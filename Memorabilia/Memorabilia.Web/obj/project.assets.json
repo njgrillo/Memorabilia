@@ -10041,11 +10041,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Projects\\Memorabilia\\Memorabilia\\Memorabilia.Web\\Memorabilia.Web.csproj",
+      "projectUniqueName": "C:\\Projects\\njgrillo\\Memorabilia\\Memorabilia\\Memorabilia.Web\\Memorabilia.Web.csproj",
       "projectName": "Memorabilia.Web",
-      "projectPath": "C:\\Projects\\Memorabilia\\Memorabilia\\Memorabilia.Web\\Memorabilia.Web.csproj",
+      "projectPath": "C:\\Projects\\njgrillo\\Memorabilia\\Memorabilia\\Memorabilia.Web\\Memorabilia.Web.csproj",
       "packagesPath": "C:\\Users\\njgri\\.nuget\\packages\\",
-      "outputPath": "C:\\Projects\\Memorabilia\\Memorabilia\\Memorabilia.Web\\obj\\",
+      "outputPath": "C:\\Projects\\njgrillo\\Memorabilia\\Memorabilia\\Memorabilia.Web\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -10068,14 +10068,14 @@
         "net5.0": {
           "targetAlias": "net5.0",
           "projectReferences": {
-            "C:\\Projects\\Memorabilia\\Memorabilia\\Memorabilia.Application\\Memorabilia.Application.csproj": {
-              "projectPath": "C:\\Projects\\Memorabilia\\Memorabilia\\Memorabilia.Application\\Memorabilia.Application.csproj"
+            "C:\\Projects\\njgrillo\\Memorabilia\\Memorabilia\\Memorabilia.Application\\Memorabilia.Application.csproj": {
+              "projectPath": "C:\\Projects\\njgrillo\\Memorabilia\\Memorabilia\\Memorabilia.Application\\Memorabilia.Application.csproj"
             },
-            "C:\\Projects\\Memorabilia\\Memorabilia\\Memorabilia.Domain\\Memorabilia.Domain.csproj": {
-              "projectPath": "C:\\Projects\\Memorabilia\\Memorabilia\\Memorabilia.Domain\\Memorabilia.Domain.csproj"
+            "C:\\Projects\\njgrillo\\Memorabilia\\Memorabilia\\Memorabilia.Domain\\Memorabilia.Domain.csproj": {
+              "projectPath": "C:\\Projects\\njgrillo\\Memorabilia\\Memorabilia\\Memorabilia.Domain\\Memorabilia.Domain.csproj"
             },
-            "C:\\Projects\\Memorabilia\\Memorabilia\\Memorabilia.Repository\\Memorabilia.Repository.csproj": {
-              "projectPath": "C:\\Projects\\Memorabilia\\Memorabilia\\Memorabilia.Repository\\Memorabilia.Repository.csproj"
+            "C:\\Projects\\njgrillo\\Memorabilia\\Memorabilia\\Memorabilia.Repository\\Memorabilia.Repository.csproj": {
+              "projectPath": "C:\\Projects\\njgrillo\\Memorabilia\\Memorabilia\\Memorabilia.Repository\\Memorabilia.Repository.csproj"
             }
           }
         }

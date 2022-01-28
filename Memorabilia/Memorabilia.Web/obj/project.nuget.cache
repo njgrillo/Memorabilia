@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "PCMm/puzIxMF8PrVX+qWCnaKPaJHiVK1DPmNIMQ+k3rFCHulyiGFuPZm5cIRmLG8YCQXppdR5WZtnXmPV9b3cA==",
+  "dgSpecHash": "AZHp3ZAT3OtEJq+9adgP23ucfT5s/h8lDpGdhWYlprCEnSuS0YtRF2fB41ckcZiJ3mU1wEDM6Mdw0XYx6W+Y3g==",
   "success": true,
-  "projectFilePath": "C:\\Projects\\Memorabilia\\Memorabilia\\Memorabilia.Web\\Memorabilia.Web.csproj",
+  "projectFilePath": "C:\\Projects\\njgrillo\\Memorabilia\\Memorabilia\\Memorabilia.Web\\Memorabilia.Web.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\njgri\\.nuget\\packages\\blazored.toast\\3.2.2\\blazored.toast.3.2.2.nupkg.sha512",
     "C:\\Users\\njgri\\.nuget\\packages\\comparenetobjects\\4.73.0\\comparenetobjects.4.73.0.nupkg.sha512",

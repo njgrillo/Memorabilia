@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "k1h9mRIxsNQENbIcVANx9k/pCeD+Rf1LOXCsXbISULPbQRcIC9XhS53nfgwkNMQ5CrtVRaY/4vAVgPw06PwPqg==",
+  "dgSpecHash": "jGwA1bsxxrxWiq4d+MSYh+z4RU8e+v6kxdFYQeSVv9ADsnsNRDZjQgi5GmyK8hlH7DsIEa5eZUYsRSNkW4nQQQ==",
   "success": true,
-  "projectFilePath": "C:\\Projects\\Memorabilia\\Memorabilia\\Memorabilia.Repository\\Memorabilia.Repository.csproj",
+  "projectFilePath": "C:\\Projects\\njgrillo\\Memorabilia\\Memorabilia\\Memorabilia.Repository\\Memorabilia.Repository.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\njgri\\.nuget\\packages\\comparenetobjects\\4.73.0\\comparenetobjects.4.73.0.nupkg.sha512",
     "C:\\Users\\njgri\\.nuget\\packages\\dapper\\2.0.90\\dapper.2.0.90.nupkg.sha512",

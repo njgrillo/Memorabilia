@@ -8148,11 +8148,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Projects\\Memorabilia\\Memorabilia\\Memorabilia.Domain\\Memorabilia.Domain.csproj",
+      "projectUniqueName": "C:\\Projects\\njgrillo\\Memorabilia\\Memorabilia\\Memorabilia.Domain\\Memorabilia.Domain.csproj",
       "projectName": "Memorabilia.Domain",
-      "projectPath": "C:\\Projects\\Memorabilia\\Memorabilia\\Memorabilia.Domain\\Memorabilia.Domain.csproj",
+      "projectPath": "C:\\Projects\\njgrillo\\Memorabilia\\Memorabilia\\Memorabilia.Domain\\Memorabilia.Domain.csproj",
       "packagesPath": "C:\\Users\\njgri\\.nuget\\packages\\",
-      "outputPath": "C:\\Projects\\Memorabilia\\Memorabilia\\Memorabilia.Domain\\obj\\",
+      "outputPath": "C:\\Projects\\njgrillo\\Memorabilia\\Memorabilia\\Memorabilia.Domain\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"

@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Projects\\Memorabilia\\Memorabilia\\Memorabilia.Application\\Memorabilia.Application.csproj": {}
+    "C:\\Projects\\njgrillo\\Memorabilia\\Memorabilia\\Memorabilia.Application\\Memorabilia.Application.csproj": {}
   },
   "projects": {
-    "C:\\Projects\\Memorabilia\\Memorabilia\\Memorabilia.Application\\Memorabilia.Application.csproj": {
+    "C:\\Projects\\njgrillo\\Memorabilia\\Memorabilia\\Memorabilia.Application\\Memorabilia.Application.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Projects\\Memorabilia\\Memorabilia\\Memorabilia.Application\\Memorabilia.Application.csproj",
+        "projectUniqueName": "C:\\Projects\\njgrillo\\Memorabilia\\Memorabilia\\Memorabilia.Application\\Memorabilia.Application.csproj",
         "projectName": "Memorabilia.Application",
-        "projectPath": "C:\\Projects\\Memorabilia\\Memorabilia\\Memorabilia.Application\\Memorabilia.Application.csproj",
+        "projectPath": "C:\\Projects\\njgrillo\\Memorabilia\\Memorabilia\\Memorabilia.Application\\Memorabilia.Application.csproj",
         "packagesPath": "C:\\Users\\njgri\\.nuget\\packages\\",
-        "outputPath": "C:\\Projects\\Memorabilia\\Memorabilia\\Memorabilia.Application\\obj\\",
+        "outputPath": "C:\\Projects\\njgrillo\\Memorabilia\\Memorabilia\\Memorabilia.Application\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -34,8 +34,8 @@
           "net5.0": {
             "targetAlias": "net5.0",
             "projectReferences": {
-              "C:\\Projects\\Memorabilia\\Memorabilia\\Memorabilia.Domain\\Memorabilia.Domain.csproj": {
-                "projectPath": "C:\\Projects\\Memorabilia\\Memorabilia\\Memorabilia.Domain\\Memorabilia.Domain.csproj"
+              "C:\\Projects\\njgrillo\\Memorabilia\\Memorabilia\\Memorabilia.Domain\\Memorabilia.Domain.csproj": {
+                "projectPath": "C:\\Projects\\njgrillo\\Memorabilia\\Memorabilia\\Memorabilia.Domain\\Memorabilia.Domain.csproj"
               }
             }
           }
@@ -68,14 +68,14 @@
         }
       }
     },
-    "C:\\Projects\\Memorabilia\\Memorabilia\\Memorabilia.Domain\\Memorabilia.Domain.csproj": {
+    "C:\\Projects\\njgrillo\\Memorabilia\\Memorabilia\\Memorabilia.Domain\\Memorabilia.Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Projects\\Memorabilia\\Memorabilia\\Memorabilia.Domain\\Memorabilia.Domain.csproj",
+        "projectUniqueName": "C:\\Projects\\njgrillo\\Memorabilia\\Memorabilia\\Memorabilia.Domain\\Memorabilia.Domain.csproj",
         "projectName": "Memorabilia.Domain",
-        "projectPath": "C:\\Projects\\Memorabilia\\Memorabilia\\Memorabilia.Domain\\Memorabilia.Domain.csproj",
+        "projectPath": "C:\\Projects\\njgrillo\\Memorabilia\\Memorabilia\\Memorabilia.Domain\\Memorabilia.Domain.csproj",
         "packagesPath": "C:\\Users\\njgri\\.nuget\\packages\\",
-        "outputPath": "C:\\Projects\\Memorabilia\\Memorabilia\\Memorabilia.Domain\\obj\\",
+        "outputPath": "C:\\Projects\\njgrillo\\Memorabilia\\Memorabilia\\Memorabilia.Domain\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
