@@ -31,3 +31,6 @@ _ReSharper*/
 #Nuget packages folder
 packages/
 /Memorabilia/.vs/Memorabilia/v17/.suo
+/Memorabilia/.vs/Memorabilia/config/applicationhost.config
+/Memorabilia/.vs/Memorabilia/v17/.suo
+/Memorabilia/Memorabilia.Web/obj/Debug/net5.0/project.razor.json
