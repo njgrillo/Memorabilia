@@ -1,0 +1,27 @@
+﻿@inject NavigationManager _navigation
+
+@using Memorabilia.Application.Features.Admin.Commissioner
+
+<div class="form-group">
+    <label for="commissioner">Commissioner</label>
+    <InputSelect id="commissioner" @bind-Value="@CommissionerId" class="form-control">
+        @foreach (var commissioner in Commissioners)
+        {
+            <option value="@commissioner.Id">@commissioner.PersonName</option>
+        }
+    </InputSelect>
+</div>
+
+@code {
+    [Parameter]
+    public int CommissionerId { get; set; }  
+
+    [Parameter]
+    public IEnumerable<CommissionerViewModel> Commissioners { get; set; }  
+
+    protected override Task OnInitializedAsync()
+    {
+        return base.OnInitializedAsync();
+    }
+}
+

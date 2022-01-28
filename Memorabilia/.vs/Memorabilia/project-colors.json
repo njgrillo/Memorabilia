@@ -1,0 +1,86 @@
+{
+  "Version": 1,
+  "ProjectMap": {
+    "b45ac287-2170-4b94-aedf-41892c9dc5d7": {
+      "ProjectGuid": "b45ac287-2170-4b94-aedf-41892c9dc5d7",
+      "DisplayName": "Memorabilia",
+      "ColorIndex": 0
+    },
+    "7cc6f27c-f6b3-41f0-b810-40c0315fe9cf": {
+      "ProjectGuid": "7cc6f27c-f6b3-41f0-b810-40c0315fe9cf",
+      "DisplayName": "Memorabilia.Domain",
+      "ColorIndex": 1
+    },
+    "d0162cff-a3c0-45fc-b182-d318b93602a9": {
+      "ProjectGuid": "d0162cff-a3c0-45fc-b182-d318b93602a9",
+      "DisplayName": "Memorabilia.Repository",
+      "ColorIndex": 2
+    },
+    "23b4e2c8-2598-4dc3-95f3-3568ac2f31d3": {
+      "ProjectGuid": "23b4e2c8-2598-4dc3-95f3-3568ac2f31d3",
+      "DisplayName": "Memorabilia.Application",
+      "ColorIndex": 3
+    },
+    "c536e16b-9b59-4d1b-9707-1440a544ce98": {
+      "ProjectGuid": "c536e16b-9b59-4d1b-9707-1440a544ce98",
+      "DisplayName": "Memorabilia.Web",
+      "ColorIndex": 4
+    },
+    "e78b38d1-e67c-4253-8e79-cac16d3b2b69": {
+      "ProjectGuid": "e78b38d1-e67c-4253-8e79-cac16d3b2b69",
+      "DisplayName": "Memorabilia.Web2",
+      "ColorIndex": 5
+    },
+    "2c9a6e33-1f45-4373-825f-9bd411814652": {
+      "ProjectGuid": "2c9a6e33-1f45-4373-825f-9bd411814652",
+      "DisplayName": "Memorabilia.Domain",
+      "ColorIndex": 6
+    },
+    "0e343780-74dc-41d1-b48f-c2560c4b0f9b": {
+      "ProjectGuid": "0e343780-74dc-41d1-b48f-c2560c4b0f9b",
+      "DisplayName": "Memorabilia.Repository1",
+      "ColorIndex": 7
+    },
+    "7b6d48bd-2a34-40a9-a1c2-e63de4f1d99f": {
+      "ProjectGuid": "7b6d48bd-2a34-40a9-a1c2-e63de4f1d99f",
+      "DisplayName": "Memorabilia.Application1",
+      "ColorIndex": 8
+    },
+    "434b5c76-cb38-45ee-9887-bd518e4d61b7": {
+      "ProjectGuid": "434b5c76-cb38-45ee-9887-bd518e4d61b7",
+      "DisplayName": "Memorabilia.Web1",
+      "ColorIndex": 9
+    },
+    "423f5122-a422-4374-9271-acf59f8b241d": {
+      "ProjectGuid": "423f5122-a422-4374-9271-acf59f8b241d",
+      "DisplayName": "Memorabilia.Domain",
+      "ColorIndex": 10
+    },
+    "0a88e75f-7afe-4231-a594-6bf95e09cb63": {
+      "ProjectGuid": "0a88e75f-7afe-4231-a594-6bf95e09cb63",
+      "DisplayName": "Memorabilia.Web",
+      "ColorIndex": 11
+    },
+    "79f0e3a4-f280-432c-a04a-82307f300632": {
+      "ProjectGuid": "79f0e3a4-f280-432c-a04a-82307f300632",
+      "DisplayName": "Memorabilia.Web",
+      "ColorIndex": 12
+    },
+    "8f9b2f70-2a22-4cab-867d-ab343b7f701e": {
+      "ProjectGuid": "8f9b2f70-2a22-4cab-867d-ab343b7f701e",
+      "DisplayName": "Memorabilia.Application",
+      "ColorIndex": 13
+    },
+    "0db2052f-44d6-4652-bdb5-6c6d929732b9": {
+      "ProjectGuid": "0db2052f-44d6-4652-bdb5-6c6d929732b9",
+      "DisplayName": "Memorabilia.Repository",
+      "ColorIndex": 14
+    },
+    "a2fe74e1-b743-11d0-ae1a-00a0c90fffc3": {
+      "ProjectGuid": "a2fe74e1-b743-11d0-ae1a-00a0c90fffc3",
+      "DisplayName": "Miscellaneous Files",
+      "ColorIndex": -1
+    }
+  },
+  "NextColorIndex": 15
+}

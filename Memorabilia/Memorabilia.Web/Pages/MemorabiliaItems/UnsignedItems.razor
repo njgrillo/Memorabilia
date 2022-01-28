@@ -1,0 +1,109 @@
+﻿@page "/Memorabilia/UnsignedItems"
+
+@using Memorabilia.Application.Features.Memorabilia
+
+@inject CommandRouter _commandRouter
+@inject ProtectedLocalStorage _localStorage
+@inject NavigationManager _navigation
+@inject QueryRouter _queryRouter
+@inject IToastService _toastService
+
+@if (_viewModel == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <PopConfirm @ref="_deleteDialog"
+                Title="Delete Memorabilia Item"
+                ConfirmedChanged="Delete" />
+    <div class="row">
+        <div class="col-md-12" style="text-align: center">
+            <h1>@_viewModel.PageTitle</h1>
+        </div>
+    </div>
+    <br />
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Item Type</th>
+                <th>Condition</th>
+                <th>Cost</th>
+                <th>Value</th>
+                <th>Create Date</th>
+                <th>Last Modified Date</th>
+                <th></th>
+                <th></th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var memorabiliaItem in _viewModel.MemorabiliaItems)
+            {
+                <tr>
+                    <td>@memorabiliaItem.ItemTypeName</td>
+                    <td>@memorabiliaItem.ConditionName</td>
+                    <td>@memorabiliaItem.Cost</td>
+                    <td>@memorabiliaItem.EstimatedValue</td>
+                    <td>@memorabiliaItem.CreateDate</td>
+                    <td>@memorabiliaItem.LastModifiedDate</td>
+                    <td><a href=@($"Memorabilia/{memorabiliaItem.ItemTypeName}/Edit/{memorabiliaItem.Id}")>Details</a></td>
+                    <td><a href=@($"Memorabilia/Edit/{memorabiliaItem.Id}")>Edit</a></td>
+                    <td><button class="btn btn-danger" @onclick="@( _ => ShowConfirm(memorabiliaItem.Id) )">Delete</button></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <div class="row">
+        <div class="col-md-12" style="text-align: center">
+            <div class="col-md-12" style="text-align: center">
+                <a href="Memorabilia/Add">Add Memorabilia</a>
+            </div>
+        </div>
+    </div>
+    <br />
+}
+
+@code {
+    private PopConfirm _deleteDialog;
+    private int _deletedItemId;
+    private MemorabiliaItemsViewModel _viewModel;
+
+    protected async Task Delete(bool confirm)
+    {
+        if (!confirm)
+        {
+            _deletedItemId = 0;
+            return;
+        }
+
+        var itemToDelete = _viewModel.MemorabiliaItems.Single(item => item.Id == _deletedItemId);
+        var viewModel = new SaveMemorabiliaItemViewModel(itemToDelete);
+        viewModel.IsDeleted = true;
+
+        var command = new SaveMemorabiliaItem.Command(viewModel);
+
+        await _commandRouter.Send(command).ConfigureAwait(false);
+        await OnInitializedAsync().ConfigureAwait(false);
+
+        _toastService.ShowSuccess($"{itemToDelete.ItemTypeName} was deleted successfully!", _viewModel.PageTitle);
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        var userId = await _localStorage.GetAsync<int>("UserId");
+
+        if (userId.Value == 0)
+            _navigation.NavigateTo("Login");
+
+        var query = new GetMemorabiliaItems.Query(userId.Value);
+
+        _viewModel = await _queryRouter.Send(query).ConfigureAwait(false);
+    }
+
+    protected void ShowConfirm(int id)
+    {
+        _deletedItemId = id;
+        _deleteDialog.ShowPop();
+    }
+}

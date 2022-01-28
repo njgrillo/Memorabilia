@@ -1,0 +1,12 @@
+C:\Projects\Memorabilia\Memorabilia\Memorabilia.Domain\bin\Debug\net6.0\Memorabilia.Domain.deps.json
+C:\Projects\Memorabilia\Memorabilia\Memorabilia.Domain\bin\Debug\net6.0\Memorabilia.Domain.dll
+C:\Projects\Memorabilia\Memorabilia\Memorabilia.Domain\bin\Debug\net6.0\ref\Memorabilia.Domain.dll
+C:\Projects\Memorabilia\Memorabilia\Memorabilia.Domain\bin\Debug\net6.0\Memorabilia.Domain.pdb
+C:\Projects\Memorabilia\Memorabilia\Memorabilia.Domain\obj\Debug\net6.0\Memorabilia.Domain.csproj.AssemblyReference.cache
+C:\Projects\Memorabilia\Memorabilia\Memorabilia.Domain\obj\Debug\net6.0\Memorabilia.Domain.GeneratedMSBuildEditorConfig.editorconfig
+C:\Projects\Memorabilia\Memorabilia\Memorabilia.Domain\obj\Debug\net6.0\Memorabilia.Domain.AssemblyInfoInputs.cache
+C:\Projects\Memorabilia\Memorabilia\Memorabilia.Domain\obj\Debug\net6.0\Memorabilia.Domain.AssemblyInfo.cs
+C:\Projects\Memorabilia\Memorabilia\Memorabilia.Domain\obj\Debug\net6.0\Memorabilia.Domain.csproj.CoreCompileInputs.cache
+C:\Projects\Memorabilia\Memorabilia\Memorabilia.Domain\obj\Debug\net6.0\Memorabilia.Domain.dll
+C:\Projects\Memorabilia\Memorabilia\Memorabilia.Domain\obj\Debug\net6.0\ref\Memorabilia.Domain.dll
+C:\Projects\Memorabilia\Memorabilia\Memorabilia.Domain\obj\Debug\net6.0\Memorabilia.Domain.pdb

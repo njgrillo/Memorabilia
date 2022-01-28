@@ -1,0 +1,26 @@
+﻿@inject NavigationManager _navigation
+
+@using Memorabilia.Application.Features.Admin.ItemTypeBrand
+
+<div class="form-group">
+    <label for="brand">Brand</label>
+    <InputSelect id="brand" @bind-Value="@BrandId" class="form-control">
+        @foreach (var brand in Brands)
+        {
+            <option value="@brand.Id">@brand.BrandName</option>
+        }
+    </InputSelect>
+</div>
+
+@code {
+    [Parameter]
+    public int BrandId { get; set; }  
+
+    [Parameter]
+    public IEnumerable<ItemTypeBrandViewModel> Brands { get; set; }  
+
+    protected override Task OnInitializedAsync()
+    {
+        return base.OnInitializedAsync();
+    }
+}

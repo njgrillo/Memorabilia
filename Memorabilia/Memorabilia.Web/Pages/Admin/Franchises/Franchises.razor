@@ -1,0 +1,108 @@
+﻿@page "/Franchises"
+
+@using Memorabilia.Application.Features.Admin
+@using Memorabilia.Application.Features.Admin.Franchise
+
+@inject CommandRouter _commandRouter
+@inject ProtectedLocalStorage _localStorage
+@inject NavigationManager _navigation
+@inject QueryRouter _queryRouter
+@inject IToastService _toastService
+
+@if (_viewModel == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <PopConfirm @ref="_deleteDialog"
+                Title="Delete Franchise"
+                ConfirmedChanged="Delete" />
+    <div class="row">
+        <div class="col-md-12" style="text-align: center">
+            <h1>@_viewModel.PageTitle</h1>
+        </div>
+    </div>
+    <br />
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Sport</th>
+                <th>Name</th>
+                <th>Location</th>
+                <th>Founded</th>
+                <th></th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var franchise in _viewModel.Franchises)
+            {
+                <tr>
+                    <td>@franchise.SportName</td>
+                    <td>@franchise.Name</td>
+                    <td>@franchise.Location</td>
+                    <td>@franchise.FoundYear</td>
+                    <td><a href=@($"Franchises/Edit/{franchise.Id}")>Edit</a></td>
+                    <td><button class="btn btn-danger" @onclick="@( _ => ShowConfirm(franchise.Id) )">Delete</button></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <div class="row">
+        <div class="col-md-12" style="text-align: center">
+            <div class="col-md-12" style="text-align: center">
+                <a href="Franchises/Add">Add Franchise</a>
+            </div>
+        </div>
+    </div>
+    <br />
+}
+
+@code {
+    private PopConfirm _deleteDialog;
+    private int _deletedItemId;
+    private FranchisesViewModel _viewModel;
+
+    protected async Task Delete(bool confirm)
+    {
+        if (!confirm)
+        {
+            _deletedItemId = 0;
+            return;
+        }
+
+        var viewModel = new SaveFranchiseViewModel(_viewModel.Franchises.Single(Franchise => Franchise.Id == _deletedItemId));
+        viewModel.IsDeleted = true;
+
+        var command = new SaveFranchise.Command(viewModel);
+
+        await _commandRouter.Send(command).ConfigureAwait(false);
+        await OnInitializedAsync().ConfigureAwait(false);
+
+        _toastService.ShowSuccess("Franchise was deleted successfully!", _viewModel.PageTitle);
+    }
+
+    protected void Edit(int id)
+    {
+        _navigation.NavigateTo($"Franchises/Edit/{id}");
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        var userId = await _localStorage.GetAsync<int>("UserId");
+
+        if (userId.Value == 0)
+            _navigation.NavigateTo("Login");
+
+        var query = new GetFranchises.Query();
+
+        _viewModel = await _queryRouter.Send(query).ConfigureAwait(false);
+    }
+
+    protected void ShowConfirm(int id)
+    {
+        _deletedItemId = id;
+        _deleteDialog.ShowPop();
+    }
+}

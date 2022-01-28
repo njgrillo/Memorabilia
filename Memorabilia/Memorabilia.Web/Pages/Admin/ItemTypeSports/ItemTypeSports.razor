@@ -1,0 +1,104 @@
+﻿@page "/ItemTypeSports"
+
+@using Memorabilia.Application.Features.Admin
+@using Memorabilia.Application.Features.Admin.ItemTypeSport
+
+@inject CommandRouter _commandRouter
+@inject ProtectedLocalStorage _localStorage
+@inject NavigationManager _navigation
+@inject QueryRouter _queryRouter
+@inject IToastService _toastService
+
+@if (_viewModel == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <PopConfirm @ref="_deleteDialog"
+                Title="Delete ItemTypeSport"
+                ConfirmedChanged="Delete" />
+    <div class="row">
+        <div class="col-md-12" style="text-align: center">
+            <h1>@_viewModel.PageTitle</h1>
+        </div>
+    </div>
+    <br />
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Item Type</th>
+                <th>Sport</th>
+                <th></th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var itemTypeSport in _viewModel.ItemTypeSports)
+            {
+                <tr>
+                    <td>@itemTypeSport.ItemTypeName</td>
+                    <td>@itemTypeSport.SportName</td>
+                    <td><a href=@($"ItemTypeSports/Edit/{itemTypeSport.Id}")>Edit</a></td>
+                    <td><button class="btn btn-danger" @onclick="@( _ => ShowConfirm(itemTypeSport.Id) )">Delete</button></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <div class="row">
+        <div class="col-md-12" style="text-align: center">
+            <div class="col-md-12" style="text-align: center">
+                <a href="ItemTypeSports/Add">Add Item Type Sport</a>
+            </div>
+        </div>
+    </div>
+    <br />
+}
+
+@code {
+    private PopConfirm _deleteDialog;
+    private int _deletedItemId;
+    private ItemTypeSportsViewModel _viewModel;
+
+    protected async Task Delete(bool confirm)
+    {
+        if (!confirm)
+        {
+            _deletedItemId = 0;
+            return;
+        }
+
+        var viewModel = new SaveItemTypeSportViewModel(_viewModel.ItemTypeSports.Single(ItemTypeSport => ItemTypeSport.Id == _deletedItemId));
+        viewModel.IsDeleted = true;
+
+        var command = new SaveItemTypeSport.Command(viewModel);
+
+        await _commandRouter.Send(command).ConfigureAwait(false);
+        await OnInitializedAsync().ConfigureAwait(false);
+
+        _toastService.ShowSuccess("Item Type Sport was deleted successfully!", _viewModel.PageTitle);
+    }
+
+    protected void Edit(int id)
+    {
+        _navigation.NavigateTo($"ItemTypeSports/Edit/{id}");
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        var userId = await _localStorage.GetAsync<int>("UserId");
+
+        if (userId.Value == 0)
+            _navigation.NavigateTo("Login");
+
+        var query = new GetItemTypeSports.Query();
+
+        _viewModel = await _queryRouter.Send(query).ConfigureAwait(false);
+    }
+
+    protected void ShowConfirm(int id)
+    {
+        _deletedItemId = id;
+        _deleteDialog.ShowPop();
+    }
+}

@@ -1,0 +1,104 @@
+﻿@page "/ItemTypeBrands"
+
+@using Memorabilia.Application.Features.Admin
+@using Memorabilia.Application.Features.Admin.ItemTypeBrand
+
+@inject CommandRouter _commandRouter
+@inject ProtectedLocalStorage _localStorage
+@inject NavigationManager _navigation
+@inject QueryRouter _queryRouter
+@inject IToastService _toastService
+
+@if (_viewModel == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <PopConfirm @ref="_deleteDialog"
+                Title="Delete ItemTypeBrand"
+                ConfirmedChanged="Delete" />
+    <div class="row">
+        <div class="col-md-12" style="text-align: center">
+            <h1>@_viewModel.PageTitle</h1>
+        </div>
+    </div>
+    <br />
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Item Type</th>
+                <th>Brand</th>
+                <th></th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var itemTypeBrand in _viewModel.ItemTypeBrands)
+            {
+                <tr>
+                    <td>@itemTypeBrand.ItemTypeName</td>
+                    <td>@itemTypeBrand.BrandName</td>
+                    <td><a href=@($"ItemTypeBrands/Edit/{itemTypeBrand.Id}")>Edit</a></td>
+                    <td><button class="btn btn-danger" @onclick="@( _ => ShowConfirm(itemTypeBrand.Id) )">Delete</button></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <div class="row">
+        <div class="col-md-12" style="text-align: center">
+            <div class="col-md-12" style="text-align: center">
+                <a href="ItemTypeBrands/Add">Add Item Type Brand</a>
+            </div>
+        </div>
+    </div>
+    <br />
+}
+
+@code {
+    private PopConfirm _deleteDialog;
+    private int _deletedItemId;
+    private ItemTypeBrandsViewModel _viewModel;
+
+    protected async Task Delete(bool confirm)
+    {
+        if (!confirm)
+        {
+            _deletedItemId = 0;
+            return;
+        }
+
+        var viewModel = new SaveItemTypeBrandViewModel(_viewModel.ItemTypeBrands.Single(ItemTypeBrand => ItemTypeBrand.Id == _deletedItemId));
+        viewModel.IsDeleted = true;
+
+        var command = new SaveItemTypeBrand.Command(viewModel);
+
+        await _commandRouter.Send(command).ConfigureAwait(false);
+        await OnInitializedAsync().ConfigureAwait(false);
+
+        _toastService.ShowSuccess("Item Type Brand was deleted successfully!", _viewModel.PageTitle);
+    }
+
+    protected void Edit(int id)
+    {
+        _navigation.NavigateTo($"ItemTypeBrands/Edit/{id}");
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        var userId = await _localStorage.GetAsync<int>("UserId");
+
+        if (userId.Value == 0)
+            _navigation.NavigateTo("Login");
+
+        var query = new GetItemTypeBrands.Query();
+
+        _viewModel = await _queryRouter.Send(query).ConfigureAwait(false);
+    }
+
+    protected void ShowConfirm(int id)
+    {
+        _deletedItemId = id;
+        _deleteDialog.ShowPop();
+    }
+}

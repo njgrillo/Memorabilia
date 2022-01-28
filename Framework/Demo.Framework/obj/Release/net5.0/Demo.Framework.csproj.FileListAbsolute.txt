@@ -1,0 +1,12 @@
+C:\Projects\Prototypes\Framework\Demo.Framework\bin\Release\net5.0\Demo.Framework.deps.json
+C:\Projects\Prototypes\Framework\Demo.Framework\bin\Release\net5.0\Demo.Framework.dll
+C:\Projects\Prototypes\Framework\Demo.Framework\bin\Release\net5.0\ref\Demo.Framework.dll
+C:\Projects\Prototypes\Framework\Demo.Framework\bin\Release\net5.0\Demo.Framework.pdb
+C:\Projects\Prototypes\Framework\Demo.Framework\obj\Release\net5.0\Demo.Framework.csproj.AssemblyReference.cache
+C:\Projects\Prototypes\Framework\Demo.Framework\obj\Release\net5.0\Demo.Framework.GeneratedMSBuildEditorConfig.editorconfig
+C:\Projects\Prototypes\Framework\Demo.Framework\obj\Release\net5.0\Demo.Framework.AssemblyInfoInputs.cache
+C:\Projects\Prototypes\Framework\Demo.Framework\obj\Release\net5.0\Demo.Framework.AssemblyInfo.cs
+C:\Projects\Prototypes\Framework\Demo.Framework\obj\Release\net5.0\Demo.Framework.csproj.CoreCompileInputs.cache
+C:\Projects\Prototypes\Framework\Demo.Framework\obj\Release\net5.0\Demo.Framework.dll
+C:\Projects\Prototypes\Framework\Demo.Framework\obj\Release\net5.0\ref\Demo.Framework.dll
+C:\Projects\Prototypes\Framework\Demo.Framework\obj\Release\net5.0\Demo.Framework.pdb

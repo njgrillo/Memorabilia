@@ -1,0 +1,114 @@
+﻿@page "/People"
+
+@using Memorabilia.Application.Features.Admin
+@using Memorabilia.Application.Features.Admin.Person
+
+@inject CommandRouter _commandRouter
+@inject ProtectedLocalStorage _localStorage
+@inject NavigationManager _navigation
+@inject QueryRouter _queryRouter
+@inject IToastService _toastService
+
+@if (_viewModel == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <PopConfirm @ref="_deleteDialog"
+                Title="Delete Person"
+                ConfirmedChanged="Delete" />
+    <div class="row">
+        <div class="col-md-12" style="text-align: center">
+            <h1>@_viewModel.PageTitle</h1>
+        </div>
+    </div>
+    <br />
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Full Name</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Suffix</th>
+                <th>Nickname</th>
+                <th>Birth Date</th>
+                <th>Death Date</th>
+                <th></th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var person in _viewModel.People)
+            {
+                <tr>
+                    <td>@person.FullName</td>
+                    <td>@person.FirstName</td>
+                    <td>@person.LastName</td>
+                    <td>@person.Suffix</td>
+                    <td>@person.Nickname</td>
+                    <td>@person.BirthDate</td>
+                    <td>@person.DeathDate</td>
+                    <td><a href=@($"People/Edit/{person.Id}")>Edit</a></td>
+                    <td><button class="btn btn-danger" @onclick="@( _ => ShowConfirm(person.Id) )">Delete</button></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <div class="row">
+        <div class="col-md-12" style="text-align: center">
+            <div class="col-md-12" style="text-align: center">
+                <a href="People/Add">Add Person</a>
+            </div>
+        </div>
+    </div>
+    <br />
+}
+
+@code {
+    private PopConfirm _deleteDialog;
+    private int _deletedItemId;
+    private PeopleViewModel _viewModel;
+
+    protected async Task Delete(bool confirm)
+    {
+        if (!confirm)
+        {
+            _deletedItemId = 0;
+            return;
+        }
+
+        var viewModel = new SavePersonViewModel(_viewModel.People.Single(person => person.Id == _deletedItemId));
+        viewModel.IsDeleted = true;
+
+        var command = new SavePerson.Command(viewModel);
+
+        await _commandRouter.Send(command).ConfigureAwait(false);
+        await OnInitializedAsync().ConfigureAwait(false);
+
+        _toastService.ShowSuccess("Person was deleted successfully!", _viewModel.PageTitle);
+    }
+
+    protected void Edit(int id)
+    {
+        _navigation.NavigateTo($"People/Edit/{id}");
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        var userId = await _localStorage.GetAsync<int>("UserId");
+
+        if (userId.Value == 0)
+            _navigation.NavigateTo("Login");
+
+        var query = new GetPeople.Query();
+
+        _viewModel = await _queryRouter.Send(query).ConfigureAwait(false);
+    }
+
+    protected void ShowConfirm(int id)
+    {
+        _deletedItemId = id;
+        _deleteDialog.ShowPop();
+    }
+}

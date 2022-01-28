@@ -1,0 +1,57 @@
+﻿<div>
+    @if (Show)
+    {
+        <div class="pop-container">
+            <div class="popconfirm gradient-to-gray">
+                <div class="row">
+                    <div class="col">
+                        <div class="card pop-message-card">
+                            <div class="card-header">
+                                @Title
+                            </div>
+                            <div class="card-body">
+                                <p>
+                                    This will delete the record!
+                                    <div class="row" />
+                                    Are you sure?
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-6">
+                        <button type="button" class="btn btn-yes" @onclick="() => Confirmation(true)">Yes</button>
+                    </div>
+                    <div class="col-6">
+                        <button type="button" class="btn btn-no" @onclick="() => Confirmation(false)">No</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+@code {
+    [Parameter]
+    public EventCallback<bool> ConfirmedChanged { get; set; }
+
+    [Parameter]
+    public string Message { get; set; } = "Are you sure?";
+
+    [Parameter]
+    public string Title { get; set; } = "Delete";
+
+    public bool Show { get; set; }
+
+    public async Task Confirmation(bool value)
+    {
+        Show = false;
+        await ConfirmedChanged.InvokeAsync(value);
+    }
+
+    public void ShowPop()
+    {
+        Show = true;
+    }
+}

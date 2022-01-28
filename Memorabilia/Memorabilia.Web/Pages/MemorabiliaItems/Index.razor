@@ -1,0 +1,38 @@
+﻿@page "/Memorabilia"
+
+@using Memorabilia.Application.Features.Memorabilia
+
+@inject ProtectedLocalStorage _localStorage
+@inject NavigationManager _navigation
+@inject QueryRouter _queryRouter
+
+<div class="row">
+    <div class="col-md-12" style="text-align: center">
+        <h1>Memorabilia</h1>
+    </div>
+</div>
+<br />
+<div class="row">
+    <div class="col-md-12" style="text-align: center">
+        <h3>Unsigned Items</h3>
+    </div>
+</div>
+<br />
+<div class="row">
+    <div class="col-md-4">
+        <_Summary Title="Add Unsigned Item" ImagePath="images/itemtypes.jpg" Description="" Page="Memorabilia/Add" />
+    </div>
+    <div class="col-md-4">
+        <_Summary Title="View Unsigned Items" ImagePath="images/itemtypes.jpg" Description="" Page="Memorabilia/UnsignedItems" />
+    </div>       
+</div>
+
+@code {
+    protected override async Task OnInitializedAsync()
+    {
+        var userId = await _localStorage.GetAsync<int>("UserId");
+
+        if (userId.Value == 0)
+            _navigation.NavigateTo("Login");
+    }
+}

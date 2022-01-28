@@ -1,0 +1,104 @@
+﻿@page "/JerseyTypes"
+
+@using Memorabilia.Application.Features.Admin
+@using Memorabilia.Application.Features.Admin.JerseyType
+
+@inject CommandRouter _commandRouter
+@inject ProtectedLocalStorage _localStorage
+@inject NavigationManager _navigation
+@inject QueryRouter _queryRouter
+@inject IToastService _toastService
+
+@if (_viewModel == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <PopConfirm @ref="_deleteDialog"
+                Title="Delete Jersey Type"
+                ConfirmedChanged="Delete" />
+    <div class="row">
+        <div class="col-md-12" style="text-align: center">
+            <h1>@_viewModel.PageTitle</h1>
+        </div>
+    </div>
+    <br />
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Abbreviation</th>
+                <th></th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var domainEntity in _viewModel.DomainEntities)
+            {
+                <tr>
+                    <td>@domainEntity.Name</td>
+                    <td>@domainEntity.Abbreviation</td>
+                    <td><a href=@($"JerseyTypes/Edit/{domainEntity.Id}")>Edit</a></td>
+                    <td><button class="btn btn-danger" @onclick="@( _ => ShowConfirm(domainEntity.Id) )">Delete</button></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <div class="row">
+        <div class="col-md-12" style="text-align: center">
+            <div class="col-md-12" style="text-align: center">
+                <a href="JerseyTypes/Add">Add Jersey Type</a>
+            </div>
+        </div>
+    </div>
+    <br />
+}
+
+@code {
+    private PopConfirm _deleteDialog;
+    private int _deletedItemId;
+    private JerseyTypesViewModel _viewModel;
+
+    protected async Task Delete(bool confirm)
+    {
+        if (!confirm)
+        {
+            _deletedItemId = 0;
+            return;
+        }
+
+        var viewModel = new SaveDomainViewModel(_viewModel.DomainEntities.Single(domainEntity => domainEntity.Id == _deletedItemId));
+        viewModel.IsDeleted = true;
+
+        var command = new SaveJerseyType.Command(viewModel);
+
+        await _commandRouter.Send(command).ConfigureAwait(false);
+        await OnInitializedAsync().ConfigureAwait(false);
+
+        _toastService.ShowSuccess("Jersey Type was deleted successfully!", _viewModel.PageTitle);
+    }
+
+    protected void Edit(int id)
+    {
+        _navigation.NavigateTo($"JerseyTypes/Edit/{id}");
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        var userId = await _localStorage.GetAsync<int>("UserId");
+
+        if (userId.Value == 0)
+            _navigation.NavigateTo("Login");
+
+        var query = new GetJerseyTypes.Query();
+
+        _viewModel = await _queryRouter.Send(query).ConfigureAwait(false);
+    }
+
+    protected void ShowConfirm(int id)
+    {
+        _deletedItemId = id;
+        _deleteDialog.ShowPop();
+    }
+}

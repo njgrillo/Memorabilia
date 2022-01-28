@@ -1,0 +1,115 @@
+﻿@page "/Autographs/View"
+
+@using Memorabilia.Application.Features.Autograph
+
+@inject CommandRouter _commandRouter
+@inject ProtectedLocalStorage _localStorage
+@inject NavigationManager _navigation
+@inject QueryRouter _queryRouter
+@inject IToastService _toastService
+
+@if (_viewModel == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <PopConfirm @ref="_deleteDialog"
+                Title="Delete Autograph"
+                ConfirmedChanged="Delete" />
+    <div class="row">
+        <div class="col-md-12" style="text-align: center">
+            <h1>@_viewModel.PageTitle</h1>
+        </div>
+    </div>
+    <br />
+    <table class="table">
+        <thead>
+            <tr>                
+                <th>Person</th>
+                <th>Item</th>
+                <th>Condition</th>
+                <th>Spot</th>                
+                <th>Color</th>
+                <th>Writing Instrument</th>
+                <th>Create Date</th>
+                <th>Last Modified Date</th>
+                <th></th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var autograph in _viewModel.Autographs)
+            {
+                <tr>                    
+                    <td>@autograph.PersonName</td>
+                    <td>@autograph.ItemTypeName</td>
+                    <td>@autograph.ConditionName</td>
+                    <td>@autograph.SpotName</td>
+                    <td>@autograph.ColorName</td>
+                    <td>@autograph.WritingInstrumentName</td>
+                    <td>@autograph.CreateDate</td>
+                    <td>@autograph.LastModifiedDate</td>
+                    <td><a href=@($"Autographs/Edit/{autograph.Id}")>Edit</a></td>
+                    <td><button class="btn btn-danger" @onclick="@( _ => ShowConfirm(autograph.Id) )">Delete</button></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <div class="row">
+        <div class="col-md-12" style="text-align: center">
+            <div class="col-md-12" style="text-align: center">
+                <a href="Autographs/Add">Add Autograph</a>
+            </div>
+        </div>
+    </div>
+    <br />
+}
+
+@code {
+    private PopConfirm _deleteDialog;
+    private int _deletedItemId;
+    private AutographsViewModel _viewModel;
+
+    protected async Task Delete(bool confirm)
+    {
+        if (!confirm)
+        {
+            _deletedItemId = 0;
+            return;
+        }
+
+        var viewModel = new SaveAutographViewModel(_viewModel.Autographs.Single(item => item.Id == _deletedItemId));
+        viewModel.IsDeleted = true;
+
+        var command = new SaveAutograph.Command(viewModel);
+
+        await _commandRouter.Send(command).ConfigureAwait(false);
+        await OnInitializedAsync().ConfigureAwait(false);
+
+        _toastService.ShowSuccess("Autograph was deleted successfully!", _viewModel.PageTitle);
+    }
+
+    protected void Edit(int id)
+    {
+        _navigation.NavigateTo($"Autographs/Edit/{id}");
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        var userId = await _localStorage.GetAsync<int>("UserId");
+
+        if (userId.Value == 0)
+            _navigation.NavigateTo("Login");
+
+        var query = new GetAutographs.Query(userId.Value);
+
+        _viewModel = await _queryRouter.Send(query).ConfigureAwait(false);
+    }
+
+    protected void ShowConfirm(int id)
+    {
+        _deletedItemId = id;
+        _deleteDialog.ShowPop();
+    }
+}

@@ -1,0 +1,132 @@
+﻿@page "/Admin"
+
+@inject ProtectedLocalStorage _localStorage
+@inject NavigationManager _navigation
+@inject QueryRouter _queryRouter
+
+<div class="row">
+    <div class="col-md-12" style="text-align: center">
+        <h1>Admin</h1>
+    </div>
+</div>
+<br />
+<div class="row">
+    <div class="col-md-12" style="text-align: center">
+        <h3>Domain Items</h3>
+    </div>
+</div>
+<br />
+<div class="row">
+    <div class="col-md-4">
+        <_Summary Title="Acquisition Types" ImagePath="images/acquisitiontypes.jpg" Description="" Page="AcquisitionTypes" />
+    </div>
+    <div class="col-md-4">
+        <_Summary Title="Authentication Companies" ImagePath="images/beckett.jpg" Description="" Page="AuthenticationCompanies" />
+    </div>
+    <div class="col-md-4">
+        <_Summary Title="Baseball Types" ImagePath="images/baseballtypes.jpg" Description="" Page="BaseballTypes" />
+    </div>       
+</div>
+<div class="row">
+    <div class="col-md-4">
+        <_Summary Title="Brands" ImagePath="images/brands.jpg" Description="" Page="Brands" />
+    </div> 
+    <div class="col-md-4">
+        <_Summary Title="Colors" ImagePath="images/colors.png" Description="" Page="Colors" />
+    </div>
+    <div class="col-md-4">
+        <_Summary Title="Commissioners" ImagePath="images/conditions.jpg" Description="" Page="Commissioners" />
+    </div>          
+</div>
+<div class="row">
+    <div class="col-md-4">
+        <_Summary Title="Conditions" ImagePath="images/conditions.jpg" Description="" Page="Conditions" />
+    </div> 
+    <div class="col-md-4">
+        <_Summary Title="Franchises" ImagePath="images/franchises.jpg" Description="" Page="Franchises" />
+    </div> 
+    <div class="col-md-4">
+        <_Summary Title="Full Size Helmet Types" ImagePath="images/fullsizehelmettypes.jpg" Description="" Page="FullSizeHelmetTypes" />
+    </div>                
+</div>
+<div class="row">
+    <div class="col-md-4">
+        <_Summary Title="Glove Types" ImagePath="images/glovetypes.jpg" Description="" Page="GloveTypes" />
+    </div>  
+    <div class="col-md-4">
+        <_Summary Title="Helmet Types" ImagePath="images/minihelmets.jpg" Description="" Page="HelmetTypes" />
+    </div> 
+    <div class="col-md-4">
+        <_Summary Title="Inscription Types" ImagePath="images/inscriptiontypes.jpg" Description="" Page="InscriptionTypes" />
+    </div>                                  
+</div>
+<div class="row">
+    <div class="col-md-4">
+        <_Summary Title="Item Type Brands" ImagePath="images/brands.jpg" Description="" Page="ItemTypeBrands" />
+    </div> 
+    <div class="col-md-4">
+        <_Summary Title="Item Type Sizes" ImagePath="images/sizes.jpg" Description="" Page="ItemTypeSizes" />
+    </div>  
+    <div class="col-md-4">
+        <_Summary Title="Item Type Sports" ImagePath="images/sports.jpg" Description="" Page="ItemTypeSports" />
+    </div>                             
+</div>
+<div class="row">
+    <div class="col-md-4">
+        <_Summary Title="Item Type Spots" ImagePath="images/spots.png" Description="" Page="ItemTypeSpots" />
+    </div> 
+    <div class="col-md-4">
+        <_Summary Title="Item Types" ImagePath="images/itemtypes.jpg" Description="" Page="ItemTypes" />
+    </div> 
+    <div class="col-md-4">
+        <_Summary Title="Jersey Level Types" ImagePath="images/jerseytypes.jpg" Description="" Page="JerseyLevelTypes" />
+    </div>                         
+</div>
+<div class="row">
+    <div class="col-md-4">
+        <_Summary Title="Jersey Number Types" ImagePath="images/jerseytypes.jpg" Description="" Page="JerseyNumberTypes" />
+    </div> 
+    <div class="col-md-4">
+        <_Summary Title="Jersey Types" ImagePath="images/jerseytypes.jpg" Description="" Page="JerseyTypes" />
+    </div> 
+    <div class="col-md-4">
+        <_Summary Title="Magazine Types" ImagePath="images/magazinetypes.jpg" Description="" Page="MagazineTypes" />
+    </div>     
+</div>
+<div class="row">
+    <div class="col-md-4">
+        <_Summary Title="Occupations" ImagePath="images/occupations.jpg" Description="" Page="Occupations" />
+    </div> 
+    <div class="col-md-4">
+        <_Summary Title="People" ImagePath="images/athletes.jpg" Description="" Page="People" />
+    </div> 
+    <div class="col-md-4">
+        <_Summary Title="Sizes" ImagePath="images/sizes.jpg" Description="" Page="Sizes" />
+    </div>             
+</div>
+<div class="row">
+    <div class="col-md-4">
+        <_Summary Title="Sports" ImagePath="images/sports.jpg" Description="" Page="Sports" />
+    </div> 
+    <div class="col-md-4">
+        <_Summary Title="Spots" ImagePath="images/spots.png" Description="" Page="Spots" />
+    </div> 
+    <div class="col-md-4">
+        <_Summary Title="Teams" ImagePath="images/teams.jpg" Description="" Page="Teams" />
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-4">
+        <_Summary Title="Writing Instruments" ImagePath="images/writinginstruments.jpg" Description="" Page="WritingInstruments" />
+    </div>
+</div>
+
+@code {
+    protected override async Task OnInitializedAsync()
+    {
+        var userId = await _localStorage.GetAsync<int>("UserId");
+
+        if (userId.Value == 0)
+            _navigation.NavigateTo("Login");
+    }
+}

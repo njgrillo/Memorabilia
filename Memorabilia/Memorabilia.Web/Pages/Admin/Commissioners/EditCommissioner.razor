@@ -1,0 +1,107 @@
+﻿@page "/Commissioners/Edit/{id:int}"
+
+@using Memorabilia.Application.Features.Admin
+@using Memorabilia.Application.Features.Admin.Commissioner
+@using Memorabilia.Application.Features.Admin.Person
+
+@inject CommandRouter _commandRouter
+@inject ProtectedLocalStorage _localStorage
+@inject NavigationManager _navigation
+@inject QueryRouter _queryRouter
+@inject IToastService _toastService
+
+@if (_viewModel == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <div class="row">
+        <div class="col-md-12" style="text-align: center">
+            <h1>@_viewModel.PageTitle</h1>
+        </div>
+    </div>
+    <br />
+    <div style="border: 1px solid black; margin-top: 2%; margin-bottom: 2%; margin-left: 2%; margin-right: 2%;">
+        <div class="row" style="margin-top: 2%; margin-bottom: 2%; margin-left: 1%; margin-right: 1%;">
+            <div class="col-lg-12" style="text-align: center">
+                <img src="images/athlets.jpg" alt="Image" height="150" width="150" />
+            </div>
+            <EditForm Model="_viewModel" OnValidSubmit="HandleValidSubmit">
+                <DataAnnotationsValidator />
+                <ValidationSummary />
+                <div class="form-group">
+                    <label for="sport">Sport</label>
+                    <InputSelect id="sport" @bind-Value="_viewModel.SportId" class="form-control">
+                        @foreach (var sport in Memorabilia.Domain.Constants.Sport.All)
+                        {
+                            <option value="@sport.Id">@sport.Name</option>
+                        }
+                    </InputSelect>
+                </div>
+                <div class="form-group">
+                    <label for="person">Sport</label>
+                    <InputSelect id="person" @bind-Value="_viewModel.PersonId" class="form-control">
+                        @foreach (var person in _people)
+                        {
+                            <option value="@person.Id">@person.FullName</option>
+                        }
+                    </InputSelect>
+                </div>
+                <div class="form-group">
+                    <label for="beginYear">Begin Year</label>
+                    <InputNumber id="beginYear" @bind-Value="_viewModel.BeginYear" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label for="endYear">End Year</label>
+                    <InputNumber id="endYear" @bind-Value="_viewModel.EndYear" class="form-control" />
+                </div>
+            </EditForm>
+        </div>
+        <div class="row">
+            <div class="col-md-12" style="text-align: center">
+                <a href="Commissioners">Back</a>
+            </div>
+        </div>
+        <br />
+    </div>
+}
+
+@code {
+    [Parameter]
+    public int Id { get; set; }
+
+    private IEnumerable<PersonViewModel> _people = Enumerable.Empty<PersonViewModel>();
+    private SaveCommissionerViewModel _viewModel = new SaveCommissionerViewModel();
+
+    protected async Task HandleValidSubmit()
+    {
+        var command = new SaveCommissioner.Command(_viewModel);
+
+        await _commandRouter.Send(command).ConfigureAwait(false);
+
+        _navigation.NavigateTo("Commissioners");
+
+        _toastService.ShowSuccess("Commissioner was saved successfully!", _viewModel.PageTitle);
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        var query = new GetCommissioner.Query(Id);
+
+        _viewModel = new SaveCommissionerViewModel(await _queryRouter.Send(query).ConfigureAwait(false));
+        
+        await GetPeople().ConfigureAwait(false);
+    }
+
+    private async Task GetPeople()
+    {
+        var query = new GetPeople.Query();
+
+        _people = (await _queryRouter.Send(query).ConfigureAwait(false)).People;
+
+        _viewModel.PersonId = _people.First().Id;
+    }
+}
+
+

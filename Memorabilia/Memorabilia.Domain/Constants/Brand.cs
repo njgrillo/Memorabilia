@@ -1,0 +1,42 @@
+﻿using System.Linq;
+
+namespace Memorabilia.Domain.Constants
+{
+    public sealed class Brand
+    {
+        public static readonly Brand Rawlings = new(1, "Rawlings", string.Empty);
+        public static readonly Brand Nike = new(2, "Nike", string.Empty);
+        public static readonly Brand Reebok = new(3, "Reebok", "RBK");
+        public static readonly Brand Adidas = new(4, "Adidas", string.Empty);
+        public static readonly Brand Majestic = new(5, "Majestic", string.Empty);
+        public static readonly Brand Wilson = new(6, "Wilson", string.Empty);
+
+        public static readonly Brand[] All =
+        {
+            Rawlings,
+            Nike,
+            Reebok,
+            Adidas,
+            Majestic,
+            Wilson
+        };
+
+        private Brand(int id, string name, string abbreviation)
+        {
+            Id = id;
+            Name = name;
+            Abbreviation = abbreviation;
+        }
+
+        public string Abbreviation { get; }
+
+        public int Id { get; }
+
+        public string Name { get; }
+
+        public static Brand Find(int id)
+        {
+            return All.SingleOrDefault(brand => brand.Id == id);
+        }
+    }
+}
