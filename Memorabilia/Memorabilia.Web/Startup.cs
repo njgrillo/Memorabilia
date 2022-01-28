@@ -37,11 +37,13 @@ using Memorabilia.Application.Features.User.Register;
 using Memorabilia.Domain;
 using Memorabilia.Repository;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using System;
 
 namespace Memorabilia.Web
 {
@@ -58,6 +60,11 @@ namespace Memorabilia.Web
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDataProtection()
+                //.PersistKeysToDbContext<ApplicationDbContext>()
+                .SetApplicationName("Memorabilia")
+                .SetDefaultKeyLifetime(TimeSpan.FromDays(180));
+
             services.AddRazorPages();
             services.AddServerSideBlazor();
             services.AddBlazoredToast();
