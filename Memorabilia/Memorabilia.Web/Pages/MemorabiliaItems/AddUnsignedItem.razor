@@ -1,6 +1,12 @@
 ﻿@page "/Memorabilia/Add"
 
 @using Memorabilia.Application.Features.Memorabilia
+@using Memorabilia.Domain.Constants
+@using Memorabilia.Web.Controls.AcquisitionType
+@using Memorabilia.Web.Controls.Condition
+@using Memorabilia.Web.Controls.ItemType
+@using Memorabilia.Web.Controls.PurchaseType
+@using Memorabilia.Web.Controls.PrivacyType
 
 @inject CommandRouter _commandRouter
 @inject ProtectedLocalStorage _localStorage
@@ -30,29 +36,41 @@ else
                 <ValidationSummary />
                 <div class="form-group">
                     <label for="itemType">Item Type</label>
-                    <InputSelect id="itemType" @bind-Value="_viewModel.ItemTypeId" class="form-control">
-                        @foreach (var itemType in Domain.Constants.ItemType.All)
-                        {
-                            <option value="@itemType.Id">@itemType.Name</option>
-                        }
-                    </InputSelect>
+                    <_ItemTypeDropDown @bind-Value="@_viewModel.ItemTypeId" 
+                                       @bind-Value:event="ValueChanged" /> 
                 </div>
                 <div class="form-group">
                     <label for="condition">Condition</label>
-                    <InputSelect id="condition" @bind-Value="_viewModel.ConditionId" class="form-control">
-                        @foreach (var condition in Domain.Constants.Condition.All)
-                        {
-                            <option value="@condition.Id">@condition.Name</option>
-                        }
-                    </InputSelect>
-                </div>
-                <div class="form-group">
-                    <label for="cost">Cost</label>
-                    <InputNumber id="cost" @bind-Value="_viewModel.Cost" class="form-control" />
+                    <_ConditionDropDown @bind-Value="@_viewModel.ConditionId" 
+                                        @bind-Value:event="ValueChanged" /> 
                 </div>
                 <div class="form-group">
                     <label for="estimatedValue">Estimated Value</label>
-                    <InputNumber id="estimatedValue" @bind-Value="_viewModel.EstimatedValue" class="form-control" />
+                    <InputNumber id="estimatedValue" class="form-control" @bind-Value="_viewModel.EstimatedValue" />
+                </div>
+                <div class="form-group">
+                    <label for="acquisitionType">Acquisition Type</label>
+                    <_AcquisitionTypeDropDown @bind-Value="@_viewModel.AcquisitionTypeId" 
+                                              @bind-Value:event="ValueChanged"
+                                              IsAutograph="false" /> 
+                </div>
+                <div class="form-group">
+                    <label for="acquiredDate">Acquired Date</label>
+                    <InputDate id="acquiredDate" class="form-control" @bind-Value="_viewModel.AcquiredDate" />
+                </div>
+                <div class="form-group" hidden="@(!_viewModel.CanHaveCost)">
+                    <label for="cost">Cost</label>
+                    <InputNumber id="cost" class="form-control" @bind-Value="_viewModel.Cost" />
+                </div>
+                <div class="form-group" hidden="@(!_viewModel.CanHaveCost)">
+                    <label for="purchaseType">Place of Purchase</label>
+                    <_PurchaseTypeDropDown @bind-Value="@_viewModel.PurchaseTypeId" 
+                                           @bind-Value:event="ValueChanged" /> 
+                </div>
+                <div class="form-group">
+                    <label for="privacyType">Privacy Type</label>
+                    <_PrivacyTypeDropDown @bind-Value="@_viewModel.PrivacyTypeId" 
+                                          @bind-Value:event="ValueChanged" /> 
                 </div>
                 <div class="text-right">
                     <button type="submit" class="btn btn-primary">Save</button>
@@ -84,7 +102,7 @@ else
 
         await _commandRouter.Send(command).ConfigureAwait(false);
 
-        var itemTypeName = Domain.Constants.ItemType.Find(_viewModel.ItemTypeId).Name;
+        var itemTypeName = ItemType.Find(_viewModel.ItemTypeId).Name;
 
         _navigation.NavigateTo($"Memorabilia/{itemTypeName}/Add/{command.Id}");
 
@@ -97,7 +115,5 @@ else
 
         if (userId.Value == 0)
             _navigation.NavigateTo("Login");
-
-        _viewModel.ConditionId = Domain.Constants.Condition.Pristine.Id;
     }
 }

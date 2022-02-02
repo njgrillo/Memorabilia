@@ -1,10 +1,14 @@
 ﻿@page "/Memorabilia/Baseball/Edit/{memorabiliaId:int}"
 
-@using Memorabilia.Application.Features.Admin.Commissioner
-@using Memorabilia.Application.Features.Admin.ItemTypeBrand
-@using Memorabilia.Application.Features.Admin.ItemTypeSize
 @using Memorabilia.Application.Features.Memorabilia
 @using Memorabilia.Application.Features.Memorabilia.Baseball
+@using Memorabilia.Domain.Constants
+@using Memorabilia.Web.Controls.Baseball
+@using Memorabilia.Web.Controls.Brand
+@using Memorabilia.Web.Controls.Commissioner
+@using Memorabilia.Web.Controls.Person
+@using Memorabilia.Web.Controls.Size
+@using Memorabilia.Web.Controls.Team
 
 @inject CommandRouter _commandRouter
 @inject ProtectedLocalStorage _localStorage
@@ -32,10 +36,54 @@ else
             <EditForm Model="_viewModel" OnValidSubmit="HandleValidSubmit">
                 <DataAnnotationsValidator />
                 <ValidationSummary />
-                <_BaseballTypes @ref="_baseballType" BaseballTypeId="@_viewModel.BaseballTypeId" /> 
-                <_Brands @ref="_brand" Brands="@_brands" BrandId="@_viewModel.BrandId" />
-                <_Commissioners @ref="_commissioner" Commissioners="@_commissioners" CommissionerId="@_viewModel.CommissionerId" />
-                <_Sizes @ref="_size" Sizes="@_sizes" SizeId="@_viewModel.SizeId" />                               
+                <div class="form-group">
+                    <label for="brand">Brand</label>
+                    <_BrandDropDown @bind-Value="@_viewModel.BrandId" 
+                                    @bind-Value:event="ValueChanged"
+                                    ItemType="@ItemType.Baseball" />
+                </div>                
+                <div class="form-group" hidden="@(!_viewModel.DisplayBaseballType)">
+                    <label for="baseballType">Baseball Type</label>
+                    <_BaseballTypeDropDown @bind-Value="@_viewModel.BaseballTypeId" 
+                                           @bind-Value:event="ValueChanged" /> 
+                </div>                 
+                <div class="form-group" hidden="@(!_viewModel.DisplayBaseballTypeYear)">
+                    <label for="year">Year</label>
+                    <InputNumber id="year" class="form-control" @bind-Value="_viewModel.BaseballTypeYear" />
+                </div> 
+                <div class="form-group" hidden="@(!_viewModel.DisplayBaseballTypeAnniversary)">
+                    <label for="anniversary">Anniversary</label>
+                    <InputText id="anniversary" class="form-control" @bind-Value="_viewModel.BaseballTypeAnniversary" />
+                </div>  
+                <div class="form-group">
+                    <label for="commissioner">Commissioner</label>
+                    <_CommissionerDropDown @bind-Value="@_viewModel.CommissionerId"
+                                           @bind-Value:event="ValueChanged" 
+                                           Sport="@Sport.Baseball" />
+                </div>
+                <div class="form-group">
+                    <label for="size">Size</label>
+                    <_SizeDropDown @bind-Value="@_viewModel.SizeId"
+                                   @bind-Value:event="ValueChanged" 
+                                   ItemType="@ItemType.Baseball" /> 
+                </div>                
+                <div class="form-group">
+                    <input type="checkbox" checked="@_viewModel.HasPerson" @onchange="eventArgs => { PersonCheckboxClicked(eventArgs.Value); }" />
+                    <label for="person">Associate Baseball with a Person</label>
+                    <div class="form-group" hidden="@(!_displayPeople)">
+                        <_PersonSelector @bind-Value="@_viewModel.PersonId"
+                                         @bind-Value:event="ValueChanged" /> 
+                    </div>                    
+                </div>  
+                <div class="form-group">
+                    <input type="checkbox" checked="@_viewModel.HasTeam" @onchange="eventArgs => { TeamsCheckboxClicked(eventArgs.Value); }" />
+                    <label for="teams">Associate Baseball with a Team</label>
+                    <div class="form-group" hidden="@(!_displayTeams)">
+                        <_TeamDropDown @bind-Value="@_viewModel.TeamId"
+                                       @bind-Value:event="ValueChanged"
+                                       Sport="@Sport.Baseball" /> 
+                    </div>                    
+                </div>                             
                 <div class="text-right">
                     <button type="submit" class="btn btn-primary">Save</button>
                 </div>
@@ -54,13 +102,8 @@ else
     [Parameter]
     public int MemorabiliaId { get; set; }  
 
-    private _BaseballTypes _baseballType;
-    private _Brands _brand;
-    private IEnumerable<ItemTypeBrandViewModel> _brands = Enumerable.Empty<ItemTypeBrandViewModel>();
-    private _Commissioners _commissioner;
-    private IEnumerable<CommissionerViewModel> _commissioners = Enumerable.Empty<CommissionerViewModel>();
-    private _Sizes _size;
-    private IEnumerable<ItemTypeSizeViewModel> _sizes = Enumerable.Empty<ItemTypeSizeViewModel>();
+    private bool _displayPeople;
+    private bool _displayTeams;
     private SaveBaseballViewModel _viewModel = new SaveBaseballViewModel();
 
     protected async Task HandleValidSubmit()
@@ -70,17 +113,7 @@ else
         if (userId.Value == 0)
             _navigation.NavigateTo("Login");
 
-        _viewModel.BaseballTypeId = _baseballType.BaseballTypeId;
-        _viewModel.BrandId = _brand.BrandId;
-        _viewModel.CommissionerId = _commissioner.CommissionerId;
-        //_viewModel.MemorabiliaId = MemorabiliaId;
-        _viewModel.SizeId = _size.SizeId;
-
-        // person
-        // team
-        // sport
-
-        var command = new SaveBaseball.Command(_viewModel);
+        var command = new SaveBaseball.Command(MemorabiliaId, _viewModel);
 
         await _commandRouter.Send(command).ConfigureAwait(false);
 
@@ -94,35 +127,40 @@ else
         var userId = await _localStorage.GetAsync<int>("UserId");
 
         if (userId.Value == 0)
-            _navigation.NavigateTo("Login");
-
-        await GetBrands().ConfigureAwait(false);
-        await GetCommissioners().ConfigureAwait(false);
-        await GetSizes().ConfigureAwait(false);
+            _navigation.NavigateTo("Login");        
 
         var query = new GetBaseball.Query(MemorabiliaId);
+        var baseballViewModel = await _queryRouter.Send(query).ConfigureAwait(false);
 
-        _viewModel = new SaveBaseballViewModel(await _queryRouter.Send(query).ConfigureAwait(false));
-    }
+        if (baseballViewModel.MemorabiliaBrand == null)
+        {
+            _navigation.NavigateTo($"Memorabilia/Baseball/Add/{MemorabiliaId}");
+            return;
+        }    
 
-    private async Task GetBrands()
+        _viewModel = new SaveBaseballViewModel(baseballViewModel);  
+        
+        _displayPeople = _viewModel.HasPerson;
+        _displayTeams = _viewModel.HasTeam;
+    }  
+
+    private void PersonCheckboxClicked(object isChecked)
+    {     
+        _displayPeople = (bool)isChecked;
+
+        if (!_displayPeople)
+            _viewModel.PersonId = 0;
+
+        StateHasChanged();
+    } 
+
+    public void TeamsCheckboxClicked(object isChecked)
     {
-        var query = new GetItemTypeBrands.Query(Domain.Constants.ItemType.Baseball.Id);
+        _displayTeams = (bool)isChecked;
 
-        _brands = (await _queryRouter.Send(query).ConfigureAwait(false)).ItemTypeBrands;
-    }
+        if (!_displayTeams)
+            _viewModel.TeamId = 0;
 
-    private async Task GetCommissioners()
-    {
-        var query = new GetCommissioners.Query(Domain.Constants.Sport.Baseball.Id);
-
-        _commissioners = (await _queryRouter.Send(query).ConfigureAwait(false)).Commissioners;
-    }
-
-    private async Task GetSizes()
-    {
-        var query = new GetItemTypeSizes.Query(Domain.Constants.ItemType.Baseball.Id);
-
-        _sizes = (await _queryRouter.Send(query).ConfigureAwait(false)).ItemTypeSizes;
+        StateHasChanged();
     }
 }

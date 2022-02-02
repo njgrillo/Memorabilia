@@ -13,127 +13,176 @@ namespace Memorabilia.Web.Pages.MemorabiliaItems.Baseballs
     using System.Threading.Tasks;
     using Microsoft.AspNetCore.Components;
 #nullable restore
-#line 1 "C:\Projects\Memorabilia\Memorabilia\Memorabilia.Web\_Imports.razor"
+#line 1 "C:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\_Imports.razor"
 using System.Net.Http;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 2 "C:\Projects\Memorabilia\Memorabilia\Memorabilia.Web\_Imports.razor"
+#line 2 "C:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\_Imports.razor"
 using Microsoft.AspNetCore.Authorization;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 3 "C:\Projects\Memorabilia\Memorabilia\Memorabilia.Web\_Imports.razor"
+#line 3 "C:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\_Imports.razor"
 using Microsoft.AspNetCore.Components.Authorization;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 4 "C:\Projects\Memorabilia\Memorabilia\Memorabilia.Web\_Imports.razor"
+#line 4 "C:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\_Imports.razor"
 using Microsoft.AspNetCore.Components.Forms;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 5 "C:\Projects\Memorabilia\Memorabilia\Memorabilia.Web\_Imports.razor"
+#line 5 "C:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\_Imports.razor"
 using Microsoft.AspNetCore.Components.Routing;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 6 "C:\Projects\Memorabilia\Memorabilia\Memorabilia.Web\_Imports.razor"
+#line 6 "C:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\_Imports.razor"
 using Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 7 "C:\Projects\Memorabilia\Memorabilia\Memorabilia.Web\_Imports.razor"
+#line 7 "C:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\_Imports.razor"
 using Microsoft.AspNetCore.Components.Web;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 8 "C:\Projects\Memorabilia\Memorabilia\Memorabilia.Web\_Imports.razor"
+#line 8 "C:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\_Imports.razor"
 using Microsoft.AspNetCore.Components.Web.Virtualization;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 9 "C:\Projects\Memorabilia\Memorabilia\Memorabilia.Web\_Imports.razor"
+#line 9 "C:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\_Imports.razor"
 using Microsoft.JSInterop;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 10 "C:\Projects\Memorabilia\Memorabilia\Memorabilia.Web\_Imports.razor"
+#line 10 "C:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\_Imports.razor"
 using Memorabilia.Web;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 11 "C:\Projects\Memorabilia\Memorabilia\Memorabilia.Web\_Imports.razor"
+#line 11 "C:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\_Imports.razor"
 using Memorabilia.Web.Controls;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 12 "C:\Projects\Memorabilia\Memorabilia\Memorabilia.Web\_Imports.razor"
+#line 12 "C:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\_Imports.razor"
 using Memorabilia.Web.Shared;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 13 "C:\Projects\Memorabilia\Memorabilia\Memorabilia.Web\_Imports.razor"
+#line 13 "C:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\_Imports.razor"
 using Blazored.Toast;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 14 "C:\Projects\Memorabilia\Memorabilia\Memorabilia.Web\_Imports.razor"
+#line 14 "C:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\_Imports.razor"
 using Blazored.Toast.Services;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 15 "C:\Projects\Memorabilia\Memorabilia\Memorabilia.Web\_Imports.razor"
+#line 15 "C:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\_Imports.razor"
 using Memorabilia.Domain;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 16 "C:\Projects\Memorabilia\Memorabilia\Memorabilia.Web\_Imports.razor"
+#line 16 "C:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\_Imports.razor"
 using Demo.Framework.Web;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 3 "C:\Projects\Memorabilia\Memorabilia\Memorabilia.Web\Pages\MemorabiliaItems\Baseballs\AddBaseball.razor"
+#line 3 "C:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\Pages\MemorabiliaItems\Baseballs\AddBaseball.razor"
 using Memorabilia.Application.Features.Memorabilia;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 4 "C:\Projects\Memorabilia\Memorabilia\Memorabilia.Web\Pages\MemorabiliaItems\Baseballs\AddBaseball.razor"
+#line 4 "C:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\Pages\MemorabiliaItems\Baseballs\AddBaseball.razor"
 using Memorabilia.Application.Features.Memorabilia.Baseball;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 5 "C:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\Pages\MemorabiliaItems\Baseballs\AddBaseball.razor"
+using Memorabilia.Domain.Constants;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 6 "C:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\Pages\MemorabiliaItems\Baseballs\AddBaseball.razor"
+using Memorabilia.Web.Controls.Baseball;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 7 "C:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\Pages\MemorabiliaItems\Baseballs\AddBaseball.razor"
+using Memorabilia.Web.Controls.Brand;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 8 "C:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\Pages\MemorabiliaItems\Baseballs\AddBaseball.razor"
+using Memorabilia.Web.Controls.Commissioner;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 9 "C:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\Pages\MemorabiliaItems\Baseballs\AddBaseball.razor"
+using Memorabilia.Web.Controls.Person;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 10 "C:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\Pages\MemorabiliaItems\Baseballs\AddBaseball.razor"
+using Memorabilia.Web.Controls.Size;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 11 "C:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\Pages\MemorabiliaItems\Baseballs\AddBaseball.razor"
+using Memorabilia.Web.Controls.Team;
 
 #line default
 #line hidden
@@ -147,53 +196,58 @@ using Memorabilia.Application.Features.Memorabilia.Baseball;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 71 "C:\Projects\Memorabilia\Memorabilia\Memorabilia.Web\Pages\MemorabiliaItems\Baseballs\AddBaseball.razor"
+#line 101 "C:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\Pages\MemorabiliaItems\Baseballs\AddBaseball.razor"
        
     [Parameter]
     public int MemorabiliaId { get; set; }  
 
-    private _BaseballTypes _baseballType;
-    private _Brands _brand;
-    private _Commissioners _commissioner;
-    private _Sizes _size;
+    private bool _displayPeople;
+    private bool _displayTeams;
     private SaveBaseballViewModel _viewModel = new SaveBaseballViewModel();
 
     protected async Task HandleValidSubmit()
     {
-        var userId = await _localStorage.GetAsync<int>("UserId");
+        var userId = await _localStorage.GetAsync<int>("UserId").ConfigureAwait(false);
 
         if (userId.Value == 0)
             _navigation.NavigateTo("Login");
 
-        _viewModel.BaseballTypeId = _baseballType.BaseballTypeId;
-        _viewModel.BrandId = _brand.BrandId > 0 ? _brand.BrandId : _viewModel.Brands.First().Id;
-        _viewModel.CommissionerId = _commissioner.CommissionerId > 0 ? _commissioner.CommissionerId : _viewModel.Commissioners.First().Id;
-        _viewModel.MemorabiliaId = MemorabiliaId;
-        _viewModel.SizeId = _size.SizeId > 0 ? _size.SizeId : _viewModel.Sizes.First().Id;
-
-        //Move    _sports to SaveBaseballViewModel
-        
-
-        // person
-        // team
-        // sport
-
-        var command = new SaveBaseball.Command(_viewModel);
+        var command = new SaveBaseball.Command(MemorabiliaId, _viewModel);
 
         await _commandRouter.Send(command).ConfigureAwait(false);
 
-        _navigation.NavigateTo("Memorabilia");
+        _navigation.NavigateTo($"Memorabilia/Image/Add/{command.MemorabiliaId}");
 
         _toastService.ShowSuccess("Baseball Details were added successfully!", _viewModel.PageTitle);
     }
 
     protected override async Task OnInitializedAsync()
     {
-        var userId = await _localStorage.GetAsync<int>("UserId");
+        var userId = await _localStorage.GetAsync<int>("UserId").ConfigureAwait(false);
 
         if (userId.Value == 0)
             _navigation.NavigateTo("Login");
-    }
+    }    
+
+    private void PersonCheckboxClicked(object isChecked)
+    {
+        _displayPeople = (bool)isChecked;
+
+        if (!_displayPeople)
+            _viewModel.PersonId = 0;
+
+        StateHasChanged();
+    } 
+
+    private void TeamsCheckboxClicked(object isChecked)
+    {
+        _displayTeams = (bool)isChecked;
+
+        if (!_displayTeams)
+            _viewModel.TeamId = 0;
+
+        StateHasChanged();
+    } 
 
 #line default
 #line hidden

@@ -1,0 +1,29 @@
+﻿@using Memorabilia.Application.Features.Admin.BaseballType
+
+<InputSelect class="form-control" id="baseballType" @bind-Value="@Value" @oninput="@OnInputChange" >
+    <option value="0">--Select--</option>
+    @foreach (var baseballType in Domain.Constants.BaseballType.All)
+    {
+        <option value="@baseballType.Id">@baseballType.Name</option>
+    }
+</InputSelect>
+
+@code {
+    [Parameter]
+    public int Value { get; set; }
+
+    [Parameter]
+    public EventCallback<int> ValueChanged { get; set; }
+
+    protected override Task OnInitializedAsync()
+    {
+        return base.OnInitializedAsync();
+    }
+
+    private async Task OnInputChange(ChangeEventArgs args)
+    {
+        Value = Convert.ToInt32(args.Value);
+        await ValueChanged.InvokeAsync(Value);
+    }
+}
+

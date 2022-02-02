@@ -12,6 +12,7 @@ using Memorabilia.Application.Features.Admin.Franchise;
 using Memorabilia.Application.Features.Admin.FullSizeHelmetType;
 using Memorabilia.Application.Features.Admin.GloveType;
 using Memorabilia.Application.Features.Admin.HelmetType;
+using Memorabilia.Application.Features.Admin.ImageType;
 using Memorabilia.Application.Features.Admin.InscriptionType;
 using Memorabilia.Application.Features.Admin.ItemType;
 using Memorabilia.Application.Features.Admin.ItemTypeBrand;
@@ -24,6 +25,8 @@ using Memorabilia.Application.Features.Admin.JerseyType;
 using Memorabilia.Application.Features.Admin.MagazineType;
 using Memorabilia.Application.Features.Admin.Occupation;
 using Memorabilia.Application.Features.Admin.Person;
+using Memorabilia.Application.Features.Admin.PrivacyType;
+using Memorabilia.Application.Features.Admin.PurchaseType;
 using Memorabilia.Application.Features.Admin.Size;
 using Memorabilia.Application.Features.Admin.Sport;
 using Memorabilia.Application.Features.Admin.Spot;
@@ -61,14 +64,13 @@ namespace Memorabilia.Web
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDataProtection()
-                //.PersistKeysToDbContext<ApplicationDbContext>()
-                .SetApplicationName("Memorabilia")
-                .SetDefaultKeyLifetime(TimeSpan.FromDays(180));
+                    .SetApplicationName("Memorabilia")
+                    .SetDefaultKeyLifetime(TimeSpan.FromDays(180));
 
             services.AddRazorPages();
             services.AddServerSideBlazor();
             services.AddBlazoredToast();
-            services.AddDbContext<Context>(options => options.UseSqlServer("name=ConnectionStrings:Memorabilia"));
+            services.AddDbContext<Context>(options => options.UseSqlServer("name=ConnectionStrings:Memorabilia"), ServiceLifetime.Transient);
             services.AddTransient<IContext, Context>();
             services.AddTransient<CommandRouter>();
             services.AddTransient<QueryRouter>();
@@ -86,6 +88,7 @@ namespace Memorabilia.Web
             services.AddTransient<IFullSizeHelmetTypeRepository, FullSizeHelmetTypeRepository>();
             services.AddTransient<IGloveTypeRepository, GloveTypeRepository>();
             services.AddTransient<IHelmetTypeRepository, HelmetTypeRepository>();
+            services.AddTransient<IImageTypeRepository, ImageTypeRepository>();
             services.AddTransient<IInscriptionTypeRepository, InscriptionTypeRepository>();
             services.AddTransient<IItemTypeRepository, ItemTypeRepository>();
             services.AddTransient<IItemTypeBrandRepository, ItemTypeBrandRepository>();
@@ -106,6 +109,8 @@ namespace Memorabilia.Web
             services.AddTransient<IMemorabiliaTeamRepository, MemorabiliaTeamRepository>();
             services.AddTransient<IOccupationRepository, OccupationRepository>();
             services.AddTransient<IPersonRepository, PersonRepository>();
+            services.AddTransient<IPrivacyTypeRepository, PrivacyTypeRepository>();
+            services.AddTransient<IPurchaseTypeRepository, PurchaseTypeRepository>();
             services.AddTransient<ISizeRepository, SizeRepository>();
             services.AddTransient<ISportRepository, SportRepository>();
             services.AddTransient<ISpotRepository, SpotRepository>();
@@ -140,7 +145,9 @@ namespace Memorabilia.Web
             services.AddTransient<GetGloveTypes>();
             services.AddTransient<GetHelmetType>();
             services.AddTransient<GetHelmetTypes>();
-            services.AddTransient<GetInscriptionType>();
+            services.AddTransient<GetImageType>();
+            services.AddTransient<GetImageTypes>();
+            services.AddTransient<GetInscriptionTypes>();
             services.AddTransient<GetInscriptionTypes>();
             services.AddTransient<GetItemType>();
             services.AddTransient<GetItemTypes>();
@@ -166,6 +173,10 @@ namespace Memorabilia.Web
             services.AddTransient<GetOccupations>();
             services.AddTransient<GetPerson>();
             services.AddTransient<GetPeople>();
+            services.AddTransient<GetPrivacyType>();
+            services.AddTransient<GetPrivacyTypes>();
+            services.AddTransient<GetPurchaseType>();
+            services.AddTransient<GetPurchaseTypes>();
             services.AddTransient<GetSize>();
             services.AddTransient<GetSizes>();
             services.AddTransient<GetSport>();
@@ -191,6 +202,7 @@ namespace Memorabilia.Web
             services.AddTransient<SaveFullSizeHelmetType>();
             services.AddTransient<SaveGloveType>();
             services.AddTransient<SaveHelmetType>();
+            services.AddTransient<SaveImageType>();
             services.AddTransient<SaveInscriptionType>();
             services.AddTransient<SaveItemType>();
             services.AddTransient<SaveItemTypeBrand>();
@@ -204,6 +216,8 @@ namespace Memorabilia.Web
             services.AddTransient<SaveMemorabiliaItem>();
             services.AddTransient<SaveOccupation>();
             services.AddTransient<SavePerson>();
+            services.AddTransient<SavePrivacyType>();
+            services.AddTransient<SavePurchaseType>();
             services.AddTransient<SaveSize>();
             services.AddTransient<SaveSport>();
             services.AddTransient<SaveSpot>();

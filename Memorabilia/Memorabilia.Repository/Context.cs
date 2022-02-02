@@ -9,6 +9,7 @@ namespace Memorabilia.Repository
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<Domain.Entities.Acquisition>().Property(x => x.Cost).HasPrecision(12, 2);
             modelBuilder.Entity<Domain.Entities.AcquisitionType>();
             modelBuilder.Entity<Domain.Entities.AuthenticationCompany>();
             modelBuilder.Entity<Domain.Entities.Autograph>();
@@ -21,6 +22,7 @@ namespace Memorabilia.Repository
             modelBuilder.Entity<Domain.Entities.FullSizeHelmetType>();
             modelBuilder.Entity<Domain.Entities.GloveType>();
             modelBuilder.Entity<Domain.Entities.HelmetType>();
+            modelBuilder.Entity<Domain.Entities.ImageType>();
             modelBuilder.Entity<Domain.Entities.InscriptionType>();
             modelBuilder.Entity<Domain.Entities.ItemType>();
             modelBuilder.Entity<Domain.Entities.ItemTypeBrand>();
@@ -31,8 +33,8 @@ namespace Memorabilia.Repository
             modelBuilder.Entity<Domain.Entities.JerseyNumberType>();
             modelBuilder.Entity<Domain.Entities.JerseyType>();
             modelBuilder.Entity<Domain.Entities.MagazineType>();
-            modelBuilder.Entity<Domain.Entities.Memorabilia>().Property(x => x.Cost).HasPrecision(12, 2);
             modelBuilder.Entity<Domain.Entities.Memorabilia>().Property(x => x.EstimatedValue).HasPrecision(12, 2);
+            modelBuilder.Entity<Domain.Entities.MemorabiliaAcquisition>();
             modelBuilder.Entity<Domain.Entities.MemorabiliaBaseballType>();
             modelBuilder.Entity<Domain.Entities.MemorabiliaBrand>();
             modelBuilder.Entity<Domain.Entities.MemorabiliaCommissioner>();
@@ -42,6 +44,8 @@ namespace Memorabilia.Repository
             modelBuilder.Entity<Domain.Entities.MemorabiliaTeam>();
             modelBuilder.Entity<Domain.Entities.Occupation>();
             modelBuilder.Entity<Domain.Entities.Person>();
+            modelBuilder.Entity<Domain.Entities.PrivacyType>();
+            modelBuilder.Entity<Domain.Entities.PurchaseType>();
             modelBuilder.Entity<Domain.Entities.Size>();
             modelBuilder.Entity<Domain.Entities.Sport>();
             modelBuilder.Entity<Domain.Entities.Spot>();

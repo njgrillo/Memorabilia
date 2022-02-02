@@ -1,0 +1,92 @@
+﻿@using System 
+@using System.IO
+@using Microsoft.AspNetCore.Hosting
+@using Microsoft.Extensions.Logging
+
+@inject IWebHostEnvironment _environment
+@inject ProtectedLocalStorage _localStorage
+@inject ILogger<_ImageFileSelector> _logger
+@inject NavigationManager _navigation
+
+<div class="row">
+    <InputFile OnChange="@LoadFiles" accept="image/*" multiple @bind-Value="@Value" />
+</div>
+<div class="row" hidden="@(!DisplayPreview)">
+    @foreach(var filePath in _filePaths)
+    {
+        <div class="col-md-4">
+            <img src="data:image/jpg;base64,@Convert.ToBase64String(File.ReadAllBytes(filePath))" alt="Image" height="150" width="150">
+        </div>           
+    } 
+</div>
+
+@code {
+    private List<string> _filePaths = new();
+
+    private IReadOnlyList<IBrowserFile> _files;
+
+    [Parameter]
+    public bool DisplayPreview { get; set; }
+
+    [Parameter]
+    public int? MaximumAllowedFiles { get; set; }
+
+    [Parameter]
+    public long? MaximumFileSize { get; set; }
+
+    [Parameter]
+    public List<string> Value { get; set; } = new();
+
+    [Parameter]
+    public EventCallback<List<string>> ValueChanged { get; set; }    
+
+    private async Task LoadFiles(InputFileChangeEventArgs e)
+    {
+        var userId = await _localStorage.GetAsync<int>("UserId");
+
+        if (userId.Value == 0)
+            _navigation.NavigateTo("Login");
+
+        _files = e.GetMultipleFiles(MaximumAllowedFiles ?? 5);
+
+        await Save().ConfigureAwait(false);
+    }
+
+    public async Task Save()
+    {
+        var userId = await _localStorage.GetAsync<int>("UserId");
+
+        if (userId.Value == 0)
+            _navigation.NavigateTo("Login");
+
+        _filePaths = new List<string>();
+
+        foreach (var file in _files)
+        {
+            try
+            {
+                var directory = Path.Combine(_environment.ContentRootPath,
+                                             "wwwroot/userimages", 
+                                             userId.Value.ToString());
+
+                if (!Directory.Exists(directory))
+                    Directory.CreateDirectory(directory);
+
+                var fileName = Path.GetRandomFileName();
+                var path = Path.Combine(directory, fileName);
+
+                await using FileStream fs = new(path, FileMode.Create);
+                await file.OpenReadStream(MaximumFileSize ?? 5120000).CopyToAsync(fs);
+
+                _filePaths.Add($"wwwroot/userimages/{userId.Value}/{fileName}");
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError("File: {Filename} Error: {Error}", file.Name, ex.Message);
+            }               
+        }
+
+        Value = _filePaths;
+        await ValueChanged.InvokeAsync(Value);
+    }
+}

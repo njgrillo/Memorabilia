@@ -25,8 +25,11 @@ namespace Memorabilia.Application.Features.Memorabilia
                 {
                     memorabilia = new Domain.Entities.Memorabilia(command.ItemTypeId,
                                                                   command.ConditionId,
-                                                                  command.ImagePath,
+                                                                  command.AcquisitionTypeId,
+                                                                  command.AcquiredDate,
                                                                   command.Cost,
+                                                                  command.PurchaseTypeId,
+                                                                  command.PrivacyTypeId,
                                                                   command.EstimatedValue,
                                                                   command.UserId);
 
@@ -47,8 +50,11 @@ namespace Memorabilia.Application.Features.Memorabilia
                 }
 
                 memorabilia.Set(command.ConditionId,
-                                command.ImagePath,
+                                command.AcquisitionTypeId,
+                                command.AcquiredDate,
                                 command.Cost,
+                                command.PurchaseTypeId,
+                                command.PrivacyTypeId,
                                 command.EstimatedValue);
 
                 await _memorabiliaRepository.Update(memorabilia).ConfigureAwait(false);
@@ -65,7 +71,11 @@ namespace Memorabilia.Application.Features.Memorabilia
                 Id = _viewModel.Id;
             }
 
-            public int? ConditionId => _viewModel.ConditionId;
+            public int AcquisitionTypeId => _viewModel.AcquisitionTypeId;
+
+            public DateTime? AcquiredDate => _viewModel.AcquiredDate;
+
+            public int? ConditionId => _viewModel.ConditionId > 0 ? _viewModel.ConditionId : null;
 
             public decimal? Cost => _viewModel.Cost;
 
@@ -74,8 +84,6 @@ namespace Memorabilia.Application.Features.Memorabilia
             public decimal? EstimatedValue => _viewModel.EstimatedValue;
 
             public int Id { get; set; }
-
-            public string ImagePath => _viewModel.ImagePath;
 
             public bool IsDeleted => _viewModel.IsDeleted;
 
@@ -86,6 +94,10 @@ namespace Memorabilia.Application.Features.Memorabilia
             public int ItemTypeId => _viewModel.ItemTypeId;
 
             public DateTime? LastModifiedDate => _viewModel.LastModifiedDate;
+
+            public int PrivacyTypeId => _viewModel.PrivacyTypeId;
+
+            public int? PurchaseTypeId => _viewModel.PurchaseTypeId > 0 ? _viewModel.PurchaseTypeId : null;
 
             public int UserId => _viewModel.UserId;
         }

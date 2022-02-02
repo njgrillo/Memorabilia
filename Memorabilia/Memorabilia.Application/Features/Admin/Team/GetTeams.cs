@@ -17,7 +17,7 @@ namespace Memorabilia.Application.Features.Admin.Team
 
             protected override async Task<TeamsViewModel> Handle(Query query)
             {
-                var teams = await _teamRepository.GetAll().ConfigureAwait(false);
+                var teams = await _teamRepository.GetAll(query.SportId).ConfigureAwait(false);
 
                 var viewModel = new TeamsViewModel(teams);
 
@@ -27,6 +27,14 @@ namespace Memorabilia.Application.Features.Admin.Team
 
         public class Query : IQuery<TeamsViewModel>
         {
+            public Query() { }
+
+            public Query(int sportId)
+            {
+                SportId = sportId;
+            }
+
+            public int? SportId { get; }
         }
     }
 }

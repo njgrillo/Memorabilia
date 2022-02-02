@@ -1,4 +1,5 @@
-﻿using System.Threading;
+﻿using System.Collections.Generic;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Memorabilia.Domain
@@ -7,7 +8,7 @@ namespace Memorabilia.Domain
     {
         Task Add(Entities.MemorabiliaTeam memorabiliaTeam, CancellationToken cancellationToken = default);
 
-        Task Delete(Entities.MemorabiliaTeam memorabiliaTeam, CancellationToken cancellationToken = default);
+        Task Delete(IEnumerable<Entities.MemorabiliaTeam> memorabiliaTeams, CancellationToken cancellationToken = default);
 
         Task<Entities.MemorabiliaTeam> Get(int id);
 

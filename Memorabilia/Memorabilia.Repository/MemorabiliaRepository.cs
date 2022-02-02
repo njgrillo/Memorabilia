@@ -16,10 +16,12 @@ namespace Memorabilia.Repository
             _context = context;
         }
 
-        private IQueryable<Domain.Entities.Memorabilia> Memorabilia => _context.Set<Domain.Entities.Memorabilia>()
+        private IQueryable<Domain.Entities.Memorabilia> Memorabilia => _context.Set<Domain.Entities.Memorabilia>()                                                                               
                                                                                .Include(memorabilia => memorabilia.BaseballType)
                                                                                .Include(memorabilia => memorabilia.Brand)
                                                                                .Include(memorabilia => memorabilia.Commissioner)
+                                                                               .Include(memorabilia => memorabilia.MemorabiliaAcquisition)
+                                                                               .Include(memorabilia => memorabilia.MemorabiliaAcquisition.Acquisition)
                                                                                .Include(memorabilia => memorabilia.People)
                                                                                .Include(memorabilia => memorabilia.Size)
                                                                                .Include(memorabilia => memorabilia.Sports)

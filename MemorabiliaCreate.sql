@@ -7,6 +7,28 @@ GO
 SET QUOTED_IDENTIFIER ON
 GO
 
+IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = N'MemorabiliaAcquisition')
+BEGIN
+	IF OBJECT_ID('tempdb..#TempMemorabiliaAcquisitionTable') IS NOT NULL DROP TABLE #TempMemorabiliaAcquisitionTable; 
+
+	SELECT * 
+	INTO #TempMemorabiliaAcquisitionTable
+	FROM [dbo].[MemorabiliaAcquisition]
+
+	DROP TABLE [dbo].[MemorabiliaAcquisition]
+END
+
+IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = N'MemorabiliaImage')
+BEGIN
+	IF OBJECT_ID('tempdb..#TempMemorabiliaImageTable') IS NOT NULL DROP TABLE #TempMemorabiliaImageTable; 
+
+	SELECT * 
+	INTO #TempMemorabiliaImageTable
+	FROM [dbo].[MemorabiliaImage]
+
+	DROP TABLE [dbo].[MemorabiliaImage]
+END
+
 IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = N'Personalization')
 BEGIN
 	IF OBJECT_ID('tempdb..#TempPersonalizationTable') IS NOT NULL DROP TABLE #TempPersonalizationTable; 
@@ -181,6 +203,17 @@ BEGIN
 	FROM [dbo].[AutographAuthentication]
 
 	DROP TABLE [dbo].[AutographAuthentication]
+END
+
+IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = N'Acquisition')
+BEGIN
+	IF OBJECT_ID('tempdb..#TempAcquisitionTable') IS NOT NULL DROP TABLE #TempAcquisitionTable; 
+
+	SELECT * 
+	INTO #TempAcquisitionTable
+	FROM [dbo].[Acquisition]
+
+	DROP TABLE [dbo].[Acquisition]
 END
 
 IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = N'Inscription')
@@ -645,6 +678,39 @@ BEGIN
 	DROP TABLE [dbo].[Role]
 END
 
+IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = N'PrivacyType')
+BEGIN
+	IF OBJECT_ID('tempdb..#TempPrivacyTypeTable') IS NOT NULL DROP TABLE #TempPrivacyTypeTable; 
+
+	SELECT * 
+	INTO #TempPrivacyTypeTable
+	FROM [dbo].[PrivacyType]
+
+	DROP TABLE [dbo].[PrivacyType]
+END
+
+IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = N'ImageType')
+BEGIN
+	IF OBJECT_ID('tempdb..#TempImageTypeTable') IS NOT NULL DROP TABLE #TempImageTypeTable; 
+
+	SELECT * 
+	INTO #TempImageTypeTable
+	FROM [dbo].[ImageType]
+
+	DROP TABLE [dbo].[ImageType]
+END
+
+IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = N'PurchaseType')
+BEGIN
+	IF OBJECT_ID('tempdb..#TempPurchaseTypeTable') IS NOT NULL DROP TABLE #TempPurchaseTypeTable; 
+
+	SELECT * 
+	INTO #TempPurchaseTypeTable
+	FROM [dbo].[PurchaseType]
+
+	DROP TABLE [dbo].[PurchaseType]
+END
+
 --Domain Tables
 CREATE TABLE [dbo].[AcquisitionType](
 	[Id] [int] IDENTITY(1,1) NOT NULL,
@@ -659,13 +725,18 @@ GO
 
 SET IDENTITY_INSERT [dbo].[AcquisitionType] ON
 
-INSERT INTO  [dbo].[AcquisitionType] (Id, Name, Abbreviation)
-VALUES (1, 'Private Signing', '')
-     , (2, 'Public Signing', '')
-	 , (3, 'In Person', 'IP')
-	 , (4, 'Through the Mail', 'TTM')
-	 , (5, 'Trade', '')
-	 , (6, 'Purchase', '')
+--INSERT INTO  [dbo].[AcquisitionType] (Id, Name, Abbreviation)
+--VALUES (1, 'Private Signing', NULL)
+--     , (2, 'Public Signing', NULL)
+--	 , (3, 'In Person', 'IP')
+--	 , (4, 'Through the Mail', 'TTM')
+--	 , (5, 'Trade', NULL)
+--	 , (6, 'Purchase', NULL)
+--	 , (7, 'Gift', NULL)
+
+INSERT INTO [dbo].[AcquisitionType] (Id, Name, Abbreviation)
+SELECT * 
+FROM #TempAcquisitionTypeTable
 
 SET IDENTITY_INSERT [dbo].[AcquisitionType] OFF
 
@@ -707,7 +778,25 @@ SET IDENTITY_INSERT [dbo].[BaseballType] ON
 --     , (2, 'All Star', NULL)
 --	 , (3, 'World Series', NULL)
 --	 , (4, 'Offical Major League Baseball', 'ROMLB')
---	 , (5, 'Spinneybeck', NULL)
+--	 , (5, 'Other', NULL)
+--	 , (6, 'None', NULL)
+--	 , (7, 'American League', NULL)
+--	 , (8, 'National League', NULL)
+--	 , (9, 'Father''s Day', NULL)
+--	 , (10, 'Mother''s', NULL)
+--	 , (11, 'Cy Young', NULL)
+--	 , (12, 'Commemorative', NULL)
+--	 , (13, 'Home Run Derby', NULL)
+--	 , (14, 'Gold', 'ROMLBG')
+--	 , (15, 'Gold Glove', 'RGGBB')
+--	 , (16, 'Spring Training', NULL)
+--	 , (17, 'Gold World Series',  NULL)
+--	 , (18, 'Team Anniversary', NULL)
+--	 , (19, 'All Star Future''s Game', NULL)
+--	 , (20, 'Opening Day', NULL)
+--	 , (21, 'Post Season', NULL)
+--	 , (22, 'Hall of Fame', NULL)
+--	 , (23, 'Breast Cancer Awareness', NULL)
 
 INSERT INTO [dbo].[BaseballType] (Id, Name, Abbreviation)
 SELECT * 
@@ -962,6 +1051,29 @@ FROM #TempHelmetTypeTable
 
 SET IDENTITY_INSERT [dbo].[HelmetType] OFF
 
+CREATE TABLE [dbo].[ImageType](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[Name] [varchar](100) NOT NULL,
+	[Abbreviation] [varchar](10) NULL,
+ CONSTRAINT [PK_ImageType] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+SET IDENTITY_INSERT [dbo].[ImageType] ON
+
+--INSERT INTO  [dbo].[ImageType] (Id, Name, Abbreviation)
+--VALUES (1, 'Primary', NULL)
+--     , (2, 'Secondary', NULL)
+
+INSERT INTO [dbo].[ImageType] (Id, Name, Abbreviation)
+SELECT * 
+FROM #TempImageTypeTable
+
+SET IDENTITY_INSERT [dbo].[ImageType] OFF
+
 CREATE TABLE [dbo].[InscriptionType](
 	[Id] [int] IDENTITY(1,1) NOT NULL,
 	[Name] [varchar](100) NOT NULL,
@@ -1171,6 +1283,55 @@ SELECT *
 FROM #TempPersonTable
 
 SET IDENTITY_INSERT [dbo].[Person] OFF
+
+CREATE TABLE [dbo].[PrivacyType](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[Name] [varchar](75) NOT NULL,
+	[Abbreviation] [varchar](10) NULL,
+ CONSTRAINT [PK_PrivacyType] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+SET IDENTITY_INSERT [dbo].[PrivacyType] ON
+
+--INSERT INTO  [dbo].[PrivacyType] (Id, Name, Abbreviation)
+--VALUES (1, 'Public', NULL)
+--     , (2, 'Private', NULL)
+
+INSERT INTO [dbo].[PrivacyType] (Id, Name, Abbreviation)
+SELECT * 
+FROM #TempPrivacyTypeTable
+
+SET IDENTITY_INSERT [dbo].[PrivacyType] OFF
+
+CREATE TABLE [dbo].[PurchaseType](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[Name] [varchar](100) NOT NULL,
+	[Abbreviation] [varchar](10) NULL,
+ CONSTRAINT [PK_PurchaseType] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+SET IDENTITY_INSERT [dbo].[PurchaseType] ON
+
+--INSERT INTO  [dbo].[PurchaseType] (Id, Name, Abbreviation)
+--VALUES (1, 'eBay', NULL)
+--     , (2, 'Amazon', NULL)
+--	 , (3, 'Other', NULL)
+--	 , (4, 'Retail Store', NULL)
+--	 , (5, 'Facebook', NULL)
+
+INSERT INTO [dbo].[PurchaseType] (Id, Name, Abbreviation)
+SELECT * 
+FROM #TempPurchaseTypeTable
+
+SET IDENTITY_INSERT [dbo].[PurchaseType] OFF
 
 CREATE TABLE [dbo].[Role](
 	[Id] [int] IDENTITY(1,1) NOT NULL,
@@ -1792,9 +1953,8 @@ CREATE TABLE [dbo].[Memorabilia](
 	[Id] [int] IDENTITY(1,1) NOT NULL,
 	[ItemTypeId] [int] NOT NULL,
 	[ConditionId] [int] NULL,
-	[Cost] [decimal](12, 2) NULL,
 	[EstimatedValue] [decimal](12, 2) NULL,
-	[ImagePath] [varchar](500) NULL,
+	[PrivacyTypeId] int NOT NULL,
 	[UserId] [int] NOT NULL,
 	[CreateDate] [datetime] NOT NULL,
 	[LastModifiedDate] [datetime] NULL,
@@ -1819,6 +1979,13 @@ GO
 ALTER TABLE [dbo].[Memorabilia] CHECK CONSTRAINT [FK_Memorabilia_ItemType]
 GO
 
+ALTER TABLE [dbo].[Memorabilia]  WITH CHECK ADD  CONSTRAINT [FK_Memorabilia_PrivacyType] FOREIGN KEY([PrivacyTypeId])
+REFERENCES [dbo].[PrivacyType] ([Id])
+GO
+
+ALTER TABLE [dbo].[Memorabilia] CHECK CONSTRAINT [FK_Memorabilia_PrivacyType]
+GO
+
 ALTER TABLE [dbo].[Memorabilia]  WITH CHECK ADD  CONSTRAINT [FK_Memorabilia_User] FOREIGN KEY([UserId])
 REFERENCES [dbo].[User] ([Id])
 GO
@@ -1828,7 +1995,7 @@ GO
 
 SET IDENTITY_INSERT [dbo].[Memorabilia] ON
 
-INSERT INTO [dbo].[Memorabilia] (Id, ItemTypeId, ConditionId, Cost, EstimatedValue, ImagePath, UserId, CreateDate, LastModifiedDate)
+INSERT INTO [dbo].[Memorabilia] (Id, ItemTypeId, ConditionId, EstimatedValue, PrivacyTypeId, UserId, CreateDate, LastModifiedDate)
 SELECT * 
 FROM #TempMemorabiliaTable
 
@@ -2201,6 +2368,41 @@ GO
 ALTER TABLE [dbo].[WritingInstrumentBrand] CHECK CONSTRAINT [FK_WritingInstrumentBrand_WritingInstrument]
 GO
 
+CREATE TABLE [dbo].[Acquisition](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[AcquisitionTypeId] [int] NOT NULL,
+	[AcquiredDate] [datetime] NULL,
+	[PurchaseTypeId] [int] NULL,
+	[Cost] [decimal](12, 2) NULL,
+ CONSTRAINT [PK_Acquisition] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+ALTER TABLE [dbo].[Acquisition]  WITH CHECK ADD  CONSTRAINT [FK_Acquisition_AcquisitionType] FOREIGN KEY([AcquisitionTypeId])
+REFERENCES [dbo].[AcquisitionType] ([Id])
+GO
+
+ALTER TABLE [dbo].[Acquisition] CHECK CONSTRAINT [FK_Acquisition_AcquisitionType]
+GO
+
+ALTER TABLE [dbo].[Acquisition]  WITH CHECK ADD  CONSTRAINT [FK_Acquisition_PurchaseType] FOREIGN KEY([PurchaseTypeId])
+REFERENCES [dbo].[PurchaseType] ([Id])
+GO
+
+ALTER TABLE [dbo].[Acquisition] CHECK CONSTRAINT [FK_Acquisition_PurchaseType]
+GO
+
+SET IDENTITY_INSERT [dbo].[Acquisition] ON
+
+INSERT INTO [dbo].[Acquisition] (Id, AcquisitionTypeId, AcquiredDate, PurchaseTypeId, Cost)
+SELECT * 
+FROM #TempAcquisitionTable
+
+SET IDENTITY_INSERT [dbo].[Acquisition] OFF
+
 CREATE TABLE [dbo].[Inscription](
 	[Id] [int] IDENTITY(1,1) NOT NULL,
 	[InscriptionTypeId] [int] NOT NULL,
@@ -2231,6 +2433,8 @@ CREATE TABLE [dbo].[MemorabiliaBaseballType](
 	[Id] [int] IDENTITY(1,1) NOT NULL,
 	[MemorabiliaId] [int] NOT NULL,
 	[BaseballTypeId] [int] NOT NULL,
+	[Year] [int] NULL,
+	[Anniversary] varchar(5) NULL,
  CONSTRAINT [PK_MemorabiliaBaseballType] PRIMARY KEY CLUSTERED 
 (
 	[Id] ASC
@@ -2254,8 +2458,76 @@ GO
 
 SET IDENTITY_INSERT [dbo].[MemorabiliaBaseballType] ON
 
-INSERT INTO [dbo].[MemorabiliaBaseballType] (Id, MemorabiliaId, BaseballTypeId)
+INSERT INTO [dbo].[MemorabiliaBaseballType] (Id, MemorabiliaId, BaseballTypeId, [Year], Anniversary)
 SELECT * 
 FROM #TempMemorabiliaBaseballTypeTable
 
 SET IDENTITY_INSERT [dbo].[MemorabiliaBaseballType] OFF
+
+CREATE TABLE [dbo].[MemorabiliaAcquisition](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[MemorabiliaId] [int] NOT NULL,
+	[AcquisitionId] [int] NOT NULL
+ CONSTRAINT [PK_MemorabiliaAcquisition] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+ALTER TABLE [dbo].[MemorabiliaAcquisition]  WITH CHECK ADD  CONSTRAINT [FK_MemorabiliaAcquisition_Acquisition] FOREIGN KEY([AcquisitionId])
+REFERENCES [dbo].[Acquisition] ([Id])
+GO
+
+ALTER TABLE [dbo].[MemorabiliaAcquisition] CHECK CONSTRAINT [FK_MemorabiliaAcquisition_Acquisition]
+GO
+
+ALTER TABLE [dbo].[MemorabiliaAcquisition]  WITH CHECK ADD  CONSTRAINT [FK_MemorabiliaAcquisition_Memorabilia] FOREIGN KEY([MemorabiliaId])
+REFERENCES [dbo].[Memorabilia] ([Id])
+GO
+
+ALTER TABLE [dbo].[MemorabiliaAcquisition] CHECK CONSTRAINT [FK_MemorabiliaAcquisition_Memorabilia]
+GO
+
+SET IDENTITY_INSERT [dbo].[MemorabiliaAcquisition] ON
+
+INSERT INTO [dbo].[MemorabiliaAcquisition] (Id, MemorabiliaId, AcquisitionId)
+SELECT * 
+FROM #TempMemorabiliaAcquisitionTable
+
+SET IDENTITY_INSERT [dbo].[MemorabiliaAcquisition] OFF
+
+CREATE TABLE [dbo].[MemorabiliaImage](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[MemorabiliaId] [int] NOT NULL,
+	[FilePath] nvarchar(500) NOT NULL,
+	[UploadDate] [datetime] NOT NULL,
+	[ImageTypeId] [int] NOT NULL,
+ CONSTRAINT [PK_MemorabiliaImage] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+ALTER TABLE [dbo].[MemorabiliaImage]  WITH CHECK ADD  CONSTRAINT [FK_MemorabiliaImage_ImageType] FOREIGN KEY([ImageTypeId])
+REFERENCES [dbo].[ImageType] ([Id])
+GO
+
+ALTER TABLE [dbo].[MemorabiliaImage] CHECK CONSTRAINT [FK_MemorabiliaImage_ImageType]
+GO
+
+ALTER TABLE [dbo].[MemorabiliaImage]  WITH CHECK ADD  CONSTRAINT [FK_MemorabiliaImage_Memorabilia] FOREIGN KEY([MemorabiliaId])
+REFERENCES [dbo].[Memorabilia] ([Id])
+GO
+
+ALTER TABLE [dbo].[MemorabiliaImage] CHECK CONSTRAINT [FK_MemorabiliaImage_Memorabilia]
+GO
+
+SET IDENTITY_INSERT [dbo].[MemorabiliaImage] ON
+
+INSERT INTO [dbo].[MemorabiliaImage] (Id, MemorabiliaId, FilePath, UploadDate, ImageTypeId)
+SELECT * 
+FROM #TempMemorabiliaImageTable
+
+SET IDENTITY_INSERT [dbo].[MemorabiliaImage] OFF

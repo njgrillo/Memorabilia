@@ -1,0 +1,43 @@
+﻿@using Memorabilia.Application.Features.Admin.Team
+@using Memorabilia.Domain.Constants
+
+@inject QueryRouter _queryRouter
+
+<InputSelect class="form-control" id="TeamDropDown" @bind-Value="@Value" @oninput="@OnInputChange">
+    <option value="0">--Select--</option>
+    @foreach (var team in _teams)
+    {
+        <option value="@team.Id">@team.DisplayName</option>
+    }
+</InputSelect>
+
+@code {
+    [Parameter]
+    public Sport Sport { get; set; }
+    
+    [Parameter]
+    public int Value { get; set; }  
+
+    private IEnumerable<TeamViewModel> _teams = Enumerable.Empty<TeamViewModel>();
+
+    [Parameter]
+    public EventCallback<int> ValueChanged { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        await Load().ConfigureAwait(false);
+    } 
+
+    private async Task Load()
+    {
+        var query = new GetTeams.Query(Sport.Id);
+
+        _teams = (await _queryRouter.Send(query).ConfigureAwait(false)).Teams;
+    }
+
+    private async Task OnInputChange(ChangeEventArgs args)
+    {
+        Value = Convert.ToInt32(args.Value);
+        await ValueChanged.InvokeAsync(Value);
+    }
+}

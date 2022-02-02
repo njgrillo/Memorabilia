@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace Memorabilia.Domain.Constants
 {
@@ -10,15 +11,24 @@ namespace Memorabilia.Domain.Constants
         public static readonly AcquisitionType ThroughTheMail = new(4, "Through the Mail", "TTM");
         public static readonly AcquisitionType Trade = new(5, "Trade", string.Empty);
         public static readonly AcquisitionType Purchase = new(6, "Purchase", string.Empty);
+        public static readonly AcquisitionType Gift = new(7, "Gift", string.Empty);
 
         public static readonly AcquisitionType[] All =
-        {
+        {        
+            Gift,
+            InPerson,
             PrivateSigning,
             PublicSigning,
-            InPerson,
+            Purchase,
             ThroughTheMail,
-            Trade,
-            Purchase
+            Trade            
+        };
+
+        public static readonly AcquisitionType[] MemorabiliaAcquisitionTypes =
+        {
+            Gift,
+            Purchase,
+            Trade
         };
 
         private AcquisitionType(int id, string name, string abbreviation)
@@ -34,9 +44,23 @@ namespace Memorabilia.Domain.Constants
 
         public string Name { get; }
 
+        public static bool CanHaveCost(AcquisitionType acquisitionType)
+        {
+            var acquisitionTypes = new List<AcquisitionType>
+            {
+                InPerson,
+                PrivateSigning,
+                PublicSigning,
+                Purchase,
+                ThroughTheMail
+            };
+
+            return acquisitionTypes.Contains(acquisitionType);
+        }
+
         public static AcquisitionType Find(int id)
         {
             return All.SingleOrDefault(AcquisitionType => AcquisitionType.Id == id);
-        }
+        }        
     }
 }

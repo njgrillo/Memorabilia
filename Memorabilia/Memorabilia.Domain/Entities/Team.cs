@@ -22,6 +22,8 @@
 
         public int? EndYear { get; private set; }
 
+        public Franchise Franchise { get; private set; }
+
         public int FranchiseId { get; private set; }
 
         public string ImagePath { get; private set; }

@@ -15,6 +15,8 @@
 
         public int? BeginYear => _team.BeginYear;
 
+        public string DisplayName => $"Franchise: {_team.Franchise.FullName}, Team: {_team.Name} ({_team.BeginYear} - {(_team.EndYear.HasValue ? _team.EndYear : "current")})";
+
         public int? EndYear => _team.EndYear;
 
         public int FranchiseId => _team.FranchiseId;

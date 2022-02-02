@@ -1,11 +1,5 @@
-﻿using Memorabilia.Application.Features.Admin.Commissioner;
-using Memorabilia.Application.Features.Admin.ItemTypeBrand;
-using Memorabilia.Application.Features.Admin.ItemTypeSize;
-using Memorabilia.Application.Features.Admin.Person;
-using Memorabilia.Application.Features.Admin.Team;
-using System.Collections.Generic;
+﻿using Memorabilia.Domain.Constants;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
 
 namespace Memorabilia.Application.Features.Memorabilia.Baseball
 {
@@ -15,38 +9,47 @@ namespace Memorabilia.Application.Features.Memorabilia.Baseball
 
         public SaveBaseballViewModel(BaseballViewModel viewModel)
         {
-            BaseballTypeId = viewModel.MemorabiliaBaseballType.BaseballTypeId;
+            BaseballTypeAnniversary = viewModel.MemorabiliaBaseballType?.Anniversary;
+            BaseballTypeId = viewModel.MemorabiliaBaseballType?.BaseballTypeId ?? 0;
+            BaseballTypeYear = viewModel.MemorabiliaBaseballType?.Year;
             BrandId = viewModel.MemorabiliaBrand.BrandId;
-            Brands = viewModel.Brands;
             CommissionerId = viewModel.MemorabiliaCommissioner.CommissionerId;
-            Commissioners = viewModel.Commissioners;
-            MemorabiliaBaseballTypeId = viewModel.MemorabiliaBaseballType.Id;
+            MemorabiliaBaseballTypeId = viewModel.MemorabiliaBaseballType?.Id;
             MemorabiliaBrandId = viewModel.MemorabiliaBrand.Id;
             MemorabiliaCommissionerId = viewModel.MemorabiliaCommissioner.Id;
             MemorabiliaId = viewModel.MemorabiliaId;
             MemorabiliaSizeId = viewModel.MemorabiliaSize.Id;
-            People = viewModel.People;
-            PersonIds = viewModel.PersonIds;
+            PersonId = viewModel.PersonId ?? 0;
             SizeId = viewModel.MemorabiliaSize.SizeId;
-            Sizes = viewModel.Sizes;
-            SportIds = viewModel.SportIds;
-            TeamIds = viewModel.TeamIds;
-            Teams = viewModel.Teams;
+            TeamId = viewModel.TeamId ?? 0;
         }
 
-        [Required]
+        [StringLength(5, ErrorMessage = "Anniversary is too long.")]
+        public string BaseballTypeAnniversary { get; set; }
+
+        public BaseballType BaseballType => BaseballType.Find(BaseballTypeId);
+
         public int BaseballTypeId { get; set; }
 
+        public int? BaseballTypeYear { get; set; }
+
         [Required]
+        [Range(1, int.MaxValue, ErrorMessage = "Brand is required.")]
         public int BrandId { get; set; }  
-        
-        public IEnumerable<ItemTypeBrandViewModel> Brands { get; set; } = Enumerable.Empty<ItemTypeBrandViewModel>();
         
         public int CommissionerId { get; set; }
 
-        public IEnumerable<CommissionerViewModel> Commissioners { get; set; } = Enumerable.Empty<CommissionerViewModel>();
+        public bool DisplayBaseballType => BrandId == Brand.Rawlings.Id;
 
-        public int MemorabiliaBaseballTypeId { get; set; }
+        public bool DisplayBaseballTypeAnniversary => DisplayBaseballType && BaseballType.CanHaveAnniversary(BaseballType);
+
+        public bool DisplayBaseballTypeYear => DisplayBaseballType && BaseballType.CanHaveYear(BaseballType);
+
+        public bool HasPerson => PersonId > 0;
+
+        public bool HasTeam => TeamId > 0;
+
+        public int? MemorabiliaBaseballTypeId { get; set; }
 
         public int MemorabiliaBrandId { get; set; }
 
@@ -57,23 +60,14 @@ namespace Memorabilia.Application.Features.Memorabilia.Baseball
 
         public int MemorabiliaSizeId { get; set; }
 
-        public override string PageTitle => $"{(MemorabiliaId > 0 ? "Edit" : "Add")} {Domain.Constants.ItemType.Baseball.Name}";
+        public override string PageTitle => $"{(MemorabiliaId > 0 ? "Edit" : "Add")} {Domain.Constants.ItemType.Baseball.Name} Details";
 
-        public IEnumerable<PersonViewModel> People { get; set; } = Enumerable.Empty<PersonViewModel>();
-
-        public List<int> PersonIds { get; set; }
+        public int PersonId { get; set; } 
 
         [Required]
+        [Range(1, int.MaxValue, ErrorMessage = "Size is required.")]
         public int SizeId { get; set; }
 
-        public IEnumerable<ItemTypeSizeViewModel> Sizes { get; set; } = Enumerable.Empty<ItemTypeSizeViewModel>();
-
-        public List<int> SportIds { get; set; }
-
-        public IEnumerable<Domain.Constants.Sport> Sports => Domain.Constants.Sport.All;
-
-        public List<int> TeamIds { get; set; }
-
-        public IEnumerable<TeamViewModel> Teams { get; set; } = Enumerable.Empty<TeamViewModel>();
+        public int TeamId { get; set; }
     }
 }

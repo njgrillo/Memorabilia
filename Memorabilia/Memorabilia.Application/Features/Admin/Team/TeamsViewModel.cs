@@ -9,7 +9,9 @@ namespace Memorabilia.Application.Features.Admin.Team
 
         public TeamsViewModel(IEnumerable<Domain.Entities.Team> teams)
         {
-            Teams = teams.Select(team => new TeamViewModel(team)).OrderBy(team => team.FranchiseName).ThenBy(team => team.BeginYear);
+            Teams = teams.Select(team => new TeamViewModel(team))
+                         .OrderBy(team => team.FranchiseName)
+                         .ThenBy(team => team.BeginYear);
         }
 
         public override string PageTitle => "Teams";

@@ -20,7 +20,7 @@ namespace Memorabilia.Application.Features.Admin.Commissioner
             {
                 var commissioners = (await _commissionerRepository.GetAll(query.SportId).ConfigureAwait(false))
                                                                   .OrderBy(commissioner => commissioner.Sport.Name)
-                                                                  .ThenBy(commissioner => commissioner.BeginYear);
+                                                                  .ThenByDescending(commissioner => commissioner.BeginYear);
 
                 var viewModel = new CommissionersViewModel(commissioners);
 

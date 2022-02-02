@@ -28,8 +28,12 @@ else
             <tr>
                 <th>Item Type</th>
                 <th>Condition</th>
-                <th>Cost</th>
                 <th>Value</th>
+                <th>Acquisition Type</th>
+                <th>Acquisition Date</th>
+                <th>Cost</th>
+                <th>Place of Purchase</th>
+                <th>Privacy Type</th>
                 <th>Create Date</th>
                 <th>Last Modified Date</th>
                 <th></th>
@@ -43,8 +47,12 @@ else
                 <tr>
                     <td>@memorabiliaItem.ItemTypeName</td>
                     <td>@memorabiliaItem.ConditionName</td>
-                    <td>@memorabiliaItem.Cost</td>
-                    <td>@memorabiliaItem.EstimatedValue</td>
+                    <td>@memorabiliaItem.EstimatedValue?.ToString("c")</td>
+                    <td>@memorabiliaItem.AcquisitionTypeName</td>
+                    <td>@memorabiliaItem.Acquisition.AcquiredDate?.ToString("MM-dd-yyyy")</td>
+                    <td>@memorabiliaItem.Acquisition.Cost?.ToString("c")</td>
+                    <td>@memorabiliaItem.PurchaseTypeName</td>
+                    <td>@memorabiliaItem.PrivacyTypeName</td>
                     <td>@memorabiliaItem.CreateDate</td>
                     <td>@memorabiliaItem.LastModifiedDate</td>
                     <td><a href=@($"Memorabilia/{memorabiliaItem.ItemTypeName}/Edit/{memorabiliaItem.Id}")>Details</a></td>

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Memorabilia.Domain.Entities;
+using System;
 
 namespace Memorabilia.Application.Features.Memorabilia
 {
@@ -13,11 +14,13 @@ namespace Memorabilia.Application.Features.Memorabilia
             _memorabilia = memorabilia;
         }
 
+        public Acquisition Acquisition => _memorabilia.MemorabiliaAcquisition.Acquisition;
+
+        public string AcquisitionTypeName => Domain.Constants.AcquisitionType.Find(_memorabilia.MemorabiliaAcquisition.Acquisition.AcquisitionTypeId).Name;
+
         public int? ConditionId => _memorabilia.ConditionId;
 
         public string ConditionName => _memorabilia.Condition?.Name;
-
-        public decimal? Cost => _memorabilia.Cost;
 
         public DateTime CreateDate => _memorabilia.CreateDate;
 
@@ -25,13 +28,19 @@ namespace Memorabilia.Application.Features.Memorabilia
 
         public int Id => _memorabilia.Id;
 
-        public string ImagePath => _memorabilia.ImagePath;
-
         public int ItemTypeId => _memorabilia.ItemTypeId;
 
         public string ItemTypeName => _memorabilia.ItemType?.Name;
 
         public DateTime? LastModifiedDate => _memorabilia.LastModifiedDate;
+
+        public int PrivacyTypeId => _memorabilia.PrivacyTypeId;
+
+        public string PrivacyTypeName => Domain.Constants.PrivacyType.Find(_memorabilia.PrivacyTypeId).Name;
+
+        public int? PurchaseTypeId => _memorabilia.MemorabiliaAcquisition.Acquisition.PurchaseTypeId;
+
+        public string PurchaseTypeName => Domain.Constants.PurchaseType.Find(_memorabilia.MemorabiliaAcquisition.Acquisition.PurchaseTypeId ?? 0)?.Name;
 
         public int UserId => _memorabilia.UserId;
     }

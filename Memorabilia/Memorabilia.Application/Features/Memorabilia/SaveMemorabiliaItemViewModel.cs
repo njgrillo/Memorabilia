@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Memorabilia.Domain.Constants;
+using System;
 using System.ComponentModel.DataAnnotations;
 
 namespace Memorabilia.Application.Features.Memorabilia
@@ -8,19 +9,30 @@ namespace Memorabilia.Application.Features.Memorabilia
         public SaveMemorabiliaItemViewModel() { }
 
         public SaveMemorabiliaItemViewModel(MemorabiliaItemViewModel viewModel)
-        { 
-            ConditionId = viewModel.ConditionId;
-            Cost = viewModel.Cost;
+        {
+            AcquiredDate = viewModel.Acquisition.AcquiredDate;
+            AcquisitionTypeId = viewModel.Acquisition.AcquisitionTypeId;
+            ConditionId = viewModel.ConditionId ?? 0;
+            Cost = viewModel.Acquisition.Cost;
             CreateDate = viewModel.CreateDate;
             EstimatedValue = viewModel.EstimatedValue;
             Id = viewModel.Id;
-            ImagePath = viewModel.ImagePath;
+            PrivacyTypeId = viewModel.PrivacyTypeId;
+            PurchaseTypeId = viewModel.PurchaseTypeId ?? 0;
             ItemTypeId = viewModel.ItemTypeId;
             LastModifiedDate = viewModel.LastModifiedDate;
             UserId = viewModel.UserId;
         }
 
-        public int? ConditionId { get; set; }
+        public DateTime? AcquiredDate { get; set; }
+
+        [Required]
+        [Range(1, int.MaxValue, ErrorMessage = "Acquisition Type is required.")]
+        public int AcquisitionTypeId { get; set; }
+
+        public bool CanHaveCost => AcquisitionType.CanHaveCost(AcquisitionType.Find(AcquisitionTypeId));
+
+        public int ConditionId { get; set; }
 
         public decimal? Cost { get; set; }
 
@@ -28,17 +40,21 @@ namespace Memorabilia.Application.Features.Memorabilia
 
         public decimal? EstimatedValue { get; set; }
 
-        [StringLength(500, ErrorMessage = "Image Path is too long.")]
-        public string ImagePath { get; set; }
-
         [Required]
+        [Range(1, int.MaxValue, ErrorMessage = "Item Type is required.")]
         public int ItemTypeId { get; set; }
 
-        public string ItemTypeName => Domain.Constants.ItemType.Find(ItemTypeId)?.Name;
+        public string ItemTypeName => ItemType.Find(ItemTypeId)?.Name;
 
         public DateTime? LastModifiedDate { get; set; } 
 
         public override string PageTitle => $"{(Id > 0 ? "Edit" : "Add")} {(ItemTypeId > 0 ? ItemTypeName : "Memorabilia")}";
+
+        [Required]
+        [Range(1, int.MaxValue, ErrorMessage = "Privacy Type is required.")]
+        public int PrivacyTypeId { get; set; }
+
+        public int PurchaseTypeId { get; set; }
 
         public int UserId { get; set; }
     }

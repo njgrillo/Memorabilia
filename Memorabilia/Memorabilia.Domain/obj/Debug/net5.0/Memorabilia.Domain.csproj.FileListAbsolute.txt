@@ -14,7 +14,6 @@ C:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Domain\bin\Debug\net5.0
 C:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Domain\bin\Debug\net5.0\Memorabilia.Domain.dll
 C:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Domain\bin\Debug\net5.0\ref\Memorabilia.Domain.dll
 C:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Domain\bin\Debug\net5.0\Memorabilia.Domain.pdb
-C:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Domain\obj\Debug\net5.0\Memorabilia.Domain.csproj.AssemblyReference.cache
 C:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Domain\obj\Debug\net5.0\Memorabilia.Domain.GeneratedMSBuildEditorConfig.editorconfig
 C:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Domain\obj\Debug\net5.0\Memorabilia.Domain.AssemblyInfoInputs.cache
 C:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Domain\obj\Debug\net5.0\Memorabilia.Domain.AssemblyInfo.cs

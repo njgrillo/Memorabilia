@@ -1,5 +1,6 @@
 ﻿using Memorabilia.Domain;
 using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -24,9 +25,9 @@ namespace Memorabilia.Repository
             await _context.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
         }
 
-        public async Task Delete(Domain.Entities.MemorabiliaPerson memorabiliaPerson, CancellationToken cancellationToken = default)
+        public async Task Delete(IEnumerable<Domain.Entities.MemorabiliaPerson> memorabiliaPeople, CancellationToken cancellationToken = default)
         {
-            _context.Set<Domain.Entities.MemorabiliaPerson>().Remove(memorabiliaPerson);
+            _context.Set<Domain.Entities.MemorabiliaPerson>().RemoveRange(memorabiliaPeople);
 
             await _context.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
         }
