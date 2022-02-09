@@ -147,7 +147,7 @@ using Memorabilia.Application.Features.Admin.Franchise;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 74 "C:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\Pages\Admin\Franchises\Franchises.razor"
+#line 78 "C:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\Pages\Admin\Franchises\Franchises.razor"
        
     private PopConfirm _deleteDialog;
     private int _deletedItemId;

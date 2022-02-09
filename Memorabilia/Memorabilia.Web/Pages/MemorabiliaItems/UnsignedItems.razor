@@ -1,6 +1,7 @@
 ﻿@page "/Memorabilia/UnsignedItems"
 
 @using Memorabilia.Application.Features.Memorabilia
+@using Memorabilia.Web.Controls
 @using System 
 @using System.IO
 
@@ -49,11 +50,13 @@ else
             {
                 <tr>
                     <td>
-                        <img class="can-click" 
-                             src="data:image/jpg;base64,@Convert.ToBase64String(File.ReadAllBytes(@memorabiliaItem.ImagePath))"
-                             height="25" 
-                             width="25" 
-                             @onclick="@( _ => _navigation.NavigateTo($"Memorabilia/Image/Edit/{memorabiliaItem.Id}") )" />
+                        <_Tooltip Text="Images">
+                            <img class="can-click" 
+                                 src="data:image/jpg;base64,@Convert.ToBase64String(File.ReadAllBytes(@memorabiliaItem.ImagePath))"
+                                 height="25" 
+                                 width="25" 
+                                 @onclick="@( _ => _navigation.NavigateTo($"Memorabilia/Image/Edit/{memorabiliaItem.Id}") )" />
+                        </_Tooltip>                         
                     </td>
                     <td>@memorabiliaItem.ItemTypeName</td>
                     <td>@memorabiliaItem.ConditionName</td>
@@ -66,25 +69,31 @@ else
                     <td>@memorabiliaItem.CreateDate</td>
                     <td>@memorabiliaItem.LastModifiedDate</td>
                     <td>
-                        <img class="can-click" 
-                             src="images/details.png" 
-                             height="25" 
-                             width="25" 
-                             @onclick="@(_ => _navigation.NavigateTo($"Memorabilia/{memorabiliaItem.ItemTypeName}/Edit/{memorabiliaItem.Id}"))" />
+                        <_Tooltip Text="Details">
+                            <img class="can-click" 
+                                 src="images/details.png" 
+                                 height="25" 
+                                 width="25" 
+                                 @onclick="@(_ => _navigation.NavigateTo($"Memorabilia/{memorabiliaItem.ItemTypeName}/Edit/{memorabiliaItem.Id}"))" />
+                        </_Tooltip>                         
                     </td>
                     <td>
-                        <img class="can-click" 
-                             src="images/pencil.png" 
-                             height="25" 
-                             width="25" 
-                             @onclick="@(_ => _navigation.NavigateTo($"Memorabilia/Edit/{memorabiliaItem.Id}"))" />
+                        <_Tooltip Text="Edit">
+                            <img class="can-click" 
+                                 src="images/pencil.png" 
+                                 height="25" 
+                                 width="25" 
+                                 @onclick="@(_ => _navigation.NavigateTo($"Memorabilia/Edit/{memorabiliaItem.Id}"))" />
+                        </_Tooltip>                        
                     </td>
                     <td>
-                        <img class="can-click" 
-                             src="images/trash.png" 
-                             height="25" 
-                             width="25" 
-                             "@(_ => ShowConfirm(memorabiliaItem.Id))" />
+                        <_Tooltip Text="Delete">
+                            <img class="can-click" 
+                                 src="images/trash.png" 
+                                 height="25" 
+                                 width="25" 
+                                 @onclick="@(_ => ShowConfirm(memorabiliaItem.Id))" />
+                        </_Tooltip>
                     </td>
                 </tr>
             }

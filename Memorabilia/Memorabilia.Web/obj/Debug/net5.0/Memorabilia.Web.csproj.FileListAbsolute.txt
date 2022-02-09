@@ -778,3 +778,6 @@ C:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\obj\Debug\net5.0\Me
 C:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\obj\Debug\net5.0\ref\Memorabilia.Web.dll
 C:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\obj\Debug\net5.0\Memorabilia.Web.pdb
 C:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\obj\Debug\net5.0\Memorabilia.Web.genruntimeconfig.cache
+C:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\obj\Debug\net5.0\RazorDeclaration\Controls\_Tooltip.razor.g.cs
+C:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\obj\Debug\net5.0\Razor\Controls\_Tooltip.razor.g.cs
+C:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\obj\Debug\net5.0\scopedcss\Controls\_Tooltip.razor.rz.scp.css

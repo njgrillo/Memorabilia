@@ -82,13 +82,6 @@ using Memorabilia.Web;
 #line hidden
 #nullable disable
 #nullable restore
-#line 11 "C:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\_Imports.razor"
-using Memorabilia.Web.Controls;
-
-#line default
-#line hidden
-#nullable disable
-#nullable restore
 #line 12 "C:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\_Imports.razor"
 using Memorabilia.Web.Shared;
 
@@ -132,13 +125,20 @@ using Memorabilia.Application.Features.Memorabilia;
 #nullable disable
 #nullable restore
 #line 4 "C:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\Pages\MemorabiliaItems\UnsignedItems.razor"
-using System;
+using Memorabilia.Web.Controls;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
 #line 5 "C:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\Pages\MemorabiliaItems\UnsignedItems.razor"
+using System;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 6 "C:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\Pages\MemorabiliaItems\UnsignedItems.razor"
 using System.IO;
 
 #line default
@@ -153,7 +153,7 @@ using System.IO;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 103 "C:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\Pages\MemorabiliaItems\UnsignedItems.razor"
+#line 112 "C:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\Pages\MemorabiliaItems\UnsignedItems.razor"
        
     private PopConfirm _deleteDialog;
     private int _deletedItemId;

@@ -147,7 +147,7 @@ using Memorabilia.Application.Features.Admin.MagazineType;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 70 "C:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\Pages\Admin\MagazineTypes\MagazineTypes.razor"
+#line 74 "C:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\Pages\Admin\MagazineTypes\MagazineTypes.razor"
        
     private PopConfirm _deleteDialog;
     private int _deletedItemId;

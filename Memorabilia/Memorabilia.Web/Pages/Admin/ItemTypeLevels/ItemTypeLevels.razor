@@ -40,18 +40,22 @@ else
                     <td>@itemTypeLevel.ItemTypeName</td>
                     <td>@itemTypeLevel.LevelTypeName</td>
                     <td>
-                        <img class="can-click" 
-                             src="images/pencil.png"
-                             height="25" 
-                             width="25" 
-                             @onclick="@(_ => _navigation.NavigateTo($"ItemTypeLevels/Edit/{itemTypeLevel.Id}"))" />
+                        <_Tooltip Text="Edit">
+                            <img class="can-click" 
+                                 src="images/pencil.png" 
+                                 height="25" 
+                                 width="25" 
+                                 @onclick="@(_ => _navigation.NavigateTo($"ItemTypeLevels/Edit/{itemTypeLevel.Id}"))" />
+                        </_Tooltip>                        
                     </td>
                     <td>
-                        <img class="can-click" 
-                             src="images/trash.png" 
-                             height="25" 
-                             width="25" 
-                             "@(_ => ShowConfirm(itemTypeLevel.Id))" />
+                        <_Tooltip Text="Delete">
+                            <img class="can-click" 
+                                 src="images/trash.png" 
+                                 height="25" 
+                                 width="25" 
+                                 @onclick="@(_ => ShowConfirm(itemTypeLevel.Id))" />
+                        </_Tooltip>
                     </td>
                 </tr>
             }

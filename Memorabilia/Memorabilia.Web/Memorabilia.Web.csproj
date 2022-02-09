@@ -9,6 +9,14 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="Controls\_Tooltip.razor.css" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Controls\_Tooltip.razor.css" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Blazored.Toast" Version="3.2.2" />
     <PackageReference Include="Demo.Framework" Version="1.0.10" />
     <PackageReference Include="MediatR" Version="4.1.0" />

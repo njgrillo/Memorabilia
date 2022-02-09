@@ -41,18 +41,22 @@ else
                     <td>@domainEntity.Abbreviation</td>
                     <td><a href=@($"PurchaseTypes/Edit/{domainEntity.Id}")>Edit</a></td>
                     <td>
-                        <img class="can-click" 
-                             src="images/pencil.png"
-                             height="25" 
-                             width="25" 
-                             @onclick="@(_ => _navigation.NavigateTo($"PurchaseTypes/Edit/{domainEntity.Id}"))" />
+                        <_Tooltip Text="Edit">
+                            <img class="can-click" 
+                                 src="images/pencil.png" 
+                                 height="25" 
+                                 width="25" 
+                                 @onclick="@(_ => _navigation.NavigateTo($"PurchaseTypes/Edit/{domainEntity.Id}"))" />
+                        </_Tooltip>                        
                     </td>
                     <td>
-                        <img class="can-click" 
-                             src="images/trash.png" 
-                             height="25" 
-                             width="25" 
-                             "@(_ => ShowConfirm(domainEntity.Id))" />
+                        <_Tooltip Text="Delete">
+                            <img class="can-click" 
+                                 src="images/trash.png" 
+                                 height="25" 
+                                 width="25" 
+                                 @onclick="@(_ => ShowConfirm(domainEntity.Id))" />
+                        </_Tooltip>
                     </td>
                 </tr>
             }

@@ -40,18 +40,22 @@ else
                     <td>@sport.Name</td>
                     <td>@sport.AlternateName</td>
                     <td>
-                        <img class="can-click" 
-                             src="images/pencil.png"
-                             height="25" 
-                             width="25" 
-                             @onclick="@(_ => _navigation.NavigateTo($"Sports/Edit/{sport.Id}"))" />
+                        <_Tooltip Text="Edit">
+                            <img class="can-click" 
+                                 src="images/pencil.png" 
+                                 height="25" 
+                                 width="25" 
+                                 @onclick="@(_ => _navigation.NavigateTo($"Sports/Edit/{sport.Id}"))" />
+                        </_Tooltip>                        
                     </td>
                     <td>
-                        <img class="can-click" 
-                             src="images/trash.png" 
-                             height="25" 
-                             width="25" 
-                             "@(_ => ShowConfirm(sport.Id))" />
+                        <_Tooltip Text="Delete">
+                            <img class="can-click" 
+                                 src="images/trash.png" 
+                                 height="25" 
+                                 width="25" 
+                                 @onclick="@(_ => ShowConfirm(sport.Id))" />
+                        </_Tooltip>
                     </td>
                 </tr>
             }

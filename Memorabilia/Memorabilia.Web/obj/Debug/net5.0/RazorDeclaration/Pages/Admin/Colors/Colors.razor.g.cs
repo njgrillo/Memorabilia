@@ -147,7 +147,7 @@ using Memorabilia.Application.Features.Admin.Color;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 70 "C:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\Pages\Admin\Colors\Colors.razor"
+#line 74 "C:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\Pages\Admin\Colors\Colors.razor"
        
     private PopConfirm _deleteDialog;
     private int _deletedItemId;

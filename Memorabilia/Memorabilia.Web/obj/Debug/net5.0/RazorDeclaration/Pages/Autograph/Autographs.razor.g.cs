@@ -153,7 +153,7 @@ using System.IO;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 97 "C:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\Pages\Autograph\Autographs.razor"
+#line 105 "C:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\Pages\Autograph\Autographs.razor"
        
     private PopConfirm _deleteDialog;
     private int _deletedItemId;

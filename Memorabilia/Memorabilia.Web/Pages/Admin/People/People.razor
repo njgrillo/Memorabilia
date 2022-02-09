@@ -50,18 +50,22 @@ else
                     <td>@person.BirthDate</td>
                     <td>@person.DeathDate</td>
                     <td>
-                        <img class="can-click" 
-                             src="images/pencil.png"
-                             height="25" 
-                             width="25" 
-                             @onclick="@(_ => _navigation.NavigateTo($"People/Edit/{person.Id}"))" />
+                        <_Tooltip Text="Edit">
+                            <img class="can-click" 
+                                 src="images/pencil.png" 
+                                 height="25" 
+                                 width="25" 
+                                 @onclick="@(_ => _navigation.NavigateTo($"People/Edit/{person.Id}"))" />
+                        </_Tooltip>                        
                     </td>
                     <td>
-                        <img class="can-click" 
-                             src="images/trash.png" 
-                             height="25" 
-                             width="25" 
-                             "@(_ => ShowConfirm(person.Id))" />
+                        <_Tooltip Text="Delete">
+                            <img class="can-click" 
+                                 src="images/trash.png" 
+                                 height="25" 
+                                 width="25" 
+                                 @onclick="@(_ => ShowConfirm(person.Id))" />
+                        </_Tooltip>
                     </td>
                 </tr>
             }

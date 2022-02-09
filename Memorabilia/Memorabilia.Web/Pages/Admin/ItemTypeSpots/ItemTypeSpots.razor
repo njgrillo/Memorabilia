@@ -40,18 +40,22 @@ else
                     <td>@itemTypeSpot.ItemTypeName</td>
                     <td>@itemTypeSpot.SpotName</td>
                     <td>
-                        <img class="can-click" 
-                             src="images/pencil.png"
-                             height="25" 
-                             width="25" 
-                             @onclick="@(_ => _navigation.NavigateTo($"ItemTypeSpots/Edit/{itemTypeSpot.Id}"))" />
+                        <_Tooltip Text="Edit">
+                            <img class="can-click" 
+                                 src="images/pencil.png" 
+                                 height="25" 
+                                 width="25" 
+                                 @onclick="@(_ => _navigation.NavigateTo($"ItemTypeSpots/Edit/{itemTypeSpot.Id}"))" />
+                        </_Tooltip>                        
                     </td>
                     <td>
-                        <img class="can-click" 
-                             src="images/trash.png" 
-                             height="25" 
-                             width="25" 
-                             "@(_ => ShowConfirm(itemTypeSpot.Id))" />
+                        <_Tooltip Text="Delete">
+                            <img class="can-click" 
+                                 src="images/trash.png" 
+                                 height="25" 
+                                 width="25" 
+                                 @onclick="@(_ => ShowConfirm(itemTypeSpot.Id))" />
+                        </_Tooltip>
                     </td>
                 </tr>
             }

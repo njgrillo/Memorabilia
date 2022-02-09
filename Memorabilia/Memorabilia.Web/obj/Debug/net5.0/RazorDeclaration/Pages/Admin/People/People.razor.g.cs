@@ -147,7 +147,7 @@ using Memorabilia.Application.Features.Admin.Person;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 80 "C:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\Pages\Admin\People\People.razor"
+#line 84 "C:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\Pages\Admin\People\People.razor"
        
     private PopConfirm _deleteDialog;
     private int _deletedItemId;

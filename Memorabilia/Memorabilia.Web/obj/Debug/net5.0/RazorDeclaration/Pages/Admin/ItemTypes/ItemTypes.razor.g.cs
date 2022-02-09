@@ -147,7 +147,7 @@ using Memorabilia.Application.Features.Admin.ItemType;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 70 "C:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\Pages\Admin\ItemTypes\ItemTypes.razor"
+#line 74 "C:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\Pages\Admin\ItemTypes\ItemTypes.razor"
        
     private PopConfirm _deleteDialog;
     private int _deletedItemId;
