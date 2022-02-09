@@ -12,7 +12,7 @@ namespace Memorabilia.Domain
 
         Task<Entities.Autograph> Get(int id);
 
-        Task<IEnumerable<Entities.Autograph>> GetAll(int? memorabiliaId = null, int? userId = null);
+        Task<IEnumerable<Entities.Autograph>> GetAll(int? memorabiliaId = null);
 
         Task Update(Entities.Autograph autograph, CancellationToken cancellationToken = default);
     }

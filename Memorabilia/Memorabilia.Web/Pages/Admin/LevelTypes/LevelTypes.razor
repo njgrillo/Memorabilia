@@ -1,0 +1,111 @@
+﻿@page "/LevelTypes"
+
+@using Memorabilia.Application.Features.Admin
+@using Memorabilia.Application.Features.Admin.LevelType
+
+@inject CommandRouter _commandRouter
+@inject ProtectedLocalStorage _localStorage
+@inject NavigationManager _navigation
+@inject QueryRouter _queryRouter
+@inject IToastService _toastService
+
+@if (_viewModel == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <PopConfirm @ref="_deleteDialog"
+                Title="Delete Level Type"
+                ConfirmedChanged="Delete" />
+    <div class="row">
+        <div class="col-md-12" style="text-align: center">
+            <h1>@_viewModel.PageTitle</h1>
+        </div>
+    </div>
+    <br />
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Abbreviation</th>
+                <th></th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var domainEntity in _viewModel.DomainEntities)
+            {
+                <tr>
+                    <td>@domainEntity.Name</td>
+                    <td>@domainEntity.Abbreviation</td>
+                    <td>
+                        <img class="can-click" 
+                             src="images/pencil.png"
+                             height="25" 
+                             width="25" 
+                             @onclick="@(_ => _navigation.NavigateTo($"LevelTypes/Edit/{domainEntity.Id}"))" />
+                    </td>
+                    <td>
+                        <img class="can-click" 
+                             src="images/trash.png" 
+                             height="25" 
+                             width="25" 
+                             "@(_ => ShowConfirm(domainEntity.Id))" />
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <div class="row">
+        <div class="col-md-12" style="text-align: center">
+            <div class="col-md-12" style="text-align: center">
+                <a href="LevelTypes/Add">Add Level Type</a>
+            </div>
+        </div>
+    </div>
+    <br />
+}
+
+@code {
+    private PopConfirm _deleteDialog;
+    private int _deletedItemId;
+    private LevelTypesViewModel _viewModel;
+
+    protected async Task Delete(bool confirm)
+    {
+        if (!confirm)
+        {
+            _deletedItemId = 0;
+            return;
+        }
+
+        var viewModel = new SaveDomainViewModel(_viewModel.DomainEntities.Single(domainEntity => domainEntity.Id == _deletedItemId));
+        viewModel.IsDeleted = true;
+
+        var command = new SaveLevelType.Command(viewModel);
+
+        await _commandRouter.Send(command).ConfigureAwait(false);
+        await OnInitializedAsync().ConfigureAwait(false);
+
+        _toastService.ShowSuccess("Level Type was deleted successfully!", _viewModel.PageTitle);
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        var userId = await _localStorage.GetAsync<int>("UserId");
+
+        if (userId.Value == 0)
+            _navigation.NavigateTo("Login");
+
+        var query = new GetLevelTypes.Query();
+
+        _viewModel = await _queryRouter.Send(query).ConfigureAwait(false);
+    }
+
+    protected void ShowConfirm(int id)
+    {
+        _deletedItemId = id;
+        _deleteDialog.ShowPop();
+    }
+}

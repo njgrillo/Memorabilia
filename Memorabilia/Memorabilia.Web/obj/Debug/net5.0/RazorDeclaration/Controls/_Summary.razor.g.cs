@@ -132,7 +132,7 @@ using Demo.Framework.Web;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 21 "C:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\Controls\_Summary.razor"
+#line 23 "C:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\Controls\_Summary.razor"
        
     [Parameter]
     public string Description { get; set; }  

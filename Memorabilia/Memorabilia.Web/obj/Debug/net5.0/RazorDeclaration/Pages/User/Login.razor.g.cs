@@ -177,11 +177,6 @@ using Memorabilia.Application.Features.User.Login;
             _navigation.NavigateTo("Home");
     }
 
-    //private void Register()
-    //{
-    //    _navigation.NavigateTo("Register");
-    //}
-
 #line default
 #line hidden
 #nullable disable

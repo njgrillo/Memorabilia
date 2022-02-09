@@ -7,7 +7,6 @@
 namespace Memorabilia.Web.Pages.MemorabiliaItems
 {
     #line hidden
-    using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
@@ -131,6 +130,20 @@ using Memorabilia.Application.Features.Memorabilia;
 #line default
 #line hidden
 #nullable disable
+#nullable restore
+#line 4 "C:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\Pages\MemorabiliaItems\UnsignedItems.razor"
+using System;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 5 "C:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\Pages\MemorabiliaItems\UnsignedItems.razor"
+using System.IO;
+
+#line default
+#line hidden
+#nullable disable
     [Microsoft.AspNetCore.Components.RouteAttribute("/Memorabilia/UnsignedItems")]
     public partial class UnsignedItems : Microsoft.AspNetCore.Components.ComponentBase
     {
@@ -140,7 +153,7 @@ using Memorabilia.Application.Features.Memorabilia;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 75 "C:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\Pages\MemorabiliaItems\UnsignedItems.razor"
+#line 103 "C:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\Pages\MemorabiliaItems\UnsignedItems.razor"
        
     private PopConfirm _deleteDialog;
     private int _deletedItemId;

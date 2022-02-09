@@ -39,8 +39,20 @@ else
                 <tr>
                     <td>@itemTypeBrand.ItemTypeName</td>
                     <td>@itemTypeBrand.BrandName</td>
-                    <td><a href=@($"ItemTypeBrands/Edit/{itemTypeBrand.Id}")>Edit</a></td>
-                    <td><button class="btn btn-danger" @onclick="@( _ => ShowConfirm(itemTypeBrand.Id) )">Delete</button></td>
+                    <td>
+                        <img class="can-click" 
+                             src="images/pencil.png"
+                             height="25" 
+                             width="25" 
+                             @onclick="@(_ => _navigation.NavigateTo($"ItemTypeBrands/Edit/{itemTypeBrand.Id}"))" />
+                    </td>
+                    <td>
+                        <img class="can-click" 
+                             src="images/trash.png" 
+                             height="25" 
+                             width="25" 
+                             "@(_ => ShowConfirm(itemTypeBrand.Id))" />
+                    </td>
                 </tr>
             }
         </tbody>
@@ -77,11 +89,6 @@ else
         await OnInitializedAsync().ConfigureAwait(false);
 
         _toastService.ShowSuccess("Item Type Brand was deleted successfully!", _viewModel.PageTitle);
-    }
-
-    protected void Edit(int id)
-    {
-        _navigation.NavigateTo($"ItemTypeBrands/Edit/{id}");
     }
 
     protected override async Task OnInitializedAsync()

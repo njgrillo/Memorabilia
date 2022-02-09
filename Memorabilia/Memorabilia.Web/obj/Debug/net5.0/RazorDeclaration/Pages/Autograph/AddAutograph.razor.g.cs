@@ -126,28 +126,63 @@ using Demo.Framework.Web;
 #nullable disable
 #nullable restore
 #line 4 "C:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\Pages\Autograph\AddAutograph.razor"
-using Memorabilia.Application.Features.Admin.ItemTypeSpot;
-
-#line default
-#line hidden
-#nullable disable
-#nullable restore
-#line 5 "C:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\Pages\Autograph\AddAutograph.razor"
 using Memorabilia.Application.Features.Admin.Person;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 6 "C:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\Pages\Autograph\AddAutograph.razor"
+#line 5 "C:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\Pages\Autograph\AddAutograph.razor"
 using Memorabilia.Application.Features.Autograph;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 7 "C:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\Pages\Autograph\AddAutograph.razor"
+#line 6 "C:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\Pages\Autograph\AddAutograph.razor"
 using Memorabilia.Application.Features.Memorabilia;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 7 "C:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\Pages\Autograph\AddAutograph.razor"
+using Memorabilia.Web.Controls.AcquisitionType;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 8 "C:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\Pages\Autograph\AddAutograph.razor"
+using Memorabilia.Web.Controls.Color;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 9 "C:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\Pages\Autograph\AddAutograph.razor"
+using Memorabilia.Web.Controls.Condition;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 10 "C:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\Pages\Autograph\AddAutograph.razor"
+using Memorabilia.Web.Controls.Person;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 11 "C:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\Pages\Autograph\AddAutograph.razor"
+using Memorabilia.Web.Controls.PurchaseType;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 12 "C:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\Pages\Autograph\AddAutograph.razor"
+using Memorabilia.Web.Controls.WritingInstrument;
 
 #line default
 #line hidden
@@ -162,15 +197,13 @@ using Memorabilia.Application.Features.Memorabilia;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 94 "C:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\Pages\Autograph\AddAutograph.razor"
+#line 115 "C:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\Pages\Autograph\AddAutograph.razor"
        
     [Parameter]
     public int MemorabiliaId { get; set; }
 
-    private bool _displaySpots;
+    private bool _displayPersonalization;
     private int _itemTypeId;
-    private IEnumerable<PersonViewModel> _people = Enumerable.Empty<PersonViewModel>();
-    private IEnumerable<ItemTypeSpotViewModel> _spots = Enumerable.Empty<ItemTypeSpotViewModel>();
     private SaveAutographViewModel _viewModel = new SaveAutographViewModel();
 
     protected async Task HandleValidSubmit()
@@ -195,34 +228,20 @@ using Memorabilia.Application.Features.Memorabilia;
 
         if (userId.Value == 0)
             _navigation.NavigateTo("Login");
-
-        var query = new GetMemorabiliaItem.Query(MemorabiliaId);
-        var memorabilia = await _queryRouter.Send(query).ConfigureAwait(false);
-
-        _itemTypeId = memorabilia.ItemTypeId;
-
-        var personQuery = new GetPeople.Query();
-        _people = (await _queryRouter.Send(personQuery).ConfigureAwait(false)).People;
-
-        _viewModel.UserId = userId.Value;
-        _viewModel.MemorabiliaId = memorabilia.Id;
-        _viewModel.PersonId = _people.FirstOrDefault()?.Id ?? 0;
-        _viewModel.ConditionId = Domain.Constants.Condition.Pristine.Id;
-        _viewModel.WritingInstrumentId = Domain.Constants.WritingInstrument.PaintPen.Id;
-        _viewModel.ColorId = Domain.Constants.Color.Silver.Id;
-
-        await GetSpots().ConfigureAwait(false);
     }
 
-    private async Task GetSpots()
+    private void PersonalizationCheckboxClicked(object isChecked)
     {
-        var query = new GetItemTypeSpots.Query(_itemTypeId);
+        _displayPersonalization = (bool)isChecked;
 
-        _spots = (await _queryRouter.Send(query).ConfigureAwait(false)).ItemTypeSpots;
+        if (!_displayPersonalization)
+        {
+            _viewModel.Greeting = null;
+            _viewModel.PersonalizationText = null;
+        }
 
-        _displaySpots = _spots.Any();
-        _viewModel.SpotId = _spots.FirstOrDefault()?.SpotId;
-    }
+        StateHasChanged();
+    } 
 
 #line default
 #line hidden

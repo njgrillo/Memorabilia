@@ -1,6 +1,8 @@
 ﻿@page "/Memorabilia/UnsignedItems"
 
 @using Memorabilia.Application.Features.Memorabilia
+@using System 
+@using System.IO
 
 @inject CommandRouter _commandRouter
 @inject ProtectedLocalStorage _localStorage
@@ -26,6 +28,7 @@ else
     <table class="table">
         <thead>
             <tr>
+                <th></th>
                 <th>Item Type</th>
                 <th>Condition</th>
                 <th>Value</th>
@@ -45,6 +48,13 @@ else
             @foreach (var memorabiliaItem in _viewModel.MemorabiliaItems)
             {
                 <tr>
+                    <td>
+                        <img class="can-click" 
+                             src="data:image/jpg;base64,@Convert.ToBase64String(File.ReadAllBytes(@memorabiliaItem.ImagePath))"
+                             height="25" 
+                             width="25" 
+                             @onclick="@( _ => _navigation.NavigateTo($"Memorabilia/Image/Edit/{memorabiliaItem.Id}") )" />
+                    </td>
                     <td>@memorabiliaItem.ItemTypeName</td>
                     <td>@memorabiliaItem.ConditionName</td>
                     <td>@memorabiliaItem.EstimatedValue?.ToString("c")</td>
@@ -55,9 +65,27 @@ else
                     <td>@memorabiliaItem.PrivacyTypeName</td>
                     <td>@memorabiliaItem.CreateDate</td>
                     <td>@memorabiliaItem.LastModifiedDate</td>
-                    <td><a href=@($"Memorabilia/{memorabiliaItem.ItemTypeName}/Edit/{memorabiliaItem.Id}")>Details</a></td>
-                    <td><a href=@($"Memorabilia/Edit/{memorabiliaItem.Id}")>Edit</a></td>
-                    <td><button class="btn btn-danger" @onclick="@( _ => ShowConfirm(memorabiliaItem.Id) )">Delete</button></td>
+                    <td>
+                        <img class="can-click" 
+                             src="images/details.png" 
+                             height="25" 
+                             width="25" 
+                             @onclick="@(_ => _navigation.NavigateTo($"Memorabilia/{memorabiliaItem.ItemTypeName}/Edit/{memorabiliaItem.Id}"))" />
+                    </td>
+                    <td>
+                        <img class="can-click" 
+                             src="images/pencil.png" 
+                             height="25" 
+                             width="25" 
+                             @onclick="@(_ => _navigation.NavigateTo($"Memorabilia/Edit/{memorabiliaItem.Id}"))" />
+                    </td>
+                    <td>
+                        <img class="can-click" 
+                             src="images/trash.png" 
+                             height="25" 
+                             width="25" 
+                             "@(_ => ShowConfirm(memorabiliaItem.Id))" />
+                    </td>
                 </tr>
             }
         </tbody>

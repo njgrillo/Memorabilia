@@ -1,5 +1,6 @@
 ﻿using Memorabilia.Domain.Entities;
 using System;
+using System.Linq;
 
 namespace Memorabilia.Application.Features.Memorabilia
 {
@@ -27,6 +28,8 @@ namespace Memorabilia.Application.Features.Memorabilia
         public decimal? EstimatedValue => _memorabilia.EstimatedValue;
 
         public int Id => _memorabilia.Id;
+
+        public string ImagePath => !_memorabilia.Images.Any() ? "wwwroot/images/imagenotavailable.png" : _memorabilia.Images.First().FilePath;
 
         public int ItemTypeId => _memorabilia.ItemTypeId;
 

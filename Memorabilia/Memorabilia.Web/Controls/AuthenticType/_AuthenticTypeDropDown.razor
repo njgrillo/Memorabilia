@@ -1,0 +1,37 @@
+﻿@using Memorabilia.Application.Features.Admin.ItemTypeAuthenticType
+@using Memorabilia.Domain.Constants
+
+@inject QueryRouter _queryRouter
+
+<InputSelect class="form-control" id="authenticType" @bind-Value="@Value" @oninput="@OnInputChange">
+     <option value="0">--Select--</option>
+    @foreach (var authenticType in AuthenticType.All)
+    {
+        <option value="@authenticType.Id">@authenticType.Name</option>
+    }
+</InputSelect>
+
+@code {
+    [Parameter]
+    public AuthenticType InitialValue { get; set; }
+
+    [Parameter]
+    public int Value { get; set; }  
+
+    [Parameter]
+    public EventCallback<int> ValueChanged { get; set; }
+
+    protected override Task OnInitializedAsync()
+    {
+        if ((InitialValue?.Id ?? 0) > 0)
+            Value = InitialValue.Id;
+
+        return base.OnInitializedAsync();
+    }   
+
+    private async Task OnInputChange(ChangeEventArgs args)
+    {
+        Value = Convert.ToInt32(args.Value);
+        await ValueChanged.InvokeAsync(Value);
+    }    
+}

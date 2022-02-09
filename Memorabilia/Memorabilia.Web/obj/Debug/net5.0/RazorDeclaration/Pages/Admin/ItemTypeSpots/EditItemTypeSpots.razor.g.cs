@@ -138,6 +138,13 @@ using Memorabilia.Application.Features.Admin.ItemTypeSpot;
 #line default
 #line hidden
 #nullable disable
+#nullable restore
+#line 5 "C:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\Pages\Admin\ItemTypeSpots\EditItemTypeSpots.razor"
+using Memorabilia.Web.Controls.Spot;
+
+#line default
+#line hidden
+#nullable disable
     [Microsoft.AspNetCore.Components.RouteAttribute("/ItemTypeSpots/Edit/{id:int}")]
     public partial class EditItemTypeSpots : Microsoft.AspNetCore.Components.ComponentBase
     {
@@ -147,7 +154,7 @@ using Memorabilia.Application.Features.Admin.ItemTypeSpot;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 55 "C:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\Pages\Admin\ItemTypeSpots\EditItemTypeSpots.razor"
+#line 52 "C:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\Pages\Admin\ItemTypeSpots\EditItemTypeSpots.razor"
        
     [Parameter]
     public int Id { get; set; }

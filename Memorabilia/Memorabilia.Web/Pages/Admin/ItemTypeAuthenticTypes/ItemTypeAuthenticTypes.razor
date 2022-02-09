@@ -1,0 +1,111 @@
+﻿@page "/ItemTypeAuthenticTypes"
+
+@using Memorabilia.Application.Features.Admin
+@using Memorabilia.Application.Features.Admin.ItemTypeAuthenticType
+
+@inject CommandRouter _commandRouter
+@inject ProtectedLocalStorage _localStorage
+@inject NavigationManager _navigation
+@inject QueryRouter _queryRouter
+@inject IToastService _toastService
+
+@if (_viewModel == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <PopConfirm @ref="_deleteDialog"
+                Title="Delete ItemTypeAuthenticType"
+                ConfirmedChanged="Delete" />
+    <div class="row">
+        <div class="col-md-12" style="text-align: center">
+            <h1>@_viewModel.PageTitle</h1>
+        </div>
+    </div>
+    <br />
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Item Type</th>
+                <th>AuthenticType</th>
+                <th></th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var itemTypeAuthenticType in _viewModel.ItemTypeAuthenticTypes)
+            {
+                <tr>
+                    <td>@itemTypeAuthenticType.ItemTypeName</td>
+                    <td>@itemTypeAuthenticType.AuthenticTypeName</td>
+                    <td>
+                        <img class="can-click" 
+                             src="images/pencil.png"
+                             height="25" 
+                             width="25" 
+                             @onclick="@(_ => _navigation.NavigateTo($"ItemTypeAuthenticTypes/Edit/{itemTypeAuthenticType.Id}"))" />
+                    </td>
+                    <td>
+                        <img class="can-click" 
+                             src="images/trash.png" 
+                             height="25" 
+                             width="25" 
+                             "@(_ => ShowConfirm(itemTypeAuthenticType.Id))" />
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <div class="row">
+        <div class="col-md-12" style="text-align: center">
+            <div class="col-md-12" style="text-align: center">
+                <a href="ItemTypeAuthenticTypes/Add">Add Item Type AuthenticType</a>
+            </div>
+        </div>
+    </div>
+    <br />
+}
+
+@code {
+    private PopConfirm _deleteDialog;
+    private int _deletedItemId;
+    private ItemTypeAuthenticTypesViewModel _viewModel;
+
+    protected async Task Delete(bool confirm)
+    {
+        if (!confirm)
+        {
+            _deletedItemId = 0;
+            return;
+        }
+
+        var viewModel = new SaveItemTypeAuthenticTypeViewModel(_viewModel.ItemTypeAuthenticTypes.Single(ItemTypeAuthenticType => ItemTypeAuthenticType.Id == _deletedItemId));
+        viewModel.IsDeleted = true;
+
+        var command = new SaveItemTypeAuthenticType.Command(viewModel);
+
+        await _commandRouter.Send(command).ConfigureAwait(false);
+        await OnInitializedAsync().ConfigureAwait(false);
+
+        _toastService.ShowSuccess("Item Type AuthenticType was deleted successfully!", _viewModel.PageTitle);
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        var userId = await _localStorage.GetAsync<int>("UserId");
+
+        if (userId.Value == 0)
+            _navigation.NavigateTo("Login");
+
+        var query = new GetItemTypeAuthenticTypes.Query();
+
+        _viewModel = await _queryRouter.Send(query).ConfigureAwait(false);
+    }
+
+    protected void ShowConfirm(int id)
+    {
+        _deletedItemId = id;
+        _deleteDialog.ShowPop();
+    }
+}

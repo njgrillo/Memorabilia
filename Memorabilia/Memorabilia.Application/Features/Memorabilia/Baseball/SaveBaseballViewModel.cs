@@ -1,4 +1,5 @@
 ﻿using Memorabilia.Domain.Constants;
+using System;
 using System.ComponentModel.DataAnnotations;
 
 namespace Memorabilia.Application.Features.Memorabilia.Baseball
@@ -9,20 +10,23 @@ namespace Memorabilia.Application.Features.Memorabilia.Baseball
 
         public SaveBaseballViewModel(BaseballViewModel viewModel)
         {
-            BaseballTypeAnniversary = viewModel.MemorabiliaBaseballType?.Anniversary;
-            BaseballTypeId = viewModel.MemorabiliaBaseballType?.BaseballTypeId ?? 0;
-            BaseballTypeYear = viewModel.MemorabiliaBaseballType?.Year;
+            AuthenticTypeId = viewModel.MemorabiliaGame?.AuthenticTypeId ?? 0;
+            BaseballTypeAnniversary = viewModel.MemorabiliaBaseball?.Anniversary;
+            BaseballTypeId = viewModel.MemorabiliaBaseball?.BaseballTypeId ?? 0;
+            BaseballTypeYear = viewModel.MemorabiliaBaseball?.Year;
             BrandId = viewModel.MemorabiliaBrand.BrandId;
             CommissionerId = viewModel.MemorabiliaCommissioner.CommissionerId;
-            MemorabiliaBaseballTypeId = viewModel.MemorabiliaBaseballType?.Id;
-            MemorabiliaBrandId = viewModel.MemorabiliaBrand.Id;
-            MemorabiliaCommissionerId = viewModel.MemorabiliaCommissioner.Id;
+            GameDate = viewModel.MemorabiliaGame?.GameDate;
+            LevelTypeId = viewModel.MemorabiliaLevelType.LevelTypeId;
             MemorabiliaId = viewModel.MemorabiliaId;
-            MemorabiliaSizeId = viewModel.MemorabiliaSize.Id;
             PersonId = viewModel.PersonId ?? 0;
             SizeId = viewModel.MemorabiliaSize.SizeId;
             TeamId = viewModel.TeamId ?? 0;
         }
+
+        //[Required]
+        //[Range(1, int.MaxValue, ErrorMessage = "Game Level Type is required.")]
+        public int AuthenticTypeId { get; set; }
 
         [StringLength(5, ErrorMessage = "Anniversary is too long.")]
         public string BaseballTypeAnniversary { get; set; }
@@ -45,22 +49,20 @@ namespace Memorabilia.Application.Features.Memorabilia.Baseball
 
         public bool DisplayBaseballTypeYear => DisplayBaseballType && BaseballType.CanHaveYear(BaseballType);
 
+        public DateTime? GameDate { get; set; }
+
         public bool HasPerson => PersonId > 0;
 
         public bool HasTeam => TeamId > 0;
 
-        public int? MemorabiliaBaseballTypeId { get; set; }
-
-        public int MemorabiliaBrandId { get; set; }
-
-        public int MemorabiliaCommissionerId { get; set; }
+        [Required]
+        [Range(1, int.MaxValue, ErrorMessage = "Level is required.")]
+        public int LevelTypeId { get; set; }
 
         [Required]
         public int MemorabiliaId { get; set; }
 
-        public int MemorabiliaSizeId { get; set; }
-
-        public override string PageTitle => $"{(MemorabiliaId > 0 ? "Edit" : "Add")} {Domain.Constants.ItemType.Baseball.Name} Details";
+        public override string PageTitle => $"{(MemorabiliaId > 0 ? "Edit" : "Add")} {ItemType.Baseball.Name} Details";
 
         public int PersonId { get; set; } 
 

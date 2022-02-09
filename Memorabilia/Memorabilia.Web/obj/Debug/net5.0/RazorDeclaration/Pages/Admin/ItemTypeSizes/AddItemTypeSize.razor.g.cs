@@ -138,6 +138,20 @@ using Memorabilia.Application.Features.Admin.ItemTypeSize;
 #line default
 #line hidden
 #nullable disable
+#nullable restore
+#line 5 "C:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\Pages\Admin\ItemTypeSizes\AddItemTypeSize.razor"
+using Memorabilia.Web.Controls.ItemType;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 6 "C:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\Pages\Admin\ItemTypeSizes\AddItemTypeSize.razor"
+using Memorabilia.Web.Controls.Size;
+
+#line default
+#line hidden
+#nullable disable
     [Microsoft.AspNetCore.Components.RouteAttribute("/ItemTypeSizes/Add")]
     public partial class AddItemTypeSize : Microsoft.AspNetCore.Components.ComponentBase
     {
@@ -147,7 +161,7 @@ using Memorabilia.Application.Features.Admin.ItemTypeSize;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 64 "C:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\Pages\Admin\ItemTypeSizes\AddItemTypeSize.razor"
+#line 58 "C:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\Pages\Admin\ItemTypeSizes\AddItemTypeSize.razor"
        
     private SaveItemTypeSizeViewModel _viewModel = new SaveItemTypeSizeViewModel();
 

@@ -1,0 +1,27 @@
+﻿<InputSelect class="form-control" id="footballType" @bind-Value="@Value" @oninput="@OnInputChange" >
+    <option value="0">--Select--</option>
+    @foreach (var footballType in Domain.Constants.FootballType.All)
+    {
+        <option value="@footballType.Id">@footballType.Name</option>
+    }
+</InputSelect>
+
+@code {
+    [Parameter]
+    public int Value { get; set; }
+
+    [Parameter]
+    public EventCallback<int> ValueChanged { get; set; }
+
+    protected override Task OnInitializedAsync()
+    {
+        return base.OnInitializedAsync();
+    }
+
+    private async Task OnInputChange(ChangeEventArgs args)
+    {
+        Value = Convert.ToInt32(args.Value);
+        await ValueChanged.InvokeAsync(Value);
+    }
+}
+

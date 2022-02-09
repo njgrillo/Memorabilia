@@ -1,10 +1,15 @@
 ﻿@page "/Autographs/Add"
 @page "/Autographs/Add/{memorabiliaId:int}"
 
-@using Memorabilia.Application.Features.Admin.ItemTypeSpot
 @using Memorabilia.Application.Features.Admin.Person
 @using Memorabilia.Application.Features.Autograph
 @using Memorabilia.Application.Features.Memorabilia
+@using Memorabilia.Web.Controls.AcquisitionType
+@using Memorabilia.Web.Controls.Color
+@using Memorabilia.Web.Controls.Condition
+@using Memorabilia.Web.Controls.Person
+@using Memorabilia.Web.Controls.PurchaseType
+@using Memorabilia.Web.Controls.WritingInstrument
 
 @inject CommandRouter _commandRouter
 @inject ProtectedLocalStorage _localStorage
@@ -34,49 +39,65 @@ else
                 <ValidationSummary />
                 <div class="form-group">
                     <label for="person">Person</label>
-                    <InputSelect id="person" @bind-Value="_viewModel.PersonId" class="form-control">
-                        @foreach (var person in _people)
-                        {
-                            <option value="@person.Id">@person.FullName</option>
-                        }
-                    </InputSelect>
-                </div>
+                    <_PersonSelector @bind-Value="@_viewModel.PersonId"
+                                     @bind-Value:event="ValueChanged" />                    
+                </div> 
                 <div class="form-group">
                     <label for="condition">Condition</label>
-                    <InputSelect id="condition" @bind-Value="_viewModel.ConditionId" class="form-control">
-                        @foreach (var condition in Domain.Constants.Condition.All)
-                        {
-                            <option value="@condition.Id">@condition.Name</option>
-                        }
-                    </InputSelect>
+                    <_ConditionDropDown @bind-Value="@_viewModel.ConditionId" 
+                                        @bind-Value:event="ValueChanged" /> 
                 </div>
                 <div class="form-group">
                     <label for="writingInstrument">Writing Instrument</label>
-                    <InputSelect id="writingInstrument" @bind-Value="_viewModel.WritingInstrumentId" class="form-control">
-                        @foreach (var writingInstrument in Domain.Constants.WritingInstrument.All)
-                        {
-                            <option value="@writingInstrument.Id">@writingInstrument.Name</option>
-                        }
-                    </InputSelect>
+                    <_WritingInstrumentDropDown @bind-Value="@_viewModel.WritingInstrumentId" 
+                                                @bind-Value:event="ValueChanged" /> 
                 </div>
                 <div class="form-group">
                     <label for="color">Color</label>
-                    <InputSelect id="color" @bind-Value="_viewModel.ColorId" class="form-control">
-                        @foreach (var color in Domain.Constants.Color.All)
-                        {
-                            <option value="@color.Id">@color.Name</option>
-                        }
-                    </InputSelect>
+                    <_ColorDropDown @bind-Value="@_viewModel.ColorId" 
+                                    @bind-Value:event="ValueChanged" /> 
+                </div>  
+                <div class="form-group">
+                    <label for="acquisitionType">Acquisition Type</label>
+                    <_AcquisitionTypeDropDown @bind-Value="@_viewModel.AcquisitionTypeId" 
+                                              @bind-Value:event="ValueChanged"
+                                              IsAutograph="false" /> 
                 </div>
-                <div class="form-group" hidden="@(!_displaySpots)">
-                    <label for="spot">Spot</label>
-                    <InputSelect id="spot" @bind-Value="_viewModel.SpotId" class="form-control">
-                        @foreach (var spot in _spots)
-                        {
-                            <option value="@spot.Id">@spot.SpotName</option>
-                        }
-                    </InputSelect>
+                <div class="form-group">
+                    <label for="acquiredDate">Acquired Date</label>
+                    <InputDate id="acquiredDate" class="form-control" @bind-Value="_viewModel.AcquiredDate" />
                 </div>
+                <div class="form-group" hidden="@(!_viewModel.CanHaveCost)">
+                    <label for="cost">Cost</label>
+                    <InputNumber id="cost" class="form-control" @bind-Value="_viewModel.Cost" />
+                </div>
+                <div class="form-group" hidden="@(!_viewModel.CanHaveCost)">
+                    <label for="purchaseType">Place of Purchase</label>
+                    <_PurchaseTypeDropDown @bind-Value="@_viewModel.PurchaseTypeId" 
+                                           @bind-Value:event="ValueChanged" /> 
+                </div>
+                <div class="form-group">
+                    <label for="estimatedValue">Estimated Value</label>
+                    <InputNumber id="estimatedValue" class="form-control" @bind-Value="_viewModel.EstimatedValue" />
+                </div>
+                <div class="form-group">
+                    <label for="grade">Grade</label>
+                    <InputText id="grade" class="form-control" @bind-Value="_viewModel.Grade" />
+                </div>
+                <div class="form-group">
+                    <input type="checkbox" @onchange="eventArgs => { PersonalizationCheckboxClicked(eventArgs.Value); }" />
+                    <label for="personalization">Has Personalization</label>
+                    <div class="form-group" hidden="@(!_displayPersonalization)">
+                        <div class="form-group">
+                            <label for="text">Personalization Text</label>
+                            <InputText id="text" class="form-control" @bind-Value="_viewModel.PersonalizationText" />
+                        </div>
+                        <div class="form-group">
+                            <label for="greeting">Greeting</label>
+                            <InputText id="greeting" class="form-control" @bind-Value="_viewModel.Grade" />
+                        </div>
+                    </div>                    
+                </div> 
                 <div class="text-right">
                     <button type="submit" class="btn btn-primary">Save</button>
                 </div>
@@ -95,10 +116,8 @@ else
     [Parameter]
     public int MemorabiliaId { get; set; }
 
-    private bool _displaySpots;
+    private bool _displayPersonalization;
     private int _itemTypeId;
-    private IEnumerable<PersonViewModel> _people = Enumerable.Empty<PersonViewModel>();
-    private IEnumerable<ItemTypeSpotViewModel> _spots = Enumerable.Empty<ItemTypeSpotViewModel>();
     private SaveAutographViewModel _viewModel = new SaveAutographViewModel();
 
     protected async Task HandleValidSubmit()
@@ -123,32 +142,18 @@ else
 
         if (userId.Value == 0)
             _navigation.NavigateTo("Login");
-
-        var query = new GetMemorabiliaItem.Query(MemorabiliaId);
-        var memorabilia = await _queryRouter.Send(query).ConfigureAwait(false);
-
-        _itemTypeId = memorabilia.ItemTypeId;
-
-        var personQuery = new GetPeople.Query();
-        _people = (await _queryRouter.Send(personQuery).ConfigureAwait(false)).People;
-
-        _viewModel.UserId = userId.Value;
-        _viewModel.MemorabiliaId = memorabilia.Id;
-        _viewModel.PersonId = _people.FirstOrDefault()?.Id ?? 0;
-        _viewModel.ConditionId = Domain.Constants.Condition.Pristine.Id;
-        _viewModel.WritingInstrumentId = Domain.Constants.WritingInstrument.PaintPen.Id;
-        _viewModel.ColorId = Domain.Constants.Color.Silver.Id;
-
-        await GetSpots().ConfigureAwait(false);
     }
 
-    private async Task GetSpots()
+    private void PersonalizationCheckboxClicked(object isChecked)
     {
-        var query = new GetItemTypeSpots.Query(_itemTypeId);
+        _displayPersonalization = (bool)isChecked;
 
-        _spots = (await _queryRouter.Send(query).ConfigureAwait(false)).ItemTypeSpots;
+        if (!_displayPersonalization)
+        {
+            _viewModel.Greeting = null;
+            _viewModel.PersonalizationText = null;
+        }
 
-        _displaySpots = _spots.Any();
-        _viewModel.SpotId = _spots.FirstOrDefault()?.SpotId;
-    }
+        StateHasChanged();
+    } 
 }

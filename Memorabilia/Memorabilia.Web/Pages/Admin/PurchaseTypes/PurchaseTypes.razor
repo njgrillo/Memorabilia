@@ -40,7 +40,20 @@ else
                     <td>@domainEntity.Name</td>
                     <td>@domainEntity.Abbreviation</td>
                     <td><a href=@($"PurchaseTypes/Edit/{domainEntity.Id}")>Edit</a></td>
-                    <td><button class="btn btn-danger" @onclick="@( _ => ShowConfirm(domainEntity.Id) )">Delete</button></td>
+                    <td>
+                        <img class="can-click" 
+                             src="images/pencil.png"
+                             height="25" 
+                             width="25" 
+                             @onclick="@(_ => _navigation.NavigateTo($"PurchaseTypes/Edit/{domainEntity.Id}"))" />
+                    </td>
+                    <td>
+                        <img class="can-click" 
+                             src="images/trash.png" 
+                             height="25" 
+                             width="25" 
+                             "@(_ => ShowConfirm(domainEntity.Id))" />
+                    </td>
                 </tr>
             }
         </tbody>
@@ -77,11 +90,6 @@ else
         await OnInitializedAsync().ConfigureAwait(false);
 
         _toastService.ShowSuccess("Purchase Type was deleted successfully!", _viewModel.PageTitle);
-    }
-
-    protected void Edit(int id)
-    {
-        _navigation.NavigateTo($"PurchaseTypes/Edit/{id}");
     }
 
     protected override async Task OnInitializedAsync()

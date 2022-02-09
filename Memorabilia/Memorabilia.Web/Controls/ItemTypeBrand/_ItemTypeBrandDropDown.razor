@@ -1,0 +1,49 @@
+﻿@using Memorabilia.Application.Features.Admin.ItemTypeBrand
+@using Memorabilia.Domain.Constants
+
+@inject QueryRouter _queryRouter
+
+<InputSelect class="form-control" id="ItemTypeBrandDropDown" @bind-Value="@Value" @oninput="@OnInputChange">
+     <option value="0">--Select--</option>
+    @foreach (var itemTypeBrand in _itemTypeBrands)
+    {
+        <option value="@itemTypeBrand.BrandId">@itemTypeBrand.BrandName</option>
+    }
+</InputSelect>
+
+@code {
+    [Parameter]
+    public Brand InitialValue { get; set; }
+
+    [Parameter]
+    public ItemType ItemType { get; set; }
+
+    [Parameter]
+    public int Value { get; set; }  
+
+    [Parameter]
+    public EventCallback<int> ValueChanged { get; set; }
+
+    private IEnumerable<ItemTypeBrandViewModel> _itemTypeBrands = Enumerable.Empty<ItemTypeBrandViewModel>();
+
+    protected override async Task OnInitializedAsync()
+    {
+        await Load().ConfigureAwait(false);
+
+        if ((InitialValue?.Id ?? 0) > 0)
+            Value = InitialValue.Id; 
+    }    
+
+    private async Task Load()
+    {
+        var query = new GetItemTypeBrands.Query(ItemType.Id);
+
+        _itemTypeBrands = (await _queryRouter.Send(query).ConfigureAwait(false)).ItemTypeBrands;
+    }
+
+    private async Task OnInputChange(ChangeEventArgs args)
+    {
+        Value = Convert.ToInt32(args.Value);
+        await ValueChanged.InvokeAsync(Value);
+    }    
+}

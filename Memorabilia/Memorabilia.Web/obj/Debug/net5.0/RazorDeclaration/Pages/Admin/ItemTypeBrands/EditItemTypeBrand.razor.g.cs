@@ -138,6 +138,13 @@ using Memorabilia.Application.Features.Admin.ItemTypeBrand;
 #line default
 #line hidden
 #nullable disable
+#nullable restore
+#line 5 "C:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\Pages\Admin\ItemTypeBrands\EditItemTypeBrand.razor"
+using Memorabilia.Web.Controls.Brand;
+
+#line default
+#line hidden
+#nullable disable
     [Microsoft.AspNetCore.Components.RouteAttribute("/ItemTypeBrands/Edit/{id:int}")]
     public partial class EditItemTypeBrand : Microsoft.AspNetCore.Components.ComponentBase
     {
@@ -147,7 +154,7 @@ using Memorabilia.Application.Features.Admin.ItemTypeBrand;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 55 "C:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\Pages\Admin\ItemTypeBrands\EditItemTypeBrand.razor"
+#line 52 "C:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\Pages\Admin\ItemTypeBrands\EditItemTypeBrand.razor"
        
     [Parameter]
     public int Id { get; set; }

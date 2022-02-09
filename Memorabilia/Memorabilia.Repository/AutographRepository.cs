@@ -17,8 +17,13 @@ namespace Memorabilia.Repository
         }
 
         private IQueryable<Domain.Entities.Autograph> Autograph => _context.Set<Domain.Entities.Autograph>()
+                                                                           .Include(autograph => autograph.Acquisition)
+                                                                           .Include(autograph => autograph.Authentications)
+                                                                           .Include(autograph => autograph.Images)
                                                                            .Include(autograph => autograph.Memorabilia)
-                                                                           .Include(autograph => autograph.Person);
+                                                                           .Include(autograph => autograph.Person)
+                                                                           .Include(autograph => autograph.Personalization)
+                                                                           .Include(autograph => autograph.Spots);
 
         public async Task Add(Domain.Entities.Autograph autograph, CancellationToken cancellationToken = default)
         {
@@ -39,13 +44,10 @@ namespace Memorabilia.Repository
             return await Autograph.SingleOrDefaultAsync(autograph => autograph.Id == id).ConfigureAwait(false);
         }
 
-        public async Task<IEnumerable<Domain.Entities.Autograph>> GetAll(int? memorabiliaId = null, int? userId = null)
+        public async Task<IEnumerable<Domain.Entities.Autograph>> GetAll(int? memorabiliaId = null)
         {
             if (memorabiliaId.HasValue)
                 return await Autograph.Where(autograph => autograph.MemorabiliaId == memorabiliaId).ToListAsync().ConfigureAwait(false);
-
-            if (userId.HasValue)
-                return await Autograph.Where(autograph => autograph.UserId == userId).ToListAsync().ConfigureAwait(false);
 
             return await Autograph.ToListAsync().ConfigureAwait(false);
         }

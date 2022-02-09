@@ -1,7 +1,9 @@
 ﻿using Framework.Domain.Command;
 using Framework.Handler;
 using Memorabilia.Domain;
+using Memorabilia.Domain.Constants;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Memorabilia.Application.Features.Memorabilia.Image
@@ -21,7 +23,7 @@ namespace Memorabilia.Application.Features.Memorabilia.Image
             {
                 var memorabilia = await _memorabiliaRepository.Get(command.MemorabiliaId).ConfigureAwait(false);
 
-                memorabilia.AddImages(command.FilePaths);
+                memorabilia.SetImages(command.FilePaths, command.PrimaryImageFilePath);
 
                 await _memorabiliaRepository.Update(memorabilia).ConfigureAwait(false);
             }
@@ -36,9 +38,11 @@ namespace Memorabilia.Application.Features.Memorabilia.Image
                 _viewModel = viewModel;
             }
 
-            public IEnumerable<string> FilePaths => _viewModel.FilePaths;
+            public IEnumerable<string> FilePaths => _viewModel.Images.Select(image => image.FilePath);
 
             public int MemorabiliaId => _viewModel.MemorabiliaId;
+
+            public string PrimaryImageFilePath => _viewModel.Images.Single(image => image.ImageTypeId == ImageType.Primary.Id).FilePath;
         }
     }
 }

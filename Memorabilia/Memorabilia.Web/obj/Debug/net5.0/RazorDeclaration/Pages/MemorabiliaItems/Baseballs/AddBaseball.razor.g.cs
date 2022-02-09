@@ -147,14 +147,14 @@ using Memorabilia.Domain.Constants;
 #nullable disable
 #nullable restore
 #line 6 "C:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\Pages\MemorabiliaItems\Baseballs\AddBaseball.razor"
-using Memorabilia.Web.Controls.Baseball;
+using Memorabilia.Web.Controls.AuthenticType;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
 #line 7 "C:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\Pages\MemorabiliaItems\Baseballs\AddBaseball.razor"
-using Memorabilia.Web.Controls.Brand;
+using Memorabilia.Web.Controls.Baseball;
 
 #line default
 #line hidden
@@ -168,20 +168,34 @@ using Memorabilia.Web.Controls.Commissioner;
 #nullable disable
 #nullable restore
 #line 9 "C:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\Pages\MemorabiliaItems\Baseballs\AddBaseball.razor"
-using Memorabilia.Web.Controls.Person;
+using Memorabilia.Web.Controls.ItemTypeBrand;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
 #line 10 "C:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\Pages\MemorabiliaItems\Baseballs\AddBaseball.razor"
-using Memorabilia.Web.Controls.Size;
+using Memorabilia.Web.Controls.ItemTypeLevel;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
 #line 11 "C:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\Pages\MemorabiliaItems\Baseballs\AddBaseball.razor"
+using Memorabilia.Web.Controls.ItemTypeSize;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 12 "C:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\Pages\MemorabiliaItems\Baseballs\AddBaseball.razor"
+using Memorabilia.Web.Controls.Person;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 13 "C:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\Pages\MemorabiliaItems\Baseballs\AddBaseball.razor"
 using Memorabilia.Web.Controls.Team;
 
 #line default
@@ -196,7 +210,7 @@ using Memorabilia.Web.Controls.Team;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 101 "C:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\Pages\MemorabiliaItems\Baseballs\AddBaseball.razor"
+#line 114 "C:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\Pages\MemorabiliaItems\Baseballs\AddBaseball.razor"
        
     [Parameter]
     public int MemorabiliaId { get; set; }  
@@ -212,7 +226,9 @@ using Memorabilia.Web.Controls.Team;
         if (userId.Value == 0)
             _navigation.NavigateTo("Login");
 
-        var command = new SaveBaseball.Command(MemorabiliaId, _viewModel);
+        _viewModel.MemorabiliaId = MemorabiliaId;
+
+        var command = new SaveBaseball.Command(_viewModel);
 
         await _commandRouter.Send(command).ConfigureAwait(false);
 

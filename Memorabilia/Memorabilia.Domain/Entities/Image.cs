@@ -2,15 +2,17 @@
 
 namespace Memorabilia.Domain.Entities
 {
-    public abstract class Image : Framework.Domain.Entity.DomainEntity
+    public class Image : Framework.Domain.Entity.DomainEntity
     {
         public Image() { }
 
-        public Image(string filePath, int imageTypeId, DateTime uploadDate)
+        public Image(string filePath, int imageTypeId, DateTime? uploadDate = null)
         {
             FilePath = filePath;
             ImageTypeId = imageTypeId;
-            UploadDate = uploadDate;
+
+            if (uploadDate.HasValue)
+                UploadDate = uploadDate.Value;
         }
 
         public string FilePath { get; private set; }

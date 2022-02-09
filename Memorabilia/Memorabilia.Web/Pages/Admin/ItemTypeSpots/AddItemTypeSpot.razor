@@ -2,6 +2,8 @@
 
 @using Memorabilia.Application.Features.Admin
 @using Memorabilia.Application.Features.Admin.ItemTypeSpot
+@using Memorabilia.Web.Controls.ItemType
+@using Memorabilia.Web.Controls.Spot
 
 @inject CommandRouter _commandRouter
 @inject ProtectedLocalStorage _localStorage
@@ -31,21 +33,13 @@ else
                 <ValidationSummary />
                 <div class="form-group">
                     <label for="itemType">Item Type</label>
-                    <InputSelect id="itemType" @bind-Value="_viewModel.ItemTypeId" class="form-control">
-                        @foreach (var itemType in Domain.Constants.ItemType.All)
-                        {
-                            <option value="@itemType.Id">@itemType.Name</option>
-                        }
-                    </InputSelect>
+                    <_ItemTypeDropDown @bind-Value="@_viewModel.ItemTypeId" 
+                                       @bind-Value:event="ValueChanged" /> 
                 </div>
                 <div class="form-group">
                     <label for="spot">Spot</label>
-                    <InputSelect id="spot" @bind-Value="_viewModel.SpotId" class="form-control">
-                        @foreach (var spot in Domain.Constants.Spot.All)
-                        {
-                            <option value="@spot.Id">@spot.Name</option>
-                        }
-                    </InputSelect>
+                    <_SpotDropDown @bind-Value="@_viewModel.SpotId" 
+                                   @bind-Value:event="ValueChanged" /> 
                 </div>
                 <div class="text-right">
                     <button type="submit" class="btn btn-primary">Save</button>

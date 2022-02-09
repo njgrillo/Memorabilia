@@ -147,7 +147,7 @@ using Memorabilia.Application.Features.Admin.GloveType;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 58 "C:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\Pages\Admin\GloveTypes\GloveTypes.razor"
+#line 70 "C:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\Pages\Admin\GloveTypes\GloveTypes.razor"
        
     private PopConfirm _deleteDialog;
     private int _deletedItemId;
@@ -170,11 +170,6 @@ using Memorabilia.Application.Features.Admin.GloveType;
         await OnInitializedAsync().ConfigureAwait(false);
 
         _toastService.ShowSuccess("Glove Type was deleted successfully!", _viewModel.PageTitle);
-    }
-
-    protected void Edit(int id)
-    {
-        _navigation.NavigateTo($"GloveTypes/Edit/{id}");
     }
 
     protected override async Task OnInitializedAsync()

@@ -1,7 +1,7 @@
 ﻿using Framework.Domain.Command;
 using Framework.Handler;
 using Memorabilia.Domain;
-using System.Linq;
+using System;
 using System.Threading.Tasks;
 
 namespace Memorabilia.Application.Features.Memorabilia.Baseball
@@ -10,81 +10,29 @@ namespace Memorabilia.Application.Features.Memorabilia.Baseball
     {
         public class Handler : CommandHandler<Command>
         {
-            private readonly IMemorabiliaBaseballTypeRepository _memorabiliaBaseballTypeRepository;
-            private readonly IMemorabiliaCommissionerRepository _memorabiliaCommissionerRepository;
-            private readonly IMemorabiliaPersonRepository _memorabiliaPersonRepository;
             private readonly IMemorabiliaRepository _memorabiliaRepository;
-            private readonly IMemorabiliaTeamRepository _memorabiliaTeamRepository;
 
-            public Handler(IMemorabiliaBaseballTypeRepository memorabiliaBaseballTypeRepository, 
-                           IMemorabiliaCommissionerRepository memorabiliaCommissionerRepository,
-                           IMemorabiliaPersonRepository memorabiliaPersonRepository, 
-                           IMemorabiliaRepository memorabiliaRepository,
-                           IMemorabiliaTeamRepository memorabiliaTeamRepository)
+            public Handler(IMemorabiliaRepository memorabiliaRepository)
             {
-                _memorabiliaBaseballTypeRepository = memorabiliaBaseballTypeRepository;
-                _memorabiliaCommissionerRepository = memorabiliaCommissionerRepository;
-                _memorabiliaPersonRepository = memorabiliaPersonRepository;
                 _memorabiliaRepository = memorabiliaRepository;
-                _memorabiliaTeamRepository = memorabiliaTeamRepository;
             }
 
             protected override async Task Handle(Command command)
             {
                 var memorabilia = await _memorabiliaRepository.Get(command.MemorabiliaId).ConfigureAwait(false);
 
-                memorabilia.SetBrand(command.MemorabiliaBrandId, command.BrandId);
-                memorabilia.SetSize(command.MemorabiliaSizeId, command.SizeId);
-                memorabilia.SetSports(command.SportId);
-
-                if (command.CommissionerId > 0)
-                {
-                    memorabilia.SetCommissioner(command.MemorabiliaCommissionerId, command.CommissionerId);
-                }
-                else
-                {
-                    if (memorabilia.Commissioner?.Id > 0)
-                        await _memorabiliaCommissionerRepository.Delete(memorabilia.Commissioner).ConfigureAwait(false);
-                }
-                              
-                              
-
-                if (command.BaseballTypeId.HasValue)
-                {
-                    memorabilia.SetBaseballType(command.MemorabiliaBaseballTypeId ?? 0,
-                                                command.BaseballTypeId.Value,
-                                                command.BaseballTypeYear,
-                                                command.BaseballTypeAnniversary);
-                }
-                else
-                {
-                    if (memorabilia.BaseballType?.Id > 0)
-                        await _memorabiliaBaseballTypeRepository.Delete(memorabilia.BaseballType).ConfigureAwait(false);
-                }  
-
-                if (command.PersonId.HasValue)
-                {
-                    memorabilia.SetPeople(command.PersonId.Value);
-                }
-                else
-                {
-                    if (memorabilia.People.Any())
-                        await _memorabiliaPersonRepository.Delete(memorabilia.People).ConfigureAwait(false);
-
-                    memorabilia.RemovePeople();
-                }
-
-                if (command.TeamId.HasValue)
-                {
-                    memorabilia.SetTeams(command.TeamId.Value);
-                }                    
-                else
-                {
-                    if (memorabilia.Teams.Any())
-                        await _memorabiliaTeamRepository.Delete(memorabilia.Teams).ConfigureAwait(false);
-
-                    memorabilia.RemoveTeams();
-                }                    
+                memorabilia.SetBaseball(command.Anniversary,
+                                        command.AuthenticTypeId,
+                                        command.BaseballTypeId,
+                                        command.BrandId, 
+                                        command.CommissionerId, 
+                                        command.GameDate,
+                                        command.LevelTypeId,
+                                        command.PersonId,
+                                        command.SizeId, 
+                                        command.SportId,
+                                        command.TeamId,
+                                        command.Year);                                    
 
                 await _memorabiliaRepository.Update(memorabilia).ConfigureAwait(false);
             }
@@ -94,31 +42,26 @@ namespace Memorabilia.Application.Features.Memorabilia.Baseball
         {
             private readonly SaveBaseballViewModel _viewModel;
 
-            public Command(int memorabiliaId, SaveBaseballViewModel viewModel)
+            public Command(SaveBaseballViewModel viewModel)
             {
-                MemorabiliaId = memorabiliaId;
                 _viewModel = viewModel;
             }
 
-            public string BaseballTypeAnniversary => _viewModel.BaseballTypeAnniversary;
+            public string Anniversary => _viewModel.BaseballTypeAnniversary;
 
-            public int? BaseballTypeId => _viewModel.BaseballTypeId > 0 ? _viewModel.BaseballTypeId : null;
+            public int? AuthenticTypeId => _viewModel.AuthenticTypeId > 0 ? _viewModel.AuthenticTypeId : 0;           
 
-            public int? BaseballTypeYear => _viewModel.BaseballTypeYear;
+            public int? BaseballTypeId => _viewModel.BaseballTypeId > 0 ? _viewModel.BaseballTypeId : null;            
 
             public int BrandId => _viewModel.BrandId;
 
             public int CommissionerId => _viewModel.CommissionerId;
 
-            public int? MemorabiliaBaseballTypeId => _viewModel.MemorabiliaBaseballTypeId;
+            public DateTime? GameDate => _viewModel.GameDate;
 
-            public int MemorabiliaBrandId => _viewModel.MemorabiliaBrandId;
+            public int LevelTypeId => _viewModel.LevelTypeId;
 
-            public int MemorabiliaCommissionerId => _viewModel.MemorabiliaCommissionerId;
-
-            public int MemorabiliaId { get; set; }
-
-            public int MemorabiliaSizeId => _viewModel.MemorabiliaSizeId;
+            public int MemorabiliaId => _viewModel.MemorabiliaId;
 
             public int? PersonId => _viewModel.PersonId > 0 ? _viewModel.PersonId : null;
 
@@ -127,6 +70,8 @@ namespace Memorabilia.Application.Features.Memorabilia.Baseball
             public int SportId => Domain.Constants.Sport.Baseball.Id;
 
             public int? TeamId => _viewModel.TeamId > 0 ? _viewModel.TeamId : null;
+
+            public int? Year => _viewModel.BaseballTypeYear;
         }
     }
 }

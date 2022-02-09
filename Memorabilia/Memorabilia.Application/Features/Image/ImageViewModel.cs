@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Memorabilia.Domain.Constants;
+using System;
 
 namespace Memorabilia.Application.Features.Image
 {
@@ -18,6 +19,8 @@ namespace Memorabilia.Application.Features.Image
         public int Id => _image.Id;
 
         public int ImageTypeId => _image.ImageTypeId;
+
+        public bool IsPrimary => _image.ImageTypeId == ImageType.Primary.Id;
 
         public DateTime UploadDate => _image.UploadDate;
     }

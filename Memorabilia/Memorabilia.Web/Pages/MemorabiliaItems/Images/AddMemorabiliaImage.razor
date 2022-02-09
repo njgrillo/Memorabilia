@@ -1,7 +1,10 @@
 ﻿@page "/Memorabilia/Image/Add/{memorabiliaId:int}"
 
+@using Application.Features.Image
 @using Memorabilia.Application.Features.Memorabilia
 @using Memorabilia.Application.Features.Memorabilia.Image
+@using System 
+@using System.IO
 
 @inject CommandRouter _commandRouter
 @inject ProtectedLocalStorage _localStorage
@@ -30,15 +33,20 @@ else
                 <DataAnnotationsValidator />
                 <ValidationSummary />   
                 <div class="form-group">
-                    <_ImageFileSelector @bind-Value="@_viewModel.FilePaths"
+                    <_ImageFileSelector @bind-Value="@_viewModel.Images"
                                         @bind-Value:event="ValueChanged" 
                                         @ref="_imageFileSelector" 
+                                        CanRemove="true"
                                         DisplayPreview="true"
+                                        HasPrimary="true"                                        
                                         MaximumAllowedFiles="5" 
-                                        MaximumFileSize="5120000" />
+                                        MaximumFileSize="5120000"
+                                        OnPrimarySet="OnPrimarySet"
+                                        OnRemove="OnRemove" />
                 </div> 
                 <div class="text-right">
                     <button type="submit" class="btn btn-primary">Save</button>
+                    <button type="button" class="btn btn-cancel" @onclick="Cancel">Cancel</button>
                 </div>
             </EditForm>           
         </div>
@@ -58,14 +66,23 @@ else
     private _ImageFileSelector _imageFileSelector;
     private SaveMemorabiliaImagesViewModel _viewModel = new SaveMemorabiliaImagesViewModel();
 
+    protected void Cancel()
+    {
+        foreach(var image in _viewModel.Images)
+        {
+            if (File.Exists(image.FilePath))
+                File.Delete(image.FilePath);
+        }
+
+        _viewModel.Images = new List<SaveImageViewModel>();
+    }
+
     protected async Task HandleValidSubmit()
     {
         var userId = await _localStorage.GetAsync<int>("UserId");
 
         if (userId.Value == 0)
             _navigation.NavigateTo("Login");
-
-        await _imageFileSelector.Save().ConfigureAwait(false);
 
         _viewModel.MemorabiliaId = MemorabiliaId;
 
@@ -85,4 +102,41 @@ else
         if (userId.Value == 0)
             _navigation.NavigateTo("Login");
     }
+
+    protected void OnPrimarySet(string filePath)
+    {
+        var image = _viewModel.Images.FirstOrDefault(i => i.FilePath == filePath);
+
+        if (image == null)
+            return;
+
+        foreach(var memorabiliaImage in _viewModel.Images)
+        {
+            if (memorabiliaImage.FilePath == image.FilePath)
+                memorabiliaImage.ImageTypeId = Domain.Constants.ImageType.Primary.Id;
+
+            if (memorabiliaImage.ImageTypeId == Domain.Constants.ImageType.Primary.Id && memorabiliaImage.FilePath != image.FilePath)
+                memorabiliaImage.ImageTypeId = Domain.Constants.ImageType.Secondary.Id;
+        }
+    }
+
+    protected void OnRemove(string filePath)
+    {
+        var image = _viewModel.Images.FirstOrDefault(i => i.FilePath == filePath);
+
+        if (image == null)
+            return;
+
+        _viewModel.Images.Remove(image);
+
+        if (!image.IsPrimary)
+            return;
+
+        var primaryImage = _viewModel.Images.FirstOrDefault();
+
+        if (primaryImage == null)
+            return;
+
+        primaryImage.ImageTypeId = Domain.Constants.ImageType.Primary.Id;       
+    }    
 }

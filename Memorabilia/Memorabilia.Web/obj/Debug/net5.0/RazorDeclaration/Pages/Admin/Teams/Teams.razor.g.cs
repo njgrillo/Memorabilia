@@ -147,7 +147,7 @@ using Memorabilia.Application.Features.Admin.Team;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 68 "C:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\Pages\Admin\Teams\Teams.razor"
+#line 80 "C:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\Pages\Admin\Teams\Teams.razor"
        
     private PopConfirm _deleteDialog;
     private int _deletedItemId;
@@ -170,11 +170,6 @@ using Memorabilia.Application.Features.Admin.Team;
         await OnInitializedAsync().ConfigureAwait(false);
 
         _toastService.ShowSuccess("Team was deleted successfully!", _viewModel.PageTitle);
-    }
-
-    protected void Edit(int id)
-    {
-        _navigation.NavigateTo($"Teams/Edit/{id}");
     }
 
     protected override async Task OnInitializedAsync()

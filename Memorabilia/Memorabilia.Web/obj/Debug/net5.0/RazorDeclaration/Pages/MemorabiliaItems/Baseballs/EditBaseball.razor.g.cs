@@ -154,28 +154,28 @@ using Memorabilia.Web.Controls.Baseball;
 #nullable disable
 #nullable restore
 #line 7 "C:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\Pages\MemorabiliaItems\Baseballs\EditBaseball.razor"
-using Memorabilia.Web.Controls.Brand;
+using Memorabilia.Web.Controls.ItemTypeBrand;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
 #line 8 "C:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\Pages\MemorabiliaItems\Baseballs\EditBaseball.razor"
-using Memorabilia.Web.Controls.Commissioner;
+using Memorabilia.Web.Controls.ItemTypeSize;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
 #line 9 "C:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\Pages\MemorabiliaItems\Baseballs\EditBaseball.razor"
-using Memorabilia.Web.Controls.Person;
+using Memorabilia.Web.Controls.Commissioner;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
 #line 10 "C:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\Pages\MemorabiliaItems\Baseballs\EditBaseball.razor"
-using Memorabilia.Web.Controls.Size;
+using Memorabilia.Web.Controls.Person;
 
 #line default
 #line hidden
@@ -212,7 +212,7 @@ using Memorabilia.Web.Controls.Team;
         if (userId.Value == 0)
             _navigation.NavigateTo("Login");
 
-        var command = new SaveBaseball.Command(MemorabiliaId, _viewModel);
+        var command = new SaveBaseball.Command(_viewModel);
 
         await _commandRouter.Send(command).ConfigureAwait(false);
 

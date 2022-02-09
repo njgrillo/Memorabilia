@@ -138,6 +138,13 @@ using Memorabilia.Application.Features.Admin.ItemTypeSport;
 #line default
 #line hidden
 #nullable disable
+#nullable restore
+#line 5 "C:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\Pages\Admin\ItemTypeSports\EditItemTypeSport.razor"
+using Memorabilia.Web.Controls.Sport;
+
+#line default
+#line hidden
+#nullable disable
     [Microsoft.AspNetCore.Components.RouteAttribute("/ItemTypeSports/Edit/{id:int}")]
     public partial class EditItemTypeSport : Microsoft.AspNetCore.Components.ComponentBase
     {
@@ -147,7 +154,7 @@ using Memorabilia.Application.Features.Admin.ItemTypeSport;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 55 "C:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\Pages\Admin\ItemTypeSports\EditItemTypeSport.razor"
+#line 52 "C:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\Pages\Admin\ItemTypeSports\EditItemTypeSport.razor"
        
     [Parameter]
     public int Id { get; set; }

@@ -4,10 +4,10 @@
 @using Memorabilia.Application.Features.Memorabilia.Baseball
 @using Memorabilia.Domain.Constants
 @using Memorabilia.Web.Controls.Baseball
-@using Memorabilia.Web.Controls.Brand
+@using Memorabilia.Web.Controls.ItemTypeBrand
+@using Memorabilia.Web.Controls.ItemTypeSize
 @using Memorabilia.Web.Controls.Commissioner
 @using Memorabilia.Web.Controls.Person
-@using Memorabilia.Web.Controls.Size
 @using Memorabilia.Web.Controls.Team
 
 @inject CommandRouter _commandRouter
@@ -38,9 +38,9 @@ else
                 <ValidationSummary />
                 <div class="form-group">
                     <label for="brand">Brand</label>
-                    <_BrandDropDown @bind-Value="@_viewModel.BrandId" 
-                                    @bind-Value:event="ValueChanged"
-                                    ItemType="@ItemType.Baseball" />
+                    <_ItemTypeBrandDropDown @bind-Value="@_viewModel.BrandId" 
+                                            @bind-Value:event="ValueChanged"
+                                            ItemType="@ItemType.Baseball" />
                 </div>                
                 <div class="form-group" hidden="@(!_viewModel.DisplayBaseballType)">
                     <label for="baseballType">Baseball Type</label>
@@ -63,9 +63,9 @@ else
                 </div>
                 <div class="form-group">
                     <label for="size">Size</label>
-                    <_SizeDropDown @bind-Value="@_viewModel.SizeId"
-                                   @bind-Value:event="ValueChanged" 
-                                   ItemType="@ItemType.Baseball" /> 
+                    <_ItemTypeSizeDropDown @bind-Value="@_viewModel.SizeId"
+                                           @bind-Value:event="ValueChanged" 
+                                           ItemType="@ItemType.Baseball" /> 
                 </div>                
                 <div class="form-group">
                     <input type="checkbox" checked="@_viewModel.HasPerson" @onchange="eventArgs => { PersonCheckboxClicked(eventArgs.Value); }" />
@@ -113,7 +113,7 @@ else
         if (userId.Value == 0)
             _navigation.NavigateTo("Login");
 
-        var command = new SaveBaseball.Command(MemorabiliaId, _viewModel);
+        var command = new SaveBaseball.Command(_viewModel);
 
         await _commandRouter.Send(command).ConfigureAwait(false);
 

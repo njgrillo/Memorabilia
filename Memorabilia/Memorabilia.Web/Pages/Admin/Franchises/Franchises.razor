@@ -43,8 +43,20 @@ else
                     <td>@franchise.Name</td>
                     <td>@franchise.Location</td>
                     <td>@franchise.FoundYear</td>
-                    <td><a href=@($"Franchises/Edit/{franchise.Id}")>Edit</a></td>
-                    <td><button class="btn btn-danger" @onclick="@( _ => ShowConfirm(franchise.Id) )">Delete</button></td>
+                    <td>
+                        <img class="can-click" 
+                             src="images/pencil.png"
+                             height="25" 
+                             width="25" 
+                             @onclick="@(_ => _navigation.NavigateTo($"Franchises/Edit/{franchise.Id}"))" />
+                    </td>
+                    <td>
+                        <img class="can-click" 
+                             src="images/trash.png" 
+                             height="25" 
+                             width="25" 
+                             "@(_ => ShowConfirm(franchise.Id))" />
+                    </td>
                 </tr>
             }
         </tbody>
@@ -81,11 +93,6 @@ else
         await OnInitializedAsync().ConfigureAwait(false);
 
         _toastService.ShowSuccess("Franchise was deleted successfully!", _viewModel.PageTitle);
-    }
-
-    protected void Edit(int id)
-    {
-        _navigation.NavigateTo($"Franchises/Edit/{id}");
     }
 
     protected override async Task OnInitializedAsync()

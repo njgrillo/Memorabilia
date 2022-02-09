@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Memorabilia.Domain.Entities
 {
@@ -6,33 +8,52 @@ namespace Memorabilia.Domain.Entities
     {
         public Autograph() { }
 
-        public Autograph(int memorabiliaId,
+        public Autograph(DateTime? acquiredDate,
+                         int acquisitionTypeId, 
+                         int colorId,
+                         int conditionId,
+                         decimal? cost,
+                         decimal? estimatedValue,
+                         string grade,
+                         string greeting,
+                         int memorabiliaId,                         
+                         string personalizationText,
                          int personId,
-                         int? conditionId,
-                         int? spotId,
-                         int? writingInstrumentId,
-                         int? colorId,
-                         int userId)
+                         int? purchaseTypeId,
+                         int writingInstrumentId)
         {
+            ColorId = colorId;
+            ConditionId = conditionId;
+            EstimatedValue = estimatedValue;    
+            Grade = grade;
             MemorabiliaId = memorabiliaId;
             PersonId = personId;
-            ConditionId = conditionId;
-            SpotId = spotId;
             WritingInstrumentId = writingInstrumentId;
-            ColorId = colorId;
-            UserId = userId;
             CreateDate = DateTime.UtcNow;
-        }       
 
-        public int? ColorId { get; private set; }
+            Acquisition = new Acquisition(acquisitionTypeId, acquiredDate, cost, purchaseTypeId);
+            Personalization = new Personalization(Id, greeting, personalizationText);
+        } 
 
-        public Constants.Color Color => Constants.Color.Find(ColorId ?? 0);
+        public Acquisition Acquisition { get; private set; }
+        
+        public int AcquisitionId { get; private set; }
 
-        public Constants.Condition Condition => Constants.Condition.Find(ConditionId ?? 0);
+        public List<AutographAuthentication> Authentications { get; private set; } = new();
 
-        public int? ConditionId { get; private set; }
+        public int ColorId { get; private set; }
+
+        public int ConditionId { get; private set; }
 
         public DateTime CreateDate { get; private set; }
+
+        public decimal? EstimatedValue { get; private set; }
+
+        public string Grade { get; private set; }
+
+        public List<AutographImage> Images { get; private set; } = new();
+
+        public List<Inscription> Inscriptions { get; private set; } = new();
 
         public DateTime? LastModifiedDate { get; private set; }
 
@@ -42,30 +63,63 @@ namespace Memorabilia.Domain.Entities
 
         public Person Person { get; set; }
 
+        public Personalization Personalization { get; private set; }
+
         public int PersonId { get; private set; }
 
-        public Constants.Spot Spot => Constants.Spot.Find(SpotId ?? 0);
+        public List<AutographSpot> Spots { get; private set; } = new();
 
-        public int? SpotId { get; private set; }
+        public int WritingInstrumentId { get; private set; }
 
-        public int UserId { get; private set; }
-
-        public Constants.WritingInstrument WritingInstrument => Constants.WritingInstrument.Find(WritingInstrumentId ?? 0);
-
-        public int? WritingInstrumentId { get; private set; }
-
-        public void Set(int personId, 
-                        int? conditionId,
-                        int? spotId,
-                        int? writingInstrumentId,
-                        int? colorId)
+        public void Set(DateTime? acquiredDate,
+                        int acquisitionTypeId,
+                        int colorId,
+                        int conditionId,
+                        decimal? cost,
+                        decimal? estimatedValue,
+                        string grade,
+                        string greeting,
+                        string personalizationText,
+                        int personId,
+                        int? purchaseTypeId,
+                        int writingInstrumentId)
         {
-            PersonId = personId;
-            ConditionId = conditionId;
-            SpotId = spotId;
-            WritingInstrumentId = writingInstrumentId;
             ColorId = colorId;
+            ConditionId = conditionId;
+            EstimatedValue = estimatedValue;
+            Grade = grade;
+            PersonId = personId;
+            WritingInstrumentId = writingInstrumentId;
             LastModifiedDate = DateTime.UtcNow;
+
+            Acquisition.Set(acquisitionTypeId, acquiredDate, cost, purchaseTypeId);
+            Personalization.Set(greeting, personalizationText);
+        }
+
+        public void SetAuthentication(int id, int authenticationCompanyId, bool? hasHologram, bool? hasLetter, string verification)
+        {
+            var authentication = Authentications.SingleOrDefault(authentication => authentication.Id == id);
+
+            if (authentication == null)
+            {
+                Authentications.Add(new AutographAuthentication(authenticationCompanyId, Id, hasHologram, hasLetter, verification));
+                return;
+            }
+
+            authentication.Set(authenticationCompanyId, hasHologram, hasLetter, verification);
+        }
+
+        public void SetInscription(int id, int inscriptionTypeId, string text)
+        {
+            var inscription = Inscriptions.SingleOrDefault(inscription => inscription.Id == id);
+
+            if (inscription == null)
+            {
+                Inscriptions.Add(new Inscription(Id, inscriptionTypeId, text));
+                return;
+            }
+
+            inscription.Set(inscriptionTypeId, text);
         }
     }
 }

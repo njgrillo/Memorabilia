@@ -138,6 +138,20 @@ using Memorabilia.Application.Features.Admin.ItemTypeBrand;
 #line default
 #line hidden
 #nullable disable
+#nullable restore
+#line 5 "C:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\Pages\Admin\ItemTypeBrands\AddItemTypeBrand.razor"
+using Memorabilia.Web.Controls.Brand;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 6 "C:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\Pages\Admin\ItemTypeBrands\AddItemTypeBrand.razor"
+using Memorabilia.Web.Controls.ItemType;
+
+#line default
+#line hidden
+#nullable disable
     [Microsoft.AspNetCore.Components.RouteAttribute("/ItemTypeBrands/Add")]
     public partial class AddItemTypeBrand : Microsoft.AspNetCore.Components.ComponentBase
     {
@@ -147,7 +161,7 @@ using Memorabilia.Application.Features.Admin.ItemTypeBrand;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 64 "C:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\Pages\Admin\ItemTypeBrands\AddItemTypeBrand.razor"
+#line 58 "C:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\Pages\Admin\ItemTypeBrands\AddItemTypeBrand.razor"
        
     private SaveItemTypeBrandViewModel _viewModel = new SaveItemTypeBrandViewModel();
 

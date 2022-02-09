@@ -2,6 +2,7 @@
 
 @using Memorabilia.Application.Features.Admin
 @using Memorabilia.Application.Features.Admin.ItemTypeSize
+@using Memorabilia.Web.Controls.Size
 
 @inject CommandRouter _commandRouter
 @inject ProtectedLocalStorage _localStorage
@@ -31,12 +32,8 @@ else
                 <ValidationSummary />
                 <div class="form-group">
                     <label for="size">Size</label>
-                    <InputSelect id="size" @bind-Value="_viewModel.SizeId" class="form-control">
-                        @foreach (var size in Domain.Constants.Size.All)
-                        {
-                            <option value="@size.Id">@size.Name</option>
-                        }
-                    </InputSelect>
+                    <_SizeDropDown @bind-Value="@_viewModel.SizeId" 
+                                   @bind-Value:event="ValueChanged" /> 
                 </div>
                 <div class="text-right">
                     <button type="submit" class="btn btn-primary">Save</button>

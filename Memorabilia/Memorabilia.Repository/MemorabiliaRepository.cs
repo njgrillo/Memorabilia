@@ -16,13 +16,25 @@ namespace Memorabilia.Repository
             _context = context;
         }
 
-        private IQueryable<Domain.Entities.Memorabilia> Memorabilia => _context.Set<Domain.Entities.Memorabilia>()                                                                               
-                                                                               .Include(memorabilia => memorabilia.BaseballType)
+        private IQueryable<Domain.Entities.Memorabilia> Memorabilia => _context.Set<Domain.Entities.Memorabilia>()
+                                                                               .Include(memorabilia => memorabilia.Autographs)
+                                                                               .Include(memorabilia => memorabilia.Baseball)
+                                                                               .Include(memorabilia => memorabilia.Basketball)
+                                                                               .Include(memorabilia => memorabilia.Bat)
                                                                                .Include(memorabilia => memorabilia.Brand)
+                                                                               .Include(memorabilia => memorabilia.Card)
                                                                                .Include(memorabilia => memorabilia.Commissioner)
+                                                                               .Include(memorabilia => memorabilia.Football)
+                                                                               .Include(memorabilia => memorabilia.Game)
+                                                                               .Include(memorabilia => memorabilia.Images)
+                                                                               .Include(memorabilia => memorabilia.Jersey)
+                                                                               .Include(memorabilia => memorabilia.LevelType)
+                                                                               .Include(memorabilia => memorabilia.Magazine)
                                                                                .Include(memorabilia => memorabilia.MemorabiliaAcquisition)
                                                                                .Include(memorabilia => memorabilia.MemorabiliaAcquisition.Acquisition)
+                                                                               .Include(memorabilia => memorabilia.Orientation)
                                                                                .Include(memorabilia => memorabilia.People)
+                                                                               .Include(memorabilia => memorabilia.Photo)
                                                                                .Include(memorabilia => memorabilia.Size)
                                                                                .Include(memorabilia => memorabilia.Sports)
                                                                                .Include(memorabilia => memorabilia.Teams);

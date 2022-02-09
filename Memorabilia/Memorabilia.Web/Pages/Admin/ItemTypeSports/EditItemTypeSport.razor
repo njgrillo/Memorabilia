@@ -2,6 +2,7 @@
 
 @using Memorabilia.Application.Features.Admin
 @using Memorabilia.Application.Features.Admin.ItemTypeSport
+@using Memorabilia.Web.Controls.Sport
 
 @inject CommandRouter _commandRouter
 @inject ProtectedLocalStorage _localStorage
@@ -31,12 +32,8 @@ else
                 <ValidationSummary />
                 <div class="form-group">
                     <label for="sport">Sport</label>
-                    <InputSelect id="sport" @bind-Value="_viewModel.SportId" class="form-control">
-                        @foreach (var sport in Domain.Constants.Sport.All)
-                        {
-                            <option value="@sport.Id">@sport.Name</option>
-                        }
-                    </InputSelect>
+                    <_SportDropDown @bind-Value="@_viewModel.SportId" 
+                                    @bind-Value:event="ValueChanged" /> 
                 </div>
                 <div class="text-right">
                     <button type="submit" class="btn btn-primary">Save</button>

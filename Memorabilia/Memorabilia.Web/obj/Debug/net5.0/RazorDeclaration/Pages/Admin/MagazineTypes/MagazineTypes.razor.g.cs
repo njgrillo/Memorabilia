@@ -147,7 +147,7 @@ using Memorabilia.Application.Features.Admin.MagazineType;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 58 "C:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\Pages\Admin\MagazineTypes\MagazineTypes.razor"
+#line 70 "C:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\Pages\Admin\MagazineTypes\MagazineTypes.razor"
        
     private PopConfirm _deleteDialog;
     private int _deletedItemId;
@@ -170,11 +170,6 @@ using Memorabilia.Application.Features.Admin.MagazineType;
         await OnInitializedAsync().ConfigureAwait(false);
 
         _toastService.ShowSuccess("Magazine Type was deleted successfully!", _viewModel.PageTitle);
-    }
-
-    protected void Edit(int id)
-    {
-        _navigation.NavigateTo($"MagazineTypes/Edit/{id}");
     }
 
     protected override async Task OnInitializedAsync()

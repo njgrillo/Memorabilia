@@ -49,8 +49,20 @@ else
                     <td>@person.Nickname</td>
                     <td>@person.BirthDate</td>
                     <td>@person.DeathDate</td>
-                    <td><a href=@($"People/Edit/{person.Id}")>Edit</a></td>
-                    <td><button class="btn btn-danger" @onclick="@( _ => ShowConfirm(person.Id) )">Delete</button></td>
+                    <td>
+                        <img class="can-click" 
+                             src="images/pencil.png"
+                             height="25" 
+                             width="25" 
+                             @onclick="@(_ => _navigation.NavigateTo($"People/Edit/{person.Id}"))" />
+                    </td>
+                    <td>
+                        <img class="can-click" 
+                             src="images/trash.png" 
+                             height="25" 
+                             width="25" 
+                             "@(_ => ShowConfirm(person.Id))" />
+                    </td>
                 </tr>
             }
         </tbody>
@@ -87,11 +99,6 @@ else
         await OnInitializedAsync().ConfigureAwait(false);
 
         _toastService.ShowSuccess("Person was deleted successfully!", _viewModel.PageTitle);
-    }
-
-    protected void Edit(int id)
-    {
-        _navigation.NavigateTo($"People/Edit/{id}");
     }
 
     protected override async Task OnInitializedAsync()

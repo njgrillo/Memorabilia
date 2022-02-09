@@ -7,7 +7,6 @@
 namespace Memorabilia.Web.Pages.Autograph
 {
     #line hidden
-    using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
@@ -131,6 +130,20 @@ using Memorabilia.Application.Features.Autograph;
 #line default
 #line hidden
 #nullable disable
+#nullable restore
+#line 4 "C:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\Pages\Autograph\Autographs.razor"
+using System;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 5 "C:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\Pages\Autograph\Autographs.razor"
+using System.IO;
+
+#line default
+#line hidden
+#nullable disable
     [Microsoft.AspNetCore.Components.RouteAttribute("/Autographs/View")]
     public partial class Autographs : Microsoft.AspNetCore.Components.ComponentBase
     {
@@ -140,7 +153,7 @@ using Memorabilia.Application.Features.Autograph;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 69 "C:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\Pages\Autograph\Autographs.razor"
+#line 97 "C:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\Pages\Autograph\Autographs.razor"
        
     private PopConfirm _deleteDialog;
     private int _deletedItemId;
@@ -163,11 +176,6 @@ using Memorabilia.Application.Features.Autograph;
         await OnInitializedAsync().ConfigureAwait(false);
 
         _toastService.ShowSuccess("Autograph was deleted successfully!", _viewModel.PageTitle);
-    }
-
-    protected void Edit(int id)
-    {
-        _navigation.NavigateTo($"Autographs/Edit/{id}");
     }
 
     protected override async Task OnInitializedAsync()

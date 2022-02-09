@@ -22,6 +22,8 @@ namespace Memorabilia.Application.Features.Image
         [Required]
         public int ImageTypeId { get; set; }
 
+        public bool IsPrimary => ImageTypeId == Domain.Constants.ImageType.Primary.Id;
+
         [Required]
         public DateTime UploadDate { get; set; }
 

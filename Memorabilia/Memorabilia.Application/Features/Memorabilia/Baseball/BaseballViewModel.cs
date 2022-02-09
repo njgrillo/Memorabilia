@@ -15,13 +15,17 @@ namespace Memorabilia.Application.Features.Memorabilia.Baseball
             _memorabilia = memorabilia;
         }
 
-        public MemorabiliaBaseballType MemorabiliaBaseballType => _memorabilia.BaseballType;
+        public MemorabiliaBaseball MemorabiliaBaseball => _memorabilia.Baseball;
 
         public MemorabiliaBrand MemorabiliaBrand => _memorabilia.Brand;
 
         public MemorabiliaCommissioner MemorabiliaCommissioner => _memorabilia.Commissioner;
 
+        public MemorabiliaGame MemorabiliaGame => _memorabilia.Game;
+
         public int MemorabiliaId => _memorabilia.Id;
+
+        public MemorabiliaLevelType MemorabiliaLevelType => _memorabilia.LevelType;
 
         public MemorabiliaSize MemorabiliaSize => _memorabilia.Size;
 

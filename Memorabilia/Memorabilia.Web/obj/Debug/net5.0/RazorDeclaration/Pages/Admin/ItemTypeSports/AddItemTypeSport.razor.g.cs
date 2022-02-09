@@ -138,6 +138,20 @@ using Memorabilia.Application.Features.Admin.ItemTypeSport;
 #line default
 #line hidden
 #nullable disable
+#nullable restore
+#line 5 "C:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\Pages\Admin\ItemTypeSports\AddItemTypeSport.razor"
+using Memorabilia.Web.Controls.ItemType;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 6 "C:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\Pages\Admin\ItemTypeSports\AddItemTypeSport.razor"
+using Memorabilia.Web.Controls.Sport;
+
+#line default
+#line hidden
+#nullable disable
     [Microsoft.AspNetCore.Components.RouteAttribute("/ItemTypeSports/Add")]
     public partial class AddItemTypeSport : Microsoft.AspNetCore.Components.ComponentBase
     {
@@ -147,7 +161,7 @@ using Memorabilia.Application.Features.Admin.ItemTypeSport;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 64 "C:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\Pages\Admin\ItemTypeSports\AddItemTypeSport.razor"
+#line 58 "C:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\Pages\Admin\ItemTypeSports\AddItemTypeSport.razor"
        
     private SaveItemTypeSportViewModel _viewModel = new SaveItemTypeSportViewModel();
 

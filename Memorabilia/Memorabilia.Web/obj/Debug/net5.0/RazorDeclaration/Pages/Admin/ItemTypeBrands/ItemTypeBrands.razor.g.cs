@@ -147,7 +147,7 @@ using Memorabilia.Application.Features.Admin.ItemTypeBrand;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 58 "C:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\Pages\Admin\ItemTypeBrands\ItemTypeBrands.razor"
+#line 70 "C:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\Pages\Admin\ItemTypeBrands\ItemTypeBrands.razor"
        
     private PopConfirm _deleteDialog;
     private int _deletedItemId;
@@ -170,11 +170,6 @@ using Memorabilia.Application.Features.Admin.ItemTypeBrand;
         await OnInitializedAsync().ConfigureAwait(false);
 
         _toastService.ShowSuccess("Item Type Brand was deleted successfully!", _viewModel.PageTitle);
-    }
-
-    protected void Edit(int id)
-    {
-        _navigation.NavigateTo($"ItemTypeBrands/Edit/{id}");
     }
 
     protected override async Task OnInitializedAsync()

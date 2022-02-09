@@ -4,8 +4,8 @@ namespace Memorabilia.Domain.Constants
 {
     public sealed class ImageType
     {
-        public static readonly ImageType Primary = new(1, "All Star");
-        public static readonly ImageType Secondary = new(2, "Black Image");
+        public static readonly ImageType Primary = new(1, "Primary");
+        public static readonly ImageType Secondary = new(2, "Secondary");
 
         public static readonly ImageType[] All =
         {

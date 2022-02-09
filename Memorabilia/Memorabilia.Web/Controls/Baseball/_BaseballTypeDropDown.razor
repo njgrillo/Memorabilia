@@ -1,6 +1,4 @@
-﻿@using Memorabilia.Application.Features.Admin.BaseballType
-
-<InputSelect class="form-control" id="baseballType" @bind-Value="@Value" @oninput="@OnInputChange" >
+﻿<InputSelect class="form-control" id="baseballType" @bind-Value="@Value" @oninput="@OnInputChange" >
     <option value="0">--Select--</option>
     @foreach (var baseballType in Domain.Constants.BaseballType.All)
     {

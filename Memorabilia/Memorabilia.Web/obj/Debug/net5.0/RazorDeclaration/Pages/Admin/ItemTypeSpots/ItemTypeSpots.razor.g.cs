@@ -147,7 +147,7 @@ using Memorabilia.Application.Features.Admin.ItemTypeSpot;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 58 "C:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\Pages\Admin\ItemTypeSpots\ItemTypeSpots.razor"
+#line 70 "C:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\Pages\Admin\ItemTypeSpots\ItemTypeSpots.razor"
        
     private PopConfirm _deleteDialog;
     private int _deletedItemId;
@@ -170,11 +170,6 @@ using Memorabilia.Application.Features.Admin.ItemTypeSpot;
         await OnInitializedAsync().ConfigureAwait(false);
 
         _toastService.ShowSuccess("Item Type Spot was deleted successfully!", _viewModel.PageTitle);
-    }
-
-    protected void Edit(int id)
-    {
-        _navigation.NavigateTo($"ItemTypeSpots/Edit/{id}");
     }
 
     protected override async Task OnInitializedAsync()

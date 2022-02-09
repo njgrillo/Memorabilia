@@ -138,6 +138,20 @@ using Memorabilia.Application.Features.Admin.ItemTypeSpot;
 #line default
 #line hidden
 #nullable disable
+#nullable restore
+#line 5 "C:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\Pages\Admin\ItemTypeSpots\AddItemTypeSpot.razor"
+using Memorabilia.Web.Controls.ItemType;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 6 "C:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\Pages\Admin\ItemTypeSpots\AddItemTypeSpot.razor"
+using Memorabilia.Web.Controls.Spot;
+
+#line default
+#line hidden
+#nullable disable
     [Microsoft.AspNetCore.Components.RouteAttribute("/ItemTypeSpots/Add")]
     public partial class AddItemTypeSpot : Microsoft.AspNetCore.Components.ComponentBase
     {
@@ -147,7 +161,7 @@ using Memorabilia.Application.Features.Admin.ItemTypeSpot;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 64 "C:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\Pages\Admin\ItemTypeSpots\AddItemTypeSpot.razor"
+#line 58 "C:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\Pages\Admin\ItemTypeSpots\AddItemTypeSpot.razor"
        
     private SaveItemTypeSpotViewModel _viewModel = new SaveItemTypeSpotViewModel();
 

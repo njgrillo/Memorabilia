@@ -133,7 +133,7 @@ using Demo.Framework.Web;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 135 "C:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\Pages\Admin\Admin.razor"
+#line 168 "C:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\Pages\Admin\Admin.razor"
        
     protected override async Task OnInitializedAsync()
     {

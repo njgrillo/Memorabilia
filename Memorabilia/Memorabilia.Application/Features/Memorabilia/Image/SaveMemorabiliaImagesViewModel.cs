@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Memorabilia.Application.Features.Image;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace Memorabilia.Application.Features.Memorabilia.Image
@@ -7,12 +8,12 @@ namespace Memorabilia.Application.Features.Memorabilia.Image
     {
         public SaveMemorabiliaImagesViewModel() { }
 
-        public SaveMemorabiliaImagesViewModel(List<string> filePaths)
+        public SaveMemorabiliaImagesViewModel(List<SaveImageViewModel> images)
         {
-            FilePaths = filePaths;
+            Images = images;
         }
 
-        public List<string> FilePaths { get; set; } = new();
+        public List<SaveImageViewModel> Images { get; set; } = new();
 
         [Required]
         public int MemorabiliaId { get; set; }

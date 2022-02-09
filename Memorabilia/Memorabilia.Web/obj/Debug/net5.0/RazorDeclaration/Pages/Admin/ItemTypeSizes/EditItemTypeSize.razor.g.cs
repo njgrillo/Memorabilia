@@ -138,6 +138,13 @@ using Memorabilia.Application.Features.Admin.ItemTypeSize;
 #line default
 #line hidden
 #nullable disable
+#nullable restore
+#line 5 "C:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\Pages\Admin\ItemTypeSizes\EditItemTypeSize.razor"
+using Memorabilia.Web.Controls.Size;
+
+#line default
+#line hidden
+#nullable disable
     [Microsoft.AspNetCore.Components.RouteAttribute("/ItemTypeSizes/Edit/{id:int}")]
     public partial class EditItemTypeSize : Microsoft.AspNetCore.Components.ComponentBase
     {
@@ -147,7 +154,7 @@ using Memorabilia.Application.Features.Admin.ItemTypeSize;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 55 "C:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\Pages\Admin\ItemTypeSizes\EditItemTypeSize.razor"
+#line 52 "C:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\Pages\Admin\ItemTypeSizes\EditItemTypeSize.razor"
        
     [Parameter]
     public int Id { get; set; }

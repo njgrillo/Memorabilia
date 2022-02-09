@@ -147,7 +147,7 @@ using Memorabilia.Application.Features.Admin.Commissioner;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 62 "C:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\Pages\Admin\Commissioners\Commissioners.razor"
+#line 74 "C:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\Pages\Admin\Commissioners\Commissioners.razor"
        
     private PopConfirm _deleteDialog;
     private int _deletedItemId;
@@ -170,11 +170,6 @@ using Memorabilia.Application.Features.Admin.Commissioner;
         await OnInitializedAsync().ConfigureAwait(false);
 
         _toastService.ShowSuccess("Commissioner was deleted successfully!", _viewModel.PageTitle);
-    }
-
-    protected void Edit(int id)
-    {
-        _navigation.NavigateTo($"Commissioners/Edit/{id}");
     }
 
     protected override async Task OnInitializedAsync()

@@ -17,7 +17,7 @@ namespace Memorabilia.Application.Features.Autograph
 
             protected override async Task<AutographsViewModel> Handle(Query query)
             {
-                var autograph = await _autographRepository.GetAll(query.UserId).ConfigureAwait(false);
+                var autograph = await _autographRepository.GetAll(query.MemorabiliaId).ConfigureAwait(false);
 
                 var viewModel = new AutographsViewModel(autograph);
 
@@ -27,15 +27,12 @@ namespace Memorabilia.Application.Features.Autograph
 
         public class Query : IQuery<AutographsViewModel>
         {
-            public Query(int? memorabiliaId = null, int? userId = null)
+            public Query(int? memorabiliaId = null)
             {
                 MemorabiliaId = memorabiliaId;
-                UserId = userId;
             }
 
             public int? MemorabiliaId { get; }
-
-            public int? UserId { get; }
         }
     }
 }

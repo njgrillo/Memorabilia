@@ -23,14 +23,14 @@ namespace Memorabilia.Application.Features.Memorabilia
 
                 if (command.IsNew)
                 {
-                    memorabilia = new Domain.Entities.Memorabilia(command.ItemTypeId,
-                                                                  command.ConditionId,
+                    memorabilia = new Domain.Entities.Memorabilia(command.AcquiredDate,
                                                                   command.AcquisitionTypeId,
-                                                                  command.AcquiredDate,
+                                                                  command.ConditionId,                                                                  
                                                                   command.Cost,
-                                                                  command.PurchaseTypeId,
-                                                                  command.PrivacyTypeId,
                                                                   command.EstimatedValue,
+                                                                  command.ItemTypeId,
+                                                                  command.PrivacyTypeId,
+                                                                  command.PurchaseTypeId,
                                                                   command.UserId);
 
                     await _memorabiliaRepository.Add(memorabilia).ConfigureAwait(false);
@@ -49,13 +49,13 @@ namespace Memorabilia.Application.Features.Memorabilia
                     return;
                 }
 
-                memorabilia.Set(command.ConditionId,
+                memorabilia.Set(command.AcquiredDate,                                
                                 command.AcquisitionTypeId,
-                                command.AcquiredDate,
+                                command.ConditionId,
                                 command.Cost,
-                                command.PurchaseTypeId,
+                                command.EstimatedValue,
                                 command.PrivacyTypeId,
-                                command.EstimatedValue);
+                                command.PurchaseTypeId);
 
                 await _memorabiliaRepository.Update(memorabilia).ConfigureAwait(false);
             }

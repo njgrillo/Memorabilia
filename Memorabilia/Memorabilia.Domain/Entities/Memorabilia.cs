@@ -8,14 +8,14 @@ namespace Memorabilia.Domain.Entities
     {
         public Memorabilia() { }
 
-        public Memorabilia(int itemTypeId,
-                           int? conditionId,
+        public Memorabilia(DateTime? acquiredDate,
                            int acquisitionTypeId,
-                           DateTime? acquiredDate,
+                           int? conditionId,
                            decimal? cost,
-                           int? purchaseTypeId,
+                           decimal? estimatedValue,
+                           int itemTypeId,
                            int privacyTypeId,
-                           decimal? estimatedValue, 
+                           int? purchaseTypeId,
                            int userId)
         {
             ItemTypeId = itemTypeId;
@@ -31,11 +31,19 @@ namespace Memorabilia.Domain.Entities
 
         public Acquisition Acquisition => MemorabiliaAcquisition.Acquisition;
 
-        public MemorabiliaBaseballType BaseballType { get; set; }
+        public List<Autograph> Autographs { get; private set; } = new ();
 
-        public MemorabiliaBrand Brand { get; set; }
+        public MemorabiliaBaseball Baseball { get; private set; }
 
-        public MemorabiliaCommissioner Commissioner { get; set; }
+        public MemorabiliaBasketball Basketball { get; private set; }
+
+        public MemorabiliaBat Bat { get; private set; }
+
+        public MemorabiliaBrand Brand { get; private set; }
+
+        public MemorabiliaCard Card { get; private set; }
+
+        public MemorabiliaCommissioner Commissioner { get; private set; }
 
         public Constants.Condition Condition => Constants.Condition.Find(ConditionId ?? 0);
 
@@ -43,65 +51,51 @@ namespace Memorabilia.Domain.Entities
 
         public DateTime CreateDate { get; private set; }
 
+        public MemorabiliaFootball Football { get; private set; }
+
         public decimal? EstimatedValue { get; private set; }
 
-        public List<MemorabiliaImage> Images { get; private set; } = new List<MemorabiliaImage>();
+        public MemorabiliaGame Game { get; private set; }
+
+        public List<MemorabiliaImage> Images { get; private set; } = new ();
 
         public Constants.ItemType ItemType => Constants.ItemType.Find(ItemTypeId);
 
         public int ItemTypeId { get; private set; }
 
+        public MemorabiliaJersey Jersey { get; private set; }
+
         public DateTime? LastModifiedDate { get; private set; }
 
-        public MemorabiliaAcquisition MemorabiliaAcquisition { get; set; }
+        public MemorabiliaLevelType LevelType { get; private set; }
 
-        public List<MemorabiliaPerson> People { get; private set; } = new List<MemorabiliaPerson>();
+        public MemorabiliaMagazine Magazine { get; private set; }
 
-        public int PrivacyTypeId { get; set; }
+        public MemorabiliaAcquisition MemorabiliaAcquisition { get; private set; }
 
-        public MemorabiliaSize Size { get; set; }
+        public MemorabiliaOrientation Orientation { get; private set; }
 
-        public List<MemorabiliaSport> Sports { get; private set; } = new List<MemorabiliaSport>();
+        public List<MemorabiliaPerson> People { get; private set; } = new ();
 
-        public List<MemorabiliaTeam> Teams { get; private set; } = new List<MemorabiliaTeam>();
+        public MemorabiliaPhoto Photo { get; private set; }
 
-        public int UserId { get; private set; }
+        public int PrivacyTypeId { get; private set; }
 
-        public void AddImages(IEnumerable<string> filePaths)
-        {
-            if (!filePaths.Any())
-                return;
+        public MemorabiliaSize Size { get; private set; }
 
-            Images.Add(filePaths.Select(filePath => 
-                                        new MemorabiliaImage(Id, 
-                                                             filePath, 
-                                                             Constants.ImageType.Primary.Id, 
-                                                             DateTime.UtcNow))
-                                .First());
+        public List<MemorabiliaSport> Sports { get; private set; } = new ();
 
-            foreach (var filePath in filePaths.Skip(1))
-            {
-                Images.Add(new MemorabiliaImage(Id, filePath, Constants.ImageType.Secondary.Id, DateTime.UtcNow));
-            }
-        }
+        public List<MemorabiliaTeam> Teams { get; private set; } = new ();
 
-        public void RemovePeople()
-        {
-            People = new List<MemorabiliaPerson> { };
-        }
+        public int UserId { get; private set; }        
 
-        public void RemoveTeams()
-        {
-            Teams = new List<MemorabiliaTeam> { };
-        }
-
-        public void Set(int? conditionId,
+        public void Set(DateTime? acquiredDate,
                         int acquisitionTypeId,
-                        DateTime? acquiredDate,
+                        int? conditionId,
                         decimal? cost,
-                        int? purchaseTypeId,
+                        decimal? estimatedValue,
                         int privacyTypeId,
-                        decimal? estimatedValue)
+                        int? purchaseTypeId)
         {
             ConditionId = conditionId;
             PrivacyTypeId = privacyTypeId;
@@ -111,23 +105,173 @@ namespace Memorabilia.Domain.Entities
             MemorabiliaAcquisition.Set(acquisitionTypeId, acquiredDate, cost, purchaseTypeId);
         }
 
-        public void SetBaseballType(int memorabiliaBaseballTypeId, int baseballTypeId, int? year, string anniversary)
+        public void SetBaseball(string anniversary,
+                                int? authenticTypeId,
+                                int? baseballTypeId,  
+                                int brandId, 
+                                int commissionerId, 
+                                DateTime? gameDate,
+                                int levelTypeId,
+                                int? personId,
+                                int sizeId, 
+                                int sportId,
+                                int? teamId,
+                                int? year)
         {
-            if (Brand.BrandId != Constants.Brand.Rawlings.Id)
-                return;
+            SetBrand(brandId);
+            SetLevelType(levelTypeId);
+            SetSize(sizeId);
+            SetSports(sportId);
+            SetBaseballType(baseballTypeId.Value, year, anniversary);
+            SetCommissioner(commissionerId);
+            SetGame(authenticTypeId, personId, gameDate);            
 
-            if (memorabiliaBaseballTypeId == 0)
+            if (!personId.HasValue)
+                People = new List<MemorabiliaPerson>();
+            else
+                SetPeople(personId.Value);
+
+            if (!teamId.HasValue)
+                Teams = new List<MemorabiliaTeam>();
+            else
+                SetTeams(teamId.Value);
+        }
+
+        public void SetBasketball(int basketballTypeId)
+        {
+            if (Basketball == null)
             {
-                BaseballType = new MemorabiliaBaseballType(Id, baseballTypeId, year, anniversary);
+                Basketball = new MemorabiliaBasketball(Id, basketballTypeId);
                 return;
             }
 
-            BaseballType.Set(baseballTypeId, year, anniversary);
+            Basketball.Set(basketballTypeId);
         }
 
-        public void SetBrand(int memorabiliaBrandId, int brandId)
+        public void SetBat(int batTypeId, int? length)
         {
-            if (memorabiliaBrandId == 0)
+            if (Bat == null)
+            {
+                Bat = new MemorabiliaBat(Id, batTypeId, length);
+                return;
+            }
+
+            Bat.Set(batTypeId, length);
+        }
+
+        public void SetCard(int? denominator, int? numerator, int? year)
+        {
+            if (Card == null)
+            {
+                Card = new MemorabiliaCard(Id, year, numerator, denominator);
+                return;
+            }
+
+            Card.Set(year, numerator, denominator);
+        }
+
+        public void SetFootball(int footballTypeId)
+        {
+            if (Football == null)
+            {
+                Football = new MemorabiliaFootball(Id, footballTypeId);
+                return;
+            }
+
+            Football.Set(footballTypeId);
+        }
+
+        public void SetImages(IEnumerable<string> filePaths, string primaryImageFilePath)
+        {
+            if (!filePaths.Any())
+            {
+                Images = new List<MemorabiliaImage>();
+                return;
+            }
+
+            Images = filePaths.Select(filePath =>
+                                        new MemorabiliaImage(Id,
+                                                             filePath,
+                                                             filePath == primaryImageFilePath
+                                                                 ? Constants.ImageType.Primary.Id 
+                                                                 : Constants.ImageType.Secondary.Id,
+                                                             DateTime.UtcNow)).ToList();
+        }
+
+        public void SetJersey(int? authenticTypeId,
+                              int brandId, 
+                              DateTime? gameDate,
+                              int? gamePersonId,
+                              int levelTypeId,
+                              int[] personIds,
+                              int qualityTypeId,                              
+                              int sizeId, 
+                              int[] sportIds,
+                              int styleTypeId,
+                              int[] teamIds,
+                              int typeId)
+        {
+            SetBrand(brandId);
+            SetLevelType(levelTypeId);
+            SetSize(sizeId);
+            SetGame(authenticTypeId, gamePersonId, gameDate);
+            SetPeople(personIds);
+            SetSports(sportIds);
+            SetTeams(teamIds);
+
+            if (Jersey.Id == 0)
+                Jersey = new MemorabiliaJersey(Id, qualityTypeId, styleTypeId, typeId);
+            else
+                Jersey.Set(qualityTypeId, styleTypeId, typeId);
+        }
+
+        public void SetMagazine(DateTime? date, bool framed)
+        {
+            if (Magazine == null)
+            {
+                Magazine = new MemorabiliaMagazine(Id, date, framed);
+                return;
+            }
+
+            Magazine.Set(date, framed);
+        }
+
+        public void SetPhoto(int photoTypeId, bool framed)
+        {
+            if (Photo == null)
+            {
+                Photo = new MemorabiliaPhoto(Id, photoTypeId, framed);
+                return;
+            }
+
+            Photo.Set(photoTypeId, framed);
+        }
+
+        private void SetBaseballType(int? baseballTypeId, int? year, string anniversary)
+        {
+            if (baseballTypeId.HasValue)
+            {
+                if (Brand.BrandId != Constants.Brand.Rawlings.Id)
+                    return;
+
+                if (Baseball == null)
+                {
+                    Baseball = new MemorabiliaBaseball(Id, baseballTypeId.Value, year, anniversary);
+                    return;
+                }
+
+                Baseball.Set(baseballTypeId.Value, year, anniversary);
+            }
+            else
+            {
+                if (Baseball?.Id > 0)
+                    Baseball = null;
+            }            
+        }
+
+        private void SetBrand(int brandId)
+        {
+            if (Brand == null)
             {
                 Brand = new MemorabiliaBrand(Id, brandId);
                 return;
@@ -136,26 +280,81 @@ namespace Memorabilia.Domain.Entities
             Brand.Set(brandId);
         }
 
-        public void SetCommissioner(int memorabiliaCommissionerId, int commissionerId)
+        private void SetCommissioner(int commissionerId)
         {
-            if (memorabiliaCommissionerId == 0)
+            if (commissionerId > 0)
             {
-                Commissioner = new MemorabiliaCommissioner(Id, commissionerId);
+                if (Commissioner == null)
+                {
+                    Commissioner = new MemorabiliaCommissioner(Id, commissionerId);
+                    return;
+                }
+
+                Commissioner.Set(commissionerId);
+            }
+            else
+            {
+                if (Commissioner?.Id > 0)
+                    Commissioner = null;
+            }
+        }
+
+        private void SetGame(int? authenticTypeId, int? personId, DateTime? gameDate)
+        {
+            if (authenticTypeId.HasValue)
+            {
+                if (ItemType.Id == Constants.ItemType.Jersey.Id && Jersey.JerseyQualityTypeId != Constants.JerseyQualityType.Authentic.Id)
+                    return;
+
+                if (Game == null)
+                {
+                    Game = new MemorabiliaGame(Id, authenticTypeId.Value, personId, gameDate);
+                    return;
+                }
+
+                Game.Set(authenticTypeId.Value, personId, gameDate);
+            }
+            else
+            {
+                if (Game?.Id > 0)
+                    Game = null;
+            }
+        }
+
+        private void SetLevelType(int levelTypeId)
+        {
+            if (LevelType == null)
+            {
+                LevelType = new MemorabiliaLevelType(Id, levelTypeId);
                 return;
             }
 
-            Commissioner.Set(commissionerId);
-        }        
+            LevelType.Set(levelTypeId);
+        }
 
-        public void SetPeople(params int[] personIds)
+        private void SetOrientation(int orientationId)
         {
+            if (Orientation == null)
+            {
+                Orientation = new MemorabiliaOrientation(Id, orientationId);
+                return;
+            }
+
+            Orientation.Set(orientationId);
+        }
+
+        private void SetPeople(params int[] personIds)
+        {
+            if (personIds == null || !personIds.Any())
+                People = new List<MemorabiliaPerson>();
+
             People.RemoveAll(team => !personIds.Contains(team.PersonId));
             People.AddRange(personIds.Where(personId => !People.Select(person => person.PersonId).Contains(personId)).Select(personId => new MemorabiliaPerson(Id, personId)));
         }
 
-        public void SetSize(int memorabiliaSizeId, int sizeId)
+        private void SetSize(int sizeId)
         {
-            if (memorabiliaSizeId == 0)
+            if (Size == null)
             {
                 Size = new MemorabiliaSize(Id, sizeId);
                 return;
@@ -164,14 +363,20 @@ namespace Memorabilia.Domain.Entities
             Size.Set(sizeId);
         }
 
-        public void SetSports(params int[] sportIds)
+        private void SetSports(params int[] sportIds)
         {
+            if (sportIds == null || !sportIds.Any())
+                Sports = new List<MemorabiliaSport>();
+
             Sports.RemoveAll(sportId => !sportIds.Contains(sportId.SportId));
             Sports.AddRange(sportIds.Where(sportId => !Sports.Select(sport => sport.SportId).Contains(sportId)).Select(sportId => new MemorabiliaSport(Id, sportId)));
         }
 
-        public void SetTeams(params int[] teamIds)
+        private void SetTeams(params int[] teamIds)
         {
+            if (teamIds == null || !teamIds.Any())
+                Teams = new List<MemorabiliaTeam>();
+
             Teams.RemoveAll(team => !teamIds.Contains(team.TeamId));
             Teams.AddRange(teamIds.Where(teamId => !Teams.Select(team => team.TeamId).Contains(teamId)).Select(teamId => new MemorabiliaTeam(Id, teamId)));
         }

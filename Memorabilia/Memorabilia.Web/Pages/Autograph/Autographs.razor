@@ -1,6 +1,8 @@
 ﻿@page "/Autographs/View"
 
 @using Memorabilia.Application.Features.Autograph
+@using System 
+@using System.IO
 
 @inject CommandRouter _commandRouter
 @inject ProtectedLocalStorage _localStorage
@@ -25,15 +27,16 @@ else
     <br />
     <table class="table">
         <thead>
-            <tr>                
+            <tr>      
+                <th></th>
                 <th>Person</th>
                 <th>Item</th>
-                <th>Condition</th>
-                <th>Spot</th>                
+                <th>Condition</th>            
                 <th>Color</th>
                 <th>Writing Instrument</th>
                 <th>Create Date</th>
                 <th>Last Modified Date</th>
+                <th></th>
                 <th></th>
                 <th></th>
             </tr>
@@ -41,17 +44,42 @@ else
         <tbody>
             @foreach (var autograph in _viewModel.Autographs)
             {
-                <tr>                    
+                <tr>      
+                    <td>
+                        <img class="can-click" 
+                             src="data:image/jpg;base64,@Convert.ToBase64String(File.ReadAllBytes(@autograph.ImagePath))"
+                             height="25" 
+                             width="25" 
+                             @onclick="@( _ => _navigation.NavigateTo($"Autographs/Image/Edit/{autograph.Id}") )" />
+                    </td>
                     <td>@autograph.PersonName</td>
                     <td>@autograph.ItemTypeName</td>
                     <td>@autograph.ConditionName</td>
-                    <td>@autograph.SpotName</td>
                     <td>@autograph.ColorName</td>
                     <td>@autograph.WritingInstrumentName</td>
                     <td>@autograph.CreateDate</td>
                     <td>@autograph.LastModifiedDate</td>
-                    <td><a href=@($"Autographs/Edit/{autograph.Id}")>Edit</a></td>
-                    <td><button class="btn btn-danger" @onclick="@( _ => ShowConfirm(autograph.Id) )">Delete</button></td>
+                    <td>
+                        <img class="can-click" 
+                             src="images/details.png" 
+                             height="25" 
+                             width="25" 
+                             @onclick="@(_ => _navigation.NavigateTo($"Autographs/{autograph.ItemTypeName}/Edit/{autograph.Id}"))" />
+                    </td>
+                    <td>
+                        <img class="can-click" 
+                             src="images/pencil.png" 
+                             height="25" 
+                             width="25" 
+                             @onclick="@(_ => _navigation.NavigateTo($"Autographs/Edit/{autograph.Id}"))" />
+                    </td>
+                    <td>
+                        <img class="can-click" 
+                             src="images/trash.png" 
+                             height="25" 
+                             width="25" 
+                             "@(_ => ShowConfirm(autograph.Id))" />
+                    </td>
                 </tr>
             }
         </tbody>
@@ -88,11 +116,6 @@ else
         await OnInitializedAsync().ConfigureAwait(false);
 
         _toastService.ShowSuccess("Autograph was deleted successfully!", _viewModel.PageTitle);
-    }
-
-    protected void Edit(int id)
-    {
-        _navigation.NavigateTo($"Autographs/Edit/{id}");
     }
 
     protected override async Task OnInitializedAsync()

@@ -1,44 +1,23 @@
-﻿@using Memorabilia.Application.Features.Admin.ItemTypeSize
-@using Memorabilia.Domain.Constants
+﻿@using Memorabilia.Domain.Constants
 
-@inject QueryRouter _queryRouter
-
-<InputSelect class="form-control" id="size" @bind-Value="@Value" @oninput="@OnInputChange">
+<InputSelect class="form-control" id="SizeDropDown" @bind-Value="@Value" @oninput="@OnInputChange" >
     <option value="0">--Select--</option>
-    @foreach (var size in _sizes)
+    @foreach (var Size in Size.All)
     {
-        <option value="@size.SizeId">@size.SizeName</option>
+        <option value="@Size.Id">@Size.Name</option>
     }
 </InputSelect>
 
 @code {
     [Parameter]
-    public Size InitialValue { get; set; }
-
-    [Parameter]
-    public ItemType ItemType { get; set; }
-
-    [Parameter]
-    public int Value { get; set; }  
-
-    private IEnumerable<ItemTypeSizeViewModel> _sizes = Enumerable.Empty<ItemTypeSizeViewModel>();
+    public int Value { get; set; }
 
     [Parameter]
     public EventCallback<int> ValueChanged { get; set; }
 
-    protected override async Task OnInitializedAsync()
+    protected override Task OnInitializedAsync()
     {
-        await Load().ConfigureAwait(false);
-
-        if ((InitialValue?.Id ?? 0) > 0)
-            Value = InitialValue.Id; 
-    }    
-
-    private async Task Load()
-    {
-        var query = new GetItemTypeSizes.Query(Domain.Constants.ItemType.Baseball.Id);
-
-        _sizes = (await _queryRouter.Send(query).ConfigureAwait(false)).ItemTypeSizes.OrderByDescending(size => size.SizeName);
+        return base.OnInitializedAsync();
     }
 
     private async Task OnInputChange(ChangeEventArgs args)
@@ -47,3 +26,4 @@
         await ValueChanged.InvokeAsync(Value);
     }
 }
+

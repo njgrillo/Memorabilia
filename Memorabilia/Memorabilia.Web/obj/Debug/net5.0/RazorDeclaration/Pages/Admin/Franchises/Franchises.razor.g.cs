@@ -147,7 +147,7 @@ using Memorabilia.Application.Features.Admin.Franchise;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 62 "C:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\Pages\Admin\Franchises\Franchises.razor"
+#line 74 "C:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\Pages\Admin\Franchises\Franchises.razor"
        
     private PopConfirm _deleteDialog;
     private int _deletedItemId;
@@ -170,11 +170,6 @@ using Memorabilia.Application.Features.Admin.Franchise;
         await OnInitializedAsync().ConfigureAwait(false);
 
         _toastService.ShowSuccess("Franchise was deleted successfully!", _viewModel.PageTitle);
-    }
-
-    protected void Edit(int id)
-    {
-        _navigation.NavigateTo($"Franchises/Edit/{id}");
     }
 
     protected override async Task OnInitializedAsync()

@@ -14,9 +14,11 @@ namespace Memorabilia.Application.Features.Admin.ItemTypeSize
         }
 
         [Required]
+        [Range(1, int.MaxValue, ErrorMessage = "Item Type is required.")]
         public int ItemTypeId { get; set; }
 
         [Required]
+        [Range(1, int.MaxValue, ErrorMessage = "Size is required.")]
         public int SizeId { get; set; }
 
         public override string PageTitle => $"{(Id > 0 ? "Edit" : "Add")} Item Type Size";

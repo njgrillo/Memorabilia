@@ -9,7 +9,7 @@ namespace Memorabilia.Application.Features.Admin.ItemTypeBrand
 
         public ItemTypeBrandsViewModel(IEnumerable<Domain.Entities.ItemTypeBrand> itemTypeBrands)
         {
-            ItemTypeBrands = itemTypeBrands.Select(ItemTypeBrand => new ItemTypeBrandViewModel(ItemTypeBrand));
+            ItemTypeBrands = itemTypeBrands.Select(itemTypeBrand => new ItemTypeBrandViewModel(itemTypeBrand));
         }
 
         public override string PageTitle => "Item Type Brands";
