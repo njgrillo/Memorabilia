@@ -9,11 +9,15 @@ namespace Memorabilia.Application.Features.Admin.ItemTypeSpot
 
         public ItemTypeSpotsViewModel(IEnumerable<Domain.Entities.ItemTypeSpot> itemTypeSpots)
         {
-            ItemTypeSpots = itemTypeSpots.Select(ItemTypeSpot => new ItemTypeSpotViewModel(ItemTypeSpot));
+            ItemTypeSpots = itemTypeSpots.Select(ItemTypeSpot => new ItemTypeSpotViewModel(ItemTypeSpot)).ToList();
         }
 
-        public IEnumerable<ItemTypeSpotViewModel> ItemTypeSpots { get; set; } = Enumerable.Empty<ItemTypeSpotViewModel>();
+        public List<ItemTypeSpotViewModel> ItemTypeSpots { get; set; } = new();
 
-        public override string PageTitle => "Item Type Spots";        
+        public override string ItemTitle => "Item Type Spot";
+
+        public override string PageTitle => "Item Type Spots";
+
+        public override string RoutePrefix => "ItemTypeSpots";
     }
 }

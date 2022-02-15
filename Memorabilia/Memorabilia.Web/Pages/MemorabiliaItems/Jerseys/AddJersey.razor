@@ -3,7 +3,7 @@
 @using Memorabilia.Application.Features.Memorabilia
 @using Memorabilia.Application.Features.Memorabilia.Jersey
 @using Memorabilia.Domain.Constants
-@using Memorabilia.Web.Controls.AuthenticType
+@using Memorabilia.Web.Controls.GameStyleType
 @using Memorabilia.Web.Controls.ItemTypeBrand
 @using Memorabilia.Web.Controls.ItemTypeLevel
 @using Memorabilia.Web.Controls.ItemTypeSize
@@ -64,9 +64,9 @@ else
                     <_JerseyQualityTypeDropDown @bind-Value="@_viewModel.JerseyQualityTypeId" 
                                                 @bind-Value:event="ValueChanged" /> 
                 </div>        
-                <div class="form-group" hidden="@(!_viewModel.DisplayAuthenticType)">
-                    <label for="JerseyAuthenticType">Authentic Type</label>
-                    <_AuthenticTypeDropDown @bind-Value="@_viewModel.AuthenticTypeId" 
+                <div class="form-group" hidden="@(!_viewModel.DisplayGameStyleType)">
+                    <label for="JerseyGameStyleType">Game Style Type</label>
+                    <_AuthenticTypeDropDown @bind-Value="@_viewModel.GameStyleTypeId" 
                                             @bind-Value:event="ValueChanged" /> 
                 </div>    
                 <div class="form-group" hidden="@(!_viewModel.DisplayGameDate)">

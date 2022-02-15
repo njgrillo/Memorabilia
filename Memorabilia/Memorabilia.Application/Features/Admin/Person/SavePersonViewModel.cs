@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
 
 namespace Memorabilia.Application.Features.Admin.Person
 {
@@ -12,12 +14,14 @@ namespace Memorabilia.Application.Features.Admin.Person
             BirthDate = viewModel.BirthDate;
             DeathDate = viewModel.DeathDate;
             FirstName = viewModel.FirstName;
+            FullName = viewModel.FullName;
             Id = viewModel.Id;
             ImagePath = viewModel.ImagePath;
             LastName = viewModel.LastName;
-            Suffix = viewModel.Suffix;
             Nickname = viewModel.Nickname;
-            FullName = viewModel.FullName;
+            Occupations = viewModel.Occupations.Select(occupation => new SavePersonOccupationViewModel(occupation)).ToList();
+            Suffix = viewModel.Suffix;   
+            Teams = viewModel.Teams.Select(team => new SavePersonTeamViewModel(team)).ToList();
         }
 
         public DateTime? BirthDate { get; set; }
@@ -43,9 +47,13 @@ namespace Memorabilia.Application.Features.Admin.Person
         [StringLength(50, ErrorMessage = "Nickname is too long.")]
         public string Nickname { get; set; }
 
+        public List<SavePersonOccupationViewModel> Occupations { get; set; } = new();
+
         public override string PageTitle => $"{(Id > 0 ? "Edit" : "Add")} Person";
 
         [StringLength(25, ErrorMessage = "Suffix is too long.")]
         public string Suffix { get; set; }
+
+        public List<SavePersonTeamViewModel> Teams { get; set; } = new();
     }
 }

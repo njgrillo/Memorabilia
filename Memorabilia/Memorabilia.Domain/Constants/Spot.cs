@@ -32,7 +32,7 @@ namespace Memorabilia.Domain.Constants
 
         public static Spot Find(int id)
         {
-            return All.SingleOrDefault(Spot => Spot.Id == id);
+            return All.SingleOrDefault(spot => spot.Id == id);
         }
     }
 }

@@ -25,9 +25,9 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Projects\\Budget\\NugetPackages\\Framework": {},
-          "C:\\Projects\\Memorabilia\\NugetPackages\\Framework": {},
           "C:\\Projects\\SurePassIDFramework\\NugetPackages": {},
+          "C:\\Projects\\njgrillo\\Budget\\NugetPackages\\Framework": {},
+          "C:\\Projects\\njgrillo\\Memorabilia\\NugetPackages\\Framework": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {

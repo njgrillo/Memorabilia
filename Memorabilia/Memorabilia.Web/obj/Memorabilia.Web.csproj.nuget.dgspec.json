@@ -25,9 +25,9 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Projects\\Budget\\NugetPackages\\Framework": {},
-          "C:\\Projects\\Memorabilia\\NugetPackages\\Framework": {},
           "C:\\Projects\\SurePassIDFramework\\NugetPackages": {},
+          "C:\\Projects\\njgrillo\\Budget\\NugetPackages\\Framework": {},
+          "C:\\Projects\\njgrillo\\Memorabilia\\NugetPackages\\Framework": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -89,9 +89,9 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Projects\\Budget\\NugetPackages\\Framework": {},
-          "C:\\Projects\\Memorabilia\\NugetPackages\\Framework": {},
           "C:\\Projects\\SurePassIDFramework\\NugetPackages": {},
+          "C:\\Projects\\njgrillo\\Budget\\NugetPackages\\Framework": {},
+          "C:\\Projects\\njgrillo\\Memorabilia\\NugetPackages\\Framework": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -155,9 +155,9 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Projects\\Budget\\NugetPackages\\Framework": {},
-          "C:\\Projects\\Memorabilia\\NugetPackages\\Framework": {},
           "C:\\Projects\\SurePassIDFramework\\NugetPackages": {},
+          "C:\\Projects\\njgrillo\\Budget\\NugetPackages\\Framework": {},
+          "C:\\Projects\\njgrillo\\Memorabilia\\NugetPackages\\Framework": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -219,9 +219,9 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Projects\\Budget\\NugetPackages\\Framework": {},
-          "C:\\Projects\\Memorabilia\\NugetPackages\\Framework": {},
           "C:\\Projects\\SurePassIDFramework\\NugetPackages": {},
+          "C:\\Projects\\njgrillo\\Budget\\NugetPackages\\Framework": {},
+          "C:\\Projects\\njgrillo\\Memorabilia\\NugetPackages\\Framework": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -254,6 +254,10 @@
               "target": "Package",
               "version": "[3.2.2, )"
             },
+            "Blazored.Typeahead": {
+              "target": "Package",
+              "version": "[4.6.0, )"
+            },
             "Demo.Framework": {
               "target": "Package",
               "version": "[1.0.10, )"
@@ -281,6 +285,12 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
+          "downloadDependencies": [
+            {
+              "name": "Microsoft.NETCore.App.Host.win-x64",
+              "version": "[5.0.13, 5.0.13]"
+            }
+          ],
           "frameworkReferences": {
             "Microsoft.AspNetCore.App": {
               "privateAssets": "none"

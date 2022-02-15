@@ -34,12 +34,12 @@ namespace Memorabilia.Repository
 
         public async Task<Domain.Entities.MagazineType> Get(int id)
         {
-            return await MagazineType.SingleOrDefaultAsync(user => user.Id == id).ConfigureAwait(false);
+            return await MagazineType.SingleOrDefaultAsync(magazineType => magazineType.Id == id).ConfigureAwait(false);
         }
 
         public async Task<IEnumerable<Domain.Entities.MagazineType>> GetAll()
         {
-            return await MagazineType.ToListAsync().ConfigureAwait(false);
+            return (await MagazineType.ToListAsync().ConfigureAwait(false)).OrderBy(magazineType => magazineType.Name);
         }
 
         public async Task Update(Domain.Entities.MagazineType magazineType, CancellationToken cancellationToken = default)

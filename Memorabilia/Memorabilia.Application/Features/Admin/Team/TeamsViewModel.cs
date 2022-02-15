@@ -11,11 +11,16 @@ namespace Memorabilia.Application.Features.Admin.Team
         {
             Teams = teams.Select(team => new TeamViewModel(team))
                          .OrderBy(team => team.FranchiseName)
-                         .ThenBy(team => team.BeginYear);
+                         .ThenBy(team => team.BeginYear)
+                         .ToList();
         }
+
+        public override string ItemTitle => "Team";
 
         public override string PageTitle => "Teams";
 
-        public IEnumerable<TeamViewModel> Teams { get; set; } = Enumerable.Empty<TeamViewModel>();
+        public override string RoutePrefix => "Teams";
+
+        public List<TeamViewModel> Teams { get; set; } = new();
     }
 }

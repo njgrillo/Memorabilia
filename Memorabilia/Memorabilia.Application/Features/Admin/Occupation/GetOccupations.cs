@@ -25,8 +25,6 @@ namespace Memorabilia.Application.Features.Admin.Occupation
             }
         }
 
-        public class Query : IQuery<OccupationsViewModel>
-        {
-        }
+        public class Query : IQuery<OccupationsViewModel> { }
     }
 }

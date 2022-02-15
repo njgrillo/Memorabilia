@@ -14,13 +14,13 @@ namespace Memorabilia.Domain.Constants
 
         public static readonly Color[] All =
         {
-            Blue,
             Black,
-            Silver,
+            Blue,
             Gold,
-            Red,
             Orange,
-            Other
+            Other,
+            Red,
+            Silver  
         };
 
         private Color(int id, string name, string abbreviation)
@@ -38,7 +38,7 @@ namespace Memorabilia.Domain.Constants
 
         public static Color Find(int id)
         {
-            return All.SingleOrDefault(Color => Color.Id == id);
+            return All.SingleOrDefault(color => color.Id == id);
         }
     }
 }

@@ -34,12 +34,12 @@ namespace Memorabilia.Repository
 
         public async Task<Domain.Entities.JerseyQualityType> Get(int id)
         {
-            return await JerseyQualityType.SingleOrDefaultAsync(user => user.Id == id).ConfigureAwait(false);
+            return await JerseyQualityType.SingleOrDefaultAsync(jerseyQualityType => jerseyQualityType.Id == id).ConfigureAwait(false);
         }
 
         public async Task<IEnumerable<Domain.Entities.JerseyQualityType>> GetAll()
         {
-            return await JerseyQualityType.ToListAsync().ConfigureAwait(false);
+            return (await JerseyQualityType.ToListAsync().ConfigureAwait(false)).OrderBy(jerseyQualityType => jerseyQualityType.Name);
         }
 
         public async Task Update(Domain.Entities.JerseyQualityType jerseyQualityType, CancellationToken cancellationToken = default)

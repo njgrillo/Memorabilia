@@ -11,11 +11,11 @@ namespace Memorabilia.Application.Features.Memorabilia.Jersey
         public SaveJerseyViewModel() { }
 
         public SaveJerseyViewModel(JerseyViewModel viewModel)
-        {
-            AuthenticTypeId = viewModel.MemorabiliaGame?.AuthenticTypeId ?? 0;
+        {            
             BrandId = viewModel.MemorabiliaBrand.BrandId;
             GameDate = viewModel.MemorabiliaGame?.GameDate;
             GamePersonId = viewModel.MemorabiliaGame?.PersonId ?? 0;
+            GameStyleTypeId = viewModel.MemorabiliaGame?.GameStyleTypeId ?? 0;
             JerseyQualityTypeId = viewModel.MemorabiliaJersey.JerseyQualityTypeId;
             JerseyStyleTypeId = viewModel.MemorabiliaJersey.JerseyStyleTypeId;
             JerseyTypeId = viewModel.MemorabiliaJersey.JerseyTypeId;
@@ -25,22 +25,22 @@ namespace Memorabilia.Application.Features.Memorabilia.Jersey
             SizeId = viewModel.MemorabiliaSize.SizeId;
             SportIds = viewModel.Sports.Select(x => x.Id);
             TeamIds = viewModel.Teams.Select(x => x.Id);    
-        }        
-
-        public int AuthenticTypeId { get; set; }
+        }   
 
         [Required]
         [Range(1, int.MaxValue, ErrorMessage = "Brand is required.")]
-        public int BrandId { get; set; }
+        public int BrandId { get; set; }       
 
-        public bool DisplayAuthenticType => JerseyQualityTypeId == JerseyQualityType.Authentic.Id;
+        public bool DisplayGameDate => DisplayGameStyleType && 
+                                       (GameStyleTypeId == GameStyleType.GameUsed.Id || GameStyleTypeId == GameStyleType.GameIssued.Id);
 
-        public bool DisplayGameDate => DisplayAuthenticType && 
-                                       (AuthenticTypeId == AuthenticType.GameUsed.Id || AuthenticTypeId == AuthenticType.GameIssued.Id);
+        public bool DisplayGameStyleType => JerseyQualityTypeId == JerseyQualityType.Authentic.Id;
 
         public DateTime? GameDate { get; set; }
 
         public int GamePersonId { get; set; }
+
+        public int GameStyleTypeId { get; set; }
 
         public bool HasPerson => PersonIds.Any();
 

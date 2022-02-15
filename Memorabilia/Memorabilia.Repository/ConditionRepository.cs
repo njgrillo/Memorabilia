@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+
 namespace Memorabilia.Repository
 {
     public class ConditionRepository : BaseRepository<Domain.Entities.Condition>, IConditionRepository
@@ -33,12 +34,12 @@ namespace Memorabilia.Repository
 
         public async Task<Domain.Entities.Condition> Get(int id)
         {
-            return await Condition.SingleOrDefaultAsync(user => user.Id == id).ConfigureAwait(false);
+            return await Condition.SingleOrDefaultAsync(condition => condition.Id == id).ConfigureAwait(false);
         }
 
         public async Task<IEnumerable<Domain.Entities.Condition>> GetAll()
         {
-            return await Condition.ToListAsync().ConfigureAwait(false);
+            return (await Condition.ToListAsync().ConfigureAwait(false)).OrderBy(condition => condition.Name);
         }
 
         public async Task Update(Domain.Entities.Condition condition, CancellationToken cancellationToken = default)

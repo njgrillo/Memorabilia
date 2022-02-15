@@ -86,6 +86,8 @@ namespace Memorabilia.Domain.Entities
         public List<MemorabiliaSport> Sports { get; private set; } = new ();
 
         public List<MemorabiliaTeam> Teams { get; private set; } = new ();
+        
+        public User User { get; set; }
 
         public int UserId { get; private set; }        
 
@@ -105,12 +107,12 @@ namespace Memorabilia.Domain.Entities
             MemorabiliaAcquisition.Set(acquisitionTypeId, acquiredDate, cost, purchaseTypeId);
         }
 
-        public void SetBaseball(string anniversary,
-                                int? authenticTypeId,
+        public void SetBaseball(string anniversary,                                
                                 int? baseballTypeId,  
                                 int brandId, 
                                 int commissionerId, 
                                 DateTime? gameDate,
+                                int? gameStyleTypeId,
                                 int levelTypeId,
                                 int? personId,
                                 int sizeId, 
@@ -124,7 +126,7 @@ namespace Memorabilia.Domain.Entities
             SetSports(sportId);
             SetBaseballType(baseballTypeId.Value, year, anniversary);
             SetCommissioner(commissionerId);
-            SetGame(authenticTypeId, personId, gameDate);            
+            SetGame(gameStyleTypeId, personId, gameDate);            
 
             if (!personId.HasValue)
                 People = new List<MemorabiliaPerson>();
@@ -198,10 +200,10 @@ namespace Memorabilia.Domain.Entities
                                                              DateTime.UtcNow)).ToList();
         }
 
-        public void SetJersey(int? authenticTypeId,
-                              int brandId, 
+        public void SetJersey(int brandId, 
                               DateTime? gameDate,
                               int? gamePersonId,
+                              int? gameStyleTypeId,
                               int levelTypeId,
                               int[] personIds,
                               int qualityTypeId,                              
@@ -214,7 +216,7 @@ namespace Memorabilia.Domain.Entities
             SetBrand(brandId);
             SetLevelType(levelTypeId);
             SetSize(sizeId);
-            SetGame(authenticTypeId, gamePersonId, gameDate);
+            SetGame(gameStyleTypeId, gamePersonId, gameDate);
             SetPeople(personIds);
             SetSports(sportIds);
             SetTeams(teamIds);
@@ -299,20 +301,20 @@ namespace Memorabilia.Domain.Entities
             }
         }
 
-        private void SetGame(int? authenticTypeId, int? personId, DateTime? gameDate)
+        private void SetGame(int? gameStyleTypeId, int? personId, DateTime? gameDate)
         {
-            if (authenticTypeId.HasValue)
+            if (gameStyleTypeId.HasValue)
             {
                 if (ItemType.Id == Constants.ItemType.Jersey.Id && Jersey.JerseyQualityTypeId != Constants.JerseyQualityType.Authentic.Id)
                     return;
 
                 if (Game == null)
                 {
-                    Game = new MemorabiliaGame(Id, authenticTypeId.Value, personId, gameDate);
+                    Game = new MemorabiliaGame(Id, gameStyleTypeId.Value, personId, gameDate);
                     return;
                 }
 
-                Game.Set(authenticTypeId.Value, personId, gameDate);
+                Game.Set(gameStyleTypeId.Value, personId, gameDate);
             }
             else
             {

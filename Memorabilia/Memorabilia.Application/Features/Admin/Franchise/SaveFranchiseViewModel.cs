@@ -16,10 +16,12 @@ namespace Memorabilia.Application.Features.Admin.Franchise
         }
 
         [Required]
-        public int FoundYear { get; set; }
+        public int FoundYear { get; set; } = 1900;
 
         [StringLength(200, ErrorMessage = "Image Path is too long.")]
         public string ImagePath { get; set; }
+
+        public override string ItemTitle => "Franchise";
 
         [Required]
         [StringLength(100, ErrorMessage = "Location is too long.")]
@@ -31,7 +33,9 @@ namespace Memorabilia.Application.Features.Admin.Franchise
         [MinLength(1, ErrorMessage = "Name is too short.")]
         public string Name { get; set; }
 
-        public override string PageTitle => $"{(Id > 0 ? "Edit" : "Add")} Franchise";
+        public override string PageTitle => $"{(Id > 0 ? "Edit" : "Add")} {ItemTitle}";
+
+        public override string RoutePrefix => "Franchises";
 
         [Required]
         public int SportId { get; set; }

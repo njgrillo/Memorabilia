@@ -19,18 +19,18 @@ namespace Memorabilia.Domain.Constants
 
         public static readonly LevelType[] All =
         {
-            College,
-            HighSchool,
-            Professional,
             Amateur,
-            Other,
-            None,
-            Unknown,
-            TripleA,
+            ClassA,
+            College,
             DoubleA,
             HighClassA,
-            ClassA,
-            Rookie
+            HighSchool,
+            None,
+            Other,
+            Professional,
+            Rookie,
+            TripleA,
+            Unknown
         };
 
         private LevelType(int id, string name, string abbreviation)

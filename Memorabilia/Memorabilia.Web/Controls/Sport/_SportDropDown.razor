@@ -1,8 +1,9 @@
 ﻿@using Memorabilia.Application.Features.Admin.Sport
+@using Memorabilia.Domain.Constants
 
-<InputSelect class="form-control" id="sport" @bind-Value="@Value" @oninput="@OnInputChange" >
+<InputSelect id="sport" class="form-control" @bind-Value="@Value" @oninput="@OnInputChange" >
     <option value="0">--Select--</option>
-    @foreach (var sport in Domain.Constants.Sport.All)
+    @foreach (var sport in Sport.All)
     {
         <option value="@sport.Id">@sport.Name</option>
     }

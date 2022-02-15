@@ -12,6 +12,8 @@
 
         public int MemorabiliaId { get; private set; }
 
+        public Person Person { get; set; }
+
         public int PersonId { get; private set; }
 
         public void Set(int personId)

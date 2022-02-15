@@ -34,12 +34,12 @@ namespace Memorabilia.Repository
 
         public async Task<Domain.Entities.PrivacyType> Get(int id)
         {
-            return await PrivacyType.SingleOrDefaultAsync(user => user.Id == id).ConfigureAwait(false);
+            return await PrivacyType.SingleOrDefaultAsync(privacyType => privacyType.Id == id).ConfigureAwait(false);
         }
 
         public async Task<IEnumerable<Domain.Entities.PrivacyType>> GetAll()
         {
-            return await PrivacyType.ToListAsync().ConfigureAwait(false);
+            return (await PrivacyType.ToListAsync().ConfigureAwait(false)).OrderBy(privacyType => privacyType.Name);
         }
 
         public async Task Update(Domain.Entities.PrivacyType privacyType, CancellationToken cancellationToken = default)

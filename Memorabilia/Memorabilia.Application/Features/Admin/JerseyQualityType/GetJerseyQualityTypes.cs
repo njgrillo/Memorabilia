@@ -25,8 +25,6 @@ namespace Memorabilia.Application.Features.Admin.JerseyQualityType
             }
         }
 
-        public class Query : IQuery<JerseyQualityTypesViewModel>
-        {
-        }
+        public class Query : IQuery<JerseyQualityTypesViewModel> { }
     }
 }

@@ -25,8 +25,6 @@ namespace Memorabilia.Application.Features.Admin.InscriptionType
             }
         }
 
-        public class Query : IQuery<InscriptionTypesViewModel>
-        {
-        }
+        public class Query : IQuery<InscriptionTypesViewModel> { }
     }
 }

@@ -26,8 +26,6 @@ namespace Memorabilia.Application.Features.Admin.Person
             }
         }
 
-        public class Query : IQuery<PeopleViewModel>
-        {
-        }
+        public class Query : IQuery<PeopleViewModel> { }
     }
 }

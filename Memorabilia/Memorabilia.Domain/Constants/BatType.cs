@@ -13,8 +13,8 @@ namespace Memorabilia.Domain.Constants
         public static readonly BatType[] All =
         {
             BigStick,
-            GameModel,
             Commemorative,
+            GameModel,            
             None,
             Other
         };
@@ -34,7 +34,7 @@ namespace Memorabilia.Domain.Constants
 
         public static BatType Find(int id)
         {
-            return All.SingleOrDefault(BatType => BatType.Id == id);
+            return All.SingleOrDefault(batType => batType.Id == id);
         }
     }
 }

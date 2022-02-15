@@ -14,10 +14,10 @@ namespace Memorabilia.Domain.Constants
         public static readonly JerseyQualityType[] All =
         {
             Authentic,
-            Replica,
             China,
             Custom,
             Other,
+            Replica,            
             Unknown
         };
 

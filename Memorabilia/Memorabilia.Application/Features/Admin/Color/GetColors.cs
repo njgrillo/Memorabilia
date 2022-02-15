@@ -25,8 +25,6 @@ namespace Memorabilia.Application.Features.Admin.Color
             }
         }
 
-        public class Query : IQuery<ColorsViewModel>
-        {
-        }
+        public class Query : IQuery<ColorsViewModel> { }
     }
 }

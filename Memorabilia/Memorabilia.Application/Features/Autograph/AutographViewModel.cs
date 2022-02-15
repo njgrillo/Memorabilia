@@ -32,7 +32,7 @@ namespace Memorabilia.Application.Features.Autograph
 
         public decimal? EstimatedValue => _autograph.EstimatedValue;
 
-        public string Grade => _autograph.Grade;    
+        public int? Grade => _autograph.Grade;    
 
         public int Id => _autograph.Id;
 
@@ -51,6 +51,8 @@ namespace Memorabilia.Application.Features.Autograph
         public int PersonId => _autograph.PersonId;
 
         public string PersonName => _autograph.Person?.FullName;
+
+        public string UserFirstName => _autograph.Memorabilia.User.FirstName;
 
         public int WritingInstrumentId => _autograph.WritingInstrumentId;
 

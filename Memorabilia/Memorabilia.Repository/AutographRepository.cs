@@ -23,7 +23,7 @@ namespace Memorabilia.Repository
                                                                            .Include(autograph => autograph.Memorabilia)
                                                                            .Include(autograph => autograph.Person)
                                                                            .Include(autograph => autograph.Personalization)
-                                                                           .Include(autograph => autograph.Spots);
+                                                                           .Include(autograph => autograph.Spot);
 
         public async Task Add(Domain.Entities.Autograph autograph, CancellationToken cancellationToken = default)
         {
@@ -44,10 +44,13 @@ namespace Memorabilia.Repository
             return await Autograph.SingleOrDefaultAsync(autograph => autograph.Id == id).ConfigureAwait(false);
         }
 
-        public async Task<IEnumerable<Domain.Entities.Autograph>> GetAll(int? memorabiliaId = null)
+        public async Task<IEnumerable<Domain.Entities.Autograph>> GetAll(int? memorabiliaId = null, int? userId = null)
         {
             if (memorabiliaId.HasValue)
                 return await Autograph.Where(autograph => autograph.MemorabiliaId == memorabiliaId).ToListAsync().ConfigureAwait(false);
+
+            if (userId.HasValue)
+                return await Autograph.Where(autograph => autograph.Memorabilia.UserId == userId).ToListAsync().ConfigureAwait(false);
 
             return await Autograph.ToListAsync().ConfigureAwait(false);
         }

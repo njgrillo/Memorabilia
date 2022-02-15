@@ -29,7 +29,9 @@ namespace Memorabilia.Application.Features.Memorabilia.Baseball
 
         public MemorabiliaSize MemorabiliaSize => _memorabilia.Size;
 
-        public IEnumerable<MemorabiliaSport> MemorabiliaSports => _memorabilia.Sports; 
+        public IEnumerable<MemorabiliaSport> MemorabiliaSports => _memorabilia.Sports;
+
+        public MemorabiliaPerson Person => _memorabilia.People.FirstOrDefault();
 
         public int? PersonId => _memorabilia.People.FirstOrDefault()?.PersonId;
 

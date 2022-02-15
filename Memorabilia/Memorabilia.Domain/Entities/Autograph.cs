@@ -14,8 +14,7 @@ namespace Memorabilia.Domain.Entities
                          int conditionId,
                          decimal? cost,
                          decimal? estimatedValue,
-                         string grade,
-                         string greeting,
+                         int? grade,
                          int memorabiliaId,                         
                          string personalizationText,
                          int personId,
@@ -31,8 +30,10 @@ namespace Memorabilia.Domain.Entities
             WritingInstrumentId = writingInstrumentId;
             CreateDate = DateTime.UtcNow;
 
-            Acquisition = new Acquisition(acquisitionTypeId, acquiredDate, cost, purchaseTypeId);
-            Personalization = new Personalization(Id, greeting, personalizationText);
+            Acquisition = new Acquisition(acquisitionTypeId, acquiredDate, cost, purchaseTypeId); 
+            
+            if (!string.IsNullOrEmpty(personalizationText))
+                Personalization = new Personalization(Id, personalizationText);
         } 
 
         public Acquisition Acquisition { get; private set; }
@@ -49,7 +50,7 @@ namespace Memorabilia.Domain.Entities
 
         public decimal? EstimatedValue { get; private set; }
 
-        public string Grade { get; private set; }
+        public int? Grade { get; private set; }
 
         public List<AutographImage> Images { get; private set; } = new();
 
@@ -67,7 +68,7 @@ namespace Memorabilia.Domain.Entities
 
         public int PersonId { get; private set; }
 
-        public List<AutographSpot> Spots { get; private set; } = new();
+        public AutographSpot Spot { get; private set; } 
 
         public int WritingInstrumentId { get; private set; }
 
@@ -77,8 +78,7 @@ namespace Memorabilia.Domain.Entities
                         int conditionId,
                         decimal? cost,
                         decimal? estimatedValue,
-                        string grade,
-                        string greeting,
+                        int? grade,
                         string personalizationText,
                         int personId,
                         int? purchaseTypeId,
@@ -93,7 +93,7 @@ namespace Memorabilia.Domain.Entities
             LastModifiedDate = DateTime.UtcNow;
 
             Acquisition.Set(acquisitionTypeId, acquiredDate, cost, purchaseTypeId);
-            Personalization.Set(greeting, personalizationText);
+            Personalization.Set(personalizationText);
         }
 
         public void SetAuthentication(int id, int authenticationCompanyId, bool? hasHologram, bool? hasLetter, string verification)
@@ -109,17 +109,45 @@ namespace Memorabilia.Domain.Entities
             authentication.Set(authenticationCompanyId, hasHologram, hasLetter, verification);
         }
 
-        public void SetInscription(int id, int inscriptionTypeId, string text)
+        public void SetImages(IEnumerable<string> filePaths, string primaryImageFilePath)
+        {
+            if (!filePaths.Any())
+            {
+                Images = new List<AutographImage>();
+                return;
+            }
+
+            Images = filePaths.Select(filePath =>
+                                        new AutographImage(Id,
+                                                           filePath,
+                                                           filePath == primaryImageFilePath
+                                                                 ? Constants.ImageType.Primary.Id
+                                                                 : Constants.ImageType.Secondary.Id,
+                                                           DateTime.UtcNow)).ToList();
+        }
+
+        public void SetInscription(int id, int inscriptionTypeId, string inscriptionText)
         {
             var inscription = Inscriptions.SingleOrDefault(inscription => inscription.Id == id);
 
             if (inscription == null)
             {
-                Inscriptions.Add(new Inscription(Id, inscriptionTypeId, text));
+                Inscriptions.Add(new Inscription(Id, inscriptionTypeId, inscriptionText));
                 return;
             }
 
-            inscription.Set(inscriptionTypeId, text);
+            inscription.Set(inscriptionTypeId, inscriptionText);
+        }
+
+        public void SetSpot(int spotId)
+        {
+            if (Spot == null)
+            {
+                Spot = new AutographSpot(Id, spotId);
+                return;
+            }
+
+            Spot.Set(spotId);
         }
     }
 }

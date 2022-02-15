@@ -18,6 +18,7 @@
 
   <ItemGroup>
     <PackageReference Include="Blazored.Toast" Version="3.2.2" />
+    <PackageReference Include="Blazored.Typeahead" Version="4.6.0" />
     <PackageReference Include="Demo.Framework" Version="1.0.10" />
     <PackageReference Include="MediatR" Version="4.1.0" />
     <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="4.1.0" />
@@ -28,6 +29,10 @@
     <ProjectReference Include="..\Memorabilia.Application\Memorabilia.Application.csproj" />
     <ProjectReference Include="..\Memorabilia.Domain\Memorabilia.Domain.csproj" />
     <ProjectReference Include="..\Memorabilia.Repository\Memorabilia.Repository.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\userimages\" />
   </ItemGroup>
 
 </Project>

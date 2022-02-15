@@ -4,6 +4,7 @@
 @using Memorabilia.Application.Features.Admin.Franchise
 @using Memorabilia.Application.Features.Admin.Sport
 @using Memorabilia.Application.Features.Admin.Team
+@using Memorabilia.Domain.Constants
 
 @inject CommandRouter _commandRouter
 @inject ProtectedLocalStorage _localStorage
@@ -34,7 +35,7 @@ else
                 <div class="form-group">
                     <label for="sports">Sports</label>
                     <select value="@_sportId" @onchange="OnChangeSport">
-                        @foreach (var sport in Memorabilia.Domain.Constants.Sport.All)
+                        @foreach (var sport in Sport.All)
                         {
                             <option value="@sport.Id">@sport.Name</option>
                         }

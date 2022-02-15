@@ -25,8 +25,6 @@ namespace Memorabilia.Application.Features.Admin.ImageType
             }
         }
 
-        public class Query : IQuery<ImageTypesViewModel>
-        {
-        }
+        public class Query : IQuery<ImageTypesViewModel> { }
     }
 }

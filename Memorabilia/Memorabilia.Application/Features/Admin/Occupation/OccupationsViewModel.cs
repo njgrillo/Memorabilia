@@ -9,6 +9,10 @@ namespace Memorabilia.Application.Features.Admin.Occupation
 
         public OccupationsViewModel(IEnumerable<DomainEntity> domainEntities) : base(domainEntities) { }
 
+        public override string ItemTitle => "Occupation";
+
         public override string PageTitle => "Occupations";
+
+        public override string RoutePrefix => "Occupations";
     }
 }

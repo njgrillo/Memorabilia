@@ -20,6 +20,6 @@ namespace Memorabilia.Application.Features.Admin
         [MinLength(1, ErrorMessage = "Name is too short.")]
         public string Name { get; set; }
 
-        //public override string PageTitle => $"{(Id > 0 ? "Edit" : "Add")} Bill";
+        public override string PageTitle => $"{(Id > 0 ? "Edit" : "Add")}";
     }
 }

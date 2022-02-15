@@ -36,14 +36,19 @@ namespace Memorabilia.Repository
 
         public async Task<Domain.Entities.Commissioner> Get(int id)
         {
-            return await Commissioner.SingleOrDefaultAsync(user => user.Id == id).ConfigureAwait(false);
+            return await Commissioner.SingleOrDefaultAsync(commissioner => commissioner.Id == id).ConfigureAwait(false);
         }
 
         public async Task<IEnumerable<Domain.Entities.Commissioner>> GetAll(int? sportId = null)
         {
             return !sportId.HasValue
-                ? await Commissioner.ToListAsync().ConfigureAwait(false)
-                : await Commissioner.Where(commissioner => commissioner.SportId == sportId).ToListAsync().ConfigureAwait(false);
+                ? (await Commissioner.ToListAsync()
+                                     .ConfigureAwait(false)).OrderBy(commissioner => commissioner.Sport.Name)
+                                                            .ThenByDescending(commissioner => commissioner.BeginYear)
+                : (await Commissioner.Where(commissioner => commissioner.SportId == sportId)
+                                     .ToListAsync()
+                                     .ConfigureAwait(false)).OrderBy(commissioner => commissioner.Sport.Name)
+                                                            .ThenByDescending(commissioner => commissioner.BeginYear);
         }
 
         public async Task Update(Domain.Entities.Commissioner commissioner, CancellationToken cancellationToken = default)

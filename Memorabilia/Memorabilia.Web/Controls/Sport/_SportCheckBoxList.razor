@@ -5,7 +5,7 @@
 
 @code {
     [Parameter]
-    public List<int> SelectedValues { get; set; } = new List<int>();
+    public List<int> SelectedValues { get; set; } = new();
 
     [Parameter]
     public IEnumerable<Domain.Constants.Sport> Sports { get; set; }

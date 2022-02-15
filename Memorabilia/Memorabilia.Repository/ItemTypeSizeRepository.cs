@@ -35,14 +35,19 @@ namespace Memorabilia.Repository
 
         public async Task<ItemTypeSize> Get(int id)
         {
-            return await ItemTypeSize.SingleOrDefaultAsync(user => user.Id == id).ConfigureAwait(false);
+            return await ItemTypeSize.SingleOrDefaultAsync(itemTypeSize => itemTypeSize.Id == id).ConfigureAwait(false);
         }
 
         public async Task<IEnumerable<ItemTypeSize>> GetAll(int? itemTypeId = null)
         {
             return !itemTypeId.HasValue 
-                ? await ItemTypeSize.ToListAsync().ConfigureAwait(false)
-                : await ItemTypeSize.Where(itemTypeSize => itemTypeSize.ItemTypeId == itemTypeId).ToListAsync().ConfigureAwait(false);
+                ? (await ItemTypeSize.ToListAsync()
+                                     .ConfigureAwait(false)).OrderBy(itemTypeSize => itemTypeSize.ItemTypeName)
+                                                            .ThenBy(itemTypeSize => itemTypeSize.SizeName)
+                : (await ItemTypeSize.Where(itemTypeSize => itemTypeSize.ItemTypeId == itemTypeId)
+                                     .ToListAsync()
+                                     .ConfigureAwait(false)).OrderBy(itemTypeSize => itemTypeSize.ItemTypeName)
+                                                            .ThenBy(itemTypeSize => itemTypeSize.SizeName);
         }
 
         public async Task Update(ItemTypeSize itemTypeSize, CancellationToken cancellationToken = default)

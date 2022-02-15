@@ -34,7 +34,7 @@ namespace Memorabilia.Domain.Constants
 
         public static JerseyType Find(int id)
         {
-            return All.SingleOrDefault(JerseyType => JerseyType.Id == id);
+            return All.SingleOrDefault(jerseyType => jerseyType.Id == id);
         }
     }
 }

@@ -9,11 +9,15 @@ namespace Memorabilia.Application.Features.Admin.Commissioner
 
         public CommissionersViewModel(IEnumerable<Domain.Entities.Commissioner> commissioners)
         {
-            Commissioners = commissioners.Select(commissioner => new CommissionerViewModel(commissioner));
+            Commissioners = commissioners.Select(commissioner => new CommissionerViewModel(commissioner)).ToList();
         }
 
-        public IEnumerable<CommissionerViewModel> Commissioners { get; set; } = Enumerable.Empty<CommissionerViewModel>();
+        public List<CommissionerViewModel> Commissioners { get; set; } = new();
+
+        public override string ItemTitle => "Commissioner";
 
         public override string PageTitle => "Commissioners";
+
+        public override string RoutePrefix => "Commissioners";
     }
 }

@@ -22,10 +22,10 @@ namespace Memorabilia.Application.Features.Memorabilia.Jersey
             {
                 var memorabilia = await _memorabiliaRepository.Get(command.MemorabiliaId).ConfigureAwait(false);
 
-                memorabilia.SetJersey(command.AuthenticTypeId,
-                                      command.BrandId,
+                memorabilia.SetJersey(command.BrandId,
                                       command.GameDate,
                                       command.GamePersonId,
+                                      command.GameStyleTypeId,
                                       command.LevelTypeId,
                                       command.PersonIds,
                                       command.QualityTypeId,
@@ -46,15 +46,15 @@ namespace Memorabilia.Application.Features.Memorabilia.Jersey
             public Command(SaveJerseyViewModel viewModel)
             {
                 _viewModel = viewModel;
-            }
-
-            public int? AuthenticTypeId => _viewModel.AuthenticTypeId > 0 ? _viewModel.AuthenticTypeId : 0;
+            }            
 
             public int BrandId => _viewModel.BrandId;
 
             public DateTime? GameDate => _viewModel.GameDate;
 
-            public int? GamePersonId => _viewModel.GamePersonId > 0 ? _viewModel.GamePersonId : null;            
+            public int? GamePersonId => _viewModel.GamePersonId > 0 ? _viewModel.GamePersonId : null;
+
+            public int? GameStyleTypeId => _viewModel.GameStyleTypeId > 0 ? _viewModel.GameStyleTypeId : 0;
 
             public int LevelTypeId => _viewModel.LevelTypeId;
 

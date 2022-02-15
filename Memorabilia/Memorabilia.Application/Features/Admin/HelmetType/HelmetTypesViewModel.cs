@@ -9,6 +9,10 @@ namespace Memorabilia.Application.Features.Admin.HelmetType
 
         public HelmetTypesViewModel(IEnumerable<DomainEntity> domainEntities) : base(domainEntities) { }
 
+        public override string ItemTitle => "Helmet Type";
+
         public override string PageTitle => "Helmet Types";
+
+        public override string RoutePrefix => "HelmetTypes";
     }
 }

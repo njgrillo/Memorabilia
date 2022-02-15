@@ -29,9 +29,9 @@ namespace Memorabilia.Domain.Entities
 
         public string Name { get; private set; }
 
-        public Constants.Sport Sport => Constants.Sport.Find(SportId);
-
         public int SportId { get; private set; }
+
+        public string SportName => Constants.Sport.Find(SportId)?.Name;
 
         public void Set(string name, string location, int foundYear)
         {

@@ -4,22 +4,18 @@
     {
         public Personalization() { }
 
-        public Personalization(int autographId, string greeting, string text)
+        public Personalization(int autographId, string text)
         {
             AutographId = autographId;
-            Greeting = greeting;
             Text = text;
         }
 
         public int AutographId { get; private set; }
 
-        public string Greeting  { get; private set; }
-
         public string Text { get; private set; }
 
-        public void Set(string greeting, string text)
+        public void Set(string text)
         {
-            Greeting = greeting;
             Text = text;
         }
     }

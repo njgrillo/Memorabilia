@@ -44,9 +44,7 @@ namespace Memorabilia.Application.Features.Admin.AuthenticationCompany
 
         public class Command : DomainEntityCommand
         {
-            public Command(SaveDomainViewModel viewModel) : base(viewModel)
-            {
-            }
+            public Command(SaveDomainViewModel viewModel) : base(viewModel) { }
         }
     }
 }

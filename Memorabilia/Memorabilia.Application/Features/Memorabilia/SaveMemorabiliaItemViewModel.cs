@@ -40,6 +40,8 @@ namespace Memorabilia.Application.Features.Memorabilia
 
         public decimal? EstimatedValue { get; set; }
 
+        public string ImagePath => $"images/{(!string.IsNullOrEmpty(ItemTypeName) ? ItemTypeName + ".jpg" : "itemtypes.jpg")}";
+
         [Required]
         [Range(1, int.MaxValue, ErrorMessage = "Item Type is required.")]
         public int ItemTypeId { get; set; }

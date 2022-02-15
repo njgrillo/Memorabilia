@@ -9,6 +9,10 @@ namespace Memorabilia.Application.Features.Admin.FootballType
 
         public FootballTypesViewModel(IEnumerable<DomainEntity> domainEntities) : base(domainEntities) { }
 
+        public override string ItemTitle => "Football Type";
+
         public override string PageTitle => "Football Types";
+
+        public override string RoutePrefix => "FootballTypes";
     }
 }

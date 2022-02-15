@@ -9,6 +9,10 @@ namespace Memorabilia.Application.Features.Admin.Brand
 
         public BrandsViewModel(IEnumerable<DomainEntity> domainEntities) : base(domainEntities) { }
 
+        public override string ItemTitle => "Brand";
+
         public override string PageTitle => "Brands";
+
+        public override string RoutePrefix => "Brands";
     }
 }

@@ -1,10 +1,7 @@
 ﻿using Framework.Domain.Command;
 using Framework.Handler;
-using Memorabilia.Application.Features.Autograph.Authentication;
-using Memorabilia.Application.Features.Autograph.Inscription;
 using Memorabilia.Domain;
 using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Memorabilia.Application.Features.Autograph
@@ -33,17 +30,15 @@ namespace Memorabilia.Application.Features.Autograph
                                                               command.Cost,
                                                               command.EstimatedValue,
                                                               command.Grade,
-                                                              command.Greeting,
                                                               command.MemorabiliaId,
                                                               command.PersonalizationText,
                                                               command.PersonId,
                                                               command.PurchaseTypeId,
                                                               command.WritingInstrumentId);
 
-                    UpdateAuthentications(autograph, command.Authentications);
-                    UpdateInscriptions(autograph, command.Inscriptions);
-
                     await _autographRepository.Add(autograph).ConfigureAwait(false);
+
+                    command.Id = autograph.Id;
 
                     return;
                 }
@@ -64,36 +59,12 @@ namespace Memorabilia.Application.Features.Autograph
                               command.Cost,
                               command.EstimatedValue,
                               command.Grade,
-                              command.Greeting,
                               command.PersonalizationText,
                               command.PersonId,
                               command.PurchaseTypeId,
                               command.WritingInstrumentId);
 
-                UpdateAuthentications(autograph, command.Authentications);
-                UpdateInscriptions(autograph, command.Inscriptions);
-
                 await _autographRepository.Update(autograph).ConfigureAwait(false);
-            }
-
-            private static void UpdateAuthentications(Domain.Entities.Autograph autograph, ICollection<SaveAuthenticationViewModel> authentications)
-            {
-                foreach (var authentication in authentications)
-                {
-                    autograph.SetAuthentication(authentication.Id,
-                                                authentication.AuthenticationCompanyId,
-                                                authentication.HasHologram,
-                                                authentication.HasLetter,
-                                                authentication.Verification);
-                }
-            }
-
-            private static void UpdateInscriptions(Domain.Entities.Autograph autograph, ICollection<SaveInscriptionViewModel> inscriptions)
-            {
-                foreach (var inscription in inscriptions)
-                {
-                    autograph.SetInscription(inscription.Id, inscription.InscriptionTypeId, inscription.InscriptionText);
-                }
             }
         }
 
@@ -104,13 +75,12 @@ namespace Memorabilia.Application.Features.Autograph
             public Command(SaveAutographViewModel viewModel)
             {
                 _viewModel = viewModel;
+                Id = _viewModel.Id;
             }
 
             public DateTime? AcquiredDate => _viewModel.AcquiredDate;
 
             public int AcquisitionTypeId => _viewModel.AcquisitionTypeId;
-
-            public ICollection<SaveAuthenticationViewModel> Authentications => _viewModel.Authentications;
 
             public int ColorId => _viewModel.ColorId;
 
@@ -122,13 +92,9 @@ namespace Memorabilia.Application.Features.Autograph
 
             public decimal? EstimatedValue => _viewModel.EstimatedValue;
 
-            public string Grade => _viewModel.Grade;
+            public int? Grade => _viewModel.Grade;
 
-            public string Greeting => _viewModel.Greeting;
-
-            public int Id => _viewModel.Id;
-
-            public ICollection<SaveInscriptionViewModel> Inscriptions => _viewModel.Inscriptions;
+            public int Id { get; set; }
 
             public bool IsDeleted => _viewModel.IsDeleted;
 
@@ -142,7 +108,7 @@ namespace Memorabilia.Application.Features.Autograph
 
             public string PersonalizationText => _viewModel.PersonalizationText;
 
-            public int PersonId => _viewModel.PersonId;
+            public int PersonId => _viewModel.Person.Id;
 
             public int? PurchaseTypeId => _viewModel.PurchaseTypeId > 0 ? _viewModel.PurchaseTypeId : null;
 

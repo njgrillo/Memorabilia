@@ -28,7 +28,7 @@ namespace Memorabilia.Domain.Constants
 
         public static MagazineType Find(int id)
         {
-            return All.SingleOrDefault(MagazineType => MagazineType.Id == id);
+            return All.SingleOrDefault(magazineType => magazineType.Id == id);
         }
     }
 }

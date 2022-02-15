@@ -1,6 +1,8 @@
-﻿<InputSelect class="form-control" id="basketballType" @bind-Value="@Value" @oninput="@OnInputChange" >
+﻿@using Memorabilia.Domain.Constants
+
+<InputSelect id="basketballType" class="form-control" @bind-Value="@Value" @oninput="@OnInputChange" >
     <option value="0">--Select--</option>
-    @foreach (var basketballType in Domain.Constants.BasketballType.All)
+    @foreach (var basketballType in BasketballType.All)
     {
         <option value="@basketballType.Id">@basketballType.Name</option>
     }

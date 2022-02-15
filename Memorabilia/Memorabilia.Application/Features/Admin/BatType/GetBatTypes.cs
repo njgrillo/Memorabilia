@@ -25,8 +25,6 @@ namespace Memorabilia.Application.Features.Admin.BatType
             }
         }
 
-        public class Query : IQuery<BatTypesViewModel>
-        {
-        }
+        public class Query : IQuery<BatTypesViewModel> { }
     }
 }

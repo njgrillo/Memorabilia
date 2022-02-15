@@ -27,9 +27,7 @@ namespace Memorabilia.Application.Features.Admin.ImageType
 
         public class Query : DomainQuery
         {
-            public Query(int id) : base(id)
-            {
-            }
+            public Query(int id) : base(id) { }
         }
     }
 }

@@ -34,12 +34,12 @@ namespace Memorabilia.Repository
 
         public async Task<Domain.Entities.ItemType> Get(int id)
         {
-            return await ItemType.SingleOrDefaultAsync(user => user.Id == id).ConfigureAwait(false);
+            return await ItemType.SingleOrDefaultAsync(itemType => itemType.Id == id).ConfigureAwait(false);
         }
 
         public async Task<IEnumerable<Domain.Entities.ItemType>> GetAll()
         {
-            return await ItemType.ToListAsync().ConfigureAwait(false);
+            return (await ItemType.ToListAsync().ConfigureAwait(false)).OrderBy(itemType => itemType.Name);
         }
 
         public async Task Update(Domain.Entities.ItemType itemType, CancellationToken cancellationToken = default)

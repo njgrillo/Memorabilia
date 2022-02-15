@@ -24,7 +24,7 @@ else
         </div>
     </div>
     <br />
-    <table class="table">
+    <table class="table" style="border: 1px solid black;">
         <thead>
             <tr>
                 <th>Name</th>
@@ -45,7 +45,7 @@ else
                                  src="images/pencil.png" 
                                  height="25" 
                                  width="25" 
-                                 @onclick="@(_ => _navigation.NavigateTo($"AuthenticationCompanies/Edit/{domainEntity.Id}"))" />
+                                 @onclick="@(_ => _navigation.NavigateTo($"{_viewModel.RoutePrefix}/Edit/{domainEntity.Id}"))" />
                         </_Tooltip>                        
                     </td>
                     <td>
@@ -64,7 +64,7 @@ else
     <div class="row">
         <div class="col-md-12" style="text-align: center">
             <div class="col-md-12" style="text-align: center">
-                <a href="AuthenticationCompanies/Add">Add Authentication Company</a>
+                <a href="AuthenticationCompanies/Add">Add @_viewModel.ItemTitle</a>
             </div>
         </div>
     </div>
@@ -84,15 +84,17 @@ else
             return;
         }
 
-        var viewModel = new SaveDomainViewModel(_viewModel.DomainEntities.Single(domainEntity => domainEntity.Id == _deletedItemId));
+        var deletedItem = _viewModel.DomainEntities.Single(domainEntity => domainEntity.Id == _deletedItemId);
+        var viewModel = new SaveDomainViewModel(deletedItem);
         viewModel.IsDeleted = true;
 
         var command = new SaveAuthenticationCompany.Command(viewModel);
 
         await _commandRouter.Send(command).ConfigureAwait(false);
-        await OnInitializedAsync().ConfigureAwait(false);
 
-        _toastService.ShowSuccess("Authentication Company was deleted successfully!", _viewModel.PageTitle);
+        _viewModel.DomainEntities.Remove(deletedItem);
+
+        _toastService.ShowSuccess($"{_viewModel.ItemTitle} was deleted successfully!", _viewModel.PageTitle);
     }
 
     protected override async Task OnInitializedAsync()

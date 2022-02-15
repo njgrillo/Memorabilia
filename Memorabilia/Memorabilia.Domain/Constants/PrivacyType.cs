@@ -25,7 +25,7 @@ namespace Memorabilia.Domain.Constants
 
         public static PrivacyType Find(int id)
         {
-            return All.SingleOrDefault(rivacyType => rivacyType.Id == id);
+            return All.SingleOrDefault(privacyType => privacyType.Id == id);
         }
     }
 }

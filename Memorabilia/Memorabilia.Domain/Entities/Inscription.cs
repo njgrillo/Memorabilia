@@ -4,23 +4,23 @@
     {
         public Inscription() { }
 
-        public Inscription(int autographId, int inscriptionTypeId, string text)
+        public Inscription(int autographId, int inscriptionTypeId, string inscriptionText)
         {
             AutographId = autographId;
             InscriptionTypeId = inscriptionTypeId;
-            Text = text;
+            InscriptionText = inscriptionText;
         }        
 
         public int AutographId { get; private set; }
 
-        public int InscriptionTypeId { get; private set; }
+        public string InscriptionText { get; private set; }
 
-        public string Text { get; private set; }
+        public int InscriptionTypeId { get; private set; }        
 
-        public void Set(int inscriptionTypeId, string text)
+        public void Set(int inscriptionTypeId, string inscriptionText)
         {
             InscriptionTypeId = inscriptionTypeId;
-            Text = text;
+            InscriptionText = inscriptionText;
         }
     }
 }

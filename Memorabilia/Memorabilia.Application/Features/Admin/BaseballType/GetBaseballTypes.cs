@@ -19,14 +19,10 @@ namespace Memorabilia.Application.Features.Admin.BaseballType
             {
                 var baseballTypes = await _baseballTypeRepository.GetAll().ConfigureAwait(false);
 
-                var viewModel = new BaseballTypesViewModel(baseballTypes);
-
-                return viewModel;
+                return new BaseballTypesViewModel(baseballTypes);
             }
         }
 
-        public class Query : IQuery<BaseballTypesViewModel>
-        {
-        }
+        public class Query : IQuery<BaseballTypesViewModel> { }
     }
 }

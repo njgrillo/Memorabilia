@@ -14,174 +14,188 @@ namespace Memorabilia.Web.Pages.Autograph
     using Microsoft.AspNetCore.Components;
 #nullable restore
 #line 1 "C:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\_Imports.razor"
-using System.Net.Http;
-
-#line default
-#line hidden
-#nullable disable
-#nullable restore
-#line 2 "C:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\_Imports.razor"
-using Microsoft.AspNetCore.Authorization;
-
-#line default
-#line hidden
-#nullable disable
-#nullable restore
-#line 3 "C:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\_Imports.razor"
-using Microsoft.AspNetCore.Components.Authorization;
-
-#line default
-#line hidden
-#nullable disable
-#nullable restore
-#line 4 "C:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\_Imports.razor"
-using Microsoft.AspNetCore.Components.Forms;
-
-#line default
-#line hidden
-#nullable disable
-#nullable restore
-#line 5 "C:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\_Imports.razor"
-using Microsoft.AspNetCore.Components.Routing;
-
-#line default
-#line hidden
-#nullable disable
-#nullable restore
-#line 6 "C:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\_Imports.razor"
-using Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage;
-
-#line default
-#line hidden
-#nullable disable
-#nullable restore
-#line 7 "C:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\_Imports.razor"
-using Microsoft.AspNetCore.Components.Web;
-
-#line default
-#line hidden
-#nullable disable
-#nullable restore
-#line 8 "C:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\_Imports.razor"
-using Microsoft.AspNetCore.Components.Web.Virtualization;
-
-#line default
-#line hidden
-#nullable disable
-#nullable restore
-#line 9 "C:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\_Imports.razor"
-using Microsoft.JSInterop;
-
-#line default
-#line hidden
-#nullable disable
-#nullable restore
-#line 10 "C:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\_Imports.razor"
-using Memorabilia.Web;
-
-#line default
-#line hidden
-#nullable disable
-#nullable restore
-#line 11 "C:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\_Imports.razor"
-using Memorabilia.Web.Controls;
-
-#line default
-#line hidden
-#nullable disable
-#nullable restore
-#line 12 "C:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\_Imports.razor"
-using Memorabilia.Web.Shared;
-
-#line default
-#line hidden
-#nullable disable
-#nullable restore
-#line 13 "C:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\_Imports.razor"
 using Blazored.Toast;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 14 "C:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\_Imports.razor"
+#line 2 "C:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\_Imports.razor"
 using Blazored.Toast.Services;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 15 "C:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\_Imports.razor"
-using Memorabilia.Domain;
-
-#line default
-#line hidden
-#nullable disable
-#nullable restore
-#line 16 "C:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\_Imports.razor"
+#line 3 "C:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\_Imports.razor"
 using Demo.Framework.Web;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
+#line 4 "C:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\_Imports.razor"
+using Framework.Extension;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 5 "C:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\_Imports.razor"
+using Memorabilia.Domain;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 6 "C:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\_Imports.razor"
+using Memorabilia.Web;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 7 "C:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\_Imports.razor"
+using Memorabilia.Web.Controls;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 8 "C:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\_Imports.razor"
+using Memorabilia.Web.Shared;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 9 "C:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\_Imports.razor"
+using Microsoft.AspNetCore.Authorization;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 10 "C:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\_Imports.razor"
+using Microsoft.AspNetCore.Components.Authorization;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 11 "C:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\_Imports.razor"
+using Microsoft.AspNetCore.Components.Forms;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 12 "C:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\_Imports.razor"
+using Microsoft.AspNetCore.Components.Routing;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 13 "C:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\_Imports.razor"
+using Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 14 "C:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\_Imports.razor"
+using Microsoft.AspNetCore.Components.Web;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 15 "C:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\_Imports.razor"
+using Microsoft.AspNetCore.Components.Web.Virtualization;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 16 "C:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\_Imports.razor"
+using Microsoft.JSInterop;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 17 "C:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\_Imports.razor"
+using System.Net.Http;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
 #line 4 "C:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\Pages\Autograph\AddAutograph.razor"
-using Memorabilia.Application.Features.Admin.Person;
+using Blazored.Typeahead;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
 #line 5 "C:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\Pages\Autograph\AddAutograph.razor"
-using Memorabilia.Application.Features.Autograph;
+using Memorabilia.Application.Features.Admin.Person;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
 #line 6 "C:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\Pages\Autograph\AddAutograph.razor"
-using Memorabilia.Application.Features.Memorabilia;
+using Memorabilia.Application.Features.Autograph;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
 #line 7 "C:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\Pages\Autograph\AddAutograph.razor"
-using Memorabilia.Web.Controls.AcquisitionType;
+using Memorabilia.Application.Features.Memorabilia;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
 #line 8 "C:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\Pages\Autograph\AddAutograph.razor"
-using Memorabilia.Web.Controls.Color;
+using Memorabilia.Web.Controls.AcquisitionType;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
 #line 9 "C:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\Pages\Autograph\AddAutograph.razor"
-using Memorabilia.Web.Controls.Condition;
+using Memorabilia.Web.Controls.Color;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
 #line 10 "C:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\Pages\Autograph\AddAutograph.razor"
-using Memorabilia.Web.Controls.Person;
+using Memorabilia.Web.Controls.Condition;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
 #line 11 "C:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\Pages\Autograph\AddAutograph.razor"
-using Memorabilia.Web.Controls.PurchaseType;
+using Memorabilia.Web.Controls.Person;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
 #line 12 "C:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\Pages\Autograph\AddAutograph.razor"
+using Memorabilia.Web.Controls.PurchaseType;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 13 "C:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\Pages\Autograph\AddAutograph.razor"
 using Memorabilia.Web.Controls.WritingInstrument;
 
 #line default
@@ -197,13 +211,15 @@ using Memorabilia.Web.Controls.WritingInstrument;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 115 "C:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\Pages\Autograph\AddAutograph.razor"
+#line 160 "C:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\Pages\Autograph\AddAutograph.razor"
        
     [Parameter]
     public int MemorabiliaId { get; set; }
 
+    private bool _continue;
     private bool _displayPersonalization;
     private int _itemTypeId;
+    private IEnumerable<PersonViewModel> _people = Enumerable.Empty<PersonViewModel>();   
     private SaveAutographViewModel _viewModel = new SaveAutographViewModel();
 
     protected async Task HandleValidSubmit()
@@ -211,13 +227,29 @@ using Memorabilia.Web.Controls.WritingInstrument;
         var userId = await _localStorage.GetAsync<int>("UserId");
 
         if (userId.Value == 0)
-            _navigation.NavigateTo("Login");        
+            _navigation.NavigateTo("Login"); 
 
         var command = new SaveAutograph.Command(_viewModel);
 
         await _commandRouter.Send(command).ConfigureAwait(false);
 
-        _navigation.NavigateTo("Autographs");
+        if (_continue)
+        {
+            //if (_viewModel.IsAuthenticated)
+            //{
+            //    url = $"Autographs/Authentications/Add/{command.Id}{(_viewModel.HasInscription ? "/true" : string.Empty)}";
+            //}
+            //else if (_viewModel.HasInscription)
+            //{
+            //    url = $"Autographs/Inscriptions/Add/{command.Id}";
+            //}
+            //else
+            //{
+            //    url = $"Autographs/{_viewModel.ItemTypeName}/Add/{command.Id}";
+            //}
+        }
+
+        _navigation.NavigateTo(_continue ? $"Autographs/Inscriptions/Add/{command.Id}" : "Memorabilia");
 
         _toastService.ShowSuccess("Autograph was added successfully!", _viewModel.PageTitle);
     }
@@ -228,20 +260,55 @@ using Memorabilia.Web.Controls.WritingInstrument;
 
         if (userId.Value == 0)
             _navigation.NavigateTo("Login");
+
+        var query = new GetMemorabiliaItem.Query(MemorabiliaId);
+        var memorabiliaViewModel = await _queryRouter.Send(query).ConfigureAwait(false);
+
+        _viewModel = new SaveAutographViewModel(memorabiliaViewModel);
+
+        await LoadPeople().ConfigureAwait(false);
+
+        SetDefaults();
+    }
+
+    private async Task LoadPeople()
+    {
+        var query = new GetPeople.Query();
+
+        _people = (await _queryRouter.Send(query).ConfigureAwait(false)).People;
+    }
+
+    private void OnImportAcquisitionClick()
+    {
+        _viewModel.AcquisitionTypeId = _viewModel.MemorabiliaAcquisitionTypeId;
+        _viewModel.AcquiredDate = _viewModel.MemorabiliaAcquiredDate;
+        _viewModel.Cost = _viewModel.MemorabiliaCost;
+        _viewModel.PurchaseTypeId = _viewModel.MemorabiliaPurchaseTypeId ?? 0;
+    }
+
+    private void OnImportPersonClick()
+    {
+        _viewModel.Person = _viewModel.MemorabiliaPerson;
     }
 
     private void PersonalizationCheckboxClicked(object isChecked)
     {
         _displayPersonalization = (bool)isChecked;
 
-        if (!_displayPersonalization)
-        {
-            _viewModel.Greeting = null;
-            _viewModel.PersonalizationText = null;
-        }
+        _viewModel.PersonalizationText = _displayPersonalization ? $"To {_viewModel.UserFirstName}" : null;
 
         StateHasChanged();
     } 
+
+    private async Task<IEnumerable<PersonViewModel>> SearchPeople(string searchText)
+    {
+        return await Task.FromResult(_people.Where(person => person.FullName.Contains(searchText, StringComparison.OrdinalIgnoreCase))).ConfigureAwait(false);
+    }
+
+    private void SetDefaults()
+    {
+        _viewModel.ConditionId = Domain.Constants.Condition.Pristine.Id;
+    }
 
 #line default
 #line hidden

@@ -24,7 +24,7 @@ else
         </div>
     </div>
     <br />
-    <table class="table">
+    <table class="table" style="border: 1px solid black;">
         <thead>
             <tr>
                 <th>Franchise</th>
@@ -55,7 +55,7 @@ else
                                  src="images/pencil.png" 
                                  height="25" 
                                  width="25" 
-                                 @onclick="@(_ => _navigation.NavigateTo($"Teams/Edit/{team.Id}"))" />
+                                 @onclick="@(_ => _navigation.NavigateTo($"{_viewModel.RoutePrefix}/Edit/{team.Id}"))" />
                         </_Tooltip>                        
                     </td>
                     <td>
@@ -74,7 +74,7 @@ else
     <div class="row">
         <div class="col-md-12" style="text-align: center">
             <div class="col-md-12" style="text-align: center">
-                <a href="Teams/Add">Add Team</a>
+                <a href="Teams/Add">Add @_viewModel.ItemTitle</a>
             </div>
         </div>
     </div>
@@ -94,15 +94,17 @@ else
             return;
         }
 
-        var viewModel = new SaveTeamViewModel(_viewModel.Teams.Single(team => team.Id == _deletedItemId));
+        var deletedItem = _viewModel.Teams.Single(team => team.Id == _deletedItemId);
+        var viewModel = new SaveTeamViewModel(deletedItem);
         viewModel.IsDeleted = true;
 
         var command = new SaveTeam.Command(viewModel);
 
         await _commandRouter.Send(command).ConfigureAwait(false);
-        await OnInitializedAsync().ConfigureAwait(false);
+        
+        _viewModel.Teams.Remove(deletedItem);
 
-        _toastService.ShowSuccess("Team was deleted successfully!", _viewModel.PageTitle);
+        _toastService.ShowSuccess($"{_viewModel.ItemTitle} was deleted successfully!", _viewModel.PageTitle);
     }
 
     protected override async Task OnInitializedAsync()

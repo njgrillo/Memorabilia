@@ -9,6 +9,10 @@ namespace Memorabilia.Application.Features.Admin.MagazineType
 
         public MagazineTypesViewModel(IEnumerable<DomainEntity> domainEntities) : base(domainEntities) { }
 
+        public override string ItemTitle => "Magazine Type";
+
         public override string PageTitle => "Magazine Types";
+
+        public override string RoutePrefix => "MagazineTypes";
     }
 }

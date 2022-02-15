@@ -12,11 +12,11 @@ namespace Memorabilia.Domain.Constants
 
         public static readonly PurchaseType[] All =
         {
-            Ebay,
             Amazon,
+            Ebay,
+            Facebook,
             Other,
-            Retail,
-            Facebook
+            Retail
         };
 
         private PurchaseType(int id, string name, string abbreviation)

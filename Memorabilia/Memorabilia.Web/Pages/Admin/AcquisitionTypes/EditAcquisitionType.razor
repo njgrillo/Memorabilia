@@ -29,14 +29,7 @@ else
             <EditForm Model="_viewModel" OnValidSubmit="HandleValidSubmit">
                 <DataAnnotationsValidator />
                 <ValidationSummary />
-                <div class="form-group">
-                    <label for="name">Name</label>
-                    <InputText id="name" @bind-Value="_viewModel.Name" class="form-control" />
-                </div>
-                <div class="form-group">
-                    <label for="abbreviation">Abbreviation</label>
-                    <InputText id="abbreviation" @bind-Value="_viewModel.Abbreviation" class="form-control" />
-                </div>
+                <_DomainEditor DomainItem="_viewModel" />
                 <div class="text-right">
                     <button type="submit" class="btn btn-primary">Save</button>
                 </div>

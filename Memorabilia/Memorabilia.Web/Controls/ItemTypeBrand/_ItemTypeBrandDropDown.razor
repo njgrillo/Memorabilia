@@ -3,8 +3,8 @@
 
 @inject QueryRouter _queryRouter
 
-<InputSelect class="form-control" id="ItemTypeBrandDropDown" @bind-Value="@Value" @oninput="@OnInputChange">
-     <option value="0">--Select--</option>
+<InputSelect id="ItemTypeBrandDropDown" class="form-control" @bind-Value="@Value" @oninput="@OnInputChange">
+    <option value="0">--Select--</option>
     @foreach (var itemTypeBrand in _itemTypeBrands)
     {
         <option value="@itemTypeBrand.BrandId">@itemTypeBrand.BrandName</option>

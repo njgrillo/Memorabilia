@@ -31,9 +31,7 @@ namespace Memorabilia.Application.Features.Admin.ItemTypeSize
 
         public class Query : IQuery<ItemTypeSizesViewModel>
         {
-            public Query() { }
-
-            public Query(int itemTypeId)
+            public Query(int? itemTypeId = null)
             {
                 ItemTypeId = itemTypeId;
             }

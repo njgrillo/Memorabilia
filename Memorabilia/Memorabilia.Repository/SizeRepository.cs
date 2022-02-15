@@ -34,12 +34,12 @@ namespace Memorabilia.Repository
 
         public async Task<Domain.Entities.Size> Get(int id)
         {
-            return await Size.SingleOrDefaultAsync(user => user.Id == id).ConfigureAwait(false);
+            return await Size.SingleOrDefaultAsync(size => size.Id == id).ConfigureAwait(false);
         }
 
         public async Task<IEnumerable<Domain.Entities.Size>> GetAll()
         {
-            return await Size.ToListAsync().ConfigureAwait(false);
+            return (await Size.ToListAsync().ConfigureAwait(false)).OrderBy(size => size.Name);
         }
 
         public async Task Update(Domain.Entities.Size size, CancellationToken cancellationToken = default)

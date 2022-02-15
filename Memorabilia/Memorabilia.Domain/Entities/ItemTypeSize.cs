@@ -12,7 +12,11 @@
 
         public int ItemTypeId { get; private set; }
 
+        public string ItemTypeName => Constants.ItemType.Find(ItemTypeId)?.Name;
+
         public int SizeId { get; private set; }
+
+        public string SizeName => Constants.Size.Find(SizeId)?.Name;
 
         public void Set(int sizeId)
         {

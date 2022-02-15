@@ -1,6 +1,5 @@
 ﻿using Demo.Framework.Handler;
 using Memorabilia.Domain;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace Memorabilia.Application.Features.Admin.Commissioner
@@ -18,9 +17,7 @@ namespace Memorabilia.Application.Features.Admin.Commissioner
 
             protected override async Task<CommissionersViewModel> Handle(Query query)
             {
-                var commissioners = (await _commissionerRepository.GetAll(query.SportId).ConfigureAwait(false))
-                                                                  .OrderBy(commissioner => commissioner.Sport.Name)
-                                                                  .ThenByDescending(commissioner => commissioner.BeginYear);
+                var commissioners = await _commissionerRepository.GetAll(query.SportId).ConfigureAwait(false);
 
                 var viewModel = new CommissionersViewModel(commissioners);
 
@@ -30,9 +27,7 @@ namespace Memorabilia.Application.Features.Admin.Commissioner
 
         public class Query : IQuery<CommissionersViewModel>
         {
-            public Query() { }
-
-            public Query(int sportId)
+            public Query(int? sportId = null)
             {
                 SportId = sportId;
             }

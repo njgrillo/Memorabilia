@@ -25,8 +25,6 @@ namespace Memorabilia.Application.Features.Admin.LevelType
             }
         }
 
-        public class Query : IQuery<LevelTypesViewModel>
-        {
-        }
+        public class Query : IQuery<LevelTypesViewModel> { }
     }
 }

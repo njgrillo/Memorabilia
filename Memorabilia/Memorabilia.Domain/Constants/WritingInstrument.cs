@@ -30,7 +30,7 @@ namespace Memorabilia.Domain.Constants
 
         public static WritingInstrument Find(int id)
         {
-            return All.SingleOrDefault(WritingInstrument => WritingInstrument.Id == id);
+            return All.SingleOrDefault(writingInstrument => writingInstrument.Id == id);
         }
     }
 }

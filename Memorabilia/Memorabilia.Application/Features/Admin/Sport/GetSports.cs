@@ -25,8 +25,6 @@ namespace Memorabilia.Application.Features.Admin.Sport
             }
         }
 
-        public class Query : IQuery<SportsViewModel>
-        {
-        }
+        public class Query : IQuery<SportsViewModel> { }
     }
 }

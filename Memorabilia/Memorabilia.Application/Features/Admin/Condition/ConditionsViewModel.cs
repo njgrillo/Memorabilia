@@ -9,6 +9,10 @@ namespace Memorabilia.Application.Features.Admin.Condition
 
         public ConditionsViewModel(IEnumerable<DomainEntity> domainEntities) : base(domainEntities) { }
 
+        public override string ItemTitle => "Condition";
+
         public override string PageTitle => "Conditions";
+
+        public override string RoutePrefix => "Conditions";
     }
 }

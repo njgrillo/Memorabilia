@@ -8,7 +8,6 @@ namespace Memorabilia.Domain.Constants
         public static readonly BaseballType AllStarFuturesGame = new(19, "All Star Future's Game", string.Empty);
         public static readonly BaseballType AmericanLeague = new(7, "American League", string.Empty);
         public static readonly BaseballType Black = new(1, "Black Baseball", "ROMLBBG");
-        public static readonly BaseballType BreastCancerAwareness = new(23, "Breast Cancer Awareness", string.Empty);
         public static readonly BaseballType Commemorative = new(12, "Commemorative", string.Empty);
         public static readonly BaseballType CyYoung = new(11, "Cy Young", string.Empty);
         public static readonly BaseballType FathersDay = new(9, "Father's Day", string.Empty);
@@ -17,10 +16,11 @@ namespace Memorabilia.Domain.Constants
         public static readonly BaseballType GoldWorldSeries = new(17, "Gold World Series", string.Empty);
         public static readonly BaseballType HallOfFame = new(22, "Hall of Fame", string.Empty);
         public static readonly BaseballType HomeRunDerby = new(13, "Home Run Derby", string.Empty);
-        public static readonly BaseballType MothersDay = new(10, "Mother's Day", string.Empty);
+        public static readonly BaseballType MemorialDay = new(23, "Memorial Day", string.Empty);
+        public static readonly BaseballType MothersDay = new(10, "Mother's Day", "ROMLBMOM");
         public static readonly BaseballType NationalLeague = new(8, "National League", string.Empty);
         public static readonly BaseballType None = new(6, "None", string.Empty);
-        public static readonly BaseballType Official = new(4, "Offical Major League Baseball", "ROMLB");
+        public static readonly BaseballType Official = new(4, "Official Major League Baseball", "ROMLB");
         public static readonly BaseballType OpeningDay = new(20, "Opening Day", string.Empty);
         public static readonly BaseballType Other = new(5, "Other", string.Empty);
         public static readonly BaseballType PostSeason = new(21, "Post Season", string.Empty);
@@ -54,6 +54,24 @@ namespace Memorabilia.Domain.Constants
             WorldSeries
         };
 
+        public static readonly BaseballType[] GameWorthly =
+        {
+            AllStar,
+            AllStarFuturesGame,
+            AmericanLeague,
+            Commemorative,
+            FathersDay,
+            HomeRunDerby,
+            MothersDay,
+            NationalLeague,
+            Official,
+            OpeningDay,
+            PostSeason,
+            SpringTraining,
+            TeamAnniversary,
+            WorldSeries
+        };
+
         public static readonly BaseballType[] Yearly =
         {
             AllStar,
@@ -79,11 +97,11 @@ namespace Memorabilia.Domain.Constants
 
         public int Id { get; }
 
-        public string Name { get; }
+        public string Name { get; }        
 
         public static bool CanHaveAnniversary(BaseballType baseballType)
         {
-            return baseballType == BaseballType.TeamAnniversary;
+            return baseballType == TeamAnniversary;
         }
 
         public static bool CanHaveYear(BaseballType baseballType)
@@ -93,7 +111,12 @@ namespace Memorabilia.Domain.Constants
 
         public static BaseballType Find(int id)
         {
-            return All.SingleOrDefault(BaseballType => BaseballType.Id == id);
+            return All.SingleOrDefault(baseballType => baseballType.Id == id);
+        }
+
+        public static bool IsGameWorthly(BaseballType baseballType)
+        {
+            return GameWorthly.Contains(baseballType);
         }
     }
 }

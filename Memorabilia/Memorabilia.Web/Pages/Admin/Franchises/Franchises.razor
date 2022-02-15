@@ -24,7 +24,7 @@ else
         </div>
     </div>
     <br />
-    <table class="table">
+    <table class="table" style="border: 1px solid black;">
         <thead>
             <tr>
                 <th>Sport</th>
@@ -49,7 +49,7 @@ else
                                  src="images/pencil.png" 
                                  height="25" 
                                  width="25" 
-                                 @onclick="@(_ => _navigation.NavigateTo($"Franchises/Edit/{franchise.Id}"))" />
+                                 @onclick="@(_ => _navigation.NavigateTo($"{_viewModel.RoutePrefix}/Edit/{franchise.Id}"))" />
                         </_Tooltip>                        
                     </td>
                     <td>
@@ -68,7 +68,7 @@ else
     <div class="row">
         <div class="col-md-12" style="text-align: center">
             <div class="col-md-12" style="text-align: center">
-                <a href="Franchises/Add">Add Franchise</a>
+                <a href="Franchises/Add">Add @_viewModel.ItemTitle</a>
             </div>
         </div>
     </div>
@@ -88,15 +88,17 @@ else
             return;
         }
 
-        var viewModel = new SaveFranchiseViewModel(_viewModel.Franchises.Single(Franchise => Franchise.Id == _deletedItemId));
+        var deletedItem = _viewModel.Franchises.Single(Franchise => Franchise.Id == _deletedItemId);
+        var viewModel = new SaveFranchiseViewModel(deletedItem);
         viewModel.IsDeleted = true;
 
         var command = new SaveFranchise.Command(viewModel);
 
-        await _commandRouter.Send(command).ConfigureAwait(false);
-        await OnInitializedAsync().ConfigureAwait(false);
+        await _commandRouter.Send(command).ConfigureAwait(false);        
 
-        _toastService.ShowSuccess("Franchise was deleted successfully!", _viewModel.PageTitle);
+        _viewModel.Franchises.Remove(deletedItem);
+
+        _toastService.ShowSuccess($"{_viewModel.ItemTitle} was deleted successfully!", _viewModel.PageTitle);
     }
 
     protected override async Task OnInitializedAsync()

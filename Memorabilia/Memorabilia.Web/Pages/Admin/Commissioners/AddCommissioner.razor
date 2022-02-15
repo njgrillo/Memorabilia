@@ -1,8 +1,11 @@
 ﻿@page "/Commissioners/Add"
 
+@using Blazored.Typeahead
 @using Memorabilia.Application.Features.Admin
 @using Memorabilia.Application.Features.Admin.Commissioner
 @using Memorabilia.Application.Features.Admin.Person
+@using Memorabilia.Web.Controls.Person
+@using Memorabilia.Web.Controls.Sport
 
 @inject CommandRouter _commandRouter
 @inject ProtectedLocalStorage _localStorage
@@ -25,36 +28,36 @@ else
     <div style="border: 1px solid black; margin-top: 2%; margin-bottom: 2%; margin-left: 2%; margin-right: 2%;">
         <div class="row" style="margin-top: 2%; margin-bottom: 2%; margin-left: 1%; margin-right: 1%;">
             <div class="col-lg-12" style="text-align: center">
-                <img src="images/athlets.jpg" alt="Image" height="150" width="150" />
+                <img src="images/commissioners.jpg" alt="Image" height="150" width="150" />
             </div>
             <EditForm Model="_viewModel" OnValidSubmit="HandleValidSubmit">
                 <DataAnnotationsValidator />
-                <ValidationSummary />
+                <ValidationSummary />                
                 <div class="form-group">
                     <label for="sport">Sport</label>
-                    <InputSelect id="sport" @bind-Value="_viewModel.SportId" class="form-control">
-                        @foreach (var sport in Memorabilia.Domain.Constants.Sport.All)
-                        {
-                            <option value="@sport.Id">@sport.Name</option>
-                        }
-                    </InputSelect>
+                    <_SportDropDown @bind-Value="@_viewModel.SportId"
+                                    @bind-Value:event="ValueChanged" /> 
                 </div>
                 <div class="form-group">
                     <label for="person">Person</label>
-                    <InputSelect id="person" @bind-Value="_viewModel.PersonId" class="form-control">
-                        @foreach (var person in _people)
-                        {
-                            <option value="@person.Id">@person.FullName</option>
-                        }
-                    </InputSelect>
+                    <BlazoredTypeahead SearchMethod="SearchPeople"
+                                       @bind-Value="_viewModel.Person"
+                                       Placeholder="Search by name...">
+                        <SelectedTemplate Context="person">
+                            @person.FullName
+                        </SelectedTemplate>
+                        <ResultTemplate Context="person">
+                            @person.FullName
+                        </ResultTemplate>
+                    </BlazoredTypeahead>  
                 </div>
                 <div class="form-group">
                     <label for="beginYear">Begin Year</label>
-                    <InputNumber id="beginYear" @bind-Value="_viewModel.BeginYear" class="form-control" />
+                    <InputNumber id="beginYear" class="form-control" @bind-Value="_viewModel.BeginYear" />
                 </div>
                 <div class="form-group">
                     <label for="endYear">End Year</label>
-                    <InputNumber id="endYear" @bind-Value="_viewModel.EndYear" class="form-control" />
+                    <InputNumber id="endYear" class="form-control" @bind-Value="_viewModel.EndYear" />
                 </div>
                 <div class="text-right">
                     <button type="submit" class="btn btn-primary">Save</button>
@@ -72,7 +75,7 @@ else
 
 @code {
     private IEnumerable<PersonViewModel> _people = Enumerable.Empty<PersonViewModel>();
-    private SaveCommissionerViewModel _viewModel = new SaveCommissionerViewModel();
+    private SaveCommissionerViewModel _viewModel = new SaveCommissionerViewModel(); 
 
     protected async Task HandleValidSubmit()
     {
@@ -80,9 +83,9 @@ else
 
         await _commandRouter.Send(command).ConfigureAwait(false);
 
-        _navigation.NavigateTo("Commissioners");
+        _navigation.NavigateTo(_viewModel.RoutePrefix);
 
-        _toastService.ShowSuccess("Commissioner was added successfully!", _viewModel.PageTitle);
+        _toastService.ShowSuccess($"{_viewModel.PageTitle} was added successfully!", _viewModel.PageTitle);
     }
 
     protected override async Task OnInitializedAsync()
@@ -92,15 +95,18 @@ else
         if (userId.Value == 0)
             _navigation.NavigateTo("Login");
 
-        await GetPeople().ConfigureAwait(false);
+        await LoadPeople().ConfigureAwait(false);
     }
 
-    private async Task GetPeople()
+    private async Task LoadPeople()
     {
         var query = new GetPeople.Query();
 
         _people = (await _queryRouter.Send(query).ConfigureAwait(false)).People;
+    }
 
-        _viewModel.PersonId = _people.First().Id;
+    private async Task<IEnumerable<PersonViewModel>> SearchPeople(string searchText)
+    {
+        return await Task.FromResult(_people.Where(person => person.FullName.Contains(searchText, StringComparison.OrdinalIgnoreCase))).ConfigureAwait(false);
     }
 }

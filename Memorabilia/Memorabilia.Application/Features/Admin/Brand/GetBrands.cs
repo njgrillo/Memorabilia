@@ -25,8 +25,6 @@ namespace Memorabilia.Application.Features.Admin.Brand
             }
         }
 
-        public class Query : IQuery<BrandsViewModel>
-        {
-        }
+        public class Query : IQuery<BrandsViewModel> { }
     }
 }

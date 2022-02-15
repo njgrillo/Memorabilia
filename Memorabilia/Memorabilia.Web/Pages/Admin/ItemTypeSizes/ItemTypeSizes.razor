@@ -24,7 +24,7 @@ else
         </div>
     </div>
     <br />
-    <table class="table">
+    <table class="table" style="border: 1px solid black;">
         <thead>
             <tr>
                 <th>Item Type</th>
@@ -45,7 +45,7 @@ else
                                  src="images/pencil.png" 
                                  height="25" 
                                  width="25" 
-                                 @onclick="@(_ => _navigation.NavigateTo($"ItemTypeSizes/Edit/{itemTypeSize.Id}"))" />
+                                 @onclick="@(_ => _navigation.NavigateTo($"{_viewModel.RoutePrefix}/Edit/{itemTypeSize.Id}"))" />
                         </_Tooltip>                        
                     </td>
                     <td>
@@ -64,7 +64,7 @@ else
     <div class="row">
         <div class="col-md-12" style="text-align: center">
             <div class="col-md-12" style="text-align: center">
-                <a href="ItemTypeSizes/Add">Add Item Type Size</a>
+                <a href="ItemTypeSizes/Add">Add @_viewModel.ItemTitle</a>
             </div>
         </div>
     </div>
@@ -84,15 +84,17 @@ else
             return;
         }
 
-        var viewModel = new SaveItemTypeSizeViewModel(_viewModel.ItemTypeSizes.Single(ItemTypeSize => ItemTypeSize.Id == _deletedItemId));
+        var deletedItem = _viewModel.ItemTypeSizes.Single(ItemTypeSize => ItemTypeSize.Id == _deletedItemId);
+        var viewModel = new SaveItemTypeSizeViewModel(deletedItem);
         viewModel.IsDeleted = true;
 
         var command = new SaveItemTypeSize.Command(viewModel);
 
         await _commandRouter.Send(command).ConfigureAwait(false);
-        await OnInitializedAsync().ConfigureAwait(false);
+        
+        _viewModel.ItemTypeSizes.Remove(deletedItem);
 
-        _toastService.ShowSuccess("Item Type Size was deleted successfully!", _viewModel.PageTitle);
+        _toastService.ShowSuccess($"{_viewModel.ItemTitle} was deleted successfully!", _viewModel.PageTitle);
     }
 
     protected override async Task OnInitializedAsync()

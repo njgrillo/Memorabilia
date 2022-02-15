@@ -25,8 +25,6 @@ namespace Memorabilia.Application.Features.Admin.HelmetType
             }
         }
 
-        public class Query : IQuery<HelmetTypesViewModel>
-        {
-        }
+        public class Query : IQuery<HelmetTypesViewModel> { }
     }
 }

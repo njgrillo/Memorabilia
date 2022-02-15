@@ -27,9 +27,7 @@ namespace Memorabilia.Application.Features.Admin.ItemTypeSpot
 
         public class Query : IQuery<ItemTypeSpotsViewModel>
         {
-            public Query() { }
-
-            public Query(int itemTypeId)
+            public Query(int? itemTypeId = null)
             {
                 ItemTypeId = itemTypeId;
             }

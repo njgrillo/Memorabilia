@@ -9,6 +9,10 @@ namespace Memorabilia.Application.Features.Admin.WritingInstrument
 
         public WritingInstrumentsViewModel(IEnumerable<DomainEntity> domainEntities) : base(domainEntities) { }
 
+        public override string ItemTitle => "Writing Instrument";
+
         public override string PageTitle => "Writing Instruments";
+
+        public override string RoutePrefix => "WritingInstruments";
     }
 }

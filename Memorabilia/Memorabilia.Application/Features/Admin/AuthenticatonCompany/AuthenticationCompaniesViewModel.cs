@@ -9,6 +9,10 @@ namespace Memorabilia.Application.Features.Admin.AuthenticationCompany
 
         public AuthenticationCompaniesViewModel(IEnumerable<DomainEntity> domainEntities) : base(domainEntities) { }
 
+        public override string ItemTitle => "Authentication Company";
+
         public override string PageTitle => "Authentication Companies";
+
+        public override string RoutePrefix => "AuthenticationCompanies";
     }
 }

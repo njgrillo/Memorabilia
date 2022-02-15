@@ -22,6 +22,25 @@
           "buildMultiTargeting/Blazored.Toast.props": {}
         }
       },
+      "Blazored.Typeahead/4.6.0": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.AspNetCore.Components": "3.1.2",
+          "Microsoft.AspNetCore.Components.Web": "3.1.2"
+        },
+        "compile": {
+          "lib/netstandard2.1/Blazored.Typeahead.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.1/Blazored.Typeahead.dll": {}
+        },
+        "build": {
+          "buildTransitive/Blazored.Typeahead.props": {}
+        },
+        "buildMultiTargeting": {
+          "buildMultiTargeting/Blazored.Typeahead.props": {}
+        }
+      },
       "CompareNETObjects/4.73.0": {
         "type": "package",
         "dependencies": {
@@ -3354,6 +3373,25 @@
         "lib/netstandard2.1/Blazored.Toast.dll",
         "staticwebassets/blazored-toast.css",
         "staticwebassets/blazored-toast.min.css"
+      ]
+    },
+    "Blazored.Typeahead/4.6.0": {
+      "sha512": "eYViTbA5DmsaUmPO3tUzDxahido811vU0/mNtGfIkA4SqTxN2VAwRJgCmoVxFiHwVWtPjVcNGIpUI44lTe24bg==",
+      "type": "package",
+      "path": "blazored.typeahead/4.6.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "blazored.typeahead.4.6.0.nupkg.sha512",
+        "blazored.typeahead.nuspec",
+        "build/Blazored.Typeahead.props",
+        "build/Microsoft.AspNetCore.StaticWebAssets.props",
+        "buildMultiTargeting/Blazored.Typeahead.props",
+        "buildTransitive/Blazored.Typeahead.props",
+        "icon.png",
+        "lib/netstandard2.1/Blazored.Typeahead.dll",
+        "staticwebassets/blazored-typeahead.css",
+        "staticwebassets/blazored-typeahead.js"
       ]
     },
     "CompareNETObjects/4.73.0": {
@@ -10025,6 +10063,7 @@
   "projectFileDependencyGroups": {
     "net5.0": [
       "Blazored.Toast >= 3.2.2",
+      "Blazored.Typeahead >= 4.6.0",
       "Demo.Framework >= 1.0.10",
       "MediatR >= 4.1.0",
       "MediatR.Extensions.Microsoft.DependencyInjection >= 4.1.0",
@@ -10059,9 +10098,9 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-        "C:\\Projects\\Budget\\NugetPackages\\Framework": {},
-        "C:\\Projects\\Memorabilia\\NugetPackages\\Framework": {},
         "C:\\Projects\\SurePassIDFramework\\NugetPackages": {},
+        "C:\\Projects\\njgrillo\\Budget\\NugetPackages\\Framework": {},
+        "C:\\Projects\\njgrillo\\Memorabilia\\NugetPackages\\Framework": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -10094,6 +10133,10 @@
             "target": "Package",
             "version": "[3.2.2, )"
           },
+          "Blazored.Typeahead": {
+            "target": "Package",
+            "version": "[4.6.0, )"
+          },
           "Demo.Framework": {
             "target": "Package",
             "version": "[1.0.10, )"
@@ -10121,6 +10164,12 @@
         ],
         "assetTargetFallback": true,
         "warn": true,
+        "downloadDependencies": [
+          {
+            "name": "Microsoft.NETCore.App.Host.win-x64",
+            "version": "[5.0.13, 5.0.13]"
+          }
+        ],
         "frameworkReferences": {
           "Microsoft.AspNetCore.App": {
             "privateAssets": "none"

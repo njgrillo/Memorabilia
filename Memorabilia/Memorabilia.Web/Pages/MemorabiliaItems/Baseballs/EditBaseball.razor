@@ -67,14 +67,14 @@ else
                                            @bind-Value:event="ValueChanged" 
                                            ItemType="@ItemType.Baseball" /> 
                 </div>                
-                <div class="form-group">
+                @*<div class="form-group">
                     <input type="checkbox" checked="@_viewModel.HasPerson" @onchange="eventArgs => { PersonCheckboxClicked(eventArgs.Value); }" />
                     <label for="person">Associate Baseball with a Person</label>
                     <div class="form-group" hidden="@(!_displayPeople)">
                         <_PersonSelector @bind-Value="@_viewModel.PersonId"
                                          @bind-Value:event="ValueChanged" /> 
                     </div>                    
-                </div>  
+                </div> *@ 
                 <div class="form-group">
                     <input type="checkbox" checked="@_viewModel.HasTeam" @onchange="eventArgs => { TeamsCheckboxClicked(eventArgs.Value); }" />
                     <label for="teams">Associate Baseball with a Team</label>
@@ -149,7 +149,7 @@ else
         _displayPeople = (bool)isChecked;
 
         if (!_displayPeople)
-            _viewModel.PersonId = 0;
+            _viewModel.Person = null;
 
         StateHasChanged();
     } 

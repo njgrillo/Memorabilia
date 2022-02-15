@@ -37,7 +37,8 @@ namespace Memorabilia.Repository
                                                                                .Include(memorabilia => memorabilia.Photo)
                                                                                .Include(memorabilia => memorabilia.Size)
                                                                                .Include(memorabilia => memorabilia.Sports)
-                                                                               .Include(memorabilia => memorabilia.Teams);
+                                                                               .Include(memorabilia => memorabilia.Teams)
+                                                                               .Include(memorabilia => memorabilia.User);
 
         public async Task Add(Domain.Entities.Memorabilia memorabilia, CancellationToken cancellationToken = default)
         {
@@ -61,6 +62,11 @@ namespace Memorabilia.Repository
         public async Task<IEnumerable<Domain.Entities.Memorabilia>> GetAll(int userId)
         {
             return await Memorabilia.Where(memorabilia => memorabilia.UserId == userId).ToListAsync().ConfigureAwait(false);
+        }
+
+        public async Task<IEnumerable<Domain.Entities.Memorabilia>> GetAllUnsigned(int userId)
+        {
+            return await Memorabilia.Where(memorabilia => memorabilia.UserId == userId && !memorabilia.Autographs.Any()).ToListAsync().ConfigureAwait(false);
         }
 
         public async Task Update(Domain.Entities.Memorabilia memorabilia, CancellationToken cancellationToken = default)

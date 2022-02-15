@@ -26,7 +26,7 @@ else
         </div>
     </div>
     <br />
-    <table class="table">
+    <table class="table" style="border: 1px solid black;">
         <thead>
             <tr>
                 <th></th>
@@ -53,8 +53,8 @@ else
                         <_Tooltip Text="Images">
                             <img class="can-click" 
                                  src="data:image/jpg;base64,@Convert.ToBase64String(File.ReadAllBytes(@memorabiliaItem.ImagePath))"
-                                 height="25" 
-                                 width="25" 
+                                 height="40" 
+                                 width="40" 
                                  @onclick="@( _ => _navigation.NavigateTo($"Memorabilia/Image/Edit/{memorabiliaItem.Id}") )" />
                         </_Tooltip>                         
                     </td>
@@ -72,8 +72,8 @@ else
                         <_Tooltip Text="Details">
                             <img class="can-click" 
                                  src="images/details.png" 
-                                 height="25" 
-                                 width="25" 
+                                 height="40" 
+                                 width="40" 
                                  @onclick="@(_ => _navigation.NavigateTo($"Memorabilia/{memorabiliaItem.ItemTypeName}/Edit/{memorabiliaItem.Id}"))" />
                         </_Tooltip>                         
                     </td>
@@ -81,8 +81,8 @@ else
                         <_Tooltip Text="Edit">
                             <img class="can-click" 
                                  src="images/pencil.png" 
-                                 height="25" 
-                                 width="25" 
+                                 height="40" 
+                                 width="40" 
                                  @onclick="@(_ => _navigation.NavigateTo($"Memorabilia/Edit/{memorabiliaItem.Id}"))" />
                         </_Tooltip>                        
                     </td>
@@ -90,8 +90,8 @@ else
                         <_Tooltip Text="Delete">
                             <img class="can-click" 
                                  src="images/trash.png" 
-                                 height="25" 
-                                 width="25" 
+                                 height="40" 
+                                 width="40" 
                                  @onclick="@(_ => ShowConfirm(memorabiliaItem.Id))" />
                         </_Tooltip>
                     </td>

@@ -1,4 +1,5 @@
 ﻿using Framework.Domain.Command;
+using Framework.Extension;
 using Framework.Handler;
 using Memorabilia.Domain;
 using System;
@@ -34,6 +35,8 @@ namespace Memorabilia.Application.Features.Admin.Person
 
                     await _personRepository.Add(person).ConfigureAwait(false);
 
+                    command.Id = person.Id;
+
                     return;
                 }
 
@@ -66,6 +69,7 @@ namespace Memorabilia.Application.Features.Admin.Person
             public Command(SavePersonViewModel viewModel)
             {
                 _viewModel = viewModel;
+                Id = viewModel.Id;
             }
 
             public DateTime? BirthDate => _viewModel.BirthDate;
@@ -78,17 +82,17 @@ namespace Memorabilia.Application.Features.Admin.Person
             {
                 get
                 {
-                    if (!string.IsNullOrWhiteSpace(_viewModel.FullName))
+                    if (!_viewModel.FullName.IsNullOrEmpty())
                         return _viewModel.FullName;
 
                     return $"{_viewModel.LastName}" 
-                        + (!string.IsNullOrWhiteSpace(_viewModel.Suffix) ? $" {_viewModel.Suffix}, " : ", ") 
+                        + (!_viewModel.Suffix.IsNullOrEmpty() ? $" {_viewModel.Suffix}, " : ", ") 
                         + $"{_viewModel.FirstName}"
-                        + (!string.IsNullOrWhiteSpace(_viewModel.Nickname) ? $" ({_viewModel.Nickname})" : string.Empty);
+                        + (!_viewModel.Nickname.IsNullOrEmpty() ? $" ({_viewModel.Nickname})" : string.Empty);
                 }               
             }
 
-            public int Id => _viewModel.Id;
+            public int Id { get; set; }
 
             public string ImagePath => _viewModel.ImagePath;
 
@@ -100,7 +104,7 @@ namespace Memorabilia.Application.Features.Admin.Person
 
             public string LastName => _viewModel.LastName;
 
-            public string Nickname => _viewModel.Nickname;
+            public string Nickname => _viewModel.Nickname;         
 
             public string Suffix => _viewModel.Suffix;
         }

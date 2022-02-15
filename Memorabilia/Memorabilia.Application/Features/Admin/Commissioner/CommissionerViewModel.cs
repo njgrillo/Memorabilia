@@ -17,9 +17,7 @@
 
         public int Id => _commissioner.Id;
 
-        public int PersonId => _commissioner.PersonId;
-
-        public string PersonName => _commissioner.Person.FullName;
+        public Domain.Entities.Person Person => _commissioner.Person;
 
         public int SportId => _commissioner.SportId;
 

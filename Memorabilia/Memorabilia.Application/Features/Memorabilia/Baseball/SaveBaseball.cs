@@ -21,12 +21,12 @@ namespace Memorabilia.Application.Features.Memorabilia.Baseball
             {
                 var memorabilia = await _memorabiliaRepository.Get(command.MemorabiliaId).ConfigureAwait(false);
 
-                memorabilia.SetBaseball(command.Anniversary,
-                                        command.AuthenticTypeId,
+                memorabilia.SetBaseball(command.Anniversary,                                        
                                         command.BaseballTypeId,
                                         command.BrandId, 
                                         command.CommissionerId, 
                                         command.GameDate,
+                                        command.GameStyleTypeId,
                                         command.LevelTypeId,
                                         command.PersonId,
                                         command.SizeId, 
@@ -47,9 +47,7 @@ namespace Memorabilia.Application.Features.Memorabilia.Baseball
                 _viewModel = viewModel;
             }
 
-            public string Anniversary => _viewModel.BaseballTypeAnniversary;
-
-            public int? AuthenticTypeId => _viewModel.AuthenticTypeId > 0 ? _viewModel.AuthenticTypeId : 0;           
+            public string Anniversary => _viewModel.BaseballTypeAnniversary;                     
 
             public int? BaseballTypeId => _viewModel.BaseballTypeId > 0 ? _viewModel.BaseballTypeId : null;            
 
@@ -59,11 +57,13 @@ namespace Memorabilia.Application.Features.Memorabilia.Baseball
 
             public DateTime? GameDate => _viewModel.GameDate;
 
+            public int? GameStyleTypeId => _viewModel.GameStyleTypeId > 0 ? _viewModel.GameStyleTypeId : 0;
+
             public int LevelTypeId => _viewModel.LevelTypeId;
 
             public int MemorabiliaId => _viewModel.MemorabiliaId;
 
-            public int? PersonId => _viewModel.PersonId > 0 ? _viewModel.PersonId : null;
+            public int? PersonId => _viewModel.Person?.Id > 0 ? _viewModel.Person?.Id : null;
 
             public int SizeId => _viewModel.SizeId;
 

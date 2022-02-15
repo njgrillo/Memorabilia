@@ -34,12 +34,12 @@ namespace Memorabilia.Repository
 
         public async Task<Domain.Entities.BatType> Get(int id)
         {
-            return await BatType.SingleOrDefaultAsync(user => user.Id == id).ConfigureAwait(false);
+            return await BatType.SingleOrDefaultAsync(batType => batType.Id == id).ConfigureAwait(false);
         }
 
         public async Task<IEnumerable<Domain.Entities.BatType>> GetAll()
         {
-            return await BatType.ToListAsync().ConfigureAwait(false);
+            return (await BatType.ToListAsync().ConfigureAwait(false)).OrderBy(batType => batType.Name);
         }
 
         public async Task Update(Domain.Entities.BatType batType, CancellationToken cancellationToken = default)

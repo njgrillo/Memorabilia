@@ -25,8 +25,6 @@ namespace Memorabilia.Application.Features.Admin.Spot
             }
         }
 
-        public class Query : IQuery<SpotsViewModel>
-        {
-        }
+        public class Query : IQuery<SpotsViewModel> { }
     }
 }

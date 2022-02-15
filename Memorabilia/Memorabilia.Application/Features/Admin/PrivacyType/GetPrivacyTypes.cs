@@ -25,8 +25,6 @@ namespace Memorabilia.Application.Features.Admin.PrivacyType
             }
         }
 
-        public class Query : IQuery<PrivacyTypesViewModel>
-        {
-        }
+        public class Query : IQuery<PrivacyTypesViewModel> { }
     }
 }

@@ -35,14 +35,19 @@ namespace Memorabilia.Repository
 
         public async Task<ItemTypeBrand> Get(int id)
         {
-            return await ItemTypeBrand.SingleOrDefaultAsync(user => user.Id == id).ConfigureAwait(false);
+            return await ItemTypeBrand.SingleOrDefaultAsync(itemTypeBrand => itemTypeBrand.Id == id).ConfigureAwait(false);
         }
 
         public async Task<IEnumerable<ItemTypeBrand>> GetAll(int? itemTypeId = null)
         {
             return !itemTypeId.HasValue
-                ? await ItemTypeBrand.ToListAsync().ConfigureAwait(false)
-                : await ItemTypeBrand.Where(itemTypeBrand => itemTypeBrand.ItemTypeId == itemTypeId).ToListAsync().ConfigureAwait(false);
+                ? (await ItemTypeBrand.ToListAsync()
+                                      .ConfigureAwait(false)).OrderBy(itemTypeBrand => itemTypeBrand.ItemTypeName)
+                                                             .ThenBy(itemTypeBrand => itemTypeBrand.BrandName)
+                : (await ItemTypeBrand.Where(itemTypeBrand => itemTypeBrand.ItemTypeId == itemTypeId)
+                                      .ToListAsync()
+                                      .ConfigureAwait(false)).OrderBy(itemTypeBrand => itemTypeBrand.ItemTypeName)
+                                                             .ThenBy(itemTypeBrand => itemTypeBrand.BrandName);
         }
 
         public async Task Update(ItemTypeBrand itemTypeBrand, CancellationToken cancellationToken = default)

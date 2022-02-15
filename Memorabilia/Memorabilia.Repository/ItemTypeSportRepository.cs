@@ -35,14 +35,19 @@ namespace Memorabilia.Repository
 
         public async Task<ItemTypeSport> Get(int id)
         {
-            return await ItemTypeSport.SingleOrDefaultAsync(user => user.Id == id).ConfigureAwait(false);
+            return await ItemTypeSport.SingleOrDefaultAsync(itemTypeSport => itemTypeSport.Id == id).ConfigureAwait(false);
         }
 
         public async Task<IEnumerable<ItemTypeSport>> GetAll(int? itemTypeId = null)
         {
             return !itemTypeId.HasValue
-                ? await ItemTypeSport.ToListAsync().ConfigureAwait(false)
-                : await ItemTypeSport.Where(itemTypeSport => itemTypeSport.ItemTypeId == itemTypeId).ToListAsync().ConfigureAwait(false);
+                ? (await ItemTypeSport.ToListAsync()
+                                      .ConfigureAwait(false)).OrderBy(itemTypeSport => itemTypeSport.ItemTypeName)
+                                                             .ThenBy(itemTypeSport => itemTypeSport.SportName)
+                : (await ItemTypeSport.Where(itemTypeSport => itemTypeSport.ItemTypeId == itemTypeId)
+                                      .ToListAsync()
+                                      .ConfigureAwait(false)).OrderBy(itemTypeSport => itemTypeSport.ItemTypeName)
+                                                             .ThenBy(itemTypeSport => itemTypeSport.SportName);
         }
 
         public async Task Update(ItemTypeSport itemTypeSport, CancellationToken cancellationToken = default)

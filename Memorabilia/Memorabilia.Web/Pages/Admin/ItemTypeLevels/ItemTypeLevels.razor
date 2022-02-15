@@ -24,11 +24,11 @@ else
         </div>
     </div>
     <br />
-    <table class="table">
+    <table class="table" style="border: 1px solid black;">
         <thead>
             <tr>
                 <th>Item Type</th>
-                <th>LevelType</th>
+                <th>Level</th>
                 <th></th>
                 <th></th>
             </tr>
@@ -45,7 +45,7 @@ else
                                  src="images/pencil.png" 
                                  height="25" 
                                  width="25" 
-                                 @onclick="@(_ => _navigation.NavigateTo($"ItemTypeLevels/Edit/{itemTypeLevel.Id}"))" />
+                                 @onclick="@(_ => _navigation.NavigateTo($"{_viewModel.RoutePrefix}/Edit/{itemTypeLevel.Id}"))" />
                         </_Tooltip>                        
                     </td>
                     <td>
@@ -64,7 +64,7 @@ else
     <div class="row">
         <div class="col-md-12" style="text-align: center">
             <div class="col-md-12" style="text-align: center">
-                <a href="ItemTypeLevels/Add">Add Item Type Level</a>
+                <a href="ItemTypeLevels/Add">Add @_viewModel.ItemTitle</a>
             </div>
         </div>
     </div>
@@ -84,15 +84,17 @@ else
             return;
         }
 
-        var viewModel = new SaveItemTypeLevelViewModel(_viewModel.ItemTypeLevels.Single(ItemTypeLevel => ItemTypeLevel.Id == _deletedItemId));
+        var deletedItem = _viewModel.ItemTypeLevels.Single(ItemTypeLevel => ItemTypeLevel.Id == _deletedItemId);
+        var viewModel = new SaveItemTypeLevelViewModel(deletedItem);
         viewModel.IsDeleted = true;
 
         var command = new SaveItemTypeLevel.Command(viewModel);
 
         await _commandRouter.Send(command).ConfigureAwait(false);
-        await OnInitializedAsync().ConfigureAwait(false);
+        
+        _viewModel.ItemTypeLevels.Remove(deletedItem);
 
-        _toastService.ShowSuccess("Item Type Level was deleted successfully!", _viewModel.PageTitle);
+        _toastService.ShowSuccess($"{_viewModel.ItemTitle} was deleted successfully!", _viewModel.PageTitle);
     }
 
     protected override async Task OnInitializedAsync()

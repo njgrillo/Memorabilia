@@ -25,8 +25,6 @@ namespace Memorabilia.Application.Features.Admin.Condition
             }
         }
 
-        public class Query : IQuery<ConditionsViewModel>
-        {
-        }
+        public class Query : IQuery<ConditionsViewModel> { }
     }
 }

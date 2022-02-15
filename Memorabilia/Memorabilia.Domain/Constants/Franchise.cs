@@ -81,7 +81,7 @@ namespace Memorabilia.Domain.Constants
 
         public static Franchise Find(int id)
         {
-            return All.SingleOrDefault(Franchise => Franchise.Id == id);
+            return All.SingleOrDefault(franchise => franchise.Id == id);
         }
     }
 }

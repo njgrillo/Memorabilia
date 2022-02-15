@@ -9,6 +9,10 @@ namespace Memorabilia.Application.Features.Admin.Color
 
         public ColorsViewModel(IEnumerable<DomainEntity> domainEntities) : base(domainEntities) { }
 
+        public override string ItemTitle => "Color";
+
         public override string PageTitle => "Colors";
+
+        public override string RoutePrefix => "Colors";
     }
 }

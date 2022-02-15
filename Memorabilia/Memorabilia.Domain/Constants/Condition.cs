@@ -20,7 +20,7 @@ namespace Memorabilia.Domain.Constants
             NearMint,
             Excellent,
             Fair,
-            Poor
+            Poor             
         };
 
         private Condition(int id, string name, string abbreviation)

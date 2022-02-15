@@ -9,11 +9,15 @@ namespace Memorabilia.Application.Features.Admin.Person
 
         public PeopleViewModel(IEnumerable<Domain.Entities.Person> persons)
         {
-            People = persons.Select(person => new PersonViewModel(person));
+            People = persons.Select(person => new PersonViewModel(person)).ToList();
         }
+
+        public override string ItemTitle => "Person";
 
         public override string PageTitle => "People";
 
-        public IEnumerable<PersonViewModel> People { get; set; } = Enumerable.Empty<PersonViewModel>();
+        public List<PersonViewModel> People { get; set; } = new();
+
+        public override string RoutePrefix => "People";        
     }
 }

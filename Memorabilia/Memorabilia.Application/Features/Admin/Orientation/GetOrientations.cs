@@ -25,8 +25,6 @@ namespace Memorabilia.Application.Features.Admin.Orientation
             }
         }
 
-        public class Query : IQuery<OrientationsViewModel>
-        {
-        }
+        public class Query : IQuery<OrientationsViewModel> { }
     }
 }

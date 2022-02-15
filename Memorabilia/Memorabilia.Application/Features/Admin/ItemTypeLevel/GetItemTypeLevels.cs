@@ -27,9 +27,7 @@ namespace Memorabilia.Application.Features.Admin.ItemTypeLevel
 
         public class Query : IQuery<ItemTypeLevelsViewModel>
         {
-            public Query() { }
-
-            public Query(int itemTypeId)
+            public Query(int? itemTypeId = null)
             {
                 ItemTypeId = itemTypeId;
             }

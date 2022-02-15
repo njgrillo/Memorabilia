@@ -1,8 +1,9 @@
 ﻿@using Memorabilia.Application.Features.Admin.Spot
+@using Memorabilia.Domain.Constants
 
-<InputSelect class="form-control" id="spot" @bind-Value="@Value" @oninput="@OnInputChange" >
+<InputSelect id="spot" class="form-control" @bind-Value="@Value" @oninput="@OnInputChange" >
     <option value="0">--Select--</option>
-    @foreach (var spot in Domain.Constants.Spot.All)
+    @foreach (var spot in Spot.All)
     {
         <option value="@spot.Id">@spot.Name</option>
     }

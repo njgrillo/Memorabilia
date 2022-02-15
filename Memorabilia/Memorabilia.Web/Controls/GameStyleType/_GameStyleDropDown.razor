@@ -1,0 +1,37 @@
+﻿@using Memorabilia.Application.Features.Admin.ItemTypeGameStyle
+@using Memorabilia.Domain.Constants
+
+@inject QueryRouter _queryRouter
+
+<InputSelect id="gameStyleType" class="form-control" @bind-Value="@Value" @oninput="@OnInputChange">
+    <option value="0">--Select--</option>
+    @foreach (var gameStyleType in GameStyleType.All)
+    {
+        <option value="@gameStyleType.Id">@gameStyleType.Name</option>
+    }
+</InputSelect>
+
+@code {
+    [Parameter]
+    public GameStyleType InitialValue { get; set; }
+
+    [Parameter]
+    public int Value { get; set; }  
+
+    [Parameter]
+    public EventCallback<int> ValueChanged { get; set; }
+
+    protected override Task OnInitializedAsync()
+    {
+        if ((InitialValue?.Id ?? 0) > 0)
+            Value = InitialValue.Id;
+
+        return base.OnInitializedAsync();
+    }   
+
+    private async Task OnInputChange(ChangeEventArgs args)
+    {
+        Value = Convert.ToInt32(args.Value);
+        await ValueChanged.InvokeAsync(Value);
+    }    
+}

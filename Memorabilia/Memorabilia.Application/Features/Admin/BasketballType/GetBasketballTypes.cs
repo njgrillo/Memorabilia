@@ -25,8 +25,6 @@ namespace Memorabilia.Application.Features.Admin.BasketballType
             }
         }
 
-        public class Query : IQuery<BasketballTypesViewModel>
-        {
-        }
+        public class Query : IQuery<BasketballTypesViewModel> { }
     }
 }

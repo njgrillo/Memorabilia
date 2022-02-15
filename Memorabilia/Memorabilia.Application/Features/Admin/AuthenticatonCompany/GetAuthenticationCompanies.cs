@@ -25,8 +25,6 @@ namespace Memorabilia.Application.Features.Admin.AuthenticationCompany
             }
         }
 
-        public class Query : IQuery<AuthenticationCompaniesViewModel>
-        {
-        }
+        public class Query : IQuery<AuthenticationCompaniesViewModel> { }
     }
 }

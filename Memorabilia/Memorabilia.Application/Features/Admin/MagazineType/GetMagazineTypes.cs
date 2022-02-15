@@ -25,8 +25,6 @@ namespace Memorabilia.Application.Features.Admin.MagazineType
             }
         }
 
-        public class Query : IQuery<MagazineTypesViewModel>
-        {
-        }
+        public class Query : IQuery<MagazineTypesViewModel> { }
     }
 }

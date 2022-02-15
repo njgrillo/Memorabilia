@@ -1,6 +1,6 @@
 ﻿@using Memorabilia.Domain.Constants
 
-<InputSelect class="form-control" id="batType" @bind-Value="@Value" @oninput="@OnInputChange" >
+<InputSelect id="batType" class="form-control" @bind-Value="@Value" @oninput="@OnInputChange" >
     <option value="0">--Select--</option>
     @foreach (var batType in BatType.All)
     {

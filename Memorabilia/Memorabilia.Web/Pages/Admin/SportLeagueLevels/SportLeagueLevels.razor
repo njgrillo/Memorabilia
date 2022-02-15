@@ -1,0 +1,121 @@
+﻿@page "/SportLeagueLevels"
+
+@using Memorabilia.Application.Features.Admin
+@using Memorabilia.Application.Features.Admin.SportLeagueLevel
+
+@inject CommandRouter _commandRouter
+@inject ProtectedLocalStorage _localStorage
+@inject NavigationManager _navigation
+@inject QueryRouter _queryRouter
+@inject IToastService _toastService
+
+@if (_viewModel == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <PopConfirm @ref="_deleteDialog"
+                Title="Delete Sport League Level"
+                ConfirmedChanged="Delete" />
+    <div class="row">
+        <div class="col-md-12" style="text-align: center">
+            <h1>@_viewModel.PageTitle</h1>
+        </div>
+    </div>
+    <br />
+    <table class="table" style="border: 1px solid black;">
+        <thead>
+            <tr>
+                <th>Sport</th>
+                <th>Level</th>
+                <th>Name</th>
+                <th>Abbreviation</th>
+                <th></th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var sportLeagueLevel in _viewModel.SportLeagueLevels)
+            {
+                <tr>
+                    <td>@sportLeagueLevel.SportName</td>
+                    <td>@sportLeagueLevel.LevelTypeName</td>
+                    <td>@sportLeagueLevel.Name</td>
+                    <td>@sportLeagueLevel.Abbreviation</td>
+                    <td>
+                        <_Tooltip Text="Edit">
+                            <img class="can-click" 
+                                 src="images/pencil.png" 
+                                 height="25" 
+                                 width="25" 
+                                 @onclick="@(_ => _navigation.NavigateTo($"{_viewModel.RoutePrefix}/Edit/{sportLeagueLevel.Id}"))" />
+                        </_Tooltip>                        
+                    </td>
+                    <td>
+                        <_Tooltip Text="Delete">
+                            <img class="can-click" 
+                                 src="images/trash.png" 
+                                 height="25" 
+                                 width="25" 
+                                 @onclick="@(_ => ShowConfirm(sportLeagueLevel.Id))" />
+                        </_Tooltip>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <div class="row">
+        <div class="col-md-12" style="text-align: center">
+            <div class="col-md-12" style="text-align: center">
+                <a href="SportLeagueLevels/Add">Add @_viewModel.ItemTitle</a>
+            </div>
+        </div>
+    </div>
+    <br />
+}
+
+@code {
+    private PopConfirm _deleteDialog;
+    private int _deletedItemId;
+    private SportLeagueLevelsViewModel _viewModel;
+
+    protected async Task Delete(bool confirm)
+    {
+        if (!confirm)
+        {
+            _deletedItemId = 0;
+            return;
+        }
+
+        var deletedItem = _viewModel.SportLeagueLevels.Single(sportLeagueLevel => sportLeagueLevel.Id == _deletedItemId);
+        var viewModel = new SaveSportLeagueLevelViewModel(deletedItem);
+        viewModel.IsDeleted = true;
+
+        var command = new SaveSportLeagueLevel.Command(viewModel);
+
+        await _commandRouter.Send(command).ConfigureAwait(false);
+        
+        _viewModel.SportLeagueLevels.Remove(deletedItem);
+
+        _toastService.ShowSuccess($"{_viewModel.ItemTitle} was deleted successfully!", _viewModel.PageTitle);
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        var userId = await _localStorage.GetAsync<int>("UserId");
+
+        if (userId.Value == 0)
+            _navigation.NavigateTo("Login");
+
+        var query = new GetSportLeagueLevels.Query();
+
+        _viewModel = await _queryRouter.Send(query).ConfigureAwait(false);
+    }
+
+    protected void ShowConfirm(int id)
+    {
+        _deletedItemId = id;
+        _deleteDialog.ShowPop();
+    }
+}

@@ -1,7 +1,7 @@
 ﻿@using Memorabilia.Application.Features.Admin.Condition
 @using Domain.Constants
 
-<InputSelect id="ConditionDropDown" class="form-control" @bind-Value="@Value" @oninput="@OnInputChange" >
+<InputSelect class="form-control" id="ConditionDropDown" @bind-Value="@Value" @oninput="@OnInputChange" >
     <option value="0">--Select--</option>
     @foreach (var condition in Condition.All)
     {

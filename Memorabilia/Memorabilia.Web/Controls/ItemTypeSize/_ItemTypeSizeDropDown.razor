@@ -3,7 +3,7 @@
 
 @inject QueryRouter _queryRouter
 
-<InputSelect class="form-control" id="itemTypeSizeDropDown" @bind-Value="@Value" @oninput="@OnInputChange">
+<InputSelect id="itemTypeSizeDropDown" class="form-control" @bind-Value="@Value" @oninput="@OnInputChange">
     <option value="0">--Select--</option>
     @foreach (var itemTypeSize in _itemTypeSizes)
     {

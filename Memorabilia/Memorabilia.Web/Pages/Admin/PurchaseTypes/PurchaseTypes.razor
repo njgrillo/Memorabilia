@@ -24,7 +24,7 @@ else
         </div>
     </div>
     <br />
-    <table class="table">
+    <table class="table" style="border: 1px solid black;">
         <thead>
             <tr>
                 <th>Name</th>
@@ -39,14 +39,13 @@ else
                 <tr>
                     <td>@domainEntity.Name</td>
                     <td>@domainEntity.Abbreviation</td>
-                    <td><a href=@($"PurchaseTypes/Edit/{domainEntity.Id}")>Edit</a></td>
                     <td>
                         <_Tooltip Text="Edit">
                             <img class="can-click" 
                                  src="images/pencil.png" 
                                  height="25" 
                                  width="25" 
-                                 @onclick="@(_ => _navigation.NavigateTo($"PurchaseTypes/Edit/{domainEntity.Id}"))" />
+                                 @onclick="@(_ => _navigation.NavigateTo($"{_viewModel.RoutePrefix}/Edit/{domainEntity.Id}"))" />
                         </_Tooltip>                        
                     </td>
                     <td>
@@ -65,7 +64,7 @@ else
     <div class="row">
         <div class="col-md-12" style="text-align: center">
             <div class="col-md-12" style="text-align: center">
-                <a href="PurchaseTypes/Add">Add Purchase Type</a>
+                <a href="PurchaseTypes/Add">Add @_viewModel.ItemTitle</a>
             </div>
         </div>
     </div>
@@ -85,15 +84,17 @@ else
             return;
         }
 
-        var viewModel = new SaveDomainViewModel(_viewModel.DomainEntities.Single(domainEntity => domainEntity.Id == _deletedItemId));
+        var deletedItem = _viewModel.DomainEntities.Single(domainEntity => domainEntity.Id == _deletedItemId);
+        var viewModel = new SaveDomainViewModel(deletedItem);
         viewModel.IsDeleted = true;
 
         var command = new SavePurchaseType.Command(viewModel);
 
         await _commandRouter.Send(command).ConfigureAwait(false);
-        await OnInitializedAsync().ConfigureAwait(false);
+        
+        _viewModel.DomainEntities.Remove(deletedItem);
 
-        _toastService.ShowSuccess("Purchase Type was deleted successfully!", _viewModel.PageTitle);
+        _toastService.ShowSuccess($"{_viewModel.ItemTitle} was deleted successfully!", _viewModel.PageTitle);
     }
 
     protected override async Task OnInitializedAsync()

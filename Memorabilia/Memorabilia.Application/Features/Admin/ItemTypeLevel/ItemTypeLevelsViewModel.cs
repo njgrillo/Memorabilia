@@ -9,11 +9,15 @@ namespace Memorabilia.Application.Features.Admin.ItemTypeLevel
 
         public ItemTypeLevelsViewModel(IEnumerable<Domain.Entities.ItemTypeLevel> itemTypeLevels)
         {
-            ItemTypeLevels = itemTypeLevels.Select(itemTypeLevel => new ItemTypeLevelViewModel(itemTypeLevel));
+            ItemTypeLevels = itemTypeLevels.Select(itemTypeLevel => new ItemTypeLevelViewModel(itemTypeLevel)).ToList();
         }
 
-        public IEnumerable<ItemTypeLevelViewModel> ItemTypeLevels { get; set; } = Enumerable.Empty<ItemTypeLevelViewModel>();
+        public List<ItemTypeLevelViewModel> ItemTypeLevels { get; set; } = new();
+
+        public override string ItemTitle => "Item Type Level";
 
         public override string PageTitle => "Item Type Levels";
+
+        public override string RoutePrefix => "ItemTypeLevels";
     }
 }

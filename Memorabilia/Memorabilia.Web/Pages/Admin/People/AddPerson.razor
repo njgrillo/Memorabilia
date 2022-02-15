@@ -2,6 +2,7 @@
 
 @using Memorabilia.Application.Features.Admin
 @using Memorabilia.Application.Features.Admin.Person
+@using Memorabilia.Web.Controls.Person
 
 @inject CommandRouter _commandRouter
 @inject ProtectedLocalStorage _localStorage
@@ -28,36 +29,60 @@ else
             <EditForm Model="_viewModel" OnValidSubmit="HandleValidSubmit">
                 <DataAnnotationsValidator />
                 <ValidationSummary />
-                <div class="form-group">
-                    <label for="firstName">First Name</label>
-                    <InputText id="firstName" @bind-Value="_viewModel.FirstName" @onblur="OnNameFieldBlur" class="form-control" />
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label for="firstName">First Name</label>
+                            <InputText id="firstName" @bind-Value="_viewModel.FirstName" @onblur="OnNameFieldBlur" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label for="lastName">Last Name</label>
+                            <InputText id="lastName" @bind-Value="_viewModel.LastName" @onblur="OnNameFieldBlur" class="form-control" />
+                        </div>
+                    </div>                    
                 </div>
-                <div class="form-group">
-                    <label for="lastName">Last Name</label>
-                    <InputText id="lastName" @bind-Value="_viewModel.LastName" @onblur="OnNameFieldBlur" class="form-control" />
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label for="suffix">Suffix</label>
+                            <InputText id="suffix" @bind-Value="_viewModel.Suffix" @onblur="OnNameFieldBlur" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label for="nickname">Nickname</label>
+                            <InputText id="nickname" @bind-Value="_viewModel.Nickname" @onblur="OnNameFieldBlur" class="form-control" />
+                        </div> 
+                    </div>                    
                 </div>
-                <div class="form-group">
-                    <label for="suffix">Suffix</label>
-                    <InputText id="suffix" @bind-Value="_viewModel.Suffix" @onblur="OnNameFieldBlur" class="form-control" />
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label for="fullName">Full Name</label>
+                            <InputText id="fullName" @bind-Value="_viewModel.FullName" class="form-control" />
+                        </div> 
+                    </div>                    
                 </div>
-                <div class="form-group">
-                    <label for="nickname">Nickname</label>
-                    <InputText id="nickname" @bind-Value="_viewModel.Nickname" @onblur="OnNameFieldBlur" class="form-control" />
-                </div>
-                <div class="form-group">
-                    <label for="fullName">Full Name</label>
-                    <InputText id="fullName" @bind-Value="_viewModel.FullName" class="form-control" />
-                </div>
-                <div class="form-group">
-                    <label for="birthDate">Birth Date</label>
-                    <InputDate id="birthDate" @bind-Value="_viewModel.BirthDate" class="form-control" />
-                </div>
-                <div class="form-group">
-                    <label for="deathDate">Death Date</label>
-                    <InputDate id="deathDate" @bind-Value="_viewModel.DeathDate" class="form-control" />
-                </div>
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label for="birthDate">Birth Date</label>
+                            <InputDate id="birthDate" @bind-Value="_viewModel.BirthDate" class="form-control" />
+                        </div>
+                    </div> 
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label for="deathDate">Death Date</label>
+                            <InputDate id="deathDate" @bind-Value="_viewModel.DeathDate" class="form-control" />
+                        </div>
+                    </div> 
+                </div>     
                 <div class="text-right">
-                    <button type="submit" class="btn btn-primary">Save</button>
+                    <button type="submit" class="btn btn-primary" @onclick="@(()=> _continue = true)">Save & Continue</button>
+                    <button type="submit" class="btn btn-primary">Save & Exit</button>
+                    <button type="button" class="btn btn-secondary" @onclick="@(_ => _navigation.NavigateTo("People"))">Cancel</button>
                 </div>
             </EditForm>
         </div>
@@ -71,6 +96,9 @@ else
 }
 
 @code {
+    private bool _continue;
+
+    private SavePersonOccupationViewModel _personOccupationViewModel = new SavePersonOccupationViewModel();
     private SavePersonViewModel _viewModel = new SavePersonViewModel();
 
     protected async Task HandleValidSubmit()
@@ -79,7 +107,9 @@ else
 
         await _commandRouter.Send(command).ConfigureAwait(false);
 
-        _navigation.NavigateTo("People");
+        var url = _continue ? $"People/Occupation/Add/{command.Id}" : "People";
+
+        _navigation.NavigateTo(url);
 
         _toastService.ShowSuccess("Person was added successfully!", _viewModel.PageTitle);
     }
@@ -87,8 +117,8 @@ else
     public void OnNameFieldBlur()
     {
         _viewModel.FullName = $"{_viewModel.LastName}" 
-            + (!string.IsNullOrWhiteSpace(_viewModel.Suffix) ? $" {_viewModel.Suffix}, " : ", ") 
+            + (!_viewModel.Suffix.IsNullOrEmpty() ? $" {_viewModel.Suffix}, " : ", ") 
             + $"{_viewModel.FirstName}"
-            + (!string.IsNullOrWhiteSpace(_viewModel.Nickname) ? $" ({_viewModel.Nickname})" : string.Empty); 
+            + (!_viewModel.Nickname.IsNullOrEmpty() ? $" ({_viewModel.Nickname})" : string.Empty); 
     }
 }

@@ -6,25 +6,25 @@ namespace Memorabilia.Domain.Entities
     {
         public MemorabiliaGame() { }
 
-        public MemorabiliaGame(int memorabiliaId, int authenticTypeId, int? personId, DateTime? gameDate)
+        public MemorabiliaGame(int memorabiliaId, int gameStyleTypeId, int? personId, DateTime? gameDate)
         {
             MemorabiliaId = memorabiliaId;
-            AuthenticTypeId = authenticTypeId;
+            GameStyleTypeId = gameStyleTypeId;
             PersonId = personId;
             GameDate = gameDate;
-        }
-
-        public int AuthenticTypeId { get; private set; }
+        }        
 
         public DateTime? GameDate { get; private set; }
+
+        public int GameStyleTypeId { get; private set; }
 
         public int MemorabiliaId { get; private set; }
 
         public int? PersonId { get; private set; }
 
-        public void Set(int authenticTypeId, int? personId, DateTime? gameDate)
+        public void Set(int gameStyleTypeId, int? personId, DateTime? gameDate)
         {
-            AuthenticTypeId = authenticTypeId;
+            GameStyleTypeId = gameStyleTypeId;
             PersonId = personId;
             GameDate = gameDate;
         }

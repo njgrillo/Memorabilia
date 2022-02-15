@@ -27,9 +27,7 @@ namespace Memorabilia.Application.Features.Admin.ItemTypeSport
 
         public class Query : IQuery<ItemTypeSportsViewModel>
         {
-            public Query() { }
-
-            public Query(int itemTypeId)
+            public Query(int? itemTypeId = null)
             {
                 ItemTypeId = itemTypeId;
             }

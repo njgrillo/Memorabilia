@@ -24,7 +24,7 @@ else
         </div>
     </div>
     <br />
-    <table class="table">
+    <table class="table" style="border: 1px solid black;">
         <thead>
             <tr>
                 <th>Full Name</th>
@@ -94,15 +94,17 @@ else
             return;
         }
 
-        var viewModel = new SavePersonViewModel(_viewModel.People.Single(person => person.Id == _deletedItemId));
+        var deletedItem = _viewModel.People.Single(person => person.Id == _deletedItemId);
+        var viewModel = new SavePersonViewModel(deletedItem);
         viewModel.IsDeleted = true;
 
         var command = new SavePerson.Command(viewModel);
 
         await _commandRouter.Send(command).ConfigureAwait(false);
-        await OnInitializedAsync().ConfigureAwait(false);
+        
+        _viewModel.People.Remove(deletedItem);
 
-        _toastService.ShowSuccess("Person was deleted successfully!", _viewModel.PageTitle);
+        _toastService.ShowSuccess($"{_viewModel.ItemTitle} was deleted successfully!", _viewModel.PageTitle);
     }
 
     protected override async Task OnInitializedAsync()

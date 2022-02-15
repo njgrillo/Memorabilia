@@ -17,16 +17,16 @@ namespace Memorabilia.Domain.Constants
 
         public static readonly JerseyStyleType[] All =
         {
-            Home,
-            Away,
-            Alternate,
-            WorldSeries,
             AllStar,
-            ProBowl,
+            Alternate,
+            Away,
             Finals,
-            Throwback,
+            Home,
             Other,
-            Unknown
+            ProBowl,
+            Throwback,
+            Unknown,
+            WorldSeries
         };
 
         private JerseyStyleType(int id, string name, string abbreviation)

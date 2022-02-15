@@ -60,7 +60,7 @@ namespace Memorabilia.Domain.Constants
 
         public static AcquisitionType Find(int id)
         {
-            return All.SingleOrDefault(AcquisitionType => AcquisitionType.Id == id);
+            return All.SingleOrDefault(acquisitionType => acquisitionType.Id == id);
         }        
     }
 }

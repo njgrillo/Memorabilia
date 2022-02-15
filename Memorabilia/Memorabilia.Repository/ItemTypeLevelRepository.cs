@@ -35,14 +35,19 @@ namespace Memorabilia.Repository
 
         public async Task<ItemTypeLevel> Get(int id)
         {
-            return await ItemTypeLevel.SingleOrDefaultAsync(user => user.Id == id).ConfigureAwait(false);
+            return await ItemTypeLevel.SingleOrDefaultAsync(itemTypeLevel => itemTypeLevel.Id == id).ConfigureAwait(false);
         }
 
         public async Task<IEnumerable<ItemTypeLevel>> GetAll(int? itemTypeId = null)
         {
             return !itemTypeId.HasValue
-                ? await ItemTypeLevel.ToListAsync().ConfigureAwait(false)
-                : await ItemTypeLevel.Where(itemTypeLevelType => itemTypeLevelType.ItemTypeId == itemTypeId).ToListAsync().ConfigureAwait(false);
+                ? (await ItemTypeLevel.ToListAsync()
+                                      .ConfigureAwait(false)).OrderBy(itemTypeLevel => itemTypeLevel.ItemTypeName)
+                                                             .ThenBy(itemTypeLevel => itemTypeLevel.LevelTypeName)
+                : (await ItemTypeLevel.Where(itemTypeLevelType => itemTypeLevelType.ItemTypeId == itemTypeId)
+                                      .ToListAsync()
+                                      .ConfigureAwait(false)).OrderBy(itemTypeLevel => itemTypeLevel.ItemTypeName)
+                                                             .ThenBy(itemTypeLevel => itemTypeLevel.LevelTypeName);
         }
 
         public async Task Update(ItemTypeLevel itemTypeLevel, CancellationToken cancellationToken = default)

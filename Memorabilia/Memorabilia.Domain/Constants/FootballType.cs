@@ -11,9 +11,9 @@ namespace Memorabilia.Domain.Constants
 
         public static readonly FootballType[] All =
         {
-            Duke,
-            DukeReplica,
             Commemorative,
+            Duke,
+            DukeReplica,            
             Other
         };
 

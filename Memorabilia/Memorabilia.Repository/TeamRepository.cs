@@ -35,14 +35,26 @@ namespace Memorabilia.Repository
 
         public async Task<Domain.Entities.Team> Get(int id)
         {
-            return await Team.SingleOrDefaultAsync(user => user.Id == id).ConfigureAwait(false);
+            return await Team.SingleOrDefaultAsync(team => team.Id == id).ConfigureAwait(false);
         }
 
         public async Task<IEnumerable<Domain.Entities.Team>> GetAll(int? sportId = null)
         {
-            return !sportId.HasValue 
-                ? await Team.ToListAsync().ConfigureAwait(false) 
-                : await Team.Where(team => team.Franchise.SportId == sportId).ToListAsync().ConfigureAwait(false);
+            try
+            {
+                return !sportId.HasValue
+                ? (await Team.ToListAsync()
+                             .ConfigureAwait(false)).OrderBy(team => team.Franchise.SportName)
+                                                    .ThenBy(team => team.Name)
+                : (await Team.Where(team => team.Franchise.SportId == sportId)
+                             .ToListAsync()
+                             .ConfigureAwait(false)).OrderBy(team => team.Franchise.SportName)
+                                                    .ThenBy(team => team.Name);
+            }
+            catch (System.Exception ex)
+            {
+                throw;
+            }
         }
 
         public async Task Update(Domain.Entities.Team team, CancellationToken cancellationToken = default)

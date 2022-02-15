@@ -9,9 +9,9 @@ namespace Memorabilia.Domain.Constants
         public static readonly AuthenticationCompany PSA = new(3, "Professional Sports Authenticator", "PSA");
 
         public static readonly AuthenticationCompany[] All =
-        {
-            JSA,
+        {            
             BAS,
+            JSA,
             PSA
         };
 
@@ -30,7 +30,7 @@ namespace Memorabilia.Domain.Constants
 
         public static AuthenticationCompany Find(int id)
         {
-            return All.SingleOrDefault(AuthenticationCompany => AuthenticationCompany.Id == id);
+            return All.SingleOrDefault(authenticationCompany => authenticationCompany.Id == id);
         }
     }
 }

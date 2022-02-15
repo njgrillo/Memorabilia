@@ -25,8 +25,6 @@ namespace Memorabilia.Application.Features.Admin.WritingInstrument
             }
         }
 
-        public class Query : IQuery<WritingInstrumentsViewModel>
-        {
-        }
+        public class Query : IQuery<WritingInstrumentsViewModel> { }
     }
 }

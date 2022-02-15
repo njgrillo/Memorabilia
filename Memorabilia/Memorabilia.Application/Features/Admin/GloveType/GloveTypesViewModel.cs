@@ -9,6 +9,10 @@ namespace Memorabilia.Application.Features.Admin.GloveType
 
         public GloveTypesViewModel(IEnumerable<DomainEntity> domainEntities) : base(domainEntities) { }
 
+        public override string ItemTitle => "Glove Type";
+
         public override string PageTitle => "Glove Types";
+
+        public override string RoutePrefix => "GloveTypes";
     }
 }

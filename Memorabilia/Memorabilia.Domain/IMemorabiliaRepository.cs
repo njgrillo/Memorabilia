@@ -14,6 +14,8 @@ namespace Memorabilia.Domain
 
         Task<IEnumerable<Entities.Memorabilia>> GetAll(int userId);
 
+        Task<IEnumerable<Entities.Memorabilia>> GetAllUnsigned(int userId);
+
         Task Update(Entities.Memorabilia memorabilia, CancellationToken cancellationToken = default);
     }
 }

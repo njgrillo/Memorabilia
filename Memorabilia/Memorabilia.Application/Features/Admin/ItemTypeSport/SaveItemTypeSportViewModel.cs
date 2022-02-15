@@ -15,12 +15,12 @@ namespace Memorabilia.Application.Features.Admin.ItemTypeSport
 
         [Required]
         [Range(1, int.MaxValue, ErrorMessage = "Item Type is required.")]
-        public int ItemTypeId { get; set; }
+        public int ItemTypeId { get; set; }        
+
+        public override string PageTitle => $"{(Id > 0 ? "Edit" : "Add")} Item Type Sport";
 
         [Required]
         [Range(1, int.MaxValue, ErrorMessage = "Sport is required.")]
         public int SportId { get; set; }
-
-        public override string PageTitle => $"{(Id > 0 ? "Edit" : "Add")} Item Type Sport";
     }
 }

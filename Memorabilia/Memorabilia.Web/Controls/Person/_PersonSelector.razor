@@ -1,33 +1,27 @@
-﻿@using Memorabilia.Application.Features.Admin.Person
-@using Memorabilia.Domain.Constants
+﻿@using Blazored.Typeahead
+@using Memorabilia.Application.Features.Admin.Person
+@using Memorabilia.Domain.Entities
 
 @inject QueryRouter _queryRouter
 
-<label for="sport">Sport</label>
-<select class="form-control" value="@Sport" @onchange="OnSportChange">
-    <option value="0">--Select--</option>
-    @foreach (var sport in Sport.All)
-    {
-        <option value="@sport.Id">@sport.Name</option>
-    }
-</select> 
-<InputSelect class="form-control" id="PersonDropDown" @bind-Value="@Value" @oninput="@OnInputChange">
-    <option value="0">--Select--</option>
-    @foreach (var person in _people)
-    {
-        <option value="@person.Id">@person.FullName</option>
-    }
-</InputSelect>
+<BlazoredTypeahead SearchMethod="SearchPeople" @bind-Value="Value" @oninput="@((e) => { SelectedValue=(string)e.Value;})">
+    <SelectedTemplate>
+        @context?.FullName 
+    </SelectedTemplate>
+    <ResultTemplate>
+        @context?.FullName
+    </ResultTemplate>
+</BlazoredTypeahead>
 
 @code {
     [Parameter]
-    public Sport Sport { get; set; }
+    public string SelectedValue { get; set; }  
 
     [Parameter]
-    public int Value { get; set; }  
+    public PersonViewModel Value { get; set; }  
 
     [Parameter]
-    public EventCallback<int> ValueChanged { get; set; }
+    public EventCallback<PersonViewModel> ValueChanged { get; set; }
 
     private IEnumerable<PersonViewModel> _people = Enumerable.Empty<PersonViewModel>();
 
@@ -45,14 +39,12 @@
 
     private async Task OnInputChange(ChangeEventArgs args)
     {
-        Value = Convert.ToInt32(args.Value);
+        Value = (PersonViewModel)args.Value;
         await ValueChanged.InvokeAsync(Value);
     }
 
-    private void OnSportChange(ChangeEventArgs args)
+    private async Task<IEnumerable<PersonViewModel>> SearchPeople(string searchText)
     {
-        Sport = Sport.Find(int.Parse(args.Value.ToString()));
-
-        //Filter People
-    }
+        return await Task.FromResult(_people.Where(person => person.FullName.Contains(searchText, StringComparison.OrdinalIgnoreCase))).ConfigureAwait(false);
+    } 
 }

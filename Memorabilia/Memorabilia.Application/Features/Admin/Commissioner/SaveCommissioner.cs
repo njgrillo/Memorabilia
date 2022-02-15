@@ -64,7 +64,7 @@ namespace Memorabilia.Application.Features.Admin.Commissioner
 
             public bool IsNew => _viewModel.IsNew;
 
-            public int PersonId => _viewModel.PersonId;
+            public int PersonId => _viewModel.Person.Id;
 
             public int SportId => _viewModel.SportId;
         }

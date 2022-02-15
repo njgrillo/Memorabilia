@@ -1,6 +1,6 @@
 ﻿@using Memorabilia.Domain.Constants
 
-<InputSelect class="form-control" id="SizeDropDown" @bind-Value="@Value" @oninput="@OnInputChange" >
+<InputSelect id="SizeDropDown" class="form-control" @bind-Value="@Value" @oninput="@OnInputChange" >
     <option value="0">--Select--</option>
     @foreach (var Size in Size.All)
     {
@@ -26,4 +26,3 @@
         await ValueChanged.InvokeAsync(Value);
     }
 }
-

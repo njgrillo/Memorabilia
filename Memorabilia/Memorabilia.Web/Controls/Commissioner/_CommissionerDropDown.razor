@@ -3,11 +3,11 @@
 
 @inject QueryRouter _queryRouter
 
-<InputSelect class="form-control" id="commissioner" @bind-Value="@Value" @oninput="@OnInputChange">
+<InputSelect id="commissioner" class="form-control" @bind-Value="@Value" @oninput="@OnInputChange">
     <option value="0">--Select--</option>
     @foreach (var commissioner in _commissioners)
     {
-        <option value="@commissioner.Id">@commissioner.PersonName</option>
+        <option value="@commissioner.Id">@commissioner.Person.FullName</option>
     }
 </InputSelect>
 

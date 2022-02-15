@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Memorabilia.Domain.Entities;
+using System;
+using System.Collections.Generic;
 
 namespace Memorabilia.Application.Features.Admin.Person
 {
@@ -31,6 +33,10 @@ namespace Memorabilia.Application.Features.Admin.Person
 
         public string Nickname => _person.Nickname;
 
+        public IEnumerable<PersonOccupation> Occupations => _person.Occupations;
+
         public string Suffix => _person.Suffix;
+
+        public IEnumerable<PersonTeam> Teams => _person.Teams;
     }
 }

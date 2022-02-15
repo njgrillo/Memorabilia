@@ -27,12 +27,15 @@ namespace Memorabilia.Application.Features.Autograph
 
         public class Query : IQuery<AutographsViewModel>
         {
-            public Query(int? memorabiliaId = null)
+            public Query(int? memorabiliaId = null, int? userId = null)
             {
                 MemorabiliaId = memorabiliaId;
+                UserId = userId;
             }
 
             public int? MemorabiliaId { get; }
+
+            public int? UserId { get; }
         }
     }
 }

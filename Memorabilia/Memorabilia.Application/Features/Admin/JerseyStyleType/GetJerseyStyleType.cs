@@ -27,9 +27,7 @@ namespace Memorabilia.Application.Features.Admin.JerseyStyleType
 
         public class Query : DomainQuery
         {
-            public Query(int id) : base(id)
-            {
-            }
+            public Query(int id) : base(id) { }
         }
     }
 }

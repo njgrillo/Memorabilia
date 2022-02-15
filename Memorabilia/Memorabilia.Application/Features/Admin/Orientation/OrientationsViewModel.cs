@@ -9,6 +9,10 @@ namespace Memorabilia.Application.Features.Admin.Orientation
 
         public OrientationsViewModel(IEnumerable<DomainEntity> domainEntities) : base(domainEntities) { }
 
-        public override string PageTitle => "Orientations";
+        public override string ItemTitle => "Orientation";
+
+        public override string PageTitle => "AOrientations";
+
+        public override string RoutePrefix => "Orientations";
     }
 }

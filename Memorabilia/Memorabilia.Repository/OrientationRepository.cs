@@ -34,12 +34,12 @@ namespace Memorabilia.Repository
 
         public async Task<Domain.Entities.Orientation> Get(int id)
         {
-            return await Orientation.SingleOrDefaultAsync(user => user.Id == id).ConfigureAwait(false);
+            return await Orientation.SingleOrDefaultAsync(orientation => orientation.Id == id).ConfigureAwait(false);
         }
 
         public async Task<IEnumerable<Domain.Entities.Orientation>> GetAll()
         {
-            return await Orientation.ToListAsync().ConfigureAwait(false);
+            return (await Orientation.ToListAsync().ConfigureAwait(false)).OrderBy(orientation => orientation.Name);
         }
 
         public async Task Update(Domain.Entities.Orientation orientation, CancellationToken cancellationToken = default)

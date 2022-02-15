@@ -15,9 +15,9 @@ namespace Memorabilia.Domain.Constants
         {
             Baseball,
             Batting,
-            Football,
-            Hockey,
             Boxing,
+            Football,
+            Hockey,            
             MMA
         };
 
@@ -36,7 +36,7 @@ namespace Memorabilia.Domain.Constants
 
         public static GloveType Find(int id)
         {
-            return All.SingleOrDefault(GloveType => GloveType.Id == id);
+            return All.SingleOrDefault(gloveType => gloveType.Id == id);
         }
     }
 }

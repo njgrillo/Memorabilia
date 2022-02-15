@@ -10,11 +10,9 @@ namespace Memorabilia.Application.Features.Admin
 
         public DomainsViewModel(IEnumerable<DomainEntity> domainEntities)
         {
-            DomainEntities = domainEntities.Select(domainEntity => new DomainViewModel(domainEntity));
+            DomainEntities = domainEntities.Select(domainEntity => new DomainViewModel(domainEntity)).ToList();
         }
 
-        public IEnumerable<DomainViewModel> DomainEntities { get; set; } = Enumerable.Empty<DomainViewModel>();
-
-        public override string PageTitle => "Authentication Companies";
+        public List<DomainViewModel> DomainEntities { get; set; } = new();        
     }
 }

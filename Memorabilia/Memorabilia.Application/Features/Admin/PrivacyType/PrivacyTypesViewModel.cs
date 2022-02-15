@@ -9,6 +9,10 @@ namespace Memorabilia.Application.Features.Admin.PrivacyType
 
         public PrivacyTypesViewModel(IEnumerable<DomainEntity> domainEntities) : base(domainEntities) { }
 
+        public override string ItemTitle => "Privacy Type";
+
         public override string PageTitle => "Privacy Types";
+
+        public override string RoutePrefix => "PrivacyTypes";
     }
 }

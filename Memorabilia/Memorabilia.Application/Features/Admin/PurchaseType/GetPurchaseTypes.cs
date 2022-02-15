@@ -25,8 +25,6 @@ namespace Memorabilia.Application.Features.Admin.PurchaseType
             }
         }
 
-        public class Query : IQuery<PurchaseTypesViewModel>
-        {
-        }
+        public class Query : IQuery<PurchaseTypesViewModel> { }
     }
 }

@@ -9,6 +9,10 @@ namespace Memorabilia.Application.Features.Admin.ItemType
 
         public ItemTypesViewModel(IEnumerable<DomainEntity> domainEntities) : base(domainEntities) { }
 
+        public override string ItemTitle => "Item Type";
+
         public override string PageTitle => "Item Types";
+
+        public override string RoutePrefix => "ItemTypes";
     }
 }

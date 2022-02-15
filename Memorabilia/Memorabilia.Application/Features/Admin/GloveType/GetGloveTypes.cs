@@ -25,8 +25,6 @@ namespace Memorabilia.Application.Features.Admin.GloveType
             }
         }
 
-        public class Query : IQuery<GloveTypesViewModel>
-        {
-        }
+        public class Query : IQuery<GloveTypesViewModel> { }
     }
 }

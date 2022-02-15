@@ -1,10 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "AZHp3ZAT3OtEJq+9adgP23ucfT5s/h8lDpGdhWYlprCEnSuS0YtRF2fB41ckcZiJ3mU1wEDM6Mdw0XYx6W+Y3g==",
+  "dgSpecHash": "gAl/xN/Qepb0RUWoC6XeBaHVR7OL2djV+Ibj7UXr/G6A/j1HGSL89555JbiS6buSVYeGCG6ahKcZexNjW0y3Ew==",
   "success": true,
   "projectFilePath": "C:\\Projects\\njgrillo\\Memorabilia\\Memorabilia\\Memorabilia.Web\\Memorabilia.Web.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\njgri\\.nuget\\packages\\blazored.toast\\3.2.2\\blazored.toast.3.2.2.nupkg.sha512",
+    "C:\\Users\\njgri\\.nuget\\packages\\blazored.typeahead\\4.6.0\\blazored.typeahead.4.6.0.nupkg.sha512",
     "C:\\Users\\njgri\\.nuget\\packages\\comparenetobjects\\4.73.0\\comparenetobjects.4.73.0.nupkg.sha512",
     "C:\\Users\\njgri\\.nuget\\packages\\dapper\\2.0.90\\dapper.2.0.90.nupkg.sha512",
     "C:\\Users\\njgri\\.nuget\\packages\\demo.framework\\1.0.10\\demo.framework.1.0.10.nupkg.sha512",
@@ -219,7 +220,8 @@
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\system.xml.xmldocument\\4.3.0\\system.xml.xmldocument.4.3.0.nupkg.sha512",
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\system.xml.xmlserializer\\4.3.0\\system.xml.xmlserializer.4.3.0.nupkg.sha512",
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\system.xml.xpath\\4.3.0\\system.xml.xpath.4.3.0.nupkg.sha512",
-    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\system.xml.xpath.xdocument\\4.3.0\\system.xml.xpath.xdocument.4.3.0.nupkg.sha512"
+    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\system.xml.xpath.xdocument\\4.3.0\\system.xml.xpath.xdocument.4.3.0.nupkg.sha512",
+    "C:\\Users\\njgri\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\5.0.13\\microsoft.netcore.app.host.win-x64.5.0.13.nupkg.sha512"
   ],
   "logs": []
 }

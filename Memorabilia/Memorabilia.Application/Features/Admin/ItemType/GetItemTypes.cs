@@ -25,8 +25,6 @@ namespace Memorabilia.Application.Features.Admin.ItemType
             }
         }
 
-        public class Query : IQuery<ItemTypesViewModel>
-        {
-        }
+        public class Query : IQuery<ItemTypesViewModel> { }
     }
 }

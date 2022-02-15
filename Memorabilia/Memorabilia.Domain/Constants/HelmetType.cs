@@ -18,17 +18,30 @@ namespace Memorabilia.Domain.Constants
 
         public static readonly HelmetType[] All =
         {
-            Pewter,
+            Blaze,
+            Bronze,
             Chrome,
+            Flash,
+            Ice,
+            Pewter,
+            Revolution,
             Throwback,
             TwentyFourKaratGoldPlated,
-            SterlingSilver,
-            Bronze,
-            Revolution,
             Speed,
+            SterlingSilver
+        };
+
+        public static readonly HelmetType[] FullSizeHelmetTypes =
+        {
             Blaze,
+            Chrome,
+            Flash,
             Ice,
-            Flash
+            Pewter,
+            Revolution,
+            Throwback,
+            TwentyFourKaratGoldPlated,
+            Speed
         };
 
         private HelmetType(int id, string name, string abbreviation)
@@ -46,7 +59,7 @@ namespace Memorabilia.Domain.Constants
 
         public static HelmetType Find(int id)
         {
-            return All.SingleOrDefault(HelmetType => HelmetType.Id == id);
+            return All.SingleOrDefault(helmetType => helmetType.Id == id);
         }
     }
 }

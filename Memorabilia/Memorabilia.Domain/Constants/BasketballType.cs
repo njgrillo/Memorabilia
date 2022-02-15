@@ -8,12 +8,14 @@ namespace Memorabilia.Domain.Constants
         public static readonly BasketballType Finals = new(2, "Finals", string.Empty);
         public static readonly BasketballType Commemorative = new(3, "Commemorative", string.Empty);
         public static readonly BasketballType Other = new(4, "Other", string.Empty);
+        public static readonly BasketballType None = new(5, "None", string.Empty);
 
         public static readonly BasketballType[] All =
         {
-            Official,
-            Finals,
             Commemorative,
+            Finals,
+            Official,  
+            None,
             Other
         };
 

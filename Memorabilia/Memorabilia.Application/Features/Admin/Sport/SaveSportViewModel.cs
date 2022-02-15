@@ -10,7 +10,6 @@ namespace Memorabilia.Application.Features.Admin.Sport
         {
             AlternateName = viewModel.AlternateName;
             Id = viewModel.Id;
-            //ImagePath = viewModel.ImagePath;
             Name = viewModel.Name;
         }
 

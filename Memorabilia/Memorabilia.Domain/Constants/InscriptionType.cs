@@ -13,12 +13,12 @@ namespace Memorabilia.Domain.Constants
 
         public static readonly InscriptionType[] All =
         {
+            BibleVerse,
+            CyYoung,
             HallOfFame,
             MostValuablePlayer,
             Number,
-            RookieOfTheYear,
-            CyYoung,
-            BibleVerse
+            RookieOfTheYear  
         };
 
         private InscriptionType(int id, string name, string abbreviation)
@@ -36,7 +36,7 @@ namespace Memorabilia.Domain.Constants
 
         public static InscriptionType Find(int id)
         {
-            return All.SingleOrDefault(InscriptionType => InscriptionType.Id == id);
+            return All.SingleOrDefault(inscriptionType => inscriptionType.Id == id);
         }
     }
 }

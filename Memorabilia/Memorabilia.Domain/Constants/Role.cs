@@ -9,9 +9,9 @@ namespace Memorabilia.Domain.Constants
         public static readonly Role User = new(3, "User");
 
         public static readonly Role[] All =
-        {
-            SuperAdmin,
+        {            
             Admin,
+            SuperAdmin,
             User
         };
 
@@ -27,7 +27,7 @@ namespace Memorabilia.Domain.Constants
 
         public static Role Find(int id)
         {
-            return All.SingleOrDefault(Role => Role.Id == id);
+            return All.SingleOrDefault(role => role.Id == id);
         }
     }
 }

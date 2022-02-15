@@ -7,6 +7,17 @@ GO
 SET QUOTED_IDENTIFIER ON
 GO
 
+IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = N'SportLeagueLevel')
+BEGIN
+	IF OBJECT_ID('tempdb..#TempSportLeagueLevelTable') IS NOT NULL DROP TABLE #TempSportLeagueLevelTable; 
+
+	SELECT * 
+	INTO #TempSportLeagueLevelTable
+	FROM [dbo].[SportLeagueLevel]
+
+	DROP TABLE [dbo].[SportLeagueLevel]
+END
+
 IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = N'AutographSpot')
 BEGIN
 	IF OBJECT_ID('tempdb..#TempAutographSpotTable') IS NOT NULL DROP TABLE #TempAutographSpotTable; 
@@ -183,6 +194,17 @@ BEGIN
 	DROP TABLE [dbo].[PersonOccupation]
 END
 
+IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = N'PersonTeam')
+BEGIN
+	IF OBJECT_ID('tempdb..#TempPersonTeamTable') IS NOT NULL DROP TABLE #TempPersonTeamTable; 
+
+	SELECT * 
+	INTO #TempPersonTeamTable
+	FROM [dbo].[PersonTeam]
+
+	DROP TABLE [dbo].[PersonTeam]
+END
+
 IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = N'TeamConference')
 BEGIN
 	IF OBJECT_ID('tempdb..#TempTeamConferenceTable') IS NOT NULL DROP TABLE #TempTeamConferenceTable; 
@@ -271,15 +293,15 @@ BEGIN
 	DROP TABLE [dbo].[MemorabiliaSize]
 END
 
-IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = N'ItemTypeAuthenticType')
+IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = N'ItemTypeGameStyleType')
 BEGIN
-	IF OBJECT_ID('tempdb..#TempItemTypeAuthenticTypeTable') IS NOT NULL DROP TABLE #TempItemTypeAuthenticTypeTable; 
+	IF OBJECT_ID('tempdb..#TempItemTypeGameStyleTypeTable') IS NOT NULL DROP TABLE #TempItemTypeGameStyleTypeTable; 
 
 	SELECT * 
-	INTO #TempItemTypeAuthenticTypeTable
-	FROM [dbo].[ItemTypeAuthenticType]
+	INTO #TempItemTypeGameStyleTypeTable
+	FROM [dbo].[ItemTypeGameStyleType]
 
-	DROP TABLE [dbo].[ItemTypeAuthenticType]
+	DROP TABLE [dbo].[ItemTypeGameStyleType]
 END
 
 IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = N'ItemTypeLevel')
@@ -392,15 +414,15 @@ BEGIN
 	DROP TABLE [dbo].[Event]
 END
 
-IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = N'HallOfFamers')
+IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = N'HallOfFame')
 BEGIN
-	IF OBJECT_ID('tempdb..#TempHallOfFamersTable') IS NOT NULL DROP TABLE #TempHallOfFamersTable; 
+	IF OBJECT_ID('tempdb..#TempHallOfFameTable') IS NOT NULL DROP TABLE #TempHallOfFameTable; 
 
 	SELECT * 
-	INTO #TempHallOfFamersTable
-	FROM [dbo].[HallOfFamers]
+	INTO #TempHallOfFameTable
+	FROM [dbo].[HallOfFame]
 
-	DROP TABLE [dbo].[HallOfFamers]
+	DROP TABLE [dbo].[HallOfFame]
 END
 
 IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = N'MemorabiliaPerson')
@@ -447,17 +469,6 @@ BEGIN
 	DROP TABLE [dbo].[Memorabilia]
 END
 
-IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = N'SportConference')
-BEGIN
-	IF OBJECT_ID('tempdb..#TempSportConferenceTable') IS NOT NULL DROP TABLE #TempSportConferenceTable; 
-
-	SELECT * 
-	INTO #TempSportConferenceTable
-	FROM [dbo].[SportConference]
-
-	DROP TABLE [dbo].[SportConference]
-END
-
 IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = N'SportDivision')
 BEGIN
 	IF OBJECT_ID('tempdb..#TempSportDivisionTable') IS NOT NULL DROP TABLE #TempSportDivisionTable; 
@@ -502,15 +513,15 @@ BEGIN
 	DROP TABLE [dbo].[AuthenticationCompany]
 END
 
-IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = N'AuthenticType')
+IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = N'GameStyleType')
 BEGIN
-	IF OBJECT_ID('tempdb..#TempAuthenticTypeTable') IS NOT NULL DROP TABLE #TempAuthenticTypeTable; 
+	IF OBJECT_ID('tempdb..#TempGameStyleTypeTable') IS NOT NULL DROP TABLE #TempGameStyleTypeTable; 
 
 	SELECT * 
-	INTO #TempAuthenticTypeTable
-	FROM [dbo].[AuthenticType]
+	INTO #TempGameStyleTypeTable
+	FROM [dbo].[GameStyleType]
 
-	DROP TABLE [dbo].[AuthenticType]
+	DROP TABLE [dbo].[GameStyleType]
 END
 
 IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = N'BaseballType')
@@ -623,15 +634,15 @@ BEGIN
 	DROP TABLE [dbo].[FootballType]
 END
 
-IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = N'FullSizeHelmetType')
+IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = N'HelmetQualityType')
 BEGIN
-	IF OBJECT_ID('tempdb..#TempFullSizeHelmetTypeTable') IS NOT NULL DROP TABLE #TempFullSizeHelmetTypeTable; 
+	IF OBJECT_ID('tempdb..#TempHelmetQualityTypeTable') IS NOT NULL DROP TABLE #TempHelmetQualityTypeTable; 
 
 	SELECT * 
-	INTO #TempFullSizeHelmetTypeTable
-	FROM [dbo].[FullSizeHelmetType]
+	INTO #TempHelmetQualityTypeTable
+	FROM [dbo].[HelmetQualityType]
 
-	DROP TABLE [dbo].[FullSizeHelmetType]
+	DROP TABLE [dbo].[HelmetQualityType]
 END
 
 IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = N'GloveType')
@@ -676,6 +687,17 @@ BEGIN
 	FROM [dbo].[ItemType]
 
 	DROP TABLE [dbo].[ItemType]
+END
+
+IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = N'Conference')
+BEGIN
+	IF OBJECT_ID('tempdb..#TempConferenceTable') IS NOT NULL DROP TABLE #TempConferenceTable; 
+
+	SELECT * 
+	INTO #TempConferenceTable
+	FROM [dbo].[Conference]
+
+	DROP TABLE [dbo].[Conference]
 END
 
 IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = N'LevelType')
@@ -854,17 +876,6 @@ BEGIN
 	DROP TABLE [dbo].[Brand]
 END
 
-IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = N'Conference')
-BEGIN
-	IF OBJECT_ID('tempdb..#TempConferenceTable') IS NOT NULL DROP TABLE #TempConferenceTable; 
-
-	SELECT * 
-	INTO #TempConferenceTable
-	FROM [dbo].[Conference]
-
-	DROP TABLE [dbo].[Conference]
-END
-
 IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = N'Franchise')
 BEGIN
 	IF OBJECT_ID('tempdb..#TempFranchiseTable') IS NOT NULL DROP TABLE #TempFranchiseTable; 
@@ -931,6 +942,17 @@ BEGIN
 	DROP TABLE [dbo].[ImageType]
 END
 
+IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = N'OccupationType')
+BEGIN
+	IF OBJECT_ID('tempdb..#TempOccupationTypeTable') IS NOT NULL DROP TABLE #TempOccupationTypeTable; 
+
+	SELECT * 
+	INTO #TempOccupationTypeTable
+	FROM [dbo].[OccupationType]
+
+	DROP TABLE [dbo].[OccupationType]
+END
+
 IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = N'PurchaseType')
 BEGIN
 	IF OBJECT_ID('tempdb..#TempPurchaseTypeTable') IS NOT NULL DROP TABLE #TempPurchaseTypeTable; 
@@ -991,30 +1013,31 @@ VALUES (1, 'James Spence Authentication', 'JSA')
 
 SET IDENTITY_INSERT [dbo].[AuthenticationCompany] OFF
 
-CREATE TABLE [dbo].[AuthenticType](
+CREATE TABLE [dbo].[GameStyleType](
 	[Id] [int] IDENTITY(1,1) NOT NULL,
 	[Name] [varchar](100) NOT NULL,
 	[Abbreviation] [varchar](10) NULL,
- CONSTRAINT [PK_AuthenticType] PRIMARY KEY CLUSTERED 
+ CONSTRAINT [PK_GameStyleType] PRIMARY KEY CLUSTERED 
 (
 	[Id] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
 
-SET IDENTITY_INSERT [dbo].[AuthenticType] ON
+SET IDENTITY_INSERT [dbo].[GameStyleType] ON
 
---INSERT INTO  [dbo].[AuthenticType] (Id, Name, Abbreviation)
+--INSERT INTO  [dbo].[GameStyleType] (Id, Name, Abbreviation)
 --VALUES (1, 'Game Used', NULL)
---     , (2, 'Game Issued', NULL)
---	 , (3, 'None', NULL)
---	 , (4, 'Other', NULL)
+--     , (2, 'Game Worn', NULL)
+--     , (3, 'Game Issued', NULL)
+--	 , (4, 'None', NULL)
+--	 , (5, 'Other', NULL)
 
-INSERT INTO [dbo].[AuthenticType] (Id, Name, Abbreviation)
+INSERT INTO [dbo].[GameStyleType] (Id, Name, Abbreviation)
 SELECT * 
-FROM #TempAuthenticTypeTable
+FROM #TempGameStyleTypeTable
 
-SET IDENTITY_INSERT [dbo].[AuthenticType] OFF
+SET IDENTITY_INSERT [dbo].[GameStyleType] OFF
 
 CREATE TABLE [dbo].[BaseballType](
 	[Id] [int] IDENTITY(1,1) NOT NULL,
@@ -1052,7 +1075,7 @@ SET IDENTITY_INSERT [dbo].[BaseballType] ON
 --	 , (20, 'Opening Day', NULL)
 --	 , (21, 'Post Season', NULL)
 --	 , (22, 'Hall of Fame', NULL)
---	 , (23, 'Breast Cancer Awareness', NULL)
+--   , (23, 'Memorial Day', NULL)
 
 INSERT INTO [dbo].[BaseballType] (Id, Name, Abbreviation)
 SELECT * 
@@ -1078,6 +1101,7 @@ SET IDENTITY_INSERT [dbo].[BasketballType] ON
 --     , (2, 'Finals', NULL)
 --	 , (3, 'Commemorative', NULL)
 --	 , (4, 'Other', NULL)
+--   , (5, 'None', NULL)
 
 INSERT INTO [dbo].[BasketballType] (Id, Name, Abbreviation)
 SELECT * 
@@ -1309,24 +1333,24 @@ FROM #TempFranchiseTable
 
 SET IDENTITY_INSERT [dbo].[Franchise] OFF
 
-CREATE TABLE [dbo].[FullSizeHelmetType](
+CREATE TABLE [dbo].[HelmetQualityType](
 	[Id] [int] IDENTITY(1,1) NOT NULL,
 	[Name] [varchar](100) NOT NULL,
 	[Abbreviation] [varchar](10) NULL,
- CONSTRAINT [PK_FullSizeHelmetType] PRIMARY KEY CLUSTERED 
+ CONSTRAINT [PK_HelmetQualityType] PRIMARY KEY CLUSTERED 
 (
 	[Id] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
 
-SET IDENTITY_INSERT [dbo].[FullSizeHelmetType] ON
+SET IDENTITY_INSERT [dbo].[HelmetQualityType] ON
 
-INSERT INTO  [dbo].[FullSizeHelmetType] (Id, Name, Abbreviation)
+INSERT INTO  [dbo].[HelmetQualityType] (Id, Name, Abbreviation)
 VALUES (1, 'Authentic', 'AUTH')
      , (2, 'Replica', 'REP')
 
-SET IDENTITY_INSERT [dbo].[FullSizeHelmetType] OFF
+SET IDENTITY_INSERT [dbo].[HelmetQualityType] OFF
 
 CREATE TABLE [dbo].[GloveType](
 	[Id] [int] IDENTITY(1,1) NOT NULL,
@@ -1719,6 +1743,29 @@ FROM #TempPrivacyTypeTable
 
 SET IDENTITY_INSERT [dbo].[PrivacyType] OFF
 
+CREATE TABLE [dbo].[OccupationType](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[Name] [varchar](100) NOT NULL,
+	[Abbreviation] [varchar](10) NULL,
+ CONSTRAINT [PK_OccupationType] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+SET IDENTITY_INSERT [dbo].[OccupationType] ON
+
+--INSERT INTO  [dbo].[OccupationType] (Id, [Name], Abbreviation)
+--VALUES (1, 'Primary', NULL)
+--     , (2, 'Secondary', NULL)
+
+INSERT INTO [dbo].[OccupationType] (Id, [Name], Abbreviation)
+SELECT * 
+FROM #TempOccupationTypeTable
+
+SET IDENTITY_INSERT [dbo].[OccupationType] OFF
+
 CREATE TABLE [dbo].[PurchaseType](
 	[Id] [int] IDENTITY(1,1) NOT NULL,
 	[Name] [varchar](100) NOT NULL,
@@ -1930,9 +1977,10 @@ VALUES (1, 'Ballpoint Pen', NULL)
 SET IDENTITY_INSERT [dbo].[WritingInstrument] OFF
 
 CREATE TABLE [dbo].[PersonOccupation](
-	[Id] [int] NOT NULL,
+	[Id] [int] IDENTITY(1,1) NOT NULL,
 	[PersonId] [int] NOT NULL,
 	[OccupationId] [int] NOT NULL,
+	[OccupationTypeId] [int] NOT NULL,
  CONSTRAINT [PK_PersonOccupation] PRIMARY KEY CLUSTERED 
 (
 	[Id] ASC
@@ -1952,6 +2000,40 @@ REFERENCES [dbo].[Person] ([Id])
 GO
 
 ALTER TABLE [dbo].[PersonOccupation] CHECK CONSTRAINT [FK_PersonOccupation_Person]
+GO
+
+ALTER TABLE [dbo].[PersonOccupation]  WITH CHECK ADD  CONSTRAINT [FK_PersonOccupation_OccupationType] FOREIGN KEY([OccupationTypeId])
+REFERENCES [dbo].[OccupationType] ([Id])
+GO
+
+ALTER TABLE [dbo].[PersonOccupation] CHECK CONSTRAINT [FK_PersonOccupation_OccupationType]
+GO
+
+CREATE TABLE [dbo].[PersonTeam](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[PersonId] [int] NOT NULL,
+	[TeamId] [int] NOT NULL,
+	[BeginYear] [int] NULL,
+	[EndYear] [int] NULL,
+ CONSTRAINT [PK_PersonTeam] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+ALTER TABLE [dbo].[PersonTeam]  WITH CHECK ADD  CONSTRAINT [FK_PersonTeam_Team] FOREIGN KEY([TeamId])
+REFERENCES [dbo].[Team] ([Id])
+GO
+
+ALTER TABLE [dbo].[PersonTeam] CHECK CONSTRAINT [FK_PersonTeam_Team]
+GO
+
+ALTER TABLE [dbo].[PersonTeam]  WITH CHECK ADD  CONSTRAINT [FK_PersonTeam_Person] FOREIGN KEY([PersonId])
+REFERENCES [dbo].[Person] ([Id])
+GO
+
+ALTER TABLE [dbo].[PersonTeam] CHECK CONSTRAINT [FK_PersonTeam_Person]
 GO
 
 CREATE TABLE [dbo].[League](
@@ -1999,38 +2081,38 @@ FROM #TempItemTypeLevelTable
 
 SET IDENTITY_INSERT [dbo].[ItemTypeLevel] OFF
 
-CREATE TABLE [dbo].[ItemTypeAuthenticType](
+CREATE TABLE [dbo].[ItemTypeGameStyleType](
 	[Id] [int] IDENTITY(1,1) NOT NULL,
 	[ItemTypeId] [int] NOT NULL,
-	[AuthenticTypeId] [int] NOT NULL,
- CONSTRAINT [PK_ItemTypeAuthenticType] PRIMARY KEY CLUSTERED 
+	[GameStyleTypeId] [int] NOT NULL,
+ CONSTRAINT [PK_ItemTypeGameStyleType] PRIMARY KEY CLUSTERED 
 (
 	[Id] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
 
-ALTER TABLE [dbo].[ItemTypeAuthenticType]  WITH CHECK ADD  CONSTRAINT [FK_ItemTypeAuthenticType_ItemType] FOREIGN KEY([ItemTypeId])
+ALTER TABLE [dbo].[ItemTypeGameStyleType]  WITH CHECK ADD  CONSTRAINT [FK_ItemTypeGameStyleType_ItemType] FOREIGN KEY([ItemTypeId])
 REFERENCES [dbo].[ItemType] ([Id])
 GO
 
-ALTER TABLE [dbo].[ItemTypeAuthenticType] CHECK CONSTRAINT [FK_ItemTypeAuthenticType_ItemType]
+ALTER TABLE [dbo].[ItemTypeGameStyleType] CHECK CONSTRAINT [FK_ItemTypeGameStyleType_ItemType]
 GO
 
-ALTER TABLE [dbo].[ItemTypeAuthenticType]  WITH CHECK ADD  CONSTRAINT [FK_ItemTypeAuthenticType_AuthenticType] FOREIGN KEY([AuthenticTypeId])
-REFERENCES [dbo].[AuthenticType] ([Id])
+ALTER TABLE [dbo].[ItemTypeGameStyleType]  WITH CHECK ADD  CONSTRAINT [FK_ItemTypeGameStyleType_GameStyleType] FOREIGN KEY([GameStyleTypeId])
+REFERENCES [dbo].[GameStyleType] ([Id])
 GO
 
-ALTER TABLE [dbo].[ItemTypeAuthenticType] CHECK CONSTRAINT [FK_ItemTypeAuthenticType_AuthenticType]
+ALTER TABLE [dbo].[ItemTypeGameStyleType] CHECK CONSTRAINT [FK_ItemTypeGameStyleType_GameStyleType]
 GO  
 
-SET IDENTITY_INSERT [dbo].[ItemTypeAuthenticType] ON
+SET IDENTITY_INSERT [dbo].[ItemTypeGameStyleType] ON
 
-INSERT INTO [dbo].[ItemTypeAuthenticType] (Id, ItemTypeId, AuthenticTypeId)
+INSERT INTO [dbo].[ItemTypeGameStyleType] (Id, ItemTypeId, GameStyleTypeId)
 SELECT * 
-FROM #TempItemTypeAuthenticTypeTable
+FROM #TempItemTypeGameStyleTypeTable
 
-SET IDENTITY_INSERT [dbo].[ItemTypeAuthenticType] OFF
+SET IDENTITY_INSERT [dbo].[ItemTypeGameStyleType] OFF
 
 CREATE TABLE [dbo].[ItemTypeSpot](
 	[Id] [int] IDENTITY(1,1) NOT NULL,
@@ -2152,14 +2234,30 @@ SET IDENTITY_INSERT [dbo].[ItemTypeBrand] OFF
 
 CREATE TABLE [dbo].[Conference](
 	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[SportId] [int] NOT NULL,
+	[LevelTypeId] [int] NOT NULL,
 	[Name] [nvarchar](100) NOT NULL,
-	[Abbreviation] [nvarchar](10) NULL,
+	[Abbreviation] [nvarchar](10) NULL,	
 	[ImagePath] [varchar](200) NULL,
  CONSTRAINT [PK_Conference] PRIMARY KEY CLUSTERED 
 (
 	[Id] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
+GO
+
+ALTER TABLE [dbo].[Conference]  WITH CHECK ADD  CONSTRAINT [FK_Conference_Sport] FOREIGN KEY([SportId])
+REFERENCES [dbo].[Sport] ([Id])
+GO
+
+ALTER TABLE [dbo].[Conference] CHECK CONSTRAINT [FK_Conference_Sport]
+GO
+
+ALTER TABLE [dbo].[Conference]  WITH CHECK ADD  CONSTRAINT [FK_Conference_LevelType] FOREIGN KEY([LevelTypeId])
+REFERENCES [dbo].[LevelType] ([Id])
+GO
+
+ALTER TABLE [dbo].[Conference] CHECK CONSTRAINT [FK_Conference_LevelType]
 GO
 
 CREATE TABLE [dbo].[Division](
@@ -2322,58 +2420,49 @@ GO
 ALTER TABLE [dbo].[Event] CHECK CONSTRAINT [FK_Event_AcquisitionType]
 GO
 
-CREATE TABLE [dbo].[HallOfFamers](
+CREATE TABLE [dbo].[HallOfFame](
 	[Id] [int] IDENTITY(1,1) NOT NULL,
 	[PersonId] [int] NOT NULL,
 	[SportId] [int] NOT NULL,
+	[LevelTypeId] [int] NOT NULL,
+	[FranchiseId] [int] NULL,
 	[InductionYear] [int] NULL,
 	[VoteCount] [int] NULL,
- CONSTRAINT [PK_HallOfFamers] PRIMARY KEY CLUSTERED 
+ CONSTRAINT [PK_HallOfFame] PRIMARY KEY CLUSTERED 
 (
 	[Id] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
 
-ALTER TABLE [dbo].[HallOfFamers]  WITH CHECK ADD  CONSTRAINT [FK_HallOfFamers_Person] FOREIGN KEY([PersonId])
+ALTER TABLE [dbo].[HallOfFame]  WITH CHECK ADD  CONSTRAINT [FK_HallOfFame_Person] FOREIGN KEY([PersonId])
 REFERENCES [dbo].[Person] ([Id])
 GO
 
-ALTER TABLE [dbo].[HallOfFamers] CHECK CONSTRAINT [FK_HallOfFamers_Person]
+ALTER TABLE [dbo].[HallOfFame] CHECK CONSTRAINT [FK_HallOfFame_Person]
 GO
 
-ALTER TABLE [dbo].[HallOfFamers]  WITH CHECK ADD  CONSTRAINT [FK_HallOfFamers_Sport] FOREIGN KEY([SportId])
+ALTER TABLE [dbo].[HallOfFame]  WITH CHECK ADD  CONSTRAINT [FK_HallOfFame_Sport] FOREIGN KEY([SportId])
 REFERENCES [dbo].[Sport] ([Id])
 GO
 
-ALTER TABLE [dbo].[HallOfFamers] CHECK CONSTRAINT [FK_HallOfFamers_Sport]
+ALTER TABLE [dbo].[HallOfFame] CHECK CONSTRAINT [FK_HallOfFame_Sport]
 GO
 
-CREATE TABLE [dbo].[SportConference](
-	[Id] [int] IDENTITY(1,1) NOT NULL,
-	[SportId] [int] NULL,
-	[ConferenceId] [int] NULL,
-	[ImagePath] [varchar](200) NULL,
- CONSTRAINT [PK_SportConference] PRIMARY KEY CLUSTERED 
-(
-	[Id] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
-) ON [PRIMARY]
+ALTER TABLE [dbo].[HallOfFame]  WITH CHECK ADD  CONSTRAINT [FK_HallOfFame_LevelType] FOREIGN KEY([LevelTypeId])
+REFERENCES [dbo].[LevelType] ([Id])
 GO
 
-ALTER TABLE [dbo].[SportConference]  WITH CHECK ADD  CONSTRAINT [FK_SportConference_Conference] FOREIGN KEY([ConferenceId])
-REFERENCES [dbo].[Conference] ([Id])
+ALTER TABLE [dbo].[HallOfFame] CHECK CONSTRAINT [FK_HallOfFame_LevelType]
 GO
 
-ALTER TABLE [dbo].[SportConference] CHECK CONSTRAINT [FK_SportConference_Conference]
+ALTER TABLE [dbo].[HallOfFame]  WITH CHECK ADD  CONSTRAINT [FK_HallOfFame_Franchise] FOREIGN KEY([FranchiseId])
+REFERENCES [dbo].[Franchise] ([Id])
 GO
 
-ALTER TABLE [dbo].[SportConference]  WITH CHECK ADD  CONSTRAINT [FK_SportConference_Sport] FOREIGN KEY([SportId])
-REFERENCES [dbo].[Sport] ([Id])
+ALTER TABLE [dbo].[HallOfFame] CHECK CONSTRAINT [FK_HallOfFame_Franchise]
 GO
 
-ALTER TABLE [dbo].[SportConference] CHECK CONSTRAINT [FK_SportConference_Sport]
-GO
 
 CREATE TABLE [dbo].[SportDivision](
 	[Id] [int] IDENTITY(1,1) NOT NULL,
@@ -2854,7 +2943,7 @@ CREATE TABLE [dbo].[Autograph](
 	[ColorId] [int] NOT NULL,
 	[AcquisitionId] [int] NOT NULL,
 	[EstimatedValue] decimal(12, 2) NULL,
-	[Grade] varchar(10) NULL,
+	[Grade] [int] NULL,
 	[CreateDate] [datetime] NOT NULL,
 	[LastModifiedDate] [datetime] NULL,
  CONSTRAINT [PK_Autograph] PRIMARY KEY CLUSTERED 
@@ -2910,7 +2999,6 @@ CREATE TABLE [dbo].[Personalization](
 	[Id] [int] IDENTITY(1,1) NOT NULL,
 	[AutographId] [int] NOT NULL,
 	[Text] [varchar](200) NOT NULL,
-	[Greeting] [varchar](500) NULL,
  CONSTRAINT [PK_Personalization] PRIMARY KEY CLUSTERED 
 (
 	[Id] ASC
@@ -3016,9 +3104,9 @@ ALTER TABLE [dbo].[WritingInstrumentBrand] CHECK CONSTRAINT [FK_WritingInstrumen
 GO
 
 CREATE TABLE [dbo].[Inscription](
-	[Id] [int] IDENTITY(1,1) NOT NULL,
-	[InscriptionTypeId] [int] NOT NULL,
+	[Id] [int] IDENTITY(1,1) NOT NULL,	
 	[AutographId] [int] NOT NULL,
+	[InscriptionTypeId] [int] NOT NULL,
 	[InscriptionText] [varchar](1000) NOT NULL,
  CONSTRAINT [PK_Inscription] PRIMARY KEY CLUSTERED 
 (
@@ -3298,7 +3386,7 @@ SET IDENTITY_INSERT [dbo].[MemorabiliaJersey] OFF
 CREATE TABLE [dbo].[MemorabiliaGame](
 	[Id] [int] IDENTITY(1,1) NOT NULL,
 	[MemorabiliaId] [int] NOT NULL,
-	[AuthenticTypeId] [int] NOT NULL,
+	[GameStyleTypeId] [int] NOT NULL,
 	[PersonId] [int] NULL,
 	[GameDate] [datetime] NULL,
  CONSTRAINT [PK_MemorabiliaGame] PRIMARY KEY CLUSTERED 
@@ -3308,11 +3396,11 @@ CREATE TABLE [dbo].[MemorabiliaGame](
 ) ON [PRIMARY]
 GO
 
-ALTER TABLE [dbo].[MemorabiliaGame]  WITH CHECK ADD  CONSTRAINT [FK_MemorabiliaGame_AuthenticType] FOREIGN KEY([AuthenticTypeId])
-REFERENCES [dbo].[AuthenticType] ([Id])
+ALTER TABLE [dbo].[MemorabiliaGame]  WITH CHECK ADD  CONSTRAINT [FK_MemorabiliaGame_GameStyleType] FOREIGN KEY([GameStyleTypeId])
+REFERENCES [dbo].[GameStyleType] ([Id])
 GO
 
-ALTER TABLE [dbo].[MemorabiliaGame] CHECK CONSTRAINT [FK_MemorabiliaGame_AuthenticType]
+ALTER TABLE [dbo].[MemorabiliaGame] CHECK CONSTRAINT [FK_MemorabiliaGame_GameStyleType]
 GO
 
 ALTER TABLE [dbo].[MemorabiliaGame]  WITH CHECK ADD  CONSTRAINT [FK_MemorabiliaGame_Person] FOREIGN KEY([PersonId])
@@ -3331,7 +3419,7 @@ GO
 
 SET IDENTITY_INSERT [dbo].[MemorabiliaGame] ON
 
-INSERT INTO [dbo].[MemorabiliaGame] (Id, MemorabiliaId, AuthenticTypeId, PersonId, GameDate)
+INSERT INTO [dbo].[MemorabiliaGame] (Id, MemorabiliaId, GameStyleTypeId, PersonId, GameDate)
 SELECT * 
 FROM #TempMemorabiliaGameTable
 
@@ -3424,3 +3512,38 @@ SELECT *
 FROM #TempAutographSpotTable
 
 SET IDENTITY_INSERT [dbo].[AutographSpot] OFF
+
+CREATE TABLE [dbo].[SportLeagueLevel](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[SportId] [int] NOT NULL,
+	[LevelTypeId] [int] NOT NULL,
+	[Name] [nvarchar](100) NOT NULL,
+	[Abbreviation] [nvarchar](10) NULL,
+ CONSTRAINT [PK_SportLeagueLevel] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+ALTER TABLE [dbo].[SportLeagueLevel]  WITH CHECK ADD  CONSTRAINT [FK_SportLeagueLevel_Sport] FOREIGN KEY([SportId])
+REFERENCES [dbo].[Sport] ([Id])
+GO
+
+ALTER TABLE [dbo].[SportLeagueLevel] CHECK CONSTRAINT [FK_SportLeagueLevel_Sport]
+GO
+
+ALTER TABLE [dbo].[SportLeagueLevel]  WITH CHECK ADD  CONSTRAINT [FK_SportLeagueLevel_LevelType] FOREIGN KEY([LevelTypeId])
+REFERENCES [dbo].[LevelType] ([Id])
+GO
+
+ALTER TABLE [dbo].[SportLeagueLevel] CHECK CONSTRAINT [FK_SportLeagueLevel_LevelType]
+GO
+
+SET IDENTITY_INSERT [dbo].[SportLeagueLevel] ON
+
+--INSERT INTO [dbo].[SportLeagueLevel] (Id, SportId, LevelTypeId, [Name], Abbreviation)
+--SELECT * 
+--FROM #TempSportLeagueLevelTable
+
+SET IDENTITY_INSERT [dbo].[SportLeagueLevel] OFF

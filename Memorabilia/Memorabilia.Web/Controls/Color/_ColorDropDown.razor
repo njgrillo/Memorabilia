@@ -2,7 +2,7 @@
 
 <InputSelect id="ColorDropDown" class="form-control" @bind-Value="@Value" @oninput="@OnInputChange" >
     <option value="0">--Select--</option>
-    @foreach (var color in Domain.Constants.Color.All)
+    @foreach (var color in Color.All)
     {
         <option value="@color.Id">@color.Name</option>
     }

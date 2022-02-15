@@ -34,7 +34,7 @@ namespace Memorabilia.Domain.Constants
 
         public static Sport Find(int id)
         {
-            return All.SingleOrDefault(Sport => Sport.Id == id);
+            return All.SingleOrDefault(sport => sport.Id == id);
         }
     }
 }

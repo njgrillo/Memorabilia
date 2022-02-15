@@ -25,8 +25,6 @@ namespace Memorabilia.Application.Features.Admin.Franchise
             }
         }
 
-        public class Query : IQuery<FranchisesViewModel>
-        {
-        }
+        public class Query : IQuery<FranchisesViewModel> { }
     }
 }

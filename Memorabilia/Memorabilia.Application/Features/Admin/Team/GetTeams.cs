@@ -27,9 +27,7 @@ namespace Memorabilia.Application.Features.Admin.Team
 
         public class Query : IQuery<TeamsViewModel>
         {
-            public Query() { }
-
-            public Query(int sportId)
+            public Query(int? sportId = null)
             {
                 SportId = sportId;
             }

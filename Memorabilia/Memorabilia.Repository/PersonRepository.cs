@@ -16,7 +16,10 @@ namespace Memorabilia.Repository
             _context = context;
         }
 
-        private IQueryable<Domain.Entities.Person> Person => _context.Set<Domain.Entities.Person>();
+        private IQueryable<Domain.Entities.Person> Person => _context.Set<Domain.Entities.Person>()
+                                                                     .Include(person => person.HallOfFames)
+                                                                     .Include(person => person.Occupations)
+                                                                     .Include(person => person.Teams);
 
         public async Task Add(Domain.Entities.Person person, CancellationToken cancellationToken = default)
         {
@@ -34,12 +37,12 @@ namespace Memorabilia.Repository
 
         public async Task<Domain.Entities.Person> Get(int id)
         {
-            return await Person.SingleOrDefaultAsync(user => user.Id == id).ConfigureAwait(false);
+            return await Person.SingleOrDefaultAsync(person => person.Id == id).ConfigureAwait(false);
         }
 
         public async Task<IEnumerable<Domain.Entities.Person>> GetAll()
         {
-            return await Person.ToListAsync().ConfigureAwait(false);
+            return (await Person.ToListAsync().ConfigureAwait(false)).OrderBy(person => person.FullName);
         }
 
         public async Task Update(Domain.Entities.Person person, CancellationToken cancellationToken = default)

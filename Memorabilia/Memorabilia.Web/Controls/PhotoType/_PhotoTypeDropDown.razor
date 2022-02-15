@@ -1,6 +1,8 @@
-﻿<InputSelect class="form-control" id="photoType" @bind-Value="@Value" @oninput="@OnInputChange" >
+﻿@using Memorabilia.Domain.Constants
+
+<InputSelect id="photoType" class="form-control" @bind-Value="@Value" @oninput="@OnInputChange" >
     <option value="0">--Select--</option>
-    @foreach (var photoType in Domain.Constants.PhotoType.All)
+    @foreach (var photoType in PhotoType.All)
     {
         <option value="@photoType.Id">@photoType.Name</option>
     }
@@ -24,5 +26,3 @@
         await ValueChanged.InvokeAsync(Value);
     }
 }
-
-

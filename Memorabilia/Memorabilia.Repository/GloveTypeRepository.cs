@@ -34,12 +34,12 @@ namespace Memorabilia.Repository
 
         public async Task<Domain.Entities.GloveType> Get(int id)
         {
-            return await GloveType.SingleOrDefaultAsync(user => user.Id == id).ConfigureAwait(false);
+            return await GloveType.SingleOrDefaultAsync(gloveType => gloveType.Id == id).ConfigureAwait(false);
         }
 
         public async Task<IEnumerable<Domain.Entities.GloveType>> GetAll()
         {
-            return await GloveType.ToListAsync().ConfigureAwait(false);
+            return (await GloveType.ToListAsync().ConfigureAwait(false)).OrderBy(gloveType => gloveType.Name);
         }
 
         public async Task Update(Domain.Entities.GloveType gloveType, CancellationToken cancellationToken = default)

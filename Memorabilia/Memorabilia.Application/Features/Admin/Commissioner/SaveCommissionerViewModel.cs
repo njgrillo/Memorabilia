@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Memorabilia.Application.Features.Admin.Person;
+using System.ComponentModel.DataAnnotations;
 
 namespace Memorabilia.Application.Features.Admin.Commissioner
 {
@@ -11,7 +12,7 @@ namespace Memorabilia.Application.Features.Admin.Commissioner
             BeginYear = viewModel.BeginYear;
             EndYear = viewModel.EndYear;
             Id = viewModel.Id;
-            PersonId = viewModel.PersonId;
+            Person = new PersonViewModel(viewModel.Person);
             SportId = viewModel.SportId;
         }
 
@@ -19,10 +20,14 @@ namespace Memorabilia.Application.Features.Admin.Commissioner
 
         public int? EndYear { get; set; }
 
-        public override string PageTitle => $"{(Id > 0 ? "Edit" : "Add")} Commissioner";
+        public override string ItemTitle => "Commissioner";
+
+        public override string PageTitle => $"{(Id > 0 ? "Edit" : "Add")} {ItemTitle}";
 
         [Required]
-        public int PersonId { get; set; }
+        public PersonViewModel Person { get; set; }
+
+        public override string RoutePrefix => "Commissioners";
 
         [Required]
         public int SportId { get; set; }

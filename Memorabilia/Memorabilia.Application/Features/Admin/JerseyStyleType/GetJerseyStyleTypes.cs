@@ -25,8 +25,6 @@ namespace Memorabilia.Application.Features.Admin.JerseyStyleType
             }
         }
 
-        public class Query : IQuery<JerseyStyleTypesViewModel>
-        {
-        }
+        public class Query : IQuery<JerseyStyleTypesViewModel> { }
     }
 }

@@ -24,7 +24,7 @@ else
         </div>
     </div>
     <br />
-    <table class="table">
+    <table class="table" style="border: 1px solid black;">
         <thead>
             <tr>
                 <th>Item Type</th>
@@ -45,7 +45,7 @@ else
                                  src="images/pencil.png" 
                                  height="25" 
                                  width="25" 
-                                 @onclick="@(_ => _navigation.NavigateTo($"ItemTypeBrands/Edit/{itemTypeBrand.Id}"))" />
+                                 @onclick="@(_ => _navigation.NavigateTo($"{_viewModel.RoutePrefix}/Edit/{itemTypeBrand.Id}"))" />
                         </_Tooltip>                        
                     </td>
                     <td>
@@ -64,7 +64,7 @@ else
     <div class="row">
         <div class="col-md-12" style="text-align: center">
             <div class="col-md-12" style="text-align: center">
-                <a href="ItemTypeBrands/Add">Add Item Type Brand</a>
+                <a href="ItemTypeBrands/Add">Add @_viewModel.ItemTitle</a>
             </div>
         </div>
     </div>
@@ -84,15 +84,17 @@ else
             return;
         }
 
-        var viewModel = new SaveItemTypeBrandViewModel(_viewModel.ItemTypeBrands.Single(ItemTypeBrand => ItemTypeBrand.Id == _deletedItemId));
+        var deletedItem = _viewModel.ItemTypeBrands.Single(ItemTypeBrand => ItemTypeBrand.Id == _deletedItemId);
+        var viewModel = new SaveItemTypeBrandViewModel(deletedItem);
         viewModel.IsDeleted = true;
 
         var command = new SaveItemTypeBrand.Command(viewModel);
 
         await _commandRouter.Send(command).ConfigureAwait(false);
-        await OnInitializedAsync().ConfigureAwait(false);
+        
+        _viewModel.ItemTypeBrands.Remove(deletedItem);
 
-        _toastService.ShowSuccess("Item Type Brand was deleted successfully!", _viewModel.PageTitle);
+        _toastService.ShowSuccess($"{_viewModel.ItemTitle} was deleted successfully!", _viewModel.PageTitle);
     }
 
     protected override async Task OnInitializedAsync()

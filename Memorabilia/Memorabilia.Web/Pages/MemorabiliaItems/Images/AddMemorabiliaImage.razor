@@ -44,25 +44,22 @@ else
                                         OnPrimarySet="OnPrimarySet"
                                         OnRemove="OnRemove" />
                 </div> 
-                <div class="text-right">
-                    <button type="submit" class="btn btn-primary">Save</button>
-                    <button type="button" class="btn btn-cancel" @onclick="Cancel">Cancel</button>
+                <div class="text-right">                    
+                    <button type="submit" class="btn btn-primary" @onclick="@(()=> _continue = true)">Save & Continue</button>
+                    <button type="submit" class="btn btn-primary">Save & Exit</button>
+                    <button type="button" class="btn btn-secondary" @onclick="@(_ => _navigation.NavigateTo($"Autographs/Add/{MemorabiliaId}"))">Skip</button>
+                    <button type="button" class="btn btn-secondary" @onclick="@(_ => _navigation.NavigateTo("Memorabilia"))">Cancel</button>
                 </div>
             </EditForm>           
         </div>
-        <div class="row">
-            <div class="col-md-12" style="text-align: center">
-                <a href="Memorabilia/Add">Back</a>
-            </div>
-        </div>
-        <br />
     </div>
 }
 
 @code {
     [Parameter]
-    public int MemorabiliaId { get; set; }  
+    public int MemorabiliaId { get; set; }
 
+    private bool _continue;
     private _ImageFileSelector _imageFileSelector;
     private SaveMemorabiliaImagesViewModel _viewModel = new SaveMemorabiliaImagesViewModel();
 
@@ -75,6 +72,8 @@ else
         }
 
         _viewModel.Images = new List<SaveImageViewModel>();
+
+        _navigation.NavigateTo("Memorabilia");
     }
 
     protected async Task HandleValidSubmit()
@@ -90,7 +89,9 @@ else
 
         await _commandRouter.Send(command).ConfigureAwait(false);
 
-        _navigation.NavigateTo($"Memorabilia");
+        var url = _continue ? $"Autographs/Add/{MemorabiliaId}" : "Memorabilia";
+
+        _navigation.NavigateTo(url);
 
         _toastService.ShowSuccess("Memorabilia Images were added successfully!", _viewModel.PageTitle);
     }

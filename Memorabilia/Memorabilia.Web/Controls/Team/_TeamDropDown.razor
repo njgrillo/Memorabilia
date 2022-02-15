@@ -3,7 +3,7 @@
 
 @inject QueryRouter _queryRouter
 
-<InputSelect class="form-control" id="TeamDropDown" @bind-Value="@Value" @oninput="@OnInputChange">
+<InputSelect id="TeamDropDown" class="form-control" @bind-Value="@Value" @oninput="@OnInputChange">
     <option value="0">--Select--</option>
     @foreach (var team in _teams)
     {

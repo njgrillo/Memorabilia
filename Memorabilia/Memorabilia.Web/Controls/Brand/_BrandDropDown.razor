@@ -1,6 +1,6 @@
 ﻿@using Memorabilia.Domain.Constants
 
-<InputSelect class="form-control" id="BrandDropDown" @bind-Value="@Value" @oninput="@OnInputChange" >
+<InputSelect id="BrandDropDown" class="form-control" @bind-Value="@Value" @oninput="@OnInputChange" >
     <option value="0">--Select--</option>
     @foreach (var brand in Brand.All)
     {

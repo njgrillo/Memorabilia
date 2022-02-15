@@ -21,6 +21,9 @@ namespace Memorabilia.Application.Features.Memorabilia.Image
 
             protected override async Task Handle(Command command)
             {
+                if (!command.FilePaths.Any())
+                    return;
+
                 var memorabilia = await _memorabiliaRepository.Get(command.MemorabiliaId).ConfigureAwait(false);
 
                 memorabilia.SetImages(command.FilePaths, command.PrimaryImageFilePath);

@@ -34,12 +34,13 @@ namespace Memorabilia.Repository
 
         public async Task<Domain.Entities.LevelType> Get(int id)
         {
-            return await LevelType.SingleOrDefaultAsync(user => user.Id == id).ConfigureAwait(false);
+            return await LevelType.SingleOrDefaultAsync(levelType => levelType.Id == id).ConfigureAwait(false);
         }
 
         public async Task<IEnumerable<Domain.Entities.LevelType>> GetAll()
         {
-            return await LevelType.ToListAsync().ConfigureAwait(false);
+            return (await LevelType.ToListAsync()
+                                   .ConfigureAwait(false)).OrderBy(levelType => levelType.Name);
         }
 
         public async Task Update(Domain.Entities.LevelType levelType, CancellationToken cancellationToken = default)

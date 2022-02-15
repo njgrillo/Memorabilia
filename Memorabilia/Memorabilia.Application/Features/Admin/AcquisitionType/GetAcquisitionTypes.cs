@@ -25,8 +25,6 @@ namespace Memorabilia.Application.Features.Admin.AcquisitionType
             }
         }
 
-        public class Query : IQuery<AcquisitionTypesViewModel>
-        {
-        }
+        public class Query : IQuery<AcquisitionTypesViewModel> { }
     }
 }

@@ -9,6 +9,10 @@ namespace Memorabilia.Application.Features.Admin.JerseyQualityType
 
         public JerseyQualityTypesViewModel(IEnumerable<DomainEntity> domainEntities) : base(domainEntities) { }
 
+        public override string ItemTitle => "Jersey Quality Type";
+
         public override string PageTitle => "Jersey Quality Types";
+
+        public override string RoutePrefix => "JerseyQualityTypes";
     }
 }

@@ -9,6 +9,10 @@ namespace Memorabilia.Application.Features.Admin.ImageType
 
         public ImageTypesViewModel(IEnumerable<DomainEntity> domainEntities) : base(domainEntities) { }
 
+        public override string ItemTitle => "Image Type";
+
         public override string PageTitle => "Image Types";
+
+        public override string RoutePrefix => "ImageTypes";
     }
 }
