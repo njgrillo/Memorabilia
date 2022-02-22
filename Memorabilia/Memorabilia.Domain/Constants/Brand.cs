@@ -11,6 +11,7 @@ namespace Memorabilia.Domain.Constants
         public static readonly Brand Other = new(7, "Other", string.Empty);
         public static readonly Brand Rawlings = new(1, "Rawlings", string.Empty);       
         public static readonly Brand Reebok = new(3, "Reebok", "RBK");  
+        public static readonly Brand Spalding = new(10, "Spalding", string.Empty);  
         public static readonly Brand Spinneybeck = new(9, "Spinneybeck", string.Empty);  
         public static readonly Brand Wilson = new(6, "Wilson", string.Empty);
 
@@ -23,6 +24,7 @@ namespace Memorabilia.Domain.Constants
             Other,
             Rawlings,
             Reebok,
+            Spalding,
             Spinneybeck,
             Wilson
         };

@@ -147,7 +147,7 @@ using Memorabilia.Application.Features.Memorabilia;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 24 "D:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\Pages\MemorabiliaItems\Index.razor"
+#line 27 "D:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\Pages\MemorabiliaItems\Index.razor"
        
     protected override async Task OnInitializedAsync()
     {

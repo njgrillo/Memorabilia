@@ -18,6 +18,7 @@ namespace Memorabilia.Repository
 
         private IQueryable<Domain.Entities.Memorabilia> Memorabilia => _context.Set<Domain.Entities.Memorabilia>()
                                                                                .Include(memorabilia => memorabilia.Autographs)
+                                                                               //.Include(memorabilia => memorabilia.Autographs.Select(autograph => autograph.Images))
                                                                                .Include(memorabilia => memorabilia.Baseball)
                                                                                .Include(memorabilia => memorabilia.Basketball)
                                                                                .Include(memorabilia => memorabilia.Bat)

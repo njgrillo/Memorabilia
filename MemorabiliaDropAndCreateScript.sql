@@ -1917,6 +1917,7 @@ BEGIN
 		 , (20, 'Soccer Ball', NULL)
 		 , (21, 'Hockey Stick', NULL)
 		 , (22, 'Ticket Stub', NULL)
+		 , (23, 'Hat', NULL)
 END
 
 IF @KeepExistingValues = 1
@@ -2317,6 +2318,11 @@ BEGIN
 		 , (4, 'Small', 'S')
 		 , (5, 'Standard', NULL)
 		 , (6, 'Oversized', NULL)
+		 , (7, 'Other', NULL)
+		 , (8, 'None', NULL)
+		 , (9, 'Medium', 'M')
+		 , (10, 'Extra Large', 'XL')
+
 END
 
 IF @KeepExistingValues = 1
@@ -3056,8 +3062,9 @@ SET IDENTITY_INSERT [dbo].[MemorabiliaBasketball] OFF
 CREATE TABLE [dbo].[MemorabiliaBat](
 	[Id] [int] IDENTITY(1,1) NOT NULL,
 	[MemorabiliaId] [int] NOT NULL,
-	[BatTypeId] [int] NOT NULL,
-	[Length] [int] NULL
+	[BatTypeId] [int] NULL,
+	[Length] [int] NULL,
+	[ColorId] [int] NULL
  CONSTRAINT [PK_MemorabiliaBat] PRIMARY KEY CLUSTERED 
 (
 	[Id] ASC
@@ -3072,11 +3079,15 @@ ALTER TABLE [dbo].[MemorabiliaBat]  WITH CHECK ADD  CONSTRAINT [FK_MemorabiliaBa
 REFERENCES [dbo].[Memorabilia] ([Id])
 ALTER TABLE [dbo].[MemorabiliaBat] CHECK CONSTRAINT [FK_MemorabiliaBat_Memorabilia]
 
+ALTER TABLE [dbo].[MemorabiliaBat]  WITH CHECK ADD  CONSTRAINT [FK_MemorabiliaBat_Color] FOREIGN KEY([ColorId])
+REFERENCES [dbo].[Color] ([Id])
+ALTER TABLE [dbo].[MemorabiliaBat] CHECK CONSTRAINT [FK_MemorabiliaBat_Color]
+
 SET IDENTITY_INSERT [dbo].[MemorabiliaBat] ON
 
 IF @KeepExistingValues = 1
 BEGIN
-	INSERT INTO [dbo].[MemorabiliaBat] (Id, MemorabiliaId, BatTypeId, [Length])
+	INSERT INTO [dbo].[MemorabiliaBat] (Id, MemorabiliaId, BatTypeId, [Length], ColorId)
 	SELECT * 
 	FROM #TempMemorabiliaBatTable
 END

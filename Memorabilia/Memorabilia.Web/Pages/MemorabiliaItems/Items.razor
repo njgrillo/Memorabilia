@@ -1,0 +1,164 @@
+﻿@page "/Memorabilia/Items"
+
+@using Memorabilia.Application.Features.Memorabilia
+@using Memorabilia.Web.Controls
+@using System 
+@using System.IO
+
+@inject CommandRouter _commandRouter
+@inject ProtectedLocalStorage _localStorage
+@inject NavigationManager _navigation
+@inject QueryRouter _queryRouter
+@inject IToastService _toastService
+
+@if (_viewModel == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <PopConfirm @ref="_deleteDialog"
+                Title="Delete Memorabilia Item"
+                ConfirmedChanged="Delete" />
+    <div class="row">
+        <div class="col-md-12" style="text-align: center">
+            <h1>@_viewModel.PageTitle</h1>
+        </div>
+    </div>
+    <br />
+    <table class="table" style="border: 1px solid black;">
+        <thead>
+            <tr>
+                <th></th>
+                <th>Item Type</th>
+                <th>Condition</th>
+                <th>Value</th>
+                <th>Acquisition Type</th>
+                <th>Acquisition Date</th>
+                <th>Cost</th>
+                <th>Place of Purchase</th>
+                <th>Privacy Type</th>
+                <th>Autographs</th>
+                <th>Create Date</th>
+                <th>Last Modified Date</th>
+                <th></th>
+                <th></th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var memorabiliaItem in _viewModel.MemorabiliaItems)
+            {
+                <tr>
+                    <td>
+                        <_Tooltip Text="Images">
+                            <img class="can-click" 
+                                 src="data:image/jpg;base64,@Convert.ToBase64String(File.ReadAllBytes(@memorabiliaItem.ImagePath))"
+                                 height="40" 
+                                 width="40" 
+                                 @onclick="@( _ => _navigation.NavigateTo($"Memorabilia/Image/Edit/{memorabiliaItem.Id}") )" />
+                        </_Tooltip>                         
+                    </td>
+                    <td>@memorabiliaItem.ItemTypeName</td>
+                    <td>@memorabiliaItem.ConditionName</td>
+                    <td>@memorabiliaItem.EstimatedValue?.ToString("c")</td>
+                    <td>@memorabiliaItem.AcquisitionTypeName</td>
+                    <td>@memorabiliaItem.Acquisition.AcquiredDate?.ToString("MM-dd-yyyy")</td>
+                    <td>@memorabiliaItem.Acquisition.Cost?.ToString("c")</td>
+                    <td>@memorabiliaItem.PurchaseTypeName</td>
+                    <td>@memorabiliaItem.PrivacyTypeName</td>
+                    <td>
+                        <_Tooltip Text="@memorabiliaItem.AutographDisplayCount">
+                            <img class="can-click" 
+                                 src="@memorabiliaItem.PrimaryAutographImagePath" 
+                                 height="40" 
+                                 width="40" 
+                                 @onclick="@(_ => _navigation.NavigateTo((memorabiliaItem.HasAutographs ? $"Autographs/Edit/{memorabiliaItem.PrimaryAutographId}" : $"Autographs/Add/{memorabiliaItem.Id}")))" />
+                        </_Tooltip>                         
+                    </td>
+                    <td>@memorabiliaItem.CreateDate</td>
+                    <td>@memorabiliaItem.LastModifiedDate</td>
+                    <td>
+                        <_Tooltip Text="Details">
+                            <img class="can-click" 
+                                 src="images/details.png" 
+                                 height="40" 
+                                 width="40" 
+                                 @onclick="@(_ => _navigation.NavigateTo($"Memorabilia/{memorabiliaItem.ItemTypeName}/Edit/{memorabiliaItem.Id}"))" />
+                        </_Tooltip>                         
+                    </td>
+                    <td>
+                        <_Tooltip Text="Edit">
+                            <img class="can-click" 
+                                 src="images/pencil.png" 
+                                 height="40" 
+                                 width="40" 
+                                 @onclick="@(_ => _navigation.NavigateTo($"Memorabilia/Edit/{memorabiliaItem.Id}"))" />
+                        </_Tooltip>                        
+                    </td>
+                    <td>
+                        <_Tooltip Text="Delete">
+                            <img class="can-click" 
+                                 src="images/trash.png" 
+                                 height="40" 
+                                 width="40" 
+                                 @onclick="@(_ => ShowConfirm(memorabiliaItem.Id))" />
+                        </_Tooltip>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <div class="row">
+        <div class="col-md-12" style="text-align: center">
+            <div class="col-md-12" style="text-align: center">
+                <a href="Memorabilia/Add">Add Memorabilia</a>
+            </div>
+        </div>
+    </div>
+    <br />
+}
+
+@code {
+    private PopConfirm _deleteDialog;
+    private int _deletedItemId;
+    private MemorabiliaItemsViewModel _viewModel;
+
+    protected async Task Delete(bool confirm)
+    {
+        if (!confirm)
+        {
+            _deletedItemId = 0;
+            return;
+        }
+
+        var itemToDelete = _viewModel.MemorabiliaItems.Single(item => item.Id == _deletedItemId);
+        var viewModel = new SaveMemorabiliaItemViewModel(itemToDelete);
+        viewModel.IsDeleted = true;
+
+        var command = new SaveMemorabiliaItem.Command(viewModel);
+
+        await _commandRouter.Send(command).ConfigureAwait(false);
+        await OnInitializedAsync().ConfigureAwait(false);
+
+        _toastService.ShowSuccess($"{itemToDelete.ItemTypeName} was deleted successfully!", _viewModel.PageTitle);
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        var userId = await _localStorage.GetAsync<int>("UserId");
+
+        if (userId.Value == 0)
+            _navigation.NavigateTo("Login");
+
+        var query = new GetMemorabiliaItems.Query(userId.Value);
+
+        _viewModel = await _queryRouter.Send(query).ConfigureAwait(false);
+    }
+
+    protected void ShowConfirm(int id)
+    {
+        _deletedItemId = id;
+        _deleteDialog.ShowPop();
+    }
+}

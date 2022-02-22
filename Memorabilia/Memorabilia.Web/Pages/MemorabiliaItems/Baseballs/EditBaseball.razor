@@ -1,10 +1,14 @@
 ﻿@page "/Memorabilia/Baseball/Edit/{memorabiliaId:int}"
 
+@using Blazored.Typeahead
+@using Memorabilia.Application.Features.Admin.Person
 @using Memorabilia.Application.Features.Memorabilia
 @using Memorabilia.Application.Features.Memorabilia.Baseball
 @using Memorabilia.Domain.Constants
 @using Memorabilia.Web.Controls.Baseball
+@using Memorabilia.Web.Controls.GameStyleType
 @using Memorabilia.Web.Controls.ItemTypeBrand
+@using Memorabilia.Web.Controls.ItemTypeLevel
 @using Memorabilia.Web.Controls.ItemTypeSize
 @using Memorabilia.Web.Controls.Commissioner
 @using Memorabilia.Web.Controls.Person
@@ -36,56 +40,118 @@ else
             <EditForm Model="_viewModel" OnValidSubmit="HandleValidSubmit">
                 <DataAnnotationsValidator />
                 <ValidationSummary />
-                <div class="form-group">
-                    <label for="brand">Brand</label>
-                    <_ItemTypeBrandDropDown @bind-Value="@_viewModel.BrandId" 
-                                            @bind-Value:event="ValueChanged"
-                                            ItemType="@ItemType.Baseball" />
-                </div>                
-                <div class="form-group" hidden="@(!_viewModel.DisplayBaseballType)">
-                    <label for="baseballType">Baseball Type</label>
-                    <_BaseballTypeDropDown @bind-Value="@_viewModel.BaseballTypeId" 
-                                           @bind-Value:event="ValueChanged" /> 
-                </div>                 
-                <div class="form-group" hidden="@(!_viewModel.DisplayBaseballTypeYear)">
-                    <label for="year">Year</label>
-                    <InputNumber id="year" class="form-control" @bind-Value="_viewModel.BaseballTypeYear" />
-                </div> 
-                <div class="form-group" hidden="@(!_viewModel.DisplayBaseballTypeAnniversary)">
-                    <label for="anniversary">Anniversary</label>
-                    <InputText id="anniversary" class="form-control" @bind-Value="_viewModel.BaseballTypeAnniversary" />
-                </div>  
-                <div class="form-group">
-                    <label for="commissioner">Commissioner</label>
-                    <_CommissionerDropDown @bind-Value="@_viewModel.CommissionerId"
-                                           @bind-Value:event="ValueChanged" 
-                                           Sport="@Sport.Baseball" />
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label for="level">Level</label>
+                            <_ItemTypeLevelDropDown @bind-Value="@_viewModel.LevelTypeId"
+                                                    @bind-Value:event="ValueChanged" 
+                                                    ItemType="_viewModel.ItemType" /> 
+                        </div> 
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label for="brand">Brand</label>
+                            <_ItemTypeBrandDropDown @bind-Value="@_viewModel.BrandId" 
+                                                    @bind-Value:event="ValueChanged"
+                                                    ItemType="_viewModel.ItemType" />
+                        </div> 
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label for="size">Size</label>
-                    <_ItemTypeSizeDropDown @bind-Value="@_viewModel.SizeId"
-                                           @bind-Value:event="ValueChanged" 
-                                           ItemType="@ItemType.Baseball" /> 
-                </div>                
-                @*<div class="form-group">
-                    <input type="checkbox" checked="@_viewModel.HasPerson" @onchange="eventArgs => { PersonCheckboxClicked(eventArgs.Value); }" />
-                    <label for="person">Associate Baseball with a Person</label>
-                    <div class="form-group" hidden="@(!_displayPeople)">
-                        <_PersonSelector @bind-Value="@_viewModel.PersonId"
-                                         @bind-Value:event="ValueChanged" /> 
-                    </div>                    
-                </div> *@ 
-                <div class="form-group">
-                    <input type="checkbox" checked="@_viewModel.HasTeam" @onchange="eventArgs => { TeamsCheckboxClicked(eventArgs.Value); }" />
-                    <label for="teams">Associate Baseball with a Team</label>
-                    <div class="form-group" hidden="@(!_displayTeams)">
-                        <_TeamDropDown @bind-Value="@_viewModel.TeamId"
-                                       @bind-Value:event="ValueChanged"
-                                       Sport="@Sport.Baseball" /> 
-                    </div>                    
-                </div>                             
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label for="size">Size</label>
+                            <_ItemTypeSizeDropDown @bind-Value="@_viewModel.SizeId"
+                                                   @bind-Value:event="ValueChanged" 
+                                                   ItemType="_viewModel.ItemType" /> 
+                        </div> 
+                    </div>
+                    <div class="col-lg-6">
+                         <div class="form-group" hidden="@(!_viewModel.DisplayBaseballType)">
+                            <label for="baseballType">Baseball Type</label>
+                            <_BaseballTypeDropDown @bind-Value="@_viewModel.BaseballTypeId" 
+                                                   @bind-Value:event="ValueChanged"
+                                                   GameStyleType="_viewModel.GameStyleType" /> 
+                        </div> 
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label for="gameStyleType">Game Style Type</label>
+                            <_GameStyleTypeDropDown @bind-Value="@_viewModel.GameStyleTypeId"
+                                                    @bind-Value:event="ValueChanged"
+                                                    ItemType="_viewModel.ItemType" /> 
+                        </div> 
+                    </div>
+                    <div class="col-lg-6">
+                         <div class="form-group">
+                            <label for="commissioner">Commissioner</label>
+                            <_CommissionerDropDown @bind-Value="@_viewModel.CommissionerId"
+                                                   @bind-Value:event="ValueChanged" 
+                                                   SportLeagueLevel="_viewModel.SportLeagueLevel" />
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6" />
+                    <div class="col-lg-6">
+                        <div class="form-group" hidden="@(!_viewModel.DisplayBaseballTypeYear)">
+                            <label for="year">Year</label>
+                            <InputNumber id="year" class="form-control" @bind-Value="_viewModel.BaseballTypeYear" />
+                        </div>                        
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6" />
+                    <div class="col-lg-6">
+                        <div class="form-group" hidden="@(!_viewModel.DisplayBaseballTypeAnniversary)">
+                            <label for="anniversary">Anniversary</label>
+                            <_Tooltip Text="Example: 25th">
+                                <img src="images/info.png" alt="Image" height="20" width="20" />
+                            </_Tooltip>
+                            <InputText id="anniversary" class="form-control" @bind-Value="_viewModel.BaseballTypeAnniversary" />
+                        </div>                         
+                    </div>
+                </div>
+                <div class="row">                    
+                    <div class="col-lg-12">
+                        <div class="form-group">
+                            <input type="checkbox" @onchange="eventArgs => { PersonCheckboxClicked(eventArgs.Value); }" />
+                            <label for="person">Associate Baseball with a Person</label>
+                            <div class="form-group" hidden="@(!_displayPeople)">
+                                <BlazoredTypeahead SearchMethod="SearchPeople"
+                                                   @bind-Value="_viewModel.Person"
+                                                   Placeholder="Search by name...">
+                                    <SelectedTemplate Context="person">
+                                        @person.DisplayName
+                                    </SelectedTemplate>
+                                    <ResultTemplate Context="person">
+                                        @person.DisplayName
+                                    </ResultTemplate>
+                                </BlazoredTypeahead>
+                            </div>                    
+                        </div> 
+                    </div>
+                </div>              
+                <div class="row">                    
+                    <div class="col-lg-12">
+                        <div class="form-group">
+                            <input type="checkbox" @onchange="eventArgs => { TeamsCheckboxClicked(eventArgs.Value); }" />
+                            <label for="teams">Associate Baseball with a Team</label>
+                            <div class="form-group" hidden="@(!_displayTeams)">
+                                <_TeamDropDown @bind-Value="@_viewModel.TeamId"
+                                               @bind-Value:event="ValueChanged"                                        
+                                               SportLeagueLevel="@_viewModel.SportLeagueLevel" /> 
+                            </div>                    
+                        </div> 
+                    </div>
+                </div>                            
                 <div class="text-right">
-                    <button type="submit" class="btn btn-primary">Save</button>
+                    <button type="submit" class="btn btn-primary" @onclick="@(()=> _continue = true)">Save & Continue</button>
+                    <button type="submit" class="btn btn-primary">Save & Exit</button>
+                    <button type="button" class="btn btn-secondary" @onclick="@(_ => _navigation.NavigateTo("Memorabilia"))">Cancel</button>
                 </div>
             </EditForm>
         </div>
@@ -100,10 +166,12 @@ else
 
 @code {
     [Parameter]
-    public int MemorabiliaId { get; set; }  
+    public int MemorabiliaId { get; set; }
 
+    private bool _continue;
     private bool _displayPeople;
     private bool _displayTeams;
+    private IEnumerable<PersonViewModel> _people = Enumerable.Empty<PersonViewModel>();  
     private SaveBaseballViewModel _viewModel = new SaveBaseballViewModel();
 
     protected async Task HandleValidSubmit()
@@ -117,7 +185,9 @@ else
 
         await _commandRouter.Send(command).ConfigureAwait(false);
 
-        _navigation.NavigateTo("Memorabilia");
+        var url = _continue ? $"Memorabilia/Image/Edit/{command.MemorabiliaId}" : "Memorabilia";
+
+        _navigation.NavigateTo(url);
 
         _toastService.ShowSuccess("Baseball Details were saved successfully!", _viewModel.PageTitle);
     }
@@ -142,7 +212,16 @@ else
         
         _displayPeople = _viewModel.HasPerson;
         _displayTeams = _viewModel.HasTeam;
+
+        await LoadPeople().ConfigureAwait(false);
     }  
+
+    private async Task LoadPeople()
+    {
+        var query = new GetPeople.Query();
+
+        _people = (await _queryRouter.Send(query).ConfigureAwait(false)).People;
+    }
 
     private void PersonCheckboxClicked(object isChecked)
     {     
@@ -153,6 +232,11 @@ else
 
         StateHasChanged();
     } 
+
+    private async Task<IEnumerable<PersonViewModel>> SearchPeople(string searchText)
+    {
+        return await Task.FromResult(_people.Where(person => person.DisplayName.Contains(searchText, StringComparison.OrdinalIgnoreCase))).ConfigureAwait(false);
+    }
 
     public void TeamsCheckboxClicked(object isChecked)
     {

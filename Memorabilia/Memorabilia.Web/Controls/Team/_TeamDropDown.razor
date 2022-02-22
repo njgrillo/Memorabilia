@@ -16,7 +16,7 @@
     public Franchise Franchise { get; set; }
 
     [Parameter]
-    public Sport Sport { get; set; }
+    public SportLeagueLevel SportLeagueLevel { get; set; }
 
     [Parameter]
     public int Value { get; set; }
@@ -33,7 +33,7 @@
 
     private async Task Load()
     {
-        var query = new GetTeams.Query(Franchise?.Id, Sport?.Id);
+        var query = new GetTeams.Query(Franchise?.Id, SportLeagueLevel?.Id);
 
         _teams = (await _queryRouter.Send(query).ConfigureAwait(false)).Teams;
     }

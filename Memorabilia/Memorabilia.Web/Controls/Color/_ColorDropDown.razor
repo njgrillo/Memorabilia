@@ -13,13 +13,20 @@
     public Color InitialValue { get; set; }
 
     [Parameter]
+    public ItemType ItemType { get; set; }
+
+    [Parameter]
     public int Value { get; set; }
 
     [Parameter]
     public EventCallback<int> ValueChanged { get; set; }
 
+    private Color[] _colors;
+
     protected override Task OnInitializedAsync()
     {
+        _colors = Color.GetAll(ItemType);
+
         if ((InitialValue?.Id ?? 0) > 0)
             Value = InitialValue.Id;
 

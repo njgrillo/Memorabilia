@@ -139,26 +139,62 @@ namespace Memorabilia.Domain.Entities
                 SetTeams(teamId.Value);
         }
 
-        public void SetBasketball(int basketballTypeId)
+        public void SetBasketball(int? basketballTypeId,
+                                  int brandId,
+                                  int commissionerId,
+                                  DateTime? gameDate,
+                                  int? gameStyleTypeId,
+                                  int levelTypeId,
+                                  int? personId,
+                                  int sizeId,
+                                  int sportId,
+                                  int? teamId)
         {
-            if (Basketball == null)
-            {
-                Basketball = new MemorabiliaBasketball(Id, basketballTypeId);
-                return;
-            }
+            SetBrand(brandId);
+            SetLevelType(levelTypeId);
+            SetSize(sizeId);
+            SetSports(sportId);
+            SetBasketballType(basketballTypeId.Value);
+            SetCommissioner(commissionerId);
+            SetGame(gameStyleTypeId, personId, gameDate);
 
-            Basketball.Set(basketballTypeId);
+            if (!personId.HasValue)
+                People = new List<MemorabiliaPerson>();
+            else
+                SetPeople(personId.Value);
+
+            if (!teamId.HasValue)
+                Teams = new List<MemorabiliaTeam>();
+            else
+                SetTeams(teamId.Value);
         }
 
-        public void SetBat(int batTypeId, int? length)
+        public void SetBat(int? batTypeId,
+                           int brandId,
+                           int? colorId,
+                           DateTime? gameDate,
+                           int? gameStyleTypeId,
+                           int? length,
+                           int? personId,
+                           int sizeId,
+                           int sportId,
+                           int? teamId)
         {
-            if (Bat == null)
-            {
-                Bat = new MemorabiliaBat(Id, batTypeId, length);
-                return;
-            }
+            SetBrand(brandId);
+            SetSize(sizeId);
+            SetSports(sportId);
+            SetBatType(batTypeId, colorId, length);
+            SetGame(gameStyleTypeId, personId, gameDate);
 
-            Bat.Set(batTypeId, length);
+            if (!personId.HasValue)
+                People = new List<MemorabiliaPerson>();
+            else
+                SetPeople(personId.Value);
+
+            if (!teamId.HasValue)
+                Teams = new List<MemorabiliaTeam>();
+            else
+                SetTeams(teamId.Value);
         }
 
         public void SetCard(int? denominator, int? numerator, int? year)
@@ -172,15 +208,34 @@ namespace Memorabilia.Domain.Entities
             Card.Set(year, numerator, denominator);
         }
 
-        public void SetFootball(int footballTypeId)
+        public void SetFootball(int brandId,
+                                int commissionerId,
+                                int? footballTypeId,
+                                DateTime? gameDate,
+                                int? gameStyleTypeId,
+                                int levelTypeId,
+                                int? personId,
+                                int sizeId,
+                                int sportId,
+                                int? teamId)
         {
-            if (Football == null)
-            {
-                Football = new MemorabiliaFootball(Id, footballTypeId);
-                return;
-            }
+            SetBrand(brandId);
+            SetLevelType(levelTypeId);
+            SetSize(sizeId);
+            SetSports(sportId);
+            SetFootballType(footballTypeId.Value);
+            SetCommissioner(commissionerId);
+            SetGame(gameStyleTypeId, personId, gameDate);
 
-            Football.Set(footballTypeId);
+            if (!personId.HasValue)
+                People = new List<MemorabiliaPerson>();
+            else
+                SetPeople(personId.Value);
+
+            if (!teamId.HasValue)
+                Teams = new List<MemorabiliaTeam>();
+            else
+                SetTeams(teamId.Value);
         }
 
         public void SetImages(IEnumerable<string> filePaths, string primaryImageFilePath)
@@ -271,6 +326,44 @@ namespace Memorabilia.Domain.Entities
             }            
         }
 
+        private void SetBasketballType(int? basketballTypeId)
+        {
+            if (basketballTypeId.HasValue)
+            {
+                if (Basketball == null)
+                {
+                    Basketball = new MemorabiliaBasketball(Id, basketballTypeId.Value);
+                    return;
+                }
+
+                Basketball.Set(basketballTypeId.Value);
+            }
+            else
+            {
+                if (Basketball?.Id > 0)
+                    Basketball = null;
+            }
+        }
+
+        private void SetBatType(int? batTypeId, int? colorId, int? length)
+        {
+            if (batTypeId.HasValue || colorId.HasValue || length.HasValue)
+            {
+                if (Bat == null)
+                {
+                    Bat = new MemorabiliaBat(Id, batTypeId, colorId, length);
+                    return;
+                }
+
+                Bat.Set(batTypeId, colorId, length);
+            }
+            else
+            {
+                if (Bat?.Id > 0)
+                    Bat = null;
+            }
+        }
+
         private void SetBrand(int brandId)
         {
             if (Brand == null)
@@ -298,6 +391,25 @@ namespace Memorabilia.Domain.Entities
             {
                 if (Commissioner?.Id > 0)
                     Commissioner = null;
+            }
+        }
+
+        private void SetFootballType(int? footballTypeId)
+        {
+            if (footballTypeId.HasValue)
+            {
+                if (Football == null)
+                {
+                    Football = new MemorabiliaFootball(Id, footballTypeId.Value);
+                    return;
+                }
+
+                Football.Set(footballTypeId.Value);
+            }
+            else
+            {
+                if (Football?.Id > 0)
+                    Football = null;
             }
         }
 

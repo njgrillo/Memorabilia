@@ -14,6 +14,7 @@ namespace Memorabilia.Domain.Constants
         public static readonly ItemType FirstDayCover = new(5, "First Day Cover");
         public static readonly ItemType Football = new(9, "Football");
         public static readonly ItemType Glove = new(10, "Glove");
+        public static readonly ItemType Hat = new(23, "Hat");
         public static readonly ItemType Helmet = new(11, "Helmet");
         public static readonly ItemType HockeyStick = new(21, " Hockey Stick");
         public static readonly ItemType Jersey = new(12, "Jersey");
@@ -39,6 +40,7 @@ namespace Memorabilia.Domain.Constants
             FirstDayCover,
             Football,
             Glove,
+            Hat,
             Helmet,
             HockeyStick,
             Jersey,
@@ -53,9 +55,26 @@ namespace Memorabilia.Domain.Constants
             TicketStub 
         };
 
+        public static readonly ItemType[] GameTypes =
+        {
+            Baseball,
+            Basketball,
+            Bat,
+            Football,
+            Glove,
+            Hat,
+            Helmet,
+            HockeyStick,
+            Jersey,
+            Puck,
+            Pylon,
+            SoccerBall
+        };
+
         public static readonly ItemType[] WearableTypes =
         {
             Glove,
+            Hat,
             Helmet,
             Jersey
         };
@@ -73,6 +92,11 @@ namespace Memorabilia.Domain.Constants
         public static ItemType Find(int id)
         {
             return All.SingleOrDefault(itemType => itemType.Id == id);
+        }
+
+        public static bool IsGameType(ItemType itemType)
+        {
+            return GameTypes.Contains(itemType);
         }
 
         public static bool IsWearable(ItemType itemType)

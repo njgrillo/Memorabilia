@@ -298,11 +298,11 @@ using Memorabilia.Web.Controls.Team;
 
     private void SetDefaults()
     {
-        _viewModel.GameStyleTypeId = GameStyleType.None.Id;
-        _viewModel.BrandId = Brand.Rawlings.Id;
-        _viewModel.LevelTypeId = LevelType.Professional.Id;
-        _viewModel.SizeId = Size.Standard.Id;
         _viewModel.BaseballTypeId = BaseballType.Official.Id;
+        _viewModel.BrandId = Brand.Rawlings.Id;
+        _viewModel.GameStyleTypeId = GameStyleType.None.Id;
+        _viewModel.LevelTypeId = LevelType.Professional.Id;
+        _viewModel.SizeId = Size.Standard.Id;        
     }
 
     private void TeamsCheckboxClicked(object isChecked)

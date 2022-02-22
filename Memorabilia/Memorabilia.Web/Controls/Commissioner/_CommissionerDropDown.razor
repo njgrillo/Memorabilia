@@ -13,7 +13,7 @@
 
 @code {
     [Parameter]
-    public Sport Sport { get; set; }
+    public SportLeagueLevel SportLeagueLevel  { get; set; }
 
     [Parameter]
     public int Value { get; set; }  
@@ -30,7 +30,7 @@
 
     private async Task Load()
     {
-        var query = new GetCommissioners.Query(Sport.Id);
+        var query = new GetCommissioners.Query(SportLeagueLevel.Id);
 
         _commissioners = (await _queryRouter.Send(query).ConfigureAwait(false)).Commissioners;
     }

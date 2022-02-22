@@ -19,6 +19,10 @@ namespace Memorabilia.Application.Features.Memorabilia
         public Acquisition Acquisition => _memorabilia.MemorabiliaAcquisition.Acquisition;
 
         public string AcquisitionTypeName => Domain.Constants.AcquisitionType.Find(_memorabilia.MemorabiliaAcquisition.Acquisition.AcquisitionTypeId).Name;
+                
+        public int AutographsCount => _memorabilia.Autographs.Count();
+
+        public string AutographDisplayCount => $"{AutographsCount} Autograph(s)";
 
         public int? ConditionId => _memorabilia.ConditionId;
 
@@ -27,6 +31,8 @@ namespace Memorabilia.Application.Features.Memorabilia
         public DateTime CreateDate => _memorabilia.CreateDate;
 
         public decimal? EstimatedValue => _memorabilia.EstimatedValue;
+
+        public bool HasAutographs => _memorabilia.Autographs.Any();
 
         public int Id => _memorabilia.Id;
 
@@ -41,6 +47,14 @@ namespace Memorabilia.Application.Features.Memorabilia
         public DateTime? LastModifiedDate => _memorabilia.LastModifiedDate;
 
         public IEnumerable<MemorabiliaPerson> People => _memorabilia.People;
+
+        public int? PrimaryAutographId => _memorabilia.Autographs.FirstOrDefault()?.Id;
+
+        public string PrimaryAutographImagePath => HasAutographs 
+            ? _memorabilia.Autographs
+                          .SelectMany(autograph => autograph.Images)
+                          .SingleOrDefault(image => image.ImageTypeId == Domain.Constants.ImageType.Primary.Id)?.FilePath ?? "images/imagenotavailable.png"
+            : "images/imagenotavailable.png";
 
         public int PrivacyTypeId => _memorabilia.PrivacyTypeId;
 

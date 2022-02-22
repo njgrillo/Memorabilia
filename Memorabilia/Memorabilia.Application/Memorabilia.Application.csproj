@@ -5,11 +5,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Features\Memorabilia\Bat\**" />
     <Compile Remove="Services\**" />
-    <EmbeddedResource Remove="Features\Memorabilia\Bat\**" />
     <EmbeddedResource Remove="Services\**" />
-    <None Remove="Features\Memorabilia\Bat\**" />
     <None Remove="Services\**" />
   </ItemGroup>
 

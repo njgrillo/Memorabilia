@@ -46,6 +46,8 @@ namespace Memorabilia.Application.Features.Autograph
 
         public int MemorabiliaId => _autograph.MemorabiliaId;
 
+        public Domain.Entities.Person Person => _autograph.Person;
+
         public Domain.Entities.Personalization Personalization => _autograph.Personalization;
 
         public int PersonId => _autograph.PersonId;

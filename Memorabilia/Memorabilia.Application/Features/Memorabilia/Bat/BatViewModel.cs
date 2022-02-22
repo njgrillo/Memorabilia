@@ -2,30 +2,32 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Memorabilia.Application.Features.Memorabilia.Basketball
+namespace Memorabilia.Application.Features.Memorabilia.Bat
 {
-    public class BasketbalViewModel
+    public class BatViewModel
     {
         private readonly Domain.Entities.Memorabilia _memorabilia;
 
-        public BasketbalViewModel() { }
+        public BatViewModel() { }
 
-        public BasketbalViewModel(Domain.Entities.Memorabilia memorabilia)
+        public BatViewModel(Domain.Entities.Memorabilia memorabilia)
         {
             _memorabilia = memorabilia;
         }
 
-        //public MemorabiliaBasketballType MemorabiliaBasketballType => _memorabilia.BasketballType;
+        public MemorabiliaBat MemorabiliaBat => _memorabilia.Bat;
 
         public MemorabiliaBrand MemorabiliaBrand => _memorabilia.Brand;
 
-        public MemorabiliaCommissioner MemorabiliaCommissioner => _memorabilia.Commissioner;
+        public MemorabiliaGame MemorabiliaGame => _memorabilia.Game;
 
         public int MemorabiliaId => _memorabilia.Id;
 
         public MemorabiliaSize MemorabiliaSize => _memorabilia.Size;
 
         public IEnumerable<MemorabiliaSport> MemorabiliaSports => _memorabilia.Sports;
+
+        public MemorabiliaPerson Person => _memorabilia.People.FirstOrDefault();
 
         public int? PersonId => _memorabilia.People.FirstOrDefault()?.PersonId;
 

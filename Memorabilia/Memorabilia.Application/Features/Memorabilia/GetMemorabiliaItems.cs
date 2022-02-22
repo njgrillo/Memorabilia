@@ -17,7 +17,7 @@ namespace Memorabilia.Application.Features.Memorabilia
 
             protected override async Task<MemorabiliaItemsViewModel> Handle(Query query)
             {
-                var memorabilia = await _memorabiliaRepository.GetAllUnsigned(query.UserId).ConfigureAwait(false);
+                var memorabilia = await _memorabiliaRepository.GetAll(query.UserId).ConfigureAwait(false);
 
                 var viewModel = new MemorabiliaItemsViewModel(memorabilia);
 

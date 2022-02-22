@@ -75,6 +75,8 @@ namespace Memorabilia.Application.Features.Memorabilia.Baseball
             }
         }
 
+        public ItemType ItemType => ItemType.Baseball;
+
         [Required]
         [Range(1, int.MaxValue, ErrorMessage = "Level is required.")]
         public int LevelTypeId { get; set; }
@@ -89,6 +91,8 @@ namespace Memorabilia.Application.Features.Memorabilia.Baseball
         [Required]
         [Range(1, int.MaxValue, ErrorMessage = "Size is required.")]
         public int SizeId { get; set; }
+
+        public SportLeagueLevel SportLeagueLevel => SportLeagueLevel.MajorLeagueBaseball;
 
         public int TeamId { get; set; }
     }

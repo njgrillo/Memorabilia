@@ -47,7 +47,7 @@ else
                             <label for="level">Level</label>
                             <_ItemTypeLevelDropDown @bind-Value="@_viewModel.LevelTypeId"
                                                     @bind-Value:event="ValueChanged" 
-                                                    ItemType="ItemType.Baseball" /> 
+                                                    ItemType="_viewModel.ItemType" /> 
                         </div> 
                     </div>
                     <div class="col-lg-6">
@@ -55,7 +55,7 @@ else
                             <label for="brand">Brand</label>
                             <_ItemTypeBrandDropDown @bind-Value="@_viewModel.BrandId" 
                                                     @bind-Value:event="ValueChanged"
-                                                    ItemType="ItemType.Baseball" />
+                                                    ItemType="_viewModel.ItemType" />
                         </div> 
                     </div>
                 </div>
@@ -65,7 +65,7 @@ else
                             <label for="size">Size</label>
                             <_ItemTypeSizeDropDown @bind-Value="@_viewModel.SizeId"
                                                    @bind-Value:event="ValueChanged" 
-                                                   ItemType="ItemType.Baseball" /> 
+                                                   ItemType="_viewModel.ItemType" /> 
                         </div> 
                     </div>
                     <div class="col-lg-6">
@@ -83,7 +83,7 @@ else
                             <label for="gameStyleType">Game Style Type</label>
                             <_GameStyleTypeDropDown @bind-Value="@_viewModel.GameStyleTypeId"
                                                     @bind-Value:event="ValueChanged"
-                                                    ItemType="ItemType.Baseball" /> 
+                                                    ItemType="_viewModel.ItemType" /> 
                         </div> 
                     </div>
                     <div class="col-lg-6">
@@ -91,7 +91,7 @@ else
                             <label for="commissioner">Commissioner</label>
                             <_CommissionerDropDown @bind-Value="@_viewModel.CommissionerId"
                                                    @bind-Value:event="ValueChanged" 
-                                                   Sport="Sport.Baseball" />
+                                                   SportLeagueLevel="_viewModel.SportLeagueLevel" />
                         </div>
                     </div>
                 </div>
@@ -144,7 +144,7 @@ else
                             <div class="form-group" hidden="@(!_displayTeams)">
                                 <_TeamDropDown @bind-Value="@_viewModel.TeamId"
                                                @bind-Value:event="ValueChanged"                                        
-                                               Sport="@Sport.Baseball" /> 
+                                               SportLeagueLevel="_viewModel.SportLeagueLevel" /> 
                             </div>                    
                         </div> 
                     </div>
@@ -225,11 +225,11 @@ else
 
     private void SetDefaults()
     {
-        _viewModel.GameStyleTypeId = GameStyleType.None.Id;
-        _viewModel.BrandId = Brand.Rawlings.Id;
-        _viewModel.LevelTypeId = LevelType.Professional.Id;
-        _viewModel.SizeId = Size.Standard.Id;
         _viewModel.BaseballTypeId = BaseballType.Official.Id;
+        _viewModel.BrandId = Brand.Rawlings.Id;
+        _viewModel.GameStyleTypeId = GameStyleType.None.Id;
+        _viewModel.LevelTypeId = LevelType.Professional.Id;
+        _viewModel.SizeId = Size.Standard.Id;        
     }
 
     private void TeamsCheckboxClicked(object isChecked)

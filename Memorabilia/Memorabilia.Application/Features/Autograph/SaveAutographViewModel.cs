@@ -25,8 +25,8 @@ namespace Memorabilia.Application.Features.Autograph
             ItemTypeName = viewModel.ItemTypeName;
             LastModifiedDate = viewModel.LastModifiedDate;
             MemorabiliaId = viewModel.MemorabiliaId;
-            Person = new PersonViewModel(new Domain.Entities.Person());
-            PersonalizationText = viewModel.Personalization.Text;            
+            Person = new PersonViewModel(viewModel.Person);
+            PersonalizationText = viewModel.Personalization?.Text;            
             PurchaseTypeId = viewModel.Acquisition.PurchaseTypeId ?? 0;
             WritingInstrumentId = viewModel.WritingInstrumentId;
         }
