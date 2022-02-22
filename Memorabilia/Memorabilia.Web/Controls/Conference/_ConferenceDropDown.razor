@@ -3,15 +3,20 @@
 
 <InputSelect class="form-control" id="ConferenceDropDown" @bind-Value="@Value" @oninput="@OnInputChange" >
     <option value="0">--Select--</option>
-    @foreach (var conference in Conference.All)
+    @foreach (var conference in _conferences)
     {
         <option value="@conference.Id">@conference.Name</option>
     }
 </InputSelect>
 
 @code {
+    private Conference[] _conferences;
+
     [Parameter]
     public Conference InitialValue { get; set; }
+
+    [Parameter]
+    public SportLeagueLevel SportLeagueLevel { get; set; }
 
     [Parameter]
     public int Value { get; set; }
@@ -20,7 +25,9 @@
     public EventCallback<int> ValueChanged { get; set; }
 
     protected override Task OnInitializedAsync()
-    {   
+    {
+        _conferences = SportLeagueLevel == null ? Conference.All : Conference.GetAll(SportLeagueLevel);
+
         return base.OnInitializedAsync();
     }
 

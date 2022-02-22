@@ -1,7 +1,8 @@
-﻿@page "/Team/Conference/Edit/{teamId:int}"
+﻿@page "/Team/Conference/Edit/{teamId:int}/{sportLeagueLevelId:int}"
 
 @using Memorabilia.Application.Features.Admin
 @using Memorabilia.Application.Features.Admin.Team
+@using Memorabilia.Domain.Constants
 @using Memorabilia.Web.Controls.Team
 
 @inject CommandRouter _commandRouter
@@ -33,7 +34,8 @@ else
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="form-group">
-                            <_TeamConferenceEditor Conferences="_viewModel" />
+                            <_TeamConferenceEditor Conferences="_viewModel"
+                                                   SportLeagueLevel="_sportLeagueLevel" />
                         </div>
                     </div>
                 </div>
@@ -55,10 +57,13 @@ else
 
 @code {
     [Parameter]
+    public int SportLeagueLevelId { get; set; }
+
+    [Parameter]
     public int TeamId { get; set; }
 
     private bool _continue;
-
+    private SportLeagueLevel _sportLeagueLevel;
     private List<SaveTeamConferenceViewModel> _viewModel = new();
 
     protected async Task HandleValidSubmit()
@@ -67,7 +72,7 @@ else
 
         await _commandRouter.Send(command).ConfigureAwait(false);
 
-        var url = _continue ? $"Team/Division/Edit/{TeamId}" : "Teams";
+        var url = _continue ? $"Team/Division/Edit/{TeamId}/{SportLeagueLevelId}" : "Teams";
 
         _navigation.NavigateTo(url);
 
@@ -76,6 +81,8 @@ else
 
     protected override async Task OnInitializedAsync()
     {
+        _sportLeagueLevel = SportLeagueLevel.Find(SportLeagueLevelId);
+
         var query = new GetTeamConferences.Query(TeamId);
 
         _viewModel = (await _queryRouter.Send(query)

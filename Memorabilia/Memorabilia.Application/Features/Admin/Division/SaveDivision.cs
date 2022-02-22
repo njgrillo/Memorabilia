@@ -23,6 +23,7 @@ namespace Memorabilia.Application.Features.Admin.Division
                 if (command.IsNew)
                 {
                     division = new Domain.Entities.Division(command.ConferenceId,
+                                                            command.LeagueId,
                                                             command.Name,
                                                             command.Abbreviation);
 
@@ -41,6 +42,7 @@ namespace Memorabilia.Application.Features.Admin.Division
                 }
 
                 division.Set(command.ConferenceId,
+                             command.LeagueId,
                              command.Name,
                              command.Abbreviation);
 
@@ -68,6 +70,8 @@ namespace Memorabilia.Application.Features.Admin.Division
             public bool IsModified => _viewModel.IsModified;
 
             public bool IsNew => _viewModel.IsNew;
+
+            public int? LeagueId => _viewModel.LeagueId > 0 ? _viewModel.LeagueId : null;
 
             public string Name => _viewModel.Name;            
         }

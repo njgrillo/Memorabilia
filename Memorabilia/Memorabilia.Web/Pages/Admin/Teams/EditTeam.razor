@@ -2,6 +2,7 @@
 
 @using Memorabilia.Application.Features.Admin
 @using Memorabilia.Application.Features.Admin.Team
+@using Memorabilia.Domain.Constants
 
 @inject CommandRouter _commandRouter
 @inject ProtectedLocalStorage _localStorage
@@ -74,7 +75,6 @@ else
     public int Id { get; set; }
 
     private bool _continue { get; set; }
-
     private SaveTeamViewModel _viewModel = new SaveTeamViewModel();
 
     protected async Task HandleValidSubmit()
@@ -83,7 +83,9 @@ else
 
         await _commandRouter.Send(command).ConfigureAwait(false);
 
-        var url = _continue ? $"Team/Conference/Edit/{command.Id}" : "Teams";
+        var nextStep = _viewModel.SportLeagueLevelId == SportLeagueLevel.MajorLeagueBaseball.Id ? "Division" : "Conference";
+
+        var url = _continue ? $"Team/{nextStep}/Edit/{command.Id}/{_viewModel.SportLeagueLevelId}" : "Teams";
 
         _navigation.NavigateTo(url);
 

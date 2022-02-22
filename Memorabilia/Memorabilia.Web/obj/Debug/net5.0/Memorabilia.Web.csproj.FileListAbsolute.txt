@@ -921,7 +921,6 @@ D:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\obj\Debug\net5.0\Ra
 D:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\obj\Debug\net5.0\RazorDeclaration\Controls\Condition\_ConditionDropDown.razor.g.cs
 D:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\obj\Debug\net5.0\RazorDeclaration\Controls\Football\_FootballTypeDropDown.razor.g.cs
 D:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\obj\Debug\net5.0\RazorDeclaration\Controls\Franchise\_FranchiseDropDown.razor.g.cs
-D:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\obj\Debug\net5.0\RazorDeclaration\Controls\GameStyleType\_GameStyleDropDown.razor.g.cs
 D:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\obj\Debug\net5.0\RazorDeclaration\Controls\InscriptionType\_InscriptionTypeDropDown.razor.g.cs
 D:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\obj\Debug\net5.0\RazorDeclaration\Controls\ItemTypeBrand\_ItemTypeBrandDropDown.razor.g.cs
 D:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\obj\Debug\net5.0\RazorDeclaration\Controls\ItemTypeLevel\_ItemTypeLevelDropDown.razor.g.cs
@@ -1125,7 +1124,6 @@ D:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\obj\Debug\net5.0\Ra
 D:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\obj\Debug\net5.0\Razor\Controls\Condition\_ConditionDropDown.razor.g.cs
 D:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\obj\Debug\net5.0\Razor\Controls\Football\_FootballTypeDropDown.razor.g.cs
 D:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\obj\Debug\net5.0\Razor\Controls\Franchise\_FranchiseDropDown.razor.g.cs
-D:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\obj\Debug\net5.0\Razor\Controls\GameStyleType\_GameStyleDropDown.razor.g.cs
 D:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\obj\Debug\net5.0\Razor\Controls\InscriptionType\_InscriptionTypeDropDown.razor.g.cs
 D:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\obj\Debug\net5.0\Razor\Controls\ItemTypeBrand\_ItemTypeBrandDropDown.razor.g.cs
 D:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\obj\Debug\net5.0\Razor\Controls\ItemTypeLevel\_ItemTypeLevelDropDown.razor.g.cs
@@ -1387,3 +1385,5 @@ D:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\obj\Debug\net5.0\Ra
 D:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\obj\Debug\net5.0\Razor\Pages\Admin\People\EditPersonHallOfFame.razor.g.cs
 D:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\obj\Debug\net5.0\RazorDeclaration\Pages\Admin\People\EditPersonTeam.razor.g.cs
 D:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\obj\Debug\net5.0\Razor\Pages\Admin\People\EditPersonTeam.razor.g.cs
+D:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\obj\Debug\net5.0\RazorDeclaration\Controls\GameStyleType\_GameStyleTypeDropDown.razor.g.cs
+D:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\obj\Debug\net5.0\Razor\Controls\GameStyleType\_GameStyleTypeDropDown.razor.g.cs

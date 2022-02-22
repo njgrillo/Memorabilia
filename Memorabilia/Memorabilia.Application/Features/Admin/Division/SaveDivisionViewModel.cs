@@ -11,6 +11,7 @@ namespace Memorabilia.Application.Features.Admin.Division
             Abbreviation = viewModel.Abbreviation;
             ConferenceId = viewModel.ConferenceId ?? 0;
             Id = viewModel.Id;
+            LeagueId = viewModel.LeagueId ?? 0;
             Name = viewModel.Name;
         }
 
@@ -18,6 +19,8 @@ namespace Memorabilia.Application.Features.Admin.Division
         public string Abbreviation { get; set; }
 
         public int ConferenceId { get; set; }
+
+        public int LeagueId { get; set; }
 
         [Required]
         [StringLength(100, ErrorMessage = "Name is too long.")]

@@ -201,7 +201,9 @@ using Memorabilia.Web.Controls.SportLeagueLevel;
 
         await _commandRouter.Send(command).ConfigureAwait(false);
 
-        var url = _continue ? $"Team/Conference/Add/{command.Id}" : "Teams";
+        var nextStep = _sportLeagueLevel == SportLeagueLevel.MajorLeagueBaseball ? "Division" : "Conference";
+
+        var url = _continue ? $"Team/{nextStep}/Add/{command.Id}/{_sportLeagueLevel.Id}" : "Teams";
 
         _navigation.NavigateTo(url);
 
@@ -214,6 +216,8 @@ using Memorabilia.Web.Controls.SportLeagueLevel;
 
         if (userId.Value == 0)
             _navigation.NavigateTo("Login");
+
+        _sportLeagueLevel = SportLeagueLevel.MajorLeagueBaseball;
     }
 
     private void OnChangeSportLeagueLevel(ChangeEventArgs args)

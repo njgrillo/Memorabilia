@@ -145,6 +145,13 @@ using Memorabilia.Application.Features.Admin.Team;
 #line default
 #line hidden
 #nullable disable
+#nullable restore
+#line 5 "D:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\Pages\Admin\Teams\EditTeam.razor"
+using Memorabilia.Domain.Constants;
+
+#line default
+#line hidden
+#nullable disable
     [Microsoft.AspNetCore.Components.RouteAttribute("/Teams/Edit/{id:int}")]
     public partial class EditTeam : Microsoft.AspNetCore.Components.ComponentBase
     {
@@ -154,13 +161,12 @@ using Memorabilia.Application.Features.Admin.Team;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 72 "D:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\Pages\Admin\Teams\EditTeam.razor"
+#line 73 "D:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\Pages\Admin\Teams\EditTeam.razor"
        
     [Parameter]
     public int Id { get; set; }
 
     private bool _continue { get; set; }
-
     private SaveTeamViewModel _viewModel = new SaveTeamViewModel();
 
     protected async Task HandleValidSubmit()
@@ -169,7 +175,9 @@ using Memorabilia.Application.Features.Admin.Team;
 
         await _commandRouter.Send(command).ConfigureAwait(false);
 
-        var url = _continue ? $"Team/Conference/Edit/{command.Id}" : "Teams";
+        var nextStep = _viewModel.SportLeagueLevelId == SportLeagueLevel.MajorLeagueBaseball.Id ? "Division" : "Conference";
+
+        var url = _continue ? $"Team/{nextStep}/Edit/{command.Id}/{_viewModel.SportLeagueLevelId}" : "Teams";
 
         _navigation.NavigateTo(url);
 

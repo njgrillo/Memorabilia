@@ -47,7 +47,7 @@ else
                             <label for="level">Level</label>
                             <_ItemTypeLevelDropDown @bind-Value="@_viewModel.LevelTypeId"
                                                     @bind-Value:event="ValueChanged" 
-                                                    ItemType="@ItemType.Baseball" /> 
+                                                    ItemType="ItemType.Baseball" /> 
                         </div> 
                     </div>
                     <div class="col-lg-6">
@@ -55,7 +55,7 @@ else
                             <label for="brand">Brand</label>
                             <_ItemTypeBrandDropDown @bind-Value="@_viewModel.BrandId" 
                                                     @bind-Value:event="ValueChanged"
-                                                    ItemType="@ItemType.Baseball" />
+                                                    ItemType="ItemType.Baseball" />
                         </div> 
                     </div>
                 </div>
@@ -65,14 +65,15 @@ else
                             <label for="size">Size</label>
                             <_ItemTypeSizeDropDown @bind-Value="@_viewModel.SizeId"
                                                    @bind-Value:event="ValueChanged" 
-                                                   ItemType="@ItemType.Baseball" /> 
+                                                   ItemType="ItemType.Baseball" /> 
                         </div> 
                     </div>
                     <div class="col-lg-6">
                          <div class="form-group" hidden="@(!_viewModel.DisplayBaseballType)">
                             <label for="baseballType">Baseball Type</label>
                             <_BaseballTypeDropDown @bind-Value="@_viewModel.BaseballTypeId" 
-                                                   @bind-Value:event="ValueChanged" /> 
+                                                   @bind-Value:event="ValueChanged"
+                                                   GameStyleType="_viewModel.GameStyleType" /> 
                         </div> 
                     </div>
                 </div>
@@ -80,8 +81,9 @@ else
                     <div class="col-lg-6">
                         <div class="form-group">
                             <label for="gameStyleType">Game Style Type</label>
-                            <_AuthenticTypeDropDown @bind-Value="@_viewModel.GameStyleTypeId"
-                                                    @bind-Value:event="ValueChanged" /> 
+                            <_GameStyleTypeDropDown @bind-Value="@_viewModel.GameStyleTypeId"
+                                                    @bind-Value:event="ValueChanged"
+                                                    ItemType="ItemType.Baseball" /> 
                         </div> 
                     </div>
                     <div class="col-lg-6">
@@ -89,7 +91,7 @@ else
                             <label for="commissioner">Commissioner</label>
                             <_CommissionerDropDown @bind-Value="@_viewModel.CommissionerId"
                                                    @bind-Value:event="ValueChanged" 
-                                                   Sport="@Sport.Baseball" />
+                                                   Sport="Sport.Baseball" />
                         </div>
                     </div>
                 </div>

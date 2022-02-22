@@ -8,8 +8,10 @@ namespace Memorabilia.Domain.Constants
         public static readonly Occupation Actor = new(2, "Actor", string.Empty);
         public static readonly Occupation Actress = new(3, "Actress", string.Empty);
         public static readonly Occupation Celebrity = new(4, "Celebrity", string.Empty);
+        public static readonly Occupation Commissioner = new(8, "Commissioner", string.Empty);
         public static readonly Occupation Broadcaster = new(5, "Broadcaster", string.Empty);
         public static readonly Occupation Comedian = new(6, "Comedian", string.Empty);
+        public static readonly Occupation Manager = new(7, "Manager", string.Empty);       
 
         public static readonly Occupation[] All =
         {
@@ -18,7 +20,9 @@ namespace Memorabilia.Domain.Constants
             Actress,
             Broadcaster,
             Celebrity,            
-            Comedian
+            Comedian,
+            Commissioner,
+            Manager
         };
 
         private Occupation(int id, string name, string abbreviation)

@@ -1,11 +1,13 @@
 ﻿@using Memorabilia.Application.Features.Admin.Team
+@using Memorabilia.Domain.Constants
 @using Memorabilia.Web.Controls.League
 
 <div class="row">
     <div class="col-lg-12">
         <div class="form-group">
             <_LeagueDropDown @bind-Value="@_viewModel.LeagueId" 
-                             @bind-Value:event="ValueChanged" /> 
+                             @bind-Value:event="ValueChanged"
+                             SportLeagueLevel="SportLeagueLevel" /> 
         </div>
     </div>
 </div>
@@ -60,6 +62,9 @@
 @code {
     [Parameter]
     public List<SaveTeamLeagueViewModel> Leagues { get; set; } = new();
+
+    [Parameter]
+    public SportLeagueLevel SportLeagueLevel { get; set; }
 
     private SaveTeamLeagueViewModel _viewModel = new SaveTeamLeagueViewModel();
 

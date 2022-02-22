@@ -19,6 +19,14 @@ namespace Memorabilia.Domain.Constants
             Other
         };
 
+        public static readonly GameStyleType[] NonWearableStyles =
+        {
+            GameUsed,
+            GameIssued,
+            None,
+            Other
+        };
+
         private GameStyleType(int id, string name, string abbreviation)
         {
             Id = id;
@@ -35,6 +43,14 @@ namespace Memorabilia.Domain.Constants
         public static GameStyleType Find(int id)
         {
             return All.SingleOrDefault(gameStyleType => gameStyleType.Id == id);
+        }
+
+        public static GameStyleType[] GetAll(ItemType itemType)
+        {
+            if (ItemType.IsWearable(itemType))
+                return All;
+
+            return NonWearableStyles;
         }
     }
 }

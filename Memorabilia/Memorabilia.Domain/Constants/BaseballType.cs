@@ -114,6 +114,14 @@ namespace Memorabilia.Domain.Constants
             return All.SingleOrDefault(baseballType => baseballType.Id == id);
         }
 
+        public static BaseballType[] GetAll(GameStyleType gameStyleType)
+        {
+            if (gameStyleType == null || gameStyleType == GameStyleType.None)
+                return All;
+
+            return GameWorthly;
+        }
+
         public static bool IsGameWorthly(BaseballType baseballType)
         {
             return GameWorthly.Contains(baseballType);

@@ -34,5 +34,7 @@
         public string Name => _team.Name;
 
         public string Nickname => _team.Nickname;
+
+        public Domain.Constants.SportLeagueLevel SportLeagueLevel => Domain.Constants.SportLeagueLevel.Find(_team.Franchise.SportLeagueLevelId);
     }
 }

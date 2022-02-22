@@ -55,10 +55,16 @@ else
                     </div>
                 </div>   
                 <div class="row">
-                    <div class="col-lg-12">
+                    <div class="col-lg-6">
                         <div class="form-group">  
                             <label for="verification">Verification</label>
                             <InputText id="verification" class="form-control" @bind-Value="_viewModel.Verification" />                            
+                        </div> 
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="form-group">  
+                            <label for="witnessed">Witnessed</label>
+                            <InputCheckbox id="witnessed" @bind-Value="@_viewModel.Witnessed" />                          
                         </div> 
                     </div>
                 </div> 
@@ -73,6 +79,7 @@ else
                             <th>Has Hologram</th>
                             <th>Has Letter</th>
                             <th>Verification</th>
+                            <th>Witnessed</th>
                             <th></th>
                         </tr>
                     </thead>
@@ -84,6 +91,7 @@ else
                                 <td>@(authentication.HasHologram ? "Yes" : "No")</td>
                                 <td>@(authentication.HasLetter ? "Yes" : "No")</td>
                                 <td>@authentication.Verification</td>
+                                <td>@(authentication.Witnessed ? "Yes" : "No")</td>
                                 <td>
                                     <_Tooltip Text="Delete">
                                         <img class="can-click" 

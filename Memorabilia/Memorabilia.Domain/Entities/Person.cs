@@ -136,9 +136,9 @@ namespace Memorabilia.Domain.Entities
             occupation.Set(occupationId, occupationTypeId);
         }
 
-        public void SetTeam(int personTeamId, int teamId, int? beginYear, int? endYear)
+        public void SetTeam(int teamId, int? beginYear, int? endYear)
         {
-            var team = Teams.SingleOrDefault(team => team.Id == personTeamId);
+            var team = Teams.SingleOrDefault(team => team.TeamId == teamId && team.BeginYear == beginYear);
 
             if (team == null)
             {

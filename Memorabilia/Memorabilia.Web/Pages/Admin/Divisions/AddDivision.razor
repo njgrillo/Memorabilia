@@ -4,6 +4,7 @@
 @using Memorabilia.Application.Features.Admin.Division
 @using Memorabilia.Domain.Constants
 @using Memorabilia.Web.Controls.Conference
+@using Memorabilia.Web.Controls.League
 
 @inject CommandRouter _commandRouter
 @inject ProtectedLocalStorage _localStorage
@@ -35,6 +36,11 @@ else
                     <label for="conference">Conference</label>
                     <_ConferenceDropDown @bind-Value="@_viewModel.ConferenceId" 
                                          @bind-Value:event="ValueChanged" />                           
+                </div>
+                <div class="form-group">
+                    <label for="league">League</label>
+                    <_LeagueDropDown @bind-Value="@_viewModel.LeagueId" 
+                                     @bind-Value:event="ValueChanged" />                           
                 </div>
                 <div class="form-group">
                     <label for="name">Name</label>

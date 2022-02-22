@@ -50,8 +50,10 @@ namespace Memorabilia.Application.Features.Memorabilia.Baseball
 
         public DateTime? GameDate { get; set; }
 
-        //[Required]
-        //[Range(1, int.MaxValue, ErrorMessage = "Game Level Type is required.")]
+        public GameStyleType GameStyleType => GameStyleType.Find(GameStyleTypeId);
+
+        [Required]
+        [Range(1, int.MaxValue, ErrorMessage = "Game Style Type is required.")]
         public int GameStyleTypeId { get; set; }
 
         public bool HasPerson => Person?.Id > 0;

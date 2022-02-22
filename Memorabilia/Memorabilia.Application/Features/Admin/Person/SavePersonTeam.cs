@@ -27,7 +27,7 @@ namespace Memorabilia.Application.Features.Admin.Person
 
                 foreach (var team in command.Teams.Where(x => !x.IsDeleted))
                 {
-                    person.SetTeam(team.Id, team.TeamId, team.BeginYear, team.EndYear);
+                    person.SetTeam(team.TeamId, team.BeginYear, team.EndYear);
                 }
 
                 await _personRepository.Update(person).ConfigureAwait(false);

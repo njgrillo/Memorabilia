@@ -27,7 +27,8 @@ namespace Memorabilia.Application.Features.Autograph.Authentication
                                                 authentication.AuthenticationCompanyId,
                                                 authentication.HasHologram,
                                                 authentication.HasLetter,
-                                                authentication.Verification);
+                                                authentication.Verification,
+                                                authentication.Witnessed);
                 }
 
                 await _autographRepository.Update(autograph).ConfigureAwait(false);

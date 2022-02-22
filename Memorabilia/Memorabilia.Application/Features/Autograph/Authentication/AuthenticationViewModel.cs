@@ -22,5 +22,7 @@
         public int Id => _authentication.Id;
 
         public string Verification => _authentication.Verification;
+
+        public bool Witnessed => _authentication.Witnessed;
     }
 }

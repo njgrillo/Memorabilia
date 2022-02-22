@@ -17,7 +17,7 @@ namespace Memorabilia.Repository
         }
 
         private IQueryable<Domain.Entities.PersonTeam> PersonTeam => _context.Set<Domain.Entities.PersonTeam>()
-                                                                                        .Include(personTeam => personTeam.Team);
+                                                                             .Include(personTeam => personTeam.Team);
 
         public async Task Add(Domain.Entities.PersonTeam personTeam, CancellationToken cancellationToken = default)
         {

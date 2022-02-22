@@ -6,14 +6,14 @@ namespace Memorabilia.Domain.Constants
     {
         public static readonly SportLeagueLevel MajorLeagueBaseball = new(1, "Major League Baseball", "MLB");
         public static readonly SportLeagueLevel NationalFootballLeague = new(2, "National Football League", "NFL");
-        public static readonly SportLeagueLevel NationalBasketballAssocation = new(3, "National Basketball Assocation", "NBA");
+        public static readonly SportLeagueLevel NationalBasketballAssociation = new(3, "National Basketball Association", "NBA");
         public static readonly SportLeagueLevel NationalHockeyLeague = new(4, "National Hockey League", "NHL");
 
         public static readonly SportLeagueLevel[] All =
         {
             MajorLeagueBaseball,
             NationalFootballLeague,
-            NationalBasketballAssocation,
+            NationalBasketballAssociation,
             NationalHockeyLeague
         };
 

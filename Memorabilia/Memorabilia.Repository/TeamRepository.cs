@@ -43,32 +43,25 @@ namespace Memorabilia.Repository
 
         public async Task<IEnumerable<Domain.Entities.Team>> GetAll(int? franchiseId = null, int? sportLeageLevelId = null)
         {
-            try
+            if (franchiseId.HasValue)
             {
-                if (franchiseId.HasValue)
-                {
-                    return (await Team.Where(team => team.FranchiseId == franchiseId)
-                                      .ToListAsync()
-                                      .ConfigureAwait(false)).OrderBy(team => team.Name);
-                }
+                return (await Team.Where(team => team.FranchiseId == franchiseId)
+                                  .ToListAsync()
+                                  .ConfigureAwait(false)).OrderBy(team => team.Name);
+            }
 
-                if (sportLeageLevelId.HasValue)
-                {
-                    return (await Team.Where(team => team.Franchise.SportLeagueLevelId == sportLeageLevelId)
-                                      .ToListAsync()
-                                      .ConfigureAwait(false)).OrderBy(team => team.Franchise.SportLeagueLevelName)
-                                                             .ThenBy(team => team.Name);
-                }
-
-
-                return (await Team.ToListAsync()
+            if (sportLeageLevelId.HasValue)
+            {
+                return (await Team.Where(team => team.Franchise.SportLeagueLevelId == sportLeageLevelId)
+                                  .ToListAsync()
                                   .ConfigureAwait(false)).OrderBy(team => team.Franchise.SportLeagueLevelName)
                                                          .ThenBy(team => team.Name);
             }
-            catch (System.Exception ex)
-            {
-                throw;
-            }
+
+
+            return (await Team.ToListAsync()
+                              .ConfigureAwait(false)).OrderBy(team => team.Franchise.SportLeagueLevelName)
+                                                     .ThenBy(team => team.Name);
         }
 
         public async Task Update(Domain.Entities.Team team, CancellationToken cancellationToken = default)

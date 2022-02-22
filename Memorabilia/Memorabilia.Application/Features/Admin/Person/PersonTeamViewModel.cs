@@ -20,5 +20,7 @@
         public int PersonId => _personTeam.PersonId;
 
         public int TeamId => _personTeam.TeamId;
+
+        public string TeamName => _personTeam.Team?.Name;
     }
 }

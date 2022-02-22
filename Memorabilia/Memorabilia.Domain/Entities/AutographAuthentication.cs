@@ -4,13 +4,19 @@
     {
         public AutographAuthentication() { }
 
-        public AutographAuthentication(int authenticationCompanyId, int autographId, bool? hasHologram, bool? hasLetter, string verification)
+        public AutographAuthentication(int authenticationCompanyId, 
+                                       int autographId, 
+                                       bool? hasHologram, 
+                                       bool? hasLetter, 
+                                       string verification,
+                                       bool witnessed)
         {
             AuthenticationCompanyId = authenticationCompanyId;
             AutographId = autographId;
             HasHologram = hasHologram;
             HasLetter = hasLetter;
             Verification = verification;
+            Witnessed = witnessed;
         }
 
         public int AuthenticationCompanyId { get; private set; }
@@ -23,12 +29,19 @@
 
         public string Verification { get; private set; }
 
-        public void Set(int authenticationCompanyId, bool? hasHologram, bool? hasLetter, string verification)
+        public bool Witnessed { get; private set; }
+
+        public void Set(int authenticationCompanyId, 
+                        bool? hasHologram, 
+                        bool? hasLetter, 
+                        string verification,
+                        bool witnessed)
         {
             AuthenticationCompanyId = authenticationCompanyId;
             HasHologram = hasHologram;
             HasLetter = hasLetter;
             Verification = verification;
+            Witnessed = witnessed;
         }
     }
 }

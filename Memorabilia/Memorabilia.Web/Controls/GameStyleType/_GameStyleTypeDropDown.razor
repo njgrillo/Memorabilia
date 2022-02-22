@@ -5,7 +5,7 @@
 
 <InputSelect id="gameStyleType" class="form-control" @bind-Value="@Value" @oninput="@OnInputChange">
     <option value="0">--Select--</option>
-    @foreach (var gameStyleType in GameStyleType.All)
+    @foreach (var gameStyleType in _gameStyleTypes)
     {
         <option value="@gameStyleType.Id">@gameStyleType.Name</option>
     }
@@ -16,13 +16,20 @@
     public GameStyleType InitialValue { get; set; }
 
     [Parameter]
+    public ItemType ItemType { get; set; }
+
+    [Parameter]
     public int Value { get; set; }  
 
     [Parameter]
     public EventCallback<int> ValueChanged { get; set; }
 
+    private GameStyleType[] _gameStyleTypes;
+
     protected override Task OnInitializedAsync()
     {
+        _gameStyleTypes = GameStyleType.GetAll(ItemType);
+
         if ((InitialValue?.Id ?? 0) > 0)
             Value = InitialValue.Id;
 

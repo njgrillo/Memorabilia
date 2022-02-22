@@ -1530,6 +1530,7 @@ SET IDENTITY_INSERT [dbo].[Condition] OFF
 CREATE TABLE [dbo].[Division](
 	[Id] [int] IDENTITY(1,1) NOT NULL,
 	[ConferenceId] [int] NULL,
+	[LeagueId] [int] NULL,
 	[Name] [nvarchar](100) NOT NULL,
 	[Abbreviation] [nvarchar](10) NULL,
 	[ImagePath] [varchar](200) NULL,
@@ -1543,11 +1544,15 @@ ALTER TABLE [dbo].[Division]  WITH CHECK ADD  CONSTRAINT [FK_Division_Conference
 REFERENCES [dbo].[Conference] ([Id])
 ALTER TABLE [dbo].[Division] CHECK CONSTRAINT [FK_Division_Conference]
 
+ALTER TABLE [dbo].[Division]  WITH CHECK ADD  CONSTRAINT [FK_Division_League] FOREIGN KEY([LeagueId])
+REFERENCES [dbo].[League] ([Id])
+ALTER TABLE [dbo].[Division] CHECK CONSTRAINT [FK_Division_League]
+
 SET IDENTITY_INSERT [dbo].[Division] ON
 
 IF @KeepExistingValues = 1
 BEGIN
-	INSERT INTO [dbo].[Division] (Id, ConferenceId, Name, Abbreviation, ImagePath)
+	INSERT INTO [dbo].[Division] (Id, ConferenceId, LeagueId, [Name], Abbreviation, ImagePath)
 	SELECT * 
 	FROM #TempDivisionTable
 END

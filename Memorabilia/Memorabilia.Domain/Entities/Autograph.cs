@@ -96,17 +96,22 @@ namespace Memorabilia.Domain.Entities
             Personalization.Set(personalizationText);
         }
 
-        public void SetAuthentication(int id, int authenticationCompanyId, bool? hasHologram, bool? hasLetter, string verification)
+        public void SetAuthentication(int id, 
+                                      int authenticationCompanyId, 
+                                      bool? hasHologram, 
+                                      bool? hasLetter, 
+                                      string verification,
+                                      bool witnessed)
         {
             var authentication = Authentications.SingleOrDefault(authentication => authentication.Id == id);
 
             if (authentication == null)
             {
-                Authentications.Add(new AutographAuthentication(authenticationCompanyId, Id, hasHologram, hasLetter, verification));
+                Authentications.Add(new AutographAuthentication(authenticationCompanyId, Id, hasHologram, hasLetter, verification, witnessed));
                 return;
             }
 
-            authentication.Set(authenticationCompanyId, hasHologram, hasLetter, verification);
+            authentication.Set(authenticationCompanyId, hasHologram, hasLetter, verification, witnessed);
         }
 
         public void SetImages(IEnumerable<string> filePaths, string primaryImageFilePath)

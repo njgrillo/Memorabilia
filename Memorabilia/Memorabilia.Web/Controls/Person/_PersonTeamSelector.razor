@@ -8,11 +8,11 @@
 <BlazoredTypeahead SearchMethod="SearchTeams"
                    @bind-Value="@_viewModel"
                    Placeholder="Search by team...">
-    <SelectedTemplate Context="personTeam">
-        @personTeam.TeamId
+    <SelectedTemplate Context="team">
+        @team.TeamDisplayName
     </SelectedTemplate>
     <ResultTemplate Context="team">
-        @team.DisplayName
+        @team.TeamDisplayName
     </ResultTemplate>   
 </BlazoredTypeahead> 
 <div class="row">
@@ -37,6 +37,8 @@
     <thead>
         <tr>
             <th>Team</th>
+            <th>Begin Year</th>
+            <th>End Year</th>
             <th></th>
         </tr>
     </thead>
@@ -44,7 +46,9 @@
         @foreach (var team in Teams.Where(team => !team.IsDeleted))
         {
             <tr>
-                <td>@_teams.Single(team => team.Id == team.Id).Name</td>
+                <td>@team.TeamName</td>
+                <td>@team.BeginYear</td>
+                <td>@team.EndYear</td>
                 <td>
                     <_Tooltip Text="Delete">
                         <img class="can-click" 
@@ -61,9 +65,12 @@
 
 @code {
     [Parameter]
+    public int PersonId { get; set; }
+
+    [Parameter]
     public List<SavePersonTeamViewModel> Teams { get; set; } = new();
 
-    private IEnumerable<TeamViewModel> _teams = Enumerable.Empty<TeamViewModel>();  
+    private IEnumerable<SavePersonTeamViewModel> _teams = Enumerable.Empty<SavePersonTeamViewModel>();  
     private SavePersonTeamViewModel _viewModel = new SavePersonTeamViewModel();
 
     protected override async Task OnInitializedAsync()
@@ -82,7 +89,7 @@
     {
         var query = new GetTeams.Query();
 
-        _teams = (await _queryRouter.Send(query).ConfigureAwait(false)).Teams;
+        _teams = (await _queryRouter.Send(query).ConfigureAwait(false)).Teams.Select(team => new SavePersonTeamViewModel(PersonId, team));
     }
 
     private void Remove(int teamPersonId)
@@ -95,8 +102,8 @@
         team.IsDeleted = true;                                                                        
     } 
 
-    private async Task<IEnumerable<TeamViewModel>> SearchTeams(string searchText)
+    private async Task<IEnumerable<SavePersonTeamViewModel>> SearchTeams(string searchText)
     {
-        return await Task.FromResult(_teams.Where(team => team.DisplayName.Contains(searchText, StringComparison.OrdinalIgnoreCase))).ConfigureAwait(false);
+        return await Task.FromResult(_teams.Where(team => team.TeamDisplayName.Contains(searchText, StringComparison.OrdinalIgnoreCase))).ConfigureAwait(false);
     }
 }

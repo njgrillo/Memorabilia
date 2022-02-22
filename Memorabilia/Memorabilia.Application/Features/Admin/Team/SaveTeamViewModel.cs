@@ -10,6 +10,7 @@ namespace Memorabilia.Application.Features.Admin.Team
         {
             Abbreviation = viewModel.Abbreviation;
             BeginYear = viewModel.BeginYear;
+            DisplayName = viewModel.DisplayName;
             EndYear = viewModel.EndYear;
             FranchiseId = viewModel.FranchiseId;
             Id = viewModel.Id;
@@ -17,12 +18,15 @@ namespace Memorabilia.Application.Features.Admin.Team
             Location = viewModel.Location;
             Name = viewModel.Name;
             Nickname = viewModel.Nickname;
+            SportLeagueLevelId = viewModel.SportLeagueLevel.Id;
         }
 
         [StringLength(10, ErrorMessage = "Abbreviation is too long.")]
         public string Abbreviation { get; set; }
 
         public int? BeginYear { get; set; }
+
+        public string DisplayName { get; set; }
 
         public int? EndYear { get; set; }
 

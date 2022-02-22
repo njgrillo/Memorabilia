@@ -3,7 +3,7 @@
 
 <InputSelect class="form-control" id="DivisionDropDown" @bind-Value="@Value" @oninput="@OnInputChange" >
     <option value="0">--Select--</option>
-    @foreach (var division in Division.All)
+    @foreach (var division in _divisions)
     {
         <option value="@division.Id">@division.Name</option>
     }
@@ -14,13 +14,20 @@
     public Division InitialValue { get; set; }
 
     [Parameter]
+    public SportLeagueLevel SportLeagueLevel { get; set; }
+
+    [Parameter]
     public int Value { get; set; }
 
     [Parameter]
     public EventCallback<int> ValueChanged { get; set; }
 
+    private Division[] _divisions;
+
     protected override Task OnInitializedAsync()
-    {   
+    {
+        _divisions = Division.GetAll(SportLeagueLevel);
+
         return base.OnInitializedAsync();
     }
 

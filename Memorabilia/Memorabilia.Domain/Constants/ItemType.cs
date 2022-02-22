@@ -53,6 +53,13 @@ namespace Memorabilia.Domain.Constants
             TicketStub 
         };
 
+        public static readonly ItemType[] WearableTypes =
+        {
+            Glove,
+            Helmet,
+            Jersey
+        };
+
         private ItemType(int id, string name)
         {
             Id = id;
@@ -66,6 +73,11 @@ namespace Memorabilia.Domain.Constants
         public static ItemType Find(int id)
         {
             return All.SingleOrDefault(itemType => itemType.Id == id);
+        }
+
+        public static bool IsWearable(ItemType itemType)
+        {
+            return WearableTypes.Contains(itemType);
         }
     }
 }

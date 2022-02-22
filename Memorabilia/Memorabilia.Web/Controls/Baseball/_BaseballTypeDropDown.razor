@@ -2,7 +2,7 @@
 
 <InputSelect id="baseballType" class="form-control" @bind-Value="@Value" @oninput="@OnInputChange" >
     <option value="0">--Select--</option>
-    @foreach (var baseballType in BaseballType.All)
+    @foreach (var baseballType in _baseballTypes)
     {
         <option value="@baseballType.Id">@baseballType.Name</option>
     }
@@ -10,13 +10,20 @@
 
 @code {
     [Parameter]
+    public GameStyleType GameStyleType { get; set; }
+
+    [Parameter]
     public int Value { get; set; }
 
     [Parameter]
     public EventCallback<int> ValueChanged { get; set; }
 
+    private BaseballType[] _baseballTypes;
+
     protected override Task OnInitializedAsync()
     {
+        _baseballTypes = BaseballType.GetAll(GameStyleType);
+
         return base.OnInitializedAsync();
     }
 

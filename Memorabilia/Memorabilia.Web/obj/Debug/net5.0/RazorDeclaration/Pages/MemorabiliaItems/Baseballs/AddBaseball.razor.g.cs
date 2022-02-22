@@ -231,7 +231,7 @@ using Memorabilia.Web.Controls.Team;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 160 "D:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\Pages\MemorabiliaItems\Baseballs\AddBaseball.razor"
+#line 162 "D:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\Pages\MemorabiliaItems\Baseballs\AddBaseball.razor"
        
     [Parameter]
     public int MemorabiliaId { get; set; }

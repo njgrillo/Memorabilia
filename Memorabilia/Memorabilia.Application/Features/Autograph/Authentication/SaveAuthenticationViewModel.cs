@@ -12,6 +12,7 @@
             HasLetter = authentication.HasLetter ?? false;
             Id = authentication.Id;
             Verification = authentication.Verification;
+            Witnessed = authentication.Witnessed;
         }
 
         public int AuthenticationCompanyId { get; set; }
@@ -27,5 +28,7 @@
         public int Id { get; set; }        
 
         public string Verification { get; set; }
+
+        public bool Witnessed { get; set; }
     }
 }
