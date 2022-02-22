@@ -50,7 +50,7 @@ namespace Memorabilia.Application.Features.Autograph
 
         public int PersonId => _autograph.PersonId;
 
-        public string PersonName => _autograph.Person?.FullName;
+        public string PersonName => _autograph.Person?.DisplayName;
 
         public string UserFirstName => _autograph.Memorabilia.User.FirstName;
 

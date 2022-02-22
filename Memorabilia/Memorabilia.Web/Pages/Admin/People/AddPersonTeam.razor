@@ -67,9 +67,7 @@ else
 
         await _commandRouter.Send(command).ConfigureAwait(false);
 
-        var url = _continue ? $"People/HallOfFame/Add/{PersonId}" : "People";
-
-        _navigation.NavigateTo(url);
+        _navigation.NavigateTo("People");
 
         _toastService.ShowSuccess("Team(s) were added successfully!", "Teams");
     }

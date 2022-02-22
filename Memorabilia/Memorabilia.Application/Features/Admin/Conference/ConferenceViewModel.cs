@@ -17,8 +17,8 @@
 
         public string Name => _conference.Name;
 
-        public int SportId => _conference.SportId;
+        public int SportLeagueLevelId => _conference.SportLeagueLevelId;
 
-        public string SportName => Domain.Constants.Sport.Find(SportId)?.Name;
+        public string SportLeagueLevelName => Domain.Constants.SportLeagueLevel.Find(SportLeagueLevelId)?.Name;
     }
 }

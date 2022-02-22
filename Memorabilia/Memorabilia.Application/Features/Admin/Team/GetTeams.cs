@@ -17,7 +17,7 @@ namespace Memorabilia.Application.Features.Admin.Team
 
             protected override async Task<TeamsViewModel> Handle(Query query)
             {
-                var teams = await _teamRepository.GetAll(query.SportId).ConfigureAwait(false);
+                var teams = await _teamRepository.GetAll(query.FranchiseId, query.SportLeagueLevelId).ConfigureAwait(false);
 
                 var viewModel = new TeamsViewModel(teams);
 
@@ -27,12 +27,15 @@ namespace Memorabilia.Application.Features.Admin.Team
 
         public class Query : IQuery<TeamsViewModel>
         {
-            public Query(int? sportId = null)
+            public Query(int? franchiseId = null, int? sportLeagueLevelId = null)
             {
-                SportId = sportId;
+                FranchiseId = franchiseId;
+                SportLeagueLevelId = sportLeagueLevelId;
             }
 
-            public int? SportId { get; }
+            public int? FranchiseId { get; }
+
+            public int? SportLeagueLevelId { get; }
         }
     }
 }

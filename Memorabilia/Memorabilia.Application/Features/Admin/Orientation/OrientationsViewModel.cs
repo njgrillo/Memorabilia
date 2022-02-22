@@ -11,7 +11,7 @@ namespace Memorabilia.Application.Features.Admin.Orientation
 
         public override string ItemTitle => "Orientation";
 
-        public override string PageTitle => "AOrientations";
+        public override string PageTitle => "Orientations";
 
         public override string RoutePrefix => "Orientations";
     }

@@ -46,5 +46,7 @@ namespace Memorabilia.Application.Features.Admin.Team
         public string Nickname { get; set; }
 
         public override string PageTitle => $"{(Id > 0 ? "Edit" : "Add")} Team";
+
+        public int SportLeagueLevelId { get; set; }
     }
 }

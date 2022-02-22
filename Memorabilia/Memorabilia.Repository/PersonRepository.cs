@@ -42,7 +42,7 @@ namespace Memorabilia.Repository
 
         public async Task<IEnumerable<Domain.Entities.Person>> GetAll()
         {
-            return (await Person.ToListAsync().ConfigureAwait(false)).OrderBy(person => person.FullName);
+            return (await Person.ToListAsync().ConfigureAwait(false)).OrderBy(person => person.DisplayName);
         }
 
         public async Task Update(Domain.Entities.Person person, CancellationToken cancellationToken = default)

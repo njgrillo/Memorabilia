@@ -8160,21 +8160,17 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\njgri\\.nuget\\packages\\": {},
-    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
+    "C:\\Users\\njgri\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Projects\\njgrillo\\Memorabilia\\Memorabilia\\Memorabilia.Application\\Memorabilia.Application.csproj",
+      "projectUniqueName": "D:\\Projects\\njgrillo\\Memorabilia\\Memorabilia\\Memorabilia.Application\\Memorabilia.Application.csproj",
       "projectName": "Memorabilia.Application",
-      "projectPath": "C:\\Projects\\njgrillo\\Memorabilia\\Memorabilia\\Memorabilia.Application\\Memorabilia.Application.csproj",
+      "projectPath": "D:\\Projects\\njgrillo\\Memorabilia\\Memorabilia\\Memorabilia.Application\\Memorabilia.Application.csproj",
       "packagesPath": "C:\\Users\\njgri\\.nuget\\packages\\",
-      "outputPath": "C:\\Projects\\njgrillo\\Memorabilia\\Memorabilia\\Memorabilia.Application\\obj\\",
+      "outputPath": "D:\\Projects\\njgrillo\\Memorabilia\\Memorabilia\\Memorabilia.Application\\obj\\",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
-      ],
       "configFilePaths": [
         "C:\\Users\\njgri\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
@@ -8184,17 +8180,15 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-        "C:\\Projects\\SurePassIDFramework\\NugetPackages": {},
-        "C:\\Projects\\njgrillo\\Budget\\NugetPackages\\Framework": {},
-        "C:\\Projects\\njgrillo\\Memorabilia\\NugetPackages\\Framework": {},
+        "D:\\Projects\\njgrillo\\Budget\\NugetPackages\\Framework": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
         "net5.0": {
           "targetAlias": "net5.0",
           "projectReferences": {
-            "C:\\Projects\\njgrillo\\Memorabilia\\Memorabilia\\Memorabilia.Domain\\Memorabilia.Domain.csproj": {
-              "projectPath": "C:\\Projects\\njgrillo\\Memorabilia\\Memorabilia\\Memorabilia.Domain\\Memorabilia.Domain.csproj"
+            "D:\\Projects\\njgrillo\\Memorabilia\\Memorabilia\\Memorabilia.Domain\\Memorabilia.Domain.csproj": {
+              "projectPath": "D:\\Projects\\njgrillo\\Memorabilia\\Memorabilia\\Memorabilia.Domain\\Memorabilia.Domain.csproj"
             }
           }
         }
@@ -8223,7 +8217,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.101\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.200\\RuntimeIdentifierGraph.json"
       }
     }
   }

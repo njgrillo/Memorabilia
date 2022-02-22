@@ -25,10 +25,12 @@ namespace Memorabilia.Repository
             modelBuilder.Entity<Domain.Entities.Commissioner>();
             modelBuilder.Entity<Domain.Entities.Condition>();
             modelBuilder.Entity<Domain.Entities.Conference>();
+            modelBuilder.Entity<Domain.Entities.Division>();
+            modelBuilder.Entity<Domain.Entities.FigureType>();
             modelBuilder.Entity<Domain.Entities.FootballType>();
             modelBuilder.Entity<Domain.Entities.Franchise>();            
             modelBuilder.Entity<Domain.Entities.GloveType>();
-            modelBuilder.Entity<Domain.Entities.HallOfFame>();
+            modelBuilder.Entity<Domain.Entities.HallOfFame>().Property(x => x.VotePercentage).HasPrecision(5, 2);
             modelBuilder.Entity<Domain.Entities.HelmetQualityType>();
             modelBuilder.Entity<Domain.Entities.HelmetType>();
             modelBuilder.Entity<Domain.Entities.ImageType>();
@@ -44,6 +46,7 @@ namespace Memorabilia.Repository
             modelBuilder.Entity<Domain.Entities.JerseyQualityType>();
             modelBuilder.Entity<Domain.Entities.JerseyStyleType>();
             modelBuilder.Entity<Domain.Entities.JerseyType>();
+            modelBuilder.Entity<Domain.Entities.League>();
             modelBuilder.Entity<Domain.Entities.LevelType>();
             modelBuilder.Entity<Domain.Entities.MagazineType>();
             modelBuilder.Entity<Domain.Entities.Memorabilia>().Property(x => x.EstimatedValue).HasPrecision(12, 2);
@@ -72,6 +75,7 @@ namespace Memorabilia.Repository
             modelBuilder.Entity<Domain.Entities.Personalization>();
             modelBuilder.Entity<Domain.Entities.PersonOccupation>();
             modelBuilder.Entity<Domain.Entities.PersonTeam>();
+            modelBuilder.Entity<Domain.Entities.Pewter>();
             modelBuilder.Entity<Domain.Entities.PhotoType>();
             modelBuilder.Entity<Domain.Entities.PrivacyType>();
             modelBuilder.Entity<Domain.Entities.PurchaseType>();
@@ -80,6 +84,9 @@ namespace Memorabilia.Repository
             modelBuilder.Entity<Domain.Entities.SportLeagueLevel>();
             modelBuilder.Entity<Domain.Entities.Spot>();
             modelBuilder.Entity<Domain.Entities.Team>();
+            modelBuilder.Entity<Domain.Entities.TeamConference>();
+            modelBuilder.Entity<Domain.Entities.TeamDivision>();
+            modelBuilder.Entity<Domain.Entities.TeamLeague>();
             modelBuilder.Entity<Domain.Entities.User>();
             modelBuilder.Entity<Domain.Entities.WritingInstrument>();            
         }

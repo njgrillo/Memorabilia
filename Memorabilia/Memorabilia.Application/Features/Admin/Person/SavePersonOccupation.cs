@@ -22,7 +22,10 @@ namespace Memorabilia.Application.Features.Admin.Person
             {
                 var person = await _personRepository.Get(command.PersonId).ConfigureAwait(false);
 
-                foreach (var occupation in command.Occupations)
+                if (command.DeletedOccupationIds.Any())
+                    person.RemoveOccupations(command.DeletedOccupationIds);
+
+                foreach (var occupation in command.Occupations.Where(occupation => !occupation.IsDeleted))
                 {
                     person.SetOccupation(occupation.OccupationId, occupation.OccupationTypeId);
                 }
@@ -38,6 +41,8 @@ namespace Memorabilia.Application.Features.Admin.Person
                 PersonId = personId;
                 Occupations = occupations.ToArray();
             }
+
+            public int[] DeletedOccupationIds => Occupations.Where(occupation => occupation.IsDeleted).Select(occupation => occupation.Id).ToArray();
 
             public SavePersonOccupationViewModel[] Occupations { get; }
 

@@ -27,11 +27,13 @@ else
     <table class="table" style="border: 1px solid black;">
         <thead>
             <tr>
-                <th>Full Name</th>
+                <th>Display Name</th>
                 <th>First Name</th>
                 <th>Last Name</th>
+                <th>Middle Name</th>
                 <th>Suffix</th>
                 <th>Nickname</th>
+                <th>Legal Name</th>
                 <th>Birth Date</th>
                 <th>Death Date</th>
                 <th></th>
@@ -42,11 +44,13 @@ else
             @foreach (var person in _viewModel.People)
             {
                 <tr>
-                    <td>@person.FullName</td>
+                    <td>@person.DisplayName</td>
                     <td>@person.FirstName</td>
                     <td>@person.LastName</td>
+                    <td>@person.MiddleName</td>
                     <td>@person.Suffix</td>
                     <td>@person.Nickname</td>
+                    <td>@person.LegalName</td>
                     <td>@person.BirthDate</td>
                     <td>@person.DeathDate</td>
                     <td>

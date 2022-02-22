@@ -1,0 +1,33 @@
+﻿@using Memorabilia.Application.Features.Admin.League
+@using Domain.Constants
+
+<InputSelect class="form-control" id="LeagueDropDown" @bind-Value="@Value" @oninput="@OnInputChange" >
+    <option value="0">--Select--</option>
+    @foreach (var league in League.All)
+    {
+        <option value="@league.Id">@league.Name</option>
+    }
+</InputSelect>
+
+@code {
+    [Parameter]
+    public League InitialValue { get; set; }
+
+    [Parameter]
+    public int Value { get; set; }
+
+    [Parameter]
+    public EventCallback<int> ValueChanged { get; set; }
+
+    protected override Task OnInitializedAsync()
+    {   
+        return base.OnInitializedAsync();
+    }
+
+    private async Task OnInputChange(ChangeEventArgs args)
+    {
+        Value = Convert.ToInt32(args.Value);
+        await ValueChanged.InvokeAsync(Value);
+    }
+}
+

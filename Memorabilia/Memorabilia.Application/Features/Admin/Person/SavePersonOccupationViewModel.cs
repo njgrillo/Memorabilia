@@ -4,7 +4,7 @@
     {
         public SavePersonOccupationViewModel() { }
 
-        public SavePersonOccupationViewModel(Domain.Entities.PersonOccupation occupation)
+        public SavePersonOccupationViewModel(PersonOccupationViewModel occupation)
         {
             Id = occupation.Id;
             OccupationId = occupation.OccupationId;

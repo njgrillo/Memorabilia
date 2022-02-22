@@ -39,7 +39,9 @@ namespace Memorabilia.Repository
 
         public async Task<IEnumerable<Domain.Entities.Conference>> GetAll()
         {
-            return (await Conference.ToListAsync().ConfigureAwait(false)).OrderBy(conference => conference.Name);
+            return (await Conference.ToListAsync()
+                                    .ConfigureAwait(false)).OrderBy(conference => conference.SportLeagueLevelName)
+                                                           .ThenBy(conference => conference.Name);
         }
 
         public async Task Update(Domain.Entities.Conference conference, CancellationToken cancellationToken = default)

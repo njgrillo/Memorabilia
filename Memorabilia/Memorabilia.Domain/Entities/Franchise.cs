@@ -6,9 +6,9 @@ namespace Memorabilia.Domain.Entities
     {
         public Franchise() { }
 
-        public Franchise(int sportId, string name, string location, int foundYear)
+        public Franchise(int sportLeagueLevelId, string name, string location, int foundYear)
         {
-            SportId = sportId;
+            SportLeagueLevelId = sportLeagueLevelId;
             Name = name;
             Location = location;
             FoundYear = foundYear;
@@ -29,9 +29,9 @@ namespace Memorabilia.Domain.Entities
 
         public string Name { get; private set; }
 
-        public int SportId { get; private set; }
+        public int SportLeagueLevelId { get; private set; }
 
-        public string SportName => Constants.Sport.Find(SportId)?.Name;
+        public string SportLeagueLevelName => Constants.SportLeagueLevel.Find(SportLeagueLevelId)?.Name;
 
         public void Set(string name, string location, int foundYear)
         {

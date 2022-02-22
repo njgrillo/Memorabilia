@@ -5,7 +5,7 @@
 @using Memorabilia.Application.Features.Admin.Commissioner
 @using Memorabilia.Application.Features.Admin.Person
 @using Memorabilia.Web.Controls.Person
-@using Memorabilia.Web.Controls.Sport
+@using Memorabilia.Web.Controls.SportLeagueLevel
 
 @inject CommandRouter _commandRouter
 @inject ProtectedLocalStorage _localStorage
@@ -35,8 +35,8 @@ else
                 <ValidationSummary />
                 <div class="form-group">
                     <label for="sport">Sport</label>
-                    <_SportDropDown @bind-Value="@_viewModel.SportId"
-                                    @bind-Value:event="ValueChanged" /> 
+                    <_SportLeagueLevelDropDown @bind-Value="@_viewModel.SportLeagueLevelId"
+                                               @bind-Value:event="ValueChanged" /> 
                 </div>
                 <div class="form-group">
                     <label for="person">Person</label>
@@ -44,10 +44,10 @@ else
                                        @bind-Value="_viewModel.Person"
                                        Placeholder="Search by name...">
                         <SelectedTemplate Context="person">
-                            @person.FullName
+                            @person.DisplayName
                         </SelectedTemplate>
                         <ResultTemplate Context="person">
-                            @person.FullName
+                            @person.DisplayName
                         </ResultTemplate>
                     </BlazoredTypeahead> 
                 </div>
@@ -109,7 +109,7 @@ else
 
     private async Task<IEnumerable<PersonViewModel>> SearchPeople(string searchText)
     {
-        return await Task.FromResult(_people.Where(person => person.FullName.Contains(searchText, StringComparison.OrdinalIgnoreCase))).ConfigureAwait(false);
+        return await Task.FromResult(_people.Where(person => person.DisplayName.Contains(searchText, StringComparison.OrdinalIgnoreCase))).ConfigureAwait(false);
     }
 }
 

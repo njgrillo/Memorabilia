@@ -7,7 +7,7 @@
     <option value="0">--Select--</option>
     @foreach (var commissioner in _commissioners)
     {
-        <option value="@commissioner.Id">@commissioner.Person.FullName</option>
+        <option value="@commissioner.Id">@commissioner.Person.DisplayName</option>
     }
 </InputSelect>
 

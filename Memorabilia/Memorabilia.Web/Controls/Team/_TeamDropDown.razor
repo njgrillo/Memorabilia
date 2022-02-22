@@ -13,10 +13,13 @@
 
 @code {
     [Parameter]
-    public Sport Sport { get; set; }
-    
+    public Franchise Franchise { get; set; }
+
     [Parameter]
-    public int Value { get; set; }  
+    public Sport Sport { get; set; }
+
+    [Parameter]
+    public int Value { get; set; }
 
     private IEnumerable<TeamViewModel> _teams = Enumerable.Empty<TeamViewModel>();
 
@@ -30,7 +33,7 @@
 
     private async Task Load()
     {
-        var query = new GetTeams.Query(Sport.Id);
+        var query = new GetTeams.Query(Franchise?.Id, Sport?.Id);
 
         _teams = (await _queryRouter.Send(query).ConfigureAwait(false)).Teams;
     }
@@ -39,5 +42,11 @@
     {
         Value = Convert.ToInt32(args.Value);
         await ValueChanged.InvokeAsync(Value);
+    }
+
+    protected override async Task OnParametersSetAsync()
+    {
+        if (Franchise != null)
+            await Load().ConfigureAwait(false);
     }
 }

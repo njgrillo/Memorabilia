@@ -18,6 +18,8 @@
 
         public int PersonId { get; private set; }
 
+        public Team Team { get; private set; }
+
         public int TeamId { get; private set; }
 
         public void Set(int teamId, int? beginYear, int? endYear)

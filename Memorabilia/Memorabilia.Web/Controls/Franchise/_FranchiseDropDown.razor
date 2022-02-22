@@ -2,7 +2,7 @@
 
 <InputSelect id="FranchiseDropDown" class="form-control" @bind-Value="@Value" @oninput="OnInputChange">
     <option value="0">--Select--</option>
-    @foreach (var franchise in Franchise.All)
+    @foreach (var franchise in Franchise.GetFranchises(SportLeagueLevel))
     {
         <option value="@franchise.Id">@franchise.Name</option>
     }
@@ -11,6 +11,9 @@
 @code {
     [Parameter]
     public Franchise InitialValue { get; set; }
+
+    [Parameter]
+    public SportLeagueLevel SportLeagueLevel { get; set; }
 
     [Parameter]
     public int Value { get; set; }

@@ -19,7 +19,7 @@ namespace Memorabilia.Application.Features.Admin.SportLeagueLevel
         public string Abbreviation { get; set; }
 
         [Required]
-        [MinLength(1, ErrorMessage = "Level Type is required.")]
+        [Range(1, int.MaxValue, ErrorMessage = "Level Type is required.")]
         public int LevelTypeId { get; set; }
 
         [Required]
@@ -30,7 +30,7 @@ namespace Memorabilia.Application.Features.Admin.SportLeagueLevel
         public override string PageTitle => $"{(Id > 0 ? "Edit" : "Add")} Sport League Level";
 
         [Required]
-        [MinLength(1, ErrorMessage = "Sport is required.")]
+        [Range(1, int.MaxValue, ErrorMessage = "Sport is required.")]
         public int SportId { get; set; }
     }
 }

@@ -5,12 +5,16 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Memorabilia.Domain\Memorabilia.Domain.csproj" />
+    <Compile Remove="Features\Memorabilia\Bat\**" />
+    <Compile Remove="Services\**" />
+    <EmbeddedResource Remove="Features\Memorabilia\Bat\**" />
+    <EmbeddedResource Remove="Services\**" />
+    <None Remove="Features\Memorabilia\Bat\**" />
+    <None Remove="Services\**" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Features\Memorabilia\Bat\" />
-    <Folder Include="Services\" />
+    <ProjectReference Include="..\Memorabilia.Domain\Memorabilia.Domain.csproj" />
   </ItemGroup>
 
 </Project>

@@ -39,7 +39,9 @@ namespace Memorabilia.Repository
 
         public async Task<IEnumerable<Domain.Entities.Franchise>> GetAll()
         {
-            return (await Franchise.ToListAsync().ConfigureAwait(false)).OrderBy(franchise => franchise.Name);
+            return (await Franchise.ToListAsync()
+                                   .ConfigureAwait(false)).OrderBy(franchise => franchise.SportLeagueLevelName)
+                                                          .ThenBy(franchise => franchise.Name);
         }
 
         public async Task Update(Domain.Entities.Franchise franchise, CancellationToken cancellationToken = default)

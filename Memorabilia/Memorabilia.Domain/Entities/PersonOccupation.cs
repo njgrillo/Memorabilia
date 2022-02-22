@@ -13,7 +13,11 @@
 
         public int OccupationId { get; private set; }
 
+        public string OccupationName => Constants.Occupation.Find(OccupationId)?.Name;
+
         public int OccupationTypeId { get; private set; }
+
+        public Person Person { get; private set; }
 
         public int PersonId { get; private set; }
 

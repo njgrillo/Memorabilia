@@ -17,8 +17,7 @@ namespace Memorabilia.Repository
         }
 
         private IQueryable<Domain.Entities.Commissioner> Commissioner => _context.Set<Domain.Entities.Commissioner>()
-                                                                                 .Include(commissioner => commissioner.Person)
-                                                                                 .Include(commissioner => commissioner.Sport);
+                                                                                 .Include(commissioner => commissioner.Person);
 
         public async Task Add(Domain.Entities.Commissioner commissioner, CancellationToken cancellationToken = default)
         {
@@ -39,15 +38,15 @@ namespace Memorabilia.Repository
             return await Commissioner.SingleOrDefaultAsync(commissioner => commissioner.Id == id).ConfigureAwait(false);
         }
 
-        public async Task<IEnumerable<Domain.Entities.Commissioner>> GetAll(int? sportId = null)
+        public async Task<IEnumerable<Domain.Entities.Commissioner>> GetAll(int? sportLeagueLevelId = null)
         {
-            return !sportId.HasValue
+            return !sportLeagueLevelId.HasValue
                 ? (await Commissioner.ToListAsync()
-                                     .ConfigureAwait(false)).OrderBy(commissioner => commissioner.Sport.Name)
+                                     .ConfigureAwait(false)).OrderBy(commissioner => commissioner.SportLeagueLevelName)
                                                             .ThenByDescending(commissioner => commissioner.BeginYear)
-                : (await Commissioner.Where(commissioner => commissioner.SportId == sportId)
+                : (await Commissioner.Where(commissioner => commissioner.SportLeagueLevelId == sportLeagueLevelId)
                                      .ToListAsync()
-                                     .ConfigureAwait(false)).OrderBy(commissioner => commissioner.Sport.Name)
+                                     .ConfigureAwait(false)).OrderBy(commissioner => commissioner.SportLeagueLevelName)
                                                             .ThenByDescending(commissioner => commissioner.BeginYear);
         }
 

@@ -1,24 +1,14 @@
 ﻿@using Memorabilia.Application.Features.Admin.Person
 @using Memorabilia.Web.Controls.Franchise
-@using Memorabilia.Web.Controls.LevelType
-@using Memorabilia.Web.Controls.Sport
+@using Memorabilia.Web.Controls.SportLeagueLevel
 
 <div class="row">
     <div class="col-lg-12">
         <div class="form-group">
             <label for="sport">Sport</label>
-            <_SportDropDown @bind-Value="@_viewModel.SportId"
-                            @bind-Value:event="ValueChanged" /> 
+            <_SportLeagueLevelDropDown @bind-Value="@_viewModel.SportLeagueLevelId"
+                                       @bind-Value:event="ValueChanged" /> 
         </div> 
-    </div>
-</div>
-<div class="row">
-    <div class="col-lg-12">
-        <div class="form-group">
-            <label for="levelType">Level</label>
-            <_LevelTypeDropDown @bind-Value="@_viewModel.LevelTypeId"
-                                @bind-Value:event="ValueChanged" /> 
-        </div>
     </div>
 </div>
 <div class="row">
@@ -39,8 +29,8 @@
     </div> 
     <div class="col-lg-6">
         <div class="form-group">
-            <label for="voteCount">Vote Count</label>
-            <InputNumber class="form-control" @bind-Value="_viewModel.VoteCount" />
+            <label for="votePercentage">Vote Percentage</label>
+            <InputNumber class="form-control" @bind-Value="_viewModel.VotePercentage" />
         </div>
     </div> 
 </div> 
@@ -52,25 +42,27 @@
     <thead>
         <tr>
             <th>Sport</th>
-            <th>Level</th>
             <th>Franchise</th>
+            <th>Induction Year</th>
+            <th>Vote Percentage</th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-        @foreach (var hallOfFame in HallOfFames)
+        @foreach (var hallOfFame in HallOfFames.Where(x => !x.IsDeleted))
         {
             <tr>
                 <td>@hallOfFame.SportName</td>
-                <td>@hallOfFame.LevelTypeName</td>
                 <td>@hallOfFame.FranchiseName</td>
+                <td>@hallOfFame.InductionYear</td>
+                <td>@hallOfFame.VotePercentage</td>
                 <td>
                     <_Tooltip Text="Delete">
                         <img class="can-click" 
                              src="images/trash.png" 
                              height="25" 
                              width="25" 
-                             @onclick="@(_ => Remove(hallOfFame.SportId, hallOfFame.LevelTypeId))" />
+                             @onclick="@(_ => Remove(hallOfFame.SportLeagueLevelId))" />
                     </_Tooltip>
                 </td>
             </tr>
@@ -91,13 +83,13 @@
         _viewModel = new SavePersonHallOfFameViewModel();
     }
 
-    private void Remove(int sportId, int levelTypeId)
+    private void Remove(int sportLeagueLevelId)
     {
-        var hallOfFame = HallOfFames.SingleOrDefault(hallOfFame => hallOfFame.SportId == sportId && hallOfFame.LevelTypeId == levelTypeId);
+        var hallOfFame = HallOfFames.SingleOrDefault(hallOfFame => hallOfFame.SportLeagueLevelId == sportLeagueLevelId);
 
         if (hallOfFame == null)
             return;
 
-        HallOfFames.Remove(hallOfFame);                                                                               
+        hallOfFame.IsDeleted = true;                                                                             
     } 
 }

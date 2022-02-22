@@ -11,7 +11,7 @@ namespace Memorabilia.Application.Features.Admin.Conference
             Abbreviation = viewModel.Abbreviation;
             Id = viewModel.Id;
             Name = viewModel.Name;
-            SportId = viewModel.SportId;
+            SportLeagueLevelId = viewModel.SportLeagueLevelId;
         }
 
         [StringLength(10, ErrorMessage = "Abbreviation is too long.")]
@@ -25,7 +25,7 @@ namespace Memorabilia.Application.Features.Admin.Conference
         public override string PageTitle => $"{(Id > 0 ? "Edit" : "Add")} Conference";
 
         [Required]
-        [MinLength(1, ErrorMessage = "Sport is required.")]
-        public int SportId { get; set; }
+        [Range(1, int.MaxValue, ErrorMessage = "Sport League Level is required.")]
+        public int SportLeagueLevelId { get; set; }
     }
 }

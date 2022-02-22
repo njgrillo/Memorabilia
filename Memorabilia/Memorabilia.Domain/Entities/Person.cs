@@ -10,18 +10,22 @@ namespace Memorabilia.Domain.Entities
 
         public Person(string firstName, 
                       string lastName, 
-                      string suffix, 
-                      string fullName, 
-                      string nickname, 
+                      string middleName,
+                      string suffix,
+                      string nickname,
+                      string legalName,
+                      string displayName,                       
                       DateTime? birthDate, 
                       DateTime? deathDate, 
                       string imagePath)
         {
             FirstName = firstName;
             LastName = lastName;
+            MiddleName = middleName;
             Suffix = suffix;
-            FullName = fullName;
             Nickname = nickname;
+            LegalName = legalName;
+            DisplayName = displayName;
             BirthDate = birthDate;
             DeathDate = deathDate;
             ImagePath = imagePath;
@@ -34,9 +38,9 @@ namespace Memorabilia.Domain.Entities
 
         public DateTime? DeathDate { get; private set; }
 
-        public string FirstName { get; private set; }
+        public string DisplayName { get; private set; }
 
-        public string FullName { get; private set; }
+        public string FirstName { get; private set; }        
 
         public List<HallOfFame> HallOfFames { get; private set; } = new();
 
@@ -45,6 +49,10 @@ namespace Memorabilia.Domain.Entities
         public DateTime? LastModifiedDate { get; private set; }
 
         public string LastName { get; private set; }
+
+        public string LegalName { get; private set; }
+
+        public string MiddleName { get; private set; }
 
         public string Nickname { get; private set; }
 
@@ -80,40 +88,44 @@ namespace Memorabilia.Domain.Entities
 
         public void Set(string firstName, 
                         string lastName, 
-                        string suffix, 
-                        string fullName, 
-                        string nickname, 
+                        string middleName,
+                        string suffix,
+                        string nickname,
+                        string legalName,
+                        string displayName,                         
                         DateTime? birthDate, 
                         DateTime? deathDate, 
                         string imagePath)
         {
             FirstName = firstName;
             LastName = lastName;
+            MiddleName = middleName;
             Suffix = suffix;
-            FullName = fullName;
             Nickname = nickname;
+            LegalName = legalName;
+            DisplayName = displayName;
             BirthDate = birthDate;
             DeathDate = deathDate;
             ImagePath = imagePath;
             LastModifiedDate = DateTime.UtcNow;
         }
 
-        public void SetHallOfFame(int sportId, int levelTypeId, int? franchiseId, int? inductionYear, int? voteCount)
+        public void SetHallOfFame(int sportLeagueLevelId, int? franchiseId, int? inductionYear, decimal? votePercentage)
         {
-            var hallOfFame = HallOfFames.SingleOrDefault(hof => hof.SportId == sportId && hof.LevelTypeId == levelTypeId);
+            var hallOfFame = HallOfFames.SingleOrDefault(hof => hof.SportLeagueLevelId == sportLeagueLevelId);
 
             if (hallOfFame == null)
             {
-                HallOfFames.Add(new HallOfFame(inductionYear, Id, sportId, levelTypeId, franchiseId, voteCount));
+                HallOfFames.Add(new HallOfFame(inductionYear, Id, sportLeagueLevelId, franchiseId, votePercentage));
                 return;
             }
 
-            hallOfFame.Set(inductionYear, sportId, levelTypeId, franchiseId, voteCount);
+            hallOfFame.Set(inductionYear, sportLeagueLevelId, franchiseId, votePercentage);
         }
 
         public void SetOccupation(int occupationId, int occupationTypeId)
         {
-            var occupation = Occupations.SingleOrDefault(occupation => occupation.OccupationId == occupationId);
+            var occupation = occupationId > 0 ? Occupations.SingleOrDefault(occupation => occupation.OccupationId == occupationId) : null;
 
             if (occupation == null)
             {

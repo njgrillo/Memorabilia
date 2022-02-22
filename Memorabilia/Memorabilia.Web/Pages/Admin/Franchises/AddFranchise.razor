@@ -2,7 +2,7 @@
 
 @using Memorabilia.Application.Features.Admin
 @using Memorabilia.Application.Features.Admin.Franchise
-@using Memorabilia.Web.Controls.Sport
+@using Memorabilia.Web.Controls.SportLeagueLevel
 
 @inject CommandRouter _commandRouter
 @inject ProtectedLocalStorage _localStorage
@@ -31,8 +31,8 @@ else
                 <ValidationSummary />
                 <div class="form-group">
                     <label for="sport">Sport</label>
-                    <_SportDropDown @bind-Value="@_viewModel.SportId"
-                                    @bind-Value:event="ValueChanged" /> 
+                    <_SportLeagueLevelDropDown @bind-Value="@_viewModel.SportLeagueLevelId"
+                                               @bind-Value:event="ValueChanged" /> 
                 </div>
                 <div class="form-group">
                     <label for="name">Name</label>

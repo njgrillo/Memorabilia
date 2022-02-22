@@ -35,7 +35,6 @@ else
                 <div class="form-group">
                     <_ImageFileSelector @bind-Value="@_viewModel.Images"
                                         @bind-Value:event="ValueChanged" 
-                                        @ref="_imageFileSelector" 
                                         CanRemove="true"
                                         DisplayPreview="true"
                                         HasPrimary="true"                                        
@@ -60,7 +59,6 @@ else
     public int MemorabiliaId { get; set; }
 
     private bool _continue;
-    private _ImageFileSelector _imageFileSelector;
     private SaveMemorabiliaImagesViewModel _viewModel = new SaveMemorabiliaImagesViewModel();
 
     protected void Cancel()

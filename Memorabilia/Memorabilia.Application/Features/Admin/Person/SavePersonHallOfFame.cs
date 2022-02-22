@@ -22,13 +22,15 @@ namespace Memorabilia.Application.Features.Admin.Person
             {
                 var person = await _personRepository.Get(command.PersonId).ConfigureAwait(false);
 
-                foreach (var hallOfFame in command.HallOfFames)
+                if (command.DeletedHallOfFameIds.Any())
+                    person.RemoveHallOfFames(command.DeletedHallOfFameIds);
+
+                foreach (var hallOfFame in command.HallOfFames.Where(hof => !hof.IsDeleted))
                 {
-                    person.SetHallOfFame(hallOfFame.SportId, 
-                                         hallOfFame.LevelTypeId, 
+                    person.SetHallOfFame(hallOfFame.SportLeagueLevelId, 
                                          hallOfFame.FranchiseId > 0 ? hallOfFame.FranchiseId : null, 
                                          hallOfFame.InductionYear, 
-                                         hallOfFame.VoteCount);
+                                         hallOfFame.VotePercentage);
                 }
 
                 await _personRepository.Update(person).ConfigureAwait(false);
@@ -42,6 +44,8 @@ namespace Memorabilia.Application.Features.Admin.Person
                 PersonId = personId;
                 HallOfFames = hallOfFames.ToArray();
             }
+
+            public int[] DeletedHallOfFameIds => HallOfFames.Where(hof => hof.IsDeleted).Select(hof => hof.Id).ToArray();
 
             public SavePersonHallOfFameViewModel[] HallOfFames { get; }
 

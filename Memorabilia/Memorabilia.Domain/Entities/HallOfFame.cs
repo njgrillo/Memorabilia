@@ -4,35 +4,31 @@
     {
         public HallOfFame() { }
 
-        public HallOfFame(int? inductionYear, int personId, int sportId, int levelTypeId, int? franchiseId, int? voteCount)
+        public HallOfFame(int? inductionYear, int personId, int sportLeagueLevelId, int? franchiseId, decimal? votePercentage)
         {
             InductionYear = inductionYear;
             PersonId = personId;
-            SportId = sportId;
-            LevelTypeId = levelTypeId;
+            SportLeagueLevelId = sportLeagueLevelId;
             FranchiseId = franchiseId;
-            VoteCount = voteCount;
+            VotePercentage = votePercentage;
         }
 
         public int? FranchiseId { get; private set; }
 
         public int? InductionYear { get; private set; }
 
-        public int LevelTypeId { get; private set; }
-
         public int PersonId { get; private set; }
 
-        public int SportId { get; private set; }
+        public int SportLeagueLevelId { get; private set; }
 
-        public int? VoteCount { get; private set; }
+        public decimal? VotePercentage { get; private set; }
 
-        public void Set(int? inductionYear, int sportId, int levelTypeId, int? franchiseId, int? voteCount)
+        public void Set(int? inductionYear, int sportLeagueLevelId, int? franchiseId, decimal? votePercentage)
         {
             InductionYear = inductionYear;
-            SportId = sportId;
-            LevelTypeId = levelTypeId;
+            SportLeagueLevelId = sportLeagueLevelId;
             FranchiseId = franchiseId;
-            VoteCount = voteCount;
+            VotePercentage = votePercentage;
         }
     }
 }

@@ -22,3 +22,15 @@ C:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Domain\obj\Debug\net5.0
 C:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Domain\obj\Debug\net5.0\ref\Memorabilia.Domain.dll
 C:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Domain\obj\Debug\net5.0\Memorabilia.Domain.pdb
 C:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Domain\obj\Debug\net5.0\Memorabilia.Domain.csproj.AssemblyReference.cache
+D:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Domain\bin\Debug\net5.0\Memorabilia.Domain.deps.json
+D:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Domain\bin\Debug\net5.0\Memorabilia.Domain.dll
+D:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Domain\bin\Debug\net5.0\Memorabilia.Domain.pdb
+D:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Domain\obj\Debug\net5.0\Memorabilia.Domain.csproj.AssemblyReference.cache
+D:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Domain\obj\Debug\net5.0\Memorabilia.Domain.GeneratedMSBuildEditorConfig.editorconfig
+D:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Domain\obj\Debug\net5.0\Memorabilia.Domain.AssemblyInfoInputs.cache
+D:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Domain\obj\Debug\net5.0\Memorabilia.Domain.AssemblyInfo.cs
+D:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Domain\obj\Debug\net5.0\Memorabilia.Domain.csproj.CoreCompileInputs.cache
+D:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Domain\obj\Debug\net5.0\Memorabilia.Domain.dll
+D:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Domain\obj\Debug\net5.0\refint\Memorabilia.Domain.dll
+D:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Domain\obj\Debug\net5.0\Memorabilia.Domain.pdb
+D:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Domain\obj\Debug\net5.0\ref\Memorabilia.Domain.dll

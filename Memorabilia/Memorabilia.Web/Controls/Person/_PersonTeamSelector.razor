@@ -41,7 +41,7 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var team in Teams)
+        @foreach (var team in Teams.Where(team => !team.IsDeleted))
         {
             <tr>
                 <td>@_teams.Single(team => team.Id == team.Id).Name</td>
@@ -92,7 +92,7 @@
         if (team == null)
             return;
 
-        Teams.Remove(team);                                                                               
+        team.IsDeleted = true;                                                                        
     } 
 
     private async Task<IEnumerable<TeamViewModel>> SearchTeams(string searchText)

@@ -4,9 +4,9 @@
     {
         public Conference() { }
 
-        public Conference(int sportId, string name, string abbreviation)
+        public Conference(int sportLeagueLevelId, string name, string abbreviation)
         {
-            SportId = sportId;
+            SportLeagueLevelId = sportLeagueLevelId;
             Name = name;
             Abbreviation = abbreviation;
         }
@@ -15,11 +15,13 @@
 
         public string Name { get; set; }
 
-        public int SportId { get; set; }
+        public int SportLeagueLevelId { get; set; }
 
-        public void Set(int sportId, string name, string abbreviation)
+        public string SportLeagueLevelName => Constants.SportLeagueLevel.Find(SportLeagueLevelId)?.Name;
+
+        public void Set(int sportLeagueLevelId, string name, string abbreviation)
         {
-            SportId = sportId;
+            SportLeagueLevelId = sportLeagueLevelId;
             Name = name;
             Abbreviation = abbreviation;
         }

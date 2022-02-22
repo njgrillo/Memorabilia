@@ -13,7 +13,7 @@ namespace Memorabilia.Application.Features.Admin.Commissioner
             EndYear = viewModel.EndYear;
             Id = viewModel.Id;
             Person = new PersonViewModel(viewModel.Person);
-            SportId = viewModel.SportId;
+            SportLeagueLevelId = viewModel.SportLeagueLevelId;
         }
 
         public int? BeginYear { get; set; }
@@ -30,6 +30,6 @@ namespace Memorabilia.Application.Features.Admin.Commissioner
         public override string RoutePrefix => "Commissioners";
 
         [Required]
-        public int SportId { get; set; }
+        public int SportLeagueLevelId { get; set; }
     }
 }

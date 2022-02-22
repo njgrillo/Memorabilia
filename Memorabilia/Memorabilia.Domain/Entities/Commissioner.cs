@@ -4,9 +4,9 @@
     {
         public Commissioner() { }
 
-        public Commissioner(int sportId, int personId, int? beginYear, int? endYear)
+        public Commissioner(int sportLeagueLevelId, int personId, int? beginYear, int? endYear)
         {
-            SportId = sportId;
+            SportLeagueLevelId = sportLeagueLevelId;
             PersonId = personId;
             BeginYear = beginYear;
             EndYear = endYear;
@@ -20,9 +20,9 @@
 
         public int PersonId { get; private set; }
 
-        public Sport Sport { get; set; }
+        public int SportLeagueLevelId { get; private set; }
 
-        public int SportId { get; private set; }
+        public string SportLeagueLevelName => Constants.SportLeagueLevel.Find(SportLeagueLevelId)?.Name;
 
         public void Set(int? beginYear, int? endYear)
         {

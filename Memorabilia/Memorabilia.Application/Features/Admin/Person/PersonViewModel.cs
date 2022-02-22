@@ -19,9 +19,9 @@ namespace Memorabilia.Application.Features.Admin.Person
 
         public DateTime? DeathDate => _person.DeathDate;
 
-        public string FirstName => _person.FirstName;
+        public string DisplayName => _person.DisplayName;
 
-        public string FullName => _person.FullName;
+        public string FirstName => _person.FirstName;        
 
         public int Id => _person.Id;
 
@@ -30,6 +30,10 @@ namespace Memorabilia.Application.Features.Admin.Person
         public DateTime? LastModifiedDate => _person.LastModifiedDate;
 
         public string LastName => _person.LastName; 
+
+        public string LegalName => _person.LegalName;
+
+        public string MiddleName => _person.MiddleName;
 
         public string Nickname => _person.Nickname;
 

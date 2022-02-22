@@ -22,7 +22,10 @@ namespace Memorabilia.Application.Features.Admin.Franchise
 
                 if (command.IsNew)
                 {
-                    franchise = new Domain.Entities.Franchise(command.SportId, command.Name, command.Location, command.FoundYear);
+                    franchise = new Domain.Entities.Franchise(command.SportLeagueLevelId, 
+                                                              command.Name, 
+                                                              command.Location, 
+                                                              command.FoundYear);
                     await _franchiseRepository.Add(franchise).ConfigureAwait(false);
 
                     return;
@@ -68,7 +71,7 @@ namespace Memorabilia.Application.Features.Admin.Franchise
 
             public string Name => _viewModel.Name;
 
-            public int SportId => _viewModel.SportId;
+            public int SportLeagueLevelId => _viewModel.SportLeagueLevelId;
         }
     }
 }

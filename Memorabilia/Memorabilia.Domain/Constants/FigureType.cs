@@ -28,7 +28,7 @@ namespace Memorabilia.Domain.Constants
 
         public static FigureType Find(int id)
         {
-            return All.SingleOrDefault(FigureType => FigureType.Id == id);
+            return All.SingleOrDefault(figureType => figureType.Id == id);
         }
     }
 }

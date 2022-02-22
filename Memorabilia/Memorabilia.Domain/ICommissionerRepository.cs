@@ -12,7 +12,7 @@ namespace Memorabilia.Domain
 
         Task<Entities.Commissioner> Get(int id);
 
-        Task<IEnumerable<Entities.Commissioner>> GetAll(int? sportId = null);
+        Task<IEnumerable<Entities.Commissioner>> GetAll(int? sportLeagueLevelId = null);
 
         Task Update(Entities.Commissioner commissioner, CancellationToken cancellationToken = default);
     }

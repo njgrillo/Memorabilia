@@ -1,0 +1,119 @@
+﻿@page "/Divisions"
+
+@using Memorabilia.Application.Features.Admin
+@using Memorabilia.Application.Features.Admin.Division
+
+@inject CommandRouter _commandRouter
+@inject ProtectedLocalStorage _localStorage
+@inject NavigationManager _navigation
+@inject QueryRouter _queryRouter
+@inject IToastService _toastService
+
+@if (_viewModel == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <PopConfirm @ref="_deleteDialog"
+                Title="Delete Division"
+                ConfirmedChanged="Delete" />
+    <div class="row">
+        <div class="col-md-12" style="text-align: center">
+            <h1>@_viewModel.PageTitle</h1>
+        </div>
+    </div>
+    <br />
+    <table class="table" style="border: 1px solid black;">
+        <thead>
+            <tr>
+                <th>Conference</th>
+                <th>Name</th>
+                <th>Abbreviation</th>
+                <th></th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var division in _viewModel.Divisions)
+            {
+                <tr>
+                    <td>@division.ConferenceName</td>
+                    <td>@division.Name</td>
+                    <td>@division.Abbreviation</td>
+                    <td>
+                        <_Tooltip Text="Edit">
+                            <img class="can-click" 
+                                 src="images/pencil.png" 
+                                 height="25" 
+                                 width="25" 
+                                 @onclick="@(_ => _navigation.NavigateTo($"{_viewModel.RoutePrefix}/Edit/{division.Id}"))" />
+                        </_Tooltip>                        
+                    </td>
+                    <td>
+                        <_Tooltip Text="Delete">
+                            <img class="can-click" 
+                                 src="images/trash.png" 
+                                 height="25" 
+                                 width="25" 
+                                 @onclick="@(_ => ShowConfirm(division.Id))" />
+                        </_Tooltip>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <div class="row">
+        <div class="col-md-12" style="text-align: center">
+            <div class="col-md-12" style="text-align: center">
+                <a href="Divisions/Add">Add @_viewModel.ItemTitle</a>
+            </div>
+        </div>
+    </div>
+    <br />
+}
+
+@code {
+    private PopConfirm _deleteDialog;
+    private int _deletedItemId;
+    private DivisionsViewModel _viewModel;
+
+    protected async Task Delete(bool confirm)
+    {
+        if (!confirm)
+        {
+            _deletedItemId = 0;
+            return;
+        }
+
+        var deletedItem = _viewModel.Divisions.Single(Division => Division.Id == _deletedItemId);
+        var viewModel = new SaveDivisionViewModel(deletedItem);
+        viewModel.IsDeleted = true;
+
+        var command = new SaveDivision.Command(viewModel);
+
+        await _commandRouter.Send(command).ConfigureAwait(false);
+        
+        _viewModel.Divisions.Remove(deletedItem);
+
+        _toastService.ShowSuccess($"{_viewModel.ItemTitle} was deleted successfully!", _viewModel.PageTitle);
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        var userId = await _localStorage.GetAsync<int>("UserId");
+
+        if (userId.Value == 0)
+            _navigation.NavigateTo("Login");
+
+        var query = new GetDivisions.Query();
+
+        _viewModel = await _queryRouter.Send(query).ConfigureAwait(false);
+    }
+
+    protected void ShowConfirm(int id)
+    {
+        _deletedItemId = id;
+        _deleteDialog.ShowPop();
+    }
+}

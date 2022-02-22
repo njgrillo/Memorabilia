@@ -33,6 +33,8 @@ namespace Memorabilia.Application.Features.Admin.Team
 
                     await _teamRepository.Add(team).ConfigureAwait(false);
 
+                    command.Id = team.Id;
+
                     return;
                 }
 
@@ -64,6 +66,7 @@ namespace Memorabilia.Application.Features.Admin.Team
             public Command(SaveTeamViewModel viewModel)
             {
                 _viewModel = viewModel;
+                Id = _viewModel.Id;
             }
 
             public string Abbreviation => _viewModel.Abbreviation;
@@ -74,7 +77,7 @@ namespace Memorabilia.Application.Features.Admin.Team
 
             public int FranchiseId => _viewModel.FranchiseId;
 
-            public int Id => _viewModel.Id;
+            public int Id { get; set; } 
 
             public string ImagePath => _viewModel.ImagePath;
 

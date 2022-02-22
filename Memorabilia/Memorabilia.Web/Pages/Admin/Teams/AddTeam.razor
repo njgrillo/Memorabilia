@@ -5,6 +5,8 @@
 @using Memorabilia.Application.Features.Admin.Sport
 @using Memorabilia.Application.Features.Admin.Team
 @using Memorabilia.Domain.Constants
+@using Memorabilia.Web.Controls.Franchise
+@using Memorabilia.Web.Controls.SportLeagueLevel
 
 @inject CommandRouter _commandRouter
 @inject ProtectedLocalStorage _localStorage
@@ -12,7 +14,7 @@
 @inject QueryRouter _queryRouter
 @inject IToastService _toastService
 
-@if (_viewModel == null || _franchises == null || _filteredFranchises == null)
+@if (_viewModel == null) 
 {
     <p><em>Loading...</em></p>
 }
@@ -33,22 +35,19 @@ else
                 <DataAnnotationsValidator />
                 <ValidationSummary />
                 <div class="form-group">
-                    <label for="sports">Sports</label>
-                    <select value="@_sportId" @onchange="OnChangeSport">
-                        @foreach (var sport in Sport.All)
+                    <label for="sport">Sport</label>
+                    <select @onchange="OnChangeSportLeagueLevel">
+                        @foreach (var sportLeagueLevel in SportLeagueLevel.All)
                         {
-                            <option value="@sport.Id">@sport.Name</option>
+                            <option value="@sportLeagueLevel.Id">@sportLeagueLevel.Name</option>
                         }
                     </select>                            
                 </div>
                 <div class="form-group">
                     <label for="franchise">Franchise</label>
-                    <InputSelect id="franchise" @bind-Value="_viewModel.FranchiseId" class="form-control">
-                        @foreach (var franchise in _filteredFranchises)
-                        {
-                            <option value="@franchise.Id">@franchise.FullName</option>
-                        }
-                    </InputSelect>
+                    <_FranchiseDropDown @bind-Value="@_viewModel.FranchiseId" 
+                                        @bind-Value:event="ValueChanged"
+                                        SportLeagueLevel="@_sportLeagueLevel" />   
                 </div>
                 <div class="form-group">
                     <label for="name">Name</label>
@@ -75,7 +74,9 @@ else
                     <InputNumber id="endYear" @bind-Value="_viewModel.EndYear" class="form-control" />
                 </div>
                 <div class="text-right">
-                    <button type="submit" class="btn btn-primary">Save</button>
+                    <button type="submit" class="btn btn-primary" @onclick="@(()=> _continue = true)">Save & Continue</button>
+                    <button type="submit" class="btn btn-primary">Save & Exit</button>
+                    <button type="button" class="btn btn-secondary" @onclick="@(_ => _navigation.NavigateTo("Teams"))">Cancel</button>
                 </div>
             </EditForm>
         </div>
@@ -89,10 +90,8 @@ else
 }
 
 @code {
-    private IEnumerable<FranchiseViewModel> _filteredFranchises;
-    private IEnumerable<FranchiseViewModel> _franchises;
-    private int _sportId { get; set; }
-    private SportsViewModel _sports;
+    private bool _continue;
+    private SportLeagueLevel _sportLeagueLevel;
     private SaveTeamViewModel _viewModel = new SaveTeamViewModel();
 
     protected async Task HandleValidSubmit()
@@ -101,7 +100,9 @@ else
 
         await _commandRouter.Send(command).ConfigureAwait(false);
 
-        _navigation.NavigateTo("Teams");
+        var url = _continue ? $"Team/Conference/Add/{command.Id}" : "Teams";
+
+        _navigation.NavigateTo(url);
 
         _toastService.ShowSuccess("Team was added successfully!", _viewModel.PageTitle);
     }
@@ -112,17 +113,10 @@ else
 
         if (userId.Value == 0)
             _navigation.NavigateTo("Login");
-
-        var query = new GetFranchises.Query();
-
-        _franchises = (await _queryRouter.Send(query).ConfigureAwait(false)).Franchises;
-        _filteredFranchises = _franchises;
     }
 
-    private void OnChangeSport(ChangeEventArgs args)
+    private void OnChangeSportLeagueLevel(ChangeEventArgs args)
     {
-        var sportId = int.Parse(args.Value.ToString());
-
-        _filteredFranchises = _franchises.Where(franchise => franchise.SportId == sportId).OrderBy(franchise => franchise.FullName);
+        _sportLeagueLevel = SportLeagueLevel.Find(int.Parse(args.Value.ToString()));
     }
 }

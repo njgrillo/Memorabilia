@@ -13,6 +13,7 @@ namespace Memorabilia.Application.Features.Admin.Franchise
             Location = viewModel.Location;
             Name = viewModel.Name;
             FoundYear = viewModel.FoundYear;
+            SportLeagueLevelId = viewModel.SportLeagueLevelId;
         }
 
         [Required]
@@ -38,6 +39,6 @@ namespace Memorabilia.Application.Features.Admin.Franchise
         public override string RoutePrefix => "Franchises";
 
         [Required]
-        public int SportId { get; set; }
+        public int SportLeagueLevelId { get; set; }
     }
 }

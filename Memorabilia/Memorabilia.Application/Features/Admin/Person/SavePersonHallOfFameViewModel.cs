@@ -4,12 +4,15 @@
     {
         public SavePersonHallOfFameViewModel() { }
 
-        //public SavePersonHallOfFameViewModel(Domain.Entities.HallOfFame occupation)
-        //{
-        //    Id = occupation.Id;
-        //    OccupationId = occupation.OccupationId;
-        //    OccupationTypeId = occupation.OccupationTypeId;
-        //}
+        public SavePersonHallOfFameViewModel(PersonHallOfFameViewModel hallOfFame)
+        {            
+            FranchiseId = hallOfFame.FranchiseId ?? 0;
+            Id = hallOfFame.Id;
+            InductionYear = hallOfFame.InductionYear;
+            PersonId = hallOfFame.PersonId;
+            SportLeagueLevelId = hallOfFame.SportLeagueLevelId;
+            VotePercentage = hallOfFame.VotePercentage;
+        }
 
         public int FranchiseId { get; set; }
 
@@ -17,16 +20,12 @@
 
         public int? InductionYear { get; set; }
 
-        public int LevelTypeId { get; set; }
-
-        public string LevelTypeName => Domain.Constants.LevelType.Find(LevelTypeId)?.Name;
-
         public int PersonId { get; set; }
 
-        public int SportId { get; set; }
+        public int SportLeagueLevelId { get; set; }
 
-        public string SportName => Domain.Constants.Sport.Find(SportId)?.Name;
+        public string SportName => Domain.Constants.SportLeagueLevel.Find(SportLeagueLevelId)?.Name;    
 
-        public int? VoteCount { get; set; }
+        public decimal? VotePercentage { get; set; }
     }
 }

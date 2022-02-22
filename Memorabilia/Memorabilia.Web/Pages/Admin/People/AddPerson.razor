@@ -46,24 +46,38 @@ else
                 <div class="row">
                     <div class="col-lg-6">
                         <div class="form-group">
-                            <label for="suffix">Suffix</label>
-                            <InputText id="suffix" @bind-Value="_viewModel.Suffix" @onblur="OnNameFieldBlur" class="form-control" />
-                        </div>
+                            <label for="middleName">Middle Name</label>
+                            <InputText id="middleName" @bind-Value="_viewModel.MiddleName" class="form-control" />
+                        </div>                        
                     </div>
                     <div class="col-lg-6">
                         <div class="form-group">
-                            <label for="nickname">Nickname</label>
-                            <InputText id="nickname" @bind-Value="_viewModel.Nickname" @onblur="OnNameFieldBlur" class="form-control" />
-                        </div> 
+                            <label for="suffix">Suffix</label>
+                            <InputText id="suffix" @bind-Value="_viewModel.Suffix" @onblur="OnNameFieldBlur" class="form-control" />
+                        </div>                        
                     </div>                    
                 </div>
                 <div class="row">
                     <div class="col-lg-6">
                         <div class="form-group">
-                            <label for="fullName">Full Name</label>
-                            <InputText id="fullName" @bind-Value="_viewModel.FullName" class="form-control" />
+                            <label for="nickname">Nickname</label>
+                            <InputText id="nickname" @bind-Value="_viewModel.Nickname" @onblur="OnNameFieldBlur" class="form-control" />
                         </div> 
-                    </div>                    
+                    </div>  
+                     <div class="col-lg-6">
+                        <div class="form-group">
+                            <label for="legalName">Legal Name</label>
+                            <InputText id="legalName" @bind-Value="_viewModel.LegalName" class="form-control" />
+                        </div> 
+                    </div> 
+                </div>
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label for="displayName">Display Name</label>
+                            <InputText id="displayName" @bind-Value="_viewModel.DisplayName" class="form-control" />
+                        </div> 
+                    </div>  
                 </div>
                 <div class="row">
                     <div class="col-lg-6">
@@ -116,9 +130,13 @@ else
 
     public void OnNameFieldBlur()
     {
-        _viewModel.FullName = $"{_viewModel.LastName}" 
-            + (!_viewModel.Suffix.IsNullOrEmpty() ? $" {_viewModel.Suffix}, " : ", ") 
-            + $"{_viewModel.FirstName}"
-            + (!_viewModel.Nickname.IsNullOrEmpty() ? $" ({_viewModel.Nickname})" : string.Empty); 
+        _viewModel.DisplayName = $"{_viewModel.LastName}"
+                                + (!_viewModel.Suffix.IsNullOrEmpty() ? $" {_viewModel.Suffix}, " : ", ")
+                                + (!_viewModel.Nickname.IsNullOrEmpty() ? $" {_viewModel.Nickname}" : string.Empty)
+                                + (!_viewModel.FirstName.IsNullOrEmpty() 
+                                    ? (!_viewModel.Nickname.IsNullOrEmpty() 
+                                        ? $" ({_viewModel.FirstName})" 
+                                        : _viewModel.FirstName) 
+                                    : string.Empty);            
     }
 }

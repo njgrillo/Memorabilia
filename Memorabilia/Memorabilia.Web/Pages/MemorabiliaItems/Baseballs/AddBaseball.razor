@@ -124,10 +124,10 @@ else
                                                    @bind-Value="_viewModel.Person"
                                                    Placeholder="Search by name...">
                                     <SelectedTemplate Context="person">
-                                        @person.FullName
+                                        @person.DisplayName
                                     </SelectedTemplate>
                                     <ResultTemplate Context="person">
-                                        @person.FullName
+                                        @person.DisplayName
                                     </ResultTemplate>
                                 </BlazoredTypeahead>
                             </div>                    
@@ -218,7 +218,7 @@ else
 
     private async Task<IEnumerable<PersonViewModel>> SearchPeople(string searchText)
     {
-        return await Task.FromResult(_people.Where(person => person.FullName.Contains(searchText, StringComparison.OrdinalIgnoreCase))).ConfigureAwait(false);
+        return await Task.FromResult(_people.Where(person => person.DisplayName.Contains(searchText, StringComparison.OrdinalIgnoreCase))).ConfigureAwait(false);
     }
 
     private void SetDefaults()

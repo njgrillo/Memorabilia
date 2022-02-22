@@ -18,7 +18,7 @@ namespace Memorabilia.Application.Features.Admin.Person
 
             protected override async Task<PeopleViewModel> Handle(Query query)
             {
-                var persons = (await _personRepository.GetAll().ConfigureAwait(false)).OrderBy(person => person.FullName);
+                var persons = (await _personRepository.GetAll().ConfigureAwait(false)).OrderBy(person => person.DisplayName);
 
                 var viewModel = new PeopleViewModel(persons);
 

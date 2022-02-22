@@ -8,65 +8,65 @@ build_property.PlatformNeutralAssembly =
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = Memorabilia.Web
 build_property.RootNamespace = Memorabilia.Web
-build_property.ProjectDir = C:\Projects\Memorabilia\Memorabilia\Memorabilia.Web\
+build_property.ProjectDir = D:\Projects\njgrillo\Memorabilia\Memorabilia\.NET6.0\Memorabilia.Web\
 build_property.RazorLangVersion = 6.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = C:\Projects\Memorabilia\Memorabilia\Memorabilia.Web
+build_property.MSBuildProjectDirectory = D:\Projects\njgrillo\Memorabilia\Memorabilia\.NET6.0\Memorabilia.Web
 build_property._RazorSourceGeneratorDebug = 
 
-[C:/Projects/Memorabilia/Memorabilia/Memorabilia.Web/App.razor]
+[D:/Projects/njgrillo/Memorabilia/Memorabilia/.NET6.0/Memorabilia.Web/App.razor]
 build_metadata.AdditionalFiles.TargetPath = QXBwLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Projects/Memorabilia/Memorabilia/Memorabilia.Web/Pages/Admin/Admin.razor]
+[D:/Projects/njgrillo/Memorabilia/Memorabilia/.NET6.0/Memorabilia.Web/Pages/Admin/Admin.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWRtaW5cQWRtaW4ucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Projects/Memorabilia/Memorabilia/Memorabilia.Web/Pages/Default.razor]
+[D:/Projects/njgrillo/Memorabilia/Memorabilia/.NET6.0/Memorabilia.Web/Pages/Default.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRGVmYXVsdC5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Projects/Memorabilia/Memorabilia/Memorabilia.Web/Pages/Home/Home.razor]
+[D:/Projects/njgrillo/Memorabilia/Memorabilia/.NET6.0/Memorabilia.Web/Pages/Home/Home.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSG9tZVxIb21lLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Projects/Memorabilia/Memorabilia/Memorabilia.Web/Pages/User/Login.razor]
+[D:/Projects/njgrillo/Memorabilia/Memorabilia/.NET6.0/Memorabilia.Web/Pages/User/Login.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcVXNlclxMb2dpbi5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Projects/Memorabilia/Memorabilia/Memorabilia.Web/Pages/User/Logout.razor]
+[D:/Projects/njgrillo/Memorabilia/Memorabilia/.NET6.0/Memorabilia.Web/Pages/User/Logout.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcVXNlclxMb2dvdXQucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Projects/Memorabilia/Memorabilia/Memorabilia.Web/Pages/User/Register.razor]
+[D:/Projects/njgrillo/Memorabilia/Memorabilia/.NET6.0/Memorabilia.Web/Pages/User/Register.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcVXNlclxSZWdpc3Rlci5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Projects/Memorabilia/Memorabilia/Memorabilia.Web/Shared/PopConfirm.razor]
+[D:/Projects/njgrillo/Memorabilia/Memorabilia/.NET6.0/Memorabilia.Web/Shared/PopConfirm.razor]
 build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXFBvcENvbmZpcm0ucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Projects/Memorabilia/Memorabilia/Memorabilia.Web/_Imports.razor]
+[D:/Projects/njgrillo/Memorabilia/Memorabilia/.NET6.0/Memorabilia.Web/_Imports.razor]
 build_metadata.AdditionalFiles.TargetPath = X0ltcG9ydHMucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Projects/Memorabilia/Memorabilia/Memorabilia.Web/Shared/MainLayout.razor]
+[D:/Projects/njgrillo/Memorabilia/Memorabilia/.NET6.0/Memorabilia.Web/Shared/MainLayout.razor]
 build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXE1haW5MYXlvdXQucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = b-t1k92htf10
 
-[C:/Projects/Memorabilia/Memorabilia/Memorabilia.Web/Shared/NavMenu.razor]
+[D:/Projects/njgrillo/Memorabilia/Memorabilia/.NET6.0/Memorabilia.Web/Shared/NavMenu.razor]
 build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXE5hdk1lbnUucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = b-p2slcw79tm
 
-[C:/Projects/Memorabilia/Memorabilia/Memorabilia.Web/Pages/Error.cshtml]
+[D:/Projects/njgrillo/Memorabilia/Memorabilia/.NET6.0/Memorabilia.Web/Pages/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRXJyb3IuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Projects/Memorabilia/Memorabilia/Memorabilia.Web/Pages/_Host.cshtml]
+[D:/Projects/njgrillo/Memorabilia/Memorabilia/.NET6.0/Memorabilia.Web/Pages/_Host.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcX0hvc3QuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Projects/Memorabilia/Memorabilia/Memorabilia.Web/Pages/_Layout.cshtml]
+[D:/Projects/njgrillo/Memorabilia/Memorabilia/.NET6.0/Memorabilia.Web/Pages/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcX0xheW91dC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 

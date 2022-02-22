@@ -22,7 +22,10 @@ namespace Memorabilia.Application.Features.Admin.Commissioner
 
                 if (command.IsNew)
                 {
-                    commissioner = new Domain.Entities.Commissioner(command.SportId, command.PersonId, command.BeginYear, command.EndYear);
+                    commissioner = new Domain.Entities.Commissioner(command.SportLeagueLevelId, 
+                                                                    command.PersonId, 
+                                                                    command.BeginYear, 
+                                                                    command.EndYear);
                     await _commissionerRepository.Add(commissioner).ConfigureAwait(false);
 
                     return;
@@ -66,7 +69,7 @@ namespace Memorabilia.Application.Features.Admin.Commissioner
 
             public int PersonId => _viewModel.Person.Id;
 
-            public int SportId => _viewModel.SportId;
+            public int SportLeagueLevelId => _viewModel.SportLeagueLevelId;
         }
     }
 }

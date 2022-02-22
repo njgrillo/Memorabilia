@@ -39,8 +39,8 @@ else
             @foreach (var commissioner in _viewModel.Commissioners)
             {
                 <tr>
-                    <td>@commissioner.SportName</td>
-                    <td>@commissioner.Person.FullName</td>
+                    <td>@commissioner.SportLeagueLevelName</td>
+                    <td>@commissioner.Person.DisplayName</td>
                     <td>@commissioner.BeginYear?.ToString()</td>
                     <td>@commissioner.EndYear?.ToString()</td>
                     <td>

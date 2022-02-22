@@ -1,0 +1,82 @@
+﻿@using Memorabilia.Application.Features.Admin.Team
+@using Memorabilia.Web.Controls.Conference
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="form-group">
+            <_ConferenceDropDown @bind-Value="@_viewModel.ConferenceId" 
+                                 @bind-Value:event="ValueChanged" /> 
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-6">
+        <div class="form-group">
+            <label for="beginYear">Begin Year</label>
+            <InputNumber id="beginYear" class="form-control" @bind-Value="_viewModel.BeginYear" />
+        </div>
+    </div>
+        <div class="col-lg-6">
+        <div class="form-group">
+            <label for="endYear">End Year</label>
+            <InputNumber id="endYear" class="form-control" @bind-Value="_viewModel.EndYear" />
+        </div>
+    </div>
+</div>
+<div class="text-right">
+    <button type="button" class="btn btn-secondary" @onclick="Add">Add</button>
+</div>
+<br />
+<table class="table" style="border: 1px solid black;">
+    <thead>
+        <tr>
+            <th>Conference</th>
+            <th>Begin Year</th>
+            <th>End Year</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var conference in Conferences.Where(x => !x.IsDeleted).OrderBy(x => x.BeginYear))
+        {
+            <tr>
+                <td>@conference.ConferenceName</td>
+                <td>@conference.BeginYear</td>
+                <td>@conference.EndYear</td>
+                <td>
+                    <_Tooltip Text="Delete">
+                        <img class="can-click" 
+                             src="images/trash.png" 
+                             height="25" 
+                             width="25" 
+                             @onclick="@(_ => Remove(conference.ConferenceId, conference.BeginYear))" />
+                    </_Tooltip>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@code {
+    [Parameter]
+    public List<SaveTeamConferenceViewModel> Conferences { get; set; } = new();
+
+    private SaveTeamConferenceViewModel _viewModel = new SaveTeamConferenceViewModel();
+
+    private void Add()
+    {        
+        Conferences.Add(_viewModel);
+
+        _viewModel = new SaveTeamConferenceViewModel();
+    }
+
+    private void Remove(int conferenceId, int? beginYear)
+    {
+        var conference = Conferences.SingleOrDefault(conference => conference.ConferenceId == conferenceId && conference.BeginYear == beginYear);
+
+        if (conference == null)
+            return;
+
+        conference.IsDeleted = true;                                                                             
+    } 
+}

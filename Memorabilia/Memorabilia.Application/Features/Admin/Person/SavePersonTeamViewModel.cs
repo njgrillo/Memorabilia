@@ -4,7 +4,7 @@
     {
         public SavePersonTeamViewModel() { }
 
-        public SavePersonTeamViewModel(Domain.Entities.PersonTeam team)
+        public SavePersonTeamViewModel(PersonTeamViewModel team)
         {
             Id = team.Id;
             PersonId = team.PersonId;

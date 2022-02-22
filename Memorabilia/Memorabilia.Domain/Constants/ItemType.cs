@@ -7,11 +7,11 @@ namespace Memorabilia.Domain.Constants
         public static readonly ItemType Baseball = new(1, "Baseball");
         public static readonly ItemType Basketball = new(2, "Basketball");
         public static readonly ItemType Bat = new(3, "Bat");
-        public static readonly ItemType Book = new(4, "Book");
-        public static readonly ItemType Cachet = new(5, "Cachet");
+        public static readonly ItemType Book = new(4, "Book");       
         public static readonly ItemType Canvas = new(6, "Canvas");
         public static readonly ItemType Card = new(7, "Card");
         public static readonly ItemType Figure = new(8, "Figure");
+        public static readonly ItemType FirstDayCover = new(5, "First Day Cover");
         public static readonly ItemType Football = new(9, "Football");
         public static readonly ItemType Glove = new(10, "Glove");
         public static readonly ItemType Helmet = new(11, "Helmet");
@@ -33,10 +33,10 @@ namespace Memorabilia.Domain.Constants
             Basketball,
             Bat,
             Book,
-            Cachet,
             Canvas,
             Card,
             Figure,
+            FirstDayCover,
             Football,
             Glove,
             Helmet,

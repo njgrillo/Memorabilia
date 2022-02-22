@@ -17,7 +17,10 @@ namespace Memorabilia.Repository
         }
 
         private IQueryable<Domain.Entities.Team> Team => _context.Set<Domain.Entities.Team>()
-                                                                 .Include(team => team.Franchise);
+                                                                 .Include(team => team.Conferences)
+                                                                 .Include(team => team.Divisions)
+                                                                 .Include(team => team.Franchise)
+                                                                 .Include(team => team.Leagues);
 
         public async Task Add(Domain.Entities.Team team, CancellationToken cancellationToken = default)
         {
@@ -38,18 +41,29 @@ namespace Memorabilia.Repository
             return await Team.SingleOrDefaultAsync(team => team.Id == id).ConfigureAwait(false);
         }
 
-        public async Task<IEnumerable<Domain.Entities.Team>> GetAll(int? sportId = null)
+        public async Task<IEnumerable<Domain.Entities.Team>> GetAll(int? franchiseId = null, int? sportLeageLevelId = null)
         {
             try
             {
-                return !sportId.HasValue
-                ? (await Team.ToListAsync()
-                             .ConfigureAwait(false)).OrderBy(team => team.Franchise.SportName)
-                                                    .ThenBy(team => team.Name)
-                : (await Team.Where(team => team.Franchise.SportId == sportId)
-                             .ToListAsync()
-                             .ConfigureAwait(false)).OrderBy(team => team.Franchise.SportName)
-                                                    .ThenBy(team => team.Name);
+                if (franchiseId.HasValue)
+                {
+                    return (await Team.Where(team => team.FranchiseId == franchiseId)
+                                      .ToListAsync()
+                                      .ConfigureAwait(false)).OrderBy(team => team.Name);
+                }
+
+                if (sportLeageLevelId.HasValue)
+                {
+                    return (await Team.Where(team => team.Franchise.SportLeagueLevelId == sportLeageLevelId)
+                                      .ToListAsync()
+                                      .ConfigureAwait(false)).OrderBy(team => team.Franchise.SportLeagueLevelName)
+                                                             .ThenBy(team => team.Name);
+                }
+
+
+                return (await Team.ToListAsync()
+                                  .ConfigureAwait(false)).OrderBy(team => team.Franchise.SportLeagueLevelName)
+                                                         .ThenBy(team => team.Name);
             }
             catch (System.Exception ex)
             {

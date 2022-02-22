@@ -27,8 +27,8 @@ namespace Memorabilia.Application.Features.Admin.Franchise
 
         public string Name => _franchise.Name;
 
-        public int SportId => _franchise.SportId;
+        public int SportLeagueLevelId => _franchise.SportLeagueLevelId;
 
-        public string SportName => Domain.Constants.Sport.Find(SportId)?.Name;
+        public string SportLeagueLevelName => _franchise.SportLeagueLevelName;
     }
 }

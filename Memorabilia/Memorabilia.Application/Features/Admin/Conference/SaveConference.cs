@@ -22,7 +22,7 @@ namespace Memorabilia.Application.Features.Admin.Conference
 
                 if (command.IsNew)
                 {
-                    conference = new Domain.Entities.Conference(command.SportId,
+                    conference = new Domain.Entities.Conference(command.SportLeagueLevelId,
                                                                 command.Name,
                                                                 command.Abbreviation);
 
@@ -40,7 +40,7 @@ namespace Memorabilia.Application.Features.Admin.Conference
                     return;
                 }
 
-                conference.Set(command.SportId,
+                conference.Set(command.SportLeagueLevelId,
                                command.Name,
                                command.Abbreviation);
 
@@ -70,7 +70,7 @@ namespace Memorabilia.Application.Features.Admin.Conference
 
             public string Name => _viewModel.Name;
 
-            public int SportId => _viewModel.SportId;
+            public int SportLeagueLevelId => _viewModel.SportLeagueLevelId;
         }
     }
 }

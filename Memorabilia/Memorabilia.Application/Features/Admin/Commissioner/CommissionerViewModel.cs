@@ -19,8 +19,8 @@
 
         public Domain.Entities.Person Person => _commissioner.Person;
 
-        public int SportId => _commissioner.SportId;
+        public int SportLeagueLevelId => _commissioner.SportLeagueLevelId;
 
-        public string SportName => Domain.Constants.Sport.Find(SportId)?.Name;
+        public string SportLeagueLevelName => _commissioner.SportLeagueLevelName;
     }
 }
