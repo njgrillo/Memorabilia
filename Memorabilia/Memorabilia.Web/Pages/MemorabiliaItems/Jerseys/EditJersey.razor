@@ -1,4 +1,4 @@
-﻿@page "/Memorabilia/Jersey/Add/{memorabiliaId:int}"
+﻿@page "/Memorabilia/Jersey/Edit/{memorabiliaId:int}"
 
 @using Blazored.Typeahead
 @using Memorabilia.Application.Features.Admin.Person
@@ -34,7 +34,7 @@ else
     <div style="border: 1px solid black; margin-top: 2%; margin-bottom: 2%; margin-left: 2%; margin-right: 2%;">
         <div class="row" style="margin-top: 2%; margin-bottom: 2%; margin-left: 1%; margin-right: 1%;">
             <div class="col-lg-12" style="text-align: center">
-                <img src="images/jerseytypes.jpg" alt="Image" height="150" width="150" />
+                <img src="images/itemtypes.jpg" alt="Image" height="150" width="150" />
             </div>            
             <EditForm Model="_viewModel" OnValidSubmit="HandleValidSubmit">
                 <DataAnnotationsValidator />
@@ -110,7 +110,7 @@ else
                             </div>                    
                         </div> 
                     </div>
-                </div>              
+                </div>             
                 <div class="row">                    
                     <div class="col-lg-12">
                         <div class="form-group">
@@ -131,7 +131,7 @@ else
         </div>
         <div class="row">
             <div class="col-md-12" style="text-align: center">
-                <a href="Memorabilia/Add">Back</a>
+                <a href="Memorabilia/UnsignedItems">Back</a>
             </div>
         </div>
         <br />
@@ -150,35 +150,45 @@ else
 
     protected async Task HandleValidSubmit()
     {
-        var userId = await _localStorage.GetAsync<int>("UserId").ConfigureAwait(false);
+        var userId = await _localStorage.GetAsync<int>("UserId");
 
         if (userId.Value == 0)
             _navigation.NavigateTo("Login");
-
-        _viewModel.MemorabiliaId = MemorabiliaId;
 
         var command = new SaveJersey.Command(_viewModel);
 
         await _commandRouter.Send(command).ConfigureAwait(false);
 
-        var url = _continue ? $"Memorabilia/Image/Add/{command.MemorabiliaId}" : "Memorabilia";
+        var url = _continue ? $"Memorabilia/Image/Edit/{command.MemorabiliaId}" : "Memorabilia";
 
         _navigation.NavigateTo(url);
 
-        _toastService.ShowSuccess("Jersey Details were added successfully!", _viewModel.PageTitle);
+        _toastService.ShowSuccess("Jersey Details were saved successfully!", _viewModel.PageTitle);
     }
 
     protected override async Task OnInitializedAsync()
     {
-        var userId = await _localStorage.GetAsync<int>("UserId").ConfigureAwait(false);
+        var userId = await _localStorage.GetAsync<int>("UserId");
 
         if (userId.Value == 0)
-            _navigation.NavigateTo("Login");
+            _navigation.NavigateTo("Login");        
 
-        SetDefaults();
+        var query = new GetJersey.Query(MemorabiliaId);
+        var JerseyViewModel = await _queryRouter.Send(query).ConfigureAwait(false);
+
+        if (JerseyViewModel.MemorabiliaBrand == null)
+        {
+            _navigation.NavigateTo($"Memorabilia/Jersey/Add/{MemorabiliaId}");
+            return;
+        }    
+
+        _viewModel = new SaveJerseyViewModel(JerseyViewModel);  
+        
+        _displayPeople = _viewModel.HasPerson;
+        _displayTeams = _viewModel.HasTeam;
 
         await LoadPeople().ConfigureAwait(false);
-    }    
+    }  
 
     private async Task LoadPeople()
     {
@@ -188,7 +198,7 @@ else
     }
 
     private void PersonCheckboxClicked(object isChecked)
-    {
+    {     
         _displayPeople = (bool)isChecked;
 
         if (!_displayPeople)
@@ -202,14 +212,7 @@ else
         return await Task.FromResult(_people.Where(person => person.DisplayName.Contains(searchText, StringComparison.OrdinalIgnoreCase))).ConfigureAwait(false);
     }
 
-    private void SetDefaults()
-    {
-        _viewModel.GameStyleTypeId = GameStyleType.None.Id;
-        _viewModel.JerseyTypeId = JerseyType.Stitched.Id;
-        _viewModel.LevelTypeId = LevelType.Professional.Id;
-    }
-
-    private void TeamsCheckboxClicked(object isChecked)
+    public void TeamsCheckboxClicked(object isChecked)
     {
         _displayTeams = (bool)isChecked;
 
@@ -217,5 +220,5 @@ else
             _viewModel.Teams = new();
 
         StateHasChanged();
-    } 
+    }
 }

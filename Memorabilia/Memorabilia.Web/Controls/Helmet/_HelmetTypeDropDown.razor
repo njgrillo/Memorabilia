@@ -1,0 +1,35 @@
+﻿@using Memorabilia.Application.Features.Admin.HelmetType
+@using Memorabilia.Domain.Constants
+
+<InputSelect id="HelmetTypeDropDown" class="form-control" @bind-Value="@Value" @oninput="OnInputChange" >
+    <option value="0">--Select--</option>
+    @foreach (var helmetType in HelmetType.All)
+    {
+        <option value="@helmetType.Id">@helmetType.Name</option>
+    }
+</InputSelect>
+
+@code {
+    [Parameter]
+    public HelmetType InitialValue { get; set; }
+
+    [Parameter]
+    public int Value { get; set; }
+
+    [Parameter]
+    public EventCallback<int> ValueChanged { get; set; }
+
+    protected override Task OnInitializedAsync()
+    {
+        if ((InitialValue?.Id ?? 0) > 0)
+            Value = InitialValue.Id;
+
+        return base.OnInitializedAsync();
+    }
+
+    private async Task OnInputChange(ChangeEventArgs args)
+    {
+        Value = Convert.ToInt32(args.Value);
+        await ValueChanged.InvokeAsync(Value);
+    }
+}

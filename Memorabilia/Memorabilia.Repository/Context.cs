@@ -59,6 +59,7 @@ namespace Memorabilia.Repository
             modelBuilder.Entity<Domain.Entities.MemorabiliaCommissioner>();
             modelBuilder.Entity<Domain.Entities.MemorabiliaFootball>();
             modelBuilder.Entity<Domain.Entities.MemorabiliaGame>();
+            modelBuilder.Entity<Domain.Entities.MemorabiliaHelmet>();
             modelBuilder.Entity<Domain.Entities.MemorabiliaImage>();
             modelBuilder.Entity<Domain.Entities.MemorabiliaJersey>();
             modelBuilder.Entity<Domain.Entities.MemorabiliaLevelType>();

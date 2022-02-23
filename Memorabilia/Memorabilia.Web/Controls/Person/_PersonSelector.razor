@@ -1,50 +1,88 @@
 ﻿@using Blazored.Typeahead
 @using Memorabilia.Application.Features.Admin.Person
-@using Memorabilia.Domain.Entities
+@using Memorabilia.Web.Controls.Person
 
 @inject QueryRouter _queryRouter
 
-<BlazoredTypeahead SearchMethod="SearchPeople" @bind-Value="Value" @oninput="@((e) => { SelectedValue=(string)e.Value;})">
-    <SelectedTemplate>
-        @context?.DisplayName 
+<BlazoredTypeahead SearchMethod="SearchPeople"
+                   @bind-Value="@_viewModel"
+                   Placeholder="Search by name...">
+    <SelectedTemplate Context="person">
+        @person.DisplayName
     </SelectedTemplate>
-    <ResultTemplate>
-        @context?.DisplayName
-    </ResultTemplate>
-</BlazoredTypeahead>
+    <ResultTemplate Context="person">
+        @person.DisplayName
+    </ResultTemplate>   
+</BlazoredTypeahead> 
+<br />  
+<div class="text-right">
+    <button type="button" class="btn btn-secondary" @onclick="Add">Add Person</button>
+</div>
+<br />  
+<table class="table" style="border: 1px solid black;">
+    <thead>
+        <tr>
+            <th>Person</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var person in People.Where(person => !person.IsDeleted))
+        {
+            <tr>
+                <td>@person.DisplayName</td>
+                <td>
+                    <_Tooltip Text="Delete">
+                        <img class="can-click" 
+                             src="images/trash.png" 
+                             height="25" 
+                             width="25" 
+                             @onclick="@(_ => Remove(person.Id))" />
+                    </_Tooltip>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
 
 @code {
     [Parameter]
-    public string SelectedValue { get; set; }  
+    public List<SavePersonViewModel> People { get; set; } = new();
 
-    [Parameter]
-    public PersonViewModel Value { get; set; }  
-
-    [Parameter]
-    public EventCallback<PersonViewModel> ValueChanged { get; set; }
-
-    private IEnumerable<PersonViewModel> _people = Enumerable.Empty<PersonViewModel>();
+    private IEnumerable<SavePersonViewModel> _people = Enumerable.Empty<SavePersonViewModel>();  
+    private SavePersonViewModel _viewModel = new SavePersonViewModel();
 
     protected override async Task OnInitializedAsync()
     {
-        await Load().ConfigureAwait(false);
+        await LoadPeople().ConfigureAwait(false);
     } 
 
-    private async Task Load()
+    private void Add()
+    {        
+        People.Add(_viewModel);
+
+        _viewModel = new SavePersonViewModel();
+    }
+
+    private async Task LoadPeople()
     {
         var query = new GetPeople.Query();
 
-        _people = (await _queryRouter.Send(query).ConfigureAwait(false)).People;
+        _people = (await _queryRouter.Send(query).ConfigureAwait(false)).People.Select(person => new SavePersonViewModel(person));
     }
 
-    private async Task OnInputChange(ChangeEventArgs args)
+    private void Remove(int personId)
     {
-        Value = (PersonViewModel)args.Value;
-        await ValueChanged.InvokeAsync(Value);
-    }
+        var person = People.SingleOrDefault(person => person.Id == personId);
 
-    private async Task<IEnumerable<PersonViewModel>> SearchPeople(string searchText)
-    {
-        return await Task.FromResult(_people.Where(person => person.LegalName.Contains(searchText, StringComparison.OrdinalIgnoreCase))).ConfigureAwait(false);
+        if (person == null)
+            return;
+
+        person.IsDeleted = true;                                                                        
     } 
+
+    private async Task<IEnumerable<SavePersonViewModel>> SearchPeople(string searchText)
+    {
+        return await Task.FromResult(_people.Where(person => person.DisplayName.Contains(searchText, StringComparison.OrdinalIgnoreCase))).ConfigureAwait(false);
+    }
 }

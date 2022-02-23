@@ -27,6 +27,7 @@ namespace Memorabilia.Repository
                                                                                .Include(memorabilia => memorabilia.Commissioner)
                                                                                .Include(memorabilia => memorabilia.Football)
                                                                                .Include(memorabilia => memorabilia.Game)
+                                                                               .Include(memorabilia => memorabilia.Helmet)
                                                                                .Include(memorabilia => memorabilia.Images)
                                                                                .Include(memorabilia => memorabilia.Jersey)
                                                                                .Include(memorabilia => memorabilia.LevelType)

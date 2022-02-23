@@ -1405,3 +1405,13 @@ D:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\obj\Debug\net5.0\Ra
 D:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\obj\Debug\net5.0\RazorDeclaration\Pages\MemorabiliaItems\Footballs\EditFootball.razor.g.cs
 D:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\obj\Debug\net5.0\Razor\Pages\MemorabiliaItems\Footballs\AddFootball.razor.g.cs
 D:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\obj\Debug\net5.0\Razor\Pages\MemorabiliaItems\Footballs\EditFootball.razor.g.cs
+D:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\obj\Debug\net5.0\RazorDeclaration\Controls\Helmet\_HelmetQualityTypeDropDown.razor.g.cs
+D:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\obj\Debug\net5.0\RazorDeclaration\Controls\Helmet\_HelmetTypeDropDown.razor.g.cs
+D:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\obj\Debug\net5.0\RazorDeclaration\Pages\MemorabiliaItems\Helmets\AddHelmet.razor.g.cs
+D:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\obj\Debug\net5.0\Razor\Controls\Helmet\_HelmetQualityTypeDropDown.razor.g.cs
+D:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\obj\Debug\net5.0\Razor\Controls\Helmet\_HelmetTypeDropDown.razor.g.cs
+D:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\obj\Debug\net5.0\Razor\Pages\MemorabiliaItems\Helmets\AddHelmet.razor.g.cs
+D:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\obj\Debug\net5.0\RazorDeclaration\Pages\MemorabiliaItems\Helmets\EditHelmet.razor.g.cs
+D:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\obj\Debug\net5.0\Razor\Pages\MemorabiliaItems\Helmets\EditHelmet.razor.g.cs
+D:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\obj\Debug\net5.0\RazorDeclaration\Pages\MemorabiliaItems\Jerseys\EditJersey.razor.g.cs
+D:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\obj\Debug\net5.0\Razor\Pages\MemorabiliaItems\Jerseys\EditJersey.razor.g.cs

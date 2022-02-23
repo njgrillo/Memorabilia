@@ -262,6 +262,18 @@ BEGIN
 	DROP TABLE [dbo].[MemorabiliaGame]
 END
 
+--MemorabiliaHelmet Drop - FK - MemorabiliaId, HelmetQualityTypeId, HelmetTypeId
+IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = N'MemorabiliaHelmet')
+BEGIN
+	IF OBJECT_ID('tempdb..#TempMemorabiliaHelmetTable') IS NOT NULL DROP TABLE #TempMemorabiliaHelmetTable; 
+
+	SELECT * 
+	INTO #TempMemorabiliaHelmetTable
+	FROM [dbo].[MemorabiliaHelmet]
+
+	DROP TABLE [dbo].[MemorabiliaHelmet]
+END
+
 --MemorabiliaImage Drop - FK - MemorabiliaId, ImageTypeId
 IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = N'MemorabiliaImage')
 BEGIN
@@ -1986,6 +1998,8 @@ BEGIN
 		 , (6, 'Pro Bowl', NULL)
 		 , (7, 'Finals', NULL)
 		 , (8, 'Throwback', NULL)
+		 , (9, 'Other', NULL)
+		 , (10, 'Unknown', NULL)
 END
 
 IF @KeepExistingValues = 1
@@ -3247,6 +3261,41 @@ BEGIN
 END
 
 SET IDENTITY_INSERT [dbo].[MemorabiliaGame] OFF
+
+--MemorabiliaHelmet Create
+CREATE TABLE [dbo].[MemorabiliaHelmet](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[MemorabiliaId] [int] NOT NULL,
+	[HelmetQualityTypeId] [int] NULL,
+	[HelmetTypeId] [int] NULL,
+ CONSTRAINT [PK_MemorabiliaHelmet] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+
+ALTER TABLE [dbo].[MemorabiliaHelmet]  WITH CHECK ADD  CONSTRAINT [FK_MemorabiliaHelmet_HelmetQualityType] FOREIGN KEY([HelmetQualityTypeId])
+REFERENCES [dbo].[HelmetQualityType] ([Id])
+ALTER TABLE [dbo].[MemorabiliaHelmet] CHECK CONSTRAINT [FK_MemorabiliaHelmet_HelmetQualityType]
+
+ALTER TABLE [dbo].[MemorabiliaHelmet]  WITH CHECK ADD  CONSTRAINT [FK_MemorabiliaHelmet_HelmetType] FOREIGN KEY([HelmetTypeId])
+REFERENCES [dbo].[HelmetType] ([Id])
+ALTER TABLE [dbo].[MemorabiliaHelmet] CHECK CONSTRAINT [FK_MemorabiliaHelmet_HelmetType]
+
+ALTER TABLE [dbo].[MemorabiliaHelmet]  WITH CHECK ADD  CONSTRAINT [FK_MemorabiliaHelmet_Memorabilia] FOREIGN KEY([MemorabiliaId])
+REFERENCES [dbo].[Memorabilia] ([Id])
+ALTER TABLE [dbo].[MemorabiliaHelmet] CHECK CONSTRAINT [FK_MemorabiliaHelmet_Memorabilia]
+
+SET IDENTITY_INSERT [dbo].[MemorabiliaHelmet] ON
+
+IF @KeepExistingValues = 1
+BEGIN
+	INSERT INTO [dbo].[MemorabiliaHelmet] (Id, MemorabiliaId, HelmetQualityTypeId, HelmetTypeId)
+	SELECT * 
+	FROM #TempMemorabiliaHelmetTable
+END
+
+SET IDENTITY_INSERT [dbo].[MemorabiliaHelmet] OFF
 
 --MemorabiliaImage Create
 CREATE TABLE [dbo].[MemorabiliaImage](

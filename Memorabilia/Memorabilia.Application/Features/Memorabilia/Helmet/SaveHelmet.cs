@@ -2,12 +2,11 @@
 using Framework.Handler;
 using Memorabilia.Domain;
 using System;
-using System.Linq;
 using System.Threading.Tasks;
 
-namespace Memorabilia.Application.Features.Memorabilia.Jersey
+namespace Memorabilia.Application.Features.Memorabilia.Helmet
 {
-    public class SaveJersey
+    public class SaveHelmet
     {
         public class Handler : CommandHandler<Command>
         {
@@ -22,18 +21,16 @@ namespace Memorabilia.Application.Features.Memorabilia.Jersey
             {
                 var memorabilia = await _memorabiliaRepository.Get(command.MemorabiliaId).ConfigureAwait(false);
 
-                memorabilia.SetJersey(command.BrandId,
+                memorabilia.SetHelmet(command.BrandId,
                                       command.GameDate,
-                                      command.GamePersonId,
                                       command.GameStyleTypeId,
+                                      command.HelmetQualityTypeId,
+                                      command.HelmetTypeId,
                                       command.LevelTypeId,
-                                      command.PersonIds,
-                                      command.QualityTypeId,
+                                      command.PersonId,
                                       command.SizeId,
                                       command.SportIds,
-                                      command.StyleTypeId,
-                                      command.TeamIds,
-                                      command.TypeId);
+                                      command.TeamIds);
 
                 await _memorabiliaRepository.Update(memorabilia).ConfigureAwait(false);
             }
@@ -41,9 +38,9 @@ namespace Memorabilia.Application.Features.Memorabilia.Jersey
 
         public class Command : DomainCommand, ICommand
         {
-            private readonly SaveJerseyViewModel _viewModel;
+            private readonly SaveHelmetViewModel _viewModel;
 
-            public Command(SaveJerseyViewModel viewModel)
+            public Command(SaveHelmetViewModel viewModel)
             {
                 _viewModel = viewModel;
             }            
@@ -52,27 +49,23 @@ namespace Memorabilia.Application.Features.Memorabilia.Jersey
 
             public DateTime? GameDate => _viewModel.GameDate;
 
-            public int? GamePersonId => _viewModel.GamePersonId > 0 ? _viewModel.GamePersonId : null;
-
             public int? GameStyleTypeId => _viewModel.GameStyleTypeId > 0 ? _viewModel.GameStyleTypeId : 0;
+
+            public int? HelmetQualityTypeId => _viewModel.HelmetQualityTypeId > 0 ? _viewModel.HelmetQualityTypeId : null;
+
+            public int? HelmetTypeId => _viewModel.HelmetTypeId > 0 ? _viewModel.HelmetTypeId : null;
 
             public int LevelTypeId => _viewModel.LevelTypeId;
 
             public int MemorabiliaId => _viewModel.MemorabiliaId;
 
-            public int[] PersonIds => _viewModel.People.Select(person => person.Id).ToArray();
-
-            public int QualityTypeId => _viewModel.JerseyQualityTypeId;
+            public int? PersonId => _viewModel.Person?.Id > 0 ? _viewModel.Person?.Id : null;
 
             public int SizeId => _viewModel.SizeId;
 
             public int[] SportIds => _viewModel.SportIds.ToArray();
 
-            public int StyleTypeId => _viewModel.JerseyStyleTypeId;
-
-            public int[] TeamIds => _viewModel.Teams.Select(team => team.Id).ToArray();
-
-            public int TypeId => _viewModel.JerseyTypeId;
+            public int[] TeamIds => _viewModel.TeamIds.ToArray();
         }
     }
 }

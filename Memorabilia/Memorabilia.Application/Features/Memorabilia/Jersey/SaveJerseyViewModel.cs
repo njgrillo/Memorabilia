@@ -1,4 +1,6 @@
-﻿using Memorabilia.Domain.Constants;
+﻿using Memorabilia.Application.Features.Admin.Person;
+using Memorabilia.Application.Features.Admin.Team;
+using Memorabilia.Domain.Constants;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -21,10 +23,10 @@ namespace Memorabilia.Application.Features.Memorabilia.Jersey
             JerseyTypeId = viewModel.MemorabiliaJersey.JerseyTypeId;
             LevelTypeId = viewModel.MemorabiliaLevelType.LevelTypeId;
             MemorabiliaId = viewModel.MemorabiliaId;
-            PersonIds = viewModel.People.Select(x => x.Id);
+            People = viewModel.People.Select(person => new SavePersonViewModel(new PersonViewModel(person.Person))).ToList();
             SizeId = viewModel.MemorabiliaSize.SizeId;
-            SportIds = viewModel.Sports.Select(x => x.Id);
-            TeamIds = viewModel.Teams.Select(x => x.Id);    
+            SportIds = viewModel.Sports.Select(x => x.Id).ToList();
+            Teams = viewModel.Teams.Select(team => new SaveTeamViewModel(new TeamViewModel(team.Team))).ToList();
         }   
 
         [Required]
@@ -42,11 +44,13 @@ namespace Memorabilia.Application.Features.Memorabilia.Jersey
 
         public int GameStyleTypeId { get; set; }
 
-        public bool HasPerson => PersonIds.Any();
+        public bool HasPerson => People.Any();
 
         public bool HasSport => SportIds.Any();
 
-        public bool HasTeam => TeamIds.Any();
+        public bool HasTeam => Teams.Any();
+
+        public ItemType ItemType => ItemType.Jersey;
 
         [Required]
         [Range(1, int.MaxValue, ErrorMessage = "Quality is required.")]
@@ -69,14 +73,14 @@ namespace Memorabilia.Application.Features.Memorabilia.Jersey
 
         public override string PageTitle => $"{(MemorabiliaId > 0 ? "Edit" : "Add")} {Domain.Constants.ItemType.Jersey.Name} Details";
 
-        public IEnumerable<int> PersonIds { get; set; }
+        public List<SavePersonViewModel> People { get; set; } = new();
 
         [Required]
         [Range(1, int.MaxValue, ErrorMessage = "Size is required.")]
         public int SizeId { get; set; }
 
-        public IEnumerable<int> SportIds { get; set; }
+        public List<int> SportIds { get; set; } = new();
 
-        public IEnumerable<int> TeamIds { get; set; }
+        public List<SaveTeamViewModel> Teams { get; set; } = new();
     }
 }

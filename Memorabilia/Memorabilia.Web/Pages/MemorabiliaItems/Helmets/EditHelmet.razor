@@ -1,15 +1,15 @@
-﻿@page "/Memorabilia/Jersey/Add/{memorabiliaId:int}"
+﻿@page "/Memorabilia/Helmet/Edit/{memorabiliaId:int}"
 
 @using Blazored.Typeahead
 @using Memorabilia.Application.Features.Admin.Person
 @using Memorabilia.Application.Features.Memorabilia
-@using Memorabilia.Application.Features.Memorabilia.Jersey
+@using Memorabilia.Application.Features.Memorabilia.Helmet
 @using Memorabilia.Domain.Constants
 @using Memorabilia.Web.Controls.GameStyleType
+@using Memorabilia.Web.Controls.Helmet
 @using Memorabilia.Web.Controls.ItemTypeBrand
 @using Memorabilia.Web.Controls.ItemTypeLevel
 @using Memorabilia.Web.Controls.ItemTypeSize
-@using Memorabilia.Web.Controls.Jersey
 @using Memorabilia.Web.Controls.Person
 @using Memorabilia.Web.Controls.Team
 
@@ -34,7 +34,7 @@ else
     <div style="border: 1px solid black; margin-top: 2%; margin-bottom: 2%; margin-left: 2%; margin-right: 2%;">
         <div class="row" style="margin-top: 2%; margin-bottom: 2%; margin-left: 1%; margin-right: 1%;">
             <div class="col-lg-12" style="text-align: center">
-                <img src="images/jerseytypes.jpg" alt="Image" height="150" width="150" />
+                <img src="images/itemtypes.jpg" alt="Image" height="150" width="150" />
             </div>            
             <EditForm Model="_viewModel" OnValidSubmit="HandleValidSubmit">
                 <DataAnnotationsValidator />
@@ -71,57 +71,59 @@ else
                             <label for="gameStyleType">Game Style Type</label>
                             <_GameStyleTypeDropDown @bind-Value="@_viewModel.GameStyleTypeId"
                                                     @bind-Value:event="ValueChanged"
-                                                    ItemType="_viewModel.ItemType" /> 
+                                                    ItemType="_viewModel.ItemType" />                             
                         </div> 
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-lg-6">
                         <div class="form-group">
-                            <label for="jerseyQualityType">Quality</label>
-                            <_JerseyQualityTypeDropDown @bind-Value="@_viewModel.JerseyQualityTypeId"
+                            <label for="HelmetQualityType">Quality</label>
+                            <_HelmetQualityTypeDropDown @bind-Value="@_viewModel.HelmetQualityTypeId" 
                                                         @bind-Value:event="ValueChanged" /> 
                         </div> 
                     </div>
                     <div class="col-lg-6">
                          <div class="form-group">
-                            <label for="jerseyType">Type</label>
-                            <_JerseyTypeDropDown @bind-Value="@_viewModel.JerseyTypeId"
+                            <label for="HelmetType">Type</label>
+                            <_HelmetTypeDropDown @bind-Value="@_viewModel.HelmetTypeId" 
                                                  @bind-Value:event="ValueChanged" /> 
                         </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-lg-6">
-                        <div class="form-group">
-                            <label for="jerseyStyleType">Style</label>
-                            <_JerseyStyleTypeDropDown @bind-Value="@_viewModel.JerseyStyleTypeId"
-                                                      @bind-Value:event="ValueChanged" /> 
-                        </div> 
                     </div>
                 </div>
                 <div class="row">                    
                     <div class="col-lg-12">
                         <div class="form-group">
                             <input type="checkbox" @onchange="eventArgs => { PersonCheckboxClicked(eventArgs.Value); }" />
-                            <label for="person">Associate Jersey with People</label>
+                            <label for="person">Associate Helmet with a Person</label>
                             <div class="form-group" hidden="@(!_displayPeople)">
-                                <_PersonSelector People="_viewModel.People" />
+                                <BlazoredTypeahead SearchMethod="SearchPeople"
+                                                   @bind-Value="_viewModel.Person"
+                                                   Placeholder="Search by name...">
+                                    <SelectedTemplate Context="person">
+                                        @person.DisplayName
+                                    </SelectedTemplate>
+                                    <ResultTemplate Context="person">
+                                        @person.DisplayName
+                                    </ResultTemplate>
+                                </BlazoredTypeahead>
                             </div>                    
                         </div> 
                     </div>
                 </div>              
-                <div class="row">                    
+                @*<div class="row">                    
                     <div class="col-lg-12">
                         <div class="form-group">
                             <input type="checkbox" @onchange="eventArgs => { TeamsCheckboxClicked(eventArgs.Value); }" />
-                            <label for="teams">Associate Jersey with Team(s)</label>
+                            <label for="teams">Associate Helmet with a Team</label>
                             <div class="form-group" hidden="@(!_displayTeams)">
-                                <_TeamSelector Teams="_viewModel.Teams" />
+                                <_TeamDropDown @bind-Value="@_viewModel.TeamId"
+                                               @bind-Value:event="ValueChanged"                                        
+                                               SportLeagueLevel="_viewModel.SportLeagueLevel" /> 
                             </div>                    
                         </div> 
                     </div>
-                </div>                            
+                </div> *@                           
                 <div class="text-right">
                     <button type="submit" class="btn btn-primary" @onclick="@(()=> _continue = true)">Save & Continue</button>
                     <button type="submit" class="btn btn-primary">Save & Exit</button>
@@ -131,7 +133,7 @@ else
         </div>
         <div class="row">
             <div class="col-md-12" style="text-align: center">
-                <a href="Memorabilia/Add">Back</a>
+                <a href="Memorabilia/UnsignedItems">Back</a>
             </div>
         </div>
         <br />
@@ -146,39 +148,49 @@ else
     private bool _displayPeople;
     private bool _displayTeams;
     private IEnumerable<PersonViewModel> _people = Enumerable.Empty<PersonViewModel>();  
-    private SaveJerseyViewModel _viewModel = new SaveJerseyViewModel();
+    private SaveHelmetViewModel _viewModel = new SaveHelmetViewModel();
 
     protected async Task HandleValidSubmit()
     {
-        var userId = await _localStorage.GetAsync<int>("UserId").ConfigureAwait(false);
+        var userId = await _localStorage.GetAsync<int>("UserId");
 
         if (userId.Value == 0)
             _navigation.NavigateTo("Login");
 
-        _viewModel.MemorabiliaId = MemorabiliaId;
-
-        var command = new SaveJersey.Command(_viewModel);
+        var command = new SaveHelmet.Command(_viewModel);
 
         await _commandRouter.Send(command).ConfigureAwait(false);
 
-        var url = _continue ? $"Memorabilia/Image/Add/{command.MemorabiliaId}" : "Memorabilia";
+        var url = _continue ? $"Memorabilia/Image/Edit/{command.MemorabiliaId}" : "Memorabilia";
 
         _navigation.NavigateTo(url);
 
-        _toastService.ShowSuccess("Jersey Details were added successfully!", _viewModel.PageTitle);
+        _toastService.ShowSuccess("Helmet Details were saved successfully!", _viewModel.PageTitle);
     }
 
     protected override async Task OnInitializedAsync()
     {
-        var userId = await _localStorage.GetAsync<int>("UserId").ConfigureAwait(false);
+        var userId = await _localStorage.GetAsync<int>("UserId");
 
         if (userId.Value == 0)
-            _navigation.NavigateTo("Login");
+            _navigation.NavigateTo("Login");        
 
-        SetDefaults();
+        var query = new GetHelmet.Query(MemorabiliaId);
+        var HelmetViewModel = await _queryRouter.Send(query).ConfigureAwait(false);
+
+        if (HelmetViewModel.MemorabiliaBrand == null)
+        {
+            _navigation.NavigateTo($"Memorabilia/Helmet/Add/{MemorabiliaId}");
+            return;
+        }    
+
+        _viewModel = new SaveHelmetViewModel(HelmetViewModel);  
+        
+        _displayPeople = _viewModel.HasPerson;
+        _displayTeams = _viewModel.HasTeam;
 
         await LoadPeople().ConfigureAwait(false);
-    }    
+    }  
 
     private async Task LoadPeople()
     {
@@ -188,11 +200,11 @@ else
     }
 
     private void PersonCheckboxClicked(object isChecked)
-    {
+    {     
         _displayPeople = (bool)isChecked;
 
         if (!_displayPeople)
-            _viewModel.People = new();
+            _viewModel.Person = null;
 
         StateHasChanged();
     } 
@@ -202,20 +214,13 @@ else
         return await Task.FromResult(_people.Where(person => person.DisplayName.Contains(searchText, StringComparison.OrdinalIgnoreCase))).ConfigureAwait(false);
     }
 
-    private void SetDefaults()
-    {
-        _viewModel.GameStyleTypeId = GameStyleType.None.Id;
-        _viewModel.JerseyTypeId = JerseyType.Stitched.Id;
-        _viewModel.LevelTypeId = LevelType.Professional.Id;
-    }
-
-    private void TeamsCheckboxClicked(object isChecked)
+    public void TeamsCheckboxClicked(object isChecked)
     {
         _displayTeams = (bool)isChecked;
 
         if (!_displayTeams)
-            _viewModel.Teams = new();
+            _viewModel.TeamIds = new();
 
         StateHasChanged();
-    } 
+    }
 }
