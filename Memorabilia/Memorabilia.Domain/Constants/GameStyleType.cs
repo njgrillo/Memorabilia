@@ -19,6 +19,13 @@ namespace Memorabilia.Domain.Constants
             Other
         };
 
+        public static readonly GameStyleType[] GameWorthly =
+        {
+            GameIssued,
+            GameUsed,
+            GameWorn
+        };
+
         public static readonly GameStyleType[] NonWearableStyles =
         {
             GameUsed,
@@ -51,6 +58,11 @@ namespace Memorabilia.Domain.Constants
                 return All;
 
             return NonWearableStyles;
+        }
+
+        public static bool IsGameWorthly(GameStyleType gameStyleType)
+        {
+            return GameWorthly.Contains(gameStyleType);
         }
     }
 }

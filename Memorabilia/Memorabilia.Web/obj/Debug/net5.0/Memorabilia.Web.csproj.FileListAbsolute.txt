@@ -871,7 +871,6 @@ D:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\obj\Debug\net5.0\Ra
 D:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\obj\Debug\net5.0\RazorDeclaration\Controls\Person\_PersonOccupationSelector.razor.g.cs
 D:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\obj\Debug\net5.0\RazorDeclaration\Controls\Person\_PersonSelector.razor.g.cs
 D:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\obj\Debug\net5.0\RazorDeclaration\Controls\Person\_PersonTeamSelector.razor.g.cs
-D:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\obj\Debug\net5.0\RazorDeclaration\Controls\PhotoType\_PhotoTypeDropDown.razor.g.cs
 D:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\obj\Debug\net5.0\RazorDeclaration\Controls\PrivacyType\_PrivacyTypeDropDown.razor.g.cs
 D:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\obj\Debug\net5.0\RazorDeclaration\Controls\PurchaseType\_PurchaseTypeDropDown.razor.g.cs
 D:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\obj\Debug\net5.0\RazorDeclaration\Controls\Size\_SizeDropDown.razor.g.cs
@@ -1193,7 +1192,6 @@ D:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\obj\Debug\net5.0\Ra
 D:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\obj\Debug\net5.0\Razor\Controls\Person\_PersonOccupationSelector.razor.g.cs
 D:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\obj\Debug\net5.0\Razor\Controls\Person\_PersonSelector.razor.g.cs
 D:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\obj\Debug\net5.0\Razor\Controls\Person\_PersonTeamSelector.razor.g.cs
-D:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\obj\Debug\net5.0\Razor\Controls\PhotoType\_PhotoTypeDropDown.razor.g.cs
 D:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\obj\Debug\net5.0\Razor\Controls\PrivacyType\_PrivacyTypeDropDown.razor.g.cs
 D:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\obj\Debug\net5.0\Razor\Controls\PurchaseType\_PurchaseTypeDropDown.razor.g.cs
 D:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\obj\Debug\net5.0\Razor\Controls\Size\_SizeDropDown.razor.g.cs
@@ -1415,3 +1413,13 @@ D:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\obj\Debug\net5.0\Me
 D:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\obj\Debug\net5.0\Memorabilia.Web.csproj.CopyComplete
 D:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\obj\Debug\net5.0\Memorabilia.Web.genruntimeconfig.cache
 D:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\obj\Debug\net5.0\ref\Memorabilia.Web.dll
+D:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\obj\Debug\net5.0\RazorDeclaration\Controls\Photo\_PhotoTypeDropDown.razor.g.cs
+D:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\obj\Debug\net5.0\RazorDeclaration\Pages\MemorabiliaItems\Photos\AddPhoto.razor.g.cs
+D:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\obj\Debug\net5.0\RazorDeclaration\Pages\MemorabiliaItems\Photos\EditPhoto.razor.g.cs
+D:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\obj\Debug\net5.0\Razor\Controls\Photo\_PhotoTypeDropDown.razor.g.cs
+D:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\obj\Debug\net5.0\Razor\Pages\MemorabiliaItems\Photos\AddPhoto.razor.g.cs
+D:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\obj\Debug\net5.0\Razor\Pages\MemorabiliaItems\Photos\EditPhoto.razor.g.cs
+D:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\obj\Debug\net5.0\RazorDeclaration\Pages\MemorabiliaItems\Magazines\AddMagazine.razor.g.cs
+D:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\obj\Debug\net5.0\Razor\Pages\MemorabiliaItems\Magazines\AddMagazine.razor.g.cs
+D:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\obj\Debug\net5.0\RazorDeclaration\Pages\MemorabiliaItems\Magazines\EditMagazine.razor.g.cs
+D:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\obj\Debug\net5.0\Razor\Pages\MemorabiliaItems\Magazines\EditMagazine.razor.g.cs

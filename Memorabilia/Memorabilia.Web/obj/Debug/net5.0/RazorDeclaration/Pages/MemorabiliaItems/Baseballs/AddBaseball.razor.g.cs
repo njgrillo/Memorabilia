@@ -231,8 +231,7 @@ using Memorabilia.Web.Controls.Team;
 
     private bool _continue;
     private bool _displayPeople;
-    private bool _displayTeams;
-    private IEnumerable<PersonViewModel> _people = Enumerable.Empty<PersonViewModel>();    
+    private bool _displayTeams;  
     private SaveBaseballViewModel _viewModel = new SaveBaseballViewModel();    
 
     protected async Task HandleValidSubmit()
@@ -263,16 +262,7 @@ using Memorabilia.Web.Controls.Team;
             _navigation.NavigateTo("Login");
 
         SetDefaults();
-
-        await LoadPeople().ConfigureAwait(false);
-    }    
-
-    private async Task LoadPeople()
-    {
-        var query = new GetPeople.Query();
-
-        _people = (await _queryRouter.Send(query).ConfigureAwait(false)).People;
-    }
+    }   
 
     private void PersonCheckboxClicked(object isChecked)
     {
@@ -283,11 +273,6 @@ using Memorabilia.Web.Controls.Team;
 
         StateHasChanged();
     } 
-
-    private async Task<IEnumerable<PersonViewModel>> SearchPeople(string searchText)
-    {
-        return await Task.FromResult(_people.Where(person => person.DisplayName.Contains(searchText, StringComparison.OrdinalIgnoreCase))).ConfigureAwait(false);
-    }
 
     private void SetDefaults()
     {

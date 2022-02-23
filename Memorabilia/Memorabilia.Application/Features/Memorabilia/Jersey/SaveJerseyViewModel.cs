@@ -33,14 +33,15 @@ namespace Memorabilia.Application.Features.Memorabilia.Jersey
         [Range(1, int.MaxValue, ErrorMessage = "Brand is required.")]
         public int BrandId { get; set; }       
 
-        public bool DisplayGameDate => DisplayGameStyleType && 
-                                       (GameStyleTypeId == GameStyleType.GameUsed.Id || GameStyleTypeId == GameStyleType.GameIssued.Id);
+        public bool DisplayGameDate => DisplayGameStyleType && GameStyleType.IsGameWorthly(GameStyleType);
 
         public bool DisplayGameStyleType => JerseyQualityTypeId == JerseyQualityType.Authentic.Id;
 
         public DateTime? GameDate { get; set; }
 
         public int GamePersonId { get; set; }
+
+        public GameStyleType GameStyleType => GameStyleType.Find(GameStyleTypeId);
 
         public int GameStyleTypeId { get; set; }
 

@@ -134,8 +134,7 @@ else
 
     private bool _continue;
     private bool _displayPeople;
-    private bool _displayTeams;
-    private IEnumerable<PersonViewModel> _people = Enumerable.Empty<PersonViewModel>();    
+    private bool _displayTeams; 
     private SaveBasketballViewModel _viewModel = new SaveBasketballViewModel();    
 
     protected async Task HandleValidSubmit()
@@ -166,16 +165,7 @@ else
             _navigation.NavigateTo("Login");
 
         SetDefaults();
-
-        await LoadPeople().ConfigureAwait(false);
     }    
-
-    private async Task LoadPeople()
-    {
-        var query = new GetPeople.Query();
-
-        _people = (await _queryRouter.Send(query).ConfigureAwait(false)).People;
-    }
 
     private void PersonCheckboxClicked(object isChecked)
     {
@@ -186,11 +176,6 @@ else
 
         StateHasChanged();
     } 
-
-    private async Task<IEnumerable<PersonViewModel>> SearchPeople(string searchText)
-    {
-        return await Task.FromResult(_people.Where(person => person.DisplayName.Contains(searchText, StringComparison.OrdinalIgnoreCase))).ConfigureAwait(false);
-    }
 
     private void SetDefaults()
     {

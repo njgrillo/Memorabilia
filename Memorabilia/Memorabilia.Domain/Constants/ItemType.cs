@@ -19,14 +19,16 @@ namespace Memorabilia.Domain.Constants
         public static readonly ItemType HockeyStick = new(21, " Hockey Stick");
         public static readonly ItemType Jersey = new(12, "Jersey");
         public static readonly ItemType JerseyNumber = new(13, "Jersey Number");
+        public static readonly ItemType Lithograph = new(24, "Lithograph");
         public static readonly ItemType Magazine = new(14, "Magazine");
         public static readonly ItemType Other = new(15, "Other");
         public static readonly ItemType Painting = new(16, "Painting");
         public static readonly ItemType Photo = new(17, "Photo");        
         public static readonly ItemType Puck = new(18, "Puck");        
         public static readonly ItemType Pylon = new(19, "Pylon");        
-        public static readonly ItemType SoccerBall = new(20, "Soccer Ball");   
-        public static readonly ItemType TicketStub = new(22, "Ticket Stub");        
+        public static readonly ItemType Shoe = new(25, "Shoe");   
+        public static readonly ItemType Soccerball = new(20, "Soccer Ball");   
+        public static readonly ItemType Ticket = new(22, "Ticket");        
 
         public static readonly ItemType[] All =
         {
@@ -45,14 +47,16 @@ namespace Memorabilia.Domain.Constants
             HockeyStick,
             Jersey,
             JerseyNumber,
+            Lithograph,
             Magazine,
             Other,
             Painting,
             Photo,
             Puck,
             Pylon,
-            SoccerBall,
-            TicketStub 
+            Shoe,
+            Soccerball,
+            Ticket 
         };
 
         public static readonly ItemType[] GameTypes =
@@ -68,7 +72,8 @@ namespace Memorabilia.Domain.Constants
             Jersey,
             Puck,
             Pylon,
-            SoccerBall
+            Shoe,
+            Soccerball
         };
 
         public static readonly ItemType[] WearableTypes =
@@ -76,7 +81,8 @@ namespace Memorabilia.Domain.Constants
             Glove,
             Hat,
             Helmet,
-            Jersey
+            Jersey,
+            Shoe
         };
 
         private ItemType(int id, string name)

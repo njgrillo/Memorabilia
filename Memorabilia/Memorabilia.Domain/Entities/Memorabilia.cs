@@ -199,6 +199,18 @@ namespace Memorabilia.Domain.Entities
                 SetTeams(teamId.Value);
         }
 
+        public void SetBook(bool bookplate,
+                            int[] personIds,
+                            int[] sportIds,
+                            int[] teamIds,
+                            string title)
+        {
+            SetBook(bookplate, title);
+            SetPeople(personIds);
+            SetSports(sportIds);
+            SetTeams(teamIds);
+        }
+
         public void SetCard(int? denominator, int? numerator, int? year)
         {
             if (Card == null)
@@ -238,6 +250,44 @@ namespace Memorabilia.Domain.Entities
                 Teams = new List<MemorabiliaTeam>();
             else
                 SetTeams(teamId.Value);
+        }
+
+        public void SetGlove(int brandId,
+                             DateTime? gameDate,
+                             int? gamePersonId,
+                             int? gameStyleTypeId,
+                             int levelTypeId,
+                             int[] personIds,
+                             int sizeId,
+                             int[] sportIds,
+                             int[] teamIds)
+        {
+            SetBrand(brandId);
+            SetLevelType(levelTypeId);
+            SetSize(sizeId);
+            SetGame(gameStyleTypeId, gamePersonId, gameDate);
+            SetPeople(personIds);
+            SetSports(sportIds);
+            SetTeams(teamIds);
+        }
+
+        public void SetHat(int brandId,
+                           DateTime? gameDate,
+                           int? gamePersonId,
+                           int? gameStyleTypeId,
+                           int levelTypeId,
+                           int[] personIds,
+                           int sizeId,
+                           int[] sportIds,
+                           int[] teamIds)
+        {
+            SetBrand(brandId);
+            SetLevelType(levelTypeId);
+            SetSize(sizeId);
+            SetGame(gameStyleTypeId, gamePersonId, gameDate);
+            SetPeople(personIds);
+            SetSports(sportIds);
+            SetTeams(teamIds);
         }
 
         public void SetHelmet(int brandId,
@@ -305,26 +355,44 @@ namespace Memorabilia.Domain.Entities
             SetTeams(teamIds); 
         }
 
-        public void SetMagazine(DateTime? date, bool framed)
+        public void SetJerseyNumber(int[] sportIds, int[] teamIds)
         {
-            if (Magazine == null)
-            {
-                Magazine = new MemorabiliaMagazine(Id, date, framed);
-                return;
-            }
-
-            Magazine.Set(date, framed);
+            SetSports(sportIds);
+            SetTeams(teamIds);
         }
 
-        public void SetPhoto(int photoTypeId, bool framed)
+        public void SetMagazine(int brandId,
+                                DateTime? date,
+                                bool framed,
+                                int[] personIds,
+                                int sizeId,
+                                int[] sportIds,
+                                int[] teamIds)
         {
-            if (Photo == null)
-            {
-                Photo = new MemorabiliaPhoto(Id, photoTypeId, framed);
-                return;
-            }
+            SetBrand(brandId);
+            SetSize(sizeId);
+            SetMagazine(date, framed);
+            SetPeople(personIds);
+            SetSports(sportIds);
+            SetTeams(teamIds);            
+        }
 
-            Photo.Set(photoTypeId, framed);
+        public void SetPhoto(int brandId,
+                             bool framed,
+                             int orientationId,
+                             int[] personIds,
+                             int photoTypeId,
+                             int sizeId,
+                             int[] sportIds,
+                             int[] teamIds)
+        {
+            SetBrand(brandId);
+            SetSize(sizeId);
+            SetOrientation(orientationId);
+            SetPhoto(photoTypeId, framed);
+            SetPeople(personIds);
+            SetSports(sportIds);
+            SetTeams(teamIds);
         }
 
         private void SetBaseballType(int? baseballTypeId, int? year, string anniversary)
@@ -385,6 +453,11 @@ namespace Memorabilia.Domain.Entities
                 if (Bat?.Id > 0)
                     Bat = null;
             }
+        }
+
+        private void SetBook(bool bookplate, string title)
+        {
+
         }
 
         private void SetBrand(int brandId)
@@ -480,9 +553,12 @@ namespace Memorabilia.Domain.Entities
         private void SetJersey(int qualityTypeId, int styleTypeId, int typeId)
         {
             if (Jersey == null)
+            {
                 Jersey = new MemorabiliaJersey(Id, qualityTypeId, styleTypeId, typeId);
-            else
-                Jersey.Set(qualityTypeId, styleTypeId, typeId);
+                return;
+            }
+
+            Jersey.Set(qualityTypeId, styleTypeId, typeId);
         }
 
         private void SetLevelType(int levelTypeId)
@@ -494,6 +570,17 @@ namespace Memorabilia.Domain.Entities
             }
 
             LevelType.Set(levelTypeId);
+        }
+
+        private void SetMagazine(DateTime? date, bool framed)
+        {
+            if (Magazine == null)
+            {
+                Magazine = new MemorabiliaMagazine(Id, date, framed);
+                return;
+            }
+
+            Magazine.Set(date, framed);
         }
 
         private void SetOrientation(int orientationId)
@@ -514,6 +601,17 @@ namespace Memorabilia.Domain.Entities
 
             People.RemoveAll(team => !personIds.Contains(team.PersonId));
             People.AddRange(personIds.Where(personId => !People.Select(person => person.PersonId).Contains(personId)).Select(personId => new MemorabiliaPerson(Id, personId)));
+        }
+
+        private void SetPhoto(int photoTypeId, bool framed)
+        {
+            if (Photo == null)
+            {
+                Photo = new MemorabiliaPhoto(Id, photoTypeId, framed);
+                return;
+            }
+
+            Photo.Set(photoTypeId, framed);
         }
 
         private void SetSize(int sizeId)
