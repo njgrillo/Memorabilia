@@ -1,6 +1,5 @@
 ﻿using Memorabilia.Domain.Entities;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace Memorabilia.Application.Features.Memorabilia.Football
 {
@@ -15,26 +14,24 @@ namespace Memorabilia.Application.Features.Memorabilia.Football
             _memorabilia = memorabilia;
         }        
 
-        public MemorabiliaBrand MemorabiliaBrand => _memorabilia.Brand;
+        public MemorabiliaBrand Brand => _memorabilia.Brand;
 
-        public MemorabiliaCommissioner MemorabiliaCommissioner => _memorabilia.Commissioner;
+        public MemorabiliaCommissioner Commissioner => _memorabilia.Commissioner;
 
-        public MemorabiliaFootball MemorabiliaFootball => _memorabilia.Football;
+        public MemorabiliaFootball Football => _memorabilia.Football;
 
-        public MemorabiliaGame MemorabiliaGame => _memorabilia.Game;
+        public MemorabiliaGame Game => _memorabilia.Game;
 
         public int MemorabiliaId => _memorabilia.Id;
 
-        public MemorabiliaLevelType MemorabiliaLevelType => _memorabilia.LevelType;
+        public MemorabiliaLevelType Level => _memorabilia.LevelType;        
 
-        public MemorabiliaSize MemorabiliaSize => _memorabilia.Size;
+        public IEnumerable<MemorabiliaPerson> People => _memorabilia.People;
 
-        public IEnumerable<MemorabiliaSport> MemorabiliaSports => _memorabilia.Sports;
+        public MemorabiliaSize Size => _memorabilia.Size;
 
-        public MemorabiliaPerson Person => _memorabilia.People.FirstOrDefault();
+        public IEnumerable<MemorabiliaSport> Sports => _memorabilia.Sports;
 
-        public int? PersonId => _memorabilia.People.FirstOrDefault()?.PersonId;
-
-        public int? TeamId => _memorabilia.Teams.FirstOrDefault()?.TeamId;
+        public IEnumerable<MemorabiliaTeam> Teams => _memorabilia.Teams;
     }
 }

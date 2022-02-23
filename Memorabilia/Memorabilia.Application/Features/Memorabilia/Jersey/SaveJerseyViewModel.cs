@@ -14,17 +14,17 @@ namespace Memorabilia.Application.Features.Memorabilia.Jersey
 
         public SaveJerseyViewModel(JerseyViewModel viewModel)
         {            
-            BrandId = viewModel.MemorabiliaBrand.BrandId;
-            GameDate = viewModel.MemorabiliaGame?.GameDate;
-            GamePersonId = viewModel.MemorabiliaGame?.PersonId ?? 0;
-            GameStyleTypeId = viewModel.MemorabiliaGame?.GameStyleTypeId ?? 0;
-            JerseyQualityTypeId = viewModel.MemorabiliaJersey.JerseyQualityTypeId;
-            JerseyStyleTypeId = viewModel.MemorabiliaJersey.JerseyStyleTypeId;
-            JerseyTypeId = viewModel.MemorabiliaJersey.JerseyTypeId;
-            LevelTypeId = viewModel.MemorabiliaLevelType.LevelTypeId;
+            BrandId = viewModel.Brand.BrandId;
+            GameDate = viewModel.Game?.GameDate;
+            GamePersonId = viewModel.Game?.PersonId ?? 0;
+            GameStyleTypeId = viewModel.Game?.GameStyleTypeId ?? 0;
+            JerseyQualityTypeId = viewModel.Jersey.JerseyQualityTypeId;
+            JerseyStyleTypeId = viewModel.Jersey.JerseyStyleTypeId;
+            JerseyTypeId = viewModel.Jersey.JerseyTypeId;
+            LevelTypeId = viewModel.Level.LevelTypeId;
             MemorabiliaId = viewModel.MemorabiliaId;
             People = viewModel.People.Select(person => new SavePersonViewModel(new PersonViewModel(person.Person))).ToList();
-            SizeId = viewModel.MemorabiliaSize.SizeId;
+            SizeId = viewModel.Size.SizeId;
             SportIds = viewModel.Sports.Select(x => x.Id).ToList();
             Teams = viewModel.Teams.Select(team => new SaveTeamViewModel(new TeamViewModel(team.Team))).ToList();
         }   
@@ -71,7 +71,7 @@ namespace Memorabilia.Application.Features.Memorabilia.Jersey
         [Required]
         public int MemorabiliaId { get; set; }
 
-        public override string PageTitle => $"{(MemorabiliaId > 0 ? "Edit" : "Add")} {Domain.Constants.ItemType.Jersey.Name} Details";
+        public override string PageTitle => $"{(MemorabiliaId > 0 ? "Edit" : "Add")} {ItemType.Jersey.Name} Details";
 
         public List<SavePersonViewModel> People { get; set; } = new();
 

@@ -133,90 +133,83 @@ using System.Net.Http;
 #nullable disable
 #nullable restore
 #line 3 "D:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\Pages\MemorabiliaItems\Baseballs\EditBaseball.razor"
-using Blazored.Typeahead;
-
-#line default
-#line hidden
-#nullable disable
-#nullable restore
-#line 4 "D:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\Pages\MemorabiliaItems\Baseballs\EditBaseball.razor"
 using Memorabilia.Application.Features.Admin.Person;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 5 "D:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\Pages\MemorabiliaItems\Baseballs\EditBaseball.razor"
+#line 4 "D:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\Pages\MemorabiliaItems\Baseballs\EditBaseball.razor"
 using Memorabilia.Application.Features.Memorabilia;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 6 "D:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\Pages\MemorabiliaItems\Baseballs\EditBaseball.razor"
+#line 5 "D:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\Pages\MemorabiliaItems\Baseballs\EditBaseball.razor"
 using Memorabilia.Application.Features.Memorabilia.Baseball;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 7 "D:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\Pages\MemorabiliaItems\Baseballs\EditBaseball.razor"
+#line 6 "D:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\Pages\MemorabiliaItems\Baseballs\EditBaseball.razor"
 using Memorabilia.Domain.Constants;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 8 "D:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\Pages\MemorabiliaItems\Baseballs\EditBaseball.razor"
+#line 7 "D:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\Pages\MemorabiliaItems\Baseballs\EditBaseball.razor"
 using Memorabilia.Web.Controls.Baseball;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 9 "D:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\Pages\MemorabiliaItems\Baseballs\EditBaseball.razor"
+#line 8 "D:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\Pages\MemorabiliaItems\Baseballs\EditBaseball.razor"
 using Memorabilia.Web.Controls.Commissioner;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 10 "D:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\Pages\MemorabiliaItems\Baseballs\EditBaseball.razor"
+#line 9 "D:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\Pages\MemorabiliaItems\Baseballs\EditBaseball.razor"
 using Memorabilia.Web.Controls.GameStyleType;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 11 "D:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\Pages\MemorabiliaItems\Baseballs\EditBaseball.razor"
+#line 10 "D:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\Pages\MemorabiliaItems\Baseballs\EditBaseball.razor"
 using Memorabilia.Web.Controls.ItemTypeBrand;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 12 "D:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\Pages\MemorabiliaItems\Baseballs\EditBaseball.razor"
+#line 11 "D:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\Pages\MemorabiliaItems\Baseballs\EditBaseball.razor"
 using Memorabilia.Web.Controls.ItemTypeLevel;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 13 "D:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\Pages\MemorabiliaItems\Baseballs\EditBaseball.razor"
+#line 12 "D:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\Pages\MemorabiliaItems\Baseballs\EditBaseball.razor"
 using Memorabilia.Web.Controls.ItemTypeSize;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 14 "D:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\Pages\MemorabiliaItems\Baseballs\EditBaseball.razor"
+#line 13 "D:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\Pages\MemorabiliaItems\Baseballs\EditBaseball.razor"
 using Memorabilia.Web.Controls.Person;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 15 "D:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\Pages\MemorabiliaItems\Baseballs\EditBaseball.razor"
+#line 14 "D:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\Pages\MemorabiliaItems\Baseballs\EditBaseball.razor"
 using Memorabilia.Web.Controls.Team;
 
 #line default
@@ -231,7 +224,7 @@ using Memorabilia.Web.Controls.Team;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 167 "D:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\Pages\MemorabiliaItems\Baseballs\EditBaseball.razor"
+#line 158 "D:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\Pages\MemorabiliaItems\Baseballs\EditBaseball.razor"
        
     [Parameter]
     public int MemorabiliaId { get; set; }
@@ -270,7 +263,7 @@ using Memorabilia.Web.Controls.Team;
         var query = new GetBaseball.Query(MemorabiliaId);
         var baseballViewModel = await _queryRouter.Send(query).ConfigureAwait(false);
 
-        if (baseballViewModel.MemorabiliaBrand == null)
+        if (baseballViewModel.Brand == null)
         {
             _navigation.NavigateTo($"Memorabilia/Baseball/Add/{MemorabiliaId}");
             return;
@@ -296,7 +289,7 @@ using Memorabilia.Web.Controls.Team;
         _displayPeople = (bool)isChecked;
 
         if (!_displayPeople)
-            _viewModel.Person = null;
+            _viewModel.People = new();
 
         StateHasChanged();
     } 
@@ -311,7 +304,7 @@ using Memorabilia.Web.Controls.Team;
         _displayTeams = (bool)isChecked;
 
         if (!_displayTeams)
-            _viewModel.TeamId = 0;
+            _viewModel.Teams = new();
 
         StateHasChanged();
     }

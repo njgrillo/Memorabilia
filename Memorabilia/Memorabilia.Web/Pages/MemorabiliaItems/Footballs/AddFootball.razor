@@ -1,6 +1,5 @@
 ﻿@page "/Memorabilia/Football/Add/{memorabiliaId:int}"
 
-@using Blazored.Typeahead
 @using Memorabilia.Application.Features.Admin.Person
 @using Memorabilia.Application.Features.Memorabilia
 @using Memorabilia.Application.Features.Memorabilia.Football
@@ -100,16 +99,8 @@ else
                             <input type="checkbox" @onchange="eventArgs => { PersonCheckboxClicked(eventArgs.Value); }" />
                             <label for="person">Associate Football with a Person</label>
                             <div class="form-group" hidden="@(!_displayPeople)">
-                                <BlazoredTypeahead SearchMethod="SearchPeople"
-                                                   @bind-Value="_viewModel.Person"
-                                                   Placeholder="Search by name...">
-                                    <SelectedTemplate Context="person">
-                                        @person.DisplayName
-                                    </SelectedTemplate>
-                                    <ResultTemplate Context="person">
-                                        @person.DisplayName
-                                    </ResultTemplate>
-                                </BlazoredTypeahead>
+                                <_PersonSelector AllowMultiple="false"
+                                                 People="_viewModel.People" />
                             </div>                    
                         </div> 
                     </div>
@@ -120,9 +111,9 @@ else
                             <input type="checkbox" @onchange="eventArgs => { TeamsCheckboxClicked(eventArgs.Value); }" />
                             <label for="teams">Associate Football with a Team</label>
                             <div class="form-group" hidden="@(!_displayTeams)">
-                                <_TeamDropDown @bind-Value="@_viewModel.TeamId"
-                                               @bind-Value:event="ValueChanged"                                        
-                                               SportLeagueLevel="_viewModel.SportLeagueLevel" /> 
+                                <_TeamSelector AllowMultiple="false"
+                                               SportLeagueLevel="_viewModel.SportLeagueLevel"
+                                               Teams="_viewModel.Teams" />
                             </div>                    
                         </div> 
                     </div>
@@ -191,7 +182,7 @@ else
         _displayPeople = (bool)isChecked;
 
         if (!_displayPeople)
-            _viewModel.Person = null;
+            _viewModel.People = new();
 
         StateHasChanged();
     } 
@@ -215,7 +206,7 @@ else
         _displayTeams = (bool)isChecked;
 
         if (!_displayTeams)
-            _viewModel.TeamId = 0;
+            _viewModel.Teams = new();
 
         StateHasChanged();
     }     

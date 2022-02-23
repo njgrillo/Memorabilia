@@ -1,11 +1,12 @@
 ﻿@using Blazored.Typeahead
 @using Memorabilia.Application.Features.Admin.Team
+@using Memorabilia.Domain.Constants
 @using Memorabilia.Web.Controls.Team
 
 @inject QueryRouter _queryRouter
 
-<BlazoredTypeahead SearchMethod="SearchTeams"
-                   @bind-Value="@_viewModel"
+<BlazoredTypeahead @bind-Value="_viewModel"
+                   SearchMethod="SearchTeams"                   
                    Placeholder="Search by team...">
     <SelectedTemplate Context="team">
         @team.DisplayName
@@ -15,7 +16,7 @@
     </ResultTemplate>   
 </BlazoredTypeahead> 
 <br />  
-<div class="text-right">
+<div class="text-right" hidden="@(!_canAdd)">
     <button type="button" class="btn btn-secondary" @onclick="Add">Add Team</button>
 </div>
 <br />  
@@ -34,21 +35,27 @@
                 <td>
                     <_Tooltip Text="Delete">
                         <img class="can-click" 
-                             src="images/trash.png" 
-                             height="25" 
-                             width="25" 
-                             @onclick="@(_ => Remove(team.Id))" />
+                                src="images/trash.png" 
+                                height="25" 
+                                width="25" 
+                                @onclick="@(_ => Remove(team.Id))" />
                     </_Tooltip>
                 </td>
             </tr>
         }
     </tbody>
 </table>
-
 @code {
+    [Parameter]
+    public bool AllowMultiple { get; set; }
+
+    [Parameter]
+    public SportLeagueLevel SportLeagueLevel { get; set; }
+
     [Parameter]
     public List<SaveTeamViewModel> Teams { get; set; } = new();
 
+    private bool _canAdd = true;
     private IEnumerable<SaveTeamViewModel> _teams = Enumerable.Empty<SaveTeamViewModel>();  
     private SaveTeamViewModel _viewModel = new SaveTeamViewModel();
 
@@ -59,14 +66,21 @@
 
     private void Add()
     {        
-        Teams.Add(_viewModel);
+        var team = Teams.SingleOrDefault(team => team.Id == _viewModel.Id);
 
-        _viewModel = new SaveTeamViewModel();
+        if (team != null)
+            team.IsDeleted = false;
+        else
+            Teams.Add(_viewModel);
+
+        _viewModel = new();
+
+        SetCanAdd();
     }
 
     private async Task LoadTeams()
     {
-        var query = new GetTeams.Query();
+        var query = new GetTeams.Query(sportLeagueLevelId:SportLeagueLevel?.Id);
 
         _teams = (await _queryRouter.Send(query).ConfigureAwait(false)).Teams.Select(team => new SaveTeamViewModel(team));
     }
@@ -78,11 +92,18 @@
         if (team == null)
             return;
 
-        team.IsDeleted = true;                                                                        
+        team.IsDeleted = true;   
+        
+        SetCanAdd();
     } 
 
     private async Task<IEnumerable<SaveTeamViewModel>> SearchTeams(string searchText)
     {
         return await Task.FromResult(_teams.Where(team => team.DisplayName.Contains(searchText, StringComparison.OrdinalIgnoreCase))).ConfigureAwait(false);
+    }
+
+    private void SetCanAdd()
+    {
+        _canAdd = AllowMultiple || Teams.Count(team => !team.IsDeleted) == 0;
     }
 }

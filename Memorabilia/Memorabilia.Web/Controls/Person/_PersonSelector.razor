@@ -4,8 +4,8 @@
 
 @inject QueryRouter _queryRouter
 
-<BlazoredTypeahead SearchMethod="SearchPeople"
-                   @bind-Value="@_viewModel"
+<BlazoredTypeahead @bind-Value="_viewModel" 
+                   SearchMethod="SearchPeople"                     
                    Placeholder="Search by name...">
     <SelectedTemplate Context="person">
         @person.DisplayName
@@ -15,7 +15,7 @@
     </ResultTemplate>   
 </BlazoredTypeahead> 
 <br />  
-<div class="text-right">
+<div class="text-right" hidden="@(!_canAdd)">
     <button type="button" class="btn btn-secondary" @onclick="Add">Add Person</button>
 </div>
 <br />  
@@ -34,23 +34,26 @@
                 <td>
                     <_Tooltip Text="Delete">
                         <img class="can-click" 
-                             src="images/trash.png" 
-                             height="25" 
-                             width="25" 
-                             @onclick="@(_ => Remove(person.Id))" />
+                                src="images/trash.png" 
+                                height="25" 
+                                width="25" 
+                                @onclick="@(_ => Remove(person.Id))" />
                     </_Tooltip>
                 </td>
             </tr>
         }
     </tbody>
 </table>
-
 @code {
+    [Parameter]
+    public bool AllowMultiple { get; set; }
+
     [Parameter]
     public List<SavePersonViewModel> People { get; set; } = new();
 
+    private bool _canAdd = true;
     private IEnumerable<SavePersonViewModel> _people = Enumerable.Empty<SavePersonViewModel>();  
-    private SavePersonViewModel _viewModel = new SavePersonViewModel();
+    private SavePersonViewModel _viewModel = new SavePersonViewModel();    
 
     protected override async Task OnInitializedAsync()
     {
@@ -58,11 +61,18 @@
     } 
 
     private void Add()
-    {        
-        People.Add(_viewModel);
+    {
+        var person = People.SingleOrDefault(person => person.Id == _viewModel.Id);
 
-        _viewModel = new SavePersonViewModel();
-    }
+        if (person != null)
+            person.IsDeleted = false;
+        else
+            People.Add(_viewModel); 
+
+        _viewModel = new();
+
+        SetCanAdd();
+    }    
 
     private async Task LoadPeople()
     {
@@ -78,11 +88,18 @@
         if (person == null)
             return;
 
-        person.IsDeleted = true;                                                                        
-    } 
+        person.IsDeleted = true;
+
+        SetCanAdd();
+    }     
 
     private async Task<IEnumerable<SavePersonViewModel>> SearchPeople(string searchText)
     {
         return await Task.FromResult(_people.Where(person => person.DisplayName.Contains(searchText, StringComparison.OrdinalIgnoreCase))).ConfigureAwait(false);
+    }
+
+    private void SetCanAdd()
+    {
+        _canAdd = AllowMultiple || People.Count(person => !person.IsDeleted) == 0;
     }
 }

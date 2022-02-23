@@ -14,19 +14,19 @@ namespace Memorabilia.Application.Features.Memorabilia.Jersey
             _memorabilia = memorabilia;
         }
 
-        public MemorabiliaBrand MemorabiliaBrand => _memorabilia.Brand;
+        public MemorabiliaBrand Brand => _memorabilia.Brand;
 
-        public MemorabiliaGame MemorabiliaGame => _memorabilia.Game;
+        public MemorabiliaGame Game => _memorabilia.Game;
 
         public int MemorabiliaId => _memorabilia.Id;
 
-        public MemorabiliaJersey MemorabiliaJersey => _memorabilia.Jersey;
+        public MemorabiliaJersey Jersey => _memorabilia.Jersey;
 
-        public MemorabiliaLevelType MemorabiliaLevelType => _memorabilia.LevelType;
-
-        public MemorabiliaSize MemorabiliaSize => _memorabilia.Size;        
+        public MemorabiliaLevelType Level => _memorabilia.LevelType;
 
         public IEnumerable<MemorabiliaPerson> People => _memorabilia.People;
+
+        public MemorabiliaSize Size => _memorabilia.Size; 
 
         public IEnumerable<MemorabiliaSport> Sports => _memorabilia.Sports;
 

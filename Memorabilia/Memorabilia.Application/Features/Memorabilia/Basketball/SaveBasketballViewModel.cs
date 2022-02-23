@@ -1,7 +1,10 @@
 ﻿using Memorabilia.Application.Features.Admin.Person;
+using Memorabilia.Application.Features.Admin.Team;
 using Memorabilia.Domain.Constants;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
 
 namespace Memorabilia.Application.Features.Memorabilia.Basketball
 {
@@ -11,16 +14,16 @@ namespace Memorabilia.Application.Features.Memorabilia.Basketball
 
         public SaveBasketballViewModel(BasketballViewModel viewModel)
         {
-            BasketballTypeId = viewModel.MemorabiliaBasketball?.BasketballTypeId ?? 0;
-            BrandId = viewModel.MemorabiliaBrand.BrandId;
-            CommissionerId = viewModel.MemorabiliaCommissioner.CommissionerId;
-            GameDate = viewModel.MemorabiliaGame?.GameDate;
-            GameStyleTypeId = viewModel.MemorabiliaGame?.GameStyleTypeId ?? 0;
-            LevelTypeId = viewModel.MemorabiliaLevelType.LevelTypeId;
+            BasketballTypeId = viewModel.Basketball?.BasketballTypeId ?? 0;
+            BrandId = viewModel.Brand.BrandId;
+            CommissionerId = viewModel.Commissioner.CommissionerId;
+            GameDate = viewModel.Game?.GameDate;
+            GameStyleTypeId = viewModel.Game?.GameStyleTypeId ?? 0;
+            LevelTypeId = viewModel.Level.LevelTypeId;
             MemorabiliaId = viewModel.MemorabiliaId;
-            Person = new PersonViewModel(new Domain.Entities.Person());
-            SizeId = viewModel.MemorabiliaSize.SizeId;
-            TeamId = viewModel.TeamId ?? 0;
+            People = viewModel.People.Select(person => new SavePersonViewModel(new PersonViewModel(person.Person))).ToList();
+            SizeId = viewModel.Size.SizeId;
+            Teams = viewModel.Teams.Select(team => new SaveTeamViewModel(new TeamViewModel(team.Team))).ToList();
         }
 
         public BasketballType BasketballType => BasketballType.Find(BasketballTypeId);
@@ -41,9 +44,9 @@ namespace Memorabilia.Application.Features.Memorabilia.Basketball
         [Range(1, int.MaxValue, ErrorMessage = "Game Style Type is required.")]
         public int GameStyleTypeId { get; set; }
 
-        public bool HasPerson => Person?.Id > 0;
+        public bool HasPerson => People.Any();
 
-        public bool HasTeam => TeamId > 0;
+        public bool HasTeam => Teams.Any();
 
         public string ImagePath
         {
@@ -71,7 +74,7 @@ namespace Memorabilia.Application.Features.Memorabilia.Basketball
 
         public override string PageTitle => $"{(MemorabiliaId > 0 ? "Edit" : "Add")} {ItemType.Basketball.Name} Details";
 
-        public PersonViewModel Person { get; set; }
+        public List<SavePersonViewModel> People { get; set; } = new();
 
         [Required]
         [Range(1, int.MaxValue, ErrorMessage = "Size is required.")]
@@ -79,6 +82,6 @@ namespace Memorabilia.Application.Features.Memorabilia.Basketball
 
         public SportLeagueLevel SportLeagueLevel => SportLeagueLevel.NationalBasketballAssociation;
 
-        public int TeamId { get; set; }
+        public List<SaveTeamViewModel> Teams { get; set; } = new();
     }
 }

@@ -1,6 +1,5 @@
 ﻿using Memorabilia.Domain.Entities;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace Memorabilia.Application.Features.Memorabilia.Helmet
 {
@@ -15,24 +14,22 @@ namespace Memorabilia.Application.Features.Memorabilia.Helmet
             _memorabilia = memorabilia;
         }
 
-        public MemorabiliaBrand MemorabiliaBrand => _memorabilia.Brand;
+        public MemorabiliaBrand Brand => _memorabilia.Brand;
 
-        public MemorabiliaGame MemorabiliaGame => _memorabilia.Game;
+        public MemorabiliaGame Game => _memorabilia.Game;
 
-        public MemorabiliaHelmet MemorabiliaHelmet => _memorabilia.Helmet;
+        public MemorabiliaHelmet Helmet => _memorabilia.Helmet;
 
         public int MemorabiliaId => _memorabilia.Id;
 
-        public MemorabiliaLevelType MemorabiliaLevelType => _memorabilia.LevelType;
+        public MemorabiliaLevelType Level => _memorabilia.LevelType;
 
-        public MemorabiliaSize MemorabiliaSize => _memorabilia.Size;
+        public IEnumerable<MemorabiliaPerson> People => _memorabilia.People;
 
-        public IEnumerable<MemorabiliaSport> MemorabiliaSports => _memorabilia.Sports;
+        public MemorabiliaSize Size => _memorabilia.Size;
 
-        public IEnumerable<MemorabiliaTeam> MemorabiliaTeams => _memorabilia.Teams;
+        public IEnumerable<MemorabiliaSport> Sports => _memorabilia.Sports;
 
-        public MemorabiliaPerson Person => _memorabilia.People.FirstOrDefault();
-
-        public int? PersonId => _memorabilia.People.FirstOrDefault()?.PersonId;        
+        public IEnumerable<MemorabiliaTeam> Teams => _memorabilia.Teams;             
     }
 }

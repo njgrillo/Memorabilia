@@ -1,4 +1,5 @@
 ﻿using Memorabilia.Application.Features.Admin.Person;
+using Memorabilia.Application.Features.Admin.Team;
 using Memorabilia.Domain.Constants;
 using System;
 using System.Collections.Generic;
@@ -13,17 +14,17 @@ namespace Memorabilia.Application.Features.Memorabilia.Helmet
 
         public SaveHelmetViewModel(HelmetViewModel viewModel)
         {
-            BrandId = viewModel.MemorabiliaBrand.BrandId;
-            GameDate = viewModel.MemorabiliaGame?.GameDate;
-            GameStyleTypeId = viewModel.MemorabiliaGame?.GameStyleTypeId ?? 0;
-            HelmetQualityTypeId = viewModel.MemorabiliaHelmet?.HelmetQualityTypeId ?? 0;
-            HelmetTypeId = viewModel.MemorabiliaHelmet?.HelmetTypeId ?? 0;
-            LevelTypeId = viewModel.MemorabiliaLevelType.LevelTypeId;
+            BrandId = viewModel.Brand.BrandId;
+            GameDate = viewModel.Game?.GameDate;
+            GameStyleTypeId = viewModel.Game?.GameStyleTypeId ?? 0;
+            HelmetQualityTypeId = viewModel.Helmet?.HelmetQualityTypeId ?? 0;
+            HelmetTypeId = viewModel.Helmet?.HelmetTypeId ?? 0;
+            LevelTypeId = viewModel.Level.LevelTypeId;
             MemorabiliaId = viewModel.MemorabiliaId;
-            Person = new PersonViewModel(new Domain.Entities.Person());
-            SizeId = viewModel.MemorabiliaSize.SizeId;
-            SportIds = viewModel.MemorabiliaSports.Select(sport => sport.SportId).ToList();
-            TeamIds = viewModel.MemorabiliaTeams.Select(team => team.TeamId).ToList();
+            People = viewModel.People.Select(person => new SavePersonViewModel(new PersonViewModel(person.Person))).ToList();
+            SizeId = viewModel.Size.SizeId;
+            SportIds = viewModel.Sports.Select(x => x.Id).ToList();
+            Teams = viewModel.Teams.Select(team => new SaveTeamViewModel(new TeamViewModel(team.Team))).ToList();
         }   
 
         [Required]
@@ -38,9 +39,9 @@ namespace Memorabilia.Application.Features.Memorabilia.Helmet
         [Range(1, int.MaxValue, ErrorMessage = "Game Style Type is required.")]
         public int GameStyleTypeId { get; set; }
 
-        public bool HasPerson => Person?.Id > 0;
+        public bool HasPerson => People.Any();
 
-        public bool HasTeam => TeamIds.Any();
+        public bool HasTeam => Teams.Any();
 
         public int HelmetQualityTypeId { get; set; }
 
@@ -74,7 +75,7 @@ namespace Memorabilia.Application.Features.Memorabilia.Helmet
 
         public override string PageTitle => $"{(MemorabiliaId > 0 ? "Edit" : "Add")} {ItemType.Helmet.Name} Details";
 
-        public PersonViewModel Person { get; set; }
+        public List<SavePersonViewModel> People { get; set; } = new();
 
         [Required]
         [Range(1, int.MaxValue, ErrorMessage = "Size is required.")]
@@ -82,6 +83,6 @@ namespace Memorabilia.Application.Features.Memorabilia.Helmet
 
         public List<int> SportIds { get; set; } = new();
 
-        public List<int> TeamIds { get; set; } = new();
+        public List<SaveTeamViewModel> Teams { get; set; } = new();
     }
 }

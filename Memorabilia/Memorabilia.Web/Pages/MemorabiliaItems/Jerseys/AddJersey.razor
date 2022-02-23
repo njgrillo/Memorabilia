@@ -1,6 +1,5 @@
 ﻿@page "/Memorabilia/Jersey/Add/{memorabiliaId:int}"
 
-@using Blazored.Typeahead
 @using Memorabilia.Application.Features.Admin.Person
 @using Memorabilia.Application.Features.Memorabilia
 @using Memorabilia.Application.Features.Memorabilia.Jersey
@@ -106,7 +105,8 @@ else
                             <input type="checkbox" @onchange="eventArgs => { PersonCheckboxClicked(eventArgs.Value); }" />
                             <label for="person">Associate Jersey with People</label>
                             <div class="form-group" hidden="@(!_displayPeople)">
-                                <_PersonSelector People="_viewModel.People" />
+                                <_PersonSelector AllowMultiple="true" 
+                                                 People="_viewModel.People" />
                             </div>                    
                         </div> 
                     </div>
@@ -117,7 +117,8 @@ else
                             <input type="checkbox" @onchange="eventArgs => { TeamsCheckboxClicked(eventArgs.Value); }" />
                             <label for="teams">Associate Jersey with Team(s)</label>
                             <div class="form-group" hidden="@(!_displayTeams)">
-                                <_TeamSelector Teams="_viewModel.Teams" />
+                                <_TeamSelector AllowMultiple="true" 
+                                               Teams="_viewModel.Teams" />
                             </div>                    
                         </div> 
                     </div>
