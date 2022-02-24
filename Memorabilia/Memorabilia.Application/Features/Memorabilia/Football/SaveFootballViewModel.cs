@@ -32,6 +32,8 @@ namespace Memorabilia.Application.Features.Memorabilia.Football
 
         public int CommissionerId { get; set; }
 
+        public bool DisplayGameDate => GameStyleType.IsGameWorthly(GameStyleType);
+
         public FootballType FootballType => FootballType.Find(FootballTypeId);
 
         public int FootballTypeId { get; set; }

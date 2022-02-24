@@ -24,43 +24,38 @@ else
         </div>
     </div>
     <br />
-    <table class="table" style="border: 1px solid black;">
-        <thead>
-            <tr>
-                <th>Item Type</th>
-                <th>Game Style</th>
-                <th></th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var itemTypeGameStyle in _viewModel.ItemTypeGameStyles)
-            {
-                <tr>
-                    <td>@itemTypeGameStyle.ItemTypeName</td>
-                    <td>@itemTypeGameStyle.GameStyleTypeName</td>
-                    <td>
-                        <_Tooltip Text="Edit">
-                            <img class="can-click" 
-                                 src="images/pencil.png" 
-                                 height="25" 
-                                 width="25" 
-                                 @onclick="@(_ => _navigation.NavigateTo($"{_viewModel.RoutePrefix}/Edit/{itemTypeGameStyle.Id}"))" />
-                        </_Tooltip>                        
-                    </td>
-                    <td>
-                        <_Tooltip Text="Delete">
-                            <img class="can-click" 
-                                 src="images/trash.png" 
-                                 height="25" 
-                                 width="25" 
-                                 @onclick="@(_ => ShowConfirm(itemTypeGameStyle.Id))" />
-                        </_Tooltip>
-                    </td>
-                </tr>
-            }
-        </tbody>
-    </table>
+    <_Table Items="_viewModel.ItemTypeGameStyles" 
+            ItemsPerPage="10"                     
+            TItem="ItemTypeGameStyleViewModel">
+        <HeaderTemplate>
+            <th scope="col">Item Type</th>
+            <th scope="col">Game Style</th>
+            <th scope="col"></th>
+            <th scope="col"></th>
+        </HeaderTemplate>
+        <RowTemplate>
+            <td>@context.ItemTypeName</td>
+            <td>@context.GameStyleTypeName</td>
+            <td>
+                <_Tooltip Text="Edit">
+                    <img class="can-click" 
+                            src="images/pencil.png" 
+                            height="25" 
+                            width="25" 
+                            @onclick="@(_ => _navigation.NavigateTo($"{_viewModel.RoutePrefix}/Edit/{context.Id}"))" />
+                </_Tooltip>                        
+            </td>
+            <td>
+                <_Tooltip Text="Delete">
+                    <img class="can-click" 
+                            src="images/trash.png" 
+                            height="25" 
+                            width="25" 
+                            @onclick="@(_ => ShowConfirm(context.Id))" />
+                </_Tooltip>
+            </td>
+        </RowTemplate>
+    </_Table>
     <div class="row">
         <div class="col-md-12" style="text-align: center">
             <div class="col-md-12" style="text-align: center">

@@ -7,7 +7,6 @@
 @inject ProtectedLocalStorage _localStorage
 @inject NavigationManager _navigation
 @inject QueryRouter _queryRouter
-@inject IToastService _toastService
 
 @if (_viewModel == null)
 {
@@ -15,86 +14,21 @@
 }
 else
 {
-    <PopConfirm @ref="_deleteDialog"
-                Title="Delete Privacy Type"
-                ConfirmedChanged="Delete" />
-    <div class="row">
-        <div class="col-md-12" style="text-align: center">
-            <h1>@_viewModel.PageTitle</h1>
-        </div>
-    </div>
-    <br />
-    <table class="table" style="border: 1px solid black;">
-        <thead>
-            <tr>
-                <th>Name</th>
-                <th>Abbreviation</th>
-                <th></th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var domainEntity in _viewModel.DomainEntities)
-            {
-                <tr>
-                    <td>@domainEntity.Name</td>
-                    <td>@domainEntity.Abbreviation</td>
-                    <td>
-                        <_Tooltip Text="Edit">
-                            <img class="can-click" 
-                                 src="images/pencil.png" 
-                                 height="25" 
-                                 width="25" 
-                                 @onclick="@(_ => _navigation.NavigateTo($"{_viewModel.RoutePrefix}/Edit/{domainEntity.Id}"))" />
-                        </_Tooltip>                        
-                    </td>
-                    <td>
-                        <_Tooltip Text="Delete">
-                            <img class="can-click" 
-                                 src="images/trash.png" 
-                                 height="25" 
-                                 width="25" 
-                                 @onclick="@(_ => ShowConfirm(domainEntity.Id))" />
-                        </_Tooltip>
-                    </td>
-                </tr>
-            }
-        </tbody>
-    </table>
-    <div class="row">
-        <div class="col-md-12" style="text-align: center">
-            <div class="col-md-12" style="text-align: center">
-                <a href="PrivacyTypes/Add">Add @_viewModel.ItemTitle</a>
-            </div>
-        </div>
-    </div>
-    <br />
+    <_DomainTable DomainEntities="@_viewModel.DomainEntities"
+                  DomainItemName="@_viewModel.ItemTitle"
+                  DomainItemTitle="@_viewModel.PageTitle"
+                  OnDelete="Delete"
+                  RoutePrefix="@_viewModel.RoutePrefix" />
 }
 
 @code {
-    private PopConfirm _deleteDialog;
-    private int _deletedItemId;
     private PrivacyTypesViewModel _viewModel;
 
-    protected async Task Delete(bool confirm)
+    protected async Task Delete(SaveDomainViewModel viewModel)
     {
-        if (!confirm)
-        {
-            _deletedItemId = 0;
-            return;
-        }
-
-        var deletedItem = _viewModel.DomainEntities.Single(domainEntity => domainEntity.Id == _deletedItemId);
-        var viewModel = new SaveDomainViewModel(deletedItem);
-        viewModel.IsDeleted = true;
-
         var command = new SavePrivacyType.Command(viewModel);
 
         await _commandRouter.Send(command).ConfigureAwait(false);
-        
-        _viewModel.DomainEntities.Remove(deletedItem);
-
-        _toastService.ShowSuccess($"{_viewModel.ItemTitle} was deleted successfully!", _viewModel.PageTitle);
     }
 
     protected override async Task OnInitializedAsync()
@@ -107,11 +41,5 @@ else
         var query = new GetPrivacyTypes.Query();
 
         _viewModel = await _queryRouter.Send(query).ConfigureAwait(false);
-    }
-
-    protected void ShowConfirm(int id)
-    {
-        _deletedItemId = id;
-        _deleteDialog.ShowPop();
     }
 }

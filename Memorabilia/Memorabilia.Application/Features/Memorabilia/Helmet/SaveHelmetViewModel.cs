@@ -31,6 +31,8 @@ namespace Memorabilia.Application.Features.Memorabilia.Helmet
         [Range(1, int.MaxValue, ErrorMessage = "Brand is required.")]
         public int BrandId { get; set; }
 
+        public bool DisplayGameDate => GameStyleType.IsGameWorthly(GameStyleType);
+
         public DateTime? GameDate { get; set; }
 
         public GameStyleType GameStyleType => GameStyleType.Find(GameStyleTypeId);

@@ -24,53 +24,48 @@ else
         </div>
     </div>
     <br />
-    <table class="table" style="border: 1px solid black;">
-        <thead>
-            <tr>
-                <th>Franchise</th>
-                <th>Name</th>
-                <th>Location</th>
-                <th>Nickname</th>
-                <th>Abbreviation</th>
-                <th>Begin Year</th>
-                <th>End Year</th>
-                <th></th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var team in _viewModel.Teams)
-            {
-                <tr>
-                    <td>@team.FranchiseName</td>
-                    <td>@team.Name</td>
-                    <td>@team.Location</td>
-                    <td>@team.Nickname</td>
-                    <td>@team.Abbreviation</td>
-                    <td>@team.BeginYear</td>
-                    <td>@team.EndYear</td>
-                    <td>
-                        <_Tooltip Text="Edit">
-                            <img class="can-click" 
-                                 src="images/pencil.png" 
-                                 height="25" 
-                                 width="25" 
-                                 @onclick="@(_ => _navigation.NavigateTo($"{_viewModel.RoutePrefix}/Edit/{team.Id}"))" />
-                        </_Tooltip>                        
-                    </td>
-                    <td>
-                        <_Tooltip Text="Delete">
-                            <img class="can-click" 
-                                 src="images/trash.png" 
-                                 height="25" 
-                                 width="25" 
-                                 @onclick="@(_ => ShowConfirm(team.Id))" />
-                        </_Tooltip>
-                    </td>
-                </tr>
-            }
-        </tbody>
-    </table>
+    <_Table Items="_viewModel.Teams" 
+            ItemsPerPage="10"                     
+            TItem="TeamViewModel">
+        <HeaderTemplate>
+            <th scope="col">Franchise</th>
+            <th scope="col">Name</th>
+            <th scope="col">Location</th>
+            <th scope="col">Nickname</th>
+            <th scope="col">Abbreviation</th>
+            <th scope="col">Begin Year</th>
+            <th scope="col">End Year</th>
+            <th scope="col"></th>
+            <th scope="col"></th>
+        </HeaderTemplate>
+        <RowTemplate>
+            <td>@context.FranchiseName</td>
+            <td>@context.Name</td>
+            <td>@context.Location</td>
+            <td>@context.Nickname</td>
+            <td>@context.Abbreviation</td>
+            <td>@context.BeginYear</td>
+            <td>@context.EndYear</td>
+            <td>
+                <_Tooltip Text="Edit">
+                    <img class="can-click" 
+                            src="images/pencil.png" 
+                            height="25" 
+                            width="25" 
+                            @onclick="@(_ => _navigation.NavigateTo($"{_viewModel.RoutePrefix}/Edit/{context.Id}"))" />
+                </_Tooltip>                        
+            </td>
+            <td>
+                <_Tooltip Text="Delete">
+                    <img class="can-click" 
+                            src="images/trash.png" 
+                            height="25" 
+                            width="25" 
+                            @onclick="@(_ => ShowConfirm(context.Id))" />
+                </_Tooltip>
+            </td>
+        </RowTemplate>
+    </_Table>
     <div class="row">
         <div class="col-md-12" style="text-align: center">
             <div class="col-md-12" style="text-align: center">

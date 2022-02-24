@@ -25,53 +25,48 @@ else
         </div>
     </div>
     <br />
-    <table class="table" style="border: 1px solid black;">
-        <thead>
-            <tr>
-                <th></th>
-                <th>Franchise</th>
-                <th>Team</th>
-                <th>Size</th>
-                <th>Image Type</th>
-                <th></th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var pewter in _viewModel.Pewters)
-            {
-                <tr>
-                    <td>
-                        <img src="data:image/jpg;base64,@Convert.ToBase64String(File.ReadAllBytes(@pewter.ImagePath))"
-                             height="40" 
-                             width="40" />                        
-                    </td>
-                    <td>@pewter.FranchiseName</td>
-                    <td>@pewter.TeamName</td>
-                    <td>@pewter.SizeName</td>
-                    <td>@pewter.ImageTypeName</td>
-                    <td>
-                        <_Tooltip Text="Edit">
-                            <img class="can-click" 
-                                 src="images/pencil.png" 
-                                 height="25" 
-                                 width="25" 
-                                 @onclick="@(_ => _navigation.NavigateTo($"{_viewModel.RoutePrefix}/Edit/{pewter.Id}"))" />
-                        </_Tooltip>                        
-                    </td>
-                    <td>
-                        <_Tooltip Text="Delete">
-                            <img class="can-click" 
-                                 src="images/trash.png" 
-                                 height="25" 
-                                 width="25" 
-                                 @onclick="@(_ => ShowConfirm(pewter.Id))" />
-                        </_Tooltip>
-                    </td>
-                </tr>
-            }
-        </tbody>
-    </table>
+    <_Table Items="_viewModel.Pewters" 
+            ItemsPerPage="10"                     
+            TItem="PewterViewModel">
+        <HeaderTemplate>
+            <th scope="col"></th>
+            <th scope="col">Franchise</th>
+            <th scope="col">Team</th>
+            <th scope="col">Size</th>
+            <th scope="col">Image Type</th>
+            <th scope="col"></th>
+            <th scope="col"></th>
+        </HeaderTemplate>
+        <RowTemplate>
+            <td>
+                <img src="data:image/jpg;base64,@Convert.ToBase64String(File.ReadAllBytes(@context.ImagePath))"
+                     height="40" 
+                     width="40" />                        
+            </td>
+            <td>@context.FranchiseName</td>
+            <td>@context.TeamName</td>
+            <td>@context.SizeName</td>
+            <td>@context.ImageTypeName</td>
+            <td>
+                <_Tooltip Text="Edit">
+                    <img class="can-click" 
+                         src="images/pencil.png" 
+                         height="25" 
+                         width="25" 
+                         @onclick="@(_ => _navigation.NavigateTo($"{_viewModel.RoutePrefix}/Edit/{context.Id}"))" />
+                </_Tooltip>                        
+            </td>
+            <td>
+                <_Tooltip Text="Delete">
+                    <img class="can-click" 
+                         src="images/trash.png" 
+                         height="25" 
+                         width="25" 
+                         @onclick="@(_ => ShowConfirm(context.Id))" />
+                </_Tooltip>
+            </td>
+        </RowTemplate>
+    </_Table>
     <div class="row">
         <div class="col-md-12" style="text-align: center">
             <div class="col-md-12" style="text-align: center">

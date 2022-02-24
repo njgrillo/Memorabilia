@@ -24,45 +24,40 @@ else
         </div>
     </div>
     <br />
-    <table class="table" style="border: 1px solid black;">
-        <thead>
-            <tr>
-                <th>Sport</th>
-                <th>Name</th>
-                <th>Abbreviation</th>
-                <th></th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var conference in _viewModel.Conferences)
-            {
-                <tr>
-                    <td>@conference.SportLeagueLevelName</td>
-                    <td>@conference.Name</td>
-                    <td>@conference.Abbreviation</td>
-                    <td>
-                        <_Tooltip Text="Edit">
-                            <img class="can-click" 
-                                 src="images/pencil.png" 
-                                 height="25" 
-                                 width="25" 
-                                 @onclick="@(_ => _navigation.NavigateTo($"{_viewModel.RoutePrefix}/Edit/{conference.Id}"))" />
-                        </_Tooltip>                        
-                    </td>
-                    <td>
-                        <_Tooltip Text="Delete">
-                            <img class="can-click" 
-                                 src="images/trash.png" 
-                                 height="25" 
-                                 width="25" 
-                                 @onclick="@(_ => ShowConfirm(conference.Id))" />
-                        </_Tooltip>
-                    </td>
-                </tr>
-            }
-        </tbody>
-    </table>
+    <_Table Items="_viewModel.Conferences" 
+            ItemsPerPage="10"                     
+            TItem="ConferenceViewModel">
+        <HeaderTemplate>
+            <th scope="col">Sport</th>
+            <th scope="col">Name</th>
+            <th scope="col">Abbreviation</th>
+            <th scope="col"></th>
+            <th scope="col"></th>
+        </HeaderTemplate>
+        <RowTemplate>
+            <td>@context.SportLeagueLevelName</td>
+            <td>@context.Name</td>
+            <td>@context.Abbreviation</td>
+            <td>
+                <_Tooltip Text="Edit">
+                    <img class="can-click" 
+                            src="images/pencil.png" 
+                            height="25" 
+                            width="25" 
+                            @onclick="@(_ => _navigation.NavigateTo($"{_viewModel.RoutePrefix}/Edit/{context.Id}"))" />
+                </_Tooltip>                        
+            </td>
+            <td>
+                <_Tooltip Text="Delete">
+                    <img class="can-click" 
+                            src="images/trash.png" 
+                            height="25" 
+                            width="25" 
+                            @onclick="@(_ => ShowConfirm(context.Id))" />
+                </_Tooltip>
+            </td>
+        </RowTemplate>
+    </_Table>
     <div class="row">
         <div class="col-md-12" style="text-align: center">
             <div class="col-md-12" style="text-align: center">

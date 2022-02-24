@@ -49,83 +49,90 @@ using Memorabilia.Domain;
 #nullable disable
 #nullable restore
 #line 6 "D:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\_Imports.razor"
-using Memorabilia.Web;
+using Memorabilia.Domain.Constants;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
 #line 7 "D:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\_Imports.razor"
-using Memorabilia.Web.Controls;
+using Memorabilia.Web;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
 #line 8 "D:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\_Imports.razor"
-using Memorabilia.Web.Shared;
+using Memorabilia.Web.Controls;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
 #line 9 "D:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\_Imports.razor"
-using Microsoft.AspNetCore.Authorization;
+using Memorabilia.Web.Shared;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
 #line 10 "D:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\_Imports.razor"
-using Microsoft.AspNetCore.Components.Authorization;
+using Microsoft.AspNetCore.Authorization;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
 #line 11 "D:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\_Imports.razor"
-using Microsoft.AspNetCore.Components.Forms;
+using Microsoft.AspNetCore.Components.Authorization;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
 #line 12 "D:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\_Imports.razor"
-using Microsoft.AspNetCore.Components.Routing;
+using Microsoft.AspNetCore.Components.Forms;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
 #line 13 "D:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\_Imports.razor"
-using Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage;
+using Microsoft.AspNetCore.Components.Routing;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
 #line 14 "D:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\_Imports.razor"
-using Microsoft.AspNetCore.Components.Web;
+using Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
 #line 15 "D:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\_Imports.razor"
-using Microsoft.AspNetCore.Components.Web.Virtualization;
+using Microsoft.AspNetCore.Components.Web;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
 #line 16 "D:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\_Imports.razor"
-using Microsoft.JSInterop;
+using Microsoft.AspNetCore.Components.Web.Virtualization;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
 #line 17 "D:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\_Imports.razor"
+using Microsoft.JSInterop;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 18 "D:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\_Imports.razor"
 using System.Net.Http;
 
 #line default
@@ -145,6 +152,13 @@ using Memorabilia.Application.Features.Admin.Color;
 #line default
 #line hidden
 #nullable disable
+#nullable restore
+#line 5 "D:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\Pages\Admin\Colors\EditColor.razor"
+using Memorabilia.Web.Controls.Color;
+
+#line default
+#line hidden
+#nullable disable
     [Microsoft.AspNetCore.Components.RouteAttribute("/Colors/Edit/{id:int}")]
     public partial class EditColor : Microsoft.AspNetCore.Components.ComponentBase
     {
@@ -154,29 +168,31 @@ using Memorabilia.Application.Features.Admin.Color;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 54 "D:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\Pages\Admin\Colors\EditColor.razor"
+#line 24 "D:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\Pages\Admin\Colors\EditColor.razor"
        
     [Parameter]
     public int Id { get; set; }
 
-    private SaveDomainViewModel _viewModel = new SaveDomainViewModel();
+    private EditModeType _editModeType;
+    private SaveDomainViewModel _viewModel = new SaveDomainViewModel();    
 
-    protected async Task HandleValidSubmit()
+    protected override async Task OnInitializedAsync()
+    {
+        _editModeType = Id > 0 ? EditModeType.Edit : EditModeType.Add;
+
+        if (Id == 0)
+            return;
+
+        var query = new GetColor.Query(Id);
+
+        _viewModel = new SaveDomainViewModel(await _queryRouter.Send(query).ConfigureAwait(false));
+    }
+
+    protected async Task Save()
     {
         var command = new SaveColor.Command(_viewModel);
 
         await _commandRouter.Send(command).ConfigureAwait(false);
-
-        _navigation.NavigateTo("Colors");
-
-        _toastService.ShowSuccess("Color was saved successfully!", _viewModel.PageTitle);
-    }
-
-    protected override async Task OnInitializedAsync()
-    {
-        var query = new GetColor.Query(Id);
-
-        _viewModel = new SaveDomainViewModel(await _queryRouter.Send(query).ConfigureAwait(false));
     }
 
 #line default

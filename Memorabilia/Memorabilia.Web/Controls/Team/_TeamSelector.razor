@@ -6,8 +6,8 @@
 @inject QueryRouter _queryRouter
 
 <BlazoredTypeahead @bind-Value="_viewModel"
-                   SearchMethod="SearchTeams"                   
-                   Placeholder="Search by team...">
+                    SearchMethod="SearchTeams"                   
+                    Placeholder="Search by team...">
     <SelectedTemplate Context="team">
         @team.DisplayName
     </SelectedTemplate>
@@ -45,6 +45,7 @@
         }
     </tbody>
 </table>
+
 @code {
     [Parameter]
     public bool AllowMultiple { get; set; }

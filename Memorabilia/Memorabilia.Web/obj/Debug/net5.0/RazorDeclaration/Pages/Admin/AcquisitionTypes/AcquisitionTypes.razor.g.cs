@@ -49,83 +49,90 @@ using Memorabilia.Domain;
 #nullable disable
 #nullable restore
 #line 6 "D:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\_Imports.razor"
-using Memorabilia.Web;
+using Memorabilia.Domain.Constants;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
 #line 7 "D:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\_Imports.razor"
-using Memorabilia.Web.Controls;
+using Memorabilia.Web;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
 #line 8 "D:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\_Imports.razor"
-using Memorabilia.Web.Shared;
+using Memorabilia.Web.Controls;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
 #line 9 "D:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\_Imports.razor"
-using Microsoft.AspNetCore.Authorization;
+using Memorabilia.Web.Shared;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
 #line 10 "D:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\_Imports.razor"
-using Microsoft.AspNetCore.Components.Authorization;
+using Microsoft.AspNetCore.Authorization;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
 #line 11 "D:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\_Imports.razor"
-using Microsoft.AspNetCore.Components.Forms;
+using Microsoft.AspNetCore.Components.Authorization;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
 #line 12 "D:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\_Imports.razor"
-using Microsoft.AspNetCore.Components.Routing;
+using Microsoft.AspNetCore.Components.Forms;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
 #line 13 "D:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\_Imports.razor"
-using Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage;
+using Microsoft.AspNetCore.Components.Routing;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
 #line 14 "D:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\_Imports.razor"
-using Microsoft.AspNetCore.Components.Web;
+using Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
 #line 15 "D:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\_Imports.razor"
-using Microsoft.AspNetCore.Components.Web.Virtualization;
+using Microsoft.AspNetCore.Components.Web;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
 #line 16 "D:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\_Imports.razor"
-using Microsoft.JSInterop;
+using Microsoft.AspNetCore.Components.Web.Virtualization;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
 #line 17 "D:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\_Imports.razor"
+using Microsoft.JSInterop;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 18 "D:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\_Imports.razor"
 using System.Net.Http;
 
 #line default
@@ -154,31 +161,15 @@ using Memorabilia.Application.Features.Admin.AcquisitionType;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 74 "D:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\Pages\Admin\AcquisitionTypes\AcquisitionTypes.razor"
+#line 24 "D:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\Pages\Admin\AcquisitionTypes\AcquisitionTypes.razor"
        
-    private PopConfirm _deleteDialog;
-    private int _deletedItemId;
     private AcquisitionTypesViewModel _viewModel;
 
-    protected async Task Delete(bool confirm)
+    protected async Task Delete(SaveDomainViewModel viewModel)
     {
-        if (!confirm)
-        {
-            _deletedItemId = 0;
-            return;
-        }
-
-        var deletedItem = _viewModel.DomainEntities.Single(domainEntity => domainEntity.Id == _deletedItemId);
-        var viewModel = new SaveDomainViewModel(deletedItem);
-        viewModel.IsDeleted = true;
-
         var command = new SaveAcquisitionType.Command(viewModel);
 
         await _commandRouter.Send(command).ConfigureAwait(false);
-
-        _viewModel.DomainEntities.Remove(deletedItem);
-
-        _toastService.ShowSuccess($"{_viewModel.ItemTitle} was deleted successfully!", _viewModel.PageTitle);
     }
 
     protected override async Task OnInitializedAsync()
@@ -193,16 +184,9 @@ using Memorabilia.Application.Features.Admin.AcquisitionType;
         _viewModel = await _queryRouter.Send(query).ConfigureAwait(false);
     }
 
-    protected void ShowConfirm(int id)
-    {
-        _deletedItemId = id;
-        _deleteDialog.ShowPop();
-    }
-
 #line default
 #line hidden
 #nullable disable
-        [global::Microsoft.AspNetCore.Components.InjectAttribute] private IToastService _toastService { get; set; }
         [global::Microsoft.AspNetCore.Components.InjectAttribute] private QueryRouter _queryRouter { get; set; }
         [global::Microsoft.AspNetCore.Components.InjectAttribute] private NavigationManager _navigation { get; set; }
         [global::Microsoft.AspNetCore.Components.InjectAttribute] private ProtectedLocalStorage _localStorage { get; set; }

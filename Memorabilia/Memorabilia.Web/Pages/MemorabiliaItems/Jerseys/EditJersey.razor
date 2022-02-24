@@ -74,6 +74,15 @@ else
                         </div> 
                     </div>
                 </div>
+                <div class="row">     
+                    <div class="col-lg-6" /> 
+                    <div class="col-lg-6">
+                        <div class="form-group" hidden="@(!_viewModel.DisplayGameDate)">
+                            <label for="gameDate">Game Date</label>
+                            <InputDate id="gameDate" class="form-control" @bind-Value="_viewModel.GameDate" />
+                        </div>                        
+                    </div>                     
+                </div>
                 <div class="row">
                     <div class="col-lg-6">
                         <div class="form-group">

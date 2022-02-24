@@ -1,0 +1,33 @@
+﻿@using Memorabilia.Application.Features.Admin
+
+<_DomainItemEditor ImagePath="images/magazinetypes.jpg"
+                   Item="@Item"
+                   ItemName="Magazine Type"
+                   NavigationPath="MagazineTypes"
+                   OnSave="Save"
+                   PageTitle="@_pageTitle"/>
+
+@code {
+    [Parameter]
+    public EditModeType EditModeType { get; set; }
+
+    [Parameter]
+    public SaveDomainViewModel Item { get; set; } = new SaveDomainViewModel();
+
+    [Parameter]
+    public EventCallback<SaveDomainViewModel> OnSave { get; set; }
+
+    private string _pageTitle;
+
+    protected override Task OnInitializedAsync()
+    {
+        _pageTitle = $"{(EditModeType == EditModeType.Add ? "Add" : "Edit")} Magazine Type";
+
+        return base.OnInitializedAsync();
+    }
+
+    protected async Task Save()
+    {
+        await OnSave.InvokeAsync(Item);
+    }
+}

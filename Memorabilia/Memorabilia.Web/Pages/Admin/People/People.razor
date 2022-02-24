@@ -24,57 +24,52 @@ else
         </div>
     </div>
     <br />
-    <table class="table" style="border: 1px solid black;">
-        <thead>
-            <tr>
-                <th>Display Name</th>
-                <th>First Name</th>
-                <th>Last Name</th>
-                <th>Middle Name</th>
-                <th>Suffix</th>
-                <th>Nickname</th>
-                <th>Legal Name</th>
-                <th>Birth Date</th>
-                <th>Death Date</th>
-                <th></th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var person in _viewModel.People)
-            {
-                <tr>
-                    <td>@person.DisplayName</td>
-                    <td>@person.FirstName</td>
-                    <td>@person.LastName</td>
-                    <td>@person.MiddleName</td>
-                    <td>@person.Suffix</td>
-                    <td>@person.Nickname</td>
-                    <td>@person.LegalName</td>
-                    <td>@person.BirthDate</td>
-                    <td>@person.DeathDate</td>
-                    <td>
-                        <_Tooltip Text="Edit">
-                            <img class="can-click" 
-                                 src="images/pencil.png" 
-                                 height="25" 
-                                 width="25" 
-                                 @onclick="@(_ => _navigation.NavigateTo($"People/Edit/{person.Id}"))" />
-                        </_Tooltip>                        
-                    </td>
-                    <td>
-                        <_Tooltip Text="Delete">
-                            <img class="can-click" 
-                                 src="images/trash.png" 
-                                 height="25" 
-                                 width="25" 
-                                 @onclick="@(_ => ShowConfirm(person.Id))" />
-                        </_Tooltip>
-                    </td>
-                </tr>
-            }
-        </tbody>
-    </table>
+    <_Table Items="_viewModel.People" 
+            ItemsPerPage="10"                     
+            TItem="PersonViewModel">
+        <HeaderTemplate>
+            <th scope="col">Display Name</th>
+            <th scope="col">First Name</th>
+            <th scope="col">Last Name</th>
+            <th scope="col">Middle Name</th>
+            <th scope="col">Suffix</th>
+            <th scope="col">Nickname</th>
+            <th scope="col">Legal Name</th>
+            <th scope="col">Birth Date</th>
+            <th scope="col">Death Date</th>
+            <th scope="col"></th>
+            <th scope="col"></th>
+        </HeaderTemplate>
+        <RowTemplate>
+            <td>@context.DisplayName</td>
+            <td>@context.FirstName</td>
+            <td>@context.LastName</td>
+            <td>@context.MiddleName</td>
+            <td>@context.Suffix</td>
+            <td>@context.Nickname</td>
+            <td>@context.LegalName</td>
+            <td>@context.BirthDate</td>
+            <td>@context.DeathDate</td>
+            <td>
+                <_Tooltip Text="Edit">
+                    <img class="can-click" 
+                            src="images/pencil.png" 
+                            height="25" 
+                            width="25" 
+                            @onclick="@(_ => _navigation.NavigateTo($"People/Edit/{context.Id}"))" />
+                </_Tooltip>                        
+            </td>
+            <td>
+                <_Tooltip Text="Delete">
+                    <img class="can-click" 
+                            src="images/trash.png" 
+                            height="25" 
+                            width="25" 
+                            @onclick="@(_ => ShowConfirm(context.Id))" />
+                </_Tooltip>
+            </td>
+        </RowTemplate>
+    </_Table>
     <div class="row">
         <div class="col-md-12" style="text-align: center">
             <div class="col-md-12" style="text-align: center">

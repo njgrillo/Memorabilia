@@ -36,6 +36,8 @@ namespace Memorabilia.Application.Features.Memorabilia.Basketball
 
         public int CommissionerId { get; set; }
 
+        public bool DisplayGameDate => GameStyleType == GameStyleType.GameUsed;
+
         public DateTime? GameDate { get; set; }
 
         public GameStyleType GameStyleType => GameStyleType.Find(GameStyleTypeId);

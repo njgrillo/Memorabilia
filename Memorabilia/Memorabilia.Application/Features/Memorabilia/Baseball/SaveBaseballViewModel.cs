@@ -51,7 +51,7 @@ namespace Memorabilia.Application.Features.Memorabilia.Baseball
 
         public bool DisplayBaseballTypeYear => DisplayBaseballType && BaseballType.CanHaveYear(BaseballType);
 
-        //public bool DisplayGameDate => GameStyleType.IsGameWorthly(GameStyleType);
+        public bool DisplayGameDate => BaseballType.IsGameWorthly(BaseballType) && GameStyleType.IsGameWorthly(GameStyleType);
 
         public DateTime? GameDate { get; set; }
 
@@ -99,6 +99,6 @@ namespace Memorabilia.Application.Features.Memorabilia.Baseball
 
         public SportLeagueLevel SportLeagueLevel => SportLeagueLevel.MajorLeagueBaseball;
 
-        public List<SaveTeamViewModel> Teams { get; set; }
+        public List<SaveTeamViewModel> Teams { get; set; } = new();
     }
 }

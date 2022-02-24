@@ -1,0 +1,38 @@
+﻿using Demo.Framework.Handler;
+using Memorabilia.Domain;
+using System.Threading.Tasks;
+
+namespace Memorabilia.Application.Features.Memorabilia.HockeyStick
+{
+    public class GetHockeyStick
+    {
+        public class Handler : QueryHandler<Query, HockeyStickViewModel>
+        {
+            private readonly IMemorabiliaRepository _memorabiliaRepository;
+
+            public Handler(IMemorabiliaRepository memorabiliaRepository)
+            {
+                _memorabiliaRepository = memorabiliaRepository;
+            }
+
+            protected override async Task<HockeyStickViewModel> Handle(Query query)
+            {
+                var memorabilia = await _memorabiliaRepository.Get(query.MemorabiliaId).ConfigureAwait(false);
+
+                var viewModel = new HockeyStickViewModel(memorabilia);
+
+                return viewModel;
+            }
+        }
+
+        public class Query : IQuery<HockeyStickViewModel>
+        {
+            public Query(int memorabiliaId)
+            {
+                MemorabiliaId = memorabiliaId;
+            }
+
+            public int MemorabiliaId { get; }
+        }
+    }
+}

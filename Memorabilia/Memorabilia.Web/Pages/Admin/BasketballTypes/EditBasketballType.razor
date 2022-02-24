@@ -2,6 +2,7 @@
 
 @using Memorabilia.Application.Features.Admin
 @using Memorabilia.Application.Features.Admin.BasketballType
+@using Memorabilia.Web.Controls.Basketball
 
 @inject CommandRouter _commandRouter
 @inject ProtectedLocalStorage _localStorage
@@ -15,56 +16,34 @@
 }
 else
 {
-    <div class="row">
-        <div class="col-md-12" style="text-align: center">
-            <h1>@_viewModel.PageTitle</h1>
-        </div>
-    </div>
-    <br />
-    <div style="border: 1px solid black; margin-top: 2%; margin-bottom: 2%; margin-left: 2%; margin-right: 2%;">
-        <div class="row" style="margin-top: 2%; margin-bottom: 2%; margin-left: 1%; margin-right: 1%;">
-            <div class="col-lg-12" style="text-align: center">
-                <img src="images/basketballtypes.jpg" alt="Image" height="150" width="150" />
-            </div>
-            <EditForm Model="_viewModel" OnValidSubmit="HandleValidSubmit">
-                <DataAnnotationsValidator />
-                <ValidationSummary />
-                <_DomainEditor DomainItem="_viewModel" />
-                <div class="text-right">
-                    <button type="submit" class="btn btn-primary">Save</button>
-                </div>
-            </EditForm>
-        </div>
-        <div class="row">
-            <div class="col-md-12" style="text-align: center">
-                <a href="BasketballTypes">Back</a>
-            </div>
-        </div>
-        <br />
-    </div>
+    <_BasketballTypeEditor EditModeType="@_editModeType" 
+                           Item="@_viewModel"                  
+                           OnSave="Save" />
 }
 
 @code {
     [Parameter]
     public int Id { get; set; }
 
-    private SaveDomainViewModel _viewModel = new SaveDomainViewModel();
+    private EditModeType _editModeType;
+    private SaveDomainViewModel _viewModel = new SaveDomainViewModel();    
 
-    protected async Task HandleValidSubmit()
+    protected override async Task OnInitializedAsync()
+    {
+        _editModeType = Id > 0 ? EditModeType.Edit : EditModeType.Add;
+
+        if (Id == 0)
+            return;
+
+        var query = new GetBasketballType.Query(Id);
+
+        _viewModel = new SaveDomainViewModel(await _queryRouter.Send(query).ConfigureAwait(false));
+    }
+
+    protected async Task Save()
     {
         var command = new SaveBasketballType.Command(_viewModel);
 
         await _commandRouter.Send(command).ConfigureAwait(false);
-
-        _navigation.NavigateTo("BasketballTypes");
-
-        _toastService.ShowSuccess("Basketball Type was saved successfully!", _viewModel.PageTitle);
-    }
-
-    protected override async Task OnInitializedAsync()
-    {
-        var query = new GetBasketballType.Query(Id);
-
-        _viewModel = new SaveDomainViewModel(await _queryRouter.Send(query).ConfigureAwait(false));
     }
 }

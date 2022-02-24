@@ -24,43 +24,38 @@ else
         </div>
     </div>
     <br />
-    <table class="table" style="border: 1px solid black;">
-        <thead>
-            <tr>
-                <th>Item Type</th>
-                <th>Spot</th>
-                <th></th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var itemTypeSpot in _viewModel.ItemTypeSpots)
-            {
-                <tr>
-                    <td>@itemTypeSpot.ItemTypeName</td>
-                    <td>@itemTypeSpot.SpotName</td>
-                    <td>
-                        <_Tooltip Text="Edit">
-                            <img class="can-click" 
-                                 src="images/pencil.png" 
-                                 height="25" 
-                                 width="25" 
-                                 @onclick="@(_ => _navigation.NavigateTo($"{_viewModel.RoutePrefix}/Edit/{itemTypeSpot.Id}"))" />
-                        </_Tooltip>                        
-                    </td>
-                    <td>
-                        <_Tooltip Text="Delete">
-                            <img class="can-click" 
-                                 src="images/trash.png" 
-                                 height="25" 
-                                 width="25" 
-                                 @onclick="@(_ => ShowConfirm(itemTypeSpot.Id))" />
-                        </_Tooltip>
-                    </td>
-                </tr>
-            }
-        </tbody>
-    </table>
+    <_Table Items="_viewModel.ItemTypeSpots" 
+            ItemsPerPage="10"                     
+            TItem="ItemTypeSpotViewModel">
+        <HeaderTemplate>
+            <th scope="col">Item Type</th>
+            <th scope="col">Spot</th>
+            <th scope="col"></th>
+            <th scope="col"></th>
+        </HeaderTemplate>
+        <RowTemplate>
+            <td>@context.ItemTypeName</td>
+            <td>@context.SpotName</td>
+            <td>
+                <_Tooltip Text="Edit">
+                    <img class="can-click" 
+                            src="images/pencil.png" 
+                            height="25" 
+                            width="25" 
+                            @onclick="@(_ => _navigation.NavigateTo($"{_viewModel.RoutePrefix}/Edit/{context.Id}"))" />
+                </_Tooltip>                        
+            </td>
+            <td>
+                <_Tooltip Text="Delete">
+                    <img class="can-click" 
+                            src="images/trash.png" 
+                            height="25" 
+                            width="25" 
+                            @onclick="@(_ => ShowConfirm(context.Id))" />
+                </_Tooltip>
+            </td>
+        </RowTemplate>
+    </_Table>
     <div class="row">
         <div class="col-md-12" style="text-align: center">
             <div class="col-md-12" style="text-align: center">

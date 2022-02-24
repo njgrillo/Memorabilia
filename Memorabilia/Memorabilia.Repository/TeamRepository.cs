@@ -58,7 +58,6 @@ namespace Memorabilia.Repository
                                                          .ThenBy(team => team.Name);
             }
 
-
             return (await Team.ToListAsync()
                               .ConfigureAwait(false)).OrderBy(team => team.Franchise.SportLeagueLevelName)
                                                      .ThenBy(team => team.Name);

@@ -1,0 +1,122 @@
+﻿@typeparam TItem
+
+@if (!Items.Any())
+{
+    <div class="none-indicator">(none)</div>
+}
+else
+{
+  <table class="table table-striped table-bordered">
+    <thead class="thead-dark">
+        <tr>
+            @HeaderTemplate
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in _currentDisplay)
+        {
+            <tr>
+                @RowTemplate(item)
+            </tr>
+        }
+    </tbody>
+    <tfoot>
+        <tr>
+            @FooterTemplate
+        </tr>
+    </tfoot>
+  </table>
+
+  @if (TotalPages() > 1)
+  {
+    <div class="pager-display">
+        @if (_currentPage == 1)
+        {
+            <button disabled>&laquo;</button>
+            <button disabled>&lsaquo;</button>
+        }
+        else
+        {
+            <button @onclick="@MoveFirst" title="Move First">&laquo;</button>
+            <button @onclick="@MoveBack" title="Move Back">&lsaquo;</button>
+        }
+        <span>@_currentPage of @TotalPages() </span>
+        @if (!AtLastPage())
+        {
+            <button @onclick="@MoveNext" title="Move Next">&rsaquo;</button>
+            <button @onclick="@MoveLast" title="Move Last">&raquo;</button>
+        }
+        else
+        {
+            <button disabled>&rsaquo;</button>
+            <button disabled>&raquo;</button>
+        }
+    </div>
+  }
+}
+
+@code {
+    [Parameter]
+    public RenderFragment FooterTemplate { get; set; }   
+
+    [Parameter]
+    public RenderFragment HeaderTemplate { get; set; }    
+
+    [Parameter]
+    public List<TItem> Items { get; set; }
+
+    [Parameter]
+    public int ItemsPerPage { get; set; } = 10;   
+
+    [Parameter]
+    public RenderFragment<TItem> RowTemplate { get; set; }
+
+    private List<TItem> _currentDisplay;
+    private int _currentPage = 1;  
+    private int _totalCount;
+
+    protected override void OnParametersSet()
+    {
+        UpdateDisplay();
+        _totalCount = Items.Count();
+    }
+
+    private bool AtLastPage()
+    {
+        return _currentPage >= TotalPages();
+    }
+
+    private void MoveBack()
+    {
+        _currentPage--;
+        UpdateDisplay();
+    }
+
+    private void MoveFirst()
+    {
+        _currentPage = 1;
+        UpdateDisplay();
+    }
+
+    private void MoveLast()
+    {
+        _currentPage = TotalPages();
+        UpdateDisplay();
+    }
+
+    private void MoveNext()
+    {
+        _currentPage++;
+        UpdateDisplay();
+    }
+
+    private int TotalPages()
+    {
+        return Convert.ToInt32(Math.Ceiling(_totalCount / Convert.ToDecimal(ItemsPerPage)));
+    }
+
+    private void UpdateDisplay()
+    {
+        _currentDisplay = Items.Skip((_currentPage - 1) * ItemsPerPage).Take(ItemsPerPage).ToList();
+    }  
+}

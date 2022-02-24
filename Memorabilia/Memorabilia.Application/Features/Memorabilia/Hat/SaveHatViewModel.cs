@@ -30,9 +30,7 @@ namespace Memorabilia.Application.Features.Memorabilia.Hat
         [Range(1, int.MaxValue, ErrorMessage = "Brand is required.")]
         public int BrandId { get; set; }
 
-        //public bool DisplayGameDate => DisplayGameStyleType && GameStyleType.IsGameWorthly(GameStyleType);
-
-        //public bool DisplayGameStyleType => HatQualityTypeId == HatQualityType.Authentic.Id;
+        public bool DisplayGameDate => GameStyleType == GameStyleType.GameUsed;
 
         public DateTime? GameDate { get; set; }
 

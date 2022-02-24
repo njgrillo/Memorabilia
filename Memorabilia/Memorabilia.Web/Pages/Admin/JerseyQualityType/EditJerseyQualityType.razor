@@ -2,12 +2,10 @@
 
 @using Memorabilia.Application.Features.Admin
 @using Memorabilia.Application.Features.Admin.JerseyQualityType
+@using Memorabilia.Web.Controls.Jersey
 
 @inject CommandRouter _commandRouter
-@inject ProtectedLocalStorage _localStorage
-@inject NavigationManager _navigation
 @inject QueryRouter _queryRouter
-@inject IToastService _toastService
 
 @if (_viewModel == null)
 {
@@ -15,56 +13,34 @@
 }
 else
 {
-    <div class="row">
-        <div class="col-md-12" style="text-align: center">
-            <h1>@_viewModel.PageTitle</h1>
-        </div>
-    </div>
-    <br />
-    <div style="border: 1px solid black; margin-top: 2%; margin-bottom: 2%; margin-left: 2%; margin-right: 2%;">
-        <div class="row" style="margin-top: 2%; margin-bottom: 2%; margin-left: 1%; margin-right: 1%;">
-            <div class="col-lg-12" style="text-align: center">
-                <img src="images/jerseytypes.jpg" alt="Image" height="150" width="150" />
-            </div>
-            <EditForm Model="_viewModel" OnValidSubmit="HandleValidSubmit">
-                <DataAnnotationsValidator />
-                <ValidationSummary />
-                <_DomainEditor DomainItem="_viewModel" />
-                <div class="text-right">
-                    <button Type="submit" class="btn btn-primary">Save</button>
-                </div>
-            </EditForm>
-        </div>
-        <div class="row">
-            <div class="col-md-12" style="text-align: center">
-                <a href="JerseyQualityTypes">Back</a>
-            </div>
-        </div>
-        <br />
-    </div>
+    <_JerseyQualityTypeEditor EditModeType="@_editModeType" 
+                              Item="@_viewModel"                  
+                              OnSave="Save" />
 }
 
 @code {
     [Parameter]
     public int Id { get; set; }
 
-    private SaveDomainViewModel _viewModel = new SaveDomainViewModel();
+    private EditModeType _editModeType;
+    private SaveDomainViewModel _viewModel = new SaveDomainViewModel();    
 
-    protected async Task HandleValidSubmit()
+    protected override async Task OnInitializedAsync()
+    {
+        _editModeType = Id > 0 ? EditModeType.Edit : EditModeType.Add;
+
+        if (Id == 0)
+            return;
+
+        var query = new GetJerseyQualityType.Query(Id);
+
+        _viewModel = new SaveDomainViewModel(await _queryRouter.Send(query).ConfigureAwait(false));
+    }
+
+    protected async Task Save()
     {
         var command = new SaveJerseyQualityType.Command(_viewModel);
 
         await _commandRouter.Send(command).ConfigureAwait(false);
-
-        _navigation.NavigateTo("JerseyQualityTypes");
-
-        _toastService.ShowSuccess("Jersey Quality Type was saved successfully!", _viewModel.PageTitle);
-    }
-
-    protected override async Task OnInitializedAsync()
-    {
-        var query = new GetJerseyQualityType.Query(Id);
-
-        _viewModel = new SaveDomainViewModel(await _queryRouter.Send(query).ConfigureAwait(false));
     }
 }

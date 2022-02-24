@@ -49,83 +49,90 @@ using Memorabilia.Domain;
 #nullable disable
 #nullable restore
 #line 6 "D:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\_Imports.razor"
-using Memorabilia.Web;
+using Memorabilia.Domain.Constants;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
 #line 7 "D:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\_Imports.razor"
-using Memorabilia.Web.Controls;
+using Memorabilia.Web;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
 #line 8 "D:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\_Imports.razor"
-using Memorabilia.Web.Shared;
+using Memorabilia.Web.Controls;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
 #line 9 "D:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\_Imports.razor"
-using Microsoft.AspNetCore.Authorization;
+using Memorabilia.Web.Shared;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
 #line 10 "D:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\_Imports.razor"
-using Microsoft.AspNetCore.Components.Authorization;
+using Microsoft.AspNetCore.Authorization;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
 #line 11 "D:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\_Imports.razor"
-using Microsoft.AspNetCore.Components.Forms;
+using Microsoft.AspNetCore.Components.Authorization;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
 #line 12 "D:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\_Imports.razor"
-using Microsoft.AspNetCore.Components.Routing;
+using Microsoft.AspNetCore.Components.Forms;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
 #line 13 "D:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\_Imports.razor"
-using Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage;
+using Microsoft.AspNetCore.Components.Routing;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
 #line 14 "D:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\_Imports.razor"
-using Microsoft.AspNetCore.Components.Web;
+using Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
 #line 15 "D:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\_Imports.razor"
-using Microsoft.AspNetCore.Components.Web.Virtualization;
+using Microsoft.AspNetCore.Components.Web;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
 #line 16 "D:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\_Imports.razor"
-using Microsoft.JSInterop;
+using Microsoft.AspNetCore.Components.Web.Virtualization;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
 #line 17 "D:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\_Imports.razor"
+using Microsoft.JSInterop;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 18 "D:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\_Imports.razor"
 using System.Net.Http;
 
 #line default
@@ -145,6 +152,13 @@ using Memorabilia.Application.Features.Admin.Condition;
 #line default
 #line hidden
 #nullable disable
+#nullable restore
+#line 5 "D:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\Pages\Admin\Conditions\EditCondition.razor"
+using Memorabilia.Web.Controls.Condition;
+
+#line default
+#line hidden
+#nullable disable
     [Microsoft.AspNetCore.Components.RouteAttribute("/Conditions/Edit/{id:int}")]
     public partial class EditCondition : Microsoft.AspNetCore.Components.ComponentBase
     {
@@ -154,38 +168,37 @@ using Memorabilia.Application.Features.Admin.Condition;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 47 "D:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\Pages\Admin\Conditions\EditCondition.razor"
+#line 21 "D:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\Pages\Admin\Conditions\EditCondition.razor"
        
     [Parameter]
     public int Id { get; set; }
 
-    private SaveDomainViewModel _viewModel = new SaveDomainViewModel();
-
-    protected async Task HandleValidSubmit()
-    {
-        var command = new SaveCondition.Command(_viewModel);
-
-        await _commandRouter.Send(command).ConfigureAwait(false);
-
-        _navigation.NavigateTo("Conditions");
-
-        _toastService.ShowSuccess("Condition was saved successfully!", _viewModel.PageTitle);
-    }
+    private EditModeType _editModeType;
+    private SaveDomainViewModel _viewModel = new SaveDomainViewModel();    
 
     protected override async Task OnInitializedAsync()
     {
+        _editModeType = Id > 0 ? EditModeType.Edit : EditModeType.Add;
+
+        if (Id == 0)
+            return;
+
         var query = new GetCondition.Query(Id);
 
         _viewModel = new SaveDomainViewModel(await _queryRouter.Send(query).ConfigureAwait(false));
     }
 
+    protected async Task Save()
+    {
+        var command = new SaveCondition.Command(_viewModel);
+
+        await _commandRouter.Send(command).ConfigureAwait(false);
+    }
+
 #line default
 #line hidden
 #nullable disable
-        [global::Microsoft.AspNetCore.Components.InjectAttribute] private IToastService _toastService { get; set; }
         [global::Microsoft.AspNetCore.Components.InjectAttribute] private QueryRouter _queryRouter { get; set; }
-        [global::Microsoft.AspNetCore.Components.InjectAttribute] private NavigationManager _navigation { get; set; }
-        [global::Microsoft.AspNetCore.Components.InjectAttribute] private ProtectedLocalStorage _localStorage { get; set; }
         [global::Microsoft.AspNetCore.Components.InjectAttribute] private CommandRouter _commandRouter { get; set; }
     }
 }

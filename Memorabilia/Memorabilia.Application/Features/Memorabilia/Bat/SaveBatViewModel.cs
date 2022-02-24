@@ -36,6 +36,8 @@ namespace Memorabilia.Application.Features.Memorabilia.Bat
 
         public int ColorId { get; set; }
 
+        public bool DisplayGameDate => GameStyleType == GameStyleType.GameUsed;
+
         public DateTime? GameDate { get; set; }
 
         public GameStyleType GameStyleType => GameStyleType.Find(GameStyleTypeId);
