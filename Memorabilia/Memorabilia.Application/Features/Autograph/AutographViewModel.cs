@@ -18,6 +18,10 @@ namespace Memorabilia.Application.Features.Autograph
 
         public Domain.Entities.Acquisition Acquisition => _autograph.Acquisition;
 
+        public DateTime? AcquisitionDate => Acquisition?.AcquiredDate;
+
+        public string AcquisitionTypeName => AcquisitionType.Find(Acquisition?.AcquisitionTypeId ?? 0)?.Name;
+
         public List<Domain.Entities.AutographAuthentication> Authentications => _autograph.Authentications;
 
         public int ColorId => _autograph.ColorId;
@@ -31,6 +35,10 @@ namespace Memorabilia.Application.Features.Autograph
         public DateTime CreateDate => _autograph.CreateDate;
 
         public decimal? EstimatedValue => _autograph.EstimatedValue;
+
+        public string FormattedAcquisitionDate => AcquisitionDate?.ToString("MM-dd-yyyy") ?? string.Empty;
+
+        public string FormattedEstimatedValue => EstimatedValue?.ToString("c") ?? string.Empty;
 
         public int? Grade => _autograph.Grade;    
 

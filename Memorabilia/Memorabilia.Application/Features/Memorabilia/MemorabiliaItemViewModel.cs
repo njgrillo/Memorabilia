@@ -1,4 +1,5 @@
-﻿using Memorabilia.Domain.Entities;
+﻿using Memorabilia.Application.Features.Autograph;
+using Memorabilia.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,7 +20,9 @@ namespace Memorabilia.Application.Features.Memorabilia
         public Acquisition Acquisition => _memorabilia.MemorabiliaAcquisition.Acquisition;
 
         public string AcquisitionTypeName => Domain.Constants.AcquisitionType.Find(_memorabilia.MemorabiliaAcquisition.Acquisition.AcquisitionTypeId).Name;
-                
+
+        public List<AutographViewModel> Autographs => _memorabilia.Autographs.Select(autograph => new AutographViewModel(autograph)).ToList();
+
         public int AutographsCount => _memorabilia.Autographs.Count();
 
         public string AutographDisplayCount => $"{AutographsCount} Autograph(s)";
@@ -31,6 +34,10 @@ namespace Memorabilia.Application.Features.Memorabilia
         public DateTime CreateDate => _memorabilia.CreateDate;
 
         public decimal? EstimatedValue => _memorabilia.EstimatedValue;
+
+        public string FormattedTotalCost => ((Acquisition?.Cost ?? 0) + _memorabilia.Autographs.Sum(autograph => autograph.Acquisition?.Cost ?? 0)).ToString("c");
+
+        public string FormattedTotalValue => ((EstimatedValue ?? 0) + _memorabilia.Autographs.Sum(autograph => autograph.EstimatedValue ?? 0)).ToString("c");
 
         public bool HasAutographs => _memorabilia.Autographs.Any();
 

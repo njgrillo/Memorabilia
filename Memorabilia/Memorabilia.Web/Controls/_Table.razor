@@ -2,7 +2,7 @@
 
 @if (!Items.Any())
 {
-    <div class="none-indicator">(none)</div>
+    <div class="none-indicator">No Items Found</div>
 }
 else
 {
@@ -16,8 +16,20 @@ else
         @foreach (var item in _currentDisplay)
         {
             <tr>
-                @RowTemplate(item)
+                @RowTemplate(item)                  
             </tr>
+            if (@HasChildItems)
+            {
+                if (@ShowSummary){
+                    <tr style="background-color:#6D7B8D;color:honeydew;border-style:dashed;border-width:2px;border-color:#ECF3F4;">  
+                        @SummaryTemplate(item) 
+                    </tr> 
+                }                
+                <tr>
+                    <td></td>
+                    @SubGridTemplate(item)                    
+                </tr>
+            }            
         }
     </tbody>
     <tfoot>
@@ -57,7 +69,10 @@ else
 
 @code {
     [Parameter]
-    public RenderFragment FooterTemplate { get; set; }   
+    public RenderFragment FooterTemplate { get; set; }  
+
+    [Parameter]
+    public bool HasChildItems { get; set; }
 
     [Parameter]
     public RenderFragment HeaderTemplate { get; set; }    
@@ -70,6 +85,15 @@ else
 
     [Parameter]
     public RenderFragment<TItem> RowTemplate { get; set; }
+
+    [Parameter]
+    public bool ShowSummary { get; set; }
+
+    [Parameter]
+    public RenderFragment<TItem> SubGridTemplate { get; set; }
+
+    [Parameter]
+    public RenderFragment<TItem> SummaryTemplate { get; set; }
 
     private List<TItem> _currentDisplay;
     private int _currentPage = 1;  
