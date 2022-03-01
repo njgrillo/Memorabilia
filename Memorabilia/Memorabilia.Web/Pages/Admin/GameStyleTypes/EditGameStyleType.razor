@@ -37,7 +37,7 @@ else
 
      protected async Task Save()
     {
-        _editModeType = Id > 0 ? EditModeType.Edit : EditModeType.Add;
+        _editModeType = Id > 0 ? EditModeType.Update : EditModeType.Add;
 
         if (Id == 0)
             return;

@@ -22,6 +22,10 @@ namespace Memorabilia.Application.Features.Autograph
 
         public string AcquisitionTypeName => AcquisitionType.Find(Acquisition?.AcquisitionTypeId ?? 0)?.Name;
 
+        public string AuthenticationIconPath => Authentications.Any() ? "images/check.png" : "images/none.png";
+
+        public string AuthenticationTooltip => Authentications.Any() ? "Is Authenticated" : "No Authentications Found";
+
         public List<Domain.Entities.AutographAuthentication> Authentications => _autograph.Authentications;
 
         public int ColorId => _autograph.ColorId;
@@ -38,15 +42,37 @@ namespace Memorabilia.Application.Features.Autograph
 
         public string FormattedAcquisitionDate => AcquisitionDate?.ToString("MM-dd-yyyy") ?? string.Empty;
 
+        public string FormattedCost => Acquisition?.Cost?.ToString("c") ?? string.Empty;
+
         public string FormattedEstimatedValue => EstimatedValue?.ToString("c") ?? string.Empty;
 
         public int? Grade => _autograph.Grade;    
 
         public int Id => _autograph.Id;
 
-        public string ImagePath => !_autograph.Images.Any() ? "wwwroot/images/imagenotavailable.png" : _autograph.Images.First().FilePath;
+        public string ImageDisplayCount
+        {
+            get
+            {
+                if (!Images.Any())
+                    return "No Images Found";
+
+                if (Images.Count == 1)
+                    return "1 Image";
+
+                return $"{Images.Count} Images";
+            }
+        }
+
+        public List<Domain.Entities.AutographImage> Images => _autograph.Images;
+
+        public string InscriptionIconPath => Inscriptions.Any() ? "images/check.png" : "images/none.png";
+
+        public string InscriptionTooltip => Inscriptions.Any() ? "Has Inscription(s)" : "No Inscriptions Found";
 
         public List<Domain.Entities.Inscription> Inscriptions => _autograph.Inscriptions;
+
+        public bool IsPersonalized => Personalization?.Id > 0;
 
         public string ItemTypeName => ItemType.Find(_autograph.Memorabilia.ItemTypeId)?.Name;
 
@@ -58,9 +84,21 @@ namespace Memorabilia.Application.Features.Autograph
 
         public Domain.Entities.Personalization Personalization => _autograph.Personalization;
 
+        public string PersonalizationIconPath => IsPersonalized ? "images/check.png" : "images/none.png";
+
+        public string PersonalizationTooltip => IsPersonalized ? "Is Personalized" : "Not Personalized";
+
         public int PersonId => _autograph.PersonId;
 
         public string PersonName => _autograph.Person?.DisplayName;
+
+        public string PrimaryImagePath => Images.Any()
+            ? Images.SingleOrDefault(image => image.ImageTypeId == ImageType.Primary.Id)?.FilePath ?? "wwwroot/images/imagenotavailable.png"
+            : "wwwroot/images/imagenotavailable.png";
+
+        public int? PurchaseTypeId => _autograph?.Acquisition?.PurchaseTypeId;
+
+        public string PurchaseTypeName => PurchaseType.Find(PurchaseTypeId ?? 0)?.Name;
 
         public string UserFirstName => _autograph.Memorabilia.User.FirstName;
 

@@ -20,6 +20,7 @@ namespace Memorabilia.Repository
                                                                            .Include(autograph => autograph.Acquisition)
                                                                            .Include(autograph => autograph.Authentications)
                                                                            .Include(autograph => autograph.Images)
+                                                                           .Include(autograph => autograph.Inscriptions)
                                                                            .Include(autograph => autograph.Memorabilia)
                                                                            .Include(autograph => autograph.Person)
                                                                            .Include(autograph => autograph.Personalization)

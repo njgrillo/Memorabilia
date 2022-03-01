@@ -1,5 +1,6 @@
 ﻿@page "/Autographs/Inscriptions/Edit/{autographId:int}"
 
+@using Memorabilia.Application.Features.Autograph
 @using Memorabilia.Application.Features.Autograph.Inscription
 @using Memorabilia.Web.Controls
 @using Memorabilia.Web.Controls.InscriptionType
@@ -7,6 +8,7 @@
 @inject CommandRouter _commandRouter
 @inject ProtectedLocalStorage _localStorage
 @inject NavigationManager _navigation
+@inject QueryRouter _queryRouter
 @inject IToastService _toastService
 
 @if (_viewModel == null)
@@ -34,7 +36,8 @@ else
                         <div class="form-group">
                             <label for="inscriptionType">Type</label>
                             <_InscriptionTypeDropDown @bind-Value="@_viewModel.InscriptionTypeId"
-                                                      @bind-Value:event="ValueChanged" /> 
+                                                      @bind-Value:event="ValueChanged"
+                                                      Disabled="@(!_canEditInscriptionType)" /> 
                         </div> 
                     </div>
                 </div>
@@ -47,36 +50,42 @@ else
                     </div>
                 </div>     
                 <div class="text-right">
-                    <button type="button" class="btn btn-secondary" @onclick="AddInscription">Add</button>
+                    <button type="button" class="btn btn-secondary" hidden="@(!_canAddInscription)" @onclick="AddInscription">Add</button>
+                    <button type="button" class="btn btn-secondary" hidden="@(!_canUpdateInscription)" @onclick="UpdateInscription">Update</button>
                 </div>
                 <br />
-                <table class="table" style="border: 1px solid black;">
-                    <thead>
-                        <tr>
-                            <th>Inscription Type</th>
-                            <th>Inscription Text</th>
-                            <th></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach (var inscription in _inscriptionsViewModel.Inscriptions)
-                        {
-                            <tr>
-                                <td>@inscription.InscriptionTypeName</td>
-                                <td>@inscription.InscriptionText</td>
-                                <td>
-                                    <_Tooltip Text="Delete">
-                                        <img class="can-click" 
-                                             src="images/trash.png" 
-                                             height="25" 
-                                             width="25" 
-                                             @onclick="@(_ => Remove(inscription.InscriptionTypeId, inscription.InscriptionText))" />
-                                    </_Tooltip>
-                                </td>
-                            </tr>
-                        }
-                    </tbody>
-                </table>
+                <_Table Items="_inscriptionsViewModel.Inscriptions" 
+                        ItemsPerPage="5"   
+                        TItem="SaveInscriptionViewModel">
+                    <HeaderTemplate>
+                        <th scope="col">Inscription Type</th>
+                        <th scope="col">Inscription Text</th>
+                        <th scope="col"></th>
+                        <th scope="col"></th>
+                    </HeaderTemplate>
+                    <RowTemplate Context="inscription">
+                        <td>@inscription.InscriptionTypeName</td>
+                        <td>@inscription.InscriptionText</td>
+                        <td>
+                            <_Tooltip Text="Edit">
+                                <img class="can-click" 
+                                     src="images/pencil.png" 
+                                     height="25" 
+                                     width="25" 
+                                     @onclick="@(_ => Edit(inscription))" />
+                            </_Tooltip>
+                        </td>
+                        <td>
+                            <_Tooltip Text="Delete">
+                                <img class="can-click" 
+                                     src="images/trash.png" 
+                                     height="25" 
+                                     width="25" 
+                                     @onclick="@(_ => Remove(inscription.InscriptionTypeId, inscription.InscriptionText))" />
+                            </_Tooltip>
+                        </td>
+                    </RowTemplate>
+                </_Table>
                 <div class="text-right">
                     <button type="submit" class="btn btn-primary" @onclick="@(()=> _continue = true)">Save & Continue</button>
                     <button type="submit" class="btn btn-primary">Save & Exit</button>
@@ -91,6 +100,9 @@ else
     [Parameter]
     public int AutographId { get; set; }
 
+    private bool _canAddInscription = true;    
+    private bool _canEditInscriptionType = true;
+    private bool _canUpdateInscription;
     private bool _continue;
     private SaveInscriptionsViewModel _inscriptionsViewModel = new SaveInscriptionsViewModel();     
     private SaveInscriptionViewModel _viewModel = new SaveInscriptionViewModel();
@@ -112,7 +124,7 @@ else
 
         _navigation.NavigateTo(url);
 
-        _toastService.ShowSuccess("Inscriptions were saved successfully!", _inscriptionsViewModel.PageTitle);
+        _toastService.ShowSuccess($"{_inscriptionsViewModel.PageTitle} were saved successfully!", _inscriptionsViewModel.PageTitle);
     }
 
     protected override async Task OnInitializedAsync()
@@ -122,7 +134,11 @@ else
         if (userId.Value == 0)
             _navigation.NavigateTo("Login");
 
-        //var query = GetI
+        var query = new GetAutograph.Query(AutographId);
+        var autograph = await _queryRouter.Send(query).ConfigureAwait(false);
+
+        if (autograph.Inscriptions.Any())
+            _inscriptionsViewModel = new SaveInscriptionsViewModel(autograph.Inscriptions);
     } 
 
     private void AddInscription()
@@ -131,11 +147,34 @@ else
         _viewModel = new SaveInscriptionViewModel();
     }
 
+    private void Edit(SaveInscriptionViewModel inscription)
+    {
+        _viewModel.InscriptionTypeId = inscription.InscriptionTypeId;
+        _viewModel.InscriptionText = inscription.InscriptionText;
+
+        _canAddInscription = false;
+        _canEditInscriptionType = false;
+        _canUpdateInscription = true;
+    }
+
     private void Remove(int inscriptionTypeId, string inscriptionText)
     {
         var inscription = _inscriptionsViewModel.Inscriptions.Single(inscription => inscription.InscriptionTypeId == inscriptionTypeId &&
                                                                                     inscription.InscriptionText == inscriptionText);
 
         _inscriptionsViewModel.Inscriptions.Remove(inscription);                                                                               
-    }    
+    }   
+    
+    private void UpdateInscription()
+    {       
+        var inscription = _inscriptionsViewModel.Inscriptions.Single(inscription => inscription.InscriptionTypeId == _viewModel.InscriptionTypeId);
+
+        inscription.InscriptionText = _viewModel.InscriptionText;
+
+        _viewModel = new SaveInscriptionViewModel();
+
+        _canAddInscription = true;
+        _canEditInscriptionType = true;
+        _canUpdateInscription = false;
+    }
 }

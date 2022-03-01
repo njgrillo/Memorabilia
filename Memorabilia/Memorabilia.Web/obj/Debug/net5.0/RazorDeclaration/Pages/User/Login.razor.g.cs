@@ -168,7 +168,6 @@ using Memorabilia.Application.Features.User.Login;
     protected async Task HandleValidSubmit()
     {
         var query = new GetUser.Query(_viewModel.Username, _viewModel.Password);
-
         var viewModel = await _queryRouter.Send(query).ConfigureAwait(false);
 
         if (!viewModel.IsValid || viewModel.Id == 0)
@@ -178,14 +177,14 @@ using Memorabilia.Application.Features.User.Login;
             return;
         }
 
-        await _localStorage.SetAsync("UserId", viewModel.Id);
+        await _localStorage.SetAsync("UserId", viewModel.Id).ConfigureAwait(false);
 
         _navigation.NavigateTo("Home");
     }
 
     protected override async Task OnInitializedAsync()
     {
-        var userId = await _localStorage.GetAsync<int>("UserId");
+        var userId = await _localStorage.GetAsync<int>("UserId").ConfigureAwait(false);
 
         if (userId.Value > 0)
             _navigation.NavigateTo("Home");

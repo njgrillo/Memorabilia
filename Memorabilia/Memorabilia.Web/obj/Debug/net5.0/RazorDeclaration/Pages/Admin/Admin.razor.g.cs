@@ -147,7 +147,7 @@ using System.Net.Http;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 328 "D:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\Pages\Admin\Admin.razor"
+#line 334 "D:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\Pages\Admin\Admin.razor"
        
     protected override async Task OnInitializedAsync()
     {

@@ -15,35 +15,33 @@
     </ResultTemplate>   
 </BlazoredTypeahead> 
 <br />  
-<div class="text-right" hidden="@(!_canAdd)">
-    <button type="button" class="btn btn-secondary" @onclick="Add">Add Person</button>
+<div hidden="@(!AllowMultiple)">
+    <div class="text-right" hidden="@(!_canAdd)">
+        <button type="button" class="btn btn-secondary" @onclick="Add">Add Person</button>
+    </div>
+    <br />  
+    <_Table Items="People.Where(person => !person.IsDeleted).ToList()" 
+            ItemsPerPage="5"   
+            TItem="SavePersonViewModel">
+        <HeaderTemplate>
+            <th scope="col">Person</th>
+            <th scope="col"></th>
+        </HeaderTemplate>
+        <RowTemplate>
+            <td>@context.DisplayName</td>
+            <td>
+                <_Tooltip Text="Delete">
+                    <img class="can-click" 
+                         src="images/trash.png" 
+                         height="25" 
+                         width="25" 
+                         @onclick="@(_ => Remove(context.Id))" />
+                </_Tooltip>
+            </td>
+        </RowTemplate>
+    </_Table>
 </div>
-<br />  
-<table class="table" style="border: 1px solid black;">
-    <thead>
-        <tr>
-            <th>Person</th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var person in People.Where(person => !person.IsDeleted))
-        {
-            <tr>
-                <td>@person.DisplayName</td>
-                <td>
-                    <_Tooltip Text="Delete">
-                        <img class="can-click" 
-                                src="images/trash.png" 
-                                height="25" 
-                                width="25" 
-                                @onclick="@(_ => Remove(person.Id))" />
-                    </_Tooltip>
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
+
 @code {
     [Parameter]
     public bool AllowMultiple { get; set; }
@@ -51,9 +49,24 @@
     [Parameter]
     public List<SavePersonViewModel> People { get; set; } = new();
 
+    [Parameter]
+    public SavePersonViewModel SelectedPerson { get; set; }
+
+    [Parameter]
+    public EventCallback<SavePersonViewModel> SelectedPersonChanged { get; set; }
+
+    SavePersonViewModel _viewModel
+    {
+        get => SelectedPerson;
+        set
+        {
+            SelectedPerson = value;
+            SelectedPersonChanged.InvokeAsync(value);
+        }
+    } 
+
     private bool _canAdd = true;
     private IEnumerable<SavePersonViewModel> _people = Enumerable.Empty<SavePersonViewModel>();  
-    private SavePersonViewModel _viewModel = new SavePersonViewModel();    
 
     protected override async Task OnInitializedAsync()
     {

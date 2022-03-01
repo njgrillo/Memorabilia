@@ -29,6 +29,6 @@
 
     protected async Task Save()
     {
-        await OnSave.InvokeAsync(Item);
+        await OnSave.InvokeAsync(Item).ConfigureAwait(false);
     }
 }

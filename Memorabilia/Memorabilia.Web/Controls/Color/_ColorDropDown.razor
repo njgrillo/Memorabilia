@@ -1,8 +1,6 @@
-﻿@using Domain.Constants
-
-<InputSelect id="ColorDropDown" class="form-control" @bind-Value="@Value" @oninput="@OnInputChange" >
+﻿<InputSelect id="ColorDropDown" class="form-control" @bind-Value="@Value" @oninput="@OnInputChange" >
     <option value="0">--Select--</option>
-    @foreach (var color in Color.All)
+    @foreach (var color in _colors)
     {
         <option value="@color.Id">@color.Name</option>
     }
@@ -16,6 +14,9 @@
     public ItemType ItemType { get; set; }
 
     [Parameter]
+    public bool UseAutographColors { get; set; }
+
+    [Parameter]
     public int Value { get; set; }
 
     [Parameter]
@@ -25,7 +26,7 @@
 
     protected override Task OnInitializedAsync()
     {
-        _colors = Color.GetAll(ItemType);
+        _colors = UseAutographColors ? Color.Autograph : Color.GetAll(ItemType);
 
         if ((InitialValue?.Id ?? 0) > 0)
             Value = InitialValue.Id;
@@ -36,7 +37,7 @@
     private async Task OnInputChange(ChangeEventArgs args)
     {
         Value = Convert.ToInt32(args.Value);
-        await ValueChanged.InvokeAsync(Value);
+        await ValueChanged.InvokeAsync(Value).ConfigureAwait(false);
     }
 }
 

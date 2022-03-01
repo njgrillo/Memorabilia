@@ -100,7 +100,7 @@
 
         DomainEntities.Remove(deletedItem);
 
-        await OnDelete.InvokeAsync(viewModel);
+        await OnDelete.InvokeAsync(viewModel).ConfigureAwait(false);
 
         _toastService.ShowSuccess($"{DomainItemName} was deleted successfully!", DomainItemTitle);               
     }

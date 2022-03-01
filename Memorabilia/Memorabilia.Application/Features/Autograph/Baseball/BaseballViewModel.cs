@@ -13,6 +13,6 @@
 
         public int AutographId => _autograph.Id;
 
-        public int SpotId => _autograph.Spot.SpotId;
+        public int SpotId => _autograph?.Spot?.SpotId ?? 0;
     }
 }

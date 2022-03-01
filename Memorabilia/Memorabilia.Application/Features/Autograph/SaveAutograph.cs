@@ -80,7 +80,7 @@ namespace Memorabilia.Application.Features.Autograph
 
             public DateTime? AcquiredDate => _viewModel.AcquiredDate;
 
-            public int AcquisitionTypeId => _viewModel.AcquisitionTypeId;
+            public int? AcquisitionTypeId => _viewModel.AcquisitionTypeId > 0 ? _viewModel.AcquisitionTypeId : null;
 
             public int ColorId => _viewModel.ColorId;
 

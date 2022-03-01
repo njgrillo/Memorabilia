@@ -1,6 +1,6 @@
 ﻿@inject NavigationManager _navigation
 
-<div class="@(!string.IsNullOrEmpty(Page) ? "can-click" : string.Empty)" 
+<div class="@(!Page.IsNullOrEmpty() ? "can-click" : string.Empty)" 
      style="border: 1px solid black; margin-top: 5%; margin-bottom: 5%; margin-left: 5%; margin-right: 5%;" 
      @onclick=OnClick>
     <div class="row" style="margin-top: 5%; margin-bottom: 5%; margin-left: 5%; margin-right: 5%;">

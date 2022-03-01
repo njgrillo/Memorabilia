@@ -24,33 +24,28 @@
     <button type="button" class="btn btn-secondary" @onclick="Add">Add</button>
 </div>
 <br />
-<table class="table" style="border: 1px solid black;">
-    <thead>
-        <tr>
-            <th>Occupation</th>
-            <th>Occupation Type</th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var occupation in Occupations.Where(x => !x.IsDeleted).OrderBy(x => x.OccupationName))
-        {
-            <tr>
-                <td>@occupation.OccupationName</td>
-                <td>@occupation.OccupationTypeName</td>
-                <td>
-                    <_Tooltip Text="Delete">
-                        <img class="can-click" 
-                             src="images/trash.png" 
-                             height="25" 
-                             width="25" 
-                             @onclick="@(_ => Remove(occupation.OccupationId))" />
-                    </_Tooltip>
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
+<_Table Items="Occupations.Where(x => !x.IsDeleted).OrderBy(x => x.OccupationName).ToList()" 
+        ItemsPerPage="10"   
+        TItem="SavePersonOccupationViewModel">
+    <HeaderTemplate>
+        <th scope="col">Occupation</th>
+        <th scope="col">Occupation Type</th>
+        <th scope="col"></th>
+    </HeaderTemplate>
+    <RowTemplate>
+        <td>@context.OccupationName</td>
+        <td>@context.OccupationTypeName</td>
+        <td>
+            <_Tooltip Text="Delete">
+                <img class="can-click" 
+                     src="images/trash.png" 
+                     height="25" 
+                     width="25" 
+                     @onclick="@(_ => Remove(context.OccupationId))" />
+            </_Tooltip>
+        </td>
+    </RowTemplate>
+</_Table>
 
 @code {
     [Parameter]

@@ -2,7 +2,6 @@
 using Memorabilia.Application.Features.Admin.Team;
 using Memorabilia.Domain.Constants;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 
@@ -22,10 +21,14 @@ namespace Memorabilia.Application.Features.Memorabilia.Baseball
             GameDate = viewModel.Game?.GameDate;
             GameStyleTypeId = viewModel.Game?.GameStyleTypeId ?? 0;
             LevelTypeId = viewModel.Level.LevelTypeId;
-            MemorabiliaId = viewModel.MemorabiliaId;
-            People = viewModel.People.Select(person => new SavePersonViewModel(new PersonViewModel(person.Person))).ToList();
+            MemorabiliaId = viewModel.MemorabiliaId;            
             SizeId = viewModel.Size.SizeId;
-            Teams = viewModel.Teams.Select(team => new SaveTeamViewModel(new TeamViewModel(team.Team))).ToList();
+
+            if (viewModel.People.Any())
+                Person = new SavePersonViewModel(new PersonViewModel(viewModel.People.First().Person));
+
+            if (viewModel.Teams.Any())
+                Team = new SaveTeamViewModel(new TeamViewModel(viewModel.Teams.First().Team));
         }        
 
         [StringLength(5, ErrorMessage = "Anniversary is too long.")]
@@ -61,9 +64,9 @@ namespace Memorabilia.Application.Features.Memorabilia.Baseball
         [Range(1, int.MaxValue, ErrorMessage = "Game Style Type is required.")]
         public int GameStyleTypeId { get; set; }
 
-        public bool HasPerson => People.Any();
+        public bool HasPerson => Person?.Id > 0;
 
-        public bool HasTeam => Teams.Any();
+        public bool HasTeam => Team?.Id > 0;
 
         public string ImagePath
         {
@@ -91,7 +94,7 @@ namespace Memorabilia.Application.Features.Memorabilia.Baseball
 
         public override string PageTitle => $"{(MemorabiliaId > 0 ? "Edit" : "Add")} {ItemType.Baseball.Name} Details";
 
-        public List<SavePersonViewModel> People { get; set; } = new();
+        public SavePersonViewModel Person { get; set; } 
 
         [Required]
         [Range(1, int.MaxValue, ErrorMessage = "Size is required.")]
@@ -99,6 +102,6 @@ namespace Memorabilia.Application.Features.Memorabilia.Baseball
 
         public SportLeagueLevel SportLeagueLevel => SportLeagueLevel.MajorLeagueBaseball;
 
-        public List<SaveTeamViewModel> Teams { get; set; } = new();
+        public SaveTeamViewModel Team { get; set; } 
     }
 }

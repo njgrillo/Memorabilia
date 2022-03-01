@@ -17,14 +17,16 @@ namespace Memorabilia.Application.Features.Memorabilia.Helmet
             BrandId = viewModel.Brand.BrandId;
             GameDate = viewModel.Game?.GameDate;
             GameStyleTypeId = viewModel.Game?.GameStyleTypeId ?? 0;
-            HelmetQualityTypeId = viewModel.Helmet?.HelmetQualityTypeId ?? 0;
-            HelmetTypeId = viewModel.Helmet?.HelmetTypeId ?? 0;
+            HelmetFinishId = viewModel.Helmet.HelmetFinishId ?? 0;
+            HelmetQualityTypeId = viewModel.Helmet.HelmetQualityTypeId ?? 0;
+            HelmetTypeId = viewModel.Helmet.HelmetTypeId ?? 0;
             LevelTypeId = viewModel.Level.LevelTypeId;
             MemorabiliaId = viewModel.MemorabiliaId;
             People = viewModel.People.Select(person => new SavePersonViewModel(new PersonViewModel(person.Person))).ToList();
             SizeId = viewModel.Size.SizeId;
             SportIds = viewModel.Sports.Select(x => x.Id).ToList();
             Teams = viewModel.Teams.Select(team => new SaveTeamViewModel(new TeamViewModel(team.Team))).ToList();
+            Throwback = viewModel.Helmet.Throwback;
         }   
 
         [Required]
@@ -32,6 +34,8 @@ namespace Memorabilia.Application.Features.Memorabilia.Helmet
         public int BrandId { get; set; }
 
         public bool DisplayGameDate => GameStyleType.IsGameWorthly(GameStyleType);
+
+        public bool DisplayHelmetQualityType => Size.Find(SizeId) == Size.Full;
 
         public DateTime? GameDate { get; set; }
 
@@ -44,6 +48,8 @@ namespace Memorabilia.Application.Features.Memorabilia.Helmet
         public bool HasPerson => People.Any();
 
         public bool HasTeam => Teams.Any();
+
+        public int HelmetFinishId { get; set; }
 
         public int HelmetQualityTypeId { get; set; }
 
@@ -86,5 +92,7 @@ namespace Memorabilia.Application.Features.Memorabilia.Helmet
         public List<int> SportIds { get; set; } = new();
 
         public List<SaveTeamViewModel> Teams { get; set; } = new();
+
+        public bool Throwback { get; set; }
     }
 }

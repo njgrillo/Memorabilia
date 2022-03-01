@@ -8,26 +8,27 @@
 
 <div class="row">
     <div class="col-md-12" style="text-align: center">
-        <h1>Memorabilia</h1>
+        <h1>My Memorabilia</h1>
     </div>
 </div>
 <br />
 <div class="row">
     <div class="col-md-4">
-        <_Summary Title="Items" ImagePath="images/itemtypes.jpg" Description="" Page="Memorabilia/Items" />
+        <_Summary ImagePath="images/autographs.jpg"  
+                  Page="Memorabilia/Edit" 
+                  Title="Add Memorabilia Item" />
     </div>
     <div class="col-md-4">
-        <_Summary Title="Unsigned Items" ImagePath="images/itemtypes.jpg" Description="" Page="Memorabilia/UnsignedItems" />
-    </div>  
-    <div class="col-md-4">
-        <_Summary Title="Autographed Items" ImagePath="images/autographs.jpg" Description="" Page="Autographs/View" />
-    </div> 
+        <_Summary ImagePath="images/autographs.jpg"  
+                  Page="Memorabilia/Items" 
+                  Title="View Memorabilia Items" />
+    </div>
 </div>
 
 @code {
     protected override async Task OnInitializedAsync()
     {
-        var userId = await _localStorage.GetAsync<int>("UserId");
+        var userId = await _localStorage.GetAsync<int>("UserId").ConfigureAwait(false);
 
         if (userId.Value == 0)
             _navigation.NavigateTo("Login");

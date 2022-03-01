@@ -2,7 +2,6 @@
 using Memorabilia.Application.Features.Admin.Team;
 using Memorabilia.Domain.Constants;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 
@@ -21,9 +20,13 @@ namespace Memorabilia.Application.Features.Memorabilia.Basketball
             GameStyleTypeId = viewModel.Game?.GameStyleTypeId ?? 0;
             LevelTypeId = viewModel.Level.LevelTypeId;
             MemorabiliaId = viewModel.MemorabiliaId;
-            People = viewModel.People.Select(person => new SavePersonViewModel(new PersonViewModel(person.Person))).ToList();
             SizeId = viewModel.Size.SizeId;
-            Teams = viewModel.Teams.Select(team => new SaveTeamViewModel(new TeamViewModel(team.Team))).ToList();
+
+            if (!viewModel.People.Any())
+                Person = new SavePersonViewModel(new PersonViewModel(viewModel.People.First().Person));
+
+            if (viewModel.Teams.Any())
+                Team = new SaveTeamViewModel(new TeamViewModel(viewModel.Teams.First().Team));
         }
 
         public BasketballType BasketballType => BasketballType.Find(BasketballTypeId);
@@ -46,9 +49,9 @@ namespace Memorabilia.Application.Features.Memorabilia.Basketball
         [Range(1, int.MaxValue, ErrorMessage = "Game Style Type is required.")]
         public int GameStyleTypeId { get; set; }
 
-        public bool HasPerson => People.Any();
+        public bool HasPerson => Person?.Id > 0;
 
-        public bool HasTeam => Teams.Any();
+        public bool HasTeam => Team?.Id > 0;
 
         public string ImagePath
         {
@@ -76,7 +79,7 @@ namespace Memorabilia.Application.Features.Memorabilia.Basketball
 
         public override string PageTitle => $"{(MemorabiliaId > 0 ? "Edit" : "Add")} {ItemType.Basketball.Name} Details";
 
-        public List<SavePersonViewModel> People { get; set; } = new();
+        public SavePersonViewModel Person;
 
         [Required]
         [Range(1, int.MaxValue, ErrorMessage = "Size is required.")]
@@ -84,6 +87,6 @@ namespace Memorabilia.Application.Features.Memorabilia.Basketball
 
         public SportLeagueLevel SportLeagueLevel => SportLeagueLevel.NationalBasketballAssociation;
 
-        public List<SaveTeamViewModel> Teams { get; set; } = new();
+        public SaveTeamViewModel Team { get; set; }
     }
 }

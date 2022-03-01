@@ -1,7 +1,7 @@
 ﻿@using Memorabilia.Application.Features.Admin.AuthenticationCompany
 @using Memorabilia.Domain.Constants
 
-<InputSelect id="AuthenticationCompanyDropDown" class="form-control" @bind-Value="@Value" @oninput="OnInputChange" >
+<InputSelect id="AuthenticationCompanyDropDown" class="form-control" disabled="@Disabled" @bind-Value="@Value" @oninput="OnInputChange" >
     <option value="0">--Select--</option>
     @foreach (var authenticationCompany in AuthenticationCompany.All)
     {
@@ -10,6 +10,9 @@
 </InputSelect>
 
 @code {
+    [Parameter]
+    public bool Disabled { get; set; }
+
     [Parameter]
     public AuthenticationCompany InitialValue { get; set; }
 
@@ -30,6 +33,6 @@
     private async Task OnInputChange(ChangeEventArgs args)
     {
         Value = Convert.ToInt32(args.Value);
-        await ValueChanged.InvokeAsync(Value);
+        await ValueChanged.InvokeAsync(Value).ConfigureAwait(false);
     }
 }

@@ -15,7 +15,7 @@ namespace Memorabilia.Application.Features.Autograph.Baseball
 
         public int AutographId { get; set; }
 
-        public string ImagePath { get; set; }
+        public string ImagePath => "images/baseball.jpg";
 
         [Required]
         [Range(1, int.MaxValue, ErrorMessage = "Spot is required.")]

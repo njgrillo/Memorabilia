@@ -4,44 +4,21 @@ namespace Memorabilia.Domain.Constants
 {
     public sealed class HelmetType
     {
-        public static readonly HelmetType Pewter = new(1, "Pewter", string.Empty);
-        public static readonly HelmetType Chrome = new(2, "Chrome", string.Empty);
-        public static readonly HelmetType Throwback = new(3, "Throwback", string.Empty);
-        public static readonly HelmetType TwentyFourKaratGoldPlated = new(4, "24k Gold Plated", string.Empty);
-        public static readonly HelmetType SterlingSilver = new(5, "Sterling Silver", string.Empty);
-        public static readonly HelmetType Bronze = new(6, "Bronze", string.Empty);
-        public static readonly HelmetType Revolution = new(7, "Revolution", string.Empty);
-        public static readonly HelmetType Speed = new(8, "Speed", string.Empty);
-        public static readonly HelmetType Blaze = new(9, "Blaze", string.Empty);
-        public static readonly HelmetType Ice = new(10, "Ice", string.Empty);
-        public static readonly HelmetType Flash = new(11, "Flash", string.Empty);
+        public static readonly HelmetType F7 = new(5, "F7", string.Empty);
+        public static readonly HelmetType Flex = new(1, "Flex", string.Empty);
+        public static readonly HelmetType Hydro = new(2, "Hydro", string.Empty);
+        public static readonly HelmetType Other = new(6, "Other", string.Empty);
+        public static readonly HelmetType Revolution = new(4, "Revolution", string.Empty);
+        public static readonly HelmetType Speed = new(3, "Speed", string.Empty);        
 
         public static readonly HelmetType[] All =
         {
-            Blaze,
-            Bronze,
-            Chrome,
-            Flash,
-            Ice,
-            Pewter,
+            F7,
+            Flex,
+            Hydro,
+            Other,
             Revolution,
-            Throwback,
-            TwentyFourKaratGoldPlated,
-            Speed,
-            SterlingSilver
-        };
-
-        public static readonly HelmetType[] FullSizeHelmetTypes =
-        {
-            Blaze,
-            Chrome,
-            Flash,
-            Ice,
-            Pewter,
-            Revolution,
-            Throwback,
-            TwentyFourKaratGoldPlated,
-            Speed
+            Speed            
         };
 
         private HelmetType(int id, string name, string abbreviation)

@@ -151,7 +151,7 @@ using System.Net.Http;
        
     protected override async Task OnInitializedAsync()
     {
-        await _localStorage.DeleteAsync("UserId");
+        await _localStorage.DeleteAsync("UserId").ConfigureAwait(false);
 
         _navigation.NavigateTo("Login");
     }

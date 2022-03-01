@@ -1,0 +1,49 @@
+﻿@page "/HelmetFinishes/Edit/{id:int}"
+
+@using Memorabilia.Application.Features.Admin
+@using Memorabilia.Application.Features.Admin.HelmetFinish
+@using Memorabilia.Web.Controls.Helmet
+
+@inject CommandRouter _commandRouter
+@inject ProtectedLocalStorage _localStorage
+@inject NavigationManager _navigation
+@inject QueryRouter _queryRouter
+@inject IToastService _toastService
+
+@if (_viewModel == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <_HelmetFinishEditor EditModeType="@_editModeType" 
+                         Item="@_viewModel"                  
+                         OnSave="Save" />
+}
+
+@code {
+    [Parameter]
+    public int Id { get; set; }
+
+    private EditModeType _editModeType;
+    private SaveDomainViewModel _viewModel = new SaveDomainViewModel();    
+
+    protected override async Task OnInitializedAsync()
+    {
+        _editModeType = Id > 0 ? EditModeType.Update : EditModeType.Add;
+
+        if (Id == 0)
+            return;
+
+        var query = new GetHelmetFinish.Query(Id);
+
+        _viewModel = new SaveDomainViewModel(await _queryRouter.Send(query).ConfigureAwait(false));
+    }
+
+    protected async Task Save()
+    {
+        var command = new SaveHelmetFinish.Command(_viewModel);
+
+        await _commandRouter.Send(command).ConfigureAwait(false);
+    }
+}

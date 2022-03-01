@@ -30,6 +30,6 @@ namespace Memorabilia.Application.Features.Memorabilia.Helmet
 
         public IEnumerable<MemorabiliaSport> Sports => _memorabilia.Sports;
 
-        public IEnumerable<MemorabiliaTeam> Teams => _memorabilia.Teams;             
+        public IEnumerable<MemorabiliaTeam> Teams => _memorabilia.Teams;   
     }
 }

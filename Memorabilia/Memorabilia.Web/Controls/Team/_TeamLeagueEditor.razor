@@ -29,35 +29,30 @@
     <button type="button" class="btn btn-secondary" @onclick="Add">Add</button>
 </div>
 <br />
-<table class="table" style="border: 1px solid black;">
-    <thead>
-        <tr>
-            <th>League</th>
-            <th>Begin Year</th>
-            <th>End Year</th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var league in Leagues.Where(x => !x.IsDeleted).OrderBy(x => x.BeginYear))
-        {
-            <tr>
-                <td>@league.LeagueName</td>
-                <td>@league.BeginYear</td>
-                <td>@league.EndYear</td>
-                <td>
-                    <_Tooltip Text="Delete">
-                        <img class="can-click" 
-                             src="images/trash.png" 
-                             height="25" 
-                             width="25" 
-                             @onclick="@(_ => Remove(league.LeagueId, league.BeginYear))" />
-                    </_Tooltip>
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
+<_Table Items="Leagues.Where(x => !x.IsDeleted).OrderBy(x => x.BeginYear).ToList()" 
+        ItemsPerPage="5"   
+        TItem="SaveTeamLeagueViewModel">
+    <HeaderTemplate>
+        <th scope="col">League</th>
+        <th scope="col">Begin Year</th>
+        <th scope="col">End Year</th>
+        <th scope="col"></th>
+    </HeaderTemplate>
+    <RowTemplate>
+        <td>@context.LeagueName</td>
+        <td>@context.BeginYear</td>
+        <td>@context.EndYear</td>
+        <td>
+            <_Tooltip Text="Delete">
+                <img class="can-click" 
+                     src="images/trash.png" 
+                     height="25" 
+                     width="25" 
+                     @onclick="@(_ => Remove(context.LeagueId, context.BeginYear))" />
+            </_Tooltip>
+        </td>
+    </RowTemplate>
+</_Table>
 
 @code {
     [Parameter]

@@ -16,35 +16,32 @@
     </ResultTemplate>   
 </BlazoredTypeahead> 
 <br />  
-<div class="text-right" hidden="@(!_canAdd)">
-    <button type="button" class="btn btn-secondary" @onclick="Add">Add Team</button>
+<div hidden="@(!AllowMultiple)">
+    <div class="text-right" hidden="@(!_canAdd)">
+        <button type="button" class="btn btn-secondary" @onclick="Add">Add Team</button>
+    </div>
+    <br />  
+    <_Table Items="Teams.Where(team => !team.IsDeleted).ToList()" 
+            ItemsPerPage="25"   
+            TItem="SaveTeamViewModel">
+        <HeaderTemplate>
+            <th scope="col">Team</th>
+            <th scope="col"></th>
+        </HeaderTemplate>
+        <RowTemplate>
+            <td>@context.DisplayName</td>
+            <td>
+                <_Tooltip Text="Delete">
+                    <img class="can-click" 
+                         src="images/trash.png" 
+                         height="25" 
+                         width="25" 
+                         @onclick="@(_ => Remove(context.Id))" />
+                </_Tooltip>
+            </td>
+        </RowTemplate>
+    </_Table>
 </div>
-<br />  
-<table class="table" style="border: 1px solid black;">
-    <thead>
-        <tr>
-            <th>Team</th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var team in Teams.Where(team => !team.IsDeleted))
-        {
-            <tr>
-                <td>@team.DisplayName</td>
-                <td>
-                    <_Tooltip Text="Delete">
-                        <img class="can-click" 
-                                src="images/trash.png" 
-                                height="25" 
-                                width="25" 
-                                @onclick="@(_ => Remove(team.Id))" />
-                    </_Tooltip>
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
 
 @code {
     [Parameter]
@@ -54,11 +51,26 @@
     public SportLeagueLevel SportLeagueLevel { get; set; }
 
     [Parameter]
-    public List<SaveTeamViewModel> Teams { get; set; } = new();
+    public SaveTeamViewModel SelectedTeam { get; set; }
+
+    [Parameter]
+    public EventCallback<SaveTeamViewModel> SelectedTeamChanged { get; set; }
+
+    [Parameter]
+    public List<SaveTeamViewModel> Teams { get; set; } = new();    
+
+    SaveTeamViewModel _viewModel
+    {
+        get => SelectedTeam;
+        set
+        {
+            SelectedTeam = value;
+            SelectedTeamChanged.InvokeAsync(value);
+        }
+    } 
 
     private bool _canAdd = true;
     private IEnumerable<SaveTeamViewModel> _teams = Enumerable.Empty<SaveTeamViewModel>();  
-    private SaveTeamViewModel _viewModel = new SaveTeamViewModel();
 
     protected override async Task OnInitializedAsync()
     {

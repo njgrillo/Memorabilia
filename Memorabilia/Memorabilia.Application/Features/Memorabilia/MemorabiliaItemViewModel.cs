@@ -35,6 +35,10 @@ namespace Memorabilia.Application.Features.Memorabilia
 
         public decimal? EstimatedValue => _memorabilia.EstimatedValue;
 
+        public string FormattedCreateDate => CreateDate.ToString("MM-dd-yyyy");
+
+        public string FormattedLastModifiedDate => LastModifiedDate?.ToString("MM-dd-yyyy");
+
         public string FormattedTotalCost => ((Acquisition?.Cost ?? 0) + _memorabilia.Autographs.Sum(autograph => autograph.Acquisition?.Cost ?? 0)).ToString("c");
 
         public string FormattedTotalValue => ((EstimatedValue ?? 0) + _memorabilia.Autographs.Sum(autograph => autograph.EstimatedValue ?? 0)).ToString("c");
@@ -43,9 +47,25 @@ namespace Memorabilia.Application.Features.Memorabilia
 
         public int Id => _memorabilia.Id;
 
+        public string ImageDisplayCount
+        {
+            get
+            {
+                if (!Images.Any())
+                    return "No Images Found";
+
+                if (Images.Count == 1)
+                    return "1 Image";
+
+                return $"{Images.Count} Images";
+            }
+        }
+
         public string ImagePath => !_memorabilia.Images.Any() 
             ? "wwwroot/images/imagenotavailable.png"
             : _memorabilia.Images.First().FilePath;
+
+        public List<MemorabiliaImage> Images => _memorabilia.Images;
 
         public int ItemTypeId => _memorabilia.ItemTypeId;
 

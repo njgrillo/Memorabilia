@@ -2,7 +2,6 @@
 using Framework.Handler;
 using Memorabilia.Domain;
 using System;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace Memorabilia.Application.Features.Memorabilia.Basketball
@@ -60,13 +59,13 @@ namespace Memorabilia.Application.Features.Memorabilia.Basketball
 
             public int MemorabiliaId => _viewModel.MemorabiliaId;
 
-            public int? PersonId => _viewModel.People.Any() ? _viewModel.People.First().Id : null;
+            public int? PersonId => _viewModel.Person?.Id > 0 ? _viewModel.Person?.Id : null;
 
             public int SizeId => _viewModel.SizeId;
 
             public int SportId => Domain.Constants.Sport.Basketball.Id;
 
-            public int? TeamId => _viewModel.Teams.Any() ? _viewModel.Teams.First().Id : null;
+            public int? TeamId => _viewModel.Team?.Id > 0 ? _viewModel.Team?.Id : null;
         }
     }
 }

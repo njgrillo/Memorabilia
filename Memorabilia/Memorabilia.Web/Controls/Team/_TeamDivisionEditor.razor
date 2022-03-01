@@ -29,35 +29,30 @@
     <button type="button" class="btn btn-secondary" @onclick="Add">Add</button>
 </div>
 <br />
-<table class="table" style="border: 1px solid black;">
-    <thead>
-        <tr>
-            <th>Division</th>
-            <th>Begin Year</th>
-            <th>End Year</th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var division in Divisions.Where(x => !x.IsDeleted).OrderBy(x => x.BeginYear))
-        {
-            <tr>
-                <td>@division.DivisionName</td>
-                <td>@division.BeginYear</td>
-                <td>@division.EndYear</td>
-                <td>
-                    <_Tooltip Text="Delete">
-                        <img class="can-click" 
-                             src="images/trash.png" 
-                             height="25" 
-                             width="25" 
-                             @onclick="@(_ => Remove(division.DivisionId, division.BeginYear))" />
-                    </_Tooltip>
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
+<_Table Items="Divisions.Where(x => !x.IsDeleted).OrderBy(x => x.BeginYear).ToList()" 
+        ItemsPerPage="5"   
+        TItem="SaveTeamDivisionViewModel">
+    <HeaderTemplate>
+        <th scope="col">Division</th>
+        <th scope="col">Begin Year</th>
+        <th scope="col">End Year</th>
+        <th scope="col"></th>
+    </HeaderTemplate>
+    <RowTemplate>
+        <td>@context.DivisionName</td>
+        <td>@context.BeginYear</td>
+        <td>@context.EndYear</td>
+        <td>
+            <_Tooltip Text="Delete">
+                <img class="can-click" 
+                     src="images/trash.png" 
+                     height="25" 
+                     width="25" 
+                     @onclick="@(_ => Remove(context.DivisionId, context.BeginYear))" />
+            </_Tooltip>
+        </td>
+    </RowTemplate>
+</_Table>
 
 @code {
     [Parameter]

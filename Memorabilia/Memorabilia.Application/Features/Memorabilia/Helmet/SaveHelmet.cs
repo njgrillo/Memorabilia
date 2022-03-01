@@ -25,12 +25,14 @@ namespace Memorabilia.Application.Features.Memorabilia.Helmet
                 memorabilia.SetHelmet(command.BrandId,
                                       command.GameDate,
                                       command.GameStyleTypeId,
+                                      command.HelmetFinishId,
                                       command.HelmetQualityTypeId,
                                       command.HelmetTypeId,
                                       command.LevelTypeId,
                                       command.PersonId,
                                       command.SizeId,
                                       command.SportIds,
+                                      command.Throwback,
                                       command.TeamIds);
 
                 await _memorabiliaRepository.Update(memorabilia).ConfigureAwait(false);
@@ -52,6 +54,8 @@ namespace Memorabilia.Application.Features.Memorabilia.Helmet
 
             public int? GameStyleTypeId => _viewModel.GameStyleTypeId > 0 ? _viewModel.GameStyleTypeId : 0;
 
+            public int? HelmetFinishId => _viewModel.HelmetFinishId > 0 ? _viewModel.HelmetFinishId : null;
+
             public int? HelmetQualityTypeId => _viewModel.HelmetQualityTypeId > 0 ? _viewModel.HelmetQualityTypeId : null;
 
             public int? HelmetTypeId => _viewModel.HelmetTypeId > 0 ? _viewModel.HelmetTypeId : null;
@@ -67,6 +71,8 @@ namespace Memorabilia.Application.Features.Memorabilia.Helmet
             public int[] SportIds => _viewModel.SportIds.ToArray();
 
             public int[] TeamIds => _viewModel.Teams.Select(team => team.Id).ToArray();
+
+            public bool Throwback => _viewModel.Throwback;
         }
     }
 }

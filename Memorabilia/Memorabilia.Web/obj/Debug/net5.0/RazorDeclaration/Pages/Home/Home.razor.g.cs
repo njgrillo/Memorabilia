@@ -151,7 +151,7 @@ using System.Net.Http;
        
     protected override async Task OnInitializedAsync()
     {
-        var userId = await _localStorage.GetAsync<int>("UserId");
+        var userId = await _localStorage.GetAsync<int>("UserId").ConfigureAwait(false);
 
         if (userId.Value == 0)
             _navigation.NavigateTo("Login");       

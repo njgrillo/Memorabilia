@@ -162,7 +162,7 @@ using System.Net.Http;
     public async Task Confirmation(bool value)
     {
         Show = false;
-        await ConfirmedChanged.InvokeAsync(value);
+        await ConfirmedChanged.InvokeAsync(value).ConfigureAwait(false);;
     }
 
     public void ShowPop()

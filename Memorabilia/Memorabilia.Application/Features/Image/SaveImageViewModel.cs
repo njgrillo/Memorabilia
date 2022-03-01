@@ -14,6 +14,13 @@ namespace Memorabilia.Application.Features.Image
             ImageTypeId = viewModel.ImageTypeId;
         }
 
+        public SaveImageViewModel(Domain.Entities.Image image)
+        {
+            FilePath = image.FilePath;
+            Id = image.Id;
+            ImageTypeId = image.ImageTypeId;
+        }
+
         [Required]
         [StringLength(500, ErrorMessage = "File Path is too long.")]
         [MinLength(1, ErrorMessage = "File Path is too short.")]

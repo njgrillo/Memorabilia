@@ -1,7 +1,6 @@
 ﻿@using Memorabilia.Application.Features.Admin.ItemType
-@using Domain.Constants
 
-<InputSelect id="ItemTypeDropDown" class="form-control" @bind-Value="@Value" @oninput="@OnInputChange" >
+<InputSelect id="ItemTypeDropDown" class="form-control" disabled="@Disabled" @bind-Value="@Value" @oninput="@OnInputChange" >
     <option value="0">--Select--</option>
     @foreach (var itemType in ItemType.All)
     {
@@ -9,7 +8,10 @@
     }
 </InputSelect>
 
-@code {   
+@code {
+    [Parameter]
+    public bool Disabled { get; set; }
+
     [Parameter]
     public ItemType InitialValue { get; set; }
 
@@ -30,7 +32,7 @@
     private async Task OnInputChange(ChangeEventArgs args)
     {
         Value = Convert.ToInt32(args.Value);
-        await ValueChanged.InvokeAsync(Value);
+        await ValueChanged.InvokeAsync(Value).ConfigureAwait(false);
     }
 }
 

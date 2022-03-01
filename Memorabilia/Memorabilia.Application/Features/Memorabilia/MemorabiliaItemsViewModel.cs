@@ -9,10 +9,10 @@ namespace Memorabilia.Application.Features.Memorabilia
 
         public MemorabiliaItemsViewModel(IEnumerable<Domain.Entities.Memorabilia> memorabiliaItems)
         {
-            MemorabiliaItems = memorabiliaItems.Select(memorabiliaItem => new MemorabiliaItemViewModel(memorabiliaItem));
+            MemorabiliaItems = memorabiliaItems.Select(memorabiliaItem => new MemorabiliaItemViewModel(memorabiliaItem)).ToList();
         }
 
-        public IEnumerable<MemorabiliaItemViewModel> MemorabiliaItems { get; set; } = Enumerable.Empty<MemorabiliaItemViewModel>();
+        public List<MemorabiliaItemViewModel> MemorabiliaItems { get; set; } = new();
 
         public override string PageTitle => "Memorabilia";       
     }

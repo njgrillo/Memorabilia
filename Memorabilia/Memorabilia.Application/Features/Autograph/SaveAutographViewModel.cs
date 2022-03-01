@@ -13,11 +13,11 @@ namespace Memorabilia.Application.Features.Autograph
 
         public SaveAutographViewModel(AutographViewModel viewModel)
         {
-            AcquiredDate = viewModel.Acquisition.AcquiredDate;
-            AcquisitionTypeId = viewModel.Acquisition.AcquisitionTypeId;
+            AcquiredDate = viewModel.Acquisition?.AcquiredDate;
+            AcquisitionTypeId = viewModel.Acquisition?.AcquisitionTypeId ?? 0;
             ColorId = viewModel.ColorId;
             ConditionId = viewModel.ConditionId;
-            Cost = viewModel.Acquisition.Cost;
+            Cost = viewModel.Acquisition?.Cost;
             CreateDate = viewModel.CreateDate;
             EstimatedValue = viewModel.EstimatedValue;
             Grade = viewModel.Grade;
@@ -25,9 +25,9 @@ namespace Memorabilia.Application.Features.Autograph
             ItemTypeName = viewModel.ItemTypeName;
             LastModifiedDate = viewModel.LastModifiedDate;
             MemorabiliaId = viewModel.MemorabiliaId;
-            Person = new PersonViewModel(viewModel.Person);
+            Person = new SavePersonViewModel(new PersonViewModel(viewModel.Person));
             PersonalizationText = viewModel.Personalization?.Text;            
-            PurchaseTypeId = viewModel.Acquisition.PurchaseTypeId ?? 0;
+            PurchaseTypeId = viewModel.Acquisition?.PurchaseTypeId ?? 0;
             WritingInstrumentId = viewModel.WritingInstrumentId;
         }
 
@@ -47,8 +47,6 @@ namespace Memorabilia.Application.Features.Autograph
 
         public DateTime? AcquiredDate { get; set; }
 
-        [Required]
-        [Range(1, int.MaxValue, ErrorMessage = "Acquisition Type is required.")]
         public int AcquisitionTypeId { get; set; }
 
         public bool CanHaveCost => AcquisitionType.CanHaveCost(AcquisitionType.Find(AcquisitionTypeId));
@@ -88,10 +86,10 @@ namespace Memorabilia.Application.Features.Autograph
 
         public override string PageTitle => $"{(Id > 0 ? "Edit" : "Add")} Autograph";
 
-        public string PersonalizationText { get; set; }
-
         [Required]
-        public PersonViewModel Person { get; set; } 
+        public SavePersonViewModel Person { get; set; } = new();
+
+        public string PersonalizationText { get; set; }
 
         public int PurchaseTypeId { get; set; }
 

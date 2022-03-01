@@ -14,7 +14,7 @@ namespace Memorabilia.Application.Features.Autograph.Inscription
 
         public int AutographId { get; set; }
 
-        public string ImagePath { get; set; }
+        public string ImagePath => "images/inscriptiontypes.jpg";
 
         public List<SaveInscriptionViewModel> Inscriptions { get; set; } = new();
 

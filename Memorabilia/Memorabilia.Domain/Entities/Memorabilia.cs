@@ -327,19 +327,21 @@ namespace Memorabilia.Domain.Entities
         public void SetHelmet(int brandId,
                               DateTime? gameDate,
                               int? gameStyleTypeId,
+                              int? helmetFinishId,
                               int? helmetQualityTypeId,
                               int? helmetTypeId,
                               int levelTypeId,
                               int? personId,
                               int sizeId,
                               int[] sportIds,
+                              bool throwback,
                               params int[] teamIds)
         {
             SetBrand(brandId);
             SetLevelType(levelTypeId);
             SetSize(sizeId);
             SetSports(sportIds);
-            SetHelmet(helmetQualityTypeId.Value, helmetTypeId.Value);
+            SetHelmet(helmetFinishId, helmetQualityTypeId, helmetTypeId, throwback);
             SetGame(gameStyleTypeId, personId, gameDate);
             SetTeams(teamIds);
 
@@ -354,18 +356,26 @@ namespace Memorabilia.Domain.Entities
                                    int? gamePersonId,
                                    int? gameStyleTypeId,
                                    int levelTypeId,
-                                   int[] personIds,
+                                   int? personId,
                                    int sizeId,
                                    int sportId,
-                                   int[] teamIds)
+                                   int? teamId)
         {
             SetBrand(brandId);
             SetLevelType(levelTypeId);
             SetSize(sizeId);
             SetGame(gameStyleTypeId, gamePersonId, gameDate);
-            SetPeople(personIds);
             SetSports(sportId);
-            SetTeams(teamIds);
+
+            if (!personId.HasValue)
+                People = new List<MemorabiliaPerson>();
+            else
+                SetPeople(personId.Value);
+
+            if (!teamId.HasValue)
+                Teams = new List<MemorabiliaTeam>();
+            else
+                SetTeams(teamId.Value);
         }
 
         public void SetImages(IEnumerable<string> filePaths, string primaryImageFilePath)
@@ -683,23 +693,15 @@ namespace Memorabilia.Domain.Entities
             }
         }
 
-        private void SetHelmet(int? helmetQualityTypeId, int? helmetTypeId)
+        private void SetHelmet(int? helmetFinishId, int? helmetQualityTypeId, int? helmetTypeId, bool throwback)
         {
-            if (helmetQualityTypeId.HasValue || helmetTypeId.HasValue)
+            if (Helmet == null)
             {
-                if (Helmet == null)
-                {
-                    Helmet = new MemorabiliaHelmet(Id, helmetQualityTypeId.Value, helmetTypeId.Value);
-                    return;
-                }
+                Helmet = new MemorabiliaHelmet(Id, helmetFinishId, helmetQualityTypeId, helmetTypeId, throwback);
+                return;
+            }
 
-                Helmet.Set(helmetQualityTypeId.Value, helmetTypeId.Value);
-            }
-            else
-            {
-                if (Helmet?.Id > 0)
-                    Helmet = null;
-            }
+            Helmet.Set(helmetFinishId, helmetQualityTypeId, helmetTypeId, throwback);
         }
 
         private void SetJersey(int qualityTypeId, int styleTypeId, int typeId)

@@ -17,6 +17,7 @@ using Memorabilia.Application.Features.Admin.FootballType;
 using Memorabilia.Application.Features.Admin.Franchise;
 using Memorabilia.Application.Features.Admin.GameStyleType;
 using Memorabilia.Application.Features.Admin.GloveType;
+using Memorabilia.Application.Features.Admin.HelmetFinish;
 using Memorabilia.Application.Features.Admin.HelmetQualityType;
 using Memorabilia.Application.Features.Admin.HelmetType;
 using Memorabilia.Application.Features.Admin.ImageType;
@@ -129,6 +130,7 @@ namespace Memorabilia.Web
             services.AddTransient<IGameStyleTypeRepository, GameStyleTypeRepository>();
             services.AddTransient<IGloveTypeRepository, GloveTypeRepository>();
             services.AddTransient<IHallOfFameRepository, HallOfFameRepository>();
+            services.AddTransient<IHelmetFinishRepository, HelmetFinishRepository>();
             services.AddTransient<IHelmetQualityTypeRepository, HelmetQualityTypeRepository>();
             services.AddTransient<IHelmetTypeRepository, HelmetTypeRepository>();
             services.AddTransient<IImageTypeRepository, ImageTypeRepository>();
@@ -231,6 +233,8 @@ namespace Memorabilia.Web
             services.AddTransient<GetGloveTypes>();
             services.AddTransient<GetHat>();
             services.AddTransient<GetHelmet>();
+            services.AddTransient<GetHelmetFinish>();
+            services.AddTransient<GetHelmetFinishes>();
             services.AddTransient<GetHelmetQualityType>();
             services.AddTransient<GetHelmetQualityTypes>();
             services.AddTransient<GetHelmetType>();
@@ -335,6 +339,7 @@ namespace Memorabilia.Web
             services.AddTransient<SaveGloveType>();
             services.AddTransient<SaveHat>();
             services.AddTransient<SaveHelmet>();
+            services.AddTransient<SaveHelmetFinish>();
             services.AddTransient<SaveHelmetQualityType>();
             services.AddTransient<SaveHelmetType>();
             services.AddTransient<SaveHockeyStick>();

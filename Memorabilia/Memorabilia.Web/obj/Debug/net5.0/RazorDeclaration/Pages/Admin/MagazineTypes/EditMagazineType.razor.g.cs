@@ -171,7 +171,7 @@ using Memorabilia.Application.Features.Admin.MagazineType;
 
     protected override async Task OnInitializedAsync()
     {
-        _editModeType = Id > 0 ? EditModeType.Edit : EditModeType.Add;
+        _editModeType = Id > 0 ? EditModeType.Update : EditModeType.Add;
 
         if (Id == 0)
             return;

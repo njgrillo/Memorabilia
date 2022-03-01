@@ -1,6 +1,7 @@
 ﻿@page "/Memorabilia/Bat/Edit/{memorabiliaId:int}"
 
 @using Memorabilia.Application.Features.Admin.Person
+@using Memorabilia.Application.Features.Admin.Team
 @using Memorabilia.Application.Features.Memorabilia
 @using Memorabilia.Application.Features.Memorabilia.Bat
 @using Memorabilia.Domain.Constants
@@ -120,9 +121,9 @@ else
                             <input type="checkbox" @onchange="eventArgs => { TeamsCheckboxClicked(eventArgs.Value); }" />
                             <label for="teams">Associate Bat with a Team</label>
                             <div class="form-group" hidden="@(!_displayTeams)">
-                                <_TeamSelector AllowMultiple="false"
-                                               SportLeagueLevel="_viewModel.SportLeagueLevel"
-                                               Teams="_viewModel.Teams" />
+                                <_TeamSelector SelectedTeam="_viewModel.Team"
+                                               SelectedTeamChanged="SelectedTeamChanged"
+                                               SportLeagueLevel="_viewModel.SportLeagueLevel" />
                             </div>                    
                         </div> 
                     </div>
@@ -136,7 +137,7 @@ else
         </div>
         <div class="row">
             <div class="col-md-12" style="text-align: center">
-                <a href="Memorabilia/UnsignedItems">Back</a>
+                <a href="Memorabilia/Items">Back</a>
             </div>
         </div>
         <br />
@@ -154,10 +155,12 @@ else
 
     protected async Task HandleValidSubmit()
     {
-        var userId = await _localStorage.GetAsync<int>("UserId");
+        var userId = await _localStorage.GetAsync<int>("UserId").ConfigureAwait(false);
 
         if (userId.Value == 0)
-            _navigation.NavigateTo("Login");
+            _navigation.NavigateTo("Login");  
+            
+        _viewModel.MemorabiliaId = MemorabiliaId;
 
         var command = new SaveBat.Command(_viewModel);
 
@@ -172,7 +175,7 @@ else
 
     protected override async Task OnInitializedAsync()
     {
-        var userId = await _localStorage.GetAsync<int>("UserId");
+        var userId = await _localStorage.GetAsync<int>("UserId").ConfigureAwait(false);
 
         if (userId.Value == 0)
             _navigation.NavigateTo("Login");        
@@ -182,7 +185,7 @@ else
 
         if (viewModel.Brand == null)
         {
-            _navigation.NavigateTo($"Memorabilia/Bat/Add/{MemorabiliaId}");
+            SetDefaults();
             return;
         }    
 
@@ -202,12 +205,26 @@ else
         StateHasChanged();
     } 
 
+    private void SelectedTeamChanged(SaveTeamViewModel team)
+    {
+        _viewModel.Team = team;
+    }
+
+    private void SetDefaults()
+    {        
+        _viewModel.BatTypeId = BatType.BigStick.Id;
+        _viewModel.BrandId = Brand.Rawlings.Id;
+        _viewModel.ColorId = Color.Black.Id;
+        _viewModel.GameStyleTypeId = GameStyleType.None.Id;
+        _viewModel.SizeId = Size.Full.Id;  
+    }
+
     public void TeamsCheckboxClicked(object isChecked)
     {
         _displayTeams = (bool)isChecked;
 
         if (!_displayTeams)
-            _viewModel.Teams = new();
+            _viewModel.Team = new();
 
         StateHasChanged();
     }

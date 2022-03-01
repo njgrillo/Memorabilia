@@ -1,7 +1,6 @@
-﻿@page "/Autographs/Edit"
-@page "/Autographs/Edit/{autographId:int}"
+﻿@page "/Autographs/Edit/{memorabiliaId:int}"
+@page "/Autographs/Edit/{memorabiliaId:int}/{autographId:int}"
 
-@using Blazored.Typeahead
 @using Memorabilia.Application.Features.Admin.Person
 @using Memorabilia.Application.Features.Autograph
 @using Memorabilia.Application.Features.Memorabilia
@@ -39,30 +38,38 @@ else
                 <DataAnnotationsValidator />
                 <ValidationSummary />
                 <div class="row">
-                    <div class="col-lg-6">
+                    <div class="col-lg-12">
                         <div class="form-group">
                             <label for="person">Person</label>
                             <_Tooltip Text="Import from memorabilia item">
-                                <img class="can-click" src="images/import.jpg" alt="Image" height="20" width="20" @onclick="OnImportPersonClick" />
+                                <img class="can-click" 
+                                     src="images/import.jpg" 
+                                     alt="Image" 
+                                     height="20" 
+                                     width="20" 
+                                     hidden="@(!_displayPersonImport)"
+                                     @onclick="OnImportPersonClick" />
                             </_Tooltip>
-                            <BlazoredTypeahead SearchMethod="SearchPeople"
-                                               @bind-Value="_viewModel.Person"
-                                               Placeholder="Search by name...">
-                                <SelectedTemplate Context="person">
-                                    @person.DisplayName
-                                </SelectedTemplate>
-                                <ResultTemplate Context="person">
-                                    @person.DisplayName
-                                </ResultTemplate>
-                            </BlazoredTypeahead>                
+                            <_PersonSelector SelectedPerson="_viewModel.Person"
+                                             SelectedPersonChanged="SelectedPersonChanged" />          
                         </div>
-                    </div>
+                    </div>                                       
+                </div>
+                <div class="row">
                     <div class="col-lg-6">
                         <div class="form-group">
                             <label for="writingInstrument">Writing Instrument</label>
                             <_WritingInstrumentDropDown @bind-Value="@_viewModel.WritingInstrumentId" 
                                                         @bind-Value:event="ValueChanged" /> 
                         </div>
+                    </div>                     
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label for="color">Color</label>
+                            <_ColorDropDown @bind-Value="@_viewModel.ColorId" 
+                                            @bind-Value:event="ValueChanged"
+                                            UseAutographColors="true" /> 
+                        </div>  
                     </div>                    
                 </div>
                 <div class="row">
@@ -75,47 +82,13 @@ else
                     </div>
                     <div class="col-lg-6">
                         <div class="form-group">
-                            <label for="color">Color</label>
-                            <_ColorDropDown @bind-Value="@_viewModel.ColorId" 
-                                            @bind-Value:event="ValueChanged" /> 
-                        </div>  
-                    </div>                    
-                </div>
-                <div class="row">
-                    <div class="col-lg-6">
-                        <div class="form-group">
                             <label for="grade">Grade</label>
                             <InputNumber id="grade" class="form-control" @bind-Value="_viewModel.Grade" />
                         </div>
-                    </div>
-                    <div class="col-lg-6">
-                        <div class="form-group">
-                            <label for="acquisitionType">Acquisition Type</label>
-                            <_Tooltip Text="Import from memorabilia item">
-                                <img class="can-click" src="images/import.jpg" alt="Image" height="20" width="20" @onclick="OnImportAcquisitionClick" />
-                            </_Tooltip>
-                            <_AcquisitionTypeDropDown @bind-Value="@_viewModel.AcquisitionTypeId" 
-                                                      @bind-Value:event="ValueChanged"
-                                                      IsAutograph="false" /> 
-                        </div>
-                    </div>                    
+                    </div>                                  
                 </div>
                 <div class="row">
-                    <div class="col-lg-6">
-                        <div class="form-group">
-                            <label for="estimatedValue">Estimated Value</label>
-                            <InputNumber id="estimatedValue" class="form-control" @bind-Value="_viewModel.EstimatedValue" />
-                        </div>
-                    </div>
-                    <div class="col-lg-6">
-                        <div class="form-group">
-                            <label for="acquiredDate">Acquired Date</label>
-                            <InputDate id="acquiredDate" class="form-control" @bind-Value="_viewModel.AcquiredDate" />
-                        </div>
-                    </div>                    
-                </div>
-                <div class="row">
-                    <div class="col-lg-6">
+                    <div class="col-lg-12">
                         <div class="form-group">
                             <input type="checkbox" @onchange="eventArgs => { PersonalizationCheckboxClicked(eventArgs.Value); }" />
                             <label for="personalization">Has Personalization</label>
@@ -129,24 +102,68 @@ else
                                 </div>
                             </div>                    
                         </div> 
+                    </div>                                       
+                </div> 
+                <div class="row">                    
+                    <div class="col-lg-12">
+                        <div class="form-group">
+                            <input type="checkbox" checked="checked" @onchange="eventArgs => { EstimatedValueCheckboxClicked(eventArgs.Value); }" />
+                            <label for="estimatedValue">Estimated Value same as Memorabilia</label>                                               
+                        </div> 
                     </div>
+                </div> 
+                <div class="row" hidden="@(!_displayEstimatedValue)">
                     <div class="col-lg-6">
-                        <div class="form-group" hidden="@(!_viewModel.CanHaveCost)">
-                            <label for="cost">Cost</label>
-                            <InputNumber id="cost" class="form-control" @bind-Value="_viewModel.Cost" />
+                        <div class="form-group">
+                            <label for="estimatedValue">Estimated Value ($)</label>
+                            <InputNumber id="estimatedValue" class="form-control" @bind-Value="_viewModel.EstimatedValue" />
                         </div>
-                    </div>                    
-                </div>
-                <div class="row">
-                    <div class="col-lg-6" />
-                    <div class="col-lg-6">
-                        <div class="form-group" hidden="@(!_viewModel.CanHaveCost)">
-                            <label for="purchaseType">Place of Purchase</label>
-                            <_PurchaseTypeDropDown @bind-Value="@_viewModel.PurchaseTypeId" 
-                                                   @bind-Value:event="ValueChanged" /> 
-                        </div>
-                    </div>                    
-                </div>
+                    </div>
+                </div>  
+                <div class="row">                    
+                    <div class="col-lg-12">
+                        <div class="form-group">
+                            <input type="checkbox" checked="checked" @onchange="eventArgs => { AcquisitionDetailsCheckboxClicked(eventArgs.Value); }" />
+                            <label for="person">Acquisition Details same as Memorabilia</label>                                               
+                        </div> 
+                    </div>
+                </div>                          
+                <div hidden="@(!_displayAcquisitionDetails)">
+                    <div class="row">  
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label for="acquisitionType">Acquisition Type</label>
+                                <_Tooltip Text="Import from memorabilia item">
+                                    <img class="can-click" src="images/import.jpg" alt="Image" height="20" width="20" @onclick="OnImportAcquisitionClick" />
+                                </_Tooltip>
+                                <_AcquisitionTypeDropDown @bind-Value="@_viewModel.AcquisitionTypeId" 
+                                                          @bind-Value:event="ValueChanged"
+                                                          IsAutograph="true" /> 
+                            </div>
+                        </div>  
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label for="acquiredDate">Acquired Date</label>
+                                <InputDate id="acquiredDate" class="form-control" @bind-Value="_viewModel.AcquiredDate" />
+                            </div>
+                        </div>                    
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="form-group" hidden="@(!_viewModel.CanHaveCost)">
+                                <label for="cost">Cost ($)</label>
+                                <InputNumber id="cost" class="form-control" @bind-Value="_viewModel.Cost" />
+                            </div>
+                        </div> 
+                        <div class="col-lg-6">
+                            <div class="form-group" hidden="@(!_viewModel.CanHaveCost)">
+                                <label for="purchaseType">Place of Purchase</label>
+                                <_PurchaseTypeDropDown @bind-Value="@_viewModel.PurchaseTypeId" 
+                                                       @bind-Value:event="ValueChanged" /> 
+                            </div>
+                        </div> 
+                    </div>
+                </div>                
                 <div class="text-right">
                     <button type="submit" class="btn btn-primary" @onclick="@(()=> _continue = true)">Save & Continue</button>
                     <button type="submit" class="btn btn-primary">Save & Exit</button>
@@ -161,15 +178,20 @@ else
     [Parameter]
     public int AutographId { get; set; }
 
+    [Parameter]
+    public int MemorabiliaId { get; set; }
+
     private bool _continue;
+    private bool _displayAcquisitionDetails;
+    private bool _displayEstimatedValue;
     private bool _displayPersonalization;
-    private int _itemTypeId;
-    private IEnumerable<PersonViewModel> _people = Enumerable.Empty<PersonViewModel>();   
+    private bool _displayPersonImport;
+    private int _itemTypeId; 
     private SaveAutographViewModel _viewModel = new SaveAutographViewModel();
 
     protected async Task HandleValidSubmit()
     {
-        var userId = await _localStorage.GetAsync<int>("UserId");
+        var userId = await _localStorage.GetAsync<int>("UserId").ConfigureAwait(false);
 
         if (userId.Value == 0)
             _navigation.NavigateTo("Login"); 
@@ -178,34 +200,85 @@ else
 
         await _commandRouter.Send(command).ConfigureAwait(false);
 
-        _navigation.NavigateTo(_continue ? $"Autographs/Inscriptions/Edit/{AutographId}" : "Memorabilia");
+        _navigation.NavigateTo(_continue ? $"Autographs/Inscriptions/Edit/{command.Id}" : "Memorabilia");
 
         _toastService.ShowSuccess("Autograph was saved successfully!", _viewModel.PageTitle);
     }
 
     protected override async Task OnInitializedAsync()
     {
-        var userId = await _localStorage.GetAsync<int>("UserId");
+        var userId = await _localStorage.GetAsync<int>("UserId").ConfigureAwait(false);
 
         if (userId.Value == 0)
             _navigation.NavigateTo("Login");        
 
-        var query = new GetAutograph.Query(AutographId);
-        var autograph = await _queryRouter.Send(query).ConfigureAwait(false);
+        var query = new GetMemorabiliaItem.Query(MemorabiliaId);
+        var viewModel = await _queryRouter.Send(query).ConfigureAwait(false);
 
-        //if (autograph == null)
-        //    _navigation.NavigateTo($"Autographs/Add/{command.Id}");
+        if (viewModel.Autographs.Any())
+        {
+            if (AutographId == 0)
+            {
+                _viewModel = new SaveAutographViewModel(viewModel);
+                SetDefaults();
+                return;
+            }
 
-        _viewModel = new SaveAutographViewModel(autograph);       
-        
-        await LoadPeople().ConfigureAwait(false);
+            GetViewModel(viewModel);
+        }
+        else
+        {
+            _viewModel = new SaveAutographViewModel(viewModel);
+            SetDefaults();
+        }  
     }
 
-    private async Task LoadPeople()
+    private void AcquisitionDetailsCheckboxClicked(object isChecked)
     {
-        var query = new GetPeople.Query();
+        _displayAcquisitionDetails = !(bool)isChecked;
 
-        _people = (await _queryRouter.Send(query).ConfigureAwait(false)).People;
+        if (!_displayAcquisitionDetails)
+        {
+            _viewModel.AcquisitionTypeId = 0;
+            _viewModel.AcquiredDate = null;
+            _viewModel.Cost = null;
+            _viewModel.PurchaseTypeId = 0;
+        }        
+
+        StateHasChanged();
+    }
+
+    private void EstimatedValueCheckboxClicked(object isChecked)
+    {
+        _displayEstimatedValue = !(bool)isChecked;
+
+        if (!_displayEstimatedValue)
+        {
+            _viewModel.EstimatedValue = null;
+        }        
+
+        StateHasChanged();
+    }
+
+    private void GetViewModel(MemorabiliaItemViewModel viewModel)
+    {
+        var autograph = AutographId == -1 
+            ? viewModel.Autographs.FirstOrDefault()
+            : viewModel.Autographs.SingleOrDefault(autograph => autograph.Id == AutographId);
+
+        if (autograph == null)
+        {
+            _viewModel = new SaveAutographViewModel(viewModel);
+            SetDefaults();
+            return;
+        }
+
+        _viewModel = new SaveAutographViewModel(autograph);
+
+        _displayAcquisitionDetails = _viewModel.AcquisitionTypeId > 0;
+        _displayEstimatedValue = _viewModel.EstimatedValue.HasValue;
+        _displayPersonalization = !_viewModel.PersonalizationText.IsNullOrEmpty();
+        _displayPersonImport = _viewModel.MemorabiliaPerson?.Id > 0;
     }
 
     private void OnImportAcquisitionClick()
@@ -218,7 +291,7 @@ else
 
     private void OnImportPersonClick()
     {
-        _viewModel.Person = _viewModel.MemorabiliaPerson;
+        _viewModel.Person = new SavePersonViewModel(_viewModel.MemorabiliaPerson);
     }
 
     private void PersonalizationCheckboxClicked(object isChecked)
@@ -230,8 +303,13 @@ else
         StateHasChanged();
     } 
 
-    private async Task<IEnumerable<PersonViewModel>> SearchPeople(string searchText)
+    private void SelectedPersonChanged(SavePersonViewModel person)
     {
-        return await Task.FromResult(_people.Where(person => person.DisplayName.Contains(searchText, StringComparison.OrdinalIgnoreCase))).ConfigureAwait(false);
+        _viewModel.Person = person;
+    }
+
+    private void SetDefaults()
+    {
+        _viewModel.ConditionId = Domain.Constants.Condition.Pristine.Id;
     }
 }

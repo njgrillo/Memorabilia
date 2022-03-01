@@ -15,6 +15,7 @@
         @team.TeamDisplayName
     </ResultTemplate>   
 </BlazoredTypeahead> 
+<br />
 <div class="row">
     <div class="col-lg-6">
         <div class="form-group">
@@ -33,35 +34,30 @@
     <button type="button" class="btn btn-secondary" @onclick="Add">Add</button>
 </div>
 <br />  
-<table class="table" style="border: 1px solid black;">
-    <thead>
-        <tr>
-            <th>Team</th>
-            <th>Begin Year</th>
-            <th>End Year</th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var team in Teams.Where(team => !team.IsDeleted))
-        {
-            <tr>
-                <td>@team.TeamName</td>
-                <td>@team.BeginYear</td>
-                <td>@team.EndYear</td>
-                <td>
-                    <_Tooltip Text="Delete">
-                        <img class="can-click" 
-                             src="images/trash.png" 
-                             height="25" 
-                             width="25" 
-                             @onclick="@(_ => Remove(team.Id))" />
-                    </_Tooltip>
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
+<_Table Items="Teams.Where(team => !team.IsDeleted).ToList()" 
+        ItemsPerPage="10"   
+        TItem="SavePersonTeamViewModel">
+    <HeaderTemplate>
+        <th scope="col">Team</th>
+        <th scope="col">Begin Year</th>
+        <th scope="col">End Year</th>
+        <th scope="col"></th>
+    </HeaderTemplate>
+    <RowTemplate>
+        <td>@context.TeamName</td>
+        <td>@context.BeginYear</td>
+        <td>@context.EndYear</td>
+        <td>
+            <_Tooltip Text="Delete">
+                <img class="can-click" 
+                     src="images/trash.png" 
+                     height="25" 
+                     width="25" 
+                     @onclick="@(_ => Remove(context.Id))" />
+            </_Tooltip>
+        </td>
+    </RowTemplate>
+</_Table>
 
 @code {
     [Parameter]

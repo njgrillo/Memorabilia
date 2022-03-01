@@ -707,6 +707,18 @@ BEGIN
 	DROP TABLE [dbo].[GloveType]
 END
 
+--HelmetFinish Drop
+IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = N'HelmetFinish')
+BEGIN
+	IF OBJECT_ID('tempdb..#TempHelmetFinishTable') IS NOT NULL DROP TABLE #TempHelmetFinishTable; 
+
+	SELECT * 
+	INTO #TempHelmetFinishTable
+	FROM [dbo].[HelmetFinish]
+
+	DROP TABLE [dbo].[HelmetFinish]
+END
+
 --HelmetQualityType Drop 
 IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = N'HelmetQualityType')
 BEGIN
@@ -1762,6 +1774,45 @@ END
 
 SET IDENTITY_INSERT [dbo].[GloveType] OFF
 
+--HelmetFinish Create
+CREATE TABLE [dbo].[HelmetFinish](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[Name] [varchar](100) NOT NULL,
+	[Abbreviation] [varchar](10) NULL,
+ CONSTRAINT [PK_HelmetFinish] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+
+SET IDENTITY_INSERT [dbo].[HelmetFinish] ON
+
+IF @LoadInitialValues = 1
+BEGIN
+	INSERT INTO  [dbo].[HelmetFinish] (Id, [Name], Abbreviation)
+	VALUES (1, 'Pewter', NULL)
+		 , (2, 'Chrome', NULL)
+		 , (3, '24k Gold Plated', NULL)
+		 , (4, 'Sterling Silver', NULL)
+		 , (5, 'Bronze', NULL)
+		 , (6, 'Blaze', NULL)
+		 , (7, 'Ice', NULL)
+		 , (8, 'Flash', NULL)
+		 , (9, 'Custom', NULL)
+		 , (10, 'Drip', NULL)
+		 , (11, 'Ripped', NULL)
+		 , (12, 'Other', NULL)
+END
+
+IF @KeepExistingValues = 1
+BEGIN
+	INSERT INTO [dbo].[HelmetFinish] (Id, [Name], Abbreviation)
+	SELECT * 
+	FROM #TempHelmetFinishTable
+END
+
+SET IDENTITY_INSERT [dbo].[HelmetFinish] OFF
+
 --HelmetQualityType Create
 CREATE TABLE [dbo].[HelmetQualityType](
 	[Id] [int] IDENTITY(1,1) NOT NULL,
@@ -1807,17 +1858,12 @@ SET IDENTITY_INSERT [dbo].[HelmetType] ON
 IF @LoadInitialValues = 1
 BEGIN
 	INSERT INTO  [dbo].[HelmetType] (Id, Name, Abbreviation)
-	VALUES (1, 'Pewter', NULL)
-		 , (2, 'Chrome', NULL)
-		 , (3, 'Throwback', NULL)
-		 , (4, '24k ld Plated', NULL)
-		 , (5, 'Sterling Silver', NULL)
-		 , (6, 'Bronze', NULL)
-		 , (7, 'Revolution', NULL)
-		 , (8, 'Speed', NULL)
-		 , (9, 'Blaze', NULL)
-		 , (10, 'Ice', NULL)
-		 , (11, 'Flash', NULL)
+	VALUES (1, 'Flex', NULL)
+		 , (2, 'Hydro', NULL)
+		 , (3, 'Speed', NULL)
+		 , (4, 'Revolution', NULL)
+		 , (5, 'F7', NULL)
+		 , (6, 'Other', NULL)
 END
 
 IF @KeepExistingValues = 1
@@ -2564,7 +2610,7 @@ CREATE TABLE [dbo].[Autograph](
 	[ConditionId] [int] NOT NULL,
 	[WritingInstrumentId] [int] NOT NULL,
 	[ColorId] [int] NOT NULL,
-	[AcquisitionId] [int] NOT NULL,
+	[AcquisitionId] [int] NULL,
 	[EstimatedValue] decimal(12, 2) NULL,
 	[Grade] [int] NULL,
 	[CreateDate] [datetime] NOT NULL,
@@ -3268,6 +3314,8 @@ CREATE TABLE [dbo].[MemorabiliaHelmet](
 	[MemorabiliaId] [int] NOT NULL,
 	[HelmetQualityTypeId] [int] NULL,
 	[HelmetTypeId] [int] NULL,
+	[HelmetFinishId] [int] NULL,
+	[Throwback] [bit] NOT NULL,
  CONSTRAINT [PK_MemorabiliaHelmet] PRIMARY KEY CLUSTERED 
 (
 	[Id] ASC
@@ -3282,6 +3330,10 @@ ALTER TABLE [dbo].[MemorabiliaHelmet]  WITH CHECK ADD  CONSTRAINT [FK_Memorabili
 REFERENCES [dbo].[HelmetType] ([Id])
 ALTER TABLE [dbo].[MemorabiliaHelmet] CHECK CONSTRAINT [FK_MemorabiliaHelmet_HelmetType]
 
+ALTER TABLE [dbo].[MemorabiliaHelmet]  WITH CHECK ADD  CONSTRAINT [FK_MemorabiliaHelmet_HelmetFinish] FOREIGN KEY([HelmetFinishId])
+REFERENCES [dbo].[HelmetFinish] ([Id])
+ALTER TABLE [dbo].[MemorabiliaHelmet] CHECK CONSTRAINT [FK_MemorabiliaHelmet_HelmetFinish]
+
 ALTER TABLE [dbo].[MemorabiliaHelmet]  WITH CHECK ADD  CONSTRAINT [FK_MemorabiliaHelmet_Memorabilia] FOREIGN KEY([MemorabiliaId])
 REFERENCES [dbo].[Memorabilia] ([Id])
 ALTER TABLE [dbo].[MemorabiliaHelmet] CHECK CONSTRAINT [FK_MemorabiliaHelmet_Memorabilia]
@@ -3290,7 +3342,7 @@ SET IDENTITY_INSERT [dbo].[MemorabiliaHelmet] ON
 
 IF @KeepExistingValues = 1
 BEGIN
-	INSERT INTO [dbo].[MemorabiliaHelmet] (Id, MemorabiliaId, HelmetQualityTypeId, HelmetTypeId)
+	INSERT INTO [dbo].[MemorabiliaHelmet] (Id, MemorabiliaId, HelmetQualityTypeId, HelmetTypeId, HelmetFinishId, Throwback)
 	SELECT * 
 	FROM #TempMemorabiliaHelmetTable
 END

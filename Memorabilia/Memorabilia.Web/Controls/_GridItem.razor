@@ -1,0 +1,59 @@
+﻿@typeparam TItem
+
+<tr>
+    @if (@HasChildItems)
+    {
+        <td>
+            <img class="can-click" 
+                 src="@GetToggleImage()" 
+                 height="40" 
+                 width="40" 
+                 @onclick="@(_ => ToggleExpand())" />
+        </td>
+    }
+    @RowTemplate(Item)                  
+</tr>
+@if (@HasChildItems && _showSubGridItems)
+{
+    if (@ShowSummary){
+        <tr style="background-color:#6D7B8D;color:honeydew;border-style:dashed;border-width:2px;border-color:#ECF3F4;">  
+            @SummaryTemplate(Item) 
+        </tr> 
+    }                
+    <tr>
+        <td></td>
+        @SubGridTemplate(Item)                    
+    </tr>
+}  
+
+@code {
+    [Parameter]
+    public bool HasChildItems { get; set; }
+
+    [Parameter]
+    public TItem Item { get; set; }
+
+    [Parameter]
+    public RenderFragment<TItem> RowTemplate { get; set; }
+
+    [Parameter]
+    public bool ShowSummary { get; set; }
+
+    [Parameter]
+    public RenderFragment<TItem> SubGridTemplate { get; set; }
+
+    [Parameter]
+    public RenderFragment<TItem> SummaryTemplate { get; set; }
+
+    private bool _showSubGridItems = false;
+
+    private string GetToggleImage()
+    {
+        return _showSubGridItems ? "images/down.png" : "images/right.png";
+    }
+
+    protected void ToggleExpand()
+    {
+        _showSubGridItems = !_showSubGridItems;
+    }
+}

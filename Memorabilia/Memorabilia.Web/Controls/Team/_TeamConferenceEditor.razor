@@ -29,35 +29,30 @@
     <button type="button" class="btn btn-secondary" @onclick="Add">Add</button>
 </div>
 <br />
-<table class="table" style="border: 1px solid black;">
-    <thead>
-        <tr>
-            <th>Conference</th>
-            <th>Begin Year</th>
-            <th>End Year</th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var conference in Conferences.Where(x => !x.IsDeleted).OrderBy(x => x.BeginYear))
-        {
-            <tr>
-                <td>@conference.ConferenceName</td>
-                <td>@conference.BeginYear</td>
-                <td>@conference.EndYear</td>
-                <td>
-                    <_Tooltip Text="Delete">
-                        <img class="can-click" 
-                             src="images/trash.png" 
-                             height="25" 
-                             width="25" 
-                             @onclick="@(_ => Remove(conference.ConferenceId, conference.BeginYear))" />
-                    </_Tooltip>
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
+<_Table Items="Conferences.Where(x => !x.IsDeleted).OrderBy(x => x.BeginYear).ToList()" 
+        ItemsPerPage="5"   
+        TItem="SaveTeamConferenceViewModel">
+    <HeaderTemplate>
+        <th scope="col">Conference</th>
+        <th scope="col">Begin Year</th>
+        <th scope="col">End Year</th>
+        <th scope="col"></th>
+    </HeaderTemplate>
+    <RowTemplate>
+        <td>@context.ConferenceName</td>
+        <td>@context.BeginYear</td>
+        <td>@context.EndYear</td>
+        <td>
+            <_Tooltip Text="Delete">
+                <img class="can-click" 
+                     src="images/trash.png" 
+                     height="25" 
+                     width="25" 
+                     @onclick="@(_ => Remove(context.ConferenceId, context.BeginYear))" />
+            </_Tooltip>
+        </td>
+    </RowTemplate>
+</_Table>
 
 @code {
     [Parameter]

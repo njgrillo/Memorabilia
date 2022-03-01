@@ -1,6 +1,7 @@
 ﻿@page "/Memorabilia/Basketball/Edit/{memorabiliaId:int}"
 
 @using Memorabilia.Application.Features.Admin.Person
+@using Memorabilia.Application.Features.Admin.Team
 @using Memorabilia.Application.Features.Memorabilia
 @using Memorabilia.Application.Features.Memorabilia.Basketball
 @using Memorabilia.Domain.Constants
@@ -107,8 +108,8 @@ else
                             <input type="checkbox" @onchange="eventArgs => { PersonCheckboxClicked(eventArgs.Value); }" />
                             <label for="person">Associate Basketball with a Person</label>
                             <div class="form-group" hidden="@(!_displayPeople)">
-                                <_PersonSelector AllowMultiple="false"
-                                                 People="_viewModel.People" />
+                                <_PersonSelector SelectedPerson="_viewModel.Person"
+                                                 SelectedPersonChanged="SelectedPersonChanged" />
                             </div>                    
                         </div> 
                     </div>
@@ -119,9 +120,9 @@ else
                             <input type="checkbox" @onchange="eventArgs => { TeamsCheckboxClicked(eventArgs.Value); }" />
                             <label for="teams">Associate Basketball with a Team</label>
                             <div class="form-group" hidden="@(!_displayTeams)">
-                                <_TeamSelector AllowMultiple="false"
-                                               SportLeagueLevel="_viewModel.SportLeagueLevel"
-                                               Teams="_viewModel.Teams" /> 
+                                <_TeamSelector SelectedTeam="_viewModel.Team"
+                                               SelectedTeamChanged="SelectedTeamChanged"
+                                               SportLeagueLevel="_viewModel.SportLeagueLevel" />
                             </div>                    
                         </div> 
                     </div>
@@ -135,7 +136,7 @@ else
         </div>
         <div class="row">
             <div class="col-md-12" style="text-align: center">
-                <a href="Memorabilia/UnsignedItems">Back</a>
+                <a href="Memorabilia/Items">Back</a>
             </div>
         </div>
         <br />
@@ -153,10 +154,12 @@ else
 
     protected async Task HandleValidSubmit()
     {
-        var userId = await _localStorage.GetAsync<int>("UserId");
+        var userId = await _localStorage.GetAsync<int>("UserId").ConfigureAwait(false);
 
         if (userId.Value == 0)
             _navigation.NavigateTo("Login");
+
+        _viewModel.MemorabiliaId = MemorabiliaId;
 
         var command = new SaveBasketball.Command(_viewModel);
 
@@ -171,7 +174,7 @@ else
 
     protected override async Task OnInitializedAsync()
     {
-        var userId = await _localStorage.GetAsync<int>("UserId");
+        var userId = await _localStorage.GetAsync<int>("UserId").ConfigureAwait(false);
 
         if (userId.Value == 0)
             _navigation.NavigateTo("Login");        
@@ -181,12 +184,12 @@ else
 
         if (viewModel.Brand == null)
         {
-            _navigation.NavigateTo($"Memorabilia/Basketball/Add/{MemorabiliaId}");
+            SetDefaults();
             return;
         }    
 
         _viewModel = new SaveBasketballViewModel(viewModel);  
-        
+                
         _displayPeople = _viewModel.HasPerson;
         _displayTeams = _viewModel.HasTeam;
     }  
@@ -196,17 +199,36 @@ else
         _displayPeople = (bool)isChecked;
 
         if (!_displayPeople)
-            _viewModel.People = new();
+            _viewModel.Person = null;
 
         StateHasChanged();
     } 
+
+    private void SelectedPersonChanged(SavePersonViewModel person)
+    {
+        _viewModel.Person = person;
+    }
+
+    private void SelectedTeamChanged(SaveTeamViewModel team)
+    {
+        _viewModel.Team = team;
+    }
+
+    private void SetDefaults()
+    {
+        _viewModel.BasketballTypeId = BasketballType.Official.Id;
+        _viewModel.BrandId = Brand.Spalding.Id;
+        _viewModel.GameStyleTypeId = GameStyleType.None.Id;        
+        _viewModel.LevelTypeId = LevelType.Professional.Id;
+        _viewModel.SizeId = Size.Standard.Id;       
+    }
 
     public void TeamsCheckboxClicked(object isChecked)
     {
         _displayTeams = (bool)isChecked;
 
         if (!_displayTeams)
-            _viewModel.Teams = new();
+            _viewModel.Team = null;
 
         StateHasChanged();
     }

@@ -20,10 +20,14 @@ namespace Memorabilia.Application.Features.Memorabilia.HockeyStick
             GameStyleTypeId = viewModel.Game?.GameStyleTypeId ?? 0;
             LevelTypeId = viewModel.Level.LevelTypeId;
             MemorabiliaId = viewModel.MemorabiliaId;
-            People = viewModel.People.Select(person => new SavePersonViewModel(new PersonViewModel(person.Person))).ToList();
             SizeId = viewModel.Size.SizeId;
             SportIds = viewModel.Sports.Select(x => x.Id).ToList();
-            Teams = viewModel.Teams.Select(team => new SaveTeamViewModel(new TeamViewModel(team.Team))).ToList();
+
+            if (viewModel.People.Any())
+                Person = new SavePersonViewModel(new PersonViewModel(viewModel.People.First().Person));
+
+            if (viewModel.Teams.Any())
+                Team = new SaveTeamViewModel(new TeamViewModel(viewModel.Teams.First().Team));
         }
 
         [Required]
@@ -40,11 +44,13 @@ namespace Memorabilia.Application.Features.Memorabilia.HockeyStick
 
         public int GameStyleTypeId { get; set; }
 
-        public bool HasPerson => People.Any();
+        public bool HasPerson => Person?.Id > 0;
 
         public bool HasSport => SportIds.Any();
 
-        public bool HasTeam => Teams.Any();
+        public bool HasTeam => Team?.Id > 0;
+
+        public string ImagePath { get; set; }
 
         public ItemType ItemType => ItemType.HockeyStick;
 
@@ -57,7 +63,7 @@ namespace Memorabilia.Application.Features.Memorabilia.HockeyStick
 
         public override string PageTitle => $"{(MemorabiliaId > 0 ? "Edit" : "Add")} {ItemType.HockeyStick.Name} Details";
 
-        public List<SavePersonViewModel> People { get; set; } = new();
+        public SavePersonViewModel Person { get; set; } 
 
         [Required]
         [Range(1, int.MaxValue, ErrorMessage = "Size is required.")]
@@ -65,6 +71,8 @@ namespace Memorabilia.Application.Features.Memorabilia.HockeyStick
 
         public List<int> SportIds { get; set; } = new();
 
-        public List<SaveTeamViewModel> Teams { get; set; } = new();
+        public SportLeagueLevel SportLeagueLevel => SportLeagueLevel.NationalHockeyLeague;
+
+        public SaveTeamViewModel Team { get; set; } 
     }
 }

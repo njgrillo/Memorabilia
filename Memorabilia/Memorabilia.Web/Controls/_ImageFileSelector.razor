@@ -1,6 +1,5 @@
 ﻿@using Memorabilia.Application.Features.Image
 @using Memorabilia.Domain.Constants
-@using Memorabilia.Domain.Entities
 @using Microsoft.AspNetCore.Hosting
 @using Microsoft.Extensions.Logging
 @using System 
@@ -17,26 +16,13 @@
 <div class="row" hidden="@(!DisplayPreview)">
     @foreach(var image in Value)
     {
-        <div style="border: 1px solid black; margin-top: 5%; margin-bottom: 5%; margin-left: 5%; margin-right: 5%;" hidden="@(!HasPrimary)">
-            <div class="row" style="margin-top: 5%; margin-bottom: 5%; margin-left: 5%; margin-right: 5%;">
-                <div class="col-lg-12" style="text-align: center;">
-                    <h4>@(Domain.Constants.ImageType.Find(image.ImageTypeId).Name)</h4>
-                </div>
-            </div>
-            <div class="row" style="margin-top: 1%; margin-bottom: 1%; margin-left: 1%; margin-right: 1%;">
-                <div class="col-lg-12" style="text-align: center;">
-                    <img src="data:image/jpg;base64,@Convert.ToBase64String(File.ReadAllBytes(image.FilePath))" alt="Image" height="150" width="150">
-                </div>
-            </div>
-            <div class="row" style="margin-top: 1%; margin-bottom: 1%; margin-left: 1%; margin-right: 1%;">
-                <div class="col-lg-12" style="text-align: center;" hidden="@(!HasPrimary || image.IsPrimary)">
-                    <button class="btn btn-primary" type="button" @onclick="@( _ => SetPrimary(image.FilePath) )">Make Primary</button>
-                </div>
-                <div class="col-lg-12" style="text-align: center;" hidden="@(!CanRemove)">
-                    <button class="btn btn-danger" type="button" @onclick="@( _ => Remove(image.FilePath) )">Remove</button>
-                </div>
-            </div>
-        </div>        
+        <_ImageEditor CanRemove="CanRemove"
+                      HasPrimary="HasPrimary"
+                      ImageFilePath="@image.FilePath"
+                      ImageType="@Domain.Constants.ImageType.Find(image.ImageTypeId)"
+                      IsPrimary="@image.IsPrimary"
+                      OnPrimarySet="SetPrimary"
+                      OnRemove="Remove" />     
     } 
 </div>
 
@@ -68,24 +54,24 @@
     public List<SaveImageViewModel> Value { get; set; } = new();
 
     [Parameter]
-    public EventCallback<List<SaveImageViewModel>> ValueChanged { get; set; }    
+    public EventCallback<List<SaveImageViewModel>> ValueChanged { get; set; }   
 
     protected async Task Remove(string filePath)
     {
         if (File.Exists(filePath))
             File.Delete(filePath);
 
-        await OnRemove.InvokeAsync(filePath);
+        await OnRemove.InvokeAsync(filePath).ConfigureAwait(false);
     }
 
     protected async Task SetPrimary(string filePath)
     {
-        await OnPrimarySet.InvokeAsync(filePath);
+        await OnPrimarySet.InvokeAsync(filePath).ConfigureAwait(false);
     }
 
     private async Task LoadFiles(InputFileChangeEventArgs e)
     {
-        var userId = await _localStorage.GetAsync<int>("UserId");
+        var userId = await _localStorage.GetAsync<int>("UserId").ConfigureAwait(false);
 
         if (userId.Value == 0)
             _navigation.NavigateTo("Login");
@@ -97,7 +83,7 @@
 
     private async Task Save()
     {
-        var userId = await _localStorage.GetAsync<int>("UserId");
+        var userId = await _localStorage.GetAsync<int>("UserId").ConfigureAwait(false);
 
         if (userId.Value == 0)
             _navigation.NavigateTo("Login");
@@ -120,7 +106,7 @@
                 var path = Path.Combine(directory, fileName);
 
                 await using FileStream fs = new(path, FileMode.Create);
-                await file.OpenReadStream(MaximumFileSize ?? 5120000).CopyToAsync(fs);
+                await file.OpenReadStream(MaximumFileSize ?? 5120000).CopyToAsync(fs).ConfigureAwait(false);
 
                 images.Add(new SaveImageViewModel(new ImageViewModel(new Domain.Entities.Image($"wwwroot/userimages/{userId.Value}/{fileName}", imageType.Id))));
 
@@ -133,6 +119,6 @@
         }
 
         Value = images;
-        await ValueChanged.InvokeAsync(Value);
+        await ValueChanged.InvokeAsync(Value).ConfigureAwait(false);        
     }    
 }

@@ -85,18 +85,35 @@ else
                 </div>
                 <div class="row">
                     <div class="col-lg-6">
-                        <div class="form-group">
-                            <label for="HelmetQualityType">Quality</label>
-                            <_HelmetQualityTypeDropDown @bind-Value="@_viewModel.HelmetQualityTypeId" 
-                                                        @bind-Value:event="ValueChanged" /> 
-                        </div> 
-                    </div>
-                    <div class="col-lg-6">
                          <div class="form-group">
                             <label for="HelmetType">Type</label>
                             <_HelmetTypeDropDown @bind-Value="@_viewModel.HelmetTypeId" 
                                                  @bind-Value:event="ValueChanged" /> 
                         </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="form-group" hidden="@(!_viewModel.DisplayHelmetQualityType)">
+                            <label for="HelmetQualityType">Quality</label>
+                            <_HelmetQualityTypeDropDown @bind-Value="@_viewModel.HelmetQualityTypeId" 
+                                                        @bind-Value:event="ValueChanged" /> 
+                        </div> 
+                    </div>                    
+                </div>
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label for="HelmetFinish">Finish</label>
+                            <_HelmetFinishDropDown @bind-Value="@_viewModel.HelmetFinishId" 
+                                                   @bind-Value:event="ValueChanged" /> 
+                        </div> 
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="form-group">
+                             <InputCheckbox id="throwback" @bind-Value="@_viewModel.Throwback" />
+                            <label for="Throwback">Is a Throwback?</label>                           
+                        </div> 
                     </div>
                 </div>
                 <div class="row">                    
@@ -132,7 +149,7 @@ else
         </div>
         <div class="row">
             <div class="col-md-12" style="text-align: center">
-                <a href="Memorabilia/UnsignedItems">Back</a>
+                <a href="Memorabilia/Items">Back</a>
             </div>
         </div>
         <br />
@@ -150,10 +167,12 @@ else
 
     protected async Task HandleValidSubmit()
     {
-        var userId = await _localStorage.GetAsync<int>("UserId");
+        var userId = await _localStorage.GetAsync<int>("UserId").ConfigureAwait(false);
 
         if (userId.Value == 0)
-            _navigation.NavigateTo("Login");
+            _navigation.NavigateTo("Login");     
+            
+        _viewModel.MemorabiliaId = MemorabiliaId;
 
         var command = new SaveHelmet.Command(_viewModel);
 
@@ -168,7 +187,7 @@ else
 
     protected override async Task OnInitializedAsync()
     {
-        var userId = await _localStorage.GetAsync<int>("UserId");
+        var userId = await _localStorage.GetAsync<int>("UserId").ConfigureAwait(false);
 
         if (userId.Value == 0)
             _navigation.NavigateTo("Login");        
@@ -178,7 +197,7 @@ else
 
         if (HelmetViewModel.Brand == null)
         {
-            _navigation.NavigateTo($"Memorabilia/Helmet/Add/{MemorabiliaId}");
+            SetDefaults();
             return;
         }    
 
@@ -197,6 +216,13 @@ else
 
         StateHasChanged();
     } 
+
+    private void SetDefaults()
+    {        
+        _viewModel.BrandId = Brand.Riddell.Id;
+        _viewModel.GameStyleTypeId = GameStyleType.None.Id;
+        _viewModel.LevelTypeId = LevelType.Professional.Id;
+    }
 
     public void TeamsCheckboxClicked(object isChecked)
     {

@@ -31,6 +31,7 @@ namespace Memorabilia.Repository
             modelBuilder.Entity<Domain.Entities.Franchise>();            
             modelBuilder.Entity<Domain.Entities.GloveType>();
             modelBuilder.Entity<Domain.Entities.HallOfFame>().Property(x => x.VotePercentage).HasPrecision(5, 2);
+            modelBuilder.Entity<Domain.Entities.HelmetFinish>();
             modelBuilder.Entity<Domain.Entities.HelmetQualityType>();
             modelBuilder.Entity<Domain.Entities.HelmetType>();
             modelBuilder.Entity<Domain.Entities.ImageType>();

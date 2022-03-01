@@ -1,0 +1,149 @@
+﻿@page "/Memorabilia/Image/Edit/{memorabiliaId:int}"
+
+@using Application.Features.Image
+@using Memorabilia.Application.Features.Memorabilia
+@using Memorabilia.Application.Features.Memorabilia.Image
+@using System 
+@using System.IO
+
+@inject CommandRouter _commandRouter
+@inject ProtectedLocalStorage _localStorage
+@inject NavigationManager _navigation
+@inject QueryRouter _queryRouter
+@inject IToastService _toastService
+
+@if (_viewModel == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <div class="row">
+        <div class="col-md-12" style="text-align: center">
+            <h1>@_viewModel.PageTitle</h1>
+        </div>
+    </div>
+    <br />
+    <div style="border: 1px solid black; margin-top: 2%; margin-bottom: 2%; margin-left: 2%; margin-right: 2%;">
+        <div class="row" style="margin-top: 2%; margin-bottom: 2%; margin-left: 1%; margin-right: 1%;">
+            <div class="col-lg-12" style="text-align: center">
+                <img src="images/imagetypes.png" alt="Image" height="150" width="150" />
+            </div>                
+            <EditForm Model="_viewModel" OnValidSubmit="HandleValidSubmit">
+                <DataAnnotationsValidator />
+                <ValidationSummary />   
+                <div class="form-group">
+                    <_ImageFileSelector @bind-Value="@_viewModel.Images"
+                                        @bind-Value:event="ValueChanged" 
+                                        CanRemove="true"
+                                        DisplayPreview="true"
+                                        HasPrimary="true"                                        
+                                        MaximumAllowedFiles="5" 
+                                        MaximumFileSize="5120000"
+                                        OnPrimarySet="OnPrimarySet"
+                                        OnRemove="OnRemove" />
+                </div> 
+                <div class="text-right">                    
+                    <button type="submit" class="btn btn-primary" @onclick="@(()=> _continue = true)">Save & Continue</button>
+                    <button type="submit" class="btn btn-primary">Save & Exit</button>
+                    <button type="button" class="btn btn-secondary" @onclick="@(_ => _navigation.NavigateTo($"Autographs/Edit/{MemorabiliaId}/0"))">Skip</button>
+                    <button type="button" class="btn btn-secondary" @onclick="@(_ => _navigation.NavigateTo("Memorabilia"))">Cancel</button>
+                </div>
+            </EditForm>           
+        </div>
+    </div>
+}
+
+@code {
+    [Parameter]
+    public int MemorabiliaId { get; set; }
+
+    private bool _continue;
+    private SaveMemorabiliaImagesViewModel _viewModel = new SaveMemorabiliaImagesViewModel();
+
+    protected void Cancel()
+    {
+        foreach(var image in _viewModel.Images.Where(image => image.IsNew))
+        {
+            if (File.Exists(image.FilePath))
+                File.Delete(image.FilePath);
+        }
+
+        _viewModel.Images = new List<SaveImageViewModel>();
+
+        _navigation.NavigateTo("Memorabilia");
+    }
+
+    protected async Task HandleValidSubmit()
+    {
+        var userId = await _localStorage.GetAsync<int>("UserId").ConfigureAwait(false);
+
+        if (userId.Value == 0)
+            _navigation.NavigateTo("Login");  
+            
+        _viewModel.MemorabiliaId = MemorabiliaId;
+
+        var command = new SaveMemorabiliaImage.Command(_viewModel);
+
+        await _commandRouter.Send(command).ConfigureAwait(false);
+
+        var url = _continue ? $"Autographs/Edit/{MemorabiliaId}/-1" : "Memorabilia";
+
+        _navigation.NavigateTo(url);
+
+        _toastService.ShowSuccess("Memorabilia Images were saved successfully!", _viewModel.PageTitle);
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        var userId = await _localStorage.GetAsync<int>("UserId").ConfigureAwait(false);
+
+        if (userId.Value == 0)
+            _navigation.NavigateTo("Login");
+
+        var query = new GetMemorabiliaItem.Query(MemorabiliaId);
+        var memorabilia = await _queryRouter.Send(query).ConfigureAwait(false);
+
+        if (!memorabilia.Images.Any())
+            return;
+
+        _viewModel = new SaveMemorabiliaImagesViewModel(memorabilia.Images);
+    }
+
+    protected void OnPrimarySet(string filePath)
+    {
+        var image = _viewModel.Images.FirstOrDefault(i => i.FilePath == filePath);
+
+        if (image == null)
+            return;
+
+        foreach(var memorabiliaImage in _viewModel.Images)
+        {
+            if (memorabiliaImage.FilePath == image.FilePath)
+                memorabiliaImage.ImageTypeId = Domain.Constants.ImageType.Primary.Id;
+
+            if (memorabiliaImage.ImageTypeId == Domain.Constants.ImageType.Primary.Id && memorabiliaImage.FilePath != image.FilePath)
+                memorabiliaImage.ImageTypeId = Domain.Constants.ImageType.Secondary.Id;
+        }
+    }
+
+    protected void OnRemove(string filePath)
+    {
+        var image = _viewModel.Images.FirstOrDefault(i => i.FilePath == filePath);
+
+        if (image == null)
+            return;
+
+        _viewModel.Images.Remove(image);
+
+        if (!image.IsPrimary)
+            return;
+
+        var primaryImage = _viewModel.Images.FirstOrDefault();
+
+        if (primaryImage == null)
+            return;
+
+        primaryImage.ImageTypeId = Domain.Constants.ImageType.Primary.Id;       
+    }    
+}

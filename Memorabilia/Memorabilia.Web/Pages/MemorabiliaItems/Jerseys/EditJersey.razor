@@ -141,7 +141,7 @@ else
         </div>
         <div class="row">
             <div class="col-md-12" style="text-align: center">
-                <a href="Memorabilia/UnsignedItems">Back</a>
+                <a href="Memorabilia/Items">Back</a>
             </div>
         </div>
         <br />
@@ -159,10 +159,12 @@ else
 
     protected async Task HandleValidSubmit()
     {
-        var userId = await _localStorage.GetAsync<int>("UserId");
+        var userId = await _localStorage.GetAsync<int>("UserId").ConfigureAwait(false);
 
         if (userId.Value == 0)
-            _navigation.NavigateTo("Login");
+            _navigation.NavigateTo("Login");   
+            
+        _viewModel.MemorabiliaId = MemorabiliaId;
 
         var command = new SaveJersey.Command(_viewModel);
 
@@ -177,7 +179,7 @@ else
 
     protected override async Task OnInitializedAsync()
     {
-        var userId = await _localStorage.GetAsync<int>("UserId");
+        var userId = await _localStorage.GetAsync<int>("UserId").ConfigureAwait(false);
 
         if (userId.Value == 0)
             _navigation.NavigateTo("Login");        
@@ -187,7 +189,7 @@ else
 
         if (JerseyViewModel.Brand == null)
         {
-            _navigation.NavigateTo($"Memorabilia/Jersey/Add/{MemorabiliaId}");
+            SetDefaults();
             return;
         }    
 
@@ -206,6 +208,13 @@ else
 
         StateHasChanged();
     } 
+
+    private void SetDefaults()
+    {
+        _viewModel.GameStyleTypeId = GameStyleType.None.Id;
+        _viewModel.JerseyTypeId = JerseyType.Stitched.Id;
+        _viewModel.LevelTypeId = LevelType.Professional.Id;
+    }
 
     public void TeamsCheckboxClicked(object isChecked)
     {

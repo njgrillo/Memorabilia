@@ -16,10 +16,10 @@ namespace Memorabilia.Application.Features.Autograph.Authentication
 
         public int AutographId { get; set; }
 
-        public string ImagePath { get; set; }    
+        public string ImagePath => "images/beckett.jpg";   
         
         public string ItemTypeName { get; set; }
 
-        public override string PageTitle => "Inscriptions";
+        public override string PageTitle => "Authentications";
     }
 }

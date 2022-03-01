@@ -38,7 +38,7 @@
     <br />
 </div>
 
-@code {   
+@code {
     [Parameter]
     public string ImagePath { get; set; }
 
@@ -59,10 +59,10 @@
 
     protected async Task HandleValidSubmit()
     {
-        await OnSave.InvokeAsync(Item);
+        await OnSave.InvokeAsync(Item).ConfigureAwait(false);
 
         _navigation.NavigateTo(NavigationPath);
 
         _toastService.ShowSuccess($"{ItemName} was added successfully!", PageTitle);
-    }
+    }  
 }

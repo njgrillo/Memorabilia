@@ -66,7 +66,7 @@ namespace Memorabilia.Application.Features.Memorabilia.Bat
 
             public int SportId => Domain.Constants.Sport.Baseball.Id;
 
-            public int? TeamId => _viewModel.Teams.Any() ? _viewModel.Teams.First().Id : null;
+            public int? TeamId => _viewModel.Team?.Id > 0 ? _viewModel.Team?.Id : null;
         }
     }
 }

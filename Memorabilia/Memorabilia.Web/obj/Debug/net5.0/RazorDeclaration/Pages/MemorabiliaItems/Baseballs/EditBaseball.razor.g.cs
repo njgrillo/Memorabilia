@@ -140,76 +140,83 @@ using Memorabilia.Application.Features.Admin.Person;
 #nullable disable
 #nullable restore
 #line 4 "D:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\Pages\MemorabiliaItems\Baseballs\EditBaseball.razor"
-using Memorabilia.Application.Features.Memorabilia;
+using Memorabilia.Application.Features.Admin.Team;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
 #line 5 "D:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\Pages\MemorabiliaItems\Baseballs\EditBaseball.razor"
-using Memorabilia.Application.Features.Memorabilia.Baseball;
+using Memorabilia.Application.Features.Memorabilia;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
 #line 6 "D:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\Pages\MemorabiliaItems\Baseballs\EditBaseball.razor"
-using Memorabilia.Domain.Constants;
+using Memorabilia.Application.Features.Memorabilia.Baseball;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
 #line 7 "D:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\Pages\MemorabiliaItems\Baseballs\EditBaseball.razor"
-using Memorabilia.Web.Controls.Baseball;
+using Memorabilia.Domain.Constants;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
 #line 8 "D:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\Pages\MemorabiliaItems\Baseballs\EditBaseball.razor"
-using Memorabilia.Web.Controls.Commissioner;
+using Memorabilia.Web.Controls.Baseball;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
 #line 9 "D:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\Pages\MemorabiliaItems\Baseballs\EditBaseball.razor"
-using Memorabilia.Web.Controls.GameStyleType;
+using Memorabilia.Web.Controls.Commissioner;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
 #line 10 "D:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\Pages\MemorabiliaItems\Baseballs\EditBaseball.razor"
-using Memorabilia.Web.Controls.ItemTypeBrand;
+using Memorabilia.Web.Controls.GameStyleType;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
 #line 11 "D:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\Pages\MemorabiliaItems\Baseballs\EditBaseball.razor"
-using Memorabilia.Web.Controls.ItemTypeLevel;
+using Memorabilia.Web.Controls.ItemTypeBrand;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
 #line 12 "D:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\Pages\MemorabiliaItems\Baseballs\EditBaseball.razor"
-using Memorabilia.Web.Controls.ItemTypeSize;
+using Memorabilia.Web.Controls.ItemTypeLevel;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
 #line 13 "D:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\Pages\MemorabiliaItems\Baseballs\EditBaseball.razor"
-using Memorabilia.Web.Controls.Person;
+using Memorabilia.Web.Controls.ItemTypeSize;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
 #line 14 "D:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\Pages\MemorabiliaItems\Baseballs\EditBaseball.razor"
+using Memorabilia.Web.Controls.Person;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 15 "D:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\Pages\MemorabiliaItems\Baseballs\EditBaseball.razor"
 using Memorabilia.Web.Controls.Team;
 
 #line default
@@ -224,7 +231,7 @@ using Memorabilia.Web.Controls.Team;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 163 "D:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\Pages\MemorabiliaItems\Baseballs\EditBaseball.razor"
+#line 164 "D:\Projects\njgrillo\Memorabilia\Memorabilia\Memorabilia.Web\Pages\MemorabiliaItems\Baseballs\EditBaseball.razor"
        
     [Parameter]
     public int MemorabiliaId { get; set; }
@@ -236,10 +243,12 @@ using Memorabilia.Web.Controls.Team;
 
     protected async Task HandleValidSubmit()
     {
-        var userId = await _localStorage.GetAsync<int>("UserId");
+        var userId = await _localStorage.GetAsync<int>("UserId").ConfigureAwait(false);
 
         if (userId.Value == 0)
-            _navigation.NavigateTo("Login");
+            _navigation.NavigateTo("Login");  
+            
+        _viewModel.MemorabiliaId = MemorabiliaId;
 
         var command = new SaveBaseball.Command(_viewModel);
 
@@ -254,42 +263,61 @@ using Memorabilia.Web.Controls.Team;
 
     protected override async Task OnInitializedAsync()
     {
-        var userId = await _localStorage.GetAsync<int>("UserId");
+        var userId = await _localStorage.GetAsync<int>("UserId").ConfigureAwait(false);
 
         if (userId.Value == 0)
-            _navigation.NavigateTo("Login");        
+            _navigation.NavigateTo("Login");  
 
         var query = new GetBaseball.Query(MemorabiliaId);
         var baseballViewModel = await _queryRouter.Send(query).ConfigureAwait(false);
 
         if (baseballViewModel.Brand == null)
         {
-            _navigation.NavigateTo($"Memorabilia/Baseball/Add/{MemorabiliaId}");
+            SetDefaults();
             return;
         }    
 
-        _viewModel = new SaveBaseballViewModel(baseballViewModel);  
-        
+        _viewModel = new SaveBaseballViewModel(baseballViewModel);          
+
         _displayPeople = _viewModel.HasPerson;
         _displayTeams = _viewModel.HasTeam;
-    }  
+    } 
 
     private void PersonCheckboxClicked(object isChecked)
     {     
         _displayPeople = (bool)isChecked;
 
         if (!_displayPeople)
-            _viewModel.People = new();
+            _viewModel.Person = null;
 
         StateHasChanged();
     } 
+
+    private void SelectedPersonChanged(SavePersonViewModel person)
+    {
+        _viewModel.Person = person;
+    }
+
+    private void SelectedTeamChanged(SaveTeamViewModel team)
+    {
+        _viewModel.Team = team;
+    }
+
+    private void SetDefaults()
+    {
+        _viewModel.BaseballTypeId = BaseballType.Official.Id;
+        _viewModel.BrandId = Brand.Rawlings.Id;
+        _viewModel.GameStyleTypeId = GameStyleType.None.Id;
+        _viewModel.LevelTypeId = LevelType.Professional.Id;
+        _viewModel.SizeId = Size.Standard.Id;        
+    }
 
     public void TeamsCheckboxClicked(object isChecked)
     {
         _displayTeams = (bool)isChecked;
 
         if (!_displayTeams)
-            _viewModel.Teams = new();
+            _viewModel.Team = null;
 
         StateHasChanged();
     }

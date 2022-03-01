@@ -27,6 +27,17 @@ namespace Memorabilia.Domain.Constants
             Silver  
         };
 
+        public static readonly Color[] Autograph =
+        {
+            Black,
+            Blue,
+            Gold,
+            Orange,
+            Other,
+            Red,
+            Silver
+        };
+
         public static readonly Color[] Bat =
         {
             Ash,

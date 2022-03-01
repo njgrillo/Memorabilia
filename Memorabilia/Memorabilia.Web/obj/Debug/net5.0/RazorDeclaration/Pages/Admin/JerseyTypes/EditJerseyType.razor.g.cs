@@ -178,7 +178,7 @@ using Memorabilia.Web.Controls.Jersey;
 
     protected override async Task OnInitializedAsync()
     {
-        _editModeType = Id > 0 ? EditModeType.Edit : EditModeType.Add;
+        _editModeType = Id > 0 ? EditModeType.Update : EditModeType.Add;
 
         if (Id == 0)
             return;

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Framework.Extension;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -9,7 +10,7 @@ namespace Memorabilia.Domain.Entities
         public Autograph() { }
 
         public Autograph(DateTime? acquiredDate,
-                         int acquisitionTypeId, 
+                         int? acquisitionTypeId, 
                          int colorId,
                          int conditionId,
                          decimal? cost,
@@ -30,15 +31,14 @@ namespace Memorabilia.Domain.Entities
             WritingInstrumentId = writingInstrumentId;
             CreateDate = DateTime.UtcNow;
 
-            Acquisition = new Acquisition(acquisitionTypeId, acquiredDate, cost, purchaseTypeId); 
+            if (acquisitionTypeId.HasValue)
+                Acquisition = new Acquisition(acquisitionTypeId.Value, acquiredDate, cost, purchaseTypeId); 
             
-            if (!string.IsNullOrEmpty(personalizationText))
+            if (!personalizationText.IsNullOrEmpty())
                 Personalization = new Personalization(Id, personalizationText);
         } 
 
         public Acquisition Acquisition { get; private set; }
-        
-        public int AcquisitionId { get; private set; }
 
         public List<AutographAuthentication> Authentications { get; private set; } = new();
 
@@ -73,7 +73,7 @@ namespace Memorabilia.Domain.Entities
         public int WritingInstrumentId { get; private set; }
 
         public void Set(DateTime? acquiredDate,
-                        int acquisitionTypeId,
+                        int? acquisitionTypeId,
                         int colorId,
                         int conditionId,
                         decimal? cost,
@@ -92,7 +92,11 @@ namespace Memorabilia.Domain.Entities
             WritingInstrumentId = writingInstrumentId;
             LastModifiedDate = DateTime.UtcNow;
 
-            Acquisition.Set(acquisitionTypeId, acquiredDate, cost, purchaseTypeId);
+            if (acquisitionTypeId.HasValue)
+                Acquisition.Set(acquisitionTypeId.Value, acquiredDate, cost, purchaseTypeId);
+            else
+                Acquisition = null;
+
             Personalization.Set(personalizationText);
         }
 

@@ -1,6 +1,7 @@
 ﻿using Memorabilia.Application.Features.Image;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
 
 namespace Memorabilia.Application.Features.Memorabilia.Image
 {
@@ -8,9 +9,9 @@ namespace Memorabilia.Application.Features.Memorabilia.Image
     {
         public SaveMemorabiliaImagesViewModel() { }
 
-        public SaveMemorabiliaImagesViewModel(List<SaveImageViewModel> images)
+        public SaveMemorabiliaImagesViewModel(List<Domain.Entities.MemorabiliaImage> images)
         {
-            Images = images;
+            Images = images.Select(image => new SaveImageViewModel(image)).ToList();
         }
 
         public List<SaveImageViewModel> Images { get; set; } = new();

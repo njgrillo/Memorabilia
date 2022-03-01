@@ -23,7 +23,9 @@ namespace Memorabilia.Application.Features.Memorabilia.Bat
             MemorabiliaId = viewModel.MemorabiliaId;
             People = viewModel.People.Select(person => new SavePersonViewModel(new PersonViewModel(person.Person))).ToList();
             SizeId = viewModel.Size.SizeId;
-            Teams = viewModel.Teams.Select(team => new SaveTeamViewModel(new TeamViewModel(team.Team))).ToList();
+
+            if (viewModel.Teams.Any())
+                Team = new SaveTeamViewModel(new TeamViewModel(viewModel.Teams.First().Team));
         }
 
         public BatType BatType => BatType.Find(BatTypeId);
@@ -48,7 +50,7 @@ namespace Memorabilia.Application.Features.Memorabilia.Bat
 
         public bool HasPerson => People.Any();
 
-        public bool HasTeam => Teams.Any();
+        public bool HasTeam => Team?.Id > 0;
 
         public string ImagePath
         {
@@ -82,6 +84,6 @@ namespace Memorabilia.Application.Features.Memorabilia.Bat
 
         public SportLeagueLevel SportLeagueLevel => SportLeagueLevel.MajorLeagueBaseball;
 
-        public List<SaveTeamViewModel> Teams { get; set; } = new();
+        public SaveTeamViewModel Team { get; set; }
     }
 }

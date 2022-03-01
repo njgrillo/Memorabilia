@@ -45,7 +45,7 @@
     private async Task OnInputChange(ChangeEventArgs args)
     {
         Value = Convert.ToInt32(args.Value);
-        await ValueChanged.InvokeAsync(Value);
+        await ValueChanged.InvokeAsync(Value).ConfigureAwait(false);
     }
 }
 
