@@ -26,6 +26,7 @@ namespace Memorabilia.Repository
             modelBuilder.Entity<Domain.Entities.Condition>();
             modelBuilder.Entity<Domain.Entities.Conference>();
             modelBuilder.Entity<Domain.Entities.Division>();
+            modelBuilder.Entity<Domain.Entities.FigureSpecialtyType>();
             modelBuilder.Entity<Domain.Entities.FigureType>();
             modelBuilder.Entity<Domain.Entities.FootballType>();
             modelBuilder.Entity<Domain.Entities.Franchise>();            
@@ -55,9 +56,11 @@ namespace Memorabilia.Repository
             modelBuilder.Entity<Domain.Entities.MemorabiliaBaseball>();
             modelBuilder.Entity<Domain.Entities.MemorabiliaBasketball>();
             modelBuilder.Entity<Domain.Entities.MemorabiliaBat>();
+            modelBuilder.Entity<Domain.Entities.MemorabiliaBook>();
             modelBuilder.Entity<Domain.Entities.MemorabiliaBrand>();
             modelBuilder.Entity<Domain.Entities.MemorabiliaCard>();
             modelBuilder.Entity<Domain.Entities.MemorabiliaCommissioner>();
+            modelBuilder.Entity<Domain.Entities.MemorabiliaFigure>();
             modelBuilder.Entity<Domain.Entities.MemorabiliaFootball>();
             modelBuilder.Entity<Domain.Entities.MemorabiliaGame>();
             modelBuilder.Entity<Domain.Entities.MemorabiliaHelmet>();

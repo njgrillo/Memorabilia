@@ -4,27 +4,35 @@
     {
         public MemorabiliaCard() { }
 
-        public MemorabiliaCard(int memorabiliaId, int? year, int? numerator, int? denominator)
+        public MemorabiliaCard(int memorabiliaId, bool custom, int? denominator, bool licensed, int? numerator, int? year)
         {
             MemorabiliaId = memorabiliaId;
-            Year = year;
-            Numerator = numerator;
+            Custom = custom;
             Denominator = denominator;
+            Licensed = licensed;
+            Numerator = numerator;
+            Year = year;
         }
 
-        public int? Denominator { get; set; }
+        public bool Custom { get; private set; }
+
+        public int? Denominator { get; private set; }
+
+        public bool Licensed { get; private set; }
 
         public int MemorabiliaId { get; private set; }
 
-        public int? Numerator { get; set; }
+        public int? Numerator { get; private set; }
 
         public int? Year { get; private set; }
 
-        public void Set(int? year, int? numerator, int? denominator)
+        public void Set(bool custom, int? denominator, bool licensed, int? numerator, int? year)
         {
-            Year = year;
-            Numerator = numerator;
+            Custom = custom;
             Denominator = denominator;
+            Licensed = licensed;
+            Numerator = numerator;
+            Year = year;
         }
     }
 }

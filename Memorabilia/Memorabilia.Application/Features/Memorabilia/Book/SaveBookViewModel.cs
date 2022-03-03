@@ -13,13 +13,19 @@ namespace Memorabilia.Application.Features.Memorabilia.Book
 
         public SaveBookViewModel(BookViewModel viewModel)
         {
+            Edition = viewModel.Book?.Edition; 
+            HardCover = viewModel.Book?.HardCover ?? true;
             MemorabiliaId = viewModel.MemorabiliaId;
             People = viewModel.People.Select(person => new SavePersonViewModel(new PersonViewModel(person.Person))).ToList();
+            Publisher = viewModel.Book?.Publisher;
             SportIds = viewModel.Sports.Select(x => x.Id).ToList();
             Teams = viewModel.Teams.Select(team => new SaveTeamViewModel(new TeamViewModel(team.Team))).ToList();
+            Title = viewModel.Book?.Title;
         }
 
-        public bool Bookplate { get; set; }
+        public string Edition { get; set; }
+
+        public bool HardCover { get; set; }
         
         public bool HasPerson => People.Any();
 
@@ -35,6 +41,8 @@ namespace Memorabilia.Application.Features.Memorabilia.Book
         public override string PageTitle => $"{(MemorabiliaId > 0 ? "Edit" : "Add")} {ItemType.Book.Name} Details";
 
         public List<SavePersonViewModel> People { get; set; } = new();
+
+        public string Publisher { get; set; }
 
         public List<int> SportIds { get; set; } = new();
 

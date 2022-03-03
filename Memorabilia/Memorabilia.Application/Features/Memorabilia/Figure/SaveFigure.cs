@@ -22,11 +22,14 @@ namespace Memorabilia.Application.Features.Memorabilia.Figure
                 var memorabilia = await _memorabiliaRepository.Get(command.MemorabiliaId).ConfigureAwait(false);
 
                 memorabilia.SetFigure(command.BrandId,
+                                      command.FigureSpecialtyTypeId,
+                                      command.FigureTypeId,
                                       command.LevelTypeId,
                                       command.PersonIds,
                                       command.SizeId,
                                       command.SportIds,
-                                      command.TeamIds);
+                                      command.TeamIds,
+                                      command.Year);
 
                 await _memorabiliaRepository.Update(memorabilia).ConfigureAwait(false);
             }
@@ -43,6 +46,10 @@ namespace Memorabilia.Application.Features.Memorabilia.Figure
 
             public int BrandId => _viewModel.BrandId;
 
+            public int? FigureSpecialtyTypeId => _viewModel.FigureSpecialtyTypeId > 0 ? _viewModel.FigureSpecialtyTypeId : 0;
+
+            public int? FigureTypeId => _viewModel.FigureTypeId > 0 ? _viewModel.FigureTypeId : null;
+
             public int LevelTypeId => _viewModel.LevelTypeId;
 
             public int MemorabiliaId => _viewModel.MemorabiliaId;
@@ -54,6 +61,8 @@ namespace Memorabilia.Application.Features.Memorabilia.Figure
             public int[] SportIds => _viewModel.SportIds.ToArray();
 
             public int[] TeamIds => _viewModel.Teams.Select(team => team.Id).ToArray();
+
+            public int? Year => _viewModel.Year;
         }
     }
 }

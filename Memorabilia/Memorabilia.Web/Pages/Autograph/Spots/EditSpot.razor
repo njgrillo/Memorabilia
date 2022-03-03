@@ -1,6 +1,6 @@
-﻿@page "/Autographs/Baseball/Edit/{autographId:int}"
+﻿@page "/Autographs/Spot/Edit/{autographId:int}"
 
-@using Memorabilia.Application.Features.Autograph.Baseball
+@using Memorabilia.Application.Features.Autograph.Spot
 @using Memorabilia.Domain.Constants
 @using Memorabilia.Web.Controls.ItemTypeSpot
 
@@ -36,7 +36,7 @@ else
                             <label for="spot">Spot</label>
                             <_ItemTypeSpotDropDown @bind-Value="@_viewModel.SpotId"
                                                    @bind-Value:event="ValueChanged" 
-                                                   ItemType="@ItemType.Baseball" /> 
+                                                   ItemType="@_viewModel.ItemType" /> 
                         </div> 
                     </div>
                 </div>                                   
@@ -55,7 +55,7 @@ else
     public int AutographId { get; set; }
 
     private bool _continue;
-    private SaveBaseballViewModel _viewModel = new SaveBaseballViewModel();   
+    private SaveSpotViewModel _viewModel = new SaveSpotViewModel();   
 
     protected async Task HandleValidSubmit()
     {
@@ -66,15 +66,15 @@ else
 
         _viewModel.AutographId = AutographId;
 
-        var command = new SaveBaseball.Command(_viewModel);
+        var command = new SaveSpot.Command(_viewModel);
 
         await _commandRouter.Send(command).ConfigureAwait(false);
 
-        var url = _continue ? $"Autographs/Image/Edit/{command.AutographId}" : "Memorabilia";
+        var url = _continue ? $"Autographs/Image/Edit/{AutographId}" : $"Memorabilia";
 
         _navigation.NavigateTo(url);
 
-        _toastService.ShowSuccess("Baseball Details were saved successfully!", _viewModel.PageTitle);
+        _toastService.ShowSuccess($"{_viewModel.ItemTypeName} Autograph Spot was saved successfully!", _viewModel.ItemTypeName);
     }
 
     protected override async Task OnInitializedAsync()
@@ -84,8 +84,8 @@ else
         if (userId.Value == 0)
             _navigation.NavigateTo("Login");
 
-        var query = new GetBaseball.Query(AutographId);
+        var query = new GetSpot.Query(AutographId);
 
-        _viewModel = new SaveBaseballViewModel(await _queryRouter.Send(query).ConfigureAwait(false));
+        _viewModel = new SaveSpotViewModel(await _queryRouter.Send(query).ConfigureAwait(false));
     } 
 }

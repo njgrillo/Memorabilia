@@ -39,6 +39,8 @@ namespace Memorabilia.Domain.Entities
 
         public MemorabiliaBat Bat { get; private set; }
 
+        public MemorabiliaBook Book { get; private set; }
+
         public MemorabiliaBrand Brand { get; private set; }
 
         public MemorabiliaCard Card { get; private set; }
@@ -50,6 +52,8 @@ namespace Memorabilia.Domain.Entities
         public int? ConditionId { get; private set; }
 
         public DateTime CreateDate { get; private set; }
+
+        public MemorabiliaFigure Figure { get; private set; }
 
         public MemorabiliaFootball Football { get; private set; }
 
@@ -199,21 +203,25 @@ namespace Memorabilia.Domain.Entities
                 SetTeams(teamId.Value);
         }
 
-        public void SetBook(bool bookplate,
+        public void SetBook(string edition,
+                            bool hardCover,
                             int[] personIds,
+                            string publisher,
                             int[] sportIds,
                             int[] teamIds,
                             string title)
         {
-            SetBook(bookplate, title);
+            SetBook(edition, hardCover, publisher, title);
             SetPeople(personIds);
             SetSports(sportIds);
             SetTeams(teamIds);
         }
 
         public void SetCard(int brandId,
+                            bool custom,
                             int? denominator,
                             int levelTypeId,
+                            bool licensed,
                             int? numerator,
                             int[] personIds,
                             int sizeId,
@@ -224,20 +232,24 @@ namespace Memorabilia.Domain.Entities
             SetBrand(brandId);
             SetLevelType(levelTypeId);
             SetSize(sizeId);
-            SetCard(denominator, numerator, year);
+            SetCard(custom, denominator, licensed, numerator, year);
             SetPeople(personIds);
             SetSports(sportIds);
             SetTeams(teamIds);
         }
 
         public void SetFigure(int brandId,
+                              int? figureSpecialtyTypeId,
+                              int? figureTypeId,
                               int levelTypeId,
                               int[] personIds,
                               int sizeId,
                               int[] sportIds,
-                              int[] teamIds)
+                              int[] teamIds,
+                              int? year)
         {
             SetBrand(brandId);
+            SetFigureType(figureSpecialtyTypeId, figureTypeId, year);
             SetLevelType(levelTypeId);
             SetSize(sizeId);
             SetPeople(personIds);
@@ -606,9 +618,15 @@ namespace Memorabilia.Domain.Entities
             }
         }
 
-        private void SetBook(bool bookplate, string title)
+        private void SetBook(string edition, bool hardCover, string publisher, string title)
         {
+            if (Book == null)
+            {
+                Book = new MemorabiliaBook(Id, edition, hardCover, publisher, title);
+                return;
+            }
 
+            Book.Set(edition, hardCover, publisher, title);  
         }
 
         private void SetBrand(int brandId)
@@ -622,15 +640,15 @@ namespace Memorabilia.Domain.Entities
             Brand.Set(brandId);
         }
 
-        private void SetCard(int? denominator, int? numerator, int? year)
+        private void SetCard(bool custom, int? denominator, bool licensed, int? numerator, int? year)
         {
             if (Card == null)
             {
-                Card = new MemorabiliaCard(Id, year, numerator, denominator);
+                Card = new MemorabiliaCard(Id, custom, denominator, licensed, numerator, year);
                 return;
             }
 
-            Card.Set(year, numerator, denominator);
+            Card.Set(custom, denominator, licensed, numerator, year);
         }
 
         private void SetCommissioner(int commissionerId)
@@ -649,6 +667,25 @@ namespace Memorabilia.Domain.Entities
             {
                 if (Commissioner?.Id > 0)
                     Commissioner = null;
+            }
+        }
+
+        private void SetFigureType(int? figureSpecialtyTypeId, int? figureTypeId, int? year)
+        {
+            if (figureSpecialtyTypeId.HasValue || figureTypeId.HasValue || year.HasValue)
+            {
+                if (Figure == null)
+                {
+                    Figure = new MemorabiliaFigure(Id, figureSpecialtyTypeId.Value, figureTypeId.Value, year.Value);
+                    return;
+                }
+
+                Figure.Set(figureSpecialtyTypeId.Value, figureTypeId.Value, year.Value);
+            }
+            else
+            {
+                if (Figure?.Id > 0)
+                    Figure = null;
             }
         }
 

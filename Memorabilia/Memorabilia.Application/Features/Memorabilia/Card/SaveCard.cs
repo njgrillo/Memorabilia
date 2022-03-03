@@ -22,8 +22,10 @@ namespace Memorabilia.Application.Features.Memorabilia.Card
                 var memorabilia = await _memorabiliaRepository.Get(command.MemorabiliaId).ConfigureAwait(false);
 
                 memorabilia.SetCard(command.BrandId,
+                                    command.Custom,
                                     command.Denominator,
                                     command.LevelTypeId,
+                                    command.Licensed,
                                     command.Numerator,
                                     command.PersonIds,
                                     command.SizeId,
@@ -46,9 +48,13 @@ namespace Memorabilia.Application.Features.Memorabilia.Card
 
             public int BrandId => _viewModel.BrandId;
 
+            public bool Custom => _viewModel.Custom;
+
             public int? Denominator => _viewModel.Denominator > 0 ? _viewModel.Denominator : 0;
 
             public int LevelTypeId => _viewModel.LevelTypeId;
+
+            public bool Licensed => _viewModel.Licensed;
 
             public int MemorabiliaId => _viewModel.MemorabiliaId;
 

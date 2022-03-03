@@ -1,7 +1,7 @@
 {
   "version": 3,
   "targets": {
-    "net5.0": {
+    "net6.0": {
       "Blazored.Toast/3.2.2": {
         "type": "package",
         "dependencies": {
@@ -3316,7 +3316,7 @@
       },
       "Memorabilia.Application/1.0.0": {
         "type": "project",
-        "framework": ".NETCoreApp,Version=v5.0",
+        "framework": ".NETCoreApp,Version=v6.0",
         "dependencies": {
           "Memorabilia.Domain": "1.0.0"
         },
@@ -3329,7 +3329,7 @@
       },
       "Memorabilia.Domain/1.0.0": {
         "type": "project",
-        "framework": ".NETCoreApp,Version=v5.0",
+        "framework": ".NETCoreApp,Version=v6.0",
         "dependencies": {
           "Demo.Framework": "1.0.10"
         },
@@ -3342,7 +3342,7 @@
       },
       "Memorabilia.Repository/1.0.0": {
         "type": "project",
-        "framework": ".NETCoreApp,Version=v5.0",
+        "framework": ".NETCoreApp,Version=v6.0",
         "dependencies": {
           "Memorabilia.Domain": "1.0.0"
         },
@@ -10061,7 +10061,7 @@
     }
   },
   "projectFileDependencyGroups": {
-    "net5.0": [
+    "net6.0": [
       "Blazored.Toast >= 3.2.2",
       "Blazored.Typeahead >= 4.6.0",
       "Demo.Framework >= 1.0.10",
@@ -10090,7 +10090,7 @@
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
-        "net5.0"
+        "net6.0"
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
@@ -10098,8 +10098,8 @@
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
-        "net5.0": {
-          "targetAlias": "net5.0",
+        "net6.0": {
+          "targetAlias": "net6.0",
           "projectReferences": {
             "D:\\Projects\\njgrillo\\Memorabilia\\Memorabilia\\Memorabilia.Application\\Memorabilia.Application.csproj": {
               "projectPath": "D:\\Projects\\njgrillo\\Memorabilia\\Memorabilia\\Memorabilia.Application\\Memorabilia.Application.csproj"
@@ -10120,8 +10120,8 @@
       }
     },
     "frameworks": {
-      "net5.0": {
-        "targetAlias": "net5.0",
+      "net6.0": {
+        "targetAlias": "net6.0",
         "dependencies": {
           "Blazored.Toast": {
             "target": "Package",

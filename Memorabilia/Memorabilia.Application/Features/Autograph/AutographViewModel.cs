@@ -74,6 +74,8 @@ namespace Memorabilia.Application.Features.Autograph
 
         public bool IsPersonalized => Personalization?.Id > 0;
 
+        public int ItemTypeId => _autograph.Memorabilia.ItemTypeId;
+
         public string ItemTypeName => ItemType.Find(_autograph.Memorabilia.ItemTypeId)?.Name;
 
         public DateTime? LastModifiedDate => _autograph.LastModifiedDate;

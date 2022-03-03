@@ -12,6 +12,7 @@ using Memorabilia.Application.Features.Admin.Commissioner;
 using Memorabilia.Application.Features.Admin.Condition;
 using Memorabilia.Application.Features.Admin.Conference;
 using Memorabilia.Application.Features.Admin.Division;
+using Memorabilia.Application.Features.Admin.FigureSpecialtyType;
 using Memorabilia.Application.Features.Admin.FigureType;
 using Memorabilia.Application.Features.Admin.FootballType;
 using Memorabilia.Application.Features.Admin.Franchise;
@@ -124,6 +125,7 @@ namespace Memorabilia.Web
             services.AddTransient<IConditionRepository, ConditionRepository>();
             services.AddTransient<IConferenceRepository, ConferenceRepository>();
             services.AddTransient<IDivisionRepository, DivisionRepository>();
+            services.AddTransient<IFigureSpecialtyTypeRepository, FigureSpecialtyTypeRepository>();
             services.AddTransient<IFigureTypeRepository, FigureTypeRepository>();
             services.AddTransient<IFootballTypeRepository, FootballTypeRepository>();
             services.AddTransient<IFranchiseRepository, FranchiseRepository>();
@@ -218,6 +220,8 @@ namespace Memorabilia.Web
             services.AddTransient<GetDivision>();
             services.AddTransient<GetDivisions>();
             services.AddTransient<GetFigure>();
+            services.AddTransient<GetFigureSpecialtyType>();
+            services.AddTransient<GetFigureSpecialtyTypes>();
             services.AddTransient<GetFigureType>();
             services.AddTransient<GetFigureTypes>();
             services.AddTransient<GetFirstDayCover>();
@@ -329,6 +333,7 @@ namespace Memorabilia.Web
             services.AddTransient<SaveConference>();
             services.AddTransient<SaveDivision>();
             services.AddTransient<SaveFigure>();
+            services.AddTransient<SaveFigureSpecialtyType>();
             services.AddTransient<SaveFigureType>();
             services.AddTransient<SaveFirstDayCover>();
             services.AddTransient<SaveFootball>();
@@ -379,7 +384,7 @@ namespace Memorabilia.Web
             services.AddTransient<SaveSize>();
             services.AddTransient<SaveSoccerball>();
             services.AddTransient<SaveSport>();
-            services.AddTransient<SaveSpot>();
+            services.AddTransient<Application.Features.Admin.Spot.SaveSpot>();
             services.AddTransient<SaveTeam>();
             services.AddTransient<SaveTicket>();
             services.AddTransient<SaveWritingInstrument>();

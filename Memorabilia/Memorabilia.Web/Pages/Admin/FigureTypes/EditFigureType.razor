@@ -2,7 +2,7 @@
 
 @using Memorabilia.Application.Features.Admin
 @using Memorabilia.Application.Features.Admin.FigureType
-@using Memorabilia.Web.Controls.FigureType
+@using Memorabilia.Web.Controls.Figure
 
 @inject CommandRouter _commandRouter
 @inject QueryRouter _queryRouter
@@ -27,6 +27,11 @@ else
 
     protected override async Task OnInitializedAsync()
     {
+        _editModeType = Id > 0 ? EditModeType.Update : EditModeType.Add;
+
+        if (Id == 0)
+            return;
+
         var query = new GetFigureType.Query(Id);
 
         _viewModel = new SaveDomainViewModel(await _queryRouter.Send(query).ConfigureAwait(false));

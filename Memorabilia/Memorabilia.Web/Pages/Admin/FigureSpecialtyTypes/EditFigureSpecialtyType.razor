@@ -1,0 +1,46 @@
+﻿@page "/FigureSpecialtyTypes/Edit/{id:int}"
+
+@using Memorabilia.Application.Features.Admin
+@using Memorabilia.Application.Features.Admin.FigureSpecialtyType
+@using Memorabilia.Web.Controls.Figure
+
+@inject CommandRouter _commandRouter
+@inject QueryRouter _queryRouter
+
+@if (_viewModel == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <_FigureTypeEditor EditModeType="@_editModeType" 
+                       Item="@_viewModel"                  
+                       OnSave="Save" />
+}
+
+@code {
+    [Parameter]
+    public int Id { get; set; }
+
+    private EditModeType _editModeType;
+    private SaveDomainViewModel _viewModel = new SaveDomainViewModel();    
+
+    protected override async Task OnInitializedAsync()
+    {
+        _editModeType = Id > 0 ? EditModeType.Update : EditModeType.Add;
+
+        if (Id == 0)
+            return;
+
+        var query = new GetFigureSpecialtyType.Query(Id);
+
+        _viewModel = new SaveDomainViewModel(await _queryRouter.Send(query).ConfigureAwait(false));
+    }
+
+    protected async Task Save()
+    {
+        var command = new SaveFigureSpecialtyType.Command(_viewModel);
+
+        await _commandRouter.Send(command).ConfigureAwait(false);
+    }
+}

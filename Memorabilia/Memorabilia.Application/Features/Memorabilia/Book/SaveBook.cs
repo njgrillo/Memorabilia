@@ -21,8 +21,10 @@ namespace Memorabilia.Application.Features.Memorabilia.Book
             {
                 var memorabilia = await _memorabiliaRepository.Get(command.MemorabiliaId).ConfigureAwait(false);
 
-                memorabilia.SetBook(command.Bookplate,
+                memorabilia.SetBook(command.Edition,
+                                    command.HardCover,
                                     command.PersonIds,
+                                    command.Publisher,
                                     command.SportIds,
                                     command.TeamIds,
                                     command.Title);
@@ -40,11 +42,15 @@ namespace Memorabilia.Application.Features.Memorabilia.Book
                 _viewModel = viewModel;
             }
 
-            public bool Bookplate => _viewModel.Bookplate;
+            public string Edition => _viewModel.Edition;
+
+            public bool HardCover => _viewModel.HardCover;
 
             public int MemorabiliaId => _viewModel.MemorabiliaId;
 
             public int[] PersonIds => _viewModel.People.Select(person => person.Id).ToArray();
+
+            public string Publisher => _viewModel.Publisher;
 
             public int[] SportIds => _viewModel.SportIds.ToArray();
 

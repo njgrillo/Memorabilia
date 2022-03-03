@@ -3,9 +3,9 @@ using Framework.Handler;
 using Memorabilia.Domain;
 using System.Threading.Tasks;
 
-namespace Memorabilia.Application.Features.Autograph.Baseball
+namespace Memorabilia.Application.Features.Autograph.Spot
 {
-    public class SaveBaseball
+    public class SaveSpot
     {
         public class Handler : CommandHandler<Command>
         {
@@ -28,9 +28,9 @@ namespace Memorabilia.Application.Features.Autograph.Baseball
 
         public class Command : DomainCommand, ICommand
         {
-            private readonly SaveBaseballViewModel _viewModel;
+            private readonly SaveSpotViewModel _viewModel;
 
-            public Command(SaveBaseballViewModel viewModel)
+            public Command(SaveSpotViewModel viewModel)
             {
                 _viewModel = viewModel;
             }

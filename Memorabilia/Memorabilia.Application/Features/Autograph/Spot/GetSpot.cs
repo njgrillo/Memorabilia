@@ -2,11 +2,11 @@
 using Memorabilia.Domain;
 using System.Threading.Tasks;
 
-namespace Memorabilia.Application.Features.Autograph.Baseball
+namespace Memorabilia.Application.Features.Autograph.Spot
 {
-    public class GetBaseball
+    public class GetSpot
     {
-        public class Handler : QueryHandler<Query, BaseballViewModel>
+        public class Handler : QueryHandler<Query, SpotViewModel>
         {
             private readonly IAutographRepository _autographRepository;
 
@@ -15,17 +15,17 @@ namespace Memorabilia.Application.Features.Autograph.Baseball
                 _autographRepository = autographRepository;
             }
 
-            protected override async Task<BaseballViewModel> Handle(Query query)
+            protected override async Task<SpotViewModel> Handle(Query query)
             {
                 var autograph = await _autographRepository.Get(query.AutographId).ConfigureAwait(false);
 
-                var viewModel = new BaseballViewModel(autograph);
+                var viewModel = new SpotViewModel(autograph);
 
                 return viewModel;
             }
         }
 
-        public class Query : IQuery<BaseballViewModel>
+        public class Query : IQuery<SpotViewModel>
         {
             public Query(int autographId)
             {

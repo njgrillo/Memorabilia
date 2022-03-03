@@ -22,7 +22,6 @@ namespace Memorabilia.Application.Features.Autograph
             EstimatedValue = viewModel.EstimatedValue;
             Grade = viewModel.Grade;
             Id = viewModel.Id;
-            ItemTypeName = viewModel.ItemTypeName;
             LastModifiedDate = viewModel.LastModifiedDate;
             MemorabiliaId = viewModel.MemorabiliaId;
             Person = new SavePersonViewModel(new PersonViewModel(viewModel.Person));
@@ -33,7 +32,6 @@ namespace Memorabilia.Application.Features.Autograph
 
         public SaveAutographViewModel(MemorabiliaItemViewModel viewModel)
         {
-            ItemTypeName = viewModel.ItemTypeName;
             MemorabiliaAcquiredDate = viewModel.Acquisition.AcquiredDate;
             MemorabiliaAcquisitionTypeId = viewModel.Acquisition.AcquisitionTypeId;
             MemorabiliaCost = viewModel.Acquisition.Cost;
@@ -66,8 +64,6 @@ namespace Memorabilia.Application.Features.Autograph
         public decimal? EstimatedValue { get; set; }
 
         public int? Grade { get; set; }
-
-        public string ItemTypeName { get; set; }
 
         public DateTime? LastModifiedDate { get; set; }
 

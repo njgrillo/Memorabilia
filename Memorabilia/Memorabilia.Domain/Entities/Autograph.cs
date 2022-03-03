@@ -95,7 +95,7 @@ namespace Memorabilia.Domain.Entities
             if (acquisitionTypeId.HasValue)
                 Acquisition.Set(acquisitionTypeId.Value, acquiredDate, cost, purchaseTypeId);
             else
-                Acquisition = null;
+                Acquisition = null;            
 
             Personalization.Set(personalizationText);
         }

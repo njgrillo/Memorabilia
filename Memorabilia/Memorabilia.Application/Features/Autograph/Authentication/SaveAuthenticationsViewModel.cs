@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Memorabilia.Domain.Constants;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace Memorabilia.Application.Features.Autograph.Authentication
@@ -16,9 +17,13 @@ namespace Memorabilia.Application.Features.Autograph.Authentication
 
         public int AutographId { get; set; }
 
-        public string ImagePath => "images/beckett.jpg";   
-        
-        public string ItemTypeName { get; set; }
+        public bool CanHaveSpot => ItemType.CanHaveSpot(ItemType);
+
+        public string ImagePath => "images/beckett.jpg";
+
+        public ItemType ItemType { get; set; }
+
+        public string ItemTypeName => ItemType.Find(ItemType.Id)?.Name;
 
         public override string PageTitle => "Authentications";
     }

@@ -38,6 +38,38 @@ else
                 <div class="row">                    
                     <div class="col-lg-12">
                         <div class="form-group">
+                            <label for="title">Title</label>
+                            <InputText id="title" class="form-control" @bind-Value="@_viewModel.Title" />                    
+                        </div> 
+                    </div>
+                </div> 
+                <div class="row">                    
+                    <div class="col-lg-12">
+                        <div class="form-group">
+                            <label for="edition">Edition</label>
+                            <InputText id="edition" class="form-control" @bind-Value="@_viewModel.Edition" />                    
+                        </div> 
+                    </div>
+                </div> 
+                <div class="row">                    
+                    <div class="col-lg-12">
+                        <div class="form-group">
+                            <label for="publisher">Publisher</label>
+                            <InputText id="publisher" class="form-control" @bind-Value="@_viewModel.Publisher" />                    
+                        </div> 
+                    </div>
+                </div> 
+                <div class="row">                    
+                    <div class="col-lg-12">
+                        <div class="form-group">                            
+                            <InputCheckbox id="hardCover" @bind-Value="@_viewModel.HardCover" />  
+                            <label for="hardCover">Hard Cover</label>
+                        </div> 
+                    </div>
+                </div>    
+                <div class="row">                    
+                    <div class="col-lg-12">
+                        <div class="form-group">
                             <input type="checkbox" @onchange="eventArgs => { PersonCheckboxClicked(eventArgs.Value); }" />
                             <label for="person">Associate Book with a Person</label>
                             <div class="form-group" hidden="@(!_displayPeople)">
@@ -130,7 +162,7 @@ else
         StateHasChanged();
     } 
 
-    public void TeamsCheckboxClicked(object isChecked)
+    private void TeamsCheckboxClicked(object isChecked)
     {
         _displayTeams = (bool)isChecked;
 

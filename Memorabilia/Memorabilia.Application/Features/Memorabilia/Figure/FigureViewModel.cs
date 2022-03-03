@@ -16,7 +16,7 @@ namespace Memorabilia.Application.Features.Memorabilia.Figure
 
         public MemorabiliaBrand Brand => _memorabilia.Brand;
 
-        //public MemorabiliaFigure Figure => _memorabilia.Figure;
+        public MemorabiliaFigure Figure => _memorabilia.Figure;
 
         public int MemorabiliaId => _memorabilia.Id;        
 

@@ -6,6 +6,9 @@ namespace Memorabilia.Domain.Constants
     {
         public static readonly Brand Adidas = new(4, "Adidas", string.Empty);
         public static readonly Brand Beckett = new(14, "Beckett", string.Empty);
+        public static readonly Brand Funko = new(19, "Funko Inc.", string.Empty);
+        public static readonly Brand Hasbro = new(18, "Hasbro", string.Empty);
+        public static readonly Brand Kenner = new(17, "Kenner", string.Empty);
         public static readonly Brand Majestic = new(5, "Majestic", string.Empty);
         public static readonly Brand Nike = new(2, "Nike", string.Empty);
         public static readonly Brand None = new(8, "None", string.Empty);
@@ -17,12 +20,17 @@ namespace Memorabilia.Domain.Constants
         public static readonly Brand Spalding = new(10, "Spalding", string.Empty);  
         public static readonly Brand Spinneybeck = new(9, "Spinneybeck", string.Empty);  
         public static readonly Brand SportsIllustrated = new(13, "Sports Illustrated", "SI");  
+        public static readonly Brand Topps = new(15, "Topps", string.Empty);  
+        public static readonly Brand UpperDeck = new(16, "Upper Deck", "UD");  
         public static readonly Brand Wilson = new(6, "Wilson", string.Empty);
 
         public static readonly Brand[] All =
         {
             Adidas,
             Beckett,
+            Funko,
+            Hasbro,
+            Kenner,
             Majestic,
             Nike,
             None,
@@ -34,6 +42,8 @@ namespace Memorabilia.Domain.Constants
             Spalding,
             Spinneybeck,
             SportsIllustrated,
+            Topps,
+            UpperDeck,
             Wilson
         };
 

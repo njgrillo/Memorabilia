@@ -27,7 +27,7 @@
     public EventCallback<int> ValueChanged { get; set; }
 
     protected override async Task OnInitializedAsync()
-    {
+    {   
         await Load().ConfigureAwait(false);
 
         if ((InitialValue?.Id ?? 0) > 0)
@@ -36,7 +36,7 @@
 
     private async Task Load()
     {
-        var query = new GetItemTypeSpots.Query(ItemType.Id);
+        var query = new GetItemTypeSpots.Query(ItemType?.Id);
 
         _itemTypeSpots = (await _queryRouter.Send(query).ConfigureAwait(false)).ItemTypeSpots.OrderByDescending(spot => spot.SpotName);            
     }

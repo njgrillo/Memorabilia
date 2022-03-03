@@ -146,7 +146,9 @@ else
 
         await _commandRouter.Send(command).ConfigureAwait(false);
 
-        var url = _continue ? $"Autographs/{_authenticationsViewModel.ItemTypeName}/Edit/{AutographId}" : "Memorabilia";
+        var url = _continue && _authenticationsViewModel.CanHaveSpot 
+            ? $"Autographs/Spot/Edit/{AutographId}" 
+            : $"Autographs/Image/Edit/{AutographId}";
 
         _navigation.NavigateTo(url);
 
@@ -166,7 +168,7 @@ else
         if (autograph.Authentications.Any())
             _authenticationsViewModel = new SaveAuthenticationsViewModel(autograph.Authentications);
 
-        _authenticationsViewModel.ItemTypeName = autograph.ItemTypeName;
+        _authenticationsViewModel.ItemType = ItemType.Find(autograph.ItemTypeId);
     } 
 
     private void AddAuthentication()

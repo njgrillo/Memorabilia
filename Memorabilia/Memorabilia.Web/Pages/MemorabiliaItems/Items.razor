@@ -130,9 +130,9 @@ else
                         <th scope="col">Place of Purchase</th>
                         <th scope="col">Writing Instrument</th>
                         <th scope="col">Color</th>
-                        <th scope="col">Personalized?</th>
-                        <th scope="col">Authenticated?</th>
-                        <th scope="col">Inscriptions?</th>
+                        <th scope="col">Personalized</th>
+                        <th scope="col">Authenticated</th>
+                        <th scope="col">Inscriptions</th>
                         <th scope="col"></th>
                         <th scope="col"></th>
                         <th scope="col"></th>
@@ -144,7 +144,7 @@ else
                                      src="data:image/jpg;base64,@Convert.ToBase64String(File.ReadAllBytes(@autograph.PrimaryImagePath))"
                                      height="40" 
                                      width="40" 
-                                     @onclick="@( _ => _navigation.NavigateTo($"Autographs/Image/Edit/{@autograph.Id}") )" />
+                                     @onclick="@( _ => _navigation.NavigateTo($"Autographs/Image/Edit/{@autograph.Id}"))" />
                             </_Tooltip>                         
                         </td>
                         <td>@autograph.PersonName</td>

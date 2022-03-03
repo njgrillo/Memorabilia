@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
-    <TargetFramework>net5.0</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
@@ -26,13 +26,13 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Memorabilia.Application\Memorabilia.Application.csproj" />
-    <ProjectReference Include="..\Memorabilia.Domain\Memorabilia.Domain.csproj" />
-    <ProjectReference Include="..\Memorabilia.Repository\Memorabilia.Repository.csproj" />
+    <Folder Include="wwwroot\userimages\" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="wwwroot\userimages\" />
+    <ProjectReference Include="..\Memorabilia.Application\Memorabilia.Application.csproj" />
+    <ProjectReference Include="..\Memorabilia.Domain\Memorabilia.Domain.csproj" />
+    <ProjectReference Include="..\Memorabilia.Repository\Memorabilia.Repository.csproj" />
   </ItemGroup>
 
 </Project>

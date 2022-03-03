@@ -5,6 +5,10 @@
 @using Memorabilia.Application.Features.Memorabilia
 @using Memorabilia.Application.Features.Memorabilia.Figure
 @using Memorabilia.Domain.Constants
+@using Memorabilia.Web.Controls.Figure
+@using Memorabilia.Web.Controls.ItemTypeBrand
+@using Memorabilia.Web.Controls.ItemTypeLevel
+@using Memorabilia.Web.Controls.ItemTypeSize
 @using Memorabilia.Web.Controls.Person
 @using Memorabilia.Web.Controls.SportLeagueLevel
 @using Memorabilia.Web.Controls.Team
@@ -35,6 +39,57 @@ else
             <EditForm Model="_viewModel" OnValidSubmit="HandleValidSubmit">
                 <DataAnnotationsValidator />
                 <ValidationSummary />
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label for="level">Level</label>
+                            <_ItemTypeLevelDropDown @bind-Value="@_viewModel.LevelTypeId"
+                                                    @bind-Value:event="ValueChanged" 
+                                                    ItemType="_viewModel.ItemType" /> 
+                        </div> 
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label for="brand">Brand</label>
+                            <_ItemTypeBrandDropDown @bind-Value="@_viewModel.BrandId" 
+                                                    @bind-Value:event="ValueChanged"
+                                                    ItemType="_viewModel.ItemType" />
+                        </div> 
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label for="size">Size</label>
+                            <_ItemTypeSizeDropDown @bind-Value="@_viewModel.SizeId"
+                                                   @bind-Value:event="ValueChanged" 
+                                                   ItemType="_viewModel.ItemType" /> 
+                        </div> 
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label for="type">Type</label>
+                            <_FigureTypeDropDown @bind-Value="@_viewModel.FigureTypeId" 
+                                                 @bind-Value:event="ValueChanged" />
+                        </div> 
+                    </div>                    
+                </div>
+                <div class="row">                    
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label for="year">Year</label>
+                            <InputNumber id="year" class="form-control" @bind-Value="@_viewModel.Year" />                    
+                        </div> 
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label for="specialtyType">Specialty Type</label>
+                            <_FigureSpecialtyTypeDropDown @bind-Value="@_viewModel.FigureSpecialtyTypeId" 
+                                                          @bind-Value:event="ValueChanged"
+                                                          FigureType="FigureType.Find(_viewModel.FigureTypeId)" />
+                        </div> 
+                    </div> 
+                </div> 
                 <div class="row">                    
                     <div class="col-lg-12">
                         <div class="form-group">
@@ -90,7 +145,7 @@ else
 
         if (userId.Value == 0)
             _navigation.NavigateTo("Login");  
-            
+
         _viewModel.MemorabiliaId = MemorabiliaId;
 
         var command = new SaveFigure.Command(_viewModel);
@@ -112,10 +167,16 @@ else
             _navigation.NavigateTo("Login");        
 
         var query = new GetFigure.Query(MemorabiliaId);
-        var viewModel = await _queryRouter.Send(query).ConfigureAwait(false);   
-
-        _viewModel = new SaveFigureViewModel(viewModel);  
+        var viewModel = await _queryRouter.Send(query).ConfigureAwait(false); 
         
+        if (viewModel.Brand == null)
+        {
+            SetDefaults();
+            return;
+        }
+
+        _viewModel = new SaveFigureViewModel(viewModel);          
+
         _displayPeople = _viewModel.HasPerson;
         _displayTeams = _viewModel.HasTeam;
     }  
@@ -130,7 +191,13 @@ else
         StateHasChanged();
     } 
 
-    public void TeamsCheckboxClicked(object isChecked)
+    private void SetDefaults()
+    {
+        _viewModel.LevelTypeId = LevelType.Professional.Id;
+        _viewModel.SizeId = Size.Standard.Id;        
+    }
+
+    private void TeamsCheckboxClicked(object isChecked)
     {
         _displayTeams = (bool)isChecked;
 

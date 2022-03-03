@@ -16,7 +16,7 @@ namespace Memorabilia.Application.Features.Memorabilia.Card
 
         public MemorabiliaBrand Brand => _memorabilia.Brand;
 
-        //public MemorabiliaCard Card => _memorabilia.Card;
+        public MemorabiliaCard Card => _memorabilia.Card;
 
         public int MemorabiliaId => _memorabilia.Id;        
 

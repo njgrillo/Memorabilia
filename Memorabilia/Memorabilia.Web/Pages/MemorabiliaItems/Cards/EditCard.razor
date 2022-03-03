@@ -5,6 +5,10 @@
 @using Memorabilia.Application.Features.Memorabilia
 @using Memorabilia.Application.Features.Memorabilia.Card
 @using Memorabilia.Domain.Constants
+@using Memorabilia.Web.Controls.Card
+@using Memorabilia.Web.Controls.ItemTypeBrand
+@using Memorabilia.Web.Controls.ItemTypeLevel
+@using Memorabilia.Web.Controls.ItemTypeSize
 @using Memorabilia.Web.Controls.Person
 @using Memorabilia.Web.Controls.SportLeagueLevel
 @using Memorabilia.Web.Controls.Team
@@ -35,10 +39,87 @@ else
             <EditForm Model="_viewModel" OnValidSubmit="HandleValidSubmit">
                 <DataAnnotationsValidator />
                 <ValidationSummary />
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label for="level">Level</label>
+                            <_ItemTypeLevelDropDown @bind-Value="@_viewModel.LevelTypeId"
+                                                    @bind-Value:event="ValueChanged" 
+                                                    ItemType="_viewModel.ItemType" /> 
+                        </div> 
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label for="brand">Brand</label>
+                            <_ItemTypeBrandDropDown @bind-Value="@_viewModel.BrandId" 
+                                                    @bind-Value:event="ValueChanged"
+                                                    ItemType="_viewModel.ItemType" />
+                        </div> 
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label for="size">Size</label>
+                            <_ItemTypeSizeDropDown @bind-Value="@_viewModel.SizeId"
+                                                   @bind-Value:event="ValueChanged" 
+                                                   ItemType="_viewModel.ItemType" /> 
+                        </div> 
+                    </div>
+                </div>
+                <div class="row">                    
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label for="year">Year</label>
+                            <InputNumber id="year" class="form-control" @bind-Value="@_viewModel.Year" />                    
+                        </div> 
+                    </div>
+                </div> 
                 <div class="row">                    
                     <div class="col-lg-12">
                         <div class="form-group">
-                            <input type="checkbox" @onchange="eventArgs => { PersonCheckboxClicked(eventArgs.Value); }" />
+                            <input type="checkbox" @onchange="eventArgs => { NumberedCheckboxClicked(eventArgs.Value); }" />
+                            <label for="numbered">Numbered</label>
+                            <div class="form-group" hidden="@(!_displayNumbered)">
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <InputNumber id="numerator" class="form-control" @bind-Value="@_viewModel.Numerator" />                    
+                                    </div> 
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label for="of">of</label>              
+                                    </div> 
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <InputNumber id="denominator" class="form-control" @bind-Value="@_viewModel.Denominator" />                    
+                                    </div> 
+                                </div>
+                            </div>                    
+                        </div> 
+                    </div>
+                </div> 
+                <div class="row">                    
+                    <div class="col-lg-12">
+                        <div class="form-group">                            
+                            <InputCheckbox id="licensed" @bind-Value="@_viewModel.Licensed" />  
+                            <label for="licensed">Licensed</label>
+                        </div> 
+                    </div>
+                </div> 
+                <div class="row">                    
+                    <div class="col-lg-12">
+                        <div class="form-group">                            
+                            <InputCheckbox id="custom" @bind-Value="@_viewModel.Custom" />  
+                            <label for="custom">Custom</label>
+                        </div> 
+                    </div>
+                </div>                 
+                <div class="row">                    
+                    <div class="col-lg-12">
+                        <div class="form-group">
+                            <input type="checkbox" checked="checked" @onchange="eventArgs => { PersonCheckboxClicked(eventArgs.Value); }" />
                             <label for="person">Associate Card with a Person</label>
                             <div class="form-group" hidden="@(!_displayPeople)">
                                 <_PersonSelector AllowMultiple="true"
@@ -50,7 +131,7 @@ else
                 <div class="row">                    
                     <div class="col-lg-12">
                         <div class="form-group">
-                            <input type="checkbox" @onchange="eventArgs => { TeamsCheckboxClicked(eventArgs.Value); }" />
+                            <input type="checkbox" checked="checked" @onchange="eventArgs => { TeamsCheckboxClicked(eventArgs.Value); }" />
                             <label for="teams">Associate Card with a Team</label>
                             <div class="form-group" hidden="@(!_displayTeams)">
                                 <_TeamSelector AllowMultiple="true" 
@@ -80,8 +161,9 @@ else
     public int MemorabiliaId { get; set; }
 
     private bool _continue;
-    private bool _displayPeople;
-    private bool _displayTeams;
+    private bool _displayNumbered;
+    private bool _displayPeople = true;
+    private bool _displayTeams = true;
     private SaveCardViewModel _viewModel = new SaveCardViewModel();
 
     protected async Task HandleValidSubmit()
@@ -90,7 +172,7 @@ else
 
         if (userId.Value == 0)
             _navigation.NavigateTo("Login");  
-            
+
         _viewModel.MemorabiliaId = MemorabiliaId;
 
         var command = new SaveCard.Command(_viewModel);
@@ -114,11 +196,30 @@ else
         var query = new GetCard.Query(MemorabiliaId);
         var viewModel = await _queryRouter.Send(query).ConfigureAwait(false);   
 
+        if (viewModel.Brand == null)
+        {
+            SetDefaults();
+            return;
+        }
+
         _viewModel = new SaveCardViewModel(viewModel);  
-        
+
         _displayPeople = _viewModel.HasPerson;
         _displayTeams = _viewModel.HasTeam;
     }  
+
+    private void NumberedCheckboxClicked(object isChecked)
+    {     
+        _displayNumbered = (bool)isChecked;
+
+        if (!_displayNumbered)
+        {
+            _viewModel.Denominator = null;
+            _viewModel.Numerator = null;
+        }        
+
+        StateHasChanged();
+    } 
 
     private void PersonCheckboxClicked(object isChecked)
     {     
@@ -130,7 +231,13 @@ else
         StateHasChanged();
     } 
 
-    public void TeamsCheckboxClicked(object isChecked)
+    private void SetDefaults()
+    {
+        _viewModel.LevelTypeId = LevelType.Professional.Id;
+        _viewModel.SizeId = Size.Standard.Id;        
+    }
+
+    private void TeamsCheckboxClicked(object isChecked)
     {
         _displayTeams = (bool)isChecked;
 

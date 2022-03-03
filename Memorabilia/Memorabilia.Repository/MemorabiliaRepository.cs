@@ -23,6 +23,7 @@ namespace Memorabilia.Repository
                                                                                .Include("Autographs.Images")
                                                                                .Include("Autographs.Inscriptions")
                                                                                .Include("Autographs.Person")
+                                                                               .Include("Autographs.Spot")
                                                                                .Include(memorabilia => memorabilia.Baseball)
                                                                                .Include(memorabilia => memorabilia.Basketball)
                                                                                .Include(memorabilia => memorabilia.Bat)

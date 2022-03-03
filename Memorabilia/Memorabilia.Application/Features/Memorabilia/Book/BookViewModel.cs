@@ -14,7 +14,7 @@ namespace Memorabilia.Application.Features.Memorabilia.Book
             _memorabilia = memorabilia;
         }
 
-        //public MemorabiliaBook Book => _memorabilia.Book;
+        public MemorabiliaBook Book => _memorabilia.Book;
 
         public int MemorabiliaId => _memorabilia.Id;        
 
