@@ -23,19 +23,19 @@ namespace Memorabilia.Domain.Entities
 
         public int? BeginYear { get; private set; }
 
-        public List<TeamConference> Conferences { get; private set; } = new();
+        public virtual List<TeamConference> Conferences { get; private set; } = new();
 
-        public List<TeamDivision> Divisions { get; private set; } = new();
+        public virtual List<TeamDivision> Divisions { get; private set; } = new();
 
         public int? EndYear { get; private set; }
 
-        public Franchise Franchise { get; private set; }
+        public virtual Franchise Franchise { get; private set; }
 
         public int FranchiseId { get; private set; }
 
         public string ImagePath { get; private set; }
 
-        public List<TeamLeague> Leagues { get; private set; } = new();
+        public virtual List<TeamLeague> Leagues { get; private set; } = new();
 
         public string Location { get; private set; }
 

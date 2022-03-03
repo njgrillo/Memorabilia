@@ -27,7 +27,7 @@
 
         public string SizeName => Constants.Size.Find(SizeId)?.Name;
 
-        public Team Team { get; private set; }
+        public virtual Team Team { get; private set; }
 
         public int TeamId { get; private set; }     
 

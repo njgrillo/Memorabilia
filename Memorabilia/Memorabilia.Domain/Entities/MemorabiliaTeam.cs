@@ -12,7 +12,7 @@
 
         public int MemorabiliaId { get; private set; }
 
-        public Team Team { get; private set; }
+        public virtual Team Team { get; private set; }
 
         public int TeamId { get; private set; }
 

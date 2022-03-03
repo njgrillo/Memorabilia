@@ -40,9 +40,9 @@ namespace Memorabilia.Domain.Entities
 
         public string DisplayName { get; private set; }
 
-        public string FirstName { get; private set; }        
+        public string FirstName { get; private set; }
 
-        public List<HallOfFame> HallOfFames { get; private set; } = new();
+        public virtual List<HallOfFame> HallOfFames { get; private set; } = new();
 
         public string ImagePath { get; private set; }
 
@@ -56,9 +56,9 @@ namespace Memorabilia.Domain.Entities
 
         public string Nickname { get; private set; }
 
-        public List<PersonOccupation> Occupations { get; private set; } = new();
+        public virtual List<PersonOccupation> Occupations { get; private set; } = new();
 
-        public List<PersonTeam> Teams { get; private set; } = new();
+        public virtual List<PersonTeam> Teams { get; private set; } = new();
 
         public string Suffix { get; private set; }
 

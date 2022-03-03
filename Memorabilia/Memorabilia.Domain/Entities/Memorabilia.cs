@@ -29,23 +29,23 @@ namespace Memorabilia.Domain.Entities
                 MemorabiliaAcquisition = new MemorabiliaAcquisition(Id, acquisitionTypeId, acquiredDate, cost, purchaseTypeId);
         }
 
-        public Acquisition Acquisition => MemorabiliaAcquisition.Acquisition;
+        public virtual Acquisition Acquisition => MemorabiliaAcquisition.Acquisition;
 
-        public List<Autograph> Autographs { get; private set; } = new ();
+        public virtual List<Autograph> Autographs { get; private set; } = new ();
 
-        public MemorabiliaBaseball Baseball { get; private set; }
+        public virtual MemorabiliaBaseball Baseball { get; private set; }
 
-        public MemorabiliaBasketball Basketball { get; private set; }
+        public virtual MemorabiliaBasketball Basketball { get; private set; }
 
-        public MemorabiliaBat Bat { get; private set; }
+        public virtual MemorabiliaBat Bat { get; private set; }
 
-        public MemorabiliaBook Book { get; private set; }
+        public virtual MemorabiliaBook Book { get; private set; }
 
-        public MemorabiliaBrand Brand { get; private set; }
+        public virtual MemorabiliaBrand Brand { get; private set; }
 
-        public MemorabiliaCard Card { get; private set; }
+        public virtual MemorabiliaCard Card { get; private set; }
 
-        public MemorabiliaCommissioner Commissioner { get; private set; }
+        public virtual MemorabiliaCommissioner Commissioner { get; private set; }
 
         public Constants.Condition Condition => Constants.Condition.Find(ConditionId ?? 0);
 
@@ -53,47 +53,47 @@ namespace Memorabilia.Domain.Entities
 
         public DateTime CreateDate { get; private set; }
 
-        public MemorabiliaFigure Figure { get; private set; }
+        public virtual MemorabiliaFigure Figure { get; private set; }
 
-        public MemorabiliaFootball Football { get; private set; }
+        public virtual MemorabiliaFootball Football { get; private set; }
 
         public decimal? EstimatedValue { get; private set; }
 
-        public MemorabiliaGame Game { get; private set; }
+        public virtual MemorabiliaGame Game { get; private set; }
 
-        public MemorabiliaHelmet Helmet { get; private set; }
+        public virtual MemorabiliaHelmet Helmet { get; private set; }
 
-        public List<MemorabiliaImage> Images { get; private set; } = new ();
+        public virtual List<MemorabiliaImage> Images { get; private set; } = new ();
 
         public Constants.ItemType ItemType => Constants.ItemType.Find(ItemTypeId);
 
         public int ItemTypeId { get; private set; }
 
-        public MemorabiliaJersey Jersey { get; private set; }
+        public virtual MemorabiliaJersey Jersey { get; private set; }
 
         public DateTime? LastModifiedDate { get; private set; }
 
-        public MemorabiliaLevelType LevelType { get; private set; }
+        public virtual MemorabiliaLevelType LevelType { get; private set; }
 
-        public MemorabiliaMagazine Magazine { get; private set; }
+        public virtual MemorabiliaMagazine Magazine { get; private set; }
 
-        public MemorabiliaAcquisition MemorabiliaAcquisition { get; private set; }
+        public virtual MemorabiliaAcquisition MemorabiliaAcquisition { get; private set; }
 
-        public MemorabiliaOrientation Orientation { get; private set; }
+        public virtual MemorabiliaOrientation Orientation { get; private set; }
 
-        public List<MemorabiliaPerson> People { get; private set; } = new ();
+        public virtual List<MemorabiliaPerson> People { get; private set; } = new ();
 
-        public MemorabiliaPhoto Photo { get; private set; }
+        public virtual MemorabiliaPhoto Photo { get; private set; }
 
         public int PrivacyTypeId { get; private set; }
 
-        public MemorabiliaSize Size { get; private set; }
+        public virtual MemorabiliaSize Size { get; private set; }
 
-        public List<MemorabiliaSport> Sports { get; private set; } = new ();
+        public virtual List<MemorabiliaSport> Sports { get; private set; } = new ();
 
-        public List<MemorabiliaTeam> Teams { get; private set; } = new ();
-        
-        public User User { get; set; }
+        public virtual List<MemorabiliaTeam> Teams { get; private set; } = new ();
+
+        public virtual User User { get; set; }
 
         public int UserId { get; private set; }        
 

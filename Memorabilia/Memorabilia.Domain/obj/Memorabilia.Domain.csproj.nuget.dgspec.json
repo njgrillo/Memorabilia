@@ -44,6 +44,10 @@
             "Demo.Framework": {
               "target": "Package",
               "version": "[1.0.10, )"
+            },
+            "Microsoft.EntityFrameworkCore.Proxies": {
+              "target": "Package",
+              "version": "[6.0.2, )"
             }
           },
           "imports": [

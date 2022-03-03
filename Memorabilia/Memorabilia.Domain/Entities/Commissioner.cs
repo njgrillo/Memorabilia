@@ -16,7 +16,7 @@
 
         public int? EndYear { get; private set; }
 
-        public Person Person { get; set; }
+        public virtual Person Person { get; set; }
 
         public int PersonId { get; private set; }
 

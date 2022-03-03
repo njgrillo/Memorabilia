@@ -36,11 +36,11 @@ namespace Memorabilia.Domain.Entities
             
             if (!personalizationText.IsNullOrEmpty())
                 Personalization = new Personalization(Id, personalizationText);
-        } 
+        }
 
-        public Acquisition Acquisition { get; private set; }
+        public virtual Acquisition Acquisition { get; private set; }
 
-        public List<AutographAuthentication> Authentications { get; private set; } = new();
+        public virtual List<AutographAuthentication> Authentications { get; private set; } = new();
 
         public int ColorId { get; private set; }
 
@@ -52,23 +52,23 @@ namespace Memorabilia.Domain.Entities
 
         public int? Grade { get; private set; }
 
-        public List<AutographImage> Images { get; private set; } = new();
+        public virtual List<AutographImage> Images { get; private set; } = new();
 
-        public List<Inscription> Inscriptions { get; private set; } = new();
+        public virtual List<Inscription> Inscriptions { get; private set; } = new();
 
         public DateTime? LastModifiedDate { get; private set; }
 
-        public Memorabilia Memorabilia { get; set; }
+        public virtual Memorabilia Memorabilia { get; set; }
 
         public int MemorabiliaId { get; private set; }
 
-        public Person Person { get; set; }
+        public virtual Person Person { get; set; }
 
-        public Personalization Personalization { get; private set; }
+        public virtual Personalization Personalization { get; private set; }
 
         public int PersonId { get; private set; }
 
-        public AutographSpot Spot { get; private set; } 
+        public virtual AutographSpot Spot { get; private set; } 
 
         public int WritingInstrumentId { get; private set; }
 

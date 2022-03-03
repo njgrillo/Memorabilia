@@ -20,7 +20,7 @@
 
         public int? EndYear { get; set; }
 
-        public Team Team { get; set; }
+        public virtual Team Team { get; set; }
 
         public int TeamId { get; set; }
 

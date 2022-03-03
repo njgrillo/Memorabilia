@@ -13,7 +13,7 @@ namespace Memorabilia.Domain.Entities
             Acquisition = new Acquisition(acquisitionTypeId, acquiredDate, cost, purchaseTypeId);
         }
 
-        public Acquisition Acquisition { get; private set; }
+        public virtual Acquisition Acquisition { get; private set; }
 
         public int MemorabiliaId { get; private set; }
 
