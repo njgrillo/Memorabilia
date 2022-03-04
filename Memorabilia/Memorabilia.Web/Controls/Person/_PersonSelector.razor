@@ -55,6 +55,9 @@
     [Parameter]
     public EventCallback<SavePersonViewModel> SelectedPersonChanged { get; set; }
 
+    [Parameter]
+    public Sport Sport { get; set; }
+
     SavePersonViewModel _viewModel
     {
         get => SelectedPerson;
@@ -73,6 +76,13 @@
         await LoadPeople().ConfigureAwait(false);
     } 
 
+    public async Task Reload(Sport sport = null)
+    {
+        var query = new GetPeople.Query(sport?.Id ?? null);
+
+        _people = (await _queryRouter.Send(query).ConfigureAwait(false)).People.Select(person => new SavePersonViewModel(person));
+    }
+
     private void Add()
     {
         var person = People.SingleOrDefault(person => person.Id == _viewModel.Id);
@@ -89,10 +99,10 @@
 
     private async Task LoadPeople()
     {
-        var query = new GetPeople.Query();
+        var query = new GetPeople.Query(Sport?.Id ?? null);
 
         _people = (await _queryRouter.Send(query).ConfigureAwait(false)).People.Select(person => new SavePersonViewModel(person));
-    }
+    }    
 
     private void Remove(int personId)
     {

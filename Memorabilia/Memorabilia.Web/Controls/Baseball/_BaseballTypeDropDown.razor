@@ -10,7 +10,18 @@
 
 @code {
     [Parameter]
-    public GameStyleType GameStyleType { get; set; }
+    public GameStyleType GameStyleType
+    {
+        get
+        {
+            return _gameStyleType;
+        }
+        set
+        {
+            _gameStyleType = value;
+            _baseballTypes = value != null ? BaseballType.GetAll(GameStyleType.Find(value.Id)) : BaseballType.All;
+        }
+    }
 
     [Parameter]
     public int Value { get; set; }
@@ -19,6 +30,7 @@
     public EventCallback<int> ValueChanged { get; set; }
 
     private BaseballType[] _baseballTypes;
+    private GameStyleType _gameStyleType;
 
     protected override Task OnInitializedAsync()
     {

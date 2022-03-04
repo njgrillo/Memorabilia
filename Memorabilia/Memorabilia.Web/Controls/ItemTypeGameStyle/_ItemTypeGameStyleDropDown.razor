@@ -1,0 +1,49 @@
+﻿@using Memorabilia.Application.Features.Admin.ItemTypeGameStyle
+@using Memorabilia.Domain.Constants
+
+@inject QueryRouter _queryRouter
+
+<InputSelect id="ItemTypeGameStyleDropDown" class="form-control" @bind-Value="@Value" @oninput="@OnInputChange">
+    <option value="0">--Select--</option>
+    @foreach (var itemTypeGameStyle in _itemTypeGameStyles)
+    {
+        <option value="@itemTypeGameStyle.GameStyleTypeId">@itemTypeGameStyle.GameStyleTypeName</option>
+    }
+</InputSelect>
+
+@code {
+    [Parameter]
+    public GameStyleType InitialValue { get; set; }
+
+    [Parameter]
+    public ItemType ItemType { get; set; }
+
+    [Parameter]
+    public int Value { get; set; }  
+
+    [Parameter]
+    public EventCallback<int> ValueChanged { get; set; }
+
+    private IEnumerable<ItemTypeGameStyleViewModel> _itemTypeGameStyles = Enumerable.Empty<ItemTypeGameStyleViewModel>();
+
+    protected override async Task OnInitializedAsync()
+    {
+        await Load().ConfigureAwait(false);
+
+        if ((InitialValue?.Id ?? 0) > 0)
+            Value = InitialValue.Id; 
+    }    
+
+    private async Task Load()
+    {
+        var query = new GetItemTypeGameStyles.Query(ItemType.Id);
+
+        _itemTypeGameStyles = (await _queryRouter.Send(query).ConfigureAwait(false)).ItemTypeGameStyles;
+    }
+
+    private async Task OnInputChange(ChangeEventArgs args)
+    {
+        Value = Convert.ToInt32(args.Value);
+        await ValueChanged.InvokeAsync(Value).ConfigureAwait(false);
+    }    
+}

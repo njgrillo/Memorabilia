@@ -26,7 +26,7 @@ namespace Memorabilia.Application.Features.Autograph
 
         public string AuthenticationTooltip => Authentications.Any() ? "Is Authenticated" : "No Authentications Found";
 
-        public List<Domain.Entities.AutographAuthentication> Authentications => _autograph.Authentications;
+        public List<Domain.Entities.AutographAuthentication> Authentications => _autograph.Authentications;        
 
         public int ColorId => _autograph.ColorId;
 
@@ -37,6 +37,8 @@ namespace Memorabilia.Application.Features.Autograph
         public string ConditionName => Condition.Find(_autograph.ConditionId)?.Name;
 
         public DateTime CreateDate => _autograph.CreateDate;
+
+        public bool DisplaySpot => ItemType.CanHaveSpot(ItemType.Find(ItemTypeId));
 
         public decimal? EstimatedValue => _autograph.EstimatedValue;
 

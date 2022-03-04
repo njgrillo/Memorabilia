@@ -35,6 +35,7 @@ namespace Memorabilia.Application.Features.Autograph
             MemorabiliaAcquiredDate = viewModel.Acquisition.AcquiredDate;
             MemorabiliaAcquisitionTypeId = viewModel.Acquisition.AcquisitionTypeId;
             MemorabiliaCost = viewModel.Acquisition.Cost;
+            MemorabiliaEstimatedValue = viewModel.EstimatedValue;
             MemorabiliaId = viewModel.Id;            
             MemorabiliaPurchaseTypeId = viewModel.Acquisition.PurchaseTypeId;            
             UserFirstName = viewModel.UserFirstName;
@@ -45,9 +46,13 @@ namespace Memorabilia.Application.Features.Autograph
 
         public DateTime? AcquiredDate { get; set; }
 
+        public AcquisitionType AcquisitionType => AcquisitionType.Find(AcquisitionTypeId);
+
         public int AcquisitionTypeId { get; set; }
 
         public bool CanHaveCost => AcquisitionType.CanHaveCost(AcquisitionType.Find(AcquisitionTypeId));
+
+        public bool CanHavePlaceOfPurchase => AcquisitionType == AcquisitionType.Purchase;
 
         [Required]
         [Range(1, int.MaxValue, ErrorMessage = "Color is required.")]
@@ -61,9 +66,35 @@ namespace Memorabilia.Application.Features.Autograph
 
         public DateTime CreateDate { get; set; }
 
-        public decimal? EstimatedValue { get; set; }
+        public decimal? EstimatedValue { get; set; }        
 
         public int? Grade { get; set; }
+
+        public bool IsAcquisitionFromMemorabilia
+        {
+            get
+            {
+                if (AcquisitionTypeId == MemorabiliaAcquisitionTypeId && 
+                    AcquiredDate == MemorabiliaAcquiredDate &&
+                    Cost == MemorabiliaCost &&
+                    PurchaseTypeId == MemorabiliaPurchaseTypeId)
+                    return true;
+
+                return false;
+            }
+        }
+
+        public bool IsEstimatedValueFromMemorabilia
+        {
+            get
+            {
+                if (EstimatedValue == MemorabiliaEstimatedValue &&
+                    MemorabiliaEstimatedValue.HasValue)
+                    return true;
+
+                return false;
+            }
+        }
 
         public DateTime? LastModifiedDate { get; set; }
 
@@ -72,6 +103,8 @@ namespace Memorabilia.Application.Features.Autograph
         public int MemorabiliaAcquisitionTypeId { get; set; }
 
         public decimal? MemorabiliaCost { get; set; }
+
+        public decimal? MemorabiliaEstimatedValue { get; set; }
 
         [Required]
         public int MemorabiliaId { get; set; }
@@ -84,6 +117,10 @@ namespace Memorabilia.Application.Features.Autograph
 
         [Required]
         public SavePersonViewModel Person { get; set; } = new();
+
+        [Required]
+        [Range(1, int.MaxValue, ErrorMessage = "Person is required.")]
+        public int? PersonId => Person?.Id;
 
         public string PersonalizationText { get; set; }
 

@@ -32,7 +32,7 @@ else
     <br />
     <_Table HasChildItems="true"
             Items="_viewModel.MemorabiliaItems" 
-            ItemsPerPage="5"   
+            ItemsPerPage="25"   
             ShowSummary="true"
             TItem="MemorabiliaItemViewModel">
         <HeaderTemplate>            
@@ -183,13 +183,16 @@ else
                             </_Tooltip>                         
                         </td>
                         <td>
-                            <_Tooltip Text="Details">
-                                <img class="can-click" 
-                                     src="images/details.png" 
-                                     height="20" 
-                                     width="20" 
-                                     @onclick="@(_ => _navigation.NavigateTo($"Autographs/{@context.ItemTypeName}/Edit/{@autograph.Id}"))" />
-                            </_Tooltip>                         
+                            @if (autograph.DisplaySpot)
+                            {
+                                <_Tooltip Text="Details">
+                                    <img class="can-click" 
+                                         src="images/details.png" 
+                                         height="20" 
+                                         width="20" 
+                                         @onclick="@(_ => _navigation.NavigateTo($"Autographs/Spot/Edit/{@autograph.Id}"))" />
+                                </_Tooltip> 
+                            }                                                    
                         </td>
                         <td>
                             <_Tooltip Text="Edit">

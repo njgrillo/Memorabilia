@@ -19,7 +19,8 @@ namespace Memorabilia.Repository
         private IQueryable<Domain.Entities.Person> Person => _context.Set<Domain.Entities.Person>()
                                                                      .Include(person => person.HallOfFames)
                                                                      .Include(person => person.Occupations)
-                                                                     .Include(person => person.Teams);
+                                                                     .Include(person => person.Teams)
+                                                                     .Include("Teams.Team");
 
         public async Task Add(Domain.Entities.Person person, CancellationToken cancellationToken = default)
         {
@@ -40,9 +41,14 @@ namespace Memorabilia.Repository
             return await Person.SingleOrDefaultAsync(person => person.Id == id).ConfigureAwait(false);
         }
 
-        public async Task<IEnumerable<Domain.Entities.Person>> GetAll()
+        public async Task<IEnumerable<Domain.Entities.Person>> GetAll(int? sportId = null)
         {
-            return (await Person.ToListAsync().ConfigureAwait(false)).OrderBy(person => person.DisplayName);
+            return sportId.HasValue 
+                ? (await Person.Where(person => person.Teams.Any(team => team.Team.Franchise.SportLeagueLevel.SportId == sportId.Value))
+                               .ToListAsync()
+                               .ConfigureAwait(false))
+                               .OrderBy(person => person.DisplayName)
+                : (await Person.ToListAsync().ConfigureAwait(false)).OrderBy(person => person.DisplayName);
         }
 
         public async Task Update(Domain.Entities.Person person, CancellationToken cancellationToken = default)

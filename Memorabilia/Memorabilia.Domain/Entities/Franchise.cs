@@ -29,6 +29,8 @@ namespace Memorabilia.Domain.Entities
 
         public string Name { get; private set; }
 
+        public virtual SportLeagueLevel SportLeagueLevel { get; private set; }
+
         public int SportLeagueLevelId { get; private set; }
 
         public string SportLeagueLevelName => Constants.SportLeagueLevel.Find(SportLeagueLevelId)?.Name;

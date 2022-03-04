@@ -12,7 +12,7 @@ namespace Memorabilia.Domain
 
         Task<Entities.Person> Get(int id);
 
-        Task<IEnumerable<Entities.Person>> GetAll();
+        Task<IEnumerable<Entities.Person>> GetAll(int? sportId = null);
 
         Task Update(Entities.Person person, CancellationToken cancellationToken = default);
     }

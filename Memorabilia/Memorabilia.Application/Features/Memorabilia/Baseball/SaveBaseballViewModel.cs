@@ -17,7 +17,7 @@ namespace Memorabilia.Application.Features.Memorabilia.Baseball
             BaseballTypeId = viewModel.Baseball?.BaseballTypeId ?? 0;
             BaseballTypeYear = viewModel.Baseball?.Year;
             BrandId = viewModel.Brand.BrandId;
-            CommissionerId = viewModel.Commissioner.CommissionerId;
+            CommissionerId = viewModel.Commissioner?.CommissionerId ?? 0;
             GameDate = viewModel.Game?.GameDate;
             GameStyleTypeId = viewModel.Game?.GameStyleTypeId ?? 0;
             LevelTypeId = viewModel.Level.LevelTypeId;
@@ -29,7 +29,9 @@ namespace Memorabilia.Application.Features.Memorabilia.Baseball
 
             if (viewModel.Teams.Any())
                 Team = new SaveTeamViewModel(new TeamViewModel(viewModel.Teams.First().Team));
-        }        
+        }
+
+        private int _gameStyleTypeId;
 
         [StringLength(5, ErrorMessage = "Anniversary is too long.")]
         public string BaseballTypeAnniversary { get; set; }
@@ -39,6 +41,8 @@ namespace Memorabilia.Application.Features.Memorabilia.Baseball
         public int BaseballTypeId { get; set; }        
 
         public int? BaseballTypeYear { get; set; }
+
+        public Brand Brand => Brand.Find(BrandId);
 
         [Required]
         [Range(1, int.MaxValue, ErrorMessage = "Brand is required.")]
@@ -58,11 +62,22 @@ namespace Memorabilia.Application.Features.Memorabilia.Baseball
 
         public DateTime? GameDate { get; set; }
 
-        public GameStyleType GameStyleType => GameStyleType.Find(GameStyleTypeId);
+        public GameStyleType GameStyleType => GameStyleType.Find(GameStyleTypeId);        
 
         [Required]
         [Range(1, int.MaxValue, ErrorMessage = "Game Style Type is required.")]
-        public int GameStyleTypeId { get; set; }
+        public int GameStyleTypeId
+        {
+            get
+            {
+                return _gameStyleTypeId;
+            }
+            set
+            {
+                _gameStyleTypeId = value;
+                BaseballTypeId = Brand == Brand.Rawlings ? BaseballType.Official.Id : 0;
+            }
+        }
 
         public bool HasPerson => Person?.Id > 0;
 
@@ -98,7 +113,9 @@ namespace Memorabilia.Application.Features.Memorabilia.Baseball
 
         [Required]
         [Range(1, int.MaxValue, ErrorMessage = "Size is required.")]
-        public int SizeId { get; set; }        
+        public int SizeId { get; set; }
+
+        public Sport Sport => Sport.Baseball;
 
         public SportLeagueLevel SportLeagueLevel => SportLeagueLevel.MajorLeagueBaseball;
 

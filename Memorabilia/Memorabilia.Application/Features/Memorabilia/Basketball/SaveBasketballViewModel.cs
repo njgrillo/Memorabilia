@@ -22,12 +22,14 @@ namespace Memorabilia.Application.Features.Memorabilia.Basketball
             MemorabiliaId = viewModel.MemorabiliaId;
             SizeId = viewModel.Size.SizeId;
 
-            if (!viewModel.People.Any())
+            if (viewModel.People.Any())
                 Person = new SavePersonViewModel(new PersonViewModel(viewModel.People.First().Person));
 
             if (viewModel.Teams.Any())
                 Team = new SaveTeamViewModel(new TeamViewModel(viewModel.Teams.First().Team));
         }
+
+        private int _gameStyleTypeId;
 
         public BasketballType BasketballType => BasketballType.Find(BasketballTypeId);
 
@@ -47,7 +49,18 @@ namespace Memorabilia.Application.Features.Memorabilia.Basketball
 
         [Required]
         [Range(1, int.MaxValue, ErrorMessage = "Game Style Type is required.")]
-        public int GameStyleTypeId { get; set; }
+        public int GameStyleTypeId
+        {
+            get
+            {
+                return _gameStyleTypeId;
+            }
+            set
+            {
+                _gameStyleTypeId = value;
+                BasketballTypeId = BasketballType.Official.Id;
+            }
+        }
 
         public bool HasPerson => Person?.Id > 0;
 
@@ -84,6 +97,8 @@ namespace Memorabilia.Application.Features.Memorabilia.Basketball
         [Required]
         [Range(1, int.MaxValue, ErrorMessage = "Size is required.")]
         public int SizeId { get; set; }
+
+        public Sport Sport => Sport.Basketball;
 
         public SportLeagueLevel SportLeagueLevel => SportLeagueLevel.NationalBasketballAssociation;
 

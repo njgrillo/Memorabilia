@@ -19,6 +19,12 @@ namespace Memorabilia.Domain.Constants
             Other
         };
 
+        public static readonly BasketballType[] GameWorthly =
+        {
+            Finals,
+            Official
+        };
+
         private BasketballType(int id, string name, string abbreviation)
         {
             Id = id;
@@ -35,6 +41,14 @@ namespace Memorabilia.Domain.Constants
         public static BasketballType Find(int id)
         {
             return All.SingleOrDefault(basketballType => basketballType.Id == id);
+        }
+
+        public static BasketballType[] GetAll(GameStyleType gameStyleType)
+        {
+            if (gameStyleType == null || gameStyleType == GameStyleType.None)
+                return All;
+
+            return GameWorthly;
         }
     }
 }

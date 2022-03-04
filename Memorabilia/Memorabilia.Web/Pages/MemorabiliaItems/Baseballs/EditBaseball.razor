@@ -7,8 +7,8 @@
 @using Memorabilia.Domain.Constants
 @using Memorabilia.Web.Controls.Baseball
 @using Memorabilia.Web.Controls.Commissioner
-@using Memorabilia.Web.Controls.GameStyleType
 @using Memorabilia.Web.Controls.ItemTypeBrand
+@using Memorabilia.Web.Controls.ItemTypeGameStyle
 @using Memorabilia.Web.Controls.ItemTypeLevel
 @using Memorabilia.Web.Controls.ItemTypeSize
 @using Memorabilia.Web.Controls.Person
@@ -69,7 +69,7 @@ else
                     </div>
                     <div class="col-lg-6">
                          <div class="form-group" hidden="@(!_viewModel.DisplayBaseballType)">
-                            <label for="baseballType">Baseball Type</label>
+                            <label for="baseballType">Type</label>
                             <_BaseballTypeDropDown @bind-Value="@_viewModel.BaseballTypeId" 
                                                    @bind-Value:event="ValueChanged"
                                                    GameStyleType="_viewModel.GameStyleType" /> 
@@ -80,9 +80,9 @@ else
                     <div class="col-lg-6">
                         <div class="form-group">
                             <label for="gameStyleType">Game Style Type</label>
-                            <_GameStyleTypeDropDown @bind-Value="@_viewModel.GameStyleTypeId"
-                                                    @bind-Value:event="ValueChanged"
-                                                    ItemType="_viewModel.ItemType" /> 
+                            <_ItemTypeGameStyleDropDown @bind-Value="@_viewModel.GameStyleTypeId"
+                                                        @bind-Value:event="ValueChanged"
+                                                        ItemType="_viewModel.ItemType" /> 
                         </div> 
                     </div>
                     <div class="col-lg-6">
@@ -123,19 +123,41 @@ else
                 <div class="row">                    
                     <div class="col-lg-12">
                         <div class="form-group">
-                            <input type="checkbox" @onchange="eventArgs => { PersonCheckboxClicked(eventArgs.Value); }" />
-                            <label for="person">Associate Baseball with a Person</label>
-                            <div class="form-group" hidden="@(!_displayPeople)">
-                                <_PersonSelector SelectedPerson="_viewModel.Person"
-                                                 SelectedPersonChanged="SelectedPersonChanged" />
-                            </div>                    
+                            <input type="checkbox" 
+                                   checked="@_viewModel.HasPerson" 
+                                   @onchange="eventArgs => { PersonCheckboxClicked(eventArgs.Value); }" />
+                            <label for="person">Associate Baseball with a Person</label>                  
                         </div> 
                     </div>
-                </div>              
+                </div>  
+                <div hidden="@(!_displayPeople)">
+                    <div class="row" >
+                        <div class="col-lg-12">
+                            <div class="form-group">
+                                <input type="checkbox" 
+                                    checked="@true"                                        
+                                    @onchange="eventArgs => { PersonFilterCheckboxClicked(eventArgs.Value); }" />
+                                <label for="person">Filter by Baseball</label>
+                            </div> 
+                        </div>                                                   
+                    </div>  
+                    <div class="row">                    
+                        <div class="col-lg-12">
+                            <div class="form-group">                                                      
+                                <div class="form-group" >
+                                    <_PersonSelector @ref="@_personSelector" 
+                                                     SelectedPerson="_viewModel.Person"
+                                                     SelectedPersonChanged="SelectedPersonChanged"
+                                                     Sport="_viewModel.Sport" />
+                                </div>                    
+                            </div> 
+                        </div>
+                    </div> 
+                </div>                
                 <div class="row">                    
                     <div class="col-lg-12">
                         <div class="form-group">
-                            <input type="checkbox" @onchange="eventArgs => { TeamsCheckboxClicked(eventArgs.Value); }" />
+                            <input type="checkbox" checked="@_viewModel.HasTeam" @onchange="eventArgs => { TeamsCheckboxClicked(eventArgs.Value); }" />
                             <label for="teams">Associate Baseball with a Team</label>
                             <div class="form-group" hidden="@(!_displayTeams)">
                                 <_TeamSelector SelectedTeam="_viewModel.Team"
@@ -168,6 +190,7 @@ else
     private bool _continue;
     private bool _displayPeople;
     private bool _displayTeams;
+    private _PersonSelector _personSelector;
     private SaveBaseballViewModel _viewModel = new SaveBaseballViewModel();
 
     protected async Task HandleValidSubmit()
@@ -176,7 +199,7 @@ else
 
         if (userId.Value == 0)
             _navigation.NavigateTo("Login");  
-            
+
         _viewModel.MemorabiliaId = MemorabiliaId;
 
         var command = new SaveBaseball.Command(_viewModel);
@@ -218,6 +241,13 @@ else
 
         if (!_displayPeople)
             _viewModel.Person = null;
+
+        StateHasChanged();
+    } 
+
+    private async Task PersonFilterCheckboxClicked(object isChecked)
+    {     
+        await _personSelector.Reload((bool)isChecked ? _viewModel.Sport : null).ConfigureAwait(false);
 
         StateHasChanged();
     } 

@@ -130,7 +130,7 @@ namespace Memorabilia.Domain.Entities
             SetLevelType(levelTypeId);
             SetSize(sizeId);
             SetSports(sportId);
-            SetBaseballType(baseballTypeId.Value, year, anniversary);
+            SetBaseballType(baseballTypeId, year, anniversary);
             SetCommissioner(commissionerId);
             SetGame(gameStyleTypeId, personId, gameDate);            
 

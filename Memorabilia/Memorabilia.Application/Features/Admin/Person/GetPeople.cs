@@ -18,7 +18,7 @@ namespace Memorabilia.Application.Features.Admin.Person
 
             protected override async Task<PeopleViewModel> Handle(Query query)
             {
-                var persons = (await _personRepository.GetAll().ConfigureAwait(false)).OrderBy(person => person.DisplayName);
+                var persons = (await _personRepository.GetAll(query.SportId).ConfigureAwait(false)).OrderBy(person => person.DisplayName);
 
                 var viewModel = new PeopleViewModel(persons);
 
@@ -26,6 +26,14 @@ namespace Memorabilia.Application.Features.Admin.Person
             }
         }
 
-        public class Query : IQuery<PeopleViewModel> { }
+        public class Query : IQuery<PeopleViewModel> 
+        { 
+            public Query(int? sportId = null)
+            {
+                SportId = sportId;
+            }
+
+            public int? SportId { get; }
+        }
     }
 }

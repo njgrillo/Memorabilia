@@ -92,12 +92,8 @@ namespace Memorabilia.Domain.Entities
             WritingInstrumentId = writingInstrumentId;
             LastModifiedDate = DateTime.UtcNow;
 
-            if (acquisitionTypeId.HasValue)
-                Acquisition.Set(acquisitionTypeId.Value, acquiredDate, cost, purchaseTypeId);
-            else
-                Acquisition = null;            
-
-            Personalization.Set(personalizationText);
+            SetAcquisition(acquisitionTypeId, acquiredDate, cost, purchaseTypeId);
+            SetPersonalization(personalizationText);
         }
 
         public void SetAuthentication(int id, 
@@ -157,6 +153,30 @@ namespace Memorabilia.Domain.Entities
             }
 
             Spot.Set(spotId);
+        }
+
+        private void SetAcquisition(int? acquisitionTypeId, DateTime? acquiredDate, decimal? cost, int? purchaseTypeId)
+        {
+            if (acquisitionTypeId.HasValue)
+                Acquisition.Set(acquisitionTypeId.Value, acquiredDate, cost, purchaseTypeId);
+            else
+                Acquisition = null;
+        }
+
+        private void SetPersonalization(string personalizationText)
+        {
+            if (!personalizationText.IsNullOrEmpty())
+            {
+                if (Personalization == null)
+                {
+                    Personalization = new Personalization(Id, personalizationText);
+                    return;
+                }
+
+                Personalization.Set(personalizationText);
+            }
+            else
+                Personalization = null;
         }
     }
 }

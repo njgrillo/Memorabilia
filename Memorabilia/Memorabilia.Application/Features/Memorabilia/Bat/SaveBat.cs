@@ -60,13 +60,13 @@ namespace Memorabilia.Application.Features.Memorabilia.Bat
 
             public int MemorabiliaId => _viewModel.MemorabiliaId;
 
-            public int? PersonId => _viewModel.People.Any() ? _viewModel.People.First().Id: null;
+            public int? PersonId => _viewModel.Person?.Id > 0 ? _viewModel.Person.Id: null;
 
             public int SizeId => _viewModel.SizeId;
 
             public int SportId => Domain.Constants.Sport.Baseball.Id;
 
-            public int? TeamId => _viewModel.Team?.Id > 0 ? _viewModel.Team?.Id : null;
+            public int? TeamId => _viewModel.Team?.Id > 0 ? _viewModel.Team.Id : null;
         }
     }
 }

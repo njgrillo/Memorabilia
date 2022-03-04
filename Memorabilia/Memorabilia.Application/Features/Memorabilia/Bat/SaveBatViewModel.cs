@@ -21,8 +21,10 @@ namespace Memorabilia.Application.Features.Memorabilia.Bat
             GameStyleTypeId = viewModel.Game?.GameStyleTypeId ?? 0;
             Length = viewModel.Bat?.Length ?? 0;
             MemorabiliaId = viewModel.MemorabiliaId;
-            People = viewModel.People.Select(person => new SavePersonViewModel(new PersonViewModel(person.Person))).ToList();
             SizeId = viewModel.Size.SizeId;
+
+            if (viewModel.People.Any())
+                Person = new SavePersonViewModel(new PersonViewModel(viewModel.People.First().Person));
 
             if (viewModel.Teams.Any())
                 Team = new SaveTeamViewModel(new TeamViewModel(viewModel.Teams.First().Team));
@@ -48,7 +50,7 @@ namespace Memorabilia.Application.Features.Memorabilia.Bat
         [Range(1, int.MaxValue, ErrorMessage = "Game Style Type is required.")]
         public int GameStyleTypeId { get; set; }
 
-        public bool HasPerson => People.Any();
+        public bool HasPerson => Person?.Id > 0;
 
         public bool HasTeam => Team?.Id > 0;
 
@@ -76,11 +78,13 @@ namespace Memorabilia.Application.Features.Memorabilia.Bat
 
         public override string PageTitle => $"{(MemorabiliaId > 0 ? "Edit" : "Add")} {ItemType.Bat.Name} Details";
 
-        public List<SavePersonViewModel> People { get; set; } = new();
+        public SavePersonViewModel Person { get; set; }
 
         [Required]
         [Range(1, int.MaxValue, ErrorMessage = "Size is required.")]
         public int SizeId { get; set; }
+
+        public Sport Sport => Sport.Baseball;
 
         public SportLeagueLevel SportLeagueLevel => SportLeagueLevel.MajorLeagueBaseball;
 

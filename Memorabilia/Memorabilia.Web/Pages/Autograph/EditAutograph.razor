@@ -107,7 +107,9 @@ else
                 <div class="row">                    
                     <div class="col-lg-12">
                         <div class="form-group">
-                            <input type="checkbox" checked="checked" @onchange="eventArgs => { EstimatedValueCheckboxClicked(eventArgs.Value); }" />
+                            <input type="checkbox" 
+                                   checked="@_viewModel.IsEstimatedValueFromMemorabilia" 
+                                   @onchange="eventArgs => { EstimatedValueCheckboxClicked(eventArgs.Value); }" />
                             <label for="estimatedValue">Estimated Value same as Memorabilia</label>                                               
                         </div> 
                     </div>
@@ -123,7 +125,9 @@ else
                 <div class="row">                    
                     <div class="col-lg-12">
                         <div class="form-group">
-                            <input type="checkbox" checked="checked" @onchange="eventArgs => { AcquisitionDetailsCheckboxClicked(eventArgs.Value); }" />
+                            <input type="checkbox" 
+                                   checked="@_viewModel.IsAcquisitionFromMemorabilia"  
+                                   @onchange="eventArgs => { AcquisitionDetailsCheckboxClicked(eventArgs.Value); }" />
                             <label for="person">Acquisition Details same as Memorabilia</label>                                               
                         </div> 
                     </div>
@@ -156,7 +160,7 @@ else
                             </div>
                         </div> 
                         <div class="col-lg-6">
-                            <div class="form-group" hidden="@(!_viewModel.CanHaveCost)">
+                            <div class="form-group" hidden="@(!_viewModel.CanHavePlaceOfPurchase)">
                                 <label for="purchaseType">Place of Purchase</label>
                                 <_PurchaseTypeDropDown @bind-Value="@_viewModel.PurchaseTypeId" 
                                                        @bind-Value:event="ValueChanged" /> 
@@ -182,8 +186,8 @@ else
     public int MemorabiliaId { get; set; }
 
     private bool _continue;
-    private bool _displayAcquisitionDetails;
-    private bool _displayEstimatedValue;
+    private bool _displayAcquisitionDetails = true;
+    private bool _displayEstimatedValue = true;
     private bool _displayPersonalization;
     private bool _displayPersonImport;
     private int _itemTypeId; 
@@ -214,6 +218,8 @@ else
 
         var query = new GetMemorabiliaItem.Query(MemorabiliaId);
         var viewModel = await _queryRouter.Send(query).ConfigureAwait(false);
+
+        _displayPersonImport = viewModel.People.Any() && viewModel.People.Count() == 1;
 
         if (viewModel.Autographs.Any())
         {
