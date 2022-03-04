@@ -1,6 +1,4 @@
-﻿@using Memorabilia.Domain.Constants
-
-<InputSelect id="orientation" class="form-control" @bind-Value="@Value" @oninput="@OnInputChange" >
+﻿<InputSelect id="orientation" class="form-control" @bind-Value="@Value" @oninput="@OnInputChange" >
     <option value="0">--Select--</option>
     @foreach (var orientation in Orientation.All)
     {

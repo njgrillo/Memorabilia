@@ -17,8 +17,9 @@ namespace Memorabilia.Application.Features.Memorabilia.Photo
         {
             BrandId = viewModel.Brand.BrandId;
             Framed = viewModel.Photo.Framed;
+            Matted = viewModel.Photo.Matted;
             MemorabiliaId = viewModel.MemorabiliaId;
-            OrientationId = viewModel.Orientation.Id;
+            OrientationId = viewModel.Orientation.OrientationId;
             People = viewModel.People.Select(person => new SavePersonViewModel(new PersonViewModel(person.Person))).ToList();
             PhotoTypeId = viewModel.Photo.PhotoTypeId;
             SizeId = viewModel.Size.SizeId;
@@ -38,7 +39,9 @@ namespace Memorabilia.Application.Features.Memorabilia.Photo
 
         public bool HasTeam => Teams.Any();
 
-        public ItemType ItemType => ItemType.Photo;        
+        public ItemType ItemType => ItemType.Photo;       
+        
+        public bool Matted { get; set; }
 
         [Required]
         public int MemorabiliaId { get; set; }

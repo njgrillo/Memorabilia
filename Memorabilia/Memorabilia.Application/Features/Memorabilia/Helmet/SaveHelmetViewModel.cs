@@ -27,13 +27,19 @@ namespace Memorabilia.Application.Features.Memorabilia.Helmet
             SportIds = viewModel.Sports.Select(x => x.Id).ToList();
             Teams = viewModel.Teams.Select(team => new SaveTeamViewModel(new TeamViewModel(team.Team))).ToList();
             Throwback = viewModel.Helmet.Throwback;
-        }   
+        }
+
+        private int _gameStyleTypeId;
 
         [Required]
         [Range(1, int.MaxValue, ErrorMessage = "Brand is required.")]
         public int BrandId { get; set; }
 
-        public bool DisplayGameDate => GameStyleType.IsGameWorthly(GameStyleType);
+        public bool CanEditHelmetQualityType { get; private set; } = true;
+
+        public bool DisplayGameDate => IsGameWorthly;
+
+        public bool DisplayHelmetFinish => !IsGameWorthly;
 
         public bool DisplayHelmetQualityType => Size.Find(SizeId) == Size.Full;
 
@@ -43,7 +49,23 @@ namespace Memorabilia.Application.Features.Memorabilia.Helmet
 
         [Required]
         [Range(1, int.MaxValue, ErrorMessage = "Game Style Type is required.")]
-        public int GameStyleTypeId { get; set; }
+        public int GameStyleTypeId
+        {
+            get
+            {
+                return _gameStyleTypeId;
+            }
+            set
+            {
+                _gameStyleTypeId = value;
+                CanEditHelmetQualityType = !IsGameWorthly;
+
+                if (IsGameWorthly)
+                {
+                    HelmetQualityTypeId = HelmetQualityType.Authentic.Id;                    
+                }                    
+            }
+        }
 
         public bool HasPerson => People.Any();
 
@@ -71,6 +93,8 @@ namespace Memorabilia.Application.Features.Memorabilia.Helmet
                 return $"{path}helmet.jpg";
             }
         }
+
+        public bool IsGameWorthly => GameStyleType.IsGameWorthly(GameStyleType);
 
         public ItemType ItemType => ItemType.Helmet;
 

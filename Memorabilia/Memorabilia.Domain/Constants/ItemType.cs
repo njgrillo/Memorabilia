@@ -20,6 +20,7 @@ namespace Memorabilia.Domain.Constants
         public static readonly ItemType FirstDayCover = new(5, "First Day Cover");
         public static readonly ItemType Football = new(9, "Football");
         public static readonly ItemType Glove = new(10, "Glove");
+        public static readonly ItemType GolfBall = new(42, "Golf Ball");       
         public static readonly ItemType Guitar = new(29, "Guitar");
         public static readonly ItemType Hat = new(23, "Hat");
         public static readonly ItemType HeadBand = new(41, "Head Band");
@@ -34,13 +35,16 @@ namespace Memorabilia.Domain.Constants
         public static readonly ItemType Painting = new(16, "Painting");
         public static readonly ItemType Pants = new(39, "Pants");
         public static readonly ItemType Photo = new(17, "Photo");
+        public static readonly ItemType PinFlag = new(43, "Pin Flag");
         public static readonly ItemType PlayingCard = new(31, "Playing Card");
         public static readonly ItemType Poster = new(33, "Poster");
         public static readonly ItemType Puck = new(18, "Puck");        
         public static readonly ItemType Pylon = new(19, "Pylon");
         public static readonly ItemType Shirt = new(37, "Shirt");
         public static readonly ItemType Shoe = new(25, "Shoe");   
-        public static readonly ItemType Soccerball = new(20, "Soccer Ball");   
+        public static readonly ItemType Soccerball = new(20, "Soccer Ball");
+        public static readonly ItemType TennisBall = new(44, "Tennis Ball");
+        public static readonly ItemType TennisRacket = new(45, "Tennis Racket");
         public static readonly ItemType Ticket = new(22, "Ticket");
         public static readonly ItemType TradingCard = new(7, "Trading Card");
         public static readonly ItemType Trunks = new(38, "Trunks");
@@ -64,6 +68,7 @@ namespace Memorabilia.Domain.Constants
             FirstDayCover,
             Football,
             Glove,
+            GolfBall,
             Guitar,
             Hat,
             HeadBand,
@@ -78,6 +83,7 @@ namespace Memorabilia.Domain.Constants
             Painting,
             Pants,
             Photo,
+            PinFlag,
             PlayingCard,
             Poster,
             Puck,
@@ -85,6 +91,8 @@ namespace Memorabilia.Domain.Constants
             Shirt,
             Shoe,
             Soccerball,
+            TennisBall,
+            TennisRacket,
             Ticket,
             TradingCard,
             Trunks,
@@ -98,17 +106,21 @@ namespace Memorabilia.Domain.Constants
             Bat,
             Football,
             Glove,
+            GolfBall,
             Hat,
             HeadBand,
             Helmet,
             HockeyStick,
             Jersey,
             Pants,
+            PinFlag,
             Puck,
             Pylon,
             Shirt,
             Shoe,
             Soccerball,
+            TennisBall,
+            TennisRacket,
             Trunks,
             WristBand
         };
@@ -130,9 +142,12 @@ namespace Memorabilia.Domain.Constants
             Jersey,
             Magazine,
             Pants,
+            PinFlag,
             PlayingCard,
             Shirt,
             Shoe,
+            TennisBall,
+            TennisRacket,
             TradingCard,
             Trunks
         };

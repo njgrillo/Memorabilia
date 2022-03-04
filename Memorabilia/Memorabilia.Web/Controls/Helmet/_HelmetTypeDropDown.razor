@@ -3,13 +3,27 @@
 
 <InputSelect id="HelmetTypeDropDown" class="form-control" @bind-Value="@Value" @oninput="OnInputChange" >
     <option value="0">--Select--</option>
-    @foreach (var helmetType in HelmetType.All)
+    @foreach (var helmetType in _helmetTypes)
     {
         <option value="@helmetType.Id">@helmetType.Name</option>
     }
 </InputSelect>
 
 @code {
+    [Parameter]
+    public GameStyleType GameStyleType
+    {
+        get
+        {
+            return _gameStyleType;
+        }
+        set
+        {
+            _gameStyleType = value;
+            _helmetTypes = value != null ? HelmetType.GetAll(GameStyleType.Find(value.Id)) : HelmetType.All;
+        }
+    }
+
     [Parameter]
     public HelmetType InitialValue { get; set; }
 
@@ -19,8 +33,13 @@
     [Parameter]
     public EventCallback<int> ValueChanged { get; set; }
 
+    private HelmetType[] _helmetTypes;
+    private GameStyleType _gameStyleType;
+
     protected override Task OnInitializedAsync()
     {
+        _helmetTypes = HelmetType.GetAll(GameStyleType);
+
         if ((InitialValue?.Id ?? 0) > 0)
             Value = InitialValue.Id;
 

@@ -69,6 +69,8 @@ namespace Memorabilia.Application.Features.Memorabilia.HockeyStick
         [Range(1, int.MaxValue, ErrorMessage = "Size is required.")]
         public int SizeId { get; set; }
 
+        public Sport Sport => Sport.Hockey;
+
         public List<int> SportIds { get; set; } = new();
 
         public SportLeagueLevel SportLeagueLevel => SportLeagueLevel.NationalHockeyLeague;

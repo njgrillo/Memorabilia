@@ -343,7 +343,7 @@ namespace Memorabilia.Domain.Entities
                               int? helmetQualityTypeId,
                               int? helmetTypeId,
                               int levelTypeId,
-                              int? personId,
+                              int[] personIds,
                               int sizeId,
                               int[] sportIds,
                               bool throwback,
@@ -354,13 +354,9 @@ namespace Memorabilia.Domain.Entities
             SetSize(sizeId);
             SetSports(sportIds);
             SetHelmet(helmetFinishId, helmetQualityTypeId, helmetTypeId, throwback);
-            SetGame(gameStyleTypeId, personId, gameDate);
+            SetGame(gameStyleTypeId, personIds.Any() ? personIds.First() : null, gameDate);
             SetTeams(teamIds);
-
-            if (!personId.HasValue)
-                People = new List<MemorabiliaPerson>();
-            else
-                SetPeople(personId.Value);                
+            SetPeople(personIds);
         }
 
         public void SetHockeyStick(int brandId,
@@ -454,6 +450,7 @@ namespace Memorabilia.Domain.Entities
 
         public void SetPhoto(int brandId,
                              bool framed,
+                             bool matted,
                              int orientationId,
                              int[] personIds,
                              int photoTypeId,
@@ -464,7 +461,7 @@ namespace Memorabilia.Domain.Entities
             SetBrand(brandId);
             SetSize(sizeId);
             SetOrientation(orientationId);
-            SetPhoto(photoTypeId, framed);
+            SetPhoto(photoTypeId, framed, matted);
             SetPeople(personIds);
             SetSports(sportIds);
             SetTeams(teamIds);
@@ -794,15 +791,15 @@ namespace Memorabilia.Domain.Entities
             People.AddRange(personIds.Where(personId => !People.Select(person => person.PersonId).Contains(personId)).Select(personId => new MemorabiliaPerson(Id, personId)));
         }
 
-        private void SetPhoto(int photoTypeId, bool framed)
+        private void SetPhoto(int photoTypeId, bool framed, bool matted)
         {
             if (Photo == null)
             {
-                Photo = new MemorabiliaPhoto(Id, photoTypeId, framed);
+                Photo = new MemorabiliaPhoto(Id, photoTypeId, framed, matted);
                 return;
             }
 
-            Photo.Set(photoTypeId, framed);
+            Photo.Set(photoTypeId, framed, matted);
         }
 
         private void SetSize(int sizeId)

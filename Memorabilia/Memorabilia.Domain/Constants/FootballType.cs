@@ -17,6 +17,12 @@ namespace Memorabilia.Domain.Constants
             Other
         };
 
+        public static readonly FootballType[] GameWorthly =
+        {
+            Duke,
+            Other
+        };
+
         private FootballType(int id, string name, string abbreviation)
         {
             Id = id;
@@ -33,6 +39,19 @@ namespace Memorabilia.Domain.Constants
         public static FootballType Find(int id)
         {
             return All.SingleOrDefault(footballType => footballType.Id == id);
+        }
+
+        public static FootballType[] GetAll(GameStyleType gameStyleType)
+        {
+            if (gameStyleType == null || gameStyleType == GameStyleType.None)
+                return All;
+
+            return GameWorthly;
+        }
+
+        public static bool IsGameWorthly(FootballType footballType)
+        {
+            return GameWorthly.Contains(footballType);
         }
     }
 }

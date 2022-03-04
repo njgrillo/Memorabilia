@@ -20,15 +20,17 @@ namespace Memorabilia.Application.Features.Autograph.Image
             }
 
             protected override async Task Handle(Command command)
-            {
+            {     
+                var autograph = await _autographRepository.Get(command.AutographId).ConfigureAwait(false);
+
+                command.MemorabiliaId = autograph.MemorabiliaId;
+
                 if (!command.FilePaths.Any())
                     return;
 
-                var autograph = await _autographRepository.Get(command.AutographId).ConfigureAwait(false);
-
                 autograph.SetImages(command.FilePaths, command.PrimaryImageFilePath);
 
-                await _autographRepository.Update(autograph).ConfigureAwait(false);
+                await _autographRepository.Update(autograph).ConfigureAwait(false);                
             }
         }
 
@@ -42,6 +44,8 @@ namespace Memorabilia.Application.Features.Autograph.Image
             }
 
             public int AutographId => _viewModel.AutographId;
+
+            public int MemorabiliaId { get; set; }
 
             public IEnumerable<string> FilePaths => _viewModel.Images.Select(image => image.FilePath);            
 

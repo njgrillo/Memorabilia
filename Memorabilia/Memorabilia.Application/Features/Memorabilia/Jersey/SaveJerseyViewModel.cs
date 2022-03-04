@@ -27,11 +27,15 @@ namespace Memorabilia.Application.Features.Memorabilia.Jersey
             SizeId = viewModel.Size.SizeId;
             SportIds = viewModel.Sports.Select(x => x.Id).ToList();
             Teams = viewModel.Teams.Select(team => new SaveTeamViewModel(new TeamViewModel(team.Team))).ToList();
-        }   
+        }
+
+        private int _gameStyleTypeId;
 
         [Required]
         [Range(1, int.MaxValue, ErrorMessage = "Brand is required.")]
-        public int BrandId { get; set; }       
+        public int BrandId { get; set; }
+
+        public bool CanEditJerseyQualityType { get; private set; } = true;
 
         public bool DisplayGameDate => DisplayGameStyleType && GameStyleType.IsGameWorthly(GameStyleType);
 
@@ -43,13 +47,33 @@ namespace Memorabilia.Application.Features.Memorabilia.Jersey
 
         public GameStyleType GameStyleType => GameStyleType.Find(GameStyleTypeId);
 
-        public int GameStyleTypeId { get; set; }
+        [Required]
+        [Range(1, int.MaxValue, ErrorMessage = "Game Style Type is required.")]
+        public int GameStyleTypeId
+        {
+            get
+            {
+                return _gameStyleTypeId;
+            }
+            set
+            {
+                _gameStyleTypeId = value;
+                CanEditJerseyQualityType = !IsGameWorthly;
+
+                if (IsGameWorthly)
+                {
+                    JerseyQualityTypeId = JerseyQualityType.Authentic.Id;
+                }
+            }
+        }
 
         public bool HasPerson => People.Any();
 
         public bool HasSport => SportIds.Any();
 
         public bool HasTeam => Teams.Any();
+
+        public bool IsGameWorthly => GameStyleType.IsGameWorthly(GameStyleType);
 
         public ItemType ItemType => ItemType.Jersey;
 

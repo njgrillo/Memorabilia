@@ -35,30 +35,14 @@ else
             <EditForm Model="_viewModel" OnValidSubmit="HandleValidSubmit">
                 <DataAnnotationsValidator />
                 <ValidationSummary />
-                <div class="row">                    
-                    <div class="col-lg-12">
-                        <div class="form-group">
-                            <input type="checkbox" @onchange="eventArgs => { PersonCheckboxClicked(eventArgs.Value); }" />
-                            <label for="person">Associate Glove with a Person</label>
-                            <div class="form-group" hidden="@(!_displayPeople)">
-                                <_PersonSelector AllowMultiple="true"
-                                                 People="_viewModel.People" />
-                            </div>                    
-                        </div> 
-                    </div>
-                </div>              
-                <div class="row">                    
-                    <div class="col-lg-12">
-                        <div class="form-group">
-                            <input type="checkbox" @onchange="eventArgs => { TeamsCheckboxClicked(eventArgs.Value); }" />
-                            <label for="teams">Associate Glove with a Team</label>
-                            <div class="form-group" hidden="@(!_displayTeams)">
-                                <_TeamSelector AllowMultiple="true" 
-                                               Teams="_viewModel.Teams" />
-                            </div>                    
-                        </div> 
-                    </div>
-                </div>                            
+                <_PersonSelector AllowMultiple="true"
+                                 CanToggle="true"
+                                 ItemType="_viewModel.ItemType"
+                                 People="_viewModel.People" />                 
+                <_TeamSelector AllowMultiple="true"
+                               CanToggle="true" 
+                               ItemType="_viewModel.ItemType"
+                               Teams="_viewModel.Teams" />                             
                 <div class="text-right">
                     <button type="submit" class="btn btn-primary" @onclick="@(()=> _continue = true)">Save & Continue</button>
                     <button type="submit" class="btn btn-primary">Save & Exit</button>
@@ -80,8 +64,6 @@ else
     public int MemorabiliaId { get; set; }
 
     private bool _continue;
-    private bool _displayPeople;
-    private bool _displayTeams;
     private SaveGloveViewModel _viewModel = new SaveGloveViewModel();
 
     protected async Task HandleValidSubmit()
@@ -115,28 +97,5 @@ else
         var viewModel = await _queryRouter.Send(query).ConfigureAwait(false);   
 
         _viewModel = new SaveGloveViewModel(viewModel);  
-        
-        _displayPeople = _viewModel.HasPerson;
-        _displayTeams = _viewModel.HasTeam;
     }  
-
-    private void PersonCheckboxClicked(object isChecked)
-    {     
-        _displayPeople = (bool)isChecked;
-
-        if (!_displayPeople)
-            _viewModel.People = new();
-
-        StateHasChanged();
-    } 
-
-    public void TeamsCheckboxClicked(object isChecked)
-    {
-        _displayTeams = (bool)isChecked;
-
-        if (!_displayTeams)
-            _viewModel.Teams = new();
-
-        StateHasChanged();
-    }
 }

@@ -3680,6 +3680,7 @@ CREATE TABLE [dbo].[MemorabiliaPhoto](
 	[MemorabiliaId] [int] NOT NULL,
 	[PhotoTypeId] [int] NOT NULL,
 	[Framed] [bit] NOT NULL,
+	[Matted] [bit] NOT NULL,
  CONSTRAINT [PK_MemorabiliaPhoto] PRIMARY KEY CLUSTERED 
 (
 	[Id] ASC

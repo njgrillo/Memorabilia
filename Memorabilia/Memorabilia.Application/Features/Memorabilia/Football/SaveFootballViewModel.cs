@@ -22,7 +22,7 @@ namespace Memorabilia.Application.Features.Memorabilia.Football
             MemorabiliaId = viewModel.MemorabiliaId;
             SizeId = viewModel.Size.SizeId;
 
-            if (!viewModel.People.Any())
+            if (viewModel.People.Any())
                 Person = new SavePersonViewModel(new PersonViewModel(viewModel.People.First().Person));
 
             if (viewModel.Teams.Any())
@@ -84,6 +84,8 @@ namespace Memorabilia.Application.Features.Memorabilia.Football
         [Required]
         [Range(1, int.MaxValue, ErrorMessage = "Size is required.")]
         public int SizeId { get; set; }
+
+        public Sport Sport => Sport.Football;
 
         public SportLeagueLevel SportLeagueLevel => SportLeagueLevel.NationalFootballLeague;
 

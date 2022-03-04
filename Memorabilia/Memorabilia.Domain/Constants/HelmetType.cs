@@ -21,6 +21,15 @@ namespace Memorabilia.Domain.Constants
             Speed            
         };
 
+        public static readonly HelmetType[] GameWorthly =
+        {
+            F7,
+            Flex,
+            Other,
+            Revolution,
+            Speed
+        };
+
         private HelmetType(int id, string name, string abbreviation)
         {
             Id = id;
@@ -37,6 +46,19 @@ namespace Memorabilia.Domain.Constants
         public static HelmetType Find(int id)
         {
             return All.SingleOrDefault(helmetType => helmetType.Id == id);
+        }
+
+        public static HelmetType[] GetAll(GameStyleType gameStyleType)
+        {
+            if (gameStyleType == null || gameStyleType == GameStyleType.None)
+                return All;
+
+            return GameWorthly;
+        }
+
+        public static bool IsGameWorthly(HelmetType helmetType)
+        {
+            return GameWorthly.Contains(helmetType);
         }
     }
 }

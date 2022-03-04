@@ -88,7 +88,7 @@ else
                          src="images/details.png" 
                          height="40" 
                          width="40" 
-                         @onclick="@(_ => _navigation.NavigateTo($"Memorabilia/{@context.ItemTypeName}/Edit/{@context.Id}"))" />
+                         @onclick="@(_ => _navigation.NavigateTo($"Memorabilia/{@context.ItemTypeName.Replace(" ", "")}/Edit/{@context.Id}"))" />
                 </_Tooltip>                         
             </td>
             <td>

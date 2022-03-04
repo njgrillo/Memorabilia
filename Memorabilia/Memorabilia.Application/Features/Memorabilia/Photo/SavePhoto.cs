@@ -23,6 +23,7 @@ namespace Memorabilia.Application.Features.Memorabilia.Photo
 
                 memorabilia.SetPhoto(command.BrandId,
                                      command.Framed,
+                                     command.Matted,
                                      command.OrientationId,
                                      command.PersonIds,
                                      command.PhotoTypeId,
@@ -46,6 +47,8 @@ namespace Memorabilia.Application.Features.Memorabilia.Photo
             public int BrandId => _viewModel.BrandId;
 
             public bool Framed => _viewModel.Framed;
+
+            public bool Matted => _viewModel.Matted;
 
             public int MemorabiliaId => _viewModel.MemorabiliaId;
 

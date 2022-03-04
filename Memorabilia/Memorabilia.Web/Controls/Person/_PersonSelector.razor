@@ -10,7 +10,7 @@
         <div class="col-lg-12">
             <div class="form-group">
                 <input type="checkbox" 
-                       checked="@(SelectedPerson?.Id > 0)" 
+                       checked="@_hasPeople" 
                        @onchange="eventArgs => { PersonCheckboxClicked(eventArgs.Value); }" />
                 <label for="person">Associate @ItemType.Name with a Person</label>                  
             </div> 
@@ -34,45 +34,44 @@
     <div class="row">                    
         <div class="col-lg-12">
             <div class="form-group">                                                      
-                <div class="form-group" >
-                    <BlazoredTypeahead @bind-Value="_viewModel" 
-                                       SearchMethod="SearchPeople"                     
-                                       Placeholder="Search by name...">
-                        <SelectedTemplate Context="person">
-                            @person.DisplayName
-                        </SelectedTemplate>
-                        <ResultTemplate Context="person">
-                            @person.DisplayName
-                        </ResultTemplate>   
-                    </BlazoredTypeahead> 
-                    <br />  
-                    <div hidden="@(!AllowMultiple)">
-                        <div class="text-right" hidden="@(!_canAdd)">
-                            <button type="button" class="btn btn-secondary" @onclick="Add">Add Person</button>
-                        </div>
-                        <br />  
-                        <_Table Items="People.Where(person => !person.IsDeleted).ToList()" 
-                                ItemsPerPage="5"   
-                                TItem="SavePersonViewModel">
-                            <HeaderTemplate>
-                                <th scope="col">Person</th>
-                                <th scope="col"></th>
-                            </HeaderTemplate>
-                            <RowTemplate>
-                                <td>@context.DisplayName</td>
-                                <td>
-                                    <_Tooltip Text="Delete">
-                                        <img class="can-click" 
-                                             src="images/trash.png" 
-                                             height="25" 
-                                             width="25" 
-                                             @onclick="@(_ => Remove(context.Id))" />
-                                    </_Tooltip>
-                                </td>
-                            </RowTemplate>
-                        </_Table>
+                <BlazoredTypeahead @bind-Value="_viewModel" 
+                                   SearchMethod="SearchPeople"                     
+                                   Placeholder="Search by name...">
+                    <SelectedTemplate Context="person">
+                        @person.DisplayName
+                    </SelectedTemplate>
+                    <ResultTemplate Context="person">
+                        @person.DisplayName
+                    </ResultTemplate>   
+                </BlazoredTypeahead> 
+                <br />  
+                @if (AllowMultiple)
+                {
+                    <div class="text-right" hidden="@(!_canAdd)">
+                        <button type="button" class="btn btn-secondary" @onclick="Add">Add Person</button>
                     </div>
-                </div>                    
+                    <br />  
+                    <_Table Items="People.Where(person => !person.IsDeleted).ToList()" 
+                            ItemsPerPage="5"   
+                            TItem="SavePersonViewModel">
+                        <HeaderTemplate>
+                            <th scope="col">Person</th>
+                            <th scope="col"></th>
+                        </HeaderTemplate>
+                        <RowTemplate>
+                            <td>@context.DisplayName</td>
+                            <td>
+                                <_Tooltip Text="Delete">
+                                    <img class="can-click" 
+                                            src="images/trash.png" 
+                                            height="25" 
+                                            width="25" 
+                                            @onclick="@(_ => Remove(context.Id))" />
+                                </_Tooltip>
+                            </td>
+                        </RowTemplate>
+                    </_Table>
+                }                
             </div> 
         </div>
     </div> 
@@ -115,11 +114,13 @@
 
     private bool _canAdd = true;
     private bool _displayPeople;
+    private bool _hasPeople;
     private IEnumerable<SavePersonViewModel> _people = Enumerable.Empty<SavePersonViewModel>();  
 
     protected override async Task OnInitializedAsync()
     {
-        _displayPeople = !CanToggle || SelectedPerson?.Id > 0;
+        _displayPeople = !CanToggle || SelectedPerson?.Id > 0 || People.Any();
+        _hasPeople = SelectedPerson?.Id > 0 || People.Any();
 
         await LoadPeople().ConfigureAwait(false);
     } 

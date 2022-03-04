@@ -1,7 +1,6 @@
 ﻿@using Memorabilia.Application.Features.Admin.HelmetQualityType
-@using Memorabilia.Domain.Constants
 
-<InputSelect id="HelmetQualityTypeDropDown" class="form-control" @bind-Value="@Value" @oninput="OnInputChange" >
+<InputSelect id="HelmetQualityTypeDropDown" class="form-control" disabled="@Disabled" @bind-Value="@Value" @oninput="OnInputChange" >
     <option value="0">--Select--</option>
     @foreach (var helmetQualityType in HelmetQualityType.All)
     {
@@ -11,7 +10,10 @@
 
 @code {
     [Parameter]
-    public HelmetQualityType InitialValue { get; set; }
+    public bool Disabled { get; set; }
+
+    [Parameter]
+    public HelmetQualityType InitialValue { get; set; }    
 
     [Parameter]
     public int Value { get; set; }

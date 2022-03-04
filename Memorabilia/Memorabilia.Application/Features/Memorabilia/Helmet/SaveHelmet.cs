@@ -29,7 +29,7 @@ namespace Memorabilia.Application.Features.Memorabilia.Helmet
                                       command.HelmetQualityTypeId,
                                       command.HelmetTypeId,
                                       command.LevelTypeId,
-                                      command.PersonId,
+                                      command.PersonIds,
                                       command.SizeId,
                                       command.SportIds,
                                       command.Throwback,
@@ -64,7 +64,7 @@ namespace Memorabilia.Application.Features.Memorabilia.Helmet
 
             public int MemorabiliaId => _viewModel.MemorabiliaId;
 
-            public int? PersonId => _viewModel.People.Any() ? _viewModel.People.First().Id : null;
+            public int[] PersonIds => _viewModel.People.Select(person => person.Id).ToArray();
 
             public int SizeId => _viewModel.SizeId;
 

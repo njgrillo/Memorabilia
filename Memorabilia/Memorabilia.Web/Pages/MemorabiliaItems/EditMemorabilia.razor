@@ -142,7 +142,7 @@ else
         await _commandRouter.Send(command).ConfigureAwait(false);
 
         var itemTypeName = Domain.Constants.ItemType.Find(_viewModel.ItemTypeId).Name;
-        var url = _continue ? $"Memorabilia/{itemTypeName}/Edit/{command.Id}" : "Memorabilia/Items";
+        var url = _continue ? $"Memorabilia/{itemTypeName.Replace(" ", "")}/Edit/{command.Id}" : "Memorabilia/Items";
 
         _navigation.NavigateTo(url);
 

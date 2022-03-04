@@ -1,7 +1,6 @@
 ﻿@using Memorabilia.Application.Features.Admin.JerseyQualityType
-@using Domain.Constants
 
-<InputSelect id="JerseyQualityTypeDropDown" class="form-control" @bind-Value="@Value" @oninput="@OnInputChange" >
+<InputSelect id="JerseyQualityTypeDropDown" class="form-control" disabled="@Disabled" @bind-Value="@Value" @oninput="@OnInputChange" >
     <option value="0">--Select--</option>
     @foreach (var jerseyQualityType in JerseyQualityType.All)
     {
@@ -10,6 +9,9 @@
 </InputSelect>
 
 @code {
+    [Parameter]
+    public bool Disabled { get; set; }
+
     [Parameter]
     public JerseyQualityType InitialValue { get; set; }
 
