@@ -43,6 +43,8 @@ namespace Memorabilia.Domain.Entities
 
         public virtual MemorabiliaBrand Brand { get; private set; }
 
+        public virtual MemorabiliaCanvas Canvas { get; private set; }
+
         public virtual MemorabiliaCard Card { get; private set; }
 
         public virtual MemorabiliaCommissioner Commissioner { get; private set; }
@@ -74,6 +76,8 @@ namespace Memorabilia.Domain.Entities
         public DateTime? LastModifiedDate { get; private set; }
 
         public virtual MemorabiliaLevelType LevelType { get; private set; }
+
+        public virtual MemorabiliaLithograph Lithograph { get; private set; }
 
         public virtual MemorabiliaMagazine Magazine { get; private set; }
 
@@ -111,6 +115,25 @@ namespace Memorabilia.Domain.Entities
             LastModifiedDate = DateTime.UtcNow;
 
             MemorabiliaAcquisition.Set(acquisitionTypeId, acquiredDate, cost, purchaseTypeId);
+        }
+
+        public void SetBammer(int brandId,
+                              int levelTypeId,
+                              int? personId,
+                              int? teamId)
+        {
+            SetBrand(brandId);
+            SetLevelType(levelTypeId);
+
+            if (!personId.HasValue)
+                People = new List<MemorabiliaPerson>();
+            else
+                SetPeople(personId.Value);
+
+            if (!teamId.HasValue)
+                Teams = new List<MemorabiliaTeam>();
+            else
+                SetTeams(teamId.Value);
         }
 
         public void SetBaseball(string anniversary,                                
@@ -203,6 +226,27 @@ namespace Memorabilia.Domain.Entities
                 SetTeams(teamId.Value);
         }
 
+        public void SetBobblehead(int brandId,
+                                  int levelTypeId,
+                                  int? personId,
+                                  int sizeId,
+                                  int? teamId)
+        {
+            SetBrand(brandId);
+            SetLevelType(levelTypeId);
+            SetSize(sizeId);
+
+            if (!personId.HasValue)
+                People = new List<MemorabiliaPerson>();
+            else
+                SetPeople(personId.Value);
+
+            if (!teamId.HasValue)
+                Teams = new List<MemorabiliaTeam>();
+            else
+                SetTeams(teamId.Value);
+        }
+
         public void SetBook(string edition,
                             bool hardCover,
                             int[] personIds,
@@ -215,6 +259,14 @@ namespace Memorabilia.Domain.Entities
             SetPeople(personIds);
             SetSports(sportIds);
             SetTeams(teamIds);
+        }
+
+        public void SetBookplate(int? personId)
+        {
+            if (!personId.HasValue)
+                People = new List<MemorabiliaPerson>();
+            else
+                SetPeople(personId.Value);
         }
 
         public void SetCard(int brandId,
@@ -235,6 +287,49 @@ namespace Memorabilia.Domain.Entities
             SetCard(custom, denominator, licensed, numerator, year);
             SetPeople(personIds);
             SetSports(sportIds);
+            SetTeams(teamIds);
+        }
+
+        public void SetCanvas(int brandId,
+                              bool framed,
+                              int orientationId,
+                              int[] personIds,
+                              int sizeId,
+                              int[] sportIds,
+                              bool stretched,
+                              int[] teamIds)
+        {
+            SetBrand(brandId);
+            SetSize(sizeId);
+            SetOrientation(orientationId);
+            SetCanvas(framed, stretched);
+            SetPeople(personIds);
+            SetSports(sportIds);
+            SetTeams(teamIds);
+        }
+
+        public void SetCerealBox(int brandId,
+                                 int levelTypeId,
+                                 int[] personIds,
+                                 int[] teamIds)
+        {
+            SetBrand(brandId);
+            SetLevelType(levelTypeId);
+            SetPeople(personIds);
+            SetTeams(teamIds);
+        }
+
+        public void SetCompactDisc(int[] personIds)
+        {
+            SetPeople(personIds);
+        }
+
+        public void SetDocument(int[] personIds, 
+                                int sizeId,                                
+                                int[] teamIds)
+        {
+            SetPeople(personIds);
+            SetSize(sizeId);            
             SetTeams(teamIds);
         }
 
@@ -336,6 +431,28 @@ namespace Memorabilia.Domain.Entities
             SetTeams(teamIds);
         }
 
+        public void SetHeadBand(int brandId,
+                                DateTime? gameDate,
+                                int? gameStyleTypeId,
+                                int levelTypeId,
+                                int? personId,
+                                int? teamId)
+        {
+            SetBrand(brandId);
+            SetLevelType(levelTypeId);
+            SetGame(gameStyleTypeId, personId, gameDate);
+
+            if (!personId.HasValue)
+                People = new List<MemorabiliaPerson>();
+            else
+                SetPeople(personId.Value);
+
+            if (!teamId.HasValue)
+                Teams = new List<MemorabiliaTeam>();
+            else
+                SetTeams(teamId.Value);
+        }
+
         public void SetHelmet(int brandId,
                               DateTime? gameDate,
                               int? gameStyleTypeId,
@@ -403,6 +520,11 @@ namespace Memorabilia.Domain.Entities
                                                              DateTime.UtcNow)).ToList();
         }
 
+        public void SetIndexCard(int sizeId)
+        {
+            SetSize(sizeId);
+        }
+
         public void SetJersey(int brandId, 
                               DateTime? gameDate,
                               int? gamePersonId,
@@ -428,6 +550,24 @@ namespace Memorabilia.Domain.Entities
 
         public void SetJerseyNumber(int[] sportIds, int[] teamIds)
         {
+            SetSports(sportIds);
+            SetTeams(teamIds);
+        }
+
+        public void SetLithograph(int brandId,
+                                  bool framed,
+                                  bool matted,
+                                  int orientationId,
+                                  int[] personIds,
+                                  int sizeId,
+                                  int[] sportIds,
+                                  int[] teamIds)
+        {
+            SetBrand(brandId);
+            SetSize(sizeId);
+            SetOrientation(orientationId);
+            SetLithograph(framed, matted);
+            SetPeople(personIds);
             SetSports(sportIds);
             SetTeams(teamIds);
         }
@@ -500,6 +640,25 @@ namespace Memorabilia.Domain.Entities
             SetTeams(teamIds);
         }
 
+        public void SetShirt(int brandId,
+                             DateTime? gameDate,
+                             int? gamePersonId,
+                             int? gameStyleTypeId,
+                             int levelTypeId,
+                             int[] personIds,
+                             int sizeId,
+                             int[] sportIds,
+                             int[] teamIds)
+        {
+            SetBrand(brandId);
+            SetLevelType(levelTypeId);
+            SetSize(sizeId);
+            SetGame(gameStyleTypeId, gamePersonId, gameDate);
+            SetPeople(personIds);
+            SetSports(sportIds);
+            SetTeams(teamIds);
+        }
+
         public void SetShoe(int brandId,
                             DateTime? gameDate,
                             int? gamePersonId,
@@ -536,6 +695,25 @@ namespace Memorabilia.Domain.Entities
             SetPeople(personIds);
             SetSports(sportIds);
             SetTeams(teamIds);
+        }
+
+        public void SetTennisball(int brandId,
+                                  DateTime? gameDate,
+                                  int? gameStyleTypeId,
+                                  int levelTypeId,
+                                  int? personId,
+                                  int sizeId)
+        {
+            SetBrand(brandId);
+            SetLevelType(levelTypeId);
+            SetSize(sizeId);
+            //SetSports(sportId);
+            SetGame(gameStyleTypeId, personId, gameDate);
+
+            if (!personId.HasValue)
+                People = new List<MemorabiliaPerson>();
+            else
+                SetPeople(personId.Value);
         }
 
         public void SetTicket(DateTime? gameDate,
@@ -635,6 +813,17 @@ namespace Memorabilia.Domain.Entities
             }
 
             Brand.Set(brandId);
+        }
+
+        private void SetCanvas(bool framed, bool stretched)
+        {
+            if (Canvas == null)
+            {
+                Canvas = new MemorabiliaCanvas(Id, framed, stretched);
+                return;
+            }
+
+            Canvas.Set(framed, stretched);
         }
 
         private void SetCard(bool custom, int? denominator, bool licensed, int? numerator, int? year)
@@ -758,6 +947,17 @@ namespace Memorabilia.Domain.Entities
             }
 
             LevelType.Set(levelTypeId);
+        }
+
+        private void SetLithograph(bool framed, bool stretched)
+        {
+            if (Lithograph == null)
+            {
+                Lithograph = new MemorabiliaLithograph(Id, framed, stretched);
+                return;
+            }
+
+            Lithograph.Set(framed, stretched);
         }
 
         private void SetMagazine(DateTime? date, bool framed)

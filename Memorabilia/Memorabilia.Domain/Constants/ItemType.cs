@@ -43,7 +43,7 @@ namespace Memorabilia.Domain.Constants
         public static readonly ItemType Shirt = new(37, "Shirt");
         public static readonly ItemType Shoe = new(25, "Shoe");   
         public static readonly ItemType Soccerball = new(20, "Soccer Ball");
-        public static readonly ItemType TennisBall = new(44, "Tennis Ball");
+        public static readonly ItemType Tennisball = new(44, "Tennis Ball");
         public static readonly ItemType TennisRacket = new(45, "Tennis Racket");
         public static readonly ItemType Ticket = new(22, "Ticket");
         public static readonly ItemType TradingCard = new(7, "Trading Card");
@@ -91,7 +91,7 @@ namespace Memorabilia.Domain.Constants
             Shirt,
             Shoe,
             Soccerball,
-            TennisBall,
+            Tennisball,
             TennisRacket,
             Ticket,
             TradingCard,
@@ -119,7 +119,7 @@ namespace Memorabilia.Domain.Constants
             Shirt,
             Shoe,
             Soccerball,
-            TennisBall,
+            Tennisball,
             TennisRacket,
             Trunks,
             WristBand
@@ -146,7 +146,7 @@ namespace Memorabilia.Domain.Constants
             PlayingCard,
             Shirt,
             Shoe,
-            TennisBall,
+            Tennisball,
             TennisRacket,
             TradingCard,
             Trunks

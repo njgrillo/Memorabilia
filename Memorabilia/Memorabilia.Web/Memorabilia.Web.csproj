@@ -26,6 +26,28 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Pages\MemorabiliaItems\Bammers\" />
+    <Folder Include="Pages\MemorabiliaItems\Bobbleheads\" />
+    <Folder Include="Pages\MemorabiliaItems\Canvases\" />
+    <Folder Include="Pages\MemorabiliaItems\CerealBoxes\" />
+    <Folder Include="Pages\MemorabiliaItems\CompactDiscs\" />
+    <Folder Include="Pages\MemorabiliaItems\Documents\" />
+    <Folder Include="Pages\MemorabiliaItems\Drums\" />
+    <Folder Include="Pages\MemorabiliaItems\GolfBalls\" />
+    <Folder Include="Pages\MemorabiliaItems\Guitars\" />
+    <Folder Include="Pages\MemorabiliaItems\HeadBands\" />
+    <Folder Include="Pages\MemorabiliaItems\IndexCards\" />
+    <Folder Include="Pages\MemorabiliaItems\Lithographs\" />
+    <Folder Include="Pages\MemorabiliaItems\WristBands\" />
+    <Folder Include="Pages\MemorabiliaItems\Trunks\" />
+    <Folder Include="Pages\MemorabiliaItems\TennisRackets\" />
+    <Folder Include="Pages\MemorabiliaItems\Tennisballs\" />
+    <Folder Include="Pages\MemorabiliaItems\Shirts\" />
+    <Folder Include="Pages\MemorabiliaItems\Posters\" />
+    <Folder Include="Pages\MemorabiliaItems\PlayingCards\" />
+    <Folder Include="Pages\MemorabiliaItems\PinFlags\" />
+    <Folder Include="Pages\MemorabiliaItems\Pants\" />
+    <Folder Include="Pages\MemorabiliaItems\Paintings\" />
     <Folder Include="wwwroot\userimages\" />
   </ItemGroup>
 

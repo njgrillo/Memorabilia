@@ -14,4 +14,15 @@
     <ProjectReference Include="..\Memorabilia.Domain\Memorabilia.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Features\Memorabilia\WristBand\" />
+    <Folder Include="Features\Memorabilia\Trunks\" />
+    <Folder Include="Features\Memorabilia\TennisRacket\" />
+    <Folder Include="Features\Memorabilia\Poster\" />
+    <Folder Include="Features\Memorabilia\PlayingCard\" />
+    <Folder Include="Features\Memorabilia\PinFlag\" />
+    <Folder Include="Features\Memorabilia\Pants\" />
+    <Folder Include="Features\Memorabilia\Painting\" />
+  </ItemGroup>
+
 </Project>
