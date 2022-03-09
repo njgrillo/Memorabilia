@@ -158,6 +158,7 @@ namespace Memorabilia.Web
             services.AddTransient<IMemorabiliaCommissionerRepository, MemorabiliaCommissionerRepository>();
             services.AddTransient<IMemorabiliaFootballRepository, MemorabiliaFootballRepository>();
             services.AddTransient<IMemorabiliaGameRepository, MemorabiliaGameRepository>();
+            services.AddTransient<IMemorabiliaImageRepository, MemorabiliaImageRepository>();
             services.AddTransient<IMemorabiliaJerseyRepository, MemorabiliaJerseyRepository>();
             services.AddTransient<IMemorabiliaLevelTypeRepository, MemorabiliaLevelTypeRepository>();
             services.AddTransient<IMemorabiliaMagazineRepository, MemorabiliaMagazineRepository>();

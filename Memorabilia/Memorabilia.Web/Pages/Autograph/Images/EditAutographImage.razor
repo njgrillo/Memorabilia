@@ -3,6 +3,7 @@
 @using Application.Features.Image
 @using Memorabilia.Application.Features.Autograph
 @using Memorabilia.Application.Features.Autograph.Image
+@using Memorabilia.Application.Features.Memorabilia.Image
 @using System 
 @using System.IO
 
@@ -33,6 +34,14 @@ else
                 <DataAnnotationsValidator />
                 <ValidationSummary />   
                 <div class="form-group">
+                    <div>
+                        <div class="row">
+                            <button type="button" class="btn btn-secondary" @onclick="OnImportClick">Import from Memorabilia</button>
+                        </div>
+                        <div class="row">
+                            or
+                        </div>  
+                    </div>                                      
                     <_ImageFileSelector @bind-Value="@_viewModel.Images"
                                         @bind-Value:event="ValueChanged" 
                                         CanRemove="true"
@@ -41,11 +50,11 @@ else
                                         MaximumAllowedFiles="10" 
                                         MaximumFileSize="10240000"
                                         OnPrimarySet="OnPrimarySet"
-                                        OnRemove="OnRemove" />
+                                        OnRemove="OnRemove" />                    
                 </div> 
                 <div class="text-right">                    
                     <button type="submit" class="btn btn-primary">Save & Exit</button>
-                    <button type="submit" class="btn btn-primary" @onclick="@(()=> _addAnotherAutograph = true)">Save & Another Autograph</button>
+                    <button type="submit" class="btn btn-primary" @onclick="@(()=> _addAnotherAutograph = true)">Save & Add Another Autograph</button>
                     <button type="button" class="btn btn-secondary" @onclick="@(_ => _navigation.NavigateTo("Memorabilia"))">Cancel</button>
                 </div>
             </EditForm>           
@@ -58,6 +67,7 @@ else
     public int AutographId { get; set; }
 
     private bool _addAnotherAutograph;
+    private int _memorabiliaId;
     private SaveAutographImagesViewModel _viewModel = new SaveAutographImagesViewModel();
 
     protected void Cancel()
@@ -93,6 +103,20 @@ else
         _toastService.ShowSuccess("Autograph Images were saved successfully!", _viewModel.PageTitle);
     }
 
+    protected async Task OnImportClick()
+    {
+        var query = new GetMemorabiliaImages.Query(_memorabiliaId);
+        var memorabliaImagesViewModel = await _queryRouter.Send(query).ConfigureAwait(false);
+        var images = memorabliaImagesViewModel.Images
+                                              .Select(image => new Domain.Entities.AutographImage(_viewModel.AutographId,
+                                                                                                  image.FilePath,
+                                                                                                  image.ImageTypeId, 
+                                                                                                  image.UploadDate))
+                                              .ToList();
+
+        _viewModel = new SaveAutographImagesViewModel(images);
+    }
+
     protected override async Task OnInitializedAsync()
     {
         var userId = await _localStorage.GetAsync<int>("UserId").ConfigureAwait(false);
@@ -102,6 +126,8 @@ else
 
         var query = new GetAutograph.Query(AutographId);
         var autograph = await _queryRouter.Send(query).ConfigureAwait(false);
+
+        _memorabiliaId = autograph.MemorabiliaId;
 
         if (!autograph.Images.Any())
             return;

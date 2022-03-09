@@ -8,7 +8,7 @@ namespace Memorabilia.Application.Features.Memorabilia.Image
 
         public MemorabiliaImageViewModel() { }
 
-        public MemorabiliaImageViewModel(Domain.Entities.MemorabiliaImage image)
+        public MemorabiliaImageViewModel(Domain.Entities.MemorabiliaImage image) : base(image)
         {
             _image = image;
         }

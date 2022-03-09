@@ -38,8 +38,7 @@ else
                     </div>
                 </div>
                 <div class="text-right">
-                    <button type="submit" class="btn btn-primary" @onclick="@(()=> _continue = true)">Save & Continue</button>
-                    <button type="submit" class="btn btn-primary">Save & Exit</button>
+                    <button type="submit" class="btn btn-primary">Save</button>
                     <button type="button" class="btn btn-secondary" @onclick="@(_ => _navigation.NavigateTo("People"))">Cancel</button>
                 </div>
             </EditForm>
@@ -56,8 +55,6 @@ else
 @code {
     [Parameter]
     public int PersonId { get; set; }
-
-    private bool _continue;
 
     private SavePersonTeamViewModel _personTeamViewModel = new SavePersonTeamViewModel();
     private List<SavePersonTeamViewModel> _viewModel = new();

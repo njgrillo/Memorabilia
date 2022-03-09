@@ -36,6 +36,7 @@ namespace Memorabilia.Application.Features.Autograph
 
         public SaveAutographViewModel(MemorabiliaItemViewModel viewModel)
         {
+            AcquiredWithAutograph = viewModel.Acquisition?.AcquiredWithAutograph ?? false;
             MemorabiliaAcquiredDate = viewModel.Acquisition.AcquiredDate;
             MemorabiliaAcquisitionTypeId = viewModel.Acquisition.AcquisitionTypeId;
             MemorabiliaCost = viewModel.Acquisition.Cost;
