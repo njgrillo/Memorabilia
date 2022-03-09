@@ -17,22 +17,13 @@ namespace Memorabilia.Application.Features.Memorabilia.Document
 
             protected override async Task<DocumentViewModel> Handle(Query query)
             {
-                var memorabilia = await _memorabiliaRepository.Get(query.MemorabiliaId).ConfigureAwait(false);
-
-                var viewModel = new DocumentViewModel(memorabilia);
-
-                return viewModel;
+                return new DocumentViewModel(await _memorabiliaRepository.Get(query.MemorabiliaId).ConfigureAwait(false));
             }
         }
 
-        public class Query : IQuery<DocumentViewModel>
+        public class Query : MemorabiliaQuery, IQuery<DocumentViewModel>
         {
-            public Query(int memorabiliaId)
-            {
-                MemorabiliaId = memorabiliaId;
-            }
-
-            public int MemorabiliaId { get; }
+            public Query(int memorabiliaId) : base(memorabiliaId) { }
         }
     }
 }

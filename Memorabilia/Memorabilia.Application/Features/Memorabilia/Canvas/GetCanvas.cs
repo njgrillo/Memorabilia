@@ -17,22 +17,13 @@ namespace Memorabilia.Application.Features.Memorabilia.Canvas
 
             protected override async Task<CanvasViewModel> Handle(Query query)
             {
-                var memorabilia = await _memorabiliaRepository.Get(query.MemorabiliaId).ConfigureAwait(false);
-
-                var viewModel = new CanvasViewModel(memorabilia);
-
-                return viewModel;
+                return new CanvasViewModel(await _memorabiliaRepository.Get(query.MemorabiliaId).ConfigureAwait(false));
             }
         }
 
-        public class Query : IQuery<CanvasViewModel>
+        public class Query : MemorabiliaQuery, IQuery<CanvasViewModel>
         {
-            public Query(int memorabiliaId)
-            {
-                MemorabiliaId = memorabiliaId;
-            }
-
-            public int MemorabiliaId { get; }
+            public Query(int memorabiliaId) : base(memorabiliaId) { }
         }
     }
 }

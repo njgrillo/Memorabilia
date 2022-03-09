@@ -24,12 +24,13 @@ namespace Memorabilia.Application.Features.Memorabilia
                 if (command.IsNew)
                 {
                     memorabilia = new Domain.Entities.Memorabilia(command.AcquiredDate,
+                                                                  command.AcquiredWithAutograph,
                                                                   command.AcquisitionTypeId,
                                                                   command.ConditionId,                                                                  
                                                                   command.Cost,
                                                                   command.EstimatedValue,
                                                                   command.ItemTypeId,
-                                                                  command.PrivacyTypeId,
+                                                                  command.PrivacyTypeId,                                                                  
                                                                   command.PurchaseTypeId,
                                                                   command.UserId);
 
@@ -49,7 +50,8 @@ namespace Memorabilia.Application.Features.Memorabilia
                     return;
                 }
 
-                memorabilia.Set(command.AcquiredDate,                                
+                memorabilia.Set(command.AcquiredDate,    
+                                command.AcquiredWithAutograph,
                                 command.AcquisitionTypeId,
                                 command.ConditionId,
                                 command.Cost,
@@ -74,6 +76,8 @@ namespace Memorabilia.Application.Features.Memorabilia
             public int AcquisitionTypeId => _viewModel.AcquisitionTypeId;
 
             public DateTime? AcquiredDate => _viewModel.AcquiredDate;
+
+            public bool AcquiredWithAutograph => _viewModel.AcquiredWithAutograph;
 
             public int? ConditionId => _viewModel.ConditionId > 0 ? _viewModel.ConditionId : null;
 

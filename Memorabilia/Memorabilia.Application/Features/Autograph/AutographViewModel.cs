@@ -16,6 +16,8 @@ namespace Memorabilia.Application.Features.Autograph
             _autograph = autograph;
         }
 
+        public bool AcquiredWithAutograph => _autograph.Memorabilia.Acquisition?.AcquiredWithAutograph ?? false;
+
         public Domain.Entities.Acquisition Acquisition => _autograph.Acquisition;
 
         public DateTime? AcquisitionDate => Acquisition?.AcquiredDate;
@@ -98,11 +100,15 @@ namespace Memorabilia.Application.Features.Autograph
 
         public string PrimaryImagePath => Images.Any()
             ? Images.SingleOrDefault(image => image.ImageTypeId == ImageType.Primary.Id)?.FilePath ?? "wwwroot/images/imagenotavailable.png"
-            : "wwwroot/images/imagenotavailable.png";
+            : "wwwroot/images/imagenotavailable.png";        
 
         public int? PurchaseTypeId => _autograph?.Acquisition?.PurchaseTypeId;
 
         public string PurchaseTypeName => PurchaseType.Find(PurchaseTypeId ?? 0)?.Name;
+
+        public DateTime? ReceivedDate => _autograph.ThroughTheMail?.ReceivedDate;
+
+        public DateTime? SentDate => _autograph.ThroughTheMail?.SentDate;
 
         public string UserFirstName => _autograph.Memorabilia.User.FirstName;
 

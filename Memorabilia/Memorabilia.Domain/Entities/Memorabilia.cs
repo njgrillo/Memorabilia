@@ -9,12 +9,13 @@ namespace Memorabilia.Domain.Entities
         public Memorabilia() { }
 
         public Memorabilia(DateTime? acquiredDate,
+                           bool acquiredWithAutograph,
                            int acquisitionTypeId,
                            int? conditionId,
                            decimal? cost,
                            decimal? estimatedValue,
                            int itemTypeId,
-                           int privacyTypeId,
+                           int privacyTypeId,                           
                            int? purchaseTypeId,
                            int userId)
         {
@@ -26,7 +27,7 @@ namespace Memorabilia.Domain.Entities
             CreateDate = DateTime.UtcNow;
 
             if (acquisitionTypeId > 0)
-                MemorabiliaAcquisition = new MemorabiliaAcquisition(Id, acquisitionTypeId, acquiredDate, cost, purchaseTypeId);
+                MemorabiliaAcquisition = new MemorabiliaAcquisition(Id, acquisitionTypeId, acquiredDate, acquiredWithAutograph, cost, purchaseTypeId);
         }
 
         public virtual Acquisition Acquisition => MemorabiliaAcquisition.Acquisition;
@@ -102,11 +103,12 @@ namespace Memorabilia.Domain.Entities
         public int UserId { get; private set; }        
 
         public void Set(DateTime? acquiredDate,
+                        bool acquiredWithAutograph,
                         int acquisitionTypeId,
                         int? conditionId,
                         decimal? cost,
                         decimal? estimatedValue,
-                        int privacyTypeId,
+                        int privacyTypeId,                        
                         int? purchaseTypeId)
         {
             ConditionId = conditionId;
@@ -114,7 +116,7 @@ namespace Memorabilia.Domain.Entities
             EstimatedValue = estimatedValue;
             LastModifiedDate = DateTime.UtcNow;
 
-            MemorabiliaAcquisition.Set(acquisitionTypeId, acquiredDate, cost, purchaseTypeId);
+            MemorabiliaAcquisition.Set(acquisitionTypeId, acquiredDate, acquiredWithAutograph, cost, purchaseTypeId);
         }
 
         public void SetBammer(int brandId,

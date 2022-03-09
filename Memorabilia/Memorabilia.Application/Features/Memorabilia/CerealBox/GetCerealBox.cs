@@ -17,22 +17,13 @@ namespace Memorabilia.Application.Features.Memorabilia.CerealBox
 
             protected override async Task<CerealBoxViewModel> Handle(Query query)
             {
-                var memorabilia = await _memorabiliaRepository.Get(query.MemorabiliaId).ConfigureAwait(false);
-
-                var viewModel = new CerealBoxViewModel(memorabilia);
-
-                return viewModel;
+                return new CerealBoxViewModel(await _memorabiliaRepository.Get(query.MemorabiliaId).ConfigureAwait(false));
             }
         }
 
-        public class Query : IQuery<CerealBoxViewModel>
+        public class Query : MemorabiliaQuery, IQuery<CerealBoxViewModel>
         {
-            public Query(int memorabiliaId)
-            {
-                MemorabiliaId = memorabiliaId;
-            }
-
-            public int MemorabiliaId { get; }
+            public Query(int memorabiliaId) : base(memorabiliaId) { }
         }
     }
 }

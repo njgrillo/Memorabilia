@@ -17,22 +17,13 @@ namespace Memorabilia.Application.Features.Memorabilia.Card
 
             protected override async Task<CardViewModel> Handle(Query query)
             {
-                var memorabilia = await _memorabiliaRepository.Get(query.MemorabiliaId).ConfigureAwait(false);
-
-                var viewModel = new CardViewModel(memorabilia);
-
-                return viewModel;
+                return new CardViewModel(await _memorabiliaRepository.Get(query.MemorabiliaId).ConfigureAwait(false));
             }
         }
 
-        public class Query : IQuery<CardViewModel>
+        public class Query : MemorabiliaQuery, IQuery<CardViewModel>
         {
-            public Query(int memorabiliaId)
-            {
-                MemorabiliaId = memorabiliaId;
-            }
-
-            public int MemorabiliaId { get; }
+            public Query(int memorabiliaId) : base(memorabiliaId) { }
         }
     }
 }

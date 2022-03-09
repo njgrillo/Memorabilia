@@ -22,6 +22,7 @@ namespace Memorabilia.Repository
             modelBuilder.Entity<Domain.Entities.AutographAuthentication>();
             modelBuilder.Entity<Domain.Entities.AutographImage>();
             modelBuilder.Entity<Domain.Entities.AutographSpot>();
+            modelBuilder.Entity<Domain.Entities.AutographThroughTheMail>();
             modelBuilder.Entity<Domain.Entities.BaseballType>();
             modelBuilder.Entity<Domain.Entities.BasketballType>();
             modelBuilder.Entity<Domain.Entities.BatType>();
@@ -63,6 +64,7 @@ namespace Memorabilia.Repository
             modelBuilder.Entity<Domain.Entities.MemorabiliaBat>();
             modelBuilder.Entity<Domain.Entities.MemorabiliaBook>();
             modelBuilder.Entity<Domain.Entities.MemorabiliaBrand>();
+            modelBuilder.Entity<Domain.Entities.MemorabiliaCanvas>();
             modelBuilder.Entity<Domain.Entities.MemorabiliaCard>();
             modelBuilder.Entity<Domain.Entities.MemorabiliaCommissioner>();
             modelBuilder.Entity<Domain.Entities.MemorabiliaFigure>();
@@ -72,6 +74,7 @@ namespace Memorabilia.Repository
             modelBuilder.Entity<Domain.Entities.MemorabiliaImage>();
             modelBuilder.Entity<Domain.Entities.MemorabiliaJersey>();
             modelBuilder.Entity<Domain.Entities.MemorabiliaLevelType>();
+            modelBuilder.Entity<Domain.Entities.MemorabiliaLithograph>();
             modelBuilder.Entity<Domain.Entities.MemorabiliaMagazine>();
             modelBuilder.Entity<Domain.Entities.MemorabiliaOrientation>();
             modelBuilder.Entity<Domain.Entities.MemorabiliaPerson>();

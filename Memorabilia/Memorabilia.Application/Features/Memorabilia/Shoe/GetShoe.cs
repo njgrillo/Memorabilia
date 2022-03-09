@@ -17,22 +17,13 @@ namespace Memorabilia.Application.Features.Memorabilia.Shoe
 
             protected override async Task<ShoeViewModel> Handle(Query query)
             {
-                var memorabilia = await _memorabiliaRepository.Get(query.MemorabiliaId).ConfigureAwait(false);
-
-                var viewModel = new ShoeViewModel(memorabilia);
-
-                return viewModel;
+                return new ShoeViewModel(await _memorabiliaRepository.Get(query.MemorabiliaId).ConfigureAwait(false));
             }
         }
 
-        public class Query : IQuery<ShoeViewModel>
+        public class Query : MemorabiliaQuery, IQuery<ShoeViewModel>
         {
-            public Query(int memorabiliaId)
-            {
-                MemorabiliaId = memorabiliaId;
-            }
-
-            public int MemorabiliaId { get; }
+            public Query(int memorabiliaId) : base(memorabiliaId) { }
         }
     }
 }

@@ -75,7 +75,9 @@ namespace Memorabilia.Application.Features.Memorabilia.Baseball
             set
             {
                 _gameStyleTypeId = value;
-                BaseballTypeId = Brand == Brand.Rawlings ? BaseballType.Official.Id : 0;
+
+                if (GameStyleType.IsGameWorthly(GameStyleType))
+                    BaseballTypeId = Brand == Brand.Rawlings ? BaseballType.Official.Id : 0;
             }
         }
 

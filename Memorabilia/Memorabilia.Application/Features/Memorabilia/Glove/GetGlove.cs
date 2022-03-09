@@ -17,22 +17,13 @@ namespace Memorabilia.Application.Features.Memorabilia.Glove
 
             protected override async Task<GloveViewModel> Handle(Query query)
             {
-                var memorabilia = await _memorabiliaRepository.Get(query.MemorabiliaId).ConfigureAwait(false);
-
-                var viewModel = new GloveViewModel(memorabilia);
-
-                return viewModel;
+                return new GloveViewModel(await _memorabiliaRepository.Get(query.MemorabiliaId).ConfigureAwait(false));
             }
         }
 
-        public class Query : IQuery<GloveViewModel>
+        public class Query : MemorabiliaQuery, IQuery<GloveViewModel>
         {
-            public Query(int memorabiliaId)
-            {
-                MemorabiliaId = memorabiliaId;
-            }
-
-            public int MemorabiliaId { get; }
+            public Query(int memorabiliaId) : base(memorabiliaId) { }
         }
     }
 }

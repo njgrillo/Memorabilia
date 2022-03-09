@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Memorabilia.Application.Features.Memorabilia.Baseball
 {
-    public class BaseballViewModel
+    public class BaseballViewModel : ViewModel
     {
         private readonly Domain.Entities.Memorabilia _memorabilia;
 

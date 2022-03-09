@@ -77,6 +77,15 @@ else
                     </div>
                 </div>
                 <div class="row">
+                    <div class="col-lg-6" />
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <InputCheckbox id="acquiredWithAutograph" @bind-Value="@_viewModel.AcquiredWithAutograph" />
+                            <label for="acquiredWithAutograph">Acquired with Autograph(s)</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
                     <div class="col-lg-6">
                         <div class="form-group">
                             <label for="privacyType">Privacy Type</label>
@@ -103,7 +112,7 @@ else
                                                    @bind-Value:event="ValueChanged" /> 
                         </div>
                     </div>
-                </div>
+                </div>                
                 <div class="text-right">
                     <button type="submit" class="btn btn-primary" @onclick="@(()=> _continue = true)">Save & Continue</button>
                     <button type="submit" class="btn btn-primary">Save & Exit</button>

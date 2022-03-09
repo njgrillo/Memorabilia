@@ -17,22 +17,13 @@ namespace Memorabilia.Application.Features.Memorabilia.Bobblehead
 
             protected override async Task<BobbleheadViewModel> Handle(Query query)
             {
-                var memorabilia = await _memorabiliaRepository.Get(query.MemorabiliaId).ConfigureAwait(false);
-
-                var viewModel = new BobbleheadViewModel(memorabilia);
-
-                return viewModel;
+                return new BobbleheadViewModel(await _memorabiliaRepository.Get(query.MemorabiliaId).ConfigureAwait(false));
             }
         }
 
-        public class Query : IQuery<BobbleheadViewModel>
+        public class Query : MemorabiliaQuery, IQuery<BobbleheadViewModel>
         {
-            public Query(int memorabiliaId)
-            {
-                MemorabiliaId = memorabiliaId;
-            }
-
-            public int MemorabiliaId { get; }
+            public Query(int memorabiliaId) : base(memorabiliaId) { }
         }
     }
 }

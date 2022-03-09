@@ -17,22 +17,13 @@ namespace Memorabilia.Application.Features.Memorabilia.Bammer
 
             protected override async Task<BammerViewModel> Handle(Query query)
             {
-                var memorabilia = await _memorabiliaRepository.Get(query.MemorabiliaId).ConfigureAwait(false);
-
-                var viewModel = new BammerViewModel(memorabilia);
-
-                return viewModel;
+                return new BammerViewModel(await _memorabiliaRepository.Get(query.MemorabiliaId).ConfigureAwait(false));
             }
         }
 
-        public class Query : IQuery<BammerViewModel>
+        public class Query : MemorabiliaQuery, IQuery<BammerViewModel>
         {
-            public Query(int memorabiliaId)
-            {
-                MemorabiliaId = memorabiliaId;
-            }
-
-            public int MemorabiliaId { get; }
+            public Query(int memorabiliaId) : base(memorabiliaId) { }
         }
     }
 }

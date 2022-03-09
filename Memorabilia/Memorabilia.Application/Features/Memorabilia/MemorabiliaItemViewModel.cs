@@ -85,7 +85,7 @@ namespace Memorabilia.Application.Features.Memorabilia
 
         public int PrivacyTypeId => _memorabilia.PrivacyTypeId;
 
-        public string PrivacyTypeName => Domain.Constants.PrivacyType.Find(_memorabilia.PrivacyTypeId).Name;
+        public string PrivacyTypeName => Domain.Constants.PrivacyType.Find(_memorabilia.PrivacyTypeId).Name;        
 
         public int? PurchaseTypeId => _memorabilia.MemorabiliaAcquisition.Acquisition.PurchaseTypeId;
 

@@ -17,22 +17,13 @@ namespace Memorabilia.Application.Features.Memorabilia.Lithograph
 
             protected override async Task<LithographViewModel> Handle(Query query)
             {
-                var memorabilia = await _memorabiliaRepository.Get(query.MemorabiliaId).ConfigureAwait(false);
-
-                var viewModel = new LithographViewModel(memorabilia);
-
-                return viewModel;
+                return new LithographViewModel(await _memorabiliaRepository.Get(query.MemorabiliaId).ConfigureAwait(false));
             }
         }
 
-        public class Query : IQuery<LithographViewModel>
+        public class Query : MemorabiliaQuery, IQuery<LithographViewModel>
         {
-            public Query(int memorabiliaId)
-            {
-                MemorabiliaId = memorabiliaId;
-            }
-
-            public int MemorabiliaId { get; }
+            public Query(int memorabiliaId) : base(memorabiliaId) { }
         }
     }
 }

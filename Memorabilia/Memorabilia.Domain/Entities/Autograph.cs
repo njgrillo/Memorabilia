@@ -20,6 +20,8 @@ namespace Memorabilia.Domain.Entities
                          string personalizationText,
                          int personId,
                          int? purchaseTypeId,
+                         DateTime? receivedDate,
+                         DateTime? sentDate,
                          int writingInstrumentId)
         {
             ColorId = colorId;
@@ -36,6 +38,8 @@ namespace Memorabilia.Domain.Entities
             
             if (!personalizationText.IsNullOrEmpty())
                 Personalization = new Personalization(Id, personalizationText);
+
+            SetThroughTheMail(sentDate, receivedDate);
         }
 
         public virtual Acquisition Acquisition { get; private set; }
@@ -70,6 +74,8 @@ namespace Memorabilia.Domain.Entities
 
         public virtual AutographSpot Spot { get; private set; } 
 
+        public virtual AutographThroughTheMail ThroughTheMail { get; private set; }
+
         public int WritingInstrumentId { get; private set; }
 
         public void Set(DateTime? acquiredDate,
@@ -82,6 +88,8 @@ namespace Memorabilia.Domain.Entities
                         string personalizationText,
                         int personId,
                         int? purchaseTypeId,
+                        DateTime? receivedDate,
+                        DateTime? sentDate,
                         int writingInstrumentId)
         {
             ColorId = colorId;
@@ -94,6 +102,7 @@ namespace Memorabilia.Domain.Entities
 
             SetAcquisition(acquisitionTypeId, acquiredDate, cost, purchaseTypeId);
             SetPersonalization(personalizationText);
+            SetThroughTheMail(sentDate, receivedDate);
         }
 
         public void SetAuthentication(int id, 
@@ -177,6 +186,21 @@ namespace Memorabilia.Domain.Entities
             }
             else
                 Personalization = null;
+        }
+
+        private void SetThroughTheMail(DateTime? sentDate, DateTime? receivedDate)
+        {
+            var acquisitionType = Constants.AcquisitionType.Find(Acquisition?.AcquisitionTypeId ?? 0);
+
+            if (acquisitionType != Constants.AcquisitionType.ThroughTheMail)
+            {
+                if (ThroughTheMail != null)
+                    ThroughTheMail = null;
+
+                return;
+            }
+
+            ThroughTheMail = new AutographThroughTheMail(Id, sentDate, receivedDate);
         }
     }
 }

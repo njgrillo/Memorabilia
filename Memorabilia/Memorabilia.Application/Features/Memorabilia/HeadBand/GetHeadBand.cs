@@ -17,22 +17,13 @@ namespace Memorabilia.Application.Features.Memorabilia.HeadBand
 
             protected override async Task<HeadBandViewModel> Handle(Query query)
             {
-                var memorabilia = await _memorabiliaRepository.Get(query.MemorabiliaId).ConfigureAwait(false);
-
-                var viewModel = new HeadBandViewModel(memorabilia);
-
-                return viewModel;
+                return new HeadBandViewModel(await _memorabiliaRepository.Get(query.MemorabiliaId).ConfigureAwait(false));
             }
         }
 
-        public class Query : IQuery<HeadBandViewModel>
+        public class Query : MemorabiliaQuery, IQuery<HeadBandViewModel>
         {
-            public Query(int memorabiliaId)
-            {
-                MemorabiliaId = memorabiliaId;
-            }
-
-            public int MemorabiliaId { get; }
+            public Query(int memorabiliaId) : base(memorabiliaId) { }
         }
     }
 }

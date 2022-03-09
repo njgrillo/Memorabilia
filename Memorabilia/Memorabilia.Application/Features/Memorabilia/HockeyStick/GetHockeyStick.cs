@@ -17,22 +17,13 @@ namespace Memorabilia.Application.Features.Memorabilia.HockeyStick
 
             protected override async Task<HockeyStickViewModel> Handle(Query query)
             {
-                var memorabilia = await _memorabiliaRepository.Get(query.MemorabiliaId).ConfigureAwait(false);
-
-                var viewModel = new HockeyStickViewModel(memorabilia);
-
-                return viewModel;
+                return new HockeyStickViewModel(await _memorabiliaRepository.Get(query.MemorabiliaId).ConfigureAwait(false));
             }
         }
 
-        public class Query : IQuery<HockeyStickViewModel>
+        public class Query : MemorabiliaQuery, IQuery<HockeyStickViewModel>
         {
-            public Query(int memorabiliaId)
-            {
-                MemorabiliaId = memorabiliaId;
-            }
-
-            public int MemorabiliaId { get; }
+            public Query(int memorabiliaId) : base(memorabiliaId) { }
         }
     }
 }

@@ -17,22 +17,13 @@ namespace Memorabilia.Application.Features.Memorabilia.Photo
 
             protected override async Task<PhotoViewModel> Handle(Query query)
             {
-                var memorabilia = await _memorabiliaRepository.Get(query.MemorabiliaId).ConfigureAwait(false);
-
-                var viewModel = new PhotoViewModel(memorabilia);
-
-                return viewModel;
+                return new PhotoViewModel(await _memorabiliaRepository.Get(query.MemorabiliaId).ConfigureAwait(false));
             }
         }
 
-        public class Query : IQuery<PhotoViewModel>
+        public class Query : MemorabiliaQuery, IQuery<PhotoViewModel>
         {
-            public Query(int memorabiliaId)
-            {
-                MemorabiliaId = memorabiliaId;
-            }
-
-            public int MemorabiliaId { get; }
+            public Query(int memorabiliaId) : base(memorabiliaId) { }
         }
     }
 }

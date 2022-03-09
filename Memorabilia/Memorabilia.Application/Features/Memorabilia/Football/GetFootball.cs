@@ -17,22 +17,13 @@ namespace Memorabilia.Application.Features.Memorabilia.Football
 
             protected override async Task<FootballViewModel> Handle(Query query)
             {
-                var memorabilia = await _memorabiliaRepository.Get(query.MemorabiliaId).ConfigureAwait(false);
-
-                var viewModel = new FootballViewModel(memorabilia);
-
-                return viewModel;
+                return new FootballViewModel(await _memorabiliaRepository.Get(query.MemorabiliaId).ConfigureAwait(false));
             }
         }
 
-        public class Query : IQuery<FootballViewModel>
+        public class Query : MemorabiliaQuery, IQuery<FootballViewModel>
         {
-            public Query(int memorabiliaId)
-            {
-                MemorabiliaId = memorabiliaId;
-            }
-
-            public int MemorabiliaId { get; }
+            public Query(int memorabiliaId) : base(memorabiliaId) { }
         }
     }
 }

@@ -17,22 +17,13 @@ namespace Memorabilia.Application.Features.Memorabilia.IndexCard
 
             protected override async Task<IndexCardViewModel> Handle(Query query)
             {
-                var memorabilia = await _memorabiliaRepository.Get(query.MemorabiliaId).ConfigureAwait(false);
-
-                var viewModel = new IndexCardViewModel(memorabilia);
-
-                return viewModel;
+                return new IndexCardViewModel(await _memorabiliaRepository.Get(query.MemorabiliaId).ConfigureAwait(false));
             }
         }
 
-        public class Query : IQuery<IndexCardViewModel>
+        public class Query : MemorabiliaQuery, IQuery<IndexCardViewModel>
         {
-            public Query(int memorabiliaId)
-            {
-                MemorabiliaId = memorabiliaId;
-            }
-
-            public int MemorabiliaId { get; }
+            public Query(int memorabiliaId) : base(memorabiliaId) { }
         }
     }
 }

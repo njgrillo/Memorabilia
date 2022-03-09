@@ -17,22 +17,13 @@ namespace Memorabilia.Application.Features.Memorabilia.FirstDayCover
 
             protected override async Task<FirstDayCoverViewModel> Handle(Query query)
             {
-                var memorabilia = await _memorabiliaRepository.Get(query.MemorabiliaId).ConfigureAwait(false);
-
-                var viewModel = new FirstDayCoverViewModel(memorabilia);
-
-                return viewModel;
+                return new FirstDayCoverViewModel(await _memorabiliaRepository.Get(query.MemorabiliaId).ConfigureAwait(false));
             }
         }
 
-        public class Query : IQuery<FirstDayCoverViewModel>
+        public class Query : MemorabiliaQuery, IQuery<FirstDayCoverViewModel>
         {
-            public Query(int memorabiliaId)
-            {
-                MemorabiliaId = memorabiliaId;
-            }
-
-            public int MemorabiliaId { get; }
+            public Query(int memorabiliaId) : base(memorabiliaId) { }
         }
     }
 }

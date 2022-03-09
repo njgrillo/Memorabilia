@@ -34,6 +34,8 @@ namespace Memorabilia.Application.Features.Autograph
                                                               command.PersonalizationText,
                                                               command.PersonId,
                                                               command.PurchaseTypeId,
+                                                              command.ReceivedDate,
+                                                              command.SentDate,
                                                               command.WritingInstrumentId);
 
                     await _autographRepository.Add(autograph).ConfigureAwait(false);
@@ -62,6 +64,8 @@ namespace Memorabilia.Application.Features.Autograph
                               command.PersonalizationText,
                               command.PersonId,
                               command.PurchaseTypeId,
+                              command.ReceivedDate,
+                              command.SentDate,
                               command.WritingInstrumentId);
 
                 await _autographRepository.Update(autograph).ConfigureAwait(false);
@@ -111,6 +115,10 @@ namespace Memorabilia.Application.Features.Autograph
             public int PersonId => _viewModel.Person.Id;
 
             public int? PurchaseTypeId => _viewModel.PurchaseTypeId > 0 ? _viewModel.PurchaseTypeId : null;
+
+            public DateTime? ReceivedDate => _viewModel.ReceivedDate;
+
+            public DateTime? SentDate => _viewModel.SentDate;
 
             public int WritingInstrumentId => _viewModel.WritingInstrumentId;
         }

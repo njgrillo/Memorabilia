@@ -46,6 +46,18 @@ BEGIN
 	DROP TABLE [dbo].[AutographSpot]
 END
 
+--AutographThroughTheMail Drop - FK - AutographId
+IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = N'AutographThroughTheMail')
+BEGIN
+	IF OBJECT_ID('tempdb..#TempAutographThroughTheMailTable') IS NOT NULL DROP TABLE #TempAutographThroughTheMailTable; 
+
+	SELECT * 
+	INTO #TempAutographThroughTheMailTable
+	FROM [dbo].[AutographThroughTheMail]
+
+	DROP TABLE [dbo].[AutographThroughTheMail]
+END
+
 --Event Drop - FK - AcquisitionTypeId
 IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = N'Event')
 BEGIN
@@ -226,6 +238,18 @@ BEGIN
 	DROP TABLE [dbo].[MemorabiliaBrand]
 END
 
+--MemorabiliaCanvas Drop  - FK - MemorabiliaId
+IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = N'MemorabiliaCanvas')
+BEGIN
+	IF OBJECT_ID('tempdb..#TempMemorabiliaCanvasTable') IS NOT NULL DROP TABLE #TempMemorabiliaCanvasTable; 
+
+	SELECT * 
+	INTO #TempMemorabiliaCanvasTable
+	FROM [dbo].[MemorabiliaCanvas]
+
+	DROP TABLE [dbo].[MemorabiliaCanvas]
+END
+
 --MemorabiliaCard Drop - FK - MemorabiliaId
 IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = N'MemorabiliaCard')
 BEGIN
@@ -332,6 +356,18 @@ BEGIN
 	FROM [dbo].[MemorabiliaLevelType]
 
 	DROP TABLE [dbo].[MemorabiliaLevelType]
+END
+
+--MemorabiliaLithograph Drop  - FK - MemorabiliaId
+IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = N'MemorabiliaLithograph')
+BEGIN
+	IF OBJECT_ID('tempdb..#TempMemorabiliaLithographTable') IS NOT NULL DROP TABLE #TempMemorabiliaLithographTable; 
+
+	SELECT * 
+	INTO #TempMemorabiliaLithographTable
+	FROM [dbo].[MemorabiliaLithograph]
+
+	DROP TABLE [dbo].[MemorabiliaLithograph]
 END
 
 --MemorabilaMagazine Drop  - FK - MemorabiliaId
@@ -1766,7 +1802,7 @@ BEGIN
 		 , (3, 1, 'Yankees', 'New York', 1901, NULL, GETUTCDATE())
 		 , (4, 1, 'Rays', 'Tampa Bay', 1998, NULL, GETUTCDATE())
 		 , (5, 1, 'Blue Jays', 'Toronto', 1977, NULL, GETUTCDATE())
-		 , (6, 1, 'White Sox', 'Chica', 1901, NULL, GETUTCDATE())
+		 , (6, 1, 'White Sox', 'Chicago', 1901, NULL, GETUTCDATE())
 		 , (7, 1, 'Guardians', 'Cleveland', 1901, NULL, GETUTCDATE())
 		 , (8, 1, 'Tigers', 'Detroit', 1901, NULL, GETUTCDATE())
 		 , (9, 1, 'Twins', 'Minnesota', 1901, NULL, GETUTCDATE())
@@ -1784,7 +1820,7 @@ BEGIN
 		 , (21, 1, 'Brewers', 'Milwaukee', 1969, NULL, GETUTCDATE())
 		 , (22, 1, 'Reds', 'Cincinnati', 1882, NULL, GETUTCDATE())
 		 , (23, 1, 'Pirates', 'Pittsburgh', 1882, NULL, GETUTCDATE())
-		 , (24, 1, 'Cubs', 'Chica', 1874, NULL, GETUTCDATE())
+		 , (24, 1, 'Cubs', 'Chicago', 1874, NULL, GETUTCDATE())
 		 , (25, 1, 'Cardinals', 'St. Louis', 1882, NULL, GETUTCDATE())
 		 , (26, 1, 'Dodgers', 'Los Angeles', 1884, NULL, GETUTCDATE())
 		 , (27, 1, 'Giants', 'San Francisco', 1883, NULL, GETUTCDATE())
@@ -2644,6 +2680,7 @@ CREATE TABLE [dbo].[Acquisition](
 	[AcquiredDate] [datetime] NULL,
 	[PurchaseTypeId] [int] NULL,
 	[Cost] [decimal](12, 2) NULL,
+	[AcquiredWithAutograph] [bit] NULL
  CONSTRAINT [PK_Acquisition] PRIMARY KEY CLUSTERED 
 (
 	[Id] ASC
@@ -2662,7 +2699,7 @@ SET IDENTITY_INSERT [dbo].[Acquisition] ON
 
 IF @KeepExistingValues = 1
 BEGIN
-	INSERT INTO [dbo].[Acquisition] (Id, AcquisitionTypeId, AcquiredDate, PurchaseTypeId, Cost)
+	INSERT INTO [dbo].[Acquisition] (Id, AcquisitionTypeId, AcquiredDate, PurchaseTypeId, Cost, PurchasedWithAutograph)
 	SELECT * 
 	FROM #TempAcquisitionTable
 END
@@ -2820,6 +2857,33 @@ BEGIN
 END
 
 SET IDENTITY_INSERT [dbo].[AutographSpot] OFF
+
+--AutographThroughTheMail Create
+CREATE TABLE [dbo].[AutographThroughTheMail](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[AutographId] [int] NOT NULL,
+	[SentDate] [datetime] NULL,
+	[ReceivedDate] [datetime] NULL,
+ CONSTRAINT [PK_AutographThroughTheMail] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+
+ALTER TABLE [dbo].[AutographThroughTheMail]  WITH CHECK ADD  CONSTRAINT [FK_AutographThroughTheMail_Autograph] FOREIGN KEY([AutographId])
+REFERENCES [dbo].[Autograph] ([Id])
+ALTER TABLE [dbo].[AutographThroughTheMail] CHECK CONSTRAINT [FK_AutographThroughTheMail_Autograph]
+
+SET IDENTITY_INSERT [dbo].[AutographThroughTheMail] ON
+
+IF @KeepExistingValues = 1
+BEGIN
+	INSERT INTO [dbo].[AutographThroughTheMail] (Id, AutographId, SentDate, ReceivedDate)
+	SELECT * 
+	FROM #TempAutographThroughTheMailTable
+END
+
+SET IDENTITY_INSERT [dbo].[AutographThroughTheMail] OFF
 
 --Event Create
 CREATE TABLE [dbo].[Event](
@@ -3282,6 +3346,33 @@ END
 
 SET IDENTITY_INSERT [dbo].[MemorabiliaBrand] OFF
 
+--MemorabiliaCanvas Create
+CREATE TABLE [dbo].[MemorabiliaCanvas](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[MemorabiliaId] [int] NOT NULL,
+	[Framed] [bit] NOT NULL,
+	[Stretched] [bit] NOT NULL,
+ CONSTRAINT [PK_MemorabiliaCanvas] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+
+ALTER TABLE [dbo].[MemorabiliaCanvas]  WITH CHECK ADD  CONSTRAINT [FK_MemorabiliaCanvas_Memorabilia] FOREIGN KEY([MemorabiliaId])
+REFERENCES [dbo].[Memorabilia] ([Id])
+ALTER TABLE [dbo].[MemorabiliaCanvas] CHECK CONSTRAINT [FK_MemorabiliaCanvas_Memorabilia]
+
+SET IDENTITY_INSERT [dbo].[MemorabiliaCanvas] ON
+
+IF @KeepExistingValues = 1
+BEGIN
+	INSERT INTO [dbo].[MemorabiliaCanvas] (Id, MemorabiliaId, Framed, Stretched)
+	SELECT * 
+	FROM #TempMemorabiliaCanvasTable
+END
+
+SET IDENTITY_INSERT [dbo].[MemorabiliaLCanvas] OFF
+
 --MemorabiliaCard Create
 CREATE TABLE [dbo].[MemorabiliaCard](
 	[Id] [int] IDENTITY(1,1) NOT NULL,
@@ -3586,6 +3677,33 @@ BEGIN
 END
 
 SET IDENTITY_INSERT [dbo].[MemorabiliaLevelType] OFF
+
+--MemorabiliaLithograph Create
+CREATE TABLE [dbo].[MemorabiliaLithograph](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[MemorabiliaId] [int] NOT NULL,
+	[Framed] [bit] NOT NULL,
+	[Matted] [bit] NOT NULL,
+ CONSTRAINT [PK_MemorabiliaLithograph] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+
+ALTER TABLE [dbo].[MemorabiliaLithograph]  WITH CHECK ADD  CONSTRAINT [FK_MemorabiliaLithograph_Memorabilia] FOREIGN KEY([MemorabiliaId])
+REFERENCES [dbo].[Memorabilia] ([Id])
+ALTER TABLE [dbo].[MemorabiliaLithograph] CHECK CONSTRAINT [FK_MemorabiliaLithograph_Memorabilia]
+
+SET IDENTITY_INSERT [dbo].[MemorabiliaLithograph] ON
+
+IF @KeepExistingValues = 1
+BEGIN
+	INSERT INTO [dbo].[MemorabiliaLithograph] (Id, MemorabiliaId, Framed, Matted)
+	SELECT * 
+	FROM #TempMemorabiliaLithographTable
+END
+
+SET IDENTITY_INSERT [dbo].[MemorabiliaLithograph] OFF
 
 --MemorabilaMagazine Create
 CREATE TABLE [dbo].[MemorabiliaMagazine](

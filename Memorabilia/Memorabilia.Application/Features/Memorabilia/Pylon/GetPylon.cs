@@ -17,22 +17,13 @@ namespace Memorabilia.Application.Features.Memorabilia.Pylon
 
             protected override async Task<PylonViewModel> Handle(Query query)
             {
-                var memorabilia = await _memorabiliaRepository.Get(query.MemorabiliaId).ConfigureAwait(false);
-
-                var viewModel = new PylonViewModel(memorabilia);
-
-                return viewModel;
+                return new PylonViewModel(await _memorabiliaRepository.Get(query.MemorabiliaId).ConfigureAwait(false));
             }
         }
 
-        public class Query : IQuery<PylonViewModel>
+        public class Query : MemorabiliaQuery, IQuery<PylonViewModel>
         {
-            public Query(int memorabiliaId)
-            {
-                MemorabiliaId = memorabiliaId;
-            }
-
-            public int MemorabiliaId { get; }
+            public Query(int memorabiliaId) : base(memorabiliaId) { }
         }
     }
 }

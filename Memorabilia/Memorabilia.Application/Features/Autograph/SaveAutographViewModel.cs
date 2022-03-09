@@ -1,4 +1,5 @@
-﻿using Memorabilia.Application.Features.Admin.Person;
+﻿using Framework.Extension;
+using Memorabilia.Application.Features.Admin.Person;
 using Memorabilia.Application.Features.Memorabilia;
 using Memorabilia.Domain.Constants;
 using System;
@@ -14,6 +15,7 @@ namespace Memorabilia.Application.Features.Autograph
         public SaveAutographViewModel(AutographViewModel viewModel)
         {
             AcquiredDate = viewModel.Acquisition?.AcquiredDate;
+            AcquiredWithAutograph = viewModel.AcquiredWithAutograph;
             AcquisitionTypeId = viewModel.Acquisition?.AcquisitionTypeId ?? 0;
             ColorId = viewModel.ColorId;
             ConditionId = viewModel.ConditionId;
@@ -27,6 +29,8 @@ namespace Memorabilia.Application.Features.Autograph
             Person = new SavePersonViewModel(new PersonViewModel(viewModel.Person));
             PersonalizationText = viewModel.Personalization?.Text;            
             PurchaseTypeId = viewModel.Acquisition?.PurchaseTypeId ?? 0;
+            ReceivedDate = viewModel.ReceivedDate;
+            SentDate = viewModel.SentDate;
             WritingInstrumentId = viewModel.WritingInstrumentId;
         }
 
@@ -45,6 +49,8 @@ namespace Memorabilia.Application.Features.Autograph
         }
 
         public DateTime? AcquiredDate { get; set; }
+
+        public bool AcquiredWithAutograph { get; set; }
 
         public AcquisitionType AcquisitionType => AcquisitionType.Find(AcquisitionTypeId);
 
@@ -65,6 +71,10 @@ namespace Memorabilia.Application.Features.Autograph
         public decimal? Cost { get; set; }
 
         public DateTime CreateDate { get; set; }
+
+        public bool DisplayAcquisitionDetails => !AcquiredWithAutograph;
+
+        public bool DisplayThroughTheMailDetails => AcquisitionType == AcquisitionType.ThroughTheMail;
 
         public decimal? EstimatedValue { get; set; }        
 
@@ -96,6 +106,8 @@ namespace Memorabilia.Application.Features.Autograph
             }
         }
 
+        public bool IsPersonalized => !PersonalizationText.IsNullOrEmpty();
+
         public DateTime? LastModifiedDate { get; set; }
 
         public DateTime? MemorabiliaAcquiredDate { get; set; }
@@ -125,6 +137,10 @@ namespace Memorabilia.Application.Features.Autograph
         public string PersonalizationText { get; set; }
 
         public int PurchaseTypeId { get; set; }
+
+        public DateTime? ReceivedDate { get; set; }
+
+        public DateTime? SentDate { get; set; }
 
         public string UserFirstName { get; set; }
 

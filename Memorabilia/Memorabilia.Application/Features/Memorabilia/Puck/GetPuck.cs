@@ -17,22 +17,13 @@ namespace Memorabilia.Application.Features.Memorabilia.Puck
 
             protected override async Task<PuckViewModel> Handle(Query query)
             {
-                var memorabilia = await _memorabiliaRepository.Get(query.MemorabiliaId).ConfigureAwait(false);
-
-                var viewModel = new PuckViewModel(memorabilia);
-
-                return viewModel;
+                return new PuckViewModel(await _memorabiliaRepository.Get(query.MemorabiliaId).ConfigureAwait(false));
             }
         }
 
-        public class Query : IQuery<PuckViewModel>
+        public class Query : MemorabiliaQuery, IQuery<PuckViewModel>
         {
-            public Query(int memorabiliaId)
-            {
-                MemorabiliaId = memorabiliaId;
-            }
-
-            public int MemorabiliaId { get; }
+            public Query(int memorabiliaId) : base(memorabiliaId) { }
         }
     }
 }

@@ -11,13 +11,14 @@ namespace Memorabilia.Application.Features.Memorabilia
         public SaveMemorabiliaItemViewModel(MemorabiliaItemViewModel viewModel)
         {
             AcquiredDate = viewModel.Acquisition.AcquiredDate;
+            AcquiredWithAutograph = viewModel.Acquisition.AcquiredWithAutograph ?? false;
             AcquisitionTypeId = viewModel.Acquisition.AcquisitionTypeId;
             ConditionId = viewModel.ConditionId ?? 0;
             Cost = viewModel.Acquisition.Cost;
             CreateDate = viewModel.CreateDate;
             EstimatedValue = viewModel.EstimatedValue;
             Id = viewModel.Id;
-            PrivacyTypeId = viewModel.PrivacyTypeId;
+            PrivacyTypeId = viewModel.PrivacyTypeId;            
             PurchaseTypeId = viewModel.PurchaseTypeId ?? 0;
             ItemTypeId = viewModel.ItemTypeId;
             LastModifiedDate = viewModel.LastModifiedDate;
@@ -25,6 +26,8 @@ namespace Memorabilia.Application.Features.Memorabilia
         }
 
         public DateTime? AcquiredDate { get; set; }
+
+        public bool AcquiredWithAutograph { get; set; }
 
         [Required]
         [Range(1, int.MaxValue, ErrorMessage = "Acquisition Type is required.")]
@@ -54,7 +57,7 @@ namespace Memorabilia.Application.Features.Memorabilia
 
         [Required]
         [Range(1, int.MaxValue, ErrorMessage = "Privacy Type is required.")]
-        public int PrivacyTypeId { get; set; }
+        public int PrivacyTypeId { get; set; }        
 
         public int PurchaseTypeId { get; set; }
 

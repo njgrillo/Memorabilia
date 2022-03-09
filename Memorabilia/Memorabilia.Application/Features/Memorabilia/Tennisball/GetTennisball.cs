@@ -17,22 +17,13 @@ namespace Memorabilia.Application.Features.Memorabilia.Tennisball
 
             protected override async Task<TennisballViewModel> Handle(Query query)
             {
-                var memorabilia = await _memorabiliaRepository.Get(query.MemorabiliaId).ConfigureAwait(false);
-
-                var viewModel = new TennisballViewModel(memorabilia);
-
-                return viewModel;
+                return new TennisballViewModel(await _memorabiliaRepository.Get(query.MemorabiliaId).ConfigureAwait(false));
             }
         }
 
-        public class Query : IQuery<TennisballViewModel>
+        public class Query : MemorabiliaQuery, IQuery<TennisballViewModel>
         {
-            public Query(int memorabiliaId)
-            {
-                MemorabiliaId = memorabiliaId;
-            }
-
-            public int MemorabiliaId { get; }
+            public Query(int memorabiliaId) : base(memorabiliaId) { }
         }
     }
 }

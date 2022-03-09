@@ -17,22 +17,13 @@ namespace Memorabilia.Application.Features.Memorabilia.CompactDisc
 
             protected override async Task<CompactDiscViewModel> Handle(Query query)
             {
-                var memorabilia = await _memorabiliaRepository.Get(query.MemorabiliaId).ConfigureAwait(false);
-
-                var viewModel = new CompactDiscViewModel(memorabilia);
-
-                return viewModel;
+                return new CompactDiscViewModel(await _memorabiliaRepository.Get(query.MemorabiliaId).ConfigureAwait(false));
             }
         }
 
-        public class Query : IQuery<CompactDiscViewModel>
+        public class Query : MemorabiliaQuery, IQuery<CompactDiscViewModel>
         {
-            public Query(int memorabiliaId)
-            {
-                MemorabiliaId = memorabiliaId;
-            }
-
-            public int MemorabiliaId { get; }
+            public Query(int memorabiliaId) : base(memorabiliaId) { }
         }
     }
 }

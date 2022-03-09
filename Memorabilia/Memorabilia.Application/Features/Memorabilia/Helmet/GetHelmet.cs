@@ -17,22 +17,13 @@ namespace Memorabilia.Application.Features.Memorabilia.Helmet
 
             protected override async Task<HelmetViewModel> Handle(Query query)
             {
-                var memorabilia = await _memorabiliaRepository.Get(query.MemorabiliaId).ConfigureAwait(false);
-
-                var viewModel = new HelmetViewModel(memorabilia);
-
-                return viewModel;
+                return new HelmetViewModel(await _memorabiliaRepository.Get(query.MemorabiliaId).ConfigureAwait(false));
             }
         }
 
-        public class Query : IQuery<HelmetViewModel>
+        public class Query : MemorabiliaQuery, IQuery<HelmetViewModel>
         {
-            public Query(int memorabiliaId)
-            {
-                MemorabiliaId = memorabiliaId;
-            }
-
-            public int MemorabiliaId { get; }
+            public Query(int memorabiliaId) : base(memorabiliaId) { }
         }
     }
 }
