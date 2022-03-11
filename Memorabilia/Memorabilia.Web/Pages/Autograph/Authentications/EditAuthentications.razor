@@ -57,6 +57,12 @@ else
                 </div>   
                 <div class="row">
                     <div class="col-lg-6">
+                        <div class="form-group">                                 
+                            <InputCheckbox id="hasCertificationCard" @bind-Value="@_viewModel.HasCertificationCard" />
+                            <label for="hasCertificationCard">Has Certification Card</label>
+                        </div> 
+                    </div>
+                    <div class="col-lg-6">
                         <div class="form-group">                              
                             <InputCheckbox id="witnessed" @bind-Value="@_viewModel.Witnessed" />  
                             <label for="witnessed">Witnessed</label>
@@ -81,6 +87,7 @@ else
                         TItem="SaveAuthenticationViewModel">
                     <HeaderTemplate>
                         <th scope="col">Authentication Company</th>
+                        <th scope="col">Has Certification Card</th>
                         <th scope="col">Has Hologram</th>
                         <th scope="col">Has Letter</th>
                         <th scope="col">Verification</th>
@@ -90,6 +97,7 @@ else
                     </HeaderTemplate>
                     <RowTemplate Context="authentication">
                         <td>@authentication.AuthenticationCompanyName</td>
+                        <td>@(authentication.HasCertificationCard ? "Yes" : "No")</td>
                         <td>@(authentication.HasHologram ? "Yes" : "No")</td>
                         <td>@(authentication.HasLetter ? "Yes" : "No")</td>
                         <td>@authentication.Verification</td>

@@ -60,7 +60,6 @@ else
     public int PersonId { get; set; }
 
     private bool _continue;
-
     private SavePersonTeamViewModel _personTeamViewModel = new SavePersonTeamViewModel();
     private List<SavePersonTeamViewModel> _viewModel = new();
 
@@ -70,9 +69,11 @@ else
 
         await _commandRouter.Send(command).ConfigureAwait(false);
 
-        _navigation.NavigateTo("People");
+        var url = _continue ? $"People/HallOfFame/Edit/{PersonId}" : "People";
 
-        _toastService.ShowSuccess("Team(s) were added successfully!", "Teams");
+        _navigation.NavigateTo(url);
+
+        _toastService.ShowSuccess("Team(s) were saved successfully!", "Teams");
     }
 
     protected override async Task OnInitializedAsync()

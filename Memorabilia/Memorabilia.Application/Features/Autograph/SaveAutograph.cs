@@ -29,6 +29,7 @@ namespace Memorabilia.Application.Features.Autograph
                                                               command.ConditionId,
                                                               command.Cost,
                                                               command.EstimatedValue,
+                                                              command.FullName,
                                                               command.Grade,
                                                               command.MemorabiliaId,
                                                               command.PersonalizationText,
@@ -60,6 +61,7 @@ namespace Memorabilia.Application.Features.Autograph
                               command.ConditionId,
                               command.Cost,
                               command.EstimatedValue,
+                              command.FullName,
                               command.Grade,
                               command.PersonalizationText,
                               command.PersonId,
@@ -95,6 +97,8 @@ namespace Memorabilia.Application.Features.Autograph
             public DateTime CreateDate => _viewModel.CreateDate;
 
             public decimal? EstimatedValue => _viewModel.EstimatedValue;
+
+            public bool FullName => _viewModel.FullName;
 
             public int? Grade => _viewModel.Grade;
 

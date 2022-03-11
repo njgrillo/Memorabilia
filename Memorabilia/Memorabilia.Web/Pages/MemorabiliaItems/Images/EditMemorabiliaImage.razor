@@ -3,11 +3,15 @@
 @using Application.Features.Image
 @using Memorabilia.Application.Features.Memorabilia
 @using Memorabilia.Application.Features.Memorabilia.Image
+@using Microsoft.AspNetCore.Hosting
+@using Microsoft.Extensions.Logging
 @using System 
 @using System.IO
 
 @inject CommandRouter _commandRouter
+@inject IWebHostEnvironment _environment
 @inject ProtectedLocalStorage _localStorage
+@inject ILogger<_ImageFileSelector> _logger
 @inject NavigationManager _navigation
 @inject QueryRouter _queryRouter
 @inject IToastService _toastService
@@ -33,15 +37,21 @@ else
                 <DataAnnotationsValidator />
                 <ValidationSummary />   
                 <div class="form-group">
-                    <_ImageFileSelector @bind-Value="@_viewModel.Images"
-                                        @bind-Value:event="ValueChanged" 
-                                        CanRemove="true"
-                                        DisplayPreview="true"
-                                        HasPrimary="true"                                        
-                                        MaximumAllowedFiles="5" 
-                                        MaximumFileSize="5120000"
-                                        OnPrimarySet="OnPrimarySet"
-                                        OnRemove="OnRemove" />
+                    <div class="row">
+                        <InputFile OnChange="@LoadFiles" accept="image/*" multiple @bind-Value="@_viewModel.Images" />
+                    </div>
+                    <div class="row">
+                        @foreach(var image in _viewModel.Images)
+                        {
+                            <_ImageEditor CanRemove="true"
+                                          HasPrimary="true"
+                                          ImageFilePath="@image.FilePath"
+                                          ImageType="@Domain.Constants.ImageType.Find(image.ImageTypeId)"
+                                          IsPrimary="@image.IsPrimary"
+                                          OnPrimarySet="OnPrimarySet"
+                                          OnRemove="OnRemove" />     
+                        } 
+                    </div>
                 </div> 
                 <div class="text-right">                    
                     <button type="submit" class="btn btn-primary" @onclick="@(()=> _continue = true)">Save & Continue</button>
@@ -59,6 +69,7 @@ else
     public int MemorabiliaId { get; set; }
 
     private bool _continue;
+    private IReadOnlyList<IBrowserFile> _files;
     private SaveMemorabiliaImagesViewModel _viewModel = new SaveMemorabiliaImagesViewModel();
 
     protected void Cancel()
@@ -93,6 +104,13 @@ else
 
         _toastService.ShowSuccess("Memorabilia Images were saved successfully!", _viewModel.PageTitle);
     }
+
+    protected async Task LoadFiles(InputFileChangeEventArgs e)
+    {
+        _files = e.GetMultipleFiles(5);
+
+        await Save().ConfigureAwait(false);
+    } 
 
     protected override async Task OnInitializedAsync()
     {
@@ -146,4 +164,44 @@ else
 
         primaryImage.ImageTypeId = Domain.Constants.ImageType.Primary.Id;       
     }    
+
+    protected async Task Save()
+    {
+        var userId = await _localStorage.GetAsync<int>("UserId").ConfigureAwait(false);
+
+        if (userId.Value == 0)
+            _navigation.NavigateTo("Login");
+
+        var images = new List<SaveImageViewModel>();
+        var imageType = Domain.Constants.ImageType.Primary;
+
+        foreach (var file in _files)
+        {
+            try
+            {
+                var directory = Path.Combine(_environment.ContentRootPath,
+                                             "wwwroot/userimages", 
+                                             userId.Value.ToString());
+
+                if (!Directory.Exists(directory))
+                    Directory.CreateDirectory(directory);
+
+                var fileName = Path.GetRandomFileName();
+                var path = Path.Combine(directory, fileName);
+
+                await using FileStream fs = new(path, FileMode.Create);
+                await file.OpenReadStream(10240000).CopyToAsync(fs).ConfigureAwait(false);
+
+                images.Add(new SaveImageViewModel(new ImageViewModel(new Domain.Entities.Image($"wwwroot/userimages/{userId.Value}/{fileName}", imageType.Id))));
+
+                imageType = Domain.Constants.ImageType.Secondary;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError("File: {Filename} Error: {Error}", file.Name, ex.Message);
+            }               
+        }
+
+        _viewModel.Images = images;      
+    } 
 }

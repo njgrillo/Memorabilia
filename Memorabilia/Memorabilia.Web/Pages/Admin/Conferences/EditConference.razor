@@ -77,6 +77,9 @@ else
 
     protected override async Task OnInitializedAsync()
     {
+        if (Id == 0)
+            return;
+
         var query = new GetConference.Query(Id);
 
         _viewModel = new SaveConferenceViewModel(await _queryRouter.Send(query).ConfigureAwait(false));

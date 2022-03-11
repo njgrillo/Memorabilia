@@ -1,4 +1,5 @@
-﻿@page "/Sports/Edit/{id:int}"
+﻿@page "/Sports/Edit"
+@page "/Sports/Edit/{id:int}"
 
 @using Memorabilia.Application.Features.Admin
 @using Memorabilia.Application.Features.Admin.Sport
@@ -70,6 +71,9 @@ else
 
     protected override async Task OnInitializedAsync()
     {
+        if (Id == 0)
+            return;
+
         var query = new GetSport.Query(Id);
 
         _viewModel = new SaveSportViewModel(await _queryRouter.Send(query).ConfigureAwait(false));

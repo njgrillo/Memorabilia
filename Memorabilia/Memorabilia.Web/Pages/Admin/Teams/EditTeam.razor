@@ -1,8 +1,10 @@
-﻿@page "/Teams/Edit/{id:int}"
+﻿@page "/Teams/Edit"
+@page "/Teams/Edit/{id:int}"
 
 @using Memorabilia.Application.Features.Admin
 @using Memorabilia.Application.Features.Admin.Team
-@using Memorabilia.Domain.Constants
+@using Memorabilia.Web.Controls.Franchise
+@using Memorabilia.Web.Controls.SportLeagueLevel
 
 @inject CommandRouter _commandRouter
 @inject ProtectedLocalStorage _localStorage
@@ -30,6 +32,23 @@ else
             <EditForm Model="_viewModel" OnValidSubmit="HandleValidSubmit">
                 <DataAnnotationsValidator />
                 <ValidationSummary />
+                <div hidden="@(!_displayFranchise)">
+                    <div class="form-group">
+                        <label for="sportLeague">Sport League</label>
+                        <select @onchange="OnChangeSportLeagueLevel">
+                            @foreach (var sportLeagueLevel in SportLeagueLevel.All)
+                            {
+                                <option value="@sportLeagueLevel.Id">@sportLeagueLevel.Name</option>
+                            }
+                        </select>                            
+                    </div>
+                    <div class="form-group">
+                        <label for="franchise">Franchise</label>
+                        <_FranchiseDropDown @bind-Value="@_viewModel.FranchiseId" 
+                                            @bind-Value:event="ValueChanged"
+                                            SportLeagueLevel="@_sportLeagueLevel" />   
+                    </div>
+                </div>
                 <div class="form-group">
                     <label for="name">Name</label>
                     <InputText id="name" @bind-Value="_viewModel.Name" class="form-control" />
@@ -75,6 +94,8 @@ else
     public int Id { get; set; }
 
     private bool _continue { get; set; }
+    private bool _displayFranchise { get; set; }
+    private SportLeagueLevel _sportLeagueLevel;
     private SaveTeamViewModel _viewModel = new SaveTeamViewModel();
 
     protected async Task HandleValidSubmit()
@@ -94,9 +115,21 @@ else
 
     protected override async Task OnInitializedAsync()
     {
+        if (Id == 0)
+        {
+            _displayFranchise = true;
+            _sportLeagueLevel = SportLeagueLevel.MajorLeagueBaseball;
+            return;
+        }
+
         var query = new GetTeam.Query(Id);
 
         _viewModel = new SaveTeamViewModel(await _queryRouter.Send(query).ConfigureAwait(false));
+    }
+
+    private void OnChangeSportLeagueLevel(ChangeEventArgs args)
+    {
+        _sportLeagueLevel = SportLeagueLevel.Find(int.Parse(args.Value.ToString()));
     }
 }
 

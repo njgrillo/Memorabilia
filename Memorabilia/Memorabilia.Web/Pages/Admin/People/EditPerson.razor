@@ -1,4 +1,5 @@
-﻿@page "/People/Edit/{id:int}"
+﻿@page "/People/Edit"
+@page "/People/Edit/{id:int}"
 
 @using Memorabilia.Application.Features.Admin
 @using Memorabilia.Application.Features.Admin.Person
@@ -131,6 +132,9 @@ else
 
     protected override async Task OnInitializedAsync()
     {
+        if (Id == 0)
+            return;
+
         var query = new GetPerson.Query(Id);
 
         _viewModel = new SavePersonViewModel(await _queryRouter.Send(query).ConfigureAwait(false));

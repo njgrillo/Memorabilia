@@ -58,7 +58,6 @@ else
     public int PersonId { get; set; }
 
     private bool _continue;
-
     private List<SavePersonOccupationViewModel> _viewModel = new();
 
     protected async Task HandleValidSubmit()
@@ -67,7 +66,7 @@ else
 
         await _commandRouter.Send(command).ConfigureAwait(false);
 
-        var url = _continue ? $"People/HallOfFame/Edit/{PersonId}" : "People";
+        var url = _continue ? $"People/Team/Edit/{PersonId}" : "People";
 
         _navigation.NavigateTo(url);
 

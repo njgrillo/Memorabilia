@@ -8,6 +8,7 @@
         {
             AuthenticationCompanyId = authentication.AuthenticationCompanyId;
             AutographId = authentication.AutographId;
+            HasCertificationCard = authentication.HasCertificationCard ?? false;
             HasHologram = authentication.HasHologram ?? false;
             HasLetter = authentication.HasLetter ?? false;
             Id = authentication.Id;
@@ -20,6 +21,8 @@
         public string AuthenticationCompanyName => Domain.Constants.AuthenticationCompany.Find(AuthenticationCompanyId)?.Name;
 
         public int AutographId { get; set; }
+
+        public bool HasCertificationCard { get; set; }
 
         public bool HasHologram { get; set; }
 

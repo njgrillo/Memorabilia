@@ -1,4 +1,5 @@
-﻿@page "/Leagues/Edit/{id:int}"
+﻿@page "/Leagues/Edit"
+@page "/Leagues/Edit/{id:int}"
 
 @using Memorabilia.Application.Features.Admin
 @using Memorabilia.Application.Features.Admin.League
@@ -77,6 +78,9 @@ else
 
     protected override async Task OnInitializedAsync()
     {
+        if (Id == 0)
+            return;
+
         var query = new GetLeague.Query(Id);
 
         _viewModel = new SaveLeagueViewModel(await _queryRouter.Send(query).ConfigureAwait(false));

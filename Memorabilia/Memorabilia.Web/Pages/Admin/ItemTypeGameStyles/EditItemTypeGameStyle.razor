@@ -1,8 +1,10 @@
-﻿@page "/ItemTypeGameStyles/Edit/{id:int}"
+﻿@page "/ItemTypeGameStyles/Edit"
+@page "/ItemTypeGameStyles/Edit/{id:int}"
 
 @using Memorabilia.Application.Features.Admin
 @using Memorabilia.Application.Features.Admin.ItemTypeGameStyle
 @using Memorabilia.Web.Controls.GameStyleType
+@using Memorabilia.Web.Controls.ItemType
 
 @inject CommandRouter _commandRouter
 @inject ProtectedLocalStorage _localStorage
@@ -30,6 +32,11 @@ else
             <EditForm Model="_viewModel" OnValidSubmit="HandleValidSubmit">
                 <DataAnnotationsValidator />
                 <ValidationSummary />
+                <div class="form-group" hidden="@(!_displayItemType)">
+                    <label for="itemType">Item Type</label>
+                    <_ItemTypeDropDown @bind-Value="@_viewModel.ItemTypeId" 
+                                       @bind-Value:event="ValueChanged" /> 
+                </div>
                 <div class="form-group">
                     <label for="authenticType">AuthenticType</label>
                     <_GameStyleTypeDropDown @bind-Value="@_viewModel.GameStyleTypeId" 
@@ -53,6 +60,7 @@ else
     [Parameter]
     public int Id { get; set; }
 
+    private bool _displayItemType;
     private SaveItemTypeGameStyleViewModel _viewModel = new SaveItemTypeGameStyleViewModel();
 
     protected async Task HandleValidSubmit()
@@ -68,6 +76,12 @@ else
 
     protected override async Task OnInitializedAsync()
     {
+        if (Id == 0)
+        {
+            _displayItemType = true;
+            return;
+        }
+
         var query = new GetItemTypeGameStyle.Query(Id);
 
         _viewModel = new SaveItemTypeGameStyleViewModel(await _queryRouter.Send(query).ConfigureAwait(false));

@@ -15,6 +15,8 @@
 
         public int AutographId => _authentication.AutographId;
 
+        public bool? HasCertificationCard => _authentication.HasCertificationCard;
+
         public bool? HasHologram => _authentication.HasHologram;
 
         public bool? HasLetter => _authentication.HasLetter;

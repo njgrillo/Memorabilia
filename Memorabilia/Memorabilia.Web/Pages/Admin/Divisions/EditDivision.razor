@@ -83,6 +83,9 @@ else
 
     protected override async Task OnInitializedAsync()
     {
+        if (Id == 0)
+            return;
+
         var query = new GetDivision.Query(Id);
 
         _viewModel = new SaveDivisionViewModel(await _queryRouter.Send(query).ConfigureAwait(false));

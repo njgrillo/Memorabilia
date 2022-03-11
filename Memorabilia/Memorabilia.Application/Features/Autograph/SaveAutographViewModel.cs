@@ -22,6 +22,7 @@ namespace Memorabilia.Application.Features.Autograph
             Cost = viewModel.Acquisition?.Cost;
             CreateDate = viewModel.CreateDate;
             EstimatedValue = viewModel.EstimatedValue;
+            FullName = viewModel.FullName ?? false;
             Grade = viewModel.Grade;
             Id = viewModel.Id;
             LastModifiedDate = viewModel.LastModifiedDate;
@@ -77,7 +78,9 @@ namespace Memorabilia.Application.Features.Autograph
 
         public bool DisplayThroughTheMailDetails => AcquisitionType == AcquisitionType.ThroughTheMail;
 
-        public decimal? EstimatedValue { get; set; }        
+        public decimal? EstimatedValue { get; set; }   
+        
+        public bool FullName { get; set; }
 
         public int? Grade { get; set; }
 

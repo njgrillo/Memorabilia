@@ -15,6 +15,7 @@ namespace Memorabilia.Domain.Entities
                          int conditionId,
                          decimal? cost,
                          decimal? estimatedValue,
+                         bool fullName,
                          int? grade,
                          int memorabiliaId,                         
                          string personalizationText,
@@ -26,7 +27,8 @@ namespace Memorabilia.Domain.Entities
         {
             ColorId = colorId;
             ConditionId = conditionId;
-            EstimatedValue = estimatedValue;    
+            EstimatedValue = estimatedValue;
+            FullName = fullName;
             Grade = grade;
             MemorabiliaId = memorabiliaId;
             PersonId = personId;
@@ -53,6 +55,8 @@ namespace Memorabilia.Domain.Entities
         public DateTime CreateDate { get; private set; }
 
         public decimal? EstimatedValue { get; private set; }
+
+        public bool? FullName { get; private set; }
 
         public int? Grade { get; private set; }
 
@@ -84,6 +88,7 @@ namespace Memorabilia.Domain.Entities
                         int conditionId,
                         decimal? cost,
                         decimal? estimatedValue,
+                        bool fullName,
                         int? grade,
                         string personalizationText,
                         int personId,
@@ -95,6 +100,7 @@ namespace Memorabilia.Domain.Entities
             ColorId = colorId;
             ConditionId = conditionId;
             EstimatedValue = estimatedValue;
+            FullName = fullName;
             Grade = grade;
             PersonId = personId;
             WritingInstrumentId = writingInstrumentId;
@@ -106,7 +112,8 @@ namespace Memorabilia.Domain.Entities
         }
 
         public void SetAuthentication(int id, 
-                                      int authenticationCompanyId, 
+                                      int authenticationCompanyId,
+                                      bool? hasCertificationCard,
                                       bool? hasHologram, 
                                       bool? hasLetter, 
                                       string verification,
@@ -116,11 +123,22 @@ namespace Memorabilia.Domain.Entities
 
             if (authentication == null)
             {
-                Authentications.Add(new AutographAuthentication(authenticationCompanyId, Id, hasHologram, hasLetter, verification, witnessed));
+                Authentications.Add(new AutographAuthentication(authenticationCompanyId, 
+                                                                Id, 
+                                                                hasCertificationCard, 
+                                                                hasHologram, 
+                                                                hasLetter, 
+                                                                verification, 
+                                                                witnessed));
                 return;
             }
 
-            authentication.Set(authenticationCompanyId, hasHologram, hasLetter, verification, witnessed);
+            authentication.Set(authenticationCompanyId, 
+                               hasCertificationCard, 
+                               hasHologram, 
+                               hasLetter, 
+                               verification, 
+                               witnessed);
         }
 
         public void SetImages(IEnumerable<string> filePaths, string primaryImageFilePath)

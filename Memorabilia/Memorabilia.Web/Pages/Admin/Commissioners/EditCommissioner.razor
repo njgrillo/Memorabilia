@@ -1,4 +1,5 @@
-﻿@page "/Commissioners/Edit/{id:int}"
+﻿@page "/Commissioners/Edit"
+@page "/Commissioners/Edit/{id:int}"
 
 @using Blazored.Typeahead
 @using Memorabilia.Application.Features.Admin
@@ -93,11 +94,14 @@ else
 
     protected override async Task OnInitializedAsync()
     {
+        await LoadPeople().ConfigureAwait(false);
+
+        if (Id == 0)
+            return;
+
         var query = new GetCommissioner.Query(Id);
 
-        _viewModel = new SaveCommissionerViewModel(await _queryRouter.Send(query).ConfigureAwait(false));
-        
-        await LoadPeople().ConfigureAwait(false);
+        _viewModel = new SaveCommissionerViewModel(await _queryRouter.Send(query).ConfigureAwait(false));   
     }
 
     private async Task LoadPeople()

@@ -1,4 +1,5 @@
-﻿@page "/SportLeagueLevels/Edit/{id:int}"
+﻿@page "/SportLeagueLevels/Edit"
+@page "/SportLeagueLevels/Edit/{id:int}"
 
 @using Memorabilia.Application.Features.Admin
 @using Memorabilia.Application.Features.Admin.SportLeagueLevel
@@ -83,6 +84,9 @@ else
 
     protected override async Task OnInitializedAsync()
     {
+        if (Id == 0)
+            return;
+
         var query = new GetSportLeagueLevel.Query(Id);
 
         _viewModel = new SaveSportLeagueLevelViewModel(await _queryRouter.Send(query).ConfigureAwait(false));

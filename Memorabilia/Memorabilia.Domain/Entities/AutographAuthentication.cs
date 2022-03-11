@@ -6,6 +6,7 @@
 
         public AutographAuthentication(int authenticationCompanyId, 
                                        int autographId, 
+                                       bool? hasCertificationCard,
                                        bool? hasHologram, 
                                        bool? hasLetter, 
                                        string verification,
@@ -13,6 +14,7 @@
         {
             AuthenticationCompanyId = authenticationCompanyId;
             AutographId = autographId;
+            HasCertificationCard = hasCertificationCard;
             HasHologram = hasHologram;
             HasLetter = hasLetter;
             Verification = verification;
@@ -23,6 +25,8 @@
 
         public int AutographId { get; private set; }
 
+        public bool? HasCertificationCard { get; private set; }
+
         public bool? HasHologram { get; private set; }
 
         public bool? HasLetter { get; private set; }
@@ -31,13 +35,15 @@
 
         public bool Witnessed { get; private set; }
 
-        public void Set(int authenticationCompanyId, 
+        public void Set(int authenticationCompanyId,
+                        bool? hasCertificationCard,
                         bool? hasHologram, 
                         bool? hasLetter, 
                         string verification,
                         bool witnessed)
         {
             AuthenticationCompanyId = authenticationCompanyId;
+            HasCertificationCard = hasCertificationCard;
             HasHologram = hasHologram;
             HasLetter = hasLetter;
             Verification = verification;

@@ -1,11 +1,3 @@
---.Include(memorabilia => memorabilia.Autographs)
---                                                                               .Include("Autographs.Acquisition")
---                                                                               .Include("Autographs.Authentications")
---                                                                               .Include("Autographs.Images")
---                                                                               .Include("Autographs.Inscriptions")
---                                                                               .Include("Autographs.Person")
---                                                                               .Include("Autographs.Spot")
-
 SELECT memorabilia.Id
      , memorabilia.ItemTypeId
 	 , memorabilia.ConditionId

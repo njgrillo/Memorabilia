@@ -25,6 +25,7 @@ namespace Memorabilia.Application.Features.Autograph.Authentication
                 {
                     autograph.SetAuthentication(authentication.Id,
                                                 authentication.AuthenticationCompanyId,
+                                                authentication.HasCertificationCard,
                                                 authentication.HasHologram,
                                                 authentication.HasLetter,
                                                 authentication.Verification,

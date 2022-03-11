@@ -71,11 +71,6 @@
 
     private async Task LoadFiles(InputFileChangeEventArgs e)
     {
-        var userId = await _localStorage.GetAsync<int>("UserId").ConfigureAwait(false);
-
-        if (userId.Value == 0)
-            _navigation.NavigateTo("Login");
-
         _files = e.GetMultipleFiles(MaximumAllowedFiles ?? 5);
 
         await Save().ConfigureAwait(false);

@@ -50,6 +50,8 @@ namespace Memorabilia.Application.Features.Autograph
 
         public string FormattedEstimatedValue => EstimatedValue?.ToString("c") ?? string.Empty;
 
+        public bool? FullName => _autograph.FullName;   
+
         public int? Grade => _autograph.Grade;    
 
         public int Id => _autograph.Id;

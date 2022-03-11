@@ -2716,6 +2716,7 @@ CREATE TABLE [dbo].[Autograph](
 	[ColorId] [int] NOT NULL,
 	[AcquisitionId] [int] NULL,
 	[EstimatedValue] decimal(12, 2) NULL,
+	[FullName] [bit] NULL,
 	[Grade] [int] NULL,
 	[CreateDate] [datetime] NOT NULL,
 	[LastModifiedDate] [datetime] NULL,
@@ -2755,7 +2756,7 @@ SET IDENTITY_INSERT [dbo].[Autograph] ON
 
 IF @KeepExistingValues = 1
 BEGIN
-	INSERT INTO [dbo].[Autograph] (Id, MemorabiliaId, PersonId, ConditionId, WritingInstrumentId, ColorId, AcquisitionId, EstimatedValue, Grade, CreateDate, LastModifiedDate)
+	INSERT INTO [dbo].[Autograph] (Id, MemorabiliaId, PersonId, ConditionId, WritingInstrumentId, ColorId, AcquisitionId, EstimatedValue, FullName, Grade, CreateDate, LastModifiedDate)
 	SELECT * 
 	FROM #TempAutographTable
 END
@@ -2769,6 +2770,7 @@ CREATE TABLE [dbo].[AutographAuthentication](
 	[AuthenticationCompanyId] [int] NOT NULL,
 	[Verification] [varchar](50) NULL,
 	[HasHologram] [bit] NULL,
+	[HasCertificationCard] [bit] NULL,
 	[HasLetter] [bit] NULL,
 	[Witnessed] [bit] NULL,
  CONSTRAINT [PK_AutographAuthentication] PRIMARY KEY CLUSTERED 
@@ -2789,7 +2791,7 @@ SET IDENTITY_INSERT [dbo].[AutographAuthentication] ON
 
 IF @KeepExistingValues = 1
 BEGIN
-	INSERT INTO [dbo].[AutographAuthentication] (Id, AutographId, AuthenticationCompanyId, Verification, HasHologram, HasLetter, Witnessed)
+	INSERT INTO [dbo].[AutographAuthentication] (Id, AutographId, AuthenticationCompanyId, Verification, HasHologram, HasCertificationCard, HasLetter, Witnessed)
 	SELECT * 
 	FROM #TempAutographAuthenticationTable
 END
