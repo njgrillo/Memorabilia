@@ -2666,7 +2666,7 @@ SET IDENTITY_INSERT [dbo].[Memorabilia] ON
 
 IF @KeepExistingValues = 1
 BEGIN
-	INSERT INTO [dbo].[Memorabilia] (Id, ItemTypeId, ConditionId, EstimatedValue, PrivacyTypeId, UserId, CreateDate, LastModifiedDate)
+	INSERT INTO [dbo].[Memorabilia] (Id, ItemTypeId, ConditionId, EstimatedValue, Grade, PrivacyTypeId, UserId, CreateDate, LastModifiedDate)
 	SELECT * 
 	FROM #TempMemorabiliaTable
 END

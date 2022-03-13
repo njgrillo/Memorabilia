@@ -12,9 +12,9 @@
 @inject QueryRouter _queryRouter
 @inject IToastService _toastService
 
-@if (_viewModel == null)
+@if (!_pageLoaded)
 {
-    <p><em>Loading...</em></p>
+    <_PageLoader />
 }
 else
 {
@@ -95,6 +95,7 @@ else
 
     private bool _continue { get; set; }
     private bool _displayFranchise { get; set; }
+    private bool _pageLoaded;
     private SportLeagueLevel _sportLeagueLevel;
     private SaveTeamViewModel _viewModel = new SaveTeamViewModel();
 
@@ -119,12 +120,14 @@ else
         {
             _displayFranchise = true;
             _sportLeagueLevel = SportLeagueLevel.MajorLeagueBaseball;
+            _pageLoaded = true;
             return;
         }
 
         var query = new GetTeam.Query(Id);
 
         _viewModel = new SaveTeamViewModel(await _queryRouter.Send(query).ConfigureAwait(false));
+        _pageLoaded = true;
     }
 
     private void OnChangeSportLeagueLevel(ChangeEventArgs args)

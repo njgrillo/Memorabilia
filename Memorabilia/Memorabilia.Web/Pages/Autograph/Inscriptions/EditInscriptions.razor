@@ -11,9 +11,9 @@
 @inject QueryRouter _queryRouter
 @inject IToastService _toastService
 
-@if (_viewModel == null)
+@if (!_pageLoaded)
 {
-    <p><em>Loading...</em></p>
+    <_PageLoader />
 }
 else
 {
@@ -24,32 +24,32 @@ else
     </div>
     <br />
     <div style="border: 1px solid black; margin-top: 2%; margin-bottom: 2%; margin-left: 2%; margin-right: 2%;">
-        <div class="row" style="margin-top: 2%; margin-bottom: 2%; margin-left: 1%; margin-right: 1%;">
-            <div class="col-lg-12" style="text-align: center">
-                <img src="@_inscriptionsViewModel.ImagePath" alt="Image" height="150" width="150" />
-            </div>            
-            <EditForm Model="_viewModel" OnValidSubmit="HandleValidSubmit">
-                <DataAnnotationsValidator />
-                <ValidationSummary />
+        <EditForm Model="_viewModel" OnValidSubmit="HandleValidSubmit">
+            <DataAnnotationsValidator />
+            <ValidationSummary />
+            <div style="margin-top: 2%; margin-bottom: 2%; margin-left: 1%; margin-right: 1%;">
+                <div class="col-lg-12" style="text-align: center">
+                    <img src="@_inscriptionsViewModel.ImagePath" alt="Image" height="150" width="150" />
+                </div>            
                 <div class="row">
-                    <div class="col-lg-12">
+                    <div class="col-lg-4">
                         <div class="form-group">
                             <label for="inscriptionType">Type</label>
                             <_InscriptionTypeDropDown @bind-Value="@_viewModel.InscriptionTypeId"
-                                                      @bind-Value:event="ValueChanged"
-                                                      Disabled="@(!_canEditInscriptionType)" /> 
+                                                       @bind-Value:event="ValueChanged"
+                                                       Disabled="@(!_canEditInscriptionType)" /> 
                         </div> 
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-lg-12">
+                    <div class="col-lg-4">
                         <div class="form-group">
                             <label for="inscriptionText">Inscription</label>
                             <InputText id="inscriptionText" class="form-control" @bind-Value="_viewModel.InscriptionText" />
                         </div> 
                     </div>
                 </div>     
-                <div class="text-right">
+                <div class="text-left">
                     <button type="button" class="btn btn-secondary" hidden="@(!_canAddInscription)" @onclick="AddInscription">Add</button>
                     <button type="button" class="btn btn-secondary" hidden="@(!_canUpdateInscription)" @onclick="UpdateInscription">Update</button>
                 </div>
@@ -86,13 +86,13 @@ else
                         </td>
                     </RowTemplate>
                 </_Table>
-                <div class="text-right">
+                <div class="text-left">
                     <button type="submit" class="btn btn-primary" @onclick="@(()=> _continue = true)">Save & Continue</button>
                     <button type="submit" class="btn btn-primary">Save & Exit</button>
                     <button type="button" class="btn btn-secondary" @onclick="@(_ => _navigation.NavigateTo("Memorabilia"))">Cancel</button>
                 </div>
-            </EditForm>
-        </div>
+            </div>            
+        </EditForm>        
     </div>
 }
 
@@ -104,7 +104,8 @@ else
     private bool _canEditInscriptionType = true;
     private bool _canUpdateInscription;
     private bool _continue;
-    private SaveInscriptionsViewModel _inscriptionsViewModel = new SaveInscriptionsViewModel();     
+    private SaveInscriptionsViewModel _inscriptionsViewModel = new SaveInscriptionsViewModel();   
+    private bool _pageLoaded;
     private SaveInscriptionViewModel _viewModel = new SaveInscriptionViewModel();
 
     protected async Task HandleValidSubmit()
@@ -139,6 +140,8 @@ else
 
         if (autograph.Inscriptions.Any())
             _inscriptionsViewModel = new SaveInscriptionsViewModel(autograph.Inscriptions);
+
+        _pageLoaded = true;
     } 
 
     private void AddInscription()

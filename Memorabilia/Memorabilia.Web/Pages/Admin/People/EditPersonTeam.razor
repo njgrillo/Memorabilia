@@ -10,9 +10,9 @@
 @inject QueryRouter _queryRouter
 @inject IToastService _toastService
 
-@if (_viewModel == null)
+@if (!_pageLoaded)
 {
-    <p><em>Loading...</em></p>
+    <_PageLoader />
 }
 else
 {
@@ -60,6 +60,7 @@ else
     public int PersonId { get; set; }
 
     private bool _continue;
+    private bool _pageLoaded;
     private SavePersonTeamViewModel _personTeamViewModel = new SavePersonTeamViewModel();
     private List<SavePersonTeamViewModel> _viewModel = new();
 
@@ -81,6 +82,9 @@ else
         var query = new GetPersonTeams.Query(PersonId);
 
         _viewModel = (await _queryRouter.Send(query)
-                                        .ConfigureAwait(false)).Select(personTeam => new SavePersonTeamViewModel(personTeam)).ToList();
+                                        .ConfigureAwait(false)).Select(personTeam => new SavePersonTeamViewModel(personTeam))
+                                                               .ToList();
+
+        _pageLoaded = true;
     }
 }

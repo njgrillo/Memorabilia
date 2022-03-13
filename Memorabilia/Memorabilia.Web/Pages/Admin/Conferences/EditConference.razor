@@ -11,9 +11,9 @@
 @inject QueryRouter _queryRouter
 @inject IToastService _toastService
 
-@if (_viewModel == null)
+@if (!_pageLoaded)
 {
-    <p><em>Loading...</em></p>
+    <_PageLoader />
 }
 else
 {
@@ -62,6 +62,7 @@ else
     [Parameter]
     public int Id { get; set; }
 
+    private bool _pageLoaded;
     private SaveConferenceViewModel _viewModel = new SaveConferenceViewModel();
 
     protected async Task HandleValidSubmit()
@@ -78,10 +79,14 @@ else
     protected override async Task OnInitializedAsync()
     {
         if (Id == 0)
+        {
+            _pageLoaded = true;
             return;
+        }
 
         var query = new GetConference.Query(Id);
 
         _viewModel = new SaveConferenceViewModel(await _queryRouter.Send(query).ConfigureAwait(false));
+        _pageLoaded = true;
     }
 }

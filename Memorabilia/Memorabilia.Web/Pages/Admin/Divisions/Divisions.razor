@@ -9,9 +9,9 @@
 @inject QueryRouter _queryRouter
 @inject IToastService _toastService
 
-@if (_viewModel == null)
+@if (!_pageLoaded)
 {
-    <p><em>Loading...</em></p>
+    <_PageLoader />
 }
 else
 {
@@ -73,6 +73,7 @@ else
 @code {
     private PopConfirm _deleteDialog;
     private int _deletedItemId;
+    private bool _pageLoaded;
     private DivisionsViewModel _viewModel;
 
     protected async Task Delete(bool confirm)
@@ -106,6 +107,7 @@ else
         var query = new GetDivisions.Query();
 
         _viewModel = await _queryRouter.Send(query).ConfigureAwait(false);
+        _pageLoaded = true;
     }
 
     protected void ShowConfirm(int id)

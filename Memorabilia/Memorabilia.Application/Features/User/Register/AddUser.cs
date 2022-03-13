@@ -22,13 +22,15 @@ namespace Memorabilia.Application.Features.User.Register
 
                 if (user != null)
                 {
-                    //user already exists
+                    //TODO: user already exists
                     return;
                 }
 
                 user = new Domain.Entities.User(command.Username, command.Password, command.EmailAddress, command.FirstName, command.LastName, command.Phone);
 
                 await _userRepository.Add(user).ConfigureAwait(false);
+
+                command.Id = user.Id;
             }
 
             //private static string EncodePassword(string password)
@@ -44,11 +46,14 @@ namespace Memorabilia.Application.Features.User.Register
             public Command(SaveUserViewModel viewModel)
             {
                 _viewModel = viewModel;
+                Id = viewModel.Id;
             }
 
             public string EmailAddress => _viewModel.EmailAddress;
 
             public string FirstName => _viewModel.FirstName;
+
+            public int Id { get; set; }
 
             public string LastName => _viewModel.LastName;
 

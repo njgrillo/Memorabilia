@@ -6,9 +6,9 @@
 @inject ProtectedLocalStorage _localStorage
 @inject NavigationManager _navigation
 
-@if (_viewModel == null)
+@if (!_pageLoaded)
 {
-    <p><em>Loading...</em></p>
+    <_PageLoader />
 }
 else
 {
@@ -58,9 +58,8 @@ else
 }
 
 @code {
+    private bool _pageLoaded;
     private SaveUserViewModel _viewModel = new SaveUserViewModel();
-
-    protected EditContext MyEditContext { get; set; }
 
     protected async Task HandleValidSubmit()
     {
@@ -68,13 +67,13 @@ else
 
         await _commandRouter.Send(command).ConfigureAwait(false);
 
-        //Set user id in local storage
+        await _localStorage.SetAsync("UserId", command.Id).ConfigureAwait(false);
 
         _navigation.NavigateTo("Home");
     }
 
     protected override void OnInitialized()
     {
-        MyEditContext = new EditContext(_viewModel);
+        _pageLoaded = true;
     }
 }

@@ -15,9 +15,9 @@
 @inject QueryRouter _queryRouter
 @inject IToastService _toastService
 
-@if (_viewModel == null)
+@if (!_pageLoaded)
 {
-    <p><em>Loading...</em></p>
+    <_PageLoader />
 }
 else
 {
@@ -96,6 +96,7 @@ else
     public int MemorabiliaId { get; set; }
 
     private bool _continue;
+    private bool _pageLoaded;
     private SaveBookViewModel _viewModel = new SaveBookViewModel();
 
     protected async Task HandleValidSubmit()
@@ -129,5 +130,6 @@ else
         var viewModel = await _queryRouter.Send(query).ConfigureAwait(false);   
 
         _viewModel = new SaveBookViewModel(viewModel);  
+        _pageLoaded = true;
     }  
 }

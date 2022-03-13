@@ -9,9 +9,9 @@
 @inject NavigationManager _navigation
 @inject QueryRouter _queryRouter
 
-@if (_viewModel == null)
+@if (!_pageLoaded)
 {
-    <p><em>Loading...</em></p>
+    <_PageLoader />
 }
 else
 {
@@ -25,6 +25,7 @@ else
     public int Id { get; set; }
 
     private EditModeType _editModeType;
+    private bool _pageLoaded;
     private SaveDomainViewModel _viewModel = new SaveDomainViewModel();    
 
     protected override async Task OnInitializedAsync()
@@ -32,11 +33,15 @@ else
         _editModeType = Id > 0 ? EditModeType.Update : EditModeType.Add;
 
         if (Id == 0)
+        {
+            _pageLoaded = true;
             return;
+        }
 
         var query = new GetBrand.Query(Id);
 
         _viewModel = new SaveDomainViewModel(await _queryRouter.Send(query).ConfigureAwait(false));
+        _pageLoaded = true;
     }
 
     protected async Task Save()

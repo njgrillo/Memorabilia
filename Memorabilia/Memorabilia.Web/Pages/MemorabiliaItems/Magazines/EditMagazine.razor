@@ -15,9 +15,9 @@
 @inject QueryRouter _queryRouter
 @inject IToastService _toastService
 
-@if (_viewModel == null)
+@if (!_pageLoaded)
 {
-    <p><em>Loading...</em></p>
+    <_PageLoader />
 }
 else
 {
@@ -98,6 +98,7 @@ else
     public int MemorabiliaId { get; set; }
 
     private bool _continue;
+    private bool _pageLoaded;
     private SaveMagazineViewModel _viewModel = new SaveMagazineViewModel();
 
     protected async Task HandleValidSubmit()
@@ -133,10 +134,12 @@ else
         if (MagazineViewModel.Brand == null)
         {
             SetDefaults();
+            _pageLoaded = true;
             return;
         }    
 
         _viewModel = new SaveMagazineViewModel(MagazineViewModel);  
+        _pageLoaded = true;
     }  
 
     private void SetDefaults()

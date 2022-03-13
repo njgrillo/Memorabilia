@@ -10,9 +10,9 @@
 @inject QueryRouter _queryRouter
 @inject IToastService _toastService
 
-@if (_viewModel == null)
+@if (!_pageLoaded)
 {
-    <p><em>Loading...</em></p>
+    <_PageLoader />
 }
 else
 {
@@ -26,6 +26,7 @@ else
     public int Id { get; set; }
 
     private EditModeType _editModeType;
+    private bool _pageLoaded;
     private SaveDomainViewModel _viewModel = new SaveDomainViewModel();   
 
     protected override async Task OnInitializedAsync()
@@ -40,10 +41,14 @@ else
         _editModeType = Id > 0 ? EditModeType.Update : EditModeType.Add;
 
         if (Id == 0)
+        {
+            _pageLoaded = true;
             return;
+        }
 
         var command = new SaveGameStyleType.Command(_viewModel);
 
         await _commandRouter.Send(command).ConfigureAwait(false);
+        _pageLoaded = true;
     }
 }

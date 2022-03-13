@@ -19,9 +19,9 @@
 @inject QueryRouter _queryRouter
 @inject IToastService _toastService
 
-@if (_viewModel == null)
+@if (!_pageLoaded)
 {
-    <p><em>Loading...</em></p>
+    <_PageLoader />
 }
 else
 {
@@ -142,6 +142,7 @@ else
 
     private bool _continue;
     private bool _displayNumbered;
+    private bool _pageLoaded;
     private SaveCardViewModel _viewModel = new SaveCardViewModel();
 
     protected async Task HandleValidSubmit()
@@ -177,11 +178,13 @@ else
         if (viewModel.Brand == null)
         {
             SetDefaults();
+            _pageLoaded = true;
             return;
         }
 
         _viewModel = new SaveCardViewModel(viewModel);
         _displayNumbered = _viewModel.IsNumbered;
+        _pageLoaded = true;
     }  
 
     private void NumberedCheckboxClicked(object isChecked)

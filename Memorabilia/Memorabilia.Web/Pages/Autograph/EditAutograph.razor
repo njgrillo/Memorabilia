@@ -17,9 +17,9 @@
 @inject QueryRouter _queryRouter
 @inject IToastService _toastService
 
-@if (_viewModel == null)
+@if (!_pageLoaded)
 {
-    <p><em>Loading...</em></p>
+    <_PageLoader /> 
 }
 else
 {
@@ -30,15 +30,15 @@ else
     </div>
     <br />
     <div style="border: 1px solid black; margin-top: 2%; margin-bottom: 2%; margin-left: 2%; margin-right: 2%;">
-        <div class="row" style="margin-top: 2%; margin-bottom: 2%; margin-left: 1%; margin-right: 1%;">
-            <div class="col-lg-12" style="text-align: center">
-                <img src="images/autographs.jpg" alt="Image" height="150" width="150" />
-            </div>            
-            <EditForm Model="_viewModel" OnValidSubmit="HandleValidSubmit">
-                <DataAnnotationsValidator />
-                <ValidationSummary />
+        <EditForm Model="_viewModel" OnValidSubmit="HandleValidSubmit">
+            <DataAnnotationsValidator />
+            <ValidationSummary />
+            <div style="margin-top: 2%; margin-bottom: 2%; margin-left: 1%; margin-right: 1%;">
+                <div class="col-lg-12" style="text-align: center">
+                    <img src="images/autographs.jpg" alt="Image" height="150" width="150" />
+                </div>            
                 <div class="row">
-                    <div class="col-lg-12">
+                    <div class="col-lg-6">
                         <div class="form-group">
                             <label for="person">Person</label>
                             <_Tooltip Text="Import from memorabilia item">
@@ -56,47 +56,15 @@ else
                     </div>                                       
                 </div>
                 <div class="row">
-                    <div class="col-lg-6">
-                        <div class="form-group">
-                            <label for="writingInstrument">Writing Instrument</label>
-                            <_WritingInstrumentDropDown @bind-Value="@_viewModel.WritingInstrumentId" 
-                                                        @bind-Value:event="ValueChanged" /> 
-                        </div>
-                    </div>                     
-                    <div class="col-lg-6">
-                        <div class="form-group">
-                            <label for="color">Color</label>
-                            <_ColorDropDown @bind-Value="@_viewModel.ColorId" 
-                                            @bind-Value:event="ValueChanged"
-                                            UseAutographColors="true" /> 
-                        </div>  
-                    </div>                    
-                </div>
-                <div class="row">
-                    <div class="col-lg-6">
-                        <div class="form-group">
-                            <label for="condition">Condition</label>
-                            <_ConditionDropDown @bind-Value="@_viewModel.ConditionId" 
-                                                @bind-Value:event="ValueChanged" /> 
-                        </div>
-                    </div>
-                    <div class="col-lg-6">
-                        <div class="form-group">
-                            <label for="grade">Grade</label>
-                            <InputNumber id="grade" class="form-control" @bind-Value="_viewModel.Grade" />
-                        </div>
-                    </div>                                  
-                </div>
-                <div class="row">
-                    <div class="col-lg-12">
+                    <div class="col-lg-3">
                         <div class="form-group">                              
                             <InputCheckbox id="fullName" @bind-Value="@_viewModel.FullName" />  
                             <label for="fullName">Is Full Name</label>
                         </div> 
-                    </div>                                       
-                </div> 
+                    </div> 
+                </div>
                 <div class="row">
-                    <div class="col-lg-12">
+                    <div class="col-lg-3">
                         <div class="form-group">
                             <input type="checkbox" 
                                    checked="@_viewModel.IsPersonalized" 
@@ -112,12 +80,27 @@ else
                                 </div>
                             </div>                    
                         </div> 
-                    </div>                                       
-                </div> 
-                @if (_viewModel.DisplayAcquisitionDetails)
-                {
-                    <div class="row">                    
-                        <div class="col-lg-12">
+                    </div> 
+                </div>
+                <div class="row">
+                    <div class="col-lg-3">
+                        <div class="form-group">
+                            <label for="writingInstrument">Writing Instrument</label>
+                            <_WritingInstrumentDropDown @bind-Value="@_viewModel.WritingInstrumentId" 
+                                                        @bind-Value:event="ValueChanged" /> 
+                        </div>
+                    </div>                     
+                    <div class="col-lg-3">
+                        <div class="form-group">
+                            <label for="color">Color</label>
+                            <_ColorDropDown @bind-Value="@_viewModel.ColorId" 
+                                            @bind-Value:event="ValueChanged"
+                                            UseAutographColors="true" /> 
+                        </div>  
+                    </div>   
+                    @if (_viewModel.DisplayAcquisitionDetails)
+                    {
+                        <div class="col-lg-3">
                             <div class="form-group">
                                 <input type="checkbox" 
                                        checked="@_viewModel.IsEstimatedValueFromMemorabilia" 
@@ -125,17 +108,7 @@ else
                                 <label for="estimatedValue">Estimated Value same as Memorabilia</label>                                               
                             </div> 
                         </div>
-                    </div> 
-                    <div class="row" hidden="@(!_displayEstimatedValue)">
-                        <div class="col-lg-6">
-                            <div class="form-group">
-                                <label for="estimatedValue">Estimated Value ($)</label>
-                                <InputNumber id="estimatedValue" class="form-control" @bind-Value="_viewModel.EstimatedValue" />
-                            </div>
-                        </div>
-                    </div>  
-                    <div class="row">                    
-                        <div class="col-lg-12">
+                        <div class="col-lg-3">
                             <div class="form-group">
                                 <input type="checkbox" 
                                        checked="@_viewModel.IsAcquisitionFromMemorabilia"  
@@ -143,65 +116,121 @@ else
                                 <label for="person">Acquisition Details same as Memorabilia</label>                                               
                             </div> 
                         </div>
-                    </div>                          
-                    <div hidden="@(!_displayAcquisitionDetails)">
-                        <div class="row">  
-                            <div class="col-lg-6">
-                                <div class="form-group">
-                                    <label for="acquisitionType">Acquisition Type</label>
-                                    <_Tooltip Text="Import from memorabilia item">
-                                        <img class="can-click" src="images/import.jpg" alt="Image" height="20" width="20" @onclick="OnImportAcquisitionClick" />
-                                    </_Tooltip>
-                                    <_AcquisitionTypeDropDown @bind-Value="@_viewModel.AcquisitionTypeId" 
-                                                              @bind-Value:event="ValueChanged"
-                                                              IsAutograph="true" /> 
-                                </div>
-                            </div>  
-                            <div class="col-lg-6">
-                                <div class="form-group">
-                                    <label for="acquiredDate">Acquired Date</label>
-                                    <InputDate id="acquiredDate" class="form-control" @bind-Value="_viewModel.AcquiredDate" />
-                                </div>
-                            </div>                    
+                    }                    
+                </div>
+                <div class="row">
+                    <div class="col-lg-3">
+                        <div class="form-group">
+                            <label for="condition">Condition</label>
+                            <_ConditionDropDown @bind-Value="@_viewModel.ConditionId" 
+                                                @bind-Value:event="ValueChanged" /> 
                         </div>
-                        <div class="row"  hidden="@(!_viewModel.DisplayThroughTheMailDetails)">
-                            <div class="col-lg-6">
-                                <div class="form-group">
-                                    <label for="sentDate">Sent</label>
-                                    <InputDate id="sentDate" class="form-control" @bind-Value="_viewModel.SentDate" />
-                                </div>
-                            </div> 
-                            <div class="col-lg-6">
-                                <div class="form-group">
-                                    <label for="receivedDate">Received</label>
-                                    <InputDate id="receivedDate" class="form-control" @bind-Value="_viewModel.ReceivedDate" />
-                                </div>
-                            </div> 
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="form-group">
+                            <label for="grade">Grade</label>
+                            <InputNumber id="grade" class="form-control" @bind-Value="_viewModel.Grade" />
                         </div>
-                        <div class="row">
-                            <div class="col-lg-6">
-                                <div class="form-group" hidden="@(!_viewModel.CanHaveCost)">
-                                    <label for="cost">Cost ($)</label>
-                                    <InputNumber id="cost" class="form-control" @bind-Value="_viewModel.Cost" />
-                                </div>
-                            </div> 
-                            <div class="col-lg-6">
-                                <div class="form-group" hidden="@(!_viewModel.CanHavePlaceOfPurchase)">
-                                    <label for="purchaseType">Place of Purchase</label>
-                                    <_PurchaseTypeDropDown @bind-Value="@_viewModel.PurchaseTypeId" 
-                                                           @bind-Value:event="ValueChanged" /> 
-                                </div>
-                            </div> 
+                    </div>  
+                    @if (_viewModel.DisplayAcquisitionDetails)
+                    {
+                        <div class="col-lg-3" hidden="@(!_displayEstimatedValue)">
+                            <div class="form-group">
+                                <label for="estimatedValue">Estimated Value ($)</label>
+                                <InputNumber id="estimatedValue" class="form-control" @bind-Value="_viewModel.EstimatedValue" />
+                            </div>
                         </div>
-                    </div>      
-                }                               
-                <div class="text-right">
+                        <div class="col-lg-3" hidden="@(!_displayAcquisitionDetails)">
+                            <div class="form-group">
+                                <label for="acquisitionType">Acquisition Type</label>
+                                <_Tooltip Text="Import from memorabilia item">
+                                    <img class="can-click" src="images/import.jpg" alt="Image" height="20" width="20" @onclick="OnImportAcquisitionClick" />
+                                </_Tooltip>
+                                <_AcquisitionTypeDropDown @bind-Value="@_viewModel.AcquisitionTypeId" 
+                                                          @bind-Value:event="ValueChanged"
+                                                          IsAutograph="true" /> 
+                            </div>
+                        </div> 
+                    }
+                </div>
+                <div class="row">
+                    <div class="col-lg-3" />
+                    <div class="col-lg-3" />
+                    <div class="col-lg-3" />
+                    @if (_viewModel.DisplayAcquisitionDetails && _displayAcquisitionDetails)
+                    {
+                        <div class="col-lg-3">
+                            <div class="form-group">
+                                <label for="acquiredDate">Acquired Date</label>
+                                <InputDate id="acquiredDate" class="form-control" @bind-Value="_viewModel.AcquiredDate" />
+                            </div>
+                        </div> 
+                    }
+                </div>
+                <div class="row">
+                    <div class="col-lg-3" />  
+                    <div class="col-lg-3" />
+                    <div class="col-lg-3" />
+                    @if (_viewModel.DisplayAcquisitionDetails && _displayAcquisitionDetails)
+                    {
+                        <div class="col-lg-3">
+                            <div class="form-group" hidden="@(!_viewModel.CanHaveCost)">
+                                <label for="cost">Cost ($)</label>
+                                <InputNumber id="cost" class="form-control" @bind-Value="_viewModel.Cost" />
+                            </div>
+                        </div> 
+                    }
+                </div> 
+                <div class="row">
+                    <div class="col-lg-3" />
+                    <div class="col-lg-3" />                                   
+                    <div class="col-lg-3" />   
+                    @if (_viewModel.DisplayAcquisitionDetails && _displayAcquisitionDetails)
+                    {
+                       <div class="col-lg-3">
+                           <div class="form-group" hidden="@(!_viewModel.CanHavePlaceOfPurchase)">
+                               <label for="purchaseType">Place of Purchase</label>
+                               <_PurchaseTypeDropDown @bind-Value="@_viewModel.PurchaseTypeId" 
+                                                      @bind-Value:event="ValueChanged" /> 
+                           </div>
+                       </div>  
+                    }
+                </div> 
+                <div class="row">
+                    <div class="col-lg-3" />
+                    <div class="col-lg-3" />                                   
+                    <div class="col-lg-3" />   
+                    @if (_viewModel.DisplayAcquisitionDetails && _viewModel.DisplayThroughTheMailDetails)
+                    {
+                       <div class="col-lg-3">
+                           <div class="form-group">
+                               <label for="sentDate">Sent</label>
+                               <InputDate id="sentDate" class="form-control" @bind-Value="_viewModel.SentDate" />
+                           </div>
+                       </div>  
+                    }
+                </div> 
+                <div class="row">
+                    <div class="col-lg-3" />
+                    <div class="col-lg-3" />                                   
+                    <div class="col-lg-3" />   
+                    @if (_viewModel.DisplayAcquisitionDetails && _viewModel.DisplayThroughTheMailDetails)
+                    {
+                       <div class="col-lg-3">
+                           <div class="form-group">
+                               <label for="receivedDate">Received</label>
+                               <InputDate id="receivedDate" class="form-control" @bind-Value="_viewModel.ReceivedDate" />
+                           </div>
+                       </div> 
+                    }
+                </div>                               
+                <div class="text-left">
                     <button type="submit" class="btn btn-primary" @onclick="@(()=> _continue = true)">Save & Continue</button>
                     <button type="submit" class="btn btn-primary">Save & Exit</button>
                     <button type="button" class="btn btn-secondary" @onclick="@(_ => _navigation.NavigateTo("Memorabilia"))">Cancel</button>
                 </div>
-            </EditForm>
-        </div>
+            </div>            
+        </EditForm>        
     </div>
 }
 
@@ -218,6 +247,7 @@ else
     private bool _displayPersonalization;
     private bool _displayPersonImport;
     private int _itemTypeId; 
+    private bool _pageLoaded;
     private SaveAutographViewModel _viewModel = new SaveAutographViewModel();
 
     protected async Task HandleValidSubmit()
@@ -254,6 +284,7 @@ else
             {
                 _viewModel = new SaveAutographViewModel(viewModel);
                 SetDefaults();
+                _pageLoaded = true;
                 return;
             }
 
@@ -263,7 +294,9 @@ else
         {
             _viewModel = new SaveAutographViewModel(viewModel);
             SetDefaults();
-        }  
+        }
+
+        _pageLoaded = true;
     }
 
     private void AcquisitionDetailsCheckboxClicked(object isChecked)

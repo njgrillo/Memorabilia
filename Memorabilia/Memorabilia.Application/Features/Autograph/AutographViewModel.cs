@@ -22,6 +22,8 @@ namespace Memorabilia.Application.Features.Autograph
 
         public DateTime? AcquisitionDate => Acquisition?.AcquiredDate;
 
+        public int AcquisitionTypeId => Acquisition?.AcquisitionTypeId ?? 0;
+
         public string AcquisitionTypeName => AcquisitionType.Find(Acquisition?.AcquisitionTypeId ?? 0)?.Name;
 
         public string AuthenticationIconPath => Authentications.Any() ? "images/check.png" : "images/none.png";
@@ -37,6 +39,8 @@ namespace Memorabilia.Application.Features.Autograph
         public int ConditionId => _autograph.ConditionId;
 
         public string ConditionName => Condition.Find(_autograph.ConditionId)?.Name;
+
+        public decimal? Cost => Acquisition?.Cost;  
 
         public DateTime CreateDate => _autograph.CreateDate;
 
@@ -111,6 +115,8 @@ namespace Memorabilia.Application.Features.Autograph
         public DateTime? ReceivedDate => _autograph.ThroughTheMail?.ReceivedDate;
 
         public DateTime? SentDate => _autograph.ThroughTheMail?.SentDate;
+
+        public int? SpotId => _autograph?.Spot?.SpotId;
 
         public string UserFirstName => _autograph.Memorabilia.User.FirstName;
 

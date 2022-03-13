@@ -14,9 +14,9 @@
 @inject QueryRouter _queryRouter
 @inject IToastService _toastService
 
-@if (_viewModel == null)
+@if (!_pageLoaded)
 {
-    <p><em>Loading...</em></p>
+    <_PageLoader />
 }
 else
 {
@@ -78,6 +78,7 @@ else
     [Parameter]
     public int Id { get; set; }
 
+    private bool _pageLoaded;
     private IEnumerable<PersonViewModel> _people = Enumerable.Empty<PersonViewModel>();
     private SaveCommissionerViewModel _viewModel = new SaveCommissionerViewModel();
 
@@ -97,11 +98,15 @@ else
         await LoadPeople().ConfigureAwait(false);
 
         if (Id == 0)
+        {
+            _pageLoaded = true;
             return;
+        }
 
         var query = new GetCommissioner.Query(Id);
 
         _viewModel = new SaveCommissionerViewModel(await _queryRouter.Send(query).ConfigureAwait(false));   
+        _pageLoaded = true;
     }
 
     private async Task LoadPeople()

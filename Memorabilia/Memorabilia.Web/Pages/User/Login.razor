@@ -7,9 +7,9 @@
 @inject ProtectedLocalStorage _localStorage
 @inject QueryRouter _queryRouter
 
-@if (_viewModel == null)
+@if (!_pageLoaded)
 {
-    <p><em>Loading...</em></p>
+    <_PageLoader />
 }
 else
 {
@@ -55,6 +55,7 @@ else
 }
 
 @code {
+    private bool _pageLoaded;
     private LoginUserViewModel _viewModel = new LoginUserViewModel();
 
     protected async Task HandleValidSubmit()
@@ -64,7 +65,7 @@ else
 
         if (!viewModel.IsValid || viewModel.Id == 0)
         {
-            //Didn't find user
+            //TODO: Didn't find user
 
             return;
         }
@@ -80,5 +81,7 @@ else
 
         if (userId.Value > 0)
             _navigation.NavigateTo("Home");
+
+        _pageLoaded = true;
     }
 }

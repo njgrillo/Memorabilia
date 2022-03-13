@@ -8,9 +8,9 @@
 @inject NavigationManager _navigation
 @inject QueryRouter _queryRouter
 
-@if (_viewModel == null)
+@if (!_pageLoaded)
 {
-    <p><em>Loading...</em></p>
+    <_PageLoader />
 }
 else
 {
@@ -24,6 +24,7 @@ else
 @code {
     private PopConfirm _deleteDialog;
     private int _deletedItemId;
+    private bool _pageLoaded;
     private GloveTypesViewModel _viewModel;
 
     protected async Task Delete(SaveDomainViewModel viewModel)
@@ -43,5 +44,6 @@ else
         var query = new GetGloveTypes.Query();
 
         _viewModel = await _queryRouter.Send(query).ConfigureAwait(false);
+         _pageLoaded = true;
     }
 }

@@ -27,6 +27,8 @@ namespace Memorabilia.Application.Features.Memorabilia
 
         public string AutographDisplayCount => $"{AutographsCount} Autograph(s)";
 
+        public int? BrandId => _memorabilia.Brand?.BrandId;
+
         public int? ConditionId => _memorabilia.ConditionId;
 
         public string ConditionName => _memorabilia.Condition?.Name;
@@ -42,6 +44,10 @@ namespace Memorabilia.Application.Features.Memorabilia
         public string FormattedTotalCost => ((Acquisition?.Cost ?? 0) + _memorabilia.Autographs.Sum(autograph => autograph.Acquisition?.Cost ?? 0)).ToString("c");
 
         public string FormattedTotalValue => ((EstimatedValue ?? 0) + _memorabilia.Autographs.Sum(autograph => autograph.EstimatedValue ?? 0)).ToString("c");
+
+        public IEnumerable<Franchise> Franchises => Teams.Select(team => team.Team.Franchise);
+
+        public int? GameStyleTypeId => _memorabilia.Game?.GameStyleTypeId;
 
         public bool HasAutographs => _memorabilia.Autographs.Any();
 
@@ -73,6 +79,8 @@ namespace Memorabilia.Application.Features.Memorabilia
 
         public DateTime? LastModifiedDate => _memorabilia.LastModifiedDate;
 
+        public int? LevelTypeId => _memorabilia?.LevelType?.Id;
+
         public IEnumerable<MemorabiliaPerson> People => _memorabilia.People;
 
         public int? PrimaryAutographId => _memorabilia.Autographs.FirstOrDefault()?.Id;
@@ -90,6 +98,14 @@ namespace Memorabilia.Application.Features.Memorabilia
         public int? PurchaseTypeId => _memorabilia.MemorabiliaAcquisition.Acquisition.PurchaseTypeId;
 
         public string PurchaseTypeName => Domain.Constants.PurchaseType.Find(_memorabilia.MemorabiliaAcquisition.Acquisition.PurchaseTypeId ?? 0)?.Name;
+
+        public int? SizeId => _memorabilia.Size?.SizeId;        
+
+        public IEnumerable<SportLeagueLevel> SportLeagueLevels => Franchises.Select(franchise => franchise.SportLeagueLevel);
+
+        public IEnumerable<MemorabiliaSport> Sports => _memorabilia.Sports;
+
+        public IEnumerable<MemorabiliaTeam> Teams => _memorabilia.Teams;        
 
         public string UserFirstName => _memorabilia.User.FirstName;
 

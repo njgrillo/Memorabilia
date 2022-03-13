@@ -8,9 +8,9 @@
 @inject NavigationManager _navigation
 @inject QueryRouter _queryRouter
 
-@if (_viewModel == null)
+@if (!_pageLoaded)
 {
-    <p><em>Loading...</em></p>
+    <_PageLoader />
 }
 else
 {
@@ -22,6 +22,7 @@ else
 }
 
 @code {
+    private bool _pageLoaded;
     private PhotoTypesViewModel _viewModel;
 
     protected async Task Delete(SaveDomainViewModel viewModel)
@@ -41,5 +42,6 @@ else
         var query = new GetPhotoTypes.Query();
 
         _viewModel = await _queryRouter.Send(query).ConfigureAwait(false);
+        _pageLoaded = true;
     }
 }

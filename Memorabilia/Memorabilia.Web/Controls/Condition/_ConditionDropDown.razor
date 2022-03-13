@@ -21,7 +21,8 @@
 
     protected override Task OnInitializedAsync()
     {
-        Value = InitialValue?.Id ?? Condition.Pristine.Id;            
+        if (InitialValue?.Id > 0)
+            Value = InitialValue.Id;            
 
         return base.OnInitializedAsync();
     }

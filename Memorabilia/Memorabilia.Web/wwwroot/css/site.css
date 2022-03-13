@@ -30,6 +30,29 @@ a, .btn-link {
     outline: 1px solid red;
 }
 
+.spinnerDiv {
+    position: fixed;
+    text-align: center;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    right: 0;
+    left: 0;
+    z-index: 9999999;
+    background-color: #000000;
+    opacity: 0.66;
+}
+
+.spinnerImage {
+    padding: 10px;
+    position: fixed;
+    top: 45%;
+    left: 44.5%;
+    opacity: 1.0;
+    height: 150px;
+    width: 150px;
+}
+
 .validation-message {
     color: red;
 }

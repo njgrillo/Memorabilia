@@ -10,9 +10,9 @@
 @inject QueryRouter _queryRouter
 @inject IToastService _toastService
 
-@if (_viewModel == null)
+@if (!_pageLoaded)
 {
-    <p><em>Loading...</em></p>
+    <_PageLoader />
 }
 else
 {
@@ -56,6 +56,7 @@ else
     [Parameter]
     public int Id { get; set; }
 
+    private bool _pageLoaded;
     private SaveSportViewModel _viewModel = new SaveSportViewModel();
 
     protected async Task HandleValidSubmit()
@@ -72,11 +73,15 @@ else
     protected override async Task OnInitializedAsync()
     {
         if (Id == 0)
+        {
+            _pageLoaded = true;
             return;
+        }
 
         var query = new GetSport.Query(Id);
 
         _viewModel = new SaveSportViewModel(await _queryRouter.Send(query).ConfigureAwait(false));
+        _pageLoaded = true;
     }
 }
 

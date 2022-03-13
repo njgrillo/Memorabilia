@@ -3,6 +3,7 @@
 @using Memorabilia.Application.Features.Autograph
 @using Memorabilia.Application.Features.Memorabilia
 @using Memorabilia.Web.Controls
+@using Memorabilia.Web.Controls.MemorabiliaItem
 @using System 
 @using System.IO
 
@@ -12,9 +13,9 @@
 @inject QueryRouter _queryRouter
 @inject IToastService _toastService
 
-@if (_viewModel == null)
+@if (!_pageLoaded)
 {
-    <p><em>Loading...</em></p>
+    <_PageLoader />  
 }
 else
 {
@@ -30,6 +31,8 @@ else
         </div>
     </div>
     <br />
+    <_SearchMemorabilia Items="_initialItems"
+                        ResultsChanged="OnFilter" />
     <_Table HasChildItems="true"
             Items="_viewModel.MemorabiliaItems" 
             ItemsPerPage="25"   
@@ -224,9 +227,7 @@ else
     </_Table>    
     <div class="row">
         <div class="col-md-12" style="text-align: center">
-            <div class="col-md-12" style="text-align: center">
-                <a href="Memorabilia/Edit">Add Memorabilia</a>
-            </div>
+            <a href="Memorabilia/Edit">Add Memorabilia</a>
         </div>
     </div>
     <br />
@@ -237,6 +238,8 @@ else
     private int _deletedAutographItemId;
     private PopConfirm _deleteMemorabiliaItemDialog;
     private int _deletedMemorabiliaItemId;
+    private List<MemorabiliaItemViewModel> _initialItems;
+    private bool _pageLoaded;
     private MemorabiliaItemsViewModel _viewModel;
 
     protected async Task DeleteAutographItem(bool confirm)
@@ -285,6 +288,11 @@ else
         _toastService.ShowSuccess($"{itemToDelete.ItemTypeName} was deleted successfully!", _viewModel.PageTitle);
     }    
 
+    protected void OnFilter(List<MemorabiliaItemViewModel> items)
+    {
+        _viewModel.MemorabiliaItems = items;
+    }
+
     protected override async Task OnInitializedAsync()
     {
         var userId = await _localStorage.GetAsync<int>("UserId").ConfigureAwait(false);
@@ -295,6 +303,9 @@ else
         var query = new GetMemorabiliaItems.Query(userId.Value);
 
         _viewModel = await _queryRouter.Send(query).ConfigureAwait(false);
+
+        _initialItems = _viewModel.MemorabiliaItems;
+        _pageLoaded = true;
     }
 
     protected void ShowConfirmAutographItem(int id)
