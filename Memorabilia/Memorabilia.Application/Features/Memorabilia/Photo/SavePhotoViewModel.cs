@@ -39,6 +39,8 @@ namespace Memorabilia.Application.Features.Memorabilia.Photo
 
         public bool HasTeam => Teams.Any();
 
+        public string ImagePath => "images/phototypes.jpg";
+
         public ItemType ItemType => ItemType.Photo;       
         
         public bool Matted { get; set; }

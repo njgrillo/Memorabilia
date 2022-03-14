@@ -4,115 +4,87 @@
 @using Memorabilia.Application.Features.Admin.Division
 
 @inject CommandRouter _commandRouter
-@inject ProtectedLocalStorage _localStorage
 @inject NavigationManager _navigation
 @inject QueryRouter _queryRouter
 @inject IToastService _toastService
 
-@if (!_pageLoaded)
-{
-    <_PageLoader />
-}
-else
-{
-    <PopConfirm @ref="_deleteDialog"
-                Title="Delete Division"
-                ConfirmedChanged="Delete" />
-    <div class="row">
-        <div class="col-md-12" style="text-align: center">
-            <h1>@_viewModel.PageTitle</h1>
-        </div>
-    </div>
-    <br />
-    <_Table Items="_viewModel.Divisions" 
-            ItemsPerPage="10"                     
-            TItem="DivisionViewModel">
-        <HeaderTemplate>
-            <th scope="col">Conference</th>
-            <th scope="col">League</th>
-            <th scope="col">Name</th>
-            <th scope="col">Abbreviation</th>
-            <th scope="col"></th>
-            <th scope="col"></th>
-        </HeaderTemplate>
-        <RowTemplate>
-            <td>@context.ConferenceName</td>
-            <td>@context.LeagueName</td>
-            <td>@context.Name</td>
-            <td>@context.Abbreviation</td>
-            <td>
-                <_Tooltip Text="Edit">
-                    <img class="can-click" 
-                            src="images/pencil.png" 
-                            height="25" 
-                            width="25" 
-                            @onclick="@(_ => _navigation.NavigateTo($"{_viewModel.RoutePrefix}/Edit/{context.Id}"))" />
-                </_Tooltip>                        
-            </td>
-            <td>
-                <_Tooltip Text="Delete">
-                    <img class="can-click" 
-                            src="images/trash.png" 
-                            height="25" 
-                            width="25" 
-                            @onclick="@(_ => ShowConfirm(context.Id))" />
-                </_Tooltip>
-            </td>
-        </RowTemplate>
-    </_Table>
-    <div class="row">
-        <div class="col-md-12" style="text-align: center">
+<_Page @ref="_page" 
+       ConfirmationTitle="Delete Division" 
+       OnConfirm="Delete" 
+       OnLoad="OnLoad">
+    <Content>
+        <div class="row">
             <div class="col-md-12" style="text-align: center">
-                <a href="Divisions/Edit">Add @_viewModel.ItemTitle</a>
+                <h1>@_viewModel.PageTitle</h1>
             </div>
         </div>
-    </div>
-    <br />
-}
+        <br />
+        <_Table Items="_viewModel.Divisions" 
+                ItemsPerPage="10"                     
+                TItem="DivisionViewModel">
+            <HeaderTemplate>
+                <th scope="col">Conference</th>
+                <th scope="col">League</th>
+                <th scope="col">Name</th>
+                <th scope="col">Abbreviation</th>
+                <th scope="col"></th>
+                <th scope="col"></th>
+            </HeaderTemplate>
+            <RowTemplate>
+                <td>@context.ConferenceName</td>
+                <td>@context.LeagueName</td>
+                <td>@context.Name</td>
+                <td>@context.Abbreviation</td>
+                <td>
+                    <_Tooltip Text="Edit">
+                        <img class="can-click" 
+                                src="images/pencil.png" 
+                                height="25" 
+                                width="25" 
+                                @onclick="@(_ => _navigation.NavigateTo($"{_viewModel.RoutePrefix}/Edit/{context.Id}"))" />
+                    </_Tooltip>                        
+                </td>
+                <td>
+                    <_Tooltip Text="Delete">
+                        <img class="can-click" 
+                                src="images/trash.png" 
+                                height="25" 
+                                width="25" 
+                                @onclick="@(_ => _page.ShowConfirm(context.Id))" />
+                    </_Tooltip>
+                </td>
+            </RowTemplate>
+        </_Table>
+        <div class="row">
+            <div class="col-md-12" style="text-align: center">
+                <div class="col-md-12" style="text-align: center">
+                    <a href="Divisions/Edit">Add @_viewModel.ItemTitle</a>
+                </div>
+            </div>
+        </div>
+        <br />
+    </Content>
+</_Page>
 
 @code {
-    private PopConfirm _deleteDialog;
-    private int _deletedItemId;
-    private bool _pageLoaded;
+    private _Page _page;
     private DivisionsViewModel _viewModel;
 
-    protected async Task Delete(bool confirm)
+    protected async Task Delete(int id)
     {
-        if (!confirm)
-        {
-            _deletedItemId = 0;
-            return;
-        }
-
-        var deletedItem = _viewModel.Divisions.Single(Division => Division.Id == _deletedItemId);
+        var deletedItem = _viewModel.Divisions.Single(Division => Division.Id == id);
         var viewModel = new SaveDivisionViewModel(deletedItem);
         viewModel.IsDeleted = true;
 
-        var command = new SaveDivision.Command(viewModel);
-
-        await _commandRouter.Send(command).ConfigureAwait(false);
+        await _commandRouter.Send(new SaveDivision.Command(viewModel)).ConfigureAwait(false);
         
         _viewModel.Divisions.Remove(deletedItem);
 
         _toastService.ShowSuccess($"{_viewModel.ItemTitle} was deleted successfully!", _viewModel.PageTitle);
     }
 
-    protected override async Task OnInitializedAsync()
+    protected async Task OnLoad()
     {
-        var userId = await _localStorage.GetAsync<int>("UserId");
-
-        if (userId.Value == 0)
-            _navigation.NavigateTo("Login");
-
-        var query = new GetDivisions.Query();
-
-        _viewModel = await _queryRouter.Send(query).ConfigureAwait(false);
-        _pageLoaded = true;
-    }
-
-    protected void ShowConfirm(int id)
-    {
-        _deletedItemId = id;
-        _deleteDialog.ShowPop();
+        _viewModel = await _queryRouter.Send(new GetDivisions.Query()).ConfigureAwait(false);
     }
 }

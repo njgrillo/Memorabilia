@@ -18,12 +18,16 @@ namespace Memorabilia.Application.Features.Admin.League
         [StringLength(10, ErrorMessage = "Abbreviation is too long.")]
         public string Abbreviation { get; set; }
 
+        public override string ItemTitle => "League";
+
         [Required]
         [StringLength(100, ErrorMessage = "Name is too long.")]
         [MinLength(1, ErrorMessage = "Name is too short.")]
         public string Name { get; set; }
 
         public override string PageTitle => $"{(Id > 0 ? "Edit" : "Add")} League";
+
+        public override string RoutePrefix => "Leagues";
 
         [Required]
         [Range(1, int.MaxValue, ErrorMessage = "Sport League Level is required.")]

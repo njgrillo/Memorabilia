@@ -46,6 +46,8 @@ namespace Memorabilia.Application.Features.Memorabilia.Glove
 
         public bool HasTeam => Teams.Any();
 
+        public string ImagePath => string.Empty;
+
         public ItemType ItemType => ItemType.Glove;
 
         [Required]

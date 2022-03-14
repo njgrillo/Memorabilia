@@ -40,6 +40,8 @@ namespace Memorabilia.Application.Features.Memorabilia.Figure
 
         public bool HasTeam => Teams.Any();
 
+        public string ImagePath => string.Empty;
+
         public ItemType ItemType => ItemType.Figure;
 
         [Required]

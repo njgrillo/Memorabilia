@@ -4,111 +4,83 @@
 @using Memorabilia.Application.Features.Admin.ItemTypeSpot
 
 @inject CommandRouter _commandRouter
-@inject ProtectedLocalStorage _localStorage
 @inject NavigationManager _navigation
 @inject QueryRouter _queryRouter
 @inject IToastService _toastService
 
-@if (!_pageLoaded)
-{
-    <_PageLoader />
-}
-else
-{
-    <PopConfirm @ref="_deleteDialog"
-                Title="Delete ItemTypeSpot"
-                ConfirmedChanged="Delete" />
-    <div class="row">
-        <div class="col-md-12" style="text-align: center">
-            <h1>@_viewModel.PageTitle</h1>
-        </div>
-    </div>
-    <br />
-    <_Table Items="_viewModel.ItemTypeSpots" 
-            ItemsPerPage="10"                     
-            TItem="ItemTypeSpotViewModel">
-        <HeaderTemplate>
-            <th scope="col">Item Type</th>
-            <th scope="col">Spot</th>
-            <th scope="col"></th>
-            <th scope="col"></th>
-        </HeaderTemplate>
-        <RowTemplate>
-            <td>@context.ItemTypeName</td>
-            <td>@context.SpotName</td>
-            <td>
-                <_Tooltip Text="Edit">
-                    <img class="can-click" 
-                            src="images/pencil.png" 
-                            height="25" 
-                            width="25" 
-                            @onclick="@(_ => _navigation.NavigateTo($"{_viewModel.RoutePrefix}/Edit/{context.Id}"))" />
-                </_Tooltip>                        
-            </td>
-            <td>
-                <_Tooltip Text="Delete">
-                    <img class="can-click" 
-                            src="images/trash.png" 
-                            height="25" 
-                            width="25" 
-                            @onclick="@(_ => ShowConfirm(context.Id))" />
-                </_Tooltip>
-            </td>
-        </RowTemplate>
-    </_Table>
-    <div class="row">
-        <div class="col-md-12" style="text-align: center">
+<_Page @ref="_page" 
+       ConfirmationTitle="Delete Item Type Spot" 
+       OnConfirm="Delete" 
+       OnLoad="OnLoad">
+    <Content>
+        <div class="row">
             <div class="col-md-12" style="text-align: center">
-                <a href="ItemTypeSpots/Edit">Add @_viewModel.ItemTitle</a>
+                <h1>@_viewModel.PageTitle</h1>
             </div>
         </div>
-    </div>
-    <br />
-}
+        <br />
+        <_Table Items="_viewModel.ItemTypeSpots" 
+                ItemsPerPage="10"                     
+                TItem="ItemTypeSpotViewModel">
+            <HeaderTemplate>
+                <th scope="col">Item Type</th>
+                <th scope="col">Spot</th>
+                <th scope="col"></th>
+                <th scope="col"></th>
+            </HeaderTemplate>
+            <RowTemplate>
+                <td>@context.ItemTypeName</td>
+                <td>@context.SpotName</td>
+                <td>
+                    <_Tooltip Text="Edit">
+                        <img class="can-click" 
+                                src="images/pencil.png" 
+                                height="25" 
+                                width="25" 
+                                @onclick="@(_ => _navigation.NavigateTo($"{_viewModel.RoutePrefix}/Edit/{context.Id}"))" />
+                    </_Tooltip>                        
+                </td>
+                <td>
+                    <_Tooltip Text="Delete">
+                        <img class="can-click" 
+                                src="images/trash.png" 
+                                height="25" 
+                                width="25" 
+                                @onclick="@(_ => _page.ShowConfirm(context.Id))" />
+                    </_Tooltip>
+                </td>
+            </RowTemplate>
+        </_Table>
+        <div class="row">
+            <div class="col-md-12" style="text-align: center">
+                <div class="col-md-12" style="text-align: center">
+                    <a href="ItemTypeSpots/Edit">Add @_viewModel.ItemTitle</a>
+                </div>
+            </div>
+        </div>
+        <br />
+    </Content>
+</_Page>
 
 @code {
-    private PopConfirm _deleteDialog;
-    private int _deletedItemId;
-    private bool _pageLoaded;
+    private _Page _page;
     private ItemTypeSpotsViewModel _viewModel;
 
-    protected async Task Delete(bool confirm)
+    protected async Task Delete(int id)
     {
-        if (!confirm)
-        {
-            _deletedItemId = 0;
-            return;
-        }
-
-        var deletedItem = _viewModel.ItemTypeSpots.Single(ItemTypeSpot => ItemTypeSpot.Id == _deletedItemId);
+        var deletedItem = _viewModel.ItemTypeSpots.Single(ItemTypeSpot => ItemTypeSpot.Id == id);
         var viewModel = new SaveItemTypeSpotViewModel(deletedItem);
         viewModel.IsDeleted = true;
 
-        var command = new SaveItemTypeSpot.Command(viewModel);
-
-        await _commandRouter.Send(command).ConfigureAwait(false);
+        await _commandRouter.Send(new SaveItemTypeSpot.Command(viewModel)).ConfigureAwait(false);
         
         _viewModel.ItemTypeSpots.Remove(deletedItem);
 
         _toastService.ShowSuccess($"{_viewModel.ItemTitle} was deleted successfully!", _viewModel.PageTitle);
     }
 
-    protected override async Task OnInitializedAsync()
+    protected async Task OnLoad()
     {
-        var userId = await _localStorage.GetAsync<int>("UserId");
-
-        if (userId.Value == 0)
-            _navigation.NavigateTo("Login");
-
-        var query = new GetItemTypeSpots.Query();
-
-        _viewModel = await _queryRouter.Send(query).ConfigureAwait(false);
-        _pageLoaded = true;
-    }
-
-    protected void ShowConfirm(int id)
-    {
-        _deletedItemId = id;
-        _deleteDialog.ShowPop();
+        _viewModel = await _queryRouter.Send(new GetItemTypeSpots.Query()).ConfigureAwait(false);
     }
 }

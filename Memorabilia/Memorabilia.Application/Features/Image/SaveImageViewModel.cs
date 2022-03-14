@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Memorabilia.Domain.Constants;
+using System;
 using System.ComponentModel.DataAnnotations;
 
 namespace Memorabilia.Application.Features.Image
@@ -25,6 +26,8 @@ namespace Memorabilia.Application.Features.Image
         [StringLength(500, ErrorMessage = "File Path is too long.")]
         [MinLength(1, ErrorMessage = "File Path is too short.")]
         public string FilePath { get; set; }
+
+        public ImageType ImageType => ImageType.Find(ImageTypeId);
 
         [Required]
         public int ImageTypeId { get; set; }

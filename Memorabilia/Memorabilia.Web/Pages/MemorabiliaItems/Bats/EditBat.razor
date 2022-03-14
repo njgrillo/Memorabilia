@@ -4,7 +4,6 @@
 @using Memorabilia.Application.Features.Admin.Team
 @using Memorabilia.Application.Features.Memorabilia
 @using Memorabilia.Application.Features.Memorabilia.Bat
-@using Memorabilia.Domain.Constants
 @using Memorabilia.Web.Controls.Bat
 @using Memorabilia.Web.Controls.Color
 @using Memorabilia.Web.Controls.Commissioner
@@ -12,172 +11,127 @@
 @using Memorabilia.Web.Controls.ItemTypeBrand
 @using Memorabilia.Web.Controls.ItemTypeLevel
 @using Memorabilia.Web.Controls.ItemTypeSize
+@using Memorabilia.Web.Controls.MemorabiliaItem
 @using Memorabilia.Web.Controls.Person
 @using Memorabilia.Web.Controls.Team
 
 @inject CommandRouter _commandRouter
-@inject ProtectedLocalStorage _localStorage
-@inject NavigationManager _navigation
 @inject QueryRouter _queryRouter
-@inject IToastService _toastService
 
-@if (!_pageLoaded)
-{
-    <_PageLoader />
-}
-else
-{
-    <div class="row">
-        <div class="col-md-12" style="text-align: center">
-            <h1>@_viewModel.PageTitle</h1>
-        </div>
-    </div>
-    <br />
-    <div style="border: 1px solid black; margin-top: 2%; margin-bottom: 2%; margin-left: 2%; margin-right: 2%;">
-        <div class="row" style="margin-top: 2%; margin-bottom: 2%; margin-left: 1%; margin-right: 1%;">
-            <div class="col-lg-12" style="text-align: center">
-                <img src="images/itemtypes.jpg" alt="Image" height="150" width="150" />
-            </div>            
-            <EditForm Model="_viewModel" OnValidSubmit="HandleValidSubmit">
-                <DataAnnotationsValidator />
-                <ValidationSummary />
-                <div class="row">
-                    <div class="col-lg-6">
-                        <div class="form-group">
-                            <div class="form-group">
-                            <label for="brand">Brand</label>
-                            <_ItemTypeBrandDropDown @bind-Value="@_viewModel.BrandId" 
-                                                    @bind-Value:event="ValueChanged"
-                                                    ItemType="_viewModel.ItemType" />
-                        </div> 
-                        </div> 
-                    </div>
-                    <div class="col-lg-6">
-                        <div class="form-group">
-                            <label for="size">Size</label>
-                            <_ItemTypeSizeDropDown @bind-Value="@_viewModel.SizeId"
-                                                   @bind-Value:event="ValueChanged" 
-                                                   ItemType="_viewModel.ItemType" /> 
-                        </div> 
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-lg-6">
-                         <div class="form-group">
-                            <label for="BatType">Bat Type</label>
-                            <_BatTypeDropDown @bind-Value="@_viewModel.BatTypeId" 
-                                              @bind-Value:event="ValueChanged" /> 
-                        </div> 
-                    </div>
-                    <div class="col-lg-6">
-                        <div class="form-group">
-                            <label for="gameStyleType">Game Style Type</label>
-                            <_GameStyleTypeDropDown @bind-Value="@_viewModel.GameStyleTypeId"
-                                                    @bind-Value:event="ValueChanged"
-                                                    ItemType="_viewModel.ItemType" /> 
-                        </div> 
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-lg-6" />  
-                    <div class="col-lg-6">
-                        <div class="form-group" hidden="@(!_viewModel.DisplayGameDate)">
-                            <label for="gameDate">Game Date</label>
-                            <InputDate id="gameDate" class="form-control" @bind-Value="_viewModel.GameDate" />
-                        </div>                        
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-lg-6">
-                        <div class="form-group">
-                            <label for="color">Color</label>
-                            <_ColorDropDown @bind-Value="@_viewModel.ColorId"
+<_EditMemorabiliaItem ImagePath="@_viewModel.ImagePath"
+					  ItemType="_viewModel.ItemType" 
+                      MemorabiliaId="MemorabiliaId"
+                      Model="_viewModel"
+                      OnLoad="OnLoad"
+                      OnSave="OnSave"
+                      PageTitle="_viewModel.PageTitle"
+                      TItem="SaveBatViewModel">
+    <Content>
+		<div class="row">
+            <div class="col-lg-6">
+                <div class="form-group">
+                    <div class="form-group">
+                    <label for="brand">Brand</label>
+                    <_ItemTypeBrandDropDown @bind-Value="@_viewModel.BrandId" 
                                             @bind-Value:event="ValueChanged"
-                                            ItemType="_viewModel.ItemType" /> 
-                        </div> 
-                    </div>
-                    <div class="col-lg-6">
-                        <div class="form-group">
-                            <label for="length">Length</label>
-                            <InputNumber id="length" class="form-control" @bind-Value="_viewModel.Length" />
-                        </div> 
-                    </div>
-                </div>
-                <_PersonSelector CanFilterBySport="true"
-                                 CanToggle="true"
-                                 ItemType="_viewModel.ItemType"
-                                 SelectedPerson="_viewModel.Person"
-                                 SelectedPersonChanged="SelectedPersonChanged"
-                                 Sport="_viewModel.Sport" />                 
-                <_TeamSelector CanToggle="true" 
-                               ItemType="_viewModel.ItemType"
-                               SelectedTeam="_viewModel.Team"
-                               SelectedTeamChanged="SelectedTeamChanged"
-                               SportLeagueLevel="_viewModel.SportLeagueLevel" />                             
-                <div class="text-right">
-                    <button type="submit" class="btn btn-primary" @onclick="@(()=> _continue = true)">Save & Continue</button>
-                    <button type="submit" class="btn btn-primary">Save & Exit</button>
-                    <button type="button" class="btn btn-secondary" @onclick="@(_ => _navigation.NavigateTo("Memorabilia"))">Cancel</button>
-                </div>
-            </EditForm>
-        </div>
-        <div class="row">
-            <div class="col-md-12" style="text-align: center">
-                <a href="Memorabilia/Items">Back</a>
+                                            ItemType="_viewModel.ItemType" />
+                </div> 
+                </div> 
+            </div>
+            <div class="col-lg-6">
+                <div class="form-group">
+                    <label for="size">Size</label>
+                    <_ItemTypeSizeDropDown @bind-Value="@_viewModel.SizeId"
+                                           @bind-Value:event="ValueChanged" 
+                                           ItemType="_viewModel.ItemType" /> 
+                </div> 
             </div>
         </div>
-        <br />
-    </div>
-}
+        <div class="row">
+            <div class="col-lg-6">
+                    <div class="form-group">
+                    <label for="BatType">Bat Type</label>
+                    <_BatTypeDropDown @bind-Value="@_viewModel.BatTypeId" 
+                                       @bind-Value:event="ValueChanged" /> 
+                </div> 
+            </div>
+            <div class="col-lg-6">
+                <div class="form-group">
+                    <label for="gameStyleType">Game Style Type</label>
+                    <_GameStyleTypeDropDown @bind-Value="@_viewModel.GameStyleTypeId"
+                                            @bind-Value:event="ValueChanged"
+                                            ItemType="_viewModel.ItemType" /> 
+                </div> 
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-6" />  
+            <div class="col-lg-6">
+                <div class="form-group" hidden="@(!_viewModel.DisplayGameDate)">
+                    <label for="gameDate">Game Date</label>
+                    <InputDate id="gameDate" class="form-control" @bind-Value="_viewModel.GameDate" />
+                </div>                        
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="form-group">
+                    <label for="color">Color</label>
+                    <_ColorDropDown @bind-Value="@_viewModel.ColorId"
+                                    @bind-Value:event="ValueChanged"
+                                    ItemType="_viewModel.ItemType" /> 
+                </div> 
+            </div>
+            <div class="col-lg-6">
+                <div class="form-group">
+                    <label for="length">Length</label>
+                    <InputNumber id="length" class="form-control" @bind-Value="_viewModel.Length" />
+                </div> 
+            </div>
+        </div>
+        <_PersonSelector CanFilterBySport="true"
+                         CanToggle="true"
+                         ItemType="_viewModel.ItemType"
+                         SelectedPerson="_viewModel.Person"
+                         SelectedPersonChanged="SelectedPersonChanged"
+                         Sport="_viewModel.Sport" />                 
+        <_TeamSelector CanToggle="true" 
+                       ItemType="_viewModel.ItemType"
+                       SelectedTeam="_viewModel.Team"
+                       SelectedTeamChanged="SelectedTeamChanged"
+                       SportLeagueLevel="_viewModel.SportLeagueLevel" />
+	</Content>
+</_EditMemorabiliaItem>
 
 @code {
     [Parameter]
     public int MemorabiliaId { get; set; }
 
-    private bool _continue;
-    private bool _pageLoaded;
-    private SaveBatViewModel _viewModel = new SaveBatViewModel();
+    private SaveBatViewModel _viewModel = new SaveBatViewModel();    
 
-    protected async Task HandleValidSubmit()
-    {
-        var userId = await _localStorage.GetAsync<int>("UserId").ConfigureAwait(false);
+    protected async Task OnLoad()
+    {     
+        var viewModel = await _queryRouter.Send(new GetBat.Query(MemorabiliaId)).ConfigureAwait(false);
 
-        if (userId.Value == 0)
-            _navigation.NavigateTo("Login");  
-            
+        if (viewModel.Brand == null)
+        {
+            SetDefaults();
+            return;
+        }    
+
+        _viewModel = new SaveBatViewModel(viewModel); 
+    }  
+
+    protected async Task OnSave()
+    {            
         _viewModel.MemorabiliaId = MemorabiliaId;
 
         var command = new SaveBat.Command(_viewModel);
 
         await _commandRouter.Send(command).ConfigureAwait(false);
 
-        var url = _continue ? $"Memorabilia/Image/Edit/{command.MemorabiliaId}" : "Memorabilia";
-
-        _navigation.NavigateTo(url);
-
-        _toastService.ShowSuccess("Bat Details were saved successfully!", _viewModel.PageTitle);
+        MemorabiliaId = command.MemorabiliaId;
     }
-
-    protected override async Task OnInitializedAsync()
-    {
-        var userId = await _localStorage.GetAsync<int>("UserId").ConfigureAwait(false);
-
-        if (userId.Value == 0)
-            _navigation.NavigateTo("Login");        
-
-        var query = new GetBat.Query(MemorabiliaId);
-        var viewModel = await _queryRouter.Send(query).ConfigureAwait(false);
-
-        if (viewModel.Brand == null)
-        {
-            SetDefaults();
-            _pageLoaded = true;
-            return;
-        }    
-
-        _viewModel = new SaveBatViewModel(viewModel); 
-        _pageLoaded = true;
-    }  
 
     private void SelectedPersonChanged(SavePersonViewModel person)
     {

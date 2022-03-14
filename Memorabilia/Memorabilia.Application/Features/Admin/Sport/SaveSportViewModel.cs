@@ -19,11 +19,15 @@ namespace Memorabilia.Application.Features.Admin.Sport
         [StringLength(200, ErrorMessage = "Image Path is too long.")]
         public string ImagePath { get; set; }
 
+        public override string ItemTitle => "Sport";
+
         [Required]
         [StringLength(50, ErrorMessage = "Name is too long.")]
         [MinLength(1, ErrorMessage = "Name is too short.")]
         public string Name { get; set; }
 
         public override string PageTitle => $"{(Id > 0 ? "Edit" : "Add")} Sport";
+
+        public override string RoutePrefix => "Sports";
     }
 }

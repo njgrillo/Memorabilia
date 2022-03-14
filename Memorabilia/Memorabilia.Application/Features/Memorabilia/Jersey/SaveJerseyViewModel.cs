@@ -73,6 +73,8 @@ namespace Memorabilia.Application.Features.Memorabilia.Jersey
 
         public bool HasTeam => Teams.Any();
 
+        public string ImagePath => "images/itemtypes.jpg";
+
         public bool IsGameWorthly => GameStyleType.IsGameWorthly(GameStyleType);
 
         public ItemType ItemType => ItemType.Jersey;

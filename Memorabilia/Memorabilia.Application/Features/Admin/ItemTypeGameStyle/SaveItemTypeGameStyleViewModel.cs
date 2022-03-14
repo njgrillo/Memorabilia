@@ -17,10 +17,14 @@ namespace Memorabilia.Application.Features.Admin.ItemTypeGameStyle
         [Range(1, int.MaxValue, ErrorMessage = "Game Style Type is required.")]
         public int GameStyleTypeId { get; set; }
 
+        public override string ItemTitle => "Item Type Game Style";
+
         [Required]
         [Range(1, int.MaxValue, ErrorMessage = "Item Type is required.")]
         public int ItemTypeId { get; set; }
 
-        public override string PageTitle => $"{(Id > 0 ? "Edit" : "Add")} Item Type Authentic Type";
+        public override string PageTitle => $"{(Id > 0 ? "Edit" : "Add")} Item Type Game Style";
+
+        public override string RoutePrefix => "ItemTypeGameStyles";
     }
 }

@@ -36,6 +36,8 @@ namespace Memorabilia.Application.Features.Admin.Team
         [StringLength(200, ErrorMessage = "Image Path is too long.")]
         public string ImagePath { get; set; }
 
+        public override string ItemTitle => "Team";
+
         [Required]
         [StringLength(100, ErrorMessage = "Name is too long.")]
         [MinLength(1, ErrorMessage = "Name is too short.")]
@@ -50,6 +52,8 @@ namespace Memorabilia.Application.Features.Admin.Team
         public string Nickname { get; set; }
 
         public override string PageTitle => $"{(Id > 0 ? "Edit" : "Add")} Team";
+
+        public override string RoutePrefix => "Teams";
 
         public int SportLeagueLevelId { get; set; }
     }

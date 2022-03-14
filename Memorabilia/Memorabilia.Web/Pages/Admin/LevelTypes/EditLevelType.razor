@@ -2,50 +2,39 @@
 
 @using Memorabilia.Application.Features.Admin
 @using Memorabilia.Application.Features.Admin.LevelType
-@using Memorabilia.Web.Controls.LevelType
 
 @inject CommandRouter _commandRouter
 @inject QueryRouter _queryRouter
 
-@if (!_pageLoaded)
-{
-    <_PageLoader />
-}
-else
-{
-    <_LevelTypeEditor EditModeType="@_editModeType" 
-                      Item="@_viewModel"                  
-                      OnSave="Save" />
-}
+<_EditDomainItem DomainItem="_viewModel"
+                 OnLoad="OnLoad"
+                 OnSave="OnSave" />
 
 @code {
     [Parameter]
     public int Id { get; set; }
 
-    private EditModeType _editModeType;
-    private bool _pageLoaded;
-    private SaveDomainViewModel _viewModel = new SaveDomainViewModel();    
+    private const string DomainTypeName = "Level Type";
+    private const string ImagePath = "images/jerseytypes.jpg";
+    private string _navigationPath = $"{DomainTypeName.Replace(" ", "")}s";
 
-    protected override async Task OnInitializedAsync()
+    private SaveDomainViewModel _viewModel;  
+
+    protected override void OnInitialized()
     {
-        _editModeType = Id > 0 ? EditModeType.Update : EditModeType.Add;
+        _viewModel = new SaveDomainViewModel(Id, DomainTypeName, ImagePath, _navigationPath);
+    }   
 
-        if (Id == 0)
-        {
-            _pageLoaded = true;
-            return;
-        }
-
-        var query = new GetLevelType.Query(Id);
-
-        _viewModel = new SaveDomainViewModel(await _queryRouter.Send(query).ConfigureAwait(false));
-        _pageLoaded = true;
+    protected async Task OnLoad()
+    {
+        _viewModel = new SaveDomainViewModel(await _queryRouter.Send(new GetLevelType.Query(Id)).ConfigureAwait(false), 
+                                             DomainTypeName, 
+                                             ImagePath, 
+                                             _navigationPath);
     }
 
-    protected async Task Save()
+    protected async Task OnSave()
     {
-        var command = new SaveLevelType.Command(_viewModel);
-
-        await _commandRouter.Send(command).ConfigureAwait(false);
+        await _commandRouter.Send(new SaveLevelType.Command(_viewModel)).ConfigureAwait(false);
     }
 }

@@ -22,6 +22,8 @@
 
         public int PersonId { get; set; }
 
+        public override string RoutePrefix => "People";
+
         public int SportLeagueLevelId { get; set; }
 
         public string SportName => Domain.Constants.SportLeagueLevel.Find(SportLeagueLevelId)?.Name;    

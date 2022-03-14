@@ -3,184 +3,138 @@
 @using Memorabilia.Application.Features.Admin.Person
 @using Memorabilia.Application.Features.Memorabilia
 @using Memorabilia.Application.Features.Memorabilia.Jersey
-@using Memorabilia.Domain.Constants
 @using Memorabilia.Web.Controls.GameStyleType
 @using Memorabilia.Web.Controls.ItemTypeBrand
 @using Memorabilia.Web.Controls.ItemTypeLevel
 @using Memorabilia.Web.Controls.ItemTypeSize
 @using Memorabilia.Web.Controls.Jersey
+@using Memorabilia.Web.Controls.MemorabiliaItem
 @using Memorabilia.Web.Controls.Person
 @using Memorabilia.Web.Controls.Team
 
 @inject CommandRouter _commandRouter
-@inject ProtectedLocalStorage _localStorage
-@inject NavigationManager _navigation
 @inject QueryRouter _queryRouter
-@inject IToastService _toastService
 
-@if (!_pageLoaded)
-{
-    <_PageLoader />
-}
-else
-{
-    <div class="row">
-        <div class="col-md-12" style="text-align: center">
-            <h1>@_viewModel.PageTitle</h1>
-        </div>
-    </div>
-    <br />
-    <div style="border: 1px solid black; margin-top: 2%; margin-bottom: 2%; margin-left: 2%; margin-right: 2%;">
-        <div class="row" style="margin-top: 2%; margin-bottom: 2%; margin-left: 1%; margin-right: 1%;">
-            <div class="col-lg-12" style="text-align: center">
-                <img src="images/itemtypes.jpg" alt="Image" height="150" width="150" />
-            </div>            
-            <EditForm Model="_viewModel" OnValidSubmit="HandleValidSubmit">
-                <DataAnnotationsValidator />
-                <ValidationSummary />
-                <div class="row">
-                    <div class="col-lg-6">
-                        <div class="form-group">
-                            <label for="level">Level</label>
-                            <_ItemTypeLevelDropDown @bind-Value="@_viewModel.LevelTypeId"
-                                                    @bind-Value:event="ValueChanged" 
-                                                    ItemType="_viewModel.ItemType" /> 
-                        </div> 
-                    </div>
-                    <div class="col-lg-6">
-                        <div class="form-group">
-                            <label for="brand">Brand</label>
-                            <_ItemTypeBrandDropDown @bind-Value="@_viewModel.BrandId" 
-                                                    @bind-Value:event="ValueChanged"
-                                                    ItemType="_viewModel.ItemType" />
-                        </div> 
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-lg-6">
-                        <div class="form-group">
-                            <label for="size">Size</label>
-                            <_ItemTypeSizeDropDown @bind-Value="@_viewModel.SizeId"
-                                                   @bind-Value:event="ValueChanged" 
-                                                   ItemType="_viewModel.ItemType" /> 
-                        </div> 
-                    </div>
-                    <div class="col-lg-6">
-                         <div class="form-group">
-                            <label for="gameStyleType">Game Style Type</label>
-                            <_GameStyleTypeDropDown @bind-Value="@_viewModel.GameStyleTypeId"
-                                                    @bind-Value:event="ValueChanged"
-                                                    ItemType="_viewModel.ItemType" /> 
-                        </div> 
-                    </div>
-                </div>
-                <div class="row">     
-                    <div class="col-lg-6" /> 
-                    <div class="col-lg-6">
-                        <div class="form-group" hidden="@(!_viewModel.DisplayGameDate)">
-                            <label for="gameDate">Game Date</label>
-                            <InputDate id="gameDate" class="form-control" @bind-Value="_viewModel.GameDate" />
-                        </div>                        
-                    </div>                     
-                </div>
-                <div class="row">
-                    <div class="col-lg-6">
-                        <div class="form-group">
-                            <label for="jerseyQualityType">Quality</label>
-                            <_JerseyQualityTypeDropDown @bind-Value="@_viewModel.JerseyQualityTypeId"
-                                                        @bind-Value:event="ValueChanged"
-                                                        Disabled="!_viewModel.CanEditJerseyQualityType" /> 
-                        </div> 
-                    </div>
-                    <div class="col-lg-6">
-                         <div class="form-group">
-                            <label for="jerseyType">Type</label>
-                            <_JerseyTypeDropDown @bind-Value="@_viewModel.JerseyTypeId"
-                                                 @bind-Value:event="ValueChanged" /> 
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-lg-6">
-                        <div class="form-group">
-                            <label for="jerseyStyleType">Style</label>
-                            <_JerseyStyleTypeDropDown @bind-Value="@_viewModel.JerseyStyleTypeId"
-                                                      @bind-Value:event="ValueChanged" /> 
-                        </div> 
-                    </div>
-                </div>
-                <_PersonSelector AllowMultiple="true"
-                                 CanToggle="true"
-                                 ItemType="_viewModel.ItemType"
-                                 People="_viewModel.People" />                 
-                <_TeamSelector AllowMultiple="true"
-                               CanToggle="true" 
-                               ItemType="_viewModel.ItemType"
-                               Teams="_viewModel.Teams" />                             
-                <div class="text-right">
-                    <button type="submit" class="btn btn-primary" @onclick="@(()=> _continue = true)">Save & Continue</button>
-                    <button type="submit" class="btn btn-primary">Save & Exit</button>
-                    <button type="button" class="btn btn-secondary" @onclick="@(_ => _navigation.NavigateTo("Memorabilia"))">Cancel</button>
-                </div>
-            </EditForm>
-        </div>
-        <div class="row">
-            <div class="col-md-12" style="text-align: center">
-                <a href="Memorabilia/Items">Back</a>
+<_EditMemorabiliaItem ImagePath="@_viewModel.ImagePath"
+					  ItemType="_viewModel.ItemType" 
+                      MemorabiliaId="MemorabiliaId"
+                      Model="_viewModel"
+                      OnLoad="OnLoad"
+                      OnSave="OnSave"
+                      PageTitle="_viewModel.PageTitle"
+                      TItem="SaveJerseyViewModel">
+    <Content>
+		 <div class="row">
+            <div class="col-lg-6">
+                <div class="form-group">
+                    <label for="level">Level</label>
+                    <_ItemTypeLevelDropDown @bind-Value="@_viewModel.LevelTypeId"
+                                            @bind-Value:event="ValueChanged" 
+                                            ItemType="_viewModel.ItemType" /> 
+                </div> 
+            </div>
+            <div class="col-lg-6">
+                <div class="form-group">
+                    <label for="brand">Brand</label>
+                    <_ItemTypeBrandDropDown @bind-Value="@_viewModel.BrandId" 
+                                            @bind-Value:event="ValueChanged"
+                                            ItemType="_viewModel.ItemType" />
+                </div> 
             </div>
         </div>
-        <br />
-    </div>
-}
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="form-group">
+                    <label for="size">Size</label>
+                    <_ItemTypeSizeDropDown @bind-Value="@_viewModel.SizeId"
+                                           @bind-Value:event="ValueChanged" 
+                                           ItemType="_viewModel.ItemType" /> 
+                </div> 
+            </div>
+            <div class="col-lg-6">
+                    <div class="form-group">
+                    <label for="gameStyleType">Game Style Type</label>
+                    <_GameStyleTypeDropDown @bind-Value="@_viewModel.GameStyleTypeId"
+                                            @bind-Value:event="ValueChanged"
+                                            ItemType="_viewModel.ItemType" /> 
+                </div> 
+            </div>
+        </div>
+        <div class="row">     
+            <div class="col-lg-6" /> 
+            <div class="col-lg-6">
+                <div class="form-group" hidden="@(!_viewModel.DisplayGameDate)">
+                    <label for="gameDate">Game Date</label>
+                    <InputDate id="gameDate" class="form-control" @bind-Value="_viewModel.GameDate" />
+                </div>                        
+            </div>                     
+        </div>
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="form-group">
+                    <label for="jerseyQualityType">Quality</label>
+                    <_JerseyQualityTypeDropDown @bind-Value="@_viewModel.JerseyQualityTypeId"
+                                                @bind-Value:event="ValueChanged"
+                                                Disabled="!_viewModel.CanEditJerseyQualityType" /> 
+                </div> 
+            </div>
+            <div class="col-lg-6">
+                    <div class="form-group">
+                    <label for="jerseyType">Type</label>
+                    <_JerseyTypeDropDown @bind-Value="@_viewModel.JerseyTypeId"
+                                         @bind-Value:event="ValueChanged" /> 
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="form-group">
+                    <label for="jerseyStyleType">Style</label>
+                    <_JerseyStyleTypeDropDown @bind-Value="@_viewModel.JerseyStyleTypeId"
+                                              @bind-Value:event="ValueChanged" /> 
+                </div> 
+            </div>
+        </div>
+        <_PersonSelector AllowMultiple="true"
+                         CanToggle="true"
+                         ItemType="_viewModel.ItemType"
+                         People="_viewModel.People" />                 
+        <_TeamSelector AllowMultiple="true"
+                       CanToggle="true" 
+                       ItemType="_viewModel.ItemType"
+                       Teams="_viewModel.Teams" />
+	</Content>
+</_EditMemorabiliaItem>
 
 @code {
     [Parameter]
     public int MemorabiliaId { get; set; }
 
-    private bool _continue;
-    private bool _pageLoaded;
-    private SaveJerseyViewModel _viewModel = new SaveJerseyViewModel();
+    private SaveJerseyViewModel _viewModel = new SaveJerseyViewModel();    
 
-    protected async Task HandleValidSubmit()
-    {
-        var userId = await _localStorage.GetAsync<int>("UserId").ConfigureAwait(false);
+    protected async Task OnLoad()
+    {   
+        var jerseyViewModel = await _queryRouter.Send(new GetJersey.Query(MemorabiliaId)).ConfigureAwait(false);
 
-        if (userId.Value == 0)
-            _navigation.NavigateTo("Login");   
-            
+        if (jerseyViewModel.Brand == null)
+        {
+            SetDefaults();
+            return;
+        }    
+
+        _viewModel = new SaveJerseyViewModel(jerseyViewModel);  
+    }  
+
+    protected async Task OnSave()
+    {            
         _viewModel.MemorabiliaId = MemorabiliaId;
 
         var command = new SaveJersey.Command(_viewModel);
 
         await _commandRouter.Send(command).ConfigureAwait(false);
 
-        var url = _continue ? $"Memorabilia/Image/Edit/{command.MemorabiliaId}" : "Memorabilia";
-
-        _navigation.NavigateTo(url);
-
-        _toastService.ShowSuccess("Jersey Details were saved successfully!", _viewModel.PageTitle);
+        MemorabiliaId = command.MemorabiliaId;
     }
-
-    protected override async Task OnInitializedAsync()
-    {
-        var userId = await _localStorage.GetAsync<int>("UserId").ConfigureAwait(false);
-
-        if (userId.Value == 0)
-            _navigation.NavigateTo("Login");        
-
-        var query = new GetJersey.Query(MemorabiliaId);
-        var JerseyViewModel = await _queryRouter.Send(query).ConfigureAwait(false);
-
-        if (JerseyViewModel.Brand == null)
-        {
-            SetDefaults();
-            _pageLoaded = true;
-            return;
-        }    
-
-        _viewModel = new SaveJerseyViewModel(JerseyViewModel);  
-        _pageLoaded = true;
-    }  
 
     private void SetDefaults()
     {

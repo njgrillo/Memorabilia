@@ -1,15 +1,9 @@
 ﻿@page "/Home"
 
-@inject ProtectedLocalStorage _localStorage
-@inject NavigationManager _navigation
-@inject QueryRouter _queryRouter
+<_Page>
+    <Content>
+    </Content>
+</_Page>
 
 @code {
-    protected override async Task OnInitializedAsync()
-    {
-        var userId = await _localStorage.GetAsync<int>("UserId").ConfigureAwait(false);
-
-        if (userId.Value == 0)
-            _navigation.NavigateTo("Login");       
-    }
 }

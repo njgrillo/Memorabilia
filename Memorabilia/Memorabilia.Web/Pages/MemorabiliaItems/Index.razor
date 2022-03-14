@@ -2,35 +2,28 @@
 
 @using Memorabilia.Application.Features.Memorabilia
 
-@inject ProtectedLocalStorage _localStorage
-@inject NavigationManager _navigation
-@inject QueryRouter _queryRouter
-
-<div class="row">
-    <div class="col-md-12" style="text-align: center">
-        <h1>My Memorabilia</h1>
-    </div>
-</div>
-<br />
-<div class="row">
-    <div class="col-md-4">
-        <_Summary ImagePath="images/autographs.jpg"  
-                  Page="Memorabilia/Edit" 
-                  Title="Add Memorabilia Item" />
-    </div>
-    <div class="col-md-4">
-        <_Summary ImagePath="images/autographs.jpg"  
-                  Page="Memorabilia/Items" 
-                  Title="View Memorabilia Items" />
-    </div>
-</div>
+<_Page>
+    <Content>
+        <div class="row">
+            <div class="col-md-12" style="text-align: center">
+                <h1>My Memorabilia</h1>
+            </div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-md-4">
+                <_Summary ImagePath="images/autographs.jpg"  
+                          Page="Memorabilia/Edit" 
+                          Title="Add Memorabilia Item" />
+            </div>
+            <div class="col-md-4">
+                <_Summary ImagePath="images/autographs.jpg"  
+                          Page="Memorabilia/Items" 
+                          Title="View Memorabilia Items" />
+            </div>
+        </div>
+    </Content>
+</_Page>
 
 @code {
-    protected override async Task OnInitializedAsync()
-    {
-        var userId = await _localStorage.GetAsync<int>("UserId").ConfigureAwait(false);
-
-        if (userId.Value == 0)
-            _navigation.NavigateTo("Login");
-    }
 }

@@ -6,45 +6,35 @@
 @inject CommandRouter _commandRouter
 @inject QueryRouter _queryRouter
 
-@if (!_pageLoaded)
-{
-    <_PageLoader />
-}
-else
-{
-    <_MagazineTypeEditor EditModeType="@_editModeType" 
-                         Item="@_viewModel"                  
-                         OnSave="Save" />
-}
+<_EditDomainItem DomainItem="_viewModel"
+                 OnLoad="OnLoad"
+                 OnSave="OnSave" />
 
 @code {
     [Parameter]
     public int Id { get; set; }
 
-    private EditModeType _editModeType;
-    private bool _pageLoaded;
-    private SaveDomainViewModel _viewModel = new SaveDomainViewModel();    
+    private const string DomainTypeName = "Magazine Type";
+    private const string ImagePath = "images/magazinetypes.jpg";
+    private string _navigationPath = $"{DomainTypeName.Replace(" ", "")}s";
 
-    protected override async Task OnInitializedAsync()
+    private SaveDomainViewModel _viewModel;  
+
+    protected override void OnInitialized()
     {
-        _editModeType = Id > 0 ? EditModeType.Update : EditModeType.Add;
+        _viewModel = new SaveDomainViewModel(Id, DomainTypeName, ImagePath, _navigationPath);
+    }   
 
-        if (Id == 0)
-        {
-            _pageLoaded = true;
-            return;
-        }
-
-        var query = new GetMagazineType.Query(Id);
-
-        _viewModel = new SaveDomainViewModel(await _queryRouter.Send(query).ConfigureAwait(false));
-        _pageLoaded = true;
+    protected async Task OnLoad()
+    {
+        _viewModel = new SaveDomainViewModel(await _queryRouter.Send(new GetMagazineType.Query(Id)).ConfigureAwait(false), 
+                                             DomainTypeName, 
+                                             ImagePath, 
+                                             _navigationPath);
     }
 
-    protected async Task Save()
+    protected async Task OnSave()
     {
-        var command = new SaveMagazineType.Command(_viewModel);
-
-        await _commandRouter.Send(command).ConfigureAwait(false);
+        await _commandRouter.Send(new SaveMagazineType.Command(_viewModel)).ConfigureAwait(false);
     }
 }

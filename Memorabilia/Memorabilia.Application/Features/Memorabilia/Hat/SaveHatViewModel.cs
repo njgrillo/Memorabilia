@@ -46,6 +46,8 @@ namespace Memorabilia.Application.Features.Memorabilia.Hat
 
         public bool HasTeam => Teams.Any();
 
+        public string ImagePath => string.Empty;
+
         public ItemType ItemType => ItemType.Hat;
 
         [Required]

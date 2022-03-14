@@ -9,111 +9,95 @@
 @using Memorabilia.Web.Controls.SportLeagueLevel
 
 @inject CommandRouter _commandRouter
-@inject ProtectedLocalStorage _localStorage
 @inject NavigationManager _navigation
 @inject QueryRouter _queryRouter
 @inject IToastService _toastService
 
-@if (!_pageLoaded)
-{
-    <_PageLoader />
-}
-else
-{
-    <div class="row">
-        <div class="col-md-12" style="text-align: center">
-            <h1>@_viewModel.PageTitle</h1>
-        </div>
-    </div>
-    <br />
-    <div style="border: 1px solid black; margin-top: 2%; margin-bottom: 2%; margin-left: 2%; margin-right: 2%;">
-        <div class="row" style="margin-top: 2%; margin-bottom: 2%; margin-left: 1%; margin-right: 1%;">
-            <div class="col-lg-12" style="text-align: center">
-                <img src="images/commissioners.jpg" alt="Image" height="150" width="150" />
-            </div>
-            <EditForm Model="_viewModel" OnValidSubmit="HandleValidSubmit">
-                <DataAnnotationsValidator />
-                <ValidationSummary />
-                <div class="form-group">
-                    <label for="sportLeague">Sport League</label>
-                    <_SportLeagueLevelDropDown @bind-Value="@_viewModel.SportLeagueLevelId"
-                                               @bind-Value:event="ValueChanged" /> 
-                </div>
-                <div class="form-group">
-                    <label for="person">Person</label>
-                    <BlazoredTypeahead SearchMethod="SearchPeople"
-                                       @bind-Value="_viewModel.Person"
-                                       Placeholder="Search by name...">
-                        <SelectedTemplate Context="person">
-                            @person.DisplayName
-                        </SelectedTemplate>
-                        <ResultTemplate Context="person">
-                            @person.DisplayName
-                        </ResultTemplate>
-                    </BlazoredTypeahead> 
-                </div>
-                <div class="form-group">
-                    <label for="beginYear">Begin Year</label>
-                    <InputNumber id="beginYear" @bind-Value="_viewModel.BeginYear" class="form-control" />
-                </div>
-                <div class="form-group">
-                    <label for="endYear">End Year</label>
-                    <InputNumber id="endYear" @bind-Value="_viewModel.EndYear" class="form-control" />
-                </div>
-                <div class="text-right">
-                    <button type="submit" class="btn btn-primary">Save</button>
-                </div>
-            </EditForm>
-        </div>
+<_Page OnLoad="OnLoad">
+    <Content>
         <div class="row">
             <div class="col-md-12" style="text-align: center">
-                <a href="Commissioners">Back</a>
+                <h1>@_viewModel.PageTitle</h1>
             </div>
         </div>
         <br />
-    </div>
-}
+        <div style="border: 1px solid black; margin-top: 2%; margin-bottom: 2%; margin-left: 2%; margin-right: 2%;">
+            <div class="row" style="margin-top: 2%; margin-bottom: 2%; margin-left: 1%; margin-right: 1%;">
+                <div class="col-lg-12" style="text-align: center">
+                    <img src="images/commissioners.jpg" alt="Image" height="150" width="150" />
+                </div>
+                <EditForm Model="_viewModel" OnValidSubmit="HandleValidSubmit">
+                    <DataAnnotationsValidator />
+                    <ValidationSummary />
+                    <div class="form-group">
+                        <label for="sportLeague">Sport League</label>
+                        <_SportLeagueLevelDropDown @bind-Value="@_viewModel.SportLeagueLevelId"
+                                                   @bind-Value:event="ValueChanged" /> 
+                    </div>
+                    <div class="form-group">
+                        <label for="person">Person</label>
+                        <BlazoredTypeahead SearchMethod="SearchPeople"
+                                           @bind-Value="_viewModel.Person"
+                                           Placeholder="Search by name...">
+                            <SelectedTemplate Context="person">
+                                @person.DisplayName
+                            </SelectedTemplate>
+                            <ResultTemplate Context="person">
+                                @person.DisplayName
+                            </ResultTemplate>
+                        </BlazoredTypeahead> 
+                    </div>
+                    <div class="form-group">
+                        <label for="beginYear">Begin Year</label>
+                        <InputNumber id="beginYear" @bind-Value="_viewModel.BeginYear" class="form-control" />
+                    </div>
+                    <div class="form-group">
+                        <label for="endYear">End Year</label>
+                        <InputNumber id="endYear" @bind-Value="_viewModel.EndYear" class="form-control" />
+                    </div>
+                    <div class="text-right">
+                        <button type="submit" class="btn btn-primary">Save</button>
+                    </div>
+                </EditForm>
+            </div>
+            <div class="row">
+                <div class="col-md-12" style="text-align: center">
+                    <a href="@_viewModel.RoutePrefix">Back</a>
+                </div>
+            </div>
+            <br />
+        </div>
+    </Content>
+</_Page>
 
 @code {
     [Parameter]
     public int Id { get; set; }
 
-    private bool _pageLoaded;
     private IEnumerable<PersonViewModel> _people = Enumerable.Empty<PersonViewModel>();
     private SaveCommissionerViewModel _viewModel = new SaveCommissionerViewModel();
 
     protected async Task HandleValidSubmit()
     {
-        var command = new SaveCommissioner.Command(_viewModel);
-
-        await _commandRouter.Send(command).ConfigureAwait(false);
+        await _commandRouter.Send(new SaveCommissioner.Command(_viewModel)).ConfigureAwait(false);
 
         _navigation.NavigateTo(_viewModel.RoutePrefix);
-
         _toastService.ShowSuccess($"{_viewModel.ItemTitle} was saved successfully!", _viewModel.PageTitle);
     }
 
-    protected override async Task OnInitializedAsync()
+    protected async Task OnLoad()
     {
         await LoadPeople().ConfigureAwait(false);
 
         if (Id == 0)
-        {
-            _pageLoaded = true;
             return;
-        }
 
-        var query = new GetCommissioner.Query(Id);
-
-        _viewModel = new SaveCommissionerViewModel(await _queryRouter.Send(query).ConfigureAwait(false));   
-        _pageLoaded = true;
+        _viewModel = new SaveCommissionerViewModel(await _queryRouter.Send(new GetCommissioner.Query(Id)).ConfigureAwait(false));
     }
 
     private async Task LoadPeople()
     {
-        var query = new GetPeople.Query();
-
-        _people = (await _queryRouter.Send(query).ConfigureAwait(false)).People;
+        _people = (await _queryRouter.Send(new GetPeople.Query()).ConfigureAwait(false)).People;
     }
 
     private async Task<IEnumerable<PersonViewModel>> SearchPeople(string searchText)

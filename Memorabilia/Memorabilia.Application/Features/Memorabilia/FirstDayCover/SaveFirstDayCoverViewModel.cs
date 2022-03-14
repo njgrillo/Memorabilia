@@ -27,6 +27,8 @@ namespace Memorabilia.Application.Features.Memorabilia.FirstDayCover
 
         public bool HasTeam => Teams.Any();
 
+        public string ImagePath => string.Empty;
+
         public ItemType ItemType => ItemType.FirstDayCover;
 
         [Required]

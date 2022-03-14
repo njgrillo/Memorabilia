@@ -42,6 +42,8 @@ namespace Memorabilia.Application.Features.Memorabilia.Card
 
         public bool HasTeam => Teams.Any();
 
+        public string ImagePath => string.Empty;
+
         public bool IsNumbered => Numerator.HasValue || Denominator.HasValue;
 
         public ItemType ItemType => ItemType.TradingCard;

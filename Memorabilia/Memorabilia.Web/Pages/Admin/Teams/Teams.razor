@@ -4,121 +4,93 @@
 @using Memorabilia.Application.Features.Admin.Team
 
 @inject CommandRouter _commandRouter
-@inject ProtectedLocalStorage _localStorage
 @inject NavigationManager _navigation
 @inject QueryRouter _queryRouter
 @inject IToastService _toastService
 
-@if (!_pageLoaded)
-{
-    <_PageLoader />
-}
-else
-{
-    <PopConfirm @ref="_deleteDialog"
-                Title="Delete Team"
-                ConfirmedChanged="Delete" />
-    <div class="row">
-        <div class="col-md-12" style="text-align: center">
-            <h1>@_viewModel.PageTitle</h1>
-        </div>
-    </div>
-    <br />
-    <_Table Items="_viewModel.Teams" 
-            ItemsPerPage="50"                     
-            TItem="TeamViewModel">
-        <HeaderTemplate>
-            <th scope="col">Franchise</th>
-            <th scope="col">Name</th>
-            <th scope="col">Location</th>
-            <th scope="col">Nickname</th>
-            <th scope="col">Abbreviation</th>
-            <th scope="col">Begin Year</th>
-            <th scope="col">End Year</th>
-            <th scope="col"></th>
-            <th scope="col"></th>
-        </HeaderTemplate>
-        <RowTemplate>
-            <td>@context.FranchiseName</td>
-            <td>@context.Name</td>
-            <td>@context.Location</td>
-            <td>@context.Nickname</td>
-            <td>@context.Abbreviation</td>
-            <td>@context.BeginYear</td>
-            <td>@context.EndYear</td>
-            <td>
-                <_Tooltip Text="Edit">
-                    <img class="can-click" 
-                            src="images/pencil.png" 
-                            height="25" 
-                            width="25" 
-                            @onclick="@(_ => _navigation.NavigateTo($"{_viewModel.RoutePrefix}/Edit/{context.Id}"))" />
-                </_Tooltip>                        
-            </td>
-            <td>
-                <_Tooltip Text="Delete">
-                    <img class="can-click" 
-                            src="images/trash.png" 
-                            height="25" 
-                            width="25" 
-                            @onclick="@(_ => ShowConfirm(context.Id))" />
-                </_Tooltip>
-            </td>
-        </RowTemplate>
-    </_Table>
-    <div class="row">
-        <div class="col-md-12" style="text-align: center">
+<_Page @ref="_page" 
+       ConfirmationTitle="Delete Team" 
+       OnConfirm="Delete" 
+       OnLoad="OnLoad">
+    <Content>
+        <div class="row">
             <div class="col-md-12" style="text-align: center">
-                <a href="Teams/Edit">Add @_viewModel.ItemTitle</a>
+                <h1>@_viewModel.PageTitle</h1>
             </div>
         </div>
-    </div>
-    <br />
-}
+        <br />
+        <_Table Items="_viewModel.Teams" 
+                ItemsPerPage="50"                     
+                TItem="TeamViewModel">
+            <HeaderTemplate>
+                <th scope="col">Franchise</th>
+                <th scope="col">Name</th>
+                <th scope="col">Location</th>
+                <th scope="col">Nickname</th>
+                <th scope="col">Abbreviation</th>
+                <th scope="col">Begin Year</th>
+                <th scope="col">End Year</th>
+                <th scope="col"></th>
+                <th scope="col"></th>
+            </HeaderTemplate>
+            <RowTemplate>
+                <td>@context.FranchiseName</td>
+                <td>@context.Name</td>
+                <td>@context.Location</td>
+                <td>@context.Nickname</td>
+                <td>@context.Abbreviation</td>
+                <td>@context.BeginYear</td>
+                <td>@context.EndYear</td>
+                <td>
+                    <_Tooltip Text="Edit">
+                        <img class="can-click" 
+                                src="images/pencil.png" 
+                                height="25" 
+                                width="25" 
+                                @onclick="@(_ => _navigation.NavigateTo($"{_viewModel.RoutePrefix}/Edit/{context.Id}"))" />
+                    </_Tooltip>                        
+                </td>
+                <td>
+                    <_Tooltip Text="Delete">
+                        <img class="can-click" 
+                                src="images/trash.png" 
+                                height="25" 
+                                width="25" 
+                                @onclick="@(_ => _page.ShowConfirm(context.Id))" />
+                    </_Tooltip>
+                </td>
+            </RowTemplate>
+        </_Table>
+        <div class="row">
+            <div class="col-md-12" style="text-align: center">
+                <div class="col-md-12" style="text-align: center">
+                    <a href="Teams/Edit">Add @_viewModel.ItemTitle</a>
+                </div>
+            </div>
+        </div>
+        <br />
+    </Content>
+</_Page>
 
 @code {
-    private PopConfirm _deleteDialog;
-    private int _deletedItemId;
-    private bool _pageLoaded;
+    private _Page _page;
     private TeamsViewModel _viewModel;
 
-    protected async Task Delete(bool confirm)
+    protected async Task Delete(int id)
     {
-        if (!confirm)
-        {
-            _deletedItemId = 0;
-            return;
-        }
-
-        var deletedItem = _viewModel.Teams.Single(team => team.Id == _deletedItemId);
+        var deletedItem = _viewModel.Teams.Single(team => team.Id == id);
         var viewModel = new SaveTeamViewModel(deletedItem);
         viewModel.IsDeleted = true;
 
-        var command = new SaveTeam.Command(viewModel);
-
-        await _commandRouter.Send(command).ConfigureAwait(false);
+        await _commandRouter.Send(new SaveTeam.Command(viewModel)).ConfigureAwait(false);
         
         _viewModel.Teams.Remove(deletedItem);
 
         _toastService.ShowSuccess($"{_viewModel.ItemTitle} was deleted successfully!", _viewModel.PageTitle);
     }
 
-    protected override async Task OnInitializedAsync()
+    protected async Task OnLoad()
     {
-        var userId = await _localStorage.GetAsync<int>("UserId");
-
-        if (userId.Value == 0)
-            _navigation.NavigateTo("Login");
-
-        var query = new GetTeams.Query();
-
-        _viewModel = await _queryRouter.Send(query).ConfigureAwait(false);
-        _pageLoaded = true;
-    }
-
-    protected void ShowConfirm(int id)
-    {
-        _deletedItemId = id;
-        _deleteDialog.ShowPop();
+        _viewModel = await _queryRouter.Send(new GetTeams.Query()).ConfigureAwait(false);
     }
 }

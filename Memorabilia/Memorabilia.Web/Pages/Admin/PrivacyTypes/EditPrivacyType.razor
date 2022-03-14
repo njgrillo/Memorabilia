@@ -2,52 +2,39 @@
 
 @using Memorabilia.Application.Features.Admin
 @using Memorabilia.Application.Features.Admin.PrivacyType
-@using Memorabilia.Web.Controls.PrivacyType
 
 @inject CommandRouter _commandRouter
-@inject ProtectedLocalStorage _localStorage
-@inject NavigationManager _navigation
 @inject QueryRouter _queryRouter
 
-@if (!_pageLoaded)
-{
-    <_PageLoader />
-}
-else
-{
-    <_PrivacyTypeEditor EditModeType="@_editModeType" 
-                        Item="@_viewModel"                  
-                        OnSave="Save" />
-}
+<_EditDomainItem DomainItem="_viewModel"
+                 OnLoad="OnLoad"
+                 OnSave="OnSave" />
 
 @code {
     [Parameter]
     public int Id { get; set; }
 
-    private EditModeType _editModeType;
-    private bool _pageLoaded;
-    private SaveDomainViewModel _viewModel = new SaveDomainViewModel();    
+    private const string DomainTypeName = "Privacy Type";
+    private const string ImagePath = "images/privacy.png";
+    private string _navigationPath = $"{DomainTypeName.Replace(" ", "")}s";
 
-    protected override async Task OnInitializedAsync()
+    private SaveDomainViewModel _viewModel;  
+
+    protected override void OnInitialized()
     {
-        _editModeType = Id > 0 ? EditModeType.Update : EditModeType.Add;
+        _viewModel = new SaveDomainViewModel(Id, DomainTypeName, ImagePath, _navigationPath);
+    }  
 
-        if (Id == 0)
-        {
-            _pageLoaded = true;
-            return;
-        }
-
-        var query = new GetPrivacyType.Query(Id);
-
-        _viewModel = new SaveDomainViewModel(await _queryRouter.Send(query).ConfigureAwait(false));
-        _pageLoaded = true;
+    protected async Task OnLoad()
+    {
+        _viewModel = new SaveDomainViewModel(await _queryRouter.Send(new GetPrivacyType.Query(Id)).ConfigureAwait(false), 
+                                             DomainTypeName, 
+                                             ImagePath, 
+                                             _navigationPath);
     }
 
-    protected async Task Save()
+    protected async Task OnSave()
     {
-        var command = new SavePrivacyType.Command(_viewModel);
-
-        await _commandRouter.Send(command).ConfigureAwait(false);
+        await _commandRouter.Send(new SavePrivacyType.Command(_viewModel)).ConfigureAwait(false);
     }
 }

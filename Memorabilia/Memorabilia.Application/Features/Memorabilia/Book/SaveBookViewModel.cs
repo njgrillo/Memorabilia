@@ -33,6 +33,8 @@ namespace Memorabilia.Application.Features.Memorabilia.Book
 
         public bool HasTeam => Teams.Any();
 
+        public string ImagePath => string.Empty;
+
         public ItemType ItemType => ItemType.Book;
 
         [Required]

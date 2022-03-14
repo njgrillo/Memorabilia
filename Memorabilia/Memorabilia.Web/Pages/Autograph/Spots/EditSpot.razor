@@ -5,90 +5,68 @@
 @using Memorabilia.Web.Controls.ItemTypeSpot
 
 @inject CommandRouter _commandRouter
-@inject ProtectedLocalStorage _localStorage
 @inject NavigationManager _navigation
 @inject QueryRouter _queryRouter
 @inject IToastService _toastService
 
-@if (!_pageLoaded)
-{
-    <_PageLoader />
-}
-else
-{
-    <div class="row">
-        <div class="col-md-12" style="text-align: center">
-            <h1>@_viewModel.PageTitle</h1>
+<_Page OnLoad="OnLoad">
+    <Content>
+        <div class="row">
+            <div class="col-md-12" style="text-align: center">
+                <h1>@_viewModel.PageTitle</h1>
+            </div>
         </div>
-    </div>
-    <br />
-    <div style="border: 1px solid black; margin-top: 2%; margin-bottom: 2%; margin-left: 2%; margin-right: 2%;">
-        <EditForm Model="_viewModel" OnValidSubmit="HandleValidSubmit">
-            <DataAnnotationsValidator />
-            <ValidationSummary />
-            <div style="margin-top: 2%; margin-bottom: 2%; margin-left: 1%; margin-right: 1%;">
-                <div class="col-lg-12" style="text-align: center">
-                    <img src="@_viewModel.ImagePath" alt="Image" height="150" width="150" />
-                </div>            
-                <div class="row">
-                    <div class="col-lg-3">
-                        <div class="form-group">
-                            <label for="spot">Spot</label>
-                            <_ItemTypeSpotDropDown @bind-Value="@_viewModel.SpotId"
-                                                   @bind-Value:event="ValueChanged" 
-                                                   ItemType="@_viewModel.ItemType" /> 
-                        </div> 
+        <br />
+        <div style="border: 1px solid black; margin-top: 2%; margin-bottom: 2%; margin-left: 2%; margin-right: 2%;">
+            <EditForm Model="_viewModel" OnValidSubmit="HandleValidSubmit">
+                <DataAnnotationsValidator />
+                <ValidationSummary />
+                <div style="margin-top: 2%; margin-bottom: 2%; margin-left: 1%; margin-right: 1%;">
+                    <div class="col-lg-12" style="text-align: center">
+                        <img src="@_viewModel.ImagePath" alt="Image" height="150" width="150" />
+                    </div>            
+                    <div class="row">
+                        <div class="col-lg-3">
+                            <div class="form-group">
+                                <label for="spot">Spot</label>
+                                <_ItemTypeSpotDropDown @bind-Value="@_viewModel.SpotId"
+                                                       @bind-Value:event="ValueChanged" 
+                                                       ItemType="@_viewModel.ItemType" /> 
+                            </div> 
+                        </div>
+                    </div>                                   
+                    <div class="text-left">
+                        <button type="submit" class="btn btn-primary" @onclick="@(()=> _continue = true)">Save & Continue</button>
+                        <button type="submit" class="btn btn-primary">Save & Exit</button>
+                        <button type="button" class="btn btn-secondary" @onclick="@(_ => _navigation.NavigateTo("Memorabilia"))">Cancel</button>
                     </div>
-                </div>                                   
-                <div class="text-left">
-                    <button type="submit" class="btn btn-primary" @onclick="@(()=> _continue = true)">Save & Continue</button>
-                    <button type="submit" class="btn btn-primary">Save & Exit</button>
-                    <button type="button" class="btn btn-secondary" @onclick="@(_ => _navigation.NavigateTo("Memorabilia"))">Cancel</button>
-                </div>
-            </div>            
-        </EditForm>        
-    </div>
-}
+                </div>            
+            </EditForm>        
+        </div>
+    </Content>
+</_Page>
 
 @code {
     [Parameter]
     public int AutographId { get; set; }
 
     private bool _continue;
-    private bool _pageLoaded;
     private SaveSpotViewModel _viewModel = new SaveSpotViewModel();   
 
     protected async Task HandleValidSubmit()
     {
-        var userId = await _localStorage.GetAsync<int>("UserId").ConfigureAwait(false);
-
-        if (userId.Value == 0)
-            _navigation.NavigateTo("Login");
-
         _viewModel.AutographId = AutographId;
 
-        var command = new SaveSpot.Command(_viewModel);
-
-        await _commandRouter.Send(command).ConfigureAwait(false);
+        await _commandRouter.Send(new SaveSpot.Command(_viewModel)).ConfigureAwait(false);
 
         var url = _continue ? $"Autographs/Image/Edit/{AutographId}" : $"Memorabilia";
 
         _navigation.NavigateTo(url);
-
         _toastService.ShowSuccess($"{_viewModel.ItemTypeName} Autograph Spot was saved successfully!", _viewModel.ItemTypeName);
     }
 
-    protected override async Task OnInitializedAsync()
+    protected async Task OnLoad()
     {
-        var userId = await _localStorage.GetAsync<int>("UserId").ConfigureAwait(false);
-
-        if (userId.Value == 0)
-            _navigation.NavigateTo("Login");
-
-        var query = new GetSpot.Query(AutographId);
-
-        _viewModel = new SaveSpotViewModel(await _queryRouter.Send(query).ConfigureAwait(false));
-
-        _pageLoaded = true;
+        _viewModel = new SaveSpotViewModel(await _queryRouter.Send(new GetSpot.Query(AutographId)).ConfigureAwait(false));
     } 
 }

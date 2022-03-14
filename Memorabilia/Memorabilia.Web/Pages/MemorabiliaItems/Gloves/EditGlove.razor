@@ -4,100 +4,55 @@
 @using Memorabilia.Application.Features.Admin.Team
 @using Memorabilia.Application.Features.Memorabilia
 @using Memorabilia.Application.Features.Memorabilia.Glove
-@using Memorabilia.Domain.Constants
+@using Memorabilia.Web.Controls.MemorabiliaItem
 @using Memorabilia.Web.Controls.Person
 @using Memorabilia.Web.Controls.SportLeagueLevel
 @using Memorabilia.Web.Controls.Team
 
 @inject CommandRouter _commandRouter
-@inject ProtectedLocalStorage _localStorage
-@inject NavigationManager _navigation
 @inject QueryRouter _queryRouter
-@inject IToastService _toastService
 
-@if (!_pageLoaded)
-{
-    <_PageLoader />
-}
-else
-{
-    <div class="row">
-        <div class="col-md-12" style="text-align: center">
-            <h1>@_viewModel.PageTitle</h1>
-        </div>
-    </div>
-    <br />
-    <div style="border: 1px solid black; margin-top: 2%; margin-bottom: 2%; margin-left: 2%; margin-right: 2%;">
-        <div class="row" style="margin-top: 2%; margin-bottom: 2%; margin-left: 1%; margin-right: 1%;">
-            <div class="col-lg-12" style="text-align: center">
-                <img src="images/itemtypes.jpg" alt="Image" height="150" width="150" />
-            </div>            
-            <EditForm Model="_viewModel" OnValidSubmit="HandleValidSubmit">
-                <DataAnnotationsValidator />
-                <ValidationSummary />
-                <_PersonSelector AllowMultiple="true"
-                                 CanToggle="true"
-                                 ItemType="_viewModel.ItemType"
-                                 People="_viewModel.People" />                 
-                <_TeamSelector AllowMultiple="true"
-                               CanToggle="true" 
-                               ItemType="_viewModel.ItemType"
-                               Teams="_viewModel.Teams" />                             
-                <div class="text-right">
-                    <button type="submit" class="btn btn-primary" @onclick="@(()=> _continue = true)">Save & Continue</button>
-                    <button type="submit" class="btn btn-primary">Save & Exit</button>
-                    <button type="button" class="btn btn-secondary" @onclick="@(_ => _navigation.NavigateTo("Memorabilia"))">Cancel</button>
-                </div>
-            </EditForm>
-        </div>
-        <div class="row">
-            <div class="col-md-12" style="text-align: center">
-                <a href="Memorabilia/Items">Back</a>
-            </div>
-        </div>
-        <br />
-    </div>
-}
+<_EditMemorabiliaItem ImagePath="@_viewModel.ImagePath"
+					  ItemType="_viewModel.ItemType" 
+                      MemorabiliaId="MemorabiliaId"
+                      Model="_viewModel"
+                      OnLoad="OnLoad"
+                      OnSave="OnSave"
+                      PageTitle="_viewModel.PageTitle"
+                      TItem="SaveGloveViewModel">
+    <Content>
+		<_PersonSelector AllowMultiple="true"
+                         CanToggle="true"
+                         ItemType="_viewModel.ItemType"
+                         People="_viewModel.People" />                 
+        <_TeamSelector AllowMultiple="true"
+                       CanToggle="true" 
+                       ItemType="_viewModel.ItemType"
+                       Teams="_viewModel.Teams" />   
+	</Content>
+</_EditMemorabiliaItem>
 
 @code {
     [Parameter]
     public int MemorabiliaId { get; set; }
 
-    private bool _continue;
-    private bool _pageLoaded;
-    private SaveGloveViewModel _viewModel = new SaveGloveViewModel();
+    private SaveGloveViewModel _viewModel = new SaveGloveViewModel();    
 
-    protected async Task HandleValidSubmit()
-    {
-        var userId = await _localStorage.GetAsync<int>("UserId").ConfigureAwait(false);
+    protected async Task OnLoad()
+    {    
+        var viewModel = await _queryRouter.Send(new GetGlove.Query(MemorabiliaId)).ConfigureAwait(false);   
 
-        if (userId.Value == 0)
-            _navigation.NavigateTo("Login");  
-            
+        _viewModel = new SaveGloveViewModel(viewModel);  
+    }  
+
+    protected async Task OnSave()
+    {            
         _viewModel.MemorabiliaId = MemorabiliaId;
 
         var command = new SaveGlove.Command(_viewModel);
 
         await _commandRouter.Send(command).ConfigureAwait(false);
 
-        var url = _continue ? $"Memorabilia/Image/Edit/{command.MemorabiliaId}" : "Memorabilia";
-
-        _navigation.NavigateTo(url);
-
-        _toastService.ShowSuccess("Glove Details were saved successfully!", _viewModel.PageTitle);
+        MemorabiliaId = command.MemorabiliaId;
     }
-
-    protected override async Task OnInitializedAsync()
-    {
-        var userId = await _localStorage.GetAsync<int>("UserId").ConfigureAwait(false);
-
-        if (userId.Value == 0)
-            _navigation.NavigateTo("Login");        
-
-        var query = new GetGlove.Query(MemorabiliaId);
-        var viewModel = await _queryRouter.Send(query).ConfigureAwait(false);   
-
-        _viewModel = new SaveGloveViewModel(viewModel);  
-        _pageLoaded = true;
-    }  
 }

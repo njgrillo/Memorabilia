@@ -13,11 +13,15 @@ namespace Memorabilia.Application.Features.Admin.ItemTypeSport
             SportId = viewModel.SportId;
         }
 
+        public override string ItemTitle => "Item Type Sport";
+
         [Required]
         [Range(1, int.MaxValue, ErrorMessage = "Item Type is required.")]
         public int ItemTypeId { get; set; }        
 
         public override string PageTitle => $"{(Id > 0 ? "Edit" : "Add")} Item Type Sport";
+
+        public override string RoutePrefix => "ItemTypeSports";
 
         [Required]
         [Range(1, int.MaxValue, ErrorMessage = "Sport is required.")]

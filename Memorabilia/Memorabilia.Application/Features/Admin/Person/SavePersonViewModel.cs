@@ -43,6 +43,8 @@ namespace Memorabilia.Application.Features.Admin.Person
         [StringLength(200, ErrorMessage = "Image Path is too long.")]
         public string ImagePath { get; set; }
 
+        public override string ItemTitle => "Person";
+
         [Required]
         [StringLength(50, ErrorMessage = "Last Name is too long.")]
         [MinLength(1, ErrorMessage = "Last Name is too short.")]
@@ -62,6 +64,8 @@ namespace Memorabilia.Application.Features.Admin.Person
         public List<SavePersonOccupationViewModel> Occupations { get; set; } = new();
 
         public override string PageTitle => $"{(Id > 0 ? "Edit" : "Add")} Person";
+
+        public override string RoutePrefix => "People";
 
         [StringLength(25, ErrorMessage = "Suffix is too long.")]
         public string Suffix { get; set; }

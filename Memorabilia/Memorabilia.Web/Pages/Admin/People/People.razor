@@ -9,120 +9,93 @@
 @inject QueryRouter _queryRouter
 @inject IToastService _toastService
 
-@if (!_pageLoaded)
-{
-    <_PageLoader />
-}
-else
-{
-    <PopConfirm @ref="_deleteDialog"
-                Title="Delete Person"
-                ConfirmedChanged="Delete" />
-    <div class="row">
-        <div class="col-md-12" style="text-align: center">
-            <h1>@_viewModel.PageTitle</h1>
-        </div>
-    </div>
-    <br />
-    <_Table Items="_viewModel.People" 
-            ItemsPerPage="50"                     
-            TItem="PersonViewModel">
-        <HeaderTemplate>
-            <th scope="col">Display Name</th>
-            <th scope="col">First Name</th>
-            <th scope="col">Last Name</th>
-            <th scope="col">Middle Name</th>
-            <th scope="col">Suffix</th>
-            <th scope="col">Nickname</th>
-            <th scope="col">Legal Name</th>
-            <th scope="col">Birth Date</th>
-            <th scope="col">Death Date</th>
-            <th scope="col"></th>
-            <th scope="col"></th>
-        </HeaderTemplate>
-        <RowTemplate>
-            <td>@context.DisplayName</td>
-            <td>@context.FirstName</td>
-            <td>@context.LastName</td>
-            <td>@context.MiddleName</td>
-            <td>@context.Suffix</td>
-            <td>@context.Nickname</td>
-            <td>@context.LegalName</td>
-            <td>@context.BirthDate</td>
-            <td>@context.DeathDate</td>
-            <td>
-                <_Tooltip Text="Edit">
-                    <img class="can-click" 
-                            src="images/pencil.png" 
-                            height="25" 
-                            width="25" 
-                            @onclick="@(_ => _navigation.NavigateTo($"People/Edit/{context.Id}"))" />
-                </_Tooltip>                        
-            </td>
-            <td>
-                <_Tooltip Text="Delete">
-                    <img class="can-click" 
-                            src="images/trash.png" 
-                            height="25" 
-                            width="25" 
-                            @onclick="@(_ => ShowConfirm(context.Id))" />
-                </_Tooltip>
-            </td>
-        </RowTemplate>
-    </_Table>
-    <div class="row">
-        <div class="col-md-12" style="text-align: center">
+<_Page @ref="_page" 
+       ConfirmationTitle="Delete Person" 
+       OnConfirm="Delete" 
+       OnLoad="OnLoad">
+    <Content>
+        <div class="row">
             <div class="col-md-12" style="text-align: center">
-                <a href="People/Edit">Add Person</a>
+                <h1>@_viewModel.PageTitle</h1>
             </div>
         </div>
-    </div>
-    <br />
-}
+        <br />
+        <_Table Items="_viewModel.People" 
+                ItemsPerPage="50"                     
+                TItem="PersonViewModel">
+            <HeaderTemplate>
+                <th scope="col">Display Name</th>
+                <th scope="col">First Name</th>
+                <th scope="col">Last Name</th>
+                <th scope="col">Middle Name</th>
+                <th scope="col">Suffix</th>
+                <th scope="col">Nickname</th>
+                <th scope="col">Legal Name</th>
+                <th scope="col">Birth Date</th>
+                <th scope="col">Death Date</th>
+                <th scope="col"></th>
+                <th scope="col"></th>
+            </HeaderTemplate>
+            <RowTemplate>
+                <td>@context.DisplayName</td>
+                <td>@context.FirstName</td>
+                <td>@context.LastName</td>
+                <td>@context.MiddleName</td>
+                <td>@context.Suffix</td>
+                <td>@context.Nickname</td>
+                <td>@context.LegalName</td>
+                <td>@context.BirthDate</td>
+                <td>@context.DeathDate</td>
+                <td>
+                    <_Tooltip Text="Edit">
+                        <img class="can-click" 
+                                src="images/pencil.png" 
+                                height="25" 
+                                width="25" 
+                                @onclick="@(_ => _navigation.NavigateTo($"People/Edit/{context.Id}"))" />
+                    </_Tooltip>                        
+                </td>
+                <td>
+                    <_Tooltip Text="Delete">
+                        <img class="can-click" 
+                                src="images/trash.png" 
+                                height="25" 
+                                width="25" 
+                                @onclick="@(_ => _page.ShowConfirm(context.Id))" />
+                    </_Tooltip>
+                </td>
+            </RowTemplate>
+        </_Table>
+        <div class="row">
+            <div class="col-md-12" style="text-align: center">
+                <div class="col-md-12" style="text-align: center">
+                    <a href="People/Edit">Add Person</a>
+                </div>
+            </div>
+        </div>
+        <br />
+    </Content>
+</_Page>
 
 @code {
-    private PopConfirm _deleteDialog;
-    private int _deletedItemId;
-    private bool _pageLoaded;
+    private _Page _page;
     private PeopleViewModel _viewModel;
 
-    protected async Task Delete(bool confirm)
+    protected async Task Delete(int id)
     {
-        if (!confirm)
-        {
-            _deletedItemId = 0;
-            return;
-        }
-
-        var deletedItem = _viewModel.People.Single(person => person.Id == _deletedItemId);
+        var deletedItem = _viewModel.People.Single(person => person.Id == id);
         var viewModel = new SavePersonViewModel(deletedItem);
         viewModel.IsDeleted = true;
 
-        var command = new SavePerson.Command(viewModel);
-
-        await _commandRouter.Send(command).ConfigureAwait(false);
+        await _commandRouter.Send(new SavePerson.Command(viewModel)).ConfigureAwait(false);
         
         _viewModel.People.Remove(deletedItem);
 
         _toastService.ShowSuccess($"{_viewModel.ItemTitle} was deleted successfully!", _viewModel.PageTitle);
     }
 
-    protected override async Task OnInitializedAsync()
+    protected async Task OnLoad()
     {
-        var userId = await _localStorage.GetAsync<int>("UserId");
-
-        if (userId.Value == 0)
-            _navigation.NavigateTo("Login");
-
-        var query = new GetPeople.Query();
-
-        _viewModel = await _queryRouter.Send(query).ConfigureAwait(false);
-        _pageLoaded = true;
-    }
-
-    protected void ShowConfirm(int id)
-    {
-        _deletedItemId = id;
-        _deleteDialog.ShowPop();
+        _viewModel = await _queryRouter.Send(new GetPeople.Query()).ConfigureAwait(false);
     }
 }

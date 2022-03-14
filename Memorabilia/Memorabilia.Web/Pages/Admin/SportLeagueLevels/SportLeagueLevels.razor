@@ -9,110 +9,83 @@
 @inject QueryRouter _queryRouter
 @inject IToastService _toastService
 
-@if (!_pageLoaded)
-{
-    <_PageLoader />
-}
-else
-{
-    <PopConfirm @ref="_deleteDialog"
-                Title="Delete Sport League Level"
-                ConfirmedChanged="Delete" />
-    <div class="row">
-        <div class="col-md-12" style="text-align: center">
-            <h1>@_viewModel.PageTitle</h1>
-        </div>
-    </div>
-    <br />
-    <_Table Items="_viewModel.SportLeagueLevels" 
-            ItemsPerPage="10"                     
-            TItem="SportLeagueLevelViewModel">
-        <HeaderTemplate>
-            <th scope="col">Sport</th>
-            <th scope="col">Level</th>
-            <th scope="col">Name</th>
-            <th scope="col">Abbreviation</th>
-            <th scope="col"></th>
-            <th scope="col"></th>
-        </HeaderTemplate>
-        <RowTemplate>
-            <td>@context.SportName</td>
-            <td>@context.LevelTypeName</td>
-            <td>@context.Name</td>
-            <td>@context.Abbreviation</td>
-            <td>
-                <_Tooltip Text="Edit">
-                    <img class="can-click" 
-                         src="images/pencil.png" 
-                         height="25" 
-                         width="25" 
-                         @onclick="@(_ => _navigation.NavigateTo($"{_viewModel.RoutePrefix}/Edit/{context.Id}"))" />
-                </_Tooltip>                        
-            </td>
-            <td>
-                <_Tooltip Text="Delete">
-                    <img class="can-click" 
-                         src="images/trash.png" 
-                         height="25" 
-                         width="25" 
-                         @onclick="@(_ => ShowConfirm(context.Id))" />
-                </_Tooltip>
-            </td>
-        </RowTemplate>
-    </_Table>
-    <div class="row">
-        <div class="col-md-12" style="text-align: center">
+<_Page @ref="_page" 
+       ConfirmationTitle="Delete Sport League Level" 
+       OnConfirm="Delete" 
+       OnLoad="OnLoad">
+    <Content>
+        <div class="row">
             <div class="col-md-12" style="text-align: center">
-                <a href="SportLeagueLevels/Edit">Add @_viewModel.ItemTitle</a>
+                <h1>@_viewModel.PageTitle</h1>
             </div>
         </div>
-    </div>
-    <br />
-}
+        <br />
+        <_Table Items="_viewModel.SportLeagueLevels" 
+                ItemsPerPage="10"                     
+                TItem="SportLeagueLevelViewModel">
+            <HeaderTemplate>
+                <th scope="col">Sport</th>
+                <th scope="col">Level</th>
+                <th scope="col">Name</th>
+                <th scope="col">Abbreviation</th>
+                <th scope="col"></th>
+                <th scope="col"></th>
+            </HeaderTemplate>
+            <RowTemplate>
+                <td>@context.SportName</td>
+                <td>@context.LevelTypeName</td>
+                <td>@context.Name</td>
+                <td>@context.Abbreviation</td>
+                <td>
+                    <_Tooltip Text="Edit">
+                        <img class="can-click" 
+                             src="images/pencil.png" 
+                             height="25" 
+                             width="25" 
+                             @onclick="@(_ => _navigation.NavigateTo($"{_viewModel.RoutePrefix}/Edit/{context.Id}"))" />
+                    </_Tooltip>                        
+                </td>
+                <td>
+                    <_Tooltip Text="Delete">
+                        <img class="can-click" 
+                             src="images/trash.png" 
+                             height="25" 
+                             width="25" 
+                             @onclick="@(_ => _page.ShowConfirm(context.Id))" />
+                    </_Tooltip>
+                </td>
+            </RowTemplate>
+        </_Table>
+        <div class="row">
+            <div class="col-md-12" style="text-align: center">
+                <div class="col-md-12" style="text-align: center">
+                    <a href="SportLeagueLevels/Edit">Add @_viewModel.ItemTitle</a>
+                </div>
+            </div>
+        </div>
+        <br />
+    </Content>
+</_Page>
 
 @code {
-    private PopConfirm _deleteDialog;
-    private int _deletedItemId;
-    private bool _pageLoaded;
+    private _Page _page;
     private SportLeagueLevelsViewModel _viewModel;
 
-    protected async Task Delete(bool confirm)
+    protected async Task Delete(int id)
     {
-        if (!confirm)
-        {
-            _deletedItemId = 0;
-            return;
-        }
-
-        var deletedItem = _viewModel.SportLeagueLevels.Single(sportLeagueLevel => sportLeagueLevel.Id == _deletedItemId);
+        var deletedItem = _viewModel.SportLeagueLevels.Single(sportLeagueLevel => sportLeagueLevel.Id == id);
         var viewModel = new SaveSportLeagueLevelViewModel(deletedItem);
         viewModel.IsDeleted = true;
 
-        var command = new SaveSportLeagueLevel.Command(viewModel);
-
-        await _commandRouter.Send(command).ConfigureAwait(false);
+        await _commandRouter.Send(new SaveSportLeagueLevel.Command(viewModel)).ConfigureAwait(false);
         
         _viewModel.SportLeagueLevels.Remove(deletedItem);
 
         _toastService.ShowSuccess($"{_viewModel.ItemTitle} was deleted successfully!", _viewModel.PageTitle);
     }
 
-    protected override async Task OnInitializedAsync()
+    protected async Task OnLoad()
     {
-        var userId = await _localStorage.GetAsync<int>("UserId");
-
-        if (userId.Value == 0)
-            _navigation.NavigateTo("Login");
-
-        var query = new GetSportLeagueLevels.Query();
-
-        _viewModel = await _queryRouter.Send(query).ConfigureAwait(false);
-        _pageLoaded = true;
-    }
-
-    protected void ShowConfirm(int id)
-    {
-        _deletedItemId = id;
-        _deleteDialog.ShowPop();
+        _viewModel = await _queryRouter.Send(new GetSportLeagueLevels.Query()).ConfigureAwait(false);
     }
 }

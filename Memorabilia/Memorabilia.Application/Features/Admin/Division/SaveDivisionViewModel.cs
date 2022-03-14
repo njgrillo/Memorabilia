@@ -20,6 +20,8 @@ namespace Memorabilia.Application.Features.Admin.Division
 
         public int ConferenceId { get; set; }
 
+        public override string ItemTitle => "Division";
+
         public int LeagueId { get; set; }
 
         [Required]
@@ -27,6 +29,8 @@ namespace Memorabilia.Application.Features.Admin.Division
         [MinLength(1, ErrorMessage = "Name is too short.")]
         public string Name { get; set; }
 
-        public override string PageTitle => $"{(Id > 0 ? "Edit" : "Add")} Division";        
+        public override string PageTitle => $"{(Id > 0 ? "Edit" : "Add")} Division";
+
+        public override string RoutePrefix => "Divisions";              
     }
 }

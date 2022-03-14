@@ -13,11 +13,15 @@ namespace Memorabilia.Application.Features.Admin.ItemTypeSpot
             SpotId = viewModel.SpotId;
         }
 
+        public override string ItemTitle => "Item Type Spot";
+
         [Required]
         [Range(1, int.MaxValue, ErrorMessage = "Item Type is required.")]
         public int ItemTypeId { get; set; }
 
         public override string PageTitle => $"{(Id > 0 ? "Edit" : "Add")} Item Type Spot";
+
+        public override string RoutePrefix => "ItemTypeSpots";
 
         [Required]
         [Range(1, int.MaxValue, ErrorMessage = "Spot is required.")]

@@ -2,58 +2,53 @@
 
 @using Memorabilia.Application.Features.Admin
 @using Memorabilia.Application.Features.Admin.Team
-@using Memorabilia.Domain.Constants
 @using Memorabilia.Web.Controls.Team
 
 @inject CommandRouter _commandRouter
-@inject ProtectedLocalStorage _localStorage
 @inject NavigationManager _navigation
 @inject QueryRouter _queryRouter
 @inject IToastService _toastService
 
-@if (!_pageLoaded)
-{
-    <_PageLoader />
-}
-else
-{
-    <div class="row">
-        <div class="col-md-12" style="text-align: center">
-            <h1>Edit Conference</h1>
-        </div>
-    </div>
-    <br />
-    <div style="border: 1px solid black; margin-top: 2%; margin-bottom: 2%; margin-left: 2%; margin-right: 2%;">
-        <div class="row" style="margin-top: 2%; margin-bottom: 2%; margin-left: 1%; margin-right: 1%;">
-            <div class="col-lg-12" style="text-align: center">
-                <img src="images/conferences.jpg" alt="Image" height="150" width="150" />
-            </div>
-            <EditForm Model="_viewModel" OnValidSubmit="HandleValidSubmit">
-                <DataAnnotationsValidator />
-                <ValidationSummary /> 
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="form-group">
-                            <_TeamConferenceEditor Conferences="_viewModel"
-                                                   SportLeagueLevel="_sportLeagueLevel" />
-                        </div>
-                    </div>
-                </div>
-                <div class="text-right">
-                    <button type="submit" class="btn btn-primary" @onclick="@(()=> _continue = true)">Save & Continue</button>
-                    <button type="submit" class="btn btn-primary">Save & Exit</button>
-                    <button type="button" class="btn btn-secondary" @onclick="@(_ => _navigation.NavigateTo("Teams"))">Cancel</button>
-                </div>
-            </EditForm>
-        </div>
+<_Page OnLoad="OnLoad">
+    <Content>
         <div class="row">
             <div class="col-md-12" style="text-align: center">
-                <a href="Teams">Back</a>
+                <h1>Edit Conference</h1>
             </div>
         </div>
         <br />
-    </div>
-}
+        <div style="border: 1px solid black; margin-top: 2%; margin-bottom: 2%; margin-left: 2%; margin-right: 2%;">
+            <div class="row" style="margin-top: 2%; margin-bottom: 2%; margin-left: 1%; margin-right: 1%;">
+                <div class="col-lg-12" style="text-align: center">
+                    <img src="images/conferences.jpg" alt="Image" height="150" width="150" />
+                </div>
+                <EditForm Model="_viewModel" OnValidSubmit="HandleValidSubmit">
+                    <DataAnnotationsValidator />
+                    <ValidationSummary /> 
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="form-group">
+                                <_TeamConferenceEditor Conferences="_viewModel"
+                                                       SportLeagueLevel="_sportLeagueLevel" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="text-right">
+                        <button type="submit" class="btn btn-primary" @onclick="@(()=> _continue = true)">Save & Continue</button>
+                        <button type="submit" class="btn btn-primary">Save & Exit</button>
+                        <button type="button" class="btn btn-secondary" @onclick="@(_ => _navigation.NavigateTo("Teams"))">Cancel</button>
+                    </div>
+                </EditForm>
+            </div>
+            <div class="row">
+                <div class="col-md-12" style="text-align: center">
+                    <a href="Teams">Back</a>
+                </div>
+            </div>
+            <br />
+        </div>
+    </Content>
+</_Page>
 
 @code {
     [Parameter]
@@ -63,33 +58,25 @@ else
     public int TeamId { get; set; }
 
     private bool _continue;
-    private bool _pageLoaded;
     private SportLeagueLevel _sportLeagueLevel;
     private List<SaveTeamConferenceViewModel> _viewModel = new();
 
     protected async Task HandleValidSubmit()
     {
-        var command = new SaveTeamConference.Command(TeamId, _viewModel);
-
-        await _commandRouter.Send(command).ConfigureAwait(false);
+        await _commandRouter.Send(new SaveTeamConference.Command(TeamId, _viewModel)).ConfigureAwait(false);
 
         var url = _continue ? $"Team/Division/Edit/{TeamId}/{SportLeagueLevelId}" : "Teams";
 
         _navigation.NavigateTo(url);
-
         _toastService.ShowSuccess("Conference was saved successfully!", "Conference");
     }
 
-    protected override async Task OnInitializedAsync()
+    protected async Task OnLoad()
     {
         _sportLeagueLevel = SportLeagueLevel.Find(SportLeagueLevelId);
 
-        var query = new GetTeamConferences.Query(TeamId);
-
-        _viewModel = (await _queryRouter.Send(query)
+        _viewModel = (await _queryRouter.Send(new GetTeamConferences.Query(TeamId))
                                         .ConfigureAwait(false)).Select(teamConference => new SaveTeamConferenceViewModel(teamConference))
                                                                .ToList();
-
-        _pageLoaded = true;
     }
 }

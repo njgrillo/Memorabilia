@@ -11,7 +11,9 @@ namespace Memorabilia.Application.Features.Admin.ItemTypeLevel
             Id = viewModel.Id;
             ItemTypeId = viewModel.ItemTypeId;
             LevelTypeId = viewModel.LevelTypeId;
-        }        
+        }
+
+        public override string ItemTitle => "Item Type Level";
 
         [Required]
         [Range(1, int.MaxValue, ErrorMessage = "Item Type is required.")]
@@ -22,5 +24,7 @@ namespace Memorabilia.Application.Features.Admin.ItemTypeLevel
         public int LevelTypeId { get; set; }
 
         public override string PageTitle => $"{(Id > 0 ? "Edit" : "Add")} Item Type Level";
+
+        public override string RoutePrefix => "ItemTypeLevels";
     }
 }

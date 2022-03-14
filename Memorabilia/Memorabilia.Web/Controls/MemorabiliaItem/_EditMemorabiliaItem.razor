@@ -1,0 +1,80 @@
+﻿@typeparam TItem
+
+@inject NavigationManager _navigation
+@inject IToastService _toastService
+
+<_Page OnLoad="Load">
+    <Content>
+        <div class="row">
+            <div class="col-md-12" style="text-align: center">
+                <h1>@PageTitle</h1>
+            </div>
+        </div>
+        <br />
+        <EditForm Model="Model" OnValidSubmit="HandleValidSubmit">
+            <DataAnnotationsValidator />
+            <ValidationSummary />
+            <div style="margin-top: 2%; margin-bottom: 2%; margin-left: 1%; margin-right: 1%;">
+                <div class="col-lg-12" style="text-align: center">
+                    <img src="@ImagePath" alt="Image" height="150" width="150" />
+                </div>    
+                <br />
+                @Content
+                <div class="text-right">
+                    <button type="submit" class="btn btn-primary" @onclick="@(()=> _continue = true)">Save & Continue</button>
+                    <button type="submit" class="btn btn-primary">Save & Exit</button>
+                    <button type="button" class="btn btn-secondary" @onclick="@(_ => _navigation.NavigateTo("Memorabilia"))">Cancel</button>
+                </div>
+            </div>            
+        </EditForm>
+        <div class="row">
+            <div class="col-md-12" style="text-align: center">
+                <a href="Memorabilia/Items">Back</a>
+            </div>
+        </div>
+        <br />
+    </Content>
+</_Page>
+
+@code {
+    [Parameter]
+    public RenderFragment Content { get; set; }
+
+    [Parameter]
+    public string ImagePath { get; set; }
+
+    [Parameter]
+    public ItemType ItemType { get; set; }
+
+    [Parameter]
+    public int MemorabiliaId { get; set; }
+
+    [Parameter]
+    public TItem Model { get; set; }
+
+    [Parameter]
+    public EventCallback OnLoad { get; set; }
+
+    [Parameter]
+    public EventCallback<TItem> OnSave { get; set; }
+
+    [Parameter]
+    public string PageTitle { get; set; }    
+
+    private bool _continue;
+
+    protected async Task HandleValidSubmit()
+    {            
+        await OnSave.InvokeAsync(Model).ConfigureAwait(false);
+
+        var url = _continue ? $"Memorabilia/Image/Edit/{MemorabiliaId}" : "Memorabilia";
+
+        _navigation.NavigateTo(url);
+        _toastService.ShowSuccess($"{ItemType.Name} Details were saved successfully!", PageTitle);
+    }
+
+    protected async Task Load()
+    {
+        await OnLoad.InvokeAsync().ConfigureAwait(false);
+    }    
+}

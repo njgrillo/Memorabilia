@@ -9,183 +9,138 @@
 @using Memorabilia.Web.Controls.ItemTypeBrand
 @using Memorabilia.Web.Controls.ItemTypeLevel
 @using Memorabilia.Web.Controls.ItemTypeSize
+@using Memorabilia.Web.Controls.MemorabiliaItem
 @using Memorabilia.Web.Controls.Person
 @using Memorabilia.Web.Controls.SportLeagueLevel
 @using Memorabilia.Web.Controls.Team
 
 @inject CommandRouter _commandRouter
-@inject ProtectedLocalStorage _localStorage
-@inject NavigationManager _navigation
 @inject QueryRouter _queryRouter
-@inject IToastService _toastService
 
-@if (!_pageLoaded)
-{
-    <_PageLoader />
-}
-else
-{
-    <div class="row">
-        <div class="col-md-12" style="text-align: center">
-            <h1>@_viewModel.PageTitle</h1>
-        </div>
-    </div>
-    <br />
-    <div style="border: 1px solid black; margin-top: 2%; margin-bottom: 2%; margin-left: 2%; margin-right: 2%;">
-        <div class="row" style="margin-top: 2%; margin-bottom: 2%; margin-left: 1%; margin-right: 1%;">
-            <div class="col-lg-12" style="text-align: center">
-                <img src="images/itemtypes.jpg" alt="Image" height="150" width="150" />
-            </div>            
-            <EditForm Model="_viewModel" OnValidSubmit="HandleValidSubmit">
-                <DataAnnotationsValidator />
-                <ValidationSummary />
-                <div class="row">
-                    <div class="col-lg-6">
-                        <div class="form-group">
-                            <label for="level">Level</label>
-                            <_ItemTypeLevelDropDown @bind-Value="@_viewModel.LevelTypeId"
-                                                    @bind-Value:event="ValueChanged" 
-                                                    ItemType="_viewModel.ItemType" /> 
-                        </div> 
-                    </div>
-                    <div class="col-lg-6">
-                        <div class="form-group">
-                            <label for="brand">Brand</label>
-                            <_ItemTypeBrandDropDown @bind-Value="@_viewModel.BrandId" 
-                                                    @bind-Value:event="ValueChanged"
-                                                    ItemType="_viewModel.ItemType" />
-                        </div> 
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-lg-6">
-                        <div class="form-group">
-                            <label for="size">Size</label>
-                            <_ItemTypeSizeDropDown @bind-Value="@_viewModel.SizeId"
-                                                   @bind-Value:event="ValueChanged" 
-                                                   ItemType="_viewModel.ItemType" /> 
-                        </div> 
-                    </div>
-                    <div class="col-lg-6">
-                        <div class="form-group">
-                            <label for="year">Year</label>
-                            <InputNumber id="year" class="form-control" @bind-Value="@_viewModel.Year" />                    
-                        </div> 
-                    </div>
-                </div>
-                <div class="row">                    
-                    <div class="col-lg-6">
-                        <div class="form-group">                            
-                            <InputCheckbox id="licensed" @bind-Value="@_viewModel.Licensed" />  
-                            <label for="licensed">Licensed</label>
-                        </div> 
-                    </div>
-                    <div class="col-lg-6">
-                        <div class="form-group">                            
-                            <InputCheckbox id="custom" @bind-Value="@_viewModel.Custom" />  
-                            <label for="custom">Custom</label>
-                        </div> 
-                    </div>
+<_EditMemorabiliaItem ImagePath="@_viewModel.ImagePath"
+					  ItemType="_viewModel.ItemType" 
+                      MemorabiliaId="MemorabiliaId"
+                      Model="_viewModel"
+                      OnLoad="OnLoad"
+                      OnSave="OnSave"
+                      PageTitle="_viewModel.PageTitle"
+                      TItem="SaveCardViewModel">
+    <Content>
+		<div class="row">
+            <div class="col-lg-6">
+                <div class="form-group">
+                    <label for="level">Level</label>
+                    <_ItemTypeLevelDropDown @bind-Value="@_viewModel.LevelTypeId"
+                                            @bind-Value:event="ValueChanged" 
+                                            ItemType="_viewModel.ItemType" /> 
                 </div> 
-                <div class="row">                    
-                    <div class="col-lg-12">
-                        <div class="form-group">
-                            <input type="checkbox" checked="@_viewModel.IsNumbered" @onchange="eventArgs => { NumberedCheckboxClicked(eventArgs.Value); }" />
-                            <label for="numbered">Numbered</label>
-                            <div class="form-group" hidden="@(!_displayNumbered)">
-                                <div class="col-lg-6">
-                                    <div class="form-group">
-                                        <InputNumber id="numerator" class="form-control" @bind-Value="@_viewModel.Numerator" />                    
-                                    </div> 
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="form-group">
-                                        <label for="of">of</label>              
-                                    </div> 
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="form-group">
-                                        <InputNumber id="denominator" class="form-control" @bind-Value="@_viewModel.Denominator" />                    
-                                    </div> 
-                                </div>
-                            </div>                    
-                        </div> 
-                    </div>
-                </div>                
-                <_PersonSelector AllowMultiple="true"
-                                 CanToggle="true"
-                                 ItemType="_viewModel.ItemType"
-                                 People="_viewModel.People" />                 
-                <_TeamSelector AllowMultiple="true"
-                               CanToggle="true" 
-                               ItemType="_viewModel.ItemType"
-                               Teams="_viewModel.Teams" />                             
-                <div class="text-right">
-                    <button type="submit" class="btn btn-primary" @onclick="@(()=> _continue = true)">Save & Continue</button>
-                    <button type="submit" class="btn btn-primary">Save & Exit</button>
-                    <button type="button" class="btn btn-secondary" @onclick="@(_ => _navigation.NavigateTo("Memorabilia"))">Cancel</button>
-                </div>
-            </EditForm>
-        </div>
-        <div class="row">
-            <div class="col-md-12" style="text-align: center">
-                <a href="Memorabilia/Items">Back</a>
+            </div>
+            <div class="col-lg-6">
+                <div class="form-group">
+                    <label for="brand">Brand</label>
+                    <_ItemTypeBrandDropDown @bind-Value="@_viewModel.BrandId" 
+                                            @bind-Value:event="ValueChanged"
+                                            ItemType="_viewModel.ItemType" />
+                </div> 
             </div>
         </div>
-        <br />
-    </div>
-}
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="form-group">
+                    <label for="size">Size</label>
+                    <_ItemTypeSizeDropDown @bind-Value="@_viewModel.SizeId"
+                                           @bind-Value:event="ValueChanged" 
+                                           ItemType="_viewModel.ItemType" /> 
+                </div> 
+            </div>
+            <div class="col-lg-6">
+                <div class="form-group">
+                    <label for="year">Year</label>
+                    <InputNumber id="year" class="form-control" @bind-Value="@_viewModel.Year" />                    
+                </div> 
+            </div>
+        </div>
+        <div class="row">                    
+            <div class="col-lg-6">
+                <div class="form-group">                            
+                    <InputCheckbox id="licensed" @bind-Value="@_viewModel.Licensed" />  
+                    <label for="licensed">Licensed</label>
+                </div> 
+            </div>
+            <div class="col-lg-6">
+                <div class="form-group">                            
+                    <InputCheckbox id="custom" @bind-Value="@_viewModel.Custom" />  
+                    <label for="custom">Custom</label>
+                </div> 
+            </div>
+        </div> 
+        <div class="row">                    
+            <div class="col-lg-12">
+                <div class="form-group">
+                    <input type="checkbox" checked="@_viewModel.IsNumbered" @onchange="eventArgs => { NumberedCheckboxClicked(eventArgs.Value); }" />
+                    <label for="numbered">Numbered</label>
+                    <div class="form-group" hidden="@(!_displayNumbered)">
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <InputNumber id="numerator" class="form-control" @bind-Value="@_viewModel.Numerator" />                    
+                            </div> 
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label for="of">of</label>              
+                            </div> 
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <InputNumber id="denominator" class="form-control" @bind-Value="@_viewModel.Denominator" />                    
+                            </div> 
+                        </div>
+                    </div>                    
+                </div> 
+            </div>
+        </div>                
+        <_PersonSelector AllowMultiple="true"
+                         CanToggle="true"
+                         ItemType="_viewModel.ItemType"
+                         People="_viewModel.People" />                 
+        <_TeamSelector AllowMultiple="true"
+                       CanToggle="true" 
+                       ItemType="_viewModel.ItemType"
+                       Teams="_viewModel.Teams" />
+	</Content>
+</_EditMemorabiliaItem>
 
 @code {
     [Parameter]
     public int MemorabiliaId { get; set; }
 
-    private bool _continue;
     private bool _displayNumbered;
-    private bool _pageLoaded;
-    private SaveCardViewModel _viewModel = new SaveCardViewModel();
+    private SaveCardViewModel _viewModel = new SaveCardViewModel();    
 
-    protected async Task HandleValidSubmit()
+    protected async Task OnLoad()
+    {    
+        var viewModel = await _queryRouter.Send(new GetCard.Query(MemorabiliaId)).ConfigureAwait(false);   
+
+        if (viewModel.Brand == null)
+        {
+            SetDefaults();
+            return;
+        }
+
+        _viewModel = new SaveCardViewModel(viewModel);
+        _displayNumbered = _viewModel.IsNumbered;
+    }  
+
+    protected async Task OnSave()
     {
-        var userId = await _localStorage.GetAsync<int>("UserId").ConfigureAwait(false);
-
-        if (userId.Value == 0)
-            _navigation.NavigateTo("Login");  
-
         _viewModel.MemorabiliaId = MemorabiliaId;
 
         var command = new SaveCard.Command(_viewModel);
 
         await _commandRouter.Send(command).ConfigureAwait(false);
 
-        var url = _continue ? $"Memorabilia/Image/Edit/{command.MemorabiliaId}" : "Memorabilia";
-
-        _navigation.NavigateTo(url);
-
-        _toastService.ShowSuccess("Card Details were saved successfully!", _viewModel.PageTitle);
+        MemorabiliaId = command.MemorabiliaId;
     }
-
-    protected override async Task OnInitializedAsync()
-    {
-        var userId = await _localStorage.GetAsync<int>("UserId").ConfigureAwait(false);
-
-        if (userId.Value == 0)
-            _navigation.NavigateTo("Login");        
-
-        var query = new GetCard.Query(MemorabiliaId);
-        var viewModel = await _queryRouter.Send(query).ConfigureAwait(false);   
-
-        if (viewModel.Brand == null)
-        {
-            SetDefaults();
-            _pageLoaded = true;
-            return;
-        }
-
-        _viewModel = new SaveCardViewModel(viewModel);
-        _displayNumbered = _viewModel.IsNumbered;
-        _pageLoaded = true;
-    }  
 
     private void NumberedCheckboxClicked(object isChecked)
     {     

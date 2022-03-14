@@ -38,6 +38,8 @@ namespace Memorabilia.Application.Features.Memorabilia.Magazine
 
         public bool HasTeam => Teams.Any();
 
+        public string ImagePath => "images/magazine.jpg";
+
         public ItemType ItemType => ItemType.Magazine;
 
         [Required]

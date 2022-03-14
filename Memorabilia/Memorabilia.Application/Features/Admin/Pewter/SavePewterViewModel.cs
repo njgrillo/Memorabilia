@@ -18,6 +18,10 @@ namespace Memorabilia.Application.Features.Admin.Pewter
         [Required]
         public string ImagePath { get; set; } = "wwwroot/images/imagenotavailable.png";
 
+        public override string ItemTitle => "Pewter";
+
+        public override string RoutePrefix => "Pewters";
+
         [Required]
         [Range(1, int.MaxValue, ErrorMessage = "Size is required.")]
         public int SizeId { get; set; }

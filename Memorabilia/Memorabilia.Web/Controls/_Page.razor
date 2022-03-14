@@ -1,0 +1,74 @@
+﻿@inject ProtectedLocalStorage _localStorage
+@inject NavigationManager _navigation
+
+@if (!_pageLoaded)
+{
+    <_PageLoader />
+}
+else
+{
+    <PopConfirm @ref="_popConfirm"
+                ConfirmedChanged="Confirm" 
+                Title="@ConfirmationTitle" />
+    @Content
+}
+
+@code {
+    [Parameter]
+    public string ConfirmationTitle { get; set; }
+
+    [Parameter]
+    public RenderFragment Content { get; set; }
+
+    [Parameter]
+    public int Id
+    {
+        get
+        {
+            return _id;
+        }
+        set
+        {
+            _id = value;
+        }
+    }
+
+    [Parameter]
+    public EventCallback<int> OnConfirm { get; set; } 
+
+    [Parameter]
+    public EventCallback OnLoad { get; set; }
+
+    private int _id;
+    private PopConfirm _popConfirm;
+    private bool _pageLoaded;
+
+    protected async Task Confirm(bool confirm)
+    {
+        if (!confirm)
+        {
+            _id = 0;
+            return;
+        }
+
+        await OnConfirm.InvokeAsync(_id).ConfigureAwait(false);
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        var userId = await _localStorage.GetAsync<int>("UserId");
+
+        if (userId.Value == 0)
+            _navigation.NavigateTo("Login");
+
+        await OnLoad.InvokeAsync().ConfigureAwait(false);
+
+        _pageLoaded = true;
+    }
+
+    public void ShowConfirm(int id)
+    {
+        _id = id;
+        _popConfirm.ShowPop();
+    }
+}

@@ -4,115 +4,87 @@
 @using Memorabilia.Application.Features.Admin.Commissioner
 
 @inject CommandRouter _commandRouter
-@inject ProtectedLocalStorage _localStorage
 @inject NavigationManager _navigation
 @inject QueryRouter _queryRouter
 @inject IToastService _toastService
 
-@if (!_pageLoaded)
-{
-    <_PageLoader />
-}
-else
-{
-    <PopConfirm @ref="_deleteDialog"
-                Title="Delete Commissioner"
-                ConfirmedChanged="Delete" />
-    <div class="row">
-        <div class="col-md-12" style="text-align: center">
-            <h1>@_viewModel.PageTitle</h1>
-        </div>
-    </div>
-    <br />
-    <_Table Items="_viewModel.Commissioners" 
-            ItemsPerPage="10"                     
-            TItem="CommissionerViewModel">
-        <HeaderTemplate>
-            <th scope="col">Sport League</th>
-            <th scope="col">Name</th>
-            <th scope="col">Begin Year</th>
-            <th scope="col">End Year</th>
-            <th scope="col"></th>
-            <th scope="col"></th>
-        </HeaderTemplate>
-        <RowTemplate>
-            <td>@context.SportLeagueLevelName</td>
-            <td>@context.Person.DisplayName</td>
-            <td>@context.BeginYear?.ToString()</td>
-            <td>@context.EndYear?.ToString()</td>
-            <td>
-                <_Tooltip Text="Edit">
-                    <img class="can-click" 
-                            src="images/pencil.png" 
-                            height="25" 
-                            width="25" 
-                            @onclick="@(_ => _navigation.NavigateTo($"{_viewModel.RoutePrefix}/Edit/{context.Id}"))" />
-                </_Tooltip>                        
-            </td>
-            <td>
-                <_Tooltip Text="Delete">
-                    <img class="can-click" 
-                            src="images/trash.png" 
-                            height="25" 
-                            width="25" 
-                            @onclick="@(_ => ShowConfirm(context.Id))" />
-                </_Tooltip>
-            </td>
-        </RowTemplate>
-    </_Table>
-    <div class="row">
-        <div class="col-md-12" style="text-align: center">
+<_Page @ref="_page" 
+       ConfirmationTitle="Delete Commissioner" 
+       OnConfirm="Delete" 
+       OnLoad="OnLoad">
+    <Content>
+        <div class="row">
             <div class="col-md-12" style="text-align: center">
-                <a href="Commissioners/Edit">Add @_viewModel.ItemTitle</a>
+                <h1>@_viewModel.PageTitle</h1>
             </div>
         </div>
-    </div>
-    <br />
-}
+        <br />
+        <_Table Items="_viewModel.Commissioners" 
+                ItemsPerPage="10"                     
+                TItem="CommissionerViewModel">
+            <HeaderTemplate>
+                <th scope="col">Sport League</th>
+                <th scope="col">Name</th>
+                <th scope="col">Begin Year</th>
+                <th scope="col">End Year</th>
+                <th scope="col"></th>
+                <th scope="col"></th>
+            </HeaderTemplate>
+            <RowTemplate>
+                <td>@context.SportLeagueLevelName</td>
+                <td>@context.Person.DisplayName</td>
+                <td>@context.BeginYear?.ToString()</td>
+                <td>@context.EndYear?.ToString()</td>
+                <td>
+                    <_Tooltip Text="Edit">
+                        <img class="can-click" 
+                                src="images/pencil.png" 
+                                height="25" 
+                                width="25" 
+                                @onclick="@(_ => _navigation.NavigateTo($"{_viewModel.RoutePrefix}/Edit/{context.Id}"))" />
+                    </_Tooltip>                        
+                </td>
+                <td>
+                    <_Tooltip Text="Delete">
+                        <img class="can-click" 
+                                src="images/trash.png" 
+                                height="25" 
+                                width="25" 
+                                @onclick="@(_ => _page.ShowConfirm(context.Id))" />
+                    </_Tooltip>
+                </td>
+            </RowTemplate>
+        </_Table>
+        <div class="row">
+            <div class="col-md-12" style="text-align: center">
+                <div class="col-md-12" style="text-align: center">
+                    <a href="Commissioners/Edit">Add @_viewModel.ItemTitle</a>
+                </div>
+            </div>
+        </div>
+        <br />
+    </Content>
+</_Page>
 
 @code {
-    private PopConfirm _deleteDialog;
-    private int _deletedItemId;
-    private bool _pageLoaded;
+    private _Page _page;
     private CommissionersViewModel _viewModel;
 
-    protected async Task Delete(bool confirm)
+    protected async Task Delete(int id)
     {
-        if (!confirm)
-        {
-            _deletedItemId = 0;
-            return;
-        }
-
-        var deletedItem = _viewModel.Commissioners.Single(Commissioner => Commissioner.Id == _deletedItemId);
+        var deletedItem = _viewModel.Commissioners.Single(Commissioner => Commissioner.Id == id);
         var viewModel = new SaveCommissionerViewModel(deletedItem);
         viewModel.IsDeleted = true;
 
-        var command = new SaveCommissioner.Command(viewModel);
-
-        await _commandRouter.Send(command).ConfigureAwait(false);
+        await _commandRouter.Send(new SaveCommissioner.Command(viewModel)).ConfigureAwait(false);
 
         _viewModel.Commissioners.Remove(deletedItem);
 
         _toastService.ShowSuccess($"{_viewModel.ItemTitle} was deleted successfully!", _viewModel.PageTitle);
     }
 
-    protected override async Task OnInitializedAsync()
+    protected async Task OnLoad()
     {
-        var userId = await _localStorage.GetAsync<int>("UserId");
-
-        if (userId.Value == 0)
-            _navigation.NavigateTo("Login");
-
-        var query = new GetCommissioners.Query();
-
-        _viewModel = await _queryRouter.Send(query).ConfigureAwait(false);
-        _pageLoaded = true;
-    }
-
-    protected void ShowConfirm(int id)
-    {
-        _deletedItemId = id;
-        _deleteDialog.ShowPop();
+        _viewModel = await _queryRouter.Send(new GetCommissioners.Query()).ConfigureAwait(false);
     }
 }

@@ -4,42 +4,23 @@
 @using Memorabilia.Application.Features.Admin.GameStyleType
 
 @inject CommandRouter _commandRouter
-@inject ProtectedLocalStorage _localStorage
-@inject NavigationManager _navigation
 @inject QueryRouter _queryRouter
 
-@if (_viewModel == null)
-{
-    <p><em>Loading...</em></p>
-}
-else{
-    <_DomainTable DomainEntities="@_viewModel.DomainEntities"
-                  DomainItemName="@_viewModel.ItemTitle"
-                  DomainItemTitle="@_viewModel.PageTitle"
-                  OnDelete="Delete"
-                  RoutePrefix="@_viewModel.RoutePrefix" />
-}
+<_DomainItems DomainItems="_viewModel"
+              OnDelete="OnDelete"
+              OnLoad="OnLoad" />
 
 @code {
     private GameStyleTypesViewModel _viewModel;
 
-    protected async Task Delete(SaveDomainViewModel viewModel)
+    protected async Task OnDelete(SaveDomainViewModel viewModel)
     {
-        var command = new SaveGameStyleType.Command(viewModel);
-
-        await _commandRouter.Send(command).ConfigureAwait(false);
+        await _commandRouter.Send(new SaveGameStyleType.Command(viewModel)).ConfigureAwait(false);
     }
 
-    protected override async Task OnInitializedAsync()
+    protected async Task OnLoad()
     {
-        var userId = await _localStorage.GetAsync<int>("UserId");
-
-        if (userId.Value == 0)
-            _navigation.NavigateTo("Login");
-
-        var query = new GetGameStyleTypes.Query();
-
-        _viewModel = await _queryRouter.Send(query).ConfigureAwait(false);
+        _viewModel = await _queryRouter.Send(new GetGameStyleTypes.Query()).ConfigureAwait(false);
     }
 }
 
