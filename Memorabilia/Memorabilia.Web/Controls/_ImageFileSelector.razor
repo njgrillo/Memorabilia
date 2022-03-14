@@ -19,8 +19,8 @@
         <_ImageEditor CanRemove="CanRemove"
                       HasPrimary="HasPrimary"
                       ImageFilePath="@image.FilePath"
-                      ImageType="@Domain.Constants.ImageType.Find(image.ImageTypeId)"
-                      IsPrimary="@image.IsPrimary"
+                      ImageType="Domain.Constants.ImageType.Find(image.ImageTypeId)"
+                      IsPrimary="image.IsPrimary"
                       OnPrimarySet="SetPrimary"
                       OnRemove="Remove" />     
     } 
@@ -79,10 +79,6 @@
     private async Task Save()
     {
         var userId = await _localStorage.GetAsync<int>("UserId").ConfigureAwait(false);
-
-        if (userId.Value == 0)
-            _navigation.NavigateTo("Login");
-
         var images = new List<SaveImageViewModel>();
         var imageType = Domain.Constants.ImageType.Primary;
 
