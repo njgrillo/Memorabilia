@@ -1,4 +1,5 @@
-﻿using Memorabilia.Domain;
+﻿using Memorabilia.Domain.Entities;
+using Memorabilia.Repository.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,44 +8,44 @@ using System.Threading.Tasks;
 
 namespace Memorabilia.Repository
 {
-    public class SizeRepository : BaseRepository<Domain.Entities.Size>, ISizeRepository
+    public class SizeRepository : BaseRepository<Size>, ISizeRepository
     {
-        private readonly Context _context;
+        private readonly DomainContext _context;
 
-        public SizeRepository(Context context) : base(context)
+        public SizeRepository(DomainContext context) : base(context)
         {
             _context = context;
         }
 
-        private IQueryable<Domain.Entities.Size> Size => _context.Set<Domain.Entities.Size>();
+        private IQueryable<Size> Size => _context.Set<Size>();
 
-        public async Task Add(Domain.Entities.Size size, CancellationToken cancellationToken = default)
+        public async Task Add(Size size, CancellationToken cancellationToken = default)
         {
             _context.Add(size);
 
             await _context.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
         }
 
-        public async Task Delete(Domain.Entities.Size size, CancellationToken cancellationToken = default)
+        public async Task Delete(Size size, CancellationToken cancellationToken = default)
         {
-            _context.Set<Domain.Entities.Size>().Remove(size);
+            _context.Set<Size>().Remove(size);
 
             await _context.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
         }
 
-        public async Task<Domain.Entities.Size> Get(int id)
+        public async Task<Size> Get(int id)
         {
             return await Size.SingleOrDefaultAsync(size => size.Id == id).ConfigureAwait(false);
         }
 
-        public async Task<IEnumerable<Domain.Entities.Size>> GetAll()
+        public async Task<IEnumerable<Size>> GetAll()
         {
             return (await Size.ToListAsync().ConfigureAwait(false)).OrderBy(size => size.Name);
         }
 
-        public async Task Update(Domain.Entities.Size size, CancellationToken cancellationToken = default)
+        public async Task Update(Size size, CancellationToken cancellationToken = default)
         {
-            _context.Set<Domain.Entities.Size>().Update(size);
+            _context.Set<Size>().Update(size);
 
             await _context.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
         }

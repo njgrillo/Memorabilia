@@ -1,5 +1,5 @@
 ﻿using Demo.Framework.Handler;
-using Memorabilia.Domain;
+using Memorabilia.Repository.Interfaces;
 using System.Threading.Tasks;
 
 namespace Memorabilia.Application.Features.Admin.ItemTypeBrand
@@ -17,11 +17,7 @@ namespace Memorabilia.Application.Features.Admin.ItemTypeBrand
 
             protected override async Task<ItemTypeBrandsViewModel> Handle(Query query)
             {
-                var itemTypeBrands = await _itemTypeBrandRepository.GetAll(query.ItemTypeId).ConfigureAwait(false);
-
-                var viewModel = new ItemTypeBrandsViewModel(itemTypeBrands);
-
-                return viewModel;
+                return new ItemTypeBrandsViewModel(await _itemTypeBrandRepository.GetAll(query.ItemTypeId).ConfigureAwait(false));
             }
         }
 

@@ -18,8 +18,6 @@ namespace Memorabilia.Application.Features.Memorabilia.Hat
 
         public MemorabiliaGame Game => _memorabilia.Game;
 
-        //public MemorabiliaHat Hat => _memorabilia.Hat;
-
         public int MemorabiliaId => _memorabilia.Id;        
 
         public MemorabiliaLevelType Level => _memorabilia.LevelType;

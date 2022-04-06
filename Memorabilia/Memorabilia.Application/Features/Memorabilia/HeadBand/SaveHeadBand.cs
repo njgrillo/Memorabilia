@@ -1,6 +1,6 @@
 ﻿using Framework.Domain.Command;
 using Framework.Handler;
-using Memorabilia.Domain;
+using Memorabilia.Repository.Interfaces;
 using System;
 using System.Threading.Tasks;
 
@@ -26,6 +26,7 @@ namespace Memorabilia.Application.Features.Memorabilia.HeadBand
                                         command.GameStyleTypeId,
                                         command.LevelTypeId,
                                         command.PersonId,
+                                        command.SizeId,
                                         command.TeamId);
 
                 await _memorabiliaRepository.Update(memorabilia).ConfigureAwait(false);

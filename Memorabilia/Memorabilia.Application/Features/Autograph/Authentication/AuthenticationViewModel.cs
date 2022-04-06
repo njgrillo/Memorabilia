@@ -1,12 +1,14 @@
-﻿namespace Memorabilia.Application.Features.Autograph.Authentication
+﻿using Memorabilia.Domain.Entities;
+
+namespace Memorabilia.Application.Features.Autograph.Authentication
 {
     public class AuthenticationViewModel
     {
-        private readonly Domain.Entities.AutographAuthentication _authentication;
+        private readonly AutographAuthentication _authentication;
 
         public AuthenticationViewModel() { }
 
-        public AuthenticationViewModel(Domain.Entities.AutographAuthentication authentication)
+        public AuthenticationViewModel(AutographAuthentication authentication)
         {
             _authentication = authentication;
         }

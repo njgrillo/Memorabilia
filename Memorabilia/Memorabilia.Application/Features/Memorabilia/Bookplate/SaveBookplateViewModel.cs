@@ -1,11 +1,11 @@
-﻿using Memorabilia.Application.Features.Admin.Person;
+﻿using Memorabilia.Application.Features.Admin.People;
 using Memorabilia.Domain.Constants;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 
 namespace Memorabilia.Application.Features.Memorabilia.Bookplate
 {
-    public class SaveBookplateViewModel : SaveViewModel
+    public class SaveBookplateViewModel : SaveItemViewModel
     {
         public SaveBookplateViewModel() { }
 
@@ -17,29 +17,19 @@ namespace Memorabilia.Application.Features.Memorabilia.Bookplate
                 Person = new SavePersonViewModel(new PersonViewModel(viewModel.People.First().Person));
         }
 
+        public override string BackNavigationPath => $"Memorabilia/Edit/{MemorabiliaId}";
+
+        public override EditModeType EditModeType => MemorabiliaId > 0 ? EditModeType.Update : EditModeType.Add;
+
+        public override string ExitNavigationPath => "Memorabilia/Items";
+
         public bool HasPerson => Person?.Id > 0;
 
-        public string ImagePath
-        {
-            get
-            {
-                var path = "images/";
+        public override string ImagePath => "images/bookplate.jpg";
 
-                //if (DisplayBookplateType && BookplateType != null)
-                //{
-                //    return $"{path}{BookplateType.Name.Replace(" ", "")}.jpg";
-                //}
+        public override ItemType ItemType => ItemType.Bookplate;
 
-                return $"{path}Bookplate.jpg";
-            }
-        }
-
-        public ItemType ItemType => ItemType.Bookplate;
-
-        [Required]
-        public int MemorabiliaId { get; set; }
-
-        public override string PageTitle => $"{(MemorabiliaId > 0 ? "Edit" : "Add")} {ItemType.Bookplate.Name} Details";
+        public override string PageTitle => $"{(EditModeType == EditModeType.Update ? "Edit" : "Add")} {ItemType.Bookplate.Name} Details";
 
         public SavePersonViewModel Person { get; set; }
     }

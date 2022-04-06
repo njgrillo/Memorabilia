@@ -1,4 +1,4 @@
-﻿using Memorabilia.Domain;
+﻿using Memorabilia.Repository.Interfaces;
 using Framework.Domain.Command;
 using Framework.Handler;
 using System.Threading.Tasks;

@@ -31,6 +31,9 @@
             "projectReferences": {
               "D:\\Projects\\njgrillo\\Memorabilia\\Memorabilia\\Memorabilia.Domain\\Memorabilia.Domain.csproj": {
                 "projectPath": "D:\\Projects\\njgrillo\\Memorabilia\\Memorabilia\\Memorabilia.Domain\\Memorabilia.Domain.csproj"
+              },
+              "D:\\Projects\\njgrillo\\Memorabilia\\Memorabilia\\Memorabilia.Repository\\Memorabilia.Repository.csproj": {
+                "projectPath": "D:\\Projects\\njgrillo\\Memorabilia\\Memorabilia\\Memorabilia.Repository\\Memorabilia.Repository.csproj"
               }
             }
           }
@@ -44,6 +47,12 @@
       "frameworks": {
         "net6.0": {
           "targetAlias": "net6.0",
+          "dependencies": {
+            "MudBlazor": {
+              "target": "Package",
+              "version": "[6.0.7, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",
@@ -59,7 +68,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.200\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.201\\RuntimeIdentifierGraph.json"
         }
       }
     },
@@ -124,7 +133,72 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.200\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.201\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "D:\\Projects\\njgrillo\\Memorabilia\\Memorabilia\\Memorabilia.Repository\\Memorabilia.Repository.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\Projects\\njgrillo\\Memorabilia\\Memorabilia\\Memorabilia.Repository\\Memorabilia.Repository.csproj",
+        "projectName": "Memorabilia.Repository",
+        "projectPath": "D:\\Projects\\njgrillo\\Memorabilia\\Memorabilia\\Memorabilia.Repository\\Memorabilia.Repository.csproj",
+        "packagesPath": "C:\\Users\\njgri\\.nuget\\packages\\",
+        "outputPath": "D:\\Projects\\njgrillo\\Memorabilia\\Memorabilia\\Memorabilia.Repository\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\njgri\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "D:\\Projects\\njgrillo\\Budget\\NugetPackages\\Framework": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {
+              "D:\\Projects\\njgrillo\\Memorabilia\\Memorabilia\\Memorabilia.Domain\\Memorabilia.Domain.csproj": {
+                "projectPath": "D:\\Projects\\njgrillo\\Memorabilia\\Memorabilia\\Memorabilia.Domain\\Memorabilia.Domain.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "dependencies": {
+            "Microsoft.EntityFrameworkCore.Proxies": {
+              "target": "Package",
+              "version": "[6.0.2, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.201\\RuntimeIdentifierGraph.json"
         }
       }
     }

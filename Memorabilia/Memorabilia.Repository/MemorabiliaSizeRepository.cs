@@ -1,4 +1,5 @@
-﻿using Memorabilia.Domain;
+﻿using Memorabilia.Domain.Entities;
+using Memorabilia.Repository.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using System.Threading;
@@ -6,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Memorabilia.Repository
 {
-    public class MemorabiliaSizeRepository : BaseRepository<Domain.Entities.MemorabiliaSize>, IMemorabiliaSizeRepository
+    public class MemorabiliaSizeRepository : BaseRepository<MemorabiliaSize>, IMemorabiliaSizeRepository
     {
         private readonly Context _context;
 
@@ -15,30 +16,30 @@ namespace Memorabilia.Repository
             _context = context;
         }
 
-        private IQueryable<Domain.Entities.MemorabiliaSize> MemorabiliaSize => _context.Set<Domain.Entities.MemorabiliaSize>();
+        private IQueryable<MemorabiliaSize> MemorabiliaSize => _context.Set<MemorabiliaSize>();
 
-        public async Task Add(Domain.Entities.MemorabiliaSize memorabiliaSize, CancellationToken cancellationToken = default)
+        public async Task Add(MemorabiliaSize memorabiliaSize, CancellationToken cancellationToken = default)
         {
             _context.Add(memorabiliaSize);
 
             await _context.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
         }
 
-        public async Task Delete(Domain.Entities.MemorabiliaSize memorabiliaSize, CancellationToken cancellationToken = default)
+        public async Task Delete(MemorabiliaSize memorabiliaSize, CancellationToken cancellationToken = default)
         {
-            _context.Set<Domain.Entities.MemorabiliaSize>().Remove(memorabiliaSize);
+            _context.Set<MemorabiliaSize>().Remove(memorabiliaSize);
 
             await _context.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
         }
 
-        public async Task<Domain.Entities.MemorabiliaSize> Get(int id)
+        public async Task<MemorabiliaSize> Get(int id)
         {
             return await MemorabiliaSize.SingleOrDefaultAsync(memorabiliaSize => memorabiliaSize.Id == id).ConfigureAwait(false);
         }
 
-        public async Task Update(Domain.Entities.MemorabiliaSize memorabiliaSize, CancellationToken cancellationToken = default)
+        public async Task Update(MemorabiliaSize memorabiliaSize, CancellationToken cancellationToken = default)
         {
-            _context.Set<Domain.Entities.MemorabiliaSize>().Update(memorabiliaSize);
+            _context.Set<MemorabiliaSize>().Update(memorabiliaSize);
 
             await _context.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
         }

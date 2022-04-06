@@ -7,304 +7,203 @@
 @using System 
 @using System.IO
 
-@inject CommandRouter _commandRouter
-@inject ProtectedLocalStorage _localStorage
-@inject NavigationManager _navigation
-@inject QueryRouter _queryRouter
-@inject IToastService _toastService
-
-<_Page OnLoad="OnLoad">
+<Page OnLoad="OnLoad">
     <Content>
-        <PopConfirm @ref="_deleteMemorabiliaItemDialog"
-                    Title="Delete Memorabilia Item"
-                    ConfirmedChanged="DeleteMemorabiliaItem" />
-        <PopConfirm @ref="_deleteAutographItemDialog"
-                    Title="Delete Autograph Item"
-                    ConfirmedChanged="DeleteAutographItem" />
-        <div class="row">
-            <div class="col-md-12" style="text-align: center">
-                <h1>@_viewModel.PageTitle</h1>
-            </div>
-        </div>
-        <br />
-        <_SearchMemorabilia Items="_initialItems"
-                            ResultsChanged="OnFilter" />
-        <_Table HasChildItems="true"
-                Items="_viewModel.MemorabiliaItems" 
-                ItemsPerPage="25"   
-                ShowSummary="true"
-                TItem="MemorabiliaItemViewModel">
-            <HeaderTemplate>            
-                <th scope="col"></th>
-                <th scope="col">Item Type</th>
-                <th scope="col">Condition</th>
-                <th scope="col">Value</th>
-                <th scope="col">Acquisition Type</th>
-                <th scope="col">Acquisition Date</th>
-                <th scope="col">Cost</th>
-                <th scope="col">Place of Purchase</th>
-                <th scope="col">Privacy Type</th>
-                <th scope="col">Create Date</th>
-                <th scope="col">Last Modified Date</th>
-                <th scope="col"></th>
-                <th scope="col"></th>
-                <th scope="col"></th>
-                <th scope="col"></th>
-            </HeaderTemplate>
-            <RowTemplate>
-                <td>
-                    <_Tooltip Text="@context.ImageDisplayCount">
-                        <img class="can-click" 
-                             src="data:image/jpg;base64,@Convert.ToBase64String(File.ReadAllBytes(@context.ImagePath))"
-                             height="40" 
-                             title="Images"
-                             width="40" 
-                             @onclick="@( _ => _navigation.NavigateTo($"Memorabilia/Image/Edit/{@context.Id}") )" />
-                    </_Tooltip>                         
-                </td>
-                <td>@context.ItemTypeName</td>
-                <td>@context.ConditionName</td>
-                <td>@context.EstimatedValue?.ToString("c")</td>
-                <td>@context.AcquisitionTypeName</td>
-                <td>@context.Acquisition.AcquiredDate?.ToString("MM-dd-yyyy")</td>
-                <td>@context.Acquisition.Cost?.ToString("c")</td>
-                <td>@context.PurchaseTypeName</td>
-                <td>@context.PrivacyTypeName</td>
-                <td>@context.FormattedCreateDate</td>
-                <td>@context.FormattedLastModifiedDate</td>
-                <td>
-                    <_Tooltip Text="Add Autograph">
-                        <img class="can-click" 
-                             src="images/add.png" 
-                             height="40" 
-                             width="40" 
-                             @onclick="@(_ => _navigation.NavigateTo($"Autographs/Edit/{@context.Id}/0"))" />
-                    </_Tooltip>                         
-                </td>
-                <td>
-                    <_Tooltip Text="Details">
-                        <img class="can-click" 
-                             src="images/details.png" 
-                             height="40" 
-                             width="40" 
-                             @onclick="@(_ => _navigation.NavigateTo($"Memorabilia/{@context.ItemTypeName.Replace(" ", "")}/Edit/{@context.Id}"))" />
-                    </_Tooltip>                         
-                </td>
-                <td>
-                    <_Tooltip Text="Edit">
-                        <img class="can-click" 
-                             src="images/pencil.png" 
-                             height="40" 
-                             width="40" 
-                             @onclick="@(_ => _navigation.NavigateTo($"Memorabilia/Edit/{@context.Id}"))" />
-                    </_Tooltip>                        
-                </td>
-                <td>
-                    <_Tooltip Text="Delete">
-                        <img class="can-click" 
-                             src="images/trash.png" 
-                             height="40" 
-                             width="40" 
-                             @onclick="@(_ => ShowConfirmMemorabiliaItem(@context.Id))" />
-                    </_Tooltip>
-                </td>
-            </RowTemplate>    
-            <SubGridTemplate>
-                <td colspan="16">
-                    <_Table HasChildItems="false"
-                            Items="@context.Autographs" 
-                            ItemsPerPage="5"   
-                            NoItemsFound="No Autographs Found"
-                            ShowSummary="false"
-                            TItem="AutographViewModel">
-                        <HeaderTemplate>
-                            <th scope="col"></th>
-                            <th scope="col">Person</th>
-                            <th scope="col">Condition</th>
-                            <th scope="col">Grade</th>
-                            <th scope="col">Value</th>
-                            <th scope="col">Acquisition Type</th>
-                            <th scope="col">Acquired Date</th>
-                            <th scope="col">Cost</th>
-                            <th scope="col">Place of Purchase</th>
-                            <th scope="col">Writing Instrument</th>
-                            <th scope="col">Color</th>
-                            <th scope="col">Personalized</th>
-                            <th scope="col">Authenticated</th>
-                            <th scope="col">Inscriptions</th>
-                            <th scope="col"></th>
-                            <th scope="col"></th>
-                            <th scope="col"></th>
-                        </HeaderTemplate>
-                        <RowTemplate Context="autograph">
-                            <td>
-                                <_Tooltip Text="@autograph.ImageDisplayCount">
-                                    <img class="can-click" 
-                                         src="data:image/jpg;base64,@Convert.ToBase64String(File.ReadAllBytes(@autograph.PrimaryImagePath))"
-                                         height="40" 
-                                         width="40" 
-                                         @onclick="@( _ => _navigation.NavigateTo($"Autographs/Image/Edit/{@autograph.Id}"))" />
-                                </_Tooltip>                         
-                            </td>
-                            <td>@autograph.PersonName</td>
-                            <td>@autograph.ConditionName</td>
-                            <td>@autograph.Grade</td>
-                            <td>@autograph.FormattedEstimatedValue</td>
-                            <td>@autograph.AcquisitionTypeName</td>
-                            <td>@autograph.FormattedAcquisitionDate</td>
-                            <td>@autograph.FormattedCost</td>
-                            <td>@autograph.PurchaseTypeName</td>
-                            <td>@autograph.WritingInstrumentName</td>
-                            <td>@autograph.ColorName</td>
-                            <td>
-                                <_Tooltip Text="@autograph.PersonalizationTooltip">
-                                    <img src="@autograph.PersonalizationIconPath" 
-                                         height="20" 
-                                         width="20" />
-                                </_Tooltip>                         
-                            </td>
-                            <td>
-                                <_Tooltip Text="@autograph.AuthenticationTooltip">
-                                    <img class="can-click" 
-                                         src="@autograph.AuthenticationIconPath" 
-                                         height="20" 
-                                         width="20" 
-                                         @onclick="@(_ => _navigation.NavigateTo($"Autographs/Authentications/Edit/{@autograph.Id}"))" />
-                                </_Tooltip>                         
-                            </td>
-                            <td>
-                                <_Tooltip Text="@autograph.InscriptionTooltip">
-                                    <img class="can-click" 
-                                         src="@autograph.InscriptionIconPath" 
-                                         height="20" 
-                                         width="20" 
-                                         @onclick="@(_ => _navigation.NavigateTo($"Autographs/Inscriptions/Edit/{@autograph.Id}"))" />
-                                </_Tooltip>                         
-                            </td>
-                            <td>
-                                @if (autograph.DisplaySpot)
-                                {
-                                    <_Tooltip Text="Details">
-                                        <img class="can-click" 
-                                             src="images/details.png" 
-                                             height="20" 
-                                             width="20" 
-                                             @onclick="@(_ => _navigation.NavigateTo($"Autographs/Spot/Edit/{@autograph.Id}"))" />
-                                    </_Tooltip> 
-                                }                                                    
-                            </td>
-                            <td>
-                                <_Tooltip Text="Edit">
-                                    <img class="can-click" 
-                                         src="images/pencil.png" 
-                                         height="20" 
-                                         width="20" 
-                                         @onclick="@(_ => _navigation.NavigateTo($"Autographs/Edit/{@autograph.MemorabiliaId}/{@autograph.Id}"))" />
-                                </_Tooltip>                        
-                            </td>
-                            <td>
-                                <_Tooltip Text="Delete">
-                                    <img class="can-click" 
-                                         src="images/trash.png" 
-                                         height="20" 
-                                         width="20" 
-                                         @onclick="@(_ => ShowConfirmAutographItem(@autograph.Id))" />
-                                </_Tooltip>
-                            </td>
-                        </RowTemplate>
-                    </_Table>
-                </td>                                            
-            </SubGridTemplate>
-            <SummaryTemplate>
-                <td colspan="17" align="center">  
-                    Autographs - <strong> @context.AutographsCount </strong>, Total Value - <strong> @context.FormattedTotalValue </strong>, Total Cost - <strong> @context.FormattedTotalCost </strong>
-                </td> 
-            </SummaryTemplate>
-        </_Table>    
-        <div class="row">
-            <div class="col-md-12" style="text-align: center">
-                <a href="Memorabilia/Edit">Add Memorabilia</a>
-            </div>
-        </div>
-        <br />
+        <MemorabiliaSearchControl Items="_initialItems"
+                                  ResultsChanged="OnFilter" />
+        <DivPad2>
+            <Content>
+                <MudTable Bordered="false"
+                          Dense="false" 
+                          Hover="true"
+                          Items="@_viewModel.MemorabiliaItems"    
+                          Striped="true">
+                    <ToolBarContent>
+                        <MudText Typo="Typo.h6">My Memorabilia</MudText>
+                    </ToolBarContent>
+                    <HeaderContent>
+                        <MudTh></MudTh>
+                        <MudTh></MudTh>
+                        <MudTh>Item</MudTh>
+                        <MudTh>Condition</MudTh>
+                        <MudTh>Value</MudTh>
+                        <MudTh>Acquisition Type</MudTh>
+                        <MudTh>Acquisition Date</MudTh>
+                        <MudTh>Cost</MudTh>
+                        <MudTh>Purchase Place</MudTh>
+                        <MudTh></MudTh>
+                    </HeaderContent>
+                    <RowTemplate>
+                        <MudTd>
+                            <MudIconButton @onclick="@(_ => ToggleChildContent(@context.Id))"
+                                           Icon="@context.ToggleIcon"></MudIconButton>
+                        </MudTd>
+                        <MudTd DataLabel="">
+                            <MudTooltip Text="@context.ImageDisplayCount">
+                                <MudImage @onclick="@(_ => NavigationManager.NavigateTo($"Memorabilia/Image/Edit/{@context.Id}"))" 
+                                          Class="rounded-lg can-click" 
+                                          Elevation="5" 
+                                          Height="200"
+                                          ObjectFit="@ObjectFit.Cover"
+                                          Src="@context.MemorabiliaImagePath"
+                                          Width="200" />
+                            </MudTooltip> 
+                        </MudTd>
+                        <MudTd DataLabel="Item">@context.ItemTypeName</MudTd>
+                        <MudTd DataLabel="Condition">@context.ConditionName</MudTd>
+                        <MudTd DataLabel="Value">@context.EstimatedValue?.ToString("c")</MudTd>
+                        <MudTd DataLabel="Acquisition Type">@context.AcquisitionTypeName</MudTd>
+                        <MudTd DataLabel="Acquisition Date">@context.Acquisition.AcquiredDate?.ToString("MM-dd-yyyy")</MudTd>
+                        <MudTd DataLabel="Cost">@context.Acquisition.Cost?.ToString("c")</MudTd>
+                        <MudTd DataLabel="Purchase Place">@context.PurchaseTypeName</MudTd>
+                        <MudTd DataLabel="">
+                            <MudTooltip Text="Add Autograph">
+                                <MudFab Color="MudBlazor.Color.Primary"
+                                        Icon="@Icons.Outlined.AddCircleOutline"
+                                        OnClick="@(_ => NavigationManager.NavigateTo($"Autographs/Edit/{@context.Id}/0"))"
+                                        Size="@MudBlazor.Size.Small" />
+                            </MudTooltip> 
+                            <MudTooltip Text="Details">
+                                <MudFab Color="MudBlazor.Color.Info"
+                                        Icon="@Icons.Outlined.Info"                                        
+                                        OnClick="@(_ => NavigationManager.NavigateTo($"Memorabilia/{@context.ItemTypeName.Replace(" ", "")}/Edit/{@context.Id}"))"
+                                        Size="@MudBlazor.Size.Small" />
+                            </MudTooltip>  
+                            <MudTooltip Text="Edit">
+                                <MudFab Color="MudBlazor.Color.Primary"
+                                        Icon="@Icons.Outlined.ModeEditOutline"
+                                        OnClick="@(_ => NavigationManager.NavigateTo($"Memorabilia/Edit/{@context.Id}"))"
+                                        Size="@MudBlazor.Size.Small" />
+                            </MudTooltip> 
+                            <MudTooltip Text="Delete">
+                                <MudFab Color="MudBlazor.Color.Secondary"
+                                        Icon="@Icons.Outlined.DeleteOutline"
+                                        OnClick="@(_ => ShowDeleteMemorabiliaConfirm(@context.Id))"
+                                        Size="@MudBlazor.Size.Small" />
+                            </MudTooltip>
+                        </MudTd>
+                    </RowTemplate>
+                    <ChildRowContent>
+                        <PrettyBlazor.Condition Evaluation="@context.DisplayAutographDetails">
+                            <Match>  
+                                <tr />
+                                <tr style="background-color:#6D7B8D;color:honeydew;border-style:dashed;border-width:2px;border-color:#ECF3F4;">
+                                    <td align="center" colspan="17" >  
+                                        Summary: Autographs - <strong> @context.AutographsCount </strong>, Total Value - <strong> @context.FormattedTotalValue </strong>, Total Cost - <strong> @context.FormattedTotalCost </strong>
+                                    </td> 
+                                </tr>
+                                <tr />
+                                <tr style="margin-top: 1%; margin-bottom: 1%; margin-left: 1%; margin-right: 1%;">
+                                    <td colspan="17">
+                                        <MudTable Bordered="false"
+                                                  Dense="false" 
+                                                  Hover="true"
+                                                  Items="@context.Autographs"    
+                                                  Striped="true">
+                                            <ToolBarContent>
+                                                <MudText Typo="Typo.h6">Autographs</MudText>
+                                                <MudSpacer />
+                                            </ToolBarContent>
+                                            <HeaderContent>
+                                                <MudTh></MudTh>
+                                                <MudTh>Person</MudTh>
+                                                <MudTh>Condition</MudTh>
+                                                <MudTh>Value</MudTh>
+                                                <MudTh>Acquisition Type</MudTh>
+                                                <MudTh>Acquired Date</MudTh>
+                                                <MudTh>Cost</MudTh>
+                                                <MudTh>Purchase Place</MudTh>
+                                                <MudTh>Writing Instrument</MudTh>
+                                                <MudTh>Color</MudTh>
+                                                <MudTh>Authentications</MudTh>
+                                                <MudTh>Inscriptions</MudTh>
+                                                <MudTh></MudTh>
+                                            </HeaderContent>
+                                            <RowTemplate Context="autograph">
+                                                <MudTd DataLabel="Name">
+                                                    <MudTooltip Text="@autograph.ImageDisplayCount">
+                                                        <MudImage @onclick="@(_ => NavigationManager.NavigateTo($"Autographs/Image/Edit/{@autograph.Id}"))" 
+                                                                  Class="rounded-lg can-click" 
+                                                                  Elevation="5" 
+                                                                  Height="200"
+                                                                  ObjectFit="@ObjectFit.Cover"
+                                                                  Src="@autograph.AutographImagePath"
+                                                                  Width="200" />
+                                                    </MudTooltip> 
+                                                </MudTd>
+                                                <MudTd DataLabel="Abbreviation">@autograph.PersonName</MudTd>
+                                                <MudTd DataLabel="Condition">@autograph.ConditionName</MudTd>
+                                                <MudTd DataLabel="Value">@autograph.FormattedEstimatedValue</MudTd>
+                                                <MudTd DataLabel="Acquisition Type">@autograph.AcquisitionTypeName</MudTd>
+                                                <MudTd DataLabel="Acquired Date">@autograph.FormattedAcquisitionDate</MudTd>
+                                                <MudTd DataLabel="Cost">@autograph.FormattedCost</MudTd>
+                                                <MudTd DataLabel="Purchase Place">@autograph.PurchaseTypeName</MudTd>
+                                                <MudTd DataLabel="Writing Instrument">@autograph.WritingInstrumentName</MudTd>
+                                                <MudTd DataLabel="Color">@autograph.ColorName</MudTd>
+                                                <MudTd DataLabel="Authentications">
+                                                    <MudTooltip Text="@autograph.AuthenticationTooltip">
+                                                        <MudChip Color="MudBlazor.Color.Info" 
+                                                                 OnClick="@(_ => NavigationManager.NavigateTo($"Autographs/Authentications/Edit/{@autograph.Id}"))"
+                                                                 Size="@MudBlazor.Size.Small"
+                                                                 Text="@autograph.AuthenticationText" />
+                                                    </MudTooltip> 
+                                                </MudTd>
+                                                <MudTd DataLabel="Inscriptions">
+                                                    <MudTooltip Text="@autograph.InscriptionTooltip">
+                                                        <MudChip Color="MudBlazor.Color.Info"
+                                                                 OnClick="@(_ => NavigationManager.NavigateTo($"Autographs/Inscriptions/Edit/{@autograph.Id}"))"
+                                                                 Size="@MudBlazor.Size.Small"
+                                                                 Text="@autograph.InscriptionText" />
+                                                    </MudTooltip> 
+                                                </MudTd>
+                                                <MudTd DataLabel="Color">
+                                                    <PrettyBlazor.Condition Evaluation="autograph.DisplaySpot">
+                                                        <Match>
+                                                            <MudTooltip Text="Details">
+                                                                <MudFab Color="MudBlazor.Color.Info"
+                                                                        Icon="@Icons.Outlined.Info"
+                                                                        OnClick="@(_ => NavigationManager.NavigateTo($"Autographs/Spot/Edit/{@autograph.Id}"))"
+                                                                        Size="@MudBlazor.Size.Small" />
+                                                            </MudTooltip> 
+                                                        </Match>
+                                                    </PrettyBlazor.Condition>  
+                                                    <MudTooltip Text="Edit">
+                                                        <MudFab Color="MudBlazor.Color.Primary"
+                                                                Icon="@Icons.Outlined.ModeEditOutline"
+                                                                OnClick="@(_ => NavigationManager.NavigateTo($"Autographs/Edit/{@autograph.MemorabiliaId}/{@autograph.Id}"))"
+                                                                Size="@MudBlazor.Size.Small" />
+                                                    </MudTooltip> 
+                                                    <MudTooltip Text="Delete">
+                                                            <MudFab Color="MudBlazor.Color.Secondary"
+                                                                    Icon="@Icons.Outlined.DeleteOutline"
+                                                                    OnClick="@(_ => ShowDeleteAutographConfirm(@autograph.Id))"
+                                                                    Size="@MudBlazor.Size.Small" />
+                                                    </MudTooltip>
+                                                </MudTd>
+                                            </RowTemplate>
+                                            <PagerContent>
+                                                <MudTablePager />
+                                            </PagerContent>
+                                        </MudTable>    
+                                    </td>   
+                                </tr>                                                            
+                            </Match>
+                        </PrettyBlazor.Condition>
+                    </ChildRowContent>
+                    <PagerContent>
+                        <MudTablePager />
+                    </PagerContent>
+                </MudTable>
+            </Content>
+        </DivPad2> 
+        <DivRowCol12Center>
+            <Content>
+                <MudTooltip Text="@_viewModel.AddText">
+                    <MudFab Color="MudBlazor.Color.Primary"
+                            Icon="@Icons.Outlined.AddCircleOutline"
+                            OnClick="@(_ => NavigationManager.NavigateTo(@_viewModel.AddRoute))" />
+                </MudTooltip> 
+            </Content>
+        </DivRowCol12Center>
     </Content>
-</_Page>
-
-@code {
-    private PopConfirm _deleteAutographItemDialog;
-    private int _deletedAutographItemId;
-    private PopConfirm _deleteMemorabiliaItemDialog;
-    private int _deletedMemorabiliaItemId;
-    private List<MemorabiliaItemViewModel> _initialItems;
-    private MemorabiliaItemsViewModel _viewModel;
-
-    protected async Task DeleteAutographItem(bool confirm)
-    {
-        if (!confirm)
-        {
-            _deletedAutographItemId = 0;
-            return;
-        }
-
-        var itemToDelete = _viewModel.MemorabiliaItems
-                                     .SelectMany(item => item.Autographs)
-                                     .Single(autograph => autograph.Id == _deletedAutographItemId);
-
-        var viewModel = new SaveAutographViewModel(itemToDelete);
-        viewModel.IsDeleted = true;
-
-        await _commandRouter.Send(new SaveAutograph.Command(viewModel)).ConfigureAwait(false);
-
-        var memorabiliaItem = _viewModel.MemorabiliaItems.First(item => item.Id == itemToDelete.MemorabiliaId);
-        memorabiliaItem.Autographs.Remove(itemToDelete);
-
-        _toastService.ShowSuccess($"Autograph was deleted successfully!", "Autograph");
-    } 
-
-    protected async Task DeleteMemorabiliaItem(bool confirm)
-    {
-        if (!confirm)
-        {
-            _deletedMemorabiliaItemId = 0;
-            return;
-        }
-
-        var itemToDelete = _viewModel.MemorabiliaItems.Single(item => item.Id == _deletedMemorabiliaItemId);
-        var viewModel = new SaveMemorabiliaItemViewModel(itemToDelete);
-        viewModel.IsDeleted = true;
-
-        await _commandRouter.Send(new SaveMemorabiliaItem.Command(viewModel)).ConfigureAwait(false);
-
-        _viewModel.MemorabiliaItems.Remove(itemToDelete);
-
-        _toastService.ShowSuccess($"{itemToDelete.ItemTypeName} was deleted successfully!", _viewModel.PageTitle);
-    }    
-
-    protected void OnFilter(List<MemorabiliaItemViewModel> items)
-    {
-        _viewModel.MemorabiliaItems = items;
-    }
-
-    protected async Task OnLoad()
-    {
-        var userId = await _localStorage.GetAsync<int>("UserId").ConfigureAwait(false);
-
-        if (userId.Value == 0)
-            _navigation.NavigateTo("Login");
-
-        _viewModel = await _queryRouter.Send(new GetMemorabiliaItems.Query(userId.Value)).ConfigureAwait(false);
-        _initialItems = _viewModel.MemorabiliaItems;
-    }
-
-    protected void ShowConfirmAutographItem(int id)
-    {
-        _deletedAutographItemId = id;
-        _deleteAutographItemDialog.ShowPop();
-    }
-
-    protected void ShowConfirmMemorabiliaItem(int id)
-    {
-        _deletedMemorabiliaItemId = id;
-        _deleteMemorabiliaItemDialog.ShowPop();
-    }
-}
+</Page>

@@ -1,5 +1,5 @@
-﻿using Memorabilia.Application.Features.Admin.Person;
-using Memorabilia.Application.Features.Admin.Team;
+﻿using Memorabilia.Application.Features.Admin.People;
+using Memorabilia.Application.Features.Admin.Teams;
 using Memorabilia.Domain.Constants;
 using System;
 using System.Collections.Generic;
@@ -8,7 +8,7 @@ using System.Linq;
 
 namespace Memorabilia.Application.Features.Memorabilia.Jersey
 {
-    public class SaveJerseyViewModel : SaveViewModel
+    public class SaveJerseyViewModel : SaveItemViewModel
     {
         public SaveJerseyViewModel() { }
 
@@ -31,6 +31,8 @@ namespace Memorabilia.Application.Features.Memorabilia.Jersey
 
         private int _gameStyleTypeId;
 
+        public override string BackNavigationPath => $"Memorabilia/Edit/{MemorabiliaId}";
+
         [Required]
         [Range(1, int.MaxValue, ErrorMessage = "Brand is required.")]
         public int BrandId { get; set; }
@@ -40,6 +42,10 @@ namespace Memorabilia.Application.Features.Memorabilia.Jersey
         public bool DisplayGameDate => DisplayGameStyleType && GameStyleType.IsGameWorthly(GameStyleType);
 
         public bool DisplayGameStyleType => JerseyQualityTypeId == JerseyQualityType.Authentic.Id;
+
+        public override EditModeType EditModeType => MemorabiliaId > 0 ? EditModeType.Update : EditModeType.Add;
+
+        public override string ExitNavigationPath => "Memorabilia/Items";
 
         public DateTime? GameDate { get; set; }
 
@@ -67,38 +73,41 @@ namespace Memorabilia.Application.Features.Memorabilia.Jersey
             }
         }
 
+        public GameStyleType[] GameStyleTypes => GameStyleType.GetAll(ItemType.Jersey);
+
         public bool HasPerson => People.Any();
 
         public bool HasSport => SportIds.Any();
 
         public bool HasTeam => Teams.Any();
 
-        public string ImagePath => "images/itemtypes.jpg";
+        public override string ImagePath => "images/itemtypes.jpg";
 
         public bool IsGameWorthly => GameStyleType.IsGameWorthly(GameStyleType);
 
-        public ItemType ItemType => ItemType.Jersey;
+        public override ItemType ItemType => ItemType.Jersey;
 
         [Required]
         [Range(1, int.MaxValue, ErrorMessage = "Quality is required.")]
         public int JerseyQualityTypeId { get; set; }
 
+        public JerseyQualityType[] JerseyQualityTypes => JerseyQualityType.All;
+
         [Required]
         [Range(1, int.MaxValue, ErrorMessage = "Style is required.")]
         public int JerseyStyleTypeId { get; set; }
+
+        public JerseyStyleType[] JerseyStyleTypes => JerseyStyleType.All;
 
         [Required]
         [Range(1, int.MaxValue, ErrorMessage = "Type is required.")]
         public int JerseyTypeId { get; set; }
 
+        public JerseyType[] JerseyTypes => JerseyType.All;
+
         [Required]
         [Range(1, int.MaxValue, ErrorMessage = "Level is required.")]
         public int LevelTypeId { get; set; }
-
-        [Required]
-        public int MemorabiliaId { get; set; }
-
-        public override string PageTitle => $"{(MemorabiliaId > 0 ? "Edit" : "Add")} {ItemType.Jersey.Name} Details";
 
         public List<SavePersonViewModel> People { get; set; } = new();
 

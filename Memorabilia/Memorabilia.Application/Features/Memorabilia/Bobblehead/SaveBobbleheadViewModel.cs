@@ -1,5 +1,5 @@
-﻿using Memorabilia.Application.Features.Admin.Person;
-using Memorabilia.Application.Features.Admin.Team;
+﻿using Memorabilia.Application.Features.Admin.People;
+using Memorabilia.Application.Features.Admin.Teams;
 using Memorabilia.Domain.Constants;
 using System;
 using System.ComponentModel.DataAnnotations;
@@ -7,7 +7,7 @@ using System.Linq;
 
 namespace Memorabilia.Application.Features.Memorabilia.Bobblehead
 {
-    public class SaveBobbleheadViewModel : SaveViewModel
+    public class SaveBobbleheadViewModel : SaveItemViewModel
     {
         public SaveBobbleheadViewModel() { }
 
@@ -25,41 +25,31 @@ namespace Memorabilia.Application.Features.Memorabilia.Bobblehead
                 Team = new SaveTeamViewModel(new TeamViewModel(viewModel.Teams.First().Team));
         }
 
+        public override string BackNavigationPath => $"Memorabilia/Edit/{MemorabiliaId}";
+
         public Brand Brand => Brand.Find(BrandId);
 
         [Required]
         [Range(1, int.MaxValue, ErrorMessage = "Brand is required.")]
         public int BrandId { get; set; }
 
+        public override EditModeType EditModeType => MemorabiliaId > 0 ? EditModeType.Update : EditModeType.Add;
+
+        public override string ExitNavigationPath => "Memorabilia/Items";
+
         public bool HasPerson => Person?.Id > 0;
 
         public bool HasTeam => Team?.Id > 0;
 
-        public string ImagePath
-        {
-            get
-            {
-                var path = "images/";
+        public override string ImagePath => "images/bobblehead.jpg";
 
-                //if (DisplayBobbleheadType && BobbleheadType != null)
-                //{
-                //    return $"{path}{BobbleheadType.Name.Replace(" ", "")}.jpg";
-                //}
-
-                return $"{path}Bobblehead.jpg";
-            }
-        }
-
-        public ItemType ItemType => ItemType.Bobble;
+        public override ItemType ItemType => ItemType.Bobble;
 
         [Required]
         [Range(1, int.MaxValue, ErrorMessage = "Level is required.")]
         public int LevelTypeId { get; set; }
 
-        [Required]
-        public int MemorabiliaId { get; set; }
-
-        public override string PageTitle => $"{(MemorabiliaId > 0 ? "Edit" : "Add")} {ItemType.Bobble.Name} Details";
+        public override string PageTitle => $"{(EditModeType == EditModeType.Update ? "Edit" : "Add")} {ItemType.Bobble.Name} Details";
 
         public SavePersonViewModel Person { get; set; }
 

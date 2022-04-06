@@ -1,79 +1,48 @@
 ﻿@page "/Leagues/Edit"
 @page "/Leagues/Edit/{id:int}"
 
-@using Memorabilia.Application.Features.Admin
-@using Memorabilia.Application.Features.Admin.League
-@using Memorabilia.Domain.Constants
-@using Memorabilia.Web.Controls.SportLeagueLevel
+@using Memorabilia.Application.Features.Admin.Leagues
+@using Memorabilia.Web.Controls.DropDowns
 
-@inject CommandRouter _commandRouter
-@inject NavigationManager _navigation
-@inject QueryRouter _queryRouter
-@inject IToastService _toastService
-
-<_Page OnLoad="OnLoad">
+<EditPage ContinueNavigationPath="@_viewModel.RoutePrefix"
+          EditMode="_viewModel.EditModeType" 
+          ExitNavigationPath="@_viewModel.RoutePrefix"
+          ImagePath="@_viewModel.ImagePath" 
+          ItemName="@_viewModel.ItemTitle"
+          Model="_viewModel"
+          OnLoad="OnLoad"
+          OnSave="HandleValidSubmit"
+          PageFooterButtonText="@_viewModel.ExitButtonText"
+          PageFooterNavigationPath="@_viewModel.ExitNavigationPath"
+          PageTitle="@_viewModel.PageTitle"
+          TItem="SaveLeagueViewModel">
     <Content>
-        <div class="row">
-            <div class="col-md-12" style="text-align: center">
-                <h1>@_viewModel.PageTitle</h1>
-            </div>
-        </div>
-        <br />
-        <div style="border: 1px solid black; margin-top: 2%; margin-bottom: 2%; margin-left: 2%; margin-right: 2%;">
-            <div class="row" style="margin-top: 2%; margin-bottom: 2%; margin-left: 1%; margin-right: 1%;">
-                <div class="col-lg-12" style="text-align: center">
-                    <img src="images/sports.jpg" alt="Image" height="150" width="150" />
-                </div>
-                <EditForm Model="_viewModel" OnValidSubmit="HandleValidSubmit">
-                    <DataAnnotationsValidator />
-                    <ValidationSummary />
-                    <div class="form-group">
-                        <label for="sportLeague">Sport League</label>
-                        <_SportLeagueLevelDropDown @bind-Value="@_viewModel.SportLeagueLevelId" 
-                                                   @bind-Value:event="ValueChanged" />                           
-                    </div>
-                    <div class="form-group">
-                        <label for="name">Name</label>
-                        <InputText id="name" @bind-Value="_viewModel.Name" class="form-control" />
-                    </div>
-                    <div class="form-group">
-                        <label for="abbreviation">Abbreviation</label>
-                        <InputText id="abbreviation" @bind-Value="_viewModel.Abbreviation" class="form-control" />
-                    </div>
-                    <div class="text-right">
-                        <button type="submit" class="btn btn-primary">Save</button>
-                    </div>
-                </EditForm>
-            </div>
-            <div class="row">
-                <div class="col-md-12" style="text-align: center">
-                    <a href="@_viewModel.RoutePrefix">Back</a>
-                </div>
-            </div>
-            <br />
-        </div>
+        <DivRowCol3>
+            <Content>
+                <MudSelect @bind-Value="@_viewModel.SportLeagueLevelId"
+                           @bind-Value:event="ValueChanged" 
+                           Label="Sport League Level"
+                           Variant="Variant.Outlined">
+                    <MudSelectItem Value="@(0)">--Select--</MudSelectItem>
+                    <Iterations Items="SportLeagueLevel.All" Context="sportLeagueLevel">
+                        <MudSelectItem Value="@sportLeagueLevel.Id">@sportLeagueLevel.Name</MudSelectItem>
+                    </Iterations>	
+                </MudSelect> 
+            </Content>
+        </DivRowCol3>
+        <DivRowCol3>
+            <Content>
+                <MudTextField @bind-Value="_viewModel.Name" 
+                              Label="Name" 
+                              Variant="Variant.Outlined" />
+            </Content>
+        </DivRowCol3>
+        <DivRowCol3>
+            <Content>
+                <MudTextField @bind-Value="_viewModel.Abbreviation" 
+                              Label="Abbreviation" 
+                              Variant="Variant.Outlined" />
+            </Content>
+        </DivRowCol3>
     </Content>
-</_Page>
-
-@code {
-    [Parameter]
-    public int Id { get; set; }
-
-    private SaveLeagueViewModel _viewModel = new SaveLeagueViewModel();
-
-    protected async Task HandleValidSubmit()
-    {
-        await _commandRouter.Send(new SaveLeague.Command(_viewModel)).ConfigureAwait(false);
-
-        _navigation.NavigateTo(_viewModel.RoutePrefix);
-        _toastService.ShowSuccess($"{_viewModel.ItemTitle} was saved successfully!", _viewModel.PageTitle);
-    }
-
-    protected async Task OnLoad()
-    {
-        if (Id == 0)
-            return;
-
-        _viewModel = new SaveLeagueViewModel(await _queryRouter.Send(new GetLeague.Query(Id)).ConfigureAwait(false));
-    }
-}
+</EditPage>

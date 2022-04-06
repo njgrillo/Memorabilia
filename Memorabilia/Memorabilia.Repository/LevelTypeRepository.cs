@@ -1,4 +1,5 @@
-﻿using Memorabilia.Domain;
+﻿using Memorabilia.Domain.Entities;
+using Memorabilia.Repository.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,45 +8,45 @@ using System.Threading.Tasks;
 
 namespace Memorabilia.Repository
 {
-    public class LevelTypeRepository : BaseRepository<Domain.Entities.LevelType>, ILevelTypeRepository
+    public class LevelTypeRepository : BaseRepository<LevelType>, ILevelTypeRepository
     {
-        private readonly Context _context;
+        private readonly DomainContext _context;
 
-        public LevelTypeRepository(Context context) : base(context)
+        public LevelTypeRepository(DomainContext context) : base(context)
         {
             _context = context;
         }
 
-        private IQueryable<Domain.Entities.LevelType> LevelType => _context.Set<Domain.Entities.LevelType>();
+        private IQueryable<LevelType> LevelType => _context.Set<LevelType>();
 
-        public async Task Add(Domain.Entities.LevelType levelType, CancellationToken cancellationToken = default)
+        public async Task Add(LevelType levelType, CancellationToken cancellationToken = default)
         {
             _context.Add(levelType);
 
             await _context.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
         }
 
-        public async Task Delete(Domain.Entities.LevelType levelType, CancellationToken cancellationToken = default)
+        public async Task Delete(LevelType levelType, CancellationToken cancellationToken = default)
         {
-            _context.Set<Domain.Entities.LevelType>().Remove(levelType);
+            _context.Set<LevelType>().Remove(levelType);
 
             await _context.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
         }
 
-        public async Task<Domain.Entities.LevelType> Get(int id)
+        public async Task<LevelType> Get(int id)
         {
             return await LevelType.SingleOrDefaultAsync(levelType => levelType.Id == id).ConfigureAwait(false);
         }
 
-        public async Task<IEnumerable<Domain.Entities.LevelType>> GetAll()
+        public async Task<IEnumerable<LevelType>> GetAll()
         {
             return (await LevelType.ToListAsync()
                                    .ConfigureAwait(false)).OrderBy(levelType => levelType.Name);
         }
 
-        public async Task Update(Domain.Entities.LevelType levelType, CancellationToken cancellationToken = default)
+        public async Task Update(LevelType levelType, CancellationToken cancellationToken = default)
         {
-            _context.Set<Domain.Entities.LevelType>().Update(levelType);
+            _context.Set<LevelType>().Update(levelType);
 
             await _context.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
         }

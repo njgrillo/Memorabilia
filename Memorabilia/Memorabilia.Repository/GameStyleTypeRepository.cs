@@ -1,4 +1,5 @@
-﻿using Memorabilia.Domain;
+﻿using Memorabilia.Domain.Entities;
+using Memorabilia.Repository.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,44 +8,44 @@ using System.Threading.Tasks;
 
 namespace Memorabilia.Repository
 {
-    public class GameStyleTypeRepository : BaseRepository<Domain.Entities.GameStyleType>, IGameStyleTypeRepository
+    public class GameStyleTypeRepository : BaseRepository<GameStyleType>, IGameStyleTypeRepository
     {
-        private readonly Context _context;
+        private readonly DomainContext _context;
 
-        public GameStyleTypeRepository(Context context) : base(context)
+        public GameStyleTypeRepository(DomainContext context) : base(context)
         {
             _context = context;
         }
 
-        private IQueryable<Domain.Entities.GameStyleType> GameStyleType => _context.Set<Domain.Entities.GameStyleType>();
+        private IQueryable<GameStyleType> GameStyleType => _context.Set<GameStyleType>();
 
-        public async Task Add(Domain.Entities.GameStyleType gameStyleType, CancellationToken cancellationToken = default)
+        public async Task Add(GameStyleType gameStyleType, CancellationToken cancellationToken = default)
         {
             _context.Add(gameStyleType);
 
             await _context.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
         }
 
-        public async Task Delete(Domain.Entities.GameStyleType gameStyleType, CancellationToken cancellationToken = default)
+        public async Task Delete(GameStyleType gameStyleType, CancellationToken cancellationToken = default)
         {
-            _context.Set<Domain.Entities.GameStyleType>().Remove(gameStyleType);
+            _context.Set<GameStyleType>().Remove(gameStyleType);
 
             await _context.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
         }
 
-        public async Task<Domain.Entities.GameStyleType> Get(int id)
+        public async Task<GameStyleType> Get(int id)
         {
             return await GameStyleType.SingleOrDefaultAsync(gameStyleType => gameStyleType.Id == id).ConfigureAwait(false);
         }
 
-        public async Task<IEnumerable<Domain.Entities.GameStyleType>> GetAll()
+        public async Task<IEnumerable<GameStyleType>> GetAll()
         {
             return (await GameStyleType.ToListAsync().ConfigureAwait(false)).OrderBy(gameStyleType => gameStyleType.Name);
         }
 
-        public async Task Update(Domain.Entities.GameStyleType gameStyleType, CancellationToken cancellationToken = default)
+        public async Task Update(GameStyleType gameStyleType, CancellationToken cancellationToken = default)
         {
-            _context.Set<Domain.Entities.GameStyleType>().Update(gameStyleType);
+            _context.Set<GameStyleType>().Update(gameStyleType);
 
             await _context.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
         }

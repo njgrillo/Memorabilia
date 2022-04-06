@@ -1,4 +1,5 @@
-﻿using Memorabilia.Domain;
+﻿using Memorabilia.Domain.Entities;
+using Memorabilia.Repository.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using System.Threading;
@@ -6,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Memorabilia.Repository
 {
-    public class MemorabiliaMagazineRepository : BaseRepository<Domain.Entities.MemorabiliaMagazine>, IMemorabiliaMagazineRepository
+    public class MemorabiliaMagazineRepository : BaseRepository<MemorabiliaMagazine>, IMemorabiliaMagazineRepository
     {
         private readonly Context _context;
 
@@ -15,30 +16,30 @@ namespace Memorabilia.Repository
             _context = context;
         }
 
-        private IQueryable<Domain.Entities.MemorabiliaMagazine> MemorabiliaMagazine => _context.Set<Domain.Entities.MemorabiliaMagazine>();
+        private IQueryable<MemorabiliaMagazine> MemorabiliaMagazine => _context.Set<MemorabiliaMagazine>();
 
-        public async Task Add(Domain.Entities.MemorabiliaMagazine memorabiliaMagazine, CancellationToken cancellationToken = default)
+        public async Task Add(MemorabiliaMagazine memorabiliaMagazine, CancellationToken cancellationToken = default)
         {
             _context.Add(memorabiliaMagazine);
 
             await _context.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
         }
 
-        public async Task Delete(Domain.Entities.MemorabiliaMagazine memorabiliaMagazine, CancellationToken cancellationToken = default)
+        public async Task Delete(MemorabiliaMagazine memorabiliaMagazine, CancellationToken cancellationToken = default)
         {
-            _context.Set<Domain.Entities.MemorabiliaMagazine>().Remove(memorabiliaMagazine);
+            _context.Set<MemorabiliaMagazine>().Remove(memorabiliaMagazine);
 
             await _context.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
         }
 
-        public async Task<Domain.Entities.MemorabiliaMagazine> Get(int id)
+        public async Task<MemorabiliaMagazine> Get(int id)
         {
             return await MemorabiliaMagazine.SingleOrDefaultAsync(memorabiliaMagazine => memorabiliaMagazine.Id == id).ConfigureAwait(false);
         }
 
-        public async Task Update(Domain.Entities.MemorabiliaMagazine memorabiliaMagazine, CancellationToken cancellationToken = default)
+        public async Task Update(MemorabiliaMagazine memorabiliaMagazine, CancellationToken cancellationToken = default)
         {
-            _context.Set<Domain.Entities.MemorabiliaMagazine>().Update(memorabiliaMagazine);
+            _context.Set<MemorabiliaMagazine>().Update(memorabiliaMagazine);
 
             await _context.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
         }

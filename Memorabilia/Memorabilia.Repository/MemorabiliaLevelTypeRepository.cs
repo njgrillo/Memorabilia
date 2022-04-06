@@ -1,4 +1,5 @@
-﻿using Memorabilia.Domain;
+﻿using Memorabilia.Domain.Entities;
+using Memorabilia.Repository.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using System.Threading;
@@ -6,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Memorabilia.Repository
 {
-    public class MemorabiliaLevelTypeRepository : BaseRepository<Domain.Entities.MemorabiliaLevelType>, IMemorabiliaLevelTypeRepository
+    public class MemorabiliaLevelTypeRepository : BaseRepository<MemorabiliaLevelType>, IMemorabiliaLevelTypeRepository
     {
         private readonly Context _context;
 
@@ -15,30 +16,30 @@ namespace Memorabilia.Repository
             _context = context;
         }
 
-        private IQueryable<Domain.Entities.MemorabiliaLevelType> MemorabiliaLevelType => _context.Set<Domain.Entities.MemorabiliaLevelType>();
+        private IQueryable<MemorabiliaLevelType> MemorabiliaLevelType => _context.Set<MemorabiliaLevelType>();
 
-        public async Task Add(Domain.Entities.MemorabiliaLevelType memorabiliaLevelType, CancellationToken cancellationToken = default)
+        public async Task Add(MemorabiliaLevelType memorabiliaLevelType, CancellationToken cancellationToken = default)
         {
             _context.Add(memorabiliaLevelType);
 
             await _context.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
         }
 
-        public async Task Delete(Domain.Entities.MemorabiliaLevelType memorabiliaLevelType, CancellationToken cancellationToken = default)
+        public async Task Delete(MemorabiliaLevelType memorabiliaLevelType, CancellationToken cancellationToken = default)
         {
-            _context.Set<Domain.Entities.MemorabiliaLevelType>().Remove(memorabiliaLevelType);
+            _context.Set<MemorabiliaLevelType>().Remove(memorabiliaLevelType);
 
             await _context.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
         }
 
-        public async Task<Domain.Entities.MemorabiliaLevelType> Get(int id)
+        public async Task<MemorabiliaLevelType> Get(int id)
         {
             return await MemorabiliaLevelType.SingleOrDefaultAsync(memorabiliaLevelType => memorabiliaLevelType.Id == id).ConfigureAwait(false);
         }
 
-        public async Task Update(Domain.Entities.MemorabiliaLevelType memorabiliaLevelType, CancellationToken cancellationToken = default)
+        public async Task Update(MemorabiliaLevelType memorabiliaLevelType, CancellationToken cancellationToken = default)
         {
-            _context.Set<Domain.Entities.MemorabiliaLevelType>().Update(memorabiliaLevelType);
+            _context.Set<MemorabiliaLevelType>().Update(memorabiliaLevelType);
 
             await _context.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
         }

@@ -1,4 +1,4 @@
-﻿using Memorabilia.Application.Features.Admin.Person;
+﻿using Memorabilia.Application.Features.Admin.People;
 using Memorabilia.Domain.Constants;
 using System;
 using System.ComponentModel.DataAnnotations;
@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace Memorabilia.Application.Features.Memorabilia.Tennisball
 {
-    public class SaveTennisballViewModel : SaveViewModel
+    public class SaveTennisballViewModel : SaveItemViewModel
     {
         public SaveTennisballViewModel() { }
 
@@ -23,11 +23,19 @@ namespace Memorabilia.Application.Features.Memorabilia.Tennisball
                 Person = new SavePersonViewModel(new PersonViewModel(viewModel.People.First().Person));
         }
 
+        public override string BackNavigationPath => $"Memorabilia/Edit/{MemorabiliaId}";
+
         public Brand Brand => Brand.Find(BrandId);
 
         [Required]
         [Range(1, int.MaxValue, ErrorMessage = "Brand is required.")]
         public int BrandId { get; set; }
+
+        public bool DisplayGameDate => GameStyleType.IsGameWorthly(GameStyleType);
+
+        public override EditModeType EditModeType => MemorabiliaId > 0 ? EditModeType.Update : EditModeType.Add;
+
+        public override string ExitNavigationPath => "Memorabilia/Items";
 
         public DateTime? GameDate { get; set; }
 
@@ -39,40 +47,20 @@ namespace Memorabilia.Application.Features.Memorabilia.Tennisball
 
         public bool HasPerson => Person?.Id > 0;
 
-        public string ImagePath
-        {
-            get
-            {
-                var path = "images/";
+        public override string ImagePath => "images/tennisball.jpg";
 
-                //if (DisplayTennisballType && TennisballType != null)
-                //{
-                //    return $"{path}{TennisballType.Name.Replace(" ", "")}.jpg";
-                //}
-
-                return $"{path}Tennisball.jpg";
-            }
-        }
-
-        public ItemType ItemType => ItemType.Tennisball;
+        public override ItemType ItemType => ItemType.Tennisball;
 
         [Required]
         [Range(1, int.MaxValue, ErrorMessage = "Level is required.")]
         public int LevelTypeId { get; set; }
 
-        [Required]
-        public int MemorabiliaId { get; set; }
-
-        public override string PageTitle => $"{(MemorabiliaId > 0 ? "Edit" : "Add")} {ItemType.Tennisball.Name} Details";
+        public override string PageTitle => $"{(EditModeType == EditModeType.Update ? "Edit" : "Add")} {ItemType.Tennisball.Name} Details";
 
         public SavePersonViewModel Person { get; set; }
 
         [Required]
         [Range(1, int.MaxValue, ErrorMessage = "Size is required.")]
         public int SizeId { get; set; }
-
-        //public Sport Sport => Sport.Tennis;
-
-        //public SportLeagueLevel SportLeagueLevel => SportLeagueLevel.MajorLeagueTennisball;
     }
 }

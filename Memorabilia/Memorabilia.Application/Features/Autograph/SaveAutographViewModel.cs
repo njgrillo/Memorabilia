@@ -1,5 +1,5 @@
 ﻿using Framework.Extension;
-using Memorabilia.Application.Features.Admin.Person;
+using Memorabilia.Application.Features.Admin.People;
 using Memorabilia.Application.Features.Memorabilia;
 using Memorabilia.Domain.Constants;
 using System;
@@ -25,10 +25,11 @@ namespace Memorabilia.Application.Features.Autograph
             FullName = viewModel.FullName ?? false;
             Grade = viewModel.Grade;
             Id = viewModel.Id;
+            ItemType = viewModel.ItemType;
             LastModifiedDate = viewModel.LastModifiedDate;
             MemorabiliaId = viewModel.MemorabiliaId;
             Person = new SavePersonViewModel(new PersonViewModel(viewModel.Person));
-            PersonalizationText = viewModel.Personalization?.Text;            
+            PersonalizationText = viewModel.Personalization?.Text;
             PurchaseTypeId = viewModel.Acquisition?.PurchaseTypeId ?? 0;
             ReceivedDate = viewModel.ReceivedDate;
             SentDate = viewModel.SentDate;
@@ -42,8 +43,9 @@ namespace Memorabilia.Application.Features.Autograph
             MemorabiliaAcquisitionTypeId = viewModel.Acquisition.AcquisitionTypeId;
             MemorabiliaCost = viewModel.Acquisition.Cost;
             MemorabiliaEstimatedValue = viewModel.EstimatedValue;
-            MemorabiliaId = viewModel.Id;            
-            MemorabiliaPurchaseTypeId = viewModel.Acquisition.PurchaseTypeId;            
+            MemorabiliaId = viewModel.Id;
+            MemorabiliaPurchaseTypeId = viewModel.Acquisition.PurchaseTypeId;
+            ItemType = ItemType.Find(viewModel.ItemTypeId);
             UserFirstName = viewModel.UserFirstName;
 
             var person = viewModel.People.FirstOrDefault()?.Person;
@@ -58,17 +60,29 @@ namespace Memorabilia.Application.Features.Autograph
 
         public int AcquisitionTypeId { get; set; }
 
+        public AcquisitionType[] AcquisitionTypes => AcquisitionType.All;
+
+        public AutographStep AutographStep => AutographStep.Autograph;
+
+        public override string BackNavigationPath => $"Memorabilia/Image/Edit/{MemorabiliaId}";
+
         public bool CanHaveCost => AcquisitionType.CanHaveCost(AcquisitionType.Find(AcquisitionTypeId));
 
         public bool CanHavePlaceOfPurchase => AcquisitionType == AcquisitionType.Purchase;
+
+        public bool CanHaveSpot => ItemType.CanHaveSpot(ItemType);
 
         [Required]
         [Range(1, int.MaxValue, ErrorMessage = "Color is required.")]
         public int ColorId { get; set; }
 
+        public Color[] Colors => Color.Autograph;
+
         [Required]
         [Range(1, int.MaxValue, ErrorMessage = "Condition is required.")]
         public int ConditionId { get; set; }
+
+        public Condition[] Conditions => Condition.All;
 
         public decimal? Cost { get; set; }
 
@@ -78,17 +92,21 @@ namespace Memorabilia.Application.Features.Autograph
 
         public bool DisplayThroughTheMailDetails => AcquisitionType == AcquisitionType.ThroughTheMail;
 
-        public decimal? EstimatedValue { get; set; }   
-        
+        public decimal? EstimatedValue { get; set; }
+
+        public override string ExitNavigationPath => "Memorabilia/Items";
+
         public bool FullName { get; set; }
 
         public int? Grade { get; set; }
+
+        public string ImagePath => "images/autographs.jpg";
 
         public bool IsAcquisitionFromMemorabilia
         {
             get
             {
-                if (AcquisitionTypeId == MemorabiliaAcquisitionTypeId && 
+                if (AcquisitionTypeId == MemorabiliaAcquisitionTypeId &&
                     AcquiredDate == MemorabiliaAcquiredDate &&
                     Cost == MemorabiliaCost &&
                     PurchaseTypeId == MemorabiliaPurchaseTypeId)
@@ -111,6 +129,10 @@ namespace Memorabilia.Application.Features.Autograph
         }
 
         public bool IsPersonalized => !PersonalizationText.IsNullOrEmpty();
+
+        public ItemType ItemType { get; set; }
+
+        public string ItemTypeName => ItemType?.Name;
 
         public DateTime? LastModifiedDate { get; set; }
 
@@ -142,6 +164,8 @@ namespace Memorabilia.Application.Features.Autograph
 
         public int PurchaseTypeId { get; set; }
 
+        public PurchaseType[] PurchaseTypes => PurchaseType.All;
+
         public DateTime? ReceivedDate { get; set; }
 
         public DateTime? SentDate { get; set; }
@@ -151,5 +175,7 @@ namespace Memorabilia.Application.Features.Autograph
         [Required]
         [Range(1, int.MaxValue, ErrorMessage = "Writing Instrument is required.")]
         public int WritingInstrumentId { get; set; }
+
+        public WritingInstrument[] WritingInstruments => WritingInstrument.All;
     }
 }

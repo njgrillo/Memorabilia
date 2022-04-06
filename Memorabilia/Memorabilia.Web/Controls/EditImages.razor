@@ -1,0 +1,83 @@
+﻿@typeparam TItem
+
+<div style="border: 1px solid black; margin-top: 2%; margin-bottom: 2%; margin-left: 2%; margin-right: 2%;">
+    <EditForm Model="Model" OnValidSubmit="HandleValidSubmit">
+        <DataAnnotationsValidator />
+        <ValidationSummary />   
+        <DivPad2>
+            <Content>
+                <DivRowCol12Center>
+                    <Content>
+                        <MudImage Class="rounded-lg" 
+                                  Elevation="5" 
+                                  Height="150"
+                                  ObjectFit="@ObjectFit.Cover"
+                                  Src="images/images.png"
+                                  Width="150" />
+                    </Content>
+                </DivRowCol12Center>
+                <div class="row">
+                    <InputFile id="fileInput" @bind-Value="@Images"
+                                              accept="image/*" hidden multiple
+                                              OnChange="@LoadFiles"   />
+                    <MudFab Color="MudBlazor.Color.Secondary"
+                            HtmlTag="label"
+                            Icon="@Icons.Filled.Image"
+                            Label="Load pictures"
+                            for="fileInput" />                    
+                </div>
+                <div class="row">
+                    <PrettyBlazor.Condition Evaluation="_files != null">
+                        <Match>
+                            <MudText Typo="@Typo.h6">@_files.Count() File@(_files.Count() == 1 ? "" : "s"):</MudText>
+                            <MudList>
+                                <Iterations Items="_files" Context="file">
+                                    <MudListItem Icon="@Icons.Filled.AttachFile" @key="@file">
+                                        @file.Name <code>@file.Size bytes</code>
+                                    </MudListItem>
+                                </Iterations>
+                            </MudList>
+                        </Match>
+                    </PrettyBlazor.Condition>
+                </div>
+                <br />
+                <div class="row">
+                    <Iterations Items="Images" Context="image">
+                        <div class="col-lg-3">
+                            <ImageEditor CanRemove="true"
+                                         FileName="@image.FileName"
+                                         HasPrimary="true"
+                                         ImageFilePath="@image.FilePath"
+                                         ImageType="image.ImageType"
+                                         IsPrimary="image.IsPrimary"
+                                         OnPrimarySet="PrimarySet"
+                                         OnRemove="Remove" />  
+                        </div>                    
+                    </Iterations>
+                </div> 
+                <br />
+                <DivLeftAlign>
+                    <Content>
+                        @AdditionalButtons
+                        <MudButton ButtonType="MudBlazor.ButtonType.Submit" 
+                                   Color="MudBlazor.Color.Info"
+                                   OnClick="@(()=> _continue = true)"
+                                   Size="MudBlazor.Size.Medium"
+                                   StartIcon="@Icons.Material.Filled.Save"                                   
+                                   Variant="Variant.Filled">@SaveButtonText</MudButton>
+                        <MudButton ButtonType="MudBlazor.ButtonType.Submit" 
+                                   Color="MudBlazor.Color.Info"
+                                   Size="MudBlazor.Size.Medium"
+                                   StartIcon="@Icons.Material.Filled.Save"                                   
+                                   Variant="Variant.Filled">Save & Exit</MudButton>
+                        <MudButton ButtonType="MudBlazor.ButtonType.Button" 
+                                   Color="MudBlazor.Color.Secondary"
+                                   OnClick="Cancel"
+                                   Size="MudBlazor.Size.Medium"                                  
+                                   Variant="Variant.Filled">Cancel</MudButton>
+                    </Content>
+                </DivLeftAlign>
+            </Content>
+        </DivPad2>           
+    </EditForm>         
+</div>

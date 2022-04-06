@@ -1,72 +1,37 @@
 ﻿@page "/Autographs/Spot/Edit/{autographId:int}"
 
 @using Memorabilia.Application.Features.Autograph.Spot
-@using Memorabilia.Domain.Constants
-@using Memorabilia.Web.Controls.ItemTypeSpot
+@using Memorabilia.Web.Controls.Autographs
+@using Memorabilia.Web.Controls.DropDowns
 
-@inject CommandRouter _commandRouter
-@inject NavigationManager _navigation
-@inject QueryRouter _queryRouter
-@inject IToastService _toastService
-
-<_Page OnLoad="OnLoad">
+<EditPage ContinueNavigationPath="@_viewModel.ContinueNavigationPath"
+          EditMode="_viewModel.EditModeType"
+          ExitNavigationPath="@_viewModel.ExitNavigationPath"
+          ImagePath="@_viewModel.ImagePath"
+          ItemName="@_viewModel.ItemTypeName"
+          Model="_viewModel"
+          OnLoad="OnLoad"
+          OnSave="OnSave"
+          PageFooterButtonText="@_viewModel.ExitButtonText"
+          PageFooterNavigationPath="@_viewModel.BackNavigationPath"
+          PageTitle="@_viewModel.PageTitle"
+          TItem="SaveSpotViewModel"
+          UseMultipleButtons="true">
+    <TimelineContent>
+        <AutographTimeline AutographId="_viewModel.AutographId" 
+                           AutographStep="_viewModel.AutographStep"  
+                           DisplaySpot="_viewModel.CanHaveSpot" 
+                           EditMode="_viewModel.EditModeType"
+                           MemorabiliaId="_viewModel.MemorabiliaId" />
+    </TimelineContent>
     <Content>
-        <div class="row">
-            <div class="col-md-12" style="text-align: center">
-                <h1>@_viewModel.PageTitle</h1>
-            </div>
-        </div>
-        <br />
-        <div style="border: 1px solid black; margin-top: 2%; margin-bottom: 2%; margin-left: 2%; margin-right: 2%;">
-            <EditForm Model="_viewModel" OnValidSubmit="HandleValidSubmit">
-                <DataAnnotationsValidator />
-                <ValidationSummary />
-                <div style="margin-top: 2%; margin-bottom: 2%; margin-left: 1%; margin-right: 1%;">
-                    <div class="col-lg-12" style="text-align: center">
-                        <img src="@_viewModel.ImagePath" alt="Image" height="150" width="150" />
-                    </div>            
-                    <div class="row">
-                        <div class="col-lg-3">
-                            <div class="form-group">
-                                <label for="spot">Spot</label>
-                                <_ItemTypeSpotDropDown @bind-Value="@_viewModel.SpotId"
-                                                       @bind-Value:event="ValueChanged" 
-                                                       ItemType="@_viewModel.ItemType" /> 
-                            </div> 
-                        </div>
-                    </div>                                   
-                    <div class="text-left">
-                        <button type="submit" class="btn btn-primary" @onclick="@(()=> _continue = true)">Save & Continue</button>
-                        <button type="submit" class="btn btn-primary">Save & Exit</button>
-                        <button type="button" class="btn btn-secondary" @onclick="@(_ => _navigation.NavigateTo("Memorabilia"))">Cancel</button>
-                    </div>
-                </div>            
-            </EditForm>        
-        </div>
+        <DivRowCol3>
+            <Content>
+                <ItemTypeSpotDropDown @bind-Value="@_viewModel.SpotId"
+                                      @bind-Value:event="ValueChanged" 
+                                      ItemType="@_viewModel.ItemType"
+                                      SelectedValue="_viewModel.SpotId" /> 
+            </Content>
+        </DivRowCol3>
     </Content>
-</_Page>
-
-@code {
-    [Parameter]
-    public int AutographId { get; set; }
-
-    private bool _continue;
-    private SaveSpotViewModel _viewModel = new SaveSpotViewModel();   
-
-    protected async Task HandleValidSubmit()
-    {
-        _viewModel.AutographId = AutographId;
-
-        await _commandRouter.Send(new SaveSpot.Command(_viewModel)).ConfigureAwait(false);
-
-        var url = _continue ? $"Autographs/Image/Edit/{AutographId}" : $"Memorabilia";
-
-        _navigation.NavigateTo(url);
-        _toastService.ShowSuccess($"{_viewModel.ItemTypeName} Autograph Spot was saved successfully!", _viewModel.ItemTypeName);
-    }
-
-    protected async Task OnLoad()
-    {
-        _viewModel = new SaveSpotViewModel(await _queryRouter.Send(new GetSpot.Query(AutographId)).ConfigureAwait(false));
-    } 
-}
+</EditPage>

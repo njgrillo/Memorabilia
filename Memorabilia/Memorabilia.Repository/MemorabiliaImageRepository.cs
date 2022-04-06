@@ -1,4 +1,5 @@
-﻿using Memorabilia.Domain;
+﻿using Memorabilia.Domain.Entities;
+using Memorabilia.Repository.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Memorabilia.Repository
 {
-    public class MemorabiliaImageRepository : BaseRepository<Domain.Entities.MemorabiliaImage>, IMemorabiliaImageRepository
+    public class MemorabiliaImageRepository : BaseRepository<MemorabiliaImage>, IMemorabiliaImageRepository
     {
         private readonly Context _context;
 
@@ -16,35 +17,35 @@ namespace Memorabilia.Repository
             _context = context;
         }
 
-        private IQueryable<Domain.Entities.MemorabiliaImage> MemorabiliaImage => _context.Set<Domain.Entities.MemorabiliaImage>();
+        private IQueryable<MemorabiliaImage> MemorabiliaImage => _context.Set<MemorabiliaImage>();
 
-        public async Task Add(Domain.Entities.MemorabiliaImage memorabiliaImage, CancellationToken cancellationToken = default)
+        public async Task Add(MemorabiliaImage memorabiliaImage, CancellationToken cancellationToken = default)
         {
             _context.Add(memorabiliaImage);
 
             await _context.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
         }
 
-        public async Task Delete(Domain.Entities.MemorabiliaImage memorabiliaImage, CancellationToken cancellationToken = default)
+        public async Task Delete(MemorabiliaImage memorabiliaImage, CancellationToken cancellationToken = default)
         {
-            _context.Set<Domain.Entities.MemorabiliaImage>().Remove(memorabiliaImage);
+            _context.Set<MemorabiliaImage>().Remove(memorabiliaImage);
 
             await _context.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
         }
 
-        public async Task<Domain.Entities.MemorabiliaImage> Get(int id)
+        public async Task<MemorabiliaImage> Get(int id)
         {
             return await MemorabiliaImage.SingleOrDefaultAsync(memorabiliaImage => memorabiliaImage.Id == id).ConfigureAwait(false);
         }
 
-        public async Task<List<Domain.Entities.MemorabiliaImage>> GetAll(int memorabiliaId)
+        public async Task<List<MemorabiliaImage>> GetAll(int memorabiliaId)
         {
             return await MemorabiliaImage.Where(memorabiliaImage => memorabiliaImage.MemorabiliaId == memorabiliaId).ToListAsync().ConfigureAwait(false);
         }
 
-        public async Task Update(Domain.Entities.MemorabiliaImage memorabiliaImage, CancellationToken cancellationToken = default)
+        public async Task Update(MemorabiliaImage memorabiliaImage, CancellationToken cancellationToken = default)
         {
-            _context.Set<Domain.Entities.MemorabiliaImage>().Update(memorabiliaImage);
+            _context.Set<MemorabiliaImage>().Update(memorabiliaImage);
 
             await _context.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
         }

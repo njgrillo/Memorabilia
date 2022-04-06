@@ -1,4 +1,5 @@
-﻿using Memorabilia.Domain;
+﻿using Memorabilia.Domain.Entities;
+using Memorabilia.Repository.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,44 +8,44 @@ using System.Threading.Tasks;
 
 namespace Memorabilia.Repository
 {
-    public class PhotoTypeRepository : BaseRepository<Domain.Entities.PhotoType>, IPhotoTypeRepository
+    public class PhotoTypeRepository : BaseRepository<PhotoType>, IPhotoTypeRepository
     {
-        private readonly Context _context;
+        private readonly DomainContext _context;
 
-        public PhotoTypeRepository(Context context) : base(context)
+        public PhotoTypeRepository(DomainContext context) : base(context)
         {
             _context = context;
         }
 
-        private IQueryable<Domain.Entities.PhotoType> PhotoType => _context.Set<Domain.Entities.PhotoType>();
+        private IQueryable<PhotoType> PhotoType => _context.Set<PhotoType>();
 
-        public async Task Add(Domain.Entities.PhotoType photoType, CancellationToken cancellationToken = default)
+        public async Task Add(PhotoType photoType, CancellationToken cancellationToken = default)
         {
             _context.Add(photoType);
 
             await _context.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
         }
 
-        public async Task Delete(Domain.Entities.PhotoType photoType, CancellationToken cancellationToken = default)
+        public async Task Delete(PhotoType photoType, CancellationToken cancellationToken = default)
         {
-            _context.Set<Domain.Entities.PhotoType>().Remove(photoType);
+            _context.Set<PhotoType>().Remove(photoType);
 
             await _context.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
         }
 
-        public async Task<Domain.Entities.PhotoType> Get(int id)
+        public async Task<PhotoType> Get(int id)
         {
             return await PhotoType.SingleOrDefaultAsync(photoType => photoType.Id == id).ConfigureAwait(false);
         }
 
-        public async Task<IEnumerable<Domain.Entities.PhotoType>> GetAll()
+        public async Task<IEnumerable<PhotoType>> GetAll()
         {
             return (await PhotoType.ToListAsync().ConfigureAwait(false)).OrderBy(photoType => photoType.Name);
         }
 
-        public async Task Update(Domain.Entities.PhotoType photoType, CancellationToken cancellationToken = default)
+        public async Task Update(PhotoType photoType, CancellationToken cancellationToken = default)
         {
-            _context.Set<Domain.Entities.PhotoType>().Update(photoType);
+            _context.Set<PhotoType>().Update(photoType);
 
             await _context.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
         }

@@ -1,4 +1,5 @@
-﻿using Memorabilia.Domain;
+﻿using Memorabilia.Domain.Entities;
+using Memorabilia.Repository.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,44 +8,44 @@ using System.Threading.Tasks;
 
 namespace Memorabilia.Repository
 {
-    public class SportRepository : BaseRepository<Domain.Entities.Sport>, ISportRepository
+    public class SportRepository : BaseRepository<Sport>, ISportRepository
     {
-        private readonly Context _context;
+        private readonly DomainContext _context;
 
-        public SportRepository(Context context) : base(context)
+        public SportRepository(DomainContext context) : base(context)
         {
             _context = context;
         }
 
-        private IQueryable<Domain.Entities.Sport> Sport => _context.Set<Domain.Entities.Sport>();
+        private IQueryable<Sport> Sport => _context.Set<Sport>();
 
-        public async Task Add(Domain.Entities.Sport sport, CancellationToken cancellationToken = default)
+        public async Task Add(Sport sport, CancellationToken cancellationToken = default)
         {
             _context.Add(sport);
 
             await _context.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
         }
 
-        public async Task Delete(Domain.Entities.Sport sport, CancellationToken cancellationToken = default)
+        public async Task Delete(Sport sport, CancellationToken cancellationToken = default)
         {
-            _context.Set<Domain.Entities.Sport>().Remove(sport);
+            _context.Set<Sport>().Remove(sport);
 
             await _context.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
         }
 
-        public async Task<Domain.Entities.Sport> Get(int id)
+        public async Task<Sport> Get(int id)
         {
             return await Sport.SingleOrDefaultAsync(sport => sport.Id == id).ConfigureAwait(false);
         }
 
-        public async Task<IEnumerable<Domain.Entities.Sport>> GetAll()
+        public async Task<IEnumerable<Sport>> GetAll()
         {
             return (await Sport.ToListAsync().ConfigureAwait(false)).OrderBy(sport => sport.Name);
         }
 
-        public async Task Update(Domain.Entities.Sport sport, CancellationToken cancellationToken = default)
+        public async Task Update(Sport sport, CancellationToken cancellationToken = default)
         {
-            _context.Set<Domain.Entities.Sport>().Update(sport);
+            _context.Set<Sport>().Update(sport);
 
             await _context.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
         }

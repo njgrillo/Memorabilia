@@ -1,4 +1,5 @@
-﻿using Memorabilia.Domain;
+﻿using Memorabilia.Domain.Entities;
+using Memorabilia.Repository.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,44 +8,44 @@ using System.Threading.Tasks;
 
 namespace Memorabilia.Repository
 {
-    public class OrientationRepository : BaseRepository<Domain.Entities.Orientation>, IOrientationRepository
+    public class OrientationRepository : BaseRepository<Orientation>, IOrientationRepository
     {
-        private readonly Context _context;
+        private readonly DomainContext _context;
 
-        public OrientationRepository(Context context) : base(context)
+        public OrientationRepository(DomainContext context) : base(context)
         {
             _context = context;
         }
 
-        private IQueryable<Domain.Entities.Orientation> Orientation => _context.Set<Domain.Entities.Orientation>();
+        private IQueryable<Orientation> Orientation => _context.Set<Orientation>();
 
-        public async Task Add(Domain.Entities.Orientation orientation, CancellationToken cancellationToken = default)
+        public async Task Add(Orientation orientation, CancellationToken cancellationToken = default)
         {
             _context.Add(orientation);
 
             await _context.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
         }
 
-        public async Task Delete(Domain.Entities.Orientation orientation, CancellationToken cancellationToken = default)
+        public async Task Delete(Orientation orientation, CancellationToken cancellationToken = default)
         {
-            _context.Set<Domain.Entities.Orientation>().Remove(orientation);
+            _context.Set<Orientation>().Remove(orientation);
 
             await _context.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
         }
 
-        public async Task<Domain.Entities.Orientation> Get(int id)
+        public async Task<Orientation> Get(int id)
         {
             return await Orientation.SingleOrDefaultAsync(orientation => orientation.Id == id).ConfigureAwait(false);
         }
 
-        public async Task<IEnumerable<Domain.Entities.Orientation>> GetAll()
+        public async Task<IEnumerable<Orientation>> GetAll()
         {
             return (await Orientation.ToListAsync().ConfigureAwait(false)).OrderBy(orientation => orientation.Name);
         }
 
-        public async Task Update(Domain.Entities.Orientation orientation, CancellationToken cancellationToken = default)
+        public async Task Update(Orientation orientation, CancellationToken cancellationToken = default)
         {
-            _context.Set<Domain.Entities.Orientation>().Update(orientation);
+            _context.Set<Orientation>().Update(orientation);
 
             await _context.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
         }

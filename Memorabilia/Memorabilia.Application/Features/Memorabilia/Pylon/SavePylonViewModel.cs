@@ -1,13 +1,12 @@
-﻿using Memorabilia.Application.Features.Admin.Team;
+﻿using Memorabilia.Application.Features.Admin.Teams;
 using Memorabilia.Domain.Constants;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 
 namespace Memorabilia.Application.Features.Memorabilia.Pylon
 {
-    public class SavePylonViewModel : SaveViewModel
+    public class SavePylonViewModel : SaveItemViewModel
     {
         public SavePylonViewModel() { }
 
@@ -19,11 +18,18 @@ namespace Memorabilia.Application.Features.Memorabilia.Pylon
             LevelTypeId = viewModel.Level.LevelTypeId;
             MemorabiliaId = viewModel.MemorabiliaId;
             SizeId = viewModel.Size.SizeId;
-            SportIds = viewModel.Sports.Select(x => x.Id).ToList();
-            Teams = viewModel.Teams.Select(team => new SaveTeamViewModel(new TeamViewModel(team.Team))).ToList();
+
+            if (viewModel.Teams.Any())
+                Team = new SaveTeamViewModel(new TeamViewModel(viewModel.Teams.First().Team));
         }
 
+        public override string BackNavigationPath => $"Memorabilia/Edit/{MemorabiliaId}";
+
         public bool DisplayGameDate => GameStyleType == GameStyleType.GameUsed;
+
+        public override EditModeType EditModeType => MemorabiliaId > 0 ? EditModeType.Update : EditModeType.Add;
+
+        public override string ExitNavigationPath => "Memorabilia/Items";
 
         public DateTime? GameDate { get; set; }
 
@@ -33,27 +39,22 @@ namespace Memorabilia.Application.Features.Memorabilia.Pylon
 
         public int GameStyleTypeId { get; set; }
 
-        public bool HasSport => SportIds.Any();
+        public bool HasTeam => Team.Id > 0;
 
-        public bool HasTeam => Teams.Any();
+        public override string ImagePath => "images/pylon.jpg";
 
-        public ItemType ItemType => ItemType.Pylon;
+        public override ItemType ItemType => ItemType.Pylon;
 
         [Required]
         [Range(1, int.MaxValue, ErrorMessage = "Level is required.")]
         public int LevelTypeId { get; set; }
 
-        [Required]
-        public int MemorabiliaId { get; set; }
-
-        public override string PageTitle => $"{(MemorabiliaId > 0 ? "Edit" : "Add")} {ItemType.Pylon.Name} Details";
+        public override string PageTitle => $"{(EditModeType == EditModeType.Update ? "Edit" : "Add")} {ItemType.Pylon.Name} Details";
 
         [Required]
         [Range(1, int.MaxValue, ErrorMessage = "Size is required.")]
         public int SizeId { get; set; }
 
-        public List<int> SportIds { get; set; } = new();
-
-        public List<SaveTeamViewModel> Teams { get; set; } = new();
+        public SaveTeamViewModel Team { get; set; }
     }
 }

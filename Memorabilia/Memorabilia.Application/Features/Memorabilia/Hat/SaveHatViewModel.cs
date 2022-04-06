@@ -1,5 +1,5 @@
-﻿using Memorabilia.Application.Features.Admin.Person;
-using Memorabilia.Application.Features.Admin.Team;
+﻿using Memorabilia.Application.Features.Admin.People;
+using Memorabilia.Application.Features.Admin.Teams;
 using Memorabilia.Domain.Constants;
 using System;
 using System.Collections.Generic;
@@ -8,7 +8,7 @@ using System.Linq;
 
 namespace Memorabilia.Application.Features.Memorabilia.Hat
 {
-    public class SaveHatViewModel : SaveViewModel
+    public class SaveHatViewModel : SaveItemViewModel
     {
         public SaveHatViewModel() { }
 
@@ -26,11 +26,17 @@ namespace Memorabilia.Application.Features.Memorabilia.Hat
             Teams = viewModel.Teams.Select(team => new SaveTeamViewModel(new TeamViewModel(team.Team))).ToList();
         }
 
+        public override string BackNavigationPath => $"Memorabilia/Edit/{MemorabiliaId}";
+
         [Required]
         [Range(1, int.MaxValue, ErrorMessage = "Brand is required.")]
         public int BrandId { get; set; }
 
         public bool DisplayGameDate => GameStyleType == GameStyleType.GameUsed;
+
+        public override EditModeType EditModeType => MemorabiliaId > 0 ? EditModeType.Update : EditModeType.Add;
+
+        public override string ExitNavigationPath => "Memorabilia/Items";
 
         public DateTime? GameDate { get; set; }
 
@@ -46,18 +52,13 @@ namespace Memorabilia.Application.Features.Memorabilia.Hat
 
         public bool HasTeam => Teams.Any();
 
-        public string ImagePath => string.Empty;
+        public override string ImagePath => "images/hat.jpg";
 
-        public ItemType ItemType => ItemType.Hat;
+        public override ItemType ItemType => ItemType.Hat;
 
         [Required]
         [Range(1, int.MaxValue, ErrorMessage = "Level is required.")]
         public int LevelTypeId { get; set; }
-
-        [Required]
-        public int MemorabiliaId { get; set; }
-
-        public override string PageTitle => $"{(MemorabiliaId > 0 ? "Edit" : "Add")} {ItemType.Hat.Name} Details";
 
         public List<SavePersonViewModel> People { get; set; } = new();
 

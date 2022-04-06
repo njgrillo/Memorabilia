@@ -1,4 +1,5 @@
-﻿using Memorabilia.Domain;
+﻿using Memorabilia.Domain.Entities;
+using Memorabilia.Repository.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,38 +8,38 @@ using System.Threading.Tasks;
 
 namespace Memorabilia.Repository
 {
-    public class TeamLeagueRepository : BaseRepository<Domain.Entities.TeamLeague>, ITeamLeagueRepository
+    public class TeamLeagueRepository : BaseRepository<TeamLeague>, ITeamLeagueRepository
     {
-        private readonly Context _context;
+        private readonly DomainContext _context;
 
-        public TeamLeagueRepository(Context context) : base(context)
+        public TeamLeagueRepository(DomainContext context) : base(context)
         {
             _context = context;
         }
 
-        private IQueryable<Domain.Entities.TeamLeague> TeamLeague => _context.Set<Domain.Entities.TeamLeague>()
-                                                                             .Include(teamLeague => teamLeague.Team);
+        private IQueryable<TeamLeague> TeamLeague => _context.Set<TeamLeague>()
+                                                             .Include(teamLeague => teamLeague.Team);
 
-        public async Task Add(Domain.Entities.TeamLeague teamLeague, CancellationToken cancellationToken = default)
+        public async Task Add(TeamLeague teamLeague, CancellationToken cancellationToken = default)
         {
             _context.Add(teamLeague);
 
             await _context.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
         }
 
-        public async Task Delete(Domain.Entities.TeamLeague teamLeague, CancellationToken cancellationToken = default)
+        public async Task Delete(TeamLeague teamLeague, CancellationToken cancellationToken = default)
         {
-            _context.Set<Domain.Entities.TeamLeague>().Remove(teamLeague);
+            _context.Set<TeamLeague>().Remove(teamLeague);
 
             await _context.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
         }
 
-        public async Task<Domain.Entities.TeamLeague> Get(int id)
+        public async Task<TeamLeague> Get(int id)
         {
             return await TeamLeague.SingleOrDefaultAsync(teamLeague => teamLeague.Id == id).ConfigureAwait(false);
         }
 
-        public async Task<IEnumerable<Domain.Entities.TeamLeague>> GetAll(int? teamId = null)
+        public async Task<IEnumerable<TeamLeague>> GetAll(int? teamId = null)
         {
             return teamId.HasValue 
                 ? (await TeamLeague.Where(teamLeague => teamLeague.TeamId == teamId)
@@ -50,9 +51,9 @@ namespace Memorabilia.Repository
                                                           .ThenBy(teamLeague => teamLeague.Team?.Name);
         }
 
-        public async Task Update(Domain.Entities.TeamLeague teamLeague, CancellationToken cancellationToken = default)
+        public async Task Update(TeamLeague teamLeague, CancellationToken cancellationToken = default)
         {
-            _context.Set<Domain.Entities.TeamLeague>().Update(teamLeague);
+            _context.Set<TeamLeague>().Update(teamLeague);
 
             await _context.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
         }

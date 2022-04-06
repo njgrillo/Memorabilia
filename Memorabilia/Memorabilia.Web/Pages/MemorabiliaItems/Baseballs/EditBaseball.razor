@@ -1,174 +1,129 @@
 ﻿@page "/Memorabilia/Baseball/Edit/{memorabiliaId:int}"
 
-@using Memorabilia.Application.Features.Admin.Person
-@using Memorabilia.Application.Features.Admin.Team
+@using Memorabilia.Application.Features.Admin.Commissioners
+@using Memorabilia.Application.Features.Admin.ItemTypeBrand
+@using Memorabilia.Application.Features.Admin.People
+@using Memorabilia.Application.Features.Admin.Teams
 @using Memorabilia.Application.Features.Memorabilia
 @using Memorabilia.Application.Features.Memorabilia.Baseball
-@using Memorabilia.Web.Controls.Baseball
-@using Memorabilia.Web.Controls.Commissioner
-@using Memorabilia.Web.Controls.ItemTypeBrand
-@using Memorabilia.Web.Controls.ItemTypeGameStyle
-@using Memorabilia.Web.Controls.ItemTypeLevel
-@using Memorabilia.Web.Controls.ItemTypeSize
+@using Memorabilia.Web.Controls.DropDowns
 @using Memorabilia.Web.Controls.MemorabiliaItem
 @using Memorabilia.Web.Controls.Person
 @using Memorabilia.Web.Controls.Team
 
-@inject CommandRouter _commandRouter
-@inject QueryRouter _queryRouter
-
-<_EditMemorabiliaItem ImagePath="@_viewModel.ImagePath" 
-                      ItemType="_viewModel.ItemType" 
-                      MemorabiliaId="MemorabiliaId"
-                      Model="_viewModel"
-                      OnLoad="OnLoad"
-                      OnSave="OnSave"
-                      PageTitle="@_viewModel.PageTitle"
-                      TItem="SaveBaseballViewModel">
+<EditPage ContinueNavigationPath="@_viewModel.ContinueNavigationPath"
+          EditMode="_viewModel.EditModeType"
+          ExitNavigationPath="@_viewModel.ExitNavigationPath"
+          ImagePath="@_viewModel.ImagePath"
+          ItemName="@_viewModel.ItemType.Name"
+          Model="_viewModel"
+          OnLoad="OnLoad"
+          OnSave="OnSave"
+          PageFooterButtonText="@_viewModel.ExitButtonText"
+          PageFooterNavigationPath="@_viewModel.BackNavigationPath"
+          PageTitle="@_viewModel.PageTitle"
+          TItem="SaveBaseballViewModel"
+          UseMultipleButtons="true">
+    <TimelineContent>
+        <MemorabiliaItemTimeline EditMode="_viewModel.EditModeType"
+                                 ItemTypeName="@_viewModel.ItemType.Name"
+                                 MemorabiliaId="_viewModel.MemorabiliaId"
+                                 MemorabiliaItemStep="_viewModel.MemorabiliaItemStep" />
+    </TimelineContent>
     <Content>
-        <div class="row">
-            <div class="col-lg-3">
-                <div class="form-group">
-                    <label for="brand">Brand</label>
-                    <_ItemTypeBrandDropDown @bind-Value="@_viewModel.BrandId" 
-                                            @bind-Value:event="ValueChanged"
-                                            ItemType="_viewModel.ItemType" />
-                </div> 
-            </div>
-            <div class="col-lg-3">
-                <div class="form-group">
-                    <label for="gameStyleType">Game Style Type</label>
-                    <_ItemTypeGameStyleDropDown @bind-Value="@_viewModel.GameStyleTypeId"
-                                                @bind-Value:event="ValueChanged"
-                                                ItemType="_viewModel.ItemType" /> 
-                </div> 
-            </div>
-            <div class="col-lg-3">
-                    <div class="form-group" hidden="@(!_viewModel.DisplayBaseballType)">
-                    <label for="baseballType">Type</label>
-                    <_BaseballTypeDropDown @bind-Value="@_viewModel.BaseballTypeId" 
+        <DivRowCol3>
+            <Content>
+                <ItemTypeBrandDropDown @bind-Value="@_viewModel.BrandId" 
+                                       @bind-Value:event="ValueChanged"
+                                       ItemType="_viewModel.ItemType"
+                                       SelectedValue="_viewModel.BrandId" />
+            </Content>
+            <ContentColumn2>
+                <ItemTypeGameStyleDropDown @bind-Value="@_viewModel.GameStyleTypeId"
                                            @bind-Value:event="ValueChanged"
-                                           GameStyleType="_viewModel.GameStyleType" /> 
+                                           ItemType="_viewModel.ItemType"
+                                           SelectedValue="_viewModel.GameStyleTypeId" /> 
+            </ContentColumn2>
+            <ContentColumn3>
+                <div hidden="@(!_viewModel.DisplayBaseballType)">
+                    <MudSelect @bind-Value="@_viewModel.BaseballTypeId"
+                               @bind-Value:event="ValueChanged"    
+                               Label="Type"
+                               Variant="Variant.Outlined" >
+                        <MudSelectItem Value="@(0)">--Select--</MudSelectItem>
+                        <Iterations Items="_viewModel.BaseballTypes" Context="baseballType">
+                            <MudSelectItem Value="@baseballType.Id">@baseballType.Name</MudSelectItem>
+                        </Iterations>	
+                    </MudSelect>
                 </div> 
-            </div> 
-        </div>
-        <div class="row">
-            <div class="col-lg-3">
-                <div class="form-group">
-                    <label for="size">Size</label>
-                    <_ItemTypeSizeDropDown @bind-Value="@_viewModel.SizeId"
-                                           @bind-Value:event="ValueChanged" 
-                                           ItemType="_viewModel.ItemType" /> 
+            </ContentColumn3>
+        </DivRowCol3>
+        <DivRowCol3>
+            <Content>
+                <ItemTypeSizeDropDown @bind-Value="@_viewModel.SizeId"
+                                      @bind-Value:event="ValueChanged" 
+                                      ItemType="_viewModel.ItemType"
+                                      SelectedValue="@_viewModel.SizeId" /> 
+            </Content>
+            <ContentColumn2>
+                <div hidden="@(!_viewModel.DisplayGameDate)">
+                    <MudDatePicker @bind-Date="_viewModel.GameDate"
+                                   DateFormat="MM/dd/yyyy"
+                                   Editable="true"
+                                   Label="Game Date"
+                                   Mask="@(new DateMask("MM/dd/yyyy"))" 
+                                   Variant="Variant.Outlined" />
                 </div> 
-            </div>
-            <div class="col-lg-3">
-                <div class="form-group" hidden="@(!_viewModel.DisplayGameDate)">
-                    <label for="gameDate">Game Date</label>
-                    <InputDate id="gameDate" class="form-control" @bind-Value="_viewModel.GameDate" />
-                </div>                        
-            </div>
-            @if (_viewModel.DisplayBaseballTypeYear)
-            {
-                <div class="col-lg-3">
-                    <div class="form-group">
-                        <label for="year">Year</label>
-                        <InputNumber id="year" class="form-control" @bind-Value="_viewModel.BaseballTypeYear" />
-                    </div>                        
-                </div>
-            }
-            @if (_viewModel.DisplayBaseballTypeAnniversary)
-            {
-                <div class="col-lg-3">
-                    <div class="form-group">
-                        <label for="anniversary">Anniversary</label>
-                        <_Tooltip Text="Example: 25th">
-                            <img src="images/info.png" alt="Image" height="20" width="20" />
-                        </_Tooltip>
-                        <InputText id="anniversary" class="form-control" @bind-Value="_viewModel.BaseballTypeAnniversary" />
-                    </div>                         
-                </div>
-            }                    
-        </div>
-        <div class="row">
-            <div class="col-lg-3">
-                <div class="form-group">
-                    <label for="level">Level</label>
-                    <_ItemTypeLevelDropDown @bind-Value="@_viewModel.LevelTypeId"
-                                            @bind-Value:event="ValueChanged" 
-                                            ItemType="_viewModel.ItemType" /> 
-                </div> 
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-lg-3">
-                    <div class="form-group">
-                    <label for="commissioner">Commissioner</label>
-                    <_CommissionerDropDown @bind-Value="@_viewModel.CommissionerId"
-                                           @bind-Value:event="ValueChanged" 
-                                           SportLeagueLevel="_viewModel.SportLeagueLevel" />
-                </div>
-            </div>
-        </div>
-        <_PersonSelector CanFilterBySport="true"
-                         CanToggle="true"
-                         ItemType="_viewModel.ItemType"
-                         SelectedPerson="_viewModel.Person"
-                         SelectedPersonChanged="SelectedPersonChanged"
-                         Sport="_viewModel.Sport" />                 
-        <_TeamSelector CanToggle="true" 
-                       ItemType="_viewModel.ItemType"
-                       SelectedTeam="_viewModel.Team"
-                       SelectedTeamChanged="SelectedTeamChanged"
-                       SportLeagueLevel="_viewModel.SportLeagueLevel" />  
+            </ContentColumn2>
+            <ContentColumn3>
+                <PrettyBlazor.Condition Evaluation="_viewModel.DisplayBaseballTypeYear">
+                    <Match>
+                        <MudNumericField @bind-Value="_viewModel.BaseballTypeYear" 
+                                         Label="Year" 
+                                         Variant="Variant.Outlined" />  
+                    </Match>
+                </PrettyBlazor.Condition>
+                <PrettyBlazor.Condition Evaluation="_viewModel.DisplayBaseballTypeAnniversary">
+                    <Match>
+                        <MudTextField @bind-Value="_viewModel.BaseballTypeAnniversary" 
+                                      HelperText="Example: 25th"
+                                      Label="Anniversary"  
+                                      Variant="Variant.Outlined" />
+                    </Match>
+                </PrettyBlazor.Condition>  
+            </ContentColumn3>
+        </DivRowCol3>
+        <DivRowCol3>
+            <Content>
+                <ItemTypeLevelDropDown @bind-Value="@_viewModel.LevelTypeId"
+                                       @bind-Value:event="ValueChanged" 
+                                       ItemType="_viewModel.ItemType"
+                                       SelectedValue="_viewModel.LevelTypeId" /> 
+            </Content>
+        </DivRowCol3>
+        <DivRowCol3>
+            <Content>
+                <MudSelect @bind-Value="@_viewModel.CommissionerId"
+                           @bind-Value:event="ValueChanged"    
+                           Label="Commissioner"
+                           Variant="Variant.Outlined">
+                    <MudSelectItem Value="@(0)">--Select--</MudSelectItem>
+                    <Iterations Items="_commissioners" Context="commissioner">
+                        <MudSelectItem Value="@commissioner.Id">@commissioner.Person.DisplayName</MudSelectItem>
+                    </Iterations>	
+                </MudSelect>
+            </Content>
+        </DivRowCol3>
+        <PersonSelector CanFilterBySport="true"
+                        CanToggle="true"
+                        ItemType="_viewModel.ItemType"
+                        SelectedPerson="_viewModel.Person"
+                        SelectedPersonChanged="SelectedPersonChanged"
+                        Sport="_viewModel.Sport" />                 
+        <TeamSelector CanToggle="true" 
+                      ItemType="_viewModel.ItemType"
+                      SelectedTeam="_viewModel.Team"
+                      SelectedTeamChanged="SelectedTeamChanged"
+                      SportLeagueLevel="_viewModel.SportLeagueLevel" />
     </Content>
-</_EditMemorabiliaItem>
-
-@code {
-    [Parameter]
-    public int MemorabiliaId { get; set; }
-
-    private SaveBaseballViewModel _viewModel = new SaveBaseballViewModel();    
-
-    protected async Task OnLoad()
-    {
-        var baseballViewModel = await _queryRouter.Send(new GetBaseball.Query(MemorabiliaId)).ConfigureAwait(false);
-
-        if (baseballViewModel.Brand == null)
-        {
-            SetDefaults();
-            return;
-        }    
-
-        _viewModel = new SaveBaseballViewModel(baseballViewModel);
-    }  
-
-    protected async Task OnSave()
-    {
-        _viewModel.MemorabiliaId = MemorabiliaId;
-
-        var command = new SaveBaseball.Command(_viewModel);
-
-        await _commandRouter.Send(command).ConfigureAwait(false);
-
-        MemorabiliaId = command.MemorabiliaId;
-    }
-
-    private void SelectedPersonChanged(SavePersonViewModel person)
-    {
-        _viewModel.Person = person;
-    }
-
-    private void SelectedTeamChanged(SaveTeamViewModel team)
-    {
-        _viewModel.Team = team;
-    }
-
-    private void SetDefaults()
-    {
-        _viewModel.BaseballTypeId = BaseballType.Official.Id;
-        _viewModel.BrandId = Brand.Rawlings.Id;
-        _viewModel.GameStyleTypeId = GameStyleType.None.Id;
-        _viewModel.LevelTypeId = LevelType.Professional.Id;
-        _viewModel.SizeId = Size.Standard.Id;        
-    }
-}
+</EditPage>

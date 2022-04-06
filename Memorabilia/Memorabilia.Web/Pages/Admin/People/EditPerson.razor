@@ -1,150 +1,92 @@
 ﻿@page "/People/Edit"
 @page "/People/Edit/{id:int}"
 
-@using Memorabilia.Application.Features.Admin
-@using Memorabilia.Application.Features.Admin.Person
+@using Memorabilia.Application.Features.Admin.People
+@using Memorabilia.Web.Controls.Person
 
-@inject CommandRouter _commandRouter
-@inject ProtectedLocalStorage _localStorage
-@inject NavigationManager _navigation
-@inject QueryRouter _queryRouter
-@inject IToastService _toastService
-
-<_Page OnLoad="OnLoad">
-    <Content>
-        <div class="row">
-            <div class="col-md-12" style="text-align: center">
-                <h1>@_viewModel.PageTitle</h1>
-            </div>
-        </div>
-        <br />
-        <div style="border: 1px solid black; margin-top: 2%; margin-bottom: 2%; margin-left: 2%; margin-right: 2%;">
-            <div class="row" style="margin-top: 2%; margin-bottom: 2%; margin-left: 1%; margin-right: 1%;">
-                <div class="col-lg-12" style="text-align: center">
-                    <img src="images/athletes.jpg" alt="Image" height="150" width="150" />
-                </div>
-                <EditForm Model="_viewModel" OnValidSubmit="HandleValidSubmit">
-                    <DataAnnotationsValidator />
-                    <ValidationSummary />
-                    <div class="row">
-                        <div class="col-lg-6">
-                            <div class="form-group">
-                                <label for="firstName">First Name</label>
-                                <InputText id="firstName" @bind-Value="_viewModel.FirstName" @onblur="OnNameFieldBlur" class="form-control" />
-                            </div>
-                        </div>
-                        <div class="col-lg-6">
-                            <div class="form-group">
-                                <label for="lastName">Last Name</label>
-                                <InputText id="lastName" @bind-Value="_viewModel.LastName" @onblur="OnNameFieldBlur" class="form-control" />
-                            </div>
-                        </div>                    
-                    </div>
-                    <div class="row">
-                        <div class="col-lg-6">
-                            <div class="form-group">
-                                <label for="middleName">Middle Name</label>
-                                <InputText id="middleName" @bind-Value="_viewModel.MiddleName" class="form-control" />
-                            </div>                        
-                        </div>
-                        <div class="col-lg-6">
-                            <div class="form-group">
-                                <label for="suffix">Suffix</label>
-                                <InputText id="suffix" @bind-Value="_viewModel.Suffix" @onblur="OnNameFieldBlur" class="form-control" />
-                            </div>                        
-                        </div>                    
-                    </div>
-                    <div class="row">
-                        <div class="col-lg-6">
-                            <div class="form-group">
-                                <label for="nickname">Nickname</label>
-                                <InputText id="nickname" @bind-Value="_viewModel.Nickname" @onblur="OnNameFieldBlur" class="form-control" />
-                            </div> 
-                        </div>  
-                         <div class="col-lg-6">
-                            <div class="form-group">
-                                <label for="legalName">Legal Name</label>
-                                <InputText id="legalName" @bind-Value="_viewModel.LegalName" class="form-control" />
-                            </div> 
-                        </div> 
-                    </div>
-                    <div class="row">
-                        <div class="col-lg-6">
-                            <div class="form-group">
-                                <label for="displayName">Display Name</label>
-                                <InputText id="displayName" @bind-Value="_viewModel.DisplayName" class="form-control" />
-                            </div> 
-                        </div>  
-                    </div>
-                    <div class="row">
-                        <div class="col-lg-6">
-                            <div class="form-group">
-                                <label for="birthDate">Birth Date</label>
-                                <InputDate id="birthDate" @bind-Value="_viewModel.BirthDate" class="form-control" />
-                            </div>
-                        </div> 
-                        <div class="col-lg-6">
-                            <div class="form-group">
-                                <label for="deathDate">Death Date</label>
-                                <InputDate id="deathDate" @bind-Value="_viewModel.DeathDate" class="form-control" />
-                            </div>
-                        </div> 
-                    </div> 
-                    <div class="text-right">
-                        <button type="submit" class="btn btn-primary" @onclick="@(()=> _continue = true)">Save & Continue</button>
-                        <button type="submit" class="btn btn-primary">Save & Exit</button>
-                        <button type="button" class="btn btn-secondary" @onclick="@(_ => _navigation.NavigateTo("People"))">Cancel</button>
-                    </div>
-                </EditForm>
-            </div>
-            <div class="row">
-                <div class="col-md-12" style="text-align: center">
-                    <a href="@_viewModel.RoutePrefix">Back</a>
-                </div>
-            </div>
-            <br />
-        </div>
+<EditPage ContinueNavigationPath="@_viewModel.ContinueNavigationPath"
+          EditMode="_viewModel.EditModeType"
+          ExitNavigationPath="@_viewModel.ExitNavigationPath"
+          ImagePath="@_viewModel.ImagePath"
+          ItemName="@_viewModel.ItemTitle"
+          Model="_viewModel"
+          OnLoad="OnLoad"
+          OnSave="OnSave"
+          PageFooterButtonText="@_viewModel.ExitButtonText"
+          PageFooterNavigationPath="@_viewModel.BackNavigationPath"
+          PageTitle="@_viewModel.PageTitle"
+          TItem="SavePersonViewModel"
+          UseMultipleButtons="true">
+    <TimelineContent>
+        <PersonTimeline EditMode="_viewModel.EditModeType"
+                        PersonId="_viewModel.Id"
+                        PersonStep="_viewModel.PersonStep" />
+    </TimelineContent>
+    <Content>        
+        <DivRowCol3>
+            <Content>
+                <MudTextField @bind-Value="_viewModel.FirstName" 
+                              @onblur="OnNameFieldBlur"
+                              Label="First Name" 
+                              Variant="Variant.Outlined" />
+            </Content>
+            <ContentColumn2>
+                <MudTextField @bind-Value="_viewModel.LastName" 
+                              @onblur="OnNameFieldBlur"
+                              Label="Last Name" 
+                              Variant="Variant.Outlined" />
+            </ContentColumn2>
+        </DivRowCol3>
+        <DivRowCol3>
+            <Content>
+                <MudTextField @bind-Value="_viewModel.MiddleName"
+                              Label="Middle Name" 
+                              Variant="Variant.Outlined" />
+            </Content>
+            <ContentColumn2>
+                <MudTextField @bind-Value="_viewModel.Suffix"
+                              @onblur="OnNameFieldBlur"
+                              Label="Suffix" 
+                              Variant="Variant.Outlined" />
+            </ContentColumn2>
+        </DivRowCol3>
+        <DivRowCol3>
+            <Content>
+                <MudTextField @bind-Value="_viewModel.Nickname"
+                              @onblur="OnNameFieldBlur"
+                              Label="Nickname" 
+                              Variant="Variant.Outlined" />
+            </Content>
+            <ContentColumn2>
+                <MudTextField @bind-Value="_viewModel.LegalName"
+                              Label="Legal Name" 
+                              Variant="Variant.Outlined" />
+            </ContentColumn2>
+        </DivRowCol3>
+        <DivRowCol3>
+            <Content>
+                <MudTextField @bind-Value="_viewModel.DisplayName"
+                              Label="Display Name" 
+                              Variant="Variant.Outlined" />
+            </Content>
+        </DivRowCol3>
+        <DivRowCol3>
+            <Content>
+                <MudDatePicker @bind-Date="_viewModel.BirthDate"
+                               DateFormat="MM/dd/yyyy"
+                               Editable="true"
+                               Label="Birth Date"
+                               Mask="@(new DateMask("MM/dd/yyyy"))" 
+                               Variant="Variant.Outlined" />
+            </Content>
+            <ContentColumn2>
+                <MudDatePicker @bind-Date="_viewModel.DeathDate" 
+                               DateFormat="MM/dd/yyyy"
+                               Editable="true"
+                               Label="Death Date"
+                               Mask="@(new DateMask("MM/dd/yyyy"))" 
+                               Variant="Variant.Outlined" />
+            </ContentColumn2>
+        </DivRowCol3>
     </Content>
-</_Page>
-
-@code {
-    [Parameter]
-    public int Id { get; set; }
-
-    private bool _continue;
-    private SavePersonViewModel _viewModel = new SavePersonViewModel();
-
-    protected async Task HandleValidSubmit()
-    {
-        var command = new SavePerson.Command(_viewModel);
-
-        await _commandRouter.Send(command).ConfigureAwait(false);
-
-        var url = _continue ? $"People/Occupation/Edit/{command.Id}" : "People";
-
-        _navigation.NavigateTo(url);
-
-        _toastService.ShowSuccess($"{_viewModel.ItemTitle} was saved successfully!", _viewModel.PageTitle);
-    }
-
-    protected async Task OnLoad()
-    {
-        if (Id == 0)
-            return;
-
-        _viewModel = new SavePersonViewModel(await _queryRouter.Send(new GetPerson.Query(Id)).ConfigureAwait(false));
-    }
-
-    public void OnNameFieldBlur()
-    {
-        _viewModel.DisplayName = $"{_viewModel.LastName}"
-                                + (!_viewModel.Suffix.IsNullOrEmpty() ? $" {_viewModel.Suffix}, " : ", ")
-                                + (!_viewModel.Nickname.IsNullOrEmpty() ? $" {_viewModel.Nickname}" : string.Empty)
-                                + (!_viewModel.FirstName.IsNullOrEmpty() 
-                                    ? (!_viewModel.Nickname.IsNullOrEmpty() 
-                                        ? $" ({_viewModel.FirstName})" 
-                                        : _viewModel.FirstName) 
-                                    : string.Empty);  
-    }
-}
-
+</EditPage>

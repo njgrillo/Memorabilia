@@ -1,5 +1,5 @@
 ﻿using Demo.Framework.Handler;
-using Memorabilia.Domain;
+using Memorabilia.Repository.Interfaces;
 using System.Threading.Tasks;
 
 namespace Memorabilia.Application.Features.Memorabilia.Baseball
@@ -16,7 +16,7 @@ namespace Memorabilia.Application.Features.Memorabilia.Baseball
             }
 
             protected override async Task<BaseballViewModel> Handle(Query query)
-            {  
+            {
                 return new BaseballViewModel(await _memorabiliaRepository.Get(query.MemorabiliaId).ConfigureAwait(false));
             }
         }

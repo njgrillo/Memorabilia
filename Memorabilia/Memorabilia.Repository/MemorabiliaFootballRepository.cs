@@ -1,4 +1,5 @@
-﻿using Memorabilia.Domain;
+﻿using Memorabilia.Domain.Entities;
+using Memorabilia.Repository.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using System.Threading;
@@ -6,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Memorabilia.Repository
 {
-    public class MemorabiliaFootballRepository : BaseRepository<Domain.Entities.MemorabiliaFootball>, IMemorabiliaFootballRepository
+    public class MemorabiliaFootballRepository : BaseRepository<MemorabiliaFootball>, IMemorabiliaFootballRepository
     {
         private readonly Context _context;
 
@@ -15,30 +16,30 @@ namespace Memorabilia.Repository
             _context = context;
         }
 
-        private IQueryable<Domain.Entities.MemorabiliaFootball> MemorabiliaFootball => _context.Set<Domain.Entities.MemorabiliaFootball>();
+        private IQueryable<MemorabiliaFootball> MemorabiliaFootball => _context.Set<MemorabiliaFootball>();
 
-        public async Task Add(Domain.Entities.MemorabiliaFootball memorabiliaFootball, CancellationToken cancellationToken = default)
+        public async Task Add(MemorabiliaFootball memorabiliaFootball, CancellationToken cancellationToken = default)
         {
             _context.Add(memorabiliaFootball);
 
             await _context.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
         }
 
-        public async Task Delete(Domain.Entities.MemorabiliaFootball memorabiliaFootball, CancellationToken cancellationToken = default)
+        public async Task Delete(MemorabiliaFootball memorabiliaFootball, CancellationToken cancellationToken = default)
         {
-            _context.Set<Domain.Entities.MemorabiliaFootball>().Remove(memorabiliaFootball);
+            _context.Set<MemorabiliaFootball>().Remove(memorabiliaFootball);
 
             await _context.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
         }
 
-        public async Task<Domain.Entities.MemorabiliaFootball> Get(int id)
+        public async Task<MemorabiliaFootball> Get(int id)
         {
             return await MemorabiliaFootball.SingleOrDefaultAsync(memorabiliaFootball => memorabiliaFootball.Id == id).ConfigureAwait(false);
         }
 
-        public async Task Update(Domain.Entities.MemorabiliaFootball memorabiliaFootball, CancellationToken cancellationToken = default)
+        public async Task Update(MemorabiliaFootball memorabiliaFootball, CancellationToken cancellationToken = default)
         {
-            _context.Set<Domain.Entities.MemorabiliaFootball>().Update(memorabiliaFootball);
+            _context.Set<MemorabiliaFootball>().Update(memorabiliaFootball);
 
             await _context.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
         }

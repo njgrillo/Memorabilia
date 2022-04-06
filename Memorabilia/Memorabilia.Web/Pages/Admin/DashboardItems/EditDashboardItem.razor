@@ -1,0 +1,36 @@
+﻿@page "/DashboardItems/Edit"
+@page "/DashboardItems/Edit/{id:int}"
+
+@using Memorabilia.Application.Features.Admin.DashboardItems
+
+<EditPage ContinueNavigationPath="@_viewModel.RoutePrefix"
+          EditMode="_viewModel.EditModeType" 
+          ExitNavigationPath="@_viewModel.RoutePrefix"
+          ImagePath="@_viewModel.ImagePath" 
+          ItemName="@_viewModel.ItemTitle"
+          Model="_viewModel"
+          OnLoad="OnLoad"
+          OnSave="HandleValidSubmit"
+          PageFooterButtonText="@_viewModel.ExitButtonText"
+          PageFooterNavigationPath="@_viewModel.ExitNavigationPath"
+          PageTitle="@_viewModel.PageTitle"
+          TItem="SaveDashboardItemViewModel">
+    <Content>
+        <DivRowCol3>
+            <Content>
+                <MudTextField @bind-Value="_viewModel.Name" 
+                              Label="Name" 
+                              Variant="Variant.Outlined" />
+            </Content>
+        </DivRowCol3>
+        <DivRowCol3>
+            <Content>
+                <MudTextField @bind-Value="_viewModel.Description" 
+                              Label="Description"
+                              Lines="10" 
+                              T="string"
+                              Variant="Variant.Outlined" />
+            </Content>
+        </DivRowCol3>
+    </Content>
+</EditPage>

@@ -1,6 +1,6 @@
 ﻿using Framework.Domain.Command;
 using Framework.Handler;
-using Memorabilia.Domain;
+using Memorabilia.Repository.Interfaces;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
@@ -27,10 +27,10 @@ namespace Memorabilia.Application.Features.Memorabilia.Puck
                                     command.GamePersonId,
                                     command.GameStyleTypeId,
                                     command.LevelTypeId,
-                                    command.PersonIds,
+                                    command.PersonId,
                                     command.SizeId,
                                     command.SportId,
-                                    command.TeamIds);
+                                    command.TeamId);
 
                 await _memorabiliaRepository.Update(memorabilia).ConfigureAwait(false);
             }
@@ -57,13 +57,13 @@ namespace Memorabilia.Application.Features.Memorabilia.Puck
 
             public int MemorabiliaId => _viewModel.MemorabiliaId;
 
-            public int[] PersonIds => _viewModel.People.Select(person => person.Id).ToArray();
+            public int? PersonId => _viewModel.Person?.Id > 0 ? _viewModel.Person?.Id : null;
 
             public int SizeId => _viewModel.SizeId;
 
             public int SportId => Domain.Constants.Sport.Hockey.Id;
 
-            public int[] TeamIds => _viewModel.Teams.Select(team => team.Id).ToArray();
+            public int? TeamId => _viewModel.Team?.Id > 0 ? _viewModel.Team?.Id : null;
         }
     }
 }

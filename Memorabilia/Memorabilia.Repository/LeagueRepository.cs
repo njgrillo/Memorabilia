@@ -1,4 +1,5 @@
-﻿using Memorabilia.Domain;
+﻿using Memorabilia.Domain.Entities;
+using Memorabilia.Repository.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,44 +8,44 @@ using System.Threading.Tasks;
 
 namespace Memorabilia.Repository
 {
-    public class LeagueRepository : BaseRepository<Domain.Entities.League>, ILeagueRepository
+    public class LeagueRepository : BaseRepository<League>, ILeagueRepository
     {
-        private readonly Context _context;
+        private readonly DomainContext _context;
 
-        public LeagueRepository(Context context) : base(context)
+        public LeagueRepository(DomainContext context) : base(context)
         {
             _context = context;
         }
 
-        private IQueryable<Domain.Entities.League> League => _context.Set<Domain.Entities.League>();
+        private IQueryable<League> League => _context.Set<League>();
 
-        public async Task Add(Domain.Entities.League league, CancellationToken cancellationToken = default)
+        public async Task Add(League league, CancellationToken cancellationToken = default)
         {
             _context.Add(league);
 
             await _context.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
         }
 
-        public async Task Delete(Domain.Entities.League league, CancellationToken cancellationToken = default)
+        public async Task Delete(League league, CancellationToken cancellationToken = default)
         {
-            _context.Set<Domain.Entities.League>().Remove(league);
+            _context.Set<League>().Remove(league);
 
             await _context.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
         }
 
-        public async Task<Domain.Entities.League> Get(int id)
+        public async Task<League> Get(int id)
         {
             return await League.SingleOrDefaultAsync(league => league.Id == id).ConfigureAwait(false);
         }
 
-        public async Task<IEnumerable<Domain.Entities.League>> GetAll()
+        public async Task<IEnumerable<League>> GetAll()
         {
             return (await League.ToListAsync().ConfigureAwait(false)).OrderBy(League => League.Name);
         }
 
-        public async Task Update(Domain.Entities.League league, CancellationToken cancellationToken = default)
+        public async Task Update(League league, CancellationToken cancellationToken = default)
         {
-            _context.Set<Domain.Entities.League>().Update(league);
+            _context.Set<League>().Update(league);
 
             await _context.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
         }

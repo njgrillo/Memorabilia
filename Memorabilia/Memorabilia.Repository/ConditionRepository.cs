@@ -1,4 +1,5 @@
-﻿using Memorabilia.Domain;
+﻿using Memorabilia.Domain.Entities;
+using Memorabilia.Repository.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,44 +8,44 @@ using System.Threading.Tasks;
 
 namespace Memorabilia.Repository
 {
-    public class ConditionRepository : BaseRepository<Domain.Entities.Condition>, IConditionRepository
+    public class ConditionRepository : BaseRepository<Condition>, IConditionRepository
     {
-        private readonly Context _context;
+        private readonly DomainContext _context;
 
-        public ConditionRepository(Context context) : base(context)
+        public ConditionRepository(DomainContext context) : base(context)
         {
             _context = context;
         }
 
-        private IQueryable<Domain.Entities.Condition> Condition => _context.Set<Domain.Entities.Condition>();
+        private IQueryable<Condition> Condition => _context.Set<Condition>();
 
-        public async Task Add(Domain.Entities.Condition condition, CancellationToken cancellationToken = default)
+        public async Task Add(Condition condition, CancellationToken cancellationToken = default)
         {
             _context.Add(condition);
 
             await _context.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
         }
 
-        public async Task Delete(Domain.Entities.Condition condition, CancellationToken cancellationToken = default)
+        public async Task Delete(Condition condition, CancellationToken cancellationToken = default)
         {
-            _context.Set<Domain.Entities.Condition>().Remove(condition);
+            _context.Set<Condition>().Remove(condition);
 
             await _context.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
         }
 
-        public async Task<Domain.Entities.Condition> Get(int id)
+        public async Task<Condition> Get(int id)
         {
             return await Condition.SingleOrDefaultAsync(condition => condition.Id == id).ConfigureAwait(false);
         }
 
-        public async Task<IEnumerable<Domain.Entities.Condition>> GetAll()
+        public async Task<IEnumerable<Condition>> GetAll()
         {
             return (await Condition.ToListAsync().ConfigureAwait(false)).OrderBy(condition => condition.Name);
         }
 
-        public async Task Update(Domain.Entities.Condition condition, CancellationToken cancellationToken = default)
+        public async Task Update(Condition condition, CancellationToken cancellationToken = default)
         {
-            _context.Set<Domain.Entities.Condition>().Update(condition);
+            _context.Set<Condition>().Update(condition);
 
             await _context.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
         }

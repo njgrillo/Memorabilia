@@ -1,70 +1,55 @@
 ﻿@page "/Register"
 
-@using Memorabilia.Application.Features.User.Register
-
-@inject CommandRouter _commandRouter
-@inject ProtectedLocalStorage _localStorage
-@inject NavigationManager _navigation
-
-<_Page>
+<Page>
     <Content>
-        <div class="row">
-            <div class="col-md-12" style="text-align: center">
-                <h1>@_viewModel.PageTitle</h1>
-            </div>
-        </div>
-        <br />
+        <PageHeader PageTitle="@_viewModel.PageTitle" />
         <div class="row">
             <EditForm Model="_viewModel" OnValidSubmit="HandleValidSubmit">
                 <DataAnnotationsValidator />
                 <div class="form-group">
-                    <label for="username">User Name</label>
-                    <InputText id="username" @bind-Value="_viewModel.Username" class="form-control" />
+                    <MudTextField @bind-Value="_viewModel.Username" 
+                                  Label="User Name" 
+                                  Variant="Variant.Outlined" />
                 </div>
                 <div class="form-group">
-                    <label for="password">Password</label>
-                    <InputText id="password" type="password" @bind-Value="_viewModel.Password" class="form-control" />
+                    <MudTextField @bind-Value="_viewModel.Password" 
+                                  Label="Password" 
+                                  Variant="Variant.Outlined" />
                 </div>
                 <div class="form-group">
-                    <label for="confirmPassword">Confirm Password</label>
-                    <InputText id="confirmPassword" type="password" @bind-Value="_viewModel.ConfirmPassword" class="form-control" />
+                    <MudTextField @bind-Value="_viewModel.ConfirmPassword" 
+                                  Label="Confirm Password"
+                                  Variant="Variant.Outlined" />
                 </div>
                 <div class="form-group">
-                    <label for="firstName">First Name</label>
-                    <InputText id="firstName" @bind-Value="_viewModel.FirstName" class="form-control" />
+                    <MudTextField @bind-Value="_viewModel.FirstName" 
+                                  Label="First Name" 
+                                  Variant="Variant.Outlined" />
                 </div>
                 <div class="form-group">
-                    <label for="lastName">Last Name</label>
-                    <InputText id="lastName" @bind-Value="_viewModel.LastName" class="form-control" />
+                    <MudTextField @bind-Value="_viewModel.LastName" 
+                                  Label="Last Name" 
+                                  Variant="Variant.Outlined" />
                 </div>
                 <div class="form-group">
-                    <label for="emailAddress">Email Address</label>
-                    <InputText id="emailAddress" @bind-Value="_viewModel.EmailAddress" class="form-control" />
+                    <MudTextField @bind-Value="_viewModel.EmailAddress" 
+                                  Label="Email Address" 
+                                  Variant="Variant.Outlined" />
                 </div>
                 <div class="form-group">
-                    <label for="phoneNumber">Phone Number</label>
-                    <InputText id="phoneNumber" @bind-Value="_viewModel.Phone" class="form-control" />
+                    <MudTextField @bind-Value="_viewModel.Phone" 
+                                  Label="Phone" 
+                                  Variant="Variant.Outlined" />
                 </div>
                 <div class="text-right">
-                    <button type="submit" class="btn btn-primary">Save</button>
+                    <MudButton ButtonType="MudBlazor.ButtonType.Submit" 
+                               Color="MudBlazor.Color.Info"
+                               Size="MudBlazor.Size.Medium"
+                               StartIcon="@Icons.Material.Filled.Save"                                   
+                               Variant="Variant.Filled">Save</MudButton>
                 </div>
                 <ValidationSummary />
             </EditForm>
         </div>
     </Content>
-</_Page>
-
-@code {
-    private SaveUserViewModel _viewModel = new SaveUserViewModel();
-
-    protected async Task HandleValidSubmit()
-    {
-        var command = new AddUser.Command(_viewModel);
-
-        await _commandRouter.Send(command).ConfigureAwait(false);
-
-        await _localStorage.SetAsync("UserId", command.Id).ConfigureAwait(false);
-
-        _navigation.NavigateTo("Home");
-    }
-}
+</Page>

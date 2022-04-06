@@ -1,5 +1,5 @@
 ﻿using Demo.Framework.Handler;
-using Memorabilia.Domain;
+using Memorabilia.Repository.Interfaces;
 using System.Threading.Tasks;
 
 namespace Memorabilia.Application.Features.Admin.ItemTypeLevel
@@ -17,11 +17,7 @@ namespace Memorabilia.Application.Features.Admin.ItemTypeLevel
 
             protected override async Task<ItemTypeLevelViewModel> Handle(Query query)
             {
-                var itemTypeLevel = await _itemTypeLevelRepository.Get(query.Id).ConfigureAwait(false);
-
-                var viewModel = new ItemTypeLevelViewModel(itemTypeLevel);
-
-                return viewModel;
+                return new ItemTypeLevelViewModel(await _itemTypeLevelRepository.Get(query.Id).ConfigureAwait(false));
             }
         }
 

@@ -18,8 +18,6 @@ namespace Memorabilia.Application.Features.Memorabilia.Glove
 
         public MemorabiliaGame Game => _memorabilia.Game;
 
-        //public MemorabiliaGlove Glove => _memorabilia.Glove;
-
         public int MemorabiliaId => _memorabilia.Id;        
 
         public MemorabiliaLevelType Level => _memorabilia.LevelType;

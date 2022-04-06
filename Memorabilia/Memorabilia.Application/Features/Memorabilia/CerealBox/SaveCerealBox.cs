@@ -1,6 +1,6 @@
 ﻿using Framework.Domain.Command;
 using Framework.Handler;
-using Memorabilia.Domain;
+using Memorabilia.Repository.Interfaces;
 using System.Linq;
 using System.Threading.Tasks;
 

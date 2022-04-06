@@ -1,4 +1,5 @@
-﻿using Memorabilia.Domain;
+﻿using Memorabilia.Domain.Entities;
+using Memorabilia.Repository.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,44 +8,44 @@ using System.Threading.Tasks;
 
 namespace Memorabilia.Repository
 {
-    public class DivisionRepository : BaseRepository<Domain.Entities.Division>, IDivisionRepository
+    public class DivisionRepository : BaseRepository<Division>, IDivisionRepository
     {
-        private readonly Context _context;
+        private readonly DomainContext _context;
 
-        public DivisionRepository(Context context) : base(context)
+        public DivisionRepository(DomainContext context) : base(context)
         {
             _context = context;
         }
 
-        private IQueryable<Domain.Entities.Division> Division => _context.Set<Domain.Entities.Division>();
+        private IQueryable<Division> Division => _context.Set<Division>();
 
-        public async Task Add(Domain.Entities.Division division, CancellationToken cancellationToken = default)
+        public async Task Add(Division division, CancellationToken cancellationToken = default)
         {
             _context.Add(division);
 
             await _context.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
         }
 
-        public async Task Delete(Domain.Entities.Division division, CancellationToken cancellationToken = default)
+        public async Task Delete(Division division, CancellationToken cancellationToken = default)
         {
-            _context.Set<Domain.Entities.Division>().Remove(division);
+            _context.Set<Division>().Remove(division);
 
             await _context.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
         }
 
-        public async Task<Domain.Entities.Division> Get(int id)
+        public async Task<Division> Get(int id)
         {
             return await Division.SingleOrDefaultAsync(division => division.Id == id).ConfigureAwait(false);
         }
 
-        public async Task<IEnumerable<Domain.Entities.Division>> GetAll()
+        public async Task<IEnumerable<Division>> GetAll()
         {
             return (await Division.ToListAsync().ConfigureAwait(false)).OrderBy(Division => Division.Name);
         }
 
-        public async Task Update(Domain.Entities.Division division, CancellationToken cancellationToken = default)
+        public async Task Update(Division division, CancellationToken cancellationToken = default)
         {
-            _context.Set<Domain.Entities.Division>().Update(division);
+            _context.Set<Division>().Update(division);
 
             await _context.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
         }

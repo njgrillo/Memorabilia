@@ -1,4 +1,5 @@
-﻿using Memorabilia.Domain;
+﻿using Memorabilia.Domain.Entities;
+using Memorabilia.Repository.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,44 +8,44 @@ using System.Threading.Tasks;
 
 namespace Memorabilia.Repository
 {
-    public class ItemTypeRepository : BaseRepository<Domain.Entities.ItemType>, IItemTypeRepository
+    public class ItemTypeRepository : BaseRepository<ItemType>, IItemTypeRepository
     {
-        private readonly Context _context;
+        private readonly DomainContext _context;
 
-        public ItemTypeRepository(Context context) : base(context)
+        public ItemTypeRepository(DomainContext context) : base(context)
         {
             _context = context;
         }
 
-        private IQueryable<Domain.Entities.ItemType> ItemType => _context.Set<Domain.Entities.ItemType>();
+        private IQueryable<ItemType> ItemType => _context.Set<ItemType>();
 
-        public async Task Add(Domain.Entities.ItemType itemType, CancellationToken cancellationToken = default)
+        public async Task Add(ItemType itemType, CancellationToken cancellationToken = default)
         {
             _context.Add(itemType);
 
             await _context.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
         }
 
-        public async Task Delete(Domain.Entities.ItemType itemType, CancellationToken cancellationToken = default)
+        public async Task Delete(ItemType itemType, CancellationToken cancellationToken = default)
         {
-            _context.Set<Domain.Entities.ItemType>().Remove(itemType);
+            _context.Set<ItemType>().Remove(itemType);
 
             await _context.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
         }
 
-        public async Task<Domain.Entities.ItemType> Get(int id)
+        public async Task<ItemType> Get(int id)
         {
             return await ItemType.SingleOrDefaultAsync(itemType => itemType.Id == id).ConfigureAwait(false);
         }
 
-        public async Task<IEnumerable<Domain.Entities.ItemType>> GetAll()
+        public async Task<IEnumerable<ItemType>> GetAll()
         {
             return (await ItemType.ToListAsync().ConfigureAwait(false)).OrderBy(itemType => itemType.Name);
         }
 
-        public async Task Update(Domain.Entities.ItemType itemType, CancellationToken cancellationToken = default)
+        public async Task Update(ItemType itemType, CancellationToken cancellationToken = default)
         {
-            _context.Set<Domain.Entities.ItemType>().Update(itemType);
+            _context.Set<ItemType>().Update(itemType);
 
             await _context.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
         }

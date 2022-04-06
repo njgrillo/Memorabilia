@@ -1,0 +1,17 @@
+﻿<MudCard>
+    <MudCardMedia Height="300" Image="@_imageFilePath" />
+    <MudCardContent>
+        <MudText Typo="Typo.h5">@FileName</MudText>
+        <MudText Typo="Typo.body2">@ImageType.Name</MudText>
+    </MudCardContent>
+    <MudCardActions>
+        <MudButton hidden="@(!HasPrimary || IsPrimary)"
+                   Color="MudBlazor.Color.Primary" 
+                   OnClick="@(_ => SetPrimary(ImageFilePath))"
+                   Variant="Variant.Text">Make Primary</MudButton>
+        <MudButton hidden="@(!CanRemove)"
+                   Color="MudBlazor.Color.Primary" 
+                   OnClick="@(_ => Remove(ImageFilePath))"
+                   Variant="Variant.Text" >Remove</MudButton>
+    </MudCardActions>
+</MudCard>

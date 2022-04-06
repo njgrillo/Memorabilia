@@ -1,5 +1,5 @@
-﻿using Memorabilia.Application.Features.Admin.Person;
-using Memorabilia.Application.Features.Admin.Team;
+﻿using Memorabilia.Application.Features.Admin.People;
+using Memorabilia.Application.Features.Admin.Teams;
 using Memorabilia.Domain.Constants;
 using System;
 using System.Collections.Generic;
@@ -8,7 +8,7 @@ using System.Linq;
 
 namespace Memorabilia.Application.Features.Memorabilia.Magazine
 {
-    public class SaveMagazineViewModel : SaveViewModel
+    public class SaveMagazineViewModel : SaveItemViewModel
     {
         public SaveMagazineViewModel() { }
 
@@ -24,11 +24,17 @@ namespace Memorabilia.Application.Features.Memorabilia.Magazine
             Teams = viewModel.Teams.Select(team => new SaveTeamViewModel(new TeamViewModel(team.Team))).ToList();
         }
 
+        public override string BackNavigationPath => $"Memorabilia/Edit/{MemorabiliaId}";
+
         [Required]
         [Range(1, int.MaxValue, ErrorMessage = "Brand is required.")]
         public int BrandId { get; set; }
 
         public DateTime? Date { get; set; }
+
+        public override EditModeType EditModeType => MemorabiliaId > 0 ? EditModeType.Update : EditModeType.Add;
+
+        public override string ExitNavigationPath => "Memorabilia/Items";
 
         public bool Framed { get; set; }
 
@@ -38,14 +44,9 @@ namespace Memorabilia.Application.Features.Memorabilia.Magazine
 
         public bool HasTeam => Teams.Any();
 
-        public string ImagePath => "images/magazine.jpg";
+        public override string ImagePath => "images/magazine.jpg";
 
-        public ItemType ItemType => ItemType.Magazine;
-
-        [Required]
-        public int MemorabiliaId { get; set; }
-
-        public override string PageTitle => $"{(MemorabiliaId > 0 ? "Edit" : "Add")} {ItemType.Magazine.Name} Details";
+        public override ItemType ItemType => ItemType.Magazine;
 
         public List<SavePersonViewModel> People { get; set; } = new();
 

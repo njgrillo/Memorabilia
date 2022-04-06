@@ -1,4 +1,5 @@
-﻿using Memorabilia.Domain;
+﻿using Memorabilia.Domain.Entities;
+using Memorabilia.Repository.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,44 +8,44 @@ using System.Threading.Tasks;
 
 namespace Memorabilia.Repository
 {
-    public class WritingInstrumentRepository : BaseRepository<Domain.Entities.WritingInstrument>, IWritingInstrumentRepository
+    public class WritingInstrumentRepository : BaseRepository<WritingInstrument>, IWritingInstrumentRepository
     {
-        private readonly Context _context;
+        private readonly DomainContext _context;
 
-        public WritingInstrumentRepository(Context context) : base(context)
+        public WritingInstrumentRepository(DomainContext context) : base(context)
         {
             _context = context;
         }
 
-        private IQueryable<Domain.Entities.WritingInstrument> WritingInstrument => _context.Set<Domain.Entities.WritingInstrument>();
+        private IQueryable<WritingInstrument> WritingInstrument => _context.Set<WritingInstrument>();
 
-        public async Task Add(Domain.Entities.WritingInstrument writingInstrument, CancellationToken cancellationToken = default)
+        public async Task Add(WritingInstrument writingInstrument, CancellationToken cancellationToken = default)
         {
             _context.Add(writingInstrument);
 
             await _context.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
         }
 
-        public async Task Delete(Domain.Entities.WritingInstrument writingInstrument, CancellationToken cancellationToken = default)
+        public async Task Delete(WritingInstrument writingInstrument, CancellationToken cancellationToken = default)
         {
-            _context.Set<Domain.Entities.WritingInstrument>().Remove(writingInstrument);
+            _context.Set<WritingInstrument>().Remove(writingInstrument);
 
             await _context.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
         }
 
-        public async Task<Domain.Entities.WritingInstrument> Get(int id)
+        public async Task<WritingInstrument> Get(int id)
         {
             return await WritingInstrument.SingleOrDefaultAsync(writingInstrument => writingInstrument.Id == id).ConfigureAwait(false);
         }
 
-        public async Task<IEnumerable<Domain.Entities.WritingInstrument>> GetAll()
+        public async Task<IEnumerable<WritingInstrument>> GetAll()
         {
             return (await WritingInstrument.ToListAsync().ConfigureAwait(false)).OrderBy(writingInstrument => writingInstrument.Name);
         }
 
-        public async Task Update(Domain.Entities.WritingInstrument writingInstrument, CancellationToken cancellationToken = default)
+        public async Task Update(WritingInstrument writingInstrument, CancellationToken cancellationToken = default)
         {
-            _context.Set<Domain.Entities.WritingInstrument>().Update(writingInstrument);
+            _context.Set<WritingInstrument>().Update(writingInstrument);
 
             await _context.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
         }

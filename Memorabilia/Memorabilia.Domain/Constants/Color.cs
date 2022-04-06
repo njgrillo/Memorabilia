@@ -67,6 +67,11 @@ namespace Memorabilia.Domain.Constants
             return All.SingleOrDefault(color => color.Id == id);
         }
 
+        public static Color Find(string name)
+        {
+            return All.SingleOrDefault(color => color.Name == name);
+        }
+
         public static Color[] GetAll(ItemType itemType)
         {
             if (itemType == null)

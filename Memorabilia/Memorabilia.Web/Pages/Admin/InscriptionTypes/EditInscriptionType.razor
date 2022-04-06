@@ -1,42 +1,5 @@
 ﻿@page "/InscriptionTypes/Edit/{id:int}"
 
-@using Memorabilia.Application.Features.Admin
-@using Memorabilia.Application.Features.Admin.InscriptionType
-
-@inject CommandRouter _commandRouter
-@inject QueryRouter _queryRouter
-
-<_EditDomainItem DomainItem="_viewModel"
-                 OnLoad="OnLoad"
-                 OnSave="OnSave" />
-
-@code {
-    [Parameter]
-    public int Id { get; set; }
-
-    private const string DomainTypeName = "Inscription Type";
-    private const string ImagePath = "images/inscriptiontypes.jpg";
-    private string _navigationPath = $"{DomainTypeName.Replace(" ", "")}s";
-
-    private SaveDomainViewModel _viewModel;  
-
-    protected override void OnInitialized()
-    {
-        _viewModel = new SaveDomainViewModel(Id, DomainTypeName, ImagePath, _navigationPath);
-    } 
-
-    protected async Task OnLoad()
-    {
-        var query = new GetInscriptionType.Query(Id);
-
-        _viewModel = new SaveDomainViewModel(await _queryRouter.Send(query).ConfigureAwait(false), 
-                                             DomainTypeName, 
-                                             ImagePath, 
-                                             _navigationPath);
-    }
-
-    protected async Task OnSave()
-    {
-        await _commandRouter.Send(new SaveInscriptionType.Command(_viewModel)).ConfigureAwait(false);
-    }
-}
+<EditDomainItem Item="_viewModel"
+                OnLoad="OnLoad"
+                OnSave="OnSave" />

@@ -1,90 +1,58 @@
 ﻿@page "/Franchises"
 
-@using Memorabilia.Application.Features.Admin
-@using Memorabilia.Application.Features.Admin.Franchise
+@using Memorabilia.Application.Features.Admin.Franchises
 
-@inject CommandRouter _commandRouter
-@inject NavigationManager _navigation
-@inject QueryRouter _queryRouter
-@inject IToastService _toastService
-
-<_Page @ref="_page" 
-       ConfirmationTitle="Delete Franchise" 
-       OnConfirm="Delete" 
-       OnLoad="OnLoad">
+<PageView AddRoute="@_viewModel.AddRoute" 
+          AddTitle="@_viewModel.AddTitle"
+          DisplayPageHeader="false"
+          NavigationPath="@_viewModel.ExitNavigationPath"
+          OnLoad="OnLoad"
+          PageTitle="@_viewModel.PageTitle">
     <Content>
-        <div class="row">
-            <div class="col-md-12" style="text-align: center">
-                <h1>@_viewModel.PageTitle</h1>
-            </div>
-        </div>
-        <br />
-        <_Table Items="_viewModel.Franchises" 
-                ItemsPerPage="10"                     
-                TItem="FranchiseViewModel">
-            <HeaderTemplate>
-                <th scope="col">Sport League</th>
-                <th scope="col">Name</th>
-                <th scope="col">Location</th>
-                <th scope="col">Founded</th>
-                <th scope="col"></th>
-                <th scope="col"></th>
-            </HeaderTemplate>
-            <RowTemplate>
-                <td>@context.SportLeagueLevelName</td>
-                <td>@context.Name</td>
-                <td>@context.Location</td>
-                <td>@context.FoundYear</td>
-                <td>
-                    <_Tooltip Text="Edit">
-                        <img class="can-click" 
-                                src="images/pencil.png" 
-                                height="25" 
-                                width="25" 
-                                @onclick="@(_ => _navigation.NavigateTo($"{_viewModel.RoutePrefix}/Edit/{context.Id}"))" />
-                    </_Tooltip>                        
-                </td>
-                <td>
-                    <_Tooltip Text="Delete">
-                        <img class="can-click" 
-                                src="images/trash.png" 
-                                height="25" 
-                                width="25" 
-                                @onclick="@(_ => _page.ShowConfirm(context.Id))" />
-                    </_Tooltip>
-                </td>
-            </RowTemplate>
-        </_Table>
-        <div class="row">
-            <div class="col-md-12" style="text-align: center">
-                <div class="col-md-12" style="text-align: center">
-                    <a href="Franchises/Edit">Add @_viewModel.ItemTitle</a>
-                </div>
-            </div>
-        </div>
-        <br />
+        <DivPad2>
+            <Content>
+                <MudTable Bordered="false"
+                          Dense="false" 
+                          Filter="new Func<FranchiseViewModel,bool>(FilterFunc1)"
+                          Hover="true"
+                          Items="@_viewModel.Franchises"    
+                          Striped="true">
+                    <ToolBarContent>
+                        <MudText Typo="Typo.h6">@_viewModel.PageTitle</MudText>
+                        <MudSpacer />
+                        <MudTextField @bind-Value="_search"
+                                      Adornment="Adornment.Start"
+                                      AdornmentIcon="@Icons.Material.Filled.Search"
+                                      Class="mt-0"
+                                      IconSize="MudBlazor.Size.Medium"
+                                      Placeholder="Search" />
+                    </ToolBarContent>
+                    <HeaderContent>
+                        <MudTh>Sport League</MudTh>
+                        <MudTh>Name</MudTh>
+                        <MudTh>Location</MudTh>
+                        <MudTh>Founded</MudTh>
+                        <MudTh></MudTh>
+                    </HeaderContent>
+                    <RowTemplate>
+                        <MudTd DataLabel="Sport League">@context.SportLeagueLevelName</MudTd>
+                        <MudTd DataLabel="Name">@context.Name</MudTd>
+                        <MudTd DataLabel="Location">@context.Location</MudTd>
+                        <MudTd DataLabel="Founded">@context.FoundYear</MudTd>
+                        <MudTd DataLabel="">
+                            <GridEditButton NavigationPath="@($"{_viewModel.RoutePrefix}/Edit/{context.Id}")" />    
+                            <MudTooltip Text="Delete">
+                                <MudFab Color="MudBlazor.Color.Secondary"
+                                        Icon="@Icons.Outlined.DeleteOutline"
+                                        OnClick="@(_ => ShowDeleteConfirm(@context.Id))" />
+                            </MudTooltip>
+                        </MudTd>
+                    </RowTemplate>
+                    <PagerContent>
+                        <MudTablePager />
+                    </PagerContent>
+                </MudTable>
+            </Content>
+        </DivPad2>
     </Content>
-</_Page>
-
-@code {
-    private _Page _page;
-    private FranchisesViewModel _viewModel;
-
-    protected async Task Delete(int id)
-    {
-        var deletedItem = _viewModel.Franchises.Single(Franchise => Franchise.Id == id);
-        var viewModel = new SaveFranchiseViewModel(deletedItem);
-        viewModel.IsDeleted = true;
-
-        await _commandRouter.Send(new SaveFranchise.Command(viewModel)).ConfigureAwait(false);        
-
-        _viewModel.Franchises.Remove(deletedItem);
-
-        _toastService.ShowSuccess($"{_viewModel.ItemTitle} was deleted successfully!", _viewModel.PageTitle);
-    }
-
-    protected async Task OnLoad()
-    {
-        _viewModel = await _queryRouter.Send(new GetFranchises.Query()).ConfigureAwait(false);
-    }
-}
+</PageView>

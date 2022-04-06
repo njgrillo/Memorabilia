@@ -1,4 +1,5 @@
-﻿using Memorabilia.Domain;
+﻿using Memorabilia.Domain.Entities;
+using Memorabilia.Repository.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,44 +8,44 @@ using System.Threading.Tasks;
 
 namespace Memorabilia.Repository
 {
-    public class SpotRepository : BaseRepository<Domain.Entities.Spot>, ISpotRepository
+    public class SpotRepository : BaseRepository<Spot>, ISpotRepository
     {
-        private readonly Context _context;
+        private readonly DomainContext _context;
 
-        public SpotRepository(Context context) : base(context)
+        public SpotRepository(DomainContext context) : base(context)
         {
             _context = context;
         }
 
-        private IQueryable<Domain.Entities.Spot> Spot => _context.Set<Domain.Entities.Spot>();
+        private IQueryable<Spot> Spot => _context.Set<Spot>();
 
-        public async Task Add(Domain.Entities.Spot spot, CancellationToken cancellationToken = default)
+        public async Task Add(Spot spot, CancellationToken cancellationToken = default)
         {
             _context.Add(spot);
 
             await _context.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
         }
 
-        public async Task Delete(Domain.Entities.Spot spot, CancellationToken cancellationToken = default)
+        public async Task Delete(Spot spot, CancellationToken cancellationToken = default)
         {
-            _context.Set<Domain.Entities.Spot>().Remove(spot);
+            _context.Set<Spot>().Remove(spot);
 
             await _context.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
         }
 
-        public async Task<Domain.Entities.Spot> Get(int id)
+        public async Task<Spot> Get(int id)
         {
             return await Spot.SingleOrDefaultAsync(spot => spot.Id == id).ConfigureAwait(false);
         }
 
-        public async Task<IEnumerable<Domain.Entities.Spot>> GetAll()
+        public async Task<IEnumerable<Spot>> GetAll()
         {
             return (await Spot.ToListAsync().ConfigureAwait(false)).OrderBy(spot => spot.Name);
         }
 
-        public async Task Update(Domain.Entities.Spot spot, CancellationToken cancellationToken = default)
+        public async Task Update(Spot spot, CancellationToken cancellationToken = default)
         {
-            _context.Set<Domain.Entities.Spot>().Update(spot);
+            _context.Set<Spot>().Update(spot);
 
             await _context.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
         }

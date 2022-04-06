@@ -7,9 +7,11 @@ namespace Memorabilia.Domain.Constants
         public static readonly HelmetFinish Blaze = new(6, "Blaze", string.Empty);
         public static readonly HelmetFinish Bronze = new(5, "Bronze", string.Empty);
         public static readonly HelmetFinish Chrome = new(2, "Chrome", string.Empty);
+        public static readonly HelmetFinish Copper = new(14, "Copper", string.Empty);
         public static readonly HelmetFinish Custom = new(9, "Custom", string.Empty);
         public static readonly HelmetFinish Drip = new(10, "Drip", string.Empty);
         public static readonly HelmetFinish Flash = new(7, "Flash", string.Empty);
+        public static readonly HelmetFinish Hydro = new(13, "Hydro", string.Empty);
         public static readonly HelmetFinish Ice = new(8, "Ice", string.Empty);
         public static readonly HelmetFinish Other = new(12, "Other", string.Empty);
         public static readonly HelmetFinish Pewter = new(1, "Pewter", string.Empty);
@@ -22,9 +24,11 @@ namespace Memorabilia.Domain.Constants
             Blaze,
             Bronze,
             Chrome,
+            Copper,
             Custom,
             Drip,
             Flash,
+            Hydro,
             Ice,
             Other,
             Pewter,

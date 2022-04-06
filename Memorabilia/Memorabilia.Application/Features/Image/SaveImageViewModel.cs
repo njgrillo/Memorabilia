@@ -8,8 +8,9 @@ namespace Memorabilia.Application.Features.Image
     {
         public SaveImageViewModel() { }
 
-        public SaveImageViewModel(ImageViewModel viewModel)
+        public SaveImageViewModel(ImageViewModel viewModel, string fileName)
         {
+            FileName = fileName;
             FilePath = viewModel.FilePath;
             Id = viewModel.Id;
             ImageTypeId = viewModel.ImageTypeId;
@@ -21,6 +22,8 @@ namespace Memorabilia.Application.Features.Image
             Id = image.Id;
             ImageTypeId = image.ImageTypeId;
         }
+
+        public string FileName { get; set; }
 
         [Required]
         [StringLength(500, ErrorMessage = "File Path is too long.")]

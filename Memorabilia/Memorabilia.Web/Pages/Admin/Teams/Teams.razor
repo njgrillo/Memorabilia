@@ -1,96 +1,64 @@
 ﻿@page "/Teams"
 
-@using Memorabilia.Application.Features.Admin
-@using Memorabilia.Application.Features.Admin.Team
+@using Memorabilia.Application.Features.Admin.Teams
 
-@inject CommandRouter _commandRouter
-@inject NavigationManager _navigation
-@inject QueryRouter _queryRouter
-@inject IToastService _toastService
-
-<_Page @ref="_page" 
-       ConfirmationTitle="Delete Team" 
-       OnConfirm="Delete" 
-       OnLoad="OnLoad">
+<PageView AddRoute="@_viewModel.AddRoute" 
+          AddTitle="@_viewModel.AddTitle"
+          DisplayPageHeader="false"
+          NavigationPath="@_viewModel.ExitNavigationPath"
+          OnLoad="OnLoad"
+          PageTitle="@_viewModel.PageTitle">
     <Content>
-        <div class="row">
-            <div class="col-md-12" style="text-align: center">
-                <h1>@_viewModel.PageTitle</h1>
-            </div>
-        </div>
-        <br />
-        <_Table Items="_viewModel.Teams" 
-                ItemsPerPage="50"                     
-                TItem="TeamViewModel">
-            <HeaderTemplate>
-                <th scope="col">Franchise</th>
-                <th scope="col">Name</th>
-                <th scope="col">Location</th>
-                <th scope="col">Nickname</th>
-                <th scope="col">Abbreviation</th>
-                <th scope="col">Begin Year</th>
-                <th scope="col">End Year</th>
-                <th scope="col"></th>
-                <th scope="col"></th>
-            </HeaderTemplate>
-            <RowTemplate>
-                <td>@context.FranchiseName</td>
-                <td>@context.Name</td>
-                <td>@context.Location</td>
-                <td>@context.Nickname</td>
-                <td>@context.Abbreviation</td>
-                <td>@context.BeginYear</td>
-                <td>@context.EndYear</td>
-                <td>
-                    <_Tooltip Text="Edit">
-                        <img class="can-click" 
-                                src="images/pencil.png" 
-                                height="25" 
-                                width="25" 
-                                @onclick="@(_ => _navigation.NavigateTo($"{_viewModel.RoutePrefix}/Edit/{context.Id}"))" />
-                    </_Tooltip>                        
-                </td>
-                <td>
-                    <_Tooltip Text="Delete">
-                        <img class="can-click" 
-                                src="images/trash.png" 
-                                height="25" 
-                                width="25" 
-                                @onclick="@(_ => _page.ShowConfirm(context.Id))" />
-                    </_Tooltip>
-                </td>
-            </RowTemplate>
-        </_Table>
-        <div class="row">
-            <div class="col-md-12" style="text-align: center">
-                <div class="col-md-12" style="text-align: center">
-                    <a href="Teams/Edit">Add @_viewModel.ItemTitle</a>
-                </div>
-            </div>
-        </div>
-        <br />
+        <DivPad2>
+            <Content>
+                <MudTable Bordered="false"
+                          Dense="false" 
+                          Filter="new Func<TeamViewModel,bool>(FilterFunc1)"
+                          Hover="true"
+                          Items="@_viewModel.Teams"    
+                          Striped="true">
+                    <ToolBarContent>
+                        <MudText Typo="Typo.h6">@_viewModel.PageTitle</MudText>
+                        <MudSpacer />
+                        <MudTextField @bind-Value="_search"
+                                      Adornment="Adornment.Start"
+                                      AdornmentIcon="@Icons.Material.Filled.Search"
+                                      Class="mt-0"
+                                      IconSize="MudBlazor.Size.Medium"
+                                      Placeholder="Search" />
+                    </ToolBarContent>
+                    <HeaderContent>
+                        <MudTh>Franchise</MudTh>
+                        <MudTh>Name</MudTh>
+                        <MudTh>Location</MudTh>
+                        <MudTh>Nickname</MudTh>
+                        <MudTh>Abbreviation</MudTh>
+                        <MudTh>Begin Year</MudTh>
+                        <MudTh>End Year</MudTh>
+                        <MudTh></MudTh>
+                    </HeaderContent>
+                    <RowTemplate>
+                        <MudTd DataLabel="Franchise">@context.FranchiseName</MudTd>
+                        <MudTd DataLabel="Name">@context.Name</MudTd>
+                        <MudTd DataLabel="Location">@context.Location</MudTd>
+                        <MudTd DataLabel="Nickname">@context.Nickname</MudTd>
+                        <MudTd DataLabel="Abbreviation">@context.Abbreviation</MudTd>
+                        <MudTd DataLabel="Begin Year">@context.BeginYear</MudTd>
+                        <MudTd DataLabel="End Year">@context.EndYear</MudTd>
+                        <MudTd DataLabel="">
+                            <GridEditButton NavigationPath="@($"{_viewModel.RoutePrefix}/Edit/{context.Id}")" />    
+                            <MudTooltip Text="Delete">
+                                <MudFab Color="MudBlazor.Color.Secondary"
+                                        Icon="@Icons.Outlined.DeleteOutline"
+                                        OnClick="@(_ => ShowDeleteConfirm(@context.Id))" />
+                            </MudTooltip>
+                        </MudTd>
+                    </RowTemplate>
+                    <PagerContent>
+                        <MudTablePager />
+                    </PagerContent>
+                </MudTable>
+            </Content>
+        </DivPad2>
     </Content>
-</_Page>
-
-@code {
-    private _Page _page;
-    private TeamsViewModel _viewModel;
-
-    protected async Task Delete(int id)
-    {
-        var deletedItem = _viewModel.Teams.Single(team => team.Id == id);
-        var viewModel = new SaveTeamViewModel(deletedItem);
-        viewModel.IsDeleted = true;
-
-        await _commandRouter.Send(new SaveTeam.Command(viewModel)).ConfigureAwait(false);
-        
-        _viewModel.Teams.Remove(deletedItem);
-
-        _toastService.ShowSuccess($"{_viewModel.ItemTitle} was deleted successfully!", _viewModel.PageTitle);
-    }
-
-    protected async Task OnLoad()
-    {
-        _viewModel = await _queryRouter.Send(new GetTeams.Query()).ConfigureAwait(false);
-    }
-}
+</PageView>

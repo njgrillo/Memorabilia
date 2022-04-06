@@ -1,5 +1,5 @@
-﻿using Memorabilia.Application.Features.Admin.Person;
-using Memorabilia.Application.Features.Admin.Team;
+﻿using Memorabilia.Application.Features.Admin.People;
+using Memorabilia.Application.Features.Admin.Teams;
 using Memorabilia.Domain.Constants;
 using System;
 using System.ComponentModel.DataAnnotations;
@@ -7,7 +7,7 @@ using System.Linq;
 
 namespace Memorabilia.Application.Features.Memorabilia.Basketball
 {
-    public class SaveBasketballViewModel : SaveViewModel
+    public class SaveBasketballViewModel : SaveItemViewModel
     {
         public SaveBasketballViewModel() { }
 
@@ -31,9 +31,13 @@ namespace Memorabilia.Application.Features.Memorabilia.Basketball
 
         private int _gameStyleTypeId;
 
+        public override string BackNavigationPath => $"Memorabilia/Edit/{MemorabiliaId}";
+
         public BasketballType BasketballType => BasketballType.Find(BasketballTypeId);
 
         public int BasketballTypeId { get; set; }
+
+        public BasketballType[] BasketballTypes { get; set; } = BasketballType.All;
 
         [Required]
         [Range(1, int.MaxValue, ErrorMessage = "Brand is required.")]
@@ -42,6 +46,10 @@ namespace Memorabilia.Application.Features.Memorabilia.Basketball
         public int CommissionerId { get; set; }
 
         public bool DisplayGameDate => GameStyleType == GameStyleType.GameUsed;
+
+        public override EditModeType EditModeType => MemorabiliaId > 0 ? EditModeType.Update : EditModeType.Add;
+
+        public override string ExitNavigationPath => "Memorabilia/Items";
 
         public DateTime? GameDate { get; set; }
 
@@ -58,7 +66,8 @@ namespace Memorabilia.Application.Features.Memorabilia.Basketball
             set
             {
                 _gameStyleTypeId = value;
-                BasketballTypeId = BasketballType.Official.Id;
+                BasketballTypes = BasketballType.GetAll(GameStyleType.Find(value));
+                BasketballTypeId = BasketballType.Official.Id;                
             }
         }
 
@@ -66,31 +75,13 @@ namespace Memorabilia.Application.Features.Memorabilia.Basketball
 
         public bool HasTeam => Team?.Id > 0;
 
-        public string ImagePath
-        {
-            get
-            {
-                var path = "images/";
+        public override string ImagePath => "images/basketball.jpg";
 
-                //if (DisplayBasketballType && BasketballType != null)
-                //{
-                //    return $"{path}{BasketballType.Name.Replace(" ", "")}.jpg";
-                //}
-
-                return $"{path}basketball.jpg";
-            }
-        }
-
-        public ItemType ItemType => ItemType.Basketball;
+        public override ItemType ItemType => ItemType.Basketball;
 
         [Required]
         [Range(1, int.MaxValue, ErrorMessage = "Level is required.")]
-        public int LevelTypeId { get; set; }
-
-        [Required]
-        public int MemorabiliaId { get; set; }
-
-        public override string PageTitle => $"{(MemorabiliaId > 0 ? "Edit" : "Add")} {ItemType.Basketball.Name} Details";
+        public int LevelTypeId { get; set; }        
 
         public SavePersonViewModel Person;
 

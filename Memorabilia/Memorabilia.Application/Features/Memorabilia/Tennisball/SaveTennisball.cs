@@ -1,6 +1,6 @@
 ﻿using Framework.Domain.Command;
 using Framework.Handler;
-using Memorabilia.Domain;
+using Memorabilia.Repository.Interfaces;
 using System;
 using System.Threading.Tasks;
 
@@ -26,7 +26,8 @@ namespace Memorabilia.Application.Features.Memorabilia.Tennisball
                                           command.GameStyleTypeId,
                                           command.LevelTypeId,
                                           command.PersonId,
-                                          command.SizeId);
+                                          command.SizeId,
+                                          command.SportId);
 
                 await _memorabiliaRepository.Update(memorabilia).ConfigureAwait(false);
             }
@@ -55,7 +56,7 @@ namespace Memorabilia.Application.Features.Memorabilia.Tennisball
 
             public int SizeId => _viewModel.SizeId;
 
-            //public int SportId => Domain.Constants.Sport.Tennis.Id;
+            public int SportId => Domain.Constants.Sport.Tennis.Id;
         }
     }
 }

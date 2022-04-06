@@ -1,4 +1,4 @@
-﻿using Memorabilia.Domain;
+﻿using Memorabilia.Repository.Interfaces;
 using Demo.Framework.Handler;
 using System.Threading.Tasks;
 
@@ -17,11 +17,7 @@ namespace Memorabilia.Application.Features.User
 
             protected override async Task<UserViewModel> Handle(Query query)
             {
-                var user = await _userRepository.Get(query.Username, query.Password).ConfigureAwait(false);
-
-                var viewModel = new UserViewModel(user);
-
-                return viewModel;
+                return new UserViewModel(await _userRepository.Get(query.Username, query.Password).ConfigureAwait(false));
             }
         }
 

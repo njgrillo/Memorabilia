@@ -20,7 +20,7 @@ namespace Memorabilia.Domain.Constants
         public static readonly ItemType FirstDayCover = new(5, "First Day Cover");
         public static readonly ItemType Football = new(9, "Football");
         public static readonly ItemType Glove = new(10, "Glove");
-        public static readonly ItemType GolfBall = new(42, "Golf Ball");       
+        public static readonly ItemType Golfball = new(42, "Golf Ball");       
         public static readonly ItemType Guitar = new(29, "Guitar");
         public static readonly ItemType Hat = new(23, "Hat");
         public static readonly ItemType HeadBand = new(41, "Head Band");
@@ -68,7 +68,7 @@ namespace Memorabilia.Domain.Constants
             FirstDayCover,
             Football,
             Glove,
-            GolfBall,
+            Golfball,
             Guitar,
             Hat,
             HeadBand,
@@ -106,7 +106,7 @@ namespace Memorabilia.Domain.Constants
             Bat,
             Football,
             Glove,
-            GolfBall,
+            Golfball,
             Hat,
             HeadBand,
             Helmet,

@@ -16,6 +16,8 @@
             Witnessed = authentication.Witnessed;
         }
 
+        public Domain.Constants.AuthenticationCompany[] AuthenticationCompanies => Domain.Constants.AuthenticationCompany.All;
+
         public int AuthenticationCompanyId { get; set; }
 
         public string AuthenticationCompanyName => Domain.Constants.AuthenticationCompany.Find(AuthenticationCompanyId)?.Name;

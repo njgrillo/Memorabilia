@@ -1,12 +1,11 @@
-﻿using Memorabilia.Application.Features.Admin.Person;
+﻿using Memorabilia.Application.Features.Admin.People;
 using Memorabilia.Domain.Constants;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Linq;
 
 namespace Memorabilia.Application.Features.Memorabilia.CompactDisc
 {
-    public class SaveCompactDiscViewModel : SaveViewModel
+    public class SaveCompactDiscViewModel : SaveItemViewModel
     {
         public SaveCompactDiscViewModel() { }
 
@@ -16,29 +15,19 @@ namespace Memorabilia.Application.Features.Memorabilia.CompactDisc
             People = viewModel.People.Select(person => new SavePersonViewModel(new PersonViewModel(person.Person))).ToList();
         }
 
+        public override string BackNavigationPath => $"Memorabilia/Edit/{MemorabiliaId}";
+
+        public override EditModeType EditModeType => MemorabiliaId > 0 ? EditModeType.Update : EditModeType.Add;
+
+        public override string ExitNavigationPath => "Memorabilia/Items";
+
         public bool HasPerson => People.Any();
 
-        public string ImagePath
-        {
-            get
-            {
-                var path = "images/";
+        public override string ImagePath => "images/compactdisc.jpg";
 
-                //if (DisplayCompactDiscType && CompactDiscType != null)
-                //{
-                //    return $"{path}{CompactDiscType.Name.Replace(" ", "")}.jpg";
-                //}
+        public override ItemType ItemType => ItemType.CompactDisc;
 
-                return $"{path}CompactDisc.jpg";
-            }
-        }
-
-        public ItemType ItemType => ItemType.CompactDisc;
-
-        [Required]
-        public int MemorabiliaId { get; set; }
-
-        public override string PageTitle => $"{(MemorabiliaId > 0 ? "Edit" : "Add")} {ItemType.CompactDisc.Name} Details";
+        public override string PageTitle => $"{(EditModeType == EditModeType.Update ? "Edit" : "Add")} {ItemType.CompactDisc.Name} Details";
 
         public List<SavePersonViewModel> People { get; set; } = new();
     }

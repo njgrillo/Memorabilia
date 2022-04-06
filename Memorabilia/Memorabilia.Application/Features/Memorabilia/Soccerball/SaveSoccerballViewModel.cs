@@ -1,14 +1,13 @@
-﻿using Memorabilia.Application.Features.Admin.Person;
-using Memorabilia.Application.Features.Admin.Team;
+﻿using Memorabilia.Application.Features.Admin.People;
+using Memorabilia.Application.Features.Admin.Teams;
 using Memorabilia.Domain.Constants;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 
 namespace Memorabilia.Application.Features.Memorabilia.Soccerball
 {
-    public class SaveSoccerballViewModel : SaveViewModel
+    public class SaveSoccerballViewModel : SaveItemViewModel
     {
         public SaveSoccerballViewModel() { }
 
@@ -20,17 +19,26 @@ namespace Memorabilia.Application.Features.Memorabilia.Soccerball
             GameStyleTypeId = viewModel.Game?.GameStyleTypeId ?? 0;
             LevelTypeId = viewModel.Level.LevelTypeId;
             MemorabiliaId = viewModel.MemorabiliaId;
-            People = viewModel.People.Select(person => new SavePersonViewModel(new PersonViewModel(person.Person))).ToList();
             SizeId = viewModel.Size.SizeId;
-            SportIds = viewModel.Sports.Select(x => x.Id).ToList();
-            Teams = viewModel.Teams.Select(team => new SaveTeamViewModel(new TeamViewModel(team.Team))).ToList();
+
+            if (viewModel.People.Any())
+                Person = new SavePersonViewModel(new PersonViewModel(viewModel.People.First().Person));
+
+            if (viewModel.Teams.Any())
+                Team = new SaveTeamViewModel(new TeamViewModel(viewModel.Teams.First().Team));
         }
+
+        public override string BackNavigationPath => $"Memorabilia/Edit/{MemorabiliaId}";
 
         [Required]
         [Range(1, int.MaxValue, ErrorMessage = "Brand is required.")]
         public int BrandId { get; set; }
 
         public bool DisplayGameDate => GameStyleType == GameStyleType.GameUsed;
+
+        public override EditModeType EditModeType => MemorabiliaId > 0 ? EditModeType.Update : EditModeType.Add;
+
+        public override string ExitNavigationPath => "Memorabilia/Items";
 
         public DateTime? GameDate { get; set; }
 
@@ -40,31 +48,26 @@ namespace Memorabilia.Application.Features.Memorabilia.Soccerball
 
         public int GameStyleTypeId { get; set; }
 
-        public bool HasPerson => People.Any();
+        public bool HasPerson => Person?.Id > 0;
 
-        public bool HasSport => SportIds.Any();
+        public bool HasTeam => Team?.Id > 0;
 
-        public bool HasTeam => Teams.Any();
+        public override string ImagePath => "images/soccerball.jpg";
 
-        public ItemType ItemType => ItemType.Soccerball;
+        public override ItemType ItemType => ItemType.Soccerball;
 
         [Required]
         [Range(1, int.MaxValue, ErrorMessage = "Level is required.")]
         public int LevelTypeId { get; set; }
 
-        [Required]
-        public int MemorabiliaId { get; set; }
+        public override string PageTitle => $"{(EditModeType == EditModeType.Update ? "Edit" : "Add")} {ItemType.Soccerball.Name} Details";
 
-        public override string PageTitle => $"{(MemorabiliaId > 0 ? "Edit" : "Add")} {ItemType.Soccerball.Name} Details";
-
-        public List<SavePersonViewModel> People { get; set; } = new();
+        public SavePersonViewModel Person { get; set; }
 
         [Required]
         [Range(1, int.MaxValue, ErrorMessage = "Size is required.")]
         public int SizeId { get; set; }
 
-        public List<int> SportIds { get; set; } = new();
-
-        public List<SaveTeamViewModel> Teams { get; set; } = new();
+        public SaveTeamViewModel Team { get; set; } 
     }
 }

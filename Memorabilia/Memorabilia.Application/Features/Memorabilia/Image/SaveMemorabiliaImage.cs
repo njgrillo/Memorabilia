@@ -1,6 +1,6 @@
 ﻿using Framework.Domain.Command;
 using Framework.Handler;
-using Memorabilia.Domain;
+using Memorabilia.Repository.Interfaces;
 using Memorabilia.Domain.Constants;
 using System.Collections.Generic;
 using System.Linq;

@@ -74,5 +74,10 @@ namespace Memorabilia.Domain.Constants
         {
             return All.SingleOrDefault(spot => spot.Id == id);
         }
+
+        public static Spot Find(string name)
+        {
+            return All.SingleOrDefault(spot => spot.Name == name);
+        }
     }
 }

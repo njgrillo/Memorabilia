@@ -17,6 +17,7 @@ namespace Memorabilia.Domain.Constants
         public static readonly Size SixteenByTwenty = new(13, "16x20", string.Empty);
         public static readonly Size Small = new(4, "Small", "S");
         public static readonly Size Standard = new(5, "Standard", string.Empty);
+        public static readonly Size ThreeByFive = new(15, "3x5", string.Empty);
         public static readonly Size TwentyByThirty = new(14, "20x30", string.Empty);
 
         public static readonly Size[] All =
@@ -34,6 +35,7 @@ namespace Memorabilia.Domain.Constants
             SixteenByTwenty,
             Small,
             Standard,
+            ThreeByFive,
             TwentyByThirty
         };
 
@@ -53,6 +55,11 @@ namespace Memorabilia.Domain.Constants
         public static Size Find(int id)
         {
             return All.SingleOrDefault(size => size.Id == id);
+        }
+
+        public static Size Find(string name)
+        {
+            return All.SingleOrDefault(size => size.Name == name);
         }
     }
 }

@@ -1,164 +1,100 @@
 ﻿@page "/Autographs/Inscriptions/Edit/{autographId:int}"
 
-@using Memorabilia.Application.Features.Autograph
-@using Memorabilia.Application.Features.Autograph.Inscription
+@using Memorabilia.Application.Features.Autograph.Inscriptions
 @using Memorabilia.Web.Controls
-@using Memorabilia.Web.Controls.InscriptionType
+@using Memorabilia.Web.Controls.Autographs
 
-@inject CommandRouter _commandRouter
-@inject NavigationManager _navigation
-@inject QueryRouter _queryRouter
-@inject IToastService _toastService
-
-<_Page OnLoad="OnLoad">
+<EditPage ContinueNavigationPath="@_inscriptionsViewModel.ContinueNavigationPath"
+          EditMode="_inscriptionsViewModel.EditModeType"
+          ExitNavigationPath="@_inscriptionsViewModel.ExitNavigationPath"
+          ImagePath="@_inscriptionsViewModel.ImagePath"
+          ItemName="@_inscriptionsViewModel.PageTitle"
+          Model="_inscriptionsViewModel"
+          OnLoad="OnLoad"
+          OnSave="OnSave"
+          PageFooterButtonText="@_inscriptionsViewModel.ExitButtonText"
+          PageFooterNavigationPath="@_inscriptionsViewModel.BackNavigationPath"
+          PageTitle="@_inscriptionsViewModel.PageTitle"
+          TItem="SaveInscriptionsViewModel"
+          UseMultipleButtons="true">
+    <TimelineContent>
+        <AutographTimeline AutographId="_inscriptionsViewModel.AutographId" 
+                           AutographStep="_inscriptionsViewModel.AutographStep"  
+                           DisplaySpot="_inscriptionsViewModel.CanHaveSpot" 
+                           EditMode="_inscriptionsViewModel.EditModeType"
+                           MemorabiliaId="_inscriptionsViewModel.MemorabiliaId" />
+    </TimelineContent>
     <Content>
-        <div class="row">
-            <div class="col-md-12" style="text-align: center">
-                <h1>@_inscriptionsViewModel.PageTitle</h1>
-            </div>
-        </div>
-        <br />
-        <div style="border: 1px solid black; margin-top: 2%; margin-bottom: 2%; margin-left: 2%; margin-right: 2%;">
-            <EditForm Model="_viewModel" OnValidSubmit="HandleValidSubmit">
-                <DataAnnotationsValidator />
-                <ValidationSummary />
-                <div style="margin-top: 2%; margin-bottom: 2%; margin-left: 1%; margin-right: 1%;">
-                    <div class="col-lg-12" style="text-align: center">
-                        <img src="@_inscriptionsViewModel.ImagePath" alt="Image" height="150" width="150" />
-                    </div>            
-                    <div class="row">
-                        <div class="col-lg-4">
-                            <div class="form-group">
-                                <label for="inscriptionType">Type</label>
-                                <_InscriptionTypeDropDown @bind-Value="@_viewModel.InscriptionTypeId"
-                                                           @bind-Value:event="ValueChanged"
-                                                           Disabled="@(!_canEditInscriptionType)" /> 
-                            </div> 
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-lg-4">
-                            <div class="form-group">
-                                <label for="inscriptionText">Inscription</label>
-                                <InputText id="inscriptionText" class="form-control" @bind-Value="_viewModel.InscriptionText" />
-                            </div> 
-                        </div>
-                    </div>     
-                    <div class="text-left">
-                        <button type="button" class="btn btn-secondary" hidden="@(!_canAddInscription)" @onclick="AddInscription">Add</button>
-                        <button type="button" class="btn btn-secondary" hidden="@(!_canUpdateInscription)" @onclick="UpdateInscription">Update</button>
-                    </div>
-                    <br />
-                    <_Table Items="_inscriptionsViewModel.Inscriptions" 
-                            ItemsPerPage="5"   
-                            TItem="SaveInscriptionViewModel">
-                        <HeaderTemplate>
-                            <th scope="col">Inscription Type</th>
-                            <th scope="col">Inscription Text</th>
-                            <th scope="col"></th>
-                            <th scope="col"></th>
-                        </HeaderTemplate>
-                        <RowTemplate Context="inscription">
-                            <td>@inscription.InscriptionTypeName</td>
-                            <td>@inscription.InscriptionText</td>
-                            <td>
-                                <_Tooltip Text="Edit">
-                                    <img class="can-click" 
-                                         src="images/pencil.png" 
-                                         height="25" 
-                                         width="25" 
-                                         @onclick="@(_ => Edit(inscription))" />
-                                </_Tooltip>
-                            </td>
-                            <td>
-                                <_Tooltip Text="Delete">
-                                    <img class="can-click" 
-                                         src="images/trash.png" 
-                                         height="25" 
-                                         width="25" 
-                                         @onclick="@(_ => Remove(inscription.InscriptionTypeId, inscription.InscriptionText))" />
-                                </_Tooltip>
-                            </td>
-                        </RowTemplate>
-                    </_Table>
-                    <div class="text-left">
-                        <button type="submit" class="btn btn-primary" @onclick="@(()=> _continue = true)">Save & Continue</button>
-                        <button type="submit" class="btn btn-primary">Save & Exit</button>
-                        <button type="button" class="btn btn-secondary" @onclick="@(_ => _navigation.NavigateTo("Memorabilia"))">Cancel</button>
-                    </div>
-                </div>            
-            </EditForm>        
-        </div>
+        <DivRowCol4>
+            <Content>
+                <MudSelect @bind-Value="@_viewModel.InscriptionTypeId"
+                           @bind-Value:event="ValueChanged" 
+                           Disabled="@(!_canEditInscriptionType)" 
+                           Label="Type"
+                           Variant="Variant.Outlined">
+                    <MudSelectItem Value="@(0)">--Select--</MudSelectItem>
+                    <Iterations Items="_viewModel.InscriptionTypes" Context="inscriptionType">
+                        <MudSelectItem Value="@inscriptionType.Id">@inscriptionType.Name</MudSelectItem>
+                    </Iterations>	
+                </MudSelect>
+            </Content>
+        </DivRowCol4>
+        <DivRowCol4>
+            <Content>
+                <MudTextField @bind-Value="_viewModel.InscriptionText" 
+                              Label="Inscription" 
+                              Variant="Variant.Outlined" />
+            </Content>
+        </DivRowCol4>    
+        <DivLeftAlign>
+            <Content>
+                <MudButton hidden="@(!_canAddInscription)"
+                           ButtonType="MudBlazor.ButtonType.Button" 
+                           Color="MudBlazor.Color.Secondary"
+                           OnClick="AddInscription"
+                           Size="MudBlazor.Size.Medium"                                  
+                           Variant="Variant.Filled">Add</MudButton>
+                <MudButton hidden="@(!_canUpdateInscription)"
+                           ButtonType="MudBlazor.ButtonType.Button" 
+                           Color="MudBlazor.Color.Secondary"
+                           OnClick="UpdateInscription"
+                           Size="MudBlazor.Size.Medium"                                  
+                           Variant="Variant.Filled">Update</MudButton>
+            </Content>
+        </DivLeftAlign>
+        <DivRowCol6>
+            <Content>
+                <MudTable Bordered="false"
+                          Dense="false" 
+                          Hover="true"
+                          Items="@_inscriptionsViewModel.Inscriptions"    
+                          Striped="true">
+                    <ToolBarContent>
+                        <MudText Typo="Typo.h6">Inscriptions</MudText>
+                    </ToolBarContent>
+                    <HeaderContent>
+                        <MudTh>Inscription Type</MudTh>
+                        <MudTh>Inscription Text</MudTh>
+                        <MudTh></MudTh>
+                    </HeaderContent>
+                    <RowTemplate Context="inscription">
+                        <MudTd DataLabel="Inscription Type">@inscription.InscriptionTypeName</MudTd>
+                        <MudTd DataLabel="Inscription Text">@inscription.InscriptionText</MudTd>
+                        <MudTd DataLabel="">
+                            <MudTooltip Text="Edit">
+                                <MudFab Color="MudBlazor.Color.Primary"                                
+                                        Icon="@Icons.Outlined.ModeEditOutline"
+                                        OnClick="@(_ => Edit(inscription))" />
+                            </MudTooltip>    
+                            <MudTooltip Text="Delete">
+                                <MudFab Color="MudBlazor.Color.Secondary"
+                                        Icon="@Icons.Outlined.DeleteOutline"
+                                        OnClick="@(_ => Remove(inscription.InscriptionTypeId, inscription.InscriptionText))" />
+                            </MudTooltip>
+                        </MudTd>
+                    </RowTemplate>
+                </MudTable>
+            </Content>
+        </DivRowCol6>    
     </Content>
-</_Page>
-
-@code {
-    [Parameter]
-    public int AutographId { get; set; }
-
-    private bool _canAddInscription = true;    
-    private bool _canEditInscriptionType = true;
-    private bool _canUpdateInscription;
-    private bool _continue;
-    private SaveInscriptionsViewModel _inscriptionsViewModel = new SaveInscriptionsViewModel(); 
-    private SaveInscriptionViewModel _viewModel = new SaveInscriptionViewModel();
-
-    protected async Task HandleValidSubmit()
-    {
-        _inscriptionsViewModel.AutographId = AutographId;
-
-        var command = new SaveInscriptions.Command(_inscriptionsViewModel);
-
-        await _commandRouter.Send(command).ConfigureAwait(false);
-
-        var url = _continue ? $"Autographs/Authentications/Edit/{command.AutographId}" : "Memorabilia";
-
-        _navigation.NavigateTo(url);
-        _toastService.ShowSuccess($"{_inscriptionsViewModel.PageTitle} were saved successfully!", _inscriptionsViewModel.PageTitle);
-    }
-
-    protected async Task OnLoad()
-    {
-        var autograph = await _queryRouter.Send(new GetAutograph.Query(AutographId)).ConfigureAwait(false);
-
-        if (autograph.Inscriptions.Any())
-            _inscriptionsViewModel = new SaveInscriptionsViewModel(autograph.Inscriptions);
-    } 
-
-    private void AddInscription()
-    {        
-        _inscriptionsViewModel.Inscriptions.Add(_viewModel);   
-        _viewModel = new SaveInscriptionViewModel();
-    }
-
-    private void Edit(SaveInscriptionViewModel inscription)
-    {
-        _viewModel.InscriptionTypeId = inscription.InscriptionTypeId;
-        _viewModel.InscriptionText = inscription.InscriptionText;
-
-        _canAddInscription = false;
-        _canEditInscriptionType = false;
-        _canUpdateInscription = true;
-    }
-
-    private void Remove(int inscriptionTypeId, string inscriptionText)
-    {
-        var inscription = _inscriptionsViewModel.Inscriptions.Single(inscription => inscription.InscriptionTypeId == inscriptionTypeId &&
-                                                                                    inscription.InscriptionText == inscriptionText);
-
-        _inscriptionsViewModel.Inscriptions.Remove(inscription);                                                                               
-    }   
-    
-    private void UpdateInscription()
-    {       
-        var inscription = _inscriptionsViewModel.Inscriptions.Single(inscription => inscription.InscriptionTypeId == _viewModel.InscriptionTypeId);
-
-        inscription.InscriptionText = _viewModel.InscriptionText;
-
-        _viewModel = new SaveInscriptionViewModel();
-
-        _canAddInscription = true;
-        _canEditInscriptionType = true;
-        _canUpdateInscription = false;
-    }
-}
+</EditPage>

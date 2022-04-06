@@ -1,135 +1,88 @@
 ﻿@page "/Memorabilia/HockeyStick/Edit/{memorabiliaId:int}"
 
-@using Memorabilia.Application.Features.Admin.Person
-@using Memorabilia.Application.Features.Admin.Team
-@using Memorabilia.Application.Features.Memorabilia
 @using Memorabilia.Application.Features.Memorabilia.HockeyStick
-@using Memorabilia.Web.Controls.Commissioner
-@using Memorabilia.Web.Controls.GameStyleType
-@using Memorabilia.Web.Controls.ItemTypeBrand
-@using Memorabilia.Web.Controls.ItemTypeLevel
-@using Memorabilia.Web.Controls.ItemTypeSize
+@using Memorabilia.Web.Controls.DropDowns
 @using Memorabilia.Web.Controls.MemorabiliaItem
 @using Memorabilia.Web.Controls.Person
 @using Memorabilia.Web.Controls.Team
 
-@inject CommandRouter _commandRouter
-@inject QueryRouter _queryRouter
-
-<_EditMemorabiliaItem ImagePath="@_viewModel.ImagePath"
-					  ItemType="_viewModel.ItemType" 
-                      MemorabiliaId="MemorabiliaId"
-                      Model="_viewModel"
-                      OnLoad="OnLoad"
-                      OnSave="OnSave"
-                      PageTitle="_viewModel.PageTitle"
-                      TItem="SaveHockeyStickViewModel">
+<EditPage ContinueNavigationPath="@_viewModel.ContinueNavigationPath"
+          EditMode="_viewModel.EditModeType"
+          ExitNavigationPath="@_viewModel.ExitNavigationPath"
+          ImagePath="@_viewModel.ImagePath"
+          ItemName="@_viewModel.ItemType.Name"
+          Model="_viewModel"
+          OnLoad="OnLoad"
+          OnSave="OnSave"
+          PageFooterButtonText="@_viewModel.ExitButtonText"
+          PageFooterNavigationPath="@_viewModel.ExitNavigationPath"
+          PageTitle="@_viewModel.PageTitle"
+          TItem="SaveHockeyStickViewModel"
+          UseMultipleButtons="true">
+    <TimelineContent>
+        <MemorabiliaItemTimeline EditMode="_viewModel.EditModeType"
+                                 ItemTypeName="@_viewModel.ItemType.Name"
+                                 MemorabiliaId="_viewModel.MemorabiliaId"
+                                 MemorabiliaItemStep="_viewModel.MemorabiliaItemStep" />
+    </TimelineContent>
     <Content>
-		<div class="row">
-            <div class="col-lg-6">
-                <div class="form-group">
-                    <label for="level">Level</label>
-                    <_ItemTypeLevelDropDown @bind-Value="@_viewModel.LevelTypeId"
-                                            @bind-Value:event="ValueChanged" 
-                                            ItemType="_viewModel.ItemType" /> 
+        <DivRowCol3>
+            <Content>
+                <ItemTypeLevelDropDown @bind-Value="@_viewModel.LevelTypeId"
+                                       @bind-Value:event="ValueChanged" 
+                                       ItemType="_viewModel.ItemType"
+                                       SelectedValue="_viewModel.LevelTypeId" /> 
+            </Content>
+            <ContentColumn2>
+                <ItemTypeBrandDropDown @bind-Value="@_viewModel.BrandId" 
+                                       @bind-Value:event="ValueChanged"
+                                       ItemType="_viewModel.ItemType"
+                                       SelectedValue="_viewModel.BrandId" />
+            </ContentColumn2>
+        </DivRowCol3>
+        <DivRowCol3>
+            <Content>
+                <ItemTypeSizeDropDown @bind-Value="@_viewModel.SizeId"
+                                      @bind-Value:event="ValueChanged" 
+                                      ItemType="_viewModel.ItemType"
+                                      SelectedValue="@_viewModel.SizeId" /> 
+            </Content>
+        </DivRowCol3>
+        <DivRowCol3>
+            <Content>
+                <MudSelect @bind-Value="@_viewModel.GameStyleTypeId"
+                           @bind-Value:event="ValueChanged" 
+                           Label="Game Style"
+                           Variant="Variant.Outlined">
+                    <MudSelectItem Value="@(0)">--Select--</MudSelectItem>
+                    <Iterations Items="_viewModel.GameStyleTypes" Context="gameStyleType">
+                        <MudSelectItem Value="@gameStyleType.Id">@gameStyleType.Name</MudSelectItem>
+                    </Iterations>	
+                </MudSelect>
+            </Content>
+        </DivRowCol3>
+        <DivRowCol3>
+            <Content>
+                <div hidden="@(!_viewModel.DisplayGameDate)">
+                    <MudDatePicker @bind-Date="_viewModel.GameDate"
+                                   DateFormat="MM/dd/yyyy"
+                                   Editable="true"
+                                   Label="Game Date"
+                                   Mask="@(new DateMask("MM/dd/yyyy"))" 
+                                   Variant="Variant.Outlined" />
                 </div> 
-            </div>
-            <div class="col-lg-6">
-                <div class="form-group">
-                    <label for="brand">Brand</label>
-                    <_ItemTypeBrandDropDown @bind-Value="@_viewModel.BrandId" 
-                                            @bind-Value:event="ValueChanged"
-                                            ItemType="_viewModel.ItemType" />
-                </div> 
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-lg-6">
-                <div class="form-group">
-                    <label for="size">Size</label>
-                    <_ItemTypeSizeDropDown @bind-Value="@_viewModel.SizeId"
-                                           @bind-Value:event="ValueChanged" 
-                                           ItemType="_viewModel.ItemType" /> 
-                </div> 
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-lg-6">
-                <div class="form-group">
-                    <label for="gameStyleType">Game Style Type</label>
-                    <_GameStyleTypeDropDown @bind-Value="@_viewModel.GameStyleTypeId"
-                                            @bind-Value:event="ValueChanged"
-                                            ItemType="_viewModel.ItemType" /> 
-                </div> 
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-lg-6">
-                <div class="form-group" hidden="@(!_viewModel.DisplayGameDate)">
-                    <label for="gameDate">Game Date</label>
-                    <InputDate id="gameDate" class="form-control" @bind-Value="_viewModel.GameDate" />
-                </div>                        
-            </div>
-        </div>
-        <_PersonSelector CanFilterBySport="true"
-                         CanToggle="true"
-                         ItemType="_viewModel.ItemType"
-                         SelectedPerson="_viewModel.Person"
-                         SelectedPersonChanged="SelectedPersonChanged"
-                         Sport="_viewModel.Sport" />                 
-        <_TeamSelector CanToggle="true" 
-                       ItemType="_viewModel.ItemType"
-                       SelectedTeam="_viewModel.Team"
-                       SelectedTeamChanged="SelectedTeamChanged"
-                       SportLeagueLevel="_viewModel.SportLeagueLevel" />
-	</Content>
-</_EditMemorabiliaItem>
-
-@code {
-    [Parameter]
-    public int MemorabiliaId { get; set; }
-
-    private SaveHockeyStickViewModel _viewModel = new SaveHockeyStickViewModel();    
-
-    protected async Task OnLoad()
-    {
-        var hockeyStickViewModel = await _queryRouter.Send(new GetHockeyStick.Query(MemorabiliaId)).ConfigureAwait(false);
-
-        if (hockeyStickViewModel.Brand == null)
-        {
-            SetDefaults();
-            return;
-        }    
-
-        _viewModel = new SaveHockeyStickViewModel(hockeyStickViewModel);   
-    } 
-
-    protected async Task OnSave()
-    {            
-        _viewModel.MemorabiliaId = MemorabiliaId;
-
-        var command = new SaveHockeyStick.Command(_viewModel);
-
-        await _commandRouter.Send(command).ConfigureAwait(false);
-
-        MemorabiliaId = command.MemorabiliaId;
-    }
-
-    private void SelectedPersonChanged(SavePersonViewModel person)
-    {
-        _viewModel.Person = person;
-    }
-
-    private void SelectedTeamChanged(SaveTeamViewModel team)
-    {
-        _viewModel.Team = team;
-    }
-
-    private void SetDefaults()
-    {
-        _viewModel.BrandId = Brand.Rawlings.Id;
-        _viewModel.GameStyleTypeId = GameStyleType.None.Id;
-        _viewModel.LevelTypeId = LevelType.Professional.Id;
-        _viewModel.SizeId = Size.Standard.Id;        
-    }
-}
+            </Content>
+        </DivRowCol3>
+        <PersonSelector CanFilterBySport="true"
+                        CanToggle="true"
+                        ItemType="_viewModel.ItemType"
+                        SelectedPerson="_viewModel.Person"
+                        SelectedPersonChanged="SelectedPersonChanged"
+                        Sport="_viewModel.Sport" />                 
+        <TeamSelector CanToggle="true" 
+                      ItemType="_viewModel.ItemType"
+                      SelectedTeam="_viewModel.Team"
+                      SelectedTeamChanged="SelectedTeamChanged"
+                      SportLeagueLevel="_viewModel.SportLeagueLevel" />
+    </Content>
+</EditPage>

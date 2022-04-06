@@ -1,5 +1,5 @@
-﻿using Memorabilia.Application.Features.Admin.Person;
-using Memorabilia.Application.Features.Admin.Team;
+﻿using Memorabilia.Application.Features.Admin.People;
+using Memorabilia.Application.Features.Admin.Teams;
 using Memorabilia.Domain.Constants;
 using System;
 using System.ComponentModel.DataAnnotations;
@@ -7,7 +7,7 @@ using System.Linq;
 
 namespace Memorabilia.Application.Features.Memorabilia.Football
 {
-    public class SaveFootballViewModel : SaveViewModel
+    public class SaveFootballViewModel : SaveItemViewModel
     {
         public SaveFootballViewModel() { }
 
@@ -29,6 +29,10 @@ namespace Memorabilia.Application.Features.Memorabilia.Football
                 Team = new SaveTeamViewModel(new TeamViewModel(viewModel.Teams.First().Team));
         }
 
+        private int _gameStyleTypeId;
+
+        public override string BackNavigationPath => $"Memorabilia/Edit/{MemorabiliaId}";
+
         [Required]
         [Range(1, int.MaxValue, ErrorMessage = "Brand is required.")]
         public int BrandId { get; set; }
@@ -37,9 +41,15 @@ namespace Memorabilia.Application.Features.Memorabilia.Football
 
         public bool DisplayGameDate => GameStyleType.IsGameWorthly(GameStyleType);
 
+        public override EditModeType EditModeType => MemorabiliaId > 0 ? EditModeType.Update : EditModeType.Add;
+
+        public override string ExitNavigationPath => "Memorabilia/Items";
+
         public FootballType FootballType => FootballType.Find(FootballTypeId);
 
         public int FootballTypeId { get; set; }
+
+        public FootballType[] FootballTypes { get; set; } = FootballType.All;
 
         public DateTime? GameDate { get; set; }
 
@@ -47,37 +57,33 @@ namespace Memorabilia.Application.Features.Memorabilia.Football
 
         [Required]
         [Range(1, int.MaxValue, ErrorMessage = "Game Style Type is required.")]
-        public int GameStyleTypeId { get; set; }
+        public int GameStyleTypeId
+        {
+            get
+            {
+                return _gameStyleTypeId;
+            }
+            set
+            {
+                _gameStyleTypeId = value;
+
+                FootballTypes = FootballType.GetAll(GameStyleType.Find(value));
+            }
+        }
+
+        public GameStyleType[] GameStyleTypes => GameStyleType.GetAll(ItemType.Football);
 
         public bool HasPerson => Person?.Id > 0;
 
         public bool HasTeam => Team?.Id > 0;
 
-        public string ImagePath
-        {
-            get
-            {
-                var path = "images/";
+        public override string ImagePath => "images/football.jpg";
 
-                //if (DisplayFootballType && FootballType != null)
-                //{
-                //    return $"{path}{FootballType.Name.Replace(" ", "")}.jpg";
-                //}
-
-                return $"{path}football.jpg";
-            }
-        }
-
-        public ItemType ItemType => ItemType.Football;
+        public override ItemType ItemType => ItemType.Football;
 
         [Required]
         [Range(1, int.MaxValue, ErrorMessage = "Level is required.")]
         public int LevelTypeId { get; set; }
-
-        [Required]
-        public int MemorabiliaId { get; set; }
-
-        public override string PageTitle => $"{(MemorabiliaId > 0 ? "Edit" : "Add")} {ItemType.Name} Details";
 
         public SavePersonViewModel Person { get; set; }
 

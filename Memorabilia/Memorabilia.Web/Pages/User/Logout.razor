@@ -1,19 +1,5 @@
 ﻿@page "/Logout"
 
-@inject ProtectedLocalStorage _localStorage
-@inject NavigationManager _navigation
-
-<_Page OnLoad="OnLoad">
-    <Content>
-
-    </Content>
-</_Page>
-
-@code {
-    protected async Task OnLoad()
-    {
-        await _localStorage.DeleteAsync("UserId").ConfigureAwait(false);
-
-        _navigation.NavigateTo("Login");
-    }
-}
+<Page OnLoad="OnLoad">
+    <Content />
+</Page>

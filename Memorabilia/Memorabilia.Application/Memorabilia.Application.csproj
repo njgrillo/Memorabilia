@@ -12,17 +12,11 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Memorabilia.Domain\Memorabilia.Domain.csproj" />
+    <ProjectReference Include="..\Memorabilia.Repository\Memorabilia.Repository.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Features\Memorabilia\WristBand\" />
-    <Folder Include="Features\Memorabilia\Trunks\" />
-    <Folder Include="Features\Memorabilia\TennisRacket\" />
-    <Folder Include="Features\Memorabilia\Poster\" />
-    <Folder Include="Features\Memorabilia\PlayingCard\" />
-    <Folder Include="Features\Memorabilia\PinFlag\" />
-    <Folder Include="Features\Memorabilia\Pants\" />
-    <Folder Include="Features\Memorabilia\Painting\" />
+    <PackageReference Include="MudBlazor" Version="6.0.7" />
   </ItemGroup>
 
 </Project>

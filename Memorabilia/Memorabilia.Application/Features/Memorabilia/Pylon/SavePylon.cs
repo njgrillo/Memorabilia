@@ -1,6 +1,6 @@
 ﻿using Framework.Domain.Command;
 using Framework.Handler;
-using Memorabilia.Domain;
+using Memorabilia.Repository.Interfaces;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
@@ -27,7 +27,7 @@ namespace Memorabilia.Application.Features.Memorabilia.Pylon
                                      command.LevelTypeId,
                                      command.SizeId,
                                      command.SportId,
-                                     command.TeamIds);
+                                     command.TeamId);
 
                 await _memorabiliaRepository.Update(memorabilia).ConfigureAwait(false);
             }
@@ -56,7 +56,7 @@ namespace Memorabilia.Application.Features.Memorabilia.Pylon
 
             public int SportId => Domain.Constants.Sport.Football.Id;
 
-            public int[] TeamIds => _viewModel.Teams.Select(team => team.Id).ToArray();
+            public int? TeamId => _viewModel.Team?.Id > 0 ? _viewModel.Team?.Id : null;
         }
     }
 }

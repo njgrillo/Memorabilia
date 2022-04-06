@@ -12,6 +12,12 @@ namespace Memorabilia.Application.Features.Admin.ItemTypeLevel
             ItemTypeLevels = itemTypeLevels.Select(itemTypeLevel => new ItemTypeLevelViewModel(itemTypeLevel)).ToList();
         }
 
+        public string AddRoute => $"{RoutePrefix}/Edit/0";
+
+        public string AddTitle => $"Add {ItemTitle}";
+
+        public string ExitNavigationPath => "Admin/EditDomainItems";
+
         public List<ItemTypeLevelViewModel> ItemTypeLevels { get; set; } = new();
 
         public override string ItemTitle => "Item Type Level";

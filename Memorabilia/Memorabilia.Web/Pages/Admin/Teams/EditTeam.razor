@@ -1,128 +1,94 @@
 ﻿@page "/Teams/Edit"
 @page "/Teams/Edit/{id:int}"
 
-@using Memorabilia.Application.Features.Admin
-@using Memorabilia.Application.Features.Admin.Team
-@using Memorabilia.Web.Controls.Franchise
-@using Memorabilia.Web.Controls.SportLeagueLevel
+@using Memorabilia.Application.Features.Admin.Teams
+@using Memorabilia.Web.Controls.Team
 
-@inject CommandRouter _commandRouter
-@inject NavigationManager _navigation
-@inject QueryRouter _queryRouter
-@inject IToastService _toastService
-
-<_Page OnLoad="OnLoad">
+<EditPage ContinueNavigationPath="@_viewModel.ContinueNavigationPath"
+          EditMode="_viewModel.EditModeType"
+          ExitNavigationPath="@_viewModel.ExitNavigationPath"
+          ImagePath="@_viewModel.ImagePath"
+          ItemName="@_viewModel.ItemTitle"
+          Model="_viewModel"
+          OnLoad="OnLoad"
+          OnSave="OnSave"
+          PageFooterButtonText="@_viewModel.ExitButtonText"
+          PageFooterNavigationPath="@_viewModel.BackNavigationPath"
+          PageTitle="@_viewModel.PageTitle"
+          TItem="SaveTeamViewModel"
+          UseMultipleButtons="true">
+    <TimelineContent>
+        <TeamTimeline DisplayConference="_viewModel.CanHaveConference" 
+                      EditMode="_viewModel.EditModeType"
+                      SportLeagueLevel="_viewModel.SportLeagueLevel"
+                      TeamId="_viewModel.Id"
+                      TeamStep="_viewModel.TeamStep" />
+    </TimelineContent>
     <Content>
-        <div class="row">
-            <div class="col-md-12" style="text-align: center">
-                <h1>@_viewModel.PageTitle</h1>
-            </div>
-        </div>
-        <br />
-        <div style="border: 1px solid black; margin-top: 2%; margin-bottom: 2%; margin-left: 2%; margin-right: 2%;">
-            <div class="row" style="margin-top: 2%; margin-bottom: 2%; margin-left: 1%; margin-right: 1%;">
-                <div class="col-lg-12" style="text-align: center">
-                    <img src="images/teams.jpg" alt="Image" height="150" width="150" />
-                </div>
-                <EditForm Model="_viewModel" OnValidSubmit="HandleValidSubmit">
-                    <DataAnnotationsValidator />
-                    <ValidationSummary />
-                    <div hidden="@(!_displayFranchise)">
-                        <div class="form-group">
-                            <label for="sportLeague">Sport League</label>
-                            <select @onchange="OnChangeSportLeagueLevel">
-                                @foreach (var sportLeagueLevel in SportLeagueLevel.All)
-                                {
-                                    <option value="@sportLeagueLevel.Id">@sportLeagueLevel.Name</option>
-                                }
-                            </select>                            
-                        </div>
-                        <div class="form-group">
-                            <label for="franchise">Franchise</label>
-                            <_FranchiseDropDown @bind-Value="@_viewModel.FranchiseId" 
-                                                @bind-Value:event="ValueChanged"
-                                                SportLeagueLevel="@_sportLeagueLevel" />   
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="name">Name</label>
-                        <InputText id="name" @bind-Value="_viewModel.Name" class="form-control" />
-                    </div>
-                    <div class="form-group">
-                        <label for="location">Location</label>
-                        <InputText id="location" @bind-Value="_viewModel.Location" class="form-control" />
-                    </div>
-                    <div class="form-group">
-                        <label for="nickname">Nickname</label>
-                        <InputText id="nickname" @bind-Value="_viewModel.Nickname" class="form-control" />
-                    </div>
-                    <div class="form-group">
-                        <label for="abbreviation">Abbreviation</label>
-                        <InputText id="abbreviation" @bind-Value="_viewModel.Abbreviation" class="form-control" />
-                    </div>
-                    <div class="form-group">
-                        <label for="beginYear">Begin Year</label>
-                        <InputNumber id="beginYear" @bind-Value="_viewModel.BeginYear" class="form-control" />
-                    </div>
-                    <div class="form-group">
-                        <label for="endYear">End Year</label>
-                        <InputNumber id="endYear" @bind-Value="_viewModel.EndYear" class="form-control" />
-                    </div>
-                    <div class="text-right">
-                        <button type="submit" class="btn btn-primary" @onclick="@(()=> _continue = true)">Save & Continue</button>
-                        <button type="submit" class="btn btn-primary">Save & Exit</button>
-                        <button type="button" class="btn btn-secondary" @onclick="@(_ => _navigation.NavigateTo("Teams"))">Cancel</button>
-                    </div>
-                </EditForm>
-            </div>
-            <div class="row">
-                <div class="col-md-12" style="text-align: center">
-                    <a href="@_viewModel.RoutePrefix">Back</a>
-                </div>
-            </div>
-            <br />
-        </div>
+        <DivRowCol3 Hidden="@(!_viewModel.DisplayFranchise)">
+            <Content>
+                <MudSelect @bind-Value="@_viewModel.SportLeagueLevelId"
+                           @bind-Value:event="ValueChanged" 
+                           Label="Sport League"
+                           Variant="Variant.Outlined">
+                    <MudSelectItem Value="@(0)">--Select--</MudSelectItem>
+                    <Iterations Context="sportLeagueLevel" 
+                                Items="SportLeagueLevel.All" >
+                        <MudSelectItem Value="@sportLeagueLevel.Id">@sportLeagueLevel.Name</MudSelectItem>
+                    </Iterations>	
+                </MudSelect>  
+            </Content>
+        </DivRowCol3>
+        <DivRowCol3>
+            <Content>
+                <MudSelect @bind-Value="@_viewModel.FranchiseId"
+                           @bind-Value:event="ValueChanged" 
+                           Label="Franchise"
+                           Variant="Variant.Outlined">
+                    <MudSelectItem Value="@(0)">--Select--</MudSelectItem>
+                    <Iterations Items="_viewModel.Franchises" Context="franchise">
+                        <MudSelectItem Value="@franchise.Id">@franchise.Name</MudSelectItem>
+                    </Iterations>	
+                </MudSelect>
+            </Content>
+        </DivRowCol3>
+        <DivRowCol3>
+            <Content>
+                <MudTextField @bind-Value="_viewModel.Name" 
+                              Label="Name" 
+                              Variant="Variant.Outlined" />
+            </Content>
+        </DivRowCol3>
+        <DivRowCol3>
+            <Content>
+                <MudTextField @bind-Value="_viewModel.Location" 
+                              Label="Location" 
+                              Variant="Variant.Outlined" />
+            </Content>
+        </DivRowCol3>
+        <DivRowCol3>
+            <Content>
+                <MudTextField @bind-Value="_viewModel.Nickname" 
+                              Label="Nickname" 
+                              Variant="Variant.Outlined" />
+            </Content>
+            <ContentColumn2>
+                <MudTextField @bind-Value="_viewModel.Abbreviation" 
+                              Label="Abbreviation" 
+                              Variant="Variant.Outlined" />
+            </ContentColumn2>
+        </DivRowCol3>
+         <DivRowCol3>
+            <Content>
+                <MudTextField @bind-Value="_viewModel.BeginYear" 
+                              Label="BeginYear" 
+                              Variant="Variant.Outlined" />
+            </Content>
+            <ContentColumn2>
+                <MudTextField @bind-Value="_viewModel.EndYear" 
+                              Label="EndYear" 
+                              Variant="Variant.Outlined" />
+            </ContentColumn2>
+        </DivRowCol3>
     </Content>
-</_Page>
-
-@code {
-    [Parameter]
-    public int Id { get; set; }
-
-    private bool _continue { get; set; }
-    private bool _displayFranchise { get; set; }
-    private SportLeagueLevel _sportLeagueLevel;
-    private SaveTeamViewModel _viewModel = new SaveTeamViewModel();
-
-    protected async Task HandleValidSubmit()
-    {
-        var command = new SaveTeam.Command(_viewModel);
-
-        await _commandRouter.Send(command).ConfigureAwait(false);
-
-        var nextStep = _viewModel.SportLeagueLevelId == SportLeagueLevel.MajorLeagueBaseball.Id ? "Division" : "Conference";
-
-        var url = _continue ? $"Team/{nextStep}/Edit/{command.Id}/{_viewModel.SportLeagueLevelId}" : "Teams";
-
-        _navigation.NavigateTo(url);
-        _toastService.ShowSuccess($"{_viewModel.ItemTitle} was saved successfully!", _viewModel.PageTitle);
-    }
-
-    protected async Task OnLoad()
-    {
-        if (Id == 0)
-        {
-            _displayFranchise = true;
-            _sportLeagueLevel = SportLeagueLevel.MajorLeagueBaseball;
-            return;
-        }
-
-        _viewModel = new SaveTeamViewModel(await _queryRouter.Send(new GetTeam.Query(Id)).ConfigureAwait(false));
-    }
-
-    private void OnChangeSportLeagueLevel(ChangeEventArgs args)
-    {
-        _sportLeagueLevel = SportLeagueLevel.Find(int.Parse(args.Value.ToString()));
-    }
-}
-
+</EditPage>

@@ -1,5 +1,5 @@
-﻿using Memorabilia.Application.Features.Admin.Person;
-using Memorabilia.Application.Features.Admin.Team;
+﻿using Memorabilia.Application.Features.Admin.People;
+using Memorabilia.Application.Features.Admin.Teams;
 using Memorabilia.Domain.Constants;
 using System;
 using System.Collections.Generic;
@@ -8,7 +8,7 @@ using System.Linq;
 
 namespace Memorabilia.Application.Features.Memorabilia.Card
 {
-    public class SaveCardViewModel : SaveViewModel
+    public class SaveCardViewModel : SaveItemViewModel
     {
         public SaveCardViewModel() { }
 
@@ -28,6 +28,8 @@ namespace Memorabilia.Application.Features.Memorabilia.Card
             Year = viewModel.Card.Year;
         }
 
+        public override string BackNavigationPath => $"Memorabilia/Edit/{MemorabiliaId}";
+
         [Required]
         [Range(1, int.MaxValue, ErrorMessage = "Brand is required.")]
         public int BrandId { get; set; }
@@ -36,17 +38,23 @@ namespace Memorabilia.Application.Features.Memorabilia.Card
 
         public int? Denominator { get; set; }
 
+        public override EditModeType EditModeType => MemorabiliaId > 0 ? EditModeType.Update : EditModeType.Add;
+
+        public override string ExitNavigationPath => "Memorabilia/Items";
+
         public bool HasPerson => People.Any();
 
         public bool HasSport => SportIds.Any();
 
         public bool HasTeam => Teams.Any();
 
-        public string ImagePath => string.Empty;
+        public override string ImagePath => "images/tradingcard.jpg";
 
         public bool IsNumbered => Numerator.HasValue || Denominator.HasValue;
 
-        public ItemType ItemType => ItemType.TradingCard;
+        public override ItemType ItemType => ItemType.TradingCard;
+
+        public string ItemTypeName => ItemType.Name.Replace(" ", "");
 
         [Required]
         [Range(1, int.MaxValue, ErrorMessage = "Level is required.")]
@@ -54,12 +62,7 @@ namespace Memorabilia.Application.Features.Memorabilia.Card
 
         public bool Licensed { get; set; }
 
-        [Required]
-        public int MemorabiliaId { get; set; }
-
         public int? Numerator { get; set; }
-
-        public override string PageTitle => $"{(MemorabiliaId > 0 ? "Edit" : "Add")} {ItemType.TradingCard.Name} Details";
 
         public List<SavePersonViewModel> People { get; set; } = new();
 

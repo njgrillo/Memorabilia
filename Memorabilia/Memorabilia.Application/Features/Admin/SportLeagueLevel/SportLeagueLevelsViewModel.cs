@@ -13,7 +13,13 @@ namespace Memorabilia.Application.Features.Admin.SportLeagueLevel
                                                  .OrderBy(sportLeagueLevel => sportLeagueLevel.SportName)
                                                  .ThenBy(sportLeagueLevel => sportLeagueLevel.Name)
                                                  .ToList();
-        }        
+        }
+
+        public string AddRoute => $"{RoutePrefix}/Edit/0";
+
+        public string AddTitle => $"Add {ItemTitle}";
+
+        public string ExitNavigationPath => "Admin/EditDomainItems";
 
         public override string ItemTitle => "Sport League Level";
 

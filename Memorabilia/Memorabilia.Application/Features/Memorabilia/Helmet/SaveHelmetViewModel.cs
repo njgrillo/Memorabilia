@@ -1,5 +1,5 @@
-﻿using Memorabilia.Application.Features.Admin.Person;
-using Memorabilia.Application.Features.Admin.Team;
+﻿using Memorabilia.Application.Features.Admin.People;
+using Memorabilia.Application.Features.Admin.Teams;
 using Memorabilia.Domain.Constants;
 using System;
 using System.Collections.Generic;
@@ -8,7 +8,7 @@ using System.Linq;
 
 namespace Memorabilia.Application.Features.Memorabilia.Helmet
 {
-    public class SaveHelmetViewModel : SaveViewModel
+    public class SaveHelmetViewModel : SaveItemViewModel
     {
         public SaveHelmetViewModel() { }
 
@@ -31,6 +31,8 @@ namespace Memorabilia.Application.Features.Memorabilia.Helmet
 
         private int _gameStyleTypeId;
 
+        public override string BackNavigationPath => $"Memorabilia/Edit/{MemorabiliaId}";
+
         [Required]
         [Range(1, int.MaxValue, ErrorMessage = "Brand is required.")]
         public int BrandId { get; set; }
@@ -42,6 +44,10 @@ namespace Memorabilia.Application.Features.Memorabilia.Helmet
         public bool DisplayHelmetFinish => !IsGameWorthly;
 
         public bool DisplayHelmetQualityType => Size.Find(SizeId) == Size.Full;
+
+        public override EditModeType EditModeType => MemorabiliaId > 0 ? EditModeType.Update : EditModeType.Add;
+
+        public override string ExitNavigationPath => "Memorabilia/Items";
 
         public DateTime? GameDate { get; set; }
 
@@ -58,6 +64,9 @@ namespace Memorabilia.Application.Features.Memorabilia.Helmet
             set
             {
                 _gameStyleTypeId = value;
+
+                HelmetTypes = HelmetType.GetAll(GameStyleType.Find(value));
+
                 CanEditHelmetQualityType = !IsGameWorthly;
 
                 if (IsGameWorthly)
@@ -67,45 +76,35 @@ namespace Memorabilia.Application.Features.Memorabilia.Helmet
             }
         }
 
+        public GameStyleType[] GameStyleTypes => GameStyleType.GetAll(ItemType.Helmet);
+
         public bool HasPerson => People.Any();
 
         public bool HasTeam => Teams.Any();
+
+        public HelmetFinish[] HelmetFinishes => HelmetFinish.All;
 
         public int HelmetFinishId { get; set; }
 
         public int HelmetQualityTypeId { get; set; }
 
+        public HelmetQualityType[] HelmetQualityTypes => HelmetQualityType.All;
+
         public HelmetType HelmetType => HelmetType.Find(HelmetTypeId);
 
         public int HelmetTypeId { get; set; }
 
-        public string ImagePath
-        {
-            get
-            {
-                var path = "images/";
+        public HelmetType[] HelmetTypes { get; set; } = HelmetType.All;
 
-                //if (DisplayHelmetType && HelmetType != null)
-                //{
-                //    return $"{path}{HelmetType.Name.Replace(" ", "")}.jpg";
-                //}
-
-                return $"{path}helmet.jpg";
-            }
-        }
+        public override string ImagePath => "images/helmet.jpg";
 
         public bool IsGameWorthly => GameStyleType.IsGameWorthly(GameStyleType);
 
-        public ItemType ItemType => ItemType.Helmet;
+        public override ItemType ItemType => ItemType.Helmet;
 
         [Required]
         [Range(1, int.MaxValue, ErrorMessage = "Level is required.")]
         public int LevelTypeId { get; set; }
-
-        [Required]
-        public int MemorabiliaId { get; set; }
-
-        public override string PageTitle => $"{(MemorabiliaId > 0 ? "Edit" : "Add")} {ItemType.Helmet.Name} Details";
 
         public List<SavePersonViewModel> People { get; set; } = new();
 

@@ -1,4 +1,5 @@
-﻿using Memorabilia.Domain;
+﻿using Memorabilia.Domain.Entities;
+using Memorabilia.Repository.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,38 +8,38 @@ using System.Threading.Tasks;
 
 namespace Memorabilia.Repository
 {
-    public class TeamDivisionRepository : BaseRepository<Domain.Entities.TeamDivision>, ITeamDivisionRepository
+    public class TeamDivisionRepository : BaseRepository<TeamDivision>, ITeamDivisionRepository
     {
-        private readonly Context _context;
+        private readonly DomainContext _context;
 
-        public TeamDivisionRepository(Context context) : base(context)
+        public TeamDivisionRepository(DomainContext context) : base(context)
         {
             _context = context;
         }
 
-        private IQueryable<Domain.Entities.TeamDivision> TeamDivision => _context.Set<Domain.Entities.TeamDivision>()
-                                                                                 .Include(teamDivision => teamDivision.Team);
+        private IQueryable<TeamDivision> TeamDivision => _context.Set<TeamDivision>()
+                                                                 .Include(teamDivision => teamDivision.Team);
 
-        public async Task Add(Domain.Entities.TeamDivision teamDivision, CancellationToken cancellationToken = default)
+        public async Task Add(TeamDivision teamDivision, CancellationToken cancellationToken = default)
         {
             _context.Add(teamDivision);
 
             await _context.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
         }
 
-        public async Task Delete(Domain.Entities.TeamDivision teamDivision, CancellationToken cancellationToken = default)
+        public async Task Delete(TeamDivision teamDivision, CancellationToken cancellationToken = default)
         {
-            _context.Set<Domain.Entities.TeamDivision>().Remove(teamDivision);
+            _context.Set<TeamDivision>().Remove(teamDivision);
 
             await _context.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
         }
 
-        public async Task<Domain.Entities.TeamDivision> Get(int id)
+        public async Task<TeamDivision> Get(int id)
         {
             return await TeamDivision.SingleOrDefaultAsync(teamDivision => teamDivision.Id == id).ConfigureAwait(false);
         }
 
-        public async Task<IEnumerable<Domain.Entities.TeamDivision>> GetAll(int? teamId = null)
+        public async Task<IEnumerable<TeamDivision>> GetAll(int? teamId = null)
         {
             return teamId.HasValue 
                 ? (await TeamDivision.Where(teamDivision => teamDivision.TeamId == teamId) 
@@ -50,9 +51,9 @@ namespace Memorabilia.Repository
                                                             .ThenBy(teamDivision => teamDivision.Team?.Name);
         }
 
-        public async Task Update(Domain.Entities.TeamDivision teamDivision, CancellationToken cancellationToken = default)
+        public async Task Update(TeamDivision teamDivision, CancellationToken cancellationToken = default)
         {
-            _context.Set<Domain.Entities.TeamDivision>().Update(teamDivision);
+            _context.Set<TeamDivision>().Update(teamDivision);
 
             await _context.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
         }

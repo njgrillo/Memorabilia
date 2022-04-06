@@ -1,4 +1,5 @@
-﻿using Memorabilia.Domain;
+﻿using Memorabilia.Domain.Entities;
+using Memorabilia.Repository.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,44 +8,44 @@ using System.Threading.Tasks;
 
 namespace Memorabilia.Repository
 {
-    public class InscriptionTypeRepository : BaseRepository<Domain.Entities.InscriptionType>, IInscriptionTypeRepository
+    public class InscriptionTypeRepository : BaseRepository<InscriptionType>, IInscriptionTypeRepository
     {
-        private readonly Context _context;
+        private readonly DomainContext _context;
 
-        public InscriptionTypeRepository(Context context) : base(context)
+        public InscriptionTypeRepository(DomainContext context) : base(context)
         {
             _context = context;
         }
 
-        private IQueryable<Domain.Entities.InscriptionType> InscriptionType => _context.Set<Domain.Entities.InscriptionType>();
+        private IQueryable<InscriptionType> InscriptionType => _context.Set<InscriptionType>();
 
-        public async Task Add(Domain.Entities.InscriptionType inscriptionType, CancellationToken cancellationToken = default)
+        public async Task Add(InscriptionType inscriptionType, CancellationToken cancellationToken = default)
         {
             _context.Add(inscriptionType);
 
             await _context.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
         }
 
-        public async Task Delete(Domain.Entities.InscriptionType inscriptionType, CancellationToken cancellationToken = default)
+        public async Task Delete(InscriptionType inscriptionType, CancellationToken cancellationToken = default)
         {
-            _context.Set<Domain.Entities.InscriptionType>().Remove(inscriptionType);
+            _context.Set<InscriptionType>().Remove(inscriptionType);
 
             await _context.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
         }
 
-        public async Task<Domain.Entities.InscriptionType> Get(int id)
+        public async Task<InscriptionType> Get(int id)
         {
             return await InscriptionType.SingleOrDefaultAsync(inscriptionType => inscriptionType.Id == id).ConfigureAwait(false);
         }
 
-        public async Task<IEnumerable<Domain.Entities.InscriptionType>> GetAll()
+        public async Task<IEnumerable<InscriptionType>> GetAll()
         {
             return (await InscriptionType.ToListAsync().ConfigureAwait(false)).OrderBy(inscriptionType => inscriptionType.Name);
         }
 
-        public async Task Update(Domain.Entities.InscriptionType inscriptionType, CancellationToken cancellationToken = default)
+        public async Task Update(InscriptionType inscriptionType, CancellationToken cancellationToken = default)
         {
-            _context.Set<Domain.Entities.InscriptionType>().Update(inscriptionType);
+            _context.Set<InscriptionType>().Update(inscriptionType);
 
             await _context.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
         }

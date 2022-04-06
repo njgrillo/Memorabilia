@@ -1,4 +1,5 @@
-﻿using Memorabilia.Domain;
+﻿using Memorabilia.Domain.Entities;
+using Memorabilia.Repository.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,46 +8,46 @@ using System.Threading.Tasks;
 
 namespace Memorabilia.Repository
 {
-    public class ConferenceRepository : BaseRepository<Domain.Entities.Conference>, IConferenceRepository
+    public class ConferenceRepository : BaseRepository<Conference>, IConferenceRepository
     {
-        private readonly Context _context;
+        private readonly DomainContext _context;
 
-        public ConferenceRepository(Context context) : base(context)
+        public ConferenceRepository(DomainContext context) : base(context)
         {
             _context = context;
         }
 
-        private IQueryable<Domain.Entities.Conference> Conference => _context.Set<Domain.Entities.Conference>();
+        private IQueryable<Conference> Conference => _context.Set<Conference>();
 
-        public async Task Add(Domain.Entities.Conference conference, CancellationToken cancellationToken = default)
+        public async Task Add(Conference conference, CancellationToken cancellationToken = default)
         {
             _context.Add(conference);
 
             await _context.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
         }
 
-        public async Task Delete(Domain.Entities.Conference conference, CancellationToken cancellationToken = default)
+        public async Task Delete(Conference conference, CancellationToken cancellationToken = default)
         {
-            _context.Set<Domain.Entities.Conference>().Remove(conference);
+            _context.Set<Conference>().Remove(conference);
 
             await _context.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
         }
 
-        public async Task<Domain.Entities.Conference> Get(int id)
+        public async Task<Conference> Get(int id)
         {
             return await Conference.SingleOrDefaultAsync(conference => conference.Id == id).ConfigureAwait(false);
         }
 
-        public async Task<IEnumerable<Domain.Entities.Conference>> GetAll()
+        public async Task<IEnumerable<Conference>> GetAll()
         {
             return (await Conference.ToListAsync()
                                     .ConfigureAwait(false)).OrderBy(conference => conference.SportLeagueLevelName)
                                                            .ThenBy(conference => conference.Name);
         }
 
-        public async Task Update(Domain.Entities.Conference conference, CancellationToken cancellationToken = default)
+        public async Task Update(Conference conference, CancellationToken cancellationToken = default)
         {
-            _context.Set<Domain.Entities.Conference>().Update(conference);
+            _context.Set<Conference>().Update(conference);
 
             await _context.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
         }

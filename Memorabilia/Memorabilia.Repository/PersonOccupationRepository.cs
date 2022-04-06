@@ -1,4 +1,5 @@
-﻿using Memorabilia.Domain;
+﻿using Memorabilia.Domain.Entities;
+using Memorabilia.Repository.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,38 +8,38 @@ using System.Threading.Tasks;
 
 namespace Memorabilia.Repository
 {
-    public class PersonOccupationRepository : BaseRepository<Domain.Entities.PersonOccupation>, IPersonOccupationRepository
+    public class PersonOccupationRepository : BaseRepository<PersonOccupation>, IPersonOccupationRepository
     {
-        private readonly Context _context;
+        private readonly DomainContext _context;
 
-        public PersonOccupationRepository(Context context) : base(context)
+        public PersonOccupationRepository(DomainContext context) : base(context)
         {
             _context = context;
         }
 
-        private IQueryable<Domain.Entities.PersonOccupation> PersonOccupation => _context.Set<Domain.Entities.PersonOccupation>()
-                                                                                         .Include(personOccupation => personOccupation.Person);
+        private IQueryable<PersonOccupation> PersonOccupation => _context.Set<PersonOccupation>()
+                                                                         .Include(personOccupation => personOccupation.Person);
 
-        public async Task Add(Domain.Entities.PersonOccupation personOccupation, CancellationToken cancellationToken = default)
+        public async Task Add(PersonOccupation personOccupation, CancellationToken cancellationToken = default)
         {
             _context.Add(personOccupation);
 
             await _context.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
         }
 
-        public async Task Delete(Domain.Entities.PersonOccupation personOccupation, CancellationToken cancellationToken = default)
+        public async Task Delete(PersonOccupation personOccupation, CancellationToken cancellationToken = default)
         {
-            _context.Set<Domain.Entities.PersonOccupation>().Remove(personOccupation);
+            _context.Set<PersonOccupation>().Remove(personOccupation);
 
             await _context.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
         }
 
-        public async Task<Domain.Entities.PersonOccupation> Get(int id)
+        public async Task<PersonOccupation> Get(int id)
         {
             return await PersonOccupation.SingleOrDefaultAsync(personOccupation => personOccupation.Id == id).ConfigureAwait(false);
         }
 
-        public async Task<IEnumerable<Domain.Entities.PersonOccupation>> GetAll(int? personId = null)
+        public async Task<IEnumerable<PersonOccupation>> GetAll(int? personId = null)
         {
             return personId.HasValue
                 ? (await PersonOccupation.Where(personOccupation => personOccupation.PersonId == personId)
@@ -50,9 +51,9 @@ namespace Memorabilia.Repository
                                                                 .ThenBy(personOccupation => personOccupation.Person?.DisplayName);
         }
 
-        public async Task Update(Domain.Entities.PersonOccupation personOccupation, CancellationToken cancellationToken = default)
+        public async Task Update(PersonOccupation personOccupation, CancellationToken cancellationToken = default)
         {
-            _context.Set<Domain.Entities.PersonOccupation>().Update(personOccupation);
+            _context.Set<PersonOccupation>().Update(personOccupation);
 
             await _context.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
         }

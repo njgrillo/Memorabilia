@@ -1,4 +1,5 @@
-﻿using Memorabilia.Domain;
+﻿using Memorabilia.Domain.Entities;
+using Memorabilia.Repository.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using System.Threading;
@@ -6,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Memorabilia.Repository
 {
-    public class MemorabiliaBrandRepository : BaseRepository<Domain.Entities.MemorabiliaBrand>, IMemorabiliaBrandRepository
+    public class MemorabiliaBrandRepository : BaseRepository<MemorabiliaBrand>, IMemorabiliaBrandRepository
     {
         private readonly Context _context;
 
@@ -15,30 +16,30 @@ namespace Memorabilia.Repository
             _context = context;
         }
 
-        private IQueryable<Domain.Entities.MemorabiliaBrand> MemorabiliaBrand => _context.Set<Domain.Entities.MemorabiliaBrand>();
+        private IQueryable<MemorabiliaBrand> MemorabiliaBrand => _context.Set<MemorabiliaBrand>();
 
-        public async Task Add(Domain.Entities.MemorabiliaBrand memorabiliaBrand, CancellationToken cancellationToken = default)
+        public async Task Add(MemorabiliaBrand memorabiliaBrand, CancellationToken cancellationToken = default)
         {
             _context.Add(memorabiliaBrand);
 
             await _context.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
         }
 
-        public async Task Delete(Domain.Entities.MemorabiliaBrand memorabiliaBrand, CancellationToken cancellationToken = default)
+        public async Task Delete(MemorabiliaBrand memorabiliaBrand, CancellationToken cancellationToken = default)
         {
-            _context.Set<Domain.Entities.MemorabiliaBrand>().Remove(memorabiliaBrand);
+            _context.Set<MemorabiliaBrand>().Remove(memorabiliaBrand);
 
             await _context.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
         }
 
-        public async Task<Domain.Entities.MemorabiliaBrand> Get(int id)
+        public async Task<MemorabiliaBrand> Get(int id)
         {
             return await MemorabiliaBrand.SingleOrDefaultAsync(memorabiliaBrand => memorabiliaBrand.Id == id).ConfigureAwait(false);
         }
 
-        public async Task Update(Domain.Entities.MemorabiliaBrand memorabiliaBrand, CancellationToken cancellationToken = default)
+        public async Task Update(MemorabiliaBrand memorabiliaBrand, CancellationToken cancellationToken = default)
         {
-            _context.Set<Domain.Entities.MemorabiliaBrand>().Update(memorabiliaBrand);
+            _context.Set<MemorabiliaBrand>().Update(memorabiliaBrand);
 
             await _context.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
         }

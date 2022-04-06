@@ -1,25 +1,5 @@
 ﻿@page "/WritingInstruments"
 
-@using Memorabilia.Application.Features.Admin
-@using Memorabilia.Application.Features.Admin.WritingInstrument
-
-@inject CommandRouter _commandRouter
-@inject QueryRouter _queryRouter
-
-<_DomainItems DomainItems="_viewModel"
-              OnDelete="OnDelete"
-              OnLoad="OnLoad" />
-
-@code {
-    private WritingInstrumentsViewModel _viewModel;
-
-    protected async Task OnDelete(SaveDomainViewModel viewModel)
-    {
-        await _commandRouter.Send(new SaveWritingInstrument.Command(viewModel)).ConfigureAwait(false);
-    }
-
-    protected async Task OnLoad()
-    {
-        _viewModel = await _queryRouter.Send(new GetWritingInstruments.Query()).ConfigureAwait(false);
-    }
-}
+<DomainItems Items="_viewModel"
+             OnDelete="OnDelete"
+             OnLoad="OnLoad" />

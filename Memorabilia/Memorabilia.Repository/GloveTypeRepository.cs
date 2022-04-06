@@ -1,4 +1,5 @@
-﻿using Memorabilia.Domain;
+﻿using Memorabilia.Domain.Entities;
+using Memorabilia.Repository.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,44 +8,44 @@ using System.Threading.Tasks;
 
 namespace Memorabilia.Repository
 {
-    public class GloveTypeRepository : BaseRepository<Domain.Entities.GloveType>, IGloveTypeRepository
+    public class GloveTypeRepository : BaseRepository<GloveType>, IGloveTypeRepository
     {
-        private readonly Context _context;
+        private readonly DomainContext _context;
 
-        public GloveTypeRepository(Context context) : base(context)
+        public GloveTypeRepository(DomainContext context) : base(context)
         {
             _context = context;
         }
 
-        private IQueryable<Domain.Entities.GloveType> GloveType => _context.Set<Domain.Entities.GloveType>();
+        private IQueryable<GloveType> GloveType => _context.Set<GloveType>();
 
-        public async Task Add(Domain.Entities.GloveType gloveType, CancellationToken cancellationToken = default)
+        public async Task Add(GloveType gloveType, CancellationToken cancellationToken = default)
         {
             _context.Add(gloveType);
 
             await _context.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
         }
 
-        public async Task Delete(Domain.Entities.GloveType gloveType, CancellationToken cancellationToken = default)
+        public async Task Delete(GloveType gloveType, CancellationToken cancellationToken = default)
         {
-            _context.Set<Domain.Entities.GloveType>().Remove(gloveType);
+            _context.Set<GloveType>().Remove(gloveType);
 
             await _context.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
         }
 
-        public async Task<Domain.Entities.GloveType> Get(int id)
+        public async Task<GloveType> Get(int id)
         {
             return await GloveType.SingleOrDefaultAsync(gloveType => gloveType.Id == id).ConfigureAwait(false);
         }
 
-        public async Task<IEnumerable<Domain.Entities.GloveType>> GetAll()
+        public async Task<IEnumerable<GloveType>> GetAll()
         {
             return (await GloveType.ToListAsync().ConfigureAwait(false)).OrderBy(gloveType => gloveType.Name);
         }
 
-        public async Task Update(Domain.Entities.GloveType gloveType, CancellationToken cancellationToken = default)
+        public async Task Update(GloveType gloveType, CancellationToken cancellationToken = default)
         {
-            _context.Set<Domain.Entities.GloveType>().Update(gloveType);
+            _context.Set<GloveType>().Update(gloveType);
 
             await _context.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
         }

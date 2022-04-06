@@ -1,5 +1,5 @@
 ﻿using Demo.Framework.Handler;
-using Memorabilia.Domain;
+using Memorabilia.Repository.Interfaces;
 using System.Threading.Tasks;
 
 namespace Memorabilia.Application.Features.Autograph.Spot
@@ -17,11 +17,7 @@ namespace Memorabilia.Application.Features.Autograph.Spot
 
             protected override async Task<SpotViewModel> Handle(Query query)
             {
-                var autograph = await _autographRepository.Get(query.AutographId).ConfigureAwait(false);
-
-                var viewModel = new SpotViewModel(autograph);
-
-                return viewModel;
+                return new SpotViewModel(await _autographRepository.Get(query.AutographId).ConfigureAwait(false));
             }
         }
 

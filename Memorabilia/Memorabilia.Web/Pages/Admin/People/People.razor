@@ -1,101 +1,68 @@
 ﻿@page "/People"
 
-@using Memorabilia.Application.Features.Admin
-@using Memorabilia.Application.Features.Admin.Person
+@using Memorabilia.Application.Features.Admin.People
 
-@inject CommandRouter _commandRouter
-@inject ProtectedLocalStorage _localStorage
-@inject NavigationManager _navigation
-@inject QueryRouter _queryRouter
-@inject IToastService _toastService
-
-<_Page @ref="_page" 
-       ConfirmationTitle="Delete Person" 
-       OnConfirm="Delete" 
-       OnLoad="OnLoad">
+<PageView AddRoute="@_viewModel.AddRoute" 
+          AddTitle="@_viewModel.AddTitle"
+          DisplayPageHeader="false"
+          NavigationPath="@_viewModel.ExitNavigationPath"
+          OnLoad="OnLoad"
+          PageTitle="@_viewModel.PageTitle">
     <Content>
-        <div class="row">
-            <div class="col-md-12" style="text-align: center">
-                <h1>@_viewModel.PageTitle</h1>
-            </div>
-        </div>
-        <br />
-        <_Table Items="_viewModel.People" 
-                ItemsPerPage="50"                     
-                TItem="PersonViewModel">
-            <HeaderTemplate>
-                <th scope="col">Display Name</th>
-                <th scope="col">First Name</th>
-                <th scope="col">Last Name</th>
-                <th scope="col">Middle Name</th>
-                <th scope="col">Suffix</th>
-                <th scope="col">Nickname</th>
-                <th scope="col">Legal Name</th>
-                <th scope="col">Birth Date</th>
-                <th scope="col">Death Date</th>
-                <th scope="col"></th>
-                <th scope="col"></th>
-            </HeaderTemplate>
-            <RowTemplate>
-                <td>@context.DisplayName</td>
-                <td>@context.FirstName</td>
-                <td>@context.LastName</td>
-                <td>@context.MiddleName</td>
-                <td>@context.Suffix</td>
-                <td>@context.Nickname</td>
-                <td>@context.LegalName</td>
-                <td>@context.BirthDate</td>
-                <td>@context.DeathDate</td>
-                <td>
-                    <_Tooltip Text="Edit">
-                        <img class="can-click" 
-                                src="images/pencil.png" 
-                                height="25" 
-                                width="25" 
-                                @onclick="@(_ => _navigation.NavigateTo($"People/Edit/{context.Id}"))" />
-                    </_Tooltip>                        
-                </td>
-                <td>
-                    <_Tooltip Text="Delete">
-                        <img class="can-click" 
-                                src="images/trash.png" 
-                                height="25" 
-                                width="25" 
-                                @onclick="@(_ => _page.ShowConfirm(context.Id))" />
-                    </_Tooltip>
-                </td>
-            </RowTemplate>
-        </_Table>
-        <div class="row">
-            <div class="col-md-12" style="text-align: center">
-                <div class="col-md-12" style="text-align: center">
-                    <a href="People/Edit">Add Person</a>
-                </div>
-            </div>
-        </div>
-        <br />
+        <DivPad2>
+            <Content>
+                <MudTable Bordered="false"
+                          Dense="false" 
+                          Filter="new Func<PersonViewModel,bool>(FilterFunc1)"
+                          Hover="true"
+                          Items="@_viewModel.People"    
+                          Striped="true">
+                    <ToolBarContent>
+                        <MudText Typo="Typo.h6">@_viewModel.PageTitle</MudText>
+                        <MudSpacer />
+                        <MudTextField @bind-Value="_search"
+                                      Adornment="Adornment.Start"
+                                      AdornmentIcon="@Icons.Material.Filled.Search"
+                                      Class="mt-0"
+                                      IconSize="MudBlazor.Size.Medium"
+                                      Placeholder="Search" />
+                    </ToolBarContent>
+                    <HeaderContent>
+                        <MudTh>Display Name</MudTh>
+                        <MudTh>First Name</MudTh>
+                        <MudTh>Last Name</MudTh>
+                        <MudTh>Middle Name</MudTh>
+                        <MudTh>Suffix</MudTh>
+                        <MudTh>Nickname</MudTh>
+                        <MudTh>Legal Name</MudTh>
+                        <MudTh>Birth Date</MudTh>
+                        <MudTh>Death Date</MudTh>
+                        <MudTh></MudTh>
+                    </HeaderContent>
+                    <RowTemplate>
+                        <MudTd DataLabel="Display Name">@context.DisplayName</MudTd>
+                        <MudTd DataLabel="First Name">@context.FirstName</MudTd>
+                        <MudTd DataLabel="Last Name">@context.LastName</MudTd>
+                        <MudTd DataLabel="Middle Name">@context.MiddleName</MudTd>
+                        <MudTd DataLabel="Suffix">@context.Suffix</MudTd>
+                        <MudTd DataLabel="Nickname">@context.Nickname</MudTd>
+                        <MudTd DataLabel="Legal Name">@context.LegalName</MudTd>
+                        <MudTd DataLabel="Birth Date">@context.FormattedBirthDate</MudTd>
+                        <MudTd DataLabel="Death Date">@context.FormattedDeathDate</MudTd>
+                        <MudTd DataLabel="">
+                            <GridEditButton NavigationPath="@($"People/Edit/{context.Id}")" />    
+                            <MudTooltip Text="Delete">
+                                <MudFab Color="MudBlazor.Color.Secondary"
+                                        Icon="@Icons.Outlined.DeleteOutline"
+                                        OnClick="@(_ => ShowDeleteConfirm(@context.Id))" />
+                            </MudTooltip>
+                        </MudTd>
+                    </RowTemplate>
+                    <PagerContent>
+                        <MudTablePager />
+                    </PagerContent>
+                </MudTable>
+            </Content>
+        </DivPad2>
     </Content>
-</_Page>
-
-@code {
-    private _Page _page;
-    private PeopleViewModel _viewModel;
-
-    protected async Task Delete(int id)
-    {
-        var deletedItem = _viewModel.People.Single(person => person.Id == id);
-        var viewModel = new SavePersonViewModel(deletedItem);
-        viewModel.IsDeleted = true;
-
-        await _commandRouter.Send(new SavePerson.Command(viewModel)).ConfigureAwait(false);
-        
-        _viewModel.People.Remove(deletedItem);
-
-        _toastService.ShowSuccess($"{_viewModel.ItemTitle} was deleted successfully!", _viewModel.PageTitle);
-    }
-
-    protected async Task OnLoad()
-    {
-        _viewModel = await _queryRouter.Send(new GetPeople.Query()).ConfigureAwait(false);
-    }
-}
+</PageView>

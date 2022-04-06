@@ -24,8 +24,6 @@ namespace Memorabilia.Application.Features.Memorabilia.Shoe
 
         public IEnumerable<MemorabiliaPerson> People => _memorabilia.People;
 
-        //public MemorabiliaShoe Shoe => _memorabilia.Shoe;
-
         public MemorabiliaSize Size => _memorabilia.Size;
 
         public IEnumerable<MemorabiliaSport> Sports => _memorabilia.Sports;

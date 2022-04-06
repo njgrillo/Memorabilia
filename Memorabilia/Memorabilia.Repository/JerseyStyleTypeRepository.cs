@@ -1,4 +1,5 @@
-﻿using Memorabilia.Domain;
+﻿using Memorabilia.Domain.Entities;
+using Memorabilia.Repository.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,44 +8,44 @@ using System.Threading.Tasks;
 
 namespace Memorabilia.Repository
 {
-    public class JerseyStyleTypeRepository : BaseRepository<Domain.Entities.JerseyStyleType>, IJerseyStyleTypeRepository
+    public class JerseyStyleTypeRepository : BaseRepository<JerseyStyleType>, IJerseyStyleTypeRepository
     {
-        private readonly Context _context;
+        private readonly DomainContext _context;
 
-        public JerseyStyleTypeRepository(Context context) : base(context)
+        public JerseyStyleTypeRepository(DomainContext context) : base(context)
         {
             _context = context;
         }
 
-        private IQueryable<Domain.Entities.JerseyStyleType> JerseyStyleType => _context.Set<Domain.Entities.JerseyStyleType>();
+        private IQueryable<JerseyStyleType> JerseyStyleType => _context.Set<JerseyStyleType>();
 
-        public async Task Add(Domain.Entities.JerseyStyleType jerseyStyleType, CancellationToken cancellationToken = default)
+        public async Task Add(JerseyStyleType jerseyStyleType, CancellationToken cancellationToken = default)
         {
             _context.Add(jerseyStyleType);
 
             await _context.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
         }
 
-        public async Task Delete(Domain.Entities.JerseyStyleType jerseyStyleType, CancellationToken cancellationToken = default)
+        public async Task Delete(JerseyStyleType jerseyStyleType, CancellationToken cancellationToken = default)
         {
-            _context.Set<Domain.Entities.JerseyStyleType>().Remove(jerseyStyleType);
+            _context.Set<JerseyStyleType>().Remove(jerseyStyleType);
 
             await _context.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
         }
 
-        public async Task<Domain.Entities.JerseyStyleType> Get(int id)
+        public async Task<JerseyStyleType> Get(int id)
         {
             return await JerseyStyleType.SingleOrDefaultAsync(jerseyStyleType => jerseyStyleType.Id == id).ConfigureAwait(false);
         }
 
-        public async Task<IEnumerable<Domain.Entities.JerseyStyleType>> GetAll()
+        public async Task<IEnumerable<JerseyStyleType>> GetAll()
         {
             return (await JerseyStyleType.ToListAsync().ConfigureAwait(false)).OrderBy(jerseyStyleType => jerseyStyleType.Name);
         }
 
-        public async Task Update(Domain.Entities.JerseyStyleType jerseyStyleType, CancellationToken cancellationToken = default)
+        public async Task Update(JerseyStyleType jerseyStyleType, CancellationToken cancellationToken = default)
         {
-            _context.Set<Domain.Entities.JerseyStyleType>().Update(jerseyStyleType);
+            _context.Set<JerseyStyleType>().Update(jerseyStyleType);
 
             await _context.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
         }

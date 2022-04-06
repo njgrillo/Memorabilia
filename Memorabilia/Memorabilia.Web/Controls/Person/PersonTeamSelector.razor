@@ -1,0 +1,77 @@
+﻿@using Memorabilia.Application.Features.Admin.People
+@using Memorabilia.Web.Controls.Team
+
+<DivRowCol6>
+    <Content>
+        <MudAutocomplete @bind-Value="_viewModel"
+                         AdornmentColor="MudBlazor.Color.Primary"
+                         AdornmentIcon="@Icons.Material.Filled.Search"
+                         Label="Team"
+                         Placeholder="Search by team"
+                         ResetValueOnEmptyText="true"                                             
+                         SearchFunc="@SearchTeams"                                               
+                         T="SavePersonTeamViewModel"
+                         Text="@_viewModel?.TeamDisplayName"
+                         Variant="Variant.Outlined">
+            <ItemSelectedTemplate Context="team">
+                @team?.TeamDisplayName
+            </ItemSelectedTemplate>
+            <ItemTemplate Context="team">
+                @team?.TeamDisplayName
+            </ItemTemplate>
+        </MudAutocomplete>
+    </Content>
+</DivRowCol6>
+<DivRowCol3>
+    <Content>
+        <MudNumericField @bind-Value="_viewModel.BeginYear" 
+                         Label="Begin Year"
+                         Variant="Variant.Outlined" />
+    </Content>
+    <ContentColumn2>
+        <MudNumericField @bind-Value="_viewModel.EndYear" 
+                         Label="End Year"
+                         Variant="Variant.Outlined" />
+    </ContentColumn2>
+</DivRowCol3>
+<DivLeftAlign>
+    <Content>
+        <MudButton ButtonType="MudBlazor.ButtonType.Button" 
+                   Color="MudBlazor.Color.Success"
+                   OnClick="Add"
+                   Size="MudBlazor.Size.Medium"                                  
+                   Variant="Variant.Filled">Add</MudButton>
+    </Content>
+</DivLeftAlign>
+<DivRowCol6>
+    <Content>
+        <MudTable Bordered="false"
+                  Dense="false" 
+                  Hover="true"
+                  Items="@Teams.Where(team => !team.IsDeleted).ToList()"    
+                  Striped="true">
+            <HeaderContent>
+                <MudTh>Franchise</MudTh>
+                <MudTh>Location</MudTh>
+                <MudTh>Team</MudTh>
+                <MudTh>Begin Year</MudTh>
+                <MudTh>End Year</MudTh>
+                <MudTh></MudTh>
+            </HeaderContent>
+            <RowTemplate>
+                <MudTd DataLabel="Franchise">@context.FranchiseName</MudTd>
+                <MudTd DataLabel="Location">@context.TeamLocation</MudTd>
+                <MudTd DataLabel="Team">@context.TeamName</MudTd>
+                <MudTd DataLabel="Begin Year">@context.BeginYear</MudTd>
+                <MudTd DataLabel="End Year">@context.EndYear</MudTd>
+                <MudTd DataLabel="">
+                    <MudTooltip Text="Delete">
+                        <MudFab Color="MudBlazor.Color.Secondary"
+                                Icon="@Icons.Outlined.DeleteOutline"
+                                OnClick="@(_ => Remove(context.Id))" />
+                    </MudTooltip>  
+                </MudTd>
+            </RowTemplate>
+        </MudTable>
+    </Content>
+</DivRowCol6>

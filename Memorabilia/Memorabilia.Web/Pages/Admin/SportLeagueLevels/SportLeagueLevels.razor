@@ -1,91 +1,58 @@
 ﻿@page "/SportLeagueLevels"
 
-@using Memorabilia.Application.Features.Admin
 @using Memorabilia.Application.Features.Admin.SportLeagueLevel
 
-@inject CommandRouter _commandRouter
-@inject ProtectedLocalStorage _localStorage
-@inject NavigationManager _navigation
-@inject QueryRouter _queryRouter
-@inject IToastService _toastService
-
-<_Page @ref="_page" 
-       ConfirmationTitle="Delete Sport League Level" 
-       OnConfirm="Delete" 
-       OnLoad="OnLoad">
+<PageView AddRoute="@_viewModel.AddRoute" 
+          AddTitle="@_viewModel.AddTitle"
+          DisplayPageHeader="false"
+          NavigationPath="@_viewModel.ExitNavigationPath"
+          OnLoad="OnLoad"
+          PageTitle="@_viewModel.PageTitle">
     <Content>
-        <div class="row">
-            <div class="col-md-12" style="text-align: center">
-                <h1>@_viewModel.PageTitle</h1>
-            </div>
-        </div>
-        <br />
-        <_Table Items="_viewModel.SportLeagueLevels" 
-                ItemsPerPage="10"                     
-                TItem="SportLeagueLevelViewModel">
-            <HeaderTemplate>
-                <th scope="col">Sport</th>
-                <th scope="col">Level</th>
-                <th scope="col">Name</th>
-                <th scope="col">Abbreviation</th>
-                <th scope="col"></th>
-                <th scope="col"></th>
-            </HeaderTemplate>
-            <RowTemplate>
-                <td>@context.SportName</td>
-                <td>@context.LevelTypeName</td>
-                <td>@context.Name</td>
-                <td>@context.Abbreviation</td>
-                <td>
-                    <_Tooltip Text="Edit">
-                        <img class="can-click" 
-                             src="images/pencil.png" 
-                             height="25" 
-                             width="25" 
-                             @onclick="@(_ => _navigation.NavigateTo($"{_viewModel.RoutePrefix}/Edit/{context.Id}"))" />
-                    </_Tooltip>                        
-                </td>
-                <td>
-                    <_Tooltip Text="Delete">
-                        <img class="can-click" 
-                             src="images/trash.png" 
-                             height="25" 
-                             width="25" 
-                             @onclick="@(_ => _page.ShowConfirm(context.Id))" />
-                    </_Tooltip>
-                </td>
-            </RowTemplate>
-        </_Table>
-        <div class="row">
-            <div class="col-md-12" style="text-align: center">
-                <div class="col-md-12" style="text-align: center">
-                    <a href="SportLeagueLevels/Edit">Add @_viewModel.ItemTitle</a>
-                </div>
-            </div>
-        </div>
-        <br />
+        <DivPad2>
+            <Content>
+                <MudTable Bordered="false"
+                          Dense="false" 
+                          Filter="new Func<SportLeagueLevelViewModel,bool>(FilterFunc1)"
+                          Hover="true"
+                          Items="@_viewModel.SportLeagueLevels"    
+                          Striped="true">
+                    <ToolBarContent>
+                        <MudText Typo="Typo.h6">@_viewModel.PageTitle</MudText>
+                        <MudSpacer />
+                        <MudTextField @bind-Value="_search"
+                                      Adornment="Adornment.Start"
+                                      AdornmentIcon="@Icons.Material.Filled.Search"
+                                      Class="mt-0"
+                                      IconSize="MudBlazor.Size.Medium"
+                                      Placeholder="Search" />
+                    </ToolBarContent>
+                    <HeaderContent>
+                        <MudTh>Sport</MudTh>
+                        <MudTh>Level</MudTh>
+                        <MudTh>Name</MudTh>
+                        <MudTh>Abbreviation</MudTh>
+                        <MudTh></MudTh>
+                    </HeaderContent>
+                    <RowTemplate>
+                        <MudTd DataLabel="Sport">@context.SportName</MudTd>
+                        <MudTd DataLabel="Level">@context.LevelTypeName</MudTd>
+                        <MudTd DataLabel="Name">@context.Name</MudTd>
+                        <MudTd DataLabel="Abbreviation">@context.Abbreviation</MudTd>
+                        <MudTd DataLabel="">
+                            <GridEditButton NavigationPath="@($"{_viewModel.RoutePrefix}/Edit/{context.Id}")" />    
+                            <MudTooltip Text="Delete">
+                                <MudFab Color="MudBlazor.Color.Secondary"
+                                        Icon="@Icons.Outlined.DeleteOutline"
+                                        OnClick="@(_ => ShowDeleteConfirm(@context.Id))" />
+                            </MudTooltip>
+                        </MudTd>
+                    </RowTemplate>
+                    <PagerContent>
+                        <MudTablePager />
+                    </PagerContent>
+                </MudTable>
+            </Content>
+        </DivPad2>
     </Content>
-</_Page>
-
-@code {
-    private _Page _page;
-    private SportLeagueLevelsViewModel _viewModel;
-
-    protected async Task Delete(int id)
-    {
-        var deletedItem = _viewModel.SportLeagueLevels.Single(sportLeagueLevel => sportLeagueLevel.Id == id);
-        var viewModel = new SaveSportLeagueLevelViewModel(deletedItem);
-        viewModel.IsDeleted = true;
-
-        await _commandRouter.Send(new SaveSportLeagueLevel.Command(viewModel)).ConfigureAwait(false);
-        
-        _viewModel.SportLeagueLevels.Remove(deletedItem);
-
-        _toastService.ShowSuccess($"{_viewModel.ItemTitle} was deleted successfully!", _viewModel.PageTitle);
-    }
-
-    protected async Task OnLoad()
-    {
-        _viewModel = await _queryRouter.Send(new GetSportLeagueLevels.Query()).ConfigureAwait(false);
-    }
-}
+</PageView>

@@ -1,56 +1,56 @@
-using Blazored.Toast;
 using Demo.Framework.Web;
 using MediatR;
-using Memorabilia.Application.Features.Admin.AcquisitionType;
-using Memorabilia.Application.Features.Admin.AuthenticationCompany;
-using Memorabilia.Application.Features.Admin.BaseballType;
-using Memorabilia.Application.Features.Admin.BasketballType;
-using Memorabilia.Application.Features.Admin.BatType;
-using Memorabilia.Application.Features.Admin.Brand;
-using Memorabilia.Application.Features.Admin.Color;
-using Memorabilia.Application.Features.Admin.Commissioner;
-using Memorabilia.Application.Features.Admin.Condition;
-using Memorabilia.Application.Features.Admin.Conference;
-using Memorabilia.Application.Features.Admin.Division;
-using Memorabilia.Application.Features.Admin.FigureSpecialtyType;
-using Memorabilia.Application.Features.Admin.FigureType;
-using Memorabilia.Application.Features.Admin.FootballType;
-using Memorabilia.Application.Features.Admin.Franchise;
-using Memorabilia.Application.Features.Admin.GameStyleType;
-using Memorabilia.Application.Features.Admin.GloveType;
-using Memorabilia.Application.Features.Admin.HelmetFinish;
-using Memorabilia.Application.Features.Admin.HelmetQualityType;
-using Memorabilia.Application.Features.Admin.HelmetType;
-using Memorabilia.Application.Features.Admin.ImageType;
-using Memorabilia.Application.Features.Admin.InscriptionType;
-using Memorabilia.Application.Features.Admin.ItemType;
+using Memorabilia.Application.Features.Admin.AcquisitionTypes;
+using Memorabilia.Application.Features.Admin.AuthenticationCompanies;
+using Memorabilia.Application.Features.Admin.BaseballTypes;
+using Memorabilia.Application.Features.Admin.BasketballTypes;
+using Memorabilia.Application.Features.Admin.BatTypes;
+using Memorabilia.Application.Features.Admin.Brands;
+using Memorabilia.Application.Features.Admin.Colors;
+using Memorabilia.Application.Features.Admin.Commissioners;
+using Memorabilia.Application.Features.Admin.Conditions;
+using Memorabilia.Application.Features.Admin.Conferences;
+using Memorabilia.Application.Features.Admin.DashboardItems;
+using Memorabilia.Application.Features.Admin.Divisions;
+using Memorabilia.Application.Features.Admin.FigureSpecialtyTypes;
+using Memorabilia.Application.Features.Admin.FigureTypes;
+using Memorabilia.Application.Features.Admin.FootballTypes;
+using Memorabilia.Application.Features.Admin.Franchises;
+using Memorabilia.Application.Features.Admin.GameStyleTypes;
+using Memorabilia.Application.Features.Admin.GloveTypes;
+using Memorabilia.Application.Features.Admin.HelmetFinishes;
+using Memorabilia.Application.Features.Admin.HelmetQualityTypes;
+using Memorabilia.Application.Features.Admin.HelmetTypes;
+using Memorabilia.Application.Features.Admin.ImageTypes;
+using Memorabilia.Application.Features.Admin.InscriptionTypes;
+using Memorabilia.Application.Features.Admin.ItemTypes;
 using Memorabilia.Application.Features.Admin.ItemTypeBrand;
 using Memorabilia.Application.Features.Admin.ItemTypeGameStyle;
 using Memorabilia.Application.Features.Admin.ItemTypeLevel;
-using Memorabilia.Application.Features.Admin.ItemTypeSize;
-using Memorabilia.Application.Features.Admin.ItemTypeSport;
-using Memorabilia.Application.Features.Admin.ItemTypeSpot;
-using Memorabilia.Application.Features.Admin.JerseyQualityType;
-using Memorabilia.Application.Features.Admin.JerseyStyleType;
-using Memorabilia.Application.Features.Admin.JerseyType;
-using Memorabilia.Application.Features.Admin.League;
-using Memorabilia.Application.Features.Admin.LevelType;
-using Memorabilia.Application.Features.Admin.MagazineType;
-using Memorabilia.Application.Features.Admin.Occupation;
-using Memorabilia.Application.Features.Admin.Orientation;
-using Memorabilia.Application.Features.Admin.Person;
-using Memorabilia.Application.Features.Admin.Pewter;
-using Memorabilia.Application.Features.Admin.PhotoType;
-using Memorabilia.Application.Features.Admin.PrivacyType;
-using Memorabilia.Application.Features.Admin.PurchaseType;
-using Memorabilia.Application.Features.Admin.Size;
-using Memorabilia.Application.Features.Admin.Sport;
+using Memorabilia.Application.Features.Admin.ItemTypeSizes;
+using Memorabilia.Application.Features.Admin.ItemTypeSports;
+using Memorabilia.Application.Features.Admin.ItemTypeSpots;
+using Memorabilia.Application.Features.Admin.JerseyQualityTypes;
+using Memorabilia.Application.Features.Admin.JerseyStyleTypes;
+using Memorabilia.Application.Features.Admin.JerseyTypes;
+using Memorabilia.Application.Features.Admin.Leagues;
+using Memorabilia.Application.Features.Admin.LevelTypes;
+using Memorabilia.Application.Features.Admin.MagazineTypes;
+using Memorabilia.Application.Features.Admin.Occupations;
+using Memorabilia.Application.Features.Admin.Orientations;
+using Memorabilia.Application.Features.Admin.People;
+using Memorabilia.Application.Features.Admin.Pewters;
+using Memorabilia.Application.Features.Admin.PhotoTypes;
+using Memorabilia.Application.Features.Admin.PrivacyTypes;
+using Memorabilia.Application.Features.Admin.PurchaseTypes;
+using Memorabilia.Application.Features.Admin.Sizes;
+using Memorabilia.Application.Features.Admin.Sports;
 using Memorabilia.Application.Features.Admin.SportLeagueLevel;
-using Memorabilia.Application.Features.Admin.Spot;
-using Memorabilia.Application.Features.Admin.Team;
-using Memorabilia.Application.Features.Admin.WritingInstrument;
+using Memorabilia.Application.Features.Admin.Spots;
+using Memorabilia.Application.Features.Admin.Teams;
+using Memorabilia.Application.Features.Admin.WritingInstruments;
 using Memorabilia.Application.Features.Autograph;
-using Memorabilia.Application.Features.Autograph.Inscription;
+using Memorabilia.Application.Features.Autograph.Inscriptions;
 using Memorabilia.Application.Features.Memorabilia;
 using Memorabilia.Application.Features.Memorabilia.Baseball;
 using Memorabilia.Application.Features.Memorabilia.Basketball;
@@ -72,10 +72,12 @@ using Memorabilia.Application.Features.Memorabilia.Pylon;
 using Memorabilia.Application.Features.Memorabilia.Shoe;
 using Memorabilia.Application.Features.Memorabilia.Soccerball;
 using Memorabilia.Application.Features.Memorabilia.Ticket;
+using Memorabilia.Application.Features.Services.Dashboard;
 using Memorabilia.Application.Features.User;
+using Memorabilia.Application.Features.User.Dashboard;
 using Memorabilia.Application.Features.User.Register;
-using Memorabilia.Domain;
 using Memorabilia.Repository;
+using Memorabilia.Repository.Interfaces;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.Hosting;
@@ -83,7 +85,9 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using MudBlazor.Services;
 using System;
+using MudBlazor;
 
 namespace Memorabilia.Web
 {
@@ -106,12 +110,25 @@ namespace Memorabilia.Web
 
             services.AddRazorPages();
             services.AddServerSideBlazor();
-            services.AddBlazoredToast();
             services.AddDbContext<Context>(options => options.UseSqlServer("name=ConnectionStrings:Memorabilia"), ServiceLifetime.Transient);
             services.AddTransient<IContext, Context>();
+            services.AddDbContext<DomainContext>(options => options.UseSqlServer("name=ConnectionStrings:Memorabilia"), ServiceLifetime.Transient);
+            services.AddTransient<IDomainContext, DomainContext>();
             services.AddTransient<CommandRouter>();
             services.AddTransient<QueryRouter>();
             services.AddMediatR();
+
+            services.AddMudServices(config =>
+            {
+                config.SnackbarConfiguration.PositionClass = Defaults.Classes.Position.BottomRight;
+                config.SnackbarConfiguration.PreventDuplicates = false;
+                config.SnackbarConfiguration.NewestOnTop = false;
+                config.SnackbarConfiguration.ShowCloseIcon = true;
+                config.SnackbarConfiguration.VisibleStateDuration = 10000;
+                config.SnackbarConfiguration.HideTransitionDuration = 500;
+                config.SnackbarConfiguration.ShowTransitionDuration = 500;
+                config.SnackbarConfiguration.SnackbarVariant = Variant.Filled;
+            });
 
             services.AddTransient<IAcquisitionTypeRepository, AcquisitionTypeRepository>();
             services.AddTransient<IAuthenticationCompanyRepository, AuthenticationCompanyRepository>();            
@@ -124,6 +141,7 @@ namespace Memorabilia.Web
             services.AddTransient<ICommissionerRepository, CommissionerRepository>();
             services.AddTransient<IConditionRepository, ConditionRepository>();
             services.AddTransient<IConferenceRepository, ConferenceRepository>();
+            services.AddTransient<IDashboardItemRepository, DashboardItemRepository>();
             services.AddTransient<IDivisionRepository, DivisionRepository>();
             services.AddTransient<IFigureSpecialtyTypeRepository, FigureSpecialtyTypeRepository>();
             services.AddTransient<IFigureTypeRepository, FigureTypeRepository>();
@@ -189,7 +207,9 @@ namespace Memorabilia.Web
             services.AddTransient<IUserRepository, UserRepository>();
             services.AddTransient<IWritingInstrumentRepository, WritingInstrumentRepository>();
 
-            services.AddTransient<AddUser>();
+            services.AddTransient<IDashboardItemFactory, DashboardItemFactory>();
+
+            services.AddTransient<AddUser>();            
 
             services.AddTransient<GetAcquisitionType>();
             services.AddTransient<GetAcquisitionTypes>();
@@ -218,6 +238,8 @@ namespace Memorabilia.Web
             services.AddTransient<GetConference>();
             services.AddTransient<GetConferences>();
             services.AddTransient<GetConditions>();
+            services.AddTransient<GetDashboardItem>();
+            services.AddTransient<GetDashboardItems>();
             services.AddTransient<GetDivision>();
             services.AddTransient<GetDivisions>();
             services.AddTransient<GetFigure>();
@@ -279,6 +301,7 @@ namespace Memorabilia.Web
             services.AddTransient<GetMagazineTypes>();
             services.AddTransient<GetMemorabiliaItem>();
             services.AddTransient<GetMemorabiliaItems>();
+            services.AddTransient<GetDashboard>();
             services.AddTransient<GetOccupation>();
             services.AddTransient<GetOccupations>();
             services.AddTransient<GetOrientation>();
@@ -315,7 +338,7 @@ namespace Memorabilia.Web
             services.AddTransient<GetWritingInstrument>();
             services.AddTransient<GetWritingInstruments>();
             services.AddTransient<GetUser>();
-            
+            services.AddTransient<GetUserDashboardItems>();            
             services.AddTransient<SaveAcquisitionType>();
             services.AddTransient<SaveAuthenticationCompany>();            
             services.AddTransient<SaveAutograph>();
@@ -332,6 +355,7 @@ namespace Memorabilia.Web
             services.AddTransient<SaveCommissioner>();
             services.AddTransient<SaveCondition>();
             services.AddTransient<SaveConference>();
+            services.AddTransient<SaveDashboardItem>();
             services.AddTransient<SaveDivision>();
             services.AddTransient<SaveFigure>();
             services.AddTransient<SaveFigureSpecialtyType>();
@@ -385,10 +409,11 @@ namespace Memorabilia.Web
             services.AddTransient<SaveSize>();
             services.AddTransient<SaveSoccerball>();
             services.AddTransient<SaveSport>();
-            services.AddTransient<Application.Features.Admin.Spot.SaveSpot>();
+            services.AddTransient<SaveSpot>();
             services.AddTransient<SaveTeam>();
             services.AddTransient<SaveTicket>();
             services.AddTransient<SaveWritingInstrument>();
+            services.AddTransient<SaveUserDashboard>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

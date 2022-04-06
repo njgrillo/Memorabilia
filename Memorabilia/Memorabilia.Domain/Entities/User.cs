@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Memorabilia.Domain.Entities
 {
@@ -22,6 +24,8 @@ namespace Memorabilia.Domain.Entities
 
         public DateTime CreateDate { get; private set; }
 
+        public virtual List<UserDashboard> DashboardItems { get; private set; }
+
         public string EmailAddress { get; private set; }
 
         public string FirstName { get; private set; }
@@ -36,7 +40,18 @@ namespace Memorabilia.Domain.Entities
 
         public DateTime? UpdateDate { get; private set; }
 
-        public string Username { get; private set; }        
+        public string Username { get; private set; }
+
+        public void SetDashboardItems(params int[] dashboardItemsIds)
+        {
+            if (dashboardItemsIds == null || !dashboardItemsIds.Any())
+                DashboardItems = new List<UserDashboard>();
+
+            DashboardItems.RemoveAll(dashboardItemsId => !dashboardItemsIds.Contains(dashboardItemsId.DashboardItemId));
+            DashboardItems.AddRange(dashboardItemsIds.Where(dashboardItemsId => !DashboardItems.Select(dashboardItemId => dashboardItemId.DashboardItemId)
+                                                                                               .Contains(dashboardItemsId))
+                                                     .Select(dashboardItemsId => new UserDashboard(Id, dashboardItemsId)));
+        }
 
         public void SetUser(string password, string emailAddress, string firstName, string lastName, string phone)
         {

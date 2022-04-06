@@ -1,5 +1,5 @@
 ﻿using Demo.Framework.Handler;
-using Memorabilia.Domain;
+using Memorabilia.Repository.Interfaces;
 using System.Threading.Tasks;
 
 namespace Memorabilia.Application.Features.Admin.SportLeagueLevel
@@ -17,11 +17,7 @@ namespace Memorabilia.Application.Features.Admin.SportLeagueLevel
 
             protected override async Task<SportLeagueLevelsViewModel> Handle(Query query)
             {
-                var sportLeagueLevels = await _sportLeagueLevelRepository.GetAll().ConfigureAwait(false);
-
-                var viewModel = new SportLeagueLevelsViewModel(sportLeagueLevels);
-
-                return viewModel;
+                return new SportLeagueLevelsViewModel(await _sportLeagueLevelRepository.GetAll().ConfigureAwait(false));
             }
         }
 

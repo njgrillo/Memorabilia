@@ -34,7 +34,7 @@ namespace Memorabilia.Application.Features.Admin
 
         public string Abbreviation { get; set; }
 
-        public string DomainTypeName { get; set; }
+        public string DomainTypeName { get; set; }        
 
         public string ImagePath { get; set; }        
 
@@ -45,6 +45,8 @@ namespace Memorabilia.Application.Features.Admin
 
         public string NavigationPath { get; set; }
 
-        public override string PageTitle => $"{(Id > 0 ? "Edit" : "Add")} {DomainTypeName}";
+        public virtual string PageFooterNavigationPath => NavigationPath;
+
+        public override string PageTitle => $"{(EditModeType == Domain.Constants.EditModeType.Update ? "Edit" : "Add")} {DomainTypeName}";
     }
 }

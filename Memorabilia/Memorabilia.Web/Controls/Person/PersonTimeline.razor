@@ -1,0 +1,40 @@
+﻿<Timeline>
+    <Content>
+        <MudTimelineItem Color="@PersonEditColor" 
+                         Variant="Variant.Filled">
+            <ItemContent>
+                <MudAlert style="@(GetMudAlertStyle(PersonStep.Person))"
+                          Class="@_mudAlertClass" 
+                          OnClick="@(_ => Navigate())"
+                          Severity="@PersonEditAlertSeverity">@PersonEditAlertTitle</MudAlert>
+            </ItemContent>
+        </MudTimelineItem>
+        <MudTimelineItem Color="@PersonOccupationEditColor" 
+                         Variant="Variant.Filled">
+            <ItemContent>
+                <MudAlert style="@(GetMudAlertStyle(PersonStep.Occupation))"
+                          Class="@_mudAlertClass" 
+                          OnClick="@(_ => Navigate("Occupation"))"
+                          Severity="@PersonOccupationEditAlertSeverity">@PersonOccupationEditAlertTitle</MudAlert>
+            </ItemContent>
+        </MudTimelineItem>
+        <MudTimelineItem Color="@PersonTeamEditColor" 
+                         Variant="Variant.Filled">
+            <ItemContent>
+                <MudAlert style="@(GetMudAlertStyle(PersonStep.Team))"
+                          Class="@_mudAlertClass" 
+                          OnClick="@(_ => Navigate("Team"))"
+                          Severity="@PersonTeamEditAlertSeverity">@PersonTeamEditAlertTitle</MudAlert>
+            </ItemContent>
+        </MudTimelineItem>
+        <MudTimelineItem Color="@PersonHallOfFameEditColor" 
+                         Variant="Variant.Filled">
+            <ItemContent>
+                <MudAlert style="@(GetMudAlertStyle(PersonStep.HallOfFame))"
+                          Class="@_mudAlertClass" 
+                          OnClick="@(_ => Navigate("HallOfFame"))"
+                          Severity="@PersonHallOfFameEditAlertSeverity">@PersonHallOfFameEditAlertTitle</MudAlert>
+            </ItemContent>
+        </MudTimelineItem>
+    </Content>
+</Timeline>

@@ -1,5 +1,5 @@
-﻿using Memorabilia.Application.Features.Admin.Person;
-using Memorabilia.Application.Features.Admin.Team;
+﻿using Memorabilia.Application.Features.Admin.People;
+using Memorabilia.Application.Features.Admin.Teams;
 using Memorabilia.Domain.Constants;
 using System;
 using System.Collections.Generic;
@@ -8,7 +8,7 @@ using System.Linq;
 
 namespace Memorabilia.Application.Features.Memorabilia.FirstDayCover
 {
-    public class SaveFirstDayCoverViewModel : SaveViewModel
+    public class SaveFirstDayCoverViewModel : SaveItemViewModel
     {
         public SaveFirstDayCoverViewModel() { }
 
@@ -21,20 +21,21 @@ namespace Memorabilia.Application.Features.Memorabilia.FirstDayCover
             Teams = viewModel.Teams.Select(team => new SaveTeamViewModel(new TeamViewModel(team.Team))).ToList();
         }
 
+        public override string BackNavigationPath => $"Memorabilia/Edit/{MemorabiliaId}";
+
+        public override EditModeType EditModeType => MemorabiliaId > 0 ? EditModeType.Update : EditModeType.Add;
+
+        public override string ExitNavigationPath => "Memorabilia/Items";
+
         public bool HasPerson => People.Any();
 
         public bool HasSport => SportIds.Any();
 
         public bool HasTeam => Teams.Any();
 
-        public string ImagePath => string.Empty;
+        public override string ImagePath => "images/firstdaycover.jpg";
 
-        public ItemType ItemType => ItemType.FirstDayCover;
-
-        [Required]
-        public int MemorabiliaId { get; set; }
-
-        public override string PageTitle => $"{(MemorabiliaId > 0 ? "Edit" : "Add")} {ItemType.FirstDayCover.Name} Details";
+        public override ItemType ItemType => ItemType.FirstDayCover;
 
         public List<SavePersonViewModel> People { get; set; } = new();
 

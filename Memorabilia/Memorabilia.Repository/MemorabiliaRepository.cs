@@ -1,4 +1,4 @@
-﻿using Memorabilia.Domain;
+﻿using Memorabilia.Repository.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,6 +27,7 @@ namespace Memorabilia.Repository
                                                                                .Include(memorabilia => memorabilia.Baseball)
                                                                                .Include(memorabilia => memorabilia.Basketball)
                                                                                .Include(memorabilia => memorabilia.Bat)
+                                                                               .Include(memorabilia => memorabilia.Book)
                                                                                .Include(memorabilia => memorabilia.Brand)
                                                                                .Include(memorabilia => memorabilia.Canvas)
                                                                                .Include(memorabilia => memorabilia.Card)

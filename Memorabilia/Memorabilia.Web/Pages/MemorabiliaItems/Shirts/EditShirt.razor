@@ -1,0 +1,73 @@
+﻿@page "/Memorabilia/Shirt/Edit/{memorabiliaId:int}"
+
+@using Memorabilia.Application.Features.Admin.ItemTypeBrand
+@using Memorabilia.Application.Features.Admin.People
+@using Memorabilia.Application.Features.Admin.Teams
+@using Memorabilia.Application.Features.Memorabilia
+@using Memorabilia.Application.Features.Memorabilia.Shirt
+@using Memorabilia.Web.Controls.DropDowns
+@using Memorabilia.Web.Controls.MemorabiliaItem
+@using Memorabilia.Web.Controls.Person
+@using Memorabilia.Web.Controls.Team
+
+<EditPage ContinueNavigationPath="@_viewModel.ContinueNavigationPath"
+          EditMode="_viewModel.EditModeType"
+          ExitNavigationPath="@_viewModel.ExitNavigationPath"
+          ImagePath="@_viewModel.ImagePath"
+          ItemName="@_viewModel.ItemType.Name"
+          Model="_viewModel"
+          OnLoad="OnLoad"
+          OnSave="OnSave"
+          PageFooterButtonText="@_viewModel.ExitButtonText"
+          PageFooterNavigationPath="@_viewModel.BackNavigationPath"
+          PageTitle="@_viewModel.PageTitle"
+          TItem="SaveShirtViewModel"
+          UseMultipleButtons="true">
+    <TimelineContent>
+        <MemorabiliaItemTimeline EditMode="_viewModel.EditModeType"
+                                 ItemTypeName="@_viewModel.ItemType.Name"
+                                 MemorabiliaId="_viewModel.MemorabiliaId"
+                                 MemorabiliaItemStep="_viewModel.MemorabiliaItemStep" />
+    </TimelineContent>
+    <Content>
+        <DivRowCol3>
+            <Content>
+                <ItemTypeBrandDropDown @bind-Value="@_viewModel.BrandId" 
+                                       @bind-Value:event="ValueChanged"
+                                       ItemType="_viewModel.ItemType"
+                                       SelectedValue="_viewModel.BrandId" />
+            </Content>
+            <ContentColumn2>
+                <ItemTypeGameStyleDropDown @bind-Value="@_viewModel.GameStyleTypeId"
+                                           @bind-Value:event="ValueChanged"
+                                           ItemType="_viewModel.ItemType"
+                                           SelectedValue="_viewModel.GameStyleTypeId" /> 
+            </ContentColumn2>
+        </DivRowCol3>
+        <DivRowCol3>
+            <Content>
+                <ItemTypeSizeDropDown @bind-Value="@_viewModel.SizeId"
+                                      @bind-Value:event="ValueChanged" 
+                                      ItemType="_viewModel.ItemType"
+                                      SelectedValue="@_viewModel.SizeId" /> 
+            </Content>
+        </DivRowCol3>
+        <DivRowCol3>
+            <Content>
+                <ItemTypeLevelDropDown @bind-Value="@_viewModel.LevelTypeId"
+                                       @bind-Value:event="ValueChanged" 
+                                       ItemType="_viewModel.ItemType"
+                                       SelectedValue="_viewModel.LevelTypeId" /> 
+            </Content>
+        </DivRowCol3>
+        <PersonSelector CanFilterBySport="true"
+                        CanToggle="true"
+                        ItemType="_viewModel.ItemType"
+                        SelectedPerson="_viewModel.Person"
+                        SelectedPersonChanged="SelectedPersonChanged" />                 
+        <TeamSelector CanToggle="true" 
+                      ItemType="_viewModel.ItemType"
+                      SelectedTeam="_viewModel.Team"
+                      SelectedTeamChanged="SelectedTeamChanged" />
+    </Content>
+</EditPage>

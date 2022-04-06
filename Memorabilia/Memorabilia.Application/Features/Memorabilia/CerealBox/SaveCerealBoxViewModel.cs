@@ -1,5 +1,5 @@
-﻿using Memorabilia.Application.Features.Admin.Person;
-using Memorabilia.Application.Features.Admin.Team;
+﻿using Memorabilia.Application.Features.Admin.People;
+using Memorabilia.Application.Features.Admin.Teams;
 using Memorabilia.Domain.Constants;
 using System;
 using System.Collections.Generic;
@@ -8,7 +8,7 @@ using System.Linq;
 
 namespace Memorabilia.Application.Features.Memorabilia.CerealBox
 {
-    public class SaveCerealBoxViewModel : SaveViewModel
+    public class SaveCerealBoxViewModel : SaveItemViewModel
     {
         public SaveCerealBoxViewModel() { }
 
@@ -21,41 +21,31 @@ namespace Memorabilia.Application.Features.Memorabilia.CerealBox
             Teams = viewModel.Teams.Select(team => new SaveTeamViewModel(new TeamViewModel(team.Team))).ToList();
         }
 
+        public override string BackNavigationPath => $"Memorabilia/Edit/{MemorabiliaId}";
+
         public Brand Brand => Brand.Find(BrandId);
 
         [Required]
         [Range(1, int.MaxValue, ErrorMessage = "Brand is required.")]
         public int BrandId { get; set; }
 
+        public override EditModeType EditModeType => MemorabiliaId > 0 ? EditModeType.Update : EditModeType.Add;
+
+        public override string ExitNavigationPath => "Memorabilia/Items";
+
         public bool HasPerson => People.Any();
 
         public bool HasTeam => Teams.Any();
 
-        public string ImagePath
-        {
-            get
-            {
-                var path = "images/";
+        public override string ImagePath => "images/cerealbox.jpg";
 
-                //if (DisplayCerealBoxType && CerealBoxType != null)
-                //{
-                //    return $"{path}{CerealBoxType.Name.Replace(" ", "")}.jpg";
-                //}
-
-                return $"{path}CerealBox.jpg";
-            }
-        }
-
-        public ItemType ItemType => ItemType.CerealBox;
+        public override ItemType ItemType => ItemType.CerealBox;
 
         [Required]
         [Range(1, int.MaxValue, ErrorMessage = "Level is required.")]
         public int LevelTypeId { get; set; }
 
-        [Required]
-        public int MemorabiliaId { get; set; }
-
-        public override string PageTitle => $"{(MemorabiliaId > 0 ? "Edit" : "Add")} {ItemType.CerealBox.Name} Details";
+        public override string PageTitle => $"{(EditModeType == EditModeType.Update ? "Edit" : "Add")} {ItemType.CerealBox.Name} Details";
 
         public List<SavePersonViewModel> People { get; set; } = new();
 

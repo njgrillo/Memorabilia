@@ -1,86 +1,54 @@
 ﻿@page "/ItemTypeSpots"
 
-@using Memorabilia.Application.Features.Admin
-@using Memorabilia.Application.Features.Admin.ItemTypeSpot
+@using Memorabilia.Application.Features.Admin.ItemTypeSpots
 
-@inject CommandRouter _commandRouter
-@inject NavigationManager _navigation
-@inject QueryRouter _queryRouter
-@inject IToastService _toastService
-
-<_Page @ref="_page" 
-       ConfirmationTitle="Delete Item Type Spot" 
-       OnConfirm="Delete" 
-       OnLoad="OnLoad">
+<PageView AddRoute="@_viewModel.AddRoute" 
+          AddTitle="@_viewModel.AddTitle"
+          DisplayPageHeader="false"
+          NavigationPath="@_viewModel.ExitNavigationPath"
+          OnLoad="OnLoad"
+          PageTitle="@_viewModel.PageTitle">
     <Content>
-        <div class="row">
-            <div class="col-md-12" style="text-align: center">
-                <h1>@_viewModel.PageTitle</h1>
-            </div>
-        </div>
-        <br />
-        <_Table Items="_viewModel.ItemTypeSpots" 
-                ItemsPerPage="10"                     
-                TItem="ItemTypeSpotViewModel">
-            <HeaderTemplate>
-                <th scope="col">Item Type</th>
-                <th scope="col">Spot</th>
-                <th scope="col"></th>
-                <th scope="col"></th>
-            </HeaderTemplate>
-            <RowTemplate>
-                <td>@context.ItemTypeName</td>
-                <td>@context.SpotName</td>
-                <td>
-                    <_Tooltip Text="Edit">
-                        <img class="can-click" 
-                                src="images/pencil.png" 
-                                height="25" 
-                                width="25" 
-                                @onclick="@(_ => _navigation.NavigateTo($"{_viewModel.RoutePrefix}/Edit/{context.Id}"))" />
-                    </_Tooltip>                        
-                </td>
-                <td>
-                    <_Tooltip Text="Delete">
-                        <img class="can-click" 
-                                src="images/trash.png" 
-                                height="25" 
-                                width="25" 
-                                @onclick="@(_ => _page.ShowConfirm(context.Id))" />
-                    </_Tooltip>
-                </td>
-            </RowTemplate>
-        </_Table>
-        <div class="row">
-            <div class="col-md-12" style="text-align: center">
-                <div class="col-md-12" style="text-align: center">
-                    <a href="ItemTypeSpots/Edit">Add @_viewModel.ItemTitle</a>
-                </div>
-            </div>
-        </div>
-        <br />
+        <DivPad2>
+            <Content>
+                <MudTable Bordered="false"
+                          Dense="false" 
+                          Filter="new Func<ItemTypeSpotViewModel,bool>(FilterFunc1)"
+                          Hover="true"
+                          Items="@_viewModel.ItemTypeSpots"    
+                          Striped="true">
+                    <ToolBarContent>
+                        <MudText Typo="Typo.h6">@_viewModel.PageTitle</MudText>
+                        <MudSpacer />
+                        <MudTextField @bind-Value="_search"
+                                      Adornment="Adornment.Start"
+                                      AdornmentIcon="@Icons.Material.Filled.Search"
+                                      Class="mt-0"
+                                      IconSize="MudBlazor.Size.Medium"
+                                      Placeholder="Search" />
+                    </ToolBarContent>
+                    <HeaderContent>
+                        <MudTh>Item Type</MudTh>
+                        <MudTh>Spot</MudTh>
+                        <MudTh></MudTh>
+                    </HeaderContent>
+                    <RowTemplate>
+                        <MudTd DataLabel="Item Type">@context.ItemTypeName</MudTd>
+                        <MudTd DataLabel="Spot">@context.SpotName</MudTd>
+                        <MudTd DataLabel="">
+                            <GridEditButton NavigationPath="@($"{_viewModel.RoutePrefix}/Edit/{context.Id}")" />    
+                            <MudTooltip Text="Delete">
+                                <MudFab Color="MudBlazor.Color.Secondary"
+                                        Icon="@Icons.Outlined.DeleteOutline"
+                                        OnClick="@(_ => ShowDeleteConfirm(@context.Id))" />
+                            </MudTooltip>
+                        </MudTd>
+                    </RowTemplate>
+                    <PagerContent>
+                        <MudTablePager />
+                    </PagerContent>
+                </MudTable>
+            </Content>
+        </DivPad2>
     </Content>
-</_Page>
-
-@code {
-    private _Page _page;
-    private ItemTypeSpotsViewModel _viewModel;
-
-    protected async Task Delete(int id)
-    {
-        var deletedItem = _viewModel.ItemTypeSpots.Single(ItemTypeSpot => ItemTypeSpot.Id == id);
-        var viewModel = new SaveItemTypeSpotViewModel(deletedItem);
-        viewModel.IsDeleted = true;
-
-        await _commandRouter.Send(new SaveItemTypeSpot.Command(viewModel)).ConfigureAwait(false);
-        
-        _viewModel.ItemTypeSpots.Remove(deletedItem);
-
-        _toastService.ShowSuccess($"{_viewModel.ItemTitle} was deleted successfully!", _viewModel.PageTitle);
-    }
-
-    protected async Task OnLoad()
-    {
-        _viewModel = await _queryRouter.Send(new GetItemTypeSpots.Query()).ConfigureAwait(false);
-    }
-}
+</PageView>

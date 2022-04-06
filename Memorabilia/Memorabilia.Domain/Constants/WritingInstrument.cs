@@ -32,5 +32,10 @@ namespace Memorabilia.Domain.Constants
         {
             return All.SingleOrDefault(writingInstrument => writingInstrument.Id == id);
         }
+
+        public static WritingInstrument Find(string name)
+        {
+            return All.SingleOrDefault(writingInstrument => writingInstrument.Name == name);
+        }
     }
 }

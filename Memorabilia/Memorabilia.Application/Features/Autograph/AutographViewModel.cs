@@ -1,6 +1,8 @@
 ﻿using Memorabilia.Domain.Constants;
+using MudBlazor;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 
 namespace Memorabilia.Application.Features.Autograph
@@ -24,17 +26,19 @@ namespace Memorabilia.Application.Features.Autograph
 
         public int AcquisitionTypeId => Acquisition?.AcquisitionTypeId ?? 0;
 
-        public string AcquisitionTypeName => AcquisitionType.Find(Acquisition?.AcquisitionTypeId ?? 0)?.Name;
+        public string AcquisitionTypeName => AcquisitionType.Find(Acquisition?.AcquisitionTypeId ?? 0)?.Name;        
 
-        public string AuthenticationIconPath => Authentications.Any() ? "images/check.png" : "images/none.png";
+        public List<Domain.Entities.AutographAuthentication> Authentications => _autograph.Authentications;
 
-        public string AuthenticationTooltip => Authentications.Any() ? "Is Authenticated" : "No Authentications Found";
+        public string AuthenticationText => Authentications.Any() ? "Has Authentication(s)" : "No Authentication(s)";
 
-        public List<Domain.Entities.AutographAuthentication> Authentications => _autograph.Authentications;        
+        public string AuthenticationTooltip => $"{Authentications.Count} Authentication(s)";
+
+        public string AutographImagePath => $"data:image/jpg;base64,{Convert.ToBase64String(File.ReadAllBytes(PrimaryImagePath))}";
 
         public int ColorId => _autograph.ColorId;
 
-        public string ColorName => Color.Find(_autograph.ColorId)?.Name;
+        public string ColorName => Domain.Constants.Color.Find(_autograph.ColorId)?.Name;
 
         public int ConditionId => _autograph.ConditionId;
 
@@ -56,7 +60,7 @@ namespace Memorabilia.Application.Features.Autograph
 
         public bool? FullName => _autograph.FullName;   
 
-        public int? Grade => _autograph.Grade;    
+        public int? Grade => _autograph.Grade;
 
         public int Id => _autograph.Id;
 
@@ -74,15 +78,17 @@ namespace Memorabilia.Application.Features.Autograph
             }
         }
 
-        public List<Domain.Entities.AutographImage> Images => _autograph.Images;
+        public List<Domain.Entities.AutographImage> Images => _autograph.Images;        
 
-        public string InscriptionIconPath => Inscriptions.Any() ? "images/check.png" : "images/none.png";
+        public string InscriptionText => Inscriptions.Any() ? "Has Inscription(s)" : "No Inscription(s)";
 
-        public string InscriptionTooltip => Inscriptions.Any() ? "Has Inscription(s)" : "No Inscriptions Found";
+        public string InscriptionTooltip => $"{Inscriptions.Count} Inscription(s)"; 
 
         public List<Domain.Entities.Inscription> Inscriptions => _autograph.Inscriptions;
 
         public bool IsPersonalized => Personalization?.Id > 0;
+
+        public ItemType ItemType => _autograph.Memorabilia.ItemType;
 
         public int ItemTypeId => _autograph.Memorabilia.ItemTypeId;
 
@@ -96,9 +102,9 @@ namespace Memorabilia.Application.Features.Autograph
 
         public Domain.Entities.Personalization Personalization => _autograph.Personalization;
 
-        public string PersonalizationIconPath => IsPersonalized ? "images/check.png" : "images/none.png";
+        public string PersonalizationText => IsPersonalized ? "Personalized" : "Not Personalized";
 
-        public string PersonalizationTooltip => IsPersonalized ? "Is Personalized" : "Not Personalized";
+        public string PersonalizationTooltip => IsPersonalized ? _autograph.Personalization?.Text : "Not Personalized";
 
         public int PersonId => _autograph.PersonId;
 

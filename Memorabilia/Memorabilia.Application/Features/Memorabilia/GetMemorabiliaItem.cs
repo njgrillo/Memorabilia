@@ -1,5 +1,5 @@
 ﻿using Demo.Framework.Handler;
-using Memorabilia.Domain;
+using Memorabilia.Repository.Interfaces;
 using System.Threading.Tasks;
 
 namespace Memorabilia.Application.Features.Memorabilia
@@ -17,11 +17,7 @@ namespace Memorabilia.Application.Features.Memorabilia
 
             protected override async Task<MemorabiliaItemViewModel> Handle(Query query)
             {
-                var memorabilia = await _memorabiliaRepository.Get(query.Id).ConfigureAwait(false);
-
-                var viewModel = new MemorabiliaItemViewModel(memorabilia);
-
-                return viewModel;
+                return new MemorabiliaItemViewModel(await _memorabiliaRepository.Get(query.Id).ConfigureAwait(false));
             }
         }
 

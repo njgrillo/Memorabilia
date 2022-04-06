@@ -18,11 +18,17 @@ namespace Memorabilia.Application.Features.Admin.SportLeagueLevel
         [StringLength(10, ErrorMessage = "Abbreviation is too long.")]
         public string Abbreviation { get; set; }
 
+        public override string ExitNavigationPath => "SportLeagueLevels";
+
+        public string ImagePath => "images/sportleaguelevels.jpg";
+
         public override string ItemTitle => "Sport League Level";
 
         [Required]
         [Range(1, int.MaxValue, ErrorMessage = "Level Type is required.")]
         public int LevelTypeId { get; set; }
+
+        public Domain.Constants.LevelType[] LevelTypes => Domain.Constants.LevelType.All;
 
         [Required]
         [StringLength(100, ErrorMessage = "Name is too long.")]
@@ -36,5 +42,7 @@ namespace Memorabilia.Application.Features.Admin.SportLeagueLevel
         [Required]
         [Range(1, int.MaxValue, ErrorMessage = "Sport is required.")]
         public int SportId { get; set; }
+
+        public Domain.Constants.Sport[] Sports => Domain.Constants.Sport.All;
     }
 }

@@ -1,5 +1,5 @@
-﻿using Memorabilia.Application.Features.Admin.Person;
-using Memorabilia.Application.Features.Admin.Team;
+﻿using Memorabilia.Application.Features.Admin.People;
+using Memorabilia.Application.Features.Admin.Teams;
 using Memorabilia.Domain.Constants;
 using System;
 using System.ComponentModel.DataAnnotations;
@@ -7,7 +7,7 @@ using System.Linq;
 
 namespace Memorabilia.Application.Features.Memorabilia.Baseball
 {
-    public class SaveBaseballViewModel : SaveViewModel
+    public class SaveBaseballViewModel : SaveItemViewModel
     {
         public SaveBaseballViewModel() { }
 
@@ -33,12 +33,16 @@ namespace Memorabilia.Application.Features.Memorabilia.Baseball
 
         private int _gameStyleTypeId;
 
+        public override string BackNavigationPath => $"Memorabilia/Edit/{MemorabiliaId}";
+
         [StringLength(5, ErrorMessage = "Anniversary is too long.")]
         public string BaseballTypeAnniversary { get; set; }
 
         public BaseballType BaseballType => BaseballType.Find(BaseballTypeId);
 
-        public int BaseballTypeId { get; set; }        
+        public int BaseballTypeId { get; set; }
+
+        public BaseballType[] BaseballTypes { get; set; } = BaseballType.All;
 
         public int? BaseballTypeYear { get; set; }
 
@@ -60,6 +64,10 @@ namespace Memorabilia.Application.Features.Memorabilia.Baseball
 
         public bool DisplayGameDate => BaseballType.IsGameWorthly(BaseballType) && GameStyleType.IsGameWorthly(GameStyleType);
 
+        public override EditModeType EditModeType => MemorabiliaId > 0 ? EditModeType.Update : EditModeType.Add;
+
+        public override string ExitNavigationPath => "Memorabilia/Items";
+
         public DateTime? GameDate { get; set; }
 
         public GameStyleType GameStyleType => GameStyleType.Find(GameStyleTypeId);        
@@ -76,8 +84,10 @@ namespace Memorabilia.Application.Features.Memorabilia.Baseball
             {
                 _gameStyleTypeId = value;
 
+                BaseballTypes = BaseballType.GetAll(GameStyleType.Find(value));
+
                 if (GameStyleType.IsGameWorthly(GameStyleType))
-                    BaseballTypeId = Brand == Brand.Rawlings ? BaseballType.Official.Id : 0;
+                    BaseballTypeId = Brand == Brand.Rawlings ? BaseballType.Official.Id : 0;                
             }
         }
 
@@ -85,7 +95,7 @@ namespace Memorabilia.Application.Features.Memorabilia.Baseball
 
         public bool HasTeam => Team?.Id > 0;
 
-        public string ImagePath
+        public override string ImagePath
         {
             get
             {
@@ -100,16 +110,11 @@ namespace Memorabilia.Application.Features.Memorabilia.Baseball
             }
         }
 
-        public ItemType ItemType => ItemType.Baseball;
+        public override ItemType ItemType => ItemType.Baseball;
 
         [Required]
         [Range(1, int.MaxValue, ErrorMessage = "Level is required.")]
         public int LevelTypeId { get; set; }
-
-        [Required]
-        public int MemorabiliaId { get; set; }
-
-        public override string PageTitle => $"{(MemorabiliaId > 0 ? "Edit" : "Add")} {ItemType.Baseball.Name} Details";
 
         public SavePersonViewModel Person { get; set; } 
 

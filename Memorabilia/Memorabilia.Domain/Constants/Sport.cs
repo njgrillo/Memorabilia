@@ -7,16 +7,20 @@ namespace Memorabilia.Domain.Constants
         public static readonly Sport Baseball = new(1, "Baseball", string.Empty);
         public static readonly Sport Basketball = new(2, "Basketball", string.Empty);
         public static readonly Sport Football = new(3, "Football", string.Empty);
+        public static readonly Sport Golf = new(6, "Golf", string.Empty);
         public static readonly Sport Hockey = new(4, "Hockey", string.Empty);
         public static readonly Sport Soccer= new(5, "Soccer", "Futbol");
+        public static readonly Sport Tennis= new(7, "Tennis", string.Empty);
 
         public static readonly Sport[] All =
         {
             Baseball,
             Basketball,
             Football,
+            Golf,
             Hockey,
-            Soccer
+            Soccer,
+            Tennis
         };
 
         private Sport(int id, string name, string alternateName)

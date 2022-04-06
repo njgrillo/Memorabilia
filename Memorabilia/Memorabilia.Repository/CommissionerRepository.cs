@@ -1,4 +1,5 @@
-﻿using Memorabilia.Domain;
+﻿using Memorabilia.Domain.Entities;
+using Memorabilia.Repository.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,38 +8,38 @@ using System.Threading.Tasks;
 
 namespace Memorabilia.Repository
 {
-    public class CommissionerRepository : BaseRepository<Domain.Entities.Commissioner>, ICommissionerRepository
+    public class CommissionerRepository : BaseRepository<Commissioner>, ICommissionerRepository
     {
-        private readonly Context _context;
+        private readonly DomainContext _context;
 
-        public CommissionerRepository(Context context) : base(context)
+        public CommissionerRepository(DomainContext context) : base(context)
         {
             _context = context;
         }
 
-        private IQueryable<Domain.Entities.Commissioner> Commissioner => _context.Set<Domain.Entities.Commissioner>()
-                                                                                 .Include(commissioner => commissioner.Person);
+        private IQueryable<Commissioner> Commissioner => _context.Set<Commissioner>()
+                                                                 .Include(commissioner => commissioner.Person);
 
-        public async Task Add(Domain.Entities.Commissioner commissioner, CancellationToken cancellationToken = default)
+        public async Task Add(Commissioner commissioner, CancellationToken cancellationToken = default)
         {
             _context.Add(commissioner);
 
             await _context.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
         }
 
-        public async Task Delete(Domain.Entities.Commissioner commissioner, CancellationToken cancellationToken = default)
+        public async Task Delete(Commissioner commissioner, CancellationToken cancellationToken = default)
         {
-            _context.Set<Domain.Entities.Commissioner>().Remove(commissioner);
+            _context.Set<Commissioner>().Remove(commissioner);
 
             await _context.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
         }
 
-        public async Task<Domain.Entities.Commissioner> Get(int id)
+        public async Task<Commissioner> Get(int id)
         {
             return await Commissioner.SingleOrDefaultAsync(commissioner => commissioner.Id == id).ConfigureAwait(false);
         }
 
-        public async Task<IEnumerable<Domain.Entities.Commissioner>> GetAll(int? sportLeagueLevelId = null)
+        public async Task<IEnumerable<Commissioner>> GetAll(int? sportLeagueLevelId = null)
         {
             return !sportLeagueLevelId.HasValue
                 ? (await Commissioner.ToListAsync()
@@ -50,9 +51,9 @@ namespace Memorabilia.Repository
                                                             .ThenByDescending(commissioner => commissioner.BeginYear);
         }
 
-        public async Task Update(Domain.Entities.Commissioner commissioner, CancellationToken cancellationToken = default)
+        public async Task Update(Commissioner commissioner, CancellationToken cancellationToken = default)
         {
-            _context.Set<Domain.Entities.Commissioner>().Update(commissioner);
+            _context.Set<Commissioner>().Update(commissioner);
 
             await _context.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
         }

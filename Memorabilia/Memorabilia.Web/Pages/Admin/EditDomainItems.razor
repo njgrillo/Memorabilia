@@ -1,0 +1,17 @@
+﻿@page "/Admin/EditDomainItems"
+
+<Page OnLoad="OnLoad">
+    <Content>  
+        <PageHeader PageTitle="@_viewModel.Title" />
+        <div class="row">
+            <Iterations Items="_viewModel.Items" Context="item">                
+                <div class="col-md-4">
+                    <DomainItemCard Description="@item.Description"
+                                    ImagePath="@item.ImagePath"
+                                    Page="@item.Page"
+                                    Title="@item.Title" />
+                </div>  
+            </Iterations>
+        </div>
+    </Content>
+</Page>

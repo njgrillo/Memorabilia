@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Memorabilia.Application.Features.Memorabilia.Guitar
 {
-    public class GuitarViewModel
+    public class GuitarViewModel : ViewModel
     {
         private readonly Domain.Entities.Memorabilia _memorabilia;
 

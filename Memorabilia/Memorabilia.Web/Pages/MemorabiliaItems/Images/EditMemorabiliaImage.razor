@@ -1,186 +1,27 @@
 ﻿@page "/Memorabilia/Image/Edit/{memorabiliaId:int}"
 
-@using Application.Features.Image
-@using Memorabilia.Application.Features.Memorabilia
 @using Memorabilia.Application.Features.Memorabilia.Image
-@using Microsoft.AspNetCore.Hosting
-@using Microsoft.Extensions.Logging
-@using System 
-@using System.IO
+@using Memorabilia.Web.Controls.MemorabiliaItem
 
-@inject CommandRouter _commandRouter
-@inject IWebHostEnvironment _environment
-@inject ProtectedLocalStorage _localStorage
-@inject ILogger<_ImageFileSelector> _logger
-@inject NavigationManager _navigation
-@inject QueryRouter _queryRouter
-@inject IToastService _toastService
-
-<_Page OnLoad="OnLoad">
+<Page OnLoad="OnLoad">
     <Content>
-        <div class="row">
-            <div class="col-md-12" style="text-align: center">
-                <h1>@_viewModel.PageTitle</h1>
-            </div>
-        </div>
-        <br />
-        <div style="border: 1px solid black; margin-top: 2%; margin-bottom: 2%; margin-left: 2%; margin-right: 2%;">
-            <EditForm Model="_viewModel" OnValidSubmit="HandleValidSubmit">
-                <DataAnnotationsValidator />
-                <ValidationSummary />   
-                <div style="margin-top: 2%; margin-bottom: 2%; margin-left: 1%; margin-right: 1%;">
-                    <div class="col-lg-12" style="text-align: center">
-                        <img src="images/imagetypes.png" alt="Image" height="150" width="150" />
-                    </div>                
-                    <div class="form-group">
-                        <div class="row">
-                            <InputFile OnChange="@LoadFiles" accept="image/*" multiple @bind-Value="@_viewModel.Images" />
-                        </div>
-                        <div class="row">
-                            @foreach(var image in _viewModel.Images)
-                            {
-                                <_ImageEditor CanRemove="true"
-                                              HasPrimary="true"
-                                              ImageFilePath="@image.FilePath"
-                                              ImageType="image.ImageType"
-                                              IsPrimary="image.IsPrimary"
-                                              OnPrimarySet="OnPrimarySet"
-                                              OnRemove="OnRemove" />     
-                            } 
-                        </div>
-                    </div> 
-                    <div class="text-left">                    
-                        <button type="submit" class="btn btn-primary" @onclick="@(()=> _continue = true)">Save & Continue</button>
-                        <button type="submit" class="btn btn-primary">Save & Exit</button>
-                        <button type="button" class="btn btn-secondary" @onclick="@(_ => _navigation.NavigateTo($"Autographs/Edit/{MemorabiliaId}/0"))">Skip</button>
-                        <button type="button" class="btn btn-secondary" @onclick="@(_ => _navigation.NavigateTo("Memorabilia"))">Cancel</button>
-                    </div>     
-                </div>            
-            </EditForm>         
-        </div>
+        <PageHeader PageTitle="@_viewModel.PageTitle" />
+        <MemorabiliaItemTimeline EditMode="_viewModel.EditModeType" 
+                                 ItemTypeName="@_viewModel.ItemTypeName"
+                                 MemorabiliaId="_viewModel.MemorabiliaId"
+                                 MemorabiliaItemStep="_viewModel.MemorabiliaItemStep" />
+        <EditImages @ref="EditImages"              
+                    ContinueNavigationPath="@_viewModel.ContinueNavigationPath"
+                    ExitNavigationPath="@_viewModel.ExitNavigationPath"
+                    Images="@_viewModel.Images"
+                    MaximumAllowedFiles="5"
+                    MaximumFileSize="10240000"
+                    Model="_viewModel"
+                    OnLoad="OnLoad"
+                    OnSave="OnSave"
+                    PageTitle="@_viewModel.PageTitle"
+                    SaveButtonText="Save & Continue"
+                    TItem="SaveMemorabiliaImagesViewModel" />    
+        <PageFooter NavigationPath="@_viewModel.BackNavigationPath" />
     </Content>
-</_Page>
-
-@code {
-    [Parameter]
-    public int MemorabiliaId { get; set; }
-
-    private bool _continue;
-    private IReadOnlyList<IBrowserFile> _files;
-    private SaveMemorabiliaImagesViewModel _viewModel = new SaveMemorabiliaImagesViewModel();
-
-    protected void Cancel()
-    {
-        foreach(var image in _viewModel.Images.Where(image => image.IsNew))
-        {
-            if (File.Exists(image.FilePath))
-                File.Delete(image.FilePath);
-        }
-
-        _viewModel.Images = new List<SaveImageViewModel>();
-
-        _navigation.NavigateTo("Memorabilia");
-    }
-
-    protected async Task HandleValidSubmit()
-    {
-        _viewModel.MemorabiliaId = MemorabiliaId;
-
-        await _commandRouter.Send(new SaveMemorabiliaImage.Command(_viewModel)).ConfigureAwait(false);
-
-        var url = _continue ? $"Autographs/Edit/{MemorabiliaId}/-1" : "Memorabilia";
-
-        _navigation.NavigateTo(url);
-        _toastService.ShowSuccess("Memorabilia Images were saved successfully!", _viewModel.PageTitle);
-    }
-
-    protected async Task LoadFiles(InputFileChangeEventArgs e)
-    {
-        _files = e.GetMultipleFiles(5);
-
-        await Save().ConfigureAwait(false);
-    } 
-
-    protected async Task OnLoad()
-    {
-        var memorabilia = await _queryRouter.Send(new GetMemorabiliaItem.Query(MemorabiliaId)).ConfigureAwait(false);
-
-        if (!memorabilia.Images.Any())
-            return;        
-
-        _viewModel = new SaveMemorabiliaImagesViewModel(memorabilia.Images);
-    }
-
-    protected void OnPrimarySet(string filePath)
-    {
-        var image = _viewModel.Images.FirstOrDefault(i => i.FilePath == filePath);
-
-        if (image == null)
-            return;
-
-        foreach(var memorabiliaImage in _viewModel.Images)
-        {
-            if (memorabiliaImage.FilePath == image.FilePath)
-                memorabiliaImage.ImageTypeId = Domain.Constants.ImageType.Primary.Id;
-
-            if (memorabiliaImage.ImageTypeId == Domain.Constants.ImageType.Primary.Id && memorabiliaImage.FilePath != image.FilePath)
-                memorabiliaImage.ImageTypeId = Domain.Constants.ImageType.Secondary.Id;
-        }
-    }
-
-    protected void OnRemove(string filePath)
-    {
-        var image = _viewModel.Images.FirstOrDefault(i => i.FilePath == filePath);
-
-        if (image == null)
-            return;
-
-        _viewModel.Images.Remove(image);
-
-        if (!image.IsPrimary)
-            return;
-
-        var primaryImage = _viewModel.Images.FirstOrDefault();
-
-        if (primaryImage == null)
-            return;
-
-        primaryImage.ImageTypeId = Domain.Constants.ImageType.Primary.Id;       
-    }    
-
-    protected async Task Save()
-    {
-        var userId = await _localStorage.GetAsync<int>("UserId").ConfigureAwait(false);
-        var images = new List<SaveImageViewModel>();
-        var imageType = Domain.Constants.ImageType.Primary;
-
-        foreach (var file in _files)
-        {
-            try
-            {
-                var directory = Path.Combine(_environment.ContentRootPath,
-                                             "wwwroot/userimages", 
-                                             userId.Value.ToString());
-
-                if (!Directory.Exists(directory))
-                    Directory.CreateDirectory(directory);
-
-                var fileName = Path.GetRandomFileName();
-                var path = Path.Combine(directory, fileName);
-
-                await using FileStream fs = new(path, FileMode.Create);
-                await file.OpenReadStream(10240000).CopyToAsync(fs).ConfigureAwait(false);
-
-                images.Add(new SaveImageViewModel(new ImageViewModel(new Domain.Entities.Image($"wwwroot/userimages/{userId.Value}/{fileName}", imageType.Id))));
-
-                imageType = Domain.Constants.ImageType.Secondary;
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError("File: {Filename} Error: {Error}", file.Name, ex.Message);
-            }               
-        }
-
-        _viewModel.Images = images;      
-    } 
-}
+</Page>

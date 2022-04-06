@@ -1,7 +1,6 @@
 ﻿using Framework.Domain.Command;
 using Framework.Handler;
-using Memorabilia.Domain;
-using System.Linq;
+using Memorabilia.Repository.Interfaces;
 using System.Threading.Tasks;
 
 namespace Memorabilia.Application.Features.Memorabilia.JerseyNumber
@@ -21,7 +20,7 @@ namespace Memorabilia.Application.Features.Memorabilia.JerseyNumber
             {
                 var memorabilia = await _memorabiliaRepository.Get(command.MemorabiliaId).ConfigureAwait(false);
 
-                memorabilia.SetJerseyNumber(command.SportIds, command.TeamIds);
+                memorabilia.SetJerseyNumber(command.SportId, command.TeamId);
 
                 await _memorabiliaRepository.Update(memorabilia).ConfigureAwait(false);
             }
@@ -38,9 +37,9 @@ namespace Memorabilia.Application.Features.Memorabilia.JerseyNumber
 
             public int MemorabiliaId => _viewModel.MemorabiliaId;
 
-            public int[] SportIds => _viewModel.SportIds.ToArray();
+            public int? SportId => _viewModel.Sport?.Id > 0 ? _viewModel.Sport?.Id : null;
 
-            public int[] TeamIds => _viewModel.Teams.Select(team => team.Id).ToArray();
+            public int? TeamId => _viewModel.Team?.Id > 0 ? _viewModel.Team?.Id : null;
         }
     }
 }

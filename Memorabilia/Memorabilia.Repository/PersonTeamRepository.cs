@@ -1,4 +1,5 @@
-﻿using Memorabilia.Domain;
+﻿using Memorabilia.Domain.Entities;
+using Memorabilia.Repository.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,38 +8,38 @@ using System.Threading.Tasks;
 
 namespace Memorabilia.Repository
 {
-    public class PersonTeamRepository : BaseRepository<Domain.Entities.PersonTeam>, IPersonTeamRepository
+    public class PersonTeamRepository : BaseRepository<PersonTeam>, IPersonTeamRepository
     {
-        private readonly Context _context;
+        private readonly DomainContext _context;
 
-        public PersonTeamRepository(Context context) : base(context)
+        public PersonTeamRepository(DomainContext context) : base(context)
         {
             _context = context;
         }
 
-        private IQueryable<Domain.Entities.PersonTeam> PersonTeam => _context.Set<Domain.Entities.PersonTeam>()
-                                                                             .Include(personTeam => personTeam.Team);
+        private IQueryable<PersonTeam> PersonTeam => _context.Set<PersonTeam>()
+                                                             .Include(personTeam => personTeam.Team);
 
-        public async Task Add(Domain.Entities.PersonTeam personTeam, CancellationToken cancellationToken = default)
+        public async Task Add(PersonTeam personTeam, CancellationToken cancellationToken = default)
         {
             _context.Add(personTeam);
 
             await _context.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
         }
 
-        public async Task Delete(Domain.Entities.PersonTeam personTeam, CancellationToken cancellationToken = default)
+        public async Task Delete(PersonTeam personTeam, CancellationToken cancellationToken = default)
         {
-            _context.Set<Domain.Entities.PersonTeam>().Remove(personTeam);
+            _context.Set<PersonTeam>().Remove(personTeam);
 
             await _context.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
         }
 
-        public async Task<Domain.Entities.PersonTeam> Get(int id)
+        public async Task<PersonTeam> Get(int id)
         {
             return await PersonTeam.SingleOrDefaultAsync(personTeam => personTeam.Id == id).ConfigureAwait(false);
         }
 
-        public async Task<IEnumerable<Domain.Entities.PersonTeam>> GetAll(int? personId = null)
+        public async Task<IEnumerable<PersonTeam>> GetAll(int? personId = null)
         {
             return personId.HasValue
                 ? (await PersonTeam.Where(personTeam => personTeam.PersonId == personId)
@@ -48,9 +49,9 @@ namespace Memorabilia.Repository
                                          .ConfigureAwait(false)).OrderBy(personTeam => personTeam.Team.Name);
         }
 
-        public async Task Update(Domain.Entities.PersonTeam personTeam, CancellationToken cancellationToken = default)
+        public async Task Update(PersonTeam personTeam, CancellationToken cancellationToken = default)
         {
-            _context.Set<Domain.Entities.PersonTeam>().Update(personTeam);
+            _context.Set<PersonTeam>().Update(personTeam);
 
             await _context.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
         }

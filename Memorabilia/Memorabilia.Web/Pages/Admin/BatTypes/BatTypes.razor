@@ -1,25 +1,5 @@
 ﻿@page "/BatTypes"
 
-@using Memorabilia.Application.Features.Admin
-@using Memorabilia.Application.Features.Admin.BatType
-
-@inject CommandRouter _commandRouter
-@inject QueryRouter _queryRouter
-
-<_DomainItems DomainItems="_viewModel"
-              OnDelete="OnDelete"
-              OnLoad="OnLoad" />
-
-@code {
-    private BatTypesViewModel _viewModel;
-
-    protected async Task OnDelete(SaveDomainViewModel viewModel)
-    {
-        await _commandRouter.Send(new SaveBatType.Command(viewModel)).ConfigureAwait(false);
-    }
-
-    protected async Task OnLoad()
-    {
-        _viewModel = await _queryRouter.Send(new GetBatTypes.Query()).ConfigureAwait(false);
-    }
-}
+<DomainItems Items="_viewModel"
+             OnDelete="OnDelete"
+             OnLoad="OnLoad" />

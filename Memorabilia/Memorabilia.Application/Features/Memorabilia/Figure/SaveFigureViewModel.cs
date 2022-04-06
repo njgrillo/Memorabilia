@@ -1,5 +1,5 @@
-﻿using Memorabilia.Application.Features.Admin.Person;
-using Memorabilia.Application.Features.Admin.Team;
+﻿using Memorabilia.Application.Features.Admin.People;
+using Memorabilia.Application.Features.Admin.Teams;
 using Memorabilia.Domain.Constants;
 using System;
 using System.Collections.Generic;
@@ -8,7 +8,7 @@ using System.Linq;
 
 namespace Memorabilia.Application.Features.Memorabilia.Figure
 {
-    public class SaveFigureViewModel : SaveViewModel
+    public class SaveFigureViewModel : SaveItemViewModel
     {
         public SaveFigureViewModel() { }
 
@@ -26,13 +26,21 @@ namespace Memorabilia.Application.Features.Memorabilia.Figure
             Year = viewModel.Figure?.Year;
         }
 
+        public override string BackNavigationPath => $"Memorabilia/Edit/{MemorabiliaId}";
+
         [Required]
         [Range(1, int.MaxValue, ErrorMessage = "Brand is required.")]
         public int BrandId { get; set; }
 
+        public override EditModeType EditModeType => MemorabiliaId > 0 ? EditModeType.Update : EditModeType.Add;
+
+        public override string ExitNavigationPath => "Memorabilia/Items";
+
         public int FigureSpecialtyTypeId { get; set; }
 
         public int FigureTypeId { get; set; }
+
+        public FigureType[] FigureTypes => FigureType.All;
 
         public bool HasPerson => People.Any();
 
@@ -40,18 +48,13 @@ namespace Memorabilia.Application.Features.Memorabilia.Figure
 
         public bool HasTeam => Teams.Any();
 
-        public string ImagePath => string.Empty;
+        public override string ImagePath => "images/figure.jpg";
 
-        public ItemType ItemType => ItemType.Figure;
+        public override ItemType ItemType => ItemType.Figure;
 
         [Required]
         [Range(1, int.MaxValue, ErrorMessage = "Level is required.")]
         public int LevelTypeId { get; set; }
-
-        [Required]
-        public int MemorabiliaId { get; set; }
-
-        public override string PageTitle => $"{(MemorabiliaId > 0 ? "Edit" : "Add")} {ItemType.Figure.Name} Details";
 
         public List<SavePersonViewModel> People { get; set; } = new();
 

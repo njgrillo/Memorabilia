@@ -1,13 +1,12 @@
-﻿using Memorabilia.Application.Features.Admin.Person;
-using Memorabilia.Application.Features.Admin.Team;
+﻿using Memorabilia.Application.Features.Admin.People;
+using Memorabilia.Application.Features.Admin.Teams;
 using Memorabilia.Domain.Constants;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Linq;
 
 namespace Memorabilia.Application.Features.Memorabilia.Book
 {
-    public class SaveBookViewModel : SaveViewModel
+    public class SaveBookViewModel : SaveItemViewModel
     {
         public SaveBookViewModel() { }
 
@@ -23,7 +22,13 @@ namespace Memorabilia.Application.Features.Memorabilia.Book
             Title = viewModel.Book?.Title;
         }
 
+        public override string BackNavigationPath => $"Memorabilia/Edit/{MemorabiliaId}";
+
         public string Edition { get; set; }
+
+        public override EditModeType EditModeType => MemorabiliaId > 0 ? EditModeType.Update : EditModeType.Add;
+
+        public override string ExitNavigationPath => "Memorabilia/Items";
 
         public bool HardCover { get; set; }
         
@@ -33,14 +38,9 @@ namespace Memorabilia.Application.Features.Memorabilia.Book
 
         public bool HasTeam => Teams.Any();
 
-        public string ImagePath => string.Empty;
+        public override string ImagePath => "images/book.jpg";
 
-        public ItemType ItemType => ItemType.Book;
-
-        [Required]
-        public int MemorabiliaId { get; set; }
-
-        public override string PageTitle => $"{(MemorabiliaId > 0 ? "Edit" : "Add")} {ItemType.Book.Name} Details";
+        public override ItemType ItemType => ItemType.Book;
 
         public List<SavePersonViewModel> People { get; set; } = new();
 

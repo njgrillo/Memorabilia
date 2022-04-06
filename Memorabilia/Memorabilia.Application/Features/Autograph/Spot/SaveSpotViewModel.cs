@@ -12,18 +12,33 @@ namespace Memorabilia.Application.Features.Autograph.Spot
         {
             AutographId = viewModel.AutographId;
             ItemType = ItemType.Find(viewModel.ItemTypeId);
+            MemorabiliaId = viewModel.MemorabiliaId;
             SpotId = viewModel.SpotId;
         }
 
         public int AutographId { get; set; }
 
-        public virtual string ImagePath => "images/spots.png";
+        public AutographStep AutographStep => AutographStep.Spot;
+
+        public override string BackNavigationPath => $"Autographs/Authentications/Edit/{AutographId}";
+
+        public bool CanHaveSpot => ItemType.CanHaveSpot(ItemType);
+
+        public override string ContinueNavigationPath => $"Autographs/Image/Edit/{AutographId}";
+
+        public override EditModeType EditModeType => SpotId > 0 ? EditModeType.Update : EditModeType.Add;
+
+        public override string ExitNavigationPath => "Memorabilia/Items";
+
+        public virtual string ImagePath => "images/spots.jpg";
 
         public ItemType ItemType { get; set; }
 
         public string ItemTypeName => ItemType?.Name;
 
-        public override string PageTitle => $"Edit Spot";
+        public int MemorabiliaId { get; }
+
+        public override string PageTitle => $"{(EditModeType == EditModeType.Add ? "Add" : "Edit")} Spot";
 
         [Required]
         [Range(1, int.MaxValue, ErrorMessage = "Spot is required.")]

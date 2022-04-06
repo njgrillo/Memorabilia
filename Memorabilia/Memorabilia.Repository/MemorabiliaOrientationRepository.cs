@@ -1,4 +1,5 @@
-﻿using Memorabilia.Domain;
+﻿using Memorabilia.Domain.Entities;
+using Memorabilia.Repository.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using System.Threading;
@@ -6,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Memorabilia.Repository
 {
-    public class MemorabiliaOrientationRepository : BaseRepository<Domain.Entities.MemorabiliaOrientation>, IMemorabiliaOrientationRepository
+    public class MemorabiliaOrientationRepository : BaseRepository<MemorabiliaOrientation>, IMemorabiliaOrientationRepository
     {
         private readonly Context _context;
 
@@ -15,30 +16,30 @@ namespace Memorabilia.Repository
             _context = context;
         }
 
-        private IQueryable<Domain.Entities.MemorabiliaOrientation> MemorabiliaOrientation => _context.Set<Domain.Entities.MemorabiliaOrientation>();
+        private IQueryable<MemorabiliaOrientation> MemorabiliaOrientation => _context.Set<MemorabiliaOrientation>();
 
-        public async Task Add(Domain.Entities.MemorabiliaOrientation memorabiliaOrientation, CancellationToken cancellationToken = default)
+        public async Task Add(MemorabiliaOrientation memorabiliaOrientation, CancellationToken cancellationToken = default)
         {
             _context.Add(memorabiliaOrientation);
 
             await _context.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
         }
 
-        public async Task Delete(Domain.Entities.MemorabiliaOrientation memorabiliaOrientation, CancellationToken cancellationToken = default)
+        public async Task Delete(MemorabiliaOrientation memorabiliaOrientation, CancellationToken cancellationToken = default)
         {
-            _context.Set<Domain.Entities.MemorabiliaOrientation>().Remove(memorabiliaOrientation);
+            _context.Set<MemorabiliaOrientation>().Remove(memorabiliaOrientation);
 
             await _context.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
         }
 
-        public async Task<Domain.Entities.MemorabiliaOrientation> Get(int id)
+        public async Task<MemorabiliaOrientation> Get(int id)
         {
             return await MemorabiliaOrientation.SingleOrDefaultAsync(memorabiliaOrientation => memorabiliaOrientation.Id == id).ConfigureAwait(false);
         }
 
-        public async Task Update(Domain.Entities.MemorabiliaOrientation memorabiliaOrientation, CancellationToken cancellationToken = default)
+        public async Task Update(MemorabiliaOrientation memorabiliaOrientation, CancellationToken cancellationToken = default)
         {
-            _context.Set<Domain.Entities.MemorabiliaOrientation>().Update(memorabiliaOrientation);
+            _context.Set<MemorabiliaOrientation>().Update(memorabiliaOrientation);
 
             await _context.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
         }

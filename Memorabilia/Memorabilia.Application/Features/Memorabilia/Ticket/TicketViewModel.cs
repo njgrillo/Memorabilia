@@ -27,7 +27,5 @@ namespace Memorabilia.Application.Features.Memorabilia.Ticket
         public IEnumerable<MemorabiliaSport> Sports => _memorabilia.Sports;
 
         public IEnumerable<MemorabiliaTeam> Teams => _memorabilia.Teams;
-
-        //public MemorabiliaTicket Ticket => _memorabilia.Ticket;
     }
 }

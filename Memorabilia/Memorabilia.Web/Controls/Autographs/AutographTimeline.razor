@@ -1,0 +1,54 @@
+﻿<DivRowCol12Center>
+    <Content>
+        <Timeline>
+            <Content>
+                <MudTimelineItem Color="@AutographEditColor" 
+                                 Variant="Variant.Filled">
+                    <ItemContent>
+                        <MudAlert style="@(GetMudAlertStyle(AutographStep.Autograph))"
+                                  Class="@_mudAlertClass" 
+                                  OnClick="@(_ => Navigate())"
+                                  Severity="@AutographEditAlertSeverity">@AutographEditAlertTitle</MudAlert>
+                    </ItemContent>
+                </MudTimelineItem>
+                <MudTimelineItem Color="@AutographInscriptionEditColor" 
+                                 Variant="Variant.Filled">
+                    <ItemContent>
+                        <MudAlert style="@(GetMudAlertStyle(AutographStep.Inscription))"
+                                  Class="@_mudAlertClass" 
+                                  OnClick="@(_ => Navigate("Inscriptions"))"
+                                  Severity="@AutographInscriptionEditAlertSeverity">@AutographInscriptionEditAlertTitle</MudAlert>
+                    </ItemContent>
+                </MudTimelineItem>
+                <MudTimelineItem Color="@AutographAuthenticationEditColor" 
+                                 Variant="Variant.Filled">
+                    <ItemContent>
+                        <MudAlert style="@(GetMudAlertStyle(AutographStep.Authentication))"
+                                  Class="@_mudAlertClass" 
+                                  OnClick="@(_ => Navigate("Authentications"))"
+                                  Severity="@AutographAuthenticationEditAlertSeverity">@AutographAuthenticationEditAlertTitle</MudAlert>
+                    </ItemContent>
+                </MudTimelineItem>
+                <MudTimelineItem Color="@AutographSpotEditColor" 
+                                 Variant="Variant.Filled">
+                    <ItemContent>
+                        <MudAlert style="@(GetMudAlertStyle(AutographStep.Spot))"
+                                  Class="@_mudAlertClass" 
+                                  OnClick="@(_ => Navigate("Spot"))"
+                                  Severity="@AutographSpotEditAlertSeverity">@AutographSpotEditAlertTitle</MudAlert>
+                    </ItemContent>
+                </MudTimelineItem>
+                <MudTimelineItem Color="@AutographImageEditColor" 
+                                 Variant="Variant.Filled">
+                    <ItemContent>
+                        <MudAlert style="@(GetMudAlertStyle(AutographStep.Image))"
+                                  Class="@_mudAlertClass" 
+                                  OnClick="@(_ => Navigate("Image"))"
+                                  Severity="@AutographImageEditAlertSeverity">@AutographImageEditAlertTitle</MudAlert>
+                    </ItemContent>
+                </MudTimelineItem>
+            </Content>
+        </Timeline>
+    </Content>
+</DivRowCol12Center>
+

@@ -2,6 +2,7 @@
 using Memorabilia.Domain.Entities;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 
 namespace Memorabilia.Application.Features.Memorabilia
@@ -34,6 +35,8 @@ namespace Memorabilia.Application.Features.Memorabilia
         public string ConditionName => _memorabilia.Condition?.Name;
 
         public DateTime CreateDate => _memorabilia.CreateDate;
+
+        public bool DisplayAutographDetails { get; set; }
 
         public decimal? EstimatedValue => _memorabilia.EstimatedValue;
 
@@ -81,6 +84,8 @@ namespace Memorabilia.Application.Features.Memorabilia
 
         public int? LevelTypeId => _memorabilia?.LevelType?.Id;
 
+        public string MemorabiliaImagePath => $"data:image/jpg;base64,{Convert.ToBase64String(File.ReadAllBytes(ImagePath))}";
+
         public IEnumerable<MemorabiliaPerson> People => _memorabilia.People;
 
         public int? PrimaryAutographId => _memorabilia.Autographs.FirstOrDefault()?.Id;
@@ -105,7 +110,9 @@ namespace Memorabilia.Application.Features.Memorabilia
 
         public IEnumerable<MemorabiliaSport> Sports => _memorabilia.Sports;
 
-        public IEnumerable<MemorabiliaTeam> Teams => _memorabilia.Teams;        
+        public IEnumerable<MemorabiliaTeam> Teams => _memorabilia.Teams;
+
+        public string ToggleIcon { get; set; } = MudBlazor.Icons.Material.Filled.ExpandMore;
 
         public string UserFirstName => _memorabilia.User.FirstName;
 

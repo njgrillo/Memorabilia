@@ -1,5 +1,5 @@
 ﻿using Demo.Framework.Handler;
-using Memorabilia.Domain;
+using Memorabilia.Repository.Interfaces;
 using System.Threading.Tasks;
 
 namespace Memorabilia.Application.Features.Autograph
@@ -17,11 +17,7 @@ namespace Memorabilia.Application.Features.Autograph
 
             protected override async Task<AutographViewModel> Handle(Query query)
             {
-                var autograph = await _autographRepository.Get(query.Id).ConfigureAwait(false);
-
-                var viewModel = new AutographViewModel(autograph);
-
-                return viewModel;
+                return new AutographViewModel(await _autographRepository.Get(query.Id).ConfigureAwait(false));
             }
         }
 

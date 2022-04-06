@@ -6,7 +6,6 @@ namespace Memorabilia.Domain.Constants
     {
         public static readonly HelmetType F7 = new(5, "F7", string.Empty);
         public static readonly HelmetType Flex = new(1, "Flex", string.Empty);
-        public static readonly HelmetType Hydro = new(2, "Hydro", string.Empty);
         public static readonly HelmetType Other = new(6, "Other", string.Empty);
         public static readonly HelmetType Revolution = new(4, "Revolution", string.Empty);
         public static readonly HelmetType Speed = new(3, "Speed", string.Empty);        
@@ -15,7 +14,6 @@ namespace Memorabilia.Domain.Constants
         {
             F7,
             Flex,
-            Hydro,
             Other,
             Revolution,
             Speed            

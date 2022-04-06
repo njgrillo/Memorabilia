@@ -1,0 +1,51 @@
+﻿@typeparam TItem
+
+<Page OnLoad="Load">
+    <Content>
+        <PageHeader PageTitle="@PageTitle" />
+        @TimelineContent
+        <PageBorder>
+            <Content>
+                <PageImage ImagePath="@ImagePath" />
+                <EditForm Model="@Model" 
+                          OnValidSubmit="HandleValidSubmit">
+                    <DataAnnotationsValidator />
+                    <ValidationSummary />
+                        @Content
+                    <PrettyBlazor.Condition Evaluation="@UseMultipleButtons">
+                        <Match>
+                             <div class="text-left">
+                                <MudButton hidden="@(!DisplaySaveContinueButton)"
+                                           ButtonType="MudBlazor.ButtonType.Submit" 
+                                           Color="MudBlazor.Color.Info"
+                                           OnClick="@(()=> _continue = true)"
+                                           Size="MudBlazor.Size.Medium"
+                                           StartIcon="@Icons.Material.Filled.Save"                                   
+                                           Variant="Variant.Filled">Save & Continue</MudButton>
+                                <MudButton ButtonType="MudBlazor.ButtonType.Submit" 
+                                           Color="MudBlazor.Color.Info"                                           
+                                           Size="MudBlazor.Size.Medium"
+                                           StartIcon="@Icons.Material.Filled.Save"                                   
+                                           Variant="Variant.Filled">Save & Exit</MudButton>
+                                <MudButton ButtonType="MudBlazor.ButtonType.Button" 
+                                           Color="MudBlazor.Color.Secondary"
+                                           OnClick="@(_ => NavigationManager.NavigateTo(@ExitNavigationPath))"
+                                           Size="MudBlazor.Size.Medium"                                  
+                                           Variant="Variant.Filled">Cancel</MudButton>
+                            </div>
+                        </Match>
+                        <NotMatch>
+                            <PageButton />
+                        </NotMatch>
+                    </PrettyBlazor.Condition>                    
+                </EditForm>                
+            </Content>
+        </PageBorder>
+        <PrettyBlazor.Condition Evaluation="@DisplayFooter">
+            <Match>
+                <PageFooter NavigationPath="@PageFooterNavigationPath"
+                            NavigationPathText="@PageFooterButtonText" />
+            </Match>
+        </PrettyBlazor.Condition>        
+    </Content>
+</Page>

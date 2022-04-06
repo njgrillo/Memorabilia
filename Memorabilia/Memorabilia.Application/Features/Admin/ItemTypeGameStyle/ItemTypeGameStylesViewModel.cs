@@ -12,6 +12,12 @@ namespace Memorabilia.Application.Features.Admin.ItemTypeGameStyle
             ItemTypeGameStyles = itemTypeGameStyles.Select(itemTypeGameStyle => new ItemTypeGameStyleViewModel(itemTypeGameStyle)).ToList();
         }
 
+        public string AddRoute => $"{RoutePrefix}/Edit/0";
+
+        public string AddTitle => $"Add {ItemTitle}";
+
+        public string ExitNavigationPath => "Admin/EditDomainItems";
+
         public List<ItemTypeGameStyleViewModel> ItemTypeGameStyles { get; set; } = new();
 
         public override string ItemTitle => "Item Type Game Style";

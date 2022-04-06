@@ -1,25 +1,5 @@
 ﻿@page "/Brands"
 
-@using Memorabilia.Application.Features.Admin
-@using Memorabilia.Application.Features.Admin.Brand
-
-@inject CommandRouter _commandRouter
-@inject QueryRouter _queryRouter
-
-<_DomainItems DomainItems="_viewModel"
-              OnDelete="OnDelete"
-              OnLoad="OnLoad" />
-
-@code {
-    private BrandsViewModel _viewModel;
-
-    protected async Task OnDelete(SaveDomainViewModel viewModel)
-    {
-        await _commandRouter.Send(new SaveBrand.Command(viewModel)).ConfigureAwait(false);
-    }
-
-    protected async Task OnLoad()
-    {
-        _viewModel = await _queryRouter.Send(new GetBrands.Query()).ConfigureAwait(false);
-    }
-}
+<DomainItems Items="_viewModel"
+             OnDelete="OnDelete"
+             OnLoad="OnLoad" />

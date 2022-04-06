@@ -1,84 +1,61 @@
 ﻿@page "/Divisions/Edit"
 @page "/Divisions/Edit/{id:int}"
 
-@using Memorabilia.Application.Features.Admin
-@using Memorabilia.Application.Features.Admin.Division
-@using Memorabilia.Web.Controls.Conference
-@using Memorabilia.Web.Controls.League
+@using Memorabilia.Application.Features.Admin.Divisions
+@using Memorabilia.Web.Controls.DropDowns
 
-@inject CommandRouter _commandRouter
-@inject NavigationManager _navigation
-@inject QueryRouter _queryRouter
-@inject IToastService _toastService
-
-<_Page OnLoad="OnLoad">
+<EditPage ContinueNavigationPath="@_viewModel.RoutePrefix"
+          EditMode="_viewModel.EditModeType" 
+          ExitNavigationPath="@_viewModel.RoutePrefix"
+          ImagePath="@_viewModel.ImagePath" 
+          ItemName="@_viewModel.ItemTitle"
+          Model="_viewModel"
+          OnLoad="OnLoad"
+          OnSave="HandleValidSubmit"
+          PageFooterButtonText="@_viewModel.ExitButtonText"
+          PageFooterNavigationPath="@_viewModel.ExitNavigationPath"
+          PageTitle="@_viewModel.PageTitle"
+          TItem="SaveDivisionViewModel">
     <Content>
-        <div class="row">
-            <div class="col-md-12" style="text-align: center">
-                <h1>@_viewModel.PageTitle</h1>
-            </div>
-        </div>
-        <br />
-        <div style="border: 1px solid black; margin-top: 2%; margin-bottom: 2%; margin-left: 2%; margin-right: 2%;">
-            <div class="row" style="margin-top: 2%; margin-bottom: 2%; margin-left: 1%; margin-right: 1%;">
-                <div class="col-lg-12" style="text-align: center">
-                    <img src="images/divisions.png" alt="Image" height="150" width="150" />
-                </div>
-                <EditForm Model="_viewModel" OnValidSubmit="HandleValidSubmit">
-                    <DataAnnotationsValidator />
-                    <ValidationSummary />
-                    <div class="form-group">
-                        <label for="conference">Conference</label>
-                        <_ConferenceDropDown @bind-Value="@_viewModel.ConferenceId" 
-                                             @bind-Value:event="ValueChanged" />                           
-                    </div>
-                    <div class="form-group">
-                        <label for="league">League</label>
-                        <_LeagueDropDown @bind-Value="@_viewModel.LeagueId" 
-                                         @bind-Value:event="ValueChanged" />                           
-                    </div>
-                    <div class="form-group">
-                        <label for="name">Name</label>
-                        <InputText id="name" @bind-Value="_viewModel.Name" class="form-control" />
-                    </div>
-                    <div class="form-group">
-                        <label for="abbreviation">Abbreviation</label>
-                        <InputText id="abbreviation" @bind-Value="_viewModel.Abbreviation" class="form-control" />
-                    </div>
-                    <div class="text-right">
-                        <button type="submit" class="btn btn-primary">Save</button>
-                    </div>
-                </EditForm>
-            </div>
-            <div class="row">
-                <div class="col-md-12" style="text-align: center">
-                    <a href="@_viewModel.RoutePrefix">Back</a>
-                </div>
-            </div>
-            <br />
-        </div>
+        <DivRowCol3>
+            <Content>
+                <MudSelect @bind-Value="@_viewModel.ConferenceId"
+                           @bind-Value:event="ValueChanged" 
+                           Label="Conference"
+                           Variant="Variant.Outlined">
+                    <MudSelectItem Value="@(0)">--Select--</MudSelectItem>
+                    <Iterations Items="_viewModel.Conferences" Context="conference">
+                        <MudSelectItem Value="@conference.Id">@conference.Name</MudSelectItem>
+                    </Iterations>	
+                </MudSelect>
+            </Content>
+        </DivRowCol3>
+        <DivRowCol3>
+            <Content>
+                <MudSelect @bind-Value="@_viewModel.LeagueId"
+                           @bind-Value:event="ValueChanged"  
+                           Label="League"
+                           Variant="Variant.Outlined">
+                    <MudSelectItem Value="@(0)">--Select--</MudSelectItem>
+                    <Iterations Items="_viewModel.Leagues" Context="league">
+                        <MudSelectItem Value="@league.Id">@league.Name</MudSelectItem>
+                    </Iterations>	
+                </MudSelect>  
+            </Content>
+        </DivRowCol3>
+        <DivRowCol3>
+            <Content>
+                <MudTextField @bind-Value="_viewModel.Name" 
+                              Label="Name" 
+                              Variant="Variant.Outlined" />
+            </Content>
+        </DivRowCol3>
+        <DivRowCol3>
+            <Content>
+                <MudTextField @bind-Value="_viewModel.Abbreviation" 
+                              Label="Abbreviation" 
+                              Variant="Variant.Outlined" />
+            </Content>
+        </DivRowCol3>
     </Content>
-</_Page>
-
-@code {
-    [Parameter]
-    public int Id { get; set; }
-
-    private SaveDivisionViewModel _viewModel = new SaveDivisionViewModel();
-
-    protected async Task HandleValidSubmit()
-    {
-        await _commandRouter.Send(new SaveDivision.Command(_viewModel)).ConfigureAwait(false);
-
-        _navigation.NavigateTo(_viewModel.RoutePrefix);
-        _toastService.ShowSuccess($"{_viewModel.ItemTitle} was saved successfully!", _viewModel.PageTitle);
-    }
-
-    protected async Task OnLoad()
-    {
-        if (Id == 0)
-            return;
-
-        _viewModel = new SaveDivisionViewModel(await _queryRouter.Send(new GetDivision.Query(Id)).ConfigureAwait(false));
-    }
-}
+</EditPage>

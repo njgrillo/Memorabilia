@@ -1,4 +1,5 @@
-﻿using Memorabilia.Domain;
+﻿using Memorabilia.Domain.Entities;
+using Memorabilia.Repository.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,44 +8,44 @@ using System.Threading.Tasks;
 
 namespace Memorabilia.Repository
 {
-    public class ColorRepository : BaseRepository<Domain.Entities.Color>, IColorRepository
+    public class ColorRepository : BaseRepository<Color>, IColorRepository
     {
-        private readonly Context _context;
+        private readonly DomainContext _context;
 
-        public ColorRepository(Context context) : base(context)
+        public ColorRepository(DomainContext context) : base(context)
         {
             _context = context;
         }
 
-        private IQueryable<Domain.Entities.Color> Color => _context.Set<Domain.Entities.Color>();
+        private IQueryable<Color> Color => _context.Set<Color>();
 
-        public async Task Add(Domain.Entities.Color color, CancellationToken cancellationToken = default)
+        public async Task Add(Color color, CancellationToken cancellationToken = default)
         {
             _context.Add(color);
 
             await _context.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
         }
 
-        public async Task Delete(Domain.Entities.Color color, CancellationToken cancellationToken = default)
+        public async Task Delete(Color color, CancellationToken cancellationToken = default)
         {
-            _context.Set<Domain.Entities.Color>().Remove(color);
+            _context.Set<Color>().Remove(color);
 
             await _context.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
         }
 
-        public async Task<Domain.Entities.Color> Get(int id)
+        public async Task<Color> Get(int id)
         {
             return await Color.SingleOrDefaultAsync(color => color.Id == id).ConfigureAwait(false);
         }
 
-        public async Task<IEnumerable<Domain.Entities.Color>> GetAll()
+        public async Task<IEnumerable<Color>> GetAll()
         {
             return (await Color.ToListAsync().ConfigureAwait(false)).OrderBy(color => color.Name);
         }
 
-        public async Task Update(Domain.Entities.Color color, CancellationToken cancellationToken = default)
+        public async Task Update(Color color, CancellationToken cancellationToken = default)
         {
-            _context.Set<Domain.Entities.Color>().Update(color);
+            _context.Set<Color>().Update(color);
 
             await _context.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
         }

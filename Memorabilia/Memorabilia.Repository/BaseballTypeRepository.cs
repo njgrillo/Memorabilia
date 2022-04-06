@@ -1,4 +1,5 @@
-﻿using Memorabilia.Domain;
+﻿using Memorabilia.Domain.Entities;
+using Memorabilia.Repository.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,44 +8,44 @@ using System.Threading.Tasks;
 
 namespace Memorabilia.Repository
 {
-    public class BaseballTypeRepository : BaseRepository<Domain.Entities.BaseballType>, IBaseballTypeRepository
+    public class BaseballTypeRepository : BaseRepository<BaseballType>, IBaseballTypeRepository
     {
-        private readonly Context _context;
+        private readonly DomainContext _context;
 
-        public BaseballTypeRepository(Context context) : base(context)
+        public BaseballTypeRepository(DomainContext context) : base(context)
         {
             _context = context;
         }
 
-        private IQueryable<Domain.Entities.BaseballType> BaseballType => _context.Set<Domain.Entities.BaseballType>();
+        private IQueryable<BaseballType> BaseballType => _context.Set<BaseballType>();
 
-        public async Task Add(Domain.Entities.BaseballType baseballType, CancellationToken cancellationToken = default)
+        public async Task Add(BaseballType baseballType, CancellationToken cancellationToken = default)
         {
             _context.Add(baseballType);
 
             await _context.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
         }
 
-        public async Task Delete(Domain.Entities.BaseballType baseballType, CancellationToken cancellationToken = default)
+        public async Task Delete(BaseballType baseballType, CancellationToken cancellationToken = default)
         {
-            _context.Set<Domain.Entities.BaseballType>().Remove(baseballType);
+            _context.Set<BaseballType>().Remove(baseballType);
 
             await _context.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
         }
 
-        public async Task<Domain.Entities.BaseballType> Get(int id)
+        public async Task<BaseballType> Get(int id)
         {
             return await BaseballType.SingleOrDefaultAsync(baseballType => baseballType.Id == id).ConfigureAwait(false);
         }
 
-        public async Task<IEnumerable<Domain.Entities.BaseballType>> GetAll()
+        public async Task<IEnumerable<BaseballType>> GetAll()
         {
             return (await BaseballType.ToListAsync().ConfigureAwait(false)).OrderBy(baseballType => baseballType.Name);
         }
 
-        public async Task Update(Domain.Entities.BaseballType baseballType, CancellationToken cancellationToken = default)
+        public async Task Update(BaseballType baseballType, CancellationToken cancellationToken = default)
         {
-            _context.Set<Domain.Entities.BaseballType>().Update(baseballType);
+            _context.Set<BaseballType>().Update(baseballType);
 
             await _context.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
         }

@@ -1,40 +1,5 @@
 ﻿@page "/FigureTypes/Edit/{id:int}"
 
-@using Memorabilia.Application.Features.Admin
-@using Memorabilia.Application.Features.Admin.FigureType
-
-@inject CommandRouter _commandRouter
-@inject QueryRouter _queryRouter
-
-<_EditDomainItem DomainItem="_viewModel"
-                 OnLoad="OnLoad"
-                 OnSave="OnSave" />
-
-@code {
-    [Parameter]
-    public int Id { get; set; }
-
-    private const string DomainTypeName = "Figure Type";
-    private const string ImagePath = "images/figure.jpg";
-    private string _navigationPath = $"{DomainTypeName.Replace(" ", "")}s";
-
-    private SaveDomainViewModel _viewModel;  
-
-    protected override void OnInitialized()
-    {
-        _viewModel = new SaveDomainViewModel(Id, DomainTypeName, ImagePath, _navigationPath);
-    }   
-
-    protected async Task OnLoad()
-    {
-        _viewModel = new SaveDomainViewModel(await _queryRouter.Send(new GetFigureType.Query(Id)).ConfigureAwait(false), 
-                                             DomainTypeName, 
-                                             ImagePath, 
-                                             _navigationPath);
-    }
-
-    protected async Task OnSave()
-    {
-        await _commandRouter.Send(new SaveFigureType.Command(_viewModel)).ConfigureAwait(false);
-    }
-}
+<EditDomainItem Item="_viewModel"
+                OnLoad="OnLoad"
+                OnSave="OnSave" />

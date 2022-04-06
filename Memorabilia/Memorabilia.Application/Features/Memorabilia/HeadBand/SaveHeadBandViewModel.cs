@@ -1,5 +1,5 @@
-﻿using Memorabilia.Application.Features.Admin.Person;
-using Memorabilia.Application.Features.Admin.Team;
+﻿using Memorabilia.Application.Features.Admin.People;
+using Memorabilia.Application.Features.Admin.Teams;
 using Memorabilia.Domain.Constants;
 using System;
 using System.ComponentModel.DataAnnotations;
@@ -7,7 +7,7 @@ using System.Linq;
 
 namespace Memorabilia.Application.Features.Memorabilia.HeadBand
 {
-    public class SaveHeadBandViewModel : SaveViewModel
+    public class SaveHeadBandViewModel : SaveItemViewModel
     {
         public SaveHeadBandViewModel() { }
 
@@ -26,11 +26,19 @@ namespace Memorabilia.Application.Features.Memorabilia.HeadBand
                 Team = new SaveTeamViewModel(new TeamViewModel(viewModel.Teams.First().Team));
         }
 
+        public override string BackNavigationPath => $"Memorabilia/Edit/{MemorabiliaId}";
+
         public Brand Brand => Brand.Find(BrandId);
 
         [Required]
         [Range(1, int.MaxValue, ErrorMessage = "Brand is required.")]
         public int BrandId { get; set; }
+
+        public bool DisplayGameDate => GameStyleType.IsGameWorthly(GameStyleType);
+
+        public override EditModeType EditModeType => MemorabiliaId > 0 ? EditModeType.Update : EditModeType.Add;
+
+        public override string ExitNavigationPath => "Memorabilia/Items";
 
         public DateTime? GameDate { get; set; }
 
@@ -44,31 +52,15 @@ namespace Memorabilia.Application.Features.Memorabilia.HeadBand
 
         public bool HasTeam => Team?.Id > 0;
 
-        public string ImagePath
-        {
-            get
-            {
-                var path = "images/";
+        public override string ImagePath => "images/headband.jpg";
 
-                //if (DisplayHeadBandType && HeadBandType != null)
-                //{
-                //    return $"{path}{HeadBandType.Name.Replace(" ", "")}.jpg";
-                //}
-
-                return $"{path}HeadBand.jpg";
-            }
-        }
-
-        public ItemType ItemType => ItemType.HeadBand;
+        public override ItemType ItemType => ItemType.HeadBand;
 
         [Required]
         [Range(1, int.MaxValue, ErrorMessage = "Level is required.")]
         public int LevelTypeId { get; set; }
 
-        [Required]
-        public int MemorabiliaId { get; set; }
-
-        public override string PageTitle => $"{(MemorabiliaId > 0 ? "Edit" : "Add")} {ItemType.HeadBand.Name} Details";
+        public override string PageTitle => $"{(EditModeType == EditModeType.Update ? "Edit" : "Add")} {ItemType.HeadBand.Name} Details";
 
         public SavePersonViewModel Person { get; set; }
 

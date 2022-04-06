@@ -1,4 +1,5 @@
-﻿using Memorabilia.Domain;
+﻿using Memorabilia.Domain.Entities;
+using Memorabilia.Repository.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using System.Threading;
@@ -6,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Memorabilia.Repository
 {
-    public class MemorabiliaPhotoRepository : BaseRepository<Domain.Entities.MemorabiliaPhoto>, IMemorabiliaPhotoRepository
+    public class MemorabiliaPhotoRepository : BaseRepository<MemorabiliaPhoto>, IMemorabiliaPhotoRepository
     {
         private readonly Context _context;
 
@@ -15,30 +16,30 @@ namespace Memorabilia.Repository
             _context = context;
         }
 
-        private IQueryable<Domain.Entities.MemorabiliaPhoto> MemorabiliaPhoto => _context.Set<Domain.Entities.MemorabiliaPhoto>();
+        private IQueryable<MemorabiliaPhoto> MemorabiliaPhoto => _context.Set<MemorabiliaPhoto>();
 
-        public async Task Add(Domain.Entities.MemorabiliaPhoto memorabiliaPhoto, CancellationToken cancellationToken = default)
+        public async Task Add(MemorabiliaPhoto memorabiliaPhoto, CancellationToken cancellationToken = default)
         {
             _context.Add(memorabiliaPhoto);
 
             await _context.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
         }
 
-        public async Task Delete(Domain.Entities.MemorabiliaPhoto memorabiliaPhoto, CancellationToken cancellationToken = default)
+        public async Task Delete(MemorabiliaPhoto memorabiliaPhoto, CancellationToken cancellationToken = default)
         {
-            _context.Set<Domain.Entities.MemorabiliaPhoto>().Remove(memorabiliaPhoto);
+            _context.Set<MemorabiliaPhoto>().Remove(memorabiliaPhoto);
 
             await _context.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
         }
 
-        public async Task<Domain.Entities.MemorabiliaPhoto> Get(int id)
+        public async Task<MemorabiliaPhoto> Get(int id)
         {
             return await MemorabiliaPhoto.SingleOrDefaultAsync(memorabiliaPhoto => memorabiliaPhoto.Id == id).ConfigureAwait(false);
         }
 
-        public async Task Update(Domain.Entities.MemorabiliaPhoto memorabiliaPhoto, CancellationToken cancellationToken = default)
+        public async Task Update(MemorabiliaPhoto memorabiliaPhoto, CancellationToken cancellationToken = default)
         {
-            _context.Set<Domain.Entities.MemorabiliaPhoto>().Update(memorabiliaPhoto);
+            _context.Set<MemorabiliaPhoto>().Update(memorabiliaPhoto);
 
             await _context.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
         }

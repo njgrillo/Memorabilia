@@ -1,88 +1,63 @@
 ﻿@page "/Memorabilia/Book/Edit/{memorabiliaId:int}"
 
-@using Memorabilia.Application.Features.Admin.Person
-@using Memorabilia.Application.Features.Admin.Team
-@using Memorabilia.Application.Features.Memorabilia
 @using Memorabilia.Application.Features.Memorabilia.Book
 @using Memorabilia.Web.Controls.MemorabiliaItem
 @using Memorabilia.Web.Controls.Person
-@using Memorabilia.Web.Controls.SportLeagueLevel
 @using Memorabilia.Web.Controls.Team
 
-@inject CommandRouter _commandRouter
-@inject QueryRouter _queryRouter
-
-<_EditMemorabiliaItem ImagePath="@_viewModel.ImagePath"
-					  ItemType="_viewModel.ItemType" 
-                      MemorabiliaId="MemorabiliaId"
-                      Model="_viewModel"
-                      OnLoad="OnLoad"
-                      OnSave="OnSave"
-                      PageTitle="_viewModel.PageTitle"
-                      TItem="SaveBookViewModel">
+<EditPage ContinueNavigationPath="@_viewModel.ContinueNavigationPath"
+          EditMode="_viewModel.EditModeType"
+          ExitNavigationPath="@_viewModel.ExitNavigationPath"
+          ImagePath="@_viewModel.ImagePath"
+          ItemName="@_viewModel.ItemType.Name"
+          Model="_viewModel"
+          OnLoad="OnLoad"
+          OnSave="OnSave"
+          PageFooterButtonText="@_viewModel.ExitButtonText"
+          PageFooterNavigationPath="@_viewModel.ExitNavigationPath"
+          PageTitle="@_viewModel.PageTitle"
+          TItem="SaveBookViewModel"
+          UseMultipleButtons="true">
+    <TimelineContent>
+        <MemorabiliaItemTimeline EditMode="_viewModel.EditModeType"
+                                 ItemTypeName="@_viewModel.ItemType.Name"
+                                 MemorabiliaId="_viewModel.MemorabiliaId"
+                                 MemorabiliaItemStep="_viewModel.MemorabiliaItemStep" />
+    </TimelineContent>
     <Content>
-		<div class="row">                    
-            <div class="col-lg-12">
-                <div class="form-group">
-                    <label for="title">Title</label>
-                    <InputText id="title" class="form-control" @bind-Value="@_viewModel.Title" />                    
-                </div> 
-            </div>
-        </div> 
-        <div class="row">                    
-            <div class="col-lg-12">
-                <div class="form-group">
-                    <label for="edition">Edition</label>
-                    <InputText id="edition" class="form-control" @bind-Value="@_viewModel.Edition" />                    
-                </div> 
-            </div>
-        </div> 
-        <div class="row">                    
-            <div class="col-lg-12">
-                <div class="form-group">
-                    <label for="publisher">Publisher</label>
-                    <InputText id="publisher" class="form-control" @bind-Value="@_viewModel.Publisher" />                    
-                </div> 
-            </div>
-        </div> 
-        <div class="row">                    
-            <div class="col-lg-12">
-                <div class="form-group">                            
-                    <InputCheckbox id="hardCover" @bind-Value="@_viewModel.HardCover" />  
-                    <label for="hardCover">Hard Cover</label>
-                </div> 
-            </div>
-        </div>    
-        <_PersonSelector AllowMultiple="true"
-                         CanToggle="true"
-                         ItemType="_viewModel.ItemType"
-                         People="_viewModel.People" />                 
-        <_TeamSelector AllowMultiple="true"
-                       CanToggle="true" 
-                       ItemType="_viewModel.ItemType"
-                       Teams="_viewModel.Teams" />
-	</Content>
-</_EditMemorabiliaItem>
-
-@code {
-    [Parameter]
-    public int MemorabiliaId { get; set; }
-
-    private SaveBookViewModel _viewModel = new SaveBookViewModel();    
-
-    protected async Task OnLoad()
-    {    
-        _viewModel = new SaveBookViewModel(await _queryRouter.Send(new GetBook.Query(MemorabiliaId)).ConfigureAwait(false));  
-    }  
-
-    protected async Task OnSave()
-    {            
-        _viewModel.MemorabiliaId = MemorabiliaId;
-
-        var command = new SaveBook.Command(_viewModel);
-
-        await _commandRouter.Send(command).ConfigureAwait(false);
-
-        MemorabiliaId = command.MemorabiliaId;
-    }
-}
+        <DivRowCol3>
+            <Content>
+                <MudTextField @bind-Value="_viewModel.Title" 
+                              Label="Title" 
+                              Variant="Variant.Outlined" /> 
+            </Content>
+            <ContentColumn2>
+                <MudTextField @bind-Value="_viewModel.Edition" 
+                              Label="Edition" 
+                              MaxLength="5"
+                              Variant="Variant.Outlined" />  
+            </ContentColumn2>
+        </DivRowCol3>
+        <DivRowCol3>
+            <Content>
+                <MudTextField @bind-Value="_viewModel.Publisher" 
+                              Label="Publisher" 
+                              Variant="Variant.Outlined" />  
+            </Content>
+        </DivRowCol3>
+        <DivRowCol3>
+            <Content>
+                <MudCheckBox @bind-Checked="@_viewModel.HardCover" 
+                             Label="Hard Cover" />
+            </Content>
+        </DivRowCol3>    
+        <PersonSelector AllowMultiple="true"
+                        CanToggle="true"
+                        ItemType="_viewModel.ItemType"
+                        People="_viewModel.People" />                 
+        <TeamSelector AllowMultiple="true"
+                      CanToggle="true" 
+                      ItemType="_viewModel.ItemType"
+                      Teams="_viewModel.Teams" />
+    </Content>
+</EditPage>

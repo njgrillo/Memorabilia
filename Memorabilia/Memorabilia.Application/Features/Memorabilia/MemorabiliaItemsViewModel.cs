@@ -12,6 +12,10 @@ namespace Memorabilia.Application.Features.Memorabilia
             MemorabiliaItems = memorabiliaItems.Select(memorabiliaItem => new MemorabiliaItemViewModel(memorabiliaItem)).ToList();
         }
 
+        public string AddRoute => "Memorabilia/Edit";
+
+        public string AddText => "Add Memorabilia";
+
         public List<MemorabiliaItemViewModel> MemorabiliaItems { get; set; } = new();
 
         public override string PageTitle => "Memorabilia";       

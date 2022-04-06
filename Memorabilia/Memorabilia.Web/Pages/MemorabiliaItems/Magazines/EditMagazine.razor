@@ -1,103 +1,68 @@
 ﻿@page "/Memorabilia/Magazine/Edit/{memorabiliaId:int}"
 
-@using Memorabilia.Application.Features.Admin.Person
-@using Memorabilia.Application.Features.Memorabilia
 @using Memorabilia.Application.Features.Memorabilia.Magazine
-@using Memorabilia.Web.Controls.ItemTypeBrand
-@using Memorabilia.Web.Controls.ItemTypeSize
+@using Memorabilia.Web.Controls.DropDowns
 @using Memorabilia.Web.Controls.MemorabiliaItem
 @using Memorabilia.Web.Controls.Person
 @using Memorabilia.Web.Controls.Team
 
-@inject CommandRouter _commandRouter
-@inject QueryRouter _queryRouter
-
-<_EditMemorabiliaItem ImagePath="@_viewModel.ImagePath"
-					  ItemType="_viewModel.ItemType" 
-                      MemorabiliaId="MemorabiliaId"
-                      Model="_viewModel"
-                      OnLoad="OnLoad"
-                      OnSave="OnSave"
-                      PageTitle="_viewModel.PageTitle"
-                      TItem="SaveMagazineViewModel">
+<EditPage ContinueNavigationPath="@_viewModel.ContinueNavigationPath"
+          EditMode="_viewModel.EditModeType"
+          ExitNavigationPath="@_viewModel.ExitNavigationPath"
+          ImagePath="@_viewModel.ImagePath"
+          ItemName="_viewModel.ItemTypeName"
+          Model="_viewModel"
+          OnLoad="OnLoad"
+          OnSave="OnSave"
+          PageFooterButtonText="@_viewModel.ExitButtonText"
+          PageFooterNavigationPath="@_viewModel.ExitNavigationPath"
+          PageTitle="@_viewModel.PageTitle"
+          TItem="SaveMagazineViewModel"
+          UseMultipleButtons="true">
+    <TimelineContent>
+        <MemorabiliaItemTimeline EditMode="_viewModel.EditModeType"
+                                 ItemTypeName="@_viewModel.ItemType.Name"
+                                 MemorabiliaId="_viewModel.MemorabiliaId"
+                                 MemorabiliaItemStep="_viewModel.MemorabiliaItemStep" />
+    </TimelineContent>
     <Content>
-		<div class="row">
-            <div class="col-lg-6">
-                <div class="form-group">
-                    <label for="brand">Brand</label>
-                    <_ItemTypeBrandDropDown @bind-Value="@_viewModel.BrandId" 
-                                            @bind-Value:event="ValueChanged"
-                                            ItemType="_viewModel.ItemType" />
-                </div> 
-            </div>
-            <div class="col-lg-6">
-                <div class="form-group">
-                    <label for="size">Size</label>
-                    <_ItemTypeSizeDropDown @bind-Value="@_viewModel.SizeId"
-                                           @bind-Value:event="ValueChanged" 
-                                           ItemType="_viewModel.ItemType" /> 
-                </div> 
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-lg-12">
-                    <div class="form-group">
-                    <label for="date">Date</label>
-                    <InputDate id="date" class="form-control" @bind-Value="_viewModel.Date" />
-                </div> 
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="form-group">                            
-                    <InputCheckbox id="framed" @bind-Value="@_viewModel.Framed" />
-                    <label for="framed">Framed</label>
-                </div> 
-            </div>
-        </div>
-        <_PersonSelector AllowMultiple="true"
-                         CanToggle="true"
-                         ItemType="_viewModel.ItemType"
-                         People="_viewModel.People" />                 
-        <_TeamSelector AllowMultiple="true"
-                       CanToggle="true" 
-                       ItemType="_viewModel.ItemType"
-                       Teams="_viewModel.Teams" />
-	</Content>
-</_EditMemorabiliaItem>
-
-@code {
-    [Parameter]
-    public int MemorabiliaId { get; set; }
-
-    private SaveMagazineViewModel _viewModel = new SaveMagazineViewModel();    
-
-    protected async Task OnLoad()
-    {     
-        var magazineViewModel = await _queryRouter.Send(new GetMagazine.Query(MemorabiliaId)).ConfigureAwait(false);
-
-        if (magazineViewModel.Brand == null)
-        {
-            SetDefaults();
-            return;
-        }    
-
-        _viewModel = new SaveMagazineViewModel(magazineViewModel);  
-    }  
-
-    protected async Task OnSave()
-    {            
-        _viewModel.MemorabiliaId = MemorabiliaId;
-
-        var command = new SaveMagazine.Command(_viewModel);
-
-        await _commandRouter.Send(command).ConfigureAwait(false);
-
-        MemorabiliaId = command.MemorabiliaId;
-    }
-
-    private void SetDefaults()
-    {
-        _viewModel.SizeId = Size.Standard.Id;
-    }
-}
+        <DivRowCol3>
+            <Content>
+                <ItemTypeBrandDropDown @bind-Value="@_viewModel.BrandId" 
+                                       @bind-Value:event="ValueChanged"
+                                       ItemType="_viewModel.ItemType"
+                                       SelectedValue="_viewModel.BrandId" />
+            </Content>
+            <ContentColumn2>
+                <ItemTypeSizeDropDown @bind-Value="@_viewModel.SizeId"
+                                      @bind-Value:event="ValueChanged" 
+                                      ItemType="_viewModel.ItemType"
+                                      SelectedValue="@_viewModel.SizeId" /> 
+            </ContentColumn2>
+        </DivRowCol3>
+        <DivRowCol3>
+            <Content>
+                <MudDatePicker @bind-Date="_viewModel.Date"
+                               DateFormat="MM/dd/yyyy"
+                               Editable="true"
+                               Label="Date"
+                               Mask="@(new DateMask("MM/dd/yyyy"))" 
+                               Variant="Variant.Outlined" />
+            </Content>
+        </DivRowCol3>
+        <DivRowCol3>
+            <Content>
+                <MudCheckBox @bind-Checked="@_viewModel.Framed" 
+                             Label="Framed" />
+            </Content>
+        </DivRowCol3>
+        <PersonSelector AllowMultiple="true"
+                        CanToggle="true"
+                        ItemType="_viewModel.ItemType"
+                        People="_viewModel.People" />                 
+        <TeamSelector AllowMultiple="true"
+                      CanToggle="true" 
+                      ItemType="_viewModel.ItemType"
+                      Teams="_viewModel.Teams" />
+    </Content>
+</EditPage>

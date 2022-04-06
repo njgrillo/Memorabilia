@@ -36,5 +36,10 @@ namespace Memorabilia.Domain.Constants
         {
             return All.SingleOrDefault(purchaseType => purchaseType.Id == id);
         }
+
+        public static PurchaseType Find(string name)
+        {
+            return All.SingleOrDefault(purchaseType => purchaseType.Name == name);
+        }
     }
 }

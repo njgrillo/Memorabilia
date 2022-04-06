@@ -61,6 +61,11 @@ namespace Memorabilia.Domain.Constants
         public static AcquisitionType Find(int id)
         {
             return All.SingleOrDefault(acquisitionType => acquisitionType.Id == id);
-        }        
+        }    
+        
+        public static AcquisitionType Find(string name)
+        {
+            return All.SingleOrDefault(acquisitionType => acquisitionType.Name == name);
+        }
     }
 }

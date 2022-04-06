@@ -1,25 +1,5 @@
 ﻿@page "/MagazineTypes"
 
-@using Memorabilia.Application.Features.Admin
-@using Memorabilia.Application.Features.Admin.MagazineType
-
-@inject CommandRouter _commandRouter
-@inject QueryRouter _queryRouter
-
-<_DomainItems DomainItems="_viewModel"
-              OnDelete="OnDelete"
-              OnLoad="OnLoad" />
-
-@code {
-    private MagazineTypesViewModel _viewModel;
-
-    protected async Task OnDelete(SaveDomainViewModel viewModel)
-    {
-        await _commandRouter.Send(new SaveMagazineType.Command(viewModel)).ConfigureAwait(false);
-    }
-
-    protected async Task OnLoad()
-    {
-        _viewModel = await _queryRouter.Send(new GetMagazineTypes.Query()).ConfigureAwait(false);
-    }
-}
+<DomainItems Items="_viewModel"
+             OnDelete="OnDelete"
+             OnLoad="OnLoad" />

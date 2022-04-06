@@ -1,52 +1,52 @@
-﻿using Memorabilia.Domain;
+﻿using Memorabilia.Domain.Entities;
+using Memorabilia.Repository.Interfaces;
 using Microsoft.EntityFrameworkCore;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
 namespace Memorabilia.Repository
 {
-    public class UserRepository : BaseRepository<Domain.Entities.User>, IUserRepository
+    public class UserRepository : BaseRepository<User>, IUserRepository
     {
-        private readonly Context _context;
+        private readonly DomainContext _context;
 
-        public UserRepository(Context context) : base(context)
+        public UserRepository(DomainContext context) : base(context)
         {
             _context = context;
         }
 
-        private IQueryable<Domain.Entities.User> User => _context.Set<Domain.Entities.User>();
+        private IQueryable<User> User => _context.Set<User>().Include(user => user.DashboardItems);
 
-        public async Task Add(Domain.Entities.User user, CancellationToken cancellationToken = default)
+        public async Task Add(User user, CancellationToken cancellationToken = default)
         {
             _context.Add(user);
 
             await _context.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
         }
 
-        public async Task Delete(Domain.Entities.User user, CancellationToken cancellationToken = default)
+        public async Task Delete(User user, CancellationToken cancellationToken = default)
         {
-            _context.Set<Domain.Entities.User>().Remove(user);
+            _context.Set<User>().Remove(user);
 
             await _context.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
         }
 
-        public async Task<Domain.Entities.User> Get(int id)
+        public async Task<User> Get(int id)
         {
             return await User.SingleOrDefaultAsync(user => user.Id == id)
                                .ConfigureAwait(false);
         }
 
-        public async Task<Domain.Entities.User> Get(string username, string password)
+        public async Task<User> Get(string username, string password)
         {
             return await User.SingleOrDefaultAsync(user => user.Username == username && user.Password == password)
                                .ConfigureAwait(false);
         }
 
-        public async Task Update(Domain.Entities.User user, CancellationToken cancellationToken = default)
+        public async Task Update(User user, CancellationToken cancellationToken = default)
         {
-            _context.Set<Domain.Entities.User>().Update(user);
+            _context.Set<User>().Update(user);
 
             await _context.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
         }

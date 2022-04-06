@@ -1,154 +1,112 @@
 ﻿@page "/Memorabilia/Bat/Edit/{memorabiliaId:int}"
 
-@using Memorabilia.Application.Features.Admin.Person
-@using Memorabilia.Application.Features.Admin.Team
-@using Memorabilia.Application.Features.Memorabilia
+@using Memorabilia.Application.Features.Admin.ItemTypeBrand
+@using Memorabilia.Application.Features.Admin.People
+@using Memorabilia.Application.Features.Admin.Teams
 @using Memorabilia.Application.Features.Memorabilia.Bat
-@using Memorabilia.Web.Controls.Bat
-@using Memorabilia.Web.Controls.Color
-@using Memorabilia.Web.Controls.Commissioner
-@using Memorabilia.Web.Controls.GameStyleType
-@using Memorabilia.Web.Controls.ItemTypeBrand
-@using Memorabilia.Web.Controls.ItemTypeLevel
-@using Memorabilia.Web.Controls.ItemTypeSize
+@using Memorabilia.Web.Controls.DropDowns
 @using Memorabilia.Web.Controls.MemorabiliaItem
 @using Memorabilia.Web.Controls.Person
 @using Memorabilia.Web.Controls.Team
 
-@inject CommandRouter _commandRouter
-@inject QueryRouter _queryRouter
-
-<_EditMemorabiliaItem ImagePath="@_viewModel.ImagePath"
-					  ItemType="_viewModel.ItemType" 
-                      MemorabiliaId="MemorabiliaId"
-                      Model="_viewModel"
-                      OnLoad="OnLoad"
-                      OnSave="OnSave"
-                      PageTitle="_viewModel.PageTitle"
-                      TItem="SaveBatViewModel">
+<EditPage ContinueNavigationPath="@_viewModel.ContinueNavigationPath"
+          EditMode="_viewModel.EditModeType"
+          ExitNavigationPath="@_viewModel.ExitNavigationPath"
+          ImagePath="@_viewModel.ImagePath"
+          ItemName="@_viewModel.ItemType.Name"
+          Model="_viewModel"
+          OnLoad="OnLoad"
+          OnSave="OnSave"
+          PageFooterButtonText="@_viewModel.ExitButtonText"
+          PageFooterNavigationPath="@_viewModel.ExitNavigationPath"
+          PageTitle="@_viewModel.PageTitle"
+          TItem="SaveBatViewModel"
+          UseMultipleButtons="true">
+    <TimelineContent>
+        <MemorabiliaItemTimeline EditMode="_viewModel.EditModeType"
+                                 ItemTypeName="@_viewModel.ItemType.Name"
+                                 MemorabiliaId="_viewModel.MemorabiliaId"
+                                 MemorabiliaItemStep="_viewModel.MemorabiliaItemStep" />
+    </TimelineContent>
     <Content>
-		<div class="row">
-            <div class="col-lg-6">
-                <div class="form-group">
-                    <div class="form-group">
-                    <label for="brand">Brand</label>
-                    <_ItemTypeBrandDropDown @bind-Value="@_viewModel.BrandId" 
-                                            @bind-Value:event="ValueChanged"
-                                            ItemType="_viewModel.ItemType" />
+        <DivRowCol3>
+            <Content>
+                <ItemTypeBrandDropDown @bind-Value="@_viewModel.BrandId" 
+                                       @bind-Value:event="ValueChanged"
+                                       ItemType="_viewModel.ItemType"
+                                       SelectedValue="_viewModel.BrandId" />
+            </Content>
+            <ContentColumn2>
+                <ItemTypeSizeDropDown @bind-Value="@_viewModel.SizeId"
+                                      @bind-Value:event="ValueChanged" 
+                                      ItemType="_viewModel.ItemType"
+                                      SelectedValue="@_viewModel.SizeId" /> 
+            </ContentColumn2>
+        </DivRowCol3>
+        <DivRowCol3>
+            <Content>
+                <MudSelect @bind-Value="@_viewModel.BatTypeId"
+                           @bind-Value:event="ValueChanged"    
+                           Label="Bat Type"
+                           Variant="Variant.Outlined" >
+                    <MudSelectItem Value="@(0)">--Select--</MudSelectItem>
+                    <Iterations Items="_viewModel.BatTypes" Context="batType">
+                        <MudSelectItem Value="@batType.Id">@batType.Name</MudSelectItem>
+                    </Iterations>	
+                </MudSelect>
+            </Content>
+            <ContentColumn2>
+                <MudSelect @bind-Value="@_viewModel.GameStyleTypeId"
+                           @bind-Value:event="ValueChanged"    
+                           Label="Game Style Type"
+                           Variant="Variant.Outlined" >
+                    <MudSelectItem Value="@(0)">--Select--</MudSelectItem>
+                    <Iterations Items="_viewModel.GameStyleTypes" Context="gameStyleType">
+                        <MudSelectItem Value="@gameStyleType.Id">@gameStyleType.Name</MudSelectItem>
+                    </Iterations>	
+                </MudSelect>
+            </ContentColumn2>
+        </DivRowCol3>
+        <DivRowCol3>
+            <ContentColumn2>
+                <div hidden="@(!_viewModel.DisplayGameDate)">
+                    <MudDatePicker @bind-Date="_viewModel.GameDate"
+                                   DateFormat="MM/dd/yyyy"
+                                   Editable="true"
+                                   Label="Game Date"
+                                   Mask="@(new DateMask("MM/dd/yyyy"))" 
+                                   Variant="Variant.Outlined" />
                 </div> 
-                </div> 
-            </div>
-            <div class="col-lg-6">
-                <div class="form-group">
-                    <label for="size">Size</label>
-                    <_ItemTypeSizeDropDown @bind-Value="@_viewModel.SizeId"
-                                           @bind-Value:event="ValueChanged" 
-                                           ItemType="_viewModel.ItemType" /> 
-                </div> 
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-lg-6">
-                    <div class="form-group">
-                    <label for="BatType">Bat Type</label>
-                    <_BatTypeDropDown @bind-Value="@_viewModel.BatTypeId" 
-                                       @bind-Value:event="ValueChanged" /> 
-                </div> 
-            </div>
-            <div class="col-lg-6">
-                <div class="form-group">
-                    <label for="gameStyleType">Game Style Type</label>
-                    <_GameStyleTypeDropDown @bind-Value="@_viewModel.GameStyleTypeId"
-                                            @bind-Value:event="ValueChanged"
-                                            ItemType="_viewModel.ItemType" /> 
-                </div> 
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-lg-6" />  
-            <div class="col-lg-6">
-                <div class="form-group" hidden="@(!_viewModel.DisplayGameDate)">
-                    <label for="gameDate">Game Date</label>
-                    <InputDate id="gameDate" class="form-control" @bind-Value="_viewModel.GameDate" />
-                </div>                        
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-lg-6">
-                <div class="form-group">
-                    <label for="color">Color</label>
-                    <_ColorDropDown @bind-Value="@_viewModel.ColorId"
-                                    @bind-Value:event="ValueChanged"
-                                    ItemType="_viewModel.ItemType" /> 
-                </div> 
-            </div>
-            <div class="col-lg-6">
-                <div class="form-group">
-                    <label for="length">Length</label>
-                    <InputNumber id="length" class="form-control" @bind-Value="_viewModel.Length" />
-                </div> 
-            </div>
-        </div>
-        <_PersonSelector CanFilterBySport="true"
-                         CanToggle="true"
-                         ItemType="_viewModel.ItemType"
-                         SelectedPerson="_viewModel.Person"
-                         SelectedPersonChanged="SelectedPersonChanged"
-                         Sport="_viewModel.Sport" />                 
-        <_TeamSelector CanToggle="true" 
-                       ItemType="_viewModel.ItemType"
-                       SelectedTeam="_viewModel.Team"
-                       SelectedTeamChanged="SelectedTeamChanged"
-                       SportLeagueLevel="_viewModel.SportLeagueLevel" />
-	</Content>
-</_EditMemorabiliaItem>
-
-@code {
-    [Parameter]
-    public int MemorabiliaId { get; set; }
-
-    private SaveBatViewModel _viewModel = new SaveBatViewModel();    
-
-    protected async Task OnLoad()
-    {     
-        var viewModel = await _queryRouter.Send(new GetBat.Query(MemorabiliaId)).ConfigureAwait(false);
-
-        if (viewModel.Brand == null)
-        {
-            SetDefaults();
-            return;
-        }    
-
-        _viewModel = new SaveBatViewModel(viewModel); 
-    }  
-
-    protected async Task OnSave()
-    {            
-        _viewModel.MemorabiliaId = MemorabiliaId;
-
-        var command = new SaveBat.Command(_viewModel);
-
-        await _commandRouter.Send(command).ConfigureAwait(false);
-
-        MemorabiliaId = command.MemorabiliaId;
-    }
-
-    private void SelectedPersonChanged(SavePersonViewModel person)
-    {
-        _viewModel.Person = person;
-    }
-
-    private void SelectedTeamChanged(SaveTeamViewModel team)
-    {
-        _viewModel.Team = team;
-    }
-
-    private void SetDefaults()
-    {        
-        _viewModel.BatTypeId = BatType.BigStick.Id;
-        _viewModel.BrandId = Brand.Rawlings.Id;
-        _viewModel.ColorId = Color.Black.Id;
-        _viewModel.GameStyleTypeId = GameStyleType.None.Id;
-        _viewModel.SizeId = Size.Full.Id;  
-    }
-}
+            </ContentColumn2>
+        </DivRowCol3>
+        <DivRowCol3>
+            <Content>
+                <MudSelect @bind-Value="@_viewModel.ColorId"
+                           @bind-Value:event="ValueChanged"    
+                           Label="Color"
+                           Variant="Variant.Outlined" >
+                    <MudSelectItem Value="@(0)">--Select--</MudSelectItem>
+                    <Iterations Items="_viewModel.Colors" Context="color">
+                        <MudSelectItem Value="@color.Id">@color.Name</MudSelectItem>
+                    </Iterations>	
+                </MudSelect>
+            </Content>
+            <ContentColumn2>
+                <MudNumericField @bind-Value="_viewModel.Length" 
+                                 Label="Length" 
+                                 Variant="Variant.Outlined" />
+            </ContentColumn2>
+        </DivRowCol3>
+        <PersonSelector CanFilterBySport="true"
+                        CanToggle="true"
+                        ItemType="_viewModel.ItemType"
+                        SelectedPerson="_viewModel.Person"
+                        SelectedPersonChanged="SelectedPersonChanged"
+                        Sport="_viewModel.Sport" />                 
+        <TeamSelector CanToggle="true" 
+                      ItemType="_viewModel.ItemType"
+                      SelectedTeam="_viewModel.Team"
+                      SelectedTeamChanged="SelectedTeamChanged"
+                      SportLeagueLevel="_viewModel.SportLeagueLevel" />
+    </Content>
+</EditPage>

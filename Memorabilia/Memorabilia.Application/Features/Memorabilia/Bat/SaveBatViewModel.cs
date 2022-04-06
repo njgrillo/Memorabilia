@@ -1,14 +1,13 @@
-﻿using Memorabilia.Application.Features.Admin.Person;
-using Memorabilia.Application.Features.Admin.Team;
+﻿using Memorabilia.Application.Features.Admin.People;
+using Memorabilia.Application.Features.Admin.Teams;
 using Memorabilia.Domain.Constants;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 
 namespace Memorabilia.Application.Features.Memorabilia.Bat
 {
-    public class SaveBatViewModel : SaveViewModel
+    public class SaveBatViewModel : SaveItemViewModel
     {
         public SaveBatViewModel() { }
 
@@ -30,9 +29,13 @@ namespace Memorabilia.Application.Features.Memorabilia.Bat
                 Team = new SaveTeamViewModel(new TeamViewModel(viewModel.Teams.First().Team));
         }
 
+        public override string BackNavigationPath => $"Memorabilia/Edit/{MemorabiliaId}";
+
         public BatType BatType => BatType.Find(BatTypeId);
 
         public int BatTypeId { get; set; }
+
+        public BatType[] BatTypes => BatType.All;
 
         [Required]
         [Range(1, int.MaxValue, ErrorMessage = "Brand is required.")]
@@ -40,7 +43,13 @@ namespace Memorabilia.Application.Features.Memorabilia.Bat
 
         public int ColorId { get; set; }
 
+        public Color[] Colors => Color.GetAll(ItemType);
+
         public bool DisplayGameDate => GameStyleType == GameStyleType.GameUsed;
+
+        public override EditModeType EditModeType => MemorabiliaId > 0 ? EditModeType.Update : EditModeType.Add;
+
+        public override string ExitNavigationPath => "Memorabilia/Items";
 
         public DateTime? GameDate { get; set; }
 
@@ -50,33 +59,17 @@ namespace Memorabilia.Application.Features.Memorabilia.Bat
         [Range(1, int.MaxValue, ErrorMessage = "Game Style Type is required.")]
         public int GameStyleTypeId { get; set; }
 
+        public GameStyleType[] GameStyleTypes => GameStyleType.GetAll(ItemType.Baseball);
+
         public bool HasPerson => Person?.Id > 0;
 
         public bool HasTeam => Team?.Id > 0;
 
-        public string ImagePath
-        {
-            get
-            {
-                var path = "images/";
+        public override string ImagePath => "images/bat.jpg";
 
-                //if (DisplayBatType && BatType != null)
-                //{
-                //    return $"{path}{BatType.Name.Replace(" ", "")}.jpg";
-                //}
-
-                return $"{path}bat.jpg";
-            }
-        }
-
-        public ItemType ItemType => ItemType.Bat;
+        public override ItemType ItemType => ItemType.Bat;
 
         public int? Length { get; set; }
-
-        [Required]
-        public int MemorabiliaId { get; set; }
-
-        public override string PageTitle => $"{(MemorabiliaId > 0 ? "Edit" : "Add")} {ItemType.Bat.Name} Details";
 
         public SavePersonViewModel Person { get; set; }
 

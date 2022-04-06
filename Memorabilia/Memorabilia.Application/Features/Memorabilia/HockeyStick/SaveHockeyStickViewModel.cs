@@ -1,5 +1,5 @@
-﻿using Memorabilia.Application.Features.Admin.Person;
-using Memorabilia.Application.Features.Admin.Team;
+﻿using Memorabilia.Application.Features.Admin.People;
+using Memorabilia.Application.Features.Admin.Teams;
 using Memorabilia.Domain.Constants;
 using System;
 using System.Collections.Generic;
@@ -8,7 +8,7 @@ using System.Linq;
 
 namespace Memorabilia.Application.Features.Memorabilia.HockeyStick
 {
-    public class SaveHockeyStickViewModel : SaveViewModel
+    public class SaveHockeyStickViewModel : SaveItemViewModel
     {
         public SaveHockeyStickViewModel() { }
 
@@ -30,11 +30,17 @@ namespace Memorabilia.Application.Features.Memorabilia.HockeyStick
                 Team = new SaveTeamViewModel(new TeamViewModel(viewModel.Teams.First().Team));
         }
 
+        public override string BackNavigationPath => $"Memorabilia/Edit/{MemorabiliaId}";
+
         [Required]
         [Range(1, int.MaxValue, ErrorMessage = "Brand is required.")]
         public int BrandId { get; set; }
 
         public bool DisplayGameDate => GameStyleType == GameStyleType.GameUsed;
+
+        public override EditModeType EditModeType => MemorabiliaId > 0 ? EditModeType.Update : EditModeType.Add;
+
+        public override string ExitNavigationPath => "Memorabilia/Items";
 
         public DateTime? GameDate { get; set; }
 
@@ -44,24 +50,21 @@ namespace Memorabilia.Application.Features.Memorabilia.HockeyStick
 
         public int GameStyleTypeId { get; set; }
 
+        public GameStyleType[] GameStyleTypes => GameStyleType.GetAll(ItemType.HockeyStick);
+
         public bool HasPerson => Person?.Id > 0;
 
         public bool HasSport => SportIds.Any();
 
         public bool HasTeam => Team?.Id > 0;
 
-        public string ImagePath { get; set; }
+        public override string ImagePath => "images/hockeystick.jpg";
 
-        public ItemType ItemType => ItemType.HockeyStick;
+        public override ItemType ItemType => ItemType.HockeyStick;
 
         [Required]
         [Range(1, int.MaxValue, ErrorMessage = "Level is required.")]
         public int LevelTypeId { get; set; }
-
-        [Required]
-        public int MemorabiliaId { get; set; }
-
-        public override string PageTitle => $"{(MemorabiliaId > 0 ? "Edit" : "Add")} {ItemType.HockeyStick.Name} Details";
 
         public SavePersonViewModel Person { get; set; } 
 

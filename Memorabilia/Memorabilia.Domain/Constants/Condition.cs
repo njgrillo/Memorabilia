@@ -40,5 +40,10 @@ namespace Memorabilia.Domain.Constants
         {
             return All.SingleOrDefault(condition => condition.Id == id);
         }
+
+        public static Condition Find(string name)
+        {
+            return All.SingleOrDefault(condition => condition.Name == name);
+        }
     }
 }

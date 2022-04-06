@@ -1,208 +1,129 @@
 ﻿@page "/Autographs/Authentications/Edit/{autographId:int}"
 
-@using Memorabilia.Application.Features.Autograph
 @using Memorabilia.Application.Features.Autograph.Authentication
 @using Memorabilia.Web.Controls
-@using Memorabilia.Web.Controls.AuthenticationCompany
+@using Memorabilia.Web.Controls.Autographs
 
-@inject CommandRouter _commandRouter
-@inject NavigationManager _navigation
-@inject QueryRouter _queryRouter
-@inject IToastService _toastService
-
-<_Page OnLoad="OnLoad">
+<EditPage ContinueNavigationPath="@_authenticationsViewModel.ContinueNavigationPath"
+          EditMode="_authenticationsViewModel.EditModeType"
+          ExitNavigationPath="@_authenticationsViewModel.ExitNavigationPath"
+          ImagePath="@_authenticationsViewModel.ImagePath"
+          ItemName="@_authenticationsViewModel.PageTitle"
+          Model="_authenticationsViewModel"
+          OnLoad="OnLoad"
+          OnSave="OnSave"
+          PageFooterButtonText="@_authenticationsViewModel.ExitButtonText"
+          PageFooterNavigationPath="@_authenticationsViewModel.BackNavigationPath"
+          PageTitle="@_authenticationsViewModel.PageTitle"
+          TItem="SaveAuthenticationsViewModel"
+          UseMultipleButtons="true">
+    <TimelineContent>
+        <AutographTimeline AutographId="_authenticationsViewModel.AutographId" 
+                           AutographStep="_authenticationsViewModel.AutographStep"  
+                           DisplaySpot="_authenticationsViewModel.CanHaveSpot" 
+                           EditMode="_authenticationsViewModel.EditModeType"
+                           MemorabiliaId="_authenticationsViewModel.MemorabiliaId"/>
+    </TimelineContent>
     <Content>
-        <div class="row">
-            <div class="col-md-12" style="text-align: center">
-                <h1>@_authenticationsViewModel.PageTitle</h1>
-            </div>
-        </div>
+        <DivRowCol4>
+            <Content>
+                <MudSelect @bind-Value="@_viewModel.AuthenticationCompanyId"
+                           @bind-Value:event="ValueChanged" 
+                           Disabled="@(!_canEditAuthenticationCompany)"
+                           Label="Authentication Company"
+                           Variant="Variant.Outlined">
+                    <MudSelectItem Value="@(0)">--Select--</MudSelectItem>
+                    <Iterations Items="_viewModel.AuthenticationCompanies" Context="authenticationCompany">
+                        <MudSelectItem Value="@authenticationCompany.Id">@authenticationCompany.Name</MudSelectItem>
+                    </Iterations>	
+                </MudSelect>
+            </Content>
+        </DivRowCol4>
+        <DivRowCol4>
+            <Content>
+                <MudTextField @bind-Value="_viewModel.Verification" 
+                              Label="Verification" 
+                              Variant="Variant.Outlined" /> 
+            </Content>
+        </DivRowCol4>
+        <DivRowCol2>
+            <Content>
+                <MudCheckBox @bind-Checked="@_viewModel.HasHologram" 
+                             Label="Has Hologram" />
+            </Content>
+            <ContentColumn2>
+                <MudCheckBox @bind-Checked="@_viewModel.HasCertificationCard" 
+                             Label="Has Certification Card" />
+            </ContentColumn2>
+        </DivRowCol2>
+        <DivRowCol2>
+            <Content>
+                <MudCheckBox @bind-Checked="@_viewModel.HasLetter"
+                             Label="Has Letter" />
+            </Content>
+            <ContentColumn2>
+                <MudCheckBox @bind-Checked="@_viewModel.Witnessed" 
+                             Label="Witnessed" />
+            </ContentColumn2>
+        </DivRowCol2>
+        <DivLeftAlign>
+            <Content>
+                <MudButton hidden="@(!_canAddAuthentication)"
+                           ButtonType="MudBlazor.ButtonType.Button" 
+                           Color="MudBlazor.Color.Secondary"
+                           OnClick="AddAuthentication"
+                           Size="MudBlazor.Size.Medium"                                  
+                           Variant="Variant.Filled">Add</MudButton>
+                <MudButton hidden="@(!_canUpdateAuthentication)"
+                           ButtonType="MudBlazor.ButtonType.Button" 
+                           Color="MudBlazor.Color.Secondary"
+                           OnClick="UpdateAuthentication"
+                           Size="MudBlazor.Size.Medium"                                  
+                           Variant="Variant.Filled">Update</MudButton>
+            </Content>
+        </DivLeftAlign>        
+        <DivRowCol12>
+            <Content>
+                <MudTable Bordered="false"
+                          Dense="false" 
+                          Hover="true"
+                          Items="@_authenticationsViewModel.Authentications"    
+                          Striped="true">
+                    <ToolBarContent>
+                        <MudText Typo="Typo.h6">Authentications</MudText>
+                    </ToolBarContent>
+                    <HeaderContent>
+                        <MudTh>Authentication Company</MudTh>
+                        <MudTh>Has Certification Card</MudTh>
+                        <MudTh>Has Hologram</MudTh>
+                        <MudTh>Has Letter</MudTh>
+                        <MudTh>Verification</MudTh>
+                        <MudTh>Witnessed</MudTh>
+                        <MudTh></MudTh>
+                    </HeaderContent>
+                    <RowTemplate Context="authentication">
+                        <MudTd DataLabel="Authentication Company">@authentication.AuthenticationCompanyName</MudTd>
+                        <MudTd DataLabel="Has Certification Card">@(authentication.HasCertificationCard ? "Yes" : "No")</MudTd>
+                        <MudTd DataLabel="Has Hologram">@(authentication.HasHologram ? "Yes" : "No")</MudTd>
+                        <MudTd DataLabel="Has Letter">@(authentication.HasLetter ? "Yes" : "No")</MudTd>
+                        <MudTd DataLabel="Verification">@authentication.Verification</MudTd>
+                        <MudTd DataLabel="Witnessed">@(authentication.Witnessed ? "Yes" : "No")</MudTd>
+                        <MudTd DataLabel="">
+                            <MudTooltip Text="Edit">
+                                <MudFab Color="MudBlazor.Color.Primary"                                
+                                        Icon="@Icons.Outlined.ModeEditOutline"
+                                        OnClick="@(_ => Edit(authentication))" />
+                            </MudTooltip>   
+                            <MudTooltip Text="Delete">
+                                <MudFab Color="MudBlazor.Color.Secondary"
+                                        Icon="@Icons.Outlined.DeleteOutline"
+                                        OnClick="@(_ => Remove(authentication.AuthenticationCompanyId))" />
+                            </MudTooltip>
+                        </MudTd>
+                    </RowTemplate>
+                </MudTable>
+            </Content>
+        </DivRowCol12>  
         <br />
-        <div style="border: 1px solid black; margin-top: 2%; margin-bottom: 2%; margin-left: 2%; margin-right: 2%;">
-            <EditForm Model="_viewModel" OnValidSubmit="HandleValidSubmit">
-                <DataAnnotationsValidator />
-                <ValidationSummary />
-                <div style="margin-top: 2%; margin-bottom: 2%; margin-left: 1%; margin-right: 1%;">
-                    <div class="col-lg-12" style="text-align: center">
-                        <img src="@_authenticationsViewModel.ImagePath" alt="Image" height="150" width="150" />
-                    </div>            
-                    <div class="row">
-                        <div class="col-lg-4">
-                            <div class="form-group">
-                                <label for="company">Authentication Company</label>
-                                <_AuthenticationCompanyDropDown @bind-Value="@_viewModel.AuthenticationCompanyId"
-                                                                @bind-Value:event="ValueChanged"
-                                                                Disabled="@(!_canEditAuthenticationCompany)" /> 
-                            </div> 
-                        </div>  
-                    </div>
-                    <div class="row">
-                        <div class="col-lg-4">
-                            <div class="form-group">  
-                                <label for="verification">Verification</label>
-                                <InputText id="verification" class="form-control" @bind-Value="_viewModel.Verification" />                            
-                            </div> 
-                        </div> 
-                    </div> 
-                    <div class="row">
-                        <div class="col-lg-2">
-                            <div class="form-group">                              
-                                <InputCheckbox id="hologram" @bind-Value="@_viewModel.HasHologram" />
-                                <label for="hasHologram">Has Hologram</label>
-                            </div> 
-                        </div>
-                        <div class="col-lg-2">
-                            <div class="form-group">                                 
-                                <InputCheckbox id="hasCertificationCard" @bind-Value="@_viewModel.HasCertificationCard" />
-                                <label for="hasCertificationCard">Has Certification Card</label>
-                            </div> 
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-lg-2">
-                            <div class="form-group">                                 
-                                <InputCheckbox id="letter" @bind-Value="@_viewModel.HasLetter" />
-                                <label for="hasLetter">Has Letter</label>
-                            </div> 
-                        </div>
-                        <div class="col-lg-2">
-                            <div class="form-group">                              
-                                <InputCheckbox id="witnessed" @bind-Value="@_viewModel.Witnessed" />  
-                                <label for="witnessed">Witnessed</label>
-                            </div> 
-                        </div> 
-                    </div>
-                    <div class="text-left">
-                        <button type="button" class="btn btn-secondary" hidden="@(!_canAddAuthentication)" @onclick="AddAuthentication">Add</button>
-                        <button type="button" class="btn btn-secondary" hidden="@(!_canUpdateAuthentication)" @onclick="UpdateAuthentication">Update</button>
-                    </div>
-                    <br />
-                    <_Table Items="_authenticationsViewModel.Authentications" 
-                            ItemsPerPage="5"   
-                            TItem="SaveAuthenticationViewModel">
-                        <HeaderTemplate>
-                            <th scope="col">Authentication Company</th>
-                            <th scope="col">Has Certification Card</th>
-                            <th scope="col">Has Hologram</th>
-                            <th scope="col">Has Letter</th>
-                            <th scope="col">Verification</th>
-                            <th scope="col">Witnessed</th>
-                            <th scope="col"></th>
-                            <th scope="col"></th>
-                        </HeaderTemplate>
-                        <RowTemplate Context="authentication">
-                            <td>@authentication.AuthenticationCompanyName</td>
-                            <td>@(authentication.HasCertificationCard ? "Yes" : "No")</td>
-                            <td>@(authentication.HasHologram ? "Yes" : "No")</td>
-                            <td>@(authentication.HasLetter ? "Yes" : "No")</td>
-                            <td>@authentication.Verification</td>
-                            <td>@(authentication.Witnessed ? "Yes" : "No")</td>
-                            <td>
-                                <_Tooltip Text="Edit">
-                                    <img class="can-click" 
-                                         src="images/pencil.png" 
-                                         height="25" 
-                                         width="25" 
-                                         @onclick="@(_ => Edit(authentication))" />
-                                </_Tooltip>
-                            </td>
-                            <td>
-                                <_Tooltip Text="Delete">
-                                    <img class="can-click" 
-                                         src="images/trash.png" 
-                                         height="25" 
-                                         width="25" 
-                                         @onclick="@(_ => Remove(authentication.AuthenticationCompanyId))" />
-                                </_Tooltip>
-                            </td>
-                        </RowTemplate>
-                    </_Table>
-                    <div class="text-left">
-                        <button type="submit" class="btn btn-primary" @onclick="@(()=> _continue = true)">Save & Continue</button>
-                        <button type="submit" class="btn btn-primary">Save & Exit</button>
-                        <button type="button" class="btn btn-secondary" @onclick="@(_ => _navigation.NavigateTo("Memorabilia"))">Cancel</button>
-                    </div>
-                </div>            
-            </EditForm>        
-        </div>
     </Content>
-</_Page>
-
-@code {
-    [Parameter]
-    public int AutographId { get; set; }
-
-    private SaveAuthenticationsViewModel _authenticationsViewModel = new SaveAuthenticationsViewModel();
-    private bool _canAddAuthentication = true;    
-    private bool _canEditAuthenticationCompany = true;
-    private bool _canUpdateAuthentication;
-    private bool _continue;
-    private SaveAuthenticationViewModel _viewModel = new SaveAuthenticationViewModel();
-
-    protected async Task HandleValidSubmit()
-    {
-        _authenticationsViewModel.AutographId = AutographId;
-
-        await _commandRouter.Send(new SaveAuthentications.Command(_authenticationsViewModel)).ConfigureAwait(false);
-
-        var url = _continue && _authenticationsViewModel.CanHaveSpot 
-            ? $"Autographs/Spot/Edit/{AutographId}" 
-            : $"Autographs/Image/Edit/{AutographId}";
-
-        _navigation.NavigateTo(url);
-
-        _toastService.ShowSuccess($"{_authenticationsViewModel.PageTitle} were saved successfully!", _authenticationsViewModel.PageTitle);
-    }
-
-    protected async Task OnLoad()
-    {
-        var autograph = await _queryRouter.Send(new GetAutograph.Query(AutographId)).ConfigureAwait(false);
-
-        if (autograph.Authentications.Any())
-            _authenticationsViewModel = new SaveAuthenticationsViewModel(autograph.Authentications);
-
-        _authenticationsViewModel.ItemType = ItemType.Find(autograph.ItemTypeId);
-    } 
-
-    private void AddAuthentication()
-    {        
-        _authenticationsViewModel.Authentications.Add(_viewModel);   
-        _viewModel = new SaveAuthenticationViewModel();
-    }
-
-    private void Edit(SaveAuthenticationViewModel authentication)
-    {
-        _viewModel.AuthenticationCompanyId = authentication.AuthenticationCompanyId;
-        _viewModel.HasHologram = authentication.HasHologram;
-        _viewModel.HasLetter = authentication.HasLetter;
-        _viewModel.Verification = authentication.Verification;
-        _viewModel.Witnessed = authentication.Witnessed;
-
-        _canAddAuthentication = false;
-        _canEditAuthenticationCompany = false;
-        _canUpdateAuthentication = true;
-    }
-
-    private void Remove(int authenticationCompanyId)
-    {
-        var authentication = _authenticationsViewModel.Authentications.Single(authentication => authentication.AuthenticationCompanyId == authenticationCompanyId);
-
-        _authenticationsViewModel.Authentications.Remove(authentication);                                                                               
-    }    
-
-    private void UpdateAuthentication()
-    {       
-        var authentication = _authenticationsViewModel.Authentications.Single(authentication => authentication.AuthenticationCompanyId == _viewModel.AuthenticationCompanyId);
-
-        authentication.HasHologram = _viewModel.HasHologram;
-        authentication.HasLetter = _viewModel.HasLetter;
-        authentication.Verification = _viewModel.Verification;
-        authentication.Witnessed = _viewModel.Witnessed;
-
-        _viewModel = new SaveAuthenticationViewModel();
-
-        _canAddAuthentication = true;
-        _canEditAuthenticationCompany = true;
-        _canUpdateAuthentication = false;
-    }
-}
+</EditPage>

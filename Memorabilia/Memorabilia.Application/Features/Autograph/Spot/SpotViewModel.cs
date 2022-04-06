@@ -15,6 +15,8 @@
 
         public int ItemTypeId => _autograph.Memorabilia.ItemTypeId;
 
+        public int MemorabiliaId => _autograph.Memorabilia.Id;
+
         public int SpotId => _autograph?.Spot?.SpotId ?? 0;
     }
 }

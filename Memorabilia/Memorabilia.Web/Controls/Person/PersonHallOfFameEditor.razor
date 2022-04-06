@@ -1,0 +1,82 @@
+﻿@using Memorabilia.Application.Features.Admin.People
+@using Memorabilia.Web.Controls.DropDowns
+
+<DivRowCol3>
+    <Content>
+        <MudSelect @bind-Value="@_viewModel.SportLeagueLevelId"
+                   @bind-Value:event="ValueChanged" 
+                   Label="Sport League Level"
+                   Variant="Variant.Outlined">
+            <MudSelectItem Value="@(0)">--Select--</MudSelectItem>
+            <Iterations Items="SportLeagueLevel.All" Context="sportLeagueLevel">
+                <MudSelectItem Value="@sportLeagueLevel.Id">@sportLeagueLevel.Name</MudSelectItem>
+            </Iterations>	
+        </MudSelect> 
+    </Content>
+</DivRowCol3>
+<DivRowCol3>
+    <Content>
+        <MudSelect @bind-Value="@_viewModel.FranchiseId"
+                   @bind-Value:event="ValueChanged"   
+                   Label="Franchise"
+                   Variant="Variant.Outlined">
+            <MudSelectItem Value="@(0)">--Select--</MudSelectItem>
+            <Iterations Items="_viewModel.Franchises" Context="franchise">
+                <MudSelectItem Value="@franchise.Id">@franchise.Name</MudSelectItem>
+            </Iterations>	
+        </MudSelect>
+    </Content>
+</DivRowCol3>
+<DivRowCol3>
+    <Content>
+        <MudNumericField @bind-Value="_viewModel.InductionYear" 
+                         Label="Induction Year"
+                         Variant="Variant.Outlined" />
+    </Content>
+    <ContentColumn2>
+        <MudNumericField @bind-Value="_viewModel.VotePercentage" 
+                         Label="Vote Percentage"
+                         Max="100"
+                         Variant="Variant.Outlined" />
+    </ContentColumn2>
+</DivRowCol3>
+<DivLeftAlign>
+    <Content>
+        <MudButton ButtonType="MudBlazor.ButtonType.Button" 
+                   Color="MudBlazor.Color.Success"
+                   OnClick="Add"
+                   Size="MudBlazor.Size.Medium"                                  
+                   Variant="Variant.Filled">Add</MudButton>
+    </Content>
+</DivLeftAlign>
+<DivRowCol6>
+    <Content>
+         <MudTable Bordered="false"
+                   Dense="false" 
+                   Hover="true"
+                   Items="@HallOfFames.Where(hof => !hof.IsDeleted).ToList()"    
+                   Striped="true">
+            <HeaderContent>
+                <MudTh>Sport</MudTh>
+                <MudTh>Franchise</MudTh>
+                <MudTh>Induction Year</MudTh>
+                <MudTh>Vote Percentage</MudTh>
+                <MudTh></MudTh>
+            </HeaderContent>
+            <RowTemplate>
+                <MudTd DataLabel="Sport">@context.SportName</MudTd>
+                <MudTd DataLabel="Franchise">@context.FranchiseName</MudTd>
+                <MudTd DataLabel="Induction Year">@context.InductionYear</MudTd>
+                <MudTd DataLabel="Vote Percentage">@context.VotePercentage</MudTd>
+                <MudTd DataLabel="">
+                    <MudTooltip Text="Delete">
+                        <MudFab Color="MudBlazor.Color.Secondary"
+                                Icon="@Icons.Outlined.DeleteOutline"
+                                OnClick="@(_ => Remove(context.SportLeagueLevelId))" />
+                    </MudTooltip>  
+                </MudTd>
+            </RowTemplate>
+        </MudTable>
+    </Content>
+</DivRowCol6>
+

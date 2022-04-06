@@ -1,154 +1,131 @@
 ﻿@page "/Memorabilia/Helmet/Edit/{memorabiliaId:int}"
 
-@using Memorabilia.Application.Features.Admin.Person
-@using Memorabilia.Application.Features.Memorabilia
 @using Memorabilia.Application.Features.Memorabilia.Helmet
-@using Memorabilia.Web.Controls.GameStyleType
-@using Memorabilia.Web.Controls.Helmet
-@using Memorabilia.Web.Controls.ItemTypeBrand
-@using Memorabilia.Web.Controls.ItemTypeLevel
-@using Memorabilia.Web.Controls.ItemTypeSize
+@using Memorabilia.Web.Controls.DropDowns
 @using Memorabilia.Web.Controls.MemorabiliaItem
 @using Memorabilia.Web.Controls.Person
 @using Memorabilia.Web.Controls.Team
 
-@inject CommandRouter _commandRouter
-@inject QueryRouter _queryRouter
-
-<_EditMemorabiliaItem ImagePath="@_viewModel.ImagePath"
-					  ItemType="_viewModel.ItemType" 
-                      MemorabiliaId="MemorabiliaId"
-                      Model="_viewModel"
-                      OnLoad="OnLoad"
-                      OnSave="OnSave"
-                      PageTitle="_viewModel.PageTitle"
-                      TItem="SaveHelmetViewModel">
+<EditPage ContinueNavigationPath="@_viewModel.ContinueNavigationPath"
+          EditMode="_viewModel.EditModeType"
+          ExitNavigationPath="@_viewModel.ExitNavigationPath"
+          ImagePath="@_viewModel.ImagePath"
+          ItemName="@_viewModel.ItemType.Name"
+          Model="_viewModel"
+          OnLoad="OnLoad"
+          OnSave="OnSave"
+          PageFooterButtonText="@_viewModel.ExitButtonText"
+          PageFooterNavigationPath="@_viewModel.ExitNavigationPath"
+          PageTitle="@_viewModel.PageTitle"
+          TItem="SaveHelmetViewModel"
+          UseMultipleButtons="true">
+    <TimelineContent>
+        <MemorabiliaItemTimeline EditMode="_viewModel.EditModeType"
+                                 ItemTypeName="@_viewModel.ItemType.Name"
+                                 MemorabiliaId="_viewModel.MemorabiliaId"
+                                 MemorabiliaItemStep="_viewModel.MemorabiliaItemStep" />
+    </TimelineContent>
     <Content>
-		<div class="row">
-            <div class="col-lg-6">
-                <div class="form-group">
-                    <label for="level">Level</label>
-                    <_ItemTypeLevelDropDown @bind-Value="@_viewModel.LevelTypeId"
-                                            @bind-Value:event="ValueChanged" 
-                                            ItemType="_viewModel.ItemType" /> 
+        <DivRowCol3>
+            <Content>
+                <ItemTypeLevelDropDown @bind-Value="@_viewModel.LevelTypeId"
+                                       @bind-Value:event="ValueChanged" 
+                                       ItemType="_viewModel.ItemType"
+                                       SelectedValue="_viewModel.LevelTypeId" /> 
+            </Content>
+            <ContentColumn2>
+                <ItemTypeBrandDropDown @bind-Value="@_viewModel.BrandId" 
+                                       @bind-Value:event="ValueChanged"
+                                       ItemType="_viewModel.ItemType"
+                                       SelectedValue="_viewModel.BrandId" />
+            </ContentColumn2>
+        </DivRowCol3>
+        <DivRowCol3>
+            <Content>
+                <ItemTypeSizeDropDown @bind-Value="@_viewModel.SizeId"
+                                      @bind-Value:event="ValueChanged" 
+                                      ItemType="_viewModel.ItemType"
+                                      SelectedValue="@_viewModel.SizeId" /> 
+            </Content>
+            <ContentColumn2>
+                <MudSelect @bind-Value="@_viewModel.GameStyleTypeId"
+                           @bind-Value:event="ValueChanged"    
+                           Label="Game Style Type"
+                           Variant="Variant.Outlined" >
+                    <MudSelectItem Value="@(0)">--Select--</MudSelectItem>
+                    <Iterations Items="_viewModel.GameStyleTypes" Context="gameStyleType">
+                        <MudSelectItem Value="@gameStyleType.Id">@gameStyleType.Name</MudSelectItem>
+                    </Iterations>	
+                </MudSelect> 
+            </ContentColumn2>
+        </DivRowCol3>
+        <DivRowCol3>
+            <ContentColumn2>
+                <div hidden="@(!_viewModel.DisplayGameDate)">
+                    <MudDatePicker @bind-Date="_viewModel.GameDate"
+                                   DateFormat="MM/dd/yyyy"
+                                   Editable="true"
+                                   Label="Game Date"
+                                   Mask="@(new DateMask("MM/dd/yyyy"))" 
+                                   Variant="Variant.Outlined" />
                 </div> 
-            </div>
-            <div class="col-lg-6">
-                <div class="form-group">
-                    <label for="brand">Brand</label>
-                    <_ItemTypeBrandDropDown @bind-Value="@_viewModel.BrandId" 
-                                            @bind-Value:event="ValueChanged"
-                                            ItemType="_viewModel.ItemType" />
+            </ContentColumn2>
+        </DivRowCol3>
+        <DivRowCol3>
+            <Content>
+                <MudSelect @bind-Value="@_viewModel.HelmetTypeId"
+                           @bind-Value:event="ValueChanged"    
+                           Label="Type"
+                           Variant="Variant.Outlined" >
+                    <MudSelectItem Value="@(0)">--Select--</MudSelectItem>
+                    <Iterations Items="_viewModel.HelmetTypes" Context="helmetType">
+                        <MudSelectItem Value="@helmetType.Id">@helmetType.Name</MudSelectItem>
+                    </Iterations>	
+                </MudSelect> 
+            </Content>
+            <ContentColumn2>
+                <div hidden="@(!_viewModel.DisplayHelmetQualityType)">
+                    <MudSelect @bind-Value="@_viewModel.HelmetTypeId"
+                               @bind-Value:event="ValueChanged"  
+                               Disabled="!_viewModel.CanEditHelmetQualityType"
+                               Label="Quality"
+                               Variant="Variant.Outlined" >
+                        <MudSelectItem Value="@(0)">--Select--</MudSelectItem>
+                        <Iterations Items="_viewModel.HelmetQualityTypes" Context="helmetQualityType">
+                            <MudSelectItem Value="@helmetQualityType.Id">@helmetQualityType.Name</MudSelectItem>
+                        </Iterations>	
+                    </MudSelect> 
                 </div> 
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-lg-6">
-                <div class="form-group">
-                    <label for="size">Size</label>
-                    <_ItemTypeSizeDropDown @bind-Value="@_viewModel.SizeId"
-                                           @bind-Value:event="ValueChanged" 
-                                           ItemType="_viewModel.ItemType" /> 
+            </ContentColumn2>
+        </DivRowCol3>
+        <DivRowCol3>
+            <Content>
+                <div hidden="@(!_viewModel.DisplayHelmetFinish)">
+                    <MudSelect @bind-Value="@_viewModel.HelmetFinishId"
+                               @bind-Value:event="ValueChanged"    
+                               Label="Finish"
+                               Variant="Variant.Outlined" >
+                        <MudSelectItem Value="@(0)">--Select--</MudSelectItem>
+                        <Iterations Items="_viewModel.HelmetFinishes" Context="helmetFinish">
+                            <MudSelectItem Value="@helmetFinish.Id">@helmetFinish.Name</MudSelectItem>
+                        </Iterations>	
+                    </MudSelect> 
                 </div> 
-            </div>
-            <div class="col-lg-6">
-                    <div class="form-group">
-                    <label for="gameStyleType">Game Style Type</label>
-                    <_GameStyleTypeDropDown @bind-Value="@_viewModel.GameStyleTypeId"
-                                            @bind-Value:event="ValueChanged"
-                                            ItemType="_viewModel.ItemType" />                             
-                </div> 
-            </div>
-        </div>
-        <div class="row">     
-            <div class="col-lg-6" /> 
-            <div class="col-lg-6">
-                <div class="form-group" hidden="@(!_viewModel.DisplayGameDate)">
-                    <label for="gameDate">Game Date</label>
-                    <InputDate id="gameDate" class="form-control" @bind-Value="_viewModel.GameDate" />
-                </div>                        
-            </div>                     
-        </div>
-        <div class="row">
-            <div class="col-lg-6">
-                    <div class="form-group">
-                    <label for="HelmetType">Type</label>
-                    <_HelmetTypeDropDown @bind-Value="@_viewModel.HelmetTypeId" 
-                                         @bind-Value:event="ValueChanged"
-                                         GameStyleType="_viewModel.GameStyleType"/> 
-                </div>
-            </div>
-            <div class="col-lg-6">
-                <div class="form-group" hidden="@(!_viewModel.DisplayHelmetQualityType)">
-                    <label for="HelmetQualityType">Quality</label>
-                    <_HelmetQualityTypeDropDown @bind-Value="@_viewModel.HelmetQualityTypeId" 
-                                                @bind-Value:event="ValueChanged"
-                                                Disabled="!_viewModel.CanEditHelmetQualityType" /> 
-                </div> 
-            </div>                    
-        </div>
-        <div class="row">
-            <div class="col-lg-6">
-                <div class="form-group" hidden="@(!_viewModel.DisplayHelmetFinish)">
-                    <label for="HelmetFinish">Finish</label>
-                    <_HelmetFinishDropDown @bind-Value="@_viewModel.HelmetFinishId" 
-                                           @bind-Value:event="ValueChanged" /> 
-                </div> 
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="form-group">
-                        <InputCheckbox id="throwback" @bind-Value="@_viewModel.Throwback" />
-                    <label for="Throwback">Is a Throwback?</label>                           
-                </div> 
-            </div>
-        </div>
-        <_PersonSelector AllowMultiple="true"
-                         CanToggle="true"
-                         ItemType="_viewModel.ItemType"
-                         People="_viewModel.People" />                 
-        <_TeamSelector AllowMultiple="true"
-                       CanToggle="true" 
-                       ItemType="_viewModel.ItemType"
-                       Teams="_viewModel.Teams" />
-	</Content>
-</_EditMemorabiliaItem>
-
-@code {
-    [Parameter]
-    public int MemorabiliaId { get; set; }
-
-    private SaveHelmetViewModel _viewModel = new SaveHelmetViewModel();    
-
-    protected async Task OnLoad()
-    {     
-        var helmetViewModel = await _queryRouter.Send(new GetHelmet.Query(MemorabiliaId)).ConfigureAwait(false);
-
-        if (helmetViewModel.Brand == null)
-        {
-            SetDefaults();
-            return;
-        }    
-
-        _viewModel = new SaveHelmetViewModel(helmetViewModel);  
-    }   
-
-    protected async Task OnSave()
-    {              
-        _viewModel.MemorabiliaId = MemorabiliaId;
-
-        var command = new SaveHelmet.Command(_viewModel);
-
-        await _commandRouter.Send(command).ConfigureAwait(false);
-
-        MemorabiliaId = command.MemorabiliaId;
-    }
-
-    private void SetDefaults()
-    {        
-        _viewModel.BrandId = Brand.Riddell.Id;
-        _viewModel.GameStyleTypeId = GameStyleType.None.Id;
-        _viewModel.LevelTypeId = LevelType.Professional.Id;
-    }
-}
+            </Content>
+        </DivRowCol3>
+        <DivRowCol3>
+            <Content>
+                <MudCheckBox @bind-Checked="@_viewModel.Throwback" 
+                             Label="Is a Throwback?" /> 
+            </Content>
+        </DivRowCol3>
+        <PersonSelector AllowMultiple="true"
+                        CanToggle="true"
+                        ItemType="_viewModel.ItemType"
+                        People="_viewModel.People" />                 
+        <TeamSelector AllowMultiple="true"
+                      CanToggle="true" 
+                      ItemType="_viewModel.ItemType"
+                      Teams="_viewModel.Teams" />
+    </Content>
+</EditPage>

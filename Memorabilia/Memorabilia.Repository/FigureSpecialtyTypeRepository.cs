@@ -1,4 +1,5 @@
-﻿using Memorabilia.Domain;
+﻿using Memorabilia.Domain.Entities;
+using Memorabilia.Repository.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,44 +8,44 @@ using System.Threading.Tasks;
 
 namespace Memorabilia.Repository
 {
-    public class FigureSpecialtyTypeRepository : BaseRepository<Domain.Entities.FigureSpecialtyType>, IFigureSpecialtyTypeRepository
+    public class FigureSpecialtyTypeRepository : BaseRepository<FigureSpecialtyType>, IFigureSpecialtyTypeRepository
     {
-        private readonly Context _context;
+        private readonly DomainContext _context;
 
-        public FigureSpecialtyTypeRepository(Context context) : base(context)
+        public FigureSpecialtyTypeRepository(DomainContext context) : base(context)
         {
             _context = context;
         }
 
-        private IQueryable<Domain.Entities.FigureSpecialtyType> FigureSpecialtyType => _context.Set<Domain.Entities.FigureSpecialtyType>();
+        private IQueryable<FigureSpecialtyType> FigureSpecialtyType => _context.Set<FigureSpecialtyType>();
 
-        public async Task Add(Domain.Entities.FigureSpecialtyType figureSpecialtyType, CancellationToken cancellationToken = default)
+        public async Task Add(FigureSpecialtyType figureSpecialtyType, CancellationToken cancellationToken = default)
         {
             _context.Add(figureSpecialtyType);
 
             await _context.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
         }
 
-        public async Task Delete(Domain.Entities.FigureSpecialtyType figureSpecialtyType, CancellationToken cancellationToken = default)
+        public async Task Delete(FigureSpecialtyType figureSpecialtyType, CancellationToken cancellationToken = default)
         {
-            _context.Set<Domain.Entities.FigureSpecialtyType>().Remove(figureSpecialtyType);
+            _context.Set<FigureSpecialtyType>().Remove(figureSpecialtyType);
 
             await _context.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
         }
 
-        public async Task<Domain.Entities.FigureSpecialtyType> Get(int id)
+        public async Task<FigureSpecialtyType> Get(int id)
         {
             return await FigureSpecialtyType.SingleOrDefaultAsync(figureSpecialtyType => figureSpecialtyType.Id == id).ConfigureAwait(false);
         }
 
-        public async Task<IEnumerable<Domain.Entities.FigureSpecialtyType>> GetAll()
+        public async Task<IEnumerable<FigureSpecialtyType>> GetAll()
         {
             return (await FigureSpecialtyType.ToListAsync().ConfigureAwait(false)).OrderBy(FigureSpecialtyType => FigureSpecialtyType.Name);
         }
 
-        public async Task Update(Domain.Entities.FigureSpecialtyType figureSpecialtyType, CancellationToken cancellationToken = default)
+        public async Task Update(FigureSpecialtyType figureSpecialtyType, CancellationToken cancellationToken = default)
         {
-            _context.Set<Domain.Entities.FigureSpecialtyType>().Update(figureSpecialtyType);
+            _context.Set<FigureSpecialtyType>().Update(figureSpecialtyType);
 
             await _context.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
         }

@@ -1,5 +1,5 @@
-﻿using Memorabilia.Domain;
-using Memorabilia.Domain.Entities;
+﻿using Memorabilia.Domain.Entities;
+using Memorabilia.Repository.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,9 +10,9 @@ namespace Memorabilia.Repository
 {
     public class ItemTypeSizeRepository : BaseRepository<ItemTypeSize>, IItemTypeSizeRepository
     {
-        private readonly Context _context;
+        private readonly DomainContext _context;
 
-        public ItemTypeSizeRepository(Context context) : base(context)
+        public ItemTypeSizeRepository(DomainContext context) : base(context)
         {
             _context = context;
         }

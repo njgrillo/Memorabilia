@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Memorabilia.Application.Features.Memorabilia.IndexCard
 {
-    public class SaveIndexCardViewModel : SaveViewModel
+    public class SaveIndexCardViewModel : SaveItemViewModel
     {
         public SaveIndexCardViewModel() { }
 
@@ -14,27 +14,17 @@ namespace Memorabilia.Application.Features.Memorabilia.IndexCard
             SizeId = viewModel.Size.SizeId;
         }
 
-        public string ImagePath
-        {
-            get
-            {
-                var path = "images/";
+        public override string BackNavigationPath => $"Memorabilia/Edit/{MemorabiliaId}";
 
-                //if (DisplayIndexCardType && IndexCardType != null)
-                //{
-                //    return $"{path}{IndexCardType.Name.Replace(" ", "")}.jpg";
-                //}
+        public override EditModeType EditModeType => MemorabiliaId > 0 ? EditModeType.Update : EditModeType.Add;
 
-                return $"{path}IndexCard.jpg";
-            }
-        }
+        public override string ExitNavigationPath => "Memorabilia/Items";
 
-        public ItemType ItemType => ItemType.IndexCard;
+        public override string ImagePath => "images/indexcard.jpg";
 
-        [Required]
-        public int MemorabiliaId { get; set; }
+        public override ItemType ItemType => ItemType.IndexCard;
 
-        public override string PageTitle => $"{(MemorabiliaId > 0 ? "Edit" : "Add")} {ItemType.IndexCard.Name} Details";
+        public override string PageTitle => $"{(EditModeType == EditModeType.Update ? "Edit" : "Add")} {ItemType.IndexCard.Name} Details";
 
         [Required]
         [Range(1, int.MaxValue, ErrorMessage = "Size is required.")]

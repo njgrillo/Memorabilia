@@ -1,5 +1,5 @@
 ﻿using Demo.Framework.Handler;
-using Memorabilia.Domain;
+using Memorabilia.Repository.Interfaces;
 using System.Threading.Tasks;
 
 namespace Memorabilia.Application.Features.Admin.ItemTypeGameStyle
@@ -17,11 +17,7 @@ namespace Memorabilia.Application.Features.Admin.ItemTypeGameStyle
 
             protected override async Task<ItemTypeGameStyleViewModel> Handle(Query query)
             {
-                var itemTypeGameStyle = await _itemTypeGameStyleRepository.Get(query.Id).ConfigureAwait(false);
-
-                var viewModel = new ItemTypeGameStyleViewModel(itemTypeGameStyle);
-
-                return viewModel;
+                return new ItemTypeGameStyleViewModel(await _itemTypeGameStyleRepository.Get(query.Id).ConfigureAwait(false));
             }
         }
 

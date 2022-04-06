@@ -1,34 +1,40 @@
 ﻿@inherits LayoutComponentBase
 
-<div class="page">
-    <div class="sidebar">
+@inject NavigationManager NavigationManager;
+
+<MudThemeProvider />
+<MudDialogProvider />
+<MudSnackbarProvider />
+
+<MudLayout>
+    <MudAppBar>
+        <MudIconButton Color="MudBlazor.Color.Inherit"
+                       Edge="Edge.Start" 
+                       Icon="@Icons.Material.Filled.Menu"   
+                       OnClick="@((e) => DrawerToggle())" />      
+        <MudIconButton Color="MudBlazor.Color.Inherit"
+                       Edge="Edge.Start"
+                       Icon="@Icons.Material.Filled.Settings"
+                       OnClick="@((e) => UserSettings())" />
+    </MudAppBar>
+    <MudDrawer @bind-Open="@_drawerOpen">
         <NavMenu />
-    </div>
-
-    <div class="main">
-        <div class="top-row px-4">
-            @*<a href="Settings">Settings</a>*@
-            @*<a href="Login" hidden="@_isHidden">Log in</a>*@
-            <a href="Logout">Log out</a>
-        </div>
-
-        <div class="content px-4">
-            @Body
-        </div>
-    </div>
-
-    <BlazoredToasts Position="Blazored.Toast.Configuration.ToastPosition.TopCenter"
-                    ShowProgressBar="true"
-                    Timeout="2" />
-</div>
+    </MudDrawer>
+    <MudMainContent>
+        @Body
+    </MudMainContent>
+</MudLayout>
 
 @code {
-    //private bool _isHidden;
+    bool _drawerOpen = true;
 
-    //protected override async Task OnInitializedAsync()
-    //{
-    //    var userId = await _localStorage.GetAsync<int>("UserId");
+    void DrawerToggle()
+    {
+        _drawerOpen = !_drawerOpen;
+    }
 
-    //    _isHidden = userId.Value > 0;
-    //}
+    void UserSettings()
+    {
+        NavigationManager.NavigateTo("Settings");
+    }
 }

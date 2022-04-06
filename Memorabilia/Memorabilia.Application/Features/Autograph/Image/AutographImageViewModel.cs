@@ -1,14 +1,15 @@
-﻿using Memorabilia.Application.Features.Image;
+﻿using Memorabilia.Domain.Entities;
+using Memorabilia.Application.Features.Image;
 
 namespace Memorabilia.Application.Features.Autograph.Image
 {
     public class AutographImageViewModel : ImageViewModel
     {
-        private readonly Domain.Entities.AutographImage _image;
+        private readonly AutographImage _image;
 
         public AutographImageViewModel() { }
 
-        public AutographImageViewModel(Domain.Entities.AutographImage image)
+        public AutographImageViewModel(AutographImage image)
         {
             _image = image;
         }
