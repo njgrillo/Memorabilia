@@ -17,10 +17,12 @@ namespace Memorabilia.Application.Features.Memorabilia.Magazine
             BrandId = viewModel.Brand.BrandId;
             Date = viewModel.Magazine.Date;
             Framed = viewModel.Magazine.Framed;
+            Matted = viewModel.Magazine.Matted;
             MemorabiliaId = viewModel.MemorabiliaId;
+            OrientationId = viewModel.Magazine.OrientationId;
             People = viewModel.People.Select(person => new SavePersonViewModel(new PersonViewModel(person.Person))).ToList();
             SizeId = viewModel.Size.SizeId;
-            SportIds = viewModel.Sports.Select(x => x.Id).ToList();
+            SportIds = viewModel.Sports.Select(x => x.SportId).ToList();
             Teams = viewModel.Teams.Select(team => new SaveTeamViewModel(new TeamViewModel(team.Team))).ToList();
         }
 
@@ -38,15 +40,15 @@ namespace Memorabilia.Application.Features.Memorabilia.Magazine
 
         public bool Framed { get; set; }
 
-        public bool HasPerson => People.Any();
-
-        public bool HasSport => SportIds.Any();
-
-        public bool HasTeam => Teams.Any();
-
         public override string ImagePath => "images/magazine.jpg";
 
         public override ItemType ItemType => ItemType.Magazine;
+
+        public bool Matted { get; set; }
+
+        public int OrientationId { get; set; }
+
+        public Orientation[] Orientations => Orientation.All;
 
         public List<SavePersonViewModel> People { get; set; } = new();
 

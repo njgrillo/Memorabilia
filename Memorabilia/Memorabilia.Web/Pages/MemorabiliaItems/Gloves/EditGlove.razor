@@ -3,6 +3,7 @@
 @using Memorabilia.Application.Features.Memorabilia.Glove
 @using Memorabilia.Web.Controls.MemorabiliaItem
 @using Memorabilia.Web.Controls.Person
+@using Memorabilia.Web.Controls.Sport
 @using Memorabilia.Web.Controls.Team
 
 <EditPage ContinueNavigationPath="@_viewModel.ContinueNavigationPath"
@@ -25,13 +26,64 @@
                                  MemorabiliaItemStep="_viewModel.MemorabiliaItemStep" />
     </TimelineContent>
     <Content>
-        <PersonSelector AllowMultiple="true"
-                        CanToggle="true"
-                        ItemType="_viewModel.ItemType"
-                        People="_viewModel.People" />                 
-        <TeamSelector AllowMultiple="true"
-                      CanToggle="true" 
-                      ItemType="_viewModel.ItemType"
-                      Teams="_viewModel.Teams" />   
+        <DivRowCol3>
+            <Content>
+                <ItemTypeBrandDropDown @bind-Value="@_viewModel.BrandId" 
+                                       @bind-Value:event="ValueChanged"
+                                       ItemType="_viewModel.ItemType"
+                                       SelectedValue="_viewModel.BrandId" />
+            </Content>
+            <ContentColumn2>
+                <MudSelect @bind-Value="@_viewModel.GloveTypeId"
+                           @bind-Value:event="ValueChanged" 
+                           Label="Glove Type"
+                           Variant="Variant.Outlined">
+                    <MudSelectItem Value="@(0)">--Select--</MudSelectItem>
+                    <Iterations Items="_viewModel.GloveTypes" Context="gloveType">
+                        <MudSelectItem Value="@gloveType.Id">@gloveType.Name</MudSelectItem>
+                    </Iterations>	
+                </MudSelect>
+            </ContentColumn2>
+        </DivRowCol3>
+        <DivRowCol3>
+            <Content>
+                <ItemTypeSizeDropDown @bind-Value="@_viewModel.SizeId"
+                                      @bind-Value:event="ValueChanged" 
+                                      ItemType="_viewModel.ItemType"
+                                      SelectedValue="@_viewModel.SizeId" /> 
+            </Content>
+            <ContentColumn2>
+                <ItemTypeGameStyleDropDown @bind-Value="@_viewModel.GameStyleTypeId"
+                                           @bind-Value:event="ValueChanged"
+                                           ItemType="_viewModel.ItemType"
+                                           Label="@_viewModel.GameStyleTypeText"
+                                           SelectedValue="_viewModel.GameStyleTypeId" /> 
+            </ContentColumn2>
+        </DivRowCol3>
+        <DivRowCol3>
+            <ContentColumn2>
+                <DivHidden Hidden="@(!_viewModel.DisplayGameDate)">
+                    <Content>
+                        <MudDatePicker @bind-Date="_viewModel.GameDate"
+                                       DateFormat="MM/dd/yyyy"
+                                       Editable="true"
+                                       Label="Game Date"
+                                       Mask="@(new DateMask("MM/dd/yyyy"))" 
+                                       Variant="Variant.Outlined" />
+                    </Content>
+                </DivHidden>
+            </ContentColumn2>
+        </DivRowCol3>
+        <MultiPersonSelector CanToggle="true"
+                             ItemType="_viewModel.ItemType"
+                             People="_viewModel.People" />   
+        <SportSelector @bind-Value="@_viewModel.SportId" 
+                       @bind-Value:event="ValueChanged"
+                       CanToggle="true" 
+                       ItemType="_viewModel.ItemType"
+                       SelectedValue="_viewModel.SportId"/>  
+        <MultiTeamSelector CanToggle="true" 
+                           ItemType="_viewModel.ItemType"
+                           Teams="_viewModel.Teams" /> 
     </Content>
 </EditPage>

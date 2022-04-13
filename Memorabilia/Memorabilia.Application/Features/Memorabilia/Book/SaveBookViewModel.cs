@@ -17,7 +17,7 @@ namespace Memorabilia.Application.Features.Memorabilia.Book
             MemorabiliaId = viewModel.MemorabiliaId;
             People = viewModel.People.Select(person => new SavePersonViewModel(new PersonViewModel(person.Person))).ToList();
             Publisher = viewModel.Book?.Publisher;
-            SportIds = viewModel.Sports.Select(x => x.Id).ToList();
+            SportIds = viewModel.Sports.Select(x => x.SportId).ToList();
             Teams = viewModel.Teams.Select(team => new SaveTeamViewModel(new TeamViewModel(team.Team))).ToList();
             Title = viewModel.Book?.Title;
         }
@@ -31,12 +31,6 @@ namespace Memorabilia.Application.Features.Memorabilia.Book
         public override string ExitNavigationPath => "Memorabilia/Items";
 
         public bool HardCover { get; set; }
-        
-        public bool HasPerson => People.Any();
-
-        public bool HasSport => SportIds.Any();
-
-        public bool HasTeam => Teams.Any();
 
         public override string ImagePath => "images/book.jpg";
 

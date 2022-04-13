@@ -17,7 +17,7 @@ namespace Memorabilia.Application.Features.Memorabilia.FirstDayCover
             MemorabiliaId = viewModel.MemorabiliaId;
             People = viewModel.People.Select(person => new SavePersonViewModel(new PersonViewModel(person.Person))).ToList();
             SizeId = viewModel.Size.SizeId;
-            SportIds = viewModel.Sports.Select(x => x.Id).ToList();
+            SportIds = viewModel.Sports.Select(x => x.SportId).ToList();
             Teams = viewModel.Teams.Select(team => new SaveTeamViewModel(new TeamViewModel(team.Team))).ToList();
         }
 

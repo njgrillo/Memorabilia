@@ -1,5 +1,5 @@
-﻿using Memorabilia.Domain.Constants;
-using MudBlazor;
+﻿using Framework.Extension;
+using Memorabilia.Domain.Constants;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -34,7 +34,16 @@ namespace Memorabilia.Application.Features.Autograph
 
         public string AuthenticationTooltip => $"{Authentications.Count} Authentication(s)";
 
-        public string AutographImagePath => $"data:image/jpg;base64,{Convert.ToBase64String(File.ReadAllBytes(PrimaryImagePath))}";
+        public string AutographImagePath
+        {
+            get
+            {
+                if (PrimaryImagePath.IsNullOrEmpty() || !File.Exists(PrimaryImagePath))
+                    return "images/imagenotavailable.png";
+
+                return $"data:image/jpeg;base64,{Convert.ToBase64String(File.ReadAllBytes(PrimaryImagePath))}";
+            }
+        }
 
         public int ColorId => _autograph.ColorId;
 
@@ -47,6 +56,8 @@ namespace Memorabilia.Application.Features.Autograph
         public decimal? Cost => Acquisition?.Cost;  
 
         public DateTime CreateDate => _autograph.CreateDate;
+
+        public int? Denominator => _autograph.Denominator;
 
         public bool DisplaySpot => ItemType.CanHaveSpot(ItemType.Find(ItemTypeId));
 
@@ -97,6 +108,10 @@ namespace Memorabilia.Application.Features.Autograph
         public DateTime? LastModifiedDate => _autograph.LastModifiedDate;
 
         public int MemorabiliaId => _autograph.MemorabiliaId;
+
+        public string Note => _autograph.Note;
+
+        public int? Numerator => _autograph.Numerator;
 
         public Domain.Entities.Person Person => _autograph.Person;
 

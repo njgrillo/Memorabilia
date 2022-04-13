@@ -47,11 +47,6 @@ namespace Memorabilia.Web.Pages.MemorabiliaItems.GolfBalls
             _viewModel.Person = person;
         }
 
-        private void SelectedTeamChanged(SaveTeamViewModel team)
-        {
-            _viewModel.Team = team;
-        }
-
         private void SetDefaults()
         {
             _viewModel.BrandId = Brand.Titleist.Id;

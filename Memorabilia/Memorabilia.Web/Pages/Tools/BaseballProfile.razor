@@ -1,0 +1,105 @@
+﻿@page "/Tools/BaseballProfile/{personId:int}"
+
+<DivPad2>
+    <Content>
+        <DivRowCol4>
+            <Content>
+                <MudText Typo="Typo.h4"><b>@_viewModel.NameHeader</b></MudText>
+            </Content>
+            <ContentColumn2>
+                <MudChip Color="MudBlazor.Color.Secondary">Secondary</MudChip>
+                <MudChip Color="MudBlazor.Color.Info">Info</MudChip>
+                <MudChip Color="MudBlazor.Color.Success">Success</MudChip>
+                <MudChip Color="MudBlazor.Color.Warning">Warning</MudChip>
+            </ContentColumn2>
+            <ContentColumn3>
+                <MudChip Color="MudBlazor.Color.Secondary">Secondary</MudChip>
+                <MudChip Color="MudBlazor.Color.Info">Info</MudChip>
+                <MudChip Color="MudBlazor.Color.Success">Success</MudChip>
+                <MudChip Color="MudBlazor.Color.Warning">Warning</MudChip>
+            </ContentColumn3>
+        </DivRowCol4>
+        <DivRowCol4>
+            <Content>
+                <MudText Typo="Typo.h6">@_viewModel.Nicknames</MudText>
+            </Content>
+            <ContentColumn2>
+                <MudChip Color="MudBlazor.Color.Secondary">Secondary</MudChip>
+                <MudChip Color="MudBlazor.Color.Info">Info</MudChip>
+                <MudChip Color="MudBlazor.Color.Success">Success</MudChip>
+                <MudChip Color="MudBlazor.Color.Warning">Warning</MudChip>
+            </ContentColumn2>
+            <ContentColumn3>
+                <MudChip Color="MudBlazor.Color.Secondary">Secondary</MudChip>
+                <MudChip Color="MudBlazor.Color.Info">Info</MudChip>
+                <MudChip Color="MudBlazor.Color.Success">Success</MudChip>
+                <MudChip Color="MudBlazor.Color.Warning">Warning</MudChip>
+            </ContentColumn3>
+        </DivRowCol4>
+        <DivRowCol4>
+            <Content>
+                <MudText Typo="Typo.h6">@_viewModel.LifespanHeader</MudText>
+            </Content>
+            <ContentColumn2>
+                <MudChip Color="MudBlazor.Color.Secondary">Secondary</MudChip>
+                <MudChip Color="MudBlazor.Color.Info">Info</MudChip>
+                <MudChip Color="MudBlazor.Color.Success">Success</MudChip>
+                <MudChip Color="MudBlazor.Color.Warning">Warning</MudChip>
+            </ContentColumn2>
+            <ContentColumn3>
+                <MudChip Color="MudBlazor.Color.Secondary">Secondary</MudChip>
+                <MudChip Color="MudBlazor.Color.Info">Info</MudChip>
+                <MudChip Color="MudBlazor.Color.Success">Success</MudChip>
+                <MudChip Color="MudBlazor.Color.Warning">Warning</MudChip>
+            </ContentColumn3>
+        </DivRowCol4>
+        <DivRowCol4>
+            <Content>
+                <MudImage Class="rounded-lg ma-4"
+                          Elevation="25"
+                          Height="650" 
+                          Src="@_viewModel.PersonImageData" 
+                          Width="500"   />
+            </Content>
+            <ContentColumn2>
+                <MudText Typo="Typo.h6">Draft Data</MudText>
+                <br />
+                <MudText Typo="Typo.h6">@_viewModel.Debut</MudText>
+                <MudText Typo="Typo.h6">@_viewModel.LastAppearance</MudText>
+                <br />
+                <MudText Typo="Typo.h6">Batting Average</MudText>
+                <MudText Typo="Typo.h6">Hits</MudText>
+                <MudText Typo="Typo.h6">Home Runs</MudText>
+                <MudText Typo="Typo.h6">RBIs</MudText>
+                <br />
+            </ContentColumn2>
+        </DivRowCol4>
+        <DivRowCol4>
+            <Content>
+                <MudTable Bordered="false"
+                          Dense="false" 
+                          Hover="true"
+                          Items="@_viewModel.Teams"    
+                          Striped="true">
+                    <HeaderContent>
+                        <MudTh>Team</MudTh>
+                        <MudTh>Begin Year</MudTh>
+                        <MudTh>End Year</MudTh>
+                    </HeaderContent>
+                    <RowTemplate>
+                        <MudTd DataLabel="Name">@context.Name</MudTd>
+                        <MudTd DataLabel="Begin Year">@context.BeginYear</MudTd>
+                        <MudTd DataLabel="End Year">@context.EndYear</MudTd>
+                    </RowTemplate>
+                    <PagerContent>
+                        <MudTablePager />
+                    </PagerContent>
+                </MudTable>
+            </Content>
+            <ContentColumn2>
+
+            </ContentColumn2>
+        </DivRowCol4>
+    </Content>
+</DivPad2>
+

@@ -63,14 +63,16 @@
         </DivRowCol3>
         <DivRowCol3>
             <Content>
-                <div hidden="@(!_viewModel.DisplayGameDate)">
-                    <MudDatePicker @bind-Date="_viewModel.GameDate"
-                                   DateFormat="MM/dd/yyyy"
-                                   Editable="true"
-                                   Label="Game Date"
-                                   Mask="@(new DateMask("MM/dd/yyyy"))" 
-                                   Variant="Variant.Outlined" />
-                </div> 
+                <DivHidden Hidden="@(!_viewModel.DisplayGameDate)">
+                    <Content>
+                        <MudDatePicker @bind-Date="_viewModel.GameDate"
+                                       DateFormat="MM/dd/yyyy"
+                                       Editable="true"
+                                       Label="Game Date"
+                                       Mask="@(new DateMask("MM/dd/yyyy"))" 
+                                       Variant="Variant.Outlined" />
+                    </Content>
+                </DivHidden>
             </Content>
         </DivRowCol3>
         <PersonSelector CanFilterBySport="true"

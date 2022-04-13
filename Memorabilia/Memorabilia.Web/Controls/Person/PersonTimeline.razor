@@ -18,6 +18,15 @@
                           Severity="@PersonOccupationEditAlertSeverity">@PersonOccupationEditAlertTitle</MudAlert>
             </ItemContent>
         </MudTimelineItem>
+        <MudTimelineItem Color="@PersonSportServiceEditColor" 
+                         Variant="Variant.Filled">
+            <ItemContent>
+                <MudAlert style="@(GetMudAlertStyle(PersonStep.SportService))"
+                          Class="@_mudAlertClass" 
+                          OnClick="@(_ => Navigate("SportService"))"
+                          Severity="@PersonSportServiceEditAlertSeverity">@PersonSportServiceEditAlertTitle</MudAlert>
+            </ItemContent>
+        </MudTimelineItem>
         <MudTimelineItem Color="@PersonTeamEditColor" 
                          Variant="Variant.Filled">
             <ItemContent>
@@ -34,6 +43,15 @@
                           Class="@_mudAlertClass" 
                           OnClick="@(_ => Navigate("HallOfFame"))"
                           Severity="@PersonHallOfFameEditAlertSeverity">@PersonHallOfFameEditAlertTitle</MudAlert>
+            </ItemContent>
+        </MudTimelineItem>
+        <MudTimelineItem Color="@PersonImageEditColor" 
+                         Variant="Variant.Filled">
+            <ItemContent>
+                <MudAlert style="@(GetMudAlertStyle(PersonStep.Image))"
+                          Class="@_mudAlertClass" 
+                          OnClick="@(_ => Navigate("Image"))"
+                          Severity="@PersonImageEditAlertSeverity">@PersonImageEditAlertTitle</MudAlert>
             </ItemContent>
         </MudTimelineItem>
     </Content>

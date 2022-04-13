@@ -2,6 +2,7 @@
 using Memorabilia.Application.Features.Admin.Teams;
 using Memorabilia.Domain.Constants;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 
@@ -23,12 +24,10 @@ namespace Memorabilia.Application.Features.Memorabilia.Baseball
             LevelTypeId = viewModel.Level.LevelTypeId;
             MemorabiliaId = viewModel.MemorabiliaId;            
             SizeId = viewModel.Size.SizeId;
+            Teams = viewModel.Teams.Select(team => new SaveTeamViewModel(new TeamViewModel(team.Team))).ToList();
 
             if (viewModel.People.Any())
                 Person = new SavePersonViewModel(new PersonViewModel(viewModel.People.First().Person));
-
-            if (viewModel.Teams.Any())
-                Team = new SaveTeamViewModel(new TeamViewModel(viewModel.Teams.First().Team));
         }
 
         private int _gameStyleTypeId;
@@ -62,7 +61,15 @@ namespace Memorabilia.Application.Features.Memorabilia.Baseball
 
         public bool DisplayBaseballTypeYear => DisplayBaseballType && BaseballType.CanHaveYear(BaseballType);
 
-        public bool DisplayGameDate => BaseballType.IsGameWorthly(BaseballType) && GameStyleType.IsGameWorthly(GameStyleType);
+        public bool DisplayCommissioner => Brand.IsGameWorthlyBaseballBrand(Brand);
+
+        public bool DisplayGameDate => Brand.IsGameWorthlyBaseballBrand(Brand) &&
+                                       SizeId == Size.Standard.Id && 
+                                       BaseballType.IsGameWorthly(BaseballType) && 
+                                       GameStyleType.IsGameWorthly(GameStyleType);
+
+        public bool DisplayGameStyleType => Brand.IsGameWorthlyBaseballBrand(Brand) &&
+                                            SizeId == Size.Standard.Id;
 
         public override EditModeType EditModeType => MemorabiliaId > 0 ? EditModeType.Update : EditModeType.Add;
 
@@ -83,17 +90,9 @@ namespace Memorabilia.Application.Features.Memorabilia.Baseball
             set
             {
                 _gameStyleTypeId = value;
-
-                BaseballTypes = BaseballType.GetAll(GameStyleType.Find(value));
-
-                if (GameStyleType.IsGameWorthly(GameStyleType))
-                    BaseballTypeId = Brand == Brand.Rawlings ? BaseballType.Official.Id : 0;                
+                BaseballTypes = BaseballType.GetAll(GameStyleType.Find(value));               
             }
         }
-
-        public bool HasPerson => Person?.Id > 0;
-
-        public bool HasTeam => Team?.Id > 0;
 
         public override string ImagePath
         {
@@ -116,7 +115,7 @@ namespace Memorabilia.Application.Features.Memorabilia.Baseball
         [Range(1, int.MaxValue, ErrorMessage = "Level is required.")]
         public int LevelTypeId { get; set; }
 
-        public SavePersonViewModel Person { get; set; } 
+        public SavePersonViewModel Person { get; set; }
 
         [Required]
         [Range(1, int.MaxValue, ErrorMessage = "Size is required.")]
@@ -126,6 +125,6 @@ namespace Memorabilia.Application.Features.Memorabilia.Baseball
 
         public SportLeagueLevel SportLeagueLevel => SportLeagueLevel.MajorLeagueBaseball;
 
-        public SaveTeamViewModel Team { get; set; } 
+        public List<SaveTeamViewModel> Teams { get; set; } = new();
     }
 }

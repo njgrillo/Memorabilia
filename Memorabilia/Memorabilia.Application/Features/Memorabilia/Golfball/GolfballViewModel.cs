@@ -27,7 +27,5 @@ namespace Memorabilia.Application.Features.Memorabilia.Golfball
         public MemorabiliaSize Size => _memorabilia.Size;
 
         public IEnumerable<MemorabiliaSport> Sports => _memorabilia.Sports;
-
-        public IEnumerable<MemorabiliaTeam> Teams => _memorabilia.Teams;
     }
 }

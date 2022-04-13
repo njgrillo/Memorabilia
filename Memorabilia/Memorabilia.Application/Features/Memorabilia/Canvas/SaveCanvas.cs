@@ -23,6 +23,7 @@ namespace Memorabilia.Application.Features.Memorabilia.Canvas
 
                 memorabilia.SetCanvas(command.BrandId,
                                       command.Framed,
+                                      command.Matted,
                                       command.OrientationId,
                                       command.PersonIds,
                                       command.SizeId,
@@ -47,19 +48,21 @@ namespace Memorabilia.Application.Features.Memorabilia.Canvas
 
             public bool Framed => _viewModel.Framed;
 
+            public bool Matted => _viewModel.Matted;
+
             public int MemorabiliaId => _viewModel.MemorabiliaId;
 
             public int OrientationId => _viewModel.OrientationId;
 
-            public int[] PersonIds => _viewModel.People.Select(person => person.Id).ToArray();
+            public int[] PersonIds => _viewModel.People.Where(person => !person.IsDeleted).Select(person => person.Id).ToArray();
 
             public int SizeId => _viewModel.SizeId;
 
-            public int[] SportIds => _viewModel.Sports.Select(team => team.Id).ToArray();
+            public int[] SportIds => _viewModel.SportIds.ToArray();
 
             public bool Stretched => _viewModel.Stretched;
 
-            public int[] TeamIds => _viewModel.Teams.Select(team => team.Id).ToArray();
+            public int[] TeamIds => _viewModel.Teams.Where(person => !person.IsDeleted).Select(team => team.Id).ToArray();
         }
     }
 }

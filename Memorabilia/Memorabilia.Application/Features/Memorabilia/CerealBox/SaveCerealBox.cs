@@ -24,6 +24,7 @@ namespace Memorabilia.Application.Features.Memorabilia.CerealBox
                 memorabilia.SetCerealBox(command.BrandId,
                                          command.LevelTypeId,
                                          command.PersonIds,
+                                         command.SportIds,
                                          command.TeamIds);
 
                 await _memorabiliaRepository.Update(memorabilia).ConfigureAwait(false);
@@ -45,9 +46,11 @@ namespace Memorabilia.Application.Features.Memorabilia.CerealBox
 
             public int MemorabiliaId => _viewModel.MemorabiliaId;
 
-            public int[] PersonIds => _viewModel.People.Select(person => person.Id).ToArray();
+            public int[] PersonIds => _viewModel.People.Where(person => !person.IsDeleted).Select(person => person.Id).ToArray();
 
-            public int[] TeamIds => _viewModel.Teams.Select(team => team.Id).ToArray();
+            public int[] SportIds => _viewModel.SportIds.ToArray();
+
+            public int[] TeamIds => _viewModel.Teams.Where(team => !team.IsDeleted).Select(team => team.Id).ToArray();
         }
     }
 }

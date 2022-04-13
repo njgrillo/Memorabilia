@@ -20,7 +20,7 @@ namespace Memorabilia.Application.Features.Memorabilia.JerseyNumber
             {
                 var memorabilia = await _memorabiliaRepository.Get(command.MemorabiliaId).ConfigureAwait(false);
 
-                memorabilia.SetJerseyNumber(command.SportId, command.TeamId);
+                memorabilia.SetJerseyNumber(command.PersonId, command.SportId, command.TeamId);
 
                 await _memorabiliaRepository.Update(memorabilia).ConfigureAwait(false);
             }
@@ -37,9 +37,11 @@ namespace Memorabilia.Application.Features.Memorabilia.JerseyNumber
 
             public int MemorabiliaId => _viewModel.MemorabiliaId;
 
-            public int? SportId => _viewModel.Sport?.Id > 0 ? _viewModel.Sport?.Id : null;
+            public int? PersonId => _viewModel.Person?.Id > 0 ? _viewModel.Person.Id : null;
 
-            public int? TeamId => _viewModel.Team?.Id > 0 ? _viewModel.Team?.Id : null;
+            public int? SportId => _viewModel.SportId > 0 ? _viewModel.SportId : null;
+
+            public int? TeamId => _viewModel.Team?.Id > 0 ? _viewModel.Team.Id : null;
         }
     }
 }

@@ -1,0 +1,20 @@
+﻿using Memorabilia.Domain.Constants;
+using Memorabilia.Domain.Entities;
+using System.Linq;
+
+namespace Memorabilia.Application.Features.Services.Tools.Profile.Rules
+{
+    public class BaseballProfileRule : IProfileRule
+    {
+        public bool Applies(Person person)
+        {
+            return person.Occupations.Any(occupation => occupation.OccupationId == Domain.Constants.Occupation.Athlete.Id) &&
+                   person.Teams.Any(team => team.Team.Franchise.SportLeagueLevel.SportId == Domain.Constants.Sport.Baseball.Id);
+        }
+
+        public ProfileType GetProfileType()
+        {
+            return ProfileType.Baseball;
+        }
+    }
+}

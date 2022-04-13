@@ -14,6 +14,8 @@ namespace Memorabilia.Application.Features.Memorabilia.Bammer
             _memorabilia = memorabilia;
         }
 
+        public MemorabiliaBammer Bammer => _memorabilia.Bammer;
+
         public MemorabiliaBrand Brand => _memorabilia.Brand;
 
         public int MemorabiliaId => _memorabilia.Id;

@@ -21,7 +21,7 @@ namespace Memorabilia.Application.Features.Memorabilia.Figure
             MemorabiliaId = viewModel.MemorabiliaId;
             People = viewModel.People.Select(person => new SavePersonViewModel(new PersonViewModel(person.Person))).ToList();
             SizeId = viewModel.Size.SizeId;
-            SportIds = viewModel.Sports.Select(x => x.Id).ToList();
+            SportIds = viewModel.Sports.Select(x => x.SportId).ToList();
             Teams = viewModel.Teams.Select(team => new SaveTeamViewModel(new TeamViewModel(team.Team))).ToList();
             Year = viewModel.Figure?.Year;
         }
@@ -41,12 +41,6 @@ namespace Memorabilia.Application.Features.Memorabilia.Figure
         public int FigureTypeId { get; set; }
 
         public FigureType[] FigureTypes => FigureType.All;
-
-        public bool HasPerson => People.Any();
-
-        public bool HasSport => SportIds.Any();
-
-        public bool HasTeam => Teams.Any();
 
         public override string ImagePath => "images/figure.jpg";
 

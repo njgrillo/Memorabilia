@@ -1,0 +1,26 @@
+﻿<PrettyBlazor.Condition Evaluation="CanToggle">
+    <Match>
+        <DivRowCol3>
+            <Content>
+                <MudCheckBox Checked="@_hasSport"
+                             CheckedChanged="SportCheckboxClicked"
+                             Label="@_itemTypeNameLabel"
+                             T="bool" />  
+            </Content>
+        </DivRowCol3>
+    </Match>
+</PrettyBlazor.Condition>
+<DivRowCol3 Hidden="@(!_displaySports)">
+    <Content>
+        <MudSelect Label="Sport"           
+                   T="int"           
+                   Value="@SelectedValue"
+                   ValueChanged="@OnInputChange"
+                   Variant="Variant.Outlined">
+            <MudSelectItem Value="@(0)">--Select--</MudSelectItem>
+            <Iterations Items="Domain.Constants.Sport.All" Context="sport">
+                <MudSelectItem Value="@sport.Id">@sport.Name</MudSelectItem>
+            </Iterations>	
+        </MudSelect>        
+    </Content>
+</DivRowCol3>

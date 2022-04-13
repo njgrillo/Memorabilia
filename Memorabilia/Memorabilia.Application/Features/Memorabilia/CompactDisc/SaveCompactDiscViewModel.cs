@@ -23,7 +23,7 @@ namespace Memorabilia.Application.Features.Memorabilia.CompactDisc
 
         public bool HasPerson => People.Any();
 
-        public override string ImagePath => "images/compactdisc.jpg";
+        public override string ImagePath => "images/cd.jpg";
 
         public override ItemType ItemType => ItemType.CompactDisc;
 

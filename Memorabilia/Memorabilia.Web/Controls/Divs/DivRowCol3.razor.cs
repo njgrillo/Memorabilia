@@ -20,6 +20,18 @@ namespace Memorabilia.Web.Controls.Divs
         public bool Hidden { get; set; }
 
         [Parameter]
+        public bool HideColumn1 { get; set; }
+
+        [Parameter]
+        public bool HideColumn2 { get; set; }
+
+        [Parameter]
+        public bool HideColumn3 { get; set; }
+
+        [Parameter]
+        public bool HideColumn4 { get; set; }
+
+        [Parameter]
         public string LeftPadding { get; set; }
     }
 }

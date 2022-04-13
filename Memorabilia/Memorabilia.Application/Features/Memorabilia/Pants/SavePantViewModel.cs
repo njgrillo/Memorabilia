@@ -20,7 +20,7 @@ namespace Memorabilia.Application.Features.Memorabilia.Pants
             LevelTypeId = viewModel.Level.LevelTypeId;
             MemorabiliaId = viewModel.MemorabiliaId;
             SizeId = viewModel.Size.SizeId;
-            SportId = viewModel.Sports.Any() ? viewModel.Sports.Select(x => x.Id).First() : 0;
+            SportId = viewModel.Sports.Select(sport => sport.SportId).FirstOrDefault();
 
             if (viewModel.People.Any())
                 Person = new SavePersonViewModel(new PersonViewModel(viewModel.People.First().Person));
@@ -52,10 +52,6 @@ namespace Memorabilia.Application.Features.Memorabilia.Pants
         [Required]
         [Range(1, int.MaxValue, ErrorMessage = "Game Style Type is required.")]
         public int GameStyleTypeId { get; set; }
-
-        public bool HasPerson => Person?.Id > 0;
-
-        public bool HasTeam => Team?.Id > 0;
 
         public override string ImagePath => "images/pant.jpg";
 

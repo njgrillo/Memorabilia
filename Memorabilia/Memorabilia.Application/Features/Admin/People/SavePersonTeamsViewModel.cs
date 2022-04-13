@@ -14,7 +14,7 @@ namespace Memorabilia.Application.Features.Admin.People
             Teams = teams;
         }
 
-        public override string BackNavigationPath => $"People/Occupation/Edit/{PersonId}";
+        public override string BackNavigationPath => $"People/SportService/Edit/{PersonId}";
 
         public override string ContinueNavigationPath => $"People/HallOfFame/Edit/{PersonId}";
 

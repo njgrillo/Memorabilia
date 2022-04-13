@@ -48,10 +48,6 @@ namespace Memorabilia.Application.Features.Memorabilia.Puck
 
         public int GameStyleTypeId { get; set; }
 
-        public bool HasPerson => Person.Id > 0;
-
-        public bool HasTeam => Team.Id > 0;
-
         public override string ImagePath => "images/puck.jpg";
 
         public override ItemType ItemType => ItemType.Puck;

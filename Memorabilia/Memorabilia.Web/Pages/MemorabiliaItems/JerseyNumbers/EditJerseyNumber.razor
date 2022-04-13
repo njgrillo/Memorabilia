@@ -6,6 +6,8 @@
 @using Memorabilia.Application.Features.Memorabilia.JerseyNumber
 @using Memorabilia.Web.Controls.DropDowns
 @using Memorabilia.Web.Controls.MemorabiliaItem
+@using Memorabilia.Web.Controls.Person
+@using Memorabilia.Web.Controls.Sport
 @using Memorabilia.Web.Controls.Team
 
 <EditPage ContinueNavigationPath="@_viewModel.ContinueNavigationPath"
@@ -27,7 +29,17 @@
                                  MemorabiliaId="_viewModel.MemorabiliaId"
                                  MemorabiliaItemStep="_viewModel.MemorabiliaItemStep" />
     </TimelineContent>
-    <Content>              
+    <Content>     
+        <PersonSelector CanFilterBySport="true"
+                        CanToggle="true"
+                        ItemType="_viewModel.ItemType"
+                        SelectedPerson="_viewModel.Person"
+                        SelectedPersonChanged="SelectedPersonChanged" />   
+        <SportSelector @bind-Value="@_viewModel.SportId" 
+                       @bind-Value:event="ValueChanged"
+                       CanToggle="true" 
+                       ItemType="_viewModel.ItemType"
+                       SelectedValue="_viewModel.SportId"/> 
         <TeamSelector CanToggle="true" 
                       ItemType="_viewModel.ItemType"
                       SelectedTeam="_viewModel.Team"

@@ -16,19 +16,6 @@
 </DivRowCol3>
 <DivRowCol3>
     <Content>
-        <MudSelect @bind-Value="@_viewModel.FranchiseId"
-                   @bind-Value:event="ValueChanged"   
-                   Label="Franchise"
-                   Variant="Variant.Outlined">
-            <MudSelectItem Value="@(0)">--Select--</MudSelectItem>
-            <Iterations Items="_viewModel.Franchises" Context="franchise">
-                <MudSelectItem Value="@franchise.Id">@franchise.Name</MudSelectItem>
-            </Iterations>	
-        </MudSelect>
-    </Content>
-</DivRowCol3>
-<DivRowCol3>
-    <Content>
         <MudNumericField @bind-Value="_viewModel.InductionYear" 
                          Label="Induction Year"
                          Variant="Variant.Outlined" />
@@ -58,14 +45,12 @@
                    Striped="true">
             <HeaderContent>
                 <MudTh>Sport</MudTh>
-                <MudTh>Franchise</MudTh>
                 <MudTh>Induction Year</MudTh>
                 <MudTh>Vote Percentage</MudTh>
                 <MudTh></MudTh>
             </HeaderContent>
             <RowTemplate>
                 <MudTd DataLabel="Sport">@context.SportName</MudTd>
-                <MudTd DataLabel="Franchise">@context.FranchiseName</MudTd>
                 <MudTd DataLabel="Induction Year">@context.InductionYear</MudTd>
                 <MudTd DataLabel="Vote Percentage">@context.VotePercentage</MudTd>
                 <MudTd DataLabel="">

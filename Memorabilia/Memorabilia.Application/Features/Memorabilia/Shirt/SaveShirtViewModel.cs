@@ -2,7 +2,6 @@
 using Memorabilia.Application.Features.Admin.Teams;
 using Memorabilia.Domain.Constants;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 
@@ -20,13 +19,11 @@ namespace Memorabilia.Application.Features.Memorabilia.Shirt
             GameStyleTypeId = viewModel.Game?.GameStyleTypeId ?? 0;
             LevelTypeId = viewModel.Level.LevelTypeId;
             MemorabiliaId = viewModel.MemorabiliaId;
-            SizeId = viewModel.Size.SizeId;            
+            SizeId = viewModel.Size.SizeId;
+            SportId = viewModel.Sports.Select(sport => sport.SportId).FirstOrDefault();
 
             if (viewModel.People.Any())
                 Person = new SavePersonViewModel(new PersonViewModel(viewModel.People.First().Person));
-
-            if (viewModel.Sports.Any())
-                Sport = Sport.Find(viewModel.People.First().Id);
 
             if (viewModel.Teams.Any())
                 Team = new SaveTeamViewModel(new TeamViewModel(viewModel.Teams.First().Team));
@@ -52,12 +49,6 @@ namespace Memorabilia.Application.Features.Memorabilia.Shirt
         [Range(1, int.MaxValue, ErrorMessage = "Game Style Type is required.")]
         public int GameStyleTypeId { get; set; }
 
-        public bool HasPerson => Person.Id > 0;
-
-        public bool HasSport => Sport?.Id > 0;
-
-        public bool HasTeam => Team.Id > 0;
-
         public override string ImagePath => "images/shirt.jpg";
 
         public bool IsGameWorthly => GameStyleType.IsGameWorthly(GameStyleType);
@@ -76,7 +67,7 @@ namespace Memorabilia.Application.Features.Memorabilia.Shirt
         [Range(1, int.MaxValue, ErrorMessage = "Size is required.")]
         public int SizeId { get; set; }
 
-        public Sport Sport { get; set; }
+        public int SportId { get; set; }
 
         public SaveTeamViewModel Team { get; set; }
     }

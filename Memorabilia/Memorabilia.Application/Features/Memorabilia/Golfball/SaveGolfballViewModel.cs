@@ -1,5 +1,4 @@
 ﻿using Memorabilia.Application.Features.Admin.People;
-using Memorabilia.Application.Features.Admin.Teams;
 using Memorabilia.Domain.Constants;
 using System;
 using System.ComponentModel.DataAnnotations;
@@ -22,9 +21,6 @@ namespace Memorabilia.Application.Features.Memorabilia.Golfball
 
             if (viewModel.People.Any())
                 Person = new SavePersonViewModel(new PersonViewModel(viewModel.People.First().Person));
-
-            if (viewModel.Teams.Any())
-                Team = new SaveTeamViewModel(new TeamViewModel(viewModel.Teams.First().Team));
         }
 
         public override string BackNavigationPath => $"Memorabilia/Edit/{MemorabiliaId}";
@@ -44,14 +40,10 @@ namespace Memorabilia.Application.Features.Memorabilia.Golfball
         public GameStyleType GameStyleType => GameStyleType.Find(GameStyleTypeId);
 
         [Required]
-        [Range(1, int.MaxValue, ErrorMessage = "Game Style Type is required.")]
+        [Range(1, int.MaxValue, ErrorMessage = "Tournament Style Type is required.")]
         public int GameStyleTypeId { get; set; } 
 
         public GameStyleType[] GameStyleTypes => GameStyleType.GetAll(ItemType.Golfball);
-
-        public bool HasPerson => Person?.Id > 0;
-
-        public bool HasTeam => Team?.Id > 0;
 
         public override string ImagePath => "images/golfball.jpg";
 
@@ -68,7 +60,5 @@ namespace Memorabilia.Application.Features.Memorabilia.Golfball
         public int SizeId { get; set; }
 
         public Sport Sport => Sport.Golf;
-
-        public SaveTeamViewModel Team { get; set; }
     }
 }

@@ -16,7 +16,7 @@ namespace Memorabilia.Application.Features.Admin.People
 
         public override string BackNavigationPath => $"People/Team/Edit/{PersonId}";
 
-        public override string ContinueNavigationPath => "Admin/EditDomainItems";
+        public override string ContinueNavigationPath => $"People/Image/Edit/{PersonId}";
 
         public override EditModeType EditModeType => HallOfFames.Any() ? EditModeType.Update : EditModeType.Add;
 

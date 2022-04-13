@@ -21,10 +21,13 @@ namespace Memorabilia.Application.Features.Memorabilia.Bobblehead
                 var memorabilia = await _memorabiliaRepository.Get(command.MemorabiliaId).ConfigureAwait(false);
 
                 memorabilia.SetBobblehead(command.BrandId,
+                                          command.HasBox,
                                           command.LevelTypeId,
                                           command.PersonId,
                                           command.SizeId,
-                                          command.TeamId);
+                                          command.SportId,
+                                          command.TeamId,
+                                          command.Year);
 
                 await _memorabiliaRepository.Update(memorabilia).ConfigureAwait(false);
             }
@@ -41,6 +44,8 @@ namespace Memorabilia.Application.Features.Memorabilia.Bobblehead
 
             public int BrandId => _viewModel.BrandId;
 
+            public bool HasBox => _viewModel.HasBox;
+
             public int LevelTypeId => _viewModel.LevelTypeId;
 
             public int MemorabiliaId => _viewModel.MemorabiliaId;
@@ -49,7 +54,11 @@ namespace Memorabilia.Application.Features.Memorabilia.Bobblehead
 
             public int SizeId => _viewModel.SizeId;
 
+            public int? SportId => _viewModel.SportId > 0 ? _viewModel.SportId : null;
+
             public int? TeamId => _viewModel.Team?.Id > 0 ? _viewModel.Team?.Id : null;
+
+            public int? Year => _viewModel.Year;
         }
     }
 }

@@ -17,6 +17,9 @@ namespace Memorabilia.Web.Controls.DropDowns
         public ItemType ItemType { get; set; }
 
         [Parameter]
+        public string Label { get; set; } = "Game Style";
+
+        [Parameter]
         public int SelectedValue { get; set; }
 
         [Parameter]

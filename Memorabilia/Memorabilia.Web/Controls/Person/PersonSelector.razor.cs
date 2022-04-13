@@ -16,9 +16,6 @@ namespace Memorabilia.Web.Controls.Person
         public QueryRouter QueryRouter { get; set; }
 
         [Parameter]
-        public bool AllowMultiple { get; set; }
-
-        [Parameter]
         public bool CanFilterBySport { get; set; }
 
         [Parameter]
@@ -37,7 +34,7 @@ namespace Memorabilia.Web.Controls.Person
         public EventCallback<SavePersonViewModel> SelectedPersonChanged { get; set; }
 
         [Parameter]
-        public Sport Sport { get; set; }
+        public Domain.Constants.Sport Sport { get; set; }
 
         SavePersonViewModel _viewModel
         {
@@ -49,11 +46,10 @@ namespace Memorabilia.Web.Controls.Person
             }
         }
 
-        private bool _canAdd = true;
         private bool _displayPeople;
         private bool _filterPeople = true;
         private bool _hasPeople;
-        private string _itemTypeNameLabel => $"Associate {ItemType.Name} with {(AllowMultiple ? "People" : "a Person")}";
+        private string _itemTypeNameLabel => $"Associate {ItemType.Name} with a Person";
         private string _itemTypeNameFilterLabel => $"Filter by {Sport?.Name}";
         private IEnumerable<SavePersonViewModel> _people = Enumerable.Empty<SavePersonViewModel>();
 
@@ -65,25 +61,9 @@ namespace Memorabilia.Web.Controls.Person
             await LoadPeople().ConfigureAwait(false);
         }
 
-        private void Add()
-        {
-            var person = People.SingleOrDefault(person => person.Id == _viewModel.Id);
-
-            if (person != null)
-                person.IsDeleted = false;
-            else
-                People.Add(_viewModel);
-
-            _viewModel = new();
-
-            SetCanAdd();
-        }
-
         private async Task LoadPeople()
         {
-            var query = new GetPeople.Query(Sport?.Id ?? null);
-
-            _people = (await QueryRouter.Send(query).ConfigureAwait(false)).People.Select(person => new SavePersonViewModel(person));
+            _people = (await QueryRouter.Send(new GetPeople.Query(Sport?.Id ?? null)).ConfigureAwait(false)).People.Select(person => new SavePersonViewModel(person));
         }
 
         private void PersonCheckboxClicked(bool isChecked)
@@ -91,7 +71,7 @@ namespace Memorabilia.Web.Controls.Person
             _displayPeople = CanToggle && isChecked;
 
             if (!_displayPeople)
-                SelectedPerson = null;
+                _viewModel = null;
 
             _hasPeople = isChecked;
         }
@@ -106,29 +86,12 @@ namespace Memorabilia.Web.Controls.Person
             _people = (await QueryRouter.Send(query).ConfigureAwait(false)).People.Select(person => new SavePersonViewModel(person));
         }
 
-        private void Remove(int personId)
-        {
-            var person = People.SingleOrDefault(person => person.Id == personId);
-
-            if (person == null)
-                return;
-
-            person.IsDeleted = true;
-
-            SetCanAdd();
-        }
-
         private async Task<IEnumerable<SavePersonViewModel>> SearchPeople(string searchText)
         {
             if (searchText.IsNullOrEmpty())
                 return Array.Empty<SavePersonViewModel>();
 
             return await Task.FromResult(_people.Where(person => person.DisplayName.Contains(searchText, StringComparison.OrdinalIgnoreCase))).ConfigureAwait(false);
-        }
-
-        private void SetCanAdd()
-        {
-            _canAdd = AllowMultiple || People.Count(person => !person.IsDeleted) == 0;
         }
     }
 }

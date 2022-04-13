@@ -8,6 +8,7 @@
 @using Memorabilia.Web.Controls.DropDowns
 @using Memorabilia.Web.Controls.MemorabiliaItem
 @using Memorabilia.Web.Controls.Person
+@using Memorabilia.Web.Controls.Sport
 @using Memorabilia.Web.Controls.Team
 
 <EditPage ContinueNavigationPath="@_viewModel.ContinueNavigationPath"
@@ -42,7 +43,12 @@
                         CanToggle="true"
                         ItemType="_viewModel.ItemType"
                         SelectedPerson="_viewModel.Person"
-                        SelectedPersonChanged="SelectedPersonChanged" />                 
+                        SelectedPersonChanged="SelectedPersonChanged" />    
+        <SportSelector @bind-Value="@_viewModel.SportId" 
+                       @bind-Value:event="ValueChanged"
+                       CanToggle="true" 
+                       ItemType="_viewModel.ItemType"
+                       SelectedValue="_viewModel.SportId"/>  
         <TeamSelector CanToggle="true" 
                       ItemType="_viewModel.ItemType"
                       SelectedTeam="_viewModel.Team"

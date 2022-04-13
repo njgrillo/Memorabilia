@@ -15,6 +15,7 @@ namespace Memorabilia.Application.Features.Memorabilia.PlayingCard
         {
             MemorabiliaId = viewModel.MemorabiliaId;
             SizeId = viewModel.Size.SizeId;
+            SportId = viewModel.Sports.Select(sport => sport.SportId).FirstOrDefault(); 
 
             if (viewModel.People.Any())
                 Person = new SavePersonViewModel(new PersonViewModel(viewModel.People.First().Person));
@@ -29,10 +30,6 @@ namespace Memorabilia.Application.Features.Memorabilia.PlayingCard
 
         public override string ExitNavigationPath => "Memorabilia/Items";
 
-        public bool HasPerson => Person?.Id > 0;
-
-        public bool HasTeam => Team?.Id > 0;
-
         public override string ImagePath => "images/playingcard.jpg";
 
         public override ItemType ItemType => ItemType.PlayingCard;
@@ -42,6 +39,8 @@ namespace Memorabilia.Application.Features.Memorabilia.PlayingCard
         [Required]
         [Range(1, int.MaxValue, ErrorMessage = "Size is required.")]
         public int SizeId { get; set; }
+
+        public int SportId { get; set; }
 
         public SaveTeamViewModel Team { get; set; }
     }

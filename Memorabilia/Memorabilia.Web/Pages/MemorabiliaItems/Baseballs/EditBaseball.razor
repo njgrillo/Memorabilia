@@ -31,7 +31,8 @@
                                  MemorabiliaItemStep="_viewModel.MemorabiliaItemStep" />
     </TimelineContent>
     <Content>
-        <DivRowCol3>
+        <DivRowCol3 HideColumn3="@(!_viewModel.DisplayGameStyleType)"
+                    HideColumn4="@(!_viewModel.DisplayBaseballType)">
             <Content>
                 <ItemTypeBrandDropDown @bind-Value="@_viewModel.BrandId" 
                                        @bind-Value:event="ValueChanged"
@@ -39,26 +40,31 @@
                                        SelectedValue="_viewModel.BrandId" />
             </Content>
             <ContentColumn2>
+                <ItemTypeLevelDropDown @bind-Value="@_viewModel.LevelTypeId"
+                                       @bind-Value:event="ValueChanged" 
+                                       ItemType="_viewModel.ItemType"
+                                       SelectedValue="_viewModel.LevelTypeId" />                               
+            </ContentColumn2>
+            <ContentColumn3>
                 <ItemTypeGameStyleDropDown @bind-Value="@_viewModel.GameStyleTypeId"
                                            @bind-Value:event="ValueChanged"
                                            ItemType="_viewModel.ItemType"
                                            SelectedValue="_viewModel.GameStyleTypeId" /> 
-            </ContentColumn2>
-            <ContentColumn3>
-                <div hidden="@(!_viewModel.DisplayBaseballType)">
-                    <MudSelect @bind-Value="@_viewModel.BaseballTypeId"
-                               @bind-Value:event="ValueChanged"    
-                               Label="Type"
-                               Variant="Variant.Outlined" >
-                        <MudSelectItem Value="@(0)">--Select--</MudSelectItem>
-                        <Iterations Items="_viewModel.BaseballTypes" Context="baseballType">
-                            <MudSelectItem Value="@baseballType.Id">@baseballType.Name</MudSelectItem>
-                        </Iterations>	
-                    </MudSelect>
-                </div> 
             </ContentColumn3>
+            <ContentColumn4>
+                <MudSelect @bind-Value="@_viewModel.BaseballTypeId"
+                           @bind-Value:event="ValueChanged"    
+                           Label="Type"
+                           Variant="Variant.Outlined" >
+                    <MudSelectItem Value="@(0)">--Select--</MudSelectItem>
+                    <Iterations Items="_viewModel.BaseballTypes" Context="baseballType">
+                        <MudSelectItem Value="@baseballType.Id">@baseballType.Name</MudSelectItem>
+                    </Iterations>	
+                </MudSelect>
+            </ContentColumn4>
         </DivRowCol3>
-        <DivRowCol3>
+        <DivRowCol3 HideColumn2="@(!_viewModel.DisplayCommissioner)"
+                    HideColumn3="@(!_viewModel.DisplayGameDate)">
             <Content>
                 <ItemTypeSizeDropDown @bind-Value="@_viewModel.SizeId"
                                       @bind-Value:event="ValueChanged" 
@@ -66,16 +72,25 @@
                                       SelectedValue="@_viewModel.SizeId" /> 
             </Content>
             <ContentColumn2>
-                <div hidden="@(!_viewModel.DisplayGameDate)">
-                    <MudDatePicker @bind-Date="_viewModel.GameDate"
-                                   DateFormat="MM/dd/yyyy"
-                                   Editable="true"
-                                   Label="Game Date"
-                                   Mask="@(new DateMask("MM/dd/yyyy"))" 
-                                   Variant="Variant.Outlined" />
-                </div> 
+                <MudSelect @bind-Value="@_viewModel.CommissionerId"
+                           @bind-Value:event="ValueChanged"    
+                           Label="Commissioner"
+                           Variant="Variant.Outlined">
+                    <MudSelectItem Value="@(0)">--Select--</MudSelectItem>
+                    <Iterations Items="_commissioners" Context="commissioner">
+                        <MudSelectItem Value="@commissioner.Id">@commissioner.Person.DisplayName</MudSelectItem>
+                    </Iterations>	
+                </MudSelect>
             </ContentColumn2>
             <ContentColumn3>
+                <MudDatePicker @bind-Date="_viewModel.GameDate"
+                               DateFormat="MM/dd/yyyy"
+                               Editable="true"
+                               Label="Game Date"
+                               Mask="@(new DateMask("MM/dd/yyyy"))" 
+                               Variant="Variant.Outlined" />                 
+            </ContentColumn3>
+            <ContentColumn4>
                 <PrettyBlazor.Condition Evaluation="_viewModel.DisplayBaseballTypeYear">
                     <Match>
                         <MudNumericField @bind-Value="_viewModel.BaseballTypeYear" 
@@ -91,39 +106,16 @@
                                       Variant="Variant.Outlined" />
                     </Match>
                 </PrettyBlazor.Condition>  
-            </ContentColumn3>
-        </DivRowCol3>
-        <DivRowCol3>
-            <Content>
-                <ItemTypeLevelDropDown @bind-Value="@_viewModel.LevelTypeId"
-                                       @bind-Value:event="ValueChanged" 
-                                       ItemType="_viewModel.ItemType"
-                                       SelectedValue="_viewModel.LevelTypeId" /> 
-            </Content>
-        </DivRowCol3>
-        <DivRowCol3>
-            <Content>
-                <MudSelect @bind-Value="@_viewModel.CommissionerId"
-                           @bind-Value:event="ValueChanged"    
-                           Label="Commissioner"
-                           Variant="Variant.Outlined">
-                    <MudSelectItem Value="@(0)">--Select--</MudSelectItem>
-                    <Iterations Items="_commissioners" Context="commissioner">
-                        <MudSelectItem Value="@commissioner.Id">@commissioner.Person.DisplayName</MudSelectItem>
-                    </Iterations>	
-                </MudSelect>
-            </Content>
+            </ContentColumn4>
         </DivRowCol3>
         <PersonSelector CanFilterBySport="true"
                         CanToggle="true"
                         ItemType="_viewModel.ItemType"
                         SelectedPerson="_viewModel.Person"
                         SelectedPersonChanged="SelectedPersonChanged"
-                        Sport="_viewModel.Sport" />                 
-        <TeamSelector CanToggle="true" 
-                      ItemType="_viewModel.ItemType"
-                      SelectedTeam="_viewModel.Team"
-                      SelectedTeamChanged="SelectedTeamChanged"
-                      SportLeagueLevel="_viewModel.SportLeagueLevel" />
+                        Sport="_viewModel.Sport" />  
+        <MultiTeamSelector CanToggle="true" 
+                           ItemType="_viewModel.ItemType"
+                           Teams="_viewModel.Teams" />
     </Content>
 </EditPage>

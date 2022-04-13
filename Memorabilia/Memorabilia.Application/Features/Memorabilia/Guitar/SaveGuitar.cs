@@ -43,7 +43,7 @@ namespace Memorabilia.Application.Features.Memorabilia.Guitar
 
             public int MemorabiliaId => _viewModel.MemorabiliaId;
 
-            public int[] PersonIds => _viewModel.People.Select(person => person.Id).ToArray();
+            public int[] PersonIds => _viewModel.People.Where(person => !person.IsDeleted).Select(person => person.Id).ToArray();
 
             public int SizeId => _viewModel.SizeId;
         }

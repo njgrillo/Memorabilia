@@ -17,12 +17,15 @@ namespace Memorabilia.Application.Features.Memorabilia
             ConditionId = viewModel.ConditionId ?? 0;
             Cost = viewModel.Acquisition.Cost;
             CreateDate = viewModel.CreateDate;
+            Denominator = viewModel.Denominator;
             EstimatedValue = viewModel.EstimatedValue;
             Id = viewModel.Id;
-            PrivacyTypeId = viewModel.PrivacyTypeId;            
-            PurchaseTypeId = viewModel.PurchaseTypeId ?? 0;
             ItemTypeId = viewModel.ItemTypeId;
             LastModifiedDate = viewModel.LastModifiedDate;
+            Note = viewModel.Note;
+            Numerator = viewModel.Numerator;
+            PrivacyTypeId = viewModel.PrivacyTypeId;            
+            PurchaseTypeId = viewModel.PurchaseTypeId ?? 0;            
             UserId = viewModel.UserId;
         }
 
@@ -46,11 +49,15 @@ namespace Memorabilia.Application.Features.Memorabilia
 
         public DateTime CreateDate { get; set; }
 
+        public int? Denominator { get; set; }
+
         public decimal? EstimatedValue { get; set; }
 
         public override string ExitNavigationPath => "Memorabilia/Items";
 
-        public string ImagePath => $"images/{(!ItemTypeName.IsNullOrEmpty() ? ItemTypeName + ".jpg" : "itemtypes.jpg")}";
+        public string ImagePath => $"images/{(!ItemTypeName.IsNullOrEmpty() ? $"{ItemTypeName.Replace(" ", "")}.jpg" : "itemtypes.jpg")}";
+
+        public bool IsNumbered => Numerator.HasValue || Denominator.HasValue;
 
         [Required]
         [Range(1, int.MaxValue, ErrorMessage = "Item Type is required.")]
@@ -63,6 +70,10 @@ namespace Memorabilia.Application.Features.Memorabilia
         public DateTime? LastModifiedDate { get; set; }
 
         public MemorabiliaItemStep MemorabiliaItemStep => MemorabiliaItemStep.Item;
+
+        public string Note { get; set; }
+
+        public int? Numerator { get; set; }
 
         public override string PageTitle => $"{(Id > 0 ? "Edit" : "Add")} {(ItemTypeId > 0 ? ItemTypeName : "Memorabilia")}";
 

@@ -3,12 +3,16 @@
 <Page>
     <Content>
         <PageHeader PageTitle="@_viewModel.PageTitle" /> 
-        <div class="row" style="margin-top: 2%; margin-bottom: 2%; margin-left: 2%; margin-right: 2%;">
-            <div class="col-md-4">
-                <DomainItemCard ImagePath="images/dashboard.jpg"  
-                                Page="User/ManageDashboard" 
-                                Title="Manage Dashboard" />
-            </div>
-        </div>
+        <DivPad2>
+            <Content>
+                <DivRowCol4>
+                    <Content>
+                        <DomainItemCard ImagePath="images/dashboard.jpg"  
+                                        Page="User/ManageDashboard" 
+                                        Title="Manage Dashboard" />
+                    </Content>
+                </DivRowCol4>
+            </Content>
+        </DivPad2>
     </Content>
 </Page>

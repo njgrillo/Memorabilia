@@ -2,8 +2,11 @@
 {
     public sealed class AdminDomainItem
     {
+        public static readonly AdminDomainItem AccomplishmentTypes = new("Accomplishment Types", "Defines variations of accomplishments", "images/accomplishmenttypes.jpg");
         public static readonly AdminDomainItem AcquisitionTypes = new("Acquisition Types", "Describes how the memorabilia and/or autograph was obtained", "images/acquisitiontypes.jpg");
         public static readonly AdminDomainItem AuthenticationCompanies = new("Authentication Companies", "Defines third party companies that ensure the authenticity of autographs", "images/authenticationcompanies.jpg");
+        public static readonly AdminDomainItem AwardTypes = new("Award Types", "Defines variations of awards", "images/awardtypes.jpg");
+        public static readonly AdminDomainItem BammerTypes = new("Bammer Types", "Defines variations of bammers", "images/bammer.jpg");
         public static readonly AdminDomainItem BaseballTypes = new("Baseball Types", "Defines variations of baseballs", "images/baseballtypes.jpg");
         public static readonly AdminDomainItem BasketballTypes = new("Basketball Types", "Defines variations of basketballs", "images/basketballtypes.jpg");
         public static readonly AdminDomainItem BatTypes = new("Bat Types", "Defines variations of bats", "images/battypes.jpg");
@@ -17,6 +20,7 @@
         public static readonly AdminDomainItem FigureSpecialtyTypes = new("Figure Specialty Types", "Defines variations of figure specialty types", "images/figurespecialtytypes.jpg");
         public static readonly AdminDomainItem FigureTypes = new("Figure Types", "Defines variations of figures", "images/figure.jpg");
         public static readonly AdminDomainItem FootballTypes = new("Football Types", "Defines variations of footballs", "images/footballtypes.jpg");
+        public static readonly AdminDomainItem FranchiseHallOfFameTypes = new("Franchise Hall Of Fame Types", "Defines various hall of fames, ring of honors etc.", "images/franchisehalloffametypes.jpg");
         public static readonly AdminDomainItem Franchises = new("Franchises", "Defines sport franchises", "images/franchises.jpg");
         public static readonly AdminDomainItem GameStyleTypes = new("Game Style Types", "Describes how the memorabilia was used in a game", "images/gamestyletypes.jpg");
         public static readonly AdminDomainItem GloveTypes = new("Glove Types", "Defines variations of gloves", "images/glovetypes.jpg");
@@ -45,6 +49,7 @@
         public static readonly AdminDomainItem PhotoTypes = new("Photo Types", "Defines variations of photos", "images/phototypes.jpg");
         public static readonly AdminDomainItem PrivacyTypes = new("Privacy Types", "Defines the privacy types of memorabilia", "images/privacy.png");
         public static readonly AdminDomainItem PurchaseTypes = new("Purchase Types", "Defines variations of purchase types", "images/purchasetypes.png");
+        public static readonly AdminDomainItem RecordTypes = new("Record Types", "Defines variations of record", "images/recordtypes.jpg");
         public static readonly AdminDomainItem Sizes = new("Sizes", "Defines variations of sizes", "images/sizes.jpg");
         public static readonly AdminDomainItem SportLeagueLevels = new("Sport League Levels", "Defines variations of sport leagues", "images/sportleaguelevels.jpg");
         public static readonly AdminDomainItem Sports = new("Sports", "Defines sports", "images/sports.jpg");
@@ -54,8 +59,11 @@
 
         public static readonly AdminDomainItem[] All =
         {
+            AccomplishmentTypes,
             AcquisitionTypes,
             AuthenticationCompanies,
+            AwardTypes,
+            BammerTypes,
             BaseballTypes,
             BasketballTypes,
             BatTypes,
@@ -69,6 +77,7 @@
             FigureSpecialtyTypes,
             FigureTypes,
             FootballTypes,
+            FranchiseHallOfFameTypes,
             Franchises,
             GameStyleTypes,
             GloveTypes,
@@ -96,6 +105,7 @@
             PhotoTypes,
             PrivacyTypes,
             PurchaseTypes,
+            RecordTypes,
             Sizes,
             SportLeagueLevels,
             Sports,

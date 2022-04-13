@@ -2,6 +2,8 @@
 using Memorabilia.Application.Features.Memorabilia.Figure;
 using Memorabilia.Domain.Constants;
 using Microsoft.AspNetCore.Components;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Memorabilia.Web.Pages.MemorabiliaItems.Figures
@@ -38,6 +40,11 @@ namespace Memorabilia.Web.Pages.MemorabiliaItems.Figures
         protected async Task OnSave()
         {
             await CommandRouter.Send(new SaveFigure.Command(_viewModel)).ConfigureAwait(false);
+        }
+
+        private void SelectedSportIdsChanged(IEnumerable<int> sportIds)
+        {
+            _viewModel.SportIds = sportIds.ToList();
         }
 
         private void SetDefaults()

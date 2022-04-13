@@ -13,72 +13,41 @@
         </DivRowCol3>
     </Match>
 </PrettyBlazor.Condition>
-<div hidden="@(!_displayPeople)">
-    <PrettyBlazor.Condition Evaluation="CanFilterBySport">
-        <Match>
-            <DivRowCol3 LeftPadding="10">
-                <Content>
-                    <MudCheckBox Checked="@_filterPeople"
-                                 CheckedChanged="PersonFilterCheckboxClicked" 
-                                 Label="@_itemTypeNameFilterLabel"
-                                 T="bool" /> 
-                </Content>
-            </DivRowCol3>
-        </Match>
-    </PrettyBlazor.Condition>    
-    <DivRowCol6>
-        <Content>
-            <MudAutocomplete @bind-Value="_viewModel"
-                             AdornmentColor="MudBlazor.Color.Primary"
-                             AdornmentIcon="@Icons.Material.Filled.Search"
-                             Label="Person"
-                             Placeholder="Search by name..."
-                             ResetValueOnEmptyText="true"                                             
-                             SearchFunc="@SearchPeople"                                               
-                             T="SavePersonViewModel"
-                             Text="@_viewModel?.DisplayName"
-                             Variant="Variant.Outlined">
-                <ItemSelectedTemplate Context="person">
-                    @person?.DisplayName
-                </ItemSelectedTemplate>
-                <ItemTemplate Context="person">
-                    @person?.DisplayName
-                </ItemTemplate>
-            </MudAutocomplete>
-            <br />  
-            <PrettyBlazor.Condition Evaluation="AllowMultiple">
-                <Match>
-                    <DivLeftAlign Hidden="@(!_canAdd)">
-                        <Content>
-                            <MudButton ButtonType="MudBlazor.ButtonType.Button" 
-                                       Color="MudBlazor.Color.Success"
-                                       OnClick="Add"
-                                       Size="MudBlazor.Size.Medium"                                  
-                                       Variant="Variant.Filled">Add Person</MudButton>
-                        </Content>
-                    </DivLeftAlign>
-                    <MudTable Bordered="false"
-                              Dense="false" 
-                              Hover="true"
-                              Items="@People.Where(person => !person.IsDeleted).ToList()"    
-                              Striped="true">
-                        <HeaderContent>
-                            <MudTh>Person</MudTh>
-                            <MudTh></MudTh>
-                        </HeaderContent>
-                        <RowTemplate>
-                            <MudTd DataLabel="Person">@context.DisplayName</MudTd>
-                            <MudTd DataLabel="">
-                                <MudTooltip Text="Delete">
-                                    <MudFab Color="MudBlazor.Color.Secondary"
-                                            Icon="@Icons.Outlined.DeleteOutline"
-                                            OnClick="@(_ => Remove(context.Id))" />
-                                </MudTooltip>  
-                            </MudTd>
-                        </RowTemplate>
-                    </MudTable>
-                </Match>
-            </PrettyBlazor.Condition>  
-        </Content>
-    </DivRowCol6>
-</div> 
+<DivHidden Hidden="@(!_displayPeople)">
+    <Content>
+        <PrettyBlazor.Condition Evaluation="CanFilterBySport">
+            <Match>
+                <DivRowCol3 LeftPadding="10">
+                    <Content>
+                        <MudCheckBox Checked="@_filterPeople"
+                                     CheckedChanged="PersonFilterCheckboxClicked" 
+                                     Label="@_itemTypeNameFilterLabel"
+                                     T="bool" /> 
+                    </Content>
+                </DivRowCol3>
+            </Match>
+        </PrettyBlazor.Condition>    
+        <DivRowCol6>
+            <Content>
+                <MudAutocomplete @bind-Value="_viewModel"
+                                 AdornmentColor="MudBlazor.Color.Primary"
+                                 AdornmentIcon="@Icons.Material.Filled.Search"
+                                 Label="Person"
+                                 Placeholder="Search by name..."
+                                 ResetValueOnEmptyText="true"                                             
+                                 SearchFunc="@SearchPeople"                                               
+                                 T="SavePersonViewModel"
+                                 Text="@_viewModel?.DisplayName"
+                                 Variant="Variant.Outlined">
+                    <ItemSelectedTemplate Context="person">
+                        @person?.DisplayName
+                    </ItemSelectedTemplate>
+                    <ItemTemplate Context="person">
+                        @person?.DisplayName
+                    </ItemTemplate>
+                </MudAutocomplete>
+                <br />   
+            </Content>
+        </DivRowCol6>
+    </Content>
+</DivHidden>

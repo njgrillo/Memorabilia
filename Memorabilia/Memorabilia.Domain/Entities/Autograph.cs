@@ -14,10 +14,13 @@ namespace Memorabilia.Domain.Entities
                          int colorId,
                          int conditionId,
                          decimal? cost,
+                         int? denominator,
                          decimal? estimatedValue,
                          bool fullName,
                          int? grade,
-                         int memorabiliaId,                         
+                         int memorabiliaId, 
+                         string note,
+                         int? numerator,
                          string personalizationText,
                          int personId,
                          int? purchaseTypeId,
@@ -27,10 +30,13 @@ namespace Memorabilia.Domain.Entities
         {
             ColorId = colorId;
             ConditionId = conditionId;
+            Denominator = denominator;
             EstimatedValue = estimatedValue;
             FullName = fullName;
             Grade = grade;
             MemorabiliaId = memorabiliaId;
+            Note = note;
+            Numerator = numerator;
             PersonId = personId;
             WritingInstrumentId = writingInstrumentId;
             CreateDate = DateTime.UtcNow;
@@ -54,6 +60,8 @@ namespace Memorabilia.Domain.Entities
 
         public DateTime CreateDate { get; private set; }
 
+        public int? Denominator { get; private set; }
+
         public decimal? EstimatedValue { get; private set; }
 
         public bool? FullName { get; private set; }
@@ -69,6 +77,10 @@ namespace Memorabilia.Domain.Entities
         public virtual Memorabilia Memorabilia { get; set; }
 
         public int MemorabiliaId { get; private set; }
+
+        public string Note { get; private set; }
+
+        public int? Numerator { get; private set; }
 
         public virtual Person Person { get; set; }
 
@@ -87,9 +99,12 @@ namespace Memorabilia.Domain.Entities
                         int colorId,
                         int conditionId,
                         decimal? cost,
+                        int? denominator,
                         decimal? estimatedValue,
                         bool fullName,
                         int? grade,
+                        string note,
+                        int? numerator,
                         string personalizationText,
                         int personId,
                         int? purchaseTypeId,
@@ -99,9 +114,12 @@ namespace Memorabilia.Domain.Entities
         {
             ColorId = colorId;
             ConditionId = conditionId;
+            Denominator = denominator;
             EstimatedValue = estimatedValue;
             FullName = fullName;
             Grade = grade;
+            Note = note;
+            Numerator = numerator;
             PersonId = personId;
             WritingInstrumentId = writingInstrumentId;
             LastModifiedDate = DateTime.UtcNow;

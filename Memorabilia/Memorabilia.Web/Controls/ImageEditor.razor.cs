@@ -33,9 +33,16 @@ namespace Memorabilia.Web.Controls
         [Parameter]
         public EventCallback<string> OnRemove { get; set; }
 
-        private string _imageFilePath => !ImageFilePath.IsNullOrEmpty() 
-            ? $"data:image/jpeg;base64,{Convert.ToBase64String(File.ReadAllBytes(ImageFilePath))}"
-            : "images/imagenotavailable.png";
+        private string _imageFilePath
+        {
+            get
+            {
+                if (ImageFilePath.IsNullOrEmpty() || !File.Exists(ImageFilePath))
+                    return "images/imagenotavailable.png";
+
+                return $"data:image/jpeg;base64,{Convert.ToBase64String(File.ReadAllBytes(ImageFilePath))}";
+            }
+        }
 
         protected async Task Remove(string filePath)
         {

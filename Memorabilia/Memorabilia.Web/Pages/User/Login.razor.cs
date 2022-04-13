@@ -38,7 +38,7 @@ namespace Memorabilia.Web.Pages.User
 
         protected void OnLoad()
         {
-            NavigationManager.NavigateTo("Home");
+            //NavigationManager.NavigateTo("Home");
         }
     }
 }

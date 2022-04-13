@@ -9,8 +9,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Blazored.Toast" Version="3.2.2" />
-    <PackageReference Include="Blazored.Typeahead" Version="4.6.0" />
     <PackageReference Include="Demo.Framework" Version="1.0.10" />
     <PackageReference Include="MediatR" Version="4.1.0" />
     <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="4.1.0" />

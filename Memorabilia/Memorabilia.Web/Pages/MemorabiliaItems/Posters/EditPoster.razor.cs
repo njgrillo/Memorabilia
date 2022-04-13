@@ -2,6 +2,8 @@
 using Memorabilia.Application.Features.Memorabilia.Poster;
 using Memorabilia.Domain.Constants;
 using Microsoft.AspNetCore.Components;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Memorabilia.Web.Pages.MemorabiliaItems.Posters
@@ -38,6 +40,11 @@ namespace Memorabilia.Web.Pages.MemorabiliaItems.Posters
         protected async Task OnSave()
         {
             await CommandRouter.Send(new SavePoster.Command(_viewModel)).ConfigureAwait(false);
+        }
+
+        private void SelectedSportIdsChanged(IEnumerable<int> sportIds)
+        {
+            _viewModel.SportIds = sportIds.ToList();
         }
 
         private void SetDefaults()

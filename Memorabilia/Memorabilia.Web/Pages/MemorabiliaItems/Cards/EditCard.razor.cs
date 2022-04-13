@@ -2,6 +2,8 @@
 using Memorabilia.Application.Features.Memorabilia.Card;
 using Memorabilia.Domain.Constants;
 using Microsoft.AspNetCore.Components;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Memorabilia.Web.Pages.MemorabiliaItems.Cards
@@ -17,7 +19,6 @@ namespace Memorabilia.Web.Pages.MemorabiliaItems.Cards
         [Parameter]
         public int MemorabiliaId { get; set; }            
 
-        private bool _displayNumbered;
         private SaveCardViewModel _viewModel = new ();
 
         protected async Task OnLoad()
@@ -31,7 +32,6 @@ namespace Memorabilia.Web.Pages.MemorabiliaItems.Cards
             }
 
             _viewModel = new SaveCardViewModel(viewModel);
-            _displayNumbered = _viewModel.IsNumbered;
         }
 
         protected async Task OnSave()
@@ -39,15 +39,9 @@ namespace Memorabilia.Web.Pages.MemorabiliaItems.Cards
             await CommandRouter.Send(new SaveCard.Command(_viewModel)).ConfigureAwait(false);
         }
 
-        private void NumberedCheckboxClicked(bool isChecked)
+        private void SelectedSportIdsChanged(IEnumerable<int> sportIds)
         {
-            _displayNumbered = isChecked;
-
-            if (!_displayNumbered)
-            {
-                _viewModel.Denominator = null;
-                _viewModel.Numerator = null;
-            }
+            _viewModel.SportIds = sportIds.ToList();
         }
 
         private void SetDefaults()

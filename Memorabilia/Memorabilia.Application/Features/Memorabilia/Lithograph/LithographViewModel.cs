@@ -14,15 +14,13 @@ namespace Memorabilia.Application.Features.Memorabilia.Lithograph
             _memorabilia = memorabilia;
         }
 
-        public MemorabiliaBrand Brand => _memorabilia.Brand;
+        public MemorabiliaBrand Brand => _memorabilia.Brand;        
 
-        public MemorabiliaLithograph Lithograph => _memorabilia.Lithograph;
-
-        public int MemorabiliaId => _memorabilia.Id;
-
-        public MemorabiliaOrientation Orientation => _memorabilia.Orientation;        
+        public int MemorabiliaId => _memorabilia.Id;      
 
         public IEnumerable<MemorabiliaPerson> People => _memorabilia.People;
+
+        public MemorabiliaPicture Picture => _memorabilia.Picture;
 
         public MemorabiliaSize Size => _memorabilia.Size;
 

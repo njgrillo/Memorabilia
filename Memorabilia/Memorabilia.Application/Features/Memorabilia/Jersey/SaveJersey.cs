@@ -30,7 +30,7 @@ namespace Memorabilia.Application.Features.Memorabilia.Jersey
                                       command.PersonIds,
                                       command.QualityTypeId,
                                       command.SizeId,
-                                      command.SportIds,
+                                      command.SportId,
                                       command.StyleTypeId,
                                       command.TeamIds,
                                       command.TypeId);
@@ -60,17 +60,17 @@ namespace Memorabilia.Application.Features.Memorabilia.Jersey
 
             public int MemorabiliaId => _viewModel.MemorabiliaId;
 
-            public int[] PersonIds => _viewModel.People.Select(person => person.Id).ToArray();
+            public int[] PersonIds => _viewModel.People.Where(person => !person.IsDeleted).Select(person => person.Id).ToArray();
 
             public int QualityTypeId => _viewModel.JerseyQualityTypeId;
 
             public int SizeId => _viewModel.SizeId;
 
-            public int[] SportIds => _viewModel.SportIds.ToArray();
+            public int? SportId => _viewModel.SportId > 0 ? _viewModel.SportId : null;
 
             public int StyleTypeId => _viewModel.JerseyStyleTypeId;
 
-            public int[] TeamIds => _viewModel.Teams.Select(team => team.Id).ToArray();
+            public int[] TeamIds => _viewModel.Teams.Where(team => !team.IsDeleted).Select(team => team.Id).ToArray();
 
             public int TypeId => _viewModel.JerseyTypeId;
         }

@@ -1,6 +1,8 @@
 ﻿using Demo.Framework.Web;
 using Memorabilia.Application.Features.Memorabilia.FirstDayCover;
 using Microsoft.AspNetCore.Components;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Memorabilia.Web.Pages.MemorabiliaItems.FirstDayCovers
@@ -29,6 +31,11 @@ namespace Memorabilia.Web.Pages.MemorabiliaItems.FirstDayCovers
         protected async Task OnSave()
         {
             await CommandRouter.Send(new SaveFirstDayCover.Command(_viewModel)).ConfigureAwait(false);
+        }
+
+        private void SelectedSportIdsChanged(IEnumerable<int> sportIds)
+        {
+            _viewModel.SportIds = sportIds.ToList();
         }
     }
 }

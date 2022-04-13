@@ -18,9 +18,9 @@ namespace Memorabilia.Application.Features.Memorabilia.Painting
 
         public int MemorabiliaId => _memorabilia.Id;
 
-        public MemorabiliaOrientation Orientation => _memorabilia.Orientation;
-
         public IEnumerable<MemorabiliaPerson> People => _memorabilia.People;
+
+        public MemorabiliaPicture Picture => _memorabilia.Picture;
 
         public MemorabiliaSize Size => _memorabilia.Size;
 

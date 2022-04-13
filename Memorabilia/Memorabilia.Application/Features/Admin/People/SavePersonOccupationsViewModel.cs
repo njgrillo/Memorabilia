@@ -16,7 +16,7 @@ namespace Memorabilia.Application.Features.Admin.People
 
         public override string BackNavigationPath => $"People/Edit/{PersonId}";
 
-        public override string ContinueNavigationPath => $"People/Team/Edit/{PersonId}";
+        public override string ContinueNavigationPath => $"People/SportService/Edit/{PersonId}";
 
         public override EditModeType EditModeType => PersonOccupations.Any() ? EditModeType.Update : EditModeType.Add;
 

@@ -1,5 +1,4 @@
 ﻿using Memorabilia.Application.Features.Admin.People;
-using Memorabilia.Application.Features.Admin.Sports;
 using Memorabilia.Application.Features.Admin.Teams;
 using Memorabilia.Domain.Constants;
 using System;
@@ -16,14 +15,14 @@ namespace Memorabilia.Application.Features.Memorabilia.Photo
         public SavePhotoViewModel(PhotoViewModel viewModel)
         {
             BrandId = viewModel.Brand.BrandId;
-            Framed = viewModel.Photo.Framed;
-            Matted = viewModel.Photo.Matted;
+            Framed = viewModel.Picture.Framed;
+            Matted = viewModel.Picture.Matted;
             MemorabiliaId = viewModel.MemorabiliaId;
-            OrientationId = viewModel.Orientation.OrientationId;
+            OrientationId = viewModel.Picture.OrientationId;
             People = viewModel.People.Select(person => new SavePersonViewModel(new PersonViewModel(person.Person))).ToList();
-            PhotoTypeId = viewModel.Photo.PhotoTypeId;
+            PhotoTypeId = viewModel.Picture.PhotoTypeId;
             SizeId = viewModel.Size.SizeId;
-            Sports = viewModel.Sports.Select(sport => new SaveSportViewModel(new SportViewModel(sport.Sport))).ToList();
+            SportIds = viewModel.Sports.Select(sport => sport.SportId).ToList();
             Teams = viewModel.Teams.Select(team => new SaveTeamViewModel(new TeamViewModel(team.Team))).ToList();
         }
 
@@ -39,12 +38,6 @@ namespace Memorabilia.Application.Features.Memorabilia.Photo
 
         public bool Framed { get; set; }
 
-        public bool HasPerson => People.Any();
-
-        public bool HasSport => Sports.Any();
-
-        public bool HasTeam => Teams.Any();
-
         public override string ImagePath => "images/phototypes.jpg";
 
         public override ItemType ItemType => ItemType.Photo;       
@@ -59,7 +52,7 @@ namespace Memorabilia.Application.Features.Memorabilia.Photo
 
         [Required]
         [Range(1, int.MaxValue, ErrorMessage = "Type is required.")]
-        public int PhotoTypeId { get; set; }
+        public int? PhotoTypeId { get; set; }
 
         public PhotoType[] PhotoTypes => PhotoType.All;
 
@@ -67,7 +60,7 @@ namespace Memorabilia.Application.Features.Memorabilia.Photo
         [Range(1, int.MaxValue, ErrorMessage = "Size is required.")]
         public int SizeId { get; set; }
 
-        public List<SaveSportViewModel> Sports { get; set; } = new();
+        public List<int> SportIds { get; set; } = new();
 
         public List<SaveTeamViewModel> Teams { get; set; } = new();
     }

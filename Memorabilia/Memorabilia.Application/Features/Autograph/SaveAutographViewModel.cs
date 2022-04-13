@@ -21,6 +21,7 @@ namespace Memorabilia.Application.Features.Autograph
             ConditionId = viewModel.ConditionId;
             Cost = viewModel.Acquisition?.Cost;
             CreateDate = viewModel.CreateDate;
+            Denominator = viewModel.Denominator;
             EstimatedValue = viewModel.EstimatedValue;
             FullName = viewModel.FullName ?? false;
             Grade = viewModel.Grade;
@@ -28,6 +29,8 @@ namespace Memorabilia.Application.Features.Autograph
             ItemType = viewModel.ItemType;
             LastModifiedDate = viewModel.LastModifiedDate;
             MemorabiliaId = viewModel.MemorabiliaId;
+            Note = viewModel.Note;
+            Numerator = viewModel.Numerator;    
             Person = new SavePersonViewModel(new PersonViewModel(viewModel.Person));
             PersonalizationText = viewModel.Personalization?.Text;
             PurchaseTypeId = viewModel.Acquisition?.PurchaseTypeId ?? 0;
@@ -88,6 +91,8 @@ namespace Memorabilia.Application.Features.Autograph
 
         public DateTime CreateDate { get; set; }
 
+        public int? Denominator { get; set; }
+
         public bool DisplayAcquisitionDetails => !AcquiredWithAutograph;
 
         public bool DisplayThroughTheMailDetails => AcquisitionType == AcquisitionType.ThroughTheMail;
@@ -128,6 +133,8 @@ namespace Memorabilia.Application.Features.Autograph
             }
         }
 
+        public bool IsNumbered => Numerator.HasValue || Denominator.HasValue;
+
         public bool IsPersonalized => !PersonalizationText.IsNullOrEmpty();
 
         public ItemType ItemType { get; set; }
@@ -150,6 +157,10 @@ namespace Memorabilia.Application.Features.Autograph
         public PersonViewModel MemorabiliaPerson { get; set; }
 
         public int? MemorabiliaPurchaseTypeId { get; set; }
+
+        public string Note { get; set; }
+
+        public int? Numerator { get; set; }
 
         public override string PageTitle => $"{(Id > 0 ? "Edit" : "Add")} Autograph";
 

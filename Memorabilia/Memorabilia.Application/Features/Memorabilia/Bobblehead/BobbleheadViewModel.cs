@@ -14,6 +14,8 @@ namespace Memorabilia.Application.Features.Memorabilia.Bobblehead
             _memorabilia = memorabilia;
         }
 
+        public MemorabiliaBobblehead Bobblehead => _memorabilia.Bobblehead;
+
         public MemorabiliaBrand Brand => _memorabilia.Brand;
 
         public int MemorabiliaId => _memorabilia.Id;

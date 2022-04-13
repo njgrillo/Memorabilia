@@ -58,7 +58,7 @@ namespace Memorabilia.Application.Features.Memorabilia.Ticket
 
             public int SizeId => _viewModel.SizeId;
 
-            public int? SportId => _viewModel.Sport?.Id > 0 ? _viewModel.Sport.Id : null;
+            public int? SportId => _viewModel.SportId > 0 ? _viewModel.SportId : null;
 
             public int[] TeamIds => _viewModel.Teams.Select(team => team.Id).ToArray();
         }

@@ -1,6 +1,7 @@
 ﻿using Framework.Domain.Command;
 using Framework.Handler;
 using Memorabilia.Repository.Interfaces;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Memorabilia.Application.Features.Memorabilia.Bammer
@@ -20,10 +21,14 @@ namespace Memorabilia.Application.Features.Memorabilia.Bammer
             {
                 var memorabilia = await _memorabiliaRepository.Get(command.MemorabiliaId).ConfigureAwait(false);
 
-                memorabilia.SetBammer(command.BrandId,
+                memorabilia.SetBammer(command.BammerTypeId,
+                                      command.BrandId,
+                                      command.InPackage,
                                       command.LevelTypeId,
-                                      command.PersonId,
-                                      command.TeamId);
+                                      command.PersonIds,
+                                      command.SportId,
+                                      command.TeamIds,
+                                      command.Year);
 
                 await _memorabiliaRepository.Update(memorabilia).ConfigureAwait(false);
             }
@@ -38,15 +43,23 @@ namespace Memorabilia.Application.Features.Memorabilia.Bammer
                 _viewModel = viewModel;
             }
 
+            public int? BammerTypeId => _viewModel.BammerTypeId > 0 ? _viewModel.BammerTypeId : null;
+
             public int BrandId => _viewModel.BrandId;
+
+            public bool InPackage => _viewModel.InPackage;
 
             public int LevelTypeId => _viewModel.LevelTypeId;
 
             public int MemorabiliaId => _viewModel.MemorabiliaId;
 
-            public int? PersonId => _viewModel.Person?.Id > 0 ? _viewModel.Person?.Id : null;
+            public int[] PersonIds => _viewModel.People.Where(person => !person.IsDeleted).Select(person => person.Id).ToArray();
 
-            public int? TeamId => _viewModel.Team?.Id > 0 ? _viewModel.Team?.Id : null;
+            public int? SportId => _viewModel.SportId > 0 ? _viewModel.SportId : null;
+
+            public int[] TeamIds => _viewModel.Teams.Where(team => !team.IsDeleted).Select(team => team.Id).ToArray();
+
+            public int? Year => _viewModel.Year;
         }
     }
 }

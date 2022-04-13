@@ -18,6 +18,7 @@ namespace Memorabilia.Application.Features.Memorabilia.Trunks
             LevelTypeId = viewModel.Level.LevelTypeId;
             MemorabiliaId = viewModel.MemorabiliaId;
             SizeId = viewModel.Size.SizeId;
+            SportId = viewModel.Sports.Select(sport => sport.SportId).FirstOrDefault();
 
             if (viewModel.People.Any())
                 Person = new SavePersonViewModel(new PersonViewModel(viewModel.People.First().Person));
@@ -42,10 +43,8 @@ namespace Memorabilia.Application.Features.Memorabilia.Trunks
         public GameStyleType GameStyleType => GameStyleType.Find(GameStyleTypeId);
 
         [Required]
-        [Range(1, int.MaxValue, ErrorMessage = "Game Style Type is required.")]
+        [Range(1, int.MaxValue, ErrorMessage = "Match Style Type is required.")]
         public int GameStyleTypeId { get; set; }
-
-        public bool HasPerson => Person?.Id > 0;
 
         public override string ImagePath => "images/trunks.jpg";
 
@@ -60,5 +59,7 @@ namespace Memorabilia.Application.Features.Memorabilia.Trunks
         [Required]
         [Range(1, int.MaxValue, ErrorMessage = "Size is required.")]
         public int SizeId { get; set; }
+
+        public int SportId { get; set; }
     }
 }

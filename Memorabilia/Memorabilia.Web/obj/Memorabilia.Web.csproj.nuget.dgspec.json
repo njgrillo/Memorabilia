@@ -249,14 +249,6 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "dependencies": {
-            "Blazored.Toast": {
-              "target": "Package",
-              "version": "[3.2.2, )"
-            },
-            "Blazored.Typeahead": {
-              "target": "Package",
-              "version": "[4.6.0, )"
-            },
             "Demo.Framework": {
               "target": "Package",
               "version": "[1.0.10, )"

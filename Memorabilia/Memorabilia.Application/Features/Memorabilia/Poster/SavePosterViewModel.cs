@@ -15,13 +15,13 @@ namespace Memorabilia.Application.Features.Memorabilia.Poster
 
         public SavePosterViewModel(PosterViewModel viewModel)
         {
-            //Framed = viewModel.Poster.Framed;
-            //Matted = viewModel.Poster.Matted;
+            Framed = viewModel.Picture.Framed;
+            Matted = viewModel.Picture.Matted;
             MemorabiliaId = viewModel.MemorabiliaId;
-            OrientationId = viewModel.Orientation.OrientationId;
+            OrientationId = viewModel.Picture.OrientationId;
             People = viewModel.People.Select(person => new SavePersonViewModel(new PersonViewModel(person.Person))).ToList();
             SizeId = viewModel.Size.SizeId;
-            Sports = viewModel.Sports.Select(sport => new SaveSportViewModel(new SportViewModel(sport.Sport))).ToList();
+            SportIds = viewModel.Sports.Select(sport => sport.SportId).ToList();
             Teams = viewModel.Teams.Select(team => new SaveTeamViewModel(new TeamViewModel(team.Team))).ToList();
         }
 
@@ -36,12 +36,6 @@ namespace Memorabilia.Application.Features.Memorabilia.Poster
         public override string ExitNavigationPath => "Memorabilia/Items";
 
         public bool Framed { get; set; }
-
-        public bool HasPerson => People.Any();
-
-        public bool HasSport => Sports.Any();
-
-        public bool HasTeam => Teams.Any();
 
         public override string ImagePath => "images/poster.jpg";
 
@@ -61,7 +55,7 @@ namespace Memorabilia.Application.Features.Memorabilia.Poster
         [Range(1, int.MaxValue, ErrorMessage = "Size is required.")]
         public int SizeId { get; set; }
 
-        public List<SaveSportViewModel> Sports { get; set; } = new();
+        public List<int> SportIds { get; set; } = new();
 
         public List<SaveTeamViewModel> Teams { get; set; } = new();
     }

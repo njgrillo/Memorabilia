@@ -28,8 +28,11 @@ namespace Memorabilia.Application.Features.Memorabilia
                                                                   command.AcquisitionTypeId,
                                                                   command.ConditionId,                                                                  
                                                                   command.Cost,
+                                                                  command.Denominator,
                                                                   command.EstimatedValue,
                                                                   command.ItemTypeId,
+                                                                  command.Note,
+                                                                  command.Numerator,
                                                                   command.PrivacyTypeId,                                                                  
                                                                   command.PurchaseTypeId,
                                                                   command.UserId);
@@ -55,7 +58,10 @@ namespace Memorabilia.Application.Features.Memorabilia
                                 command.AcquisitionTypeId,
                                 command.ConditionId,
                                 command.Cost,
+                                command.Denominator,
                                 command.EstimatedValue,
+                                command.Note,
+                                command.Numerator,
                                 command.PrivacyTypeId,
                                 command.PurchaseTypeId);
 
@@ -85,6 +91,8 @@ namespace Memorabilia.Application.Features.Memorabilia
 
             public DateTime CreateDate => _viewModel.CreateDate;
 
+            public int? Denominator => _viewModel.Denominator;
+
             public decimal? EstimatedValue => _viewModel.EstimatedValue;
 
             public int Id { get; set; }
@@ -98,6 +106,10 @@ namespace Memorabilia.Application.Features.Memorabilia
             public int ItemTypeId => _viewModel.ItemTypeId;
 
             public DateTime? LastModifiedDate => _viewModel.LastModifiedDate;
+
+            public string Note => _viewModel.Note;  
+
+            public int? Numerator => _viewModel.Numerator;
 
             public int PrivacyTypeId => _viewModel.PrivacyTypeId;
 

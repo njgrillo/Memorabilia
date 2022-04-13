@@ -17,12 +17,19 @@ namespace Memorabilia.Domain.Constants
         public static readonly Spot MiddleLeft = new(19, "Middle - Facemask Facing Left", string.Empty);
         public static readonly Spot MiddleRight = new(18, "Middle - Facemask Facing Right", string.Empty);
         public static readonly Spot OnBack = new(10, "On Back", string.Empty);
+        public static readonly Spot OnBase = new(29, "On Base", string.Empty);
+        public static readonly Spot OnBear = new(28, "On Bear", string.Empty);
         public static readonly Spot OnBookplate = new(8, "On Bookplate", string.Empty);
+        public static readonly Spot OnBox = new(31, "On Box", string.Empty);
         public static readonly Spot OnCardboard = new(12, "On Cardboard", string.Empty);
         public static readonly Spot OnCloth = new(3, "On Cloth", string.Empty);
-        public static readonly Spot OnFront = new(9, "On Front", string.Empty);        
+        public static readonly Spot OnFront = new(9, "On Front", string.Empty);
+        public static readonly Spot OnHat = new(30, "On Hat", string.Empty);
         public static readonly Spot OnNumber = new(4, "On Number", string.Empty);        
+        public static readonly Spot OnPackage = new(25, "On Package", string.Empty);        
         public static readonly Spot OnPlastic = new(11, "On Plastic", string.Empty);        
+        public static readonly Spot OnPlasticTagProtector = new(27, "On Plastic Tag Protector", string.Empty);        
+        public static readonly Spot OnTag = new(26, "On Tag", string.Empty);        
         public static readonly Spot SidePanel = new(2, "Side Panel", string.Empty);
         public static readonly Spot SweetSpot = new(1, "Sweet Spot", string.Empty);
         public static readonly Spot TopLeft = new(15, "Top - Facemask Facing Left", string.Empty);
@@ -44,12 +51,19 @@ namespace Memorabilia.Domain.Constants
             MiddleLeft,
             MiddleRight,
             OnBack,
+            OnBase,
+            OnBear,
             OnBookplate,
+            OnBox,
             OnCardboard,
             OnCloth,
             OnFront,
+            OnHat,
             OnNumber, 
+            OnPackage,
             OnPlastic,
+            OnPlasticTagProtector,
+            OnTag,
             SidePanel,
             SweetSpot,
             TopLeft,

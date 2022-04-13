@@ -24,7 +24,7 @@ namespace Memorabilia.Application.Features.Memorabilia.Helmet
             MemorabiliaId = viewModel.MemorabiliaId;
             People = viewModel.People.Select(person => new SavePersonViewModel(new PersonViewModel(person.Person))).ToList();
             SizeId = viewModel.Size.SizeId;
-            SportIds = viewModel.Sports.Select(x => x.Id).ToList();
+            SportIds = viewModel.Sports.Select(x => x.SportId).ToList();
             Teams = viewModel.Teams.Select(team => new SaveTeamViewModel(new TeamViewModel(team.Team))).ToList();
             Throwback = viewModel.Helmet.Throwback;
         }
@@ -77,10 +77,6 @@ namespace Memorabilia.Application.Features.Memorabilia.Helmet
         }
 
         public GameStyleType[] GameStyleTypes => GameStyleType.GetAll(ItemType.Helmet);
-
-        public bool HasPerson => People.Any();
-
-        public bool HasTeam => Teams.Any();
 
         public HelmetFinish[] HelmetFinishes => HelmetFinish.All;
 

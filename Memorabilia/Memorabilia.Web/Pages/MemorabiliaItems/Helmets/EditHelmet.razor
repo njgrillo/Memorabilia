@@ -4,6 +4,7 @@
 @using Memorabilia.Web.Controls.DropDowns
 @using Memorabilia.Web.Controls.MemorabiliaItem
 @using Memorabilia.Web.Controls.Person
+@using Memorabilia.Web.Controls.Sport
 @using Memorabilia.Web.Controls.Team
 
 <EditPage ContinueNavigationPath="@_viewModel.ContinueNavigationPath"
@@ -61,14 +62,16 @@
         </DivRowCol3>
         <DivRowCol3>
             <ContentColumn2>
-                <div hidden="@(!_viewModel.DisplayGameDate)">
-                    <MudDatePicker @bind-Date="_viewModel.GameDate"
-                                   DateFormat="MM/dd/yyyy"
-                                   Editable="true"
-                                   Label="Game Date"
-                                   Mask="@(new DateMask("MM/dd/yyyy"))" 
-                                   Variant="Variant.Outlined" />
-                </div> 
+                <DivHidden Hidden="@(!_viewModel.DisplayGameDate)">
+                    <Content>
+                        <MudDatePicker @bind-Date="_viewModel.GameDate"
+                                       DateFormat="MM/dd/yyyy"
+                                       Editable="true"
+                                       Label="Game Date"
+                                       Mask="@(new DateMask("MM/dd/yyyy"))" 
+                                       Variant="Variant.Outlined" />
+                    </Content>
+                </DivHidden>
             </ContentColumn2>
         </DivRowCol3>
         <DivRowCol3>
@@ -84,33 +87,37 @@
                 </MudSelect> 
             </Content>
             <ContentColumn2>
-                <div hidden="@(!_viewModel.DisplayHelmetQualityType)">
-                    <MudSelect @bind-Value="@_viewModel.HelmetTypeId"
-                               @bind-Value:event="ValueChanged"  
-                               Disabled="!_viewModel.CanEditHelmetQualityType"
-                               Label="Quality"
-                               Variant="Variant.Outlined" >
-                        <MudSelectItem Value="@(0)">--Select--</MudSelectItem>
-                        <Iterations Items="_viewModel.HelmetQualityTypes" Context="helmetQualityType">
-                            <MudSelectItem Value="@helmetQualityType.Id">@helmetQualityType.Name</MudSelectItem>
-                        </Iterations>	
-                    </MudSelect> 
-                </div> 
+                <DivHidden Hidden="@(!_viewModel.DisplayHelmetQualityType)">
+                    <Content>
+                        <MudSelect @bind-Value="@_viewModel.HelmetTypeId"
+                                   @bind-Value:event="ValueChanged"  
+                                   Disabled="!_viewModel.CanEditHelmetQualityType"
+                                   Label="Quality"
+                                   Variant="Variant.Outlined" >
+                            <MudSelectItem Value="@(0)">--Select--</MudSelectItem>
+                            <Iterations Items="_viewModel.HelmetQualityTypes" Context="helmetQualityType">
+                                <MudSelectItem Value="@helmetQualityType.Id">@helmetQualityType.Name</MudSelectItem>
+                            </Iterations>	
+                        </MudSelect> 
+                    </Content>
+                </DivHidden> 
             </ContentColumn2>
         </DivRowCol3>
         <DivRowCol3>
             <Content>
-                <div hidden="@(!_viewModel.DisplayHelmetFinish)">
-                    <MudSelect @bind-Value="@_viewModel.HelmetFinishId"
-                               @bind-Value:event="ValueChanged"    
-                               Label="Finish"
-                               Variant="Variant.Outlined" >
-                        <MudSelectItem Value="@(0)">--Select--</MudSelectItem>
-                        <Iterations Items="_viewModel.HelmetFinishes" Context="helmetFinish">
-                            <MudSelectItem Value="@helmetFinish.Id">@helmetFinish.Name</MudSelectItem>
-                        </Iterations>	
-                    </MudSelect> 
-                </div> 
+                <DivHidden Hidden="@(!_viewModel.DisplayHelmetFinish)">
+                    <Content>
+                        <MudSelect @bind-Value="@_viewModel.HelmetFinishId"
+                                   @bind-Value:event="ValueChanged"    
+                                   Label="Finish"
+                                   Variant="Variant.Outlined" >
+                            <MudSelectItem Value="@(0)">--Select--</MudSelectItem>
+                            <Iterations Items="_viewModel.HelmetFinishes" Context="helmetFinish">
+                                <MudSelectItem Value="@helmetFinish.Id">@helmetFinish.Name</MudSelectItem>
+                            </Iterations>	
+                        </MudSelect>
+                    </Content>
+                </DivHidden>
             </Content>
         </DivRowCol3>
         <DivRowCol3>
@@ -119,13 +126,15 @@
                              Label="Is a Throwback?" /> 
             </Content>
         </DivRowCol3>
-        <PersonSelector AllowMultiple="true"
-                        CanToggle="true"
-                        ItemType="_viewModel.ItemType"
-                        People="_viewModel.People" />                 
-        <TeamSelector AllowMultiple="true"
-                      CanToggle="true" 
-                      ItemType="_viewModel.ItemType"
-                      Teams="_viewModel.Teams" />
+        <MultiPersonSelector CanToggle="true"
+                             ItemType="_viewModel.ItemType"
+                             People="_viewModel.People" />   
+        <MultiSportSelector CanToggle="true"
+                            ItemType="_viewModel.ItemType"
+                            SelectedSportIdsChanged="SelectedSportIdsChanged"
+                            SportIds="_viewModel.SportIds" />
+        <MultiTeamSelector CanToggle="true" 
+                           ItemType="_viewModel.ItemType"
+                           Teams="_viewModel.Teams" />
     </Content>
 </EditPage>

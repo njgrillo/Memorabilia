@@ -14,15 +14,13 @@ namespace Memorabilia.Application.Features.Memorabilia.Canvas
             _memorabilia = memorabilia;
         }
 
-        public MemorabiliaBrand Brand => _memorabilia.Brand;
+        public MemorabiliaBrand Brand => _memorabilia.Brand;        
 
-        public MemorabiliaCanvas Canvas => _memorabilia.Canvas;
-
-        public int MemorabiliaId => _memorabilia.Id;
-
-        public MemorabiliaOrientation Orientation => _memorabilia.Orientation;       
+        public int MemorabiliaId => _memorabilia.Id;     
 
         public IEnumerable<MemorabiliaPerson> People => _memorabilia.People;
+
+        public MemorabiliaPicture Picture => _memorabilia.Picture;
 
         public MemorabiliaSize Size => _memorabilia.Size;
 

@@ -16,13 +16,11 @@ namespace Memorabilia.Application.Features.Memorabilia.Photo
 
         public MemorabiliaBrand Brand => _memorabilia.Brand;
 
-        public int MemorabiliaId => _memorabilia.Id;
-
-        public MemorabiliaOrientation Orientation => _memorabilia.Orientation;
-
-        public MemorabiliaPhoto Photo => _memorabilia.Photo;
+        public int MemorabiliaId => _memorabilia.Id;      
 
         public IEnumerable<MemorabiliaPerson> People => _memorabilia.People;
+
+        public MemorabiliaPicture Picture => _memorabilia.Picture;
 
         public MemorabiliaSize Size => _memorabilia.Size;
 

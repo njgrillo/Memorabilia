@@ -18,6 +18,7 @@ namespace Memorabilia.Application.Features.Memorabilia.HeadBand
             GameStyleTypeId = viewModel.Game?.GameStyleTypeId ?? 0;
             LevelTypeId = viewModel.Level.LevelTypeId;
             MemorabiliaId = viewModel.MemorabiliaId;
+            SportId = viewModel.Sports.Select(sport => sport.SportId).FirstOrDefault();
 
             if (viewModel.People.Any())
                 Person = new SavePersonViewModel(new PersonViewModel(viewModel.People.First().Person));
@@ -48,10 +49,6 @@ namespace Memorabilia.Application.Features.Memorabilia.HeadBand
         [Range(1, int.MaxValue, ErrorMessage = "Game Style Type is required.")]
         public int GameStyleTypeId { get; set; }
 
-        public bool HasPerson => Person?.Id > 0;
-
-        public bool HasTeam => Team?.Id > 0;
-
         public override string ImagePath => "images/headband.jpg";
 
         public override ItemType ItemType => ItemType.HeadBand;
@@ -67,6 +64,8 @@ namespace Memorabilia.Application.Features.Memorabilia.HeadBand
         [Required]
         [Range(1, int.MaxValue, ErrorMessage = "Size is required.")]
         public int SizeId { get; set; }
+
+        public int SportId { get; set; }
 
         public SaveTeamViewModel Team { get; set; }
     }

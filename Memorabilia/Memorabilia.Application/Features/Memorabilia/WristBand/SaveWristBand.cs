@@ -26,6 +26,7 @@ namespace Memorabilia.Application.Features.Memorabilia.WristBand
                                          command.GameStyleTypeId,
                                          command.LevelTypeId,
                                          command.PersonId,
+                                         command.SportId,
                                          command.TeamId);
 
                 await _memorabiliaRepository.Update(memorabilia).ConfigureAwait(false);
@@ -54,6 +55,8 @@ namespace Memorabilia.Application.Features.Memorabilia.WristBand
             public int? PersonId => _viewModel.Person?.Id > 0 ? _viewModel.Person?.Id : null;
 
             public int SizeId => _viewModel.SizeId;
+
+            public int? SportId => _viewModel.SportId > 0 ? _viewModel.SportId : null;
 
             public int? TeamId => _viewModel.Team?.Id > 0 ? _viewModel.Team?.Id : null;
         }

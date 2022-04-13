@@ -39,8 +39,6 @@ namespace Memorabilia.Application.Features.Memorabilia.Pylon
 
         public int GameStyleTypeId { get; set; }
 
-        public bool HasTeam => Team.Id > 0;
-
         public override string ImagePath => "images/pylon.jpg";
 
         public override ItemType ItemType => ItemType.Pylon;

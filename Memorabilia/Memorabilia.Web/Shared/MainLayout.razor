@@ -8,14 +8,30 @@
 
 <MudLayout>
     <MudAppBar>
-        <MudIconButton Color="MudBlazor.Color.Inherit"
-                       Edge="Edge.Start" 
-                       Icon="@Icons.Material.Filled.Menu"   
-                       OnClick="@((e) => DrawerToggle())" />      
-        <MudIconButton Color="MudBlazor.Color.Inherit"
-                       Edge="Edge.Start"
-                       Icon="@Icons.Material.Filled.Settings"
-                       OnClick="@((e) => UserSettings())" />
+        <MudTooltip Text="@(_drawerOpen ? "Collapse" : "Expand")">
+            <MudIconButton Color="MudBlazor.Color.Inherit"
+                           Edge="Edge.Start" 
+                           Icon="@Icons.Material.Filled.Menu"   
+                           OnClick="@((e) => DrawerToggle())" />  
+        </MudTooltip>
+        <MudTooltip Text="User Settings">
+            <MudIconButton Color="MudBlazor.Color.Inherit"
+                           Edge="Edge.Start"
+                           Icon="@Icons.Material.Filled.Settings"
+                           OnClick="@((e) => UserSettings())" />
+        </MudTooltip>
+        <MudTooltip Text="Login">
+            <MudIconButton Color="MudBlazor.Color.Inherit"
+                           Edge="Edge.Start"
+                           Icon="@Icons.Material.Filled.Login"
+                           OnClick="@((e) => Login())" />
+        </MudTooltip> 
+        <MudTooltip Text="Logout">
+            <MudIconButton Color="MudBlazor.Color.Inherit"
+                           Edge="Edge.Start"
+                           Icon="@Icons.Material.Filled.Logout"
+                           OnClick="@((e) => Logout())" />
+        </MudTooltip> 
     </MudAppBar>
     <MudDrawer @bind-Open="@_drawerOpen">
         <NavMenu />
@@ -26,14 +42,24 @@
 </MudLayout>
 
 @code {
-    bool _drawerOpen = true;
+    private bool _drawerOpen = true;
 
-    void DrawerToggle()
+    public void DrawerToggle()
     {
         _drawerOpen = !_drawerOpen;
     }
 
-    void UserSettings()
+    public void Login()
+    {
+        NavigationManager.NavigateTo("Login");
+    }
+
+    public void Logout()
+    {
+        NavigationManager.NavigateTo("Logout");
+    }
+
+    public void UserSettings()
     {
         NavigationManager.NavigateTo("Settings");
     }

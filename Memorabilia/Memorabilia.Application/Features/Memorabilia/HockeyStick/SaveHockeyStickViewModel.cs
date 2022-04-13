@@ -2,7 +2,6 @@
 using Memorabilia.Application.Features.Admin.Teams;
 using Memorabilia.Domain.Constants;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 
@@ -21,7 +20,6 @@ namespace Memorabilia.Application.Features.Memorabilia.HockeyStick
             LevelTypeId = viewModel.Level.LevelTypeId;
             MemorabiliaId = viewModel.MemorabiliaId;
             SizeId = viewModel.Size.SizeId;
-            SportIds = viewModel.Sports.Select(x => x.Id).ToList();
 
             if (viewModel.People.Any())
                 Person = new SavePersonViewModel(new PersonViewModel(viewModel.People.First().Person));
@@ -52,12 +50,6 @@ namespace Memorabilia.Application.Features.Memorabilia.HockeyStick
 
         public GameStyleType[] GameStyleTypes => GameStyleType.GetAll(ItemType.HockeyStick);
 
-        public bool HasPerson => Person?.Id > 0;
-
-        public bool HasSport => SportIds.Any();
-
-        public bool HasTeam => Team?.Id > 0;
-
         public override string ImagePath => "images/hockeystick.jpg";
 
         public override ItemType ItemType => ItemType.HockeyStick;
@@ -73,8 +65,6 @@ namespace Memorabilia.Application.Features.Memorabilia.HockeyStick
         public int SizeId { get; set; }
 
         public Sport Sport => Sport.Hockey;
-
-        public List<int> SportIds { get; set; } = new();
 
         public SportLeagueLevel SportLeagueLevel => SportLeagueLevel.NationalHockeyLeague;
 

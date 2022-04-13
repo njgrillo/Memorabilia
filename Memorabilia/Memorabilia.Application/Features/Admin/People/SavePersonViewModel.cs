@@ -21,7 +21,9 @@ namespace Memorabilia.Application.Features.Admin.People
             LegalName = viewModel.LegalName;
             MiddleName = viewModel.MiddleName;
             Nickname = viewModel.Nickname;
+            Nicknames = viewModel.Nicknames.Select(nickname => new SavePersonNicknameViewModel(new PersonNicknameViewModel(nickname))).ToList();
             Occupations = viewModel.Occupations.Select(occupation => new SavePersonOccupationViewModel(new PersonOccupationViewModel(occupation))).ToList();
+            ProfileName = viewModel.ProfileName;
             Suffix = viewModel.Suffix;   
             Teams = viewModel.Teams.Select(team => new SavePersonTeamViewModel(new PersonTeamViewModel(team))).ToList();
         }
@@ -66,11 +68,15 @@ namespace Memorabilia.Application.Features.Admin.People
         [StringLength(50, ErrorMessage = "Nickname is too long.")]
         public string Nickname { get; set; }
 
+        public List<SavePersonNicknameViewModel> Nicknames { get; set; } = new();
+
         public List<SavePersonOccupationViewModel> Occupations { get; set; } = new();
 
         public override string PageTitle => $"{(EditModeType == EditModeType.Update ? "Edit" : "Add")} Person";
 
         public PersonStep PersonStep => PersonStep.Person;
+
+        public string ProfileName { get; set; }
 
         public override string RoutePrefix => "People";
 

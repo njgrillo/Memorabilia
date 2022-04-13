@@ -13,8 +13,6 @@ namespace Memorabilia.Application.Features.Admin.People
             _personHallOfFame = personHallOfFame;
         }
 
-        public int? FranchiseId => _personHallOfFame.FranchiseId;
-
         public int Id => _personHallOfFame.Id;
 
         public int? InductionYear => _personHallOfFame.InductionYear;

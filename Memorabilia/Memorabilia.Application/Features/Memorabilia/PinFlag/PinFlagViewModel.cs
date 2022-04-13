@@ -14,6 +14,8 @@ namespace Memorabilia.Application.Features.Memorabilia.PinFlag
             _memorabilia = memorabilia;
         }
 
+        public MemorabiliaGame Game => _memorabilia.Game;
+
         public int MemorabiliaId => _memorabilia.Id;
 
         public IEnumerable<MemorabiliaPerson> People => _memorabilia.People;

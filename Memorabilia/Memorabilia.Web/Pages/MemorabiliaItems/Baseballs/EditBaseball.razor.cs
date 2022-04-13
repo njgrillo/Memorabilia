@@ -56,11 +56,6 @@ namespace Memorabilia.Web.Pages.MemorabiliaItems.Baseballs
             _viewModel.Person = person;
         }
 
-        private void SelectedTeamChanged(SaveTeamViewModel team)
-        {
-            _viewModel.Team = team;
-        }
-
         private void SetDefaults()
         {
             _viewModel.BaseballTypeId = BaseballType.Official.Id;

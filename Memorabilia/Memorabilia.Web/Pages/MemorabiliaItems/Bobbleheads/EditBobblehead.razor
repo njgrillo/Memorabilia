@@ -8,6 +8,7 @@
 @using Memorabilia.Web.Controls.DropDowns
 @using Memorabilia.Web.Controls.MemorabiliaItem
 @using Memorabilia.Web.Controls.Person
+@using Memorabilia.Web.Controls.Sport
 @using Memorabilia.Web.Controls.Team
 
 <EditPage ContinueNavigationPath="@_viewModel.ContinueNavigationPath"
@@ -51,12 +52,28 @@
                                        ItemType="_viewModel.ItemType"
                                        SelectedValue="_viewModel.LevelTypeId" /> 
             </Content>
+            <ContentColumn2>
+                <MudNumericField @bind-Value="_viewModel.Year" 
+                                 Label="Year" 
+                                 Variant="Variant.Outlined" />  
+            </ContentColumn2>
+        </DivRowCol3>
+        <DivRowCol3>
+            <Content>
+                <MudCheckBox @bind-Checked="@_viewModel.HasBox" 
+                             Label="Has Box" />
+            </Content>
         </DivRowCol3>
         <PersonSelector CanFilterBySport="false"
                         CanToggle="true"
                         ItemType="_viewModel.ItemType"
                         SelectedPerson="_viewModel.Person"
-                        SelectedPersonChanged="SelectedPersonChanged" />                 
+                        SelectedPersonChanged="SelectedPersonChanged" /> 
+        <SportSelector @bind-Value="@_viewModel.SportId" 
+                       @bind-Value:event="ValueChanged"
+                       CanToggle="true" 
+                       ItemType="_viewModel.ItemType"
+                       SelectedValue="_viewModel.SportId"/>  
         <TeamSelector CanToggle="true" 
                       ItemType="_viewModel.ItemType"
                       SelectedTeam="_viewModel.Team"

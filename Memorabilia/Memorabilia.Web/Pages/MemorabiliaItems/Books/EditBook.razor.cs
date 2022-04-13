@@ -1,6 +1,8 @@
 ﻿using Demo.Framework.Web;
 using Memorabilia.Application.Features.Memorabilia.Book;
 using Microsoft.AspNetCore.Components;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Memorabilia.Web.Pages.MemorabiliaItems.Books
@@ -26,6 +28,11 @@ namespace Memorabilia.Web.Pages.MemorabiliaItems.Books
         protected async Task OnSave()
         {
             await CommandRouter.Send(new SaveBook.Command(_viewModel)).ConfigureAwait(false);
+        }
+
+        private void SelectedSportIdsChanged(IEnumerable<int> sportIds)
+        {
+            _viewModel.SportIds = sportIds.ToList();
         }
     }
 }

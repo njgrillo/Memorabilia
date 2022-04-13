@@ -6,7 +6,6 @@
 
         public SavePersonHallOfFameViewModel(PersonHallOfFameViewModel hallOfFame)
         {            
-            FranchiseId = hallOfFame.FranchiseId ?? 0;
             Id = hallOfFame.Id;
             InductionYear = hallOfFame.InductionYear;
             PersonId = hallOfFame.PersonId;
@@ -14,30 +13,11 @@
             VotePercentage = hallOfFame.VotePercentage;
         }
 
-        private int _sportLeagueLevelId;
-
-        public int FranchiseId { get; set; }
-
-        public string FranchiseName => Domain.Constants.Franchise.Find(FranchiseId)?.Name;
-
-        public Domain.Constants.Franchise[] Franchises { get; set; } = Domain.Constants.Franchise.All;
-
         public int? InductionYear { get; set; }
 
         public int PersonId { get; set; }
 
-        public int SportLeagueLevelId
-        {
-            get
-            {
-                return _sportLeagueLevelId;
-            }
-            set
-            {
-                _sportLeagueLevelId = value;
-                Franchises = Domain.Constants.Franchise.GetFranchises(Domain.Constants.SportLeagueLevel.Find(value));
-            }
-        }
+        public int SportLeagueLevelId { get; set; }
 
         public string SportName => Domain.Constants.SportLeagueLevel.Find(SportLeagueLevelId)?.Name;    
 

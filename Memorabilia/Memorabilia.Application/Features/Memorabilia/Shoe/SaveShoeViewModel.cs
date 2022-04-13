@@ -20,12 +20,10 @@ namespace Memorabilia.Application.Features.Memorabilia.Shoe
             LevelTypeId = viewModel.Level.LevelTypeId;
             MemorabiliaId = viewModel.MemorabiliaId;
             SizeId = viewModel.Size.SizeId;
+            SportId = viewModel.Sports.Select(sport => sport.SportId).FirstOrDefault();
 
             if (viewModel.People.Any())
                 Person = new SavePersonViewModel(new PersonViewModel(viewModel.People.First().Person));
-
-            if (viewModel.Sports.Any())
-                Sport = Sport.Find(viewModel.Sports.First().Id);
 
             if (viewModel.Teams.Any())
                 Team = new SaveTeamViewModel(new TeamViewModel(viewModel.Teams.First().Team));
@@ -51,12 +49,6 @@ namespace Memorabilia.Application.Features.Memorabilia.Shoe
 
         public int GameStyleTypeId { get; set; }
 
-        public bool HasPerson => Person?.Id > 0;
-
-        public bool HasSport => Sport?.Id > 0;
-
-        public bool HasTeam => Team?.Id > 0;
-
         public override string ImagePath => "images/shoe.jpg";
 
         public override ItemType ItemType => ItemType.Shoe;
@@ -73,7 +65,7 @@ namespace Memorabilia.Application.Features.Memorabilia.Shoe
         [Range(1, int.MaxValue, ErrorMessage = "Size is required.")]
         public int SizeId { get; set; }
 
-        public Sport Sport { get; set; } 
+        public int SportId { get; set; } 
 
         public SaveTeamViewModel Team { get; set; } 
     }

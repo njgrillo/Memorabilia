@@ -23,10 +23,9 @@ namespace Memorabilia.Application.Features.Memorabilia.Card
 
                 memorabilia.SetCard(command.BrandId,
                                     command.Custom,
-                                    command.Denominator,
                                     command.LevelTypeId,
                                     command.Licensed,
-                                    command.Numerator,
+                                    command.OrientationId,
                                     command.PersonIds,
                                     command.SizeId,
                                     command.SportIds,
@@ -50,23 +49,21 @@ namespace Memorabilia.Application.Features.Memorabilia.Card
 
             public bool Custom => _viewModel.Custom;
 
-            public int? Denominator => _viewModel.Denominator > 0 ? _viewModel.Denominator : 0;
-
             public int LevelTypeId => _viewModel.LevelTypeId;
 
             public bool Licensed => _viewModel.Licensed;
 
             public int MemorabiliaId => _viewModel.MemorabiliaId;
 
-            public int? Numerator => _viewModel.Numerator > 0 ? _viewModel.Numerator : 0;
+            public int OrientationId => _viewModel.OrientationId;
 
-            public int[] PersonIds => _viewModel.People.Select(person => person.Id).ToArray();
+            public int[] PersonIds => _viewModel.People.Where(person => !person.IsDeleted).Select(person => person.Id).ToArray();
 
             public int SizeId => _viewModel.SizeId;
 
             public int[] SportIds => _viewModel.SportIds.ToArray();
 
-            public int[] TeamIds => _viewModel.Teams.Select(team => team.Id).ToArray();
+            public int[] TeamIds => _viewModel.Teams.Where(team => !team.IsDeleted).Select(team => team.Id).ToArray();
 
             public int? Year => _viewModel.Year > 0 ? _viewModel.Year : 0;
         }

@@ -27,6 +27,7 @@ namespace Memorabilia.Application.Features.Memorabilia.HeadBand
                                         command.LevelTypeId,
                                         command.PersonId,
                                         command.SizeId,
+                                        command.SportId,
                                         command.TeamId);
 
                 await _memorabiliaRepository.Update(memorabilia).ConfigureAwait(false);
@@ -55,6 +56,8 @@ namespace Memorabilia.Application.Features.Memorabilia.HeadBand
             public int? PersonId => _viewModel.Person?.Id > 0 ? _viewModel.Person?.Id : null;
 
             public int SizeId => _viewModel.SizeId;
+
+            public int? SportId => _viewModel.SportId > 0 ? _viewModel.SportId : null;
 
             public int? TeamId => _viewModel.Team?.Id > 0 ? _viewModel.Team?.Id : null;
         }

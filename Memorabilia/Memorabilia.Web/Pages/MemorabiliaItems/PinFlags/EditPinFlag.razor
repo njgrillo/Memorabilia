@@ -28,6 +28,25 @@
                                  MemorabiliaItemStep="_viewModel.MemorabiliaItemStep" />
     </TimelineContent>
     <Content>
+        <DivRowCol3>
+            <Content>
+                <ItemTypeGameStyleDropDown @bind-Value="@_viewModel.GameStyleTypeId"
+                                           @bind-Value:event="ValueChanged"
+                                           ItemType="_viewModel.ItemType"
+                                           Label="Tournament Style Type"
+                                           SelectedValue="_viewModel.GameStyleTypeId" /> 
+            </Content>
+        </DivRowCol3>
+        <DivRowCol3 Hidden="@(!_viewModel.DisplayGameDate)">
+            <Content>
+                <MudDatePicker @bind-Date="_viewModel.GameDate"
+                               DateFormat="MM/dd/yyyy"
+                               Editable="true"
+                               Label="Game Date"
+                               Mask="@(new DateMask("MM/dd/yyyy"))" 
+                               Variant="Variant.Outlined" />
+            </Content>
+        </DivRowCol3>
         <PersonSelector CanFilterBySport="true"
                         CanToggle="true"
                         ItemType="_viewModel.ItemType"

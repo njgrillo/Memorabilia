@@ -18,11 +18,12 @@ namespace Memorabilia.Application.Features.Memorabilia.Glove
             GameDate = viewModel.Game?.GameDate;
             GamePersonId = viewModel.Game?.PersonId ?? 0;
             GameStyleTypeId = viewModel.Game?.GameStyleTypeId ?? 0;
+            GloveTypeId = viewModel.Glove?.GloveTypeId ?? 0;
             LevelTypeId = viewModel.Level.LevelTypeId;
             MemorabiliaId = viewModel.MemorabiliaId;
             People = viewModel.People.Select(person => new SavePersonViewModel(new PersonViewModel(person.Person))).ToList();
             SizeId = viewModel.Size.SizeId;
-            SportIds = viewModel.Sports.Select(x => x.Id).ToList();
+            SportId = viewModel.Sports.Select(x => x.SportId).FirstOrDefault();
             Teams = viewModel.Teams.Select(team => new SaveTeamViewModel(new TeamViewModel(team.Team))).ToList();
         }
 
@@ -44,13 +45,17 @@ namespace Memorabilia.Application.Features.Memorabilia.Glove
 
         public GameStyleType GameStyleType => GameStyleType.Find(GameStyleTypeId);
 
+        [Required]
+        [Range(1, int.MaxValue, ErrorMessage = $"Style Type is required.")]
         public int GameStyleTypeId { get; set; }
 
-        public bool HasPerson => People.Any();
+        public string GameStyleTypeText { get; set; } = "Game Style Type";
 
-        public bool HasSport => SportIds.Any();
+        [Required]
+        [Range(1, int.MaxValue, ErrorMessage = $"Glove Type is required.")]
+        public int GloveTypeId { get; set; }
 
-        public bool HasTeam => Teams.Any();
+        public GloveType[] GloveTypes => GloveType.All;
 
         public override string ImagePath => "images/glove.jpg";
 
@@ -66,7 +71,7 @@ namespace Memorabilia.Application.Features.Memorabilia.Glove
         [Range(1, int.MaxValue, ErrorMessage = "Size is required.")]
         public int SizeId { get; set; }
 
-        public List<int> SportIds { get; set; } = new();
+        public int SportId { get; set; }
 
         public List<SaveTeamViewModel> Teams { get; set; } = new();
     }

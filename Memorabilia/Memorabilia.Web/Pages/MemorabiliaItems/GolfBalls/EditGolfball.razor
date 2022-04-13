@@ -41,6 +41,7 @@
                 <ItemTypeGameStyleDropDown @bind-Value="@_viewModel.GameStyleTypeId"
                                            @bind-Value:event="ValueChanged"
                                            ItemType="_viewModel.ItemType"
+                                           Label="Tournament Style Type"
                                            SelectedValue="_viewModel.GameStyleTypeId" /> 
             </ContentColumn2>
         </DivRowCol3>
@@ -75,10 +76,6 @@
                         ItemType="_viewModel.ItemType"
                         SelectedPerson="_viewModel.Person"
                         SelectedPersonChanged="SelectedPersonChanged"
-                        Sport="_viewModel.Sport" />                 
-        <TeamSelector CanToggle="true" 
-                      ItemType="_viewModel.ItemType"
-                      SelectedTeam="_viewModel.Team"
-                      SelectedTeamChanged="SelectedTeamChanged" />
+                        Sport="_viewModel.Sport" /> 
     </Content>
 </EditPage>

@@ -26,10 +26,11 @@ namespace Memorabilia.Application.Features.Memorabilia.Glove
                                      command.GameDate,
                                      command.GamePersonId,
                                      command.GameStyleTypeId,
+                                     command.GloveTypeId,
                                      command.LevelTypeId,
                                      command.PersonIds,
                                      command.SizeId,
-                                     command.SportIds,
+                                     command.SportId,
                                      command.TeamIds);
 
                 await _memorabiliaRepository.Update(memorabilia).ConfigureAwait(false);
@@ -51,19 +52,21 @@ namespace Memorabilia.Application.Features.Memorabilia.Glove
 
             public int? GamePersonId => _viewModel.GamePersonId > 0 ? _viewModel.GamePersonId : null;
 
-            public int? GameStyleTypeId => _viewModel.GameStyleTypeId > 0 ? _viewModel.GameStyleTypeId : 0;
+            public int? GameStyleTypeId => _viewModel.GameStyleTypeId > 0 ? _viewModel.GameStyleTypeId : null;
+
+            public int? GloveTypeId => _viewModel.GloveTypeId > 0 ? _viewModel.GloveTypeId : null;
 
             public int LevelTypeId => _viewModel.LevelTypeId;
 
             public int MemorabiliaId => _viewModel.MemorabiliaId;
 
-            public int[] PersonIds => _viewModel.People.Select(person => person.Id).ToArray();
+            public int[] PersonIds => _viewModel.People.Where(person => !person.IsDeleted).Select(person => person.Id).ToArray();
 
             public int SizeId => _viewModel.SizeId;
 
-            public int[] SportIds => _viewModel.SportIds.ToArray();
+            public int? SportId => _viewModel.SportId > 0 ? _viewModel.SportId : null;
 
-            public int[] TeamIds => _viewModel.Teams.Select(team => team.Id).ToArray();
+            public int[] TeamIds => _viewModel.Teams.Where(team => !team.IsDeleted).Select(team => team.Id).ToArray();
         }
     }
 }

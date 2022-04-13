@@ -10,9 +10,9 @@ namespace Memorabilia.Repository
 {
     public class AutographRepository : BaseRepository<Autograph>, IAutographRepository
     {
-        private readonly Context _context;
+        private readonly MemorabiliaContext _context;
 
-        public AutographRepository(Context context) : base(context)
+        public AutographRepository(MemorabiliaContext context) : base(context)
         {
             _context = context;
         }

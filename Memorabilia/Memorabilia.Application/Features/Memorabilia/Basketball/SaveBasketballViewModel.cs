@@ -66,14 +66,9 @@ namespace Memorabilia.Application.Features.Memorabilia.Basketball
             set
             {
                 _gameStyleTypeId = value;
-                BasketballTypes = BasketballType.GetAll(GameStyleType.Find(value));
-                BasketballTypeId = BasketballType.Official.Id;                
+                BasketballTypes = BasketballType.GetAll(GameStyleType.Find(value));              
             }
         }
-
-        public bool HasPerson => Person?.Id > 0;
-
-        public bool HasTeam => Team?.Id > 0;
 
         public override string ImagePath => "images/basketball.jpg";
 

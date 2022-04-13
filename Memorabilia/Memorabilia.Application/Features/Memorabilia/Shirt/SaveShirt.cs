@@ -2,7 +2,6 @@
 using Framework.Handler;
 using Memorabilia.Repository.Interfaces;
 using System;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace Memorabilia.Application.Features.Memorabilia.Shirt
@@ -61,7 +60,7 @@ namespace Memorabilia.Application.Features.Memorabilia.Shirt
 
             public int SizeId => _viewModel.SizeId;
 
-            public int? SportId => _viewModel.Sport?.Id > 0 ? _viewModel.Sport?.Id : null;
+            public int? SportId => _viewModel.SportId > 0 ? _viewModel.SportId : null;
 
             public int? TeamId => _viewModel.Team?.Id > 0 ? _viewModel.Team?.Id : null;
         }

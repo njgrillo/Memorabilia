@@ -2,6 +2,8 @@
 using Memorabilia.Application.Features.Memorabilia.Canvas;
 using Memorabilia.Domain.Constants;
 using Microsoft.AspNetCore.Components;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Memorabilia.Web.Pages.MemorabiliaItems.Canvases
@@ -46,6 +48,11 @@ namespace Memorabilia.Web.Pages.MemorabiliaItems.Canvases
             _viewModel.MemorabiliaId = MemorabiliaId;
             _viewModel.OrientationId = Orientation.Portrait.Id;
             _viewModel.SizeId = Size.TwentyByThirty.Id;
+        }
+
+        private void SelectedSportIdsChanged(IEnumerable<int> sportIds)
+        {
+            _viewModel.SportIds = sportIds.ToList();
         }
     }
 }

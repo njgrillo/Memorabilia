@@ -37,13 +37,11 @@
                                       SelectedValue="@_viewModel.SizeId" /> 
             </Content>
         </DivRowCol3>
-        <PersonSelector AllowMultiple="true"
-                        CanToggle="true"
-                        ItemType="_viewModel.ItemType"
-                        People="_viewModel.People" />                 
-        <TeamSelector AllowMultiple="true"
-                      CanToggle="true" 
-                      ItemType="_viewModel.ItemType"
-                      Teams="_viewModel.Teams" />
+        <MultiPersonSelector CanToggle="true"
+                             ItemType="_viewModel.ItemType"
+                             People="_viewModel.People" />    
+        <MultiTeamSelector CanToggle="true" 
+                           ItemType="_viewModel.ItemType"
+                           Teams="_viewModel.Teams" />
     </Content>
 </EditPage>

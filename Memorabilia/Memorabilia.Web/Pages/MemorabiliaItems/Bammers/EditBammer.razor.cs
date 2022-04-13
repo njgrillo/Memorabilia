@@ -1,6 +1,4 @@
 ﻿using Demo.Framework.Web;
-using Memorabilia.Application.Features.Admin.People;
-using Memorabilia.Application.Features.Admin.Teams;
 using Memorabilia.Application.Features.Memorabilia.Bammer;
 using Memorabilia.Domain.Constants;
 using Microsoft.AspNetCore.Components;
@@ -40,16 +38,6 @@ namespace Memorabilia.Web.Pages.MemorabiliaItems.Bammers
         protected async Task OnSave()
         {
             await CommandRouter.Send(new SaveBammer.Command(_viewModel)).ConfigureAwait(false);
-        }
-
-        private void SelectedPersonChanged(SavePersonViewModel person)
-        {
-            _viewModel.Person = person;
-        }
-
-        private void SelectedTeamChanged(SaveTeamViewModel team)
-        {
-            _viewModel.Team = team;
         }
 
         private void SetDefaults()

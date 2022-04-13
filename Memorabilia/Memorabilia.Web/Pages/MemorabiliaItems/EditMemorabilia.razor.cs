@@ -29,6 +29,7 @@ namespace Memorabilia.Web.Pages.MemorabiliaItems
         public int Id { get; set; }
 
         private bool _canEditItemType = true;
+        private bool _displayNumbered;
         private SaveMemorabiliaItemViewModel _viewModel = new ();        
 
         protected async Task OnLoad()
@@ -41,6 +42,7 @@ namespace Memorabilia.Web.Pages.MemorabiliaItems
 
             _viewModel = new SaveMemorabiliaItemViewModel(await QueryRouter.Send(new GetMemorabiliaItem.Query(Id)).ConfigureAwait(false));
             _canEditItemType = false;
+            _displayNumbered = _viewModel.IsNumbered;
         }
 
         protected async Task OnSave()
@@ -58,6 +60,17 @@ namespace Memorabilia.Web.Pages.MemorabiliaItems
 
             var itemTypeName = ItemType.Find(_viewModel.ItemTypeId).Name;
             _viewModel.ContinueNavigationPath = $"Memorabilia/{itemTypeName.Replace(" ", "")}/Edit/{command.Id}";
+        }
+
+        private void NumberedCheckboxClicked(bool isChecked)
+        {
+            _displayNumbered = isChecked;
+
+            if (!_displayNumbered)
+            {
+                _viewModel.Denominator = null;
+                _viewModel.Numerator = null;
+            }
         }
 
         private void SetDefaults()

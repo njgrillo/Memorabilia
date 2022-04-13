@@ -1,11 +1,9 @@
 {
   "version": 2,
-  "dgSpecHash": "tNAmQ59DLZDk6K8cDgEP6yfIXp25+/XCzlIvMLo/Q7gcX/9MmGPGyPBgw9G2j7BH0DHcK4+o/Uiril8wCiUNZQ==",
+  "dgSpecHash": "gpYv/lxHL2HCj1gHiy1zPP3A+siDBXO7dW5hNtNFK84xeeVS574LrEmHU65ZQvxzG42msOdnVA8T//TOEzVSZQ==",
   "success": true,
   "projectFilePath": "D:\\Projects\\njgrillo\\Memorabilia\\Memorabilia\\Memorabilia.Web\\Memorabilia.Web.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\njgri\\.nuget\\packages\\blazored.toast\\3.2.2\\blazored.toast.3.2.2.nupkg.sha512",
-    "C:\\Users\\njgri\\.nuget\\packages\\blazored.typeahead\\4.6.0\\blazored.typeahead.4.6.0.nupkg.sha512",
     "C:\\Users\\njgri\\.nuget\\packages\\castle.core\\4.4.1\\castle.core.4.4.1.nupkg.sha512",
     "C:\\Users\\njgri\\.nuget\\packages\\comparenetobjects\\4.73.0\\comparenetobjects.4.73.0.nupkg.sha512",
     "C:\\Users\\njgri\\.nuget\\packages\\dapper\\2.0.90\\dapper.2.0.90.nupkg.sha512",

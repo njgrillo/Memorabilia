@@ -26,7 +26,8 @@ namespace Memorabilia.Application.Features.Memorabilia.Trunks
                                      command.GameStyleTypeId,
                                      command.LevelTypeId,
                                      command.PersonId,
-                                     command.SizeId);
+                                     command.SizeId,
+                                     command.SportId);
 
                 await _memorabiliaRepository.Update(memorabilia).ConfigureAwait(false);
             }
@@ -54,6 +55,8 @@ namespace Memorabilia.Application.Features.Memorabilia.Trunks
             public int? PersonId => _viewModel.Person?.Id > 0 ? _viewModel.Person?.Id : null;
 
             public int SizeId => _viewModel.SizeId;
+
+            public int? SportId => _viewModel.SportId > 0 ? _viewModel.SportId : null;
         }
     }
 }

@@ -54,7 +54,7 @@
             <Content>
                 <MudTextField @bind-Value="_viewModel.Nickname"
                               @onblur="OnNameFieldBlur"
-                              Label="Nickname" 
+                              Label="Calling Name" 
                               Variant="Variant.Outlined" />
             </Content>
             <ContentColumn2>
@@ -69,6 +69,11 @@
                               Label="Display Name" 
                               Variant="Variant.Outlined" />
             </Content>
+            <ContentColumn2>
+                <MudTextField @bind-Value="_viewModel.ProfileName"
+                              Label="Profile Name" 
+                              Variant="Variant.Outlined" />
+            </ContentColumn2>
         </DivRowCol3>
         <DivRowCol3>
             <Content>
@@ -88,5 +93,10 @@
                                Variant="Variant.Outlined" />
             </ContentColumn2>
         </DivRowCol3>
+        <DivRowCol12>
+            <Content>
+                <PersonNicknameEditor Nicknames="_viewModel.Nicknames" />
+            </Content>
+        </DivRowCol12>
     </Content>
 </EditPage>

@@ -38,6 +38,8 @@ namespace Memorabilia.Application.Features.Memorabilia
 
         public bool DisplayAutographDetails { get; set; }
 
+        public int? Denominator => _memorabilia.Denominator;
+
         public decimal? EstimatedValue => _memorabilia.EstimatedValue;
 
         public string FormattedCreateDate => CreateDate.ToString("MM-dd-yyyy");
@@ -85,6 +87,10 @@ namespace Memorabilia.Application.Features.Memorabilia
         public int? LevelTypeId => _memorabilia?.LevelType?.Id;
 
         public string MemorabiliaImagePath => $"data:image/jpg;base64,{Convert.ToBase64String(File.ReadAllBytes(ImagePath))}";
+
+        public string Note => _memorabilia.Note;
+
+        public int? Numerator => _memorabilia.Numerator;
 
         public IEnumerable<MemorabiliaPerson> People => _memorabilia.People;
 

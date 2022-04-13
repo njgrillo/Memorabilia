@@ -28,10 +28,13 @@ namespace Memorabilia.Application.Features.Autograph
                                                               command.ColorId,
                                                               command.ConditionId,
                                                               command.Cost,
+                                                              command.Denominator,
                                                               command.EstimatedValue,
                                                               command.FullName,
                                                               command.Grade,
                                                               command.MemorabiliaId,
+                                                              command.Note,
+                                                              command.Numerator,
                                                               command.PersonalizationText,
                                                               command.PersonId,
                                                               command.PurchaseTypeId,
@@ -60,9 +63,12 @@ namespace Memorabilia.Application.Features.Autograph
                               command.ColorId,
                               command.ConditionId,
                               command.Cost,
+                              command.Denominator,
                               command.EstimatedValue,
                               command.FullName,
                               command.Grade,
+                              command.Note,
+                              command.Numerator,
                               command.PersonalizationText,
                               command.PersonId,
                               command.PurchaseTypeId,
@@ -96,6 +102,8 @@ namespace Memorabilia.Application.Features.Autograph
 
             public DateTime CreateDate => _viewModel.CreateDate;
 
+            public int? Denominator => _viewModel.Denominator;
+
             public decimal? EstimatedValue => _viewModel.EstimatedValue;
 
             public bool FullName => _viewModel.FullName;
@@ -113,6 +121,10 @@ namespace Memorabilia.Application.Features.Autograph
             public DateTime? LastModifiedDate => _viewModel.LastModifiedDate;
 
             public int MemorabiliaId => _viewModel.MemorabiliaId;
+
+            public string Note => _viewModel.Note;
+
+            public int? Numerator => _viewModel.Numerator;
 
             public string PersonalizationText => _viewModel.PersonalizationText;
 

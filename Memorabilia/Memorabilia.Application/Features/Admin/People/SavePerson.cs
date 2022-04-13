@@ -4,6 +4,7 @@ using Framework.Handler;
 using Memorabilia.Domain.Entities;
 using Memorabilia.Repository.Interfaces;
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Memorabilia.Application.Features.Admin.People
@@ -32,9 +33,10 @@ namespace Memorabilia.Application.Features.Admin.People
                                         command.Nickname, 
                                         command.LegalName,
                                         command.DisplayName,
+                                        command.ProfileName,
                                         command.BirthDate, 
-                                        command.DeathDate, 
-                                        command.ImagePath);
+                                        command.DeathDate,
+                                        command.Nicknames);
 
                     await _personRepository.Add(person).ConfigureAwait(false);
 
@@ -59,9 +61,10 @@ namespace Memorabilia.Application.Features.Admin.People
                            command.Nickname,
                            command.LegalName,
                            command.DisplayName,
+                           command.ProfileName,
                            command.BirthDate, 
-                           command.DeathDate, 
-                           command.ImagePath);
+                           command.DeathDate,
+                           command.Nicknames);
 
                 await _personRepository.Update(person).ConfigureAwait(false);
             }
@@ -103,8 +106,6 @@ namespace Memorabilia.Application.Features.Admin.People
 
             public int Id { get; set; }
 
-            public string ImagePath => _viewModel.ImagePath;
-
             public bool IsDeleted => _viewModel.IsDeleted;
 
             public bool IsModified => _viewModel.IsModified;
@@ -117,7 +118,22 @@ namespace Memorabilia.Application.Features.Admin.People
 
             public string MiddleName => _viewModel.MiddleName;
 
-            public string Nickname => _viewModel.Nickname;         
+            public string Nickname => _viewModel.Nickname;
+
+            public string[] Nicknames => _viewModel.Nicknames.Select(nickname => nickname.Nickname).ToArray();
+
+            public string  ProfileName
+            {
+                get
+                {
+                    if (!_viewModel.ProfileName.IsNullOrEmpty())
+                        return _viewModel.ProfileName;
+
+                    return $"{(!_viewModel.Nickname.IsNullOrEmpty() ? _viewModel.Nickname : _viewModel.FirstName)}"
+                        + $" {_viewModel.LastName}"
+                        + (!_viewModel.Suffix.IsNullOrEmpty() ? $" {_viewModel.Suffix}" : string.Empty);
+                }
+            }
 
             public string Suffix => _viewModel.Suffix;
         }

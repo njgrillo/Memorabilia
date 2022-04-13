@@ -25,6 +25,7 @@ namespace Memorabilia.Web.Pages.Autograph
 
         private bool _displayAcquisitionDetails = true;
         private bool _displayEstimatedValue = true;
+        private bool _displayNumbered;
         private bool _displayPersonalization;
         private bool _displayPersonImport;
         private SaveAutographViewModel _viewModel = new ();
@@ -33,7 +34,7 @@ namespace Memorabilia.Web.Pages.Autograph
         {
             var viewModel = await QueryRouter.Send(new GetMemorabiliaItem.Query(MemorabiliaId)).ConfigureAwait(false);
 
-            _displayPersonImport = viewModel.People.Any() && viewModel.People.Count() == 1;
+            _displayPersonImport = viewModel.People.Any() && viewModel.People.Count() == 1;            
 
             if (viewModel.Autographs.Any())
             {
@@ -92,6 +93,7 @@ namespace Memorabilia.Web.Pages.Autograph
             if (autograph == null)
             {
                 _viewModel = new SaveAutographViewModel(viewModel);
+                _displayNumbered = _viewModel.IsNumbered;
                 SetDefaults();
                 return;
             }
@@ -100,8 +102,20 @@ namespace Memorabilia.Web.Pages.Autograph
 
             _displayAcquisitionDetails = _viewModel.AcquisitionTypeId > 0;
             _displayEstimatedValue = _viewModel.EstimatedValue.HasValue;
+            _displayNumbered = _viewModel.IsNumbered;
             _displayPersonalization = !_viewModel.PersonalizationText.IsNullOrEmpty();
             _displayPersonImport = _viewModel.MemorabiliaPerson?.Id > 0;
+        }
+
+        private void NumberedCheckboxClicked(bool isChecked)
+        {
+            _displayNumbered = isChecked;
+
+            if (!_displayNumbered)
+            {
+                _viewModel.Denominator = null;
+                _viewModel.Numerator = null;
+            }
         }
 
         private void OnImportAcquisitionClick()

@@ -9,6 +9,7 @@ namespace Memorabilia.Domain.Constants
         public static readonly Brand Callaway = new(24, "Callaway", string.Empty);
         public static readonly Brand CCM = new(26, "CCM", string.Empty);
         public static readonly Brand Fender = new(22, "Fender", string.Empty);
+        public static readonly Brand Fotoball = new(27, "Fotoball", string.Empty);
         public static readonly Brand Funko = new(19, "Funko Inc.", string.Empty);
         public static readonly Brand Hasbro = new(18, "Hasbro", string.Empty);
         public static readonly Brand Kenner = new(17, "Kenner", string.Empty);
@@ -19,7 +20,8 @@ namespace Memorabilia.Domain.Constants
         public static readonly Brand None = new(8, "None", string.Empty);
         public static readonly Brand Other = new(7, "Other", string.Empty);
         public static readonly Brand Photofile = new(12, "Photofile", string.Empty);
-        public static readonly Brand Rawlings = new(1, "Rawlings", string.Empty);       
+        public static readonly Brand Rawlings = new(1, "Rawlings", string.Empty);
+        public static readonly Brand Reach = new(28, "Reach", string.Empty);
         public static readonly Brand Reebok = new(3, "Reebok", "RBK");  
         public static readonly Brand Riddell = new(11, "Riddell", string.Empty);
         public static readonly Brand Salvino = new(20, "Salvino", string.Empty);
@@ -38,6 +40,7 @@ namespace Memorabilia.Domain.Constants
             Callaway,
             CCM,
             Fender,
+            Fotoball,
             Funko,
             Hasbro,
             Kenner,
@@ -49,6 +52,7 @@ namespace Memorabilia.Domain.Constants
             Other,
             Photofile,
             Rawlings,
+            Reach,
             Reebok,
             Riddell,
             Salvino,
@@ -59,6 +63,13 @@ namespace Memorabilia.Domain.Constants
             Topps,
             UpperDeck,
             Wilson
+        };
+
+        public static readonly Brand[] GameWorthlyBaseballBrand =
+        {
+            Rawlings,
+            Reach,
+            Spalding
         };
 
         private Brand(int id, string name, string abbreviation)
@@ -82,6 +93,16 @@ namespace Memorabilia.Domain.Constants
         public static Brand Find(string name)
         {
             return All.SingleOrDefault(brand => brand.Name == name);
+        }
+
+        public static bool IsGameWorthlyBaseballBrand(int id)
+        {
+            return GameWorthlyBaseballBrand.Contains(Find(id));
+        }
+
+        public static bool IsGameWorthlyBaseballBrand(Brand brand)
+        {
+            return GameWorthlyBaseballBrand.Contains(brand);
         }
     }
 }

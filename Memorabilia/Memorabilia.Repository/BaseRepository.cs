@@ -11,7 +11,7 @@ namespace Memorabilia.Repository
             context.Set<T>().Where(t => 1 == 0).Load();
         }
 
-        public BaseRepository(Context context)
+        public BaseRepository(MemorabiliaContext context)
         {
             context.Set<T>().Where(t => 1 == 0).Load();
         }

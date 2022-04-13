@@ -97,7 +97,7 @@ namespace Memorabilia.Web.Pages.MemorabiliaItems
 
         protected async Task ShowDeleteMemorabiliaConfirm(int id)
         {
-            var dialog = DialogService.Show<DeleteDialog>("Delete Autograph");
+            var dialog = DialogService.Show<DeleteDialog>("Delete Memorabilia");
             var result = await dialog.Result;
 
             if (result.Cancelled)

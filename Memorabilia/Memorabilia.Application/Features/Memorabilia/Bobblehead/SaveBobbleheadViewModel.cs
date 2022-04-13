@@ -14,9 +14,12 @@ namespace Memorabilia.Application.Features.Memorabilia.Bobblehead
         public SaveBobbleheadViewModel(BobbleheadViewModel viewModel)
         {
             BrandId = viewModel.Brand.BrandId;
+            HasBox = viewModel.Bobblehead?.HasBox ?? false;
             LevelTypeId = viewModel.Level.LevelTypeId;
             MemorabiliaId = viewModel.MemorabiliaId;
             SizeId = viewModel.Size.SizeId;
+            SportId = viewModel.Sports.Select(x => x.SportId).FirstOrDefault();
+            Year = viewModel.Bobblehead?.Year;
 
             if (viewModel.People.Any())
                 Person = new SavePersonViewModel(new PersonViewModel(viewModel.People.First().Person));
@@ -37,9 +40,7 @@ namespace Memorabilia.Application.Features.Memorabilia.Bobblehead
 
         public override string ExitNavigationPath => "Memorabilia/Items";
 
-        public bool HasPerson => Person?.Id > 0;
-
-        public bool HasTeam => Team?.Id > 0;
+        public bool HasBox { get; set; }
 
         public override string ImagePath => "images/bobblehead.jpg";
 
@@ -57,6 +58,10 @@ namespace Memorabilia.Application.Features.Memorabilia.Bobblehead
         [Range(1, int.MaxValue, ErrorMessage = "Size is required.")]
         public int SizeId { get; set; }
 
+        public int SportId { get; set; }
+
         public SaveTeamViewModel Team { get; set; }
+
+        public int? Year { get; set; }
     }
 }

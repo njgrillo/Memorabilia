@@ -16,9 +16,6 @@ namespace Memorabilia.Web.Controls.Team
         public QueryRouter QueryRouter { get; set; }
 
         [Parameter]
-        public bool AllowMultiple { get; set; }
-
-        [Parameter]
         public bool CanToggle { get; set; }
 
         [Parameter]
@@ -46,7 +43,6 @@ namespace Memorabilia.Web.Controls.Team
             }
         }
 
-        private bool _canAdd = true;
         private bool _displayTeams;
         private bool _hasTeams;
         private string _itemTypeNameLabel => $"Associate {ItemType.Name} with a Team";
@@ -60,37 +56,9 @@ namespace Memorabilia.Web.Controls.Team
             await LoadTeams().ConfigureAwait(false);
         }
 
-        private void Add()
-        {
-            var team = Teams.SingleOrDefault(team => team.Id == _viewModel.Id);
-
-            if (team != null)
-                team.IsDeleted = false;
-            else
-                Teams.Add(_viewModel);
-
-            _viewModel = new();
-
-            SetCanAdd();
-        }
-
         private async Task LoadTeams()
         {
-            var query = new GetTeams.Query(sportLeagueLevelId: SportLeagueLevel?.Id);
-
-            _teams = (await QueryRouter.Send(query).ConfigureAwait(false)).Teams.Select(team => new SaveTeamViewModel(team));
-        }
-
-        private void Remove(int teamId)
-        {
-            var team = _teams.SingleOrDefault(team => team.Id == teamId);
-
-            if (team == null)
-                return;
-
-            team.IsDeleted = true;
-
-            SetCanAdd();
+            _teams = (await QueryRouter.Send(new GetTeams.Query(sportLeagueLevelId: SportLeagueLevel?.Id)).ConfigureAwait(false)).Teams.Select(team => new SaveTeamViewModel(team));
         }
 
         private async Task<IEnumerable<SaveTeamViewModel>> SearchTeams(string searchText)
@@ -101,17 +69,12 @@ namespace Memorabilia.Web.Controls.Team
             return await Task.FromResult(_teams.Where(team => team.DisplayName.Contains(searchText, StringComparison.OrdinalIgnoreCase))).ConfigureAwait(false);
         }
 
-        private void SetCanAdd()
-        {
-            _canAdd = AllowMultiple || Teams.Any(team => !team.IsDeleted);
-        }
-
         private void TeamCheckboxClicked(bool isChecked)
         {
             _displayTeams = CanToggle && isChecked;
 
             if (!_displayTeams)
-                SelectedTeam = null;
+                _viewModel = null;
 
             _hasTeams = isChecked;
         }

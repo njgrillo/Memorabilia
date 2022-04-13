@@ -42,10 +42,8 @@ namespace Memorabilia.Application.Features.Memorabilia.Tennisball
         public GameStyleType GameStyleType => GameStyleType.Find(GameStyleTypeId);
 
         [Required]
-        [Range(1, int.MaxValue, ErrorMessage = "Game Style Type is required.")]
+        [Range(1, int.MaxValue, ErrorMessage = "Match Style Type is required.")]
         public int GameStyleTypeId { get; set; }
-
-        public bool HasPerson => Person?.Id > 0;
 
         public override string ImagePath => "images/tennisball.jpg";
 

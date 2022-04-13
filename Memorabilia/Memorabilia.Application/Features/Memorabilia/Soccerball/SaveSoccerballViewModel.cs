@@ -46,11 +46,9 @@ namespace Memorabilia.Application.Features.Memorabilia.Soccerball
 
         public GameStyleType GameStyleType => GameStyleType.Find(GameStyleTypeId);
 
+        [Required]
+        [Range(1, int.MaxValue, ErrorMessage = "Match Style Type is required.")]
         public int GameStyleTypeId { get; set; }
-
-        public bool HasPerson => Person?.Id > 0;
-
-        public bool HasTeam => Team?.Id > 0;
 
         public override string ImagePath => "images/soccerball.jpg";
 

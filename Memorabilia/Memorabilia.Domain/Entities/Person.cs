@@ -14,10 +14,11 @@ namespace Memorabilia.Domain.Entities
                       string suffix,
                       string nickname,
                       string legalName,
-                      string displayName,                       
+                      string displayName,   
+                      string profileName,
                       DateTime? birthDate, 
-                      DateTime? deathDate, 
-                      string imagePath)
+                      DateTime? deathDate,
+                      string[] nicknames)
         {
             FirstName = firstName;
             LastName = lastName;
@@ -26,11 +27,16 @@ namespace Memorabilia.Domain.Entities
             Nickname = nickname;
             LegalName = legalName;
             DisplayName = displayName;
+            ProfileName = profileName;
             BirthDate = birthDate;
             DeathDate = deathDate;
-            ImagePath = imagePath;
             CreateDate = DateTime.UtcNow;
+
+            if (nicknames.Any())
+                Nicknames = nicknames.Select(nickname => new PersonNickname(Id, nickname)).ToList();
         }
+
+        public virtual List<AllStar> AllStars { get; private set; } = new();
 
         public DateTime? BirthDate { get; private set; }
 
@@ -56,7 +62,13 @@ namespace Memorabilia.Domain.Entities
 
         public string Nickname { get; private set; }
 
+        public virtual List<PersonNickname> Nicknames { get; private set; } = new();
+
         public virtual List<PersonOccupation> Occupations { get; private set; } = new();
+
+        public string ProfileName { get; private set; }
+
+        public virtual SportService Service { get; private set; }
 
         public virtual List<PersonTeam> Teams { get; private set; } = new();
 
@@ -92,10 +104,11 @@ namespace Memorabilia.Domain.Entities
                         string suffix,
                         string nickname,
                         string legalName,
-                        string displayName,                         
+                        string displayName,   
+                        string profileName,
                         DateTime? birthDate, 
-                        DateTime? deathDate, 
-                        string imagePath)
+                        DateTime? deathDate,
+                        string[] nicknames)
         {
             FirstName = firstName;
             LastName = lastName;
@@ -104,23 +117,46 @@ namespace Memorabilia.Domain.Entities
             Nickname = nickname;
             LegalName = legalName;
             DisplayName = displayName;
+            ProfileName = profileName;
             BirthDate = birthDate;
             DeathDate = deathDate;
-            ImagePath = imagePath;
             LastModifiedDate = DateTime.UtcNow;
+
+            SetNicknames(nicknames);
         }
 
-        public void SetHallOfFame(int sportLeagueLevelId, int? franchiseId, int? inductionYear, decimal? votePercentage)
+        public void SetHallOfFame(int sportLeagueLevelId, int? inductionYear, decimal? votePercentage)
         {
             var hallOfFame = HallOfFames.SingleOrDefault(hof => hof.SportLeagueLevelId == sportLeagueLevelId);
 
             if (hallOfFame == null)
             {
-                HallOfFames.Add(new HallOfFame(inductionYear, Id, sportLeagueLevelId, franchiseId, votePercentage));
+                HallOfFames.Add(new HallOfFame(inductionYear, Id, sportLeagueLevelId, votePercentage));
                 return;
             }
 
-            hallOfFame.Set(inductionYear, sportLeagueLevelId, franchiseId, votePercentage);
+            hallOfFame.Set(inductionYear, sportLeagueLevelId, votePercentage);
+        }
+
+        public void SetImage(string imagePath)
+        {
+            ImagePath = imagePath;
+        }
+
+        public void SetNicknames(string[] nicknames)
+        {
+            if (!nicknames.Any())
+            {
+                Nicknames = new();
+                return;
+            }
+
+            var existingNicknames = Nicknames.Select(personNickname => personNickname.Nickname);
+
+            foreach (var nickname in nicknames.Where(nickname => !existingNicknames.Contains(nickname)))
+            {
+                Nicknames.Add(new PersonNickname(Id, nickname));
+            }
         }
 
         public void SetOccupation(int occupationId, int occupationTypeId)
@@ -134,6 +170,17 @@ namespace Memorabilia.Domain.Entities
             }
 
             occupation.Set(occupationId, occupationTypeId);
+        }
+
+        public void SetService(DateTime? debutDate, DateTime? freeAgentSigningDate, DateTime? lastAppearanceDate)
+        {
+            if (Service == null)
+            {
+                Service = new SportService(Id, debutDate, freeAgentSigningDate, lastAppearanceDate);
+                return;
+            }
+
+            Service.Set(debutDate, freeAgentSigningDate, lastAppearanceDate);
         }
 
         public void SetTeam(int teamId, int? beginYear, int? endYear)

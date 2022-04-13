@@ -8,6 +8,7 @@
 @using Memorabilia.Web.Controls.DropDowns
 @using Memorabilia.Web.Controls.MemorabiliaItem
 @using Memorabilia.Web.Controls.Person
+@using Memorabilia.Web.Controls.Sport
 @using Memorabilia.Web.Controls.Team
 
 <EditPage ContinueNavigationPath="@_viewModel.ContinueNavigationPath"
@@ -38,20 +39,46 @@
                                        SelectedValue="_viewModel.BrandId" />
             </Content>
             <ContentColumn2>
+                <MudSelect @bind-Value="@_viewModel.BammerTypeId"
+                           @bind-Value:event="ValueChanged"    
+                           Label="Type"
+                           Variant="Variant.Outlined" >
+                    <MudSelectItem Value="@(0)">--Select--</MudSelectItem>
+                    <Iterations Items="_viewModel.BammerTypes" Context="bammerType">
+                        <MudSelectItem Value="@bammerType.Id">@bammerType.Name</MudSelectItem>
+                    </Iterations>	
+                </MudSelect>                
+            </ContentColumn2>
+        </DivRowCol3>
+        <DivRowCol3>
+            <Content>
                 <ItemTypeLevelDropDown @bind-Value="@_viewModel.LevelTypeId"
                                        @bind-Value:event="ValueChanged" 
                                        ItemType="_viewModel.ItemType"
                                        SelectedValue="_viewModel.LevelTypeId" /> 
+            </Content>
+            <ContentColumn2>
+                <MudNumericField @bind-Value="_viewModel.Year" 
+                                 Label="Year"
+                                 Variant="Variant.Outlined" />
             </ContentColumn2>
         </DivRowCol3>
-        <PersonSelector CanFilterBySport="false"
-                        CanToggle="true"
-                        ItemType="_viewModel.ItemType"
-                        SelectedPerson="_viewModel.Person"
-                        SelectedPersonChanged="SelectedPersonChanged" />                 
-        <TeamSelector CanToggle="true" 
-                      ItemType="_viewModel.ItemType"
-                      SelectedTeam="_viewModel.Team"
-                      SelectedTeamChanged="SelectedTeamChanged" />
+        <DivRowCol3>
+            <Content>
+                <MudCheckBox @bind-Checked="@_viewModel.InPackage" 
+                             Label="In Package" />
+            </Content>
+        </DivRowCol3>
+        <MultiPersonSelector CanToggle="true"
+                             ItemType="_viewModel.ItemType"
+                             People="_viewModel.People" />   
+        <SportSelector @bind-Value="@_viewModel.SportId" 
+                       @bind-Value:event="ValueChanged"
+                       CanToggle="true" 
+                       ItemType="_viewModel.ItemType"
+                       SelectedValue="_viewModel.SportId"/>  
+        <MultiTeamSelector CanToggle="true" 
+                           ItemType="_viewModel.ItemType"
+                           Teams="_viewModel.Teams" />
     </Content>
 </EditPage>

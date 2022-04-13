@@ -46,6 +46,10 @@ namespace Memorabilia.Web.Pages.Admin.People
                                             ? $" ({_viewModel.FirstName})"
                                             : _viewModel.FirstName)
                                         : string.Empty);
+
+            _viewModel.ProfileName = $"{(!_viewModel.Nickname.IsNullOrEmpty() ? _viewModel.Nickname : _viewModel.FirstName)}"
+                                   + $" {_viewModel.LastName}"
+                                   + (!_viewModel.Suffix.IsNullOrEmpty() ? $" {_viewModel.Suffix}" : string.Empty);
         }
     }
 }

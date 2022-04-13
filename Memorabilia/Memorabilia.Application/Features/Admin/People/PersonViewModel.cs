@@ -29,8 +29,6 @@ namespace Memorabilia.Application.Features.Admin.People
 
         public int Id => _person.Id;
 
-        public string ImagePath => _person.ImagePath;
-
         public DateTime? LastModifiedDate => _person.LastModifiedDate;
 
         public string LastName => _person.LastName; 
@@ -41,7 +39,11 @@ namespace Memorabilia.Application.Features.Admin.People
 
         public string Nickname => _person.Nickname;
 
+        public IEnumerable<PersonNickname> Nicknames => _person.Nicknames;
+
         public IEnumerable<PersonOccupation> Occupations => _person.Occupations;
+
+        public string ProfileName => _person.ProfileName;   
 
         public string Suffix => _person.Suffix;
 

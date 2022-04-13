@@ -18,6 +18,7 @@ namespace Memorabilia.Application.Features.Memorabilia.CerealBox
             LevelTypeId = viewModel.Level.LevelTypeId;
             MemorabiliaId = viewModel.MemorabiliaId;
             People = viewModel.People.Select(person => new SavePersonViewModel(new PersonViewModel(person.Person))).ToList();
+            SportIds = viewModel.Sports.Select(x => x.SportId).ToList();
             Teams = viewModel.Teams.Select(team => new SaveTeamViewModel(new TeamViewModel(team.Team))).ToList();
         }
 
@@ -33,10 +34,6 @@ namespace Memorabilia.Application.Features.Memorabilia.CerealBox
 
         public override string ExitNavigationPath => "Memorabilia/Items";
 
-        public bool HasPerson => People.Any();
-
-        public bool HasTeam => Teams.Any();
-
         public override string ImagePath => "images/cerealbox.jpg";
 
         public override ItemType ItemType => ItemType.CerealBox;
@@ -48,6 +45,8 @@ namespace Memorabilia.Application.Features.Memorabilia.CerealBox
         public override string PageTitle => $"{(EditModeType == EditModeType.Update ? "Edit" : "Add")} {ItemType.CerealBox.Name} Details";
 
         public List<SavePersonViewModel> People { get; set; } = new();
+
+        public List<int> SportIds { get; set; } = new();
 
         public List<SaveTeamViewModel> Teams { get; set; } = new();
     }

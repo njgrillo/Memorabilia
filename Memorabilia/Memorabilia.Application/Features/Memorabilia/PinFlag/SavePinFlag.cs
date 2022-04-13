@@ -2,9 +2,6 @@
 using Framework.Handler;
 using Memorabilia.Repository.Interfaces;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Memorabilia.Application.Features.Memorabilia.PinFlag
@@ -24,7 +21,10 @@ namespace Memorabilia.Application.Features.Memorabilia.PinFlag
             {
                 var memorabilia = await _memorabiliaRepository.Get(command.MemorabiliaId).ConfigureAwait(false);
 
-                memorabilia.SetPinFlag(command.PersonId, command.SportId);
+                memorabilia.SetPinFlag(command.GameDate, 
+                                       command.GameStyleTypeId, 
+                                       command.PersonId, 
+                                       command.SportId);
 
                 await _memorabiliaRepository.Update(memorabilia).ConfigureAwait(false);
             }
@@ -38,6 +38,10 @@ namespace Memorabilia.Application.Features.Memorabilia.PinFlag
             {
                 _viewModel = viewModel;
             }
+
+            public DateTime? GameDate => _viewModel.GameDate;
+
+            public int? GameStyleTypeId => _viewModel.GameStyleTypeId > 0 ? _viewModel.GameStyleTypeId : 0;
 
             public int MemorabiliaId => _viewModel.MemorabiliaId;
 

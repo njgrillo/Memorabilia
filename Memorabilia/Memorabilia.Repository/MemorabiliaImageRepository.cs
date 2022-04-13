@@ -10,9 +10,9 @@ namespace Memorabilia.Repository
 {
     public class MemorabiliaImageRepository : BaseRepository<MemorabiliaImage>, IMemorabiliaImageRepository
     {
-        private readonly Context _context;
+        private readonly MemorabiliaContext _context;
 
-        public MemorabiliaImageRepository(Context context) : base(context)
+        public MemorabiliaImageRepository(MemorabiliaContext context) : base(context)
         {
             _context = context;
         }

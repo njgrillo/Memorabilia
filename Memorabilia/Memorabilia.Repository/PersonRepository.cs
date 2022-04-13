@@ -20,6 +20,7 @@ namespace Memorabilia.Repository
         private IQueryable<Person> Person => _context.Set<Person>()
                                                      .Include(person => person.HallOfFames)
                                                      .Include(person => person.Occupations)
+                                                     .Include(person => person.Service)
                                                      .Include(person => person.Teams)
                                                      .Include("Teams.Team");
 

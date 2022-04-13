@@ -29,7 +29,7 @@ namespace Memorabilia.Application.Features.Memorabilia.Hat
                                    command.LevelTypeId,
                                    command.PersonIds,
                                    command.SizeId,
-                                   command.SportIds,
+                                   command.SportId,
                                    command.TeamIds);
 
                 await _memorabiliaRepository.Update(memorabilia).ConfigureAwait(false);
@@ -57,13 +57,13 @@ namespace Memorabilia.Application.Features.Memorabilia.Hat
 
             public int MemorabiliaId => _viewModel.MemorabiliaId;
 
-            public int[] PersonIds => _viewModel.People.Select(person => person.Id).ToArray();
+            public int[] PersonIds => _viewModel.People.Where(person => !person.IsDeleted).Select(person => person.Id).ToArray();
 
             public int SizeId => _viewModel.SizeId;
 
-            public int[] SportIds => _viewModel.SportIds.ToArray();
+            public int? SportId => _viewModel.SportId > 0 ? _viewModel.SportId : null;
 
-            public int[] TeamIds => _viewModel.Teams.Select(team => team.Id).ToArray();
+            public int[] TeamIds => _viewModel.Teams.Where(team => !team.IsDeleted).Select(team => team.Id).ToArray();
         }
     }
 }

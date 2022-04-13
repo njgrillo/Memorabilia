@@ -30,8 +30,6 @@ namespace Memorabilia.Application.Features.Memorabilia.Guitar
 
         public override string ExitNavigationPath => "Memorabilia/Items";
 
-        public bool HasPerson => People.Any();
-
         public override string ImagePath => "images/guitar.jpg";
 
         public override ItemType ItemType => ItemType.Guitar;

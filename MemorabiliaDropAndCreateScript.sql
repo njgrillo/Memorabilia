@@ -10,6 +10,18 @@ GO
 DECLARE @KeepExistingValues INT = 1
 DECLARE @LoadInitialValues INT = 0
 
+--AllStar - FK - PersonId
+IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = N'AllStar')
+BEGIN
+	IF OBJECT_ID('tempdb..#TempAllStarTable') IS NOT NULL DROP TABLE #TempAllStarTable; 
+
+	SELECT * 
+	INTO #TempAllStarTable
+	FROM [dbo].[AllStar]
+
+	DROP TABLE [dbo].[AllStar]
+END
+
 --AutographAuthentication - FK - AutographId, AuthenticationCompanyId
 IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = N'AutographAuthentication')
 BEGIN
@@ -56,6 +68,18 @@ BEGIN
 	FROM [dbo].[AutographThroughTheMail]
 
 	DROP TABLE [dbo].[AutographThroughTheMail]
+END
+
+--Draft Drop - FK - PersonId, FranchiseId
+IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = N'Draft')
+BEGIN
+	IF OBJECT_ID('tempdb..#TempDraftTable') IS NOT NULL DROP TABLE #TempDraftTable; 
+
+	SELECT * 
+	INTO #TempDraftTable
+	FROM [dbo].[Draft]
+
+	DROP TABLE [dbo].[Draft]
 END
 
 --Event Drop - FK - AcquisitionTypeId
@@ -178,6 +202,18 @@ BEGIN
 	DROP TABLE [dbo].[MemorabiliaAcquisition]
 END
 
+--MemorabiliaBammer Drop - FK - MemorabiliaId, BammerTypeId
+IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = N'MemorabiliaBammer')
+BEGIN
+	IF OBJECT_ID('tempdb..#TempMemorabiliaBammerTable') IS NOT NULL DROP TABLE #TempMemorabiliaBammerTable; 
+
+	SELECT * 
+	INTO #TempMemorabiliaBammerTable
+	FROM [dbo].[MemorabiliaBammer]
+
+	DROP TABLE [dbo].[MemorabiliaBammer]
+END
+
 --MemorabiliaBaseball Drop - FK - MemorabiliaId, BaseballTypeId
 IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = N'MemorabiliaBaseball')
 BEGIN
@@ -214,6 +250,18 @@ BEGIN
 	DROP TABLE [dbo].[MemorabiliaBat]
 END
 
+--MemorabiliaBobblehead Drop - FK - MemorabiliaId
+IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = N'MemorabiliaBobblehead')
+BEGIN
+	IF OBJECT_ID('tempdb..#TempMemorabiliaBobbleheadTable') IS NOT NULL DROP TABLE #TempMemorabiliaBobbleheadTable; 
+
+	SELECT * 
+	INTO #TempMemorabiliaBobbleheadTable
+	FROM [dbo].[MemorabiliaBobblehead]
+
+	DROP TABLE [dbo].[MemorabiliaBobblehead]
+END
+
 --MemorabiliaBook Drop - FK - MemorabiliaId
 IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = N'MemorabiliaBook')
 BEGIN
@@ -236,18 +284,6 @@ BEGIN
 	FROM [dbo].[MemorabiliaBrand]
 
 	DROP TABLE [dbo].[MemorabiliaBrand]
-END
-
---MemorabiliaCanvas Drop  - FK - MemorabiliaId
-IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = N'MemorabiliaCanvas')
-BEGIN
-	IF OBJECT_ID('tempdb..#TempMemorabiliaCanvasTable') IS NOT NULL DROP TABLE #TempMemorabiliaCanvasTable; 
-
-	SELECT * 
-	INTO #TempMemorabiliaCanvasTable
-	FROM [dbo].[MemorabiliaCanvas]
-
-	DROP TABLE [dbo].[MemorabiliaCanvas]
 END
 
 --MemorabiliaCard Drop - FK - MemorabiliaId
@@ -310,6 +346,18 @@ BEGIN
 	DROP TABLE [dbo].[MemorabiliaGame]
 END
 
+--MemorabiliaGlove Drop - FK - MemorabiliaId, GloveTypeId, PersonId
+IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = N'MemorabiliaGlove')
+BEGIN
+	IF OBJECT_ID('tempdb..#TempMemorabiliaGloveTable') IS NOT NULL DROP TABLE #TempMemorabiliaGloveTable; 
+
+	SELECT * 
+	INTO #TempMemorabiliaGloveTable
+	FROM [dbo].[MemorabiliaGlove]
+
+	DROP TABLE [dbo].[MemorabiliaGlove]
+END
+
 --MemorabiliaHelmet Drop - FK - MemorabiliaId, HelmetQualityTypeId, HelmetTypeId
 IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = N'MemorabiliaHelmet')
 BEGIN
@@ -358,18 +406,6 @@ BEGIN
 	DROP TABLE [dbo].[MemorabiliaLevelType]
 END
 
---MemorabiliaLithograph Drop  - FK - MemorabiliaId
-IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = N'MemorabiliaLithograph')
-BEGIN
-	IF OBJECT_ID('tempdb..#TempMemorabiliaLithographTable') IS NOT NULL DROP TABLE #TempMemorabiliaLithographTable; 
-
-	SELECT * 
-	INTO #TempMemorabiliaLithographTable
-	FROM [dbo].[MemorabiliaLithograph]
-
-	DROP TABLE [dbo].[MemorabiliaLithograph]
-END
-
 --MemorabilaMagazine Drop  - FK - MemorabiliaId
 IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = N'MemorabiliaMagazine')
 BEGIN
@@ -380,18 +416,6 @@ BEGIN
 	FROM [dbo].[MemorabiliaMagazine]
 
 	DROP TABLE [dbo].[MemorabiliaMagazine]
-END
-
---MemorabiliaOrientation Drop - FK - MemorabiliaId, OrientationId
-IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = N'MemorabiliaOrientation')
-BEGIN
-	IF OBJECT_ID('tempdb..#TempMemorabiliaOrientationTable') IS NOT NULL DROP TABLE #TempMemorabiliaOrientationTable; 
-
-	SELECT * 
-	INTO #TempMemorabiliaOrientationTable
-	FROM [dbo].[MemorabiliaOrientation]
-
-	DROP TABLE [dbo].[MemorabiliaOrientation]
 END
 
 --MemorabiliaPerson Drop - FK - MemorabiliaId, PersonId
@@ -406,16 +430,16 @@ BEGIN
 	DROP TABLE [dbo].[MemorabiliaPerson]
 END
 
---MemorabiliaPhoto Drop  - FK - MemorabiliaId, PhotoTypeId
+--MemorabiliaPicture Drop  - FK - MemorabiliaId, PhotoTypeId
 IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = N'MemorabiliaPhoto')
 BEGIN
-	IF OBJECT_ID('tempdb..#TempMemorabiliaPhotoTable') IS NOT NULL DROP TABLE #TempMemorabiliaPhotoTable; 
+	IF OBJECT_ID('tempdb..#TempMemorabiliaPictureTable') IS NOT NULL DROP TABLE #TempMemorabiliaPictureTable; 
 
 	SELECT * 
-	INTO #TempMemorabiliaPhotoTable
-	FROM [dbo].[MemorabiliaPhoto]
+	INTO #TempMemorabiliaPictureTable
+	FROM [dbo].[MemorabiliaPicture]
 
-	DROP TABLE [dbo].[MemorabiliaPhoto]
+	DROP TABLE [dbo].[MemorabiliaPicture]
 END
 
 --MemorabiliaSize Drop  - FK - MemorabiliaId, SizeId
@@ -454,6 +478,18 @@ BEGIN
 	DROP TABLE [dbo].[MemorabiliaTeam]
 END
 
+--PersonAward Drop - FK - PersonId, AwardTypeId
+IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = N'PersonAward')
+BEGIN
+	IF OBJECT_ID('tempdb..#TempPersonAwardTable') IS NOT NULL DROP TABLE #TempPersonAwardTable; 
+
+	SELECT * 
+	INTO #TempPersonAwardTable
+	FROM [dbo].[PersonAward]
+
+	DROP TABLE [dbo].[PersonAward]
+END
+
 --Personalization Drop - FK - AutographId
 IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = N'Personalization')
 BEGIN
@@ -464,6 +500,18 @@ BEGIN
 	FROM [dbo].[Personalization]
 
 	DROP TABLE [dbo].[Personalization]
+END
+
+--PersonNickname Drop - FK - PersonId
+IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = N'PersonNickname')
+BEGIN
+	IF OBJECT_ID('tempdb..#TempPersonNicknameTable') IS NOT NULL DROP TABLE #TempPersonNicknameTable; 
+
+	SELECT * 
+	INTO #TempPersonNicknameTable
+	FROM [dbo].[PersonNickname]
+
+	DROP TABLE [dbo].[PersonNickname]
 END
 
 --PersonOccupation Drop - FK - PersonId, OccupationId, OccupationTypeId
@@ -500,6 +548,18 @@ BEGIN
 	FROM [dbo].[Pewter]
 
 	DROP TABLE [dbo].[Pewter]
+END
+
+--SportService Drop - FK - PersonId
+IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = N'SportService')
+BEGIN
+	IF OBJECT_ID('tempdb..#TempSportServiceTable') IS NOT NULL DROP TABLE #TempSportServiceTable; 
+
+	SELECT * 
+	INTO #TempSportServiceTable
+	FROM [dbo].[SportService]
+
+	DROP TABLE [dbo].[SportService]
 END
 
 --TeamConference Drop - FK - ConferenceId, TeamId
@@ -575,6 +635,18 @@ BEGIN
 END
 
 --Start Dropping Domain Tables
+--AccomplishmentType Drop
+IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = N'AccomplishmentType')
+BEGIN
+	IF OBJECT_ID('tempdb..#TempAccomplishmentTypeTable') IS NOT NULL DROP TABLE #TempAccomplishmentTypeTable; 
+
+	SELECT * 
+	INTO #TempAccomplishmentTypeTable
+	FROM [dbo].[AccomplishmentType]
+
+	DROP TABLE [dbo].[AccomplishmentType]
+END
+
 --Acquisition Drop - FK - AcquisitionTypeId, PurchaseTypeId
 IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = N'Acquisition')
 BEGIN
@@ -609,6 +681,30 @@ BEGIN
 	FROM [dbo].[AuthenticationCompany]
 
 	DROP TABLE [dbo].[AuthenticationCompany]
+END
+
+--AwardType Drop 
+IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = N'AwardType')
+BEGIN
+	IF OBJECT_ID('tempdb..#TempAwardTypeTable') IS NOT NULL DROP TABLE #TempAwardTypeTable; 
+
+	SELECT * 
+	INTO #TempAwardTypeTable
+	FROM [dbo].[AwardType]
+
+	DROP TABLE [dbo].[AwardType]
+END
+
+--BammerType Drop
+IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = N'BammerType')
+BEGIN
+	IF OBJECT_ID('tempdb..#TempBammerTypeTable') IS NOT NULL DROP TABLE #TempBammerTypeTable; 
+
+	SELECT * 
+	INTO #TempBammerTypeTable
+	FROM [dbo].[BammerType]
+
+	DROP TABLE [dbo].[BammerType]
 END
 
 --BaseballType Drop
@@ -755,6 +851,18 @@ BEGIN
 	DROP TABLE [dbo].[FootballType]
 END
 
+--FranchiseHallOfFameType
+IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = N'FranchiseHallOfFameType')
+BEGIN
+	IF OBJECT_ID('tempdb..#TempFranchiseHallOfFameTypeTable') IS NOT NULL DROP TABLE #TempFranchiseHallOfFameTypeTable; 
+
+	SELECT * 
+	INTO #TempFranchiseHallOfFameTypeTable
+	FROM [dbo].[FranchiseHallOfFameType]
+
+	DROP TABLE [dbo].[FranchiseHallOfFameType]
+END
+
 --GameStyleType Drop
 IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = N'GameStyleType')
 BEGIN
@@ -887,6 +995,18 @@ BEGIN
 	DROP TABLE [dbo].[JerseyType]
 END
 
+--LeaderType Drop
+IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = N'LeaderType')
+BEGIN
+	IF OBJECT_ID('tempdb..#TempLeaderTypeTable') IS NOT NULL DROP TABLE #TempLeaderTypeTable; 
+
+	SELECT * 
+	INTO #TempLeaderTypeTable
+	FROM [dbo].[LeaderType]
+
+	DROP TABLE [dbo].[LeaderType]
+END
+
 --League Drop
 IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = N'League')
 BEGIN
@@ -993,6 +1113,18 @@ BEGIN
 	FROM [dbo].[PurchaseType]
 
 	DROP TABLE [dbo].[PurchaseType]
+END
+
+--RecordType Drop
+IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = N'RecordType')
+BEGIN
+	IF OBJECT_ID('tempdb..#TempRecordTypeTable') IS NOT NULL DROP TABLE #TempRecordTypeTable; 
+
+	SELECT * 
+	INTO #TempRecordTypeTable
+	FROM [dbo].[RecordType]
+
+	DROP TABLE [dbo].[RecordType]
 END
 
 --Size Drop
@@ -1229,9 +1361,10 @@ CREATE TABLE [dbo].[Person](
 	[Nickname] [nvarchar] (50) NULL,
 	[LegalName] [nvarchar](225) NOT NULL,
 	[DisplayName] [nvarchar] (225) NOT NULL,
+	[ProfileName] [nvarchar] (225) NOT NULL,
 	[BirthDate] [datetime] NULL,
 	[DeathDate] [datetime] NULL,
-	[ImagePath] [varchar](200) NULL,
+	[ImagePath] [varchar](max) NULL,
 	[CreateDate] [datetime] NOT NULL,
 	[LastModifiedDate] [datetime] NULL,
  CONSTRAINT [PK_Person] PRIMARY KEY CLUSTERED 
@@ -1244,7 +1377,7 @@ SET IDENTITY_INSERT [dbo].[Person] ON
 
 IF @KeepExistingValues = 1
 BEGIN
-	INSERT INTO [dbo].[Person] (Id, FirstName, LastName, MiddleName, Suffix, Nickname, LegalName, DisplayName, BirthDate, DeathDate, ImagePath, CreateDate, LastModifiedDate)
+	INSERT INTO [dbo].[Person] (Id, FirstName, LastName, MiddleName, Suffix, Nickname, LegalName, DisplayName, ProfileName, BirthDate, DeathDate, ImagePath, CreateDate, LastModifiedDate)
 	SELECT * 
 	FROM #TempPersonTable
 END
@@ -1278,6 +1411,28 @@ BEGIN
 END
 
 SET IDENTITY_INSERT [dbo].[Conference] OFF
+
+--AccomplishmentType Create
+CREATE TABLE [dbo].[AccomplishmentType](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[Name] [varchar](100) NOT NULL,
+	[Abbreviation] [varchar](25) NULL,
+ CONSTRAINT [PK_AccomplishmentType] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+
+SET IDENTITY_INSERT [dbo].[AccomplishmentType] ON
+
+IF @KeepExistingValues = 1
+BEGIN
+	INSERT INTO [dbo].[AccomplishmentType] (Id, [Name], Abbreviation)
+	SELECT * 
+	FROM #TempAccomplishmentTypeTable
+END
+
+SET IDENTITY_INSERT [dbo].[AccomplishmentType] OFF
 
 --AcquisitionType Create
 CREATE TABLE [dbo].[AcquisitionType](
@@ -1342,6 +1497,28 @@ BEGIN
 END
 
 SET IDENTITY_INSERT [dbo].[AuthenticationCompany] OFF
+
+--AwardType Create
+CREATE TABLE [dbo].[AwardType](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[Name] [varchar](200) NOT NULL,
+	[Abbreviation] [varchar](20) NULL,
+ CONSTRAINT [PK_AwardType] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+
+SET IDENTITY_INSERT [dbo].[AwardType] ON
+
+IF @KeepExistingValues = 1
+BEGIN
+	INSERT INTO [dbo].[AwardType] (Id, [Name], Abbreviation)
+	SELECT * 
+	FROM #TempAwardTypeTable
+END
+
+SET IDENTITY_INSERT [dbo].[AwardType] OFF
 
 --BaseballType Create
 CREATE TABLE [dbo].[BaseballType](
@@ -1838,6 +2015,28 @@ END
 
 SET IDENTITY_INSERT [dbo].[Franchise] OFF
 
+--FranchiseHallOfFameType Create
+CREATE TABLE [dbo].[FranchiseHallOfFameType](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[Name] [varchar](100) NOT NULL,
+	[Abbreviation] [varchar](10) NULL,
+ CONSTRAINT [PK_FranchiseHallOfFameType] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+
+SET IDENTITY_INSERT [dbo].[FranchiseHallOfFameType] ON
+
+IF @KeepExistingValues = 1
+BEGIN
+	INSERT INTO [dbo].[FranchiseHallOfFameType] (Id, [Name], Abbreviation)
+	SELECT * 
+	FROM #TempFranchiseHallOfFameTypeTable
+END
+
+SET IDENTITY_INSERT [dbo].[FranchiseHallOfFameType] OFF
+
 --GameStyleType Create
 CREATE TABLE [dbo].[GameStyleType](
 	[Id] [int] IDENTITY(1,1) NOT NULL,
@@ -2217,6 +2416,28 @@ END
 
 SET IDENTITY_INSERT [dbo].[JerseyType] OFF
 
+--LeaderType Create
+CREATE TABLE [dbo].[LeaderType](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[Name] [varchar](100) NOT NULL,
+	[Abbreviation] [varchar](10) NULL,
+ CONSTRAINT [PK_LeaderType] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+
+SET IDENTITY_INSERT [dbo].[LeaderType] ON
+
+IF @KeepExistingValues = 1
+BEGIN
+	INSERT INTO [dbo].[LeaderType] (Id, [Name], Abbreviation)
+	SELECT * 
+	FROM #TempLeaderTypeTable
+END
+
+SET IDENTITY_INSERT [dbo].[LeaderType] OFF
+
 --MagazineType Create
 CREATE TABLE [dbo].[MagazineType](
 	[Id] [int] IDENTITY(1,1) NOT NULL,
@@ -2428,6 +2649,28 @@ END
 
 SET IDENTITY_INSERT [dbo].[PurchaseType] OFF
 
+--RecordType Create
+CREATE TABLE [dbo].[RecordType](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[Name] [varchar](100) NOT NULL,
+	[Abbreviation] [varchar](10) NULL,
+ CONSTRAINT [PK_RecordType] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+
+SET IDENTITY_INSERT [dbo].[RecordType] ON
+
+IF @KeepExistingValues = 1
+BEGIN
+	INSERT INTO [dbo].[RecordType] (Id, [Name], Abbreviation)
+	SELECT * 
+	FROM #TempRecordTypeTable
+END
+
+SET IDENTITY_INSERT [dbo].[RecordType] OFF
+
 --Role Create
 CREATE TABLE [dbo].[Role](
 	[Id] [int] IDENTITY(1,1) NOT NULL,
@@ -2635,6 +2878,9 @@ CREATE TABLE [dbo].[Memorabilia](
 	[ConditionId] [int] NULL,
 	[EstimatedValue] [decimal](12, 2) NULL,
 	[PrivacyTypeId] int NOT NULL,
+	[Numerator] int NULL,
+	[Denominator] int NULL,
+	[Note] [varchar](max),
 	[UserId] [int] NOT NULL,
 	[CreateDate] [datetime] NOT NULL,
 	[LastModifiedDate] [datetime] NULL,
@@ -2666,7 +2912,7 @@ SET IDENTITY_INSERT [dbo].[Memorabilia] ON
 
 IF @KeepExistingValues = 1
 BEGIN
-	INSERT INTO [dbo].[Memorabilia] (Id, ItemTypeId, ConditionId, EstimatedValue, Grade, PrivacyTypeId, UserId, CreateDate, LastModifiedDate)
+	INSERT INTO [dbo].[Memorabilia] (Id, ItemTypeId, ConditionId, EstimatedValue, Grade, PrivacyTypeId, Numerator, Denominator, UserId, CreateDate, LastModifiedDate)
 	SELECT * 
 	FROM #TempMemorabiliaTable
 END
@@ -2706,6 +2952,32 @@ END
 
 SET IDENTITY_INSERT [dbo].[Acquisition] OFF
 
+--AllStar Create
+CREATE TABLE [dbo].[AllStar](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[PersonId] [int] NOT NULL,
+	[Year] [int] NOT NULL,
+ CONSTRAINT [PK_AllStar] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+
+ALTER TABLE [dbo].[AllStar]  WITH CHECK ADD  CONSTRAINT [FK_AllStar_Person] FOREIGN KEY([PersonId])
+REFERENCES [dbo].[Person] ([Id])
+ALTER TABLE [dbo].[AllStar] CHECK CONSTRAINT [FK_AllStar_Person]
+
+SET IDENTITY_INSERT [dbo].[AllStar] ON
+
+IF @KeepExistingValues = 1
+BEGIN
+	INSERT INTO [dbo].[AllStar] (Id, PersonId, [Year])
+	SELECT * 
+	FROM #TempAllStarTable
+END
+
+SET IDENTITY_INSERT [dbo].[AllStar] OFF
+
 --Autograph Create
 CREATE TABLE [dbo].[Autograph](
 	[Id] [int] IDENTITY(1,1) NOT NULL,
@@ -2718,6 +2990,9 @@ CREATE TABLE [dbo].[Autograph](
 	[EstimatedValue] decimal(12, 2) NULL,
 	[FullName] [bit] NULL,
 	[Grade] [int] NULL,
+	[Denominator] [int] NULL,
+	[Numerator] [int] NULL,
+	[Note] [varchar](max),
 	[CreateDate] [datetime] NOT NULL,
 	[LastModifiedDate] [datetime] NULL,
  CONSTRAINT [PK_Autograph] PRIMARY KEY CLUSTERED 
@@ -2756,7 +3031,7 @@ SET IDENTITY_INSERT [dbo].[Autograph] ON
 
 IF @KeepExistingValues = 1
 BEGIN
-	INSERT INTO [dbo].[Autograph] (Id, MemorabiliaId, PersonId, ConditionId, WritingInstrumentId, ColorId, AcquisitionId, EstimatedValue, FullName, Grade, CreateDate, LastModifiedDate)
+	INSERT INTO [dbo].[Autograph] (Id, MemorabiliaId, PersonId, ConditionId, WritingInstrumentId, ColorId, AcquisitionId, EstimatedValue, FullName, Grade, Denominator, Numerator, CreateDate, LastModifiedDate)
 	SELECT * 
 	FROM #TempAutographTable
 END
@@ -2886,6 +3161,40 @@ BEGIN
 END
 
 SET IDENTITY_INSERT [dbo].[AutographThroughTheMail] OFF
+
+--Draft Create
+CREATE TABLE [dbo].[Draft](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[PersonId] [int] NOT NULL,
+	[FranchiseId] [int] NOT NULL,
+	[Year] [int] NOT NULL,
+	[Round] [int] NOT NULL,
+	[Pick] [int] NULL,
+	[Overall] [int] NULL,
+ CONSTRAINT [PK_Draft] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+
+ALTER TABLE [dbo].[Draft]  WITH CHECK ADD  CONSTRAINT [FK_Draft_Person] FOREIGN KEY([PersonId])
+REFERENCES [dbo].[Person] ([Id])
+ALTER TABLE [dbo].[Draft] CHECK CONSTRAINT [FK_Draft_Person]
+
+ALTER TABLE [dbo].[Draft]  WITH CHECK ADD  CONSTRAINT [FK_Draft_Franchise] FOREIGN KEY([FranchiseId])
+REFERENCES [dbo].[Franchise] ([Id])
+ALTER TABLE [dbo].[Draft] CHECK CONSTRAINT [FK_Draft_Franchise]
+
+SET IDENTITY_INSERT [dbo].[Draft] ON
+
+IF @KeepExistingValues = 1
+BEGIN
+	INSERT INTO [dbo].[Draft] (Id, PersonId, [Round], Pick, Overall)
+	SELECT * 
+	FROM #TempDraftTable
+END
+
+SET IDENTITY_INSERT [dbo].[Draft] OFF
 
 --Event Create
 CREATE TABLE [dbo].[Event](
@@ -3191,6 +3500,38 @@ END
 
 SET IDENTITY_INSERT [dbo].[MemorabiliaAcquisition] OFF
 
+--MemorabiliaBammer Create
+CREATE TABLE [dbo].[MemorabiliaBammer](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[MemorabiliaId] [int] NOT NULL,
+	[BammerTypeId] [int] NULL,
+	[Year] [int] NULL,
+	[InPackage] [bit] NOT NULL,
+ CONSTRAINT [PK_MemorabiliaBammer] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+
+ALTER TABLE [dbo].[MemorabiliaBammer]  WITH CHECK ADD  CONSTRAINT [FK_MemorabiliaBammer_Memorabilia] FOREIGN KEY([MemorabiliaId])
+REFERENCES [dbo].[Memorabilia] ([Id])
+ALTER TABLE [dbo].[MemorabiliaBammer] CHECK CONSTRAINT [FK_MemorabiliaBammer_Memorabilia]
+
+ALTER TABLE [dbo].[MemorabiliaBammer]  WITH CHECK ADD  CONSTRAINT [FK_MemorabiliaBammer_BammerType] FOREIGN KEY([BammerTypeId])
+REFERENCES [dbo].[BammerType] ([Id])
+ALTER TABLE [dbo].[MemorabiliaBammer] CHECK CONSTRAINT [FK_MemorabiliaBammer_BammerType]
+
+SET IDENTITY_INSERT [dbo].[MemorabiliaBammer] ON
+
+IF @KeepExistingValues = 1
+BEGIN
+	INSERT INTO [dbo].[MemorabiliaBammer] (Id, MemorabiliaId, BammerTypeId, [Year], InPackage)
+	SELECT * 
+	FROM #TempMemorabiliaBammerTable
+END
+
+SET IDENTITY_INSERT [dbo].[MemorabiliaBammer] OFF
+
 --MemorabiliaBaseball Create
 CREATE TABLE [dbo].[MemorabiliaBaseball](
 	[Id] [int] IDENTITY(1,1) NOT NULL,
@@ -3289,6 +3630,33 @@ END
 
 SET IDENTITY_INSERT [dbo].[MemorabiliaBat] OFF
 
+--MemorabiliaBobblehead Create
+CREATE TABLE [dbo].[MemorabiliaBobblehead](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[MemorabiliaId] [int] NOT NULL,
+	[Year] [int] NULL,
+	[HasBox] [bit] NOT NULL,
+ CONSTRAINT [PK_MemorabiliaBobblehead] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+
+ALTER TABLE [dbo].[MemorabiliaBobblehead]  WITH CHECK ADD  CONSTRAINT [FK_MemorabiliaBobblehead_Memorabilia] FOREIGN KEY([MemorabiliaId])
+REFERENCES [dbo].[Memorabilia] ([Id])
+ALTER TABLE [dbo].[MemorabiliaBobblehead] CHECK CONSTRAINT [FK_MemorabiliaBobblehead_Memorabilia]
+
+SET IDENTITY_INSERT [dbo].[MemorabiliaBobblehead] ON
+
+IF @KeepExistingValues = 1
+BEGIN
+	INSERT INTO [dbo].[MemorabiliaBobblehead] (Id, MemorabiliaId, Publisher, Edition, HardCover)
+	SELECT * 
+	FROM #TempMemorabiliaBobbleheadTable
+END
+
+SET IDENTITY_INSERT [dbo].[MemorabiliaBobblehead] OFF
+
 --MemorabiliaBook Create
 CREATE TABLE [dbo].[MemorabiliaBook](
 	[Id] [int] IDENTITY(1,1) NOT NULL,
@@ -3348,40 +3716,12 @@ END
 
 SET IDENTITY_INSERT [dbo].[MemorabiliaBrand] OFF
 
---MemorabiliaCanvas Create
-CREATE TABLE [dbo].[MemorabiliaCanvas](
-	[Id] [int] IDENTITY(1,1) NOT NULL,
-	[MemorabiliaId] [int] NOT NULL,
-	[Framed] [bit] NOT NULL,
-	[Stretched] [bit] NOT NULL,
- CONSTRAINT [PK_MemorabiliaCanvas] PRIMARY KEY CLUSTERED 
-(
-	[Id] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
-) ON [PRIMARY]
-
-ALTER TABLE [dbo].[MemorabiliaCanvas]  WITH CHECK ADD  CONSTRAINT [FK_MemorabiliaCanvas_Memorabilia] FOREIGN KEY([MemorabiliaId])
-REFERENCES [dbo].[Memorabilia] ([Id])
-ALTER TABLE [dbo].[MemorabiliaCanvas] CHECK CONSTRAINT [FK_MemorabiliaCanvas_Memorabilia]
-
-SET IDENTITY_INSERT [dbo].[MemorabiliaCanvas] ON
-
-IF @KeepExistingValues = 1
-BEGIN
-	INSERT INTO [dbo].[MemorabiliaCanvas] (Id, MemorabiliaId, Framed, Stretched)
-	SELECT * 
-	FROM #TempMemorabiliaCanvasTable
-END
-
-SET IDENTITY_INSERT [dbo].[MemorabiliaLCanvas] OFF
-
 --MemorabiliaCard Create
 CREATE TABLE [dbo].[MemorabiliaCard](
 	[Id] [int] IDENTITY(1,1) NOT NULL,
 	[MemorabiliaId] [int] NOT NULL,
+	[OrientationId] [int] NOT NULL,
 	[Year] [int] NULL,
-	[Numerator] [int] NULL,
-	[Denominator] [int] NULL,
 	[Licensed] [bit] NOT NULL,
 	[Custom] [bit] NOT NULL,
  CONSTRAINT [PK_MemorabiliaCard] PRIMARY KEY CLUSTERED 
@@ -3394,11 +3734,15 @@ ALTER TABLE [dbo].[MemorabiliaCard]  WITH CHECK ADD  CONSTRAINT [FK_MemorabiliaC
 REFERENCES [dbo].[Memorabilia] ([Id])
 ALTER TABLE [dbo].[MemorabiliaCard] CHECK CONSTRAINT [FK_MemorabiliaCard_Memorabilia]
 
+ALTER TABLE [dbo].[MemorabiliaCard]  WITH CHECK ADD  CONSTRAINT [FK_MemorabiliaCard_Orientation] FOREIGN KEY([OrientationId])
+REFERENCES [dbo].[Orientation] ([Id])
+ALTER TABLE [dbo].[MemorabiliaCard] CHECK CONSTRAINT [FK_MemorabiliaCard_Orientation]
+
 SET IDENTITY_INSERT [dbo].[MemorabiliaCard] ON
 
 IF @KeepExistingValues = 1
 BEGIN
-	INSERT INTO [dbo].[MemorabiliaCard] (Id, MemorabiliaId, [Year], Numerator, Denominator, Licensed, [Custom])
+	INSERT INTO [dbo].[MemorabiliaCard] (Id, MemorabiliaId, [Year], Licensed, [Custom])
 	SELECT * 
 	FROM #TempMemorabiliaCardTable
 END
@@ -3536,6 +3880,42 @@ BEGIN
 END
 
 SET IDENTITY_INSERT [dbo].[MemorabiliaGame] OFF
+
+--MemorabiliaGlove Create
+CREATE TABLE [dbo].[MemorabiliaGlove](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[MemorabiliaId] [int] NOT NULL,
+	[GloveTypeId] [int] NOT NULL,
+	[PersonId] [int] NULL,
+	[GameDate] [datetime] NULL,
+ CONSTRAINT [PK_MemorabiliaGlove] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+
+ALTER TABLE [dbo].[MemorabiliaGlove]  WITH CHECK ADD  CONSTRAINT [FK_MemorabiliaGame_GloveType] FOREIGN KEY([GloveTypeId])
+REFERENCES [dbo].[GloveType] ([Id])
+ALTER TABLE [dbo].[MemorabiliaGlove] CHECK CONSTRAINT [FK_MemorabiliaGame_GloveType]
+
+ALTER TABLE [dbo].[MemorabiliaGlove]  WITH CHECK ADD  CONSTRAINT [FK_MemorabiliaGlove_Person] FOREIGN KEY([PersonId])
+REFERENCES [dbo].[Person] ([Id])
+ALTER TABLE [dbo].[MemorabiliaGlove] CHECK CONSTRAINT [FK_MemorabiliaGlove_Person]
+
+ALTER TABLE [dbo].[MemorabiliaGlove]  WITH CHECK ADD  CONSTRAINT [FK_MemorabiliaGlove_Memorabilia] FOREIGN KEY([MemorabiliaId])
+REFERENCES [dbo].[Memorabilia] ([Id])
+ALTER TABLE [dbo].[MemorabiliaGlove] CHECK CONSTRAINT [FK_MemorabiliaGlove_Memorabilia]
+
+SET IDENTITY_INSERT [dbo].[MemorabiliaGlove] ON
+
+IF @KeepExistingValues = 1
+BEGIN
+	INSERT INTO [dbo].[MemorabiliaGlove] (Id, MemorabiliaId, GloveTypeId, PersonId, GameDate)
+	SELECT * 
+	FROM #TempMemorabiliaGloveTable
+END
+
+SET IDENTITY_INSERT [dbo].[MemorabiliaGlove] OFF
 
 --MemorabiliaHelmet Create
 CREATE TABLE [dbo].[MemorabiliaHelmet](
@@ -3680,39 +4060,14 @@ END
 
 SET IDENTITY_INSERT [dbo].[MemorabiliaLevelType] OFF
 
---MemorabiliaLithograph Create
-CREATE TABLE [dbo].[MemorabiliaLithograph](
-	[Id] [int] IDENTITY(1,1) NOT NULL,
-	[MemorabiliaId] [int] NOT NULL,
-	[Framed] [bit] NOT NULL,
-	[Matted] [bit] NOT NULL,
- CONSTRAINT [PK_MemorabiliaLithograph] PRIMARY KEY CLUSTERED 
-(
-	[Id] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
-) ON [PRIMARY]
-
-ALTER TABLE [dbo].[MemorabiliaLithograph]  WITH CHECK ADD  CONSTRAINT [FK_MemorabiliaLithograph_Memorabilia] FOREIGN KEY([MemorabiliaId])
-REFERENCES [dbo].[Memorabilia] ([Id])
-ALTER TABLE [dbo].[MemorabiliaLithograph] CHECK CONSTRAINT [FK_MemorabiliaLithograph_Memorabilia]
-
-SET IDENTITY_INSERT [dbo].[MemorabiliaLithograph] ON
-
-IF @KeepExistingValues = 1
-BEGIN
-	INSERT INTO [dbo].[MemorabiliaLithograph] (Id, MemorabiliaId, Framed, Matted)
-	SELECT * 
-	FROM #TempMemorabiliaLithographTable
-END
-
-SET IDENTITY_INSERT [dbo].[MemorabiliaLithograph] OFF
-
 --MemorabilaMagazine Create
 CREATE TABLE [dbo].[MemorabiliaMagazine](
 	[Id] [int] IDENTITY(1,1) NOT NULL,
 	[MemorabiliaId] [int] NOT NULL,
+	[OrientationId] [int] NOT NULL,
 	[Date] [datetime] NULL,
-	[Framed] [bit] NULL,
+	[Framed] [bit] NOT NULL,
+	[Matted] [bit] NOT NULL,
  CONSTRAINT [PK_MemorabiliaMagazine] PRIMARY KEY CLUSTERED 
 (
 	[Id] ASC
@@ -3723,46 +4078,20 @@ ALTER TABLE [dbo].[MemorabiliaMagazine]  WITH CHECK ADD  CONSTRAINT [FK_Memorabi
 REFERENCES [dbo].[Memorabilia] ([Id])
 ALTER TABLE [dbo].[MemorabiliaMagazine] CHECK CONSTRAINT [FK_MemorabiliaMagazine_Memorabilia]
 
+ALTER TABLE [dbo].[MemorabiliaMagazine]  WITH CHECK ADD  CONSTRAINT [FK_MemorabiliaMagazine_Orientation] FOREIGN KEY([OrientationId])
+REFERENCES [dbo].[Orientation] ([Id])
+ALTER TABLE [dbo].[MemorabiliaMagazine] CHECK CONSTRAINT [FK_MemorabiliaMagazine_Orientation]
+
 SET IDENTITY_INSERT [dbo].[MemorabiliaMagazine] ON
 
 IF @KeepExistingValues = 1
 BEGIN
-	INSERT INTO [dbo].[MemorabiliaMagazine] (Id, MemorabiliaId, [Date], Framed)
+	INSERT INTO [dbo].[MemorabiliaMagazine] (Id, MemorabiliaId, OrientationId, [Date], Framed, Matted)
 	SELECT * 
 	FROM #TempMemorabiliaMagazineTable
 END
 
 SET IDENTITY_INSERT [dbo].[MemorabiliaMagazine] OFF
-
---MemorabiliaOrientation Create
-CREATE TABLE [dbo].[MemorabiliaOrientation](
-	[Id] [int] IDENTITY(1,1) NOT NULL,
-	[MemorabiliaId] [int] NOT NULL,
-	[OrientationId] [int] NOT NULL,
- CONSTRAINT [PK_MemorabiliaOrientation] PRIMARY KEY CLUSTERED 
-(
-	[Id] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
-) ON [PRIMARY]
-
-ALTER TABLE [dbo].[MemorabiliaOrientation]  WITH CHECK ADD  CONSTRAINT [FK_MemorabiliaOrientation_Memorabilia] FOREIGN KEY([MemorabiliaId])
-REFERENCES [dbo].[Memorabilia] ([Id])
-ALTER TABLE [dbo].[MemorabiliaOrientation] CHECK CONSTRAINT [FK_MemorabiliaOrientation_Memorabilia]
-
-ALTER TABLE [dbo].[MemorabiliaOrientation]  WITH CHECK ADD  CONSTRAINT [FK_MemorabiliaOrientation_Orientation] FOREIGN KEY([OrientationId])
-REFERENCES [dbo].[Orientation] ([Id])
-ALTER TABLE [dbo].[MemorabiliaOrientation] CHECK CONSTRAINT [FK_MemorabiliaOrientation_Orientation]
-
-SET IDENTITY_INSERT [dbo].[MemorabiliaOrientation] ON
-
-IF @KeepExistingValues = 1
-BEGIN
-	INSERT INTO [dbo].[MemorabiliaOrientation] (Id, MemorabiliaId, OrientationId)
-	SELECT * 
-	FROM #TempMemorabiliaOrientationTable
-END
-
-SET IDENTITY_INSERT [dbo].[MemorabiliaOrientation] OFF
 
 --MemorabiliaPerson Create
 CREATE TABLE [dbo].[MemorabiliaPerson](
@@ -3794,37 +4123,43 @@ END
 
 SET IDENTITY_INSERT [dbo].[MemorabiliaPerson] OFF
 
---MemorabiliaPhoto Create
-CREATE TABLE [dbo].[MemorabiliaPhoto](
+--MemorabiliaPicture Create
+CREATE TABLE [dbo].[MemorabiliaPicture](
 	[Id] [int] IDENTITY(1,1) NOT NULL,
 	[MemorabiliaId] [int] NOT NULL,
-	[PhotoTypeId] [int] NOT NULL,
+	[OrientationId] [int] NOT NULL,
+	[PhotoTypeId] [int] NULL,
 	[Framed] [bit] NOT NULL,
 	[Matted] [bit] NOT NULL,
- CONSTRAINT [PK_MemorabiliaPhoto] PRIMARY KEY CLUSTERED 
+	[Stretched] [bit] NOT NULL,
+ CONSTRAINT [PK_MemorabiliaPicture] PRIMARY KEY CLUSTERED 
 (
 	[Id] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 
-ALTER TABLE [dbo].[MemorabiliaPhoto]  WITH CHECK ADD  CONSTRAINT [FK_MemorabiliaPhoto_Memorabilia] FOREIGN KEY([MemorabiliaId])
+ALTER TABLE [dbo].[MemorabiliaPicture]  WITH CHECK ADD  CONSTRAINT [FK_MemorabiliaPicture_Memorabilia] FOREIGN KEY([MemorabiliaId])
 REFERENCES [dbo].[Memorabilia] ([Id])
-ALTER TABLE [dbo].[MemorabiliaPhoto] CHECK CONSTRAINT [FK_MemorabiliaPhoto_Memorabilia]
+ALTER TABLE [dbo].[MemorabiliaPicture] CHECK CONSTRAINT [FK_MemorabiliaPicture_Memorabilia]
 
-ALTER TABLE [dbo].[MemorabiliaPhoto]  WITH CHECK ADD  CONSTRAINT [FK_MemorabiliaPhoto_PhotoType] FOREIGN KEY([PhotoTypeId])
+ALTER TABLE [dbo].[MemorabiliaPicture]  WITH CHECK ADD  CONSTRAINT [FK_MemorabiliaPicture_Orientation] FOREIGN KEY([OrientationId])
+REFERENCES [dbo].[Orientation] ([Id])
+ALTER TABLE [dbo].[MemorabiliaPicture] CHECK CONSTRAINT [FK_MemorabiliaPicture_Orientation]
+
+ALTER TABLE [dbo].[MemorabiliaPicture]  WITH CHECK ADD  CONSTRAINT [FK_MemorabiliaPicture_PhotoType] FOREIGN KEY([PhotoTypeId])
 REFERENCES [dbo].[PhotoType] ([Id])
-ALTER TABLE [dbo].[MemorabiliaPhoto] CHECK CONSTRAINT [FK_MemorabiliaPhoto_PhotoType]
+ALTER TABLE [dbo].[MemorabiliaPicture] CHECK CONSTRAINT [FK_MemorabiliaPicture_PhotoType]
 
-SET IDENTITY_INSERT [dbo].[MemorabiliaPhoto] ON
+SET IDENTITY_INSERT [dbo].[MemorabiliaPicture] ON
 
 IF @KeepExistingValues = 1
 BEGIN
-	INSERT INTO [dbo].[MemorabiliaPhoto] (Id, MemorabiliaId, PhotoTypeId, Framed)
+	INSERT INTO [dbo].[MemorabiliaPicture] (Id, MemorabiliaId, OrientationId, PhotoTypeId, Framed, Matted, Stretched)
 	SELECT * 
-	FROM #TempMemorabiliaPhotoTable
+	FROM #TempMemorabiliaPictureTable
 END
 
-SET IDENTITY_INSERT [dbo].[MemorabiliaPhoto] OFF
+SET IDENTITY_INSERT [dbo].[MemorabiliaPicture] OFF
 
 --MemorabiliaSize Create
 CREATE TABLE [dbo].[MemorabiliaSize](
@@ -3916,6 +4251,37 @@ END
 
 SET IDENTITY_INSERT [dbo].[MemorabiliaTeam] OFF
 
+--PersonAward Create
+CREATE TABLE [dbo].[PersonAward](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[PersonId] [int] NOT NULL,
+	[AwardTypeId] [int] NOT NULL,
+	[Year] [int] NOT NULL,
+ CONSTRAINT [PK_PersonAward] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+
+ALTER TABLE [dbo].[PersonAward]  WITH CHECK ADD  CONSTRAINT [FK_PersonAward_Person] FOREIGN KEY([PersonId])
+REFERENCES [dbo].[Person] ([Id])
+ALTER TABLE [dbo].[PersonAward] CHECK CONSTRAINT [FK_PersonAward_Person]
+
+ALTER TABLE [dbo].[PersonAward]  WITH CHECK ADD  CONSTRAINT [FK_PersonAward_AwardType] FOREIGN KEY([AwardTypeId])
+REFERENCES [dbo].[AwardType] ([Id])
+ALTER TABLE [dbo].[PersonAward] CHECK CONSTRAINT [FK_PersonAward_AwardType]
+
+SET IDENTITY_INSERT [dbo].[PersonAward] ON
+
+IF @KeepExistingValues = 1
+BEGIN
+	INSERT INTO [dbo].[PersonAward] (Id, PersonId, AwardTypeId, [Year])
+	SELECT * 
+	FROM #TempPersonAwardTable
+END
+
+SET IDENTITY_INSERT [dbo].[PersonAward] OFF
+
 --Personalization Create
 CREATE TABLE [dbo].[Personalization](
 	[Id] [int] IDENTITY(1,1) NOT NULL,
@@ -3941,6 +4307,32 @@ BEGIN
 END
 
 SET IDENTITY_INSERT [dbo].[Personalization] OFF
+
+--PersonNickname Create
+CREATE TABLE [dbo].[PersonNickname](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[PersonId] [int] NOT NULL,
+	[Nickname] [varchar](100) NOT NULL,
+ CONSTRAINT [PK_PersonNickname] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+
+ALTER TABLE [dbo].[PersonNickname]  WITH CHECK ADD  CONSTRAINT [FK_PersonNickname_Person] FOREIGN KEY([PersonId])
+REFERENCES [dbo].[Person] ([Id])
+ALTER TABLE [dbo].[PersonNickname] CHECK CONSTRAINT [FK_PersonNickname_Person]
+
+SET IDENTITY_INSERT [dbo].[PersonNickname] ON
+
+IF @KeepExistingValues = 1
+BEGIN
+	INSERT INTO [dbo].[PersonNickname] (Id, PersonId, Nickname)
+	SELECT * 
+	FROM #TempPersonNicknameTable
+END
+
+SET IDENTITY_INSERT [dbo].[PersonNickname] OFF
 
 --PersonOccupation Create
 CREATE TABLE [dbo].[PersonOccupation](
@@ -4050,6 +4442,33 @@ END
 
 SET IDENTITY_INSERT [dbo].[Pewter] OFF
 
+--SportService Create
+CREATE TABLE [dbo].[SportService](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[PersonId] [int] NOT NULL,
+	[DebutDate] [datetime] NULL,
+	[LastAppearanceDate] [datetime] NULL,
+	[FreeAgentSigningDate] [datetime] NULL,
+ CONSTRAINT [PK_SportService] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+
+ALTER TABLE [dbo].[SportService]  WITH CHECK ADD  CONSTRAINT [FK_SportService_Person] FOREIGN KEY([PersonId])
+REFERENCES [dbo].[Person] ([Id])
+ALTER TABLE [dbo].[SportService] CHECK CONSTRAINT [FK_SportService_Person]
+
+SET IDENTITY_INSERT [dbo].[SportService] ON
+
+IF @KeepExistingValues = 1
+BEGIN
+	INSERT INTO [dbo].[SportService] (Id, PersonId, DebutDate, LastAppearanceDate, FreeAgentSigningDate)
+	SELECT * 
+	FROM #TempSportServiceTable
+END
+
+SET IDENTITY_INSERT [dbo].[SportService] OFF
 
 --TeamConference Create
 CREATE TABLE [dbo].[TeamConference](

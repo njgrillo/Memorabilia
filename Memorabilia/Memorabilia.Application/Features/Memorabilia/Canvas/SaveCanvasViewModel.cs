@@ -1,5 +1,4 @@
 ﻿using Memorabilia.Application.Features.Admin.People;
-using Memorabilia.Application.Features.Admin.Sports;
 using Memorabilia.Application.Features.Admin.Teams;
 using Memorabilia.Domain.Constants;
 using System;
@@ -16,13 +15,14 @@ namespace Memorabilia.Application.Features.Memorabilia.Canvas
         public SaveCanvasViewModel(CanvasViewModel viewModel)
         {
             BrandId = viewModel.Brand.BrandId;
-            Framed = viewModel.Canvas.Framed;
+            Framed = viewModel.Picture.Framed;
+            Matted = viewModel.Picture.Matted;
             MemorabiliaId = viewModel.MemorabiliaId;
-            OrientationId = viewModel.Orientation.OrientationId;
+            OrientationId = viewModel.Picture.OrientationId;
             People = viewModel.People.Select(person => new SavePersonViewModel(new PersonViewModel(person.Person))).ToList();
             SizeId = viewModel.Size.SizeId;
-            Sports = viewModel.Sports.Select(sport => new SaveSportViewModel(new SportViewModel(sport.Sport))).ToList();
-            Stretched = viewModel.Canvas.Stretched;
+            SportIds = viewModel.Sports.Select(sport => sport.SportId).ToList();
+            Stretched = viewModel.Picture.Stretched;
             Teams = viewModel.Teams.Select(team => new SaveTeamViewModel(new TeamViewModel(team.Team))).ToList();
         }
 
@@ -38,15 +38,11 @@ namespace Memorabilia.Application.Features.Memorabilia.Canvas
 
         public bool Framed { get; set; }
 
-        public bool HasPerson => People.Any();
-
-        public bool HasSport => Sports.Any();
-
-        public bool HasTeam => Teams.Any();
-
         public override string ImagePath => "images/canvas.jpg";
 
         public override ItemType ItemType => ItemType.Canvas;
+
+        public bool Matted { get; set; }
 
         public int OrientationId { get; set; }
 
@@ -60,7 +56,7 @@ namespace Memorabilia.Application.Features.Memorabilia.Canvas
         [Range(1, int.MaxValue, ErrorMessage = "Size is required.")]
         public int SizeId { get; set; }
 
-        public List<SaveSportViewModel> Sports { get; set; } = new();
+        public List<int> SportIds { get; set; } = new();
 
         public bool Stretched { get; set; }
 

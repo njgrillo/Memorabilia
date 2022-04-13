@@ -15,8 +15,11 @@ namespace Memorabilia.Repository
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<AccomplishmentType>();
             modelBuilder.Entity<AcquisitionType>();
             modelBuilder.Entity<AuthenticationCompany>();
+            modelBuilder.Entity<AwardType>();
+            modelBuilder.Entity<BammerType>();
             modelBuilder.Entity<BaseballType>();
             modelBuilder.Entity<BasketballType>();
             modelBuilder.Entity<BatType>();
@@ -31,6 +34,7 @@ namespace Memorabilia.Repository
             modelBuilder.Entity<FigureType>();
             modelBuilder.Entity<FootballType>();
             modelBuilder.Entity<Franchise>();
+            modelBuilder.Entity<FranchiseHallOfFameType>();
             modelBuilder.Entity<GameStyleType>();
             modelBuilder.Entity<GloveType>();
             modelBuilder.Entity<HallOfFame>().Property(x => x.VotePercentage).HasPrecision(5, 2);
@@ -55,15 +59,18 @@ namespace Memorabilia.Repository
             modelBuilder.Entity<Occupation>();
             modelBuilder.Entity<Orientation>();
             modelBuilder.Entity<Person>();
+            modelBuilder.Entity<PersonNickname>();
             modelBuilder.Entity<PersonOccupation>();
             modelBuilder.Entity<PersonTeam>();
             modelBuilder.Entity<Pewter>();
             modelBuilder.Entity<PhotoType>();
             modelBuilder.Entity<PrivacyType>();
             modelBuilder.Entity<PurchaseType>();
+            modelBuilder.Entity<RecordType>();
             modelBuilder.Entity<Size>();
             modelBuilder.Entity<Sport>();
             modelBuilder.Entity<SportLeagueLevel>();
+            modelBuilder.Entity<SportService>();
             modelBuilder.Entity<Spot>();
             modelBuilder.Entity<Team>();
             modelBuilder.Entity<TeamConference>();

@@ -28,7 +28,6 @@ namespace Memorabilia.Application.Features.Admin.People
                 foreach (var hallOfFame in command.HallOfFames.Where(hof => !hof.IsDeleted))
                 {
                     person.SetHallOfFame(hallOfFame.SportLeagueLevelId, 
-                                         hallOfFame.FranchiseId > 0 ? hallOfFame.FranchiseId : null, 
                                          hallOfFame.InductionYear, 
                                          hallOfFame.VotePercentage);
                 }

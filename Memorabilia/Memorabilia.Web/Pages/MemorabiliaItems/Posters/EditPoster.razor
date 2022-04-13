@@ -4,6 +4,7 @@
 @using Memorabilia.Web.Controls.DropDowns
 @using Memorabilia.Web.Controls.MemorabiliaItem
 @using Memorabilia.Web.Controls.Person
+@using Memorabilia.Web.Controls.Sport
 @using Memorabilia.Web.Controls.Team
 
 <EditPage ContinueNavigationPath="@_viewModel.ContinueNavigationPath"
@@ -59,13 +60,21 @@
                              Label="Framed" />
             </Content>
         </DivRowCol3>
-        <PersonSelector AllowMultiple="true"
-                        CanToggle="true"
-                        ItemType="_viewModel.ItemType"
-                        People="_viewModel.People" />                 
-        <TeamSelector AllowMultiple="true"
-                      CanToggle="true" 
-                      ItemType="_viewModel.ItemType"
-                      Teams="_viewModel.Teams" />
+        <DivRowCol3>
+            <Content>
+                <MudCheckBox @bind-Checked="@_viewModel.Matted" 
+                             Label="Matted" />
+            </Content>
+        </DivRowCol3>
+        <MultiPersonSelector CanToggle="true"
+                             ItemType="_viewModel.ItemType"
+                             People="_viewModel.People" />   
+        <MultiSportSelector CanToggle="true"
+                            ItemType="_viewModel.ItemType"
+                            SelectedSportIdsChanged="SelectedSportIdsChanged"
+                            SportIds="_viewModel.SportIds" /> 
+        <MultiTeamSelector CanToggle="true" 
+                           ItemType="_viewModel.ItemType"
+                           Teams="_viewModel.Teams" />
     </Content>
 </EditPage>

@@ -16,6 +16,8 @@ namespace Memorabilia.Application.Features.Memorabilia.JerseyNumber
 
         public int MemorabiliaId => _memorabilia.Id;
 
+        public IEnumerable<MemorabiliaPerson> People => _memorabilia.People;
+
         public IEnumerable<MemorabiliaSport> Sports => _memorabilia.Sports;
 
         public IEnumerable<MemorabiliaTeam> Teams => _memorabilia.Teams;

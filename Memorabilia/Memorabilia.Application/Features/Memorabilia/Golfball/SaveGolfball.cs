@@ -27,8 +27,7 @@ namespace Memorabilia.Application.Features.Memorabilia.Golfball
                                         command.LevelTypeId,
                                         command.PersonId,
                                         command.SizeId,
-                                        command.SportId,
-                                        command.TeamId);
+                                        command.SportId);
 
                 await _memorabiliaRepository.Update(memorabilia).ConfigureAwait(false);
             }
@@ -58,8 +57,6 @@ namespace Memorabilia.Application.Features.Memorabilia.Golfball
             public int SizeId => _viewModel.SizeId;
 
             public int SportId => Domain.Constants.Sport.Golf.Id;
-
-            public int? TeamId => _viewModel.Team?.Id > 0 ? _viewModel.Team?.Id : null;
         }
     }
 }

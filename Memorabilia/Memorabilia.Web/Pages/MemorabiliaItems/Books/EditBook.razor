@@ -3,6 +3,7 @@
 @using Memorabilia.Application.Features.Memorabilia.Book
 @using Memorabilia.Web.Controls.MemorabiliaItem
 @using Memorabilia.Web.Controls.Person
+@using Memorabilia.Web.Controls.Sport
 @using Memorabilia.Web.Controls.Team
 
 <EditPage ContinueNavigationPath="@_viewModel.ContinueNavigationPath"
@@ -51,13 +52,15 @@
                              Label="Hard Cover" />
             </Content>
         </DivRowCol3>    
-        <PersonSelector AllowMultiple="true"
-                        CanToggle="true"
-                        ItemType="_viewModel.ItemType"
-                        People="_viewModel.People" />                 
-        <TeamSelector AllowMultiple="true"
-                      CanToggle="true" 
-                      ItemType="_viewModel.ItemType"
-                      Teams="_viewModel.Teams" />
+        <MultiPersonSelector CanToggle="true"
+                             ItemType="_viewModel.ItemType"
+                             People="_viewModel.People" />   
+        <MultiSportSelector CanToggle="true"
+                            ItemType="_viewModel.ItemType"
+                            SelectedSportIdsChanged="SelectedSportIdsChanged"
+                            SportIds="_viewModel.SportIds" />
+        <MultiTeamSelector CanToggle="true" 
+                           ItemType="_viewModel.ItemType"
+                           Teams="_viewModel.Teams" />
     </Content>
 </EditPage>

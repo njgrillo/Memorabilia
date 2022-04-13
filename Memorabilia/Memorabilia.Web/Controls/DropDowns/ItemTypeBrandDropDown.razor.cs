@@ -17,10 +17,10 @@ namespace Memorabilia.Web.Controls.DropDowns
         public ItemType ItemType { get; set; }
 
         [Parameter]
-        public int SelectedValue { get; set; }
+        public int Value { get; set; }
 
         [Parameter]
-        public int Value { get; set; }
+        public int SelectedValue { get; set; }
 
         [Parameter]
         public EventCallback<int> ValueChanged { get; set; }

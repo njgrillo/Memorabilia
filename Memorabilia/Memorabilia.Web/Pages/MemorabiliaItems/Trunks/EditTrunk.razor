@@ -7,6 +7,7 @@
 @using Memorabilia.Web.Controls.DropDowns
 @using Memorabilia.Web.Controls.MemorabiliaItem
 @using Memorabilia.Web.Controls.Person
+@using Memorabilia.Web.Controls.Sport
 
 <EditPage ContinueNavigationPath="@_viewModel.ContinueNavigationPath"
           EditMode="_viewModel.EditModeType"
@@ -39,6 +40,7 @@
                 <ItemTypeGameStyleDropDown @bind-Value="@_viewModel.GameStyleTypeId"
                                            @bind-Value:event="ValueChanged"
                                            ItemType="_viewModel.ItemType"
+                                           Label="Match Style Type"
                                            SelectedValue="_viewModel.GameStyleTypeId" /> 
             </ContentColumn2>
         </DivRowCol3>
@@ -50,14 +52,16 @@
                                       SelectedValue="@_viewModel.SizeId" /> 
             </Content>
             <ContentColumn2>
-                <div hidden="@(!_viewModel.DisplayGameDate)">
-                    <MudDatePicker @bind-Date="_viewModel.GameDate"
-                                   DateFormat="MM/dd/yyyy"
-                                   Editable="true"
-                                   Label="Game Date"
-                                   Mask="@(new DateMask("MM/dd/yyyy"))" 
-                                   Variant="Variant.Outlined" />
-                </div> 
+                <DivHidden Hidden="@(!_viewModel.DisplayGameDate)">
+                    <Content>
+                        <MudDatePicker @bind-Date="_viewModel.GameDate"
+                                       DateFormat="MM/dd/yyyy"
+                                       Editable="true"
+                                       Label="Game Date"
+                                       Mask="@(new DateMask("MM/dd/yyyy"))" 
+                                       Variant="Variant.Outlined" />
+                    </Content>
+                </DivHidden>
             </ContentColumn2>
         </DivRowCol3>
         <DivRowCol3>
@@ -72,6 +76,11 @@
                         CanToggle="true"
                         ItemType="_viewModel.ItemType"
                         SelectedPerson="_viewModel.Person"
-                        SelectedPersonChanged="SelectedPersonChanged" />                 
+                        SelectedPersonChanged="SelectedPersonChanged" />      
+        <SportSelector @bind-Value="@_viewModel.SportId" 
+                       @bind-Value:event="ValueChanged"
+                       CanToggle="true" 
+                       ItemType="_viewModel.ItemType"
+                       SelectedValue="_viewModel.SportId"/>  
     </Content>
 </EditPage>
