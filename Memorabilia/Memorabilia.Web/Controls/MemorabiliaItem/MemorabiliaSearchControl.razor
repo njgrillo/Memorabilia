@@ -68,13 +68,13 @@
                                              ResetValueOnEmptyText="true"                                             
                                              SearchFunc="@SearchPeople"                                               
                                              T="SavePersonViewModel"
-                                             Text="@_autographPerson?.DisplayName"
+                                             Text="@_autographPerson?.ProfileName"
                                              Variant="Variant.Outlined" >
                                 <ItemSelectedTemplate Context="person">
-                                    @person?.DisplayName
+                                    @person?.ProfileName
                                 </ItemSelectedTemplate>
                                 <ItemTemplate Context="person">
-                                    @person?.DisplayName
+                                    @person?.ProfileName
                                 </ItemTemplate>
                             </MudAutocomplete>
                         </div>                    

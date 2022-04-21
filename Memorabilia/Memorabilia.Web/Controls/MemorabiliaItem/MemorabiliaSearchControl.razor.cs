@@ -8,6 +8,7 @@ using Memorabilia.Application.Features.Memorabilia;
 using Microsoft.AspNetCore.Components;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
@@ -316,7 +317,13 @@ namespace Memorabilia.Web.Controls.MemorabiliaItem
             if (value.IsNullOrEmpty())
                 return Array.Empty<SavePersonViewModel>();
 
-            return _people.Where(person => person.DisplayName.Contains(value, StringComparison.InvariantCultureIgnoreCase));
+            var nonCulturalResults = _people.Where(person => CultureInfo.CurrentCulture.CompareInfo.IndexOf(person.ProfileName,
+                                                                                                            value,
+                                                                                                            CompareOptions.IgnoreNonSpace) > -1);
+
+            var culturalResults = _people.Where(person => person.ProfileName.Contains(value, StringComparison.OrdinalIgnoreCase));
+
+            return await Task.FromResult(nonCulturalResults.Union(culturalResults).DistinctBy(person => person.Id)).ConfigureAwait(false);
         }
 
         private async Task<IEnumerable<SaveTeamViewModel>> SearchTeams(string value)
@@ -324,7 +331,7 @@ namespace Memorabilia.Web.Controls.MemorabiliaItem
             if (value.IsNullOrEmpty())
                 return Array.Empty<SaveTeamViewModel>();
 
-            return _teams.Where(team => team.DisplayName.Contains(value, StringComparison.InvariantCultureIgnoreCase));
+            return await Task.FromResult(_teams.Where(team => team.DisplayName.Contains(value, StringComparison.InvariantCultureIgnoreCase))).ConfigureAwait(false);
         }
     }
 }

@@ -70,6 +70,30 @@ BEGIN
 	DROP TABLE [dbo].[AutographThroughTheMail]
 END
 
+--CareerRecord Drop - FK - PersonId, RecordTypeId
+IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = N'CareerRecord')
+BEGIN
+	IF OBJECT_ID('tempdb..#TempCareerRecordTable') IS NOT NULL DROP TABLE #TempCareerRecordTable; 
+
+	SELECT * 
+	INTO #TempCareerRecordTable
+	FROM [dbo].[CareerRecord]
+
+	DROP TABLE [dbo].[CareerRecord]
+END
+
+--Champion Drop - FK - TeamId, ChampionTypeId
+IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = N'Champion')
+BEGIN
+	IF OBJECT_ID('tempdb..#TempChampionTable') IS NOT NULL DROP TABLE #TempChampionTable; 
+
+	SELECT * 
+	INTO #TempChampionTable
+	FROM [dbo].[Champion]
+
+	DROP TABLE [dbo].[Champion]
+END
+
 --Draft Drop - FK - PersonId, FranchiseId
 IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = N'Draft')
 BEGIN
@@ -92,6 +116,18 @@ BEGIN
 	FROM [dbo].[Event]
 
 	DROP TABLE [dbo].[Event]
+END
+
+--FranchiseHallOfFame Drop - FK - PersonId, FranchiseHallOfFameTypeId
+IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = N'FranchiseHallOfFame')
+BEGIN
+	IF OBJECT_ID('tempdb..#TempFranchiseHallOfFameTable') IS NOT NULL DROP TABLE #TempFranchiseHallOfFameTable; 
+
+	SELECT * 
+	INTO #TempFranchiseHallOfFameTable
+	FROM [dbo].[FranchiseHallOfFame]
+
+	DROP TABLE [dbo].[FranchiseHallOfFame]
 END
 
 --HallOfFame Drop - FK - FranchiseId, LevelTypeId, PersonId, SportId
@@ -188,6 +224,18 @@ BEGIN
 	FROM [dbo].[ItemTypeSpot]
 
 	DROP TABLE [dbo].[ItemTypeSpot]
+END
+
+--Leader - FK - PersonId, LeaderTypeId
+IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = N'Leader')
+BEGIN
+	IF OBJECT_ID('tempdb..#TempLeaderTable') IS NOT NULL DROP TABLE #TempLeaderTable; 
+
+	SELECT * 
+	INTO #TempLeaderTable
+	FROM [dbo].[Leader]
+
+	DROP TABLE [dbo].[Leader]
 END
 
 --MemorabiliaAcquisition Drop - FK - MemorabiliaId, AcquisitionId
@@ -478,6 +526,18 @@ BEGIN
 	DROP TABLE [dbo].[MemorabiliaTeam]
 END
 
+--PersonAccomplishment Drop - FK - PersonId, AccomplishmentTypeId
+IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = N'PersonAccomplishment')
+BEGIN
+	IF OBJECT_ID('tempdb..#TempPersonAccomplishmentTable') IS NOT NULL DROP TABLE #TempPersonAccomplishmentTable; 
+
+	SELECT * 
+	INTO #TempPersonAccomplishmentTable
+	FROM [dbo].[PersonAccomplishment]
+
+	DROP TABLE [dbo].[PersonAccomplishment]
+END
+
 --PersonAward Drop - FK - PersonId, AwardTypeId
 IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = N'PersonAward')
 BEGIN
@@ -500,6 +560,18 @@ BEGIN
 	FROM [dbo].[Personalization]
 
 	DROP TABLE [dbo].[Personalization]
+END
+
+--PersonCollege Drop - FK - PersonId, CollegeId
+IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = N'PersonCollege')
+BEGIN
+	IF OBJECT_ID('tempdb..#TempPersonCollegeTable') IS NOT NULL DROP TABLE #TempPersonCollegeTable; 
+
+	SELECT * 
+	INTO #TempPersonCollegeTable
+	FROM [dbo].[PersonCollege]
+
+	DROP TABLE [dbo].[PersonCollege]
 END
 
 --PersonNickname Drop - FK - PersonId
@@ -548,6 +620,30 @@ BEGIN
 	FROM [dbo].[Pewter]
 
 	DROP TABLE [dbo].[Pewter]
+END
+
+--RetiredNumber Drop - FK - PersonId, FranchiseId
+IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = N'RetiredNumber')
+BEGIN
+	IF OBJECT_ID('tempdb..#TempRetiredNumberTable') IS NOT NULL DROP TABLE #TempRetiredNumberTable; 
+
+	SELECT * 
+	INTO #TempRetiredNumberTable
+	FROM [dbo].[RetiredNumber]
+
+	DROP TABLE [dbo].[RetiredNumber]
+END
+
+--SingleSeasonRecord Drop - FK - PersonId, RecordTypeId
+IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = N'SingleSeasonRecord')
+BEGIN
+	IF OBJECT_ID('tempdb..#TempSingleSeasonRecordTable') IS NOT NULL DROP TABLE #TempSingleSeasonRecordTable; 
+
+	SELECT * 
+	INTO #TempSingleSeasonRecordTable
+	FROM [dbo].[SingleSeasonRecord]
+
+	DROP TABLE [dbo].[SingleSeasonRecord]
 END
 
 --SportService Drop - FK - PersonId
@@ -765,6 +861,30 @@ BEGIN
 	FROM [dbo].[CardType]
 
 	DROP TABLE [dbo].[CardType]
+END
+
+--ChampionType Drop
+IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = N'ChampionType')
+BEGIN
+	IF OBJECT_ID('tempdb..#TempChampionTypeTable') IS NOT NULL DROP TABLE #TempChampionTypeTable; 
+
+	SELECT * 
+	INTO #TempChampionTypeTable
+	FROM [dbo].[ChampionType]
+
+	DROP TABLE [dbo].[ChampionType]
+END
+
+--College Drop
+IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = N'College')
+BEGIN
+	IF OBJECT_ID('tempdb..#TempCollegeTable') IS NOT NULL DROP TABLE #TempCollegeTable; 
+
+	SELECT * 
+	INTO #TempCollegeTable
+	FROM [dbo].[College]
+
+	DROP TABLE [dbo].[College]
 END
 
 --Color Drop
@@ -1860,6 +1980,28 @@ END
 
 SET IDENTITY_INSERT [dbo].[Division] OFF
 
+--College Create
+CREATE TABLE [dbo].[College](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[Name] [varchar](300) NOT NULL,
+	[Abbreviation] [varchar](20) NULL,
+ CONSTRAINT [PK_College] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+
+SET IDENTITY_INSERT [dbo].[College] ON
+
+IF @KeepExistingValues = 1
+BEGIN
+	INSERT INTO [dbo].[College] (Id, [Name], Abbreviation)
+	SELECT * 
+	FROM #TempCollegeTable
+END
+
+SET IDENTITY_INSERT [dbo].[College] OFF
+
 --FigureSpecialtyType Create
 CREATE TABLE [dbo].[FigureSpecialtyType](
 	[Id] [int] IDENTITY(1,1) NOT NULL,
@@ -2419,8 +2561,8 @@ SET IDENTITY_INSERT [dbo].[JerseyType] OFF
 --LeaderType Create
 CREATE TABLE [dbo].[LeaderType](
 	[Id] [int] IDENTITY(1,1) NOT NULL,
-	[Name] [varchar](100) NOT NULL,
-	[Abbreviation] [varchar](10) NULL,
+	[Name] [varchar](200) NOT NULL,
+	[Abbreviation] [varchar](25) NULL,
  CONSTRAINT [PK_LeaderType] PRIMARY KEY CLUSTERED 
 (
 	[Id] ASC
@@ -3162,6 +3304,86 @@ END
 
 SET IDENTITY_INSERT [dbo].[AutographThroughTheMail] OFF
 
+--CareerRecord Create
+CREATE TABLE [dbo].[CareerRecord](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[PersonId] [int] NOT NULL,
+	[RecordTypeId] [int] NOT NULL,
+	[Amount] [int] NOT NULL,
+ CONSTRAINT [PK_CareerRecord] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+
+ALTER TABLE [dbo].[CareerRecord]  WITH CHECK ADD  CONSTRAINT [FK_CareerRecord_Person] FOREIGN KEY([PersonId])
+REFERENCES [dbo].[Person] ([Id])
+ALTER TABLE [dbo].[CareerRecord] CHECK CONSTRAINT [FK_CareerRecord_Person]
+
+ALTER TABLE [dbo].[CareerRecord]  WITH CHECK ADD  CONSTRAINT [FK_CareerRecord_RecordType] FOREIGN KEY([RecordTypeId])
+REFERENCES [dbo].[RecordType] ([Id])
+ALTER TABLE [dbo].[CareerRecord] CHECK CONSTRAINT [FK_CareerRecord_RecordType]
+
+SET IDENTITY_INSERT [dbo].[CareerRecord] ON
+
+IF @KeepExistingValues = 1
+BEGIN
+	INSERT INTO [dbo].[CareerRecord] (Id, PersonId, RecordTypeId, Amount)
+	SELECT * 
+	FROM #TempCareerRecordTable
+END
+
+SET IDENTITY_INSERT [dbo].[CareerRecord] OFF
+
+--ChampionType Create
+CREATE TABLE [dbo].[ChampionType](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[Name] [varchar](200) NOT NULL,
+	[Abbreviation] [varchar](25) NULL,
+ CONSTRAINT [PK_ChampionType] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+
+SET IDENTITY_INSERT [dbo].[ChampionType] ON
+
+IF @KeepExistingValues = 1
+BEGIN
+	INSERT INTO [dbo].[ChampionType] (Id, [Name], Abbreviation)
+	SELECT * 
+	FROM #TempChampionTypeTable
+END
+
+SET IDENTITY_INSERT [dbo].[ChampionType] OFF
+
+--Champion Create
+CREATE TABLE [dbo].[Champion](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[ChampionTypeId] [int] NOT NULL,
+	[TeamId] [int] NOT NULL,
+	[Year] [int] NOT NULL,
+ CONSTRAINT [PK_Champion] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+
+ALTER TABLE [dbo].[Champion]  WITH CHECK ADD  CONSTRAINT [FK_Champion_ChampionType] FOREIGN KEY([ChampionTypeId])
+REFERENCES [dbo].[ChampionType] ([Id])
+ALTER TABLE [dbo].[Champion] CHECK CONSTRAINT [FK_Champion_ChampionType]
+
+SET IDENTITY_INSERT [dbo].[Champion] ON
+
+IF @KeepExistingValues = 1
+BEGIN
+	INSERT INTO [dbo].[Champion] (Id, ChampionTypeId, TeamId, [Year])
+	SELECT * 
+	FROM #TempChampionTable
+END
+
+SET IDENTITY_INSERT [dbo].[Champion] OFF
+
 --Draft Create
 CREATE TABLE [dbo].[Draft](
 	[Id] [int] IDENTITY(1,1) NOT NULL,
@@ -3222,6 +3444,37 @@ END
 
 SET IDENTITY_INSERT [dbo].[Event] OFF
 
+--FranchiseHallOfFame Create
+CREATE TABLE [dbo].[FranchiseHallOfFame](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[PersonId] [int] NOT NULL,
+	[FranchiseId] [int] NOT NULL,
+	[Year] [int] NULL,
+ CONSTRAINT [PK_FranchiseHallOfFame] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+
+ALTER TABLE [dbo].[FranchiseHallOfFame]  WITH CHECK ADD  CONSTRAINT [FK_FranchiseHallOfFame_Person] FOREIGN KEY([PersonId])
+REFERENCES [dbo].[Person] ([Id])
+ALTER TABLE [dbo].[FranchiseHallOfFame] CHECK CONSTRAINT [FK_FranchiseHallOfFame_Person]
+
+ALTER TABLE [dbo].[FranchiseHallOfFame]  WITH CHECK ADD  CONSTRAINT [FK_FranchiseHallOfFame_Franchise] FOREIGN KEY([FranchiseId])
+REFERENCES [dbo].[Franchise] ([Id])
+ALTER TABLE [dbo].[FranchiseHallOfFame] CHECK CONSTRAINT [FK_FranchiseHallOfFame_Franchise]
+
+SET IDENTITY_INSERT [dbo].[FranchiseHallOfFame] ON
+
+IF @KeepExistingValues = 1
+BEGIN
+	INSERT INTO [dbo].[FranchiseHallOfFame] (Id, PersonId, FranchiseId, [Year])
+	SELECT * 
+	FROM #TempFranchiseHallOfFameTable
+END
+
+SET IDENTITY_INSERT [dbo].[FranchiseHallOfFame] OFF
+
 --HallOfFame Create
 CREATE TABLE [dbo].[HallOfFame](
 	[Id] [int] IDENTITY(1,1) NOT NULL,
@@ -3230,6 +3483,7 @@ CREATE TABLE [dbo].[HallOfFame](
 	[FranchiseId] [int] NULL,
 	[InductionYear] [int] NULL,
 	[VotePercentage] [decimal](5, 2) NULL,
+	[BallotNumber] [int] NULL,
  CONSTRAINT [PK_HallOfFame] PRIMARY KEY CLUSTERED 
 (
 	[Id] ASC
@@ -3252,7 +3506,7 @@ SET IDENTITY_INSERT [dbo].[HallOfFame] ON
 
 IF @KeepExistingValues = 1
 BEGIN
-	INSERT INTO [dbo].[HallOfFame] (Id, PersonId, SportLeagueLevelId, FranchiseId, InductionYear, VotePercentage)
+	INSERT INTO [dbo].[HallOfFame] (Id, PersonId, SportLeagueLevelId, FranchiseId, InductionYear, VotePercentage, BallotNumber)
 	SELECT * 
 	FROM #TempHallOfFameTable
 END
@@ -3469,6 +3723,37 @@ BEGIN
 END
 
 SET IDENTITY_INSERT [dbo].[ItemTypeSpot] OFF
+
+--Leader Create
+CREATE TABLE [dbo].[Leader](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[PersonId] [int] NOT NULL,
+	[LeaderTypeId] [int] NOT NULL,
+	[Year] [int] NOT NULL,
+ CONSTRAINT [PK_Leader] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+
+ALTER TABLE [dbo].[Leader]  WITH CHECK ADD  CONSTRAINT [FK_Leader_Person] FOREIGN KEY([PersonId])
+REFERENCES [dbo].[Person] ([Id])
+ALTER TABLE [dbo].[Leader] CHECK CONSTRAINT [FK_Leader_Person]
+
+ALTER TABLE [dbo].[Leader]  WITH CHECK ADD  CONSTRAINT [FK_Leader_LeaderType] FOREIGN KEY([LeaderTypeId])
+REFERENCES [dbo].[LeaderType] ([Id])
+ALTER TABLE [dbo].[Leader] CHECK CONSTRAINT [FK_Leader_LeaderType]
+
+SET IDENTITY_INSERT [dbo].[Leader] ON
+
+IF @KeepExistingValues = 1
+BEGIN
+	INSERT INTO [dbo].[Leader] (Id, PersonId, [Year])
+	SELECT * 
+	FROM #TempLeaderTable
+END
+
+SET IDENTITY_INSERT [dbo].[Leader] OFF
 
 --MemorabiliaAcquisition Create
 CREATE TABLE [dbo].[MemorabiliaAcquisition](
@@ -4251,6 +4536,38 @@ END
 
 SET IDENTITY_INSERT [dbo].[MemorabiliaTeam] OFF
 
+--PersonAccomplishment Create
+CREATE TABLE [dbo].[PersonAccomplishment](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[PersonId] [int] NOT NULL,
+	[AccomplishmentTypeId] [int] NOT NULL,
+	[Date] [datetime] NULL,
+	[Year] [int] NULL,
+ CONSTRAINT [PK_PersonAccomplishment] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+
+ALTER TABLE [dbo].[PersonAccomplishment]  WITH CHECK ADD  CONSTRAINT [FK_PersonAccomplishment_Person] FOREIGN KEY([PersonId])
+REFERENCES [dbo].[Person] ([Id])
+ALTER TABLE [dbo].[PersonAccomplishment] CHECK CONSTRAINT [FK_PersonAccomplishment_Person]
+
+ALTER TABLE [dbo].[PersonAccomplishment]  WITH CHECK ADD  CONSTRAINT [FK_PersonAccomplishment_AccomplishmentType] FOREIGN KEY([AccomplishmentTypeId])
+REFERENCES [dbo].[AccomplishmentType] ([Id])
+ALTER TABLE [dbo].[PersonAccomplishment] CHECK CONSTRAINT [FK_PersonAccomplishment_AccomplishmentType]
+
+SET IDENTITY_INSERT [dbo].[PersonAccomplishment] ON
+
+IF @KeepExistingValues = 1
+BEGIN
+	INSERT INTO [dbo].[PersonAccomplishment] (Id, PersonId, AccomplishmentTypeId, [Date], [Year])
+	SELECT * 
+	FROM #TempPersonAccomplishmentTable
+END
+
+SET IDENTITY_INSERT [dbo].[PersonAccomplishment] OFF
+
 --PersonAward Create
 CREATE TABLE [dbo].[PersonAward](
 	[Id] [int] IDENTITY(1,1) NOT NULL,
@@ -4307,6 +4624,38 @@ BEGIN
 END
 
 SET IDENTITY_INSERT [dbo].[Personalization] OFF
+
+--PersonCollege Create
+CREATE TABLE [dbo].[PersonCollege](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[PersonId] [int] NOT NULL,
+	[CollegeId] [int] NOT NULL,
+	[BeginYear] [int] NULL,
+	[EndYear] [int] NULL,
+ CONSTRAINT [PK_PersonCollege] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+
+ALTER TABLE [dbo].[PersonCollege]  WITH CHECK ADD  CONSTRAINT [FK_PersonCollege_College] FOREIGN KEY([CollegeId])
+REFERENCES [dbo].[College] ([Id])
+ALTER TABLE [dbo].[PersonCollege] CHECK CONSTRAINT [FK_PersonCollege_College]
+
+ALTER TABLE [dbo].[PersonCollege]  WITH CHECK ADD  CONSTRAINT [FK_PersonCollege_Person] FOREIGN KEY([PersonId])
+REFERENCES [dbo].[Person] ([Id])
+ALTER TABLE [dbo].[PersonCollege] CHECK CONSTRAINT [FK_PersonCollege_Person]
+
+SET IDENTITY_INSERT [dbo].[PersonCollege] ON
+
+IF @KeepExistingValues = 1
+BEGIN
+	INSERT INTO [dbo].[PersonCollege] (Id, PersonId, CollegeId, BeginYear, EndYear)
+	SELECT * 
+	FROM #TempPersonCollegeTable
+END
+
+SET IDENTITY_INSERT [dbo].[PersonCollege] OFF
 
 --PersonNickname Create
 CREATE TABLE [dbo].[PersonNickname](
@@ -4442,6 +4791,69 @@ END
 
 SET IDENTITY_INSERT [dbo].[Pewter] OFF
 
+--RetiredNumber Create
+CREATE TABLE [dbo].[RetiredNumber](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[PersonId] [int] NOT NULL,
+	[FranchiseId] [int] NOT NULL,
+	[PlayerNumber] [int] NOT NULL,
+ CONSTRAINT [PK_RetiredNumber] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+
+ALTER TABLE [dbo].[RetiredNumber]  WITH CHECK ADD  CONSTRAINT [FK_RetiredNumber_Person] FOREIGN KEY([PersonId])
+REFERENCES [dbo].[Person] ([Id])
+ALTER TABLE [dbo].[RetiredNumber] CHECK CONSTRAINT [FK_RetiredNumber_Person]
+
+ALTER TABLE [dbo].[RetiredNumber]  WITH CHECK ADD  CONSTRAINT [FK_RetiredNumber_Franchise] FOREIGN KEY([FranchiseId])
+REFERENCES [dbo].[Franchise] ([Id])
+ALTER TABLE [dbo].[RetiredNumber] CHECK CONSTRAINT [FK_RetiredNumber_Franchise]
+
+SET IDENTITY_INSERT [dbo].[RetiredNumber] ON
+
+IF @KeepExistingValues = 1
+BEGIN
+	INSERT INTO [dbo].[RetiredNumber] (Id, PersonId, FranchiseId, PlayerNumber)
+	SELECT * 
+	FROM #TempRetiredNumberTable
+END
+
+SET IDENTITY_INSERT [dbo].[RetiredNumber] OFF
+
+--SingleSeasonRecord Create
+CREATE TABLE [dbo].[SingleSeasonRecord](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[PersonId] [int] NOT NULL,
+	[RecordTypeId] [int] NOT NULL,
+	[Year] [int] NOT NULL,
+	[Amount] [int] NOT NULL,
+ CONSTRAINT [PK_SingleSeasonRecord] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+
+ALTER TABLE [dbo].[SingleSeasonRecord]  WITH CHECK ADD  CONSTRAINT [FK_SingleSeasonRecord_Person] FOREIGN KEY([PersonId])
+REFERENCES [dbo].[Person] ([Id])
+ALTER TABLE [dbo].[SingleSeasonRecord] CHECK CONSTRAINT [FK_SingleSeasonRecord_Person]
+
+ALTER TABLE [dbo].[SingleSeasonRecord]  WITH CHECK ADD  CONSTRAINT [FK_SingleSeasonRecord_RecordType] FOREIGN KEY([RecordTypeId])
+REFERENCES [dbo].[RecordType] ([Id])
+ALTER TABLE [dbo].[SingleSeasonRecord] CHECK CONSTRAINT [FK_SingleSeasonRecord_RecordType]
+
+SET IDENTITY_INSERT [dbo].[SingleSeasonRecord] ON
+
+IF @KeepExistingValues = 1
+BEGIN
+	INSERT INTO [dbo].[SingleSeasonRecord] (Id, PersonId, RecordTypeId, [Year], Amount)
+	SELECT * 
+	FROM #TempSingleSeasonRecordTable
+END
+
+SET IDENTITY_INSERT [dbo].[SingleSeasonRecord] OFF
+
 --SportService Create
 CREATE TABLE [dbo].[SportService](
 	[Id] [int] IDENTITY(1,1) NOT NULL,
@@ -4569,7 +4981,7 @@ SET IDENTITY_INSERT [dbo].[TeamLeague] OFF
 --WishList Create
 CREATE TABLE [dbo].[WishList](
 	[Id] [int] IDENTITY(1,1) NOT NULL,
-	[ItemTypeId] [int] NOT NULL,
+	[ItemTypeId] [int] NULL,
 	[PersonId] [int] NULL,
 	[Rank] [int] NULL,
 	[IsUpgrade] [int] NULL,

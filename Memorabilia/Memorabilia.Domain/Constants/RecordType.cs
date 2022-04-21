@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using Framework.Extension;
+using System.Linq;
 
 namespace Memorabilia.Domain.Constants
 {
@@ -31,6 +32,11 @@ namespace Memorabilia.Domain.Constants
         public static RecordType Find(int id)
         {
             return All.SingleOrDefault(recordType => recordType.Id == id);
+        }
+
+        public override string ToString()
+        {
+            return !Abbreviation.IsNullOrEmpty() ? Abbreviation : Name;
         }
     }
 }

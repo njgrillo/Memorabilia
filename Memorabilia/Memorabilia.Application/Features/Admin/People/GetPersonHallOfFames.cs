@@ -1,31 +1,27 @@
 ﻿using Demo.Framework.Handler;
 using Memorabilia.Repository.Interfaces;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace Memorabilia.Application.Features.Admin.People
 {
     public class GetPersonHallOfFames
     {
-        public class Handler : QueryHandler<Query, IEnumerable<PersonHallOfFameViewModel>>
+        public class Handler : QueryHandler<Query, PersonHallOfFameViewModel>
         {
-            private readonly IHallOfFameRepository _personHallOfFameRepository;
+            private readonly IPersonRepository _personRepository;
 
-            public Handler(IHallOfFameRepository personHallOfFameRepository)
+            public Handler(IPersonRepository personRepository)
             {
-                _personHallOfFameRepository = personHallOfFameRepository;
+                _personRepository = personRepository;
             }
 
-            protected override async Task<IEnumerable<PersonHallOfFameViewModel>> Handle(Query query)
+            protected override async Task<PersonHallOfFameViewModel> Handle(Query query)
             {
-                var personHallOfFames = await _personHallOfFameRepository.GetAll(query.PersonId).ConfigureAwait(false);
-
-                return personHallOfFames.Select(personHallOfFame => new PersonHallOfFameViewModel(personHallOfFame));
+                return new PersonHallOfFameViewModel(await _personRepository.Get(query.PersonId).ConfigureAwait(false));
             }
         }
 
-        public class Query : IQuery<IEnumerable<PersonHallOfFameViewModel>>
+        public class Query : IQuery<PersonHallOfFameViewModel>
         {
             public Query(int personId)
             {

@@ -5,6 +5,7 @@ using Memorabilia.Web.Controls.Dialogs;
 using Microsoft.AspNetCore.Components;
 using MudBlazor;
 using System;
+using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -63,19 +64,25 @@ namespace Memorabilia.Web.Pages.Admin.People
             Snackbar.Add($"{_viewModel.ItemTitle} was deleted successfully!", Severity.Success);
         }
 
-        private static bool FilterFunc(PersonViewModel viewModel, string search)
+        private bool FilterFunc(PersonViewModel viewModel, string search)
         {
             return search.IsNullOrEmpty() ||
                    viewModel.DisplayName.Contains(search, StringComparison.OrdinalIgnoreCase) ||
                    viewModel.FirstName.Contains(search, StringComparison.OrdinalIgnoreCase) ||
                    viewModel.LastName.Contains(search, StringComparison.OrdinalIgnoreCase) ||
                    viewModel.LegalName.Contains(search, StringComparison.OrdinalIgnoreCase) ||
-                   (!viewModel.MiddleName.IsNullOrEmpty() &&
-                    viewModel.MiddleName.Contains(search, StringComparison.OrdinalIgnoreCase)) ||
-                   (!viewModel.Suffix.IsNullOrEmpty() &&
-                    viewModel.Suffix.Contains(search, StringComparison.OrdinalIgnoreCase)) ||
-                   (!viewModel.Nickname.IsNullOrEmpty() &&
-                    viewModel.Nickname.Contains(search, StringComparison.OrdinalIgnoreCase));
+                   CultureInfo.CurrentCulture.CompareInfo.IndexOf(viewModel.LegalName,
+                                                                  search,
+                                                                  CompareOptions.IgnoreNonSpace) > -1 ||
+                   CultureInfo.CurrentCulture.CompareInfo.IndexOf(viewModel.DisplayName,
+                                                                  search,
+                                                                  CompareOptions.IgnoreNonSpace) > -1 ||
+                   CultureInfo.CurrentCulture.CompareInfo.IndexOf(viewModel.FirstName,
+                                                                  search,
+                                                                  CompareOptions.IgnoreNonSpace) > -1 ||
+                   CultureInfo.CurrentCulture.CompareInfo.IndexOf(viewModel.LastName,
+                                                                  search,
+                                                                  CompareOptions.IgnoreNonSpace) > -1;
         }
     }
 }

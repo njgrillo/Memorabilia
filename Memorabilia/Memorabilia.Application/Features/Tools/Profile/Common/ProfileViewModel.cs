@@ -10,7 +10,10 @@ namespace Memorabilia.Application.Features.Tools.Profile.Common
     {
         private readonly Person _person;
 
-        public ProfileViewModel() { }
+        public ProfileViewModel() 
+        { 
+            _person = new Person();
+        }
 
         public ProfileViewModel(Person person)
         {

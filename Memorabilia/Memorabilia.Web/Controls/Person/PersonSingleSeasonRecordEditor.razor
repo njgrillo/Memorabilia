@@ -1,0 +1,59 @@
+﻿@using Memorabilia.Application.Features.Admin.People
+@using Memorabilia.Web.Controls.DropDowns
+
+<DivRowCol3>
+    <Content>
+        <MudSelect @bind-Value="@_viewModel.RecordTypeId"
+                   @bind-Value:event="ValueChanged" 
+                   Label="Record Type"  
+                   Variant="Variant.Outlined">
+            <MudSelectItem Value="@(0)">--Select--</MudSelectItem>
+            <Iterations Items="_viewModel.RecordTypes" Context="recordType">
+                <MudSelectItem Value="@recordType.Id">@recordType.ToString()</MudSelectItem>
+            </Iterations>	
+        </MudSelect>
+    </Content>
+    <ContentColumn2>
+        <MudNumericField @bind-Value="_viewModel.Amount" 
+                         Label="Amount"
+                         Variant="Variant.Outlined" />
+    </ContentColumn2>
+</DivRowCol3>
+<DivLeftAlign>
+    <Content>
+        <MudButton ButtonType="MudBlazor.ButtonType.Button" 
+                   Color="MudBlazor.Color.Success"
+                   OnClick="Add"
+                   Size="MudBlazor.Size.Medium"                                  
+                   Variant="Variant.Filled">Add</MudButton>
+    </Content>
+</DivLeftAlign>
+<DivRowCol6>
+    <Content>
+         <MudTable Bordered="false"
+                   Dense="false" 
+                   Hover="true"
+                   Items="@SingleSeasonRecords.Where(record => !record.IsDeleted).ToList()"    
+                   Striped="true">
+            <HeaderContent>
+                <MudTh>Record</MudTh>
+                <MudTh>Year</MudTh>
+                <MudTh>Amount</MudTh>
+                <MudTh></MudTh>
+            </HeaderContent>
+            <RowTemplate>
+                <MudTd DataLabel="Record">@context.RecordTypeName</MudTd>
+                <MudTd DataLabel="Year">@context.Year</MudTd>
+                <MudTd DataLabel="Amount">@context.Amount</MudTd>
+                <MudTd DataLabel="">
+                    <MudTooltip Text="Delete">
+                        <MudFab Color="MudBlazor.Color.Secondary"
+                                Icon="@Icons.Outlined.DeleteOutline"
+                                OnClick="@(_ => Remove(context.RecordTypeId, context.Year, context.Amount))" />
+                    </MudTooltip>  
+                </MudTd>
+            </RowTemplate>
+        </MudTable>
+    </Content>
+</DivRowCol6>
+

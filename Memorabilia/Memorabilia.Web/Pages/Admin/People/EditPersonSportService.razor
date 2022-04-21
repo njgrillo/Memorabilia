@@ -21,7 +21,12 @@
                         PersonId="_viewModel.PersonId"
                         PersonStep="_viewModel.PersonStep" />
     </TimelineContent>
-    <Content>        
+    <Content>     
+        <DivRowCol3>
+            <Content>
+                <MudText Typo="Typo.h3">Service Details</MudText>
+            </Content>
+        </DivRowCol3>
         <DivRowCol3>
             <Content>
                 <MudDatePicker @bind-Date="_viewModel.DebutDate"
@@ -32,23 +37,37 @@
                                Variant="Variant.Outlined" />
             </Content>
             <ContentColumn2>
-                <MudDatePicker @bind-Date="_viewModel.FreeAgentSigningDate"
-                               DateFormat="MM/dd/yyyy"
-                               Editable="true"
-                               Label="Free Agent Signing Date"
-                               Mask="@(new DateMask("MM/dd/yyyy"))" 
-                               Variant="Variant.Outlined" />                
-            </ContentColumn2>
-        </DivRowCol3>
-        <DivRowCol3>
-            <Content>
                 <MudDatePicker @bind-Date="_viewModel.LastAppearanceDate"
                                DateFormat="MM/dd/yyyy"
                                Editable="true"
                                Label="Last Appearance Date"
                                Mask="@(new DateMask("MM/dd/yyyy"))" 
-                               Variant="Variant.Outlined" />
+                               Variant="Variant.Outlined" />                              
+            </ContentColumn2>
+        </DivRowCol3>
+        <DivRowCol3>
+            <Content>
+                <MudDatePicker @bind-Date="_viewModel.FreeAgentSigningDate"
+                               DateFormat="MM/dd/yyyy"
+                               Editable="true"
+                               Label="Free Agent Signing Date"
+                               Mask="@(new DateMask("MM/dd/yyyy"))" 
+                               Variant="Variant.Outlined" />  
             </Content>
         </DivRowCol3>
+        <br />
+        <DivRowCol12>
+            <Content>
+                <MudText Typo="Typo.h3">Colleges</MudText>
+                <PersonCollegeEditor Colleges="_viewModel.Colleges" />
+            </Content>
+        </DivRowCol12>
+        <br />
+        <DivRowCol12>
+            <Content>
+                <MudText Typo="Typo.h3">Draft Details</MudText>
+                <PersonDraftEditor Drafts="_viewModel.Drafts" />
+            </Content>
+        </DivRowCol12>        
     </Content>
 </EditPage>

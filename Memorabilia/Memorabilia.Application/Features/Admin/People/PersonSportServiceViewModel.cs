@@ -1,25 +1,25 @@
 ﻿using Memorabilia.Domain.Entities;
-using System;
+using System.Collections.Generic;
 
 namespace Memorabilia.Application.Features.Admin.People
 {
     public class PersonSportServiceViewModel
     {
-        private readonly SportService _sportService;
+        private readonly Person _person;
 
         public PersonSportServiceViewModel() { }
 
-        public PersonSportServiceViewModel(SportService sportService)
-        { 
-            _sportService = sportService;
+        public PersonSportServiceViewModel(Person person)
+        {
+            _person = person;
         }
 
-        public DateTime? DebutDate => _sportService?.DebutDate;
+        public List<PersonCollege> Colleges => _person.Colleges;
 
-        public DateTime? FreeAgentSigningDate => _sportService?.FreeAgentSigningDate;        
+        public List<Draft> Drafts => _person.Drafts;
 
-        public DateTime? LastAppearanceDate => _sportService?.LastAppearanceDate;
+        public int PersonId => _person.Id;
 
-        public int PersonId => _sportService?.PersonId ?? 0;
+        public SportService Service => _person.Service;
     }
 }

@@ -18,9 +18,18 @@ namespace Memorabilia.Repository
         }
 
         private IQueryable<Person> Person => _context.Set<Person>()
+                                                     .Include(person => person.Accomplishments)
+                                                     .Include(person => person.AllStars)
+                                                     .Include(person => person.Awards)
+                                                     .Include(person => person.CareerRecords)
+                                                     .Include(person => person.Colleges)
+                                                     .Include(person => person.FranchiseHallOfFames)
                                                      .Include(person => person.HallOfFames)
+                                                     .Include(person => person.Leaders)
                                                      .Include(person => person.Occupations)
+                                                     .Include(person => person.RetiredNumbers)
                                                      .Include(person => person.Service)
+                                                     .Include(person => person.SingleSeasonRecords)
                                                      .Include(person => person.Teams)
                                                      .Include("Teams.Team");
 

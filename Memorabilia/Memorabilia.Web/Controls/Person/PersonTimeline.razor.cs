@@ -13,6 +13,15 @@ namespace Memorabilia.Web.Controls.Person
         public EditModeType EditMode { get; set; } = EditModeType.Add;
 
         [Parameter]
+        public MudBlazor.Severity PersonAccoladeEditAlertSeverity { get; set; } = MudBlazor.Severity.Info;
+
+        [Parameter]
+        public string PersonAccoladeEditAlertTitle { get; set; }
+
+        [Parameter]
+        public MudBlazor.Color PersonAccoladeEditColor { get; set; } = MudBlazor.Color.Info;
+
+        [Parameter]
         public MudBlazor.Severity PersonEditAlertSeverity { get; set; } = MudBlazor.Severity.Info;
 
         [Parameter]
@@ -20,18 +29,6 @@ namespace Memorabilia.Web.Controls.Person
 
         [Parameter]
         public MudBlazor.Color PersonEditColor { get; set; } = MudBlazor.Color.Info;
-
-        [Parameter]
-        public int PersonId { get; set; }
-
-        [Parameter]
-        public MudBlazor.Severity PersonOccupationEditAlertSeverity { get; set; } = MudBlazor.Severity.Info;
-
-        [Parameter]
-        public string PersonOccupationEditAlertTitle { get; set; }
-
-        [Parameter]
-        public MudBlazor.Color PersonOccupationEditColor { get; set; } = MudBlazor.Color.Info;
 
         [Parameter]
         public MudBlazor.Severity PersonHallOfFameEditAlertSeverity { get; set; } = MudBlazor.Severity.Info;
@@ -43,6 +40,9 @@ namespace Memorabilia.Web.Controls.Person
         public MudBlazor.Color PersonHallOfFameEditColor { get; set; } = MudBlazor.Color.Info;
 
         [Parameter]
+        public int PersonId { get; set; }
+
+        [Parameter]
         public MudBlazor.Severity PersonImageEditAlertSeverity { get; set; } = MudBlazor.Severity.Info;
 
         [Parameter]
@@ -50,6 +50,15 @@ namespace Memorabilia.Web.Controls.Person
 
         [Parameter]
         public MudBlazor.Color PersonImageEditColor { get; set; } = MudBlazor.Color.Info;
+
+        [Parameter]
+        public MudBlazor.Severity PersonOccupationEditAlertSeverity { get; set; } = MudBlazor.Severity.Info;
+
+        [Parameter]
+        public string PersonOccupationEditAlertTitle { get; set; }
+
+        [Parameter]
+        public MudBlazor.Color PersonOccupationEditColor { get; set; } = MudBlazor.Color.Info;
 
         [Parameter]
         public MudBlazor.Severity PersonSportServiceEditAlertSeverity { get; set; } = MudBlazor.Severity.Info;
@@ -61,6 +70,9 @@ namespace Memorabilia.Web.Controls.Person
         public MudBlazor.Color PersonSportServiceEditColor { get; set; } = MudBlazor.Color.Info;
 
         [Parameter]
+        public PersonStep PersonStep { get; set; }
+
+        [Parameter]
         public MudBlazor.Severity PersonTeamEditAlertSeverity { get; set; } = MudBlazor.Severity.Info;
 
         [Parameter]
@@ -69,8 +81,7 @@ namespace Memorabilia.Web.Controls.Person
         [Parameter]
         public MudBlazor.Color PersonTeamEditColor { get; set; } = MudBlazor.Color.Info;
 
-        [Parameter]
-        public PersonStep PersonStep { get; set; }
+        
 
         private string _mudAlertClass;
 
@@ -78,6 +89,7 @@ namespace Memorabilia.Web.Controls.Person
         {
             _mudAlertClass = PersonId > 0 ? "can-click" : string.Empty;
 
+            PersonAccoladeEditAlertTitle = PersonStep.Accolade.Name;
             PersonEditAlertTitle = PersonStep.Person.Name;
             PersonHallOfFameEditAlertTitle = PersonStep.HallOfFame.Name;
             PersonImageEditAlertTitle = PersonStep.Image.Name;
@@ -112,8 +124,23 @@ namespace Memorabilia.Web.Controls.Person
                 return;
             }
 
+            if (PersonStep == PersonStep.Accolade)
+            {
+                PersonEditAlertSeverity = MudBlazor.Severity.Success;
+                PersonEditColor = MudBlazor.Color.Success;
+                PersonOccupationEditAlertSeverity = MudBlazor.Severity.Success;
+                PersonOccupationEditColor = MudBlazor.Color.Success;
+                PersonSportServiceEditAlertSeverity = MudBlazor.Severity.Success;
+                PersonSportServiceEditColor = MudBlazor.Color.Success;
+                PersonTeamEditAlertSeverity = MudBlazor.Severity.Success;
+                PersonTeamEditColor = MudBlazor.Color.Success;
+                return;
+            }
+
             if (PersonStep == PersonStep.HallOfFame)
             {
+                PersonAccoladeEditAlertSeverity = MudBlazor.Severity.Success;
+                PersonAccoladeEditColor = MudBlazor.Color.Success;
                 PersonEditAlertSeverity = MudBlazor.Severity.Success;
                 PersonEditColor = MudBlazor.Color.Success;
                 PersonOccupationEditAlertSeverity = MudBlazor.Severity.Success;
@@ -127,6 +154,8 @@ namespace Memorabilia.Web.Controls.Person
 
             if (PersonStep == PersonStep.Image)
             {
+                PersonAccoladeEditAlertSeverity = MudBlazor.Severity.Success;
+                PersonAccoladeEditColor = MudBlazor.Color.Success;
                 PersonEditAlertSeverity = MudBlazor.Severity.Success;
                 PersonEditColor = MudBlazor.Color.Success;
                 PersonHallOfFameEditAlertSeverity = MudBlazor.Severity.Success;

@@ -7,16 +7,10 @@
                 <MudText Typo="Typo.h4"><b>@_viewModel.NameHeader</b></MudText>
             </Content>
             <ContentColumn2>
-                <MudChip Color="MudBlazor.Color.Secondary">Secondary</MudChip>
-                <MudChip Color="MudBlazor.Color.Info">Info</MudChip>
-                <MudChip Color="MudBlazor.Color.Success">Success</MudChip>
-                <MudChip Color="MudBlazor.Color.Warning">Warning</MudChip>
+                <MudChip Color="MudBlazor.Color.Success">@_viewModel.AllStarSummaryDisplayText</MudChip>
             </ContentColumn2>
             <ContentColumn3>
-                <MudChip Color="MudBlazor.Color.Secondary">Secondary</MudChip>
-                <MudChip Color="MudBlazor.Color.Info">Info</MudChip>
-                <MudChip Color="MudBlazor.Color.Success">Success</MudChip>
-                <MudChip Color="MudBlazor.Color.Warning">Warning</MudChip>
+                <MudChip Color="MudBlazor.Color.Success">@_viewModel.ChampionshipSummaryDisplayText</MudChip>
             </ContentColumn3>
         </DivRowCol4>
         <DivRowCol4>
@@ -24,16 +18,12 @@
                 <MudText Typo="Typo.h6">@_viewModel.Nicknames</MudText>
             </Content>
             <ContentColumn2>
-                <MudChip Color="MudBlazor.Color.Secondary">Secondary</MudChip>
-                <MudChip Color="MudBlazor.Color.Info">Info</MudChip>
-                <MudChip Color="MudBlazor.Color.Success">Success</MudChip>
-                <MudChip Color="MudBlazor.Color.Warning">Warning</MudChip>
+                <Iterations Items="@_viewModel.DistinctAwards">
+                    <MudChip Color="MudBlazor.Color.Success">@($"{_viewModel.Awards.Where(award => award.AwardTypeId == context.AwardTypeId).Count()}x {context.AwardTypeAbbreviatedName}")</MudChip>
+                </Iterations>
             </ContentColumn2>
             <ContentColumn3>
-                <MudChip Color="MudBlazor.Color.Secondary">Secondary</MudChip>
-                <MudChip Color="MudBlazor.Color.Info">Info</MudChip>
-                <MudChip Color="MudBlazor.Color.Success">Success</MudChip>
-                <MudChip Color="MudBlazor.Color.Warning">Warning</MudChip>
+                
             </ContentColumn3>
         </DivRowCol4>
         <DivRowCol4>
@@ -41,16 +31,12 @@
                 <MudText Typo="Typo.h6">@_viewModel.LifespanHeader</MudText>
             </Content>
             <ContentColumn2>
-                <MudChip Color="MudBlazor.Color.Secondary">Secondary</MudChip>
-                <MudChip Color="MudBlazor.Color.Info">Info</MudChip>
-                <MudChip Color="MudBlazor.Color.Success">Success</MudChip>
-                <MudChip Color="MudBlazor.Color.Warning">Warning</MudChip>
+                <Iterations Items="@_viewModel.DistinctLeaders">
+                    <MudChip Color="MudBlazor.Color.Success">@($"{_viewModel.Leaders.Where(leader => leader.LeaderTypeId == context.LeaderTypeId).Count()}x {context.LeaderTypeAbbreviatedName}")</MudChip>
+                </Iterations>
             </ContentColumn2>
             <ContentColumn3>
-                <MudChip Color="MudBlazor.Color.Secondary">Secondary</MudChip>
-                <MudChip Color="MudBlazor.Color.Info">Info</MudChip>
-                <MudChip Color="MudBlazor.Color.Success">Success</MudChip>
-                <MudChip Color="MudBlazor.Color.Warning">Warning</MudChip>
+
             </ContentColumn3>
         </DivRowCol4>
         <DivRowCol4>
@@ -61,8 +47,15 @@
                           Src="@_viewModel.PersonImageData" 
                           Width="500"   />
             </Content>
-            <ContentColumn2>
-                <MudText Typo="Typo.h6">Draft Data</MudText>
+            <ContentColumn2>                
+                <PrettyBlazor.Condition Evaluation="_viewModel.HasDraftData">
+                    <Match>
+                        <MudText Typo="Typo.h6"><b>Draft Details</b></MudText>
+                        <Iterations Items="@_viewModel.Drafts">
+                            <MudText Typo="Typo.h6">@context.ToString()</MudText>
+                        </Iterations>
+                    </Match>
+                </PrettyBlazor.Condition>  
                 <br />
                 <MudText Typo="Typo.h6">@_viewModel.Debut</MudText>
                 <MudText Typo="Typo.h6">@_viewModel.LastAppearance</MudText>
@@ -72,6 +65,23 @@
                 <MudText Typo="Typo.h6">Home Runs</MudText>
                 <MudText Typo="Typo.h6">RBIs</MudText>
                 <br />
+                <PrettyBlazor.Condition Evaluation="_viewModel.HasCareerRecords">
+                    <Match>
+                        <MudText Typo="Typo.h6"><b>Career Records:</b></MudText>
+                        <Iterations Items="@_viewModel.CareerRecords">
+                            <MudText Typo="Typo.h6">@context.ToString()</MudText>
+                        </Iterations>
+                    </Match>
+                </PrettyBlazor.Condition>   
+                <br />
+                <PrettyBlazor.Condition Evaluation="_viewModel.HasSingleSeasonRecords">
+                    <Match>
+                        <MudText Typo="Typo.h6"><b>Single Season Records:</b></MudText>
+                        <Iterations Items="@_viewModel.SingleSeasonRecords">
+                            <MudText Typo="Typo.h6">@context.ToString()</MudText>
+                        </Iterations>
+                    </Match>
+                </PrettyBlazor.Condition> 
             </ContentColumn2>
         </DivRowCol4>
         <DivRowCol4>

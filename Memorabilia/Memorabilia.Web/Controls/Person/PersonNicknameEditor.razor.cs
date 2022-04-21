@@ -1,4 +1,5 @@
-﻿using Memorabilia.Application.Features.Admin.People;
+﻿using Framework.Extension;
+using Memorabilia.Application.Features.Admin.People;
 using Microsoft.AspNetCore.Components;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,6 +15,9 @@ namespace Memorabilia.Web.Controls.Person
 
         private void Add()
         {
+            if (_viewModel.Nickname.IsNullOrEmpty())
+                return;
+
             Nicknames.Add(_viewModel);
 
             _viewModel = new SavePersonNicknameViewModel();

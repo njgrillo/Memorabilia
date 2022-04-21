@@ -7,7 +7,14 @@ namespace Memorabilia.Domain.Entities
     {
         public Team() { }
 
-        public Team(int franchiseId, string name, string location, string nickname, string abbreviation, int? beginYear, int? endYear, string imagePath)
+        public Team(int franchiseId, 
+                    string name, 
+                    string location, 
+                    string nickname, 
+                    string abbreviation, 
+                    int? beginYear, 
+                    int? endYear, 
+                    string imagePath)
         {
             FranchiseId = franchiseId;
             Name = name;
@@ -22,6 +29,8 @@ namespace Memorabilia.Domain.Entities
         public string Abbreviation { get; private set; }
 
         public int? BeginYear { get; private set; }
+
+        public virtual List<Champion> Championships { get; private set; } = new();
 
         public virtual List<TeamConference> Conferences { get; private set; } = new();
 
@@ -43,6 +52,11 @@ namespace Memorabilia.Domain.Entities
 
         public string Nickname { get; private set; }
 
+        public void RemoveChampionships(int[] championIds)
+        {
+            Championships.RemoveAll(champion => championIds.Contains(champion.Id));
+        }
+
         public void RemoveConferences(int[] teamConferenceIds)
         {
             Conferences.RemoveAll(teamConference => teamConferenceIds.Contains(teamConference.Id));
@@ -58,7 +72,13 @@ namespace Memorabilia.Domain.Entities
             Leagues.RemoveAll(teamLeague => teamLeagueIds.Contains(teamLeague.Id));
         }
 
-        public void Set(string name, string location, string nickname, string abbreviation, int? beginYear, int? endYear, string imagePath)
+        public void Set(string name, 
+                        string location, 
+                        string nickname, 
+                        string abbreviation, 
+                        int? beginYear, 
+                        int? endYear, 
+                        string imagePath)
         {
             Name = name;
             Location = location;
@@ -67,6 +87,19 @@ namespace Memorabilia.Domain.Entities
             BeginYear = beginYear;
             EndYear = endYear;
             ImagePath = imagePath;
+        }
+
+        public void SetChampionship(int championId, int championTypeId, int year)
+        {
+            var championship = championId > 0 ? Championships.SingleOrDefault(championship => championship.Id == championId) : null;
+
+            if (championship == null)
+            {
+                Championships.Add(new Champion(championTypeId, Id, year));
+                return;
+            }
+
+            championship.Set(Id, championTypeId, year);
         }
 
         public void SetConference(int teamConferenceId, int conferenceId, int? beginYear, int? endYear)

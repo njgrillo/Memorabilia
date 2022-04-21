@@ -1,26 +1,23 @@
 ﻿using Memorabilia.Domain.Entities;
+using System.Collections.Generic;
 
 namespace Memorabilia.Application.Features.Admin.People
 {
     public class PersonHallOfFameViewModel
     {
-        private readonly HallOfFame _personHallOfFame;
+        private readonly Person _person;
 
         public PersonHallOfFameViewModel() { }
 
-        public PersonHallOfFameViewModel(HallOfFame personHallOfFame)
+        public PersonHallOfFameViewModel(Person person)
         {
-            _personHallOfFame = personHallOfFame;
+            _person = person;
         }
 
-        public int Id => _personHallOfFame.Id;
+        public List<FranchiseHallOfFame> FranchiseHallOfFames => _person.FranchiseHallOfFames;
 
-        public int? InductionYear => _personHallOfFame.InductionYear;
+        public List<HallOfFame> HallOfFames => _person.HallOfFames;
 
-        public int PersonId => _personHallOfFame.PersonId;
-
-        public int SportLeagueLevelId => _personHallOfFame.SportLeagueLevelId;
-
-        public decimal? VotePercentage => _personHallOfFame.VotePercentage;
+        public int PersonId => _person.Id;
     }
 }

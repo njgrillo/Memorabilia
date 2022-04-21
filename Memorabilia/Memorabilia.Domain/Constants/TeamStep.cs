@@ -4,6 +4,7 @@ namespace Memorabilia.Domain.Constants
 {
     public sealed class TeamStep
     {
+        public static readonly TeamStep Championship = new(5, "Championships");
         public static readonly TeamStep Conference = new(3, "Conferences");
         public static readonly TeamStep Division = new(2, "Divisions");       
         public static readonly TeamStep League = new(4, "Leagues");       
@@ -11,6 +12,7 @@ namespace Memorabilia.Domain.Constants
 
         public static readonly TeamStep[] All =
         {
+           Championship,
            Conference,
            Division,
            League,

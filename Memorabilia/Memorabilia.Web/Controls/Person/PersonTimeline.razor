@@ -36,6 +36,15 @@
                           Severity="@PersonTeamEditAlertSeverity">@PersonTeamEditAlertTitle</MudAlert>
             </ItemContent>
         </MudTimelineItem>
+        <MudTimelineItem Color="@PersonAccoladeEditColor" 
+                         Variant="Variant.Filled">
+            <ItemContent>
+                <MudAlert style="@(GetMudAlertStyle(PersonStep.Accolade))"
+                          Class="@_mudAlertClass" 
+                          OnClick="@(_ => Navigate("Accolade"))"
+                          Severity="@PersonAccoladeEditAlertSeverity">@PersonAccoladeEditAlertTitle</MudAlert>
+            </ItemContent>
+        </MudTimelineItem>
         <MudTimelineItem Color="@PersonHallOfFameEditColor" 
                          Variant="Variant.Filled">
             <ItemContent>

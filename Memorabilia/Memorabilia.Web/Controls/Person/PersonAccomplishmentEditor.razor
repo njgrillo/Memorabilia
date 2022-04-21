@@ -1,0 +1,58 @@
+﻿@using Memorabilia.Application.Features.Admin.People
+@using Memorabilia.Web.Controls.DropDowns
+
+<DivRowCol3>
+    <Content>
+        <MudSelect @bind-Value="@_viewModel.AccomplishmentTypeId"
+                   @bind-Value:event="ValueChanged" 
+                   Label="Accomplishment"  
+                   Variant="Variant.Outlined">
+            <MudSelectItem Value="@(0)">--Select--</MudSelectItem>
+            <Iterations Items="_viewModel.AccomplishmentTypes" Context="accomplishmentType">
+                <MudSelectItem Value="@accomplishmentType.Id">@accomplishmentType.Name</MudSelectItem>
+            </Iterations>	
+        </MudSelect>
+    </Content>
+    <ContentColumn2>
+        <MudNumericField @bind-Value="_viewModel.Year" 
+                         Label="Year"
+                         Variant="Variant.Outlined" />
+    </ContentColumn2>
+</DivRowCol3>
+<DivLeftAlign>
+    <Content>
+        <MudButton ButtonType="MudBlazor.ButtonType.Button" 
+                   Color="MudBlazor.Color.Success"
+                   OnClick="Add"
+                   Size="MudBlazor.Size.Medium"                                  
+                   Variant="Variant.Filled">Add</MudButton>
+    </Content>
+</DivLeftAlign>
+<DivRowCol6>
+    <Content>
+         <MudTable Bordered="false"
+                   Dense="false" 
+                   Hover="true"
+                   Items="@Accomplishments.Where(accomplishment => !accomplishment.IsDeleted).ToList()"    
+                   Striped="true">
+            <HeaderContent>
+                <MudTh>Accomplishment</MudTh>
+                <MudTh>Date</MudTh>
+                <MudTh>Year</MudTh>
+                <MudTh></MudTh>
+            </HeaderContent>
+            <RowTemplate>
+                <MudTd DataLabel="Accomplishment">@context.AccomplishmentTypeName</MudTd>
+                <MudTd DataLabel="Date">@context.Date</MudTd>
+                <MudTd DataLabel="Year">@context.Year</MudTd>
+                <MudTd DataLabel="">
+                    <MudTooltip Text="Delete">
+                        <MudFab Color="MudBlazor.Color.Secondary"
+                                Icon="@Icons.Outlined.DeleteOutline"
+                                OnClick="@(_ => Remove(context.AccomplishmentTypeId, context.Date, context.Year))" />
+                    </MudTooltip>  
+                </MudTd>
+            </RowTemplate>
+        </MudTable>
+    </Content>
+</DivRowCol6>

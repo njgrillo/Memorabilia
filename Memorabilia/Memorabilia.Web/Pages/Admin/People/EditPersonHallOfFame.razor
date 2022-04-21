@@ -4,7 +4,6 @@
 @using Memorabilia.Web.Controls.Person
 
 <EditPage ContinueNavigationPath="@_viewModel.ContinueNavigationPath"
-          DisplaySaveContinueButton="false"
           EditMode="_viewModel.EditModeType"
           ExitNavigationPath="@_viewModel.ExitNavigationPath"
           ImagePath="@_viewModel.ImagePath"
@@ -25,7 +24,15 @@
     <Content>
         <DivRowCol12>
             <Content>
+                <MudText Typo="Typo.h3">Sport Hall of Fames</MudText>
                 <PersonHallOfFameEditor HallOfFames="_viewModel.HallOfFames" />
+            </Content>
+        </DivRowCol12>
+        <br />
+        <DivRowCol12>
+            <Content>
+                <MudText Typo="Typo.h3">Franchise Hall of Fames</MudText>
+                <PersonFranchiseHallOfFameEditor FranchiseHallOfFames="_viewModel.FranchiseHallOfFames" />
             </Content>
         </DivRowCol12>
     </Content>

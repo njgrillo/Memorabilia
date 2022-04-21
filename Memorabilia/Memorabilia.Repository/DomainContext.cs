@@ -17,13 +17,15 @@ namespace Memorabilia.Repository
         {
             modelBuilder.Entity<AccomplishmentType>();
             modelBuilder.Entity<AcquisitionType>();
-            modelBuilder.Entity<AuthenticationCompany>();
+            modelBuilder.Entity<AuthenticationCompany>();           
             modelBuilder.Entity<AwardType>();
             modelBuilder.Entity<BammerType>();
             modelBuilder.Entity<BaseballType>();
             modelBuilder.Entity<BasketballType>();
             modelBuilder.Entity<BatType>();
             modelBuilder.Entity<Brand>();
+            modelBuilder.Entity<ChampionType>();
+            modelBuilder.Entity<College>();
             modelBuilder.Entity<Color>();
             modelBuilder.Entity<Commissioner>();
             modelBuilder.Entity<Condition>();
@@ -53,12 +55,14 @@ namespace Memorabilia.Repository
             modelBuilder.Entity<JerseyQualityType>();
             modelBuilder.Entity<JerseyStyleType>();
             modelBuilder.Entity<JerseyType>();
+            modelBuilder.Entity<LeaderType>();
             modelBuilder.Entity<League>();
             modelBuilder.Entity<LevelType>();
             modelBuilder.Entity<MagazineType>();
             modelBuilder.Entity<Occupation>();
             modelBuilder.Entity<Orientation>();
             modelBuilder.Entity<Person>();
+            modelBuilder.Entity<PersonAward>();
             modelBuilder.Entity<PersonNickname>();
             modelBuilder.Entity<PersonOccupation>();
             modelBuilder.Entity<PersonTeam>();

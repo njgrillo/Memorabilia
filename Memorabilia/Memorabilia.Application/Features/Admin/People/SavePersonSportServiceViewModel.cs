@@ -1,5 +1,7 @@
 ﻿using Memorabilia.Domain.Constants;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Memorabilia.Application.Features.Admin.People
 {
@@ -9,9 +11,11 @@ namespace Memorabilia.Application.Features.Admin.People
 
         public SavePersonSportServiceViewModel(int personId, PersonSportServiceViewModel viewModel)
         {
-            DebutDate = viewModel.DebutDate;
-            FreeAgentSigningDate = viewModel.FreeAgentSigningDate;
-            LastAppearanceDate = viewModel.LastAppearanceDate;
+            Colleges = viewModel.Colleges.Select(college => new SavePersonCollegeViewModel(college)).ToList();
+            DebutDate = viewModel.Service?.DebutDate;
+            Drafts = viewModel.Drafts.Select(draft => new SavePersonDraftViewModel(draft)).ToList();
+            FreeAgentSigningDate = viewModel.Service?.FreeAgentSigningDate;
+            LastAppearanceDate = viewModel.Service?.LastAppearanceDate;
             PersonId = personId;
         }
 
@@ -19,9 +23,14 @@ namespace Memorabilia.Application.Features.Admin.People
 
         public override string ContinueNavigationPath => $"People/Team/Edit/{PersonId}";
 
+        public List<SavePersonCollegeViewModel> Colleges { get; set; } = new();
+
         public DateTime? DebutDate { get; set; }
 
-        public override EditModeType EditModeType => DebutDate.HasValue || 
+        public List<SavePersonDraftViewModel> Drafts { get; set; } = new();
+
+        public override EditModeType EditModeType => Drafts.Any() ||
+                                                     DebutDate.HasValue || 
                                                      FreeAgentSigningDate.HasValue || 
                                                      LastAppearanceDate.HasValue ? EditModeType.Update : EditModeType.Add;
 
@@ -40,5 +49,7 @@ namespace Memorabilia.Application.Features.Admin.People
         public int PersonId { get; set; }
 
         public PersonStep PersonStep => PersonStep.SportService;
+
+        public SavePersonSportServiceViewModel Service { get; set; }
     }
 }

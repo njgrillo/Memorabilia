@@ -1,7 +1,7 @@
 ﻿using Framework.Domain.Command;
 using Framework.Handler;
+using Memorabilia.Domain.Entities;
 using Memorabilia.Repository.Interfaces;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -22,31 +22,53 @@ namespace Memorabilia.Application.Features.Admin.People
             {
                 var person = await _personRepository.Get(command.PersonId).ConfigureAwait(false);
 
-                if (command.DeletedHallOfFameIds.Any())
-                    person.RemoveHallOfFames(command.DeletedHallOfFameIds);
+                UpdateFranchiseHallOfFames(command, person);
+                UpdateHallOfFames(command, person);
+
+                await _personRepository.Update(person).ConfigureAwait(false);
+            }
+
+            private static void UpdateFranchiseHallOfFames(Command command, Person person)
+            {
+                person.RemoveFranchiseHallOfFames(command.DeletedFranchiseHallOfFameIds);
+
+                foreach (var hallOfFame in command.FranchiseHallOfFames.Where(hof => !hof.IsDeleted))
+                {
+                    person.SetFranchiseHallOfFame(hallOfFame.FranchiseId, hallOfFame.Year);
+                }
+            }
+
+            private static void UpdateHallOfFames(Command command, Person person)
+            {
+                person.RemoveHallOfFames(command.DeletedHallOfFameIds);
 
                 foreach (var hallOfFame in command.HallOfFames.Where(hof => !hof.IsDeleted))
                 {
-                    person.SetHallOfFame(hallOfFame.SportLeagueLevelId, 
-                                         hallOfFame.InductionYear, 
-                                         hallOfFame.VotePercentage);
+                    person.SetHallOfFame(hallOfFame.SportLeagueLevelId,
+                                         hallOfFame.InductionYear,
+                                         hallOfFame.VotePercentage,
+                                         hallOfFame.BallotNumber > 0 ? hallOfFame.BallotNumber : null);
                 }
-
-                await _personRepository.Update(person).ConfigureAwait(false);
             }
         }
 
         public class Command : DomainCommand, ICommand
         {
-            public Command(int personId, IEnumerable<SavePersonHallOfFameViewModel> hallOfFames)
-            {
+            private readonly SavePersonHallOfFamesViewModel _viewModel;
+
+            public Command(int personId, SavePersonHallOfFamesViewModel viewModel)
+            {               
                 PersonId = personId;
-                HallOfFames = hallOfFames.ToArray();
+                _viewModel = viewModel;
             }
 
-            public int[] DeletedHallOfFameIds => HallOfFames.Where(hof => hof.IsDeleted).Select(hof => hof.Id).ToArray();
+            public int[] DeletedFranchiseHallOfFameIds => _viewModel.FranchiseHallOfFames.Where(hof => hof.IsDeleted).Select(hof => hof.Id).ToArray();
 
-            public SavePersonHallOfFameViewModel[] HallOfFames { get; }
+            public int[] DeletedHallOfFameIds => _viewModel.HallOfFames.Where(hof => hof.IsDeleted).Select(hof => hof.Id).ToArray();
+
+            public SavePersonFranchiseHallOfFameViewModel[] FranchiseHallOfFames => _viewModel.FranchiseHallOfFames.ToArray();
+
+            public SavePersonHallOfFameViewModel[] HallOfFames => _viewModel.HallOfFames.ToArray();
 
             public int PersonId { get; }
         }

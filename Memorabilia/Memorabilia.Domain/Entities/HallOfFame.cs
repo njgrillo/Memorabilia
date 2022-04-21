@@ -4,13 +4,16 @@
     {
         public HallOfFame() { }
 
-        public HallOfFame(int? inductionYear, int personId, int sportLeagueLevelId, decimal? votePercentage)
+        public HallOfFame(int? inductionYear, int personId, int sportLeagueLevelId, decimal? votePercentage, int? ballotNumber)
         {
             InductionYear = inductionYear;
             PersonId = personId;
             SportLeagueLevelId = sportLeagueLevelId;
             VotePercentage = votePercentage;
+            BallotNumber = ballotNumber;
         }
+
+        public int? BallotNumber { get; private set; }
 
         public int? InductionYear { get; private set; }
 
@@ -20,11 +23,12 @@
 
         public decimal? VotePercentage { get; private set; }
 
-        public void Set(int? inductionYear, int sportLeagueLevelId, decimal? votePercentage)
+        public void Set(int? inductionYear, int sportLeagueLevelId, decimal? votePercentage, int? ballotNumber)
         {
             InductionYear = inductionYear;
             SportLeagueLevelId = sportLeagueLevelId;
             VotePercentage = votePercentage;
+            BallotNumber = ballotNumber;
         }
     }
 }

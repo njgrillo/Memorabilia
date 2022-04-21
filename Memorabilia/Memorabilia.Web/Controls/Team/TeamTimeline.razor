@@ -37,5 +37,14 @@
                           Severity="@TeamLeagueEditAlertSeverity">@TeamLeagueEditAlertTitle</MudAlert>
             </ItemContent>
         </MudTimelineItem>
+        <MudTimelineItem Color="@TeamChampionshipEditColor" 
+                         Variant="Variant.Filled">
+            <ItemContent>
+                <MudAlert style="@(GetMudAlertStyle(TeamStep.Championship))"
+                          Class="@_mudAlertClass" 
+                          OnClick="@(_ => Navigate("Championship"))"
+                          Severity="@TeamChampionshipEditAlertSeverity">@TeamChampionshipEditAlertTitle</MudAlert>
+            </ItemContent>
+        </MudTimelineItem>
     </Content>
 </Timeline>

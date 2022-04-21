@@ -1,0 +1,57 @@
+﻿@using Memorabilia.Application.Features.Admin.People
+@using Memorabilia.Web.Controls.DropDowns
+
+<DivRowCol3>
+    <Content>
+        <MudSelect @bind-Value="@_viewModel.FranchiseId"
+                   @bind-Value:event="ValueChanged" 
+                   Label="Franchise"
+                   Variant="Variant.Outlined">
+            <MudSelectItem Value="@(0)">--Select--</MudSelectItem>
+            <Iterations Items="_viewModel.Franchises" Context="franchise">
+                <MudSelectItem Value="@franchise.Id">@franchise.Name</MudSelectItem>
+            </Iterations>	
+        </MudSelect>
+    </Content>
+    <ContentColumn2>
+        <MudNumericField @bind-Value="_viewModel.PlayerNumber" 
+                         Label="Number"
+                         Variant="Variant.Outlined" />
+    </ContentColumn2>
+</DivRowCol3>
+<DivLeftAlign>
+    <Content>
+        <MudButton ButtonType="MudBlazor.ButtonType.Button" 
+                   Color="MudBlazor.Color.Success"
+                   OnClick="Add"
+                   Size="MudBlazor.Size.Medium"                                  
+                   Variant="Variant.Filled">Add</MudButton>
+    </Content>
+</DivLeftAlign>
+<DivRowCol6>
+    <Content>
+         <MudTable Bordered="false"
+                   Dense="false" 
+                   Hover="true"
+                   Items="@RetiredNumbers.Where(retiredNumber => !retiredNumber.IsDeleted).ToList()"    
+                   Striped="true">
+            <HeaderContent>
+                <MudTh>Franchise</MudTh>
+                <MudTh>Number</MudTh>
+                <MudTh></MudTh>
+            </HeaderContent>
+            <RowTemplate>
+                <MudTd DataLabel="Franchise">@context.FranchiseName</MudTd>
+                <MudTd DataLabel="Number">@context.PlayerNumber</MudTd>
+                <MudTd DataLabel="">
+                    <MudTooltip Text="Delete">
+                        <MudFab Color="MudBlazor.Color.Secondary"
+                                Icon="@Icons.Outlined.DeleteOutline"
+                                OnClick="@(_ => Remove(context.FranchiseId, context.PlayerNumber))" />
+                    </MudTooltip>  
+                </MudTd>
+            </RowTemplate>
+        </MudTable>
+    </Content>
+</DivRowCol6>
+

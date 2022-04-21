@@ -23,7 +23,7 @@ namespace Memorabilia.Application.Features.Admin.Teams
 
         public bool CanHaveConference => SportLeagueLevel != Domain.Constants.SportLeagueLevel.MajorLeagueBaseball;
 
-        public override string ContinueNavigationPath => "Teams";
+        public override string ContinueNavigationPath => $"Team/Championship/Edit/{TeamId}/{SportLeagueLevel?.Id}";
 
         public override EditModeType EditModeType => Leagues.Any() ? EditModeType.Update : EditModeType.Add;
 

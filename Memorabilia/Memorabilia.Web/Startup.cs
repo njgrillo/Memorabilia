@@ -63,6 +63,8 @@ using System;
 using MudBlazor;
 using Memorabilia.Application.Features.Services.Tools.Profile.Rules;
 using Memorabilia.Application.Features.Services.Tools.Profile;
+using Memorabilia.Application.Features.Admin.Colleges;
+using Memorabilia.Application.Features.Admin.ChampionTypes;
 
 namespace Memorabilia.Web
 {
@@ -114,7 +116,9 @@ namespace Memorabilia.Web
             services.AddTransient<IBaseballTypeRepository, BaseballTypeRepository>();
             services.AddTransient<IBasketballTypeRepository, BasketballTypeRepository>();
             services.AddTransient<IBatTypeRepository, BatTypeRepository>();
-            services.AddTransient<IBrandRepository, BrandRepository>();
+            services.AddTransient<IBrandRepository, BrandRepository>();            
+            services.AddTransient<IChampionTypeRepository, ChampionTypeRepository>();
+            services.AddTransient<ICollegeRepository, CollegeRepository>();
             services.AddTransient<IColorRepository, ColorRepository>();
             services.AddTransient<ICommissionerRepository, CommissionerRepository>();
             services.AddTransient<IConditionRepository, ConditionRepository>();
@@ -144,6 +148,7 @@ namespace Memorabilia.Web
             services.AddTransient<IJerseyQualityTypeRepository, JerseyQualityTypeRepository>();
             services.AddTransient<IJerseyStyleTypeRepository, JerseyStyleTypeRepository>();
             services.AddTransient<IJerseyTypeRepository, JerseyTypeRepository>();
+            services.AddTransient<ILeaderTypeRepository, LeaderTypeRepository>();
             services.AddTransient<ILeagueRepository, LeagueRepository>();
             services.AddTransient<ILevelTypeRepository, LevelTypeRepository>();
             services.AddTransient<IMagazineTypeRepository, MagazineTypeRepository>();
@@ -165,6 +170,7 @@ namespace Memorabilia.Web
             services.AddTransient<ISportRepository, SportRepository>();
             services.AddTransient<ISportServiceRepository, SportServiceRepository>();
             services.AddTransient<ISpotRepository, SpotRepository>();
+            services.AddTransient<ITeamChampionshipRepository, TeamChampionshipRepository>();
             services.AddTransient<ITeamConferenceRepository, TeamConferenceRepository>();
             services.AddTransient<ITeamDivisionRepository, TeamDivisionRepository>();
             services.AddTransient<ITeamLeagueRepository, TeamLeagueRepository>();
@@ -187,6 +193,10 @@ namespace Memorabilia.Web
             services.AddTransient<GetBrand>();
             services.AddTransient<GetBrands>();
             services.AddTransient<GetCard>();
+            services.AddTransient<GetChampionType>();
+            services.AddTransient<GetChampionTypes>();
+            services.AddTransient<GetCollege>();
+            services.AddTransient<GetColleges>();
             services.AddTransient<GetCommissioner>();
             services.AddTransient<GetCommissioners>();
             services.AddTransient<GetConditions>();
@@ -256,6 +266,8 @@ namespace Memorabilia.Web
             services.AddTransient<SaveBook>();
             services.AddTransient<SaveBrand>();
             services.AddTransient<SaveCard>();
+            services.AddTransient<SaveChampionType>();
+            services.AddTransient<SaveCollege>();
             services.AddTransient<SaveCommissioner>();
             services.AddTransient<SaveConference>();
             services.AddTransient<SaveDashboardItem>();

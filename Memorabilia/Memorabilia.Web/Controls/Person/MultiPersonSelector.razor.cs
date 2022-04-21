@@ -5,6 +5,7 @@ using Memorabilia.Domain.Constants;
 using Microsoft.AspNetCore.Components;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -113,7 +114,13 @@ namespace Memorabilia.Web.Controls.Person
             if (searchText.IsNullOrEmpty())
                 return Array.Empty<SavePersonViewModel>();
 
-            return await Task.FromResult(_people.Where(person => person.DisplayName.Contains(searchText, StringComparison.OrdinalIgnoreCase))).ConfigureAwait(false);
+            var nonCulturalResults = _people.Where(person => CultureInfo.CurrentCulture.CompareInfo.IndexOf(person.ProfileName,
+                                                                                                            searchText,
+                                                                                                            CompareOptions.IgnoreNonSpace) > -1);
+
+            var culturalResults = _people.Where(person => person.ProfileName.Contains(searchText, StringComparison.OrdinalIgnoreCase));
+
+            return await Task.FromResult(nonCulturalResults.Union(culturalResults).DistinctBy(person => person.Id)).ConfigureAwait(false);
         }
     }
 }

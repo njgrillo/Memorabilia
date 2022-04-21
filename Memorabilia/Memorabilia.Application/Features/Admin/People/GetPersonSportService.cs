@@ -8,16 +8,16 @@ namespace Memorabilia.Application.Features.Admin.People
     {
         public class Handler : QueryHandler<Query, PersonSportServiceViewModel>
         {
-            private readonly ISportServiceRepository _SportServiceRepository;
+            private readonly IPersonRepository _personRepository;
 
-            public Handler(ISportServiceRepository SportServiceRepository)
+            public Handler(IPersonRepository personRepository)
             {
-                _SportServiceRepository = SportServiceRepository;
+                _personRepository = personRepository;
             }
 
             protected override async Task<PersonSportServiceViewModel> Handle(Query query)
             {
-                return new PersonSportServiceViewModel(await _SportServiceRepository.Get(query.PersonId).ConfigureAwait(false));
+                return new PersonSportServiceViewModel(await _personRepository.Get(query.PersonId).ConfigureAwait(false));
             }
         }
 

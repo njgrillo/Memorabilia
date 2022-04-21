@@ -1,0 +1,74 @@
+﻿@page "/People/Accolade/Edit/{personId:int}"
+
+@using Memorabilia.Application.Features.Admin.People
+@using Memorabilia.Web.Controls.Person
+
+<EditPage ContinueNavigationPath="@_viewModel.ContinueNavigationPath"
+          EditMode="_viewModel.EditModeType"
+          ExitNavigationPath="@_viewModel.ExitNavigationPath"
+          ImagePath="@_viewModel.ImagePath"
+          ItemName="@_viewModel.ItemTitle"
+          Model="_viewModel"
+          OnLoad="OnLoad"
+          OnSave="OnSave"
+          PageFooterButtonText="@_viewModel.ExitButtonText"
+          PageFooterNavigationPath="@_viewModel.BackNavigationPath"
+          PageTitle="@_viewModel.PageTitle"
+          TItem="SavePersonAccoladeViewModel"
+          UseMultipleButtons="true">
+    <TimelineContent>
+        <PersonTimeline EditMode="_viewModel.EditModeType"
+                        PersonId="_viewModel.PersonId"
+                        PersonStep="_viewModel.PersonStep" />
+    </TimelineContent>
+    <Content>              
+        <DivRowCol12>
+            <Content>
+                <MudText Typo="Typo.h3">All Star Games</MudText>
+                <PersonAllStarEditor AllStarYears="_viewModel.AllStarYears" />
+            </Content>
+        </DivRowCol12>
+        <br />
+        <DivRowCol12>
+            <Content>
+                <MudText Typo="Typo.h3">Awards</MudText>
+                <PersonAwardEditor Awards="_viewModel.Awards" />
+            </Content>
+        </DivRowCol12>
+        <br />
+        <DivRowCol12>
+            <Content>
+                <MudText Typo="Typo.h3">Accomplishments</MudText>
+                <PersonAccomplishmentEditor Accomplishments="_viewModel.Accomplishments" />
+            </Content>
+        </DivRowCol12>
+        <br />
+        <DivRowCol12>
+            <Content>
+                <MudText Typo="Typo.h3">Leaders</MudText>
+                <PersonLeaderEditor Leaders="_viewModel.Leaders" />
+            </Content>
+        </DivRowCol12>
+        <br />
+        <DivRowCol12>
+            <Content>
+                <MudText Typo="Typo.h3">Career Records</MudText>
+                <PersonCareerRecordEditor CareerRecords="_viewModel.CareerRecords" />
+            </Content>
+        </DivRowCol12>
+        <br />
+        <DivRowCol12>
+            <Content>
+                <MudText Typo="Typo.h3">Single Season Records</MudText>
+                <PersonSingleSeasonRecordEditor SingleSeasonRecords="_viewModel.SingleSeasonRecords" />
+            </Content>
+        </DivRowCol12>
+        <br />
+        <DivRowCol12>
+            <Content>
+                <MudText Typo="Typo.h3">Retired Numbers</MudText>
+                <PersonRetiredNumberEditor RetiredNumbers="_viewModel.RetiredNumbers" />
+            </Content>
+        </DivRowCol12>
+    </Content>
+</EditPage>

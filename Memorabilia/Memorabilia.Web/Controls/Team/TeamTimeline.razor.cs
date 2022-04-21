@@ -19,6 +19,15 @@ namespace Memorabilia.Web.Controls.Team
         public SportLeagueLevel SportLeagueLevel { get; set; }
 
         [Parameter]
+        public MudBlazor.Severity TeamChampionshipEditAlertSeverity { get; set; } = MudBlazor.Severity.Info;
+
+        [Parameter]
+        public string TeamChampionshipEditAlertTitle { get; set; }
+
+        [Parameter]
+        public MudBlazor.Color TeamChampionshipEditColor { get; set; } = MudBlazor.Color.Info;
+
+        [Parameter]
         public MudBlazor.Severity TeamConferenceEditAlertSeverity { get; set; } = MudBlazor.Severity.Info;
 
         [Parameter]
@@ -67,6 +76,7 @@ namespace Memorabilia.Web.Controls.Team
             _mudAlertClass = TeamId > 0 ? "can-click" : string.Empty;
 
             TeamConferenceEditAlertTitle = TeamStep.Conference.Name;
+            TeamChampionshipEditAlertTitle = TeamStep.Championship.Name;
             TeamDivisionEditAlertTitle = TeamStep.Division.Name;
             TeamEditAlertTitle = TeamStep.Team.Name;      
             TeamLeagueEditAlertTitle = TeamStep.League.Name;
@@ -96,6 +106,18 @@ namespace Memorabilia.Web.Controls.Team
                 TeamEditAlertSeverity = MudBlazor.Severity.Success;
                 TeamEditColor = MudBlazor.Color.Success;
                 return;
+            }
+
+            if (TeamStep == TeamStep.Championship)
+            {
+                TeamDivisionEditAlertSeverity = MudBlazor.Severity.Success;
+                TeamDivisionEditColor = MudBlazor.Color.Success;
+                TeamConferenceEditAlertSeverity = MudBlazor.Severity.Success;
+                TeamConferenceEditColor = MudBlazor.Color.Success;
+                TeamLeagueEditAlertSeverity = MudBlazor.Severity.Success;
+                TeamLeagueEditColor = MudBlazor.Color.Success;
+                TeamEditAlertSeverity = MudBlazor.Severity.Success;
+                TeamEditColor = MudBlazor.Color.Success;
             }
         }
 

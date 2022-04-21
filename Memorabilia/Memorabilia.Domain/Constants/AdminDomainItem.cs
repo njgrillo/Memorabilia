@@ -11,6 +11,8 @@
         public static readonly AdminDomainItem BasketballTypes = new("Basketball Types", "Defines variations of basketballs", "images/basketballtypes.jpg");
         public static readonly AdminDomainItem BatTypes = new("Bat Types", "Defines variations of bats", "images/battypes.jpg");
         public static readonly AdminDomainItem Brands = new("Brands", "Defines the brands memorabilia can have", "images/brands.jpg");
+        public static readonly AdminDomainItem ChampionTypes = new("Champion Types", "Defines the championships in various sports", "images/championtypes.jpg");
+        public static readonly AdminDomainItem Colleges = new("Colleges", "Defines colleges", "images/colleges.jpg");
         public static readonly AdminDomainItem Colors = new("Colors", "Defines the colors for autographs", "images/colors.jpg");
         public static readonly AdminDomainItem Commissioners = new("Commissioners", "Specifies the commissioners of each sport", "images/commissioners.jpg");
         public static readonly AdminDomainItem Conditions = new("Conditions", "Defines the conditions for memorabila and autographs", "images/conditions.jpg");
@@ -39,6 +41,7 @@
         public static readonly AdminDomainItem JerseyQualityTypes = new("Jersey Quality Types", "Defines variations of jersey quality types", "images/jerseyqualitytypes.jpg");
         public static readonly AdminDomainItem JerseyStyleTypes = new("Jersey Style Types", "Defines variations of jersey style types", "images/jerseystyletypes.jpg");
         public static readonly AdminDomainItem JerseyTypes = new("Jersey Types", "Defines variations of jersey types", "images/jerseytypes.jpg");
+        public static readonly AdminDomainItem LeaderTypes = new("Leader Types", "Defines variations of leaders", "images/leadertypes.jpg");
         public static readonly AdminDomainItem Leagues = new("Leagues", "Defines leagues of a sport", "images/leagues.jpg");
         public static readonly AdminDomainItem LevelTypes = new("Level Types", "Defines memorabila level types", "images/leveltypes.jpg");
         public static readonly AdminDomainItem MagazineTypes = new("Magazine Types", "Defines variations of magazine types", "images/magazinetypes.jpg");
@@ -68,6 +71,8 @@
             BasketballTypes,
             BatTypes,
             Brands,
+            ChampionTypes,
+            Colleges,
             Colors,
             Commissioners,
             Conditions,
@@ -95,6 +100,7 @@
             JerseyQualityTypes,
             JerseyStyleTypes,
             JerseyTypes,
+            LeaderTypes,
             Leagues,
             LevelTypes,
             MagazineTypes,

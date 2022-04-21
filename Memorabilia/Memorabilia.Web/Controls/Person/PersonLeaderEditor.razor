@@ -1,0 +1,57 @@
+﻿@using Memorabilia.Application.Features.Admin.People
+@using Memorabilia.Web.Controls.DropDowns
+
+<DivRowCol3>
+    <Content>
+        <MudSelect @bind-Value="@_viewModel.LeaderTypeId"
+                   @bind-Value:event="ValueChanged" 
+                   Label="Leader Type"  
+                   Variant="Variant.Outlined">
+            <MudSelectItem Value="@(0)">--Select--</MudSelectItem>
+            <Iterations Items="_viewModel.LeaderTypes" Context="leaderType">
+                <MudSelectItem Value="@leaderType.Id">@leaderType.ToString()</MudSelectItem>
+            </Iterations>	
+        </MudSelect>
+    </Content>
+    <ContentColumn2>
+        <MudNumericField @bind-Value="_viewModel.Year" 
+                         Label="Year"
+                         Variant="Variant.Outlined" />
+    </ContentColumn2>
+</DivRowCol3>
+<DivLeftAlign>
+    <Content>
+        <MudButton ButtonType="MudBlazor.ButtonType.Button" 
+                   Color="MudBlazor.Color.Success"
+                   OnClick="Add"
+                   Size="MudBlazor.Size.Medium"                                  
+                   Variant="Variant.Filled">Add</MudButton>
+    </Content>
+</DivLeftAlign>
+<DivRowCol6>
+    <Content>
+         <MudTable Bordered="false"
+                   Dense="false" 
+                   Hover="true"
+                   Items="@Leaders.Where(Leader => !Leader.IsDeleted).ToList()"    
+                   Striped="true">
+            <HeaderContent>
+                <MudTh>Leader</MudTh>
+                <MudTh>Year</MudTh>
+                <MudTh></MudTh>
+            </HeaderContent>
+            <RowTemplate>
+                <MudTd DataLabel="Leader">@context.LeaderTypeName</MudTd>
+                <MudTd DataLabel="Year">@context.Year</MudTd>
+                <MudTd DataLabel="">
+                    <MudTooltip Text="Delete">
+                        <MudFab Color="MudBlazor.Color.Secondary"
+                                Icon="@Icons.Outlined.DeleteOutline"
+                                OnClick="@(_ => Remove(context.LeaderTypeId, context.Year))" />
+                    </MudTooltip>  
+                </MudTd>
+            </RowTemplate>
+        </MudTable>
+    </Content>
+</DivRowCol6>
+

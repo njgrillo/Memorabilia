@@ -34,7 +34,7 @@ namespace Memorabilia.Web.Pages.Admin.People
 
         protected async Task OnSave()
         {
-            await CommandRouter.Send(new SavePersonSportService.Command(_viewModel)).ConfigureAwait(false);
+            await CommandRouter.Send(new SavePersonSportService.Command(PersonId, _viewModel)).ConfigureAwait(false);
         }
     }
 }
