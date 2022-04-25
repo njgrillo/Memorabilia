@@ -11,17 +11,21 @@ namespace Memorabilia.Application.Features.Tools.Profile.Common
             _record = record;
         }
 
-        public int Amount => _record.Amount;
+        public string Amount => _record.Amount?.ToString("G29");
 
-        public string CareerRecordTypeAbbreviatedName => Domain.Constants.RecordType.Find(CareerRecordTypeId)?.ToString();
+        public Domain.Constants.RecordType RecordType => Domain.Constants.RecordType.Find(RecordTypeId);
 
-        public int CareerRecordTypeId => _record.RecordTypeId;
+        public string RecordTypeAbbreviatedName => RecordType?.ToString();
+
+        public int RecordTypeId => _record.RecordTypeId;
+
+        public string RecordTypeName => RecordType?.Name;
 
         public int Year => _record.Year;
 
         public override string ToString()
         {
-            return $"{Year} {Amount:N0} {CareerRecordTypeAbbreviatedName}";
+            return $"{Year} {Amount} {RecordTypeAbbreviatedName}";
         }
     }
 }

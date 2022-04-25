@@ -70,6 +70,18 @@ BEGIN
 	DROP TABLE [dbo].[AutographThroughTheMail]
 END
 
+--BaseballBattingStatistics Drop - FK - PersonId
+IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = N'BaseballBattingStatistics')
+BEGIN
+	IF OBJECT_ID('tempdb..#TempBaseballBattingStatisticsTable') IS NOT NULL DROP TABLE #TempBaseballBattingStatisticsTable; 
+
+	SELECT * 
+	INTO #TempBaseballBattingStatisticsTable
+	FROM [dbo].[BaseballBattingStatistics]
+
+	DROP TABLE [dbo].[BaseballBattingStatistics]
+END
+
 --CareerRecord Drop - FK - PersonId, RecordTypeId
 IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = N'CareerRecord')
 BEGIN
@@ -3303,6 +3315,42 @@ BEGIN
 END
 
 SET IDENTITY_INSERT [dbo].[AutographThroughTheMail] OFF
+
+--BaseballBattingStatistics Create
+CREATE TABLE [dbo].[BaseballBattingStatistics](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[PersonId] [int] NOT NULL,
+	[Year] [int] NOT NULL,
+	[AtBats] [int] NULL,
+	[Hits] [int] NULL,
+	[Walks] [int] NULL,
+	[Singles] [int] NULL,
+	[Doubles] [int] NULL,
+	[Triples] [int] NULL,
+	[Homeruns] [int] NULL,
+	[RunsBattedIn] [int] NULL,
+	[Runs] [int] NULL,
+	[Strikeouts] [int] NULL,
+ CONSTRAINT [PK_BaseballBattingStatistics] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+
+ALTER TABLE [dbo].[BaseballBattingStatistics]  WITH CHECK ADD  CONSTRAINT [FK_BaseballBattingStatistics_Person] FOREIGN KEY([PersonId])
+REFERENCES [dbo].[Person] ([Id])
+ALTER TABLE [dbo].[BaseballBattingStatistics] CHECK CONSTRAINT [FK_BaseballBattingStatistics_Person]
+
+SET IDENTITY_INSERT [dbo].[BaseballBattingStatistics] ON
+
+IF @KeepExistingValues = 1
+BEGIN
+	INSERT INTO [dbo].[BaseballBattingStatistics] (Id, PersonId, RecordTypeId, Amount)
+	SELECT * 
+	FROM #TempBaseballBattingStatisticsTable
+END
+
+SET IDENTITY_INSERT [dbo].[BaseballBattingStatistics] OFF
 
 --CareerRecord Create
 CREATE TABLE [dbo].[CareerRecord](

@@ -11,13 +11,29 @@ namespace Memorabilia.Application.Features.Admin.People
         public SavePersonAccoladeViewModel(int personId, PersonAccoladeViewModel viewModel)
         {
             PersonId = personId;
-            Accomplishments = viewModel.Accomplishments.Select(accomplishment => new SavePersonAccomplishmentViewModel(accomplishment)).ToList();
-            AllStarYears = viewModel.AllStars.Select(allStar => allStar.Year).ToList();
-            Awards = viewModel.Awards.Select(award => new SavePersonAwardViewModel(award)).ToList();
-            CareerRecords = viewModel.CareerRecords.Select(careerRecord => new SavePersonCareerRecordViewModel(careerRecord)).ToList();
-            Leaders = viewModel.Leaders.Select(leader => new SavePersonLeaderViewModel(leader)).ToList();
-            RetiredNumbers = viewModel.RetiredNumbers.Select(retiredNumber => new SavePersonRetiredNumberViewModel(retiredNumber)).ToList();
-            SingleSeasonRecords = viewModel.SingleSeasonRecords.Select(singleSeasonRecord => new SavePersonSingleSeasonRecordViewModel(singleSeasonRecord)).ToList();  
+            Accomplishments = viewModel.Accomplishments.Select(accomplishment => new SavePersonAccomplishmentViewModel(accomplishment))
+                                                       .OrderBy(accomplishment => accomplishment.AccomplishmentTypeName)    
+                                                       .ToList();
+            AllStarYears = viewModel.AllStars.Select(allStar => allStar.Year)
+                                             .OrderBy(year => year)
+                                             .ToList();
+            Awards = viewModel.Awards.Select(award => new SavePersonAwardViewModel(award))
+                                     .OrderBy(award => award.AwardTypeName)
+                                     .ThenBy(award => award.Year)
+                                     .ToList();
+            CareerRecords = viewModel.CareerRecords.Select(careerRecord => new SavePersonCareerRecordViewModel(careerRecord))
+                                                   .OrderBy(careerRecord => careerRecord.RecordTypeName)
+                                                   .ToList();
+            Leaders = viewModel.Leaders.Select(leader => new SavePersonLeaderViewModel(leader))
+                                       .OrderBy(leader => leader.LeaderTypeName)
+                                       .ThenBy(leader => leader.Year)
+                                       .ToList();
+            RetiredNumbers = viewModel.RetiredNumbers.Select(retiredNumber => new SavePersonRetiredNumberViewModel(retiredNumber))
+                                                     .OrderBy(retiredNumber => retiredNumber.FranchiseName)
+                                                     .ToList();
+            SingleSeasonRecords = viewModel.SingleSeasonRecords.Select(singleSeasonRecord => new SavePersonSingleSeasonRecordViewModel(singleSeasonRecord))
+                                                               .OrderBy(singleSeasonRecord => singleSeasonRecord.RecordTypeName)                   
+                                                               .ToList();  
         }
 
         public List<SavePersonAccomplishmentViewModel> Accomplishments { get; set; } = new();

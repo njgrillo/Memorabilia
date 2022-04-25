@@ -24,6 +24,8 @@ namespace Memorabilia.Application.Features.Admin.People
 
         public DateTime? Date { get; set; }
 
+        public string FormattedDate => Date?.ToString("MM/dd/yyyy");
+
         public int PersonId { get; set; }
 
         public int? Year { get; set; }

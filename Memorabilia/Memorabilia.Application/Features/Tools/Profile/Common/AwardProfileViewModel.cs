@@ -11,9 +11,13 @@ namespace Memorabilia.Application.Features.Tools.Profile.Common
             _award = award;
         }
 
-        public string AwardTypeAbbreviatedName => Domain.Constants.AwardType.Find(AwardTypeId)?.ToString();
+        public Domain.Constants.AwardType AwardType => Domain.Constants.AwardType.Find(AwardTypeId);
 
-        public int AwardTypeId => _award.AwardTypeId;        
+        public string AwardTypeAbbreviatedName => AwardType?.ToString();
+
+        public int AwardTypeId => _award.AwardTypeId;
+
+        public string AwardTypeName => AwardType?.Name;
 
         public int Year => _award.Year;
     }

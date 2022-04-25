@@ -2,6 +2,7 @@
 using Framework.Handler;
 using Memorabilia.Repository.Interfaces;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Memorabilia.Application.Features.Autograph.Inscriptions
@@ -21,7 +22,9 @@ namespace Memorabilia.Application.Features.Autograph.Inscriptions
             {
                 var autograph = await _autographRepository.Get(command.AutographId).ConfigureAwait(false);
 
-                foreach (var inscription in command.Items)
+                autograph.RemoveInscriptions(command.DeletedIds);
+
+                foreach (var inscription in command.Items.Where(item => !item.IsDeleted))
                 {
                     autograph.SetInscription(inscription.Id,
                                              inscription.InscriptionTypeId,
@@ -43,6 +46,8 @@ namespace Memorabilia.Application.Features.Autograph.Inscriptions
             }
 
             public int AutographId => _viewModel.AutographId;
+
+            public int[] DeletedIds => Items.Where(item => item.IsDeleted).Select(item => item.Id).ToArray();
 
             public IEnumerable<SaveInscriptionViewModel> Items { get; set; }
         }

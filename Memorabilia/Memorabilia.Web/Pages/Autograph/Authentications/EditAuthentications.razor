@@ -87,7 +87,7 @@
                 <MudTable Bordered="false"
                           Dense="false" 
                           Hover="true"
-                          Items="@_authenticationsViewModel.Authentications"    
+                          Items="@_authenticationsViewModel.Authentications.Where(authentication => !authentication.IsDeleted)"    
                           Striped="true">
                     <ToolBarContent>
                         <MudText Typo="Typo.h6">Authentications</MudText>

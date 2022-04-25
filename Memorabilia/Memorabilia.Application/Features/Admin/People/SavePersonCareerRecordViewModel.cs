@@ -14,7 +14,9 @@ namespace Memorabilia.Application.Features.Admin.People
             RecordTypeId = record.RecordTypeId;
         }
 
-        public int Amount { get; set; }
+        public decimal? Amount { get; set; }
+
+        public string DisplayAmount => Amount?.ToString("G29");
 
         public int PersonId { get; set; }
 

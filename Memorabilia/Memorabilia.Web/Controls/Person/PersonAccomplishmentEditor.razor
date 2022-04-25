@@ -13,10 +13,20 @@
             </Iterations>	
         </MudSelect>
     </Content>
-    <ContentColumn2>
+</DivRowCol3>
+<DivRowCol3>
+    <Content>
         <MudNumericField @bind-Value="_viewModel.Year" 
                          Label="Year"
                          Variant="Variant.Outlined" />
+    </Content>
+    <ContentColumn2>
+        <MudDatePicker @bind-Date="_viewModel.Date"
+                       DateFormat="MM/dd/yyyy"
+                       Editable="true"
+                       Label="Date"
+                       Mask="@(new DateMask("MM/dd/yyyy"))" 
+                       Variant="Variant.Outlined" />
     </ContentColumn2>
 </DivRowCol3>
 <DivLeftAlign>
@@ -43,7 +53,7 @@
             </HeaderContent>
             <RowTemplate>
                 <MudTd DataLabel="Accomplishment">@context.AccomplishmentTypeName</MudTd>
-                <MudTd DataLabel="Date">@context.Date</MudTd>
+                <MudTd DataLabel="Date">@context.FormattedDate</MudTd>
                 <MudTd DataLabel="Year">@context.Year</MudTd>
                 <MudTd DataLabel="">
                     <MudTooltip Text="Delete">

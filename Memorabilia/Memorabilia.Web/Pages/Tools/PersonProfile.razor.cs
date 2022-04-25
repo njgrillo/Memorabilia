@@ -2,10 +2,10 @@
 using Framework.Extension;
 using Memorabilia.Application.Features.Admin.People;
 using Memorabilia.Application.Features.Services.Tools.Profile;
-using Memorabilia.Application.Features.Tools.Profile.Baseball;
 using Microsoft.AspNetCore.Components;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -52,7 +52,13 @@ namespace Memorabilia.Web.Pages.Tools
             if (searchText.IsNullOrEmpty())
                 return Array.Empty<PersonViewModel>();
 
-            return await Task.FromResult(_people.Where(person => person.DisplayName.Contains(searchText, StringComparison.OrdinalIgnoreCase))).ConfigureAwait(false);
+            var nonCulturalResults = _people.Where(person => CultureInfo.CurrentCulture.CompareInfo.IndexOf(person.ProfileName,
+                                                                                                            searchText,
+                                                                                                            CompareOptions.IgnoreNonSpace) > -1);
+
+            var culturalResults = _people.Where(person => person.ProfileName.Contains(searchText, StringComparison.OrdinalIgnoreCase));
+
+            return await Task.FromResult(nonCulturalResults.Union(culturalResults).DistinctBy(person => person.Id)).ConfigureAwait(false);
         }
 
         private async Task SelectedPersonChanged(PersonViewModel person)

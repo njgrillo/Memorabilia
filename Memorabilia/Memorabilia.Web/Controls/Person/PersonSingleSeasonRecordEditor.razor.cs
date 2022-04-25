@@ -19,11 +19,9 @@ namespace Memorabilia.Web.Controls.Person
             _viewModel = new SavePersonSingleSeasonRecordViewModel();
         }
 
-        private void Remove(int recordTypeId, int year, int amount)
+        private void Remove(int recordTypeId)
         {
-            var record = SingleSeasonRecords.SingleOrDefault(record => record.RecordTypeId == recordTypeId && 
-                                                                       record.Year == year && 
-                                                                       record.Amount == amount);
+            var record = SingleSeasonRecords.SingleOrDefault(record => record.RecordTypeId == recordTypeId);
 
             if (record == null)
                 return;

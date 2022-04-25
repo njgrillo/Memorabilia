@@ -14,6 +14,17 @@ namespace Memorabilia.Web.Pages.Tools
         [Inject]
         public QueryRouter QueryRouter { get; set; }
 
+        public bool DisplayAccomplishments => _selectedAccomplishment?.Text == "Accomplishment";
+
+        public bool DisplayAllStars => _selectedAccomplishment?.Text == "AllStar";
+
+        public bool DisplayAwards => _selectedAccomplishment?.Text == "Award";
+
+        public bool DisplayChampionships => _selectedAccomplishment?.Text == "Championship";
+
+        public bool DisplayLeaders => _selectedAccomplishment?.Text == "Leader";
+
+        private MudBlazor.MudChip _selectedAccomplishment;
         private BaseballProfileViewModel _viewModel = new();
 
         protected override async Task OnInitializedAsync()

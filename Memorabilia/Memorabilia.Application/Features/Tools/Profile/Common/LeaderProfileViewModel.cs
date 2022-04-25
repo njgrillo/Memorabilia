@@ -11,9 +11,13 @@ namespace Memorabilia.Application.Features.Tools.Profile.Common
             _leader = leader;
         }
 
-        public string LeaderTypeAbbreviatedName => Domain.Constants.LeaderType.Find(LeaderTypeId)?.ToString();
+        public Domain.Constants.LeaderType LeaderType => Domain.Constants.LeaderType.Find(LeaderTypeId);
 
-        public int LeaderTypeId => _leader.LeaderTypeId;        
+        public string LeaderTypeAbbreviatedName => LeaderType?.ToString();
+
+        public int LeaderTypeId => _leader.LeaderTypeId;
+
+        public string LeaderTypeName => LeaderType?.Name;
 
         public int Year => _leader.Year;
     }

@@ -27,9 +27,20 @@ namespace Memorabilia.Application.Features.Admin.People
                                   command.FreeAgentSigningDate,
                                   command.LastAppearnceDate);
 
+                UpdateColleges(command, person);
                 UpdateDrafts(command, person);
 
                 await _personRepository.Update(person).ConfigureAwait(false);
+            }
+
+            private static void UpdateColleges(Command command, Person person)
+            {
+                person.RemoveColleges(command.DeletedCollegeIds);
+
+                foreach (var college in command.Colleges)
+                {
+                    person.SetCollege(college.CollegeId, college.BeginYear, college.EndYear);
+                }
             }
 
             private static void UpdateDrafts(Command command, Person person)
@@ -53,7 +64,11 @@ namespace Memorabilia.Application.Features.Admin.People
                 _viewModel = viewModel;
             }
 
+            public SavePersonCollegeViewModel[] Colleges => _viewModel.Colleges.Where(college => !college.IsDeleted).ToArray();
+
             public DateTime? DebutDate => _viewModel.DebutDate;
+
+            public int[] DeletedCollegeIds => _viewModel.Colleges.Where(college => college.IsDeleted).Select(college => college.Id).ToArray();
 
             public int[] DeletedDraftIds => _viewModel.Drafts.Where(draft => draft.IsDeleted).Select(draft => draft.Id).ToArray();
 

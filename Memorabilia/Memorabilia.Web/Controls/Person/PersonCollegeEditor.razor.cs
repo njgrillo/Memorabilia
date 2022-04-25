@@ -19,9 +19,9 @@ namespace Memorabilia.Web.Controls.Person
             _viewModel = new SavePersonCollegeViewModel();
         }
 
-        private void Remove(int collegeId, int? beginYear)
+        private void Remove(int collegeId)
         {
-            var college = Colleges.SingleOrDefault(college => college.CollegeId == collegeId && college.BeginYear == beginYear);
+            var college = Colleges.SingleOrDefault(college => college.CollegeId == collegeId);
 
             if (college == null)
                 return;

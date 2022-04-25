@@ -4,20 +4,20 @@
     {
         public CareerRecord() { }
 
-        public CareerRecord(int personId, int recordTypeId, int amount)
+        public CareerRecord(int personId, int recordTypeId, decimal? amount)
         {
             PersonId = personId;
             RecordTypeId = recordTypeId;
             Amount = amount;
         }
 
-        public int Amount { get; private set; }
+        public decimal? Amount { get; private set; }
 
         public int PersonId { get; private set; }
 
         public int RecordTypeId { get; private set; }
 
-        public void Set(int recordTypeId, int amount)
+        public void Set(int recordTypeId, decimal? amount)
         {
             RecordTypeId = recordTypeId;
             Amount = amount;

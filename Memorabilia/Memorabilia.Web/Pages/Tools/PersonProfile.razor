@@ -17,13 +17,13 @@
                                          ResetValueOnEmptyText="true"                                             
                                          SearchFunc="@SearchPeople"                                               
                                          T="PersonViewModel"
-                                         Text="@_viewModel?.DisplayName"
+                                         Text="@_viewModel?.ProfileName"
                                          Variant="Variant.Outlined">
                             <ItemSelectedTemplate Context="person">
-                                @person?.DisplayName
+                                @person?.ProfileName
                             </ItemSelectedTemplate>
                             <ItemTemplate Context="person">
-                                @person?.DisplayName
+                                @person?.ProfileName
                             </ItemTemplate>
                         </MudAutocomplete>
                         <br />   

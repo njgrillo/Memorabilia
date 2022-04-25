@@ -4,7 +4,7 @@
     {
         public SingleSeasonRecord() { }
 
-        public SingleSeasonRecord(int personId, int recordTypeId, int year, int amount)
+        public SingleSeasonRecord(int personId, int recordTypeId, int year, decimal? amount)
         {
             PersonId = personId;
             RecordTypeId = recordTypeId;
@@ -12,7 +12,7 @@
             Amount = amount;
         }
 
-        public int Amount { get; private set; }
+        public decimal? Amount { get; private set; }
 
         public int PersonId { get; private set; }
 
@@ -20,7 +20,7 @@
 
         public int Year { get; private set; }
 
-        public void Set(int recordTypeId, int year, int amount)
+        public void Set(int recordTypeId, int year, decimal? amount)
         {
             RecordTypeId = recordTypeId;
             Year = year;

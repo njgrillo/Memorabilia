@@ -300,6 +300,9 @@ namespace Memorabilia.Web.Controls.MemorabiliaItem
             Results = filteredMemorabilaItems.Where(item => memorabiliaIds.Contains(item.Id)).ToList();
 
             await ResultsChanged.InvokeAsync(Results).ConfigureAwait(false);
+
+            _autographPerson = null;
+            _memorabiliaPerson = null;
         }
 
         private async Task LoadPeople()

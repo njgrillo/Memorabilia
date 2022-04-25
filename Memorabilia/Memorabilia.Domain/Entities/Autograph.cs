@@ -94,6 +94,22 @@ namespace Memorabilia.Domain.Entities
 
         public int WritingInstrumentId { get; private set; }
 
+        public void RemoveAuthentications(params int[] ids)
+        {
+            if (ids == null || ids.Length == 0)
+                return;
+
+            Authentications.RemoveAll(authenticatoin => ids.Contains(authenticatoin.Id));
+        }
+
+        public void RemoveInscriptions(params int[] ids)
+        {
+            if (ids == null || ids.Length == 0)
+                return;
+
+            Inscriptions.RemoveAll(inscription => ids.Contains(inscription.Id));
+        }
+
         public void Set(DateTime? acquiredDate,
                         int? acquisitionTypeId,
                         int colorId,
@@ -137,7 +153,8 @@ namespace Memorabilia.Domain.Entities
                                       string verification,
                                       bool witnessed)
         {
-            var authentication = Authentications.SingleOrDefault(authentication => authentication.Id == id);
+            var authentication = Authentications.SingleOrDefault(authentication => id > 0 && authentication.Id == id) ??
+                                 Authentications.SingleOrDefault(authentication => authentication.AuthenticationCompanyId == authenticationCompanyId);
 
             if (authentication == null)
             {
@@ -178,7 +195,9 @@ namespace Memorabilia.Domain.Entities
 
         public void SetInscription(int id, int inscriptionTypeId, string inscriptionText)
         {
-            var inscription = Inscriptions.SingleOrDefault(inscription => inscription.Id == id);
+            var inscription = Inscriptions.SingleOrDefault(inscription => id > 0 && inscription.Id == id) ??
+                              Inscriptions.SingleOrDefault(inscription => inscription.InscriptionTypeId == inscriptionTypeId &&
+                                                                          inscription.InscriptionText == inscriptionText);
 
             if (inscription == null)
             {

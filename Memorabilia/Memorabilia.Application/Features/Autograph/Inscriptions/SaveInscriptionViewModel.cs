@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Application.Features.Autograph.Inscriptions
 {
-    public class SaveInscriptionViewModel
+    public class SaveInscriptionViewModel : SaveViewModel
     {
         public SaveInscriptionViewModel() { }
 
@@ -12,9 +12,7 @@
             InscriptionTypeId = viewModel.InscriptionTypeId;
         }
 
-        public int AutographId { get; set; }        
-
-        public int Id { get; set; }
+        public int AutographId { get; set; }   
 
         public string InscriptionText { get; set; }
 

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Components;
+﻿using Memorabilia.Domain.Extensions;
+using Microsoft.AspNetCore.Components;
 using System.Collections.Generic;
 
 namespace Memorabilia.Web.Controls.Person
@@ -8,13 +9,13 @@ namespace Memorabilia.Web.Controls.Person
         [Parameter]
         public List<int> AllStarYears { get; set; } = new();
 
-        private int _year;
+        private string _years;
 
         private void Add()
         {
-            AllStarYears.Add(_year);
+            AllStarYears.AddRange(_years.ToIntArray());
 
-            _year = 0;
+            _years = string.Empty;
         }
 
         private void Remove(int year)

@@ -259,7 +259,7 @@ namespace Memorabilia.Domain.Entities
             award.Set(awardTypeId, year);
         }
 
-        public void SetCareerRecord(int careerRecordId, int recordTypeId, int amount)
+        public void SetCareerRecord(int careerRecordId, int recordTypeId, decimal? amount)
         {
             if (careerRecordId == 0)
             {
@@ -395,7 +395,7 @@ namespace Memorabilia.Domain.Entities
             Service.Set(debutDate, freeAgentSigningDate, lastAppearanceDate);
         }
 
-        public void SetSingleSeasonRecord(int singleSeasonRecordId, int recordTypeId, int year, int amount)
+        public void SetSingleSeasonRecord(int singleSeasonRecordId, int recordTypeId, int year, decimal? amount)
         {
             if (singleSeasonRecordId == 0)
             {

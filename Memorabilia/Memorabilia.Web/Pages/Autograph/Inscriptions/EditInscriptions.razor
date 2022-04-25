@@ -67,7 +67,7 @@
                 <MudTable Bordered="false"
                           Dense="false" 
                           Hover="true"
-                          Items="@_inscriptionsViewModel.Inscriptions"    
+                          Items="@_inscriptionsViewModel.Inscriptions.Where(inscription => !inscription.IsDeleted)"    
                           Striped="true">
                     <ToolBarContent>
                         <MudText Typo="Typo.h6">Inscriptions</MudText>

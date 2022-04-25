@@ -2,6 +2,7 @@
 using Framework.Handler;
 using Memorabilia.Repository.Interfaces;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Memorabilia.Application.Features.Autograph.Authentication
@@ -21,7 +22,9 @@ namespace Memorabilia.Application.Features.Autograph.Authentication
             {
                 var autograph = await _autographRepository.Get(command.AutographId).ConfigureAwait(false);
 
-                foreach (var authentication in command.Items)
+                autograph.RemoveAuthentications(command.DeletedIds);
+
+                foreach (var authentication in command.Items.Where(item => !item.IsDeleted))
                 {
                     autograph.SetAuthentication(authentication.Id,
                                                 authentication.AuthenticationCompanyId,
@@ -47,6 +50,8 @@ namespace Memorabilia.Application.Features.Autograph.Authentication
             }
 
             public int AutographId => _viewModel.AutographId;
+
+            public int[] DeletedIds => Items.Where(item => item.IsDeleted).Select(item => item.Id).ToArray();
 
             public IEnumerable<SaveAuthenticationViewModel> Items { get; set; }
         }

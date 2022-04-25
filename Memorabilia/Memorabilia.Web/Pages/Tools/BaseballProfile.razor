@@ -5,38 +5,32 @@
         <DivRowCol4>
             <Content>
                 <MudText Typo="Typo.h4"><b>@_viewModel.NameHeader</b></MudText>
-            </Content>
-            <ContentColumn2>
-                <MudChip Color="MudBlazor.Color.Success">@_viewModel.AllStarSummaryDisplayText</MudChip>
-            </ContentColumn2>
-            <ContentColumn3>
-                <MudChip Color="MudBlazor.Color.Success">@_viewModel.ChampionshipSummaryDisplayText</MudChip>
-            </ContentColumn3>
-        </DivRowCol4>
-        <DivRowCol4>
-            <Content>
                 <MudText Typo="Typo.h6">@_viewModel.Nicknames</MudText>
-            </Content>
-            <ContentColumn2>
-                <Iterations Items="@_viewModel.DistinctAwards">
-                    <MudChip Color="MudBlazor.Color.Success">@($"{_viewModel.Awards.Where(award => award.AwardTypeId == context.AwardTypeId).Count()}x {context.AwardTypeAbbreviatedName}")</MudChip>
-                </Iterations>
-            </ContentColumn2>
-            <ContentColumn3>
-                
-            </ContentColumn3>
-        </DivRowCol4>
-        <DivRowCol4>
-            <Content>
+                <br />
                 <MudText Typo="Typo.h6">@_viewModel.LifespanHeader</MudText>
             </Content>
             <ContentColumn2>
-                <Iterations Items="@_viewModel.DistinctLeaders">
-                    <MudChip Color="MudBlazor.Color.Success">@($"{_viewModel.Leaders.Where(leader => leader.LeaderTypeId == context.LeaderTypeId).Count()}x {context.LeaderTypeAbbreviatedName}")</MudChip>
-                </Iterations>
+                <PrettyBlazor.Condition Evaluation="_viewModel.HasDraftData">
+                    <Match>
+                        <Iterations Items="@_viewModel.Drafts">
+                            <MudText Typo="Typo.h6">@context.ToString()</MudText>
+                        </Iterations>
+                    </Match>
+                </PrettyBlazor.Condition>  
+                <PrettyBlazor.Condition Evaluation="_viewModel.HasFreeAgentSigningData">
+                    <Match>
+                        <MudText Typo="Typo.h6">@_viewModel.FreeAgentSigning</MudText>
+                    </Match>
+                </PrettyBlazor.Condition>  
+                <br />
+                <MudText Typo="Typo.h6">@_viewModel.Debut</MudText>
+                <MudText Typo="Typo.h6">@_viewModel.LastAppearance</MudText>                
             </ContentColumn2>
             <ContentColumn3>
-
+                <MudText Typo="Typo.h6">Batting Average</MudText>
+                <MudText Typo="Typo.h6">Hits</MudText>
+                <MudText Typo="Typo.h6">Home Runs</MudText>
+                <MudText Typo="Typo.h6">RBIs</MudText>                
             </ContentColumn3>
         </DivRowCol4>
         <DivRowCol4>
@@ -47,50 +41,15 @@
                           Src="@_viewModel.PersonImageData" 
                           Width="500"   />
             </Content>
-            <ContentColumn2>                
-                <PrettyBlazor.Condition Evaluation="_viewModel.HasDraftData">
-                    <Match>
-                        <MudText Typo="Typo.h6"><b>Draft Details</b></MudText>
-                        <Iterations Items="@_viewModel.Drafts">
-                            <MudText Typo="Typo.h6">@context.ToString()</MudText>
-                        </Iterations>
-                    </Match>
-                </PrettyBlazor.Condition>  
-                <br />
-                <MudText Typo="Typo.h6">@_viewModel.Debut</MudText>
-                <MudText Typo="Typo.h6">@_viewModel.LastAppearance</MudText>
-                <br />
-                <MudText Typo="Typo.h6">Batting Average</MudText>
-                <MudText Typo="Typo.h6">Hits</MudText>
-                <MudText Typo="Typo.h6">Home Runs</MudText>
-                <MudText Typo="Typo.h6">RBIs</MudText>
-                <br />
-                <PrettyBlazor.Condition Evaluation="_viewModel.HasCareerRecords">
-                    <Match>
-                        <MudText Typo="Typo.h6"><b>Career Records:</b></MudText>
-                        <Iterations Items="@_viewModel.CareerRecords">
-                            <MudText Typo="Typo.h6">@context.ToString()</MudText>
-                        </Iterations>
-                    </Match>
-                </PrettyBlazor.Condition>   
-                <br />
-                <PrettyBlazor.Condition Evaluation="_viewModel.HasSingleSeasonRecords">
-                    <Match>
-                        <MudText Typo="Typo.h6"><b>Single Season Records:</b></MudText>
-                        <Iterations Items="@_viewModel.SingleSeasonRecords">
-                            <MudText Typo="Typo.h6">@context.ToString()</MudText>
-                        </Iterations>
-                    </Match>
-                </PrettyBlazor.Condition> 
-            </ContentColumn2>
-        </DivRowCol4>
-        <DivRowCol4>
-            <Content>
+            <ContentColumn2>
                 <MudTable Bordered="false"
                           Dense="false" 
                           Hover="true"
                           Items="@_viewModel.Teams"    
                           Striped="true">
+                    <ToolBarContent>
+                        <MudText Typo="Typo.h6"><b>Teams</b></MudText>
+                    </ToolBarContent>
                     <HeaderContent>
                         <MudTh>Team</MudTh>
                         <MudTh>Begin Year</MudTh>
@@ -105,10 +64,274 @@
                         <MudTablePager />
                     </PagerContent>
                 </MudTable>
+                @*Stats table*@                
+            </ContentColumn2>
+            <ContentColumn3>
+                <PrettyBlazor.Condition Evaluation="_viewModel.HasHallOfFameData">
+                    <Match>
+                        <MudTable Bordered="false"
+                                  Dense="false" 
+                                  Hover="true"
+                                  Items="@_viewModel.HallOfFames"    
+                                  Striped="true">
+                            <ToolBarContent>
+                                <MudText Typo="Typo.h6"><b>MLB Hall of Fame</b></MudText>
+                            </ToolBarContent>
+                            <HeaderContent>
+                                <MudTh>Induction Year</MudTh>
+                                <MudTh>Ballot</MudTh>
+                                <MudTh>Vote (%)</MudTh>
+                            </HeaderContent>
+                            <RowTemplate>
+                                <MudTd DataLabel="Induction Year">@context.InductionYear</MudTd>
+                                <MudTd DataLabel="Ballot">@context.BallotNumberName</MudTd>
+                                <MudTd DataLabel="Vote (%)">@context.VotePercentage</MudTd>
+                            </RowTemplate>
+                        </MudTable>
+                        <br />
+                    </Match>
+                </PrettyBlazor.Condition>                  
+                <PrettyBlazor.Condition Evaluation="_viewModel.HasFranchiseHallOfFameData">
+                    <Match>
+                        <MudTable Bordered="false"
+                                  Dense="false" 
+                                  Hover="true"
+                                  Items="@_viewModel.FranchiseHallOfFames"    
+                                  Striped="true">
+                            <ToolBarContent>
+                                <MudText Typo="Typo.h6"><b>Franchise Hall of Fames</b></MudText>
+                            </ToolBarContent>
+                            <HeaderContent>
+                                <MudTh>Name</MudTh>
+                                <MudTh>Year</MudTh>
+                            </HeaderContent>
+                            <RowTemplate>
+                                <MudTd DataLabel="Name">@context.FranchiseHallOfFameName</MudTd>
+                                <MudTd DataLabel="Year">@context.Year</MudTd>
+                            </RowTemplate>
+                        </MudTable>
+                    </Match>
+                </PrettyBlazor.Condition> 
+            </ContentColumn3>
+        </DivRowCol4>
+        <DivRowCol4>
+            <Content>
+                <MudChipSet @bind-SelectedChip="_selectedAccomplishment" 
+                            Filter="true">
+                    <PrettyBlazor.Condition Evaluation="_viewModel.HasAccomplishments">
+                        <Match>
+                            <Iterations Items="@_viewModel.Accomplishments">
+                                <MudChip Color="MudBlazor.Color.Info"
+                                         Text="Accomplishment">@($"{context.AccomplishmentTypeName}")</MudChip>
+                            </Iterations>
+                        </Match>
+                    </PrettyBlazor.Condition>
+                    <PrettyBlazor.Condition Evaluation="_viewModel.HasAllStarData">
+                        <Match>
+                            <MudChip Color="MudBlazor.Color.Success"
+                                     Text="AllStar">@_viewModel.AllStarSummaryDisplayText</MudChip>
+                        </Match>
+                    </PrettyBlazor.Condition>
+                    <PrettyBlazor.Condition Evaluation="_viewModel.HasAwards">
+                        <Match>
+                            <Iterations Items="@_viewModel.DistinctAwards">
+                                <MudChip Color="MudBlazor.Color.Warning"
+                                         Text="Award">@($"{_viewModel.Awards.Where(award => award.AwardTypeId == context.AwardTypeId).Count()}x {context.AwardTypeAbbreviatedName}")</MudChip>
+                            </Iterations>
+                        </Match>
+                    </PrettyBlazor.Condition>
+                    <PrettyBlazor.Condition Evaluation="_viewModel.HasChampionships">
+                        <Match>
+                            <MudChip Color="MudBlazor.Color.Primary"
+                                     Text="Championship">@_viewModel.ChampionshipSummaryDisplayText</MudChip>
+                        </Match>
+                    </PrettyBlazor.Condition>  
+                    <PrettyBlazor.Condition Evaluation="_viewModel.HasLeaders">
+                        <Match>
+                            <Iterations Items="@_viewModel.DistinctLeaders">
+                                <MudChip Color="MudBlazor.Color.Secondary"
+                                         Text="Leader">@($"{_viewModel.Leaders.Where(leader => leader.LeaderTypeId == context.LeaderTypeId).Count()}x {context.LeaderTypeAbbreviatedName}")</MudChip>
+                            </Iterations>
+                        </Match>
+                    </PrettyBlazor.Condition>
+                </MudChipSet>
             </Content>
             <ContentColumn2>
-
+                 
             </ContentColumn2>
+            <ContentColumn3>
+                
+            </ContentColumn3>
+        </DivRowCol4>
+        <DivRowCol4>
+            <Content>
+                <PrettyBlazor.Condition Evaluation="DisplayAccomplishments">
+                    <Match>
+                       <MudTable Bordered="false"
+                                 Dense="false" 
+                                 Hover="true"
+                                 Items="@_viewModel.Accomplishments"    
+                                 Striped="true">
+                            <ToolBarContent>
+                                <MudText Typo="Typo.h6"><b>Accomplishments</b></MudText>
+                            </ToolBarContent>
+                            <HeaderContent>
+                                <MudTh>Name</MudTh>
+                                <MudTh>Date/Year</MudTh>
+                            </HeaderContent>
+                            <RowTemplate>
+                                <MudTd DataLabel="Name">@context.AccomplishmentTypeName</MudTd>
+                                <MudTd DataLabel="Date/Year">@context.TimeFrame</MudTd>
+                            </RowTemplate>
+                            <PagerContent>
+                                <MudTablePager />
+                            </PagerContent>
+                        </MudTable>
+                    </Match>
+                </PrettyBlazor.Condition>
+                <PrettyBlazor.Condition Evaluation="DisplayAllStars">
+                    <Match>
+                       <MudTable Bordered="false"
+                                 Dense="false" 
+                                 Hover="true"
+                                 Items="@_viewModel.AllStars"    
+                                 Striped="true">
+                            <ToolBarContent>
+                                <MudText Typo="Typo.h6"><b>All Star Game Selections</b></MudText>
+                            </ToolBarContent>
+                            <HeaderContent>
+                                <MudTh>Team</MudTh>
+                                <MudTh>Year</MudTh>
+                            </HeaderContent>
+                            <RowTemplate>
+                                <MudTd DataLabel="Team">@context.TeamName</MudTd>
+                                <MudTd DataLabel="Year">@context.Year</MudTd>
+                            </RowTemplate>
+                            <PagerContent>
+                                <MudTablePager />
+                            </PagerContent>
+                        </MudTable>
+                    </Match>
+                </PrettyBlazor.Condition>
+                <PrettyBlazor.Condition Evaluation="DisplayAwards">
+                    <Match>
+                       <MudTable Bordered="false"
+                                 Dense="false" 
+                                 Hover="true"
+                                 Items="@_viewModel.Awards"    
+                                 Striped="true">
+                            <ToolBarContent>
+                                <MudText Typo="Typo.h6"><b>Awards</b></MudText>
+                            </ToolBarContent>
+                            <HeaderContent>
+                                <MudTh>Name</MudTh>
+                                <MudTh>Year</MudTh>
+                            </HeaderContent>
+                            <RowTemplate>
+                                <MudTd DataLabel="Name">@context.AwardTypeName</MudTd>
+                                <MudTd DataLabel="Year">@context.Year</MudTd>
+                            </RowTemplate>
+                            <PagerContent>
+                                <MudTablePager />
+                            </PagerContent>
+                        </MudTable>
+                    </Match>
+                </PrettyBlazor.Condition>
+                <PrettyBlazor.Condition Evaluation="DisplayChampionships">
+                    <Match>
+                       <MudTable Bordered="false"
+                                 Dense="false" 
+                                 Hover="true"
+                                 Items="@_viewModel.Championships"    
+                                 Striped="true">
+                            <ToolBarContent>
+                                <MudText Typo="Typo.h6"><b>Championships</b></MudText>
+                            </ToolBarContent>
+                            <HeaderContent>
+                                <MudTh></MudTh>
+                                <MudTh>Team</MudTh>
+                                <MudTh>Year</MudTh>
+                            </HeaderContent>
+                            <RowTemplate>
+                                <MudTd DataLabel="">@context.ChampionshipTypeName</MudTd>
+                                <MudTd DataLabel="Team">@context.TeamName</MudTd>
+                                <MudTd DataLabel="Year">@context.Year</MudTd>
+                            </RowTemplate>
+                            <PagerContent>
+                                <MudTablePager />
+                            </PagerContent>
+                        </MudTable>
+                    </Match>
+                </PrettyBlazor.Condition>
+                <PrettyBlazor.Condition Evaluation="DisplayLeaders">
+                    <Match>
+                       <MudTable Bordered="false"
+                                 Dense="false" 
+                                 Hover="true"
+                                 Items="@_viewModel.Leaders"    
+                                 Striped="true">
+                            <ToolBarContent>
+                                <MudText Typo="Typo.h6"><b>Leaders</b></MudText>
+                            </ToolBarContent>
+                            <HeaderContent>
+                                <MudTh>Name</MudTh>
+                                <MudTh>Year</MudTh>
+                            </HeaderContent>
+                            <RowTemplate>
+                                <MudTd DataLabel="Name">@context.LeaderTypeName</MudTd>
+                                <MudTd DataLabel="Year">@context.Year</MudTd>
+                            </RowTemplate>
+                            <PagerContent>
+                                <MudTablePager />
+                            </PagerContent>
+                        </MudTable>
+                    </Match>
+                </PrettyBlazor.Condition>
+            </Content>
+            <ContentColumn2>
+                <MudTable Bordered="false"
+                          Dense="false" 
+                          Hover="true"
+                          Items="@_viewModel.CareerRecords"    
+                          Striped="true">
+                    <ToolBarContent>
+                        <MudText Typo="Typo.h6"><b>Career Records</b></MudText>
+                    </ToolBarContent>
+                    <HeaderContent>
+                        <MudTh>Record</MudTh>
+                        <MudTh></MudTh>
+                    </HeaderContent>
+                    <RowTemplate>
+                        <MudTd DataLabel="Record">@context.CareerRecordTypeName</MudTd>
+                        <MudTd DataLabel="">@context.Amount</MudTd>
+                    </RowTemplate>
+                    <PagerContent>
+                        <MudTablePager />
+                    </PagerContent>
+                </MudTable>
+            </ContentColumn2>
+            <ContentColumn3>
+                <MudTable Bordered="false"
+                          Dense="false" 
+                          Hover="true"
+                          Items="@_viewModel.SingleSeasonRecords"    
+                          Striped="true">
+                    <ToolBarContent>
+                        <MudText Typo="Typo.h6"><b>Single Season Records</b></MudText>
+                    </ToolBarContent>
+                    <HeaderContent>
+                        <MudTh>Record</MudTh>
+                        <MudTh></MudTh>
+                    </HeaderContent>
+                    <RowTemplate>
+                        <MudTd DataLabel="Record">@context.RecordTypeName</MudTd>
+                        <MudTd DataLabel="">@context.Amount</MudTd>
+                    </RowTemplate>
+                    <PagerContent>
+                        <MudTablePager />
+                    </PagerContent>
+                </MudTable> 
+            </ContentColumn3>
         </DivRowCol4>
     </Content>
 </DivPad2>

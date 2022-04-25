@@ -14,9 +14,10 @@
         </MudSelect>
     </Content>
     <ContentColumn2>
-        <MudNumericField @bind-Value="_viewModel.Year" 
-                         Label="Year"
-                         Variant="Variant.Outlined" />
+        <MudTextField @bind-Value="_years" 
+                      HelperText="Ex. 1999 or 1999-2002 or 2003, 2005-2008"
+                      Label="Years"
+                      Variant="Variant.Outlined" />
     </ContentColumn2>
 </DivRowCol3>
 <DivLeftAlign>

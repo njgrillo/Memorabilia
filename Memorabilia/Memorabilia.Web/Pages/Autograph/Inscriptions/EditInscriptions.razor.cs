@@ -62,7 +62,7 @@ namespace Memorabilia.Web.Pages.Autograph.Inscriptions
             var inscription = _inscriptionsViewModel.Inscriptions.Single(inscription => inscription.InscriptionTypeId == inscriptionTypeId &&
                                                                                         inscription.InscriptionText == inscriptionText);
 
-            _inscriptionsViewModel.Inscriptions.Remove(inscription);
+            inscription.IsDeleted = true;
         }
 
         private void UpdateInscription()

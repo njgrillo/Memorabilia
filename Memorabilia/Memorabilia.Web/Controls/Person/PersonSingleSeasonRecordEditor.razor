@@ -13,6 +13,13 @@
             </Iterations>	
         </MudSelect>
     </Content>
+</DivRowCol3>
+<DivRowCol3>
+    <Content>
+        <MudNumericField @bind-Value="_viewModel.Year" 
+                         Label="Year"
+                         Variant="Variant.Outlined" />
+    </Content>
     <ContentColumn2>
         <MudNumericField @bind-Value="_viewModel.Amount" 
                          Label="Amount"
@@ -44,12 +51,12 @@
             <RowTemplate>
                 <MudTd DataLabel="Record">@context.RecordTypeName</MudTd>
                 <MudTd DataLabel="Year">@context.Year</MudTd>
-                <MudTd DataLabel="Amount">@context.Amount</MudTd>
+                <MudTd DataLabel="Amount">@context.DisplayAmount</MudTd>
                 <MudTd DataLabel="">
                     <MudTooltip Text="Delete">
                         <MudFab Color="MudBlazor.Color.Secondary"
                                 Icon="@Icons.Outlined.DeleteOutline"
-                                OnClick="@(_ => Remove(context.RecordTypeId, context.Year, context.Amount))" />
+                                OnClick="@(_ => Remove(context.RecordTypeId))" />
                     </MudTooltip>  
                 </MudTd>
             </RowTemplate>

@@ -42,12 +42,12 @@
             </HeaderContent>
             <RowTemplate>
                 <MudTd DataLabel="Record">@context.RecordTypeName</MudTd>
-                <MudTd DataLabel="Amount">@context.Amount</MudTd>
+                <MudTd DataLabel="Amount">@context.DisplayAmount</MudTd>
                 <MudTd DataLabel="">
                     <MudTooltip Text="Delete">
                         <MudFab Color="MudBlazor.Color.Secondary"
                                 Icon="@Icons.Outlined.DeleteOutline"
-                                OnClick="@(_ => Remove(context.RecordTypeId, context.Amount))" />
+                                OnClick="@(_ => Remove(context.RecordTypeId))" />
                     </MudTooltip>  
                 </MudTd>
             </RowTemplate>

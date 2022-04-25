@@ -19,9 +19,9 @@ namespace Memorabilia.Web.Controls.Person
             _viewModel = new SavePersonCareerRecordViewModel();
         }
 
-        private void Remove(int recordTypeId, int amount)
+        private void Remove(int recordTypeId)
         {
-            var record = CareerRecords.SingleOrDefault(record => record.RecordTypeId == recordTypeId && record.Amount == amount);
+            var record = CareerRecords.SingleOrDefault(record => record.RecordTypeId == recordTypeId);
 
             if (record == null)
                 return;

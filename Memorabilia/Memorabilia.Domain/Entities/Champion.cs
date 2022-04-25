@@ -13,6 +13,8 @@
 
         public int ChampionTypeId { get; private set; }
 
+        public virtual Team Team { get; private set; }
+
         public int TeamId { get; private set; }
 
         public int Year { get; private set; }

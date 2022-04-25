@@ -1,7 +1,6 @@
 ﻿using Demo.Framework.Web;
 using Memorabilia.Application.Features.Autograph;
 using Memorabilia.Application.Features.Autograph.Authentication;
-using Memorabilia.Domain.Constants;
 using Microsoft.AspNetCore.Components;
 using System.Linq;
 using System.Threading.Tasks;
@@ -68,7 +67,7 @@ namespace Memorabilia.Web.Pages.Autograph.Authentications
         {
             var authentication = _authenticationsViewModel.Authentications.Single(authentication => authentication.AuthenticationCompanyId == authenticationCompanyId);
 
-            _authenticationsViewModel.Authentications.Remove(authentication);
+            authentication.IsDeleted = true;
         }
 
         private void UpdateAuthentication()

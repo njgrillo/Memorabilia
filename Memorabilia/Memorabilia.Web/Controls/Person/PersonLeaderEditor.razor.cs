@@ -1,4 +1,5 @@
 ﻿using Memorabilia.Application.Features.Admin.People;
+using Memorabilia.Domain.Extensions;
 using Microsoft.AspNetCore.Components;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,12 +12,17 @@ namespace Memorabilia.Web.Controls.Person
         public List<SavePersonLeaderViewModel> Leaders { get; set; } = new();
 
         private SavePersonLeaderViewModel _viewModel = new();
+        private string _years;
 
         private void Add()
         {
-            Leaders.Add(_viewModel);
+            foreach (var year in _years.ToIntArray())
+            {
+                Leaders.Add(new SavePersonLeaderViewModel() { LeaderTypeId = _viewModel.LeaderTypeId, Year = year });
+            }            
 
             _viewModel = new SavePersonLeaderViewModel();
+            _years = string.Empty;
         }
 
         private void Remove(int leaderTypeId, int year)
