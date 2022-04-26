@@ -3,7 +3,8 @@
 <DivRowCol3>
     <Content>
         <MudSelect @bind-Value="@_viewModel.OccupationId"
-                   @bind-Value:event="ValueChanged"   
+                   @bind-Value:event="ValueChanged" 
+                   Disabled="@(!_canEditOccupation)"
                    Label="Occupation"
                    Variant="Variant.Outlined">
             <MudSelectItem Value="@(0)">--Select--</MudSelectItem>
@@ -28,11 +29,18 @@
 </DivRowCol3>
 <DivLeftAlign>
     <Content>
-        <MudButton ButtonType="MudBlazor.ButtonType.Button" 
-                   Color="MudBlazor.Color.Success"
+        <MudButton hidden="@(!_canAdd)"
+                   ButtonType="MudBlazor.ButtonType.Button" 
+                   Color="MudBlazor.Color.Secondary"
                    OnClick="Add"
                    Size="MudBlazor.Size.Medium"                                  
                    Variant="Variant.Filled">Add</MudButton>
+        <MudButton hidden="@(!_canUpdate)"
+                   ButtonType="MudBlazor.ButtonType.Button" 
+                   Color="MudBlazor.Color.Secondary"
+                   OnClick="Update"
+                   Size="MudBlazor.Size.Medium"                                  
+                   Variant="Variant.Filled">Update</MudButton>
     </Content>    
 </DivLeftAlign>
 <DivRowCol6>
@@ -51,6 +59,11 @@
                 <MudTd DataLabel="Occupation">@context.OccupationName</MudTd>
                 <MudTd DataLabel="Occupation Type">@context.OccupationTypeName</MudTd>
                 <MudTd DataLabel="">
+                    <MudTooltip Text="Edit">
+                        <MudFab Color="MudBlazor.Color.Primary"                                
+                                Icon="@Icons.Outlined.ModeEditOutline"
+                                OnClick="@(_ => Edit(context))" />
+                    </MudTooltip> 
                     <MudTooltip Text="Delete">
                         <MudFab Color="MudBlazor.Color.Secondary"
                                 Icon="@Icons.Outlined.DeleteOutline"

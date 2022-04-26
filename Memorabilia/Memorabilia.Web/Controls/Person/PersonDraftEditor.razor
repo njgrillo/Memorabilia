@@ -5,6 +5,7 @@
     <Content>
         <MudSelect @bind-Value="@_viewModel.FranchiseId"
                    @bind-Value:event="ValueChanged" 
+                   Disabled="@(!_canEditFranchise)"
                    Label="Franchise"
                    Variant="Variant.Outlined">
             <MudSelectItem Value="@(0)">--Select--</MudSelectItem>
@@ -40,11 +41,18 @@
 </DivRowCol3>
 <DivLeftAlign>
     <Content>
-        <MudButton ButtonType="MudBlazor.ButtonType.Button" 
-                   Color="MudBlazor.Color.Success"
+        <MudButton hidden="@(!_canAdd)"
+                   ButtonType="MudBlazor.ButtonType.Button" 
+                   Color="MudBlazor.Color.Secondary"
                    OnClick="Add"
                    Size="MudBlazor.Size.Medium"                                  
                    Variant="Variant.Filled">Add</MudButton>
+        <MudButton hidden="@(!_canUpdate)"
+                   ButtonType="MudBlazor.ButtonType.Button" 
+                   Color="MudBlazor.Color.Secondary"
+                   OnClick="Update"
+                   Size="MudBlazor.Size.Medium"                                  
+                   Variant="Variant.Filled">Update</MudButton>
     </Content>
 </DivLeftAlign>
 <DivRowCol6>
@@ -69,6 +77,11 @@
                 <MudTd DataLabel="Pick">@context.Pick</MudTd>
                 <MudTd DataLabel="Overall">@context.Overall</MudTd>
                 <MudTd DataLabel="">
+                    <MudTooltip Text="Edit">
+                        <MudFab Color="MudBlazor.Color.Primary"                                
+                                Icon="@Icons.Outlined.ModeEditOutline"
+                                OnClick="@(_ => Edit(context))" />
+                    </MudTooltip> 
                     <MudTooltip Text="Delete">
                         <MudFab Color="MudBlazor.Color.Secondary"
                                 Icon="@Icons.Outlined.DeleteOutline"

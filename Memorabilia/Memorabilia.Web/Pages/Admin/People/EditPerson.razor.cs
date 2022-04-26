@@ -39,13 +39,8 @@ namespace Memorabilia.Web.Pages.Admin.People
         public void OnNameFieldBlur()
         {
             _viewModel.DisplayName = $"{_viewModel.LastName}"
-                                    + (!_viewModel.Suffix.IsNullOrEmpty() ? $" {_viewModel.Suffix}, " : ",")
-                                    + (!_viewModel.Nickname.IsNullOrEmpty() ? $" {_viewModel.Nickname}" : string.Empty)
-                                    + (!_viewModel.FirstName.IsNullOrEmpty()
-                                        ? (!_viewModel.Nickname.IsNullOrEmpty()
-                                            ? $" ({_viewModel.FirstName})"
-                                            : _viewModel.FirstName)
-                                        : string.Empty);
+                                    + (!_viewModel.Suffix.IsNullOrEmpty() ? $" {_viewModel.Suffix}," : ",")
+                                    + (!_viewModel.Nickname.IsNullOrEmpty() ? $" {_viewModel.Nickname}" : $" {_viewModel.FirstName}");
 
             _viewModel.ProfileName = $"{(!_viewModel.Nickname.IsNullOrEmpty() ? _viewModel.Nickname : _viewModel.FirstName)}"
                                    + $" {_viewModel.LastName}"

@@ -10,6 +10,9 @@ namespace Memorabilia.Web.Controls.Person
         [Parameter]
         public List<SavePersonDraftViewModel> Drafts { get; set; } = new();
 
+        private bool _canAdd = true;
+        private bool _canEditFranchise = true;
+        private bool _canUpdate;
         private SavePersonDraftViewModel _viewModel = new();
 
         private void Add()
@@ -19,7 +22,20 @@ namespace Memorabilia.Web.Controls.Person
             _viewModel = new SavePersonDraftViewModel();
         }
 
-        private void Remove(int franchiseId, int year)
+        private void Edit(SavePersonDraftViewModel draft)
+        {
+            _viewModel.FranchiseId = draft.FranchiseId;
+            _viewModel.Year = draft.Year;
+            _viewModel.Round = draft.Round;
+            _viewModel.Pick = draft.Pick;
+            _viewModel.Overall = draft.Overall;
+
+            _canAdd = false;
+            _canEditFranchise = false;
+            _canUpdate = true;
+        }
+
+        private void Remove(int franchiseId, int? year)
         {
             var draft = Drafts.SingleOrDefault(draft => draft.FranchiseId == franchiseId && draft.Year == year);
 
@@ -27,6 +43,23 @@ namespace Memorabilia.Web.Controls.Person
                 return;
 
             draft.IsDeleted = true;
+        }
+
+        private void Update()
+        {
+            var draft = Drafts.Single(draft => draft.FranchiseId == _viewModel.FranchiseId);
+
+            draft.FranchiseId = _viewModel.FranchiseId;
+            draft.Year = _viewModel.Year;
+            draft.Round = _viewModel.Round;
+            draft.Pick = _viewModel.Pick;
+            draft.Overall = _viewModel.Overall;
+
+            _viewModel = new SavePersonDraftViewModel();
+
+            _canAdd = true;
+            _canEditFranchise = true;
+            _canUpdate = false;
         }
     }
 }

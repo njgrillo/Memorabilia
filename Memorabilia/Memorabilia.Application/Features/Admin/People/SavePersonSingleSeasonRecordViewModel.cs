@@ -1,4 +1,5 @@
 ﻿using Memorabilia.Domain.Entities;
+using System.ComponentModel.DataAnnotations;
 
 namespace Memorabilia.Application.Features.Admin.People
 {
@@ -27,6 +28,8 @@ namespace Memorabilia.Application.Features.Admin.People
 
         public Domain.Constants.RecordType[] RecordTypes => Domain.Constants.RecordType.All;
 
-        public int Year { get; set; }
+        [Required]
+        [Range(1800, 3000, ErrorMessage = "Year is required and must be 1800 or greater.")]
+        public int? Year { get; set; }
     }
 }

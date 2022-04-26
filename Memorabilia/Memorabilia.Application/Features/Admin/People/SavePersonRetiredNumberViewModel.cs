@@ -1,4 +1,5 @@
 ﻿using Memorabilia.Domain.Entities;
+using System.ComponentModel.DataAnnotations;
 
 namespace Memorabilia.Application.Features.Admin.People
 {
@@ -22,6 +23,8 @@ namespace Memorabilia.Application.Features.Admin.People
 
         public int PersonId { get; set; }
 
-        public int PlayerNumber { get; set; }
+        [Required]
+        [Range(0, 99, ErrorMessage = "Number is required and must be 0 or greater.")]
+        public int? PlayerNumber { get; set; }
     }
 }

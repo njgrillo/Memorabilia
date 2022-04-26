@@ -16,11 +16,13 @@ namespace Memorabilia.Domain.Constants
         public static readonly AwardType AmericanLeagueRookieOfTheYear = new(13, "American League Rookie of the Year", "AL ROY");        
         public static readonly AwardType AssociatedPressAthleteOfTheYear = new(19, "Associated Press Athlete of the Year", "AP Athlete of the Year");        
         public static readonly AwardType DickHowserTrophy = new(29, "Dick Howser Trophy", string.Empty);
+        public static readonly AwardType EdgarMartinezAward = new(35, "Edgar Martinez Award", string.Empty);
         public static readonly AwardType FieldingBibleAward = new(21, "Fielding Bible Award", string.Empty);
         public static readonly AwardType FinalsMostValuablePlayer = new(4, "Finals Most Valuable Player", "Finals MVP");
         public static readonly AwardType GoldenSpikes = new(5, "Golden Spikes", string.Empty);
         public static readonly AwardType GoldGlove = new(6, "Gold Glove", string.Empty);
         public static readonly AwardType ManagerOfTheYear = new(7, "Manager of the Year", string.Empty);
+        public static readonly AwardType MarvinMillerManOfTheYear = new(34, "Marvin Miller Man of the Year", string.Empty);
         public static readonly AwardType MostValuablePlayer = new(16, "Most Valuable Player", "MVP");
         public static readonly AwardType NationalLeagueChampionshipSeriesMostValuablePlayer = new(22, "National League Championship Series Most Valuable Player", "NLCS MVP");
         public static readonly AwardType NationalLeagueComebackPlayerOfTheYear = new(25, "National League Comeback Player of the Year", "NL Comeback Player of the Year");
@@ -52,11 +54,13 @@ namespace Memorabilia.Domain.Constants
             AmericanLeagueRookieOfTheYear,
             AssociatedPressAthleteOfTheYear,
             DickHowserTrophy,
+            EdgarMartinezAward,
             FieldingBibleAward,
             FinalsMostValuablePlayer,
             GoldenSpikes,
             GoldGlove,
             ManagerOfTheYear,
+            MarvinMillerManOfTheYear,
             MostValuablePlayer,
             NationalLeagueChampionshipSeriesMostValuablePlayer,
             NationalLeagueComebackPlayerOfTheYear,

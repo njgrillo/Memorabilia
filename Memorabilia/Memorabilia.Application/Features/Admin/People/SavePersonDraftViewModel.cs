@@ -1,4 +1,5 @@
 ﻿using Memorabilia.Domain.Entities;
+using System.ComponentModel.DataAnnotations;
 
 namespace Memorabilia.Application.Features.Admin.People
 {
@@ -29,8 +30,12 @@ namespace Memorabilia.Application.Features.Admin.People
 
         public int? Pick { get; set; }
 
-        public int Round { get; set; }
+        [Required]
+        [Range(1, 50, ErrorMessage = "Round is required and must be 1 or greater.")]
+        public int? Round { get; set; }
 
-        public int Year { get; set; }
+        [Required]
+        [Range(1965, 3000, ErrorMessage = "Year is required and must be 1965 or later.")]
+        public int? Year { get; set; }
     }
 }

@@ -19,10 +19,10 @@ namespace Memorabilia.Web.Controls.Person
             _viewModel = new SavePersonRetiredNumberViewModel();
         }
 
-        private void Remove(int franchiseId, int number)
+        private void Remove(int franchiseId, int? number)
         {
             var retiredNumber = RetiredNumbers.SingleOrDefault(retiredNumber => retiredNumber.FranchiseId == franchiseId &&
-                                                                                retiredNumber.PlayerNumber == number);
+                                                                                retiredNumber.PlayerNumber == (number ?? 0));
 
             if (retiredNumber == null)
                 return;

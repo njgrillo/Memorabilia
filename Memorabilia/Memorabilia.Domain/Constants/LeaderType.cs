@@ -16,6 +16,7 @@ namespace Memorabilia.Domain.Constants
         public static readonly LeaderType MajorLeagueBaseballHitsLeader = new(20, "Major League Baseball Hits Leader", "MLB Hits Leader");
         public static readonly LeaderType MajorLeagueBaseballHomeRunLeader = new(9, "Major League Baseball Home Run Leader", "MLB HR Leader");
         public static readonly LeaderType MajorLeagueBaseballRunsBattedInLeader = new(17, "Major League Baseball Runs Batted In Leader", "MLB RBI Leader");
+        public static readonly LeaderType MajorLeagueBaseballStrikeoutLeader = new(21, "Major League Baseball Strikeout Leader", "MLB Strikeout Leader");
         public static readonly LeaderType MajorLeagueBaseballWinsLeader = new(10, "Major League Baseball Wins Leader", "MLB Wins Leader");
         public static readonly LeaderType NationalLeagueBattingChampion = new(4, "National League Batting Champion", "NL Batting Champ");
         public static readonly LeaderType NationalLeagueHitsLeader = new(19, "National League Hits Leader", "NL Hits Leader");
@@ -39,6 +40,7 @@ namespace Memorabilia.Domain.Constants
             MajorLeagueBaseballHitsLeader,
             MajorLeagueBaseballHomeRunLeader,
             MajorLeagueBaseballRunsBattedInLeader,
+            MajorLeagueBaseballStrikeoutLeader,
             MajorLeagueBaseballWinsLeader,
             NationalLeagueBattingChampion,
             NationalLeagueEarnedRunAverageLeader,

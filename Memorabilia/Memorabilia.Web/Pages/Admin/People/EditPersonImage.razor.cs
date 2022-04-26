@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Logging;
-using MudBlazor;
 using System;
 using System.IO;
 using System.Threading.Tasks;
@@ -24,13 +23,7 @@ namespace Memorabilia.Web.Pages.Admin.People
         public ILogger<EditPersonImage> Logger { get; set; }
 
         [Inject]
-        public NavigationManager NavigationManager { get; set; }
-
-        [Inject]
         public QueryRouter QueryRouter { get; set; }
-
-        [Inject]
-        public ISnackbar Snackbar { get; set; }
 
         [Parameter]
         public int PersonId { get; set; }

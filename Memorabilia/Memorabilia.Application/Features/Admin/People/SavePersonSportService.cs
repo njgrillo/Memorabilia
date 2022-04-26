@@ -49,7 +49,7 @@ namespace Memorabilia.Application.Features.Admin.People
 
                 foreach (var draft in command.Drafts)
                 {
-                    person.SetDraft(draft.FranchiseId, draft.Year, draft.Round, draft.Pick, draft.Overall);
+                    person.SetDraft(draft.FranchiseId, draft.Year ?? 0, draft.Round ?? 0, draft.Pick, draft.Overall);
                 }
             }
         }

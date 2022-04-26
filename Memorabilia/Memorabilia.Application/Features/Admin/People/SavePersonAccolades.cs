@@ -83,7 +83,7 @@ namespace Memorabilia.Application.Features.Admin.People
 
                 foreach (var retiredNumber in command.RetiredNumbers)
                 {
-                    person.SetRetiredNumber(retiredNumber.Id, retiredNumber.FranchiseId, retiredNumber.PlayerNumber);
+                    person.SetRetiredNumber(retiredNumber.Id, retiredNumber.FranchiseId, retiredNumber.PlayerNumber ?? 0);
                 }
             }
 
@@ -93,7 +93,7 @@ namespace Memorabilia.Application.Features.Admin.People
 
                 foreach (var record in command.SingleSeasonRecords)
                 {
-                    person.SetSingleSeasonRecord(record.Id, record.RecordTypeId, record.Year, record.Amount);
+                    person.SetSingleSeasonRecord(record.Id, record.RecordTypeId, record.Year ?? 0, record.Amount);
                 }
             }
         }

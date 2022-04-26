@@ -10,6 +10,7 @@ namespace Memorabilia.Domain.Constants
         public static readonly AccomplishmentType AllWorldBaseballClassicTeam = new(11, "All-World Baseball Classic Team", string.Empty);
         public static readonly AccomplishmentType AmericanLeagueTripleCrown = new(2, "American League Triple Crown", "AL Triple Crown");
         public static readonly AccomplishmentType CombinedNoHitter = new(8, "Combined No Hitter", string.Empty);
+        public static readonly AccomplishmentType FourHomeRunsInAGame = new(12, "4 Home Runs in a Game", string.Empty);
         public static readonly AccomplishmentType MajorLeagueBaseballAllCenturyTeam = new(6, "Major League Baseball All-Century Team", string.Empty);
         public static readonly AccomplishmentType MajorLeagueBaseballAllTimeTeam = new(7, "Major League Baseball All-Time Team", string.Empty);
         public static readonly AccomplishmentType NationalLeagueTripleCrown = new(10, "National League Triple Crown", "NL Triple Crown");
@@ -24,6 +25,7 @@ namespace Memorabilia.Domain.Constants
             AllWorldBaseballClassicTeam,
             AmericanLeagueTripleCrown,
             CombinedNoHitter,
+            FourHomeRunsInAGame,
             MajorLeagueBaseballAllCenturyTeam,
             MajorLeagueBaseballAllTimeTeam,
             NationalLeagueTripleCrown,

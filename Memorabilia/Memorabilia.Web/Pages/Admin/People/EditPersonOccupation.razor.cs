@@ -1,7 +1,6 @@
 ﻿using Demo.Framework.Web;
 using Memorabilia.Application.Features.Admin.People;
 using Microsoft.AspNetCore.Components;
-using MudBlazor;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -13,13 +12,7 @@ namespace Memorabilia.Web.Pages.Admin.People
         public CommandRouter CommandRouter { get; set; }
 
         [Inject]
-        public NavigationManager NavigationManager { get; set; }
-
-        [Inject]
         public QueryRouter QueryRouter { get; set; }
-
-        [Inject]
-        public ISnackbar Snackbar { get; set; }
 
         [Parameter]
         public int PersonId { get; set; }
