@@ -14,6 +14,9 @@ namespace Memorabilia.Web.Controls
         public ISnackbar Snackbar { get; set; }
 
         [Parameter]
+        public RenderFragment AdditionalButtons { get; set; }
+
+        [Parameter]
         public string BackNavigationPath { get; set; }
 
         [Parameter]

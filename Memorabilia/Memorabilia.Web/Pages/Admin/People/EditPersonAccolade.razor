@@ -21,10 +21,18 @@
                         PersonId="_viewModel.PersonId"
                         PersonStep="_viewModel.PersonStep" />
     </TimelineContent>
-    <Content>              
+    <Content>      
         <DivRowCol12>
             <Content>
-                <MudText Typo="Typo.h3">All Star Games</MudText>
+                <MudText Typo="Typo.h3">Accomplishments</MudText>
+                <PersonAccomplishmentEditor Accomplishments="_viewModel.Accomplishments"
+                                            AccomplishmentTypes="_viewModel.AccomplishmentTypes" />
+            </Content>
+        </DivRowCol12>
+        <br />
+        <DivRowCol12 Hidden="@(!_viewModel.DisplayAllStars)">
+            <Content>
+                <MudText Typo="Typo.h3">@_viewModel.AllStarGameLabel</MudText>
                 <PersonAllStarEditor AllStarYears="_viewModel.AllStarYears" />
             </Content>
         </DivRowCol12>
@@ -32,43 +40,41 @@
         <DivRowCol12>
             <Content>
                 <MudText Typo="Typo.h3">Awards</MudText>
-                <PersonAwardEditor Awards="_viewModel.Awards" />
-            </Content>
-        </DivRowCol12>
-        <br />
-        <DivRowCol12>
-            <Content>
-                <MudText Typo="Typo.h3">Accomplishments</MudText>
-                <PersonAccomplishmentEditor Accomplishments="_viewModel.Accomplishments" />
-            </Content>
-        </DivRowCol12>
-        <br />
-        <DivRowCol12>
-            <Content>
-                <MudText Typo="Typo.h3">Leaders</MudText>
-                <PersonLeaderEditor Leaders="_viewModel.Leaders" />
+                <PersonAwardEditor Awards="_viewModel.Awards"
+                                   AwardTypes="_viewModel.AwardTypes" />
             </Content>
         </DivRowCol12>
         <br />
         <DivRowCol12>
             <Content>
                 <MudText Typo="Typo.h3">Career Records</MudText>
-                <PersonCareerRecordEditor CareerRecords="_viewModel.CareerRecords" />
+                <PersonCareerRecordEditor CareerRecords="_viewModel.CareerRecords"
+                                          RecordTypes="_viewModel.RecordTypes" />
             </Content>
         </DivRowCol12>
         <br />
         <DivRowCol12>
             <Content>
-                <MudText Typo="Typo.h3">Single Season Records</MudText>
-                <PersonSingleSeasonRecordEditor SingleSeasonRecords="_viewModel.SingleSeasonRecords" />
+                <MudText Typo="Typo.h3">Leaders</MudText>
+                <PersonLeaderEditor Leaders="_viewModel.Leaders"
+                                    LeaderTypes="_viewModel.LeaderTypes" />
             </Content>
         </DivRowCol12>
         <br />
         <DivRowCol12>
             <Content>
                 <MudText Typo="Typo.h3">Retired Numbers</MudText>
-                <PersonRetiredNumberEditor RetiredNumbers="_viewModel.RetiredNumbers" />
+                <PersonRetiredNumberEditor Franchises="_viewModel.Franchises" 
+                                           RetiredNumbers="_viewModel.RetiredNumbers" />
             </Content>
         </DivRowCol12>
+        <br />
+        <DivRowCol12>
+            <Content>
+                <MudText Typo="Typo.h3">Single Season Records</MudText>
+                <PersonSingleSeasonRecordEditor RecordTypes="_viewModel.RecordTypes"
+                                                SingleSeasonRecords="_viewModel.SingleSeasonRecords" />
+            </Content>
+        </DivRowCol12>   
     </Content>
 </EditPage>

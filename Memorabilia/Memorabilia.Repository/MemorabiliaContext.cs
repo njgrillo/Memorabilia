@@ -48,6 +48,8 @@ namespace Memorabilia.Repository
             modelBuilder.Entity<MemorabiliaSport>();
             modelBuilder.Entity<MemorabiliaTeam>();
             modelBuilder.Entity<Personalization>();          
+            modelBuilder.Entity<Project>();          
+            modelBuilder.Entity<ProjectPerson>();         
         }
     }
 }

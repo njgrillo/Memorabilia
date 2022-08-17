@@ -13,6 +13,8 @@
 
         public int AwardTypeId { get; private set; }
 
+        public virtual Person Person { get; private set; }
+
         public int PersonId { get; private set; }
 
         public int Year { get; private set; }

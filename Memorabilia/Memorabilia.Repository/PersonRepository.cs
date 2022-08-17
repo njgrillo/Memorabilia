@@ -17,21 +17,23 @@ namespace Memorabilia.Repository
             _context = context;
         }
 
-        private IQueryable<Person> Person => _context.Set<Person>()
-                                                     .Include(person => person.Accomplishments)
-                                                     .Include(person => person.AllStars)
-                                                     .Include(person => person.Awards)
-                                                     .Include(person => person.CareerRecords)
-                                                     .Include(person => person.Colleges)
-                                                     .Include(person => person.FranchiseHallOfFames)
-                                                     .Include(person => person.HallOfFames)
-                                                     .Include(person => person.Leaders)
-                                                     .Include(person => person.Occupations)
-                                                     .Include(person => person.RetiredNumbers)
-                                                     .Include(person => person.Service)
-                                                     .Include(person => person.SingleSeasonRecords)
-                                                     .Include(person => person.Teams)
-                                                     .Include("Teams.Team");
+        private IQueryable<Person> People => _context.Set<Person>();
+
+        private IQueryable<Person> Person => People.Include(person => person.Accomplishments)
+                                                   .Include(person => person.AllStars)
+                                                   .Include(person => person.Awards)
+                                                   .Include(person => person.CareerRecords)
+                                                   .Include(person => person.Colleges)
+                                                   .Include(person => person.FranchiseHallOfFames)
+                                                   .Include(person => person.HallOfFames)
+                                                   .Include(person => person.Leaders)
+                                                   .Include(person => person.Occupations)
+                                                   .Include(person => person.RetiredNumbers)
+                                                   .Include(person => person.Service)
+                                                   .Include(person => person.SingleSeasonRecords)
+                                                   .Include(person => person.Sports)
+                                                   .Include(person => person.Teams)
+                                                   .Include("Teams.Team");
 
         public async Task Add(Person person, CancellationToken cancellationToken = default)
         {
@@ -55,11 +57,10 @@ namespace Memorabilia.Repository
         public async Task<IEnumerable<Person>> GetAll(int? sportId = null)
         {
             return sportId.HasValue 
-                ? (await Person.Where(person => person.Teams.Any(team => team.Team.Franchise.SportLeagueLevel.SportId == sportId.Value))
+                ? (await People.Where(person => person.Teams.Any(team => team.Team.Franchise.SportLeagueLevel.SportId == sportId.Value))
                                .ToListAsync()
                                .ConfigureAwait(false))
-                               .OrderBy(person => person.DisplayName)
-                : (await Person.ToListAsync().ConfigureAwait(false)).OrderBy(person => person.DisplayName);
+                : await People.ToListAsync().ConfigureAwait(false);
         }
 
         public async Task Update(Person person, CancellationToken cancellationToken = default)

@@ -23,6 +23,18 @@ namespace Memorabilia.Domain.Constants
             Tennis
         };
 
+        public static readonly Sport[] AllStarGameSports =
+        {
+            Baseball,
+            Basketball,
+            Hockey
+        };
+
+        public static readonly Sport[] ProBowlGameSports =
+        {
+            Football
+        };
+
         private Sport(int id, string name, string alternateName)
         {
             Id = id;
@@ -39,6 +51,16 @@ namespace Memorabilia.Domain.Constants
         public static Sport Find(int id)
         {
             return All.SingleOrDefault(sport => sport.Id == id);
+        }
+
+        public static bool HasAllStarGames(params int[] sportIds)
+        {
+            return sportIds.Select(id => Find(id)).Any(sport => AllStarGameSports.Contains(sport));
+        }
+
+        public static bool HasProBowlGames(params int[] sportIds)
+        {
+            return sportIds.Select(id => Find(id)).Any(sport => ProBowlGameSports.Contains(sport));
         }
     }
 }

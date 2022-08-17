@@ -23,10 +23,16 @@ namespace Memorabilia.Application.Features.Admin.People
 
         public int PersonId => _personTeam.PersonId;
 
+        public int SportId => _personTeam.Team.Franchise.SportLeagueLevel.SportId;
+
+        public int SportLeagueLevelId => _personTeam.Team.Franchise.SportLeagueLevelId;
+
         public int TeamId => _personTeam.TeamId;
 
         public string TeamLocation => _personTeam.Team.Location;
 
         public string TeamName => _personTeam.Team?.Name;
+
+        public int TeamRoleTypeId => _personTeam.TeamRoleTypeId;
     }
 }

@@ -14,6 +14,7 @@ namespace Memorabilia.Domain.Constants
         public static readonly BallotNumber Nineth = new(9, "9th");
         public static readonly BallotNumber Second = new(2, "2nd");
         public static readonly BallotNumber Seventh = new(7, "7th");
+        public static readonly BallotNumber Sixteenth = new(16, "16th");
         public static readonly BallotNumber Sixth = new(6, "6th");
         public static readonly BallotNumber Tenth = new(10, "10th");
         public static readonly BallotNumber Third = new(3, "3rd");
@@ -36,7 +37,8 @@ namespace Memorabilia.Domain.Constants
             Twelveth,
             Thirteenth,
             Fourteenth,
-            Fifthteenth
+            Fifthteenth,
+            Sixteenth
         };
 
         public int Id { get; }

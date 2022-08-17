@@ -31,6 +31,7 @@
         public static readonly AdminDomainItem HelmetTypes = new("Helmet Types", "Defines variations of helmets", "images/helmettypes.jpg");
         public static readonly AdminDomainItem ImageTypes = new("Image Types", "Defines the importance of the image", "images/imagetypes.png");
         public static readonly AdminDomainItem InscriptionTypes = new("Inscription Types", "Defines variations of inscriptions for autographs", "images/inscriptiontypes.jpg");
+        public static readonly AdminDomainItem InternationalHallOfFameTypes = new("International Hall Of Fame Types", "Defines variations of international hall of fames", "images/internationalhalloffametypes.jpg");
         public static readonly AdminDomainItem ItemTypeBrands = new("Item Type Brands", "Defines which items have which brands", "images/brands.jpg");
         public static readonly AdminDomainItem ItemTypeGameStyles = new("Item Type Game Styles", "Defines which items have which game styles", "images/gamestyletypes.jpg");
         public static readonly AdminDomainItem ItemTypeLevels = new("Item Type Levels", "Defines which items have which levels", "images/leveltypes.jpg");
@@ -50,6 +51,7 @@
         public static readonly AdminDomainItem People = new("People", "Defines people", "images/athletes.jpg");
         public static readonly AdminDomainItem Pewters = new("Pewters", "Defines variations of pewters", "images/pewters.jpg");
         public static readonly AdminDomainItem PhotoTypes = new("Photo Types", "Defines variations of photos", "images/phototypes.jpg");
+        public static readonly AdminDomainItem PriorityTypes = new("Priority Types", "Defines the priority types of projects", "images/prioritytypes.jpg");
         public static readonly AdminDomainItem PrivacyTypes = new("Privacy Types", "Defines the privacy types of memorabilia", "images/privacy.png");
         public static readonly AdminDomainItem PurchaseTypes = new("Purchase Types", "Defines variations of purchase types", "images/purchasetypes.png");
         public static readonly AdminDomainItem RecordTypes = new("Record Types", "Defines variations of record", "images/recordtypes.jpg");
@@ -57,6 +59,7 @@
         public static readonly AdminDomainItem SportLeagueLevels = new("Sport League Levels", "Defines variations of sport leagues", "images/sportleaguelevels.jpg");
         public static readonly AdminDomainItem Sports = new("Sports", "Defines sports", "images/sports.jpg");
         public static readonly AdminDomainItem Spots = new("Spots", "Defines variations of autograph spots", "images/spots.jpg");
+        public static readonly AdminDomainItem TeamRoleTypes = new("Team Role Types", "Defines the variations of roles in a team", "images/teamroletypes.jpg");
         public static readonly AdminDomainItem Teams = new("Teams", "Defines teams", "images/teams.jpg");
         public static readonly AdminDomainItem WritingInstruments = new("Writing Instruments", "Defines variations of writing instruments", "images/writinginstruments.jpg");
 
@@ -90,6 +93,7 @@
             HelmetQualityTypes,
             HelmetTypes,
             InscriptionTypes,
+            InternationalHallOfFameTypes,
             ItemTypeBrands,
             ItemTypeGameStyles,
             ItemTypeLevels,
@@ -109,6 +113,7 @@
             People,
             Pewters,
             PhotoTypes,
+            PriorityTypes,
             PrivacyTypes,
             PurchaseTypes,
             RecordTypes,
@@ -116,6 +121,7 @@
             SportLeagueLevels,
             Sports,
             Spots,
+            TeamRoleTypes,
             Teams,
             WritingInstruments
         };

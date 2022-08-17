@@ -45,6 +45,8 @@ namespace Memorabilia.Repository
             modelBuilder.Entity<HelmetType>();
             modelBuilder.Entity<ImageType>();
             modelBuilder.Entity<InscriptionType>();
+            modelBuilder.Entity<InternationalHallOfFame>();
+            modelBuilder.Entity<InternationalHallOfFameType>();
             modelBuilder.Entity<ItemType>();
             modelBuilder.Entity<ItemTypeGameStyleType>();
             modelBuilder.Entity<ItemTypeBrand>();
@@ -65,10 +67,12 @@ namespace Memorabilia.Repository
             modelBuilder.Entity<PersonAward>();
             modelBuilder.Entity<PersonNickname>();
             modelBuilder.Entity<PersonOccupation>();
+            modelBuilder.Entity<PersonSport>();
             modelBuilder.Entity<PersonTeam>();
             modelBuilder.Entity<Pewter>();
             modelBuilder.Entity<PhotoType>();
-            modelBuilder.Entity<PrivacyType>();
+            modelBuilder.Entity<PriorityType>();
+            modelBuilder.Entity<PrivacyType>();            
             modelBuilder.Entity<PurchaseType>();
             modelBuilder.Entity<RecordType>();
             modelBuilder.Entity<Size>();
@@ -80,6 +84,7 @@ namespace Memorabilia.Repository
             modelBuilder.Entity<TeamConference>();
             modelBuilder.Entity<TeamDivision>();
             modelBuilder.Entity<TeamLeague>();
+            modelBuilder.Entity<TeamRoleType>();
             modelBuilder.Entity<User>();
             modelBuilder.Entity<UserDashboard>();
             modelBuilder.Entity<WritingInstrument>();

@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Memorabilia.Domain.Entities;
+using System.ComponentModel.DataAnnotations;
 
 namespace Memorabilia.Application.Features.Admin.People
 {
@@ -6,7 +7,7 @@ namespace Memorabilia.Application.Features.Admin.People
     {
         public SavePersonOccupationViewModel() { }
 
-        public SavePersonOccupationViewModel(PersonOccupationViewModel occupation)
+        public SavePersonOccupationViewModel(PersonOccupation occupation)
         {
             Id = occupation.Id;
             OccupationId = occupation.OccupationId;

@@ -1,31 +1,27 @@
 ﻿using Demo.Framework.Handler;
 using Memorabilia.Repository.Interfaces;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace Memorabilia.Application.Features.Admin.People
 {
     public class GetPersonTeams
     {
-        public class Handler : QueryHandler<Query, IEnumerable<PersonTeamViewModel>>
+        public class Handler : QueryHandler<Query, PersonTeamsViewModel>
         {
-            private readonly IPersonTeamRepository _personTeamRepository;
+            private readonly IPersonRepository _personRepository;
 
-            public Handler(IPersonTeamRepository personTeamRepository)
+            public Handler(IPersonRepository personRepository)
             {
-                _personTeamRepository = personTeamRepository;
+                _personRepository = personRepository;
             }
 
-            protected override async Task<IEnumerable<PersonTeamViewModel>> Handle(Query query)
+            protected override async Task<PersonTeamsViewModel> Handle(Query query)
             {
-                var personTeams = await _personTeamRepository.GetAll(query.PersonId).ConfigureAwait(false);
-
-                return personTeams.Select(personTeam => new PersonTeamViewModel(personTeam));
+                return new PersonTeamsViewModel(await _personRepository.Get(query.PersonId).ConfigureAwait(false));
             }
         }
 
-        public class Query : IQuery<IEnumerable<PersonTeamViewModel>>
+        public class Query : IQuery<PersonTeamsViewModel>
         {
             public Query(int personId)
             {

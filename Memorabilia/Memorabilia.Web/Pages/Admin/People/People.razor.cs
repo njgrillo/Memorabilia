@@ -20,6 +20,9 @@ namespace Memorabilia.Web.Pages.Admin.People
         public IDialogService DialogService { get; set; }
 
         [Inject]
+        public NavigationManager NavigationManager { get; set; }
+
+        [Inject]
         public QueryRouter QueryRouter { get; set; }
 
         [Inject]

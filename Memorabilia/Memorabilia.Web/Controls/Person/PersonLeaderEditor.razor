@@ -8,8 +8,8 @@
                    Label="Leader Type"  
                    Variant="Variant.Outlined">
             <MudSelectItem Value="@(0)">--Select--</MudSelectItem>
-            <Iterations Items="_viewModel.LeaderTypes" Context="leaderType">
-                <MudSelectItem Value="@leaderType.Id">@leaderType.ToString()</MudSelectItem>
+            <Iterations Items="LeaderTypes" Context="leaderType">
+                <MudSelectItem Value="@leaderType.Id">@leaderType.Name</MudSelectItem>
             </Iterations>	
         </MudSelect>
     </Content>
@@ -23,7 +23,7 @@
 <DivLeftAlign>
     <Content>
         <MudButton ButtonType="MudBlazor.ButtonType.Button" 
-                   Color="MudBlazor.Color.Success"
+                   Color="MudBlazor.Color.Secondary"
                    OnClick="Add"
                    Size="MudBlazor.Size.Medium"                                  
                    Variant="Variant.Filled">Add</MudButton>

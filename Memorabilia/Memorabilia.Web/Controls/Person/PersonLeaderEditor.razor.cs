@@ -11,6 +11,9 @@ namespace Memorabilia.Web.Controls.Person
         [Parameter]
         public List<SavePersonLeaderViewModel> Leaders { get; set; } = new();
 
+        [Parameter]
+        public Domain.Constants.LeaderType[] LeaderTypes { get; set; } = Domain.Constants.LeaderType.All;
+
         private SavePersonLeaderViewModel _viewModel = new();
         private string _years;
 

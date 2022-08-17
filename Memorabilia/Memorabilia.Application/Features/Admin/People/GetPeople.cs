@@ -1,6 +1,5 @@
 ﻿using Demo.Framework.Handler;
 using Memorabilia.Repository.Interfaces;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace Memorabilia.Application.Features.Admin.People
@@ -18,11 +17,7 @@ namespace Memorabilia.Application.Features.Admin.People
 
             protected override async Task<PeopleViewModel> Handle(Query query)
             {
-                var persons = (await _personRepository.GetAll(query.SportId)
-                                                      .ConfigureAwait(false)).OrderBy(person => person.DisplayName);
-
-
-                return new PeopleViewModel(persons);
+                return new PeopleViewModel(await _personRepository.GetAll(query.SportId).ConfigureAwait(false));
             }
         }
 

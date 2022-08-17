@@ -23,7 +23,7 @@ namespace Memorabilia.Application.Features.Admin.Pewters
         [Range(1, int.MaxValue, ErrorMessage = "Franchise is required.")]
         public int FranchiseId { get; set; }
 
-        public Domain.Constants.Franchise[] Franchises => Domain.Constants.Franchise.GetFranchises(SportLeagueLevel);
+        public Domain.Constants.Franchise[] Franchises => Domain.Constants.Franchise.GetAll(SportLeagueLevel);
 
         [Required]
         public string ImagePath { get; set; } 

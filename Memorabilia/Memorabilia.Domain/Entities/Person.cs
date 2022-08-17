@@ -64,6 +64,8 @@ namespace Memorabilia.Domain.Entities
 
         public string ImagePath { get; private set; }
 
+        public virtual List<InternationalHallOfFame> InternationalHallOfFames { get; private set; } = new();
+
         public DateTime? LastModifiedDate { get; private set; }
 
         public string LastName { get; private set; }
@@ -87,6 +89,8 @@ namespace Memorabilia.Domain.Entities
         public virtual SportService Service { get; private set; }
 
         public virtual List<SingleSeasonRecord> SingleSeasonRecords { get; private set; } = new();
+
+        public virtual List<PersonSport> Sports { get; private set; } = new();
 
         public virtual List<PersonTeam> Teams { get; private set; } = new();
 
@@ -148,6 +152,14 @@ namespace Memorabilia.Domain.Entities
             HallOfFames.RemoveAll(hof => ids.Contains(hof.Id));
         }
 
+        public void RemoveInternationalHallOfFames(params int[] ids)
+        {
+            if (ids == null || ids.Length == 0)
+                return;
+
+            InternationalHallOfFames.RemoveAll(hof => ids.Contains(hof.Id));
+        }
+
         public void RemoveLeaders(params int[] ids)
         {
             if (ids == null || ids.Length == 0)
@@ -178,6 +190,14 @@ namespace Memorabilia.Domain.Entities
                 return;
 
             SingleSeasonRecords.RemoveAll(record => ids.Contains(record.Id));
+        }
+
+        public void RemoveSports(params int[] ids)
+        {
+            if (ids == null || ids.Length == 0)
+                return;
+
+            Sports.RemoveAll(sport => ids.Contains(sport.Id));
         }
 
         public void RemoveTeams(params int[] ids)
@@ -329,6 +349,19 @@ namespace Memorabilia.Domain.Entities
             ImagePath = imagePath;
         }
 
+        public void SetInternationalHallOfFame(int id, int internationalHallOfFameTypeId, int? inductionYear)
+        {
+            if (id == 0)
+            {
+                InternationalHallOfFames.Add(new InternationalHallOfFame(Id, internationalHallOfFameTypeId, inductionYear));
+                return;
+            }
+
+            var internationalhallOfFame = InternationalHallOfFames.SingleOrDefault(hof => hof.Id == id);
+
+            internationalhallOfFame.Set(internationalHallOfFameTypeId, inductionYear);
+        }
+
         public void SetLeader(int leaderId, int leaderTypeId, int year)
         {
             if (leaderId == 0)
@@ -408,17 +441,32 @@ namespace Memorabilia.Domain.Entities
             record.Set(recordTypeId, year, amount);
         }
 
-        public void SetTeam(int teamId, int? beginYear, int? endYear)
+        public void SetSport(int sportId)
         {
-            var team = Teams.SingleOrDefault(team => team.TeamId == teamId && team.BeginYear == beginYear);
+            var sport = Sports.SingleOrDefault(sport => sport.SportId == sportId);
 
-            if (team == null)
+            if (sport == null)
             {
-                Teams.Add(new PersonTeam(Id, teamId, beginYear, endYear));
+                Sports.Add(new PersonSport(Id, sportId));
                 return;
             }
 
-            team.Set(teamId, beginYear, endYear);
+            sport.Set(sportId);
+        }
+
+        public void SetTeam(int id, int teamId, int? beginYear, int? endYear, int teamRoleTypeId)
+        {
+            var team = id > 0 
+                ? Teams.SingleOrDefault(team => team.Id == id) 
+                : Teams.SingleOrDefault(team => team.TeamId == teamId && team.BeginYear == beginYear && team.TeamRoleTypeId == teamRoleTypeId);
+
+            if (team == null)
+            {
+                Teams.Add(new PersonTeam(Id, teamId, beginYear, endYear, teamRoleTypeId));
+                return;
+            }
+
+            team.Set(teamId, beginYear, endYear, teamRoleTypeId);
         }        
     }
 }

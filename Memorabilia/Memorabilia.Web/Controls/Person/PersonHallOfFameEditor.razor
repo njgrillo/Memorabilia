@@ -9,7 +9,7 @@
                    Label="Sport League Level"
                    Variant="Variant.Outlined">
             <MudSelectItem Value="@(0)">--Select--</MudSelectItem>
-            <Iterations Items="_viewModel.SportLeagueLevels" Context="sportLeagueLevel">
+            <Iterations Items="SportLeagueLevels" Context="sportLeagueLevel">
                 <MudSelectItem Value="@sportLeagueLevel.Id">@sportLeagueLevel.Name</MudSelectItem>
             </Iterations>	
         </MudSelect> 

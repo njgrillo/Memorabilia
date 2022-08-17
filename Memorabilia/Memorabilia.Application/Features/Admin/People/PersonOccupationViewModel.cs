@@ -1,24 +1,23 @@
 ﻿using Memorabilia.Domain.Entities;
+using System.Collections.Generic;
 
 namespace Memorabilia.Application.Features.Admin.People
 {
     public class PersonOccupationViewModel
     {
-        private readonly PersonOccupation _personOccupation;
+        private readonly Person _person;
 
         public PersonOccupationViewModel() { }
 
-        public PersonOccupationViewModel(PersonOccupation personOccupation)
+        public PersonOccupationViewModel(Person person)
         {
-            _personOccupation = personOccupation;
+            _person = person;
         }
 
-        public int Id => _personOccupation.Id;
+        public List<PersonOccupation> Occupations => _person.Occupations;        
 
-        public int OccupationId => _personOccupation.OccupationId;
+        public int PersonId => _person.Id;
 
-        public int OccupationTypeId => _personOccupation.OccupationTypeId;
-
-        public int PersonId => _personOccupation.PersonId;
+        public List<PersonSport> Sports => _person.Sports;
     }
 }

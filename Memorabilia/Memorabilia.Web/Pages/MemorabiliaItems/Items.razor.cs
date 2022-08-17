@@ -105,6 +105,7 @@ namespace Memorabilia.Web.Pages.MemorabiliaItems
 
             await DeleteMemorabiliaItem(id).ConfigureAwait(false);
         }
+
         private void ToggleChildContent(int memorabiliaItemId)
         {
             var memorabiliaItem = _viewModel.MemorabiliaItems.Single(item => item.Id == memorabiliaItemId);

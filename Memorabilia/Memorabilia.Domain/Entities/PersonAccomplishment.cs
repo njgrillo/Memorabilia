@@ -18,6 +18,8 @@ namespace Memorabilia.Domain.Entities
 
         public DateTime? Date { get; private set; }
 
+        public virtual Person Person { get; private set; }
+
         public int PersonId { get; private set; }
 
         public int? Year { get; private set; }

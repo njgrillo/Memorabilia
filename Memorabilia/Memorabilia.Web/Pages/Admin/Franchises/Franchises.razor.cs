@@ -19,9 +19,6 @@ namespace Memorabilia.Web.Pages.Admin.Franchises
         public IDialogService DialogService { get; set; }
 
         [Inject]
-        public NavigationManager NavigationManager { get; set; }
-
-        [Inject]
         public QueryRouter QueryRouter { get; set; }
 
         [Inject]

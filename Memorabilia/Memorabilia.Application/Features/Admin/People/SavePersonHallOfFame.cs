@@ -24,6 +24,7 @@ namespace Memorabilia.Application.Features.Admin.People
 
                 UpdateFranchiseHallOfFames(command, person);
                 UpdateHallOfFames(command, person);
+                UpdateInternationalHallOfFames(command, person);
 
                 await _personRepository.Update(person).ConfigureAwait(false);
             }
@@ -50,6 +51,18 @@ namespace Memorabilia.Application.Features.Admin.People
                                          hallOfFame.BallotNumber > 0 ? hallOfFame.BallotNumber : null);
                 }
             }
+
+            private static void UpdateInternationalHallOfFames(Command command, Person person)
+            {
+                person.RemoveInternationalHallOfFames(command.DeletedInternationalHallOfFameIds);
+
+                foreach (var hallOfFame in command.InternationalHallOfFames.Where(hof => !hof.IsDeleted))
+                {
+                    person.SetInternationalHallOfFame(hallOfFame.Id,
+                                                      hallOfFame.InternationalHallOfFameTypeId,
+                                                      hallOfFame.Year);
+                }
+            }
         }
 
         public class Command : DomainCommand, ICommand
@@ -66,9 +79,13 @@ namespace Memorabilia.Application.Features.Admin.People
 
             public int[] DeletedHallOfFameIds => _viewModel.HallOfFames.Where(hof => hof.IsDeleted).Select(hof => hof.Id).ToArray();
 
+            public int[] DeletedInternationalHallOfFameIds => _viewModel.InternationalHallOfFames.Where(hof => hof.IsDeleted).Select(hof => hof.Id).ToArray();
+
             public SavePersonFranchiseHallOfFameViewModel[] FranchiseHallOfFames => _viewModel.FranchiseHallOfFames.ToArray();
 
             public SavePersonHallOfFameViewModel[] HallOfFames => _viewModel.HallOfFames.ToArray();
+
+            public SavePersonInternationalHallOfFameViewModel[] InternationalHallOfFames => _viewModel.InternationalHallOfFames.ToArray();
 
             public int PersonId { get; }
         }

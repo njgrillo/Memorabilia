@@ -37,6 +37,8 @@ namespace Memorabilia.Application.Features.Admin.Teams
 
         public string Nickname => _team.Nickname;
 
+        public int SportId => _team.Franchise.SportLeagueLevel.SportId;
+
         public Domain.Constants.SportLeagueLevel SportLeagueLevel => Domain.Constants.SportLeagueLevel.Find(_team.Franchise.SportLeagueLevelId);
     }
 }

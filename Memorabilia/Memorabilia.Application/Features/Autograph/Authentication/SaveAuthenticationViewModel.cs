@@ -30,8 +30,6 @@
 
         public bool HasLetter { get; set; }
 
-        public int Id { get; set; }        
-
         public string Verification { get; set; }
 
         public bool Witnessed { get; set; }

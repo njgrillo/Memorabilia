@@ -15,7 +15,7 @@
                           Dense="false" 
                           Filter="new Func<PersonViewModel,bool>(FilterFunc1)"
                           Hover="true"
-                          Items="@_viewModel.People"    
+                          Items="@_viewModel.People.OrderBy(person => person.DisplayName)"    
                           Striped="true">
                     <ToolBarContent>
                         <MudText Typo="Typo.h6">@_viewModel.PageTitle</MudText>
@@ -28,6 +28,7 @@
                                       Placeholder="Search" />
                     </ToolBarContent>
                     <HeaderContent>
+                        <MudTh></MudTh>
                         <MudTh>Display Name</MudTh>
                         <MudTh>First Name</MudTh>
                         <MudTh>Last Name</MudTh>
@@ -40,6 +41,17 @@
                         <MudTh></MudTh>
                     </HeaderContent>
                     <RowTemplate>
+                        <MudTd DataLabel="">
+                            <MudTooltip>
+                                <MudImage @onclick="@(_ => NavigationManager.NavigateTo($"People/Image/Edit/{@context.Id}"))" 
+                                          Class="rounded-lg can-click" 
+                                          Elevation="5" 
+                                          Height="200"
+                                          ObjectFit="@ObjectFit.Cover"
+                                          Src="@context.PersonImagePath"
+                                          Width="200" />
+                            </MudTooltip> 
+                        </MudTd>
                         <MudTd DataLabel="Display Name">@context.DisplayName</MudTd>
                         <MudTd DataLabel="First Name">@context.FirstName</MudTd>
                         <MudTd DataLabel="Last Name">@context.LastName</MudTd>

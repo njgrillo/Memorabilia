@@ -6,5 +6,8 @@ namespace Memorabilia.Web.Controls.Divs
     {
         [Parameter]
         public RenderFragment Content { get; set; }
+
+        [Parameter]
+        public bool Hidden { get; set; }
     }
 }

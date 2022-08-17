@@ -10,6 +10,8 @@ namespace Memorabilia.Application.Features.Admin.People
         {
             FranchiseName = team.FranchiseName;
             PersonId = personId;
+            SportId = team.SportId;
+            SportLeagueLevelId = team.SportLeagueLevel.Id;
             TeamDisplayName = team.DisplayName;
             TeamId = team.Id;
             TeamLocation = team.Location;
@@ -26,6 +28,9 @@ namespace Memorabilia.Application.Features.Admin.People
             TeamName = team.TeamName;
             BeginYear = team.BeginYear;
             EndYear = team.EndYear;
+            SportId = team.SportId;
+            SportLeagueLevelId = team.SportLeagueLevelId;
+            TeamRoleTypeId = team.TeamRoleTypeId;
         }
 
         public int? BeginYear { get; set; }        
@@ -36,6 +41,12 @@ namespace Memorabilia.Application.Features.Admin.People
 
         public int PersonId { get; set; }
 
+        public Domain.Constants.SportLeagueLevel SportLeagueLevel => Domain.Constants.SportLeagueLevel.Find(SportLeagueLevelId);
+
+        public int SportId { get; }
+
+        public int SportLeagueLevelId { get; }
+
         public string TeamDisplayName { get; }
 
         public int TeamId { get; set; }
@@ -43,5 +54,11 @@ namespace Memorabilia.Application.Features.Admin.People
         public string TeamLocation { get; }
 
         public string TeamName { get; }
+
+        public int TeamRoleTypeId { get; set; }
+
+        public string TeamRoleTypeName => Domain.Constants.TeamRoleType.Find(TeamRoleTypeId)?.Name;
+
+        public Domain.Constants.TeamRoleType[] TeamRoleTypes => Domain.Constants.TeamRoleType.Get(SportLeagueLevel);
     }
 }

@@ -22,7 +22,7 @@ namespace Memorabilia.Application.Features.Admin.People
             MiddleName = viewModel.MiddleName;
             Nickname = viewModel.Nickname;
             Nicknames = viewModel.Nicknames.Select(nickname => new SavePersonNicknameViewModel(new PersonNicknameViewModel(nickname))).ToList();
-            Occupations = viewModel.Occupations.Select(occupation => new SavePersonOccupationViewModel(new PersonOccupationViewModel(occupation))).ToList();
+            PersonImagePath = viewModel.PersonImagePath;
             ProfileName = viewModel.ProfileName;
             Suffix = viewModel.Suffix;   
             Teams = viewModel.Teams.Select(team => new SavePersonTeamViewModel(new PersonTeamViewModel(team))).ToList();
@@ -70,9 +70,9 @@ namespace Memorabilia.Application.Features.Admin.People
 
         public List<SavePersonNicknameViewModel> Nicknames { get; set; } = new();
 
-        public List<SavePersonOccupationViewModel> Occupations { get; set; } = new();
-
         public override string PageTitle => $"{(EditModeType == EditModeType.Update ? "Edit" : "Add")} Person";
+
+        public string PersonImagePath { get; set; }
 
         public PersonStep PersonStep => PersonStep.Person;
 

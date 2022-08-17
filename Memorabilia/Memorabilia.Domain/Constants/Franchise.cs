@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace Memorabilia.Domain.Constants
 {
@@ -312,7 +313,7 @@ namespace Memorabilia.Domain.Constants
             return All.SingleOrDefault(franchise => franchise.Id == id);
         }
 
-        public static Franchise[] GetFranchises(SportLeagueLevel sport)
+        public static Franchise[] GetAll(SportLeagueLevel sport)
         {
             if (sport == SportLeagueLevel.MajorLeagueBaseball)
                 return Baseball;
@@ -324,6 +325,26 @@ namespace Memorabilia.Domain.Constants
                 return Football;
 
             return All;
+        }
+
+        public static Franchise[] GetAll(int[] sportIds)
+        {
+            if (!sportIds.Any())
+                return All;
+
+            var sports = sportIds.Select(id => Sport.Find(id));
+            var franchises = new List<Franchise>();
+
+            if (sports.Any(sport => sport == Sport.Baseball))
+                franchises.AddRange(Baseball);
+
+            if (sports.Any(sport => sport == Sport.Basketball))
+                franchises.AddRange(Basketball);
+
+            if (sports.Any(sport => sport == Sport.Football))
+                franchises.AddRange(Football);
+
+            return franchises.OrderBy(franchise => franchise.Name).ToArray();
         }
     }
 }

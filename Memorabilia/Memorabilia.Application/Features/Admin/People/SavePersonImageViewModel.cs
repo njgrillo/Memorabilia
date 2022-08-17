@@ -19,7 +19,7 @@ namespace Memorabilia.Application.Features.Admin.People
 
         public override EditModeType EditModeType => !ImagePath.IsNullOrEmpty() ? EditModeType.Update : EditModeType.Add;
 
-        public override string ExitNavigationPath => $"Admin/EditDomainItems";
+        public override string ExitNavigationPath { get; set; } = $"Admin/EditDomainItems";
 
         public string ImagePath { get; set; }
 
@@ -32,5 +32,7 @@ namespace Memorabilia.Application.Features.Admin.People
         public int PersonId { get; set; }
 
         public PersonStep PersonStep => PersonStep.Image;
+
+        public string SaveReturnNavigationPath => "People";
     }
 }

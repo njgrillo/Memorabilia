@@ -17,6 +17,7 @@ namespace Memorabilia.Application.Features.Admin.People
             FreeAgentSigningDate = viewModel.Service?.FreeAgentSigningDate;
             LastAppearanceDate = viewModel.Service?.LastAppearanceDate;
             PersonId = personId;
+            SportIds = viewModel.Sports.Select(sport => sport.Sport.Id).ToList();    
         }
 
         public override string BackNavigationPath => $"People/Occupation/Edit/{PersonId}";
@@ -51,5 +52,7 @@ namespace Memorabilia.Application.Features.Admin.People
         public PersonStep PersonStep => PersonStep.SportService;
 
         public SavePersonSportServiceViewModel Service { get; set; }
+
+        public List<int> SportIds { get; set; }
     }
 }

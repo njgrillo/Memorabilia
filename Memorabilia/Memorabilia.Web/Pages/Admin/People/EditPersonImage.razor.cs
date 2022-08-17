@@ -23,6 +23,9 @@ namespace Memorabilia.Web.Pages.Admin.People
         public ILogger<EditPersonImage> Logger { get; set; }
 
         [Inject]
+        public NavigationManager NavigationManager { get; set; }    
+
+        [Inject]
         public QueryRouter QueryRouter { get; set; }
 
         [Parameter]
@@ -71,6 +74,11 @@ namespace Memorabilia.Web.Pages.Admin.People
             {
                 Logger.LogError("File: {Filename} Error: {Error}", file.Name, ex.Message);
             }
+        }
+
+        protected void OnSaveReturnClick()
+        {
+            _viewModel.ExitNavigationPath = _viewModel.SaveReturnNavigationPath;
         }
 
         private void Remove()

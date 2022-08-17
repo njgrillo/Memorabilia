@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace Memorabilia.Domain.Constants
 {
@@ -33,6 +34,25 @@ namespace Memorabilia.Domain.Constants
         public static SportLeagueLevel Find(int id)
         {
             return All.SingleOrDefault(sportLeagueLevel => sportLeagueLevel.Id == id);
+        }
+
+        public static SportLeagueLevel[] GetAll(params int[] sportIds)
+        {
+            var sportLeagueLevels = new List<SportLeagueLevel>();
+
+            if (sportIds.Contains(Sport.Baseball.Id))
+                sportLeagueLevels.Add(MajorLeagueBaseball);
+
+            if (sportIds.Contains(Sport.Basketball.Id))
+                sportLeagueLevels.Add(NationalBasketballAssociation);
+
+            if (sportIds.Contains(Sport.Football.Id))
+                sportLeagueLevels.Add(NationalFootballLeague);
+
+            if (sportIds.Contains(Sport.Hockey.Id))
+                sportLeagueLevels.Add(NationalHockeyLeague);
+
+            return sportLeagueLevels.OrderBy(sportLeagueLevel => sportLeagueLevel.Name).ToArray();
         }
     }
 }

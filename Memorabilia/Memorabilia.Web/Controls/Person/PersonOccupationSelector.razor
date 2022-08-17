@@ -13,9 +13,7 @@
             </Iterations>	
         </MudSelect>
     </Content>
-</DivRowCol3>
-<DivRowCol3>
-    <Content>
+    <ContentColumn2>
         <MudSelect @bind-Value="@_viewModel.OccupationTypeId"
                    @bind-Value:event="ValueChanged"   
                    Label="Type"
@@ -25,7 +23,7 @@
                 <MudSelectItem Value="@occupationType.Id">@occupationType.Name</MudSelectItem>
             </Iterations>	
         </MudSelect>
-    </Content>
+    </ContentColumn2>
 </DivRowCol3>
 <DivLeftAlign>
     <Content>

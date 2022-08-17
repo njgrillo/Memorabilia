@@ -8,8 +8,8 @@
                    Label="Award"  
                    Variant="Variant.Outlined">
             <MudSelectItem Value="@(0)">--Select--</MudSelectItem>
-            <Iterations Items="_viewModel.AwardTypes" Context="awardType">
-                <MudSelectItem Value="@awardType.Id">@awardType.ToString()</MudSelectItem>
+            <Iterations Items="AwardTypes" Context="awardType">
+                <MudSelectItem Value="@awardType.Id">@awardType.Name</MudSelectItem>
             </Iterations>	
         </MudSelect>
     </Content>
@@ -23,7 +23,7 @@
 <DivLeftAlign>
     <Content>
         <MudButton ButtonType="MudBlazor.ButtonType.Button" 
-                   Color="MudBlazor.Color.Success"
+                   Color="MudBlazor.Color.Secondary"
                    OnClick="Add"
                    Size="MudBlazor.Size.Medium"                                  
                    Variant="Variant.Filled">Add</MudButton>
@@ -44,7 +44,7 @@
             <RowTemplate>
                 <MudTd DataLabel="Award">@context.AwardTypeName</MudTd>
                 <MudTd DataLabel="Year">@context.Year</MudTd>
-                <MudTd DataLabel="">
+                <MudTd DataLabel=""> 
                     <MudTooltip Text="Delete">
                         <MudFab Color="MudBlazor.Color.Secondary"
                                 Icon="@Icons.Outlined.DeleteOutline"

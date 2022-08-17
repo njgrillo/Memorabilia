@@ -65,6 +65,9 @@ using Memorabilia.Application.Features.Services.Tools.Profile.Rules;
 using Memorabilia.Application.Features.Services.Tools.Profile;
 using Memorabilia.Application.Features.Admin.Colleges;
 using Memorabilia.Application.Features.Admin.ChampionTypes;
+using Memorabilia.Application.Features.Project;
+using Memorabilia.Application.Features.Tools.Baseball.Awards;
+using Memorabilia.Application.Features.Tools.Baseball.Accomplishments;
 
 namespace Memorabilia.Web
 {
@@ -138,6 +141,7 @@ namespace Memorabilia.Web
             services.AddTransient<IHelmetTypeRepository, HelmetTypeRepository>();
             services.AddTransient<IImageTypeRepository, ImageTypeRepository>();
             services.AddTransient<IInscriptionTypeRepository, InscriptionTypeRepository>();                      
+            services.AddTransient<IInternationalHallOfFameTypeRepository, InternationalHallOfFameTypeRepository>();                      
             services.AddTransient<IItemTypeBrandRepository, ItemTypeBrandRepository>();
             services.AddTransient<IItemTypeGameStyleTypeRepository, ItemTypeGameStyleTypeRepository>();
             services.AddTransient<IItemTypeLevelRepository, ItemTypeLevelRepository>();
@@ -156,13 +160,17 @@ namespace Memorabilia.Web
             services.AddTransient<IMemorabiliaRepository, MemorabiliaRepository>();
             services.AddTransient<IOccupationRepository, OccupationRepository>();
             services.AddTransient<IOrientationRepository, OrientationRepository>();
+            services.AddTransient<IPersonAccomplishmentRepository, PersonAccomplishmentRepository>();
+            services.AddTransient<IPersonAwardRepository, PersonAwardRepository>();
             services.AddTransient<IPersonNicknameRepository, PersonNicknameRepository>();
             services.AddTransient<IPersonOccupationRepository, PersonOccupationRepository>();
             services.AddTransient<IPersonRepository, PersonRepository>();
             services.AddTransient<IPersonTeamRepository, PersonTeamRepository>();
             services.AddTransient<IPewterRepository, PewterRepository>();
             services.AddTransient<IPhotoTypeRepository, PhotoTypeRepository>();
+            services.AddTransient<IPriorityTypeRepository, PriorityTypeRepository>();
             services.AddTransient<IPrivacyTypeRepository, PrivacyTypeRepository>();
+            services.AddTransient<IProjectRepository, ProjectRepository>();
             services.AddTransient<IPurchaseTypeRepository, PurchaseTypeRepository>();
             services.AddTransient<IRecordTypeRepository, RecordTypeRepository>();
             services.AddTransient<ISizeRepository, SizeRepository>();
@@ -175,6 +183,7 @@ namespace Memorabilia.Web
             services.AddTransient<ITeamDivisionRepository, TeamDivisionRepository>();
             services.AddTransient<ITeamLeagueRepository, TeamLeagueRepository>();
             services.AddTransient<ITeamRepository, TeamRepository>();
+            services.AddTransient<ITeamRoleTypeRepository, TeamRoleTypeRepository>();
             services.AddTransient<IUserRepository, UserRepository>();
             services.AddTransient<IWritingInstrumentRepository, WritingInstrumentRepository>();
 
@@ -184,8 +193,10 @@ namespace Memorabilia.Web
 
             services.AddTransient<AddUser>();            
           
+            services.AddTransient<GetAccomplishments>();
             services.AddTransient<GetAutograph>();
             services.AddTransient<GetAutographs>();
+            services.AddTransient<GetAwards>();
             services.AddTransient<GetBaseball>();
             services.AddTransient<GetBasketball>();
             services.AddTransient<GetBat>();
@@ -243,6 +254,8 @@ namespace Memorabilia.Web
             services.AddTransient<GetPewter>();
             services.AddTransient<GetPewters>();
             services.AddTransient<GetPhoto>();
+            services.AddTransient<GetProject>();
+            services.AddTransient<GetProjects>();
             services.AddTransient<GetPuck>();
             services.AddTransient<GetPylon>();
             services.AddTransient<GetShoe>();
@@ -300,6 +313,7 @@ namespace Memorabilia.Web
             services.AddTransient<SavePersonTeam>();
             services.AddTransient<SavePewter>();
             services.AddTransient<SavePhoto>();
+            services.AddTransient<SaveProject>();
             services.AddTransient<SavePuck>();
             services.AddTransient<SavePylon>();
             services.AddTransient<SaveShoe>();

@@ -20,8 +20,6 @@ namespace Memorabilia.Application.Features.Admin.People
 
         public string AccomplishmentTypeName => Domain.Constants.AccomplishmentType.Find(AccomplishmentTypeId)?.Name;
 
-        public Domain.Constants.AccomplishmentType[] AccomplishmentTypes => Domain.Constants.AccomplishmentType.All;
-
         public DateTime? Date { get; set; }
 
         public string FormattedDate => Date?.ToString("MM/dd/yyyy");

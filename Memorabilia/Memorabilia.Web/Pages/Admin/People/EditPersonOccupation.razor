@@ -24,7 +24,16 @@
     <Content>
         <DivRowCol12>
             <Content>
-                <PersonOccupationSelector Occupations="_viewModel.PersonOccupations" />
+                <MudText Typo="Typo.h3">Occupations</MudText>
+                <PersonOccupationSelector Occupations="_viewModel.Occupations" />
+            </Content>
+        </DivRowCol12>
+        <br />
+        @*<DivRowCol12 Hidden="@(!_viewModel.HasAthleteOccupation)">*@
+        <DivRowCol12>
+            <Content>
+                <MudText Typo="Typo.h3">Sports</MudText>
+                <PersonSportEditor Sports="_viewModel.Sports" />
             </Content>
         </DivRowCol12>
     </Content>

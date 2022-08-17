@@ -1,7 +1,7 @@
 ﻿using Framework.Domain.Command;
 using Framework.Handler;
+using Memorabilia.Domain.Entities;
 using Memorabilia.Repository.Interfaces;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -22,29 +22,50 @@ namespace Memorabilia.Application.Features.Admin.People
             {
                 var person = await _personRepository.Get(command.PersonId).ConfigureAwait(false);
 
-                if (command.DeletedOccupationIds.Any())
-                    person.RemoveOccupations(command.DeletedOccupationIds);
+                UpdateOccupations(command, person);
+                UpdateSports(command, person);
+
+                await _personRepository.Update(person).ConfigureAwait(false);
+            }
+
+            private static void UpdateOccupations(Command command, Person person)
+            {
+                person.RemoveOccupations(command.DeletedOccupationIds);
 
                 foreach (var occupation in command.Occupations.Where(occupation => !occupation.IsDeleted))
                 {
                     person.SetOccupation(occupation.OccupationId, occupation.OccupationTypeId);
                 }
+            }
 
-                await _personRepository.Update(person).ConfigureAwait(false);
+            private static void UpdateSports(Command command, Person person)
+            {
+                person.RemoveSports(command.DeletedSportsIds);
+
+                foreach (var sport in command.Sports.Where(sport => !sport.IsDeleted))
+                {
+                    person.SetSport(sport.SportId);
+                }
             }
         }
 
         public class Command : DomainCommand, ICommand
         {
-            public Command(int personId, IEnumerable<SavePersonOccupationViewModel> occupations)
+            private readonly SavePersonOccupationsViewModel _viewModel;
+
+            public Command(int personId, SavePersonOccupationsViewModel viewModel)
             {
                 PersonId = personId;
-                Occupations = occupations.ToArray();
+                _viewModel = viewModel;
             }
 
-            public int[] DeletedOccupationIds => Occupations.Where(occupation => occupation.IsDeleted).Select(occupation => occupation.Id).ToArray();
+            public int[] DeletedOccupationIds => _viewModel.Occupations.Where(occupation => occupation.IsDeleted).Select(occupation => occupation.Id).ToArray();
 
-            public SavePersonOccupationViewModel[] Occupations { get; }
+            public int[] DeletedSportsIds => _viewModel.Sports.Where(sport => sport.IsDeleted).Select(sport => sport.Id).ToArray();
+
+            public SavePersonOccupationViewModel[] Occupations => _viewModel.Occupations.ToArray();
+
+            public SavePersonSportViewModel[] Sports => _viewModel.Sports.ToArray();
 
             public int PersonId { get; }
         }

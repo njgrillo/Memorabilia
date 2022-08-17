@@ -47,7 +47,7 @@ namespace Memorabilia.Application.Features.Admin.Teams
         [Required]
         public int FranchiseId { get; set; }
 
-        public Franchise[] Franchises { get; set; } = Franchise.GetFranchises(Domain.Constants.SportLeagueLevel.MajorLeagueBaseball);
+        public Franchise[] Franchises { get; set; } = Franchise.GetAll(Domain.Constants.SportLeagueLevel.MajorLeagueBaseball);
 
         public string ImagePath => "images/teams.jpg";
 
@@ -79,7 +79,7 @@ namespace Memorabilia.Application.Features.Admin.Teams
             set
             {
                 _sportLeagueLeveId = value;
-                Franchises = Franchise.GetFranchises(Domain.Constants.SportLeagueLevel.Find(value));
+                Franchises = Franchise.GetAll(Domain.Constants.SportLeagueLevel.Find(value));
             }
         }
 

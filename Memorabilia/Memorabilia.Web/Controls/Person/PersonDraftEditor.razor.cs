@@ -10,16 +10,24 @@ namespace Memorabilia.Web.Controls.Person
         [Parameter]
         public List<SavePersonDraftViewModel> Drafts { get; set; } = new();
 
+        [Parameter]
+        public List<int> SportIds { get; set; } = new();
+
         private bool _canAdd = true;
         private bool _canEditFranchise = true;
         private bool _canUpdate;
         private SavePersonDraftViewModel _viewModel = new();
 
+        protected override void OnInitialized()
+        {
+            _viewModel = new SavePersonDraftViewModel(SportIds);
+        }
+
         private void Add()
         {
             Drafts.Add(_viewModel);
 
-            _viewModel = new SavePersonDraftViewModel();
+            _viewModel = new SavePersonDraftViewModel(SportIds);
         }
 
         private void Edit(SavePersonDraftViewModel draft)
@@ -55,7 +63,7 @@ namespace Memorabilia.Web.Controls.Person
             draft.Pick = _viewModel.Pick;
             draft.Overall = _viewModel.Overall;
 
-            _viewModel = new SavePersonDraftViewModel();
+            _viewModel = new SavePersonDraftViewModel(SportIds);
 
             _canAdd = true;
             _canEditFranchise = true;

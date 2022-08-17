@@ -4,12 +4,13 @@
     {
         public PersonTeam() { }
 
-        public PersonTeam(int personId, int teamId, int? beginYear, int? endYear)
+        public PersonTeam(int personId, int teamId, int? beginYear, int? endYear, int teamRoleTypeId)
         {
             PersonId = personId;
             TeamId = teamId;
             BeginYear = beginYear;
             EndYear = endYear;
+            TeamRoleTypeId = teamRoleTypeId;
         }
 
         public int? BeginYear { get; private set; }
@@ -22,11 +23,14 @@
 
         public int TeamId { get; private set; }
 
-        public void Set(int teamId, int? beginYear, int? endYear)
+        public int TeamRoleTypeId { get; private set; }
+
+        public void Set(int teamId, int? beginYear, int? endYear, int teamRoleTypeId)
         {
             TeamId = teamId;
             BeginYear = beginYear;
             EndYear = endYear;
+            TeamRoleTypeId = teamRoleTypeId;
         }
     }
 }

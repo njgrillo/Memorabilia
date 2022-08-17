@@ -29,5 +29,7 @@ namespace Memorabilia.Application.Features.Admin.People
         public List<RetiredNumber> RetiredNumbers => _person.RetiredNumbers;
 
         public List<SingleSeasonRecord> SingleSeasonRecords => _person.SingleSeasonRecords;
+
+        public List<PersonSport> Sports => _person.Sports;
     }
 }

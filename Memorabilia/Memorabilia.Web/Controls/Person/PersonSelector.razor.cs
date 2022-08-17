@@ -23,6 +23,9 @@ namespace Memorabilia.Web.Controls.Person
         public bool CanToggle { get; set; }
 
         [Parameter]
+        public bool Disabled { get; set; }
+
+        [Parameter]
         public ItemType ItemType { get; set; }
 
         [Parameter]

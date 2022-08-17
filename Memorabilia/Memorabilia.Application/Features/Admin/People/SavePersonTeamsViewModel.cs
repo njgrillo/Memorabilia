@@ -8,10 +8,15 @@ namespace Memorabilia.Application.Features.Admin.People
     {
         public SavePersonTeamsViewModel() { }
 
-        public SavePersonTeamsViewModel(int personId, List<SavePersonTeamViewModel> teams)
+        public SavePersonTeamsViewModel(PersonTeamsViewModel viewModel)
         {
-            PersonId = personId;
-            Teams = teams;
+            PersonId = viewModel.PersonId;
+            SportIds = viewModel.Sports.Select(sport => sport.SportId).ToList();
+            Teams = viewModel.Teams
+                             .Select(team => new SavePersonTeamViewModel(new PersonTeamViewModel(team)))
+                             .OrderBy(team => team.BeginYear)
+                             .ThenBy(team => team.TeamDisplayName)
+                             .ToList();
         }
 
         public override string BackNavigationPath => $"People/SportService/Edit/{PersonId}";
@@ -31,6 +36,8 @@ namespace Memorabilia.Application.Features.Admin.People
         public int PersonId { get; set; }
 
         public PersonStep PersonStep => PersonStep.Team;
+
+        public List<int> SportIds { get; set; } = new();
 
         public List<SavePersonTeamViewModel> Teams { get; set; } = new();
     }

@@ -1,7 +1,6 @@
 ﻿using Demo.Framework.Web;
 using Memorabilia.Application.Features.Admin.People;
 using Microsoft.AspNetCore.Components;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace Memorabilia.Web.Pages.Admin.People
@@ -21,11 +20,7 @@ namespace Memorabilia.Web.Pages.Admin.People
 
         protected async Task OnLoad()
         {
-            var teams = (await QueryRouter.Send(new GetPersonTeams.Query(PersonId))
-                                          .ConfigureAwait(false)).Select(personTeam => new SavePersonTeamViewModel(personTeam))
-                                                                 .ToList();
-
-            _viewModel = new SavePersonTeamsViewModel(PersonId, teams);
+            _viewModel = new SavePersonTeamsViewModel(await QueryRouter.Send(new GetPersonTeams.Query(PersonId)).ConfigureAwait(false));
         }
 
         protected async Task OnSave()

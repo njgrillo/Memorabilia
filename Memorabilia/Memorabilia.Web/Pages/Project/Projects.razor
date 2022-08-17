@@ -1,0 +1,46 @@
+﻿@page "/Projects"
+
+<PageView AddRoute="@_viewModel.AddRoute" 
+          AddTitle="@_viewModel.AddTitle"
+          DisplayPageHeader="false"
+          NavigationPath="@_viewModel.ExitNavigationPath"
+          OnLoad="OnLoad"
+          PageTitle="@_viewModel.PageTitle">
+    <Content>
+        <DivPad2>
+            <Content>
+                <MudTable Bordered="false"
+                          Dense="false" 
+                          Hover="true"
+                          Items="@_viewModel.Projects"    
+                          Striped="true">
+                    <ToolBarContent>
+                        <MudText Typo="Typo.h6">@_viewModel.PageTitle</MudText>
+                    </ToolBarContent>
+                    <HeaderContent>
+                        <MudTh>Name</MudTh>
+                        <MudTh>Start Date</MudTh>
+                        <MudTh>End Date</MudTh>
+                        <MudTh></MudTh>
+                    </HeaderContent>
+                    <RowTemplate>
+                        <MudTd DataLabel="Name">@context.Name</MudTd>
+                        <MudTd DataLabel="Start Date">@context.FormattedStartDate</MudTd>
+                        <MudTd DataLabel="End Date">@context.FormattedEndDate</MudTd>
+                        <MudTd DataLabel="">
+                            <GridEditButton NavigationPath="@($"{_viewModel.RoutePrefix}/Edit/{context.Id}")" />    
+                            <MudTooltip Text="Delete">
+                                <MudFab Color="MudBlazor.Color.Secondary"
+                                        Icon="@Icons.Outlined.DeleteOutline"
+                                        OnClick="@(_ => ShowDeleteConfirm(@context.Id))" />
+                            </MudTooltip>
+                        </MudTd>
+                    </RowTemplate>
+                    <PagerContent>
+                        <MudTablePager />
+                    </PagerContent>
+                </MudTable>
+            </Content>
+        </DivPad2>
+    </Content>
+</PageView>

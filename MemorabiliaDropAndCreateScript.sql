@@ -610,6 +610,18 @@ BEGIN
 	DROP TABLE [dbo].[PersonOccupation]
 END
 
+--PersonSport Drop - FK - PersonId, SportId
+IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = N'PersonSport')
+BEGIN
+	IF OBJECT_ID('tempdb..#TempPersonSportTable') IS NOT NULL DROP TABLE #TempPersonSportTable; 
+
+	SELECT * 
+	INTO #TempPersonSportTable
+	FROM [dbo].[PersonSport]
+
+	DROP TABLE [dbo].[PersonSport]
+END
+
 --PersonTeam Drop - FK - PersonId, TeamId
 IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = N'PersonTeam')
 BEGIN
@@ -4765,6 +4777,36 @@ BEGIN
 END
 
 SET IDENTITY_INSERT [dbo].[PersonOccupation] OFF
+
+--PersonSport Create
+CREATE TABLE [dbo].[PersonSport](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[PersonId] [int] NOT NULL,
+	[SportId] [int] NOT NULL,
+ CONSTRAINT [PK_PersonSport] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+
+ALTER TABLE [dbo].[PersonSport]  WITH CHECK ADD  CONSTRAINT [FK_PersonTeam_Sport] FOREIGN KEY([SportId])
+REFERENCES [dbo].[Sport] ([Id])
+ALTER TABLE [dbo].[PersonSport] CHECK CONSTRAINT [FK_PersonTeam_Sport]
+
+ALTER TABLE [dbo].[PersonSport]  WITH CHECK ADD  CONSTRAINT [FK_PersonSport_Person] FOREIGN KEY([PersonId])
+REFERENCES [dbo].[Person] ([Id])
+ALTER TABLE [dbo].[PersonSport] CHECK CONSTRAINT [FK_PersonSport_Person]
+
+SET IDENTITY_INSERT [dbo].[PersonSport] ON
+
+IF @KeepExistingValues = 1
+BEGIN
+	INSERT INTO [dbo].[PersonSport] (Id, PersonId, SportId)
+	SELECT * 
+	FROM #TempPersonSportTable
+END
+
+SET IDENTITY_INSERT [dbo].[PersonSport] OFF
 
 --PersonTeam Create
 CREATE TABLE [dbo].[PersonTeam](

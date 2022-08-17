@@ -35,7 +35,7 @@ namespace Memorabilia.Web.Controls.Person
 
         private void Remove(int collegeId)
         {
-            var college = Colleges.SingleOrDefault(college => college.CollegeId == collegeId);
+            var college = Colleges.FirstOrDefault(college => college.CollegeId == collegeId);
 
             if (college == null)
                 return;

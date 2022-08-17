@@ -21,5 +21,7 @@ namespace Memorabilia.Application.Features.Admin.People
         public int PersonId => _person.Id;
 
         public SportService Service => _person.Service;
+
+        public List<PersonSport> Sports => _person.Sports;
     }
 }

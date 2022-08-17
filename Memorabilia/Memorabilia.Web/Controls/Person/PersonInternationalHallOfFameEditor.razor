@@ -1,0 +1,70 @@
+﻿@using Memorabilia.Application.Features.Admin.People
+@using Memorabilia.Web.Controls.DropDowns
+
+<DivRowCol3>
+    <Content>
+        <MudSelect @bind-Value="@_viewModel.InternationalHallOfFameTypeId"
+                   @bind-Value:event="ValueChanged" 
+                   Disabled="@(!_canEditInternationalHallOfFameType)"
+                   Label="Type"
+                   Variant="Variant.Outlined">
+            <MudSelectItem Value="@(0)">--Select--</MudSelectItem>
+            <Iterations Items="_viewModel.InternationalHallOfFameTypes" Context="internationalHallOfFameType">
+                <MudSelectItem Value="@internationalHallOfFameType.Id">@internationalHallOfFameType.Name</MudSelectItem>
+            </Iterations>	
+        </MudSelect> 
+    </Content>
+    <ContentColumn2>
+        <MudNumericField @bind-Value="_viewModel.Year" 
+                         Label="Induction Year"
+                         Variant="Variant.Outlined" />
+    </ContentColumn2>
+</DivRowCol3>
+<DivLeftAlign>
+    <Content>
+        <MudButton hidden="@(!_canAdd)"
+                   ButtonType="MudBlazor.ButtonType.Button" 
+                   Color="MudBlazor.Color.Secondary"
+                   OnClick="Add"
+                   Size="MudBlazor.Size.Medium"                                  
+                   Variant="Variant.Filled">Add</MudButton>
+        <MudButton hidden="@(!_canUpdate)"
+                   ButtonType="MudBlazor.ButtonType.Button" 
+                   Color="MudBlazor.Color.Secondary"
+                   OnClick="Update"
+                   Size="MudBlazor.Size.Medium"                                  
+                   Variant="Variant.Filled">Update</MudButton>
+    </Content>
+</DivLeftAlign>
+<DivRowCol6>
+    <Content>
+         <MudTable Bordered="false"
+                   Dense="false" 
+                   Hover="true"
+                   Items="@InternationalHallOfFames.Where(hof => !hof.IsDeleted).ToList()"    
+                   Striped="true">
+            <HeaderContent>
+                <MudTh>Type</MudTh>
+                <MudTh>Induction Year</MudTh>
+                <MudTh></MudTh>
+            </HeaderContent>
+            <RowTemplate>
+                <MudTd DataLabel="Type">@context.InternationalHallOfFameTypeName</MudTd>
+                <MudTd DataLabel="Induction Year">@context.Year</MudTd>
+                <MudTd DataLabel="">
+                    <MudTooltip Text="Edit">
+                        <MudFab Color="MudBlazor.Color.Primary"                                
+                                Icon="@Icons.Outlined.ModeEditOutline"
+                                OnClick="@(_ => Edit(context))" />
+                    </MudTooltip> 
+                    <MudTooltip Text="Delete">
+                        <MudFab Color="MudBlazor.Color.Secondary"
+                                Icon="@Icons.Outlined.DeleteOutline"
+                                OnClick="@(_ => Remove(context.InternationalHallOfFameTypeId))" />
+                    </MudTooltip>  
+                </MudTd>
+            </RowTemplate>
+        </MudTable>
+    </Content>
+</DivRowCol6>
+

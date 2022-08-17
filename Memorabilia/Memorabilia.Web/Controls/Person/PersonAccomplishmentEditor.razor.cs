@@ -11,6 +11,12 @@ namespace Memorabilia.Web.Controls.Person
         [Parameter]
         public List<SavePersonAccomplishmentViewModel> Accomplishments { get; set; } = new();
 
+        [Parameter]
+        public Domain.Constants.AccomplishmentType[] AccomplishmentTypes { get; set; } = Domain.Constants.AccomplishmentType.All;
+
+        private bool _canAdd= true;
+        private bool _canEditAccomplishmentType = true;
+        private bool _canUpdate;
         private SavePersonAccomplishmentViewModel _viewModel = new();
 
         private void Add()
@@ -18,6 +24,17 @@ namespace Memorabilia.Web.Controls.Person
             Accomplishments.Add(_viewModel);
 
             _viewModel = new SavePersonAccomplishmentViewModel();
+        }
+
+        private void Edit(SavePersonAccomplishmentViewModel accomplishment)
+        {
+            _viewModel.AccomplishmentTypeId = accomplishment.AccomplishmentTypeId;
+            _viewModel.Year = accomplishment.Year;
+            _viewModel.Date = accomplishment.Date;
+
+            _canAdd = false;
+            _canEditAccomplishmentType = false;
+            _canUpdate = true;
         }
 
         private void Remove(int accomplishmentTypeId, DateTime? date, int? year)
@@ -30,6 +47,20 @@ namespace Memorabilia.Web.Controls.Person
                 return;
 
             accomplishment.IsDeleted = true;
+        }        
+
+        private void Update()
+        {
+            var accomplishment = Accomplishments.Single(accomplishment => accomplishment.AccomplishmentTypeId == _viewModel.AccomplishmentTypeId);
+
+            accomplishment.Year = _viewModel.Year;
+            accomplishment.Date = _viewModel.Date;
+
+            _viewModel = new SavePersonAccomplishmentViewModel();
+
+            _canAdd = true;
+            _canEditAccomplishmentType = true;
+            _canUpdate = false;
         }
     }
 }

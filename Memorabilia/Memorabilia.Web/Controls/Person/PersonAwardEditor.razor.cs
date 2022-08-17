@@ -11,6 +11,9 @@ namespace Memorabilia.Web.Controls.Person
         [Parameter]
         public List<SavePersonAwardViewModel> Awards { get; set; } = new();
 
+        [Parameter]
+        public Domain.Constants.AwardType[] AwardTypes { get; set; } = Domain.Constants.AwardType.All;
+
         private SavePersonAwardViewModel _viewModel = new();
         private string _years;
 

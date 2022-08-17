@@ -5,10 +5,11 @@
     <Content>
         <MudSelect @bind-Value="@_viewModel.FranchiseId"
                    @bind-Value:event="ValueChanged" 
+                   Disabled="@(!_canEditFranchise)"
                    Label="Franchise"
                    Variant="Variant.Outlined">
             <MudSelectItem Value="@(0)">--Select--</MudSelectItem>
-            <Iterations Items="_viewModel.Franchises" Context="franchise">
+            <Iterations Items="Franchises" Context="franchise">
                 <MudSelectItem Value="@franchise.Id">@franchise.Name</MudSelectItem>
             </Iterations>	
         </MudSelect>
@@ -21,11 +22,18 @@
 </DivRowCol3>
 <DivLeftAlign>
     <Content>
-        <MudButton ButtonType="MudBlazor.ButtonType.Button" 
-                   Color="MudBlazor.Color.Success"
+        <MudButton hidden="@(!_canAdd)"
+                   ButtonType="MudBlazor.ButtonType.Button" 
+                   Color="MudBlazor.Color.Secondary"
                    OnClick="Add"
                    Size="MudBlazor.Size.Medium"                                  
                    Variant="Variant.Filled">Add</MudButton>
+        <MudButton hidden="@(!_canUpdate)"
+                   ButtonType="MudBlazor.ButtonType.Button" 
+                   Color="MudBlazor.Color.Secondary"
+                   OnClick="Update"
+                   Size="MudBlazor.Size.Medium"                                  
+                   Variant="Variant.Filled">Update</MudButton>
     </Content>
 </DivLeftAlign>
 <DivRowCol6>
@@ -44,6 +52,11 @@
                 <MudTd DataLabel="Franchise">@context.FranchiseName</MudTd>
                 <MudTd DataLabel="Number">@context.PlayerNumber</MudTd>
                 <MudTd DataLabel="">
+                    <MudTooltip Text="Edit">
+                        <MudFab Color="MudBlazor.Color.Primary"                                
+                                Icon="@Icons.Outlined.ModeEditOutline"
+                                OnClick="@(_ => Edit(context))" />
+                    </MudTooltip> 
                     <MudTooltip Text="Delete">
                         <MudFab Color="MudBlazor.Color.Secondary"
                                 Icon="@Icons.Outlined.DeleteOutline"
