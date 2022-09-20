@@ -99,7 +99,7 @@ namespace Memorabilia.Domain.Entities
             if (ids == null || ids.Length == 0)
                 return;
 
-            Authentications.RemoveAll(authenticatoin => ids.Contains(authenticatoin.Id));
+            Authentications.RemoveAll(authentication => ids.Contains(authentication.Id));
         }
 
         public void RemoveInscriptions(params int[] ids)
