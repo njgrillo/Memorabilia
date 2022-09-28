@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Domain.Entities
 {
-    public class Conference : Framework.Domain.Entity.DomainEntity
+    public class Conference : Framework.Library.Domain.Entity.DomainEntity
     {
         public Conference() { }
 

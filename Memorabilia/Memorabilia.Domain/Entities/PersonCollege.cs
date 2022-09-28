@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Domain.Entities
 {
-    public class PersonCollege : Framework.Domain.Entity.DomainEntity
+    public class PersonCollege : Framework.Library.Domain.Entity.DomainEntity
     {
         public PersonCollege() { }
 

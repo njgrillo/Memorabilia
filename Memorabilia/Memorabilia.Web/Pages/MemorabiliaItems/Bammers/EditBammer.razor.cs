@@ -1,8 +1,4 @@
-﻿using Demo.Framework.Web;
-using Memorabilia.Application.Features.Memorabilia.Bammer;
-using Memorabilia.Domain.Constants;
-using Microsoft.AspNetCore.Components;
-using System.Threading.Tasks;
+﻿using Memorabilia.Application.Features.Memorabilia.Bammer;
 
 namespace Memorabilia.Web.Pages.MemorabiliaItems.Bammers
 {

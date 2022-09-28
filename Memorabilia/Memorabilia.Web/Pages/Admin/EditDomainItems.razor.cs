@@ -1,11 +1,4 @@
-﻿using Framework.Extension;
-using Memorabilia.Application.Features.Admin;
-using Microsoft.AspNetCore.Components;
-using System;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace Memorabilia.Web.Pages.Admin
+﻿namespace Memorabilia.Web.Pages.Admin
 {
     public partial class EditDomainItems : ComponentBase
     {

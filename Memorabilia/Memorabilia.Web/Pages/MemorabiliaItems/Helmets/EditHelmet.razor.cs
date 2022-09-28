@@ -1,10 +1,4 @@
-﻿using Demo.Framework.Web;
-using Memorabilia.Application.Features.Memorabilia.Helmet;
-using Memorabilia.Domain.Constants;
-using Microsoft.AspNetCore.Components;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using Memorabilia.Application.Features.Memorabilia.Helmet;
 
 namespace Memorabilia.Web.Pages.MemorabiliaItems.Helmets
 {

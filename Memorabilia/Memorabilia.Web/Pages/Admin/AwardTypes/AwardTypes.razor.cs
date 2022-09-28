@@ -1,8 +1,4 @@
-﻿using Demo.Framework.Web;
-using Memorabilia.Application.Features.Admin;
-using Memorabilia.Application.Features.Admin.AwardTypes;
-using Microsoft.AspNetCore.Components;
-using System.Threading.Tasks;
+﻿using Memorabilia.Application.Features.Admin.AwardTypes;
 
 namespace Memorabilia.Web.Pages.Admin.AwardTypes
 {

@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Domain.Entities
 {
-    public class AutographThroughTheMail : Framework.Domain.Entity.DomainEntity
+    public class AutographThroughTheMail : Framework.Library.Domain.Entity.DomainEntity
     {
         public AutographThroughTheMail() { }
 

@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Domain.Entities
 {
-    public class Franchise : Framework.Domain.Entity.DomainEntity
+    public class Franchise : Framework.Library.Domain.Entity.DomainEntity
     {
         public Franchise() { }
 

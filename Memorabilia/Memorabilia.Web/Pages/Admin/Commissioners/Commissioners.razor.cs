@@ -1,12 +1,4 @@
-﻿using Demo.Framework.Web;
-using Framework.Extension;
-using Memorabilia.Application.Features.Admin.Commissioners;
-using Memorabilia.Blazor.Controls.Dialogs;
-using Microsoft.AspNetCore.Components;
-using MudBlazor;
-using System;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using Memorabilia.Application.Features.Admin.Commissioners;
 
 namespace Memorabilia.Web.Pages.Admin.Commissioners
 {

@@ -1,8 +1,4 @@
-﻿using Demo.Framework.Web;
-using Memorabilia.Application.Features.Admin;
-using Memorabilia.Application.Features.Admin.AuthenticationCompanies;
-using Microsoft.AspNetCore.Components;
-using System.Threading.Tasks;
+﻿using Memorabilia.Application.Features.Admin.AuthenticationCompanies;
 
 namespace Memorabilia.Web.Pages.Admin.AuthenticationCompanies
 {

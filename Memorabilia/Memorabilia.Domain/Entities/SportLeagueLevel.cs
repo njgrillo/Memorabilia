@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Domain.Entities
 {
-    public class SportLeagueLevel : Framework.Domain.Entity.DomainEntity
+    public class SportLeagueLevel : Framework.Library.Domain.Entity.DomainEntity
     {
         public SportLeagueLevel() { }
 

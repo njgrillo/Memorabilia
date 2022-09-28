@@ -29,6 +29,7 @@
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\componentspace.saml2.net.licensed": {},
           "C:\\Program Files\\dotnet\\library-packs": {},
           "D:\\Projects\\njgrillo\\Budget\\NugetPackages\\Framework": {},
+          "D:\\Projects\\njgrillo\\Memorabilia\\NugetPackages\\Framework": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -104,6 +105,7 @@
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\componentspace.saml2.net.licensed": {},
           "C:\\Program Files\\dotnet\\library-packs": {},
           "D:\\Projects\\njgrillo\\Budget\\NugetPackages\\Framework": {},
+          "D:\\Projects\\njgrillo\\Memorabilia\\NugetPackages\\Framework": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -129,9 +131,13 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "dependencies": {
-            "Demo.Framework": {
+            "Framework.Library": {
               "target": "Package",
-              "version": "[1.0.10, )"
+              "version": "[1.0.0, )"
+            },
+            "MediatR": {
+              "target": "Package",
+              "version": "[10.0.1, )"
             },
             "Microsoft.AspNetCore.Components": {
               "target": "Package",
@@ -195,6 +201,7 @@
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\componentspace.saml2.net.licensed": {},
           "C:\\Program Files\\dotnet\\library-packs": {},
           "D:\\Projects\\njgrillo\\Budget\\NugetPackages\\Framework": {},
+          "D:\\Projects\\njgrillo\\Memorabilia\\NugetPackages\\Framework": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -213,9 +220,13 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "dependencies": {
-            "Demo.Framework": {
+            "Framework.Library": {
               "target": "Package",
-              "version": "[1.0.10, )"
+              "version": "[1.0.0, )"
+            },
+            "MediatR": {
+              "target": "Package",
+              "version": "[10.0.1, )"
             },
             "Microsoft.EntityFrameworkCore.Proxies": {
               "target": "Package",
@@ -267,6 +278,7 @@
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\componentspace.saml2.net.licensed": {},
           "C:\\Program Files\\dotnet\\library-packs": {},
           "D:\\Projects\\njgrillo\\Budget\\NugetPackages\\Framework": {},
+          "D:\\Projects\\njgrillo\\Memorabilia\\NugetPackages\\Framework": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -339,6 +351,7 @@
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\componentspace.saml2.net.licensed": {},
           "C:\\Program Files\\dotnet\\library-packs": {},
           "D:\\Projects\\njgrillo\\Budget\\NugetPackages\\Framework": {},
+          "D:\\Projects\\njgrillo\\Memorabilia\\NugetPackages\\Framework": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -370,17 +383,13 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "dependencies": {
-            "Demo.Framework": {
-              "target": "Package",
-              "version": "[1.0.10, )"
-            },
             "MediatR": {
               "target": "Package",
-              "version": "[4.1.0, )"
+              "version": "[10.0.1, )"
             },
             "MediatR.Extensions.Microsoft.DependencyInjection": {
               "target": "Package",
-              "version": "[4.1.0, )"
+              "version": "[10.0.1, )"
             },
             "Microsoft.AspNetCore.Components": {
               "target": "Package",

@@ -1,5 +1,5 @@
-﻿using Demo.Framework.Web;
-using Framework.Extension;
+﻿
+
 using Memorabilia.Application.Features.Admin.ItemTypeSpots;
 using Memorabilia.Blazor.Controls.Dialogs;
 using Microsoft.AspNetCore.Components;

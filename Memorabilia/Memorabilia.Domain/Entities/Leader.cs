@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Domain.Entities
 {
-    public class Leader : Framework.Domain.Entity.DomainEntity
+    public class Leader : Framework.Library.Domain.Entity.DomainEntity
     {
         public Leader() { }
 

@@ -1,5 +1,6 @@
-﻿global using Demo.Framework.Web;
-global using Framework.Extension;
+﻿//global using Demo.Framework.Web;
+global using Framework.Library.Extension;
+global using Framework.Library.Web;
 global using Memorabilia.Application.Features;
 global using Memorabilia.Application.Features.Admin;
 global using Memorabilia.Application.Features.Admin.AccomplishmentTypes;

@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Domain.Entities
 {
-    public class AllStar : Framework.Domain.Entity.DomainEntity
+    public class AllStar : Framework.Library.Domain.Entity.DomainEntity
     {
         public AllStar() { }
 

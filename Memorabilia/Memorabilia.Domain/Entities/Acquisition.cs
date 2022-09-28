@@ -1,8 +1,6 @@
-﻿
-
-namespace Memorabilia.Domain.Entities
+﻿namespace Memorabilia.Domain.Entities
 {
-    public class Acquisition : Framework.Domain.Entity.DomainEntity
+    public class Acquisition : Framework.Library.Domain.Entity.DomainEntity
     {
         public Acquisition() { }
 

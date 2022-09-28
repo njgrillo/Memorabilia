@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Domain.Entities
 {
-    public class CareerRecord : Framework.Domain.Entity.DomainEntity
+    public class CareerRecord : Framework.Library.Domain.Entity.DomainEntity
     {
         public CareerRecord() { }
 

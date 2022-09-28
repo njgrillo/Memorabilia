@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Domain.Entities
 {
-    public class MemorabiliaBook : Framework.Domain.Entity.DomainEntity
+    public class MemorabiliaBook : Framework.Library.Domain.Entity.DomainEntity
     {
         public MemorabiliaBook() { }
 

@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Domain.Entities
 {
-    public class Division : Framework.Domain.Entity.DomainEntity
+    public class Division : Framework.Library.Domain.Entity.DomainEntity
     {
         public Division() { }
 

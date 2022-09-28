@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Domain.Entities
 {
-    public class SingleSeasonRecord : Framework.Domain.Entity.DomainEntity
+    public class SingleSeasonRecord : Framework.Library.Domain.Entity.DomainEntity
     {
         public SingleSeasonRecord() { }
 

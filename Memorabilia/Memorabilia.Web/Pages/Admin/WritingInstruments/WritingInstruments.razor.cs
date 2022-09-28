@@ -1,8 +1,4 @@
-﻿using Demo.Framework.Web;
-using Memorabilia.Application.Features.Admin;
-using Memorabilia.Application.Features.Admin.WritingInstruments;
-using Microsoft.AspNetCore.Components;
-using System.Threading.Tasks;
+﻿using Memorabilia.Application.Features.Admin.WritingInstruments;
 
 namespace Memorabilia.Web.Pages.Admin.WritingInstruments
 {

@@ -1,4 +1,4 @@
-﻿using Demo.Framework.Web;
+﻿
 using Memorabilia.Application.Features.Admin;
 using Memorabilia.Application.Features.Admin.PrivacyTypes;
 using Microsoft.AspNetCore.Components;

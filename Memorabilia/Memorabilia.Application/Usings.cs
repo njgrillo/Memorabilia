@@ -1,7 +1,7 @@
-﻿global using Demo.Framework.Handler;
-global using Framework.Domain.Command;
-global using Framework.Extension;
-global using Framework.Handler;
+﻿//global using Demo.Framework.Handler;
+global using Framework.Library.Domain.Command;
+global using Framework.Library.Extension;
+global using Framework.Library.Handler;
 global using Memorabilia.Application.Features.Admin.People;
 global using Memorabilia.Application.Features.Admin.Teams;
 global using Memorabilia.Application.Features.Autograph;

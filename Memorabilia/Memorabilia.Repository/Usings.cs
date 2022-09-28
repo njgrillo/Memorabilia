@@ -1,4 +1,4 @@
-﻿global using Framework.Domain.Entity;
+﻿global using Framework.Library.Domain.Entity;
 global using Memorabilia.Repository.Interfaces;
 global using Microsoft.EntityFrameworkCore;
 global using System.Collections.Generic;
