@@ -1,10 +1,4 @@
-﻿using Framework.Domain.Command;
-using Framework.Handler;
-using Memorabilia.Repository.Interfaces;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace Memorabilia.Application.Features.Memorabilia.Bammer
+﻿namespace Memorabilia.Application.Features.Memorabilia.Bammer
 {
     public class SaveBammer
     {

@@ -1,11 +1,4 @@
-﻿using Framework.Domain.Command;
-using Framework.Handler;
-using Memorabilia.Repository.Interfaces;
-using System;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace Memorabilia.Application.Features.Memorabilia.Jersey
+﻿namespace Memorabilia.Application.Features.Memorabilia.Jersey
 {
     public class SaveJersey
     {

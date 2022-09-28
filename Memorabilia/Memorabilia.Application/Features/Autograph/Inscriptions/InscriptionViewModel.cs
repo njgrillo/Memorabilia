@@ -1,5 +1,4 @@
 ﻿using Memorabilia.Domain.Entities;
-using Memorabilia.Repository.Interfaces;
 
 namespace Memorabilia.Application.Features.Autograph.Inscriptions
 {

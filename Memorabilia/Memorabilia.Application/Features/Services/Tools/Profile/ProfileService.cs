@@ -1,8 +1,4 @@
-﻿using Memorabilia.Application.Features.Services.Tools.Profile.Rules;
-using Memorabilia.Domain.Constants;
-using Memorabilia.Repository.Interfaces;
-using System.Collections.Generic;
-using System.Threading.Tasks;
+﻿using Memorabilia.Domain.Constants;
 
 namespace Memorabilia.Application.Features.Services.Tools.Profile
 {

@@ -1,7 +1,7 @@
 ﻿using Demo.Framework.Web;
 using Memorabilia.Application.Features.Autograph;
 using Memorabilia.Application.Features.Memorabilia;
-using Memorabilia.Web.Controls.Dialogs;
+using Memorabilia.Blazor.Controls.Dialogs;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage;
 using MudBlazor;

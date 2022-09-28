@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace Memorabilia.Application.Features.Services.Dashboard
+﻿namespace Memorabilia.Application.Features.Services.Dashboard
 {
     public class DashboardItemFactory : IDashboardItemFactory
     {

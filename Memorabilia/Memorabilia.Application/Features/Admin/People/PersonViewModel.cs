@@ -1,8 +1,4 @@
-﻿using Framework.Extension;
-using Memorabilia.Domain.Entities;
-using System;
-using System.Collections.Generic;
-using System.IO;
+﻿using Memorabilia.Domain.Entities;
 
 namespace Memorabilia.Application.Features.Admin.People
 {

@@ -1,9 +1,4 @@
-﻿using Memorabilia.Repository.Interfaces;
-using Framework.Domain.Command;
-using Framework.Handler;
-using System.Threading.Tasks;
-
-namespace Memorabilia.Application.Features.User.Register
+﻿namespace Memorabilia.Application.Features.User.Register
 {
     public class AddUser
     {

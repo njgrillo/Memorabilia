@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace Memorabilia.Application.Features.Admin.Franchises
+﻿namespace Memorabilia.Application.Features.Admin.Franchises
 {
     public class SaveFranchiseViewModel : SaveViewModel
     {

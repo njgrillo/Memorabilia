@@ -1,8 +1,4 @@
-﻿using Demo.Framework.Handler;
-using Memorabilia.Repository.Interfaces;
-using System.Threading.Tasks;
-
-namespace Memorabilia.Application.Features.Memorabilia.Card
+﻿namespace Memorabilia.Application.Features.Memorabilia.Card
 {
     public class GetCard
     {

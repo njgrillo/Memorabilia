@@ -1,7 +1,4 @@
-﻿using Memorabilia.Application.Features.Tools.Profile.Common;
-using Memorabilia.Domain.Entities;
-using System.Collections.Generic;
-using System.Linq;
+﻿using Memorabilia.Domain.Entities;
 
 namespace Memorabilia.Application.Features.Tools.Profile.Baseball
 {

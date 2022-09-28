@@ -13,8 +13,12 @@
         "packagesPath": "C:\\Users\\njgri\\.nuget\\packages\\",
         "outputPath": "D:\\Projects\\njgrillo\\Memorabilia\\Memorabilia\\Memorabilia.Application\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
           "C:\\Users\\njgri\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -23,6 +27,7 @@
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\componentspace.saml2.net.licensed": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "D:\\Projects\\njgrillo\\Budget\\NugetPackages\\Framework": {},
           "https://api.nuget.org/v3/index.json": {}
         },
@@ -51,7 +56,7 @@
           "dependencies": {
             "MudBlazor": {
               "target": "Package",
-              "version": "[6.0.7, )"
+              "version": "[6.0.15, )"
             }
           },
           "imports": [
@@ -60,7 +65,8 @@
             "net47",
             "net471",
             "net472",
-            "net48"
+            "net48",
+            "net481"
           ],
           "assetTargetFallback": true,
           "warn": true,
@@ -69,7 +75,98 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.201\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.401\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "D:\\Projects\\njgrillo\\Memorabilia\\Memorabilia\\Memorabilia.Blazor\\Memorabilia.Blazor.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\Projects\\njgrillo\\Memorabilia\\Memorabilia\\Memorabilia.Blazor\\Memorabilia.Blazor.csproj",
+        "projectName": "Memorabilia.Blazor",
+        "projectPath": "D:\\Projects\\njgrillo\\Memorabilia\\Memorabilia\\Memorabilia.Blazor\\Memorabilia.Blazor.csproj",
+        "packagesPath": "C:\\Users\\njgri\\.nuget\\packages\\",
+        "outputPath": "D:\\Projects\\njgrillo\\Memorabilia\\Memorabilia\\Memorabilia.Blazor\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\njgri\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\componentspace.saml2.net.licensed": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
+          "D:\\Projects\\njgrillo\\Budget\\NugetPackages\\Framework": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {
+              "D:\\Projects\\njgrillo\\Memorabilia\\Memorabilia\\Memorabilia.Application\\Memorabilia.Application.csproj": {
+                "projectPath": "D:\\Projects\\njgrillo\\Memorabilia\\Memorabilia\\Memorabilia.Application\\Memorabilia.Application.csproj"
+              },
+              "D:\\Projects\\njgrillo\\Memorabilia\\Memorabilia\\Memorabilia.Domain\\Memorabilia.Domain.csproj": {
+                "projectPath": "D:\\Projects\\njgrillo\\Memorabilia\\Memorabilia\\Memorabilia.Domain\\Memorabilia.Domain.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "dependencies": {
+            "Demo.Framework": {
+              "target": "Package",
+              "version": "[1.0.10, )"
+            },
+            "Microsoft.AspNetCore.Components": {
+              "target": "Package",
+              "version": "[6.0.9, )"
+            },
+            "Microsoft.AspNetCore.Components.Web": {
+              "target": "Package",
+              "version": "[6.0.9, )"
+            },
+            "MudBlazor": {
+              "target": "Package",
+              "version": "[6.0.15, )"
+            },
+            "PrettyBlazor": {
+              "target": "Package",
+              "version": "[1.2.0, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.401\\RuntimeIdentifierGraph.json"
         }
       }
     },
@@ -82,8 +179,12 @@
         "packagesPath": "C:\\Users\\njgri\\.nuget\\packages\\",
         "outputPath": "D:\\Projects\\njgrillo\\Memorabilia\\Memorabilia\\Memorabilia.Domain\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
           "C:\\Users\\njgri\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -92,6 +193,7 @@
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\componentspace.saml2.net.licensed": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "D:\\Projects\\njgrillo\\Budget\\NugetPackages\\Framework": {},
           "https://api.nuget.org/v3/index.json": {}
         },
@@ -126,7 +228,8 @@
             "net47",
             "net471",
             "net472",
-            "net48"
+            "net48",
+            "net481"
           ],
           "assetTargetFallback": true,
           "warn": true,
@@ -135,7 +238,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.201\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.401\\RuntimeIdentifierGraph.json"
         }
       }
     },
@@ -148,8 +251,12 @@
         "packagesPath": "C:\\Users\\njgri\\.nuget\\packages\\",
         "outputPath": "D:\\Projects\\njgrillo\\Memorabilia\\Memorabilia\\Memorabilia.Repository\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
           "C:\\Users\\njgri\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -158,6 +265,7 @@
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\componentspace.saml2.net.licensed": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "D:\\Projects\\njgrillo\\Budget\\NugetPackages\\Framework": {},
           "https://api.nuget.org/v3/index.json": {}
         },
@@ -192,7 +300,8 @@
             "net47",
             "net471",
             "net472",
-            "net48"
+            "net48",
+            "net481"
           ],
           "assetTargetFallback": true,
           "warn": true,
@@ -201,7 +310,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.201\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.401\\RuntimeIdentifierGraph.json"
         }
       }
     },
@@ -214,8 +323,12 @@
         "packagesPath": "C:\\Users\\njgri\\.nuget\\packages\\",
         "outputPath": "D:\\Projects\\njgrillo\\Memorabilia\\Memorabilia\\Memorabilia.Web\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
           "C:\\Users\\njgri\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -224,6 +337,7 @@
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\componentspace.saml2.net.licensed": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "D:\\Projects\\njgrillo\\Budget\\NugetPackages\\Framework": {},
           "https://api.nuget.org/v3/index.json": {}
         },
@@ -233,6 +347,9 @@
             "projectReferences": {
               "D:\\Projects\\njgrillo\\Memorabilia\\Memorabilia\\Memorabilia.Application\\Memorabilia.Application.csproj": {
                 "projectPath": "D:\\Projects\\njgrillo\\Memorabilia\\Memorabilia\\Memorabilia.Application\\Memorabilia.Application.csproj"
+              },
+              "D:\\Projects\\njgrillo\\Memorabilia\\Memorabilia\\Memorabilia.Blazor\\Memorabilia.Blazor.csproj": {
+                "projectPath": "D:\\Projects\\njgrillo\\Memorabilia\\Memorabilia\\Memorabilia.Blazor\\Memorabilia.Blazor.csproj"
               },
               "D:\\Projects\\njgrillo\\Memorabilia\\Memorabilia\\Memorabilia.Domain\\Memorabilia.Domain.csproj": {
                 "projectPath": "D:\\Projects\\njgrillo\\Memorabilia\\Memorabilia\\Memorabilia.Domain\\Memorabilia.Domain.csproj"
@@ -265,13 +382,17 @@
               "target": "Package",
               "version": "[4.1.0, )"
             },
+            "Microsoft.AspNetCore.Components": {
+              "target": "Package",
+              "version": "[6.0.9, )"
+            },
             "Microsoft.EntityFrameworkCore.SqlServer": {
               "target": "Package",
               "version": "[6.0.2, )"
             },
             "MudBlazor": {
               "target": "Package",
-              "version": "[6.0.7, )"
+              "version": "[6.0.15, )"
             },
             "Newtonsoft.Json": {
               "target": "Package",
@@ -288,7 +409,8 @@
             "net47",
             "net471",
             "net472",
-            "net48"
+            "net48",
+            "net481"
           ],
           "assetTargetFallback": true,
           "warn": true,
@@ -300,7 +422,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.201\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.401\\RuntimeIdentifierGraph.json"
         }
       }
     }

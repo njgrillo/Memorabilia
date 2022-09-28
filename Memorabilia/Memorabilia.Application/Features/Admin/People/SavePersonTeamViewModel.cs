@@ -1,6 +1,4 @@
-﻿using Memorabilia.Application.Features.Admin.Teams;
-
-namespace Memorabilia.Application.Features.Admin.People
+﻿namespace Memorabilia.Application.Features.Admin.People
 {
     public class SavePersonTeamViewModel : SaveViewModel
     {

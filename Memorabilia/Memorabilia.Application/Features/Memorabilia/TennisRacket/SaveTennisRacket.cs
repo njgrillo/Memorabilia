@@ -1,10 +1,4 @@
-﻿using Framework.Domain.Command;
-using Framework.Handler;
-using Memorabilia.Repository.Interfaces;
-using System;
-using System.Threading.Tasks;
-
-namespace Memorabilia.Application.Features.Memorabilia.TennisRacket
+﻿namespace Memorabilia.Application.Features.Memorabilia.TennisRacket
 {
     public class SaveTennisRacket
     {

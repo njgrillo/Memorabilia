@@ -1,7 +1,4 @@
-﻿using Framework.Extension;
-using Memorabilia.Domain.Constants;
-using System;
-using System.ComponentModel.DataAnnotations;
+﻿using Memorabilia.Domain.Constants;
 
 namespace Memorabilia.Application.Features.Memorabilia
 {

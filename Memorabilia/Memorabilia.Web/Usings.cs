@@ -1,0 +1,27 @@
+﻿global using Demo.Framework.Web;
+global using Framework.Extension;
+global using Memorabilia.Application.Features.Admin;
+global using Memorabilia.Application.Features.Admin.AccomplishmentTypes;
+global using Memorabilia.Application.Features.Admin.AcquisitionTypes;
+global using Memorabilia.Application.Features.Image;
+global using Memorabilia.Application.Features.Memorabilia;
+global using Memorabilia.Application.Features.Memorabilia.Canvas;
+global using Memorabilia.Application.Features.Memorabilia.Image;
+global using Memorabilia.Blazor.Controls;
+global using Memorabilia.Blazor.Controls.Dialogs;
+global using Memorabilia.Domain.Constants;
+global using Microsoft.AspNetCore.Components;
+global using Microsoft.AspNetCore.Components.Forms;
+global using Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage;
+global using Microsoft.AspNetCore.Hosting;
+global using Microsoft.Extensions.Logging;
+global using MudBlazor;
+global using System;
+global using System.Collections.Generic;
+global using System.IO;
+global using System.Linq;
+global using System.Threading.Tasks;
+
+global using Color = Memorabilia.Domain.Constants.Color;
+global using Orientation = Memorabilia.Domain.Constants.Orientation;
+global using Size = Memorabilia.Domain.Constants.Size;

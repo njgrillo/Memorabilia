@@ -1,5 +1,4 @@
 ﻿using Memorabilia.Domain.Entities;
-using Memorabilia.Application.Features.Image;
 
 namespace Memorabilia.Application.Features.Autograph.Image
 {

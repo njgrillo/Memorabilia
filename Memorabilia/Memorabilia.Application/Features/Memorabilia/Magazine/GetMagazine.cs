@@ -1,8 +1,4 @@
-﻿using Demo.Framework.Handler;
-using Memorabilia.Repository.Interfaces;
-using System.Threading.Tasks;
-
-namespace Memorabilia.Application.Features.Memorabilia.Magazine
+﻿namespace Memorabilia.Application.Features.Memorabilia.Magazine
 {
     public class GetMagazine
     {

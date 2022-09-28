@@ -1,8 +1,4 @@
-﻿using Framework.Extension;
-using System.Collections.Generic;
-using System.Linq;
-
-namespace Memorabilia.Domain.Extensions
+﻿namespace Memorabilia.Domain.Extensions
 {
     public static class StringExtensions
     {

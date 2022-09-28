@@ -1,7 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-
-namespace Memorabilia.Domain.Entities
+﻿namespace Memorabilia.Domain.Entities
 {
     public class Team : Framework.Domain.Entity.DomainEntity
     {

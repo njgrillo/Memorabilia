@@ -1,7 +1,7 @@
 ﻿using Demo.Framework.Web;
 using Framework.Extension;
 using Memorabilia.Application.Features.Admin.DashboardItems;
-using Memorabilia.Web.Controls.Dialogs;
+using Memorabilia.Blazor.Controls.Dialogs;
 using Microsoft.AspNetCore.Components;
 using MudBlazor;
 using System;

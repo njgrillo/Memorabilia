@@ -1,9 +1,4 @@
-﻿using Framework.Extension;
-using Memorabilia.Domain.Constants;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
+﻿using Memorabilia.Domain.Constants;
 
 namespace Memorabilia.Application.Features.Autograph
 {

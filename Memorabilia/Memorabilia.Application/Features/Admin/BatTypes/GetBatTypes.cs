@@ -1,8 +1,4 @@
-﻿using Demo.Framework.Handler;
-using Memorabilia.Repository.Interfaces;
-using System.Threading.Tasks;
-
-namespace Memorabilia.Application.Features.Admin.BatTypes
+﻿namespace Memorabilia.Application.Features.Admin.BatTypes
 {
     public class GetBatTypes
     {

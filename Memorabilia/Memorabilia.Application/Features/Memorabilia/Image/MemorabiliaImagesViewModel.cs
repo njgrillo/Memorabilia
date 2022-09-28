@@ -1,7 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-
-namespace Memorabilia.Application.Features.Memorabilia.Image
+﻿namespace Memorabilia.Application.Features.Memorabilia.Image
 {
     public class MemorabiliaImagesViewModel : ViewModel
     {

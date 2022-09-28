@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-
-namespace Memorabilia.Application.Features.Project
+﻿namespace Memorabilia.Application.Features.Project
 {
     public class ProjectViewModel
     {

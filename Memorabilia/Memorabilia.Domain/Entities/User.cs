@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-
-namespace Memorabilia.Domain.Entities
+﻿namespace Memorabilia.Domain.Entities
 {
     public class User : Framework.Domain.Entity.DomainEntity
     {

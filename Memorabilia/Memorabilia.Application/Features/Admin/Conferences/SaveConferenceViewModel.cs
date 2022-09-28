@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace Memorabilia.Application.Features.Admin.Conferences
+﻿namespace Memorabilia.Application.Features.Admin.Conferences
 {
     public class SaveConferenceViewModel : SaveViewModel
     {

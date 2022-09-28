@@ -1,10 +1,4 @@
-﻿using Demo.Framework.Handler;
-using Memorabilia.Repository.Interfaces;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace Memorabilia.Application.Features.Admin.Teams
+﻿namespace Memorabilia.Application.Features.Admin.Teams
 {
     public class GetTeamChampionships
     {

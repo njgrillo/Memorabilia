@@ -11,6 +11,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Memorabilia.Application", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Memorabilia.Web", "Memorabilia.Web\Memorabilia.Web.csproj", "{79F0E3A4-F280-432C-A04A-82307F300632}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Memorabilia.Blazor", "Memorabilia.Blazor\Memorabilia.Blazor.csproj", "{2008C769-2F7A-4C84-852E-4CF1F6C1FD5A}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Memorabilia.MauiBlazor", "Memorabilia.MauiBlazor\Memorabilia.MauiBlazor.csproj", "{0DC8340D-D7EE-4951-9F13-5993736A6FCD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +37,16 @@ Global
 		{79F0E3A4-F280-432C-A04A-82307F300632}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{79F0E3A4-F280-432C-A04A-82307F300632}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{79F0E3A4-F280-432C-A04A-82307F300632}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2008C769-2F7A-4C84-852E-4CF1F6C1FD5A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2008C769-2F7A-4C84-852E-4CF1F6C1FD5A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2008C769-2F7A-4C84-852E-4CF1F6C1FD5A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2008C769-2F7A-4C84-852E-4CF1F6C1FD5A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0DC8340D-D7EE-4951-9F13-5993736A6FCD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0DC8340D-D7EE-4951-9F13-5993736A6FCD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0DC8340D-D7EE-4951-9F13-5993736A6FCD}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{0DC8340D-D7EE-4951-9F13-5993736A6FCD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0DC8340D-D7EE-4951-9F13-5993736A6FCD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0DC8340D-D7EE-4951-9F13-5993736A6FCD}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

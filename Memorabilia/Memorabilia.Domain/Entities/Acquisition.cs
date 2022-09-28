@@ -1,4 +1,4 @@
-﻿using System;
+﻿
 
 namespace Memorabilia.Domain.Entities
 {

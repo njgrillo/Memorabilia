@@ -1,11 +1,4 @@
-﻿using Demo.Framework.Web;
-using Memorabilia.Application.Features.Memorabilia;
-using Memorabilia.Application.Features.Memorabilia.Image;
-using Memorabilia.Web.Controls;
-using Microsoft.AspNetCore.Components;
-using System.Threading.Tasks;
-
-namespace Memorabilia.Web.Pages.MemorabiliaItems.Images
+﻿namespace Memorabilia.Web.Pages.MemorabiliaItems.Images
 {
     public partial class EditMemorabiliaImage : ComponentBase
     {

@@ -1,8 +1,4 @@
-﻿using Framework.Domain.Entity;
-using Microsoft.EntityFrameworkCore;
-using System.Linq;
-
-namespace Memorabilia.Repository
+﻿namespace Memorabilia.Repository
 {
     public abstract class BaseRepository<T> where T : DomainEntity
     {

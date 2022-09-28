@@ -1,7 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-
-namespace Memorabilia.Application.Features.Autograph
+﻿namespace Memorabilia.Application.Features.Autograph
 {
     public class AutographsViewModel : ViewModel
     {

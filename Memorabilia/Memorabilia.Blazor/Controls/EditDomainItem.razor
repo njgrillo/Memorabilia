@@ -1,0 +1,34 @@
+﻿<Page OnLoad="Load">
+    <Content>
+        <EditPage ContinueNavigationPath="@_viewModel.NavigationPath"
+                  EditMode="_viewModel.EditModeType"
+                  ExitNavigationPath="@_viewModel.NavigationPath"
+                  ImagePath="@_viewModel.ImagePath"
+                  ItemName="@_viewModel.DomainTypeName"
+                  Model="_viewModel"
+                  OnLoad="Load"
+                  OnSave="Save"
+                  PageFooterNavigationPath="@_viewModel.PageFooterNavigationPath"
+                  PageTitle="@_viewModel.PageTitle"
+                  TItem="SaveDomainViewModel">
+            <Content>
+                <DivRowCol3>
+                    <Content>
+                        <MudTextField @bind-Value="_viewModel.Name"
+                                      Label="Name"
+                                      Variant="Variant.Outlined" />
+                    </Content>
+                </DivRowCol3>
+                <DivRowCol3>
+                    <Content>
+                        <MudTextField @bind-Value="_viewModel.Abbreviation"
+                                      Label="Abbreviation"
+                                      Variant="Variant.Outlined" />
+                    </Content>
+                </DivRowCol3>
+            </Content>
+        </EditPage>
+    </Content>
+</Page>
+
+

@@ -1,9 +1,4 @@
 ﻿using Memorabilia.Domain.Entities;
-using Memorabilia.Repository.Interfaces;
-using Microsoft.EntityFrameworkCore;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
 
 namespace Memorabilia.Repository
 {

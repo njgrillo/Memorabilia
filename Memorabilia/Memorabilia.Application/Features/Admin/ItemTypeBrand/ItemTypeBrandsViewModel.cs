@@ -1,7 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-
-namespace Memorabilia.Application.Features.Admin.ItemTypeBrand
+﻿namespace Memorabilia.Application.Features.Admin.ItemTypeBrand
 {
     public class ItemTypeBrandsViewModel : ViewModel
     {

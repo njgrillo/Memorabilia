@@ -1,9 +1,4 @@
-﻿using Demo.Framework.Handler;
-using Memorabilia.Application.Features.Tools.Profile.Baseball;
-using Memorabilia.Repository.Interfaces;
-using System.Threading.Tasks;
-
-namespace Memorabilia.Application.Features.Tools.Profile
+﻿namespace Memorabilia.Application.Features.Tools.Profile
 {
     public class GetBaseballProfile
     {

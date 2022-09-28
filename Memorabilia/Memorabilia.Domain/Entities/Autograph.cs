@@ -1,9 +1,4 @@
-﻿using Framework.Extension;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-
-namespace Memorabilia.Domain.Entities
+﻿namespace Memorabilia.Domain.Entities
 {
     public class Autograph : Framework.Domain.Entity.DomainEntity
     {

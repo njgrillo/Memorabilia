@@ -1,10 +1,4 @@
-﻿using Framework.Domain.Command;
-using Framework.Handler;
-using Memorabilia.Repository.Interfaces;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace Memorabilia.Application.Features.Memorabilia.Photo
+﻿namespace Memorabilia.Application.Features.Memorabilia.Photo
 {
     public class SavePhoto
     {
@@ -56,7 +50,7 @@ namespace Memorabilia.Application.Features.Memorabilia.Photo
 
             public int[] PersonIds => _viewModel.People.Where(person => !person.IsDeleted).Select(person => person.Id).ToArray();
 
-            public int? PhotoTypeId => _viewModel.PhotoTypeId;
+            public int? PhotoTypeId => _viewModel.PhotoTypeId > 0 ? _viewModel.PhotoTypeId : null;
 
             public int SizeId => _viewModel.SizeId;
 

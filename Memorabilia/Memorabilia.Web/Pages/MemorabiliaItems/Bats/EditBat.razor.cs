@@ -1,10 +1,6 @@
-﻿using Demo.Framework.Web;
-using Memorabilia.Application.Features.Admin.People;
+﻿using Memorabilia.Application.Features.Admin.People;
 using Memorabilia.Application.Features.Admin.Teams;
 using Memorabilia.Application.Features.Memorabilia.Bat;
-using Memorabilia.Domain.Constants;
-using Microsoft.AspNetCore.Components;
-using System.Threading.Tasks;
 
 namespace Memorabilia.Web.Pages.MemorabiliaItems.Bats
 {

@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace Memorabilia.Application.Features.Admin.ItemTypeLevel
+﻿namespace Memorabilia.Application.Features.Admin.ItemTypeLevel
 {
     public class SaveItemTypeLevelViewModel : SaveViewModel
     {

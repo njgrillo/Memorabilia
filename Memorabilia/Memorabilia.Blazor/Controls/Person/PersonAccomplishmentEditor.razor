@@ -1,0 +1,78 @@
+﻿<DivRowCol3>
+    <Content>
+        <MudSelect @bind-Value="@_viewModel.AccomplishmentTypeId"
+                   @bind-Value:event="ValueChanged" 
+                   Disabled="@(!_canEditAccomplishmentType)"
+                   Label="Accomplishment"  
+                   Variant="Variant.Outlined">
+            <MudSelectItem Value="@(0)">--Select--</MudSelectItem>
+            <Iterations Items="AccomplishmentTypes" Context="accomplishmentType">
+                <MudSelectItem Value="@accomplishmentType.Id">@accomplishmentType.Name</MudSelectItem>
+            </Iterations>	
+        </MudSelect>
+    </Content>
+</DivRowCol3>
+<DivRowCol3>
+    <Content>
+        <MudNumericField @bind-Value="_viewModel.Year" 
+                         Label="Year"
+                         Variant="Variant.Outlined" />
+    </Content>
+    <ContentColumn2>
+        <MudDatePicker @bind-Date="_viewModel.Date"
+                       DateFormat="MM/dd/yyyy"
+                       Editable="true"
+                       Label="Date"
+                       Mask="@(new DateMask("MM/dd/yyyy"))" 
+                       Variant="Variant.Outlined" />
+    </ContentColumn2>
+</DivRowCol3>
+<DivLeftAlign>
+    <Content>
+        <MudButton hidden="@(!_canAdd)"
+                   ButtonType="MudBlazor.ButtonType.Button" 
+                   Color="MudBlazor.Color.Secondary"
+                   OnClick="Add"
+                   Size="MudBlazor.Size.Medium"                                  
+                   Variant="Variant.Filled">Add</MudButton>
+        <MudButton hidden="@(!_canUpdate)"
+                   ButtonType="MudBlazor.ButtonType.Button" 
+                   Color="MudBlazor.Color.Secondary"
+                   OnClick="Update"
+                   Size="MudBlazor.Size.Medium"                                  
+                   Variant="Variant.Filled">Update</MudButton>
+    </Content>
+</DivLeftAlign>
+<DivRowCol6>
+    <Content>
+         <MudTable Bordered="false"
+                   Dense="false" 
+                   Hover="true"
+                   Items="@Accomplishments.Where(accomplishment => !accomplishment.IsDeleted).ToList()"    
+                   Striped="true">
+            <HeaderContent>
+                <MudTh>Accomplishment</MudTh>
+                <MudTh>Date</MudTh>
+                <MudTh>Year</MudTh>
+                <MudTh></MudTh>
+            </HeaderContent>
+            <RowTemplate>
+                <MudTd DataLabel="Accomplishment">@context.AccomplishmentTypeName</MudTd>
+                <MudTd DataLabel="Date">@context.FormattedDate</MudTd>
+                <MudTd DataLabel="Year">@context.Year</MudTd>
+                <MudTd DataLabel="">
+                    <MudTooltip Text="Edit">
+                        <MudFab Color="MudBlazor.Color.Primary"                                
+                                Icon="@Icons.Outlined.ModeEditOutline"
+                                OnClick="@(_ => Edit(context))" />
+                    </MudTooltip> 
+                    <MudTooltip Text="Delete">
+                        <MudFab Color="MudBlazor.Color.Secondary"
+                                Icon="@Icons.Outlined.DeleteOutline"
+                                OnClick="@(_ => Remove(context.AccomplishmentTypeId, context.Date, context.Year))" />
+                    </MudTooltip>  
+                </MudTd>
+            </RowTemplate>
+        </MudTable>
+    </Content>
+</DivRowCol6>

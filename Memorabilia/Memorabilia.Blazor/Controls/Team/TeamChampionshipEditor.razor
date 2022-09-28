@@ -1,0 +1,56 @@
+﻿<DivRowCol3>
+    <Content>
+        <MudSelect @bind-Value="@_viewModel.ChampionshipTypeId"
+                   @bind-Value:event="ValueChanged" 
+                   Label="Championship Type"
+                   Variant="Variant.Outlined">
+            <MudSelectItem Value="@(0)">--Select--</MudSelectItem>
+            <Iterations Context="championshipType" 
+                        Items="_viewModel.ChampionshipTypes" >
+                <MudSelectItem Value="@championshipType.Id">@championshipType.Name</MudSelectItem>
+            </Iterations>	
+        </MudSelect>  
+    </Content>
+</DivRowCol3>
+<DivRowCol3>
+    <Content>
+        <MudNumericField @bind-Value="_viewModel.Year" 
+                         Label="Begin Year"
+                         Variant="Variant.Outlined" />
+    </Content>
+</DivRowCol3>
+<DivLeftAlign>
+    <Content>
+        <MudButton ButtonType="MudBlazor.ButtonType.Button" 
+                   Color="MudBlazor.Color.Secondary"
+                   OnClick="Add"
+                   Size="MudBlazor.Size.Medium"                                  
+                   Variant="Variant.Filled">Add</MudButton>
+    </Content>
+</DivLeftAlign>
+<DivRowCol3>
+    <Content>
+        <MudTable Bordered="false"
+                  Dense="false" 
+                  Hover="true"
+                  Items="@Championships.Where(championship => !championship.IsDeleted).OrderBy(championship => championship.Year).ToList()"    
+                  Striped="true">
+            <HeaderContent>
+                <MudTh>Championship Type</MudTh>
+                <MudTh>Year</MudTh>
+                <MudTh></MudTh>
+            </HeaderContent>
+            <RowTemplate>
+                <MudTd DataLabel="Championship Type">@context.ChampionshipTypeName</MudTd>
+                <MudTd DataLabel="Year">@context.Year</MudTd>
+                <MudTd DataLabel="">
+                    <MudTooltip Text="Delete">
+                        <MudFab Color="MudBlazor.Color.Secondary"
+                                Icon="@Icons.Outlined.DeleteOutline"
+                                OnClick="@(_ => Remove(context.TeamId, context.Year))" />
+                    </MudTooltip>  
+                </MudTd>
+            </RowTemplate>
+        </MudTable>
+    </Content>
+</DivRowCol3>

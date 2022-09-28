@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Memorabilia.Domain.Entities
+﻿namespace Memorabilia.Domain.Entities
 {
     public class MemorabiliaAcquisition : Framework.Domain.Entity.DomainEntity
     {

@@ -1,8 +1,4 @@
-﻿using Memorabilia.Application.Features.Image;
-using Memorabilia.Domain.Constants;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
+﻿using Memorabilia.Domain.Constants;
 
 namespace Memorabilia.Application.Features.Memorabilia.Image
 {

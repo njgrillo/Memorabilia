@@ -1,8 +1,4 @@
-﻿using Demo.Framework.Web;
-using Memorabilia.Application.Features.Memorabilia;
-using Microsoft.AspNetCore.Components;
-using Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage;
-using System.Threading.Tasks;
+﻿using Memorabilia.Application.Features.Memorabilia;
 
 namespace Memorabilia.Web.Pages.MemorabiliaItems
 {

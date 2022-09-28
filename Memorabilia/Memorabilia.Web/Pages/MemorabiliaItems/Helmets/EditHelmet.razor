@@ -1,11 +1,6 @@
 ﻿@page "/Memorabilia/Helmet/Edit/{memorabiliaId:int}"
 
 @using Memorabilia.Application.Features.Memorabilia.Helmet
-@using Memorabilia.Web.Controls.DropDowns
-@using Memorabilia.Web.Controls.MemorabiliaItem
-@using Memorabilia.Web.Controls.Person
-@using Memorabilia.Web.Controls.Sport
-@using Memorabilia.Web.Controls.Team
 
 <EditPage ContinueNavigationPath="@_viewModel.ContinueNavigationPath"
           EditMode="_viewModel.EditModeType"
@@ -89,7 +84,7 @@
             <ContentColumn2>
                 <DivHidden Hidden="@(!_viewModel.DisplayHelmetQualityType)">
                     <Content>
-                        <MudSelect @bind-Value="@_viewModel.HelmetTypeId"
+                        <MudSelect @bind-Value="@_viewModel.HelmetQualityTypeId"
                                    @bind-Value:event="ValueChanged"  
                                    Disabled="!_viewModel.CanEditHelmetQualityType"
                                    Label="Quality"

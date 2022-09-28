@@ -1,0 +1,32 @@
+<Project Sdk="Microsoft.NET.Sdk.Razor">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+
+  <ItemGroup>
+    <SupportedPlatform Include="browser" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Demo.Framework" Version="1.0.10" />
+    <PackageReference Include="Microsoft.AspNetCore.Components" Version="6.0.9" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="6.0.9" />
+    <PackageReference Include="MudBlazor" Version="6.0.15" />
+    <PackageReference Include="PrettyBlazor" Version="1.2.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Pages\MemorabiliaItems\" />
+    <Folder Include="Pages\Tools\ThroughTheMail\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Memorabilia.Application\Memorabilia.Application.csproj" />
+    <ProjectReference Include="..\Memorabilia.Domain\Memorabilia.Domain.csproj" />
+  </ItemGroup>
+
+</Project>

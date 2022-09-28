@@ -1,7 +1,4 @@
-﻿using Memorabilia.Application.Features.User.Dashboard;
-using System.Collections.Generic;
-
-namespace Memorabilia.Application.Features.Memorabilia
+﻿namespace Memorabilia.Application.Features.Memorabilia
 {
     public class DashboardViewModel : ViewModel
     {

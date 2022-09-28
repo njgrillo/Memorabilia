@@ -1,5 +1,4 @@
-﻿using Framework.Extension;
-using Memorabilia.Domain.Constants;
+﻿using Memorabilia.Domain.Constants;
 
 namespace Memorabilia.Application.Features.Admin.People
 {

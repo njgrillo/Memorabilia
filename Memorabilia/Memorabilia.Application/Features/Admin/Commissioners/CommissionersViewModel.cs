@@ -1,7 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-
-namespace Memorabilia.Application.Features.Admin.Commissioners
+﻿namespace Memorabilia.Application.Features.Admin.Commissioners
 {
     public class CommissionersViewModel : ViewModel
     {

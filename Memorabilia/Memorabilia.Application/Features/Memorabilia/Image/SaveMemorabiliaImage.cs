@@ -1,10 +1,4 @@
-﻿using Framework.Domain.Command;
-using Framework.Handler;
-using Memorabilia.Repository.Interfaces;
-using Memorabilia.Domain.Constants;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using Memorabilia.Domain.Constants;
 
 namespace Memorabilia.Application.Features.Memorabilia.Image
 {

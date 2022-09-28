@@ -1,6 +1,4 @@
-﻿using System.Linq;
-
-namespace Memorabilia.Domain.Constants
+﻿namespace Memorabilia.Domain.Constants
 {
     public sealed class HelmetType
     {
@@ -9,6 +7,7 @@ namespace Memorabilia.Domain.Constants
         public static readonly HelmetType Other = new(6, "Other", string.Empty);
         public static readonly HelmetType Revolution = new(4, "Revolution", string.Empty);
         public static readonly HelmetType Speed = new(3, "Speed", string.Empty);        
+        public static readonly HelmetType VSR4 = new(7, "VSR4", string.Empty);        
 
         public static readonly HelmetType[] All =
         {
@@ -16,7 +15,8 @@ namespace Memorabilia.Domain.Constants
             Flex,
             Other,
             Revolution,
-            Speed            
+            Speed,
+            VSR4
         };
 
         public static readonly HelmetType[] GameWorthly =
@@ -25,7 +25,8 @@ namespace Memorabilia.Domain.Constants
             Flex,
             Other,
             Revolution,
-            Speed
+            Speed,
+            VSR4
         };
 
         private HelmetType(int id, string name, string abbreviation)

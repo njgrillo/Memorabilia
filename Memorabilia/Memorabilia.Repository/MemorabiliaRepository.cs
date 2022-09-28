@@ -1,11 +1,4 @@
-﻿using Memorabilia.Repository.Interfaces;
-using Microsoft.EntityFrameworkCore;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
-
-namespace Memorabilia.Repository
+﻿namespace Memorabilia.Repository
 {
     public class MemorabiliaRepository : BaseRepository<Domain.Entities.Memorabilia>, IMemorabiliaRepository
     {

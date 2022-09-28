@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace Memorabilia.Application.Features.Admin.ItemTypeSpots
+﻿namespace Memorabilia.Application.Features.Admin.ItemTypeSpots
 {
     public class SaveItemTypeSpotViewModel : SaveViewModel
     {

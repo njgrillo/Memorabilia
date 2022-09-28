@@ -1,8 +1,4 @@
-﻿using Demo.Framework.Handler;
-using Memorabilia.Repository.Interfaces;
-using System.Threading.Tasks;
-
-namespace Memorabilia.Application.Features.Admin.ItemTypeSizes
+﻿namespace Memorabilia.Application.Features.Admin.ItemTypeSizes
 {
     public class GetItemTypeSize
     {

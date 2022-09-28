@@ -1,0 +1,30 @@
+﻿<Page OnLoad="OnLoad">
+    <Content>
+        <PageHeader PageTitle="@_viewModel.PageTitle" />
+        <AutographTimeline AutographId="_viewModel.AutographId" 
+                           AutographStep="_viewModel.AutographStep"  
+                           DisplaySpot="_viewModel.CanHaveSpot" 
+                           EditMode="_viewModel.EditModeType"
+                           MemorabiliaId="_viewModel.MemorabiliaId" />
+        <EditImages ContinueNavigationPath="@_viewModel.ContinueNavigationPath"
+                    ExitNavigationPath="@_viewModel.ExitNavigationPath"
+                    Images="@_viewModel.Images"
+                    MaximumAllowedFiles="10"
+                    MaximumFileSize="10240000"
+                    Model="_viewModel"
+                    OnLoad="OnLoad"
+                    OnSave="OnSave"
+                    PageTitle="@_viewModel.PageTitle"
+                    SaveButtonText="Save & Add Another Autograph"
+                    TItem="SaveAutographImagesViewModel">
+            <AdditionalButtons>
+                <MudButton ButtonType="MudBlazor.ButtonType.Button" 
+                           Color="MudBlazor.Color.Secondary"
+                           OnClick="OnImportClick"
+                           Size="MudBlazor.Size.Medium"                                  
+                           Variant="Variant.Filled">Import from Memorabilia</MudButton>
+            </AdditionalButtons>
+        </EditImages>
+        <PageFooter NavigationPath="@_viewModel.BackNavigationPath" />
+    </Content>
+</Page>

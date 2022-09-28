@@ -1,8 +1,4 @@
-﻿using Demo.Framework.Handler;
-using Memorabilia.Repository.Interfaces;
-using System.Threading.Tasks;
-
-namespace Memorabilia.Application.Features.Admin.Sizes
+﻿namespace Memorabilia.Application.Features.Admin.Sizes
 {
     public class GetSizes
     {

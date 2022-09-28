@@ -1,11 +1,4 @@
-﻿using Memorabilia.Application.Features.Admin.People;
-using Memorabilia.Application.Features.Admin.Sports;
-using Memorabilia.Application.Features.Admin.Teams;
-using Memorabilia.Domain.Constants;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
+﻿using Memorabilia.Domain.Constants;
 
 namespace Memorabilia.Application.Features.Memorabilia.Poster
 {

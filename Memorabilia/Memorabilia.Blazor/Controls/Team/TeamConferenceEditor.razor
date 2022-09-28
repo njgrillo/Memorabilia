@@ -1,0 +1,66 @@
+﻿<DivRowCol3>
+    <Content>
+        <MudSelect @bind-Value="@_viewModel.ConferenceId"
+                   @bind-Value:event="ValueChanged" 
+                   Label="Division"
+                   Variant="Variant.Outlined">
+            <MudSelectItem Value="@(0)">--Select--</MudSelectItem>
+            <Iterations Context="conference" 
+                        Items="Conference.GetAll(SportLeagueLevel)" >
+                <MudSelectItem Value="@conference.Id">@conference.Name</MudSelectItem>
+            </Iterations>	
+        </MudSelect>  
+    </Content>
+</DivRowCol3>
+<DivRowCol3>
+    <Content>
+        <MudNumericField @bind-Value="_viewModel.BeginYear" 
+                         Label="Begin Year"
+                         Variant="Variant.Outlined" />
+    </Content>
+    <ContentColumn2>
+        <MudNumericField @bind-Value="_viewModel.EndYear" 
+                         Label="End Year"
+                         Variant="Variant.Outlined" />
+    </ContentColumn2>
+</DivRowCol3>
+<DivRowCol3>
+    <Content />
+</DivRowCol3>
+<DivLeftAlign>
+    <Content>
+        <MudButton ButtonType="MudBlazor.ButtonType.Button" 
+                   Color="MudBlazor.Color.Secondary"
+                   OnClick="Add"
+                   Size="MudBlazor.Size.Medium"                                  
+                   Variant="Variant.Filled">Add</MudButton>
+    </Content>
+</DivLeftAlign>
+<DivRowCol6>
+    <Content>
+        <MudTable Bordered="false"
+                  Dense="false" 
+                  Hover="true"
+                  Items="@Conferences.Where(conference => !conference.IsDeleted).OrderBy(conference => conference.BeginYear).ToList()"    
+                  Striped="true">
+            <HeaderContent>
+                <MudTh>Conference</MudTh>
+                <MudTh>Begin Year</MudTh>
+                <MudTh>End Year</MudTh>
+                <MudTh></MudTh>
+            </HeaderContent>
+            <RowTemplate>
+                <MudTd DataLabel="Conference">@context.ConferenceName</MudTd>
+                <MudTd DataLabel="Begin Year">@context.BeginYear</MudTd>
+                <MudTd DataLabel="End Year">@context.EndYear</MudTd>
+                <MudTd DataLabel="">
+                    <MudTooltip Text="Delete">
+                        <MudFab Color="MudBlazor.Color.Secondary"
+                                Icon="@Icons.Outlined.DeleteOutline"
+                                OnClick="@(_ => Remove(context.ConferenceId, context.BeginYear))" />
+                    </MudTooltip>  
+                </MudTd>
+            </RowTemplate>
+        </MudTable>
+    </Content>
+</DivRowCol6>

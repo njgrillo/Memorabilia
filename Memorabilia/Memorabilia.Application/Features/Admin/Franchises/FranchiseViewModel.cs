@@ -1,5 +1,4 @@
 ﻿using Memorabilia.Domain.Entities;
-using System;
 
 namespace Memorabilia.Application.Features.Admin.Franchises
 {

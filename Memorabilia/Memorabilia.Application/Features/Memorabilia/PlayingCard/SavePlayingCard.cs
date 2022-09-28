@@ -1,9 +1,4 @@
-﻿using Framework.Domain.Command;
-using Framework.Handler;
-using Memorabilia.Repository.Interfaces;
-using System.Threading.Tasks;
-
-namespace Memorabilia.Application.Features.Memorabilia.PlayingCard
+﻿namespace Memorabilia.Application.Features.Memorabilia.PlayingCard
 {
     public class SavePlayingCard 
     {

@@ -1,6 +1,4 @@
-﻿using Demo.Framework.Handler;
-
-namespace Memorabilia.Application.Features.Admin
+﻿namespace Memorabilia.Application.Features.Admin
 {
     public class DomainQuery : IQuery<DomainViewModel>
     {

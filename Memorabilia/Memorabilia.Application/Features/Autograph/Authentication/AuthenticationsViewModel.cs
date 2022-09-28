@@ -1,7 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-
-namespace Memorabilia.Application.Features.Autograph.Authentication
+﻿namespace Memorabilia.Application.Features.Autograph.Authentication
 {
     public class AuthenticationsViewModel : ViewModel
     {

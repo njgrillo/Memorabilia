@@ -1,8 +1,4 @@
-﻿using System;
-using System.Linq;
-using System.Linq.Expressions;
-
-namespace Memorabilia.Application.Features
+﻿namespace Memorabilia.Application.Features
 {
     public static class PredicateBuilder
     {

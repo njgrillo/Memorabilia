@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace Memorabilia.Application.Features.User.Login
+﻿namespace Memorabilia.Application.Features.User.Login
 {
     public class LoginUserViewModel : ViewModel
     {

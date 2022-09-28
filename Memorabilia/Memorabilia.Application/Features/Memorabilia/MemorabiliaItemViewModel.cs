@@ -1,9 +1,4 @@
-﻿using Memorabilia.Application.Features.Autograph;
-using Memorabilia.Domain.Entities;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
+﻿using Memorabilia.Domain.Entities;
 
 namespace Memorabilia.Application.Features.Memorabilia
 {
@@ -74,7 +69,7 @@ namespace Memorabilia.Application.Features.Memorabilia
 
         public string ImagePath => !_memorabilia.Images.Any() 
             ? "wwwroot/images/imagenotavailable.png"
-            : _memorabilia.Images.First().FilePath;
+            : _memorabilia.Images.FirstOrDefault(image => image.ImageTypeId == Domain.Constants.ImageType.Primary.Id)?.FilePath ?? _memorabilia.Images.First().FilePath;
 
         public List<MemorabiliaImage> Images => _memorabilia.Images;
 

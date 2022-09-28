@@ -1,8 +1,4 @@
-﻿using Framework.Extension;
-using Memorabilia.Domain.Entities;
-using System;
-using System.IO;
-using System.Linq;
+﻿using Memorabilia.Domain.Entities;
 
 namespace Memorabilia.Application.Features.Tools.Profile.Common
 {

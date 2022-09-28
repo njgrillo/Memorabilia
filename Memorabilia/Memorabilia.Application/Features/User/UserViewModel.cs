@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Memorabilia.Application.Features.User
+﻿namespace Memorabilia.Application.Features.User
 {
     public class UserViewModel
     {

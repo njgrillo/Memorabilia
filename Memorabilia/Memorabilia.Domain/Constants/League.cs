@@ -1,6 +1,4 @@
-﻿using System.Linq;
-
-namespace Memorabilia.Domain.Constants
+﻿namespace Memorabilia.Domain.Constants
 {
     public sealed class League
     {

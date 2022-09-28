@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace Memorabilia.Application.Features.User.Dashboard
+﻿namespace Memorabilia.Application.Features.User.Dashboard
 {
     public class SaveUserDashboardViewModel : SaveViewModel
     {

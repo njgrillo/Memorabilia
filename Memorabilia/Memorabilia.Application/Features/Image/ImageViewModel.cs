@@ -1,5 +1,4 @@
 ﻿using Memorabilia.Domain.Constants;
-using System;
 
 namespace Memorabilia.Application.Features.Image
 {

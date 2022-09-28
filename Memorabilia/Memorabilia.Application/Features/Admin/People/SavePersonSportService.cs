@@ -1,10 +1,4 @@
-﻿using Framework.Domain.Command;
-using Framework.Handler;
-using Memorabilia.Domain.Entities;
-using Memorabilia.Repository.Interfaces;
-using System;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using Memorabilia.Domain.Entities;
 
 namespace Memorabilia.Application.Features.Admin.People
 {

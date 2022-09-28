@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace Memorabilia.Application.Features.Admin.Divisions
+﻿namespace Memorabilia.Application.Features.Admin.Divisions
 {
     public class SaveDivisionViewModel : SaveViewModel
     {

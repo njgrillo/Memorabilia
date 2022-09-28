@@ -1,10 +1,4 @@
-﻿using Framework.Domain.Command;
-using Framework.Handler;
-using Memorabilia.Repository.Interfaces;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace Memorabilia.Application.Features.User.Dashboard
+﻿namespace Memorabilia.Application.Features.User.Dashboard
 {
     public class SaveUserDashboard
     {

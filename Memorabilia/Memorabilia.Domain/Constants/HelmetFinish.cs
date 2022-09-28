@@ -1,12 +1,11 @@
-﻿using System.Linq;
-
-namespace Memorabilia.Domain.Constants
+﻿namespace Memorabilia.Domain.Constants
 {
     public sealed class HelmetFinish
     {
         public static readonly HelmetFinish Blaze = new(6, "Blaze", string.Empty);
         public static readonly HelmetFinish Bronze = new(5, "Bronze", string.Empty);
         public static readonly HelmetFinish Chrome = new(2, "Chrome", string.Empty);
+        public static readonly HelmetFinish ChromeTwentyFourKaratGoldPlatedFacemask = new(15, "Chrome 24k Gold Plated Facemask", string.Empty);
         public static readonly HelmetFinish Copper = new(14, "Copper", string.Empty);
         public static readonly HelmetFinish Custom = new(9, "Custom", string.Empty);
         public static readonly HelmetFinish Drip = new(10, "Drip", string.Empty);
@@ -24,6 +23,7 @@ namespace Memorabilia.Domain.Constants
             Blaze,
             Bronze,
             Chrome,
+            ChromeTwentyFourKaratGoldPlatedFacemask,
             Copper,
             Custom,
             Drip,

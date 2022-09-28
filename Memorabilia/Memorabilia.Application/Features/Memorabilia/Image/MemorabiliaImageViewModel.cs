@@ -1,6 +1,4 @@
-﻿using Memorabilia.Application.Features.Image;
-
-namespace Memorabilia.Application.Features.Memorabilia.Image
+﻿namespace Memorabilia.Application.Features.Memorabilia.Image
 {
     public class MemorabiliaImageViewModel : ImageViewModel
     {

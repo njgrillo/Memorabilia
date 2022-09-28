@@ -1,0 +1,49 @@
+﻿<Page OnLoad="OnLoad">
+    <Content>
+        <PageHeader PageTitle="@_viewModel.PageTitle" />
+        <div style="border: 1px solid black; margin-top: 5%; margin-bottom: 5%; margin-left: 25%; margin-right: 25%;">
+            <div class="row" style="margin-top: 1%; margin-bottom: 1%; margin-left: 1%; margin-right: 1%;">
+                <div class="col-lg-12" style="text-align: center;">
+                    <MudImage Class="rounded-lg"
+                              Elevation="5"
+                              Height="150"
+                              ObjectFit="@ObjectFit.Cover"
+                              Src="images/MiniHelmets.jpg"
+                              Width="150" />
+                </div>
+            </div>
+            <div class="row" style="margin-top: 5%; margin-bottom: 5%; margin-left: 5%; margin-right: 5%;">
+                <div class="col-md-4" />
+                <span class="col-md-4" style="text-align: center">
+                    <EditForm Model="_viewModel" OnValidSubmit="HandleValidSubmit">
+                        <DataAnnotationsValidator />
+                        <ValidationSummary />
+                        <div style="text-align: left">
+                            <MudTextField @bind-Value="_viewModel.Username"
+                                          Label="User Name"
+                                          Variant="Variant.Outlined" />
+                        </div>
+                        <div style="text-align: left">
+                            <MudTextField @bind-Value="_viewModel.Password"
+                                          Label="Password"
+                                          Variant="Variant.Outlined" />
+                        </div>
+                        <div class="text-center">
+                            <MudButton ButtonType="MudBlazor.ButtonType.Submit"
+                                       Color="MudBlazor.Color.Info"
+                                       Size="MudBlazor.Size.Medium"
+                                       StartIcon="@Icons.Material.Filled.Save"
+                                       Variant="Variant.Filled">Login</MudButton>
+                        </div>
+                        <br />
+                        <div class="row">
+                            <div class="col-md-12" style="text-align: center">
+                                <MudLink Href="Register">Register</MudLink>
+                            </div>
+                        </div>
+                    </EditForm>
+                </span>
+            </div>
+        </div>
+    </Content>
+</Page>

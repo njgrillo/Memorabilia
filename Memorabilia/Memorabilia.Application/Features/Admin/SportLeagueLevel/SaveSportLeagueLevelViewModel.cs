@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace Memorabilia.Application.Features.Admin.SportLeagueLevel
+﻿namespace Memorabilia.Application.Features.Admin.SportLeagueLevel
 {
     public class SaveSportLeagueLevelViewModel : SaveViewModel
     {

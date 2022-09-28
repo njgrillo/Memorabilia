@@ -1,6 +1,4 @@
-﻿using Memorabilia.Application.Features.User.Dashboard;
-using Memorabilia.Domain.Constants;
-using System.Collections.Generic;
+﻿using Memorabilia.Domain.Constants;
 
 namespace Memorabilia.Application.Features.Services.Dashboard
 {

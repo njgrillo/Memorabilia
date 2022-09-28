@@ -1,8 +1,4 @@
-﻿using Demo.Framework.Handler;
-using Memorabilia.Repository.Interfaces;
-using System.Threading.Tasks;
-
-namespace Memorabilia.Application.Features.Admin.ItemTypeSports
+﻿namespace Memorabilia.Application.Features.Admin.ItemTypeSports
 {
     public class GetItemTypeSports
     {

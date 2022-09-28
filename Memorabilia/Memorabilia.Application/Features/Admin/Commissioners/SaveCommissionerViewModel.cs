@@ -1,7 +1,4 @@
-﻿using Memorabilia.Application.Features.Admin.People;
-using System.ComponentModel.DataAnnotations;
-
-namespace Memorabilia.Application.Features.Admin.Commissioners
+﻿namespace Memorabilia.Application.Features.Admin.Commissioners
 {
     public class SaveCommissionerViewModel : SaveViewModel
     {

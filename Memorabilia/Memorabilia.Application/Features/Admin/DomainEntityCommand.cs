@@ -1,7 +1,4 @@
-﻿using Framework.Domain.Command;
-using Framework.Handler;
-
-namespace Memorabilia.Application.Features.Admin
+﻿namespace Memorabilia.Application.Features.Admin
 {
     public class DomainEntityCommand : DomainCommand, ICommand
     {

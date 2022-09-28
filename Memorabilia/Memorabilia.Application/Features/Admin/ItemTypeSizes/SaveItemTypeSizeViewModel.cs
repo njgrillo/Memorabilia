@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace Memorabilia.Application.Features.Admin.ItemTypeSizes
+﻿namespace Memorabilia.Application.Features.Admin.ItemTypeSizes
 {
     public class SaveItemTypeSizeViewModel : SaveViewModel
     {

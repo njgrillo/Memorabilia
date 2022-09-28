@@ -1,7 +1,4 @@
-﻿using Memorabilia.Application.Features.Admin.People;
-using Memorabilia.Domain.Constants;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
+﻿using Memorabilia.Domain.Constants;
 
 namespace Memorabilia.Application.Features.Memorabilia.Bookplate
 {

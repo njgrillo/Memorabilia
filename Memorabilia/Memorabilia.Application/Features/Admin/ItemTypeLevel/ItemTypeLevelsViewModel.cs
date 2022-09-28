@@ -1,7 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-
-namespace Memorabilia.Application.Features.Admin.ItemTypeLevel
+﻿namespace Memorabilia.Application.Features.Admin.ItemTypeLevel
 {
     public class ItemTypeLevelsViewModel : ViewModel
     {

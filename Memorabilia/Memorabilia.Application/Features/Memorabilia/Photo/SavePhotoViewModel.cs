@@ -1,10 +1,4 @@
-﻿using Memorabilia.Application.Features.Admin.People;
-using Memorabilia.Application.Features.Admin.Teams;
-using Memorabilia.Domain.Constants;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
+﻿using Memorabilia.Domain.Constants;
 
 namespace Memorabilia.Application.Features.Memorabilia.Photo
 {
@@ -20,7 +14,7 @@ namespace Memorabilia.Application.Features.Memorabilia.Photo
             MemorabiliaId = viewModel.MemorabiliaId;
             OrientationId = viewModel.Picture.OrientationId;
             People = viewModel.People.Select(person => new SavePersonViewModel(new PersonViewModel(person.Person))).ToList();
-            PhotoTypeId = viewModel.Picture.PhotoTypeId;
+            PhotoTypeId = viewModel.Picture.PhotoTypeId ?? 0;
             SizeId = viewModel.Size.SizeId;
             SportIds = viewModel.Sports.Select(sport => sport.SportId).ToList();
             Teams = viewModel.Teams.Select(team => new SaveTeamViewModel(new TeamViewModel(team.Team))).ToList();
@@ -52,7 +46,7 @@ namespace Memorabilia.Application.Features.Memorabilia.Photo
 
         [Required]
         [Range(1, int.MaxValue, ErrorMessage = "Type is required.")]
-        public int? PhotoTypeId { get; set; }
+        public int PhotoTypeId { get; set; }
 
         public PhotoType[] PhotoTypes => PhotoType.All;
 

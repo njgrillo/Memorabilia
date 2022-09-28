@@ -1,5 +1,4 @@
 ﻿using Memorabilia.Domain.Constants;
-using System.ComponentModel.DataAnnotations;
 
 namespace Memorabilia.Application.Features.Admin.Teams
 {

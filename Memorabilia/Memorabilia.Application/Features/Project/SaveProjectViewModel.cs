@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-
-namespace Memorabilia.Application.Features.Project
+﻿namespace Memorabilia.Application.Features.Project
 {
     public class SaveProjectViewModel : SaveViewModel
     {

@@ -1,7 +1,4 @@
-﻿using Memorabilia.Application.Features.Admin.People;
-using System.ComponentModel.DataAnnotations;
-
-namespace Memorabilia.Application.Features.Project
+﻿namespace Memorabilia.Application.Features.Project
 {
     public class SaveProjectPersonViewModel : SaveViewModel
     {

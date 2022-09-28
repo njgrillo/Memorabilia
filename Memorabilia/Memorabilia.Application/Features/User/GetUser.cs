@@ -1,8 +1,4 @@
-﻿using Memorabilia.Repository.Interfaces;
-using Demo.Framework.Handler;
-using System.Threading.Tasks;
-
-namespace Memorabilia.Application.Features.User
+﻿namespace Memorabilia.Application.Features.User
 {
     public class GetUser
     {

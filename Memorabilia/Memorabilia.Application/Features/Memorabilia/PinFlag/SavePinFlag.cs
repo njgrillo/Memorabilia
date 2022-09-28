@@ -1,10 +1,4 @@
-﻿using Framework.Domain.Command;
-using Framework.Handler;
-using Memorabilia.Repository.Interfaces;
-using System;
-using System.Threading.Tasks;
-
-namespace Memorabilia.Application.Features.Memorabilia.PinFlag
+﻿namespace Memorabilia.Application.Features.Memorabilia.PinFlag
 {
     public class SavePinFlag
     {

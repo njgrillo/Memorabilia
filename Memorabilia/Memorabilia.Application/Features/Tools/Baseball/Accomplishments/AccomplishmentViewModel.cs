@@ -1,6 +1,4 @@
 ﻿using Memorabilia.Domain.Entities;
-using System;
-using System.IO;
 
 namespace Memorabilia.Application.Features.Tools.Baseball.Accomplishments
 {

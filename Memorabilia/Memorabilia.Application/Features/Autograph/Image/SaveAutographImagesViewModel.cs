@@ -1,9 +1,5 @@
-﻿using Memorabilia.Application.Features.Image;
-using Memorabilia.Domain.Constants;
+﻿using Memorabilia.Domain.Constants;
 using Memorabilia.Domain.Entities;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
 
 namespace Memorabilia.Application.Features.Autograph.Image
 {

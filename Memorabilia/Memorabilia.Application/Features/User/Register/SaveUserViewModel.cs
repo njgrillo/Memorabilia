@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace Memorabilia.Application.Features.User.Register
+﻿namespace Memorabilia.Application.Features.User.Register
 {
     public class SaveUserViewModel : SaveViewModel
     {

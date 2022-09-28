@@ -1,7 +1,4 @@
-﻿using Framework.Handler;
-using Memorabilia.Domain.Entities;
-using Memorabilia.Repository.Interfaces;
-using System.Threading.Tasks;
+﻿using Memorabilia.Domain.Entities;
 
 namespace Memorabilia.Application.Features.Admin.JerseyStyleTypes
 {

@@ -1,0 +1,51 @@
+﻿<DivPad2>
+    <Content>
+        <DivRowCol3>
+            <Content>
+                <MudSelect Label="Award"
+                           T="int"
+                           ValueChanged="@OnInputChange"
+                           Variant="Variant.Outlined">
+                    <MudSelectItem Value="@(0)">--Select--</MudSelectItem>
+                    <Iterations Items="_viewModel.AwardTypes" Context="awardType">
+                        <MudSelectItem Value="@awardType.Id">@awardType.Name</MudSelectItem>
+                    </Iterations>
+                </MudSelect>
+            </Content>
+        </DivRowCol3>
+        <DivRowCol6>
+            <Content>
+                <MudTable Bordered="false"
+                          Dense="false"
+                          Hover="true"
+                          Items="@_viewModel.PersonAwards.ToList()"
+                          Striped="true">
+                    <HeaderContent>
+                        <MudTh></MudTh>
+                        <MudTh>Person</MudTh>
+                        <MudTh>Year</MudTh>
+                    </HeaderContent>
+                    <RowTemplate>
+                        <MudTd DataLabel="">
+                            <MudTooltip>
+                                <MudImage Class="rounded-lg can-click"
+                                          Elevation="5"
+                                          Height="200"
+                                          ObjectFit="@ObjectFit.Cover"
+                                          Src="@context.PersonImagePath"
+                                          Width="200" />
+                            </MudTooltip>
+                        </MudTd>
+                        <MudTd DataLabel="Person">
+                            <MudLink Href="@context.ProfileLink">@context.PersonName</MudLink>
+                        </MudTd>
+                        <MudTd DataLabel="Year">@context.Year</MudTd>
+                    </RowTemplate>
+                    <PagerContent>
+                        <MudTablePager />
+                    </PagerContent>
+                </MudTable>
+            </Content>
+        </DivRowCol6>
+    </Content>
+</DivPad2>

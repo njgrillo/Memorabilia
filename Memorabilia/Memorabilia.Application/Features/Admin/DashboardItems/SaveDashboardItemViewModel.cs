@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace Memorabilia.Application.Features.Admin.DashboardItems
+﻿namespace Memorabilia.Application.Features.Admin.DashboardItems
 {
     public class SaveDashboardItemViewModel : SaveViewModel
     {

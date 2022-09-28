@@ -1,7 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-
-namespace Memorabilia.Application.Features.Admin.SportLeagueLevel
+﻿namespace Memorabilia.Application.Features.Admin.SportLeagueLevel
 {
     public class SportLeagueLevelsViewModel : ViewModel
     {

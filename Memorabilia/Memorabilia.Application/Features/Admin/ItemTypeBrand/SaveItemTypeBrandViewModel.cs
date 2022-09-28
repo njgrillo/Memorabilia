@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace Memorabilia.Application.Features.Admin.ItemTypeBrand
+﻿namespace Memorabilia.Application.Features.Admin.ItemTypeBrand
 {
     public class SaveItemTypeBrandViewModel : SaveViewModel
     {

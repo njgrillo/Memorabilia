@@ -1,6 +1,4 @@
 ﻿using Memorabilia.Domain.Entities;
-using Memorabilia.Repository.Interfaces;
-using Microsoft.EntityFrameworkCore;
 
 namespace Memorabilia.Repository
 {

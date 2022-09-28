@@ -1,9 +1,4 @@
-﻿using Framework.Domain.Command;
-using Framework.Handler;
-using Memorabilia.Repository.Interfaces;
-using System.Threading.Tasks;
-
-namespace Memorabilia.Application.Features.Memorabilia.IndexCard
+﻿namespace Memorabilia.Application.Features.Memorabilia.IndexCard
 {
     public class SaveIndexCard
     {

@@ -1,5 +1,4 @@
 ﻿using Memorabilia.Domain.Entities;
-using System.Linq;
 
 namespace Memorabilia.Application.Features.Admin.People
 {

@@ -1,7 +1,4 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
-
-namespace Memorabilia.Application.Features.Admin.Leagues
+﻿namespace Memorabilia.Application.Features.Admin.Leagues
 {
     public class SaveLeagueViewModel : SaveViewModel
     {

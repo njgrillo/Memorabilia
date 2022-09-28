@@ -1,0 +1,261 @@
+﻿<EditPage ContinueNavigationPath="@_viewModel.ContinueNavigationPath"
+          EditMode="_viewModel.EditModeType"
+          ExitNavigationPath="@_viewModel.ExitNavigationPath"
+          ImagePath="@_viewModel.ImagePath"
+          ItemName="@_viewModel.ItemTypeName"
+          Model="_viewModel"
+          OnLoad="OnLoad"
+          OnSave="OnSave"
+          PageFooterButtonText="@_viewModel.ExitButtonText"
+          PageFooterNavigationPath="@_viewModel.BackNavigationPath"
+          PageTitle="@_viewModel.PageTitle"
+          TItem="SaveAutographViewModel"
+          UseMultipleButtons="true">
+    <TimelineContent>
+        <AutographTimeline AutographId="_viewModel.Id" 
+                           AutographStep="_viewModel.AutographStep"  
+                           DisplaySpot="_viewModel.CanHaveSpot" 
+                           EditMode="_viewModel.EditModeType"
+                           MemorabiliaId="_viewModel.MemorabiliaId" />
+    </TimelineContent>
+    <Content>
+        <DivRowCol6>
+            <Content>
+                <MudTooltip Text="Import from memorabilia item">
+                    <MudImage @onclick="OnImportPersonClick"
+                              hidden="@(!_displayPersonImport)" 
+                              Class="rounded-lg can-click" 
+                              Elevation="5" 
+                              Height="20"                                              
+                              ObjectFit="@ObjectFit.Cover"
+                              Src="images/import.jpg"
+                              Width="20" />
+                </MudTooltip>
+                <PersonSelector SelectedPerson="_viewModel.Person"
+                                SelectedPersonChanged="SelectedPersonChanged" />  
+            </Content>
+        </DivRowCol6>
+        <DivRowCol3>
+            <Content>
+                <MudCheckBox @bind-Checked="@_viewModel.FullName" 
+                             Label="Is Full Name" />
+            </Content>
+        </DivRowCol3>
+        <DivRowCol3>
+            <Content>
+                <MudCheckBox Checked="@_viewModel.IsPersonalized"
+                             CheckedChanged="PersonalizationCheckboxClicked"
+                             Label="Has Personalization"
+                             T="bool" />  
+                <DivHidden Hidden="@(!_displayPersonalization)">
+                    <Content>
+                        <MudTextField @bind-Value="_viewModel.PersonalizationText" 
+                                      Label="Personalization Text" 
+                                      HelperText="Example: To Nick" 
+                                      Variant="Variant.Outlined" />
+                    </Content>
+                </DivHidden>
+            </Content>
+        </DivRowCol3>
+        <DivRowCol3>
+            <Content>
+                <MudSelect @bind-Value="@_viewModel.WritingInstrumentId"
+                           @bind-Value:event="ValueChanged" 
+                           Label="Writing Instrument"
+                           Variant="Variant.Outlined">
+                    <MudSelectItem Value="@(0)">--Select--</MudSelectItem>
+                    <Iterations Items="_viewModel.WritingInstruments" Context="writingInstrument">
+                        <MudSelectItem Value="@writingInstrument.Id">@writingInstrument.Name</MudSelectItem>
+                    </Iterations>	
+                </MudSelect>
+            </Content>
+            <ContentColumn2>
+                <MudSelect @bind-Value="@_viewModel.ConditionId"
+                           @bind-Value:event="ValueChanged" 
+                           Label="Condition"
+                           Variant="Variant.Outlined">
+                    <MudSelectItem Value="@(0)">--Select--</MudSelectItem>
+                    <Iterations Items="_viewModel.Conditions" Context="condition">
+                        <MudSelectItem Value="@condition.Id">@condition.Name</MudSelectItem>
+                    </Iterations>	
+                </MudSelect>
+            </ContentColumn2>
+            <ContentColumn3>
+                <PrettyBlazor.Condition Evaluation="_viewModel.DisplayAcquisitionDetails">
+                    <Match>
+                        <MudCheckBox CheckedChanged="EstimatedValueCheckboxClicked"
+                                     Label="Estimated Value same as Memorabilia"
+                                     T="bool" />  
+                    </Match>
+                </PrettyBlazor.Condition>  
+            </ContentColumn3>
+            <ContentColumn4>
+                <PrettyBlazor.Condition Evaluation="_viewModel.DisplayAcquisitionDetails">
+                    <Match>
+                        <MudCheckBox CheckedChanged="AcquisitionDetailsCheckboxClicked"
+                                     Label="Acquisition Details same as Memorabilia"
+                                     T="bool" />   
+                    </Match>
+                </PrettyBlazor.Condition>  
+            </ContentColumn4>
+        </DivRowCol3>
+        <DivRowCol3>
+            <Content>
+                <MudSelect @bind-Value="@_viewModel.ColorId"
+                           @bind-Value:event="ValueChanged" 
+                           Label="Color"
+                           Variant="Variant.Outlined">
+                    <MudSelectItem Value="@(0)">--Select--</MudSelectItem>
+                    <Iterations Items="_viewModel.Colors" Context="color">
+                        <MudSelectItem Value="@color.Id">@color.Name</MudSelectItem>
+                    </Iterations>	
+                </MudSelect>
+            </Content>
+            <ContentColumn2>                
+                <MudNumericField @bind-Value="_viewModel.Grade" 
+                                 Label="Grade" 
+                                 Variant="Variant.Outlined" />
+            </ContentColumn2>
+            <ContentColumn3>
+                <PrettyBlazor.Condition Evaluation="_viewModel.DisplayAcquisitionDetails">
+                    <Match>
+                        <MudNumericField @bind-Value="_viewModel.EstimatedValue"
+                                         Label="Estimated Value ($)" 
+                                         Variant="Variant.Outlined" />
+                    </Match>
+                </PrettyBlazor.Condition>
+            </ContentColumn3>
+            <ContentColumn4>
+                <PrettyBlazor.Condition Evaluation="_viewModel.DisplayAcquisitionDetails">
+                    <Match>
+                        <MudTooltip Text="Import from memorabilia item">
+                            <MudImage @onclick="OnImportAcquisitionClick"
+                                      hidden="@(!_displayPersonImport)" 
+                                      Class="rounded-lg can-click" 
+                                      Elevation="5" 
+                                      Height="20"                                              
+                                      ObjectFit="@ObjectFit.Cover"
+                                      Src="images/import.jpg"
+                                      Width="20" />
+                        </MudTooltip>
+                        <MudSelect @bind-Value="@_viewModel.AcquisitionTypeId"
+                                   @bind-Value:event="ValueChanged" 
+                                   Label="Acquisition Type"
+                                   Variant="Variant.Outlined">
+                            <MudSelectItem Value="@(0)">--Select--</MudSelectItem>
+                            <Iterations Items="_viewModel.AcquisitionTypes" Context="acquisitionType">
+                                <MudSelectItem Value="@acquisitionType.Id">@acquisitionType.Name</MudSelectItem>
+                            </Iterations>	
+                        </MudSelect>
+                    </Match>
+                </PrettyBlazor.Condition>
+            </ContentColumn4>
+        </DivRowCol3>
+        <DivRowCol3>
+            <ContentColumn4>
+                <PrettyBlazor.Condition Evaluation="_viewModel.DisplayAcquisitionDetails && _displayAcquisitionDetails">
+                    <Match>
+                        <MudDatePicker @bind-Date="_viewModel.AcquiredDate"
+                                       DateFormat="MM/dd/yyyy"
+                                       Editable="true"
+                                       Label="Acquired Date"
+                                       Mask="@(new DateMask("MM/dd/yyyy"))" 
+                                       Variant="Variant.Outlined"/>
+                    </Match>
+                </PrettyBlazor.Condition>
+            </ContentColumn4>
+        </DivRowCol3>
+        <DivRowCol3>
+            <ContentColumn4>
+                <PrettyBlazor.Condition Evaluation="_viewModel.DisplayAcquisitionDetails && _displayAcquisitionDetails">
+                    <Match>
+                        <MudNumericField @bind-Value="_viewModel.Cost"
+                                         Label="Cost ($)" 
+                                         Variant="Variant.Outlined" />
+                    </Match>
+                </PrettyBlazor.Condition>
+            </ContentColumn4>
+        </DivRowCol3>
+        <DivRowCol3>
+            <ContentColumn4>
+                <PrettyBlazor.Condition Evaluation="_viewModel.DisplayAcquisitionDetails && _displayAcquisitionDetails">
+                    <Match>
+                        <DivHidden Hidden="@(!_viewModel.CanHavePlaceOfPurchase)">
+                            <Content>
+                                <MudSelect @bind-Value="@_viewModel.PurchaseTypeId"
+                                           @bind-Value:event="ValueChanged" 
+                                           Label="Place of Purchase"
+                                           Variant="Variant.Outlined">
+                                    <MudSelectItem Value="@(0)">--Select--</MudSelectItem>
+                                    <Iterations Items="_viewModel.PurchaseTypes" Context="purchaseType">
+                                        <MudSelectItem Value="@purchaseType.Id">@purchaseType.Name</MudSelectItem>
+                                    </Iterations>	
+                                </MudSelect>
+                            </Content>
+                        </DivHidden>
+                    </Match>
+                </PrettyBlazor.Condition>
+            </ContentColumn4>
+        </DivRowCol3>
+        <DivRowCol3>
+            <ContentColumn4>
+                <PrettyBlazor.Condition Evaluation="_viewModel.DisplayAcquisitionDetails && _viewModel.DisplayThroughTheMailDetails">
+                    <Match>
+                        <MudDatePicker @bind-Date="_viewModel.SentDate"
+                                       DateFormat="MM/dd/yyyy"
+                                       Editable="true"
+                                       Label="Sent" 
+                                       Mask="@(new DateMask("MM/dd/yyyy"))" 
+                                       Variant="Variant.Outlined" /> 
+                    </Match>
+                </PrettyBlazor.Condition>
+            </ContentColumn4>
+        </DivRowCol3>
+        <DivRowCol3>
+            <ContentColumn4>
+                <PrettyBlazor.Condition Evaluation="_viewModel.DisplayAcquisitionDetails && _viewModel.DisplayThroughTheMailDetails">
+                    <Match>
+                        <MudDatePicker @bind-Date="_viewModel.ReceivedDate" 
+                                       DateFormat="MM/dd/yyyy"
+                                       Editable="true"
+                                       Label="Received" 
+                                       Mask="@(new DateMask("MM/dd/yyyy"))" 
+                                       Variant="Variant.Outlined"  />
+                    </Match>
+                </PrettyBlazor.Condition>
+            </ContentColumn4>
+        </DivRowCol3>
+        <DivRowCol3>
+            <Content>
+                <MudCheckBox Checked="_displayNumbered"
+                             CheckedChanged="NumberedCheckboxClicked" 
+                             Label="Numbered"
+                             T="bool" /> 
+            </Content>
+        </DivRowCol3>
+        <DivRowCol1 Hidden="@(!_displayNumbered)">
+            <Content>
+                <MudNumericField @bind-Value="_viewModel.Numerator" 
+                                 Label="Numerator"
+                                 Variant="Variant.Outlined" />  
+            </Content>
+            <ContentColumn2>
+                <label for="of">of</label>  
+            </ContentColumn2>
+            <ContentColumn3>
+                <MudNumericField @bind-Value="_viewModel.Denominator" 
+                                 Label="Denominator"
+                                 Variant="Variant.Outlined" /> 
+            </ContentColumn3>
+        </DivRowCol1> 
+        <DivRowCol3>
+            <Content>
+                <MudTextField @bind-Value="_viewModel.Note" 
+                              Label="Note"
+                              Lines="10" 
+                              T="string"
+                              Variant="Variant.Outlined" />
+            </Content>
+        </DivRowCol3>
+    </Content>
+</EditPage>

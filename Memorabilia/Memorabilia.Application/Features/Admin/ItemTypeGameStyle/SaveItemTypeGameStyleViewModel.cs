@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace Memorabilia.Application.Features.Admin.ItemTypeGameStyle
+﻿namespace Memorabilia.Application.Features.Admin.ItemTypeGameStyle
 {
     public class SaveItemTypeGameStyleViewModel : SaveViewModel
     {

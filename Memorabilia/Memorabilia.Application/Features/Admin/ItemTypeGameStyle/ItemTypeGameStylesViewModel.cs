@@ -1,7 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-
-namespace Memorabilia.Application.Features.Admin.ItemTypeGameStyle
+﻿namespace Memorabilia.Application.Features.Admin.ItemTypeGameStyle
 {
     public class ItemTypeGameStylesViewModel : ViewModel
     {

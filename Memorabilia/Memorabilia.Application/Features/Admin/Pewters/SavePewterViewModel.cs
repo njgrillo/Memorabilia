@@ -1,8 +1,4 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
-using System.IO;
-
-namespace Memorabilia.Application.Features.Admin.Pewters
+﻿namespace Memorabilia.Application.Features.Admin.Pewters
 {
     public class SavePewterViewModel : SaveViewModel
     {

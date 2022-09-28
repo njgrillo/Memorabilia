@@ -1,0 +1,46 @@
+﻿<DivRowCol3>
+    <Content>
+        <MudSelect @bind-Value="@_viewModel.SportId"
+                   @bind-Value:event="ValueChanged" 
+                   Label="Sport"
+                   Variant="Variant.Outlined">
+            <MudSelectItem Value="@(0)">--Select--</MudSelectItem>
+            <Iterations Items="_viewModel.Sports" Context="sport">
+                <MudSelectItem Value="@sport.Id">@sport.Name</MudSelectItem>
+            </Iterations>	
+        </MudSelect>
+    </Content>
+</DivRowCol3>
+<DivLeftAlign>
+    <Content>
+        <MudButton ButtonType="MudBlazor.ButtonType.Button" 
+                   Color="MudBlazor.Color.Secondary"
+                   OnClick="Add"
+                   Size="MudBlazor.Size.Medium"                                  
+                   Variant="Variant.Filled">Add</MudButton>
+    </Content>    
+</DivLeftAlign>
+<DivRowCol6>
+    <Content>
+        <MudTable Bordered="false"
+                  Dense="false" 
+                  Hover="true"
+                  Items="@Sports.Where(sport => !sport.IsDeleted).OrderBy(sport => sport.SportName).ToList()"    
+                  Striped="true">
+            <HeaderContent>
+                <MudTh>Sport</MudTh>
+                <MudTh></MudTh>
+            </HeaderContent>
+            <RowTemplate>
+                <MudTd DataLabel="Sport">@context.SportName</MudTd>
+                <MudTd DataLabel="">
+                    <MudTooltip Text="Delete">
+                        <MudFab Color="MudBlazor.Color.Secondary"
+                                Icon="@Icons.Outlined.DeleteOutline"
+                                OnClick="@(_ => Remove(context.SportId))" />
+                    </MudTooltip>  
+                </MudTd>
+            </RowTemplate>
+        </MudTable>
+    </Content>
+</DivRowCol6>

@@ -1,7 +1,4 @@
 ﻿using Memorabilia.Domain.Constants;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace Memorabilia.Application.Features.Admin.People
 {

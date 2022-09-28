@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace Memorabilia.Application.Features.Admin.Sports
+﻿namespace Memorabilia.Application.Features.Admin.Sports
 {
     public class SaveSportViewModel : SaveViewModel
     {

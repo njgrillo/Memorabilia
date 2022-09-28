@@ -1,36 +1,3 @@
 ﻿@page "/Tools/PersonProfile"
 
-@using Memorabilia.Application.Features.Admin.People
-@using Memorabilia.Web.Controls.Person
-
-<Page OnLoad="OnLoad">
-    <Content>
-        <DivPad2>
-            <Content>
-                <DivRowCol6>
-                    <Content>
-                        <MudAutocomplete @bind-Value="_viewModel"
-                                         AdornmentColor="MudBlazor.Color.Primary"
-                                         AdornmentIcon="@Icons.Material.Filled.Search"
-                                         Label="Person"
-                                         Placeholder="Search by name..."
-                                         ResetValueOnEmptyText="true"                                             
-                                         SearchFunc="@SearchPeople"                                               
-                                         T="PersonViewModel"
-                                         Text="@_viewModel?.ProfileName"
-                                         Variant="Variant.Outlined">
-                            <ItemSelectedTemplate Context="person">
-                                @person?.ProfileName
-                            </ItemSelectedTemplate>
-                            <ItemTemplate Context="person">
-                                @person?.ProfileName
-                            </ItemTemplate>
-                        </MudAutocomplete>
-                        <br />   
-                    </Content>
-                </DivRowCol6>
-            </Content>
-        </DivPad2>
-    </Content>
-</Page>
-
+<Memorabilia.Blazor.Pages.Tools.Profile.PersonProfile />

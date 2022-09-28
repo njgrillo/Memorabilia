@@ -1,12 +1,4 @@
-﻿using Demo.Framework.Handler;
-using Memorabilia.Application.Features.Services.Dashboard;
-using Memorabilia.Application.Features.User.Dashboard;
-using Memorabilia.Repository.Interfaces;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace Memorabilia.Application.Features.Memorabilia
+﻿namespace Memorabilia.Application.Features.Memorabilia
 {
     public class GetDashboard
     {

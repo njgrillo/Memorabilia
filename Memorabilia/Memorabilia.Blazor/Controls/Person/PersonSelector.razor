@@ -1,0 +1,51 @@
+﻿<PrettyBlazor.Condition Evaluation="CanToggle">
+    <Match>
+        <DivRowCol3>
+            <Content>
+                <MudCheckBox Checked="@_hasPeople"
+                             CheckedChanged="PersonCheckboxClicked"
+                             Label="@_itemTypeNameLabel"
+                             T="bool" />  
+            </Content>
+        </DivRowCol3>
+    </Match>
+</PrettyBlazor.Condition>
+<DivHidden Hidden="@(!_displayPeople)">
+    <Content>
+        <PrettyBlazor.Condition Evaluation="CanFilterBySport">
+            <Match>
+                <DivRowCol3 LeftPadding="10">
+                    <Content>
+                        <MudCheckBox Checked="@_filterPeople"
+                                     CheckedChanged="PersonFilterCheckboxClicked" 
+                                     Label="@_itemTypeNameFilterLabel"
+                                     T="bool" /> 
+                    </Content>
+                </DivRowCol3>
+            </Match>
+        </PrettyBlazor.Condition>    
+        <DivRowCol6>
+            <Content>
+                <MudAutocomplete @bind-Value="_viewModel"
+                                 AdornmentColor="MudBlazor.Color.Primary"
+                                 AdornmentIcon="@Icons.Material.Filled.Search"
+                                 Disabled="Disabled"
+                                 Label="Person"
+                                 Placeholder="Search by name..."
+                                 ResetValueOnEmptyText="true"                                             
+                                 SearchFunc="@SearchPeople"                                               
+                                 T="SavePersonViewModel"
+                                 Text="@_viewModel?.ProfileName"
+                                 Variant="Variant.Outlined">
+                    <ItemSelectedTemplate Context="person">
+                        @person?.ProfileName
+                    </ItemSelectedTemplate>
+                    <ItemTemplate Context="person">
+                        @person?.ProfileName
+                    </ItemTemplate>
+                </MudAutocomplete>
+                <br />   
+            </Content>
+        </DivRowCol6>
+    </Content>
+</DivHidden>

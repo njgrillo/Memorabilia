@@ -1,8 +1,4 @@
-﻿using Demo.Framework.Handler;
-using Memorabilia.Repository.Interfaces;
-using System.Threading.Tasks;
-
-namespace Memorabilia.Application.Features.Admin.Conditions
+﻿namespace Memorabilia.Application.Features.Admin.Conditions
 {
     public class GetCondition
     {
