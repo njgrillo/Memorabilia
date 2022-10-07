@@ -1,22 +1,23 @@
-﻿namespace Memorabilia.Application.Features.Admin.BasketballTypes
+﻿using Memorabilia.Domain.Entities;
+
+namespace Memorabilia.Application.Features.Admin.BasketballTypes;
+
+public class GetBasketballTypes
 {
-    public class GetBasketballTypes
+    public class Handler : QueryHandler<Query, BasketballTypesViewModel>
     {
-        public class Handler : QueryHandler<Query, BasketballTypesViewModel>
+        private readonly IDomainRepository<BasketballType> _basketballTypeRepository;
+
+        public Handler(IDomainRepository<BasketballType> basketballTypeRepository)
         {
-            private readonly IBasketballTypeRepository _basketballTypeRepository;
-
-            public Handler(IBasketballTypeRepository basketballTypeRepository)
-            {
-                _basketballTypeRepository = basketballTypeRepository;
-            }
-
-            protected override async Task<BasketballTypesViewModel> Handle(Query query)
-            {
-                return new BasketballTypesViewModel(await _basketballTypeRepository.GetAll().ConfigureAwait(false));
-            }
+            _basketballTypeRepository = basketballTypeRepository;
         }
 
-        public class Query : IQuery<BasketballTypesViewModel> { }
+        protected override async Task<BasketballTypesViewModel> Handle(Query query)
+        {
+            return new BasketballTypesViewModel(await _basketballTypeRepository.GetAll());
+        }
     }
+
+    public class Query : IQuery<BasketballTypesViewModel> { }
 }

@@ -1,5 +1,7 @@
 ﻿@page "/BaseballTypes/Edit/{id:int}"
 
-<EditDomainItem Item="_viewModel"
-                OnLoad="OnLoad"
-                OnSave="OnSave" />
+<WebPage>
+    <Content>
+        <BaseballTypeEditor Id=@Id />
+    </Content>
+</WebPage>

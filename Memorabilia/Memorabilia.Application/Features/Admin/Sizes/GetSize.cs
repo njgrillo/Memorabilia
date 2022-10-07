@@ -1,25 +1,26 @@
-﻿namespace Memorabilia.Application.Features.Admin.Sizes
+﻿using Memorabilia.Domain.Entities;
+
+namespace Memorabilia.Application.Features.Admin.Sizes;
+
+public class GetSize
 {
-    public class GetSize
+    public class Handler : QueryHandler<Query, DomainViewModel>
     {
-        public class Handler : QueryHandler<Query, DomainViewModel>
+        private readonly IDomainRepository<Size> _sizeRepository;
+
+        public Handler(IDomainRepository<Size> sizeRepository)
         {
-            private readonly ISizeRepository _sizeRepository;
-
-            public Handler(ISizeRepository sizeRepository)
-            {
-                _sizeRepository = sizeRepository;
-            }
-
-            protected override async Task<DomainViewModel> Handle(Query query)
-            {
-                return new DomainViewModel(await _sizeRepository.Get(query.Id).ConfigureAwait(false));
-            }
+            _sizeRepository = sizeRepository;
         }
 
-        public class Query : DomainQuery
+        protected override async Task<DomainViewModel> Handle(Query query)
         {
-            public Query(int id) : base(id) { }
+            return new DomainViewModel(await _sizeRepository.Get(query.Id));
         }
+    }
+
+    public class Query : DomainQuery
+    {
+        public Query(int id) : base(id) { }
     }
 }

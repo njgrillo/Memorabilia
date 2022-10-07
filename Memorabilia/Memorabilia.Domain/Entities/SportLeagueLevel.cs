@@ -1,35 +1,34 @@
-﻿namespace Memorabilia.Domain.Entities
+﻿namespace Memorabilia.Domain.Entities;
+
+public class SportLeagueLevel : Framework.Library.Domain.Entity.DomainEntity
 {
-    public class SportLeagueLevel : Framework.Library.Domain.Entity.DomainEntity
+    public SportLeagueLevel() { }
+
+    public SportLeagueLevel(int sportId, int levelTypeId, string name, string abbreviation)
     {
-        public SportLeagueLevel() { }
+        SportId = sportId;
+        LevelTypeId = levelTypeId;
+        Name = name;
+        Abbreviation = abbreviation;
+    }
 
-        public SportLeagueLevel(int sportId, int levelTypeId, string name, string abbreviation)
-        {
-            SportId = sportId;
-            LevelTypeId = levelTypeId;
-            Name = name;
-            Abbreviation = abbreviation;
-        }
+    public string Abbreviation { get; set; }
 
-        public string Abbreviation { get; set; }
+    public string Name { get; set; }
 
-        public string Name { get; set; }
+    public int LevelTypeId { get; set; }
 
-        public int LevelTypeId { get; set; }
+    public string LevelTypeName => Constants.LevelType.Find(LevelTypeId)?.Name;
 
-        public string LevelTypeName => Constants.LevelType.Find(LevelTypeId)?.Name;
+    public int SportId { get; set; }
 
-        public int SportId { get; set; }
+    public string SportName => Constants.Sport.Find(SportId)?.Name;
 
-        public string SportName => Constants.Sport.Find(SportId)?.Name;
-
-        public void Set(int sportId, int levelTypeId, string name, string abbreviation)
-        {
-            SportId = sportId;
-            LevelTypeId = levelTypeId;
-            Name = name;
-            Abbreviation = abbreviation;
-        }
+    public void Set(int sportId, int levelTypeId, string name, string abbreviation)
+    {
+        SportId = sportId;
+        LevelTypeId = levelTypeId;
+        Name = name;
+        Abbreviation = abbreviation;
     }
 }

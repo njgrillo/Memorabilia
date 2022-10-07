@@ -1,9 +1,8 @@
-﻿namespace Memorabilia.Domain.Entities
-{
-    public class ImageType : DomainEntity
-    {
-        public ImageType() { }
+﻿namespace Memorabilia.Domain.Entities;
 
-        public ImageType(string name, string abbreviation) : base(name, abbreviation) { }
-    }
+public class ImageType : DomainEntity
+{
+    public ImageType() { }
+
+    public ImageType(string name, string abbreviation) : base(name, abbreviation) { }
 }

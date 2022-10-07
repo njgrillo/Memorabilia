@@ -1,17 +1,8 @@
 ﻿using Memorabilia.Domain.Entities;
 
-namespace Memorabilia.Repository.Interfaces
+namespace Memorabilia.Repository.Interfaces;
+
+public interface IMemorabiliaImageRepository : IDomainRepository<MemorabiliaImage>
 {
-    public interface IMemorabiliaImageRepository
-    {
-        Task Add(MemorabiliaImage memorabiliaImage, CancellationToken cancellationToken = default);
-
-        Task Delete(MemorabiliaImage memorabiliaImage, CancellationToken cancellationToken = default);
-
-        Task<MemorabiliaImage> Get(int id);
-
-        Task<List<MemorabiliaImage>> GetAll(int memorabiliaId);
-
-        Task Update(MemorabiliaImage memorabiliaImage, CancellationToken cancellationToken = default);
-    }
+    Task<List<MemorabiliaImage>> GetAll(int memorabiliaId);
 }

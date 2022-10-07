@@ -1,17 +1,17 @@
-﻿using Memorabilia.Domain.Entities;
+﻿using Memorabilia.Domain.Constants;
+using Memorabilia.Domain.Entities;
 
-namespace Memorabilia.Application.Features.Admin.Colors
+namespace Memorabilia.Application.Features.Admin.Colors;
+
+public class ColorsViewModel : DomainsViewModel
 {
-    public class ColorsViewModel : DomainsViewModel
-    {
-        public ColorsViewModel() { }
+    public ColorsViewModel() { }
 
-        public ColorsViewModel(IEnumerable<DomainEntity> domainEntities) : base(domainEntities) { }
+    public ColorsViewModel(IEnumerable<DomainEntity> domainEntities) : base(domainEntities) { }
 
-        public override string ItemTitle => "Color";
+    public override string ItemTitle => AdminDomainItem.Colors.Item;
 
-        public override string PageTitle => "Colors";
+    public override string PageTitle => AdminDomainItem.Colors.Title;
 
-        public override string RoutePrefix => "Colors";
-    }
+    public override string RoutePrefix => AdminDomainItem.Colors.Page;
 }

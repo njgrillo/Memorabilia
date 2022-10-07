@@ -1,22 +1,23 @@
-﻿namespace Memorabilia.Application.Features.Admin.Pewters
+﻿using Memorabilia.Domain.Entities;
+
+namespace Memorabilia.Application.Features.Admin.Pewters;
+
+public class GetPewters
 {
-    public class GetPewters
+    public class Handler : QueryHandler<Query, PewtersViewModel>
     {
-        public class Handler : QueryHandler<Query, PewtersViewModel>
+        private readonly IDomainRepository<Pewter> _pewterRepository;
+
+        public Handler(IDomainRepository<Pewter> pewterRepository)
         {
-            private readonly IPewterRepository _pewterRepository;
-
-            public Handler(IPewterRepository pewterRepository)
-            {
-                _pewterRepository = pewterRepository;
-            }
-
-            protected override async Task<PewtersViewModel> Handle(Query query)
-            {
-                return new PewtersViewModel(await _pewterRepository.GetAll().ConfigureAwait(false));
-            }
+            _pewterRepository = pewterRepository;
         }
 
-        public class Query : IQuery<PewtersViewModel> { }
+        protected override async Task<PewtersViewModel> Handle(Query query)
+        {
+            return new PewtersViewModel(await _pewterRepository.GetAll());
+        }
     }
+
+    public class Query : IQuery<PewtersViewModel> { }
 }

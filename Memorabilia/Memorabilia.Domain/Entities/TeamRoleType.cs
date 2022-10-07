@@ -1,9 +1,8 @@
-﻿namespace Memorabilia.Domain.Entities
-{
-    public class TeamRoleType : DomainEntity
-    {
-        public TeamRoleType() { }
+﻿namespace Memorabilia.Domain.Entities;
 
-        public TeamRoleType(string name, string abbreviation) : base(name, abbreviation) { }
-    }
+public class TeamRoleType : DomainEntity
+{
+    public TeamRoleType() { }
+
+    public TeamRoleType(string name, string abbreviation) : base(name, abbreviation) { }
 }

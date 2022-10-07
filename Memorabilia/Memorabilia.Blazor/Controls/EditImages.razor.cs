@@ -5,12 +5,6 @@ namespace Memorabilia.Blazor.Controls
     public partial class EditImages<TItem> : ComponentBase
     {
         [Inject]
-        public IWebHostEnvironment Environment { get; set; }
-
-        [Inject]
-        public ProtectedLocalStorage LocalStorage { get; set; }
-
-        [Inject]
         public ILogger<EditImages<TItem>> Logger { get; set; }
 
         [Inject]
@@ -51,6 +45,12 @@ namespace Memorabilia.Blazor.Controls
 
         [Parameter]
         public string SaveButtonText { get; set; }
+
+        [Parameter]
+        public string UploadPath { get; set; }
+
+        [Parameter]
+        public int UserId { get; set; }
 
         [Parameter]
         public EventCallback<List<SaveImageViewModel>> ValueChanged { get; set; }
@@ -130,7 +130,6 @@ namespace Memorabilia.Blazor.Controls
 
         protected async Task Save()
         {
-            var userId = await LocalStorage.GetAsync<int>("UserId").ConfigureAwait(false);
             var images = new List<SaveImageViewModel>();
             var imageType = ImageType.Primary;
 
@@ -138,9 +137,9 @@ namespace Memorabilia.Blazor.Controls
             {
                 try
                 {
-                    var directory = Path.Combine(Environment.ContentRootPath,
+                    var directory = Path.Combine(UploadPath,
                                                  "wwwroot/userimages",
-                                                 userId.Value.ToString());
+                                                 UserId.ToString()); 
 
                     if (!Directory.Exists(directory))
                         Directory.CreateDirectory(directory);
@@ -151,7 +150,7 @@ namespace Memorabilia.Blazor.Controls
                     await using FileStream fs = new(path, FileMode.Create);
                     await file.OpenReadStream(MaximumFileSize).CopyToAsync(fs).ConfigureAwait(false);
 
-                    images.Add(new SaveImageViewModel(new ImageViewModel(new Domain.Entities.Image($"wwwroot/userimages/{userId.Value}/{fileName}", imageType.Id)), file.Name));
+                    images.Add(new SaveImageViewModel(new ImageViewModel(new Domain.Entities.Image($"wwwroot/userimages/{UserId}/{fileName}", imageType.Id)), file.Name));
 
                     imageType = ImageType.Secondary;
                 }

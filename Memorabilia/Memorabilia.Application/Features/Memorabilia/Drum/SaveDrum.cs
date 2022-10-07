@@ -1,40 +1,39 @@
-﻿namespace Memorabilia.Application.Features.Memorabilia.Drum
+﻿namespace Memorabilia.Application.Features.Memorabilia.Drum;
+
+public class SaveDrum
 {
-    public class SaveDrum
+    public class Handler : CommandHandler<Command>
     {
-        public class Handler : CommandHandler<Command>
+        private readonly IMemorabiliaItemRepository _memorabiliaRepository;
+
+        public Handler(IMemorabiliaItemRepository memorabiliaRepository)
         {
-            private readonly IMemorabiliaRepository _memorabiliaRepository;
-
-            public Handler(IMemorabiliaRepository memorabiliaRepository)
-            {
-                _memorabiliaRepository = memorabiliaRepository;
-            }
-
-            protected override async Task Handle(Command command)
-            {
-                var memorabilia = await _memorabiliaRepository.Get(command.MemorabiliaId).ConfigureAwait(false);
-
-                memorabilia.SetDrum(command.BrandId, command.PersonIds);
-
-                await _memorabiliaRepository.Update(memorabilia).ConfigureAwait(false);
-            }
+            _memorabiliaRepository = memorabiliaRepository;
         }
 
-        public class Command : DomainCommand, ICommand
+        protected override async Task Handle(Command command)
         {
-            private readonly SaveDrumViewModel _viewModel;
+            var memorabilia = await _memorabiliaRepository.Get(command.MemorabiliaId);
 
-            public Command(SaveDrumViewModel viewModel)
-            {
-                _viewModel = viewModel;
-            }
+            memorabilia.SetDrum(command.BrandId, command.PersonIds);
 
-            public int BrandId => _viewModel.BrandId;
-
-            public int MemorabiliaId => _viewModel.MemorabiliaId;
-
-            public int[] PersonIds => _viewModel.People.Select(person => person.Id).ToArray();
+            await _memorabiliaRepository.Update(memorabilia);
         }
+    }
+
+    public class Command : DomainCommand, ICommand
+    {
+        private readonly SaveDrumViewModel _viewModel;
+
+        public Command(SaveDrumViewModel viewModel)
+        {
+            _viewModel = viewModel;
+        }
+
+        public int BrandId => _viewModel.BrandId;
+
+        public int MemorabiliaId => _viewModel.MemorabiliaId;
+
+        public int[] PersonIds => _viewModel.People.Select(person => person.Id).ToArray();
     }
 }

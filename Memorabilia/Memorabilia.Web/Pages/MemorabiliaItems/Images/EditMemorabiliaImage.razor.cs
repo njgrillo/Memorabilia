@@ -3,32 +3,24 @@
     public partial class EditMemorabiliaImage : ComponentBase
     {
         [Inject]
-        public CommandRouter CommandRouter { get; set; }
+        public IWebHostEnvironment Environment { get; set; }
 
         [Inject]
-        public QueryRouter QueryRouter { get; set; }
+        public ProtectedLocalStorage LocalStorage { get; set; }
 
         [Parameter]
         public int MemorabiliaId { get; set; }
 
-        private EditImages<SaveMemorabiliaImagesViewModel> EditImages;
-        private SaveMemorabiliaImagesViewModel _viewModel = new ();
+        protected string UploadPath { get; set; }
 
-        protected async Task OnLoad()
+        protected int UserId { get; set; }
+
+        protected override async Task OnInitializedAsync()
         {
-            var memorabilia = await QueryRouter.Send(new GetMemorabiliaItem.Query(MemorabiliaId)).ConfigureAwait(false);
+            var userId = await LocalStorage.GetAsync<int>("UserId").ConfigureAwait(false);
 
-            _viewModel = new SaveMemorabiliaImagesViewModel(memorabilia.Images, memorabilia.ItemTypeName)
-            {
-                MemorabiliaId = MemorabiliaId
-            };
-        }
-
-        protected async Task OnSave()
-        {
-            _viewModel.Images = EditImages.Images;            
-
-            await CommandRouter.Send(new SaveMemorabiliaImage.Command(_viewModel)).ConfigureAwait(false);
+            UserId = userId.Value;
+            UploadPath = Environment.ContentRootPath;
         }
     }
 }

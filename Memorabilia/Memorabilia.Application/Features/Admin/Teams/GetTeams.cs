@@ -1,33 +1,32 @@
-﻿namespace Memorabilia.Application.Features.Admin.Teams
+﻿namespace Memorabilia.Application.Features.Admin.Teams;
+
+public class GetTeams
 {
-    public class GetTeams
+    public class Handler : QueryHandler<Query, TeamsViewModel>
     {
-        public class Handler : QueryHandler<Query, TeamsViewModel>
+        private readonly ITeamRepository _teamRepository;
+
+        public Handler(ITeamRepository teamRepository)
         {
-            private readonly ITeamRepository _teamRepository;
-
-            public Handler(ITeamRepository teamRepository)
-            {
-                _teamRepository = teamRepository;
-            }
-
-            protected override async Task<TeamsViewModel> Handle(Query query)
-            {
-                return new TeamsViewModel(await _teamRepository.GetAll(query.FranchiseId, query.SportLeagueLevelId).ConfigureAwait(false));
-            }
+            _teamRepository = teamRepository;
         }
 
-        public class Query : IQuery<TeamsViewModel>
+        protected override async Task<TeamsViewModel> Handle(Query query)
         {
-            public Query(int? franchiseId = null, int? sportLeagueLevelId = null)
-            {
-                FranchiseId = franchiseId;
-                SportLeagueLevelId = sportLeagueLevelId;
-            }
-
-            public int? FranchiseId { get; }
-
-            public int? SportLeagueLevelId { get; }
+            return new TeamsViewModel(await _teamRepository.GetAll(query.FranchiseId, query.SportLeagueLevelId));
         }
+    }
+
+    public class Query : IQuery<TeamsViewModel>
+    {
+        public Query(int? franchiseId = null, int? sportLeagueLevelId = null)
+        {
+            FranchiseId = franchiseId;
+            SportLeagueLevelId = sportLeagueLevelId;
+        }
+
+        public int? FranchiseId { get; }
+
+        public int? SportLeagueLevelId { get; }
     }
 }

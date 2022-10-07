@@ -1,25 +1,24 @@
-﻿namespace Memorabilia.Application.Features.Memorabilia.Document
+﻿namespace Memorabilia.Application.Features.Memorabilia.Document;
+
+public class GetDocument
 {
-    public class GetDocument
+    public class Handler : QueryHandler<Query, DocumentViewModel>
     {
-        public class Handler : QueryHandler<Query, DocumentViewModel>
+        private readonly IMemorabiliaItemRepository _memorabiliaRepository;
+
+        public Handler(IMemorabiliaItemRepository memorabiliaRepository)
         {
-            private readonly IMemorabiliaRepository _memorabiliaRepository;
-
-            public Handler(IMemorabiliaRepository memorabiliaRepository)
-            {
-                _memorabiliaRepository = memorabiliaRepository;
-            }
-
-            protected override async Task<DocumentViewModel> Handle(Query query)
-            {
-                return new DocumentViewModel(await _memorabiliaRepository.Get(query.MemorabiliaId).ConfigureAwait(false));
-            }
+            _memorabiliaRepository = memorabiliaRepository;
         }
 
-        public class Query : MemorabiliaQuery, IQuery<DocumentViewModel>
+        protected override async Task<DocumentViewModel> Handle(Query query)
         {
-            public Query(int memorabiliaId) : base(memorabiliaId) { }
+            return new DocumentViewModel(await _memorabiliaRepository.Get(query.MemorabiliaId));
         }
+    }
+
+    public class Query : MemorabiliaQuery, IQuery<DocumentViewModel>
+    {
+        public Query(int memorabiliaId) : base(memorabiliaId) { }
     }
 }

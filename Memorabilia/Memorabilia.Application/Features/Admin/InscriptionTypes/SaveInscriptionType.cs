@@ -1,48 +1,48 @@
 ﻿using Memorabilia.Domain.Entities;
 
-namespace Memorabilia.Application.Features.Admin.InscriptionTypes
+namespace Memorabilia.Application.Features.Admin.InscriptionTypes;
+
+public class SaveInscriptionType
 {
-    public class SaveInscriptionType
+    public class Handler : CommandHandler<Command>
     {
-        public class Handler : CommandHandler<Command>
+        private readonly IDomainRepository<InscriptionType> _inscriptionTypeRepository;
+
+        public Handler(IDomainRepository<InscriptionType> inscriptionTypeRepository)
         {
-            private readonly IInscriptionTypeRepository _inscriptionTypeRepository;
-
-            public Handler(IInscriptionTypeRepository inscriptionTypeRepository)
-            {
-                _inscriptionTypeRepository = inscriptionTypeRepository;
-            }
-
-            protected override async Task Handle(Command command)
-            {
-                InscriptionType inscriptionType;
-
-                if (command.IsNew)
-                {
-                    inscriptionType = new InscriptionType(command.Name, command.Abbreviation);
-                    await _inscriptionTypeRepository.Add(inscriptionType).ConfigureAwait(false);
-
-                    return;
-                }
-
-                inscriptionType = await _inscriptionTypeRepository.Get(command.Id).ConfigureAwait(false);
-
-                if (command.IsDeleted)
-                {
-                    await _inscriptionTypeRepository.Delete(inscriptionType).ConfigureAwait(false);
-
-                    return;
-                }
-
-                inscriptionType.Set(command.Name, command.Abbreviation);
-
-                await _inscriptionTypeRepository.Update(inscriptionType).ConfigureAwait(false);
-            }
+            _inscriptionTypeRepository = inscriptionTypeRepository;
         }
 
-        public class Command : DomainEntityCommand
+        protected override async Task Handle(Command command)
         {
-            public Command(SaveDomainViewModel viewModel) : base(viewModel) { }
+            InscriptionType inscriptionType;
+
+            if (command.IsNew)
+            {
+                inscriptionType = new InscriptionType(command.Name, command.Abbreviation);
+
+                await _inscriptionTypeRepository.Add(inscriptionType);
+
+                return;
+            }
+
+            inscriptionType = await _inscriptionTypeRepository.Get(command.Id);
+
+            if (command.IsDeleted)
+            {
+                await _inscriptionTypeRepository.Delete(inscriptionType);
+
+                return;
+            }
+
+            inscriptionType.Set(command.Name, command.Abbreviation);
+
+            await _inscriptionTypeRepository.Update(inscriptionType);
         }
+    }
+
+    public class Command : DomainEntityCommand
+    {
+        public Command(SaveDomainViewModel viewModel) : base(viewModel) { }
     }
 }

@@ -1,25 +1,24 @@
-﻿namespace Memorabilia.Application.Features.Memorabilia.PlayingCard
+﻿namespace Memorabilia.Application.Features.Memorabilia.PlayingCard;
+
+public class GetPlayingCard
 {
-    public class GetPlayingCard
+    public class Handler : QueryHandler<Query, PlayingCardViewModel>
     {
-        public class Handler : QueryHandler<Query, PlayingCardViewModel>
+        private readonly IMemorabiliaItemRepository _memorabiliaRepository;
+
+        public Handler(IMemorabiliaItemRepository memorabiliaRepository)
         {
-            private readonly IMemorabiliaRepository _memorabiliaRepository;
-
-            public Handler(IMemorabiliaRepository memorabiliaRepository)
-            {
-                _memorabiliaRepository = memorabiliaRepository;
-            }
-
-            protected override async Task<PlayingCardViewModel> Handle(Query query)
-            {
-                return new PlayingCardViewModel(await _memorabiliaRepository.Get(query.MemorabiliaId).ConfigureAwait(false));
-            }
+            _memorabiliaRepository = memorabiliaRepository;
         }
 
-        public class Query : MemorabiliaQuery, IQuery<PlayingCardViewModel>
+        protected override async Task<PlayingCardViewModel> Handle(Query query)
         {
-            public Query(int memorabiliaId) : base(memorabiliaId) { }
+            return new PlayingCardViewModel(await _memorabiliaRepository.Get(query.MemorabiliaId));
         }
+    }
+
+    public class Query : MemorabiliaQuery, IQuery<PlayingCardViewModel>
+    {
+        public Query(int memorabiliaId) : base(memorabiliaId) { }
     }
 }

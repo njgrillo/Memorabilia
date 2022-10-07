@@ -1,25 +1,24 @@
-﻿namespace Memorabilia.Application.Features.Memorabilia.Photo
+﻿namespace Memorabilia.Application.Features.Memorabilia.Photo;
+
+public class GetPhoto
 {
-    public class GetPhoto
+    public class Handler : QueryHandler<Query, PhotoViewModel>
     {
-        public class Handler : QueryHandler<Query, PhotoViewModel>
+        private readonly IMemorabiliaItemRepository _memorabiliaRepository;
+
+        public Handler(IMemorabiliaItemRepository memorabiliaRepository)
         {
-            private readonly IMemorabiliaRepository _memorabiliaRepository;
-
-            public Handler(IMemorabiliaRepository memorabiliaRepository)
-            {
-                _memorabiliaRepository = memorabiliaRepository;
-            }
-
-            protected override async Task<PhotoViewModel> Handle(Query query)
-            {
-                return new PhotoViewModel(await _memorabiliaRepository.Get(query.MemorabiliaId).ConfigureAwait(false));
-            }
+            _memorabiliaRepository = memorabiliaRepository;
         }
 
-        public class Query : MemorabiliaQuery, IQuery<PhotoViewModel>
+        protected override async Task<PhotoViewModel> Handle(Query query)
         {
-            public Query(int memorabiliaId) : base(memorabiliaId) { }
+            return new PhotoViewModel(await _memorabiliaRepository.Get(query.MemorabiliaId));
         }
+    }
+
+    public class Query : MemorabiliaQuery, IQuery<PhotoViewModel>
+    {
+        public Query(int memorabiliaId) : base(memorabiliaId) { }
     }
 }

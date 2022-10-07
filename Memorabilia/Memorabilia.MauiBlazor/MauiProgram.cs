@@ -1,5 +1,5 @@
-﻿using MudBlazor;
-using MudBlazor.Services;
+﻿using Memorabilia.Repository.Implementations;
+using Microsoft.Extensions.Configuration;
 
 namespace Memorabilia.MauiBlazor
 {
@@ -19,6 +19,18 @@ namespace Memorabilia.MauiBlazor
 #if DEBUG
 		builder.Services.AddBlazorWebViewDeveloperTools();
 #endif
+            builder.Configuration.AddJsonFile("appsettings.json");
+
+            builder.Services.AddDbContext<MemorabiliaContext>(options => options.UseSqlServer("name=ConnectionStrings:Memorabilia"), ServiceLifetime.Transient);
+            builder.Services.AddTransient<IMemorabiliaContext, MemorabiliaContext>();
+            builder.Services.AddDbContext<DomainContext>(options => options.UseSqlServer("name=ConnectionStrings:Memorabilia"), ServiceLifetime.Transient);
+            builder.Services.AddTransient<IDomainContext, DomainContext>();
+            builder.Services.AddTransient<CommandRouter>();
+            builder.Services.AddTransient<QueryRouter>();
+
+            builder.Services.AddMediatR(typeof(GetAccomplishments).Assembly);
+
+            builder.Services.AddTransient<GetUser>();
 
             builder.Services.AddMudServices(config =>
             {
@@ -31,6 +43,32 @@ namespace Memorabilia.MauiBlazor
                 config.SnackbarConfiguration.ShowTransitionDuration = 500;
                 config.SnackbarConfiguration.SnackbarVariant = Variant.Filled;
             });
+
+            builder.Services.AddTransient<IAutographRepository, AutographRepository>();
+            builder.Services.AddTransient<ICommissionerRepository, CommissionerRepository>();
+            builder.Services.AddTransient<IHallOfFameRepository, HallOfFameRepository>();
+            builder.Services.AddTransient<IItemTypeBrandRepository, ItemTypeBrandRepository>();
+            builder.Services.AddTransient<IItemTypeGameStyleTypeRepository, ItemTypeGameStyleTypeRepository>();
+            builder.Services.AddTransient<IItemTypeLevelRepository, ItemTypeLevelRepository>();
+            builder.Services.AddTransient<IItemTypeSizeRepository, ItemTypeSizeRepository>();
+            builder.Services.AddTransient<IItemTypeSportRepository, ItemTypeSportRepository>();
+            builder.Services.AddTransient<IItemTypeSpotRepository, ItemTypeSpotRepository>();
+            builder.Services.AddTransient<IMemorabiliaImageRepository, MemorabiliaImageRepository>();
+            builder.Services.AddTransient<IMemorabiliaItemRepository, MemorabiliaItemRepository>();
+            builder.Services.AddTransient<IPersonAccomplishmentRepository, PersonAccomplishmentRepository>();
+            builder.Services.AddTransient<IPersonAwardRepository, PersonAwardRepository>();
+            builder.Services.AddTransient<IPersonRepository, PersonRepository>();
+            builder.Services.AddTransient<IProjectRepository, ProjectRepository>();
+            builder.Services.AddTransient<ITeamChampionshipRepository, TeamChampionshipRepository>();
+            builder.Services.AddTransient<ITeamConferenceRepository, TeamConferenceRepository>();
+            builder.Services.AddTransient<ITeamDivisionRepository, TeamDivisionRepository>();
+            builder.Services.AddTransient<ITeamLeagueRepository, TeamLeagueRepository>();
+            builder.Services.AddTransient<ITeamRepository, TeamRepository>();
+            builder.Services.AddTransient<IUserRepository, UserRepository>();
+
+            builder.Services.AddTransient<IDashboardItemFactory, DashboardItemFactory>();
+            builder.Services.AddTransient<IProfileRuleFactory, ProfileRuleFactory>();
+            builder.Services.AddTransient<IProfileService, ProfileService>();
 
             return builder.Build();
         }

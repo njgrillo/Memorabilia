@@ -1,30 +1,29 @@
-﻿namespace Memorabilia.Application.Features.Admin.People
+﻿namespace Memorabilia.Application.Features.Admin.People;
+
+public class GetPersonAccomplishments
 {
-    public class GetPersonAccomplishments
+    public class Handler : QueryHandler<Query, PersonAccoladeViewModel>
     {
-        public class Handler : QueryHandler<Query, PersonAccoladeViewModel>
+        private readonly IPersonRepository _personRepository;
+
+        public Handler(IPersonRepository personRepository)
         {
-            private readonly IPersonRepository _personRepository;
-
-            public Handler(IPersonRepository personRepository)
-            {
-                _personRepository = personRepository;
-            }
-
-            protected override async Task<PersonAccoladeViewModel> Handle(Query query)
-            {
-                return new PersonAccoladeViewModel(await _personRepository.Get(query.PersonId).ConfigureAwait(false));
-            }
+            _personRepository = personRepository;
         }
 
-        public class Query : IQuery<PersonAccoladeViewModel>
+        protected override async Task<PersonAccoladeViewModel> Handle(Query query)
         {
-            public Query(int personId)
-            {
-                PersonId = personId;
-            }
-
-            public int PersonId { get; }
+            return new PersonAccoladeViewModel(await _personRepository.Get(query.PersonId));
         }
+    }
+
+    public class Query : IQuery<PersonAccoladeViewModel>
+    {
+        public Query(int personId)
+        {
+            PersonId = personId;
+        }
+
+        public int PersonId { get; }
     }
 }

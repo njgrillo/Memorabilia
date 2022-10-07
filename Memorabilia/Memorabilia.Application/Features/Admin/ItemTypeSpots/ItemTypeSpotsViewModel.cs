@@ -1,28 +1,26 @@
-﻿using Memorabilia.Domain.Entities;
+﻿using Memorabilia.Domain.Constants;
+using Memorabilia.Domain.Entities;
 
-namespace Memorabilia.Application.Features.Admin.ItemTypeSpots
+namespace Memorabilia.Application.Features.Admin.ItemTypeSpots;
+
+public class ItemTypeSpotsViewModel : ViewModel
 {
-    public class ItemTypeSpotsViewModel : ViewModel
+    public ItemTypeSpotsViewModel() { }
+
+    public ItemTypeSpotsViewModel(IEnumerable<ItemTypeSpot> itemTypeSpots)
     {
-        public ItemTypeSpotsViewModel() { }
-
-        public ItemTypeSpotsViewModel(IEnumerable<ItemTypeSpot> itemTypeSpots)
-        {
-            ItemTypeSpots = itemTypeSpots.Select(ItemTypeSpot => new ItemTypeSpotViewModel(ItemTypeSpot)).ToList();
-        }
-
-        public string AddRoute => $"{RoutePrefix}/Edit/0";
-
-        public string AddTitle => $"Add {ItemTitle}";
-
-        public string ExitNavigationPath => "Admin/EditDomainItems";
-
-        public List<ItemTypeSpotViewModel> ItemTypeSpots { get; set; } = new();
-
-        public override string ItemTitle => "Item Type Spot";
-
-        public override string PageTitle => "Item Type Spots";
-
-        public override string RoutePrefix => "ItemTypeSpots";
+        ItemTypeSpots = itemTypeSpots.Select(ItemTypeSpot => new ItemTypeSpotViewModel(ItemTypeSpot)).ToList();
     }
+
+    public string AddRoute => $"{RoutePrefix}/{EditModeType.Update.Name}/0";
+
+    public string AddTitle => $"{EditModeType.Add.Name} {ItemTitle}";
+
+    public List<ItemTypeSpotViewModel> ItemTypeSpots { get; set; } = new();
+
+    public override string ItemTitle => AdminDomainItem.ItemTypeSpots.Item;
+
+    public override string PageTitle => AdminDomainItem.ItemTypeSpots.Title;
+
+    public override string RoutePrefix => AdminDomainItem.ItemTypeSpots.Page;
 }

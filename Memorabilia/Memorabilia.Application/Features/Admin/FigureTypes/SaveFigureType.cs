@@ -1,48 +1,47 @@
 ﻿using Memorabilia.Domain.Entities;
 
-namespace Memorabilia.Application.Features.Admin.FigureTypes
+namespace Memorabilia.Application.Features.Admin.FigureTypes;
+
+public class SaveFigureType
 {
-    public class SaveFigureType
+    public class Handler : CommandHandler<Command>
     {
-        public class Handler : CommandHandler<Command>
+        private readonly IDomainRepository<FigureType> _figureTypeRepository;
+
+        public Handler(IDomainRepository<FigureType> figureTypeRepository)
         {
-            private readonly IFigureTypeRepository _figureTypeRepository;
-
-            public Handler(IFigureTypeRepository figureTypeRepository)
-            {
-                _figureTypeRepository = figureTypeRepository;
-            }
-
-            protected override async Task Handle(Command command)
-            {
-                FigureType figureType;
-
-                if (command.IsNew)
-                {
-                    figureType = new FigureType(command.Name, command.Abbreviation);
-                    await _figureTypeRepository.Add(figureType).ConfigureAwait(false);
-
-                    return;
-                }
-
-                figureType = await _figureTypeRepository.Get(command.Id).ConfigureAwait(false);
-
-                if (command.IsDeleted)
-                {
-                    await _figureTypeRepository.Delete(figureType).ConfigureAwait(false);
-
-                    return;
-                }
-
-                figureType.Set(command.Name, command.Abbreviation);
-
-                await _figureTypeRepository.Update(figureType).ConfigureAwait(false);
-            }
+            _figureTypeRepository = figureTypeRepository;
         }
 
-        public class Command : DomainEntityCommand
+        protected override async Task Handle(Command command)
         {
-            public Command(SaveDomainViewModel viewModel) : base(viewModel) { }
+            FigureType figureType;
+
+            if (command.IsNew)
+            {
+                figureType = new FigureType(command.Name, command.Abbreviation);
+                await _figureTypeRepository.Add(figureType);
+
+                return;
+            }
+
+            figureType = await _figureTypeRepository.Get(command.Id);
+
+            if (command.IsDeleted)
+            {
+                await _figureTypeRepository.Delete(figureType);
+
+                return;
+            }
+
+            figureType.Set(command.Name, command.Abbreviation);
+
+            await _figureTypeRepository.Update(figureType);
         }
+    }
+
+    public class Command : DomainEntityCommand
+    {
+        public Command(SaveDomainViewModel viewModel) : base(viewModel) { }
     }
 }

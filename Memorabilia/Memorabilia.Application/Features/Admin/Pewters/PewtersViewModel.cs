@@ -1,28 +1,26 @@
-﻿using Memorabilia.Domain.Entities;
+﻿using Memorabilia.Domain.Constants;
+using Memorabilia.Domain.Entities;
 
-namespace Memorabilia.Application.Features.Admin.Pewters
+namespace Memorabilia.Application.Features.Admin.Pewters;
+
+public class PewtersViewModel : ViewModel
 {
-    public class PewtersViewModel : ViewModel
+    public PewtersViewModel() { }
+
+    public PewtersViewModel(IEnumerable<Pewter> pewters)
     {
-        public PewtersViewModel() { }
-
-        public PewtersViewModel(IEnumerable<Pewter> pewters)
-        {
-            Pewters = pewters.Select(pewter => new PewterViewModel(pewter)).ToList();
-        }
-
-        public string AddRoute => $"{RoutePrefix}/Edit/0";
-
-        public string AddTitle => $"Add {ItemTitle}";
-
-        public string ExitNavigationPath => "Admin/EditDomainItems";
-
-        public override string ItemTitle => "Pewter";
-
-        public override string PageTitle => "Pewters";
-
-        public List<PewterViewModel> Pewters { get; set; } = new();
-
-        public override string RoutePrefix => "Pewters";
+        Pewters = pewters.Select(pewter => new PewterViewModel(pewter)).ToList();
     }
+
+    public string AddRoute => $"{RoutePrefix}/{EditModeType.Update.Name}/0";
+
+    public string AddTitle => $"{EditModeType.Add.Name} {ItemTitle}";
+
+    public override string ItemTitle => AdminDomainItem.Pewters.Item;
+
+    public override string PageTitle => AdminDomainItem.Pewters.Title;
+
+    public List<PewterViewModel> Pewters { get; set; } = new();
+
+    public override string RoutePrefix => AdminDomainItem.Pewters.Page;
 }

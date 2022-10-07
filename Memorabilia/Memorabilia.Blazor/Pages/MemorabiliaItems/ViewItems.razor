@@ -1,0 +1,200 @@
+﻿<Page OnLoad="OnLoad">
+   <Content>
+        <MemorabiliaSearchControl Items="_initialItems"
+                                  ResultsChanged="OnFilter" />
+        <DivPad2>
+            <Content>
+                <MudTable Bordered="false"
+                          Dense="false" 
+                          Hover="true"
+                          Items="@_viewModel.MemorabiliaItems"    
+                          Striped="true">
+                    <ToolBarContent>
+                        <MudText Typo="Typo.h6">My Memorabilia</MudText>
+                    </ToolBarContent>
+                    <HeaderContent>
+                        <MudTh></MudTh>
+                        <MudTh></MudTh>
+                        <MudTh>Item</MudTh>
+                        <MudTh>Condition</MudTh>
+                        <MudTh>Value</MudTh>
+                        <MudTh>Acquisition Type</MudTh>
+                        <MudTh>Acquisition Date</MudTh>
+                        <MudTh>Cost</MudTh>
+                        <MudTh>Purchase Place</MudTh>
+                        <MudTh></MudTh>
+                    </HeaderContent>
+                    <RowTemplate>
+                        <MudTd>
+                            <MudIconButton @onclick="@(_ => ToggleChildContent(@context.Id))"
+                                           Icon="@context.ToggleIcon"></MudIconButton>
+                        </MudTd>
+                        <MudTd DataLabel="">
+                            <MudTooltip Text="@context.ImageDisplayCount">
+                                <MudImage @onclick="@(_ => NavigationManager.NavigateTo($"Memorabilia/Image/Edit/{@context.Id}"))" 
+                                          Class="rounded-lg can-click" 
+                                          Elevation="5" 
+                                          Height="200"
+                                          ObjectFit="@ObjectFit.Cover"
+                                          Src="@context.MemorabiliaImagePath"
+                                          Width="200" />
+                            </MudTooltip> 
+                        </MudTd>
+                        <MudTd DataLabel="Item">@context.ItemTypeName</MudTd>
+                        <MudTd DataLabel="Condition">@context.ConditionName</MudTd>
+                        <MudTd DataLabel="Value">@context.EstimatedValue?.ToString("c")</MudTd>
+                        <MudTd DataLabel="Acquisition Type">@context.AcquisitionTypeName</MudTd>
+                        <MudTd DataLabel="Acquisition Date">@context.Acquisition.AcquiredDate?.ToString("MM-dd-yyyy")</MudTd>
+                        <MudTd DataLabel="Cost">@context.Acquisition.Cost?.ToString("c")</MudTd>
+                        <MudTd DataLabel="Purchase Place">@context.PurchaseTypeName</MudTd>
+                        <MudTd DataLabel="">
+                            <MudTooltip Text="Add Autograph">
+                                <MudFab Color="MudBlazor.Color.Primary"
+                                        Icon="@Icons.Outlined.AddCircleOutline"
+                                        OnClick="@(_ => NavigationManager.NavigateTo($"Autographs/Edit/{@context.Id}/0"))"
+                                        Size="@MudBlazor.Size.Small" />
+                            </MudTooltip> 
+                            <MudTooltip Text="Details">
+                                <MudFab Color="MudBlazor.Color.Info"
+                                        Icon="@Icons.Outlined.Info"                                        
+                                        OnClick="@(_ => NavigationManager.NavigateTo($"Memorabilia/{@context.ItemTypeName.Replace(" ", "")}/Edit/{@context.Id}"))"
+                                        Size="@MudBlazor.Size.Small" />
+                            </MudTooltip>  
+                            <MudTooltip Text="Edit">
+                                <MudFab Color="MudBlazor.Color.Primary"
+                                        Icon="@Icons.Outlined.ModeEditOutline"
+                                        OnClick="@(_ => NavigationManager.NavigateTo($"Memorabilia/Edit/{@context.Id}"))"
+                                        Size="@MudBlazor.Size.Small" />
+                            </MudTooltip> 
+                            <MudTooltip Text="Delete">
+                                <MudFab Color="MudBlazor.Color.Secondary"
+                                        Icon="@Icons.Outlined.DeleteOutline"
+                                        OnClick="@(_ => ShowDeleteMemorabiliaConfirm(@context.Id))"
+                                        Size="@MudBlazor.Size.Small" />
+                            </MudTooltip>
+                        </MudTd>
+                    </RowTemplate>
+                    <ChildRowContent>
+                        <PrettyBlazor.Condition Evaluation="@context.DisplayAutographDetails">
+                            <Match>  
+                                <tr />
+                                <tr style="background-color:#6D7B8D;color:honeydew;border-style:dashed;border-width:2px;border-color:#ECF3F4;">
+                                    <td align="center" colspan="17" >  
+                                        Summary: Autographs - <strong> @context.AutographsCount </strong>, Total Value - <strong> @context.FormattedTotalValue </strong>, Total Cost - <strong> @context.FormattedTotalCost </strong>
+                                    </td> 
+                                </tr>
+                                <tr />
+                                <tr style="margin-top: 1%; margin-bottom: 1%; margin-left: 1%; margin-right: 1%;">
+                                    <td colspan="17">
+                                        <MudTable Bordered="false"
+                                                  Dense="false" 
+                                                  Hover="true"
+                                                  Items="@context.Autographs"    
+                                                  Striped="true">
+                                            <ToolBarContent>
+                                                <MudText Typo="Typo.h6">Autographs</MudText>
+                                                <MudSpacer />
+                                            </ToolBarContent>
+                                            <HeaderContent>
+                                                <MudTh></MudTh>
+                                                <MudTh>Person</MudTh>
+                                                <MudTh>Condition</MudTh>
+                                                <MudTh>Value</MudTh>
+                                                <MudTh>Acquisition Type</MudTh>
+                                                <MudTh>Acquired Date</MudTh>
+                                                <MudTh>Cost</MudTh>
+                                                <MudTh>Purchase Place</MudTh>
+                                                <MudTh>Writing Instrument</MudTh>
+                                                <MudTh>Color</MudTh>
+                                                <MudTh>Authentications</MudTh>
+                                                <MudTh>Inscriptions</MudTh>
+                                                <MudTh></MudTh>
+                                            </HeaderContent>
+                                            <RowTemplate Context="autograph">
+                                                <MudTd DataLabel="Name">
+                                                    <MudTooltip Text="@autograph.ImageDisplayCount">
+                                                        <MudImage @onclick="@(_ => NavigationManager.NavigateTo($"Autographs/Image/Edit/{@autograph.Id}"))" 
+                                                                  Class="rounded-lg can-click" 
+                                                                  Elevation="5" 
+                                                                  Height="200"
+                                                                  ObjectFit="@ObjectFit.Cover"
+                                                                  Src="@autograph.AutographImagePath"
+                                                                  Width="200" />
+                                                    </MudTooltip> 
+                                                </MudTd>
+                                                <MudTd DataLabel="Abbreviation">@autograph.PersonName</MudTd>
+                                                <MudTd DataLabel="Condition">@autograph.ConditionName</MudTd>
+                                                <MudTd DataLabel="Value">@autograph.FormattedEstimatedValue</MudTd>
+                                                <MudTd DataLabel="Acquisition Type">@autograph.AcquisitionTypeName</MudTd>
+                                                <MudTd DataLabel="Acquired Date">@autograph.FormattedAcquisitionDate</MudTd>
+                                                <MudTd DataLabel="Cost">@autograph.FormattedCost</MudTd>
+                                                <MudTd DataLabel="Purchase Place">@autograph.PurchaseTypeName</MudTd>
+                                                <MudTd DataLabel="Writing Instrument">@autograph.WritingInstrumentName</MudTd>
+                                                <MudTd DataLabel="Color">@autograph.ColorName</MudTd>
+                                                <MudTd DataLabel="Authentications">
+                                                    <MudTooltip Text="@autograph.AuthenticationTooltip">
+                                                        <MudChip Color="MudBlazor.Color.Info" 
+                                                                 OnClick="@(_ => NavigationManager.NavigateTo($"Autographs/Authentications/Edit/{@autograph.Id}"))"
+                                                                 Size="@MudBlazor.Size.Small"
+                                                                 Text="@autograph.AuthenticationText" />
+                                                    </MudTooltip> 
+                                                </MudTd>
+                                                <MudTd DataLabel="Inscriptions">
+                                                    <MudTooltip Text="@autograph.InscriptionTooltip">
+                                                        <MudChip Color="MudBlazor.Color.Info"
+                                                                 OnClick="@(_ => NavigationManager.NavigateTo($"Autographs/Inscriptions/Edit/{@autograph.Id}"))"
+                                                                 Size="@MudBlazor.Size.Small"
+                                                                 Text="@autograph.InscriptionText" />
+                                                    </MudTooltip> 
+                                                </MudTd>
+                                                <MudTd DataLabel="Color">
+                                                    <PrettyBlazor.Condition Evaluation="autograph.DisplaySpot">
+                                                        <Match>
+                                                            <MudTooltip Text="Details">
+                                                                <MudFab Color="MudBlazor.Color.Info"
+                                                                        Icon="@Icons.Outlined.Info"
+                                                                        OnClick="@(_ => NavigationManager.NavigateTo($"Autographs/Spot/Edit/{@autograph.Id}"))"
+                                                                        Size="@MudBlazor.Size.Small" />
+                                                            </MudTooltip> 
+                                                        </Match>
+                                                    </PrettyBlazor.Condition>  
+                                                    <MudTooltip Text="Edit">
+                                                        <MudFab Color="MudBlazor.Color.Primary"
+                                                                Icon="@Icons.Outlined.ModeEditOutline"
+                                                                OnClick="@(_ => NavigationManager.NavigateTo($"Autographs/Edit/{@autograph.MemorabiliaId}/{@autograph.Id}"))"
+                                                                Size="@MudBlazor.Size.Small" />
+                                                    </MudTooltip> 
+                                                    <MudTooltip Text="Delete">
+                                                            <MudFab Color="MudBlazor.Color.Secondary"
+                                                                    Icon="@Icons.Outlined.DeleteOutline"
+                                                                    OnClick="@(_ => ShowDeleteAutographConfirm(@autograph.Id))"
+                                                                    Size="@MudBlazor.Size.Small" />
+                                                    </MudTooltip>
+                                                </MudTd>
+                                            </RowTemplate>
+                                            <PagerContent>
+                                                <MudTablePager />
+                                            </PagerContent>
+                                        </MudTable>    
+                                    </td>   
+                                </tr>                                                            
+                            </Match>
+                        </PrettyBlazor.Condition>
+                    </ChildRowContent>
+                    <PagerContent>
+                        <MudTablePager />
+                    </PagerContent>
+                </MudTable>
+            </Content>
+        </DivPad2> 
+        <DivRowCol12Center>
+            <Content>
+                <MudTooltip Text="@_viewModel.AddText">
+                    <MudFab Color="MudBlazor.Color.Primary"
+                            Icon="@Icons.Outlined.AddCircleOutline"
+                            OnClick="@(_ => NavigationManager.NavigateTo(@_viewModel.AddRoute))" />
+                </MudTooltip> 
+            </Content>
+        </DivRowCol12Center>
+    </Content>
+</Page>

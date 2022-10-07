@@ -8,10 +8,10 @@ namespace Memorabilia.Blazor.Pages.User
         public CommandRouter CommandRouter { get; set; }
 
         [Inject]
-        public ProtectedLocalStorage LocalStorage { get; set; }
-
-        [Inject]
         public NavigationManager NavigationManager { get; set; }
+
+        [Parameter]
+        public EventCallback<int> OnSaved { get; set; }
 
         private readonly SaveUserViewModel _viewModel = new();
 
@@ -20,8 +20,7 @@ namespace Memorabilia.Blazor.Pages.User
             var command = new AddUser.Command(_viewModel);
 
             await CommandRouter.Send(command).ConfigureAwait(false);
-
-            await LocalStorage.SetAsync("UserId", command.Id).ConfigureAwait(false);
+            await OnSaved.InvokeAsync(command.Id).ConfigureAwait(false);            
 
             NavigationManager.NavigateTo("Home");
         }

@@ -1,5 +1,7 @@
 ﻿@page "/LeaderTypes/Edit/{id:int}"
 
-<EditDomainItem Item="_viewModel"
-                OnLoad="OnLoad"
-                OnSave="OnSave" />
+<WebPage>
+    <Content>
+        <EditLeaderType Id="@Id" />
+    </Content>
+</WebPage>

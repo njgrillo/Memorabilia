@@ -1,28 +1,27 @@
 ﻿using Memorabilia.Domain.Constants;
 
-namespace Memorabilia.Application.Features.User.Dashboard
+namespace Memorabilia.Application.Features.User.Dashboard;
+
+public class SportChartViewModel : DashboardItemViewModel
 {
-    public class SportChartViewModel : DashboardItemViewModel
+    public SportChartViewModel() { }
+
+    public SportChartViewModel(DashboardItem dashboardItem, IEnumerable<Domain.Entities.Memorabilia> memorabiliaItems)
     {
-        public SportChartViewModel() { }
+        DashboardItem = dashboardItem;
 
-        public SportChartViewModel(DashboardItem dashboardItem, IEnumerable<Domain.Entities.Memorabilia> memorabiliaItems)
+        var sports = memorabiliaItems.SelectMany(item => item.Sports);
+        var sportNames = sports.Select(sport => sport.Sport.Name).Distinct();
+
+        Labels = sportNames.ToArray();
+
+        var counts = new List<double>();
+
+        foreach (var sportName in sportNames)
         {
-            DashboardItem = dashboardItem;
-
-            var sports = memorabiliaItems.SelectMany(item => item.Sports);
-            var sportNames = sports.Select(sport => sport.Sport.Name).Distinct();
-
-            Labels = sportNames.ToArray();
-
-            var counts = new List<double>();
-
-            foreach (var sportName in sportNames)
-            {
-                counts.Add(sports.Count(sport => sport.Sport.Name == sportName));
-            }
-
-            DataNew = counts.ToArray();
+            counts.Add(sports.Count(sport => sport.Sport.Name == sportName));
         }
+
+        DataNew = counts.ToArray();
     }
 }

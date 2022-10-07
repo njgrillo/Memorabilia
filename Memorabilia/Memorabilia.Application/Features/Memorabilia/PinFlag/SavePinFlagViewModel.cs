@@ -1,41 +1,40 @@
 ﻿using Memorabilia.Domain.Constants;
 
-namespace Memorabilia.Application.Features.Memorabilia.PinFlag
+namespace Memorabilia.Application.Features.Memorabilia.PinFlag;
+
+public class SavePinFlagViewModel : SaveItemViewModel
 {
-    public class SavePinFlagViewModel : SaveItemViewModel
+    public SavePinFlagViewModel() { }
+
+    public SavePinFlagViewModel(PinFlagViewModel viewModel)
     {
-        public SavePinFlagViewModel() { }
+        GameDate = viewModel.Game?.GameDate;
+        GameStyleTypeId = viewModel.Game?.GameStyleTypeId ?? 0;
+        MemorabiliaId = viewModel.MemorabiliaId;            
 
-        public SavePinFlagViewModel(PinFlagViewModel viewModel)
-        {
-            GameDate = viewModel.Game?.GameDate;
-            GameStyleTypeId = viewModel.Game?.GameStyleTypeId ?? 0;
-            MemorabiliaId = viewModel.MemorabiliaId;            
-
-            if (viewModel.People.Any())
-                Person = new SavePersonViewModel(new PersonViewModel(viewModel.People.First().Person));
-        }
-
-        public override string BackNavigationPath => $"Memorabilia/Edit/{MemorabiliaId}";
-
-        public bool DisplayGameDate => GameStyleType.IsGameWorthly(GameStyleType);
-
-        public override EditModeType EditModeType => MemorabiliaId > 0 ? EditModeType.Update : EditModeType.Add;
-
-        public override string ExitNavigationPath => "Memorabilia/Items";
-
-        public DateTime? GameDate { get; set; }
-
-        public GameStyleType GameStyleType => GameStyleType.Find(GameStyleTypeId);
-
-        [Required]
-        [Range(1, int.MaxValue, ErrorMessage = "Tournament Style Type is required.")]
-        public int GameStyleTypeId { get; set; }
-
-        public override string ImagePath => "images/pinflag.jpg";
-
-        public override ItemType ItemType => ItemType.PinFlag;
-
-        public SavePersonViewModel Person { get; set; }
+        if (viewModel.People.Any())
+            Person = new SavePersonViewModel(new PersonViewModel(viewModel.People.First().Person));
     }
+
+    public override string BackNavigationPath => $"Memorabilia/{EditModeType.Update.Name}/{MemorabiliaId}";
+
+    public bool DisplayGameDate => GameStyleType.IsGameWorthly(GameStyleType);
+
+    public override EditModeType EditModeType => MemorabiliaId > 0 ? EditModeType.Update : EditModeType.Add;
+
+    public override string ExitNavigationPath => "Memorabilia/Items";
+
+    public DateTime? GameDate { get; set; }
+
+    public GameStyleType GameStyleType => GameStyleType.Find(GameStyleTypeId);
+
+    [Required]
+    [Range(1, int.MaxValue, ErrorMessage = "Tournament Style Type is required.")]
+    public int GameStyleTypeId { get; set; }
+
+    public override string ImagePath => Domain.Constants.ImagePath.PinFlag;
+
+    public override ItemType ItemType => ItemType.PinFlag;
+
+    public SavePersonViewModel Person { get; set; }
 }

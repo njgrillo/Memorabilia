@@ -1,25 +1,26 @@
-﻿namespace Memorabilia.Application.Features.Admin.PurchaseTypes
+﻿using Memorabilia.Domain.Entities;
+
+namespace Memorabilia.Application.Features.Admin.PurchaseTypes;
+
+public class GetPurchaseType
 {
-    public class GetPurchaseType
+    public class Handler : QueryHandler<Query, DomainViewModel>
     {
-        public class Handler : QueryHandler<Query, DomainViewModel>
+        private readonly IDomainRepository<PurchaseType> _purchaseTypeRepository;
+
+        public Handler(IDomainRepository<PurchaseType> purchaseTypeRepository)
         {
-            private readonly IPurchaseTypeRepository _purchaseTypeRepository;
-
-            public Handler(IPurchaseTypeRepository purchaseTypeRepository)
-            {
-                _purchaseTypeRepository = purchaseTypeRepository;
-            }
-
-            protected override async Task<DomainViewModel> Handle(Query query)
-            {
-                return new DomainViewModel(await _purchaseTypeRepository.Get(query.Id).ConfigureAwait(false));
-            }
+            _purchaseTypeRepository = purchaseTypeRepository;
         }
 
-        public class Query : DomainQuery
+        protected override async Task<DomainViewModel> Handle(Query query)
         {
-            public Query(int id) : base(id) { }
+            return new DomainViewModel(await _purchaseTypeRepository.Get(query.Id));
         }
+    }
+
+    public class Query : DomainQuery
+    {
+        public Query(int id) : base(id) { }
     }
 }

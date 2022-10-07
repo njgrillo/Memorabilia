@@ -1,17 +1,17 @@
-﻿using Memorabilia.Domain.Entities;
+﻿using Memorabilia.Domain.Constants;
+using Memorabilia.Domain.Entities;
 
-namespace Memorabilia.Application.Features.Admin.PhotoTypes
+namespace Memorabilia.Application.Features.Admin.PhotoTypes;
+
+public class PhotoTypesViewModel : DomainsViewModel
 {
-    public class PhotoTypesViewModel : DomainsViewModel
-    {
-        public PhotoTypesViewModel() { }
+    public PhotoTypesViewModel() { }
 
-        public PhotoTypesViewModel(IEnumerable<DomainEntity> domainEntities) : base(domainEntities) { }
+    public PhotoTypesViewModel(IEnumerable<DomainEntity> domainEntities) : base(domainEntities) { }
 
-        public override string ItemTitle => "Photo Type";
+    public override string ItemTitle => AdminDomainItem.PhotoTypes.Item;
 
-        public override string PageTitle => "Photo Types";
+    public override string PageTitle => AdminDomainItem.PhotoTypes.Title;
 
-        public override string RoutePrefix => "PhotoTypes";
-    }
+    public override string RoutePrefix => AdminDomainItem.PhotoTypes.Page;
 }

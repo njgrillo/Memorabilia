@@ -3,12 +3,30 @@
     public partial class EditDomainItems : ComponentBase
     {
         [Inject]
+        public ProtectedLocalStorage LocalStorage { get; set; }
+
+        [Inject]
         public NavigationManager NavigationManager { get; set; }
 
         private string _domainItemQuickJump;
         private readonly AdminDomainItemsViewModel _viewModel = new ();
 
-        public async Task OnLoad() { }
+        [Parameter]
+        public int UserId { get; set; }
+
+        protected override async Task OnInitializedAsync()
+        {
+            var userId = await LocalStorage.GetAsync<int>("UserId").ConfigureAwait(false);
+
+            UserId = userId.Value;
+        }
+
+        protected async Task OnLoad()
+        {
+            //var userId = await LocalStorage.GetAsync<int>("UserId").ConfigureAwait(false);
+
+            //UserId = userId.Value;
+        }
 
         public void QuickJump()
         {

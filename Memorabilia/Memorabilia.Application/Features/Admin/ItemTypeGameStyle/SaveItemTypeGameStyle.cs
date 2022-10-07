@@ -1,64 +1,63 @@
-﻿namespace Memorabilia.Application.Features.Admin.ItemTypeGameStyle
+﻿namespace Memorabilia.Application.Features.Admin.ItemTypeGameStyle;
+
+public class SaveItemTypeGameStyle
 {
-    public class SaveItemTypeGameStyle
+    public class Handler : CommandHandler<Command>
     {
-        public class Handler : CommandHandler<Command>
+        private readonly IItemTypeGameStyleTypeRepository _itemTypeGameStyleRepository;
+
+        public Handler(IItemTypeGameStyleTypeRepository itemTypeGameStyleRepository)
         {
-            private readonly IItemTypeGameStyleTypeRepository _itemTypeGameStyleRepository;
-
-            public Handler(IItemTypeGameStyleTypeRepository itemTypeGameStyleRepository)
-            {
-                _itemTypeGameStyleRepository = itemTypeGameStyleRepository;
-            }
-
-            protected override async Task Handle(Command command)
-            {
-                Domain.Entities.ItemTypeGameStyleType itemTypeGameStyle;
-
-                if (command.IsNew)
-                {
-                    itemTypeGameStyle = new Domain.Entities.ItemTypeGameStyleType(command.ItemTypeId, command.GameStyleTypeId);
-
-                    await _itemTypeGameStyleRepository.Add(itemTypeGameStyle).ConfigureAwait(false);
-
-                    return;
-                }
-
-                itemTypeGameStyle = await _itemTypeGameStyleRepository.Get(command.Id).ConfigureAwait(false);
-
-                if (command.IsDeleted)
-                {
-                    await _itemTypeGameStyleRepository.Delete(itemTypeGameStyle).ConfigureAwait(false);
-
-                    return;
-                }
-
-                itemTypeGameStyle.Set(command.GameStyleTypeId);
-
-                await _itemTypeGameStyleRepository.Update(itemTypeGameStyle).ConfigureAwait(false);
-            }
+            _itemTypeGameStyleRepository = itemTypeGameStyleRepository;
         }
 
-        public class Command : DomainCommand, ICommand
+        protected override async Task Handle(Command command)
         {
-            private readonly SaveItemTypeGameStyleViewModel _viewModel;
+            Domain.Entities.ItemTypeGameStyleType itemTypeGameStyle;
 
-            public Command(SaveItemTypeGameStyleViewModel viewModel)
+            if (command.IsNew)
             {
-                _viewModel = viewModel;
+                itemTypeGameStyle = new Domain.Entities.ItemTypeGameStyleType(command.ItemTypeId, command.GameStyleTypeId);
+
+                await _itemTypeGameStyleRepository.Add(itemTypeGameStyle);
+
+                return;
             }
 
-            public int GameStyleTypeId => _viewModel.GameStyleTypeId;
+            itemTypeGameStyle = await _itemTypeGameStyleRepository.Get(command.Id);
 
-            public int Id => _viewModel.Id;
+            if (command.IsDeleted)
+            {
+                await _itemTypeGameStyleRepository.Delete(itemTypeGameStyle);
 
-            public bool IsDeleted => _viewModel.IsDeleted;
+                return;
+            }
 
-            public bool IsModified => _viewModel.IsModified;
+            itemTypeGameStyle.Set(command.GameStyleTypeId);
 
-            public bool IsNew => _viewModel.IsNew;
-
-            public int ItemTypeId => _viewModel.ItemTypeId;
+            await _itemTypeGameStyleRepository.Update(itemTypeGameStyle);
         }
+    }
+
+    public class Command : DomainCommand, ICommand
+    {
+        private readonly SaveItemTypeGameStyleViewModel _viewModel;
+
+        public Command(SaveItemTypeGameStyleViewModel viewModel)
+        {
+            _viewModel = viewModel;
+        }
+
+        public int GameStyleTypeId => _viewModel.GameStyleTypeId;
+
+        public int Id => _viewModel.Id;
+
+        public bool IsDeleted => _viewModel.IsDeleted;
+
+        public bool IsModified => _viewModel.IsModified;
+
+        public bool IsNew => _viewModel.IsNew;
+
+        public int ItemTypeId => _viewModel.ItemTypeId;
     }
 }

@@ -1,26 +1,25 @@
-﻿namespace Memorabilia.Domain.Entities
+﻿namespace Memorabilia.Domain.Entities;
+
+public class ItemTypeSport : Framework.Library.Domain.Entity.DomainEntity
 {
-    public class ItemTypeSport : Framework.Library.Domain.Entity.DomainEntity
+    public ItemTypeSport() { }
+
+    public ItemTypeSport(int itemTypeId, int sportId)
     {
-        public ItemTypeSport() { }
+        ItemTypeId = itemTypeId;
+        SportId = sportId;
+    }
 
-        public ItemTypeSport(int itemTypeId, int sportId)
-        {
-            ItemTypeId = itemTypeId;
-            SportId = sportId;
-        }
+    public int ItemTypeId { get; private set; }
 
-        public int ItemTypeId { get; private set; }
+    public string ItemTypeName => Constants.ItemType.Find(ItemTypeId)?.Name;
 
-        public string ItemTypeName => Constants.ItemType.Find(ItemTypeId)?.Name;
+    public int SportId { get; private set; }
 
-        public int SportId { get; private set; }
+    public string SportName => Constants.Sport.Find(SportId)?.Name;
 
-        public string SportName => Constants.Sport.Find(SportId)?.Name;
-
-        public void Set(int sportId)
-        {
-            SportId = sportId;
-        }
+    public void Set(int sportId)
+    {
+        SportId = sportId;
     }
 }

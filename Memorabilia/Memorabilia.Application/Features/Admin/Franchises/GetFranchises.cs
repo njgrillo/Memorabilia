@@ -1,22 +1,23 @@
-﻿namespace Memorabilia.Application.Features.Admin.Franchises
+﻿using Memorabilia.Domain.Entities;
+
+namespace Memorabilia.Application.Features.Admin.Franchises;
+
+public class GetFranchises
 {
-    public class GetFranchises
+    public class Handler : QueryHandler<Query, FranchisesViewModel>
     {
-        public class Handler : QueryHandler<Query, FranchisesViewModel>
+        private readonly IDomainRepository<Franchise> _franchiseRepository;
+
+        public Handler(IDomainRepository<Franchise> franchiseRepository)
         {
-            private readonly IFranchiseRepository _franchiseRepository;
-
-            public Handler(IFranchiseRepository franchiseRepository)
-            {
-                _franchiseRepository = franchiseRepository;
-            }
-
-            protected override async Task<FranchisesViewModel> Handle(Query query)
-            {
-                return new FranchisesViewModel(await _franchiseRepository.GetAll().ConfigureAwait(false));
-            }
+            _franchiseRepository = franchiseRepository;
         }
 
-        public class Query : IQuery<FranchisesViewModel> { }
+        protected override async Task<FranchisesViewModel> Handle(Query query)
+        {
+            return new FranchisesViewModel(await _franchiseRepository.GetAll());
+        }
     }
+
+    public class Query : IQuery<FranchisesViewModel> { }
 }

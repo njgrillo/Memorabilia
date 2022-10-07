@@ -1,17 +1,17 @@
-﻿using Memorabilia.Domain.Entities;
+﻿using Memorabilia.Domain.Constants;
+using Memorabilia.Domain.Entities;
 
-namespace Memorabilia.Application.Features.Admin.JerseyQualityTypes
+namespace Memorabilia.Application.Features.Admin.JerseyQualityTypes;
+
+public class JerseyQualityTypesViewModel : DomainsViewModel
 {
-    public class JerseyQualityTypesViewModel : DomainsViewModel
-    {
-        public JerseyQualityTypesViewModel() { }
+    public JerseyQualityTypesViewModel() { }
 
-        public JerseyQualityTypesViewModel(IEnumerable<DomainEntity> domainEntities) : base(domainEntities) { }
+    public JerseyQualityTypesViewModel(IEnumerable<DomainEntity> domainEntities) : base(domainEntities) { }
 
-        public override string ItemTitle => "Jersey Quality Type";
+    public override string ItemTitle => AdminDomainItem.JerseyQualityTypes.Item;
 
-        public override string PageTitle => "Jersey Quality Types";
+    public override string PageTitle => AdminDomainItem.JerseyQualityTypes.Title;
 
-        public override string RoutePrefix => "JerseyQualityTypes";
-    }
+    public override string RoutePrefix => AdminDomainItem.JerseyQualityTypes.Page;
 }

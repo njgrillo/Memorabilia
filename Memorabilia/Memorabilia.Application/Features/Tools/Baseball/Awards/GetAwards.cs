@@ -1,30 +1,33 @@
-﻿namespace Memorabilia.Application.Features.Tools.Baseball.Awards
+﻿namespace Memorabilia.Application.Features.Tools.Baseball.Awards;
+
+public class GetAwards
 {
-    public class GetAwards
+    public class Handler : QueryHandler<Query, AwardsViewModel>
     {
-        public class Handler : QueryHandler<Query, AwardsViewModel>
+        private readonly IPersonAwardRepository _personAwardRepository;
+
+        public Handler(IPersonAwardRepository personAwardRepository)
         {
-            private readonly IPersonAwardRepository _personAwardRepository;
-
-            public Handler(IPersonAwardRepository personAwardRepository)
-            {
-                _personAwardRepository = personAwardRepository;
-            }
-
-            protected override async Task<AwardsViewModel> Handle(Query query)
-            {
-                return new AwardsViewModel(await _personAwardRepository.GetAll(query.AwardTypeId).ConfigureAwait(false));
-            }
+            _personAwardRepository = personAwardRepository;
         }
 
-        public class Query : IQuery<AwardsViewModel>
+        protected override async Task<AwardsViewModel> Handle(Query query)
         {
-            public Query(int awardTypeId)
-            {
-                AwardTypeId = awardTypeId;
-            }
+            var personAwards = (await _personAwardRepository.GetAll(query.AwardTypeId))
+                                        .OrderByDescending(personAward => personAward.Year)
+                                        .ThenBy(personAward => personAward.Person.DisplayName);
 
-            public int AwardTypeId { get; }
+            return new AwardsViewModel(personAwards);
         }
+    }
+
+    public class Query : IQuery<AwardsViewModel>
+    {
+        public Query(int awardTypeId)
+        {
+            AwardTypeId = awardTypeId;
+        }
+
+        public int AwardTypeId { get; }
     }
 }

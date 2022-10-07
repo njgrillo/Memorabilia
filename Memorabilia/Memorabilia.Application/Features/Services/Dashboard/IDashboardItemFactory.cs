@@ -1,7 +1,6 @@
-﻿namespace Memorabilia.Application.Features.Services.Dashboard
+﻿namespace Memorabilia.Application.Features.Services.Dashboard;
+
+public interface IDashboardItemFactory 
 {
-    public interface IDashboardItemFactory 
-    {
-        List<IDashboardItemRule> Rules { get; }
-    }
+    List<IDashboardItemRule> Rules { get; }
 }

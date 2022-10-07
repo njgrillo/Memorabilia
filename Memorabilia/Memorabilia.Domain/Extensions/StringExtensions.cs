@@ -1,56 +1,60 @@
-﻿namespace Memorabilia.Domain.Extensions
+﻿namespace Memorabilia.Domain.Extensions;
+
+public static class StringExtensions
 {
-    public static class StringExtensions
+    public static int[] ToIntArray(this string value)
     {
-        public static int[] ToIntArray(this string value)
+        var results = new List<int>();
+
+        if (value.IndexOf(",") > -1)
         {
-            var results = new List<int>();
+            var items = value.Split(',');
 
-            if (value.IndexOf(",") > -1)
+            foreach (var item in items)
             {
-                var items = value.Split(',');
-
-                foreach (var item in items)
+                if (item.IndexOf("-") > -1)
                 {
-                    if (item.IndexOf("-") > -1)
-                    {
-                        results.AddRange(SplitByHyphen(item));
-                    }
-                    else
-                    {
-                        results.Add(item.Trim().ToInt32());
-                    }
-                }
-            }
-            else
-            {
-                if (value.IndexOf("-") > -1)
-                {
-                    results.AddRange(SplitByHyphen(value));
+                    results.AddRange(SplitByHyphen(item));
                 }
                 else
                 {
-                    results.Add(value.Trim().ToInt32());
+                    results.Add(item.Trim().ToInt32());
                 }
             }
-
-            return results.ToArray();
         }
-
-        private static int[] SplitByHyphen(string value)
+        else
         {
-            var results = new List<int>();
-            var range = value.Split("-");
-            var startYear = range[0].Trim().ToInt32();
-            var endYear = range[1].Trim().ToInt32();
-            var length = endYear - startYear + 1;
-
-            foreach (var rangeItem in Enumerable.Range(startYear, length))
+            if (value.IndexOf("-") > -1)
             {
-                results.Add(rangeItem);
+                results.AddRange(SplitByHyphen(value));
             }
-
-            return results.ToArray();
+            else
+            {
+                results.Add(value.Trim().ToInt32());
+            }
         }
+
+        return results.ToArray();
+    }
+
+    public static string ToSentence(this string value)
+    {
+        return new string(value.SelectMany((c, i) => i > 0 && char.IsUpper(c) ? new[] { ' ', c } : new[] { c }).ToArray());
+    }
+
+    private static int[] SplitByHyphen(string value)
+    {
+        var results = new List<int>();
+        var range = value.Split("-");
+        var startYear = range[0].Trim().ToInt32();
+        var endYear = range[1].Trim().ToInt32();
+        var length = endYear - startYear + 1;
+
+        foreach (var rangeItem in Enumerable.Range(startYear, length))
+        {
+            results.Add(rangeItem);
+        }
+
+        return results.ToArray();
     }
 }

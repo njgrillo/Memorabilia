@@ -1,22 +1,21 @@
 ﻿using Memorabilia.Domain.Constants;
 
-namespace Memorabilia.Application.Features.Services.Dashboard
+namespace Memorabilia.Application.Features.Services.Dashboard;
+
+public class SpotChartRule : DashboardItemRule, IDashboardItemRule
 {
-    public class SpotChartRule : DashboardItemRule, IDashboardItemRule
+    public override DashboardItem DashboardItem { get; set; }
+
+    public bool Applies(DashboardItem dashboardItem)
     {
-        public override DashboardItem DashboardItem { get; set; }
+        DashboardItem = dashboardItem;
 
-        public bool Applies(DashboardItem dashboardItem)
-        {
-            DashboardItem = dashboardItem;
+        return dashboardItem == DashboardItem.SpotDonutChart ||
+               dashboardItem == DashboardItem.SpotPieChart;
+    }
 
-            return dashboardItem == DashboardItem.SpotDonutChart ||
-                   dashboardItem == DashboardItem.SpotPieChart;
-        }
-
-        public DashboardItemViewModel Get(IEnumerable<Domain.Entities.Memorabilia> memorabiliaItems)
-        {
-            return new SpotChartViewModel(DashboardItem, memorabiliaItems);
-        }
+    public DashboardItemViewModel Get(IEnumerable<Domain.Entities.Memorabilia> memorabiliaItems)
+    {
+        return new SpotChartViewModel(DashboardItem, memorabiliaItems);
     }
 }

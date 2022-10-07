@@ -1,12 +1,11 @@
-﻿namespace Memorabilia.Application.Features.Memorabilia
-{
-    public abstract class MemorabiliaQuery
-    {
-        protected MemorabiliaQuery(int memorabiliaId)
-        {
-            MemorabiliaId = memorabiliaId;
-        }
+﻿namespace Memorabilia.Application.Features.Memorabilia;
 
-        public virtual int MemorabiliaId { get; }
+public abstract class MemorabiliaQuery
+{
+    protected MemorabiliaQuery(int memorabiliaId)
+    {
+        MemorabiliaId = memorabiliaId;
     }
+
+    public virtual int MemorabiliaId { get; }
 }

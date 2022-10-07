@@ -1,30 +1,33 @@
-﻿namespace Memorabilia.Application.Features.Admin.Commissioners
+﻿namespace Memorabilia.Application.Features.Admin.Commissioners;
+
+public class GetCommissioners : ViewModel
 {
-    public class GetCommissioners : ViewModel
+    public class Handler : QueryHandler<Query, CommissionersViewModel>
     {
-        public class Handler : QueryHandler<Query, CommissionersViewModel>
+        private readonly ICommissionerRepository _commissionerRepository;
+
+        public Handler(ICommissionerRepository commissionerRepository)
         {
-            private readonly ICommissionerRepository _commissionerRepository;
-
-            public Handler(ICommissionerRepository commissionerRepository)
-            {
-                _commissionerRepository = commissionerRepository;
-            }
-
-            protected override async Task<CommissionersViewModel> Handle(Query query)
-            {
-                return new CommissionersViewModel(await _commissionerRepository.GetAll(query.SportId).ConfigureAwait(false));
-            }
+            _commissionerRepository = commissionerRepository;
         }
 
-        public class Query : IQuery<CommissionersViewModel>
+        protected override async Task<CommissionersViewModel> Handle(Query query)
         {
-            public Query(int? sportId = null)
-            {
-                SportId = sportId;
-            }
+            var commissioners = (await _commissionerRepository.GetAll(query.SportId))
+                                            .OrderBy(commissioner => commissioner.SportLeagueLevelName)
+                                            .ThenByDescending(commissioner => commissioner.BeginYear);
 
-            public int? SportId { get; }
+            return new CommissionersViewModel(commissioners);
         }
+    }
+
+    public class Query : IQuery<CommissionersViewModel>
+    {
+        public Query(int? sportId = null)
+        {
+            SportId = sportId;
+        }
+
+        public int? SportId { get; }
     }
 }

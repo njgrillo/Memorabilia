@@ -1,55 +1,43 @@
-﻿namespace Memorabilia.Domain.Constants
+﻿namespace Memorabilia.Domain.Constants;
+
+public sealed class SportLeagueLevel : DomainItemConstant
 {
-    public sealed class SportLeagueLevel
+    public static readonly SportLeagueLevel MajorLeagueBaseball = new(1, "Major League Baseball", "MLB");
+    public static readonly SportLeagueLevel NationalFootballLeague = new(2, "National Football League", "NFL");
+    public static readonly SportLeagueLevel NationalBasketballAssociation = new(3, "National Basketball Association", "NBA");
+    public static readonly SportLeagueLevel NationalHockeyLeague = new(4, "National Hockey League", "NHL");
+
+    public static readonly SportLeagueLevel[] All =
     {
-        public static readonly SportLeagueLevel MajorLeagueBaseball = new(1, "Major League Baseball", "MLB");
-        public static readonly SportLeagueLevel NationalFootballLeague = new(2, "National Football League", "NFL");
-        public static readonly SportLeagueLevel NationalBasketballAssociation = new(3, "National Basketball Association", "NBA");
-        public static readonly SportLeagueLevel NationalHockeyLeague = new(4, "National Hockey League", "NHL");
+        MajorLeagueBaseball,
+        NationalFootballLeague,
+        NationalBasketballAssociation,
+        NationalHockeyLeague
+    };
 
-        public static readonly SportLeagueLevel[] All =
-        {
-            MajorLeagueBaseball,
-            NationalFootballLeague,
-            NationalBasketballAssociation,
-            NationalHockeyLeague
-        };
+    private SportLeagueLevel(int id, string name, string abbreviation) : base(id, name, abbreviation) { }
 
-        public string Abbreviation { get; }
+    public static SportLeagueLevel Find(int id)
+    {
+        return All.SingleOrDefault(sportLeagueLevel => sportLeagueLevel.Id == id);
+    }
 
-        public int Id { get; }
+    public static SportLeagueLevel[] GetAll(params int[] sportIds)
+    {
+        var sportLeagueLevels = new List<SportLeagueLevel>();
 
-        public string Name { get; }
+        if (sportIds.Contains(Sport.Baseball.Id))
+            sportLeagueLevels.Add(MajorLeagueBaseball);
 
-        private SportLeagueLevel(int id, string name, string abbreviation)
-        {
-            Id = id;
-            Name = name;
-            Abbreviation = abbreviation;
-        }
+        if (sportIds.Contains(Sport.Basketball.Id))
+            sportLeagueLevels.Add(NationalBasketballAssociation);
 
-        public static SportLeagueLevel Find(int id)
-        {
-            return All.SingleOrDefault(sportLeagueLevel => sportLeagueLevel.Id == id);
-        }
+        if (sportIds.Contains(Sport.Football.Id))
+            sportLeagueLevels.Add(NationalFootballLeague);
 
-        public static SportLeagueLevel[] GetAll(params int[] sportIds)
-        {
-            var sportLeagueLevels = new List<SportLeagueLevel>();
+        if (sportIds.Contains(Sport.Hockey.Id))
+            sportLeagueLevels.Add(NationalHockeyLeague);
 
-            if (sportIds.Contains(Sport.Baseball.Id))
-                sportLeagueLevels.Add(MajorLeagueBaseball);
-
-            if (sportIds.Contains(Sport.Basketball.Id))
-                sportLeagueLevels.Add(NationalBasketballAssociation);
-
-            if (sportIds.Contains(Sport.Football.Id))
-                sportLeagueLevels.Add(NationalFootballLeague);
-
-            if (sportIds.Contains(Sport.Hockey.Id))
-                sportLeagueLevels.Add(NationalHockeyLeague);
-
-            return sportLeagueLevels.OrderBy(sportLeagueLevel => sportLeagueLevel.Name).ToArray();
-        }
+        return sportLeagueLevels.OrderBy(sportLeagueLevel => sportLeagueLevel.Name).ToArray();
     }
 }

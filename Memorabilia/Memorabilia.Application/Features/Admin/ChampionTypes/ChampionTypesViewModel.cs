@@ -1,17 +1,17 @@
-﻿using Memorabilia.Domain.Entities;
+﻿using Memorabilia.Domain.Constants;
+using Memorabilia.Domain.Entities;
 
-namespace Memorabilia.Application.Features.Admin.ChampionTypes
+namespace Memorabilia.Application.Features.Admin.ChampionTypes;
+
+public class ChampionTypesViewModel : DomainsViewModel
 {
-    public class ChampionTypesViewModel : DomainsViewModel
-    {
-        public ChampionTypesViewModel() { }
+    public ChampionTypesViewModel() { }
 
-        public ChampionTypesViewModel(IEnumerable<DomainEntity> domainEntities) : base(domainEntities) { }
+    public ChampionTypesViewModel(IEnumerable<DomainEntity> domainEntities) : base(domainEntities) { }
 
-        public override string ItemTitle => "Champion Type";
+    public override string ItemTitle => AdminDomainItem.ChampionTypes.Item;
 
-        public override string PageTitle => "Champion Types";
+    public override string PageTitle => AdminDomainItem.ChampionTypes.Title;
 
-        public override string RoutePrefix => "ChampionTypes";
-    }
+    public override string RoutePrefix => AdminDomainItem.ChampionTypes.Page;
 }

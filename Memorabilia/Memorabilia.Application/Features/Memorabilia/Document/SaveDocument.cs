@@ -1,44 +1,43 @@
-﻿namespace Memorabilia.Application.Features.Memorabilia.Document
+﻿namespace Memorabilia.Application.Features.Memorabilia.Document;
+
+public class SaveDocument
 {
-    public class SaveDocument
+    public class Handler : CommandHandler<Command>
     {
-        public class Handler : CommandHandler<Command>
+        private readonly IMemorabiliaItemRepository _memorabiliaRepository;
+
+        public Handler(IMemorabiliaItemRepository memorabiliaRepository)
         {
-            private readonly IMemorabiliaRepository _memorabiliaRepository;
-
-            public Handler(IMemorabiliaRepository memorabiliaRepository)
-            {
-                _memorabiliaRepository = memorabiliaRepository;
-            }
-
-            protected override async Task Handle(Command command)
-            {
-                var memorabilia = await _memorabiliaRepository.Get(command.MemorabiliaId).ConfigureAwait(false);
-
-                memorabilia.SetDocument(command.PersonIds,
-                                        command.SizeId,
-                                        command.TeamIds);
-
-                await _memorabiliaRepository.Update(memorabilia).ConfigureAwait(false);
-            }
+            _memorabiliaRepository = memorabiliaRepository;
         }
 
-        public class Command : DomainCommand, ICommand
+        protected override async Task Handle(Command command)
         {
-            private readonly SaveDocumentViewModel _viewModel;
+            var memorabilia = await _memorabiliaRepository.Get(command.MemorabiliaId);
 
-            public Command(SaveDocumentViewModel viewModel)
-            {
-                _viewModel = viewModel;
-            }
+            memorabilia.SetDocument(command.PersonIds,
+                                    command.SizeId,
+                                    command.TeamIds);
 
-            public int MemorabiliaId => _viewModel.MemorabiliaId;
-
-            public int[] PersonIds => _viewModel.People.Select(person => person.Id).ToArray();
-
-            public int SizeId => _viewModel.SizeId;
-
-            public int[] TeamIds => _viewModel.Teams.Select(team => team.Id).ToArray();
+            await _memorabiliaRepository.Update(memorabilia);
         }
+    }
+
+    public class Command : DomainCommand, ICommand
+    {
+        private readonly SaveDocumentViewModel _viewModel;
+
+        public Command(SaveDocumentViewModel viewModel)
+        {
+            _viewModel = viewModel;
+        }
+
+        public int MemorabiliaId => _viewModel.MemorabiliaId;
+
+        public int[] PersonIds => _viewModel.People.Select(person => person.Id).ToArray();
+
+        public int SizeId => _viewModel.SizeId;
+
+        public int[] TeamIds => _viewModel.Teams.Select(team => team.Id).ToArray();
     }
 }

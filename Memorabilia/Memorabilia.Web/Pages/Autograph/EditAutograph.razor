@@ -1,4 +1,9 @@
 ﻿@page "/Autographs/Edit/{memorabiliaId:int}"
 @page "/Autographs/Edit/{memorabiliaId:int}/{autographId:int}"
 
-<Memorabilia.Blazor.Pages.Autograph.EditAutograph AutographId="@AutographId" MemorabiliaId="@MemorabiliaId" />
+<WebPage>
+    <Content>
+        <AutographEditor AutographId="@AutographId" 
+                         MemorabiliaId="@MemorabiliaId" />
+    </Content>
+</WebPage>

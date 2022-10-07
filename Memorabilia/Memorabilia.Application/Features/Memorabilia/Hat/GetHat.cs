@@ -1,25 +1,24 @@
-﻿namespace Memorabilia.Application.Features.Memorabilia.Hat
+﻿namespace Memorabilia.Application.Features.Memorabilia.Hat;
+
+public class GetHat
 {
-    public class GetHat
+    public class Handler : QueryHandler<Query, HatViewModel>
     {
-        public class Handler : QueryHandler<Query, HatViewModel>
+        private readonly IMemorabiliaItemRepository _memorabiliaRepository;
+
+        public Handler(IMemorabiliaItemRepository memorabiliaRepository)
         {
-            private readonly IMemorabiliaRepository _memorabiliaRepository;
-
-            public Handler(IMemorabiliaRepository memorabiliaRepository)
-            {
-                _memorabiliaRepository = memorabiliaRepository;
-            }
-
-            protected override async Task<HatViewModel> Handle(Query query)
-            {
-                return new HatViewModel(await _memorabiliaRepository.Get(query.MemorabiliaId).ConfigureAwait(false));
-            }
+            _memorabiliaRepository = memorabiliaRepository;
         }
 
-        public class Query : MemorabiliaQuery, IQuery<HatViewModel>
+        protected override async Task<HatViewModel> Handle(Query query)
         {
-            public Query(int memorabiliaId) : base(memorabiliaId) { }
+            return new HatViewModel(await _memorabiliaRepository.Get(query.MemorabiliaId));
         }
+    }
+
+    public class Query : MemorabiliaQuery, IQuery<HatViewModel>
+    {
+        public Query(int memorabiliaId) : base(memorabiliaId) { }
     }
 }

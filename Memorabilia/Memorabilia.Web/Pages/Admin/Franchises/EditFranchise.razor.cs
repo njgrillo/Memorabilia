@@ -16,7 +16,7 @@ namespace Memorabilia.Web.Pages.Admin.Franchises
         [Parameter]
         public int Id { get; set; }
 
-        private bool _displaySportLeageLevel;
+        private bool _displaySportLeagueLevel;
         private SaveFranchiseViewModel _viewModel = new ();
 
         protected async Task HandleValidSubmit()
@@ -28,7 +28,7 @@ namespace Memorabilia.Web.Pages.Admin.Franchises
         {
             if (Id == 0)
             {
-                _displaySportLeageLevel = true;
+                _displaySportLeagueLevel = true;
                 return;
             }
 

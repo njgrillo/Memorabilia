@@ -1,42 +1,39 @@
 ﻿using Memorabilia.Domain.Constants;
 
-namespace Memorabilia.Application.Features.Admin.Teams
+namespace Memorabilia.Application.Features.Admin.Teams;
+
+public class SaveTeamChampionshipsViewModel : SaveViewModel
 {
-    public class SaveTeamChampionshipsViewModel : SaveViewModel
+    public SaveTeamChampionshipsViewModel() { }
+
+    public SaveTeamChampionshipsViewModel(int teamId)
     {
-        public SaveTeamChampionshipsViewModel() { }
-
-        public SaveTeamChampionshipsViewModel(int teamId)
-        {
-            TeamId = teamId;
-        }
-
-        public SaveTeamChampionshipsViewModel(int teamId, List<SaveTeamChampionshipViewModel> championships)
-        {
-            TeamId = teamId;
-            Championships = championships;
-        }
-
-        public override string BackNavigationPath => $"Team/Leage/Edit/{TeamId}/{SportLeagueLevel?.Id}";
-
-        public bool CanHaveConference => SportLeagueLevel != Domain.Constants.SportLeagueLevel.MajorLeagueBaseball;
-
-        public List<SaveTeamChampionshipViewModel> Championships { get; set; } = new();
-
-        public override string ContinueNavigationPath => "Teams";
-
-        public override EditModeType EditModeType => Championships.Any() ? EditModeType.Update : EditModeType.Add;
-
-        public override string ExitNavigationPath => "Admin/EditDomainItems";
-
-        public string ImagePath => "images/championtypes.jpg";
-
-        public override string PageTitle => $"{(EditModeType == EditModeType.Update ? "Edit" : "Add")} Championships";
-
-        public Domain.Constants.SportLeagueLevel SportLeagueLevel { get; set; }
-
-        public int TeamId { get; set; }
-
-        public TeamStep TeamStep => TeamStep.Championship;
+        TeamId = teamId;
     }
+
+    public SaveTeamChampionshipsViewModel(int teamId, List<SaveTeamChampionshipViewModel> championships)
+    {
+        TeamId = teamId;
+        Championships = championships;
+    }
+
+    public override string BackNavigationPath => $"{AdminDomainItem.Teams.Item}/{AdminDomainItem.Leagues.Item}/{EditModeType.Update.Name}/{TeamId}/{SportLeagueLevel?.Id}";
+
+    public bool CanHaveConference => SportLeagueLevel != Domain.Constants.SportLeagueLevel.MajorLeagueBaseball;
+
+    public List<SaveTeamChampionshipViewModel> Championships { get; set; } = new();
+
+    public override string ContinueNavigationPath => AdminDomainItem.Teams.Page;
+
+    public override EditModeType EditModeType => Championships.Any() ? EditModeType.Update : EditModeType.Add;
+
+    public string ImagePath => Domain.Constants.ImagePath.ChampionshipTypes;
+
+    public override string PageTitle => $"{(EditModeType == EditModeType.Update ? EditModeType.Update.Name : EditModeType.Add.Name)} Championships";
+
+    public Domain.Constants.SportLeagueLevel SportLeagueLevel { get; set; }
+
+    public int TeamId { get; set; }
+
+    public TeamStep TeamStep => TeamStep.Championship;
 }

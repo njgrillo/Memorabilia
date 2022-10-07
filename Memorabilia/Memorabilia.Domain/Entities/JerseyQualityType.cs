@@ -1,9 +1,8 @@
-﻿namespace Memorabilia.Domain.Entities
-{
-    public class JerseyQualityType : DomainEntity
-    {
-        public JerseyQualityType() { }
+﻿namespace Memorabilia.Domain.Entities;
 
-        public JerseyQualityType(string name, string abbreviation) : base(name, abbreviation) { }
-    }
+public class JerseyQualityType : DomainEntity
+{
+    public JerseyQualityType() { }
+
+    public JerseyQualityType(string name, string abbreviation) : base(name, abbreviation) { }
 }

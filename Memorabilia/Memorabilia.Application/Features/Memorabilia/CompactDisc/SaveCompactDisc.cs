@@ -1,38 +1,37 @@
-﻿namespace Memorabilia.Application.Features.Memorabilia.CompactDisc
+﻿namespace Memorabilia.Application.Features.Memorabilia.CompactDisc;
+
+public class SaveCompactDisc
 {
-    public class SaveCompactDisc
+    public class Handler : CommandHandler<Command>
     {
-        public class Handler : CommandHandler<Command>
+        private readonly IMemorabiliaItemRepository _memorabiliaRepository;
+
+        public Handler(IMemorabiliaItemRepository memorabiliaRepository)
         {
-            private readonly IMemorabiliaRepository _memorabiliaRepository;
-
-            public Handler(IMemorabiliaRepository memorabiliaRepository)
-            {
-                _memorabiliaRepository = memorabiliaRepository;
-            }
-
-            protected override async Task Handle(Command command)
-            {
-                var memorabilia = await _memorabiliaRepository.Get(command.MemorabiliaId).ConfigureAwait(false);
-
-                memorabilia.SetCompactDisc(command.PersonIds);
-
-                await _memorabiliaRepository.Update(memorabilia).ConfigureAwait(false);
-            }
+            _memorabiliaRepository = memorabiliaRepository;
         }
 
-        public class Command : DomainCommand, ICommand
+        protected override async Task Handle(Command command)
         {
-            private readonly SaveCompactDiscViewModel _viewModel;
+            var memorabilia = await _memorabiliaRepository.Get(command.MemorabiliaId);
 
-            public Command(SaveCompactDiscViewModel viewModel)
-            {
-                _viewModel = viewModel;
-            }
+            memorabilia.SetCompactDisc(command.PersonIds);
 
-            public int MemorabiliaId => _viewModel.MemorabiliaId;
-
-            public int[] PersonIds => _viewModel.People.Select(person => person.Id).ToArray();
+            await _memorabiliaRepository.Update(memorabilia);
         }
+    }
+
+    public class Command : DomainCommand, ICommand
+    {
+        private readonly SaveCompactDiscViewModel _viewModel;
+
+        public Command(SaveCompactDiscViewModel viewModel)
+        {
+            _viewModel = viewModel;
+        }
+
+        public int MemorabiliaId => _viewModel.MemorabiliaId;
+
+        public int[] PersonIds => _viewModel.People.Select(person => person.Id).ToArray();
     }
 }

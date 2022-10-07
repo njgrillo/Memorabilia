@@ -1,20 +1,19 @@
 ﻿using Memorabilia.Domain.Constants;
 
-namespace Memorabilia.Application.Features.Memorabilia
-{
-    public class SaveItemViewModel : SaveViewModel
-    {   
-        public override string ContinueNavigationPath => $"Memorabilia/Image/Edit/{MemorabiliaId}";       
+namespace Memorabilia.Application.Features.Memorabilia;
 
-        public virtual string ImagePath { get; set; }
+public class SaveItemViewModel : SaveViewModel
+{   
+    public override string ContinueNavigationPath => $"Memorabilia/Image/{EditModeType.Update.Name}/{MemorabiliaId}";       
 
-        public virtual ItemType ItemType { get; set; }
+    public virtual string ImagePath { get; set; }
 
-        [Required]
-        public int MemorabiliaId { get; set; }
+    public virtual ItemType ItemType { get; set; }
 
-        public MemorabiliaItemStep MemorabiliaItemStep => MemorabiliaItemStep.Detail;
+    [Required]
+    public int MemorabiliaId { get; set; }
 
-        public override string PageTitle => $"{(EditModeType == EditModeType.Update ? "Edit" : "Add")} {ItemType?.Name} Details";
-    }
+    public MemorabiliaItemStep MemorabiliaItemStep => MemorabiliaItemStep.Detail;
+
+    public override string PageTitle => $"{(EditModeType == EditModeType.Update ? EditModeType.Update.Name : EditModeType.Add.Name)} {ItemType?.Name} Details";
 }

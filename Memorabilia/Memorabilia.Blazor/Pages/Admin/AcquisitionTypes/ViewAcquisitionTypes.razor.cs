@@ -1,25 +1,16 @@
 ﻿#nullable disable
 
-namespace Memorabilia.Blazor.Pages.Admin.AcquisitionTypes
+namespace Memorabilia.Blazor.Pages.Admin.AcquisitionTypes;
+
+public partial class ViewAcquisitionTypes : ViewDomainItem<AcquisitionTypesViewModel>, IDeleteDomainItem, IViewDomainItem
 {
-    public partial class ViewAcquisitionTypes : ComponentBase
+    public async Task OnDelete(SaveDomainViewModel viewModel)
     {
-        [Inject]
-        public CommandRouter CommandRouter { get; set; }
+        await OnDelete(new SaveAcquisitionType.Command(viewModel));
+    }
 
-        [Inject]
-        public QueryRouter QueryRouter { get; set; }
-
-        private AcquisitionTypesViewModel _viewModel;
-
-        protected async Task OnDelete(SaveDomainViewModel viewModel)
-        {
-            await CommandRouter.Send(new SaveAcquisitionType.Command(viewModel)).ConfigureAwait(false);
-        }
-
-        protected async Task OnLoad()
-        {
-            _viewModel = await QueryRouter.Send(new GetAcquisitionTypes.Query()).ConfigureAwait(false);
-        }
+    public async Task OnLoad()
+    {
+        await OnLoad(new GetAcquisitionTypes.Query());
     }
 }

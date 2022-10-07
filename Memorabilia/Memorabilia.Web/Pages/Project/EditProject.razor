@@ -1,4 +1,10 @@
 ﻿@page "/Projects/Edit"
 @page "/Projects/Edit/{id:int}"
 
-<Memorabilia.Blazor.Pages.Project.EditProject Id="@Id" />
+<WebPage>
+    <Content>
+        <ProjectEditor Id="@Id" 
+                       UserId="@UserId" />
+    </Content>
+</WebPage>
+

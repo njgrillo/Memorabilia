@@ -1,30 +1,29 @@
-﻿namespace Memorabilia.Application.Features.Memorabilia
+﻿namespace Memorabilia.Application.Features.Memorabilia;
+
+public class GetMemorabiliaItems
 {
-    public class GetMemorabiliaItems
+    public class Handler : QueryHandler<Query, MemorabiliaItemsViewModel>
     {
-        public class Handler : QueryHandler<Query, MemorabiliaItemsViewModel>
+        private readonly IMemorabiliaItemRepository _memorabiliaRepository;
+
+        public Handler(IMemorabiliaItemRepository memorabiliaRepository)
         {
-            private readonly IMemorabiliaRepository _memorabiliaRepository;
-
-            public Handler(IMemorabiliaRepository memorabiliaRepository)
-            {
-                _memorabiliaRepository = memorabiliaRepository;
-            }
-
-            protected override async Task<MemorabiliaItemsViewModel> Handle(Query query)
-            {
-                return new MemorabiliaItemsViewModel(await _memorabiliaRepository.GetAll(query.UserId).ConfigureAwait(false));
-            }
+            _memorabiliaRepository = memorabiliaRepository;
         }
 
-        public class Query : IQuery<MemorabiliaItemsViewModel>
+        protected override async Task<MemorabiliaItemsViewModel> Handle(Query query)
         {
-            public Query(int userId)
-            {
-                UserId = userId;
-            }
-
-            public int UserId { get; }
+            return new MemorabiliaItemsViewModel(await _memorabiliaRepository.GetAll(query.UserId));
         }
+    }
+
+    public class Query : IQuery<MemorabiliaItemsViewModel>
+    {
+        public Query(int userId)
+        {
+            UserId = userId;
+        }
+
+        public int UserId { get; }
     }
 }

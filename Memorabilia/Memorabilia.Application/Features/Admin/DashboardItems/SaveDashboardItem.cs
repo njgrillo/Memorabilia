@@ -1,66 +1,65 @@
 ﻿using Memorabilia.Domain.Entities;
 
-namespace Memorabilia.Application.Features.Admin.DashboardItems
+namespace Memorabilia.Application.Features.Admin.DashboardItems;
+
+public class SaveDashboardItem
 {
-    public class SaveDashboardItem
+    public class Handler : CommandHandler<Command>
     {
-        public class Handler : CommandHandler<Command>
+        private readonly IDomainRepository<DashboardItem> _dashboardItemRepository;
+
+        public Handler(IDomainRepository<DashboardItem> dashboardItemRepository)
         {
-            private readonly IDashboardItemRepository _dashboardItemRepository;
-
-            public Handler(IDashboardItemRepository dashboardItemRepository)
-            {
-                _dashboardItemRepository = dashboardItemRepository;
-            }
-
-            protected override async Task Handle(Command command)
-            {
-                DashboardItem dashboardItem;
-
-                if (command.IsNew)
-                {
-                    dashboardItem = new DashboardItem(command.Name, command.Description);
-
-                    await _dashboardItemRepository.Add(dashboardItem).ConfigureAwait(false);
-
-                    return;
-                }
-
-                dashboardItem = await _dashboardItemRepository.Get(command.Id).ConfigureAwait(false);
-
-                if (command.IsDeleted)
-                {
-                    await _dashboardItemRepository.Delete(dashboardItem).ConfigureAwait(false);
-
-                    return;
-                }
-
-                dashboardItem.Set(command.Name, command.Description);
-
-                await _dashboardItemRepository.Update(dashboardItem).ConfigureAwait(false);
-            }
+            _dashboardItemRepository = dashboardItemRepository;
         }
 
-        public class Command : DomainCommand, ICommand
+        protected override async Task Handle(Command command)
         {
-            private readonly SaveDashboardItemViewModel _viewModel;
+            DashboardItem dashboardItem;
 
-            public Command(SaveDashboardItemViewModel viewModel)
+            if (command.IsNew)
             {
-                _viewModel = viewModel;
+                dashboardItem = new DashboardItem(command.Name, command.Description);
+
+                await _dashboardItemRepository.Add(dashboardItem);
+
+                return;
             }
 
-            public string Description => _viewModel.Description;
+            dashboardItem = await _dashboardItemRepository.Get(command.Id);
 
-            public int Id => _viewModel.Id;
+            if (command.IsDeleted)
+            {
+                await _dashboardItemRepository.Delete(dashboardItem);
 
-            public bool IsDeleted => _viewModel.IsDeleted;
+                return;
+            }
 
-            public bool IsModified => _viewModel.IsModified;
+            dashboardItem.Set(command.Name, command.Description);
 
-            public bool IsNew => _viewModel.IsNew;
-
-            public string Name => _viewModel.Name;
+            await _dashboardItemRepository.Update(dashboardItem);
         }
+    }
+
+    public class Command : DomainCommand, ICommand
+    {
+        private readonly SaveDashboardItemViewModel _viewModel;
+
+        public Command(SaveDashboardItemViewModel viewModel)
+        {
+            _viewModel = viewModel;
+        }
+
+        public string Description => _viewModel.Description;
+
+        public int Id => _viewModel.Id;
+
+        public bool IsDeleted => _viewModel.IsDeleted;
+
+        public bool IsModified => _viewModel.IsModified;
+
+        public bool IsNew => _viewModel.IsNew;
+
+        public string Name => _viewModel.Name;
     }
 }

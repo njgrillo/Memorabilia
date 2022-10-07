@@ -1,22 +1,23 @@
-﻿namespace Memorabilia.Application.Features.Admin.LevelTypes
+﻿using Memorabilia.Domain.Entities;
+
+namespace Memorabilia.Application.Features.Admin.LevelTypes;
+
+public class GetLevelTypes
 {
-    public class GetLevelTypes
+    public class Handler : QueryHandler<Query, LevelTypesViewModel>
     {
-        public class Handler : QueryHandler<Query, LevelTypesViewModel>
+        private readonly IDomainRepository<LevelType> _levelTypeRepository;
+
+        public Handler(IDomainRepository<LevelType> levelTypeRepository)
         {
-            private readonly ILevelTypeRepository _levelTypeRepository;
-
-            public Handler(ILevelTypeRepository levelTypeRepository)
-            {
-                _levelTypeRepository = levelTypeRepository;
-            }
-
-            protected override async Task<LevelTypesViewModel> Handle(Query query)
-            {
-                return new LevelTypesViewModel(await _levelTypeRepository.GetAll().ConfigureAwait(false));
-            }
+            _levelTypeRepository = levelTypeRepository;
         }
 
-        public class Query : IQuery<LevelTypesViewModel> { }
+        protected override async Task<LevelTypesViewModel> Handle(Query query)
+        {
+            return new LevelTypesViewModel(await _levelTypeRepository.GetAll());
+        }
     }
+
+    public class Query : IQuery<LevelTypesViewModel> { }
 }

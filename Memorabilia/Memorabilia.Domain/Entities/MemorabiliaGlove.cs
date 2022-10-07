@@ -1,22 +1,21 @@
-﻿namespace Memorabilia.Domain.Entities
+﻿namespace Memorabilia.Domain.Entities;
+
+public class MemorabiliaGlove : Framework.Library.Domain.Entity.DomainEntity
 {
-    public class MemorabiliaGlove : Framework.Library.Domain.Entity.DomainEntity
+    public MemorabiliaGlove() { }
+
+    public MemorabiliaGlove(int memorabiliaId, int gloveTypeId)
     {
-        public MemorabiliaGlove() { }
+        MemorabiliaId = memorabiliaId;
+        GloveTypeId = gloveTypeId;
+    }
 
-        public MemorabiliaGlove(int memorabiliaId, int gloveTypeId)
-        {
-            MemorabiliaId = memorabiliaId;
-            GloveTypeId = gloveTypeId;
-        }
+    public int GloveTypeId { get; private set; }
 
-        public int GloveTypeId { get; private set; }
+    public int MemorabiliaId { get; private set; }
 
-        public int MemorabiliaId { get; private set; }
-
-        public void Set(int gloveTypeId)
-        {
-            GloveTypeId = gloveTypeId;
-        }
+    public void Set(int gloveTypeId)
+    {
+        GloveTypeId = gloveTypeId;
     }
 }

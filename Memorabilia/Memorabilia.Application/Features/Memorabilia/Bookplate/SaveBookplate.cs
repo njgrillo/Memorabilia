@@ -1,38 +1,37 @@
-﻿namespace Memorabilia.Application.Features.Memorabilia.Bookplate
+﻿namespace Memorabilia.Application.Features.Memorabilia.Bookplate;
+
+public class SaveBookplate
 {
-    public class SaveBookplate
+    public class Handler : CommandHandler<Command>
     {
-        public class Handler : CommandHandler<Command>
+        private readonly IMemorabiliaItemRepository _memorabiliaRepository;
+
+        public Handler(IMemorabiliaItemRepository memorabiliaRepository)
         {
-            private readonly IMemorabiliaRepository _memorabiliaRepository;
-
-            public Handler(IMemorabiliaRepository memorabiliaRepository)
-            {
-                _memorabiliaRepository = memorabiliaRepository;
-            }
-
-            protected override async Task Handle(Command command)
-            {
-                var memorabilia = await _memorabiliaRepository.Get(command.MemorabiliaId).ConfigureAwait(false);
-
-                memorabilia.SetBookplate(command.PersonId);
-
-                await _memorabiliaRepository.Update(memorabilia).ConfigureAwait(false);
-            }
+            _memorabiliaRepository = memorabiliaRepository;
         }
 
-        public class Command : DomainCommand, ICommand
+        protected override async Task Handle(Command command)
         {
-            private readonly SaveBookplateViewModel _viewModel;
+            var memorabilia = await _memorabiliaRepository.Get(command.MemorabiliaId);
 
-            public Command(SaveBookplateViewModel viewModel)
-            {
-                _viewModel = viewModel;
-            }
+            memorabilia.SetBookplate(command.PersonId);
 
-            public int MemorabiliaId => _viewModel.MemorabiliaId;
-
-            public int? PersonId => _viewModel.Person?.Id > 0 ? _viewModel.Person?.Id : null;
+            await _memorabiliaRepository.Update(memorabilia);
         }
+    }
+
+    public class Command : DomainCommand, ICommand
+    {
+        private readonly SaveBookplateViewModel _viewModel;
+
+        public Command(SaveBookplateViewModel viewModel)
+        {
+            _viewModel = viewModel;
+        }
+
+        public int MemorabiliaId => _viewModel.MemorabiliaId;
+
+        public int? PersonId => _viewModel.Person?.Id > 0 ? _viewModel.Person?.Id : null;
     }
 }

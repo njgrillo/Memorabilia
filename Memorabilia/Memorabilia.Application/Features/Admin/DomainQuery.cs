@@ -1,12 +1,11 @@
-﻿namespace Memorabilia.Application.Features.Admin
-{
-    public class DomainQuery : IQuery<DomainViewModel>
-    {
-        public DomainQuery(int id)
-        {
-            Id = id;
-        }
+﻿namespace Memorabilia.Application.Features.Admin;
 
-        public int Id { get; }
+public class DomainQuery : IQuery<DomainViewModel>
+{
+    public DomainQuery(int id)
+    {
+        Id = id;
     }
+
+    public int Id { get; }
 }

@@ -1,9 +1,8 @@
-﻿namespace Memorabilia.Domain.Entities
-{
-    public class GameStyleType : DomainEntity
-    {
-        public GameStyleType() { }
+﻿namespace Memorabilia.Domain.Entities;
 
-        public GameStyleType(string name, string abbreviation) : base(name, abbreviation) { }
-    }
+public class GameStyleType : DomainEntity
+{
+    public GameStyleType() { }
+
+    public GameStyleType(string name, string abbreviation) : base(name, abbreviation) { }
 }

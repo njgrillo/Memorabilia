@@ -1,34 +1,33 @@
-﻿namespace Memorabilia.Domain.Entities
+﻿namespace Memorabilia.Domain.Entities;
+
+public class MemorabiliaMagazine : Framework.Library.Domain.Entity.DomainEntity
 {
-    public class MemorabiliaMagazine : Framework.Library.Domain.Entity.DomainEntity
+    public MemorabiliaMagazine() { }
+
+    public MemorabiliaMagazine(int memorabiliaId, int orientationId, DateTime? date, bool framed, bool matted)
     {
-        public MemorabiliaMagazine() { }
+        MemorabiliaId = memorabiliaId;
+        OrientationId = orientationId;
+        Date = date;
+        Framed = framed;
+        Matted = matted;
+    }
 
-        public MemorabiliaMagazine(int memorabiliaId, int orientationId, DateTime? date, bool framed, bool matted)
-        {
-            MemorabiliaId = memorabiliaId;
-            OrientationId = orientationId;
-            Date = date;
-            Framed = framed;
-            Matted = matted;
-        }
+    public DateTime? Date { get; set; }
 
-        public DateTime? Date { get; set; }
+    public bool Framed { get; set; }
 
-        public bool Framed { get; set; }
+    public bool Matted { get; set; }
 
-        public bool Matted { get; set; }
+    public int MemorabiliaId { get; private set; }
 
-        public int MemorabiliaId { get; private set; }
+    public int OrientationId { get; private set; }
 
-        public int OrientationId { get; private set; }
-
-        public void Set(int orientationId, DateTime? date, bool framed, bool matted)
-        {
-            OrientationId = orientationId;
-            Date = date;
-            Framed = framed;
-            Matted = matted;
-        }
+    public void Set(int orientationId, DateTime? date, bool framed, bool matted)
+    {
+        OrientationId = orientationId;
+        Date = date;
+        Framed = framed;
+        Matted = matted;
     }
 }

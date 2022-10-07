@@ -8,9 +8,6 @@ namespace Memorabilia.Blazor.Pages.User
         public CommandRouter CommandRouter { get; set; }
 
         [Inject]
-        public ProtectedLocalStorage LocalStorage { get; set; }
-
-        [Inject]
         public NavigationManager NavigationManager { get; set; }
 
         [Inject]
@@ -18,6 +15,9 @@ namespace Memorabilia.Blazor.Pages.User
 
         [Inject]
         public ISnackbar Snackbar { get; set; }
+
+        [Parameter]
+        public int UserId { get; set; }
 
         private SaveUserDashboardViewModel _viewModel = new();
 
@@ -31,12 +31,10 @@ namespace Memorabilia.Blazor.Pages.User
 
         protected async Task OnLoad()
         {
-            var userId = await LocalStorage.GetAsync<int>("UserId").ConfigureAwait(false);
-
-            if (userId.Value == 0)
+            if (UserId == 0)
                 NavigationManager.NavigateTo("Login");
 
-            _viewModel = new SaveUserDashboardViewModel(await QueryRouter.Send(new GetUserDashboardItems.Query(userId.Value)).ConfigureAwait(false));
+            _viewModel = new SaveUserDashboardViewModel(await QueryRouter.Send(new GetUserDashboardItems.Query(UserId)).ConfigureAwait(false));
         }
     }
 }

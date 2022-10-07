@@ -1,36 +1,35 @@
 ﻿using Memorabilia.Domain.Entities;
 
-namespace Memorabilia.Application.Features.Memorabilia.Football
+namespace Memorabilia.Application.Features.Memorabilia.Football;
+
+public class FootballViewModel
 {
-    public class FootballViewModel
+    private readonly Domain.Entities.Memorabilia _memorabilia;
+
+    public FootballViewModel() { }
+
+    public FootballViewModel(Domain.Entities.Memorabilia memorabilia)
     {
-        private readonly Domain.Entities.Memorabilia _memorabilia;
+        _memorabilia = memorabilia;
+    }        
 
-        public FootballViewModel() { }
+    public MemorabiliaBrand Brand => _memorabilia.Brand;
 
-        public FootballViewModel(Domain.Entities.Memorabilia memorabilia)
-        {
-            _memorabilia = memorabilia;
-        }        
+    public MemorabiliaCommissioner Commissioner => _memorabilia.Commissioner;
 
-        public MemorabiliaBrand Brand => _memorabilia.Brand;
+    public MemorabiliaFootball Football => _memorabilia.Football;
 
-        public MemorabiliaCommissioner Commissioner => _memorabilia.Commissioner;
+    public MemorabiliaGame Game => _memorabilia.Game;
 
-        public MemorabiliaFootball Football => _memorabilia.Football;
+    public int MemorabiliaId => _memorabilia.Id;
 
-        public MemorabiliaGame Game => _memorabilia.Game;
+    public MemorabiliaLevelType Level => _memorabilia.LevelType;        
 
-        public int MemorabiliaId => _memorabilia.Id;
+    public IEnumerable<MemorabiliaPerson> People => _memorabilia.People;
 
-        public MemorabiliaLevelType Level => _memorabilia.LevelType;        
+    public MemorabiliaSize Size => _memorabilia.Size;
 
-        public IEnumerable<MemorabiliaPerson> People => _memorabilia.People;
+    public IEnumerable<MemorabiliaSport> Sports => _memorabilia.Sports;
 
-        public MemorabiliaSize Size => _memorabilia.Size;
-
-        public IEnumerable<MemorabiliaSport> Sports => _memorabilia.Sports;
-
-        public IEnumerable<MemorabiliaTeam> Teams => _memorabilia.Teams;
-    }
+    public IEnumerable<MemorabiliaTeam> Teams => _memorabilia.Teams;
 }

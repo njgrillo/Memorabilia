@@ -1,9 +1,8 @@
-﻿namespace Memorabilia.Domain.Entities
-{
-    public class AcquisitionType : DomainEntity
-    {
-        public AcquisitionType() { }
+﻿namespace Memorabilia.Domain.Entities;
 
-        public AcquisitionType(string name, string abbreviation) : base(name, abbreviation) { }
-    }
+public class AcquisitionType : DomainEntity
+{
+    public AcquisitionType() { }
+
+    public AcquisitionType(string name, string abbreviation) : base(name, abbreviation) { }
 }

@@ -1,25 +1,16 @@
 ﻿#nullable disable
 
-namespace Memorabilia.Blazor.Pages.Admin.AccomplishmentTypes
+namespace Memorabilia.Blazor.Pages.Admin.AccomplishmentTypes;
+
+public partial class ViewAccomplishmentTypes : ViewDomainItem<AccomplishmentTypesViewModel>, IDeleteDomainItem, IViewDomainItem
 {
-    public partial class ViewAccomplishmentTypes : ComponentBase
+    public async Task OnDelete(SaveDomainViewModel viewModel)
     {
-        [Inject]
-        public CommandRouter CommandRouter { get; set; }
+        await OnDelete(new SaveAccomplishmentType.Command(viewModel));
+    }
 
-        [Inject]
-        public QueryRouter QueryRouter { get; set; }
-
-        private AccomplishmentTypesViewModel _viewModel;
-
-        protected async Task OnDelete(SaveDomainViewModel viewModel)
-        {
-            await CommandRouter.Send(new SaveAccomplishmentType.Command(viewModel)).ConfigureAwait(false);
-        }
-
-        protected async Task OnLoad()
-        {
-            _viewModel = await QueryRouter.Send(new GetAccomplishmentTypes.Query()).ConfigureAwait(false);
-        }
+    public async Task OnLoad()
+    {
+        await OnLoad(new GetAccomplishmentTypes.Query());
     }
 }

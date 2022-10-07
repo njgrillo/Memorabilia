@@ -1,41 +1,40 @@
 ﻿#nullable disable
 
-namespace Memorabilia.Blazor.Controls
+namespace Memorabilia.Blazor.Controls;
+
+public partial class EditDomainItem : ComponentBase
 {
-    public partial class EditDomainItem : ComponentBase
+    [Parameter]
+    public SaveDomainViewModel Item
     {
-        [Parameter]
-        public SaveDomainViewModel Item
+        get
         {
-            get
-            {
-                return _viewModel;
-            }
-            set
-            {
-                _viewModel = value;
-            }
+            return _viewModel;
         }
-
-        [Parameter]
-        public EventCallback OnLoad { get; set; }
-
-        [Parameter]
-        public EventCallback<SaveDomainViewModel> OnSave { get; set; }
-
-        private SaveDomainViewModel _viewModel;
-
-        protected async Task Load()
+        set
         {
-            if (_viewModel.Id == 0)
-                return;
-
-            await OnLoad.InvokeAsync().ConfigureAwait(false);
+            _viewModel = value;
         }
+    }
 
-        protected async Task Save()
-        {
-            await OnSave.InvokeAsync(_viewModel).ConfigureAwait(false);
-        }
+    [Parameter]
+    public EventCallback OnLoad { get; set; }
+
+    [Parameter]
+    public EventCallback<SaveDomainViewModel> OnSave { get; set; }
+
+    private SaveDomainViewModel _viewModel;
+
+    protected async Task Load()
+    {
+        if (_viewModel.Id == 0)
+            return;
+
+        await OnLoad.InvokeAsync().ConfigureAwait(false);
+    }
+
+    protected async Task Save()
+    {
+        await OnSave.InvokeAsync(_viewModel).ConfigureAwait(false);
     }
 }

@@ -1,33 +1,32 @@
-﻿namespace Memorabilia.Domain.Entities
+﻿namespace Memorabilia.Domain.Entities;
+
+public class Commissioner : Framework.Library.Domain.Entity.DomainEntity
 {
-    public class Commissioner : Framework.Library.Domain.Entity.DomainEntity
+    public Commissioner() { }
+
+    public Commissioner(int sportLeagueLevelId, int personId, int? beginYear, int? endYear)
     {
-        public Commissioner() { }
+        SportLeagueLevelId = sportLeagueLevelId;
+        PersonId = personId;
+        BeginYear = beginYear;
+        EndYear = endYear;
+    }
 
-        public Commissioner(int sportLeagueLevelId, int personId, int? beginYear, int? endYear)
-        {
-            SportLeagueLevelId = sportLeagueLevelId;
-            PersonId = personId;
-            BeginYear = beginYear;
-            EndYear = endYear;
-        }
+    public int? BeginYear { get; private set; }
 
-        public int? BeginYear { get; private set; }
+    public int? EndYear { get; private set; }
 
-        public int? EndYear { get; private set; }
+    public virtual Person Person { get; set; }
 
-        public virtual Person Person { get; set; }
+    public int PersonId { get; private set; }
 
-        public int PersonId { get; private set; }
+    public int SportLeagueLevelId { get; private set; }
 
-        public int SportLeagueLevelId { get; private set; }
+    public string SportLeagueLevelName => Constants.SportLeagueLevel.Find(SportLeagueLevelId)?.Name;
 
-        public string SportLeagueLevelName => Constants.SportLeagueLevel.Find(SportLeagueLevelId)?.Name;
-
-        public void Set(int? beginYear, int? endYear)
-        {
-            BeginYear = beginYear;
-            EndYear = endYear;
-        }
+    public void Set(int? beginYear, int? endYear)
+    {
+        BeginYear = beginYear;
+        EndYear = endYear;
     }
 }

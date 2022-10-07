@@ -1,7 +1,6 @@
-﻿namespace Memorabilia.Application.Features.Services.Tools.Profile.Rules
+﻿namespace Memorabilia.Application.Features.Services.Tools.Profile.Rules;
+
+public interface IProfileRuleFactory
 {
-    public interface IProfileRuleFactory
-    {
-        List<IProfileRule> Rules { get; }
-    }
+    List<IProfileRule> Rules { get; }
 }

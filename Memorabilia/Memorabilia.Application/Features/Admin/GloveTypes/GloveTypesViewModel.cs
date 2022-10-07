@@ -1,17 +1,17 @@
-﻿using Memorabilia.Domain.Entities;
+﻿using Memorabilia.Domain.Constants;
+using Memorabilia.Domain.Entities;
 
-namespace Memorabilia.Application.Features.Admin.GloveTypes
+namespace Memorabilia.Application.Features.Admin.GloveTypes;
+
+public class GloveTypesViewModel : DomainsViewModel
 {
-    public class GloveTypesViewModel : DomainsViewModel
-    {
-        public GloveTypesViewModel() { }
+    public GloveTypesViewModel() { }
 
-        public GloveTypesViewModel(IEnumerable<DomainEntity> domainEntities) : base(domainEntities) { }
+    public GloveTypesViewModel(IEnumerable<DomainEntity> domainEntities) : base(domainEntities) { }
 
-        public override string ItemTitle => "Glove Type";
+    public override string ItemTitle => AdminDomainItem.GloveTypes.Item;
 
-        public override string PageTitle => "Glove Types";
+    public override string PageTitle => AdminDomainItem.GloveTypes.Title;
 
-        public override string RoutePrefix => "GloveTypes";
-    }
+    public override string RoutePrefix => AdminDomainItem.GloveTypes.Page;
 }

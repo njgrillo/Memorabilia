@@ -1,30 +1,33 @@
-﻿namespace Memorabilia.Application.Features.Admin.ItemTypeBrand
+﻿namespace Memorabilia.Application.Features.Admin.ItemTypeBrand;
+
+public class GetItemTypeBrands
 {
-    public class GetItemTypeBrands
+    public class Handler : QueryHandler<Query, ItemTypeBrandsViewModel>
     {
-        public class Handler : QueryHandler<Query, ItemTypeBrandsViewModel>
+        private readonly IItemTypeBrandRepository _itemTypeBrandRepository;
+
+        public Handler(IItemTypeBrandRepository itemTypeBrandRepository)
         {
-            private readonly IItemTypeBrandRepository _itemTypeBrandRepository;
-
-            public Handler(IItemTypeBrandRepository itemTypeBrandRepository)
-            {
-                _itemTypeBrandRepository = itemTypeBrandRepository;
-            }
-
-            protected override async Task<ItemTypeBrandsViewModel> Handle(Query query)
-            {
-                return new ItemTypeBrandsViewModel(await _itemTypeBrandRepository.GetAll(query.ItemTypeId).ConfigureAwait(false));
-            }
+            _itemTypeBrandRepository = itemTypeBrandRepository;
         }
 
-        public class Query : IQuery<ItemTypeBrandsViewModel>
+        protected override async Task<ItemTypeBrandsViewModel> Handle(Query query)
         {
-            public Query(int? itemTypeId = null)
-            {
-                ItemTypeId = itemTypeId;
-            }
+            var itemTypeBrands = (await _itemTypeBrandRepository.GetAll(query.ItemTypeId))
+                                         .OrderBy(itemTypeBrand => itemTypeBrand.ItemTypeName)
+                                         .ThenBy(itemTypeBrand => itemTypeBrand.BrandName);
 
-            public int? ItemTypeId { get; }
+            return new ItemTypeBrandsViewModel(itemTypeBrands);
         }
+    }
+
+    public class Query : IQuery<ItemTypeBrandsViewModel>
+    {
+        public Query(int? itemTypeId = null)
+        {
+            ItemTypeId = itemTypeId;
+        }
+
+        public int? ItemTypeId { get; }
     }
 }

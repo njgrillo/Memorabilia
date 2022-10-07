@@ -1,25 +1,26 @@
-﻿namespace Memorabilia.Application.Features.Admin.GameStyleTypes
+﻿using Memorabilia.Domain.Entities;
+
+namespace Memorabilia.Application.Features.Admin.GameStyleTypes;
+
+public class GetGameStyleType
 {
-    public class GetGameStyleType
+    public class Handler : QueryHandler<Query, DomainViewModel>
     {
-        public class Handler : QueryHandler<Query, DomainViewModel>
+        private readonly IDomainRepository<GameStyleType> _gameStyleTypeRepository;
+
+        public Handler(IDomainRepository<GameStyleType> gameStyleTypeRepository)
         {
-            private readonly IGameStyleTypeRepository _gameStyleTypeRepository;
-
-            public Handler(IGameStyleTypeRepository gameStyleTypeRepository)
-            {
-                _gameStyleTypeRepository = gameStyleTypeRepository;
-            }
-
-            protected override async Task<DomainViewModel> Handle(Query query)
-            {
-                return new DomainViewModel(await _gameStyleTypeRepository.Get(query.Id).ConfigureAwait(false));
-            }
+            _gameStyleTypeRepository = gameStyleTypeRepository;
         }
 
-        public class Query : DomainQuery
+        protected override async Task<DomainViewModel> Handle(Query query)
         {
-            public Query(int id) : base(id) { }
+            return new DomainViewModel(await _gameStyleTypeRepository.Get(query.Id));
         }
+    }
+
+    public class Query : DomainQuery
+    {
+        public Query(int id) : base(id) { }
     }
 }

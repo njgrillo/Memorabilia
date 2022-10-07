@@ -1,0 +1,131 @@
+﻿<EditPage ContinueNavigationPath="@_viewModel.ContinueNavigationPath"
+          EditMode="_viewModel.EditModeType"
+          ExitNavigationPath="@_viewModel.ExitNavigationPath"
+          ImagePath="@_viewModel.ImagePath"
+          ItemName="@_viewModel.ItemType.Name"
+          Model="_viewModel"
+          OnLoad="OnLoad"
+          OnSave="OnSave"
+          PageFooterButtonText="@_viewModel.ExitButtonText"
+          PageFooterNavigationPath="@_viewModel.ExitNavigationPath"
+          PageTitle="@_viewModel.PageTitle"
+          TItem="SaveHelmetViewModel"
+          UseMultipleButtons="true">
+    <TimelineContent>
+        <MemorabiliaItemTimeline EditMode="_viewModel.EditModeType"
+                                 ItemTypeName="@_viewModel.ItemType.Name"
+                                 MemorabiliaId="_viewModel.MemorabiliaId"
+                                 MemorabiliaItemStep="_viewModel.MemorabiliaItemStep" />
+    </TimelineContent>
+    <Content>
+        <DivRowCol3>
+            <Content>
+                <ItemTypeLevelDropDown @bind-Value="@_viewModel.LevelTypeId"
+                                       @bind-Value:event="ValueChanged" 
+                                       ItemType="_viewModel.ItemType"
+                                       SelectedValue="_viewModel.LevelTypeId" /> 
+            </Content>
+            <ContentColumn2>
+                <ItemTypeBrandDropDown @bind-Value="@_viewModel.BrandId" 
+                                       @bind-Value:event="ValueChanged"
+                                       ItemType="_viewModel.ItemType"
+                                       SelectedValue="_viewModel.BrandId" />
+            </ContentColumn2>
+        </DivRowCol3>
+        <DivRowCol3>
+            <Content>
+                <ItemTypeSizeDropDown @bind-Value="@_viewModel.SizeId"
+                                      @bind-Value:event="ValueChanged" 
+                                      ItemType="_viewModel.ItemType"
+                                      SelectedValue="@_viewModel.SizeId" /> 
+            </Content>
+            <ContentColumn2>
+                <MudSelect @bind-Value="@_viewModel.GameStyleTypeId"
+                           @bind-Value:event="ValueChanged"    
+                           Label="Game Style Type"
+                           Variant="Variant.Outlined" >
+                    <MudSelectItem Value="@(0)">--Select--</MudSelectItem>
+                    <Iterations Items="_viewModel.GameStyleTypes" Context="gameStyleType">
+                        <MudSelectItem Value="@gameStyleType.Id">@gameStyleType.Name</MudSelectItem>
+                    </Iterations>	
+                </MudSelect> 
+            </ContentColumn2>
+        </DivRowCol3>
+        <DivRowCol3>
+            <ContentColumn2>
+                <DivHidden Hidden="@(!_viewModel.DisplayGameDate)">
+                    <Content>
+                        <MudDatePicker @bind-Date="_viewModel.GameDate"
+                                       DateFormat="MM/dd/yyyy"
+                                       Editable="true"
+                                       Label="Game Date"
+                                       Mask="@(new DateMask("MM/dd/yyyy"))" 
+                                       Variant="Variant.Outlined" />
+                    </Content>
+                </DivHidden>
+            </ContentColumn2>
+        </DivRowCol3>
+        <DivRowCol3>
+            <Content>
+                <MudSelect @bind-Value="@_viewModel.HelmetTypeId"
+                           @bind-Value:event="ValueChanged"    
+                           Label="Type"
+                           Variant="Variant.Outlined" >
+                    <MudSelectItem Value="@(0)">--Select--</MudSelectItem>
+                    <Iterations Items="_viewModel.HelmetTypes" Context="helmetType">
+                        <MudSelectItem Value="@helmetType.Id">@helmetType.Name</MudSelectItem>
+                    </Iterations>	
+                </MudSelect> 
+            </Content>
+            <ContentColumn2>
+                <DivHidden Hidden="@(!_viewModel.DisplayHelmetQualityType)">
+                    <Content>
+                        <MudSelect @bind-Value="@_viewModel.HelmetQualityTypeId"
+                                   @bind-Value:event="ValueChanged"  
+                                   Disabled="!_viewModel.CanEditHelmetQualityType"
+                                   Label="Quality"
+                                   Variant="Variant.Outlined" >
+                            <MudSelectItem Value="@(0)">--Select--</MudSelectItem>
+                            <Iterations Items="_viewModel.HelmetQualityTypes" Context="helmetQualityType">
+                                <MudSelectItem Value="@helmetQualityType.Id">@helmetQualityType.Name</MudSelectItem>
+                            </Iterations>	
+                        </MudSelect> 
+                    </Content>
+                </DivHidden> 
+            </ContentColumn2>
+        </DivRowCol3>
+        <DivRowCol3>
+            <Content>
+                <DivHidden Hidden="@(!_viewModel.DisplayHelmetFinish)">
+                    <Content>
+                        <MudSelect @bind-Value="@_viewModel.HelmetFinishId"
+                                   @bind-Value:event="ValueChanged"    
+                                   Label="Finish"
+                                   Variant="Variant.Outlined" >
+                            <MudSelectItem Value="@(0)">--Select--</MudSelectItem>
+                            <Iterations Items="_viewModel.HelmetFinishes" Context="helmetFinish">
+                                <MudSelectItem Value="@helmetFinish.Id">@helmetFinish.Name</MudSelectItem>
+                            </Iterations>	
+                        </MudSelect>
+                    </Content>
+                </DivHidden>
+            </Content>
+        </DivRowCol3>
+        <DivRowCol3>
+            <Content>
+                <MudCheckBox @bind-Checked="@_viewModel.Throwback" 
+                             Label="Is a Throwback?" /> 
+            </Content>
+        </DivRowCol3>
+        <MultiPersonSelector CanToggle="true"
+                             ItemType="_viewModel.ItemType"
+                             People="_viewModel.People" />   
+        <MultiSportSelector CanToggle="true"
+                            ItemType="_viewModel.ItemType"
+                            SelectedSportIdsChanged="SelectedSportIdsChanged"
+                            SportIds="_viewModel.SportIds" />
+        <MultiTeamSelector CanToggle="true" 
+                           ItemType="_viewModel.ItemType"
+                           Teams="_viewModel.Teams" />
+    </Content>
+</EditPage>

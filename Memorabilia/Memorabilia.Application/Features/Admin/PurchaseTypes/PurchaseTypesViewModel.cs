@@ -1,17 +1,17 @@
-﻿using Memorabilia.Domain.Entities;
+﻿using Memorabilia.Domain.Constants;
+using Memorabilia.Domain.Entities;
 
-namespace Memorabilia.Application.Features.Admin.PurchaseTypes
+namespace Memorabilia.Application.Features.Admin.PurchaseTypes;
+
+public class PurchaseTypesViewModel : DomainsViewModel
 {
-    public class PurchaseTypesViewModel : DomainsViewModel
-    {
-        public PurchaseTypesViewModel() { }
+    public PurchaseTypesViewModel() { }
 
-        public PurchaseTypesViewModel(IEnumerable<DomainEntity> domainEntities) : base(domainEntities) { }
+    public PurchaseTypesViewModel(IEnumerable<DomainEntity> domainEntities) : base(domainEntities) { }
 
-        public override string ItemTitle => "Purchase Type";
+    public override string ItemTitle => AdminDomainItem.PurchaseTypes.Item;
 
-        public override string PageTitle => "Purchase Types";
+    public override string PageTitle => AdminDomainItem.PurchaseTypes.Title;
 
-        public override string RoutePrefix => "PurchaseTypes";
-    }
+    public override string RoutePrefix => AdminDomainItem.PurchaseTypes.Page;
 }

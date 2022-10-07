@@ -1,64 +1,63 @@
-﻿namespace Memorabilia.Application.Features.Admin.ItemTypeLevel
+﻿namespace Memorabilia.Application.Features.Admin.ItemTypeLevel;
+
+public class SaveItemTypeLevel
 {
-    public class SaveItemTypeLevel
+    public class Handler : CommandHandler<Command>
     {
-        public class Handler : CommandHandler<Command>
+        private readonly IItemTypeLevelRepository _itemTypeLevelRepository;
+
+        public Handler(IItemTypeLevelRepository itemTypeLevelRepository)
         {
-            private readonly IItemTypeLevelRepository _itemTypeLevelRepository;
-
-            public Handler(IItemTypeLevelRepository itemTypeLevelRepository)
-            {
-                _itemTypeLevelRepository = itemTypeLevelRepository;
-            }
-
-            protected override async Task Handle(Command command)
-            {
-                Domain.Entities.ItemTypeLevel itemTypeLevel;
-
-                if (command.IsNew)
-                {
-                    itemTypeLevel = new Domain.Entities.ItemTypeLevel(command.ItemTypeId, command.LevelTypeId);
-
-                    await _itemTypeLevelRepository.Add(itemTypeLevel).ConfigureAwait(false);
-
-                    return;
-                }
-
-                itemTypeLevel = await _itemTypeLevelRepository.Get(command.Id).ConfigureAwait(false);
-
-                if (command.IsDeleted)
-                {
-                    await _itemTypeLevelRepository.Delete(itemTypeLevel).ConfigureAwait(false);
-
-                    return;
-                }
-
-                itemTypeLevel.Set(command.LevelTypeId);
-
-                await _itemTypeLevelRepository.Update(itemTypeLevel).ConfigureAwait(false);
-            }
+            _itemTypeLevelRepository = itemTypeLevelRepository;
         }
 
-        public class Command : DomainCommand, ICommand
+        protected override async Task Handle(Command command)
         {
-            private readonly SaveItemTypeLevelViewModel _viewModel;
+            Domain.Entities.ItemTypeLevel itemTypeLevel;
 
-            public Command(SaveItemTypeLevelViewModel viewModel)
+            if (command.IsNew)
             {
-                _viewModel = viewModel;
-            }            
+                itemTypeLevel = new Domain.Entities.ItemTypeLevel(command.ItemTypeId, command.LevelTypeId);
 
-            public int Id => _viewModel.Id;
+                await _itemTypeLevelRepository.Add(itemTypeLevel);
 
-            public bool IsDeleted => _viewModel.IsDeleted;
+                return;
+            }
 
-            public bool IsModified => _viewModel.IsModified;
+            itemTypeLevel = await _itemTypeLevelRepository.Get(command.Id);
 
-            public bool IsNew => _viewModel.IsNew;
+            if (command.IsDeleted)
+            {
+                await _itemTypeLevelRepository.Delete(itemTypeLevel);
 
-            public int ItemTypeId => _viewModel.ItemTypeId;
+                return;
+            }
 
-            public int LevelTypeId => _viewModel.LevelTypeId;
+            itemTypeLevel.Set(command.LevelTypeId);
+
+            await _itemTypeLevelRepository.Update(itemTypeLevel);
         }
+    }
+
+    public class Command : DomainCommand, ICommand
+    {
+        private readonly SaveItemTypeLevelViewModel _viewModel;
+
+        public Command(SaveItemTypeLevelViewModel viewModel)
+        {
+            _viewModel = viewModel;
+        }            
+
+        public int Id => _viewModel.Id;
+
+        public bool IsDeleted => _viewModel.IsDeleted;
+
+        public bool IsModified => _viewModel.IsModified;
+
+        public bool IsNew => _viewModel.IsNew;
+
+        public int ItemTypeId => _viewModel.ItemTypeId;
+
+        public int LevelTypeId => _viewModel.LevelTypeId;
     }
 }

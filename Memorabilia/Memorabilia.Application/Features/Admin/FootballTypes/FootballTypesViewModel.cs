@@ -1,17 +1,17 @@
-﻿using Memorabilia.Domain.Entities;
+﻿using Memorabilia.Domain.Constants;
+using Memorabilia.Domain.Entities;
 
-namespace Memorabilia.Application.Features.Admin.FootballTypes
+namespace Memorabilia.Application.Features.Admin.FootballTypes;
+
+public class FootballTypesViewModel : DomainsViewModel
 {
-    public class FootballTypesViewModel : DomainsViewModel
-    {
-        public FootballTypesViewModel() { }
+    public FootballTypesViewModel() { }
 
-        public FootballTypesViewModel(IEnumerable<DomainEntity> domainEntities) : base(domainEntities) { }
+    public FootballTypesViewModel(IEnumerable<DomainEntity> domainEntities) : base(domainEntities) { }
 
-        public override string ItemTitle => "Football Type";
+    public override string ItemTitle => AdminDomainItem.FootballTypes.Item;
 
-        public override string PageTitle => "Football Types";
+    public override string PageTitle => AdminDomainItem.FootballTypes.Title;
 
-        public override string RoutePrefix => "FootballTypes";
-    }
+    public override string RoutePrefix => AdminDomainItem.FootballTypes.Page;
 }

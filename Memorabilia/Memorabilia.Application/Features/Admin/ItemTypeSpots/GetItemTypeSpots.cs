@@ -1,30 +1,33 @@
-﻿namespace Memorabilia.Application.Features.Admin.ItemTypeSpots
+﻿namespace Memorabilia.Application.Features.Admin.ItemTypeSpots;
+
+public class GetItemTypeSpots
 {
-    public class GetItemTypeSpots
+    public class Handler : QueryHandler<Query, ItemTypeSpotsViewModel>
     {
-        public class Handler : QueryHandler<Query, ItemTypeSpotsViewModel>
+        private readonly IItemTypeSpotRepository _itemTypeSpotRepository;
+
+        public Handler(IItemTypeSpotRepository itemTypeSpotRepository)
         {
-            private readonly IItemTypeSpotRepository _itemTypeSpotRepository;
-
-            public Handler(IItemTypeSpotRepository itemTypeSpotRepository)
-            {
-                _itemTypeSpotRepository = itemTypeSpotRepository;
-            }
-
-            protected override async Task<ItemTypeSpotsViewModel> Handle(Query query)
-            {
-                return new ItemTypeSpotsViewModel(await _itemTypeSpotRepository.GetAll(query.ItemTypeId).ConfigureAwait(false));
-            }
+            _itemTypeSpotRepository = itemTypeSpotRepository;
         }
 
-        public class Query : IQuery<ItemTypeSpotsViewModel>
+        protected override async Task<ItemTypeSpotsViewModel> Handle(Query query)
         {
-            public Query(int? itemTypeId = null)
-            {
-                ItemTypeId = itemTypeId;
-            }
+            var itemTypeSpots = (await _itemTypeSpotRepository.GetAll(query.ItemTypeId))
+                                        .OrderBy(itemTypeSpot => itemTypeSpot.ItemTypeName)
+                                        .ThenBy(itemTypeSpot => itemTypeSpot.SpotName);
 
-            public int? ItemTypeId { get; }
+            return new ItemTypeSpotsViewModel(itemTypeSpots);
         }
+    }
+
+    public class Query : IQuery<ItemTypeSpotsViewModel>
+    {
+        public Query(int? itemTypeId = null)
+        {
+            ItemTypeId = itemTypeId;
+        }
+
+        public int? ItemTypeId { get; }
     }
 }

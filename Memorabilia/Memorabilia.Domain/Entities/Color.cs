@@ -1,9 +1,8 @@
-﻿namespace Memorabilia.Domain.Entities
-{
-    public class Color : DomainEntity
-    {
-        public Color() { }
+﻿namespace Memorabilia.Domain.Entities;
 
-        public Color(string name, string abbreviation) : base(name, abbreviation) { }
-    }
+public class Color : DomainEntity
+{
+    public Color() { }
+
+    public Color(string name, string abbreviation) : base(name, abbreviation) { }
 }

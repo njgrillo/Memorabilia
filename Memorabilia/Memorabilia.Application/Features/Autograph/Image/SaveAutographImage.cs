@@ -1,49 +1,48 @@
 ﻿using Memorabilia.Domain.Constants;
 
-namespace Memorabilia.Application.Features.Autograph.Image
+namespace Memorabilia.Application.Features.Autograph.Image;
+
+public class SaveAutographImage
 {
-    public class SaveAutographImage
+    public class Handler : CommandHandler<Command>
     {
-        public class Handler : CommandHandler<Command>
+        private readonly IAutographRepository _autographRepository;
+
+        public Handler(IAutographRepository autographRepository)
         {
-            private readonly IAutographRepository _autographRepository;
-
-            public Handler(IAutographRepository autographRepository)
-            {
-                _autographRepository = autographRepository;
-            }
-
-            protected override async Task Handle(Command command)
-            {     
-                var autograph = await _autographRepository.Get(command.AutographId).ConfigureAwait(false);
-
-                command.MemorabiliaId = autograph.MemorabiliaId;
-
-                if (!command.FilePaths.Any())
-                    return;
-
-                autograph.SetImages(command.FilePaths, command.PrimaryImageFilePath);
-
-                await _autographRepository.Update(autograph).ConfigureAwait(false);                
-            }
+            _autographRepository = autographRepository;
         }
 
-        public class Command : DomainCommand, ICommand
-        {
-            private readonly SaveAutographImagesViewModel _viewModel;
+        protected override async Task Handle(Command command)
+        {     
+            var autograph = await _autographRepository.Get(command.AutographId);
 
-            public Command(SaveAutographImagesViewModel viewModel)
-            {
-                _viewModel = viewModel;
-            }
+            command.MemorabiliaId = autograph.MemorabiliaId;
 
-            public int AutographId => _viewModel.AutographId;
+            if (!command.FilePaths.Any())
+                return;
 
-            public int MemorabiliaId { get; set; }
+            autograph.SetImages(command.FilePaths, command.PrimaryImageFilePath);
 
-            public IEnumerable<string> FilePaths => _viewModel.Images.Select(image => image.FilePath);            
-
-            public string PrimaryImageFilePath => _viewModel.Images.Single(image => image.ImageTypeId == ImageType.Primary.Id).FilePath;
+            await _autographRepository.Update(autograph);                
         }
+    }
+
+    public class Command : DomainCommand, ICommand
+    {
+        private readonly SaveAutographImagesViewModel _viewModel;
+
+        public Command(SaveAutographImagesViewModel viewModel)
+        {
+            _viewModel = viewModel;
+        }
+
+        public int AutographId => _viewModel.AutographId;
+
+        public int MemorabiliaId { get; set; }
+
+        public IEnumerable<string> FilePaths => _viewModel.Images.Select(image => image.FilePath);            
+
+        public string PrimaryImageFilePath => _viewModel.Images.Single(image => image.ImageTypeId == ImageType.Primary.Id).FilePath;
     }
 }

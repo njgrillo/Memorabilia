@@ -1,17 +1,17 @@
-﻿using Memorabilia.Domain.Entities;
+﻿using Memorabilia.Domain.Constants;
+using Memorabilia.Domain.Entities;
 
-namespace Memorabilia.Application.Features.Admin.JerseyStyleTypes
+namespace Memorabilia.Application.Features.Admin.JerseyStyleTypes;
+
+public class JerseyStyleTypesViewModel : DomainsViewModel
 {
-    public class JerseyStyleTypesViewModel : DomainsViewModel
-    {
-        public JerseyStyleTypesViewModel() { }
+    public JerseyStyleTypesViewModel() { }
 
-        public JerseyStyleTypesViewModel(IEnumerable<DomainEntity> domainEntities) : base(domainEntities) { }
+    public JerseyStyleTypesViewModel(IEnumerable<DomainEntity> domainEntities) : base(domainEntities) { }
 
-        public override string ItemTitle => "Jersey Style Type";
+    public override string ItemTitle => AdminDomainItem.JerseyStyleTypes.Item;
 
-        public override string PageTitle => "Jersey Style Types";
+    public override string PageTitle => AdminDomainItem.JerseyStyleTypes.Title;
 
-        public override string RoutePrefix => "JerseyStyleTypes";
-    }
+    public override string RoutePrefix => AdminDomainItem.JerseyStyleTypes.Page;
 }

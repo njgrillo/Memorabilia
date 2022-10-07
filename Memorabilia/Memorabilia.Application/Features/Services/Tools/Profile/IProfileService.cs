@@ -1,9 +1,8 @@
 ﻿using Memorabilia.Domain.Constants;
 
-namespace Memorabilia.Application.Features.Services.Tools.Profile
+namespace Memorabilia.Application.Features.Services.Tools.Profile;
+
+public interface IProfileService
 {
-    public interface IProfileService
-    {
-        Task<List<ProfileType>> GetProfileTypes(int personId);
-    }
+    Task<List<ProfileType>> GetProfileTypes(int personId);
 }

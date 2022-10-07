@@ -1,38 +1,37 @@
-﻿namespace Memorabilia.Application.Features.Memorabilia.IndexCard
+﻿namespace Memorabilia.Application.Features.Memorabilia.IndexCard;
+
+public class SaveIndexCard
 {
-    public class SaveIndexCard
+    public class Handler : CommandHandler<Command>
     {
-        public class Handler : CommandHandler<Command>
+        private readonly IMemorabiliaItemRepository _memorabiliaRepository;
+
+        public Handler(IMemorabiliaItemRepository memorabiliaRepository)
         {
-            private readonly IMemorabiliaRepository _memorabiliaRepository;
-
-            public Handler(IMemorabiliaRepository memorabiliaRepository)
-            {
-                _memorabiliaRepository = memorabiliaRepository;
-            }
-
-            protected override async Task Handle(Command command)
-            {
-                var memorabilia = await _memorabiliaRepository.Get(command.MemorabiliaId).ConfigureAwait(false);
-
-                memorabilia.SetIndexCard(command.SizeId);
-
-                await _memorabiliaRepository.Update(memorabilia).ConfigureAwait(false);
-            }
+            _memorabiliaRepository = memorabiliaRepository;
         }
 
-        public class Command : DomainCommand, ICommand
+        protected override async Task Handle(Command command)
         {
-            private readonly SaveIndexCardViewModel _viewModel;
+            var memorabilia = await _memorabiliaRepository.Get(command.MemorabiliaId);
 
-            public Command(SaveIndexCardViewModel viewModel)
-            {
-                _viewModel = viewModel;
-            }
+            memorabilia.SetIndexCard(command.SizeId);
 
-            public int MemorabiliaId => _viewModel.MemorabiliaId;
-
-            public int SizeId => _viewModel.SizeId;
+            await _memorabiliaRepository.Update(memorabilia);
         }
+    }
+
+    public class Command : DomainCommand, ICommand
+    {
+        private readonly SaveIndexCardViewModel _viewModel;
+
+        public Command(SaveIndexCardViewModel viewModel)
+        {
+            _viewModel = viewModel;
+        }
+
+        public int MemorabiliaId => _viewModel.MemorabiliaId;
+
+        public int SizeId => _viewModel.SizeId;
     }
 }

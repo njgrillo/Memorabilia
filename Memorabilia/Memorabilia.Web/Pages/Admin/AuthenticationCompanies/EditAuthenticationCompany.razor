@@ -1,5 +1,8 @@
 ﻿@page "/AuthenticationCompanies/Edit/{id:int}"
 
-<EditDomainItem Item="_viewModel"
-                OnLoad="OnLoad"
-                OnSave="OnSave" />
+<WebPage>
+    <Content>
+        <AuthenticationCompanyEditor Id="@Id" />
+    </Content>
+</WebPage>
+

@@ -1,9 +1,8 @@
-﻿namespace Memorabilia.Domain.Entities
-{
-    public class MagazineType : DomainEntity
-    {
-        public MagazineType() { }
+﻿namespace Memorabilia.Domain.Entities;
 
-        public MagazineType(string name, string abbreviation) : base(name, abbreviation) { }
-    }
+public class MagazineType : DomainEntity
+{
+    public MagazineType() { }
+
+    public MagazineType(string name, string abbreviation) : base(name, abbreviation) { }
 }

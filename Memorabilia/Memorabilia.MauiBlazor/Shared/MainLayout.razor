@@ -1,17 +1,66 @@
 ﻿@inherits LayoutComponentBase
 
-<div class="page">
-	<div class="sidebar">
-		<NavMenu />
-	</div>
+@inject NavigationManager NavigationManager;
 
-	<main>
-		<div class="top-row px-4">
-			<a href="https://docs.microsoft.com/aspnet/" target="_blank">About</a>
-		</div>
+<MudThemeProvider />
+<MudDialogProvider />
+<MudSnackbarProvider />
 
-		<article class="content px-4">
-			@Body
-		</article>
-	</main>
-</div>
+<MudLayout>
+    <MudAppBar>
+        <MudTooltip Text="@(_drawerOpen ? "Collapse" : "Expand")">
+            <MudIconButton Color="MudBlazor.Color.Inherit"
+                           Edge="Edge.Start"
+                           Icon="@Icons.Material.Filled.Menu"
+                           OnClick="@((e) => DrawerToggle())" />
+        </MudTooltip>
+        <MudTooltip Text="User Settings">
+            <MudIconButton Color="MudBlazor.Color.Inherit"
+                           Edge="Edge.Start"
+                           Icon="@Icons.Material.Filled.Settings"
+                           OnClick="@((e) => UserSettings())" />
+        </MudTooltip>
+        <MudTooltip Text="Login">
+            <MudIconButton Color="MudBlazor.Color.Inherit"
+                           Edge="Edge.Start"
+                           Icon="@Icons.Material.Filled.Login"
+                           OnClick="@((e) => Login())" />
+        </MudTooltip>
+        <MudTooltip Text="Logout">
+            <MudIconButton Color="MudBlazor.Color.Inherit"
+                           Edge="Edge.Start"
+                           Icon="@Icons.Material.Filled.Logout"
+                           OnClick="@((e) => Logout())" />
+        </MudTooltip>
+    </MudAppBar>
+    <MudDrawer @bind-Open="@_drawerOpen">
+        <NavMenu />
+    </MudDrawer>
+    <MudMainContent>
+        @Body
+    </MudMainContent>
+</MudLayout>
+
+@code {
+    private bool _drawerOpen = true;
+
+    public void DrawerToggle()
+    {
+        _drawerOpen = !_drawerOpen;
+    }
+
+    public void Login()
+    {
+        NavigationManager.NavigateTo("Login");
+    }
+
+    public void Logout()
+    {
+        NavigationManager.NavigateTo("Logout");
+    }
+
+    public void UserSettings()
+    {
+        NavigationManager.NavigateTo("Settings");
+    }
+}

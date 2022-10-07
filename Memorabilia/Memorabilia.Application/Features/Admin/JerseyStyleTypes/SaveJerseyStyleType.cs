@@ -1,48 +1,48 @@
 ﻿using Memorabilia.Domain.Entities;
 
-namespace Memorabilia.Application.Features.Admin.JerseyStyleTypes
+namespace Memorabilia.Application.Features.Admin.JerseyStyleTypes;
+
+public class SaveJerseyStyleType
 {
-    public class SaveJerseyStyleType
+    public class Handler : CommandHandler<Command>
     {
-        public class Handler : CommandHandler<Command>
+        private readonly IDomainRepository<JerseyStyleType> _jerseyStyleTypeRepository;
+
+        public Handler(IDomainRepository<JerseyStyleType> jerseyStyleTypeRepository)
         {
-            private readonly IJerseyStyleTypeRepository _jerseyStyleTypeRepository;
-
-            public Handler(IJerseyStyleTypeRepository jerseyStyleTypeRepository)
-            {
-                _jerseyStyleTypeRepository = jerseyStyleTypeRepository;
-            }
-
-            protected override async Task Handle(Command command)
-            {
-                JerseyStyleType jerseyStyleType;
-
-                if (command.IsNew)
-                {
-                    jerseyStyleType = new JerseyStyleType(command.Name, command.Abbreviation);
-                    await _jerseyStyleTypeRepository.Add(jerseyStyleType).ConfigureAwait(false);
-
-                    return;
-                }
-
-                jerseyStyleType = await _jerseyStyleTypeRepository.Get(command.Id).ConfigureAwait(false);
-
-                if (command.IsDeleted)
-                {
-                    await _jerseyStyleTypeRepository.Delete(jerseyStyleType).ConfigureAwait(false);
-
-                    return;
-                }
-
-                jerseyStyleType.Set(command.Name, command.Abbreviation);
-
-                await _jerseyStyleTypeRepository.Update(jerseyStyleType).ConfigureAwait(false);
-            }
+            _jerseyStyleTypeRepository = jerseyStyleTypeRepository;
         }
 
-        public class Command : DomainEntityCommand
+        protected override async Task Handle(Command command)
         {
-            public Command(SaveDomainViewModel viewModel) : base(viewModel) { }
+            JerseyStyleType jerseyStyleType;
+
+            if (command.IsNew)
+            {
+                jerseyStyleType = new JerseyStyleType(command.Name, command.Abbreviation);
+
+                await _jerseyStyleTypeRepository.Add(jerseyStyleType);
+
+                return;
+            }
+
+            jerseyStyleType = await _jerseyStyleTypeRepository.Get(command.Id);
+
+            if (command.IsDeleted)
+            {
+                await _jerseyStyleTypeRepository.Delete(jerseyStyleType);
+
+                return;
+            }
+
+            jerseyStyleType.Set(command.Name, command.Abbreviation);
+
+            await _jerseyStyleTypeRepository.Update(jerseyStyleType);
         }
+    }
+
+    public class Command : DomainEntityCommand
+    {
+        public Command(SaveDomainViewModel viewModel) : base(viewModel) { }
     }
 }

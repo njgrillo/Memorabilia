@@ -1,17 +1,17 @@
-﻿using Memorabilia.Domain.Entities;
+﻿using Memorabilia.Domain.Constants;
+using Memorabilia.Domain.Entities;
 
-namespace Memorabilia.Application.Features.Admin.FranchiseHallOfFameTypes
+namespace Memorabilia.Application.Features.Admin.FranchiseHallOfFameTypes;
+
+public class FranchiseHallOfFameTypesViewModel : DomainsViewModel
 {
-    public class FranchiseHallOfFameTypesViewModel : DomainsViewModel
-    {
-        public FranchiseHallOfFameTypesViewModel() { }
+    public FranchiseHallOfFameTypesViewModel() { }
 
-        public FranchiseHallOfFameTypesViewModel(IEnumerable<DomainEntity> domainEntities) : base(domainEntities) { }
+    public FranchiseHallOfFameTypesViewModel(IEnumerable<DomainEntity> domainEntities) : base(domainEntities) { }
 
-        public override string ItemTitle => "Franchise Hall of Fame Type";
+    public override string ItemTitle => AdminDomainItem.FranchiseHallOfFameTypes.Item;
 
-        public override string PageTitle => "Franchise Hall of Fame Types";
+    public override string PageTitle => AdminDomainItem.FranchiseHallOfFameTypes.Title;
 
-        public override string RoutePrefix => "FranchiseHallOfFameTypes";
-    }
+    public override string RoutePrefix => AdminDomainItem.FranchiseHallOfFameTypes.Page;
 }

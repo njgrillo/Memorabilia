@@ -1,16 +1,15 @@
-﻿namespace Memorabilia.Application.Features.Memorabilia.Image
+﻿namespace Memorabilia.Application.Features.Memorabilia.Image;
+
+public class MemorabiliaImageViewModel : ImageViewModel
 {
-    public class MemorabiliaImageViewModel : ImageViewModel
+    private readonly Domain.Entities.MemorabiliaImage _image;
+
+    public MemorabiliaImageViewModel() { }
+
+    public MemorabiliaImageViewModel(Domain.Entities.MemorabiliaImage image) : base(image)
     {
-        private readonly Domain.Entities.MemorabiliaImage _image;
-
-        public MemorabiliaImageViewModel() { }
-
-        public MemorabiliaImageViewModel(Domain.Entities.MemorabiliaImage image) : base(image)
-        {
-            _image = image;
-        }
-
-        public int MemorabiliaId => _image.MemorabiliaId;
+        _image = image;
     }
+
+    public int MemorabiliaId => _image.MemorabiliaId;
 }

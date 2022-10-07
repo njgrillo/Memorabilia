@@ -2,21 +2,28 @@
     <MudNavMenu>
         <MudText Typo="Typo.h6" Class="px-4">Graphinallday</MudText>
         <MudDivider Class="my-2"/>
+        <MudNavLink Href="">Home</MudNavLink>
+        <MudNavGroup Title="Admin">
+            <MudNavLink Href="/Admin/EditDomainItems">Domain Items</MudNavLink>
+        </MudNavGroup>
         <MudNavGroup Title="My Memorabilia">
             <MudNavLink Href="/Projects">Projects</MudNavLink>
+        </MudNavGroup>
+        <MudNavGroup Title="Tools">
         </MudNavGroup>
     </MudNavMenu>
 </MudPaper>
 
 @code {
-	private bool collapseNavMenu = true;
+    private bool collapseNavMenu = true;
 
     private string NavMenuCssClass => collapseNavMenu ? "collapse" : null;
 
-    private MudTheme Theme = new ();
+    private MudTheme Theme = new();
 
     private void ToggleNavMenu()
     {
         collapseNavMenu = !collapseNavMenu;
     }
 }
+

@@ -1,22 +1,23 @@
-﻿namespace Memorabilia.Application.Features.Admin.JerseyTypes
+﻿using Memorabilia.Domain.Entities;
+
+namespace Memorabilia.Application.Features.Admin.JerseyTypes;
+
+public class GetJerseyTypes
 {
-    public class GetJerseyTypes
+    public class Handler : QueryHandler<Query, JerseyTypesViewModel>
     {
-        public class Handler : QueryHandler<Query, JerseyTypesViewModel>
+        private readonly IDomainRepository<JerseyType> _jerseyTypeRepository;
+
+        public Handler(IDomainRepository<JerseyType> jerseyTypeRepository)
         {
-            private readonly IJerseyTypeRepository _jerseyTypeRepository;
-
-            public Handler(IJerseyTypeRepository jerseyTypeRepository)
-            {
-                _jerseyTypeRepository = jerseyTypeRepository;
-            }
-
-            protected override async Task<JerseyTypesViewModel> Handle(Query query)
-            {
-                return new JerseyTypesViewModel(await _jerseyTypeRepository.GetAll().ConfigureAwait(false));
-            }
+            _jerseyTypeRepository = jerseyTypeRepository;
         }
 
-        public class Query : IQuery<JerseyTypesViewModel> { }
+        protected override async Task<JerseyTypesViewModel> Handle(Query query)
+        {
+            return new JerseyTypesViewModel(await _jerseyTypeRepository.GetAll());
+        }
     }
+
+    public class Query : IQuery<JerseyTypesViewModel> { }
 }

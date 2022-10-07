@@ -1,41 +1,40 @@
-﻿namespace Memorabilia.Domain.Entities
+﻿namespace Memorabilia.Domain.Entities;
+
+public class MemorabiliaHelmet : Framework.Library.Domain.Entity.DomainEntity
 {
-    public class MemorabiliaHelmet : Framework.Library.Domain.Entity.DomainEntity
+    public MemorabiliaHelmet() { }
+
+    public MemorabiliaHelmet(int memorabiliaId, 
+                             int? helmetFinishId, 
+                             int? helmetQualityTypeId, 
+                             int? helmetTypeId, 
+                             bool throwback)
     {
-        public MemorabiliaHelmet() { }
+        MemorabiliaId = memorabiliaId;
+        HelmetFinishId = helmetFinishId;
+        HelmetQualityTypeId = helmetQualityTypeId;
+        HelmetTypeId = helmetTypeId;
+        Throwback = throwback;
+    }
 
-        public MemorabiliaHelmet(int memorabiliaId, 
-                                 int? helmetFinishId, 
-                                 int? helmetQualityTypeId, 
-                                 int? helmetTypeId, 
-                                 bool throwback)
-        {
-            MemorabiliaId = memorabiliaId;
-            HelmetFinishId = helmetFinishId;
-            HelmetQualityTypeId = helmetQualityTypeId;
-            HelmetTypeId = helmetTypeId;
-            Throwback = throwback;
-        }
+    public int? HelmetFinishId { get; private set; }
 
-        public int? HelmetFinishId { get; private set; }
+    public int? HelmetQualityTypeId { get; private set; }
 
-        public int? HelmetQualityTypeId { get; private set; }
+    public int? HelmetTypeId { get; private set; }
 
-        public int? HelmetTypeId { get; private set; }
+    public int MemorabiliaId { get; private set; }
 
-        public int MemorabiliaId { get; private set; }
+    public bool Throwback { get; private set; }
 
-        public bool Throwback { get; private set; }
-
-        public void Set(int? helmetFinishId,
-                        int? helmetQualityTypeId,
-                        int? helmetTypeId,
-                        bool throwback)
-        {
-            HelmetFinishId = helmetFinishId;
-            HelmetQualityTypeId = helmetQualityTypeId;
-            HelmetTypeId = helmetTypeId;
-            Throwback = throwback;
-        }
+    public void Set(int? helmetFinishId,
+                    int? helmetQualityTypeId,
+                    int? helmetTypeId,
+                    bool throwback)
+    {
+        HelmetFinishId = helmetFinishId;
+        HelmetQualityTypeId = helmetQualityTypeId;
+        HelmetTypeId = helmetTypeId;
+        Throwback = throwback;
     }
 }

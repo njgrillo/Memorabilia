@@ -1,9 +1,8 @@
-﻿namespace Memorabilia.Domain.Entities
-{
-    public class PriorityType : DomainEntity
-    {
-        public PriorityType() { }
+﻿namespace Memorabilia.Domain.Entities;
 
-        public PriorityType(string name, string abbreviation) : base(name, abbreviation) { }
-    }
+public class PriorityType : DomainEntity
+{
+    public PriorityType() { }
+
+    public PriorityType(string name, string abbreviation) : base(name, abbreviation) { }
 }

@@ -1,48 +1,48 @@
 ﻿using Memorabilia.Domain.Entities;
 
-namespace Memorabilia.Application.Features.Admin.ChampionTypes
+namespace Memorabilia.Application.Features.Admin.ChampionTypes;
+
+public class SaveChampionType
 {
-    public class SaveChampionType
+    public class Handler : CommandHandler<Command>
     {
-        public class Handler : CommandHandler<Command>
+        private readonly IDomainRepository<ChampionType> _championTypeRepository;
+
+        public Handler(IDomainRepository<ChampionType> championTypeRepository)
         {
-            private readonly IChampionTypeRepository _championTypeRepository;
-
-            public Handler(IChampionTypeRepository championTypeRepository)
-            {
-                _championTypeRepository = championTypeRepository;
-            }
-
-            protected override async Task Handle(Command command)
-            {
-                ChampionType championType;
-
-                if (command.IsNew)
-                {
-                    championType = new ChampionType(command.Name, command.Abbreviation);
-                    await _championTypeRepository.Add(championType).ConfigureAwait(false);
-
-                    return;
-                }
-
-                championType = await _championTypeRepository.Get(command.Id).ConfigureAwait(false);
-
-                if (command.IsDeleted)
-                {
-                    await _championTypeRepository.Delete(championType).ConfigureAwait(false);
-
-                    return;
-                }
-
-                championType.Set(command.Name, command.Abbreviation);
-
-                await _championTypeRepository.Update(championType).ConfigureAwait(false);
-            }
+            _championTypeRepository = championTypeRepository;
         }
 
-        public class Command : DomainEntityCommand
+        protected override async Task Handle(Command command)
         {
-            public Command(SaveDomainViewModel viewModel) : base(viewModel) { }
+            ChampionType championType;
+
+            if (command.IsNew)
+            {
+                championType = new ChampionType(command.Name, command.Abbreviation);
+
+                await _championTypeRepository.Add(championType);
+
+                return;
+            }
+
+            championType = await _championTypeRepository.Get(command.Id);
+
+            if (command.IsDeleted)
+            {
+                await _championTypeRepository.Delete(championType);
+
+                return;
+            }
+
+            championType.Set(command.Name, command.Abbreviation);
+
+            await _championTypeRepository.Update(championType);
         }
+    }
+
+    public class Command : DomainEntityCommand
+    {
+        public Command(SaveDomainViewModel viewModel) : base(viewModel) { }
     }
 }

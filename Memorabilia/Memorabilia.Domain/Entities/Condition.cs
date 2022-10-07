@@ -1,9 +1,8 @@
-﻿namespace Memorabilia.Domain.Entities
-{
-    public class Condition : DomainEntity
-    {
-        public Condition() { }
+﻿namespace Memorabilia.Domain.Entities;
 
-        public Condition(string name, string abbreviation) : base(name, abbreviation) { }
-    }
+public class Condition : DomainEntity
+{
+    public Condition() { }
+
+    public Condition(string name, string abbreviation) : base(name, abbreviation) { }
 }

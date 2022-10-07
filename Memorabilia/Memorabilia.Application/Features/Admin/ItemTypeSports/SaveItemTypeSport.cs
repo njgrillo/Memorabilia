@@ -1,66 +1,65 @@
 ﻿using Memorabilia.Domain.Entities;
 
-namespace Memorabilia.Application.Features.Admin.ItemTypeSports
+namespace Memorabilia.Application.Features.Admin.ItemTypeSports;
+
+public class SaveItemTypeSport
 {
-    public class SaveItemTypeSport
+    public class Handler : CommandHandler<Command>
     {
-        public class Handler : CommandHandler<Command>
+        private readonly IItemTypeSportRepository _itemTypeSportRepository;
+
+        public Handler(IItemTypeSportRepository itemTypeSportRepository)
         {
-            private readonly IItemTypeSportRepository _itemTypeSportRepository;
-
-            public Handler(IItemTypeSportRepository itemTypeSportRepository)
-            {
-                _itemTypeSportRepository = itemTypeSportRepository;
-            }
-
-            protected override async Task Handle(Command command)
-            {
-                ItemTypeSport itemTypeSport;
-
-                if (command.IsNew)
-                {
-                    itemTypeSport = new ItemTypeSport(command.ItemTypeId, command.SportId);
-
-                    await _itemTypeSportRepository.Add(itemTypeSport).ConfigureAwait(false);
-
-                    return;
-                }
-
-                itemTypeSport = await _itemTypeSportRepository.Get(command.Id).ConfigureAwait(false);
-
-                if (command.IsDeleted)
-                {
-                    await _itemTypeSportRepository.Delete(itemTypeSport).ConfigureAwait(false);
-
-                    return;
-                }
-
-                itemTypeSport.Set(command.SportId);
-
-                await _itemTypeSportRepository.Update(itemTypeSport).ConfigureAwait(false);
-            }
+            _itemTypeSportRepository = itemTypeSportRepository;
         }
 
-        public class Command : DomainCommand, ICommand
+        protected override async Task Handle(Command command)
         {
-            private readonly SaveItemTypeSportViewModel _viewModel;
+            ItemTypeSport itemTypeSport;
 
-            public Command(SaveItemTypeSportViewModel viewModel)
+            if (command.IsNew)
             {
-                _viewModel = viewModel;
+                itemTypeSport = new ItemTypeSport(command.ItemTypeId, command.SportId);
+
+                await _itemTypeSportRepository.Add(itemTypeSport);
+
+                return;
             }
 
-            public int Id => _viewModel.Id;
+            itemTypeSport = await _itemTypeSportRepository.Get(command.Id);
 
-            public bool IsDeleted => _viewModel.IsDeleted;
+            if (command.IsDeleted)
+            {
+                await _itemTypeSportRepository.Delete(itemTypeSport);
 
-            public bool IsModified => _viewModel.IsModified;
+                return;
+            }
 
-            public bool IsNew => _viewModel.IsNew;
+            itemTypeSport.Set(command.SportId);
 
-            public int ItemTypeId => _viewModel.ItemTypeId;
-
-            public int SportId => _viewModel.SportId;
+            await _itemTypeSportRepository.Update(itemTypeSport);
         }
+    }
+
+    public class Command : DomainCommand, ICommand
+    {
+        private readonly SaveItemTypeSportViewModel _viewModel;
+
+        public Command(SaveItemTypeSportViewModel viewModel)
+        {
+            _viewModel = viewModel;
+        }
+
+        public int Id => _viewModel.Id;
+
+        public bool IsDeleted => _viewModel.IsDeleted;
+
+        public bool IsModified => _viewModel.IsModified;
+
+        public bool IsNew => _viewModel.IsNew;
+
+        public int ItemTypeId => _viewModel.ItemTypeId;
+
+        public int SportId => _viewModel.SportId;
     }
 }

@@ -1,33 +1,32 @@
-﻿namespace Memorabilia.Application.Features.User
+﻿namespace Memorabilia.Application.Features.User;
+
+public class GetUser
 {
-    public class GetUser
+    public class Handler : QueryHandler<Query, UserViewModel>
     {
-        public class Handler : QueryHandler<Query, UserViewModel>
+        private readonly IUserRepository _userRepository;
+
+        public Handler(IUserRepository userRepository)
         {
-            private readonly IUserRepository _userRepository;
-
-            public Handler(IUserRepository userRepository)
-            {
-                _userRepository = userRepository;
-            }
-
-            protected override async Task<UserViewModel> Handle(Query query)
-            {
-                return new UserViewModel(await _userRepository.Get(query.Username, query.Password).ConfigureAwait(false));
-            }
+            _userRepository = userRepository;
         }
 
-        public class Query : IQuery<UserViewModel>
+        protected override async Task<UserViewModel> Handle(Query query)
         {
-            public Query(string username, string password)
-            {
-                Username = username;
-                Password = password;
-            }
-
-            public string Password { get; }
-
-            public string Username { get; }
+            return new UserViewModel(await _userRepository.Get(query.Username, query.Password));
         }
+    }
+
+    public class Query : IQuery<UserViewModel>
+    {
+        public Query(string username, string password)
+        {
+            Username = username;
+            Password = password;
+        }
+
+        public string Password { get; }
+
+        public string Username { get; }
     }
 }

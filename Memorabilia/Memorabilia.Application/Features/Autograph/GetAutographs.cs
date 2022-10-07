@@ -1,33 +1,32 @@
-﻿namespace Memorabilia.Application.Features.Autograph
+﻿namespace Memorabilia.Application.Features.Autograph;
+
+public class GetAutographs
 {
-    public class GetAutographs
+    public class Handler : QueryHandler<Query, AutographsViewModel>
     {
-        public class Handler : QueryHandler<Query, AutographsViewModel>
+        private readonly IAutographRepository _autographRepository;
+
+        public Handler(IAutographRepository autographRepository)
         {
-            private readonly IAutographRepository _autographRepository;
-
-            public Handler(IAutographRepository autographRepository)
-            {
-                _autographRepository = autographRepository;
-            }
-
-            protected override async Task<AutographsViewModel> Handle(Query query)
-            {
-                return new AutographsViewModel(await _autographRepository.GetAll(query.MemorabiliaId).ConfigureAwait(false));
-            }
+            _autographRepository = autographRepository;
         }
 
-        public class Query : IQuery<AutographsViewModel>
+        protected override async Task<AutographsViewModel> Handle(Query query)
         {
-            public Query(int? memorabiliaId = null, int? userId = null)
-            {
-                MemorabiliaId = memorabiliaId;
-                UserId = userId;
-            }
-
-            public int? MemorabiliaId { get; }
-
-            public int? UserId { get; }
+            return new AutographsViewModel(await _autographRepository.GetAll(query.MemorabiliaId));
         }
+    }
+
+    public class Query : IQuery<AutographsViewModel>
+    {
+        public Query(int? memorabiliaId = null, int? userId = null)
+        {
+            MemorabiliaId = memorabiliaId;
+            UserId = userId;
+        }
+
+        public int? MemorabiliaId { get; }
+
+        public int? UserId { get; }
     }
 }

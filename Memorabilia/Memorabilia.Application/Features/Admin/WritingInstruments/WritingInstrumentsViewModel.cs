@@ -1,17 +1,17 @@
-﻿using Memorabilia.Domain.Entities;
+﻿using Memorabilia.Domain.Constants;
+using Memorabilia.Domain.Entities;
 
-namespace Memorabilia.Application.Features.Admin.WritingInstruments
+namespace Memorabilia.Application.Features.Admin.WritingInstruments;
+
+public class WritingInstrumentsViewModel : DomainsViewModel
 {
-    public class WritingInstrumentsViewModel : DomainsViewModel
-    {
-        public WritingInstrumentsViewModel() { }
+    public WritingInstrumentsViewModel() { }
 
-        public WritingInstrumentsViewModel(IEnumerable<DomainEntity> domainEntities) : base(domainEntities) { }
+    public WritingInstrumentsViewModel(IEnumerable<DomainEntity> domainEntities) : base(domainEntities) { }
 
-        public override string ItemTitle => "Writing Instrument";
+    public override string ItemTitle => AdminDomainItem.WritingInstruments.Item;
 
-        public override string PageTitle => "Writing Instruments";
+    public override string PageTitle => AdminDomainItem.WritingInstruments.Title;
 
-        public override string RoutePrefix => "WritingInstruments";
-    }
+    public override string RoutePrefix => AdminDomainItem.WritingInstruments.Page;
 }

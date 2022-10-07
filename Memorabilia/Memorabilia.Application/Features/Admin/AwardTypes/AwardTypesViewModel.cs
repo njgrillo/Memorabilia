@@ -1,17 +1,17 @@
-﻿using Memorabilia.Domain.Entities;
+﻿using Memorabilia.Domain.Constants;
+using Memorabilia.Domain.Entities;
 
-namespace Memorabilia.Application.Features.Admin.AwardTypes
+namespace Memorabilia.Application.Features.Admin.AwardTypes;
+
+public class AwardTypesViewModel : DomainsViewModel
 {
-    public class AwardTypesViewModel : DomainsViewModel
-    {
-        public AwardTypesViewModel() { }
+    public AwardTypesViewModel() { }
 
-        public AwardTypesViewModel(IEnumerable<DomainEntity> domainEntities) : base(domainEntities) { }
+    public AwardTypesViewModel(IEnumerable<DomainEntity> domainEntities) : base(domainEntities) { }
 
-        public override string ItemTitle => "Award Type";
+    public override string ItemTitle => AdminDomainItem.AwardTypes.Item;
 
-        public override string PageTitle => "Award Types";
+    public override string PageTitle => AdminDomainItem.AwardTypes.Title;
 
-        public override string RoutePrefix => "AwardTypes";
-    }
+    public override string RoutePrefix => AdminDomainItem.AwardTypes.Page;
 }

@@ -1,5 +1,7 @@
 ﻿@page "/AwardTypes/Edit/{id:int}"
 
-<EditDomainItem Item="_viewModel"
-                OnLoad="OnLoad"
-                OnSave="OnSave" />
+<WebPage>
+    <Content>
+        <AwardTypeEditor Id="@Id" />
+    </Content>
+</WebPage>

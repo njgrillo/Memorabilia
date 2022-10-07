@@ -1,9 +1,8 @@
-﻿namespace Memorabilia.Domain.Entities
-{
-    public class HelmetQualityType : DomainEntity
-    {
-        public HelmetQualityType() { }
+﻿namespace Memorabilia.Domain.Entities;
 
-        public HelmetQualityType(string name, string abbreviation) : base(name, abbreviation) { }
-    }
+public class HelmetQualityType : DomainEntity
+{
+    public HelmetQualityType() { }
+
+    public HelmetQualityType(string name, string abbreviation) : base(name, abbreviation) { }
 }

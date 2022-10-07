@@ -1,30 +1,29 @@
-﻿namespace Memorabilia.Domain.Entities
+﻿namespace Memorabilia.Domain.Entities;
+
+public class Sport : Framework.Library.Domain.Entity.DomainEntity
 {
-    public class Sport : Framework.Library.Domain.Entity.DomainEntity
+    public Sport() { }
+
+    public Sport(string name, string alternateName)
     {
-        public Sport() { }
+        Name = name;
+        AlternateName = alternateName;
+        CreateDate = DateTime.UtcNow;
+    }
 
-        public Sport(string name, string alternateName)
-        {
-            Name = name;
-            AlternateName = alternateName;
-            CreateDate = DateTime.UtcNow;
-        }
+    public string AlternateName { get; private set; }
 
-        public string AlternateName { get; private set; }
+    public DateTime CreateDate { get; private set; }
 
-        public DateTime CreateDate { get; private set; }
+    public string ImagePath { get; private set; }
 
-        public string ImagePath { get; private set; }
+    public DateTime? LastModifiedDate { get; private set; }
 
-        public DateTime? LastModifiedDate { get; private set; }
+    public string Name { get; private set; }
 
-        public string Name { get; private set; }
-
-        public void Set(string name, string alternateName)
-        {
-            Name = name;
-            AlternateName = alternateName;
-        }
+    public void Set(string name, string alternateName)
+    {
+        Name = name;
+        AlternateName = alternateName;
     }
 }

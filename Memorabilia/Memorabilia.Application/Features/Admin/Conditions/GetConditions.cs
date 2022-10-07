@@ -1,22 +1,23 @@
-﻿namespace Memorabilia.Application.Features.Admin.Conditions
+﻿using Memorabilia.Domain.Entities;
+
+namespace Memorabilia.Application.Features.Admin.Conditions;
+
+public class GetConditions
 {
-    public class GetConditions
+    public class Handler : QueryHandler<Query, ConditionsViewModel>
     {
-        public class Handler : QueryHandler<Query, ConditionsViewModel>
+        private readonly IDomainRepository<Condition> _conditionRepository;
+
+        public Handler(IDomainRepository<Condition> conditionRepository)
         {
-            private readonly IConditionRepository _conditionRepository;
-
-            public Handler(IConditionRepository conditionRepository)
-            {
-                _conditionRepository = conditionRepository;
-            }
-
-            protected override async Task<ConditionsViewModel> Handle(Query query)
-            {
-                return new ConditionsViewModel(await _conditionRepository.GetAll().ConfigureAwait(false));
-            }
+            _conditionRepository = conditionRepository;
         }
 
-        public class Query : IQuery<ConditionsViewModel> { }
+        protected override async Task<ConditionsViewModel> Handle(Query query)
+        {
+            return new ConditionsViewModel(await _conditionRepository.GetAll());
+        }
     }
+
+    public class Query : IQuery<ConditionsViewModel> { }
 }

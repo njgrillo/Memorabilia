@@ -1,32 +1,31 @@
 ﻿using Memorabilia.Domain.Constants;
 
-namespace Memorabilia.Application.Features.Services.Tools.Profile
+namespace Memorabilia.Application.Features.Services.Tools.Profile;
+
+public class ProfileService : IProfileService
 {
-    public class ProfileService : IProfileService
+    private readonly IPersonRepository _personRepository;
+    private readonly IProfileRuleFactory _profileRuleFactory;
+
+    public ProfileService(IPersonRepository personRepository, IProfileRuleFactory profileRuleFactory)
     {
-        private readonly IPersonRepository _personRepository;
-        private readonly IProfileRuleFactory _profileRuleFactory;
+        _personRepository = personRepository;
+        _profileRuleFactory = profileRuleFactory;
+    }
 
-        public ProfileService(IPersonRepository personRepository, IProfileRuleFactory profileRuleFactory)
+    public async Task<List<ProfileType>> GetProfileTypes(int personId)
+    {
+        var person = await _personRepository.Get(personId);
+        var profileTypes = new List<ProfileType>();
+
+        foreach (var rule in _profileRuleFactory.Rules)
         {
-            _personRepository = personRepository;
-            _profileRuleFactory = profileRuleFactory;
-        }
-
-        public async Task<List<ProfileType>> GetProfileTypes(int personId)
-        {
-            var person = await _personRepository.Get(personId).ConfigureAwait(false);
-            var profileTypes = new List<ProfileType>();
-
-            foreach (var rule in _profileRuleFactory.Rules)
+            if (rule.Applies(person))
             {
-                if (rule.Applies(person))
-                {
-                    profileTypes.Add(rule.GetProfileType());
-                }
+                profileTypes.Add(rule.GetProfileType());
             }
-
-            return profileTypes;
         }
+
+        return profileTypes;
     }
 }

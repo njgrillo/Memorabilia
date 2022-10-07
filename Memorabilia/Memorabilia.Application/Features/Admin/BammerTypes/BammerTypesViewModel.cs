@@ -1,17 +1,17 @@
-﻿using Memorabilia.Domain.Entities;
+﻿using Memorabilia.Domain.Constants;
+using Memorabilia.Domain.Entities;
 
-namespace Memorabilia.Application.Features.Admin.BammerTypes
+namespace Memorabilia.Application.Features.Admin.BammerTypes;
+
+public class BammerTypesViewModel : DomainsViewModel
 {
-    public class BammerTypesViewModel : DomainsViewModel
-    {
-        public BammerTypesViewModel() { }
+    public BammerTypesViewModel() { }
 
-        public BammerTypesViewModel(IEnumerable<DomainEntity> domainEntities) : base(domainEntities) { }
+    public BammerTypesViewModel(IEnumerable<DomainEntity> domainEntities) : base(domainEntities) { }
 
-        public override string ItemTitle => "Bammer Type";
+    public override string ItemTitle => AdminDomainItem.BammerTypes.Item;
 
-        public override string PageTitle => "Bammer Types";
+    public override string PageTitle => AdminDomainItem.BammerTypes.Title;
 
-        public override string RoutePrefix => "BammerTypes";
-    }
+    public override string RoutePrefix => AdminDomainItem.BammerTypes.Page;
 }

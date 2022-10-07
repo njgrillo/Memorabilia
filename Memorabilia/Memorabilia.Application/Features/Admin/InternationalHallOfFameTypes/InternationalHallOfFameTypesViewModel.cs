@@ -1,17 +1,17 @@
-﻿using Memorabilia.Domain.Entities;
+﻿using Memorabilia.Domain.Constants;
+using Memorabilia.Domain.Entities;
 
-namespace Memorabilia.Application.Features.Admin.InternationalHallOfFameTypes
+namespace Memorabilia.Application.Features.Admin.InternationalHallOfFameTypes;
+
+public class InternationalHallOfFameTypesViewModel : DomainsViewModel
 {
-    public class InternationalHallOfFameTypesViewModel : DomainsViewModel
-    {
-        public InternationalHallOfFameTypesViewModel() { }
+    public InternationalHallOfFameTypesViewModel() { }
 
-        public InternationalHallOfFameTypesViewModel(IEnumerable<DomainEntity> domainEntities) : base(domainEntities) { }
+    public InternationalHallOfFameTypesViewModel(IEnumerable<DomainEntity> domainEntities) : base(domainEntities) { }
 
-        public override string ItemTitle => "International Hall of Fame Type";
+    public override string ItemTitle => AdminDomainItem.InternationalHallOfFameTypes.Item;
 
-        public override string PageTitle => "International Hall of Fame Types";
+    public override string PageTitle => AdminDomainItem.InternationalHallOfFameTypes.Title;
 
-        public override string RoutePrefix => "InternationalHallOfFameTypes";
-    }
+    public override string RoutePrefix => AdminDomainItem.InternationalHallOfFameTypes.Page;
 }

@@ -1,17 +1,17 @@
-﻿using Memorabilia.Domain.Entities;
+﻿using Memorabilia.Domain.Constants;
+using Memorabilia.Domain.Entities;
 
-namespace Memorabilia.Application.Features.Admin.GameStyleTypes
+namespace Memorabilia.Application.Features.Admin.GameStyleTypes;
+
+public class GameStyleTypesViewModel : DomainsViewModel
 {
-    public class GameStyleTypesViewModel : DomainsViewModel
-    {
-        public GameStyleTypesViewModel() { }
+    public GameStyleTypesViewModel() { }
 
-        public GameStyleTypesViewModel(IEnumerable<DomainEntity> domainEntities) : base(domainEntities) { }
+    public GameStyleTypesViewModel(IEnumerable<DomainEntity> domainEntities) : base(domainEntities) { }
 
-        public override string ItemTitle => "Game Style Type";
+    public override string ItemTitle => AdminDomainItem.GameStyleTypes.Item;
 
-        public override string PageTitle => "Game Style Types";
+    public override string PageTitle => AdminDomainItem.GameStyleTypes.Title;
 
-        public override string RoutePrefix => "GameStyleTypes";
-    }
+    public override string RoutePrefix => AdminDomainItem.GameStyleTypes.Page;
 }

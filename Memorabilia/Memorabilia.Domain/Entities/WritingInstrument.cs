@@ -1,9 +1,8 @@
-﻿namespace Memorabilia.Domain.Entities
-{
-    public class WritingInstrument : DomainEntity
-    {
-        public WritingInstrument() { }
+﻿namespace Memorabilia.Domain.Entities;
 
-        public WritingInstrument(string name, string abbreviation) : base(name, abbreviation) { }
-    }
+public class WritingInstrument : DomainEntity
+{
+    public WritingInstrument() { }
+
+    public WritingInstrument(string name, string abbreviation) : base(name, abbreviation) { }
 }

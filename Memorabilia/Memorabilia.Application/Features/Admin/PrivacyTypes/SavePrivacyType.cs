@@ -1,48 +1,48 @@
 ﻿using Memorabilia.Domain.Entities;
 
-namespace Memorabilia.Application.Features.Admin.PrivacyTypes
+namespace Memorabilia.Application.Features.Admin.PrivacyTypes;
+
+public class SavePrivacyType
 {
-    public class SavePrivacyType
+    public class Handler : CommandHandler<Command>
     {
-        public class Handler : CommandHandler<Command>
+        private readonly IDomainRepository<PrivacyType> _privacyTypeRepository;
+
+        public Handler(IDomainRepository<PrivacyType> privacyTypeRepository)
         {
-            private readonly IPrivacyTypeRepository _privacyTypeRepository;
-
-            public Handler(IPrivacyTypeRepository privacyTypeRepository)
-            {
-                _privacyTypeRepository = privacyTypeRepository;
-            }
-
-            protected override async Task Handle(Command command)
-            {
-                PrivacyType privacyType;
-
-                if (command.IsNew)
-                {
-                    privacyType = new PrivacyType(command.Name, command.Abbreviation);
-                    await _privacyTypeRepository.Add(privacyType).ConfigureAwait(false);
-
-                    return;
-                }
-
-                privacyType = await _privacyTypeRepository.Get(command.Id).ConfigureAwait(false);
-
-                if (command.IsDeleted)
-                {
-                    await _privacyTypeRepository.Delete(privacyType).ConfigureAwait(false);
-
-                    return;
-                }
-
-                privacyType.Set(command.Name, command.Abbreviation);
-
-                await _privacyTypeRepository.Update(privacyType).ConfigureAwait(false);
-            }
+            _privacyTypeRepository = privacyTypeRepository;
         }
 
-        public class Command : DomainEntityCommand
+        protected override async Task Handle(Command command)
         {
-            public Command(SaveDomainViewModel viewModel) : base(viewModel) { }
+            PrivacyType privacyType;
+
+            if (command.IsNew)
+            {
+                privacyType = new PrivacyType(command.Name, command.Abbreviation);
+
+                await _privacyTypeRepository.Add(privacyType);
+
+                return;
+            }
+
+            privacyType = await _privacyTypeRepository.Get(command.Id);
+
+            if (command.IsDeleted)
+            {
+                await _privacyTypeRepository.Delete(privacyType);
+
+                return;
+            }
+
+            privacyType.Set(command.Name, command.Abbreviation);
+
+            await _privacyTypeRepository.Update(privacyType);
         }
+    }
+
+    public class Command : DomainEntityCommand
+    {
+        public Command(SaveDomainViewModel viewModel) : base(viewModel) { }
     }
 }

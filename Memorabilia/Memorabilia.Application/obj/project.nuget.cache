@@ -1,14 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "ZN61TgHB0YZVrEUZFgnEl5fVaK4xGEKF3BfsAmrAmJlaO0kY8a8e8RX+YM0xZZrOCobRBOqXDmo1JPokohY1cA==",
+  "dgSpecHash": "UoRo0j9qFHLWdSBoudGixL2m/KmGI6jTILkdshAPAJApjblkHMBiwiuYjyf3QhZc94Xnbw00/QazME/Q67w/mw==",
   "success": true,
   "projectFilePath": "D:\\Projects\\njgrillo\\Memorabilia\\Memorabilia\\Memorabilia.Application\\Memorabilia.Application.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\njgri\\.nuget\\packages\\autofac\\6.4.0\\autofac.6.4.0.nupkg.sha512",
+    "C:\\Users\\njgri\\.nuget\\packages\\autofac.extensions.dependencyinjection\\8.0.0\\autofac.extensions.dependencyinjection.8.0.0.nupkg.sha512",
     "C:\\Users\\njgri\\.nuget\\packages\\castle.core\\4.4.1\\castle.core.4.4.1.nupkg.sha512",
-    "C:\\Users\\njgri\\.nuget\\packages\\fluentvalidation\\11.2.1\\fluentvalidation.11.2.1.nupkg.sha512",
-    "C:\\Users\\njgri\\.nuget\\packages\\fluentvalidation.aspnetcore\\11.2.2\\fluentvalidation.aspnetcore.11.2.2.nupkg.sha512",
-    "C:\\Users\\njgri\\.nuget\\packages\\fluentvalidation.dependencyinjectionextensions\\11.2.1\\fluentvalidation.dependencyinjectionextensions.11.2.1.nupkg.sha512",
-    "C:\\Users\\njgri\\.nuget\\packages\\framework.library\\1.0.0\\framework.library.1.0.0.nupkg.sha512",
     "C:\\Users\\njgri\\.nuget\\packages\\mediatr\\10.0.1\\mediatr.10.0.1.nupkg.sha512",
     "C:\\Users\\njgri\\.nuget\\packages\\mediatr.contracts\\1.0.1\\mediatr.contracts.1.0.1.nupkg.sha512",
     "C:\\Users\\njgri\\.nuget\\packages\\microsoft.aspnetcore.authorization\\6.0.8\\microsoft.aspnetcore.authorization.6.0.8.nupkg.sha512",
@@ -114,7 +112,8 @@
     "C:\\Users\\njgri\\.nuget\\packages\\system.threading.timer\\4.3.0\\system.threading.timer.4.3.0.nupkg.sha512",
     "C:\\Users\\njgri\\.nuget\\packages\\system.xml.readerwriter\\4.3.0\\system.xml.readerwriter.4.3.0.nupkg.sha512",
     "C:\\Users\\njgri\\.nuget\\packages\\system.xml.xdocument\\4.3.0\\system.xml.xdocument.4.3.0.nupkg.sha512",
-    "C:\\Users\\njgri\\.nuget\\packages\\system.xml.xmldocument\\4.3.0\\system.xml.xmldocument.4.3.0.nupkg.sha512"
+    "C:\\Users\\njgri\\.nuget\\packages\\system.xml.xmldocument\\4.3.0\\system.xml.xmldocument.4.3.0.nupkg.sha512",
+    "C:\\Users\\njgri\\.nuget\\packages\\framework.library\\1.0.0\\framework.library.1.0.0.nupkg.sha512"
   ],
   "logs": []
 }

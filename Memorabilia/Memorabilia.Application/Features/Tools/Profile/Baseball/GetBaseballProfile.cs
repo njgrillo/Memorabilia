@@ -1,30 +1,29 @@
-﻿namespace Memorabilia.Application.Features.Tools.Profile
+﻿namespace Memorabilia.Application.Features.Tools.Profile;
+
+public class GetBaseballProfile
 {
-    public class GetBaseballProfile
+    public class Handler : QueryHandler<Query, BaseballProfileViewModel>
     {
-        public class Handler : QueryHandler<Query, BaseballProfileViewModel>
+        private readonly IPersonRepository _personRepository;
+
+        public Handler(IPersonRepository personRepository)
         {
-            private readonly IPersonRepository _personRepository;
-
-            public Handler(IPersonRepository personRepository)
-            {
-                _personRepository = personRepository;
-            }
-
-            protected override async Task<BaseballProfileViewModel> Handle(Query query)
-            {
-                return new BaseballProfileViewModel(await _personRepository.Get(query.PersonId).ConfigureAwait(false));
-            }
+            _personRepository = personRepository;
         }
 
-        public class Query : IQuery<BaseballProfileViewModel>
+        protected override async Task<BaseballProfileViewModel> Handle(Query query)
         {
-            public Query(int personId) 
-            { 
-                PersonId = personId;
-            }
-
-            public int PersonId { get; }
+            return new BaseballProfileViewModel(await _personRepository.Get(query.PersonId));
         }
+    }
+
+    public class Query : IQuery<BaseballProfileViewModel>
+    {
+        public Query(int personId) 
+        { 
+            PersonId = personId;
+        }
+
+        public int PersonId { get; }
     }
 }

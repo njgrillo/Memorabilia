@@ -1,73 +1,72 @@
 ﻿using Memorabilia.Domain.Entities;
 
-namespace Memorabilia.Application.Features.Admin.Leagues
+namespace Memorabilia.Application.Features.Admin.Leagues;
+
+public class SaveLeague
 {
-    public class SaveLeague
+    public class Handler : CommandHandler<Command>
     {
-        public class Handler : CommandHandler<Command>
+        private readonly IDomainRepository<League> _leagueRepository;
+
+        public Handler(IDomainRepository<League> leagueRepository)
         {
-            private readonly ILeagueRepository _leagueRepository;
-
-            public Handler(ILeagueRepository leagueRepository)
-            {
-                _leagueRepository = leagueRepository;
-            }
-
-            protected override async Task Handle(Command command)
-            {
-                League league;
-
-                if (command.IsNew)
-                {
-                    league = new League(command.SportLeagueLevelId,
-                                        command.Name,
-                                        command.Abbreviation);
-
-                    await _leagueRepository.Add(league).ConfigureAwait(false);
-
-                    return;
-                }
-
-                league = await _leagueRepository.Get(command.Id).ConfigureAwait(false);
-
-                if (command.IsDeleted)
-                {
-                    await _leagueRepository.Delete(league).ConfigureAwait(false);
-
-                    return;
-                }
-
-                league.Set(command.SportLeagueLevelId,
-                           command.Name,
-                           command.Abbreviation);
-
-                await _leagueRepository.Update(league).ConfigureAwait(false);
-            }
+            _leagueRepository = leagueRepository;
         }
 
-        public class Command : DomainCommand, ICommand
+        protected override async Task Handle(Command command)
         {
-            private readonly SaveLeagueViewModel _viewModel;
+            League league;
 
-            public Command(SaveLeagueViewModel viewModel)
+            if (command.IsNew)
             {
-                _viewModel = viewModel;
+                league = new League(command.SportLeagueLevelId,
+                                    command.Name,
+                                    command.Abbreviation);
+
+                await _leagueRepository.Add(league);
+
+                return;
             }
 
-            public string Abbreviation => _viewModel.Abbreviation;
+            league = await _leagueRepository.Get(command.Id);
 
-            public int Id => _viewModel.Id;
+            if (command.IsDeleted)
+            {
+                await _leagueRepository.Delete(league);
 
-            public bool IsDeleted => _viewModel.IsDeleted;
+                return;
+            }
 
-            public bool IsModified => _viewModel.IsModified;
+            league.Set(command.SportLeagueLevelId,
+                       command.Name,
+                       command.Abbreviation);
 
-            public bool IsNew => _viewModel.IsNew;
-
-
-            public string Name => _viewModel.Name;
-
-            public int SportLeagueLevelId => _viewModel.SportLeagueLevelId;
+            await _leagueRepository.Update(league);
         }
+    }
+
+    public class Command : DomainCommand, ICommand
+    {
+        private readonly SaveLeagueViewModel _viewModel;
+
+        public Command(SaveLeagueViewModel viewModel)
+        {
+            _viewModel = viewModel;
+        }
+
+        public string Abbreviation => _viewModel.Abbreviation;
+
+        public int Id => _viewModel.Id;
+
+        public bool IsDeleted => _viewModel.IsDeleted;
+
+        public bool IsModified => _viewModel.IsModified;
+
+        public bool IsNew => _viewModel.IsNew;
+
+
+        public string Name => _viewModel.Name;
+
+        public int SportLeagueLevelId => _viewModel.SportLeagueLevelId;
     }
 }

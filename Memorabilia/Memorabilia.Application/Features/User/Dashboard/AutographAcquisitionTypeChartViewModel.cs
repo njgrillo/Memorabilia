@@ -1,34 +1,33 @@
 ﻿using Memorabilia.Domain.Constants;
 
-namespace Memorabilia.Application.Features.User.Dashboard
+namespace Memorabilia.Application.Features.User.Dashboard;
+
+public class AutographAcquisitionTypeChartViewModel : DashboardItemViewModel
 {
-    public class AutographAcquisitionTypeChartViewModel : DashboardItemViewModel
+    public AutographAcquisitionTypeChartViewModel() { }
+
+    public AutographAcquisitionTypeChartViewModel(DashboardItem dashboardItem, IEnumerable<Domain.Entities.Memorabilia> memorabiliaItems)
     {
-        public AutographAcquisitionTypeChartViewModel() { }
+        DashboardItem = dashboardItem;
 
-        public AutographAcquisitionTypeChartViewModel(DashboardItem dashboardItem, IEnumerable<Domain.Entities.Memorabilia> memorabiliaItems)
+        var acquisitions = memorabiliaItems.SelectMany(item => item.Autographs.Where(autograph => autograph.Acquisition != null)
+                                                                              .Select(autograph => autograph.Acquisition));
+
+        var acquisitionTypeNames = acquisitions.Select(acquisition => AcquisitionType.Find(acquisition.AcquisitionTypeId).Name)
+                                               .Distinct();
+
+        Labels = acquisitionTypeNames.ToArray();
+
+        var counts = new List<double>();
+
+        foreach (var acquisitionTypeName in acquisitionTypeNames)
         {
-            DashboardItem = dashboardItem;
+            var acquisitionType = AcquisitionType.Find(acquisitionTypeName);
+            var count = acquisitions.Count(acquisition => acquisition.AcquisitionTypeId == acquisitionType.Id);
 
-            var acquisitions = memorabiliaItems.SelectMany(item => item.Autographs.Where(autograph => autograph.Acquisition != null)
-                                                                                  .Select(autograph => autograph.Acquisition));
-
-            var acquisitionTypeNames = acquisitions.Select(acquisition => AcquisitionType.Find(acquisition.AcquisitionTypeId).Name)
-                                                   .Distinct();
-
-            Labels = acquisitionTypeNames.ToArray();
-
-            var counts = new List<double>();
-
-            foreach (var acquisitionTypeName in acquisitionTypeNames)
-            {
-                var acquisitionType = AcquisitionType.Find(acquisitionTypeName);
-                var count = acquisitions.Count(acquisition => acquisition.AcquisitionTypeId == acquisitionType.Id);
-
-                counts.Add(count);
-            }
-
-            DataNew = counts.ToArray();
+            counts.Add(count);
         }
+
+        DataNew = counts.ToArray();
     }
 }

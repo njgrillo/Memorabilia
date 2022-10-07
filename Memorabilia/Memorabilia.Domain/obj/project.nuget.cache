@@ -1,14 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "QFeIqUP2n6bDcHR/kt1/ApMeCU9DVJTH3+mMcJEawqaXwr1sMi4hyqXNzKxG5qFoPgqON2Do4R8iEnmR9Q4cEg==",
+  "dgSpecHash": "VuPj/Ytf+tY4AibCxBy3tZV+aKLKzu+T9+EpQC79X3o/c5hwk6xM5kCP5RkXd3+xqp48nll9SULdPLJ24wWNIw==",
   "success": true,
   "projectFilePath": "D:\\Projects\\njgrillo\\Memorabilia\\Memorabilia\\Memorabilia.Domain\\Memorabilia.Domain.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\njgri\\.nuget\\packages\\castle.core\\4.4.1\\castle.core.4.4.1.nupkg.sha512",
-    "C:\\Users\\njgri\\.nuget\\packages\\fluentvalidation\\11.2.1\\fluentvalidation.11.2.1.nupkg.sha512",
-    "C:\\Users\\njgri\\.nuget\\packages\\fluentvalidation.aspnetcore\\11.2.2\\fluentvalidation.aspnetcore.11.2.2.nupkg.sha512",
-    "C:\\Users\\njgri\\.nuget\\packages\\fluentvalidation.dependencyinjectionextensions\\11.2.1\\fluentvalidation.dependencyinjectionextensions.11.2.1.nupkg.sha512",
-    "C:\\Users\\njgri\\.nuget\\packages\\framework.library\\1.0.0\\framework.library.1.0.0.nupkg.sha512",
     "C:\\Users\\njgri\\.nuget\\packages\\mediatr\\10.0.1\\mediatr.10.0.1.nupkg.sha512",
     "C:\\Users\\njgri\\.nuget\\packages\\mediatr.contracts\\1.0.1\\mediatr.contracts.1.0.1.nupkg.sha512",
     "C:\\Users\\njgri\\.nuget\\packages\\microsoft.entityframeworkcore\\6.0.2\\microsoft.entityframeworkcore.6.0.2.nupkg.sha512",
@@ -105,7 +101,8 @@
     "C:\\Users\\njgri\\.nuget\\packages\\system.threading.timer\\4.3.0\\system.threading.timer.4.3.0.nupkg.sha512",
     "C:\\Users\\njgri\\.nuget\\packages\\system.xml.readerwriter\\4.3.0\\system.xml.readerwriter.4.3.0.nupkg.sha512",
     "C:\\Users\\njgri\\.nuget\\packages\\system.xml.xdocument\\4.3.0\\system.xml.xdocument.4.3.0.nupkg.sha512",
-    "C:\\Users\\njgri\\.nuget\\packages\\system.xml.xmldocument\\4.3.0\\system.xml.xmldocument.4.3.0.nupkg.sha512"
+    "C:\\Users\\njgri\\.nuget\\packages\\system.xml.xmldocument\\4.3.0\\system.xml.xmldocument.4.3.0.nupkg.sha512",
+    "C:\\Users\\njgri\\.nuget\\packages\\framework.library\\1.0.0\\framework.library.1.0.0.nupkg.sha512"
   ],
   "logs": []
 }

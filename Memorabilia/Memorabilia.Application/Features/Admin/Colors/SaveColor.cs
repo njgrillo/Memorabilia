@@ -1,48 +1,48 @@
 ﻿using Memorabilia.Domain.Entities;
 
-namespace Memorabilia.Application.Features.Admin.Colors
+namespace Memorabilia.Application.Features.Admin.Colors;
+
+public class SaveColor
 {
-    public class SaveColor
+    public class Handler : CommandHandler<Command>
     {
-        public class Handler : CommandHandler<Command>
+        private readonly IDomainRepository<Color> _colorRepository;
+
+        public Handler(IDomainRepository<Color> colorRepository)
         {
-            private readonly IColorRepository _colorRepository;
-
-            public Handler(IColorRepository colorRepository)
-            {
-                _colorRepository = colorRepository;
-            }
-
-            protected override async Task Handle(Command command)
-            {
-                Color color;
-
-                if (command.IsNew)
-                {
-                    color = new Color(command.Name, command.Abbreviation);
-                    await _colorRepository.Add(color).ConfigureAwait(false);
-
-                    return;
-                }
-
-                color = await _colorRepository.Get(command.Id).ConfigureAwait(false);
-
-                if (command.IsDeleted)
-                {
-                    await _colorRepository.Delete(color).ConfigureAwait(false);
-
-                    return;
-                }
-
-                color.Set(command.Name, command.Abbreviation);
-
-                await _colorRepository.Update(color).ConfigureAwait(false);
-            }
+            _colorRepository = colorRepository;
         }
 
-        public class Command : DomainEntityCommand
+        protected override async Task Handle(Command command)
         {
-            public Command(SaveDomainViewModel viewModel) : base(viewModel) { }
+            Color color;
+
+            if (command.IsNew)
+            {
+                color = new Color(command.Name, command.Abbreviation);
+
+                await _colorRepository.Add(color);
+
+                return;
+            }
+
+            color = await _colorRepository.Get(command.Id);
+
+            if (command.IsDeleted)
+            {
+                await _colorRepository.Delete(color);
+
+                return;
+            }
+
+            color.Set(command.Name, command.Abbreviation);
+
+            await _colorRepository.Update(color);
         }
+    }
+
+    public class Command : DomainEntityCommand
+    {
+        public Command(SaveDomainViewModel viewModel) : base(viewModel) { }
     }
 }

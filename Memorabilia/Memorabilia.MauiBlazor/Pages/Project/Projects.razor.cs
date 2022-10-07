@@ -1,10 +1,14 @@
-﻿using Microsoft.AspNetCore.Components;
-
-namespace Memorabilia.MauiBlazor.Pages.Project
+﻿namespace Memorabilia.MauiBlazor.Pages.Project
 {
 	public partial class Projects : ComponentBase
 	{
-        [Parameter]
-        public RenderFragment Content { get; set; }
+        protected int UserId { get; set; }
+
+        protected override async Task OnInitializedAsync()
+        {
+            var userId = await SecureStorage.Default.GetAsync("UserId");
+
+            UserId = userId.ToInt32();
+        }
     }
 }

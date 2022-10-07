@@ -1,9 +1,8 @@
-﻿namespace Memorabilia.Domain.Entities
-{
-    public class FranchiseHallOfFameType : DomainEntity
-    {
-        public FranchiseHallOfFameType() { }
+﻿namespace Memorabilia.Domain.Entities;
 
-        public FranchiseHallOfFameType(string name, string abbreviation) : base(name, abbreviation) { }
-    }
+public class FranchiseHallOfFameType : DomainEntity
+{
+    public FranchiseHallOfFameType() { }
+
+    public FranchiseHallOfFameType(string name, string abbreviation) : base(name, abbreviation) { }
 }

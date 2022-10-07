@@ -1,38 +1,37 @@
-﻿namespace Memorabilia.Application.Features.Autograph.Spot
+﻿namespace Memorabilia.Application.Features.Autograph.Spot;
+
+public class SaveSpot
 {
-    public class SaveSpot
+    public class Handler : CommandHandler<Command>
     {
-        public class Handler : CommandHandler<Command>
+        private readonly IAutographRepository _autographRepository;
+
+        public Handler(IAutographRepository autographRepository)
         {
-            private readonly IAutographRepository _autographRepository;
-
-            public Handler(IAutographRepository autographRepository)
-            {
-                _autographRepository = autographRepository;
-            }
-
-            protected override async Task Handle(Command command)
-            {
-                var autograph = await _autographRepository.Get(command.AutographId).ConfigureAwait(false);
-
-                autograph.SetSpot(command.SpotId);
-
-                await _autographRepository.Update(autograph).ConfigureAwait(false);
-            }
+            _autographRepository = autographRepository;
         }
 
-        public class Command : DomainCommand, ICommand
+        protected override async Task Handle(Command command)
         {
-            private readonly SaveSpotViewModel _viewModel;
+            var autograph = await _autographRepository.Get(command.AutographId);
 
-            public Command(SaveSpotViewModel viewModel)
-            {
-                _viewModel = viewModel;
-            }
+            autograph.SetSpot(command.SpotId);
 
-            public int AutographId => _viewModel.AutographId;
-
-            public int SpotId => _viewModel.SpotId;
+            await _autographRepository.Update(autograph);
         }
+    }
+
+    public class Command : DomainCommand, ICommand
+    {
+        private readonly SaveSpotViewModel _viewModel;
+
+        public Command(SaveSpotViewModel viewModel)
+        {
+            _viewModel = viewModel;
+        }
+
+        public int AutographId => _viewModel.AutographId;
+
+        public int SpotId => _viewModel.SpotId;
     }
 }

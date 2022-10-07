@@ -78,7 +78,7 @@ namespace Memorabilia.Blazor.Controls.MemorabiliaItem
             return MemorabiliaItemStep == memorabiliaItemStep ? "border: 1px solid black;" : string.Empty;
         }
 
-        private void Navigate(string? item = null)
+        private void Navigate(string item = null)
         {
             if (MemorabiliaId == 0)
                 return;

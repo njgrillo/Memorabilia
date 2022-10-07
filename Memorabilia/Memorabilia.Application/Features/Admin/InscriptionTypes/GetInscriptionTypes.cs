@@ -1,22 +1,23 @@
-﻿namespace Memorabilia.Application.Features.Admin.InscriptionTypes
+﻿using Memorabilia.Domain.Entities;
+
+namespace Memorabilia.Application.Features.Admin.InscriptionTypes;
+
+public class GetInscriptionTypes
 {
-    public class GetInscriptionTypes
+    public class Handler : QueryHandler<Query, InscriptionTypesViewModel>
     {
-        public class Handler : QueryHandler<Query, InscriptionTypesViewModel>
+        private readonly IDomainRepository<InscriptionType> _inscriptionTypeRepository;
+
+        public Handler(IDomainRepository<InscriptionType> inscriptionTypeRepository)
         {
-            private readonly IInscriptionTypeRepository _inscriptionTypeRepository;
-
-            public Handler(IInscriptionTypeRepository inscriptionTypeRepository)
-            {
-                _inscriptionTypeRepository = inscriptionTypeRepository;
-            }
-
-            protected override async Task<InscriptionTypesViewModel> Handle(Query query)
-            {
-                return new InscriptionTypesViewModel(await _inscriptionTypeRepository.GetAll().ConfigureAwait(false));
-            }
+            _inscriptionTypeRepository = inscriptionTypeRepository;
         }
 
-        public class Query : IQuery<InscriptionTypesViewModel> { }
+        protected override async Task<InscriptionTypesViewModel> Handle(Query query)
+        {
+            return new InscriptionTypesViewModel(await _inscriptionTypeRepository.GetAll());
+        }
     }
+
+    public class Query : IQuery<InscriptionTypesViewModel> { }
 }

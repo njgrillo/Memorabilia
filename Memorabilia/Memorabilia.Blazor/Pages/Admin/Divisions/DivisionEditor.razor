@@ -1,0 +1,55 @@
+﻿<EditPage ContinueNavigationPath="@ViewModel.RoutePrefix"
+          EditMode="ViewModel.EditModeType" 
+          ExitNavigationPath="@ViewModel.RoutePrefix"
+          ImagePath="@ViewModel.ImagePath" 
+          ItemName="@ViewModel.ItemTitle"
+          Model="ViewModel"
+          OnLoad="OnLoad"
+          OnSave="HandleValidSubmit"
+          PageFooterButtonText="@ViewModel.ExitButtonText"
+          PageFooterNavigationPath="@ViewModel.ExitNavigationPath"
+          PageTitle="@ViewModel.PageTitle"
+          TItem="SaveDivisionViewModel">
+    <Content>
+        <DivRowCol3>
+            <Content>
+                <MudSelect @bind-Value="@ViewModel.ConferenceId"
+                           @bind-Value:event="ValueChanged" 
+                           Label="Conference"
+                           Variant="Variant.Outlined">
+                    <MudSelectItem Value="@(0)">--Select--</MudSelectItem>
+                    <Iterations Items="ViewModel.Conferences" Context="conference">
+                        <MudSelectItem Value="@conference.Id">@conference.Name</MudSelectItem>
+                    </Iterations>	
+                </MudSelect>
+            </Content>
+        </DivRowCol3>
+        <DivRowCol3>
+            <Content>
+                <MudSelect @bind-Value="@ViewModel.LeagueId"
+                           @bind-Value:event="ValueChanged"  
+                           Label="League"
+                           Variant="Variant.Outlined">
+                    <MudSelectItem Value="@(0)">--Select--</MudSelectItem>
+                    <Iterations Items="ViewModel.Leagues" Context="league">
+                        <MudSelectItem Value="@league.Id">@league.Name</MudSelectItem>
+                    </Iterations>	
+                </MudSelect>  
+            </Content>
+        </DivRowCol3>
+        <DivRowCol3>
+            <Content>
+                <MudTextField @bind-Value="ViewModel.Name" 
+                              Label="Name" 
+                              Variant="Variant.Outlined" />
+            </Content>
+        </DivRowCol3>
+        <DivRowCol3>
+            <Content>
+                <MudTextField @bind-Value="ViewModel.Abbreviation" 
+                              Label="Abbreviation" 
+                              Variant="Variant.Outlined" />
+            </Content>
+        </DivRowCol3>
+    </Content>
+</EditPage>

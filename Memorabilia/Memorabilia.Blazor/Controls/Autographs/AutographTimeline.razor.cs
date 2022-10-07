@@ -1,149 +1,148 @@
 ﻿#nullable disable
 
-namespace Memorabilia.Blazor.Controls.Autographs
+namespace Memorabilia.Blazor.Controls.Autographs;
+
+public partial class AutographTimeline : ComponentBase
 {
-    public partial class AutographTimeline : ComponentBase
+    [Inject]
+    public NavigationManager NavigationManager { get; set; }
+
+    [Parameter]
+    public int AutographId { get; set; }
+
+    [Parameter]
+    public EditModeType EditMode { get; set; } = EditModeType.Add;
+
+    [Parameter]
+    public Severity AutographAuthenticationEditAlertSeverity { get; set; } = MudBlazor.Severity.Info;
+
+    [Parameter]
+    public string AutographAuthenticationEditAlertTitle { get; set; }
+
+    [Parameter]
+    public Color AutographAuthenticationEditColor { get; set; } = MudBlazor.Color.Info;
+
+    [Parameter]
+    public Severity AutographEditAlertSeverity { get; set; } = MudBlazor.Severity.Info;
+
+    [Parameter]
+    public string AutographEditAlertTitle { get; set; }
+
+    [Parameter]
+    public Color AutographEditColor { get; set; } = MudBlazor.Color.Info;
+
+    [Parameter]
+    public Severity AutographImageEditAlertSeverity { get; set; } = MudBlazor.Severity.Info;
+
+    [Parameter]
+    public string AutographImageEditAlertTitle { get; set; }
+
+    [Parameter]
+    public Color AutographImageEditColor { get; set; } = MudBlazor.Color.Info;
+
+    [Parameter]
+    public Severity AutographInscriptionEditAlertSeverity { get; set; } = MudBlazor.Severity.Info;
+
+    [Parameter]
+    public string AutographInscriptionEditAlertTitle { get; set; }
+
+    [Parameter]
+    public Color AutographInscriptionEditColor { get; set; } = MudBlazor.Color.Info;
+
+    [Parameter]
+    public Severity AutographSpotEditAlertSeverity { get; set; } = MudBlazor.Severity.Info;
+
+    [Parameter]
+    public string AutographSpotEditAlertTitle { get; set; }
+
+    [Parameter]
+    public Color AutographSpotEditColor { get; set; } = MudBlazor.Color.Info;
+
+    [Parameter]
+    public AutographStep AutographStep { get; set; }
+
+    [Parameter]
+    public bool DisplaySpot { get; set; }
+
+    [Parameter]
+    public int MemorabiliaId { get; set; }
+
+    private string _mudAlertClass;
+
+    protected override void OnInitialized()
     {
-        [Inject]
-        public NavigationManager NavigationManager { get; set; }
+        _mudAlertClass = AutographId > 0 ? "can-click" : string.Empty;
 
-        [Parameter]
-        public int AutographId { get; set; }
+        AutographAuthenticationEditAlertTitle = AutographStep.Authentication.Name;
+        AutographEditAlertTitle = AutographStep.Autograph.Name;
+        AutographImageEditAlertTitle = AutographStep.Image.Name;
+        AutographInscriptionEditAlertTitle = AutographStep.Inscription.Name;
 
-        [Parameter]
-        public EditModeType EditMode { get; set; } = EditModeType.Add;
+        if (DisplaySpot)
+            AutographSpotEditAlertTitle = AutographStep.Spot.Name;
 
-        [Parameter]
-        public Severity AutographAuthenticationEditAlertSeverity { get; set; } = MudBlazor.Severity.Info;
-
-        [Parameter]
-        public string AutographAuthenticationEditAlertTitle { get; set; }
-
-        [Parameter]
-        public Color AutographAuthenticationEditColor { get; set; } = MudBlazor.Color.Info;
-
-        [Parameter]
-        public Severity AutographEditAlertSeverity { get; set; } = MudBlazor.Severity.Info;
-
-        [Parameter]
-        public string AutographEditAlertTitle { get; set; }
-
-        [Parameter]
-        public Color AutographEditColor { get; set; } = MudBlazor.Color.Info;
-
-        [Parameter]
-        public Severity AutographImageEditAlertSeverity { get; set; } = MudBlazor.Severity.Info;
-
-        [Parameter]
-        public string AutographImageEditAlertTitle { get; set; }
-
-        [Parameter]
-        public Color AutographImageEditColor { get; set; } = MudBlazor.Color.Info;
-
-        [Parameter]
-        public Severity AutographInscriptionEditAlertSeverity { get; set; } = MudBlazor.Severity.Info;
-
-        [Parameter]
-        public string AutographInscriptionEditAlertTitle { get; set; }
-
-        [Parameter]
-        public Color AutographInscriptionEditColor { get; set; } = MudBlazor.Color.Info;
-
-        [Parameter]
-        public Severity AutographSpotEditAlertSeverity { get; set; } = MudBlazor.Severity.Info;
-
-        [Parameter]
-        public string AutographSpotEditAlertTitle { get; set; }
-
-        [Parameter]
-        public Color AutographSpotEditColor { get; set; } = MudBlazor.Color.Info;
-
-        [Parameter]
-        public AutographStep AutographStep { get; set; }
-
-        [Parameter]
-        public bool DisplaySpot { get; set; }
-
-        [Parameter]
-        public int MemorabiliaId { get; set; }
-
-        private string _mudAlertClass;
-
-        protected override void OnInitialized()
+        if (AutographStep == AutographStep.Inscription)
         {
-            _mudAlertClass = AutographId > 0 ? "can-click" : string.Empty;
+            AutographEditAlertSeverity = Severity.Success;
+            AutographEditColor = Color.Success;
+            return;
+        }
 
-            AutographAuthenticationEditAlertTitle = AutographStep.Authentication.Name;
-            AutographEditAlertTitle = AutographStep.Autograph.Name;
-            AutographImageEditAlertTitle = AutographStep.Image.Name;
-            AutographInscriptionEditAlertTitle = AutographStep.Inscription.Name;
+        if (AutographStep == AutographStep.Authentication)
+        {
+            AutographEditAlertSeverity = Severity.Success;
+            AutographEditColor = Color.Success;
+            AutographInscriptionEditAlertSeverity = Severity.Success;
+            AutographInscriptionEditColor = Color.Success;
+            return;
+        }
+
+        if (DisplaySpot && AutographStep == AutographStep.Spot)
+        {
+            AutographAuthenticationEditAlertSeverity = Severity.Success;
+            AutographAuthenticationEditColor = Color.Success;
+            AutographEditAlertSeverity = Severity.Success;
+            AutographEditColor = Color.Success;
+            AutographInscriptionEditAlertSeverity = Severity.Success;
+            AutographInscriptionEditColor = Color.Success;
+            return;
+        }
+
+        if (AutographStep == AutographStep.Image)
+        {
+            AutographAuthenticationEditAlertSeverity = Severity.Success;
+            AutographAuthenticationEditColor = Color.Success;
+            AutographEditAlertSeverity = Severity.Success;
+            AutographEditColor = Color.Success;
+            AutographInscriptionEditAlertSeverity = Severity.Success;
+            AutographInscriptionEditColor = Color.Success;
 
             if (DisplaySpot)
-                AutographSpotEditAlertTitle = AutographStep.Spot.Name;
-
-            if (AutographStep == AutographStep.Inscription)
             {
-                AutographEditAlertSeverity = Severity.Success;
-                AutographEditColor = Color.Success;
-                return;
+                AutographSpotEditAlertSeverity = Severity.Success;
+                AutographSpotEditColor = Color.Success;
             }
 
-            if (AutographStep == AutographStep.Authentication)
-            {
-                AutographEditAlertSeverity = Severity.Success;
-                AutographEditColor = Color.Success;
-                AutographInscriptionEditAlertSeverity = Severity.Success;
-                AutographInscriptionEditColor = Color.Success;
-                return;
-            }
-
-            if (DisplaySpot && AutographStep == AutographStep.Spot)
-            {
-                AutographAuthenticationEditAlertSeverity = Severity.Success;
-                AutographAuthenticationEditColor = Color.Success;
-                AutographEditAlertSeverity = Severity.Success;
-                AutographEditColor = Color.Success;
-                AutographInscriptionEditAlertSeverity = Severity.Success;
-                AutographInscriptionEditColor = Color.Success;
-                return;
-            }
-
-            if (AutographStep == AutographStep.Image)
-            {
-                AutographAuthenticationEditAlertSeverity = Severity.Success;
-                AutographAuthenticationEditColor = Color.Success;
-                AutographEditAlertSeverity = Severity.Success;
-                AutographEditColor = Color.Success;
-                AutographInscriptionEditAlertSeverity = Severity.Success;
-                AutographInscriptionEditColor = Color.Success;
-
-                if (DisplaySpot)
-                {
-                    AutographSpotEditAlertSeverity = Severity.Success;
-                    AutographSpotEditColor = Color.Success;
-                }
-
-                return;
-            }
+            return;
         }
+    }
 
-        private string GetMudAlertStyle(AutographStep autographStep)
+    private string GetMudAlertStyle(AutographStep autographStep)
+    {
+        return AutographStep == autographStep ? "border: 1px solid black;" : string.Empty;
+    }
+
+    private void Navigate(string item = null)
+    {
+        if (AutographId == 0)
+            return;
+
+        if (item.IsNullOrEmpty())
         {
-            return AutographStep == autographStep ? "border: 1px solid black;" : string.Empty;
+            NavigationManager.NavigateTo($"Autographs/Edit/{MemorabiliaId}/{AutographId}");
+            return;
         }
 
-        private void Navigate(string item = null)
-        {
-            if (AutographId == 0)
-                return;
-
-            if (item.IsNullOrEmpty())
-            {
-                NavigationManager.NavigateTo($"Autographs/Edit/{MemorabiliaId}/{AutographId}");
-                return;
-            }
-
-            NavigationManager.NavigateTo($"Autographs/{item}/Edit/{AutographId}");
-        }
+        NavigationManager.NavigateTo($"Autographs/{item}/Edit/{AutographId}");
     }
 }

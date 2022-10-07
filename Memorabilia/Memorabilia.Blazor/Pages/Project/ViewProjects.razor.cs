@@ -11,27 +11,19 @@ namespace Memorabilia.Blazor.Pages.Project
         public IDialogService DialogService { get; set; }
 
         [Inject]
-        public ProtectedLocalStorage LocalStorage { get; set; }
-
-        [Inject]
-        public NavigationManager NavigationManager { get; set; }
-
-        [Inject]
         public QueryRouter QueryRouter { get; set; }
 
         [Inject]
         public ISnackbar Snackbar { get; set; }
 
+        [Parameter]
+        public int UserId { get; set; }
+
         private ProjectsViewModel _viewModel = new();
 
         protected async Task OnLoad()
         {
-            var userId = await LocalStorage.GetAsync<int>("UserId");
-
-            if (userId.Value == 0)
-                NavigationManager.NavigateTo("Login");
-
-            _viewModel = await QueryRouter.Send(new GetProjects.Query(userId.Value)).ConfigureAwait(false);
+            _viewModel = await QueryRouter.Send(new GetProjects.Query(UserId)).ConfigureAwait(false);
         }
 
         protected async Task ShowDeleteConfirm(int id)

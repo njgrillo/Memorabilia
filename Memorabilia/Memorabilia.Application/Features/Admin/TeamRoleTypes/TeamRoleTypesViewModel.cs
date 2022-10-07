@@ -1,17 +1,17 @@
-﻿using Memorabilia.Domain.Entities;
+﻿using Memorabilia.Domain.Constants;
+using Memorabilia.Domain.Entities;
 
-namespace Memorabilia.Application.Features.Admin.TeamRoleTypes
+namespace Memorabilia.Application.Features.Admin.TeamRoleTypes;
+
+public class TeamRoleTypesViewModel : DomainsViewModel
 {
-    public class TeamRoleTypesViewModel : DomainsViewModel
-    {
-        public TeamRoleTypesViewModel() { }
+    public TeamRoleTypesViewModel() { }
 
-        public TeamRoleTypesViewModel(IEnumerable<DomainEntity> domainEntities) : base(domainEntities) { }
+    public TeamRoleTypesViewModel(IEnumerable<DomainEntity> domainEntities) : base(domainEntities) { }
 
-        public override string ItemTitle => "Team Role Type";
+    public override string ItemTitle => AdminDomainItem.TeamRoleTypes.Item;
 
-        public override string PageTitle => "Team Role Types";
+    public override string PageTitle => AdminDomainItem.TeamRoleTypes.Title;
 
-        public override string RoutePrefix => "TeamRoleTypes";
-    }
+    public override string RoutePrefix => AdminDomainItem.TeamRoleTypes.Page;
 }

@@ -1,82 +1,59 @@
-﻿namespace Memorabilia.Repository
+﻿namespace Memorabilia.Repository;
+
+public class MemorabiliaRepository<T> : BaseRepository<T>, IDomainRepository<T> where T : DomainEntity
 {
-    public class MemorabiliaRepository : BaseRepository<Domain.Entities.Memorabilia>, IMemorabiliaRepository
+    private readonly MemorabiliaContext _context;
+
+    public MemorabiliaRepository(MemorabiliaContext context) : base(context)
     {
-        private readonly MemorabiliaContext _context;
+        _context = context;
+    }
 
-        public MemorabiliaRepository(MemorabiliaContext context) : base(context)
-        {
-            _context = context;
-        }
+    protected IQueryable<T> Items => _context.Set<T>();
 
-        private IQueryable<Domain.Entities.Memorabilia> Memorabilia => _context.Set<Domain.Entities.Memorabilia>()
-                                                                               .Include(memorabilia => memorabilia.Autographs)
-                                                                               .Include("Autographs.Acquisition")
-                                                                               .Include("Autographs.Authentications")
-                                                                               .Include("Autographs.Images")
-                                                                               .Include("Autographs.Inscriptions")
-                                                                               .Include("Autographs.Person")
-                                                                               .Include("Autographs.Spot")
-                                                                               .Include(memorabilia => memorabilia.Bammer)
-                                                                               .Include(memorabilia => memorabilia.Baseball)
-                                                                               .Include(memorabilia => memorabilia.Basketball)
-                                                                               .Include(memorabilia => memorabilia.Bat)
-                                                                               .Include(memorabilia => memorabilia.Bobblehead)
-                                                                               .Include(memorabilia => memorabilia.Book)
-                                                                               .Include(memorabilia => memorabilia.Brand)
-                                                                               .Include(memorabilia => memorabilia.Card)
-                                                                               .Include(memorabilia => memorabilia.Commissioner)
-                                                                               .Include(memorabilia => memorabilia.Football)
-                                                                               .Include(memorabilia => memorabilia.Game)
-                                                                               .Include(memorabilia => memorabilia.Glove)
-                                                                               .Include(memorabilia => memorabilia.Helmet)
-                                                                               .Include(memorabilia => memorabilia.Images)
-                                                                               .Include(memorabilia => memorabilia.Jersey)
-                                                                               .Include(memorabilia => memorabilia.LevelType)
-                                                                               .Include(memorabilia => memorabilia.Magazine)
-                                                                               .Include(memorabilia => memorabilia.MemorabiliaAcquisition)
-                                                                               .Include(memorabilia => memorabilia.MemorabiliaAcquisition.Acquisition)
-                                                                               .Include(memorabilia => memorabilia.People)
-                                                                               .Include(memorabilia => memorabilia.Picture)
-                                                                               .Include(memorabilia => memorabilia.Size)
-                                                                               .Include(memorabilia => memorabilia.Sports)
-                                                                               .Include(memorabilia => memorabilia.Teams)
-                                                                               .Include(memorabilia => memorabilia.User);
+    public async Task Add(T item, CancellationToken cancellationToken = default)
+    {
+        _context.Add(item);
 
-        public async Task Add(Domain.Entities.Memorabilia memorabilia, CancellationToken cancellationToken = default)
-        {
-            _context.Add(memorabilia);
+        await _context.SaveChangesAsync(cancellationToken);
+    }
 
-            await _context.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
-        }
+    public void CommitTransaction()
+    {
+        CommitTransaction(_context);
+    }
 
-        public async Task Delete(Domain.Entities.Memorabilia memorabilia, CancellationToken cancellationToken = default)
-        {
-            _context.Set<Domain.Entities.Memorabilia>().Remove(memorabilia);
+    public async Task Delete(T item, CancellationToken cancellationToken = default)
+    {
+        _context.Set<T>().Remove(item);
 
-            await _context.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
-        }
+        await _context.SaveChangesAsync(cancellationToken);
+    }
 
-        public async Task<Domain.Entities.Memorabilia> Get(int id)
-        {
-            return await Memorabilia.SingleOrDefaultAsync(memorabilia => memorabilia.Id == id).ConfigureAwait(false);
-        }
+    public virtual async Task<T> Get(int id)
+    {
+        return await Items.SingleOrDefaultAsync(item => item.Id == id);
+    }
 
-        public async Task<IEnumerable<Domain.Entities.Memorabilia>> GetAll(int userId)
-        {
-            return await Memorabilia.Where(memorabilia => memorabilia.UserId == userId).ToListAsync().ConfigureAwait(false);
-        }
+    public async Task<IEnumerable<T>> GetAll()
+    {
+        return await Items.ToListAsync();
+    }
 
-        public async Task<IEnumerable<Domain.Entities.Memorabilia>> GetAllUnsigned(int userId)
-        {
-            return await Memorabilia.Where(memorabilia => memorabilia.UserId == userId && !memorabilia.Autographs.Any()).ToListAsync().ConfigureAwait(false);
-        }
+    public IDbContextTransaction GetTransaction()
+    {
+        return GetTransaction(_context);
+    }
 
-        public async Task Update(Domain.Entities.Memorabilia memorabilia, CancellationToken cancellationToken = default)
-        {
-            _context.Set<Domain.Entities.Memorabilia>().Update(memorabilia);
+    public void RollbackTransaction()
+    {
+        RollbackTransaction(_context);
+    }
 
-            await _context.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
-        }
+    public async Task Update(T item, CancellationToken cancellationToken = default)
+    {
+        _context.Set<T>().Update(item);
+
+        await _context.SaveChangesAsync(cancellationToken);
     }
 }

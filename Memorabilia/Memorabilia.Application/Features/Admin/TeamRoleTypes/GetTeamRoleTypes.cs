@@ -1,22 +1,23 @@
-﻿namespace Memorabilia.Application.Features.Admin.TeamRoleTypes
+﻿using Memorabilia.Domain.Entities;
+
+namespace Memorabilia.Application.Features.Admin.TeamRoleTypes;
+
+public class GetTeamRoleTypes
 {
-    public class GetTeamRoleTypes
+    public class Handler : QueryHandler<Query, TeamRoleTypesViewModel>
     {
-        public class Handler : QueryHandler<Query, TeamRoleTypesViewModel>
+        private readonly IDomainRepository<TeamRoleType> _TeamRoleTypeRepository;
+
+        public Handler(IDomainRepository<TeamRoleType> TeamRoleTypeRepository)
         {
-            private readonly ITeamRoleTypeRepository _TeamRoleTypeRepository;
-
-            public Handler(ITeamRoleTypeRepository TeamRoleTypeRepository)
-            {
-                _TeamRoleTypeRepository = TeamRoleTypeRepository;
-            }
-
-            protected override async Task<TeamRoleTypesViewModel> Handle(Query query)
-            {
-                return new TeamRoleTypesViewModel(await _TeamRoleTypeRepository.GetAll().ConfigureAwait(false));
-            }
+            _TeamRoleTypeRepository = TeamRoleTypeRepository;
         }
 
-        public class Query : IQuery<TeamRoleTypesViewModel> { }
+        protected override async Task<TeamRoleTypesViewModel> Handle(Query query)
+        {
+            return new TeamRoleTypesViewModel(await _TeamRoleTypeRepository.GetAll());
+        }
     }
+
+    public class Query : IQuery<TeamRoleTypesViewModel> { }
 }

@@ -1,24 +1,23 @@
-﻿namespace Memorabilia.Application.Features.Admin.ItemTypeLevel
+﻿namespace Memorabilia.Application.Features.Admin.ItemTypeLevel;
+
+public class ItemTypeLevelViewModel
 {
-    public class ItemTypeLevelViewModel
+    private readonly Domain.Entities.ItemTypeLevel _itemTypeLevel;
+
+    public ItemTypeLevelViewModel() { }
+
+    public ItemTypeLevelViewModel(Domain.Entities.ItemTypeLevel itemTypeLevel)
     {
-        private readonly Domain.Entities.ItemTypeLevel _itemTypeLevel;
+        _itemTypeLevel = itemTypeLevel;
+    }        
 
-        public ItemTypeLevelViewModel() { }
+    public int Id => _itemTypeLevel.Id;
 
-        public ItemTypeLevelViewModel(Domain.Entities.ItemTypeLevel itemTypeLevel)
-        {
-            _itemTypeLevel = itemTypeLevel;
-        }        
+    public int ItemTypeId => _itemTypeLevel.ItemTypeId;
 
-        public int Id => _itemTypeLevel.Id;
+    public string ItemTypeName => Domain.Constants.ItemType.Find(ItemTypeId).Name;
 
-        public int ItemTypeId => _itemTypeLevel.ItemTypeId;
+    public int LevelTypeId => _itemTypeLevel.LevelTypeId;
 
-        public string ItemTypeName => Domain.Constants.ItemType.Find(ItemTypeId).Name;
-
-        public int LevelTypeId => _itemTypeLevel.LevelTypeId;
-
-        public string LevelTypeName => Domain.Constants.LevelType.Find(LevelTypeId).Name;
-    }
+    public string LevelTypeName => Domain.Constants.LevelType.Find(LevelTypeId).Name;
 }

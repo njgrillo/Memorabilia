@@ -1,25 +1,24 @@
-﻿namespace Memorabilia.Application.Features.Memorabilia.JerseyNumber
+﻿namespace Memorabilia.Application.Features.Memorabilia.JerseyNumber;
+
+public class GetJerseyNumber
 {
-    public class GetJerseyNumber
+    public class Handler : QueryHandler<Query, JerseyNumberViewModel>
     {
-        public class Handler : QueryHandler<Query, JerseyNumberViewModel>
+        private readonly IMemorabiliaItemRepository _memorabiliaRepository;
+
+        public Handler(IMemorabiliaItemRepository memorabiliaRepository)
         {
-            private readonly IMemorabiliaRepository _memorabiliaRepository;
-
-            public Handler(IMemorabiliaRepository memorabiliaRepository)
-            {
-                _memorabiliaRepository = memorabiliaRepository;
-            }
-
-            protected override async Task<JerseyNumberViewModel> Handle(Query query)
-            {
-                return new JerseyNumberViewModel(await _memorabiliaRepository.Get(query.MemorabiliaId).ConfigureAwait(false));
-            }
+            _memorabiliaRepository = memorabiliaRepository;
         }
 
-        public class Query : MemorabiliaQuery, IQuery<JerseyNumberViewModel>
+        protected override async Task<JerseyNumberViewModel> Handle(Query query)
         {
-            public Query(int memorabiliaId) : base(memorabiliaId) { }
+            return new JerseyNumberViewModel(await _memorabiliaRepository.Get(query.MemorabiliaId));
         }
+    }
+
+    public class Query : MemorabiliaQuery, IQuery<JerseyNumberViewModel>
+    {
+        public Query(int memorabiliaId) : base(memorabiliaId) { }
     }
 }

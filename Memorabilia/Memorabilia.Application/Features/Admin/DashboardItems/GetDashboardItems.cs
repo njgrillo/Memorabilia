@@ -1,25 +1,26 @@
-﻿namespace Memorabilia.Application.Features.Admin.DashboardItems
+﻿using Memorabilia.Domain.Entities;
+
+namespace Memorabilia.Application.Features.Admin.DashboardItems;
+
+public class GetDashboardItems
 {
-    public class GetDashboardItems
+    public class Handler : QueryHandler<Query, DashboardItemsViewModel>
     {
-        public class Handler : QueryHandler<Query, DashboardItemsViewModel>
+        private readonly IDomainRepository<DashboardItem> _dashboardItemRepository;
+
+        public Handler(IDomainRepository<DashboardItem> dashboardItemRepository)
         {
-            private readonly IDashboardItemRepository _dashboardItemRepository;
-
-            public Handler(IDashboardItemRepository dashboardItemRepository)
-            {
-                _dashboardItemRepository = dashboardItemRepository;
-            }
-
-            protected override async Task<DashboardItemsViewModel> Handle(Query query)
-            {
-                return new DashboardItemsViewModel(await _dashboardItemRepository.GetAll().ConfigureAwait(false));
-            }
+            _dashboardItemRepository = dashboardItemRepository;
         }
 
-        public class Query : IQuery<DashboardItemsViewModel>
+        protected override async Task<DashboardItemsViewModel> Handle(Query query)
         {
-            public Query() { }
+            return new DashboardItemsViewModel(await _dashboardItemRepository.GetAll());
         }
+    }
+
+    public class Query : IQuery<DashboardItemsViewModel>
+    {
+        public Query() { }
     }
 }

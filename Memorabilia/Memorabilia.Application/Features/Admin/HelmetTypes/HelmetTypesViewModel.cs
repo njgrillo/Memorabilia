@@ -1,17 +1,17 @@
-﻿using Memorabilia.Domain.Entities;
+﻿using Memorabilia.Domain.Constants;
+using Memorabilia.Domain.Entities; 
 
-namespace Memorabilia.Application.Features.Admin.HelmetTypes
+namespace Memorabilia.Application.Features.Admin.HelmetTypes;
+
+public class HelmetTypesViewModel : DomainsViewModel
 {
-    public class HelmetTypesViewModel : DomainsViewModel
-    {
-        public HelmetTypesViewModel() { }
+    public HelmetTypesViewModel() { }
 
-        public HelmetTypesViewModel(IEnumerable<DomainEntity> domainEntities) : base(domainEntities) { }
+    public HelmetTypesViewModel(IEnumerable<DomainEntity> domainEntities) : base(domainEntities) { }
 
-        public override string ItemTitle => "Helmet Type";
+    public override string ItemTitle => AdminDomainItem.HelmetTypes.Item;
 
-        public override string PageTitle => "Helmet Types";
+    public override string PageTitle => AdminDomainItem.HelmetTypes.Title;
 
-        public override string RoutePrefix => "HelmetTypes";
-    }
+    public override string RoutePrefix => AdminDomainItem.HelmetTypes.Page;
 }

@@ -4,6 +4,75 @@
     "D:\\Projects\\njgrillo\\Memorabilia\\Memorabilia\\Memorabilia.Web\\Memorabilia.Web.csproj": {}
   },
   "projects": {
+    "D:\\Projects\\njgrillo\\Framework\\Framework.Library\\Framework.Library.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\Projects\\njgrillo\\Framework\\Framework.Library\\Framework.Library.csproj",
+        "projectName": "Framework.Library",
+        "projectPath": "D:\\Projects\\njgrillo\\Framework\\Framework.Library\\Framework.Library.csproj",
+        "packagesPath": "C:\\Users\\njgri\\.nuget\\packages\\",
+        "outputPath": "D:\\Projects\\njgrillo\\Framework\\Framework.Library\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\njgri\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\componentspace.saml2.net.licensed": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
+          "D:\\Projects\\njgrillo\\Budget\\NugetPackages\\Framework": {},
+          "D:\\Projects\\njgrillo\\Memorabilia\\NugetPackages\\Framework": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "dependencies": {
+            "MediatR": {
+              "target": "Package",
+              "version": "[10.0.1, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.401\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
     "D:\\Projects\\njgrillo\\Memorabilia\\Memorabilia\\Memorabilia.Application\\Memorabilia.Application.csproj": {
       "version": "1.0.0",
       "restore": {
@@ -55,6 +124,14 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "dependencies": {
+            "Autofac": {
+              "target": "Package",
+              "version": "[6.4.0, )"
+            },
+            "Autofac.Extensions.DependencyInjection": {
+              "target": "Package",
+              "version": "[8.0.0, )"
+            },
             "MudBlazor": {
               "target": "Package",
               "version": "[6.0.15, )"
@@ -112,6 +189,9 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
+              "D:\\Projects\\njgrillo\\Framework\\Framework.Library\\Framework.Library.csproj": {
+                "projectPath": "D:\\Projects\\njgrillo\\Framework\\Framework.Library\\Framework.Library.csproj"
+              },
               "D:\\Projects\\njgrillo\\Memorabilia\\Memorabilia\\Memorabilia.Application\\Memorabilia.Application.csproj": {
                 "projectPath": "D:\\Projects\\njgrillo\\Memorabilia\\Memorabilia\\Memorabilia.Application\\Memorabilia.Application.csproj"
               },
@@ -131,10 +211,6 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "dependencies": {
-            "Framework.Library": {
-              "target": "Package",
-              "version": "[1.0.0, )"
-            },
             "MediatR": {
               "target": "Package",
               "version": "[10.0.1, )"
@@ -207,7 +283,11 @@
         "frameworks": {
           "net6.0": {
             "targetAlias": "net6.0",
-            "projectReferences": {}
+            "projectReferences": {
+              "D:\\Projects\\njgrillo\\Framework\\Framework.Library\\Framework.Library.csproj": {
+                "projectPath": "D:\\Projects\\njgrillo\\Framework\\Framework.Library\\Framework.Library.csproj"
+              }
+            }
           }
         },
         "warningProperties": {
@@ -220,10 +300,6 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "dependencies": {
-            "Framework.Library": {
-              "target": "Package",
-              "version": "[1.0.0, )"
-            },
             "MediatR": {
               "target": "Package",
               "version": "[10.0.1, )"
@@ -301,6 +377,14 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "dependencies": {
+            "Autofac": {
+              "target": "Package",
+              "version": "[6.4.0, )"
+            },
+            "Autofac.Extensions.DependencyInjection": {
+              "target": "Package",
+              "version": "[8.0.0, )"
+            },
             "Microsoft.EntityFrameworkCore.Proxies": {
               "target": "Package",
               "version": "[6.0.2, )"
@@ -383,6 +467,14 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "dependencies": {
+            "Autofac": {
+              "target": "Package",
+              "version": "[6.4.0, )"
+            },
+            "Autofac.Extensions.DependencyInjection": {
+              "target": "Package",
+              "version": "[8.0.0, )"
+            },
             "MediatR": {
               "target": "Package",
               "version": "[10.0.1, )"

@@ -1,16 +1,8 @@
 ﻿@page "/Memorabilia/Dashboard"
 
-<Page OnLoad="OnLoad">
+<WebPage>
     <Content>
-        <PageHeader PageTitle="@_viewModel.PageTitle" />   
-        <div class="row">
-            <Iterations Items="_viewModel.UserDashboardItems" Context="userDashboardItem">
-                <div class="col-md-4">
-                    <UserDashboardItem DashboardItem="userDashboardItem.DashboardItem"
-                                       Data="userDashboardItem.DataNew"
-                                       Labels="userDashboardItem.Labels" />
-                </div> 
-            </Iterations>
-        </div>  
+        <ViewDashboard UserId="@UserId" />
     </Content>
-</Page>
+</WebPage>
+

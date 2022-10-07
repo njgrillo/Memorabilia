@@ -1,32 +1,31 @@
-﻿namespace Memorabilia.Application.Features.Admin.Teams
+﻿namespace Memorabilia.Application.Features.Admin.Teams;
+
+public class GetTeamChampionships
 {
-    public class GetTeamChampionships
+    public class Handler : QueryHandler<Query, IEnumerable<TeamChampionshipViewModel>>
     {
-        public class Handler : QueryHandler<Query, IEnumerable<TeamChampionshipViewModel>>
+        private readonly ITeamChampionshipRepository _teamChampionshipRepository;
+
+        public Handler(ITeamChampionshipRepository teamChampionshipRepository)
         {
-            private readonly ITeamChampionshipRepository _teamChampionshipRepository;
-
-            public Handler(ITeamChampionshipRepository teamChampionshipRepository)
-            {
-                _teamChampionshipRepository = teamChampionshipRepository;
-            }
-
-            protected override async Task<IEnumerable<TeamChampionshipViewModel>> Handle(Query query)
-            {
-                var teamChampionships = await _teamChampionshipRepository.GetAll(query.TeamId).ConfigureAwait(false);
-
-                return teamChampionships.Select(teamChampionship => new TeamChampionshipViewModel(teamChampionship));
-            }
+            _teamChampionshipRepository = teamChampionshipRepository;
         }
 
-        public class Query : IQuery<IEnumerable<TeamChampionshipViewModel>>
+        protected override async Task<IEnumerable<TeamChampionshipViewModel>> Handle(Query query)
         {
-            public Query(int teamId)
-            {
-                TeamId = teamId;
-            }
+            var teamChampionships = (await _teamChampionshipRepository.GetAll(query.TeamId)).OrderBy(champion => champion.Year);
 
-            public int TeamId { get; }
+            return teamChampionships.Select(teamChampionship => new TeamChampionshipViewModel(teamChampionship));
         }
+    }
+
+    public class Query : IQuery<IEnumerable<TeamChampionshipViewModel>>
+    {
+        public Query(int teamId)
+        {
+            TeamId = teamId;
+        }
+
+        public int TeamId { get; }
     }
 }

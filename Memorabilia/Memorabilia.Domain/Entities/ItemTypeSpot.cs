@@ -1,26 +1,25 @@
-﻿namespace Memorabilia.Domain.Entities
+﻿namespace Memorabilia.Domain.Entities;
+
+public class ItemTypeSpot : Framework.Library.Domain.Entity.DomainEntity
 {
-    public class ItemTypeSpot : Framework.Library.Domain.Entity.DomainEntity
+    public ItemTypeSpot() { }
+
+    public ItemTypeSpot(int itemTypeId, int spotId)
     {
-        public ItemTypeSpot() { }
+        ItemTypeId = itemTypeId;
+        SpotId = spotId;
+    }
 
-        public ItemTypeSpot(int itemTypeId, int spotId)
-        {
-            ItemTypeId = itemTypeId;
-            SpotId = spotId;
-        }
+    public int ItemTypeId { get; private set; }
 
-        public int ItemTypeId { get; private set; }
+    public string ItemTypeName => Constants.ItemType.Find(ItemTypeId)?.Name;
 
-        public string ItemTypeName => Constants.ItemType.Find(ItemTypeId)?.Name;
+    public int SpotId { get; private set; }
 
-        public int SpotId { get; private set; }
+    public string SpotName => Constants.ItemType.Find(SpotId)?.Name;
 
-        public string SpotName => Constants.ItemType.Find(SpotId)?.Name;
-
-        public void Set(int spotId)
-        {
-            SpotId = spotId;
-        }
+    public void Set(int spotId)
+    {
+        SpotId = spotId;
     }
 }

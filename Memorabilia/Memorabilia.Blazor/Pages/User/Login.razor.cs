@@ -3,15 +3,15 @@
 namespace Memorabilia.Blazor.Pages.User
 {
     public partial class Login : ComponentBase
-    {
-        [Inject]
-        public ProtectedLocalStorage LocalStorage { get; set; }
-
+    {   
         [Inject]
         public NavigationManager NavigationManager { get; set; }
 
         [Inject]
         public QueryRouter QueryRouter { get; set; }
+
+        [Parameter]
+        public EventCallback<int> UserValidated { get; set; }
 
         private readonly LoginUserViewModel _viewModel = new();
 
@@ -26,7 +26,7 @@ namespace Memorabilia.Blazor.Pages.User
                 return;
             }
 
-            await LocalStorage.SetAsync("UserId", viewModel.Id).ConfigureAwait(false);
+            await UserValidated.InvokeAsync(viewModel.Id).ConfigureAwait(false);            
 
             NavigationManager.NavigateTo("Home");
         }

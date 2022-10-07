@@ -1,19 +1,18 @@
-﻿namespace Memorabilia.Domain.Constants
+﻿namespace Memorabilia.Domain.Constants;
+
+public sealed class ProfileType
 {
-    public sealed class ProfileType
+    public static readonly ProfileType Baseball = new ("Baseball");
+
+    public static readonly ProfileType[] All =
     {
-        public static readonly ProfileType Baseball = new ("Baseball");
+        Baseball
+    };
 
-        public static readonly ProfileType[] All =
-        {
-            Baseball
-        };
-
-        private ProfileType(string name)
-        {
-            Name = name;
-        }
-
-        public string Name { get; set; }
+    private ProfileType(string name)
+    {
+        Name = name;
     }
+
+    public string Name { get; set; }
 }

@@ -1,17 +1,17 @@
-﻿using Memorabilia.Domain.Entities;
+﻿using Memorabilia.Domain.Constants;
+using Memorabilia.Domain.Entities;
 
-namespace Memorabilia.Application.Features.Admin.InscriptionTypes
+namespace Memorabilia.Application.Features.Admin.InscriptionTypes;
+
+public class InscriptionTypesViewModel : DomainsViewModel
 {
-    public class InscriptionTypesViewModel : DomainsViewModel
-    {
-        public InscriptionTypesViewModel() { }
+    public InscriptionTypesViewModel() { }
 
-        public InscriptionTypesViewModel(IEnumerable<DomainEntity> domainEntities) : base(domainEntities) { }
+    public InscriptionTypesViewModel(IEnumerable<DomainEntity> domainEntities) : base(domainEntities) { }
 
-        public override string ItemTitle => "Inscription Type";
+    public override string ItemTitle => AdminDomainItem.InscriptionTypes.Item;
 
-        public override string PageTitle => "Inscription Types";
+    public override string PageTitle => AdminDomainItem.InscriptionTypes.Title;
 
-        public override string RoutePrefix => "InscriptionTypes";
-    }
+    public override string RoutePrefix => AdminDomainItem.InscriptionTypes.Page;
 }

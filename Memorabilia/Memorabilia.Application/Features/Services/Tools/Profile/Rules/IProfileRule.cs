@@ -1,12 +1,11 @@
 ﻿using Memorabilia.Domain.Constants;
 using Memorabilia.Domain.Entities;
 
-namespace Memorabilia.Application.Features.Services.Tools.Profile.Rules
-{
-    public interface IProfileRule
-    {
-        bool Applies(Person person);
+namespace Memorabilia.Application.Features.Services.Tools.Profile.Rules;
 
-        ProfileType GetProfileType();
-    }
+public interface IProfileRule
+{
+    bool Applies(Person person);
+
+    ProfileType GetProfileType();
 }

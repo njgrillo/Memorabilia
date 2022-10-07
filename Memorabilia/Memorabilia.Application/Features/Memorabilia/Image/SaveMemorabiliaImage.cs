@@ -1,45 +1,44 @@
 ﻿using Memorabilia.Domain.Constants;
 
-namespace Memorabilia.Application.Features.Memorabilia.Image
+namespace Memorabilia.Application.Features.Memorabilia.Image;
+
+public class SaveMemorabiliaImage
 {
-    public class SaveMemorabiliaImage
+    public class Handler : CommandHandler<Command>
     {
-        public class Handler : CommandHandler<Command>
+        private readonly IMemorabiliaItemRepository _memorabiliaRepository;
+
+        public Handler(IMemorabiliaItemRepository memorabiliaRepository)
         {
-            private readonly IMemorabiliaRepository _memorabiliaRepository;
-
-            public Handler(IMemorabiliaRepository memorabiliaRepository)
-            {
-                _memorabiliaRepository = memorabiliaRepository;
-            }
-
-            protected override async Task Handle(Command command)
-            {
-                if (!command.FilePaths.Any())
-                    return;
-
-                var memorabilia = await _memorabiliaRepository.Get(command.MemorabiliaId).ConfigureAwait(false);
-
-                memorabilia.SetImages(command.FilePaths, command.PrimaryImageFilePath);
-
-                await _memorabiliaRepository.Update(memorabilia).ConfigureAwait(false);
-            }
+            _memorabiliaRepository = memorabiliaRepository;
         }
 
-        public class Command : DomainCommand, ICommand
+        protected override async Task Handle(Command command)
         {
-            private readonly SaveMemorabiliaImagesViewModel _viewModel;
+            if (!command.FilePaths.Any())
+                return;
 
-            public Command(SaveMemorabiliaImagesViewModel viewModel)
-            {
-                _viewModel = viewModel;
-            }
+            var memorabilia = await _memorabiliaRepository.Get(command.MemorabiliaId);
 
-            public IEnumerable<string> FilePaths => _viewModel.Images.Select(image => image.FilePath);
+            memorabilia.SetImages(command.FilePaths, command.PrimaryImageFilePath);
 
-            public int MemorabiliaId => _viewModel.MemorabiliaId;
-
-            public string PrimaryImageFilePath => _viewModel.Images.Single(image => image.ImageTypeId == ImageType.Primary.Id).FilePath;
+            await _memorabiliaRepository.Update(memorabilia);
         }
+    }
+
+    public class Command : DomainCommand, ICommand
+    {
+        private readonly SaveMemorabiliaImagesViewModel _viewModel;
+
+        public Command(SaveMemorabiliaImagesViewModel viewModel)
+        {
+            _viewModel = viewModel;
+        }
+
+        public IEnumerable<string> FilePaths => _viewModel.Images.Select(image => image.FilePath);
+
+        public int MemorabiliaId => _viewModel.MemorabiliaId;
+
+        public string PrimaryImageFilePath => _viewModel.Images.Single(image => image.ImageTypeId == ImageType.Primary.Id).FilePath;
     }
 }

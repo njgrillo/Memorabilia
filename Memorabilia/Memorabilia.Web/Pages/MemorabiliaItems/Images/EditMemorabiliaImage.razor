@@ -1,26 +1,5 @@
 ﻿@page "/Memorabilia/Image/Edit/{memorabiliaId:int}"
 
-@using Memorabilia.Application.Features.Memorabilia.Image
-
-<Page OnLoad="OnLoad">
-    <Content>
-        <PageHeader PageTitle="@_viewModel.PageTitle" />
-        <MemorabiliaItemTimeline EditMode="_viewModel.EditModeType" 
-                                 ItemTypeName="@_viewModel.ItemTypeName"
-                                 MemorabiliaId="_viewModel.MemorabiliaId"
-                                 MemorabiliaItemStep="_viewModel.MemorabiliaItemStep" />
-        <EditImages @ref="EditImages"              
-                    ContinueNavigationPath="@_viewModel.ContinueNavigationPath"
-                    ExitNavigationPath="@_viewModel.ExitNavigationPath"
-                    Images="@_viewModel.Images"
-                    MaximumAllowedFiles="5"
-                    MaximumFileSize="10240000"
-                    Model="_viewModel"
-                    OnLoad="OnLoad"
-                    OnSave="OnSave"
-                    PageTitle="@_viewModel.PageTitle"
-                    SaveButtonText="Save & Continue"
-                    TItem="SaveMemorabiliaImagesViewModel" />    
-        <PageFooter NavigationPath="@_viewModel.BackNavigationPath" />
-    </Content>
-</Page>
+<Memorabilia.Blazor.Pages.MemorabiliaItems.Images.EditMemorabiliaImage MemorabiliaId="@MemorabiliaId"
+                                                                       UploadPath="@UploadPath"
+                                                                       UserId="@UserId" />

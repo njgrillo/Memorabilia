@@ -1,35 +1,33 @@
-﻿namespace Memorabilia.Application.Features.Admin.ItemTypeSizes
+﻿namespace Memorabilia.Application.Features.Admin.ItemTypeSizes;
+
+public class GetItemTypeSizes
 {
-    public class GetItemTypeSizes
+    public class Handler : QueryHandler<Query, ItemTypeSizesViewModel>
     {
-        public class Handler : QueryHandler<Query, ItemTypeSizesViewModel>
+        private readonly IItemTypeSizeRepository _itemTypeSizeRepository;
+
+        public Handler(IItemTypeSizeRepository itemTypeSizeRepository)
         {
-            private readonly IItemTypeSizeRepository _itemTypeSizeRepository;
-
-            public Handler(IItemTypeSizeRepository itemTypeSizeRepository)
-            {
-                _itemTypeSizeRepository = itemTypeSizeRepository;
-            }
-
-            protected override async Task<ItemTypeSizesViewModel> Handle(Query query)
-            {
-                var itemTypeSizes = (await _itemTypeSizeRepository.GetAll(query.ItemTypeId)
-                                                                  .ConfigureAwait(false))
-                                                                  .OrderBy(itemTypeSize => Domain.Constants.ItemType.Find(itemTypeSize.ItemTypeId).Name)
-                                                                  .ThenBy(itemTypeSize => Domain.Constants.Size.Find(itemTypeSize.SizeId).Name);
-
-                return new ItemTypeSizesViewModel(itemTypeSizes);
-            }
+            _itemTypeSizeRepository = itemTypeSizeRepository;
         }
 
-        public class Query : IQuery<ItemTypeSizesViewModel>
+        protected override async Task<ItemTypeSizesViewModel> Handle(Query query)
         {
-            public Query(int? itemTypeId = null)
-            {
-                ItemTypeId = itemTypeId;
-            }
+            var itemTypeSizes = (await _itemTypeSizeRepository.GetAll(query.ItemTypeId))
+                                                              .OrderBy(itemTypeSize => itemTypeSize.ItemTypeName)
+                                                              .ThenBy(itemTypeSize => itemTypeSize.SizeName);
 
-            public int? ItemTypeId { get; }
+            return new ItemTypeSizesViewModel(itemTypeSizes);
         }
+    }
+
+    public class Query : IQuery<ItemTypeSizesViewModel>
+    {
+        public Query(int? itemTypeId = null)
+        {
+            ItemTypeId = itemTypeId;
+        }
+
+        public int? ItemTypeId { get; }
     }
 }

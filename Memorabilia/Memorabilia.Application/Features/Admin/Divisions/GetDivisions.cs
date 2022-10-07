@@ -1,25 +1,26 @@
-﻿namespace Memorabilia.Application.Features.Admin.Divisions
+﻿using Memorabilia.Domain.Entities;
+
+namespace Memorabilia.Application.Features.Admin.Divisions;
+
+public class GetDivisions
 {
-    public class GetDivisions
+    public class Handler : QueryHandler<Query, DivisionsViewModel>
     {
-        public class Handler : QueryHandler<Query, DivisionsViewModel>
+        private readonly IDomainRepository<Division> _divisionRepository;
+
+        public Handler(IDomainRepository<Division> divisionRepository)
         {
-            private readonly IDivisionRepository _divisionRepository;
-
-            public Handler(IDivisionRepository divisionRepository)
-            {
-                _divisionRepository = divisionRepository;
-            }
-
-            protected override async Task<DivisionsViewModel> Handle(Query query)
-            {
-                return new DivisionsViewModel(await _divisionRepository.GetAll().ConfigureAwait(false));
-            }
+            _divisionRepository = divisionRepository;
         }
 
-        public class Query : IQuery<DivisionsViewModel>
+        protected override async Task<DivisionsViewModel> Handle(Query query)
         {
-            public Query() { }
+            return new DivisionsViewModel(await _divisionRepository.GetAll());
         }
+    }
+
+    public class Query : IQuery<DivisionsViewModel>
+    {
+        public Query() { }
     }
 }

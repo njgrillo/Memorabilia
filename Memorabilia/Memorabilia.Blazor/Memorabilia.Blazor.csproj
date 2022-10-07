@@ -6,13 +6,20 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Compile Remove="Pages\Admin\DashboardItems\DashboardItemEditor.razor.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="Pages\Admin\DashboardItems\DashboardItemEditor.razor" />
+  </ItemGroup>
+
 
   <ItemGroup>
     <SupportedPlatform Include="browser" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Framework.Library" Version="1.0.0" />
     <PackageReference Include="MediatR" Version="10.0.1" />
     <PackageReference Include="Microsoft.AspNetCore.Components" Version="6.0.9" />
     <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="6.0.9" />
@@ -21,11 +28,51 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Pages\MemorabiliaItems\" />
     <Folder Include="Pages\Tools\ThroughTheMail\" />
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="Pages\Admin\BasketballTypes\BasketballTypeEditor.razor" />
+    <None Include="Pages\Admin\BasketballTypes\ViewBasketballTypes.razor" />
+    <None Include="Pages\Admin\BatTypes\BatTypeEditor.razor" />
+    <None Include="Pages\Admin\BatTypes\ViewBatTypes.razor" />
+    <None Include="Pages\Admin\Brands\BrandEditor.razor" />
+    <None Include="Pages\Admin\Brands\ViewBrands.razor" />
+    <None Include="Pages\Admin\ChampionTypes\ChampionTypeEditor.razor" />
+    <None Include="Pages\Admin\ChampionTypes\ViewChampionTypes.razor" />
+    <None Include="Pages\Admin\Colleges\CollegeEditor.razor" />
+    <None Include="Pages\Admin\Colleges\ViewColleges.razor" />
+    <None Include="Pages\Admin\Colors\ColorEditor.razor" />
+    <None Include="Pages\Admin\Colors\ViewColors.razor" />
+    <None Include="Pages\Admin\Commissioners\CommissionerEditor.razor" />
+    <None Include="Pages\Admin\Commissioners\ViewCommissioners.razor" />
+    <None Include="Pages\Admin\Conditions\ConditionEditor.razor" />
+    <None Include="Pages\Admin\Conditions\ViewConditions.razor" />
+    <None Include="Pages\Admin\Conferences\ConferenceEditor.razor" />
+    <None Include="Pages\Admin\Conferences\ViewConferences.razor" />
+    <None Include="Pages\Admin\DashboardItems\ViewDashboardItems.razor" />
+    <None Include="Pages\Admin\Divisions\DivisionEditor.razor" />
+    <None Include="Pages\Admin\Divisions\ViewDivisions.razor" />
+    <None Include="Pages\Admin\FigureSpecialtyTypes\FigureSpecialtyTypeEditor.razor" />
+    <None Include="Pages\Admin\FigureSpecialtyTypes\ViewFigureSpecialtyTypes.razor" />
+    <None Include="Pages\Admin\FigureTypes\FigureTypeEditor.razor" />
+    <None Include="Pages\Admin\FigureTypes\ViewFigureTypes.razor" />
+    <None Include="Pages\Admin\ItemTypeSports\ItemTypeSportEditor.razor" />
+    <None Include="Pages\Admin\ItemTypeSports\ViewItemTypeSports.razor" />
+    <None Include="Pages\Admin\ItemTypeSpots\ItemTypeSpotsEditor.razor" />
+    <None Include="Pages\Admin\ItemTypeSpots\ViewItemTypeSpots.razor" />
+    <None Include="Pages\Admin\JerseyQualityType\JerseyQualityTypeEditor.razor" />
+    <None Include="Pages\Admin\JerseyQualityType\ViewJerseyQualityTypes.razor" />
+    <None Include="Pages\Admin\JerseyStyleTypes\JerseyStyleTypeEditor.razor" />
+    <None Include="Pages\Admin\JerseyStyleTypes\ViewJerseyStyleTypes.razor" />
+    <None Include="Pages\Admin\JerseyTypes\JerseyTypeEditor.razor" />
+    <None Include="Pages\Admin\JerseyTypes\ViewJerseyTypes.razor" />
+    <None Include="Pages\Admin\Leagues\LeagueEditor.razor" />
+    <None Include="Pages\Admin\Leagues\ViewLeagues.razor" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Framework\Framework.Library\Framework.Library.csproj" />
     <ProjectReference Include="..\Memorabilia.Application\Memorabilia.Application.csproj" />
     <ProjectReference Include="..\Memorabilia.Domain\Memorabilia.Domain.csproj" />
   </ItemGroup>

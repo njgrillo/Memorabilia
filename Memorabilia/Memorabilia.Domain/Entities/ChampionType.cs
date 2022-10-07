@@ -1,9 +1,8 @@
-﻿namespace Memorabilia.Domain.Entities
-{
-    public class ChampionType : DomainEntity
-    {
-        public ChampionType() { }
+﻿namespace Memorabilia.Domain.Entities;
 
-        public ChampionType(string name, string abbreviation) : base(name, abbreviation) { }
-    }
+public class ChampionType : DomainEntity
+{
+    public ChampionType() { }
+
+    public ChampionType(string name, string abbreviation) : base(name, abbreviation) { }
 }

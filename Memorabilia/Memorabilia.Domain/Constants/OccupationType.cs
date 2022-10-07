@@ -1,29 +1,20 @@
-﻿namespace Memorabilia.Domain.Constants
+﻿namespace Memorabilia.Domain.Constants;
+
+public sealed class OccupationType : DomainItemConstant
 {
-    public sealed class OccupationType
+    public static readonly OccupationType Primary = new(1, "Primary");
+    public static readonly OccupationType Secondary = new(2, "Secondary");
+
+    public static readonly OccupationType[] All =
     {
-        public static readonly OccupationType Primary = new(1, "Primary");
-        public static readonly OccupationType Secondary = new(2, "Secondary");
+        Primary,
+        Secondary
+    };
 
-        public static readonly OccupationType[] All =
-        {
-            Primary,
-            Secondary
-        };
+    private OccupationType(int id, string name) : base(id, name) { }
 
-        private OccupationType(int id, string name)
-        {
-            Id = id;
-            Name = name;
-        }
-
-        public int Id { get; }
-
-        public string Name { get; }
-
-        public static OccupationType Find(int id)
-        {
-            return All.SingleOrDefault(occupationType => occupationType.Id == id);
-        }
+    public static OccupationType Find(int id)
+    {
+        return All.SingleOrDefault(occupationType => occupationType.Id == id);
     }
 }

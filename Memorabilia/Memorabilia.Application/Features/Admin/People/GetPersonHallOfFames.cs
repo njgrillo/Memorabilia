@@ -1,30 +1,29 @@
-﻿namespace Memorabilia.Application.Features.Admin.People
+﻿namespace Memorabilia.Application.Features.Admin.People;
+
+public class GetPersonHallOfFames
 {
-    public class GetPersonHallOfFames
+    public class Handler : QueryHandler<Query, PersonHallOfFameViewModel>
     {
-        public class Handler : QueryHandler<Query, PersonHallOfFameViewModel>
+        private readonly IPersonRepository _personRepository;
+
+        public Handler(IPersonRepository personRepository)
         {
-            private readonly IPersonRepository _personRepository;
-
-            public Handler(IPersonRepository personRepository)
-            {
-                _personRepository = personRepository;
-            }
-
-            protected override async Task<PersonHallOfFameViewModel> Handle(Query query)
-            {
-                return new PersonHallOfFameViewModel(await _personRepository.Get(query.PersonId).ConfigureAwait(false));
-            }
+            _personRepository = personRepository;
         }
 
-        public class Query : IQuery<PersonHallOfFameViewModel>
+        protected override async Task<PersonHallOfFameViewModel> Handle(Query query)
         {
-            public Query(int personId)
-            {
-                PersonId = personId;
-            }
-
-            public int PersonId { get; }
+            return new PersonHallOfFameViewModel(await _personRepository.Get(query.PersonId));
         }
+    }
+
+    public class Query : IQuery<PersonHallOfFameViewModel>
+    {
+        public Query(int personId)
+        {
+            PersonId = personId;
+        }
+
+        public int PersonId { get; }
     }
 }

@@ -1,30 +1,29 @@
-﻿namespace Memorabilia.Application.Features.Admin.ItemTypeSizes
+﻿namespace Memorabilia.Application.Features.Admin.ItemTypeSizes;
+
+public class GetItemTypeSize
 {
-    public class GetItemTypeSize
+    public class Handler : QueryHandler<Query, ItemTypeSizeViewModel>
     {
-        public class Handler : QueryHandler<Query, ItemTypeSizeViewModel>
+        private readonly IItemTypeSizeRepository _itemTypeSizeRepository;
+
+        public Handler(IItemTypeSizeRepository itemTypeSizeRepository)
         {
-            private readonly IItemTypeSizeRepository _itemTypeSizeRepository;
-
-            public Handler(IItemTypeSizeRepository itemTypeSizeRepository)
-            {
-                _itemTypeSizeRepository = itemTypeSizeRepository;
-            }
-
-            protected override async Task<ItemTypeSizeViewModel> Handle(Query query)
-            {
-                return new ItemTypeSizeViewModel(await _itemTypeSizeRepository.Get(query.Id).ConfigureAwait(false));
-            }
+            _itemTypeSizeRepository = itemTypeSizeRepository;
         }
 
-        public class Query : IQuery<ItemTypeSizeViewModel>
+        protected override async Task<ItemTypeSizeViewModel> Handle(Query query)
         {
-            public Query(int id)
-            {
-                Id = id;
-            }
-
-            public int Id { get; }
+            return new ItemTypeSizeViewModel(await _itemTypeSizeRepository.Get(query.Id));
         }
+    }
+
+    public class Query : IQuery<ItemTypeSizeViewModel>
+    {
+        public Query(int id)
+        {
+            Id = id;
+        }
+
+        public int Id { get; }
     }
 }

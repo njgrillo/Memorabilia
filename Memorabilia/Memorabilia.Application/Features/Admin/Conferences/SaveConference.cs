@@ -1,73 +1,72 @@
 ﻿using Memorabilia.Domain.Entities;
 
-namespace Memorabilia.Application.Features.Admin.Conferences
+namespace Memorabilia.Application.Features.Admin.Conferences;
+
+public class SaveConference
 {
-    public class SaveConference
+    public class Handler : CommandHandler<Command>
     {
-        public class Handler : CommandHandler<Command>
+        private readonly IDomainRepository<Conference> _conferenceRepository;
+
+        public Handler(IDomainRepository<Conference> conferenceRepository)
         {
-            private readonly IConferenceRepository _conferenceRepository;
-
-            public Handler(IConferenceRepository conferenceRepository)
-            {
-                _conferenceRepository = conferenceRepository;
-            }
-
-            protected override async Task Handle(Command command)
-            {
-                Conference conference;
-
-                if (command.IsNew)
-                {
-                    conference = new Conference(command.SportLeagueLevelId,
-                                                command.Name,
-                                                command.Abbreviation);
-
-                    await _conferenceRepository.Add(conference).ConfigureAwait(false);
-
-                    return;
-                }
-
-                conference = await _conferenceRepository.Get(command.Id).ConfigureAwait(false);
-
-                if (command.IsDeleted)
-                {
-                    await _conferenceRepository.Delete(conference).ConfigureAwait(false);
-
-                    return;
-                }
-
-                conference.Set(command.SportLeagueLevelId,
-                               command.Name,
-                               command.Abbreviation);
-
-                await _conferenceRepository.Update(conference).ConfigureAwait(false);
-            }
+            _conferenceRepository = conferenceRepository;
         }
 
-        public class Command : DomainCommand, ICommand
+        protected override async Task Handle(Command command)
         {
-            private readonly SaveConferenceViewModel _viewModel;
+            Conference conference;
 
-            public Command(SaveConferenceViewModel viewModel)
+            if (command.IsNew)
             {
-                _viewModel = viewModel;
+                conference = new Conference(command.SportLeagueLevelId,
+                                            command.Name,
+                                            command.Abbreviation);
+
+                await _conferenceRepository.Add(conference);
+
+                return;
             }
 
-            public string Abbreviation => _viewModel.Abbreviation;
+            conference = await _conferenceRepository.Get(command.Id);
 
-            public int Id => _viewModel.Id;
+            if (command.IsDeleted)
+            {
+                await _conferenceRepository.Delete(conference);
 
-            public bool IsDeleted => _viewModel.IsDeleted;
+                return;
+            }
 
-            public bool IsModified => _viewModel.IsModified;
+            conference.Set(command.SportLeagueLevelId,
+                           command.Name,
+                           command.Abbreviation);
 
-            public bool IsNew => _viewModel.IsNew;
-
-
-            public string Name => _viewModel.Name;
-
-            public int SportLeagueLevelId => _viewModel.SportLeagueLevelId;
+            await _conferenceRepository.Update(conference);
         }
+    }
+
+    public class Command : DomainCommand, ICommand
+    {
+        private readonly SaveConferenceViewModel _viewModel;
+
+        public Command(SaveConferenceViewModel viewModel)
+        {
+            _viewModel = viewModel;
+        }
+
+        public string Abbreviation => _viewModel.Abbreviation;
+
+        public int Id => _viewModel.Id;
+
+        public bool IsDeleted => _viewModel.IsDeleted;
+
+        public bool IsModified => _viewModel.IsModified;
+
+        public bool IsNew => _viewModel.IsNew;
+
+
+        public string Name => _viewModel.Name;
+
+        public int SportLeagueLevelId => _viewModel.SportLeagueLevelId;
     }
 }

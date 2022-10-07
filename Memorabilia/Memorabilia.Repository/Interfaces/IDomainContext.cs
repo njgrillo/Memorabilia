@@ -1,6 +1,5 @@
-﻿namespace Memorabilia.Repository.Interfaces
+﻿namespace Memorabilia.Repository.Interfaces;
+
+public interface IDomainContext
 {
-    public interface IDomainContext
-    {
-    }
 }

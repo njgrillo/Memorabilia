@@ -1,30 +1,29 @@
-﻿namespace Memorabilia.Application.Features.Admin.ItemTypeGameStyle
+﻿namespace Memorabilia.Application.Features.Admin.ItemTypeGameStyle;
+
+public class GetItemTypeGameStyle
 {
-    public class GetItemTypeGameStyle
+    public class Handler : QueryHandler<Query, ItemTypeGameStyleViewModel>
     {
-        public class Handler : QueryHandler<Query, ItemTypeGameStyleViewModel>
+        private readonly IItemTypeGameStyleTypeRepository _itemTypeGameStyleRepository;
+
+        public Handler(IItemTypeGameStyleTypeRepository itemTypeGameStyleRepository)
         {
-            private readonly IItemTypeGameStyleTypeRepository _itemTypeGameStyleRepository;
-
-            public Handler(IItemTypeGameStyleTypeRepository itemTypeGameStyleRepository)
-            {
-                _itemTypeGameStyleRepository = itemTypeGameStyleRepository;
-            }
-
-            protected override async Task<ItemTypeGameStyleViewModel> Handle(Query query)
-            {
-                return new ItemTypeGameStyleViewModel(await _itemTypeGameStyleRepository.Get(query.Id).ConfigureAwait(false));
-            }
+            _itemTypeGameStyleRepository = itemTypeGameStyleRepository;
         }
 
-        public class Query : IQuery<ItemTypeGameStyleViewModel>
+        protected override async Task<ItemTypeGameStyleViewModel> Handle(Query query)
         {
-            public Query(int id)
-            {
-                Id = id;
-            }
-
-            public int Id { get; }
+            return new ItemTypeGameStyleViewModel(await _itemTypeGameStyleRepository.Get(query.Id));
         }
+    }
+
+    public class Query : IQuery<ItemTypeGameStyleViewModel>
+    {
+        public Query(int id)
+        {
+            Id = id;
+        }
+
+        public int Id { get; }
     }
 }

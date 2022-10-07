@@ -1,17 +1,17 @@
-﻿using Memorabilia.Domain.Entities;
+﻿using Memorabilia.Domain.Constants;
+using Memorabilia.Domain.Entities;
 
-namespace Memorabilia.Application.Features.Admin.LevelTypes
+namespace Memorabilia.Application.Features.Admin.LevelTypes;
+
+public class LevelTypesViewModel : DomainsViewModel
 {
-    public class LevelTypesViewModel : DomainsViewModel
-    {
-        public LevelTypesViewModel() { }
+    public LevelTypesViewModel() { }
 
-        public LevelTypesViewModel(IEnumerable<DomainEntity> domainEntities) : base(domainEntities) { }
+    public LevelTypesViewModel(IEnumerable<DomainEntity> domainEntities) : base(domainEntities) { }
 
-        public override string ItemTitle => "Level Type";
+    public override string ItemTitle => AdminDomainItem.LevelTypes.Item;
 
-        public override string PageTitle => "Level Types";
+    public override string PageTitle => AdminDomainItem.LevelTypes.Title;
 
-        public override string RoutePrefix => "LevelTypes";
-    }
+    public override string RoutePrefix => AdminDomainItem.LevelTypes.Page;
 }

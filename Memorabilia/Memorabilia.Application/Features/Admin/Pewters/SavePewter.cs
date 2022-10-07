@@ -1,80 +1,79 @@
 ﻿using Memorabilia.Domain.Entities;
 
-namespace Memorabilia.Application.Features.Admin.Pewters
+namespace Memorabilia.Application.Features.Admin.Pewters;
+
+public class SavePewter
 {
-    public class SavePewter
+    public class Handler : CommandHandler<Command>
     {
-        public class Handler : CommandHandler<Command>
+        private readonly IDomainRepository<Pewter> _pewterRepository;
+
+        public Handler(IDomainRepository<Pewter> pewterRepository)
         {
-            private readonly IPewterRepository _pewterRepository;
-
-            public Handler(IPewterRepository pewterRepository)
-            {
-                _pewterRepository = pewterRepository;
-            }
-
-            protected override async Task Handle(Command command)
-            {
-                Pewter pewter;
-
-                if (command.IsNew)
-                {
-                    pewter = new Pewter(command.FranchiseId,
-                                        command.TeamId,
-                                        command.SizeId,
-                                        command.ImageTypeId,
-                                        command.ImagePath);
-
-                    await _pewterRepository.Add(pewter).ConfigureAwait(false);
-
-                    return;
-                }
-
-                pewter = await _pewterRepository.Get(command.Id).ConfigureAwait(false);
-
-                if (command.IsDeleted)
-                {
-                    await _pewterRepository.Delete(pewter).ConfigureAwait(false);
-
-                    return;
-                }
-
-                pewter.Set(command.FranchiseId,
-                           command.TeamId,
-                           command.SizeId,
-                           command.ImageTypeId,
-                           command.ImagePath);
-
-                await _pewterRepository.Update(pewter).ConfigureAwait(false);
-            }
+            _pewterRepository = pewterRepository;
         }
 
-        public class Command : DomainCommand, ICommand
+        protected override async Task Handle(Command command)
         {
-            private readonly SavePewterViewModel _viewModel;
+            Pewter pewter;
 
-            public Command(SavePewterViewModel viewModel)
+            if (command.IsNew)
             {
-                _viewModel = viewModel;
+                pewter = new Pewter(command.FranchiseId,
+                                    command.TeamId,
+                                    command.SizeId,
+                                    command.ImageTypeId,
+                                    command.ImagePath);
+
+                await _pewterRepository.Add(pewter);
+
+                return;
             }
 
-            public int FranchiseId => _viewModel.FranchiseId;
+            pewter = await _pewterRepository.Get(command.Id);
 
-            public int Id => _viewModel.Id;            
+            if (command.IsDeleted)
+            {
+                await _pewterRepository.Delete(pewter);
 
-            public string ImagePath => _viewModel.ImagePath;
+                return;
+            }
 
-            public int? ImageTypeId => !_viewModel.ImagePath.IsNullOrEmpty() ? Domain.Constants.ImageType.Primary.Id : null;
+            pewter.Set(command.FranchiseId,
+                       command.TeamId,
+                       command.SizeId,
+                       command.ImageTypeId,
+                       command.ImagePath);
 
-            public bool IsDeleted => _viewModel.IsDeleted;
-
-            public bool IsModified => _viewModel.IsModified;
-
-            public bool IsNew => _viewModel.IsNew;            
-
-            public int SizeId => _viewModel.SizeId;
-
-            public int TeamId => _viewModel.TeamId;
+            await _pewterRepository.Update(pewter);
         }
+    }
+
+    public class Command : DomainCommand, ICommand
+    {
+        private readonly SavePewterViewModel _viewModel;
+
+        public Command(SavePewterViewModel viewModel)
+        {
+            _viewModel = viewModel;
+        }
+
+        public int FranchiseId => _viewModel.FranchiseId;
+
+        public int Id => _viewModel.Id;            
+
+        public string ImagePath => _viewModel.ImagePath;
+
+        public int? ImageTypeId => !_viewModel.ImagePath.IsNullOrEmpty() ? Domain.Constants.ImageType.Primary.Id : null;
+
+        public bool IsDeleted => _viewModel.IsDeleted;
+
+        public bool IsModified => _viewModel.IsModified;
+
+        public bool IsNew => _viewModel.IsNew;            
+
+        public int SizeId => _viewModel.SizeId;
+
+        public int TeamId => _viewModel.TeamId;
     }
 }

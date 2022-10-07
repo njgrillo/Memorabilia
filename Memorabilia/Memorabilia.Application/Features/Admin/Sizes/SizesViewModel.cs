@@ -1,13 +1,13 @@
-﻿using Memorabilia.Domain.Entities;
+﻿using Memorabilia.Domain.Constants;
+using Memorabilia.Domain.Entities;
 
-namespace Memorabilia.Application.Features.Admin.Sizes
+namespace Memorabilia.Application.Features.Admin.Sizes;
+
+public class SizesViewModel : DomainsViewModel
 {
-    public class SizesViewModel : DomainsViewModel
-    {
-        public SizesViewModel() { }
+    public SizesViewModel() { }
 
-        public SizesViewModel(IEnumerable<DomainEntity> domainEntities) : base(domainEntities) { }
+    public SizesViewModel(IEnumerable<DomainEntity> domainEntities) : base(domainEntities) { }
 
-        public override string PageTitle => "Sizes";
-    }
+    public override string PageTitle => AdminDomainItem.Sizes.Title;
 }

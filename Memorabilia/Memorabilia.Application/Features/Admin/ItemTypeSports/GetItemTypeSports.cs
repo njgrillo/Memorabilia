@@ -1,30 +1,33 @@
-﻿namespace Memorabilia.Application.Features.Admin.ItemTypeSports
+﻿namespace Memorabilia.Application.Features.Admin.ItemTypeSports;
+
+public class GetItemTypeSports
 {
-    public class GetItemTypeSports
+    public class Handler : QueryHandler<Query, ItemTypeSportsViewModel>
     {
-        public class Handler : QueryHandler<Query, ItemTypeSportsViewModel>
+        private readonly IItemTypeSportRepository _itemTypeSportRepository;
+
+        public Handler(IItemTypeSportRepository itemTypeSportRepository)
         {
-            private readonly IItemTypeSportRepository _itemTypeSportRepository;
-
-            public Handler(IItemTypeSportRepository itemTypeSportRepository)
-            {
-                _itemTypeSportRepository = itemTypeSportRepository;
-            }
-
-            protected override async Task<ItemTypeSportsViewModel> Handle(Query query)
-            {
-                return new ItemTypeSportsViewModel(await _itemTypeSportRepository.GetAll(query.ItemTypeId).ConfigureAwait(false));
-            }
+            _itemTypeSportRepository = itemTypeSportRepository;
         }
 
-        public class Query : IQuery<ItemTypeSportsViewModel>
+        protected override async Task<ItemTypeSportsViewModel> Handle(Query query)
         {
-            public Query(int? itemTypeId = null)
-            {
-                ItemTypeId = itemTypeId;
-            }
+            var itemTypeSports = (await _itemTypeSportRepository.GetAll(query.ItemTypeId))
+                                            .OrderBy(itemTypeSport => itemTypeSport.ItemTypeName)
+                                            .ThenBy(itemTypeSport => itemTypeSport.SportName);
 
-            public int? ItemTypeId { get; }
+            return new ItemTypeSportsViewModel(itemTypeSports);
         }
+    }
+
+    public class Query : IQuery<ItemTypeSportsViewModel>
+    {
+        public Query(int? itemTypeId = null)
+        {
+            ItemTypeId = itemTypeId;
+        }
+
+        public int? ItemTypeId { get; }
     }
 }

@@ -1,4 +1,4 @@
-﻿//global using Demo.Framework.Handler;
+﻿global using Autofac;
 global using Framework.Library.Domain.Command;
 global using Framework.Library.Extension;
 global using Framework.Library.Handler;
@@ -8,6 +8,7 @@ global using Memorabilia.Application.Features.Autograph;
 global using Memorabilia.Application.Features.Image;
 global using Memorabilia.Application.Features.Memorabilia;
 global using Memorabilia.Application.Features.Services.Dashboard;
+global using Memorabilia.Application.Features.Services.Tools.Profile;
 global using Memorabilia.Application.Features.Services.Tools.Profile.Rules;
 global using Memorabilia.Application.Features.Tools.Profile.Baseball;
 global using Memorabilia.Application.Features.Tools.Profile.Common;

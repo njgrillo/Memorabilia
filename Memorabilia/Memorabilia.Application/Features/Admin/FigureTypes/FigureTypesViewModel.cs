@@ -1,17 +1,17 @@
-﻿using Memorabilia.Domain.Entities;
+﻿using Memorabilia.Domain.Constants;
+using Memorabilia.Domain.Entities;
 
-namespace Memorabilia.Application.Features.Admin.FigureTypes
+namespace Memorabilia.Application.Features.Admin.FigureTypes;
+
+public class FigureTypesViewModel : DomainsViewModel
 {
-    public class FigureTypesViewModel : DomainsViewModel
-    {
-        public FigureTypesViewModel() { }
+    public FigureTypesViewModel() { }
 
-        public FigureTypesViewModel(IEnumerable<DomainEntity> domainEntities) : base(domainEntities) { }
+    public FigureTypesViewModel(IEnumerable<DomainEntity> domainEntities) : base(domainEntities) { }
 
-        public override string ItemTitle => "Figure Type";
+    public override string ItemTitle => AdminDomainItem.FigureTypes.Item;
 
-        public override string PageTitle => "Figure Types";
+    public override string PageTitle => AdminDomainItem.FigureTypes.Title;
 
-        public override string RoutePrefix => "FigureTypes";
-    }
+    public override string RoutePrefix => AdminDomainItem.FigureTypes.Page;
 }

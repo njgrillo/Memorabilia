@@ -1,31 +1,30 @@
 ﻿using Memorabilia.Domain.Constants;
 
-namespace Memorabilia.Application.Features.User.Dashboard
+namespace Memorabilia.Application.Features.User.Dashboard;
+
+public class MemorabiliaAcquisitionTypeChartViewModel : DashboardItemViewModel
 {
-    public class MemorabiliaAcquisitionTypeChartViewModel : DashboardItemViewModel
+    public MemorabiliaAcquisitionTypeChartViewModel() { }
+
+    public MemorabiliaAcquisitionTypeChartViewModel(DashboardItem dashboardItem, IEnumerable<Domain.Entities.Memorabilia> memorabiliaItems)
     {
-        public MemorabiliaAcquisitionTypeChartViewModel() { }
+        DashboardItem = dashboardItem;
 
-        public MemorabiliaAcquisitionTypeChartViewModel(DashboardItem dashboardItem, IEnumerable<Domain.Entities.Memorabilia> memorabiliaItems)
+        var acquisitions = memorabiliaItems.Select(item => item.Acquisition);
+        var acquisitionTypeNames = acquisitions.Select(acquisition => AcquisitionType.Find(acquisition.AcquisitionTypeId).Name).Distinct();
+
+        Labels = acquisitionTypeNames.ToArray();
+
+        var counts = new List<double>();
+
+        foreach (var acquisitionTypeName in acquisitionTypeNames)
         {
-            DashboardItem = dashboardItem;
+            var acquisitionType = AcquisitionType.Find(acquisitionTypeName);
+            var count = acquisitions.Count(acquisition => acquisition.AcquisitionTypeId == acquisitionType.Id);
 
-            var acquisitions = memorabiliaItems.Select(item => item.Acquisition);
-            var acquisitionTypeNames = acquisitions.Select(acquisition => AcquisitionType.Find(acquisition.AcquisitionTypeId).Name).Distinct();
-
-            Labels = acquisitionTypeNames.ToArray();
-
-            var counts = new List<double>();
-
-            foreach (var acquisitionTypeName in acquisitionTypeNames)
-            {
-                var acquisitionType = AcquisitionType.Find(acquisitionTypeName);
-                var count = acquisitions.Count(acquisition => acquisition.AcquisitionTypeId == acquisitionType.Id);
-
-                counts.Add(count);
-            }
-
-            DataNew = counts.ToArray();
+            counts.Add(count);
         }
+
+        DataNew = counts.ToArray();
     }
 }

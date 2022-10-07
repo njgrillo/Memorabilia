@@ -1,0 +1,16 @@
+﻿#nullable disable
+
+namespace Memorabilia.Blazor.Pages.Admin.AwardTypes;
+
+public partial class ViewAwardTypes : ViewDomainItem<AwardTypesViewModel>, IDeleteDomainItem, IViewDomainItem
+{
+    public async Task OnDelete(SaveDomainViewModel viewModel)
+    {
+        await OnDelete(new SaveAwardType.Command(viewModel));
+    }
+
+    public async Task OnLoad()
+    {
+        await OnLoad(new GetAwardTypes.Query());
+    }
+}

@@ -6,7 +6,7 @@
             <Content>
                 <div class="row">
                     <div class="col-md-6" style="text-align: left">
-                        <h3>Memorabilia Filters</h3>
+                <h3>Memorabilia Filters</h3>
                     </div>
                     <div class="col-md-6" style="text-align: left">
                         <h3>Autograph Filters</h3>
@@ -16,9 +16,9 @@
                     <div class="col-lg-2">
                         <div class="form-group">
                             <MudSelect @bind-Value="@_itemTypeId"
-                                       @bind-Value:event="ValueChanged" 
-                                       Label="Item Type"
-                                       Variant="Variant.Outlined">
+                                        @bind-Value:event="ValueChanged" 
+                                        Label="Item Type"
+                                        Variant="Variant.Outlined">
                                 <MudSelectItem Value="@(0)">--Select--</MudSelectItem>
                                 <Iterations Items="ItemType.All" Context="itemType">
                                     <MudSelectItem Value="@itemType.Id">@itemType.Name</MudSelectItem>
@@ -29,9 +29,9 @@
                     <div class="col-lg-2">
                         <div class="form-group">
                             <MudSelect @bind-Value="@_brandId"
-                                       @bind-Value:event="ValueChanged" 
-                                       Label="Brand"
-                                       Variant="Variant.Outlined">
+                                        @bind-Value:event="ValueChanged" 
+                                        Label="Brand"
+                                        Variant="Variant.Outlined">
                                 <MudSelectItem Value="@(0)">--Select--</MudSelectItem>
                                 <Iterations Items="Brand.All" Context="brand">
                                     <MudSelectItem Value="@brand.Id">@brand.Name</MudSelectItem>
@@ -42,9 +42,9 @@
                     <div class="col-lg-2">
                         <div class="form-group">
                             <MudSelect @bind-Value="@_memorabiliaAcquisitionTypeId"
-                                       @bind-Value:event="ValueChanged" 
-                                       Label="Acquisition Type"
-                                       Variant="Variant.Outlined">
+                                        @bind-Value:event="ValueChanged" 
+                                        Label="Acquisition Type"
+                                        Variant="Variant.Outlined">
                                 <MudSelectItem Value="@(0)">--Select--</MudSelectItem>
                                 <Iterations Items="AcquisitionType.MemorabiliaAcquisitionTypes" Context="acquisitionType">
                                     <MudSelectItem Value="@acquisitionType.Id">@acquisitionType.Name</MudSelectItem>
@@ -55,20 +55,20 @@
                     <div class="col-lg-2">
                         <div class="form-group">
                             <MudAutocomplete @bind-Value="_autographPerson"
-                                             AdornmentColor="MudBlazor.Color.Primary"
-                                             AdornmentIcon="@Icons.Material.Filled.Search"
-                                             Label="Person"
-                                             Placeholder="Search by person"
-                                             ResetValueOnEmptyText="true"                                             
-                                             SearchFunc="@SearchPeople"                                               
-                                             T="SavePersonViewModel"
-                                             Text="@_autographPerson?.ProfileName"
-                                             Variant="Variant.Outlined" >
+                                                AdornmentColor="MudBlazor.Color.Primary"
+                                                AdornmentIcon="@Icons.Material.Filled.Search"
+                                                Label="Person"
+                                                Placeholder="Search by person"
+                                                ResetValueOnEmptyText="true"                                             
+                                                SearchFunc="@SearchPeople"                                               
+                                                T="SavePersonViewModel"
+                                                Text="@_autographPerson?.ProfileName"
+                                                Variant="Variant.Outlined" >
                                 <ItemSelectedTemplate Context="person">
-                                    @person?.ProfileName
+                            @person?.ProfileName
                                 </ItemSelectedTemplate>
                                 <ItemTemplate Context="person">
-                                    @person?.ProfileName
+                            @person?.ProfileName
                                 </ItemTemplate>
                             </MudAutocomplete>
                         </div>                    
@@ -76,9 +76,9 @@
                     <div class="col-lg-2">
                         <div class="form-group">
                             <MudSelect @bind-Value="@_writingInstrumentId"
-                                       @bind-Value:event="ValueChanged" 
-                                       Label="Writing Instrument"
-                                       Variant="Variant.Outlined">
+                                        @bind-Value:event="ValueChanged" 
+                                        Label="Writing Instrument"
+                                        Variant="Variant.Outlined">
                                 <MudSelectItem Value="@(0)">--Select--</MudSelectItem>
                                 <Iterations Items="WritingInstrument.All" Context="writingInstrument">
                                     <MudSelectItem Value="@writingInstrument.Id">@writingInstrument.Name</MudSelectItem>
@@ -89,9 +89,9 @@
                     <div class="col-lg-2">
                         <div class="form-group">
                             <MudSelect @bind-Value="@_autographAcquisitionTypeId"
-                                       @bind-Value:event="ValueChanged" 
-                                       Label="Acquisition Type"
-                                       Variant="Variant.Outlined">
+                                        @bind-Value:event="ValueChanged" 
+                                        Label="Acquisition Type"
+                                        Variant="Variant.Outlined">
                                 <MudSelectItem Value="@(0)">--Select--</MudSelectItem>
                                 <Iterations Items="AcquisitionType.All" Context="acquisitionType">
                                     <MudSelectItem Value="@acquisitionType.Id">@acquisitionType.Name</MudSelectItem>
@@ -104,9 +104,9 @@
                     <div class="col-lg-2">
                         <div class="form-group">
                             <MudSelect @bind-Value="@_memorabiliaConditionId"
-                                       @bind-Value:event="ValueChanged" 
-                                       Label="Condition"
-                                       Variant="Variant.Outlined">
+                                        @bind-Value:event="ValueChanged" 
+                                        Label="Condition"
+                                        Variant="Variant.Outlined">
                                 <MudSelectItem Value="@(0)">--Select--</MudSelectItem>
                                 <Iterations Items="Domain.Constants.Condition.All" Context="condition">
                                     <MudSelectItem Value="@condition.Id">@condition.Name</MudSelectItem>
@@ -117,9 +117,9 @@
                     <div class="col-lg-2">
                         <div class="form-group">
                             <MudSelect @bind-Value="@_sizeId"
-                                       @bind-Value:event="ValueChanged" 
-                                       Label="Size"
-                                       Variant="Variant.Outlined">
+                                        @bind-Value:event="ValueChanged" 
+                                        Label="Size"
+                                        Variant="Variant.Outlined">
                                 <MudSelectItem Value="@(0)">--Select--</MudSelectItem>
                                 <Iterations Items="Domain.Constants.Size.All" Context="size">
                                     <MudSelectItem Value="@size.Id">@size.Name</MudSelectItem>
@@ -130,19 +130,19 @@
                     <div class="col-lg-2">
                         <div class="form-group">
                             <MudDatePicker @bind-Date="_memorabiliaAcquiredDate"
-                                           DateFormat="MM/dd/yyyy"
-                                           Editable="true"
-                                           Label="Acquired Date"
-                                           Mask="@(new DateMask("MM/dd/yyyy"))" 
-                                           Variant="Variant.Outlined" />
+                                            DateFormat="MM/dd/yyyy"
+                                            Editable="true"
+                                            Label="Acquired Date"
+                                            Mask="@(new DateMask("MM/dd/yyyy"))" 
+                                            Variant="Variant.Outlined" />
                         </div>
                     </div> 
                     <div class="col-lg-2">
                         <div class="form-group">
                             <MudSelect @bind-Value="@_autographConditionId"
-                                       @bind-Value:event="ValueChanged" 
-                                       Label="Condition"
-                                       Variant="Variant.Outlined">
+                                        @bind-Value:event="ValueChanged" 
+                                        Label="Condition"
+                                        Variant="Variant.Outlined">
                                 <MudSelectItem Value="@(0)">--Select--</MudSelectItem>
                                 <Iterations Items="Domain.Constants.Condition.All" Context="condition">
                                     <MudSelectItem Value="@condition.Id">@condition.Name</MudSelectItem>
@@ -153,9 +153,9 @@
                     <div class="col-lg-2">
                         <div class="form-group">
                             <MudSelect @bind-Value="@_colorId"
-                                       @bind-Value:event="ValueChanged" 
-                                       Label="Color"
-                                       Variant="Variant.Outlined">
+                                        @bind-Value:event="ValueChanged" 
+                                        Label="Color"
+                                        Variant="Variant.Outlined">
                                 <MudSelectItem Value="@(0)">--Select--</MudSelectItem>
                                 <Iterations Items="Domain.Constants.Color.All" Context="color">
                                     <MudSelectItem Value="@color.Id">@color.Name</MudSelectItem>
@@ -166,11 +166,11 @@
                     <div class="col-lg-2">
                         <div class="form-group">
                             <MudDatePicker @bind-Date="_autographAcquiredDate"
-                                           DateFormat="MM/dd/yyyy"
-                                           Editable="true"
-                                           Label="Acquired Date"
-                                           Mask="@(new DateMask("MM/dd/yyyy"))" 
-                                           Variant="Variant.Outlined" />
+                                            DateFormat="MM/dd/yyyy"
+                                            Editable="true"
+                                            Label="Acquired Date"
+                                            Mask="@(new DateMask("MM/dd/yyyy"))" 
+                                            Variant="Variant.Outlined" />
                         </div>
                     </div> 
                 </div>
@@ -178,37 +178,37 @@
                     <div class="col-lg-2">
                         <div class="form-group">
                             <MudNumericField @bind-Value="_memorabiliaGrade" 
-                                             Label="Grade"
-                                             Variant="Variant.Outlined" />
+                                                Label="Grade"
+                                                Variant="Variant.Outlined" />
                         </div>
                     </div> 
                     <div class="col-lg-2">
                         <div class="form-group">
                             <MudNumericField @bind-Value="_memorabiliaEstimatedValue" 
-                                             Label="Estimated Value ($)"
-                                             Variant="Variant.Outlined" />
+                                                Label="Estimated Value ($)"
+                                                Variant="Variant.Outlined" />
                         </div>
                     </div> 
                     <div class="col-lg-2">
                         <div class="form-group">
                             <MudNumericField @bind-Value="_memorabiliaCost" 
-                                             Label="Cost ($)"
-                                             Variant="Variant.Outlined" />
+                                                Label="Cost ($)"
+                                                Variant="Variant.Outlined" />
                         </div>
                     </div> 
                     <div class="col-lg-2">
                         <div class="form-group">
                             <MudNumericField @bind-Value="_autographGrade" 
-                                             Label="Grade"
-                                             Variant="Variant.Outlined" />
+                                                Label="Grade"
+                                                Variant="Variant.Outlined" />
                         </div>
                     </div>                 
                     <div class="col-lg-2">
                         <div class="form-group">
                             <MudSelect @bind-Value="@_spotId"
-                                       @bind-Value:event="ValueChanged" 
-                                       Label="Spot"
-                                       Variant="Variant.Outlined">
+                                        @bind-Value:event="ValueChanged" 
+                                        Label="Spot"
+                                        Variant="Variant.Outlined">
                                 <MudSelectItem Value="@(0)">--Select--</MudSelectItem>
                                 <Iterations Items="Spot.All" Context="spot">
                                     <MudSelectItem Value="@spot.Id">@spot.Name</MudSelectItem>
@@ -219,8 +219,8 @@
                     <div class="col-lg-2">
                         <div class="form-group">
                             <MudNumericField @bind-Value="_autographCost" 
-                                             Label="Cost ($)"
-                                             Variant="Variant.Outlined" />
+                                                Label="Cost ($)"
+                                                Variant="Variant.Outlined" />
                         </div>
                     </div> 
                 </div>
@@ -228,9 +228,9 @@
                     <div class="col-lg-2">
                         <div class="form-group">
                             <MudSelect @bind-Value="@_levelTypeId"
-                                       @bind-Value:event="ValueChanged" 
-                                       Label="Level Type"
-                                       Variant="Variant.Outlined">
+                                        @bind-Value:event="ValueChanged" 
+                                        Label="Level Type"
+                                        Variant="Variant.Outlined">
                                 <MudSelectItem Value="@(0)">--Select--</MudSelectItem>
                                 <Iterations Items="LevelType.All" Context="levelType">
                                     <MudSelectItem Value="@levelType.Id">@levelType.Name</MudSelectItem>
@@ -241,9 +241,9 @@
                     <div class="col-lg-2">
                         <div class="form-group">
                             <MudSelect @bind-Value="@_gameStyleTypeId"
-                                       @bind-Value:event="ValueChanged" 
-                                       Label="Game Style"
-                                       Variant="Variant.Outlined">
+                                        @bind-Value:event="ValueChanged" 
+                                        Label="Game Style"
+                                        Variant="Variant.Outlined">
                                 <MudSelectItem Value="@(0)">--Select--</MudSelectItem>
                                 <Iterations Items="GameStyleType.All" Context="gameStyleType">
                                     <MudSelectItem Value="@gameStyleType.Id">@gameStyleType.Name</MudSelectItem>
@@ -254,9 +254,9 @@
                     <div class="col-lg-2">
                         <div class="form-group">
                             <MudSelect @bind-Value="@_memorabiliaPurchaseTypeId"
-                                       @bind-Value:event="ValueChanged" 
-                                       Label="Purchase Type"
-                                       Variant="Variant.Outlined">
+                                        @bind-Value:event="ValueChanged" 
+                                        Label="Purchase Type"
+                                        Variant="Variant.Outlined">
                                 <MudSelectItem Value="@(0)">--Select--</MudSelectItem>
                                 <Iterations Items="PurchaseType.All" Context="purchaseType">
                                     <MudSelectItem Value="@purchaseType.Id">@purchaseType.Name</MudSelectItem>
@@ -268,8 +268,8 @@
                     <div class="col-lg-2">
                         <div class="form-group">
                             <MudNumericField @bind-Value="_autographEstimatedValue" 
-                                             Label="Estimated Value ($)"
-                                             Variant="Variant.Outlined" />
+                                                Label="Estimated Value ($)"
+                                                Variant="Variant.Outlined" />
                         </div>
                     </div> 
                 </div>
@@ -277,20 +277,20 @@
                     <div class="col-lg-2">
                         <div class="form-group">
                             <MudAutocomplete @bind-Value="_memorabiliaPerson"
-                                             AdornmentColor="MudBlazor.Color.Primary"
-                                             AdornmentIcon="@Icons.Material.Filled.Search"
-                                             Label="Person"
-                                             Placeholder="Search by person"
-                                             ResetValueOnEmptyText="true"                                             
-                                             SearchFunc="@SearchPeople"                                               
-                                             T="SavePersonViewModel"
-                                             Text="@_memorabiliaPerson?.DisplayName"
-                                             Variant="Variant.Outlined">
+                                                AdornmentColor="MudBlazor.Color.Primary"
+                                                AdornmentIcon="@Icons.Material.Filled.Search"
+                                                Label="Person"
+                                                Placeholder="Search by person"
+                                                ResetValueOnEmptyText="true"                                             
+                                                SearchFunc="@SearchPeople"                                               
+                                                T="SavePersonViewModel"
+                                                Text="@_memorabiliaPerson?.DisplayName"
+                                                Variant="Variant.Outlined">
                                 <ItemSelectedTemplate Context="person">
-                                    @person?.DisplayName
+                            @person?.DisplayName
                                 </ItemSelectedTemplate>
                                 <ItemTemplate Context="person">
-                                    @person?.DisplayName
+                            @person?.DisplayName
                                 </ItemTemplate>
                             </MudAutocomplete>
                         </div>                    
@@ -298,9 +298,9 @@
                     <div class="col-lg-2">
                         <div class="form-group">
                             <MudSelect @bind-Value="@_sportId"
-                                       @bind-Value:event="ValueChanged" 
-                                       Label="Sport"
-                                       Variant="Variant.Outlined">
+                                        @bind-Value:event="ValueChanged" 
+                                        Label="Sport"
+                                        Variant="Variant.Outlined">
                                 <MudSelectItem Value="@(0)">--Select--</MudSelectItem>
                                 <Iterations Items="Sport.All" Context="sport">
                                     <MudSelectItem Value="@sport.Id">@sport.Name</MudSelectItem>
@@ -311,9 +311,9 @@
                     <div class="col-lg-2">
                         <div class="form-group">
                             <MudSelect @bind-Value="@_sportLeagueLevelId"
-                                       @bind-Value:event="ValueChanged" 
-                                       Label="Sport League Level"
-                                       Variant="Variant.Outlined">
+                                        @bind-Value:event="ValueChanged" 
+                                        Label="Sport League Level"
+                                        Variant="Variant.Outlined">
                                 <MudSelectItem Value="@(0)">--Select--</MudSelectItem>
                                 <Iterations Items="SportLeagueLevel.All" Context="sportLeagueLevel">
                                     <MudSelectItem Value="@sportLeagueLevel.Id">@sportLeagueLevel.Name</MudSelectItem>
@@ -326,9 +326,9 @@
                     <div class="col-lg-4">
                         <div class="form-group">
                             <MudSelect @bind-Value="@_franchiseId"
-                                       @bind-Value:event="ValueChanged" 
-                                       Label="Franchise"
-                                       Variant="Variant.Outlined">
+                                        @bind-Value:event="ValueChanged" 
+                                        Label="Franchise"
+                                        Variant="Variant.Outlined">
                                 <MudSelectItem Value="@(0)">--Select--</MudSelectItem>
                                 <Iterations Items="Franchise.All" Context="franchise">
                                     <MudSelectItem Value="@franchise.Id">@franchise.Name</MudSelectItem>
@@ -339,9 +339,9 @@
                     <div class="col-lg-2">
                         <div class="form-group">
                             <MudSelect @bind-Value="@_privacyTypeId"
-                                       @bind-Value:event="ValueChanged" 
-                                       Label="Privacy Type"
-                                       Variant="Variant.Outlined">
+                                        @bind-Value:event="ValueChanged" 
+                                        Label="Privacy Type"
+                                        Variant="Variant.Outlined">
                                 <MudSelectItem Value="@(0)">--Select--</MudSelectItem>
                                 <Iterations Items="PrivacyType.All" Context="privacyType">
                                     <MudSelectItem Value="@privacyType.Id">@privacyType.Name</MudSelectItem>
@@ -354,20 +354,20 @@
                     <div class="col-lg-6">
                         <div class="form-group">
                             <MudAutocomplete @bind-Value="_memorabiliaTeam"
-                                             AdornmentColor="MudBlazor.Color.Primary"
-                                             AdornmentIcon="@Icons.Material.Filled.Search"
-                                             Label="Team"
-                                             Placeholder="Search by team"
-                                             ResetValueOnEmptyText="true"                                             
-                                             SearchFunc="@SearchTeams"                                               
-                                             T="SaveTeamViewModel"
-                                             Text="@_memorabiliaTeam?.DisplayName"
-                                             Variant="Variant.Outlined">
+                                                AdornmentColor="MudBlazor.Color.Primary"
+                                                AdornmentIcon="@Icons.Material.Filled.Search"
+                                                Label="Team"
+                                                Placeholder="Search by team"
+                                                ResetValueOnEmptyText="true"                                             
+                                                SearchFunc="@SearchTeams"                                               
+                                                T="SaveTeamViewModel"
+                                                Text="@_memorabiliaTeam?.DisplayName"
+                                                Variant="Variant.Outlined">
                                 <ItemSelectedTemplate Context="team">
-                                    @team?.DisplayName
+                            @team?.DisplayName
                                 </ItemSelectedTemplate>
                                 <ItemTemplate Context="team">
-                                    @team?.DisplayName
+                            @team?.DisplayName
                                 </ItemTemplate>
                             </MudAutocomplete>
                         </div>                    
@@ -376,19 +376,20 @@
                 <DivRowCol12Center>
                     <Content>
                         <MudButton ButtonType="MudBlazor.ButtonType.Button" 
-                                   Color="MudBlazor.Color.Primary"
-                                   OnClick="@HandleValidSubmit"
-                                   Size="MudBlazor.Size.Medium"
-                                   StartIcon="@Icons.Material.Filled.Save"                                   
-                                   Variant="Variant.Filled">Filter</MudButton>
+                                    Color="MudBlazor.Color.Primary"
+                                    OnClick="@HandleValidSubmit"
+                                    Size="MudBlazor.Size.Medium"
+                                    StartIcon="@Icons.Material.Filled.Save"                                   
+                                    Variant="Variant.Filled">Filter</MudButton>
                         <MudButton ButtonType="MudBlazor.ButtonType.Button" 
-                                   Color="MudBlazor.Color.Secondary"
-                                   OnClick="@ResetCriteria"
-                                   Size="MudBlazor.Size.Medium"                                  
-                                   Variant="Variant.Filled">Reset Criteria</MudButton>
+                                    Color="MudBlazor.Color.Secondary"
+                                    OnClick="@ResetCriteria"
+                                    Size="MudBlazor.Size.Medium"                                  
+                                    Variant="Variant.Filled">Reset Criteria</MudButton>
                     </Content>
                 </DivRowCol12Center>
             </Content>
         </DivPad2>      
     </EditForm>
 </div>
+

@@ -1,59 +1,58 @@
-﻿namespace Memorabilia.Application.Features.Memorabilia.Bammer
+﻿namespace Memorabilia.Application.Features.Memorabilia.Bammer;
+
+public class SaveBammer
 {
-    public class SaveBammer
+    public class Handler : CommandHandler<Command>
     {
-        public class Handler : CommandHandler<Command>
+        private readonly IMemorabiliaItemRepository _memorabiliaRepository;
+
+        public Handler(IMemorabiliaItemRepository memorabiliaRepository)
         {
-            private readonly IMemorabiliaRepository _memorabiliaRepository;
-
-            public Handler(IMemorabiliaRepository memorabiliaRepository)
-            {
-                _memorabiliaRepository = memorabiliaRepository;
-            }
-
-            protected override async Task Handle(Command command)
-            {
-                var memorabilia = await _memorabiliaRepository.Get(command.MemorabiliaId).ConfigureAwait(false);
-
-                memorabilia.SetBammer(command.BammerTypeId,
-                                      command.BrandId,
-                                      command.InPackage,
-                                      command.LevelTypeId,
-                                      command.PersonIds,
-                                      command.SportId,
-                                      command.TeamIds,
-                                      command.Year);
-
-                await _memorabiliaRepository.Update(memorabilia).ConfigureAwait(false);
-            }
+            _memorabiliaRepository = memorabiliaRepository;
         }
 
-        public class Command : DomainCommand, ICommand
+        protected override async Task Handle(Command command)
         {
-            private readonly SaveBammerViewModel _viewModel;
+            var memorabilia = await _memorabiliaRepository.Get(command.MemorabiliaId);
 
-            public Command(SaveBammerViewModel viewModel)
-            {
-                _viewModel = viewModel;
-            }
+            memorabilia.SetBammer(command.BammerTypeId,
+                                  command.BrandId,
+                                  command.InPackage,
+                                  command.LevelTypeId,
+                                  command.PersonIds,
+                                  command.SportId,
+                                  command.TeamIds,
+                                  command.Year);
 
-            public int? BammerTypeId => _viewModel.BammerTypeId > 0 ? _viewModel.BammerTypeId : null;
-
-            public int BrandId => _viewModel.BrandId;
-
-            public bool InPackage => _viewModel.InPackage;
-
-            public int LevelTypeId => _viewModel.LevelTypeId;
-
-            public int MemorabiliaId => _viewModel.MemorabiliaId;
-
-            public int[] PersonIds => _viewModel.People.Where(person => !person.IsDeleted).Select(person => person.Id).ToArray();
-
-            public int? SportId => _viewModel.SportId > 0 ? _viewModel.SportId : null;
-
-            public int[] TeamIds => _viewModel.Teams.Where(team => !team.IsDeleted).Select(team => team.Id).ToArray();
-
-            public int? Year => _viewModel.Year;
+            await _memorabiliaRepository.Update(memorabilia);
         }
+    }
+
+    public class Command : DomainCommand, ICommand
+    {
+        private readonly SaveBammerViewModel _viewModel;
+
+        public Command(SaveBammerViewModel viewModel)
+        {
+            _viewModel = viewModel;
+        }
+
+        public int? BammerTypeId => _viewModel.BammerTypeId > 0 ? _viewModel.BammerTypeId : null;
+
+        public int BrandId => _viewModel.BrandId;
+
+        public bool InPackage => _viewModel.InPackage;
+
+        public int LevelTypeId => _viewModel.LevelTypeId;
+
+        public int MemorabiliaId => _viewModel.MemorabiliaId;
+
+        public int[] PersonIds => _viewModel.People.Where(person => !person.IsDeleted).Select(person => person.Id).ToArray();
+
+        public int? SportId => _viewModel.SportId > 0 ? _viewModel.SportId : null;
+
+        public int[] TeamIds => _viewModel.Teams.Where(team => !team.IsDeleted).Select(team => team.Id).ToArray();
+
+        public int? Year => _viewModel.Year;
     }
 }

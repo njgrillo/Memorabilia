@@ -1,0 +1,54 @@
+﻿<PageView AddRoute="@ViewModel.AddRoute" 
+          AddTitle="@ViewModel.AddTitle"
+          DisplayPageHeader="false"
+          NavigationPath="@ViewModel.ExitNavigationPath"
+          OnLoad="OnLoad"
+          PageTitle="@ViewModel.PageTitle">
+    <Content>
+        <DivPad2>
+            <Content>
+                <MudTable Bordered="false"
+                          Dense="false" 
+                          Filter="new Func<FranchiseViewModel,bool>(FilterFunc1)"
+                          Hover="true"
+                          Items="@ViewModel.Franchises"    
+                          Striped="true">
+                    <ToolBarContent>
+                        <MudText Typo="Typo.h6">@ViewModel.PageTitle</MudText>
+                        <MudSpacer />
+                        <MudTextField @bind-Value="Search"
+                                      Adornment="Adornment.Start"
+                                      AdornmentIcon="@Icons.Material.Filled.Search"
+                                      Class="mt-0"
+                                      IconSize="MudBlazor.Size.Medium"
+                                      Placeholder="Search" />
+                    </ToolBarContent>
+                    <HeaderContent>
+                        <MudTh>Sport League</MudTh>
+                        <MudTh>Name</MudTh>
+                        <MudTh>Location</MudTh>
+                        <MudTh>Founded</MudTh>
+                        <MudTh></MudTh>
+                    </HeaderContent>
+                    <RowTemplate>
+                        <MudTd DataLabel="Sport League">@context.SportLeagueLevelName</MudTd>
+                        <MudTd DataLabel="Name">@context.Name</MudTd>
+                        <MudTd DataLabel="Location">@context.Location</MudTd>
+                        <MudTd DataLabel="Founded">@context.FoundYear</MudTd>
+                        <MudTd DataLabel="">
+                            <GridEditButton NavigationPath="@($"{ViewModel.RoutePrefix}/Edit/{context.Id}")" />    
+                            <MudTooltip Text="Delete">
+                                <MudFab Color="MudBlazor.Color.Secondary"
+                                        Icon="@Icons.Outlined.DeleteOutline"
+                                        OnClick="@(_ => ShowDeleteConfirm(@context.Id))" />
+                            </MudTooltip>
+                        </MudTd>
+                    </RowTemplate>
+                    <PagerContent>
+                        <MudTablePager />
+                    </PagerContent>
+                </MudTable>
+            </Content>
+        </DivPad2>
+    </Content>
+</PageView>

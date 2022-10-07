@@ -1,0 +1,24 @@
+﻿<Page OnLoad="OnLoad">
+    <Content>
+        <PageHeader PageTitle="@_viewModel.PageTitle" />
+        <MemorabiliaItemTimeline EditMode="_viewModel.EditModeType" 
+                                 ItemTypeName="@_viewModel.ItemTypeName"
+                                 MemorabiliaId="_viewModel.MemorabiliaId"
+                                 MemorabiliaItemStep="_viewModel.MemorabiliaItemStep" />
+        <EditImages @ref="EditImages"              
+                    ContinueNavigationPath="@_viewModel.ContinueNavigationPath"
+                    ExitNavigationPath="@_viewModel.ExitNavigationPath"
+                    Images="@_viewModel.Images"
+                    MaximumAllowedFiles="5"
+                    MaximumFileSize="10240000"
+                    Model="_viewModel"
+                    OnLoad="OnLoad"
+                    OnSave="OnSave"
+                    PageTitle="@_viewModel.PageTitle"
+                    SaveButtonText="Save & Continue"
+                    TItem="SaveMemorabiliaImagesViewModel"
+                    UploadPath="@UploadPath"
+                    UserId="@UserId"/>    
+        <PageFooter NavigationPath="@_viewModel.BackNavigationPath" />
+    </Content>
+</Page>

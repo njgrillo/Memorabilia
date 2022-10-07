@@ -1,9 +1,8 @@
 ﻿using Memorabilia.Domain.Entities;
 
-namespace Memorabilia.Repository.Interfaces
+namespace Memorabilia.Repository.Interfaces;
+
+public interface IPersonAccomplishmentRepository
 {
-    public interface IPersonAccomplishmentRepository
-    {
-        Task<IEnumerable<PersonAccomplishment>> GetAll(int accomplishmentTypeId);
-    }
+    Task<IEnumerable<PersonAccomplishment>> GetAll(int accomplishmentTypeId);
 }

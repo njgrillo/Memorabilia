@@ -1,28 +1,25 @@
-﻿using Memorabilia.Domain.Entities;
+﻿using Memorabilia.Domain.Constants;
 
-namespace Memorabilia.Application.Features.Admin.Sports
+namespace Memorabilia.Application.Features.Admin.Sports;
+
+public class SportsViewModel : ViewModel
 {
-    public class SportsViewModel : ViewModel
+    public SportsViewModel() { }
+
+    public SportsViewModel(IEnumerable<Domain.Entities.Sport> sports) 
     {
-        public SportsViewModel() { }
-
-        public SportsViewModel(IEnumerable<Sport> sports) 
-        {
-            Sports = sports.Select(sport => new SportViewModel(sport)).ToList();
-        }
-
-        public string AddRoute => $"{RoutePrefix}/Edit/0";
-
-        public string AddTitle => $"Add {ItemTitle}";
-
-        public string ExitNavigationPath => "Admin/EditDomainItems";
-
-        public override string ItemTitle => "Sport";
-
-        public override string PageTitle => "Sports";
-
-        public override string RoutePrefix => "Sports";
-
-        public List<SportViewModel> Sports { get; set; } = new();
+        Sports = sports.Select(sport => new SportViewModel(sport)).ToList();
     }
+
+    public string AddRoute => $"{RoutePrefix}/{EditModeType.Update.Name}/0";
+
+    public string AddTitle => $"{EditModeType.Add.Name} {ItemTitle}";
+
+    public override string ItemTitle => AdminDomainItem.Sports.Item;
+
+    public override string PageTitle => AdminDomainItem.Sports.Title;
+
+    public override string RoutePrefix => AdminDomainItem.Sports.Page;
+
+    public List<SportViewModel> Sports { get; set; } = new();
 }

@@ -1,20 +1,19 @@
 ﻿using Memorabilia.Domain.Constants;
 
-namespace Memorabilia.Application.Features.User.Dashboard
+namespace Memorabilia.Application.Features.User.Dashboard;
+
+public class EstimatedValueChartViewModel : DashboardItemViewModel
 {
-    public class EstimatedValueChartViewModel : DashboardItemViewModel
+    public EstimatedValueChartViewModel() { }
+
+    public EstimatedValueChartViewModel(DashboardItem dashboardItem, IEnumerable<Domain.Entities.Memorabilia> memorabiliaItems)
     {
-        public EstimatedValueChartViewModel() { }
+        DashboardItem = dashboardItem;
 
-        public EstimatedValueChartViewModel(DashboardItem dashboardItem, IEnumerable<Domain.Entities.Memorabilia> memorabiliaItems)
-        {
-            DashboardItem = dashboardItem;
-
-            var memorabiliaEstimatedValueTotal = memorabiliaItems.Sum(memorabiliaItem => memorabiliaItem.EstimatedValue ?? 0);
-            var autographsEstimatedValueTotal = memorabiliaItems.Sum(memorabiliaItem => memorabiliaItem.Autographs.Select(autograph => autograph.EstimatedValue ?? 0).Sum());
-            
-            Labels = new List<string>() { "Memorabilia", "Autographs" }.ToArray();
-            DataNew = new List<double>() { (double)memorabiliaEstimatedValueTotal, (double)autographsEstimatedValueTotal }.ToArray();
-        }
+        var memorabiliaEstimatedValueTotal = memorabiliaItems.Sum(memorabiliaItem => memorabiliaItem.EstimatedValue ?? 0);
+        var autographsEstimatedValueTotal = memorabiliaItems.Sum(memorabiliaItem => memorabiliaItem.Autographs.Select(autograph => autograph.EstimatedValue ?? 0).Sum());
+        
+        Labels = new List<string>() { "Memorabilia", "Autographs" }.ToArray();
+        DataNew = new List<double>() { (double)memorabiliaEstimatedValueTotal, (double)autographsEstimatedValueTotal }.ToArray();
     }
 }

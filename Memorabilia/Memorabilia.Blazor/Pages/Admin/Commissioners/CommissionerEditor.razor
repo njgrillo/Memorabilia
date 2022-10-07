@@ -1,0 +1,63 @@
+﻿<EditPage ContinueNavigationPath="@ViewModel.RoutePrefix"
+          EditMode="ViewModel.EditModeType" 
+          ExitNavigationPath="@ViewModel.RoutePrefix"
+          ImagePath="@ViewModel.ImagePath" 
+          ItemName="@ViewModel.ItemTitle"
+          Model="ViewModel"          
+          OnLoad="OnLoad"
+          OnSave="HandleValidSubmit"
+          PageFooterButtonText="@ViewModel.ExitButtonText"
+          PageFooterNavigationPath="@ViewModel.ExitNavigationPath"
+          PageTitle="@ViewModel.PageTitle"
+          TItem="SaveCommissionerViewModel">
+    <Content>
+        <DivRowCol3>
+            <Content>
+                <MudSelect @bind-Value="@ViewModel.SportLeagueLevelId"
+                           @bind-Value:event="ValueChanged" 
+                           Label="Sport League Level"
+                           Variant="Variant.Outlined">
+                    <MudSelectItem Value="@(0)">--Select--</MudSelectItem>
+                    <Iterations Items="SportLeagueLevel.All" Context="sportLeagueLevel">
+                        <MudSelectItem Value="@sportLeagueLevel.Id">@sportLeagueLevel.Name</MudSelectItem>
+                    </Iterations>	
+                </MudSelect> 
+            </Content>
+        </DivRowCol3>
+        <DivRowCol3>
+            <Content>
+                <MudAutocomplete @bind-Value="ViewModel.Person"
+                                 AdornmentColor="MudBlazor.Color.Primary"
+                                 AdornmentIcon="@Icons.Material.Filled.Search"
+                                 Label="Person"
+                                 Placeholder="Search by name..."
+                                 ResetValueOnEmptyText="false"                                             
+                                 SearchFunc="@SearchPeople"                                               
+                                 T="PersonViewModel"
+                                 Text="@ViewModel.Person?.DisplayName"
+                                 Variant="Variant.Outlined">
+                    <ItemSelectedTemplate Context="person">
+                        @person?.DisplayName
+                    </ItemSelectedTemplate>
+                    <ItemTemplate Context="person">
+                        @person?.DisplayName
+                    </ItemTemplate>
+                </MudAutocomplete>
+            </Content>
+        </DivRowCol3>
+        <DivRowCol3>
+            <Content>
+                <MudNumericField @bind-Value="ViewModel.BeginYear" 
+                                 Label="Begin Year"
+                                 Variant="Variant.Outlined" />
+            </Content>
+        </DivRowCol3>
+        <DivRowCol3>
+            <Content>
+                <MudNumericField @bind-Value="ViewModel.EndYear" 
+                                 Label="End Year"
+                                 Variant="Variant.Outlined" />
+            </Content>
+        </DivRowCol3>
+    </Content>
+</EditPage>

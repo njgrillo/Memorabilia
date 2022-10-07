@@ -1,48 +1,47 @@
 ﻿using Memorabilia.Domain.Entities;
 
-namespace Memorabilia.Application.Features.Admin.GameStyleTypes
+namespace Memorabilia.Application.Features.Admin.GameStyleTypes;
+
+public class SaveGameStyleType
 {
-    public class SaveGameStyleType
+    public class Handler : CommandHandler<Command>
     {
-        public class Handler : CommandHandler<Command>
+        private readonly IDomainRepository<GameStyleType> _gameStyleTypeRepository;
+
+        public Handler(IDomainRepository<GameStyleType> gameStyleTypeRepository)
         {
-            private readonly IGameStyleTypeRepository _gameStyleTypeRepository;
-
-            public Handler(IGameStyleTypeRepository gameStyleTypeRepository)
-            {
-                _gameStyleTypeRepository = gameStyleTypeRepository;
-            }
-
-            protected override async Task Handle(Command command)
-            {
-                GameStyleType gameStyleType;
-
-                if (command.IsNew)
-                {
-                    gameStyleType = new GameStyleType(command.Name, command.Abbreviation);
-                    await _gameStyleTypeRepository.Add(gameStyleType).ConfigureAwait(false);
-
-                    return;
-                }
-
-                gameStyleType = await _gameStyleTypeRepository.Get(command.Id).ConfigureAwait(false);
-
-                if (command.IsDeleted)
-                {
-                    await _gameStyleTypeRepository.Delete(gameStyleType).ConfigureAwait(false);
-
-                    return;
-                }
-
-                gameStyleType.Set(command.Name, command.Abbreviation);
-
-                await _gameStyleTypeRepository.Update(gameStyleType).ConfigureAwait(false);
-            }
+            _gameStyleTypeRepository = gameStyleTypeRepository;
         }
 
-        public class Command : DomainEntityCommand
+        protected override async Task Handle(Command command)
         {
-            public Command(SaveDomainViewModel viewModel) : base(viewModel) { }
+            GameStyleType gameStyleType;
+
+            if (command.IsNew)
+            {
+                gameStyleType = new GameStyleType(command.Name, command.Abbreviation);
+                await _gameStyleTypeRepository.Add(gameStyleType);
+
+                return;
+            }
+
+            gameStyleType = await _gameStyleTypeRepository.Get(command.Id);
+
+            if (command.IsDeleted)
+            {
+                await _gameStyleTypeRepository.Delete(gameStyleType);
+
+                return;
+            }
+
+            gameStyleType.Set(command.Name, command.Abbreviation);
+
+            await _gameStyleTypeRepository.Update(gameStyleType);
         }
+    }
+
+    public class Command : DomainEntityCommand
+    {
+        public Command(SaveDomainViewModel viewModel) : base(viewModel) { }
     }
 }

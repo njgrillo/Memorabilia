@@ -1,27 +1,26 @@
-﻿namespace Memorabilia.Domain.Entities
+﻿namespace Memorabilia.Domain.Entities;
+
+public class League : Framework.Library.Domain.Entity.DomainEntity
 {
-    public class League : Framework.Library.Domain.Entity.DomainEntity
+    public League() { }
+
+    public League(int sportLeagueLevelId, string name, string abbreviation)
     {
-        public League() { }
+        SportLeagueLevelId = sportLeagueLevelId;
+        Name = name;
+        Abbreviation = abbreviation;
+    }
 
-        public League(int sportLeagueLevelId, string name, string abbreviation)
-        {
-            SportLeagueLevelId = sportLeagueLevelId;
-            Name = name;
-            Abbreviation = abbreviation;
-        }
+    public string Abbreviation { get; set; }
 
-        public string Abbreviation { get; set; }
+    public string Name { get; set; }
 
-        public string Name { get; set; }
+    public int SportLeagueLevelId { get; set; }
 
-        public int SportLeagueLevelId { get; set; }
-
-        public void Set(int sportLeagueLevelId, string name, string abbreviation)
-        {
-            SportLeagueLevelId = sportLeagueLevelId;
-            Name = name;
-            Abbreviation = abbreviation;
-        }
+    public void Set(int sportLeagueLevelId, string name, string abbreviation)
+    {
+        SportLeagueLevelId = sportLeagueLevelId;
+        Name = name;
+        Abbreviation = abbreviation;
     }
 }

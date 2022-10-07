@@ -1,17 +1,17 @@
-﻿using Memorabilia.Domain.Entities;
+﻿using Memorabilia.Domain.Constants;
+using Memorabilia.Domain.Entities;
 
-namespace Memorabilia.Application.Features.Admin.LeaderTypes
+namespace Memorabilia.Application.Features.Admin.LeaderTypes;
+
+public class LeaderTypesViewModel : DomainsViewModel
 {
-    public class LeaderTypesViewModel : DomainsViewModel
-    {
-        public LeaderTypesViewModel() { }
+    public LeaderTypesViewModel() { }
 
-        public LeaderTypesViewModel(IEnumerable<DomainEntity> domainEntities) : base(domainEntities) { }
+    public LeaderTypesViewModel(IEnumerable<DomainEntity> domainEntities) : base(domainEntities) { }
 
-        public override string ItemTitle => "Leader Type";
+    public override string ItemTitle => AdminDomainItem.LeaderTypes.Item;
 
-        public override string PageTitle => "Leader Types";
+    public override string PageTitle => AdminDomainItem.LeaderTypes.Title;
 
-        public override string RoutePrefix => "LeaderTypes";
-    }
+    public override string RoutePrefix => AdminDomainItem.LeaderTypes.Page;
 }
