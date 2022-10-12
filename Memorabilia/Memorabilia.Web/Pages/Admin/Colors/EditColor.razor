@@ -1,5 +1,9 @@
 ﻿@page "/Colors/Edit/{id:int}"
 
-<EditDomainItem Item="_viewModel"
-                OnLoad="OnLoad"
-                OnSave="OnSave" />
+@inherits EditItem
+
+<PageLoader>
+    <Content>
+        <ColorEditor Id=@Id />
+    </Content>
+</PageLoader>

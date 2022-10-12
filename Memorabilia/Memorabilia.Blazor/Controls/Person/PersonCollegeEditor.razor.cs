@@ -1,58 +1,57 @@
 ﻿#nullable disable
 
-namespace Memorabilia.Blazor.Controls.Person
+namespace Memorabilia.Blazor.Controls.Person;
+
+public partial class PersonCollegeEditor : ComponentBase
 {
-    public partial class PersonCollegeEditor : ComponentBase
+    [Parameter]
+    public List<SavePersonCollegeViewModel> Colleges { get; set; } = new();
+
+    private bool _canAdd = true;
+    private bool _canEditCollege = true;
+    private bool _canUpdate;
+    private SavePersonCollegeViewModel _viewModel = new();
+
+    private void Add()
     {
-        [Parameter]
-        public List<SavePersonCollegeViewModel> Colleges { get; set; } = new();
+        Colleges.Add(_viewModel);
 
-        private bool _canAdd = true;
-        private bool _canEditCollege = true;
-        private bool _canUpdate;
-        private SavePersonCollegeViewModel _viewModel = new();
+        _viewModel = new SavePersonCollegeViewModel();
+    }
 
-        private void Add()
-        {
-            Colleges.Add(_viewModel);
+    private void Edit(SavePersonCollegeViewModel college)
+    {
+        _viewModel.CollegeId = college.CollegeId;
+        _viewModel.BeginYear = college.BeginYear;
+        _viewModel.EndYear = college.EndYear;
 
-            _viewModel = new SavePersonCollegeViewModel();
-        }
+        _canAdd = false;
+        _canEditCollege = false;
+        _canUpdate = true;
+    }
 
-        private void Edit(SavePersonCollegeViewModel college)
-        {
-            _viewModel.CollegeId = college.CollegeId;
-            _viewModel.BeginYear = college.BeginYear;
-            _viewModel.EndYear = college.EndYear;
+    private void Remove(int collegeId)
+    {
+        var college = Colleges.FirstOrDefault(college => college.CollegeId == collegeId);
 
-            _canAdd = false;
-            _canEditCollege = false;
-            _canUpdate = true;
-        }
+        if (college == null)
+            return;
 
-        private void Remove(int collegeId)
-        {
-            var college = Colleges.FirstOrDefault(college => college.CollegeId == collegeId);
+        college.IsDeleted = true;
+    }
 
-            if (college == null)
-                return;
+    private void Update()
+    {
+        var college = Colleges.Single(college => college.CollegeId == _viewModel.CollegeId);
 
-            college.IsDeleted = true;
-        }
+        college.CollegeId = _viewModel.CollegeId;
+        college.BeginYear = _viewModel.BeginYear;
+        college.EndYear = _viewModel.EndYear;
 
-        private void Update()
-        {
-            var college = Colleges.Single(college => college.CollegeId == _viewModel.CollegeId);
+        _viewModel = new SavePersonCollegeViewModel();
 
-            college.CollegeId = _viewModel.CollegeId;
-            college.BeginYear = _viewModel.BeginYear;
-            college.EndYear = _viewModel.EndYear;
-
-            _viewModel = new SavePersonCollegeViewModel();
-
-            _canAdd = false;
-            _canEditCollege = false;
-            _canUpdate = true;
-        }
+        _canAdd = false;
+        _canEditCollege = false;
+        _canUpdate = true;
     }
 }

@@ -1,70 +1,69 @@
 ﻿#nullable disable
 
-namespace Memorabilia.Blazor.Controls.Person
+namespace Memorabilia.Blazor.Controls.Person;
+
+public partial class PersonDraftEditor : ComponentBase
 {
-    public partial class PersonDraftEditor : ComponentBase
+    [Parameter]
+    public List<SavePersonDraftViewModel> Drafts { get; set; } = new();
+
+    [Parameter]
+    public List<int> SportIds { get; set; } = new();
+
+    private bool _canAdd = true;
+    private bool _canEditFranchise = true;
+    private bool _canUpdate;
+    private SavePersonDraftViewModel _viewModel = new();
+
+    protected override void OnInitialized()
     {
-        [Parameter]
-        public List<SavePersonDraftViewModel> Drafts { get; set; } = new();
+        _viewModel = new SavePersonDraftViewModel(SportIds);
+    }
 
-        [Parameter]
-        public List<int> SportIds { get; set; } = new();
+    private void Add()
+    {
+        Drafts.Add(_viewModel);
 
-        private bool _canAdd = true;
-        private bool _canEditFranchise = true;
-        private bool _canUpdate;
-        private SavePersonDraftViewModel _viewModel = new();
+        _viewModel = new SavePersonDraftViewModel(SportIds);
+    }
 
-        protected override void OnInitialized()
-        {
-            _viewModel = new SavePersonDraftViewModel(SportIds);
-        }
+    private void Edit(SavePersonDraftViewModel draft)
+    {
+        _viewModel.FranchiseId = draft.FranchiseId;
+        _viewModel.Year = draft.Year;
+        _viewModel.Round = draft.Round;
+        _viewModel.Pick = draft.Pick;
+        _viewModel.Overall = draft.Overall;
 
-        private void Add()
-        {
-            Drafts.Add(_viewModel);
+        _canAdd = false;
+        _canEditFranchise = false;
+        _canUpdate = true;
+    }
 
-            _viewModel = new SavePersonDraftViewModel(SportIds);
-        }
+    private void Remove(int franchiseId, int? year)
+    {
+        var draft = Drafts.SingleOrDefault(draft => draft.FranchiseId == franchiseId && draft.Year == year);
 
-        private void Edit(SavePersonDraftViewModel draft)
-        {
-            _viewModel.FranchiseId = draft.FranchiseId;
-            _viewModel.Year = draft.Year;
-            _viewModel.Round = draft.Round;
-            _viewModel.Pick = draft.Pick;
-            _viewModel.Overall = draft.Overall;
+        if (draft == null)
+            return;
 
-            _canAdd = false;
-            _canEditFranchise = false;
-            _canUpdate = true;
-        }
+        draft.IsDeleted = true;
+    }
 
-        private void Remove(int franchiseId, int? year)
-        {
-            var draft = Drafts.SingleOrDefault(draft => draft.FranchiseId == franchiseId && draft.Year == year);
+    private void Update()
+    {
+        var draft = Drafts.Single(draft => draft.FranchiseId == _viewModel.FranchiseId);
 
-            if (draft == null)
-                return;
+        draft.FranchiseId = _viewModel.FranchiseId;
+        draft.Year = _viewModel.Year;
+        draft.Round = _viewModel.Round;
+        draft.Pick = _viewModel.Pick;
+        draft.Overall = _viewModel.Overall;
 
-            draft.IsDeleted = true;
-        }
+        _viewModel = new SavePersonDraftViewModel(SportIds);
 
-        private void Update()
-        {
-            var draft = Drafts.Single(draft => draft.FranchiseId == _viewModel.FranchiseId);
-
-            draft.FranchiseId = _viewModel.FranchiseId;
-            draft.Year = _viewModel.Year;
-            draft.Round = _viewModel.Round;
-            draft.Pick = _viewModel.Pick;
-            draft.Overall = _viewModel.Overall;
-
-            _viewModel = new SavePersonDraftViewModel(SportIds);
-
-            _canAdd = true;
-            _canEditFranchise = true;
-            _canUpdate = false;
-        }
+        _canAdd = true;
+        _canEditFranchise = true;
+        _canUpdate = false;
     }
 }

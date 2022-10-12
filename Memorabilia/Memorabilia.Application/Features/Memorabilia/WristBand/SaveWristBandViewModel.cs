@@ -28,7 +28,7 @@ public class SaveWristBandViewModel : SaveItemViewModel
 
     [Required]
     [Range(1, int.MaxValue, ErrorMessage = "Brand is required.")]
-    public int BrandId { get; set; }
+    public int BrandId { get; set; } = Brand.Rawlings.Id;
 
     public bool DisplayGameDate => GameStyleType.IsGameWorthly(GameStyleType);
 
@@ -42,23 +42,21 @@ public class SaveWristBandViewModel : SaveItemViewModel
 
     [Required]
     [Range(1, int.MaxValue, ErrorMessage = "Game Style Type is required.")]
-    public int GameStyleTypeId { get; set; }
+    public int GameStyleTypeId { get; set; } = GameStyleType.None.Id;
 
-    public override string ImagePath => "images/Wristband.jpg";
+    public override string ImagePath => Domain.Constants.ImagePath.WristBand;
 
     public override ItemType ItemType => ItemType.WristBand;
 
     [Required]
     [Range(1, int.MaxValue, ErrorMessage = "Level is required.")]
-    public int LevelTypeId { get; set; }
-
-    public override string PageTitle => $"{(EditModeType == EditModeType.Update ? EditModeType.Update.Name : EditModeType.Add.Name)} {ItemType.WristBand.Name} Details";
+    public int LevelTypeId { get; set; } = LevelType.Professional.Id;
 
     public SavePersonViewModel Person { get; set; }
 
     [Required]
     [Range(1, int.MaxValue, ErrorMessage = "Size is required.")]
-    public int SizeId { get; set; }
+    public int SizeId { get; set; } = Size.Standard.Id;
 
     public int SportId { get; set; }
 

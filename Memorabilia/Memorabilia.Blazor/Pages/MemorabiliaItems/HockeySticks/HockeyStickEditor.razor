@@ -1,0 +1,84 @@
+﻿@inherits MemorabiliaItem<SaveHockeyStickViewModel>
+
+<EditPage ContinueNavigationPath="@ViewModel.ContinueNavigationPath"
+          EditMode="ViewModel.EditModeType"
+          ExitNavigationPath="@ViewModel.ExitNavigationPath"
+          ImagePath="@ViewModel.ImagePath"
+          ItemName="@ViewModel.ItemType.Name"
+          Model="ViewModel"
+          OnLoad="OnLoad"
+          OnSave="OnSave"
+          PageFooterButtonText="@ViewModel.ExitButtonText"
+          PageFooterNavigationPath="@ViewModel.ExitNavigationPath"
+          PageTitle="@ViewModel.PageTitle"
+          TItem="SaveHockeyStickViewModel"
+          UseMultipleButtons="true">
+    <TimelineContent>
+        <MemorabiliaItemTimeline EditMode="ViewModel.EditModeType"
+                                 ItemTypeName="@ViewModel.ItemType.Name"
+                                 MemorabiliaId="ViewModel.MemorabiliaId"
+                                 MemorabiliaItemStep="ViewModel.MemorabiliaItemStep" />
+    </TimelineContent>
+    <Content>
+        <DivRowCol3>
+            <Content>
+                <ItemTypeLevelDropDown @bind-Value="@ViewModel.LevelTypeId"
+                                       @bind-Value:event="ValueChanged" 
+                                       ItemType="ViewModel.ItemType"
+                                       SelectedValue="ViewModel.LevelTypeId" /> 
+            </Content>
+            <ContentColumn2>
+                <ItemTypeBrandDropDown @bind-Value="@ViewModel.BrandId" 
+                                       @bind-Value:event="ValueChanged"
+                                       ItemType="ViewModel.ItemType"
+                                       SelectedValue="ViewModel.BrandId" />
+            </ContentColumn2>
+        </DivRowCol3>
+        <DivRowCol3>
+            <Content>
+                <ItemTypeSizeDropDown @bind-Value="@ViewModel.SizeId"
+                                      @bind-Value:event="ValueChanged" 
+                                      ItemType="ViewModel.ItemType"
+                                      SelectedValue="@ViewModel.SizeId" /> 
+            </Content>
+        </DivRowCol3>
+        <DivRowCol3>
+            <Content>
+                <MudSelect @bind-Value="@ViewModel.GameStyleTypeId"
+                           @bind-Value:event="ValueChanged" 
+                           Label="Game Style"
+                           Variant="Variant.Outlined">
+                    <MudSelectItem Value="@(0)">--Select--</MudSelectItem>
+                    <Iterations Items="ViewModel.GameStyleTypes" Context="gameStyleType">
+                        <MudSelectItem Value="@gameStyleType.Id">@gameStyleType.Name</MudSelectItem>
+                    </Iterations>	
+                </MudSelect>
+            </Content>
+        </DivRowCol3>
+        <DivRowCol3>
+            <Content>
+                <DivHidden Hidden="@(!ViewModel.DisplayGameDate)">
+                    <Content>
+                        <MudDatePicker @bind-Date="ViewModel.GameDate"
+                                       DateFormat="MM/dd/yyyy"
+                                       Editable="true"
+                                       Label="Game Date"
+                                       Mask="@(new DateMask("MM/dd/yyyy"))" 
+                                       Variant="Variant.Outlined" />
+                    </Content>
+                </DivHidden>
+            </Content>
+        </DivRowCol3>
+        <PersonSelector CanFilterBySport="true"
+                        CanToggle="true"
+                        ItemType="ViewModel.ItemType"
+                        SelectedPerson="ViewModel.Person"
+                        SelectedPersonChanged="SelectedPersonChanged"
+                        Sport="ViewModel.Sport" />                 
+        <TeamSelector CanToggle="true" 
+                      ItemType="ViewModel.ItemType"
+                      SelectedTeam="ViewModel.Team"
+                      SelectedTeamChanged="SelectedTeamChanged"
+                      SportLeagueLevel="ViewModel.SportLeagueLevel" />
+    </Content>
+</EditPage>

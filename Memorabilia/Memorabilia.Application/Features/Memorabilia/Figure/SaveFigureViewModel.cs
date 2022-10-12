@@ -42,13 +42,13 @@ public class SaveFigureViewModel : SaveItemViewModel
 
     [Required]
     [Range(1, int.MaxValue, ErrorMessage = "Level is required.")]
-    public int LevelTypeId { get; set; }
+    public int LevelTypeId { get; set; } = LevelType.Professional.Id;
 
     public List<SavePersonViewModel> People { get; set; } = new();
 
     [Required]
     [Range(1, int.MaxValue, ErrorMessage = "Size is required.")]
-    public int SizeId { get; set; }
+    public int SizeId { get; set; } = Size.Standard.Id;
 
     public List<int> SportIds { get; set; } = new();
 

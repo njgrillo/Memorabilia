@@ -27,7 +27,7 @@ public class SaveSoccerballViewModel : SaveItemViewModel
 
     [Required]
     [Range(1, int.MaxValue, ErrorMessage = "Brand is required.")]
-    public int BrandId { get; set; }
+    public int BrandId { get; set; } = Brand.Rawlings.Id;
 
     public bool DisplayGameDate => GameStyleType == GameStyleType.GameUsed;
 
@@ -43,23 +43,21 @@ public class SaveSoccerballViewModel : SaveItemViewModel
 
     [Required]
     [Range(1, int.MaxValue, ErrorMessage = "Match Style Type is required.")]
-    public int GameStyleTypeId { get; set; }
+    public int GameStyleTypeId { get; set; } = GameStyleType.None.Id;
 
-    public override string ImagePath => "images/soccerball.jpg";
+    public override string ImagePath => Domain.Constants.ImagePath.Soccerball;
 
     public override ItemType ItemType => ItemType.Soccerball;
 
     [Required]
     [Range(1, int.MaxValue, ErrorMessage = "Level is required.")]
-    public int LevelTypeId { get; set; }
-
-    public override string PageTitle => $"{(EditModeType == EditModeType.Update ? EditModeType.Update.Name : EditModeType.Add.Name)} {ItemType.Soccerball.Name} Details";
+    public int LevelTypeId { get; set; } = LevelType.Professional.Id;
 
     public SavePersonViewModel Person { get; set; }
 
     [Required]
     [Range(1, int.MaxValue, ErrorMessage = "Size is required.")]
-    public int SizeId { get; set; }
+    public int SizeId { get; set; } = Size.Standard.Id;
 
     public SaveTeamViewModel Team { get; set; } 
 }

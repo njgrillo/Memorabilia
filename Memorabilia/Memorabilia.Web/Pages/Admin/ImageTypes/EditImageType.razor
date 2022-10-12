@@ -1,5 +1,9 @@
 ﻿@page "/ImageTypes/Edit/{id:int}"
 
-<EditDomainItem Item="_viewModel"
-                OnLoad="OnLoad"
-                OnSave="OnSave" />
+@inherits EditItem
+
+<PageLoader>
+    <Content>
+        <ImageTypeEditor Id=@Id />
+    </Content>
+</PageLoader>

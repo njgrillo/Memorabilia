@@ -1,3 +1,9 @@
 ﻿@page "/Memorabilia/Poster/Edit/{memorabiliaId:int}"
 
-<Memorabilia.Blazor.Pages.MemorabiliaItems.Posters.EditPoster MemorabiliaId="@MemorabiliaId" />
+@inherits MemorabiliaItem
+
+<PageLoader>
+    <Content>
+        <PosterEditor MemorabiliaId="@MemorabiliaId" />
+    </Content>
+</PageLoader>

@@ -33,7 +33,7 @@ public class SavePylonViewModel : SaveItemViewModel
 
     public GameStyleType GameStyleType => GameStyleType.Find(GameStyleTypeId);
 
-    public int GameStyleTypeId { get; set; }
+    public int GameStyleTypeId { get; set; } = GameStyleType.None.Id;
 
     public override string ImagePath => Domain.Constants.ImagePath.Pylon;
 
@@ -41,13 +41,11 @@ public class SavePylonViewModel : SaveItemViewModel
 
     [Required]
     [Range(1, int.MaxValue, ErrorMessage = "Level is required.")]
-    public int LevelTypeId { get; set; }
-
-    public override string PageTitle => $"{(EditModeType == EditModeType.Update ? EditModeType.Update.Name : EditModeType.Add.Name)} {ItemType.Pylon.Name} Details";
+    public int LevelTypeId { get; set; } = LevelType.Professional.Id;
 
     [Required]
     [Range(1, int.MaxValue, ErrorMessage = "Size is required.")]
-    public int SizeId { get; set; }
+    public int SizeId { get; set; } = Size.Standard.Id;
 
     public SaveTeamViewModel Team { get; set; }
 }

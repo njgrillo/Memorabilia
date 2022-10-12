@@ -1,55 +1,54 @@
 ﻿#nullable disable
 
-namespace Memorabilia.Blazor.Pages.Project
+namespace Memorabilia.Blazor.Pages.Project;
+
+public partial class ViewProjects : ComponentBase
 {
-    public partial class ViewProjects : ComponentBase
+    [Inject]
+    public CommandRouter CommandRouter { get; set; }
+
+    [Inject]
+    public IDialogService DialogService { get; set; }
+
+    [Inject]
+    public QueryRouter QueryRouter { get; set; }
+
+    [Inject]
+    public ISnackbar Snackbar { get; set; }
+
+    [Parameter]
+    public int UserId { get; set; }
+
+    private ProjectsViewModel _viewModel = new();
+
+    protected async Task OnLoad()
     {
-        [Inject]
-        public CommandRouter CommandRouter { get; set; }
+        _viewModel = await QueryRouter.Send(new GetProjects.Query(UserId)).ConfigureAwait(false);
+    }
 
-        [Inject]
-        public IDialogService DialogService { get; set; }
+    protected async Task ShowDeleteConfirm(int id)
+    {
+        var dialog = DialogService.Show<DeleteDialog>("Delete Project");
+        var result = await dialog.Result;
 
-        [Inject]
-        public QueryRouter QueryRouter { get; set; }
+        if (result.Cancelled)
+            return;
 
-        [Inject]
-        public ISnackbar Snackbar { get; set; }
+        await Delete(id).ConfigureAwait(false);
+    }
 
-        [Parameter]
-        public int UserId { get; set; }
-
-        private ProjectsViewModel _viewModel = new();
-
-        protected async Task OnLoad()
+    protected async Task Delete(int id)
+    {
+        var deletedItem = _viewModel.Projects.Single(project => project.Id == id);
+        var viewModel = new SaveProjectViewModel(deletedItem)
         {
-            _viewModel = await QueryRouter.Send(new GetProjects.Query(UserId)).ConfigureAwait(false);
-        }
+            IsDeleted = true
+        };
 
-        protected async Task ShowDeleteConfirm(int id)
-        {
-            var dialog = DialogService.Show<DeleteDialog>("Delete Project");
-            var result = await dialog.Result;
+        await CommandRouter.Send(new SaveProject.Command(viewModel)).ConfigureAwait(false);
 
-            if (result.Cancelled)
-                return;
+        _viewModel.Projects.Remove(deletedItem);
 
-            await Delete(id).ConfigureAwait(false);
-        }
-
-        protected async Task Delete(int id)
-        {
-            var deletedItem = _viewModel.Projects.Single(project => project.Id == id);
-            var viewModel = new SaveProjectViewModel(deletedItem)
-            {
-                IsDeleted = true
-            };
-
-            await CommandRouter.Send(new SaveProject.Command(viewModel)).ConfigureAwait(false);
-
-            _viewModel.Projects.Remove(deletedItem);
-
-            Snackbar.Add($"{_viewModel.ItemTitle} was deleted successfully!", Severity.Success);
-        }
+        Snackbar.Add($"{_viewModel.ItemTitle} was deleted successfully!", Severity.Success);
     }
 }

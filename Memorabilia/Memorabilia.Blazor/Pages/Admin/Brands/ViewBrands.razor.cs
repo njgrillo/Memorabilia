@@ -2,16 +2,8 @@
 
 namespace Memorabilia.Blazor.Pages.Admin.Brands;
 
-public partial class ViewBrands : IViewDomainItem, IDeleteDomainItem
+public partial class ViewBrands : ViewDomainItem<BrandsViewModel>, IDeleteDomainItem, IViewDomainItem
 {
-    [Inject]
-    public CommandRouter CommandRouter { get; set; }
-
-    [Inject]
-    public QueryRouter QueryRouter { get; set; }
-
-    private BrandsViewModel ViewModel;
-
     public async Task OnDelete(SaveDomainViewModel viewModel)
     {
         await CommandRouter.Send(new SaveBrand.Command(viewModel)).ConfigureAwait(false);

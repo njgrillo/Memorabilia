@@ -2,16 +2,8 @@
 
 namespace Memorabilia.Blazor.Pages.Admin.Colleges;
 
-public partial class ViewColleges : IViewDomainItem, IDeleteDomainItem
+public partial class ViewColleges : ViewDomainItem<CollegesViewModel>, IDeleteDomainItem, IViewDomainItem
 {
-    [Inject]
-    public CommandRouter CommandRouter { get; set; }
-
-    [Inject]
-    public QueryRouter QueryRouter { get; set; }
-
-    private CollegesViewModel ViewModel;
-
     public async Task OnDelete(SaveDomainViewModel viewModel)
     {
         await CommandRouter.Send(new SaveCollege.Command(viewModel)).ConfigureAwait(false);

@@ -1,3 +1,9 @@
 ﻿@page "/Memorabilia/Bobblehead/Edit/{memorabiliaId:int}"
 
-<Memorabilia.Blazor.Pages.MemorabiliaItems.Bobbleheads.EditBobblehead MemorabiliaId="@MemorabiliaId" />
+@inherits MemorabiliaItem
+
+<PageLoader>
+    <Content>
+        <BobbleheadEditor MemorabiliaId="@MemorabiliaId" />
+    </Content>
+</PageLoader>

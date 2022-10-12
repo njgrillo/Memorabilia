@@ -29,7 +29,7 @@ public class SavePantViewModel : SaveItemViewModel
 
     [Required]
     [Range(1, int.MaxValue, ErrorMessage = "Brand is required.")]
-    public int BrandId { get; set; }
+    public int BrandId { get; set; } = Brand.Rawlings.Id;
 
     public bool DisplayGameDate => GameStyleType.IsGameWorthly(GameStyleType);
 
@@ -45,7 +45,7 @@ public class SavePantViewModel : SaveItemViewModel
 
     [Required]
     [Range(1, int.MaxValue, ErrorMessage = "Game Style Type is required.")]
-    public int GameStyleTypeId { get; set; }
+    public int GameStyleTypeId { get; set; } = GameStyleType.None.Id;
 
     public override string ImagePath => Domain.Constants.ImagePath.Pant;
 
@@ -53,13 +53,13 @@ public class SavePantViewModel : SaveItemViewModel
 
     [Required]
     [Range(1, int.MaxValue, ErrorMessage = "Level is required.")]
-    public int LevelTypeId { get; set; }
+    public int LevelTypeId { get; set; } = LevelType.Professional.Id;
 
     public SavePersonViewModel Person { get; set; }
 
     [Required]
     [Range(1, int.MaxValue, ErrorMessage = "Size is required.")]
-    public int SizeId { get; set; }
+    public int SizeId { get; set; } = Domain.Constants.Size.Large.Id;
 
     public int SportId { get; set; }
 

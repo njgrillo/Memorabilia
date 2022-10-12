@@ -1,7 +1,9 @@
 ﻿@page "/BaseballTypes/Edit/{id:int}"
 
-<WebPage>
+@inherits EditItem
+
+<PageLoader>
     <Content>
         <BaseballTypeEditor Id=@Id />
     </Content>
-</WebPage>
+</PageLoader>

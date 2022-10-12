@@ -1,3 +1,9 @@
 ﻿@page "/Memorabilia/Bookplate/Edit/{memorabiliaId:int}"
 
-<Memorabilia.Blazor.Pages.MemorabiliaItems.Bookplates.EditBookplate MemorabiliaId="@MemorabiliaId" />
+@inherits MemorabiliaItem
+
+<PageLoader>
+    <Content>
+        <BookplateEditor MemorabiliaId="@MemorabiliaId" />
+    </Content>
+</PageLoader>

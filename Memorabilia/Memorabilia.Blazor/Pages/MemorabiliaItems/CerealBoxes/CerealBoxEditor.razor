@@ -1,0 +1,48 @@
+﻿@inherits MemorabiliaItem<SaveCerealBoxViewModel>
+
+<EditPage ContinueNavigationPath="@ViewModel.ContinueNavigationPath"
+          EditMode="ViewModel.EditModeType"
+          ExitNavigationPath="@ViewModel.ExitNavigationPath"
+          ImagePath="@ViewModel.ImagePath"
+          ItemName="@ViewModel.ItemType.Name"
+          Model="ViewModel"
+          OnLoad="OnLoad"
+          OnSave="OnSave"
+          PageFooterButtonText="@ViewModel.ExitButtonText"
+          PageFooterNavigationPath="@ViewModel.BackNavigationPath"
+          PageTitle="@ViewModel.PageTitle"
+          TItem="SaveCerealBoxViewModel"
+          UseMultipleButtons="true">
+    <TimelineContent>
+        <MemorabiliaItemTimeline EditMode="ViewModel.EditModeType"
+                                 ItemTypeName="@ViewModel.ItemType.Name"
+                                 MemorabiliaId="ViewModel.MemorabiliaId"
+                                 MemorabiliaItemStep="ViewModel.MemorabiliaItemStep" />
+    </TimelineContent>
+    <Content>
+        <DivRowCol3>
+            <Content>
+                <ItemTypeBrandDropDown @bind-Value="@ViewModel.BrandId" 
+                                       @bind-Value:event="ValueChanged"
+                                       ItemType="ViewModel.ItemType"
+                                       SelectedValue="ViewModel.BrandId" />
+            </Content>
+            <ContentColumn2>
+                <ItemTypeLevelDropDown @bind-Value="@ViewModel.LevelTypeId"
+                                       @bind-Value:event="ValueChanged" 
+                                       ItemType="ViewModel.ItemType"
+                                       SelectedValue="ViewModel.LevelTypeId" /> 
+            </ContentColumn2>
+        </DivRowCol3>
+        <MultiPersonSelector CanToggle="true"
+                             ItemType="ViewModel.ItemType"
+                             People="ViewModel.People" />    
+        <MultiSportSelector CanToggle="true"
+                            ItemType="ViewModel.ItemType"
+                            SelectedSportIdsChanged="SelectedSportIdsChanged"
+                            SportIds="ViewModel.SportIds" />
+        <MultiTeamSelector CanToggle="true" 
+                           ItemType="ViewModel.ItemType"
+                           Teams="ViewModel.Teams" />
+    </Content>
+</EditPage>

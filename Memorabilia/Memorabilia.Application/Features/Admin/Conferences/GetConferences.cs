@@ -15,7 +15,11 @@ public class GetConferences
 
         protected override async Task<ConferencesViewModel> Handle(Query query)
         {
-            return new ConferencesViewModel(await _conferenceRepository.GetAll());
+            var conferences = (await _conferenceRepository.GetAll())
+                                    .OrderBy(conference => conference.SportLeagueLevelName)
+                                    .ThenBy(conference => conference.Name);
+
+            return new ConferencesViewModel(conferences);
         }
     }
 

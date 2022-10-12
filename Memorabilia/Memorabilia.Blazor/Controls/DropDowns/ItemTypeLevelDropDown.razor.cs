@@ -1,34 +1,33 @@
 ﻿#nullable disable
 
-namespace Memorabilia.Blazor.Controls.DropDowns
+namespace Memorabilia.Blazor.Controls.DropDowns;
+
+public partial class ItemTypeLevelDropDown : ComponentBase
 {
-    public partial class ItemTypeLevelDropDown : ComponentBase
+    [Inject]
+    public QueryRouter QueryRouter { get; set; }
+
+    [Parameter]
+    public ItemType ItemType { get; set; }
+
+    [Parameter]
+    public int SelectedValue { get; set; }
+
+    [Parameter]
+    public int Value { get; set; }
+
+    [Parameter]
+    public EventCallback<int> ValueChanged { get; set; }
+
+    private IEnumerable<ItemTypeLevelViewModel> _itemTypeLevels = Enumerable.Empty<ItemTypeLevelViewModel>();
+
+    protected override async Task OnInitializedAsync()
     {
-        [Inject]
-        public QueryRouter QueryRouter { get; set; }
+        _itemTypeLevels = (await QueryRouter.Send(new GetItemTypeLevels.Query(ItemType.Id)).ConfigureAwait(false)).ItemTypeLevels;
+    }
 
-        [Parameter]
-        public ItemType ItemType { get; set; }
-
-        [Parameter]
-        public int SelectedValue { get; set; }
-
-        [Parameter]
-        public int Value { get; set; }
-
-        [Parameter]
-        public EventCallback<int> ValueChanged { get; set; }
-
-        private IEnumerable<ItemTypeLevelViewModel> _itemTypeLevels = Enumerable.Empty<ItemTypeLevelViewModel>();
-
-        protected override async Task OnInitializedAsync()
-        {
-            _itemTypeLevels = (await QueryRouter.Send(new GetItemTypeLevels.Query(ItemType.Id)).ConfigureAwait(false)).ItemTypeLevels;
-        }
-
-        private async Task OnInputChange(int value)
-        {
-            await ValueChanged.InvokeAsync(value).ConfigureAwait(false);
-        }
+    private async Task OnInputChange(int value)
+    {
+        await ValueChanged.InvokeAsync(value).ConfigureAwait(false);
     }
 }

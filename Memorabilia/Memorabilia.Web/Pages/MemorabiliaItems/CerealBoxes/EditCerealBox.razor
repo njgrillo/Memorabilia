@@ -1,4 +1,11 @@
 ﻿@page "/Memorabilia/CerealBox/Edit/{memorabiliaId:int}"
 @page "/Memorabilia/Cereal Box/Edit/{memorabiliaId:int}"
 
-<Memorabilia.Blazor.Pages.MemorabiliaItems.CerealBoxes.EditCerealBox MemorabiliaId="@MemorabiliaId" />
+@inherits MemorabiliaItem
+
+<PageLoader>
+    <Content>
+        <CerealBoxEditor MemorabiliaId="@MemorabiliaId" />
+    </Content>
+</PageLoader>
+

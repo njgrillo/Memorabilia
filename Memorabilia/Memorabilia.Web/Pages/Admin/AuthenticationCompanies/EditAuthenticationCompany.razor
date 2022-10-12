@@ -1,8 +1,10 @@
 ﻿@page "/AuthenticationCompanies/Edit/{id:int}"
 
-<WebPage>
+@inherits EditItem
+
+<PageLoader>
     <Content>
         <AuthenticationCompanyEditor Id="@Id" />
     </Content>
-</WebPage>
+</PageLoader>
 

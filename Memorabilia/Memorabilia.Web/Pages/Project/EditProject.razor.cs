@@ -1,20 +1,7 @@
-﻿namespace Memorabilia.Web.Pages.Project
-{
-    public partial class EditProject : ComponentBase
-    {  
-        [Inject]
-        public ProtectedLocalStorage LocalStorage { get; set; }
+﻿namespace Memorabilia.Web.Pages.Project;
 
-        [Parameter]
-        public int Id { get; set; }
-
-        protected int UserId { get; set; }
-
-        protected override async Task OnInitializedAsync()
-        {
-            var userId = await LocalStorage.GetAsync<int>("UserId").ConfigureAwait(false);
-
-            UserId = userId.Value;
-        }
-    }
+public partial class EditProject : WebPage
+{  
+    [Parameter]
+    public int Id { get; set; }
 }

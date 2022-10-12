@@ -1,0 +1,26 @@
+﻿@inherits CommandQuery
+
+<Page OnLoad="OnLoad">
+    <Content>
+        <PageHeader PageTitle="@ViewModel.PageTitle" />
+        <MemorabiliaItemTimeline EditMode="ViewModel.EditModeType" 
+                                 ItemTypeName="@ViewModel.ItemTypeName"
+                                 MemorabiliaId="ViewModel.MemorabiliaId"
+                                 MemorabiliaItemStep="ViewModel.MemorabiliaItemStep" />
+        <EditImages @ref="EditImages"              
+                    ContinueNavigationPath="@ViewModel.ContinueNavigationPath"
+                    ExitNavigationPath="@ViewModel.ExitNavigationPath"
+                    Images="@ViewModel.Images"
+                    MaximumAllowedFiles="5"
+                    MaximumFileSize="10240000"
+                    Model="ViewModel"
+                    OnLoad="OnLoad"
+                    OnSave="OnSave"
+                    PageTitle="@ViewModel.PageTitle"
+                    SaveButtonText="Save & Continue"
+                    TItem="SaveMemorabiliaImagesViewModel"
+                    UploadPath="@UploadPath"
+                    UserId="@UserId"/>    
+        <PageFooter NavigationPath="@ViewModel.BackNavigationPath" />
+    </Content>
+</Page>

@@ -29,7 +29,7 @@ public class SaveHelmetViewModel : SaveItemViewModel
 
     [Required]
     [Range(1, int.MaxValue, ErrorMessage = "Brand is required.")]
-    public int BrandId { get; set; }
+    public int BrandId { get; set; } = Brand.Riddell.Id;
 
     public bool CanEditHelmetQualityType { get; private set; } = true;
 
@@ -94,7 +94,7 @@ public class SaveHelmetViewModel : SaveItemViewModel
 
     [Required]
     [Range(1, int.MaxValue, ErrorMessage = "Level is required.")]
-    public int LevelTypeId { get; set; }
+    public int LevelTypeId { get; set; } = LevelType.Professional.Id;
 
     public List<SavePersonViewModel> People { get; set; } = new();
 

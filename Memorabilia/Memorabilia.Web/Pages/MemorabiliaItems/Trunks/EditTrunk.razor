@@ -1,3 +1,9 @@
 ﻿@page "/Memorabilia/Trunk/Edit/{memorabiliaId:int}"
 
-<Memorabilia.Blazor.Pages.MemorabiliaItems.Trunks.EditTrunk MemorabiliaId="@MemorabiliaId" />
+@inherits MemorabiliaItem
+
+<PageLoader>
+    <Content>
+        <TrunkEditor MemorabiliaId="@MemorabiliaId" />
+    </Content>
+</PageLoader>

@@ -1,10 +1,9 @@
 ﻿#nullable disable
 
-namespace Memorabilia.Blazor.Controls
+namespace Memorabilia.Blazor.Controls;
+
+public partial class PageImage : ComponentBase
 {
-    public partial class PageImage : ComponentBase
-    {
-        [Parameter]
-        public string ImagePath { get; set; }
-    }
+    [Parameter]
+    public string ImagePath { get; set; }
 }

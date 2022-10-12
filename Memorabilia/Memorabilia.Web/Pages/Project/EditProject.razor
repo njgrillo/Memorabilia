@@ -1,10 +1,12 @@
 ﻿@page "/Projects/Edit"
 @page "/Projects/Edit/{id:int}"
 
-<WebPage>
+@inherits WebPage
+
+<PageLoader>
     <Content>
         <ProjectEditor Id="@Id" 
                        UserId="@UserId" />
     </Content>
-</WebPage>
+</PageLoader>
 

@@ -1,31 +1,30 @@
 ﻿#nullable disable
 
-namespace Memorabilia.Blazor.Pages.Tools.Profile
+namespace Memorabilia.Blazor.Pages.Tools.Profile;
+
+public partial class BaseballProfile : ComponentBase
 {
-    public partial class BaseballProfile : ComponentBase
+    [Inject]
+    public QueryRouter QueryRouter { get; set; }
+
+    [Parameter]
+    public int PersonId { get; set; }
+
+    public bool DisplayAccomplishments => _selectedAccomplishment?.Text == "Accomplishment";
+
+    public bool DisplayAllStars => _selectedAccomplishment?.Text == "AllStar";
+
+    public bool DisplayAwards => _selectedAccomplishment?.Text == "Award";
+
+    public bool DisplayChampionships => _selectedAccomplishment?.Text == "Championship";
+
+    public bool DisplayLeaders => _selectedAccomplishment?.Text == "Leader";
+
+    private MudBlazor.MudChip _selectedAccomplishment;
+    private BaseballProfileViewModel _viewModel = new();
+
+    protected override async Task OnInitializedAsync()
     {
-        [Inject]
-        public QueryRouter QueryRouter { get; set; }
-
-        [Parameter]
-        public int PersonId { get; set; }
-
-        public bool DisplayAccomplishments => _selectedAccomplishment?.Text == "Accomplishment";
-
-        public bool DisplayAllStars => _selectedAccomplishment?.Text == "AllStar";
-
-        public bool DisplayAwards => _selectedAccomplishment?.Text == "Award";
-
-        public bool DisplayChampionships => _selectedAccomplishment?.Text == "Championship";
-
-        public bool DisplayLeaders => _selectedAccomplishment?.Text == "Leader";
-
-        private MudBlazor.MudChip _selectedAccomplishment;
-        private BaseballProfileViewModel _viewModel = new();
-
-        protected override async Task OnInitializedAsync()
-        {
-            _viewModel = await QueryRouter.Send(new GetBaseballProfile.Query(PersonId)).ConfigureAwait(false);
-        }
+        _viewModel = await QueryRouter.Send(new GetBaseballProfile.Query(PersonId)).ConfigureAwait(false);
     }
 }

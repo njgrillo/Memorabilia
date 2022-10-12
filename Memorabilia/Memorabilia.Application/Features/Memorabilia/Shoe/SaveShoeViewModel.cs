@@ -28,7 +28,7 @@ public class SaveShoeViewModel : SaveItemViewModel
 
     [Required]
     [Range(1, int.MaxValue, ErrorMessage = "Brand is required.")]
-    public int BrandId { get; set; }
+    public int BrandId { get; set; } = Brand.Nike.Id;
 
     public bool DisplayGameDate => GameStyleType == GameStyleType.GameUsed;
 
@@ -42,23 +42,21 @@ public class SaveShoeViewModel : SaveItemViewModel
 
     public GameStyleType GameStyleType => GameStyleType.Find(GameStyleTypeId);
 
-    public int GameStyleTypeId { get; set; }
+    public int GameStyleTypeId { get; set; } = GameStyleType.None.Id;
 
-    public override string ImagePath => "images/shoe.jpg";
+    public override string ImagePath => Domain.Constants.ImagePath.Shoe;
 
     public override ItemType ItemType => ItemType.Shoe;
 
     [Required]
     [Range(1, int.MaxValue, ErrorMessage = "Level is required.")]
-    public int LevelTypeId { get; set; }
-
-    public override string PageTitle => $"{(EditModeType == EditModeType.Update ? EditModeType.Update.Name : EditModeType.Add.Name)} {ItemType.Shoe.Name} Details";
+    public int LevelTypeId { get; set; } = LevelType.Professional.Id;
 
     public SavePersonViewModel Person { get; set; }
 
     [Required]
     [Range(1, int.MaxValue, ErrorMessage = "Size is required.")]
-    public int SizeId { get; set; }
+    public int SizeId { get; set; } = Size.Standard.Id;
 
     public int SportId { get; set; } 
 

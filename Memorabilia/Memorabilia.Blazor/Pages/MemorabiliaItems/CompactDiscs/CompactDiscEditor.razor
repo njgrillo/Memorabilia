@@ -1,0 +1,27 @@
+﻿@inherits MemorabiliaItem<SaveCompactDiscViewModel>
+
+<EditPage ContinueNavigationPath="@ViewModel.ContinueNavigationPath"
+          EditMode="ViewModel.EditModeType"
+          ExitNavigationPath="@ViewModel.ExitNavigationPath"
+          ImagePath="@ViewModel.ImagePath"
+          ItemName="@ViewModel.ItemType.Name"
+          Model="ViewModel"
+          OnLoad="OnLoad"
+          OnSave="OnSave"
+          PageFooterButtonText="@ViewModel.ExitButtonText"
+          PageFooterNavigationPath="@ViewModel.BackNavigationPath"
+          PageTitle="@ViewModel.PageTitle"
+          TItem="SaveCompactDiscViewModel"
+          UseMultipleButtons="true">
+    <TimelineContent>
+        <MemorabiliaItemTimeline EditMode="ViewModel.EditModeType"
+                                 ItemTypeName="@ViewModel.ItemType.Name"
+                                 MemorabiliaId="ViewModel.MemorabiliaId"
+                                 MemorabiliaItemStep="ViewModel.MemorabiliaItemStep" />
+    </TimelineContent>
+    <Content>
+        <MultiPersonSelector CanToggle="true"
+                             ItemType="ViewModel.ItemType"
+                             People="ViewModel.People" />   
+    </Content>
+</EditPage>

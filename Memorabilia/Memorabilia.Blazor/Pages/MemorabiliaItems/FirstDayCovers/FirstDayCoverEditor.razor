@@ -1,0 +1,34 @@
+﻿@inherits MemorabiliaItem<SaveFirstDayCoverViewModel>
+
+<EditPage ContinueNavigationPath="@ViewModel.ContinueNavigationPath"
+          EditMode="ViewModel.EditModeType"
+          ExitNavigationPath="@ViewModel.ExitNavigationPath"
+          ImagePath="@ViewModel.ImagePath"
+          ItemName="@ViewModel.ItemType.Name"
+          Model="ViewModel"
+          OnLoad="OnLoad"
+          OnSave="OnSave"
+          PageFooterButtonText="@ViewModel.ExitButtonText"
+          PageFooterNavigationPath="@ViewModel.ExitNavigationPath"
+          PageTitle="@ViewModel.PageTitle"
+          TItem="SaveFirstDayCoverViewModel"
+          UseMultipleButtons="true">
+    <TimelineContent>
+        <MemorabiliaItemTimeline EditMode="ViewModel.EditModeType"
+                                 ItemTypeName="@ViewModel.ItemType.Name"
+                                 MemorabiliaId="ViewModel.MemorabiliaId"
+                                 MemorabiliaItemStep="ViewModel.MemorabiliaItemStep" />
+    </TimelineContent>
+    <Content>
+        <MultiPersonSelector CanToggle="true"
+                             ItemType="ViewModel.ItemType"
+                             People="ViewModel.People" />    
+        <MultiSportSelector CanToggle="true"
+                            ItemType="ViewModel.ItemType"
+                            SelectedSportIdsChanged="SelectedSportIdsChanged"
+                            SportIds="ViewModel.SportIds" />
+        <MultiTeamSelector CanToggle="true" 
+                           ItemType="ViewModel.ItemType"
+                           Teams="ViewModel.Teams" />
+    </Content>
+</EditPage>

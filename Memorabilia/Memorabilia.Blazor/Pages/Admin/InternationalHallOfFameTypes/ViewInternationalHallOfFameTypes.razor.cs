@@ -2,16 +2,8 @@
 
 namespace Memorabilia.Blazor.Pages.Admin.InternationalHallOfFameTypes;
 
-public partial class ViewInternationalHallOfFameTypes : ComponentBase, IViewDomainItem, IDeleteDomainItem
+public partial class ViewInternationalHallOfFameTypes : ViewDomainItem<InternationalHallOfFameTypesViewModel>, IDeleteDomainItem, IViewDomainItem
 {
-    [Inject]
-    public CommandRouter CommandRouter { get; set; }
-
-    [Inject]
-    public QueryRouter QueryRouter { get; set; }
-
-    private InternationalHallOfFameTypesViewModel ViewModel;
-
     public async Task OnDelete(SaveDomainViewModel viewModel)
     {
         await CommandRouter.Send(new SaveInternationalHallOfFameType.Command(viewModel)).ConfigureAwait(false);

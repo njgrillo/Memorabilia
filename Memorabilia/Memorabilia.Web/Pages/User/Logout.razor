@@ -1,7 +1,9 @@
 ﻿@page "/Logout"
 
-<WebPage>
+@inherits WebPage
+
+<PageLoader>
     <Content>
         <Memorabilia.Blazor.Pages.User.Logout LoggedOut="LoggedOut" />
     </Content>
-</WebPage>
+</PageLoader>

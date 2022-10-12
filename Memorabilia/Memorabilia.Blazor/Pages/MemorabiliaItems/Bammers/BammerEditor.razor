@@ -1,0 +1,73 @@
+﻿@inherits MemorabiliaItem<SaveBammerViewModel>
+
+<EditPage ContinueNavigationPath="@ViewModel.ContinueNavigationPath"
+          EditMode="ViewModel.EditModeType"
+          ExitNavigationPath="@ViewModel.ExitNavigationPath"
+          ImagePath="@ViewModel.ImagePath"
+          ItemName="@ViewModel.ItemType.Name"
+          Model="ViewModel"
+          OnLoad="OnLoad"
+          OnSave="OnSave"
+          PageFooterButtonText="@ViewModel.ExitButtonText"
+          PageFooterNavigationPath="@ViewModel.BackNavigationPath"
+          PageTitle="@ViewModel.PageTitle"
+          TItem="SaveBammerViewModel"
+          UseMultipleButtons="true">
+    <TimelineContent>
+        <MemorabiliaItemTimeline EditMode="ViewModel.EditModeType"
+                                 ItemTypeName="@ViewModel.ItemType.Name"
+                                 MemorabiliaId="ViewModel.MemorabiliaId"
+                                 MemorabiliaItemStep="ViewModel.MemorabiliaItemStep" />
+    </TimelineContent>
+    <Content>
+        <DivRowCol3>
+            <Content>
+                <ItemTypeBrandDropDown @bind-Value="@ViewModel.BrandId" 
+                                       @bind-Value:event="ValueChanged"
+                                       ItemType="ViewModel.ItemType"
+                                       SelectedValue="ViewModel.BrandId" />
+            </Content>
+            <ContentColumn2>
+                <MudSelect @bind-Value="@ViewModel.BammerTypeId"
+                           @bind-Value:event="ValueChanged"    
+                           Label="Type"
+                           Variant="Variant.Outlined" >
+                    <MudSelectItem Value="@(0)">--Select--</MudSelectItem>
+                    <Iterations Items="ViewModel.BammerTypes" Context="bammerType">
+                        <MudSelectItem Value="@bammerType.Id">@bammerType.Name</MudSelectItem>
+                    </Iterations>	
+                </MudSelect>                
+            </ContentColumn2>
+        </DivRowCol3>
+        <DivRowCol3>
+            <Content>
+                <ItemTypeLevelDropDown @bind-Value="@ViewModel.LevelTypeId"
+                                       @bind-Value:event="ValueChanged" 
+                                       ItemType="ViewModel.ItemType"
+                                       SelectedValue="ViewModel.LevelTypeId" /> 
+            </Content>
+            <ContentColumn2>
+                <MudNumericField @bind-Value="ViewModel.Year" 
+                                 Label="Year"
+                                 Variant="Variant.Outlined" />
+            </ContentColumn2>
+        </DivRowCol3>
+        <DivRowCol3>
+            <Content>
+                <MudCheckBox @bind-Checked="@ViewModel.InPackage" 
+                             Label="In Package" />
+            </Content>
+        </DivRowCol3>
+        <MultiPersonSelector CanToggle="true"
+                             ItemType="ViewModel.ItemType"
+                             People="ViewModel.People" />   
+        <SportSelector @bind-Value="@ViewModel.SportId" 
+                       @bind-Value:event="ValueChanged"
+                       CanToggle="true" 
+                       ItemType="ViewModel.ItemType"
+                       SelectedValue="ViewModel.SportId"/>  
+        <MultiTeamSelector CanToggle="true" 
+                           ItemType="ViewModel.ItemType"
+                           Teams="ViewModel.Teams" />
+    </Content>
+</EditPage>

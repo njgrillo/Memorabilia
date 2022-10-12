@@ -1,3 +1,10 @@
 ﻿@page "/Memorabilia/Glove/Edit/{memorabiliaId:int}"
 
-<Memorabilia.Blazor.Pages.MemorabiliaItems.Gloves.EditGlove MemorabiliaId="@MemorabiliaId" />
+@inherits MemorabiliaItem
+
+<PageLoader>
+    <Content>
+        <GloveEditor MemorabiliaId="@MemorabiliaId" />
+    </Content>
+</PageLoader>
+

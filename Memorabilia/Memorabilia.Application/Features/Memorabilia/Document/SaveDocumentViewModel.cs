@@ -27,9 +27,7 @@ public class SaveDocumentViewModel : SaveItemViewModel
     public override string ImagePath => Domain.Constants.ImagePath.Document;
 
     public override ItemType ItemType => ItemType.Document;
-
-    public override string PageTitle => $"{(EditModeType == EditModeType.Update ? EditModeType.Update.Name : EditModeType.Add.Name)} {ItemType.Document.Name} Details";
-
+   
     public List<SavePersonViewModel> People { get; set; } = new();
 
     [Required]

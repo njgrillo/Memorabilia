@@ -1,5 +1,9 @@
 ﻿@page "/JerseyTypes/Edit/{id:int}"
 
-<EditDomainItem Item="_viewModel"
-                OnLoad="OnLoad"
-                OnSave="OnSave" />
+@inherits EditItem
+
+<PageLoader>
+    <Content>
+        <JerseyTypeEditor Id=@Id />
+    </Content>
+</PageLoader>

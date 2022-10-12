@@ -21,10 +21,8 @@ public class SaveIndexCardViewModel : SaveItemViewModel
     public override string ImagePath => Domain.Constants.ImagePath.IndexCard;
 
     public override ItemType ItemType => ItemType.IndexCard;
-
-    public override string PageTitle => $"{(EditModeType == EditModeType.Update ? EditModeType.Update.Name : EditModeType.Add.Name)} {ItemType.IndexCard.Name} Details";
-
+   
     [Required]
     [Range(1, int.MaxValue, ErrorMessage = "Size is required.")]
-    public int SizeId { get; set; }
+    public int SizeId { get; set; } = Size.ThreeByFive.Id;
 }

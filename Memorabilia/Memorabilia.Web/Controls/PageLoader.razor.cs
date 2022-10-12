@@ -1,13 +1,7 @@
 ﻿namespace Memorabilia.Web.Controls;
 
-public partial class PageLoader : ComponentBase
+public partial class PageLoader : WebPage
 {
-    [Inject]
-    public ProtectedLocalStorage LocalStorage { get; set; }
-
-    [Inject]
-    public NavigationManager NavigationManager { get; set; }
-
     [Parameter]
     public RenderFragment Content { get; set; }
 

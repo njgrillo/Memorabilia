@@ -2,16 +2,8 @@
 
 namespace Memorabilia.Blazor.Pages.Admin.GloveTypes;
 
-public partial class ViewGloveTypes : ComponentBase, IViewDomainItem, IDeleteDomainItem
+public partial class ViewGloveTypes : ViewDomainItem<GloveTypesViewModel>, IDeleteDomainItem, IViewDomainItem
 {
-    [Inject]
-    public CommandRouter CommandRouter { get; set; }
-
-    [Inject]
-    public QueryRouter QueryRouter { get; set; }
-
-    private GloveTypesViewModel ViewModel;
-
     public async Task OnDelete(SaveDomainViewModel viewModel)
     {
         await CommandRouter.Send(new SaveGloveType.Command(viewModel)).ConfigureAwait(false);

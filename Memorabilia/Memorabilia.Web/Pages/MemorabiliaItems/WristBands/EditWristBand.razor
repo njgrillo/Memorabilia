@@ -1,3 +1,9 @@
 ﻿@page "/Memorabilia/WristBand/Edit/{memorabiliaId:int}"
 
-<Memorabilia.Blazor.Pages.MemorabiliaItems.WristBands.EditWristBand MemorabiliaId="@MemorabiliaId" />
+@inherits MemorabiliaItem
+
+<PageLoader>
+    <Content>
+        <WristBandEditor MemorabiliaId="@MemorabiliaId" />
+    </Content>
+</PageLoader>

@@ -1,0 +1,48 @@
+﻿@inherits MemorabiliaItem<SavePinFlagViewModel>
+
+<EditPage ContinueNavigationPath="@ViewModel.ContinueNavigationPath"
+          EditMode="ViewModel.EditModeType"
+          ExitNavigationPath="@ViewModel.ExitNavigationPath"
+          ImagePath="@ViewModel.ImagePath"
+          ItemName="@ViewModel.ItemType.Name"
+          Model="ViewModel"
+          OnLoad="OnLoad"
+          OnSave="OnSave"
+          PageFooterButtonText="@ViewModel.ExitButtonText"
+          PageFooterNavigationPath="@ViewModel.BackNavigationPath"
+          PageTitle="@ViewModel.PageTitle"
+          TItem="SavePinFlagViewModel"
+          UseMultipleButtons="true">
+    <TimelineContent>
+        <MemorabiliaItemTimeline EditMode="ViewModel.EditModeType"
+                                 ItemTypeName="@ViewModel.ItemType.Name"
+                                 MemorabiliaId="ViewModel.MemorabiliaId"
+                                 MemorabiliaItemStep="ViewModel.MemorabiliaItemStep" />
+    </TimelineContent>
+    <Content>
+        <DivRowCol3>
+            <Content>
+                <ItemTypeGameStyleDropDown @bind-Value="@ViewModel.GameStyleTypeId"
+                                           @bind-Value:event="ValueChanged"
+                                           ItemType="ViewModel.ItemType"
+                                           Label="Tournament Style Type"
+                                           SelectedValue="ViewModel.GameStyleTypeId" /> 
+            </Content>
+        </DivRowCol3>
+        <DivRowCol3 Hidden="@(!ViewModel.DisplayGameDate)">
+            <Content>
+                <MudDatePicker @bind-Date="ViewModel.GameDate"
+                               DateFormat="MM/dd/yyyy"
+                               Editable="true"
+                               Label="Game Date"
+                               Mask="@(new DateMask("MM/dd/yyyy"))" 
+                               Variant="Variant.Outlined" />
+            </Content>
+        </DivRowCol3>
+        <PersonSelector CanFilterBySport="true"
+                        CanToggle="true"
+                        ItemType="ViewModel.ItemType"
+                        SelectedPerson="ViewModel.Person"
+                        SelectedPersonChanged="SelectedPersonChanged" />                 
+    </Content>
+</EditPage>

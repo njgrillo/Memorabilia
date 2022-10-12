@@ -33,7 +33,7 @@ public class SaveBaseballViewModel : SaveItemViewModel
 
     public BaseballType BaseballType => BaseballType.Find(BaseballTypeId);
 
-    public int BaseballTypeId { get; set; }
+    public int BaseballTypeId { get; set; } = BaseballType.Official.Id;
 
     public BaseballType[] BaseballTypes { get; set; } = BaseballType.All;
 
@@ -43,8 +43,8 @@ public class SaveBaseballViewModel : SaveItemViewModel
 
     [Required]
     [Range(1, int.MaxValue, ErrorMessage = "Brand is required.")]
-    public int BrandId { get; set; }  
-    
+    public int BrandId { get; set; } = Brand.Rawlings.Id;
+
     public int CommissionerId { get; set; }
 
     public bool DisplayBaseballType => BrandId == Brand.Rawlings.Id &&
@@ -107,13 +107,13 @@ public class SaveBaseballViewModel : SaveItemViewModel
 
     [Required]
     [Range(1, int.MaxValue, ErrorMessage = "Level is required.")]
-    public int LevelTypeId { get; set; }
+    public int LevelTypeId { get; set; } = LevelType.Professional.Id;
 
     public SavePersonViewModel Person { get; set; }
 
     [Required]
     [Range(1, int.MaxValue, ErrorMessage = "Size is required.")]
-    public int SizeId { get; set; }
+    public int SizeId { get; set; } = Size.Standard.Id;
 
     public Sport Sport => Sport.Baseball;
 

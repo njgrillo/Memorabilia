@@ -2,16 +2,8 @@
 
 namespace Memorabilia.Blazor.Pages.Admin.FootballTypes;
 
-public partial class ViewFootballTypes : ComponentBase, IViewDomainItem, IDeleteDomainItem
+public partial class ViewFootballTypes : ViewDomainItem<FootballTypesViewModel>, IDeleteDomainItem, IViewDomainItem
 {
-    [Inject]
-    public CommandRouter CommandRouter { get; set; }
-
-    [Inject]
-    public QueryRouter QueryRouter { get; set; }
-
-    private FootballTypesViewModel ViewModel;
-
     public async Task OnDelete(SaveDomainViewModel viewModel)
     {
         await CommandRouter.Send(new SaveFootballType.Command(viewModel)).ConfigureAwait(false);

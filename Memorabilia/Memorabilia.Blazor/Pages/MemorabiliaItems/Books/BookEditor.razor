@@ -1,0 +1,60 @@
+﻿@inherits MemorabiliaItem<SaveBookViewModel>
+
+<EditPage ContinueNavigationPath="@ViewModel.ContinueNavigationPath"
+          EditMode="ViewModel.EditModeType"
+          ExitNavigationPath="@ViewModel.ExitNavigationPath"
+          ImagePath="@ViewModel.ImagePath"
+          ItemName="@ViewModel.ItemType.Name"
+          Model="ViewModel"
+          OnLoad="OnLoad"
+          OnSave="OnSave"
+          PageFooterButtonText="@ViewModel.ExitButtonText"
+          PageFooterNavigationPath="@ViewModel.ExitNavigationPath"
+          PageTitle="@ViewModel.PageTitle"
+          TItem="SaveBookViewModel"
+          UseMultipleButtons="true">
+    <TimelineContent>
+        <MemorabiliaItemTimeline EditMode="ViewModel.EditModeType"
+                                 ItemTypeName="@ViewModel.ItemType.Name"
+                                 MemorabiliaId="ViewModel.MemorabiliaId"
+                                 MemorabiliaItemStep="ViewModel.MemorabiliaItemStep" />
+    </TimelineContent>
+    <Content>
+        <DivRowCol3>
+            <Content>
+                <MudTextField @bind-Value="ViewModel.Title" 
+                              Label="Title" 
+                              Variant="Variant.Outlined" /> 
+            </Content>
+            <ContentColumn2>
+                <MudTextField @bind-Value="ViewModel.Edition" 
+                              Label="Edition" 
+                              MaxLength="5"
+                              Variant="Variant.Outlined" />  
+            </ContentColumn2>
+        </DivRowCol3>
+        <DivRowCol3>
+            <Content>
+                <MudTextField @bind-Value="ViewModel.Publisher" 
+                              Label="Publisher" 
+                              Variant="Variant.Outlined" />  
+            </Content>
+        </DivRowCol3>
+        <DivRowCol3>
+            <Content>
+                <MudCheckBox @bind-Checked="@ViewModel.HardCover" 
+                             Label="Hard Cover" />
+            </Content>
+        </DivRowCol3>    
+        <MultiPersonSelector CanToggle="true"
+                             ItemType="ViewModel.ItemType"
+                             People="ViewModel.People" />   
+        <MultiSportSelector CanToggle="true"
+                            ItemType="ViewModel.ItemType"
+                            SelectedSportIdsChanged="SelectedSportIdsChanged"
+                            SportIds="ViewModel.SportIds" />
+        <MultiTeamSelector CanToggle="true" 
+                           ItemType="ViewModel.ItemType"
+                           Teams="ViewModel.Teams" />
+    </Content>
+</EditPage>

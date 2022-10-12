@@ -1,3 +1,10 @@
 ﻿@page "/Memorabilia/Magazine/Edit/{memorabiliaId:int}"
 
-<Memorabilia.Blazor.Pages.MemorabiliaItems.Magazines.EditMagazine MemorabiliaId="@MemorabiliaId" />
+@inherits MemorabiliaItem
+
+<PageLoader>
+    <Content>
+        <MagazineEditor MemorabiliaId="@MemorabiliaId" />
+    </Content>
+</PageLoader>
+

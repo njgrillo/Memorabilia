@@ -25,8 +25,6 @@ public class SaveBookplateViewModel : SaveItemViewModel
     public override string ImagePath => Domain.Constants.ImagePath.Bookplate;
 
     public override ItemType ItemType => ItemType.Bookplate;
-
-    public override string PageTitle => $"{(EditModeType == EditModeType.Update ? EditModeType.Update.Name : EditModeType.Add.Name)} {ItemType.Bookplate.Name} Details";
-
+    
     public SavePersonViewModel Person { get; set; }
 }

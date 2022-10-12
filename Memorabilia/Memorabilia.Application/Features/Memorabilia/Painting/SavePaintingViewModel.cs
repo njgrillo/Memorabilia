@@ -23,7 +23,7 @@ public class SavePaintingViewModel : SaveItemViewModel
 
     [Required]
     [Range(1, int.MaxValue, ErrorMessage = "Brand is required.")]
-    public int BrandId { get; set; }
+    public int BrandId { get; set; } = Brand.None.Id;
 
     public override EditModeType EditModeType => MemorabiliaId > 0 ? EditModeType.Update : EditModeType.Add;
 
@@ -37,17 +37,15 @@ public class SavePaintingViewModel : SaveItemViewModel
 
     public bool Matted { get; set; }
 
-    public int OrientationId { get; set; }
+    public int OrientationId { get; set; } = Orientation.Portrait.Id;
 
     public Orientation[] Orientations => Orientation.All;
-
-    public override string PageTitle => $"{(EditModeType == EditModeType.Update ? EditModeType.Update.Name : EditModeType.Add.Name)} {ItemType.Painting.Name} Details";
 
     public List<SavePersonViewModel> People { get; set; } = new();
 
     [Required]
     [Range(1, int.MaxValue, ErrorMessage = "Size is required.")]
-    public int SizeId { get; set; }
+    public int SizeId { get; set; } = Size.EightByTen.Id;
 
     public List<int> SportIds { get; set; } = new();
 

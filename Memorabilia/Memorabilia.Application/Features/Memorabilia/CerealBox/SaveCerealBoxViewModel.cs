@@ -22,7 +22,7 @@ public class SaveCerealBoxViewModel : SaveItemViewModel
 
     [Required]
     [Range(1, int.MaxValue, ErrorMessage = "Brand is required.")]
-    public int BrandId { get; set; }
+    public int BrandId { get; set; } = Brand.None.Id;
 
     public override EditModeType EditModeType => MemorabiliaId > 0 ? EditModeType.Update : EditModeType.Add;
 
@@ -34,10 +34,8 @@ public class SaveCerealBoxViewModel : SaveItemViewModel
 
     [Required]
     [Range(1, int.MaxValue, ErrorMessage = "Level is required.")]
-    public int LevelTypeId { get; set; }
-
-    public override string PageTitle => $"{(EditModeType == EditModeType.Update ? EditModeType.Update.Name : EditModeType.Add.Name)} {ItemType.CerealBox.Name} Details";
-
+    public int LevelTypeId { get; set; } = LevelType.Professional.Id;
+   
     public List<SavePersonViewModel> People { get; set; } = new();
 
     public List<int> SportIds { get; set; } = new();

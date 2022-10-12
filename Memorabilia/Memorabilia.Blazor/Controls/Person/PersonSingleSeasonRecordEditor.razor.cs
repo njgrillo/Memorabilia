@@ -1,61 +1,60 @@
 ﻿#nullable disable
 
-namespace Memorabilia.Blazor.Controls.Person
+namespace Memorabilia.Blazor.Controls.Person;
+
+public partial class PersonSingleSeasonRecordEditor : ComponentBase
 {
-    public partial class PersonSingleSeasonRecordEditor : ComponentBase
+    [Parameter]
+    public Domain.Constants.RecordType[] RecordTypes { get; set; } = Domain.Constants.RecordType.All;
+
+    [Parameter]
+    public List<SavePersonSingleSeasonRecordViewModel> SingleSeasonRecords { get; set; } = new();
+
+    private bool _canAdd = true;
+    private bool _canEditRecordType = true;
+    private bool _canUpdate;
+    private SavePersonSingleSeasonRecordViewModel _viewModel = new();
+
+    private void Add()
     {
-        [Parameter]
-        public Domain.Constants.RecordType[] RecordTypes { get; set; } = Domain.Constants.RecordType.All;
+        SingleSeasonRecords.Add(_viewModel);
 
-        [Parameter]
-        public List<SavePersonSingleSeasonRecordViewModel> SingleSeasonRecords { get; set; } = new();
+        _viewModel = new SavePersonSingleSeasonRecordViewModel();
+    }
 
-        private bool _canAdd = true;
-        private bool _canEditRecordType = true;
-        private bool _canUpdate;
-        private SavePersonSingleSeasonRecordViewModel _viewModel = new();
+    private void Edit(SavePersonSingleSeasonRecordViewModel record)
+    {
+        _viewModel.RecordTypeId = record.RecordTypeId;
+        _viewModel.Year = record.Year;
+        _viewModel.Amount = record.Amount;
 
-        private void Add()
-        {
-            SingleSeasonRecords.Add(_viewModel);
+        _canAdd = false;
+        _canEditRecordType = false;
+        _canUpdate = true;
+    }
 
-            _viewModel = new SavePersonSingleSeasonRecordViewModel();
-        }
+    private void Remove(int recordTypeId)
+    {
+        var record = SingleSeasonRecords.SingleOrDefault(record => record.RecordTypeId == recordTypeId);
 
-        private void Edit(SavePersonSingleSeasonRecordViewModel record)
-        {
-            _viewModel.RecordTypeId = record.RecordTypeId;
-            _viewModel.Year = record.Year;
-            _viewModel.Amount = record.Amount;
+        if (record == null)
+            return;
 
-            _canAdd = false;
-            _canEditRecordType = false;
-            _canUpdate = true;
-        }
+        record.IsDeleted = true;
+    }
 
-        private void Remove(int recordTypeId)
-        {
-            var record = SingleSeasonRecords.SingleOrDefault(record => record.RecordTypeId == recordTypeId);
+    private void Update()
+    {
+        var record = SingleSeasonRecords.Single(record => record.RecordTypeId == _viewModel.RecordTypeId);
 
-            if (record == null)
-                return;
+        record.RecordTypeId = _viewModel.RecordTypeId;
+        record.Year = _viewModel.Year;
+        record.Amount = _viewModel.Amount;
 
-            record.IsDeleted = true;
-        }
+        _viewModel = new SavePersonSingleSeasonRecordViewModel();
 
-        private void Update()
-        {
-            var record = SingleSeasonRecords.Single(record => record.RecordTypeId == _viewModel.RecordTypeId);
-
-            record.RecordTypeId = _viewModel.RecordTypeId;
-            record.Year = _viewModel.Year;
-            record.Amount = _viewModel.Amount;
-
-            _viewModel = new SavePersonSingleSeasonRecordViewModel();
-
-            _canAdd = true;
-            _canEditRecordType = true;
-            _canUpdate = false;
-        }
+        _canAdd = true;
+        _canEditRecordType = true;
+        _canUpdate = false;
     }
 }

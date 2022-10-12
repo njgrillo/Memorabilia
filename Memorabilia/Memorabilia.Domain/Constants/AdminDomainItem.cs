@@ -26,8 +26,8 @@ public sealed class AdminDomainItem
     public static readonly AdminDomainItem Franchises = new("Franchises", "Defines sport franchises", Constants.ImagePath.Franchises);
     public static readonly AdminDomainItem GameStyleTypes = new("Game Style Types", "Describes how the memorabilia was used in a game", Constants.ImagePath.GameStyleTypes);
     public static readonly AdminDomainItem GloveTypes = new("Glove Types", "Defines variations of gloves", Constants.ImagePath.GloveTypes);
-    public static readonly AdminDomainItem HelmetFinishes = new("Helmet Finishes", "Defines the finish of a helmet", Constants.ImagePath.MiniHelmet, "Helmet Finish");
-    public static readonly AdminDomainItem HelmetQualityTypes = new("Helmet Quality Types", "Defines the quality of a helmet", Constants.ImagePath.FullSizeHelmetTypes);
+    public static readonly AdminDomainItem HelmetFinishes = new("Helmet Finishes", "Defines the finish of a helmet", Constants.ImagePath.HelmetFinishes, "Helmet Finish");
+    public static readonly AdminDomainItem HelmetQualityTypes = new("Helmet Quality Types", "Defines the quality of a helmet", Constants.ImagePath.HelmetQualityTypes);
     public static readonly AdminDomainItem HelmetTypes = new("Helmet Types", "Defines variations of helmets", Constants.ImagePath.HelmetTypes);
     public static readonly AdminDomainItem ImageTypes = new("Image Types", "Defines the importance of the image", Constants.ImagePath.ImageTypes);
     public static readonly AdminDomainItem InscriptionTypes = new("Inscription Types", "Defines variations of inscriptions for autographs", Constants.ImagePath.InscriptionTypes);

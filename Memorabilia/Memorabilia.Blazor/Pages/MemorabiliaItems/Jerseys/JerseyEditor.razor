@@ -1,0 +1,120 @@
+﻿@inherits MemorabiliaItem<SaveJerseyViewModel>
+
+<EditPage ContinueNavigationPath="@ViewModel.ContinueNavigationPath"
+          EditMode="ViewModel.EditModeType"
+          ExitNavigationPath="@ViewModel.ExitNavigationPath"
+          ImagePath="@ViewModel.ImagePath"
+          ItemName="@ViewModel.ItemType.Name"
+          Model="ViewModel"
+          OnLoad="OnLoad"
+          OnSave="OnSave"
+          PageFooterButtonText="@ViewModel.ExitButtonText"
+          PageFooterNavigationPath="@ViewModel.ExitNavigationPath"
+          PageTitle="@ViewModel.PageTitle"
+          TItem="SaveJerseyViewModel"
+          UseMultipleButtons="true">
+    <TimelineContent>
+        <MemorabiliaItemTimeline EditMode="ViewModel.EditModeType"
+                                 ItemTypeName="@ViewModel.ItemType.Name"
+                                 MemorabiliaId="ViewModel.MemorabiliaId"
+                                 MemorabiliaItemStep="ViewModel.MemorabiliaItemStep" />
+    </TimelineContent>
+    <Content>
+        <DivRowCol3>
+            <Content>
+                <ItemTypeLevelDropDown @bind-Value="@ViewModel.LevelTypeId"
+                                       @bind-Value:event="ValueChanged" 
+                                       ItemType="ViewModel.ItemType"
+                                       SelectedValue="ViewModel.LevelTypeId"/> 
+            </Content>
+            <ContentColumn2>
+                <ItemTypeBrandDropDown @bind-Value="@ViewModel.BrandId" 
+                                       @bind-Value:event="ValueChanged"
+                                       ItemType="ViewModel.ItemType"
+                                       SelectedValue="ViewModel.BrandId" />
+            </ContentColumn2>
+        </DivRowCol3>
+        <DivRowCol3>
+            <Content>
+                <ItemTypeSizeDropDown @bind-Value="@ViewModel.SizeId"
+                                      @bind-Value:event="ValueChanged" 
+                                      ItemType="ViewModel.ItemType"
+                                      SelectedValue="@ViewModel.SizeId" /> 
+            </Content>
+            <ContentColumn2>
+                <MudSelect @bind-Value="@ViewModel.GameStyleTypeId"
+                           @bind-Value:event="ValueChanged"    
+                           Label="Game Style Type"
+                           Variant="Variant.Outlined" >
+                    <MudSelectItem Value="@(0)">--Select--</MudSelectItem>
+                    <Iterations Items="ViewModel.GameStyleTypes" Context="gameStyleType">
+                        <MudSelectItem Value="@gameStyleType.Id">@gameStyleType.Name</MudSelectItem>
+                    </Iterations>	
+                </MudSelect>
+            </ContentColumn2>
+        </DivRowCol3>
+        <DivRowCol3>
+            <ContentColumn2>
+                <DivHidden Hidden="@(!ViewModel.DisplayGameDate)">
+                    <Content>
+                        <MudDatePicker @bind-Date="ViewModel.GameDate"
+                                       DateFormat="MM/dd/yyyy"
+                                       Editable="true"
+                                       Label="Game Date"
+                                       Mask="@(new DateMask("MM/dd/yyyy"))" 
+                                       Variant="Variant.Outlined" />
+                    </Content>
+                </DivHidden>
+            </ContentColumn2>
+        </DivRowCol3>
+        <DivRowCol3>
+            <Content>
+                <MudSelect @bind-Value="@ViewModel.JerseyQualityTypeId"
+                           @bind-Value:event="ValueChanged"  
+                           Disabled="!ViewModel.CanEditJerseyQualityType"
+                           Label="Quality"
+                           Variant="Variant.Outlined" >
+                    <MudSelectItem Value="@(0)">--Select--</MudSelectItem>
+                    <Iterations Items="ViewModel.JerseyQualityTypes" Context="jerseyQualityType">
+                        <MudSelectItem Value="@jerseyQualityType.Id">@jerseyQualityType.Name</MudSelectItem>
+                    </Iterations>	
+                </MudSelect>
+            </Content>
+            <ContentColumn2>
+                <MudSelect @bind-Value="@ViewModel.JerseyTypeId"
+                           @bind-Value:event="ValueChanged"  
+                           Label="Type"
+                           Variant="Variant.Outlined" >
+                    <MudSelectItem Value="@(0)">--Select--</MudSelectItem>
+                    <Iterations Items="ViewModel.JerseyTypes" Context="jerseyType">
+                        <MudSelectItem Value="@jerseyType.Id">@jerseyType.Name</MudSelectItem>
+                    </Iterations>	
+                </MudSelect>
+            </ContentColumn2>
+        </DivRowCol3>
+        <DivRowCol3>
+            <Content>
+                <MudSelect @bind-Value="@ViewModel.JerseyStyleTypeId"
+                           @bind-Value:event="ValueChanged"  
+                           Label="Jersey Style Type"
+                           Variant="Variant.Outlined" >
+                    <MudSelectItem Value="@(0)">--Select--</MudSelectItem>
+                    <Iterations Items="ViewModel.JerseyStyleTypes" Context="jerseyStyleType">
+                        <MudSelectItem Value="@jerseyStyleType.Id">@jerseyStyleType.Name</MudSelectItem>
+                    </Iterations>	
+                </MudSelect>
+            </Content>
+        </DivRowCol3>
+        <MultiPersonSelector CanToggle="true"
+                             ItemType="ViewModel.ItemType"
+                             People="ViewModel.People" />   
+        <SportSelector @bind-Value="@ViewModel.SportId" 
+                       @bind-Value:event="ValueChanged"
+                       CanToggle="true" 
+                       ItemType="ViewModel.ItemType"
+                       SelectedValue="ViewModel.SportId"/> 
+        <MultiTeamSelector CanToggle="true" 
+                           ItemType="ViewModel.ItemType"
+                           Teams="ViewModel.Teams" />
+    </Content>
+</EditPage>

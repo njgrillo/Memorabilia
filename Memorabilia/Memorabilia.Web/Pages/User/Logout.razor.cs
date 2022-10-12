@@ -1,13 +1,9 @@
-﻿namespace Memorabilia.Web.Pages.User
-{
-    public partial class Logout : ComponentBase
-    {
-        [Inject]
-        public ProtectedLocalStorage LocalStorage { get; set; }
+﻿namespace Memorabilia.Web.Pages.User;
 
-        protected async Task LoggedOut()
-        {
-            await LocalStorage.DeleteAsync("UserId").ConfigureAwait(false);
-        }
+public partial class Logout : WebPage
+{
+    protected async Task LoggedOut()
+    {
+        await DeleteUserId();   
     }
 }

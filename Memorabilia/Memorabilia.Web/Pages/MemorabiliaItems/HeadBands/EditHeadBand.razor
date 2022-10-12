@@ -1,3 +1,10 @@
 ﻿@page "/Memorabilia/HeadBand/Edit/{memorabiliaId:int}"
 
-<Memorabilia.Blazor.Pages.MemorabiliaItems.HeadBands.EditHeadBand MemorabiliaId="@MemorabiliaId" />
+@inherits MemorabiliaItem
+
+<PageLoader>
+    <Content>
+        <HeadBandEditor MemorabiliaId="@MemorabiliaId" />
+    </Content>
+</PageLoader>
+

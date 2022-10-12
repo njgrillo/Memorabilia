@@ -2,16 +2,8 @@
 
 namespace Memorabilia.Blazor.Pages.Admin.Colors;
 
-public partial class ViewColors : IViewDomainItem, IDeleteDomainItem
+public partial class ViewColors : ViewDomainItem<ColorsViewModel>, IDeleteDomainItem, IViewDomainItem
 {
-    [Inject]
-    public CommandRouter CommandRouter { get; set; }
-
-    [Inject]
-    public QueryRouter QueryRouter { get; set; }
-
-    private ColorsViewModel ViewModel;
-
     public async Task OnDelete(SaveDomainViewModel viewModel)
     {
         await CommandRouter.Send(new SaveColor.Command(viewModel)).ConfigureAwait(false);

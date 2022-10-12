@@ -1,25 +1,24 @@
 ﻿#nullable disable
 
-namespace Memorabilia.Blazor.Controls
+namespace Memorabilia.Blazor.Controls;
+
+public partial class Page : ComponentBase
 {
-    public partial class Page : ComponentBase
+    [Parameter]
+    public RenderFragment Content { get; set; }
+
+    [Parameter]
+    public EventCallback OnLoad { get; set; }
+
+    [Parameter]
+    public int UserId { get; set; }
+
+    private bool PageLoaded;
+
+    protected override async Task OnInitializedAsync()
     {
-        [Parameter]
-        public RenderFragment Content { get; set; }
+        await OnLoad.InvokeAsync();
 
-        [Parameter]
-        public EventCallback OnLoad { get; set; }
-
-        [Parameter]
-        public int UserId { get; set; }
-
-        private bool PageLoaded;
-
-        protected override async Task OnInitializedAsync()
-        {
-            await OnLoad.InvokeAsync().ConfigureAwait(false);
-
-            PageLoaded = true;
-        }
+        PageLoaded = true;
     }
 }

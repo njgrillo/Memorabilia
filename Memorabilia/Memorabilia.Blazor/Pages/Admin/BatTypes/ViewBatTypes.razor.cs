@@ -2,16 +2,8 @@
 
 namespace Memorabilia.Blazor.Pages.Admin.BatTypes;
 
-public partial class ViewBatTypes : IViewDomainItem, IDeleteDomainItem
+public partial class ViewBatTypes : ViewDomainItem<BatTypesViewModel>, IDeleteDomainItem, IViewDomainItem
 {
-    [Inject]
-    public CommandRouter CommandRouter { get; set; }
-
-    [Inject]
-    public QueryRouter QueryRouter { get; set; }
-
-    private BatTypesViewModel ViewModel;
-
     public async Task OnDelete(SaveDomainViewModel viewModel)
     {
         await CommandRouter.Send(new SaveBatType.Command(viewModel)).ConfigureAwait(false);

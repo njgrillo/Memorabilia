@@ -1,62 +1,61 @@
 ﻿#nullable disable
 
-namespace Memorabilia.Blazor.Controls.Person
+namespace Memorabilia.Blazor.Controls.Person;
+
+public partial class PersonAccomplishmentEditor : ComponentBase
 {
-    public partial class PersonAccomplishmentEditor : ComponentBase
+    [Parameter]
+    public List<SavePersonAccomplishmentViewModel> Accomplishments { get; set; } = new();
+
+    [Parameter]
+    public AccomplishmentType[] AccomplishmentTypes { get; set; } = AccomplishmentType.All;
+
+    private bool _canAdd = true;
+    private bool _canEditAccomplishmentType = true;
+    private bool _canUpdate;
+    private SavePersonAccomplishmentViewModel _viewModel = new();
+
+    private void Add()
     {
-        [Parameter]
-        public List<SavePersonAccomplishmentViewModel> Accomplishments { get; set; } = new();
+        Accomplishments.Add(_viewModel);
 
-        [Parameter]
-        public AccomplishmentType[] AccomplishmentTypes { get; set; } = AccomplishmentType.All;
+        _viewModel = new SavePersonAccomplishmentViewModel();
+    }
 
-        private bool _canAdd = true;
-        private bool _canEditAccomplishmentType = true;
-        private bool _canUpdate;
-        private SavePersonAccomplishmentViewModel _viewModel = new();
+    private void Edit(SavePersonAccomplishmentViewModel accomplishment)
+    {
+        _viewModel.AccomplishmentTypeId = accomplishment.AccomplishmentTypeId;
+        _viewModel.Year = accomplishment.Year;
+        _viewModel.Date = accomplishment.Date;
 
-        private void Add()
-        {
-            Accomplishments.Add(_viewModel);
+        _canAdd = false;
+        _canEditAccomplishmentType = false;
+        _canUpdate = true;
+    }
 
-            _viewModel = new SavePersonAccomplishmentViewModel();
-        }
+    private void Remove(int accomplishmentTypeId, DateTime? date, int? year)
+    {
+        var accomplishment = Accomplishments.SingleOrDefault(accomplishment => accomplishment.AccomplishmentTypeId == accomplishmentTypeId
+                                                             && ((accomplishment.Date.HasValue && accomplishment.Date == date)
+                                                                  || (accomplishment.Year.HasValue && accomplishment.Year == year)));
 
-        private void Edit(SavePersonAccomplishmentViewModel accomplishment)
-        {
-            _viewModel.AccomplishmentTypeId = accomplishment.AccomplishmentTypeId;
-            _viewModel.Year = accomplishment.Year;
-            _viewModel.Date = accomplishment.Date;
+        if (accomplishment == null)
+            return;
 
-            _canAdd = false;
-            _canEditAccomplishmentType = false;
-            _canUpdate = true;
-        }
+        accomplishment.IsDeleted = true;
+    }
 
-        private void Remove(int accomplishmentTypeId, DateTime? date, int? year)
-        {
-            var accomplishment = Accomplishments.SingleOrDefault(accomplishment => accomplishment.AccomplishmentTypeId == accomplishmentTypeId
-                                                                 && ((accomplishment.Date.HasValue && accomplishment.Date == date)
-                                                                      || (accomplishment.Year.HasValue && accomplishment.Year == year)));
+    private void Update()
+    {
+        var accomplishment = Accomplishments.Single(accomplishment => accomplishment.AccomplishmentTypeId == _viewModel.AccomplishmentTypeId);
 
-            if (accomplishment == null)
-                return;
+        accomplishment.Year = _viewModel.Year;
+        accomplishment.Date = _viewModel.Date;
 
-            accomplishment.IsDeleted = true;
-        }
+        _viewModel = new SavePersonAccomplishmentViewModel();
 
-        private void Update()
-        {
-            var accomplishment = Accomplishments.Single(accomplishment => accomplishment.AccomplishmentTypeId == _viewModel.AccomplishmentTypeId);
-
-            accomplishment.Year = _viewModel.Year;
-            accomplishment.Date = _viewModel.Date;
-
-            _viewModel = new SavePersonAccomplishmentViewModel();
-
-            _canAdd = true;
-            _canEditAccomplishmentType = true;
-            _canUpdate = false;
-        }
+        _canAdd = true;
+        _canEditAccomplishmentType = true;
+        _canUpdate = false;
     }
 }

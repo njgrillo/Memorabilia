@@ -4,7 +4,7 @@
                   Dense="false"
                   Filter="new Func<DomainViewModel,bool>(FilterFunc1)"
                   Hover="true"
-                  Items="@DomainEntities"
+                  Items="@DomainEntities.OrderBy(item => item.Name)"
                   Striped="true">
             <ToolBarContent>
                 <MudText Typo="Typo.h6">@DomainItemTitle</MudText>

@@ -1,7 +1,9 @@
 ﻿@page "/LeaderTypes/Edit/{id:int}"
 
-<WebPage>
+@inherits EditItem
+
+<PageLoader>
     <Content>
-        <EditLeaderType Id="@Id" />
+        <LeaderTypeEditor Id=@Id />
     </Content>
-</WebPage>
+</PageLoader>

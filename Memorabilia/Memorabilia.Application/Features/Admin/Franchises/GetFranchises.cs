@@ -15,7 +15,11 @@ public class GetFranchises
 
         protected override async Task<FranchisesViewModel> Handle(Query query)
         {
-            return new FranchisesViewModel(await _franchiseRepository.GetAll());
+            var franchises = (await _franchiseRepository.GetAll())
+                                    .OrderBy(franchise => franchise.SportLeagueLevelName)
+                                    .ThenBy(franchise => franchise.Name);
+
+            return new FranchisesViewModel(franchises);
         }
     }
 

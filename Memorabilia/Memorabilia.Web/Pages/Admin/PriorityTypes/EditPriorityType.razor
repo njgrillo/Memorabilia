@@ -1,5 +1,9 @@
 ﻿@page "/PriorityTypes/Edit/{id:int}"
 
-<EditDomainItem Item="_viewModel"
-                OnLoad="OnLoad"
-                OnSave="OnSave" />
+@inherits EditItem
+
+<PageLoader>
+    <Content>
+        <PriorityTypeEditor Id=@Id />
+    </Content>
+</PageLoader>

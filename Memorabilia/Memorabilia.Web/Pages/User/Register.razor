@@ -1,7 +1,9 @@
 ﻿@page "/Register"
 
-<WebPage>
+@inherits WebPage
+
+<PageLoader>
     <Content>
         <Memorabilia.Blazor.Pages.User.Register OnSaved="OnSaved" />
     </Content>
-</WebPage>
+</PageLoader>

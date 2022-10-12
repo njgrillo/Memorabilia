@@ -1,3 +1,10 @@
 ﻿@page "/Memorabilia/Painting/Edit/{memorabiliaId:int}"
 
-<Memorabilia.Blazor.Pages.MemorabiliaItems.Paintings.EditPainting MemorabiliaId="@MemorabiliaId" />
+@inherits MemorabiliaItem
+
+<PageLoader>
+    <Content>
+        <PaintingEditor MemorabiliaId="@MemorabiliaId" />
+    </Content>
+</PageLoader>
+

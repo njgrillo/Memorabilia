@@ -1,59 +1,58 @@
 ﻿#nullable disable
 
-namespace Memorabilia.Blazor.Controls.Person
+namespace Memorabilia.Blazor.Controls.Person;
+
+public partial class PersonOccupationSelector : ComponentBase
 {
-    public partial class PersonOccupationSelector : ComponentBase
+    [Parameter]
+    public List<SavePersonOccupationViewModel> Occupations { get; set; } = new();
+
+    private bool _canAdd = true;
+    private bool _canEditOccupation = true;
+    private bool _canUpdate;
+    private SavePersonOccupationViewModel _viewModel = new();
+
+    private void Add()
     {
-        [Parameter]
-        public List<SavePersonOccupationViewModel> Occupations { get; set; } = new();
+        if (_viewModel.OccupationId == 0 || _viewModel.OccupationTypeId == 0)
+            return;
 
-        private bool _canAdd = true;
-        private bool _canEditOccupation = true;
-        private bool _canUpdate;
-        private SavePersonOccupationViewModel _viewModel = new();
+        Occupations.Add(_viewModel);
 
-        private void Add()
-        {
-            if (_viewModel.OccupationId == 0 || _viewModel.OccupationTypeId == 0)
-                return;
+        _viewModel = new SavePersonOccupationViewModel();
+    }
 
-            Occupations.Add(_viewModel);
+    private void Edit(SavePersonOccupationViewModel occupation)
+    {
+        _viewModel.OccupationId = occupation.OccupationId;
+        _viewModel.OccupationTypeId = occupation.OccupationTypeId;
 
-            _viewModel = new SavePersonOccupationViewModel();
-        }
+        _canAdd = false;
+        _canEditOccupation = false;
+        _canUpdate = true;
+    }
 
-        private void Edit(SavePersonOccupationViewModel occupation)
-        {
-            _viewModel.OccupationId = occupation.OccupationId;
-            _viewModel.OccupationTypeId = occupation.OccupationTypeId;
+    private void Remove(int occupationId)
+    {
+        var occupation = Occupations.SingleOrDefault(occupation => occupation.OccupationId == occupationId);
 
-            _canAdd = false;
-            _canEditOccupation = false;
-            _canUpdate = true;
-        }
+        if (occupation == null)
+            return;
 
-        private void Remove(int occupationId)
-        {
-            var occupation = Occupations.SingleOrDefault(occupation => occupation.OccupationId == occupationId);
+        occupation.IsDeleted = true;
+    }
 
-            if (occupation == null)
-                return;
+    private void Update()
+    {
+        var occupation = Occupations.Single(occupation => occupation.OccupationId == _viewModel.OccupationId);
 
-            occupation.IsDeleted = true;
-        }
+        occupation.OccupationId = _viewModel.OccupationId;
+        occupation.OccupationTypeId = _viewModel.OccupationTypeId;
 
-        private void Update()
-        {
-            var occupation = Occupations.Single(occupation => occupation.OccupationId == _viewModel.OccupationId);
+        _viewModel = new SavePersonOccupationViewModel();
 
-            occupation.OccupationId = _viewModel.OccupationId;
-            occupation.OccupationTypeId = _viewModel.OccupationTypeId;
-
-            _viewModel = new SavePersonOccupationViewModel();
-
-            _canAdd = true;
-            _canEditOccupation = true;
-            _canUpdate = false;
-        }
+        _canAdd = true;
+        _canEditOccupation = true;
+        _canUpdate = false;
     }
 }

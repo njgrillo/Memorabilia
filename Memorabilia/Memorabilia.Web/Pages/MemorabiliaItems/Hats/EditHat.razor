@@ -1,3 +1,10 @@
 ﻿@page "/Memorabilia/Hat/Edit/{memorabiliaId:int}"
 
-<Memorabilia.Blazor.Pages.MemorabiliaItems.Hats.EditHat MemorabiliaId="@MemorabiliaId" />
+@inherits MemorabiliaItem
+
+<PageLoader>
+    <Content>
+        <HatEditor MemorabiliaId="@MemorabiliaId" />
+    </Content>
+</PageLoader>
+

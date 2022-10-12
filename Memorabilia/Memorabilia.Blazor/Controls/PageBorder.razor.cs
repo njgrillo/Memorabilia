@@ -1,10 +1,9 @@
 ﻿#nullable disable
 
-namespace Memorabilia.Blazor.Controls
+namespace Memorabilia.Blazor.Controls;
+
+public partial class PageBorder : ComponentBase
 {
-    public partial class PageBorder : ComponentBase
-    {
-        [Parameter]
-        public RenderFragment Content { get; set; }
-    }
+    [Parameter]
+    public RenderFragment Content { get; set; }
 }

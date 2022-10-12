@@ -1,58 +1,57 @@
 ﻿#nullable disable
 
-namespace Memorabilia.Blazor.Controls.Person
+namespace Memorabilia.Blazor.Controls.Person;
+
+public partial class PersonCareerRecordEditor : ComponentBase
 {
-    public partial class PersonCareerRecordEditor : ComponentBase
+    [Parameter]
+    public List<SavePersonCareerRecordViewModel> CareerRecords { get; set; } = new();
+
+    [Parameter]
+    public RecordType[] RecordTypes { get; set; } = RecordType.All;
+
+    private bool _canAdd = true;
+    private bool _canEditRecordType = true;
+    private bool _canUpdate;
+    private SavePersonCareerRecordViewModel _viewModel = new();
+
+    private void Add()
     {
-        [Parameter]
-        public List<SavePersonCareerRecordViewModel> CareerRecords { get; set; } = new();
+        CareerRecords.Add(_viewModel);
 
-        [Parameter]
-        public RecordType[] RecordTypes { get; set; } = RecordType.All;
+        _viewModel = new SavePersonCareerRecordViewModel();
+    }
 
-        private bool _canAdd = true;
-        private bool _canEditRecordType = true;
-        private bool _canUpdate;
-        private SavePersonCareerRecordViewModel _viewModel = new();
+    private void Edit(SavePersonCareerRecordViewModel record)
+    {
+        _viewModel.RecordTypeId = record.RecordTypeId;
+        _viewModel.Amount = record.Amount;
 
-        private void Add()
-        {
-            CareerRecords.Add(_viewModel);
+        _canAdd = false;
+        _canEditRecordType = false;
+        _canUpdate = true;
+    }
 
-            _viewModel = new SavePersonCareerRecordViewModel();
-        }
+    private void Remove(int recordTypeId)
+    {
+        var record = CareerRecords.SingleOrDefault(record => record.RecordTypeId == recordTypeId);
 
-        private void Edit(SavePersonCareerRecordViewModel record)
-        {
-            _viewModel.RecordTypeId = record.RecordTypeId;
-            _viewModel.Amount = record.Amount;
+        if (record == null)
+            return;
 
-            _canAdd = false;
-            _canEditRecordType = false;
-            _canUpdate = true;
-        }
+        record.IsDeleted = true;
+    }
 
-        private void Remove(int recordTypeId)
-        {
-            var record = CareerRecords.SingleOrDefault(record => record.RecordTypeId == recordTypeId);
+    private void Update()
+    {
+        var record = CareerRecords.Single(record => record.RecordTypeId == _viewModel.RecordTypeId);
 
-            if (record == null)
-                return;
+        record.Amount = _viewModel.Amount;
 
-            record.IsDeleted = true;
-        }
+        _viewModel = new SavePersonCareerRecordViewModel();
 
-        private void Update()
-        {
-            var record = CareerRecords.Single(record => record.RecordTypeId == _viewModel.RecordTypeId);
-
-            record.Amount = _viewModel.Amount;
-
-            _viewModel = new SavePersonCareerRecordViewModel();
-
-            _canAdd = true;
-            _canEditRecordType = true;
-            _canUpdate = false;
-        }
+        _canAdd = true;
+        _canEditRecordType = true;
+        _canUpdate = false;
     }
 }

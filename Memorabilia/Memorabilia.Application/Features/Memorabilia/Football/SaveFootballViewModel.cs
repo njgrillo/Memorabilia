@@ -30,7 +30,7 @@ public class SaveFootballViewModel : SaveItemViewModel
 
     [Required]
     [Range(1, int.MaxValue, ErrorMessage = "Brand is required.")]
-    public int BrandId { get; set; }
+    public int BrandId { get; set; } = Brand.Wilson.Id;
 
     public int CommissionerId { get; set; }
 
@@ -42,7 +42,7 @@ public class SaveFootballViewModel : SaveItemViewModel
 
     public FootballType FootballType => FootballType.Find(FootballTypeId);
 
-    public int FootballTypeId { get; set; }
+    public int FootballTypeId { get; set; } = FootballType.Duke.Id;
 
     public FootballType[] FootballTypes { get; set; } = FootballType.All;
 
@@ -78,13 +78,13 @@ public class SaveFootballViewModel : SaveItemViewModel
 
     [Required]
     [Range(1, int.MaxValue, ErrorMessage = "Level is required.")]
-    public int LevelTypeId { get; set; }
+    public int LevelTypeId { get; set; } = LevelType.Professional.Id;
 
     public SavePersonViewModel Person { get; set; }
 
     [Required]
     [Range(1, int.MaxValue, ErrorMessage = "Size is required.")]
-    public int SizeId { get; set; }
+    public int SizeId { get; set; } = Size.Full.Id;
 
     public Sport Sport => Sport.Football;
 

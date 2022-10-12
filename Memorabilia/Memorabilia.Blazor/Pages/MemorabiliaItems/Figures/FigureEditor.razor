@@ -1,0 +1,79 @@
+﻿@inherits MemorabiliaItem<SaveFigureViewModel>
+
+<EditPage ContinueNavigationPath="@ViewModel.ContinueNavigationPath"
+          EditMode="ViewModel.EditModeType"
+          ExitNavigationPath="@ViewModel.ExitNavigationPath"
+          ImagePath="@ViewModel.ImagePath"
+          ItemName="@ViewModel.ItemType.Name"
+          Model="ViewModel"
+          OnLoad="OnLoad"
+          OnSave="OnSave"
+          PageFooterButtonText="@ViewModel.ExitButtonText"
+          PageFooterNavigationPath="@ViewModel.ExitNavigationPath"
+          PageTitle="@ViewModel.PageTitle"
+          TItem="SaveFigureViewModel"
+          UseMultipleButtons="true">
+    <TimelineContent>
+        <MemorabiliaItemTimeline EditMode="ViewModel.EditModeType"
+                                 ItemTypeName="@ViewModel.ItemType.Name"
+                                 MemorabiliaId="ViewModel.MemorabiliaId"
+                                 MemorabiliaItemStep="ViewModel.MemorabiliaItemStep" />
+    </TimelineContent>
+    <Content>
+        <DivRowCol3>
+            <Content>
+                <ItemTypeLevelDropDown @bind-Value="@ViewModel.LevelTypeId"
+                                       @bind-Value:event="ValueChanged" 
+                                       ItemType="ViewModel.ItemType"
+                                       SelectedValue="ViewModel.LevelTypeId" /> 
+            </Content>
+            <ContentColumn2>
+                <ItemTypeBrandDropDown @bind-Value="@ViewModel.BrandId" 
+                                       @bind-Value:event="ValueChanged"
+                                       ItemType="ViewModel.ItemType"
+                                       SelectedValue="ViewModel.BrandId" />
+            </ContentColumn2>
+        </DivRowCol3>
+        <DivRowCol3>
+            <Content>
+                <ItemTypeSizeDropDown @bind-Value="@ViewModel.SizeId"
+                                      @bind-Value:event="ValueChanged" 
+                                      ItemType="ViewModel.ItemType"
+                                      SelectedValue="@ViewModel.SizeId" /> 
+            </Content>
+            <ContentColumn2>
+                <MudSelect @bind-Value="@ViewModel.FigureTypeId"
+                           @bind-Value:event="ValueChanged"   
+                           Label="Type"
+                           Variant="Variant.Outlined">
+                    <MudSelectItem Value="@(0)">--Select--</MudSelectItem>
+                    <Iterations Items="ViewModel.FigureTypes" Context="figureType">
+                        <MudSelectItem Value="@figureType.Id">@figureType.Name</MudSelectItem>
+                    </Iterations>	
+                </MudSelect>
+            </ContentColumn2>
+        </DivRowCol3>
+        <DivRowCol3>
+            <Content>
+                <MudNumericField @bind-Value="ViewModel.Year" 
+                                 Label="Year" 
+                                 Variant="Variant.Outlined" />  
+            </Content>
+            <ContentColumn2>
+                @*<FigureSpecialtyTypeDropDown @bind-Value="@ViewModel.FigureSpecialtyTypeId" 
+                                             @bind-Value:event="ValueChanged"
+                                             FigureType="FigureType.Find(ViewModel.FigureTypeId)" />*@
+            </ContentColumn2>
+        </DivRowCol3>
+        <MultiPersonSelector CanToggle="true"
+                             ItemType="ViewModel.ItemType"
+                             People="ViewModel.People" />    
+        <MultiSportSelector CanToggle="true"
+                            ItemType="ViewModel.ItemType"
+                            SelectedSportIdsChanged="SelectedSportIdsChanged"
+                            SportIds="ViewModel.SportIds" />
+        <MultiTeamSelector CanToggle="true" 
+                           ItemType="ViewModel.ItemType"
+                           Teams="ViewModel.Teams" />
+    </Content>
+</EditPage>

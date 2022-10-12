@@ -1,10 +1,9 @@
 ﻿#nullable disable
 
-namespace Memorabilia.Blazor.Controls
+namespace Memorabilia.Blazor.Controls;
+
+public partial class PageHeader : ComponentBase
 {
-    public partial class PageHeader : ComponentBase
-    {
-        [Parameter]
-        public string PageTitle { get; set; }
-    }
+    [Parameter]
+    public string PageTitle { get; set; }
 }

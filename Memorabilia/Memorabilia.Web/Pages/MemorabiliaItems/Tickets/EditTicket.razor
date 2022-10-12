@@ -1,3 +1,9 @@
 ﻿@page "/Memorabilia/Ticket/Edit/{memorabiliaId:int}"
 
-<Memorabilia.Blazor.Pages.MemorabiliaItems.Tickets.EditTicket MemorabiliaId="@MemorabiliaId" />
+@inherits MemorabiliaItem
+
+<PageLoader>
+    <Content>
+        <TicketEditor MemorabiliaId="@MemorabiliaId" />
+    </Content>
+</PageLoader>

@@ -89,13 +89,13 @@ public class SaveJerseyViewModel : SaveItemViewModel
 
     [Required]
     [Range(1, int.MaxValue, ErrorMessage = "Type is required.")]
-    public int JerseyTypeId { get; set; }
+    public int JerseyTypeId { get; set; } = JerseyType.Stitched.Id;
 
     public JerseyType[] JerseyTypes => JerseyType.All;
 
     [Required]
     [Range(1, int.MaxValue, ErrorMessage = "Level is required.")]
-    public int LevelTypeId { get; set; }
+    public int LevelTypeId { get; set; } = LevelType.Professional.Id;
 
     public List<SavePersonViewModel> People { get; set; } = new();
 

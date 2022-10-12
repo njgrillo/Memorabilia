@@ -28,15 +28,15 @@ public class SaveBatViewModel : SaveItemViewModel
 
     public BatType BatType => BatType.Find(BatTypeId);
 
-    public int BatTypeId { get; set; }
+    public int BatTypeId { get; set; } = BatType.BigStick.Id;
 
     public BatType[] BatTypes => BatType.All;
 
     [Required]
     [Range(1, int.MaxValue, ErrorMessage = "Brand is required.")]
-    public int BrandId { get; set; }
+    public int BrandId { get; set; } = Brand.Rawlings.Id;
 
-    public int ColorId { get; set; }
+    public int ColorId { get; set; } = Color.Black.Id;
 
     public Color[] Colors => Color.GetAll(ItemType);
 
@@ -52,7 +52,7 @@ public class SaveBatViewModel : SaveItemViewModel
 
     [Required]
     [Range(1, int.MaxValue, ErrorMessage = "Game Style Type is required.")]
-    public int GameStyleTypeId { get; set; }
+    public int GameStyleTypeId { get; set; } = GameStyleType.None.Id;
 
     public GameStyleType[] GameStyleTypes => GameStyleType.GetAll(ItemType.Baseball);
 
@@ -70,7 +70,7 @@ public class SaveBatViewModel : SaveItemViewModel
 
     [Required]
     [Range(1, int.MaxValue, ErrorMessage = "Size is required.")]
-    public int SizeId { get; set; }
+    public int SizeId { get; set; } = Size.Full.Id;
 
     public Sport Sport => Sport.Baseball;
 

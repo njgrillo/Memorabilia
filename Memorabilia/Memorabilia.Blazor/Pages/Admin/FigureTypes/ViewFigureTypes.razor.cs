@@ -2,16 +2,8 @@
 
 namespace Memorabilia.Blazor.Pages.Admin.FigureTypes;
 
-public partial class ViewFigureTypes : IViewDomainItem, IDeleteDomainItem
+public partial class ViewFigureTypes : ViewDomainItem<FigureTypesViewModel>, IDeleteDomainItem, IViewDomainItem
 {
-    [Inject]
-    public CommandRouter CommandRouter { get; set; }
-
-    [Inject]
-    public QueryRouter QueryRouter { get; set; }
-
-    private FigureTypesViewModel ViewModel;
-
     public async Task OnDelete(SaveDomainViewModel viewModel)
     {
         await CommandRouter.Send(new SaveFigureType.Command(viewModel)).ConfigureAwait(false);

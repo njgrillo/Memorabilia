@@ -1,5 +1,9 @@
 ﻿@page "/Brands/Edit/{id:int}"
 
-<EditDomainItem Item="_viewModel"
-                OnLoad="OnLoad"
-                OnSave="OnSave" />
+@inherits EditItem
+
+<PageLoader>
+    <Content>
+        <BrandEditor Id=@Id />
+    </Content>
+</PageLoader>

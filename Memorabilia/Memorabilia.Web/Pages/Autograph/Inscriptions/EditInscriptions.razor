@@ -1,7 +1,9 @@
 ﻿@page "/Autographs/Inscriptions/Edit/{autographId:int}"
 
-<WebPage>
+@inherits AutographItem
+
+<PageLoader>
     <Content>
-        <Memorabilia.Blazor.Pages.Autograph.Inscriptions.EditInscriptions AutographId="@AutographId" />
+        <InscriptionsEditor AutographId="@AutographId" />
     </Content>
-</WebPage>
+</PageLoader>

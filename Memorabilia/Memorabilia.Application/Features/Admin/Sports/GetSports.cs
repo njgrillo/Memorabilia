@@ -15,7 +15,9 @@ public class GetSports
 
         protected override async Task<SportsViewModel> Handle(Query query)
         {
-            return new SportsViewModel(await _sportRepository.GetAll());
+            var sports = (await _sportRepository.GetAll()).OrderBy(sport => sport.Name);
+
+            return new SportsViewModel(sports);
         }
     }
 

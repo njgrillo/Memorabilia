@@ -1,3 +1,9 @@
 ﻿@page "/Memorabilia/Shirt/Edit/{memorabiliaId:int}"
 
-<Memorabilia.Blazor.Pages.MemorabiliaItems.Shirts.EditShirt MemorabiliaId="@MemorabiliaId" />
+@inherits MemorabiliaItem
+
+<PageLoader>
+    <Content>
+        <ShirtEditor MemorabiliaId="@MemorabiliaId" />
+    </Content>
+</PageLoader>

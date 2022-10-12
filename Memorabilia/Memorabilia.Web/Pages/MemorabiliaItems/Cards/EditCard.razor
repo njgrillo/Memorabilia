@@ -1,4 +1,11 @@
 ﻿@page "/Memorabilia/TradingCard/Edit/{memorabiliaId:int}"
 @page "/Memorabilia/Trading Card/Edit/{memorabiliaId:int}"
 
-<Memorabilia.Blazor.Pages.MemorabiliaItems.Cards.EditCard MemorabiliaId="@MemorabiliaId" />
+@inherits MemorabiliaItem
+
+<PageLoader>
+    <Content>
+        <CardEditor MemorabiliaId="@MemorabiliaId" />
+    </Content>
+</PageLoader>
+

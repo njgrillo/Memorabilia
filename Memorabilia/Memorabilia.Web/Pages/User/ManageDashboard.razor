@@ -1,7 +1,9 @@
 ﻿@page "/User/ManageDashboard"
 
-<WebPage>
+@inherits WebPage
+
+<PageLoader>
     <Content>
         <Memorabilia.Blazor.Pages.User.ManageDashboard UserId="@UserId" />
     </Content>
-</WebPage>
+</PageLoader>

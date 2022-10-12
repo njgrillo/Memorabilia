@@ -1,3 +1,9 @@
 ﻿@page "/Memorabilia/Puck/Edit/{memorabiliaId:int}"
 
-<Memorabilia.Blazor.Pages.MemorabiliaItems.Pucks.EditPuck MemorabiliaId="@MemorabiliaId" />
+@inherits MemorabiliaItem
+
+<PageLoader>
+    <Content>
+        <PuckEditor MemorabiliaId="@MemorabiliaId" />
+    </Content>
+</PageLoader>

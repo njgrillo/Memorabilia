@@ -1,4 +1,10 @@
 ﻿@page "/Memorabilia/PinFlag/Edit/{memorabiliaId:int}"
 @page "/Memorabilia/Pin Flag/Edit/{memorabiliaId:int}"
 
-<Memorabilia.Blazor.Pages.MemorabiliaItems.PinFlags.EditPinFlag MemorabiliaId="@MemorabiliaId" />
+@inherits MemorabiliaItem
+
+<PageLoader>
+    <Content>
+        <PinFlagEditor MemorabiliaId="@MemorabiliaId" />
+    </Content>
+</PageLoader>

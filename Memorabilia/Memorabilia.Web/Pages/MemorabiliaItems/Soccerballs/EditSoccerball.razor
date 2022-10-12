@@ -1,3 +1,9 @@
 ﻿@page "/Memorabilia/Soccerball/Edit/{memorabiliaId:int}"
 
-<Memorabilia.Blazor.Pages.MemorabiliaItems.Soccerballs.EditSoccerball MemorabiliaId="@MemorabiliaId" />
+@inherits MemorabiliaItem
+
+<PageLoader>
+    <Content>
+        <SoccerballEditor MemorabiliaId="@MemorabiliaId" />
+    </Content>
+</PageLoader>

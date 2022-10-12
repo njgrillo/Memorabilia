@@ -1,0 +1,24 @@
+﻿namespace Memorabilia.Blazor.Pages.MemorabiliaItems.JerseyNumbers;
+
+public partial class JerseyNumberEditor : MemorabiliaItem<SaveJerseyNumberViewModel>
+{
+    protected async Task OnLoad()
+    {
+        ViewModel = new SaveJerseyNumberViewModel(await QueryRouter.Send(new GetJerseyNumber.Query(MemorabiliaId)));
+    }
+
+    protected async Task OnSave()
+    {
+        await CommandRouter.Send(new SaveJerseyNumber.Command(ViewModel));
+    }
+
+    private void SelectedPersonChanged(SavePersonViewModel person)
+    {
+        ViewModel.Person = person;
+    }
+
+    private void SelectedTeamChanged(SaveTeamViewModel team)
+    {
+        ViewModel.Team = team;
+    }
+}

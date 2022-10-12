@@ -1,6 +1,4 @@
-﻿#nullable disable
-
-namespace Memorabilia.Blazor.Pages.Admin.AccomplishmentTypes;
+﻿namespace Memorabilia.Blazor.Pages.Admin.AccomplishmentTypes;
 
 public partial class ViewAccomplishmentTypes : ViewDomainItem<AccomplishmentTypesViewModel>, IDeleteDomainItem, IViewDomainItem
 {

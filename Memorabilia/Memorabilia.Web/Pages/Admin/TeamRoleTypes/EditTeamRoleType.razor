@@ -1,5 +1,9 @@
 ﻿@page "/TeamRoleTypes/Edit/{id:int}"
 
-<EditDomainItem Item="_viewModel"
-                OnLoad="OnLoad"
-                OnSave="OnSave" />
+@inherits EditItem
+
+<PageLoader>
+    <Content>
+        <TeamRoleTypeEditor Id=@Id />
+    </Content>
+</PageLoader>

@@ -1,32 +1,31 @@
 ﻿#nullable disable
 
-namespace Memorabilia.Blazor.Controls.Team
+namespace Memorabilia.Blazor.Controls.Team;
+
+public partial class TeamDivisionEditor : ComponentBase
 {
-    public partial class TeamDivisionEditor : ComponentBase
+    [Parameter]
+    public List<SaveTeamDivisionViewModel> Divisions { get; set; } = new();
+
+    [Parameter]
+    public SportLeagueLevel SportLeagueLevel { get; set; }
+
+    private SaveTeamDivisionViewModel _viewModel = new();
+
+    private void Add()
     {
-        [Parameter]
-        public List<SaveTeamDivisionViewModel> Divisions { get; set; } = new();
+        Divisions.Add(_viewModel);
 
-        [Parameter]
-        public SportLeagueLevel SportLeagueLevel { get; set; }
+        _viewModel = new SaveTeamDivisionViewModel();
+    }
 
-        private SaveTeamDivisionViewModel _viewModel = new();
+    private void Remove(int divisionId, int? beginYear)
+    {
+        var division = Divisions.SingleOrDefault(division => division.DivisionId == divisionId && division.BeginYear == beginYear);
 
-        private void Add()
-        {
-            Divisions.Add(_viewModel);
+        if (division == null)
+            return;
 
-            _viewModel = new SaveTeamDivisionViewModel();
-        }
-
-        private void Remove(int divisionId, int? beginYear)
-        {
-            var division = Divisions.SingleOrDefault(division => division.DivisionId == divisionId && division.BeginYear == beginYear);
-
-            if (division == null)
-                return;
-
-            division.IsDeleted = true;
-        }
+        division.IsDeleted = true;
     }
 }

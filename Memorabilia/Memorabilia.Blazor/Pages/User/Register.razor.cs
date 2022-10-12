@@ -1,28 +1,27 @@
 ﻿#nullable disable
 
-namespace Memorabilia.Blazor.Pages.User
+namespace Memorabilia.Blazor.Pages.User;
+
+public partial class Register : ComponentBase
 {
-    public partial class Register : ComponentBase
+    [Inject]
+    public CommandRouter CommandRouter { get; set; }
+
+    [Inject]
+    public NavigationManager NavigationManager { get; set; }
+
+    [Parameter]
+    public EventCallback<int> OnSaved { get; set; }
+
+    private readonly SaveUserViewModel _viewModel = new();
+
+    protected async Task HandleValidSubmit()
     {
-        [Inject]
-        public CommandRouter CommandRouter { get; set; }
+        var command = new AddUser.Command(_viewModel);
 
-        [Inject]
-        public NavigationManager NavigationManager { get; set; }
+        await CommandRouter.Send(command).ConfigureAwait(false);
+        await OnSaved.InvokeAsync(command.Id).ConfigureAwait(false);            
 
-        [Parameter]
-        public EventCallback<int> OnSaved { get; set; }
-
-        private readonly SaveUserViewModel _viewModel = new();
-
-        protected async Task HandleValidSubmit()
-        {
-            var command = new AddUser.Command(_viewModel);
-
-            await CommandRouter.Send(command).ConfigureAwait(false);
-            await OnSaved.InvokeAsync(command.Id).ConfigureAwait(false);            
-
-            NavigationManager.NavigateTo("Home");
-        }
+        NavigationManager.NavigateTo("Home");
     }
 }

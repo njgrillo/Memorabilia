@@ -24,7 +24,7 @@ public class SavePhotoViewModel : SaveItemViewModel
 
     [Required]
     [Range(1, int.MaxValue, ErrorMessage = "Brand is required.")]
-    public int BrandId { get; set; }
+    public int BrandId { get; set; } = Brand.None.Id;
 
     public override EditModeType EditModeType => MemorabiliaId > 0 ? EditModeType.Update : EditModeType.Add;
 
@@ -38,7 +38,7 @@ public class SavePhotoViewModel : SaveItemViewModel
     
     public bool Matted { get; set; }
 
-    public int OrientationId { get; set; }
+    public int OrientationId { get; set; } = Orientation.Portrait.Id;
 
     public Orientation[] Orientations => Orientation.All;
 
@@ -46,7 +46,7 @@ public class SavePhotoViewModel : SaveItemViewModel
 
     [Required]
     [Range(1, int.MaxValue, ErrorMessage = "Type is required.")]
-    public int PhotoTypeId { get; set; }
+    public int PhotoTypeId { get; set; } = PhotoType.Glossy.Id;
 
     public PhotoType[] PhotoTypes => PhotoType.All;
 

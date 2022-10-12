@@ -30,13 +30,13 @@ public class SaveBasketballViewModel : SaveItemViewModel
 
     public BasketballType BasketballType => BasketballType.Find(BasketballTypeId);
 
-    public int BasketballTypeId { get; set; }
+    public int BasketballTypeId { get; set; } = BasketballType.Official.Id;
 
     public BasketballType[] BasketballTypes { get; set; } = BasketballType.All;
 
     [Required]
     [Range(1, int.MaxValue, ErrorMessage = "Brand is required.")]
-    public int BrandId { get; set; }
+    public int BrandId { get; set; } = Brand.Spalding.Id;
 
     public int CommissionerId { get; set; }
 
@@ -71,13 +71,13 @@ public class SaveBasketballViewModel : SaveItemViewModel
 
     [Required]
     [Range(1, int.MaxValue, ErrorMessage = "Level is required.")]
-    public int LevelTypeId { get; set; }        
+    public int LevelTypeId { get; set; } = LevelType.Professional.Id;
 
     public SavePersonViewModel Person;
 
     [Required]
     [Range(1, int.MaxValue, ErrorMessage = "Size is required.")]
-    public int SizeId { get; set; }
+    public int SizeId { get; set; } = Size.Standard.Id;
 
     public Sport Sport => Sport.Basketball;
 

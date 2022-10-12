@@ -1,3 +1,9 @@
 ﻿@page "/Memorabilia/Pylon/Edit/{memorabiliaId:int}"
 
-<Memorabilia.Blazor.Pages.MemorabiliaItems.Pylons.EditPylon MemorabiliaId="@MemorabiliaId" />
+@inherits MemorabiliaItem
+
+<PageLoader>
+    <Content>
+        <PylonEditor MemorabiliaId="@MemorabiliaId" />
+    </Content>
+</PageLoader>

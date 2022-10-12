@@ -2,16 +2,8 @@
 
 namespace Memorabilia.Blazor.Pages.Admin.HelmetFinishes;
 
-public partial class ViewHelmetFinishes : ComponentBase, IViewDomainItem, IDeleteDomainItem
+public partial class ViewHelmetFinishes : ViewDomainItem<HelmetFinishesViewModel>, IDeleteDomainItem, IViewDomainItem
 {
-    [Inject]
-    public CommandRouter CommandRouter { get; set; }
-
-    [Inject]
-    public QueryRouter QueryRouter { get; set; }
-
-    private HelmetFinishesViewModel ViewModel;
-
     public async Task OnDelete(SaveDomainViewModel viewModel)
     {
         await CommandRouter.Send(new SaveHelmetFinish.Command(viewModel)).ConfigureAwait(false);

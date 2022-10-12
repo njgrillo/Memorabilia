@@ -1,7 +1,9 @@
 ﻿@page "/Memorabilia/Jersey/Edit/{memorabiliaId:int}"
 
-<WebPage>
+@inherits MemorabiliaItem
+
+<PageLoader>
     <Content>
-        <Memorabilia.Blazor.Pages.MemorabiliaItems.Jerseys.EditJersey MemorabiliaId="@MemorabiliaId" />
+        <JerseyEditor MemorabiliaId="@MemorabiliaId" />
     </Content>
-</WebPage>
+</PageLoader>

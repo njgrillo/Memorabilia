@@ -1,3 +1,10 @@
 ﻿@page "/Memorabilia/FirstDayCover/Edit/{memorabiliaId:int}"
 
-<Memorabilia.Blazor.Pages.MemorabiliaItems.FirstDayCovers.EditFirstDayCover MemorabiliaId="@MemorabiliaId" />
+@inherits MemorabiliaItem
+
+<PageLoader>
+    <Content>
+        <FirstDayCoverEditor MemorabiliaId="@MemorabiliaId" />
+    </Content>
+</PageLoader>
+

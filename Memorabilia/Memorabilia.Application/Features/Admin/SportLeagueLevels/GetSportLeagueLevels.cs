@@ -15,7 +15,11 @@ public class GetSportLeagueLevels
 
         protected override async Task<SportLeagueLevelsViewModel> Handle(Query query)
         {
-            return new SportLeagueLevelsViewModel(await _sportLeagueLevelRepository.GetAll());
+            var sportLeagueLevels = (await _sportLeagueLevelRepository.GetAll())
+                                        .OrderBy(sportLeagueLevel => sportLeagueLevel.SportName)
+                                        .ThenBy(sportLeagueLevel => sportLeagueLevel.Name);
+
+            return new SportLeagueLevelsViewModel(sportLeagueLevels);
         }
     }
 

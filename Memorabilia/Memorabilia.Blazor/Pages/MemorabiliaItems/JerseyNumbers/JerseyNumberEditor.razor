@@ -1,0 +1,38 @@
+﻿@inherits MemorabiliaItem<SaveJerseyNumberViewModel>
+
+<EditPage ContinueNavigationPath="@ViewModel.ContinueNavigationPath"
+          EditMode="ViewModel.EditModeType"
+          ExitNavigationPath="@ViewModel.ExitNavigationPath"
+          ImagePath="@ViewModel.ImagePath"
+          ItemName="@ViewModel.ItemType.Name"
+          Model="ViewModel"
+          OnLoad="OnLoad"
+          OnSave="OnSave"
+          PageFooterButtonText="@ViewModel.ExitButtonText"
+          PageFooterNavigationPath="@ViewModel.BackNavigationPath"
+          PageTitle="@ViewModel.PageTitle"
+          TItem="SaveJerseyNumberViewModel"
+          UseMultipleButtons="true">
+    <TimelineContent>
+        <MemorabiliaItemTimeline EditMode="ViewModel.EditModeType"
+                                 ItemTypeName="@ViewModel.ItemType.Name"
+                                 MemorabiliaId="ViewModel.MemorabiliaId"
+                                 MemorabiliaItemStep="ViewModel.MemorabiliaItemStep" />
+    </TimelineContent>
+    <Content>     
+        <PersonSelector CanFilterBySport="true"
+                        CanToggle="true"
+                        ItemType="ViewModel.ItemType"
+                        SelectedPerson="ViewModel.Person"
+                        SelectedPersonChanged="SelectedPersonChanged" />   
+        <SportSelector @bind-Value="@ViewModel.SportId" 
+                       @bind-Value:event="ValueChanged"
+                       CanToggle="true" 
+                       ItemType="ViewModel.ItemType"
+                       SelectedValue="ViewModel.SportId"/> 
+        <TeamSelector CanToggle="true" 
+                      ItemType="ViewModel.ItemType"
+                      SelectedTeam="ViewModel.Team"
+                      SelectedTeamChanged="SelectedTeamChanged" />
+    </Content>
+</EditPage>

@@ -1,7 +1,9 @@
 ﻿@page "/Memorabilia/Baseball/Edit/{memorabiliaId:int}"
 
-<WebPage>
+@inherits MemorabiliaItem
+
+<PageLoader>
     <Content>
-        <Memorabilia.Blazor.Pages.MemorabiliaItems.Baseballs.EditBaseball MemorabiliaId="@MemorabiliaId" />
+        <BaseballEditor MemorabiliaId="@MemorabiliaId" />
     </Content>
-</WebPage>
+</PageLoader>

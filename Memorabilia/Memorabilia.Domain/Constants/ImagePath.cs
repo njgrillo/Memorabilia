@@ -18,7 +18,7 @@ public static class ImagePath
 
     public static string AwardTypes => $"{_images}awardtypes.jpg";
 
-    public static string Bammer => $"{_images}bammer.jpg";
+    public static string Bammer => $"{_images}bammertypes.jpg";
 
     public static string BaseballTypes => $"{_images}baseballtypes.jpg";
 
@@ -64,7 +64,7 @@ public static class ImagePath
 
     public static string Drum => $"{_images}drum.jpg";
 
-    public static string Figure => $"{_images}figure.jpg";
+    public static string Figure => $"{_images}figuretypes.jpg";
 
     public static string FigureSpecialtyTypes => $"{_images}figurespecialtytypes.jpg";
 
@@ -76,9 +76,7 @@ public static class ImagePath
 
     public static string FranchiseHallOfFameTypes => $"{_images}franchisehalloffametypes.jpg";
 
-    public static string Franchises => $"{_images}franchises.jpg";
-
-    public static string FullSizeHelmetTypes => $"{_images}fullsizehelmettypes.jpg";
+    public static string Franchises => $"{_images}franchises.jpg";    
 
     public static string GameStyleTypes => $"{_images}gamestyletypes.jpg";
 
@@ -96,6 +94,10 @@ public static class ImagePath
 
     public static string Helmet => $"{_images}helmet.jpg";
 
+    public static string HelmetFinishes => $"{_images}helmetfinishs.jpg";
+
+    public static string HelmetQualityTypes => $"{_images}helmetqualitytypes.jpg";
+
     public static string HelmetTypes => $"{_images}helmettypes.jpg";
 
     public static string HockeyStick => $"{_images}hockeystick.jpg";
@@ -104,7 +106,7 @@ public static class ImagePath
 
     public static string Images => $"{_images}images.png";
 
-    public static string ImageTypes => $"{_images}imagetypes.png";
+    public static string ImageTypes => $"{_images}imagetypes.jpg";
 
     public static string IndexCard => $"{_images}indexcard.jpg";
 
@@ -132,9 +134,7 @@ public static class ImagePath
 
     public static string Magazine => $"{_images}magazine.jpg";
 
-    public static string MagazineTypes => $"{_images}magazinetypes.jpg";
-
-    public static string MiniHelmet => $"{_images}minihelmets.jpg";
+    public static string MagazineTypes => $"{_images}magazinetypes.jpg";   
 
     public static string Occupations => $"{_images}occupations.jpg";
 
@@ -156,19 +156,25 @@ public static class ImagePath
 
     public static string PriorityTypes => $"{_images}prioritytypes.jpg";
 
-    public static string PrivacyTypes => $"{_images}privacy.png";
+    public static string PrivacyTypes => $"{_images}privacytypes.jpg";
 
     public static string Projects => $"{_images}projects.jpg";
 
     public static string Puck => $"{_images}puck.jpg";
 
-    public static string PurchaseTypes => $"{_images}purchasetypes.png";
+    public static string PurchaseTypes => $"{_images}purchasetypes.jpg";
 
     public static string Pylon => $"{_images}pylon.jpg";
 
     public static string RecordTypes => $"{_images}recordtypes.jpg";
 
+    public static string Shirt => $"{_images}shirt.jpg";
+
+    public static string Shoe => $"{_images}shoe.jpg";
+
     public static string Sizes => $"{_images}sizes.jpg";
+
+    public static string Soccerball => $"{_images}soccerball.jpg";
 
     public static string SportLeagueLevels => $"{_images}sportleaguelevels.jpg";
 
@@ -180,7 +186,17 @@ public static class ImagePath
 
     public static string Teams => $"{_images}teams.jpg";
 
+    public static string Tennisball => $"{_images}tennisball.jpg";
+
+    public static string TennisRacket => $"{_images}tennisracket.jpg";
+
+    public static string Ticket => $"{_images}ticket.jpg";
+
     public static string TradingCard => $"{_images}tradingcard.jpg";
+
+    public static string Trunks => $"{_images}trunks.jpg";
+
+    public static string WristBand => $"{_images}wristband.jpg";
 
     public static string WritingInstruments => $"{_images}writinginstruments.jpg";
 }

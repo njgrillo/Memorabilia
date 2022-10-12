@@ -1,38 +1,37 @@
 ﻿#nullable disable
 
-namespace Memorabilia.Blazor.Controls
+namespace Memorabilia.Blazor.Controls;
+
+public partial class DomainItems : ComponentBase
 {
-    public partial class DomainItems : ComponentBase
+    [Parameter]
+    public DomainsViewModel Items
     {
-        [Parameter]
-        public DomainsViewModel Items
+        get
         {
-            get
-            {
-                return _viewModel;
-            }
-            set
-            {
-                _viewModel = value;
-            }
+            return _viewModel;
         }
-
-        [Parameter]
-        public EventCallback<SaveDomainViewModel> OnDelete { get; set; }
-
-        [Parameter]
-        public EventCallback OnLoad { get; set; }
-
-        private DomainsViewModel _viewModel;
-
-        protected async Task Delete(SaveDomainViewModel viewModel)
+        set
         {
-            await OnDelete.InvokeAsync(viewModel).ConfigureAwait(false);
+            _viewModel = value;
         }
+    }
 
-        protected async Task Load()
-        {
-            await OnLoad.InvokeAsync().ConfigureAwait(false);
-        }
+    [Parameter]
+    public EventCallback<SaveDomainViewModel> OnDelete { get; set; }
+
+    [Parameter]
+    public EventCallback OnLoad { get; set; }
+
+    private DomainsViewModel _viewModel;
+
+    protected async Task Delete(SaveDomainViewModel viewModel)
+    {
+        await OnDelete.InvokeAsync(viewModel).ConfigureAwait(false);
+    }
+
+    protected async Task Load()
+    {
+        await OnLoad.InvokeAsync().ConfigureAwait(false);
     }
 }

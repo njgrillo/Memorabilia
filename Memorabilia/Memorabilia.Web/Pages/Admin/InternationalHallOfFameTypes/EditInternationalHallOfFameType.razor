@@ -1,5 +1,9 @@
 ﻿@page "/InternationalHallOfFameTypes/Edit/{id:int}"
 
-<EditDomainItem Item="_viewModel"
-                OnLoad="OnLoad"
-                OnSave="OnSave" />
+@inherits EditItem
+
+<PageLoader>
+    <Content>
+        <InternationalHallOfFameTypeEditor Id=@Id />
+    </Content>
+</PageLoader>

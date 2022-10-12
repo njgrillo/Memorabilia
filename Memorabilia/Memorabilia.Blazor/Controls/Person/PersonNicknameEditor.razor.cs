@@ -1,32 +1,31 @@
 ﻿#nullable disable
 
-namespace Memorabilia.Blazor.Controls.Person
+namespace Memorabilia.Blazor.Controls.Person;
+
+public partial class PersonNicknameEditor : ComponentBase
 {
-    public partial class PersonNicknameEditor : ComponentBase
+    [Parameter]
+    public List<SavePersonNicknameViewModel> Nicknames { get; set; } = new();
+
+    private SavePersonNicknameViewModel _viewModel = new();
+
+    private void Add()
     {
-        [Parameter]
-        public List<SavePersonNicknameViewModel> Nicknames { get; set; } = new();
+        if (_viewModel.Nickname.IsNullOrEmpty())
+            return;
 
-        private SavePersonNicknameViewModel _viewModel = new();
+        Nicknames.Add(_viewModel);
 
-        private void Add()
-        {
-            if (_viewModel.Nickname.IsNullOrEmpty())
-                return;
+        _viewModel = new SavePersonNicknameViewModel();
+    }
 
-            Nicknames.Add(_viewModel);
+    private void Remove(string nickname)
+    {
+        var existingNickname = Nicknames.SingleOrDefault(personNickname => personNickname.Nickname == nickname);
 
-            _viewModel = new SavePersonNicknameViewModel();
-        }
+        if (existingNickname == null)
+            return;
 
-        private void Remove(string nickname)
-        {
-            var existingNickname = Nicknames.SingleOrDefault(personNickname => personNickname.Nickname == nickname);
-
-            if (existingNickname == null)
-                return;
-
-            existingNickname.IsDeleted = true;
-        }
+        existingNickname.IsDeleted = true;
     }
 }

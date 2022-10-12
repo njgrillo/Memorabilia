@@ -1,8 +1,10 @@
 ﻿@page "/Memorabilia/Dashboard"
 
-<WebPage>
+@inherits WebPage
+
+<PageLoader>
     <Content>
         <ViewDashboard UserId="@UserId" />
     </Content>
-</WebPage>
+</PageLoader>
 

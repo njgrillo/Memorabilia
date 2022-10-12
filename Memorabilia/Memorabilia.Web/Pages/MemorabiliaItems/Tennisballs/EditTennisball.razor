@@ -1,3 +1,9 @@
 ﻿@page "/Memorabilia/Tennisball/Edit/{memorabiliaId:int}"
 
-<Memorabilia.Blazor.Pages.MemorabiliaItems.Tennisballs.EditTennisball MemorabiliaId="@MemorabiliaId" />
+@inherits MemorabiliaItem
+
+<PageLoader>
+    <Content>
+        <TennisballEditor MemorabiliaId="@MemorabiliaId" />
+    </Content>
+</PageLoader>

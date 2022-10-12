@@ -1,34 +1,9 @@
 ﻿@page "/Admin/EditDomainItems"
 
-<Page OnLoad="OnLoad"
-      UserId="@UserId">
-    <Content>  
-        <div class="row">
-            <div class="col-md-4">
-                <DivPad5>
-                    <Content>
-                        <MudTextField @bind-Value="_domainItemQuickJump" 
-                                      Label="Quick Jump" 
-                                      Variant="Variant.Outlined" />
-                        <br />
-                        <MudButton ButtonType="MudBlazor.ButtonType.Button" 
-                                   Color="MudBlazor.Color.Primary"
-                                   OnClick="QuickJump"
-                                   Size="MudBlazor.Size.Small"                                  
-                                   Variant="Variant.Filled">Go</MudButton>                 
-                    </Content>                    
-                </DivPad5>                
-            </div>
-        </div>
-        <div class="row">
-            <Iterations Items="_viewModel.Items" Context="item">                
-                <div class="col-md-4">
-                    <DomainItemCard Description="@item.Description"
-                                    ImagePath="@item.ImagePath"
-                                    Page="@item.Page"
-                                    Title="@item.Title" />
-                </div>  
-            </Iterations>
-        </div>
+@inherits WebPage
+
+<PageLoader>
+    <Content>
+        <DomainItemNavigator OnNavigate="OnNavigate" />
     </Content>
-</Page>
+</PageLoader>

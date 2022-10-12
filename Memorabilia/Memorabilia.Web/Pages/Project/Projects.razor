@@ -1,7 +1,9 @@
 ﻿@page "/Projects"
 
-<WebPage>
+@inherits WebPage
+
+<PageLoader>
     <Content>
         <ViewProjects UserId="@UserId" />
     </Content>
-</WebPage>
+</PageLoader>

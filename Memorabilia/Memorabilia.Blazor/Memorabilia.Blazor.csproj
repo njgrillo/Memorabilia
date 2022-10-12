@@ -61,8 +61,8 @@
     <None Include="Pages\Admin\ItemTypeSports\ViewItemTypeSports.razor" />
     <None Include="Pages\Admin\ItemTypeSpots\ItemTypeSpotsEditor.razor" />
     <None Include="Pages\Admin\ItemTypeSpots\ViewItemTypeSpots.razor" />
-    <None Include="Pages\Admin\JerseyQualityType\JerseyQualityTypeEditor.razor" />
-    <None Include="Pages\Admin\JerseyQualityType\ViewJerseyQualityTypes.razor" />
+    <None Include="Pages\Admin\JerseyQualityTypes\JerseyQualityTypeEditor.razor" />
+    <None Include="Pages\Admin\JerseyQualityTypes\ViewJerseyQualityTypes.razor" />
     <None Include="Pages\Admin\JerseyStyleTypes\JerseyStyleTypeEditor.razor" />
     <None Include="Pages\Admin\JerseyStyleTypes\ViewJerseyStyleTypes.razor" />
     <None Include="Pages\Admin\JerseyTypes\JerseyTypeEditor.razor" />

@@ -1,9 +1,7 @@
-﻿#nullable disable
-
-namespace Memorabilia.Blazor.Pages.Admin.LeaderTypes;
+﻿namespace Memorabilia.Blazor.Pages.Admin.LeaderTypes;
 
 public partial class LeaderTypeEditor : EditDomainItem<LeaderType>, IEditDomainItem
-{   
+{
     public async Task OnLoad()
     {
         await OnLoad(new GetLeaderType.Query(Id));

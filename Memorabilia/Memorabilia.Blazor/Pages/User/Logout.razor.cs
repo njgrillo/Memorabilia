@@ -1,20 +1,19 @@
 ﻿#nullable disable 
 
-namespace Memorabilia.Blazor.Pages.User
-{
-    public partial class Logout : ComponentBase
-    {   
-        [Inject]
-        public NavigationManager NavigationManager { get; set; }
+namespace Memorabilia.Blazor.Pages.User;
 
-        [Parameter]
-        public EventCallback LoggedOut { get; set; }
+public partial class Logout : ComponentBase
+{   
+    [Inject]
+    public NavigationManager NavigationManager { get; set; }
 
-        protected async Task OnLoad()
-        {
-            NavigationManager.NavigateTo("Login");
+    [Parameter]
+    public EventCallback LoggedOut { get; set; }
 
-            await LoggedOut.InvokeAsync().ConfigureAwait(false);
-        }
+    protected async Task OnLoad()
+    {
+        NavigationManager.NavigateTo("Login");
+
+        await LoggedOut.InvokeAsync().ConfigureAwait(false);
     }
 }

@@ -1,3 +1,11 @@
 ﻿@page "/Memorabilia/Document/Edit/{memorabiliaId:int}"
 
-<Memorabilia.Blazor.Pages.MemorabiliaItems.Documents.EditDocument MemorabiliaId="@MemorabiliaId" />
+@inherits MemorabiliaItem
+
+<PageLoader>
+    <Content>
+        <DocumentEditor MemorabiliaId="@MemorabiliaId" />
+    </Content>
+</PageLoader>
+
+

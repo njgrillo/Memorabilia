@@ -1,56 +1,55 @@
 ﻿#nullable disable
 
-namespace Memorabilia.Blazor.Controls.Person
+namespace Memorabilia.Blazor.Controls.Person;
+
+public partial class PersonInternationalHallOfFameEditor : ComponentBase
 {
-    public partial class PersonInternationalHallOfFameEditor : ComponentBase
+    [Parameter]
+    public List<SavePersonInternationalHallOfFameViewModel> InternationalHallOfFames { get; set; } = new();
+
+    private bool _canAdd = true;
+    private bool _canEditInternationalHallOfFameType = true;
+    private bool _canUpdate;
+    private SavePersonInternationalHallOfFameViewModel _viewModel = new();
+
+    private void Add()
     {
-        [Parameter]
-        public List<SavePersonInternationalHallOfFameViewModel> InternationalHallOfFames { get; set; } = new();
+        InternationalHallOfFames.Add(_viewModel);
 
-        private bool _canAdd = true;
-        private bool _canEditInternationalHallOfFameType = true;
-        private bool _canUpdate;
-        private SavePersonInternationalHallOfFameViewModel _viewModel = new();
+        _viewModel = new SavePersonInternationalHallOfFameViewModel();
+    }
 
-        private void Add()
-        {
-            InternationalHallOfFames.Add(_viewModel);
+    private void Edit(SavePersonInternationalHallOfFameViewModel hallOfFame)
+    {
+        _viewModel.InternationalHallOfFameTypeId = hallOfFame.InternationalHallOfFameTypeId;
+        _viewModel.Year = hallOfFame.Year;
 
-            _viewModel = new SavePersonInternationalHallOfFameViewModel();
-        }
+        _canAdd = false;
+        _canEditInternationalHallOfFameType = false;
+        _canUpdate = true;
+    }
 
-        private void Edit(SavePersonInternationalHallOfFameViewModel hallOfFame)
-        {
-            _viewModel.InternationalHallOfFameTypeId = hallOfFame.InternationalHallOfFameTypeId;
-            _viewModel.Year = hallOfFame.Year;
+    private void Remove(int internationalHallOfFameTypeId)
+    {
+        var hallOfFame = InternationalHallOfFames.SingleOrDefault(hallOfFame => hallOfFame.InternationalHallOfFameTypeId == internationalHallOfFameTypeId);
 
-            _canAdd = false;
-            _canEditInternationalHallOfFameType = false;
-            _canUpdate = true;
-        }
+        if (hallOfFame == null)
+            return;
 
-        private void Remove(int internationalHallOfFameTypeId)
-        {
-            var hallOfFame = InternationalHallOfFames.SingleOrDefault(hallOfFame => hallOfFame.InternationalHallOfFameTypeId == internationalHallOfFameTypeId);
+        hallOfFame.IsDeleted = true;
+    }
 
-            if (hallOfFame == null)
-                return;
+    private void Update()
+    {
+        var hallOfFame = InternationalHallOfFames.Single(hof => hof.InternationalHallOfFameTypeId == _viewModel.InternationalHallOfFameTypeId);
 
-            hallOfFame.IsDeleted = true;
-        }
+        hallOfFame.InternationalHallOfFameTypeId = _viewModel.InternationalHallOfFameTypeId;
+        hallOfFame.Year = _viewModel.Year;
 
-        private void Update()
-        {
-            var hallOfFame = InternationalHallOfFames.Single(hof => hof.InternationalHallOfFameTypeId == _viewModel.InternationalHallOfFameTypeId);
+        _viewModel = new SavePersonInternationalHallOfFameViewModel();
 
-            hallOfFame.InternationalHallOfFameTypeId = _viewModel.InternationalHallOfFameTypeId;
-            hallOfFame.Year = _viewModel.Year;
-
-            _viewModel = new SavePersonInternationalHallOfFameViewModel();
-
-            _canAdd = true;
-            _canEditInternationalHallOfFameType = true;
-            _canUpdate = false;
-        }
+        _canAdd = true;
+        _canEditInternationalHallOfFameType = true;
+        _canUpdate = false;
     }
 }

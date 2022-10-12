@@ -24,7 +24,7 @@ public class SaveHatViewModel : SaveItemViewModel
 
     [Required]
     [Range(1, int.MaxValue, ErrorMessage = "Brand is required.")]
-    public int BrandId { get; set; }
+    public int BrandId { get; set; } = Brand.NewEra.Id;
 
     public bool DisplayGameDate => GameStyleType == GameStyleType.GameUsed;
 
@@ -38,7 +38,7 @@ public class SaveHatViewModel : SaveItemViewModel
 
     public GameStyleType GameStyleType => GameStyleType.Find(GameStyleTypeId);
 
-    public int GameStyleTypeId { get; set; }
+    public int GameStyleTypeId { get; set; } = GameStyleType.None.Id;
 
     public override string ImagePath => Domain.Constants.ImagePath.Hat;
 
@@ -46,13 +46,13 @@ public class SaveHatViewModel : SaveItemViewModel
 
     [Required]
     [Range(1, int.MaxValue, ErrorMessage = "Level is required.")]
-    public int LevelTypeId { get; set; }
+    public int LevelTypeId { get; set; } = LevelType.Professional.Id;
 
     public List<SavePersonViewModel> People { get; set; } = new();
 
     [Required]
     [Range(1, int.MaxValue, ErrorMessage = "Size is required.")]
-    public int SizeId { get; set; }
+    public int SizeId { get; set; } = Size.Other.Id;
 
     public int SportId { get; set; } 
 

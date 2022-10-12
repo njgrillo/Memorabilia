@@ -27,9 +27,7 @@ public class SaveJerseyNumberViewModel : SaveItemViewModel
     public override string ImagePath => Domain.Constants.ImagePath.JerseyNumber;
 
     public override ItemType ItemType => ItemType.JerseyNumber;
-
-    public override string PageTitle => $"{(EditModeType == EditModeType.Update ? EditModeType.Update.Name : EditModeType.Add.Name)} {ItemType.JerseyNumber.Name} Details";
-
+   
     public SavePersonViewModel Person { get; set; }
 
     public int SportId { get; set; }

@@ -1,5 +1,7 @@
 ﻿@page "/Memorabilia/Image/Edit/{memorabiliaId:int}"
 
-<Memorabilia.Blazor.Pages.MemorabiliaItems.Images.EditMemorabiliaImage MemorabiliaId="@MemorabiliaId"
-                                                                       UploadPath="@UploadPath"
-                                                                       UserId="@UserId" />
+@inherits WebPage
+
+<MemorabiliaImageEditor MemorabiliaId="@MemorabiliaId"
+                        UploadPath="@UploadPath"
+                        UserId="@UserId" />

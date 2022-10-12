@@ -1,32 +1,31 @@
 ﻿#nullable disable
 
-namespace Memorabilia.Blazor.Controls.Person
+namespace Memorabilia.Blazor.Controls.Person;
+
+public partial class PersonSportEditor : ComponentBase
 {
-    public partial class PersonSportEditor : ComponentBase
+    [Parameter]
+    public List<SavePersonSportViewModel> Sports { get; set; } = new();
+
+    private SavePersonSportViewModel _viewModel = new();
+
+    private void Add()
     {
-        [Parameter]
-        public List<SavePersonSportViewModel> Sports { get; set; } = new();
+        if (_viewModel.SportId == 0)
+            return;
 
-        private SavePersonSportViewModel _viewModel = new();
+        Sports.Add(_viewModel);
 
-        private void Add()
-        {
-            if (_viewModel.SportId == 0)
-                return;
+        _viewModel = new SavePersonSportViewModel();
+    }
 
-            Sports.Add(_viewModel);
+    private void Remove(int SportId)
+    {
+        var sport = Sports.SingleOrDefault(sport => sport.SportId == SportId);
 
-            _viewModel = new SavePersonSportViewModel();
-        }
+        if (sport == null)
+            return;
 
-        private void Remove(int SportId)
-        {
-            var sport = Sports.SingleOrDefault(sport => sport.SportId == SportId);
-
-            if (sport == null)
-                return;
-
-            sport.IsDeleted = true;
-        }
+        sport.IsDeleted = true;
     }
 }

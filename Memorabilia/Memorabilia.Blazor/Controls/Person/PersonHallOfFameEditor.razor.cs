@@ -1,74 +1,73 @@
 ﻿#nullable disable
 
-namespace Memorabilia.Blazor.Controls.Person
+namespace Memorabilia.Blazor.Controls.Person;
+
+public partial class PersonHallOfFameEditor : ComponentBase
 {
-    public partial class PersonHallOfFameEditor : ComponentBase
+    [Parameter]
+    public List<SavePersonHallOfFameViewModel> HallOfFames { get; set; } = new();
+
+    [Parameter]
+    public SportLeagueLevel[] SportLeagueLevels { get; set; } = SportLeagueLevel.All;
+
+    private bool _canAddHallOfFame = true;
+    private bool _canEditSportLeagueLevel = true;
+    private bool _canUpdateHallOfFame;
+    private SavePersonHallOfFameViewModel _viewModel = new();
+
+    protected override void OnInitialized()
     {
-        [Parameter]
-        public List<SavePersonHallOfFameViewModel> HallOfFames { get; set; } = new();
+        if (SportLeagueLevels.Count() == 1)
+            _viewModel.SportLeagueLevelId = SportLeagueLevels.First().Id;
+    }
 
-        [Parameter]
-        public SportLeagueLevel[] SportLeagueLevels { get; set; } = SportLeagueLevel.All;
+    private void Add()
+    {
+        HallOfFames.Add(_viewModel);
 
-        private bool _canAddHallOfFame = true;
-        private bool _canEditSportLeagueLevel = true;
-        private bool _canUpdateHallOfFame;
-        private SavePersonHallOfFameViewModel _viewModel = new();
+        _viewModel = new SavePersonHallOfFameViewModel();
 
-        protected override void OnInitialized()
-        {
-            if (SportLeagueLevels.Count() == 1)
-                _viewModel.SportLeagueLevelId = SportLeagueLevels.First().Id;
-        }
+        if (SportLeagueLevels.Count() == 1)
+            _viewModel.SportLeagueLevelId = SportLeagueLevels.First().Id;
+    }
 
-        private void Add()
-        {
-            HallOfFames.Add(_viewModel);
+    private void Edit(SavePersonHallOfFameViewModel hallOfFame)
+    {
+        _viewModel.BallotNumber = hallOfFame.BallotNumber;
+        _viewModel.InductionYear = hallOfFame.InductionYear;
+        _viewModel.SportLeagueLevelId = hallOfFame.SportLeagueLevelId;
+        _viewModel.VotePercentage = hallOfFame.VotePercentage;
 
-            _viewModel = new SavePersonHallOfFameViewModel();
+        _canAddHallOfFame = false;
+        _canEditSportLeagueLevel = false;
+        _canUpdateHallOfFame = true;
+    }
 
-            if (SportLeagueLevels.Count() == 1)
-                _viewModel.SportLeagueLevelId = SportLeagueLevels.First().Id;
-        }
+    private void Remove(int sportLeagueLevelId)
+    {
+        var hallOfFame = HallOfFames.SingleOrDefault(hallOfFame => hallOfFame.SportLeagueLevelId == sportLeagueLevelId);
 
-        private void Edit(SavePersonHallOfFameViewModel hallOfFame)
-        {
-            _viewModel.BallotNumber = hallOfFame.BallotNumber;
-            _viewModel.InductionYear = hallOfFame.InductionYear;
-            _viewModel.SportLeagueLevelId = hallOfFame.SportLeagueLevelId;
-            _viewModel.VotePercentage = hallOfFame.VotePercentage;
+        if (hallOfFame == null)
+            return;
 
-            _canAddHallOfFame = false;
-            _canEditSportLeagueLevel = false;
-            _canUpdateHallOfFame = true;
-        }
+        hallOfFame.IsDeleted = true;
+    }
 
-        private void Remove(int sportLeagueLevelId)
-        {
-            var hallOfFame = HallOfFames.SingleOrDefault(hallOfFame => hallOfFame.SportLeagueLevelId == sportLeagueLevelId);
+    private void Update()
+    {
+        var hallOfFame = HallOfFames.Single(hof => hof.SportLeagueLevelId == _viewModel.SportLeagueLevelId);
 
-            if (hallOfFame == null)
-                return;
+        hallOfFame.BallotNumber = _viewModel.BallotNumber;
+        hallOfFame.InductionYear = _viewModel.InductionYear;
+        hallOfFame.VotePercentage = _viewModel.VotePercentage;
 
-            hallOfFame.IsDeleted = true;
-        }
+        _viewModel = new SavePersonHallOfFameViewModel();
 
-        private void Update()
-        {
-            var hallOfFame = HallOfFames.Single(hof => hof.SportLeagueLevelId == _viewModel.SportLeagueLevelId);
+        _canAddHallOfFame = true;
+        _canEditSportLeagueLevel = true;
+        _canUpdateHallOfFame = false;
 
-            hallOfFame.BallotNumber = _viewModel.BallotNumber;
-            hallOfFame.InductionYear = _viewModel.InductionYear;
-            hallOfFame.VotePercentage = _viewModel.VotePercentage;
-
-            _viewModel = new SavePersonHallOfFameViewModel();
-
-            _canAddHallOfFame = true;
-            _canEditSportLeagueLevel = true;
-            _canUpdateHallOfFame = false;
-
-            if (SportLeagueLevels.Count() == 1)
-                _viewModel.SportLeagueLevelId = SportLeagueLevels.First().Id;
-        }
+        if (SportLeagueLevels.Count() == 1)
+            _viewModel.SportLeagueLevelId = SportLeagueLevels.First().Id;
     }
 }

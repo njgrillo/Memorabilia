@@ -6,6 +6,8 @@ public abstract class DomainItemConstant
 
     public int Id { get; }
 
+    public string ImagePath { get; }
+
     public string Name { get; }
 
     public DomainItemConstant(int id, string name, string abbreviation = null)

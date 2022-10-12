@@ -1,0 +1,73 @@
+﻿@inherits MemorabiliaItem<SavePaintingViewModel>
+
+<EditPage ContinueNavigationPath="@ViewModel.ContinueNavigationPath"
+          EditMode="ViewModel.EditModeType"
+          ExitNavigationPath="@ViewModel.ExitNavigationPath"
+          ImagePath="@ViewModel.ImagePath"
+          ItemName="@ViewModel.ItemType.Name"
+          Model="ViewModel"
+          OnLoad="OnLoad"
+          OnSave="OnSave"
+          PageFooterButtonText="@ViewModel.ExitButtonText"
+          PageFooterNavigationPath="@ViewModel.ExitNavigationPath"
+          PageTitle="@ViewModel.PageTitle"
+          TItem="SavePaintingViewModel"
+          UseMultipleButtons="true">
+    <TimelineContent>
+        <MemorabiliaItemTimeline EditMode="ViewModel.EditModeType"
+                                 ItemTypeName="@ViewModel.ItemType.Name"
+                                 MemorabiliaId="ViewModel.MemorabiliaId"
+                                 MemorabiliaItemStep="ViewModel.MemorabiliaItemStep" />
+    </TimelineContent>
+    <Content>
+        <DivRowCol3>
+            <Content>
+                <ItemTypeBrandDropDown @bind-Value="@ViewModel.BrandId" 
+                                       @bind-Value:event="ValueChanged"
+                                       ItemType="ViewModel.ItemType"
+                                       SelectedValue="ViewModel.BrandId" />
+            </Content>
+            <ContentColumn2>
+                <ItemTypeSizeDropDown @bind-Value="@ViewModel.SizeId"
+                                      @bind-Value:event="ValueChanged" 
+                                      ItemType="ViewModel.ItemType"
+                                      SelectedValue="@ViewModel.SizeId" /> 
+            </ContentColumn2>
+        </DivRowCol3>
+        <DivRowCol3>
+            <Content>
+                <MudSelect @bind-Value="@ViewModel.OrientationId"
+                           @bind-Value:event="ValueChanged" 
+                           Label="Orientation"
+                           Variant="Variant.Outlined">
+                    <MudSelectItem Value="@(0)">--Select--</MudSelectItem>
+                    <Iterations Items="ViewModel.Orientations" Context="orientation">
+                        <MudSelectItem Value="@orientation.Id">@orientation.Name</MudSelectItem>
+                    </Iterations>	
+                </MudSelect>
+            </Content>
+        </DivRowCol3>
+        <DivRowCol3>
+            <Content>
+                <MudCheckBox @bind-Checked="@ViewModel.Framed" 
+                             Label="Framed" />
+            </Content>
+        </DivRowCol3>
+        <DivRowCol3>
+            <Content>
+                <MudCheckBox @bind-Checked="@ViewModel.Matted" 
+                             Label="Matted" />
+            </Content>
+        </DivRowCol3>
+        <MultiPersonSelector CanToggle="true"
+                             ItemType="ViewModel.ItemType"
+                             People="ViewModel.People" />   
+        <MultiSportSelector CanToggle="true"
+                            ItemType="ViewModel.ItemType"
+                            SelectedSportIdsChanged="SelectedSportIdsChanged"
+                            SportIds="ViewModel.SportIds" /> 
+        <MultiTeamSelector CanToggle="true" 
+                           ItemType="ViewModel.ItemType"
+                           Teams="ViewModel.Teams" />
+    </Content>
+</EditPage>

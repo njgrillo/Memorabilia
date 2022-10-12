@@ -1,7 +1,9 @@
 ﻿@page "/Autographs/Spot/Edit/{autographId:int}"
 
-<WebPage>
+@inherits AutographItem
+
+<PageLoader>
     <Content>
-        <Memorabilia.Blazor.Pages.Autograph.Spots.EditSpot AutographId="@AutographId" />
+        <SpotsEditor AutographId="@AutographId" />
     </Content>
-</WebPage>
+</PageLoader>

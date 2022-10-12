@@ -1,3 +1,10 @@
 ﻿@page "/Memorabilia/Lithograph/Edit/{memorabiliaId:int}"
 
-<Memorabilia.Blazor.Pages.MemorabiliaItems.Lithographs.EditLithograph MemorabiliaId="@MemorabiliaId" />
+@inherits MemorabiliaItem
+
+<PageLoader>
+    <Content>
+        <LithographEditor MemorabiliaId="@MemorabiliaId" />
+    </Content>
+</PageLoader>
+

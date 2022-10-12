@@ -1,11 +1,7 @@
-﻿namespace Memorabilia.Web.Pages.Autograph
-{
-    public partial class EditAutograph : ComponentBase
-    {
-        [Parameter]
-        public int AutographId { get; set; }     
+﻿namespace Memorabilia.Web.Pages.Autograph;
 
-        [Parameter]
-        public int MemorabiliaId { get; set; }    
-    }
+public partial class EditAutograph : AutographItem
+{ 
+    [Parameter]
+    public int MemorabiliaId { get; set; }    
 }

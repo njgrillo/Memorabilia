@@ -2,16 +2,8 @@
 
 namespace Memorabilia.Blazor.Pages.Admin.ChampionTypes;
 
-public partial class ViewChampionTypes : IViewDomainItem, IDeleteDomainItem
+public partial class ViewChampionTypes : ViewDomainItem<ChampionTypesViewModel>, IDeleteDomainItem, IViewDomainItem
 {
-    [Inject]
-    public CommandRouter CommandRouter { get; set; }
-
-    [Inject]
-    public QueryRouter QueryRouter { get; set; }
-
-    private ChampionTypesViewModel ViewModel;
-
     public async Task OnDelete(SaveDomainViewModel viewModel)
     {
         await CommandRouter.Send(new SaveChampionType.Command(viewModel)).ConfigureAwait(false);

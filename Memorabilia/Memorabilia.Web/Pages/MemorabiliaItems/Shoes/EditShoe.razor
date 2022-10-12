@@ -1,3 +1,9 @@
 ﻿@page "/Memorabilia/Shoe/Edit/{memorabiliaId:int}"
 
-<Memorabilia.Blazor.Pages.MemorabiliaItems.Shoes.EditShoe MemorabiliaId="@MemorabiliaId" />
+@inherits MemorabiliaItem
+
+<PageLoader>
+    <Content>
+        <ShoeEditor MemorabiliaId="@MemorabiliaId" />
+    </Content>
+</PageLoader>

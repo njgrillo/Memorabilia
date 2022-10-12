@@ -23,8 +23,6 @@ public class SaveCompactDiscViewModel : SaveItemViewModel
     public override string ImagePath => Domain.Constants.ImagePath.CompactDisc;
 
     public override ItemType ItemType => ItemType.CompactDisc;
-
-    public override string PageTitle => $"{(EditModeType == EditModeType.Update ? EditModeType.Update.Name : EditModeType.Add.Name)} {ItemType.CompactDisc.Name} Details";
-
+  
     public List<SavePersonViewModel> People { get; set; } = new();
 }

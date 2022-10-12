@@ -1,4 +1,12 @@
 ﻿@page "/Memorabilia/JerseyNumber/Edit/{memorabiliaId:int}"
 @page "/Memorabilia/Jersey Number/Edit/{memorabiliaId:int}"
 
-<Memorabilia.Blazor.Pages.MemorabiliaItems.JerseyNumbers.EditJerseyNumber MemorabiliaId="@MemorabiliaId" />
+@inherits MemorabiliaItem
+
+<PageLoader>
+    <Content>
+        <JerseyNumberEditor MemorabiliaId="@MemorabiliaId" />
+    </Content>
+</PageLoader>
+
+

@@ -1,7 +1,9 @@
 ﻿@page "/Memorabilia/Items"
 
-<WebPage>
+@inherits WebPage
+
+<PageLoader>
     <Content>
         <ViewItems UserId="@UserId" />
     </Content>
-</WebPage>
+</PageLoader>

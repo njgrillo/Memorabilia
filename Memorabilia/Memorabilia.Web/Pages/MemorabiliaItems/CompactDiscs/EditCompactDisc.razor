@@ -1,4 +1,11 @@
 ﻿@page "/Memorabilia/CompactDisc/Edit/{memorabiliaId:int}"
 @page "/Memorabilia/Compact Disc/Edit/{memorabiliaId:int}"
 
-<Memorabilia.Blazor.Pages.MemorabiliaItems.CompactDiscs.EditCompactDisc MemorabiliaId="@MemorabiliaId" />
+@inherits MemorabiliaItem
+
+<PageLoader>
+    <Content>
+        <CompactDiscEditor MemorabiliaId="@MemorabiliaId" />
+    </Content>
+</PageLoader>
+

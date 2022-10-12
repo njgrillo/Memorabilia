@@ -35,23 +35,21 @@ public class SaveTicketViewModel : SaveItemViewModel
 
     public GameStyleType GameStyleType => GameStyleType.Find(GameStyleTypeId);
 
-    public int GameStyleTypeId { get; set; }
+    public int GameStyleTypeId { get; set; } = GameStyleType.None.Id;
 
-    public override string ImagePath => "images/ticket.jpg";
+    public override string ImagePath => Domain.Constants.ImagePath.Ticket;
 
     public override ItemType ItemType => ItemType.Ticket;
 
     [Required]
     [Range(1, int.MaxValue, ErrorMessage = "Level is required.")]
-    public int LevelTypeId { get; set; }
-
-    public override string PageTitle => $"{(EditModeType == EditModeType.Update ? EditModeType.Update.Name : EditModeType.Add.Name)} {ItemType.Ticket.Name} Details";
+    public int LevelTypeId { get; set; } = LevelType.Professional.Id;
 
     public SavePersonViewModel Person { get; set; }
 
     [Required]
     [Range(1, int.MaxValue, ErrorMessage = "Size is required.")]
-    public int SizeId { get; set; }
+    public int SizeId { get; set; } = Size.Standard.Id;
 
     public int SportId { get; set; } 
 

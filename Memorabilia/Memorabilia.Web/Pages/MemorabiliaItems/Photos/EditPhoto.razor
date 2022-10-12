@@ -1,7 +1,9 @@
 ﻿@page "/Memorabilia/Photo/Edit/{memorabiliaId:int}"
 
-<WebPage>
+@inherits MemorabiliaItem
+
+<PageLoader>
     <Content>
-        <Memorabilia.Blazor.Pages.MemorabiliaItems.Photos.EditPhoto MemorabiliaId="@MemorabiliaId" />
+        <PhotoEditor MemorabiliaId="@MemorabiliaId" />
     </Content>
-</WebPage>
+</PageLoader>

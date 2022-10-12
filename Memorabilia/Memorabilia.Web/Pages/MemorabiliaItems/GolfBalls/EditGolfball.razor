@@ -1,3 +1,11 @@
 ﻿@page "/Memorabilia/Golfball/Edit/{memorabiliaId:int}"
 
-<Memorabilia.Blazor.Pages.MemorabiliaItems.GolfBalls.EditGolfball MemorabiliaId="@MemorabiliaId" />
+@inherits MemorabiliaItem
+
+<PageLoader>
+    <Content>
+        <GolfballEditor MemorabiliaId="@MemorabiliaId" />
+    </Content>
+</PageLoader>
+
+

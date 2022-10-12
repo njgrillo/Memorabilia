@@ -1,3 +1,10 @@
 ﻿@page "/Memorabilia/Drum/Edit/{memorabiliaId:int}"
 
-<Memorabilia.Blazor.Pages.MemorabiliaItems.Drums.EditDrum MemorabiliaId="@MemorabiliaId" />
+@inherits MemorabiliaItem
+
+<PageLoader>
+    <Content>
+        <DrumEditor MemorabiliaId="@MemorabiliaId" />
+    </Content>
+</PageLoader>
+

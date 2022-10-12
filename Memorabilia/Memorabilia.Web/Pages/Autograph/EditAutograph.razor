@@ -1,9 +1,11 @@
 ﻿@page "/Autographs/Edit/{memorabiliaId:int}"
 @page "/Autographs/Edit/{memorabiliaId:int}/{autographId:int}"
 
-<WebPage>
+@inherits AutographItem
+
+<PageLoader>
     <Content>
         <AutographEditor AutographId="@AutographId" 
                          MemorabiliaId="@MemorabiliaId" />
     </Content>
-</WebPage>
+</PageLoader>

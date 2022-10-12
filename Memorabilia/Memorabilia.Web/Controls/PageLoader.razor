@@ -1,4 +1,6 @@
-﻿<PrettyBlazor.Condition Evaluation="@(!PageLoaded)">
+﻿@inherits WebPage
+
+<PrettyBlazor.Condition Evaluation="@(!PageLoaded)">
     <Match>
         <div class="spinnerDiv">
             <MudImage Class="spinnerImage"

@@ -1,5 +1,9 @@
 ﻿@page "/PrivacyTypes/Edit/{id:int}"
 
-<EditDomainItem Item="_viewModel"
-                OnLoad="OnLoad"
-                OnSave="OnSave" />
+@inherits EditItem
+
+<PageLoader>
+    <Content>
+        <PrivacyTypeEditor Id=@Id />
+    </Content>
+</PageLoader>

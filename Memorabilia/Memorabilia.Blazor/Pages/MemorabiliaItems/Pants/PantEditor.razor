@@ -1,0 +1,80 @@
+﻿@inherits MemorabiliaItem<SavePantViewModel>
+
+<EditPage ContinueNavigationPath="@ViewModel.ContinueNavigationPath"
+          EditMode="ViewModel.EditModeType"
+          ExitNavigationPath="@ViewModel.ExitNavigationPath"
+          ImagePath="@ViewModel.ImagePath"
+          ItemName="@ViewModel.ItemType.Name"
+          Model="ViewModel"
+          OnLoad="OnLoad"
+          OnSave="OnSave"
+          PageFooterButtonText="@ViewModel.ExitButtonText"
+          PageFooterNavigationPath="@ViewModel.BackNavigationPath"
+          PageTitle="@ViewModel.PageTitle"
+          TItem="SavePantViewModel"
+          UseMultipleButtons="true">
+    <TimelineContent>
+        <MemorabiliaItemTimeline EditMode="ViewModel.EditModeType"
+                                 ItemTypeName="@ViewModel.ItemType.Name"
+                                 MemorabiliaId="ViewModel.MemorabiliaId"
+                                 MemorabiliaItemStep="ViewModel.MemorabiliaItemStep" />
+    </TimelineContent>
+    <Content>
+        <DivRowCol3>
+            <Content>
+                <ItemTypeBrandDropDown @bind-Value="@ViewModel.BrandId" 
+                                       @bind-Value:event="ValueChanged"
+                                       ItemType="ViewModel.ItemType"
+                                       SelectedValue="ViewModel.BrandId" />
+            </Content>
+            <ContentColumn2>
+                <ItemTypeGameStyleDropDown @bind-Value="@ViewModel.GameStyleTypeId"
+                                           @bind-Value:event="ValueChanged"
+                                           ItemType="ViewModel.ItemType"
+                                           SelectedValue="ViewModel.GameStyleTypeId" /> 
+            </ContentColumn2>
+        </DivRowCol3>
+        <DivRowCol3>
+            <Content>
+                <ItemTypeSizeDropDown @bind-Value="@ViewModel.SizeId"
+                                      @bind-Value:event="ValueChanged" 
+                                      ItemType="ViewModel.ItemType"
+                                      SelectedValue="@ViewModel.SizeId" /> 
+            </Content>
+            <ContentColumn2>
+                <DivHidden Hidden="@(!ViewModel.DisplayGameDate)">
+                    <Content>
+                        <MudDatePicker @bind-Date="ViewModel.GameDate"
+                                       DateFormat="MM/dd/yyyy"
+                                       Editable="true"
+                                       Label="Game Date"
+                                       Mask="@(new DateMask("MM/dd/yyyy"))" 
+                                       Variant="Variant.Outlined" />
+                    </Content>
+                </DivHidden>
+            </ContentColumn2>
+        </DivRowCol3>
+        <DivRowCol3>
+            <Content>
+                <ItemTypeLevelDropDown @bind-Value="@ViewModel.LevelTypeId"
+                                       @bind-Value:event="ValueChanged" 
+                                       ItemType="ViewModel.ItemType"
+                                       SelectedValue="ViewModel.LevelTypeId" /> 
+            </Content>
+        </DivRowCol3>
+        <PersonSelector CanFilterBySport="true"
+                        CanToggle="true"
+                        ItemType="ViewModel.ItemType"
+                        SelectedPerson="ViewModel.Person"
+                        SelectedPersonChanged="SelectedPersonChanged" />     
+        <SportSelector @bind-Value="@ViewModel.SportId" 
+                       @bind-Value:event="ValueChanged"
+                       CanToggle="true" 
+                       ItemType="ViewModel.ItemType"
+                       SelectedValue="ViewModel.SportId"/>  
+        <TeamSelector CanToggle="true" 
+                      ItemType="ViewModel.ItemType"
+                      SelectedTeam="ViewModel.Team"
+                      SelectedTeamChanged="SelectedTeamChanged" />
+    </Content>
+</EditPage>

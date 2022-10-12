@@ -1,49 +1,48 @@
 ﻿#nullable disable
 
-namespace Memorabilia.Blazor.Controls.Sport
+namespace Memorabilia.Blazor.Controls.Sport;
+
+public partial class SportSelector : ComponentBase
 {
-    public partial class SportSelector : ComponentBase
+    [Parameter]
+    public bool CanToggle { get; set; }
+
+    [Parameter]
+    public ItemType ItemType { get; set; }
+
+    [Parameter]
+    public int SelectedValue { get; set; }
+
+    [Parameter]
+    public int Value { get; set; }
+
+    [Parameter]
+    public EventCallback<int> ValueChanged { get; set; }
+
+    private bool _displaySports;
+    private bool _hasSport;
+    private string _itemTypeNameLabel => $"Associate {ItemType?.Name} with a Sport";
+
+    protected override void OnInitialized()
     {
-        [Parameter]
-        public bool CanToggle { get; set; }
+        _hasSport = SelectedValue > 0;
+        _displaySports = _hasSport;
+    }
 
-        [Parameter]
-        public ItemType ItemType { get; set; }
+    private async Task OnInputChange(int value)
+    {
+        await ValueChanged.InvokeAsync(value).ConfigureAwait(false);
+    }
 
-        [Parameter]
-        public int SelectedValue { get; set; }
+    private void SportCheckboxClicked(bool isChecked)
+    {
+        _displaySports = CanToggle && isChecked;
 
-        [Parameter]
-        public int Value { get; set; }
-
-        [Parameter]
-        public EventCallback<int> ValueChanged { get; set; }
-
-        private bool _displaySports;
-        private bool _hasSport;
-        private string _itemTypeNameLabel => $"Associate {ItemType?.Name} with a Sport";
-
-        protected override void OnInitialized()
+        if (!_displaySports)
         {
-            _hasSport = SelectedValue > 0;
-            _displaySports = _hasSport;
+            SelectedValue = 0;
         }
 
-        private async Task OnInputChange(int value)
-        {
-            await ValueChanged.InvokeAsync(value).ConfigureAwait(false);
-        }
-
-        private void SportCheckboxClicked(bool isChecked)
-        {
-            _displaySports = CanToggle && isChecked;
-
-            if (!_displaySports)
-            {
-                SelectedValue = 0;
-            }
-
-            _hasSport = isChecked;
-        }
+        _hasSport = isChecked;
     }
 }

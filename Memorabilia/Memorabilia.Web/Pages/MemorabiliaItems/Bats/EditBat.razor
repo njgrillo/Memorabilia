@@ -1,3 +1,9 @@
 ﻿@page "/Memorabilia/Bat/Edit/{memorabiliaId:int}"
 
-<Memorabilia.Blazor.Pages.MemorabiliaItems.Bats.EditBat MemorabiliaId="@MemorabiliaId" />
+@inherits MemorabiliaItem
+
+<PageLoader>
+    <Content>
+        <BatEditor MemorabiliaId="@MemorabiliaId" />
+    </Content>
+</PageLoader>

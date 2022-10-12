@@ -1,5 +1,9 @@
 ﻿@page "/ChampionTypes/Edit/{id:int}"
 
-<EditDomainItem Item="_viewModel"
-                OnLoad="OnLoad"
-                OnSave="OnSave" />
+@inherits EditItem
+
+<PageLoader>
+    <Content>
+        <ChampionTypeEditor Id=@Id />
+    </Content>
+</PageLoader>

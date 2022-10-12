@@ -1,6 +1,4 @@
-﻿#nullable disable
-
-namespace Memorabilia.Blazor.Pages.Admin.AcquisitionTypes;
+﻿namespace Memorabilia.Blazor.Pages.Admin.AcquisitionTypes;
 
 public partial class AcquisitionTypeEditor : EditDomainItem<AcquisitionType>, IEditDomainItem
 {

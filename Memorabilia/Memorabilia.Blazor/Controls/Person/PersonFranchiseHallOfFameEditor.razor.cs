@@ -1,59 +1,58 @@
 ﻿#nullable disable
 
-namespace Memorabilia.Blazor.Controls.Person
+namespace Memorabilia.Blazor.Controls.Person;
+
+public partial class PersonFranchiseHallOfFameEditor : ComponentBase
 {
-    public partial class PersonFranchiseHallOfFameEditor : ComponentBase
+    [Parameter]
+    public List<SavePersonFranchiseHallOfFameViewModel> FranchiseHallOfFames { get; set; } = new();
+
+    [Parameter]
+    public FranchiseHallOfFameType[] FranchiseHallOfFameTypes { get; set; } = FranchiseHallOfFameType.All;
+
+    private bool _canAdd = true;
+    private bool _canEditFranchise = true;
+    private bool _canUpdate;
+    private SavePersonFranchiseHallOfFameViewModel _viewModel = new();
+
+    private void Add()
     {
-        [Parameter]
-        public List<SavePersonFranchiseHallOfFameViewModel> FranchiseHallOfFames { get; set; } = new();
+        FranchiseHallOfFames.Add(_viewModel);
 
-        [Parameter]
-        public FranchiseHallOfFameType[] FranchiseHallOfFameTypes { get; set; } = FranchiseHallOfFameType.All;
+        _viewModel = new SavePersonFranchiseHallOfFameViewModel();
+    }
 
-        private bool _canAdd = true;
-        private bool _canEditFranchise = true;
-        private bool _canUpdate;
-        private SavePersonFranchiseHallOfFameViewModel _viewModel = new();
+    private void Edit(SavePersonFranchiseHallOfFameViewModel hallOfFame)
+    {
+        _viewModel.FranchiseId = hallOfFame.FranchiseId;
+        _viewModel.Year = hallOfFame.Year;
 
-        private void Add()
-        {
-            FranchiseHallOfFames.Add(_viewModel);
+        _canAdd = false;
+        _canEditFranchise = false;
+        _canUpdate = true;
+    }
 
-            _viewModel = new SavePersonFranchiseHallOfFameViewModel();
-        }
+    private void Remove(int franchiseId)
+    {
+        var hallOfFame = FranchiseHallOfFames.SingleOrDefault(hallOfFame => hallOfFame.FranchiseId == franchiseId);
 
-        private void Edit(SavePersonFranchiseHallOfFameViewModel hallOfFame)
-        {
-            _viewModel.FranchiseId = hallOfFame.FranchiseId;
-            _viewModel.Year = hallOfFame.Year;
+        if (hallOfFame == null)
+            return;
 
-            _canAdd = false;
-            _canEditFranchise = false;
-            _canUpdate = true;
-        }
+        hallOfFame.IsDeleted = true;
+    }
 
-        private void Remove(int franchiseId)
-        {
-            var hallOfFame = FranchiseHallOfFames.SingleOrDefault(hallOfFame => hallOfFame.FranchiseId == franchiseId);
+    private void Update()
+    {
+        var hallOfFame = FranchiseHallOfFames.Single(hof => hof.FranchiseId == _viewModel.FranchiseId);
 
-            if (hallOfFame == null)
-                return;
+        hallOfFame.FranchiseId = _viewModel.FranchiseId;
+        hallOfFame.Year = _viewModel.Year;
 
-            hallOfFame.IsDeleted = true;
-        }
+        _viewModel = new SavePersonFranchiseHallOfFameViewModel();
 
-        private void Update()
-        {
-            var hallOfFame = FranchiseHallOfFames.Single(hof => hof.FranchiseId == _viewModel.FranchiseId);
-
-            hallOfFame.FranchiseId = _viewModel.FranchiseId;
-            hallOfFame.Year = _viewModel.Year;
-
-            _viewModel = new SavePersonFranchiseHallOfFameViewModel();
-
-            _canAdd = true;
-            _canEditFranchise = true;
-            _canUpdate = false;
-        }
+        _canAdd = true;
+        _canEditFranchise = true;
+        _canUpdate = false;
     }
 }

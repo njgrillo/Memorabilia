@@ -1,5 +1,9 @@
 ﻿@page "/Spots/Edit/{id:int}"
 
-<EditDomainItem Item="_viewModel"
-                OnLoad="OnLoad"
-                OnSave="OnSave" />
+@inherits EditItem
+
+<PageLoader>
+    <Content>
+        <SpotEditor Id=@Id />
+    </Content>
+</PageLoader>

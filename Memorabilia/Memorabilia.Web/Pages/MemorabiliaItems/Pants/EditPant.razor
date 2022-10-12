@@ -1,3 +1,9 @@
 ﻿@page "/Memorabilia/Pant/Edit/{memorabiliaId:int}"
 
-<Memorabilia.Blazor.Pages.MemorabiliaItems.Pants.EditPant MemorabiliaId="@MemorabiliaId" />
+@inherits MemorabiliaItem
+
+<PageLoader>
+    <Content>
+        <PantEditor MemorabiliaId="@MemorabiliaId" />
+    </Content>
+</PageLoader>

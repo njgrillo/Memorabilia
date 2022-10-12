@@ -1,13 +1,9 @@
-﻿namespace Memorabilia.Web.Pages.User
-{
-    public partial class Register : ComponentBase
-    {
-        [Inject]
-        public ProtectedLocalStorage LocalStorage { get; set; }
+﻿namespace Memorabilia.Web.Pages.User;
 
-        protected async Task OnSaved(int userId)
-        {
-            await LocalStorage.SetAsync("UserId", userId).ConfigureAwait(false);
-        }
+public partial class Register : WebPage
+{
+    protected void OnSaved(int userId)
+    {
+        UserId = userId;
     }
 }

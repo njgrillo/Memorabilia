@@ -48,7 +48,7 @@ public class SaveMagazineViewModel : SaveItemViewModel
 
     [Required]
     [Range(1, int.MaxValue, ErrorMessage = "Size is required.")]
-    public int SizeId { get; set; }
+    public int SizeId { get; set; } = Size.Standard.Id;
 
     public List<int> SportIds { get; set; } = new();
 

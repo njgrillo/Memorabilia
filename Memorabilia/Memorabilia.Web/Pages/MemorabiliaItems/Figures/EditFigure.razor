@@ -1,3 +1,10 @@
 ﻿@page "/Memorabilia/Figure/Edit/{memorabiliaId:int}"
 
-<Memorabilia.Blazor.Pages.MemorabiliaItems.Figures.EditFigure MemorabiliaId="@MemorabiliaId" />
+@inherits MemorabiliaItem
+
+<PageLoader>
+    <Content>
+        <FigureEditor MemorabiliaId="@MemorabiliaId" />
+    </Content>
+</PageLoader>
+
