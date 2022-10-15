@@ -1,7 +1,9 @@
 ﻿@page "/AwardTypes/Edit/{id:int}"
 
-<MainPage>
+@inherits EditItem
+
+<PageLoader>
     <Content>
         <AwardTypeEditor Id="@Id" />
     </Content>
-</MainPage>
+</PageLoader>

@@ -45,12 +45,12 @@ public partial class TeamSelector : ComponentBase
         _displayTeams = !CanToggle || SelectedTeam?.Id > 0 || Teams.Any();
         _hasTeams = SelectedTeam?.Id > 0 || Teams.Any();
 
-        await LoadTeams().ConfigureAwait(false);
+        await LoadTeams();
     }
 
     private async Task LoadTeams()
     {
-        _teams = (await QueryRouter.Send(new GetTeams.Query(sportLeagueLevelId: SportLeagueLevel?.Id)).ConfigureAwait(false)).Teams.Select(team => new SaveTeamViewModel(team));
+        _teams = (await QueryRouter.Send(new GetTeams.Query(sportLeagueLevelId: SportLeagueLevel?.Id))).Teams.Select(team => new SaveTeamViewModel(team));
     }
 
     private async Task<IEnumerable<SaveTeamViewModel>> SearchTeams(string searchText)
@@ -58,7 +58,7 @@ public partial class TeamSelector : ComponentBase
         if (searchText.IsNullOrEmpty())
             return Array.Empty<SaveTeamViewModel>();
 
-        return await Task.FromResult(_teams.Where(team => team.DisplayName.Contains(searchText, StringComparison.OrdinalIgnoreCase))).ConfigureAwait(false);
+        return await Task.FromResult(_teams.Where(team => team.DisplayName.Contains(searchText, StringComparison.OrdinalIgnoreCase)));
     }
 
     private void TeamCheckboxClicked(bool isChecked)

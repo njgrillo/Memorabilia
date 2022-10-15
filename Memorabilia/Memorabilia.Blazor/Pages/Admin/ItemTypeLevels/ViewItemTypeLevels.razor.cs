@@ -26,7 +26,7 @@ public partial class ViewItemTypeLevels : ComponentBase
 
     protected async Task OnLoad()
     {
-        ViewModel = await QueryRouter.Send(new GetItemTypeLevels.Query()).ConfigureAwait(false);
+        ViewModel = await QueryRouter.Send(new GetItemTypeLevels.Query());
     }
 
     protected async Task ShowDeleteConfirm(int id)
@@ -37,7 +37,7 @@ public partial class ViewItemTypeLevels : ComponentBase
         if (result.Cancelled)
             return;
 
-        await Delete(id).ConfigureAwait(false);
+        await Delete(id);
     }
 
     private async Task Delete(int id)
@@ -48,7 +48,7 @@ public partial class ViewItemTypeLevels : ComponentBase
             IsDeleted = true
         };
 
-        await CommandRouter.Send(new SaveItemTypeLevel.Command(viewModel)).ConfigureAwait(false);
+        await CommandRouter.Send(new SaveItemTypeLevel.Command(viewModel));
 
         ViewModel.ItemTypeLevels.Remove(deletedItem);
 

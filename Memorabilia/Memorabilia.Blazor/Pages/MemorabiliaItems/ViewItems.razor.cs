@@ -36,7 +36,7 @@ namespace Memorabilia.Blazor.Pages.MemorabiliaItems
                 IsDeleted = true
             };
 
-            await CommandRouter.Send(new SaveAutograph.Command(viewModel)).ConfigureAwait(false);
+            await CommandRouter.Send(new SaveAutograph.Command(viewModel));
 
             var memorabiliaItem = _viewModel.MemorabiliaItems.First(item => item.Id == itemToDelete.MemorabiliaId);
             memorabiliaItem.Autographs.Remove(itemToDelete);
@@ -52,7 +52,7 @@ namespace Memorabilia.Blazor.Pages.MemorabiliaItems
                 IsDeleted = true
             };
 
-            await CommandRouter.Send(new SaveMemorabiliaItem.Command(viewModel)).ConfigureAwait(false);
+            await CommandRouter.Send(new SaveMemorabiliaItem.Command(viewModel));
 
             _viewModel.MemorabiliaItems.Remove(itemToDelete);
 
@@ -66,7 +66,7 @@ namespace Memorabilia.Blazor.Pages.MemorabiliaItems
 
         protected async Task OnLoad()
         {
-            _viewModel = await QueryRouter.Send(new GetMemorabiliaItems.Query(UserId)).ConfigureAwait(false);
+            _viewModel = await QueryRouter.Send(new GetMemorabiliaItems.Query(UserId));
             _initialItems = _viewModel.MemorabiliaItems;
         }
 
@@ -78,7 +78,7 @@ namespace Memorabilia.Blazor.Pages.MemorabiliaItems
             if (result.Cancelled)
                 return;
 
-            await DeleteAutograph(id).ConfigureAwait(false);
+            await DeleteAutograph(id);
         }
 
         protected async Task ShowDeleteMemorabiliaConfirm(int id)
@@ -89,7 +89,7 @@ namespace Memorabilia.Blazor.Pages.MemorabiliaItems
             if (result.Cancelled)
                 return;
 
-            await DeleteMemorabiliaItem(id).ConfigureAwait(false);
+            await DeleteMemorabiliaItem(id);
         }
 
         private void ToggleChildContent(int memorabiliaItemId)

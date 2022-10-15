@@ -6,11 +6,11 @@ public partial class ViewFootballTypes : ViewDomainItem<FootballTypesViewModel>,
 {
     public async Task OnDelete(SaveDomainViewModel viewModel)
     {
-        await CommandRouter.Send(new SaveFootballType.Command(viewModel)).ConfigureAwait(false);
+        await CommandRouter.Send(new SaveFootballType.Command(viewModel));
     }
 
     public async Task OnLoad()
     {
-        ViewModel = await QueryRouter.Send(new GetFootballTypes.Query()).ConfigureAwait(false);
+        ViewModel = await QueryRouter.Send(new GetFootballTypes.Query());
     }
 }

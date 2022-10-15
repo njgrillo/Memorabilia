@@ -30,12 +30,12 @@ public partial class PersonProfile : ComponentBase
 
     protected async Task OnLoad()
     {
-        await LoadPeople().ConfigureAwait(false);
+        await LoadPeople();
     }
 
     private async Task LoadPeople()
     {
-        _people = (await QueryRouter.Send(new GetPeople.Query()).ConfigureAwait(false)).People;
+        _people = (await QueryRouter.Send(new GetPeople.Query())).People;
     }
 
     private async Task<IEnumerable<PersonViewModel>> SearchPeople(string searchText)
@@ -49,12 +49,12 @@ public partial class PersonProfile : ComponentBase
 
         var culturalResults = _people.Where(person => person.ProfileName.Contains(searchText, StringComparison.OrdinalIgnoreCase));
 
-        return await Task.FromResult(nonCulturalResults.Union(culturalResults).DistinctBy(person => person.Id)).ConfigureAwait(false);
+        return await Task.FromResult(nonCulturalResults.Union(culturalResults).DistinctBy(person => person.Id));
     }
 
     private async Task SelectedPersonChanged(PersonViewModel person)
     {
-        var profiles = await ProfileService.GetProfileTypes(person.Id).ConfigureAwait(false);
+        var profiles = await ProfileService.GetProfileTypes(person.Id);
         var profile = profiles.FirstOrDefault();
 
         NavigationManager.NavigateTo($"Tools/{profile.Name}Profile/{person.Id}");

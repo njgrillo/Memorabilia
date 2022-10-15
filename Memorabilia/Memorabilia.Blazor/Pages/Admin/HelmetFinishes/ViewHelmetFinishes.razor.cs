@@ -6,11 +6,11 @@ public partial class ViewHelmetFinishes : ViewDomainItem<HelmetFinishesViewModel
 {
     public async Task OnDelete(SaveDomainViewModel viewModel)
     {
-        await CommandRouter.Send(new SaveHelmetFinish.Command(viewModel)).ConfigureAwait(false);
+        await CommandRouter.Send(new SaveHelmetFinish.Command(viewModel));
     }
 
     public async Task OnLoad()
     {
-        ViewModel = await QueryRouter.Send(new GetHelmetFinishes.Query()).ConfigureAwait(false);
+        ViewModel = await QueryRouter.Send(new GetHelmetFinishes.Query());
     }
 }

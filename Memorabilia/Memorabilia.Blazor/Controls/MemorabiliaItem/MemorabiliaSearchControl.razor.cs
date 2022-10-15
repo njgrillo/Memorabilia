@@ -29,6 +29,8 @@ public partial class MemorabiliaSearchControl : ComponentBase
                                _colorId > 0 ||
                                _franchiseId > 0 ||
                                _gameStyleTypeId > 0 ||
+                               _hasAutographAuthentication ||                               
+                               _hasAutographInscription ||
                                _itemTypeId > 0 ||
                                _levelTypeId > 0 ||
                                _memorabiliaAcquiredDate.HasValue ||
@@ -40,6 +42,7 @@ public partial class MemorabiliaSearchControl : ComponentBase
                                _memorabiliaPerson?.Id > 0 ||
                                _memorabiliaPurchaseTypeId > 0 ||
                                _memorabiliaTeam?.Id > 0 ||
+                               _noAutographImages ||
                                _privacyTypeId > 0 ||
                                _sizeId > 0 ||
                                _sportId > 0 ||
@@ -58,6 +61,8 @@ public partial class MemorabiliaSearchControl : ComponentBase
     private static int _colorId;
     private static int _franchiseId;
     private static int _gameStyleTypeId;
+    private static bool _hasAutographAuthentication;    
+    private static bool _hasAutographInscription;
     private static int _itemTypeId;
     private static int _levelTypeId;
     private static DateTime? _memorabiliaAcquiredDate;
@@ -69,6 +74,7 @@ public partial class MemorabiliaSearchControl : ComponentBase
     private static SavePersonViewModel _memorabiliaPerson;
     private static int _memorabiliaPurchaseTypeId;
     private static SaveTeamViewModel _memorabiliaTeam;
+    private static bool _noAutographImages;
     private IEnumerable<SavePersonViewModel> _people = Enumerable.Empty<SavePersonViewModel>();
     private static int _privacyTypeId;
     private static int _sizeId;
@@ -82,6 +88,8 @@ public partial class MemorabiliaSearchControl : ComponentBase
         autograph => autograph.AcquisitionDate == _autographAcquiredDate;
     private readonly static Expression<Func<AutographViewModel, bool>> _autographAcquisitionTypeExpression =
         autograph => autograph.AcquisitionTypeId == _autographAcquisitionTypeId;
+    private readonly static Expression<Func<AutographViewModel, bool>> _autographAuthenticationExpression =
+        autograph => autograph.Authentications.Count() > 0;
     private readonly static Expression<Func<AutographViewModel, bool>> _autographConditionExpression =
         autograph => autograph.ConditionId == _autographConditionId;
     private readonly static Expression<Func<AutographViewModel, bool>> _autographCostExpression =
@@ -90,6 +98,10 @@ public partial class MemorabiliaSearchControl : ComponentBase
         autograph => autograph.EstimatedValue == _autographEstimatedValue;
     private readonly static Expression<Func<AutographViewModel, bool>> _autographGradeExpression =
         autograph => autograph.Grade == _autographGrade;
+    private readonly static Expression<Func<AutographViewModel, bool>> _autographImageExpression =
+        autograph => autograph.Images.Count() == 0;
+    private readonly static Expression<Func<AutographViewModel, bool>> _autographInscriptionExpression =
+        autograph => autograph.Inscriptions.Count() > 0;
     private readonly static Expression<Func<AutographViewModel, bool>> _autographPersonExpression =
         autograph => autograph.PersonId == _autographPerson.Id;
     private readonly static Expression<Func<MemorabiliaItemViewModel, bool>> _brandExpression =
@@ -135,18 +147,18 @@ public partial class MemorabiliaSearchControl : ComponentBase
 
     protected async Task HandleValidSubmit()
     {
-        await FilterResults().ConfigureAwait(false);
+        await FilterResults();
     }
 
     protected override async Task OnInitializedAsync()
     {
-        await LoadPeople().ConfigureAwait(false);
-        await LoadTeams().ConfigureAwait(false);
+        await LoadPeople();
+        await LoadTeams();
 
         if (!_hasFilter)
             return;
 
-        await FilterResults().ConfigureAwait(false);
+        await FilterResults();
     }
 
     protected async Task ResetCriteria()
@@ -162,6 +174,8 @@ public partial class MemorabiliaSearchControl : ComponentBase
         _colorId = 0;
         _franchiseId = 0;
         _gameStyleTypeId = 0;
+        _hasAutographAuthentication = false;        
+        _hasAutographInscription = false;
         _itemTypeId = 0;
         _levelTypeId = 0;
         _memorabiliaAcquiredDate = null;
@@ -173,6 +187,7 @@ public partial class MemorabiliaSearchControl : ComponentBase
         _memorabiliaPerson = null;
         _memorabiliaPurchaseTypeId = 0;
         _memorabiliaTeam = null;
+        _noAutographImages = false;
         _privacyTypeId = 0;
         _sizeId = 0;
         _sportId = 0;
@@ -180,7 +195,7 @@ public partial class MemorabiliaSearchControl : ComponentBase
         _spotId = 0;
         _writingInstrumentId = 0;
 
-        await FilterResults().ConfigureAwait(false);
+        await FilterResults();
     }
 
     private List<AutographViewModel> FilterAutographs()
@@ -210,6 +225,15 @@ public partial class MemorabiliaSearchControl : ComponentBase
 
         if (_colorId > 0)
             predicate = predicate.And(_colorExpression);
+
+        if (_hasAutographAuthentication)
+            predicate = predicate.And(_autographAuthenticationExpression);        
+
+        if (_hasAutographInscription)
+            predicate = predicate.And(_autographInscriptionExpression);
+
+        if (_noAutographImages)
+            predicate = predicate.And(_autographImageExpression);        
 
         if (_spotId > 0)
             predicate = predicate.And(_spotExpression);
@@ -286,7 +310,7 @@ public partial class MemorabiliaSearchControl : ComponentBase
 
         Results = filteredMemorabilaItems.Where(item => memorabiliaIds.Contains(item.Id)).ToList();
 
-        await ResultsChanged.InvokeAsync(Results).ConfigureAwait(false);
+        await ResultsChanged.InvokeAsync(Results);
 
         _autographPerson = null;
         _memorabiliaPerson = null;
@@ -294,12 +318,12 @@ public partial class MemorabiliaSearchControl : ComponentBase
 
     private async Task LoadPeople()
     {
-        _people = (await QueryRouter.Send(new GetPeople.Query()).ConfigureAwait(false)).People.Select(person => new SavePersonViewModel(person));
+        _people = (await QueryRouter.Send(new GetPeople.Query())).People.Select(person => new SavePersonViewModel(person));
     }
 
     private async Task LoadTeams()
     {
-        _teams = (await QueryRouter.Send(new GetTeams.Query()).ConfigureAwait(false)).Teams.Select(team => new SaveTeamViewModel(team));
+        _teams = (await QueryRouter.Send(new GetTeams.Query())).Teams.Select(team => new SaveTeamViewModel(team));
     }
 
     private async Task<IEnumerable<SavePersonViewModel>> SearchPeople(string value)
@@ -313,7 +337,7 @@ public partial class MemorabiliaSearchControl : ComponentBase
 
         var culturalResults = _people.Where(person => person.ProfileName.Contains(value, StringComparison.OrdinalIgnoreCase));
 
-        return await Task.FromResult(nonCulturalResults.Union(culturalResults).DistinctBy(person => person.Id)).ConfigureAwait(false);
+        return await Task.FromResult(nonCulturalResults.Union(culturalResults).DistinctBy(person => person.Id));
     }
 
     private async Task<IEnumerable<SaveTeamViewModel>> SearchTeams(string value)
@@ -321,6 +345,6 @@ public partial class MemorabiliaSearchControl : ComponentBase
         if (value.IsNullOrEmpty())
             return Array.Empty<SaveTeamViewModel>();
 
-        return await Task.FromResult(_teams.Where(team => team.DisplayName.Contains(value, StringComparison.InvariantCultureIgnoreCase))).ConfigureAwait(false);
+        return await Task.FromResult(_teams.Where(team => team.DisplayName.Contains(value, StringComparison.InvariantCultureIgnoreCase)));
     }
 }

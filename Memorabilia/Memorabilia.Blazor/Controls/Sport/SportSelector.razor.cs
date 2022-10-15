@@ -31,7 +31,7 @@ public partial class SportSelector : ComponentBase
 
     private async Task OnInputChange(int value)
     {
-        await ValueChanged.InvokeAsync(value).ConfigureAwait(false);
+        await ValueChanged.InvokeAsync(value);
     }
 
     private void SportCheckboxClicked(bool isChecked)

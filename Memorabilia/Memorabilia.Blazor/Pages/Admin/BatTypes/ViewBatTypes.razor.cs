@@ -6,11 +6,11 @@ public partial class ViewBatTypes : ViewDomainItem<BatTypesViewModel>, IDeleteDo
 {
     public async Task OnDelete(SaveDomainViewModel viewModel)
     {
-        await CommandRouter.Send(new SaveBatType.Command(viewModel)).ConfigureAwait(false);
+        await CommandRouter.Send(new SaveBatType.Command(viewModel));
     }
 
     public async Task OnLoad()
     {
-        ViewModel = await QueryRouter.Send(new GetBatTypes.Query()).ConfigureAwait(false);
+        ViewModel = await QueryRouter.Send(new GetBatTypes.Query());
     }
 }

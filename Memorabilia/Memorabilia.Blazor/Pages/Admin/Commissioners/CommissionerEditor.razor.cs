@@ -18,22 +18,22 @@ public partial class CommissionerEditor : ComponentBase
 
     protected async Task HandleValidSubmit()
     {
-        await CommandRouter.Send(new SaveCommissioner.Command(ViewModel)).ConfigureAwait(false);
+        await CommandRouter.Send(new SaveCommissioner.Command(ViewModel));
     }
 
     protected async Task OnLoad()
     {
-        await LoadPeople().ConfigureAwait(false);
+        await LoadPeople();
 
         if (Id == 0)
             return;
 
-        ViewModel = new SaveCommissionerViewModel(await QueryRouter.Send(new GetCommissioner.Query(Id)).ConfigureAwait(false));
+        ViewModel = new SaveCommissionerViewModel(await QueryRouter.Send(new GetCommissioner.Query(Id)));
     }
 
     private async Task LoadPeople()
     {
-        People = (await QueryRouter.Send(new GetPeople.Query()).ConfigureAwait(false)).People;
+        People = (await QueryRouter.Send(new GetPeople.Query())).People;
     }
 
     private async Task<IEnumerable<PersonViewModel>> SearchPeople(string searchText)
@@ -41,6 +41,6 @@ public partial class CommissionerEditor : ComponentBase
         if (searchText.IsNullOrEmpty())
             return Array.Empty<PersonViewModel>();
 
-        return await Task.FromResult(People.Where(person => person.DisplayName.Contains(searchText, StringComparison.OrdinalIgnoreCase))).ConfigureAwait(false);
+        return await Task.FromResult(People.Where(person => person.DisplayName.Contains(searchText, StringComparison.OrdinalIgnoreCase)));
     }
 }

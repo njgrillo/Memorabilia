@@ -1,22 +1,27 @@
-﻿<Page OnLoad="OnLoad">
+﻿@inherits AutographItem<SaveAutographImagesViewModel>
+
+<Page OnLoad="OnLoad">
     <Content>
-        <PageHeader PageTitle="@_viewModel.PageTitle" />
-        <AutographTimeline AutographId="_viewModel.AutographId" 
-                           AutographStep="_viewModel.AutographStep"  
-                           DisplaySpot="_viewModel.CanHaveSpot" 
-                           EditMode="_viewModel.EditModeType"
-                           MemorabiliaId="_viewModel.MemorabiliaId" />
-        <EditImages ContinueNavigationPath="@_viewModel.ContinueNavigationPath"
-                    ExitNavigationPath="@_viewModel.ExitNavigationPath"
-                    Images="@_viewModel.Images"
+        <PageHeader PageTitle="@ViewModel.PageTitle" />
+        <AutographTimeline AutographId="ViewModel.AutographId" 
+                           AutographStep="ViewModel.AutographStep"  
+                           DisplaySpot="ViewModel.CanHaveSpot" 
+                           EditMode="ViewModel.EditModeType"
+                           MemorabiliaId="ViewModel.MemorabiliaId" />
+        <EditImages @ref="EditImages" 
+                    ContinueNavigationPath="@ViewModel.ContinueNavigationPath"
+                    ExitNavigationPath="@ViewModel.ExitNavigationPath"
+                    Images="@ViewModel.Images"
                     MaximumAllowedFiles="10"
                     MaximumFileSize="10240000"
-                    Model="_viewModel"
+                    Model="ViewModel"
                     OnLoad="OnLoad"
                     OnSave="OnSave"
-                    PageTitle="@_viewModel.PageTitle"
+                    PageTitle="@ViewModel.PageTitle"
                     SaveButtonText="Save & Add Another Autograph"
-                    TItem="SaveAutographImagesViewModel">
+                    TItem="SaveAutographImagesViewModel"
+                    UploadPath="@UploadPath"
+                    UserId="@UserId">
             <AdditionalButtons>
                 <MudButton ButtonType="MudBlazor.ButtonType.Button" 
                            Color="MudBlazor.Color.Secondary"
@@ -25,6 +30,6 @@
                            Variant="Variant.Filled">Import from Memorabilia</MudButton>
             </AdditionalButtons>
         </EditImages>
-        <PageFooter NavigationPath="@_viewModel.BackNavigationPath" />
+        <PageFooter NavigationPath="@ViewModel.BackNavigationPath" />
     </Content>
 </Page>

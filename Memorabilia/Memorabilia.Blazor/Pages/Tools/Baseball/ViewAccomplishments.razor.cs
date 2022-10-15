@@ -11,6 +11,6 @@ public partial class ViewAccomplishments : ComponentBase
 
     private async Task OnInputChange(int accomplishmentTypeId)
     {
-        _viewModel = await QueryRouter.Send(new GetAccomplishments.Query(accomplishmentTypeId)).ConfigureAwait(false);
+        _viewModel = await QueryRouter.Send(new GetAccomplishments.Query(accomplishmentTypeId));
     }
 }

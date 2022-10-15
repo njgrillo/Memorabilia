@@ -6,11 +6,11 @@ public partial class ViewFranchiseHallOfFameTypes : ViewDomainItem<FranchiseHall
 {
     public async Task OnDelete(SaveDomainViewModel viewModel)
     {
-        await CommandRouter.Send(new SaveFranchiseHallOfFameType.Command(viewModel)).ConfigureAwait(false);
+        await CommandRouter.Send(new SaveFranchiseHallOfFameType.Command(viewModel));
     }
 
     public async Task OnLoad()
     {
-        ViewModel = await QueryRouter.Send(new GetFranchiseHallOfFameTypes.Query()).ConfigureAwait(false);
+        ViewModel = await QueryRouter.Send(new GetFranchiseHallOfFameTypes.Query());
     }
 }

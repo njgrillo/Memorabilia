@@ -17,7 +17,7 @@ public partial class Login : ComponentBase
 
     protected async Task HandleValidSubmit()
     {
-        var viewModel = await QueryRouter.Send(new GetUser.Query(_viewModel.Username, _viewModel.Password)).ConfigureAwait(false);
+        var viewModel = await QueryRouter.Send(new GetUser.Query(_viewModel.Username, _viewModel.Password));
 
         if (!viewModel.IsValid || viewModel.Id == 0)
         {
@@ -26,7 +26,7 @@ public partial class Login : ComponentBase
             return;
         }
 
-        await UserValidated.InvokeAsync(viewModel.Id).ConfigureAwait(false);            
+        await UserValidated.InvokeAsync(viewModel.Id);            
 
         NavigationManager.NavigateTo("Home");
     }

@@ -17,7 +17,7 @@ public partial class LeagueEditor : ComponentBase
 
     protected async Task HandleValidSubmit()
     {
-        await CommandRouter.Send(new SaveLeague.Command(ViewModel)).ConfigureAwait(false);
+        await CommandRouter.Send(new SaveLeague.Command(ViewModel));
     }
 
     protected async Task OnLoad()
@@ -25,6 +25,6 @@ public partial class LeagueEditor : ComponentBase
         if (Id == 0)
             return;
 
-        ViewModel = new SaveLeagueViewModel(await QueryRouter.Send(new GetLeague.Query(Id)).ConfigureAwait(false));
+        ViewModel = new SaveLeagueViewModel(await QueryRouter.Send(new GetLeague.Query(Id)));
     }
 }

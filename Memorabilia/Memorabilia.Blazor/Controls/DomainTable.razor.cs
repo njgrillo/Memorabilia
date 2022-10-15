@@ -46,7 +46,7 @@ public partial class DomainTable : ComponentBase
         if (result.Cancelled)
             return;
 
-        await Delete(id).ConfigureAwait(false);
+        await Delete(id);
     }
 
     private async Task Delete(int id)
@@ -59,7 +59,7 @@ public partial class DomainTable : ComponentBase
 
         DomainEntities.Remove(deletedItem);
 
-        await OnDelete.InvokeAsync(viewModel).ConfigureAwait(false);
+        await OnDelete.InvokeAsync(viewModel);
 
         Snackbar.Add($"{DomainItemName} was deleted successfully!", Severity.Success);
     }

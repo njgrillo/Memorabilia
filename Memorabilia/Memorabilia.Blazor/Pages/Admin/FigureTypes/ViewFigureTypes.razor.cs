@@ -6,11 +6,11 @@ public partial class ViewFigureTypes : ViewDomainItem<FigureTypesViewModel>, IDe
 {
     public async Task OnDelete(SaveDomainViewModel viewModel)
     {
-        await CommandRouter.Send(new SaveFigureType.Command(viewModel)).ConfigureAwait(false);
+        await CommandRouter.Send(new SaveFigureType.Command(viewModel));
     }
 
     public async Task OnLoad()
     {
-        ViewModel = await QueryRouter.Send(new GetFigureTypes.Query()).ConfigureAwait(false);
+        ViewModel = await QueryRouter.Send(new GetFigureTypes.Query());
     }
 }

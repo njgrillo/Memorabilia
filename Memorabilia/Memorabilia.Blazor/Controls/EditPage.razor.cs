@@ -68,7 +68,7 @@ public partial class EditPage<TItem> : ComponentBase
 
     protected async Task HandleValidSubmit()
     {
-        await OnSave.InvokeAsync(Model).ConfigureAwait(false);
+        await OnSave.InvokeAsync(Model);
 
         var url = _continue ? ContinueNavigationPath : ExitNavigationPath;
 
@@ -78,6 +78,6 @@ public partial class EditPage<TItem> : ComponentBase
 
     protected async Task Load()
     {
-        await OnLoad.InvokeAsync().ConfigureAwait(false);
+        await OnLoad.InvokeAsync();
     }
 }

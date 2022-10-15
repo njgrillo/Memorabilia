@@ -9,11 +9,11 @@ public partial class DomainItems : ComponentBase
     {
         get
         {
-            return _viewModel;
+            return ViewModel;
         }
         set
         {
-            _viewModel = value;
+            ViewModel = value;
         }
     }
 
@@ -23,15 +23,15 @@ public partial class DomainItems : ComponentBase
     [Parameter]
     public EventCallback OnLoad { get; set; }
 
-    private DomainsViewModel _viewModel;
+    protected DomainsViewModel ViewModel;
 
     protected async Task Delete(SaveDomainViewModel viewModel)
     {
-        await OnDelete.InvokeAsync(viewModel).ConfigureAwait(false);
+        await OnDelete.InvokeAsync(viewModel);
     }
 
     protected async Task Load()
     {
-        await OnLoad.InvokeAsync().ConfigureAwait(false);
+        await OnLoad.InvokeAsync();
     }
 }

@@ -139,10 +139,10 @@ public partial class AutographTimeline : ComponentBase
 
         if (item.IsNullOrEmpty())
         {
-            NavigationManager.NavigateTo($"Autographs/Edit/{MemorabiliaId}/{AutographId}");
+            NavigationManager.NavigateTo($"Autographs/{EditModeType.Update.Name}/{MemorabiliaId}/{AutographId}");
             return;
         }
 
-        NavigationManager.NavigateTo($"Autographs/{item}/Edit/{AutographId}");
+        NavigationManager.NavigateTo($"Autographs/{item}/{EditModeType.Update.Name}/{AutographId}");
     }
 }

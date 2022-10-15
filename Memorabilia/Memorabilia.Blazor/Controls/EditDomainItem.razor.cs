@@ -30,11 +30,11 @@ public partial class EditDomainItem : ComponentBase
         if (_viewModel.Id == 0)
             return;
 
-        await OnLoad.InvokeAsync().ConfigureAwait(false);
+        await OnLoad.InvokeAsync();
     }
 
     protected async Task Save()
     {
-        await OnSave.InvokeAsync(_viewModel).ConfigureAwait(false);
+        await OnSave.InvokeAsync(_viewModel);
     }
 }

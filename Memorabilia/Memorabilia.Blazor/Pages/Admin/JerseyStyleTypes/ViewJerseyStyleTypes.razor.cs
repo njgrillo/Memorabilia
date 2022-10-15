@@ -6,11 +6,11 @@ public partial class ViewJerseyStyleTypes : ViewDomainItem<JerseyStyleTypesViewM
 {
     public async Task OnDelete(SaveDomainViewModel viewModel)
     {
-        await CommandRouter.Send(new SaveJerseyStyleType.Command(viewModel)).ConfigureAwait(false);
+        await CommandRouter.Send(new SaveJerseyStyleType.Command(viewModel));
     }
 
     public async Task OnLoad()
     {
-        ViewModel = await QueryRouter.Send(new GetJerseyStyleTypes.Query()).ConfigureAwait(false);
+        ViewModel = await QueryRouter.Send(new GetJerseyStyleTypes.Query());
     }
 }

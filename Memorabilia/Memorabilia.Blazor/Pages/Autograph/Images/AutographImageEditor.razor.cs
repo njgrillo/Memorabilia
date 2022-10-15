@@ -1,45 +1,45 @@
 ﻿#nullable disable
 
+using Memorabilia.Blazor.Controls;
+
 namespace Memorabilia.Blazor.Pages.Autograph.Images;
 
-public partial class AutographImageEditor : ComponentBase
+public partial class AutographImageEditor : AutographItem<SaveAutographImagesViewModel>
 {
     [Parameter]
-    public int AutographId { get; set; }
+    public string UploadPath { get; set; }
 
-    [Inject]
-    public CommandRouter CommandRouter { get; set; }
+    [Parameter]
+    public int UserId { get; set; }
 
-    [Inject]
-    public QueryRouter QueryRouter { get; set; }
-
-    private SaveAutographImagesViewModel _viewModel = new ();
+    private EditImages<SaveAutographImagesViewModel> EditImages;
 
     protected async Task OnImportClick()
     {
-        var query = new GetMemorabiliaImages.Query(_viewModel.MemorabiliaId);
-        var memorabliaImagesViewModel = await QueryRouter.Send(query).ConfigureAwait(false);
+        var query = new GetMemorabiliaImages.Query(ViewModel.MemorabiliaId);
+        var memorabliaImagesViewModel = await QueryRouter.Send(query);
         var images = memorabliaImagesViewModel.Images
-                                              .Select(image => new Domain.Entities.AutographImage(_viewModel.AutographId,
+                                              .Select(image => new Domain.Entities.AutographImage(ViewModel.AutographId,
                                                                                                   image.FilePath,
                                                                                                   image.ImageTypeId,
                                                                                                   image.UploadDate))
                                               .ToList();
 
-        _viewModel = new SaveAutographImagesViewModel(images, _viewModel.ItemType, _viewModel.MemorabiliaId, AutographId);
+        ViewModel = new SaveAutographImagesViewModel(images, ViewModel.ItemType, ViewModel.MemorabiliaId, AutographId);
     }
 
     protected async Task OnLoad()
     {
-        var autograph = await QueryRouter.Send(new GetAutograph.Query(AutographId)).ConfigureAwait(false);
+        var autograph = await QueryRouter.Send(new GetAutograph.Query(AutographId));
 
-        _viewModel = new SaveAutographImagesViewModel(autograph.Images, autograph.ItemType, autograph.MemorabiliaId, autograph.Id);
+        ViewModel = new SaveAutographImagesViewModel(autograph.Images, autograph.ItemType, autograph.MemorabiliaId, autograph.Id);
     }
 
     protected async Task OnSave()
     {
-        _viewModel.AutographId = AutographId;
+        ViewModel.AutographId = AutographId;
+        ViewModel.Images = EditImages.Images;
 
-        await CommandRouter.Send(new SaveAutographImage.Command(_viewModel)).ConfigureAwait(false);
+        await CommandRouter.Send(new SaveAutographImage.Command(ViewModel));
     }
 }

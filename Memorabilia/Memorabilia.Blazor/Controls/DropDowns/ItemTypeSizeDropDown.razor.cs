@@ -23,13 +23,13 @@ public partial class ItemTypeSizeDropDown : ComponentBase
 
     protected override async Task OnInitializedAsync()
     {
-        _itemTypeSizes = (await QueryRouter.Send(new GetItemTypeSizes.Query(ItemType.Id)).ConfigureAwait(false))
+        _itemTypeSizes = (await QueryRouter.Send(new GetItemTypeSizes.Query(ItemType.Id)))
                                         .ItemTypeSizes
                                         .OrderByDescending(size => size.SizeName);
     }
 
     private async Task OnInputChange(int value)
     {
-        await ValueChanged.InvokeAsync(value).ConfigureAwait(false);
+        await ValueChanged.InvokeAsync(value);
     }
 }

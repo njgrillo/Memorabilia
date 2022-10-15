@@ -23,11 +23,11 @@ public partial class ItemTypeBrandDropDown : ComponentBase
 
     protected override async Task OnInitializedAsync()
     {
-        _itemTypeBrands = (await QueryRouter.Send(new GetItemTypeBrands.Query(ItemType.Id)).ConfigureAwait(false)).ItemTypeBrands;
+        _itemTypeBrands = (await QueryRouter.Send(new GetItemTypeBrands.Query(ItemType.Id))).ItemTypeBrands;
     }
 
     private async Task OnInputChange(int value)
     {
-        await ValueChanged.InvokeAsync(value).ConfigureAwait(false);
+        await ValueChanged.InvokeAsync(value);
     }
 }

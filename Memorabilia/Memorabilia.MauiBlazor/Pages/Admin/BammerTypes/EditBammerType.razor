@@ -1,7 +1,9 @@
 ﻿@page "/BammerTypes/Edit/{id:int}"
 
-<MainPage>
+@inherits EditItem
+
+<PageLoader>
     <Content>
         <AcquisitionTypeEditor Id=@Id />
     </Content>
-</MainPage>
+</PageLoader>

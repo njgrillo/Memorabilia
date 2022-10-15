@@ -34,7 +34,7 @@ namespace Memorabilia.Blazor.Pages.MemorabiliaItems
                 return;
             }
 
-            _viewModel = new SaveMemorabiliaItemViewModel(await QueryRouter.Send(new GetMemorabiliaItem.Query(Id)).ConfigureAwait(false));
+            _viewModel = new SaveMemorabiliaItemViewModel(await QueryRouter.Send(new GetMemorabiliaItem.Query(Id)));
             _canEditItemType = false;
             _displayNumbered = _viewModel.IsNumbered;
         }
@@ -48,7 +48,7 @@ namespace Memorabilia.Blazor.Pages.MemorabiliaItems
 
             var command = new SaveMemorabiliaItem.Command(_viewModel);
 
-            await CommandRouter.Send(command).ConfigureAwait(false);
+            await CommandRouter.Send(command);
 
             var itemTypeName = ItemType.Find(_viewModel.ItemTypeId).Name;
             _viewModel.ContinueNavigationPath = $"Memorabilia/{itemTypeName.Replace(" ", "")}/Edit/{command.Id}";

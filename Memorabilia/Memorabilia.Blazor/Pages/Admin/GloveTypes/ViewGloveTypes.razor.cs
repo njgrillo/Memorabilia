@@ -6,11 +6,11 @@ public partial class ViewGloveTypes : ViewDomainItem<GloveTypesViewModel>, IDele
 {
     public async Task OnDelete(SaveDomainViewModel viewModel)
     {
-        await CommandRouter.Send(new SaveGloveType.Command(viewModel)).ConfigureAwait(false);
+        await CommandRouter.Send(new SaveGloveType.Command(viewModel));
     }
 
     public async Task OnLoad()
     {
-        ViewModel = await QueryRouter.Send(new GetGloveTypes.Query()).ConfigureAwait(false);
+        ViewModel = await QueryRouter.Send(new GetGloveTypes.Query());
     }
 }

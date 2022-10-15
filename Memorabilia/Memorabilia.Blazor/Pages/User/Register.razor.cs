@@ -19,8 +19,8 @@ public partial class Register : ComponentBase
     {
         var command = new AddUser.Command(_viewModel);
 
-        await CommandRouter.Send(command).ConfigureAwait(false);
-        await OnSaved.InvokeAsync(command.Id).ConfigureAwait(false);            
+        await CommandRouter.Send(command);
+        await OnSaved.InvokeAsync(command.Id);            
 
         NavigationManager.NavigateTo("Home");
     }

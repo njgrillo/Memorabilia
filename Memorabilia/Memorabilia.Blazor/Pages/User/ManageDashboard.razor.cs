@@ -23,7 +23,7 @@ public partial class ManageDashboard : ComponentBase
 
     protected async Task HandleValidSubmit()
     {
-        await CommandRouter.Send(new SaveUserDashboard.Command(_viewModel)).ConfigureAwait(false);
+        await CommandRouter.Send(new SaveUserDashboard.Command(_viewModel));
 
         NavigationManager.NavigateTo(_viewModel.ContinueNavigationPath);
         Snackbar.Add($"{_viewModel.PageTitle} was saved successfully!", Severity.Success);
@@ -34,6 +34,6 @@ public partial class ManageDashboard : ComponentBase
         if (UserId == 0)
             NavigationManager.NavigateTo("Login");
 
-        _viewModel = new SaveUserDashboardViewModel(await QueryRouter.Send(new GetUserDashboardItems.Query(UserId)).ConfigureAwait(false));
+        _viewModel = new SaveUserDashboardViewModel(await QueryRouter.Send(new GetUserDashboardItems.Query(UserId)));
     }
 }

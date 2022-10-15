@@ -27,7 +27,7 @@ public partial class ProjectEditor : ComponentBase
 
     protected async Task HandleValidSubmit()
     {
-        await CommandRouter.Send(new SaveProject.Command(_viewModel)).ConfigureAwait(false);
+        await CommandRouter.Send(new SaveProject.Command(_viewModel));
     }
 
     protected async Task OnLoad()
@@ -45,7 +45,7 @@ public partial class ProjectEditor : ComponentBase
             return;
         }
 
-        _viewModel = new SaveProjectViewModel(await QueryRouter.Send(new GetProject.Query(Id)).ConfigureAwait(false));
+        _viewModel = new SaveProjectViewModel(await QueryRouter.Send(new GetProject.Query(Id)));
     }
 
     private void AddProjectPerson()
@@ -136,6 +136,13 @@ public partial class ProjectEditor : ComponentBase
             : _viewModel.People.Single(person => person.Person.Id == personId && person.ItemTypeId == itemTypeId);
 
         projectPerson.IsDeleted = true;
+
+        var deletedRank = projectPerson.Rank;
+
+        foreach(var person in _viewModel.People.Where(person => person.Rank > deletedRank))
+        {
+            person.Rank--;
+        }
     }
 
     private void SelectedPersonChanged(SavePersonViewModel person)

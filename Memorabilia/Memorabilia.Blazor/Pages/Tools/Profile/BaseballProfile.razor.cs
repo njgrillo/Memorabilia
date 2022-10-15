@@ -25,6 +25,6 @@ public partial class BaseballProfile : ComponentBase
 
     protected override async Task OnInitializedAsync()
     {
-        _viewModel = await QueryRouter.Send(new GetBaseballProfile.Query(PersonId)).ConfigureAwait(false);
+        _viewModel = await QueryRouter.Send(new GetBaseballProfile.Query(PersonId));
     }
 }

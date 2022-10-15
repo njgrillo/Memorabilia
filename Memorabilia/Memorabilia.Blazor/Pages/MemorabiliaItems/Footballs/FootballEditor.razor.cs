@@ -8,7 +8,7 @@ public partial class FootballEditor : MemorabiliaItem<SaveFootballViewModel>
 
     protected async Task OnLoad()
     {
-        await LoadCommissioners().ConfigureAwait(false);
+        await LoadCommissioners();
 
         var viewModel = await QueryRouter.Send(new GetFootball.Query(MemorabiliaId));
 

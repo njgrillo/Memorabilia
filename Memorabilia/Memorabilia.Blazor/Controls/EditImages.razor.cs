@@ -73,7 +73,7 @@ public partial class EditImages<TItem> : ComponentBase
 
     protected async Task HandleValidSubmit()
     {
-        await OnSave.InvokeAsync().ConfigureAwait(false);
+        await OnSave.InvokeAsync();
 
         var url = _continue ? ContinueNavigationPath : ExitNavigationPath;
 
@@ -85,7 +85,7 @@ public partial class EditImages<TItem> : ComponentBase
     {
         _files = e.GetMultipleFiles(MaximumAllowedFiles);
 
-        await Save().ConfigureAwait(false);
+        await Save();
     }
 
     protected void PrimarySet(string filePath)
@@ -107,9 +107,6 @@ public partial class EditImages<TItem> : ComponentBase
 
     protected void Remove(string filePath)
     {
-        if (File.Exists(filePath))
-            File.Delete(filePath);
-
         var image = Images.FirstOrDefault(i => i.FilePath == filePath);
 
         if (image == null)
@@ -133,22 +130,22 @@ public partial class EditImages<TItem> : ComponentBase
         var images = new List<SaveImageViewModel>();
         var imageType = ImageType.Primary;
 
+        var directory = Path.Combine(UploadPath,
+                                             "wwwroot/userimages",
+                                             UserId.ToString());
+
+        if (!Directory.Exists(directory))
+            Directory.CreateDirectory(directory);
+
         foreach (var file in _files)
         {
             try
-            {
-                var directory = Path.Combine(UploadPath,
-                                             "wwwroot/userimages",
-                                             UserId.ToString()); 
-
-                if (!Directory.Exists(directory))
-                    Directory.CreateDirectory(directory);
-
+            {   
                 var fileName = Path.GetRandomFileName();
                 var path = Path.Combine(directory, fileName);
 
                 await using FileStream fs = new(path, FileMode.Create);
-                await file.OpenReadStream(MaximumFileSize).CopyToAsync(fs).ConfigureAwait(false);
+                await file.OpenReadStream(MaximumFileSize).CopyToAsync(fs);
 
                 images.Add(new SaveImageViewModel(new ImageViewModel(new Domain.Entities.Image($"wwwroot/userimages/{UserId}/{fileName}", imageType.Id)), file.Name));
 

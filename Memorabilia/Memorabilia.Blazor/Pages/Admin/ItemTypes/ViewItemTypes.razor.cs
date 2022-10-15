@@ -6,11 +6,11 @@ public partial class ViewItemTypes : ViewDomainItem<ItemTypesViewModel>, IDelete
 {
     public async Task OnDelete(SaveDomainViewModel viewModel)
     {
-        await CommandRouter.Send(new SaveItemType.Command(viewModel)).ConfigureAwait(false);
+        await CommandRouter.Send(new SaveItemType.Command(viewModel));
     }
 
     public async Task OnLoad()
     {
-        ViewModel = await QueryRouter.Send(new GetItemTypes.Query()).ConfigureAwait(false);
+        ViewModel = await QueryRouter.Send(new GetItemTypes.Query());
     }
 }

@@ -26,22 +26,22 @@ public partial class TeamDropDown : ComponentBase
 
     protected override async Task OnInitializedAsync()
     {
-        await Load().ConfigureAwait(false);
+        await Load();
     }
 
     private async Task Load()
     {
-        _teams = (await QueryRouter.Send(new GetTeams.Query(Franchise.Id, SportLeagueLevel.Id)).ConfigureAwait(false)).Teams;
+        _teams = (await QueryRouter.Send(new GetTeams.Query(Franchise.Id, SportLeagueLevel.Id))).Teams;
     }
 
     private async Task OnInputChange(int value)
     {
-        await ValueChanged.InvokeAsync(value).ConfigureAwait(false);
+        await ValueChanged.InvokeAsync(value);
     }
 
     protected override async Task OnParametersSetAsync()
     {
         if (Franchise != null)
-            await Load().ConfigureAwait(false);
+            await Load();
     }
 }

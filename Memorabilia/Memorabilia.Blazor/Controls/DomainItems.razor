@@ -1,9 +1,9 @@
 ﻿<Page OnLoad="Load">
     <Content>
-        <DomainTable DomainEntities="@_viewModel.DomainEntities"
-                     DomainItemName="@_viewModel.ItemTitle"
-                     DomainItemTitle="@_viewModel.PageTitle"
+        <DomainTable DomainEntities="@ViewModel.DomainEntities"
+                     DomainItemName="@ViewModel.ItemTitle"
+                     DomainItemTitle="@ViewModel.PageTitle"
                      OnDelete="Delete"
-                     RoutePrefix="@_viewModel.RoutePrefix" />
+                     RoutePrefix="@ViewModel.RoutePrefix" />
     </Content>
 </Page>

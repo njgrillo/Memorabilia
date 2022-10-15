@@ -26,7 +26,7 @@ public partial class ViewDivisions
 
     protected async Task OnLoad()
     {
-        ViewModel = await QueryRouter.Send(new GetDivisions.Query()).ConfigureAwait(false);
+        ViewModel = await QueryRouter.Send(new GetDivisions.Query());
     }
 
     protected async Task ShowDeleteConfirm(int id)
@@ -37,7 +37,7 @@ public partial class ViewDivisions
         if (result.Cancelled)
             return;
 
-        await Delete(id).ConfigureAwait(false);
+        await Delete(id);
     }
 
     private async Task Delete(int id)
@@ -48,7 +48,7 @@ public partial class ViewDivisions
             IsDeleted = true
         };
 
-        await CommandRouter.Send(new SaveDivision.Command(viewModel)).ConfigureAwait(false);
+        await CommandRouter.Send(new SaveDivision.Command(viewModel));
 
         ViewModel.Divisions.Remove(deletedItem);
 

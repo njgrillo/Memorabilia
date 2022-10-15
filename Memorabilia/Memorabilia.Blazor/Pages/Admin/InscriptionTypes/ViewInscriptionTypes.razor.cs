@@ -6,11 +6,11 @@ public partial class ViewInscriptionTypes : ViewDomainItem<InscriptionTypesViewM
 {
     public async Task OnDelete(SaveDomainViewModel viewModel)
     {
-        await CommandRouter.Send(new SaveInscriptionType.Command(viewModel)).ConfigureAwait(false);
+        await CommandRouter.Send(new SaveInscriptionType.Command(viewModel));
     }
 
     public async Task OnLoad()
     {
-        ViewModel = await QueryRouter.Send(new GetInscriptionTypes.Query()).ConfigureAwait(false);
+        ViewModel = await QueryRouter.Send(new GetInscriptionTypes.Query());
     }
 }

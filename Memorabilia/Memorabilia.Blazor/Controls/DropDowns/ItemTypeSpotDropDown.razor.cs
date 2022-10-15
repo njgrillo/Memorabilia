@@ -23,13 +23,13 @@ public partial class ItemTypeSpotDropDown : ComponentBase
 
     protected override async Task OnInitializedAsync()
     {
-        _itemTypeSpots = (await QueryRouter.Send(new GetItemTypeSpots.Query(ItemType.Id)).ConfigureAwait(false))
+        _itemTypeSpots = (await QueryRouter.Send(new GetItemTypeSpots.Query(ItemType.Id)))
                                     .ItemTypeSpots
                                     .OrderByDescending(spot => spot.SpotName);
     }
 
     private async Task OnInputChange(int value)
     {
-        await ValueChanged.InvokeAsync(value).ConfigureAwait(false);
+        await ValueChanged.InvokeAsync(value);
     }
 }

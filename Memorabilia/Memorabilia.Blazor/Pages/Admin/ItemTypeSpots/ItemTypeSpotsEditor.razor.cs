@@ -18,7 +18,7 @@ public partial class ItemTypeSpotsEditor : ComponentBase
 
     protected async Task HandleValidSubmit()
     {
-        await CommandRouter.Send(new SaveItemTypeSpot.Command(ViewModel)).ConfigureAwait(false);
+        await CommandRouter.Send(new SaveItemTypeSpot.Command(ViewModel));
     }
 
     protected async Task OnLoad()
@@ -29,6 +29,6 @@ public partial class ItemTypeSpotsEditor : ComponentBase
             return;
         }
 
-        ViewModel = new SaveItemTypeSpotViewModel(await QueryRouter.Send(new GetItemTypeSpot.Query(Id)).ConfigureAwait(false));
+        ViewModel = new SaveItemTypeSpotViewModel(await QueryRouter.Send(new GetItemTypeSpot.Query(Id)));
     }
 }

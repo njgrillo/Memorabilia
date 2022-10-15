@@ -17,7 +17,7 @@ public partial class ConferenceEditor : ComponentBase
 
     protected async Task HandleValidSubmit()
     {
-        await CommandRouter.Send(new SaveConference.Command(ViewModel)).ConfigureAwait(false);
+        await CommandRouter.Send(new SaveConference.Command(ViewModel));
     }
 
     protected async Task OnLoad()
@@ -25,6 +25,6 @@ public partial class ConferenceEditor : ComponentBase
         if (Id == 0)
             return;
 
-        ViewModel = new SaveConferenceViewModel(await QueryRouter.Send(new GetConference.Query(Id)).ConfigureAwait(false));
+        ViewModel = new SaveConferenceViewModel(await QueryRouter.Send(new GetConference.Query(Id)));
     }
 }

@@ -1,33 +1,35 @@
-﻿<EditPage ContinueNavigationPath="@_authenticationsViewModel.ContinueNavigationPath"
-          EditMode="_authenticationsViewModel.EditModeType"
-          ExitNavigationPath="@_authenticationsViewModel.ExitNavigationPath"
-          ImagePath="@_authenticationsViewModel.ImagePath"
-          ItemName="@_authenticationsViewModel.PageTitle"
-          Model="_authenticationsViewModel"
+﻿@inherits AutographItem<SaveAuthenticationViewModel>
+
+<EditPage ContinueNavigationPath="@AuthenticationsViewModel.ContinueNavigationPath"
+          EditMode="AuthenticationsViewModel.EditModeType"
+          ExitNavigationPath="@AuthenticationsViewModel.ExitNavigationPath"
+          ImagePath="@AuthenticationsViewModel.ImagePath"
+          ItemName="@AuthenticationsViewModel.PageTitle"
+          Model="AuthenticationsViewModel"
           OnLoad="OnLoad"
           OnSave="OnSave"
-          PageFooterButtonText="@_authenticationsViewModel.ExitButtonText"
-          PageFooterNavigationPath="@_authenticationsViewModel.BackNavigationPath"
-          PageTitle="@_authenticationsViewModel.PageTitle"
+          PageFooterButtonText="@AuthenticationsViewModel.ExitButtonText"
+          PageFooterNavigationPath="@AuthenticationsViewModel.BackNavigationPath"
+          PageTitle="@AuthenticationsViewModel.PageTitle"
           TItem="SaveAuthenticationsViewModel"
           UseMultipleButtons="true">
     <TimelineContent>
-        <AutographTimeline AutographId="_authenticationsViewModel.AutographId" 
-                           AutographStep="_authenticationsViewModel.AutographStep"  
-                           DisplaySpot="_authenticationsViewModel.CanHaveSpot" 
-                           EditMode="_authenticationsViewModel.EditModeType"
-                           MemorabiliaId="_authenticationsViewModel.MemorabiliaId"/>
+        <AutographTimeline AutographId="AuthenticationsViewModel.AutographId" 
+                           AutographStep="AuthenticationsViewModel.AutographStep"  
+                           DisplaySpot="AuthenticationsViewModel.CanHaveSpot" 
+                           EditMode="AuthenticationsViewModel.EditModeType"
+                           MemorabiliaId="AuthenticationsViewModel.MemorabiliaId"/>
     </TimelineContent>
     <Content>
         <DivRowCol4>
             <Content>
-                <MudSelect @bind-Value="@_viewModel.AuthenticationCompanyId"
+                <MudSelect @bind-Value="@ViewModel.AuthenticationCompanyId"
                            @bind-Value:event="ValueChanged" 
                            Disabled="@(!_canEditAuthenticationCompany)"
                            Label="Authentication Company"
                            Variant="Variant.Outlined">
                     <MudSelectItem Value="@(0)">--Select--</MudSelectItem>
-                    <Iterations Items="_viewModel.AuthenticationCompanies" Context="authenticationCompany">
+                    <Iterations Items="ViewModel.AuthenticationCompanies" Context="authenticationCompany">
                         <MudSelectItem Value="@authenticationCompany.Id">@authenticationCompany.Name</MudSelectItem>
                     </Iterations>	
                 </MudSelect>
@@ -35,28 +37,28 @@
         </DivRowCol4>
         <DivRowCol4>
             <Content>
-                <MudTextField @bind-Value="_viewModel.Verification" 
+                <MudTextField @bind-Value="ViewModel.Verification" 
                               Label="Verification" 
                               Variant="Variant.Outlined" /> 
             </Content>
         </DivRowCol4>
         <DivRowCol2>
             <Content>
-                <MudCheckBox @bind-Checked="@_viewModel.HasHologram" 
+                <MudCheckBox @bind-Checked="@ViewModel.HasHologram" 
                              Label="Has Hologram" />
             </Content>
             <ContentColumn2>
-                <MudCheckBox @bind-Checked="@_viewModel.HasCertificationCard" 
+                <MudCheckBox @bind-Checked="@ViewModel.HasCertificationCard" 
                              Label="Has Certification Card" />
             </ContentColumn2>
         </DivRowCol2>
         <DivRowCol2>
             <Content>
-                <MudCheckBox @bind-Checked="@_viewModel.HasLetter"
+                <MudCheckBox @bind-Checked="@ViewModel.HasLetter"
                              Label="Has Letter" />
             </Content>
             <ContentColumn2>
-                <MudCheckBox @bind-Checked="@_viewModel.Witnessed" 
+                <MudCheckBox @bind-Checked="@ViewModel.Witnessed" 
                              Label="Witnessed" />
             </ContentColumn2>
         </DivRowCol2>
@@ -81,7 +83,7 @@
                 <MudTable Bordered="false"
                           Dense="false" 
                           Hover="true"
-                          Items="@_authenticationsViewModel.Authentications.Where(authentication => !authentication.IsDeleted)"    
+                          Items="@AuthenticationsViewModel.Authentications.Where(authentication => !authentication.IsDeleted)"    
                           Striped="true">
                     <ToolBarContent>
                         <MudText Typo="Typo.h6">Authentications</MudText>
@@ -96,7 +98,16 @@
                         <MudTh></MudTh>
                     </HeaderContent>
                     <RowTemplate Context="authentication">
-                        <MudTd DataLabel="Authentication Company">@authentication.AuthenticationCompanyName</MudTd>
+                        <MudTd DataLabel="Authentication Company">
+                            <PrettyBlazor.Condition Evaluation="authentication.CanNavigateToWebsite">
+                                <Match>
+                                    <MudLink Href="@(authentication.VerificationWebsiteLink)" Target="_blank">@authentication.VerificationWebsiteLinkText</MudLink>
+                                </Match>
+                                <NotMatch>
+                                    @authentication.AuthenticationCompanyName
+                                </NotMatch>
+                            </PrettyBlazor.Condition>                            
+                         </MudTd>
                         <MudTd DataLabel="Has Certification Card">@(authentication.HasCertificationCard ? "Yes" : "No")</MudTd>
                         <MudTd DataLabel="Has Hologram">@(authentication.HasHologram ? "Yes" : "No")</MudTd>
                         <MudTd DataLabel="Has Letter">@(authentication.HasLetter ? "Yes" : "No")</MudTd>

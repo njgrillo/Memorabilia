@@ -11,6 +11,6 @@ public partial class ViewAwards : ComponentBase
 
     private async Task OnInputChange(int awardTypeId)
     {
-        _viewModel = await QueryRouter.Send(new GetAwards.Query(awardTypeId)).ConfigureAwait(false);
+        _viewModel = await QueryRouter.Send(new GetAwards.Query(awardTypeId));
     }
 }

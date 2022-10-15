@@ -39,6 +39,6 @@ public partial class PageView : ComponentBase
 
     public async Task Load()
     {
-        await OnLoad.InvokeAsync().ConfigureAwait(false);
+        await OnLoad.InvokeAsync();
     }
 }

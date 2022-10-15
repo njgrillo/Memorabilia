@@ -2,16 +2,8 @@
 
 namespace Memorabilia.Blazor.Pages.Autograph;
 
-public partial class AutographEditor : ComponentBase
-{
-    [Inject]
-    public CommandRouter CommandRouter { get; set; }
-
-    [Inject]
-    public QueryRouter QueryRouter { get; set; }
-
-    [Parameter]
-    public int AutographId { get; set; }     
+public partial class AutographEditor : AutographItem<SaveAutographViewModel>
+{   
 
     [Parameter]
     public int MemorabiliaId { get; set; }       
@@ -21,11 +13,10 @@ public partial class AutographEditor : ComponentBase
     private bool _displayNumbered;
     private bool _displayPersonalization;
     private bool _displayPersonImport;
-    private SaveAutographViewModel _viewModel = new ();
 
     protected async Task OnLoad()
     {
-        var viewModel = await QueryRouter.Send(new GetMemorabiliaItem.Query(MemorabiliaId)).ConfigureAwait(false);
+        var viewModel = await QueryRouter.Send(new GetMemorabiliaItem.Query(MemorabiliaId));
 
         _displayPersonImport = viewModel.People.Any() && viewModel.People.Count() == 1;            
 
@@ -33,7 +24,7 @@ public partial class AutographEditor : ComponentBase
         {
             if (AutographId == 0)
             {
-                _viewModel = new SaveAutographViewModel(viewModel);
+                ViewModel = new SaveAutographViewModel(viewModel);
                 SetDefaults();
                 return;
             }
@@ -42,18 +33,18 @@ public partial class AutographEditor : ComponentBase
         }
         else
         {
-            _viewModel = new SaveAutographViewModel(viewModel);
+            ViewModel = new SaveAutographViewModel(viewModel);
             SetDefaults();
         }
     }
 
     protected async Task OnSave()
     {
-        var command = new SaveAutograph.Command(_viewModel);
+        var command = new SaveAutograph.Command(ViewModel);
 
-        await CommandRouter.Send(command).ConfigureAwait(false);
+        await CommandRouter.Send(command);
 
-        _viewModel.ContinueNavigationPath = $"Autographs/Inscriptions/{EditModeType.Update.Name}/{command.Id}";
+        ViewModel.ContinueNavigationPath = $"Autographs/Inscriptions/{EditModeType.Update.Name}/{command.Id}";
     }
 
     private void AcquisitionDetailsCheckboxClicked(bool isChecked)
@@ -62,10 +53,10 @@ public partial class AutographEditor : ComponentBase
 
         if (!_displayAcquisitionDetails)
         {
-            _viewModel.AcquisitionTypeId = 0;
-            _viewModel.AcquiredDate = null;
-            _viewModel.Cost = null;
-            _viewModel.PurchaseTypeId = 0;
+            ViewModel.AcquisitionTypeId = 0;
+            ViewModel.AcquiredDate = null;
+            ViewModel.Cost = null;
+            ViewModel.PurchaseTypeId = 0;
         }
     }
 
@@ -74,7 +65,7 @@ public partial class AutographEditor : ComponentBase
         _displayEstimatedValue = !isChecked;
 
         if (!_displayEstimatedValue)
-            _viewModel.EstimatedValue = null;
+            ViewModel.EstimatedValue = null;
     }
 
     private void GetViewModel(MemorabiliaItemViewModel viewModel)
@@ -85,19 +76,19 @@ public partial class AutographEditor : ComponentBase
 
         if (autograph == null)
         {
-            _viewModel = new SaveAutographViewModel(viewModel);
-            _displayNumbered = _viewModel.IsNumbered;
+            ViewModel = new SaveAutographViewModel(viewModel);
+            _displayNumbered = ViewModel.IsNumbered;
             SetDefaults();
             return;
         }
 
-        _viewModel = new SaveAutographViewModel(autograph);
+        ViewModel = new SaveAutographViewModel(autograph);
 
-        _displayAcquisitionDetails = _viewModel.AcquisitionTypeId > 0;
-        _displayEstimatedValue = _viewModel.EstimatedValue.HasValue;
-        _displayNumbered = _viewModel.IsNumbered;
-        _displayPersonalization = !_viewModel.PersonalizationText.IsNullOrEmpty();
-        _displayPersonImport = _viewModel.MemorabiliaPerson?.Id > 0;
+        _displayAcquisitionDetails = ViewModel.AcquisitionTypeId > 0;
+        _displayEstimatedValue = ViewModel.EstimatedValue.HasValue;
+        _displayNumbered = ViewModel.IsNumbered;
+        _displayPersonalization = !ViewModel.PersonalizationText.IsNullOrEmpty();
+        _displayPersonImport = ViewModel.MemorabiliaPerson?.Id > 0;
     }
 
     private void NumberedCheckboxClicked(bool isChecked)
@@ -106,37 +97,37 @@ public partial class AutographEditor : ComponentBase
 
         if (!_displayNumbered)
         {
-            _viewModel.Denominator = null;
-            _viewModel.Numerator = null;
+            ViewModel.Denominator = null;
+            ViewModel.Numerator = null;
         }
     }
 
     private void OnImportAcquisitionClick()
     {
-        _viewModel.AcquisitionTypeId = _viewModel.MemorabiliaAcquisitionTypeId;
-        _viewModel.AcquiredDate = _viewModel.MemorabiliaAcquiredDate;
-        _viewModel.Cost = _viewModel.MemorabiliaCost;
-        _viewModel.PurchaseTypeId = _viewModel.MemorabiliaPurchaseTypeId ?? 0;
+        ViewModel.AcquisitionTypeId = ViewModel.MemorabiliaAcquisitionTypeId;
+        ViewModel.AcquiredDate = ViewModel.MemorabiliaAcquiredDate;
+        ViewModel.Cost = ViewModel.MemorabiliaCost;
+        ViewModel.PurchaseTypeId = ViewModel.MemorabiliaPurchaseTypeId ?? 0;
     }
 
     private void OnImportPersonClick()
     {
-        _viewModel.Person = new SavePersonViewModel(_viewModel.MemorabiliaPerson);
+        ViewModel.Person = new SavePersonViewModel(ViewModel.MemorabiliaPerson);
     }
 
     private void PersonalizationCheckboxClicked(bool isChecked)
     {
         _displayPersonalization = isChecked;
-        _viewModel.PersonalizationText = isChecked ? $"To {_viewModel.UserFirstName}" : null;
+        ViewModel.PersonalizationText = isChecked ? $"To {ViewModel.UserFirstName}" : null;
     }
 
     private void SelectedPersonChanged(SavePersonViewModel person)
     {
-        _viewModel.Person = person;
+        ViewModel.Person = person;
     }
 
     private void SetDefaults()
     {
-        _viewModel.ConditionId = Domain.Constants.Condition.Pristine.Id;
+        ViewModel.ConditionId = Condition.Pristine.Id;
     }
 }

@@ -264,14 +264,19 @@
                             </MudSelect>
                         </div>
                     </div> 
-                    <div class="col-lg-2" />
+                    <div class="col-lg-2">
+                        <div class="form-group">
+                            <MudCheckBox @bind-Checked="@_hasAutographAuthentication"
+                                         Label="Has Authentication(s)" />  
+                        </div>
+                    </div>
                     <div class="col-lg-2">
                         <div class="form-group">
                             <MudNumericField @bind-Value="_autographEstimatedValue" 
                                                 Label="Estimated Value ($)"
                                                 Variant="Variant.Outlined" />
                         </div>
-                    </div> 
+                    </div>  
                 </div>
                 <div class="row">
                     <div class="col-lg-2">
@@ -311,9 +316,9 @@
                     <div class="col-lg-2">
                         <div class="form-group">
                             <MudSelect @bind-Value="@_sportLeagueLevelId"
-                                        @bind-Value:event="ValueChanged" 
-                                        Label="Sport League Level"
-                                        Variant="Variant.Outlined">
+                                       @bind-Value:event="ValueChanged" 
+                                       Label="Sport League Level"
+                                       Variant="Variant.Outlined">
                                 <MudSelectItem Value="@(0)">--Select--</MudSelectItem>
                                 <Iterations Items="SportLeagueLevel.All" Context="sportLeagueLevel">
                                     <MudSelectItem Value="@sportLeagueLevel.Id">@sportLeagueLevel.Name</MudSelectItem>
@@ -321,6 +326,12 @@
                             </MudSelect>  
                         </div>                    
                     </div> 
+                    <div class="col-lg-2">
+                        <div class="form-group">
+                            <MudCheckBox @bind-Checked="@_hasAutographInscription"
+                                         Label="Has Inscription(s)" />  
+                        </div>
+                    </div>
                 </div>
                 <div class="row">
                     <div class="col-lg-4">
@@ -349,6 +360,12 @@
                             </MudSelect>
                         </div>
                     </div> 
+                    <div class="col-lg-2">
+                        <div class="form-group">
+                            <MudCheckBox @bind-Checked="@_noAutographImages"
+                                         Label="No Image(s)" />  
+                        </div>
+                    </div>
                 </div>
                 <div class="row">
                     <div class="col-lg-6">

@@ -2,10 +2,7 @@
 
 <PrettyBlazor.Condition Evaluation="@(!PageLoaded)">
     <Match>
-        <div class="spinnerDiv">
-            <MudImage Class="spinnerImage"
-                      Src="images/spinner.gif" />
-        </div>
+        <Spinner />
     </Match>
     <NotMatch>
         @Content

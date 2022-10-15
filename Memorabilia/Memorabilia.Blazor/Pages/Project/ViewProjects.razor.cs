@@ -23,7 +23,7 @@ public partial class ViewProjects : ComponentBase
 
     protected async Task OnLoad()
     {
-        _viewModel = await QueryRouter.Send(new GetProjects.Query(UserId)).ConfigureAwait(false);
+        _viewModel = await QueryRouter.Send(new GetProjects.Query(UserId));
     }
 
     protected async Task ShowDeleteConfirm(int id)
@@ -34,7 +34,7 @@ public partial class ViewProjects : ComponentBase
         if (result.Cancelled)
             return;
 
-        await Delete(id).ConfigureAwait(false);
+        await Delete(id);
     }
 
     protected async Task Delete(int id)
@@ -45,7 +45,7 @@ public partial class ViewProjects : ComponentBase
             IsDeleted = true
         };
 
-        await CommandRouter.Send(new SaveProject.Command(viewModel)).ConfigureAwait(false);
+        await CommandRouter.Send(new SaveProject.Command(viewModel));
 
         _viewModel.Projects.Remove(deletedItem);
 

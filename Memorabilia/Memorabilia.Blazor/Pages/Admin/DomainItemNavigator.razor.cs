@@ -7,6 +7,8 @@ public partial class DomainItemNavigator : ComponentBase
     public string DomainItemQuickJump;
     public readonly AdminDomainItemsViewModel ViewModel = new ();
 
+    public string ImageRoot => Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.CommonProgramFiles), "GraphinAllDay");
+
     [Parameter]
     public EventCallback<string> OnNavigate { get; set; }
 

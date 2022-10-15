@@ -24,7 +24,7 @@ public partial class PersonTeamSelector : ComponentBase
 
     protected override async Task OnInitializedAsync()
     {
-        await LoadTeams().ConfigureAwait(false);
+        await LoadTeams();
     }
 
     private void Add()
@@ -47,7 +47,7 @@ public partial class PersonTeamSelector : ComponentBase
     {
         var query = new GetTeams.Query();
 
-        _teams = (await QueryRouter.Send(query).ConfigureAwait(false)).Teams.Select(team => new SavePersonTeamViewModel(PersonId, team));
+        _teams = (await QueryRouter.Send(query)).Teams.Select(team => new SavePersonTeamViewModel(PersonId, team));
 
         if (SportIds.Any())
         {
@@ -70,7 +70,7 @@ public partial class PersonTeamSelector : ComponentBase
         if (searchText.IsNullOrEmpty())
             return Array.Empty<SavePersonTeamViewModel>();
 
-        return await Task.FromResult(_teams.Where(team => team.TeamDisplayName.Contains(searchText, StringComparison.OrdinalIgnoreCase))).ConfigureAwait(false);
+        return await Task.FromResult(_teams.Where(team => team.TeamDisplayName.Contains(searchText, StringComparison.OrdinalIgnoreCase)));
     }
 
     private void Update()

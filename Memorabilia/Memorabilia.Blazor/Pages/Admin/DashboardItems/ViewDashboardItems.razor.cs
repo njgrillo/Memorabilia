@@ -28,7 +28,7 @@ public partial class ViewDashboardItems
 
     protected async Task OnLoad()
     {
-        ViewModel = await QueryRouter.Send(new GetDashboardItems.Query()).ConfigureAwait(false);
+        ViewModel = await QueryRouter.Send(new GetDashboardItems.Query());
     }
 
     protected async Task ShowDeleteConfirm(int id)
@@ -39,7 +39,7 @@ public partial class ViewDashboardItems
         if (result.Cancelled)
             return;
 
-        await Delete(id).ConfigureAwait(false);
+        await Delete(id);
     }
 
     protected async Task Delete(int id)
@@ -50,7 +50,7 @@ public partial class ViewDashboardItems
             IsDeleted = true
         };
 
-        await CommandRouter.Send(new SaveDashboardItem.Command(viewModel)).ConfigureAwait(false);
+        await CommandRouter.Send(new SaveDashboardItem.Command(viewModel));
 
         ViewModel.DashboardItems.Remove(deletedItem);
 

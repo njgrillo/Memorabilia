@@ -6,11 +6,11 @@ public partial class ViewChampionTypes : ViewDomainItem<ChampionTypesViewModel>,
 {
     public async Task OnDelete(SaveDomainViewModel viewModel)
     {
-        await CommandRouter.Send(new SaveChampionType.Command(viewModel)).ConfigureAwait(false);
+        await CommandRouter.Send(new SaveChampionType.Command(viewModel));
     }
 
     public async Task OnLoad()
     {
-        ViewModel = await QueryRouter.Send(new GetChampionTypes.Query()).ConfigureAwait(false);
+        ViewModel = await QueryRouter.Send(new GetChampionTypes.Query());
     }
 }

@@ -6,11 +6,11 @@ public partial class ViewGameStyleTypes : ViewDomainItem<GameStyleTypesViewModel
 {
     public async Task OnDelete(SaveDomainViewModel viewModel)
     {
-        await CommandRouter.Send(new SaveGameStyleType.Command(viewModel)).ConfigureAwait(false);
+        await CommandRouter.Send(new SaveGameStyleType.Command(viewModel));
     }
 
     public async Task OnLoad()
     {
-        ViewModel = await QueryRouter.Send(new GetGameStyleTypes.Query()).ConfigureAwait(false);
+        ViewModel = await QueryRouter.Send(new GetGameStyleTypes.Query());
     }
 }

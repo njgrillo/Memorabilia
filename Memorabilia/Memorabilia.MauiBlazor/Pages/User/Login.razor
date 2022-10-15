@@ -1,8 +1,10 @@
 ﻿@page "/Login"
 
-<MainPage>
+@inherits DesktopPage
+
+<PageLoader>
     <Content>
         <Memorabilia.Blazor.Pages.User.Login UserValidated="UserValidated" />
     </Content>
-</MainPage>
+</PageLoader>
 

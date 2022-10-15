@@ -14,6 +14,6 @@ public partial class Logout : ComponentBase
     {
         NavigationManager.NavigateTo("Login");
 
-        await LoggedOut.InvokeAsync().ConfigureAwait(false);
+        await LoggedOut.InvokeAsync();
     }
 }

@@ -45,7 +45,7 @@ public partial class MultiTeamSelector : ComponentBase
         _displayTeams = !CanToggle || SelectedTeam?.Id > 0 || Teams.Any();
         _hasTeams = SelectedTeam?.Id > 0 || Teams.Any();
 
-        await LoadTeams().ConfigureAwait(false);
+        await LoadTeams();
     }
 
     private void Add()
@@ -62,7 +62,7 @@ public partial class MultiTeamSelector : ComponentBase
 
     private async Task LoadTeams()
     {
-        _teams = (await QueryRouter.Send(new GetTeams.Query(sportLeagueLevelId: SportLeagueLevel?.Id)).ConfigureAwait(false)).Teams.Select(team => new SaveTeamViewModel(team));
+        _teams = (await QueryRouter.Send(new GetTeams.Query(sportLeagueLevelId: SportLeagueLevel?.Id))).Teams.Select(team => new SaveTeamViewModel(team));
     }
 
     private void Remove(int teamId)
@@ -80,7 +80,7 @@ public partial class MultiTeamSelector : ComponentBase
         if (searchText.IsNullOrEmpty())
             return Array.Empty<SaveTeamViewModel>();
 
-        return await Task.FromResult(_teams.Where(team => team.DisplayName.Contains(searchText, StringComparison.OrdinalIgnoreCase))).ConfigureAwait(false);
+        return await Task.FromResult(_teams.Where(team => team.DisplayName.Contains(searchText, StringComparison.OrdinalIgnoreCase)));
     }
 
     private void TeamCheckboxClicked(bool isChecked)

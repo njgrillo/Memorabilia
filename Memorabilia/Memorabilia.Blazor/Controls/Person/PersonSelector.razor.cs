@@ -53,12 +53,12 @@ public partial class PersonSelector : ComponentBase
         _displayPeople = !CanToggle || SelectedPerson?.Id > 0 || People.Any();
         _hasPeople = SelectedPerson?.Id > 0 || People.Any();
 
-        await LoadPeople().ConfigureAwait(false);
+        await LoadPeople();
     }
 
     private async Task LoadPeople()
     {
-        _people = (await QueryRouter.Send(new GetPeople.Query(Sport?.Id ?? null)).ConfigureAwait(false)).People.Select(person => new SavePersonViewModel(person));
+        _people = (await QueryRouter.Send(new GetPeople.Query(Sport?.Id ?? null))).People.Select(person => new SavePersonViewModel(person));
     }
 
     private void PersonCheckboxClicked(bool isChecked)
@@ -78,7 +78,7 @@ public partial class PersonSelector : ComponentBase
         var sportId = _filterPeople ? Sport.Id : (int?)null;
         var query = new GetPeople.Query(sportId);
 
-        _people = (await QueryRouter.Send(query).ConfigureAwait(false)).People.Select(person => new SavePersonViewModel(person));
+        _people = (await QueryRouter.Send(query)).People.Select(person => new SavePersonViewModel(person));
     }
 
     private async Task<IEnumerable<SavePersonViewModel>> SearchPeople(string searchText)
@@ -92,6 +92,6 @@ public partial class PersonSelector : ComponentBase
 
         var culturalResults = _people.Where(person => person.ProfileName.Contains(searchText, StringComparison.OrdinalIgnoreCase));
 
-        return await Task.FromResult(nonCulturalResults.Union(culturalResults).DistinctBy(person => person.Id)).ConfigureAwait(false);
+        return await Task.FromResult(nonCulturalResults.Union(culturalResults).DistinctBy(person => person.Id));
     }
 }

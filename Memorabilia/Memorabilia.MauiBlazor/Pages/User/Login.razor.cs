@@ -1,10 +1,9 @@
-﻿namespace Memorabilia.MauiBlazor.Pages.User
+﻿namespace Memorabilia.MauiBlazor.Pages.User;
+
+public partial class Login : DesktopPage
 {
-    public partial class Login : ComponentBase
+    protected void UserValidated(int userId)
     {
-        protected async Task UserValidated(int userId)
-        {
-            await SecureStorage.Default.SetAsync("UserId", userId.ToString());
-        }
+        UserId = userId;
     }
 }

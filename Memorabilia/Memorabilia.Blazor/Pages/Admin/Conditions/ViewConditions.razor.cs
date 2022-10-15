@@ -4,11 +4,11 @@ public partial class ViewConditions : ViewDomainItem<ConditionsViewModel>, IDele
 {
     public async Task OnDelete(SaveDomainViewModel viewModel)
     {
-        await CommandRouter.Send(new SaveCondition.Command(viewModel)).ConfigureAwait(false);
+        await CommandRouter.Send(new SaveCondition.Command(viewModel));
     }
 
     public async Task OnLoad()
     {
-        ViewModel = await QueryRouter.Send(new GetConditions.Query()).ConfigureAwait(false);
+        ViewModel = await QueryRouter.Send(new GetConditions.Query());
     }
 }

@@ -17,7 +17,7 @@ public partial class DivisionEditor : ComponentBase
 
     protected async Task HandleValidSubmit()
     {
-        await CommandRouter.Send(new SaveDivision.Command(ViewModel)).ConfigureAwait(false);
+        await CommandRouter.Send(new SaveDivision.Command(ViewModel));
     }
 
     protected async Task OnLoad()
@@ -25,6 +25,6 @@ public partial class DivisionEditor : ComponentBase
         if (Id == 0)
             return;
 
-        ViewModel = new SaveDivisionViewModel(await QueryRouter.Send(new GetDivision.Query(Id)).ConfigureAwait(false));
+        ViewModel = new SaveDivisionViewModel(await QueryRouter.Send(new GetDivision.Query(Id)));
     }
 }

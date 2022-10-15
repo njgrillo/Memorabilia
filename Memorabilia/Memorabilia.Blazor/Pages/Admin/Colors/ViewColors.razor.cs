@@ -6,11 +6,11 @@ public partial class ViewColors : ViewDomainItem<ColorsViewModel>, IDeleteDomain
 {
     public async Task OnDelete(SaveDomainViewModel viewModel)
     {
-        await CommandRouter.Send(new SaveColor.Command(viewModel)).ConfigureAwait(false);
+        await CommandRouter.Send(new SaveColor.Command(viewModel));
     }
 
     public async Task OnLoad()
     {
-        ViewModel = await QueryRouter.Send(new GetColors.Query()).ConfigureAwait(false);
+        ViewModel = await QueryRouter.Send(new GetColors.Query());
     }
 }

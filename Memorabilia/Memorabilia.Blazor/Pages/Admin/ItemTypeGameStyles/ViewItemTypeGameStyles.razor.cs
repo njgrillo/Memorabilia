@@ -26,7 +26,7 @@ public partial class ViewItemTypeGameStyles : ComponentBase
 
     protected async Task OnLoad()
     {
-        ViewModel = await QueryRouter.Send(new GetItemTypeGameStyles.Query()).ConfigureAwait(false);
+        ViewModel = await QueryRouter.Send(new GetItemTypeGameStyles.Query());
     }
 
     protected async Task ShowDeleteConfirm(int id)
@@ -37,7 +37,7 @@ public partial class ViewItemTypeGameStyles : ComponentBase
         if (result.Cancelled)
             return;
 
-        await Delete(id).ConfigureAwait(false);
+        await Delete(id);
     }
 
     protected async Task Delete(int id)
@@ -48,7 +48,7 @@ public partial class ViewItemTypeGameStyles : ComponentBase
             IsDeleted = true
         };
 
-        await CommandRouter.Send(new SaveItemTypeGameStyle.Command(viewModel)).ConfigureAwait(false);
+        await CommandRouter.Send(new SaveItemTypeGameStyle.Command(viewModel));
 
         ViewModel.ItemTypeGameStyles.Remove(deletedItem);
 

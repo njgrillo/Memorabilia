@@ -1,4 +1,6 @@
-﻿<EditPage ContinueNavigationPath="@_inscriptionsViewModel.ContinueNavigationPath"
+﻿@inherits AutographItem<SaveInscriptionViewModel>
+
+<EditPage ContinueNavigationPath="@_inscriptionsViewModel.ContinueNavigationPath"
           EditMode="_inscriptionsViewModel.EditModeType"
           ExitNavigationPath="@_inscriptionsViewModel.ExitNavigationPath"
           ImagePath="@_inscriptionsViewModel.ImagePath"
@@ -21,13 +23,13 @@
     <Content>
         <DivRowCol4>
             <Content>
-                <MudSelect @bind-Value="@_viewModel.InscriptionTypeId"
+                <MudSelect @bind-Value="@ViewModel.InscriptionTypeId"
                            @bind-Value:event="ValueChanged" 
                            Disabled="@(!_canEditInscriptionType)" 
                            Label="Type"
                            Variant="Variant.Outlined">
                     <MudSelectItem Value="@(0)">--Select--</MudSelectItem>
-                    <Iterations Items="_viewModel.InscriptionTypes" Context="inscriptionType">
+                    <Iterations Items="ViewModel.InscriptionTypes" Context="inscriptionType">
                         <MudSelectItem Value="@inscriptionType.Id">@inscriptionType.Name</MudSelectItem>
                     </Iterations>	
                 </MudSelect>
@@ -35,7 +37,7 @@
         </DivRowCol4>
         <DivRowCol4>
             <Content>
-                <MudTextField @bind-Value="_viewModel.InscriptionText" 
+                <MudTextField @bind-Value="ViewModel.InscriptionText" 
                               Label="Inscription" 
                               Variant="Variant.Outlined" />
             </Content>

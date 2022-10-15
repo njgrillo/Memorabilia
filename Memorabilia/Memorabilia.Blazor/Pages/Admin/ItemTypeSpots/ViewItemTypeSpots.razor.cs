@@ -26,7 +26,7 @@ public partial class ViewItemTypeSpots : ComponentBase
 
     protected async Task OnLoad()
     {
-        ViewModel = await QueryRouter.Send(new GetItemTypeSpots.Query()).ConfigureAwait(false);
+        ViewModel = await QueryRouter.Send(new GetItemTypeSpots.Query());
     }
 
     protected async Task ShowDeleteConfirm(int id)
@@ -37,7 +37,7 @@ public partial class ViewItemTypeSpots : ComponentBase
         if (result.Cancelled)
             return;
 
-        await Delete(id).ConfigureAwait(false);
+        await Delete(id);
     }
 
     private async Task Delete(int id)
@@ -48,7 +48,7 @@ public partial class ViewItemTypeSpots : ComponentBase
             IsDeleted = true
         };
 
-        await CommandRouter.Send(new SaveItemTypeSpot.Command(viewModel)).ConfigureAwait(false);
+        await CommandRouter.Send(new SaveItemTypeSpot.Command(viewModel));
 
         ViewModel.ItemTypeSpots.Remove(deletedItem);
 

@@ -6,11 +6,11 @@ public partial class ViewInternationalHallOfFameTypes : ViewDomainItem<Internati
 {
     public async Task OnDelete(SaveDomainViewModel viewModel)
     {
-        await CommandRouter.Send(new SaveInternationalHallOfFameType.Command(viewModel)).ConfigureAwait(false);
+        await CommandRouter.Send(new SaveInternationalHallOfFameType.Command(viewModel));
     }
 
     public async Task OnLoad()
     {
-        ViewModel = await QueryRouter.Send(new GetInternationalHallOfFameTypes.Query()).ConfigureAwait(false);
+        ViewModel = await QueryRouter.Send(new GetInternationalHallOfFameTypes.Query());
     }
 }

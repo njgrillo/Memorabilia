@@ -44,11 +44,11 @@ public partial class ImageEditor : ComponentBase
         if (File.Exists(filePath))
             File.Delete(filePath);
 
-        await OnRemove.InvokeAsync(filePath).ConfigureAwait(false);
+        await OnRemove.InvokeAsync(filePath);
     }
 
     protected async Task SetPrimary(string filePath)
     {
-        await OnPrimarySet.InvokeAsync(filePath).ConfigureAwait(false);
+        await OnPrimarySet.InvokeAsync(filePath);
     }
 }

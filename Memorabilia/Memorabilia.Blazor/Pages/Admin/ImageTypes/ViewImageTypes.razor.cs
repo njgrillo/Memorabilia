@@ -6,11 +6,11 @@ public partial class ViewImageTypes : ViewDomainItem<ImageTypesViewModel>, IDele
 {
     public async Task OnDelete(SaveDomainViewModel viewModel)
     {
-        await CommandRouter.Send(new SaveImageType.Command(viewModel)).ConfigureAwait(false);
+        await CommandRouter.Send(new SaveImageType.Command(viewModel));
     }
 
     public async Task OnLoad()
     {
-        ViewModel = await QueryRouter.Send(new GetImageTypes.Query()).ConfigureAwait(false);
+        ViewModel = await QueryRouter.Send(new GetImageTypes.Query());
     }
 }

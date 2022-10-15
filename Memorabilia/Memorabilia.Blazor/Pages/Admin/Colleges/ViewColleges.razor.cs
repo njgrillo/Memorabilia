@@ -6,11 +6,11 @@ public partial class ViewColleges : ViewDomainItem<CollegesViewModel>, IDeleteDo
 {
     public async Task OnDelete(SaveDomainViewModel viewModel)
     {
-        await CommandRouter.Send(new SaveCollege.Command(viewModel)).ConfigureAwait(false);
+        await CommandRouter.Send(new SaveCollege.Command(viewModel));
     }
 
     public async Task OnLoad()
     {
-        ViewModel = await QueryRouter.Send(new GetColleges.Query()).ConfigureAwait(false);
+        ViewModel = await QueryRouter.Send(new GetColleges.Query());
     }
 }

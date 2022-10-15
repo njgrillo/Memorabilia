@@ -1,76 +1,53 @@
-﻿using Memorabilia.Repository.Implementations;
-using Microsoft.Extensions.Configuration;
+﻿namespace Memorabilia.MauiBlazor;
 
-namespace Memorabilia.MauiBlazor
+public static class MauiProgram
 {
-    public static class MauiProgram
+    public static MauiApp CreateMauiApp()
     {
-        public static MauiApp CreateMauiApp()
-        {
-            var builder = MauiApp.CreateBuilder();
-            builder
-                .UseMauiApp<App>()
-                .ConfigureFonts(fonts =>
-                {
-                    fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
-                });
+        var builder = MauiApp.CreateBuilder();
+        builder
+            .UseMauiApp<App>()
+            .ConfigureFonts(fonts =>
+            {
+                fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
+            });
 
-            builder.Services.AddMauiBlazorWebView();
+        builder.Services.AddMauiBlazorWebView();
 #if DEBUG
 		builder.Services.AddBlazorWebViewDeveloperTools();
 #endif
-            builder.Configuration.AddJsonFile("appsettings.json");
+        builder.Configuration.AddJsonFile("appsettings.json");
 
-            builder.Services.AddDbContext<MemorabiliaContext>(options => options.UseSqlServer("name=ConnectionStrings:Memorabilia"), ServiceLifetime.Transient);
-            builder.Services.AddTransient<IMemorabiliaContext, MemorabiliaContext>();
-            builder.Services.AddDbContext<DomainContext>(options => options.UseSqlServer("name=ConnectionStrings:Memorabilia"), ServiceLifetime.Transient);
-            builder.Services.AddTransient<IDomainContext, DomainContext>();
-            builder.Services.AddTransient<CommandRouter>();
-            builder.Services.AddTransient<QueryRouter>();
+        builder.Services.AddDbContext<MemorabiliaContext>(options => options.UseSqlServer("name=ConnectionStrings:Memorabilia"), ServiceLifetime.Transient);
+        builder.Services.AddTransient<IMemorabiliaContext, MemorabiliaContext>();
+        builder.Services.AddDbContext<DomainContext>(options => options.UseSqlServer("name=ConnectionStrings:Memorabilia"), ServiceLifetime.Transient);
+        builder.Services.AddTransient<IDomainContext, DomainContext>();
+        builder.Services.AddTransient<CommandRouter>();
+        builder.Services.AddTransient<QueryRouter>();
+        builder.Services.AddMediatR(typeof(GetAccomplishments).Assembly);
 
-            builder.Services.AddMediatR(typeof(GetAccomplishments).Assembly);
+        builder.Services.AddTransient<IProjectRepository, ProjectRepository>();
 
-            builder.Services.AddTransient<GetUser>();
+        var autofacBuilder = new ContainerBuilder();
+        autofacBuilder.Populate(builder.Services);
 
-            builder.Services.AddMudServices(config =>
-            {
-                config.SnackbarConfiguration.PositionClass = Defaults.Classes.Position.BottomRight;
-                config.SnackbarConfiguration.PreventDuplicates = false;
-                config.SnackbarConfiguration.NewestOnTop = false;
-                config.SnackbarConfiguration.ShowCloseIcon = true;
-                config.SnackbarConfiguration.VisibleStateDuration = 10000;
-                config.SnackbarConfiguration.HideTransitionDuration = 500;
-                config.SnackbarConfiguration.ShowTransitionDuration = 500;
-                config.SnackbarConfiguration.SnackbarVariant = Variant.Filled;
-            });
+        autofacBuilder.RegisterModule(new RepositoryModule());
+        autofacBuilder.RegisterModule(new ApplicationModule());
 
-            builder.Services.AddTransient<IAutographRepository, AutographRepository>();
-            builder.Services.AddTransient<ICommissionerRepository, CommissionerRepository>();
-            builder.Services.AddTransient<IHallOfFameRepository, HallOfFameRepository>();
-            builder.Services.AddTransient<IItemTypeBrandRepository, ItemTypeBrandRepository>();
-            builder.Services.AddTransient<IItemTypeGameStyleTypeRepository, ItemTypeGameStyleTypeRepository>();
-            builder.Services.AddTransient<IItemTypeLevelRepository, ItemTypeLevelRepository>();
-            builder.Services.AddTransient<IItemTypeSizeRepository, ItemTypeSizeRepository>();
-            builder.Services.AddTransient<IItemTypeSportRepository, ItemTypeSportRepository>();
-            builder.Services.AddTransient<IItemTypeSpotRepository, ItemTypeSpotRepository>();
-            builder.Services.AddTransient<IMemorabiliaImageRepository, MemorabiliaImageRepository>();
-            builder.Services.AddTransient<IMemorabiliaItemRepository, MemorabiliaItemRepository>();
-            builder.Services.AddTransient<IPersonAccomplishmentRepository, PersonAccomplishmentRepository>();
-            builder.Services.AddTransient<IPersonAwardRepository, PersonAwardRepository>();
-            builder.Services.AddTransient<IPersonRepository, PersonRepository>();
-            builder.Services.AddTransient<IProjectRepository, ProjectRepository>();
-            builder.Services.AddTransient<ITeamChampionshipRepository, TeamChampionshipRepository>();
-            builder.Services.AddTransient<ITeamConferenceRepository, TeamConferenceRepository>();
-            builder.Services.AddTransient<ITeamDivisionRepository, TeamDivisionRepository>();
-            builder.Services.AddTransient<ITeamLeagueRepository, TeamLeagueRepository>();
-            builder.Services.AddTransient<ITeamRepository, TeamRepository>();
-            builder.Services.AddTransient<IUserRepository, UserRepository>();
+        autofacBuilder.Build();
 
-            builder.Services.AddTransient<IDashboardItemFactory, DashboardItemFactory>();
-            builder.Services.AddTransient<IProfileRuleFactory, ProfileRuleFactory>();
-            builder.Services.AddTransient<IProfileService, ProfileService>();
+        builder.Services.AddMudServices(config =>
+        {
+            config.SnackbarConfiguration.PositionClass = Defaults.Classes.Position.BottomRight;
+            config.SnackbarConfiguration.PreventDuplicates = false;
+            config.SnackbarConfiguration.NewestOnTop = false;
+            config.SnackbarConfiguration.ShowCloseIcon = true;
+            config.SnackbarConfiguration.VisibleStateDuration = 10000;
+            config.SnackbarConfiguration.HideTransitionDuration = 500;
+            config.SnackbarConfiguration.ShowTransitionDuration = 500;
+            config.SnackbarConfiguration.SnackbarVariant = Variant.Filled;
+        });
 
-            return builder.Build();
-        }
+        return builder.Build();
     }
 }
