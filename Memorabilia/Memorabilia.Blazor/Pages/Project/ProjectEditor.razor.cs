@@ -45,7 +45,7 @@ public partial class ProjectEditor : ComponentBase
             return;
         }
 
-        _viewModel = new SaveProjectViewModel(await QueryRouter.Send(new GetProject.Query(Id)));
+        _viewModel = new SaveProjectViewModel(await QueryRouter.Send(new GetProjectQuery(Id)));
     }
 
     private void AddProjectPerson()

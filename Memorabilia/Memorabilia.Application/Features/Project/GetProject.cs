@@ -1,8 +1,8 @@
 ﻿namespace Memorabilia.Application.Features.Project;
 
-public class GetProject
+public record GetProjectQuery(int Id) : IQuery<ProjectViewModel>
 {
-    public class Handler : QueryHandler<Query, ProjectViewModel>
+    public class Handler : QueryHandler<GetProjectQuery, ProjectViewModel>
     {
         private readonly IProjectRepository _projectRepository;
 
@@ -11,19 +11,9 @@ public class GetProject
             _projectRepository = projectRepository;
         }
 
-        protected override async Task<ProjectViewModel> Handle(Query query)
+        protected override async Task<ProjectViewModel> Handle(GetProjectQuery query)
         {
             return new ProjectViewModel(await _projectRepository.Get(query.Id));
         }
-    }
-
-    public class Query : IQuery<ProjectViewModel>
-    {
-        public Query(int id)
-        {
-            Id = id;
-        }
-
-        public int Id { get; }
     }
 }

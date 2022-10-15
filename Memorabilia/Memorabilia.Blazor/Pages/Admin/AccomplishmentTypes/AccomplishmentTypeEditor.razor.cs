@@ -4,11 +4,11 @@ public partial class AccomplishmentTypeEditor : EditDomainItem<AccomplishmentTyp
 {
     public async Task OnLoad()
     {
-        await OnLoad(new GetAccomplishmentType.Query(Id));
+        await OnLoad(new GetAccomplishmentTypeQuery(Id));
     }
 
     public async Task OnSave()
     {
-        await OnSave(new SaveAccomplishmentType.Command(ViewModel));
+        await OnSave(new SaveAccomplishmentTypeCommand(ViewModel));
     }
 }
