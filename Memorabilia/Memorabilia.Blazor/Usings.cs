@@ -114,6 +114,9 @@ global using Memorabilia.Application.Features.Memorabilia.Ticket;
 global using Memorabilia.Application.Features.Memorabilia.Trunks;
 global using Memorabilia.Application.Features.Memorabilia.WristBand;
 global using Memorabilia.Application.Features.Project;
+global using Memorabilia.Application.Features.Services.Filters;
+global using Memorabilia.Application.Features.Services.Filters.Autographs;
+global using Memorabilia.Application.Features.Services.Filters.Memorabilia;
 global using Memorabilia.Application.Features.Services.Tools.Profile;
 global using Memorabilia.Application.Features.Tools.Baseball.Accomplishments;
 global using Memorabilia.Application.Features.Tools.Baseball.Awards;
@@ -134,6 +137,7 @@ global using Microsoft.AspNetCore.Components;
 global using Microsoft.AspNetCore.Components.Forms;
 global using Microsoft.Extensions.Logging;
 global using MudBlazor;
+global using System.Data;
 global using System.Globalization;
 global using System.Linq.Expressions;
 

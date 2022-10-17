@@ -16,9 +16,9 @@
                     <div class="col-lg-2">
                         <div class="form-group">
                             <MudSelect @bind-Value="@_itemTypeId"
-                                        @bind-Value:event="ValueChanged" 
-                                        Label="Item Type"
-                                        Variant="Variant.Outlined">
+                                       @bind-Value:event="ValueChanged" 
+                                       Label="Item Type"
+                                       Variant="Variant.Outlined">
                                 <MudSelectItem Value="@(0)">--Select--</MudSelectItem>
                                 <Iterations Items="ItemType.All" Context="itemType">
                                     <MudSelectItem Value="@itemType.Id">@itemType.Name</MudSelectItem>

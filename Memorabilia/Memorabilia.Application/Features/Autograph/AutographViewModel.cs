@@ -2,7 +2,7 @@
 
 namespace Memorabilia.Application.Features.Autograph;
 
-public class AutographViewModel
+public class AutographViewModel : ViewModel
 {
     private readonly Domain.Entities.Autograph _autograph;
 

@@ -5,7 +5,13 @@ namespace Memorabilia.Blazor.Controls.MemorabiliaItem;
 public partial class MemorabiliaSearchControl : ComponentBase
 {
     [Inject]
-    public QueryRouter QueryRouter { get; set; }
+    public IAutographFilterPredicateBuilder AutographFilterPredicateBuilder { get; set; }
+
+    [Inject]
+    public IMemorabiliaFilterPredicateBuilder MemorabiliaFilterPredicateBuilder { get; set; }
+
+    [Inject]
+    public QueryRouter QueryRouter { get; set; }    
 
     [Parameter]
     public List<MemorabiliaItemViewModel> Items { get; set; }
@@ -84,67 +90,6 @@ public partial class MemorabiliaSearchControl : ComponentBase
     private IEnumerable<SaveTeamViewModel> _teams = Enumerable.Empty<SaveTeamViewModel>();
     private static int _writingInstrumentId;
 
-    private readonly static Expression<Func<AutographViewModel, bool>> _autographAcquiredDateExpression =
-        autograph => autograph.AcquisitionDate == _autographAcquiredDate;
-    private readonly static Expression<Func<AutographViewModel, bool>> _autographAcquisitionTypeExpression =
-        autograph => autograph.AcquisitionTypeId == _autographAcquisitionTypeId;
-    private readonly static Expression<Func<AutographViewModel, bool>> _autographAuthenticationExpression =
-        autograph => autograph.Authentications.Count() > 0;
-    private readonly static Expression<Func<AutographViewModel, bool>> _autographConditionExpression =
-        autograph => autograph.ConditionId == _autographConditionId;
-    private readonly static Expression<Func<AutographViewModel, bool>> _autographCostExpression =
-        autograph => autograph.Cost == _autographCost;
-    private readonly static Expression<Func<AutographViewModel, bool>> _autographEstimatedValueExpression =
-        autograph => autograph.EstimatedValue == _autographEstimatedValue;
-    private readonly static Expression<Func<AutographViewModel, bool>> _autographGradeExpression =
-        autograph => autograph.Grade == _autographGrade;
-    private readonly static Expression<Func<AutographViewModel, bool>> _autographImageExpression =
-        autograph => autograph.Images.Count() == 0;
-    private readonly static Expression<Func<AutographViewModel, bool>> _autographInscriptionExpression =
-        autograph => autograph.Inscriptions.Count() > 0;
-    private readonly static Expression<Func<AutographViewModel, bool>> _autographPersonExpression =
-        autograph => autograph.PersonId == _autographPerson.Id;
-    private readonly static Expression<Func<MemorabiliaItemViewModel, bool>> _brandExpression =
-        item => item.BrandId == _brandId;
-    private readonly static Expression<Func<AutographViewModel, bool>> _colorExpression =
-        autograph => autograph.ColorId == _colorId;
-    private readonly static Expression<Func<MemorabiliaItemViewModel, bool>> _franchiseExpression =
-        item => item.Franchises.Select(franchise => franchise.Id).Contains(_franchiseId);
-    private readonly static Expression<Func<MemorabiliaItemViewModel, bool>> _gameStyleTypeExpression =
-        item => item.GameStyleTypeId == _gameStyleTypeId;
-    private readonly static Expression<Func<MemorabiliaItemViewModel, bool>> _itemTypeExpression =
-        item => item.ItemTypeId == _itemTypeId;
-    private readonly static Expression<Func<MemorabiliaItemViewModel, bool>> _levelTypeExpression =
-        item => item.LevelTypeId == _levelTypeId;
-    private readonly static Expression<Func<MemorabiliaItemViewModel, bool>> _memorabiliaAcquisitionTypeExpression =
-        item => item.Acquisition.AcquisitionTypeId == _memorabiliaAcquisitionTypeId;
-    private readonly static Expression<Func<MemorabiliaItemViewModel, bool>> _memorabiliaAcquiredDateExpression =
-        item => item.Acquisition.AcquiredDate == _memorabiliaAcquiredDate;
-    private readonly static Expression<Func<MemorabiliaItemViewModel, bool>> _memorabiliaConditionExpression =
-        item => item.ConditionId == _memorabiliaConditionId;
-    private readonly static Expression<Func<MemorabiliaItemViewModel, bool>> _memorabiliaCostExpression =
-        item => item.Acquisition.Cost == _memorabiliaCost;
-    private readonly static Expression<Func<MemorabiliaItemViewModel, bool>> _memorabiliaEstimatedValueExpression =
-        item => item.EstimatedValue == _memorabiliaEstimatedValue;
-    private readonly static Expression<Func<MemorabiliaItemViewModel, bool>> _memorabiliaPersonExpression =
-        item => item.People.Select(person => person.PersonId).Contains(_memorabiliaPerson.Id);
-    private readonly static Expression<Func<MemorabiliaItemViewModel, bool>> _memorabiliaPurchaseTypeExpression =
-        item => item.PurchaseTypeId == _memorabiliaPurchaseTypeId;
-    private readonly static Expression<Func<MemorabiliaItemViewModel, bool>> _memorabiliaTeamExpression =
-        item => item.Teams.Select(team => team.TeamId).Contains(_memorabiliaTeam.Id);
-    private readonly static Expression<Func<MemorabiliaItemViewModel, bool>> _privacyTypeExpression =
-        item => item.PrivacyTypeId == _privacyTypeId;
-    private readonly static Expression<Func<MemorabiliaItemViewModel, bool>> _sizeExpression =
-        item => item.SizeId == _sizeId;
-    private readonly static Expression<Func<MemorabiliaItemViewModel, bool>> _sportExpression =
-        item => item.Sports.Select(sport => sport.SportId).Contains(_sportId);
-    private readonly static Expression<Func<MemorabiliaItemViewModel, bool>> _sportLeagueLevelExpression =
-        item => item.SportLeagueLevels.Select(sportLeagueLevel => sportLeagueLevel.Id).Contains(_sportLeagueLevelId);
-    private readonly static Expression<Func<AutographViewModel, bool>> _spotExpression =
-        autograph => autograph.SpotId == _spotId;
-    private readonly static Expression<Func<AutographViewModel, bool>> _writingInstrumentExpression =
-        autograph => autograph.WritingInstrumentId == _writingInstrumentId;
-
     protected async Task HandleValidSubmit()
     {
         await FilterResults();
@@ -200,106 +145,44 @@ public partial class MemorabiliaSearchControl : ComponentBase
 
     private List<AutographViewModel> FilterAutographs()
     {
-        var predicate = PredicateBuilder.True<AutographViewModel>();
+        AutographFilterPredicateBuilder.AppendPredicateAnd(FilterItemEnum.AutographAcquiredDate, _autographAcquiredDate);
+        AutographFilterPredicateBuilder.AppendPredicateAnd(FilterItemEnum.AutographAcquisitionType, _autographAcquisitionTypeId);
+        AutographFilterPredicateBuilder.AppendPredicateAnd(FilterItemEnum.AutographAuthentication, _hasAutographAuthentication);
+        AutographFilterPredicateBuilder.AppendPredicateAnd(FilterItemEnum.AutographColor, _colorId);
+        AutographFilterPredicateBuilder.AppendPredicateAnd(FilterItemEnum.AutographCondition, _autographConditionId);
+        AutographFilterPredicateBuilder.AppendPredicateAnd(FilterItemEnum.AutographCost, _autographCost);
+        AutographFilterPredicateBuilder.AppendPredicateAnd(FilterItemEnum.AutographEstimatedValue, _autographEstimatedValue);
+        AutographFilterPredicateBuilder.AppendPredicateAnd(FilterItemEnum.AutographGrade, _autographGrade);
+        AutographFilterPredicateBuilder.AppendPredicateAnd(FilterItemEnum.AutographImage, _noAutographImages);
+        AutographFilterPredicateBuilder.AppendPredicateAnd(FilterItemEnum.AutographInscription, _hasAutographInscription);
+        AutographFilterPredicateBuilder.AppendPredicateAnd(FilterItemEnum.AutographPerson, _autographPerson?.Id);
+        AutographFilterPredicateBuilder.AppendPredicateAnd(FilterItemEnum.AutographSpot, _spotId);
+        AutographFilterPredicateBuilder.AppendPredicateAnd(FilterItemEnum.AutographWritingInstrument, _writingInstrumentId);
 
-        if (_autographAcquiredDate.HasValue)
-            predicate = predicate.And(_autographAcquiredDateExpression);
-
-        if (_autographAcquisitionTypeId > 0)
-            predicate = predicate.And(_autographAcquisitionTypeExpression);
-
-        if (_autographConditionId > 0)
-            predicate = predicate.And(_autographConditionExpression);
-
-        if (_autographCost.HasValue)
-            predicate = predicate.And(_autographCostExpression);
-
-        if (_autographEstimatedValue.HasValue)
-            predicate = predicate.And(_autographEstimatedValueExpression);
-
-        if (_autographGrade.HasValue)
-            predicate = predicate.And(_autographGradeExpression);
-
-        if (_autographPerson?.Id > 0)
-            predicate = predicate.And(_autographPersonExpression);
-
-        if (_colorId > 0)
-            predicate = predicate.And(_colorExpression);
-
-        if (_hasAutographAuthentication)
-            predicate = predicate.And(_autographAuthenticationExpression);        
-
-        if (_hasAutographInscription)
-            predicate = predicate.And(_autographInscriptionExpression);
-
-        if (_noAutographImages)
-            predicate = predicate.And(_autographImageExpression);        
-
-        if (_spotId > 0)
-            predicate = predicate.And(_spotExpression);
-
-        if (_writingInstrumentId > 0)
-            predicate = predicate.And(_writingInstrumentExpression);
-
-        return _autographs.AsQueryable().Where(predicate).ToList();
+        return _autographs.AsQueryable().Where(AutographFilterPredicateBuilder.Predicate).ToList();
     }
 
     private List<MemorabiliaItemViewModel> FilterMemorabiliaItems()
     {
-        var predicate = PredicateBuilder.True<MemorabiliaItemViewModel>();
+        MemorabiliaFilterPredicateBuilder.AppendPredicateAnd(FilterItemEnum.MemorabiliaAcquiredDate, _memorabiliaAcquiredDate);
+        MemorabiliaFilterPredicateBuilder.AppendPredicateAnd(FilterItemEnum.MemorabiliaAcquisitionType, _memorabiliaAcquisitionTypeId);
+        MemorabiliaFilterPredicateBuilder.AppendPredicateAnd(FilterItemEnum.MemorabiliaBrand, _brandId);
+        MemorabiliaFilterPredicateBuilder.AppendPredicateAnd(FilterItemEnum.MemorabiliaCondition, _memorabiliaConditionId);
+        MemorabiliaFilterPredicateBuilder.AppendPredicateAnd(FilterItemEnum.MemorabiliaCost, _memorabiliaCost);
+        MemorabiliaFilterPredicateBuilder.AppendPredicateAnd(FilterItemEnum.MemorabiliaEstimatedValue, _memorabiliaEstimatedValue);
+        MemorabiliaFilterPredicateBuilder.AppendPredicateAnd(FilterItemEnum.MemorabiliaFranchise, _franchiseId);
+        MemorabiliaFilterPredicateBuilder.AppendPredicateAnd(FilterItemEnum.MemorabiliaGameStyleType, _gameStyleTypeId);
+        MemorabiliaFilterPredicateBuilder.AppendPredicateAnd(FilterItemEnum.MemorabiliaItemType, _itemTypeId);
+        MemorabiliaFilterPredicateBuilder.AppendPredicateAnd(FilterItemEnum.MemorabiliaLevelType, _levelTypeId);
+        MemorabiliaFilterPredicateBuilder.AppendPredicateAnd(FilterItemEnum.MemorabiliaPerson, _memorabiliaPerson?.Id);
+        MemorabiliaFilterPredicateBuilder.AppendPredicateAnd(FilterItemEnum.MemorabiliaPrivacyType, _privacyTypeId);
+        MemorabiliaFilterPredicateBuilder.AppendPredicateAnd(FilterItemEnum.MemorabiliaPurchaseType, _memorabiliaPurchaseTypeId);
+        MemorabiliaFilterPredicateBuilder.AppendPredicateAnd(FilterItemEnum.MemorabiliaSize, _sizeId);
+        MemorabiliaFilterPredicateBuilder.AppendPredicateAnd(FilterItemEnum.MemorabiliaSport, _sportId);
+        MemorabiliaFilterPredicateBuilder.AppendPredicateAnd(FilterItemEnum.MemorabiliaSportLeagueLevel, _sportLeagueLevelId);
+        MemorabiliaFilterPredicateBuilder.AppendPredicateAnd(FilterItemEnum.MemorabiliaTeam, _memorabiliaTeam?.Id);
 
-        if (_brandId > 0)
-            predicate = predicate.And(_brandExpression);
-
-        if (_franchiseId > 0)
-            predicate = predicate.And(_franchiseExpression);
-
-        if (_gameStyleTypeId > 0)
-            predicate = predicate.And(_gameStyleTypeExpression);
-
-        if (_itemTypeId > 0)
-            predicate = predicate.And(_itemTypeExpression);
-
-        if (_levelTypeId > 0)
-            predicate = predicate.And(_levelTypeExpression);
-
-        if (_memorabiliaAcquiredDate.HasValue)
-            predicate = predicate.And(_memorabiliaAcquiredDateExpression);
-
-        if (_memorabiliaAcquisitionTypeId > 0)
-            predicate = predicate.And(_memorabiliaAcquisitionTypeExpression);
-
-        if (_memorabiliaConditionId > 0)
-            predicate = predicate.And(_memorabiliaConditionExpression);
-
-        if (_memorabiliaCost.HasValue)
-            predicate = predicate.And(_memorabiliaCostExpression);
-
-        if (_memorabiliaEstimatedValue.HasValue)
-            predicate = predicate.And(_memorabiliaEstimatedValueExpression);
-
-        if (_memorabiliaPerson?.Id > 0)
-            predicate = predicate.And(_memorabiliaPersonExpression);
-
-        if (_memorabiliaPurchaseTypeId > 0)
-            predicate = predicate.And(_memorabiliaPurchaseTypeExpression);
-
-        if (_memorabiliaTeam?.Id > 0)
-            predicate = predicate.And(_memorabiliaTeamExpression);
-
-        if (_privacyTypeId > 0)
-            predicate = predicate.And(_privacyTypeExpression);
-
-        if (_sizeId > 0)
-            predicate = predicate.And(_sizeExpression);
-
-        if (_sportId > 0)
-            predicate = predicate.And(_sportExpression);
-
-        if (_sportLeagueLevelId > 0)
-            predicate = predicate.And(_sportLeagueLevelExpression);
-
-        return Items.AsQueryable().Where(predicate).ToList();
+        return Items.AsQueryable().Where(MemorabiliaFilterPredicateBuilder.Predicate).ToList();
     }
 
     private async Task FilterResults()
