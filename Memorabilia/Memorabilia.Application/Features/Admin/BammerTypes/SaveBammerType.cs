@@ -2,9 +2,9 @@
 
 namespace Memorabilia.Application.Features.Admin.BammerTypes;
 
-public class SaveBammerType
+public record SaveBammerType(SaveDomainViewModel ViewModel) : ICommand
 {
-    public class Handler : CommandHandler<Command>
+    public class Handler : CommandHandler<SaveBammerType>
     {
         private readonly IDomainRepository<BammerType> _bammerTypeRepository;
 
@@ -13,36 +13,31 @@ public class SaveBammerType
             _bammerTypeRepository = bammerTypeRepository;
         }
 
-        protected override async Task Handle(Command command)
+        protected override async Task Handle(SaveBammerType request)
         {
             BammerType bammerType;
 
-            if (command.IsNew)
+            if (request.ViewModel.IsNew)
             {
-                bammerType = new BammerType(command.Name, command.Abbreviation);
+                bammerType = new BammerType(request.ViewModel.Name, request.ViewModel.Abbreviation);
 
                 await _bammerTypeRepository.Add(bammerType);
 
                 return;
             }
 
-            bammerType = await _bammerTypeRepository.Get(command.Id);
+            bammerType = await _bammerTypeRepository.Get(request.ViewModel.Id);
 
-            if (command.IsDeleted)
+            if (request.ViewModel.IsDeleted)
             {
                 await _bammerTypeRepository.Delete(bammerType);
 
                 return;
             }
 
-            bammerType.Set(command.Name, command.Abbreviation);
+            bammerType.Set(request.ViewModel.Name, request.ViewModel.Abbreviation);
 
             await _bammerTypeRepository.Update(bammerType);
         }
-    }
-
-    public class Command : DomainEntityCommand
-    {
-        public Command(SaveDomainViewModel viewModel) : base(viewModel) { }
     }
 }

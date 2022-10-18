@@ -26,7 +26,7 @@ namespace Memorabilia.Web.Pages.Admin.SportLeagueLevels
 
         protected async Task OnLoad()
         {
-            _viewModel = await QueryRouter.Send(new GetSportLeagueLevels.Query()).ConfigureAwait(false);
+            _viewModel = await QueryRouter.Send(new GetSportLeagueLevels());
         }
 
         protected async Task ShowDeleteConfirm(int id)
@@ -37,7 +37,7 @@ namespace Memorabilia.Web.Pages.Admin.SportLeagueLevels
             if (result.Cancelled)
                 return;
 
-            await Delete(id).ConfigureAwait(false);
+            await Delete(id);
         }
 
         private async Task Delete(int id)
@@ -48,7 +48,7 @@ namespace Memorabilia.Web.Pages.Admin.SportLeagueLevels
                 IsDeleted = true
             };
 
-            await CommandRouter.Send(new SaveSportLeagueLevel.Command(viewModel)).ConfigureAwait(false);
+            await CommandRouter.Send(new SaveSportLeagueLevel(viewModel));
 
             _viewModel.SportLeagueLevels.Remove(deletedItem);
 

@@ -2,9 +2,9 @@
 
 namespace Memorabilia.Application.Features.Admin.HelmetQualityTypes;
 
-public class GetHelmetQualityType
+public record GetHelmetQualityType(int Id) : IQuery<DomainViewModel>
 {
-    public class Handler : QueryHandler<Query, DomainViewModel>
+    public class Handler : QueryHandler<GetHelmetQualityType, DomainViewModel>
     {
         private readonly IDomainRepository<HelmetQualityType> _helmetQualityTypeRepository;
 
@@ -13,14 +13,9 @@ public class GetHelmetQualityType
             _helmetQualityTypeRepository = helmetQualityTypeRepository;
         }
 
-        protected override async Task<DomainViewModel> Handle(Query query)
+        protected override async Task<DomainViewModel> Handle(GetHelmetQualityType query)
         {
             return new DomainViewModel(await _helmetQualityTypeRepository.Get(query.Id));
         }
-    }
-
-    public class Query : DomainQuery
-    {
-        public Query(int id) : base(id) { }
     }
 }

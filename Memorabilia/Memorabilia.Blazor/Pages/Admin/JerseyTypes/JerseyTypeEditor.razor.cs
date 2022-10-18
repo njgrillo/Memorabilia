@@ -4,11 +4,11 @@ public partial class JerseyTypeEditor : EditDomainItem<JerseyType>, IEditDomainI
 {
     public async Task OnLoad()
     {
-        await OnLoad(new GetJerseyType.Query(Id));
+        await OnLoad(new GetJerseyType(Id));
     }
 
     public async Task OnSave()
     {
-        await OnSave(new SaveJerseyType.Command(ViewModel));
+        await OnSave(new SaveJerseyType(ViewModel));
     }
 }

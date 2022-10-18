@@ -4,11 +4,11 @@ public partial class ViewOccupations : ViewDomainItem<OccupationsViewModel>, IDe
 {
     public async Task OnDelete(SaveDomainViewModel viewModel)
     {
-        await OnDelete(new SaveOccupation.Command(viewModel));
+        await OnDelete(new SaveOccupation(viewModel));
     }
 
     public async Task OnLoad()
     {
-        await OnLoad(new GetOccupations.Query());
+        await OnLoad(new GetOccupations());
     }
 }

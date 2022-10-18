@@ -1,12 +1,4 @@
-﻿
-
-using Memorabilia.Application.Features.Admin.Divisions;
-using Memorabilia.Blazor.Controls.Dialogs;
-using Microsoft.AspNetCore.Components;
-using MudBlazor;
-using System;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using Memorabilia.Application.Features.Admin.Divisions;
 
 namespace Memorabilia.Web.Pages.Admin.Divisions
 {
@@ -34,7 +26,7 @@ namespace Memorabilia.Web.Pages.Admin.Divisions
 
         protected async Task OnLoad()
         {
-            _viewModel = await QueryRouter.Send(new GetDivisions.Query()).ConfigureAwait(false);
+            _viewModel = await QueryRouter.Send(new GetDivisions());
         }
 
         protected async Task ShowDeleteConfirm(int id)
@@ -45,7 +37,7 @@ namespace Memorabilia.Web.Pages.Admin.Divisions
             if (result.Cancelled)
                 return;
 
-            await Delete(id).ConfigureAwait(false);
+            await Delete(id);
         }
 
         private async Task Delete(int id)
@@ -56,7 +48,7 @@ namespace Memorabilia.Web.Pages.Admin.Divisions
                 IsDeleted = true
             };
 
-            await CommandRouter.Send(new SaveDivision.Command(viewModel)).ConfigureAwait(false);
+            await CommandRouter.Send(new SaveDivision(viewModel));
 
             _viewModel.Divisions.Remove(deletedItem);
 

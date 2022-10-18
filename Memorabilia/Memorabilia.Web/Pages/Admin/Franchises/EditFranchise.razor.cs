@@ -1,7 +1,4 @@
-﻿
-using Memorabilia.Application.Features.Admin.Franchises;
-using Microsoft.AspNetCore.Components;
-using System.Threading.Tasks;
+﻿using Memorabilia.Application.Features.Admin.Franchises;
 
 namespace Memorabilia.Web.Pages.Admin.Franchises
 {
@@ -21,7 +18,7 @@ namespace Memorabilia.Web.Pages.Admin.Franchises
 
         protected async Task HandleValidSubmit()
         {
-            await CommandRouter.Send(new SaveFranchise.Command(_viewModel)).ConfigureAwait(false);
+            await CommandRouter.Send(new SaveFranchise(_viewModel));
         }
 
         protected async Task OnLoad()
@@ -32,7 +29,7 @@ namespace Memorabilia.Web.Pages.Admin.Franchises
                 return;
             }
 
-            _viewModel = new SaveFranchiseViewModel(await QueryRouter.Send(new GetFranchise.Query(Id)).ConfigureAwait(false));
+            _viewModel = new SaveFranchiseViewModel(await QueryRouter.Send(new GetFranchise(Id)));
         }
     }
 }

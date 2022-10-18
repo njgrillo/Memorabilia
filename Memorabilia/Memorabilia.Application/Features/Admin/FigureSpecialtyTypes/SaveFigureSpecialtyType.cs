@@ -2,9 +2,9 @@
 
 namespace Memorabilia.Application.Features.Admin.FigureSpecialtyTypes;
 
-public class SaveFigureSpecialtyType
+public record SaveFigureSpecialtyType(SaveDomainViewModel ViewModel) : ICommand
 {
-    public class Handler : CommandHandler<Command>
+    public class Handler : CommandHandler<SaveFigureSpecialtyType>
     {
         private readonly IDomainRepository<FigureSpecialtyType> _figureSpecialtyTypeRepository;
 
@@ -13,35 +13,30 @@ public class SaveFigureSpecialtyType
             _figureSpecialtyTypeRepository = figureSpecialtyTypeRepository;
         }
 
-        protected override async Task Handle(Command command)
+        protected override async Task Handle(SaveFigureSpecialtyType request)
         {
             FigureSpecialtyType figureSpecialtyType;
 
-            if (command.IsNew)
+            if (request.ViewModel.IsNew)
             {
-                figureSpecialtyType = new FigureSpecialtyType(command.Name, command.Abbreviation);
+                figureSpecialtyType = new FigureSpecialtyType(request.ViewModel.Name, request.ViewModel.Abbreviation);
                 await _figureSpecialtyTypeRepository.Add(figureSpecialtyType);
 
                 return;
             }
 
-            figureSpecialtyType = await _figureSpecialtyTypeRepository.Get(command.Id);
+            figureSpecialtyType = await _figureSpecialtyTypeRepository.Get(request.ViewModel.Id);
 
-            if (command.IsDeleted)
+            if (request.ViewModel.IsDeleted)
             {
                 await _figureSpecialtyTypeRepository.Delete(figureSpecialtyType);
 
                 return;
             }
 
-            figureSpecialtyType.Set(command.Name, command.Abbreviation);
+            figureSpecialtyType.Set(request.ViewModel.Name, request.ViewModel.Abbreviation);
 
             await _figureSpecialtyTypeRepository.Update(figureSpecialtyType);
         }
-    }
-
-    public class Command : DomainEntityCommand
-    {
-        public Command(SaveDomainViewModel viewModel) : base(viewModel) { }
     }
 }

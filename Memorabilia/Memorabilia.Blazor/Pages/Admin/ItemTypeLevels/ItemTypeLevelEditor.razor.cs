@@ -18,7 +18,7 @@ public partial class ItemTypeLevelEditor : ComponentBase
 
     protected async Task HandleValidSubmit()
     {
-        await CommandRouter.Send(new SaveItemTypeLevel.Command(ViewModel));
+        await CommandRouter.Send(new SaveItemTypeLevel(ViewModel));
     }
 
     protected async Task OnLoad()
@@ -29,6 +29,6 @@ public partial class ItemTypeLevelEditor : ComponentBase
             return;
         }
 
-        ViewModel = new SaveItemTypeLevelViewModel(await QueryRouter.Send(new GetItemTypeLevel.Query(Id)));
+        ViewModel = new SaveItemTypeLevelViewModel(await QueryRouter.Send(new GetItemTypeLevel(Id)));
     }
 }

@@ -1,7 +1,4 @@
-﻿
-using Memorabilia.Application.Features.Admin.ItemTypeGameStyle;
-using Microsoft.AspNetCore.Components;
-using System.Threading.Tasks;
+﻿using Memorabilia.Application.Features.Admin.ItemTypeGameStyle;
 
 namespace Memorabilia.Web.Pages.Admin.ItemTypeGameStyles
 {
@@ -21,7 +18,7 @@ namespace Memorabilia.Web.Pages.Admin.ItemTypeGameStyles
 
         protected async Task HandleValidSubmit()
         {
-            await CommandRouter.Send(new SaveItemTypeGameStyle.Command(_viewModel)).ConfigureAwait(false);
+            await CommandRouter.Send(new SaveItemTypeGameStyle(_viewModel));
         }
 
         protected async Task OnLoad()
@@ -32,7 +29,7 @@ namespace Memorabilia.Web.Pages.Admin.ItemTypeGameStyles
                 return;
             }
 
-            _viewModel = new SaveItemTypeGameStyleViewModel(await QueryRouter.Send(new GetItemTypeGameStyle.Query(Id)).ConfigureAwait(false));
+            _viewModel = new SaveItemTypeGameStyleViewModel(await QueryRouter.Send(new GetItemTypeGameStyle(Id)));
         }
     }
 }

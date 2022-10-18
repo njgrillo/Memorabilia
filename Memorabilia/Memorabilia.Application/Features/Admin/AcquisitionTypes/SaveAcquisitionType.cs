@@ -2,9 +2,9 @@
 
 namespace Memorabilia.Application.Features.Admin.AcquisitionTypes;
 
-public class SaveAcquisitionType
+public record SaveAcquisitionType(SaveDomainViewModel ViewModel) : ICommand
 {
-    public class Handler : CommandHandler<Command>
+    public class Handler : CommandHandler<SaveAcquisitionType>
     {
         private readonly IDomainRepository<AcquisitionType> _acquisitionTypeRepository;
 
@@ -13,36 +13,31 @@ public class SaveAcquisitionType
             _acquisitionTypeRepository = acquisitionTypeRepository;
         }
 
-        protected override async Task Handle(Command command)
+        protected override async Task Handle(SaveAcquisitionType request)
         {
             AcquisitionType acquisitionType;
 
-            if (command.IsNew)
+            if (request.ViewModel.IsNew)
             {
-                acquisitionType = new AcquisitionType(command.Name, command.Abbreviation);
+                acquisitionType = new AcquisitionType(request.ViewModel.Name, request.ViewModel.Abbreviation);
 
                 await _acquisitionTypeRepository.Add(acquisitionType);
 
                 return;
             }
 
-            acquisitionType = await _acquisitionTypeRepository.Get(command.Id);
+            acquisitionType = await _acquisitionTypeRepository.Get(request.ViewModel.Id);
 
-            if (command.IsDeleted)
+            if (request.ViewModel.IsDeleted)
             {
                 await _acquisitionTypeRepository.Delete(acquisitionType);
 
                 return;
             }
 
-            acquisitionType.Set(command.Name, command.Abbreviation);
+            acquisitionType.Set(request.ViewModel.Name, request.ViewModel.Abbreviation);
 
             await _acquisitionTypeRepository.Update(acquisitionType);
         }
-    }
-
-    public class Command : DomainEntityCommand
-    {
-        public Command(SaveDomainViewModel viewModel) : base(viewModel) { }
     }
 }

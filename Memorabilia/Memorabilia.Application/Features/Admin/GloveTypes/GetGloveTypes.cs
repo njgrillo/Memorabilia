@@ -2,9 +2,9 @@
 
 namespace Memorabilia.Application.Features.Admin.GloveTypes;
 
-public class GetGloveTypes
+public record GetGloveTypes() : IQuery<GloveTypesViewModel>
 {
-    public class Handler : QueryHandler<Query, GloveTypesViewModel>
+    public class Handler : QueryHandler<GetGloveTypes, GloveTypesViewModel>
     {
         private readonly IDomainRepository<GloveType> _gloveTypeRepository;
 
@@ -13,11 +13,9 @@ public class GetGloveTypes
             _gloveTypeRepository = gloveTypeRepository;
         }
 
-        protected override async Task<GloveTypesViewModel> Handle(Query query)
+        protected override async Task<GloveTypesViewModel> Handle(GetGloveTypes query)
         {
             return new GloveTypesViewModel(await _gloveTypeRepository.GetAll());
         }
     }
-
-    public class Query : IQuery<GloveTypesViewModel> { }
 }

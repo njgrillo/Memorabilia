@@ -50,7 +50,7 @@ public partial class TeamSelector : ComponentBase
 
     private async Task LoadTeams()
     {
-        _teams = (await QueryRouter.Send(new GetTeams.Query(sportLeagueLevelId: SportLeagueLevel?.Id))).Teams.Select(team => new SaveTeamViewModel(team));
+        _teams = (await QueryRouter.Send(new GetTeams(SportLeagueLevelId: SportLeagueLevel?.Id))).Teams.Select(team => new SaveTeamViewModel(team));
     }
 
     private async Task<IEnumerable<SaveTeamViewModel>> SearchTeams(string searchText)

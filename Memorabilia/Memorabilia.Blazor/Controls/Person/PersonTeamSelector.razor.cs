@@ -45,7 +45,7 @@ public partial class PersonTeamSelector : ComponentBase
 
     private async Task LoadTeams()
     {
-        var query = new GetTeams.Query();
+        var query = new GetTeams();
 
         _teams = (await QueryRouter.Send(query)).Teams.Select(team => new SavePersonTeamViewModel(PersonId, team));
 

@@ -2,9 +2,9 @@
 
 namespace Memorabilia.Application.Features.Admin.HelmetTypes;
 
-public class SaveHelmetType
+public record SaveHelmetType(SaveDomainViewModel ViewModel) : ICommand
 {
-    public class Handler : CommandHandler<Command>
+    public class Handler : CommandHandler<SaveHelmetType>
     {
         private readonly IDomainRepository<HelmetType> _helmetTypeRepository;
 
@@ -13,35 +13,30 @@ public class SaveHelmetType
             _helmetTypeRepository = helmetTypeRepository;
         }
 
-        protected override async Task Handle(Command command)
+        protected override async Task Handle(SaveHelmetType request)
         {
             HelmetType helmetType;
 
-            if (command.IsNew)
+            if (request.ViewModel.IsNew)
             {
-                helmetType = new HelmetType(command.Name, command.Abbreviation);
+                helmetType = new HelmetType(request.ViewModel.Name, request.ViewModel.Abbreviation);
                 await _helmetTypeRepository.Add(helmetType);
 
                 return;
             }
 
-            helmetType = await _helmetTypeRepository.Get(command.Id);
+            helmetType = await _helmetTypeRepository.Get(request.ViewModel.Id);
 
-            if (command.IsDeleted)
+            if (request.ViewModel.IsDeleted)
             {
                 await _helmetTypeRepository.Delete(helmetType);
 
                 return;
             }
 
-            helmetType.Set(command.Name, command.Abbreviation);
+            helmetType.Set(request.ViewModel.Name, request.ViewModel.Abbreviation);
 
             await _helmetTypeRepository.Update(helmetType);
         }
-    }
-
-    public class Command : DomainEntityCommand
-    {
-        public Command(SaveDomainViewModel viewModel) : base(viewModel) { }
     }
 }

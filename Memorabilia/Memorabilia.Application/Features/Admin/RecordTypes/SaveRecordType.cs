@@ -2,9 +2,9 @@
 
 namespace Memorabilia.Application.Features.Admin.RecordTypes;
 
-public class SaveRecordType
+public record SaveRecordType(SaveDomainViewModel ViewModel) : ICommand
 {
-    public class Handler : CommandHandler<Command>
+    public class Handler : CommandHandler<SaveRecordType>
     {
         private readonly IDomainRepository<RecordType> _recordTypeRepository;
 
@@ -13,36 +13,31 @@ public class SaveRecordType
             _recordTypeRepository = recordTypeRepository;
         }
 
-        protected override async Task Handle(Command command)
+        protected override async Task Handle(SaveRecordType request)
         {
             RecordType recordType;
 
-            if (command.IsNew)
+            if (request.ViewModel.IsNew)
             {
-                recordType = new RecordType(command.Name, command.Abbreviation);
+                recordType = new RecordType(request.ViewModel.Name, request.ViewModel.Abbreviation);
 
                 await _recordTypeRepository.Add(recordType);
 
                 return;
             }
 
-            recordType = await _recordTypeRepository.Get(command.Id);
+            recordType = await _recordTypeRepository.Get(request.ViewModel.Id);
 
-            if (command.IsDeleted)
+            if (request.ViewModel.IsDeleted)
             {
                 await _recordTypeRepository.Delete(recordType);
 
                 return;
             }
 
-            recordType.Set(command.Name, command.Abbreviation);
+            recordType.Set(request.ViewModel.Name, request.ViewModel.Abbreviation);
 
             await _recordTypeRepository.Update(recordType);
         }
-    }
-
-    public class Command : DomainEntityCommand
-    {
-        public Command(SaveDomainViewModel viewModel) : base(viewModel) { }
     }
 }

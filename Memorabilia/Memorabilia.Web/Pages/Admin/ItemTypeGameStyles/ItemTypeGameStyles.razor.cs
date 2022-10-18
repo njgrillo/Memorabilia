@@ -1,12 +1,4 @@
-﻿
-
-using Memorabilia.Application.Features.Admin.ItemTypeGameStyle;
-using Memorabilia.Blazor.Controls.Dialogs;
-using Microsoft.AspNetCore.Components;
-using MudBlazor;
-using System;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using Memorabilia.Application.Features.Admin.ItemTypeGameStyle;
 
 namespace Memorabilia.Web.Pages.Admin.ItemTypeGameStyles
 {
@@ -34,7 +26,7 @@ namespace Memorabilia.Web.Pages.Admin.ItemTypeGameStyles
 
         protected async Task OnLoad()
         {
-            _viewModel = await QueryRouter.Send(new GetItemTypeGameStyles.Query()).ConfigureAwait(false);
+            _viewModel = await QueryRouter.Send(new GetItemTypeGameStyles());
         }
 
         protected async Task ShowDeleteConfirm(int id)
@@ -45,7 +37,7 @@ namespace Memorabilia.Web.Pages.Admin.ItemTypeGameStyles
             if (result.Cancelled)
                 return;
 
-            await Delete(id).ConfigureAwait(false);
+            await Delete(id);
         }
 
         protected async Task Delete(int id)
@@ -56,7 +48,7 @@ namespace Memorabilia.Web.Pages.Admin.ItemTypeGameStyles
                 IsDeleted = true
             };
 
-            await CommandRouter.Send(new SaveItemTypeGameStyle.Command(viewModel)).ConfigureAwait(false);
+            await CommandRouter.Send(new SaveItemTypeGameStyle(viewModel));
 
             _viewModel.ItemTypeGameStyles.Remove(deletedItem);
 

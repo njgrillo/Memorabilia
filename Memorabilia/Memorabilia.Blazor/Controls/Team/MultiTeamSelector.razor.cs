@@ -62,7 +62,7 @@ public partial class MultiTeamSelector : ComponentBase
 
     private async Task LoadTeams()
     {
-        _teams = (await QueryRouter.Send(new GetTeams.Query(sportLeagueLevelId: SportLeagueLevel?.Id))).Teams.Select(team => new SaveTeamViewModel(team));
+        _teams = (await QueryRouter.Send(new GetTeams(SportLeagueLevelId: SportLeagueLevel?.Id))).Teams.Select(team => new SaveTeamViewModel(team));
     }
 
     private void Remove(int teamId)

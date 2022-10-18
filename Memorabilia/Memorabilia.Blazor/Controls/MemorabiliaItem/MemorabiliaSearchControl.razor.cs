@@ -20,7 +20,7 @@ public partial class MemorabiliaSearchControl : ComponentBase
     public List<MemorabiliaItemViewModel> Results { get; set; }
 
     [Parameter]
-    public EventCallback<List<MemorabiliaItemViewModel>> ResultsChanged { get; set; }
+    public EventCallback<IEnumerable<int>> ResultsChanged { get; set; }
 
     private List<AutographViewModel> _autographs => Items.SelectMany(item => item.Autographs).ToList();
 
@@ -193,7 +193,7 @@ public partial class MemorabiliaSearchControl : ComponentBase
 
         Results = filteredMemorabilaItems.Where(item => memorabiliaIds.Contains(item.Id)).ToList();
 
-        await ResultsChanged.InvokeAsync(Results);
+        await ResultsChanged.InvokeAsync(Results.Select(result => result.Id));
 
         _autographPerson = null;
         _memorabiliaPerson = null;
@@ -201,12 +201,12 @@ public partial class MemorabiliaSearchControl : ComponentBase
 
     private async Task LoadPeople()
     {
-        _people = (await QueryRouter.Send(new GetPeople.Query())).People.Select(person => new SavePersonViewModel(person));
+        _people = (await QueryRouter.Send(new GetPeople())).People.Select(person => new SavePersonViewModel(person));
     }
 
     private async Task LoadTeams()
     {
-        _teams = (await QueryRouter.Send(new GetTeams.Query())).Teams.Select(team => new SaveTeamViewModel(team));
+        _teams = (await QueryRouter.Send(new GetTeams())).Teams.Select(team => new SaveTeamViewModel(team));
     }
 
     private async Task<IEnumerable<SavePersonViewModel>> SearchPeople(string value)

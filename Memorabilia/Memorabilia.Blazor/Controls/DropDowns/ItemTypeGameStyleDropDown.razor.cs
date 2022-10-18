@@ -26,8 +26,7 @@ public partial class ItemTypeGameStyleDropDown : ComponentBase
 
     protected override async Task OnInitializedAsync()
     {
-        _itemTypeGameStyles = (await QueryRounter.Send(new GetItemTypeGameStyles.Query(ItemType.Id)))
-                                            .ItemTypeGameStyles;
+        _itemTypeGameStyles = (await QueryRounter.Send(new GetItemTypeGameStyles(ItemType.Id))).ItemTypeGameStyles;
     }
 
     private async Task OnInputChange(int value)

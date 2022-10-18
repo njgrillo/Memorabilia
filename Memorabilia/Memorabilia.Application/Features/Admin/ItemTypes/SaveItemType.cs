@@ -2,9 +2,9 @@
 
 namespace Memorabilia.Application.Features.Admin.ItemTypes;
 
-public class SaveItemType
+public record SaveItemType(SaveDomainViewModel ViewModel) : ICommand
 {
-    public class Handler : CommandHandler<Command>
+    public class Handler : CommandHandler<SaveItemType>
     {
         private readonly IDomainRepository<ItemType> _itemTypeRepository;
 
@@ -13,36 +13,31 @@ public class SaveItemType
             _itemTypeRepository = itemTypeRepository;
         }
 
-        protected override async Task Handle(Command command)
+        protected override async Task Handle(SaveItemType request)
         {
             ItemType itemType;
 
-            if (command.IsNew)
+            if (request.ViewModel.IsNew)
             {
-                itemType = new ItemType(command.Name, command.Abbreviation);
+                itemType = new ItemType(request.ViewModel.Name, request.ViewModel.Abbreviation);
 
                 await _itemTypeRepository.Add(itemType);
 
                 return;
             }
 
-            itemType = await _itemTypeRepository.Get(command.Id);
+            itemType = await _itemTypeRepository.Get(request.ViewModel.Id);
 
-            if (command.IsDeleted)
+            if (request.ViewModel.IsDeleted)
             {
                 await _itemTypeRepository.Delete(itemType);
 
                 return;
             }
 
-            itemType.Set(command.Name, command.Abbreviation);
+            itemType.Set(request.ViewModel.Name, request.ViewModel.Abbreviation);
 
             await _itemTypeRepository.Update(itemType);
         }
-    }
-
-    public class Command : DomainEntityCommand
-    {
-        public Command(SaveDomainViewModel viewModel) : base(viewModel) { }
     }
 }

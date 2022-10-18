@@ -2,9 +2,9 @@
 
 namespace Memorabilia.Application.Features.Admin.HelmetFinishes;
 
-public class SaveHelmetFinish
+public record SaveHelmetFinish(SaveDomainViewModel ViewModel) : ICommand
 {
-    public class Handler : CommandHandler<Command>
+    public class Handler : CommandHandler<SaveHelmetFinish>
     {
         private readonly IDomainRepository<HelmetFinish> _helmetFinishRepository;
 
@@ -13,36 +13,31 @@ public class SaveHelmetFinish
             _helmetFinishRepository = helmetFinishRepository;
         }
 
-        protected override async Task Handle(Command command)
+        protected override async Task Handle(SaveHelmetFinish request)
         {
             HelmetFinish helmetFinish;
 
-            if (command.IsNew)
+            if (request.ViewModel.IsNew)
             {
-                helmetFinish = new HelmetFinish(command.Name, command.Abbreviation);
+                helmetFinish = new HelmetFinish(request.ViewModel.Name, request.ViewModel.Abbreviation);
 
                 await _helmetFinishRepository.Add(helmetFinish);
 
                 return;
             }
 
-            helmetFinish = await _helmetFinishRepository.Get(command.Id);
+            helmetFinish = await _helmetFinishRepository.Get(request.ViewModel.Id);
 
-            if (command.IsDeleted)
+            if (request.ViewModel.IsDeleted)
             {
                 await _helmetFinishRepository.Delete(helmetFinish);
 
                 return;
             }
 
-            helmetFinish.Set(command.Name, command.Abbreviation);
+            helmetFinish.Set(request.ViewModel.Name, request.ViewModel.Abbreviation);
 
             await _helmetFinishRepository.Update(helmetFinish);
         }
-    }
-
-    public class Command : DomainEntityCommand
-    {
-        public Command(SaveDomainViewModel viewModel) : base(viewModel) { }
     }
 }

@@ -2,9 +2,9 @@
 
 namespace Memorabilia.Application.Features.Admin.LeaderTypes;
 
-public class SaveLeaderType
+public record SaveLeaderType(SaveDomainViewModel ViewModel) : ICommand
 {
-    public class Handler : CommandHandler<Command>
+    public class Handler : CommandHandler<SaveLeaderType>
     {
         private readonly IDomainRepository<LeaderType> _leaderTypeRepository;
 
@@ -13,36 +13,31 @@ public class SaveLeaderType
             _leaderTypeRepository = leaderTypeRepository;
         }
 
-        protected override async Task Handle(Command command)
+        protected override async Task Handle(SaveLeaderType request)
         {
             LeaderType leaderType;
 
-            if (command.IsNew)
+            if (request.ViewModel.IsNew)
             {
-                leaderType = new LeaderType(command.Name, command.Abbreviation);
+                leaderType = new LeaderType(request.ViewModel.Name, request.ViewModel.Abbreviation);
 
                 await _leaderTypeRepository.Add(leaderType);
 
                 return;
             }
 
-            leaderType = await _leaderTypeRepository.Get(command.Id);
+            leaderType = await _leaderTypeRepository.Get(request.ViewModel.Id);
 
-            if (command.IsDeleted)
+            if (request.ViewModel.IsDeleted)
             {
                 await _leaderTypeRepository.Delete(leaderType);
 
                 return;
             }
 
-            leaderType.Set(command.Name, command.Abbreviation);
+            leaderType.Set(request.ViewModel.Name, request.ViewModel.Abbreviation);
 
             await _leaderTypeRepository.Update(leaderType);
         }
-    }
-
-    public class Command : DomainEntityCommand
-    {
-        public Command(SaveDomainViewModel viewModel) : base(viewModel) { }
     }
 }

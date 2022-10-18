@@ -1,7 +1,4 @@
-﻿
-using Memorabilia.Application.Features.Admin.Divisions;
-using Microsoft.AspNetCore.Components;
-using System.Threading.Tasks;
+﻿using Memorabilia.Application.Features.Admin.Divisions;
 
 namespace Memorabilia.Web.Pages.Admin.Divisions
 {
@@ -20,7 +17,7 @@ namespace Memorabilia.Web.Pages.Admin.Divisions
 
         protected async Task HandleValidSubmit()
         {
-            await CommandRouter.Send(new SaveDivision.Command(_viewModel)).ConfigureAwait(false);
+            await CommandRouter.Send(new SaveDivision(_viewModel));
         }
 
         protected async Task OnLoad()
@@ -28,7 +25,7 @@ namespace Memorabilia.Web.Pages.Admin.Divisions
             if (Id == 0)
                 return;
 
-            _viewModel = new SaveDivisionViewModel(await QueryRouter.Send(new GetDivision.Query(Id)).ConfigureAwait(false));
+            _viewModel = new SaveDivisionViewModel(await QueryRouter.Send(new GetDivision(Id)));
         }
     }
 }

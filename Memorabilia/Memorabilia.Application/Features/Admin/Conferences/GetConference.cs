@@ -2,9 +2,9 @@
 
 namespace Memorabilia.Application.Features.Admin.Conferences;
 
-public class GetConference
+public record GetConference(int Id) : IQuery<ConferenceViewModel>
 {
-    public class Handler : QueryHandler<Query, ConferenceViewModel>
+    public class Handler : QueryHandler<GetConference, ConferenceViewModel>
     {
         private readonly IDomainRepository<Conference> _conferenceRepository;
 
@@ -13,19 +13,9 @@ public class GetConference
             _conferenceRepository = conferenceRepository;
         }
 
-        protected override async Task<ConferenceViewModel> Handle(Query query)
+        protected override async Task<ConferenceViewModel> Handle(GetConference query)
         {
             return new ConferenceViewModel(await _conferenceRepository.Get(query.Id));
         }
-    }
-
-    public class Query : IQuery<ConferenceViewModel>
-    {
-        public Query(int id)
-        {
-            Id = id;
-        }
-
-        public int Id { get; }
     }
 }

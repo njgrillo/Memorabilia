@@ -4,11 +4,11 @@ public partial class OccupationEditor : EditDomainItem<Occupation>, IEditDomainI
 {
     public async Task OnLoad()
     {
-        await OnLoad(new GetOccupation.Query(Id));
+        await OnLoad(new GetOccupation(Id));
     }
 
     public async Task OnSave()
     {
-        await OnSave(new SaveOccupation.Command(ViewModel));
+        await OnSave(new SaveOccupation(ViewModel));
     }
 }

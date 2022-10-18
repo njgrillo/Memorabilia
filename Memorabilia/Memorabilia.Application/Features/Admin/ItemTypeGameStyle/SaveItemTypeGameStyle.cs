@@ -1,8 +1,8 @@
 ﻿namespace Memorabilia.Application.Features.Admin.ItemTypeGameStyle;
 
-public class SaveItemTypeGameStyle
+public record SaveItemTypeGameStyle(SaveItemTypeGameStyleViewModel ViewModel) : ICommand
 {
-    public class Handler : CommandHandler<Command>
+    public class Handler : CommandHandler<SaveItemTypeGameStyle>
     {
         private readonly IItemTypeGameStyleTypeRepository _itemTypeGameStyleRepository;
 
@@ -11,53 +11,31 @@ public class SaveItemTypeGameStyle
             _itemTypeGameStyleRepository = itemTypeGameStyleRepository;
         }
 
-        protected override async Task Handle(Command command)
+        protected override async Task Handle(SaveItemTypeGameStyle request)
         {
             Domain.Entities.ItemTypeGameStyleType itemTypeGameStyle;
 
-            if (command.IsNew)
+            if (request.ViewModel.IsNew)
             {
-                itemTypeGameStyle = new Domain.Entities.ItemTypeGameStyleType(command.ItemTypeId, command.GameStyleTypeId);
+                itemTypeGameStyle = new Domain.Entities.ItemTypeGameStyleType(request.ViewModel.ItemTypeId, request.ViewModel.GameStyleTypeId);
 
                 await _itemTypeGameStyleRepository.Add(itemTypeGameStyle);
 
                 return;
             }
 
-            itemTypeGameStyle = await _itemTypeGameStyleRepository.Get(command.Id);
+            itemTypeGameStyle = await _itemTypeGameStyleRepository.Get(request.ViewModel.Id);
 
-            if (command.IsDeleted)
+            if (request.ViewModel.IsDeleted)
             {
                 await _itemTypeGameStyleRepository.Delete(itemTypeGameStyle);
 
                 return;
             }
 
-            itemTypeGameStyle.Set(command.GameStyleTypeId);
+            itemTypeGameStyle.Set(request.ViewModel.GameStyleTypeId);
 
             await _itemTypeGameStyleRepository.Update(itemTypeGameStyle);
         }
-    }
-
-    public class Command : DomainCommand, ICommand
-    {
-        private readonly SaveItemTypeGameStyleViewModel _viewModel;
-
-        public Command(SaveItemTypeGameStyleViewModel viewModel)
-        {
-            _viewModel = viewModel;
-        }
-
-        public int GameStyleTypeId => _viewModel.GameStyleTypeId;
-
-        public int Id => _viewModel.Id;
-
-        public bool IsDeleted => _viewModel.IsDeleted;
-
-        public bool IsModified => _viewModel.IsModified;
-
-        public bool IsNew => _viewModel.IsNew;
-
-        public int ItemTypeId => _viewModel.ItemTypeId;
     }
 }

@@ -1,13 +1,5 @@
-﻿
-
-using Memorabilia.Application.Features.Admin.People;
-using Memorabilia.Blazor.Controls.Dialogs;
-using Microsoft.AspNetCore.Components;
-using MudBlazor;
-using System;
+﻿using Memorabilia.Application.Features.Admin.People;
 using System.Globalization;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Memorabilia.Web.Pages.Admin.People
 {
@@ -35,7 +27,7 @@ namespace Memorabilia.Web.Pages.Admin.People
 
         protected async Task OnLoad()
         {
-            _viewModel = await QueryRouter.Send(new GetPeople.Query()).ConfigureAwait(false);
+            _viewModel = await QueryRouter.Send(new GetPeople());
         }
 
         protected async Task ShowDeleteConfirm(int id)
@@ -46,7 +38,7 @@ namespace Memorabilia.Web.Pages.Admin.People
             if (result.Cancelled)
                 return;
 
-            await Delete(id).ConfigureAwait(false);
+            await Delete(id);
         }
 
         private async Task Delete(int id)
@@ -57,7 +49,7 @@ namespace Memorabilia.Web.Pages.Admin.People
                 IsDeleted = true
             };
 
-            await CommandRouter.Send(new SavePerson.Command(viewModel)).ConfigureAwait(false);
+            await CommandRouter.Send(new SavePerson.Command(viewModel));
 
             _viewModel.People.Remove(deletedItem);
 

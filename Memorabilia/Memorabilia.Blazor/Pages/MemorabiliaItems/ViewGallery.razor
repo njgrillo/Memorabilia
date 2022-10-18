@@ -1,0 +1,47 @@
+﻿<PrettyBlazor.Condition Evaluation="@_displaySpinner">
+    <Match>
+        <div class="spinnerDiv">
+            <MudImage Class="spinnerImage"
+                      Src="images/spinner.gif" />
+        </div>
+    </Match>
+    <NotMatch>
+        <Page OnLoad="OnLoad">
+            <Content>
+                <MemorabiliaSearchControl Items="_viewModel.FilterItems.ToList()"
+                                          ResultsChanged="OnFilter" />
+                <DivPad2>
+                    <Content>
+                        <div class="row">
+                            <Iterations Items="_displayedItems" Context="item">
+                                <div class="col-md-4">
+                                    <MemorabiliaItemGalleryCard Description="@item.Description"
+                                                                EditNavigationPath="@item.EditNavigationPath"
+                                                                MemorabiliaItem="@item"
+                                                                PrimaryImageNavigationPath="@item.PrimaryImageNavigationPath"
+                                                                PrimaryImagePath="@item.PrimaryImagePath"
+                                                                Subtitle="@item.Subtitle"
+                                                                Title="@item.Title"
+                                                                TooltipText="@item.TooltipText" />
+                                </div>
+                            </Iterations>
+                        </div>
+                        <DivHidden Hidden="@(!_displayLoadMoreButton)">
+                            <Content>
+                                <DivRowCol12Center>
+                                    <Content>
+                                        <MudButton ButtonType="MudBlazor.ButtonType.Button"
+                                                   Color="MudBlazor.Color.Primary"
+                                                   OnClick="LoadMore"
+                                                   Size="MudBlazor.Size.Small"
+                                                   Variant="Variant.Filled">Load More</MudButton>
+                                    </Content>
+                                </DivRowCol12Center>
+                            </Content>
+                        </DivHidden>
+                    </Content>
+                </DivPad2>
+            </Content>
+        </Page>
+    </NotMatch>
+</PrettyBlazor.Condition>

@@ -2,9 +2,9 @@
 
 namespace Memorabilia.Application.Features.Admin.Leagues;
 
-public class GetLeagues
+public record GetLeagues() : IQuery<LeaguesViewModel>
 {
-    public class Handler : QueryHandler<Query, LeaguesViewModel>
+    public class Handler : QueryHandler<GetLeagues, LeaguesViewModel>
     {
         private readonly IDomainRepository<League> _leagueRepository;
 
@@ -13,14 +13,9 @@ public class GetLeagues
             _leagueRepository = leagueRepository;
         }
 
-        protected override async Task<LeaguesViewModel> Handle(Query query)
+        protected override async Task<LeaguesViewModel> Handle(GetLeagues query)
         {
             return new LeaguesViewModel(await _leagueRepository.GetAll());
         }
-    }
-
-    public class Query : IQuery<LeaguesViewModel>
-    {
-        public Query() { }
     }
 }

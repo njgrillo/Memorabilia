@@ -1,8 +1,8 @@
 ﻿namespace Memorabilia.Application.Features.Admin.People;
 
-public class GetPersonOccupations
+public record GetPersonOccupations(int PersonId) : IQuery<PersonOccupationViewModel>
 {
-    public class Handler : QueryHandler<Query, PersonOccupationViewModel>
+    public class Handler : QueryHandler<GetPersonOccupations, PersonOccupationViewModel>
     {
         private readonly IPersonRepository _personRepository;
 
@@ -11,19 +11,9 @@ public class GetPersonOccupations
             _personRepository = personRepository;
         }
 
-        protected override async Task<PersonOccupationViewModel> Handle(Query query)
+        protected override async Task<PersonOccupationViewModel> Handle(GetPersonOccupations query)
         {
             return new PersonOccupationViewModel(await _personRepository.Get(query.PersonId));
         }
-    }
-
-    public class Query : IQuery<PersonOccupationViewModel>
-    {
-        public Query(int personId)
-        {
-            PersonId = personId;
-        }
-
-        public int PersonId { get; }
     }
 }

@@ -2,9 +2,9 @@
 
 namespace Memorabilia.Application.Features.Admin.BatTypes;
 
-public class SaveBatType
+public record SaveBatType(SaveDomainViewModel ViewModel) : ICommand
 {
-    public class Handler : CommandHandler<Command>
+    public class Handler : CommandHandler<SaveBatType>
     {
         private readonly IDomainRepository<BatType> _batTypeRepository;
 
@@ -13,36 +13,31 @@ public class SaveBatType
             _batTypeRepository = batTypeRepository;
         }
 
-        protected override async Task Handle(Command command)
+        protected override async Task Handle(SaveBatType request)
         {
             BatType batType;
 
-            if (command.IsNew)
+            if (request.ViewModel.IsNew)
             {
-                batType = new BatType(command.Name, command.Abbreviation);
+                batType = new BatType(request.ViewModel.Name, request.ViewModel.Abbreviation);
 
                 await _batTypeRepository.Add(batType);
 
                 return;
             }
 
-            batType = await _batTypeRepository.Get(command.Id);
+            batType = await _batTypeRepository.Get(request.ViewModel.Id);
 
-            if (command.IsDeleted)
+            if (request.ViewModel.IsDeleted)
             {
                 await _batTypeRepository.Delete(batType);
 
                 return;
             }
 
-            batType.Set(command.Name, command.Abbreviation);
+            batType.Set(request.ViewModel.Name, request.ViewModel.Abbreviation);
 
             await _batTypeRepository.Update(batType);
         }
-    }
-
-    public class Command : DomainEntityCommand
-    {
-        public Command(SaveDomainViewModel viewModel) : base(viewModel) { }
     }
 }

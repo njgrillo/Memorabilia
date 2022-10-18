@@ -4,11 +4,11 @@ public partial class FranchiseHallOfFameTypeEditor : EditDomainItem<FranchiseHal
 {
     public async Task OnLoad()
     {
-        await OnLoad(new GetFranchiseHallOfFameType.Query(Id));
+        await OnLoad(new GetFranchiseHallOfFameType(Id));
     }
 
     public async Task OnSave()
     {
-        await OnSave(new SaveFranchiseHallOfFameType.Command(ViewModel));
+        await OnSave(new SaveFranchiseHallOfFameType(ViewModel));
     }
 }

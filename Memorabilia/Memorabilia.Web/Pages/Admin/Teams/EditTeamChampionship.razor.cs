@@ -1,10 +1,4 @@
-﻿
-using Memorabilia.Application.Features.Admin.Teams;
-using Memorabilia.Domain.Constants;
-using Microsoft.AspNetCore.Components;
-using MudBlazor;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using Memorabilia.Application.Features.Admin.Teams;
 
 namespace Memorabilia.Web.Pages.Admin.Teams
 {
@@ -34,7 +28,7 @@ namespace Memorabilia.Web.Pages.Admin.Teams
         {
             _viewModel = new SaveTeamChampionshipsViewModel(TeamId);
 
-            var championships = (await QueryRouter.Send(new GetTeamChampionships.Query(TeamId))
+            var championships = (await QueryRouter.Send(new GetTeamChampionships(TeamId))
                                                   .ConfigureAwait(false))
                                                   .Select(teamChampionship => new SaveTeamChampionshipViewModel(teamChampionship))
                                                   .ToList();
@@ -45,7 +39,7 @@ namespace Memorabilia.Web.Pages.Admin.Teams
 
         protected async Task OnSave()
         {
-            await CommandRouter.Send(new SaveTeamChampionship.Command(TeamId, _viewModel.Championships)).ConfigureAwait(false);
+            await CommandRouter.Send(new SaveTeamChampionship.Command(TeamId, _viewModel.Championships));
         }
     }
 }

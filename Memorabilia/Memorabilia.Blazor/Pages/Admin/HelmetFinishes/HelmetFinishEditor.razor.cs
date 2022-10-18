@@ -4,11 +4,11 @@ public partial class HelmetFinishEditor : EditDomainItem<HelmetFinish>, IEditDom
 {
     public async Task OnLoad()
     {
-        await OnLoad(new GetHelmetFinish.Query(Id));
+        await OnLoad(new GetHelmetFinish(Id));
     }
 
     public async Task OnSave()
     {
-        await OnSave(new SaveHelmetFinish.Command(ViewModel));
+        await OnSave(new SaveHelmetFinish(ViewModel));
     }
 }

@@ -4,11 +4,11 @@ public partial class AcquisitionTypeEditor : EditDomainItem<AcquisitionType>, IE
 {
     public async Task OnLoad()
     {
-        await OnLoad(new GetAcquisitionType.Query(Id));
+        await OnLoad(new GetAcquisitionType(Id));
     }
 
     public async Task OnSave()
     {
-        await OnSave(new SaveAcquisitionType.Command(ViewModel));
+        await OnSave(new SaveAcquisitionType(ViewModel));
     }
 }

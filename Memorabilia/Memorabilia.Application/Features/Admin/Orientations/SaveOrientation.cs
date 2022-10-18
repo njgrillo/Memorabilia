@@ -2,9 +2,9 @@
 
 namespace Memorabilia.Application.Features.Admin.Orientations;
 
-public class SaveOrientation
+public record SaveOrientation(SaveDomainViewModel ViewModel) : ICommand
 {
-    public class Handler : CommandHandler<Command>
+    public class Handler : CommandHandler<SaveOrientation>
     {
         private readonly IDomainRepository<Orientation> _orientationRepository;
 
@@ -13,36 +13,31 @@ public class SaveOrientation
             _orientationRepository = orientationRepository;
         }
 
-        protected override async Task Handle(Command command)
+        protected override async Task Handle(SaveOrientation request)
         {
             Orientation orientation;
 
-            if (command.IsNew)
+            if (request.ViewModel.IsNew)
             {
-                orientation = new Orientation(command.Name, command.Abbreviation);
+                orientation = new Orientation(request.ViewModel.Name, request.ViewModel.Abbreviation);
 
                 await _orientationRepository.Add(orientation);
 
                 return;
             }
 
-            orientation = await _orientationRepository.Get(command.Id);
+            orientation = await _orientationRepository.Get(request.ViewModel.Id);
 
-            if (command.IsDeleted)
+            if (request.ViewModel.IsDeleted)
             {
                 await _orientationRepository.Delete(orientation);
 
                 return;
             }
 
-            orientation.Set(command.Name, command.Abbreviation);
+            orientation.Set(request.ViewModel.Name, request.ViewModel.Abbreviation);
 
             await _orientationRepository.Update(orientation);
         }
-    }
-
-    public class Command : DomainEntityCommand
-    {
-        public Command(SaveDomainViewModel viewModel) : base(viewModel) { }
     }
 }

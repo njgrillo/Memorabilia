@@ -26,7 +26,7 @@ public partial class ViewItemTypeSpots : ComponentBase
 
     protected async Task OnLoad()
     {
-        ViewModel = await QueryRouter.Send(new GetItemTypeSpots.Query());
+        ViewModel = await QueryRouter.Send(new GetItemTypeSpots());
     }
 
     protected async Task ShowDeleteConfirm(int id)
@@ -48,7 +48,7 @@ public partial class ViewItemTypeSpots : ComponentBase
             IsDeleted = true
         };
 
-        await CommandRouter.Send(new SaveItemTypeSpot.Command(viewModel));
+        await CommandRouter.Send(new SaveItemTypeSpot(viewModel));
 
         ViewModel.ItemTypeSpots.Remove(deletedItem);
 

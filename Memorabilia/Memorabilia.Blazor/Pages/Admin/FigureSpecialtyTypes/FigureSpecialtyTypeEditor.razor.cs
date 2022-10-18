@@ -4,11 +4,11 @@ public partial class FigureSpecialtyTypeEditor : EditDomainItem<FigureSpecialtyT
 {
     public async Task OnLoad()
     {
-        await OnLoad(new GetFigureSpecialtyType.Query(Id));
+        await OnLoad(new GetFigureSpecialtyType(Id));
     }
 
     public async Task OnSave()
     {
-        await OnSave(new SaveFigureSpecialtyType.Command(ViewModel));
+        await OnSave(new SaveFigureSpecialtyType(ViewModel));
     }
 }

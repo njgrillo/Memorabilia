@@ -58,7 +58,7 @@ public partial class PersonSelector : ComponentBase
 
     private async Task LoadPeople()
     {
-        _people = (await QueryRouter.Send(new GetPeople.Query(Sport?.Id ?? null))).People.Select(person => new SavePersonViewModel(person));
+        _people = (await QueryRouter.Send(new GetPeople(Sport?.Id ?? null))).People.Select(person => new SavePersonViewModel(person));
     }
 
     private void PersonCheckboxClicked(bool isChecked)
@@ -76,7 +76,7 @@ public partial class PersonSelector : ComponentBase
         _filterPeople = isChecked;
 
         var sportId = _filterPeople ? Sport.Id : (int?)null;
-        var query = new GetPeople.Query(sportId);
+        var query = new GetPeople(sportId);
 
         _people = (await QueryRouter.Send(query)).People.Select(person => new SavePersonViewModel(person));
     }

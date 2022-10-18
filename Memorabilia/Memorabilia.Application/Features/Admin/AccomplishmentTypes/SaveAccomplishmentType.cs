@@ -2,9 +2,9 @@
 
 namespace Memorabilia.Application.Features.Admin.AccomplishmentTypes;
 
-public record SaveAccomplishmentTypeCommand(SaveDomainViewModel viewModel) : ICommand
+public record SaveAccomplishmentType(SaveDomainViewModel ViewModel) : ICommand
 {
-    public class Handler : CommandHandler<SaveAccomplishmentTypeCommand>
+    public class Handler : CommandHandler<SaveAccomplishmentType>
     {
         private readonly IDomainRepository<AccomplishmentType> _accomplishmentTypeRepository;
 
@@ -13,76 +13,31 @@ public record SaveAccomplishmentTypeCommand(SaveDomainViewModel viewModel) : ICo
             _accomplishmentTypeRepository = accomplishmentTypeRepository;
         }
 
-        protected override async Task Handle(SaveAccomplishmentTypeCommand request)
+        protected override async Task Handle(SaveAccomplishmentType request)
         {
             AccomplishmentType accomplishmentType;
 
-            if (request.viewModel.IsNew)
+            if (request.ViewModel.IsNew)
             {
-                accomplishmentType = new AccomplishmentType(request.viewModel.Name, request.viewModel.Abbreviation);
+                accomplishmentType = new AccomplishmentType(request.ViewModel.Name, request.ViewModel.Abbreviation);
 
                 await _accomplishmentTypeRepository.Add(accomplishmentType);
 
                 return;
             }
 
-            accomplishmentType = await _accomplishmentTypeRepository.Get(request.viewModel.Id);
+            accomplishmentType = await _accomplishmentTypeRepository.Get(request.ViewModel.Id);
 
-            if (request.viewModel.IsDeleted)
+            if (request.ViewModel.IsDeleted)
             {
                 await _accomplishmentTypeRepository.Delete(accomplishmentType);
 
                 return;
             }
 
-            accomplishmentType.Set(request.viewModel.Name, request.viewModel.Abbreviation);
+            accomplishmentType.Set(request.ViewModel.Name, request.ViewModel.Abbreviation);
 
             await _accomplishmentTypeRepository.Update(accomplishmentType);
         }
-    }
-}
-
-public class SaveAccomplishmentType
-{
-    public class Handler : CommandHandler<Command>
-    {
-        private readonly IDomainRepository<AccomplishmentType> _accomplishmentTypeRepository;
-
-        public Handler(IDomainRepository<AccomplishmentType> accomplishmentTypeRepository)
-        {
-            _accomplishmentTypeRepository = accomplishmentTypeRepository;
-        }
-
-        protected override async Task Handle(Command command)
-        {
-            AccomplishmentType accomplishmentType;
-
-            if (command.IsNew)
-            {
-                accomplishmentType = new AccomplishmentType(command.Name, command.Abbreviation);
-
-                await _accomplishmentTypeRepository.Add(accomplishmentType);
-
-                return;
-            }
-
-            accomplishmentType = await _accomplishmentTypeRepository.Get(command.Id);
-
-            if (command.IsDeleted)
-            {
-                await _accomplishmentTypeRepository.Delete(accomplishmentType);
-
-                return;
-            }
-
-            accomplishmentType.Set(command.Name, command.Abbreviation);
-
-            await _accomplishmentTypeRepository.Update(accomplishmentType);
-        }
-    }
-
-    public class Command : DomainEntityCommand
-    {
-        public Command(SaveDomainViewModel viewModel) : base(viewModel) { }
     }
 }

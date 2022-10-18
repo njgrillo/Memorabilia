@@ -1,7 +1,4 @@
-﻿
-using Memorabilia.Application.Features.Admin.ItemTypeSports;
-using Microsoft.AspNetCore.Components;
-using System.Threading.Tasks;
+﻿using Memorabilia.Application.Features.Admin.ItemTypeSports;
 
 namespace Memorabilia.Web.Pages.Admin.ItemTypeSports
 {
@@ -21,7 +18,7 @@ namespace Memorabilia.Web.Pages.Admin.ItemTypeSports
 
         protected async Task HandleValidSubmit()
         {
-            await CommandRouter.Send(new SaveItemTypeSport.Command(_viewModel)).ConfigureAwait(false);
+            await CommandRouter.Send(new SaveItemTypeSport(_viewModel));
         }
 
         protected async Task OnLoad()
@@ -32,7 +29,7 @@ namespace Memorabilia.Web.Pages.Admin.ItemTypeSports
                 return;
             }
 
-            _viewModel = new SaveItemTypeSportViewModel(await QueryRouter.Send(new GetItemTypeSport.Query(Id)).ConfigureAwait(false));
+            _viewModel = new SaveItemTypeSportViewModel(await QueryRouter.Send(new GetItemTypeSport(Id)));
         }
     }
 }

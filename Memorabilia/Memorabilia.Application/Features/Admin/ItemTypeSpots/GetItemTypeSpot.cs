@@ -1,8 +1,8 @@
 ﻿namespace Memorabilia.Application.Features.Admin.ItemTypeSpots;
 
-public class GetItemTypeSpot
+public record GetItemTypeSpot(int Id) : IQuery<ItemTypeSpotViewModel>
 {
-    public class Handler : QueryHandler<Query, ItemTypeSpotViewModel>
+    public class Handler : QueryHandler<GetItemTypeSpot, ItemTypeSpotViewModel>
     {
         private readonly IItemTypeSpotRepository _itemTypeSpotRepository;
 
@@ -11,19 +11,9 @@ public class GetItemTypeSpot
             _itemTypeSpotRepository = itemTypeSpotRepository;
         }
 
-        protected override async Task<ItemTypeSpotViewModel> Handle(Query query)
+        protected override async Task<ItemTypeSpotViewModel> Handle(GetItemTypeSpot query)
         {
             return new ItemTypeSpotViewModel(await _itemTypeSpotRepository.Get(query.Id));
         }
-    }
-
-    public class Query : IQuery<ItemTypeSpotViewModel>
-    {
-        public Query(int id)
-        {
-            Id = id;
-        }
-
-        public int Id { get; }
     }
 }

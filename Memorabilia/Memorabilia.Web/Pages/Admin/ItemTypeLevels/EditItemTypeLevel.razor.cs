@@ -1,7 +1,4 @@
-﻿
-using Memorabilia.Application.Features.Admin.ItemTypeLevel;
-using Microsoft.AspNetCore.Components;
-using System.Threading.Tasks;
+﻿using Memorabilia.Application.Features.Admin.ItemTypeLevel;
 
 namespace Memorabilia.Web.Pages.Admin.ItemTypeLevels
 {
@@ -21,7 +18,7 @@ namespace Memorabilia.Web.Pages.Admin.ItemTypeLevels
 
         protected async Task HandleValidSubmit()
         {
-            await CommandRouter.Send(new SaveItemTypeLevel.Command(_viewModel)).ConfigureAwait(false);
+            await CommandRouter.Send(new SaveItemTypeLevel(_viewModel));
         }
 
         protected async Task OnLoad()
@@ -32,7 +29,7 @@ namespace Memorabilia.Web.Pages.Admin.ItemTypeLevels
                 return;
             }
 
-            _viewModel = new SaveItemTypeLevelViewModel(await QueryRouter.Send(new GetItemTypeLevel.Query(Id)).ConfigureAwait(false));
+            _viewModel = new SaveItemTypeLevelViewModel(await QueryRouter.Send(new GetItemTypeLevel(Id)));
         }
     }
 }

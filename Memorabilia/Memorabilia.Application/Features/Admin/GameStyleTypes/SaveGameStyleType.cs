@@ -2,9 +2,9 @@
 
 namespace Memorabilia.Application.Features.Admin.GameStyleTypes;
 
-public class SaveGameStyleType
+public record SaveGameStyleType(SaveDomainViewModel ViewModel) : ICommand
 {
-    public class Handler : CommandHandler<Command>
+    public class Handler : CommandHandler<SaveGameStyleType>
     {
         private readonly IDomainRepository<GameStyleType> _gameStyleTypeRepository;
 
@@ -13,35 +13,31 @@ public class SaveGameStyleType
             _gameStyleTypeRepository = gameStyleTypeRepository;
         }
 
-        protected override async Task Handle(Command command)
+        protected override async Task Handle(SaveGameStyleType request)
         {
             GameStyleType gameStyleType;
 
-            if (command.IsNew)
+            if (request.ViewModel.IsNew)
             {
-                gameStyleType = new GameStyleType(command.Name, command.Abbreviation);
+                gameStyleType = new GameStyleType(request.ViewModel.Name, request.ViewModel.Abbreviation);
+
                 await _gameStyleTypeRepository.Add(gameStyleType);
 
                 return;
             }
 
-            gameStyleType = await _gameStyleTypeRepository.Get(command.Id);
+            gameStyleType = await _gameStyleTypeRepository.Get(request.ViewModel.Id);
 
-            if (command.IsDeleted)
+            if (request.ViewModel.IsDeleted)
             {
                 await _gameStyleTypeRepository.Delete(gameStyleType);
 
                 return;
             }
 
-            gameStyleType.Set(command.Name, command.Abbreviation);
+            gameStyleType.Set(request.ViewModel.Name, request.ViewModel.Abbreviation);
 
             await _gameStyleTypeRepository.Update(gameStyleType);
         }
-    }
-
-    public class Command : DomainEntityCommand
-    {
-        public Command(SaveDomainViewModel viewModel) : base(viewModel) { }
     }
 }

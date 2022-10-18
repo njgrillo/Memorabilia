@@ -2,9 +2,9 @@
 
 namespace Memorabilia.Application.Features.Admin.Colors;
 
-public class GetColors
+public record GetColors() : IQuery<ColorsViewModel>
 {
-    public class Handler : QueryHandler<Query, ColorsViewModel>
+    public class Handler : QueryHandler<GetColors, ColorsViewModel>
     {
         private readonly IDomainRepository<Color> _colorRepository;
 
@@ -13,11 +13,9 @@ public class GetColors
             _colorRepository = colorRepository;
         }
 
-        protected override async Task<ColorsViewModel> Handle(Query query)
+        protected override async Task<ColorsViewModel> Handle(GetColors query)
         {
             return new ColorsViewModel(await _colorRepository.GetAll());
         }
     }
-
-    public class Query : IQuery<ColorsViewModel> { }
 }

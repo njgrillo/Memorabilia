@@ -26,7 +26,7 @@ public partial class ViewItemTypeGameStyles : ComponentBase
 
     protected async Task OnLoad()
     {
-        ViewModel = await QueryRouter.Send(new GetItemTypeGameStyles.Query());
+        ViewModel = await QueryRouter.Send(new GetItemTypeGameStyles());
     }
 
     protected async Task ShowDeleteConfirm(int id)
@@ -48,7 +48,7 @@ public partial class ViewItemTypeGameStyles : ComponentBase
             IsDeleted = true
         };
 
-        await CommandRouter.Send(new SaveItemTypeGameStyle.Command(viewModel));
+        await CommandRouter.Send(new SaveItemTypeGameStyle(viewModel));
 
         ViewModel.ItemTypeGameStyles.Remove(deletedItem);
 

@@ -2,9 +2,9 @@
 
 namespace Memorabilia.Application.Features.Admin.Pewters;
 
-public class GetPewters
+public record GetPewters() : IQuery<PewtersViewModel>
 {
-    public class Handler : QueryHandler<Query, PewtersViewModel>
+    public class Handler : QueryHandler<GetPewters, PewtersViewModel>
     {
         private readonly IDomainRepository<Pewter> _pewterRepository;
 
@@ -13,7 +13,7 @@ public class GetPewters
             _pewterRepository = pewterRepository;
         }
 
-        protected override async Task<PewtersViewModel> Handle(Query query)
+        protected override async Task<PewtersViewModel> Handle(GetPewters query)
         {
             var pewters = (await _pewterRepository.GetAll())
                                 .OrderBy(pewter => pewter.FranchiseName)
@@ -24,6 +24,4 @@ public class GetPewters
             return new PewtersViewModel(pewters);
         }
     }
-
-    public class Query : IQuery<PewtersViewModel> { }
 }

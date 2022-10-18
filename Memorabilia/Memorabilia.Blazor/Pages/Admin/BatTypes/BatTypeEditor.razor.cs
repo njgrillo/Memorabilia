@@ -4,11 +4,11 @@ public partial class BatTypeEditor : EditDomainItem<BatType>, IEditDomainItem
 {
     public async Task OnLoad()
     {
-        await OnLoad(new GetBatType.Query(Id));
+        await OnLoad(new GetBatType(Id));
     }
 
     public async Task OnSave()
     {
-        await OnSave(new SaveBatType.Command(ViewModel));
+        await OnSave(new SaveBatType(ViewModel));
     }
 }

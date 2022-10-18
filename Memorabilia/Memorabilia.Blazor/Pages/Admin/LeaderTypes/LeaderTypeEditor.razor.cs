@@ -4,11 +4,11 @@ public partial class LeaderTypeEditor : EditDomainItem<LeaderType>, IEditDomainI
 {
     public async Task OnLoad()
     {
-        await OnLoad(new GetLeaderType.Query(Id));
+        await OnLoad(new GetLeaderType(Id));
     }
 
     public async Task OnSave()
     {
-        await OnSave(new SaveLeaderType.Command(ViewModel));
+        await OnSave(new SaveLeaderType(ViewModel));
     }
 }

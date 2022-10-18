@@ -1,12 +1,4 @@
-﻿
-
-using Memorabilia.Application.Features.Admin.Franchises;
-using Memorabilia.Blazor.Controls.Dialogs;
-using Microsoft.AspNetCore.Components;
-using MudBlazor;
-using System;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using Memorabilia.Application.Features.Admin.Franchises;
 
 namespace Memorabilia.Web.Pages.Admin.Franchises
 {
@@ -31,7 +23,7 @@ namespace Memorabilia.Web.Pages.Admin.Franchises
 
         protected async Task OnLoad()
         {
-            _viewModel = await QueryRouter.Send(new GetFranchises.Query()).ConfigureAwait(false);
+            _viewModel = await QueryRouter.Send(new GetFranchises());
         }
 
         protected async Task ShowDeleteConfirm(int id)
@@ -42,7 +34,7 @@ namespace Memorabilia.Web.Pages.Admin.Franchises
             if (result.Cancelled)
                 return;
 
-            await Delete(id).ConfigureAwait(false);
+            await Delete(id);
         }
 
         protected async Task Delete(int id)
@@ -53,7 +45,7 @@ namespace Memorabilia.Web.Pages.Admin.Franchises
                 IsDeleted = true
             };
 
-            await CommandRouter.Send(new SaveFranchise.Command(viewModel)).ConfigureAwait(false);
+            await CommandRouter.Send(new SaveFranchise(viewModel));
 
             _viewModel.Franchises.Remove(deletedItem);
 

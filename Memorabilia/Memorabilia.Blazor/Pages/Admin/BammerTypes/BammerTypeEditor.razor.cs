@@ -4,11 +4,11 @@ public partial class BammerTypeEditor : EditDomainItem<BammerType>, IEditDomainI
 {
     public async Task OnLoad()
     {
-        await OnLoad(new GetBammerType.Query(Id));
+        await OnLoad(new GetBammerType(Id));
     }
 
     public async Task OnSave()
     {
-        await OnSave(new SaveBammerType.Command(ViewModel));
+        await OnSave(new SaveBammerType(ViewModel));
     }
 }

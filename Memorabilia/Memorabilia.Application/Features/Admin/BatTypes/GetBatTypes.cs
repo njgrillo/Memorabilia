@@ -2,9 +2,9 @@
 
 namespace Memorabilia.Application.Features.Admin.BatTypes;
 
-public class GetBatTypes
+public record GetBatTypes() : IQuery<BatTypesViewModel>
 {
-    public class Handler : QueryHandler<Query, BatTypesViewModel>
+    public class Handler : QueryHandler<GetBatTypes, BatTypesViewModel>
     {
         private readonly IDomainRepository<BatType> _batTypeRepository;
 
@@ -13,11 +13,9 @@ public class GetBatTypes
             _batTypeRepository = batTypeRepository;
         }
 
-        protected override async Task<BatTypesViewModel> Handle(Query query)
+        protected override async Task<BatTypesViewModel> Handle(GetBatTypes query)
         {
             return new BatTypesViewModel(await _batTypeRepository.GetAll());
         }
     }
-
-    public class Query : IQuery<BatTypesViewModel> { }
 }

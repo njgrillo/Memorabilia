@@ -2,9 +2,9 @@
 
 namespace Memorabilia.Application.Features.Admin.FootballTypes;
 
-public class GetFootballTypes
+public record GetFootballTypes() : IQuery<FootballTypesViewModel>
 {
-    public class Handler : QueryHandler<Query, FootballTypesViewModel>
+    public class Handler : QueryHandler<GetFootballTypes, FootballTypesViewModel>
     {
         private readonly IDomainRepository<FootballType> _footballTypeRepository;
 
@@ -13,11 +13,9 @@ public class GetFootballTypes
             _footballTypeRepository = footballTypeRepository;
         }
 
-        protected override async Task<FootballTypesViewModel> Handle(Query query)
+        protected override async Task<FootballTypesViewModel> Handle(GetFootballTypes query)
         {
             return new FootballTypesViewModel(await _footballTypeRepository.GetAll());
         }
     }
-
-    public class Query : IQuery<FootballTypesViewModel> { }
 }

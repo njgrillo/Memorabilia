@@ -2,9 +2,9 @@
 
 namespace Memorabilia.Application.Features.Admin.FigureTypes;
 
-public class GetFigureTypes
+public record GetFigureTypes() : IQuery<FigureTypesViewModel>
 {
-    public class Handler : QueryHandler<Query, FigureTypesViewModel>
+    public class Handler : QueryHandler<GetFigureTypes, FigureTypesViewModel>
     {
         private readonly IDomainRepository<FigureType> _figureTypeRepository;
 
@@ -13,11 +13,9 @@ public class GetFigureTypes
             _figureTypeRepository = figureTypeRepository;
         }
 
-        protected override async Task<FigureTypesViewModel> Handle(Query query)
+        protected override async Task<FigureTypesViewModel> Handle(GetFigureTypes query)
         {
             return new FigureTypesViewModel(await _figureTypeRepository.GetAll());
         }
     }
-
-    public class Query : IQuery<FigureTypesViewModel> { }
 }

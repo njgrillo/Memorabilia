@@ -4,11 +4,11 @@ public partial class ViewRecordTypes : ViewDomainItem<RecordTypesViewModel>, IDe
 {
     public async Task OnDelete(SaveDomainViewModel viewModel)
     {
-        await OnDelete(new SaveRecordType.Command(viewModel));
+        await OnDelete(new SaveRecordType(viewModel));
     }
 
     public async Task OnLoad()
     {
-        await OnLoad(new GetRecordTypes.Query());
+        await OnLoad(new GetRecordTypes());
     }
 }

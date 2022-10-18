@@ -2,9 +2,9 @@
 
 namespace Memorabilia.Application.Features.Admin.Sizes;
 
-public class SaveSize
+public record SaveSize(SaveDomainViewModel ViewModel) : ICommand
 {
-    public class Handler : CommandHandler<Command>
+    public class Handler : CommandHandler<SaveSize>
     {
         private readonly IDomainRepository<Size> _sizeRepository;
 
@@ -13,36 +13,31 @@ public class SaveSize
             _sizeRepository = sizeRepository;
         }
 
-        protected override async Task Handle(Command command)
+        protected override async Task Handle(SaveSize request)
         {
             Size size;
 
-            if (command.IsNew)
+            if (request.ViewModel.IsNew)
             {
-                size = new Size(command.Name, command.Abbreviation);
+                size = new Size(request.ViewModel.Name, request.ViewModel.Abbreviation);
 
                 await _sizeRepository.Add(size);
 
                 return;
             }
 
-            size = await _sizeRepository.Get(command.Id);
+            size = await _sizeRepository.Get(request.ViewModel.Id);
 
-            if (command.IsDeleted)
+            if (request.ViewModel.IsDeleted)
             {
                 await _sizeRepository.Delete(size);
 
                 return;
             }
 
-            size.Set(command.Name, command.Abbreviation);
+            size.Set(request.ViewModel.Name, request.ViewModel.Abbreviation);
 
             await _sizeRepository.Update(size);
         }
-    }
-
-    public class Command : DomainEntityCommand
-    {
-        public Command(SaveDomainViewModel viewModel) : base(viewModel) { }
     }
 }

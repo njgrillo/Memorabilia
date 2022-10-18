@@ -1,8 +1,4 @@
-﻿
-
-using Memorabilia.Application.Features.Admin.People;
-using Microsoft.AspNetCore.Components;
-using System.Threading.Tasks;
+﻿using Memorabilia.Application.Features.Admin.People;
 
 namespace Memorabilia.Web.Pages.Admin.People
 {
@@ -24,14 +20,14 @@ namespace Memorabilia.Web.Pages.Admin.People
             if (Id == 0)
                 return;
 
-            _viewModel = new SavePersonViewModel(await QueryRouter.Send(new GetPerson.Query(Id)).ConfigureAwait(false));
+            _viewModel = new SavePersonViewModel(await QueryRouter.Send(new GetPerson(Id)));
         }
 
         protected async Task OnSave()
         {
             var command = new SavePerson.Command(_viewModel);
 
-            await CommandRouter.Send(command).ConfigureAwait(false);
+            await CommandRouter.Send(command);
 
             _viewModel.Id = command.Id;
         }

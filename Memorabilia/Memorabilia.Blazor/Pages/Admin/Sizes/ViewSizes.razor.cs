@@ -4,11 +4,11 @@ public partial class ViewSizes : ViewDomainItem<SizesViewModel>, IDeleteDomainIt
 {
     public async Task OnDelete(SaveDomainViewModel viewModel)
     {
-        await OnDelete(new SaveSize.Command(viewModel));
+        await OnDelete(new SaveSize(viewModel));
     }
 
     public async Task OnLoad()
     {
-        await OnLoad(new GetSizes.Query());
+        await OnLoad(new GetSizes());
     }
 }

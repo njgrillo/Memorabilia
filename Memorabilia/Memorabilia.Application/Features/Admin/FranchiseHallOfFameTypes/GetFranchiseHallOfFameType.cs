@@ -2,9 +2,9 @@
 
 namespace Memorabilia.Application.Features.Admin.FranchiseHallOfFameTypes;
 
-public class GetFranchiseHallOfFameType
+public record GetFranchiseHallOfFameType(int Id) : IQuery<DomainViewModel>
 {
-    public class Handler : QueryHandler<Query, DomainViewModel>
+    public class Handler : QueryHandler<GetFranchiseHallOfFameType, DomainViewModel>
     {
         private readonly IDomainRepository<FranchiseHallOfFameType> _franchiseHallOfFameTypeRepository;
 
@@ -13,14 +13,9 @@ public class GetFranchiseHallOfFameType
             _franchiseHallOfFameTypeRepository = franchiseHallOfFameTypeRepository;
         }
 
-        protected override async Task<DomainViewModel> Handle(Query query)
+        protected override async Task<DomainViewModel> Handle(GetFranchiseHallOfFameType query)
         {
             return new DomainViewModel(await _franchiseHallOfFameTypeRepository.Get(query.Id));
         }
-    }
-
-    public class Query : DomainQuery
-    {
-        public Query(int id) : base(id) { }
     }
 }

@@ -2,9 +2,9 @@
 
 namespace Memorabilia.Application.Features.Admin.Occupations;
 
-public class SaveOccupation
+public record SaveOccupation(SaveDomainViewModel ViewModel) : ICommand
 {
-    public class Handler : CommandHandler<Command>
+    public class Handler : CommandHandler<SaveOccupation>
     {
         private readonly IDomainRepository<Occupation> _occupationRepository;
 
@@ -13,36 +13,31 @@ public class SaveOccupation
             _occupationRepository = occupationRepository;
         }
 
-        protected override async Task Handle(Command command)
+        protected override async Task Handle(SaveOccupation request)
         {
             Occupation occupation;
 
-            if (command.IsNew)
+            if (request.ViewModel.IsNew)
             {
-                occupation = new Occupation(command.Name, command.Abbreviation);
+                occupation = new Occupation(request.ViewModel.Name, request.ViewModel.Abbreviation);
 
                 await _occupationRepository.Add(occupation);
 
                 return;
             }
 
-            occupation = await _occupationRepository.Get(command.Id);
+            occupation = await _occupationRepository.Get(request.ViewModel.Id);
 
-            if (command.IsDeleted)
+            if (request.ViewModel.IsDeleted)
             {
                 await _occupationRepository.Delete(occupation);
 
                 return;
             }
 
-            occupation.Set(command.Name, command.Abbreviation);
+            occupation.Set(request.ViewModel.Name, request.ViewModel.Abbreviation);
 
             await _occupationRepository.Update(occupation);
         }
-    }
-
-    public class Command : DomainEntityCommand
-    {
-        public Command(SaveDomainViewModel viewModel) : base(viewModel) { }
     }
 }

@@ -35,7 +35,7 @@ public partial class PersonProfile : ComponentBase
 
     private async Task LoadPeople()
     {
-        _people = (await QueryRouter.Send(new GetPeople.Query())).People;
+        _people = (await QueryRouter.Send(new GetPeople())).People;
     }
 
     private async Task<IEnumerable<PersonViewModel>> SearchPeople(string searchText)

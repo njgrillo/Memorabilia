@@ -2,9 +2,9 @@
 
 namespace Memorabilia.Application.Features.Admin.PrivacyTypes;
 
-public class GetPrivacyTypes
+public record GetPrivacyTypes() : IQuery<PrivacyTypesViewModel>
 {
-    public class Handler : QueryHandler<Query, PrivacyTypesViewModel>
+    public class Handler : QueryHandler<GetPrivacyTypes, PrivacyTypesViewModel>
     {
         private readonly IDomainRepository<PrivacyType> _privacyTypeRepository;
 
@@ -13,11 +13,9 @@ public class GetPrivacyTypes
             _privacyTypeRepository = privacyTypeRepository;
         }
 
-        protected override async Task<PrivacyTypesViewModel> Handle(Query query)
+        protected override async Task<PrivacyTypesViewModel> Handle(GetPrivacyTypes query)
         {
             return new PrivacyTypesViewModel(await _privacyTypeRepository.GetAll());
         }
     }
-
-    public class Query : IQuery<PrivacyTypesViewModel> { }
 }

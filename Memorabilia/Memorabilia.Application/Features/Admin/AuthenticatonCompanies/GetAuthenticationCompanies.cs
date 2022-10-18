@@ -2,9 +2,9 @@
 
 namespace Memorabilia.Application.Features.Admin.AuthenticationCompanies;
 
-public class GetAuthenticationCompanies
+public record GetAuthenticationCompanies() : IQuery<AuthenticationCompaniesViewModel>
 {
-    public class Handler : QueryHandler<Query, AuthenticationCompaniesViewModel>
+    public class Handler : QueryHandler<GetAuthenticationCompanies, AuthenticationCompaniesViewModel>
     {
         private readonly IDomainRepository<AuthenticationCompany> _authenticationCompanyRepository;
 
@@ -13,11 +13,9 @@ public class GetAuthenticationCompanies
             _authenticationCompanyRepository = authenticationCompanyRepository;
         }
 
-        protected override async Task<AuthenticationCompaniesViewModel> Handle(Query query)
+        protected override async Task<AuthenticationCompaniesViewModel> Handle(GetAuthenticationCompanies query)
         {
             return new AuthenticationCompaniesViewModel(await _authenticationCompanyRepository.GetAll());
         }
     }
-
-    public class Query : IQuery<AuthenticationCompaniesViewModel> { }
 }

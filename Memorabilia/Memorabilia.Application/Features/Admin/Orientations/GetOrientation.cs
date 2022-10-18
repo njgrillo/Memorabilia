@@ -2,9 +2,9 @@
 
 namespace Memorabilia.Application.Features.Admin.Orientations;
 
-public class GetOrientation
+public record GetOrientation(int Id) : IQuery<DomainViewModel>
 {
-    public class Handler : QueryHandler<Query, DomainViewModel>
+    public class Handler : QueryHandler<GetOrientation, DomainViewModel>
     {
         private readonly IDomainRepository<Orientation> _orientationRepository;
 
@@ -13,14 +13,9 @@ public class GetOrientation
             _orientationRepository = orientationRepository;
         }
 
-        protected override async Task<DomainViewModel> Handle(Query query)
+        protected override async Task<DomainViewModel> Handle(GetOrientation query)
         {
             return new DomainViewModel(await _orientationRepository.Get(query.Id));
         }
-    }
-
-    public class Query : DomainQuery
-    {
-        public Query(int id) : base(id) { }
     }
 }

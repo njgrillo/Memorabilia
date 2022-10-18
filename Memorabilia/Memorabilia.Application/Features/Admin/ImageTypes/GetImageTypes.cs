@@ -2,9 +2,9 @@
 
 namespace Memorabilia.Application.Features.Admin.ImageTypes;
 
-public class GetImageTypes
+public record GetImageTypes() : IQuery<ImageTypesViewModel>
 {
-    public class Handler : QueryHandler<Query, ImageTypesViewModel>
+    public class Handler : QueryHandler<GetImageTypes, ImageTypesViewModel>
     {
         private readonly IDomainRepository<ImageType> _imageTypeRepository;
 
@@ -13,11 +13,9 @@ public class GetImageTypes
             _imageTypeRepository = imageTypeRepository;
         }
 
-        protected override async Task<ImageTypesViewModel> Handle(Query query)
+        protected override async Task<ImageTypesViewModel> Handle(GetImageTypes query)
         {
             return new ImageTypesViewModel(await _imageTypeRepository.GetAll());
         }
     }
-
-    public class Query : IQuery<ImageTypesViewModel> { }
 }

@@ -2,9 +2,9 @@
 
 namespace Memorabilia.Application.Features.Admin.Conferences;
 
-public class SaveConference
+public record SaveConference(SaveConferenceViewModel ViewModel) : ICommand
 {
-    public class Handler : CommandHandler<Command>
+    public class Handler : CommandHandler<SaveConference>
     {
         private readonly IDomainRepository<Conference> _conferenceRepository;
 
@@ -13,60 +13,35 @@ public class SaveConference
             _conferenceRepository = conferenceRepository;
         }
 
-        protected override async Task Handle(Command command)
+        protected override async Task Handle(SaveConference request)
         {
             Conference conference;
 
-            if (command.IsNew)
+            if (request.ViewModel.IsNew)
             {
-                conference = new Conference(command.SportLeagueLevelId,
-                                            command.Name,
-                                            command.Abbreviation);
+                conference = new Conference(request.ViewModel.SportLeagueLevelId,
+                                            request.ViewModel.Name,
+                                            request.ViewModel.Abbreviation);
 
                 await _conferenceRepository.Add(conference);
 
                 return;
             }
 
-            conference = await _conferenceRepository.Get(command.Id);
+            conference = await _conferenceRepository.Get(request.ViewModel.Id);
 
-            if (command.IsDeleted)
+            if (request.ViewModel.IsDeleted)
             {
                 await _conferenceRepository.Delete(conference);
 
                 return;
             }
 
-            conference.Set(command.SportLeagueLevelId,
-                           command.Name,
-                           command.Abbreviation);
+            conference.Set(request.ViewModel.SportLeagueLevelId,
+                           request.ViewModel.Name,
+                           request.ViewModel.Abbreviation);
 
             await _conferenceRepository.Update(conference);
         }
-    }
-
-    public class Command : DomainCommand, ICommand
-    {
-        private readonly SaveConferenceViewModel _viewModel;
-
-        public Command(SaveConferenceViewModel viewModel)
-        {
-            _viewModel = viewModel;
-        }
-
-        public string Abbreviation => _viewModel.Abbreviation;
-
-        public int Id => _viewModel.Id;
-
-        public bool IsDeleted => _viewModel.IsDeleted;
-
-        public bool IsModified => _viewModel.IsModified;
-
-        public bool IsNew => _viewModel.IsNew;
-
-
-        public string Name => _viewModel.Name;
-
-        public int SportLeagueLevelId => _viewModel.SportLeagueLevelId;
     }
 }

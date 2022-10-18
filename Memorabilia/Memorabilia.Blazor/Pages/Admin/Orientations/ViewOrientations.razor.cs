@@ -4,12 +4,12 @@
     {
         public async Task OnDelete(SaveDomainViewModel viewModel)
         {
-            await OnDelete(new SaveOrientation.Command(viewModel));
+            await OnDelete(new SaveOrientation(viewModel));
         }
 
         public async Task OnLoad()
         {
-            await OnLoad(new GetOrientations.Query());
+            await OnLoad(new GetOrientations());
         }
     }
 }

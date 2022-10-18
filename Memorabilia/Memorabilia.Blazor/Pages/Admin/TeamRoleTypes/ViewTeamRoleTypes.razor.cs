@@ -4,11 +4,11 @@ public partial class ViewTeamRoleTypes : ViewDomainItem<TeamRoleTypesViewModel>,
 {
     public async Task OnDelete(SaveDomainViewModel viewModel)
     {
-        await OnDelete(new SaveTeamRoleType.Command(viewModel));
+        await OnDelete(new SaveTeamRoleType(viewModel));
     }
 
     public async Task OnLoad()
     {
-        await OnLoad(new GetTeamRoleTypes.Query());
+        await OnLoad(new GetTeamRoleTypes());
     }
 }

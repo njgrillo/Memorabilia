@@ -2,9 +2,9 @@
 
 namespace Memorabilia.Application.Features.Admin.Conditions;
 
-public class GetCondition
+public record GetCondition(int Id) : IQuery<DomainViewModel>
 {
-    public class Handler : QueryHandler<Query, DomainViewModel>
+    public class Handler : QueryHandler<GetCondition, DomainViewModel>
     {
         private readonly IDomainRepository<Condition> _conditionRepository;
 
@@ -13,14 +13,9 @@ public class GetCondition
             _conditionRepository = conditionRepository;
         }
 
-        protected override async Task<DomainViewModel> Handle(Query query)
+        protected override async Task<DomainViewModel> Handle(GetCondition query)
         {
             return new DomainViewModel(await _conditionRepository.Get(query.Id));
         }
-    }
-
-    public class Query : DomainQuery
-    {
-        public Query(int id) : base(id) { }
     }
 }

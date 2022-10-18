@@ -2,9 +2,9 @@
 
 namespace Memorabilia.Application.Features.Admin.Sizes;
 
-public class GetSizes
+public record GetSizes() : IQuery<SizesViewModel>
 {
-    public class Handler : QueryHandler<Query, SizesViewModel>
+    public class Handler : QueryHandler<GetSizes, SizesViewModel>
     {
         private readonly IDomainRepository<Size> _sizeRepository;
 
@@ -13,11 +13,9 @@ public class GetSizes
             _sizeRepository = sizeRepository;
         }
 
-        protected override async Task<SizesViewModel> Handle(Query query)
+        protected override async Task<SizesViewModel> Handle(GetSizes query)
         {
             return new SizesViewModel(await _sizeRepository.GetAll());
         }
     }
-
-    public class Query : IQuery<SizesViewModel> { }
 }

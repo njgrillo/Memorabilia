@@ -23,7 +23,7 @@ public partial class ViewFranchises : ComponentBase
 
     protected async Task OnLoad()
     {
-        ViewModel = await QueryRouter.Send(new GetFranchises.Query());
+        ViewModel = await QueryRouter.Send(new GetFranchises());
     }
 
     protected async Task ShowDeleteConfirm(int id)
@@ -45,7 +45,7 @@ public partial class ViewFranchises : ComponentBase
             IsDeleted = true
         };
 
-        await CommandRouter.Send(new SaveFranchise.Command(viewModel));
+        await CommandRouter.Send(new SaveFranchise(viewModel));
 
         ViewModel.Franchises.Remove(deletedItem);
 

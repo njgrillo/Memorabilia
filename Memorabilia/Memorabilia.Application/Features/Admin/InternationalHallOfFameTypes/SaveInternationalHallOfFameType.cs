@@ -2,9 +2,9 @@
 
 namespace Memorabilia.Application.Features.Admin.InternationalHallOfFameTypes;
 
-public class SaveInternationalHallOfFameType
+public record SaveInternationalHallOfFameType(SaveDomainViewModel ViewModel) : ICommand
 {
-    public class Handler : CommandHandler<Command>
+    public class Handler : CommandHandler<SaveInternationalHallOfFameType>
     {
         private readonly IDomainRepository<InternationalHallOfFameType> _internationalHallOfFameTypeRepository;
 
@@ -13,36 +13,31 @@ public class SaveInternationalHallOfFameType
             _internationalHallOfFameTypeRepository = internationalHallOfFameTypeRepository;
         }
 
-        protected override async Task Handle(Command command)
+        protected override async Task Handle(SaveInternationalHallOfFameType request)
         {
             InternationalHallOfFameType internationalHallOfFameType;
 
-            if (command.IsNew)
+            if (request.ViewModel.IsNew)
             {
-                internationalHallOfFameType = new InternationalHallOfFameType(command.Name, command.Abbreviation);
+                internationalHallOfFameType = new InternationalHallOfFameType(request.ViewModel.Name, request.ViewModel.Abbreviation);
 
                 await _internationalHallOfFameTypeRepository.Add(internationalHallOfFameType);
 
                 return;
             }
 
-            internationalHallOfFameType = await _internationalHallOfFameTypeRepository.Get(command.Id);
+            internationalHallOfFameType = await _internationalHallOfFameTypeRepository.Get(request.ViewModel.Id);
 
-            if (command.IsDeleted)
+            if (request.ViewModel.IsDeleted)
             {
                 await _internationalHallOfFameTypeRepository.Delete(internationalHallOfFameType);
 
                 return;
             }
 
-            internationalHallOfFameType.Set(command.Name, command.Abbreviation);
+            internationalHallOfFameType.Set(request.ViewModel.Name, request.ViewModel.Abbreviation);
 
             await _internationalHallOfFameTypeRepository.Update(internationalHallOfFameType);
         }
-    }
-
-    public class Command : DomainEntityCommand
-    {
-        public Command(SaveDomainViewModel viewModel) : base(viewModel) { }
     }
 }

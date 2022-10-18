@@ -2,9 +2,9 @@
 
 namespace Memorabilia.Application.Features.Admin.Conferences;
 
-public class GetConferences
+public record GetConferences() : IQuery<ConferencesViewModel>
 {
-    public class Handler : QueryHandler<Query, ConferencesViewModel>
+    public class Handler : QueryHandler<GetConferences, ConferencesViewModel>
     {
         private readonly IDomainRepository<Conference> _conferenceRepository;
 
@@ -13,7 +13,7 @@ public class GetConferences
             _conferenceRepository = conferenceRepository;
         }
 
-        protected override async Task<ConferencesViewModel> Handle(Query query)
+        protected override async Task<ConferencesViewModel> Handle(GetConferences query)
         {
             var conferences = (await _conferenceRepository.GetAll())
                                     .OrderBy(conference => conference.SportLeagueLevelName)
@@ -21,10 +21,5 @@ public class GetConferences
 
             return new ConferencesViewModel(conferences);
         }
-    }
-
-    public class Query : IQuery<ConferencesViewModel>
-    {
-        public Query() { }
     }
 }

@@ -2,9 +2,9 @@
 
 namespace Memorabilia.Application.Features.Admin.FigureSpecialtyTypes;
 
-public class GetFigureSpecialtyType
+public record GetFigureSpecialtyType(int Id) : IQuery<DomainViewModel>
 {
-    public class Handler : QueryHandler<Query, DomainViewModel>
+    public class Handler : QueryHandler<GetFigureSpecialtyType, DomainViewModel>
     {
         private readonly IDomainRepository<FigureSpecialtyType> _figureSpecialtyTypeRepository;
 
@@ -13,14 +13,9 @@ public class GetFigureSpecialtyType
             _figureSpecialtyTypeRepository = figureSpecialtyTypeRepository;
         }
 
-        protected override async Task<DomainViewModel> Handle(Query query)
+        protected override async Task<DomainViewModel> Handle(GetFigureSpecialtyType query)
         {
             return new DomainViewModel(await _figureSpecialtyTypeRepository.Get(query.Id));
         }
-    }
-
-    public class Query : DomainQuery
-    {
-        public Query(int id) : base(id) { }
     }
 }

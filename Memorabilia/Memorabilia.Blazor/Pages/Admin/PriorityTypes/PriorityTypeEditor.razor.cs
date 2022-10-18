@@ -4,11 +4,11 @@ public partial class PriorityTypeEditor : EditDomainItem<PriorityType>, IEditDom
 {
     public async Task OnLoad()
     {
-        await OnLoad(new GetPriorityType.Query(Id));
+        await OnLoad(new GetPriorityType(Id));
     }
 
     public async Task OnSave()
     {
-        await OnSave(new SavePriorityType.Command(ViewModel));
+        await OnSave(new SavePriorityType(ViewModel));
     }
 }

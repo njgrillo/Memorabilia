@@ -4,11 +4,11 @@ public partial class PurchaseTypeEditor : EditDomainItem<PurchaseType>, IEditDom
 {
     public async Task OnLoad()
     {
-        await OnLoad(new GetPurchaseType.Query(Id));
+        await OnLoad(new GetPurchaseType(Id));
     }
 
     public async Task OnSave()
     {
-        await OnSave(new SavePurchaseType.Command(ViewModel));
+        await OnSave(new SavePurchaseType(ViewModel));
     }
 }

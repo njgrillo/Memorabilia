@@ -4,11 +4,11 @@ public partial class ViewMagazineTypes : ViewDomainItem<MagazineTypesViewModel>,
 {
     public async Task OnDelete(SaveDomainViewModel viewModel)
     {
-        await OnDelete(new SaveMagazineType.Command(viewModel));
+        await OnDelete(new SaveMagazineType(viewModel));
     }
 
     public async Task OnLoad()
     {
-        await OnLoad(new GetMagazineTypes.Query());
+        await OnLoad(new GetMagazineTypes());
     }
 }

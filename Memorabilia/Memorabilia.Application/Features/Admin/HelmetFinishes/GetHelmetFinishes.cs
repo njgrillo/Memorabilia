@@ -2,9 +2,9 @@
 
 namespace Memorabilia.Application.Features.Admin.HelmetFinishes;
 
-public class GetHelmetFinishes
+public record GetHelmetFinishes() : IQuery<HelmetFinishesViewModel>
 {
-    public class Handler : QueryHandler<Query, HelmetFinishesViewModel>
+    public class Handler : QueryHandler<GetHelmetFinishes, HelmetFinishesViewModel>
     {
         private readonly IDomainRepository<HelmetFinish> _helmetFinishRepository;
 
@@ -13,11 +13,9 @@ public class GetHelmetFinishes
             _helmetFinishRepository = helmetFinishRepository;
         }
 
-        protected override async Task<HelmetFinishesViewModel> Handle(Query query)
+        protected override async Task<HelmetFinishesViewModel> Handle(GetHelmetFinishes query)
         {
             return new HelmetFinishesViewModel(await _helmetFinishRepository.GetAll());
         }
     }
-
-    public class Query : IQuery<HelmetFinishesViewModel> { }
 }

@@ -1,8 +1,8 @@
 ﻿namespace Memorabilia.Application.Features.Admin.ItemTypeBrand;
 
-public class GetItemTypeBrands
+public record GetItemTypeBrands(int? ItemTypeId = null) : IQuery<ItemTypeBrandsViewModel>
 {
-    public class Handler : QueryHandler<Query, ItemTypeBrandsViewModel>
+    public class Handler : QueryHandler<GetItemTypeBrands, ItemTypeBrandsViewModel>
     {
         private readonly IItemTypeBrandRepository _itemTypeBrandRepository;
 
@@ -11,7 +11,7 @@ public class GetItemTypeBrands
             _itemTypeBrandRepository = itemTypeBrandRepository;
         }
 
-        protected override async Task<ItemTypeBrandsViewModel> Handle(Query query)
+        protected override async Task<ItemTypeBrandsViewModel> Handle(GetItemTypeBrands query)
         {
             var itemTypeBrands = (await _itemTypeBrandRepository.GetAll(query.ItemTypeId))
                                          .OrderBy(itemTypeBrand => itemTypeBrand.ItemTypeName)
@@ -19,15 +19,5 @@ public class GetItemTypeBrands
 
             return new ItemTypeBrandsViewModel(itemTypeBrands);
         }
-    }
-
-    public class Query : IQuery<ItemTypeBrandsViewModel>
-    {
-        public Query(int? itemTypeId = null)
-        {
-            ItemTypeId = itemTypeId;
-        }
-
-        public int? ItemTypeId { get; }
     }
 }

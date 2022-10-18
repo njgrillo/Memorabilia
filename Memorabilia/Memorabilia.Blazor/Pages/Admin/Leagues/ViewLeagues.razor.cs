@@ -26,7 +26,7 @@ public partial class ViewLeagues : ComponentBase
 
     protected async Task OnLoad()
     {
-        ViewModel = await QueryRouter.Send(new GetLeagues.Query());
+        ViewModel = await QueryRouter.Send(new GetLeagues());
     }
 
     protected async Task ShowDeleteConfirm(int id)
@@ -48,7 +48,7 @@ public partial class ViewLeagues : ComponentBase
             IsDeleted = true
         };
 
-        await CommandRouter.Send(new SaveLeague.Command(viewModel));
+        await CommandRouter.Send(new SaveLeague(viewModel));
 
         ViewModel.Leagues.Remove(deletedItem);
 

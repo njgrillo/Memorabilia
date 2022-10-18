@@ -4,11 +4,11 @@ public partial class SizeEditor : EditDomainItem<Domain.Constants.Size>, IEditDo
 {
     public async Task OnLoad()
     {
-        await OnLoad(new GetSize.Query(Id));
+        await OnLoad(new GetSize(Id));
     }
 
     public async Task OnSave()
     {
-        await OnSave(new SaveSize.Command(ViewModel));
+        await OnSave(new SaveSize(ViewModel));
     }
 }

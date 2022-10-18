@@ -4,12 +4,12 @@
     {
         public async Task OnDelete(SaveDomainViewModel viewModel)
         {
-            await OnDelete(new SavePriorityType.Command(viewModel));
+            await OnDelete(new SavePriorityType(viewModel));
         }
 
         public async Task OnLoad()
         {
-            await OnLoad(new GetPriorityTypes.Query());
+            await OnLoad(new GetPriorityTypes());
         }
     }
 }

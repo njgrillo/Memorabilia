@@ -1,12 +1,4 @@
-﻿
-
-using Memorabilia.Application.Features.Admin.ItemTypeSizes;
-using Memorabilia.Blazor.Controls.Dialogs;
-using Microsoft.AspNetCore.Components;
-using MudBlazor;
-using System;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using Memorabilia.Application.Features.Admin.ItemTypeSizes;
 
 namespace Memorabilia.Web.Pages.Admin.ItemTypeSizes
 {
@@ -34,7 +26,7 @@ namespace Memorabilia.Web.Pages.Admin.ItemTypeSizes
 
         protected async Task OnLoad()
         {
-            _viewModel = await QueryRouter.Send(new GetItemTypeSizes.Query()).ConfigureAwait(false);
+            _viewModel = await QueryRouter.Send(new GetItemTypeSizes());
         }
 
         protected async Task ShowDeleteConfirm(int id)
@@ -45,7 +37,7 @@ namespace Memorabilia.Web.Pages.Admin.ItemTypeSizes
             if (result.Cancelled)
                 return;
 
-            await Delete(id).ConfigureAwait(false);
+            await Delete(id);
         }
 
         private async Task Delete(int id)
@@ -56,7 +48,7 @@ namespace Memorabilia.Web.Pages.Admin.ItemTypeSizes
                 IsDeleted = true
             };
 
-            await CommandRouter.Send(new SaveItemTypeSize.Command(viewModel)).ConfigureAwait(false);
+            await CommandRouter.Send(new SaveItemTypeSize(viewModel));
 
             _viewModel.ItemTypeSizes.Remove(deletedItem);
 

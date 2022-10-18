@@ -1,7 +1,4 @@
-﻿
-using Memorabilia.Application.Features.Admin.Conferences;
-using Microsoft.AspNetCore.Components;
-using System.Threading.Tasks;
+﻿using Memorabilia.Application.Features.Admin.Conferences;
 
 namespace Memorabilia.Web.Pages.Admin.Conferences
 {
@@ -20,7 +17,7 @@ namespace Memorabilia.Web.Pages.Admin.Conferences
 
         protected async Task HandleValidSubmit()
         {
-            await CommandRouter.Send(new SaveConference.Command(_viewModel)).ConfigureAwait(false);
+            await CommandRouter.Send(new SaveConference(_viewModel));
         }
 
         protected async Task OnLoad()
@@ -28,7 +25,7 @@ namespace Memorabilia.Web.Pages.Admin.Conferences
             if (Id == 0)
                 return;
 
-            _viewModel = new SaveConferenceViewModel(await QueryRouter.Send(new GetConference.Query(Id)).ConfigureAwait(false));
+            _viewModel = new SaveConferenceViewModel(await QueryRouter.Send(new GetConference(Id)));
         }
     }
 }

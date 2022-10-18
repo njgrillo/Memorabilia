@@ -1,12 +1,4 @@
-﻿
-
-using Memorabilia.Application.Features.Admin.Pewters;
-using Memorabilia.Blazor.Controls.Dialogs;
-using Microsoft.AspNetCore.Components;
-using MudBlazor;
-using System;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using Memorabilia.Application.Features.Admin.Pewters;
 
 namespace Memorabilia.Web.Pages.Admin.Pewters
 {
@@ -34,7 +26,7 @@ namespace Memorabilia.Web.Pages.Admin.Pewters
 
         protected async Task OnLoad()
         {
-            _viewModel = await QueryRouter.Send(new GetPewters.Query()).ConfigureAwait(false);
+            _viewModel = await QueryRouter.Send(new GetPewters());
         }
 
         protected async Task ShowDeleteConfirm(int id)
@@ -45,7 +37,7 @@ namespace Memorabilia.Web.Pages.Admin.Pewters
             if (result.Cancelled)
                 return;
 
-            await Delete(id).ConfigureAwait(false);
+            await Delete(id);
         }
 
         private async Task Delete(int id)
@@ -56,7 +48,7 @@ namespace Memorabilia.Web.Pages.Admin.Pewters
                 IsDeleted = true
             };
 
-            await CommandRouter.Send(new SavePewter.Command(viewModel)).ConfigureAwait(false);
+            await CommandRouter.Send(new SavePewter(viewModel));
 
             _viewModel.Pewters.Remove(deletedItem);
 

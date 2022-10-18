@@ -2,9 +2,9 @@
 
 namespace Memorabilia.Application.Features.Admin.AuthenticationCompanies;
 
-public class SaveAuthenticationCompany
+public record SaveAuthenticationCompany(SaveDomainViewModel ViewModel) : ICommand
 {
-    public class Handler : CommandHandler<Command>
+    public class Handler : CommandHandler<SaveAuthenticationCompany>
     {
         private readonly IDomainRepository<AuthenticationCompany> _authenticationCompanyRepository;
 
@@ -13,36 +13,31 @@ public class SaveAuthenticationCompany
             _authenticationCompanyRepository = authenticationCompanyRepository;
         }
 
-        protected override async Task Handle(Command command)
+        protected override async Task Handle(SaveAuthenticationCompany request)
         {
             AuthenticationCompany authenticationCompany;
 
-            if (command.IsNew)
+            if (request.ViewModel.IsNew)
             {
-                authenticationCompany = new AuthenticationCompany(command.Name, command.Abbreviation);
+                authenticationCompany = new AuthenticationCompany(request.ViewModel.Name, request.ViewModel.Abbreviation);
 
                 await _authenticationCompanyRepository.Add(authenticationCompany);
 
                 return;
             }
 
-            authenticationCompany = await _authenticationCompanyRepository.Get(command.Id);
+            authenticationCompany = await _authenticationCompanyRepository.Get(request.ViewModel.Id);
 
-            if (command.IsDeleted)
+            if (request.ViewModel.IsDeleted)
             {
                 await _authenticationCompanyRepository.Delete(authenticationCompany);
 
                 return;
             }
 
-            authenticationCompany.Set(command.Name, command.Abbreviation);
+            authenticationCompany.Set(request.ViewModel.Name, request.ViewModel.Abbreviation);
 
             await _authenticationCompanyRepository.Update(authenticationCompany);
         }
-    }
-
-    public class Command : DomainEntityCommand
-    {
-        public Command(SaveDomainViewModel viewModel) : base(viewModel) { }
     }
 }

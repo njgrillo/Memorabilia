@@ -2,9 +2,9 @@
 
 namespace Memorabilia.Application.Features.Admin.Franchises;
 
-public class SaveFranchise
+public record SaveFranchise(SaveFranchiseViewModel ViewModel) : ICommand
 {
-    public class Handler : CommandHandler<Command>
+    public class Handler : CommandHandler<SaveFranchise>
     {
         private readonly IDomainRepository<Franchise> _franchiseRepository;
 
@@ -13,62 +13,34 @@ public class SaveFranchise
             _franchiseRepository = franchiseRepository;
         }
 
-        protected override async Task Handle(Command command)
+        protected override async Task Handle(SaveFranchise request)
         {
             Franchise franchise;
 
-            if (command.IsNew)
+            if (request.ViewModel.IsNew)
             {
-                franchise = new Franchise(command.SportLeagueLevelId, 
-                                          command.Name, 
-                                          command.Location, 
-                                          command.FoundYear);
+                franchise = new Franchise(request.ViewModel.SportLeagueLevelId,
+                                          request.ViewModel.Name,
+                                          request.ViewModel.Location,
+                                          request.ViewModel.FoundYear);
 
                 await _franchiseRepository.Add(franchise);
 
                 return;
             }
 
-            franchise = await _franchiseRepository.Get(command.Id);
+            franchise = await _franchiseRepository.Get(request.ViewModel.Id);
 
-            if (command.IsDeleted)
+            if (request.ViewModel.IsDeleted)
             {
                 await _franchiseRepository.Delete(franchise);
 
                 return;
             }
 
-            franchise.Set(command.Name, command.Location, command.FoundYear);
+            franchise.Set(request.ViewModel.Name, request.ViewModel.Location, request.ViewModel.FoundYear);
 
             await _franchiseRepository.Update(franchise);
         }
-    }
-
-    public class Command : DomainCommand, ICommand
-    {
-        private readonly SaveFranchiseViewModel _viewModel;
-
-        public Command(SaveFranchiseViewModel viewModel)
-        {
-            _viewModel = viewModel;
-        }
-
-        public int FoundYear => _viewModel.FoundYear;
-
-        public int Id => _viewModel.Id;
-
-        public string ImagePath => _viewModel.ImagePath;
-
-        public bool IsDeleted => _viewModel.IsDeleted;
-
-        public bool IsModified => _viewModel.IsModified;
-
-        public bool IsNew => _viewModel.IsNew;
-
-        public string Location => _viewModel.Location;
-
-        public string Name => _viewModel.Name;
-
-        public int SportLeagueLevelId => _viewModel.SportLeagueLevelId;
     }
 }

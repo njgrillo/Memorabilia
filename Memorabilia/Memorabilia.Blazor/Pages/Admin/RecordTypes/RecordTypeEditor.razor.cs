@@ -4,11 +4,11 @@ public partial class RecordTypeEditor : EditDomainItem<RecordType>, IEditDomainI
 {
     public async Task OnLoad()
     {
-        await OnLoad(new GetRecordType.Query(Id));
+        await OnLoad(new GetRecordType(Id));
     }
 
     public async Task OnSave()
     {
-        await OnSave(new SaveRecordType.Command(ViewModel));
+        await OnSave(new SaveRecordType(ViewModel));
     }
 }

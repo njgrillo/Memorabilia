@@ -2,9 +2,9 @@
 
 namespace Memorabilia.Application.Features.Admin.FigureTypes;
 
-public class SaveFigureType
+public record SaveFigureType(SaveDomainViewModel ViewModel) : ICommand
 {
-    public class Handler : CommandHandler<Command>
+    public class Handler : CommandHandler<SaveFigureType>
     {
         private readonly IDomainRepository<FigureType> _figureTypeRepository;
 
@@ -13,35 +13,30 @@ public class SaveFigureType
             _figureTypeRepository = figureTypeRepository;
         }
 
-        protected override async Task Handle(Command command)
+        protected override async Task Handle(SaveFigureType request)
         {
             FigureType figureType;
 
-            if (command.IsNew)
+            if (request.ViewModel.IsNew)
             {
-                figureType = new FigureType(command.Name, command.Abbreviation);
+                figureType = new FigureType(request.ViewModel.Name, request.ViewModel.Abbreviation);
                 await _figureTypeRepository.Add(figureType);
 
                 return;
             }
 
-            figureType = await _figureTypeRepository.Get(command.Id);
+            figureType = await _figureTypeRepository.Get(request.ViewModel.Id);
 
-            if (command.IsDeleted)
+            if (request.ViewModel.IsDeleted)
             {
                 await _figureTypeRepository.Delete(figureType);
 
                 return;
             }
 
-            figureType.Set(command.Name, command.Abbreviation);
+            figureType.Set(request.ViewModel.Name, request.ViewModel.Abbreviation);
 
             await _figureTypeRepository.Update(figureType);
         }
-    }
-
-    public class Command : DomainEntityCommand
-    {
-        public Command(SaveDomainViewModel viewModel) : base(viewModel) { }
     }
 }

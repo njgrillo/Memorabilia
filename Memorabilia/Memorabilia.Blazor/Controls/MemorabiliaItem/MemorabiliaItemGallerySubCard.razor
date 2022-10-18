@@ -1,0 +1,16 @@
+﻿<MudTooltip Text="@TooltipText">
+    <MudCard>
+        <MudCardMedia @onclick="OnImageClick"
+                      Class="rounded-sm can-click"
+                      Height="100"
+                      Image="@ImagePath" />
+        <MudCardContent>
+            <MudText Typo="Typo.body2">@Title</MudText>
+        </MudCardContent>
+        <MudCardActions>
+            <MudButton @onclick="OnEditClick"
+                       Color="MudBlazor.Color.Primary"
+                       Variant="Variant.Text">Edit</MudButton>
+        </MudCardActions>
+    </MudCard>
+</MudTooltip>

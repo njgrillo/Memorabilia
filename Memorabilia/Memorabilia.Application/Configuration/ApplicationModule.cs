@@ -23,6 +23,6 @@ public class ApplicationModule : Module
             .InstancePerDependency();
 
         builder.RegisterType<ProfileService>().As<IProfileService>()
-            .InstancePerDependency();      
+            .InstancePerDependency();
     }
 }

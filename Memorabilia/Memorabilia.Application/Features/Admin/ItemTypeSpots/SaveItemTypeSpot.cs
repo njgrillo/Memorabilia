@@ -2,9 +2,9 @@
 
 namespace Memorabilia.Application.Features.Admin.ItemTypeSpots;
 
-public class SaveItemTypeSpot
+public record SaveItemTypeSpot(SaveItemTypeSpotViewModel ViewModel) : ICommand
 {
-    public class Handler : CommandHandler<Command>
+    public class Handler : CommandHandler<SaveItemTypeSpot>
     {
         private readonly IItemTypeSpotRepository _itemTypeSpotRepository;
 
@@ -13,53 +13,31 @@ public class SaveItemTypeSpot
             _itemTypeSpotRepository = itemTypeSpotRepository;
         }
 
-        protected override async Task Handle(Command command)
+        protected override async Task Handle(SaveItemTypeSpot request)
         {
             ItemTypeSpot itemTypeSpot;
 
-            if (command.IsNew)
+            if (request.ViewModel.IsNew)
             {
-                itemTypeSpot = new ItemTypeSpot(command.ItemTypeId, command.SpotId);
+                itemTypeSpot = new ItemTypeSpot(request.ViewModel.ItemTypeId, request.ViewModel.SpotId);
 
                 await _itemTypeSpotRepository.Add(itemTypeSpot);
 
                 return;
             }
 
-            itemTypeSpot = await _itemTypeSpotRepository.Get(command.Id);
+            itemTypeSpot = await _itemTypeSpotRepository.Get(request.ViewModel.Id);
 
-            if (command.IsDeleted)
+            if (request.ViewModel.IsDeleted)
             {
                 await _itemTypeSpotRepository.Delete(itemTypeSpot);
 
                 return;
             }
 
-            itemTypeSpot.Set(command.SpotId);
+            itemTypeSpot.Set(request.ViewModel.SpotId);
 
             await _itemTypeSpotRepository.Update(itemTypeSpot);
         }
-    }
-
-    public class Command : DomainCommand, ICommand
-    {
-        private readonly SaveItemTypeSpotViewModel _viewModel;
-
-        public Command(SaveItemTypeSpotViewModel viewModel)
-        {
-            _viewModel = viewModel;
-        }
-
-        public int Id => _viewModel.Id;
-
-        public bool IsDeleted => _viewModel.IsDeleted;
-
-        public bool IsModified => _viewModel.IsModified;
-
-        public bool IsNew => _viewModel.IsNew;
-
-        public int ItemTypeId => _viewModel.ItemTypeId;
-
-        public int SpotId => _viewModel.SpotId;
     }
 }

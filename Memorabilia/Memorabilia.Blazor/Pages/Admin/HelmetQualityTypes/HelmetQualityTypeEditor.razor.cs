@@ -4,11 +4,11 @@ public partial class HelmetQualityTypeEditor : EditDomainItem<HelmetQualityType>
 {
     public async Task OnLoad()
     {
-        await OnLoad(new GetHelmetQualityType.Query(Id));
+        await OnLoad(new GetHelmetQualityType(Id));
     }
 
     public async Task OnSave()
     {
-        await OnSave(new SaveHelmetQualityType.Command(ViewModel));
+        await OnSave(new SaveHelmetQualityType(ViewModel));
     }
 }

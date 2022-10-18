@@ -2,9 +2,9 @@
 
 namespace Memorabilia.Application.Features.Admin.InternationalHallOfFameTypes;
 
-public class GetInternationalHallOfFameTypes
+public record GetInternationalHallOfFameTypes() : IQuery<InternationalHallOfFameTypesViewModel>
 {
-    public class Handler : QueryHandler<Query, InternationalHallOfFameTypesViewModel>
+    public class Handler : QueryHandler<GetInternationalHallOfFameTypes, InternationalHallOfFameTypesViewModel>
     {
         private readonly IDomainRepository<InternationalHallOfFameType> _internationalHallOfFameTypeRepository;
 
@@ -13,11 +13,9 @@ public class GetInternationalHallOfFameTypes
             _internationalHallOfFameTypeRepository = internationalHallOfFameTypeRepository;
         }
 
-        protected override async Task<InternationalHallOfFameTypesViewModel> Handle(Query query)
+        protected override async Task<InternationalHallOfFameTypesViewModel> Handle(GetInternationalHallOfFameTypes query)
         {
             return new InternationalHallOfFameTypesViewModel(await _internationalHallOfFameTypeRepository.GetAll());
         }
     }
-
-    public class Query : IQuery<InternationalHallOfFameTypesViewModel> { }
 }

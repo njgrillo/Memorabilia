@@ -2,9 +2,9 @@
 
 namespace Memorabilia.Application.Features.Admin.DashboardItems;
 
-public class GetDashboardItems
+public record GetDashboardItems() : IQuery<DashboardItemsViewModel>
 {
-    public class Handler : QueryHandler<Query, DashboardItemsViewModel>
+    public class Handler : QueryHandler<GetDashboardItems, DashboardItemsViewModel>
     {
         private readonly IDomainRepository<DashboardItem> _dashboardItemRepository;
 
@@ -13,14 +13,9 @@ public class GetDashboardItems
             _dashboardItemRepository = dashboardItemRepository;
         }
 
-        protected override async Task<DashboardItemsViewModel> Handle(Query query)
+        protected override async Task<DashboardItemsViewModel> Handle(GetDashboardItems query)
         {
             return new DashboardItemsViewModel(await _dashboardItemRepository.GetAll());
         }
-    }
-
-    public class Query : IQuery<DashboardItemsViewModel>
-    {
-        public Query() { }
     }
 }

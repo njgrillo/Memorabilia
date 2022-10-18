@@ -4,11 +4,11 @@ public partial class PhotoTypeEditor : EditDomainItem<PhotoType>, IEditDomainIte
 {
     public async Task OnLoad()
     {
-        await OnLoad(new GetPhotoType.Query(Id));
+        await OnLoad(new GetPhotoType(Id));
     }
 
     public async Task OnSave()
     {
-        await OnSave(new SavePhotoType.Command(ViewModel));
+        await OnSave(new SavePhotoType(ViewModel));
     }
 }

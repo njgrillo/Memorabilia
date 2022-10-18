@@ -4,11 +4,11 @@ public partial class InternationalHallOfFameTypeEditor : EditDomainItem<Internat
 {
     public async Task OnLoad()
     {
-        await OnLoad(new GetInternationalHallOfFameType.Query(Id));
+        await OnLoad(new GetInternationalHallOfFameType(Id));
     }
 
     public async Task OnSave()
     {
-        await OnSave(new SaveInternationalHallOfFameType.Command(ViewModel));
+        await OnSave(new SaveInternationalHallOfFameType(ViewModel));
     }
 }

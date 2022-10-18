@@ -1,8 +1,8 @@
 ﻿namespace Memorabilia.Application.Features.Admin.People;
 
-public class GetPersonImage
+public record GetPersonImage(int PersonId) : IQuery<PersonImageViewModel>
 {
-    public class Handler : QueryHandler<Query, PersonImageViewModel>
+    public class Handler : QueryHandler<GetPersonImage, PersonImageViewModel>
     {
         private readonly IPersonRepository _personRepository;
 
@@ -11,21 +11,11 @@ public class GetPersonImage
             _personRepository = personRepository;
         }
 
-        protected override async Task<PersonImageViewModel> Handle(Query query)
+        protected override async Task<PersonImageViewModel> Handle(GetPersonImage query)
         {
             var person = await _personRepository.Get(query.PersonId);
 
             return new PersonImageViewModel(person);
         }
-    }
-
-    public class Query : IQuery<PersonImageViewModel>
-    {
-        public Query(int personId)
-        {
-            PersonId = personId;
-        }
-
-        public int PersonId { get; }
     }
 }

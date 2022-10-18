@@ -28,7 +28,7 @@ public partial class FootballEditor : MemorabiliaItem<SaveFootballViewModel>
 
     private async Task LoadCommissioners()
     {
-        Commissioners = (await QueryRouter.Send(new GetCommissioners.Query(ViewModel.SportLeagueLevel.Id))).Commissioners.ToArray();
+        Commissioners = (await QueryRouter.Send(new GetCommissioners(ViewModel.SportLeagueLevel.Id))).Commissioners.ToArray();
     }
 
     private void SelectedPersonChanged(SavePersonViewModel person)

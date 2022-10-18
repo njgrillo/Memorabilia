@@ -4,11 +4,11 @@ public partial class ViewAccomplishmentTypes : ViewDomainItem<AccomplishmentType
 {
     public async Task OnDelete(SaveDomainViewModel viewModel)
     {
-        await OnDelete(new SaveAccomplishmentTypeCommand(viewModel));
+        await OnDelete(new SaveAccomplishmentType(viewModel));
     }
 
     public async Task OnLoad()
     {
-        await OnLoad(new GetAccomplishmentTypesQuery());
+        await OnLoad(new GetAccomplishmentTypes());
     }
 }

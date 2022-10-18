@@ -4,11 +4,11 @@ public partial class PrivacyTypeEditor : EditDomainItem<PrivacyType>, IEditDomai
 {
     public async Task OnLoad()
     {
-        await OnLoad(new GetPrivacyType.Query(Id));
+        await OnLoad(new GetPrivacyType(Id));
     }
 
     public async Task OnSave()
     {
-        await OnSave(new SavePrivacyType.Command(ViewModel));
+        await OnSave(new SavePrivacyType(ViewModel));
     }
 }

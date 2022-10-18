@@ -2,9 +2,9 @@
 
 namespace Memorabilia.Application.Features.Admin.LevelTypes;
 
-public class GetLevelTypes
+public record GetLevelTypes() : IQuery<LevelTypesViewModel>
 {
-    public class Handler : QueryHandler<Query, LevelTypesViewModel>
+    public class Handler : QueryHandler<GetLevelTypes, LevelTypesViewModel>
     {
         private readonly IDomainRepository<LevelType> _levelTypeRepository;
 
@@ -13,11 +13,9 @@ public class GetLevelTypes
             _levelTypeRepository = levelTypeRepository;
         }
 
-        protected override async Task<LevelTypesViewModel> Handle(Query query)
+        protected override async Task<LevelTypesViewModel> Handle(GetLevelTypes query)
         {
             return new LevelTypesViewModel(await _levelTypeRepository.GetAll());
         }
     }
-
-    public class Query : IQuery<LevelTypesViewModel> { }
 }

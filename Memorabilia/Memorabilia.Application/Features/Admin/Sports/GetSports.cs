@@ -2,9 +2,9 @@
 
 namespace Memorabilia.Application.Features.Admin.Sports;
 
-public class GetSports
+public record GetSports() : IQuery<SportsViewModel>
 {
-    public class Handler : QueryHandler<Query, SportsViewModel>
+    public class Handler : QueryHandler<GetSports, SportsViewModel>
     {
         private readonly IDomainRepository<Sport> _sportRepository;
 
@@ -13,13 +13,11 @@ public class GetSports
             _sportRepository = sportRepository;
         }
 
-        protected override async Task<SportsViewModel> Handle(Query query)
+        protected override async Task<SportsViewModel> Handle(GetSports query)
         {
             var sports = (await _sportRepository.GetAll()).OrderBy(sport => sport.Name);
 
             return new SportsViewModel(sports);
         }
     }
-
-    public class Query : IQuery<SportsViewModel> { }
 }

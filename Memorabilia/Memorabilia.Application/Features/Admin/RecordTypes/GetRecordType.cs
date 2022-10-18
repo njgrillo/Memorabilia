@@ -2,9 +2,9 @@
 
 namespace Memorabilia.Application.Features.Admin.RecordTypes;
 
-public class GetRecordType
+public record GetRecordType(int Id) : IQuery<DomainViewModel>
 {
-    public class Handler : QueryHandler<Query, DomainViewModel>
+    public class Handler : QueryHandler<GetRecordType, DomainViewModel>
     {
         private readonly IDomainRepository<RecordType> _recordTypeRepository;
 
@@ -13,14 +13,9 @@ public class GetRecordType
             _recordTypeRepository = recordTypeRepository;
         }
 
-        protected override async Task<DomainViewModel> Handle(Query query)
+        protected override async Task<DomainViewModel> Handle(GetRecordType query)
         {
             return new DomainViewModel(await _recordTypeRepository.Get(query.Id));
         }
-    }
-
-    public class Query : DomainQuery
-    {
-        public Query(int id) : base(id) { }
     }
 }

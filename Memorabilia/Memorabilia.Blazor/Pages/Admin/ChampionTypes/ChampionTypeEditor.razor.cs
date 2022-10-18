@@ -4,11 +4,11 @@ public partial class ChampionTypeEditor : EditDomainItem<ChampionType>, IEditDom
 {
     public async Task OnLoad()
     {
-        await OnLoad(new GetChampionType.Query(Id));
+        await OnLoad(new GetChampionType(Id));
     }
 
     public async Task OnSave()
     {
-        await OnSave(new SaveChampionType.Command(ViewModel));
+        await OnSave(new SaveChampionType(ViewModel));
     }
 }

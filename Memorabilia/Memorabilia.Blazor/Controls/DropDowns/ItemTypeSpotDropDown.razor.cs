@@ -23,7 +23,7 @@ public partial class ItemTypeSpotDropDown : ComponentBase
 
     protected override async Task OnInitializedAsync()
     {
-        _itemTypeSpots = (await QueryRouter.Send(new GetItemTypeSpots.Query(ItemType.Id)))
+        _itemTypeSpots = (await QueryRouter.Send(new GetItemTypeSpots(ItemType.Id)))
                                     .ItemTypeSpots
                                     .OrderByDescending(spot => spot.SpotName);
     }

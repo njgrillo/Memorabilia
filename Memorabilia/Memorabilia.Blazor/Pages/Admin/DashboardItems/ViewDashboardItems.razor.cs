@@ -28,7 +28,7 @@ public partial class ViewDashboardItems
 
     protected async Task OnLoad()
     {
-        ViewModel = await QueryRouter.Send(new GetDashboardItems.Query());
+        ViewModel = await QueryRouter.Send(new GetDashboardItems());
     }
 
     protected async Task ShowDeleteConfirm(int id)
@@ -50,7 +50,7 @@ public partial class ViewDashboardItems
             IsDeleted = true
         };
 
-        await CommandRouter.Send(new SaveDashboardItem.Command(viewModel));
+        await CommandRouter.Send(new SaveDashboardItem(viewModel));
 
         ViewModel.DashboardItems.Remove(deletedItem);
 

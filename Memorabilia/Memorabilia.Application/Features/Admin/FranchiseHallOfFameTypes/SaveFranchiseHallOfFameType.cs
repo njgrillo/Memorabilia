@@ -2,9 +2,9 @@
 
 namespace Memorabilia.Application.Features.Admin.FranchiseHallOfFameTypes;
 
-public class SaveFranchiseHallOfFameType
+public record SaveFranchiseHallOfFameType(SaveDomainViewModel ViewModel) : ICommand
 {
-    public class Handler : CommandHandler<Command>
+    public class Handler : CommandHandler<SaveFranchiseHallOfFameType>
     {
         private readonly IDomainRepository<FranchiseHallOfFameType> _franchiseHallOfFameTypeRepository;
 
@@ -13,35 +13,30 @@ public class SaveFranchiseHallOfFameType
             _franchiseHallOfFameTypeRepository = franchiseHallOfFameTypeRepository;
         }
 
-        protected override async Task Handle(Command command)
+        protected override async Task Handle(SaveFranchiseHallOfFameType request)
         {
             FranchiseHallOfFameType franchiseHallOfFameType;
 
-            if (command.IsNew)
+            if (request.ViewModel.IsNew)
             {
-                franchiseHallOfFameType = new FranchiseHallOfFameType(command.Name, command.Abbreviation);
+                franchiseHallOfFameType = new FranchiseHallOfFameType(request.ViewModel.Name, request.ViewModel.Abbreviation);
                 await _franchiseHallOfFameTypeRepository.Add(franchiseHallOfFameType);
 
                 return;
             }
 
-            franchiseHallOfFameType = await _franchiseHallOfFameTypeRepository.Get(command.Id);
+            franchiseHallOfFameType = await _franchiseHallOfFameTypeRepository.Get(request.ViewModel.Id);
 
-            if (command.IsDeleted)
+            if (request.ViewModel.IsDeleted)
             {
                 await _franchiseHallOfFameTypeRepository.Delete(franchiseHallOfFameType);
 
                 return;
             }
 
-            franchiseHallOfFameType.Set(command.Name, command.Abbreviation);
+            franchiseHallOfFameType.Set(request.ViewModel.Name, request.ViewModel.Abbreviation);
 
             await _franchiseHallOfFameTypeRepository.Update(franchiseHallOfFameType);
         }
-    }
-
-    public class Command : DomainEntityCommand
-    {
-        public Command(SaveDomainViewModel viewModel) : base(viewModel) { }
     }
 }

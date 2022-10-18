@@ -2,9 +2,9 @@
 
 namespace Memorabilia.Application.Features.Admin.BaseballTypes;
 
-public class SaveBaseballType
+public record SaveBaseballType(SaveDomainViewModel ViewModel) : ICommand
 {
-    public class Handler : CommandHandler<Command>
+    public class Handler : CommandHandler<SaveBaseballType>
     {
         private readonly IDomainRepository<BaseballType> _baseballTypeRepository;
 
@@ -13,36 +13,31 @@ public class SaveBaseballType
             _baseballTypeRepository = baseballTypeRepository;
         }
 
-        protected override async Task Handle(Command command)
+        protected override async Task Handle(SaveBaseballType request)
         {
             BaseballType baseballType;
 
-            if (command.IsNew)
+            if (request.ViewModel.IsNew)
             {
-                baseballType = new BaseballType(command.Name, command.Abbreviation);
+                baseballType = new BaseballType(request.ViewModel.Name, request.ViewModel.Abbreviation);
 
                 await _baseballTypeRepository.Add(baseballType);
 
                 return;
             }
 
-            baseballType = await _baseballTypeRepository.Get(command.Id);
+            baseballType = await _baseballTypeRepository.Get(request.ViewModel.Id);
 
-            if (command.IsDeleted)
+            if (request.ViewModel.IsDeleted)
             {
                 await _baseballTypeRepository.Delete(baseballType);
 
                 return;
             }
 
-            baseballType.Set(command.Name, command.Abbreviation);
+            baseballType.Set(request.ViewModel.Name, request.ViewModel.Abbreviation);
 
             await _baseballTypeRepository.Update(baseballType);
         }
-    }
-
-    public class Command : DomainEntityCommand
-    {
-        public Command(SaveDomainViewModel viewModel) : base(viewModel) { }
     }
 }

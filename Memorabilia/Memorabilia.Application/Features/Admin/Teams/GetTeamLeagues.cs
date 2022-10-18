@@ -1,8 +1,8 @@
 ﻿namespace Memorabilia.Application.Features.Admin.Teams;
 
-public class GetTeamLeagues
+public record GetTeamLeagues(int TeamId) : IQuery<IEnumerable<TeamLeagueViewModel>>
 {
-    public class Handler : QueryHandler<Query, IEnumerable<TeamLeagueViewModel>>
+    public class Handler : QueryHandler<GetTeamLeagues, IEnumerable<TeamLeagueViewModel>>
     {
         private readonly ITeamLeagueRepository _teamLeagueRepository;
 
@@ -11,7 +11,7 @@ public class GetTeamLeagues
             _teamLeagueRepository = teamLeagueRepository;
         }
 
-        protected override async Task<IEnumerable<TeamLeagueViewModel>> Handle(Query query)
+        protected override async Task<IEnumerable<TeamLeagueViewModel>> Handle(GetTeamLeagues query)
         {
             var teamLeagues = (await _teamLeagueRepository.GetAll(query.TeamId))
                                     .OrderBy(teamLeague => teamLeague.LeagueName)
@@ -19,15 +19,5 @@ public class GetTeamLeagues
 
             return teamLeagues.Select(teamLeague => new TeamLeagueViewModel(teamLeague));
         }
-    }
-
-    public class Query : IQuery<IEnumerable<TeamLeagueViewModel>>
-    {
-        public Query(int teamId)
-        {
-            TeamId = teamId;
-        }
-
-        public int TeamId { get; }
     }
 }

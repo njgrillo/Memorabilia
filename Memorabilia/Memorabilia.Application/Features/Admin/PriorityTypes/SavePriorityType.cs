@@ -2,9 +2,9 @@
 
 namespace Memorabilia.Application.Features.Admin.PriorityTypes;
 
-public class SavePriorityType
+public record SavePriorityType(SaveDomainViewModel ViewModel) : ICommand
 {
-    public class Handler : CommandHandler<Command>
+    public class Handler : CommandHandler<SavePriorityType>
     {
         private readonly IDomainRepository<PriorityType> _priorityTypeRepository;
 
@@ -13,36 +13,31 @@ public class SavePriorityType
             _priorityTypeRepository = priorityTypeRepository;
         }
 
-        protected override async Task Handle(Command command)
+        protected override async Task Handle(SavePriorityType request)
         {
             PriorityType priorityType;
 
-            if (command.IsNew)
+            if (request.ViewModel.IsNew)
             {
-                priorityType = new PriorityType(command.Name, command.Abbreviation);
+                priorityType = new PriorityType(request.ViewModel.Name, request.ViewModel.Abbreviation);
 
                 await _priorityTypeRepository.Add(priorityType);
 
                 return;
             }
 
-            priorityType = await _priorityTypeRepository.Get(command.Id);
+            priorityType = await _priorityTypeRepository.Get(request.ViewModel.Id);
 
-            if (command.IsDeleted)
+            if (request.ViewModel.IsDeleted)
             {
                 await _priorityTypeRepository.Delete(priorityType);
 
                 return;
             }
 
-            priorityType.Set(command.Name, command.Abbreviation);
+            priorityType.Set(request.ViewModel.Name, request.ViewModel.Abbreviation);
 
             await _priorityTypeRepository.Update(priorityType);
         }
-    }
-
-    public class Command : DomainEntityCommand
-    {
-        public Command(SaveDomainViewModel viewModel) : base(viewModel) { }
     }
 }

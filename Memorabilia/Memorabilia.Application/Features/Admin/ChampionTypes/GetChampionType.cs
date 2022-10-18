@@ -2,9 +2,9 @@
 
 namespace Memorabilia.Application.Features.Admin.ChampionTypes;
 
-public class GetChampionType
+public record GetChampionType(int Id) : IQuery<DomainViewModel>
 {
-    public class Handler : QueryHandler<Query, DomainViewModel>
+    public class Handler : QueryHandler<GetChampionType, DomainViewModel>
     {
         private readonly IDomainRepository<ChampionType> _championTypeRepository;
 
@@ -13,14 +13,9 @@ public class GetChampionType
             _championTypeRepository = championTypeRepository;
         }
 
-        protected override async Task<DomainViewModel> Handle(Query query)
+        protected override async Task<DomainViewModel> Handle(GetChampionType query)
         {
             return new DomainViewModel(await _championTypeRepository.Get(query.Id));
         }
-    }
-
-    public class Query : DomainQuery
-    {
-        public Query(int id) : base(id) { }
     }
 }

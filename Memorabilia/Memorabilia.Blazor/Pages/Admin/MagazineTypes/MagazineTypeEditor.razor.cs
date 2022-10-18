@@ -4,11 +4,11 @@ public partial class MagazineTypeEditor : EditDomainItem<MagazineType>, IEditDom
 {
     public async Task OnLoad()
     {
-        await OnLoad(new GetMagazineType.Query(Id));
+        await OnLoad(new GetMagazineType(Id));
     }
 
     public async Task OnSave()
     {
-        await OnSave(new SaveMagazineType.Command(ViewModel));
+        await OnSave(new SaveMagazineType(ViewModel));
     }
 }

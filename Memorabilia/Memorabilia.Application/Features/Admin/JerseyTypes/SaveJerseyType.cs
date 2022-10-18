@@ -2,9 +2,9 @@
 
 namespace Memorabilia.Application.Features.Admin.JerseyTypes;
 
-public class SaveJerseyType
+public record SaveJerseyType(SaveDomainViewModel ViewModel) : ICommand
 {
-    public class Handler : CommandHandler<Command>
+    public class Handler : CommandHandler<SaveJerseyType>
     {
         private readonly IDomainRepository<JerseyType> _jerseyTypeRepository;
 
@@ -13,36 +13,31 @@ public class SaveJerseyType
             _jerseyTypeRepository = jerseyTypeRepository;
         }
 
-        protected override async Task Handle(Command command)
+        protected override async Task Handle(SaveJerseyType request)
         {
             JerseyType jerseyType;
 
-            if (command.IsNew)
+            if (request.ViewModel.IsNew)
             {
-                jerseyType = new JerseyType(command.Name, command.Abbreviation);
+                jerseyType = new JerseyType(request.ViewModel.Name, request.ViewModel.Abbreviation);
 
                 await _jerseyTypeRepository.Add(jerseyType);
 
                 return;
             }
 
-            jerseyType = await _jerseyTypeRepository.Get(command.Id);
+            jerseyType = await _jerseyTypeRepository.Get(request.ViewModel.Id);
 
-            if (command.IsDeleted)
+            if (request.ViewModel.IsDeleted)
             {
                 await _jerseyTypeRepository.Delete(jerseyType);
 
                 return;
             }
 
-            jerseyType.Set(command.Name, command.Abbreviation);
+            jerseyType.Set(request.ViewModel.Name, request.ViewModel.Abbreviation);
 
             await _jerseyTypeRepository.Update(jerseyType);
         }
-    }
-
-    public class Command : DomainEntityCommand
-    {
-        public Command(SaveDomainViewModel viewModel) : base(viewModel) { }
     }
 }

@@ -2,9 +2,9 @@
 
 namespace Memorabilia.Application.Features.Admin.AwardTypes;
 
-public class SaveAwardType
+public record SaveAwardType(SaveDomainViewModel ViewModel) : ICommand
 {
-    public class Handler : CommandHandler<Command>
+    public class Handler : CommandHandler<SaveAwardType>
     {
         private readonly IDomainRepository<AwardType> _awardTypeRepository;
 
@@ -13,36 +13,31 @@ public class SaveAwardType
             _awardTypeRepository = awardTypeRepository;
         }
 
-        protected override async Task Handle(Command command)
+        protected override async Task Handle(SaveAwardType request)
         {
             AwardType awardType;
 
-            if (command.IsNew)
+            if (request.ViewModel.IsNew)
             {
-                awardType = new AwardType(command.Name, command.Abbreviation);
+                awardType = new AwardType(request.ViewModel.Name, request.ViewModel.Abbreviation);
 
                 await _awardTypeRepository.Add(awardType);
 
                 return;
             }
 
-            awardType = await _awardTypeRepository.Get(command.Id);
+            awardType = await _awardTypeRepository.Get(request.ViewModel.Id);
 
-            if (command.IsDeleted)
+            if (request.ViewModel.IsDeleted)
             {
                 await _awardTypeRepository.Delete(awardType);
 
                 return;
             }
 
-            awardType.Set(command.Name, command.Abbreviation);
+            awardType.Set(request.ViewModel.Name, request.ViewModel.Abbreviation);
 
             await _awardTypeRepository.Update(awardType);
         }
-    }
-
-    public class Command : DomainEntityCommand
-    {
-        public Command(SaveDomainViewModel viewModel) : base(viewModel) { }
     }
 }

@@ -1,13 +1,4 @@
-﻿
-
-using Memorabilia.Application.Features.Admin.Pewters;
-using Microsoft.AspNetCore.Components;
-using Microsoft.AspNetCore.Components.Forms;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Logging;
-using System;
-using System.IO;
-using System.Threading.Tasks;
+﻿using Memorabilia.Application.Features.Admin.Pewters;
 
 namespace Memorabilia.Web.Pages.Admin.Pewters
 {
@@ -33,7 +24,7 @@ namespace Memorabilia.Web.Pages.Admin.Pewters
 
         protected async Task HandleValidSubmit()
         {
-            await CommandRouter.Send(new SavePewter.Command(_viewModel)).ConfigureAwait(false);
+            await CommandRouter.Send(new SavePewter(_viewModel));
         }
 
         protected async Task OnLoad()
@@ -41,7 +32,7 @@ namespace Memorabilia.Web.Pages.Admin.Pewters
             if (Id == 0)
                 return;
 
-            _viewModel = new SavePewterViewModel(await QueryRouter.Send(new GetPewter.Query(Id)).ConfigureAwait(false));
+            _viewModel = new SavePewterViewModel(await QueryRouter.Send(new GetPewter(Id)));
             _hasImage = !_viewModel.ImagePath.IsNullOrEmpty();
         }
 

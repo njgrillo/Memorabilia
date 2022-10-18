@@ -2,9 +2,9 @@
 
 namespace Memorabilia.Application.Features.Admin.ChampionTypes;
 
-public class SaveChampionType
+public record SaveChampionType(SaveDomainViewModel ViewModel) : ICommand
 {
-    public class Handler : CommandHandler<Command>
+    public class Handler : CommandHandler<SaveChampionType>
     {
         private readonly IDomainRepository<ChampionType> _championTypeRepository;
 
@@ -13,36 +13,31 @@ public class SaveChampionType
             _championTypeRepository = championTypeRepository;
         }
 
-        protected override async Task Handle(Command command)
+        protected override async Task Handle(SaveChampionType request)
         {
             ChampionType championType;
 
-            if (command.IsNew)
+            if (request.ViewModel.IsNew)
             {
-                championType = new ChampionType(command.Name, command.Abbreviation);
+                championType = new ChampionType(request.ViewModel.Name, request.ViewModel.Abbreviation);
 
                 await _championTypeRepository.Add(championType);
 
                 return;
             }
 
-            championType = await _championTypeRepository.Get(command.Id);
+            championType = await _championTypeRepository.Get(request.ViewModel.Id);
 
-            if (command.IsDeleted)
+            if (request.ViewModel.IsDeleted)
             {
                 await _championTypeRepository.Delete(championType);
 
                 return;
             }
 
-            championType.Set(command.Name, command.Abbreviation);
+            championType.Set(request.ViewModel.Name, request.ViewModel.Abbreviation);
 
             await _championTypeRepository.Update(championType);
         }
-    }
-
-    public class Command : DomainEntityCommand
-    {
-        public Command(SaveDomainViewModel viewModel) : base(viewModel) { }
     }
 }

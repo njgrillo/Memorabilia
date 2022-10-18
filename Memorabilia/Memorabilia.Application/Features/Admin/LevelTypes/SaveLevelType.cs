@@ -2,9 +2,9 @@
 
 namespace Memorabilia.Application.Features.Admin.LevelTypes;
 
-public class SaveLevelType
+public record SaveLevelType(SaveDomainViewModel ViewModel) : ICommand
 {
-    public class Handler : CommandHandler<Command>
+    public class Handler : CommandHandler<SaveLevelType>
     {
         private readonly IDomainRepository<LevelType> _levelTypeRepository;
 
@@ -13,36 +13,31 @@ public class SaveLevelType
             _levelTypeRepository = levelTypeRepository;
         }
 
-        protected override async Task Handle(Command command)
+        protected override async Task Handle(SaveLevelType request)
         {
             LevelType levelType;
 
-            if (command.IsNew)
+            if (request.ViewModel.IsNew)
             {
-                levelType = new LevelType(command.Name, command.Abbreviation);
+                levelType = new LevelType(request.ViewModel.Name, request.ViewModel.Abbreviation);
 
                 await _levelTypeRepository.Add(levelType);
 
                 return;
             }
 
-            levelType = await _levelTypeRepository.Get(command.Id);
+            levelType = await _levelTypeRepository.Get(request.ViewModel.Id);
 
-            if (command.IsDeleted)
+            if (request.ViewModel.IsDeleted)
             {
                 await _levelTypeRepository.Delete(levelType);
 
                 return;
             }
 
-            levelType.Set(command.Name, command.Abbreviation);
+            levelType.Set(request.ViewModel.Name, request.ViewModel.Abbreviation);
 
             await _levelTypeRepository.Update(levelType);
         }
-    }
-
-    public class Command : DomainEntityCommand
-    {
-        public Command(SaveDomainViewModel viewModel) : base(viewModel) { }
     }
 }

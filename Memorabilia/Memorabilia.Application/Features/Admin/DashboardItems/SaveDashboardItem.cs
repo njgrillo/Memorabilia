@@ -2,9 +2,9 @@
 
 namespace Memorabilia.Application.Features.Admin.DashboardItems;
 
-public class SaveDashboardItem
+public record SaveDashboardItem(SaveDashboardItemViewModel ViewModel) : ICommand
 {
-    public class Handler : CommandHandler<Command>
+    public class Handler : CommandHandler<SaveDashboardItem>
     {
         private readonly IDomainRepository<DashboardItem> _dashboardItemRepository;
 
@@ -13,53 +13,31 @@ public class SaveDashboardItem
             _dashboardItemRepository = dashboardItemRepository;
         }
 
-        protected override async Task Handle(Command command)
+        protected override async Task Handle(SaveDashboardItem request)
         {
             DashboardItem dashboardItem;
 
-            if (command.IsNew)
+            if (request.ViewModel.IsNew)
             {
-                dashboardItem = new DashboardItem(command.Name, command.Description);
+                dashboardItem = new DashboardItem(request.ViewModel.Name, request.ViewModel.Description);
 
                 await _dashboardItemRepository.Add(dashboardItem);
 
                 return;
             }
 
-            dashboardItem = await _dashboardItemRepository.Get(command.Id);
+            dashboardItem = await _dashboardItemRepository.Get(request.ViewModel.Id);
 
-            if (command.IsDeleted)
+            if (request.ViewModel.IsDeleted)
             {
                 await _dashboardItemRepository.Delete(dashboardItem);
 
                 return;
             }
 
-            dashboardItem.Set(command.Name, command.Description);
+            dashboardItem.Set(request.ViewModel.Name, request.ViewModel.Description);
 
             await _dashboardItemRepository.Update(dashboardItem);
         }
-    }
-
-    public class Command : DomainCommand, ICommand
-    {
-        private readonly SaveDashboardItemViewModel _viewModel;
-
-        public Command(SaveDashboardItemViewModel viewModel)
-        {
-            _viewModel = viewModel;
-        }
-
-        public string Description => _viewModel.Description;
-
-        public int Id => _viewModel.Id;
-
-        public bool IsDeleted => _viewModel.IsDeleted;
-
-        public bool IsModified => _viewModel.IsModified;
-
-        public bool IsNew => _viewModel.IsNew;
-
-        public string Name => _viewModel.Name;
     }
 }

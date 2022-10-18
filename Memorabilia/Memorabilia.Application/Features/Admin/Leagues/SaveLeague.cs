@@ -2,9 +2,9 @@
 
 namespace Memorabilia.Application.Features.Admin.Leagues;
 
-public class SaveLeague
+public record SaveLeague(SaveLeagueViewModel ViewModel) : ICommand
 {
-    public class Handler : CommandHandler<Command>
+    public class Handler : CommandHandler<SaveLeague>
     {
         private readonly IDomainRepository<League> _leagueRepository;
 
@@ -13,60 +13,35 @@ public class SaveLeague
             _leagueRepository = leagueRepository;
         }
 
-        protected override async Task Handle(Command command)
+        protected override async Task Handle(SaveLeague request)
         {
             League league;
 
-            if (command.IsNew)
+            if (request.ViewModel.IsNew)
             {
-                league = new League(command.SportLeagueLevelId,
-                                    command.Name,
-                                    command.Abbreviation);
+                league = new League(request.ViewModel.SportLeagueLevelId,
+                                    request.ViewModel.Name,
+                                    request.ViewModel.Abbreviation);
 
                 await _leagueRepository.Add(league);
 
                 return;
             }
 
-            league = await _leagueRepository.Get(command.Id);
+            league = await _leagueRepository.Get(request.ViewModel.Id);
 
-            if (command.IsDeleted)
+            if (request.ViewModel.IsDeleted)
             {
                 await _leagueRepository.Delete(league);
 
                 return;
             }
 
-            league.Set(command.SportLeagueLevelId,
-                       command.Name,
-                       command.Abbreviation);
+            league.Set(request.ViewModel.SportLeagueLevelId,
+                       request.ViewModel.Name,
+                       request.ViewModel.Abbreviation);
 
             await _leagueRepository.Update(league);
         }
-    }
-
-    public class Command : DomainCommand, ICommand
-    {
-        private readonly SaveLeagueViewModel _viewModel;
-
-        public Command(SaveLeagueViewModel viewModel)
-        {
-            _viewModel = viewModel;
-        }
-
-        public string Abbreviation => _viewModel.Abbreviation;
-
-        public int Id => _viewModel.Id;
-
-        public bool IsDeleted => _viewModel.IsDeleted;
-
-        public bool IsModified => _viewModel.IsModified;
-
-        public bool IsNew => _viewModel.IsNew;
-
-
-        public string Name => _viewModel.Name;
-
-        public int SportLeagueLevelId => _viewModel.SportLeagueLevelId;
     }
 }

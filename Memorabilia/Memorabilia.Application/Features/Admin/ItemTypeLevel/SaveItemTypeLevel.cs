@@ -1,8 +1,8 @@
 ﻿namespace Memorabilia.Application.Features.Admin.ItemTypeLevel;
 
-public class SaveItemTypeLevel
+public record SaveItemTypeLevel(SaveItemTypeLevelViewModel ViewModel) : ICommand
 {
-    public class Handler : CommandHandler<Command>
+    public class Handler : CommandHandler<SaveItemTypeLevel>
     {
         private readonly IItemTypeLevelRepository _itemTypeLevelRepository;
 
@@ -11,53 +11,31 @@ public class SaveItemTypeLevel
             _itemTypeLevelRepository = itemTypeLevelRepository;
         }
 
-        protected override async Task Handle(Command command)
+        protected override async Task Handle(SaveItemTypeLevel request)
         {
             Domain.Entities.ItemTypeLevel itemTypeLevel;
 
-            if (command.IsNew)
+            if (request.ViewModel.IsNew)
             {
-                itemTypeLevel = new Domain.Entities.ItemTypeLevel(command.ItemTypeId, command.LevelTypeId);
+                itemTypeLevel = new Domain.Entities.ItemTypeLevel(request.ViewModel.ItemTypeId, request.ViewModel.LevelTypeId);
 
                 await _itemTypeLevelRepository.Add(itemTypeLevel);
 
                 return;
             }
 
-            itemTypeLevel = await _itemTypeLevelRepository.Get(command.Id);
+            itemTypeLevel = await _itemTypeLevelRepository.Get(request.ViewModel.Id);
 
-            if (command.IsDeleted)
+            if (request.ViewModel.IsDeleted)
             {
                 await _itemTypeLevelRepository.Delete(itemTypeLevel);
 
                 return;
             }
 
-            itemTypeLevel.Set(command.LevelTypeId);
+            itemTypeLevel.Set(request.ViewModel.LevelTypeId);
 
             await _itemTypeLevelRepository.Update(itemTypeLevel);
         }
-    }
-
-    public class Command : DomainCommand, ICommand
-    {
-        private readonly SaveItemTypeLevelViewModel _viewModel;
-
-        public Command(SaveItemTypeLevelViewModel viewModel)
-        {
-            _viewModel = viewModel;
-        }            
-
-        public int Id => _viewModel.Id;
-
-        public bool IsDeleted => _viewModel.IsDeleted;
-
-        public bool IsModified => _viewModel.IsModified;
-
-        public bool IsNew => _viewModel.IsNew;
-
-        public int ItemTypeId => _viewModel.ItemTypeId;
-
-        public int LevelTypeId => _viewModel.LevelTypeId;
     }
 }

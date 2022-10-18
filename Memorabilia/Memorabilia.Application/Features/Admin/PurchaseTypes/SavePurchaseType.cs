@@ -2,9 +2,9 @@
 
 namespace Memorabilia.Application.Features.Admin.PurchaseTypes;
 
-public class SavePurchaseType
+public record SavePurchaseType(SaveDomainViewModel ViewModel) : ICommand
 {
-    public class Handler : CommandHandler<Command>
+    public class Handler : CommandHandler<SavePurchaseType>
     {
         private readonly IDomainRepository<PurchaseType> _purchaseTypeRepository;
 
@@ -13,36 +13,31 @@ public class SavePurchaseType
             _purchaseTypeRepository = purchaseTypeRepository;
         }
 
-        protected override async Task Handle(Command command)
+        protected override async Task Handle(SavePurchaseType request)
         {
             PurchaseType purchaseType;
 
-            if (command.IsNew)
+            if (request.ViewModel.IsNew)
             {
-                purchaseType = new PurchaseType(command.Name, command.Abbreviation);
+                purchaseType = new PurchaseType(request.ViewModel.Name, request.ViewModel.Abbreviation);
 
                 await _purchaseTypeRepository.Add(purchaseType);
 
                 return;
             }
 
-            purchaseType = await _purchaseTypeRepository.Get(command.Id);
+            purchaseType = await _purchaseTypeRepository.Get(request.ViewModel.Id);
 
-            if (command.IsDeleted)
+            if (request.ViewModel.IsDeleted)
             {
                 await _purchaseTypeRepository.Delete(purchaseType);
 
                 return;
             }
 
-            purchaseType.Set(command.Name, command.Abbreviation);
+            purchaseType.Set(request.ViewModel.Name, request.ViewModel.Abbreviation);
 
             await _purchaseTypeRepository.Update(purchaseType);
         }
-    }
-
-    public class Command : DomainEntityCommand
-    {
-        public Command(SaveDomainViewModel viewModel) : base(viewModel) { }
     }
 }

@@ -1,8 +1,8 @@
 ﻿namespace Memorabilia.Application.Features.Admin.Commissioners;
 
-public class GetCommissioners : ViewModel
+public record GetCommissioners(int? SportId = null) : IQuery<CommissionersViewModel>
 {
-    public class Handler : QueryHandler<Query, CommissionersViewModel>
+    public class Handler : QueryHandler<GetCommissioners, CommissionersViewModel>
     {
         private readonly ICommissionerRepository _commissionerRepository;
 
@@ -11,7 +11,7 @@ public class GetCommissioners : ViewModel
             _commissionerRepository = commissionerRepository;
         }
 
-        protected override async Task<CommissionersViewModel> Handle(Query query)
+        protected override async Task<CommissionersViewModel> Handle(GetCommissioners query)
         {
             var commissioners = (await _commissionerRepository.GetAll(query.SportId))
                                             .OrderBy(commissioner => commissioner.SportLeagueLevelName)
@@ -19,15 +19,5 @@ public class GetCommissioners : ViewModel
 
             return new CommissionersViewModel(commissioners);
         }
-    }
-
-    public class Query : IQuery<CommissionersViewModel>
-    {
-        public Query(int? sportId = null)
-        {
-            SportId = sportId;
-        }
-
-        public int? SportId { get; }
     }
 }

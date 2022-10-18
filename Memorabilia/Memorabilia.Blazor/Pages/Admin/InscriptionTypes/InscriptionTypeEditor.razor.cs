@@ -4,11 +4,11 @@ public partial class InscriptionTypeEditor : EditDomainItem<InscriptionType>, IE
 {
     public async Task OnLoad()
     {
-        await OnLoad(new GetInscriptionType.Query(Id));
+        await OnLoad(new GetInscriptionType(Id));
     }
 
     public async Task OnSave()
     {
-        await OnSave(new SaveInscriptionType.Command(ViewModel));
+        await OnSave(new SaveInscriptionType(ViewModel));
     }
 }

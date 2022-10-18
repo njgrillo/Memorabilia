@@ -18,7 +18,7 @@ public partial class ItemTypeSportEditor : ComponentBase
 
     protected async Task HandleValidSubmit()
     {
-        await CommandRouter.Send(new SaveItemTypeSport.Command(ViewModel));
+        await CommandRouter.Send(new SaveItemTypeSport(ViewModel));
     }
 
     protected async Task OnLoad()
@@ -29,6 +29,6 @@ public partial class ItemTypeSportEditor : ComponentBase
             return;
         }
 
-        ViewModel = new SaveItemTypeSportViewModel(await QueryRouter.Send(new GetItemTypeSport.Query(Id)));
+        ViewModel = new SaveItemTypeSportViewModel(await QueryRouter.Send(new GetItemTypeSport(Id)));
     }
 }

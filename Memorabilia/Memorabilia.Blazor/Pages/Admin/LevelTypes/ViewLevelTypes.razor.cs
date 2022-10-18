@@ -4,11 +4,11 @@ public partial class ViewLevelTypes : ViewDomainItem<LevelTypesViewModel>, IDele
 {
     public async Task OnDelete(SaveDomainViewModel viewModel)
     {
-        await OnDelete(new SaveLevelType.Command(viewModel));
+        await OnDelete(new SaveLevelType(viewModel));
     }
 
     public async Task OnLoad()
     {
-        await OnLoad(new GetLevelTypes.Query());
+        await OnLoad(new GetLevelTypes());
     }
 }

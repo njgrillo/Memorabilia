@@ -1,8 +1,8 @@
 ﻿namespace Memorabilia.Application.Features.Admin.Teams;
 
-public class GetTeamConferences
+public record GetTeamConferences(int TeamId) : IQuery<IEnumerable<TeamConferenceViewModel>>
 {
-    public class Handler : QueryHandler<Query, IEnumerable<TeamConferenceViewModel>>
+    public class Handler : QueryHandler<GetTeamConferences, IEnumerable<TeamConferenceViewModel>>
     {
         private readonly ITeamConferenceRepository _teamConferenceRepository;
 
@@ -11,7 +11,7 @@ public class GetTeamConferences
             _teamConferenceRepository = teamConferenceRepository;
         }
 
-        protected override async Task<IEnumerable<TeamConferenceViewModel>> Handle(Query query)
+        protected override async Task<IEnumerable<TeamConferenceViewModel>> Handle(GetTeamConferences query)
         {
             var teamConferences = (await _teamConferenceRepository.GetAll(query.TeamId))
                                             .OrderBy(teamConference => teamConference.ConferenceName)
@@ -19,15 +19,5 @@ public class GetTeamConferences
 
             return teamConferences.Select(teamConference => new TeamConferenceViewModel(teamConference));
         }
-    }
-
-    public class Query : IQuery<IEnumerable<TeamConferenceViewModel>>
-    {
-        public Query(int teamId)
-        {
-            TeamId = teamId;
-        }
-
-        public int TeamId { get; }
     }
 }

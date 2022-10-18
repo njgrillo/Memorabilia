@@ -1,7 +1,4 @@
-﻿
-using Memorabilia.Application.Features.Admin.DashboardItems;
-using Microsoft.AspNetCore.Components;
-using System.Threading.Tasks;
+﻿using Memorabilia.Application.Features.Admin.DashboardItems;
 
 namespace Memorabilia.Web.Pages.Admin.DashboardItems
 {
@@ -20,7 +17,7 @@ namespace Memorabilia.Web.Pages.Admin.DashboardItems
 
         protected async Task HandleValidSubmit()
         {
-            await CommandRouter.Send(new SaveDashboardItem.Command(_viewModel)).ConfigureAwait(false);
+            await CommandRouter.Send(new SaveDashboardItem(_viewModel));
         }
 
         protected async Task OnLoad()
@@ -28,7 +25,7 @@ namespace Memorabilia.Web.Pages.Admin.DashboardItems
             if (Id == 0)
                 return;
 
-            _viewModel = new SaveDashboardItemViewModel(await QueryRouter.Send(new GetDashboardItem.Query(Id)).ConfigureAwait(false));
+            _viewModel = new SaveDashboardItemViewModel(await QueryRouter.Send(new GetDashboardItem(Id)));
         }
     }
 }

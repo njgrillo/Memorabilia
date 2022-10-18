@@ -42,7 +42,7 @@ public class AutographViewModel : ViewModel
 
     public int ColorId => _autograph.ColorId;
 
-    public string ColorName => Domain.Constants.Color.Find(_autograph.ColorId)?.Name;
+    public string ColorName => Color.Find(_autograph.ColorId)?.Name;
 
     public int ConditionId => _autograph.ConditionId;
 

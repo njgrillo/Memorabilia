@@ -2,9 +2,9 @@
 
 namespace Memorabilia.Application.Features.Admin.Colleges;
 
-public class GetCollege
+public record GetCollege(int Id) : IQuery<DomainViewModel>
 {
-    public class Handler : QueryHandler<Query, DomainViewModel>
+    public class Handler : QueryHandler<GetCollege, DomainViewModel>
     {
         private readonly IDomainRepository<College> _collegeRepository;
 
@@ -13,14 +13,9 @@ public class GetCollege
             _collegeRepository = collegeRepository;
         }
 
-        protected override async Task<DomainViewModel> Handle(Query query)
+        protected override async Task<DomainViewModel> Handle(GetCollege query)
         {
             return new DomainViewModel(await _collegeRepository.Get(query.Id));
         }
-    }
-
-    public class Query : DomainQuery
-    {
-        public Query(int id) : base(id) { }
     }
 }

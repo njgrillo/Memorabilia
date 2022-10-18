@@ -1,12 +1,4 @@
-﻿
-
-using Memorabilia.Application.Features.Admin.DashboardItems;
-using Memorabilia.Blazor.Controls.Dialogs;
-using Microsoft.AspNetCore.Components;
-using MudBlazor;
-using System;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using Memorabilia.Application.Features.Admin.DashboardItems;
 
 namespace Memorabilia.Web.Pages.Admin.DashboardItems
 {
@@ -34,7 +26,7 @@ namespace Memorabilia.Web.Pages.Admin.DashboardItems
 
         protected async Task OnLoad()
         {
-            _viewModel = await QueryRouter.Send(new GetDashboardItems.Query()).ConfigureAwait(false);
+            _viewModel = await QueryRouter.Send(new GetDashboardItems());
         }
 
         protected async Task ShowDeleteConfirm(int id)
@@ -45,7 +37,7 @@ namespace Memorabilia.Web.Pages.Admin.DashboardItems
             if (result.Cancelled)
                 return;
 
-            await Delete(id).ConfigureAwait(false);
+            await Delete(id);
         }
 
         protected async Task Delete(int id)
@@ -56,7 +48,7 @@ namespace Memorabilia.Web.Pages.Admin.DashboardItems
                 IsDeleted = true
             };
 
-            await CommandRouter.Send(new SaveDashboardItem.Command(viewModel)).ConfigureAwait(false);
+            await CommandRouter.Send(new SaveDashboardItem(viewModel));
 
             _viewModel.DashboardItems.Remove(deletedItem);
 

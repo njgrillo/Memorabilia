@@ -2,9 +2,9 @@
 
 namespace Memorabilia.Application.Features.Admin.Spots;
 
-public class SaveSpot
+public record SaveSpot(SaveDomainViewModel ViewModel) : ICommand
 {
-    public class Handler : CommandHandler<Command>
+    public class Handler : CommandHandler<SaveSpot>
     {
         private readonly IDomainRepository<Spot> _spotRepository;
 
@@ -13,36 +13,31 @@ public class SaveSpot
             _spotRepository = spotRepository;
         }
 
-        protected override async Task Handle(Command command)
+        protected override async Task Handle(SaveSpot request)
         {
             Spot spot;
 
-            if (command.IsNew)
+            if (request.ViewModel.IsNew)
             {
-                spot = new Spot(command.Name, command.Abbreviation);
+                spot = new Spot(request.ViewModel.Name, request.ViewModel.Abbreviation);
 
                 await _spotRepository.Add(spot);
 
                 return;
             }
 
-            spot = await _spotRepository.Get(command.Id);
+            spot = await _spotRepository.Get(request.ViewModel.Id);
 
-            if (command.IsDeleted)
+            if (request.ViewModel.IsDeleted)
             {
                 await _spotRepository.Delete(spot);
 
                 return;
             }
 
-            spot.Set(command.Name, command.Abbreviation);
+            spot.Set(request.ViewModel.Name, request.ViewModel.Abbreviation);
 
             await _spotRepository.Update(spot);
         }
-    }
-
-    public class Command : DomainEntityCommand
-    {
-        public Command(SaveDomainViewModel viewModel) : base(viewModel) { }
     }
 }

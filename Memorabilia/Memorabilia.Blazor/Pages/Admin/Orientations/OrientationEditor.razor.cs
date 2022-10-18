@@ -4,11 +4,11 @@ public partial class OrientationEditor : EditDomainItem<Domain.Constants.Orienta
 {
     public async Task OnLoad()
     {
-        await OnLoad(new GetOrientation.Query(Id));
+        await OnLoad(new GetOrientation(Id));
     }
 
     public async Task OnSave()
     {
-        await OnSave(new SaveOrientation.Command(ViewModel));
+        await OnSave(new SaveOrientation(ViewModel));
     }
 }

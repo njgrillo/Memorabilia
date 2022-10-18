@@ -26,7 +26,7 @@ public partial class ViewItemTypeSports : ComponentBase
 
     protected async Task OnLoad()
     {
-        ViewModel = await QueryRouter.Send(new GetItemTypeSports.Query());
+        ViewModel = await QueryRouter.Send(new GetItemTypeSports());
     }
 
     protected async Task ShowDeleteConfirm(int id)
@@ -48,7 +48,7 @@ public partial class ViewItemTypeSports : ComponentBase
             IsDeleted = true
         };
 
-        await CommandRouter.Send(new SaveItemTypeSport.Command(viewModel));
+        await CommandRouter.Send(new SaveItemTypeSport(viewModel));
 
         ViewModel.ItemTypeSports.Remove(deletedItem);
 

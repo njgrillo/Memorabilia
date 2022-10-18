@@ -1,12 +1,4 @@
-﻿
-
-using Memorabilia.Application.Features.Admin.Conferences;
-using Memorabilia.Blazor.Controls.Dialogs;
-using Microsoft.AspNetCore.Components;
-using MudBlazor;
-using System;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using Memorabilia.Application.Features.Admin.Conferences;
 
 namespace Memorabilia.Web.Pages.Admin.Conferences
 {
@@ -34,7 +26,7 @@ namespace Memorabilia.Web.Pages.Admin.Conferences
 
         protected async Task OnLoad()
         {
-            _viewModel = await QueryRouter.Send(new GetConferences.Query()).ConfigureAwait(false);
+            _viewModel = await QueryRouter.Send(new GetConferences());
         }
 
         protected async Task ShowDeleteConfirm(int id)
@@ -45,7 +37,7 @@ namespace Memorabilia.Web.Pages.Admin.Conferences
             if (result.Cancelled)
                 return;
 
-            await Delete(id).ConfigureAwait(false);
+            await Delete(id);
         }
 
         private async Task Delete(int id)
@@ -56,7 +48,7 @@ namespace Memorabilia.Web.Pages.Admin.Conferences
                 IsDeleted = true
             };
 
-            await CommandRouter.Send(new SaveConference.Command(viewModel)).ConfigureAwait(false);
+            await CommandRouter.Send(new SaveConference(viewModel));
 
             _viewModel.Conferences.Remove(deletedItem);
 

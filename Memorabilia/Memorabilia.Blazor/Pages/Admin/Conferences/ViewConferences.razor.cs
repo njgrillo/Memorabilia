@@ -26,7 +26,7 @@ public partial class ViewConferences
 
     protected async Task OnLoad()
     {
-        ViewModel = await QueryRouter.Send(new GetConferences.Query());
+        ViewModel = await QueryRouter.Send(new GetConferences());
     }
 
     protected async Task ShowDeleteConfirm(int id)
@@ -48,7 +48,7 @@ public partial class ViewConferences
             IsDeleted = true
         };
 
-        await CommandRouter.Send(new SaveConference.Command(viewModel));
+        await CommandRouter.Send(new SaveConference(viewModel));
 
         ViewModel.Conferences.Remove(deletedItem);
 

@@ -26,7 +26,7 @@ public partial class ViewItemTypeLevels : ComponentBase
 
     protected async Task OnLoad()
     {
-        ViewModel = await QueryRouter.Send(new GetItemTypeLevels.Query());
+        ViewModel = await QueryRouter.Send(new GetItemTypeLevels());
     }
 
     protected async Task ShowDeleteConfirm(int id)
@@ -48,7 +48,7 @@ public partial class ViewItemTypeLevels : ComponentBase
             IsDeleted = true
         };
 
-        await CommandRouter.Send(new SaveItemTypeLevel.Command(viewModel));
+        await CommandRouter.Send(new SaveItemTypeLevel(viewModel));
 
         ViewModel.ItemTypeLevels.Remove(deletedItem);
 

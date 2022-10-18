@@ -31,7 +31,7 @@ public partial class TeamDropDown : ComponentBase
 
     private async Task Load()
     {
-        _teams = (await QueryRouter.Send(new GetTeams.Query(Franchise.Id, SportLeagueLevel.Id))).Teams;
+        _teams = (await QueryRouter.Send(new GetTeams(Franchise.Id, SportLeagueLevel.Id))).Teams;
     }
 
     private async Task OnInputChange(int value)

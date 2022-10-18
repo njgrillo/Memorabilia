@@ -1,8 +1,8 @@
 ﻿namespace Memorabilia.Application.Features.Admin.Teams;
 
-public class GetTeams
+public record GetTeams(int? FranchiseId = null, int? SportLeagueLevelId = null) : IQuery<TeamsViewModel>
 {
-    public class Handler : QueryHandler<Query, TeamsViewModel>
+    public class Handler : QueryHandler<GetTeams, TeamsViewModel>
     {
         private readonly ITeamRepository _teamRepository;
 
@@ -11,22 +11,9 @@ public class GetTeams
             _teamRepository = teamRepository;
         }
 
-        protected override async Task<TeamsViewModel> Handle(Query query)
+        protected override async Task<TeamsViewModel> Handle(GetTeams query)
         {
             return new TeamsViewModel(await _teamRepository.GetAll(query.FranchiseId, query.SportLeagueLevelId));
         }
-    }
-
-    public class Query : IQuery<TeamsViewModel>
-    {
-        public Query(int? franchiseId = null, int? sportLeagueLevelId = null)
-        {
-            FranchiseId = franchiseId;
-            SportLeagueLevelId = sportLeagueLevelId;
-        }
-
-        public int? FranchiseId { get; }
-
-        public int? SportLeagueLevelId { get; }
     }
 }

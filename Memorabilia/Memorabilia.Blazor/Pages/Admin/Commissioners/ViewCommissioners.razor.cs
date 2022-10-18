@@ -26,7 +26,7 @@ public partial class ViewCommissioners
 
     protected async Task OnLoad()
     {
-        ViewModel = await QueryRouter.Send(new GetCommissioners.Query());
+        ViewModel = await QueryRouter.Send(new GetCommissioners());
     }
 
     protected async Task ShowDeleteConfirm(int id)
@@ -48,7 +48,7 @@ public partial class ViewCommissioners
             IsDeleted = true
         };
 
-        await CommandRouter.Send(new SaveCommissioner.Command(viewModel));
+        await CommandRouter.Send(new SaveCommissioner(viewModel));
 
         ViewModel.Commissioners.Remove(deletedItem);
 

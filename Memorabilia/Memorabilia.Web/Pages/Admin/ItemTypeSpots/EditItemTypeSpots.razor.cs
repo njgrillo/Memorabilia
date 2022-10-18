@@ -1,7 +1,4 @@
-﻿
-using Memorabilia.Application.Features.Admin.ItemTypeSpots;
-using Microsoft.AspNetCore.Components;
-using System.Threading.Tasks;
+﻿using Memorabilia.Application.Features.Admin.ItemTypeSpots;
 
 namespace Memorabilia.Web.Pages.Admin.ItemTypeSpots
 {
@@ -21,7 +18,7 @@ namespace Memorabilia.Web.Pages.Admin.ItemTypeSpots
 
         protected async Task HandleValidSubmit()
         {
-            await CommandRouter.Send(new SaveItemTypeSpot.Command(_viewModel)).ConfigureAwait(false);
+            await CommandRouter.Send(new SaveItemTypeSpot(_viewModel));
         }
 
         protected async Task OnLoad()
@@ -32,7 +29,7 @@ namespace Memorabilia.Web.Pages.Admin.ItemTypeSpots
                 return;
             }
 
-            _viewModel = new SaveItemTypeSpotViewModel(await QueryRouter.Send(new GetItemTypeSpot.Query(Id)).ConfigureAwait(false));
+            _viewModel = new SaveItemTypeSpotViewModel(await QueryRouter.Send(new GetItemTypeSpot(Id)));
         }
     }
 }

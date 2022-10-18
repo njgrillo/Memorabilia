@@ -1,12 +1,4 @@
-﻿
-
-using Memorabilia.Application.Features.Admin.ItemTypeSpots;
-using Memorabilia.Blazor.Controls.Dialogs;
-using Microsoft.AspNetCore.Components;
-using MudBlazor;
-using System;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using Memorabilia.Application.Features.Admin.ItemTypeSpots;
 
 namespace Memorabilia.Web.Pages.Admin.ItemTypeSpots
 {
@@ -34,7 +26,7 @@ namespace Memorabilia.Web.Pages.Admin.ItemTypeSpots
 
         protected async Task OnLoad()
         {
-            _viewModel = await QueryRouter.Send(new GetItemTypeSpots.Query()).ConfigureAwait(false);
+            _viewModel = await QueryRouter.Send(new GetItemTypeSpots());
         }
 
         protected async Task ShowDeleteConfirm(int id)
@@ -45,7 +37,7 @@ namespace Memorabilia.Web.Pages.Admin.ItemTypeSpots
             if (result.Cancelled)
                 return;
 
-            await Delete(id).ConfigureAwait(false);
+            await Delete(id);
         }
 
         private async Task Delete(int id)
@@ -56,7 +48,7 @@ namespace Memorabilia.Web.Pages.Admin.ItemTypeSpots
                 IsDeleted = true
             };
 
-            await CommandRouter.Send(new SaveItemTypeSpot.Command(viewModel)).ConfigureAwait(false);
+            await CommandRouter.Send(new SaveItemTypeSpot(viewModel));
 
             _viewModel.ItemTypeSpots.Remove(deletedItem);
 

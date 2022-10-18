@@ -2,9 +2,9 @@
 
 namespace Memorabilia.Application.Features.Admin.Colleges;
 
-public class SaveCollege
+public record SaveCollege(SaveDomainViewModel ViewModel) : ICommand
 {
-    public class Handler : CommandHandler<Command>
+    public class Handler : CommandHandler<SaveCollege>
     {
         private readonly IDomainRepository<College> _collegeRepository;
 
@@ -13,36 +13,31 @@ public class SaveCollege
             _collegeRepository = collegeRepository;
         }
 
-        protected override async Task Handle(Command command)
+        protected override async Task Handle(SaveCollege request)
         {
             College college;
 
-            if (command.IsNew)
+            if (request.ViewModel.IsNew)
             {
-                college = new College(command.Name, command.Abbreviation);
+                college = new College(request.ViewModel.Name, request.ViewModel.Abbreviation);
 
                 await _collegeRepository.Add(college);
 
                 return;
             }
 
-            college = await _collegeRepository.Get(command.Id);
+            college = await _collegeRepository.Get(request.ViewModel.Id);
 
-            if (command.IsDeleted)
+            if (request.ViewModel.IsDeleted)
             {
                 await _collegeRepository.Delete(college);
 
                 return;
             }
 
-            college.Set(command.Name, command.Abbreviation);
+            college.Set(request.ViewModel.Name, request.ViewModel.Abbreviation);
 
             await _collegeRepository.Update(college);
         }
-    }
-
-    public class Command : DomainEntityCommand
-    {
-        public Command(SaveDomainViewModel viewModel) : base(viewModel) { }
     }
 }

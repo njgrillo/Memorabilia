@@ -2,9 +2,9 @@
 
 namespace Memorabilia.Application.Features.Admin.Brands;
 
-public class SaveBrand
+public record SaveBrand(SaveDomainViewModel ViewModel) : ICommand
 {
-    public class Handler : CommandHandler<Command>
+    public class Handler : CommandHandler<SaveBrand>
     {
         private readonly IDomainRepository<Brand> _brandRepository;
 
@@ -13,36 +13,31 @@ public class SaveBrand
             _brandRepository = brandRepository;
         }
 
-        protected override async Task Handle(Command command)
+        protected override async Task Handle(SaveBrand request)
         {
             Brand brand;
 
-            if (command.IsNew)
+            if (request.ViewModel.IsNew)
             {
-                brand = new Brand(command.Name, command.Abbreviation);
+                brand = new Brand(request.ViewModel.Name, request.ViewModel.Abbreviation);
 
                 await _brandRepository.Add(brand);
 
                 return;
             }
 
-            brand = await _brandRepository.Get(command.Id);
+            brand = await _brandRepository.Get(request.ViewModel.Id);
 
-            if (command.IsDeleted)
+            if (request.ViewModel.IsDeleted)
             {
                 await _brandRepository.Delete(brand);
 
                 return;
             }
 
-            brand.Set(command.Name, command.Abbreviation);
+            brand.Set(request.ViewModel.Name, request.ViewModel.Abbreviation);
 
             await _brandRepository.Update(brand);
         }
-    }
-
-    public class Command : DomainEntityCommand
-    {
-        public Command(SaveDomainViewModel viewModel) : base(viewModel) { }
     }
 }

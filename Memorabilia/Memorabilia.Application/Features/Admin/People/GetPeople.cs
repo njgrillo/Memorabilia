@@ -1,8 +1,8 @@
 ﻿namespace Memorabilia.Application.Features.Admin.People;
 
-public class GetPeople
+public record GetPeople(int? SportId = null) : IQuery<PeopleViewModel>
 {
-    public class Handler : QueryHandler<Query, PeopleViewModel>
+    public class Handler : QueryHandler<GetPeople, PeopleViewModel>
     {
         private readonly IPersonRepository _personRepository;
 
@@ -11,19 +11,9 @@ public class GetPeople
             _personRepository = personRepository;
         }
 
-        protected override async Task<PeopleViewModel> Handle(Query query)
+        protected override async Task<PeopleViewModel> Handle(GetPeople query)
         {
             return new PeopleViewModel(await _personRepository.GetAll(query.SportId));
         }
-    }
-
-    public class Query : IQuery<PeopleViewModel> 
-    { 
-        public Query(int? sportId = null)
-        {
-            SportId = sportId;
-        }
-
-        public int? SportId { get; }
     }
 }

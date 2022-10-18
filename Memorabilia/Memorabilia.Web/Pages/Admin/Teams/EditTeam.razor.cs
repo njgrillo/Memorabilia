@@ -1,8 +1,4 @@
-﻿
-using Memorabilia.Application.Features.Admin.Teams;
-using Microsoft.AspNetCore.Components;
-using MudBlazor;
-using System.Threading.Tasks;
+﻿using Memorabilia.Application.Features.Admin.Teams;
 
 namespace Memorabilia.Web.Pages.Admin.Teams
 {
@@ -30,14 +26,14 @@ namespace Memorabilia.Web.Pages.Admin.Teams
             if (Id == 0)
                 return;
 
-            _viewModel = new SaveTeamViewModel(await QueryRouter.Send(new GetTeam.Query(Id)).ConfigureAwait(false));
+            _viewModel = new SaveTeamViewModel(await QueryRouter.Send(new GetTeam(Id)));
         }
 
         protected async Task OnSave()
         {
             var command = new SaveTeam.Command(_viewModel);
 
-            await CommandRouter.Send(command).ConfigureAwait(false);
+            await CommandRouter.Send(command);
 
             _viewModel.Id = command.Id;
         }

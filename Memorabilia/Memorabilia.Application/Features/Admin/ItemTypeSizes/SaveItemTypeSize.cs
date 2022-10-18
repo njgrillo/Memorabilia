@@ -2,9 +2,9 @@
 
 namespace Memorabilia.Application.Features.Admin.ItemTypeSizes;
 
-public class SaveItemTypeSize
+public record SaveItemTypeSize(SaveItemTypeSizeViewModel ViewModel) : ICommand
 {
-    public class Handler : CommandHandler<Command>
+    public class Handler : CommandHandler<SaveItemTypeSize>
     {
         private readonly IItemTypeSizeRepository _itemTypeSizeRepository;
 
@@ -13,53 +13,31 @@ public class SaveItemTypeSize
             _itemTypeSizeRepository = itemTypeSizeRepository;
         }
 
-        protected override async Task Handle(Command command)
+        protected override async Task Handle(SaveItemTypeSize request)
         {
             ItemTypeSize itemTypeSize;
 
-            if (command.IsNew)
+            if (request.ViewModel.IsNew)
             {
-                itemTypeSize = new ItemTypeSize(command.ItemTypeId, command.SizeId);
+                itemTypeSize = new ItemTypeSize(request.ViewModel.ItemTypeId, request.ViewModel.SizeId);
 
                 await _itemTypeSizeRepository.Add(itemTypeSize);
 
                 return;
             }
 
-            itemTypeSize = await _itemTypeSizeRepository.Get(command.Id);
+            itemTypeSize = await _itemTypeSizeRepository.Get(request.ViewModel.Id);
 
-            if (command.IsDeleted)
+            if (request.ViewModel.IsDeleted)
             {
                 await _itemTypeSizeRepository.Delete(itemTypeSize);
 
                 return;
             }
 
-            itemTypeSize.Set(command.SizeId);
+            itemTypeSize.Set(request.ViewModel.SizeId);
 
             await _itemTypeSizeRepository.Update(itemTypeSize);
         }
-    }
-
-    public class Command : DomainCommand, ICommand
-    {
-        private readonly SaveItemTypeSizeViewModel _viewModel;
-
-        public Command(SaveItemTypeSizeViewModel viewModel)
-        {
-            _viewModel = viewModel;
-        }
-
-        public int Id => _viewModel.Id;
-
-        public bool IsDeleted => _viewModel.IsDeleted;
-
-        public bool IsModified => _viewModel.IsModified;
-
-        public bool IsNew => _viewModel.IsNew;
-
-        public int ItemTypeId => _viewModel.ItemTypeId;
-
-        public int SizeId => _viewModel.SizeId;
     }
 }

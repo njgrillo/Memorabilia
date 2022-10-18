@@ -1,7 +1,4 @@
-﻿
-using Memorabilia.Application.Features.Admin.ItemTypeBrand;
-using Microsoft.AspNetCore.Components;
-using System.Threading.Tasks;
+﻿using Memorabilia.Application.Features.Admin.ItemTypeBrand;
 
 namespace Memorabilia.Web.Pages.Admin.ItemTypeBrands
 {
@@ -21,7 +18,7 @@ namespace Memorabilia.Web.Pages.Admin.ItemTypeBrands
 
         protected async Task HandleValidSubmit()
         {
-            await CommandRouter.Send(new SaveItemTypeBrand.Command(_viewModel)).ConfigureAwait(false);
+            await CommandRouter.Send(new SaveItemTypeBrand(_viewModel));
         }
 
         protected async Task OnLoad()
@@ -32,7 +29,7 @@ namespace Memorabilia.Web.Pages.Admin.ItemTypeBrands
                 return;
             }
 
-            _viewModel = new SaveItemTypeBrandViewModel(await QueryRouter.Send(new GetItemTypeBrand.Query(Id)).ConfigureAwait(false));
+            _viewModel = new SaveItemTypeBrandViewModel(await QueryRouter.Send(new GetItemTypeBrand(Id)));
         }
     }
 }

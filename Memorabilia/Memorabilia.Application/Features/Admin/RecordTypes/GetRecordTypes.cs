@@ -2,9 +2,9 @@
 
 namespace Memorabilia.Application.Features.Admin.RecordTypes;
 
-public class GetRecordTypes
+public record GetRecordTypes() : IQuery<RecordTypesViewModel>
 {
-    public class Handler : QueryHandler<Query, RecordTypesViewModel>
+    public class Handler : QueryHandler<GetRecordTypes, RecordTypesViewModel>
     {
         private readonly IDomainRepository<RecordType> _recordTypeRepository;
 
@@ -13,11 +13,9 @@ public class GetRecordTypes
             _recordTypeRepository = recordTypeRepository;
         }
 
-        protected override async Task<RecordTypesViewModel> Handle(Query query)
+        protected override async Task<RecordTypesViewModel> Handle(GetRecordTypes query)
         {
             return new RecordTypesViewModel(await _recordTypeRepository.GetAll());
         }
     }
-
-    public class Query : IQuery<RecordTypesViewModel> { }
 }

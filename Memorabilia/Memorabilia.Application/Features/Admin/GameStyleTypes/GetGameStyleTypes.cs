@@ -2,9 +2,9 @@
 
 namespace Memorabilia.Application.Features.Admin.GameStyleTypes;
 
-public class GetGameStyleTypes
+public record GetGameStyleTypes() : IQuery<GameStyleTypesViewModel>
 {
-    public class Handler : QueryHandler<Query, GameStyleTypesViewModel>
+    public class Handler : QueryHandler<GetGameStyleTypes, GameStyleTypesViewModel>
     {
         private readonly IDomainRepository<GameStyleType> _gameStyleTypeRepository;
 
@@ -13,11 +13,9 @@ public class GetGameStyleTypes
             _gameStyleTypeRepository = gameStyleTypeRepository;
         }
 
-        protected override async Task<GameStyleTypesViewModel> Handle(Query query)
+        protected override async Task<GameStyleTypesViewModel> Handle(GetGameStyleTypes query)
         {
             return new GameStyleTypesViewModel(await _gameStyleTypeRepository.GetAll());
         }
     }
-
-    public class Query : IQuery<GameStyleTypesViewModel> { }
 }

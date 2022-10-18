@@ -4,11 +4,11 @@ public partial class ViewSpots : ViewDomainItem<SpotsViewModel>, IDeleteDomainIt
 {
     public async Task OnDelete(SaveDomainViewModel viewModel)
     {
-        await OnDelete(new Application.Features.Admin.Spots.SaveSpot.Command(viewModel));
+        await OnDelete(new Application.Features.Admin.Spots.SaveSpot(viewModel));
     }
 
     public async Task OnLoad()
     {
-        await OnLoad(new GetSpots.Query());
+        await OnLoad(new GetSpots());
     }
 }

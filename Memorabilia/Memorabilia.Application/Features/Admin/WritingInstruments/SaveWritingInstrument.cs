@@ -2,9 +2,9 @@
 
 namespace Memorabilia.Application.Features.Admin.WritingInstruments;
 
-public class SaveWritingInstrument
+public record SaveWritingInstrument(SaveDomainViewModel ViewModel) : ICommand
 {
-    public class Handler : CommandHandler<Command>
+    public class Handler : CommandHandler<SaveWritingInstrument>
     {
         private readonly IDomainRepository<WritingInstrument> _writingInstrumentRepository;
 
@@ -13,36 +13,31 @@ public class SaveWritingInstrument
             _writingInstrumentRepository = writingInstrumentRepository;
         }
 
-        protected override async Task Handle(Command command)
+        protected override async Task Handle(SaveWritingInstrument request)
         {
-            Domain.Entities.WritingInstrument writingInstrument;
+            WritingInstrument writingInstrument;
 
-            if (command.IsNew)
+            if (request.ViewModel.IsNew)
             {
-                writingInstrument = new Domain.Entities.WritingInstrument(command.Name, command.Abbreviation);
+                writingInstrument = new WritingInstrument(request.ViewModel.Name, request.ViewModel.Abbreviation);
 
                 await _writingInstrumentRepository.Add(writingInstrument);
 
                 return;
             }
 
-            writingInstrument = await _writingInstrumentRepository.Get(command.Id);
+            writingInstrument = await _writingInstrumentRepository.Get(request.ViewModel.Id);
 
-            if (command.IsDeleted)
+            if (request.ViewModel.IsDeleted)
             {
                 await _writingInstrumentRepository.Delete(writingInstrument);
 
                 return;
             }
 
-            writingInstrument.Set(command.Name, command.Abbreviation);
+            writingInstrument.Set(request.ViewModel.Name, request.ViewModel.Abbreviation);
 
             await _writingInstrumentRepository.Update(writingInstrument);
         }
-    }
-
-    public class Command : DomainEntityCommand
-    {
-        public Command(SaveDomainViewModel viewModel) : base(viewModel) { }
     }
 }

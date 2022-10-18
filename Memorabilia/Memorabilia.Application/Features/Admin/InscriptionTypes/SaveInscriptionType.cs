@@ -2,9 +2,9 @@
 
 namespace Memorabilia.Application.Features.Admin.InscriptionTypes;
 
-public class SaveInscriptionType
+public record SaveInscriptionType(SaveDomainViewModel ViewModel) : ICommand
 {
-    public class Handler : CommandHandler<Command>
+    public class Handler : CommandHandler<SaveInscriptionType>
     {
         private readonly IDomainRepository<InscriptionType> _inscriptionTypeRepository;
 
@@ -13,36 +13,31 @@ public class SaveInscriptionType
             _inscriptionTypeRepository = inscriptionTypeRepository;
         }
 
-        protected override async Task Handle(Command command)
+        protected override async Task Handle(SaveInscriptionType request)
         {
             InscriptionType inscriptionType;
 
-            if (command.IsNew)
+            if (request.ViewModel.IsNew)
             {
-                inscriptionType = new InscriptionType(command.Name, command.Abbreviation);
+                inscriptionType = new InscriptionType(request.ViewModel.Name, request.ViewModel.Abbreviation);
 
                 await _inscriptionTypeRepository.Add(inscriptionType);
 
                 return;
             }
 
-            inscriptionType = await _inscriptionTypeRepository.Get(command.Id);
+            inscriptionType = await _inscriptionTypeRepository.Get(request.ViewModel.Id);
 
-            if (command.IsDeleted)
+            if (request.ViewModel.IsDeleted)
             {
                 await _inscriptionTypeRepository.Delete(inscriptionType);
 
                 return;
             }
 
-            inscriptionType.Set(command.Name, command.Abbreviation);
+            inscriptionType.Set(request.ViewModel.Name, request.ViewModel.Abbreviation);
 
             await _inscriptionTypeRepository.Update(inscriptionType);
         }
-    }
-
-    public class Command : DomainEntityCommand
-    {
-        public Command(SaveDomainViewModel viewModel) : base(viewModel) { }
     }
 }

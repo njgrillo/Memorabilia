@@ -4,11 +4,11 @@ public partial class AwardTypeEditor : EditDomainItem<AwardType>, IEditDomainIte
 {
     public async Task OnLoad()
     {
-        await OnLoad(new GetAwardType.Query(Id));
+        await OnLoad(new GetAwardType(Id));
     }
 
     public async Task OnSave()
     {
-        await OnSave(new SaveAwardType.Command(ViewModel));
+        await OnSave(new SaveAwardType(ViewModel));
     }
 }

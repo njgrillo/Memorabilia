@@ -2,9 +2,9 @@
 
 namespace Memorabilia.Application.Features.Admin.Conditions;
 
-public class SaveCondition
+public record SaveCondition(SaveDomainViewModel ViewModel) : ICommand
 {
-    public class Handler : CommandHandler<Command>
+    public class Handler : CommandHandler<SaveCondition>
     {
         private readonly IDomainRepository<Condition> _conditionRepository;
 
@@ -13,36 +13,31 @@ public class SaveCondition
             _conditionRepository = conditionRepository;
         }
 
-        protected override async Task Handle(Command command)
+        protected override async Task Handle(SaveCondition request)
         {
             Condition condition;
 
-            if (command.IsNew)
+            if (request.ViewModel.IsNew)
             {
-                condition = new Condition(command.Name, command.Abbreviation);
+                condition = new Condition(request.ViewModel.Name, request.ViewModel.Abbreviation);
 
                 await _conditionRepository.Add(condition);
 
                 return;
             }
 
-            condition = await _conditionRepository.Get(command.Id);
+            condition = await _conditionRepository.Get(request.ViewModel.Id);
 
-            if (command.IsDeleted)
+            if (request.ViewModel.IsDeleted)
             {
                 await _conditionRepository.Delete(condition);
 
                 return;
             }
 
-            condition.Set(command.Name, command.Abbreviation);
+            condition.Set(request.ViewModel.Name, request.ViewModel.Abbreviation);
 
             await _conditionRepository.Update(condition);
         }
-    }
-
-    public class Command : DomainEntityCommand
-    {
-        public Command(SaveDomainViewModel viewModel) : base(viewModel) { }
     }
 }

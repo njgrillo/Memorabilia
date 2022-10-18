@@ -26,7 +26,7 @@ public partial class ViewItemTypeBrands : ComponentBase
 
     protected async Task OnLoad()
     {
-        ViewModel = await QueryRouter.Send(new GetItemTypeBrands.Query());
+        ViewModel = await QueryRouter.Send(new GetItemTypeBrands());
     }
 
     protected async Task ShowDeleteConfirm(int id)
@@ -48,7 +48,7 @@ public partial class ViewItemTypeBrands : ComponentBase
             IsDeleted = true
         };
 
-        await CommandRouter.Send(new SaveItemTypeBrand.Command(viewModel));
+        await CommandRouter.Send(new SaveItemTypeBrand(viewModel));
 
         ViewModel.ItemTypeBrands.Remove(deletedItem);
 

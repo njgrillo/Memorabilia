@@ -4,11 +4,11 @@ public partial class GameStyleTypeEditor : EditDomainItem<GameStyleType>, IEditD
 {
     public async Task OnLoad()
     {
-        await OnLoad(new GetGameStyleType.Query(Id));
+        await OnLoad(new GetGameStyleType(Id));
     }
 
     public async Task OnSave()
     {
-        await OnSave(new SaveGameStyleType.Command(ViewModel));
+        await OnSave(new SaveGameStyleType(ViewModel));
     }
 }

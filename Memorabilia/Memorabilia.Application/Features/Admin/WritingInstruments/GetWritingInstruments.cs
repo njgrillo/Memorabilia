@@ -2,9 +2,9 @@
 
 namespace Memorabilia.Application.Features.Admin.WritingInstruments;
 
-public class GetWritingInstruments
+public record GetWritingInstruments() : IQuery<WritingInstrumentsViewModel>
 {
-    public class Handler : QueryHandler<Query, WritingInstrumentsViewModel>
+    public class Handler : QueryHandler<GetWritingInstruments, WritingInstrumentsViewModel>
     {
         private readonly IDomainRepository<WritingInstrument> _writingInstrumentRepository;
 
@@ -13,11 +13,9 @@ public class GetWritingInstruments
             _writingInstrumentRepository = writingInstrumentRepository;
         }
 
-        protected override async Task<WritingInstrumentsViewModel> Handle(Query query)
+        protected override async Task<WritingInstrumentsViewModel> Handle(GetWritingInstruments query)
         {
             return new WritingInstrumentsViewModel(await _writingInstrumentRepository.GetAll());
         }
     }
-
-    public class Query : IQuery<WritingInstrumentsViewModel> { }
 }

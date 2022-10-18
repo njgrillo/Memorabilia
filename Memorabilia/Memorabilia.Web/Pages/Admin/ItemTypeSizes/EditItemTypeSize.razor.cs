@@ -1,7 +1,4 @@
-﻿
-using Memorabilia.Application.Features.Admin.ItemTypeSizes;
-using Microsoft.AspNetCore.Components;
-using System.Threading.Tasks;
+﻿using Memorabilia.Application.Features.Admin.ItemTypeSizes;
 
 namespace Memorabilia.Web.Pages.Admin.ItemTypeSizes
 {
@@ -21,7 +18,7 @@ namespace Memorabilia.Web.Pages.Admin.ItemTypeSizes
 
         protected async Task HandleValidSubmit()
         {
-            await CommandRouter.Send(new SaveItemTypeSize.Command(_viewModel)).ConfigureAwait(false);
+            await CommandRouter.Send(new SaveItemTypeSize(_viewModel));
         }
 
         protected async Task OnLoad()
@@ -32,7 +29,7 @@ namespace Memorabilia.Web.Pages.Admin.ItemTypeSizes
                 return;
             }
 
-            _viewModel = new SaveItemTypeSizeViewModel(await QueryRouter.Send(new GetItemTypeSize.Query(Id)).ConfigureAwait(false));
+            _viewModel = new SaveItemTypeSizeViewModel(await QueryRouter.Send(new GetItemTypeSize(Id)));
         }
     }
 }

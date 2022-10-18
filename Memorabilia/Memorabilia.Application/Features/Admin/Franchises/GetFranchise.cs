@@ -2,9 +2,9 @@
 
 namespace Memorabilia.Application.Features.Admin.Franchises;
 
-public class GetFranchise
+public record GetFranchise(int Id) : IQuery<FranchiseViewModel>
 {
-    public class Handler : QueryHandler<Query, FranchiseViewModel>
+    public class Handler : QueryHandler<GetFranchise, FranchiseViewModel>
     {
         private readonly IDomainRepository<Franchise> _franchiseRepository;
 
@@ -13,19 +13,9 @@ public class GetFranchise
             _franchiseRepository = franchiseRepository;
         }
 
-        protected override async Task<FranchiseViewModel> Handle(Query query)
+        protected override async Task<FranchiseViewModel> Handle(GetFranchise query)
         {
             return new FranchiseViewModel(await _franchiseRepository.Get(query.Id));
         }
-    }
-
-    public class Query : IQuery<FranchiseViewModel>
-    {
-        public Query(int id)
-        {
-            Id = id;
-        }
-
-        public int Id { get; }
     }
 }

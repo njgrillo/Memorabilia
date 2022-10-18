@@ -18,7 +18,7 @@ public partial class ItemTypeBrandEditor : ComponentBase
 
     protected async Task HandleValidSubmit()
     {
-        await CommandRouter.Send(new SaveItemTypeBrand.Command(ViewModel));
+        await CommandRouter.Send(new SaveItemTypeBrand(ViewModel));
     }
 
     protected async Task OnLoad()
@@ -29,6 +29,6 @@ public partial class ItemTypeBrandEditor : ComponentBase
             return;
         }
 
-        ViewModel = new SaveItemTypeBrandViewModel(await QueryRouter.Send(new GetItemTypeBrand.Query(Id)));
+        ViewModel = new SaveItemTypeBrandViewModel(await QueryRouter.Send(new GetItemTypeBrand(Id)));
     }
 }

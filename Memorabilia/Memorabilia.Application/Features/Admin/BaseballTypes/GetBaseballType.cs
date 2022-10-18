@@ -2,9 +2,9 @@
 
 namespace Memorabilia.Application.Features.Admin.BaseballTypes;
 
-public class GetBaseballType
+public record GetBaseballType(int Id) : IQuery<DomainViewModel>
 {
-    public class Handler : QueryHandler<Query, DomainViewModel>
+    public class Handler : QueryHandler<GetBaseballType, DomainViewModel>
     {
         private readonly IDomainRepository<BaseballType> _baseballTypeRepository;
 
@@ -13,14 +13,9 @@ public class GetBaseballType
             _baseballTypeRepository = baseballTypeRepository;
         }
 
-        protected override async Task<DomainViewModel> Handle(Query query)
+        protected override async Task<DomainViewModel> Handle(GetBaseballType query)
         {
             return new DomainViewModel(await _baseballTypeRepository.Get(query.Id));
         }
-    }
-
-    public class Query : DomainQuery
-    {
-        public Query(int id) : base(id) { }
     }
 }

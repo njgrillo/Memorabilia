@@ -2,9 +2,9 @@
 
 namespace Memorabilia.Application.Features.Admin.Sports;
 
-public class SaveSport
+public record SaveSport(SaveSportViewModel ViewModel) : ICommand
 {
-    public class Handler : CommandHandler<Command>
+    public class Handler : CommandHandler<SaveSport>
     {
         private readonly IDomainRepository<Sport> _sportRepository;
 
@@ -13,55 +13,31 @@ public class SaveSport
             _sportRepository = sportRepository;
         }
 
-        protected override async Task Handle(Command command)
+        protected override async Task Handle(SaveSport request)
         {
             Sport sport;
 
-            if (command.IsNew)
+            if (request.ViewModel.IsNew)
             {
-                sport = new Sport(command.Name, command.AlternateName);
+                sport = new Sport(request.ViewModel.Name, request.ViewModel.AlternateName);
 
                 await _sportRepository.Add(sport);
 
                 return;
             }
 
-            sport = await _sportRepository.Get(command.Id);
+            sport = await _sportRepository.Get(request.ViewModel.Id);
 
-            if (command.IsDeleted)
+            if (request.ViewModel.IsDeleted)
             {
                 await _sportRepository.Delete(sport);
 
                 return;
             }
 
-            sport.Set(command.Name, command.AlternateName);
+            sport.Set(request.ViewModel.Name, request.ViewModel.AlternateName);
 
             await _sportRepository.Update(sport);
         }
-    }
-
-    public class Command : DomainCommand, ICommand
-    {
-        private readonly SaveSportViewModel _viewModel;
-
-        public Command(SaveSportViewModel viewModel)
-        {
-            _viewModel = viewModel;
-        }
-
-        public string AlternateName => _viewModel.AlternateName;
-
-        public int Id => _viewModel.Id;
-
-        public string ImagePath => _viewModel.ImagePath;
-
-        public bool IsDeleted => _viewModel.IsDeleted;
-
-        public bool IsModified => _viewModel.IsModified;
-
-        public bool IsNew => _viewModel.IsNew;
-
-        public string Name => _viewModel.Name;
     }
 }

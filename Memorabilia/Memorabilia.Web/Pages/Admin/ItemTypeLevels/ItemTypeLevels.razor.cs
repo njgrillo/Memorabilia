@@ -1,12 +1,4 @@
-﻿
-
-using Memorabilia.Application.Features.Admin.ItemTypeLevel;
-using Memorabilia.Blazor.Controls.Dialogs;
-using Microsoft.AspNetCore.Components;
-using MudBlazor;
-using System;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using Memorabilia.Application.Features.Admin.ItemTypeLevel;
 
 namespace Memorabilia.Web.Pages.Admin.ItemTypeLevels
 {
@@ -34,7 +26,7 @@ namespace Memorabilia.Web.Pages.Admin.ItemTypeLevels
 
         protected async Task OnLoad()
         {
-            _viewModel = await QueryRouter.Send(new GetItemTypeLevels.Query()).ConfigureAwait(false);
+            _viewModel = await QueryRouter.Send(new GetItemTypeLevels());
         }
 
         protected async Task ShowDeleteConfirm(int id)
@@ -45,7 +37,7 @@ namespace Memorabilia.Web.Pages.Admin.ItemTypeLevels
             if (result.Cancelled)
                 return;
 
-            await Delete(id).ConfigureAwait(false);
+            await Delete(id);
         }
 
         private async Task Delete(int id)
@@ -56,7 +48,7 @@ namespace Memorabilia.Web.Pages.Admin.ItemTypeLevels
                 IsDeleted = true
             };
 
-            await CommandRouter.Send(new SaveItemTypeLevel.Command(viewModel)).ConfigureAwait(false);
+            await CommandRouter.Send(new SaveItemTypeLevel(viewModel));
 
             _viewModel.ItemTypeLevels.Remove(deletedItem);
 

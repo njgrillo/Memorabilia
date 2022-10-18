@@ -1,16 +1,14 @@
-﻿#nullable disable
-
-namespace Memorabilia.Blazor.Pages.Admin.Colleges;
+﻿namespace Memorabilia.Blazor.Pages.Admin.Colleges;
 
 public partial class ViewColleges : ViewDomainItem<CollegesViewModel>, IDeleteDomainItem, IViewDomainItem
 {
     public async Task OnDelete(SaveDomainViewModel viewModel)
     {
-        await CommandRouter.Send(new SaveCollege.Command(viewModel));
+        await CommandRouter.Send(new SaveCollege(viewModel));
     }
 
     public async Task OnLoad()
     {
-        ViewModel = await QueryRouter.Send(new GetColleges.Query());
+        ViewModel = await QueryRouter.Send(new GetColleges());
     }
 }

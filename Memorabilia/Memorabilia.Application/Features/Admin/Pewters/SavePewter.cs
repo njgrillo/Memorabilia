@@ -2,9 +2,9 @@
 
 namespace Memorabilia.Application.Features.Admin.Pewters;
 
-public class SavePewter
+public record SavePewter(SavePewterViewModel ViewModel) : ICommand
 {
-    public class Handler : CommandHandler<Command>
+    public class Handler : CommandHandler<SavePewter>
     {
         private readonly IDomainRepository<Pewter> _pewterRepository;
 
@@ -13,67 +13,39 @@ public class SavePewter
             _pewterRepository = pewterRepository;
         }
 
-        protected override async Task Handle(Command command)
+        protected override async Task Handle(SavePewter request)
         {
             Pewter pewter;
 
-            if (command.IsNew)
+            if (request.ViewModel.IsNew)
             {
-                pewter = new Pewter(command.FranchiseId,
-                                    command.TeamId,
-                                    command.SizeId,
-                                    command.ImageTypeId,
-                                    command.ImagePath);
+                pewter = new Pewter(request.ViewModel.FranchiseId,
+                                    request.ViewModel.TeamId,
+                                    request.ViewModel.SizeId,
+                                    !request.ViewModel.ImagePath.IsNullOrEmpty() ? Domain.Constants.ImageType.Primary.Id : null,
+                                    request.ViewModel.ImagePath);
 
                 await _pewterRepository.Add(pewter);
 
                 return;
             }
 
-            pewter = await _pewterRepository.Get(command.Id);
+            pewter = await _pewterRepository.Get(request.ViewModel.Id);
 
-            if (command.IsDeleted)
+            if (request.ViewModel.IsDeleted)
             {
                 await _pewterRepository.Delete(pewter);
 
                 return;
             }
 
-            pewter.Set(command.FranchiseId,
-                       command.TeamId,
-                       command.SizeId,
-                       command.ImageTypeId,
-                       command.ImagePath);
+            pewter.Set(request.ViewModel.FranchiseId,
+                       request.ViewModel.TeamId,
+                       request.ViewModel.SizeId,
+                       !request.ViewModel.ImagePath.IsNullOrEmpty() ? Domain.Constants.ImageType.Primary.Id : null,
+                       request.ViewModel.ImagePath);
 
             await _pewterRepository.Update(pewter);
         }
-    }
-
-    public class Command : DomainCommand, ICommand
-    {
-        private readonly SavePewterViewModel _viewModel;
-
-        public Command(SavePewterViewModel viewModel)
-        {
-            _viewModel = viewModel;
-        }
-
-        public int FranchiseId => _viewModel.FranchiseId;
-
-        public int Id => _viewModel.Id;            
-
-        public string ImagePath => _viewModel.ImagePath;
-
-        public int? ImageTypeId => !_viewModel.ImagePath.IsNullOrEmpty() ? Domain.Constants.ImageType.Primary.Id : null;
-
-        public bool IsDeleted => _viewModel.IsDeleted;
-
-        public bool IsModified => _viewModel.IsModified;
-
-        public bool IsNew => _viewModel.IsNew;            
-
-        public int SizeId => _viewModel.SizeId;
-
-        public int TeamId => _viewModel.TeamId;
     }
 }

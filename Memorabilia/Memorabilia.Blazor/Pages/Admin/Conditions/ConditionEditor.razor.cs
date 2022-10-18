@@ -4,11 +4,11 @@ public partial class ConditionEditor : EditDomainItem<Domain.Constants.Condition
 {
     public async Task OnLoad()
     {
-        await OnLoad(new GetCondition.Query(Id));
+        await OnLoad(new GetCondition(Id));
     }
 
     public async Task OnSave()
     {
-        await OnSave(new SaveCondition.Command(ViewModel));
+        await OnSave(new SaveCondition(ViewModel));
     }
 }

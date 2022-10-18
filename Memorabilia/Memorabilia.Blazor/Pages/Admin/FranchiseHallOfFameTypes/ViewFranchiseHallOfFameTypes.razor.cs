@@ -1,16 +1,14 @@
-﻿#nullable disable
-
-namespace Memorabilia.Blazor.Pages.Admin.FranchiseHallOfFameTypes;
+﻿namespace Memorabilia.Blazor.Pages.Admin.FranchiseHallOfFameTypes;
 
 public partial class ViewFranchiseHallOfFameTypes : ViewDomainItem<FranchiseHallOfFameTypesViewModel>, IDeleteDomainItem, IViewDomainItem
 {
     public async Task OnDelete(SaveDomainViewModel viewModel)
     {
-        await CommandRouter.Send(new SaveFranchiseHallOfFameType.Command(viewModel));
+        await CommandRouter.Send(new SaveFranchiseHallOfFameType(viewModel));
     }
 
     public async Task OnLoad()
     {
-        ViewModel = await QueryRouter.Send(new GetFranchiseHallOfFameTypes.Query());
+        ViewModel = await QueryRouter.Send(new GetFranchiseHallOfFameTypes());
     }
 }

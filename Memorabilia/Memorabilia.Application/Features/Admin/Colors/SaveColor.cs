@@ -2,9 +2,9 @@
 
 namespace Memorabilia.Application.Features.Admin.Colors;
 
-public class SaveColor
+public record SaveColor(SaveDomainViewModel ViewModel) : ICommand
 {
-    public class Handler : CommandHandler<Command>
+    public class Handler : CommandHandler<SaveColor>
     {
         private readonly IDomainRepository<Color> _colorRepository;
 
@@ -13,36 +13,31 @@ public class SaveColor
             _colorRepository = colorRepository;
         }
 
-        protected override async Task Handle(Command command)
+        protected override async Task Handle(SaveColor request)
         {
             Color color;
 
-            if (command.IsNew)
+            if (request.ViewModel.IsNew)
             {
-                color = new Color(command.Name, command.Abbreviation);
+                color = new Color(request.ViewModel.Name, request.ViewModel.Abbreviation);
 
                 await _colorRepository.Add(color);
 
                 return;
             }
 
-            color = await _colorRepository.Get(command.Id);
+            color = await _colorRepository.Get(request.ViewModel.Id);
 
-            if (command.IsDeleted)
+            if (request.ViewModel.IsDeleted)
             {
                 await _colorRepository.Delete(color);
 
                 return;
             }
 
-            color.Set(command.Name, command.Abbreviation);
+            color.Set(request.ViewModel.Name, request.ViewModel.Abbreviation);
 
             await _colorRepository.Update(color);
         }
-    }
-
-    public class Command : DomainEntityCommand
-    {
-        public Command(SaveDomainViewModel viewModel) : base(viewModel) { }
     }
 }

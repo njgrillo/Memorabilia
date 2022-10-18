@@ -4,11 +4,11 @@ public partial class SpotEditor : EditDomainItem<Spot>, IEditDomainItem
 {
     public async Task OnLoad()
     {
-        await OnLoad(new Application.Features.Admin.Spots.GetSpot.Query(Id));
+        await OnLoad(new Application.Features.Admin.Spots.GetSpot(Id));
     }
 
     public async Task OnSave()
     {
-        await OnSave(new Application.Features.Admin.Spots.SaveSpot.Command(ViewModel));
+        await OnSave(new Application.Features.Admin.Spots.SaveSpot(ViewModel));
     }
 }

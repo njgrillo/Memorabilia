@@ -2,9 +2,9 @@
 
 namespace Memorabilia.Application.Features.Admin.ItemTypeSports;
 
-public class SaveItemTypeSport
+public record SaveItemTypeSport(SaveItemTypeSportViewModel ViewModel) : ICommand
 {
-    public class Handler : CommandHandler<Command>
+    public class Handler : CommandHandler<SaveItemTypeSport>
     {
         private readonly IItemTypeSportRepository _itemTypeSportRepository;
 
@@ -13,53 +13,31 @@ public class SaveItemTypeSport
             _itemTypeSportRepository = itemTypeSportRepository;
         }
 
-        protected override async Task Handle(Command command)
+        protected override async Task Handle(SaveItemTypeSport request)
         {
             ItemTypeSport itemTypeSport;
 
-            if (command.IsNew)
+            if (request.ViewModel.IsNew)
             {
-                itemTypeSport = new ItemTypeSport(command.ItemTypeId, command.SportId);
+                itemTypeSport = new ItemTypeSport(request.ViewModel.ItemTypeId, request.ViewModel.SportId);
 
                 await _itemTypeSportRepository.Add(itemTypeSport);
 
                 return;
             }
 
-            itemTypeSport = await _itemTypeSportRepository.Get(command.Id);
+            itemTypeSport = await _itemTypeSportRepository.Get(request.ViewModel.Id);
 
-            if (command.IsDeleted)
+            if (request.ViewModel.IsDeleted)
             {
                 await _itemTypeSportRepository.Delete(itemTypeSport);
 
                 return;
             }
 
-            itemTypeSport.Set(command.SportId);
+            itemTypeSport.Set(request.ViewModel.SportId);
 
             await _itemTypeSportRepository.Update(itemTypeSport);
         }
-    }
-
-    public class Command : DomainCommand, ICommand
-    {
-        private readonly SaveItemTypeSportViewModel _viewModel;
-
-        public Command(SaveItemTypeSportViewModel viewModel)
-        {
-            _viewModel = viewModel;
-        }
-
-        public int Id => _viewModel.Id;
-
-        public bool IsDeleted => _viewModel.IsDeleted;
-
-        public bool IsModified => _viewModel.IsModified;
-
-        public bool IsNew => _viewModel.IsNew;
-
-        public int ItemTypeId => _viewModel.ItemTypeId;
-
-        public int SportId => _viewModel.SportId;
     }
 }

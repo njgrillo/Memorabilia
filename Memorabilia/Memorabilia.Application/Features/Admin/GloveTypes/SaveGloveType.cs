@@ -2,9 +2,9 @@
 
 namespace Memorabilia.Application.Features.Admin.GloveTypes;
 
-public class SaveGloveType
+public record SaveGloveType(SaveDomainViewModel ViewModel) : ICommand
 {
-    public class Handler : CommandHandler<Command>
+    public class Handler : CommandHandler<SaveGloveType>
     {
         private readonly IDomainRepository<GloveType> _gloveTypeRepository;
 
@@ -13,35 +13,30 @@ public class SaveGloveType
             _gloveTypeRepository = gloveTypeRepository;
         }
 
-        protected override async Task Handle(Command command)
+        protected override async Task Handle(SaveGloveType request)
         {
             GloveType gloveType;
 
-            if (command.IsNew)
+            if (request.ViewModel.IsNew)
             {
-                gloveType = new GloveType(command.Name, command.Abbreviation);
+                gloveType = new GloveType(request.ViewModel.Name, request.ViewModel.Abbreviation);
                 await _gloveTypeRepository.Add(gloveType);
 
                 return;
             }
 
-            gloveType = await _gloveTypeRepository.Get(command.Id);
+            gloveType = await _gloveTypeRepository.Get(request.ViewModel.Id);
 
-            if (command.IsDeleted)
+            if (request.ViewModel.IsDeleted)
             {
                 await _gloveTypeRepository.Delete(gloveType);
 
                 return;
             }
 
-            gloveType.Set(command.Name, command.Abbreviation);
+            gloveType.Set(request.ViewModel.Name, request.ViewModel.Abbreviation);
 
             await _gloveTypeRepository.Update(gloveType);
         }
-    }
-
-    public class Command : DomainEntityCommand
-    {
-        public Command(SaveDomainViewModel viewModel) : base(viewModel) { }
     }
 }

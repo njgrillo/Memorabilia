@@ -2,9 +2,9 @@
 
 namespace Memorabilia.Application.Features.Admin.Occupations;
 
-public class GetOccupation
+public record GetOccupation(int Id) : IQuery<DomainViewModel>
 {
-    public class Handler : QueryHandler<Query, DomainViewModel>
+    public class Handler : QueryHandler<GetOccupation, DomainViewModel>
     {
         private readonly IDomainRepository<Occupation> _occupationRepository;
 
@@ -13,14 +13,9 @@ public class GetOccupation
             _occupationRepository = occupationRepository;
         }
 
-        protected override async Task<DomainViewModel> Handle(Query query)
+        protected override async Task<DomainViewModel> Handle(GetOccupation query)
         {
             return new DomainViewModel(await _occupationRepository.Get(query.Id));
         }
-    }
-
-    public class Query : DomainQuery
-    {
-        public Query(int id) : base(id) { }
     }
 }

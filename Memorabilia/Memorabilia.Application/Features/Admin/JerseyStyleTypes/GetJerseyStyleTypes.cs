@@ -2,9 +2,9 @@
 
 namespace Memorabilia.Application.Features.Admin.JerseyStyleTypes;
 
-public class GetJerseyStyleTypes
+public record GetJerseyStyleTypes() : IQuery<JerseyStyleTypesViewModel>
 {
-    public class Handler : QueryHandler<Query, JerseyStyleTypesViewModel>
+    public class Handler : QueryHandler<GetJerseyStyleTypes, JerseyStyleTypesViewModel>
     {
         private readonly IDomainRepository<JerseyStyleType> _jerseyStyleTypeRepository;
 
@@ -13,11 +13,9 @@ public class GetJerseyStyleTypes
             _jerseyStyleTypeRepository = jerseyStyleTypeRepository;
         }
 
-        protected override async Task<JerseyStyleTypesViewModel> Handle(Query query)
+        protected override async Task<JerseyStyleTypesViewModel> Handle(GetJerseyStyleTypes query)
         {
             return new JerseyStyleTypesViewModel(await _jerseyStyleTypeRepository.GetAll());
         }
     }
-
-    public class Query : IQuery<JerseyStyleTypesViewModel> { }
 }

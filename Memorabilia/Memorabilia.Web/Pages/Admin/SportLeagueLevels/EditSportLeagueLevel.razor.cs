@@ -17,7 +17,7 @@ namespace Memorabilia.Web.Pages.Admin.SportLeagueLevels
 
         protected async Task HandleValidSubmit()
         {
-            await CommandRouter.Send(new SaveSportLeagueLevel.Command(_viewModel)).ConfigureAwait(false);
+            await CommandRouter.Send(new SaveSportLeagueLevel(_viewModel));
         }
 
         protected async Task OnLoad()
@@ -25,7 +25,7 @@ namespace Memorabilia.Web.Pages.Admin.SportLeagueLevels
             if (Id == 0)
                 return;
 
-            _viewModel = new SaveSportLeagueLevelViewModel(await QueryRouter.Send(new GetSportLeagueLevel.Query(Id)).ConfigureAwait(false));
+            _viewModel = new SaveSportLeagueLevelViewModel(await QueryRouter.Send(new GetSportLeagueLevel(Id)));
         }
     }
 }

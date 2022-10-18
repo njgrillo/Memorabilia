@@ -4,11 +4,11 @@ public partial class ViewWritingInstruments : ViewDomainItem<WritingInstrumentsV
 {
     public async Task OnDelete(SaveDomainViewModel viewModel)
     {
-        await OnDelete(new SaveWritingInstrument.Command(viewModel));
+        await OnDelete(new SaveWritingInstrument(viewModel));
     }
 
     public async Task OnLoad()
     {
-        await OnLoad(new GetWritingInstruments.Query());
+        await OnLoad(new GetWritingInstruments());
     }
 }

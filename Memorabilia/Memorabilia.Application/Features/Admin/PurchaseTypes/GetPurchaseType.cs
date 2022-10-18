@@ -2,9 +2,9 @@
 
 namespace Memorabilia.Application.Features.Admin.PurchaseTypes;
 
-public class GetPurchaseType
+public record GetPurchaseType(int Id) : IQuery<DomainViewModel>
 {
-    public class Handler : QueryHandler<Query, DomainViewModel>
+    public class Handler : QueryHandler<GetPurchaseType, DomainViewModel>
     {
         private readonly IDomainRepository<PurchaseType> _purchaseTypeRepository;
 
@@ -13,14 +13,9 @@ public class GetPurchaseType
             _purchaseTypeRepository = purchaseTypeRepository;
         }
 
-        protected override async Task<DomainViewModel> Handle(Query query)
+        protected override async Task<DomainViewModel> Handle(GetPurchaseType query)
         {
             return new DomainViewModel(await _purchaseTypeRepository.Get(query.Id));
         }
-    }
-
-    public class Query : DomainQuery
-    {
-        public Query(int id) : base(id) { }
     }
 }

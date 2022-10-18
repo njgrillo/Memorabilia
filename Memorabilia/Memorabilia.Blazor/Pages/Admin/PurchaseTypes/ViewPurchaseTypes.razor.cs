@@ -4,12 +4,12 @@
     {
         public async Task OnDelete(SaveDomainViewModel viewModel)
         {
-            await OnDelete(new SavePurchaseType.Command(viewModel));
+            await OnDelete(new SavePurchaseType(viewModel));
         }
 
         public async Task OnLoad()
         {
-            await OnLoad(new GetPurchaseTypes.Query());
+            await OnLoad(new GetPurchaseTypes());
         }
     }
 }

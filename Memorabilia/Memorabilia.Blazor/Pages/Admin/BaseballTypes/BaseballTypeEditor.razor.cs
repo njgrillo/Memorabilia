@@ -4,11 +4,11 @@ public partial class BaseballTypeEditor : EditDomainItem<BaseballType>, IEditDom
 {
     public async Task OnLoad()
     {
-        await OnLoad(new GetBaseballType.Query(Id));
+        await OnLoad(new GetBaseballType(Id));
     }
 
     public async Task OnSave()
     {
-        await OnSave(new SaveBaseballType.Command(ViewModel));
+        await OnSave(new SaveBaseballType(ViewModel));
     }
 }

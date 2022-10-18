@@ -26,7 +26,7 @@ namespace Memorabilia.Web.Pages.Admin.Commissioners
 
         protected async Task OnLoad()
         {
-            _viewModel = await QueryRouter.Send(new GetCommissioners.Query()).ConfigureAwait(false);
+            _viewModel = await QueryRouter.Send(new GetCommissioners());
         }
 
         protected async Task ShowDeleteConfirm(int id)
@@ -37,7 +37,7 @@ namespace Memorabilia.Web.Pages.Admin.Commissioners
             if (result.Cancelled)
                 return;
 
-            await Delete(id).ConfigureAwait(false);
+            await Delete(id);
         }
 
         private async Task Delete(int id)
@@ -48,7 +48,7 @@ namespace Memorabilia.Web.Pages.Admin.Commissioners
                 IsDeleted = true
             };
 
-            await CommandRouter.Send(new SaveCommissioner.Command(viewModel)).ConfigureAwait(false);
+            await CommandRouter.Send(new SaveCommissioner(viewModel));
 
             _viewModel.Commissioners.Remove(deletedItem);
 

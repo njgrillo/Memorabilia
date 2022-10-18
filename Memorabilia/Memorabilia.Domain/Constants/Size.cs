@@ -5,7 +5,7 @@ public sealed class Size : DomainItemConstant
     public static readonly Size EightByTen = new(11, "8x10", string.Empty);
     public static readonly Size ElevenByFourteen = new(12, "11x14", string.Empty);
     public static readonly Size ExtraLarge = new(10, "Extra Large", "XL");
-    public static readonly Size Full = new(2, "Full", string.Empty);
+    public static readonly Size Full = new(2, "Full Size", string.Empty);
     public static readonly Size Large = new(3, "Large", "L");
     public static readonly Size Medium = new(9, "Medium", "M");
     public static readonly Size Mini = new(1, "Mini", string.Empty);

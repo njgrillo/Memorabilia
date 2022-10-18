@@ -1,24 +1,21 @@
-﻿namespace Memorabilia.Application.Features.Admin.AwardTypes;
+﻿using Memorabilia.Domain.Entities;
 
-public class GetAwardType
+namespace Memorabilia.Application.Features.Admin.AwardTypes;
+
+public record GetAwardType(int Id) : IQuery<DomainViewModel>
 {
-    public class Handler : QueryHandler<Query, DomainViewModel>
+    public class Handler : QueryHandler<GetAwardType, DomainViewModel>
     {
-        private readonly IDomainRepository<Domain.Entities.AwardType> _awardTypeRepository;
+        private readonly IDomainRepository<AwardType> _awardTypeRepository;
 
-        public Handler(IDomainRepository<Domain.Entities.AwardType> awardTypeRepository)
+        public Handler(IDomainRepository<AwardType> awardTypeRepository)
         {
             _awardTypeRepository = awardTypeRepository;
         }
 
-        protected override async Task<DomainViewModel> Handle(Query query)
+        protected override async Task<DomainViewModel> Handle(GetAwardType query)
         {
             return new DomainViewModel(await _awardTypeRepository.Get(query.Id));
         }
-    }
-
-    public class Query : DomainQuery
-    {
-        public Query(int id) : base(id) { }
     }
 }

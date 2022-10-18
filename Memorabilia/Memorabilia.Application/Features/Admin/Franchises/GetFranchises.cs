@@ -2,9 +2,9 @@
 
 namespace Memorabilia.Application.Features.Admin.Franchises;
 
-public class GetFranchises
+public record GetFranchises() : IQuery<FranchisesViewModel>
 {
-    public class Handler : QueryHandler<Query, FranchisesViewModel>
+    public class Handler : QueryHandler<GetFranchises, FranchisesViewModel>
     {
         private readonly IDomainRepository<Franchise> _franchiseRepository;
 
@@ -13,7 +13,7 @@ public class GetFranchises
             _franchiseRepository = franchiseRepository;
         }
 
-        protected override async Task<FranchisesViewModel> Handle(Query query)
+        protected override async Task<FranchisesViewModel> Handle(GetFranchises query)
         {
             var franchises = (await _franchiseRepository.GetAll())
                                     .OrderBy(franchise => franchise.SportLeagueLevelName)
@@ -22,6 +22,4 @@ public class GetFranchises
             return new FranchisesViewModel(franchises);
         }
     }
-
-    public class Query : IQuery<FranchisesViewModel> { }
 }

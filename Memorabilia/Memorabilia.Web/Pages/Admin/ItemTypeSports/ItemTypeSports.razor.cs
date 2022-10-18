@@ -1,12 +1,4 @@
-﻿
-
-using Memorabilia.Application.Features.Admin.ItemTypeSports;
-using Memorabilia.Blazor.Controls.Dialogs;
-using Microsoft.AspNetCore.Components;
-using MudBlazor;
-using System;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using Memorabilia.Application.Features.Admin.ItemTypeSports;
 
 namespace Memorabilia.Web.Pages.Admin.ItemTypeSports
 {
@@ -34,7 +26,7 @@ namespace Memorabilia.Web.Pages.Admin.ItemTypeSports
 
         protected async Task OnLoad()
         {
-            _viewModel = await QueryRouter.Send(new GetItemTypeSports.Query()).ConfigureAwait(false);
+            _viewModel = await QueryRouter.Send(new GetItemTypeSports());
         }
 
         protected async Task ShowDeleteConfirm(int id)
@@ -45,7 +37,7 @@ namespace Memorabilia.Web.Pages.Admin.ItemTypeSports
             if (result.Cancelled)
                 return;
 
-            await Delete(id).ConfigureAwait(false);
+            await Delete(id);
         }
 
         private async Task Delete(int id)
@@ -56,7 +48,7 @@ namespace Memorabilia.Web.Pages.Admin.ItemTypeSports
                 IsDeleted = true
             };
 
-            await CommandRouter.Send(new SaveItemTypeSport.Command(viewModel)).ConfigureAwait(false);
+            await CommandRouter.Send(new SaveItemTypeSport(viewModel));
 
             _viewModel.ItemTypeSports.Remove(deletedItem);
 

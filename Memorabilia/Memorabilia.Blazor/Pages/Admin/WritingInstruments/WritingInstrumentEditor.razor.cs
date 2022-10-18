@@ -4,11 +4,11 @@ public partial class WritingInstrumentEditor : EditDomainItem<WritingInstrument>
 {
     public async Task OnLoad()
     {
-        await OnLoad(new GetWritingInstrument.Query(Id));
+        await OnLoad(new GetWritingInstrument(Id));
     }
 
     public async Task OnSave()
     {
-        await OnSave(new SaveWritingInstrument.Command(ViewModel));
+        await OnSave(new SaveWritingInstrument(ViewModel));
     }
 }

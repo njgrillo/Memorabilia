@@ -4,11 +4,11 @@ public partial class GloveTypeEditor : EditDomainItem<GloveType>, IEditDomainIte
 {
     public async Task OnLoad()
     {
-        await OnLoad(new GetGloveType.Query(Id));
+        await OnLoad(new GetGloveType(Id));
     }
 
     public async Task OnSave()
     {
-        await OnSave(new SaveGloveType.Command(ViewModel));
+        await OnSave(new SaveGloveType(ViewModel));
     }
 }

@@ -4,11 +4,11 @@ public partial class ColorEditor : EditDomainItem<Domain.Constants.Color>, IEdit
 {
     public async Task OnLoad()
     {
-        await OnLoad(new GetColor.Query(Id));
+        await OnLoad(new GetColor(Id));
     }
 
     public async Task OnSave()
     {
-        await OnSave(new SaveColor.Command(ViewModel));
+        await OnSave(new SaveColor(ViewModel));
     }
 }

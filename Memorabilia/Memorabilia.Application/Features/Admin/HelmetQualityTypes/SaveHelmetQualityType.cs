@@ -2,9 +2,9 @@
 
 namespace Memorabilia.Application.Features.Admin.HelmetQualityTypes;
 
-public class SaveHelmetQualityType
+public record SaveHelmetQualityType(SaveDomainViewModel ViewModel) : ICommand
 {
-    public class Handler : CommandHandler<Command>
+    public class Handler : CommandHandler<SaveHelmetQualityType>
     {
         private readonly IDomainRepository<HelmetQualityType> _helmetQualityTypeRepository;
 
@@ -13,36 +13,31 @@ public class SaveHelmetQualityType
             _helmetQualityTypeRepository = helmetQualityTypeRepository;
         }
 
-        protected override async Task Handle(Command command)
+        protected override async Task Handle(SaveHelmetQualityType request)
         {
             HelmetQualityType helmetQualityType;
 
-            if (command.IsNew)
+            if (request.ViewModel.IsNew)
             {
-                helmetQualityType = new HelmetQualityType(command.Name, command.Abbreviation);
+                helmetQualityType = new HelmetQualityType(request.ViewModel.Name, request.ViewModel.Abbreviation);
 
                 await _helmetQualityTypeRepository.Add(helmetQualityType);
 
                 return;
             }
 
-            helmetQualityType = await _helmetQualityTypeRepository.Get(command.Id);
+            helmetQualityType = await _helmetQualityTypeRepository.Get(request.ViewModel.Id);
 
-            if (command.IsDeleted)
+            if (request.ViewModel.IsDeleted)
             {
                 await _helmetQualityTypeRepository.Delete(helmetQualityType);
 
                 return;
             }
 
-            helmetQualityType.Set(command.Name, command.Abbreviation);
+            helmetQualityType.Set(request.ViewModel.Name, request.ViewModel.Abbreviation);
 
             await _helmetQualityTypeRepository.Update(helmetQualityType);
         }
-    }
-
-    public class Command : DomainEntityCommand
-    {
-        public Command(SaveDomainViewModel viewModel) : base(viewModel) { }
     }
 }

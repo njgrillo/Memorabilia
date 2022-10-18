@@ -2,9 +2,9 @@
 
 namespace Memorabilia.Application.Features.Admin.PhotoTypes;
 
-public class SavePhotoType
+public record SavePhotoType(SaveDomainViewModel ViewModel) : ICommand
 {
-    public class Handler : CommandHandler<Command>
+    public class Handler : CommandHandler<SavePhotoType>
     {
         private readonly IDomainRepository<PhotoType> _photoTypeRepository;
 
@@ -13,36 +13,31 @@ public class SavePhotoType
             _photoTypeRepository = photoTypeRepository;
         }
 
-        protected override async Task Handle(Command command)
+        protected override async Task Handle(SavePhotoType request)
         {
             PhotoType photoType;
 
-            if (command.IsNew)
+            if (request.ViewModel.IsNew)
             {
-                photoType = new PhotoType(command.Name, command.Abbreviation);
+                photoType = new PhotoType(request.ViewModel.Name, request.ViewModel.Abbreviation);
 
                 await _photoTypeRepository.Add(photoType);
 
                 return;
             }
 
-            photoType = await _photoTypeRepository.Get(command.Id);
+            photoType = await _photoTypeRepository.Get(request.ViewModel.Id);
 
-            if (command.IsDeleted)
+            if (request.ViewModel.IsDeleted)
             {
                 await _photoTypeRepository.Delete(photoType);
 
                 return;
             }
 
-            photoType.Set(command.Name, command.Abbreviation);
+            photoType.Set(request.ViewModel.Name, request.ViewModel.Abbreviation);
 
             await _photoTypeRepository.Update(photoType);
         }
-    }
-
-    public class Command : DomainEntityCommand
-    {
-        public Command(SaveDomainViewModel viewModel) : base(viewModel) { }
     }
 }

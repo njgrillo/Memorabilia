@@ -2,9 +2,9 @@
 
 namespace Memorabilia.Application.Features.Admin.FootballTypes;
 
-public class SaveFootballType
+public record SaveFootballType(SaveDomainViewModel ViewModel) : ICommand
 {
-    public class Handler : CommandHandler<Command>
+    public class Handler : CommandHandler<SaveFootballType>
     {
         private readonly IDomainRepository<FootballType> _footballTypeRepository;
 
@@ -13,35 +13,30 @@ public class SaveFootballType
             _footballTypeRepository = footballTypeRepository;
         }
 
-        protected override async Task Handle(Command command)
+        protected override async Task Handle(SaveFootballType request)
         {
             FootballType footballType;
 
-            if (command.IsNew)
+            if (request.ViewModel.IsNew)
             {
-                footballType = new FootballType(command.Name, command.Abbreviation);
+                footballType = new FootballType(request.ViewModel.Name, request.ViewModel.Abbreviation);
                 await _footballTypeRepository.Add(footballType);
 
                 return;
             }
 
-            footballType = await _footballTypeRepository.Get(command.Id);
+            footballType = await _footballTypeRepository.Get(request.ViewModel.Id);
 
-            if (command.IsDeleted)
+            if (request.ViewModel.IsDeleted)
             {
                 await _footballTypeRepository.Delete(footballType);
 
                 return;
             }
 
-            footballType.Set(command.Name, command.Abbreviation);
+            footballType.Set(request.ViewModel.Name, request.ViewModel.Abbreviation);
 
             await _footballTypeRepository.Update(footballType);
         }
-    }
-
-    public class Command : DomainEntityCommand
-    {
-        public Command(SaveDomainViewModel viewModel) : base(viewModel) { }
     }
 }

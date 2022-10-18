@@ -1,7 +1,4 @@
-﻿
-using Memorabilia.Application.Features.Admin.People;
-using Microsoft.AspNetCore.Components;
-using System.Threading.Tasks;
+﻿using Memorabilia.Application.Features.Admin.People;
 
 namespace Memorabilia.Web.Pages.Admin.People
 {
@@ -21,13 +18,12 @@ namespace Memorabilia.Web.Pages.Admin.People
         protected async Task OnLoad()
         {
             _viewModel = new SavePersonSportServiceViewModel(PersonId, 
-                                                             await QueryRouter.Send(new GetPersonSportService.Query(PersonId))
-                             .ConfigureAwait(false));
+                                                             await QueryRouter.Send(new GetPersonSportService(PersonId)));
         }
 
         protected async Task OnSave()
         {
-            await CommandRouter.Send(new SavePersonSportService.Command(PersonId, _viewModel)).ConfigureAwait(false);
+            await CommandRouter.Send(new SavePersonSportService.Command(PersonId, _viewModel));
         }
     }
 }

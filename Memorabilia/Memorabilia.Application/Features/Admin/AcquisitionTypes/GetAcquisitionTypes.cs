@@ -2,9 +2,9 @@
 
 namespace Memorabilia.Application.Features.Admin.AcquisitionTypes;
 
-public class GetAcquisitionTypes
+public record GetAcquisitionTypes() : IQuery<AcquisitionTypesViewModel>
 {
-    public class Handler : QueryHandler<Query, AcquisitionTypesViewModel>
+    public class Handler : QueryHandler<GetAcquisitionTypes, AcquisitionTypesViewModel>
     {
         private readonly IDomainRepository<AcquisitionType> _acquisitionTypeRepository;
 
@@ -13,11 +13,9 @@ public class GetAcquisitionTypes
             _acquisitionTypeRepository = acquisitionTypeRepository;
         }
 
-        protected override async Task<AcquisitionTypesViewModel> Handle(Query query)
+        protected override async Task<AcquisitionTypesViewModel> Handle(GetAcquisitionTypes query)
         {
             return new AcquisitionTypesViewModel(await _acquisitionTypeRepository.GetAll());
         }
     }
-
-    public class Query : IQuery<AcquisitionTypesViewModel> { }
 }

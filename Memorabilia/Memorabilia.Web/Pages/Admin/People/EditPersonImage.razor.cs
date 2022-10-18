@@ -1,13 +1,4 @@
-﻿
-
-using Memorabilia.Application.Features.Admin.People;
-using Microsoft.AspNetCore.Components;
-using Microsoft.AspNetCore.Components.Forms;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Logging;
-using System;
-using System.IO;
-using System.Threading.Tasks;
+﻿using Memorabilia.Application.Features.Admin.People;
 
 namespace Memorabilia.Web.Pages.Admin.People
 {
@@ -36,18 +27,18 @@ namespace Memorabilia.Web.Pages.Admin.People
 
         protected async Task HandleValidSubmit()
         {
-            await CommandRouter.Send(new SavePersonImage.Command(_viewModel)).ConfigureAwait(false);
+            await CommandRouter.Send(new SavePersonImage.Command(_viewModel));
         }
 
         protected async Task OnLoad()
         {
-            _viewModel = new SavePersonImageViewModel(await QueryRouter.Send(new GetPersonImage.Query(PersonId)).ConfigureAwait(false));
+            _viewModel = new SavePersonImageViewModel(await QueryRouter.Send(new GetPersonImage(PersonId)));
             _hasImage = !_viewModel.ImagePath.IsNullOrEmpty();
         }
 
         protected async Task OnSave()
         {
-            await CommandRouter.Send(new SavePersonImage.Command(_viewModel)).ConfigureAwait(false);
+            await CommandRouter.Send(new SavePersonImage.Command(_viewModel));
         }
 
         private async Task LoadFile(InputFileChangeEventArgs e)

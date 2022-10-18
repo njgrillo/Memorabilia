@@ -2,9 +2,9 @@
 
 namespace Memorabilia.Application.Features.Admin.SportLeagueLevels;
 
-public class SaveSportLeagueLevel
+public record SaveSportLeagueLevel(SaveSportLeagueLevelViewModel ViewModel) : ICommand
 {
-    public class Handler : CommandHandler<Command>
+    public class Handler : CommandHandler<SaveSportLeagueLevel>
     {
         private readonly IDomainRepository<SportLeagueLevel> _sportLeagueLevelRepository;
 
@@ -13,63 +13,37 @@ public class SaveSportLeagueLevel
             _sportLeagueLevelRepository = sportLeagueLevelRepository;
         }
 
-        protected override async Task Handle(Command command)
+        protected override async Task Handle(SaveSportLeagueLevel request)
         {
-            Domain.Entities.SportLeagueLevel sportLeagueLevel;
+            SportLeagueLevel sportLeagueLevel;
 
-            if (command.IsNew)
+            if (request.ViewModel.IsNew)
             {
-                sportLeagueLevel = new Domain.Entities.SportLeagueLevel(command.SportId,
-                                                                        command.LevelTypeId,
-                                                                        command.Name,
-                                                                        command.Abbreviation);
+                sportLeagueLevel = new SportLeagueLevel(request.ViewModel.SportId,
+                                                        request.ViewModel.LevelTypeId,
+                                                        request.ViewModel.Name,
+                                                        request.ViewModel.Abbreviation);
 
                 await _sportLeagueLevelRepository.Add(sportLeagueLevel);
 
                 return;
             }
 
-            sportLeagueLevel = await _sportLeagueLevelRepository.Get(command.Id);
+            sportLeagueLevel = await _sportLeagueLevelRepository.Get(request.ViewModel.Id);
 
-            if (command.IsDeleted)
+            if (request.ViewModel.IsDeleted)
             {
                 await _sportLeagueLevelRepository.Delete(sportLeagueLevel);
 
                 return;
             }
 
-            sportLeagueLevel.Set(command.SportId,
-                                 command.LevelTypeId,
-                                 command.Name,
-                                 command.Abbreviation);
+            sportLeagueLevel.Set(request.ViewModel.SportId,
+                                 request.ViewModel.LevelTypeId,
+                                 request.ViewModel.Name,
+                                 request.ViewModel.Abbreviation);
 
             await _sportLeagueLevelRepository.Update(sportLeagueLevel);
         }
-    }
-
-    public class Command : DomainCommand, ICommand
-    {
-        private readonly SaveSportLeagueLevelViewModel _viewModel;
-
-        public Command(SaveSportLeagueLevelViewModel viewModel)
-        {
-            _viewModel = viewModel;
-        }
-
-        public string Abbreviation => _viewModel.Abbreviation;
-
-        public int Id => _viewModel.Id;
-
-        public bool IsDeleted => _viewModel.IsDeleted;
-
-        public bool IsModified => _viewModel.IsModified;
-
-        public bool IsNew => _viewModel.IsNew;
-
-        public int LevelTypeId => _viewModel.LevelTypeId;
-
-        public string Name => _viewModel.Name;
-
-        public int SportId => _viewModel.SportId;
     }
 }

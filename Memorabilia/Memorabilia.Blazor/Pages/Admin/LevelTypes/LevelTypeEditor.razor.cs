@@ -4,11 +4,11 @@ public partial class LevelTypeEditor : EditDomainItem<LevelType>, IEditDomainIte
 {
     public async Task OnLoad()
     {
-        await OnLoad(new GetLevelType.Query(Id));
+        await OnLoad(new GetLevelType(Id));
     }
 
     public async Task OnSave()
     {
-        await OnSave(new SaveLevelType.Command(ViewModel));
+        await OnSave(new SaveLevelType(ViewModel));
     }
 }

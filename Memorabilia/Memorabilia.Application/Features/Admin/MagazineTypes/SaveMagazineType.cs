@@ -2,9 +2,9 @@
 
 namespace Memorabilia.Application.Features.Admin.MagazineTypes;
 
-public class SaveMagazineType
+public record SaveMagazineType(SaveDomainViewModel ViewModel) : ICommand
 {
-    public class Handler : CommandHandler<Command>
+    public class Handler : CommandHandler<SaveMagazineType>
     {
         private readonly IDomainRepository<MagazineType> _magazineTypeRepository;
 
@@ -13,36 +13,31 @@ public class SaveMagazineType
             _magazineTypeRepository = magazineTypeRepository;
         }
 
-        protected override async Task Handle(Command command)
+        protected override async Task Handle(SaveMagazineType request)
         {
             MagazineType magazineType;
 
-            if (command.IsNew)
+            if (request.ViewModel.IsNew)
             {
-                magazineType = new MagazineType(command.Name, command.Abbreviation);
+                magazineType = new MagazineType(request.ViewModel.Name, request.ViewModel.Abbreviation);
 
                 await _magazineTypeRepository.Add(magazineType);
 
                 return;
             }
 
-            magazineType = await _magazineTypeRepository.Get(command.Id);
+            magazineType = await _magazineTypeRepository.Get(request.ViewModel.Id);
 
-            if (command.IsDeleted)
+            if (request.ViewModel.IsDeleted)
             {
                 await _magazineTypeRepository.Delete(magazineType);
 
                 return;
             }
 
-            magazineType.Set(command.Name, command.Abbreviation);
+            magazineType.Set(request.ViewModel.Name, request.ViewModel.Abbreviation);
 
             await _magazineTypeRepository.Update(magazineType);
         }
-    }
-
-    public class Command : DomainEntityCommand
-    {
-        public Command(SaveDomainViewModel viewModel) : base(viewModel) { }
     }
 }

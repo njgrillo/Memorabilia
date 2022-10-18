@@ -2,9 +2,9 @@
 
 namespace Memorabilia.Application.Features.Admin.JerseyTypes;
 
-public class GetJerseyType
+public record GetJerseyType(int Id) : IQuery<DomainViewModel>
 {
-    public class Handler : QueryHandler<Query, DomainViewModel>
+    public class Handler : QueryHandler<GetJerseyType, DomainViewModel>
     {
         private readonly IDomainRepository<JerseyType> _jerseyTypeRepository;
 
@@ -13,14 +13,9 @@ public class GetJerseyType
             _jerseyTypeRepository = jerseyTypeRepository;
         }
 
-        protected override async Task<DomainViewModel> Handle(Query query)
+        protected override async Task<DomainViewModel> Handle(GetJerseyType query)
         {
             return new DomainViewModel(await _jerseyTypeRepository.Get(query.Id));
         }
-    }
-
-    public class Query : DomainQuery
-    {
-        public Query(int id) : base(id) { }
     }
 }

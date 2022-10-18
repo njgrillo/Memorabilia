@@ -1,12 +1,4 @@
-﻿
-
-using Memorabilia.Application.Features.Admin.ItemTypeBrand;
-using Memorabilia.Blazor.Controls.Dialogs;
-using Microsoft.AspNetCore.Components;
-using MudBlazor;
-using System;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using Memorabilia.Application.Features.Admin.ItemTypeBrand;
 
 namespace Memorabilia.Web.Pages.Admin.ItemTypeBrands
 {
@@ -34,7 +26,7 @@ namespace Memorabilia.Web.Pages.Admin.ItemTypeBrands
 
         protected async Task OnLoad()
         {
-            _viewModel = await QueryRouter.Send(new GetItemTypeBrands.Query()).ConfigureAwait(false);
+            _viewModel = await QueryRouter.Send(new GetItemTypeBrands());
         }
 
         protected async Task ShowDeleteConfirm(int id)
@@ -45,7 +37,7 @@ namespace Memorabilia.Web.Pages.Admin.ItemTypeBrands
             if (result.Cancelled)
                 return;
 
-            await Delete(id).ConfigureAwait(false);
+            await Delete(id);
         }
 
         private async Task Delete(int id)
@@ -56,7 +48,7 @@ namespace Memorabilia.Web.Pages.Admin.ItemTypeBrands
                 IsDeleted = true
             };
 
-            await CommandRouter.Send(new SaveItemTypeBrand.Command(viewModel)).ConfigureAwait(false);
+            await CommandRouter.Send(new SaveItemTypeBrand(viewModel));
 
             _viewModel.ItemTypeBrands.Remove(deletedItem);
 

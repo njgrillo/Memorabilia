@@ -18,7 +18,7 @@ public partial class CommissionerEditor : ComponentBase
 
     protected async Task HandleValidSubmit()
     {
-        await CommandRouter.Send(new SaveCommissioner.Command(ViewModel));
+        await CommandRouter.Send(new SaveCommissioner(ViewModel));
     }
 
     protected async Task OnLoad()
@@ -28,12 +28,12 @@ public partial class CommissionerEditor : ComponentBase
         if (Id == 0)
             return;
 
-        ViewModel = new SaveCommissionerViewModel(await QueryRouter.Send(new GetCommissioner.Query(Id)));
+        ViewModel = new SaveCommissionerViewModel(await QueryRouter.Send(new GetCommissioner(Id)));
     }
 
     private async Task LoadPeople()
     {
-        People = (await QueryRouter.Send(new GetPeople.Query())).People;
+        People = (await QueryRouter.Send(new GetPeople())).People;
     }
 
     private async Task<IEnumerable<PersonViewModel>> SearchPeople(string searchText)

@@ -1,0 +1,35 @@
+﻿<DivPad5>
+    <Content>
+        <MudTooltip Text="@TooltipText">
+            <MudCard>
+                <MudCardMedia @onclick="OnPrimaryImageClick"
+                      Class="rounded-lg can-click"
+                             Height="300" 
+                             Image="@PrimaryImagePath" />
+                <MudCardContent>
+                    <div class="row">
+                        <Iterations Items="MemorabiliaItem.Autographs" Context="autograph">
+                            <div class="col-md-4">
+                                <MemorabiliaItemGallerySubCard EditNavigationPath="@autograph.EditNavigationPath" 
+                                                               ImageNavigationPath="@autograph.ImageNavigationPath"
+                                                               ImagePath="@autograph.PrimaryImagePath"
+                                                               Title="@autograph.PersonName"
+                                                               TooltipText="@autograph.PersonName" />
+                            </div>                        
+                        </Iterations>
+                    </div>
+
+                    <br />
+                    <MudText Typo="Typo.h5">@Title</MudText>
+                    <MudText Typo="Typo.body2">@Subtitle</MudText>
+                    <MudText Typo="Typo.body2">@Description</MudText>
+                </MudCardContent>
+                <MudCardActions>
+                    <MudButton @onclick="OnEditClick"
+                               Color="MudBlazor.Color.Primary"
+                               Variant="Variant.Text">Edit</MudButton>
+                </MudCardActions>
+            </MudCard>
+        </MudTooltip>        
+    </Content>
+</DivPad5>

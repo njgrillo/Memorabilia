@@ -18,7 +18,7 @@ public partial class ItemTypeGameStyleEditor : ComponentBase
 
     protected async Task HandleValidSubmit()
     {
-        await CommandRouter.Send(new SaveItemTypeGameStyle.Command(ViewModel));
+        await CommandRouter.Send(new SaveItemTypeGameStyle(ViewModel));
     }
 
     protected async Task OnLoad()
@@ -29,6 +29,6 @@ public partial class ItemTypeGameStyleEditor : ComponentBase
             return;
         }
 
-        ViewModel = new SaveItemTypeGameStyleViewModel(await QueryRouter.Send(new GetItemTypeGameStyle.Query(Id)));
+        ViewModel = new SaveItemTypeGameStyleViewModel(await QueryRouter.Send(new GetItemTypeGameStyle(Id)));
     }
 }

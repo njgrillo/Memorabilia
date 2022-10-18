@@ -4,11 +4,11 @@ public partial class TeamRoleTypeEditor : EditDomainItem<TeamRoleType>, IEditDom
 {
     public async Task OnLoad()
     {
-        await OnLoad(new GetTeamRoleType.Query(Id));
+        await OnLoad(new GetTeamRoleType(Id));
     }
 
     public async Task OnSave()
     {
-        await OnSave(new SaveTeamRoleType.Command(ViewModel));
+        await OnSave(new SaveTeamRoleType(ViewModel));
     }
 }

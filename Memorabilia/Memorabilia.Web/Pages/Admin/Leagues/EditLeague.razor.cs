@@ -1,7 +1,4 @@
-﻿
-using Memorabilia.Application.Features.Admin.Leagues;
-using Microsoft.AspNetCore.Components;
-using System.Threading.Tasks;
+﻿using Memorabilia.Application.Features.Admin.Leagues;
 
 namespace Memorabilia.Web.Pages.Admin.Leagues
 {
@@ -20,7 +17,7 @@ namespace Memorabilia.Web.Pages.Admin.Leagues
 
         protected async Task HandleValidSubmit()
         {
-            await CommandRouter.Send(new SaveLeague.Command(_viewModel)).ConfigureAwait(false);
+            await CommandRouter.Send(new SaveLeague(_viewModel));
         }
 
         protected async Task OnLoad()
@@ -28,7 +25,7 @@ namespace Memorabilia.Web.Pages.Admin.Leagues
             if (Id == 0)
                 return;
 
-            _viewModel = new SaveLeagueViewModel(await QueryRouter.Send(new GetLeague.Query(Id)).ConfigureAwait(false));
+            _viewModel = new SaveLeagueViewModel(await QueryRouter.Send(new GetLeague(Id)));
         }
     }
 }

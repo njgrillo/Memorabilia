@@ -2,9 +2,9 @@
 
 namespace Memorabilia.Application.Features.Admin.Divisions;
 
-public class GetDivision
+public record GetDivision(int Id) : IQuery<DivisionViewModel>
 {
-    public class Handler : QueryHandler<Query, DivisionViewModel>
+    public class Handler : QueryHandler<GetDivision, DivisionViewModel>
     {
         private readonly IDomainRepository<Division> _divisionRepository;
 
@@ -13,19 +13,9 @@ public class GetDivision
             _divisionRepository = divisionRepository;
         }
 
-        protected override async Task<DivisionViewModel> Handle(Query query)
+        protected override async Task<DivisionViewModel> Handle(GetDivision query)
         {
             return new DivisionViewModel(await _divisionRepository.Get(query.Id));
         }
-    }
-
-    public class Query : IQuery<DivisionViewModel>
-    {
-        public Query(int id)
-        {
-            Id = id;
-        }
-
-        public int Id { get; }
     }
 }

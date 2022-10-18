@@ -18,7 +18,7 @@ public partial class FranchiseEditor : ComponentBase
 
     protected async Task HandleValidSubmit()
     {
-        await CommandRouter.Send(new SaveFranchise.Command(ViewModel));
+        await CommandRouter.Send(new SaveFranchise(ViewModel));
     }
 
     protected async Task OnLoad()
@@ -29,6 +29,6 @@ public partial class FranchiseEditor : ComponentBase
             return;
         }
 
-        ViewModel = new SaveFranchiseViewModel(await QueryRouter.Send(new GetFranchise.Query(Id)));
+        ViewModel = new SaveFranchiseViewModel(await QueryRouter.Send(new GetFranchise(Id)));
     }
 }

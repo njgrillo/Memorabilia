@@ -23,7 +23,7 @@ public partial class ItemTypeLevelDropDown : ComponentBase
 
     protected override async Task OnInitializedAsync()
     {
-        _itemTypeLevels = (await QueryRouter.Send(new GetItemTypeLevels.Query(ItemType.Id))).ItemTypeLevels;
+        _itemTypeLevels = (await QueryRouter.Send(new GetItemTypeLevels(ItemType.Id))).ItemTypeLevels;
     }
 
     private async Task OnInputChange(int value)

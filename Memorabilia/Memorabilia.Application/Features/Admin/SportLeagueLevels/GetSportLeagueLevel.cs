@@ -2,9 +2,9 @@
 
 namespace Memorabilia.Application.Features.Admin.SportLeagueLevels;
 
-public class GetSportLeagueLevel
+public record GetSportLeagueLevel(int Id) : IQuery<SportLeagueLevelViewModel>
 {
-    public class Handler : QueryHandler<Query, SportLeagueLevelViewModel>
+    public class Handler : QueryHandler<GetSportLeagueLevel, SportLeagueLevelViewModel>
     {
         private readonly IDomainRepository<SportLeagueLevel> _sportLeagueLevelRepository;
 
@@ -13,19 +13,9 @@ public class GetSportLeagueLevel
             _sportLeagueLevelRepository = sportLeagueLevelRepository;
         }
 
-        protected override async Task<SportLeagueLevelViewModel> Handle(Query query)
+        protected override async Task<SportLeagueLevelViewModel> Handle(GetSportLeagueLevel query)
         {
             return new SportLeagueLevelViewModel(await _sportLeagueLevelRepository.Get(query.Id));
         }
-    }
-
-    public class Query : IQuery<SportLeagueLevelViewModel>
-    {
-        public Query(int id)
-        {
-            Id = id;
-        }
-
-        public int Id { get; }
     }
 }

@@ -1,12 +1,5 @@
-﻿
-
-using Memorabilia.Application.Features.Admin.Commissioners;
+﻿using Memorabilia.Application.Features.Admin.Commissioners;
 using Memorabilia.Application.Features.Admin.People;
-using Microsoft.AspNetCore.Components;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Memorabilia.Web.Pages.Admin.Commissioners
 {
@@ -26,22 +19,22 @@ namespace Memorabilia.Web.Pages.Admin.Commissioners
 
         protected async Task HandleValidSubmit()
         {
-            await CommandRouter.Send(new SaveCommissioner.Command(_viewModel)).ConfigureAwait(false);
+            await CommandRouter.Send(new SaveCommissioner(_viewModel));
         }
 
         protected async Task OnLoad()
         {
-            await LoadPeople().ConfigureAwait(false);
+            await LoadPeople();
 
             if (Id == 0)
                 return;
 
-            _viewModel = new SaveCommissionerViewModel(await QueryRouter.Send(new GetCommissioner.Query(Id)).ConfigureAwait(false));
+            _viewModel = new SaveCommissionerViewModel(await QueryRouter.Send(new GetCommissioner(Id)));
         }
 
         private async Task LoadPeople()
         {
-            _people = (await QueryRouter.Send(new GetPeople.Query()).ConfigureAwait(false)).People;
+            _people = (await QueryRouter.Send(new GetPeople())).People;
         }
 
         private async Task<IEnumerable<PersonViewModel>> SearchPeople(string searchText)
@@ -49,7 +42,7 @@ namespace Memorabilia.Web.Pages.Admin.Commissioners
             if (searchText.IsNullOrEmpty())
                 return Array.Empty<PersonViewModel>();
 
-            return await Task.FromResult(_people.Where(person => person.DisplayName.Contains(searchText, StringComparison.OrdinalIgnoreCase))).ConfigureAwait(false);
+            return await Task.FromResult(_people.Where(person => person.DisplayName.Contains(searchText, StringComparison.OrdinalIgnoreCase)));
         }
     }
 }

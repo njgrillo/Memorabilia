@@ -1,8 +1,8 @@
 ﻿namespace Memorabilia.Application.Features.Admin.Teams;
 
-public class GetTeamChampionships
+public record GetTeamChampionships(int TeamId) : IQuery<IEnumerable<TeamChampionshipViewModel>>
 {
-    public class Handler : QueryHandler<Query, IEnumerable<TeamChampionshipViewModel>>
+    public class Handler : QueryHandler<GetTeamChampionships, IEnumerable<TeamChampionshipViewModel>>
     {
         private readonly ITeamChampionshipRepository _teamChampionshipRepository;
 
@@ -11,21 +11,11 @@ public class GetTeamChampionships
             _teamChampionshipRepository = teamChampionshipRepository;
         }
 
-        protected override async Task<IEnumerable<TeamChampionshipViewModel>> Handle(Query query)
+        protected override async Task<IEnumerable<TeamChampionshipViewModel>> Handle(GetTeamChampionships query)
         {
             var teamChampionships = (await _teamChampionshipRepository.GetAll(query.TeamId)).OrderBy(champion => champion.Year);
 
             return teamChampionships.Select(teamChampionship => new TeamChampionshipViewModel(teamChampionship));
         }
-    }
-
-    public class Query : IQuery<IEnumerable<TeamChampionshipViewModel>>
-    {
-        public Query(int teamId)
-        {
-            TeamId = teamId;
-        }
-
-        public int TeamId { get; }
     }
 }
