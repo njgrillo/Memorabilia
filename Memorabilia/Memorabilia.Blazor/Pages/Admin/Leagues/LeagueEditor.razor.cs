@@ -1,23 +1,10 @@
-﻿#nullable disable
+﻿namespace Memorabilia.Blazor.Pages.Admin.Leagues;
 
-namespace Memorabilia.Blazor.Pages.Admin.Leagues;
-
-public partial class LeagueEditor : ComponentBase
+public partial class LeagueEditor : EditItem<SaveLeagueViewModel, LeagueViewModel>
 {
-    [Inject]
-    public CommandRouter CommandRouter { get; set; }
-
-    [Inject]
-    public QueryRouter QueryRouter { get; set; }
-
-    [Parameter]
-    public int Id { get; set; }
-
-    private SaveLeagueViewModel ViewModel = new ();
-
     protected async Task HandleValidSubmit()
     {
-        await CommandRouter.Send(new SaveLeague(ViewModel));
+        await HandleValidSubmit(new SaveLeague(ViewModel));
     }
 
     protected async Task OnLoad()
@@ -25,6 +12,6 @@ public partial class LeagueEditor : ComponentBase
         if (Id == 0)
             return;
 
-        ViewModel = new SaveLeagueViewModel(await QueryRouter.Send(new GetLeague(Id)));
+        ViewModel = new SaveLeagueViewModel(await Get(new GetLeague(Id)));
     }
 }

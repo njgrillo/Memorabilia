@@ -1,23 +1,10 @@
-﻿#nullable disable
+﻿namespace Memorabilia.Blazor.Pages.Admin.Conferences;
 
-namespace Memorabilia.Blazor.Pages.Admin.Conferences;
-
-public partial class ConferenceEditor : ComponentBase
+public partial class ConferenceEditor : EditItem<SaveConferenceViewModel, ConferenceViewModel>
 {
-    [Inject]
-    public CommandRouter CommandRouter { get; set; }
-
-    [Inject]
-    public QueryRouter QueryRouter { get; set; }
-
-    [Parameter]
-    public int Id { get; set; }
-
-    private SaveConferenceViewModel ViewModel = new ();
-
     protected async Task HandleValidSubmit()
     {
-        await CommandRouter.Send(new SaveConference(ViewModel));
+        await HandleValidSubmit(new SaveConference(ViewModel));
     }
 
     protected async Task OnLoad()
@@ -25,6 +12,6 @@ public partial class ConferenceEditor : ComponentBase
         if (Id == 0)
             return;
 
-        ViewModel = new SaveConferenceViewModel(await QueryRouter.Send(new GetConference(Id)));
+        ViewModel = new SaveConferenceViewModel(await Get(new GetConference(Id)));
     }
 }

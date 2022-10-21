@@ -4,7 +4,7 @@ public partial class ShoeEditor : MemorabiliaItem<SaveShoeViewModel>
 {
     protected async Task OnLoad()
     {
-        var viewModel = await QueryRouter.Send(new GetShoe.Query(MemorabiliaId));
+        var viewModel = await QueryRouter.Send(new GetShoe(MemorabiliaId));
 
         if (viewModel.Brand == null)
             return;

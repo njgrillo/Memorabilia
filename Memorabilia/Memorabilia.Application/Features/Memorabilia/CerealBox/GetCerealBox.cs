@@ -1,8 +1,8 @@
 ﻿namespace Memorabilia.Application.Features.Memorabilia.CerealBox;
 
-public class GetCerealBox
+public record GetCerealBox(int MemorabiliaId) : IQuery<CerealBoxViewModel>
 {
-    public class Handler : QueryHandler<Query, CerealBoxViewModel>
+    public class Handler : QueryHandler<GetCerealBox, CerealBoxViewModel>
     {
         private readonly IMemorabiliaItemRepository _memorabiliaRepository;
 
@@ -11,14 +11,9 @@ public class GetCerealBox
             _memorabiliaRepository = memorabiliaRepository;
         }
 
-        protected override async Task<CerealBoxViewModel> Handle(Query query)
+        protected override async Task<CerealBoxViewModel> Handle(GetCerealBox query)
         {
             return new CerealBoxViewModel(await _memorabiliaRepository.Get(query.MemorabiliaId));
         }
-    }
-
-    public class Query : MemorabiliaQuery, IQuery<CerealBoxViewModel>
-    {
-        public Query(int memorabiliaId) : base(memorabiliaId) { }
     }
 }

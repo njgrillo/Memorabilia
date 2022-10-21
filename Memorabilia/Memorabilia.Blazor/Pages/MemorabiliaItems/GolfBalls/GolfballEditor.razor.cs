@@ -4,7 +4,7 @@ public partial class GolfballEditor : MemorabiliaItem<SaveGolfballViewModel>
 {
     protected async Task OnLoad()
     {
-        var viewModel = await QueryRouter.Send(new GetGolfball.Query(MemorabiliaId));
+        var viewModel = await QueryRouter.Send(new GetGolfball(MemorabiliaId));
 
         if (viewModel.Brand == null)
             return;

@@ -4,7 +4,7 @@ public partial class TrunkEditor : MemorabiliaItem<SaveTrunkViewModel>
 {
     protected async Task OnLoad()
     {
-        var viewModel = await QueryRouter.Send(new GetTrunk.Query(MemorabiliaId));
+        var viewModel = await QueryRouter.Send(new GetTrunk(MemorabiliaId));
 
         if (viewModel.Brand == null)
             return;

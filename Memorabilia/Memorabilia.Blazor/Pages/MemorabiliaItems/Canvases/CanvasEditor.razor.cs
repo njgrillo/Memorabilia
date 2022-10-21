@@ -4,7 +4,7 @@ public partial class CanvasEditor : MemorabiliaItem<SaveCanvasViewModel>
 {
     protected async Task OnLoad()
     {
-        var viewModel = await QueryRouter.Send(new GetCanvas.Query(MemorabiliaId));
+        var viewModel = await QueryRouter.Send(new GetCanvas(MemorabiliaId));
 
         if (viewModel.Brand == null)
             return;

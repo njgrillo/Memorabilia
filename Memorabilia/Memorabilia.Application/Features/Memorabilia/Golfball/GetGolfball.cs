@@ -1,8 +1,8 @@
 ﻿namespace Memorabilia.Application.Features.Memorabilia.Golfball;
 
-public class GetGolfball
+public record GetGolfball(int MemorabiliaId) : IQuery<GolfballViewModel>
 {
-    public class Handler : QueryHandler<Query, GolfballViewModel>
+    public class Handler : QueryHandler<GetGolfball, GolfballViewModel>
     {
         private readonly IMemorabiliaItemRepository _memorabiliaRepository;
 
@@ -11,14 +11,9 @@ public class GetGolfball
             _memorabiliaRepository = memorabiliaRepository;
         }
 
-        protected override async Task<GolfballViewModel> Handle(Query query)
+        protected override async Task<GolfballViewModel> Handle(GetGolfball query)
         {
             return new GolfballViewModel(await _memorabiliaRepository.Get(query.MemorabiliaId));
         }
-    }
-
-    public class Query : MemorabiliaQuery, IQuery<GolfballViewModel>
-    {
-        public Query(int memorabiliaId) : base(memorabiliaId) { }
     }
 }

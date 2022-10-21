@@ -1,34 +1,19 @@
-﻿#nullable disable
+﻿namespace Memorabilia.Blazor.Pages.Admin.ItemTypeSports;
 
-namespace Memorabilia.Blazor.Pages.Admin.ItemTypeSports;
-
-public partial class ItemTypeSportEditor : ComponentBase
+public partial class ItemTypeSportEditor : EditItemTypeItem<SaveItemTypeSportViewModel, ItemTypeSportViewModel>
 {
-    [Inject]
-    public CommandRouter CommandRouter { get; set; }
-
-    [Inject]
-    public QueryRouter QueryRouter { get; set; }
-
-    [Parameter]
-    public int Id { get; set; }
-
-    private bool DisplayItemType;
-    private SaveItemTypeSportViewModel ViewModel = new ();
-
     protected async Task HandleValidSubmit()
     {
-        await CommandRouter.Send(new SaveItemTypeSport(ViewModel));
+        await HandleValidSubmit(new SaveItemTypeSport(ViewModel));
     }
 
     protected async Task OnLoad()
     {
-        if (Id == 0)
-        {
-            DisplayItemType = true;
-            return;
-        }
+        Initialize();
 
-        ViewModel = new SaveItemTypeSportViewModel(await QueryRouter.Send(new GetItemTypeSport(Id)));
+        if (DisplayItemType)
+            return;
+
+        ViewModel = new SaveItemTypeSportViewModel(await Get(new GetItemTypeSport(Id)));
     }
 }

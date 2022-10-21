@@ -1,8 +1,8 @@
 ﻿namespace Memorabilia.Application.Features.Memorabilia.Drum;
 
-public class GetDrum
+public record GetDrum(int MemorabiliaId) : IQuery<DrumViewModel>
 {
-    public class Handler : QueryHandler<Query, DrumViewModel>
+    public class Handler : QueryHandler<GetDrum, DrumViewModel>
     {
         private readonly IMemorabiliaItemRepository _memorabiliaRepository;
 
@@ -11,14 +11,9 @@ public class GetDrum
             _memorabiliaRepository = memorabiliaRepository;
         }
 
-        protected override async Task<DrumViewModel> Handle(Query query)
+        protected override async Task<DrumViewModel> Handle(GetDrum query)
         {
             return new DrumViewModel(await _memorabiliaRepository.Get(query.MemorabiliaId));
         }
-    }
-
-    public class Query : MemorabiliaQuery, IQuery<DrumViewModel>
-    {
-        public Query(int memorabiliaId) : base(memorabiliaId) { }
     }
 }

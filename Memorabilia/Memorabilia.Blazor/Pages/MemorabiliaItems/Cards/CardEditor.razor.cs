@@ -4,7 +4,7 @@ public partial class CardEditor : MemorabiliaItem<SaveCardViewModel>
 { 
     protected async Task OnLoad()
     {
-        var viewModel = await QueryRouter.Send(new GetCard.Query(MemorabiliaId));
+        var viewModel = await QueryRouter.Send(new GetCard(MemorabiliaId));
 
         if (viewModel.Brand == null)
             return;

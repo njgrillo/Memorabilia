@@ -1,34 +1,19 @@
-﻿#nullable disable
+﻿namespace Memorabilia.Blazor.Pages.Admin.ItemTypeGameStyles;
 
-namespace Memorabilia.Blazor.Pages.Admin.ItemTypeGameStyles;
-
-public partial class ItemTypeGameStyleEditor : ComponentBase
+public partial class ItemTypeGameStyleEditor : EditItemTypeItem<SaveItemTypeGameStyleViewModel, ItemTypeGameStyleViewModel>
 {
-    [Inject]
-    public CommandRouter CommandRouter { get; set; }
-
-    [Inject]
-    public QueryRouter QueryRouter { get; set; }
-
-    [Parameter]
-    public int Id { get; set; }
-
-    private bool DisplayItemType;
-    private SaveItemTypeGameStyleViewModel ViewModel = new ();
-
     protected async Task HandleValidSubmit()
     {
-        await CommandRouter.Send(new SaveItemTypeGameStyle(ViewModel));
+        await HandleValidSubmit(new SaveItemTypeGameStyle(ViewModel));
     }
 
     protected async Task OnLoad()
     {
-        if (Id == 0)
-        {
-            DisplayItemType = true;
-            return;
-        }
+        Initialize();
 
-        ViewModel = new SaveItemTypeGameStyleViewModel(await QueryRouter.Send(new GetItemTypeGameStyle(Id)));
+        if (DisplayItemType)
+            return;
+
+        ViewModel = new SaveItemTypeGameStyleViewModel(await Get(new GetItemTypeGameStyle(Id)));
     }
 }

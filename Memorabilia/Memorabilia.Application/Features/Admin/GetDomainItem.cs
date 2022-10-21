@@ -1,4 +1,6 @@
-﻿namespace Memorabilia.Application.Features.Admin;
+﻿using Memorabilia.Repository;
+
+namespace Memorabilia.Application.Features.Admin;
 
 public record GetDomainItem<T>(int Id) : IQuery<DomainViewModel> where T : Domain.Entities.DomainEntity
 {
@@ -6,9 +8,13 @@ public record GetDomainItem<T>(int Id) : IQuery<DomainViewModel> where T : Domai
     {
         protected readonly IDomainRepository<T> _repository;
 
-        public Handler(IDomainRepository<T> repository)
+        public Handler(IServiceProvider serviceProvider)
         {
-            _repository = repository;
+            //_repository = repository;
+
+            var type = typeof(T);
+            var validatorWrapper = typeof(DomainRepository<>).MakeGenericType(type);
+            _repository = (IDomainRepository<T>)serviceProvider.GetService(validatorWrapper);
         }
 
         protected override async Task<DomainViewModel> Handle(GetDomainItem<T> query)

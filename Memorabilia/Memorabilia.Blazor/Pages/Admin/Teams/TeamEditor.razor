@@ -1,0 +1,90 @@
+﻿@inherits EditItem<SaveTeamViewModel, TeamViewModel>
+
+<EditPage ContinueNavigationPath="@ViewModel.ContinueNavigationPath"
+          EditMode="ViewModel.EditModeType"
+          ExitNavigationPath="@ViewModel.ExitNavigationPath"
+          ImagePath="@ViewModel.ImagePath"
+          ItemName="@ViewModel.ItemTitle"
+          Model="ViewModel"
+          OnLoad="OnLoad"
+          OnSave="HandleValidSubmit"
+          PageFooterButtonText="@ViewModel.ExitButtonText"
+          PageFooterNavigationPath="@ViewModel.BackNavigationPath"
+          PageTitle="@ViewModel.PageTitle"
+          TItem="SaveTeamViewModel"
+          UseMultipleButtons="true">
+    <TimelineContent>
+        <TeamTimeline DisplayConference="ViewModel.CanHaveConference" 
+                      EditMode="ViewModel.EditModeType"
+                      SportLeagueLevel="ViewModel.SportLeagueLevel"
+                      TeamId="ViewModel.Id"
+                      TeamStep="ViewModel.TeamStep" />
+    </TimelineContent>
+    <Content>
+        <DivRowCol3 Hidden="@(!ViewModel.DisplayFranchise)">
+            <Content>
+                <MudSelect @bind-Value="@ViewModel.SportLeagueLevelId"
+                           @bind-Value:event="ValueChanged" 
+                           Label="Sport League"
+                           Variant="Variant.Outlined">
+                    <MudSelectItem Value="@(0)">--Select--</MudSelectItem>
+                    <Iterations Context="sportLeagueLevel" 
+                                Items="SportLeagueLevel.All" >
+                        <MudSelectItem Value="@sportLeagueLevel.Id">@sportLeagueLevel.Name</MudSelectItem>
+                    </Iterations>	
+                </MudSelect>  
+            </Content>
+        </DivRowCol3>
+        <DivRowCol3>
+            <Content>
+                <MudSelect @bind-Value="@ViewModel.FranchiseId"
+                           @bind-Value:event="ValueChanged" 
+                           Label="Franchise"
+                           Variant="Variant.Outlined">
+                    <MudSelectItem Value="@(0)">--Select--</MudSelectItem>
+                    <Iterations Items="ViewModel.Franchises" Context="franchise">
+                        <MudSelectItem Value="@franchise.Id">@franchise.Name</MudSelectItem>
+                    </Iterations>	
+                </MudSelect>
+            </Content>
+        </DivRowCol3>
+        <DivRowCol3>
+            <Content>
+                <MudTextField @bind-Value="ViewModel.Name" 
+                              Label="Name" 
+                              Variant="Variant.Outlined" />
+            </Content>
+        </DivRowCol3>
+        <DivRowCol3>
+            <Content>
+                <MudTextField @bind-Value="ViewModel.Location" 
+                              Label="Location" 
+                              Variant="Variant.Outlined" />
+            </Content>
+        </DivRowCol3>
+        <DivRowCol3>
+            <Content>
+                <MudTextField @bind-Value="ViewModel.Nickname" 
+                              Label="Nickname" 
+                              Variant="Variant.Outlined" />
+            </Content>
+            <ContentColumn2>
+                <MudTextField @bind-Value="ViewModel.Abbreviation" 
+                              Label="Abbreviation" 
+                              Variant="Variant.Outlined" />
+            </ContentColumn2>
+        </DivRowCol3>
+         <DivRowCol3>
+            <Content>
+                <MudTextField @bind-Value="ViewModel.BeginYear" 
+                              Label="BeginYear" 
+                              Variant="Variant.Outlined" />
+            </Content>
+            <ContentColumn2>
+                <MudTextField @bind-Value="ViewModel.EndYear" 
+                              Label="EndYear" 
+                              Variant="Variant.Outlined" />
+            </ContentColumn2>
+        </DivRowCol3>
+    </Content>
+</EditPage>

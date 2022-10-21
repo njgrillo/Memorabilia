@@ -1,8 +1,8 @@
 ﻿namespace Memorabilia.Application.Features.Memorabilia.HeadBand;
 
-public class GetHeadBand
+public record GetHeadBand(int MemorabiliaId) : IQuery<HeadBandViewModel>
 {
-    public class Handler : QueryHandler<Query, HeadBandViewModel>
+    public class Handler : QueryHandler<GetHeadBand, HeadBandViewModel>
     {
         private readonly IMemorabiliaItemRepository _memorabiliaRepository;
 
@@ -11,14 +11,9 @@ public class GetHeadBand
             _memorabiliaRepository = memorabiliaRepository;
         }
 
-        protected override async Task<HeadBandViewModel> Handle(Query query)
+        protected override async Task<HeadBandViewModel> Handle(GetHeadBand query)
         {
             return new HeadBandViewModel(await _memorabiliaRepository.Get(query.MemorabiliaId));
         }
-    }
-
-    public class Query : MemorabiliaQuery, IQuery<HeadBandViewModel>
-    {
-        public Query(int memorabiliaId) : base(memorabiliaId) { }
     }
 }

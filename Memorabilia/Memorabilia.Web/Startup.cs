@@ -1,3 +1,6 @@
+using Framework.Library.Handler;
+using Memorabilia.Application.Features.Memorabilia;
+
 namespace Memorabilia.Web
 {
     public class Startup
@@ -22,7 +25,7 @@ namespace Memorabilia.Web
             services.AddDbContext<MemorabiliaContext>(options => options.UseSqlServer("name=ConnectionStrings:Memorabilia"), ServiceLifetime.Transient);
             services.AddDbContext<DomainContext>(options => options.UseSqlServer("name=ConnectionStrings:Memorabilia"), ServiceLifetime.Transient);
             services.AddTransient<CommandRouter>();
-            services.AddTransient<QueryRouter>();  
+            services.AddTransient<QueryRouter>();
             services.AddMediatR(typeof(GetAccomplishments).Assembly);
 
             services.AddMudServices(config =>

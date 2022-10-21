@@ -4,7 +4,7 @@ public partial class FirstDayCoverEditor : MemorabiliaItem<SaveFirstDayCoverView
 {
     protected async Task OnLoad()
     {
-        ViewModel = new SaveFirstDayCoverViewModel(await QueryRouter.Send(new GetFirstDayCover.Query(MemorabiliaId)));
+        ViewModel = new SaveFirstDayCoverViewModel(await QueryRouter.Send(new GetFirstDayCover(MemorabiliaId)));
     }
 
     protected async Task OnSave()

@@ -4,7 +4,7 @@ public partial class PosterEditor : MemorabiliaItem<SavePosterViewModel>
 {
     protected async Task OnLoad()
     {
-        var viewModel = await QueryRouter.Send(new GetPoster.Query(MemorabiliaId));
+        var viewModel = await QueryRouter.Send(new GetPoster(MemorabiliaId));
 
         if (viewModel.Size == null)
             return;

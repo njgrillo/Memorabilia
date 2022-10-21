@@ -1,7 +1,5 @@
 ﻿#nullable disable
 
-using Memorabilia.Blazor.Controls;
-
 namespace Memorabilia.Blazor.Pages.Autograph.Images;
 
 public partial class AutographImageEditor : AutographItem<SaveAutographImagesViewModel>
@@ -16,7 +14,7 @@ public partial class AutographImageEditor : AutographItem<SaveAutographImagesVie
 
     protected async Task OnImportClick()
     {
-        var query = new GetMemorabiliaImages.Query(ViewModel.MemorabiliaId);
+        var query = new GetMemorabiliaImages(ViewModel.MemorabiliaId);
         var memorabliaImagesViewModel = await QueryRouter.Send(query);
         var images = memorabliaImagesViewModel.Images
                                               .Select(image => new Domain.Entities.AutographImage(ViewModel.AutographId,

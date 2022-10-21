@@ -28,12 +28,12 @@
                     <MudTooltip Text="Edit">
                         <MudFab Color="MudBlazor.Color.Primary"
                                 Icon="@Icons.Outlined.ModeEditOutline"
-                                OnClick="@(_ => NavigationManager.NavigateTo($"{RoutePrefix}/Edit/{@context.Id}"))" />
+                                OnClick="@(_ => NavigationManager.NavigateTo($"{RoutePrefix}/{EditModeType.Update.Name}/{context.Id}"))" />
                     </MudTooltip>
                     <MudTooltip Text="Delete">
                         <MudFab Color="MudBlazor.Color.Secondary"
                                 Icon="@Icons.Outlined.DeleteOutline"
-                                OnClick="@(_ => ShowDeleteConfirm(@context.Id))" />
+                                OnClick="@(_ => ShowDeleteConfirm(context.Id))" />
                     </MudTooltip>
                 </MudTd>
             </RowTemplate>

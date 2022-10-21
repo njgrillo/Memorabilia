@@ -4,7 +4,7 @@ public partial class SoccerballEditor : MemorabiliaItem<SaveSoccerballViewModel>
 {
     protected async Task OnLoad()
     {
-        var viewModel = await QueryRouter.Send(new GetSoccerball.Query(MemorabiliaId));
+        var viewModel = await QueryRouter.Send(new GetSoccerball(MemorabiliaId));
 
         if (viewModel.Brand == null)
             return;

@@ -1,8 +1,8 @@
 ﻿namespace Memorabilia.Application.Features.Memorabilia.Pylon;
 
-public class GetPylon
+public record GetPylon(int MemorabiliaId) : IQuery<PylonViewModel>
 {
-    public class Handler : QueryHandler<Query, PylonViewModel>
+    public class Handler : QueryHandler<GetPylon, PylonViewModel>
     {
         private readonly IMemorabiliaItemRepository _memorabiliaRepository;
 
@@ -11,7 +11,7 @@ public class GetPylon
             _memorabiliaRepository = memorabiliaRepository;
         }
 
-        protected override async Task<PylonViewModel> Handle(Query query)
+        protected override async Task<PylonViewModel> Handle(GetPylon query)
         {
             return new PylonViewModel(await _memorabiliaRepository.Get(query.MemorabiliaId));
         }

@@ -1,34 +1,19 @@
-﻿#nullable disable
+﻿namespace Memorabilia.Blazor.Pages.Admin.ItemTypeBrands;
 
-namespace Memorabilia.Blazor.Pages.Admin.ItemTypeBrands;
-
-public partial class ItemTypeBrandEditor : ComponentBase
+public partial class ItemTypeBrandEditor : EditItemTypeItem<SaveItemTypeBrandViewModel, ItemTypeBrandViewModel>
 {
-    [Inject]
-    public CommandRouter CommandRouter { get; set; }
-
-    [Inject]
-    public QueryRouter QueryRouter { get; set; }
-
-    [Parameter]
-    public int Id { get; set; }
-
-    private bool DisplayItemType;
-    private SaveItemTypeBrandViewModel ViewModel = new ();
-
     protected async Task HandleValidSubmit()
     {
-        await CommandRouter.Send(new SaveItemTypeBrand(ViewModel));
+        await HandleValidSubmit(new SaveItemTypeBrand(ViewModel));
     }
 
     protected async Task OnLoad()
     {
-        if (Id == 0)
-        {
-            DisplayItemType = true;
-            return;
-        }
+        Initialize();
 
-        ViewModel = new SaveItemTypeBrandViewModel(await QueryRouter.Send(new GetItemTypeBrand(Id)));
+        if (DisplayItemType)
+            return;
+
+        ViewModel = new SaveItemTypeBrandViewModel(await Get(new GetItemTypeBrand(Id)));
     }
 }

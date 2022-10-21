@@ -4,7 +4,7 @@ public partial class LithographEditor : MemorabiliaItem<SaveLithographViewModel>
 {
     protected async Task OnLoad()
     {
-        var viewModel = await QueryRouter.Send(new GetLithograph.Query(MemorabiliaId));
+        var viewModel = await QueryRouter.Send(new GetLithograph(MemorabiliaId));
 
         if (viewModel.Brand == null)
             return;

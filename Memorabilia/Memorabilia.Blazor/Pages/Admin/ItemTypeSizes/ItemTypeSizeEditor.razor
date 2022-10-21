@@ -1,0 +1,43 @@
+﻿@inherits EditItemTypeItem<SaveItemTypeSizeViewModel, ItemTypeSizeViewModel>
+
+<EditPage ContinueNavigationPath="@ViewModel.RoutePrefix"
+          EditMode="ViewModel.EditModeType" 
+          ExitNavigationPath="@ViewModel.RoutePrefix"
+          ImagePath="@ViewModel.ImagePath" 
+          ItemName="@ViewModel.ItemTitle"
+          Model="ViewModel"
+          OnLoad="OnLoad"
+          OnSave="HandleValidSubmit"
+          PageFooterButtonText="@ViewModel.ExitButtonText"
+          PageFooterNavigationPath="@ViewModel.ExitNavigationPath"
+          PageTitle="@ViewModel.PageTitle"
+          TItem="SaveItemTypeSizeViewModel">
+    <Content>
+        <DivRowCol3 Hidden="@(!DisplayItemType)">
+            <Content>
+                <MudSelect @bind-Value="@ViewModel.ItemTypeId"
+                           @bind-Value:event="ValueChanged" 
+                           Label="Item Type"
+                           Variant="Variant.Outlined">
+                    <MudSelectItem Value="@(0)">--Select--</MudSelectItem>
+                    <Iterations Items="ViewModel.ItemTypes" Context="itemType">
+                        <MudSelectItem Value="@itemType.Id">@itemType.Name</MudSelectItem>
+                    </Iterations>	
+                </MudSelect>
+            </Content>
+        </DivRowCol3>
+        <DivRowCol3>
+            <Content>
+                <MudSelect @bind-Value="@ViewModel.SizeId"
+                           @bind-Value:event="ValueChanged" 
+                           Label="Size"
+                           Variant="Variant.Outlined">
+                    <MudSelectItem Value="@(0)">--Select--</MudSelectItem>
+                    <Iterations Items="ViewModel.Sizes" Context="Size">
+                        <MudSelectItem Value="@Size.Id">@Size.Name</MudSelectItem>
+                    </Iterations>	
+                </MudSelect>
+            </Content>
+        </DivRowCol3>
+    </Content>
+</EditPage>

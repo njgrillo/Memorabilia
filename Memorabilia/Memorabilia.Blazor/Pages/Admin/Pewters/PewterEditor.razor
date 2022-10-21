@@ -1,0 +1,71 @@
+﻿@inherits EditItem<SavePewterViewModel, PewterViewModel>
+
+<EditPage ContinueNavigationPath="@ViewModel.RoutePrefix"
+          EditMode="ViewModel.EditModeType" 
+          ExitNavigationPath="@ViewModel.RoutePrefix"
+          ImagePath="@ViewModel.PageImagePath" 
+          ItemName="@ViewModel.ItemTitle"
+          Model="ViewModel"
+          OnLoad="OnLoad"
+          OnSave="HandleValidSubmit"
+          PageFooterButtonText="@ViewModel.ExitButtonText"
+          PageFooterNavigationPath="@ViewModel.ExitNavigationPath"
+          PageTitle="@ViewModel.PageTitle"
+          TItem="SavePewterViewModel">
+    <Content>
+        <DivRowCol3>
+            <Content>
+                <MudSelect @bind-Value="@ViewModel.FranchiseId"
+                           @bind-Value:event="ValueChanged" 
+                           Label="Franchise"                           
+                           Variant="Variant.Outlined">
+                    <MudSelectItem Value="@(0)">--Select--</MudSelectItem>
+                    <Iterations Items="ViewModel.Franchises" Context="franchise">
+                        <MudSelectItem Value="@franchise.Id">@franchise.Name</MudSelectItem>
+                    </Iterations>	
+                </MudSelect>
+            </Content>
+        </DivRowCol3>
+        <DivRowCol6>
+            <Content>
+                <TeamDropDown @bind-Value="@ViewModel.TeamId" 
+                              @bind-Value:event="ValueChanged"
+                              Franchise="@Franchise.Find(ViewModel.FranchiseId)" 
+                              SelectedValue="@ViewModel.TeamId" />  
+            </Content>
+        </DivRowCol6>
+        <DivRowCol3>
+            <Content>
+                <ItemTypeSizeDropDown @bind-Value="@ViewModel.SizeId" 
+                                      @bind-Value:event="ValueChanged"
+                                      ItemType="@ItemType.Helmet"
+                                      SelectedValue="@ViewModel.SizeId" />   
+            </Content>
+        </DivRowCol3>
+        <DivRowCol3>
+            <Content>
+                <InputFile id="fileInput" accept="image/*" hidden
+                                          OnChange="@LoadFile"   />
+                <MudFab Color="MudBlazor.Color.Secondary"
+                        HtmlTag="label"
+                        Icon="@Icons.Filled.Image"
+                        Label="Load picture"
+                        for="fileInput" />  
+            </Content>
+        </DivRowCol3>
+        <DivRowCol3>
+            <Content>
+                <PrettyBlazor.Condition Evaluation="_hasImage">
+                    <Match>
+                        <ImageEditor CanRemove="false"
+                                     FileName=""
+                                     HasPrimary="false"
+                                     ImageFilePath="@ViewModel.ImagePath"
+                                     ImageType="ImageType.Primary"
+                                     OnRemove="Remove" /> 
+                    </Match>
+                </PrettyBlazor.Condition>
+            </Content>
+        </DivRowCol3>
+    </Content>
+</EditPage>

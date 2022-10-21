@@ -1,8 +1,8 @@
 ﻿namespace Memorabilia.Application.Features.Memorabilia.Pants;
 
-public class GetPant
+public record GetPant(int MemorabiliaId) : IQuery<PantViewModel>
 {
-    public class Handler : QueryHandler<Query, PantViewModel>
+    public class Handler : QueryHandler<GetPant, PantViewModel>
     {
         private readonly IMemorabiliaItemRepository _memorabiliaRepository;
 
@@ -11,14 +11,9 @@ public class GetPant
             _memorabiliaRepository = memorabiliaRepository;
         }
 
-        protected override async Task<PantViewModel> Handle(Query query)
+        protected override async Task<PantViewModel> Handle(GetPant query)
         {
             return new PantViewModel(await _memorabiliaRepository.Get(query.MemorabiliaId));
         }
-    }
-
-    public class Query : MemorabiliaQuery, IQuery<PantViewModel>
-    {
-        public Query(int memorabiliaId) : base(memorabiliaId) { }
     }
 }

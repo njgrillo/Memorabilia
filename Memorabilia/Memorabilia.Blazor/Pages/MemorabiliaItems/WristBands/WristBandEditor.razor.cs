@@ -4,7 +4,7 @@ public partial class WristBandEditor : MemorabiliaItem<SaveWristBandViewModel>
 {
     protected async Task OnLoad()
     {
-        var viewModel = await QueryRouter.Send(new GetWristBand.Query(MemorabiliaId));
+        var viewModel = await QueryRouter.Send(new GetWristBand(MemorabiliaId));
 
         if (viewModel.Brand == null)
             return;

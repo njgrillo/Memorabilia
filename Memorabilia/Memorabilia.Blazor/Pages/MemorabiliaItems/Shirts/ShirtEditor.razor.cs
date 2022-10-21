@@ -4,7 +4,7 @@ public partial class ShirtEditor : MemorabiliaItem<SaveShirtViewModel>
 {
     protected async Task OnLoad()
     {
-        var viewModel = await QueryRouter.Send(new GetShirt.Query(MemorabiliaId));
+        var viewModel = await QueryRouter.Send(new GetShirt(MemorabiliaId));
 
         if (viewModel.Brand == null)
             return;

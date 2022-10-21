@@ -1,8 +1,8 @@
 ﻿namespace Memorabilia.Application.Features.Memorabilia.Card;
 
-public class GetCard
+public record GetCard(int MemorabiliaId) : IQuery<CardViewModel>
 {
-    public class Handler : QueryHandler<Query, CardViewModel>
+    public class Handler : QueryHandler<GetCard, CardViewModel>
     {
         private readonly IMemorabiliaItemRepository _memorabiliaRepository;
 
@@ -11,14 +11,9 @@ public class GetCard
             _memorabiliaRepository = memorabiliaRepository;
         }
 
-        protected override async Task<CardViewModel> Handle(Query query)
+        protected override async Task<CardViewModel> Handle(GetCard query)
         {
             return new CardViewModel(await _memorabiliaRepository.Get(query.MemorabiliaId));
         }
-    }
-
-    public class Query : MemorabiliaQuery, IQuery<CardViewModel>
-    {
-        public Query(int memorabiliaId) : base(memorabiliaId) { }
     }
 }

@@ -4,7 +4,7 @@ public partial class CerealBoxEditor : MemorabiliaItem<SaveCerealBoxViewModel>
 {
     protected async Task OnLoad()
     {
-        var viewModel = await QueryRouter.Send(new GetCerealBox.Query(MemorabiliaId));
+        var viewModel = await QueryRouter.Send(new GetCerealBox(MemorabiliaId));
 
         if (viewModel.Brand == null)
             return;

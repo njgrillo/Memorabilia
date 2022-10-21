@@ -1,4 +1,6 @@
-﻿<PageView AddRoute="@ViewModel.AddRoute" 
+﻿@inherits ViewItem<CommissionersViewModel, CommissionerViewModel>
+
+<PageView AddRoute="@ViewModel.AddRoute" 
           AddTitle="@ViewModel.AddTitle"
           DisplayPageHeader="false"
           NavigationPath="@ViewModel.ExitNavigationPath"
@@ -36,11 +38,11 @@
                         <MudTd DataLabel="Begin Year">@context.BeginYear?.ToString()</MudTd>
                         <MudTd DataLabel="End Year">@context.EndYear?.ToString()</MudTd>
                         <MudTd DataLabel="">
-                            <GridEditButton NavigationPath="@($"{ViewModel.RoutePrefix}/Edit/{context.Id}")" />    
+                            <GridEditButton NavigationPath="@($"{ViewModel.RoutePrefix}/{EditModeType.Update.Name}/{context.Id}")" />    
                             <MudTooltip Text="Delete">
                                 <MudFab Color="MudBlazor.Color.Secondary"
                                         Icon="@Icons.Outlined.DeleteOutline"
-                                        OnClick="@(_ => ShowDeleteConfirm(@context.Id))" />
+                                        OnClick="@(_ => ShowDeleteConfirm(context.Id, "Delete Commissioner"))" />
                             </MudTooltip>
                         </MudTd>
                     </RowTemplate>

@@ -4,7 +4,7 @@ public partial class PhotoEditor : MemorabiliaItem<SavePhotoViewModel>
 {
     protected async Task OnLoad()
     {
-        var viewModel = await QueryRouter.Send(new GetPhoto.Query(MemorabiliaId));
+        var viewModel = await QueryRouter.Send(new GetPhoto(MemorabiliaId));
 
         if (viewModel.Brand == null)
             return;

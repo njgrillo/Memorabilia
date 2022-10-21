@@ -4,7 +4,7 @@ public partial class MagazineEditor : MemorabiliaItem<SaveMagazineViewModel>
 {
     protected async Task OnLoad()
     {
-        var viewModel = await QueryRouter.Send(new GetMagazine.Query(MemorabiliaId));
+        var viewModel = await QueryRouter.Send(new GetMagazine(MemorabiliaId));
 
         if (viewModel.Brand == null)
             return;

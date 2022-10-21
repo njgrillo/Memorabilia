@@ -4,7 +4,7 @@ public partial class BobbleheadEditor : MemorabiliaItem<SaveBobbleheadViewModel>
 {
     protected async Task OnLoad()
     {
-        var viewModel = await QueryRouter.Send(new GetBobblehead.Query(MemorabiliaId));
+        var viewModel = await QueryRouter.Send(new GetBobblehead(MemorabiliaId));
 
         if (viewModel.Brand == null)
             return;

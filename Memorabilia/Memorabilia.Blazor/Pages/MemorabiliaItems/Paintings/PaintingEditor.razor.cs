@@ -4,7 +4,7 @@ public partial class PaintingEditor : MemorabiliaItem<SavePaintingViewModel>
 {
     protected async Task OnLoad()
     {
-        var viewModel = await QueryRouter.Send(new GetPainting.Query(MemorabiliaId));
+        var viewModel = await QueryRouter.Send(new GetPainting(MemorabiliaId));
 
         if (viewModel.Brand == null)
             return;

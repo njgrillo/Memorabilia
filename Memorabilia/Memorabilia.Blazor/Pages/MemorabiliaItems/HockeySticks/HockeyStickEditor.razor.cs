@@ -4,7 +4,7 @@ public partial class HockeyStickEditor : MemorabiliaItem<SaveHockeyStickViewMode
 {
     protected async Task OnLoad()
     {
-        var viewModel = await QueryRouter.Send(new GetHockeyStick.Query(MemorabiliaId));
+        var viewModel = await QueryRouter.Send(new GetHockeyStick(MemorabiliaId));
 
         if (viewModel.Brand == null)
             return;

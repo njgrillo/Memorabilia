@@ -1,34 +1,10 @@
 ﻿@page "/Team/Championship/Edit/{teamId:int}/{sportLeagueLevelId:int}"
 
-@using Memorabilia.Application.Features.Admin.Teams
+@inherits EditTeamItem
 
-<EditPage ContinueNavigationPath="@_viewModel.ContinueNavigationPath"
-          DisplaySaveContinueButton="false"
-          EditMode="_viewModel.EditModeType"
-          ExitNavigationPath="@_viewModel.ExitNavigationPath"
-          ImagePath="@_viewModel.ImagePath"
-          ItemName="@_viewModel.PageTitle"
-          Model="_viewModel"
-          OnLoad="OnLoad"
-          OnSave="OnSave"
-          PageFooterButtonText="@_viewModel.ExitButtonText"
-          PageFooterNavigationPath="@_viewModel.BackNavigationPath"
-          PageTitle="@_viewModel.PageTitle"
-          TItem="SaveTeamChampionshipsViewModel"
-          UseMultipleButtons="true">
-    <TimelineContent>
-        <TeamTimeline DisplayConference="_viewModel.CanHaveConference" 
-                      EditMode="_viewModel.EditModeType"
-                      SportLeagueLevel="_viewModel.SportLeagueLevel"
-                      TeamId="_viewModel.TeamId"
-                      TeamStep="_viewModel.TeamStep" />
-    </TimelineContent>
+<PageLoader>
     <Content>
-        <DivRowCol12>
-            <Content>
-                <TeamChampionshipEditor Championships="_viewModel.Championships"
-                                        SportLeagueLevel="_viewModel.SportLeagueLevel" />
-            </Content>
-        </DivRowCol12>
+        <ChampionshipTeamEditor SportLeagueLevelId="@SportLeagueLevelId" 
+                                TeamId=@TeamId />
     </Content>
-</EditPage>
+</PageLoader>

@@ -4,7 +4,7 @@ public partial class JerseyNumberEditor : MemorabiliaItem<SaveJerseyNumberViewMo
 {
     protected async Task OnLoad()
     {
-        ViewModel = new SaveJerseyNumberViewModel(await QueryRouter.Send(new GetJerseyNumber.Query(MemorabiliaId)));
+        ViewModel = new SaveJerseyNumberViewModel(await QueryRouter.Send(new GetJerseyNumber(MemorabiliaId)));
     }
 
     protected async Task OnSave()

@@ -1,0 +1,57 @@
+﻿@inherits EditItem<SaveSportLeagueLevelViewModel, SportLeagueLevelViewModel>
+
+<EditPage ContinueNavigationPath="@ViewModel.RoutePrefix"
+          EditMode="ViewModel.EditModeType" 
+          ExitNavigationPath="@ViewModel.RoutePrefix" 
+          ImagePath="@ViewModel.ImagePath" 
+          ItemName="@ViewModel.ItemTitle"
+          Model="ViewModel"
+          OnLoad="OnLoad"
+          OnSave="HandleValidSubmit"
+          PageFooterButtonText="@ViewModel.ExitButtonText"
+          PageFooterNavigationPath="@ViewModel.ExitNavigationPath"
+          PageTitle="@ViewModel.PageTitle"
+          TItem="SaveSportLeagueLevelViewModel">
+    <Content>
+        <DivRowCol3>
+            <Content>
+                <MudSelect @bind-Value="@ViewModel.SportId"
+                           @bind-Value:event="ValueChanged" 
+                           Label="Sports"
+                           Variant="Variant.Outlined">
+                    <MudSelectItem Value="@(0)">--Select--</MudSelectItem>
+                    <Iterations Items="ViewModel.Sports" Context="sport">
+                        <MudSelectItem Value="@sport.Id">@sport.Name</MudSelectItem>
+                    </Iterations>	
+                </MudSelect> 
+            </Content>
+        </DivRowCol3>
+        <DivRowCol3>
+            <Content>
+                <MudSelect @bind-Value="@ViewModel.LevelTypeId"
+                           @bind-Value:event="ValueChanged" 
+                           Label="Levels"
+                           Variant="Variant.Outlined">
+                    <MudSelectItem Value="@(0)">--Select--</MudSelectItem>
+                    <Iterations Items="ViewModel.LevelTypes" Context="levelType">
+                        <MudSelectItem Value="@levelType.Id">@levelType.Name</MudSelectItem>
+                    </Iterations>	
+                </MudSelect> 
+            </Content>
+        </DivRowCol3>
+        <DivRowCol3>
+            <Content>
+                <MudTextField @bind-Value="ViewModel.Name" 
+                              Label="Name" 
+                              Variant="Variant.Outlined" />
+            </Content>
+        </DivRowCol3>
+        <DivRowCol3>
+            <Content>
+                <MudTextField @bind-Value="ViewModel.Abbreviation" 
+                              Label="Abbreviation" 
+                              Variant="Variant.Outlined" />
+            </Content>
+        </DivRowCol3>
+    </Content>
+</EditPage>

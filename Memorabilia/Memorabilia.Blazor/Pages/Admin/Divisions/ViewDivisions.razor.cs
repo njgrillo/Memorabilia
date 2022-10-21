@@ -1,46 +1,13 @@
-﻿#nullable disable
+﻿namespace Memorabilia.Blazor.Pages.Admin.Divisions;
 
-namespace Memorabilia.Blazor.Pages.Admin.Divisions;
-
-public partial class ViewDivisions
+public partial class ViewDivisions : ViewItem<DivisionsViewModel, DivisionViewModel>
 {
-    [Inject]
-    public CommandRouter CommandRouter { get; set; }
-
-    [Inject]
-    public IDialogService DialogService { get; set; }
-
-    [Inject]
-    public NavigationManager NavigationManager { get; set; }
-
-    [Inject]
-    public QueryRouter QueryRouter { get; set; }
-
-    [Inject]
-    public ISnackbar Snackbar { get; set; }
-
-    private string Search;
-    private DivisionsViewModel ViewModel = new();
-
-    private bool FilterFunc1(DivisionViewModel viewModel) => FilterFunc(viewModel, Search);
-
     protected async Task OnLoad()
     {
-        ViewModel = await QueryRouter.Send(new GetDivisions());
+        await OnLoad(new GetDivisions());
     }
 
-    protected async Task ShowDeleteConfirm(int id)
-    {
-        var dialog = DialogService.Show<DeleteDialog>("Delete Division");
-        var result = await dialog.Result;
-
-        if (result.Cancelled)
-            return;
-
-        await Delete(id);
-    }
-
-    private async Task Delete(int id)
+    protected override async Task Delete(int id)
     {
         var deletedItem = ViewModel.Divisions.Single(Division => Division.Id == id);
         var viewModel = new SaveDivisionViewModel(deletedItem)
@@ -52,10 +19,10 @@ public partial class ViewDivisions
 
         ViewModel.Divisions.Remove(deletedItem);
 
-        Snackbar.Add($"{ViewModel.ItemTitle} was deleted successfully!", Severity.Success);
+        ShowDeleteSuccessfulMessage(ViewModel.ItemTitle);
     }
 
-    private static bool FilterFunc(DivisionViewModel viewModel, string search)
+    protected override bool FilterFunc(DivisionViewModel viewModel, string search)
     {
         return search.IsNullOrEmpty() ||
                viewModel.Name.Contains(search, StringComparison.OrdinalIgnoreCase) ||

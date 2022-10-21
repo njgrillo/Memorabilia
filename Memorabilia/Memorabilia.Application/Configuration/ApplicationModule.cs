@@ -1,4 +1,6 @@
-﻿namespace Memorabilia.Application.Configuration;
+﻿using Memorabilia.Application.Features.Services.Gallery.Memorabilia;
+
+namespace Memorabilia.Application.Configuration;
 
 public class ApplicationModule : Module
 {
@@ -11,6 +13,12 @@ public class ApplicationModule : Module
             .InstancePerDependency();               
 
         builder.RegisterType<DashboardItemFactory>().As<IDashboardItemFactory>()
+            .InstancePerDependency();
+
+        builder.RegisterType<GalleryRuleFactory>().As<IGalleryRuleFactory>()
+            .InstancePerDependency();
+
+        builder.RegisterType<GalleryService>().As<IGalleryService>()
             .InstancePerDependency();
 
         builder.RegisterType<MemorabiliaFilterPredicateBuilder>().As<IMemorabiliaFilterPredicateBuilder>()

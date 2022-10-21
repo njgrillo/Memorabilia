@@ -10,11 +10,12 @@ public partial class BaseballEditor : MemorabiliaItem<SaveBaseballViewModel>
     {
         await LoadCommissioners();
 
-        var viewModel = await QueryRouter.Send(new GetBaseball.Query(MemorabiliaId));
+        var viewModel = await QueryRouter.Send(new GetBaseball(MemorabiliaId));
+        //var viewModel = await QueryRouter.Send(new GetMemorabilia<BaseballViewModel>(MemorabiliaId));
 
         if (viewModel.Brand == null)
         {
-            SetDefaults();
+            ViewModel.GameStyleTypeId = GameStyleType.None.Id;
             return;
         }
 
@@ -34,10 +35,5 @@ public partial class BaseballEditor : MemorabiliaItem<SaveBaseballViewModel>
     private void SelectedPersonChanged(SavePersonViewModel person)
     {
         ViewModel.Person = person;
-    }
-
-    private void SetDefaults()
-    {
-        ViewModel.GameStyleTypeId = GameStyleType.None.Id;
     }
 }

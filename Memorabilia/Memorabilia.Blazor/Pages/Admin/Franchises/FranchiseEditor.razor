@@ -1,4 +1,6 @@
-﻿<EditPage ContinueNavigationPath="@ViewModel.RoutePrefix"
+﻿@inherits EditItem<SaveFranchiseViewModel, FranchiseViewModel>
+
+<EditPage ContinueNavigationPath="@ViewModel.RoutePrefix"
           EditMode="ViewModel.EditModeType" 
           ExitNavigationPath="@ViewModel.RoutePrefix"
           ImagePath="@ViewModel.ImagePath" 

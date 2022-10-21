@@ -4,7 +4,7 @@ public partial class BookEditor : MemorabiliaItem<SaveBookViewModel>
 {
     protected async Task OnLoad()
     {
-        ViewModel = new SaveBookViewModel(await QueryRouter.Send(new GetBook.Query(MemorabiliaId)));
+        ViewModel = new SaveBookViewModel(await QueryRouter.Send(new GetBook(MemorabiliaId)));
     }
 
     protected async Task OnSave()

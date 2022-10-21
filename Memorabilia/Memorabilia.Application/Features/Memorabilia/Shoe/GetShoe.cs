@@ -1,8 +1,8 @@
 ﻿namespace Memorabilia.Application.Features.Memorabilia.Shoe;
 
-public class GetShoe
+public record GetShoe(int MemorabiliaId) : IQuery<ShoeViewModel>
 {
-    public class Handler : QueryHandler<Query, ShoeViewModel>
+    public class Handler : QueryHandler<GetShoe, ShoeViewModel>
     {
         private readonly IMemorabiliaItemRepository _memorabiliaRepository;
 
@@ -11,14 +11,9 @@ public class GetShoe
             _memorabiliaRepository = memorabiliaRepository;
         }
 
-        protected override async Task<ShoeViewModel> Handle(Query query)
+        protected override async Task<ShoeViewModel> Handle(GetShoe query)
         {
             return new ShoeViewModel(await _memorabiliaRepository.Get(query.MemorabiliaId));
         }
-    }
-
-    public class Query : MemorabiliaQuery, IQuery<ShoeViewModel>
-    {
-        public Query(int memorabiliaId) : base(memorabiliaId) { }
     }
 }

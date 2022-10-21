@@ -1,4 +1,6 @@
-﻿namespace Memorabilia.MauiBlazor;
+﻿using Memorabilia.Application.Features.Admin.AccomplishmentTypes;
+
+namespace Memorabilia.MauiBlazor;
 
 public static class MauiProgram
 {
@@ -24,17 +26,18 @@ public static class MauiProgram
         builder.Services.AddTransient<IDomainContext, DomainContext>();
         builder.Services.AddTransient<CommandRouter>();
         builder.Services.AddTransient<QueryRouter>();
-        builder.Services.AddMediatR(typeof(GetAccomplishments).Assembly);
-
+        builder.Services.AddTransient(typeof(IDomainRepository<>), typeof(DomainRepository<>));
+        builder.Services.AddTransient<ICommissionerRepository, CommissionerRepository>();
         builder.Services.AddTransient<IProjectRepository, ProjectRepository>();
+        builder.Services.AddMediatR(typeof(GetAccomplishmentTypes));              
 
-        var autofacBuilder = new ContainerBuilder();
-        autofacBuilder.Populate(builder.Services);
+        //var autofacBuilder = new ContainerBuilder();
+        //autofacBuilder.Populate(builder.Services);
 
-        autofacBuilder.RegisterModule(new RepositoryModule());
-        autofacBuilder.RegisterModule(new ApplicationModule());
+        //autofacBuilder.RegisterModule(new RepositoryModule());
+        //autofacBuilder.RegisterModule(new ApplicationModule());
 
-        autofacBuilder.Build();
+        //autofacBuilder.Build();       
 
         builder.Services.AddMudServices(config =>
         {

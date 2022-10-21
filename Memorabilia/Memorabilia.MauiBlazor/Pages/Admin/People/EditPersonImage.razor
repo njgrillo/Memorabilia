@@ -1,0 +1,10 @@
+﻿@page "/People/Image/Edit/{personId:int}"
+
+@inherits EditPersonItem
+
+<PageLoader>
+    <Content>
+        <PersonImageEditor ImageDirectoryPath="@_imageDirectorypath" 
+                           PersonId=@PersonId />
+    </Content>
+</PageLoader>

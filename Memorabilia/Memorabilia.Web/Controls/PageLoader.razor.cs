@@ -8,14 +8,19 @@ public partial class PageLoader : WebPage
     [Parameter]
     public EventCallback OnLoad { get; set; }
 
-    private bool PageLoaded;
+    protected bool PageLoaded;
 
     protected override async Task OnInitializedAsync()
     {
+        if (UserId > 0)
+            return;
+
         var userId = await LocalStorage.GetAsync<int>("UserId").ConfigureAwait(false);
 
         if (userId.Value == 0)
             NavigationManager.NavigateTo("Login");
+
+        UserId = userId.Value;
 
         await OnLoad.InvokeAsync();
 

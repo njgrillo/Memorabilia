@@ -23,7 +23,7 @@ public partial class ViewProjects : ComponentBase
 
     protected async Task OnLoad()
     {
-        _viewModel = await QueryRouter.Send(new GetProjects.Query(UserId));
+        _viewModel = await QueryRouter.Send(new GetProjects(UserId));
     }
 
     protected async Task ShowDeleteConfirm(int id)

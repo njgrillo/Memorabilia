@@ -1,8 +1,8 @@
 ﻿namespace Memorabilia.Application.Features.Memorabilia.Painting;
 
-public class GetPainting
+public record GetPainting(int MemorabiliaId) : IQuery<PaintingViewModel>
 {
-    public class Handler : QueryHandler<Query, PaintingViewModel>
+    public class Handler : QueryHandler<GetPainting, PaintingViewModel>
     {
         private readonly IMemorabiliaItemRepository _memorabiliaRepository;
 
@@ -11,14 +11,9 @@ public class GetPainting
             _memorabiliaRepository = memorabiliaRepository;
         }
 
-        protected override async Task<PaintingViewModel> Handle(Query query)
+        protected override async Task<PaintingViewModel> Handle(GetPainting query)
         {
             return new PaintingViewModel(await _memorabiliaRepository.Get(query.MemorabiliaId));
         }
-    }
-
-    public class Query : MemorabiliaQuery, IQuery<PaintingViewModel>
-    {
-        public Query(int memorabiliaId) : base(memorabiliaId) { }
     }
 }

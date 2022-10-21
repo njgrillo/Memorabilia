@@ -15,13 +15,13 @@
                         <div class="row">
                             <Iterations Items="_displayedItems" Context="item">
                                 <div class="col-md-4">
-                                    <MemorabiliaItemGalleryCard Description="@item.Description"
+                                    <MemorabiliaItemGalleryCard Description="@GetDescription(item)"
                                                                 EditNavigationPath="@item.EditNavigationPath"
                                                                 MemorabiliaItem="@item"
                                                                 PrimaryImageNavigationPath="@item.PrimaryImageNavigationPath"
-                                                                PrimaryImagePath="@item.PrimaryImagePath"
-                                                                Subtitle="@item.Subtitle"
-                                                                Title="@item.Title"
+                                                                PrimaryImagePath="@item.PrimaryImagePath"                                                                
+                                                                Subtitle="@GetSubtitle(item)"
+                                                                Title="@GetTitle(item)"
                                                                 TooltipText="@item.TooltipText" />
                                 </div>
                             </Iterations>

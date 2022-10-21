@@ -1,8 +1,8 @@
 ﻿namespace Memorabilia.Application.Features.Memorabilia.Magazine;
 
-public class GetMagazine
+public record GetMagazine(int MemorabiliaId) : IQuery<MagazineViewModel>
 {
-    public class Handler : QueryHandler<Query, MagazineViewModel>
+    public class Handler : QueryHandler<GetMagazine, MagazineViewModel>
     {
         private readonly IMemorabiliaItemRepository _memorabiliaRepository;
 
@@ -11,14 +11,9 @@ public class GetMagazine
             _memorabiliaRepository = memorabiliaRepository;
         }
 
-        protected override async Task<MagazineViewModel> Handle(Query query)
+        protected override async Task<MagazineViewModel> Handle(GetMagazine query)
         {
             return new MagazineViewModel(await _memorabiliaRepository.Get(query.MemorabiliaId));
         }
-    }
-
-    public class Query : MemorabiliaQuery, IQuery<MagazineViewModel>
-    {
-        public Query(int memorabiliaId) : base(memorabiliaId) { }
     }
 }

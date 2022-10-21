@@ -18,7 +18,7 @@ public partial class MemorabiliaImageEditor : CommandQuery
 
     protected async Task OnLoad()
     {
-        var memorabilia = await QueryRouter.Send(new GetMemorabiliaItem.Query(MemorabiliaId));
+        var memorabilia = await QueryRouter.Send(new GetMemorabiliaItem(MemorabiliaId));
 
         ViewModel = new SaveMemorabiliaImagesViewModel(memorabilia.Images, memorabilia.ItemTypeName)
         {

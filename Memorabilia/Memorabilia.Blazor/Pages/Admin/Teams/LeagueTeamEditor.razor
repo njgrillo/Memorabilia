@@ -1,0 +1,31 @@
+﻿@inherits EditTeamItem<SaveTeamLeaguesViewModel, TeamLeagueViewModel>
+
+<EditPage ContinueNavigationPath="@ViewModel.ContinueNavigationPath"
+          EditMode="ViewModel.EditModeType"
+          ExitNavigationPath="@ViewModel.ExitNavigationPath"
+          ImagePath="@ViewModel.ImagePath"
+          ItemName="@ViewModel.PageTitle"
+          Model="ViewModel"
+          OnLoad="OnLoad"
+          OnSave="HandleValidSubmit"
+          PageFooterButtonText="@ViewModel.ExitButtonText"
+          PageFooterNavigationPath="@ViewModel.BackNavigationPath"
+          PageTitle="@ViewModel.PageTitle"
+          TItem="SaveTeamLeaguesViewModel"
+          UseMultipleButtons="true">
+    <TimelineContent>
+        <TeamTimeline DisplayConference="ViewModel.CanHaveConference" 
+                      EditMode="ViewModel.EditModeType"
+                      SportLeagueLevel="ViewModel.SportLeagueLevel"
+                      TeamId="ViewModel.TeamId"
+                      TeamStep="ViewModel.TeamStep" />
+    </TimelineContent>
+    <Content>
+        <DivRowCol12>
+            <Content>
+                <TeamLeagueEditor Leagues="ViewModel.Leagues"
+                                  SportLeagueLevel="ViewModel.SportLeagueLevel" />
+            </Content>
+        </DivRowCol12>
+    </Content>
+</EditPage>

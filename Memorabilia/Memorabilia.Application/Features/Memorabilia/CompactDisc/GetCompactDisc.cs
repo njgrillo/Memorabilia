@@ -1,8 +1,8 @@
 ﻿namespace Memorabilia.Application.Features.Memorabilia.CompactDisc;
 
-public class GetCompactDisc
+public record GetCompactDisc(int MemorabiliaId) : IQuery<CompactDiscViewModel>
 {
-    public class Handler : QueryHandler<Query, CompactDiscViewModel>
+    public class Handler : QueryHandler<GetCompactDisc, CompactDiscViewModel>
     {
         private readonly IMemorabiliaItemRepository _memorabiliaRepository;
 
@@ -11,14 +11,9 @@ public class GetCompactDisc
             _memorabiliaRepository = memorabiliaRepository;
         }
 
-        protected override async Task<CompactDiscViewModel> Handle(Query query)
+        protected override async Task<CompactDiscViewModel> Handle(GetCompactDisc query)
         {
             return new CompactDiscViewModel(await _memorabiliaRepository.Get(query.MemorabiliaId));
         }
-    }
-
-    public class Query : MemorabiliaQuery, IQuery<CompactDiscViewModel>
-    {
-        public Query(int memorabiliaId) : base(memorabiliaId) { }
     }
 }

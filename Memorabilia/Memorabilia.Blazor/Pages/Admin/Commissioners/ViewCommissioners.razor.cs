@@ -1,46 +1,13 @@
-﻿#nullable disable
+﻿namespace Memorabilia.Blazor.Pages.Admin.Commissioners;
 
-namespace Memorabilia.Blazor.Pages.Admin.Commissioners;
-
-public partial class ViewCommissioners
+public partial class ViewCommissioners : ViewItem<CommissionersViewModel, CommissionerViewModel>
 {
-    [Inject]
-    public CommandRouter CommandRouter { get; set; }
-
-    [Inject]
-    public IDialogService DialogService { get; set; }
-
-    [Inject]
-    public NavigationManager NavigationManager { get; set; }
-
-    [Inject]
-    public QueryRouter QueryRouter { get; set; }
-
-    [Inject]
-    public ISnackbar Snackbar { get; set; }
-
-    private string Search;
-    private CommissionersViewModel ViewModel = new();
-
-    private bool FilterFunc1(CommissionerViewModel viewModel) => FilterFunc(viewModel, Search);
-
     protected async Task OnLoad()
     {
-        ViewModel = await QueryRouter.Send(new GetCommissioners());
+        await OnLoad(new GetCommissioners());
     }
 
-    protected async Task ShowDeleteConfirm(int id)
-    {
-        var dialog = DialogService.Show<DeleteDialog>("Delete Commissioner");
-        var result = await dialog.Result;
-
-        if (result.Cancelled)
-            return;
-
-        await Delete(id);
-    }
-
-    private async Task Delete(int id)
+    protected override async Task Delete(int id)
     {
         var deletedItem = ViewModel.Commissioners.Single(Commissioner => Commissioner.Id == id);
         var viewModel = new SaveCommissionerViewModel(deletedItem)
@@ -52,10 +19,10 @@ public partial class ViewCommissioners
 
         ViewModel.Commissioners.Remove(deletedItem);
 
-        Snackbar.Add($"{ViewModel.ItemTitle} was deleted successfully!", Severity.Success);
+        ShowDeleteSuccessfulMessage(ViewModel.ItemTitle);
     }
 
-    private static bool FilterFunc(CommissionerViewModel viewModel, string search)
+    protected override bool FilterFunc(CommissionerViewModel viewModel, string search)
     {
         var isYear = int.TryParse(search, out var year);
 

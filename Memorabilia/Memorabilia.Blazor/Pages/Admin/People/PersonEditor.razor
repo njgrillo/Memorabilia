@@ -1,0 +1,98 @@
+﻿@inherits EditItem<SavePersonViewModel, PersonViewModel>
+
+<EditPage ContinueNavigationPath="@ViewModel.ContinueNavigationPath"
+          EditMode="ViewModel.EditModeType"
+          ExitNavigationPath="@ViewModel.ExitNavigationPath"
+          ImagePath="@ViewModel.ImagePath"
+          ItemName="@ViewModel.ItemTitle"
+          Model="ViewModel"
+          OnLoad="OnLoad"
+          OnSave="HandleValidSubmit"
+          PageFooterButtonText="@ViewModel.ExitButtonText"
+          PageFooterNavigationPath="@ViewModel.BackNavigationPath"
+          PageTitle="@ViewModel.PageTitle"
+          TItem="SavePersonViewModel"
+          UseMultipleButtons="true">
+    <TimelineContent>
+        <PersonTimeline EditMode="ViewModel.EditModeType"
+                        PersonId="ViewModel.Id"
+                        PersonStep="ViewModel.PersonStep" />
+    </TimelineContent>
+    <Content>        
+        <DivRowCol3>
+            <Content>
+                <MudTextField @bind-Value="ViewModel.FirstName" 
+                              @onblur="OnNameFieldBlur"
+                              Label="First Name" 
+                              Variant="Variant.Outlined" />
+            </Content>
+            <ContentColumn2>
+                <MudTextField @bind-Value="ViewModel.LastName" 
+                              @onblur="OnNameFieldBlur"
+                              Label="Last Name" 
+                              Variant="Variant.Outlined" />
+            </ContentColumn2>
+        </DivRowCol3>
+        <DivRowCol3>
+            <Content>
+                <MudTextField @bind-Value="ViewModel.MiddleName"
+                              Label="Middle Name" 
+                              Variant="Variant.Outlined" />
+            </Content>
+            <ContentColumn2>
+                <MudTextField @bind-Value="ViewModel.Suffix"
+                              @onblur="OnNameFieldBlur"
+                              Label="Suffix" 
+                              Variant="Variant.Outlined" />
+            </ContentColumn2>
+        </DivRowCol3>
+        <DivRowCol3>
+            <Content>
+                <MudTextField @bind-Value="ViewModel.Nickname"
+                              @onblur="OnNameFieldBlur"
+                              Label="Calling Name" 
+                              Variant="Variant.Outlined" />
+            </Content>
+            <ContentColumn2>
+                <MudTextField @bind-Value="ViewModel.LegalName"
+                              Label="Legal Name" 
+                              Variant="Variant.Outlined" />
+            </ContentColumn2>
+        </DivRowCol3>
+        <DivRowCol3>
+            <Content>
+                <MudTextField @bind-Value="ViewModel.DisplayName"
+                              Label="Display Name" 
+                              Variant="Variant.Outlined" />
+            </Content>
+            <ContentColumn2>
+                <MudTextField @bind-Value="ViewModel.ProfileName"
+                              Label="Profile Name" 
+                              Variant="Variant.Outlined" />
+            </ContentColumn2>
+        </DivRowCol3>
+        <DivRowCol3>
+            <Content>
+                <MudDatePicker @bind-Date="ViewModel.BirthDate"
+                               DateFormat="MM/dd/yyyy"
+                               Editable="true"
+                               Label="Birth Date"
+                               Mask="@(new DateMask("MM/dd/yyyy"))" 
+                               Variant="Variant.Outlined" />
+            </Content>
+            <ContentColumn2>
+                <MudDatePicker @bind-Date="ViewModel.DeathDate" 
+                               DateFormat="MM/dd/yyyy"
+                               Editable="true"
+                               Label="Death Date"
+                               Mask="@(new DateMask("MM/dd/yyyy"))" 
+                               Variant="Variant.Outlined" />
+            </ContentColumn2>
+        </DivRowCol3>
+        <DivRowCol12>
+            <Content>
+                <PersonNicknameEditor Nicknames="ViewModel.Nicknames" />
+            </Content>
+        </DivRowCol12>
+    </Content>
+</EditPage>

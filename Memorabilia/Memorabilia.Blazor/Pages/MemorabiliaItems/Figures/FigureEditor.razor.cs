@@ -4,7 +4,7 @@ public partial class FigureEditor : MemorabiliaItem<SaveFigureViewModel>
 {
     protected async Task OnLoad()
     {
-        var viewModel = await QueryRouter.Send(new GetFigure.Query(MemorabiliaId));
+        var viewModel = await QueryRouter.Send(new GetFigure(MemorabiliaId));
 
         if (viewModel.Brand == null)
             return;

@@ -1,8 +1,8 @@
 ﻿namespace Memorabilia.Application.Features.Memorabilia.Book;
 
-public class GetBook
+public record GetBook(int MemorabiliaId) : IQuery<BookViewModel>
 {
-    public class Handler : QueryHandler<Query, BookViewModel>
+    public class Handler : QueryHandler<GetBook, BookViewModel>
     {
         private readonly IMemorabiliaItemRepository _memorabiliaRepository;
 
@@ -11,14 +11,9 @@ public class GetBook
             _memorabiliaRepository = memorabiliaRepository;
         }
 
-        protected override async Task<BookViewModel> Handle(Query query)
+        protected override async Task<BookViewModel> Handle(GetBook query)
         {
             return new BookViewModel(await _memorabiliaRepository.Get(query.MemorabiliaId));
         }
-    }
-
-    public class Query : MemorabiliaQuery, IQuery<BookViewModel>
-    {
-        public Query(int memorabiliaId) : base(memorabiliaId) { }
     }
 }

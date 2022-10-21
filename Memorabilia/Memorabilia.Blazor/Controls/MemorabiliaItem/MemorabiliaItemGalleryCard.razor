@@ -1,11 +1,18 @@
 ﻿<DivPad5>
     <Content>
         <MudTooltip Text="@TooltipText">
-            <MudCard>
-                <MudCardMedia @onclick="OnPrimaryImageClick"
-                      Class="rounded-lg can-click"
-                             Height="300" 
-                             Image="@PrimaryImagePath" />
+            <MudCard Elevation="20">
+                <MudCardContent>
+                    <MudText Typo="Typo.h5">@Title</MudText>
+                </MudCardContent>
+                <MudCardContent>
+                    <MudCard Elevation="10">
+                        <MudCardMedia @onclick="OnPrimaryImageClick"
+                                      Class="rounded-lg can-click"
+                                      Height="300"
+                                      Image="@PrimaryImagePath" />
+                    </MudCard>                    
+                </MudCardContent>                
                 <MudCardContent>
                     <div class="row">
                         <Iterations Items="MemorabiliaItem.Autographs" Context="autograph">
@@ -18,16 +25,14 @@
                             </div>                        
                         </Iterations>
                     </div>
-
-                    <br />
-                    <MudText Typo="Typo.h5">@Title</MudText>
+                    <br />                    
                     <MudText Typo="Typo.body2">@Subtitle</MudText>
                     <MudText Typo="Typo.body2">@Description</MudText>
                 </MudCardContent>
                 <MudCardActions>
                     <MudButton @onclick="OnEditClick"
                                Color="MudBlazor.Color.Primary"
-                               Variant="Variant.Text">Edit</MudButton>
+                               Variant="Variant.Text">Edit Memorabilia</MudButton>
                 </MudCardActions>
             </MudCard>
         </MudTooltip>        

@@ -1,8 +1,8 @@
 ﻿namespace Memorabilia.Application.Features.Memorabilia.WristBand;
 
-public class GetWristBand
+public record GetWristBand(int MemorabiliaId) : IQuery<WristBandViewModel>
 {
-    public class Handler : QueryHandler<Query, WristBandViewModel>
+    public class Handler : QueryHandler<GetWristBand, WristBandViewModel>
     {
         private readonly IMemorabiliaItemRepository _memorabiliaRepository;
 
@@ -11,14 +11,9 @@ public class GetWristBand
             _memorabiliaRepository = memorabiliaRepository;
         }
 
-        protected override async Task<WristBandViewModel> Handle(Query query)
+        protected override async Task<WristBandViewModel> Handle(GetWristBand query)
         {
             return new WristBandViewModel(await _memorabiliaRepository.Get(query.MemorabiliaId));
         }
-    }
-
-    public class Query : MemorabiliaQuery, IQuery<WristBandViewModel>
-    {
-        public Query(int memorabiliaId) : base(memorabiliaId) { }
     }
 }

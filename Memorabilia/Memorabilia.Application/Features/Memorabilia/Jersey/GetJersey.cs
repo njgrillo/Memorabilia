@@ -1,8 +1,8 @@
 ﻿namespace Memorabilia.Application.Features.Memorabilia.Jersey;
 
-public class GetJersey
+public record GetJersey(int MemorabiliaId) : IQuery<JerseyViewModel>
 {
-    public class Handler : QueryHandler<Query, JerseyViewModel>
+    public class Handler : QueryHandler<GetJersey, JerseyViewModel>
     {
         private readonly IMemorabiliaItemRepository _memorabiliaRepository;
 
@@ -11,14 +11,9 @@ public class GetJersey
             _memorabiliaRepository = memorabiliaRepository;
         }
 
-        protected override async Task<JerseyViewModel> Handle(Query query)
+        protected override async Task<JerseyViewModel> Handle(GetJersey query)
         {
             return new JerseyViewModel(await _memorabiliaRepository.Get(query.MemorabiliaId));
         }
-    }
-
-    public class Query : MemorabiliaQuery, IQuery<JerseyViewModel>
-    {
-        public Query(int memorabiliaId) : base(memorabiliaId) { }
     }
 }

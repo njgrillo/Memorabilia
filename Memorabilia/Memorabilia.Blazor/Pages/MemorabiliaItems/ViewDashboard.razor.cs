@@ -14,7 +14,7 @@ namespace Memorabilia.Blazor.Pages.MemorabiliaItems
 
         protected async Task OnLoad()
         {
-            _viewModel = await QueryRouter.Send(new GetDashboard.Query(UserId));
+            _viewModel = await QueryRouter.Send(new GetDashboard(UserId));
         }
     }
 }

@@ -1,8 +1,8 @@
 ﻿namespace Memorabilia.Application.Features.Memorabilia.Canvas;
 
-public class GetCanvas
+public record GetCanvas(int MemorabiliaId) : IQuery<CanvasViewModel>
 {
-    public class Handler : QueryHandler<Query, CanvasViewModel>
+    public class Handler : QueryHandler<GetCanvas, CanvasViewModel>
     {
         private readonly IMemorabiliaItemRepository _memorabiliaRepository;
 
@@ -11,14 +11,9 @@ public class GetCanvas
             _memorabiliaRepository = memorabiliaRepository;
         }
 
-        protected override async Task<CanvasViewModel> Handle(Query query)
+        protected override async Task<CanvasViewModel> Handle(GetCanvas query)
         {
             return new CanvasViewModel(await _memorabiliaRepository.Get(query.MemorabiliaId));
         }
-    }
-
-    public class Query : MemorabiliaQuery, IQuery<CanvasViewModel>
-    {
-        public Query(int memorabiliaId) : base(memorabiliaId) { }
     }
 }

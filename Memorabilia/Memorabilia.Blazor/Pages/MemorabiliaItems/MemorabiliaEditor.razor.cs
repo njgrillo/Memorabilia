@@ -34,7 +34,7 @@ namespace Memorabilia.Blazor.Pages.MemorabiliaItems
                 return;
             }
 
-            _viewModel = new SaveMemorabiliaItemViewModel(await QueryRouter.Send(new GetMemorabiliaItem.Query(Id)));
+            _viewModel = new SaveMemorabiliaItemViewModel(await QueryRouter.Send(new GetMemorabiliaItem(Id)));
             _canEditItemType = false;
             _displayNumbered = _viewModel.IsNumbered;
         }

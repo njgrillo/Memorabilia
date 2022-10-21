@@ -1,8 +1,8 @@
 ﻿namespace Memorabilia.Application.Features.Memorabilia.HockeyStick;
 
-public class GetHockeyStick
+public record GetHockeyStick(int MemorabiliaId) : IQuery<HockeyStickViewModel>
 {
-    public class Handler : QueryHandler<Query, HockeyStickViewModel>
+    public class Handler : QueryHandler<GetHockeyStick, HockeyStickViewModel>
     {
         private readonly IMemorabiliaItemRepository _memorabiliaRepository;
 
@@ -11,14 +11,9 @@ public class GetHockeyStick
             _memorabiliaRepository = memorabiliaRepository;
         }
 
-        protected override async Task<HockeyStickViewModel> Handle(Query query)
+        protected override async Task<HockeyStickViewModel> Handle(GetHockeyStick query)
         {
             return new HockeyStickViewModel(await _memorabiliaRepository.Get(query.MemorabiliaId));
         }
-    }
-
-    public class Query : MemorabiliaQuery, IQuery<HockeyStickViewModel>
-    {
-        public Query(int memorabiliaId) : base(memorabiliaId) { }
     }
 }

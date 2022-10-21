@@ -4,7 +4,7 @@ public partial class PuckEditor : MemorabiliaItem<SavePuckViewModel>
 {
     protected async Task OnLoad()
     {
-        var viewModel = await QueryRouter.Send(new GetPuck.Query(MemorabiliaId));
+        var viewModel = await QueryRouter.Send(new GetPuck(MemorabiliaId));
 
         if (viewModel.Brand == null)
             return;

@@ -1,8 +1,8 @@
 ﻿namespace Memorabilia.Application.Features.Memorabilia.Bat;
 
-public class GetBat
+public record GetBat(int MemorabiliaId) : IQuery<BatViewModel>
 {
-    public class Handler : QueryHandler<Query, BatViewModel>
+    public class Handler : QueryHandler<GetBat, BatViewModel>
     {
         private readonly IMemorabiliaItemRepository _memorabiliaRepository;
 
@@ -11,14 +11,9 @@ public class GetBat
             _memorabiliaRepository = memorabiliaRepository;
         }
 
-        protected override async Task<BatViewModel> Handle(Query query)
+        protected override async Task<BatViewModel> Handle(GetBat query)
         {
             return new BatViewModel(await _memorabiliaRepository.Get(query.MemorabiliaId));
         }
-    }
-
-    public class Query : MemorabiliaQuery, IQuery<BatViewModel>
-    {
-        public Query(int memorabiliaId) : base(memorabiliaId) { }
     }
 }

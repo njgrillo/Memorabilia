@@ -4,7 +4,7 @@ public partial class HatEditor : MemorabiliaItem<SaveHatViewModel>
 {
     protected async Task OnLoad()
     {
-        var viewModel = await QueryRouter.Send(new GetHat.Query(MemorabiliaId));
+        var viewModel = await QueryRouter.Send(new GetHat(MemorabiliaId));
 
         if (viewModel.Brand == null)
             return;

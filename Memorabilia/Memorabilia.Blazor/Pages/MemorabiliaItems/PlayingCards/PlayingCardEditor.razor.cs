@@ -4,7 +4,7 @@ public partial class PlayingCardEditor : MemorabiliaItem<SavePlayingCardViewMode
 {
     protected async Task OnLoad()
     {
-        var viewModel = await QueryRouter.Send(new GetPlayingCard.Query(MemorabiliaId));
+        var viewModel = await QueryRouter.Send(new GetPlayingCard(MemorabiliaId));
 
         if (viewModel.Size == null)
             return;

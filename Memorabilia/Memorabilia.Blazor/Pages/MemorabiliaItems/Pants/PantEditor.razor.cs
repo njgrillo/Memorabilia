@@ -4,7 +4,7 @@ public partial class PantEditor : MemorabiliaItem<SavePantViewModel>
 {
     protected async Task OnLoad()
     {
-        var viewModel = await QueryRouter.Send(new GetPant.Query(MemorabiliaId));
+        var viewModel = await QueryRouter.Send(new GetPant(MemorabiliaId));
 
         if (viewModel.Brand == null)
             return;

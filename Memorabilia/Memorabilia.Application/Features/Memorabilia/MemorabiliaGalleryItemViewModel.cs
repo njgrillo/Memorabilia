@@ -21,6 +21,8 @@ public class MemorabiliaGalleryItemViewModel
 
     public int Id => _memorabilia.Id;
 
+    public Domain.Entities.Memorabilia Memorabilia => _memorabilia;
+
     public string PrimaryImageNavigationPath => $"/Memorabilia/Image/{EditModeType.Update.Name}/{Id}";
 
     public string PrimaryImagePath

@@ -1,8 +1,8 @@
 ﻿namespace Memorabilia.Application.Features.Memorabilia.Ticket;
 
-public class GetTicket
+public record GetTicket(int MemorabiliaId) : IQuery<TicketViewModel>
 {
-    public class Handler : QueryHandler<Query, TicketViewModel>
+    public class Handler : QueryHandler<GetTicket, TicketViewModel>
     {
         private readonly IMemorabiliaItemRepository _memorabiliaRepository;
 
@@ -11,14 +11,9 @@ public class GetTicket
             _memorabiliaRepository = memorabiliaRepository;
         }
 
-        protected override async Task<TicketViewModel> Handle(Query query)
+        protected override async Task<TicketViewModel> Handle(GetTicket query)
         {
             return new TicketViewModel(await _memorabiliaRepository.Get(query.MemorabiliaId));
         }
-    }
-
-    public class Query : MemorabiliaQuery, IQuery<TicketViewModel>
-    {
-        public Query(int memorabiliaId) : base(memorabiliaId) { }
     }
 }

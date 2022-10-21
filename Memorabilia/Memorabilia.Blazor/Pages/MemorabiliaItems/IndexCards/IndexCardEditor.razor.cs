@@ -4,7 +4,7 @@ public partial class IndexCardEditor : MemorabiliaItem<SaveIndexCardViewModel>
 {
     protected async Task OnLoad()
     {
-        var viewModel = await QueryRouter.Send(new GetIndexCard.Query(MemorabiliaId));
+        var viewModel = await QueryRouter.Send(new GetIndexCard(MemorabiliaId));
 
         if (viewModel.Size == null)
             return;

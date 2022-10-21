@@ -1,8 +1,8 @@
 ﻿namespace Memorabilia.Application.Features.Memorabilia.Poster;
 
-public class GetPoster
+public record GetPoster(int MemorabiliaId) : IQuery<PosterViewModel>
 {
-    public class Handler : QueryHandler<Query, PosterViewModel>
+    public class Handler : QueryHandler<GetPoster, PosterViewModel>
     {
         private readonly IMemorabiliaItemRepository _memorabiliaRepository;
 
@@ -11,14 +11,9 @@ public class GetPoster
             _memorabiliaRepository = memorabiliaRepository;
         }
 
-        protected override async Task<PosterViewModel> Handle(Query query)
+        protected override async Task<PosterViewModel> Handle(GetPoster query)
         {
             return new PosterViewModel(await _memorabiliaRepository.Get(query.MemorabiliaId));
         }
-    }
-
-    public class Query : MemorabiliaQuery, IQuery<PosterViewModel>
-    {
-        public Query(int memorabiliaId) : base(memorabiliaId) { }
     }
 }

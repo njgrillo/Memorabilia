@@ -4,7 +4,7 @@ public partial class TennisRacketEditor : MemorabiliaItem<SaveTennisRacketViewMo
 {
     protected async Task OnLoad()
     {
-        var viewModel = await QueryRouter.Send(new GetTennisRacket.Query(MemorabiliaId));
+        var viewModel = await QueryRouter.Send(new GetTennisRacket(MemorabiliaId));
 
         if (viewModel.Brand == null)
             return;

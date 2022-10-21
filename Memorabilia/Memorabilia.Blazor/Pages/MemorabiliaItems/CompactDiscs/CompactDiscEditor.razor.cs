@@ -4,7 +4,7 @@ public partial class CompactDiscEditor : MemorabiliaItem<SaveCompactDiscViewMode
 {
     protected async Task OnLoad()
     {
-        var viewModel = await QueryRouter.Send(new GetCompactDisc.Query(MemorabiliaId));
+        var viewModel = await QueryRouter.Send(new GetCompactDisc(MemorabiliaId));
 
         ViewModel = new SaveCompactDiscViewModel(viewModel);
     }

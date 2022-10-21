@@ -4,7 +4,7 @@ public partial class TicketEditor : MemorabiliaItem<SaveTicketViewModel>
 {
     protected async Task OnLoad()
     {
-        var viewModel = await QueryRouter.Send(new GetTicket.Query(MemorabiliaId));
+        var viewModel = await QueryRouter.Send(new GetTicket(MemorabiliaId));
 
         if (viewModel.Size == null)
             return;

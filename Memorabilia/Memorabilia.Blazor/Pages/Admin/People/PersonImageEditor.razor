@@ -1,0 +1,61 @@
+﻿@inherits EditPersonItem<SavePersonImageViewModel, PersonImageViewModel>
+
+<EditPage ContinueNavigationPath="@ViewModel.ContinueNavigationPath"
+          DisplaySaveContinueButton="false"
+          EditMode="ViewModel.EditModeType"
+          ExitNavigationPath="@ViewModel.ExitNavigationPath"
+          ImagePath="@ViewModel.PageImagePath" 
+          ItemName="@ViewModel.ItemTitle"
+          Model="ViewModel"
+          OnLoad="OnLoad"
+          OnSave="HandleValidSubmit"
+          PageFooterButtonText="@ViewModel.ExitButtonText"
+          PageFooterNavigationPath="@ViewModel.BackNavigationPath"
+          PageTitle="@ViewModel.PageTitle"
+          TItem="SavePersonImageViewModel"
+          UseMultipleButtons="true">
+    <TimelineContent>
+        <PersonTimeline EditMode="ViewModel.EditModeType"
+                        PersonId="ViewModel.PersonId"
+                        PersonStep="ViewModel.PersonStep" />
+    </TimelineContent>
+    <Content>
+        <DivRowCol12>
+            <Content>
+                <DivRowCol3>
+                    <Content>
+                        <InputFile id="fileInput" accept="image/*" hidden
+                                                  OnChange="@LoadFile"   />
+                        <MudFab Color="MudBlazor.Color.Secondary"
+                                HtmlTag="label"
+                                Icon="@Icons.Filled.Image"
+                                Label="Load picture"
+                                for="fileInput" />  
+                    </Content>
+                </DivRowCol3>
+                <DivRowCol3>
+                    <Content>
+                        <PrettyBlazor.Condition Evaluation="_hasImage">
+                            <Match>
+                                <ImageEditor CanRemove="true"
+                                             FileName=""
+                                             HasPrimary="false"
+                                             ImageFilePath="@ViewModel.ImagePath"
+                                             ImageType="ImageType.Primary"
+                                             OnRemove="Remove" /> 
+                            </Match>
+                        </PrettyBlazor.Condition>
+                    </Content>
+                </DivRowCol3>
+            </Content>
+        </DivRowCol12>
+    </Content>
+    <AdditionalButtons>
+        <MudButton ButtonType="MudBlazor.ButtonType.Submit" 
+                   Color="MudBlazor.Color.Info"
+                   OnClick="OnSaveReturnClick"
+                   Size="MudBlazor.Size.Medium"   
+                   StartIcon="@Icons.Material.Filled.Save"  
+                   Variant="Variant.Filled">Save & Return to People</MudButton>
+    </AdditionalButtons>
+</EditPage>

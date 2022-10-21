@@ -4,7 +4,7 @@ public partial class BatEditor : MemorabiliaItem<SaveBatViewModel>
 {
     protected async Task OnLoad()
     {
-        var viewModel = await QueryRouter.Send(new GetBat.Query(MemorabiliaId));
+        var viewModel = await QueryRouter.Send(new GetBat(MemorabiliaId));
 
         if (viewModel.Brand == null)
             return;

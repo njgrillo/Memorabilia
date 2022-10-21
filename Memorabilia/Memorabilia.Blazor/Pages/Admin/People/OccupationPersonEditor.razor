@@ -1,0 +1,37 @@
+﻿@inherits EditPersonItem<SavePersonOccupationsViewModel, PersonOccupationViewModel>
+
+<EditPage ContinueNavigationPath="@ViewModel.ContinueNavigationPath"
+          EditMode="ViewModel.EditModeType"
+          ExitNavigationPath="@ViewModel.ExitNavigationPath"
+          ImagePath="@ViewModel.ImagePath"
+          ItemName="@ViewModel.ItemTitle"
+          Model="ViewModel"
+          OnLoad="OnLoad"
+          OnSave="HandleValidSubmit"
+          PageFooterButtonText="@ViewModel.ExitButtonText"
+          PageFooterNavigationPath="@ViewModel.BackNavigationPath"
+          PageTitle="@ViewModel.PageTitle"
+          TItem="SavePersonOccupationsViewModel"
+          UseMultipleButtons="true">
+    <TimelineContent>
+        <PersonTimeline EditMode="ViewModel.EditModeType"
+                        PersonId="ViewModel.PersonId"
+                        PersonStep="ViewModel.PersonStep" />
+    </TimelineContent>
+    <Content>
+        <DivRowCol12>
+            <Content>
+                <MudText Typo="Typo.h3">Occupations</MudText>
+                <PersonOccupationSelector Occupations="ViewModel.Occupations" />
+            </Content>
+        </DivRowCol12>
+        <br />
+        @*<DivRowCol12 Hidden="@(!ViewModel.HasAthleteOccupation)">*@
+        <DivRowCol12>
+            <Content>
+                <MudText Typo="Typo.h3">Sports</MudText>
+                <PersonSportEditor Sports="ViewModel.Sports" />
+            </Content>
+        </DivRowCol12>
+    </Content>
+</EditPage>

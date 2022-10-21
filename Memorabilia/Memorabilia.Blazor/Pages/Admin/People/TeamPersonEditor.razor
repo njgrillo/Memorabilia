@@ -1,0 +1,30 @@
+﻿@inherits EditPersonItem<SavePersonTeamsViewModel, PersonTeamViewModel>
+
+<EditPage ContinueNavigationPath="@ViewModel.ContinueNavigationPath"
+          EditMode="ViewModel.EditModeType"
+          ExitNavigationPath="@ViewModel.ExitNavigationPath"
+          ImagePath="@ViewModel.ImagePath"
+          ItemName="@ViewModel.ItemTitle"
+          Model="ViewModel"
+          OnLoad="OnLoad"
+          OnSave="HandleValidSubmit"
+          PageFooterButtonText="@ViewModel.ExitButtonText"
+          PageFooterNavigationPath="@ViewModel.BackNavigationPath"
+          PageTitle="@ViewModel.PageTitle"
+          TItem="SavePersonTeamsViewModel"
+          UseMultipleButtons="true">
+    <TimelineContent>
+        <PersonTimeline EditMode="ViewModel.EditModeType"
+                        PersonId="ViewModel.PersonId"
+                        PersonStep="ViewModel.PersonStep" />
+    </TimelineContent>
+    <Content>
+        <DivRowCol12>
+            <Content>
+                <PersonTeamSelector PersonId="PersonId" 
+                                    SportIds="ViewModel.SportIds.ToArray()"
+                                    Teams="ViewModel.Teams" />
+            </Content>
+        </DivRowCol12>
+    </Content>
+</EditPage>

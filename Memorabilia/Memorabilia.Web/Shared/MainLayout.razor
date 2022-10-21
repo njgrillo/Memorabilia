@@ -1,7 +1,5 @@
 ﻿@inherits LayoutComponentBase
 
-@inject NavigationManager NavigationManager;
-
 <MudThemeProvider />
 <MudDialogProvider />
 <MudSnackbarProvider />
@@ -40,27 +38,3 @@
         @Body
     </MudMainContent>
 </MudLayout>
-
-@code {
-    private bool _drawerOpen = true;
-
-    public void DrawerToggle()
-    {
-        _drawerOpen = !_drawerOpen;
-    }
-
-    public void Login()
-    {
-        NavigationManager.NavigateTo("Login");
-    }
-
-    public void Logout()
-    {
-        NavigationManager.NavigateTo("Logout");
-    }
-
-    public void UserSettings()
-    {
-        NavigationManager.NavigateTo("Settings");
-    }
-}

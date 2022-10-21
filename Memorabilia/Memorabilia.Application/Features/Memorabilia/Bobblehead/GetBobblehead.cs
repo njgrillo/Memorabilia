@@ -1,8 +1,8 @@
 ﻿namespace Memorabilia.Application.Features.Memorabilia.Bobblehead;
 
-public class GetBobblehead
+public record GetBobblehead(int MemorabiliaId) : IQuery<BobbleheadViewModel>
 {
-    public class Handler : QueryHandler<Query, BobbleheadViewModel>
+    public class Handler : QueryHandler<GetBobblehead, BobbleheadViewModel>
     {
         private readonly IMemorabiliaItemRepository _memorabiliaRepository;
 
@@ -11,14 +11,9 @@ public class GetBobblehead
             _memorabiliaRepository = memorabiliaRepository;
         }
 
-        protected override async Task<BobbleheadViewModel> Handle(Query query)
+        protected override async Task<BobbleheadViewModel> Handle(GetBobblehead query)
         {
             return new BobbleheadViewModel(await _memorabiliaRepository.Get(query.MemorabiliaId));
         }
-    }
-
-    public class Query : MemorabiliaQuery, IQuery<BobbleheadViewModel>
-    {
-        public Query(int memorabiliaId) : base(memorabiliaId) { }
     }
 }

@@ -1,8 +1,8 @@
 ﻿namespace Memorabilia.Application.Features.Memorabilia.Basketball;
 
-public class GetBasketball
+public record GetBasketball(int MemorabiliaId) : IQuery<BasketballViewModel>
 {
-    public class Handler : QueryHandler<Query, BasketballViewModel>
+    public class Handler : QueryHandler<GetBasketball, BasketballViewModel>
     {
         private readonly IMemorabiliaItemRepository _memorabiliaRepository;
 
@@ -11,14 +11,9 @@ public class GetBasketball
             _memorabiliaRepository = memorabiliaRepository;
         }
 
-        protected override async Task<BasketballViewModel> Handle(Query query)
+        protected override async Task<BasketballViewModel> Handle(GetBasketball query)
         {
             return new BasketballViewModel(await _memorabiliaRepository.Get(query.MemorabiliaId));
         }
-    }
-
-    public class Query : MemorabiliaQuery, IQuery<BasketballViewModel>
-    {
-        public Query(int memorabiliaId) : base(memorabiliaId) { }
     }
 }

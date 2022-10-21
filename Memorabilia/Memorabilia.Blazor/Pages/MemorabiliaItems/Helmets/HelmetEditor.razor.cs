@@ -4,7 +4,7 @@ public partial class HelmetEditor : MemorabiliaItem<SaveHelmetViewModel>
 {
     protected async Task OnLoad()
     {
-        var viewModel = await QueryRouter.Send(new GetHelmet.Query(MemorabiliaId));
+        var viewModel = await QueryRouter.Send(new GetHelmet(MemorabiliaId));
 
         if (viewModel.Brand == null)
         {

@@ -1,0 +1,78 @@
+﻿@inherits ViewItem<PeopleViewModel, PersonViewModel>
+
+<PageView AddRoute="@ViewModel.AddRoute" 
+          AddTitle="@ViewModel.AddTitle"
+          DisplayPageHeader="false"
+          NavigationPath="@ViewModel.ExitNavigationPath"
+          OnLoad="OnLoad"
+          PageTitle="@ViewModel.PageTitle">
+    <Content>
+        <DivPad2>
+            <Content>
+                <MudTable Bordered="false"
+                          Dense="false" 
+                          Filter="new Func<PersonViewModel,bool>(FilterFunc1)"
+                          Hover="true"
+                          Items="@ViewModel.People.OrderBy(person => person.DisplayName)"    
+                          Striped="true">
+                    <ToolBarContent>
+                        <MudText Typo="Typo.h6">@ViewModel.PageTitle</MudText>
+                        <MudSpacer />
+                        <MudTextField @bind-Value="Search"
+                                      Adornment="Adornment.Start"
+                                      AdornmentIcon="@Icons.Material.Filled.Search"
+                                      Class="mt-0"
+                                      IconSize="MudBlazor.Size.Medium"
+                                      Placeholder="Search" />
+                    </ToolBarContent>
+                    <HeaderContent>
+                        <MudTh></MudTh>
+                        <MudTh>Display Name</MudTh>
+                        <MudTh>First Name</MudTh>
+                        <MudTh>Last Name</MudTh>
+                        <MudTh>Middle Name</MudTh>
+                        <MudTh>Suffix</MudTh>
+                        <MudTh>Calling Name</MudTh>
+                        <MudTh>Legal Name</MudTh>
+                        <MudTh>Birth Date</MudTh>
+                        <MudTh>Death Date</MudTh>
+                        <MudTh></MudTh>
+                    </HeaderContent>
+                    <RowTemplate>
+                        <MudTd DataLabel="">
+                            <MudTooltip>
+                                <MudImage @onclick="@(_ => NavigationManager.NavigateTo($"People/Image/{EditModeType.Update.Name}/{context.Id}"))" 
+                                          Class="rounded-lg can-click" 
+                                          Elevation="5" 
+                                          Height="200"
+                                          ObjectFit="@ObjectFit.Cover"
+                                          Src="@context.PersonImagePath"
+                                          Width="200" />
+                            </MudTooltip> 
+                        </MudTd>
+                        <MudTd DataLabel="Display Name">@context.DisplayName</MudTd>
+                        <MudTd DataLabel="First Name">@context.FirstName</MudTd>
+                        <MudTd DataLabel="Last Name">@context.LastName</MudTd>
+                        <MudTd DataLabel="Middle Name">@context.MiddleName</MudTd>
+                        <MudTd DataLabel="Suffix">@context.Suffix</MudTd>
+                        <MudTd DataLabel="Nickname">@context.Nickname</MudTd>
+                        <MudTd DataLabel="Legal Name">@context.LegalName</MudTd>
+                        <MudTd DataLabel="Birth Date">@context.FormattedBirthDate</MudTd>
+                        <MudTd DataLabel="Death Date">@context.FormattedDeathDate</MudTd>
+                        <MudTd DataLabel="">
+                            <GridEditButton NavigationPath="@($"People/{EditModeType.Update.Name}/{context.Id}")" />    
+                            <MudTooltip Text="Delete">
+                                <MudFab Color="MudBlazor.Color.Secondary"
+                                        Icon="@Icons.Outlined.DeleteOutline"
+                                        OnClick="@(_ => ShowDeleteConfirm(context.Id, "Delete Person"))" />
+                            </MudTooltip>
+                        </MudTd>
+                    </RowTemplate>
+                    <PagerContent>
+                        <MudTablePager />
+                    </PagerContent>
+                </MudTable>
+            </Content>
+        </DivPad2>
+    </Content>
+</PageView>

@@ -1,8 +1,8 @@
 ﻿namespace Memorabilia.Application.Features.Memorabilia.Trunks;
 
-public class GetTrunk
+public record GetTrunk(int MemorabiliaId) : IQuery<TrunkViewModel>
 {
-    public class Handler : QueryHandler<Query, TrunkViewModel>
+    public class Handler : QueryHandler<GetTrunk, TrunkViewModel>
     {
         private readonly IMemorabiliaItemRepository _memorabiliaRepository;
 
@@ -11,14 +11,9 @@ public class GetTrunk
             _memorabiliaRepository = memorabiliaRepository;
         }
 
-        protected override async Task<TrunkViewModel> Handle(Query query)
+        protected override async Task<TrunkViewModel> Handle(GetTrunk query)
         {
             return new TrunkViewModel(await _memorabiliaRepository.Get(query.MemorabiliaId));
         }
-    }
-
-    public class Query : MemorabiliaQuery, IQuery<TrunkViewModel>
-    {
-        public Query(int memorabiliaId) : base(memorabiliaId) { }
     }
 }

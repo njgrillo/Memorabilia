@@ -1,8 +1,8 @@
 ﻿namespace Memorabilia.Application.Features.Memorabilia.FirstDayCover;
 
-public class GetFirstDayCover
+public record GetFirstDayCover(int MemorabiliaId) : IQuery<FirstDayCoverViewModel>
 {
-    public class Handler : QueryHandler<Query, FirstDayCoverViewModel>
+    public class Handler : QueryHandler<GetFirstDayCover, FirstDayCoverViewModel>
     {
         private readonly IMemorabiliaItemRepository _memorabiliaRepository;
 
@@ -11,14 +11,9 @@ public class GetFirstDayCover
             _memorabiliaRepository = memorabiliaRepository;
         }
 
-        protected override async Task<FirstDayCoverViewModel> Handle(Query query)
+        protected override async Task<FirstDayCoverViewModel> Handle(GetFirstDayCover query)
         {
             return new FirstDayCoverViewModel(await _memorabiliaRepository.Get(query.MemorabiliaId));
         }
-    }
-
-    public class Query : MemorabiliaQuery, IQuery<FirstDayCoverViewModel>
-    {
-        public Query(int memorabiliaId) : base(memorabiliaId) { }
     }
 }

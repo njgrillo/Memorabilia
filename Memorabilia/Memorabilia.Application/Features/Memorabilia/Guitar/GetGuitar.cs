@@ -1,8 +1,8 @@
 ﻿namespace Memorabilia.Application.Features.Memorabilia.Guitar;
 
-public class GetGuitar
+public record GetGuitar(int MemorabiliaId) : IQuery<GuitarViewModel>
 {
-    public class Handler : QueryHandler<Query, GuitarViewModel>
+    public class Handler : QueryHandler<GetGuitar, GuitarViewModel>
     {
         private readonly IMemorabiliaItemRepository _memorabiliaRepository;
 
@@ -11,14 +11,9 @@ public class GetGuitar
             _memorabiliaRepository = memorabiliaRepository;
         }
 
-        protected override async Task<GuitarViewModel> Handle(Query query)
+        protected override async Task<GuitarViewModel> Handle(GetGuitar query)
         {
             return new GuitarViewModel(await _memorabiliaRepository.Get(query.MemorabiliaId));
         }
-    }
-
-    public class Query : MemorabiliaQuery, IQuery<GuitarViewModel>
-    {
-        public Query(int memorabiliaId) : base(memorabiliaId) { }
     }
 }

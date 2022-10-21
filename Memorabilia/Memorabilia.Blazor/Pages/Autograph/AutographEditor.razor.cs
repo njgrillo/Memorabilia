@@ -16,7 +16,7 @@ public partial class AutographEditor : AutographItem<SaveAutographViewModel>
 
     protected async Task OnLoad()
     {
-        var viewModel = await QueryRouter.Send(new GetMemorabiliaItem.Query(MemorabiliaId));
+        var viewModel = await QueryRouter.Send(new GetMemorabiliaItem(MemorabiliaId));
 
         _displayPersonImport = viewModel.People.Any() && viewModel.People.Count() == 1;            
 

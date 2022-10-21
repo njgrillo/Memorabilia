@@ -1,8 +1,8 @@
 ﻿namespace Memorabilia.Application.Features.Memorabilia.Image;
 
-public class GetMemorabiliaImages
+public record GetMemorabiliaImages(int MemorabiliaId) : IQuery<MemorabiliaImagesViewModel>
 {
-    public class Handler : QueryHandler<Query, MemorabiliaImagesViewModel>
+    public class Handler : QueryHandler<GetMemorabiliaImages, MemorabiliaImagesViewModel>
     {
         private readonly IMemorabiliaImageRepository _memorabiliaImageRepository;
 
@@ -11,19 +11,9 @@ public class GetMemorabiliaImages
             _memorabiliaImageRepository = memorabiliaImageRepository;
         }
 
-        protected override async Task<MemorabiliaImagesViewModel> Handle(Query query)
+        protected override async Task<MemorabiliaImagesViewModel> Handle(GetMemorabiliaImages query)
         {
             return new MemorabiliaImagesViewModel(await _memorabiliaImageRepository.GetAll(query.MemorabiliaId));
         }
-    }
-
-    public class Query : IQuery<MemorabiliaImagesViewModel> 
-    {
-        public Query(int memorabiliaId)
-        {
-            MemorabiliaId = memorabiliaId;
-        }
-
-        public int MemorabiliaId { get; }
     }
 }

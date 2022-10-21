@@ -66,7 +66,7 @@ public partial class ViewDetails : ComponentBase
 
     protected async Task OnLoad()
     {
-        _viewModel = await QueryRouter.Send(new GetMemorabiliaItems.Query(UserId));
+        _viewModel = await QueryRouter.Send(new GetMemorabiliaItems(UserId));
         _initialItems = _viewModel.MemorabiliaItems;
     }
 

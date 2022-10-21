@@ -1,24 +1,12 @@
-﻿#nullable disable
+﻿namespace Memorabilia.Blazor.Pages.Admin.Franchises;
 
-namespace Memorabilia.Blazor.Pages.Admin.Franchises;
-
-public partial class FranchiseEditor : ComponentBase
+public partial class FranchiseEditor : EditItem<SaveFranchiseViewModel, FranchiseViewModel>
 {
-    [Inject]
-    public CommandRouter CommandRouter { get; set; }
-
-    [Inject]
-    public QueryRouter QueryRouter { get; set; }
-
-    [Parameter]
-    public int Id { get; set; }
-
     private bool DisplaySportLeagueLevel;
-    private SaveFranchiseViewModel ViewModel = new ();
 
     protected async Task HandleValidSubmit()
     {
-        await CommandRouter.Send(new SaveFranchise(ViewModel));
+        await HandleValidSubmit(new SaveFranchise(ViewModel));
     }
 
     protected async Task OnLoad()
@@ -29,6 +17,6 @@ public partial class FranchiseEditor : ComponentBase
             return;
         }
 
-        ViewModel = new SaveFranchiseViewModel(await QueryRouter.Send(new GetFranchise(Id)));
+        ViewModel = new SaveFranchiseViewModel(await Get(new GetFranchise(Id)));
     }
 }

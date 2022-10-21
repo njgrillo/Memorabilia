@@ -1,0 +1,77 @@
+﻿@inherits EditPersonItem<SavePersonAccoladeViewModel, PersonAccoladeViewModel>
+
+<EditPage ContinueNavigationPath="@ViewModel.ContinueNavigationPath"
+          EditMode="ViewModel.EditModeType"
+          ExitNavigationPath="@ViewModel.ExitNavigationPath"
+          ImagePath="@ViewModel.ImagePath"
+          ItemName="@ViewModel.ItemTitle"
+          Model="ViewModel"
+          OnLoad="OnLoad"
+          OnSave="HandleValidSubmit"
+          PageFooterButtonText="@ViewModel.ExitButtonText"
+          PageFooterNavigationPath="@ViewModel.BackNavigationPath"
+          PageTitle="@ViewModel.PageTitle"
+          TItem="SavePersonAccoladeViewModel"
+          UseMultipleButtons="true">
+    <TimelineContent>
+        <PersonTimeline EditMode="ViewModel.EditModeType"
+                        PersonId="ViewModel.PersonId"
+                        PersonStep="ViewModel.PersonStep" />
+    </TimelineContent>
+    <Content>      
+        <DivRowCol12>
+            <Content>
+                <MudText Typo="Typo.h3">Accomplishments</MudText>
+                <PersonAccomplishmentEditor Accomplishments="ViewModel.Accomplishments"
+                                            AccomplishmentTypes="ViewModel.AccomplishmentTypes" />
+            </Content>
+        </DivRowCol12>
+        <br />
+        <DivRowCol12 Hidden="@(!ViewModel.DisplayAllStars)">
+            <Content>
+                <MudText Typo="Typo.h3">@ViewModel.AllStarGameLabel</MudText>
+                <PersonAllStarEditor AllStarYears="ViewModel.AllStarYears" />
+            </Content>
+        </DivRowCol12>
+        <br />
+        <DivRowCol12>
+            <Content>
+                <MudText Typo="Typo.h3">Awards</MudText>
+                <PersonAwardEditor Awards="ViewModel.Awards"
+                                   AwardTypes="ViewModel.AwardTypes" />
+            </Content>
+        </DivRowCol12>
+        <br />
+        <DivRowCol12>
+            <Content>
+                <MudText Typo="Typo.h3">Career Records</MudText>
+                <PersonCareerRecordEditor CareerRecords="ViewModel.CareerRecords"
+                                          RecordTypes="ViewModel.RecordTypes" />
+            </Content>
+        </DivRowCol12>
+        <br />
+        <DivRowCol12>
+            <Content>
+                <MudText Typo="Typo.h3">Leaders</MudText>
+                <PersonLeaderEditor Leaders="ViewModel.Leaders"
+                                    LeaderTypes="ViewModel.LeaderTypes" />
+            </Content>
+        </DivRowCol12>
+        <br />
+        <DivRowCol12>
+            <Content>
+                <MudText Typo="Typo.h3">Retired Numbers</MudText>
+                <PersonRetiredNumberEditor Franchises="ViewModel.Franchises" 
+                                           RetiredNumbers="ViewModel.RetiredNumbers" />
+            </Content>
+        </DivRowCol12>
+        <br />
+        <DivRowCol12>
+            <Content>
+                <MudText Typo="Typo.h3">Single Season Records</MudText>
+                <PersonSingleSeasonRecordEditor RecordTypes="ViewModel.RecordTypes"
+                                                SingleSeasonRecords="ViewModel.SingleSeasonRecords" />
+            </Content>
+        </DivRowCol12>   
+    </Content>
+</EditPage>

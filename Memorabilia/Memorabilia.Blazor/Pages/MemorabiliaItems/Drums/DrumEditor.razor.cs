@@ -4,7 +4,7 @@ public partial class DrumEditor : MemorabiliaItem<SaveDrumViewModel>
 {
     protected async Task OnLoad()
     {
-        var viewModel = await QueryRouter.Send(new GetDrum.Query(MemorabiliaId));
+        var viewModel = await QueryRouter.Send(new GetDrum(MemorabiliaId));
 
         if (viewModel.Brand == null)
             return;

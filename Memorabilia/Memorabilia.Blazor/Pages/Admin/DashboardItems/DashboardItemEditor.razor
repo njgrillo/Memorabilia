@@ -1,0 +1,33 @@
+﻿@inherits EditItem<SaveDashboardItemViewModel, DashboardItemViewModel>
+
+<EditPage ContinueNavigationPath="@ViewModel.RoutePrefix"
+          EditMode="ViewModel.EditModeType" 
+          ExitNavigationPath="@ViewModel.RoutePrefix"
+          ImagePath="@ViewModel.ImagePath" 
+          ItemName="@ViewModel.ItemTitle"
+          Model="ViewModel"
+          OnLoad="OnLoad"
+          OnSave="HandleValidSubmit"
+          PageFooterButtonText="@ViewModel.ExitButtonText"
+          PageFooterNavigationPath="@ViewModel.ExitNavigationPath"
+          PageTitle="@ViewModel.PageTitle"
+          TItem="SaveDashboardItemViewModel">
+    <Content>
+        <DivRowCol3>
+            <Content>
+                <MudTextField @bind-Value="ViewModel.Name" 
+                              Label="Name" 
+                              Variant="Variant.Outlined" />
+            </Content>
+        </DivRowCol3>
+        <DivRowCol3>
+            <Content>
+                <MudTextField @bind-Value="ViewModel.Description" 
+                              Label="Description"
+                              Lines="10" 
+                              T="string"
+                              Variant="Variant.Outlined" />
+            </Content>
+        </DivRowCol3>
+    </Content>
+</EditPage>

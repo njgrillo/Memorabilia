@@ -10,7 +10,7 @@ public partial class BasketballEditor : MemorabiliaItem<SaveBasketballViewModel>
     {      
         await LoadCommissioners();
 
-        var viewModel = await QueryRouter.Send(new GetBasketball.Query(MemorabiliaId));
+        var viewModel = await QueryRouter.Send(new GetBasketball(MemorabiliaId));
 
         if (viewModel.Brand == null)
         {

@@ -1,8 +1,8 @@
 ﻿namespace Memorabilia.Application.Features.Memorabilia.Bookplate;
 
-public class GetBookplate
+public record GetBookplate(int MemorabiliaId) : IQuery<BookplateViewModel>
 {
-    public class Handler : QueryHandler<Query, BookplateViewModel>
+    public class Handler : QueryHandler<GetBookplate, BookplateViewModel>
     {
         private readonly IMemorabiliaItemRepository _memorabiliaRepository;
 
@@ -11,14 +11,9 @@ public class GetBookplate
             _memorabiliaRepository = memorabiliaRepository;
         }
 
-        protected override async Task<BookplateViewModel> Handle(Query query)
+        protected override async Task<BookplateViewModel> Handle(GetBookplate query)
         {
             return new BookplateViewModel(await _memorabiliaRepository.Get(query.MemorabiliaId));
         }
-    }
-
-    public class Query : MemorabiliaQuery, IQuery<BookplateViewModel>
-    {
-        public Query(int memorabiliaId) : base(memorabiliaId) { }
     }
 }

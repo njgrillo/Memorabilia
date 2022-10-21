@@ -1,0 +1,71 @@
+﻿@inherits EditPersonItem<SavePersonSportServiceViewModel, PersonSportServiceViewModel>
+
+<EditPage ContinueNavigationPath="@ViewModel.ContinueNavigationPath"
+          EditMode="ViewModel.EditModeType"
+          ExitNavigationPath="@ViewModel.ExitNavigationPath"
+          ImagePath="@ViewModel.ImagePath"
+          ItemName="@ViewModel.ItemTitle"
+          Model="ViewModel"
+          OnLoad="OnLoad"
+          OnSave="HandleValidSubmit"
+          PageFooterButtonText="@ViewModel.ExitButtonText"
+          PageFooterNavigationPath="@ViewModel.BackNavigationPath"
+          PageTitle="@ViewModel.PageTitle"
+          TItem="SavePersonSportServiceViewModel"
+          UseMultipleButtons="true">
+    <TimelineContent>
+        <PersonTimeline EditMode="ViewModel.EditModeType"
+                        PersonId="ViewModel.PersonId"
+                        PersonStep="ViewModel.PersonStep" />
+    </TimelineContent>
+    <Content>  
+        <DivRowCol12>
+            <Content>
+                <MudText Typo="Typo.h3">Colleges</MudText>
+                <PersonCollegeEditor Colleges="ViewModel.Colleges" />
+            </Content>
+        </DivRowCol12>
+        <br />
+        <DivRowCol12>
+            <Content>
+                <MudText Typo="Typo.h3">Drafts</MudText>
+                <PersonDraftEditor Drafts="ViewModel.Drafts"
+                                   SportIds="ViewModel.SportIds" />
+            </Content>
+        </DivRowCol12>  
+        <br />
+        <DivRowCol3>
+            <Content>
+                <MudText Typo="Typo.h3">Service Details</MudText>
+            </Content>
+        </DivRowCol3>
+        <DivRowCol3>
+            <Content>
+                <MudDatePicker @bind-Date="ViewModel.DebutDate"
+                               DateFormat="MM/dd/yyyy"
+                               Editable="true"
+                               Label="Debut Date"
+                               Mask="@(new DateMask("MM/dd/yyyy"))" 
+                               Variant="Variant.Outlined" />
+            </Content>
+            <ContentColumn2>
+                <MudDatePicker @bind-Date="ViewModel.LastAppearanceDate"
+                               DateFormat="MM/dd/yyyy"
+                               Editable="true"
+                               Label="Last Appearance Date"
+                               Mask="@(new DateMask("MM/dd/yyyy"))" 
+                               Variant="Variant.Outlined" />                              
+            </ContentColumn2>
+        </DivRowCol3>
+        <DivRowCol3>
+            <Content>
+                <MudDatePicker @bind-Date="ViewModel.FreeAgentSigningDate"
+                               DateFormat="MM/dd/yyyy"
+                               Editable="true"
+                               Label="Free Agent Signing Date"
+                               Mask="@(new DateMask("MM/dd/yyyy"))" 
+                               Variant="Variant.Outlined" />  
+            </Content>
+        </DivRowCol3>
+    </Content>
+</EditPage>

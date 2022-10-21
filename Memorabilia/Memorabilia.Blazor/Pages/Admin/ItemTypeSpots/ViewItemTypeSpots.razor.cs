@@ -1,46 +1,13 @@
-﻿#nullable disable
+﻿namespace Memorabilia.Blazor.Pages.Admin.ItemTypeSpots;
 
-namespace Memorabilia.Blazor.Pages.Admin.ItemTypeSpots;
-
-public partial class ViewItemTypeSpots : ComponentBase
+public partial class ViewItemTypeSpots : ViewItem<ItemTypeSpotsViewModel, ItemTypeSpotViewModel>
 {
-    [Inject]
-    public CommandRouter CommandRouter { get; set; }
-
-    [Inject]
-    public IDialogService DialogService { get; set; }
-
-    [Inject]
-    public NavigationManager NavigationManager { get; set; }
-
-    [Inject]
-    public QueryRouter QueryRouter { get; set; }
-
-    [Inject]
-    public ISnackbar Snackbar { get; set; }
-
-    private string Search;
-    private ItemTypeSpotsViewModel ViewModel = new();
-
-    private bool FilterFunc1(ItemTypeSpotViewModel viewModel) => FilterFunc(viewModel, Search);
-
     protected async Task OnLoad()
     {
-        ViewModel = await QueryRouter.Send(new GetItemTypeSpots());
+        await OnLoad(new GetItemTypeSpots());
     }
 
-    protected async Task ShowDeleteConfirm(int id)
-    {
-        var dialog = DialogService.Show<DeleteDialog>("Delete Item Type Spot");
-        var result = await dialog.Result;
-
-        if (result.Cancelled)
-            return;
-
-        await Delete(id);
-    }
-
-    private async Task Delete(int id)
+    protected override async Task Delete(int id)
     {
         var deletedItem = ViewModel.ItemTypeSpots.Single(ItemTypeSpot => ItemTypeSpot.Id == id);
         var viewModel = new SaveItemTypeSpotViewModel(deletedItem)
@@ -52,10 +19,10 @@ public partial class ViewItemTypeSpots : ComponentBase
 
         ViewModel.ItemTypeSpots.Remove(deletedItem);
 
-        Snackbar.Add($"{ViewModel.ItemTitle} was deleted successfully!", Severity.Success);
+        ShowDeleteSuccessfulMessage(ViewModel.ItemTitle);
     }
 
-    private static bool FilterFunc(ItemTypeSpotViewModel viewModel, string search)
+    protected override bool FilterFunc(ItemTypeSpotViewModel viewModel, string search)
     {
         return search.IsNullOrEmpty() ||
                viewModel.ItemTypeName.Contains(search, StringComparison.OrdinalIgnoreCase) ||

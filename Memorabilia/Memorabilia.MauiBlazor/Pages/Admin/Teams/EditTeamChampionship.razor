@@ -1,0 +1,10 @@
+﻿@page "/Team/Championship/Edit/{teamId:int}/{sportLeagueLevelId:int}"
+
+@inherits EditTeamItem
+
+<PageLoader>
+    <Content>
+        <ChampionshipTeamEditor SportLeagueLevelId=@SportLeagueLevelId
+                                TeamId=@TeamId />
+    </Content>
+</PageLoader>

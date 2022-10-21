@@ -4,7 +4,7 @@ public partial class JerseyEditor : MemorabiliaItem<SaveJerseyViewModel>
 {
     protected async Task OnLoad()
     {
-        var viewModel = await QueryRouter.Send(new GetJersey.Query(MemorabiliaId));
+        var viewModel = await QueryRouter.Send(new GetJersey(MemorabiliaId));
 
         if (viewModel.Brand == null)
         {

@@ -4,7 +4,7 @@ public partial class GuitarEditor : MemorabiliaItem<SaveGuitarViewModel>
 {
     protected async Task OnLoad()
     {
-        var viewModel = await QueryRouter.Send(new GetGuitar.Query(MemorabiliaId));
+        var viewModel = await QueryRouter.Send(new GetGuitar(MemorabiliaId));
 
         if (viewModel.Brand == null)
             return;

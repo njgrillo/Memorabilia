@@ -1,23 +1,10 @@
-﻿#nullable disable
+﻿namespace Memorabilia.Blazor.Pages.Admin.Divisions;
 
-namespace Memorabilia.Blazor.Pages.Admin.Divisions;
-
-public partial class DivisionEditor : ComponentBase
+public partial class DivisionEditor : EditItem<SaveDivisionViewModel, DivisionViewModel>
 {
-    [Inject]
-    public CommandRouter CommandRouter { get; set; }
-
-    [Inject]
-    public QueryRouter QueryRouter { get; set; }
-
-    [Parameter]
-    public int Id { get; set; }
-
-    private SaveDivisionViewModel ViewModel = new ();
-
     protected async Task HandleValidSubmit()
     {
-        await CommandRouter.Send(new SaveDivision(ViewModel));
+        await HandleValidSubmit(new SaveDivision(ViewModel));
     }
 
     protected async Task OnLoad()
@@ -25,6 +12,6 @@ public partial class DivisionEditor : ComponentBase
         if (Id == 0)
             return;
 
-        ViewModel = new SaveDivisionViewModel(await QueryRouter.Send(new GetDivision(Id)));
+        ViewModel = new SaveDivisionViewModel(await Get(new GetDivision(Id)));
     }
 }

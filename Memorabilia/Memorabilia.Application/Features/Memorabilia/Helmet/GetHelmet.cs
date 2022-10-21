@@ -1,8 +1,8 @@
 ﻿namespace Memorabilia.Application.Features.Memorabilia.Helmet;
 
-public class GetHelmet
+public record GetHelmet(int MemorabiliaId) : IQuery<HelmetViewModel>
 {
-    public class Handler : QueryHandler<Query, HelmetViewModel>
+    public class Handler : QueryHandler<GetHelmet, HelmetViewModel>
     {
         private readonly IMemorabiliaItemRepository _memorabiliaRepository;
 
@@ -11,14 +11,9 @@ public class GetHelmet
             _memorabiliaRepository = memorabiliaRepository;
         }
 
-        protected override async Task<HelmetViewModel> Handle(Query query)
+        protected override async Task<HelmetViewModel> Handle(GetHelmet query)
         {
             return new HelmetViewModel(await _memorabiliaRepository.Get(query.MemorabiliaId));
         }
-    }
-
-    public class Query : MemorabiliaQuery, IQuery<HelmetViewModel>
-    {
-        public Query(int memorabiliaId) : base(memorabiliaId) { }
     }
 }

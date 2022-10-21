@@ -1,8 +1,8 @@
 ﻿namespace Memorabilia.Application.Features.Memorabilia.Shirt;
 
-public class GetShirt
+public record GetShirt(int MemorabiliaId) : IQuery<ShirtViewModel>
 {
-    public class Handler : QueryHandler<Query, ShirtViewModel>
+    public class Handler : QueryHandler<GetShirt, ShirtViewModel>
     {
         private readonly IMemorabiliaItemRepository _memorabiliaRepository;
 
@@ -11,14 +11,9 @@ public class GetShirt
             _memorabiliaRepository = memorabiliaRepository;
         }
 
-        protected override async Task<ShirtViewModel> Handle(Query query)
+        protected override async Task<ShirtViewModel> Handle(GetShirt query)
         {
             return new ShirtViewModel(await _memorabiliaRepository.Get(query.MemorabiliaId));
         }
-    }
-
-    public class Query : MemorabiliaQuery, IQuery<ShirtViewModel>
-    {
-        public Query(int memorabiliaId) : base(memorabiliaId) { }
     }
 }

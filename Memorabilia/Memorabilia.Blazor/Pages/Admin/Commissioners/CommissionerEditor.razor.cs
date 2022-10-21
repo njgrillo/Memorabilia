@@ -1,24 +1,12 @@
-﻿#nullable disable
+﻿namespace Memorabilia.Blazor.Pages.Admin.Commissioners;
 
-namespace Memorabilia.Blazor.Pages.Admin.Commissioners;
-
-public partial class CommissionerEditor : ComponentBase
+public partial class CommissionerEditor : EditItem<SaveCommissionerViewModel, CommissionerViewModel>
 {
-    [Inject]
-    public CommandRouter CommandRouter { get; set; }
-
-    [Inject]
-    public QueryRouter QueryRouter { get; set; }
-
-    [Parameter]
-    public int Id { get; set; }
-
     private IEnumerable<PersonViewModel> People = Enumerable.Empty<PersonViewModel>();
-    private SaveCommissionerViewModel ViewModel = new ();
 
     protected async Task HandleValidSubmit()
     {
-        await CommandRouter.Send(new SaveCommissioner(ViewModel));
+        await HandleValidSubmit(new SaveCommissioner(ViewModel));
     }
 
     protected async Task OnLoad()
@@ -28,7 +16,7 @@ public partial class CommissionerEditor : ComponentBase
         if (Id == 0)
             return;
 
-        ViewModel = new SaveCommissionerViewModel(await QueryRouter.Send(new GetCommissioner(Id)));
+        ViewModel = new SaveCommissionerViewModel(await Get(new GetCommissioner(Id)));
     }
 
     private async Task LoadPeople()

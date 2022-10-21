@@ -6,14 +6,6 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
-  <ItemGroup>
-    <Compile Remove="Pages\Admin\DashboardItems\DashboardItemEditor.razor.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Content Remove="Pages\Admin\DashboardItems\DashboardItemEditor.razor" />
-  </ItemGroup>
-
 
   <ItemGroup>
     <SupportedPlatform Include="browser" />
@@ -59,7 +51,7 @@
     <None Include="Pages\Admin\FigureTypes\ViewFigureTypes.razor" />
     <None Include="Pages\Admin\ItemTypeSports\ItemTypeSportEditor.razor" />
     <None Include="Pages\Admin\ItemTypeSports\ViewItemTypeSports.razor" />
-    <None Include="Pages\Admin\ItemTypeSpots\ItemTypeSpotsEditor.razor" />
+    <None Include="Pages\Admin\ItemTypeSpots\ItemTypeSpotEditor.razor" />
     <None Include="Pages\Admin\ItemTypeSpots\ViewItemTypeSpots.razor" />
     <None Include="Pages\Admin\JerseyQualityTypes\JerseyQualityTypeEditor.razor" />
     <None Include="Pages\Admin\JerseyQualityTypes\ViewJerseyQualityTypes.razor" />

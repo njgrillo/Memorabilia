@@ -1,8 +1,8 @@
 ﻿namespace Memorabilia.Application.Features.Memorabilia.Photo;
 
-public class GetPhoto
+public record GetPhoto(int MemorabiliaId) : IQuery<PhotoViewModel>
 {
-    public class Handler : QueryHandler<Query, PhotoViewModel>
+    public class Handler : QueryHandler<GetPhoto, PhotoViewModel>
     {
         private readonly IMemorabiliaItemRepository _memorabiliaRepository;
 
@@ -11,14 +11,9 @@ public class GetPhoto
             _memorabiliaRepository = memorabiliaRepository;
         }
 
-        protected override async Task<PhotoViewModel> Handle(Query query)
+        protected override async Task<PhotoViewModel> Handle(GetPhoto query)
         {
             return new PhotoViewModel(await _memorabiliaRepository.Get(query.MemorabiliaId));
         }
-    }
-
-    public class Query : MemorabiliaQuery, IQuery<PhotoViewModel>
-    {
-        public Query(int memorabiliaId) : base(memorabiliaId) { }
     }
 }

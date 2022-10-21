@@ -1,8 +1,8 @@
 ﻿namespace Memorabilia.Application.Features.Memorabilia.PinFlag;
 
-public class GetPinFlag
+public record GetPinFlag(int MemorabiliaId) : IQuery<PinFlagViewModel>
 {
-    public class Handler : QueryHandler<Query, PinFlagViewModel>
+    public class Handler : QueryHandler<GetPinFlag, PinFlagViewModel>
     {
         private readonly IMemorabiliaItemRepository _memorabiliaRepository;
 
@@ -11,14 +11,9 @@ public class GetPinFlag
             _memorabiliaRepository = memorabiliaRepository;
         }
 
-        protected override async Task<PinFlagViewModel> Handle(Query query)
+        protected override async Task<PinFlagViewModel> Handle(GetPinFlag query)
         {
             return new PinFlagViewModel(await _memorabiliaRepository.Get(query.MemorabiliaId));
         }
-    }
-
-    public class Query : MemorabiliaQuery, IQuery<PinFlagViewModel>
-    {
-        public Query(int memorabiliaId) : base(memorabiliaId) { }
     }
 }

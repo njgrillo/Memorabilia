@@ -1,9 +1,14 @@
 ﻿#nullable disable
 
+using Memorabilia.Application.Features.Services.Gallery.Memorabilia;
+
 namespace Memorabilia.Blazor.Pages.MemorabiliaItems;
 
 public partial class ViewGallery : ComponentBase
 {
+    [Inject]
+    public IGalleryService GalleryService { get; set; }
+
     [Inject]
     public QueryRouter QueryRouter { get; set; }
 
@@ -15,7 +20,22 @@ public partial class ViewGallery : ComponentBase
     private bool _displaySpinner;
     private int _index = 12;
     private List<MemorabiliaGalleryItemViewModel> _initialItems;
-    private MemorabiliaGalleryItemsViewModel _viewModel;  
+    private MemorabiliaGalleryItemsViewModel _viewModel;
+
+    protected string GetDescription(MemorabiliaGalleryItemViewModel item)
+    {
+        return GalleryService.GetDescription(item.Memorabilia);
+    }
+
+    protected string GetSubtitle(MemorabiliaGalleryItemViewModel item)
+    {
+        return GalleryService.GetSubtitle(item.Memorabilia);
+    }
+
+    protected string GetTitle(MemorabiliaGalleryItemViewModel item)
+    {
+        return GalleryService.GetTitle(item.Memorabilia);
+    }
     
     private void LoadMore()
     {

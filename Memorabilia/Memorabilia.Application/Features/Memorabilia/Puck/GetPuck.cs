@@ -1,8 +1,8 @@
 ﻿namespace Memorabilia.Application.Features.Memorabilia.Puck;
 
-public class GetPuck
+public record GetPuck(int MemorabiliaId) : IQuery<PuckViewModel>
 {
-    public class Handler : QueryHandler<Query, PuckViewModel>
+    public class Handler : QueryHandler<GetPuck, PuckViewModel>
     {
         private readonly IMemorabiliaItemRepository _memorabiliaRepository;
 
@@ -11,14 +11,9 @@ public class GetPuck
             _memorabiliaRepository = memorabiliaRepository;
         }
 
-        protected override async Task<PuckViewModel> Handle(Query query)
+        protected override async Task<PuckViewModel> Handle(GetPuck query)
         {
             return new PuckViewModel(await _memorabiliaRepository.Get(query.MemorabiliaId));
         }
-    }
-
-    public class Query : MemorabiliaQuery, IQuery<PuckViewModel>
-    {
-        public Query(int memorabiliaId) : base(memorabiliaId) { }
     }
 }

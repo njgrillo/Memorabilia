@@ -4,7 +4,7 @@ public partial class HeadBandEditor : MemorabiliaItem<SaveHeadBandViewModel>
 {
     protected async Task OnLoad()
     {
-        var viewModel = await QueryRouter.Send(new GetHeadBand.Query(MemorabiliaId));
+        var viewModel = await QueryRouter.Send(new GetHeadBand(MemorabiliaId));
 
         if (viewModel.Brand == null)
             return;

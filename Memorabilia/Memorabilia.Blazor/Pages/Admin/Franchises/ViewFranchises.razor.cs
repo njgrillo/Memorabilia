@@ -1,43 +1,13 @@
-﻿#nullable disable
+﻿namespace Memorabilia.Blazor.Pages.Admin.Franchises;
 
-namespace Memorabilia.Blazor.Pages.Admin.Franchises;
-
-public partial class ViewFranchises : ComponentBase
+public partial class ViewFranchises : ViewItem<FranchisesViewModel, FranchiseViewModel>
 {
-    [Inject]
-    public CommandRouter CommandRouter { get; set; }
-
-    [Inject]
-    public IDialogService DialogService { get; set; }
-
-    [Inject]
-    public QueryRouter QueryRouter { get; set; }
-
-    [Inject]
-    public ISnackbar Snackbar { get; set; }
-
-    private string Search;
-    private FranchisesViewModel ViewModel = new();
-
-    private bool FilterFunc1(FranchiseViewModel viewModel) => FilterFunc(viewModel, Search);
-
     protected async Task OnLoad()
     {
-        ViewModel = await QueryRouter.Send(new GetFranchises());
+        await OnLoad(new GetFranchises());
     }
 
-    protected async Task ShowDeleteConfirm(int id)
-    {
-        var dialog = DialogService.Show<DeleteDialog>("Delete Franchise");
-        var result = await dialog.Result;
-
-        if (result.Cancelled)
-            return;
-
-        await Delete(id);
-    }
-
-    protected async Task Delete(int id)
+    protected override async Task Delete(int id)
     {
         var deletedItem = ViewModel.Franchises.Single(Franchise => Franchise.Id == id);
         var viewModel = new SaveFranchiseViewModel(deletedItem)
@@ -49,10 +19,10 @@ public partial class ViewFranchises : ComponentBase
 
         ViewModel.Franchises.Remove(deletedItem);
 
-        Snackbar.Add($"{ViewModel.ItemTitle} was deleted successfully!", Severity.Success);
+        ShowDeleteSuccessfulMessage(ViewModel.ItemTitle);
     }
 
-    private static bool FilterFunc(FranchiseViewModel viewModel, string search)
+    protected override bool FilterFunc(FranchiseViewModel viewModel, string search)
     {
         var isYear = int.TryParse(search, out var year);
 

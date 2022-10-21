@@ -4,7 +4,7 @@ public partial class DocumentEditor : MemorabiliaItem<SaveDocumentViewModel>
 {
     protected async Task OnLoad()
     {
-        var viewModel = await QueryRouter.Send(new GetDocument.Query(MemorabiliaId));
+        var viewModel = await QueryRouter.Send(new GetDocument(MemorabiliaId));
 
         ViewModel = new SaveDocumentViewModel(viewModel);
     }

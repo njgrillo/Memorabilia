@@ -7,7 +7,7 @@
         <PageBorder>
             <Content>
                 <PageImage ImagePath="@ImagePath" />
-                <EditForm Model="@Model"
+                <EditForm Model="Model"
                           OnValidSubmit="HandleValidSubmit">
                     <DataAnnotationsValidator />
                     <ValidationSummary />
@@ -30,7 +30,7 @@
                                            Variant="Variant.Filled">Save & Exit</MudButton>
                                 <MudButton ButtonType="MudBlazor.ButtonType.Button"
                                            Color="MudBlazor.Color.Secondary"
-                                           OnClick="@(_ => NavigationManager.NavigateTo(@ExitNavigationPath))"
+                                           OnClick="@(_ => NavigationManager.NavigateTo(ExitNavigationPath))"
                                            Size="MudBlazor.Size.Medium"
                                            Variant="Variant.Filled">Cancel</MudButton>
                             </div>

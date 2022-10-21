@@ -1,8 +1,8 @@
 ﻿namespace Memorabilia.Application.Features.Memorabilia.TennisRacket;
 
-public class GetTennisRacket
+public record GetTennisRacket(int MemorabiliaId) : IQuery<TennisRacketViewModel>
 {
-    public class Handler : QueryHandler<Query, TennisRacketViewModel>
+    public class Handler : QueryHandler<GetTennisRacket, TennisRacketViewModel>
     {
         private readonly IMemorabiliaItemRepository _memorabiliaRepository;
 
@@ -11,14 +11,9 @@ public class GetTennisRacket
             _memorabiliaRepository = memorabiliaRepository;
         }
 
-        protected override async Task<TennisRacketViewModel> Handle(Query query)
+        protected override async Task<TennisRacketViewModel> Handle(GetTennisRacket query)
         {
             return new TennisRacketViewModel(await _memorabiliaRepository.Get(query.MemorabiliaId));
         }
-    }
-
-    public class Query : MemorabiliaQuery, IQuery<TennisRacketViewModel>
-    {
-        public Query(int memorabiliaId) : base(memorabiliaId) { }
     }
 }

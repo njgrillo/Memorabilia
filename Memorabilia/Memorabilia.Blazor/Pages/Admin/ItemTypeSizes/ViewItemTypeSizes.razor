@@ -1,0 +1,52 @@
+﻿@inherits ViewItem<ItemTypeSizesViewModel, ItemTypeSizeViewModel>
+
+<PageView AddRoute="@ViewModel.AddRoute" 
+          AddTitle="@ViewModel.AddTitle"
+          DisplayPageHeader="false"
+          NavigationPath="@ViewModel.ExitNavigationPath"
+          OnLoad="OnLoad"
+          PageTitle="@ViewModel.PageTitle">
+    <Content>
+        <DivPad2>
+            <Content>
+                <MudTable Bordered="false"
+                          Dense="false" 
+                          Filter="new Func<ItemTypeSizeViewModel,bool>(FilterFunc1)"
+                          Hover="true"
+                          Items="@ViewModel.ItemTypeSizes"    
+                          Striped="true">
+                    <ToolBarContent>
+                        <MudText Typo="Typo.h6">@ViewModel.PageTitle</MudText>
+                        <MudSpacer />
+                        <MudTextField @bind-Value="Search"
+                                      Adornment="Adornment.Start"
+                                      AdornmentIcon="@Icons.Material.Filled.Search"
+                                      Class="mt-0"
+                                      IconSize="MudBlazor.Size.Medium"
+                                      Placeholder="Search" />
+                    </ToolBarContent>
+                    <HeaderContent>
+                        <MudTh>Item Type</MudTh>
+                        <MudTh>Size</MudTh>
+                        <MudTh></MudTh>
+                    </HeaderContent>
+                    <RowTemplate>
+                        <MudTd DataLabel="Item Type">@context.ItemTypeName</MudTd>
+                        <MudTd DataLabel="Size">@context.SizeName</MudTd>
+                        <MudTd DataLabel="">
+                            <GridEditButton NavigationPath="@($"{ViewModel.RoutePrefix}/{EditModeType.Update.Name}/{context.Id}")" />    
+                            <MudTooltip Text="Delete">
+                                <MudFab Color="MudBlazor.Color.Secondary"
+                                        Icon="@Icons.Outlined.DeleteOutline"
+                                        OnClick="@(_ => ShowDeleteConfirm(@context.Id, $"Delete {context.ItemTypeName}"))" />
+                            </MudTooltip>
+                        </MudTd>
+                    </RowTemplate>
+                    <PagerContent>
+                        <MudTablePager />
+                    </PagerContent>
+                </MudTable>
+            </Content>
+        </DivPad2> 
+    </Content>
+</PageView>
