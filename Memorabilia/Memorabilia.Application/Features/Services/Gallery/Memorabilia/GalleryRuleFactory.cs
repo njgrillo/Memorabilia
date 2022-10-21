@@ -8,5 +8,7 @@ public class GalleryRuleFactory : IGalleryRuleFactory
     {
         Rules.Add(new BaseballGalleryRule());
         Rules.Add(new HelmetGalleryRule());
+        Rules.Add(new JerseyGalleryRule());
+        Rules.Add(new PhotoGalleryRule());
     }
 }

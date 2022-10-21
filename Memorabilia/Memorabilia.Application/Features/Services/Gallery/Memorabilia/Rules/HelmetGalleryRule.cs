@@ -7,32 +7,22 @@ public class HelmetGalleryRule : GalleryRule, IGalleryRule
         return itemType == Domain.Constants.ItemType.Helmet;
     }
 
-    public string GetDescription(Domain.Entities.Memorabilia memorabilia)
-    {
-        return string.Empty;
-    }
-
-    public string GetSubtitle(Domain.Entities.Memorabilia memorabilia)
-    {
-        return EstimatedValueText(memorabilia);
-    }
-
-    public string GetTitle(Domain.Entities.Memorabilia memorabilia)
-    {
-        return $"{AutographTitleText(memorabilia)} {PlayerTeamText(memorabilia)} {SizeText(memorabilia)} {ItemTypeText(memorabilia)}";
-    }
-
     public override string AutographTitleText(Domain.Entities.Memorabilia memorabilia)
     {
         return memorabilia.Autographs.Count switch
         {
-            0 => Domain.Constants.Size.Find(memorabilia.Size?.SizeId ?? 0) == Domain.Constants.Size.Full 
-                    ? Domain.Constants.HelmetQualityType.Find(memorabilia.Helmet?.HelmetQualityTypeId ?? 0)?.Name ?? string.Empty   
+            0 => Domain.Constants.Size.Find(memorabilia.Size?.SizeId ?? 0) == Domain.Constants.Size.Full
+                    ? Domain.Constants.HelmetQualityType.Find(memorabilia.Helmet?.HelmetQualityTypeId ?? 0)?.Name ?? string.Empty
                     : string.Empty,
             1 => "Autographed",
             2 => "Dual Signed",
             > 2 => "Multi Signed",
             _ => string.Empty,
         };
-    }
+    }   
+
+    public override string GetTitle(Domain.Entities.Memorabilia memorabilia)
+    {
+        return $"{AutographTitleText(memorabilia)} {PlayerTeamText(memorabilia)} {SizeText(memorabilia)} {ItemTypeText(memorabilia)}";
+    }    
 }

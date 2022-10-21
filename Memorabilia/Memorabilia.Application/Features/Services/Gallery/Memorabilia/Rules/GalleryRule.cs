@@ -2,6 +2,11 @@
 
 public abstract class GalleryRule
 {
+    public virtual string AcquisitionTypeText(Domain.Entities.Memorabilia memorabilia)
+    {
+        return $"Acquired:{Domain.Constants.AcquisitionType.Find(memorabilia.MemorabiliaAcquisition?.Acquisition?.AcquisitionTypeId ?? 0)?.Name ?? string.Empty}";
+    }
+
     public virtual string AutographTitleText(Domain.Entities.Memorabilia memorabilia)
     {
         return memorabilia.Autographs.Count switch
@@ -14,11 +19,39 @@ public abstract class GalleryRule
         };
     }
 
+    public virtual string ConditionText(Domain.Entities.Memorabilia memorabilia)
+    {
+        return $"Condition: {memorabilia.Condition?.Name ?? string.Empty}";
+    }
+
+    public virtual string CostText(Domain.Entities.Memorabilia memorabilia)
+    {
+        var cost = (memorabilia.MemorabiliaAcquisition?.Acquisition?.Cost ?? 0) 
+            + memorabilia.Autographs?.Sum(autograph => autograph?.Acquisition?.Cost ?? 0);
+
+        return $"Cost: {cost?.ToString("C") ?? string.Empty}";
+    }
+
     public virtual string EstimatedValueText(Domain.Entities.Memorabilia memorabilia)
     {
         var value = (memorabilia.EstimatedValue ?? 0) + memorabilia.Autographs?.Sum(autograph => autograph?.EstimatedValue ?? 0);
 
-        return $"Estimated Value: {value?.ToString("C") ?? string.Empty}";
+        return $"Value: {value?.ToString("C") ?? string.Empty}";
+    }
+
+    public virtual string GetDescription(Domain.Entities.Memorabilia memorabilia)
+    {
+        return $"{ConditionText(memorabilia)}, {AcquisitionTypeText(memorabilia)}";
+    }
+
+    public virtual string GetSubtitle(Domain.Entities.Memorabilia memorabilia)
+    {
+        return $"{CostText(memorabilia)}, {EstimatedValueText(memorabilia)}, {ProfitLossText(memorabilia)}";
+    }
+
+    public virtual string GetTitle(Domain.Entities.Memorabilia memorabilia)
+    {
+        return string.Empty;
     }
 
     public virtual string ItemTypeText(Domain.Entities.Memorabilia memorabilia)
@@ -47,5 +80,16 @@ public abstract class GalleryRule
     public virtual string SizeText(Domain.Entities.Memorabilia memorabilia)
     {
         return Domain.Constants.Size.Find(memorabilia.Size?.SizeId ?? 0)?.Name ?? string.Empty;
+    }
+
+    private static string ProfitLossText(Domain.Entities.Memorabilia memorabilia)
+    {
+        var value = (memorabilia.EstimatedValue ?? 0) + memorabilia.Autographs?.Sum(autograph => autograph?.EstimatedValue ?? 0);
+        var cost = (memorabilia.MemorabiliaAcquisition?.Acquisition?.Cost ?? 0)
+            + memorabilia.Autographs?.Sum(autograph => autograph?.Acquisition?.Cost ?? 0);
+
+        var profitLoss = value - cost;
+
+        return $"{(profitLoss > 0 ? "Profit" : "Loss")}: {profitLoss.Value.ToString("C") ?? string.Empty}";
     }
 }

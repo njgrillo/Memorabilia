@@ -7,17 +7,7 @@ public class BaseballGalleryRule : GalleryRule, IGalleryRule
         return itemType == Domain.Constants.ItemType.Baseball;
     }
 
-    public string GetDescription(Domain.Entities.Memorabilia memorabilia)
-    {
-        return string.Empty;
-    }
-
-    public string GetSubtitle(Domain.Entities.Memorabilia memorabilia)
-    {
-        return EstimatedValueText(memorabilia);
-    }
-
-    public string GetTitle(Domain.Entities.Memorabilia memorabilia)
+    public override string GetTitle(Domain.Entities.Memorabilia memorabilia)
     {
         return $"{AutographTitleText(memorabilia)} {PlayerTeamText(memorabilia)} {GetBaseballTypeText(memorabilia)} {ItemTypeText(memorabilia)}";
     }

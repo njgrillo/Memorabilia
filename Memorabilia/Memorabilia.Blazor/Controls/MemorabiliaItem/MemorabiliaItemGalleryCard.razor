@@ -11,7 +11,10 @@
                                       Class="rounded-lg can-click"
                                       Height="300"
                                       Image="@PrimaryImagePath" />
-                    </MudCard>                    
+                    </MudCard>  
+                    <br />
+                    <MudText Typo="Typo.body2">@Subtitle</MudText>
+                    <MudText Typo="Typo.body2">@Description</MudText>
                 </MudCardContent>                
                 <MudCardContent>
                     <div class="row">
@@ -24,10 +27,7 @@
                                                                TooltipText="@autograph.PersonName" />
                             </div>                        
                         </Iterations>
-                    </div>
-                    <br />                    
-                    <MudText Typo="Typo.body2">@Subtitle</MudText>
-                    <MudText Typo="Typo.body2">@Description</MudText>
+                    </div>                    
                 </MudCardContent>
                 <MudCardActions>
                     <MudButton @onclick="OnEditClick"
