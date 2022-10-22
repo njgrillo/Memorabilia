@@ -22,10 +22,9 @@
     <Content>
         <DivRowCol3>
             <Content>
-                <ItemTypeSizeDropDown @bind-Value="@ViewModel.SizeId"
-                                      @bind-Value:event="ValueChanged" 
-                                      ItemType="ViewModel.ItemType"
-                                      SelectedValue="@ViewModel.SizeId" /> 
+                <ItemTypeSizeDropDown ItemType="ViewModel.ItemType"
+                                      SelectedValue="@ViewModel.SizeId"
+                                      SelectionChanged="(p) => ViewModel.SizeId = p" />
             </Content>
         </DivRowCol3>
         <MultiPersonSelector CanToggle="true"

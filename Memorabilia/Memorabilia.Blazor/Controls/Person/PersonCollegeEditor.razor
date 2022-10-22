@@ -1,15 +1,8 @@
 ﻿<DivRowCol3>
     <Content>
-        <MudSelect @bind-Value="@_viewModel.CollegeId"
-                   @bind-Value:event="ValueChanged" 
-                   Disabled="@(!_canEditCollege)"
-                   Label="College"
-                   Variant="Variant.Outlined">
-            <MudSelectItem Value="@(0)">--Select--</MudSelectItem>
-            <Iterations Items="_viewModel.Colleges" Context="college">
-                <MudSelectItem Value="@college.Id">@college.Name</MudSelectItem>
-            </Iterations>	
-        </MudSelect> 
+        <CollegeDropDown Disabled="@(!_canEditCollege)" 
+                         SelectedValue="_viewModel.CollegeId"
+                         SelectionChanged="(p) => _viewModel.CollegeId = p" />
     </Content>
 </DivRowCol3>
 <DivRowCol3>

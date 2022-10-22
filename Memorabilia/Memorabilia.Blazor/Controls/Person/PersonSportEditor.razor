@@ -1,14 +1,7 @@
 ﻿<DivRowCol3>
     <Content>
-        <MudSelect @bind-Value="@_viewModel.SportId"
-                   @bind-Value:event="ValueChanged" 
-                   Label="Sport"
-                   Variant="Variant.Outlined">
-            <MudSelectItem Value="@(0)">--Select--</MudSelectItem>
-            <Iterations Items="_viewModel.Sports" Context="sport">
-                <MudSelectItem Value="@sport.Id">@sport.Name</MudSelectItem>
-            </Iterations>	
-        </MudSelect>
+        <SportDropDown SelectedValue="@_viewModel.SportId"
+                       SelectionChanged="(p) => _viewModel.SportId = p" />
     </Content>
 </DivRowCol3>
 <DivLeftAlign>

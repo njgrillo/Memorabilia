@@ -23,16 +23,9 @@
     <Content>
         <DivRowCol4>
             <Content>
-                <MudSelect @bind-Value="@ViewModel.InscriptionTypeId"
-                           @bind-Value:event="ValueChanged" 
-                           Disabled="@(!_canEditInscriptionType)" 
-                           Label="Type"
-                           Variant="Variant.Outlined">
-                    <MudSelectItem Value="@(0)">--Select--</MudSelectItem>
-                    <Iterations Items="ViewModel.InscriptionTypes" Context="inscriptionType">
-                        <MudSelectItem Value="@inscriptionType.Id">@inscriptionType.Name</MudSelectItem>
-                    </Iterations>	
-                </MudSelect>
+                <InscriptionTypeDropDown Disabled="@(!_canEditInscriptionType)" 
+                                         SelectedValue="ViewModel.InscriptionTypeId"
+                                         SelectionChanged="(p) => ViewModel.InscriptionTypeId = p" />
             </Content>
         </DivRowCol4>
         <DivRowCol4>

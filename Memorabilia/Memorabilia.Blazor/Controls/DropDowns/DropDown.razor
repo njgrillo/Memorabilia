@@ -1,0 +1,18 @@
+﻿@typeparam TItem
+@typeparam TType
+
+<MudSelect Disabled="@Disabled" 
+           Label="@Label"
+           T="TType"
+           Value="@SelectedValue"
+           ValueChanged="@OnInputChange"
+           Variant="@Variant">
+    <PrettyBlazor.Condition Evaluation="@DisplaySelect">
+        <Match>
+            <MudSelectItem Value="@SelectItemValue">@SelectItemText</MudSelectItem>
+        </Match>
+    </PrettyBlazor.Condition>
+    <Iterations Items="Items" Context="item">
+        <MudSelectItem Value="@(GetItemDisplayValue(item))">@GetItemDisplayText(item)</MudSelectItem>
+    </Iterations>
+</MudSelect>

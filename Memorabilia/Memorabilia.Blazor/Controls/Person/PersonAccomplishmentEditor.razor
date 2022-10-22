@@ -1,15 +1,8 @@
 ﻿<DivRowCol3>
     <Content>
-        <MudSelect @bind-Value="@_viewModel.AccomplishmentTypeId"
-                   @bind-Value:event="ValueChanged" 
-                   Disabled="@(!_canEditAccomplishmentType)"
-                   Label="Accomplishment"  
-                   Variant="Variant.Outlined">
-            <MudSelectItem Value="@(0)">--Select--</MudSelectItem>
-            <Iterations Items="AccomplishmentTypes" Context="accomplishmentType">
-                <MudSelectItem Value="@accomplishmentType.Id">@accomplishmentType.Name</MudSelectItem>
-            </Iterations>	
-        </MudSelect>
+        <AccomplishmentTypeDropDown Disabled="@(!_canEditAccomplishmentType)"
+                                    SelectedValue="_viewModel.AccomplishmentTypeId"
+                                    SelectionChanged="(p) => _viewModel.AccomplishmentTypeId = p" />
     </Content>
 </DivRowCol3>
 <DivRowCol3>

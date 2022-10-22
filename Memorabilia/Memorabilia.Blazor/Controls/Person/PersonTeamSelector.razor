@@ -34,15 +34,9 @@
 </DivRowCol3>
 <DivRowCol3>
     <Content>
-        <MudSelect @bind-Value="@_viewModel.TeamRoleTypeId"
-                   @bind-Value:event="ValueChanged" 
-                   Label="Role"
-                   Variant="Variant.Outlined">
-            <MudSelectItem Value="@(0)">--Select--</MudSelectItem>
-            <Iterations Items="_viewModel.TeamRoleTypes" Context="teamRoleType">
-                <MudSelectItem Value="@teamRoleType.Id">@teamRoleType.Name</MudSelectItem>
-            </Iterations>	
-        </MudSelect>
+        <TeamRoleTypeDropDown Label="Role" 
+                              SelectedValue="_viewModel.TeamRoleTypeId"
+                              SelectionChanged="(p) => _viewModel.TeamRoleTypeId = p" />
     </Content>
 </DivRowCol3>
 <DivLeftAlign>

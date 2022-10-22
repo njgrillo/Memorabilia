@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Domain.Constants;
 
-public abstract class DomainItemConstant
+public abstract class DomainItemConstant : IWithName, IWithValue<int>
 {
     public string Abbreviation { get; }
 
@@ -9,6 +9,8 @@ public abstract class DomainItemConstant
     public string ImagePath { get; }
 
     public string Name { get; }
+
+    public int Value => Id;
 
     public DomainItemConstant(int id, string name, string abbreviation = null)
     {

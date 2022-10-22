@@ -22,54 +22,37 @@
     <Content>
         <DivRowCol3>
             <Content>
-                <ItemTypeLevelDropDown @bind-Value="@ViewModel.LevelTypeId"
-                                       @bind-Value:event="ValueChanged" 
-                                       ItemType="ViewModel.ItemType"
-                                       SelectedValue="ViewModel.LevelTypeId" /> 
+                <ItemTypeLevelDropDown ItemType="ViewModel.ItemType"
+                                       SelectedValue="ViewModel.LevelTypeId" 
+                                       SelectionChanged="(p) => ViewModel.LevelTypeId = p" /> 
             </Content>
             <ContentColumn2>
-                <ItemTypeBrandDropDown @bind-Value="@ViewModel.BrandId" 
-                                       @bind-Value:event="ValueChanged"
-                                       ItemType="ViewModel.ItemType"
-                                       SelectedValue="ViewModel.BrandId" />
+                <ItemTypeBrandDropDown ItemType="ViewModel.ItemType"
+                                       SelectedValue="ViewModel.BrandId"
+                                       SelectionChanged="(p) => ViewModel.BrandId = p" />
             </ContentColumn2>
         </DivRowCol3>
         <DivRowCol3>
             <Content>
-                <ItemTypeSizeDropDown @bind-Value="@ViewModel.SizeId"
-                                      @bind-Value:event="ValueChanged" 
-                                      ItemType="ViewModel.ItemType"
-                                      SelectedValue="@ViewModel.SizeId" /> 
+                <ItemTypeSizeDropDown ItemType="ViewModel.ItemType"
+                                      SelectedValue="@ViewModel.SizeId"
+                                      SelectionChanged="(p) => ViewModel.SizeId = p" /> 
             </Content>
             <ContentColumn2>
-                <MudSelect @bind-Value="@ViewModel.BasketballTypeId"
-                           @bind-Value:event="ValueChanged"    
-                           Label="Type"
-                           Variant="Variant.Outlined" >
-                    <MudSelectItem Value="@(0)">--Select--</MudSelectItem>
-                    <Iterations Items="ViewModel.BasketballTypes" Context="basketballType">
-                        <MudSelectItem Value="@basketballType.Id">@basketballType.Name</MudSelectItem>
-                    </Iterations>	
-                </MudSelect>
+                <BasketballTypeDropDown SelectedValue="@ViewModel.BasketballTypeId"
+                                        SelectionChanged="(p) => ViewModel.BasketballTypeId = p" />
             </ContentColumn2>
         </DivRowCol3>
         <DivRowCol3>
             <Content>
-                <ItemTypeGameStyleDropDown @bind-Value="@ViewModel.GameStyleTypeId"
-                                           @bind-Value:event="ValueChanged"
-                                           ItemType="ViewModel.ItemType"
-                                           SelectedValue="ViewModel.GameStyleTypeId" /> 
+                <ItemTypeGameStyleDropDown ItemType="ViewModel.ItemType"
+                                           SelectedValue="ViewModel.GameStyleTypeId"
+                                           SelectionChanged="(p) => ViewModel.GameStyleTypeId = p"/> 
             </Content>
             <ContentColumn2>
-                <MudSelect @bind-Value="@ViewModel.CommissionerId"
-                           @bind-Value:event="ValueChanged"    
-                           Label="Commissioner"
-                           Variant="Variant.Outlined" >
-                    <MudSelectItem Value="@(0)">--Select--</MudSelectItem>
-                    <Iterations Items="Commissioners" Context="commissioner">
-                        <MudSelectItem Value="@commissioner.Id">@commissioner.Person.DisplayName</MudSelectItem>
-                    </Iterations>	
-                </MudSelect>
+                <CommissionerDropDown SelectedValue="@ViewModel.CommissionerId"
+                                      SelectionChanged="(p) => ViewModel.CommissionerId = p"
+                                      SportLeagueLevelId="SportLeagueLevel.NationalBasketballAssociation.Id" />
             </ContentColumn2>
         </DivRowCol3>
         <DivRowCol3 HideColumn1="@(!ViewModel.DisplayGameDate)">

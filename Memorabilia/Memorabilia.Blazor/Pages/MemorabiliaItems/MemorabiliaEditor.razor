@@ -19,40 +19,20 @@
     <Content>
         <DivRowCol3>
             <Content>
-                <MudSelect @bind-Value="@_viewModel.ItemTypeId"
-                           @bind-Value:event="ValueChanged"    
-                           Disabled="@(!_canEditItemType)"
-                           Label="Item Type"
-                           Variant="Variant.Outlined">
-                    <MudSelectItem Value="@(0)">--Select--</MudSelectItem>
-                    <Iterations Items="_viewModel.ItemTypes" Context="item">
-                        <MudSelectItem Value="@item.Id">@item.Name</MudSelectItem>
-                    </Iterations>	
-                </MudSelect>
+                <ItemTypeDropDown Disabled="@(!_canEditItemType)"
+                                  SelectedValue="_viewModel.ItemTypeId"
+                                  SelectionChanged="(p) => _viewModel.ItemTypeId = p" />
             </Content>
         </DivRowCol3>
         <DivRowCol3>
             <Content>
-                <MudSelect @bind-Value="@_viewModel.ConditionId"
-                           @bind-Value:event="ValueChanged" 
-                           Label="Condition"
-                           Variant="Variant.Outlined">
-                    <MudSelectItem Value="@(0)">--Select--</MudSelectItem>
-                    <Iterations Items="_viewModel.Conditions" Context="item">
-                        <MudSelectItem Value="@item.Id">@item.Name</MudSelectItem>
-                    </Iterations>	
-                </MudSelect>
+                <ConditionDropDown SelectedValue="_viewModel.ConditionId"
+                                   SelectionChanged="(p) => _viewModel.ConditionId = p" />
             </Content>
             <ContentColumn2>
-                <MudSelect @bind-Value="@_viewModel.AcquisitionTypeId"
-                           @bind-Value:event="ValueChanged" 
-                           Label="Acquisition Type"
-                           Variant="Variant.Outlined">
-                    <MudSelectItem Value="@(0)">--Select--</MudSelectItem>
-                    <Iterations Items="_viewModel.AcquisitionTypes" Context="item">
-                        <MudSelectItem Value="@item.Id">@item.Name</MudSelectItem>
-                    </Iterations>	
-                </MudSelect>
+                <AcquisitionTypeDropDown IsAutograph="false" 
+                                         SelectedValue="_viewModel.AcquisitionTypeId"
+                                         SelectionChanged="(p) => _viewModel.AcquisitionTypeId = p" />
             </ContentColumn2>
             <ContentColumn3>
                 <DivHidden Hidden="@(!_viewModel.CanHaveCost)">
@@ -81,30 +61,16 @@
             <ContentColumn3>
                 <DivHidden Hidden="@(!_viewModel.CanHaveCost)">
                     <Content>
-                        <MudSelect @bind-Value="@_viewModel.PurchaseTypeId"
-                                   @bind-Value:event="ValueChanged" 
-                                   Label="Purchase Type"
-                                   Variant="Variant.Outlined">
-                            <MudSelectItem Value="@(0)">--Select--</MudSelectItem>
-                            <Iterations Items="_viewModel.PurchaseTypes" Context="item">
-                                <MudSelectItem Value="@item.Id">@item.Name</MudSelectItem>
-                            </Iterations>	
-                        </MudSelect>
+                        <PurchaseTypeDropDown SelectedValue="_viewModel.PurchaseTypeId"
+                                              SelectionChanged="(p) => _viewModel.PurchaseTypeId = p" />
                     </Content>
                 </DivHidden>
             </ContentColumn3>
         </DivRowCol3>
         <DivRowCol3>
             <Content>
-                <MudSelect @bind-Value="@_viewModel.PrivacyTypeId"
-                           @bind-Value:event="ValueChanged" 
-                           Label="Privacy Type"
-                           Variant="Variant.Outlined">
-                    <MudSelectItem Value="@(0)">--Select--</MudSelectItem>
-                    <Iterations Items="_viewModel.PrivacyTypes" Context="item">
-                        <MudSelectItem Value="@item.Id">@item.Name</MudSelectItem>
-                    </Iterations>	
-                </MudSelect>
+                <PrivacyTypeDropDown SelectedValue="_viewModel.PrivacyTypeId"
+                                     SelectionChanged="(p) => _viewModel.PrivacyTypeId = p" />
             </Content>
             <ContentColumn2>
                 <MudCheckBox @bind-Checked="@_viewModel.AcquiredWithAutograph" 

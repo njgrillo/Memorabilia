@@ -15,84 +15,67 @@
           UseMultipleButtons="true">
     <TimelineContent>
         <MemorabiliaItemTimeline EditMode="ViewModel.EditModeType"
-                                ItemTypeName="@ViewModel.ItemType.Name"
-                                MemorabiliaId="ViewModel.MemorabiliaId"
-                                MemorabiliaItemStep="ViewModel.MemorabiliaItemStep" />
+                                 ItemTypeName="@ViewModel.ItemType.Name"
+                                 MemorabiliaId="ViewModel.MemorabiliaId"
+                                 MemorabiliaItemStep="ViewModel.MemorabiliaItemStep" />
     </TimelineContent>
     <Content>
         <DivRowCol3 HideColumn3="@(!ViewModel.DisplayGameStyleType)"
                     HideColumn4="@(!ViewModel.DisplayBaseballType)">
             <Content>
-                <ItemTypeBrandDropDown @bind-Value="@ViewModel.BrandId" 
-                                        @bind-Value:event="ValueChanged"
-                                        ItemType="ViewModel.ItemType"
-                                        SelectedValue="ViewModel.BrandId" />
+                <ItemTypeBrandDropDown ItemType="ViewModel.ItemType"
+                                       SelectedValue="ViewModel.BrandId"
+                                       SelectionChanged="(p) => ViewModel.BrandId = p" />
             </Content>
             <ContentColumn2>
-                <ItemTypeLevelDropDown @bind-Value="@ViewModel.LevelTypeId"
-                                        @bind-Value:event="ValueChanged" 
-                                        ItemType="ViewModel.ItemType"
-                                        SelectedValue="ViewModel.LevelTypeId" />                               
+                <ItemTypeLevelDropDown ItemType="ViewModel.ItemType"
+                                       SelectedValue="ViewModel.LevelTypeId"
+                                       SelectionChanged="(p) => ViewModel.LevelTypeId = p" />
             </ContentColumn2>
             <ContentColumn3>
-                <ItemTypeGameStyleDropDown @bind-Value="@ViewModel.GameStyleTypeId"
-                                            @bind-Value:event="ValueChanged"
-                                            ItemType="ViewModel.ItemType"
-                                            SelectedValue="ViewModel.GameStyleTypeId" /> 
+                <ItemTypeGameStyleDropDown ItemType="ViewModel.ItemType"
+                                           SelectedValue="ViewModel.GameStyleTypeId"
+                                           SelectionChanged="(p) => ViewModel.GameStyleTypeId = p" />
             </ContentColumn3>
-            <ContentColumn4>
-                <MudSelect @bind-Value="@ViewModel.BaseballTypeId"
-                            @bind-Value:event="ValueChanged"    
-                            Label="Type"
-                            Variant="Variant.Outlined" >
-                    <MudSelectItem Value="@(0)">--Select--</MudSelectItem>
-                    <Iterations Items="ViewModel.BaseballTypes" Context="baseballType">
-                        <MudSelectItem Value="@baseballType.Id">@baseballType.Name</MudSelectItem>
-                    </Iterations>	
-                </MudSelect>
+            <ContentColumn4>                
+                <BaseballTypeDropDown SelectedValue="ViewModel.BaseballTypeId"
+                                      SelectionChanged="(p) => ViewModel.BaseballTypeId = p" />
             </ContentColumn4>
         </DivRowCol3>
         <DivRowCol3 HideColumn2="@(!ViewModel.DisplayCommissioner)"
                     HideColumn3="@(!ViewModel.DisplayGameDate)">
             <Content>
-                <ItemTypeSizeDropDown @bind-Value="@ViewModel.SizeId"
-                                        @bind-Value:event="ValueChanged" 
-                                        ItemType="ViewModel.ItemType"
-                                        SelectedValue="@ViewModel.SizeId" /> 
+                <ItemTypeSizeDropDown ItemType="ViewModel.ItemType"
+                                      SelectedValue="@ViewModel.SizeId"
+                                      SelectionChanged="(p) => ViewModel.SizeId = p" />
             </Content>
             <ContentColumn2>
-                <MudSelect @bind-Value="@ViewModel.CommissionerId"
-                            @bind-Value:event="ValueChanged"    
-                            Label="Commissioner"
-                            Variant="Variant.Outlined">
-                    <MudSelectItem Value="@(0)">--Select--</MudSelectItem>
-                    <Iterations Items="Commissioners" Context="commissioner">
-                        <MudSelectItem Value="@commissioner.Id">@commissioner.Person.DisplayName</MudSelectItem>
-                    </Iterations>	
-                </MudSelect>
+                <CommissionerDropDown SelectedValue="@ViewModel.CommissionerId"
+                                      SelectionChanged="(p) => ViewModel.CommissionerId = p"
+                                      SportLeagueLevelId="SportLeagueLevel.MajorLeagueBaseball.Id" />
             </ContentColumn2>
             <ContentColumn3>
                 <MudDatePicker @bind-Date="ViewModel.GameDate"
-                                DateFormat="MM/dd/yyyy"
-                                Editable="true"
-                                Label="Game Date"
-                                Mask="@(new DateMask("MM/dd/yyyy"))" 
-                                Variant="Variant.Outlined" />                 
+                               DateFormat="MM/dd/yyyy"
+                               Editable="true"
+                               Label="Game Date"
+                               Mask="@(new DateMask("MM/dd/yyyy"))" 
+                               Variant="Variant.Outlined" />                 
             </ContentColumn3>
             <ContentColumn4>
                 <PrettyBlazor.Condition Evaluation="ViewModel.DisplayBaseballTypeYear">
                     <Match>
                         <MudNumericField @bind-Value="ViewModel.BaseballTypeYear" 
-                                            Label="Year" 
-                                            Variant="Variant.Outlined" />  
+                                         Label="Year" 
+                                         Variant="Variant.Outlined" />  
                     </Match>
                 </PrettyBlazor.Condition>
                 <PrettyBlazor.Condition Evaluation="ViewModel.DisplayBaseballTypeAnniversary">
                     <Match>
                         <MudTextField @bind-Value="ViewModel.BaseballTypeAnniversary" 
-                                        HelperText="Example: 25th"
-                                        Label="Anniversary"  
-                                        Variant="Variant.Outlined" />
+                                      HelperText="Example: 25th"
+                                      Label="Anniversary"  
+                                      Variant="Variant.Outlined" />
                     </Match>
                 </PrettyBlazor.Condition>  
             </ContentColumn4>
@@ -104,8 +87,8 @@
                         SelectedPersonChanged="SelectedPersonChanged"
                         Sport="ViewModel.Sport" />  
         <MultiTeamSelector CanToggle="true" 
-                            ItemType="ViewModel.ItemType"
-                            Teams="ViewModel.Teams" />
+                           ItemType="ViewModel.ItemType"
+                           Teams="ViewModel.Teams" />
     </Content>
 </EditPage>
 

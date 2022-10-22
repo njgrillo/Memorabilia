@@ -2,7 +2,7 @@
 
 namespace Memorabilia.Application.Features.Admin.ItemTypeSpots;
 
-public class ItemTypeSpotViewModel
+public class ItemTypeSpotViewModel : IWithValue<int>, IWithName
 {
     private readonly ItemTypeSpot _itemTypeSpot;
 
@@ -19,7 +19,11 @@ public class ItemTypeSpotViewModel
 
     public string ItemTypeName => Domain.Constants.ItemType.Find(ItemTypeId).Name;
 
+    string IWithName.Name => SpotName;
+
     public int SpotId => _itemTypeSpot.SpotId;
 
-    public string SpotName => Domain.Constants.Spot.Find(SpotId).Name;
+    public string SpotName => Domain.Constants.Spot.Find(SpotId).Name;    
+
+    int IWithValue<int>.Value => SpotId;
 }

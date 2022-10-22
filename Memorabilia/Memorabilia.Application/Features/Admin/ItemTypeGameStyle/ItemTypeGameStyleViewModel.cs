@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Application.Features.Admin.ItemTypeGameStyle;
 
-public class ItemTypeGameStyleViewModel
+public class ItemTypeGameStyleViewModel : IWithValue<int>, IWithName
 {
     private readonly Domain.Entities.ItemTypeGameStyleType _itemTypeGameStyle;
 
@@ -20,4 +20,8 @@ public class ItemTypeGameStyleViewModel
     public int ItemTypeId => _itemTypeGameStyle.ItemTypeId;
 
     public string ItemTypeName => Domain.Constants.ItemType.Find(ItemTypeId).Name;
+
+    string IWithName.Name => GameStyleTypeName;
+
+    int IWithValue<int>.Value => GameStyleTypeId;
 }

@@ -2,7 +2,7 @@
 
 namespace Memorabilia.Application.Features.Admin.Commissioners;
 
-public class CommissionerViewModel
+public class CommissionerViewModel : IWithName, IWithValue<int>
 {
     private readonly Commissioner _commissioner;
 
@@ -19,9 +19,13 @@ public class CommissionerViewModel
 
     public int Id => _commissioner.Id;
 
+    string IWithName.Name => Person.DisplayName;
+
     public Person Person => _commissioner.Person;
 
     public int SportLeagueLevelId => _commissioner.SportLeagueLevelId;
 
-    public string SportLeagueLevelName => _commissioner.SportLeagueLevelName;
+    public string SportLeagueLevelName => _commissioner.SportLeagueLevelName;    
+
+    int IWithValue<int>.Value => Id;
 }

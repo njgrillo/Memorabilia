@@ -22,16 +22,14 @@
     <Content>
         <DivRowCol3>
             <Content>
-                <ItemTypeGameStyleDropDown @bind-Value="@ViewModel.GameStyleTypeId"
-                                           @bind-Value:event="ValueChanged"
-                                           ItemType="ViewModel.ItemType"
-                                           SelectedValue="ViewModel.GameStyleTypeId" /> 
+                <ItemTypeGameStyleDropDown ItemType="ViewModel.ItemType"
+                                           SelectedValue="ViewModel.GameStyleTypeId"
+                                           SelectionChanged="(p) => ViewModel.GameStyleTypeId = p" />
             </Content>
             <ContentColumn2>
-                <ItemTypeSizeDropDown @bind-Value="@ViewModel.SizeId"
-                                      @bind-Value:event="ValueChanged" 
-                                      ItemType="ViewModel.ItemType"
-                                      SelectedValue="@ViewModel.SizeId" /> 
+                <ItemTypeSizeDropDown ItemType="ViewModel.ItemType"
+                                      SelectedValue="@ViewModel.SizeId"
+                                      SelectionChanged="(p) => ViewModel.SizeId = p" />
             </ContentColumn2>
         </DivRowCol3>
         <DivRowCol3>
@@ -50,10 +48,9 @@
         </DivRowCol3>
         <DivRowCol3>
             <Content>
-                <ItemTypeLevelDropDown @bind-Value="@ViewModel.LevelTypeId"
-                                       @bind-Value:event="ValueChanged" 
-                                       ItemType="ViewModel.ItemType"
-                                       SelectedValue="ViewModel.LevelTypeId" /> 
+                <ItemTypeLevelDropDown ItemType="ViewModel.ItemType"
+                                       SelectedValue="ViewModel.LevelTypeId"
+                                       SelectionChanged="(p) => ViewModel.LevelTypeId = p" />
             </Content>
         </DivRowCol3>               
         <TeamSelector CanToggle="true" 

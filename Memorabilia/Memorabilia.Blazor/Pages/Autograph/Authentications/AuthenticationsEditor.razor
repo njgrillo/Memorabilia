@@ -23,16 +23,9 @@
     <Content>
         <DivRowCol4>
             <Content>
-                <MudSelect @bind-Value="@ViewModel.AuthenticationCompanyId"
-                           @bind-Value:event="ValueChanged" 
-                           Disabled="@(!_canEditAuthenticationCompany)"
-                           Label="Authentication Company"
-                           Variant="Variant.Outlined">
-                    <MudSelectItem Value="@(0)">--Select--</MudSelectItem>
-                    <Iterations Items="ViewModel.AuthenticationCompanies" Context="authenticationCompany">
-                        <MudSelectItem Value="@authenticationCompany.Id">@authenticationCompany.Name</MudSelectItem>
-                    </Iterations>	
-                </MudSelect>
+                <AuthenticationCompanyDropDown Disabled="@(!_canEditAuthenticationCompany)"
+                                               SelectedValue="ViewModel.AuthenticationCompanyId"
+                                               SelectionChanged="(p) => ViewModel.AuthenticationCompanyId = p" />
             </Content>
         </DivRowCol4>
         <DivRowCol4>

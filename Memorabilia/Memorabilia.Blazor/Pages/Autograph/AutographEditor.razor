@@ -61,26 +61,12 @@
         </DivRowCol3>
         <DivRowCol3>
             <Content>
-                <MudSelect @bind-Value="@ViewModel.WritingInstrumentId"
-                           @bind-Value:event="ValueChanged" 
-                           Label="Writing Instrument"
-                           Variant="Variant.Outlined">
-                    <MudSelectItem Value="@(0)">--Select--</MudSelectItem>
-                    <Iterations Items="ViewModel.WritingInstruments" Context="writingInstrument">
-                        <MudSelectItem Value="@writingInstrument.Id">@writingInstrument.Name</MudSelectItem>
-                    </Iterations>	
-                </MudSelect>
+                <WritingInstrumentDropDown SelectedValue="ViewModel.WritingInstrumentId"
+                                           SelectionChanged="(p) => ViewModel.WritingInstrumentId = p" />
             </Content>
             <ContentColumn2>
-                <MudSelect @bind-Value="@ViewModel.ConditionId"
-                           @bind-Value:event="ValueChanged" 
-                           Label="Condition"
-                           Variant="Variant.Outlined">
-                    <MudSelectItem Value="@(0)">--Select--</MudSelectItem>
-                    <Iterations Items="ViewModel.Conditions" Context="condition">
-                        <MudSelectItem Value="@condition.Id">@condition.Name</MudSelectItem>
-                    </Iterations>	
-                </MudSelect>
+                <ConditionDropDown SelectedValue="ViewModel.ConditionId"
+                                   SelectionChanged="(p) => ViewModel.ConditionId = p" />
             </ContentColumn2>
             <ContentColumn3>
                 <PrettyBlazor.Condition Evaluation="ViewModel.DisplayAcquisitionDetails">
@@ -103,15 +89,8 @@
         </DivRowCol3>
         <DivRowCol3>
             <Content>
-                <MudSelect @bind-Value="@ViewModel.ColorId"
-                           @bind-Value:event="ValueChanged" 
-                           Label="Color"
-                           Variant="Variant.Outlined">
-                    <MudSelectItem Value="@(0)">--Select--</MudSelectItem>
-                    <Iterations Items="ViewModel.Colors" Context="color">
-                        <MudSelectItem Value="@color.Id">@color.Name</MudSelectItem>
-                    </Iterations>	
-                </MudSelect>
+                <ColorDropDown SelectedValue="ViewModel.ColorId"
+                               SelectionChanged="(p) => ViewModel.ColorId = p" />
             </Content>
             <ContentColumn2>                
                 <MudNumericField @bind-Value="ViewModel.Grade" 
@@ -140,15 +119,9 @@
                                       Src="images/import.jpg"
                                       Width="20" />
                         </MudTooltip>
-                        <MudSelect @bind-Value="@ViewModel.AcquisitionTypeId"
-                                   @bind-Value:event="ValueChanged" 
-                                   Label="Acquisition Type"
-                                   Variant="Variant.Outlined">
-                            <MudSelectItem Value="@(0)">--Select--</MudSelectItem>
-                            <Iterations Items="ViewModel.AcquisitionTypes" Context="acquisitionType">
-                                <MudSelectItem Value="@acquisitionType.Id">@acquisitionType.Name</MudSelectItem>
-                            </Iterations>	
-                        </MudSelect>
+                        <AcquisitionTypeDropDown IsAutograph="true" 
+                                                 SelectedValue="ViewModel.AcquisitionTypeId"
+                                                 SelectionChanged="(p) => ViewModel.AcquisitionTypeId = p" />
                     </Match>
                 </PrettyBlazor.Condition>
             </ContentColumn4>
@@ -184,15 +157,8 @@
                     <Match>
                         <DivHidden Hidden="@(!ViewModel.CanHavePlaceOfPurchase)">
                             <Content>
-                                <MudSelect @bind-Value="@ViewModel.PurchaseTypeId"
-                                           @bind-Value:event="ValueChanged" 
-                                           Label="Place of Purchase"
-                                           Variant="Variant.Outlined">
-                                    <MudSelectItem Value="@(0)">--Select--</MudSelectItem>
-                                    <Iterations Items="ViewModel.PurchaseTypes" Context="purchaseType">
-                                        <MudSelectItem Value="@purchaseType.Id">@purchaseType.Name</MudSelectItem>
-                                    </Iterations>	
-                                </MudSelect>
+                                <PurchaseTypeDropDown SelectedValue="ViewModel.PurchaseTypeId"
+                                                      SelectionChanged="(p) => ViewModel.PurchaseTypeId = p" />
                             </Content>
                         </DivHidden>
                     </Match>

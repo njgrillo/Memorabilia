@@ -22,36 +22,26 @@
     <Content>
         <DivRowCol3>
             <Content>
-                <ItemTypeBrandDropDown @bind-Value="@ViewModel.BrandId" 
-                                       @bind-Value:event="ValueChanged"
-                                       ItemType="ViewModel.ItemType"
-                                       SelectedValue="ViewModel.BrandId" />
+                <ItemTypeBrandDropDown ItemType="ViewModel.ItemType"
+                                       SelectedValue="ViewModel.BrandId"
+                                       SelectionChanged="(p) => ViewModel.BrandId = p"/>
             </Content>
             <ContentColumn2>
-                <MudSelect @bind-Value="@ViewModel.GloveTypeId"
-                           @bind-Value:event="ValueChanged" 
-                           Label="Glove Type"
-                           Variant="Variant.Outlined">
-                    <MudSelectItem Value="@(0)">--Select--</MudSelectItem>
-                    <Iterations Items="ViewModel.GloveTypes" Context="gloveType">
-                        <MudSelectItem Value="@gloveType.Id">@gloveType.Name</MudSelectItem>
-                    </Iterations>	
-                </MudSelect>
+                <GloveTypeDropDown SelectedValue="ViewModel.GloveTypeId"
+                                   SelectionChanged="(p) => ViewModel.GloveTypeId = p" />
             </ContentColumn2>
         </DivRowCol3>
         <DivRowCol3>
             <Content>
-                <ItemTypeSizeDropDown @bind-Value="@ViewModel.SizeId"
-                                      @bind-Value:event="ValueChanged" 
-                                      ItemType="ViewModel.ItemType"
-                                      SelectedValue="@ViewModel.SizeId" /> 
+                <ItemTypeSizeDropDown ItemType="ViewModel.ItemType"
+                                      SelectedValue="@ViewModel.SizeId"
+                                      SelectionChanged="(p) => ViewModel.SizeId = p" />
             </Content>
             <ContentColumn2>
-                <ItemTypeGameStyleDropDown @bind-Value="@ViewModel.GameStyleTypeId"
-                                           @bind-Value:event="ValueChanged"
-                                           ItemType="ViewModel.ItemType"
+                <ItemTypeGameStyleDropDown ItemType="ViewModel.ItemType"
                                            Label="@ViewModel.GameStyleTypeText"
-                                           SelectedValue="ViewModel.GameStyleTypeId" /> 
+                                           SelectedValue="ViewModel.GameStyleTypeId"
+                                           SelectionChanged="(p) => ViewModel.GameStyleTypeId = p"/> 
             </ContentColumn2>
         </DivRowCol3>
         <DivRowCol3>

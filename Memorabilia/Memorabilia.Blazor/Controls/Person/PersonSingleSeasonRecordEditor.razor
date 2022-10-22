@@ -1,15 +1,8 @@
 ﻿<DivRowCol3>
     <Content>
-        <MudSelect @bind-Value="@_viewModel.RecordTypeId"
-                   @bind-Value:event="ValueChanged" 
-                   Disabled="@(!_canEditRecordType)"
-                   Label="Record Type"  
-                   Variant="Variant.Outlined">
-            <MudSelectItem Value="@(0)">--Select--</MudSelectItem>
-            <Iterations Items="RecordTypes" Context="recordType">
-                <MudSelectItem Value="@recordType.Id">@recordType.Name</MudSelectItem>
-            </Iterations>	
-        </MudSelect>
+        <RecordTypeDropDown Disabled="@(!_canEditRecordType)"
+                            SelectedValue="_viewModel.RecordTypeId"
+                            SelectionChanged="(p) => _viewModel.RecordTypeId = p" />
     </Content>
 </DivRowCol3>
 <DivRowCol3>

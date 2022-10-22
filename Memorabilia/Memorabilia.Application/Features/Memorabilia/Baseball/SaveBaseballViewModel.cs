@@ -7,7 +7,7 @@ public class SaveBaseballViewModel : SaveItemViewModel
     public SaveBaseballViewModel() { }
 
     public SaveBaseballViewModel(BaseballViewModel viewModel)
-    {            
+    {
         BaseballTypeAnniversary = viewModel.Baseball?.Anniversary;
         BaseballTypeId = viewModel.Baseball?.BaseballTypeId ?? 0;
         BaseballTypeYear = viewModel.Baseball?.Year;
@@ -16,7 +16,7 @@ public class SaveBaseballViewModel : SaveItemViewModel
         GameDate = viewModel.Game?.GameDate;
         GameStyleTypeId = viewModel.Game?.GameStyleTypeId ?? 0;
         LevelTypeId = viewModel.Level.LevelTypeId;
-        MemorabiliaId = viewModel.MemorabiliaId;            
+        MemorabiliaId = viewModel.MemorabiliaId;
         SizeId = viewModel.Size.SizeId;
         Teams = viewModel.Teams.Select(team => new SaveTeamViewModel(new TeamViewModel(team.Team))).ToList();
 
@@ -116,8 +116,6 @@ public class SaveBaseballViewModel : SaveItemViewModel
     public int SizeId { get; set; } = Size.Standard.Id;
 
     public Sport Sport => Sport.Baseball;
-
-    public SportLeagueLevel SportLeagueLevel => SportLeagueLevel.MajorLeagueBaseball;
 
     public List<SaveTeamViewModel> Teams { get; set; } = new();
 }

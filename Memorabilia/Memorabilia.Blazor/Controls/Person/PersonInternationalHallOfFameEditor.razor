@@ -1,15 +1,9 @@
 ﻿<DivRowCol3>
     <Content>
-        <MudSelect @bind-Value="@_viewModel.InternationalHallOfFameTypeId"
-                   @bind-Value:event="ValueChanged" 
-                   Disabled="@(!_canEditInternationalHallOfFameType)"
-                   Label="Type"
-                   Variant="Variant.Outlined">
-            <MudSelectItem Value="@(0)">--Select--</MudSelectItem>
-            <Iterations Items="_viewModel.InternationalHallOfFameTypes" Context="internationalHallOfFameType">
-                <MudSelectItem Value="@internationalHallOfFameType.Id">@internationalHallOfFameType.Name</MudSelectItem>
-            </Iterations>	
-        </MudSelect> 
+        <InternationalHallOfFameTypeDropDown Disabled="@(!_canEditInternationalHallOfFameType)"
+                                             Label="Type" 
+                                             SelectedValue="_viewModel.InternationalHallOfFameTypeId"
+                                             SelectionChanged="(p) => _viewModel.InternationalHallOfFameTypeId = p" />
     </Content>
     <ContentColumn2>
         <MudNumericField @bind-Value="_viewModel.Year" 

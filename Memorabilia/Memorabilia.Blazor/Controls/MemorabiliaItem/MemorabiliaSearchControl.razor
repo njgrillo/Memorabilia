@@ -15,15 +15,8 @@
                 <div class="row">
                     <div class="col-lg-2">
                         <div class="form-group">
-                            <MudSelect @bind-Value="@_itemTypeId"
-                                       @bind-Value:event="ValueChanged" 
-                                       Label="Item Type"
-                                       Variant="Variant.Outlined">
-                                <MudSelectItem Value="@(0)">--Select--</MudSelectItem>
-                                <Iterations Items="ItemType.All" Context="itemType">
-                                    <MudSelectItem Value="@itemType.Id">@itemType.Name</MudSelectItem>
-                                </Iterations>	
-                            </MudSelect>
+                            <ItemTypeDropDown SelectedValue="_itemTypeId"
+                                              SelectionChanged="(p) => _itemTypeId = p" />
                         </div>
                     </div>    
                     <div class="col-lg-2">

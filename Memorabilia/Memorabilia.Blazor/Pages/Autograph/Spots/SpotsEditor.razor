@@ -23,10 +23,9 @@
     <Content>
         <DivRowCol3>
             <Content>
-                <ItemTypeSpotDropDown @bind-Value="@ViewModel.SpotId"
-                                      @bind-Value:event="ValueChanged" 
-                                      ItemType="@ViewModel.ItemType"
-                                      SelectedValue="ViewModel.SpotId" /> 
+                <ItemTypeSpotDropDown ItemType="@ViewModel.ItemType"
+                                      SelectedValue="ViewModel.SpotId"
+                                      SelectionChanged="(p) => ViewModel.SpotId = p" />
             </Content>
         </DivRowCol3>
     </Content>

@@ -1,15 +1,9 @@
-﻿#nullable disable
-
-namespace Memorabilia.Blazor.Pages.MemorabiliaItems.Basketballs;
+﻿namespace Memorabilia.Blazor.Pages.MemorabiliaItems.Basketballs;
 
 public partial class BasketballEditor : MemorabiliaItem<SaveBasketballViewModel>
 {
-    public CommissionerViewModel[] Commissioners;   
-
     protected async Task OnLoad()
     {      
-        await LoadCommissioners();
-
         var viewModel = await QueryRouter.Send(new GetBasketball(MemorabiliaId));
 
         if (viewModel.Brand == null)
@@ -24,11 +18,6 @@ public partial class BasketballEditor : MemorabiliaItem<SaveBasketballViewModel>
     protected async Task OnSave()
     {
         await CommandRouter.Send(new SaveBasketball.Command(ViewModel));
-    }
-
-    private async Task LoadCommissioners()
-    {
-        Commissioners = (await QueryRouter.Send(new GetCommissioners(ViewModel.SportLeagueLevel.Id))).Commissioners.ToArray();
     }
 
     private void SelectedPersonChanged(SavePersonViewModel person)

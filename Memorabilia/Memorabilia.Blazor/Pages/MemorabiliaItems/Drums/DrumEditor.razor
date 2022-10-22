@@ -22,10 +22,9 @@
     <Content>
         <DivRowCol3>
             <Content>
-                <ItemTypeBrandDropDown @bind-Value="@ViewModel.BrandId" 
-                                       @bind-Value:event="ValueChanged"
-                                       ItemType="ViewModel.ItemType"
-                                       SelectedValue="ViewModel.BrandId" />
+                <ItemTypeBrandDropDown ItemType="ViewModel.ItemType"
+                                       SelectedValue="ViewModel.BrandId"
+                                       SelectionChanged="(p) => ViewModel.BrandId = p" />
             </Content>
         </DivRowCol3>
         <MultiPersonSelector CanToggle="true"

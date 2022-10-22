@@ -22,40 +22,24 @@
     <Content>
         <DivRowCol3>
             <Content>
-                <ItemTypeBrandDropDown @bind-Value="@ViewModel.BrandId" 
-                                       @bind-Value:event="ValueChanged"
-                                       ItemType="ViewModel.ItemType"
-                                       SelectedValue="ViewModel.BrandId" />
+                <ItemTypeBrandDropDown ItemType="ViewModel.ItemType"
+                                       SelectedValue="ViewModel.BrandId"
+                                       SelectionChanged="(p) => ViewModel.BrandId = p"/>
             </Content>
             <ContentColumn2>
-                <ItemTypeSizeDropDown @bind-Value="@ViewModel.SizeId"
-                                      @bind-Value:event="ValueChanged" 
-                                      ItemType="ViewModel.ItemType"
-                                      SelectedValue="@ViewModel.SizeId" /> 
+                <ItemTypeSizeDropDown ItemType="ViewModel.ItemType"
+                                      SelectedValue="@ViewModel.SizeId"
+                                      SelectionChanged="(p) => ViewModel.SizeId = p"/> 
             </ContentColumn2>
         </DivRowCol3>
         <DivRowCol3>
             <Content>
-                <MudSelect @bind-Value="@ViewModel.PhotoTypeId"
-                           @bind-Value:event="ValueChanged" 
-                           Label="Type"
-                           Variant="Variant.Outlined">
-                    <MudSelectItem Value="@(0)">--Select--</MudSelectItem>
-                    <Iterations Items="ViewModel.PhotoTypes" Context="photoType">
-                        <MudSelectItem Value="@photoType.Id">@photoType.Name</MudSelectItem>
-                    </Iterations>	
-                </MudSelect>
+                <PhotoTypeDropDown SelectedValue="ViewModel.PhotoTypeId"
+                                   SelectionChanged="(p) => ViewModel.PhotoTypeId = p" />
             </Content>
             <ContentColumn2>
-                <MudSelect @bind-Value="@ViewModel.OrientationId"
-                           @bind-Value:event="ValueChanged" 
-                           Label="Orientation"
-                           Variant="Variant.Outlined">
-                    <MudSelectItem Value="@(0)">--Select--</MudSelectItem>
-                    <Iterations Items="ViewModel.Orientations" Context="orientation">
-                        <MudSelectItem Value="@orientation.Id">@orientation.Name</MudSelectItem>
-                    </Iterations>	
-                </MudSelect>
+                <OrientationDropDown SelectedValue="ViewModel.OrientationId"
+                                     SelectionChanged="(p) => ViewModel.OrientationId = p" />
             </ContentColumn2>
         </DivRowCol3>
         <DivRowCol3>

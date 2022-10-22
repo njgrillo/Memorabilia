@@ -1,15 +1,8 @@
 ﻿<DivRowCol3>
     <Content>
-        <MudSelect @bind-Value="@_viewModel.LeagueId"
-                   @bind-Value:event="ValueChanged" 
-                   Label="League"
-                   Variant="Variant.Outlined">
-            <MudSelectItem Value="@(0)">--Select--</MudSelectItem>
-            <Iterations Context="league" 
-                        Items="League.GetAll(SportLeagueLevel)" >
-                <MudSelectItem Value="@league.Id">@league.Name</MudSelectItem>
-            </Iterations>	
-        </MudSelect>  
+        <LeagueDropDown SelectedValue="_viewModel.LeagueId"
+                        SelectionChanged="(p) => _viewModel.LeagueId = p"
+                        SportLeagueLevel="@SportLeagueLevel" />  
     </Content>
 </DivRowCol3>
 <DivRowCol3>

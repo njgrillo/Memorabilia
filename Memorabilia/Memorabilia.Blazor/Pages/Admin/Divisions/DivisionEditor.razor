@@ -15,28 +15,14 @@
     <Content>
         <DivRowCol3>
             <Content>
-                <MudSelect @bind-Value="@ViewModel.ConferenceId"
-                           @bind-Value:event="ValueChanged" 
-                           Label="Conference"
-                           Variant="Variant.Outlined">
-                    <MudSelectItem Value="@(0)">--Select--</MudSelectItem>
-                    <Iterations Items="ViewModel.Conferences" Context="conference">
-                        <MudSelectItem Value="@conference.Id">@conference.Name</MudSelectItem>
-                    </Iterations>	
-                </MudSelect>
+                <ConferenceDropDown SelectedValue="ViewModel.ConferenceId"
+                                    SelectionChanged="(p) => ViewModel.ConferenceId = p" /> 
             </Content>
         </DivRowCol3>
         <DivRowCol3>
             <Content>
-                <MudSelect @bind-Value="@ViewModel.LeagueId"
-                           @bind-Value:event="ValueChanged"  
-                           Label="League"
-                           Variant="Variant.Outlined">
-                    <MudSelectItem Value="@(0)">--Select--</MudSelectItem>
-                    <Iterations Items="ViewModel.Leagues" Context="league">
-                        <MudSelectItem Value="@league.Id">@league.Name</MudSelectItem>
-                    </Iterations>	
-                </MudSelect>  
+                <LeagueDropDown SelectedValue="ViewModel.LeagueId"
+                                SelectionChanged="(p) => ViewModel.LeagueId = p" />  
             </Content>
         </DivRowCol3>
         <DivRowCol3>

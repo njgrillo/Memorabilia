@@ -18,15 +18,9 @@
                               Variant="Variant.Outlined" />
             </Content>
             <ContentColumn2>
-                <MudSelect @bind-Value="@_viewModel.ItemTypeId"
-                           @bind-Value:event="ValueChanged"  
-                           Label="Default Item Type"
-                           Variant="Variant.Outlined">
-                    <MudSelectItem Value="@(0)">--Select--</MudSelectItem>
-                    <Iterations Items="_viewModel.ItemTypes" Context="item">
-                        <MudSelectItem Value="@item.Id">@item.Name</MudSelectItem>
-                    </Iterations>	
-                </MudSelect>
+                <ItemTypeDropDown Label="Default Item Type"
+                                  SelectedValue="_viewModel.ItemTypeId"
+                                  SelectionChanged="(p) => _viewModel.ItemTypeId = p" />
             </ContentColumn2>
         </DivRowCol3>
         <DivRowCol3>
@@ -62,29 +56,16 @@
         </DivLeftAlign>
         <DivRowCol3>
             <Content>
-                <MudSelect @bind-Value="@_projectPersonViewModel.ItemTypeId"
-                           @bind-Value:event="ValueChanged" 
-                           Disabled="_viewModel.HasDefaultItemType"
-                           Label="Item Type"
-                           Variant="Variant.Outlined">
-                    <MudSelectItem Value="@(0)">--Select--</MudSelectItem>
-                    <Iterations Items="_viewModel.ItemTypes" Context="item">
-                        <MudSelectItem Value="@item.Id">@item.Name</MudSelectItem>
-                    </Iterations>	
-                </MudSelect>
+                <ItemTypeDropDown Disabled="_viewModel.HasDefaultItemType" 
+                                  Label="Item Type"
+                                  SelectedValue="_projectPersonViewModel.ItemTypeId"
+                                  SelectionChanged="(p) => _projectPersonViewModel.ItemTypeId = p" />
             </Content>
         </DivRowCol3>
         <DivRowCol3>
             <Content>
-                <MudSelect @bind-Value="@_projectPersonViewModel.PriorityTypeId"
-                           @bind-Value:event="ValueChanged" 
-                           Label="Priority"
-                           Variant="Variant.Outlined">
-                    <MudSelectItem Value="@(0)">--Select--</MudSelectItem>
-                    <Iterations Items="_viewModel.PriorityTypes" Context="priorityType">
-                        <MudSelectItem Value="@priorityType.Id">@priorityType.Name</MudSelectItem>
-                    </Iterations>	
-                </MudSelect>
+                <PriorityTypeDropDown SelectedValue="_projectPersonViewModel.PriorityTypeId"
+                                      SelectionChanged="(p) => _projectPersonViewModel.PriorityTypeId = p" />
             </Content>
             <ContentColumn2>
                 <MudNumericField @bind-Value="_projectPersonViewModel.Rank" 

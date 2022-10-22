@@ -15,28 +15,14 @@
     <Content>
         <DivRowCol3 Hidden="@(!DisplayItemType)">
             <Content>
-                <MudSelect @bind-Value="@ViewModel.ItemTypeId"
-                           @bind-Value:event="ValueChanged" 
-                           Label="Item Type"
-                           Variant="Variant.Outlined">
-                    <MudSelectItem Value="@(0)">--Select--</MudSelectItem>
-                    <Iterations Items="ViewModel.ItemTypes" Context="itemType">
-                        <MudSelectItem Value="@itemType.Id">@itemType.Name</MudSelectItem>
-                    </Iterations>	
-                </MudSelect>
+                <ItemTypeDropDown SelectedValue="ViewModel.ItemTypeId"
+                                  SelectionChanged="(p) => ViewModel.ItemTypeId = p" />
             </Content>
         </DivRowCol3>
         <DivRowCol3>
             <Content>
-                <MudSelect @bind-Value="@ViewModel.SportId"
-                           @bind-Value:event="ValueChanged" 
-                           Label="Sport"
-                           Variant="Variant.Outlined">
-                    <MudSelectItem Value="@(0)">--Select--</MudSelectItem>
-                    <Iterations Items="ViewModel.Sports" Context="sport">
-                        <MudSelectItem Value="@sport.Id">@sport.Name</MudSelectItem>
-                    </Iterations>	
-                </MudSelect>
+                <SportDropDown SelectedValue="ViewModel.SportId"
+                               SelectionChanged="(p) => ViewModel.SportId = p" />
             </Content>
         </DivRowCol3>
     </Content>

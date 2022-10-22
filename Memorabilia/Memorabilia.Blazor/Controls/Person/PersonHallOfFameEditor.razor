@@ -1,15 +1,8 @@
 ﻿<DivRowCol3>
     <Content>
-        <MudSelect @bind-Value="@_viewModel.SportLeagueLevelId"
-                   @bind-Value:event="ValueChanged" 
-                   Disabled="@(!_canEditSportLeagueLevel)"
-                   Label="Sport League Level"
-                   Variant="Variant.Outlined">
-            <MudSelectItem Value="@(0)">--Select--</MudSelectItem>
-            <Iterations Items="SportLeagueLevels" Context="sportLeagueLevel">
-                <MudSelectItem Value="@sportLeagueLevel.Id">@sportLeagueLevel.Name</MudSelectItem>
-            </Iterations>	
-        </MudSelect> 
+        <SportLeagueLevelDropDown Disabled="@(!_canEditSportLeagueLevel)" 
+                                  SelectedValue="_viewModel.SportLeagueLevelId"
+                                  SelectionChanged="(p) => _viewModel.SportLeagueLevelId = p" />
     </Content>
     <ContentColumn2>
         <MudNumericField @bind-Value="_viewModel.InductionYear" 
@@ -25,15 +18,8 @@
                          Variant="Variant.Outlined" />
     </Content>
     <ContentColumn2>
-        <MudSelect @bind-Value="@_viewModel.BallotNumber"
-                   @bind-Value:event="ValueChanged" 
-                   Label="Ballot"
-                   Variant="Variant.Outlined">
-            <MudSelectItem Value="@(0)">--Select--</MudSelectItem>
-            <Iterations Items="_viewModel.BallotNumbers" Context="ballotNumber">
-                <MudSelectItem Value="@ballotNumber.Id">@ballotNumber.Name</MudSelectItem>
-            </Iterations>	
-        </MudSelect> 
+        <BallotNumberDropDown SelectedValue="_viewModel.BallotNumber"
+                              SelectionChanged="(p) => _viewModel.BallotNumber = p" />
     </ContentColumn2>
 </DivRowCol3>
 <DivLeftAlign>

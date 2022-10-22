@@ -1,26 +1,12 @@
 ﻿<DivRowCol3>
     <Content>
-        <MudSelect @bind-Value="@_viewModel.OccupationId"
-                   @bind-Value:event="ValueChanged" 
-                   Disabled="@(!_canEditOccupation)"
-                   Label="Occupation"
-                   Variant="Variant.Outlined">
-            <MudSelectItem Value="@(0)">--Select--</MudSelectItem>
-            <Iterations Items="_viewModel.Occupations" Context="occupation">
-                <MudSelectItem Value="@occupation.Id">@occupation.Name</MudSelectItem>
-            </Iterations>	
-        </MudSelect>
+        <OccupationDropDown Disabled="@(!_canEditOccupation)" 
+                            SelectedValue="_viewModel.OccupationId"
+                            SelectionChanged="(p) => _viewModel.OccupationId = p" />
     </Content>
     <ContentColumn2>
-        <MudSelect @bind-Value="@_viewModel.OccupationTypeId"
-                   @bind-Value:event="ValueChanged"   
-                   Label="Type"
-                   Variant="Variant.Outlined">
-            <MudSelectItem Value="@(0)">--Select--</MudSelectItem>
-            <Iterations Items="_viewModel.OccupationTypes" Context="occupationType">
-                <MudSelectItem Value="@occupationType.Id">@occupationType.Name</MudSelectItem>
-            </Iterations>	
-        </MudSelect>
+        <OccupationTypeDropDown SelectedValue="_viewModel.OccupationTypeId"
+                                SelectionChanged="(p) => _viewModel.OccupationTypeId = p" />
     </ContentColumn2>
 </DivRowCol3>
 <DivLeftAlign>

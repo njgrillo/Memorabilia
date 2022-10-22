@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Application.Features.Admin.ItemTypeLevel;
 
-public class ItemTypeLevelViewModel
+public class ItemTypeLevelViewModel : IWithValue<int>, IWithName
 {
     private readonly Domain.Entities.ItemTypeLevel _itemTypeLevel;
 
@@ -20,4 +20,8 @@ public class ItemTypeLevelViewModel
     public int LevelTypeId => _itemTypeLevel.LevelTypeId;
 
     public string LevelTypeName => Domain.Constants.LevelType.Find(LevelTypeId).Name;
+
+    string IWithName.Name => LevelTypeName;
+
+    int IWithValue<int>.Value => LevelTypeId;    
 }

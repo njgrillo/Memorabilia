@@ -12,7 +12,7 @@ public sealed class BasketballType : DomainItemConstant
     {
         Commemorative,
         Finals,
-        Official,  
+        Official,
         None,
         Other
     };
@@ -23,7 +23,7 @@ public sealed class BasketballType : DomainItemConstant
         Official
     };
 
-    private BasketballType(int id, string name, string abbreviation) : base(id, name, abbreviation) { }
+    private BasketballType(int id, string name, string abbreviation) : base(id, name, abbreviation) { }    
 
     public static BasketballType Find(int id)
     {

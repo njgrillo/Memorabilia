@@ -1,14 +1,7 @@
 ﻿<DivRowCol3>
     <Content>
-        <MudSelect @bind-Value="@_viewModel.LeaderTypeId"
-                   @bind-Value:event="ValueChanged" 
-                   Label="Leader Type"  
-                   Variant="Variant.Outlined">
-            <MudSelectItem Value="@(0)">--Select--</MudSelectItem>
-            <Iterations Items="LeaderTypes" Context="leaderType">
-                <MudSelectItem Value="@leaderType.Id">@leaderType.Name</MudSelectItem>
-            </Iterations>	
-        </MudSelect>
+        <LeaderTypeDropDown SelectedValue="_viewModel.LeaderTypeId"
+                            SelectionChanged="(p) => _viewModel.LeaderTypeId = p" />
     </Content>
     <ContentColumn2>
         <MudTextField @bind-Value="_years" 

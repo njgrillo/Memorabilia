@@ -12,15 +12,7 @@
 </PrettyBlazor.Condition>
 <DivRowCol3 Hidden="@(!_displaySports)">
     <Content>
-        <MudSelect Label="Sport"           
-                   T="int"           
-                   Value="@SelectedValue"
-                   ValueChanged="@OnInputChange"
-                   Variant="Variant.Outlined">
-            <MudSelectItem Value="@(0)">--Select--</MudSelectItem>
-            <Iterations Items="Domain.Constants.Sport.All" Context="sport">
-                <MudSelectItem Value="@sport.Id">@sport.Name</MudSelectItem>
-            </Iterations>	
-        </MudSelect>        
+        <SportDropDown SelectedValue="@SelectedValue"
+                       SelectionChanged="(p) => OnInputChange(p)" />      
     </Content>
 </DivRowCol3>

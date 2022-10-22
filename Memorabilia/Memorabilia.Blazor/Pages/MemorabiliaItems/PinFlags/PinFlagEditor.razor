@@ -22,11 +22,10 @@
     <Content>
         <DivRowCol3>
             <Content>
-                <ItemTypeGameStyleDropDown @bind-Value="@ViewModel.GameStyleTypeId"
-                                           @bind-Value:event="ValueChanged"
-                                           ItemType="ViewModel.ItemType"
+                <ItemTypeGameStyleDropDown ItemType="ViewModel.ItemType"
                                            Label="Tournament Style Type"
-                                           SelectedValue="ViewModel.GameStyleTypeId" /> 
+                                           SelectedValue="ViewModel.GameStyleTypeId"
+                                           SelectionChanged="(p) => ViewModel.GameStyleTypeId = p" />
             </Content>
         </DivRowCol3>
         <DivRowCol3 Hidden="@(!ViewModel.DisplayGameDate)">

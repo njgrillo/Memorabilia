@@ -22,40 +22,25 @@
     <Content>
         <DivRowCol3>
             <Content>
-                <ItemTypeBrandDropDown @bind-Value="@ViewModel.BrandId" 
-                                       @bind-Value:event="ValueChanged"
-                                       ItemType="ViewModel.ItemType"
-                                       SelectedValue="ViewModel.BrandId" />
+                <ItemTypeBrandDropDown ItemType="ViewModel.ItemType"
+                                       SelectedValue="ViewModel.BrandId"
+                                       SelectionChanged="(p) => ViewModel.BrandId = p" />
             </Content>
             <ContentColumn2>
-                <ItemTypeSizeDropDown @bind-Value="@ViewModel.SizeId"
-                                      @bind-Value:event="ValueChanged" 
-                                      ItemType="ViewModel.ItemType"
-                                      SelectedValue="@ViewModel.SizeId" /> 
+                <ItemTypeSizeDropDown ItemType="ViewModel.ItemType"
+                                      SelectedValue="@ViewModel.SizeId"
+                                      SelectionChanged="(p) => ViewModel.SizeId = p" />
             </ContentColumn2>
         </DivRowCol3>
         <DivRowCol3>
             <Content>
-                <MudSelect @bind-Value="@ViewModel.BatTypeId"
-                           @bind-Value:event="ValueChanged"    
-                           Label="Bat Type"
-                           Variant="Variant.Outlined" >
-                    <MudSelectItem Value="@(0)">--Select--</MudSelectItem>
-                    <Iterations Items="ViewModel.BatTypes" Context="batType">
-                        <MudSelectItem Value="@batType.Id">@batType.Name</MudSelectItem>
-                    </Iterations>	
-                </MudSelect>
+                <BaseballTypeDropDown SelectedValue="ViewModel.BatTypeId"
+                                      SelectionChanged="(p) => ViewModel.BatTypeId = p" />
             </Content>
             <ContentColumn2>
-                <MudSelect @bind-Value="@ViewModel.GameStyleTypeId"
-                           @bind-Value:event="ValueChanged"    
-                           Label="Game Style Type"
-                           Variant="Variant.Outlined" >
-                    <MudSelectItem Value="@(0)">--Select--</MudSelectItem>
-                    <Iterations Items="ViewModel.GameStyleTypes" Context="gameStyleType">
-                        <MudSelectItem Value="@gameStyleType.Id">@gameStyleType.Name</MudSelectItem>
-                    </Iterations>	
-                </MudSelect>
+                <ItemTypeGameStyleDropDown ItemType="ViewModel.ItemType"
+                                           SelectedValue="ViewModel.GameStyleTypeId"
+                                           SelectionChanged="(p) => ViewModel.GameStyleTypeId = p" />
             </ContentColumn2>
         </DivRowCol3>
         <DivRowCol3>
@@ -74,15 +59,9 @@
         </DivRowCol3>
         <DivRowCol3>
             <Content>
-                <MudSelect @bind-Value="@ViewModel.ColorId"
-                           @bind-Value:event="ValueChanged"    
-                           Label="Color"
-                           Variant="Variant.Outlined" >
-                    <MudSelectItem Value="@(0)">--Select--</MudSelectItem>
-                    <Iterations Items="ViewModel.Colors" Context="color">
-                        <MudSelectItem Value="@color.Id">@color.Name</MudSelectItem>
-                    </Iterations>	
-                </MudSelect>
+                <ColorDropDown ItemType="ViewModel.ItemType" 
+                               SelectedValue="ViewModel.ColorId"
+                               SelectionChanged="(p) => ViewModel.ColorId = p" />
             </Content>
             <ContentColumn2>
                 <MudNumericField @bind-Value="ViewModel.Length" 
