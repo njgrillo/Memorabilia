@@ -7,7 +7,7 @@ public class LeagueDropDown : DropDown<League, int>
     [Parameter]
     public SportLeagueLevel SportLeagueLevel { get; set; }
 
-    protected override async Task OnInitializedAsync()
+    protected override void OnInitialized()
     {
         Items = SportLeagueLevel != null ? League.GetAll(SportLeagueLevel) : League.All;
         Label = "League";

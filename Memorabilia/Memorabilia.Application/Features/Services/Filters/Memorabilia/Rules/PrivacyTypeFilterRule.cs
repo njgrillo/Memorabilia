@@ -2,21 +2,21 @@
 
 public class PrivacyTypeFilterRule : IFilterRule<MemorabiliaItemViewModel>
 {
-    private int _privacyTypeId;
+    private int[] _privacyTypeIds;
 
     public bool Applies(FilterItemEnum filterItemEnum, object value)
     {
         if (filterItemEnum != FilterItemEnum.MemorabiliaPrivacyType)
             return false;
 
-        _privacyTypeId = (int)value;
+        _privacyTypeIds = (int[])value;
 
-        return _privacyTypeId > 0;
+        return _privacyTypeIds.Any();
     }
 
     public Expression<Func<MemorabiliaItemViewModel, bool>> GetExpression()
     {
-        Expression<Func<MemorabiliaItemViewModel, bool>> expression = item => item.PrivacyTypeId == _privacyTypeId;
+        Expression<Func<MemorabiliaItemViewModel, bool>> expression = item => _privacyTypeIds.Contains(item.PrivacyTypeId);
 
         return expression;
     }

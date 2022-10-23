@@ -2,7 +2,7 @@
 
 public class CollegeDropDown : DropDown<College, int>
 {
-    protected override async Task OnInitializedAsync()
+    protected override void OnInitialized()
     {
         Items = College.All;
         Label = "College";

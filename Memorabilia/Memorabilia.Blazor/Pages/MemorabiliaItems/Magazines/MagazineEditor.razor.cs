@@ -16,9 +16,4 @@ public partial class MagazineEditor : MemorabiliaItem<SaveMagazineViewModel>
     {
         await CommandRouter.Send(new SaveMagazine.Command(ViewModel));
     }
-
-    private void SelectedSportIdsChanged(IEnumerable<int> sportIds)
-    {
-        ViewModel.SportIds = sportIds.ToList();
-    }
 }

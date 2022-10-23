@@ -16,9 +16,4 @@ public partial class CanvasEditor : MemorabiliaItem<SaveCanvasViewModel>
     {
         await CommandRouter.Send(new SaveCanvas.Command(ViewModel));
     }
-
-    private void SelectedSportIdsChanged(IEnumerable<int> sportIds)
-    {
-        ViewModel.SportIds = sportIds.ToList();
-    }
 }

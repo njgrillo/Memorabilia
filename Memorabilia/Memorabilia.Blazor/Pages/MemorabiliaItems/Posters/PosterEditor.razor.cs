@@ -16,9 +16,4 @@ public partial class PosterEditor : MemorabiliaItem<SavePosterViewModel>
     {
         await CommandRouter.Send(new SavePoster.Command(ViewModel));
     }
-
-    private void SelectedSportIdsChanged(IEnumerable<int> sportIds)
-    {
-        ViewModel.SportIds = sportIds.ToList();
-    }
 }

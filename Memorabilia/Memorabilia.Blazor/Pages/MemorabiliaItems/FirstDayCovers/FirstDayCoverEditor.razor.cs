@@ -11,9 +11,4 @@ public partial class FirstDayCoverEditor : MemorabiliaItem<SaveFirstDayCoverView
     {
         await CommandRouter.Send(new SaveFirstDayCover.Command(ViewModel));
     }
-
-    private void SelectedSportIdsChanged(IEnumerable<int> sportIds)
-    {
-        ViewModel.SportIds = sportIds.ToList();
-    }
 }

@@ -11,9 +11,4 @@ public partial class BookEditor : MemorabiliaItem<SaveBookViewModel>
     {
         await CommandRouter.Send(new SaveBook.Command(ViewModel));
     }
-
-    private void SelectedSportIdsChanged(IEnumerable<int> sportIds)
-    {
-        ViewModel.SportIds = sportIds.ToList();
-    }
 }

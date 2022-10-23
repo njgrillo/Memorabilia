@@ -2,21 +2,21 @@
 
 public class SizeFilterRule : IFilterRule<MemorabiliaItemViewModel>
 {
-    private int _sizeId;
+    private int[] _sizeIds;
 
     public bool Applies(FilterItemEnum filterItemEnum, object value)
     {
         if (filterItemEnum != FilterItemEnum.MemorabiliaSize)
             return false;
 
-        _sizeId = (int)value;
+        _sizeIds = (int[])value;
 
-        return _sizeId > 0;
+        return _sizeIds.Any();
     }
 
     public Expression<Func<MemorabiliaItemViewModel, bool>> GetExpression()
     {
-        Expression<Func<MemorabiliaItemViewModel, bool>> expression = item => item.SizeId == _sizeId;
+        Expression<Func<MemorabiliaItemViewModel, bool>> expression = item => _sizeIds.Contains(item.SizeId ?? 0);
 
         return expression;
     }

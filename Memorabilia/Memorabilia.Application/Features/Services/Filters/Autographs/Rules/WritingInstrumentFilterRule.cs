@@ -2,21 +2,21 @@
 
 public class WritingInstrumentFilterRule : IFilterRule<AutographViewModel>
 {
-    private int _writingInstrumentId;
+    private int[] _writingInstrumentIds;
 
     public bool Applies(FilterItemEnum filterItemEnum, object value)
     {
         if (filterItemEnum != FilterItemEnum.AutographWritingInstrument)
             return false;
 
-        _writingInstrumentId = (int)value;
+        _writingInstrumentIds = (int[])value;
 
-        return _writingInstrumentId > 0;
+        return _writingInstrumentIds.Any();
     }
 
     public Expression<Func<AutographViewModel, bool>> GetExpression()
     {
-        Expression<Func<AutographViewModel, bool>> expression = autograph => autograph.WritingInstrumentId == _writingInstrumentId;
+        Expression<Func<AutographViewModel, bool>> expression = autograph => _writingInstrumentIds.Contains(autograph.WritingInstrumentId);
 
         return expression;
     }

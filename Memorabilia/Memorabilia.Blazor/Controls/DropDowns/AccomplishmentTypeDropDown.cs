@@ -2,7 +2,7 @@
 
 public class AccomplishmentTypeDropDown : DropDown<AccomplishmentType, int>
 {
-    protected override async Task OnInitializedAsync()
+    protected override void OnInitialized()
     {
         Items = AccomplishmentType.All;
         Label = "Accomplishment";

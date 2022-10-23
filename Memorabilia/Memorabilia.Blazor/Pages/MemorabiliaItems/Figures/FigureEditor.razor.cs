@@ -16,9 +16,4 @@ public partial class FigureEditor : MemorabiliaItem<SaveFigureViewModel>
     {
         await CommandRouter.Send(new SaveFigure.Command(ViewModel));
     }
-
-    private void SelectedSportIdsChanged(IEnumerable<int> sportIds)
-    {
-        ViewModel.SportIds = sportIds.ToList();
-    }
 }

@@ -2,21 +2,21 @@
 
 public class AcquisitionTypeFilterRule : IFilterRule<MemorabiliaItemViewModel>
 {
-    private int _acquiredTypeId;
+    private int[] _acquiredTypeIds;
 
     public bool Applies(FilterItemEnum filterItemEnum, object value)
     {
         if (filterItemEnum != FilterItemEnum.MemorabiliaAcquisitionType)
             return false;
 
-        _acquiredTypeId = (int)value;
+        _acquiredTypeIds = (int[])value;
 
-        return _acquiredTypeId > 0;
+        return _acquiredTypeIds.Any();
     }
 
     public Expression<Func<MemorabiliaItemViewModel, bool>> GetExpression()
     {
-        Expression<Func<MemorabiliaItemViewModel, bool>> expression = item => item.Acquisition.AcquisitionTypeId == _acquiredTypeId;
+        Expression<Func<MemorabiliaItemViewModel, bool>> expression = item => _acquiredTypeIds.Contains(item.Acquisition.AcquisitionTypeId);
 
         return expression;
     }

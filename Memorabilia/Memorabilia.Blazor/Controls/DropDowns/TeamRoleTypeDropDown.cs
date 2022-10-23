@@ -2,7 +2,7 @@
 
 public class TeamRoleTypeDropDown : DropDown<TeamRoleType, int>
 {
-    protected override async Task OnInitializedAsync()
+    protected override void OnInitialized()
     {
         Items = TeamRoleType.All;
         Label = "Team Role Type";

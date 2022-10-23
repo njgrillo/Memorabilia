@@ -16,9 +16,4 @@ public partial class CardEditor : MemorabiliaItem<SaveCardViewModel>
     {
         await CommandRouter.Send(new SaveCard.Command(ViewModel));
     }
-
-    private void SelectedSportIdsChanged(IEnumerable<int> sportIds)
-    {
-        ViewModel.SportIds = sportIds.ToList();
-    }
 }

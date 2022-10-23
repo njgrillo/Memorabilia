@@ -2,7 +2,7 @@
 
 public class LeaderTypeDropDown : DropDown<LeaderType, int>
 {
-    protected override async Task OnInitializedAsync()
+    protected override void OnInitialized()
     {
         Items = LeaderType.All;
         Label = "Leader Type";

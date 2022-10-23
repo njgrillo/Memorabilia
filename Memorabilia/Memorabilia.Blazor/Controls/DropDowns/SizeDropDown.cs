@@ -2,7 +2,7 @@
 
 public class SizeDropDown : DropDown<Domain.Constants.Size, int>
 {
-    protected override async Task OnInitializedAsync()
+    protected override void OnInitialized()
     {
         Items = Domain.Constants.Size.All;
         Label = "Size";

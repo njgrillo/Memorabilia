@@ -2,21 +2,21 @@
 
 public class SportLeagueLevelFilterRule : IFilterRule<MemorabiliaItemViewModel>
 {
-    private int _sportLeagueLevelId;
+    private int[] _sportLeagueLevelIds;
 
     public bool Applies(FilterItemEnum filterItemEnum, object value)
     {
         if (filterItemEnum != FilterItemEnum.MemorabiliaSportLeagueLevel)
             return false;
 
-        _sportLeagueLevelId = (int)value;
+        _sportLeagueLevelIds = (int[])value;
 
-        return _sportLeagueLevelId > 0;
+        return _sportLeagueLevelIds.Any();
     }
 
     public Expression<Func<MemorabiliaItemViewModel, bool>> GetExpression()
     {
-        Expression<Func<MemorabiliaItemViewModel, bool>> expression = item => item.SportLeagueLevels.Select(sportLeagueLevel => sportLeagueLevel.Id).Contains(_sportLeagueLevelId);
+        Expression<Func<MemorabiliaItemViewModel, bool>> expression = item => item.SportLeagueLevels.Select(sportLeagueLevel => sportLeagueLevel.Id).Any(sportLeagueLevelId => _sportLeagueLevelIds.Contains(sportLeagueLevelId));
 
         return expression;
     }

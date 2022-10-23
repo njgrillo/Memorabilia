@@ -35,10 +35,13 @@
         <MultiPersonSelector CanToggle="true"
                              ItemType="ViewModel.ItemType"
                              People="ViewModel.People" />    
-        <MultiSportSelector CanToggle="true"
-                            ItemType="ViewModel.ItemType"
-                            SelectedSportIdsChanged="SelectedSportIdsChanged"
-                            SportIds="ViewModel.SportIds" />
+        <DivRowCol3>
+            <Content>
+                <SportDropDown MultiSelect="true"
+                               SelectedItems="ViewModel.SportIds"
+                               SelectedItemsChanged="(p) => ViewModel.SportIds = p.ToList()" />
+            </Content>
+        </DivRowCol3>
         <MultiTeamSelector CanToggle="true" 
                            ItemType="ViewModel.ItemType"
                            Teams="ViewModel.Teams" />

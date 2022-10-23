@@ -2,21 +2,21 @@
 
 public class SpotFilterRule : IFilterRule<AutographViewModel>
 {
-    private int _spotId;
+    private int[] _spotIds;
 
     public bool Applies(FilterItemEnum filterItemEnum, object value)
     {
         if (filterItemEnum != FilterItemEnum.AutographSpot)
             return false;
 
-        _spotId = (int)value;
+        _spotIds = (int[])value;
 
-        return _spotId > 0;
+        return _spotIds.Any();
     }
 
     public Expression<Func<AutographViewModel, bool>> GetExpression()
     {
-        Expression<Func<AutographViewModel, bool>> expression = autograph => autograph.SpotId == _spotId;
+        Expression<Func<AutographViewModel, bool>> expression = autograph => _spotIds.Contains(autograph.SpotId ?? 0);
 
         return expression;
     }

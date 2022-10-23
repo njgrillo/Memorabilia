@@ -16,9 +16,4 @@ public partial class PhotoEditor : MemorabiliaItem<SavePhotoViewModel>
     {
         await CommandRouter.Send(new SavePhoto.Command(ViewModel));
     }
-
-    private void SelectedSportIdsChanged(IEnumerable<int> sportIds)
-    {
-        ViewModel.SportIds = sportIds.ToList();
-    }
 }

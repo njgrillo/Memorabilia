@@ -2,7 +2,7 @@
 
 public class FigureTypeDropDown : DropDown<FigureType, int>
 {
-    protected override async Task OnInitializedAsync()
+    protected override void OnInitialized()
     {
         Items = FigureType.All;
         Label = "Type";

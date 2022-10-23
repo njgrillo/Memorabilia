@@ -2,7 +2,7 @@
 
 public class AuthenticationCompanyDropDown : DropDown<AuthenticationCompany, int>
 {
-    protected override async Task OnInitializedAsync()
+    protected override void OnInitialized()
     {
         Items = AuthenticationCompany.All;
         Label = "Authentication Company";

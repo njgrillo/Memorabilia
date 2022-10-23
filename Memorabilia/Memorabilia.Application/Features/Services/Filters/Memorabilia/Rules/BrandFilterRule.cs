@@ -2,21 +2,21 @@
 
 public class BrandFilterRule : IFilterRule<MemorabiliaItemViewModel>
 {
-    private int _brandId;
+    private int[] _brandIds;
 
     public bool Applies(FilterItemEnum filterItemEnum, object value)
     {
         if (filterItemEnum != FilterItemEnum.MemorabiliaBrand)
             return false;
 
-        _brandId = (int)value;
+        _brandIds = (int[])value;
 
-        return _brandId > 0;
+        return _brandIds.Any();
     }
 
     public Expression<Func<MemorabiliaItemViewModel, bool>> GetExpression()
     {
-        Expression<Func<MemorabiliaItemViewModel, bool>> expression = item => item.BrandId == _brandId;
+        Expression<Func<MemorabiliaItemViewModel, bool>> expression = item => _brandIds.Contains(item.BrandId ?? 0);
 
         return expression;
     }

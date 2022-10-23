@@ -2,21 +2,21 @@
 
 public class ConditionFilterRule : IFilterRule<AutographViewModel>
 {
-    private int _conditionId;
+    private int[] _conditionIds;
 
     public bool Applies(FilterItemEnum filterItemEnum, object value)
     {
         if (filterItemEnum != FilterItemEnum.AutographCondition)
             return false;
 
-        _conditionId = (int)value;
+        _conditionIds = (int[])value;
 
-        return _conditionId > 0;
+        return _conditionIds.Any();
     }
 
     public Expression<Func<AutographViewModel, bool>> GetExpression()
     {
-        Expression<Func<AutographViewModel, bool>> expression = autograph => autograph.ConditionId == _conditionId;
+        Expression<Func<AutographViewModel, bool>> expression = autograph => _conditionIds.Contains(autograph.ConditionId);
 
         return expression;
     }

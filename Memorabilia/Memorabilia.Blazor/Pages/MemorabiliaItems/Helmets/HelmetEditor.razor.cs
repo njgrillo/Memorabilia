@@ -8,7 +8,7 @@ public partial class HelmetEditor : MemorabiliaItem<SaveHelmetViewModel>
 
         if (viewModel.Brand == null)
         {
-            SetDefaults();
+            ViewModel.GameStyleTypeId = GameStyleType.None.Id;
             return;
         }
 
@@ -18,15 +18,5 @@ public partial class HelmetEditor : MemorabiliaItem<SaveHelmetViewModel>
     protected async Task OnSave()
     {
         await CommandRouter.Send(new SaveHelmet.Command(ViewModel));
-    }
-
-    private void SelectedSportIdsChanged(IEnumerable<int> sportIds)
-    {
-        ViewModel.SportIds = sportIds.ToList();
-    }
-
-    private void SetDefaults()
-    {
-        ViewModel.GameStyleTypeId = GameStyleType.None.Id;
     }
 }

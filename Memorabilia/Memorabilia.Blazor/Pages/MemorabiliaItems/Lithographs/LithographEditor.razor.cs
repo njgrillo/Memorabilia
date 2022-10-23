@@ -16,9 +16,4 @@ public partial class LithographEditor : MemorabiliaItem<SaveLithographViewModel>
     {
         await CommandRouter.Send(new SaveLithograph.Command(ViewModel));
     }
-
-    private void SelectedSportIdsChanged(IEnumerable<int> sportIds)
-    {
-        ViewModel.SportIds = sportIds.ToList();
-    }
 }

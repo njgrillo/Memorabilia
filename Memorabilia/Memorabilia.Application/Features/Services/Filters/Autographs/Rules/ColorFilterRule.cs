@@ -2,21 +2,21 @@
 
 public class ColorFilterRule : IFilterRule<AutographViewModel>
 {
-    private int _colorId;
+    private int[] _colorIds;
 
     public bool Applies(FilterItemEnum filterItemEnum, object value)
     {
         if (filterItemEnum != FilterItemEnum.AutographColor)
             return false;
 
-        _colorId = (int)value;
+        _colorIds = (int[])value;
 
-        return _colorId > 0;
+        return _colorIds.Any();
     }
 
     public Expression<Func<AutographViewModel, bool>> GetExpression()
     {
-        Expression<Func<AutographViewModel, bool>> expression = autograph => autograph.ColorId == _colorId;
+        Expression<Func<AutographViewModel, bool>> expression = autograph => _colorIds.Contains(autograph.ColorId);
 
         return expression;
     }

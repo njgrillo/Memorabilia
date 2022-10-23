@@ -2,7 +2,7 @@
 
 public class PriorityTypeDropDown : DropDown<PriorityType, int>
 {
-    protected override async Task OnInitializedAsync()
+    protected override void OnInitialized()
     {
         Items = PriorityType.All;
         Label = "Priority";

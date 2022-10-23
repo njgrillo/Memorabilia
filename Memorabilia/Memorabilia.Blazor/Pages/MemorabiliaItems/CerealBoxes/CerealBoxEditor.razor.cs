@@ -16,9 +16,4 @@ public partial class CerealBoxEditor : MemorabiliaItem<SaveCerealBoxViewModel>
     {
         await CommandRouter.Send(new SaveCerealBox.Command(ViewModel));
     }
-
-    private void SelectedSportIdsChanged(IEnumerable<int> sportIds)
-    {
-        ViewModel.SportIds = sportIds.ToList();
-    }
 }

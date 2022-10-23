@@ -3,7 +3,7 @@ using Memorabilia.Domain.Entities;
 
 namespace Memorabilia.Application.Features.Admin.Teams;
 
-public class TeamViewModel
+public class TeamViewModel : IWithName, IWithValue<int>
 {
     private readonly Team _team;
 
@@ -41,4 +41,6 @@ public class TeamViewModel
     public int SportId => _team.Franchise.SportLeagueLevel.SportId;
 
     public Domain.Constants.SportLeagueLevel SportLeagueLevel => Domain.Constants.SportLeagueLevel.Find(_team.Franchise.SportLeagueLevelId);
+
+    int IWithValue<int>.Value => Id;
 }

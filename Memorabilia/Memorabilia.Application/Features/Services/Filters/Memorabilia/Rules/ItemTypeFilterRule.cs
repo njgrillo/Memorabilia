@@ -2,21 +2,21 @@
 
 public class ItemTypeFilterRule : IFilterRule<MemorabiliaItemViewModel>
 {
-    private int _itemTypeId;
+    private int[] _itemTypeIds;
 
     public bool Applies(FilterItemEnum filterItemEnum, object value)
     {
         if (filterItemEnum != FilterItemEnum.MemorabiliaItemType)
             return false;
 
-        _itemTypeId = (int)value;
+        _itemTypeIds = (int[])value;
 
-        return _itemTypeId > 0;
+        return _itemTypeIds.Any();
     }
 
     public Expression<Func<MemorabiliaItemViewModel, bool>> GetExpression()
     {
-        Expression<Func<MemorabiliaItemViewModel, bool>> expression = item => item.ItemTypeId == _itemTypeId;
+        Expression<Func<MemorabiliaItemViewModel, bool>> expression = item => _itemTypeIds.Contains(item.ItemTypeId);
 
         return expression;
     }

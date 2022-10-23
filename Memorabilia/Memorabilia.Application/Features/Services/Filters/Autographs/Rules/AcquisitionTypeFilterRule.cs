@@ -2,21 +2,21 @@
 
 public class AcquisitionTypeFilterRule : IFilterRule<AutographViewModel>
 {
-    private int _acquisitionTypeId;
+    private int[] _acquisitionTypeIds;
 
     public bool Applies(FilterItemEnum filterItemEnum, object value)
     {
         if (filterItemEnum != FilterItemEnum.AutographAcquisitionType)
             return false;
 
-        _acquisitionTypeId = (int)value;
+        _acquisitionTypeIds = (int[])value;
 
-        return _acquisitionTypeId > 0;
+        return _acquisitionTypeIds.Any();
     }
 
     public Expression<Func<AutographViewModel, bool>> GetExpression()
     {
-        Expression<Func<AutographViewModel, bool>> expression = autograph => autograph.AcquisitionTypeId == _acquisitionTypeId;
+        Expression<Func<AutographViewModel, bool>> expression = autograph => _acquisitionTypeIds.Contains(autograph.AcquisitionTypeId);
 
         return expression;
     }

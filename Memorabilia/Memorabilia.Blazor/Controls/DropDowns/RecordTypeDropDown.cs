@@ -2,7 +2,7 @@
 
 public class RecordTypeDropDown : DropDown<RecordType, int>
 {
-    protected override async Task OnInitializedAsync()
+    protected override void OnInitialized()
     {
         Items = RecordType.All;
         Label = "Record Type";

@@ -2,21 +2,21 @@
 
 public class SportFilterRule : IFilterRule<MemorabiliaItemViewModel>
 {
-    private int _sportId;
+    private int[] _sportIds;
 
     public bool Applies(FilterItemEnum filterItemEnum, object value)
     {
         if (filterItemEnum != FilterItemEnum.MemorabiliaSport)
             return false;
 
-        _sportId = (int)value;
+        _sportIds = (int[])value;
 
-        return _sportId > 0;
+        return _sportIds.Any();
     }
 
     public Expression<Func<MemorabiliaItemViewModel, bool>> GetExpression()
     {
-        Expression<Func<MemorabiliaItemViewModel, bool>> expression = item => item.Sports.Select(sport => sport.SportId).Contains(_sportId);
+        Expression<Func<MemorabiliaItemViewModel, bool>> expression = item => item.Sports.Select(sport => sport.SportId).Any(sportId => _sportIds.Contains(sportId));
 
         return expression;
     }

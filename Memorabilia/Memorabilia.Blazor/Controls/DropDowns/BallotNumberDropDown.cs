@@ -2,7 +2,7 @@
 
 public class BallotNumberDropDown : DropDown<BallotNumber, int>
 {
-    protected override async Task OnInitializedAsync()
+    protected override void OnInitialized()
     {
         Items = BallotNumber.All;
         Label = "Ballot";

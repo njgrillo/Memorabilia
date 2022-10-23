@@ -2,7 +2,7 @@
 
 public class PhotoTypeDropDown : DropDown<PhotoType, int>
 {
-    protected override async Task OnInitializedAsync()
+    protected override void OnInitialized()
     {
         Items = PhotoType.All;
         Label = "Type";

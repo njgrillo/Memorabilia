@@ -25,70 +25,70 @@ public partial class MemorabiliaSearchControl : ComponentBase
     private List<AutographViewModel> _autographs => Items.SelectMany(item => item.Autographs).ToList();
 
     private bool _hasFilter => _autographAcquiredDate.HasValue ||
-                               _autographAcquisitionTypeId > 0 ||
-                               _autographConditionId > 0 ||
+                               _autographAcquisitionTypeIds.Any() ||
+                               _autographConditionIds.Any() ||
                                _autographCost.HasValue ||
                                _autographEstimatedValue.HasValue ||
                                _autographGrade.HasValue ||
                                _autographPerson?.Id > 0 ||
-                               _brandId > 0 ||
-                               _colorId > 0 ||
-                               _franchiseId > 0 ||
-                               _gameStyleTypeId > 0 ||
+                               _brandIds.Any() ||
+                               _colorIds.Any() ||
+                               _franchiseIds.Any() ||
+                               _gameStyleTypeIds.Any() ||
                                _hasAutographAuthentication ||                               
                                _hasAutographInscription ||
-                               _itemTypeId > 0 ||
-                               _levelTypeId > 0 ||
+                               _itemTypeIds.Any() ||
+                               _levelTypeIds.Any() ||
                                _memorabiliaAcquiredDate.HasValue ||
-                               _memorabiliaAcquisitionTypeId > 0 ||
-                               _memorabiliaConditionId > 0 ||
+                               _memorabiliaAcquisitionTypeIds.Any() ||
+                               _memorabiliaConditionIds.Any() ||
                                _memorabiliaCost.HasValue ||
                                _memorabiliaEstimatedValue.HasValue ||
                                _memorabiliaGrade.HasValue ||
                                _memorabiliaPerson?.Id > 0 ||
-                               _memorabiliaPurchaseTypeId > 0 ||
+                               _memorabiliaPurchaseTypeIds.Any() ||
                                _memorabiliaTeam?.Id > 0 ||
                                _noAutographImages ||
-                               _privacyTypeId > 0 ||
-                               _sizeId > 0 ||
-                               _sportId > 0 ||
-                               _sportLeagueLevelId > 0 ||
-                               _spotId > 0 ||
-                               _writingInstrumentId > 0;
+                               _privacyTypeIds.Any() ||
+                               _sizeIds.Any() ||
+                               _sportIds.Any() ||
+                               _sportLeagueLevelIds.Any() ||
+                               _spotIds.Any() ||
+                               _writingInstrumentIds.Any();
 
     private static DateTime? _autographAcquiredDate;
-    private static int _autographAcquisitionTypeId;
-    private static int _autographConditionId;
+    private IEnumerable<int> _autographAcquisitionTypeIds = Enumerable.Empty<int>();
+    private IEnumerable<int> _autographConditionIds = Enumerable.Empty<int>();
     private static decimal? _autographCost;
     private static decimal? _autographEstimatedValue;
     private static int? _autographGrade;
     private static SavePersonViewModel _autographPerson;
-    private static int _brandId;
-    private static int _colorId;
-    private static int _franchiseId;
-    private static int _gameStyleTypeId;
+    private IEnumerable<int> _brandIds = Enumerable.Empty<int>();
+    private IEnumerable<int> _colorIds = Enumerable.Empty<int>();
+    private IEnumerable<int> _franchiseIds = Enumerable.Empty<int>();
+    private IEnumerable<int> _gameStyleTypeIds = Enumerable.Empty<int>();
     private static bool _hasAutographAuthentication;    
     private static bool _hasAutographInscription;
-    private static int _itemTypeId;
-    private static int _levelTypeId;
+    private IEnumerable<int> _itemTypeIds = Enumerable.Empty<int>();
+    private IEnumerable<int> _levelTypeIds = Enumerable.Empty<int>();
     private static DateTime? _memorabiliaAcquiredDate;
-    private static int _memorabiliaAcquisitionTypeId;
-    private static int _memorabiliaConditionId;
+    private IEnumerable<int> _memorabiliaAcquisitionTypeIds = Enumerable.Empty<int>();
+    private IEnumerable<int> _memorabiliaConditionIds = Enumerable.Empty<int>();
     private static decimal? _memorabiliaCost;
     private static decimal? _memorabiliaEstimatedValue;
     private static int? _memorabiliaGrade;
     private static SavePersonViewModel _memorabiliaPerson;
-    private static int _memorabiliaPurchaseTypeId;
+    private IEnumerable<int> _memorabiliaPurchaseTypeIds = Enumerable.Empty<int>();
     private static SaveTeamViewModel _memorabiliaTeam;
     private static bool _noAutographImages;
     private IEnumerable<SavePersonViewModel> _people = Enumerable.Empty<SavePersonViewModel>();
-    private static int _privacyTypeId;
-    private static int _sizeId;
-    private static int _sportId;
-    private static int _sportLeagueLevelId;
-    private static int _spotId;
+    private IEnumerable<int> _privacyTypeIds = Enumerable.Empty<int>();
+    private IEnumerable<int> _sizeIds = Enumerable.Empty<int>();
+    private IEnumerable<int> _sportIds = Enumerable.Empty<int>();
+    private IEnumerable<int> _sportLeagueLevelIds = Enumerable.Empty<int>();
+    private IEnumerable<int> _spotIds = Enumerable.Empty<int>();
     private IEnumerable<SaveTeamViewModel> _teams = Enumerable.Empty<SaveTeamViewModel>();
-    private static int _writingInstrumentId;
+    private IEnumerable<int> _writingInstrumentIds = Enumerable.Empty<int>();
 
     protected async Task HandleValidSubmit()
     {
@@ -109,36 +109,36 @@ public partial class MemorabiliaSearchControl : ComponentBase
     protected async Task ResetCriteria()
     {
         _autographAcquiredDate = null;
-        _autographAcquisitionTypeId = 0;
-        _autographConditionId = 0;
+        _autographAcquisitionTypeIds = Enumerable.Empty<int>();
+        _autographConditionIds = Enumerable.Empty<int>();
         _autographCost = null;
         _autographEstimatedValue = null;
         _autographGrade = null;
         _autographPerson = null;
-        _brandId = 0;
-        _colorId = 0;
-        _franchiseId = 0;
-        _gameStyleTypeId = 0;
+        _brandIds = Enumerable.Empty<int>();
+        _colorIds = Enumerable.Empty<int>();
+        _franchiseIds = Enumerable.Empty<int>();
+        _gameStyleTypeIds = Enumerable.Empty<int>();
         _hasAutographAuthentication = false;        
         _hasAutographInscription = false;
-        _itemTypeId = 0;
-        _levelTypeId = 0;
+        _itemTypeIds = Enumerable.Empty<int>();
+        _levelTypeIds = Enumerable.Empty<int>();
         _memorabiliaAcquiredDate = null;
-        _memorabiliaAcquisitionTypeId = 0;
-        _memorabiliaConditionId = 0;
+        _memorabiliaAcquisitionTypeIds = Enumerable.Empty<int>();
+        _memorabiliaConditionIds = Enumerable.Empty<int>();
         _memorabiliaCost = null;
         _memorabiliaEstimatedValue = null;
         _memorabiliaGrade = null;
         _memorabiliaPerson = null;
-        _memorabiliaPurchaseTypeId = 0;
+        _memorabiliaPurchaseTypeIds = Enumerable.Empty<int>();
         _memorabiliaTeam = null;
         _noAutographImages = false;
-        _privacyTypeId = 0;
-        _sizeId = 0;
-        _sportId = 0;
-        _sportLeagueLevelId = 0;
-        _spotId = 0;
-        _writingInstrumentId = 0;
+        _privacyTypeIds = Enumerable.Empty<int>();
+        _sizeIds = Enumerable.Empty<int>();
+        _sportIds = Enumerable.Empty<int>();
+        _sportLeagueLevelIds = Enumerable.Empty<int>();
+        _spotIds = Enumerable.Empty<int>();
+        _writingInstrumentIds = Enumerable.Empty<int>();
 
         await FilterResults();
     }
@@ -146,18 +146,18 @@ public partial class MemorabiliaSearchControl : ComponentBase
     private List<AutographViewModel> FilterAutographs()
     {
         AutographFilterPredicateBuilder.AppendPredicateAnd(FilterItemEnum.AutographAcquiredDate, _autographAcquiredDate);
-        AutographFilterPredicateBuilder.AppendPredicateAnd(FilterItemEnum.AutographAcquisitionType, _autographAcquisitionTypeId);
+        AutographFilterPredicateBuilder.AppendPredicateAnd(FilterItemEnum.AutographAcquisitionType, _autographAcquisitionTypeIds.ToArray());
         AutographFilterPredicateBuilder.AppendPredicateAnd(FilterItemEnum.AutographAuthentication, _hasAutographAuthentication);
-        AutographFilterPredicateBuilder.AppendPredicateAnd(FilterItemEnum.AutographColor, _colorId);
-        AutographFilterPredicateBuilder.AppendPredicateAnd(FilterItemEnum.AutographCondition, _autographConditionId);
+        AutographFilterPredicateBuilder.AppendPredicateAnd(FilterItemEnum.AutographColor, _colorIds.ToArray());
+        AutographFilterPredicateBuilder.AppendPredicateAnd(FilterItemEnum.AutographCondition, _autographConditionIds.ToArray());
         AutographFilterPredicateBuilder.AppendPredicateAnd(FilterItemEnum.AutographCost, _autographCost);
         AutographFilterPredicateBuilder.AppendPredicateAnd(FilterItemEnum.AutographEstimatedValue, _autographEstimatedValue);
         AutographFilterPredicateBuilder.AppendPredicateAnd(FilterItemEnum.AutographGrade, _autographGrade);
         AutographFilterPredicateBuilder.AppendPredicateAnd(FilterItemEnum.AutographImage, _noAutographImages);
         AutographFilterPredicateBuilder.AppendPredicateAnd(FilterItemEnum.AutographInscription, _hasAutographInscription);
         AutographFilterPredicateBuilder.AppendPredicateAnd(FilterItemEnum.AutographPerson, _autographPerson?.Id);
-        AutographFilterPredicateBuilder.AppendPredicateAnd(FilterItemEnum.AutographSpot, _spotId);
-        AutographFilterPredicateBuilder.AppendPredicateAnd(FilterItemEnum.AutographWritingInstrument, _writingInstrumentId);
+        AutographFilterPredicateBuilder.AppendPredicateAnd(FilterItemEnum.AutographSpot, _spotIds.ToArray());
+        AutographFilterPredicateBuilder.AppendPredicateAnd(FilterItemEnum.AutographWritingInstrument, _writingInstrumentIds.ToArray());
 
         return _autographs.AsQueryable().Where(AutographFilterPredicateBuilder.Predicate).ToList();
     }
@@ -165,21 +165,21 @@ public partial class MemorabiliaSearchControl : ComponentBase
     private List<MemorabiliaItemViewModel> FilterMemorabiliaItems()
     {
         MemorabiliaFilterPredicateBuilder.AppendPredicateAnd(FilterItemEnum.MemorabiliaAcquiredDate, _memorabiliaAcquiredDate);
-        MemorabiliaFilterPredicateBuilder.AppendPredicateAnd(FilterItemEnum.MemorabiliaAcquisitionType, _memorabiliaAcquisitionTypeId);
-        MemorabiliaFilterPredicateBuilder.AppendPredicateAnd(FilterItemEnum.MemorabiliaBrand, _brandId);
-        MemorabiliaFilterPredicateBuilder.AppendPredicateAnd(FilterItemEnum.MemorabiliaCondition, _memorabiliaConditionId);
+        MemorabiliaFilterPredicateBuilder.AppendPredicateAnd(FilterItemEnum.MemorabiliaAcquisitionType, _memorabiliaAcquisitionTypeIds.ToArray());
+        MemorabiliaFilterPredicateBuilder.AppendPredicateAnd(FilterItemEnum.MemorabiliaBrand, _brandIds.ToArray());
+        MemorabiliaFilterPredicateBuilder.AppendPredicateAnd(FilterItemEnum.MemorabiliaCondition, _memorabiliaConditionIds.ToArray());
         MemorabiliaFilterPredicateBuilder.AppendPredicateAnd(FilterItemEnum.MemorabiliaCost, _memorabiliaCost);
         MemorabiliaFilterPredicateBuilder.AppendPredicateAnd(FilterItemEnum.MemorabiliaEstimatedValue, _memorabiliaEstimatedValue);
-        MemorabiliaFilterPredicateBuilder.AppendPredicateAnd(FilterItemEnum.MemorabiliaFranchise, _franchiseId);
-        MemorabiliaFilterPredicateBuilder.AppendPredicateAnd(FilterItemEnum.MemorabiliaGameStyleType, _gameStyleTypeId);
-        MemorabiliaFilterPredicateBuilder.AppendPredicateAnd(FilterItemEnum.MemorabiliaItemType, _itemTypeId);
-        MemorabiliaFilterPredicateBuilder.AppendPredicateAnd(FilterItemEnum.MemorabiliaLevelType, _levelTypeId);
+        MemorabiliaFilterPredicateBuilder.AppendPredicateAnd(FilterItemEnum.MemorabiliaFranchise, _franchiseIds.ToArray());
+        MemorabiliaFilterPredicateBuilder.AppendPredicateAnd(FilterItemEnum.MemorabiliaGameStyleType, _gameStyleTypeIds.ToArray());
+        MemorabiliaFilterPredicateBuilder.AppendPredicateAnd(FilterItemEnum.MemorabiliaItemType, _itemTypeIds.ToArray());
+        MemorabiliaFilterPredicateBuilder.AppendPredicateAnd(FilterItemEnum.MemorabiliaLevelType, _levelTypeIds.ToArray());
         MemorabiliaFilterPredicateBuilder.AppendPredicateAnd(FilterItemEnum.MemorabiliaPerson, _memorabiliaPerson?.Id);
-        MemorabiliaFilterPredicateBuilder.AppendPredicateAnd(FilterItemEnum.MemorabiliaPrivacyType, _privacyTypeId);
-        MemorabiliaFilterPredicateBuilder.AppendPredicateAnd(FilterItemEnum.MemorabiliaPurchaseType, _memorabiliaPurchaseTypeId);
-        MemorabiliaFilterPredicateBuilder.AppendPredicateAnd(FilterItemEnum.MemorabiliaSize, _sizeId);
-        MemorabiliaFilterPredicateBuilder.AppendPredicateAnd(FilterItemEnum.MemorabiliaSport, _sportId);
-        MemorabiliaFilterPredicateBuilder.AppendPredicateAnd(FilterItemEnum.MemorabiliaSportLeagueLevel, _sportLeagueLevelId);
+        MemorabiliaFilterPredicateBuilder.AppendPredicateAnd(FilterItemEnum.MemorabiliaPrivacyType, _privacyTypeIds.ToArray());
+        MemorabiliaFilterPredicateBuilder.AppendPredicateAnd(FilterItemEnum.MemorabiliaPurchaseType, _memorabiliaPurchaseTypeIds.ToArray());
+        MemorabiliaFilterPredicateBuilder.AppendPredicateAnd(FilterItemEnum.MemorabiliaSize, _sizeIds.ToArray());
+        MemorabiliaFilterPredicateBuilder.AppendPredicateAnd(FilterItemEnum.MemorabiliaSport, _sportIds.ToArray());
+        MemorabiliaFilterPredicateBuilder.AppendPredicateAnd(FilterItemEnum.MemorabiliaSportLeagueLevel, _sportLeagueLevelIds.ToArray());
         MemorabiliaFilterPredicateBuilder.AppendPredicateAnd(FilterItemEnum.MemorabiliaTeam, _memorabiliaTeam?.Id);
 
         return Items.AsQueryable().Where(MemorabiliaFilterPredicateBuilder.Predicate).ToList();

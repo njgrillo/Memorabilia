@@ -2,21 +2,21 @@
 
 public class GameStyleTypeFilterRule : IFilterRule<MemorabiliaItemViewModel>
 {
-    private int _gameStyleTypeId;
+    private int[] _gameStyleTypeIds;
 
     public bool Applies(FilterItemEnum filterItemEnum, object value)
     {
         if (filterItemEnum != FilterItemEnum.MemorabiliaGameStyleType)
             return false;
 
-        _gameStyleTypeId = (int)value;
+        _gameStyleTypeIds = (int[])value;
 
-        return _gameStyleTypeId > 0;
+        return _gameStyleTypeIds.Any();
     }
 
     public Expression<Func<MemorabiliaItemViewModel, bool>> GetExpression()
     {
-        Expression<Func<MemorabiliaItemViewModel, bool>> expression = item => item.GameStyleTypeId == _gameStyleTypeId;
+        Expression<Func<MemorabiliaItemViewModel, bool>> expression = item => _gameStyleTypeIds.Contains(item.GameStyleTypeId ?? 0);
 
         return expression;
     }

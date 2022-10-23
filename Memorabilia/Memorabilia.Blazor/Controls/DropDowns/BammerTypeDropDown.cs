@@ -2,7 +2,7 @@
 
 public class BammerTypeDropDown : DropDown<BammerType, int>
 {
-    protected override async Task OnInitializedAsync()
+    protected override void OnInitialized()
     {
         Items = BammerType.All;
         Label = "Type";

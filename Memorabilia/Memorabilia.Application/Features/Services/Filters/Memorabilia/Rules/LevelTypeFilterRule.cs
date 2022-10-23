@@ -2,21 +2,21 @@
 
 public class LevelTypeFilterRule : IFilterRule<MemorabiliaItemViewModel>
 {
-    private int _levelTypeId;
+    private int[] _levelTypeIds;
 
     public bool Applies(FilterItemEnum filterItemEnum, object value)
     {
         if (filterItemEnum != FilterItemEnum.MemorabiliaLevelType)
             return false;
 
-        _levelTypeId = (int)value;
+        _levelTypeIds = (int[])value;
 
-        return _levelTypeId > 0;
+        return _levelTypeIds.Any();
     }
 
     public Expression<Func<MemorabiliaItemViewModel, bool>> GetExpression()
     {
-        Expression<Func<MemorabiliaItemViewModel, bool>> expression = item => item.LevelTypeId == _levelTypeId;
+        Expression<Func<MemorabiliaItemViewModel, bool>> expression = item => _levelTypeIds.Contains(item.LevelTypeId ?? 0);
 
         return expression;
     }

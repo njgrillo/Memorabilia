@@ -2,7 +2,7 @@
 
 public class BatTypeDropDown : DropDown<BatType, int>
 {
-    protected override async Task OnInitializedAsync()
+    protected override void OnInitialized()
     {
         Items = BatType.All;
         Label = "Bat Type";

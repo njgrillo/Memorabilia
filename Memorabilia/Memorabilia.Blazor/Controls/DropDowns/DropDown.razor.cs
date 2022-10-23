@@ -17,6 +17,18 @@ public partial class DropDown<TItem, TType> : ComponentBase where TItem : class,
     public string Label { get; set; }
 
     [Parameter]
+    public bool MultiSelect { get; set; }
+
+    [Parameter]
+    public bool SelectAll { get; set; } = true;
+
+    [Parameter]
+    public IEnumerable<TType> SelectedItems { get; set; } = Enumerable.Empty<TType>();
+
+    [Parameter]
+    public EventCallback<IEnumerable<TType>> SelectedItemsChanged { get; set; }
+
+    [Parameter]
     public TType SelectedValue { get; set; }
 
     [Parameter]
@@ -49,5 +61,10 @@ public partial class DropDown<TItem, TType> : ComponentBase where TItem : class,
     protected virtual TType GetItemDisplayValue(TItem item)
     {
         return item.Value;
+    }
+
+    protected virtual string GetMultiSelectionText(List<string> selectedValues)
+    {
+        return $"{selectedValues.Count} items have been selected";
     }
 }

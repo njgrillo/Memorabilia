@@ -16,9 +16,4 @@ public partial class PaintingEditor : MemorabiliaItem<SavePaintingViewModel>
     {
         await CommandRouter.Send(new SavePainting.Command(ViewModel));
     }
-
-    private void SelectedSportIdsChanged(IEnumerable<int> sportIds)
-    {
-        ViewModel.SportIds = sportIds.ToList();
-    }
 }

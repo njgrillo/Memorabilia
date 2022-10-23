@@ -2,7 +2,7 @@
 
 public class HelmetFinishDropDown : DropDown<HelmetFinish, int>
 {
-    protected override async Task OnInitializedAsync()
+    protected override void OnInitialized()
     {
         Items = HelmetFinish.All;
         Label = "Finish";
