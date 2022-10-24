@@ -1,22 +1,24 @@
-﻿namespace Memorabilia.Application.Features.Services.Filters.Autographs.Rules;
+﻿using MudBlazor;
+
+namespace Memorabilia.Application.Features.Services.Filters.Autographs.Rules;
 
 public class EstimatedValueFilterRule : IFilterRule<AutographViewModel>
 {
-    private decimal? _estimatedValue;
+    private Range<decimal?> _range;
 
     public bool Applies(FilterItemEnum filterItemEnum, object value)
     {
         if (filterItemEnum != FilterItemEnum.AutographEstimatedValue)
             return false;
 
-        _estimatedValue = (decimal?)value;
+        _range = (Range<decimal?>)value;
 
-        return _estimatedValue.HasValue && _estimatedValue.Value > 0;
+        return _range.Start.HasValue || _range.End.HasValue;
     }
 
     public Expression<Func<AutographViewModel, bool>> GetExpression()
     {
-        Expression<Func<AutographViewModel, bool>> expression = autograph => autograph.EstimatedValue == _estimatedValue;
+        Expression<Func<AutographViewModel, bool>> expression = autograph => autograph.EstimatedValue >= (_range.Start ?? 0) && autograph.EstimatedValue <= (_range.End ?? decimal.MaxValue);
 
         return expression;
     }

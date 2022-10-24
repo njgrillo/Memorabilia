@@ -131,16 +131,16 @@
                     </div> 
                     <div class="col-lg-2">
                         <div class="form-group">
-                            <MudNumericField @bind-Value="_memorabiliaEstimatedValue" 
-                                                Label="Estimated Value ($)"
-                                                Variant="Variant.Outlined" />
+                            <MudNumericField @bind-Value="_memorabiliaEstimatedValueLow" 
+                                             Label="Estimated Value Low ($)"
+                                             Variant="Variant.Outlined" />
                         </div>
                     </div> 
                     <div class="col-lg-2">
                         <div class="form-group">
-                            <MudNumericField @bind-Value="_memorabiliaCost" 
-                                                Label="Cost ($)"
-                                                Variant="Variant.Outlined" />
+                            <MudNumericField @bind-Value="_memorabiliaEstimatedValueHigh" 
+                                             Label="Estimated Value High ($)"
+                                             Variant="Variant.Outlined" />
                         </div>
                     </div> 
                     <div class="col-lg-2">
@@ -159,9 +159,8 @@
                     </div> 
                     <div class="col-lg-2">
                         <div class="form-group">
-                            <MudNumericField @bind-Value="_autographCost" 
-                                                Label="Cost ($)"
-                                                Variant="Variant.Outlined" />
+                            <MudCheckBox @bind-Checked="@_hasAutographAuthentication"
+                                         Label="Has Authentication(s)" />  
                         </div>
                     </div> 
                 </div>
@@ -175,31 +174,38 @@
                     </div> 
                     <div class="col-lg-2">
                         <div class="form-group">
-                            <GameStyleTypeDropDown MultiSelect="true"
-                                                   SelectedItems="_gameStyleTypeIds"
-                                                   SelectedItemsChanged="(p) => _gameStyleTypeIds = p" />
+                            <MudNumericField @bind-Value="_memorabiliaCostLow" 
+                                             Label="Cost Low($)"
+                                             Variant="Variant.Outlined" />
                         </div>
                     </div> 
                     <div class="col-lg-2">
                         <div class="form-group">
-                            <PurchaseTypeDropDown MultiSelect="true"
-                                                  SelectedItems="_memorabiliaPurchaseTypeIds"
-                                                  SelectedItemsChanged="(p) => _memorabiliaPurchaseTypeIds = p" />
+                            <MudNumericField @bind-Value="_memorabiliaCostHigh" 
+                                             Label="Cost High($)"
+                                             Variant="Variant.Outlined" />
                         </div>
                     </div> 
                     <div class="col-lg-2">
                         <div class="form-group">
-                            <MudCheckBox @bind-Checked="@_hasAutographAuthentication"
-                                         Label="Has Authentication(s)" />  
+                            <MudNumericField @bind-Value="_autographEstimatedValueLow" 
+                                             Label="Estimated Value Low ($)"
+                                             Variant="Variant.Outlined" />
                         </div>
                     </div>
                     <div class="col-lg-2">
                         <div class="form-group">
-                            <MudNumericField @bind-Value="_autographEstimatedValue" 
-                                                Label="Estimated Value ($)"
-                                                Variant="Variant.Outlined" />
+                            <MudNumericField @bind-Value="_autographEstimatedValueHigh" 
+                                             Label="Estimated Value High ($)"
+                                             Variant="Variant.Outlined" />
                         </div>
-                    </div>  
+                    </div> 
+                    <div class="col-lg-2">
+                        <div class="form-group">
+                            <MudCheckBox @bind-Checked="@_hasAutographInscription"
+                                         Label="Has Inscription(s)" />  
+                        </div>
+                    </div>
                 </div>
                 <div class="row">
                     <div class="col-lg-2">
@@ -239,13 +245,27 @@
                     </div> 
                     <div class="col-lg-2">
                         <div class="form-group">
-                            <MudCheckBox @bind-Checked="@_hasAutographInscription"
-                                         Label="Has Inscription(s)" />  
+                            <MudNumericField @bind-Value="_autographCostLow" 
+                                             Label="Cost Low ($)"
+                                             Variant="Variant.Outlined" />
+                        </div>
+                    </div>
+                    <div class="col-lg-2">
+                        <div class="form-group">
+                            <MudNumericField @bind-Value="_autographCostHigh" 
+                                             Label="Cost High ($)"
+                                             Variant="Variant.Outlined" />
+                        </div>
+                    </div>
+                    <div class="col-lg-2">
+                        <div class="form-group">
+                            <MudCheckBox @bind-Checked="@_noAutographImages"
+                                         Label="No Image(s)" />  
                         </div>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-lg-4">
+                    <div class="col-lg-2">
                         <div class="form-group">
                             <FranchiseDropDown MultiSelect="true"
                                                SelectedItems="_franchiseIds"
@@ -261,13 +281,20 @@
                     </div> 
                     <div class="col-lg-2">
                         <div class="form-group">
-                            <MudCheckBox @bind-Checked="@_noAutographImages"
-                                         Label="No Image(s)" />  
+                            <PurchaseTypeDropDown MultiSelect="true"
+                                                  SelectedItems="_memorabiliaPurchaseTypeIds"
+                                                  SelectedItemsChanged="(p) => _memorabiliaPurchaseTypeIds = p" />
                         </div>
+                    </div>
+                    <div class="col-lg-2">
+                        
+                    </div>
+                    <div class="col-lg-2">
+                        
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-lg-6">
+                    <div class="col-lg-4">
                         <div class="form-group">
                             <MudAutocomplete @bind-Value="_memorabiliaTeam"
                                                 AdornmentColor="MudBlazor.Color.Primary"
@@ -288,6 +315,13 @@
                             </MudAutocomplete>
                         </div>                    
                     </div>
+                    <div class="col-lg-2">
+                        <div class="form-group">
+                            <GameStyleTypeDropDown MultiSelect="true"
+                                                   SelectedItems="_gameStyleTypeIds"
+                                                   SelectedItemsChanged="(p) => _gameStyleTypeIds = p" />
+                        </div>
+                    </div> 
                 </div>
                 <DivRowCol12Center>
                     <Content>

@@ -1,22 +1,24 @@
-﻿namespace Memorabilia.Application.Features.Services.Filters.Memorabilia.Rules;
+﻿using MudBlazor;
+
+namespace Memorabilia.Application.Features.Services.Filters.Memorabilia.Rules;
 
 public class CostFilterRule : IFilterRule<MemorabiliaItemViewModel>
 {
-    private decimal? _cost;
+    private Range<decimal?> _range;
 
     public bool Applies(FilterItemEnum filterItemEnum, object value)
     {
         if (filterItemEnum != FilterItemEnum.MemorabiliaCost)
             return false;
 
-        _cost = (decimal?)value;
+        _range = (Range<decimal?>)value;
 
-        return _cost.HasValue && _cost.Value > 0;
+        return _range.Start.HasValue || _range.End.HasValue;
     }
 
     public Expression<Func<MemorabiliaItemViewModel, bool>> GetExpression()
     {
-        Expression<Func<MemorabiliaItemViewModel, bool>> expression = item => item.Acquisition.Cost == _cost;
+        Expression<Func<MemorabiliaItemViewModel, bool>> expression = item => item.Acquisition.Cost >= (_range.Start ?? 0) && item.Acquisition.Cost <= (_range.End ?? decimal.MaxValue);
 
         return expression;
     }

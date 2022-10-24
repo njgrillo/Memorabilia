@@ -2,7 +2,7 @@
 
 namespace Memorabilia.Blazor.Controls.MemorabiliaItem;
 
-public partial class MemorabiliaSearchControl : ComponentBase
+public partial class MemorabiliaFilter : ComponentBase
 {
     [Inject]
     public IAutographFilterPredicateBuilder AutographFilterPredicateBuilder { get; set; }
@@ -27,8 +27,10 @@ public partial class MemorabiliaSearchControl : ComponentBase
     private bool _hasFilter => _autographAcquiredDate.HasValue ||
                                _autographAcquisitionTypeIds.Any() ||
                                _autographConditionIds.Any() ||
-                               _autographCost.HasValue ||
-                               _autographEstimatedValue.HasValue ||
+                               _autographCostHigh.HasValue ||
+                               _autographCostLow.HasValue ||
+                               _autographEstimatedValueHigh.HasValue ||
+                               _autographEstimatedValueLow.HasValue ||                               
                                _autographGrade.HasValue ||
                                _autographPerson?.Id > 0 ||
                                _brandIds.Any() ||
@@ -42,8 +44,10 @@ public partial class MemorabiliaSearchControl : ComponentBase
                                _memorabiliaAcquiredDate.HasValue ||
                                _memorabiliaAcquisitionTypeIds.Any() ||
                                _memorabiliaConditionIds.Any() ||
-                               _memorabiliaCost.HasValue ||
-                               _memorabiliaEstimatedValue.HasValue ||
+                               _memorabiliaCostHigh.HasValue ||
+                               _memorabiliaCostLow.HasValue ||
+                               _memorabiliaEstimatedValueHigh.HasValue ||
+                               _memorabiliaEstimatedValueLow.HasValue ||
                                _memorabiliaGrade.HasValue ||
                                _memorabiliaPerson?.Id > 0 ||
                                _memorabiliaPurchaseTypeIds.Any() ||
@@ -59,8 +63,10 @@ public partial class MemorabiliaSearchControl : ComponentBase
     private static DateTime? _autographAcquiredDate;
     private IEnumerable<int> _autographAcquisitionTypeIds = Enumerable.Empty<int>();
     private IEnumerable<int> _autographConditionIds = Enumerable.Empty<int>();
-    private static decimal? _autographCost;
-    private static decimal? _autographEstimatedValue;
+    private static decimal? _autographCostHigh;
+    private static decimal? _autographCostLow;
+    private static decimal? _autographEstimatedValueHigh;
+    private static decimal? _autographEstimatedValueLow;    
     private static int? _autographGrade;
     private static SavePersonViewModel _autographPerson;
     private IEnumerable<int> _brandIds = Enumerable.Empty<int>();
@@ -74,8 +80,10 @@ public partial class MemorabiliaSearchControl : ComponentBase
     private static DateTime? _memorabiliaAcquiredDate;
     private IEnumerable<int> _memorabiliaAcquisitionTypeIds = Enumerable.Empty<int>();
     private IEnumerable<int> _memorabiliaConditionIds = Enumerable.Empty<int>();
-    private static decimal? _memorabiliaCost;
-    private static decimal? _memorabiliaEstimatedValue;
+    private static decimal? _memorabiliaCostHigh;
+    private static decimal? _memorabiliaCostLow;
+    private static decimal? _memorabiliaEstimatedValueHigh;
+    private static decimal? _memorabiliaEstimatedValueLow;
     private static int? _memorabiliaGrade;
     private static SavePersonViewModel _memorabiliaPerson;
     private IEnumerable<int> _memorabiliaPurchaseTypeIds = Enumerable.Empty<int>();
@@ -111,8 +119,10 @@ public partial class MemorabiliaSearchControl : ComponentBase
         _autographAcquiredDate = null;
         _autographAcquisitionTypeIds = Enumerable.Empty<int>();
         _autographConditionIds = Enumerable.Empty<int>();
-        _autographCost = null;
-        _autographEstimatedValue = null;
+        _autographCostHigh = null;
+        _autographCostLow= null;
+        _autographEstimatedValueHigh = null;
+        _autographEstimatedValueLow = null;        
         _autographGrade = null;
         _autographPerson = null;
         _brandIds = Enumerable.Empty<int>();
@@ -126,8 +136,10 @@ public partial class MemorabiliaSearchControl : ComponentBase
         _memorabiliaAcquiredDate = null;
         _memorabiliaAcquisitionTypeIds = Enumerable.Empty<int>();
         _memorabiliaConditionIds = Enumerable.Empty<int>();
-        _memorabiliaCost = null;
-        _memorabiliaEstimatedValue = null;
+        _memorabiliaCostHigh = null;
+        _memorabiliaCostLow = null;
+        _memorabiliaEstimatedValueHigh = null;
+        _memorabiliaEstimatedValueLow = null;
         _memorabiliaGrade = null;
         _memorabiliaPerson = null;
         _memorabiliaPurchaseTypeIds = Enumerable.Empty<int>();
@@ -150,8 +162,8 @@ public partial class MemorabiliaSearchControl : ComponentBase
         AutographFilterPredicateBuilder.AppendPredicateAnd(FilterItemEnum.AutographAuthentication, _hasAutographAuthentication);
         AutographFilterPredicateBuilder.AppendPredicateAnd(FilterItemEnum.AutographColor, _colorIds.ToArray());
         AutographFilterPredicateBuilder.AppendPredicateAnd(FilterItemEnum.AutographCondition, _autographConditionIds.ToArray());
-        AutographFilterPredicateBuilder.AppendPredicateAnd(FilterItemEnum.AutographCost, _autographCost);
-        AutographFilterPredicateBuilder.AppendPredicateAnd(FilterItemEnum.AutographEstimatedValue, _autographEstimatedValue);
+        AutographFilterPredicateBuilder.AppendPredicateAnd(FilterItemEnum.AutographCost, new Range<decimal?>(_autographCostLow, _autographCostHigh));
+        AutographFilterPredicateBuilder.AppendPredicateAnd(FilterItemEnum.AutographEstimatedValue, new Range<decimal?>(_autographEstimatedValueLow, _autographEstimatedValueHigh));
         AutographFilterPredicateBuilder.AppendPredicateAnd(FilterItemEnum.AutographGrade, _autographGrade);
         AutographFilterPredicateBuilder.AppendPredicateAnd(FilterItemEnum.AutographImage, _noAutographImages);
         AutographFilterPredicateBuilder.AppendPredicateAnd(FilterItemEnum.AutographInscription, _hasAutographInscription);
@@ -168,8 +180,8 @@ public partial class MemorabiliaSearchControl : ComponentBase
         MemorabiliaFilterPredicateBuilder.AppendPredicateAnd(FilterItemEnum.MemorabiliaAcquisitionType, _memorabiliaAcquisitionTypeIds.ToArray());
         MemorabiliaFilterPredicateBuilder.AppendPredicateAnd(FilterItemEnum.MemorabiliaBrand, _brandIds.ToArray());
         MemorabiliaFilterPredicateBuilder.AppendPredicateAnd(FilterItemEnum.MemorabiliaCondition, _memorabiliaConditionIds.ToArray());
-        MemorabiliaFilterPredicateBuilder.AppendPredicateAnd(FilterItemEnum.MemorabiliaCost, _memorabiliaCost);
-        MemorabiliaFilterPredicateBuilder.AppendPredicateAnd(FilterItemEnum.MemorabiliaEstimatedValue, _memorabiliaEstimatedValue);
+        MemorabiliaFilterPredicateBuilder.AppendPredicateAnd(FilterItemEnum.MemorabiliaCost, new Range<decimal?>(_memorabiliaCostLow, _memorabiliaCostHigh));
+        MemorabiliaFilterPredicateBuilder.AppendPredicateAnd(FilterItemEnum.MemorabiliaEstimatedValue, new Range<decimal?>(_memorabiliaEstimatedValueLow, _memorabiliaEstimatedValueHigh));
         MemorabiliaFilterPredicateBuilder.AppendPredicateAnd(FilterItemEnum.MemorabiliaFranchise, _franchiseIds.ToArray());
         MemorabiliaFilterPredicateBuilder.AppendPredicateAnd(FilterItemEnum.MemorabiliaGameStyleType, _gameStyleTypeIds.ToArray());
         MemorabiliaFilterPredicateBuilder.AppendPredicateAnd(FilterItemEnum.MemorabiliaItemType, _itemTypeIds.ToArray());
