@@ -18,14 +18,4 @@ public partial class TeamConferenceEditor : ComponentBase
 
         _viewModel = new SaveTeamConferenceViewModel();
     }
-
-    private void Remove(int conferenceId, int? beginYear)
-    {
-        var conference = Conferences.SingleOrDefault(conference => conference.ConferenceId == conferenceId && conference.BeginYear == beginYear);
-
-        if (conference == null)
-            return;
-
-        conference.IsDeleted = true;
-    }
 }

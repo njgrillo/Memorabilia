@@ -40,16 +40,6 @@ public partial class PersonDraftEditor : ComponentBase
         _canUpdate = true;
     }
 
-    private void Remove(int franchiseId, int? year)
-    {
-        var draft = Drafts.SingleOrDefault(draft => draft.FranchiseId == franchiseId && draft.Year == year);
-
-        if (draft == null)
-            return;
-
-        draft.IsDeleted = true;
-    }
-
     private void Update()
     {
         var draft = Drafts.Single(draft => draft.FranchiseId == _viewModel.FranchiseId);

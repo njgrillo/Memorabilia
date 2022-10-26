@@ -10,7 +10,7 @@ public class SaveBasketballViewModel : SaveItemViewModel
     {
         BasketballTypeId = viewModel.Basketball?.BasketballTypeId ?? 0;
         BrandId = viewModel.Brand.BrandId;
-        CommissionerId = viewModel.Commissioner.CommissionerId;
+        CommissionerId = viewModel.Commissioner?.CommissionerId ?? 0;
         GameDate = viewModel.Game?.GameDate;
         GameStyleTypeId = viewModel.Game?.GameStyleTypeId ?? 0;
         LevelTypeId = viewModel.Level.LevelTypeId;

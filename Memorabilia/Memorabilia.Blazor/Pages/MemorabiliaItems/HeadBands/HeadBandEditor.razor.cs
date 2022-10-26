@@ -21,9 +21,4 @@ public partial class HeadBandEditor : MemorabiliaItem<SaveHeadBandViewModel>
     {
         ViewModel.Person = person;
     }
-
-    private void SelectedTeamChanged(SaveTeamViewModel team)
-    {
-        ViewModel.Team = team;
-    }
 }

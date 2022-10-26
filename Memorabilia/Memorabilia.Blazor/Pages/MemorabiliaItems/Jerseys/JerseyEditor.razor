@@ -78,11 +78,12 @@
         <MultiPersonSelector CanToggle="true"
                              ItemType="ViewModel.ItemType"
                              People="ViewModel.People" />   
-        <SportSelector @bind-Value="@ViewModel.SportId" 
-                       @bind-Value:event="ValueChanged"
-                       CanToggle="true" 
-                       ItemType="ViewModel.ItemType"
-                       SelectedValue="ViewModel.SportId"/> 
+        <DivRowCol3>
+            <Content>
+                <SportDropDown SelectedValue="@ViewModel.SportId"
+                               SelectionChanged="(p) => ViewModel.SportId = p" />
+            </Content>
+        </DivRowCol3>
         <MultiTeamSelector CanToggle="true" 
                            ItemType="ViewModel.ItemType"
                            Teams="ViewModel.Teams" />

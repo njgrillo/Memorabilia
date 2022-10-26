@@ -21,9 +21,4 @@ public partial class PlayingCardEditor : MemorabiliaItem<SavePlayingCardViewMode
     {
         ViewModel.Person = person;
     }
-
-    private void SelectedTeamChanged(SaveTeamViewModel team)
-    {
-        ViewModel.Team = team;
-    }
 }

@@ -23,14 +23,4 @@ public partial class PersonAwardEditor : ComponentBase
         _viewModel = new SavePersonAwardViewModel();
         _years = string.Empty;
     }
-
-    private void Remove(int awardTypeId, int year)
-    {
-        var award = Awards.SingleOrDefault(award => award.AwardTypeId == awardTypeId && award.Year == year);
-
-        if (award == null)
-            return;
-
-        award.IsDeleted = true;
-    }
 }

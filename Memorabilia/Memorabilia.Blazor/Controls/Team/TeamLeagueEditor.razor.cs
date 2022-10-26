@@ -18,14 +18,4 @@ public partial class TeamLeagueEditor : ComponentBase
 
         _viewModel = new SaveTeamLeagueViewModel();
     }
-
-    private void Remove(int leagueId, int? beginYear)
-    {
-        var league = Leagues.SingleOrDefault(league => league.LeagueId == leagueId && league.BeginYear == beginYear);
-
-        if (league == null)
-            return;
-
-        league.IsDeleted = true;
-    }
 }

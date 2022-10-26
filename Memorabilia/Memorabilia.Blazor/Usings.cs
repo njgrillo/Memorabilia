@@ -2,7 +2,6 @@
 global using Framework.Library.Handler;
 global using Framework.Library.Web;
 global using MediatR;
-global using Memorabilia.Application;
 global using Memorabilia.Application.Features;
 global using Memorabilia.Application.Features.Admin;
 global using Memorabilia.Application.Features.Admin.AccomplishmentTypes;
@@ -133,7 +132,6 @@ global using Memorabilia.Application.Features.User.Register;
 global using Memorabilia.Application.Features.User.Settings;
 global using Memorabilia.Blazor.Controls;
 global using Memorabilia.Blazor.Controls.Dialogs;
-global using Memorabilia.Blazor.Pages.Admin;
 global using Memorabilia.Domain;
 global using Memorabilia.Domain.Constants;
 global using Memorabilia.Domain.Extensions;
@@ -141,9 +139,7 @@ global using Microsoft.AspNetCore.Components;
 global using Microsoft.AspNetCore.Components.Forms;
 global using Microsoft.Extensions.Logging;
 global using MudBlazor;
-global using System.ComponentModel;
 global using System.Data;
 global using System.Globalization;
-global using System.Linq.Expressions;
 
 global using Color = MudBlazor.Color;

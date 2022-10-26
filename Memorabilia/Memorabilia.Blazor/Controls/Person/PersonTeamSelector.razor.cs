@@ -55,16 +55,6 @@ public partial class PersonTeamSelector : ComponentBase
         }
     }
 
-    private void Remove(int teamPersonId)
-    {
-        var team = Teams.SingleOrDefault(team => team.Id == teamPersonId);
-
-        if (team == null)
-            return;
-
-        team.IsDeleted = true;
-    }
-
     private async Task<IEnumerable<SavePersonTeamViewModel>> SearchTeams(string searchText)
     {
         if (searchText.IsNullOrEmpty())

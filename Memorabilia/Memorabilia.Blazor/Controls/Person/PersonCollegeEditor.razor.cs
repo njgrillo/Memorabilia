@@ -30,16 +30,6 @@ public partial class PersonCollegeEditor : ComponentBase
         _canUpdate = true;
     }
 
-    private void Remove(int collegeId)
-    {
-        var college = Colleges.FirstOrDefault(college => college.CollegeId == collegeId);
-
-        if (college == null)
-            return;
-
-        college.IsDeleted = true;
-    }
-
     private void Update()
     {
         var college = Colleges.Single(college => college.CollegeId == _viewModel.CollegeId);

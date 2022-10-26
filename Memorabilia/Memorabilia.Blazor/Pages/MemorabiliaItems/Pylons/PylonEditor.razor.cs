@@ -16,9 +16,4 @@ public partial class PylonEditor : MemorabiliaItem<SavePylonViewModel>
     {
         await CommandRouter.Send(new SavePylon.Command(ViewModel));
     }
-
-    private void SelectedTeamChanged(SaveTeamViewModel team)
-    {
-        ViewModel.Team = team;
-    }
 }

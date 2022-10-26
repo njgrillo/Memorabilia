@@ -32,17 +32,6 @@ public partial class PersonRetiredNumberEditor : ComponentBase
         _canUpdate = true;
     }
 
-    private void Remove(int franchiseId, int? number)
-    {
-        var retiredNumber = RetiredNumbers.SingleOrDefault(retiredNumber => retiredNumber.FranchiseId == franchiseId &&
-                                                                            retiredNumber.PlayerNumber == (number ?? 0));
-
-        if (retiredNumber == null)
-            return;
-
-        retiredNumber.IsDeleted = true;
-    }
-
     private void Update()
     {
         var number = RetiredNumbers.Single(number => number.FranchiseId == _viewModel.FranchiseId);

@@ -1,0 +1,20 @@
+﻿@typeparam TItem
+
+<MudAutocomplete AdornmentColor="@AdornmentColor"
+                 AdornmentIcon="@AdornmentIcon"
+                 Label="@Label"
+                 Placeholder="@Placeholder"
+                 ResetValueOnEmptyText="@ResetValueOnEmptyText"
+                 SearchFunc="@Search"
+                 T="TItem"
+                 Text="@GetDisplayText(SelectedValue)"
+                 Value="SelectedValue"
+                 ValueChanged="SelectionChanged"
+                 Variant="@Variant">
+    <ItemSelectedTemplate Context="item">
+        @GetItemSelectedText(item)
+    </ItemSelectedTemplate>
+    <ItemTemplate Context="item">
+        @GetItemText(item)
+    </ItemTemplate>
+</MudAutocomplete>

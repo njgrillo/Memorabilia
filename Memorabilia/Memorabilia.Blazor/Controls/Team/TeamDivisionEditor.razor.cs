@@ -18,14 +18,4 @@ public partial class TeamDivisionEditor : ComponentBase
 
         _viewModel = new SaveTeamDivisionViewModel();
     }
-
-    private void Remove(int divisionId, int? beginYear)
-    {
-        var division = Divisions.SingleOrDefault(division => division.DivisionId == divisionId && division.BeginYear == beginYear);
-
-        if (division == null)
-            return;
-
-        division.IsDeleted = true;
-    }
 }

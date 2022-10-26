@@ -2,7 +2,7 @@
 
 namespace Memorabilia.Application.Features.Admin.People;
 
-public class PersonViewModel
+public class PersonViewModel : IWithName
 {
     private readonly Person _person;
 
@@ -52,4 +52,6 @@ public class PersonViewModel
     public string Suffix => _person.Suffix;
 
     public IEnumerable<PersonTeam> Teams => _person.Teams;
+
+    string IWithName.Name => DisplayName;
 }

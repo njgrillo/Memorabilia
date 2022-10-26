@@ -32,16 +32,6 @@ public partial class PersonOccupationSelector : ComponentBase
         _canUpdate = true;
     }
 
-    private void Remove(int occupationId)
-    {
-        var occupation = Occupations.SingleOrDefault(occupation => occupation.OccupationId == occupationId);
-
-        if (occupation == null)
-            return;
-
-        occupation.IsDeleted = true;
-    }
-
     private void Update()
     {
         var occupation = Occupations.Single(occupation => occupation.OccupationId == _viewModel.OccupationId);

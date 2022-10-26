@@ -2,7 +2,7 @@
 
 public partial class FranchiseEditor : EditItem<SaveFranchiseViewModel, FranchiseViewModel>
 {
-    private bool DisplaySportLeagueLevel;
+    private bool DisplaySportLeagueLevel => Id == 0;
 
     protected async Task HandleValidSubmit()
     {
@@ -12,10 +12,7 @@ public partial class FranchiseEditor : EditItem<SaveFranchiseViewModel, Franchis
     protected async Task OnLoad()
     {
         if (Id == 0)
-        {
-            DisplaySportLeagueLevel = true;
             return;
-        }
 
         ViewModel = new SaveFranchiseViewModel(await Get(new GetFranchise(Id)));
     }

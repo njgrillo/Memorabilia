@@ -21,9 +21,4 @@ public partial class PantEditor : MemorabiliaItem<SavePantViewModel>
     {
         ViewModel.Person = person;
     }
-
-    private void SelectedTeamChanged(SaveTeamViewModel team)
-    {
-        ViewModel.Team = team;
-    }
 }

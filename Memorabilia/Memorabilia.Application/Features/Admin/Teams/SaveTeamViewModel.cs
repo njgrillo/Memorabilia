@@ -2,7 +2,7 @@
 
 namespace Memorabilia.Application.Features.Admin.Teams;
 
-public class SaveTeamViewModel : SaveViewModel
+public class SaveTeamViewModel : SaveViewModel, IWithName
 {
     public SaveTeamViewModel() { }
 
@@ -29,7 +29,7 @@ public class SaveTeamViewModel : SaveViewModel
 
     public int? BeginYear { get; set; }
 
-    public bool CanHaveConference => Domain.Constants.SportLeagueLevel.Find(SportLeagueLevelId) != Domain.Constants.SportLeagueLevel.MajorLeagueBaseball;
+    public bool CanHaveConference => SportLeagueLevel.Find(SportLeagueLevelId) != SportLeagueLevel.MajorLeagueBaseball;
 
     public override string ContinueNavigationPath => $"{AdminDomainItem.Teams.Item}/{AdminDomainItem.Divisions.Item}/{EditModeType.Update.Name}/{Id}/{SportLeagueLevelId}";
 
@@ -42,7 +42,7 @@ public class SaveTeamViewModel : SaveViewModel
     [Required]
     public int FranchiseId { get; set; }
 
-    public Franchise[] Franchises { get; set; } = Franchise.GetAll(Domain.Constants.SportLeagueLevel.MajorLeagueBaseball);
+    public Franchise[] Franchises { get; set; } = Franchise.GetAll(SportLeagueLevel.MajorLeagueBaseball);
 
     public string ImagePath => AdminDomainItem.Teams.ImagePath;
 
@@ -61,7 +61,7 @@ public class SaveTeamViewModel : SaveViewModel
     [StringLength(10, ErrorMessage = "Nickname is too long.")]
     public string Nickname { get; set; }
 
-    public Domain.Constants.SportLeagueLevel SportLeagueLevel => Domain.Constants.SportLeagueLevel.Find(SportLeagueLevelId);
+    public SportLeagueLevel SportLeagueLevel => SportLeagueLevel.Find(SportLeagueLevelId);
 
     public int SportLeagueLevelId
     {
@@ -72,9 +72,11 @@ public class SaveTeamViewModel : SaveViewModel
         set
         {
             _sportLeagueLeveId = value;
-            Franchises = Franchise.GetAll(Domain.Constants.SportLeagueLevel.Find(value));
+            Franchises = Franchise.GetAll(SportLeagueLevel.Find(value));
         }
     }
 
     public TeamStep TeamStep => TeamStep.Team;
+
+    string IWithName.Name => DisplayName;
 }

@@ -21,9 +21,4 @@ public partial class ShirtEditor : MemorabiliaItem<SaveShirtViewModel>
     {
         ViewModel.Person = person;
     }
-
-    private void SelectedTeamChanged(SaveTeamViewModel team)
-    {
-        ViewModel.Team = team;
-    }
 }

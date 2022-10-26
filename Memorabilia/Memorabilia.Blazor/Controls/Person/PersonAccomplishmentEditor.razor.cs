@@ -33,18 +33,6 @@ public partial class PersonAccomplishmentEditor : ComponentBase
         _canUpdate = true;
     }
 
-    private void Remove(int accomplishmentTypeId, DateTime? date, int? year)
-    {
-        var accomplishment = Accomplishments.SingleOrDefault(accomplishment => accomplishment.AccomplishmentTypeId == accomplishmentTypeId
-                                                             && ((accomplishment.Date.HasValue && accomplishment.Date == date)
-                                                                  || (accomplishment.Year.HasValue && accomplishment.Year == year)));
-
-        if (accomplishment == null)
-            return;
-
-        accomplishment.IsDeleted = true;
-    }
-
     private void Update()
     {
         var accomplishment = Accomplishments.Single(accomplishment => accomplishment.AccomplishmentTypeId == _viewModel.AccomplishmentTypeId);

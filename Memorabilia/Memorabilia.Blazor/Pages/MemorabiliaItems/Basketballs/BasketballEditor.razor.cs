@@ -8,7 +8,7 @@ public partial class BasketballEditor : MemorabiliaItem<SaveBasketballViewModel>
 
         if (viewModel.Brand == null)
         {
-            SetDefaults();
+            ViewModel.GameStyleTypeId = GameStyleType.None.Id;
             return;
         }    
 
@@ -23,15 +23,5 @@ public partial class BasketballEditor : MemorabiliaItem<SaveBasketballViewModel>
     private void SelectedPersonChanged(SavePersonViewModel person)
     {
         ViewModel.Person = person;
-    }
-
-    private void SelectedTeamChanged(SaveTeamViewModel team)
-    {
-        ViewModel.Team = team;
-    }
-
-    private void SetDefaults()
-    {
-        ViewModel.GameStyleTypeId = GameStyleType.None.Id;
     }
 }

@@ -23,14 +23,4 @@ public partial class PersonLeaderEditor : ComponentBase
         _viewModel = new SavePersonLeaderViewModel();
         _years = string.Empty;
     }
-
-    private void Remove(int leaderTypeId, int year)
-    {
-        var leader = Leaders.SingleOrDefault(leader => leader.LeaderTypeId == leaderTypeId && leader.Year == year);
-
-        if (leader == null)
-            return;
-
-        leader.IsDeleted = true;
-    }
 }

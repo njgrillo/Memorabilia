@@ -18,14 +18,4 @@ public partial class PersonSportEditor : ComponentBase
 
         _viewModel = new SavePersonSportViewModel();
     }
-
-    private void Remove(int SportId)
-    {
-        var sport = Sports.SingleOrDefault(sport => sport.SportId == SportId);
-
-        if (sport == null)
-            return;
-
-        sport.IsDeleted = true;
-    }
 }

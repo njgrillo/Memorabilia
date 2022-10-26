@@ -63,9 +63,12 @@
                         ItemType="ViewModel.ItemType"
                         SelectedPerson="ViewModel.Person"
                         SelectedPersonChanged="SelectedPersonChanged" />                 
-        <TeamSelector CanToggle="true" 
-                      ItemType="ViewModel.ItemType"
-                      SelectedTeam="ViewModel.Team"
-                      SelectedTeamChanged="SelectedTeamChanged" />
+        <DivRowCol6>
+            <Content>
+                <TeamAutoComplete SelectedValue="ViewModel.Team"
+                                  SelectionChanged="(p) => ViewModel.Team = p"
+                                  SportLeagueLevel="ViewModel.SportLeagueLevel" />
+            </Content>
+        </DivRowCol6>
     </Content>
 </EditPage>

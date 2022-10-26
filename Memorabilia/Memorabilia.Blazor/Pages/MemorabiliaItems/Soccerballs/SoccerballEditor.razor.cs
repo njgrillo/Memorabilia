@@ -21,9 +21,4 @@ public partial class SoccerballEditor : MemorabiliaItem<SaveSoccerballViewModel>
     {
         ViewModel.Person = person;
     }
-
-    private void SelectedTeamChanged(SaveTeamViewModel team)
-    {
-        ViewModel.Team = team;
-    }
 }

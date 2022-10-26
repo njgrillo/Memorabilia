@@ -29,16 +29,6 @@ public partial class PersonInternationalHallOfFameEditor : ComponentBase
         _canUpdate = true;
     }
 
-    private void Remove(int internationalHallOfFameTypeId)
-    {
-        var hallOfFame = InternationalHallOfFames.SingleOrDefault(hallOfFame => hallOfFame.InternationalHallOfFameTypeId == internationalHallOfFameTypeId);
-
-        if (hallOfFame == null)
-            return;
-
-        hallOfFame.IsDeleted = true;
-    }
-
     private void Update()
     {
         var hallOfFame = InternationalHallOfFames.Single(hof => hof.InternationalHallOfFameTypeId == _viewModel.InternationalHallOfFameTypeId);

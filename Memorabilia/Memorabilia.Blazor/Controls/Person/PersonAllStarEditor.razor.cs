@@ -15,9 +15,4 @@ public partial class PersonAllStarEditor : ComponentBase
 
         _years = string.Empty;
     }
-
-    private void Remove(int year)
-    {
-        AllStarYears.Remove(year);
-    }
 }

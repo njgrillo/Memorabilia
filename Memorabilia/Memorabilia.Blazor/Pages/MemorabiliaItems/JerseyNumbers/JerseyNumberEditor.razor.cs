@@ -16,9 +16,4 @@ public partial class JerseyNumberEditor : MemorabiliaItem<SaveJerseyNumberViewMo
     {
         ViewModel.Person = person;
     }
-
-    private void SelectedTeamChanged(SaveTeamViewModel team)
-    {
-        ViewModel.Team = team;
-    }
 }

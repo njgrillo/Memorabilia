@@ -47,5 +47,7 @@ public class SavePylonViewModel : SaveItemViewModel
     [Range(1, int.MaxValue, ErrorMessage = "Size is required.")]
     public int SizeId { get; set; } = Size.Standard.Id;
 
+    public SportLeagueLevel SportLeagueLevel => SportLeagueLevel.NationalFootballLeague;
+
     public SaveTeamViewModel Team { get; set; }
 }

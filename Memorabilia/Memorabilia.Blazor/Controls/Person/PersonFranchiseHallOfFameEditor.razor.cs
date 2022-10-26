@@ -32,16 +32,6 @@ public partial class PersonFranchiseHallOfFameEditor : ComponentBase
         _canUpdate = true;
     }
 
-    private void Remove(int franchiseId)
-    {
-        var hallOfFame = FranchiseHallOfFames.SingleOrDefault(hallOfFame => hallOfFame.FranchiseId == franchiseId);
-
-        if (hallOfFame == null)
-            return;
-
-        hallOfFame.IsDeleted = true;
-    }
-
     private void Update()
     {
         var hallOfFame = FranchiseHallOfFames.Single(hof => hof.FranchiseId == _viewModel.FranchiseId);

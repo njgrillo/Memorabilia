@@ -5,7 +5,7 @@ namespace Memorabilia.Blazor.Controls.Person;
 public partial class PersonSingleSeasonRecordEditor : ComponentBase
 {
     [Parameter]
-    public Domain.Constants.RecordType[] RecordTypes { get; set; } = Domain.Constants.RecordType.All;
+    public RecordType[] RecordTypes { get; set; } = RecordType.All;
 
     [Parameter]
     public List<SavePersonSingleSeasonRecordViewModel> SingleSeasonRecords { get; set; } = new();
@@ -31,16 +31,6 @@ public partial class PersonSingleSeasonRecordEditor : ComponentBase
         _canAdd = false;
         _canEditRecordType = false;
         _canUpdate = true;
-    }
-
-    private void Remove(int recordTypeId)
-    {
-        var record = SingleSeasonRecords.SingleOrDefault(record => record.RecordTypeId == recordTypeId);
-
-        if (record == null)
-            return;
-
-        record.IsDeleted = true;
     }
 
     private void Update()

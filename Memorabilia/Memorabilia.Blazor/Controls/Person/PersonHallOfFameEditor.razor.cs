@@ -43,16 +43,6 @@ public partial class PersonHallOfFameEditor : ComponentBase
         _canUpdateHallOfFame = true;
     }
 
-    private void Remove(int sportLeagueLevelId)
-    {
-        var hallOfFame = HallOfFames.SingleOrDefault(hallOfFame => hallOfFame.SportLeagueLevelId == sportLeagueLevelId);
-
-        if (hallOfFame == null)
-            return;
-
-        hallOfFame.IsDeleted = true;
-    }
-
     private void Update()
     {
         var hallOfFame = HallOfFames.Single(hof => hof.SportLeagueLevelId == _viewModel.SportLeagueLevelId);

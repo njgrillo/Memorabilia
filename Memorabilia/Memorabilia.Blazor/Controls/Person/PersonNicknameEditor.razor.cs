@@ -18,14 +18,4 @@ public partial class PersonNicknameEditor : ComponentBase
 
         _viewModel = new SavePersonNicknameViewModel();
     }
-
-    private void Remove(string nickname)
-    {
-        var existingNickname = Nicknames.SingleOrDefault(personNickname => personNickname.Nickname == nickname);
-
-        if (existingNickname == null)
-            return;
-
-        existingNickname.IsDeleted = true;
-    }
 }

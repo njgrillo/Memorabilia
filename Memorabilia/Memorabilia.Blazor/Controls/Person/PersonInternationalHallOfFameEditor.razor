@@ -51,7 +51,7 @@
                     <MudTooltip Text="Delete">
                         <MudFab Color="MudBlazor.Color.Secondary"
                                 Icon="@Icons.Outlined.DeleteOutline"
-                                OnClick="@(_ => Remove(context.InternationalHallOfFameTypeId))" />
+                                OnClick="@(_ => context.IsDeleted = true)" />
                     </MudTooltip>  
                 </MudTd>
             </RowTemplate>

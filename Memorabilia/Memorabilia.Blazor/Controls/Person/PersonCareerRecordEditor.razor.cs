@@ -32,16 +32,6 @@ public partial class PersonCareerRecordEditor : ComponentBase
         _canUpdate = true;
     }
 
-    private void Remove(int recordTypeId)
-    {
-        var record = CareerRecords.SingleOrDefault(record => record.RecordTypeId == recordTypeId);
-
-        if (record == null)
-            return;
-
-        record.IsDeleted = true;
-    }
-
     private void Update()
     {
         var record = CareerRecords.Single(record => record.RecordTypeId == _viewModel.RecordTypeId);

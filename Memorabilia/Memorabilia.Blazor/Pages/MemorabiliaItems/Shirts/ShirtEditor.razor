@@ -51,14 +51,17 @@
                         ItemType="ViewModel.ItemType"
                         SelectedPerson="ViewModel.Person"
                         SelectedPersonChanged="SelectedPersonChanged" />   
-        <SportSelector @bind-Value="@ViewModel.SportId" 
-                       @bind-Value:event="ValueChanged"
-                       CanToggle="true" 
-                       ItemType="ViewModel.ItemType"
-                       SelectedValue="ViewModel.SportId"/> 
-        <TeamSelector CanToggle="true" 
-                      ItemType="ViewModel.ItemType"
-                      SelectedTeam="ViewModel.Team"
-                      SelectedTeamChanged="SelectedTeamChanged" />
+        <DivRowCol3>
+            <Content>
+                <SportDropDown SelectedValue="@ViewModel.SportId"
+                               SelectionChanged="(p) => ViewModel.SportId = p" />
+            </Content>
+        </DivRowCol3>  
+        <DivRowCol6>
+            <Content>
+                <TeamAutoComplete SelectedValue="ViewModel.Team"
+                                  SelectionChanged="(p) => ViewModel.Team = p" />
+            </Content>
+        </DivRowCol6>
     </Content>
 </EditPage>
