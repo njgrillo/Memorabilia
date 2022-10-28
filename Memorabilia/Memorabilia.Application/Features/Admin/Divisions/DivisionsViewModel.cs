@@ -9,7 +9,9 @@ public class DivisionsViewModel : ViewModel
     public DivisionsViewModel(IEnumerable<Domain.Entities.Division> divisions)
     {
         Divisions = divisions.Select(division => new DivisionViewModel(division))
-                             .OrderBy(division => division.Name)
+                             .OrderBy(division => division.ConferenceName)
+                             .ThenBy(division => division.LeagueName)
+                             .ThenBy(division => division.Name)
                              .ToList();
     }
 

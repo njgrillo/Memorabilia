@@ -94,7 +94,7 @@ public static class ImagePath
 
     public static string Helmet => $"{_images}helmet.jpg";
 
-    public static string HelmetFinishes => $"{_images}helmetfinishs.jpg";
+    public static string HelmetFinishes => $"{_images}helmetfinishes.jpg";
 
     public static string HelmetQualityTypes => $"{_images}helmetqualitytypes.jpg";
 

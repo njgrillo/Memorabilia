@@ -15,7 +15,8 @@
     <Content>
         <DivRowCol3>
             <Content>
-                <SportLeagueLevelDropDown SelectedValue="ViewModel.SportLeagueLevelId"
+                <SportLeagueLevelDropDown Disabled="@(!ViewModel.IsNew)" 
+                                          SelectedValue="ViewModel.SportLeagueLevelId"
                                           SelectionChanged="(p) => ViewModel.SportLeagueLevelId = p" />
             </Content>
         </DivRowCol3>

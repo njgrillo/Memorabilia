@@ -1,4 +1,5 @@
 ﻿using Memorabilia.Domain.Constants;
+using Memorabilia.Domain.Entities;
 
 namespace Memorabilia.Application.Features.Admin.Conferences;
 
@@ -9,8 +10,9 @@ public class ConferencesViewModel : ViewModel
     public ConferencesViewModel(IEnumerable<Domain.Entities.Conference> conferences)
     {
         Conferences = conferences.Select(conference => new ConferenceViewModel(conference))
-                     .OrderBy(conference => conference.Name)
-                     .ToList();
+                                 .OrderBy(conference => conference.SportLeagueLevelName)
+                                 .ThenBy(conference => conference.Name)
+                                 .ToList();
     }
 
     public string AddRoute => $"{RoutePrefix}/{EditModeType.Update.Name}/0";

@@ -13,11 +13,7 @@ public record GetItemTypeLevels(int? ItemTypeId = null) : IQuery<ItemTypeLevelsV
 
         protected override async Task<ItemTypeLevelsViewModel> Handle(GetItemTypeLevels query)
         {
-            var itemTypeLevels = (await _itemTypeLevelRepository.GetAll(query.ItemTypeId))
-                                                 .OrderBy(itemTypeLevel => itemTypeLevel.ItemTypeName)
-                                                 .ThenBy(itemTypeLevel => itemTypeLevel.LevelTypeName);
-
-            return new ItemTypeLevelsViewModel(itemTypeLevels);
+            return new ItemTypeLevelsViewModel(await _itemTypeLevelRepository.GetAll(query.ItemTypeId));
         }
     }
 }

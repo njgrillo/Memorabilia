@@ -9,9 +9,9 @@ public abstract class EditDomainItem<T> : CommandQuery where T : DomainItemConst
 
     protected virtual string DomainTypeName { get; } = type.Name.ToSentence();
 
-    protected virtual string ImagePath { get; } = $"images/{type.Name}s.jpg";
+    protected virtual string ImagePath { get; } = $"images/{type.Name.ToPlural()}.jpg";
 
-    protected virtual string NavigationPath { get; } = $"{type.Name}s";
+    protected virtual string NavigationPath { get; } = $"{type.Name.ToPlural()}";
 
     protected SaveDomainViewModel ViewModel { get; set; } 
 

@@ -38,7 +38,7 @@
                             <MudTooltip Text="Delete">
                                 <MudFab Color="MudBlazor.Color.Secondary"
                                         Icon="@Icons.Outlined.DeleteOutline"
-                                        OnClick="@(_ => ShowDeleteConfirm(context.Id, $"Delete {context.ItemTypeName}"))" />
+                                        OnClick="@(_ => ShowDeleteConfirm(context.Id, context.DeleteText))" />
                             </MudTooltip>
                         </MudTd>
                     </RowTemplate>

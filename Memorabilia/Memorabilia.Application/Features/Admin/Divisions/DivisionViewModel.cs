@@ -15,9 +15,11 @@ public class DivisionViewModel
 
     public string Abbreviation => _division.Abbreviation;
 
+    public Domain.Constants.Conference Conference => Domain.Constants.Conference.Find(ConferenceId ?? 0);
+
     public int? ConferenceId => _division.ConferenceId;
 
-    public string ConferenceName => Domain.Constants.Conference.Find(ConferenceId ?? 0)?.Name;
+    public string ConferenceName => Conference != null && !Conference.Name.IsNullOrEmpty() ? Conference.Name : "N/A";
 
     public int Id => _division.Id;
 

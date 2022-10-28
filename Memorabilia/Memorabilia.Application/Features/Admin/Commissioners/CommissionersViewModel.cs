@@ -8,7 +8,10 @@ public class CommissionersViewModel : ViewModel
 
     public CommissionersViewModel(IEnumerable<Domain.Entities.Commissioner> commissioners)
     {
-        Commissioners = commissioners.Select(commissioner => new CommissionerViewModel(commissioner)).ToList();
+        Commissioners = commissioners.Select(commissioner => new CommissionerViewModel(commissioner))
+                                     .OrderBy(commissioner => commissioner.SportLeagueLevelName)
+                                     .ThenByDescending(commissioner => commissioner.BeginYear)
+                                     .ToList();
     }
 
     public string AddRoute => $"{RoutePrefix}/{EditModeType.Update.Name}/0";

@@ -9,7 +9,10 @@ public class ItemTypeSportsViewModel : ViewModel
 
     public ItemTypeSportsViewModel(IEnumerable<ItemTypeSport> itemTypeSports)
     {
-        ItemTypeSports = itemTypeSports.Select(itemTypeSport => new ItemTypeSportViewModel(itemTypeSport)).ToList();
+        ItemTypeSports = itemTypeSports.Select(itemTypeSport => new ItemTypeSportViewModel(itemTypeSport))
+                                       .OrderBy(itemTypeSport => itemTypeSport.ItemTypeName)
+                                       .ThenBy(itemTypeSport => itemTypeSport.SportName)
+                                       .ToList();
     }
 
     public string AddRoute => $"{RoutePrefix}/{EditModeType.Update.Name}/0";

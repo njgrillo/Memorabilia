@@ -9,7 +9,10 @@ public class ItemTypeSizesViewModel : ViewModel
 
     public ItemTypeSizesViewModel(IEnumerable<ItemTypeSize> itemTypeSizes)
     {
-        ItemTypeSizes = itemTypeSizes.Select(itemTypeSize => new ItemTypeSizeViewModel(itemTypeSize)).ToList();
+        ItemTypeSizes = itemTypeSizes.Select(itemTypeSize => new ItemTypeSizeViewModel(itemTypeSize))
+                                     .OrderBy(itemTypeSize => itemTypeSize.ItemTypeName)
+                                     .ThenBy(itemTypeSize => itemTypeSize.SizeName)
+                                     .ToList();
     }
 
     public string AddRoute => $"{RoutePrefix}/{EditModeType.Update.Name}/0";

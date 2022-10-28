@@ -13,11 +13,7 @@ public record GetItemTypeSpots(int? ItemTypeId = null) : IQuery<ItemTypeSpotsVie
 
         protected override async Task<ItemTypeSpotsViewModel> Handle(GetItemTypeSpots query)
         {
-            var itemTypeSpots = (await _itemTypeSpotRepository.GetAll(query.ItemTypeId))
-                                        .OrderBy(itemTypeSpot => itemTypeSpot.ItemTypeName)
-                                        .ThenBy(itemTypeSpot => itemTypeSpot.SpotName);
-
-            return new ItemTypeSpotsViewModel(itemTypeSpots);
+            return new ItemTypeSpotsViewModel(await _itemTypeSpotRepository.GetAll(query.ItemTypeId));
         }
     }
 }

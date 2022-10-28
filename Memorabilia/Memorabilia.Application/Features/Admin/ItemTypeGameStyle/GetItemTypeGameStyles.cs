@@ -13,11 +13,7 @@ public record GetItemTypeGameStyles(int? ItemTypeId = null) : IQuery<ItemTypeGam
 
         protected override async Task<ItemTypeGameStylesViewModel> Handle(GetItemTypeGameStyles query)
         {
-            var itemTypeGameStyles = (await _itemTypeGameStyleRepository.GetAll(query.ItemTypeId))
-                                            .OrderBy(itemTypeGameStyleType => itemTypeGameStyleType.ItemTypeName)
-                                            .ThenBy(itemTypeGameStyleType => itemTypeGameStyleType.GameStyleTypeName);
-
-            return new ItemTypeGameStylesViewModel(itemTypeGameStyles);
+            return new ItemTypeGameStylesViewModel(await _itemTypeGameStyleRepository.GetAll(query.ItemTypeId));
         }
     }
 }

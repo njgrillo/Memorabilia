@@ -13,11 +13,7 @@ public record GetCommissioners(int? SportId = null) : IQuery<CommissionersViewMo
 
         protected override async Task<CommissionersViewModel> Handle(GetCommissioners query)
         {
-            var commissioners = (await _commissionerRepository.GetAll(query.SportId))
-                                            .OrderBy(commissioner => commissioner.SportLeagueLevelName)
-                                            .ThenByDescending(commissioner => commissioner.BeginYear);
-
-            return new CommissionersViewModel(commissioners);
+            return new CommissionersViewModel(await _commissionerRepository.GetAll(query.SportId));
         }
     }
 }

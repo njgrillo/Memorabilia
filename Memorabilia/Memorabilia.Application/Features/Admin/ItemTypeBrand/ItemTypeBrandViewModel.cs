@@ -1,4 +1,6 @@
-﻿namespace Memorabilia.Application.Features.Admin.ItemTypeBrand;
+﻿using Memorabilia.Domain.Constants;
+
+namespace Memorabilia.Application.Features.Admin.ItemTypeBrand;
 
 public class ItemTypeBrandViewModel : IWithValue<int>, IWithName
 {
@@ -13,13 +15,15 @@ public class ItemTypeBrandViewModel : IWithValue<int>, IWithName
 
     public int BrandId => _itemTypeBrand.BrandId;
 
-    public string BrandName => Domain.Constants.Brand.Find(BrandId).Name;
+    public string BrandName => Brand.Find(BrandId).Name;
 
-    public int Id => _itemTypeBrand.Id;
+    public string DeleteText => $"Delete {AdminDomainItem.ItemTypeBrands.Item}"; 
+
+    public int Id => _itemTypeBrand.Id;    
 
     public int ItemTypeId => _itemTypeBrand.ItemTypeId;
 
-    public string ItemTypeName => Domain.Constants.ItemType.Find(ItemTypeId).Name;
+    public string ItemTypeName => ItemType.Find(ItemTypeId).Name;
 
     string IWithName.Name => BrandName;
 

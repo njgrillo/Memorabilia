@@ -1,4 +1,5 @@
 ﻿using Memorabilia.Domain.Entities;
+using System;
 
 namespace Memorabilia.Repository.Implementations;
 
@@ -27,11 +28,10 @@ public class PersonRepository : DomainRepository<Person>, IPersonRepository
         return await Person.SingleOrDefaultAsync(person => person.Id == id);
     }
 
-    public async Task<IEnumerable<Person>> GetAll(int? sportId = null)
+    public async Task<IEnumerable<Person>> GetAll(int? sportId = null, int? sportLeagueLevelId = null)
     {
-        return sportId.HasValue
-            ? await Items.Where(person => person.Teams.Any(team => team.Team.Franchise.SportLeagueLevel.SportId == sportId.Value))
-                         .ToListAsync()
-            : await Items.ToListAsync();
+        return await Items.Where(person => (!sportId.HasValue || person.Teams.Any(team => team.Team.Franchise.SportLeagueLevel.SportId == sportId.Value))
+                                        && (!sportLeagueLevelId.HasValue || person.Teams.Any(team => team.Team.Franchise.SportLeagueLevel.Id == sportLeagueLevelId.Value)))
+                          .ToListAsync();
     }
 }

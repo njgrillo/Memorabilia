@@ -10,8 +10,15 @@ public sealed class SportLeagueLevel : DomainItemConstant
     public static readonly SportLeagueLevel[] All =
     {
         MajorLeagueBaseball,
-        NationalFootballLeague,
         NationalBasketballAssociation,
+        NationalFootballLeague,        
+        NationalHockeyLeague
+    };
+
+    public static readonly SportLeagueLevel[] Conference =
+    {
+        NationalBasketballAssociation,
+        NationalFootballLeague,        
         NationalHockeyLeague
     };
 

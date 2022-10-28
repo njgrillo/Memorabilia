@@ -13,11 +13,7 @@ public record GetItemTypeSports(int? ItemTypeId = null) : IQuery<ItemTypeSportsV
 
         protected override async Task<ItemTypeSportsViewModel> Handle(GetItemTypeSports query)
         {
-            var itemTypeSports = (await _itemTypeSportRepository.GetAll(query.ItemTypeId))
-                                            .OrderBy(itemTypeSport => itemTypeSport.ItemTypeName)
-                                            .ThenBy(itemTypeSport => itemTypeSport.SportName);
-
-            return new ItemTypeSportsViewModel(itemTypeSports);
+            return new ItemTypeSportsViewModel(await _itemTypeSportRepository.GetAll(query.ItemTypeId));
         }
     }
 }

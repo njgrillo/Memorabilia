@@ -15,11 +15,7 @@ public record GetConferences() : IQuery<ConferencesViewModel>
 
         protected override async Task<ConferencesViewModel> Handle(GetConferences query)
         {
-            var conferences = (await _conferenceRepository.GetAll())
-                                    .OrderBy(conference => conference.SportLeagueLevelName)
-                                    .ThenBy(conference => conference.Name);
-
-            return new ConferencesViewModel(conferences);
+            return new ConferencesViewModel(await _conferenceRepository.GetAll());
         }
     }
 }

@@ -37,6 +37,17 @@ public static class StringExtensions
         return results.ToArray();
     }
 
+    public static string ToPlural(this string value)
+    {
+        if (value.EndsWith("h"))
+            return $"{value}es";
+
+        if (value.EndsWith("y"))
+            return $"{value[..^1]}ies";
+
+        return $"{value}s";
+    }
+
     public static string ToSentence(this string value)
     {
         return new string(value.SelectMany((c, i) => i > 0 && char.IsUpper(c) ? new[] { ' ', c } : new[] { c }).ToArray());

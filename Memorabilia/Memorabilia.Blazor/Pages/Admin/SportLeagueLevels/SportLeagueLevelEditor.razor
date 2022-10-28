@@ -15,14 +15,16 @@
     <Content>
         <DivRowCol3>
             <Content>
-                <SportDropDown SelectedValue="ViewModel.SportId"
+                <SportDropDown Disabled="@(!ViewModel.IsNew)" 
+                               SelectedValue="ViewModel.SportId"
                                SelectionChanged="(p) => ViewModel.SportId = p" />
             </Content>
         </DivRowCol3>
         <DivRowCol3>
             <Content>
-                <LevelTypeDropDown SelectedValue="ViewModel.LevelTypeId"
-                               SelectionChanged="(p) => ViewModel.LevelTypeId = p" />
+                <LevelTypeDropDown Disabled="@(!ViewModel.IsNew)" 
+                                   SelectedValue="ViewModel.LevelTypeId"
+                                   SelectionChanged="(p) => ViewModel.LevelTypeId = p" />
             </Content>
         </DivRowCol3>
         <DivRowCol3>

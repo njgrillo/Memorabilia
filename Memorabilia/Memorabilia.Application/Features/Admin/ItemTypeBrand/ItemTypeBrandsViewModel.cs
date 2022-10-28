@@ -8,7 +8,10 @@ public class ItemTypeBrandsViewModel : ViewModel
 
     public ItemTypeBrandsViewModel(IEnumerable<Domain.Entities.ItemTypeBrand> itemTypeBrands)
     {
-        ItemTypeBrands = itemTypeBrands.Select(itemTypeBrand => new ItemTypeBrandViewModel(itemTypeBrand)).ToList();
+        ItemTypeBrands = itemTypeBrands.Select(itemTypeBrand => new ItemTypeBrandViewModel(itemTypeBrand))
+                                       .OrderBy(itemTypeBrand => itemTypeBrand.ItemTypeName)
+                                       .ThenBy(itemTypeBrand => itemTypeBrand.BrandName)
+                                       .ToList();
     }
 
     public string AddRoute => $"{RoutePrefix}/{EditModeType.Update.Name}/0";

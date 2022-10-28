@@ -1,5 +1,7 @@
 ﻿#nullable disable
 
+using System.ComponentModel;
+
 namespace Memorabilia.Blazor.Controls.TypeAhead;
 
 public abstract partial class Autocomplete<TItem> where TItem : class, IWithName

@@ -13,11 +13,7 @@ public record GetItemTypeBrands(int? ItemTypeId = null) : IQuery<ItemTypeBrandsV
 
         protected override async Task<ItemTypeBrandsViewModel> Handle(GetItemTypeBrands query)
         {
-            var itemTypeBrands = (await _itemTypeBrandRepository.GetAll(query.ItemTypeId))
-                                         .OrderBy(itemTypeBrand => itemTypeBrand.ItemTypeName)
-                                         .ThenBy(itemTypeBrand => itemTypeBrand.BrandName);
-
-            return new ItemTypeBrandsViewModel(itemTypeBrands);
+            return new ItemTypeBrandsViewModel(await _itemTypeBrandRepository.GetAll(query.ItemTypeId));
         }
     }
 }

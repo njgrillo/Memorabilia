@@ -1,4 +1,5 @@
-﻿using Memorabilia.Domain.Entities;
+﻿using Memorabilia.Domain.Constants;
+using Memorabilia.Domain.Entities;
 
 namespace Memorabilia.Application.Features.Admin.ItemTypeSpots;
 
@@ -12,6 +13,8 @@ public class ItemTypeSpotViewModel : IWithValue<int>, IWithName
     {
         _itemTypeSpot = itemTypeSpot;
     }
+
+    public string DeleteText => $"Delete {AdminDomainItem.ItemTypeSpots.Item}";
 
     public int Id => _itemTypeSpot.Id;
 

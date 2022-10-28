@@ -15,15 +15,17 @@
     <Content>
         <DivRowCol3>
             <Content>
-                <SportLeagueLevelDropDown SelectedValue="ViewModel.SportLeagueLevelId"
+                <SportLeagueLevelDropDown Disabled="@(!ViewModel.IsNew)" 
+                                          SelectedValue="ViewModel.SportLeagueLevelId"
                                           SelectionChanged="(p) => ViewModel.SportLeagueLevelId = p" />
             </Content>
         </DivRowCol3>
         <DivRowCol3>
             <Content>
-                <NamedEntityAutoComplete SelectedValue="ViewModel.Person"
-                                         SelectionChanged="(p) => ViewModel.Person = p"
-                                         T="PersonViewModel" />
+                <PersonDomainAutoComplete Disabled="@(!ViewModel.IsNew)" 
+                                          SelectedValue="ViewModel.Person"
+                                          SelectionChanged="(p) => ViewModel.Person = p"
+                                          SportLeagueLevel="ViewModel.SportLeagueLevel" />
             </Content>
         </DivRowCol3>
         <DivRowCol3>

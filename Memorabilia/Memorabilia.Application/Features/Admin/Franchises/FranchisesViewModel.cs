@@ -8,7 +8,10 @@ public class FranchisesViewModel : ViewModel
 
     public FranchisesViewModel(IEnumerable<Domain.Entities.Franchise> franchises)
     {
-        Franchises = franchises.Select(franchise => new FranchiseViewModel(franchise)).ToList();
+        Franchises = franchises.Select(franchise => new FranchiseViewModel(franchise))
+                               .OrderBy(franchise => franchise.SportLeagueLevelName)
+                               .ThenBy(franchise => franchise.Name)
+                               .ToList();
     }
 
     public string AddRoute => $"{RoutePrefix}/{EditModeType.Update.Name}/0";

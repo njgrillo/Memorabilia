@@ -30,6 +30,8 @@ public class SaveCommissionerViewModel : SaveViewModel
 
     public override string RoutePrefix => AdminDomainItem.Commissioners.Page;
 
+    public SportLeagueLevel SportLeagueLevel => SportLeagueLevel.Find(SportLeagueLevelId);
+
     [Required]
     public int SportLeagueLevelId { get; set; }
 }

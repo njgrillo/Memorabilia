@@ -9,5 +9,9 @@ public class SizesViewModel : DomainsViewModel
 
     public SizesViewModel(IEnumerable<DomainEntity> domainEntities) : base(domainEntities) { }
 
+    public override string ItemTitle => AdminDomainItem.Sizes.Item;
+
     public override string PageTitle => AdminDomainItem.Sizes.Title;
+
+    public override string RoutePrefix => AdminDomainItem.Sizes.Page;
 }

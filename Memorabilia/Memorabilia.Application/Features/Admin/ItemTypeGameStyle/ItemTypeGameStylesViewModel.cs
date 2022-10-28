@@ -8,7 +8,10 @@ public class ItemTypeGameStylesViewModel : ViewModel
 
     public ItemTypeGameStylesViewModel(IEnumerable<Domain.Entities.ItemTypeGameStyleType> itemTypeGameStyles)
     {
-        ItemTypeGameStyles = itemTypeGameStyles.Select(itemTypeGameStyle => new ItemTypeGameStyleViewModel(itemTypeGameStyle)).ToList();
+        ItemTypeGameStyles = itemTypeGameStyles.Select(itemTypeGameStyle => new ItemTypeGameStyleViewModel(itemTypeGameStyle))
+                                               .OrderBy(itemTypeGameStyleType => itemTypeGameStyleType.ItemTypeName)
+                                               .ThenBy(itemTypeGameStyleType => itemTypeGameStyleType.GameStyleTypeName)
+                                               .ToList();
     }
 
     public string AddRoute => $"{RoutePrefix}/{EditModeType.Update.Name}/0";

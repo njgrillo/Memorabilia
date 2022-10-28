@@ -28,6 +28,13 @@ public static class MauiProgram
         builder.Services.AddTransient<QueryRouter>();
         builder.Services.AddTransient(typeof(IDomainRepository<>), typeof(DomainRepository<>));
         builder.Services.AddTransient<ICommissionerRepository, CommissionerRepository>();
+        builder.Services.AddTransient<IItemTypeBrandRepository, ItemTypeBrandRepository>();
+        builder.Services.AddTransient<IItemTypeGameStyleTypeRepository, ItemTypeGameStyleTypeRepository>();
+        builder.Services.AddTransient<IItemTypeLevelRepository, ItemTypeLevelRepository>();
+        builder.Services.AddTransient<IItemTypeSizeRepository, ItemTypeSizeRepository>();
+        builder.Services.AddTransient<IItemTypeSportRepository, ItemTypeSportRepository>();
+        builder.Services.AddTransient<IItemTypeSpotRepository, ItemTypeSpotRepository>();
+        builder.Services.AddTransient<IPersonRepository, PersonRepository>();
         builder.Services.AddTransient<IProjectRepository, ProjectRepository>();
         builder.Services.AddMediatR(typeof(GetAccomplishmentTypes));              
 

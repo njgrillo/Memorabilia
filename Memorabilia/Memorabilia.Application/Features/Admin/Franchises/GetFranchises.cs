@@ -15,11 +15,7 @@ public record GetFranchises() : IQuery<FranchisesViewModel>
 
         protected override async Task<FranchisesViewModel> Handle(GetFranchises query)
         {
-            var franchises = (await _franchiseRepository.GetAll())
-                                    .OrderBy(franchise => franchise.SportLeagueLevelName)
-                                    .ThenBy(franchise => franchise.Name);
-
-            return new FranchisesViewModel(franchises);
+           return new FranchisesViewModel(await _franchiseRepository.GetAll());
         }
     }
 }

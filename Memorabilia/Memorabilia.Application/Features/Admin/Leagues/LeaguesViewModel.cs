@@ -9,7 +9,8 @@ public class LeaguesViewModel : ViewModel
     public LeaguesViewModel(IEnumerable<Domain.Entities.League> leagues)
     {
         Leagues = leagues.Select(league => new LeagueViewModel(league))
-                         .OrderBy(league => league.Name)
+                         .OrderBy(league => league.SportLeagueLevelName)
+                         .ThenBy(league => league.Name)
                          .ToList();
     }
 

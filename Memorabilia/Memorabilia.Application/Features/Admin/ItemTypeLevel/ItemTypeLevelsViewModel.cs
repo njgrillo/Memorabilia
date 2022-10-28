@@ -8,7 +8,10 @@ public class ItemTypeLevelsViewModel : ViewModel
 
     public ItemTypeLevelsViewModel(IEnumerable<Domain.Entities.ItemTypeLevel> itemTypeLevels)
     {
-        ItemTypeLevels = itemTypeLevels.Select(itemTypeLevel => new ItemTypeLevelViewModel(itemTypeLevel)).ToList();
+        ItemTypeLevels = itemTypeLevels.Select(itemTypeLevel => new ItemTypeLevelViewModel(itemTypeLevel))
+                                       .OrderBy(itemTypeLevel => itemTypeLevel.ItemTypeName)
+                                       .ThenBy(itemTypeLevel => itemTypeLevel.LevelTypeName)
+                                       .ToList();
     }
 
     public string AddRoute => $"{RoutePrefix}/{EditModeType.Update.Name}/0";

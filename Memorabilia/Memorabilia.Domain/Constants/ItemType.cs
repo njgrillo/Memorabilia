@@ -23,7 +23,7 @@ public sealed class ItemType : DomainItemConstant
     public static readonly ItemType Hat = new(23, "Hat");
     public static readonly ItemType HeadBand = new(41, "Head Band");
     public static readonly ItemType Helmet = new(11, "Helmet", true);
-    public static readonly ItemType HockeyStick = new(21, " Hockey Stick");
+    public static readonly ItemType HockeyStick = new(21, "Hockey Stick");
     public static readonly ItemType IndexCard = new(27, "Index Card");
     public static readonly ItemType Jersey = new(12, "Jersey", true);
     public static readonly ItemType JerseyNumber = new(13, "Jersey Number");

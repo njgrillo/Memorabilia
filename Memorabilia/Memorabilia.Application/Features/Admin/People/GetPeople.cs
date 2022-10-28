@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Application.Features.Admin.People;
 
-public record GetPeople(int? SportId = null) : IQuery<PeopleViewModel>
+public record GetPeople(int? SportId = null, int? SportLeagueLevelId = null) : IQuery<PeopleViewModel>
 {
     public class Handler : QueryHandler<GetPeople, PeopleViewModel>
     {
@@ -13,7 +13,7 @@ public record GetPeople(int? SportId = null) : IQuery<PeopleViewModel>
 
         protected override async Task<PeopleViewModel> Handle(GetPeople query)
         {
-            return new PeopleViewModel(await _personRepository.GetAll(query.SportId));
+            return new PeopleViewModel(await _personRepository.GetAll(query.SportId, query.SportLeagueLevelId));
         }
     }
 }

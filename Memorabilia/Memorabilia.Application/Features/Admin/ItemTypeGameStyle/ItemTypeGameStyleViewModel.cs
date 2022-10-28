@@ -1,4 +1,6 @@
-﻿namespace Memorabilia.Application.Features.Admin.ItemTypeGameStyle;
+﻿using Memorabilia.Domain.Constants;
+
+namespace Memorabilia.Application.Features.Admin.ItemTypeGameStyle;
 
 public class ItemTypeGameStyleViewModel : IWithValue<int>, IWithName
 {
@@ -11,15 +13,17 @@ public class ItemTypeGameStyleViewModel : IWithValue<int>, IWithName
         _itemTypeGameStyle = itemTypeGameStyle;
     }
 
+    public string DeleteText => $"Delete {AdminDomainItem.ItemTypeGameStyles.Item}";
+
     public int GameStyleTypeId => _itemTypeGameStyle.GameStyleTypeId;
 
-    public string GameStyleTypeName => Domain.Constants.GameStyleType.Find(GameStyleTypeId).Name;
+    public string GameStyleTypeName => GameStyleType.Find(GameStyleTypeId).Name;
 
     public int Id => _itemTypeGameStyle.Id;
 
     public int ItemTypeId => _itemTypeGameStyle.ItemTypeId;
 
-    public string ItemTypeName => Domain.Constants.ItemType.Find(ItemTypeId).Name;
+    public string ItemTypeName => ItemType.Find(ItemTypeId).Name;
 
     string IWithName.Name => GameStyleTypeName;
 

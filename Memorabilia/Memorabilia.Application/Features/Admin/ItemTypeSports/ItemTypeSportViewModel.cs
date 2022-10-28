@@ -1,4 +1,5 @@
-﻿using Memorabilia.Domain.Entities;
+﻿using Memorabilia.Domain.Constants;
+using Memorabilia.Domain.Entities;
 
 namespace Memorabilia.Application.Features.Admin.ItemTypeSports;
 
@@ -12,6 +13,8 @@ public class ItemTypeSportViewModel
     {
         _itemTypeSport = itemTypeSport;
     }
+
+    public string DeleteText => $"Delete {AdminDomainItem.ItemTypeSports.Item}";
 
     public int Id => _itemTypeSport.Id;
 

@@ -9,7 +9,10 @@ public class ItemTypeSpotsViewModel : ViewModel
 
     public ItemTypeSpotsViewModel(IEnumerable<ItemTypeSpot> itemTypeSpots)
     {
-        ItemTypeSpots = itemTypeSpots.Select(ItemTypeSpot => new ItemTypeSpotViewModel(ItemTypeSpot)).ToList();
+        ItemTypeSpots = itemTypeSpots.Select(ItemTypeSpot => new ItemTypeSpotViewModel(ItemTypeSpot))
+                                     .OrderBy(itemTypeSpot => itemTypeSpot.ItemTypeName)
+                                     .ThenBy(itemTypeSpot => itemTypeSpot.SpotName)
+                                     .ToList();
     }
 
     public string AddRoute => $"{RoutePrefix}/{EditModeType.Update.Name}/0";

@@ -8,7 +8,7 @@ public sealed class AdminDomainItem
     public static readonly AdminDomainItem AwardTypes = new("Award Types", "Defines variations of awards", Constants.ImagePath.AwardTypes);
     public static readonly AdminDomainItem BammerTypes = new("Bammer Types", "Defines variations of bammers", Constants.ImagePath.Bammer);
     public static readonly AdminDomainItem BaseballTypes = new("Baseball Types", "Defines variations of baseballs", Constants.ImagePath.BaseballTypes);
-    public static readonly AdminDomainItem BasketballTypes = new("Basketball Types", "Defines variations of basketballs", Constants.ImagePath.BaseballTypes);
+    public static readonly AdminDomainItem BasketballTypes = new("Basketball Types", "Defines variations of basketballs", Constants.ImagePath.BasketballTypes);
     public static readonly AdminDomainItem BatTypes = new("Bat Types", "Defines variations of bats", Constants.ImagePath.BatTypes);
     public static readonly AdminDomainItem Brands = new("Brands", "Defines the brands memorabilia can have", Constants.ImagePath.Brands);
     public static readonly AdminDomainItem ChampionTypes = new("Champion Types", "Defines the championships in various sports", Constants.ImagePath.ChampionshipTypes);

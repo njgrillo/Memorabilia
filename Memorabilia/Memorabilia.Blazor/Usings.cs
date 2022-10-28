@@ -137,8 +137,10 @@ global using Memorabilia.Domain.Constants;
 global using Memorabilia.Domain.Extensions;
 global using Microsoft.AspNetCore.Components;
 global using Microsoft.AspNetCore.Components.Forms;
+global using Microsoft.AspNetCore.Components.Web;
 global using Microsoft.Extensions.Logging;
 global using MudBlazor;
+global using System.ComponentModel;
 global using System.Data;
 global using System.Globalization;
 

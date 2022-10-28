@@ -1,4 +1,5 @@
-﻿using Memorabilia.Domain.Entities;
+﻿using Memorabilia.Domain.Constants;
+using Memorabilia.Domain.Entities;
 
 namespace Memorabilia.Application.Features.Admin.ItemTypeSizes;
 
@@ -13,6 +14,8 @@ public class ItemTypeSizeViewModel : IWithValue<int>, IWithName
     {
         _itemTypeSize = itemTypeSize;
     }
+
+    public string DeleteText => $"Delete {AdminDomainItem.ItemTypeSizes.Item}";
 
     public int Id => _itemTypeSize.Id;
 
