@@ -5,9 +5,9 @@
                            SelectionChanged="(p) => _viewModel.FranchiseId = p" />
     </Content>
     <ContentColumn2>
-        <MudNumericField @bind-Value="_viewModel.PlayerNumber" 
-                         Label="Number"
-                         Variant="Variant.Outlined" />
+        <NullableIntField Label="Number"
+                          Value="_viewModel.PlayerNumber"
+                          ValueChanged="@((p) => _viewModel.PlayerNumber = p)" />
     </ContentColumn2>
 </DivRowCol3>
 <DivLeftAlign>

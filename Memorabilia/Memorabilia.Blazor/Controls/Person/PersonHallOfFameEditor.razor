@@ -5,17 +5,17 @@
                                   SelectionChanged="(p) => _viewModel.SportLeagueLevelId = p" />
     </Content>
     <ContentColumn2>
-        <MudNumericField @bind-Value="_viewModel.InductionYear" 
-                         Label="Induction Year"
-                         Variant="Variant.Outlined" />
+        <NullableIntField Label="Induction Year"
+                          Value="_viewModel.InductionYear"
+                          ValueChanged="@((p) => _viewModel.InductionYear = p)" />
     </ContentColumn2>
 </DivRowCol3>
 <DivRowCol3>
     <Content>
-        <MudNumericField @bind-Value="_viewModel.VotePercentage" 
-                         Label="Vote Percentage"
-                         Max="100"
-                         Variant="Variant.Outlined" />
+        <NullableDecimalField Label="Vote Percentage"
+                              Maximum="100"
+                              Value="_viewModel.VotePercentage"
+                              ValueChanged="@((p) => _viewModel.VotePercentage = p)" />
     </Content>
     <ContentColumn2>
         <BallotNumberDropDown SelectedValue="_viewModel.BallotNumber"

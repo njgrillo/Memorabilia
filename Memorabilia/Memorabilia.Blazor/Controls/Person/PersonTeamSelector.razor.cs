@@ -4,9 +4,6 @@ namespace Memorabilia.Blazor.Controls.Person;
 
 public partial class PersonTeamSelector : ComponentBase
 {
-    [Inject]
-    public QueryRouter QueryRouter { get; set; }
-
     [Parameter]
     public int PersonId { get; set; }
 
@@ -19,13 +16,7 @@ public partial class PersonTeamSelector : ComponentBase
     private bool _canAdd = true;
     private bool _canEditTeam = true;
     private bool _canUpdate;
-    private IEnumerable<SavePersonTeamViewModel> _teams = Enumerable.Empty<SavePersonTeamViewModel>();
     private SavePersonTeamViewModel _viewModel = new();
-
-    protected override async Task OnInitializedAsync()
-    {
-        await LoadTeams();
-    }
 
     private void Add()
     {
@@ -41,26 +32,6 @@ public partial class PersonTeamSelector : ComponentBase
         _canAdd = false;
         _canEditTeam = false;
         _canUpdate = true;
-    }
-
-    private async Task LoadTeams()
-    {
-        var query = new GetTeams();
-
-        _teams = (await QueryRouter.Send(query)).Teams.Select(team => new SavePersonTeamViewModel(PersonId, team));
-
-        if (SportIds.Any())
-        {
-            _teams = _teams.Where(team => SportIds.Contains(team.SportId));
-        }
-    }
-
-    private async Task<IEnumerable<SavePersonTeamViewModel>> SearchTeams(string searchText)
-    {
-        if (searchText.IsNullOrEmpty())
-            return Array.Empty<SavePersonTeamViewModel>();
-
-        return await Task.FromResult(_teams.Where(team => team.TeamDisplayName.Contains(searchText, StringComparison.OrdinalIgnoreCase)));
     }
 
     private void Update()

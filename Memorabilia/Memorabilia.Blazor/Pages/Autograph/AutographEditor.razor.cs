@@ -9,9 +9,6 @@ public partial class AutographEditor : AutographItem<SaveAutographViewModel>
     public int MemorabiliaId { get; set; }       
 
     private bool _displayAcquisitionDetails = true;
-    private bool _displayEstimatedValue = true;
-    private bool _displayNumbered;
-    private bool _displayPersonalization;
     private bool _displayPersonImport;
 
     protected async Task OnLoad()
@@ -60,14 +57,6 @@ public partial class AutographEditor : AutographItem<SaveAutographViewModel>
         }
     }
 
-    private void EstimatedValueCheckboxClicked(bool isChecked)
-    {
-        _displayEstimatedValue = !isChecked;
-
-        if (!_displayEstimatedValue)
-            ViewModel.EstimatedValue = null;
-    }
-
     private void GetViewModel(MemorabiliaItemViewModel viewModel)
     {
         var autograph = AutographId == -1
@@ -77,7 +66,6 @@ public partial class AutographEditor : AutographItem<SaveAutographViewModel>
         if (autograph == null)
         {
             ViewModel = new SaveAutographViewModel(viewModel);
-            _displayNumbered = ViewModel.IsNumbered;
             SetDefaults();
             return;
         }
@@ -85,21 +73,7 @@ public partial class AutographEditor : AutographItem<SaveAutographViewModel>
         ViewModel = new SaveAutographViewModel(autograph);
 
         _displayAcquisitionDetails = ViewModel.AcquisitionTypeId > 0;
-        _displayEstimatedValue = ViewModel.EstimatedValue.HasValue;
-        _displayNumbered = ViewModel.IsNumbered;
-        _displayPersonalization = !ViewModel.PersonalizationText.IsNullOrEmpty();
         _displayPersonImport = ViewModel.MemorabiliaPerson?.Id > 0;
-    }
-
-    private void NumberedCheckboxClicked(bool isChecked)
-    {
-        _displayNumbered = isChecked;
-
-        if (!_displayNumbered)
-        {
-            ViewModel.Denominator = null;
-            ViewModel.Numerator = null;
-        }
     }
 
     private void OnImportAcquisitionClick()
@@ -108,22 +82,6 @@ public partial class AutographEditor : AutographItem<SaveAutographViewModel>
         ViewModel.AcquiredDate = ViewModel.MemorabiliaAcquiredDate;
         ViewModel.Cost = ViewModel.MemorabiliaCost;
         ViewModel.PurchaseTypeId = ViewModel.MemorabiliaPurchaseTypeId ?? 0;
-    }
-
-    private void OnImportPersonClick()
-    {
-        ViewModel.Person = new SavePersonViewModel(ViewModel.MemorabiliaPerson);
-    }
-
-    private void PersonalizationCheckboxClicked(bool isChecked)
-    {
-        _displayPersonalization = isChecked;
-        ViewModel.PersonalizationText = isChecked ? $"To {ViewModel.UserFirstName}" : null;
-    }
-
-    private void SelectedPersonChanged(SavePersonViewModel person)
-    {
-        ViewModel.Person = person;
     }
 
     private void SetDefaults()

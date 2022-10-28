@@ -2,9 +2,9 @@
     <div class="col-md-4">
         <DivPad5>
             <Content>
-                <MudTextField @bind-Value="DomainItemQuickJump" 
-                              Label="Quick Jump" 
-                              Variant="Variant.Outlined" />
+                <TextField Label="Quick Jump"
+                           SelectedText="@DomainItemQuickJump"
+                           SelectedTextChanged="@((p) => DomainItemQuickJump = p)" />
                 <br />
                 <MudButton ButtonType="MudBlazor.ButtonType.Button" 
                            Color="MudBlazor.Color.Primary"

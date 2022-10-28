@@ -21,72 +21,66 @@
     <Content>        
         <DivRowCol3>
             <Content>
-                <MudTextField @bind-Value="ViewModel.FirstName" 
-                              @onblur="OnNameFieldBlur"
-                              Label="First Name" 
-                              Variant="Variant.Outlined" />
+                <TextField Label="First Name"
+                           OnBlur="OnNameFieldBlur"
+                           SelectedText="@ViewModel.FirstName"
+                           SelectedTextChanged="@((p) => ViewModel.FirstName = p)" />
             </Content>
             <ContentColumn2>
-                <MudTextField @bind-Value="ViewModel.LastName" 
-                              @onblur="OnNameFieldBlur"
-                              Label="Last Name" 
-                              Variant="Variant.Outlined" />
+                <TextField Label="Last Name"
+                           OnBlur="OnNameFieldBlur"
+                           SelectedText="@ViewModel.LastName"
+                           SelectedTextChanged="@((p) => ViewModel.LastName = p)" />
             </ContentColumn2>
         </DivRowCol3>
         <DivRowCol3>
             <Content>
-                <MudTextField @bind-Value="ViewModel.MiddleName"
-                              Label="Middle Name" 
-                              Variant="Variant.Outlined" />
+                <TextField Label="Middle Name"
+                           SelectedText="@ViewModel.MiddleName"
+                           SelectedTextChanged="@((p) => ViewModel.MiddleName = p)" />
             </Content>
             <ContentColumn2>
-                <MudTextField @bind-Value="ViewModel.Suffix"
-                              @onblur="OnNameFieldBlur"
-                              Label="Suffix" 
-                              Variant="Variant.Outlined" />
+                <TextField Label="Suffix"
+                           OnBlur="OnNameFieldBlur"
+                           SelectedText="@ViewModel.Suffix"
+                           SelectedTextChanged="@((p) => ViewModel.Suffix = p)" />
             </ContentColumn2>
         </DivRowCol3>
         <DivRowCol3>
             <Content>
-                <MudTextField @bind-Value="ViewModel.Nickname"
-                              @onblur="OnNameFieldBlur"
-                              Label="Calling Name" 
-                              Variant="Variant.Outlined" />
+                <TextField Label="Calling Name"
+                           OnBlur="OnNameFieldBlur"
+                           SelectedText="@ViewModel.Nickname"
+                           SelectedTextChanged="@((p) => ViewModel.Nickname = p)" />
             </Content>
             <ContentColumn2>
-                <MudTextField @bind-Value="ViewModel.LegalName"
-                              Label="Legal Name" 
-                              Variant="Variant.Outlined" />
+                <TextField Label="Legal Name"
+                           SelectedText="@ViewModel.LegalName"
+                           SelectedTextChanged="@((p) => ViewModel.LegalName = p)" />
             </ContentColumn2>
         </DivRowCol3>
         <DivRowCol3>
             <Content>
-                <MudTextField @bind-Value="ViewModel.DisplayName"
-                              Label="Display Name" 
-                              Variant="Variant.Outlined" />
+                <TextField Label="Display Name"
+                           SelectedText="@ViewModel.DisplayName"
+                           SelectedTextChanged="@((p) => ViewModel.DisplayName = p)" />
             </Content>
             <ContentColumn2>
-                <MudTextField @bind-Value="ViewModel.ProfileName"
-                              Label="Profile Name" 
-                              Variant="Variant.Outlined" />
+                <TextField Label="Profile Name"
+                           SelectedText="@ViewModel.ProfileName"
+                           SelectedTextChanged="@((p) => ViewModel.ProfileName = p)" />
             </ContentColumn2>
         </DivRowCol3>
         <DivRowCol3>
             <Content>
-                <MudDatePicker @bind-Date="ViewModel.BirthDate"
-                               DateFormat="MM/dd/yyyy"
-                               Editable="true"
-                               Label="Birth Date"
-                               Mask="@(new DateMask("MM/dd/yyyy"))" 
-                               Variant="Variant.Outlined" />
+                <DatePicker Label="Birth Date"
+                            SelectedDate="ViewModel.BirthDate" 
+                            SelectedDateChanged="@((p) => ViewModel.BirthDate = p)"/>
             </Content>
             <ContentColumn2>
-                <MudDatePicker @bind-Date="ViewModel.DeathDate" 
-                               DateFormat="MM/dd/yyyy"
-                               Editable="true"
-                               Label="Death Date"
-                               Mask="@(new DateMask("MM/dd/yyyy"))" 
-                               Variant="Variant.Outlined" />
+                <DatePicker Label="Death Date"
+                            SelectedDate="ViewModel.DeathDate"
+                            SelectedDateChanged="@((p) => ViewModel.DeathDate = p)" />
             </ContentColumn2>
         </DivRowCol3>
         <DivRowCol12>

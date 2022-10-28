@@ -16,9 +16,4 @@ public partial class TicketEditor : MemorabiliaItem<SaveTicketViewModel>
     {
         await CommandRouter.Send(new SaveTicket.Command(ViewModel));
     }
-
-    private void SelectedPersonChanged(SavePersonViewModel person)
-    {
-        ViewModel.Person = person;
-    }
 }

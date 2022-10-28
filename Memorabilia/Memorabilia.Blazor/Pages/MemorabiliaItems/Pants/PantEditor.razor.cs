@@ -16,9 +16,4 @@ public partial class PantEditor : MemorabiliaItem<SavePantViewModel>
     {
         await CommandRouter.Send(new SavePant.Command(ViewModel));
     }
-
-    private void SelectedPersonChanged(SavePersonViewModel person)
-    {
-        ViewModel.Person = person;
-    }
 }

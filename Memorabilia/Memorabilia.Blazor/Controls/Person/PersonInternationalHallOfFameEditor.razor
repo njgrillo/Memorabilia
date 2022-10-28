@@ -6,9 +6,9 @@
                                              SelectionChanged="(p) => _viewModel.InternationalHallOfFameTypeId = p" />
     </Content>
     <ContentColumn2>
-        <MudNumericField @bind-Value="_viewModel.Year" 
-                         Label="Induction Year"
-                         Variant="Variant.Outlined" />
+        <NullableIntField Label="Induction Year"
+                          Value="_viewModel.Year"
+                          ValueChanged="@((p) => _viewModel.Year = p)" />
     </ContentColumn2>
 </DivRowCol3>
 <DivLeftAlign>

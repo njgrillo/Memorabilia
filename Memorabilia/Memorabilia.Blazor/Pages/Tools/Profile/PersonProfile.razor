@@ -4,23 +4,10 @@
             <Content>
                 <DivRowCol6>
                     <Content>
-                        <MudAutocomplete @bind-Value="_viewModel"
-                                         AdornmentColor="MudBlazor.Color.Primary"
-                                         AdornmentIcon="@Icons.Material.Filled.Search"
-                                         Label="Person"
-                                         Placeholder="Search by name..."
-                                         ResetValueOnEmptyText="true"
-                                         SearchFunc="@SearchPeople"
-                                         T="PersonViewModel"
-                                         Text="@_viewModel?.ProfileName"
-                                         Variant="Variant.Outlined">
-                            <ItemSelectedTemplate Context="person">
-                                @person?.ProfileName
-                            </ItemSelectedTemplate>
-                            <ItemTemplate Context="person">
-                                @person?.ProfileName
-                            </ItemTemplate>
-                        </MudAutocomplete>
+                        <PersonProfileAutoComplete IsCulturalSearch="true"
+                                                   ResetValueOnEmptyText="true"
+                                                   SelectedValue="ViewModel"
+                                                   SelectionChanged="(p) => ViewModel = p" />
                         <br />
                     </Content>
                 </DivRowCol6>

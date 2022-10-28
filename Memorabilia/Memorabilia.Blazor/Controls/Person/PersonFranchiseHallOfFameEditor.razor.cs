@@ -7,9 +7,6 @@ public partial class PersonFranchiseHallOfFameEditor : ComponentBase
     [Parameter]
     public List<SavePersonFranchiseHallOfFameViewModel> FranchiseHallOfFames { get; set; } = new();
 
-    [Parameter]
-    public FranchiseHallOfFameType[] FranchiseHallOfFameTypes { get; set; } = FranchiseHallOfFameType.All;
-
     private bool _canAdd = true;
     private bool _canEditFranchise = true;
     private bool _canUpdate;

@@ -18,10 +18,5 @@ public partial class BaseballEditor : MemorabiliaItem<SaveBaseballViewModel>
     protected async Task OnSave()
     {    
         await CommandRouter.Send(new SaveBaseball.Command(ViewModel));
-    }       
-
-    private void SelectedPersonChanged(SavePersonViewModel person)
-    {
-        ViewModel.Person = person;
-    }
+    }    
 }

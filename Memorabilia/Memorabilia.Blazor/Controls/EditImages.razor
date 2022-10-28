@@ -17,9 +17,10 @@
                     </Content>
                 </DivRowCol12Center>
                 <div class="row">
-                    <InputFile id="fileInput" @bind-Value="@Images"
-                                              accept="image/*" hidden multiple
-                                              OnChange="@LoadFiles"   />
+                    <InputFile id="fileInput" 
+                               @bind-Value="@Images"
+                               accept="image/*" hidden multiple
+                               OnChange="@LoadFiles"   />
                     <MudFab Color="MudBlazor.Color.Secondary"
                             HtmlTag="label"
                             Icon="@Icons.Filled.Image"
@@ -29,7 +30,7 @@
                 <div class="row">
                     <PrettyBlazor.Condition Evaluation="_files != null">
                         <Match>
-                            <MudText Typo="@Typo.h6">@_files.Count() File@(_files.Count() == 1 ? "" : "s"):</MudText>
+                            <MudText Typo="@Typo.h6">@_files?.Count() File@(_files?.Count() == 1 ? "" : "s"):</MudText>
                             <MudList>
                                 <Iterations Items="_files" Context="file">
                                     <MudListItem Icon="@Icons.Filled.AttachFile" @key="@file">

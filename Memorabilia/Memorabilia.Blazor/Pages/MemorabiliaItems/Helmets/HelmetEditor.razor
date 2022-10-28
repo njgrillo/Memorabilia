@@ -48,12 +48,9 @@
             <ContentColumn2>
                 <DivHidden Hidden="@(!ViewModel.DisplayGameDate)">
                     <Content>
-                        <MudDatePicker @bind-Date="ViewModel.GameDate"
-                                       DateFormat="MM/dd/yyyy"
-                                       Editable="true"
-                                       Label="Game Date"
-                                       Mask="@(new DateMask("MM/dd/yyyy"))" 
-                                       Variant="Variant.Outlined" />
+                        <DatePicker Label="Game Date"
+                                    SelectedDate="ViewModel.GameDate" 
+                                    SelectedDateChanged="@((p) => ViewModel.GameDate = p)"/>  
                     </Content>
                 </DivHidden>
             </ContentColumn2>
@@ -85,8 +82,9 @@
         </DivRowCol3>
         <DivRowCol3>
             <Content>
-                <MudCheckBox @bind-Checked="@ViewModel.Throwback" 
-                             Label="Is a Throwback?" /> 
+                <BooleanCheckBox Checked="@ViewModel.Throwback"
+                                 CheckedChanged="(p) => ViewModel.Throwback = p"
+                                 Label="Is a Throwback?" />
             </Content>
         </DivRowCol3>
         <MultiPersonSelector CanToggle="true"

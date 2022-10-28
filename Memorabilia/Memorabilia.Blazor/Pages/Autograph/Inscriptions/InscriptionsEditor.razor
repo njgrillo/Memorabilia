@@ -30,9 +30,9 @@
         </DivRowCol4>
         <DivRowCol4>
             <Content>
-                <MudTextField @bind-Value="ViewModel.InscriptionText" 
-                              Label="Inscription" 
-                              Variant="Variant.Outlined" />
+                <TextField Label="Inscription"
+                           SelectedText="@ViewModel.InscriptionText"
+                           SelectedTextChanged="@((p) => ViewModel.InscriptionText = p)" />
             </Content>
         </DivRowCol4>    
         <DivLeftAlign>
@@ -78,7 +78,7 @@
                             <MudTooltip Text="Delete">
                                 <MudFab Color="MudBlazor.Color.Secondary"
                                         Icon="@Icons.Outlined.DeleteOutline"
-                                        OnClick="@(_ => Remove(inscription.InscriptionTypeId, inscription.InscriptionText))" />
+                                        OnClick="@(_ => inscription.IsDeleted = true)" />
                             </MudTooltip>
                         </MudTd>
                     </RowTemplate>

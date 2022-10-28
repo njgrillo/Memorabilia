@@ -1,0 +1,15 @@
+﻿#nullable disable
+
+namespace Memorabilia.Blazor.Controls.Fields;
+
+public partial class NumericField<TType> : Field
+{
+    [Parameter]
+    public TType Maximum { get; set; }
+
+    [Parameter]
+    public TType Value { get; set; }
+
+    [Parameter]
+    public EventCallback<TType> ValueChanged { get; set; }
+}

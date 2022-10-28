@@ -4,10 +4,10 @@
                             SelectionChanged="(p) => _viewModel.LeaderTypeId = p" />
     </Content>
     <ContentColumn2>
-        <MudTextField @bind-Value="_years" 
-                      HelperText="Ex. 1999 or 1999-2002 or 2003, 2005-2008"
-                      Label="Years"
-                      Variant="Variant.Outlined" />
+        <TextField HelperText="Ex. 1999 or 1999-2002 or 2003, 2005-2008"
+                   Label="Years"
+                   SelectedText="@_years"
+                   SelectedTextChanged="@((p) => _years = p)"/>
     </ContentColumn2>
 </DivRowCol3>
 <DivLeftAlign>

@@ -127,28 +127,28 @@
                         <PrettyBlazor.Condition Evaluation="_viewModel.HasAllStarData">
                             <Match>
                                 <MudChip Color="MudBlazor.Color.Success"
-                                     Text="AllStar">@_viewModel.AllStarSummaryDisplayText</MudChip>
+                                         Text="AllStar">@_viewModel.AllStarSummaryDisplayText</MudChip>
                             </Match>
                         </PrettyBlazor.Condition>
                         <PrettyBlazor.Condition Evaluation="_viewModel.HasAwards">
                             <Match>
                                 <Iterations Items="@_viewModel.DistinctAwards">
                                     <MudChip Color="MudBlazor.Color.Warning"
-                                         Text="Award">@($"{_viewModel.Awards.Where(award => award.AwardTypeId == context.AwardTypeId).Count()}x {context.AwardTypeAbbreviatedName}")</MudChip>
+                                             Text="Award">@($"{_viewModel.Awards.Where(award => award.AwardTypeId == context.AwardTypeId).Count()}x {context.AwardTypeAbbreviatedName}")</MudChip>
                                 </Iterations>
                             </Match>
                         </PrettyBlazor.Condition>
                         <PrettyBlazor.Condition Evaluation="_viewModel.HasChampionships">
                             <Match>
                                 <MudChip Color="MudBlazor.Color.Primary"
-                                     Text="Championship">@_viewModel.ChampionshipSummaryDisplayText</MudChip>
+                                         Text="Championship">@_viewModel.ChampionshipSummaryDisplayText</MudChip>
                             </Match>
                         </PrettyBlazor.Condition>  
                         <PrettyBlazor.Condition Evaluation="_viewModel.HasLeaders">
                             <Match>
                                 <Iterations Items="@_viewModel.DistinctLeaders">
                                     <MudChip Color="MudBlazor.Color.Secondary"
-                                         Text="Leader">@($"{_viewModel.Leaders.Where(leader => leader.LeaderTypeId == context.LeaderTypeId).Count()}x {context.LeaderTypeAbbreviatedName}")</MudChip>
+                                             Text="Leader">@($"{_viewModel.Leaders.Where(leader => leader.LeaderTypeId == context.LeaderTypeId).Count()}x {context.LeaderTypeAbbreviatedName}")</MudChip>
                                 </Iterations>
                             </Match>
                         </PrettyBlazor.Condition>

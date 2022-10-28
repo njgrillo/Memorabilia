@@ -11,9 +11,4 @@ public partial class JerseyNumberEditor : MemorabiliaItem<SaveJerseyNumberViewMo
     {
         await CommandRouter.Send(new SaveJerseyNumber.Command(ViewModel));
     }
-
-    private void SelectedPersonChanged(SavePersonViewModel person)
-    {
-        ViewModel.Person = person;
-    }
 }

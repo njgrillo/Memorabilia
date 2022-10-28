@@ -21,22 +21,23 @@
         </DivRowCol3>
         <DivRowCol3>
             <Content>
-                <PersonAutoComplete SelectedValue="ViewModel.Person"
-                                    SelectionChanged="(p) => ViewModel.Person = p" />
+                <NamedEntityAutoComplete SelectedValue="ViewModel.Person"
+                                         SelectionChanged="(p) => ViewModel.Person = p"
+                                         T="PersonViewModel" />
             </Content>
         </DivRowCol3>
         <DivRowCol3>
             <Content>
-                <MudNumericField @bind-Value="ViewModel.BeginYear" 
-                                 Label="Begin Year"
-                                 Variant="Variant.Outlined" />
+                <NullableIntField Label="Begin Year"
+                                  Value="ViewModel.BeginYear"
+                                  ValueChanged="@((p) => ViewModel.BeginYear = p)" />
             </Content>
         </DivRowCol3>
         <DivRowCol3>
             <Content>
-                <MudNumericField @bind-Value="ViewModel.EndYear" 
-                                 Label="End Year"
-                                 Variant="Variant.Outlined" />
+                <NullableIntField Label="End Year"
+                                  Value="ViewModel.EndYear"
+                                  ValueChanged="@((p) => ViewModel.EndYear = p)" />
             </Content>
         </DivRowCol3>
     </Content>

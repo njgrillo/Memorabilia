@@ -19,19 +19,19 @@
                                           SelectionChanged="(p) => ViewModel.SportLeagueLevelId = p" />
             </Content>
         </DivRowCol3>
-        <DivRowCol3>
+         <DivRowCol3>
             <Content>
-                <MudTextField @bind-Value="ViewModel.Name" 
-                              Label="Name" 
-                              Variant="Variant.Outlined" />
-            </Content>
+                <TextField Label="Name"
+                           SelectedText="@ViewModel.Name"
+                           SelectedTextChanged="@((p) => ViewModel.Name = p)" />
+            </Content>            
         </DivRowCol3>
         <DivRowCol3>
             <Content>
-                <MudTextField @bind-Value="ViewModel.Abbreviation" 
-                              Label="Abbreviation" 
-                              Variant="Variant.Outlined" />
-            </Content>
+                <TextField Label="Abbreviation"
+                           SelectedText="@ViewModel.Abbreviation"
+                           SelectedTextChanged="@((p) => ViewModel.Abbreviation = p)" />
+            </Content>            
         </DivRowCol3>
     </Content>
 </EditPage>

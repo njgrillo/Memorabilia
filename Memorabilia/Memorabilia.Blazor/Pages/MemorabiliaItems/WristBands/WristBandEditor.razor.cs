@@ -16,9 +16,4 @@ public partial class WristBandEditor : MemorabiliaItem<SaveWristBandViewModel>
     {
         await CommandRouter.Send(new SaveWristBand.Command(ViewModel));
     }
-
-    private void SelectedPersonChanged(SavePersonViewModel person)
-    {
-        ViewModel.Person = person;
-    }
 }

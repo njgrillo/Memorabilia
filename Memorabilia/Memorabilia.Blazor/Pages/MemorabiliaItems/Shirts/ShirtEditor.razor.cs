@@ -16,9 +16,4 @@ public partial class ShirtEditor : MemorabiliaItem<SaveShirtViewModel>
     {
         await CommandRouter.Send(new SaveShirt.Command(ViewModel));
     }
-
-    private void SelectedPersonChanged(SavePersonViewModel person)
-    {
-        ViewModel.Person = person;
-    }
 }

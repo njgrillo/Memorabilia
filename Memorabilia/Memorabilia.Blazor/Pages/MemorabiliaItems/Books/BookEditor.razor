@@ -22,28 +22,29 @@
     <Content>
         <DivRowCol3>
             <Content>
-                <MudTextField @bind-Value="ViewModel.Title" 
-                              Label="Title" 
-                              Variant="Variant.Outlined" /> 
+                <TextField Label="Title"
+                           SelectedText="@ViewModel.Title"
+                           SelectedTextChanged="@((p) => ViewModel.Title = p)" />
             </Content>
             <ContentColumn2>
-                <MudTextField @bind-Value="ViewModel.Edition" 
-                              Label="Edition" 
-                              MaxLength="5"
-                              Variant="Variant.Outlined" />  
+                <TextField Label="Edition"
+                           MaxLength="5"
+                           SelectedText="@ViewModel.Edition"
+                           SelectedTextChanged="@((p) => ViewModel.Edition = p)" />
             </ContentColumn2>
         </DivRowCol3>
         <DivRowCol3>
             <Content>
-                <MudTextField @bind-Value="ViewModel.Publisher" 
-                              Label="Publisher" 
-                              Variant="Variant.Outlined" />  
+                <TextField Label="Publisher"
+                           SelectedText="@ViewModel.Publisher"
+                           SelectedTextChanged="@((p) => ViewModel.Publisher = p)" />
             </Content>
         </DivRowCol3>
         <DivRowCol3>
             <Content>
-                <MudCheckBox @bind-Checked="@ViewModel.HardCover" 
-                             Label="Hard Cover" />
+                <BooleanCheckBox Checked="@ViewModel.HardCover"
+                                 CheckedChanged="(p) => ViewModel.HardCover = p"
+                                 Label="Hard Cover" />
             </Content>
         </DivRowCol3>    
         <MultiPersonSelector CanToggle="true"

@@ -5,9 +5,9 @@
                             SelectionChanged="(p) => _viewModel.RecordTypeId = p" />
     </Content>
     <ContentColumn2>
-        <MudNumericField @bind-Value="_viewModel.Amount" 
-                         Label="Amount"
-                         Variant="Variant.Outlined" />
+        <NullableDecimalField Label="Amount"
+                              Value="_viewModel.Amount"
+                              ValueChanged="@((p) => _viewModel.Amount = p)" />
     </ContentColumn2>
 </DivRowCol3>
 <DivLeftAlign>

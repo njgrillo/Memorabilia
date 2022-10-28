@@ -17,15 +17,15 @@
                 <DataAnnotationsValidator />
                 <ValidationSummary />
                 <div style="text-align: left">
-                    <MudTextField @bind-Value="_viewModel.Username"
-                                  Label="User Name"
-                                  Variant="Variant.Outlined" />
+                    <TextField Label="Username"
+                               SelectedText="@_viewModel.Username"
+                               SelectedTextChanged="@((p) => _viewModel.Username = p)"/>
                 </div>
                 <div style="text-align: left">
-                    <MudTextField @bind-Value="_viewModel.Password"
-                                  InputType="InputType.Password"
-                                  Label="Password"                                  
-                                  Variant="Variant.Outlined" />
+                    <TextField InputType="InputType.Password" 
+                               Label="Password"
+                               SelectedText="@_viewModel.Password"
+                               SelectedTextChanged="@((p) => _viewModel.Password = p)" />
                 </div>
                 <br />
                 <div class="text-center">

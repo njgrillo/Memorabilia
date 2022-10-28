@@ -32,13 +32,15 @@ public class SaveMemorabiliaItemViewModel : SaveViewModel
 
     [Required]
     [Range(1, int.MaxValue, ErrorMessage = "Acquisition Type is required.")]
-    public int AcquisitionTypeId { get; set; }
+    public int AcquisitionTypeId { get; set; } = AcquisitionType.Purchase.Id;
 
     public AcquisitionType[] AcquisitionTypes => AcquisitionType.MemorabiliaAcquisitionTypes;
 
+    public bool CanEditItemType => Id == 0;
+
     public bool CanHaveCost => AcquisitionType.CanHaveCost(AcquisitionType.Find(AcquisitionTypeId));
 
-    public int ConditionId { get; set; }
+    public int ConditionId { get; set; } = Condition.Pristine.Id;
 
     public Condition[] Conditions => Condition.All;
 
@@ -54,7 +56,26 @@ public class SaveMemorabiliaItemViewModel : SaveViewModel
 
     public string ImagePath => $"images/{(!ItemTypeName.IsNullOrEmpty() ? $"{ItemTypeName.Replace(" ", "")}.jpg" : "itemtypes.jpg")}";
 
-    public bool IsNumbered => Numerator.HasValue || Denominator.HasValue;
+    private bool? _isNumbered;
+    public bool IsNumbered
+    {
+        get
+        {
+            _isNumbered ??= Numerator.HasValue || Denominator.HasValue;
+
+            return _isNumbered ?? false;
+        }
+        set
+        {
+            _isNumbered = value;
+
+            if (!_isNumbered ?? false)
+            {
+                Denominator = null;
+                Numerator = null;
+            }
+        }
+    }
 
     [Required]
     [Range(1, int.MaxValue, ErrorMessage = "Item Type is required.")]
@@ -76,8 +97,8 @@ public class SaveMemorabiliaItemViewModel : SaveViewModel
 
     [Required]
     [Range(1, int.MaxValue, ErrorMessage = "Privacy Type is required.")]
-    public int PrivacyTypeId { get; set; }   
-    
+    public int PrivacyTypeId { get; set; } = PrivacyType.Public.Id;
+
     public PrivacyType[] PrivacyTypes => PrivacyType.All;
 
     public int PurchaseTypeId { get; set; }

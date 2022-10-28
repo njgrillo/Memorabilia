@@ -16,9 +16,4 @@ public partial class TrunkEditor : MemorabiliaItem<SaveTrunkViewModel>
     {
         await CommandRouter.Send(new SaveTrunk.Command(ViewModel));
     }
-
-    private void SelectedPersonChanged(SavePersonViewModel person)
-    {
-        ViewModel.Person = person;
-    }
 }

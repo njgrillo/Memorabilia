@@ -6,9 +6,9 @@
 </DivRowCol3>
 <DivRowCol3>
     <Content>
-        <MudNumericField @bind-Value="_viewModel.Year" 
-                         Label="Begin Year"
-                         Variant="Variant.Outlined" />
+        <IntField Label="Begin Year"
+                  Value="_viewModel.Year"
+                  ValueChanged="@((p) => _viewModel.Year = p)" />
     </Content>
 </DivRowCol3>
 <DivLeftAlign>

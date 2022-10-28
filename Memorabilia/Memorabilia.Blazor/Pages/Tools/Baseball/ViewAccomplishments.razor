@@ -2,16 +2,7 @@
     <Content>
         <DivRowCol3>
             <Content>
-                @*<AccomplishmentTypeDropDown SelectionChanged="(p) => OnInputChange(p)" />*@
-                <MudSelect Label="Accomplishment"
-                           T="int"
-                           ValueChanged="@OnInputChange"
-                           Variant="Variant.Outlined">
-                    <MudSelectItem Value="@(0)">--Select--</MudSelectItem>
-                    <Iterations Items="_viewModel.AccomplishmentTypes" Context="accomplishmentType">
-                        <MudSelectItem Value="@accomplishmentType.Id">@accomplishmentType.Name</MudSelectItem>
-                    </Iterations>
-                </MudSelect>
+                <AccomplishmentTypeDropDown SelectionChanged="(p) => OnInputChange(p)" />
             </Content>
         </DivRowCol3>
         <DivRowCol6>

@@ -1,8 +1,8 @@
 ﻿<DivRowCol3>
     <Content>
-        <MudTextField @bind-Value="_viewModel.Nickname" 
-                      Label="Nickname"
-                      Variant="Variant.Outlined" />
+        <TextField Label="Nickname"
+                   SelectedText="@_viewModel.Nickname"
+                   SelectedTextChanged="@((p) => _viewModel.Nickname = p)" />
     </Content>
 </DivRowCol3>
 <DivLeftAlign>

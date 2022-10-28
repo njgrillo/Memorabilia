@@ -48,11 +48,6 @@ public partial class DropDown<TItem, TType> : ComponentBase where TItem : class,
 
     public IEnumerable<TItem> Items { get; set; } = Enumerable.Empty<TItem>();
 
-    protected async Task OnInputChange(TType value)
-    {
-        await SelectionChanged.InvokeAsync(value);
-    }
-
     protected virtual string GetItemDisplayText(TItem item)
     {
         return item.Name;

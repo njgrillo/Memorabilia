@@ -2,7 +2,7 @@
 
 namespace Memorabilia.Application.Features.Admin.People;
 
-public class PersonViewModel : IWithName
+public class PersonViewModel : ViewModel, IWithName, IWithValue<int>
 {
     private readonly Person _person;
 
@@ -39,6 +39,8 @@ public class PersonViewModel : IWithName
 
     public string MiddleName => _person.MiddleName;
 
+    public override string Name => DisplayName;
+
     public string Nickname => _person.Nickname;
 
     public IEnumerable<PersonNickname> Nicknames => _person.Nicknames;
@@ -53,5 +55,5 @@ public class PersonViewModel : IWithName
 
     public IEnumerable<PersonTeam> Teams => _person.Teams;
 
-    string IWithName.Name => DisplayName;
+    int IWithValue<int>.Value => Id;
 }

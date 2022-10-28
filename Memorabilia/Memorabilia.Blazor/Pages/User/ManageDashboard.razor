@@ -19,7 +19,8 @@
                         </HeaderContent>
                         <RowTemplate Context="userDashboardItem">
                             <MudTd DataLabel="">
-                                <MudCheckBox @bind-Checked="@userDashboardItem.IsSelected" />
+                                <BooleanCheckBox Checked="@userDashboardItem.IsSelected"
+                                                 CheckedChanged="(p) => userDashboardItem.IsSelected = p" /> 
                             </MudTd>
                             <MudTd DataLabel="Name">@userDashboardItem.Name</MudTd>
                             <MudTd DataLabel="Description">@userDashboardItem.Description</MudTd>

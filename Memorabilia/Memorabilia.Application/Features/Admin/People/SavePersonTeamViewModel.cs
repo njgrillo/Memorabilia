@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Application.Features.Admin.People;
 
-public class SavePersonTeamViewModel : SaveViewModel
+public class SavePersonTeamViewModel : SaveViewModel, IWithName, IWithValue<int>
 {
     public SavePersonTeamViewModel() { }
 
@@ -37,6 +37,8 @@ public class SavePersonTeamViewModel : SaveViewModel
 
     public string FranchiseName { get; }
 
+    public override string Name => TeamDisplayName;
+
     public int PersonId { get; set; }
 
     public Domain.Constants.SportLeagueLevel SportLeagueLevel => Domain.Constants.SportLeagueLevel.Find(SportLeagueLevelId);
@@ -58,4 +60,6 @@ public class SavePersonTeamViewModel : SaveViewModel
     public string TeamRoleTypeName => Domain.Constants.TeamRoleType.Find(TeamRoleTypeId)?.Name;
 
     public Domain.Constants.TeamRoleType[] TeamRoleTypes => Domain.Constants.TeamRoleType.Get(SportLeagueLevel);
+
+    int IWithValue<int>.Value => Id;
 }

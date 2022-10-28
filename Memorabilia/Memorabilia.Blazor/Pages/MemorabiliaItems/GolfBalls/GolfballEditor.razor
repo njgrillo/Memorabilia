@@ -41,12 +41,9 @@
             </Content>
             <ContentColumn2>
                 <div hidden="@(!ViewModel.DisplayGameDate)">
-                    <MudDatePicker @bind-Date="ViewModel.GameDate"
-                                   DateFormat="MM/dd/yyyy"
-                                   Editable="true"
-                                   Label="Game Date"
-                                   Mask="@(new DateMask("MM/dd/yyyy"))" 
-                                   Variant="Variant.Outlined" />
+                    <DatePicker Label="Game Date"
+                                SelectedDate="ViewModel.GameDate"
+                                SelectedDateChanged="@((p) => ViewModel.GameDate = p)" />
                 </div> 
             </ContentColumn2>
         </DivRowCol3>
@@ -61,7 +58,7 @@
                         CanToggle="true"
                         ItemType="ViewModel.ItemType"
                         SelectedPerson="ViewModel.Person"
-                        SelectedPersonChanged="SelectedPersonChanged"
+                        SelectedPersonChanged="(p) => ViewModel.Person = p"
                         Sport="ViewModel.Sport" /> 
     </Content>
 </EditPage>

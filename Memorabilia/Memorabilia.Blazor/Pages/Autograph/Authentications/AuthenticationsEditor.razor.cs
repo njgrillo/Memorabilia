@@ -46,13 +46,6 @@ public partial class AuthenticationsEditor : AutographItem<SaveAuthenticationVie
         _canUpdateAuthentication = true;
     }
 
-    private void Remove(int authenticationCompanyId)
-    {
-        var authentication = AuthenticationsViewModel.Authentications.Single(authentication => authentication.AuthenticationCompanyId == authenticationCompanyId);
-
-        authentication.IsDeleted = true;
-    }
-
     private void UpdateAuthentication()
     {
         var authentication = AuthenticationsViewModel.Authentications.Single(authentication => authentication.AuthenticationCompanyId == ViewModel.AuthenticationCompanyId);

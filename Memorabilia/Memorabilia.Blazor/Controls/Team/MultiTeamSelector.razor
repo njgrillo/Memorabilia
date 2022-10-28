@@ -2,10 +2,9 @@
     <Match>
         <DivRowCol3>
             <Content>
-                <MudCheckBox Checked="@_hasTeams"
-                             CheckedChanged="TeamCheckboxClicked"
-                             Label="@_itemTypeNameLabel"
-                             T="bool" />  
+                <BooleanCheckBox Checked="@_hasTeams"
+                                 CheckedChanged="TeamCheckboxClicked"
+                                 Label="@_itemTypeNameLabel" />  
             </Content>
         </DivRowCol3>
     </Match>    
@@ -25,17 +24,17 @@
         <DivLeftAlign>
             <Content>
                 <MudButton ButtonType="MudBlazor.ButtonType.Button" 
-                            Color="MudBlazor.Color.Secondary"
-                            OnClick="Add"
-                            Size="MudBlazor.Size.Medium"                                  
-                            Variant="Variant.Filled">Add Team</MudButton>
+                           Color="MudBlazor.Color.Secondary"
+                           OnClick="Add"
+                           Size="MudBlazor.Size.Medium"                                  
+                           Variant="Variant.Filled">Add Team</MudButton>
             </Content>
         </DivLeftAlign> 
         <MudTable Bordered="false"
-                    Dense="false" 
-                    Hover="true"
-                    Items="@Teams.Where(team => !team.IsDeleted).ToList()"    
-                    Striped="true">
+                  Dense="false" 
+                  Hover="true"
+                  Items="@Teams.Where(team => !team.IsDeleted).ToList()"    
+                  Striped="true">
             <HeaderContent>
                 <MudTh>Team</MudTh>
                 <MudTh></MudTh>

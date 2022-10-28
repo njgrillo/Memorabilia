@@ -15,18 +15,17 @@
     <Content>
         <DivRowCol3>
             <Content>
-                <MudTextField @bind-Value="ViewModel.Name" 
-                              Label="Name" 
-                              Variant="Variant.Outlined" />
+                <TextField Label="Name"
+                           SelectedText="@ViewModel.Name"
+                           SelectedTextChanged="@((p) => ViewModel.Name = p)" />
             </Content>
         </DivRowCol3>
         <DivRowCol3>
             <Content>
-                <MudTextField @bind-Value="ViewModel.Description" 
-                              Label="Description"
-                              Lines="10" 
-                              T="string"
-                              Variant="Variant.Outlined" />
+                <TextField Label="Description"
+                           Lines="10"
+                           SelectedText="@ViewModel.Description"
+                           SelectedTextChanged="@((p) => ViewModel.Description = p)" />
             </Content>
         </DivRowCol3>
     </Content>

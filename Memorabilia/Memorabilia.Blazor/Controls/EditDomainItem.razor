@@ -12,16 +12,16 @@
     <Content>
         <DivRowCol3>
             <Content>
-                <MudTextField @bind-Value="_viewModel.Name"
-                              Label="Name"
-                              Variant="Variant.Outlined" />
+                <TextField Label="Name"
+                           SelectedText="@_viewModel.Name"
+                           SelectedTextChanged="@((p) => _viewModel.Name = p)" />
             </Content>
         </DivRowCol3>
         <DivRowCol3>
             <Content>
-                <MudTextField @bind-Value="_viewModel.Abbreviation"
-                              Label="Abbreviation"
-                              Variant="Variant.Outlined" />
+                <TextField Label="Abbreviation"
+                           SelectedText="@_viewModel.Abbreviation"
+                           SelectedTextChanged="@((p) => _viewModel.Abbreviation = p)" />
             </Content>
         </DivRowCol3>
     </Content>

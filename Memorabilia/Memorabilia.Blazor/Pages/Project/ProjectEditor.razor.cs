@@ -145,11 +145,6 @@ public partial class ProjectEditor : ComponentBase
         }
     }
 
-    private void SelectedPersonChanged(SavePersonViewModel person)
-    {
-        _projectPersonViewModel.Person = person;
-    }
-
     private void UpdateProjectPerson()
     {
         var person = _viewModel.People.Single(person => person.Person.Id == _projectPersonViewModel.Person.Id);

@@ -8,10 +8,7 @@ public partial class MemorabiliaFilter : ComponentBase
     public IAutographFilterPredicateBuilder AutographFilterPredicateBuilder { get; set; }
 
     [Inject]
-    public IMemorabiliaFilterPredicateBuilder MemorabiliaFilterPredicateBuilder { get; set; }
-
-    [Inject]
-    public QueryRouter QueryRouter { get; set; }    
+    public IMemorabiliaFilterPredicateBuilder MemorabiliaFilterPredicateBuilder { get; set; } 
 
     [Parameter]
     public List<MemorabiliaItemViewModel> Items { get; set; }
@@ -89,13 +86,11 @@ public partial class MemorabiliaFilter : ComponentBase
     private IEnumerable<int> _memorabiliaPurchaseTypeIds = Enumerable.Empty<int>();
     private static SaveTeamViewModel _memorabiliaTeam;
     private static bool _noAutographImages;
-    private IEnumerable<SavePersonViewModel> _people = Enumerable.Empty<SavePersonViewModel>();
     private IEnumerable<int> _privacyTypeIds = Enumerable.Empty<int>();
     private IEnumerable<int> _sizeIds = Enumerable.Empty<int>();
     private IEnumerable<int> _sportIds = Enumerable.Empty<int>();
     private IEnumerable<int> _sportLeagueLevelIds = Enumerable.Empty<int>();
     private IEnumerable<int> _spotIds = Enumerable.Empty<int>();
-    private IEnumerable<SaveTeamViewModel> _teams = Enumerable.Empty<SaveTeamViewModel>();
     private IEnumerable<int> _writingInstrumentIds = Enumerable.Empty<int>();
 
     protected async Task HandleValidSubmit()
@@ -105,9 +100,6 @@ public partial class MemorabiliaFilter : ComponentBase
 
     protected override async Task OnInitializedAsync()
     {
-        await LoadPeople();
-        await LoadTeams();
-
         if (!_hasFilter)
             return;
 
@@ -209,37 +201,5 @@ public partial class MemorabiliaFilter : ComponentBase
 
         _autographPerson = null;
         _memorabiliaPerson = null;
-    }
-
-    private async Task LoadPeople()
-    {
-        _people = (await QueryRouter.Send(new GetPeople())).People.Select(person => new SavePersonViewModel(person));
-    }
-
-    private async Task LoadTeams()
-    {
-        _teams = (await QueryRouter.Send(new GetTeams())).Teams.Select(team => new SaveTeamViewModel(team));
-    }
-
-    private async Task<IEnumerable<SavePersonViewModel>> SearchPeople(string value)
-    {
-        if (value.IsNullOrEmpty())
-            return Array.Empty<SavePersonViewModel>();
-
-        var nonCulturalResults = _people.Where(person => CultureInfo.CurrentCulture.CompareInfo.IndexOf(person.ProfileName,
-                                                                                                        value,
-                                                                                                        CompareOptions.IgnoreNonSpace) > -1);
-
-        var culturalResults = _people.Where(person => person.ProfileName.Contains(value, StringComparison.OrdinalIgnoreCase));
-
-        return await Task.FromResult(nonCulturalResults.Union(culturalResults).DistinctBy(person => person.Id));
-    }
-
-    private async Task<IEnumerable<SaveTeamViewModel>> SearchTeams(string value)
-    {
-        if (value.IsNullOrEmpty())
-            return Array.Empty<SaveTeamViewModel>();
-
-        return await Task.FromResult(_teams.Where(team => team.DisplayName.Contains(value, StringComparison.InvariantCultureIgnoreCase)));
     }
 }

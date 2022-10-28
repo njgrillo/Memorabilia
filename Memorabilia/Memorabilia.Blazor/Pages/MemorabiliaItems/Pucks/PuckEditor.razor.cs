@@ -16,9 +16,4 @@ public partial class PuckEditor : MemorabiliaItem<SavePuckViewModel>
     {
         await CommandRouter.Send(new SavePuck.Command(ViewModel));
     }
-
-    private void SelectedPersonChanged(SavePersonViewModel person)
-    {
-        ViewModel.Person = person;
-    }
 }

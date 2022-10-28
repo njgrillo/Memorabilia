@@ -43,14 +43,6 @@ public partial class InscriptionsEditor : AutographItem<SaveInscriptionViewModel
         _canUpdateInscription = true;
     }
 
-    private void Remove(int inscriptionTypeId, string inscriptionText)
-    {
-        var inscription = _inscriptionsViewModel.Inscriptions.Single(inscription => inscription.InscriptionTypeId == inscriptionTypeId &&
-                                                                                    inscription.InscriptionText == inscriptionText);
-
-        inscription.IsDeleted = true;
-    }
-
     private void UpdateInscription()
     {
         var inscription = _inscriptionsViewModel.Inscriptions.Single(inscription => inscription.InscriptionTypeId == ViewModel.InscriptionTypeId);

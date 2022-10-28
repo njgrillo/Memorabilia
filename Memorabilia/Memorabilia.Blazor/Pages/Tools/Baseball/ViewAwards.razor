@@ -2,16 +2,7 @@
     <Content>
         <DivRowCol3>
             <Content>
-                @*<AwardTypeDropDown SelectionChanged="(p) => OnInputChange(p)" />*@
-                <MudSelect Label="Award"
-                           T="int"
-                           ValueChanged="@OnInputChange"
-                           Variant="Variant.Outlined">
-                    <MudSelectItem Value="@(0)">--Select--</MudSelectItem>
-                    <Iterations Items="_viewModel.AwardTypes" Context="awardType">
-                        <MudSelectItem Value="@awardType.Id">@awardType.Name</MudSelectItem>
-                    </Iterations>
-                </MudSelect>
+                <AwardTypeDropDown SelectionChanged="(p) => OnInputChange(p)" />
             </Content>
         </DivRowCol3>
         <DivRowCol6>

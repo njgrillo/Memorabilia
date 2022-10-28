@@ -22,21 +22,14 @@ namespace Memorabilia.Blazor.Pages.MemorabiliaItems
         [Parameter]
         public int UserId { get; set; }
 
-        private bool _canEditItemType = true;
-        private bool _displayNumbered;
         private SaveMemorabiliaItemViewModel _viewModel = new ();        
 
         protected async Task OnLoad()
         {
             if (Id == 0)
-            {
-                SetDefaults();
                 return;
-            }
 
             _viewModel = new SaveMemorabiliaItemViewModel(await QueryRouter.Send(new GetMemorabiliaItem(Id)));
-            _canEditItemType = false;
-            _displayNumbered = _viewModel.IsNumbered;
         }
 
         protected async Task OnSave()
@@ -52,24 +45,6 @@ namespace Memorabilia.Blazor.Pages.MemorabiliaItems
 
             var itemTypeName = ItemType.Find(_viewModel.ItemTypeId).Name;
             _viewModel.ContinueNavigationPath = $"Memorabilia/{itemTypeName.Replace(" ", "")}/Edit/{command.Id}";
-        }
-
-        private void NumberedCheckboxClicked(bool isChecked)
-        {
-            _displayNumbered = isChecked;
-
-            if (!_displayNumbered)
-            {
-                _viewModel.Denominator = null;
-                _viewModel.Numerator = null;
-            }
-        }
-
-        private void SetDefaults()
-        {
-            _viewModel.AcquisitionTypeId = AcquisitionType.Purchase.Id;
-            _viewModel.ConditionId = Condition.Pristine.Id;
-            _viewModel.PrivacyTypeId = PrivacyType.Public.Id;
         }
     }
 }

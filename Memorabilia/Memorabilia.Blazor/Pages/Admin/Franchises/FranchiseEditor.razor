@@ -21,23 +21,23 @@
         </DivRowCol3> 
         <DivRowCol3>
             <Content>
-                <MudTextField @bind-Value="ViewModel.Name" 
-                              Label="Name" 
-                              Variant="Variant.Outlined" />
+                <TextField Label="Name"
+                           SelectedText="@ViewModel.Name"
+                           SelectedTextChanged="@((p) => ViewModel.Name = p)" />
             </Content>
         </DivRowCol3>
         <DivRowCol3>
             <Content>
-                <MudTextField @bind-Value="ViewModel.Location" 
-                              Label="Location" 
-                              Variant="Variant.Outlined" />
+                <TextField Label="Location"
+                           SelectedText="@ViewModel.Location"
+                           SelectedTextChanged="@((p) => ViewModel.Location = p)" />
             </Content>
         </DivRowCol3>
         <DivRowCol3>
             <Content>
-                <MudNumericField @bind-Value="ViewModel.FoundYear" 
-                                 Label="Founded Year"
-                                 Variant="Variant.Outlined" />
+                <IntField Label="Founded Year"
+                          Value="ViewModel.FoundYear"
+                          ValueChanged="@((p) => ViewModel.FoundYear = p)" />
             </Content>
         </DivRowCol3>
     </Content>

@@ -11,9 +11,4 @@ public partial class BookplateEditor : MemorabiliaItem<SaveBookplateViewModel>
     {
         await CommandRouter.Send(new SaveBookplate.Command(ViewModel));
     }
-
-    private void SelectedPersonChanged(SavePersonViewModel person)
-    {
-        ViewModel.Person = person;
-    }
 }

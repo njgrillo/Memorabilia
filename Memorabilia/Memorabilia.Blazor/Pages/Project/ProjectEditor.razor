@@ -13,9 +13,9 @@
     <Content>
         <DivRowCol3>
             <Content>
-                <MudTextField @bind-Value="_viewModel.Name" 
-                              Label="Name" 
-                              Variant="Variant.Outlined" />
+                <TextField Label="Name"
+                           SelectedText="@_viewModel.Name"
+                           SelectedTextChanged="@((p) => _viewModel.Name = p)"/>
             </Content>
             <ContentColumn2>
                 <ItemTypeDropDown Label="Default Item Type"
@@ -25,20 +25,14 @@
         </DivRowCol3>
         <DivRowCol3>
             <Content>
-                <MudDatePicker @bind-Date="_viewModel.StartDate"
-                               DateFormat="MM/dd/yyyy"
-                               Editable="true"
-                               Label="Start Date"
-                               Mask="@(new DateMask("MM/dd/yyyy"))" 
-                               Variant="Variant.Outlined" />
+                <DatePicker Label="Start Date"
+                            SelectedDate="_viewModel.StartDate" 
+                            SelectedDateChanged="@((p) => _viewModel.StartDate = p)"/>
             </Content>
             <ContentColumn2>
-                <MudDatePicker @bind-Date="_viewModel.EndDate"
-                               DateFormat="MM/dd/yyyy"
-                               Editable="true"
-                               Label="End Date"
-                               Mask="@(new DateMask("MM/dd/yyyy"))" 
-                               Variant="Variant.Outlined" />
+                <DatePicker Label="End Date"
+                            SelectedDate="_viewModel.EndDate" 
+                            SelectedDateChanged="@((p) => _viewModel.EndDate = p)"/>
             </ContentColumn2>
         </DivRowCol3>
         <br />
@@ -51,7 +45,7 @@
             <Content>
                 <PersonSelector Disabled="@(!_canEditPerson)"
                                 SelectedPerson="_projectPersonViewModel.Person"
-                                SelectedPersonChanged="SelectedPersonChanged" /> 
+                                SelectedPersonChanged="(p) => _projectPersonViewModel.Person = p" /> 
             </Content>
         </DivLeftAlign>
         <DivRowCol3>
@@ -68,15 +62,16 @@
                                       SelectionChanged="(p) => _projectPersonViewModel.PriorityTypeId = p" />
             </Content>
             <ContentColumn2>
-                <MudNumericField @bind-Value="_projectPersonViewModel.Rank" 
-                                 Label="Rank"
-                                 Variant="Variant.Outlined" />
+                <NullableIntField Label="Rank"
+                                  Value="_projectPersonViewModel.Rank"
+                                  ValueChanged="@((p) => _projectPersonViewModel.Rank = p)" />
             </ContentColumn2>
         </DivRowCol3>
         <DivRowCol3>
             <Content>
-                <MudCheckBox @bind-Checked="@_projectPersonViewModel.Upgrade" 
-                             Label="Is Upgrade" />
+                <BooleanCheckBox Checked="@_projectPersonViewModel.Upgrade"
+                                 CheckedChanged="(p) => _projectPersonViewModel.Upgrade = p"  
+                                 Label="Is Upgrade" /> 
             </Content>
         </DivRowCol3>
         <DivLeftAlign>

@@ -11,9 +11,4 @@ public partial class PinFlagEditor : MemorabiliaItem<SavePinFlagViewModel>
     {
         await CommandRouter.Send(new SavePinFlag.Command(ViewModel));
     }
-
-    private void SelectedPersonChanged(SavePersonViewModel person)
-    {
-        ViewModel.Person = person;
-    }
 }

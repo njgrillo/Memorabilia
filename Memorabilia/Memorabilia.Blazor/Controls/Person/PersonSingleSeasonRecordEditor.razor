@@ -7,14 +7,14 @@
 </DivRowCol3>
 <DivRowCol3>
     <Content>
-        <MudNumericField @bind-Value="_viewModel.Year" 
-                         Label="Year"
-                         Variant="Variant.Outlined" />
+        <NullableIntField Label="Year"
+                          Value="_viewModel.Year"
+                          ValueChanged="@((p) => _viewModel.Year = p)" />
     </Content>
     <ContentColumn2>
-        <MudNumericField @bind-Value="_viewModel.Amount" 
-                         Label="Amount"
-                         Variant="Variant.Outlined" />
+        <NullableDecimalField Label="Amount"
+                              Value="_viewModel.Amount"
+                              ValueChanged="@((p) => _viewModel.Amount = p)" />
     </ContentColumn2>
 </DivRowCol3>
 <DivLeftAlign>

@@ -7,26 +7,26 @@
 </DivRowCol3>
 <DivRowCol3>
     <Content>
-        <MudNumericField @bind-Value="_viewModel.Year" 
-                         Label="Year"
-                         Variant="Variant.Outlined" />
+        <NullableIntField Label="Year"
+                          Value="_viewModel.Year"
+                          ValueChanged="@((p) => _viewModel.Year = p)" />
     </Content>
     <ContentColumn2>
-        <MudNumericField @bind-Value="_viewModel.Round" 
-                         Label="Round"
-                         Variant="Variant.Outlined" />
+        <NullableIntField Label="Round"
+                          Value="_viewModel.Round"
+                          ValueChanged="@((p) => _viewModel.Round = p)" />
     </ContentColumn2>
 </DivRowCol3>
 <DivRowCol3>
     <Content>
-        <MudNumericField @bind-Value="_viewModel.Pick" 
-                         Label="Pick"
-                         Variant="Variant.Outlined" />
+        <NullableIntField Label="Pick"
+                          Value="_viewModel.Pick"
+                          ValueChanged="@((p) => _viewModel.Pick = p)" />
     </Content>
     <ContentColumn2>
-        <MudNumericField @bind-Value="_viewModel.Overall" 
-                         Label="Overall"
-                         Variant="Variant.Outlined" />
+        <NullableIntField Label="Overall"
+                          Value="_viewModel.Overall"
+                          ValueChanged="@((p) => _viewModel.Overall = p)" />
     </ContentColumn2>
 </DivRowCol3>
 <DivLeftAlign>

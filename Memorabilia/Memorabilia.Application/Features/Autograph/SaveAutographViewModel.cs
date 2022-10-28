@@ -69,6 +69,8 @@ public class SaveAutographViewModel : SaveViewModel
 
     public bool CanHaveSpot => ItemType.CanHaveSpot(ItemType);
 
+    public bool CanImportPerson => MemorabiliaPerson?.Id > 0;
+
     [Required]
     [Range(1, int.MaxValue, ErrorMessage = "Color is required.")]
     public int ColorId { get; set; }
@@ -117,19 +119,58 @@ public class SaveAutographViewModel : SaveViewModel
 
     public bool IsEstimatedValueFromMemorabilia
     {
-        get
+        get => EstimatedValue == MemorabiliaEstimatedValue
+               && MemorabiliaEstimatedValue.HasValue;
+        set
         {
-            if (EstimatedValue == MemorabiliaEstimatedValue &&
-                MemorabiliaEstimatedValue.HasValue)
-                return true;
-
-            return false;
+            if (!value)
+                EstimatedValue = null;
         }
     }
 
-    public bool IsNumbered => Numerator.HasValue || Denominator.HasValue;
+    private bool? _isNumbered;
+    public bool IsNumbered
+    {
+        get
+        {
+            _isNumbered ??= Numerator.HasValue || Denominator.HasValue;
 
-    public bool IsPersonalized => !PersonalizationText.IsNullOrEmpty();
+            return _isNumbered ?? false;
+        }
+        set
+        {
+            _isNumbered = value;
+
+            if (!_isNumbered ?? false)
+            {
+                Denominator = null;
+                Numerator = null;
+            }
+        }
+    }
+
+    private bool? _isPersonalized;
+    public bool IsPersonalized
+    {
+        get
+        {
+            _isPersonalized ??= !PersonalizationText.IsNullOrEmpty();
+
+            return _isPersonalized ?? false;
+        }
+        set
+        {
+            _isPersonalized = value;
+
+            if (!_isPersonalized ?? false)
+                PersonalizationText = null;
+            else
+            {
+                if (PersonalizationText.IsNullOrEmpty())
+                    PersonalizationText = $"To {UserFirstName}";
+            } 
+        }
+    }
 
     public ItemType ItemType { get; set; }
 

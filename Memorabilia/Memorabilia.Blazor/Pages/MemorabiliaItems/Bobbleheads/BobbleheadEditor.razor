@@ -39,22 +39,23 @@
                                        SelectionChanged="(p) => ViewModel.LevelTypeId = p" />
             </Content>
             <ContentColumn2>
-                <MudNumericField @bind-Value="ViewModel.Year" 
-                                 Label="Year" 
-                                 Variant="Variant.Outlined" />  
+                <NullableIntField Label="Year"
+                                  Value="ViewModel.Year"
+                                  ValueChanged="@((p) => ViewModel.Year = p)" /> 
             </ContentColumn2>
         </DivRowCol3>
         <DivRowCol3>
             <Content>
-                <MudCheckBox @bind-Checked="@ViewModel.HasBox" 
-                             Label="Has Box" />
+                <BooleanCheckBox Checked="@ViewModel.HasBox"
+                                 CheckedChanged="(p) => ViewModel.HasBox = p"
+                                 Label="Has Box" />
             </Content>
         </DivRowCol3>
         <PersonSelector CanFilterBySport="false"
                         CanToggle="true"
                         ItemType="ViewModel.ItemType"
                         SelectedPerson="ViewModel.Person"
-                        SelectedPersonChanged="SelectedPersonChanged" /> 
+                        SelectedPersonChanged="(p) => ViewModel.Person = p" /> 
         <DivRowCol3>
             <Content>
                 <SportDropDown SelectedValue="@ViewModel.SportId"
@@ -63,8 +64,9 @@
         </DivRowCol3>
         <DivRowCol6>
             <Content>
-                <TeamAutoComplete SelectedValue="ViewModel.Team"
-                                  SelectionChanged="(p) => ViewModel.Team = p" />
+                <NamedEntityAutoComplete SelectedValue="ViewModel.Team"
+                                         SelectionChanged="(p) => ViewModel.Team = p"
+                                         T="SaveTeamViewModel" />
             </Content>
         </DivRowCol6>
     </Content>

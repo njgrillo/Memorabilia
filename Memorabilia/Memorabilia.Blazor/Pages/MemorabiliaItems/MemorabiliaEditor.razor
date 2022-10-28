@@ -19,7 +19,7 @@
     <Content>
         <DivRowCol3>
             <Content>
-                <ItemTypeDropDown Disabled="@(!_canEditItemType)"
+                <ItemTypeDropDown Disabled="@(!_viewModel.CanEditItemType)"
                                   SelectedValue="_viewModel.ItemTypeId"
                                   SelectionChanged="(p) => _viewModel.ItemTypeId = p" />
             </Content>
@@ -37,26 +37,25 @@
             <ContentColumn3>
                 <DivHidden Hidden="@(!_viewModel.CanHaveCost)">
                     <Content>
-                        <MudNumericField @bind-Value="_viewModel.Cost" 
-                                         Label="Cost ($)" 
-                                         Variant="Variant.Outlined" />
+                        <NumericField Label="Cost ($)" 
+                                      TType="decimal?"
+                                      Value="_viewModel.Cost"
+                                      ValueChanged="@((p) => _viewModel.Cost = p)" />
                     </Content>
                 </DivHidden>
             </ContentColumn3>
         </DivRowCol3>
         <DivRowCol3>
             <Content>
-                <MudNumericField @bind-Value="_viewModel.EstimatedValue" 
-                                 Label="Estimated Value ($)"
-                                 Variant="Variant.Outlined" />
+                <NumericField Label="Estimated Value ($)"
+                              TType="decimal?"
+                              Value="_viewModel.EstimatedValue"
+                              ValueChanged="@((p) => _viewModel.EstimatedValue = p)" />
             </Content>
             <ContentColumn2>
-                <MudDatePicker @bind-Date="_viewModel.AcquiredDate"
-                               DateFormat="MM/dd/yyyy"
-                               Editable="true"
-                               Label="Acquired Date"
-                               Mask="@(new DateMask("MM/dd/yyyy"))" 
-                               Variant="Variant.Outlined" />
+                <DatePicker Label="Acquired Date"
+                            SelectedDate="_viewModel.AcquiredDate" 
+                            SelectedDateChanged="@((p) => _viewModel.AcquiredDate = p)"/>
             </ContentColumn2>
             <ContentColumn3>
                 <DivHidden Hidden="@(!_viewModel.CanHaveCost)">
@@ -73,40 +72,43 @@
                                      SelectionChanged="(p) => _viewModel.PrivacyTypeId = p" />
             </Content>
             <ContentColumn2>
-                <MudCheckBox @bind-Checked="@_viewModel.AcquiredWithAutograph" 
-                             Label="Acquired with Autograph(s)" />
+                <CheckBox Checked="@_viewModel.AcquiredWithAutograph"
+                          CheckedChanged="(p) => _viewModel.AcquiredWithAutograph = p"
+                          Label="Acquired with Autograph(s)"
+                          TType="bool"/> 
             </ContentColumn2>
         </DivRowCol3>
         <DivRowCol3>
             <Content>
-                <MudCheckBox Checked="_displayNumbered"
-                             CheckedChanged="NumberedCheckboxClicked" 
-                             Label="Numbered"
-                             T="bool" /> 
+                <CheckBox Checked="@_viewModel.IsNumbered"
+                          CheckedChanged="(p) => _viewModel.IsNumbered = p"  
+                          Label="Numbered"
+                          TType="bool"/> 
             </Content>
         </DivRowCol3>
-        <DivRowCol1 Hidden="@(!_displayNumbered)">
+        <DivRowCol1 Hidden="@(!_viewModel.IsNumbered)">
             <Content>
-                <MudNumericField @bind-Value="_viewModel.Numerator" 
-                                 Label="Numerator"
-                                 Variant="Variant.Outlined" />  
+                <NumericField Label="Numerator"
+                              TType="int?"
+                              Value="_viewModel.Numerator"
+                              ValueChanged="@((p) => _viewModel.Numerator = p)" />  
             </Content>
             <ContentColumn2>
                 <label for="of">of</label>  
             </ContentColumn2>
             <ContentColumn3>
-                <MudNumericField @bind-Value="_viewModel.Denominator" 
-                                 Label="Denominator"
-                                 Variant="Variant.Outlined" /> 
+                <NumericField Label="Denominator"
+                              TType="int?"
+                              Value="_viewModel.Denominator"
+                              ValueChanged="@((p) => _viewModel.Denominator = p)" />
             </ContentColumn3>
         </DivRowCol1>  
         <DivRowCol3>
             <Content>
-                <MudTextField @bind-Value="_viewModel.Note" 
-                              Label="Note"
-                              Lines="10" 
-                              T="string"
-                              Variant="Variant.Outlined" />
+                <TextField Label="Note"
+                           Lines="10"
+                           SelectedText="@_viewModel.Note"
+                           SelectedTextChanged="@((p) => _viewModel.Note = p)"/>
             </Content>
         </DivRowCol3>
     </Content>

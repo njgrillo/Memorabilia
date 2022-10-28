@@ -16,9 +16,4 @@ public partial class ShoeEditor : MemorabiliaItem<SaveShoeViewModel>
     {
         await CommandRouter.Send(new SaveShoe.Command(ViewModel));
     }
-
-    private void SelectedPersonChanged(SavePersonViewModel person)
-    {
-        ViewModel.Person = person;
-    }
 }

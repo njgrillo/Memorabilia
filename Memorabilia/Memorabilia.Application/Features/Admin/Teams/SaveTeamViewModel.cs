@@ -2,7 +2,7 @@
 
 namespace Memorabilia.Application.Features.Admin.Teams;
 
-public class SaveTeamViewModel : SaveViewModel, IWithName
+public class SaveTeamViewModel : SaveViewModel, IWithName, IWithValue<int>
 {
     public SaveTeamViewModel() { }
 
@@ -56,7 +56,7 @@ public class SaveTeamViewModel : SaveViewModel, IWithName
     [Required]
     [StringLength(100, ErrorMessage = "Name is too long.")]
     [MinLength(1, ErrorMessage = "Name is too short.")]
-    public string Name { get; set; }
+    public override string Name { get; set; }
 
     [StringLength(10, ErrorMessage = "Nickname is too long.")]
     public string Nickname { get; set; }
@@ -79,4 +79,6 @@ public class SaveTeamViewModel : SaveViewModel, IWithName
     public TeamStep TeamStep => TeamStep.Team;
 
     string IWithName.Name => DisplayName;
+
+    int IWithValue<int>.Value => Id;
 }

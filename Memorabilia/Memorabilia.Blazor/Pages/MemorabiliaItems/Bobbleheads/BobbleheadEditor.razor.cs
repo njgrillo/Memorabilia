@@ -16,9 +16,4 @@ public partial class BobbleheadEditor : MemorabiliaItem<SaveBobbleheadViewModel>
     {
         await CommandRouter.Send(new SaveBobblehead.Command(ViewModel));
     }
-
-    private void SelectedPersonChanged(SavePersonViewModel person)
-    {
-        ViewModel.Person = person;
-    }
 }

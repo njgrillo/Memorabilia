@@ -16,9 +16,4 @@ public partial class HockeyStickEditor : MemorabiliaItem<SaveHockeyStickViewMode
     {
         await CommandRouter.Send(new SaveHockeyStick.Command(ViewModel));
     }
-
-    private void SelectedPersonChanged(SavePersonViewModel person)
-    {
-        ViewModel.Person = person;
-    }
 }

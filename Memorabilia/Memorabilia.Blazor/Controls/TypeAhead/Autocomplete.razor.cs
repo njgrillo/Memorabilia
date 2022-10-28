@@ -11,6 +11,9 @@ public abstract partial class Autocomplete<TItem> where TItem : class, IWithName
     public string AdornmentIcon { get; set; } = Icons.Material.Filled.Search;
 
     [Parameter]
+    public bool Disabled { get; set; } 
+
+    [Parameter]
     public string Label { get; set; }    
 
     [Parameter]

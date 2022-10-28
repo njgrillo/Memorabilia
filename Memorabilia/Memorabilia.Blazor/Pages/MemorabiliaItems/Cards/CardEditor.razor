@@ -45,17 +45,19 @@
         </DivRowCol3>
         <DivRowCol3>
             <Content>
-                <MudNumericField @bind-Value="ViewModel.Year" 
-                                 Label="Year"
-                                 Variant="Variant.Outlined" />  
+                <NullableIntField Label="Year"
+                                  Value="ViewModel.Year"
+                                  ValueChanged="@((p) => ViewModel.Year = p)" /> 
             </Content>
             <ContentColumn2>
-                <MudCheckBox @bind-Checked="@ViewModel.Licensed" 
-                             Label="Licensed" />
+                <BooleanCheckBox Checked="@ViewModel.Licensed"
+                                 CheckedChanged="(p) => ViewModel.Licensed = p"
+                                 Label="Licensed" />
             </ContentColumn2>
             <ContentColumn3>
-                <MudCheckBox @bind-Checked="@ViewModel.Custom" 
-                             Label="Custom" />
+                <BooleanCheckBox Checked="@ViewModel.Custom"
+                                 CheckedChanged="(p) => ViewModel.Custom = p"
+                                 Label="Custom" />
             </ContentColumn3>
         </DivRowCol3>             
         <MultiPersonSelector CanToggle="true"

@@ -38,15 +38,16 @@
                                        SelectionChanged="(p) => ViewModel.LevelTypeId = p" />
             </Content>
             <ContentColumn2>
-                <MudNumericField @bind-Value="ViewModel.Year" 
-                                 Label="Year"
-                                 Variant="Variant.Outlined" />
+                <NullableIntField Label="Year"
+                                  Value="ViewModel.Year"
+                                  ValueChanged="@((p) => ViewModel.Year = p)" />
             </ContentColumn2>
         </DivRowCol3>
         <DivRowCol3>
             <Content>
-                <MudCheckBox @bind-Checked="@ViewModel.InPackage" 
-                             Label="In Package" />
+                <BooleanCheckBox Checked="@ViewModel.InPackage"
+                                 CheckedChanged="(p) => ViewModel.InPackage = p"
+                                 Label="In Package" />
             </Content>
         </DivRowCol3>
         <MultiPersonSelector CanToggle="true"

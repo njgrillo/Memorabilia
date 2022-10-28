@@ -55,27 +55,24 @@
                                       SportLeagueLevelId="SportLeagueLevel.MajorLeagueBaseball.Id" />
             </ContentColumn2>
             <ContentColumn3>
-                <MudDatePicker @bind-Date="ViewModel.GameDate"
-                               DateFormat="MM/dd/yyyy"
-                               Editable="true"
-                               Label="Game Date"
-                               Mask="@(new DateMask("MM/dd/yyyy"))" 
-                               Variant="Variant.Outlined" />                 
+                <DatePicker Label="Game Date"
+                            SelectedDate="ViewModel.GameDate" 
+                            SelectedDateChanged="@((p) => ViewModel.GameDate = p)"/>                 
             </ContentColumn3>
             <ContentColumn4>
                 <PrettyBlazor.Condition Evaluation="ViewModel.DisplayBaseballTypeYear">
                     <Match>
-                        <MudNumericField @bind-Value="ViewModel.BaseballTypeYear" 
-                                         Label="Year" 
-                                         Variant="Variant.Outlined" />  
+                        <NullableIntField Label="Year"
+                                          Value="ViewModel.BaseballTypeYear"
+                                          ValueChanged="@((p) => ViewModel.BaseballTypeYear = p)" />
                     </Match>
                 </PrettyBlazor.Condition>
                 <PrettyBlazor.Condition Evaluation="ViewModel.DisplayBaseballTypeAnniversary">
                     <Match>
-                        <MudTextField @bind-Value="ViewModel.BaseballTypeAnniversary" 
-                                      HelperText="Example: 25th"
-                                      Label="Anniversary"  
-                                      Variant="Variant.Outlined" />
+                        <TextField HelperText="Example: 25th"
+                                   Label="Anniversary"
+                                   SelectedText="@ViewModel.BaseballTypeAnniversary"
+                                   SelectedTextChanged="@((p) => ViewModel.BaseballTypeAnniversary = p)" />
                     </Match>
                 </PrettyBlazor.Condition>  
             </ContentColumn4>
@@ -84,7 +81,7 @@
                         CanToggle="true"
                         ItemType="ViewModel.ItemType"
                         SelectedPerson="ViewModel.Person"
-                        SelectedPersonChanged="SelectedPersonChanged"
+                        SelectedPersonChanged="(p) => ViewModel.Person = p"
                         Sport="ViewModel.Sport" />  
         <MultiTeamSelector CanToggle="true" 
                            ItemType="ViewModel.ItemType"

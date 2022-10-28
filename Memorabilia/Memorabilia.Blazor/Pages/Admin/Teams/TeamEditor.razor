@@ -35,40 +35,40 @@
         </DivRowCol3>
         <DivRowCol3>
             <Content>
-                <MudTextField @bind-Value="ViewModel.Name" 
-                              Label="Name" 
-                              Variant="Variant.Outlined" />
+                <TextField Label="Name"
+                           SelectedText="@ViewModel.Name"
+                           SelectedTextChanged="@((p) => ViewModel.Name = p)" />
             </Content>
         </DivRowCol3>
         <DivRowCol3>
             <Content>
-                <MudTextField @bind-Value="ViewModel.Location" 
-                              Label="Location" 
-                              Variant="Variant.Outlined" />
+                <TextField Label="Location"
+                           SelectedText="@ViewModel.Location"
+                           SelectedTextChanged="@((p) => ViewModel.Location = p)" />
             </Content>
         </DivRowCol3>
         <DivRowCol3>
             <Content>
-                <MudTextField @bind-Value="ViewModel.Nickname" 
-                              Label="Nickname" 
-                              Variant="Variant.Outlined" />
+                <TextField Label="Nickname"
+                           SelectedText="@ViewModel.Nickname"
+                           SelectedTextChanged="@((p) => ViewModel.Nickname = p)" />
             </Content>
             <ContentColumn2>
-                <MudTextField @bind-Value="ViewModel.Abbreviation" 
-                              Label="Abbreviation" 
-                              Variant="Variant.Outlined" />
+                <TextField Label="Abbreviation"
+                           SelectedText="@ViewModel.Abbreviation"
+                           SelectedTextChanged="@((p) => ViewModel.Abbreviation = p)" />
             </ContentColumn2>
         </DivRowCol3>
          <DivRowCol3>
             <Content>
-                <MudTextField @bind-Value="ViewModel.BeginYear" 
-                              Label="BeginYear" 
-                              Variant="Variant.Outlined" />
+                <NullableIntField Label="Begin Year"
+                                  Value="ViewModel.BeginYear"
+                                  ValueChanged="@((p) => ViewModel.BeginYear = p)" />
             </Content>
             <ContentColumn2>
-                <MudTextField @bind-Value="ViewModel.EndYear" 
-                              Label="EndYear" 
-                              Variant="Variant.Outlined" />
+                <NullableIntField Label="End Year"
+                                  Value="ViewModel.EndYear"
+                                  ValueChanged="@((p) => ViewModel.EndYear = p)" />
             </ContentColumn2>
         </DivRowCol3>
     </Content>

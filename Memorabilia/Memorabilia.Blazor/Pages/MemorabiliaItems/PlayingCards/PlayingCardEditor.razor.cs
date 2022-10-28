@@ -16,9 +16,4 @@ public partial class PlayingCardEditor : MemorabiliaItem<SavePlayingCardViewMode
     {
         await CommandRouter.Send(new SavePlayingCard.Command(ViewModel));
     }
-
-    private void SelectedPersonChanged(SavePersonViewModel person)
-    {
-        ViewModel.Person = person;
-    }
 }

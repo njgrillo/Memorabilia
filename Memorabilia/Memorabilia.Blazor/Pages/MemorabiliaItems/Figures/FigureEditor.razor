@@ -45,9 +45,9 @@
         </DivRowCol3>
         <DivRowCol3>
             <Content>
-                <MudNumericField @bind-Value="ViewModel.Year" 
-                                 Label="Year" 
-                                 Variant="Variant.Outlined" />  
+                <NullableIntField Label="Year"
+                                  Value="ViewModel.Year"
+                                  ValueChanged="@((p) => ViewModel.Year = p)" />
             </Content>
             <ContentColumn2>
                 @*<FigureSpecialtyTypeDropDown @bind-Value="@ViewModel.FigureSpecialtyTypeId" 

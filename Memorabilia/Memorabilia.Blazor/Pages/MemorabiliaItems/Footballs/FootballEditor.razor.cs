@@ -19,9 +19,4 @@ public partial class FootballEditor : MemorabiliaItem<SaveFootballViewModel>
     {
         await CommandRouter.Send(new SaveFootball.Command(ViewModel));
     }
-
-    private void SelectedPersonChanged(SavePersonViewModel person)
-    {
-        ViewModel.Person = person;
-    }
 }

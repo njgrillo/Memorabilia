@@ -16,9 +16,4 @@ public partial class TennisRacketEditor : MemorabiliaItem<SaveTennisRacketViewMo
     {
         await CommandRouter.Send(new SaveTennisRacket.Command(ViewModel));
     }
-
-    private void SelectedPersonChanged(SavePersonViewModel person)
-    {
-        ViewModel.Person = person;
-    }
 }

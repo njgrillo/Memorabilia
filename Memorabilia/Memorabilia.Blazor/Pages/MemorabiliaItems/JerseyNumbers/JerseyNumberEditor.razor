@@ -24,7 +24,7 @@
                         CanToggle="true"
                         ItemType="ViewModel.ItemType"
                         SelectedPerson="ViewModel.Person"
-                        SelectedPersonChanged="SelectedPersonChanged" />   
+                        SelectedPersonChanged="(p) => ViewModel.Person = p" />   
         <DivRowCol3>
             <Content>
                 <SportDropDown SelectedValue="@ViewModel.SportId"
@@ -33,8 +33,9 @@
         </DivRowCol3> 
         <DivRowCol6>
             <Content>
-                <TeamAutoComplete SelectedValue="ViewModel.Team"
-                                  SelectionChanged="(p) => ViewModel.Team = p" />
+                <NamedEntityAutoComplete SelectedValue="ViewModel.Team"
+                                         SelectionChanged="(p) => ViewModel.Team = p"
+                                         T="SaveTeamViewModel" />
             </Content>
         </DivRowCol6>
     </Content>

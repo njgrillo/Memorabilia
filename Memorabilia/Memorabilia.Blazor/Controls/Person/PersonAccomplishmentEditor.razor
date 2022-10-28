@@ -7,17 +7,14 @@
 </DivRowCol3>
 <DivRowCol3>
     <Content>
-        <MudNumericField @bind-Value="_viewModel.Year" 
-                         Label="Year"
-                         Variant="Variant.Outlined" />
+        <NullableIntField Label="Cost ($)" 
+                          Value="_viewModel.Year"
+                          ValueChanged="@((p) => _viewModel.Year = p)" />
     </Content>
     <ContentColumn2>
-        <MudDatePicker @bind-Date="_viewModel.Date"
-                       DateFormat="MM/dd/yyyy"
-                       Editable="true"
-                       Label="Date"
-                       Mask="@(new DateMask("MM/dd/yyyy"))" 
-                       Variant="Variant.Outlined" />
+        <DatePicker Label="Date"
+                    SelectedDate="_viewModel.Date" 
+                    SelectedDateChanged="@((p) => _viewModel.Date = p)"/>
     </ContentColumn2>
 </DivRowCol3>
 <DivLeftAlign>

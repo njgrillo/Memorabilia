@@ -16,9 +16,4 @@ public partial class HeadBandEditor : MemorabiliaItem<SaveHeadBandViewModel>
     {
         await CommandRouter.Send(new SaveHeadBand.Command(ViewModel));
     }
-
-    private void SelectedPersonChanged(SavePersonViewModel person)
-    {
-        ViewModel.Person = person;
-    }
 }

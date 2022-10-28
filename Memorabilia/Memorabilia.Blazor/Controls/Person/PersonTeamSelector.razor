@@ -1,35 +1,23 @@
 ﻿<DivRowCol6>
     <Content>
-        <MudAutocomplete @bind-Value="_viewModel"
-                         AdornmentColor="MudBlazor.Color.Primary"
-                         AdornmentIcon="@Icons.Material.Filled.Search"
-                         Disabled="@(!_canEditTeam)"
-                         Label="Team"
-                         Placeholder="Search by team"
-                         ResetValueOnEmptyText="false"                                             
-                         SearchFunc="@SearchTeams"                                               
-                         T="SavePersonTeamViewModel"
-                         Text="@_viewModel?.TeamDisplayName"
-                         Variant="Variant.Outlined">
-            <ItemSelectedTemplate Context="team">
-                @team?.TeamDisplayName
-            </ItemSelectedTemplate>
-            <ItemTemplate Context="team">
-                @team?.TeamDisplayName
-            </ItemTemplate>
-        </MudAutocomplete>
+        <PersonTeamAutoComplete Disabled="@(!_canEditTeam)"
+                                PersonId="@PersonId"
+                                ResetValueOnEmptyText="false" 
+                                SelectedValue="_viewModel"
+                                SelectionChanged="(p) => _viewModel = p"
+                                SportIds="@SportIds" />
     </Content>
 </DivRowCol6>
 <DivRowCol3>
     <Content>
-        <MudNumericField @bind-Value="_viewModel.BeginYear" 
-                         Label="Begin Year"
-                         Variant="Variant.Outlined" />
+        <NullableIntField Label="Begin Year"
+                          Value="_viewModel.BeginYear"
+                          ValueChanged="@((p) => _viewModel.BeginYear = p)" />
     </Content>
     <ContentColumn2>
-        <MudNumericField @bind-Value="_viewModel.EndYear" 
-                         Label="End Year"
-                         Variant="Variant.Outlined" />
+        <NullableIntField Label="End Year"
+                          Value="_viewModel.EndYear"
+                          ValueChanged="@((p) => _viewModel.EndYear = p)" />
     </ContentColumn2>
 </DivRowCol3>
 <DivRowCol3>

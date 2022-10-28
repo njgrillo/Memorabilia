@@ -2,7 +2,7 @@
 
 namespace Memorabilia.Application.Features.Admin.People;
 
-public class SavePersonViewModel : SaveViewModel
+public class SavePersonViewModel : SaveViewModel, IWithName, IWithValue<int>
 {
     public SavePersonViewModel() { }
 
@@ -61,6 +61,8 @@ public class SavePersonViewModel : SaveViewModel
     [StringLength(50, ErrorMessage = "Middle Name is too long.")]
     public string MiddleName { get; set; }
 
+    public override string Name => ProfileName;
+
     [StringLength(50, ErrorMessage = "Nickname is too long.")]
     public string Nickname { get; set; }
 
@@ -78,4 +80,6 @@ public class SavePersonViewModel : SaveViewModel
     public string Suffix { get; set; }
 
     public List<SavePersonTeamViewModel> Teams { get; set; } = new();
+
+    int IWithValue<int>.Value => Id;
 }

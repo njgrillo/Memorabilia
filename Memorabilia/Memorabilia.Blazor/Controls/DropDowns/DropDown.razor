@@ -23,7 +23,7 @@
                    Label="@Label"
                    T="TType"
                    Value="@SelectedValue"
-                   ValueChanged="@OnInputChange"
+                   ValueChanged="@((p) => SelectionChanged.InvokeAsync(p))"
                    Variant="@Variant">
             <PrettyBlazor.Condition Evaluation="@DisplaySelect">
                 <Match>

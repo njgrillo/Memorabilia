@@ -6,7 +6,7 @@
             <Content>
                 <div class="row">
                     <div class="col-md-6" style="text-align: left">
-                <h3>Memorabilia Filters</h3>
+                        <h3>Memorabilia Filters</h3>
                     </div>
                     <div class="col-md-6" style="text-align: left">
                         <h3>Autograph Filters</h3>
@@ -36,23 +36,9 @@
                     </div> 
                     <div class="col-lg-2">
                         <div class="form-group">
-                            <MudAutocomplete @bind-Value="_autographPerson"
-                                                AdornmentColor="MudBlazor.Color.Primary"
-                                                AdornmentIcon="@Icons.Material.Filled.Search"
-                                                Label="Person"
-                                                Placeholder="Search by person"
-                                                ResetValueOnEmptyText="true"                                             
-                                                SearchFunc="@SearchPeople"                                               
-                                                T="SavePersonViewModel"
-                                                Text="@_autographPerson?.ProfileName"
-                                                Variant="Variant.Outlined" >
-                                <ItemSelectedTemplate Context="person">
-                            @person?.ProfileName
-                                </ItemSelectedTemplate>
-                                <ItemTemplate Context="person">
-                            @person?.ProfileName
-                                </ItemTemplate>
-                            </MudAutocomplete>
+                            <PersonAutoComplete IsCulturalSearch="true" 
+                                                SelectedValue="_autographPerson"
+                                                SelectionChanged="(p) => _autographPerson = p" />
                         </div>                    
                     </div>
                     <div class="col-lg-2">
@@ -88,12 +74,9 @@
                     </div> 
                     <div class="col-lg-2">
                         <div class="form-group">
-                            <MudDatePicker @bind-Date="_memorabiliaAcquiredDate"
-                                            DateFormat="MM/dd/yyyy"
-                                            Editable="true"
-                                            Label="Acquired Date"
-                                            Mask="@(new DateMask("MM/dd/yyyy"))" 
-                                            Variant="Variant.Outlined" />
+                            <DatePicker Label="Acquired Date"
+                                        SelectedDate="_memorabiliaAcquiredDate"
+                                        SelectedDateChanged="@((p) => _memorabiliaAcquiredDate = p)"/>
                         </div>
                     </div> 
                     <div class="col-lg-2">
@@ -112,42 +95,39 @@
                     </div> 
                     <div class="col-lg-2">
                         <div class="form-group">
-                            <MudDatePicker @bind-Date="_autographAcquiredDate"
-                                            DateFormat="MM/dd/yyyy"
-                                            Editable="true"
-                                            Label="Acquired Date"
-                                            Mask="@(new DateMask("MM/dd/yyyy"))" 
-                                            Variant="Variant.Outlined" />
+                            <DatePicker Label="Acquired Date"
+                                        SelectedDate="_autographAcquiredDate" 
+                                        SelectedDateChanged="@((p) => _autographAcquiredDate = p)" />
                         </div>
                     </div> 
                 </div>
                 <div class="row">
                     <div class="col-lg-2">
                         <div class="form-group">
-                            <MudNumericField @bind-Value="_memorabiliaGrade" 
-                                                Label="Grade"
-                                                Variant="Variant.Outlined" />
+                            <NullableIntField Label="Grade"
+                                              Value="_memorabiliaGrade"
+                                              ValueChanged="@((p) => _memorabiliaGrade = p)" />
                         </div>
                     </div> 
                     <div class="col-lg-2">
                         <div class="form-group">
-                            <MudNumericField @bind-Value="_memorabiliaEstimatedValueLow" 
-                                             Label="Estimated Value Low ($)"
-                                             Variant="Variant.Outlined" />
+                            <NullableDecimalField Label="Estimated Value Low ($)"
+                                                  Value="_memorabiliaEstimatedValueLow"
+                                                  ValueChanged="@((p) => _memorabiliaEstimatedValueLow = p)" />
                         </div>
                     </div> 
                     <div class="col-lg-2">
                         <div class="form-group">
-                            <MudNumericField @bind-Value="_memorabiliaEstimatedValueHigh" 
-                                             Label="Estimated Value High ($)"
-                                             Variant="Variant.Outlined" />
+                            <NullableDecimalField Label="Estimated Value High ($)"
+                                                  Value="_memorabiliaEstimatedValueHigh"
+                                                  ValueChanged="@((p) => _memorabiliaEstimatedValueHigh = p)" />
                         </div>
                     </div> 
                     <div class="col-lg-2">
                         <div class="form-group">
-                            <MudNumericField @bind-Value="_autographGrade" 
-                                                Label="Grade"
-                                                Variant="Variant.Outlined" />
+                            <NullableIntField Label="Grade"
+                                              Value="_autographGrade"
+                                              ValueChanged="@((p) => _autographGrade = p)" />
                         </div>
                     </div>                 
                     <div class="col-lg-2">
@@ -159,8 +139,9 @@
                     </div> 
                     <div class="col-lg-2">
                         <div class="form-group">
-                            <MudCheckBox @bind-Checked="@_hasAutographAuthentication"
-                                         Label="Has Authentication(s)" />  
+                            <BooleanCheckBox Checked="@_hasAutographAuthentication"
+                                             CheckedChanged="(p) => _hasAutographAuthentication = p"  
+                                             Label="Has Authentication(s)" /> 
                         </div>
                     </div> 
                 </div>
@@ -174,59 +155,46 @@
                     </div> 
                     <div class="col-lg-2">
                         <div class="form-group">
-                            <MudNumericField @bind-Value="_memorabiliaCostLow" 
-                                             Label="Cost Low($)"
-                                             Variant="Variant.Outlined" />
+                            <NullableDecimalField Label="Cost Low ($)"
+                                                  Value="_memorabiliaCostLow"
+                                                  ValueChanged="@((p) => _memorabiliaCostLow = p)" />
                         </div>
                     </div> 
                     <div class="col-lg-2">
                         <div class="form-group">
-                            <MudNumericField @bind-Value="_memorabiliaCostHigh" 
-                                             Label="Cost High($)"
-                                             Variant="Variant.Outlined" />
+                            <NullableDecimalField Label="Cost High ($)"
+                                                  Value="_memorabiliaCostHigh"
+                                                  ValueChanged="@((p) => _memorabiliaCostHigh = p)" />
                         </div>
                     </div> 
                     <div class="col-lg-2">
                         <div class="form-group">
-                            <MudNumericField @bind-Value="_autographEstimatedValueLow" 
-                                             Label="Estimated Value Low ($)"
-                                             Variant="Variant.Outlined" />
+                            <NullableDecimalField Label="Estimated Value Low ($)"
+                                                  Value="_autographEstimatedValueLow"
+                                                  ValueChanged="@((p) => _autographEstimatedValueLow = p)" />
                         </div>
                     </div>
                     <div class="col-lg-2">
                         <div class="form-group">
-                            <MudNumericField @bind-Value="_autographEstimatedValueHigh" 
-                                             Label="Estimated Value High ($)"
-                                             Variant="Variant.Outlined" />
+                            <NullableDecimalField Label="Estimated Value High ($)"
+                                                  Value="_autographEstimatedValueHigh"
+                                                  ValueChanged="@((p) => _autographEstimatedValueHigh = p)" />
                         </div>
                     </div> 
                     <div class="col-lg-2">
                         <div class="form-group">
-                            <MudCheckBox @bind-Checked="@_hasAutographInscription"
-                                         Label="Has Inscription(s)" />  
+                            <BooleanCheckBox Checked="@_hasAutographInscription"
+                                             CheckedChanged="(p) => _hasAutographInscription = p"  
+                                             Label="Has Inscription(s)" /> 
                         </div>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-lg-2">
                         <div class="form-group">
-                            <MudAutocomplete @bind-Value="_memorabiliaPerson"
-                                                AdornmentColor="MudBlazor.Color.Primary"
-                                                AdornmentIcon="@Icons.Material.Filled.Search"
-                                                Label="Person"
-                                                Placeholder="Search by person"
-                                                ResetValueOnEmptyText="true"                                             
-                                                SearchFunc="@SearchPeople"                                               
-                                                T="SavePersonViewModel"
-                                                Text="@_memorabiliaPerson?.DisplayName"
-                                                Variant="Variant.Outlined">
-                                <ItemSelectedTemplate Context="person">
-                            @person?.DisplayName
-                                </ItemSelectedTemplate>
-                                <ItemTemplate Context="person">
-                            @person?.DisplayName
-                                </ItemTemplate>
-                            </MudAutocomplete>
+                            <PersonAutoComplete IsCulturalSearch="true" 
+                                                SelectedValue="_memorabiliaPerson"
+                                                SelectionChanged="(p) => _memorabiliaPerson = p" />
                         </div>                    
                     </div> 
                     <div class="col-lg-2">
@@ -245,22 +213,23 @@
                     </div> 
                     <div class="col-lg-2">
                         <div class="form-group">
-                            <MudNumericField @bind-Value="_autographCostLow" 
-                                             Label="Cost Low ($)"
-                                             Variant="Variant.Outlined" />
+                            <NullableDecimalField Label="Cost Low ($)"
+                                                  Value="_autographCostLow"
+                                                  ValueChanged="@((p) => _autographCostLow = p)" />
                         </div>
                     </div>
                     <div class="col-lg-2">
                         <div class="form-group">
-                            <MudNumericField @bind-Value="_autographCostHigh" 
-                                             Label="Cost High ($)"
-                                             Variant="Variant.Outlined" />
+                            <NullableDecimalField Label="Cost High ($)" 
+                                                  Value="_autographCostHigh"
+                                                  ValueChanged="@((p) => _autographCostHigh = p)" />
                         </div>
                     </div>
                     <div class="col-lg-2">
                         <div class="form-group">
-                            <MudCheckBox @bind-Checked="@_noAutographImages"
-                                         Label="No Image(s)" />  
+                            <BooleanCheckBox Checked="@_noAutographImages"
+                                             CheckedChanged="(p) => _noAutographImages = p"  
+                                             Label="No Image(s)" />  
                         </div>
                     </div>
                 </div>
@@ -296,23 +265,8 @@
                 <div class="row">
                     <div class="col-lg-4">
                         <div class="form-group">
-                            <MudAutocomplete @bind-Value="_memorabiliaTeam"
-                                                AdornmentColor="MudBlazor.Color.Primary"
-                                                AdornmentIcon="@Icons.Material.Filled.Search"
-                                                Label="Team"
-                                                Placeholder="Search by team"
-                                                ResetValueOnEmptyText="true"                                             
-                                                SearchFunc="@SearchTeams"                                               
-                                                T="SaveTeamViewModel"
-                                                Text="@_memorabiliaTeam?.DisplayName"
-                                                Variant="Variant.Outlined">
-                                <ItemSelectedTemplate Context="team">
-                            @team?.DisplayName
-                                </ItemSelectedTemplate>
-                                <ItemTemplate Context="team">
-                            @team?.DisplayName
-                                </ItemTemplate>
-                            </MudAutocomplete>
+                            <TeamAutoComplete SelectedValue="_memorabiliaTeam"
+                                              SelectionChanged="(p) => _memorabiliaTeam = p" />
                         </div>                    
                     </div>
                     <div class="col-lg-2">
@@ -326,16 +280,16 @@
                 <DivRowCol12Center>
                     <Content>
                         <MudButton ButtonType="MudBlazor.ButtonType.Button" 
-                                    Color="MudBlazor.Color.Primary"
-                                    OnClick="@HandleValidSubmit"
-                                    Size="MudBlazor.Size.Medium"
-                                    StartIcon="@Icons.Material.Filled.Save"                                   
-                                    Variant="Variant.Filled">Filter</MudButton>
+                                   Color="MudBlazor.Color.Primary"
+                                   OnClick="@HandleValidSubmit"
+                                   Size="MudBlazor.Size.Medium"
+                                   StartIcon="@Icons.Material.Filled.Save"                                   
+                                   Variant="Variant.Filled">Filter</MudButton>
                         <MudButton ButtonType="MudBlazor.ButtonType.Button" 
-                                    Color="MudBlazor.Color.Secondary"
-                                    OnClick="@ResetCriteria"
-                                    Size="MudBlazor.Size.Medium"                                  
-                                    Variant="Variant.Filled">Reset Criteria</MudButton>
+                                   Color="MudBlazor.Color.Secondary"
+                                   OnClick="@ResetCriteria"
+                                   Size="MudBlazor.Size.Medium"                                  
+                                   Variant="Variant.Filled">Reset Criteria</MudButton>
                     </Content>
                 </DivRowCol12Center>
             </Content>

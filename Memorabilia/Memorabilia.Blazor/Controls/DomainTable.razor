@@ -9,12 +9,15 @@
             <ToolBarContent>
                 <MudText Typo="Typo.h6">@DomainItemTitle</MudText>
                 <MudSpacer />
-                <MudTextField @bind-Value="_search"
-                              Adornment="Adornment.Start"
-                              AdornmentIcon="@Icons.Material.Filled.Search"
-                              Class="mt-0"
-                              IconSize="MudBlazor.Size.Medium"
-                              Placeholder="Search" />
+                <TextField Adornment="Adornment.Start" 
+                           AdornmentIcon="@Icons.Material.Filled.Search"
+                           Class="mt-0"
+                           IconSize="MudBlazor.Size.Medium"
+                           Label="Note"
+                           Lines="10"
+                           PlaceHolder="Search"
+                           SelectedText="@_search"
+                           SelectedTextChanged="@((p) => _search = p)" />
             </ToolBarContent>
             <HeaderContent>
                 <MudTh>Name</MudTh>

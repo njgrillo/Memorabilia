@@ -16,9 +16,4 @@ public partial class BatEditor : MemorabiliaItem<SaveBatViewModel>
     {
         await CommandRouter.Send(new SaveBat.Command(ViewModel));
     }
-
-    private void SelectedPersonChanged(SavePersonViewModel person)
-    {
-        ViewModel.Person = person;
-    }
 }

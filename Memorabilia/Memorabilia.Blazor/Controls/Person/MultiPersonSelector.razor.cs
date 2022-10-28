@@ -4,8 +4,6 @@ namespace Memorabilia.Blazor.Controls.Person;
 
 public partial class MultiPersonSelector : ComponentBase
 {
-    [Inject]
-    public QueryRouter QueryRouter { get; set; }
 
     [Parameter]
     public bool CanFilterBySport { get; set; }
@@ -26,9 +24,9 @@ public partial class MultiPersonSelector : ComponentBase
     public EventCallback<SavePersonViewModel> SelectedPersonChanged { get; set; }
 
     [Parameter]
-    public Domain.Constants.Sport Sport { get; set; }
+    public Sport Sport { get; set; }
 
-    SavePersonViewModel _viewModel
+    public SavePersonViewModel ViewModel
     {
         get => SelectedPerson;
         set
@@ -43,31 +41,28 @@ public partial class MultiPersonSelector : ComponentBase
     private bool _hasPeople;
     private string _itemTypeNameLabel => $"Associate {ItemType.Name} with People";
     private string _itemTypeNameFilterLabel => $"Filter by {Sport?.Name}";
-    private IEnumerable<SavePersonViewModel> _people = Enumerable.Empty<SavePersonViewModel>();
+    private Sport _sportFilter;
 
-    protected override async Task OnInitializedAsync()
+    protected override void OnInitialized()
     {
-        _displayPeople = !CanToggle || SelectedPerson?.Id > 0 || People.Any();
         _hasPeople = SelectedPerson?.Id > 0 || People.Any();
+        _displayPeople = !CanToggle || _hasPeople;  
+        _sportFilter = Sport;
 
-        await LoadPeople();
+        if (!_filterPeople)
+            Sport = null;
     }
 
     private void Add()
     {
-        var person = People.SingleOrDefault(person => person.Id == _viewModel.Id);
+        var person = People.SingleOrDefault(person => person.Id == ViewModel.Id);
 
         if (person != null)
             person.IsDeleted = false;
         else
-            People.Add(_viewModel);
+            People.Add(ViewModel);
 
-        _viewModel = new();
-    }
-
-    private async Task LoadPeople()
-    {
-        _people = (await QueryRouter.Send(new GetPeople(Sport?.Id ?? null))).People.Select(person => new SavePersonViewModel(person));
+        ViewModel = new();
     }
 
     private void PersonCheckboxClicked(bool isChecked)
@@ -80,37 +75,11 @@ public partial class MultiPersonSelector : ComponentBase
         _hasPeople = isChecked;
     }
 
-    private async Task PersonFilterCheckboxClicked(bool isChecked)
+    private void PersonFilterCheckboxClicked(bool isChecked)
     {
         _filterPeople = isChecked;
 
-        var sportId = _filterPeople ? Sport.Id : (int?)null;
-        var query = new GetPeople(sportId);
-
-        _people = (await QueryRouter.Send(query)).People.Select(person => new SavePersonViewModel(person));
-    }
-
-    private void Remove(int personId)
-    {
-        var person = People.SingleOrDefault(person => person.Id == personId);
-
-        if (person == null)
-            return;
-
-        person.IsDeleted = true;
-    }
-
-    private async Task<IEnumerable<SavePersonViewModel>> SearchPeople(string searchText)
-    {
-        if (searchText.IsNullOrEmpty())
-            return Array.Empty<SavePersonViewModel>();
-
-        var nonCulturalResults = _people.Where(person => CultureInfo.CurrentCulture.CompareInfo.IndexOf(person.ProfileName,
-                                                                                                        searchText,
-                                                                                                        CompareOptions.IgnoreNonSpace) > -1);
-
-        var culturalResults = _people.Where(person => person.ProfileName.Contains(searchText, StringComparison.OrdinalIgnoreCase));
-
-        return await Task.FromResult(nonCulturalResults.Union(culturalResults).DistinctBy(person => person.Id));
+        if (_filterPeople)
+            Sport = _sportFilter;
     }
 }

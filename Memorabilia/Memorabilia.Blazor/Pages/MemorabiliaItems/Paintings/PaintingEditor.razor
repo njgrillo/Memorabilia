@@ -40,14 +40,16 @@
         </DivRowCol3>
         <DivRowCol3>
             <Content>
-                <MudCheckBox @bind-Checked="@ViewModel.Framed" 
-                             Label="Framed" />
+                <BooleanCheckBox Checked="@ViewModel.Framed"
+                                 CheckedChanged="(p) => ViewModel.Framed = p"
+                                 Label="Framed" />
             </Content>
         </DivRowCol3>
         <DivRowCol3>
             <Content>
-                <MudCheckBox @bind-Checked="@ViewModel.Matted" 
-                             Label="Matted" />
+                <BooleanCheckBox Checked="@ViewModel.Matted"
+                                 CheckedChanged="(p) => ViewModel.Matted = p"  
+                                 Label="Matted" /> 
             </Content>
         </DivRowCol3>
         <MultiPersonSelector CanToggle="true"

@@ -30,29 +30,33 @@
         </DivRowCol4>
         <DivRowCol4>
             <Content>
-                <MudTextField @bind-Value="ViewModel.Verification" 
-                              Label="Verification" 
-                              Variant="Variant.Outlined" /> 
+                <TextField Label="Verification"
+                           SelectedText="@ViewModel.Verification"
+                           SelectedTextChanged="@((p) => ViewModel.Verification = p)" />
             </Content>
         </DivRowCol4>
         <DivRowCol2>
             <Content>
-                <MudCheckBox @bind-Checked="@ViewModel.HasHologram" 
-                             Label="Has Hologram" />
+                <BooleanCheckBox Checked="@ViewModel.HasHologram"
+                                 CheckedChanged="(p) => ViewModel.HasHologram = p"
+                                 Label="Has Hologram" /> 
             </Content>
             <ContentColumn2>
-                <MudCheckBox @bind-Checked="@ViewModel.HasCertificationCard" 
-                             Label="Has Certification Card" />
+                <BooleanCheckBox Checked="@ViewModel.HasCertificationCard"
+                                 CheckedChanged="(p) => ViewModel.HasCertificationCard = p"
+                                 Label="Has Certification Card" />
             </ContentColumn2>
         </DivRowCol2>
         <DivRowCol2>
             <Content>
-                <MudCheckBox @bind-Checked="@ViewModel.HasLetter"
-                             Label="Has Letter" />
+                <BooleanCheckBox Checked="@ViewModel.HasLetter"
+                                 CheckedChanged="(p) => ViewModel.HasLetter = p"
+                                 Label="Has Letter" />
             </Content>
             <ContentColumn2>
-                <MudCheckBox @bind-Checked="@ViewModel.Witnessed" 
-                             Label="Witnessed" />
+                <BooleanCheckBox Checked="@ViewModel.Witnessed"
+                                 CheckedChanged="(p) => ViewModel.Witnessed = p"
+                                 Label="Witnessed" /> 
             </ContentColumn2>
         </DivRowCol2>
         <DivLeftAlign>
@@ -115,7 +119,7 @@
                             <MudTooltip Text="Delete">
                                 <MudFab Color="MudBlazor.Color.Secondary"
                                         Icon="@Icons.Outlined.DeleteOutline"
-                                        OnClick="@(_ => Remove(authentication.AuthenticationCompanyId))" />
+                                        OnClick="@(_ => authentication.IsDeleted = true)" />
                             </MudTooltip>
                         </MudTd>
                     </RowTemplate>

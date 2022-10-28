@@ -10,47 +10,20 @@ public partial class PersonProfile : ComponentBase
     [Inject]
     public IProfileService ProfileService { get; set; }
 
-    [Inject]
-    public QueryRouter QueryRouter { get; set; }
-
     [Parameter]
     public PersonViewModel SelectedPerson { get; set; }
 
-    private IEnumerable<PersonViewModel> _people = Enumerable.Empty<PersonViewModel>();
-
-    private PersonViewModel _viewModel
+    public PersonViewModel ViewModel
     {
         get => SelectedPerson;
         set
         {
             SelectedPerson = value;
-            SelectedPersonChanged(value);
+            SelectedPersonChanged(SelectedPerson);
         }
     }
 
-    protected async Task OnLoad()
-    {
-        await LoadPeople();
-    }
-
-    private async Task LoadPeople()
-    {
-        _people = (await QueryRouter.Send(new GetPeople())).People;
-    }
-
-    private async Task<IEnumerable<PersonViewModel>> SearchPeople(string searchText)
-    {
-        if (searchText.IsNullOrEmpty())
-            return Array.Empty<PersonViewModel>();
-
-        var nonCulturalResults = _people.Where(person => CultureInfo.CurrentCulture.CompareInfo.IndexOf(person.ProfileName,
-                                                                                                        searchText,
-                                                                                                        CompareOptions.IgnoreNonSpace) > -1);
-
-        var culturalResults = _people.Where(person => person.ProfileName.Contains(searchText, StringComparison.OrdinalIgnoreCase));
-
-        return await Task.FromResult(nonCulturalResults.Union(culturalResults).DistinctBy(person => person.Id));
-    }
+    protected void OnLoad() { }
 
     private async Task SelectedPersonChanged(PersonViewModel person)
     {

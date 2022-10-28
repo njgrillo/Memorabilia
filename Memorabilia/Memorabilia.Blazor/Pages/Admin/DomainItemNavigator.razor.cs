@@ -4,7 +4,7 @@ namespace Memorabilia.Blazor.Pages.Admin;
 
 public partial class DomainItemNavigator : ComponentBase
 {
-    public string DomainItemQuickJump;
+    public string DomainItemQuickJump { get; set; }
     public readonly AdminDomainItemsViewModel ViewModel = new ();
 
     public string ImageRoot => Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.CommonProgramFiles), "GraphinAllDay");

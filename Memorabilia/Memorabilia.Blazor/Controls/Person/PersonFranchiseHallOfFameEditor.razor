@@ -1,20 +1,13 @@
 ﻿<DivRowCol3>
     <Content>
-        <MudSelect @bind-Value="@_viewModel.FranchiseId"
-                   @bind-Value:event="ValueChanged" 
-                   Disabled="@(!_canEditFranchise)"
-                   Label="Franchise"
-                   Variant="Variant.Outlined">
-            <MudSelectItem Value="@(0)">--Select--</MudSelectItem>
-            <Iterations Items="FranchiseHallOfFameTypes" Context="franchiseHallOfFameType">
-                <MudSelectItem Value="@franchiseHallOfFameType.Franchise.Id">@franchiseHallOfFameType.ToString()</MudSelectItem>
-            </Iterations>	
-        </MudSelect> 
+        <FranchiseHallOfFameDropDown Disabled="@(!_canEditFranchise)"
+                                     SelectedValue="_viewModel.FranchiseId"
+                                     SelectionChanged="(p) => _viewModel.FranchiseId = p" />
     </Content>
     <ContentColumn2>
-        <MudNumericField @bind-Value="_viewModel.Year" 
-                         Label="Year"
-                         Variant="Variant.Outlined" />
+        <NullableIntField Label="Year"
+                          Value="_viewModel.Year"
+                          ValueChanged="@((p) => _viewModel.Year = p)" />
     </ContentColumn2>
 </DivRowCol3>
 <DivLeftAlign>

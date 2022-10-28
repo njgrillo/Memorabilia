@@ -24,7 +24,7 @@
         <DivRowCol6>
             <Content>
                 <MudTooltip Text="Import from memorabilia item">
-                    <MudImage @onclick="OnImportPersonClick"
+                    <MudImage @onclick="@(_ => ViewModel.Person = new SavePersonViewModel(ViewModel.MemorabiliaPerson))"
                               hidden="@(!_displayPersonImport)" 
                               Class="rounded-lg can-click" 
                               Elevation="5" 
@@ -34,27 +34,27 @@
                               Width="20" />
                 </MudTooltip>
                 <PersonSelector SelectedPerson="ViewModel.Person"
-                                SelectedPersonChanged="SelectedPersonChanged" />  
+                                SelectedPersonChanged="(p) => ViewModel.Person = p" />  
             </Content>
         </DivRowCol6>
         <DivRowCol3>
             <Content>
-                <MudCheckBox @bind-Checked="@ViewModel.FullName" 
-                             Label="Is Full Name" />
+                <BooleanCheckBox Checked="@ViewModel.FullName"
+                                 CheckedChanged="(p) => ViewModel.FullName = p"  
+                                 Label="Is Full Name" />
             </Content>
         </DivRowCol3>
         <DivRowCol3>
             <Content>
-                <MudCheckBox Checked="@ViewModel.IsPersonalized"
-                             CheckedChanged="PersonalizationCheckboxClicked"
-                             Label="Has Personalization"
-                             T="bool" />  
-                <DivHidden Hidden="@(!_displayPersonalization)">
+                <BooleanCheckBox Checked="@ViewModel.IsPersonalized"
+                                 CheckedChanged="(p) => ViewModel.IsPersonalized = p"  
+                                 Label="Has Personalization" />
+                <DivHidden Hidden="@(!ViewModel.IsPersonalized)">
                     <Content>
-                        <MudTextField @bind-Value="ViewModel.PersonalizationText" 
-                                      Label="Personalization Text" 
-                                      HelperText="Example: To Nick" 
-                                      Variant="Variant.Outlined" />
+                        <TextField HelperText="Example: To Nick" 
+                                   Label="Personalization Text"
+                                   SelectedText="@ViewModel.PersonalizationText"
+                                   SelectedTextChanged="@((p) => ViewModel.PersonalizationText = p)"/>
                     </Content>
                 </DivHidden>
             </Content>
@@ -71,18 +71,17 @@
             <ContentColumn3>
                 <PrettyBlazor.Condition Evaluation="ViewModel.DisplayAcquisitionDetails">
                     <Match>
-                        <MudCheckBox CheckedChanged="EstimatedValueCheckboxClicked"
-                                     Label="Estimated Value same as Memorabilia"
-                                     T="bool" />  
+                        <BooleanCheckBox Checked="@ViewModel.IsEstimatedValueFromMemorabilia"
+                                         CheckedChanged="(p) => ViewModel.IsEstimatedValueFromMemorabilia = p"
+                                         Label="Estimated Value same as Memorabilia" />
                     </Match>
                 </PrettyBlazor.Condition>  
             </ContentColumn3>
             <ContentColumn4>
                 <PrettyBlazor.Condition Evaluation="ViewModel.DisplayAcquisitionDetails">
                     <Match>
-                        <MudCheckBox CheckedChanged="AcquisitionDetailsCheckboxClicked"
-                                     Label="Acquisition Details same as Memorabilia"
-                                     T="bool" />   
+                        <BooleanCheckBox CheckedChanged="(p) => AcquisitionDetailsCheckboxClicked(p)"
+                                         Label="Acquisition Details same as Memorabilia" />  
                     </Match>
                 </PrettyBlazor.Condition>  
             </ContentColumn4>
@@ -92,17 +91,17 @@
                 <ColorDropDown SelectedValue="ViewModel.ColorId"
                                SelectionChanged="(p) => ViewModel.ColorId = p" />
             </Content>
-            <ContentColumn2>                
-                <MudNumericField @bind-Value="ViewModel.Grade" 
-                                 Label="Grade" 
-                                 Variant="Variant.Outlined" />
+            <ContentColumn2>    
+                <NullableIntField Label="Grade" 
+                                  Value="ViewModel.Grade"
+                                  ValueChanged="@((p) => ViewModel.Grade = p)" />
             </ContentColumn2>
             <ContentColumn3>
                 <PrettyBlazor.Condition Evaluation="ViewModel.DisplayAcquisitionDetails">
                     <Match>
-                        <MudNumericField @bind-Value="ViewModel.EstimatedValue"
-                                         Label="Estimated Value ($)" 
-                                         Variant="Variant.Outlined" />
+                        <NullableDecimalField Label="Estimated Value ($)"
+                                              Value="ViewModel.EstimatedValue"
+                                              ValueChanged="@((p) => ViewModel.EstimatedValue = p)" />
                     </Match>
                 </PrettyBlazor.Condition>
             </ContentColumn3>
@@ -130,12 +129,9 @@
             <ContentColumn4>
                 <PrettyBlazor.Condition Evaluation="ViewModel.DisplayAcquisitionDetails && _displayAcquisitionDetails">
                     <Match>
-                        <MudDatePicker @bind-Date="ViewModel.AcquiredDate"
-                                       DateFormat="MM/dd/yyyy"
-                                       Editable="true"
-                                       Label="Acquired Date"
-                                       Mask="@(new DateMask("MM/dd/yyyy"))" 
-                                       Variant="Variant.Outlined"/>
+                        <DatePicker Label="Acquired Date"
+                                    SelectedDate="ViewModel.AcquiredDate"
+                                    SelectedDateChanged="@((p) => ViewModel.AcquiredDate = p)" />
                     </Match>
                 </PrettyBlazor.Condition>
             </ContentColumn4>
@@ -144,9 +140,9 @@
             <ContentColumn4>
                 <PrettyBlazor.Condition Evaluation="ViewModel.DisplayAcquisitionDetails && _displayAcquisitionDetails">
                     <Match>
-                        <MudNumericField @bind-Value="ViewModel.Cost"
-                                         Label="Cost ($)" 
-                                         Variant="Variant.Outlined" />
+                        <NullableDecimalField Label="Cost ($)" 
+                                              Value="ViewModel.Cost"
+                                              ValueChanged="@((p) => ViewModel.Cost = p)" />
                     </Match>
                 </PrettyBlazor.Condition>
             </ContentColumn4>
@@ -169,12 +165,9 @@
             <ContentColumn4>
                 <PrettyBlazor.Condition Evaluation="ViewModel.DisplayAcquisitionDetails && ViewModel.DisplayThroughTheMailDetails">
                     <Match>
-                        <MudDatePicker @bind-Date="ViewModel.SentDate"
-                                       DateFormat="MM/dd/yyyy"
-                                       Editable="true"
-                                       Label="Sent" 
-                                       Mask="@(new DateMask("MM/dd/yyyy"))" 
-                                       Variant="Variant.Outlined" /> 
+                        <DatePicker Label="Sent Date"
+                                    SelectedDate="ViewModel.SentDate"
+                                    SelectedDateChanged="@((p) => ViewModel.SentDate = p)" />
                     </Match>
                 </PrettyBlazor.Condition>
             </ContentColumn4>
@@ -183,46 +176,41 @@
             <ContentColumn4>
                 <PrettyBlazor.Condition Evaluation="ViewModel.DisplayAcquisitionDetails && ViewModel.DisplayThroughTheMailDetails">
                     <Match>
-                        <MudDatePicker @bind-Date="ViewModel.ReceivedDate" 
-                                       DateFormat="MM/dd/yyyy"
-                                       Editable="true"
-                                       Label="Received" 
-                                       Mask="@(new DateMask("MM/dd/yyyy"))" 
-                                       Variant="Variant.Outlined"  />
+                        <DatePicker Label="Received Date"
+                                    SelectedDate="ViewModel.ReceivedDate"
+                                    SelectedDateChanged="@((p) => ViewModel.ReceivedDate = p)" />
                     </Match>
                 </PrettyBlazor.Condition>
             </ContentColumn4>
         </DivRowCol3>
         <DivRowCol3>
             <Content>
-                <MudCheckBox Checked="_displayNumbered"
-                             CheckedChanged="NumberedCheckboxClicked" 
-                             Label="Numbered"
-                             T="bool" /> 
+                <BooleanCheckBox Checked="@ViewModel.IsNumbered"
+                                 CheckedChanged="(p) => ViewModel.IsNumbered = p"  
+                                 Label="Numbered" /> 
             </Content>
         </DivRowCol3>
-        <DivRowCol1 Hidden="@(!_displayNumbered)">
+        <DivRowCol1 Hidden="@(!ViewModel.IsNumbered)">
             <Content>
-                <MudNumericField @bind-Value="ViewModel.Numerator" 
-                                 Label="Numerator"
-                                 Variant="Variant.Outlined" />  
+                <NullableIntField Label="Numerator"
+                                  Value="ViewModel.Numerator"
+                                  ValueChanged="@((p) => ViewModel.Numerator = p)" />
             </Content>
             <ContentColumn2>
                 <label for="of">of</label>  
             </ContentColumn2>
             <ContentColumn3>
-                <MudNumericField @bind-Value="ViewModel.Denominator" 
-                                 Label="Denominator"
-                                 Variant="Variant.Outlined" /> 
+                <NullableIntField Label="Denominator"
+                                  Value="ViewModel.Denominator"
+                                  ValueChanged="@((p) => ViewModel.Denominator = p)" />
             </ContentColumn3>
         </DivRowCol1> 
         <DivRowCol3>
             <Content>
-                <MudTextField @bind-Value="ViewModel.Note" 
-                              Label="Note"
-                              Lines="10" 
-                              T="string"
-                              Variant="Variant.Outlined" />
+                <TextField Label="Note"
+                           Lines="10"
+                           SelectedText="@ViewModel.Note"
+                           SelectedTextChanged="@((p) => ViewModel.Note = p)"/>
             </Content>
         </DivRowCol3>
     </Content>
