@@ -803,6 +803,25 @@
           }
         }
       },
+      "PropertyChanged.Fody/4.0.5": {
+        "type": "package",
+        "dependencies": {
+          "Fody": "6.6.4"
+        },
+        "compile": {
+          "lib/netstandard2.1/PropertyChanged.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard2.1/PropertyChanged.dll": {
+            "related": ".xml"
+          }
+        },
+        "build": {
+          "build/_._": {}
+        }
+      },
       "runtime.debian.8-x64.runtime.native.System.Security.Cryptography.OpenSsl/4.3.0": {
         "type": "package",
         "runtimeTargets": {
@@ -2467,7 +2486,8 @@
           "Microsoft.AspNetCore.Components": "6.0.9",
           "Microsoft.AspNetCore.Components.Web": "6.0.9",
           "MudBlazor": "6.0.15",
-          "PrettyBlazor": "1.2.0"
+          "PrettyBlazor": "1.2.0",
+          "PropertyChanged.Fody": "4.0.5"
         },
         "compile": {
           "bin/placeholder/Memorabilia.Blazor.dll": {}
@@ -3550,6 +3570,27 @@
         "lib/net5.0/PrettyBlazor.dll",
         "prettyblazor.1.2.0.nupkg.sha512",
         "prettyblazor.nuspec"
+      ]
+    },
+    "PropertyChanged.Fody/4.0.5": {
+      "sha512": "D4UXpsUw9kgayfHT8zzwzO2xL7PirJ/xrjX+Fp5x3Og/YDKtvKTMiCx0KGOydqOYXhP0OMyz22kZUMWRujdT0g==",
+      "type": "package",
+      "path": "propertychanged.fody/4.0.5",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "analyzers/dotnet/cs/PropertyChanged.Fody.Analyzer.dll",
+        "build/PropertyChanged.Fody.props",
+        "lib/net40/PropertyChanged.dll",
+        "lib/net40/PropertyChanged.xml",
+        "lib/netstandard2.0/PropertyChanged.dll",
+        "lib/netstandard2.0/PropertyChanged.xml",
+        "lib/netstandard2.1/PropertyChanged.dll",
+        "lib/netstandard2.1/PropertyChanged.xml",
+        "propertychanged.fody.4.0.5.nupkg.sha512",
+        "propertychanged.fody.nuspec",
+        "weaver/PropertyChanged.Fody.dll",
+        "weaver/PropertyChanged.Fody.xcf"
       ]
     },
     "runtime.debian.8-x64.runtime.native.System.Security.Cryptography.OpenSsl/4.3.0": {

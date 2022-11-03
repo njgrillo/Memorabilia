@@ -24,24 +24,24 @@ public class SaveTeamDivisionsViewModel : SaveViewModel
             if (SportLeagueLevel == null)
                 return string.Empty;
 
-            if (SportLeagueLevel == Domain.Constants.SportLeagueLevel.MajorLeagueBaseball)
+            if (SportLeagueLevel == SportLeagueLevel.MajorLeagueBaseball)
                 return $"{AdminDomainItem.Teams.Title}/{EditModeType.Update.Name}/{TeamId}";
 
             return $"{AdminDomainItem.Teams.Item}/{AdminDomainItem.Conferences.Item}/{EditModeType.Update.Name}/{TeamId}/{SportLeagueLevel.Id}";
         }
     }
 
-    public bool CanHaveConference => SportLeagueLevel != Domain.Constants.SportLeagueLevel.MajorLeagueBaseball;
+    public bool CanHaveConference => SportLeagueLevel != SportLeagueLevel.MajorLeagueBaseball;
 
     public override string ContinueNavigationPath
     {
         get
         {
-            var nextStep = SportLeagueLevel == Domain.Constants.SportLeagueLevel.MajorLeagueBaseball 
+            var nextStep = SportLeagueLevel == SportLeagueLevel.MajorLeagueBaseball 
                 ? AdminDomainItem.Leagues.Item 
                 : AdminDomainItem.Conferences.Item;
 
-            return $"{AdminDomainItem.Teams.Item}/{nextStep}/{EditModeType.Update.Name}/{Id}/{SportLeagueLevel?.Id}";
+            return $"{AdminDomainItem.Teams.Item}/{nextStep}/{EditModeType.Update.Name}/{TeamId}/{SportLeagueLevel?.Id}";
         }
     }
 
@@ -55,7 +55,7 @@ public class SaveTeamDivisionsViewModel : SaveViewModel
 
     public override string PageTitle => $"{(EditModeType == EditModeType.Update ? EditModeType.Update.Name : EditModeType.Add.Name)} {AdminDomainItem.Divisions.Title}";
 
-    public Domain.Constants.SportLeagueLevel SportLeagueLevel { get; set; }
+    public SportLeagueLevel SportLeagueLevel { get; set; }
 
     public int TeamId { get; set; }
 

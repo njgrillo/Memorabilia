@@ -1,4 +1,5 @@
 ﻿using Memorabilia.Domain.Constants;
+using System.ComponentModel;
 
 namespace Memorabilia.Application.Features.Admin.Teams;
 
@@ -20,8 +21,6 @@ public class SaveTeamViewModel : SaveViewModel, IWithName, IWithValue<int>
         SportLeagueLevelId = viewModel.SportLeagueLevel.Id;
     }
 
-    private int _sportLeagueLeveId;
-
     [StringLength(10, ErrorMessage = "Abbreviation is too long.")]
     public string Abbreviation { get; set; }
 
@@ -42,8 +41,6 @@ public class SaveTeamViewModel : SaveViewModel, IWithName, IWithValue<int>
     [Required]
     public int FranchiseId { get; set; }
 
-    public Franchise[] Franchises { get; set; } = Franchise.GetAll(SportLeagueLevel.MajorLeagueBaseball);
-
     public string ImagePath => AdminDomainItem.Teams.ImagePath;
 
     public override string ItemTitle => AdminDomainItem.Teams.Item;
@@ -63,18 +60,7 @@ public class SaveTeamViewModel : SaveViewModel, IWithName, IWithValue<int>
 
     public SportLeagueLevel SportLeagueLevel => SportLeagueLevel.Find(SportLeagueLevelId);
 
-    public int SportLeagueLevelId
-    {
-        get
-        {
-            return _sportLeagueLeveId;
-        }
-        set
-        {
-            _sportLeagueLeveId = value;
-            Franchises = Franchise.GetAll(SportLeagueLevel.Find(value));
-        }
-    }
+    public int SportLeagueLevelId { get; set; }
 
     public TeamStep TeamStep => TeamStep.Team;
 

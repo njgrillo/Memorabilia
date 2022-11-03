@@ -17,6 +17,8 @@ public class TeamChampionshipViewModel
 
     public int Id => _champion.Id;
 
+    public int SportLeagueLevelId => _champion.Team.Franchise.SportLeagueLevelId;
+
     public int TeamId => _champion.TeamId;
 
     public int Year => _champion.Year;

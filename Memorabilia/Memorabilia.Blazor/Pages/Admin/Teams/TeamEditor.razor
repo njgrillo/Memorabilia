@@ -24,13 +24,14 @@
         <DivRowCol3 Hidden="@(!ViewModel.DisplayFranchise)">
             <Content>
                 <SportLeagueLevelDropDown SelectedValue="ViewModel.SportLeagueLevelId"
-                                          SelectionChanged="(p) => ViewModel.SportLeagueLevelId = p" /> 
+                                          SelectionChanged="(p) => ViewModel.SportLeagueLevelId = p" />
             </Content>
         </DivRowCol3>
         <DivRowCol3>
             <Content>
                 <FranchiseDropDown SelectedValue="ViewModel.FranchiseId"
-                                   SelectionChanged="(p) => ViewModel.FranchiseId = p" />
+                                   SelectionChanged="(p) => ViewModel.FranchiseId = p"
+                                   SportLeagueLevelId="ViewModel.SportLeagueLevelId" />
             </Content>
         </DivRowCol3>
         <DivRowCol3>

@@ -1,7 +1,30 @@
-﻿namespace Memorabilia.Blazor.Controls.DropDowns;
+﻿#nullable disable
 
-public class FranchiseDropDown : DropDown<Franchise, int>
+namespace Memorabilia.Blazor.Controls.DropDowns;
+
+public class FranchiseDropDown : DropDown<Franchise, int>, INotifyPropertyChanged
 {
+    [Parameter]
+    public int[] SportIds { get; set; }
+
+    [Parameter]
+    public int SportLeagueLevelId { get; set; }
+
+    public event PropertyChangedEventHandler PropertyChanged;
+
+    public FranchiseDropDown()
+    {
+        PropertyChanged += FranchisDropDown_PropertyChanged;
+    }
+
+    public void FranchisDropDown_PropertyChanged(object sender, PropertyChangedEventArgs e)
+    {
+        if (e.PropertyName == nameof(SportLeagueLevelId) || e.PropertyName == nameof(SportIds))
+        {
+            LoadItems();
+        }
+    }
+
     protected override string GetMultiSelectionText(List<string> selectedValues)
     {
         return !selectedValues.Any() || selectedValues.Count > 4
@@ -10,8 +33,25 @@ public class FranchiseDropDown : DropDown<Franchise, int>
     }
 
     protected override void OnInitialized()
-    {
-        Items = Franchise.All;
+    {        
         Label = "Franchise";
+        LoadItems();
+    }
+
+    private void LoadItems()
+    {
+        if (SportLeagueLevelId > 0)
+        {
+            Items = Franchise.GetAll(SportLeagueLevel.Find(SportLeagueLevelId));
+            return;
+        }            
+
+        if (SportIds.Any())
+        {
+            Items = Franchise.GetAll(SportIds);
+            return;
+        }            
+
+        Items = SportLeagueLevelId > 0 ? Franchise.GetAll(SportLeagueLevel.Find(SportLeagueLevelId)) : Franchise.All;
     }
 }

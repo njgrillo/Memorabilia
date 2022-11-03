@@ -1,5 +1,4 @@
-using Framework.Library.Handler;
-using Memorabilia.Application.Features.Memorabilia;
+using Microsoft.Extensions.FileProviders;
 
 namespace Memorabilia.Web
 {
@@ -18,7 +17,7 @@ namespace Memorabilia.Web
         {
             services.AddDataProtection()
                     .SetApplicationName("Memorabilia")
-                    .SetDefaultKeyLifetime(TimeSpan.FromDays(180));
+                    .SetDefaultKeyLifetime(TimeSpan.FromDays(180));            
 
             services.AddRazorPages();
             services.AddServerSideBlazor();
@@ -57,6 +56,12 @@ namespace Memorabilia.Web
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
+
+            app.UseStaticFiles(new StaticFileOptions
+            {
+                FileProvider = new PhysicalFileProvider(Configuration["ResourcePathRoot"]),
+                RequestPath = "/Resource"
+            });
 
             app.UseRouting();
 

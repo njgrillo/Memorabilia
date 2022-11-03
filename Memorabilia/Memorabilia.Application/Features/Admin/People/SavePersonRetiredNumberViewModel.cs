@@ -14,11 +14,11 @@ public class SavePersonRetiredNumberViewModel : SaveViewModel
         PlayerNumber = retiredNumber.PlayerNumber;
     }
 
+    public Domain.Constants.Franchise Franchise => Domain.Constants.Franchise.Find(FranchiseId);
+
     public int FranchiseId { get; set; }
 
-    public string FranchiseName => Domain.Constants.Franchise.Find(FranchiseId)?.Name;
-
-    public Domain.Constants.Franchise[] Franchises => Domain.Constants.Franchise.All;
+    public string FranchiseName => Franchise?.Name;    
 
     public int PersonId { get; set; }
 

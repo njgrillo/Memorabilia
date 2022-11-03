@@ -41,9 +41,15 @@
         </DivRowCol3>
         <DivRowCol3>
             <Content>
+                @*<MudDatePicker @bind-Date="ViewModel.DebutDate"
+                               DateFormat="MM/dd/yyyy"
+                               Editable="true"
+                               Label="Debut Date"
+                               Mask="@(new DateMask("MM/dd/yyyy"))" 
+                               Variant="Variant.Outlined" />*@
                 <DatePicker Label="Debut Date"
                             SelectedDate="ViewModel.DebutDate"
-                            SelectedDateChanged="@((p) => ViewModel.DebutDate = p)" />
+                            SelectedDateChanged="@((p) => ViewModel.DebutDate = p)" /> 
             </Content>
             <ContentColumn2>
                 <DatePicker Label="Last Appearance Date"

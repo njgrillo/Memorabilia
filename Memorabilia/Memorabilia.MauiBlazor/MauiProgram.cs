@@ -8,7 +8,7 @@ public static class MauiProgram
     {
         var builder = MauiApp.CreateBuilder();
         builder
-            .UseMauiApp<App>()
+            .UseMauiApp<App>()            
             .ConfigureFonts(fonts =>
             {
                 fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
@@ -36,6 +36,11 @@ public static class MauiProgram
         builder.Services.AddTransient<IItemTypeSpotRepository, ItemTypeSpotRepository>();
         builder.Services.AddTransient<IPersonRepository, PersonRepository>();
         builder.Services.AddTransient<IProjectRepository, ProjectRepository>();
+        builder.Services.AddTransient<ITeamChampionshipRepository, TeamChampionshipRepository>();
+        builder.Services.AddTransient<ITeamConferenceRepository, TeamConferenceRepository>();
+        builder.Services.AddTransient<ITeamDivisionRepository, TeamDivisionRepository>();
+        builder.Services.AddTransient<ITeamLeagueRepository, TeamLeagueRepository>();
+        builder.Services.AddTransient<ITeamRepository, TeamRepository>();
         builder.Services.AddMediatR(typeof(GetAccomplishmentTypes));              
 
         //var autofacBuilder = new ContainerBuilder();

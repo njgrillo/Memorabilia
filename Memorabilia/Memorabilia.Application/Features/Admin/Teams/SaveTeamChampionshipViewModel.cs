@@ -8,6 +8,7 @@ public class SaveTeamChampionshipViewModel : SaveViewModel
     {
         Id = teamChampionship.Id;
         ChampionshipTypeId = teamChampionship.ChampionTypeId;
+        SportLeagueLevelId = teamChampionship.SportLeagueLevelId;
         TeamId = teamChampionship.TeamId;
         Year = teamChampionship.Year;
     }        
@@ -16,7 +17,7 @@ public class SaveTeamChampionshipViewModel : SaveViewModel
 
     public string ChampionshipTypeName => Domain.Constants.ChampionType.Find(ChampionshipTypeId)?.Name;
 
-    public Domain.Constants.ChampionType[] ChampionshipTypes => Domain.Constants.ChampionType.All;
+    public int SportLeagueLevelId { get; }
 
     public int TeamId { get; set; }
 

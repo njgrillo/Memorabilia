@@ -5,10 +5,10 @@ namespace Memorabilia.Blazor.Controls.Person;
 public partial class PersonRetiredNumberEditor : ComponentBase
 {
     [Parameter]
-    public Franchise[] Franchises { get; set; } = Franchise.All;
+    public List<SavePersonRetiredNumberViewModel> RetiredNumbers { get; set; } = new();
 
     [Parameter]
-    public List<SavePersonRetiredNumberViewModel> RetiredNumbers { get; set; } = new();
+    public int[] SportIds { get; set; }    
 
     private bool _canAdd = true;
     private bool _canEditFranchise = true;

@@ -11,11 +11,18 @@ public partial class TeamChampionshipEditor : ComponentBase
     public SportLeagueLevel SportLeagueLevel { get; set; }
 
     private SaveTeamChampionshipViewModel _viewModel = new();
+    private string _years;
 
     private void Add()
     {
-        Championships.Add(_viewModel);
+        foreach (var year in _years.ToIntArray())
+        {
+            Championships.Add(new() { ChampionshipTypeId = _viewModel.ChampionshipTypeId, 
+                                      TeamId = _viewModel.TeamId,
+                                      Year = year });
+        }
 
-        _viewModel = new SaveTeamChampionshipViewModel();
+        _viewModel = new();
+        _years = string.Empty;
     }
 }

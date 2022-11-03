@@ -1,6 +1,7 @@
 ﻿<DivRowCol3>
     <Content>
-        <ConferenceDropDown SelectedValue="_viewModel.ConferenceId"
+        <ConferenceDropDown Disabled="@(!_canEditConference)" 
+                            SelectedValue="_viewModel.ConferenceId"
                             SelectionChanged="(p) => _viewModel.ConferenceId = p"
                             SportLeagueLevel="@SportLeagueLevel" />  
     </Content>
@@ -22,11 +23,18 @@
 </DivRowCol3>
 <DivLeftAlign>
     <Content>
-        <MudButton ButtonType="MudBlazor.ButtonType.Button" 
+        <MudButton hidden="@(!_canAdd)"
+                   ButtonType="MudBlazor.ButtonType.Button"
                    Color="MudBlazor.Color.Secondary"
                    OnClick="Add"
-                   Size="MudBlazor.Size.Medium"                                  
+                   Size="MudBlazor.Size.Medium"
                    Variant="Variant.Filled">Add</MudButton>
+        <MudButton hidden="@(!_canUpdate)"
+                   ButtonType="MudBlazor.ButtonType.Button"
+                   Color="MudBlazor.Color.Secondary"
+                   OnClick="Update"
+                   Size="MudBlazor.Size.Medium"
+                   Variant="Variant.Filled">Update</MudButton>
     </Content>
 </DivLeftAlign>
 <DivRowCol6>
@@ -47,6 +55,11 @@
                 <MudTd DataLabel="Begin Year">@context.BeginYear</MudTd>
                 <MudTd DataLabel="End Year">@context.EndYear</MudTd>
                 <MudTd DataLabel="">
+                    <MudTooltip Text="Edit">
+                        <MudFab Color="MudBlazor.Color.Primary"
+                                Icon="@Icons.Outlined.ModeEditOutline"
+                                OnClick="@(_ => Edit(context))" />
+                    </MudTooltip>
                     <MudTooltip Text="Delete">
                         <MudFab Color="MudBlazor.Color.Secondary"
                                 Icon="@Icons.Outlined.DeleteOutline"

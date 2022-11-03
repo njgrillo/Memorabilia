@@ -2,7 +2,8 @@
     <Content>
         <FranchiseDropDown Disabled="@(!_canEditFranchise)"
                            SelectedValue="_viewModel.FranchiseId"
-                           SelectionChanged="(p) => _viewModel.FranchiseId = p" />
+                           SelectionChanged="(p) => _viewModel.FranchiseId = p"
+                           SportIds="_viewModel.SportIds" />
     </Content>
 </DivRowCol3>
 <DivRowCol3>

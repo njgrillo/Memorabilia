@@ -96,7 +96,7 @@ public class Team : Framework.Library.Domain.Entity.DomainEntity
             return;
         }
 
-        championship.Set(Id, championTypeId, year);
+        championship.Set(year);
     }
 
     public void SetConference(int teamConferenceId, int conferenceId, int? beginYear, int? endYear)

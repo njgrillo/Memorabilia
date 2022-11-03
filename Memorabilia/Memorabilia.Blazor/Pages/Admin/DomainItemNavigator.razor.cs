@@ -5,12 +5,18 @@ namespace Memorabilia.Blazor.Pages.Admin;
 public partial class DomainItemNavigator : ComponentBase
 {
     public string DomainItemQuickJump { get; set; }
-    public readonly AdminDomainItemsViewModel ViewModel = new ();
-
-    public string ImageRoot => Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.CommonProgramFiles), "GraphinAllDay");
+    public AdminDomainItemsViewModel ViewModel = new ();
 
     [Parameter]
     public EventCallback<string> OnNavigate { get; set; }
+
+    public void Enter(KeyboardEventArgs e)
+    {
+        if (e.Code == "Enter" || e.Code == "NumpadEnter")
+        {
+            QuickJump();
+        }
+    }
 
     public async void QuickJump()
     {

@@ -19,10 +19,8 @@ public class Champion : Framework.Library.Domain.Entity.DomainEntity
 
     public int Year { get; private set; }
 
-    public void Set(int championTypeId, int teamId, int year)
+    public void Set(int year)
     {
-        ChampionTypeId = championTypeId;
-        TeamId = teamId;
         Year = year;
     }
 }

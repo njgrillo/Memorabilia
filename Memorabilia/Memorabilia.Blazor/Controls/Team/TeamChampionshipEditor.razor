@@ -1,14 +1,16 @@
 ﻿<DivRowCol3>
     <Content>
         <ChampionshipTypeDropDown SelectedValue="_viewModel.ChampionshipTypeId"
-                                  SelectionChanged="(p) => _viewModel.ChampionshipTypeId = p" />  
+                                  SelectionChanged="(p) => _viewModel.ChampionshipTypeId = p"
+                                  SportLeagueLevel="SportLeagueLevel" />  
     </Content>
 </DivRowCol3>
 <DivRowCol3>
     <Content>
-        <IntField Label="Begin Year"
-                  Value="_viewModel.Year"
-                  ValueChanged="@((p) => _viewModel.Year = p)" />
+        <TextField HelperText="Ex. 1999 or 1999-2002 or 2003, 2005-2008"
+                   Label="Years"
+                   SelectedText="@_years"
+                   SelectedTextChanged="@((p) => _years = p)"/>
     </Content>
 </DivRowCol3>
 <DivLeftAlign>
