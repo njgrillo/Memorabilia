@@ -8,7 +8,7 @@ public partial class PersonImageEditor : EditPersonItem<SavePersonImageViewModel
     public ILogger<PersonImageEditor> Logger { get; set; }
 
     [Parameter]
-    public string ImageDirectoryPath { get; set; }
+    public string PersonImageRootPath { get; set; }
 
     private bool _hasImage;
 
@@ -29,19 +29,16 @@ public partial class PersonImageEditor : EditPersonItem<SavePersonImageViewModel
 
         try
         {
-            //var directory = Path.Combine(Environment.ContentRootPath, "wwwroot/siteimages/people");
-            var directory = Path.Combine(ImageDirectoryPath, "wwwroot/siteimages/people");
-
-            if (!Directory.Exists(directory))
-                Directory.CreateDirectory(directory);
+            if (!Directory.Exists(PersonImageRootPath))
+                Directory.CreateDirectory(PersonImageRootPath);
 
             var fileName = Path.GetRandomFileName();
-            var path = Path.Combine(directory, fileName);
+            var path = Path.Combine(PersonImageRootPath, fileName);
 
             await using FileStream fs = new(path, FileMode.Create);
             await file.OpenReadStream(5120000).CopyToAsync(fs);
 
-            ViewModel.ImagePath = $"wwwroot/siteimages/people/{fileName}";
+            ViewModel.ImagePath = fileName;
             _hasImage = true;
         }
         catch (Exception ex)

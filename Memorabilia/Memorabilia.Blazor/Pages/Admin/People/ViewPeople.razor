@@ -46,7 +46,7 @@
                                           Elevation="5" 
                                           Height="200"
                                           ObjectFit="@ObjectFit.Cover"
-                                          Src="@context.PersonImagePath"
+                                          Src="@(GetImage(context.ImagePath))"
                                           Width="200" />
                             </MudTooltip> 
                         </MudTd>

@@ -3,9 +3,12 @@
 
 @inherits WebPage
 
+@inject IConfiguration Configuration
+
 <PageLoader>
     <Content>
         <ProjectEditor Id="@Id" 
+                       PersonImageRootPath="@Configuration["PersonImageRootPath"]"
                        UserId="@UserId" />
     </Content>
 </PageLoader>

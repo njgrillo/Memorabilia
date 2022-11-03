@@ -55,14 +55,7 @@ namespace Memorabilia.Web
             }
 
             app.UseHttpsRedirection();
-            app.UseStaticFiles();
-
-            app.UseStaticFiles(new StaticFileOptions
-            {
-                FileProvider = new PhysicalFileProvider(Configuration["ResourcePathRoot"]),
-                RequestPath = "/Resource"
-            });
-
+            app.UseStaticFiles(); 
             app.UseRouting();
 
             app.UseEndpoints(endpoints =>

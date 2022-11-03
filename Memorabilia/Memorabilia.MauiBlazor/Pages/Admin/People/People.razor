@@ -1,7 +1,9 @@
 ﻿@page "/People"
 
+@inject IConfiguration Configuration
+
 <PageLoader>
     <Content>
-        <ViewPeople />
+        <ViewPeople PersonImageRootPath="@Configuration["PersonImageRootPath"]" />
     </Content>
 </PageLoader>

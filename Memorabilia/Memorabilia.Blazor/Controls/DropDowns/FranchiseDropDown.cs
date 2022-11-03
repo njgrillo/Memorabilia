@@ -5,7 +5,7 @@ namespace Memorabilia.Blazor.Controls.DropDowns;
 public class FranchiseDropDown : DropDown<Franchise, int>, INotifyPropertyChanged
 {
     [Parameter]
-    public int[] SportIds { get; set; }
+    public int[] SportIds { get; set; } = Array.Empty<int>();
 
     [Parameter]
     public int SportLeagueLevelId { get; set; }

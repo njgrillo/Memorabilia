@@ -131,7 +131,7 @@
                                       Elevation="5" 
                                       Height="200"
                                       ObjectFit="@ObjectFit.Cover"
-                                      Src="@projectPerson.Person.PersonImagePath"
+                                      Src="@(GetImage(projectPerson.Person.PersonImagePath))"
                                       Width="200" />
                         </MudTd>
                         <MudTd DataLabel="Person">@projectPerson.Person.DisplayName</MudTd>

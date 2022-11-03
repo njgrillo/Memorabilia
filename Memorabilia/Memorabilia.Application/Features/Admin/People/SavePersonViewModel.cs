@@ -18,7 +18,7 @@ public class SavePersonViewModel : SaveViewModel, IWithName, IWithValue<int>
         MiddleName = viewModel.MiddleName;
         Nickname = viewModel.Nickname;
         Nicknames = viewModel.Nicknames.Select(nickname => new SavePersonNicknameViewModel(new PersonNicknameViewModel(nickname))).ToList();
-        PersonImagePath = viewModel.PersonImagePath;
+        PersonImagePath = viewModel.ImagePath;
         ProfileName = viewModel.ProfileName;
         Suffix = viewModel.Suffix;   
         Teams = viewModel.Teams.Select(team => new SavePersonTeamViewModel(new PersonTeamViewModel(team))).ToList();

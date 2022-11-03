@@ -19,8 +19,6 @@ public class PewterViewModel
 
     public int Id => _pewter.Id;
 
-    public string ImageData => $"data:image/jpg;base64, {Convert.ToBase64String(File.ReadAllBytes(_pewter.ImagePath))}";
-
     public string ImagePath => _pewter.ImagePath;
 
     public int? ImageTypeId => _pewter.ImageTypeId;

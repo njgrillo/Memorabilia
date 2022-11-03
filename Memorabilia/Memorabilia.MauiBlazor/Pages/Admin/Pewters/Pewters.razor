@@ -1,7 +1,9 @@
 ﻿@page "/Pewters"
 
+@inject IConfiguration Configuration
+
 <PageLoader>
     <Content>
-        <ViewPewters />
+        <ViewPewters PewterImageRootPath="@Configuration["PewterImageRootPath"]" />
     </Content>
 </PageLoader>

@@ -17,6 +17,9 @@ public partial class ProjectEditor : ComponentBase
     public int Id { get; set; }
 
     [Parameter]
+    public string PersonImageRootPath { get; set; }
+
+    [Parameter]
     public int UserId { get; set; }
 
     private bool _canAddProjectPerson = true;
@@ -24,6 +27,15 @@ public partial class ProjectEditor : ComponentBase
     private bool _canUpdateProjectPerson;
     private SaveProjectPersonViewModel _projectPersonViewModel = new();
     private SaveProjectViewModel _viewModel = new();
+
+    protected string GetImage(string imagePath)
+    {
+        var path = imagePath == ImagePath.ImageNotAvailable
+                ? imagePath
+                : Path.Combine(PersonImageRootPath, imagePath);
+
+        return $"data:image/jpg;base64,{Convert.ToBase64String(File.ReadAllBytes(path))}";
+    }
 
     protected async Task HandleValidSubmit()
     {

@@ -1,7 +1,9 @@
 ﻿@page "/Tools/Baseball/Accomplishments"
 
+@inject IConfiguration Configuration
+
 <PageLoader>
     <Content>
-        <ViewAccomplishments />
+        <ViewAccomplishments PersonImageRootPath="@Configuration["PersonImageRootPath"]" />
     </Content>
 </PageLoader>

@@ -47,8 +47,6 @@ public class PersonViewModel : ViewModel, IWithName, IWithValue<int>
 
     public IEnumerable<PersonOccupation> Occupations => _person.Occupations;
 
-    public string PersonImagePath => $"data:image/jpg;base64,{Convert.ToBase64String(File.ReadAllBytes(ImagePath))}";
-
     public string ProfileName => _person.ProfileName;   
 
     public string Suffix => _person.Suffix;

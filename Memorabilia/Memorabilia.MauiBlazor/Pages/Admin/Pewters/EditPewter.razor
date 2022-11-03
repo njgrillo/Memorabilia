@@ -3,9 +3,11 @@
 
 @inherits EditItem
 
+@inject IConfiguration Configuration
+
 <PageLoader>
     <Content>
         <PewterEditor Id="@Id" 
-                      ImageDirectoryPath="@_imageDirectoryPath" />
+                      PewterImageRootPath="@Configuration["PewterImageRootPath"]" />
     </Content>
 </PageLoader>

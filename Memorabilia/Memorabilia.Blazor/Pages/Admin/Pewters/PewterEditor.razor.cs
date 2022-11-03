@@ -8,7 +8,7 @@ public partial class PewterEditor : EditItem<SavePewterViewModel, PewterViewMode
     public ILogger<PewterEditor> Logger { get; set; }
 
     [Parameter]
-    public string ImageDirectoryPath { get; set; }
+    public string PewterImageRootPath { get; set; }
 
     private bool _hasImage;
 
@@ -33,18 +33,16 @@ public partial class PewterEditor : EditItem<SavePewterViewModel, PewterViewMode
 
         try
         {
-            var directory = Path.Combine(ImageDirectoryPath, "wwwroot/siteimages/pewters");
-
-            if (!Directory.Exists(directory))
-                Directory.CreateDirectory(directory);
+            if (!Directory.Exists(PewterImageRootPath))
+                Directory.CreateDirectory(PewterImageRootPath);
 
             var fileName = Path.GetRandomFileName();
-            var path = Path.Combine(directory, fileName);
+            var path = Path.Combine(PewterImageRootPath, fileName);
 
             await using FileStream fs = new(path, FileMode.Create);
             await file.OpenReadStream(5120000).CopyToAsync(fs);
 
-            ViewModel.ImagePath = $"wwwroot/siteimages/pewters/{fileName}";
+            ViewModel.ImagePath = fileName;
             _hasImage = true;
         }
         catch (Exception ex)

@@ -19,14 +19,18 @@
                                    SelectionChanged="(p) => ViewModel.FranchiseId = p" />
             </Content>
         </DivRowCol3>
-        <DivRowCol6>
+        <DivRowCol3>
             <Content>
+                @*<TeamAutoComplete FranchiseId="@ViewModel.FranchiseId" 
+                                  SelectedValue="ViewModel.TeamId"
+                                  SelectionChanged="(p) => ViewModel.TeamId = p"
+                                  SportLeagueLevel="@SportLeagueLevel.NationalFootballLeague" />*@
                 <TeamDropDown Franchise="@Franchise.Find(ViewModel.FranchiseId)" 
                               SelectedValue="@ViewModel.TeamId"
                               SelectionChanged="(p) => ViewModel.TeamId = p"
                               SportLeagueLevel="@SportLeagueLevel.NationalFootballLeague"/> 
             </Content>
-        </DivRowCol6>
+        </DivRowCol3>
         <DivRowCol3>
             <Content>
                 <ItemTypeSizeDropDown ItemType="@ItemType.Helmet"
@@ -53,8 +57,9 @@
                     <Match>
                         <ImageEditor CanRemove="false"
                                      FileName=""
-                                     HasPrimary="false"
+                                     HasPrimary="false"                                     
                                      ImageFilePath="@ViewModel.ImagePath"
+                                     ImageRootFilePath="@PewterImageRootPath"
                                      ImageType="ImageType.Primary"
                                      OnRemove="Remove" /> 
                     </Match>

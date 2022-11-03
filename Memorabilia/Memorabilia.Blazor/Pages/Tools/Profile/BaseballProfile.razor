@@ -36,7 +36,7 @@
                 <MudImage Class="rounded-lg ma-4"
                           Elevation="25"
                           Height="650" 
-                          Src="@_viewModel.PersonImageData" 
+                          Src="@(GetImage(_viewModel.PersonImagePath))"
                           Width="500"   />
             </Content>
             <ContentColumn2>

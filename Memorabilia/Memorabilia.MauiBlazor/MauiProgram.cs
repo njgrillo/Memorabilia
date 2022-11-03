@@ -27,13 +27,17 @@ public static class MauiProgram
         builder.Services.AddTransient<CommandRouter>();
         builder.Services.AddTransient<QueryRouter>();
         builder.Services.AddTransient(typeof(IDomainRepository<>), typeof(DomainRepository<>));
+        builder.Services.AddTransient<IAutographRepository, AutographRepository>();
         builder.Services.AddTransient<ICommissionerRepository, CommissionerRepository>();
+        builder.Services.AddTransient<IHallOfFameRepository, HallOfFameRepository>();
         builder.Services.AddTransient<IItemTypeBrandRepository, ItemTypeBrandRepository>();
         builder.Services.AddTransient<IItemTypeGameStyleTypeRepository, ItemTypeGameStyleTypeRepository>();
         builder.Services.AddTransient<IItemTypeLevelRepository, ItemTypeLevelRepository>();
         builder.Services.AddTransient<IItemTypeSizeRepository, ItemTypeSizeRepository>();
         builder.Services.AddTransient<IItemTypeSportRepository, ItemTypeSportRepository>();
-        builder.Services.AddTransient<IItemTypeSpotRepository, ItemTypeSpotRepository>();
+        builder.Services.AddTransient<IItemTypeSpotRepository, ItemTypeSpotRepository>();        
+        builder.Services.AddTransient<IPersonAccomplishmentRepository, PersonAccomplishmentRepository>();
+        builder.Services.AddTransient<IPersonAwardRepository, PersonAwardRepository>();
         builder.Services.AddTransient<IPersonRepository, PersonRepository>();
         builder.Services.AddTransient<IProjectRepository, ProjectRepository>();
         builder.Services.AddTransient<ITeamChampionshipRepository, TeamChampionshipRepository>();

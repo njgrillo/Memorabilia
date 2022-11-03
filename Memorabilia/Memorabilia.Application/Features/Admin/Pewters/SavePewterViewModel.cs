@@ -36,7 +36,7 @@ public class SavePewterViewModel : SaveViewModel
     [Range(1, int.MaxValue, ErrorMessage = "Size is required.")]
     public int SizeId { get; set; }
 
-    public Domain.Constants.SportLeagueLevel SportLeagueLevel => Domain.Constants.SportLeagueLevel.NationalFootballLeague;
+    public SportLeagueLevel SportLeagueLevel => SportLeagueLevel.NationalFootballLeague;
 
     [Required]
     [Range(1, int.MaxValue, ErrorMessage = "Team is required.")]

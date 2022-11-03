@@ -33,15 +33,7 @@ public class ProfileViewModel : ViewModel
 
     public PersonOccupation[] Occupations => _person.Occupations.ToArray();
 
-    public string PersonImageData
-    {
-        get
-        {
-            return _person == null || _person.ImagePath.IsNullOrEmpty()
-                ? ImagePath.ImageNotAvailable
-                : $"data:image/jpg;base64, {Convert.ToBase64String(File.ReadAllBytes(_person.ImagePath))}";
-        }
-    } 
+    public string PersonImagePath => _person.ImagePath;
 
     public PersonOccupation PrimaryOccupation => _person.Occupations.First(occupation => occupation.OccupationTypeId == Domain.Constants.OccupationType.Primary.Id);
 }

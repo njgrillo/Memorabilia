@@ -1,7 +1,9 @@
 ﻿@page "/Tools/BaseballProfile/{personId:int}"
 
+@inject IConfiguration Configuration
+
 <PageLoader>
     <Content>
-        <BaseballProfile PersonId="@PersonId" />
+        <BaseballProfile PersonId="@PersonId" PersonImageRootPath="@Configuration["PersonImageRootPath"]" />
     </Content>
 </PageLoader>

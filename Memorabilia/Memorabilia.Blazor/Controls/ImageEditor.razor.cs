@@ -17,6 +17,9 @@ public partial class ImageEditor : ComponentBase
     public string ImageFilePath { get; set; }
 
     [Parameter]
+    public string ImageRootFilePath { get; set; }
+
+    [Parameter]
     public ImageType ImageType { get; set; }
 
     [Parameter]
@@ -28,14 +31,16 @@ public partial class ImageEditor : ComponentBase
     [Parameter]
     public EventCallback<string> OnRemove { get; set; }
 
-    private string _imageFilePath
+    public string Image
     {
         get
         {
-            if ((ImageFilePath?.IsNullOrEmpty() ?? false) || !File.Exists(ImageFilePath))
+            var path = Path.Combine(ImageRootFilePath, ImageFilePath);
+
+            if (path.IsNullOrEmpty() || !File.Exists(path))
                 return ImagePath.ImageNotAvailable;
 
-            return $"data:image/jpeg;base64,{Convert.ToBase64String(File.ReadAllBytes(ImageFilePath))}";
+            return $"data:image/jpeg;base64,{Convert.ToBase64String(File.ReadAllBytes(path))}";
         }
     }
 

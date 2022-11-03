@@ -17,7 +17,7 @@ public class AwardViewModel
 
     public int PersonId => _personAward.PersonId;
 
-    public string PersonImagePath => $"data:image/jpg;base64,{Convert.ToBase64String(File.ReadAllBytes(_personAward.Person.ImagePath))}"; 
+    public string PersonImagePath => _personAward.Person.ImagePath; 
     
     public string PersonName => _personAward.Person.DisplayName;
 

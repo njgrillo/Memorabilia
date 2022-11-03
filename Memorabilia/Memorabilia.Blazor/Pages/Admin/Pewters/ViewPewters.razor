@@ -39,7 +39,7 @@
                                       Elevation="5" 
                                       Height="150"
                                       ObjectFit="@ObjectFit.Cover"
-                                      Src="@context.ImageData"
+                                      Src="@(GetImage(context.ImagePath))"
                                       Width="150" /> 
                         </MudTd>
                         <MudTd DataLabel="Franchise">@context.FranchiseName</MudTd>

@@ -19,7 +19,7 @@ public class AccomplishmentViewModel
 
     public int PersonId => _personAccomplishment.PersonId;
 
-    public string PersonImagePath => $"data:image/jpg;base64,{Convert.ToBase64String(File.ReadAllBytes(_personAccomplishment.Person.ImagePath))}";
+    public string PersonImagePath => _personAccomplishment.Person.ImagePath;
 
     public string PersonName => _personAccomplishment.Person.DisplayName;
 
