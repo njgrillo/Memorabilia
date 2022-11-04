@@ -1,0 +1,9 @@
+﻿@page "/Tools/Baseball/Leaders"
+
+@inject IConfiguration Configuration
+
+<PageLoader>
+    <Content>
+        <ViewLeaders PersonImageRootPath="@Configuration["PersonImageRootPath"]" />
+    </Content>
+</PageLoader>

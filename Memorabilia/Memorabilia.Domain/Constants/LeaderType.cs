@@ -117,7 +117,7 @@ public sealed class LeaderType : DomainItemConstant
         return All.SingleOrDefault(leaderType => leaderType.Id == id);
     }
 
-    public static LeaderType[] GetAll(int[] sportIds)
+    public static LeaderType[] GetAll(params int[] sportIds)
     {
         if (!sportIds.Any())
             return All;

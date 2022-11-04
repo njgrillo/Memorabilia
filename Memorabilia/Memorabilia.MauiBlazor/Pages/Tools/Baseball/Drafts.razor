@@ -1,0 +1,9 @@
+﻿@page "/Tools/Baseball/Drafts"
+
+@inject IConfiguration Configuration
+
+<PageLoader>
+    <Content>
+        <ViewDrafts PersonImageRootPath="@Configuration["PersonImageRootPath"]" />
+    </Content>
+</PageLoader>

@@ -13,6 +13,8 @@ public class Leader : Framework.Library.Domain.Entity.DomainEntity
 
     public int LeaderTypeId { get; private set; }
 
+    public virtual Person Person { get; private set; }
+
     public int PersonId { get; private set; }
 
     public int Year { get; private set; }

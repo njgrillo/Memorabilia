@@ -13,9 +13,20 @@
             <Content>
                 <MudTable Bordered="false"
                           Dense="false"
+                          Filter="new Func<HallOfFameViewModel,bool>(FilterFunc1)"
                           Hover="true"
                           Items="@_viewModel.HallOfFames.ToList()"
                           Striped="true">
+                    <ToolBarContent>
+                        <MudText Typo="Typo.h6">Hall of Famers</MudText>
+                        <MudSpacer />
+                        <MudTextField @bind-Value="Search"
+                                      Adornment="Adornment.Start"
+                                      AdornmentIcon="@Icons.Material.Filled.Search"
+                                      Class="mt-0"
+                                      IconSize="MudBlazor.Size.Medium"
+                                      Placeholder="Search" />
+                    </ToolBarContent>
                     <HeaderContent>
                         <MudTh></MudTh>
                         <MudTh>Person</MudTh>
