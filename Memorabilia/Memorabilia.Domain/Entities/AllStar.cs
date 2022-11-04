@@ -8,7 +8,9 @@ public class AllStar : Framework.Library.Domain.Entity.DomainEntity
     {
         PersonId = personId;
         Year = year;
-    }        
+    }
+
+    public virtual Person Person { get; private set; }
 
     public int PersonId { get; private set; }
 

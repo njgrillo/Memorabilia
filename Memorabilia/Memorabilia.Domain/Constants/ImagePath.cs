@@ -100,7 +100,7 @@ public static class ImagePath
 
     public static string HockeyStick => $"{_root}hockeystick.jpg";
 
-    public static string ImageNotAvailable => $"{_root}imagenotavailable.png";
+    public static string ImageNotAvailable => $"wwwroot/{_root}imagenotavailable.png";
 
     public static string Images => $"{_root}images.png";
 
@@ -156,7 +156,7 @@ public static class ImagePath
 
     public static string PrivacyTypes => $"{_root}privacytypes.jpg";
 
-    public static string Projects => $"{_root}projects.jpg";
+    public static string ProjectTypes => $"{_root}projecttypes.jpg";
 
     public static string Puck => $"{_root}puck.jpg";
 

@@ -1,0 +1,51 @@
+﻿@inherits CommandQuery
+
+<DivPad2>
+    <Content>
+        <DivRowCol3>
+            <Content>
+                <CollegeDropDown SelectedValue="_viewModel.CollegeId"
+                                 SelectionChanged="(p) => OnInputChange(p)" />
+            </Content>
+        </DivRowCol3>
+        <DivRowCol6 Hidden="@(_viewModel.CollegeId == 0)">
+            <Content>
+                <MudTable Bordered="false"
+                          Dense="false"
+                          Hover="true"
+                          Items="@_viewModel.Colleges.ToList()"
+                          Striped="true">
+                    <HeaderContent>
+                        <MudTh></MudTh>
+                        <MudTh>Person</MudTh>
+                        <MudTh>College</MudTh>
+                        <MudTh>Begin Year</MudTh>
+                        <MudTh>End Year</MudTh>
+                    </HeaderContent>
+                    <RowTemplate>
+                        <MudTd DataLabel="">
+                            <MudTooltip>
+                                <MudImage @onclick="@(_ => NavigationManager.NavigateTo(context.ProfileLink))"
+                                          Class="rounded-lg can-click"
+                                          Elevation="5"
+                                          Height="200"
+                                          ObjectFit="@ObjectFit.Cover"
+                                          Src="@(GetImage(context.PersonImagePath))"
+                                          Width="200" />
+                            </MudTooltip>
+                        </MudTd>
+                        <MudTd DataLabel="Person">
+                            <MudLink Href="@context.ProfileLink">@context.PersonName</MudLink>
+                        </MudTd>
+                        <MudTd DataLabel="College">@context.CollegeName</MudTd>
+                        <MudTd DataLabel="Begin Year">@context.BeginYear</MudTd>
+                        <MudTd DataLabel="End Year">@context.EndYear</MudTd>
+                    </RowTemplate>
+                    <PagerContent>
+                        <MudTablePager />
+                    </PagerContent>
+                </MudTable>
+            </Content>
+        </DivRowCol6>
+    </Content>
+</DivPad2>

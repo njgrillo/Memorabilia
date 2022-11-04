@@ -1,8 +1,8 @@
 ﻿namespace Memorabilia.Application.Features.Tools.Baseball.Accomplishments;
 
-public class GetAccomplishments
+public record GetAccomplishments(int AccomplishmentTypeId) : IQuery<AccomplishmentsViewModel>
 {
-    public class Handler : QueryHandler<Query, AccomplishmentsViewModel>
+    public class Handler : QueryHandler<GetAccomplishments, AccomplishmentsViewModel>
     {
         private readonly IPersonAccomplishmentRepository _personAccomplishmentRepository;
 
@@ -11,19 +11,12 @@ public class GetAccomplishments
             _personAccomplishmentRepository = personAccomplishmentRepository;
         }
 
-        protected override async Task<AccomplishmentsViewModel> Handle(Query query)
+        protected override async Task<AccomplishmentsViewModel> Handle(GetAccomplishments query)
         {
-            return new AccomplishmentsViewModel(await _personAccomplishmentRepository.GetAll(query.AccomplishmentTypeId));
+            return new AccomplishmentsViewModel(await _personAccomplishmentRepository.GetAll(query.AccomplishmentTypeId))
+            {
+                AccomplishmentTypeId = query.AccomplishmentTypeId
+            };
         }
-    }
-
-    public class Query : IQuery<AccomplishmentsViewModel>
-    {
-        public Query(int accomplishmentTypeId)
-        {
-            AccomplishmentTypeId = accomplishmentTypeId;
-        }
-
-        public int AccomplishmentTypeId { get; }
     }
 }

@@ -92,6 +92,27 @@ public class Person : Framework.Library.Domain.Entity.DomainEntity
 
     public string Suffix { get; private set; }
 
+    public void Delete()
+    {
+        Accomplishments = null;
+        AllStars = null;
+        Awards = null;
+        CareerRecords = null;
+        Colleges = null;
+        Drafts = null;
+        FranchiseHallOfFames = null;
+        HallOfFames = null;
+        InternationalHallOfFames = null;
+        Leaders = null;
+        Nicknames = null;
+        Occupations = null;
+        RetiredNumbers = null;
+        Service = null;
+        SingleSeasonRecords = null;        
+        Sports = null;
+        Teams = null;
+    }
+
     public void RemoveAccomplishments(params int[] ids)
     {
         if (ids == null || ids.Length == 0)

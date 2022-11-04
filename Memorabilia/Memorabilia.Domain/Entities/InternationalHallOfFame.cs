@@ -13,7 +13,11 @@ public class InternationalHallOfFame : Framework.Library.Domain.Entity.DomainEnt
 
     public int? InductionYear { get; private set; }
 
+    public Constants.InternationalHallOfFameType InternationalHallOfFameType => Constants.InternationalHallOfFameType.Find(InternationalHallOfFameTypeId);   
+
     public int InternationalHallOfFameTypeId { get; private set; }
+
+    public virtual Person Person { get; private set; }
 
     public int PersonId { get; private set; }
 

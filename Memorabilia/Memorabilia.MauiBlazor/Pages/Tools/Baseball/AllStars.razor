@@ -1,0 +1,9 @@
+﻿@page "/Tools/Baseball/AllStars"
+
+@inject IConfiguration Configuration
+
+<PageLoader>
+    <Content>
+        <ViewAllStars PersonImageRootPath="@Configuration["PersonImageRootPath"]" />
+    </Content>
+</PageLoader>

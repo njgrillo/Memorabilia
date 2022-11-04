@@ -23,7 +23,7 @@ public class SaveProjectViewModel : SaveViewModel
 
     public bool HasDefaultItemType => ItemTypeId > 0;
 
-    public string ImagePath => Domain.Constants.ImagePath.Projects;
+    public string ImagePath => Domain.Constants.ImagePath.ProjectTypes;
 
     public override string ItemTitle => "Project";
 

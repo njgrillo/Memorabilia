@@ -1,0 +1,43 @@
+﻿@inherits CommandQuery
+
+<DivPad2>
+    <Content>
+        <DivRowCol6>
+            <Content>
+                <MudTable Bordered="false"
+                          Dense="false"
+                          Hover="true"
+                          Items="@_viewModel.SingleSeasonRecords.ToList()"
+                          Striped="true">
+                    <HeaderContent>
+                        <MudTh>Record</MudTh>
+                        <MudTh></MudTh>
+                        <MudTh>Person</MudTh>
+                        <MudTh>Amount</MudTh>
+                    </HeaderContent>
+                    <RowTemplate>
+                        <MudTd DataLabel="Record">@context.SingleSeasonRecordTypeName</MudTd>
+                        <MudTd DataLabel="">
+                            <MudTooltip>
+                                <MudImage @onclick="@(_ => NavigationManager.NavigateTo(context.ProfileLink))"
+                                          Class="rounded-lg can-click"
+                                          Elevation="5"
+                                          Height="200"
+                                          ObjectFit="@ObjectFit.Cover"
+                                          Src="@(GetImage(context.PersonImagePath))"
+                                          Width="200" />
+                            </MudTooltip>
+                        </MudTd>
+                        <MudTd DataLabel="Person">
+                            <MudLink Href="@context.ProfileLink">@context.PersonName</MudLink>
+                        </MudTd>
+                        <MudTd DataLabel="Amount">@context.Amount</MudTd>
+                    </RowTemplate>
+                    <PagerContent>
+                        <MudTablePager />
+                    </PagerContent>
+                </MudTable>
+            </Content>
+        </DivRowCol6>
+    </Content>
+</DivPad2>

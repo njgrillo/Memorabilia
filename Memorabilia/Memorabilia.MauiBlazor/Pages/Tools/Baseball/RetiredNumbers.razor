@@ -1,0 +1,9 @@
+﻿@page "/Tools/Baseball/RetiredNumbers"
+
+@inject IConfiguration Configuration
+
+<PageLoader>
+    <Content>
+        <ViewRetiredNumbers PersonImageRootPath="@Configuration["PersonImageRootPath"]" />
+    </Content>
+</PageLoader>

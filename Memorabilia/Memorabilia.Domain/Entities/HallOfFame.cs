@@ -17,6 +17,8 @@ public class HallOfFame : Framework.Library.Domain.Entity.DomainEntity
 
     public int? InductionYear { get; private set; }
 
+    public virtual Person Person { get; private set; }
+
     public int PersonId { get; private set; }
 
     public int SportLeagueLevelId { get; private set; }

@@ -69,7 +69,6 @@
     <ItemGroup>
       <Folder Include="Pages\Autograph\" />
       <Folder Include="Pages\MemorabiliaItems\" />
-      <Folder Include="Pages\Tools\" />
     </ItemGroup>
 
 </Project>

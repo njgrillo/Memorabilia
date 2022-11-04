@@ -4,18 +4,6 @@ namespace Memorabilia.Blazor.Pages.Admin.People;
 
 public partial class ViewPeople : ViewItem<PeopleViewModel, PersonViewModel>
 {
-    [Parameter]
-    public string PersonImageRootPath { get; set; }
-
-    protected string GetImage(string imagePath)
-    {
-        var path = imagePath == ImagePath.ImageNotAvailable
-                ? imagePath
-                : Path.Combine(PersonImageRootPath, imagePath);
-
-        return $"data:image/jpg;base64,{Convert.ToBase64String(File.ReadAllBytes(path))}";
-    }
-
     protected async Task OnLoad()
     {
         await OnLoad(new GetPeople());

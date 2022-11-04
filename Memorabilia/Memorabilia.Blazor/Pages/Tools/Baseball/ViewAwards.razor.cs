@@ -2,10 +2,10 @@
 
 namespace Memorabilia.Blazor.Pages.Tools.Baseball;
 
-public partial class ViewAwards : ComponentBase
+public partial class ViewAwards : CommandQuery
 {
     [Inject]
-    public QueryRouter QueryRouter { get; set; }
+    public NavigationManager NavigationManager { get; set; }
 
     [Parameter]
     public string PersonImageRootPath { get; set; }
@@ -23,6 +23,6 @@ public partial class ViewAwards : ComponentBase
 
     private async Task OnInputChange(int awardTypeId)
     {
-        _viewModel = await QueryRouter.Send(new GetAwards.Query(awardTypeId));
+        _viewModel = await QueryRouter.Send(new GetAwards(awardTypeId));
     }
 }

@@ -13,6 +13,8 @@ public class CareerRecord : Framework.Library.Domain.Entity.DomainEntity
 
     public decimal? Amount { get; private set; }
 
+    public virtual Person Person { get; private set; }
+
     public int PersonId { get; private set; }
 
     public int RecordTypeId { get; private set; }

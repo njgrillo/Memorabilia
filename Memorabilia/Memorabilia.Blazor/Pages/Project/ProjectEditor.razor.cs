@@ -17,7 +17,7 @@ public partial class ProjectEditor : ComponentBase
     public int Id { get; set; }
 
     [Parameter]
-    public string PersonImageRootPath { get; set; }
+    public string ImagePathRoot { get; set; }
 
     [Parameter]
     public int UserId { get; set; }
@@ -32,7 +32,7 @@ public partial class ProjectEditor : ComponentBase
     {
         var path = imagePath == ImagePath.ImageNotAvailable
                 ? imagePath
-                : Path.Combine(PersonImageRootPath, imagePath);
+                : Path.Combine(ImagePathRoot, imagePath);
 
         return $"data:image/jpg;base64,{Convert.ToBase64String(File.ReadAllBytes(path))}";
     }

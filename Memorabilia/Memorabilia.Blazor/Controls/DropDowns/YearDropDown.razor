@@ -1,0 +1,15 @@
+﻿<MudSelect Disabled="@Disabled"
+           Label="@Label"
+           T="int"
+           Value="@SelectedValue"
+           ValueChanged="@((p) => SelectionChanged.InvokeAsync(p))"
+           Variant="@Variant">
+    <PrettyBlazor.Condition Evaluation="@DisplaySelect">
+        <Match>
+            <MudSelectItem Value="@SelectItemValue">@SelectItemText</MudSelectItem>
+        </Match>
+    </PrettyBlazor.Condition>
+    <Iterations Items="Items" Context="item">
+        <MudSelectItem Value="@(GetItemDisplayValue(item))">@GetItemDisplayText(item)</MudSelectItem>
+    </Iterations>
+</MudSelect>

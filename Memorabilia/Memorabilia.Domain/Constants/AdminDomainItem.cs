@@ -53,6 +53,7 @@ public sealed class AdminDomainItem
     public static readonly AdminDomainItem PhotoTypes = new("Photo Types", "Defines variations of photos", Constants.ImagePath.Photo);
     public static readonly AdminDomainItem PriorityTypes = new("Priority Types", "Defines the priority types of projects", Constants.ImagePath.PriorityTypes);
     public static readonly AdminDomainItem PrivacyTypes = new("Privacy Types", "Defines the privacy types of memorabilia", Constants.ImagePath.PrivacyTypes);
+    public static readonly AdminDomainItem ProjectTypes = new("Project Types", "Defines the project types of memorabilia", Constants.ImagePath.ProjectTypes);
     public static readonly AdminDomainItem PurchaseTypes = new("Purchase Types", "Defines variations of purchase types", Constants.ImagePath.PurchaseTypes);
     public static readonly AdminDomainItem RecordTypes = new("Record Types", "Defines variations of record", Constants.ImagePath.RecordTypes);
     public static readonly AdminDomainItem Sizes = new("Sizes", "Defines variations of sizes", Constants.ImagePath.Sizes);
@@ -115,6 +116,7 @@ public sealed class AdminDomainItem
         PhotoTypes,
         PriorityTypes,
         PrivacyTypes,
+        ProjectTypes,
         PurchaseTypes,
         RecordTypes,
         Sizes,

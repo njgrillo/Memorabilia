@@ -4,18 +4,6 @@ namespace Memorabilia.Blazor.Pages.Admin.Pewters;
 
 public partial class ViewPewters : ViewItem<PewtersViewModel, PewterViewModel>
 {
-    [Parameter]
-    public string PewterImageRootPath { get; set; }
-
-    protected string GetImage(string imagePath)
-    {
-        var path = imagePath == ImagePath.ImageNotAvailable
-                ? imagePath
-                : Path.Combine(PewterImageRootPath, imagePath);
-
-        return $"data:image/jpg;base64,{Convert.ToBase64String(File.ReadAllBytes(path))}";
-    }
-
     protected async Task OnLoad()
     {
         await OnLoad(new GetPewters());

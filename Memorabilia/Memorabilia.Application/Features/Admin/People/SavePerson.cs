@@ -42,6 +42,8 @@ public class SavePerson
 
             if (command.IsDeleted)
             {
+                person.Delete();
+
                 await _personRepository.Delete(person);
 
                 return;

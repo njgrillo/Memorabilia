@@ -1,11 +1,14 @@
-﻿<DivPad2>
+﻿@inherits CommandQuery
+
+<DivPad2>
     <Content>
         <DivRowCol3>
             <Content>
-                <AccomplishmentTypeDropDown SelectionChanged="(p) => OnInputChange(p)" />
+                <AccomplishmentTypeDropDown SelectedValue="_viewModel.AccomplishmentTypeId"
+                                            SelectionChanged="(p) => OnInputChange(p)" />
             </Content>
         </DivRowCol3>
-        <DivRowCol6>
+        <DivRowCol6 Hidden="@(_viewModel.AccomplishmentTypeId == 0)">
             <Content>
                 <MudTable Bordered="false"
                           Dense="false"
@@ -15,13 +18,14 @@
                     <HeaderContent>
                         <MudTh></MudTh>
                         <MudTh>Person</MudTh>
-                        <MudTh>Date</MudTh>
-                        <MudTh>Year</MudTh>
+                        <MudTh hidden="@(_viewModel.IsYearAccomplishment)">Date</MudTh>
+                        <MudTh hidden="@(_viewModel.IsDateAccomplishment)">Year</MudTh>
                     </HeaderContent>
                     <RowTemplate>
                         <MudTd DataLabel="">
                             <MudTooltip>
-                                <MudImage Class="rounded-lg can-click"
+                                <MudImage @onclick="@(_ => NavigationManager.NavigateTo(context.ProfileLink))"
+                                          Class="rounded-lg can-click"
                                           Elevation="5"
                                           Height="200"
                                           ObjectFit="@ObjectFit.Cover"
@@ -32,8 +36,8 @@
                         <MudTd DataLabel="Person">
                             <MudLink Href="@context.ProfileLink">@context.PersonName</MudLink>
                         </MudTd>
-                        <MudTd DataLabel="Date">@context.Date</MudTd>
-                        <MudTd DataLabel="Year">@context.Year</MudTd>
+                        <MudTd DataLabel="Date" hidden="@(_viewModel.IsYearAccomplishment)">@context.Date</MudTd>
+                        <MudTd DataLabel="Year" hidden="@(_viewModel.IsDateAccomplishment)">@context.Year</MudTd>
                     </RowTemplate>
                     <PagerContent>
                         <MudTablePager />

@@ -2,10 +2,10 @@
 
 namespace Memorabilia.Blazor.Pages.Tools.Baseball;
 
-public partial class ViewAccomplishments : ComponentBase
+public partial class ViewAccomplishments : CommandQuery
 {
     [Inject]
-    public QueryRouter QueryRouter { get; set; }
+    public NavigationManager NavigationManager { get; set; }    
 
     [Parameter]
     public string PersonImageRootPath { get; set; }
@@ -23,6 +23,6 @@ public partial class ViewAccomplishments : ComponentBase
 
     private async Task OnInputChange(int accomplishmentTypeId)
     {
-        _viewModel = await QueryRouter.Send(new GetAccomplishments.Query(accomplishmentTypeId));
+        _viewModel = await QueryRouter.Send(new GetAccomplishments(accomplishmentTypeId));
     }
 }

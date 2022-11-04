@@ -21,10 +21,6 @@
         </DivRowCol3>
         <DivRowCol3>
             <Content>
-                @*<TeamAutoComplete FranchiseId="@ViewModel.FranchiseId" 
-                                  SelectedValue="ViewModel.TeamId"
-                                  SelectionChanged="(p) => ViewModel.TeamId = p"
-                                  SportLeagueLevel="@SportLeagueLevel.NationalFootballLeague" />*@
                 <TeamDropDown Franchise="@Franchise.Find(ViewModel.FranchiseId)" 
                               SelectedValue="@ViewModel.TeamId"
                               SelectionChanged="(p) => ViewModel.TeamId = p"

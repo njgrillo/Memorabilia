@@ -36,6 +36,10 @@ public class TeamViewModel : IWithName, IWithValue<int>
 
     public string Name => _team.Name;
 
+    public string NameWithYear => _team != null
+        ? $"{_team.Location} {_team.Name} ({_team.BeginYear} - {(_team.EndYear.HasValue ? _team.EndYear : "current")})"
+        : string.Empty;
+
     public string Nickname => _team.Nickname;
 
     public int SportId => _team.Franchise.SportLeagueLevel.SportId;

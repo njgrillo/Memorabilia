@@ -183,7 +183,7 @@ public sealed class RecordType : DomainItemConstant
         return All.SingleOrDefault(recordType => recordType.Id == id);
     }
 
-    public static RecordType[] GetAll(int[] sportIds)
+    public static RecordType[] GetAll(params int[] sportIds)
     {
         if (!sportIds.Any())
             return All;

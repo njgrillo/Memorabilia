@@ -13,7 +13,9 @@ public class AccomplishmentsViewModel
 
     public int AccomplishmentTypeId { get; set; }
 
-    public Domain.Constants.AccomplishmentType[] AccomplishmentTypes => Domain.Constants.AccomplishmentType.GetAll(Domain.Constants.Sport.Baseball.Id);
+    public bool IsDateAccomplishment => AccomplishmentTypeId > 0 && Domain.Constants.AccomplishmentType.IsDateAccomplishment(AccomplishmentTypeId);
+
+    public bool IsYearAccomplishment => AccomplishmentTypeId > 0 && Domain.Constants.AccomplishmentType.IsYearAccomplishment(AccomplishmentTypeId);
 
     public IEnumerable<AccomplishmentViewModel> PersonAccomplishments { get; set; } = Enumerable.Empty<AccomplishmentViewModel>();
 }

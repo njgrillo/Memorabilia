@@ -1,0 +1,9 @@
+﻿@page "/Tools/Baseball/Colleges"
+
+@inject IConfiguration Configuration
+
+<PageLoader>
+    <Content>
+        <ViewBaseballColleges PersonImageRootPath="@Configuration["PersonImageRootPath"]" />
+    </Content>
+</PageLoader>

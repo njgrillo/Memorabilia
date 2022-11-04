@@ -11,7 +11,11 @@ public class RetiredNumber : Framework.Library.Domain.Entity.DomainEntity
         PlayerNumber = playerNumber;
     }
 
+    public virtual Franchise Franchise { get; private set; }
+
     public int FranchiseId { get; private set; }
+
+    public virtual Person Person { get; private set; }
 
     public int PersonId { get; private set; }
 

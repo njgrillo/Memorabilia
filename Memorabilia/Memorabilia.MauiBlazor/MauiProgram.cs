@@ -27,9 +27,14 @@ public static class MauiProgram
         builder.Services.AddTransient<CommandRouter>();
         builder.Services.AddTransient<QueryRouter>();
         builder.Services.AddTransient(typeof(IDomainRepository<>), typeof(DomainRepository<>));
+        builder.Services.AddTransient<IAllStarRepository, AllStarRepository>();
         builder.Services.AddTransient<IAutographRepository, AutographRepository>();
+        builder.Services.AddTransient<ICareerRecordRepository, CareerRecordRepository>();
+        builder.Services.AddTransient<IChampionRepository, ChampionRepository>();       
         builder.Services.AddTransient<ICommissionerRepository, CommissionerRepository>();
+        builder.Services.AddTransient<IFranchiseHallOfFameRepository, FranchiseHallOfFameRepository>();
         builder.Services.AddTransient<IHallOfFameRepository, HallOfFameRepository>();
+        builder.Services.AddTransient<IInternationalHallOfFameRepository, InternationalHallOfFameRepository>();
         builder.Services.AddTransient<IItemTypeBrandRepository, ItemTypeBrandRepository>();
         builder.Services.AddTransient<IItemTypeGameStyleTypeRepository, ItemTypeGameStyleTypeRepository>();
         builder.Services.AddTransient<IItemTypeLevelRepository, ItemTypeLevelRepository>();
@@ -38,8 +43,11 @@ public static class MauiProgram
         builder.Services.AddTransient<IItemTypeSpotRepository, ItemTypeSpotRepository>();        
         builder.Services.AddTransient<IPersonAccomplishmentRepository, PersonAccomplishmentRepository>();
         builder.Services.AddTransient<IPersonAwardRepository, PersonAwardRepository>();
+        builder.Services.AddTransient<IPersonCollegeRepository, PersonCollegeRepository>();
         builder.Services.AddTransient<IPersonRepository, PersonRepository>();
         builder.Services.AddTransient<IProjectRepository, ProjectRepository>();
+        builder.Services.AddTransient<IRetiredNumberRepository, RetiredNumberRepository>();
+        builder.Services.AddTransient<ISingleSeasonRecordRepository, SingleSeasonRecordRepository>();
         builder.Services.AddTransient<ITeamChampionshipRepository, TeamChampionshipRepository>();
         builder.Services.AddTransient<ITeamConferenceRepository, TeamConferenceRepository>();
         builder.Services.AddTransient<ITeamDivisionRepository, TeamDivisionRepository>();

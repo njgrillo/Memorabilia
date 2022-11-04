@@ -13,6 +13,9 @@ public abstract class ViewItem<TViewModel, TItemViewModel> : CommandQuery
     [Inject]
     public ISnackbar Snackbar { get; set; }
 
+    [Parameter]
+    public string ImagePathRoot { get; set; }
+
     protected string Search;
     protected TViewModel ViewModel = (TViewModel)Activator.CreateInstance(typeof(TViewModel));
 
@@ -20,7 +23,16 @@ public abstract class ViewItem<TViewModel, TItemViewModel> : CommandQuery
 
     protected abstract Task Delete(int id);
 
-    protected abstract bool FilterFunc(TItemViewModel viewModel, string search);    
+    protected abstract bool FilterFunc(TItemViewModel viewModel, string search);
+
+    protected string GetImage(string imagePath)
+    {
+        var path = imagePath == ImagePath.ImageNotAvailable
+                ? imagePath
+                : Path.Combine(ImagePathRoot, imagePath);
+
+        return $"data:image/jpg;base64,{Convert.ToBase64String(File.ReadAllBytes(path))}";
+    }
 
     protected async Task OnLoad(IQuery<TViewModel> request)
     {

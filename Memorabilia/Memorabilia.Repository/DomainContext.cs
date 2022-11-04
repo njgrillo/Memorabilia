@@ -1,4 +1,5 @@
 ﻿using Memorabilia.Domain.Entities;
+using System.Reflection.Metadata;
 
 namespace Memorabilia.Repository;
 
@@ -62,6 +63,18 @@ public class DomainContext : DbContext, IDomainContext
         modelBuilder.Entity<Occupation>();
         modelBuilder.Entity<Orientation>();
         modelBuilder.Entity<Person>();
+
+        //modelBuilder.Entity<Person>().HasMany(b => b.Awards)
+        //                             .WithOne(p => p.Person)
+        //                             .HasForeignKey(p => p.PersonId)
+        //                             .OnDelete(DeleteBehavior.Cascade);
+
+        //modelBuilder.Entity<Person>().HasMany(b => b.Nicknames)
+        //                             .WithOne(p => p.PersonId)
+        //                             .HasForeignKey(p => p.PersonId)
+        //                             .OnDelete(DeleteBehavior.Cascade);
+
+
         modelBuilder.Entity<PersonAward>();
         modelBuilder.Entity<PersonNickname>();
         modelBuilder.Entity<PersonOccupation>();
@@ -71,6 +84,7 @@ public class DomainContext : DbContext, IDomainContext
         modelBuilder.Entity<PhotoType>();
         modelBuilder.Entity<PriorityType>();
         modelBuilder.Entity<PrivacyType>();            
+        modelBuilder.Entity<ProjectType>();            
         modelBuilder.Entity<PurchaseType>();
         modelBuilder.Entity<RecordType>();
         modelBuilder.Entity<Size>();

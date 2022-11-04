@@ -1,11 +1,14 @@
-﻿<DivPad2>
+﻿@inherits CommandQuery
+
+<DivPad2>
     <Content>
         <DivRowCol3>
             <Content>
-                <AwardTypeDropDown SelectionChanged="(p) => OnInputChange(p)" />
+                <AwardTypeDropDown SelectedValue="_viewModel.AwardTypeId"
+                                   SelectionChanged="(p) => OnInputChange(p)" />
             </Content>
         </DivRowCol3>
-        <DivRowCol6>
+        <DivRowCol6 Hidden="@(_viewModel.AwardTypeId == 0)">
             <Content>
                 <MudTable Bordered="false"
                           Dense="false"
@@ -20,7 +23,8 @@
                     <RowTemplate>
                         <MudTd DataLabel="">
                             <MudTooltip>
-                                <MudImage Class="rounded-lg can-click"
+                                <MudImage @onclick="@(_ => NavigationManager.NavigateTo(context.ProfileLink))" 
+                                          Class="rounded-lg can-click"
                                           Elevation="5"
                                           Height="200"
                                           ObjectFit="@ObjectFit.Cover"

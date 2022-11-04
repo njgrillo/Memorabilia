@@ -1,0 +1,9 @@
+﻿@page "/Tools/Baseball/FranchiseHallOfFamers"
+
+@inject IConfiguration Configuration
+
+<PageLoader>
+    <Content>
+        <ViewFranchiseHallOfFamers PersonImageRootPath="@Configuration["PersonImageRootPath"]" />
+    </Content>
+</PageLoader>

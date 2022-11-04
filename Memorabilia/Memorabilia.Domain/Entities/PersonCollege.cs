@@ -18,6 +18,8 @@ public class PersonCollege : Framework.Library.Domain.Entity.DomainEntity
 
     public int? EndYear { get; private set; }
 
+    public virtual Person Person { get; private set; }
+
     public int PersonId { get; private set; }        
 
     public void Set(int collegeId, int? beginYear, int? endYear)

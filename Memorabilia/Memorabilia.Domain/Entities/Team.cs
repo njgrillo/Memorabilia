@@ -49,6 +49,11 @@ public class Team : Framework.Library.Domain.Entity.DomainEntity
 
     public string Nickname { get; private set; }
 
+    public override string ToString()
+    {
+        return $"{Location} {Name}";
+    }
+
     public void RemoveChampionships(int[] championIds)
     {
         Championships.RemoveAll(champion => championIds.Contains(champion.Id));

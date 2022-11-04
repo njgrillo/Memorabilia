@@ -6,10 +6,10 @@ public class HallOfFameRepository : DomainRepository<HallOfFame>, IHallOfFameRep
 {
     public HallOfFameRepository(DomainContext context) : base(context) { }
 
-    public async Task<IEnumerable<HallOfFame>> GetAll(int? personId = null)
+    public async Task<IEnumerable<HallOfFame>> GetAll(int? sportLeagueLevelId = null, int? inductionYear = null)
     {
-        return personId.HasValue
-            ? await Items.Where(hof => hof.PersonId == personId).ToListAsync()
-            : await Items.ToListAsync();
+        return await Items.Where(hof => (sportLeagueLevelId == null || hof.SportLeagueLevelId == sportLeagueLevelId)
+                                     && (inductionYear == null || hof.InductionYear == inductionYear))
+                          .ToListAsync();
     }
 }
