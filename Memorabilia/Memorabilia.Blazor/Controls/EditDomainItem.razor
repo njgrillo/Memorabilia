@@ -13,6 +13,7 @@
         <DivRowCol3>
             <Content>
                 <TextField Label="Name"
+                           MaxLength="@MaxNameLength"
                            SelectedText="@_viewModel.Name"
                            SelectedTextChanged="@((p) => _viewModel.Name = p)" />
             </Content>
@@ -20,6 +21,7 @@
         <DivRowCol3>
             <Content>
                 <TextField Label="Abbreviation"
+                           MaxLength="@MaxAbbreviationLength"
                            SelectedText="@_viewModel.Abbreviation"
                            SelectedTextChanged="@((p) => _viewModel.Abbreviation = p)" />
             </Content>

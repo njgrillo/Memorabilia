@@ -18,6 +18,12 @@ public partial class EditDomainItem : ComponentBase
     }
 
     [Parameter]
+    public int MaxAbbreviationLength { get; set; } = 10;
+
+    [Parameter]
+    public int MaxNameLength { get; set; } = 100;
+
+    [Parameter]
     public EventCallback OnLoad { get; set; }
 
     [Parameter]
