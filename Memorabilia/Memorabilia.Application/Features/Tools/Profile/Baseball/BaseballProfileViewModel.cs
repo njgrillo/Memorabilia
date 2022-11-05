@@ -18,8 +18,9 @@ public class BaseballProfileViewModel : ProfileViewModel
                                                                                  .ThenBy(award => award.AwardTypeName);
         CareerRecords = _person.CareerRecords.Select(record => new CareerRecordProfileViewModel(record))
                                              .OrderBy(record => record.CareerRecordTypeName);
-        Championships = _person.Teams.SelectMany(team => team.Team.Championships.Select(championship => new ChampionshipProfileViewModel(championship)))
-                                                                                .OrderBy(championship => championship.Year);
+        Championships = _person.Teams.SelectMany(team => team.Team.Championships)
+                                     .Where(chip => _person.Teams.Any(team => team.BeginYear <= chip.Year && (!team.EndYear.HasValue || team.EndYear >= chip.Year)))
+                                     .Select(championship => new ChampionshipProfileViewModel(championship));
         Colleges = _person.Colleges.Select(college => new CollegeProfileViewModel(college));
         Drafts = _person.Drafts.Select(draft => new DraftProfileViewModel(draft));
         FranchiseHallOfFames = _person.FranchiseHallOfFames.Select(hof => new FranchiseHallOfFameProfileViewModel(hof));
@@ -32,7 +33,7 @@ public class BaseballProfileViewModel : ProfileViewModel
         Service = new SportServiceProfileViewModel(_person.Service);
         SingleSeasonRecords = _person.SingleSeasonRecords.Select(record => new SingleSeasonRecordProfileViewModel(record))
                                                          .OrderBy(record => record.RecordTypeName);
-        Teams = _person.Teams.Select(team => new TeamProfileViewModel(team));
+        Teams = _person.Teams.Select(team => new TeamProfileViewModel(team));        
     }
 
     public IEnumerable<AccomplishmentProfileViewModel> Accomplishments { get; set; } = Enumerable.Empty<AccomplishmentProfileViewModel>();
@@ -50,6 +51,8 @@ public class BaseballProfileViewModel : ProfileViewModel
     public string ChampionshipSummaryDisplayText => $"{Championships?.Count() ?? 0}x World Series Champion";
 
     public IEnumerable<CollegeProfileViewModel> Colleges { get; set; } = Enumerable.Empty<CollegeProfileViewModel>();
+
+    public AccomplishmentProfileViewModel[] DistinctAccomplishments => Accomplishments.DistinctBy(accomplishment => accomplishment.AccomplishmentTypeId).ToArray();
 
     public AwardProfileViewModel[] DistinctAwards => Awards.DistinctBy(award => award.AwardTypeId).ToArray();
 

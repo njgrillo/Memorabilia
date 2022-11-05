@@ -14,5 +14,7 @@ public class AllStarsViewModel
 
     public IEnumerable<AllStarViewModel> AllStars { get; set; } = Enumerable.Empty<AllStarViewModel>();
 
+    public string ResultsTitle => $"{Year} All Stars";
+
     public int Year { get; set; }
 }

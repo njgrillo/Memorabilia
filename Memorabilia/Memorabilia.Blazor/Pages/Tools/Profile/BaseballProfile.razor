@@ -118,7 +118,7 @@
                             Filter="true">
                     <PrettyBlazor.Condition Evaluation="_viewModel.HasAccomplishments">
                         <Match>
-                            <Iterations Items="@_viewModel.Accomplishments">
+                            <Iterations Items="@_viewModel.DistinctAccomplishments">
                                 <MudChip Color="MudBlazor.Color.Info"
                                          Text="Accomplishment">@($"{context.AccomplishmentTypeName}")</MudChip>
                                 </Iterations>
@@ -166,10 +166,10 @@
                     <PrettyBlazor.Condition Evaluation="DisplayAccomplishments">
                         <Match>
                            <MudTable Bordered="false"
-                                 Dense="false" 
-                                 Hover="true"
-                                 Items="@_viewModel.Accomplishments"    
-                                 Striped="true">
+                                     Dense="false" 
+                                     Hover="true"
+                                     Items="@_viewModel.Accomplishments"
+                                     Striped="true">
                                 <ToolBarContent>
                                     <MudText Typo="Typo.h6"><b>Accomplishments</b></MudText>
                                 </ToolBarContent>

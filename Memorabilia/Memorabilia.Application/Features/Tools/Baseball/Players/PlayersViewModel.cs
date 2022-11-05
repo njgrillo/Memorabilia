@@ -15,7 +15,11 @@ public class PlayersViewModel
 
     public int FranchiseId { get; set; }
 
+    public string FranchiseName => Domain.Constants.Franchise.Find(FranchiseId)?.Name;
+
     public IEnumerable<PlayerViewModel> Players { get; set; } = Enumerable.Empty<PlayerViewModel>();
+
+    public string ResultsTitle => $"{FranchiseName} Players";
 
     public int SportLeagueLevelId => Domain.Constants.SportLeagueLevel.MajorLeagueBaseball.Id;
 }

@@ -14,7 +14,11 @@ public class PersonCollegesViewModel
 
     public int CollegeId { get; set; }
 
+    public string CollegeName => Domain.Constants.College.Find(CollegeId)?.Name;
+
     public IEnumerable<PersonCollegeViewModel> Colleges { get; set; } = Enumerable.Empty<PersonCollegeViewModel>();
+
+    public string ResultsTitle => $"{CollegeName} Players";
 
     public int SportLeagueLevelId => Domain.Constants.SportLeagueLevel.MajorLeagueBaseball.Id;
 }

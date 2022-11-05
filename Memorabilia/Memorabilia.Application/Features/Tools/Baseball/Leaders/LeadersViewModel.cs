@@ -18,5 +18,9 @@ public class LeadersViewModel
 
     public int LeaderTypeId { get; set; }
 
+    public string LeaderTypeName => Domain.Constants.LeaderType.Find(LeaderTypeId)?.Name;
+
+    public string ResultsTitle => $"{LeaderTypeName} Leaders";
+
     public int SportLeagueLevelId => Domain.Constants.SportLeagueLevel.MajorLeagueBaseball.Id;
 }

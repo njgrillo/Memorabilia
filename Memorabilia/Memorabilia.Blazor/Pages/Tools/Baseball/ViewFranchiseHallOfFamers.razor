@@ -9,7 +9,7 @@
                                    SportLeagueLevelId="_viewModel.SportLeagueLevelId" />
             </Content>
         </DivRowCol3>
-        <DivRowCol6>
+        <DivRowCol6 Hidden="@(_viewModel.FranchiseId == 0)">
             <Content>
                 <MudTable Bordered="false"
                           Dense="false"
@@ -18,7 +18,7 @@
                           Items="@_viewModel.FranchiseHallOfFames.ToList()"
                           Striped="true">
                     <ToolBarContent>
-                        <MudText Typo="Typo.h6">Franchise Hall of Famers</MudText>
+                        <MudText Typo="Typo.h6">@_viewModel.ResultsTitle</MudText>
                         <MudSpacer />
                         <MudTextField @bind-Value="Search"
                                       Adornment="Adornment.Start"

@@ -28,6 +28,9 @@ public partial class BaseballProfile : ComponentBase
 
     protected string GetImage(string imagePath)
     {
+        if (imagePath.IsNullOrEmpty())
+            return ImagePath.ImageNotAvailable;
+
         var path = imagePath == ImagePath.ImageNotAvailable
                 ? imagePath
                 : Path.Combine(PersonImageRootPath, imagePath);

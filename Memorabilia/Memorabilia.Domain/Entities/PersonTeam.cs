@@ -13,9 +13,9 @@ public class PersonTeam : Framework.Library.Domain.Entity.DomainEntity
         TeamRoleTypeId = teamRoleTypeId;
     }
 
-    public int? BeginYear { get; private set; }
+    public int? BeginYear { get; private set; }    
 
-    public int? EndYear { get; private set; }
+    public int? EndYear { get; private set; }    
 
     public virtual Person Person { get; private set; }
 

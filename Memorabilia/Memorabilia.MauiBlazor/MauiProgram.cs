@@ -48,6 +48,8 @@ public static class MauiProgram
         builder.Services.AddTransient<IPersonCollegeRepository, PersonCollegeRepository>();
         builder.Services.AddTransient<IPersonRepository, PersonRepository>();
         builder.Services.AddTransient<IPersonTeamRepository, PersonTeamRepository>();
+        builder.Services.AddTransient<IProfileRuleFactory, ProfileRuleFactory>();
+        builder.Services.AddTransient<IProfileService, ProfileService>();
         builder.Services.AddTransient<IProjectRepository, ProjectRepository>();
         builder.Services.AddTransient<IRetiredNumberRepository, RetiredNumberRepository>();
         builder.Services.AddTransient<ISingleSeasonRecordRepository, SingleSeasonRecordRepository>();

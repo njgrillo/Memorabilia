@@ -13,6 +13,8 @@ public class AccomplishmentsViewModel
 
     public int AccomplishmentTypeId { get; set; }
 
+    public string AccomplishmentTypeName => Domain.Constants.AccomplishmentType.Find(AccomplishmentTypeId)?.Name;
+
     public bool IsDateAccomplishment => AccomplishmentTypeId > 0 && Domain.Constants.AccomplishmentType.IsDateAccomplishment(AccomplishmentTypeId);
 
     public bool IsYearAccomplishment => AccomplishmentTypeId > 0 && Domain.Constants.AccomplishmentType.IsYearAccomplishment(AccomplishmentTypeId);

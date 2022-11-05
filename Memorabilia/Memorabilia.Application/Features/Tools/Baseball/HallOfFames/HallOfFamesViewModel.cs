@@ -17,5 +17,7 @@ public class HallOfFamesViewModel
 
     public int InductionYear { get; set; }
 
+    public string ResultsTitle => $"{(InductionYear > 0 ? InductionYear : string.Empty)} Hall of Famers";
+
     public int SportLeagueLevelId => Domain.Constants.SportLeagueLevel.MajorLeagueBaseball.Id;
 }

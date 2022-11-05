@@ -18,7 +18,7 @@
                           Items="@_viewModel.AllStars.ToList()"
                           Striped="true">
                     <ToolBarContent>
-                        <MudText Typo="Typo.h6">All Stars</MudText>
+                        <MudText Typo="Typo.h6">@_viewModel.ResultsTitle</MudText>
                         <MudSpacer />
                         <MudTextField @bind-Value="Search"
                                       Adornment="Adornment.Start"

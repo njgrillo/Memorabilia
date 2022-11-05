@@ -41,6 +41,6 @@ public class NamedEntityAutoComplete<T> : Autocomplete<T> where T : ViewModel, I
 
         var culturalResults = Items.Where(item => item.Name.Contains(searchText, StringComparison.OrdinalIgnoreCase));
 
-        return await Task.FromResult(nonCulturalResults.Union(culturalResults).DistinctBy(item => item.Value));
+        return await Task.FromResult(nonCulturalResults.Union(culturalResults).DistinctBy(item => item.Name));
     }
 }

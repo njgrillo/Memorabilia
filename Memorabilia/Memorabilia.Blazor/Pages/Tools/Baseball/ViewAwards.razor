@@ -17,7 +17,7 @@
                           Items="@_viewModel.PersonAwards.ToList()"
                           Striped="true">
                     <ToolBarContent>
-                        <MudText Typo="Typo.h6">Awards</MudText>
+                        <MudText Typo="Typo.h6">@_viewModel.AwardTypeName</MudText>
                         <MudSpacer />
                         <MudTextField @bind-Value="Search"
                                       Adornment="Adornment.Start"

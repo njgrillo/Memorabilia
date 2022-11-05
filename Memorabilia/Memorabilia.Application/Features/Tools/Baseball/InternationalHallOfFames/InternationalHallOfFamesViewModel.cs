@@ -17,5 +17,9 @@ public class InternationalHallOfFamesViewModel
 
     public int InternationalHallOfFameTypeId { get; set; }
 
+    public string InternationalHallOfFameTypeName => Domain.Constants.InternationalHallOfFameType.Find(InternationalHallOfFameTypeId)?.Name;
+
+    public string ResultsTitle => $"{InternationalHallOfFameTypeName}rs";
+
     public int SportLeagueLevelId => Domain.Constants.SportLeagueLevel.MajorLeagueBaseball.Id;
 }

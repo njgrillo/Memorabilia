@@ -17,5 +17,9 @@ public class FranchiseHallOfFamesViewModel
 
     public int FranchiseId { get; set; }
 
+    public string FranchiseName => Domain.Constants.Franchise.Find(FranchiseId)?.Name;
+
+    public string ResultsTitle => $"{FranchiseName} Hall of Famers";
+
     public int SportLeagueLevelId => Domain.Constants.SportLeagueLevel.MajorLeagueBaseball.Id;
 }

@@ -18,5 +18,9 @@ public class DraftsViewModel
 
     public int FranchiseId { get; set; }
 
+    public string FranchiseName => Domain.Constants.Franchise.Find(FranchiseId)?.Name;
+
+    public string ResultsTitle => $"{FranchiseName} Draft Picks";
+
     public int SportLeagueLevelId => Domain.Constants.SportLeagueLevel.MajorLeagueBaseball.Id;
 }

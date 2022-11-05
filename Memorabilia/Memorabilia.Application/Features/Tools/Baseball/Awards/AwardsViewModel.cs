@@ -1,4 +1,5 @@
-﻿using Memorabilia.Domain.Entities;
+﻿using Memorabilia.Domain.Constants;
+using Memorabilia.Domain.Entities;
 
 namespace Memorabilia.Application.Features.Tools.Baseball.Awards;
 
@@ -14,6 +15,8 @@ public class AwardsViewModel
     }
 
     public int AwardTypeId { get; set; }
+
+    public string AwardTypeName => Domain.Constants.AwardType.Find(AwardTypeId)?.Name;
 
     public IEnumerable<AwardViewModel> PersonAwards { get; set; } = Enumerable.Empty<AwardViewModel>();
 }
