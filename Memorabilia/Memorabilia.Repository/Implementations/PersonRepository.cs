@@ -14,6 +14,7 @@ public class PersonRepository : DomainRepository<Person>, IPersonRepository
                                               .Include(person => person.FranchiseHallOfFames)
                                               .Include(person => person.HallOfFames)
                                               .Include(person => person.Leaders)
+                                              .Include(person => person.Nicknames)
                                               .Include(person => person.Occupations)
                                               .Include(person => person.RetiredNumbers)
                                               .Include(person => person.Service)

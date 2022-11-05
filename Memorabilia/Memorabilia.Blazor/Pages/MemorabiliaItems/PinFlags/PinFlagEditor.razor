@@ -30,9 +30,9 @@
         </DivRowCol3>
         <DivRowCol3 Hidden="@(!ViewModel.DisplayGameDate)">
             <Content>
-                <DatePicker Label="Tournament Date"
-                            SelectedDate="ViewModel.GameDate"
-                            SelectedDateChanged="@((p) => ViewModel.GameDate = p)" />
+                <MudDatePicker @bind-Date="ViewModel.GameDate"
+                               Label="Tournament Date"
+                               Variant="Variant.Outlined" />
             </Content>
         </DivRowCol3>
         <PersonSelector CanFilterBySport="true"

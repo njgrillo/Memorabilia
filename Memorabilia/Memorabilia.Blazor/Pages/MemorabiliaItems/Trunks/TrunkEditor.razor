@@ -42,9 +42,9 @@
             <ContentColumn2>
                 <DivHidden Hidden="@(!ViewModel.DisplayGameDate)">
                     <Content>
-                        <DatePicker Label="Match Date"
-                                    SelectedDate="ViewModel.GameDate" 
-                                    SelectedDateChanged="@((p) => ViewModel.GameDate = p)"/>  
+                        <MudDatePicker @bind-Date="ViewModel.GameDate"
+                                       Label="Match Date"
+                                       Variant="Variant.Outlined" /> 
                     </Content>
                 </DivHidden>
             </ContentColumn2>

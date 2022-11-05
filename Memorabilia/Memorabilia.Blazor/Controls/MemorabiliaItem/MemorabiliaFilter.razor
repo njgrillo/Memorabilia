@@ -74,9 +74,9 @@
                     </div> 
                     <div class="col-lg-2">
                         <div class="form-group">
-                            <DatePicker Label="Acquired Date"
-                                        SelectedDate="_memorabiliaAcquiredDate"
-                                        SelectedDateChanged="@((p) => _memorabiliaAcquiredDate = p)"/>
+                            <MudDatePicker @bind-Date="_memorabiliaAcquiredDate"
+                                           Label="Acquired Date"
+                                           Variant="Variant.Outlined" />
                         </div>
                     </div> 
                     <div class="col-lg-2">
@@ -95,9 +95,9 @@
                     </div> 
                     <div class="col-lg-2">
                         <div class="form-group">
-                            <DatePicker Label="Acquired Date"
-                                        SelectedDate="_autographAcquiredDate" 
-                                        SelectedDateChanged="@((p) => _autographAcquiredDate = p)" />
+                            <MudDatePicker @bind-Date="_autographAcquiredDate"
+                                           Label="Acquired Date"
+                                           Variant="Variant.Outlined" />
                         </div>
                     </div> 
                 </div>

@@ -41,27 +41,21 @@
         </DivRowCol3>
         <DivRowCol3>
             <Content>
-                @*<MudDatePicker @bind-Date="ViewModel.DebutDate"
-                               DateFormat="MM/dd/yyyy"
-                               Editable="true"
+                <MudDatePicker @bind-Date="ViewModel.DebutDate"
                                Label="Debut Date"
-                               Mask="@(new DateMask("MM/dd/yyyy"))" 
-                               Variant="Variant.Outlined" />*@
-                <DatePicker Label="Debut Date"
-                            SelectedDate="ViewModel.DebutDate"
-                            SelectedDateChanged="@((p) => ViewModel.DebutDate = p)" /> 
+                               Variant="Variant.Outlined" />
             </Content>
             <ContentColumn2>
-                <DatePicker Label="Last Appearance Date"
-                            SelectedDate="ViewModel.LastAppearanceDate"
-                            SelectedDateChanged="@((p) => ViewModel.LastAppearanceDate = p)" />                            
+                <MudDatePicker @bind-Date="ViewModel.LastAppearanceDate"
+                               Label="Last Appearance Date"
+                               Variant="Variant.Outlined" />                       
             </ContentColumn2>
         </DivRowCol3>
         <DivRowCol3>
             <Content>
-                <DatePicker Label="Free Agent Signing Date"
-                            SelectedDate="ViewModel.FreeAgentSigningDate"
-                            SelectedDateChanged="@((p) => ViewModel.FreeAgentSigningDate = p)" />  
+                <MudDatePicker @bind-Date="ViewModel.FreeAgentSigningDate"
+                               Label="Free Agent Signing Date"
+                               Variant="Variant.Outlined" /> 
             </Content>
         </DivRowCol3>
     </Content>

@@ -25,14 +25,14 @@
         </DivRowCol3>
         <DivRowCol3>
             <Content>
-                <DatePicker Label="Start Date"
-                            SelectedDate="_viewModel.StartDate" 
-                            SelectedDateChanged="@((p) => _viewModel.StartDate = p)"/>
+                <MudDatePicker @bind-Date="_viewModel.StartDate"
+                               Label="Start Date"
+                               Variant="Variant.Outlined" />
             </Content>
             <ContentColumn2>
-                <DatePicker Label="End Date"
-                            SelectedDate="_viewModel.EndDate" 
-                            SelectedDateChanged="@((p) => _viewModel.EndDate = p)"/>
+                <MudDatePicker @bind-Date="_viewModel.EndDate"
+                               Label="End Date"
+                               Variant="Variant.Outlined" />
             </ContentColumn2>
         </DivRowCol3>
         <br />

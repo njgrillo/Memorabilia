@@ -73,14 +73,14 @@
         </DivRowCol3>
         <DivRowCol3>
             <Content>
-                <DatePicker Label="Birth Date"
-                            SelectedDate="ViewModel.BirthDate" 
-                            SelectedDateChanged="@((p) => ViewModel.BirthDate = p)"/>
+                <MudDatePicker @bind-Date="ViewModel.BirthDate"
+                               Label="Birth Date"
+                               Variant="Variant.Outlined" />
             </Content>
             <ContentColumn2>
-                <DatePicker Label="Death Date"
-                            SelectedDate="ViewModel.DeathDate"
-                            SelectedDateChanged="@((p) => ViewModel.DeathDate = p)" />
+                <MudDatePicker @bind-Date="ViewModel.DeathDate"
+                               Label="Death Date"
+                               Variant="Variant.Outlined" />
             </ContentColumn2>
         </DivRowCol3>
         <DivRowCol12>

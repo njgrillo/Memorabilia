@@ -55,9 +55,9 @@
                                       SportLeagueLevelId="SportLeagueLevel.MajorLeagueBaseball.Id" />
             </ContentColumn2>
             <ContentColumn3>
-                <DatePicker Label="Game Date"
-                            SelectedDate="ViewModel.GameDate" 
-                            SelectedDateChanged="@((p) => ViewModel.GameDate = p)"/>                 
+                <MudDatePicker @bind-Date="ViewModel.GameDate"
+                               Label="Game Date"
+                               Variant="Variant.Outlined" />                
             </ContentColumn3>
             <ContentColumn4>
                 <PrettyBlazor.Condition Evaluation="ViewModel.DisplayBaseballTypeYear">

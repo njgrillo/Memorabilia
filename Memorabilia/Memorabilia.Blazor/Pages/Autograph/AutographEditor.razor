@@ -129,9 +129,9 @@
             <ContentColumn4>
                 <PrettyBlazor.Condition Evaluation="ViewModel.DisplayAcquisitionDetails && _displayAcquisitionDetails">
                     <Match>
-                        <DatePicker Label="Acquired Date"
-                                    SelectedDate="ViewModel.AcquiredDate"
-                                    SelectedDateChanged="@((p) => ViewModel.AcquiredDate = p)" />
+                        <MudDatePicker @bind-Date="ViewModel.AcquiredDate"
+                                       Label="Acquired Date"
+                                       Variant="Variant.Outlined" />
                     </Match>
                 </PrettyBlazor.Condition>
             </ContentColumn4>
@@ -165,9 +165,9 @@
             <ContentColumn4>
                 <PrettyBlazor.Condition Evaluation="ViewModel.DisplayAcquisitionDetails && ViewModel.DisplayThroughTheMailDetails">
                     <Match>
-                        <DatePicker Label="Sent Date"
-                                    SelectedDate="ViewModel.SentDate"
-                                    SelectedDateChanged="@((p) => ViewModel.SentDate = p)" />
+                        <MudDatePicker @bind-Date="ViewModel.SentDate"
+                                       Label="Sent Date"
+                                       Variant="Variant.Outlined" />
                     </Match>
                 </PrettyBlazor.Condition>
             </ContentColumn4>
@@ -176,9 +176,9 @@
             <ContentColumn4>
                 <PrettyBlazor.Condition Evaluation="ViewModel.DisplayAcquisitionDetails && ViewModel.DisplayThroughTheMailDetails">
                     <Match>
-                        <DatePicker Label="Received Date"
-                                    SelectedDate="ViewModel.ReceivedDate"
-                                    SelectedDateChanged="@((p) => ViewModel.ReceivedDate = p)" />
+                        <MudDatePicker @bind-Date="ViewModel.ReceivedDate"
+                                       Label="Received Date"
+                                       Variant="Variant.Outlined" />
                     </Match>
                 </PrettyBlazor.Condition>
             </ContentColumn4>

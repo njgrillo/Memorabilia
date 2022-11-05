@@ -53,9 +53,9 @@
                               ValueChanged="@((p) => _viewModel.EstimatedValue = p)" />
             </Content>
             <ContentColumn2>
-                <DatePicker Label="Acquired Date"
-                            SelectedDate="_viewModel.AcquiredDate" 
-                            SelectedDateChanged="@((p) => _viewModel.AcquiredDate = p)"/>
+                <MudDatePicker @bind-Date="_viewModel.AcquiredDate"
+                               Label="Acquired Date"
+                               Variant="Variant.Outlined" />
             </ContentColumn2>
             <ContentColumn3>
                 <DivHidden Hidden="@(!_viewModel.CanHaveCost)">

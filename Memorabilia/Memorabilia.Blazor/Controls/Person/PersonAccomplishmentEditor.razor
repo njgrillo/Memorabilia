@@ -12,9 +12,9 @@
                           ValueChanged="@((p) => _viewModel.Year = p)" />
     </Content>
     <ContentColumn2>
-        <DatePicker Label="Date"
-                    SelectedDate="_viewModel.Date" 
-                    SelectedDateChanged="@((p) => _viewModel.Date = p)"/>
+        <MudDatePicker @bind-Date="_viewModel.Date"
+                       Label="Date"
+                       Variant="Variant.Outlined" />
     </ContentColumn2>
 </DivRowCol3>
 <DivLeftAlign>
