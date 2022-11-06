@@ -11,7 +11,9 @@ public class InternationalHallOfFameRepository : DomainRepository<InternationalH
     public async Task<IEnumerable<InternationalHallOfFame>> GetAll(int? internationalHallOfFameTypeId = null, int? sportLeagueLevelId = null)
     {
         return (await InternationalHallOfFames.Where(hallOfFame => (internationalHallOfFameTypeId == null || hallOfFame.InternationalHallOfFameTypeId == internationalHallOfFameTypeId)
-                                                                && (sportLeagueLevelId == null || hallOfFame.Person.Teams.Select(team => team.Team.Franchise.SportLeagueLevelId).Contains(sportLeagueLevelId.Value))).ToListAsync())
-                                              .OrderByDescending(hallOfFame => hallOfFame.Person.DisplayName);
+                                                                && (sportLeagueLevelId == null || hallOfFame.Person.Teams.Select(team => team.Team.Franchise.SportLeagueLevelId).Contains(sportLeagueLevelId.Value)))
+                                              .AsNoTracking()
+                                              .ToListAsync())
+                  .OrderByDescending(hallOfFame => hallOfFame.Person.DisplayName);
     }
 }

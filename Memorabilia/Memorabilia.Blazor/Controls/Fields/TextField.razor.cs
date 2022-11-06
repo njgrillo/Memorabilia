@@ -14,7 +14,7 @@ public partial class TextField : Field
     public int Lines { get; set; } = 1;
 
     [Parameter]
-    public int MaxLength { get; set; }
+    public int MaxLength { get; set; } = int.MaxValue;
 
     [Parameter]
     public EventCallback<FocusEventArgs> OnBlur { get; set; }

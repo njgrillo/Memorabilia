@@ -10,6 +10,8 @@ public class SingleSeasonRecordRepository : DomainRepository<SingleSeasonRecord>
 
     public async Task<IEnumerable<SingleSeasonRecord>> GetAll(int sportId)
     {
-        return await SingleSeasonRecords.Where(record => record.Person.Sports.Select(sport => sport.SportId).Contains(sportId)).ToListAsync();
+        return await SingleSeasonRecords.Where(record => record.Person.Sports.Select(sport => sport.SportId).Contains(sportId))
+                                        .AsNoTracking()
+                                        .ToListAsync();
     }
 }

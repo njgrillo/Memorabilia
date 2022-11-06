@@ -6,11 +6,14 @@ public class ChampionRepository : DomainRepository<Champion>, IChampionRepositor
 {
     public ChampionRepository(DomainContext context) : base(context) { }
 
-    private IQueryable<Champion> Champions => Items.Include(champion => champion.Team);
+    private IQueryable<Champion> Champions => Items.Include(champion => champion.Team)
+                                                   .Include(champion => champion.Team.Franchise);
 
     public async Task<IEnumerable<Champion>> GetAll(int championTypeId)
     {
-        return (await Champions.Where(champion => champion.ChampionTypeId == championTypeId).ToListAsync())
-                               .OrderByDescending(champion => champion.Year);
+        return (await Champions.Where(champion => champion.ChampionTypeId == championTypeId)
+                               .AsNoTracking()
+                               .ToListAsync())
+                      .OrderByDescending(champion => champion.Year);
     }
 }

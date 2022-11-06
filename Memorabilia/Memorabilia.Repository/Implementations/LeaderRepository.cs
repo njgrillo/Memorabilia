@@ -10,6 +10,8 @@ public class LeaderRepository : DomainRepository<Leader>, ILeaderRepository
 
     public async Task<IEnumerable<Leader>> GetAll(int leaderTypeId)
     {
-        return await Leaders.Where(leader => leader.LeaderTypeId == leaderTypeId).ToListAsync();
+        return await Leaders.Where(leader => leader.LeaderTypeId == leaderTypeId)
+                            .AsNoTracking()
+                            .ToListAsync();
     }
 }

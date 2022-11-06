@@ -6,10 +6,13 @@ public class HallOfFameRepository : DomainRepository<HallOfFame>, IHallOfFameRep
 {
     public HallOfFameRepository(DomainContext context) : base(context) { }
 
+    private IQueryable<HallOfFame> HallOfFames => Items.Include(hallOfFame => hallOfFame.Person);
+
     public async Task<IEnumerable<HallOfFame>> GetAll(int? sportLeagueLevelId = null, int? inductionYear = null)
     {
-        return await Items.Where(hof => (sportLeagueLevelId == null || hof.SportLeagueLevelId == sportLeagueLevelId)
-                                     && (inductionYear == null || hof.InductionYear == inductionYear))
-                          .ToListAsync();
+        return await HallOfFames.Where(hof => (sportLeagueLevelId == null || hof.SportLeagueLevelId == sportLeagueLevelId)
+                                              && (inductionYear == null || hof.InductionYear == inductionYear))
+                                .AsNoTracking()
+                                .ToListAsync();
     }
 }

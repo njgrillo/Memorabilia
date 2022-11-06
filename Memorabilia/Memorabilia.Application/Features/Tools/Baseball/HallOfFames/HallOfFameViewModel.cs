@@ -17,9 +17,9 @@ public class HallOfFameViewModel
 
     public int PersonId => _hallOfFame.PersonId;
 
-    public string PersonImagePath => _hallOfFame.Person.ImagePath;
+    public string PersonImagePath => _hallOfFame.Person?.ImagePath;
 
-    public string PersonName => _hallOfFame.Person.DisplayName;
+    public string PersonName => _hallOfFame.Person?.DisplayName;
 
     public string ProfileLink => $"/Tools/BaseballProfile/{PersonId}";
 

@@ -10,6 +10,8 @@ public class CareerRecordRepository : DomainRepository<CareerRecord>, ICareerRec
 
     public async Task<IEnumerable<CareerRecord>> GetAll(int sportId)
     {
-        return await CareerRecords.Where(record => record.Person.Sports.Select(sport => sport.SportId).Contains(sportId)).ToListAsync();
+        return await CareerRecords.Where(record => record.Person.Sports.Select(sport => sport.SportId).Contains(sportId))
+                                  .AsNoTracking()
+                                  .ToListAsync();
     }
 }

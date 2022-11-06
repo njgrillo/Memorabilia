@@ -11,6 +11,7 @@ public class PersonAccomplishmentRepository : DomainRepository<PersonAccomplishm
     public async Task<IEnumerable<PersonAccomplishment>> GetAll(int accomplishmentTypeId)
     {
         var accomplishments = await PersonAccomplishment.Where(personAccomplishment => personAccomplishment.AccomplishmentTypeId == accomplishmentTypeId)
+                                                        .AsNoTracking()
                                                         .ToListAsync();
 
         var sortByDate = accomplishments.Any(personAccomplishment => personAccomplishment.Date.HasValue);

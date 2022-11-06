@@ -10,6 +10,8 @@ public class PersonAwardRepository : DomainRepository<PersonAward>, IPersonAward
 
     public async Task<IEnumerable<PersonAward>> GetAll(int awardTypeId)
     {
-        return await PersonAward.Where(personAward => personAward.AwardTypeId == awardTypeId).ToListAsync();
+        return await PersonAward.Where(personAward => personAward.AwardTypeId == awardTypeId)
+                                .AsNoTracking()
+                                .ToListAsync();
     }
 }

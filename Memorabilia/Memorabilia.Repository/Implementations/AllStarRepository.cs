@@ -10,7 +10,9 @@ public class AllStarRepository : DomainRepository<AllStar>, IAllStarRepository
 
     public async Task<IEnumerable<AllStar>> GetAll(int year)
     {
-        return (await AllStars.Where(allStar => allStar.Year == year).ToListAsync())
-                              .OrderByDescending(allStar => allStar.Person.DisplayName); 
+        return (await AllStars.Where(allStar => allStar.Year == year)
+                              .AsNoTracking()
+                              .ToListAsync())                              
+                     .OrderByDescending(allStar => allStar.Person.DisplayName); 
     }
 }

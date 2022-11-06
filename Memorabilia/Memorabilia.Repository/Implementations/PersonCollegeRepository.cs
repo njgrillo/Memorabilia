@@ -11,7 +11,9 @@ public class PersonCollegeRepository : DomainRepository<PersonCollege>, IPersonC
     public async Task<IEnumerable<PersonCollege>> GetAll(int? collegeId = null, int? sportLeagueLevelId = null)
     {
         return (await Colleges.Where(college => (collegeId == null || college.CollegeId == collegeId)
-                                             && (sportLeagueLevelId == null || college.Person.Teams.Select(team => team.Team.Franchise.SportLeagueLevelId).Contains(sportLeagueLevelId.Value))).ToListAsync())
-                              .OrderByDescending(college => college.Person.DisplayName);
+                                             && (sportLeagueLevelId == null || college.Person.Teams.Select(team => team.Team.Franchise.SportLeagueLevelId).Contains(sportLeagueLevelId.Value)))
+                              .AsNoTracking()
+                              .ToListAsync())
+                .OrderByDescending(college => college.Person.DisplayName);
     }
 }

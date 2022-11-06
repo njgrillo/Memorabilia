@@ -1,5 +1,3 @@
-using Microsoft.Extensions.FileProviders;
-
 namespace Memorabilia.Web
 {
     public class Startup
@@ -26,6 +24,54 @@ namespace Memorabilia.Web
             services.AddTransient<CommandRouter>();
             services.AddTransient<QueryRouter>();
             services.AddMediatR(typeof(GetAccomplishments).Assembly);
+
+            services.AddScoped<PersonRepository>();
+            services.AddScoped<IPersonRepository, PersonCacheRepository>();
+
+            services.AddScoped<AllStarRepository>();
+            services.AddScoped<IAllStarRepository, AllStarCacheRepository>();
+
+            services.AddScoped<CareerRecordRepository>();
+            services.AddScoped<ICareerRecordRepository, CareerRecordCacheRepository>();
+
+            services.AddScoped<ChampionRepository>();
+            services.AddScoped<IChampionRepository, ChampionCacheRepository>();
+
+            services.AddScoped<DraftRepository>();
+            services.AddScoped<IDraftRepository, DraftCacheRepository>();
+
+            services.AddScoped<FranchiseHallOfFameRepository>();
+            services.AddScoped<IFranchiseHallOfFameRepository, FranchiseHallOfFameCacheRepository>();
+
+            services.AddScoped<HallOfFameRepository>();
+            services.AddScoped<IHallOfFameRepository, HallOfFameCacheRepository>();
+
+            services.AddScoped<InternationalHallOfFameRepository>();
+            services.AddScoped<IInternationalHallOfFameRepository, InternationalHallOfFameCacheRepository>();
+
+            services.AddScoped<LeaderRepository>();
+            services.AddScoped<ILeaderRepository, LeaderCacheRepository>();
+
+            services.AddScoped<PersonAccomplishmentRepository>();
+            services.AddScoped<IPersonAccomplishmentRepository, PersonAccomplishmentCacheRepository>();
+
+            services.AddScoped<PersonAwardRepository>();
+            services.AddScoped<IPersonAwardRepository, PersonAwardCacheRepository>();
+
+            services.AddScoped<PersonCollegeRepository>();
+            services.AddScoped<IPersonCollegeRepository, PersonCollegeCacheRepository>();
+
+            services.AddScoped<PersonTeamRepository>();
+            services.AddScoped<IPersonTeamRepository, PersonTeamCacheRepository>();
+
+            services.AddScoped<RetiredNumberRepository>();
+            services.AddScoped<IRetiredNumberRepository, RetiredNumberCacheRepository>();
+
+            services.AddScoped<SingleSeasonRecordRepository>();
+            services.AddScoped<ISingleSeasonRecordRepository, SingleSeasonRecordCacheRepository>();
+
+            //services.AddScoped<MemorabiliaItemRepository>();
+            //services.AddScoped<IMemorabiliaItemRepository, MemorabiliaItemCacheRepository>();
 
             services.AddMudServices(config =>
             {

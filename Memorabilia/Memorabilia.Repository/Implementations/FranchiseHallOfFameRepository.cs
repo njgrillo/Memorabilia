@@ -11,7 +11,9 @@ public class FranchiseHallOfFameRepository : DomainRepository<FranchiseHallOfFam
 
     public async Task<IEnumerable<FranchiseHallOfFame>> GetAll(int franchiseId)
     {
-        return (await FranchiseHallOfFames.Where(franchiseHallOfFame => franchiseHallOfFame.FranchiseId == franchiseId).ToListAsync())
-                                          .OrderByDescending(franchiseHallOfFame => franchiseHallOfFame.Person.DisplayName);
+        return (await FranchiseHallOfFames.Where(franchiseHallOfFame => franchiseHallOfFame.FranchiseId == franchiseId)
+                                          .AsNoTracking()
+                                          .ToListAsync())
+                      .OrderByDescending(franchiseHallOfFame => franchiseHallOfFame.Person.DisplayName);
     }
 }

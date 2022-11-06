@@ -11,6 +11,8 @@ public class DraftRepository : DomainRepository<Draft>, IDraftRepository
 
     public async Task<IEnumerable<Draft>> GetAll(int franchiseId)
     {
-        return await Drafts.Where(draft => draft.FranchiseId == franchiseId).ToListAsync();
+        return await Drafts.Where(draft => draft.FranchiseId == franchiseId)
+                           .AsNoTracking()
+                           .ToListAsync();
     }
 }

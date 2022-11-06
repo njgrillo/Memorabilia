@@ -9,7 +9,8 @@ public class TeamChampionshipRepository : DomainRepository<Champion>, ITeamChamp
     public async Task<IEnumerable<Champion>> GetAll(int? teamId = null)
     {
         return teamId.HasValue
-            ? await Items.Where(champion => champion.TeamId == teamId).ToListAsync()
+            ? await Items.Where(champion => champion.TeamId == teamId)
+                         .ToListAsync()
             : await Items.ToListAsync();
     }
 }

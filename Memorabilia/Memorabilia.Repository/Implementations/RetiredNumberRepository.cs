@@ -11,7 +11,9 @@ public class RetiredNumberRepository : DomainRepository<RetiredNumber>, IRetired
 
     public async Task<IEnumerable<RetiredNumber>> GetAll(int franchiseId)
     {
-        return (await RetiredNumbers.Where(retiredNumber => retiredNumber.FranchiseId == franchiseId).ToListAsync())
-                                    .OrderBy(retiredNumber => retiredNumber.Person.DisplayName);
+        return (await RetiredNumbers.Where(retiredNumber => retiredNumber.FranchiseId == franchiseId)
+                                    .AsNoTracking()
+                                    .ToListAsync())
+                  .OrderBy(retiredNumber => retiredNumber.Person.DisplayName);
     }
 }
