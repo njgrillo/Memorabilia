@@ -67,7 +67,7 @@ public class MemorabiliaItemViewModel
         }
     }
 
-    public string ImagePath => !_memorabilia.Images.Any() 
+    public string ImageFileName => !_memorabilia.Images.Any() 
         ? Domain.Constants.ImagePath.ImageNotAvailable
         : _memorabilia.Images.FirstOrDefault(image => image.ImageTypeId == Domain.Constants.ImageType.Primary.Id)?.FilePath ?? _memorabilia.Images.First().FilePath;
 
@@ -79,9 +79,7 @@ public class MemorabiliaItemViewModel
 
     public DateTime? LastModifiedDate => _memorabilia.LastModifiedDate;
 
-    public int? LevelTypeId => _memorabilia?.LevelType?.Id;
-
-    public string MemorabiliaImagePath => $"data:image/jpg;base64,{Convert.ToBase64String(File.ReadAllBytes(ImagePath))}";
+    public int? LevelTypeId => _memorabilia?.LevelType?.Id;    
 
     public string Note => _memorabilia.Note;
 

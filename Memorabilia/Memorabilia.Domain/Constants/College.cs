@@ -141,6 +141,7 @@ public sealed class College : DomainItemConstant
     public static readonly College Louisville = new(38, "Louisville", "UofL");
     public static readonly College LowerColumbiaCollege = new(176, "Lower Columbia College", "LCC");
     public static readonly College LoyolaMarymount = new (147, "Loyola Marymount", "LMU");
+    public static readonly College Maine = new (317, "Maine", "UMaine");
     public static readonly College MariettaCollege = new (212, "Marietta College", "MC");
     public static readonly College Marshall = new(11, "Marshall", string.Empty);
     public static readonly College Maryland = new(149, "Maryland", "UMD");
@@ -454,6 +455,7 @@ public sealed class College : DomainItemConstant
         Louisville,
         LowerColumbiaCollege,
         LoyolaMarymount,
+        Maine,
         MariettaCollege,
         Marshall,
         Maryland,

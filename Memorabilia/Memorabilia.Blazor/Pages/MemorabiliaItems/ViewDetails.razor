@@ -36,7 +36,7 @@
                                           Elevation="5" 
                                           Height="200"
                                           ObjectFit="@ObjectFit.Cover"
-                                          Src="@context.MemorabiliaImagePath"
+                                          Src="@(GetImageData(context.ImageFileName))"
                                           Width="200" />
                             </MudTooltip> 
                         </MudTd>
@@ -118,7 +118,7 @@
                                                                   Elevation="5" 
                                                                   Height="200"
                                                                   ObjectFit="@ObjectFit.Cover"
-                                                                  Src="@autograph.AutographImagePath"
+                                                                  Src="@(GetImageData(autograph.AutographImagePath))"
                                                                   Width="200" />
                                                     </MudTooltip> 
                                                 </MudTd>

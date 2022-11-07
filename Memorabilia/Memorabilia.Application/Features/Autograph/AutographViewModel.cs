@@ -29,16 +29,7 @@ public class AutographViewModel : ViewModel
 
     public string AuthenticationTooltip => $"{Authentications.Count} Authentication(s)";
 
-    public string AutographImagePath
-    {
-        get
-        {
-            if (PrimaryImagePath.IsNullOrEmpty() || !File.Exists(PrimaryImagePath))
-                return ImagePath.ImageNotAvailable;
-
-            return $"data:image/jpeg;base64,{Convert.ToBase64String(File.ReadAllBytes(PrimaryImagePath))}";
-        }
-    }
+    public string AutographImagePath => !PrimaryImagePath.IsNullOrEmpty() ? PrimaryImagePath : ImagePath.ImageNotAvailable;
 
     public int ColorId => _autograph.ColorId;
 

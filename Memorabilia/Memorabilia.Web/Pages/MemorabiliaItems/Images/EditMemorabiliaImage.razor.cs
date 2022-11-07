@@ -3,16 +3,18 @@
     public partial class EditMemorabiliaImage : WebPage
     {
         [Inject]
-        public IWebHostEnvironment Environment { get; set; }
+        public IConfiguration Configuration { get; set; }
 
         [Parameter]
         public int MemorabiliaId { get; set; }
 
         protected string UploadPath { get; set; }
 
-        protected override void OnInitialized()
+        protected override async Task OnInitializedAsync()
         {
-            UploadPath = Environment.ContentRootPath;
+            var userId = await LocalStorage.GetAsync<int>("UserId");
+
+            UploadPath = Path.Combine(Configuration["MemorabiliaImageRootPath"], userId.Value.ToString());
         }
     }
 }

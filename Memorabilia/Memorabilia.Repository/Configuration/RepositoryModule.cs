@@ -1,6 +1,4 @@
-﻿using Memorabilia.Repository.Implementations;
-
-namespace Memorabilia.Repository.Configuration;
+﻿namespace Memorabilia.Repository.Configuration;
 
 public class RepositoryModule : Module
 {
@@ -18,6 +16,6 @@ public class RepositoryModule : Module
 
         builder.RegisterGeneric(typeof(DomainRepository<>))
            .As(typeof(IDomainRepository<>))
-           .InstancePerDependency();
+        .InstancePerDependency();
     }
 }

@@ -130,24 +130,20 @@ public partial class EditImages<TItem> : ComponentBase
         var images = new List<SaveImageViewModel>();
         var imageType = ImageType.Primary;
 
-        var directory = Path.Combine(UploadPath,
-                                             "wwwroot/userimages",
-                                             UserId.ToString());
-
-        if (!Directory.Exists(directory))
-            Directory.CreateDirectory(directory);
+        if (!Directory.Exists(UploadPath))
+            Directory.CreateDirectory(UploadPath);
 
         foreach (var file in _files)
         {
             try
             {   
                 var fileName = Path.GetRandomFileName();
-                var path = Path.Combine(directory, fileName);
+                var path = Path.Combine(UploadPath, fileName);
 
                 await using FileStream fs = new(path, FileMode.Create);
                 await file.OpenReadStream(MaximumFileSize).CopyToAsync(fs);
 
-                images.Add(new SaveImageViewModel(new ImageViewModel(new Domain.Entities.Image($"wwwroot/userimages/{UserId}/{fileName}", imageType.Id)), file.Name));
+                images.Add(new SaveImageViewModel(new ImageViewModel(new Domain.Entities.Image(fileName, imageType.Id)), file.Name));
 
                 imageType = ImageType.Secondary;
             }

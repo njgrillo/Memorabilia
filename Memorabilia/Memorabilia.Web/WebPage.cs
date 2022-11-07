@@ -28,7 +28,7 @@ public abstract class WebPage : ComponentBase
         }
     }
 
-    private async Task<int> GetUserId()
+    protected async Task<int> GetUserId()
     {
         var userId = await LocalStorage.GetAsync<int>("UserId");
 

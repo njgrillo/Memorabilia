@@ -74,12 +74,18 @@
         <DivRowCol3>
             <Content>
                 <MudDatePicker @bind-Date="ViewModel.BirthDate"
+                               DateFormat="MM/dd/yyyy"
+                               Editable="true"
                                Label="Birth Date"
+                               Mask="@(new DateMask("MM/dd/yyyy"))"
                                Variant="Variant.Outlined" />
             </Content>
             <ContentColumn2>
                 <MudDatePicker @bind-Date="ViewModel.DeathDate"
+                               DateFormat="MM/dd/yyyy"
+                               Editable="true"
                                Label="Death Date"
+                               Mask="@(new DateMask("MM/dd/yyyy"))"
                                Variant="Variant.Outlined" />
             </ContentColumn2>
         </DivRowCol3>

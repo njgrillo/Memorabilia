@@ -10,7 +10,7 @@
                     <Content>
                         <MudImage Class="rounded-lg" 
                                   Elevation="5" 
-                                  Height="150"
+                                  Height="150"                                  
                                   ObjectFit="@ObjectFit.Cover"
                                   Src="images/images.png"
                                   Width="150" />
@@ -49,6 +49,7 @@
                                          FileName="@image.FileName"
                                          HasPrimary="true"
                                          ImageFilePath="@image.FilePath"
+                                         ImageRootFilePath="@UploadPath"
                                          ImageType="image.ImageType"
                                          IsPrimary="image.IsPrimary"
                                          OnPrimarySet="PrimarySet"

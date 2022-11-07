@@ -20,6 +20,9 @@ public partial class ViewDetails : ComponentBase
     public ISnackbar Snackbar { get; set; }
 
     [Parameter]
+    public string MemorabiliaImageRootPath { get; set; }
+
+    [Parameter]
     public int UserId { get; set; }
 
     private List<MemorabiliaItemViewModel> _initialItems;
@@ -90,6 +93,14 @@ public partial class ViewDetails : ComponentBase
             return;
 
         await DeleteMemorabiliaItem(id);
+    }
+
+    private string GetImageData(string fileName)
+    {
+        if (fileName == ImagePath.ImageNotAvailable)
+            return ImagePath.ImageNotAvailable;
+
+        return $"data:image/jpg;base64,{Convert.ToBase64String(File.ReadAllBytes(Path.Combine(MemorabiliaImageRootPath, fileName)))}";
     }
 
     private void ToggleChildContent(int memorabiliaItemId)

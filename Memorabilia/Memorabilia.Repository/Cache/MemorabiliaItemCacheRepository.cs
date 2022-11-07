@@ -2,9 +2,9 @@
 
 public class MemorabiliaItemCacheRepository : MemorabiliaCacheRepository<Domain.Entities.Memorabilia>, IMemorabiliaItemRepository
 {
-    private readonly IMemorabiliaItemRepository _memorabiliaItemRepository;
+    private readonly MemorabiliaItemRepository _memorabiliaItemRepository;
 
-    public MemorabiliaItemCacheRepository(MemorabiliaContext context, IMemorabiliaItemRepository memorabiliaItemRepository, IMemoryCache memoryCache) 
+    public MemorabiliaItemCacheRepository(MemorabiliaContext context, MemorabiliaItemRepository memorabiliaItemRepository, IMemoryCache memoryCache) 
         : base(context, memoryCache) 
     { 
         _memorabiliaItemRepository = memorabiliaItemRepository; 
@@ -15,7 +15,7 @@ public class MemorabiliaItemCacheRepository : MemorabiliaCacheRepository<Domain.
         return GetAll($"MemorabiliaItem_GetAll_{userId}", entry =>
         {
             entry.SetAbsoluteExpiration(TimeSpan.FromDays(1));
-            return _memorabiliaItemRepository.GetAll();
+            return _memorabiliaItemRepository.GetAll(userId);
         });
     }
 

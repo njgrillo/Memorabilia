@@ -3,8 +3,11 @@
 
 @inherits WebPage
 
+@inject IConfiguration Configuration
+
 <PageLoader>
     <Content>
-        <ViewDetails UserId="@UserId" />
+        <ViewDetails MemorabiliaImageRootPath="@($"{Path.Combine(Configuration["MemorabiliaImageRootPath"], UserId.ToString())}")" 
+                     UserId="@UserId" />
     </Content>
 </PageLoader>

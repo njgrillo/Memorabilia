@@ -239,8 +239,6 @@ public class Person : Framework.Library.Domain.Entity.DomainEntity
             return;
         }
 
-        AllStars.RemoveAll(allStar => years.Contains(allStar.Year));
-
         var existingYears = AllStars.Select(allStar => allStar.Year);
 
         foreach (var year in years.Where(year => !existingYears.Contains(year)))
