@@ -1,9 +1,11 @@
-﻿<MudTooltip Text="@TooltipText">
+﻿@inherits ImagePage
+
+<MudTooltip Text="@TooltipText">
     <MudCard>
         <MudCardMedia @onclick="OnImageClick"
                       Class="rounded-sm can-click"
                       Height="100"
-                      Image="@ImagePath" />
+                      Image="@(GetImageData(ImageFileName))" />
         <MudCardContent>
             <MudText Typo="Typo.body2">@Title</MudText>
         </MudCardContent>

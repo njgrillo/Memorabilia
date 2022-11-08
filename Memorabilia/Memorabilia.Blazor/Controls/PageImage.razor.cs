@@ -2,8 +2,8 @@
 
 namespace Memorabilia.Blazor.Controls;
 
-public partial class PageImage : ComponentBase
+public partial class PageImage : ImagePage
 {
     [Parameter]
-    public string ImagePath { get; set; }
+    public string ImageFileName { get; set; }
 }

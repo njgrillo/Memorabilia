@@ -1,9 +1,10 @@
 ﻿@inherits AutographItem<SaveAuthenticationViewModel>
 
 <EditPage ContinueNavigationPath="@AuthenticationsViewModel.ContinueNavigationPath"
+          DomainImageRootPath="@DomainImageRootPath"
           EditMode="AuthenticationsViewModel.EditModeType"
           ExitNavigationPath="@AuthenticationsViewModel.ExitNavigationPath"
-          ImagePath="@AuthenticationsViewModel.ImagePath"
+          ImageFileName="@AuthenticationsViewModel.ImageFileName"
           ItemName="@AuthenticationsViewModel.PageTitle"
           Model="AuthenticationsViewModel"
           OnLoad="OnLoad"

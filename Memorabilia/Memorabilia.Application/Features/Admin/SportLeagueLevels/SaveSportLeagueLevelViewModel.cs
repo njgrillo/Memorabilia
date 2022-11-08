@@ -20,7 +20,7 @@ public class SaveSportLeagueLevelViewModel : SaveViewModel
 
     public override string ExitNavigationPath => AdminDomainItem.SportLeagueLevels.Page;
 
-    public string ImagePath => AdminDomainItem.SportLeagueLevels.ImagePath;
+    public string ImageFileName => AdminDomainItem.SportLeagueLevels.ImageFileName;
 
     public override string ItemTitle => AdminDomainItem.SportLeagueLevels.Item;
 

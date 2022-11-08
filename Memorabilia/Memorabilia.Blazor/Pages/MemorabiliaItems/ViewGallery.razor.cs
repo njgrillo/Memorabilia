@@ -1,23 +1,17 @@
 ﻿#nullable disable
 
-using Memorabilia.Application.Features.Services.Gallery.Memorabilia;
-
 namespace Memorabilia.Blazor.Pages.MemorabiliaItems;
 
-public partial class ViewGallery : ComponentBase
+public partial class ViewGallery : ImagePage
 {
     [Inject]
     public IGalleryService GalleryService { get; set; }
-
-    [Inject]
-    public QueryRouter QueryRouter { get; set; }
 
     [Parameter]
     public int UserId { get; set; }
 
     private List<MemorabiliaGalleryItemViewModel> _displayedItems;
     private bool _displayLoadMoreButton;
-    private bool _displaySpinner;
     private int _index = 12;
     private List<MemorabiliaGalleryItemViewModel> _initialItems;
     private MemorabiliaGalleryItemsViewModel _viewModel;

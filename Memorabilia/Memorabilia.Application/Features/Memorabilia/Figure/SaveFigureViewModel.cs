@@ -36,7 +36,7 @@ public class SaveFigureViewModel : SaveItemViewModel
 
     public FigureType[] FigureTypes => FigureType.All;
 
-    public override string ImagePath => Domain.Constants.ImagePath.Figure;
+    public override string ImageFileName => Domain.Constants.ImageFileName.Figure;
 
     public override ItemType ItemType => ItemType.Figure;
 

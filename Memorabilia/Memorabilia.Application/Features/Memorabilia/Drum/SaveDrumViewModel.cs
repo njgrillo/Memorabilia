@@ -27,7 +27,7 @@ public class SaveDrumViewModel : SaveItemViewModel
 
     public bool HasPerson => People.Any();
 
-    public override string ImagePath => Domain.Constants.ImagePath.Drum;
+    public override string ImageFileName => Domain.Constants.ImageFileName.Drum;
 
     public override ItemType ItemType => ItemType.Drum;
 

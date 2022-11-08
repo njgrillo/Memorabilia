@@ -35,7 +35,7 @@ public class SaveBammerViewModel : SaveItemViewModel
 
     public override string ExitNavigationPath => "Memorabilia/Items";
 
-    public override string ImagePath => Domain.Constants.ImagePath.Bammer;
+    public override string ImageFileName => Domain.Constants.ImageFileName.Bammer;
 
     public bool InPackage { get; set; }
 

@@ -1,5 +1,4 @@
 ﻿using Memorabilia.Domain.Constants;
-using System.Text;
 
 namespace Memorabilia.Application.Features.Memorabilia;
 
@@ -21,24 +20,21 @@ public class MemorabiliaGalleryItemViewModel
 
     public int Id => _memorabilia.Id;
 
-    public Domain.Entities.Memorabilia Memorabilia => _memorabilia;
-
-    public string PrimaryImageNavigationPath => $"/Memorabilia/Image/{EditModeType.Update.Name}/{Id}";
-
-    public string PrimaryImagePath
+    public string ImageFileName
     {
         get
         {
-            var primaryImagePath = _memorabilia.Images.Any()
-                ? _memorabilia.Images.SingleOrDefault(image => image.ImageTypeId == ImageType.Primary.Id)?.FilePath ?? ImagePath.ImageNotAvailable
-                : ImagePath.ImageNotAvailable;
+            var imageFileName = _memorabilia.Images.Any()
+                ? _memorabilia.Images.SingleOrDefault(image => image.ImageTypeId == ImageType.Primary.Id)?.FilePath ?? Domain.Constants.ImageFileName.ImageNotAvailable
+                : Domain.Constants.ImageFileName.ImageNotAvailable;
 
-            if (primaryImagePath.IsNullOrEmpty() || !File.Exists(primaryImagePath))
-                primaryImagePath = ImagePath.ImageNotAvailable;
-
-            return $"data:image/jpeg;base64,{Convert.ToBase64String(File.ReadAllBytes(primaryImagePath))}";
+            return !imageFileName.IsNullOrEmpty() ? imageFileName : Domain.Constants.ImageFileName.ImageNotAvailable;
         }
     }
+
+    public Domain.Entities.Memorabilia Memorabilia => _memorabilia;
+
+    public string PrimaryImageNavigationPath => $"/Memorabilia/Image/{EditModeType.Update.Name}/{Id}";    
 
     public string Subtitle => string.Empty;
 

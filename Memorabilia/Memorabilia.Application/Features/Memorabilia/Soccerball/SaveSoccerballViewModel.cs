@@ -45,7 +45,7 @@ public class SaveSoccerballViewModel : SaveItemViewModel
     [Range(1, int.MaxValue, ErrorMessage = "Match Style Type is required.")]
     public int GameStyleTypeId { get; set; } = GameStyleType.None.Id;
 
-    public override string ImagePath => Domain.Constants.ImagePath.Soccerball;
+    public override string ImageFileName => Domain.Constants.ImageFileName.Soccerball;
 
     public override ItemType ItemType => ItemType.Soccerball;
 

@@ -28,7 +28,7 @@ public class SaveBookViewModel : SaveItemViewModel
 
     public bool HardCover { get; set; }
 
-    public override string ImagePath => Domain.Constants.ImagePath.Book;
+    public override string ImageFileName => Domain.Constants.ImageFileName.Book;
 
     public override ItemType ItemType => ItemType.Book;
 

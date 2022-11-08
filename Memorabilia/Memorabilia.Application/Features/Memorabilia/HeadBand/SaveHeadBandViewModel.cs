@@ -44,7 +44,7 @@ public class SaveHeadBandViewModel : SaveItemViewModel
     [Range(1, int.MaxValue, ErrorMessage = "Game Style Type is required.")]
     public int GameStyleTypeId { get; set; } = GameStyleType.None.Id;
 
-    public override string ImagePath => Domain.Constants.ImagePath.HeadBand;
+    public override string ImageFileName => Domain.Constants.ImageFileName.HeadBand;
 
     public override ItemType ItemType => ItemType.HeadBand;
 

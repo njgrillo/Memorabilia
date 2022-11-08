@@ -25,7 +25,7 @@ public class SaveGuitarViewModel : SaveItemViewModel
 
     public override string ExitNavigationPath => "Memorabilia/Items";
 
-    public override string ImagePath => Domain.Constants.ImagePath.Guitar;
+    public override string ImageFileName => Domain.Constants.ImageFileName.Guitar;
 
     public override ItemType ItemType => ItemType.Guitar;
 

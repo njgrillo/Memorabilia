@@ -2,13 +2,10 @@
 
 namespace Memorabilia.Blazor.Controls.MemorabiliaItem;
 
-public partial class MemorabiliaItemGalleryCard : ComponentBase
+public partial class MemorabiliaItemGalleryCard : ImagePage
 {
-    [Inject]
-    public NavigationManager NavigationManager { get; set; }
-
     [Parameter]
-    public string Description { get; set; }
+    public string Description { get; set; }  
 
     [Parameter]
     public string EditNavigationPath { get; set; }
@@ -17,10 +14,10 @@ public partial class MemorabiliaItemGalleryCard : ComponentBase
     public MemorabiliaGalleryItemViewModel MemorabiliaItem { get; set; }
 
     [Parameter]
-    public string PrimaryImageNavigationPath { get; set; }
+    public string PrimaryImageFileName { get; set; }
 
     [Parameter]
-    public string PrimaryImagePath { get; set; }
+    public string PrimaryImageNavigationPath { get; set; }    
 
     [Parameter]
     public string Subtitle { get; set; }

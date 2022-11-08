@@ -37,7 +37,7 @@ public class SaveBobbleheadViewModel : SaveItemViewModel
 
     public bool HasBox { get; set; }
 
-    public override string ImagePath => Domain.Constants.ImagePath.Bobblehead;
+    public override string ImageFileName => Domain.Constants.ImageFileName.Bobblehead;
 
     public override ItemType ItemType => ItemType.Bobble;
 

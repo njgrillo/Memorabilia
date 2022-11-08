@@ -34,7 +34,7 @@ public class SaveMagazineViewModel : SaveItemViewModel
 
     public bool Framed { get; set; }
 
-    public override string ImagePath => Domain.Constants.ImagePath.Magazine;
+    public override string ImageFileName => Domain.Constants.ImageFileName.Magazine;
 
     public override ItemType ItemType => ItemType.Magazine;
 

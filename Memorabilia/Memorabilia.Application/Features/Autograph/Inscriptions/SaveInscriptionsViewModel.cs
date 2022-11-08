@@ -29,7 +29,7 @@ public class SaveInscriptionsViewModel : SaveViewModel
 
     public override string ExitNavigationPath => "Memorabilia/Items";
 
-    public string ImagePath => AdminDomainItem.InscriptionTypes.ImagePath;
+    public string ImageFileName => AdminDomainItem.InscriptionTypes.ImageFileName;
 
     public List<SaveInscriptionViewModel> Inscriptions { get; set; } = new();
 

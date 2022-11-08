@@ -1,5 +1,7 @@
 ﻿@typeparam TItem
 
+@inherits ImagePage
+
 <div style="border: 1px solid black; margin-top: 2%; margin-bottom: 2%; margin-left: 2%; margin-right: 2%;">
     <EditForm Model="Model" OnValidSubmit="HandleValidSubmit">
         <DataAnnotationsValidator />
@@ -12,7 +14,7 @@
                                   Elevation="5" 
                                   Height="150"                                  
                                   ObjectFit="@ObjectFit.Cover"
-                                  Src="images/images.png"
+                                  Src="@(GetImageData(Domain.Constants.ImageFileName.Images))"
                                   Width="150" />
                     </Content>
                 </DivRowCol12Center>
@@ -46,11 +48,12 @@
                     <Iterations Items="Images" Context="image">
                         <div class="col-lg-3">
                             <ImageEditor CanRemove="true"
-                                         FileName="@image.FileName"
+                                         DomainImageRootPath="@DomainImageRootPath"
                                          HasPrimary="true"
-                                         ImageFilePath="@image.FilePath"
-                                         ImageRootFilePath="@UploadPath"
+                                         ImageFileName="@image.FilePath"
+                                         ImageRootPath="@UploadPath"
                                          ImageType="image.ImageType"
+                                         IsDomainImage="false"
                                          IsPrimary="image.IsPrimary"
                                          OnPrimarySet="PrimarySet"
                                          OnRemove="Remove" />  

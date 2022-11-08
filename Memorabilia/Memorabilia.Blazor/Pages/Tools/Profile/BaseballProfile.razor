@@ -1,4 +1,6 @@
-﻿<DivPad2>
+﻿@inherits ImagePage
+
+<DivPad2>
     <Content>
         <DivRowCol4>
             <Content>
@@ -36,7 +38,7 @@
                 <MudImage Class="rounded-lg ma-4"
                           Elevation="25"
                           Height="650" 
-                          Src="@(GetImage(_viewModel.PersonImagePath))"
+                          Src="@(GetImageData(_viewModel.PersonImagePath))"
                           Width="500"   />
             </Content>
             <ContentColumn2>

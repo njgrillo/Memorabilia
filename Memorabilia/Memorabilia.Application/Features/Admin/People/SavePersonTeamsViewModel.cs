@@ -23,7 +23,7 @@ public class SavePersonTeamsViewModel : SaveViewModel
 
     public override EditModeType EditModeType => Teams.Any() ? EditModeType.Update : EditModeType.Add;
 
-    public string ImagePath => Domain.Constants.ImagePath.Athletes;
+    public string ImageFileName => Domain.Constants.ImageFileName.Athletes;
 
     public override string ItemTitle => AdminDomainItem.Teams.Title;
 

@@ -20,7 +20,7 @@ public partial class PersonImageEditor : EditPersonItem<SavePersonImageViewModel
     protected async Task OnLoad()
     {
         ViewModel = new SavePersonImageViewModel(await Get(new GetPersonImage(PersonId)));
-        _hasImage = !ViewModel.ImagePath.IsNullOrEmpty();
+        _hasImage = !ViewModel.PersonImageFileName.IsNullOrEmpty();
     }
 
     private async Task LoadFile(InputFileChangeEventArgs e)
@@ -38,7 +38,7 @@ public partial class PersonImageEditor : EditPersonItem<SavePersonImageViewModel
             await using FileStream fs = new(path, FileMode.Create);
             await file.OpenReadStream(5120000).CopyToAsync(fs);
 
-            ViewModel.ImagePath = fileName;
+            ViewModel.PersonImageFileName = fileName;
             _hasImage = true;
         }
         catch (Exception ex)
@@ -54,7 +54,7 @@ public partial class PersonImageEditor : EditPersonItem<SavePersonImageViewModel
 
     private void Remove()
     {
-        ViewModel.ImagePath = null;
+        ViewModel.PersonImageFileName = null;
         _hasImage = false;
     }
 }

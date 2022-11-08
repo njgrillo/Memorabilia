@@ -1,9 +1,11 @@
 ﻿@page "/Tools/Baseball/HallOfFamers"
 
-@inject IConfiguration Configuration
+@inherits DesktopPage
 
 <PageLoader>
     <Content>
-        <ViewHallOfFamers PersonImageRootPath="@Configuration["PersonImageRootPath"]" />
+        <ViewHallOfFamers DomainImageRootPath="@DomainImageRootPath"
+                          ImageRootPath="@PersonImageRootPath"
+                          IsDomainImage="false" />
     </Content>
 </PageLoader>

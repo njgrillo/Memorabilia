@@ -2,7 +2,7 @@
 
 namespace Memorabilia.Blazor.Pages.MemorabiliaItems.Images;
 
-public partial class MemorabiliaImageEditor : CommandQuery
+public partial class MemorabiliaImageEditor : ImagePage
 {
     [Parameter]
     public int MemorabiliaId { get; set; }

@@ -44,7 +44,7 @@ public class SaveWristBandViewModel : SaveItemViewModel
     [Range(1, int.MaxValue, ErrorMessage = "Game Style Type is required.")]
     public int GameStyleTypeId { get; set; } = GameStyleType.None.Id;
 
-    public override string ImagePath => Domain.Constants.ImagePath.WristBand;
+    public override string ImageFileName => Domain.Constants.ImageFileName.WristBand;
 
     public override ItemType ItemType => ItemType.WristBand;
 

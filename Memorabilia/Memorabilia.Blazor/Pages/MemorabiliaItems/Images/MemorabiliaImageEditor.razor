@@ -1,4 +1,4 @@
-﻿@inherits CommandQuery
+﻿@inherits ImagePage
 
 <Page OnLoad="OnLoad">
     <Content>
@@ -9,6 +9,7 @@
                                  MemorabiliaItemStep="ViewModel.MemorabiliaItemStep" />
         <EditImages @ref="EditImages"              
                     ContinueNavigationPath="@ViewModel.ContinueNavigationPath"
+                    DomainImageRootPath="@DomainImageRootPath"
                     ExitNavigationPath="@ViewModel.ExitNavigationPath"
                     Images="@ViewModel.Images"
                     MaximumAllowedFiles="10"

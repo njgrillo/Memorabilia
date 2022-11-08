@@ -5,11 +5,14 @@ namespace Memorabilia.Blazor.Pages.Admin;
 public abstract class EditDomainItem<T> : CommandQuery where T : DomainItemConstant
 {
     [Parameter]
+    public string DomainImageRootPath { get; set; }
+
+    [Parameter]
     public int Id { get; set; }
 
     protected virtual string DomainTypeName { get; } = type.Name.ToSentence();
 
-    protected virtual string ImagePath { get; } = $"images/{type.Name.ToPlural()}.jpg";
+    protected virtual string ImageFileName { get; } = $"{type.Name.ToPlural()}.jpg";
 
     protected virtual string NavigationPath { get; } = $"{type.Name.ToPlural()}";
 
@@ -19,14 +22,14 @@ public abstract class EditDomainItem<T> : CommandQuery where T : DomainItemConst
 
     protected override void OnInitialized()
     {
-       ViewModel = new SaveDomainViewModel(Id, DomainTypeName, ImagePath, NavigationPath);
+       ViewModel = new SaveDomainViewModel(Id, DomainTypeName, ImageFileName, NavigationPath);
     }
 
     protected async Task OnLoad(IRequest<DomainViewModel> request)
     {
         ViewModel = new SaveDomainViewModel(await QueryRouter.Send(request),
                                             DomainTypeName,
-                                            ImagePath,
+                                            ImageFileName,
                                             NavigationPath);
     }
 

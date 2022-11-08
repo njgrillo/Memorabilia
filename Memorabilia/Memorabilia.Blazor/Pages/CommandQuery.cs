@@ -2,7 +2,7 @@
 
 namespace Memorabilia.Blazor.Pages;
 
-public abstract class CommandQuery : ComponentBase
+public abstract class CommandQuery : NavigationItem
 {
     [Inject]
     public CommandRouter CommandRouter { get; set; }

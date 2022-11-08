@@ -21,7 +21,7 @@ public class SavePersonOccupationsViewModel : SaveViewModel
 
     public bool HasAthleteOccupation => Occupations.Any(occupation => Occupation.IsSportOccupation(occupation.OccupationId));
 
-    public string ImagePath => AdminDomainItem.Occupations.ImagePath;
+    public string ImageFileName => AdminDomainItem.Occupations.ImageFileName;
 
     public override string ItemTitle => AdminDomainItem.Occupations.Title; 
 

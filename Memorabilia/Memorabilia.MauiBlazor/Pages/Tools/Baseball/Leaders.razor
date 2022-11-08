@@ -1,9 +1,11 @@
 ﻿@page "/Tools/Baseball/Leaders"
 
-@inject IConfiguration Configuration
+@inherits DesktopPage
 
 <PageLoader>
     <Content>
-        <ViewLeaders PersonImageRootPath="@Configuration["PersonImageRootPath"]" />
+        <ViewLeaders DomainImageRootPath="@DomainImageRootPath" 
+                     ImageRootPath="@PersonImageRootPath"
+                     IsDomainImage="false" />
     </Content>
 </PageLoader>

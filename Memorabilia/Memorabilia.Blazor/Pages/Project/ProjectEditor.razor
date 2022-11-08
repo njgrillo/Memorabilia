@@ -1,7 +1,11 @@
-﻿<EditPage ContinueNavigationPath="@_viewModel.ContinueNavigationPath"
+﻿@inherits ImagePage
+
+<EditPage ContinueNavigationPath="@_viewModel.ContinueNavigationPath"
+          DomainImageRootPath="@DomainImageRootPath"
           EditMode="_viewModel.EditModeType" 
           ExitNavigationPath="@_viewModel.ExitNavigationPath"
-          ImagePath="@_viewModel.ImagePath" 
+          ImageFileName="@_viewModel.ImageFileName" 
+          ImageRootPath="@ImageRootPath"
           ItemName="@_viewModel.PageTitle"
           Model="_viewModel"
           OnLoad="OnLoad"
@@ -131,7 +135,7 @@
                                       Elevation="5" 
                                       Height="200"
                                       ObjectFit="@ObjectFit.Cover"
-                                      Src="@(GetImage(projectPerson.Person.PersonImagePath))"
+                                      Src="@(GetImageData(projectPerson.Person.PersonImagePath))"
                                       Width="200" />
                         </MudTd>
                         <MudTd DataLabel="Person">@projectPerson.Person.DisplayName</MudTd>

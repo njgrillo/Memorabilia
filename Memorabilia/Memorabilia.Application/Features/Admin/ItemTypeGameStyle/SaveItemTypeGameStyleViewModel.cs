@@ -21,7 +21,7 @@ public class SaveItemTypeGameStyleViewModel : SaveViewModel
 
     public GameStyleType[] GameStyleTypes => GameStyleType.All;
 
-    public string ImagePath => AdminDomainItem.ItemTypeGameStyles.ImagePath;
+    public string ImageFileName => AdminDomainItem.ItemTypeGameStyles.ImageFileName;
 
     public override string ItemTitle => AdminDomainItem.ItemTypeGameStyles.Item;
 

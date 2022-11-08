@@ -44,7 +44,7 @@ public class SaveShirtViewModel : SaveItemViewModel
     [Range(1, int.MaxValue, ErrorMessage = "Game Style Type is required.")]
     public int GameStyleTypeId { get; set; } = GameStyleType.None.Id;
 
-    public override string ImagePath => Domain.Constants.ImagePath.Shirt;
+    public override string ImageFileName => Domain.Constants.ImageFileName.Shirt;
 
     public bool IsGameWorthly => GameStyleType.IsGameWorthly(GameStyleType);
 

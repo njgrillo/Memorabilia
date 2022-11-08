@@ -1,12 +1,16 @@
 ﻿@typeparam TItem
 
+@inherits ImagePage
+
 <Page OnLoad="Load">
     <Content>
         <PageHeader PageTitle="@PageTitle" />
         @TimelineContent
         <PageBorder>
             <Content>
-                <PageImage ImagePath="@ImagePath" />
+                <PageImage DomainImageRootPath="@DomainImageRootPath" 
+                           ImageFileName="@ImageFileName"
+                           ImageRootPath="@ImageRootPath" />
                 <EditForm Model="Model"
                           OnValidSubmit="HandleValidSubmit">
                     <DataAnnotationsValidator />

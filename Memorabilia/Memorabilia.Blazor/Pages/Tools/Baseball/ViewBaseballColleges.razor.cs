@@ -2,14 +2,8 @@
 
 namespace Memorabilia.Blazor.Pages.Tools.Baseball;
 
-public partial class ViewBaseballColleges : CommandQuery
+public partial class ViewBaseballColleges : ImagePage
 {
-    [Inject]
-    public NavigationManager NavigationManager { get; set; }
-
-    [Parameter]
-    public string PersonImageRootPath { get; set; }
-
     protected bool FilterFunc1(PersonCollegeViewModel viewModel) => FilterFunc(viewModel, Search);
     protected string Search;
 
@@ -22,15 +16,6 @@ public partial class ViewBaseballColleges : CommandQuery
                CultureInfo.CurrentCulture.CompareInfo.IndexOf(viewModel.PersonName,
                                                               search,
                                                               CompareOptions.IgnoreNonSpace) > -1;
-    }
-
-    protected string GetImage(string imagePath)
-    {
-        var path = imagePath == ImagePath.ImageNotAvailable
-                ? imagePath
-                : Path.Combine(PersonImageRootPath, imagePath);
-
-        return $"data:image/jpg;base64,{Convert.ToBase64String(File.ReadAllBytes(path))}";
     }
 
     private async Task OnInputChange(int collegeId)

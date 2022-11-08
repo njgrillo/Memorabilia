@@ -44,7 +44,7 @@ public class SaveShoeViewModel : SaveItemViewModel
 
     public int GameStyleTypeId { get; set; } = GameStyleType.None.Id;
 
-    public override string ImagePath => Domain.Constants.ImagePath.Shoe;
+    public override string ImageFileName => Domain.Constants.ImageFileName.Shoe;
 
     public override ItemType ItemType => ItemType.Shoe;
 

@@ -6,7 +6,7 @@ public class SaveItemViewModel : SaveViewModel
 {   
     public override string ContinueNavigationPath => $"Memorabilia/Image/{EditModeType.Update.Name}/{MemorabiliaId}";       
 
-    public virtual string ImagePath { get; set; }
+    public virtual string ImageFileName { get; set; }
 
     public virtual ItemType ItemType { get; set; }
 

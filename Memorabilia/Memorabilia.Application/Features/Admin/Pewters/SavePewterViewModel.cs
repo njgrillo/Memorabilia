@@ -10,7 +10,7 @@ public class SavePewterViewModel : SaveViewModel
     {
         FranchiseId = viewModel.FranchiseId;
         Id = viewModel.Id;
-        ImagePath = viewModel.ImagePath;
+        ImagePath = viewModel.ImageFileName;
         SizeId = viewModel.SizeId;
         TeamId = viewModel.TeamId;
     }
@@ -23,12 +23,12 @@ public class SavePewterViewModel : SaveViewModel
 
     public Franchise[] Franchises => Franchise.GetAll(SportLeagueLevel);
 
+    public string ImageFileName => AdminDomainItem.Pewters.ImageFileName;
+
     [Required]
     public string ImagePath { get; set; } 
 
-    public override string ItemTitle => AdminDomainItem.Pewters.Item;
-
-    public string PageImagePath => AdminDomainItem.Pewters.ImagePath;
+    public override string ItemTitle => AdminDomainItem.Pewters.Item;    
 
     public override string RoutePrefix => AdminDomainItem.Pewters.Page;
 

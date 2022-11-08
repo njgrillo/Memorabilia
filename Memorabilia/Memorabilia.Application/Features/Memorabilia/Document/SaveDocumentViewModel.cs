@@ -24,7 +24,7 @@ public class SaveDocumentViewModel : SaveItemViewModel
 
     public bool HasTeam => Teams.Any();
 
-    public override string ImagePath => Domain.Constants.ImagePath.Document;
+    public override string ImageFileName => Domain.Constants.ImageFileName.Document;
 
     public override ItemType ItemType => ItemType.Document;
    

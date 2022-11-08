@@ -15,7 +15,7 @@ public class SaveItemTypeSpotViewModel : SaveViewModel
 
     public override string ExitNavigationPath => AdminDomainItem.ItemTypeSpots.Page;
 
-    public string ImagePath => AdminDomainItem.ItemTypeSpots.ImagePath;
+    public string ImageFileName => AdminDomainItem.ItemTypeSpots.ImageFileName;
 
     public override string ItemTitle => AdminDomainItem.ItemTypeSpots.Item;
 

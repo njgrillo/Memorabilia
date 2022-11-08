@@ -20,7 +20,7 @@ public class SaveFranchiseViewModel : SaveViewModel
     [Required]
     public int FoundYear { get; set; } = 1900;
 
-    public string ImagePath => AdminDomainItem.Franchises.ImagePath;
+    public string ImageFileName => AdminDomainItem.Franchises.ImageFileName;
 
     public override string ItemTitle => AdminDomainItem.Franchises.Item;
 

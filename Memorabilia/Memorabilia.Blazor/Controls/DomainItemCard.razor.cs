@@ -2,16 +2,13 @@
 
 namespace Memorabilia.Blazor.Controls;
 
-public partial class DomainItemCard : ComponentBase
+public partial class DomainItemCard : ImagePage
 {
-    [Inject]
-    public NavigationManager NavigationManager { get; set; }
-
     [Parameter]
     public string Description { get; set; }
 
     [Parameter]
-    public string ImagePath { get; set; }
+    public string ImageFileName { get; set; }
 
     [Parameter]
     public string Page { get; set; }

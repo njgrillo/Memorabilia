@@ -1,8 +1,11 @@
-﻿<EditPage ContinueNavigationPath="@_viewModel.ContinueNavigationPath"
+﻿@inherits ImagePage
+
+<EditPage ContinueNavigationPath="@_viewModel.ContinueNavigationPath"
+          DomainImageRootPath="@DomainImageRootPath"  
           DisplayFooter="false"
           EditMode="_viewModel.EditModeType"
           ExitNavigationPath="@_viewModel.ExitNavigationPath"
-          ImagePath="@_viewModel.ImagePath"
+          ImageFileName="@_viewModel.ImageFileName"
           ItemName="@_viewModel.ItemTypeName"
           Model="_viewModel"
           OnLoad="OnLoad"

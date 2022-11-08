@@ -24,7 +24,7 @@ public class SaveJerseyNumberViewModel : SaveItemViewModel
 
     public override string ExitNavigationPath => "Memorabilia/Items";
 
-    public override string ImagePath => Domain.Constants.ImagePath.JerseyNumber;
+    public override string ImageFileName => Domain.Constants.ImageFileName.JerseyNumber;
 
     public override ItemType ItemType => ItemType.JerseyNumber;
    

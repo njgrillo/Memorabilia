@@ -1,7 +1,10 @@
-﻿<DivPad5>
+﻿@inherits ImagePage
+
+<DivPad5>
     <Content>
         <MudCard>
-            <MudCardMedia Height="300" Image="@ImagePath" />
+            <MudCardMedia Height="300" 
+                          Image="@(GetImageData(ImageFileName))" />
             <MudCardContent>
                 <MudText Typo="Typo.h5">@Title</MudText>
                 <MudText Typo="Typo.body2">@Description</MudText>

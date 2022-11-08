@@ -51,7 +51,7 @@ public class SaveGloveViewModel : SaveItemViewModel
 
     public GloveType[] GloveTypes => GloveType.All;
 
-    public override string ImagePath => Domain.Constants.ImagePath.Glove;
+    public override string ImageFileName => Domain.Constants.ImageFileName.Glove;
 
     public override ItemType ItemType => ItemType.Glove;
 

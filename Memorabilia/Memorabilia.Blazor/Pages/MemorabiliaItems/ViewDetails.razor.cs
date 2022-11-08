@@ -2,25 +2,13 @@
 
 namespace Memorabilia.Blazor.Pages.MemorabiliaItems;
 
-public partial class ViewDetails : ComponentBase
+public partial class ViewDetails : ImagePage
 {
-    [Inject]
-    public CommandRouter CommandRouter { get; set; }
-
     [Inject]
     public IDialogService DialogService { get; set; }
 
     [Inject]
-    public NavigationManager NavigationManager { get; set; }
-
-    [Inject]
-    public QueryRouter QueryRouter { get; set; }
-
-    [Inject]
     public ISnackbar Snackbar { get; set; }
-
-    [Parameter]
-    public string MemorabiliaImageRootPath { get; set; }
 
     [Parameter]
     public int UserId { get; set; }
@@ -93,14 +81,6 @@ public partial class ViewDetails : ComponentBase
             return;
 
         await DeleteMemorabiliaItem(id);
-    }
-
-    private string GetImageData(string fileName)
-    {
-        if (fileName == ImagePath.ImageNotAvailable)
-            return ImagePath.ImageNotAvailable;
-
-        return $"data:image/jpg;base64,{Convert.ToBase64String(File.ReadAllBytes(Path.Combine(MemorabiliaImageRootPath, fileName)))}";
     }
 
     private void ToggleChildContent(int memorabiliaItemId)

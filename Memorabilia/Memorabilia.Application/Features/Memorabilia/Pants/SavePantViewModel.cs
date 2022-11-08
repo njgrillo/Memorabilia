@@ -47,7 +47,7 @@ public class SavePantViewModel : SaveItemViewModel
     [Range(1, int.MaxValue, ErrorMessage = "Game Style Type is required.")]
     public int GameStyleTypeId { get; set; } = GameStyleType.None.Id;
 
-    public override string ImagePath => Domain.Constants.ImagePath.Pant;
+    public override string ImageFileName => Domain.Constants.ImageFileName.Pant;
 
     public override ItemType ItemType => ItemType.Pants;
 

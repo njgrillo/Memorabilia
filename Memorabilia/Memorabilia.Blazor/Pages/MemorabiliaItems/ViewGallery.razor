@@ -1,4 +1,6 @@
-﻿<PrettyBlazor.Condition Evaluation="@_displaySpinner">
+﻿@inherits ImagePage
+
+<PrettyBlazor.Condition Evaluation="@false">
     <Match>
         <div class="spinnerDiv">
             <MudImage Class="spinnerImage"
@@ -16,11 +18,12 @@
                             <Iterations Items="_displayedItems" Context="item">
                                 <div class="col-md-4">
                                     <MemorabiliaItemGalleryCard Description="@GetDescription(item)"
+                                                                DomainImageRootPath="@DomainImageRootPath"
                                                                 EditNavigationPath="@item.EditNavigationPath"
+                                                                ImageRootPath="@ImageRootPath"
                                                                 MemorabiliaItem="@item"
                                                                 PrimaryImageNavigationPath="@item.PrimaryImageNavigationPath"
-                                                                PrimaryImagePath="@item.PrimaryImagePath"                                                                
-                                                                Subtitle="@GetSubtitle(item)"
+                                                                PrimaryImagePath="@(GetImageData(item.ImageFileName))"                                             Subtitle="@GetSubtitle(item)"
                                                                 Title="@GetTitle(item)"
                                                                 TooltipText="@item.TooltipText" />
                                 </div>

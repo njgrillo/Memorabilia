@@ -8,7 +8,7 @@ public class SavePersonImageViewModel : SaveViewModel
 
     public SavePersonImageViewModel(PersonImageViewModel viewModel)
     {
-        ImagePath = viewModel.ImagePath;
+        PersonImageFileName = viewModel.ImageFileName;
         PersonId = viewModel.PersonId;
     }
 
@@ -16,17 +16,17 @@ public class SavePersonImageViewModel : SaveViewModel
 
     public override string ContinueNavigationPath => "Admin/EditDomainItems";
 
-    public override EditModeType EditModeType => !ImagePath.IsNullOrEmpty() ? EditModeType.Update : EditModeType.Add;
+    public override EditModeType EditModeType => !PersonImageFileName.IsNullOrEmpty() ? EditModeType.Update : EditModeType.Add;
 
-    public string ImagePath { get; set; }
+    public string ImageFileName => Domain.Constants.ImageFileName.Images;       
 
-    public override string ItemTitle => "Image";
-
-    public string PageImagePath => Domain.Constants.ImagePath.Images;
+    public override string ItemTitle => "Image";    
 
     public override string PageTitle => $"{(EditModeType == EditModeType.Update ? EditModeType.Update.Name : EditModeType.Add.Name)} Image";
 
     public int PersonId { get; set; }
+
+    public string PersonImageFileName { get; set; }
 
     public PersonStep PersonStep => PersonStep.Image;
 

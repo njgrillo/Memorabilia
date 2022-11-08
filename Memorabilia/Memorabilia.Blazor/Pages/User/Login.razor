@@ -1,4 +1,6 @@
-﻿<PageHeader PageTitle="@_viewModel.PageTitle" />
+﻿@inherits ImagePage
+
+<PageHeader PageTitle="@_viewModel.PageTitle" />
 <div style="border: 1px solid black; margin-top: 5%; margin-bottom: 5%; margin-left: 25%; margin-right: 25%;">
     <div class="row" style="margin-top: 1%; margin-bottom: 1%; margin-left: 1%; margin-right: 1%;">
         <div class="col-lg-12" style="text-align: center;">
@@ -6,7 +8,7 @@
                       Elevation="5"
                       Height="150"
                       ObjectFit="@ObjectFit.Cover"
-                      Src="images/MiniHelmets.jpg"
+                      Src="@(GetImageData(Domain.Constants.ImageFileName.HelmetFinishes))"
                       Width="150" />
         </div>
     </div>

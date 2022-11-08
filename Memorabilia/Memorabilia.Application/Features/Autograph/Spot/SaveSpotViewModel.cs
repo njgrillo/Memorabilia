@@ -28,7 +28,7 @@ public class SaveSpotViewModel : SaveViewModel
 
     public override string ExitNavigationPath => "Memorabilia/Items";
 
-    public virtual string ImagePath => AdminDomainItem.Spots.ImagePath;
+    public virtual string ImageFileName => AdminDomainItem.Spots.ImageFileName;
 
     public ItemType ItemType { get; set; }
 

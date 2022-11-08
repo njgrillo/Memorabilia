@@ -1,9 +1,11 @@
 ﻿@page "/Tools/Baseball/Colleges"
 
-@inject IConfiguration Configuration
+@inherits WebPage
 
 <PageLoader>
     <Content>
-        <ViewBaseballColleges PersonImageRootPath="@Configuration["PersonImageRootPath"]" />
+        <ViewBaseballColleges DomainImageRootPath="@DomainImageRootPath"
+                              ImageRootPath="@PersonImageRootPath"
+                              IsDomainImage="false" />
     </Content>
 </PageLoader>

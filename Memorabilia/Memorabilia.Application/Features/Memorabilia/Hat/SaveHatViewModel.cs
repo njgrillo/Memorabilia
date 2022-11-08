@@ -40,7 +40,7 @@ public class SaveHatViewModel : SaveItemViewModel
 
     public int GameStyleTypeId { get; set; } = GameStyleType.None.Id;
 
-    public override string ImagePath => Domain.Constants.ImagePath.Hat;
+    public override string ImageFileName => Domain.Constants.ImageFileName.Hat;
 
     public override ItemType ItemType => ItemType.Hat;
 

@@ -2,11 +2,8 @@
 
 namespace Memorabilia.Blazor.Pages.Autograph;
 
-public abstract class AutographItem<T> : CommandQuery where T : SaveViewModel
+public abstract class AutographItem<T> : ImagePage where T : SaveViewModel
 {
-    [Inject]
-    public NavigationManager NavigationManager { get; set; }
-
     [Parameter]
     public int AutographId { get; set; }
 

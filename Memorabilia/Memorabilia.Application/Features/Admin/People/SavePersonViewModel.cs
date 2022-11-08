@@ -18,7 +18,7 @@ public class SavePersonViewModel : SaveViewModel, IWithName, IWithValue<int>
         MiddleName = viewModel.MiddleName;
         Nickname = viewModel.Nickname;
         Nicknames = viewModel.Nicknames.Select(nickname => new SavePersonNicknameViewModel(new PersonNicknameViewModel(nickname))).ToList();
-        PersonImagePath = viewModel.ImagePath;
+        PersonImagePath = viewModel.ImageFileName;
         ProfileName = viewModel.ProfileName;
         Suffix = viewModel.Suffix;   
         Teams = viewModel.Teams.Select(team => new SavePersonTeamViewModel(new PersonTeamViewModel(team))).ToList();
@@ -44,7 +44,7 @@ public class SavePersonViewModel : SaveViewModel, IWithName, IWithValue<int>
     [MinLength(1, ErrorMessage = "First Name is too short.")]
     public string FirstName { get; set; }
 
-    public string ImagePath => Domain.Constants.ImagePath.Athletes;
+    public string ImageFileName => Domain.Constants.ImageFileName.Athletes;
 
     public override string ItemTitle => AdminDomainItem.People.Item;
 

@@ -20,7 +20,7 @@ public class SaveDashboardItemViewModel : SaveViewModel
 
     public override string ExitNavigationPath => AdminDomainItem.DashboardItems.Page;
 
-    public string ImagePath => AdminDomainItem.DashboardItems.ImagePath;
+    public string ImageFileName => AdminDomainItem.DashboardItems.ImageFileName;
 
     public override string ItemTitle => AdminDomainItem.DashboardItems.Item;
 

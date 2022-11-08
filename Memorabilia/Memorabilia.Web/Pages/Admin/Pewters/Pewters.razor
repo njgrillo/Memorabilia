@@ -1,9 +1,11 @@
 ﻿@page "/Pewters"
 
-@inject IConfiguration Configuration
+@inherits WebPage
 
 <PageLoader>
     <Content>
-        <ViewPewters ImagePathRoot="@Configuration["PewterImageRootPath"]" />
+        <ViewPewters DomainImageRootPath="@DomainImageRootPath"
+                     ImageRootPath="@PewterImageRootPath"
+                     IsDomainImage="false" />
     </Content>
 </PageLoader>

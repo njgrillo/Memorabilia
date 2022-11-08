@@ -31,7 +31,7 @@ public class SaveLithographViewModel : SaveItemViewModel
 
     public bool Framed { get; set; }
 
-    public override string ImagePath => Domain.Constants.ImagePath.Lithograph;
+    public override string ImageFileName => Domain.Constants.ImageFileName.Lithograph;
 
     public override ItemType ItemType => ItemType.Lithograph;
 

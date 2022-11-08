@@ -13,6 +13,7 @@ global using Memorabilia.Application.Features.Tools.Baseball.Accomplishments;
 global using Memorabilia.Application.Features.User;
 global using Memorabilia.Blazor.Controls.Dialogs;
 global using Memorabilia.Blazor.Pages;
+global using Memorabilia.MauiBlazor;
 global using Memorabilia.Repository;
 global using Memorabilia.Repository.Configuration;
 global using Memorabilia.Repository.Implementations;

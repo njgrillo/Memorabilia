@@ -1,9 +1,10 @@
 ﻿@inherits MemorabiliaItem<SaveBookViewModel>
 
 <EditPage ContinueNavigationPath="@ViewModel.ContinueNavigationPath"
+          DomainImageRootPath="@DomainImageRootPath"
           EditMode="ViewModel.EditModeType"
           ExitNavigationPath="@ViewModel.ExitNavigationPath"
-          ImagePath="@ViewModel.ImagePath"
+          ImageFileName="@ViewModel.ImageFileName"
           ItemName="@ViewModel.ItemType.Name"
           Model="ViewModel"
           OnLoad="OnLoad"

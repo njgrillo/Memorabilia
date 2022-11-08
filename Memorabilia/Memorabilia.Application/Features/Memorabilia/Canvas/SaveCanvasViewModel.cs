@@ -32,7 +32,7 @@ public class SaveCanvasViewModel : SaveItemViewModel
 
     public bool Framed { get; set; }
 
-    public override string ImagePath => Domain.Constants.ImagePath.Canvas;
+    public override string ImageFileName => Domain.Constants.ImageFileName.Canvas;
 
     public override ItemType ItemType => ItemType.Canvas;
 

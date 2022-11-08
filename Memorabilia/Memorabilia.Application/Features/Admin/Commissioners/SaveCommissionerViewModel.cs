@@ -21,7 +21,7 @@ public class SaveCommissionerViewModel : SaveViewModel
 
     public override string ExitNavigationPath => AdminDomainItem.Commissioners.Page;
 
-    public string ImagePath => AdminDomainItem.Commissioners.ImagePath;
+    public string ImageFileName => AdminDomainItem.Commissioners.ImageFileName;
 
     public override string ItemTitle => AdminDomainItem.Commissioners.Item;    
 

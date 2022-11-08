@@ -43,7 +43,7 @@ public class SavePuckViewModel : SaveItemViewModel
 
     public int GameStyleTypeId { get; set; } = GameStyleType.None.Id;
 
-    public override string ImagePath => Domain.Constants.ImagePath.Puck;
+    public override string ImageFileName => Domain.Constants.ImageFileName.Puck;
 
     public override ItemType ItemType => ItemType.Puck;
 

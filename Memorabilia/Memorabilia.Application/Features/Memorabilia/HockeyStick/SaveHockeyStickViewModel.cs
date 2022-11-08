@@ -45,7 +45,7 @@ public class SaveHockeyStickViewModel : SaveItemViewModel
 
     public GameStyleType[] GameStyleTypes => GameStyleType.GetAll(ItemType.HockeyStick);
 
-    public override string ImagePath => Domain.Constants.ImagePath.HockeyStick;
+    public override string ImageFileName => Domain.Constants.ImageFileName.HockeyStick;
 
     public override ItemType ItemType => ItemType.HockeyStick;
 

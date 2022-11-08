@@ -1,9 +1,11 @@
 ﻿@page "/Tools/Baseball/AllStars"
 
-@inject IConfiguration Configuration
+@inherits WebPage
 
 <PageLoader>
     <Content>
-        <ViewAllStars PersonImageRootPath="@Configuration["PersonImageRootPath"]" />
+        <ViewAllStars DomainImageRootPath="@DomainImageRootPath"
+                      ImageRootPath="@PersonImageRootPath"
+                      IsDomainImage="false" />
     </Content>
 </PageLoader>

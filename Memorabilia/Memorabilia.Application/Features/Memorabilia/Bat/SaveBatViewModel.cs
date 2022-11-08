@@ -60,7 +60,7 @@ public class SaveBatViewModel : SaveItemViewModel
 
     public bool HasTeam => Team?.Id > 0;
 
-    public override string ImagePath => Domain.Constants.ImagePath.Bat;
+    public override string ImageFileName => Domain.Constants.ImageFileName.Bat;
 
     public override ItemType ItemType => ItemType.Bat;
 

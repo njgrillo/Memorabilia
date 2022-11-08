@@ -2,7 +2,7 @@
 
 namespace Memorabilia.Blazor.Pages.MemorabiliaItems;
 
-public abstract class MemorabiliaItem<T> : CommandQuery where T : SaveItemViewModel
+public abstract class MemorabiliaItem<T> : ImagePage where T : SaveItemViewModel
 {
     [Parameter]
     public int MemorabiliaId { get; set; }

@@ -2,11 +2,8 @@
 
 namespace Memorabilia.Blazor.Controls;
 
-public partial class EditPage<TItem> : ComponentBase
+public partial class EditPage<TItem> : ImagePage
 {
-    [Inject]
-    public NavigationManager NavigationManager { get; set; }
-
     [Inject]
     public ISnackbar Snackbar { get; set; }
 
@@ -35,7 +32,7 @@ public partial class EditPage<TItem> : ComponentBase
     public string ExitNavigationPath { get; set; }
 
     [Parameter]
-    public string ImagePath { get; set; }
+    public string ImageFileName { get; set; }
 
     [Parameter]
     public string ItemName { get; set; }

@@ -2,22 +2,16 @@
 
 namespace Memorabilia.Blazor.Controls;
 
-public partial class ImageEditor : ComponentBase
+public partial class ImageEditor : ImagePage
 {
     [Parameter]
     public bool CanRemove { get; set; }
 
     [Parameter]
-    public string FileName { get; set; }
-
-    [Parameter]
     public bool HasPrimary { get; set; }
 
     [Parameter]
-    public string ImageFilePath { get; set; }
-
-    [Parameter]
-    public string ImageRootFilePath { get; set; }
+    public string ImageFileName { get; set; }
 
     [Parameter]
     public ImageType ImageType { get; set; }
@@ -31,29 +25,18 @@ public partial class ImageEditor : ComponentBase
     [Parameter]
     public EventCallback<string> OnRemove { get; set; }
 
-    public string Image
+    protected async Task Remove(string imageFileName)
     {
-        get
-        {
-            var path = Path.Combine(ImageRootFilePath, ImageFilePath);
+        var imageFilePath = Path.Combine(ImageRootPath, imageFileName);
 
-            if (path.IsNullOrEmpty() || !File.Exists(path))
-                return ImagePath.ImageNotAvailable;
+        if (File.Exists(imageFilePath))
+            File.Delete(imageFilePath);
 
-            return $"data:image/jpeg;base64,{Convert.ToBase64String(File.ReadAllBytes(path))}";
-        }
+        await OnRemove.InvokeAsync(imageFilePath);
     }
 
-    protected async Task Remove(string filePath)
+    protected async Task SetPrimary(string imageFileName)
     {
-        if (File.Exists(filePath))
-            File.Delete(filePath);
-
-        await OnRemove.InvokeAsync(filePath);
-    }
-
-    protected async Task SetPrimary(string filePath)
-    {
-        await OnPrimarySet.InvokeAsync(filePath);
+        await OnPrimarySet.InvokeAsync(Path.Combine(ImageRootPath, imageFileName));
     }
 }

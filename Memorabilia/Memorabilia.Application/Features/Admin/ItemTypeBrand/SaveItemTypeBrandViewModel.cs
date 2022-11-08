@@ -21,7 +21,7 @@ public class SaveItemTypeBrandViewModel : SaveViewModel
 
     public override string ExitNavigationPath => AdminDomainItem.ItemTypeBrands.Page;
 
-    public string ImagePath => AdminDomainItem.ItemTypeBrands.ImagePath;
+    public string ImageFileName => AdminDomainItem.ItemTypeBrands.ImageFileName;
 
     public override string ItemTitle => AdminDomainItem.ItemTypeBrands.Item;
 

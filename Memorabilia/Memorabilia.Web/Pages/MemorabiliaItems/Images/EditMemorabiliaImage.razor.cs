@@ -2,9 +2,6 @@
 {
     public partial class EditMemorabiliaImage : WebPage
     {
-        [Inject]
-        public IConfiguration Configuration { get; set; }
-
         [Parameter]
         public int MemorabiliaId { get; set; }
 
@@ -14,7 +11,7 @@
         {
             var userId = await LocalStorage.GetAsync<int>("UserId");
 
-            UploadPath = Path.Combine(Configuration["MemorabiliaImageRootPath"], userId.Value.ToString());
+            UploadPath = Path.Combine(MemorabiliaImageRootPath, userId.Value.ToString());
         }
     }
 }

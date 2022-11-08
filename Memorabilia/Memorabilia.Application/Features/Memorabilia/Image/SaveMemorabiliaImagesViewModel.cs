@@ -22,7 +22,7 @@ public class SaveMemorabiliaImagesViewModel : SaveViewModel
 
     public List<SaveImageViewModel> Images { get; set; } = new();
 
-    public string ImagePath => Domain.Constants.ImagePath.Images;
+    public string ImagePath => Domain.Constants.ImageFileName.Images;
 
     public string ItemTypeName { get; }
 

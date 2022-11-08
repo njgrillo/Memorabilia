@@ -7,14 +7,14 @@ public class AdminDomainItemViewModel
     public AdminDomainItemViewModel(AdminDomainItem adminDomainItem)
     {
         Description = adminDomainItem.Description;
-        ImagePath = adminDomainItem.ImagePath;
+        ImageFileName = adminDomainItem.ImageFileName; 
         Page = adminDomainItem.Page;
         Title = adminDomainItem.Title;
     }
 
     public string Description { get; }
 
-    public string ImagePath { get; }
+    public string ImageFileName { get; }
 
     public string Page { get; }
 

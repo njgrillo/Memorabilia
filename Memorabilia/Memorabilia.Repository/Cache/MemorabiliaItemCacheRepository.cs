@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Repository.Cache;
 
-public class MemorabiliaItemCacheRepository : MemorabiliaCacheRepository<Domain.Entities.Memorabilia>, IMemorabiliaItemRepository
+public class MemorabiliaItemCacheRepository : MemorabiliaRepository<Domain.Entities.Memorabilia>, IMemorabiliaItemRepository
 {
     private readonly MemorabiliaItemRepository _memorabiliaItemRepository;
 
@@ -10,9 +10,16 @@ public class MemorabiliaItemCacheRepository : MemorabiliaCacheRepository<Domain.
         _memorabiliaItemRepository = memorabiliaItemRepository; 
     }
 
+    public override async Task Add(Domain.Entities.Memorabilia item, CancellationToken cancellationToken = default)
+    {
+        RemoveFromCache($"MemorabiliaItem_GetAll_{item.UserId}");
+
+        await _memorabiliaItemRepository.Add(item, cancellationToken);
+    }
+
     public Task<IEnumerable<Domain.Entities.Memorabilia>> GetAll(int userId)
     {
-        return GetAll($"MemorabiliaItem_GetAll_{userId}", entry =>
+        return GetFromCache($"MemorabiliaItem_GetAll_{userId}", entry =>
         {
             entry.SetAbsoluteExpiration(TimeSpan.FromDays(1));
             return _memorabiliaItemRepository.GetAll(userId);
@@ -21,6 +28,10 @@ public class MemorabiliaItemCacheRepository : MemorabiliaCacheRepository<Domain.
 
     public Task<IEnumerable<Domain.Entities.Memorabilia>> GetAllUnsigned(int userId)
     {
-        throw new NotImplementedException();
+        return GetFromCache($"MemorabiliaItem_GetAllUnsigned_{userId}", entry =>
+        {
+            entry.SetAbsoluteExpiration(TimeSpan.FromDays(1));
+            return _memorabiliaItemRepository.GetAllUnsigned(userId);
+        });
     }
 }

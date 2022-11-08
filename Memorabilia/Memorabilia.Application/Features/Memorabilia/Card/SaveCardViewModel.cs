@@ -33,7 +33,7 @@ public class SaveCardViewModel : SaveItemViewModel
 
     public override string ExitNavigationPath => "Memorabilia/Items";
 
-    public override string ImagePath => Domain.Constants.ImagePath.TradingCard;
+    public override string ImageFileName => Domain.Constants.ImageFileName.TradingCard;
 
     public override ItemType ItemType => ItemType.TradingCard;
 

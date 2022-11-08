@@ -1,10 +1,11 @@
 ﻿@inherits EditPersonItem<SavePersonImageViewModel, PersonImageViewModel>
 
 <EditPage ContinueNavigationPath="@ViewModel.ContinueNavigationPath"
+          DomainImageRootPath="@DomainImageRootPath"
           DisplaySaveContinueButton="false"
           EditMode="ViewModel.EditModeType"
           ExitNavigationPath="@ViewModel.ExitNavigationPath"
-          ImagePath="@ViewModel.PageImagePath" 
+          ImageFileName="@ViewModel.ImageFileName" 
           ItemName="@ViewModel.ItemTitle"
           Model="ViewModel"
           OnLoad="OnLoad"
@@ -24,8 +25,10 @@
             <Content>
                 <DivRowCol3>
                     <Content>
-                        <InputFile id="fileInput" accept="image/*" hidden
-                                                  OnChange="@LoadFile"   />
+                        <InputFile id="fileInput" 
+                                   accept="image/*" 
+                                   hidden
+                                   OnChange="@LoadFile"   />
                         <MudFab Color="MudBlazor.Color.Secondary"
                                 HtmlTag="label"
                                 Icon="@Icons.Filled.Image"
@@ -38,11 +41,12 @@
                         <PrettyBlazor.Condition Evaluation="_hasImage">
                             <Match>
                                 <ImageEditor CanRemove="true"
-                                             FileName=""
+                                             DomainImageRootPath="@DomainImageRootPath"
                                              HasPrimary="false"
-                                             ImageFilePath="@ViewModel.ImagePath"
-                                             ImageRootFilePath="@PersonImageRootPath"
+                                             ImageFileName="@ViewModel.PersonImageFileName"
+                                             ImageRootPath="@PersonImageRootPath"
                                              ImageType="ImageType.Primary"
+                                             IsDomainImage="false"
                                              OnRemove="Remove" /> 
                             </Match>
                         </PrettyBlazor.Condition>

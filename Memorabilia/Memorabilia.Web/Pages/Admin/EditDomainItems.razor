@@ -4,6 +4,7 @@
 
 <PageLoader>
     <Content>
-        <DomainItemNavigator OnNavigate="OnNavigate" />
+        <DomainItemNavigator DomainImageRootPath="@DomainImageRootPath"
+                             OnNavigate="@((page) => NavigationManager.NavigateTo(page))" />
     </Content>
 </PageLoader>

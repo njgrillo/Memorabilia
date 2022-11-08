@@ -2,7 +2,7 @@
 
 public class MemorabiliaItemRepository : MemorabiliaRepository<Domain.Entities.Memorabilia>, IMemorabiliaItemRepository
 {
-    public MemorabiliaItemRepository(MemorabiliaContext context) : base(context) { }
+    public MemorabiliaItemRepository(MemorabiliaContext context, IMemoryCache memoryCache) : base(context, memoryCache) { }
 
     private IQueryable<Domain.Entities.Memorabilia> Memorabilia => Items.Include(memorabilia => memorabilia.Autographs)
                                                                         .Include("Autographs.Acquisition")
@@ -36,6 +36,11 @@ public class MemorabiliaItemRepository : MemorabiliaRepository<Domain.Entities.M
                                                                         .Include(memorabilia => memorabilia.Sports)
                                                                         .Include(memorabilia => memorabilia.Teams)
                                                                         .Include(memorabilia => memorabilia.User);
+
+    public override async Task Add(Domain.Entities.Memorabilia item, CancellationToken cancellationToken = default)
+    {
+        await base.Add(item, cancellationToken);
+    }
 
     public override async Task<Domain.Entities.Memorabilia> Get(int id)
     {

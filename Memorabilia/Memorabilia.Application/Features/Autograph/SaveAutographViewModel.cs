@@ -101,7 +101,7 @@ public class SaveAutographViewModel : SaveViewModel
 
     public int? Grade { get; set; }
 
-    public string ImagePath => Domain.Constants.ImagePath.Autographs;
+    public string ImageFileName => Domain.Constants.ImageFileName.Autographs;
 
     public bool IsAcquisitionFromMemorabilia
     {

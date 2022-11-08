@@ -31,7 +31,7 @@ public class SavePaintingViewModel : SaveItemViewModel
 
     public bool Framed { get; set; }
 
-    public override string ImagePath => Domain.Constants.ImagePath.Painting;
+    public override string ImageFileName => Domain.Constants.ImageFileName.Painting;
 
     public override ItemType ItemType => ItemType.Painting;
 

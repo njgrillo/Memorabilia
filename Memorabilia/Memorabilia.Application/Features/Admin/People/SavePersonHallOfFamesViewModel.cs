@@ -29,7 +29,7 @@ public class SavePersonHallOfFamesViewModel : SaveViewModel
 
     public List<SavePersonHallOfFameViewModel> HallOfFames { get; set; } = new();
 
-    public string ImagePath => Domain.Constants.ImagePath.Athletes;
+    public string ImageFileName => Domain.Constants.ImageFileName.Athletes;
 
     public List<SavePersonInternationalHallOfFameViewModel> InternationalHallOfFames { get; set; } = new();
 

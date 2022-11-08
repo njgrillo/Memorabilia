@@ -29,7 +29,7 @@ public class AutographViewModel : ViewModel
 
     public string AuthenticationTooltip => $"{Authentications.Count} Authentication(s)";
 
-    public string AutographImagePath => !PrimaryImagePath.IsNullOrEmpty() ? PrimaryImagePath : ImagePath.ImageNotAvailable;
+    public string AutographImagePath => !PrimaryImagePath.IsNullOrEmpty() ? PrimaryImagePath : ImageFileName.ImageNotAvailable;
 
     public int ColorId => _autograph.ColorId;
 
@@ -112,8 +112,8 @@ public class AutographViewModel : ViewModel
     public string PersonName => _autograph.Person?.DisplayName;
 
     public string PrimaryImagePath => Images.Any()
-        ? Images.SingleOrDefault(image => image.ImageTypeId == ImageType.Primary.Id)?.FilePath ?? ImagePath.ImageNotAvailable
-        : ImagePath.ImageNotAvailable;        
+        ? Images.SingleOrDefault(image => image.ImageTypeId == ImageType.Primary.Id)?.FilePath ?? ImageFileName.ImageNotAvailable
+        : ImageFileName.ImageNotAvailable;        
 
     public int? PurchaseTypeId => _autograph?.Acquisition?.PurchaseTypeId;
 

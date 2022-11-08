@@ -1,7 +1,9 @@
 ﻿@page "/Settings"
 
+@inherits ImagePage
+
 <PageLoader>
     <Content>
-        <Settings />
+        <Settings DomainImageRootPath="@DomainImageRootPath"  />
     </Content>
 </PageLoader>

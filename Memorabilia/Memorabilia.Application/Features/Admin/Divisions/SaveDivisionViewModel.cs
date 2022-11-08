@@ -24,7 +24,7 @@ public class SaveDivisionViewModel : SaveViewModel
 
     public override string ExitNavigationPath => AdminDomainItem.Divisions.Page;
 
-    public string ImagePath => AdminDomainItem.Divisions.ImagePath;
+    public string ImageFileName => AdminDomainItem.Divisions.ImageFileName;
 
     public override string ItemTitle => AdminDomainItem.Divisions.Item;
 

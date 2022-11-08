@@ -72,7 +72,7 @@ public class SaveFootballViewModel : SaveItemViewModel
 
     public bool HasTeam => Team?.Id > 0;
 
-    public override string ImagePath => Domain.Constants.ImagePath.Football;
+    public override string ImageFileName => Domain.Constants.ImageFileName.Football;
 
     public override ItemType ItemType => ItemType.Football;
 

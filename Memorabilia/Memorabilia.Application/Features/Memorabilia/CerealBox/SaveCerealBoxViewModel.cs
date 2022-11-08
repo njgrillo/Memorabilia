@@ -28,7 +28,7 @@ public class SaveCerealBoxViewModel : SaveItemViewModel
 
     public override string ExitNavigationPath => "Memorabilia/Items";
 
-    public override string ImagePath => Domain.Constants.ImagePath.CerealBox;
+    public override string ImageFileName => Domain.Constants.ImageFileName.CerealBox;
 
     public override ItemType ItemType => ItemType.CerealBox;
 

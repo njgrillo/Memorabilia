@@ -1,18 +1,20 @@
-﻿<MudCard>
+﻿@inherits ImagePage
+
+<MudCard>
     <MudCardMedia Height="300" 
-                  Image="@Image" />
+                  Image="@(GetImageData(ImageFileName))" />
     <MudCardContent>
-        <MudText Typo="Typo.h5">@FileName</MudText>
+        <MudText Typo="Typo.h5">@ImageFileName</MudText>
         <MudText Typo="Typo.body2">@ImageType.Name</MudText>
     </MudCardContent>
     <MudCardActions>
         <MudButton hidden="@(!HasPrimary || IsPrimary)"
                    Color="MudBlazor.Color.Primary" 
-                   OnClick="@(_ => SetPrimary(ImageFilePath))"
+                   OnClick="@(_ => SetPrimary(ImageFileName))"
                    Variant="Variant.Text">Make Primary</MudButton>
         <MudButton hidden="@(!CanRemove)"
                    Color="MudBlazor.Color.Primary" 
-                   OnClick="@(_ => Remove(ImageFilePath))"
+                   OnClick="@(_ => Remove(ImageFileName))"
                    Variant="Variant.Text" >Remove</MudButton>
     </MudCardActions>
 </MudCard>

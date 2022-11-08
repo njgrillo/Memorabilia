@@ -15,7 +15,7 @@ public class SaveItemTypeSizeViewModel : SaveViewModel
 
     public override string ExitNavigationPath => AdminDomainItem.ItemTypeSizes.Page;
 
-    public string ImagePath => AdminDomainItem.ItemTypeSizes.ImagePath;
+    public string ImageFileName => AdminDomainItem.ItemTypeSizes.ImageFileName;
 
     public override string ItemTitle => AdminDomainItem.ItemTypeSizes.Item;
 

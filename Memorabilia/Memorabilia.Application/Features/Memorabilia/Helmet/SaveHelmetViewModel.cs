@@ -86,7 +86,7 @@ public class SaveHelmetViewModel : SaveItemViewModel
 
     public HelmetType[] HelmetTypes { get; set; } = HelmetType.All;
 
-    public override string ImagePath => Domain.Constants.ImagePath.Helmet;
+    public override string ImageFileName => Domain.Constants.ImageFileName.Helmet;
 
     public bool IsGameWorthly => GameStyleType.IsGameWorthly(GameStyleType);
 

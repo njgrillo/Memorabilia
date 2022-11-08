@@ -19,7 +19,7 @@ public class SaveTeamChampionshipsViewModel : SaveViewModel
 
     public override string BackNavigationPath => $"{AdminDomainItem.Teams.Item}/{AdminDomainItem.Leagues.Item}/{EditModeType.Update.Name}/{TeamId}/{SportLeagueLevel?.Id}";
 
-    public bool CanHaveConference => SportLeagueLevel != Domain.Constants.SportLeagueLevel.MajorLeagueBaseball;
+    public bool CanHaveConference => SportLeagueLevel != SportLeagueLevel.MajorLeagueBaseball;
 
     public List<SaveTeamChampionshipViewModel> Championships { get; set; } = new();
 
@@ -27,11 +27,11 @@ public class SaveTeamChampionshipsViewModel : SaveViewModel
 
     public override EditModeType EditModeType => Championships.Any() ? EditModeType.Update : EditModeType.Add;
 
-    public string ImagePath => Domain.Constants.ImagePath.ChampionshipTypes;
+    public string ImageFileName => Domain.Constants.ImageFileName.ChampionshipTypes;
 
     public override string PageTitle => $"{(EditModeType == EditModeType.Update ? EditModeType.Update.Name : EditModeType.Add.Name)} Championships";
 
-    public Domain.Constants.SportLeagueLevel SportLeagueLevel { get; set; }
+    public SportLeagueLevel SportLeagueLevel { get; set; }
 
     public int TeamId { get; set; }
 

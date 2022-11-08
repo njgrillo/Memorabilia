@@ -36,7 +36,7 @@ public class SavePersonSportServiceViewModel : SaveViewModel
 
     public DateTime? LastAppearanceDate { get; set; }
 
-    public string ImagePath => Domain.Constants.ImagePath.Athletes;
+    public string ImageFileName => Domain.Constants.ImageFileName.Athletes;
 
     public override string ItemTitle => "Sport Service";
 

@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.MauiBlazor.Pages.Admin.Teams;
 
-public class EditTeamItem : ComponentBase
+public class EditTeamItem : DesktopPage
 {
     [Parameter]
     public int SportLeagueLevelId { get; set; }

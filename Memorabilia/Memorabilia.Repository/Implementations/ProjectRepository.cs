@@ -4,7 +4,7 @@ namespace Memorabilia.Repository.Implementations;
 
 public class ProjectRepository : MemorabiliaRepository<Project>, IProjectRepository
 {
-    public ProjectRepository(MemorabiliaContext context) : base(context) { }
+    public ProjectRepository(MemorabiliaContext context, IMemoryCache memoryCache) : base(context, memoryCache) { }
 
     private IQueryable<Project> Project => Items.Include(project => project.People);
 

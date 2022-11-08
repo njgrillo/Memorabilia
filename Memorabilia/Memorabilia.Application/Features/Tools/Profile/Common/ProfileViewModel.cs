@@ -1,5 +1,4 @@
-﻿using Memorabilia.Domain.Constants;
-using Memorabilia.Domain.Entities;
+﻿using Memorabilia.Domain.Entities;
 
 namespace Memorabilia.Application.Features.Tools.Profile.Common;
 

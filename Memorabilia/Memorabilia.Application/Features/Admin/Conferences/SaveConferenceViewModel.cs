@@ -19,7 +19,7 @@ public class SaveConferenceViewModel : SaveViewModel
 
     public override string ExitNavigationPath => AdminDomainItem.Conferences.Page;
 
-    public string ImagePath => AdminDomainItem.Conferences.ImagePath;
+    public string ImageFileName => AdminDomainItem.Conferences.ImageFileName;
 
     public override string ItemTitle => AdminDomainItem.Conferences.Item;
 

@@ -35,7 +35,7 @@ public class SaveAuthenticationsViewModel : SaveViewModel
 
     public override string ExitNavigationPath => "Memorabilia/Items";
 
-    public string ImagePath => AdminDomainItem.AuthenticationCompanies.ImagePath;
+    public string ImageFileName => AdminDomainItem.AuthenticationCompanies.ImageFileName;
 
     public ItemType ItemType { get; }
 

@@ -41,7 +41,7 @@ public class SaveGolfballViewModel : SaveItemViewModel
 
     public GameStyleType[] GameStyleTypes => GameStyleType.GetAll(ItemType.Golfball);
 
-    public override string ImagePath => Domain.Constants.ImagePath.Golfball;
+    public override string ImageFileName => Domain.Constants.ImageFileName.Golfball;
 
     public override ItemType ItemType => ItemType.Golfball;
 

@@ -37,7 +37,7 @@ public class SaveTicketViewModel : SaveItemViewModel
 
     public int GameStyleTypeId { get; set; } = GameStyleType.None.Id;
 
-    public override string ImagePath => Domain.Constants.ImagePath.Ticket;
+    public override string ImageFileName => Domain.Constants.ImageFileName.Ticket;
 
     public override ItemType ItemType => ItemType.Ticket;
 

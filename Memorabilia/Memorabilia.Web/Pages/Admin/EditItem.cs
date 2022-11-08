@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Web.Pages.Admin;
 
-public class EditItem : ComponentBase
+public class EditItem : WebPage
 {
     [Parameter]
     public int Id { get; set; }

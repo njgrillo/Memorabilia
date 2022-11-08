@@ -1,9 +1,10 @@
 ﻿@inherits EditItemTypeItem<SaveItemTypeBrandViewModel, ItemTypeBrandViewModel>
 
 <EditPage ContinueNavigationPath="@ViewModel.RoutePrefix"
+          DomainImageRootPath="@DomainImageRootPath"
           EditMode="ViewModel.EditModeType" 
           ExitNavigationPath="@ViewModel.RoutePrefix"
-          ImagePath="@ViewModel.ImagePath" 
+          ImageFileName="@ViewModel.ImageFileName" 
           ItemName="@ViewModel.ItemTitle"
           Model="ViewModel"
           OnLoad="OnLoad"

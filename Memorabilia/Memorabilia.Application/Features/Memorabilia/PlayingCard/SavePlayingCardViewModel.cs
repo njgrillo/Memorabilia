@@ -25,7 +25,7 @@ public class SavePlayingCardViewModel : SaveItemViewModel
 
     public override string ExitNavigationPath => "Memorabilia/Items";
 
-    public override string ImagePath => Domain.Constants.ImagePath.PlayingCard;
+    public override string ImageFileName => Domain.Constants.ImageFileName.PlayingCard;
 
     public override ItemType ItemType => ItemType.PlayingCard;
 

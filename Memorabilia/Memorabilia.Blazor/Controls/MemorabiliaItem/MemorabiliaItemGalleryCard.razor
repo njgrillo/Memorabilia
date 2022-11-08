@@ -1,4 +1,6 @@
-﻿<DivPad5>
+﻿@inherits ImagePage
+
+<DivPad5>
     <Content>
         <MudTooltip Text="@TooltipText">
             <MudCard Elevation="20">
@@ -10,7 +12,7 @@
                         <MudCardMedia @onclick="OnPrimaryImageClick"
                                       Class="rounded-lg can-click"
                                       Height="300"
-                                      Image="@PrimaryImagePath" />
+                                      Image="@(GetImageData(PrimaryImageFileName))" />
                     </MudCard>  
                     <br />
                     <MudText Typo="Typo.body2">@Subtitle</MudText>
@@ -20,9 +22,11 @@
                     <div class="row">
                         <Iterations Items="MemorabiliaItem.Autographs" Context="autograph">
                             <div class="col-md-4">
-                                <MemorabiliaItemGallerySubCard EditNavigationPath="@autograph.EditNavigationPath" 
-                                                               ImageNavigationPath="@autograph.ImageNavigationPath"
-                                                               ImagePath="@autograph.PrimaryImagePath"
+                                <MemorabiliaItemGallerySubCard DomainImageRootPath="@DomainImageRootPath" 
+                                                               EditNavigationPath="@autograph.EditNavigationPath"                                
+                                                               ImageFileName="@(GetImageData(autograph.ImageFileName))"
+                                                               ImageNavigationPath="@autograph.ImageNavigationPath"  
+                                                               ImageRootPath="@ImageRootPath"
                                                                Title="@autograph.PersonName"
                                                                TooltipText="@autograph.PersonName" />
                             </div>                        

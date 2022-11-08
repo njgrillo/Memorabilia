@@ -36,7 +36,7 @@ public class SaveTeamConferencesViewModel : SaveViewModel
 
     public override EditModeType EditModeType => Conferences.Any() ? EditModeType.Update : EditModeType.Add;
 
-    public string ImagePath => AdminDomainItem.Conferences.ImagePath;
+    public string ImageFileName => AdminDomainItem.Conferences.ImageFileName;
 
     public override string PageTitle => $"{(EditModeType == EditModeType.Update ? EditModeType.Update.Name : EditModeType.Add.Name)} {AdminDomainItem.Conferences.Title}";
 

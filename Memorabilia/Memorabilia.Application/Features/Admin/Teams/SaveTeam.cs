@@ -26,7 +26,7 @@ public class SaveTeam
                                 command.Abbreviation, 
                                 command.BeginYear, 
                                 command.EndYear, 
-                                command.ImagePath);
+                                command.ImageFileName);
 
                 await _teamRepository.Add(team);
 
@@ -50,7 +50,7 @@ public class SaveTeam
                      command.Abbreviation,
                      command.BeginYear,
                      command.EndYear,
-                     command.ImagePath);
+                     command.ImageFileName);
 
             await _teamRepository.Update(team);
         }
@@ -76,7 +76,7 @@ public class SaveTeam
 
         public int Id { get; set; } 
 
-        public string ImagePath => _viewModel.ImagePath;
+        public string ImageFileName => _viewModel.ImageFileName;
 
         public bool IsDeleted => _viewModel.IsDeleted;
 

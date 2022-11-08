@@ -25,7 +25,7 @@ public class SaveTeamLeaguesViewModel : SaveViewModel
 
     public override EditModeType EditModeType => Leagues.Any() ? EditModeType.Update : EditModeType.Add;
 
-    public string ImagePath => AdminDomainItem.Leagues.ImagePath;
+    public string ImageFileName => AdminDomainItem.Leagues.ImageFileName;
 
     public List<SaveTeamLeagueViewModel> Leagues { get; set; } = new();
 

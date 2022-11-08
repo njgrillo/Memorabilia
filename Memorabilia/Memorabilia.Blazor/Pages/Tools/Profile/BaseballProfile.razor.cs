@@ -2,16 +2,10 @@
 
 namespace Memorabilia.Blazor.Pages.Tools.Profile;
 
-public partial class BaseballProfile : ComponentBase
+public partial class BaseballProfile : ImagePage
 {
-    [Inject]
-    public QueryRouter QueryRouter { get; set; }
-
     [Parameter]
     public int PersonId { get; set; }
-
-    [Parameter]
-    public string PersonImageRootPath { get; set; }
 
     public bool DisplayAccomplishments => _selectedAccomplishment?.Text == "Accomplishment";
 
@@ -25,18 +19,6 @@ public partial class BaseballProfile : ComponentBase
 
     private MudChip _selectedAccomplishment;
     private BaseballProfileViewModel _viewModel = new();
-
-    protected string GetImage(string imagePath)
-    {
-        if (imagePath.IsNullOrEmpty())
-            return ImagePath.ImageNotAvailable;
-
-        var path = imagePath == ImagePath.ImageNotAvailable
-                ? imagePath
-                : Path.Combine(PersonImageRootPath, imagePath);
-
-        return $"data:image/jpg;base64,{Convert.ToBase64String(File.ReadAllBytes(path))}";
-    }
 
     protected override async Task OnInitializedAsync()
     {

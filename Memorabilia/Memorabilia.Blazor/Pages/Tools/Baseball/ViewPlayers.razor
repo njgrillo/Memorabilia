@@ -1,4 +1,4 @@
-﻿@inherits CommandQuery
+﻿@inherits ImagePage
 
 <DivPad2>
     <Content>
@@ -43,7 +43,7 @@
                                           Elevation="5"
                                           Height="200"
                                           ObjectFit="@ObjectFit.Cover"
-                                          Src="@(GetImage(context.PersonImagePath))"
+                                          Src="@(GetImageData(context.PersonImagePath))"
                                           Width="200" />
                             </MudTooltip>
                         </MudTd>

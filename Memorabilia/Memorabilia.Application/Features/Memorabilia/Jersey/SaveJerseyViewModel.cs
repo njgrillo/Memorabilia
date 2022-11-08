@@ -69,7 +69,7 @@ public class SaveJerseyViewModel : SaveItemViewModel
 
     public GameStyleType[] GameStyleTypes => GameStyleType.GetAll(ItemType.Jersey);
 
-    public override string ImagePath => Domain.Constants.ImagePath.ItemTypes;
+    public override string ImageFileName => Domain.Constants.ImageFileName.ItemTypes;
 
     public bool IsGameWorthly => GameStyleType.IsGameWorthly(GameStyleType);
 

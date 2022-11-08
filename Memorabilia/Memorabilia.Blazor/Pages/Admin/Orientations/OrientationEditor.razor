@@ -1,6 +1,7 @@
 ﻿@inherits EditDomainItem<Domain.Constants.Orientation>
 
-<EditDomainItem Item="ViewModel"
+<EditDomainItem DomainImageRootPath="@DomainImageRootPath" 
+                Item="ViewModel"
                 MaxNameLength="50"
                 OnLoad="OnLoad"
                 OnSave="OnSave" />

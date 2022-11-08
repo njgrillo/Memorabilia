@@ -42,7 +42,7 @@ public class SaveTrunkViewModel : SaveItemViewModel
     [Range(1, int.MaxValue, ErrorMessage = "Match Style Type is required.")]
     public int GameStyleTypeId { get; set; } = GameStyleType.None.Id;
 
-    public override string ImagePath => Domain.Constants.ImagePath.Trunks;
+    public override string ImageFileName => Domain.Constants.ImageFileName.Trunks;
 
     public override ItemType ItemType => ItemType.Trunks;
 

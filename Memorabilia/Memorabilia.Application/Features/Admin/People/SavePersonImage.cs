@@ -15,7 +15,7 @@ public class SavePersonImage
         {
             var person = await _personRepository.Get(command.PersonId);
 
-            person.SetImage(command.ImagePath);
+            person.SetImage(command.ImageFileName);
 
             await _personRepository.Update(person);
         }
@@ -26,10 +26,10 @@ public class SavePersonImage
         public Command(SavePersonImageViewModel viewModel)
         {
             PersonId = viewModel.PersonId;
-            ImagePath = viewModel.ImagePath;
+            ImageFileName = viewModel.ImageFileName;
         }
 
-        public string ImagePath { get; }
+        public string ImageFileName { get; }
 
         public int PersonId { get; }
     }

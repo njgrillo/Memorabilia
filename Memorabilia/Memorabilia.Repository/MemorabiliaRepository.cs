@@ -4,14 +4,14 @@ public class MemorabiliaRepository<T> : BaseRepository<T>, IDomainRepository<T> 
 {
     private readonly MemorabiliaContext _context;
 
-    public MemorabiliaRepository(MemorabiliaContext context) : base(context)
+    public MemorabiliaRepository(MemorabiliaContext context, IMemoryCache memoryCache) : base(context, memoryCache)
     {
         _context = context;
     }
 
     protected IQueryable<T> Items => _context.Set<T>();
 
-    public async Task Add(T item, CancellationToken cancellationToken = default)
+    public virtual async Task Add(T item, CancellationToken cancellationToken = default)
     {
         _context.Add(item);
 

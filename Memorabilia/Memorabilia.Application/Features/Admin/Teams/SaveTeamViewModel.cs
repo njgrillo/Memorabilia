@@ -41,7 +41,7 @@ public class SaveTeamViewModel : SaveViewModel, IWithName, IWithValue<int>
     [Required]
     public int FranchiseId { get; set; }
 
-    public string ImagePath => AdminDomainItem.Teams.ImagePath;
+    public string ImageFileName => AdminDomainItem.Teams.ImageFileName;
 
     public override string ItemTitle => AdminDomainItem.Teams.Item;
 

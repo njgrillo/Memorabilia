@@ -80,7 +80,7 @@ public class SavePersonAccoladeViewModel : SaveViewModel
 
     public Franchise[] Franchises { get; set; } = Franchise.All;
 
-    public string ImagePath => Domain.Constants.ImagePath.Athletes;
+    public string ImageFileName => Domain.Constants.ImageFileName.Athletes;
 
     public override string ItemTitle => "Accolade";
 

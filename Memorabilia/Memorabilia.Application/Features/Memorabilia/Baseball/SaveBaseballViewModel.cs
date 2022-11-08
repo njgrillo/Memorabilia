@@ -88,18 +88,14 @@ public class SaveBaseballViewModel : SaveItemViewModel
         }
     }
 
-    public override string ImagePath
+    public override string ImageFileName
     {
         get
         {
-            var path = "images/";
-
             if (DisplayBaseballType && BaseballType != null)
-            {
-                return $"{path}{BaseballType.Name.Replace(" ", "")}.jpg";
-            }
+                return $"{BaseballType.Name.Replace(" ", "")}.jpg";
 
-            return $"{path}baseball.jpg";
+            return Domain.Constants.ImageFileName.Baseball;
         }
     }
 

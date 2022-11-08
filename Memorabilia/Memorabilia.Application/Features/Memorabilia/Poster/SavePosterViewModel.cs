@@ -30,7 +30,7 @@ public class SavePosterViewModel : SaveItemViewModel
 
     public bool Framed { get; set; }
 
-    public override string ImagePath => Domain.Constants.ImagePath.Poster;
+    public override string ImageFileName => Domain.Constants.ImageFileName.Poster;
 
     public override ItemType ItemType => ItemType.Poster;
 

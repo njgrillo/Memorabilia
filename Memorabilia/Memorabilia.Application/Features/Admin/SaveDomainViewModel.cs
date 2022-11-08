@@ -4,11 +4,11 @@ public class SaveDomainViewModel : SaveViewModel
 {
     public SaveDomainViewModel() { }
 
-    public SaveDomainViewModel(int id, string domainTypeName, string imagePath, string navigationPath)
+    public SaveDomainViewModel(int id, string domainTypeName, string imageFileName, string navigationPath)
     {
         Id = id;
         DomainTypeName = domainTypeName;
-        ImagePath = imagePath;
+        ImageFileName = imageFileName;
         NavigationPath = navigationPath;
     }
 
@@ -19,14 +19,14 @@ public class SaveDomainViewModel : SaveViewModel
         Name = viewModel.Name;
     }
 
-    public SaveDomainViewModel(DomainViewModel viewModel, string domainTypeName, string imagePath, string navigationPath)
+    public SaveDomainViewModel(DomainViewModel viewModel, string domainTypeName, string imageFileName, string navigationPath)
     {
         Abbreviation = viewModel.Abbreviation;
         Id = viewModel.Id;
         Name = viewModel.Name;
 
         DomainTypeName = domainTypeName;
-        ImagePath = imagePath;
+        ImageFileName = imageFileName;
         NavigationPath = navigationPath;
     }
 
@@ -34,7 +34,7 @@ public class SaveDomainViewModel : SaveViewModel
 
     public string DomainTypeName { get; set; }        
 
-    public string ImagePath { get; set; }        
+    public string ImageFileName { get; set; }        
 
     [Required]
     [StringLength(100, ErrorMessage = "Name is too long.")]

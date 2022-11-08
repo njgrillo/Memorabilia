@@ -19,7 +19,7 @@ public class SaveLeagueViewModel : SaveViewModel
 
     public override string ExitNavigationPath => AdminDomainItem.Leagues.Page;
 
-    public string ImagePath => AdminDomainItem.Leagues.ImagePath;
+    public string ImageFileName => AdminDomainItem.Leagues.ImageFileName;
 
     public override string ItemTitle => AdminDomainItem.Leagues.Item;
 

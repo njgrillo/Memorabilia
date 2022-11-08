@@ -41,7 +41,7 @@ public class SaveTennisRacketViewModel : SaveItemViewModel
     [Range(1, int.MaxValue, ErrorMessage = "Match Style Type is required.")]
     public int GameStyleTypeId { get; set; } = GameStyleType.None.Id;
 
-    public override string ImagePath => Domain.Constants.ImagePath.TennisRacket;
+    public override string ImageFileName => Domain.Constants.ImageFileName.TennisRacket;
 
     public override ItemType ItemType => ItemType.TennisRacket;
 

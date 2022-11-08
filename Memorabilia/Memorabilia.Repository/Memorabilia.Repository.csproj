@@ -5,22 +5,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Cache\AllStarCacheRepository.cs" />
-    <Compile Remove="Cache\CareerRecordCacheRepository.cs" />
-    <Compile Remove="Cache\ChampionCacheRepository.cs" />
-    <Compile Remove="Cache\DomainCacheRepository.cs" />
-    <Compile Remove="Cache\DraftCacheRepository.cs" />
-    <Compile Remove="Cache\FranchiseHallOfFameCacheRepository.cs" />
-    <Compile Remove="Cache\HallOfFameCacheRepository.cs" />
-    <Compile Remove="Cache\InternationalHallOfFameCacheRepository.cs" />
-    <Compile Remove="Cache\LeaderCacheRepository.cs" />
-    <Compile Remove="Cache\PersonAccomplishmentCacheRepository.cs" />
-    <Compile Remove="Cache\PersonAwardCacheRepository.cs" />
+    <Compile Remove="Cache\MemorabiliaCacheRepository.cs" />
     <Compile Remove="Cache\PersonCacheRepository.cs" />
-    <Compile Remove="Cache\PersonCollegeCacheRepository.cs" />
-    <Compile Remove="Cache\PersonTeamCacheRepository.cs" />
-    <Compile Remove="Cache\RetiredNumberCacheRepository.cs" />
-    <Compile Remove="Cache\SingleSeasonRecordCacheRepository.cs" />
   </ItemGroup>
 
   <ItemGroup>

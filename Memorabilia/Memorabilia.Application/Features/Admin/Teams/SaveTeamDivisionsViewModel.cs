@@ -51,7 +51,7 @@ public class SaveTeamDivisionsViewModel : SaveViewModel
 
     public override string ExitNavigationPath => AdminDomainItem.Teams.Page;
 
-    public string ImagePath => AdminDomainItem.Divisions.ImagePath;
+    public string ImageFileName => AdminDomainItem.Divisions.ImageFileName;
 
     public override string PageTitle => $"{(EditModeType == EditModeType.Update ? EditModeType.Update.Name : EditModeType.Add.Name)} {AdminDomainItem.Divisions.Title}";
 

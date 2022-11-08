@@ -27,7 +27,7 @@ public class SaveFirstDayCoverViewModel : SaveItemViewModel
 
     public bool HasTeam => Teams.Any();
 
-    public override string ImagePath => Domain.Constants.ImagePath.FirstDayCover;
+    public override string ImageFileName => Domain.Constants.ImageFileName.FirstDayCover;
 
     public override ItemType ItemType => ItemType.FirstDayCover;
 

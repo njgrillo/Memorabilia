@@ -2,17 +2,8 @@
 
 namespace Memorabilia.Blazor.Pages.MemorabiliaItems
 {
-    public partial class MemorabiliaEditor : ComponentBase
-    {
-        [Inject]
-        public CommandRouter CommandRouter { get; set; }        
-
-        [Inject]
-        public NavigationManager NavigationManager { get; set; }
-
-        [Inject]
-        public QueryRouter QueryRouter { get; set; }
-
+    public partial class MemorabiliaEditor : ImagePage
+    {   
         [Inject]
         public ISnackbar Snackbar { get; set; }        
 

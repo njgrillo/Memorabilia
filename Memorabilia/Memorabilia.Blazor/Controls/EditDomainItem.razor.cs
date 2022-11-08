@@ -5,6 +5,9 @@ namespace Memorabilia.Blazor.Controls;
 public partial class EditDomainItem : ComponentBase
 {
     [Parameter]
+    public string DomainImageRootPath { get; set; }
+
+    [Parameter]
     public SaveDomainViewModel Item
     {
         get

@@ -32,7 +32,7 @@ public class SavePinFlagViewModel : SaveItemViewModel
     [Range(1, int.MaxValue, ErrorMessage = "Tournament Style Type is required.")]
     public int GameStyleTypeId { get; set; }
 
-    public override string ImagePath => Domain.Constants.ImagePath.PinFlag;
+    public override string ImageFileName => Domain.Constants.ImageFileName.PinFlag;
 
     public override ItemType ItemType => ItemType.PinFlag;
 

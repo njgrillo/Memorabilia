@@ -1,10 +1,11 @@
 ﻿@inherits EditTeamItem<SaveTeamChampionshipsViewModel, TeamChampionshipViewModel>
 
 <EditPage ContinueNavigationPath="@ViewModel.ContinueNavigationPath"
+          DomainImageRootPath="@DomainImageRootPath"
           DisplaySaveContinueButton="false"
           EditMode="ViewModel.EditModeType"
           ExitNavigationPath="@ViewModel.ExitNavigationPath"
-          ImagePath="@ViewModel.ImagePath"
+          ImageFileName="@ViewModel.ImageFileName"
           ItemName="@ViewModel.PageTitle"
           Model="ViewModel"
           OnLoad="OnLoad"

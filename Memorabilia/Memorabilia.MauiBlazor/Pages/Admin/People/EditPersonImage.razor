@@ -2,11 +2,12 @@
 
 @inherits EditPersonItem
 
-@inject IConfiguration Configuration
-
 <PageLoader>
     <Content>
-        <PersonImageEditor PersonImageRootPath="@Configuration["PersonImageRootPath"]"
+        <PersonImageEditor DomainImageRootPath="@DomainImageRootPath" 
+                           ImageRootPath="@PersonImageRootPath"
+                           IsDomainImage="false"
+                           PersonImageRootPath="@PersonImageRootPath"
                            PersonId=@PersonId />
     </Content>
 </PageLoader>

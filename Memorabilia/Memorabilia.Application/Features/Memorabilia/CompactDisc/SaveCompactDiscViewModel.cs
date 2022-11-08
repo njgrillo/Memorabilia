@@ -20,7 +20,7 @@ public class SaveCompactDiscViewModel : SaveItemViewModel
 
     public bool HasPerson => People.Any();
 
-    public override string ImagePath => Domain.Constants.ImagePath.CompactDisc;
+    public override string ImageFileName => Domain.Constants.ImageFileName.CompactDisc;
 
     public override ItemType ItemType => ItemType.CompactDisc;
   

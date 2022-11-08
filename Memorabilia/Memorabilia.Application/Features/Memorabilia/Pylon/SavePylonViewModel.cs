@@ -35,7 +35,7 @@ public class SavePylonViewModel : SaveItemViewModel
 
     public int GameStyleTypeId { get; set; } = GameStyleType.None.Id;
 
-    public override string ImagePath => Domain.Constants.ImagePath.Pylon;
+    public override string ImageFileName => Domain.Constants.ImageFileName.Pylon;
 
     public override ItemType ItemType => ItemType.Pylon;
 

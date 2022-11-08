@@ -2,22 +2,10 @@
 
 namespace Memorabilia.Blazor.Pages.Project;
 
-public partial class ProjectEditor : ComponentBase
+public partial class ProjectEditor : ImagePage
 {
-    [Inject]
-    public CommandRouter CommandRouter { get; set; }
-
-    [Inject]
-    public NavigationManager NavigationManager { get; set; }
-
-    [Inject]
-    public QueryRouter QueryRouter { get; set; }        
-
     [Parameter]
     public int Id { get; set; }
-
-    [Parameter]
-    public string ImagePathRoot { get; set; }
 
     [Parameter]
     public int UserId { get; set; }
@@ -26,16 +14,7 @@ public partial class ProjectEditor : ComponentBase
     private bool _canEditPerson = true;
     private bool _canUpdateProjectPerson;
     private SaveProjectPersonViewModel _projectPersonViewModel = new();
-    private SaveProjectViewModel _viewModel = new();
-
-    protected string GetImage(string imagePath)
-    {
-        var path = imagePath == ImagePath.ImageNotAvailable
-                ? imagePath
-                : Path.Combine(ImagePathRoot, imagePath);
-
-        return $"data:image/jpg;base64,{Convert.ToBase64String(File.ReadAllBytes(path))}";
-    }
+    private SaveProjectViewModel _viewModel = new();    
 
     protected async Task HandleValidSubmit()
     {

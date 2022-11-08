@@ -4,7 +4,7 @@ namespace Memorabilia.Repository.Implementations;
 
 public class AutographRepository : MemorabiliaRepository<Autograph>, IAutographRepository
 {
-    public AutographRepository(MemorabiliaContext context) : base(context) { }
+    public AutographRepository(MemorabiliaContext context, IMemoryCache memoryCache) : base(context, memoryCache) { }
 
     private IQueryable<Autograph> Autograph => Items.Include(autograph => autograph.Acquisition)
                                                     .Include(autograph => autograph.Authentications)

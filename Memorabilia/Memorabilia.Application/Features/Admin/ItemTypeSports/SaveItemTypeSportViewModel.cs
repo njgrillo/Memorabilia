@@ -15,7 +15,7 @@ public class SaveItemTypeSportViewModel : SaveViewModel
 
     public override string ExitNavigationPath => AdminDomainItem.ItemTypeSports.Page;
 
-    public string ImagePath => AdminDomainItem.ItemTypeSports.ImagePath;
+    public string ImageFileName => AdminDomainItem.ItemTypeSports.ImageFileName;
 
     public override string ItemTitle => AdminDomainItem.ItemTypeSports.Item;
 

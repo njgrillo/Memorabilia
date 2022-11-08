@@ -1,9 +1,11 @@
 ﻿@page "/People"
 
-@inject IConfiguration Configuration
+@inherits WebPage
 
 <PageLoader>
     <Content>
-        <ViewPeople ImagePathRoot="@Configuration["PersonImageRootPath"]" />
+        <ViewPeople DomainImageRootPath="@DomainImageRootPath" 
+                    ImageRootPath="@PersonImageRootPath"
+                    IsDomainImage="false" />
     </Content>
 </PageLoader>

@@ -54,7 +54,7 @@ public class SaveMemorabiliaItemViewModel : SaveViewModel
 
     public override string ExitNavigationPath => "Memorabilia/Items";
 
-    public string ImagePath => $"images/{(!ItemTypeName.IsNullOrEmpty() ? $"{ItemTypeName.Replace(" ", "")}.jpg" : "itemtypes.jpg")}";
+    public string ImageFileName => $"{(!ItemTypeName.IsNullOrEmpty() ? $"{ItemTypeName.Replace(" ", "")}.jpg" : "itemtypes.jpg")}";
 
     private bool? _isNumbered;
     public bool IsNumbered

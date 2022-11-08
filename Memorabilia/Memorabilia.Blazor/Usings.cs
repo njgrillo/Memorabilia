@@ -121,6 +121,7 @@ global using Memorabilia.Application.Features.Project;
 global using Memorabilia.Application.Features.Services.Filters;
 global using Memorabilia.Application.Features.Services.Filters.Autographs;
 global using Memorabilia.Application.Features.Services.Filters.Memorabilia;
+global using Memorabilia.Application.Features.Services.Gallery.Memorabilia;
 global using Memorabilia.Application.Features.Services.Tools.Profile;
 global using Memorabilia.Application.Features.Tools.Baseball.Accomplishments;
 global using Memorabilia.Application.Features.Tools.Baseball.AllStars;

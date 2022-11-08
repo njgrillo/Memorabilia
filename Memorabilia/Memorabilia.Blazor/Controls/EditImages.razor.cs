@@ -2,13 +2,10 @@
 
 namespace Memorabilia.Blazor.Controls;
 
-public partial class EditImages<TItem> : ComponentBase
+public partial class EditImages<TItem> : ImagePage
 {
     [Inject]
     public ILogger<EditImages<TItem>> Logger { get; set; }
-
-    [Inject]
-    public NavigationManager NavigationManager { get; set; }
 
     [Inject]
     public ISnackbar Snackbar { get; set; }

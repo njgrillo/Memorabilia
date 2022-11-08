@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Blazor.Pages.Admin;
 
-public abstract class EditItem<TSaveViewModel, TViewModel> : CommandQuery
+public abstract class EditItem<TSaveViewModel, TViewModel> : ImagePage
 {
     [Parameter]
     public int Id { get; set; }

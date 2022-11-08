@@ -32,7 +32,7 @@ public class SavePhotoViewModel : SaveItemViewModel
 
     public bool Framed { get; set; }
 
-    public override string ImagePath => Domain.Constants.ImagePath.Photo;
+    public override string ImageFileName => Domain.Constants.ImageFileName.Photo;
 
     public override ItemType ItemType => ItemType.Photo;       
     

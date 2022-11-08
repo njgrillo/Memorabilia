@@ -15,7 +15,7 @@ public class SaveItemTypeLevelViewModel : SaveViewModel
 
     public override string ExitNavigationPath => AdminDomainItem.ItemTypeLevels.Page;
 
-    public string ImagePath => AdminDomainItem.ItemTypeLevels.ImagePath;
+    public string ImageFileName => AdminDomainItem.ItemTypeLevels.ImageFileName;
 
     public override string ItemTitle => AdminDomainItem.ItemTypeLevels.Item;
 

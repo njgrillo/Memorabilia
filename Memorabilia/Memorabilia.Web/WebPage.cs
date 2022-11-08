@@ -3,6 +3,9 @@
 public abstract class WebPage : ComponentBase
 {
     [Inject]
+    public IConfiguration Configuration { get; set; }   
+
+    [Inject]
     public ProtectedLocalStorage LocalStorage { get; set; }
 
     [Inject]
@@ -10,10 +13,25 @@ public abstract class WebPage : ComponentBase
 
     public int UserId { get; set; }
 
+    protected string DomainImageRootPath => Configuration["DomainImageRootPath"];
+
+    protected string MemorabiliaImageRootPath => Configuration["MemorabiliaImageRootPath"];
+
+    protected string PersonImageRootPath => Configuration["PersonImageRootPath"];
+
+    protected string PewterImageRootPath => Configuration["PewterImageRootPath"];
+
     protected async Task DeleteUserId()
     {
         await LocalStorage.DeleteAsync("UserId");
-    }    
+    }
+
+    protected async Task<int> GetUserId()
+    {
+        var userId = await LocalStorage.GetAsync<int>("UserId");
+
+        return userId.Value;
+    }
 
     protected override async Task OnInitializedAsync()
     {
@@ -26,12 +44,5 @@ public abstract class WebPage : ComponentBase
 
             await LocalStorage.SetAsync("UserId", UserId);
         }
-    }
-
-    protected async Task<int> GetUserId()
-    {
-        var userId = await LocalStorage.GetAsync<int>("UserId");
-
-        return userId.Value;
-    }
+    }    
 }

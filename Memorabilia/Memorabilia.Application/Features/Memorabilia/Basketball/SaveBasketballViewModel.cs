@@ -65,7 +65,7 @@ public class SaveBasketballViewModel : SaveItemViewModel
         }
     }
 
-    public override string ImagePath => Domain.Constants.ImagePath.Basketball;
+    public override string ImageFileName => Domain.Constants.ImageFileName.Basketball;
 
     public override ItemType ItemType => ItemType.Basketball;
 

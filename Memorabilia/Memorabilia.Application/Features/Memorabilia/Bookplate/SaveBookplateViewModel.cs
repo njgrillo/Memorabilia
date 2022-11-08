@@ -22,7 +22,7 @@ public class SaveBookplateViewModel : SaveItemViewModel
 
     public bool HasPerson => Person?.Id > 0;
 
-    public override string ImagePath => Domain.Constants.ImagePath.Bookplate;
+    public override string ImageFileName => Domain.Constants.ImageFileName.Bookplate;
 
     public override ItemType ItemType => ItemType.Bookplate;
     
