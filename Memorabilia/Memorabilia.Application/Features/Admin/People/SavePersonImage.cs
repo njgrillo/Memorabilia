@@ -26,7 +26,7 @@ public class SavePersonImage
         public Command(SavePersonImageViewModel viewModel)
         {
             PersonId = viewModel.PersonId;
-            ImageFileName = viewModel.ImageFileName;
+            ImageFileName = viewModel.PersonImageFileName;
         }
 
         public string ImageFileName { get; }

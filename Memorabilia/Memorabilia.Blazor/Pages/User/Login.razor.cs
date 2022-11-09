@@ -20,9 +20,7 @@ public partial class Login : ImagePage
             return;
         }
 
-        await UserValidated.InvokeAsync(viewModel.Id);            
-
-        NavigationManager.NavigateTo("Home");
+        await UserValidated.InvokeAsync(viewModel.Id);      
     }
 
     protected void OnLoad()

@@ -5,5 +5,6 @@ public partial class Login : WebPage
     protected void UserValidated(int userId)
     {
         UserId = userId;
+        NavigationManager.NavigateTo("Home");
     }
 }

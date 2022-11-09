@@ -22,7 +22,7 @@ public partial class TeamDropDown : DropDown<TeamViewModel, int>
 
     protected override async Task OnInitializedAsync()
     {
-        Items = (await QueryRouter.Send(new GetTeams(Franchise.Id, SportLeagueLevel.Id))).Teams;
+        Items = (await QueryRouter.Send(new GetTeams(Franchise?.Id, SportLeagueLevel?.Id))).Teams;
         Label = "Team";
     }
 }
