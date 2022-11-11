@@ -19,7 +19,7 @@ public class PewterViewModel
 
     public int Id => _pewter.Id;
 
-    public string ImageFileName => _pewter.ImagePath;
+    public string ImageFileName => _pewter.ImageFileName;
 
     public int? ImageTypeId => _pewter.ImageTypeId;
 

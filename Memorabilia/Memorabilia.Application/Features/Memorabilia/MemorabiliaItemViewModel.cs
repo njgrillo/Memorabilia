@@ -69,7 +69,7 @@ public class MemorabiliaItemViewModel
 
     public string ImageFileName => !_memorabilia.Images.Any() 
         ? Domain.Constants.ImageFileName.ImageNotAvailable
-        : _memorabilia.Images.FirstOrDefault(image => image.ImageTypeId == Domain.Constants.ImageType.Primary.Id)?.FilePath ?? _memorabilia.Images.First().FilePath;
+        : _memorabilia.Images.FirstOrDefault(image => image.ImageTypeId == Domain.Constants.ImageType.Primary.Id)?.FileName ?? _memorabilia.Images.First().FileName;
 
     public List<MemorabiliaImage> Images => _memorabilia.Images;
 
@@ -89,10 +89,10 @@ public class MemorabiliaItemViewModel
 
     public int? PrimaryAutographId => _memorabilia.Autographs.FirstOrDefault()?.Id;
 
-    public string PrimaryAutographImagePath => HasAutographs 
+    public string PrimaryAutographImageName => HasAutographs 
         ? _memorabilia.Autographs
                       .SelectMany(autograph => autograph.Images)
-                      .SingleOrDefault(image => image.ImageTypeId == Domain.Constants.ImageType.Primary.Id)?.FilePath ?? Domain.Constants.ImageFileName.ImageNotAvailable
+                      .SingleOrDefault(image => image.ImageTypeId == Domain.Constants.ImageType.Primary.Id)?.FileName ?? Domain.Constants.ImageFileName.ImageNotAvailable
         : Domain.Constants.ImageFileName.ImageNotAvailable;
 
     public int PrivacyTypeId => _memorabilia.PrivacyTypeId;

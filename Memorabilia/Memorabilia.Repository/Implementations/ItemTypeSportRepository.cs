@@ -4,7 +4,7 @@ namespace Memorabilia.Repository.Implementations;
 
 public class ItemTypeSportRepository : DomainRepository<ItemTypeSport>, IItemTypeSportRepository
 {
-    public ItemTypeSportRepository(DomainContext context) : base(context) { }
+    public ItemTypeSportRepository(DomainContext context, IMemoryCache memoryCache) : base(context, memoryCache) { }
 
     public async Task<IEnumerable<ItemTypeSport>> GetAll(int? itemTypeId = null)
     {

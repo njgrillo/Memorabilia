@@ -4,7 +4,7 @@ public abstract class DomainCacheRepository<T> : DomainRepository<T> where T : D
 {
     protected readonly IMemoryCache MemoryCache;
 
-    public DomainCacheRepository(DomainContext context, IMemoryCache memoryCache) : base(context)
+    public DomainCacheRepository(DomainContext context, IMemoryCache memoryCache) : base(context, memoryCache)
     {
         MemoryCache = memoryCache;
     }

@@ -12,17 +12,24 @@ public class ImagePage : CommandQuery
     [Parameter]
     public string ImageRootPath { get; set; }
 
-    [Parameter]
-    public bool IsDomainImage { get; set; } = true;
-
-    protected virtual string GetImageData(string imageFileName)
+    protected string GetDomainImageData(string imageFileName)
     {
-        if ((DomainImageRootPath.IsNullOrEmpty() && IsDomainImage)
-            || (ImageRootPath.IsNullOrEmpty() && !IsDomainImage))
+        return GetImageData(DomainImageRootPath, imageFileName);
+    }
+
+    protected string GetImageData(string imageFileName)
+    {
+        if (imageFileName == Domain.Constants.ImageFileName.ImageNotAvailable)
+            return GetImageData(DomainImageRootPath, imageFileName);
+
+        return GetImageData(ImageRootPath, imageFileName);
+    }
+
+    private static string GetImageData(string imageRootPath, string imageFileName)
+    {
+        if (imageRootPath.IsNullOrEmpty())
             return string.Empty;
 
-        return imageFileName.IsNullOrEmpty() 
-            ? Path.Combine(DomainImageRootPath, ImageFileName.ImageNotAvailable).ToImageData()
-            : Path.Combine(IsDomainImage ? DomainImageRootPath : ImageRootPath, imageFileName).ToImageData();
+        return Path.Combine(imageRootPath, imageFileName.IsNullOrEmpty() ? ImageFileName.ImageNotAvailable : imageFileName).ToImageData();
     }
 }

@@ -4,7 +4,7 @@ namespace Memorabilia.Repository.Implementations;
 
 public class HallOfFameRepository : DomainRepository<HallOfFame>, IHallOfFameRepository
 {
-    public HallOfFameRepository(DomainContext context) : base(context) { }
+    public HallOfFameRepository(DomainContext context, IMemoryCache memoryCache) : base(context, memoryCache) { }
 
     private IQueryable<HallOfFame> HallOfFames => Items.Include(hallOfFame => hallOfFame.Person);
 

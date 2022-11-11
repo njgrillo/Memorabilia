@@ -4,7 +4,7 @@ namespace Memorabilia.Repository.Implementations;
 
 public class PersonAccomplishmentRepository : DomainRepository<PersonAccomplishment>, IPersonAccomplishmentRepository
 {
-    public PersonAccomplishmentRepository(DomainContext context) : base(context) { }
+    public PersonAccomplishmentRepository(DomainContext context, IMemoryCache memoryCache) : base(context, memoryCache) { }
 
     private IQueryable<PersonAccomplishment> PersonAccomplishment => Items.Include(personAccomplishment => personAccomplishment.Person);
 

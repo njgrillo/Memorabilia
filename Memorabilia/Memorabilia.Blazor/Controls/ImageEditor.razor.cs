@@ -32,11 +32,11 @@ public partial class ImageEditor : ImagePage
         if (File.Exists(imageFilePath))
             File.Delete(imageFilePath);
 
-        await OnRemove.InvokeAsync(imageFilePath);
+        await OnRemove.InvokeAsync(imageFileName);
     }
 
     protected async Task SetPrimary(string imageFileName)
     {
-        await OnPrimarySet.InvokeAsync(Path.Combine(ImageRootPath, imageFileName));
+        await OnPrimarySet.InvokeAsync(imageFileName);
     }
 }

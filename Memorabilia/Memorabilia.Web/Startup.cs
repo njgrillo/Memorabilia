@@ -23,55 +23,55 @@ namespace Memorabilia.Web
             services.AddDbContext<DomainContext>(options => options.UseSqlServer("name=ConnectionStrings:Memorabilia"), ServiceLifetime.Transient);
             services.AddTransient<CommandRouter>();
             services.AddTransient<QueryRouter>();
-            services.AddMediatR(typeof(GetAccomplishments).Assembly);
+            services.AddMediatR(typeof(GetAccomplishments).Assembly);            
 
-            //services.AddScoped<PersonRepository>();
-            //services.AddScoped<IPersonRepository, PersonCacheRepository>();
+            services.AddTransient<AllStarRepository>();
+            services.AddTransient<IAllStarRepository, AllStarCacheRepository>();
 
-            services.AddScoped<AllStarRepository>();
-            services.AddScoped<IAllStarRepository, AllStarCacheRepository>();
+            services.AddTransient<CareerRecordRepository>();
+            services.AddTransient<ICareerRecordRepository, CareerRecordCacheRepository>();
 
-            services.AddScoped<CareerRecordRepository>();
-            services.AddScoped<ICareerRecordRepository, CareerRecordCacheRepository>();
+            services.AddTransient<ChampionRepository>();
+            services.AddTransient<IChampionRepository, ChampionCacheRepository>();
 
-            services.AddScoped<ChampionRepository>();
-            services.AddScoped<IChampionRepository, ChampionCacheRepository>();
+            services.AddTransient<DraftRepository>();
+            services.AddTransient<IDraftRepository, DraftCacheRepository>();
 
-            services.AddScoped<DraftRepository>();
-            services.AddScoped<IDraftRepository, DraftCacheRepository>();
+            services.AddTransient<FranchiseHallOfFameRepository>();
+            services.AddTransient<IFranchiseHallOfFameRepository, FranchiseHallOfFameCacheRepository>();
 
-            services.AddScoped<FranchiseHallOfFameRepository>();
-            services.AddScoped<IFranchiseHallOfFameRepository, FranchiseHallOfFameCacheRepository>();
+            services.AddTransient<HallOfFameRepository>();
+            services.AddTransient<IHallOfFameRepository, HallOfFameCacheRepository>();
 
-            services.AddScoped<HallOfFameRepository>();
-            services.AddScoped<IHallOfFameRepository, HallOfFameCacheRepository>();
+            services.AddTransient<InternationalHallOfFameRepository>();
+            services.AddTransient<IInternationalHallOfFameRepository, InternationalHallOfFameCacheRepository>();
 
-            services.AddScoped<InternationalHallOfFameRepository>();
-            services.AddScoped<IInternationalHallOfFameRepository, InternationalHallOfFameCacheRepository>();
+            services.AddTransient<LeaderRepository>();
+            services.AddTransient<ILeaderRepository, LeaderCacheRepository>();
 
-            services.AddScoped<LeaderRepository>();
-            services.AddScoped<ILeaderRepository, LeaderCacheRepository>();
+            services.AddTransient<PersonAccomplishmentRepository>();
+            services.AddTransient<IPersonAccomplishmentRepository, PersonAccomplishmentCacheRepository>();
 
-            services.AddScoped<PersonAccomplishmentRepository>();
-            services.AddScoped<IPersonAccomplishmentRepository, PersonAccomplishmentCacheRepository>();
+            services.AddTransient<PersonAwardRepository>();
+            services.AddTransient<IPersonAwardRepository, PersonAwardCacheRepository>();
 
-            services.AddScoped<PersonAwardRepository>();
-            services.AddScoped<IPersonAwardRepository, PersonAwardCacheRepository>();
+            services.AddTransient<PersonCollegeRepository>();
+            services.AddTransient<IPersonCollegeRepository, PersonCollegeCacheRepository>();
 
-            services.AddScoped<PersonCollegeRepository>();
-            services.AddScoped<IPersonCollegeRepository, PersonCollegeCacheRepository>();
+            services.AddTransient<PersonRepository>();
+            services.AddTransient<IPersonRepository, PersonCacheRepository>();
 
-            services.AddScoped<PersonTeamRepository>();
-            services.AddScoped<IPersonTeamRepository, PersonTeamCacheRepository>();
+            services.AddTransient<PersonTeamRepository>();
+            services.AddTransient<IPersonTeamRepository, PersonTeamCacheRepository>();
 
-            services.AddScoped<RetiredNumberRepository>();
-            services.AddScoped<IRetiredNumberRepository, RetiredNumberCacheRepository>();
+            services.AddTransient<RetiredNumberRepository>();
+            services.AddTransient<IRetiredNumberRepository, RetiredNumberCacheRepository>();
 
-            services.AddScoped<SingleSeasonRecordRepository>();
-            services.AddScoped<ISingleSeasonRecordRepository, SingleSeasonRecordCacheRepository>();
+            services.AddTransient<SingleSeasonRecordRepository>();
+            services.AddTransient<ISingleSeasonRecordRepository, SingleSeasonRecordCacheRepository>();
 
-            services.AddScoped<MemorabiliaItemRepository>();
-            services.AddScoped<IMemorabiliaItemRepository, MemorabiliaItemCacheRepository>();
+            //services.AddTransient<MemorabiliaItemRepository>();
+            //services.AddTransient<IMemorabiliaItemRepository, MemorabiliaItemCacheRepository>();
 
             services.AddMudServices(config =>
             {

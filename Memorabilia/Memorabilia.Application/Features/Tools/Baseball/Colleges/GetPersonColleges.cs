@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Application.Features.Tools.Baseball.Colleges;
 
-public record GetPersonColleges(int CollegeId, int SportLeagueLevelId) : IQuery<PersonCollegesViewModel>
+public record GetPersonColleges(Domain.Constants.College College, int SportLeagueLevelId) : IQuery<PersonCollegesViewModel>
 {
     public class Handler : QueryHandler<GetPersonColleges, PersonCollegesViewModel>
     {
@@ -13,9 +13,9 @@ public record GetPersonColleges(int CollegeId, int SportLeagueLevelId) : IQuery<
 
         protected override async Task<PersonCollegesViewModel> Handle(GetPersonColleges query)
         {
-            return new PersonCollegesViewModel(await _collegeRepository.GetAll(query.CollegeId, query.SportLeagueLevelId))
+            return new PersonCollegesViewModel(await _collegeRepository.GetAll(query.College.Id, query.SportLeagueLevelId))
             {
-                CollegeId = query.CollegeId
+                College = query.College
             };
         }
     }

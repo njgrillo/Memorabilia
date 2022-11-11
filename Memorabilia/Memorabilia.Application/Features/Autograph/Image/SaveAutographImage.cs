@@ -19,10 +19,7 @@ public class SaveAutographImage
 
             command.MemorabiliaId = autograph.MemorabiliaId;
 
-            if (!command.FilePaths.Any())
-                return;
-
-            autograph.SetImages(command.FilePaths, command.PrimaryImageFilePath);
+            autograph.SetImages(command.FileNames, command.PrimaryImageFileName);
 
             await _autographRepository.Update(autograph);                
         }
@@ -41,8 +38,8 @@ public class SaveAutographImage
 
         public int MemorabiliaId { get; set; }
 
-        public IEnumerable<string> FilePaths => _viewModel.Images.Select(image => image.FilePath);            
+        public IEnumerable<string> FileNames => _viewModel.Images.Select(image => image.FileName);            
 
-        public string PrimaryImageFilePath => _viewModel.Images.Single(image => image.ImageTypeId == ImageType.Primary.Id).FilePath;
+        public string PrimaryImageFileName => _viewModel.Images.SingleOrDefault(image => image.ImageTypeId == ImageType.Primary.Id)?.FileName;
     }
 }

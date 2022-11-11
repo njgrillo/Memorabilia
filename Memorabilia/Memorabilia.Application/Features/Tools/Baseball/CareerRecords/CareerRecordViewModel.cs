@@ -19,7 +19,7 @@ public class CareerRecordViewModel
 
     public int PersonId => _careerRecord.PersonId;
 
-    public string PersonImagePath => _careerRecord.Person.ImagePath;
+    public string PersonImageFileName => _careerRecord.Person.ImageFileName;
 
     public string PersonName => _careerRecord.Person.DisplayName;
 

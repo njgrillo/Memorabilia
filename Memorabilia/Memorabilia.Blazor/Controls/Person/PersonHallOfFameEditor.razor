@@ -1,27 +1,28 @@
-﻿<DivRowCol3>
-    <Content>
+﻿<div class="row">
+    <div class="col-3">
         <SportLeagueLevelDropDown Disabled="@(!_canEditSportLeagueLevel)" 
                                   SelectedValue="_viewModel.SportLeagueLevelId"
                                   SelectionChanged="(p) => _viewModel.SportLeagueLevelId = p" />
-    </Content>
-    <ContentColumn2>
+    </div> 
+    <div class="col-3">
+        <BallotNumberDropDown SelectedValue="_viewModel.BallotNumber"
+                              SelectionChanged="(p) => _viewModel.BallotNumber = p" />
+    </div>    
+</div>
+<div class="row">
+    <div class="col-3">
         <NullableIntField Label="Induction Year"
                           Value="_viewModel.InductionYear"
                           ValueChanged="@((p) => _viewModel.InductionYear = p)" />
-    </ContentColumn2>
-</DivRowCol3>
-<DivRowCol3>
-    <Content>
+    </div>
+    <div class="col-3">
         <NullableDecimalField Label="Vote Percentage"
                               Maximum="100"
                               Value="_viewModel.VotePercentage"
                               ValueChanged="@((p) => _viewModel.VotePercentage = p)" />
-    </Content>
-    <ContentColumn2>
-        <BallotNumberDropDown SelectedValue="_viewModel.BallotNumber"
-                              SelectionChanged="(p) => _viewModel.BallotNumber = p" />
-    </ContentColumn2>
-</DivRowCol3>
+    </div>
+</div>
+<br />
 <DivLeftAlign>
     <Content>
         <MudButton hidden="@(!_canAddHallOfFame)"

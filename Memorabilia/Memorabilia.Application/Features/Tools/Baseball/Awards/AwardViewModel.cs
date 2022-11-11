@@ -17,7 +17,7 @@ public class AwardViewModel
 
     public int PersonId => _personAward.PersonId;
 
-    public string PersonImagePath => _personAward.Person.ImagePath; 
+    public string PersonImageFileName => _personAward.Person.ImageFileName; 
     
     public string PersonName => _personAward.Person.DisplayName;
 

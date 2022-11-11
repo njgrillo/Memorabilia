@@ -18,8 +18,8 @@ public partial class ViewLeaders : ImagePage
                                                               CompareOptions.IgnoreNonSpace) > -1;
     }
 
-    private async Task OnInputChange(int leaderTypeId)
+    private async Task OnInputChange(LeaderType leaderType)
     {
-        _viewModel = await QueryRouter.Send(new GetLeaders(leaderTypeId));
+        _viewModel = await QueryRouter.Send(new GetLeaders(leaderType));
     }
 }

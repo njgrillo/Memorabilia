@@ -13,7 +13,7 @@ public class InscriptionsViewModel : ViewModel
 
     public int AutographId { get; set; }
 
-    public string ImagePath { get; set; }
+    public string ImageFileName { get; set; }
 
     public List<InscriptionViewModel> Inscriptions { get; set; } = new();
 

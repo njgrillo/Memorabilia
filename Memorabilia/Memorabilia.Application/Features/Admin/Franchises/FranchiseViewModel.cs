@@ -19,7 +19,7 @@ public class FranchiseViewModel
 
     public int Id => _franchise.Id;
 
-    public string ImagePath => _franchise.ImagePath;
+    public string ImageFileName => _franchise.ImageFileName;
 
     public DateTime? LastModifiedDate => _franchise.LastModifiedDate;
 

@@ -28,24 +28,22 @@
                            SelectedTextChanged="@((p) => ViewModel.FirstName = p)" />
             </Content>
             <ContentColumn2>
+                <TextField Label="Middle Name"
+                           SelectedText="@ViewModel.MiddleName"
+                           SelectedTextChanged="@((p) => ViewModel.MiddleName = p)" />
+            </ContentColumn2>
+            <ContentColumn3>
                 <TextField Label="Last Name"
                            OnBlur="OnNameFieldBlur"
                            SelectedText="@ViewModel.LastName"
                            SelectedTextChanged="@((p) => ViewModel.LastName = p)" />
-            </ContentColumn2>
-        </DivRowCol3>
-        <DivRowCol3>
-            <Content>
-                <TextField Label="Middle Name"
-                           SelectedText="@ViewModel.MiddleName"
-                           SelectedTextChanged="@((p) => ViewModel.MiddleName = p)" />
-            </Content>
-            <ContentColumn2>
+            </ContentColumn3>
+            <ContentColumn4>
                 <TextField Label="Suffix"
                            OnBlur="OnNameFieldBlur"
                            SelectedText="@ViewModel.Suffix"
                            SelectedTextChanged="@((p) => ViewModel.Suffix = p)" />
-            </ContentColumn2>
+            </ContentColumn4>
         </DivRowCol3>
         <DivRowCol3>
             <Content>
@@ -59,18 +57,16 @@
                            SelectedText="@ViewModel.LegalName"
                            SelectedTextChanged="@((p) => ViewModel.LegalName = p)" />
             </ContentColumn2>
-        </DivRowCol3>
-        <DivRowCol3>
-            <Content>
+            <ContentColumn3>
                 <TextField Label="Display Name"
                            SelectedText="@ViewModel.DisplayName"
                            SelectedTextChanged="@((p) => ViewModel.DisplayName = p)" />
-            </Content>
-            <ContentColumn2>
+            </ContentColumn3>
+            <ContentColumn4>
                 <TextField Label="Profile Name"
                            SelectedText="@ViewModel.ProfileName"
                            SelectedTextChanged="@((p) => ViewModel.ProfileName = p)" />
-            </ContentColumn2>
+            </ContentColumn4>
         </DivRowCol3>
         <DivRowCol3>
             <Content>

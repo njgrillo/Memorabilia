@@ -4,7 +4,7 @@ namespace Memorabilia.Repository.Implementations;
 
 public class TeamLeagueRepository : DomainRepository<TeamLeague>, ITeamLeagueRepository
 {
-    public TeamLeagueRepository(DomainContext context) : base(context) { }
+    public TeamLeagueRepository(DomainContext context, IMemoryCache memoryCache) : base(context, memoryCache) { }
 
     private IQueryable<TeamLeague> TeamLeague => Items.Include(teamLeague => teamLeague.Team);
 

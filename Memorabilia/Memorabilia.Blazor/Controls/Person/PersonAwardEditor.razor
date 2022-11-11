@@ -1,7 +1,9 @@
 ﻿<DivRowCol3>
     <Content>
-        <AwardTypeDropDown SelectedValue="_viewModel.AwardTypeId"
-                           SelectionChanged="(p) => _viewModel.AwardTypeId = p" />
+        <AwardTypeAutoComplete ResetValueOnEmptyText="false"
+                               SelectedValue="_viewModel.AwardType"
+                               SelectionChanged="(p) => _viewModel.AwardType = p"
+                               SportIds="_viewModel.SportIds" />
     </Content>
     <ContentColumn2>
         <TextField HelperText="Ex. 1999 or 1999-2002 or 2003, 2005-2008"

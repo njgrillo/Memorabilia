@@ -1,22 +1,23 @@
-﻿<DivRowCol3>
-    <Content>
-        <RecordTypeDropDown Disabled="@(!_canEditRecordType)"
-                            SelectedValue="_viewModel.RecordTypeId"
-                            SelectionChanged="(p) => _viewModel.RecordTypeId = p" />
-    </Content>
-</DivRowCol3>
-<DivRowCol3>
-    <Content>
+﻿<div class="row">
+    <div class="col-3">
+        <RecordTypeAutoComplete Disabled="@(!_canEditRecordType)" 
+                                ResetValueOnEmptyText="false"
+                                SelectedValue="_viewModel.RecordType"
+                                SelectionChanged="(p) => _viewModel.RecordType = p"
+                                SportIds="_viewModel.SportIds" />
+    </div>
+    <div class="col-1">
         <NullableIntField Label="Year"
                           Value="_viewModel.Year"
                           ValueChanged="@((p) => _viewModel.Year = p)" />
-    </Content>
-    <ContentColumn2>
+    </div>
+    <div class="col-2">
         <NullableDecimalField Label="Amount"
                               Value="_viewModel.Amount"
                               ValueChanged="@((p) => _viewModel.Amount = p)" />
-    </ContentColumn2>
-</DivRowCol3>
+    </div>
+</div>
+<br />
 <DivLeftAlign>
     <Content>
         <MudButton hidden="@(!_canAdd)"

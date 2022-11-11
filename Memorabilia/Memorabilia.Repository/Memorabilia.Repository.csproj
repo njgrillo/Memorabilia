@@ -6,7 +6,7 @@
 
   <ItemGroup>
     <Compile Remove="Cache\MemorabiliaCacheRepository.cs" />
-    <Compile Remove="Cache\PersonCacheRepository.cs" />
+    <Compile Remove="Cache\MemorabiliaItemCacheRepository.cs" />
   </ItemGroup>
 
   <ItemGroup>

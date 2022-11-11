@@ -19,7 +19,7 @@ public class Franchise : Framework.Library.Domain.Entity.DomainEntity
 
     public string FullName => $"{Location} {Name}";
 
-    public string ImagePath { get; private set; }
+    public string ImageFileName { get; private set; }
 
     public DateTime? LastModifiedDate { get; private set; }
 

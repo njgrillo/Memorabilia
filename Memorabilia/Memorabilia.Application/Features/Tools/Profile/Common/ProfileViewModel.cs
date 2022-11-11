@@ -32,7 +32,7 @@ public class ProfileViewModel : ViewModel
 
     public PersonOccupation[] Occupations => _person.Occupations.ToArray();
 
-    public string PersonImagePath => _person.ImagePath;
+    public string PersonImageFileName => _person.ImageFileName;
 
     public PersonOccupation PrimaryOccupation => _person.Occupations.First(occupation => occupation.OccupationTypeId == Domain.Constants.OccupationType.Primary.Id);
 }

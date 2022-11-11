@@ -18,7 +18,7 @@ public class SavePersonViewModel : SaveViewModel, IWithName, IWithValue<int>
         MiddleName = viewModel.MiddleName;
         Nickname = viewModel.Nickname;
         Nicknames = viewModel.Nicknames.Select(nickname => new SavePersonNicknameViewModel(new PersonNicknameViewModel(nickname))).ToList();
-        PersonImagePath = viewModel.ImageFileName;
+        PersonImageFileName = viewModel.ImageFileName;
         ProfileName = viewModel.ProfileName;
         Suffix = viewModel.Suffix;   
         Teams = viewModel.Teams.Select(team => new SavePersonTeamViewModel(new PersonTeamViewModel(team))).ToList();
@@ -68,7 +68,7 @@ public class SavePersonViewModel : SaveViewModel, IWithName, IWithValue<int>
 
     public List<SavePersonNicknameViewModel> Nicknames { get; set; } = new();
 
-    public string PersonImagePath { get; set; }
+    public string PersonImageFileName { get; set; }
 
     public PersonStep PersonStep => PersonStep.Person;
 

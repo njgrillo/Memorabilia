@@ -4,7 +4,7 @@ namespace Memorabilia.Repository.Implementations;
 
 public class ItemTypeLevelRepository : DomainRepository<ItemTypeLevel>, IItemTypeLevelRepository
 {
-    public ItemTypeLevelRepository(DomainContext context) : base(context) { }
+    public ItemTypeLevelRepository(DomainContext context, IMemoryCache memoryCache) : base(context, memoryCache) { }
 
     public async Task<IEnumerable<ItemTypeLevel>> GetAll(int? itemTypeId = null)
     {

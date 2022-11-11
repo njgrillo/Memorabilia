@@ -17,7 +17,7 @@ public class PlayerViewModel
 
     public int PersonId => _personTeam.PersonId;
 
-    public string PersonImagePath => _personTeam.Person.ImagePath;
+    public string PersonImageFileName => _personTeam.Person.ImageFileName;
 
     public string PersonName => _personTeam.Person.DisplayName;
 

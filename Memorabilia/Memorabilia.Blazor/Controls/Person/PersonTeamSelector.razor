@@ -8,26 +8,25 @@
                                 SportIds="@SportIds" />
     </Content>
 </DivRowCol6>
-<DivRowCol3>
-    <Content>
-        <NullableIntField Label="Begin Year"
-                          Value="_viewModel.BeginYear"
-                          ValueChanged="@((p) => _viewModel.BeginYear = p)" />
-    </Content>
-    <ContentColumn2>
-        <NullableIntField Label="End Year"
-                          Value="_viewModel.EndYear"
-                          ValueChanged="@((p) => _viewModel.EndYear = p)" />
-    </ContentColumn2>
-</DivRowCol3>
-<DivRowCol3>
-    <Content>
+<div class="row">
+    <div class="col-lg-2">
+       <NullableIntField Label="Begin Year"
+                         Value="_viewModel.BeginYear"
+                         ValueChanged="@((p) => _viewModel.BeginYear = p)" />
+    </div>     
+    <div class="col-lg-2">
+       <NullableIntField Label="End Year"
+                         Value="_viewModel.EndYear"
+                         ValueChanged="@((p) => _viewModel.EndYear = p)" />
+    </div> 
+    <div class="col-lg-2">
         <TeamRoleTypeDropDown Label="Role" 
                               SelectedValue="_viewModel.TeamRoleTypeId"
                               SelectionChanged="(p) => _viewModel.TeamRoleTypeId = p"
                               SportLeagueLevelId="_viewModel.SportLeagueLevelId" />
-    </Content>
-</DivRowCol3>
+    </div> 
+</div> 
+<br/>
 <DivLeftAlign>
     <Content>
         <MudButton hidden="@(!_canAdd)"

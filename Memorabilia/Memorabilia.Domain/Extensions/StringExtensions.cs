@@ -4,6 +4,9 @@ public static class StringExtensions
 {
     public static int[] ToIntArray(this string value)
     {
+        if (value.IsNullOrEmpty())
+            return Array.Empty<int>();
+
         var results = new List<int>();
 
         if (value.IndexOf(",") > -1)

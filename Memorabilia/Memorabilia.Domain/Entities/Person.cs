@@ -58,7 +58,7 @@ public class Person : Framework.Library.Domain.Entity.DomainEntity
 
     public virtual List<HallOfFame> HallOfFames { get; private set; } = new();
 
-    public string ImagePath { get; private set; }
+    public string ImageFileName { get; private set; }
 
     public virtual List<InternationalHallOfFame> InternationalHallOfFames { get; private set; } = new();
 
@@ -338,9 +338,9 @@ public class Person : Framework.Library.Domain.Entity.DomainEntity
         hallOfFame.Set(inductionYear, sportLeagueLevelId, votePercentage, ballotNumber);
     }
 
-    public void SetImage(string imagePath)
+    public void SetImage(string imageFileName)
     {
-        ImagePath = imagePath;
+        ImageFileName = imageFileName;
     }
 
     public void SetInternationalHallOfFame(int id, int internationalHallOfFameTypeId, int? inductionYear)

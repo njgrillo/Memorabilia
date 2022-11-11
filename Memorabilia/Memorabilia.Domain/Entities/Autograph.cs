@@ -171,18 +171,18 @@ public class Autograph : Framework.Library.Domain.Entity.DomainEntity
                            witnessed);
     }
 
-    public void SetImages(IEnumerable<string> filePaths, string primaryImageFilePath)
+    public void SetImages(IEnumerable<string> fileNames, string primaryImageFileName)
     {
-        if (!filePaths.Any())
+        if (!fileNames.Any())
         {
             Images = new List<AutographImage>();
             return;
         }
 
-        Images = filePaths.Select(filePath =>
+        Images = fileNames.Select(fileName =>
                                     new AutographImage(Id,
-                                                       filePath,
-                                                       filePath == primaryImageFilePath
+                                                       fileName,
+                                                       fileName == primaryImageFileName
                                                              ? Constants.ImageType.Primary.Id
                                                              : Constants.ImageType.Secondary.Id,
                                                        DateTime.UtcNow)).ToList();

@@ -12,9 +12,9 @@ public class PersonCollegesViewModel
                                  .OrderBy(college => college.PersonName);
     }
 
-    public int CollegeId { get; set; }
+    public Domain.Constants.College College { get; set; }
 
-    public string CollegeName => Domain.Constants.College.Find(CollegeId)?.Name;
+    public string CollegeName => College?.Name;
 
     public IEnumerable<PersonCollegeViewModel> Colleges { get; set; } = Enumerable.Empty<PersonCollegeViewModel>();
 

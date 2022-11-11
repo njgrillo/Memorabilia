@@ -174,6 +174,8 @@ public static class ImageFileName
 
     public static string Soccerball => "soccerball.jpg";
 
+    public static string Spinner => "spinner.gif";
+
     public static string SportLeagueLevels => "sportleaguelevels.jpg";
 
     public static string Sports => "sports.jpg";

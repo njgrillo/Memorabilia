@@ -4,7 +4,7 @@ namespace Memorabilia.Repository.Implementations;
 
 public class DraftRepository : DomainRepository<Draft>, IDraftRepository
 {
-    public DraftRepository(DomainContext context) : base(context) { }
+    public DraftRepository(DomainContext context, IMemoryCache memoryCache) : base(context, memoryCache) { }
 
     private IQueryable<Draft> Drafts => Items.Include(draft => draft.Franchise)
                                              .Include(draft => draft.Person);

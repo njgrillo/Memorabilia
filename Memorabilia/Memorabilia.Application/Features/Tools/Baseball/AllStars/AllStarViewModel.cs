@@ -13,7 +13,7 @@ public class AllStarViewModel
 
     public int PersonId => _allstar.PersonId;
 
-    public string PersonImagePath => _allstar.Person.ImagePath;
+    public string PersonImageFileName => _allstar.Person.ImageFileName;
 
     public string PersonName => _allstar.Person.DisplayName;
 

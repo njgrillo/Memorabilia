@@ -30,8 +30,6 @@ public class TeamViewModel : IWithName, IWithValue<int>
 
     public int Id => _team.Id;
 
-    public string ImagePath => _team.ImagePath;
-
     public string Location => _team.Location;
 
     public string Name => _team.Name;

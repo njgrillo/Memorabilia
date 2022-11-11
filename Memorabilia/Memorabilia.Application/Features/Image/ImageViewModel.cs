@@ -13,7 +13,7 @@ public class ImageViewModel
         _image = image;
     }
 
-    public string FilePath => _image.FilePath;
+    public string FileName => _image.FileName;
     
     public int Id => _image.Id;
 

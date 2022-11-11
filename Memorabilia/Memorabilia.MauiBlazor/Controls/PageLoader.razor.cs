@@ -1,10 +1,7 @@
 ﻿namespace Memorabilia.MauiBlazor.Controls;
 
-public partial class PageLoader : ComponentBase
+public partial class PageLoader : DesktopPage
 {
-    [Inject]
-    public NavigationManager NavigationManager { get; set; }
-
     [Parameter]
     public RenderFragment Content { get; set; }
 

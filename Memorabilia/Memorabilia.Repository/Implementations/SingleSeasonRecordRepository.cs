@@ -4,7 +4,7 @@ namespace Memorabilia.Repository.Implementations;
 
 public class SingleSeasonRecordRepository : DomainRepository<SingleSeasonRecord>, ISingleSeasonRecordRepository
 {
-    public SingleSeasonRecordRepository(DomainContext context) : base(context) { }
+    public SingleSeasonRecordRepository(DomainContext context, IMemoryCache memoryCache) : base(context, memoryCache) { }
 
     private IQueryable<SingleSeasonRecord> SingleSeasonRecords => Items.Include(record => record.Person);
 

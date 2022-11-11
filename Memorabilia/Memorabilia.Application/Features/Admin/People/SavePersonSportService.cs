@@ -33,7 +33,7 @@ public class SavePersonSportService
 
             foreach (var college in command.Colleges)
             {
-                person.SetCollege(college.CollegeId, college.BeginYear, college.EndYear);
+                person.SetCollege(college.College.Id, college.BeginYear, college.EndYear);
             }
         }
 

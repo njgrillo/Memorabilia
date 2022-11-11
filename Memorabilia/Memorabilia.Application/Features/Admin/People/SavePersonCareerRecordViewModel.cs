@@ -11,7 +11,8 @@ public class SavePersonCareerRecordViewModel : SaveViewModel
         Amount = record.Amount;
         Id = record.Id;
         PersonId = record.PersonId;
-        RecordTypeId = record.RecordTypeId;
+        RecordType = Domain.Constants.RecordType.Find(record.RecordTypeId);
+        SportIds = record.Person.Teams.Select(team => team.Team.Franchise.SportLeagueLevel.SportId).Distinct().ToArray();
     }
 
     public decimal? Amount { get; set; }
@@ -20,9 +21,9 @@ public class SavePersonCareerRecordViewModel : SaveViewModel
 
     public int PersonId { get; set; }
 
-    public int RecordTypeId { get; set; }
+    public Domain.Constants.RecordType RecordType { get; set; }
 
-    public string RecordTypeName => Domain.Constants.RecordType.Find(RecordTypeId)?.Name;
+    public string RecordTypeName => RecordType?.Name;
 
-    public Domain.Constants.RecordType[] RecordTypes => Domain.Constants.RecordType.All;
+    public int[] SportIds { get; }
 }

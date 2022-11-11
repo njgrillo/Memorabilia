@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Application.Features.Tools.Baseball.Leaders;
 
-public record GetLeaders(int LeaderTypeId) : IQuery<LeadersViewModel>
+public record GetLeaders(Domain.Constants.LeaderType LeaderType) : IQuery<LeadersViewModel>
 {
     public class Handler : QueryHandler<GetLeaders, LeadersViewModel>
     {
@@ -13,9 +13,9 @@ public record GetLeaders(int LeaderTypeId) : IQuery<LeadersViewModel>
 
         protected override async Task<LeadersViewModel> Handle(GetLeaders query)
         {
-            return new LeadersViewModel(await _leaderRepository.GetAll(query.LeaderTypeId))
+            return new LeadersViewModel(await _leaderRepository.GetAll(query.LeaderType.Id))
             {
-                LeaderTypeId = query.LeaderTypeId
+                LeaderType = query.LeaderType
             };
         }
     }

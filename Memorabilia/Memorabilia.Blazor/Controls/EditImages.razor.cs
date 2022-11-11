@@ -12,7 +12,7 @@ public partial class EditImages<TItem> : ImagePage
 
     [Parameter]
     public RenderFragment AdditionalButtons { get; set; }
-
+    
     [Parameter]
     public string ContinueNavigationPath { get; set; }
 
@@ -41,6 +41,9 @@ public partial class EditImages<TItem> : ImagePage
     public string PageTitle { get; set; }
 
     [Parameter]
+    public bool ReplaceImages { get; set; } = true;
+
+    [Parameter]
     public string SaveButtonText { get; set; }
 
     [Parameter]
@@ -59,8 +62,10 @@ public partial class EditImages<TItem> : ImagePage
     {
         foreach (var image in Images.Where(image => image.IsNew))
         {
-            if (File.Exists(image.FilePath))
-                File.Delete(image.FilePath);
+            var filePath = Path.Combine(ImageRootPath, image.FileName);
+
+            if (File.Exists(filePath))
+                File.Delete(filePath);
         }
 
         Images = new List<SaveImageViewModel>();
@@ -85,26 +90,26 @@ public partial class EditImages<TItem> : ImagePage
         await Save();
     }
 
-    protected void PrimarySet(string filePath)
+    protected void PrimarySet(string fileName)
     {
-        var image = Images.FirstOrDefault(i => i.FilePath == filePath);
+        var image = Images.FirstOrDefault(i => i.FileName == fileName);
 
         if (image == null)
             return;
 
         foreach (var memorabiliaImage in Images)
         {
-            if (memorabiliaImage.FilePath == image.FilePath)
+            if (memorabiliaImage.FileName == image.FileName)
                 memorabiliaImage.ImageTypeId = ImageType.Primary.Id;
 
-            if (memorabiliaImage.ImageTypeId == ImageType.Primary.Id && memorabiliaImage.FilePath != image.FilePath)
+            if (memorabiliaImage.ImageTypeId == ImageType.Primary.Id && memorabiliaImage.FileName != image.FileName)
                 memorabiliaImage.ImageTypeId = ImageType.Secondary.Id;
         }
     }
 
-    protected void Remove(string filePath)
+    protected void Remove(string fileName)
     {
-        var image = Images.FirstOrDefault(i => i.FilePath == filePath);
+        var image = Images.FirstOrDefault(i => i.FileName == fileName);
 
         if (image == null)
             return;
@@ -125,7 +130,7 @@ public partial class EditImages<TItem> : ImagePage
     protected async Task Save()
     {
         var images = new List<SaveImageViewModel>();
-        var imageType = ImageType.Primary;
+        var imageType = !Images.Any() ? ImageType.Primary : ImageType.Secondary;
 
         if (!Directory.Exists(UploadPath))
             Directory.CreateDirectory(UploadPath);
@@ -140,7 +145,7 @@ public partial class EditImages<TItem> : ImagePage
                 await using FileStream fs = new(path, FileMode.Create);
                 await file.OpenReadStream(MaximumFileSize).CopyToAsync(fs);
 
-                images.Add(new SaveImageViewModel(new ImageViewModel(new Domain.Entities.Image(fileName, imageType.Id)), file.Name));
+                images.Add(new SaveImageViewModel(new ImageViewModel(new Domain.Entities.Image(fileName, imageType.Id))));
 
                 imageType = ImageType.Secondary;
             }
@@ -150,6 +155,13 @@ public partial class EditImages<TItem> : ImagePage
             }
         }
 
-        Images = images;
+        if (ReplaceImages)
+        {
+            Images = images;
+        }
+        else
+        {
+            Images.AddRange(images);
+        }        
     }
 }

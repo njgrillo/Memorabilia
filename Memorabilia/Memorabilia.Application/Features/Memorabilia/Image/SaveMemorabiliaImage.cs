@@ -15,12 +15,9 @@ public class SaveMemorabiliaImage
 
         protected override async Task Handle(Command command)
         {
-            if (!command.FilePaths.Any())
-                return;
-
             var memorabilia = await _memorabiliaRepository.Get(command.MemorabiliaId);
 
-            memorabilia.SetImages(command.FilePaths, command.PrimaryImageFilePath);
+            memorabilia.SetImages(command.FileNames, command.PrimaryImageFileName);
 
             await _memorabiliaRepository.Update(memorabilia);
         }
@@ -35,10 +32,10 @@ public class SaveMemorabiliaImage
             _viewModel = viewModel;
         }
 
-        public IEnumerable<string> FilePaths => _viewModel.Images.Select(image => image.FilePath);
+        public IEnumerable<string> FileNames => _viewModel.Images.Select(image => image.FileName);
 
         public int MemorabiliaId => _viewModel.MemorabiliaId;
 
-        public string PrimaryImageFilePath => _viewModel.Images.Single(image => image.ImageTypeId == ImageType.Primary.Id).FilePath;
+        public string PrimaryImageFileName => _viewModel.Images.SingleOrDefault(image => image.ImageTypeId == ImageType.Primary.Id)?.FileName;
     }
 }

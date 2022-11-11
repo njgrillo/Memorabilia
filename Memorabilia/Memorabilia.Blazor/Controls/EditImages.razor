@@ -14,7 +14,7 @@
                                   Elevation="5" 
                                   Height="150"                                  
                                   ObjectFit="@ObjectFit.Cover"
-                                  Src="@(GetImageData(Domain.Constants.ImageFileName.Images))"
+                                  Src="@(GetDomainImageData(Domain.Constants.ImageFileName.Images))"
                                   Width="150" />
                     </Content>
                 </DivRowCol12Center>
@@ -50,10 +50,9 @@
                             <ImageEditor CanRemove="true"
                                          DomainImageRootPath="@DomainImageRootPath"
                                          HasPrimary="true"
-                                         ImageFileName="@image.FilePath"
+                                         ImageFileName="@image.FileName"
                                          ImageRootPath="@UploadPath"
                                          ImageType="image.ImageType"
-                                         IsDomainImage="false"
                                          IsPrimary="image.IsPrimary"
                                          OnPrimarySet="PrimarySet"
                                          OnRemove="Remove" />  

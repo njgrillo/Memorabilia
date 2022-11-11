@@ -4,7 +4,7 @@ namespace Memorabilia.Repository.Implementations;
 
 public class TeamChampionshipRepository : DomainRepository<Champion>, ITeamChampionshipRepository
 {
-    public TeamChampionshipRepository(DomainContext context) : base(context) { }
+    public TeamChampionshipRepository(DomainContext context, IMemoryCache memoryCache) : base(context, memoryCache) { }
 
     public async Task<IEnumerable<Champion>> GetAll(int? teamId = null)
     {

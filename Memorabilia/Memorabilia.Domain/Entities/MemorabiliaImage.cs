@@ -4,7 +4,7 @@ public class MemorabiliaImage : Image
 {
     public MemorabiliaImage() { }
 
-    public MemorabiliaImage(int memorabiliaId, string filePath, int imageTypeId, DateTime uploadDate) : base(filePath, imageTypeId, uploadDate)
+    public MemorabiliaImage(int memorabiliaId, string fileName, int imageTypeId, DateTime uploadDate) : base(fileName, imageTypeId, uploadDate)
     {
         MemorabiliaId = memorabiliaId;
     }

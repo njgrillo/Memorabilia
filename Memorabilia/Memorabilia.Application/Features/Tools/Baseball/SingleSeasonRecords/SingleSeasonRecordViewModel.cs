@@ -15,7 +15,7 @@ public class SingleSeasonRecordViewModel
 
     public int PersonId => _singleSeasonRecord.PersonId;
 
-    public string PersonImagePath => _singleSeasonRecord.Person.ImagePath;
+    public string PersonImageFileName => _singleSeasonRecord.Person.ImageFileName;
 
     public string PersonName => _singleSeasonRecord.Person.DisplayName;
 

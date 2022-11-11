@@ -8,19 +8,20 @@ public class SavePersonAwardViewModel : SaveViewModel
 
     public SavePersonAwardViewModel(PersonAward award)
     {
-        AwardTypeId = award.AwardTypeId;
+        AwardType = Domain.Constants.AwardType.Find(award.AwardTypeId);
         Id = award.Id;
         PersonId = award.PersonId;
+        SportIds = award.Person.Teams.Select(team => team.Team.Franchise.SportLeagueLevel.SportId).Distinct().ToArray();
         Year = award.Year;
     }
 
-    public int AwardTypeId { get; set; }
+    public Domain.Constants.AwardType AwardType { get; set; }
 
-    public string AwardTypeName => Domain.Constants.AwardType.Find(AwardTypeId)?.Name;
-
-    public Domain.Constants.AwardType[] AwardTypes => Domain.Constants.AwardType.All;
+    public string AwardTypeName => AwardType?.Name;
 
     public int PersonId { get; set; }
+
+    public int[] SportIds { get; }
 
     public int Year { get; set; }
 }

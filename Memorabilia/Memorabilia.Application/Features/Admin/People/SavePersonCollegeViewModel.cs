@@ -9,7 +9,7 @@ public class SavePersonCollegeViewModel : SaveViewModel
     public SavePersonCollegeViewModel(PersonCollege college)
     {
         BeginYear = college.BeginYear;
-        CollegeId = college.CollegeId;
+        College = Domain.Constants.College.Find(college.CollegeId);
         EndYear = college.EndYear;
         Id = college.Id;
         PersonId = college.PersonId;
@@ -17,11 +17,9 @@ public class SavePersonCollegeViewModel : SaveViewModel
 
     public int? BeginYear { get; set; }
 
-    public int CollegeId { get; set; }
+    public Domain.Constants.College College { get; set; }
 
-    public string CollegeName => Domain.Constants.College.Find(CollegeId)?.Name;
-
-    public Domain.Constants.College[] Colleges => Domain.Constants.College.All;
+    public string CollegeName => College?.Name;
 
     public int? EndYear { get; set; }
 

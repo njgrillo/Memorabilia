@@ -4,7 +4,7 @@ namespace Memorabilia.Repository.Implementations;
 
 public class PersonCollegeRepository : DomainRepository<PersonCollege>, IPersonCollegeRepository
 {
-    public PersonCollegeRepository(DomainContext context) : base(context) { }
+    public PersonCollegeRepository(DomainContext context, IMemoryCache memoryCache) : base(context, memoryCache) { }
 
     private IQueryable<PersonCollege> Colleges => Items.Include(record => record.Person);
 

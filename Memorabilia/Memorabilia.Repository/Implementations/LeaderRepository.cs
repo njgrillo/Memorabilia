@@ -4,7 +4,7 @@ namespace Memorabilia.Repository.Implementations;
 
 public class LeaderRepository : DomainRepository<Leader>, ILeaderRepository
 {
-    public LeaderRepository(DomainContext context) : base(context) { }
+    public LeaderRepository(DomainContext context, IMemoryCache memoryCache) : base(context, memoryCache) { }
 
     private IQueryable<Leader> Leaders => Items.Include(leader => leader.Person);
 

@@ -8,19 +8,20 @@ public class SavePersonLeaderViewModel : SaveViewModel
 
     public SavePersonLeaderViewModel(Leader leader)
     {
-        LeaderTypeId = leader.LeaderTypeId;
+        LeaderType = Domain.Constants.LeaderType.Find(leader.LeaderTypeId);
         Id = leader.Id;
         PersonId = leader.PersonId;
+        SportIds = leader.Person.Teams.Select(team => team.Team.Franchise.SportLeagueLevel.SportId).Distinct().ToArray();
         Year = leader.Year;
     }
 
-    public int LeaderTypeId { get; set; }
+    public Domain.Constants.LeaderType LeaderType { get; set; }
 
-    public string LeaderTypeName => Domain.Constants.LeaderType.Find(LeaderTypeId)?.Name;
-
-    public Domain.Constants.LeaderType[] LeaderTypes => Domain.Constants.LeaderType.All;
+    public string LeaderTypeName => LeaderType?.Name;
 
     public int PersonId { get; set; }
+
+    public int[] SportIds { get; }
 
     public int Year { get; set; }
 }

@@ -17,7 +17,7 @@ public class LeaderViewModel
 
     public int PersonId => _leader.PersonId;
 
-    public string PersonImagePath => _leader.Person.ImagePath;
+    public string PersonImageFileName => _leader.Person.ImageFileName;
 
     public string PersonName => _leader.Person.DisplayName;
 

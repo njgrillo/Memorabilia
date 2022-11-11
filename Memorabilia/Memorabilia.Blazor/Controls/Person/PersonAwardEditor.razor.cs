@@ -17,7 +17,7 @@ public partial class PersonAwardEditor : ComponentBase
     {
         foreach (var year in _years.ToIntArray())
         {
-            Awards.Add(new SavePersonAwardViewModel() { AwardTypeId = _viewModel.AwardTypeId, Year = year });
+            Awards.Add(new SavePersonAwardViewModel() { AwardType = _viewModel.AwardType, Year = year });
         }
 
         _viewModel = new SavePersonAwardViewModel();

@@ -24,7 +24,7 @@ public partial class PewterEditor : EditItem<SavePewterViewModel, PewterViewMode
 
         ViewModel = new SavePewterViewModel(await Get(new GetPewter(Id)));
 
-        _hasImage = !ViewModel.ImagePath.IsNullOrEmpty();
+        _hasImage = !ViewModel.FileName.IsNullOrEmpty();
     }
 
     private async Task LoadFile(InputFileChangeEventArgs e)
@@ -42,7 +42,7 @@ public partial class PewterEditor : EditItem<SavePewterViewModel, PewterViewMode
             await using FileStream fs = new(path, FileMode.Create);
             await file.OpenReadStream(5120000).CopyToAsync(fs);
 
-            ViewModel.ImagePath = fileName;
+            ViewModel.FileName = fileName;
             _hasImage = true;
         }
         catch (Exception ex)
@@ -53,7 +53,7 @@ public partial class PewterEditor : EditItem<SavePewterViewModel, PewterViewMode
 
     private void Remove()
     {
-        ViewModel.ImagePath = null;
+        ViewModel.FileName = null;
         _hasImage = false;
     }
 }

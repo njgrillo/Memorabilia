@@ -18,8 +18,8 @@ public partial class ViewBaseballColleges : ImagePage
                                                               CompareOptions.IgnoreNonSpace) > -1;
     }
 
-    private async Task OnInputChange(int collegeId)
+    private async Task OnInputChange(College college)
     {
-        _viewModel = await QueryRouter.Send(new GetPersonColleges(collegeId, _viewModel.SportLeagueLevelId));
+        _viewModel = await QueryRouter.Send(new GetPersonColleges(college, _viewModel.SportLeagueLevelId));
     }
 }

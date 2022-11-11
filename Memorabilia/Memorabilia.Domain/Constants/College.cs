@@ -23,6 +23,7 @@ public sealed class College : DomainItemConstant
     public static readonly College BrighamYoung = new(83, "Brigham Young", "BYU");
     public static readonly College BrookdaleCommunityCollege = new(291, "Brookdale Community College", string.Empty);
     public static readonly College BrowardCollege = new(31, "Broward College", string.Empty);
+    public static readonly College CaguasMilitaryAcademy = new(323, "Caguas Military Academy", string.Empty);
     public static readonly College CalhounCommunityCollege = new(112, "Calhoun Community College", string.Empty);
     public static readonly College CaliforniaBerkeley = new(86, "California, Berkeley", "UC Berkeley");
     public static readonly College CaliforniaIrvine = new(48, "California, Irvine", "UCI");
@@ -37,7 +38,7 @@ public sealed class College : DomainItemConstant
     public static readonly College CaliforniaStateSacremento = new(72, "California State, Sacremento", "CSUS");
     public static readonly College Campbell = new(108, "Campbell", string.Empty);
     public static readonly College CanadaCollege = new(46, "Canada College", string.Empty);
-    public static readonly College Capital = new(264, "Capital", "CU");
+    public static readonly College Capital = new(264, "Capital", "CU");    
     public static readonly College CentralArizonaCollege = new(93, "Central Arizona College", "CAC");
     public static readonly College CentralFlorida = new(1, "Central Florida", "UCF");
     public static readonly College ChabotCollege = new (227, "Chabot College", "CC");
@@ -124,6 +125,7 @@ public sealed class College : DomainItemConstant
     public static readonly College KentState = new (224, "Kent State", "KSU");
     public static readonly College Kentucky = new(91, "Kentucky", "UK");
     public static readonly College KutztownPennsylvania = new(289, "Kutztown of Pennsylvania", "KU");
+    public static readonly College LafayetteCollege = new(320, "Lafayette College", string.Empty);
     public static readonly College LakeLandCollege = new(196, "Lake Land College", string.Empty);
     public static readonly College LaneyCollege = new (283, "Laney College", string.Empty);
     public static readonly College LewisAndClarkCommunityCollege = new(206, "Lewis and Clark Community College", string.Empty);
@@ -187,6 +189,7 @@ public sealed class College : DomainItemConstant
     public static readonly College NorthCarolinaState = new(133, "North Carolina State", "NC State");
     public static readonly College Northeastern = new(216, "Northeastern", "NU");
     public static readonly College NortheasternOklahomaAMCollege = new(275, "Northeastern Oklahoma A&M College", "NEO");
+    public static readonly College NortheasternState = new(324, "Northeastern State", "NSU");
     public static readonly College NorthwesternOklahomaState = new(258, "Northwestern Oklahoma State", "NWOSU");
     public static readonly College NorthwestMissouriState = new(195, "Northwest Missouri State", string.Empty);
     public static readonly College Northwestern = new(66, "Northwestern", string.Empty);
@@ -200,6 +203,7 @@ public sealed class College : DomainItemConstant
     public static readonly College OklahomaCity = new (221, "Oklahoma City", "OCU");
     public static readonly College OklahomaState = new (130, "Oklahoma State", "OSU");
     public static readonly College OldDominion = new (135, "Old Dominion", "ODU");
+    public static readonly College OralRoberts = new(322, "Oral Roberts", "ORU");
     public static readonly College OrangeCoastCollege = new(179, "Orange Coast College", "OCC");
     public static readonly College Oregon = new(111, "Oregon", "OU");
     public static readonly College OregonState = new(23, "Oregon State", "OSU");
@@ -249,6 +253,7 @@ public sealed class College : DomainItemConstant
     public static readonly College SouthernCalifornia = new(53, "Southern California", "USC");
     public static readonly College SouthernIllinois = new (120, "Southern Illinois", "SIU");
     public static readonly College SouthernMississippi = new(3, "Southern Mississippi", "Southern Miss");
+    public static readonly College SouthFlorida = new(325, "South Florida", "USF");
     public static readonly College SpartanburgMethodistCollege = new(118, "Spartanburg Methodist College", string.Empty);
     public static readonly College StCloudState = new(278, "St. Cloud State", "SCSU");
     public static readonly College StEdwards = new(313, "St. Edward's", string.Empty);
@@ -282,10 +287,12 @@ public sealed class College : DomainItemConstant
     public static readonly College Tulane = new(295, "Tulane", string.Empty);
     public static readonly College Tulsa = new(272, "Tulsa", "TU");
     public static readonly College UnitedStatesNavalAcademy = new (281, "United States Naval Academy", string.Empty);
+    public static readonly College Utah = new (319, "Utah", "U of U");
     public static readonly College Vanderbilt = new(55, "Vanderbilt", string.Empty);
     public static readonly College Virginia = new(34, "Virginia", "UVA");
-    public static readonly College VirginaCommonwealth = new (262, "Virgina Commonwealth", "VCU");
+    public static readonly College VirginaCommonwealth = new (262, "Virgina Commonwealth", "VCU");   
     public static readonly College VirginiaState = new(16, "Virginia State", "VSU");
+    public static readonly College VirginiaTech = new(321, "Virginia Tech", "VT");
     public static readonly College WagnerCollege = new (173, "Wagner College", string.Empty);
     public static readonly College WakeForest = new(24, "Wake Forest", string.Empty);
     public static readonly College WallaceStateCommunityCollege = new(89, "Wallace State Community College", string.Empty);
@@ -302,6 +309,7 @@ public sealed class College : DomainItemConstant
     public static readonly College WesternOklahomaStateCollege = new (157, "Western Oklahoma State College", string.Empty);
     public static readonly College WestminsterCollege = new (266, "Westminster College", string.Empty);
     public static readonly College WestValleyCollege = new(256, "West Valley College", string.Empty);
+    public static readonly College WestVirginia = new(318, "West Virginia", "WVU");
     public static readonly College WheatonCollegeMassachusetts = new (301, "Wheaton College (Massachusetts)", string.Empty);
     public static readonly College WichitaState = new(20, "Wichita State", "WSU");
     public static readonly College WisconsinStevensPoint = new(143, "Wisconsin-Stevens Point", "UWSP");
@@ -337,6 +345,7 @@ public sealed class College : DomainItemConstant
         BrighamYoung,
         BrookdaleCommunityCollege,
         BrowardCollege,
+        CaguasMilitaryAcademy,
         CalhounCommunityCollege,
         CaliforniaBerkeley,
         CaliforniaIrvine,
@@ -351,7 +360,7 @@ public sealed class College : DomainItemConstant
         CaliforniaStateSacremento,
         Campbell,
         CanadaCollege,
-        Capital,
+        Capital,        
         CentralArizonaCollege,
         CentralFlorida,
         ChabotCollege,
@@ -438,6 +447,7 @@ public sealed class College : DomainItemConstant
         KentState,
         Kentucky,
         KutztownPennsylvania,
+        LafayetteCollege,
         LakeLandCollege,
         LaneyCollege,
         LewisAndClarkCommunityCollege,
@@ -501,6 +511,7 @@ public sealed class College : DomainItemConstant
         NorthCarolinaState,
         Northeastern,
         NortheasternOklahomaAMCollege,
+        NortheasternState,
         NorthwesternOklahomaState,
         NorthwestMissouriState,
         Northwestern,
@@ -514,6 +525,7 @@ public sealed class College : DomainItemConstant
         OklahomaCity,
         OklahomaState,
         OldDominion,
+        OralRoberts,
         OrangeCoastCollege,
         Oregon,
         OregonState,
@@ -563,6 +575,7 @@ public sealed class College : DomainItemConstant
         SouthernCalifornia,
         SouthernIllinois,
         SouthernMississippi,
+        SouthFlorida,
         SpartanburgMethodistCollege,            
         Stanford,
         StateCollegeFloridaManateeSarasota,
@@ -596,10 +609,12 @@ public sealed class College : DomainItemConstant
         Tulane,
         Tulsa,
         UnitedStatesNavalAcademy,
+        Utah,
         Vanderbilt,
         Virginia,
-        VirginaCommonwealth,
+        VirginaCommonwealth,        
         VirginiaState,
+        VirginiaTech,
         WagnerCollege,
         WakeForest,
         WallaceStateCommunityCollege,
@@ -616,6 +631,7 @@ public sealed class College : DomainItemConstant
         WesternOklahomaStateCollege,
         WestminsterCollege,
         WestValleyCollege,
+        WestVirginia,
         WheatonCollegeMassachusetts,
         WichitaState,
         WisconsinStevensPoint,

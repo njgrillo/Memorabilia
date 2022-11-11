@@ -24,7 +24,7 @@ public partial class PersonSingleSeasonRecordEditor : ComponentBase
 
     private void Edit(SavePersonSingleSeasonRecordViewModel record)
     {
-        _viewModel.RecordTypeId = record.RecordTypeId;
+        _viewModel.RecordType = record.RecordType;
         _viewModel.Year = record.Year;
         _viewModel.Amount = record.Amount;
 
@@ -35,9 +35,9 @@ public partial class PersonSingleSeasonRecordEditor : ComponentBase
 
     private void Update()
     {
-        var record = SingleSeasonRecords.Single(record => record.RecordTypeId == _viewModel.RecordTypeId);
+        var record = SingleSeasonRecords.Single(record => record.RecordType.Id == _viewModel.RecordType.Id);
 
-        record.RecordTypeId = _viewModel.RecordTypeId;
+        record.RecordType = _viewModel.RecordType;
         record.Year = _viewModel.Year;
         record.Amount = _viewModel.Amount;
 

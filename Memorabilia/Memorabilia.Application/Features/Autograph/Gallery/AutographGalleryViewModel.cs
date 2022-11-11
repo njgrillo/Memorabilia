@@ -18,7 +18,7 @@ public class AutographGalleryViewModel
         get
         {
             var primaryImageFileName = _autograph.Images.Any()
-                ? _autograph.Images.SingleOrDefault(image => image.ImageTypeId == ImageType.Primary.Id)?.FilePath ?? Domain.Constants.ImageFileName.ImageNotAvailable
+                ? _autograph.Images.SingleOrDefault(image => image.ImageTypeId == ImageType.Primary.Id)?.FileName ?? Domain.Constants.ImageFileName.ImageNotAvailable
                 : Domain.Constants.ImageFileName.ImageNotAvailable;
 
             return !primaryImageFileName.IsNullOrEmpty() ? primaryImageFileName : Domain.Constants.ImageFileName.ImageNotAvailable;

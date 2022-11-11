@@ -4,9 +4,10 @@ public abstract class BaseRepository<T> : IBaseRepository where T : DomainEntity
 {
     private readonly IMemoryCache _memoryCache;
 
-    public BaseRepository(DomainContext context)
+    public BaseRepository(DomainContext context, IMemoryCache memoryCache)
     {
         context.Set<T>().Where(t => 1 == 0).Load();
+        _memoryCache = memoryCache;
     }
 
     public BaseRepository(MemorabiliaContext context, IMemoryCache memoryCache)

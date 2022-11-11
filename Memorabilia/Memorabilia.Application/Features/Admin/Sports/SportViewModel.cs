@@ -17,8 +17,6 @@ public class SportViewModel
 
     public int Id => _sport.Id;
 
-    public string ImagePath => _sport.ImagePath;
-
     public DateTime? LastModifiedDate => _sport.LastModifiedDate;
 
     public string Name => _sport.Name;

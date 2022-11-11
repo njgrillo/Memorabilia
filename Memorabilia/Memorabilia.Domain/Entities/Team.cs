@@ -11,7 +11,7 @@ public class Team : Framework.Library.Domain.Entity.DomainEntity
                 string abbreviation, 
                 int? beginYear, 
                 int? endYear, 
-                string imagePath)
+                string imageFileName)
     {
         FranchiseId = franchiseId;
         Name = name;
@@ -20,7 +20,7 @@ public class Team : Framework.Library.Domain.Entity.DomainEntity
         Abbreviation = abbreviation;
         BeginYear = beginYear;
         EndYear = endYear;
-        ImagePath = imagePath;
+        ImageFileName = imageFileName;
     }
 
     public string Abbreviation { get; private set; }
@@ -39,7 +39,7 @@ public class Team : Framework.Library.Domain.Entity.DomainEntity
 
     public int FranchiseId { get; private set; }
 
-    public string ImagePath { get; private set; }
+    public string ImageFileName { get; private set; }
 
     public virtual List<TeamLeague> Leagues { get; private set; } = new();
 
@@ -80,7 +80,7 @@ public class Team : Framework.Library.Domain.Entity.DomainEntity
                     string abbreviation, 
                     int? beginYear, 
                     int? endYear, 
-                    string imagePath)
+                    string imageFileName)
     {
         Name = name;
         Location = location;
@@ -88,7 +88,7 @@ public class Team : Framework.Library.Domain.Entity.DomainEntity
         Abbreviation = abbreviation;
         BeginYear = beginYear;
         EndYear = endYear;
-        ImagePath = imagePath;
+        ImageFileName = imageFileName;
     }
 
     public void SetChampionship(int championId, int championTypeId, int year)

@@ -1,22 +1,24 @@
-﻿<DivRowCol3>
-    <Content>
+﻿<div class="row">
+    <div class="col-3">
         <AccomplishmentTypeDropDown Disabled="@(!_canEditAccomplishmentType)"
                                     SelectedValue="_viewModel.AccomplishmentTypeId"
                                     SelectionChanged="(p) => _viewModel.AccomplishmentTypeId = p" />
-    </Content>
-</DivRowCol3>
-<DivRowCol3>
-    <Content>
-        <NullableIntField Label="Cost ($)" 
+    </div>
+    <div class="col-1">
+        <NullableIntField Label="Year" 
                           Value="_viewModel.Year"
                           ValueChanged="@((p) => _viewModel.Year = p)" />
-    </Content>
-    <ContentColumn2>
+    </div>
+    <div class="col-2">
         <MudDatePicker @bind-Date="_viewModel.Date"
+                       DateFormat="MM/dd/yyyy"
+                       Editable="true"
                        Label="Date"
+                       Mask="@(new DateMask("MM/dd/yyyy"))"
                        Variant="Variant.Outlined" />
-    </ContentColumn2>
-</DivRowCol3>
+    </div>
+</div>
+<br />
 <DivLeftAlign>
     <Content>
         <MudButton hidden="@(!_canAdd)"

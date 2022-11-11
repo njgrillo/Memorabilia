@@ -1,10 +1,11 @@
-﻿<DivRowCol3>
+﻿<DivRowCol6>
     <Content>
-        <CollegeDropDown Disabled="@(!_canEditCollege)" 
-                         SelectedValue="_viewModel.CollegeId"
-                         SelectionChanged="(p) => _viewModel.CollegeId = p" />
+        <CollegeAutoComplete Disabled="@(!_canEditCollege)" 
+                             ResetValueOnEmptyText="false" 
+                             SelectedValue="_viewModel.College"
+                             SelectionChanged="(p) => _viewModel.College = p" />
     </Content>
-</DivRowCol3>
+</DivRowCol6>
 <DivRowCol3>
     <Content>
         <NullableIntField Label="Begin Year"

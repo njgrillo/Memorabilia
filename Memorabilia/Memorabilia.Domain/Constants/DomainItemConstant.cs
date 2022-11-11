@@ -6,8 +6,6 @@ public abstract class DomainItemConstant : IWithName, IWithValue<int>
 
     public int Id { get; }
 
-    public string ImagePath { get; }
-
     public string Name { get; }
 
     public int Value => Id;

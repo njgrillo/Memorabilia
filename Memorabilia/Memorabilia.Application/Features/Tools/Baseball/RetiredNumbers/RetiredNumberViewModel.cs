@@ -15,7 +15,7 @@ public class RetiredNumberViewModel
 
     public int PersonId => _retiredNumber.PersonId;
 
-    public string PersonImagePath => _retiredNumber.Person.ImagePath;
+    public string PersonImageFileName => _retiredNumber.Person.ImageFileName;
 
     public string PersonName => _retiredNumber.Person.DisplayName;
 

@@ -8,9 +8,9 @@ public class SavePewterViewModel : SaveViewModel
 
     public SavePewterViewModel(PewterViewModel viewModel)
     {
+        FileName = viewModel.ImageFileName;
         FranchiseId = viewModel.FranchiseId;
-        Id = viewModel.Id;
-        ImagePath = viewModel.ImageFileName;
+        Id = viewModel.Id;        
         SizeId = viewModel.SizeId;
         TeamId = viewModel.TeamId;
     }
@@ -18,15 +18,15 @@ public class SavePewterViewModel : SaveViewModel
     public override string ExitNavigationPath => AdminDomainItem.Pewters.Page;
 
     [Required]
+    public string FileName { get; set; }
+
+    [Required]
     [Range(1, int.MaxValue, ErrorMessage = "Franchise is required.")]
     public int FranchiseId { get; set; }
 
     public Franchise[] Franchises => Franchise.GetAll(SportLeagueLevel);
 
-    public string ImageFileName => AdminDomainItem.Pewters.ImageFileName;
-
-    [Required]
-    public string ImagePath { get; set; } 
+    public string ImageFileName => AdminDomainItem.Pewters.ImageFileName;    
 
     public override string ItemTitle => AdminDomainItem.Pewters.Item;    
 

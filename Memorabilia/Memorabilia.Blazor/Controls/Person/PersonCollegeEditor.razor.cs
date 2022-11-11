@@ -21,7 +21,7 @@ public partial class PersonCollegeEditor : ComponentBase
 
     private void Edit(SavePersonCollegeViewModel college)
     {
-        _viewModel.CollegeId = college.CollegeId;
+        _viewModel.College = college.College;
         _viewModel.BeginYear = college.BeginYear;
         _viewModel.EndYear = college.EndYear;
 
@@ -32,9 +32,9 @@ public partial class PersonCollegeEditor : ComponentBase
 
     private void Update()
     {
-        var college = Colleges.Single(college => college.CollegeId == _viewModel.CollegeId);
+        var college = Colleges.Single(college => college.College.Id == _viewModel.College.Id);
 
-        college.CollegeId = _viewModel.CollegeId;
+        college.College = _viewModel.College;
         college.BeginYear = _viewModel.BeginYear;
         college.EndYear = _viewModel.EndYear;
 

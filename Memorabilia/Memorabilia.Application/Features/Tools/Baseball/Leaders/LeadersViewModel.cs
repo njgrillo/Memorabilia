@@ -16,11 +16,13 @@ public class LeadersViewModel
 
     public IEnumerable<LeaderViewModel> Leaders { get; set; } = Enumerable.Empty<LeaderViewModel>();
 
+    public Domain.Constants.LeaderType LeaderType { get; set; }
+
     public int LeaderTypeId { get; set; }
 
-    public string LeaderTypeName => Domain.Constants.LeaderType.Find(LeaderTypeId)?.Name;
+    public string LeaderTypeName => LeaderType?.Name;
 
     public string ResultsTitle => $"{LeaderTypeName} Leaders";
 
-    public int SportLeagueLevelId => Domain.Constants.SportLeagueLevel.MajorLeagueBaseball.Id;
+    public int[] SportIds => new int[] { Domain.Constants.Sport.Baseball.Id };
 }

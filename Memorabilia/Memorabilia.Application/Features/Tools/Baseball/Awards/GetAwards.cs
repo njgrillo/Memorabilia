@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Application.Features.Tools.Baseball.Awards;
 
-public record GetAwards(int AwardTypeId) : IQuery<AwardsViewModel>
+public record GetAwards(Domain.Constants.AwardType AwardType) : IQuery<AwardsViewModel>
 {
     public class Handler : QueryHandler<GetAwards, AwardsViewModel>
     {
@@ -13,9 +13,9 @@ public record GetAwards(int AwardTypeId) : IQuery<AwardsViewModel>
 
         protected override async Task<AwardsViewModel> Handle(GetAwards query)
         {
-            return new AwardsViewModel(await _personAwardRepository.GetAll(query.AwardTypeId))
+            return new AwardsViewModel(await _personAwardRepository.GetAll(query.AwardType.Id))
             {
-                AwardTypeId = query.AwardTypeId
+                AwardType = query.AwardType
             };
         }
     }

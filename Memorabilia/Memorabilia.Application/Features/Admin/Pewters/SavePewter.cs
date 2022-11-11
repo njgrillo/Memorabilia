@@ -22,8 +22,8 @@ public record SavePewter(SavePewterViewModel ViewModel) : ICommand
                 pewter = new Pewter(request.ViewModel.FranchiseId,
                                     request.ViewModel.TeamId,
                                     request.ViewModel.SizeId,
-                                    !request.ViewModel.ImagePath.IsNullOrEmpty() ? Domain.Constants.ImageType.Primary.Id : null,
-                                    request.ViewModel.ImagePath);
+                                    !request.ViewModel.FileName.IsNullOrEmpty() ? Domain.Constants.ImageType.Primary.Id : null,
+                                    request.ViewModel.FileName);
 
                 await _pewterRepository.Add(pewter);
 
@@ -42,8 +42,8 @@ public record SavePewter(SavePewterViewModel ViewModel) : ICommand
             pewter.Set(request.ViewModel.FranchiseId,
                        request.ViewModel.TeamId,
                        request.ViewModel.SizeId,
-                       !request.ViewModel.ImagePath.IsNullOrEmpty() ? Domain.Constants.ImageType.Primary.Id : null,
-                       request.ViewModel.ImagePath);
+                       !request.ViewModel.FileName.IsNullOrEmpty() ? Domain.Constants.ImageType.Primary.Id : null,
+                       request.ViewModel.FileName);
 
             await _pewterRepository.Update(pewter);
         }

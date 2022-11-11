@@ -21,7 +21,7 @@ public class PersonCollegeViewModel
 
     public int PersonId => _personCollege.PersonId;
 
-    public string PersonImagePath => _personCollege.Person.ImagePath;
+    public string PersonImageFileName => _personCollege.Person.ImageFileName;
 
     public string PersonName => _personCollege.Person.DisplayName;
 

@@ -1,7 +1,9 @@
 ﻿<DivRowCol3>
     <Content>
-        <LeaderTypeDropDown SelectedValue="_viewModel.LeaderTypeId"
-                            SelectionChanged="(p) => _viewModel.LeaderTypeId = p" />
+        <LeaderTypeAutoComplete ResetValueOnEmptyText="false"
+                                SelectedValue="_viewModel.LeaderType"
+                                SelectionChanged="(p) => _viewModel.LeaderType = p"
+                                SportIds="_viewModel.SportIds" />
     </Content>
     <ContentColumn2>
         <TextField HelperText="Ex. 1999 or 1999-2002 or 2003, 2005-2008"

@@ -14,9 +14,11 @@ public class AwardsViewModel
                                    .ThenBy(personAward => personAward.PersonName);
     }
 
-    public int AwardTypeId { get; set; }
+    public Domain.Constants.AwardType AwardType { get; set; }
 
-    public string AwardTypeName => Domain.Constants.AwardType.Find(AwardTypeId)?.Name;
+    public string AwardTypeName => AwardType?.Name;
 
     public IEnumerable<AwardViewModel> PersonAwards { get; set; } = Enumerable.Empty<AwardViewModel>();
+
+    public int[] SportIds => new int[] { Domain.Constants.Sport.Baseball.Id };
 }

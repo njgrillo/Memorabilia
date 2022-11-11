@@ -4,16 +4,16 @@ public class Image : Framework.Library.Domain.Entity.DomainEntity
 {
     public Image() { }
 
-    public Image(string filePath, int imageTypeId, DateTime? uploadDate = null)
+    public Image(string fileName, int imageTypeId, DateTime? uploadDate = null)
     {
-        FilePath = filePath;
+        FileName = fileName;
         ImageTypeId = imageTypeId;
 
         if (uploadDate.HasValue)
             UploadDate = uploadDate.Value;
     }
 
-    public string FilePath { get; private set; }
+    public string FileName { get; private set; }
 
     public int ImageTypeId { get; private set; }
 

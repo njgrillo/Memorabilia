@@ -5,6 +5,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="wwwroot\userimages\**" />
+    <Content Remove="wwwroot\userimages\**" />
+    <EmbeddedResource Remove="wwwroot\userimages\**" />
+    <None Remove="wwwroot\userimages\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Compile Remove="Pages\Admin\AccomplishmentTypes\EditAccomplishmentType.razor.cs" />
   </ItemGroup>
 
@@ -22,10 +29,6 @@
     <PackageReference Include="MudBlazor" Version="6.0.15" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
     <PackageReference Include="PrettyBlazor" Version="1.2.0" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="wwwroot\userimages\" />
   </ItemGroup>
 
   <ItemGroup>

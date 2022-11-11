@@ -19,7 +19,7 @@ public class AccomplishmentViewModel
 
     public int PersonId => _personAccomplishment.PersonId;
 
-    public string PersonImagePath => _personAccomplishment.Person.ImagePath;
+    public string PersonImageFileName => _personAccomplishment.Person.ImageFileName;
 
     public string PersonName => _personAccomplishment.Person.DisplayName;
 

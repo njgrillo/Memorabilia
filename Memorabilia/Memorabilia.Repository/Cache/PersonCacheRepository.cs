@@ -12,6 +12,13 @@ public class PersonCacheRepository : DomainCacheRepository<Person>, IPersonRepos
         _personRepository = personRepository;
     }
 
+    public override async Task Add(Person person, CancellationToken cancellationToken = default)
+    {
+        RemoveFromCache($"Person_GetAll");
+
+        await _personRepository.Add(person, cancellationToken);
+    }
+
     public override Task<Person> Get(int id)
     {
         return Get($"Person_Get_{id}", entry =>
@@ -23,10 +30,15 @@ public class PersonCacheRepository : DomainCacheRepository<Person>, IPersonRepos
 
     public Task<IEnumerable<Person>> GetAll(int? sportId = null, int? sportLeagueLevelId = null)
     {
-        return GetAll($"Person_GetAll_{sportId ?? 0}_{sportLeagueLevelId ?? 0}", entry =>
+        if (sportId == null && sportLeagueLevelId == null)
         {
-            entry.SetAbsoluteExpiration(TimeSpan.FromDays(1));
-            return _personRepository.GetAll(sportId, sportLeagueLevelId);
-        });
+            return GetAll($"Person_GetAll", entry =>
+            {
+                entry.SetAbsoluteExpiration(TimeSpan.FromDays(1));
+                return _personRepository.GetAll();
+            });
+        }
+
+        return _personRepository.GetAll(sportId, sportLeagueLevelId);
     }
 }

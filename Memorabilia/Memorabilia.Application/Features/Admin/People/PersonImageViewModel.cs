@@ -13,7 +13,7 @@ public class PersonImageViewModel
         _person = person;
     }
 
-    public string ImageFileName => _person.ImagePath;
+    public string ImageFileName => _person.ImageFileName;
 
     public int PersonId => _person.Id;
 }

@@ -4,7 +4,7 @@ namespace Memorabilia.Repository.Implementations;
 
 public class UserRepository : DomainRepository<User>, IUserRepository
 {
-    public UserRepository(DomainContext context) : base(context) { }
+    public UserRepository(DomainContext context, IMemoryCache memoryCache) : base(context, memoryCache) { }
 
     private IQueryable<User> User => Items.Include(user => user.DashboardItems);
 

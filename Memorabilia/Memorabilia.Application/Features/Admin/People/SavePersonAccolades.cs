@@ -48,7 +48,7 @@ public class SavePersonAccolades
 
             foreach (var award in command.Awards)
             {
-                person.SetAward(award.Id, award.AwardTypeId, award.Year);
+                person.SetAward(award.Id, award.AwardType.Id, award.Year);
             }
         }
 
@@ -58,7 +58,7 @@ public class SavePersonAccolades
 
             foreach (var record in command.CareerRecords)
             {
-                person.SetCareerRecord(record.Id, record.RecordTypeId, record.Amount);
+                person.SetCareerRecord(record.Id, record.RecordType.Id, record.Amount);
             }
         }
 
@@ -68,7 +68,7 @@ public class SavePersonAccolades
 
             foreach (var leader in command.Leaders)
             {
-                person.SetLeader(leader.Id, leader.LeaderTypeId, leader.Year);
+                person.SetLeader(leader.Id, leader.LeaderType.Id, leader.Year);
             }
         }
 
@@ -88,7 +88,7 @@ public class SavePersonAccolades
 
             foreach (var record in command.SingleSeasonRecords)
             {
-                person.SetSingleSeasonRecord(record.Id, record.RecordTypeId, record.Year ?? 0, record.Amount);
+                person.SetSingleSeasonRecord(record.Id, record.RecordType.Id, record.Year ?? 0, record.Amount);
             }
         }
     }

@@ -4,7 +4,7 @@ namespace Memorabilia.Repository.Implementations;
 
 public class PersonRepository : DomainRepository<Person>, IPersonRepository
 {
-    public PersonRepository(DomainContext context) : base(context) { }
+    public PersonRepository(DomainContext context, IMemoryCache memoryCache) : base(context, memoryCache) { }
 
     private IQueryable<Person> Person => Items.Include(person => person.Accomplishments)
                                               .Include(person => person.AllStars)
@@ -21,6 +21,7 @@ public class PersonRepository : DomainRepository<Person>, IPersonRepository
                                               .Include(person => person.SingleSeasonRecords)
                                               .Include(person => person.Sports)
                                               .Include(person => person.Teams)
+                                              .Include("Sports.Sport")
                                               .Include("Teams.Team");
 
     public override async Task<Person> Get(int id)

@@ -14,10 +14,10 @@ public class FranchiseDropDown : DropDown<Franchise, int>, INotifyPropertyChange
 
     public FranchiseDropDown()
     {
-        PropertyChanged += FranchisDropDown_PropertyChanged;
+        PropertyChanged += FranchiseDropDown_PropertyChanged;
     }
 
-    public void FranchisDropDown_PropertyChanged(object sender, PropertyChangedEventArgs e)
+    public void FranchiseDropDown_PropertyChanged(object sender, PropertyChangedEventArgs e)
     {
         if (e.PropertyName == nameof(SportLeagueLevelId) || e.PropertyName == nameof(SportIds))
         {

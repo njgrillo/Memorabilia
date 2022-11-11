@@ -5,6 +5,9 @@ namespace Memorabilia.Blazor.Controls.Fields;
 public partial class NumericField<TType> : Field
 {
     [Parameter]
+    public bool HideSpinButtons { get; set; } = true;
+
+    [Parameter]
     public TType Maximum { get; set; }
 
     [Parameter]

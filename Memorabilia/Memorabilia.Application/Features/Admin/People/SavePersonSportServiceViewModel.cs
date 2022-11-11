@@ -14,7 +14,7 @@ public class SavePersonSportServiceViewModel : SaveViewModel
         FreeAgentSigningDate = viewModel.Service?.FreeAgentSigningDate;
         LastAppearanceDate = viewModel.Service?.LastAppearanceDate;
         PersonId = personId;
-        SportIds = viewModel.Sports.Select(sport => sport.Sport.Id).ToList();    
+        SportIds = viewModel.Sports.Select(sport => sport.SportId).ToList();    
     }
 
     public override string BackNavigationPath => $"{AdminDomainItem.People.Title}/{AdminDomainItem.Occupations.Item}/{EditModeType.Update.Name}/{PersonId}";

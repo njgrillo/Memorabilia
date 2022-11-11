@@ -4,7 +4,7 @@ namespace Memorabilia.Repository.Implementations;
 
 public class ItemTypeSizeRepository : DomainRepository<ItemTypeSize>, IItemTypeSizeRepository
 {
-    public ItemTypeSizeRepository(DomainContext context) : base(context) { }
+    public ItemTypeSizeRepository(DomainContext context, IMemoryCache memoryCache) : base(context, memoryCache) { }
 
     public async Task<IEnumerable<ItemTypeSize>> GetAll(int? itemTypeId = null)
     {

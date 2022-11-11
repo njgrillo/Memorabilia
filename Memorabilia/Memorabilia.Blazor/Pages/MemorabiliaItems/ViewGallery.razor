@@ -22,8 +22,9 @@
                                                                 EditNavigationPath="@item.EditNavigationPath"
                                                                 ImageRootPath="@ImageRootPath"
                                                                 MemorabiliaItem="@item"
-                                                                PrimaryImageNavigationPath="@item.PrimaryImageNavigationPath"
-                                                                PrimaryImagePath="@(GetImageData(item.ImageFileName))"                                             Subtitle="@GetSubtitle(item)"
+                                                                PrimaryImageFileName="@item.ImageFileName"
+                                                                PrimaryImageNavigationPath="@item.PrimaryImageNavigationPath"                                                                
+                                                                Subtitle="@GetSubtitle(item)"
                                                                 Title="@GetTitle(item)"
                                                                 TooltipText="@item.TooltipText" />
                                 </div>

@@ -1,8 +1,10 @@
 ﻿<DivRowCol3>
     <Content>
-        <RecordTypeDropDown Disabled="@(!_canEditRecordType)" 
-                            SelectedValue="_viewModel.RecordTypeId"
-                            SelectionChanged="(p) => _viewModel.RecordTypeId = p" />
+        <RecordTypeAutoComplete Disabled="@(!_canEditRecordType)" 
+                                ResetValueOnEmptyText="false"
+                                SelectedValue="_viewModel.RecordType"
+                                SelectionChanged="(p) => _viewModel.RecordType = p"
+                                SportIds="_viewModel.SportIds" />
     </Content>
     <ContentColumn2>
         <NullableDecimalField Label="Amount"

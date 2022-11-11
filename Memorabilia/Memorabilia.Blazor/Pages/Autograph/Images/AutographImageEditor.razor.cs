@@ -18,7 +18,7 @@ public partial class AutographImageEditor : AutographItem<SaveAutographImagesVie
         var memorabliaImagesViewModel = await QueryRouter.Send(query);
         var images = memorabliaImagesViewModel.Images
                                               .Select(image => new Domain.Entities.AutographImage(ViewModel.AutographId,
-                                                                                                  image.FilePath,
+                                                                                                  image.FileName,
                                                                                                   image.ImageTypeId,
                                                                                                   image.UploadDate))
                                               .ToList();

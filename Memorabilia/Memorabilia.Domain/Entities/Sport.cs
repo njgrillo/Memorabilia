@@ -15,7 +15,7 @@ public class Sport : Framework.Library.Domain.Entity.DomainEntity
 
     public DateTime CreateDate { get; private set; }
 
-    public string ImagePath { get; private set; }
+    public string ImageFileName { get; private set; }
 
     public DateTime? LastModifiedDate { get; private set; }
 

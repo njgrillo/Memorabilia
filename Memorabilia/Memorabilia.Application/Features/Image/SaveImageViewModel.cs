@@ -6,27 +6,21 @@ public class SaveImageViewModel : SaveViewModel
 {
     public SaveImageViewModel() { }
 
-    public SaveImageViewModel(ImageViewModel viewModel, string fileName)
+    public SaveImageViewModel(ImageViewModel viewModel)
     {
-        FileName = fileName;
-        FilePath = viewModel.FilePath;
+        FileName = viewModel.FileName;
         Id = viewModel.Id;
         ImageTypeId = viewModel.ImageTypeId;
     }
 
     public SaveImageViewModel(Domain.Entities.Image image)
     {
-        FilePath = image.FilePath;
+        FileName = image.FileName;
         Id = image.Id;
         ImageTypeId = image.ImageTypeId;
     }
 
     public string FileName { get; set; }
-
-    [Required]
-    [StringLength(500, ErrorMessage = "File Path is too long.")]
-    [MinLength(1, ErrorMessage = "File Path is too short.")]
-    public string FilePath { get; set; }
 
     public ImageType ImageType => ImageType.Find(ImageTypeId);
 

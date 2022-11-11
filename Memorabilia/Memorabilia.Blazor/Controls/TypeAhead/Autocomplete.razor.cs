@@ -1,7 +1,5 @@
 ﻿#nullable disable
 
-using System.ComponentModel;
-
 namespace Memorabilia.Blazor.Controls.TypeAhead;
 
 public abstract partial class Autocomplete<TItem> where TItem : class, IWithName
@@ -39,7 +37,7 @@ public abstract partial class Autocomplete<TItem> where TItem : class, IWithName
 
     public abstract Task<IEnumerable<TItem>> Search(string searchText);
 
-    public string GetDisplayText(TItem item)
+    public virtual string GetDisplayText(TItem item)
     {
         return item?.Name;
     }

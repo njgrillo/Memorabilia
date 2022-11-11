@@ -9,12 +9,15 @@ public class SavePersonTeamsViewModel : SaveViewModel
     public SavePersonTeamsViewModel(PersonTeamsViewModel viewModel)
     {
         PersonId = viewModel.PersonId;
-        SportIds = viewModel.Sports.Select(sport => sport.SportId).ToList();
+        SportIds = viewModel.Sports
+                            .Select(sport => sport.SportId)
+                            .Distinct()
+                            .ToList();
         Teams = viewModel.Teams
                          .Select(team => new SavePersonTeamViewModel(new PersonTeamViewModel(team)))
                          .OrderBy(team => team.BeginYear)
                          .ThenBy(team => team.TeamDisplayName)
-                         .ToList();
+                         .ToList();       
     }
 
     public override string BackNavigationPath => $"{AdminDomainItem.People.Title}/SportService/{EditModeType.Update.Name}/{PersonId}";

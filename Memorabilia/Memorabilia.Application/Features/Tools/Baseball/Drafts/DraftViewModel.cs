@@ -19,7 +19,7 @@ public class DraftViewModel
 
     public int PersonId => _draft.PersonId;
 
-    public string PersonImagePath => _draft.Person.ImagePath;
+    public string PersonImageFileName => _draft.Person.ImageFileName;
 
     public string PersonName => _draft.Person.DisplayName;
 

@@ -35,8 +35,6 @@ public class SaveAutographImagesViewModel : SaveViewModel
 
     public override string ExitNavigationPath => "Memorabilia/Items";
 
-    public string ImagePath => Domain.Constants.ImageFileName.Images;
-
     public List<SaveImageViewModel> Images { get; set; } = new();
 
     public Domain.Constants.ItemType ItemType { get; }

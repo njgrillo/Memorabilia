@@ -17,7 +17,7 @@ public partial class PersonLeaderEditor : ComponentBase
     {
         foreach (var year in _years.ToIntArray())
         {
-            Leaders.Add(new SavePersonLeaderViewModel() { LeaderTypeId = _viewModel.LeaderTypeId, Year = year });
+            Leaders.Add(new SavePersonLeaderViewModel() { LeaderType = _viewModel.LeaderType, Year = year });
         }
 
         _viewModel = new SavePersonLeaderViewModel();

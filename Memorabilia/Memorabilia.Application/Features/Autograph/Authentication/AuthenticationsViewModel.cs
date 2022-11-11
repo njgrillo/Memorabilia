@@ -11,7 +11,7 @@ public class AuthenticationsViewModel : ViewModel
 
     public int AutographId { get; set; }
 
-    public string ImagePath { get; set; }
+    public string ImageFileName { get; set; }
 
     public List<AuthenticationViewModel> Authentications { get; set; } = new();
 

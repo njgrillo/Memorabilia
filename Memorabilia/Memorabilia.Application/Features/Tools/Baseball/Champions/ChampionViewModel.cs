@@ -15,11 +15,7 @@ public class ChampionViewModel
 
     public int TeamId => _champion.TeamId;
 
-    public string TeamImagePath => _champion.Team.ImagePath;
-
     public string TeamName => _champion.Team.ToString();
-
-    //public string ProfileLink => $"/Tools/BaseballProfile/{PersonId}";
 
     public string Year => _champion.Year.ToString();
 }

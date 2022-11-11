@@ -17,7 +17,7 @@ public class HallOfFameViewModel
 
     public int PersonId => _hallOfFame.PersonId;
 
-    public string PersonImagePath => _hallOfFame.Person?.ImagePath;
+    public string PersonImageFileName => _hallOfFame.Person?.ImageFileName;
 
     public string PersonName => _hallOfFame.Person?.DisplayName;
 

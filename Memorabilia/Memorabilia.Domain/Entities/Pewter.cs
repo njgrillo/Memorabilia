@@ -4,20 +4,20 @@ public class Pewter : Framework.Library.Domain.Entity.DomainEntity
 {
     public Pewter() { }
 
-    public Pewter(int franchaseId, int teamId, int sizeId, int? imageTypeId, string imagePath)
+    public Pewter(int franchaseId, int teamId, int sizeId, int? imageTypeId, string imageFileName)
     {
         FranchiseId = franchaseId;
         TeamId = teamId;
         SizeId = sizeId;
         ImageTypeId = imageTypeId;
-        ImagePath = imagePath;
+        ImageFileName = imageFileName;
     }
 
     public int FranchiseId { get; private set; }
 
     public string FranchiseName => Constants.Franchise.Find(FranchiseId)?.Name;
 
-    public string ImagePath { get; private set; }
+    public string ImageFileName { get; private set; }
 
     public int? ImageTypeId { get; private set; }
 
@@ -31,12 +31,12 @@ public class Pewter : Framework.Library.Domain.Entity.DomainEntity
 
     public int TeamId { get; private set; }     
 
-    public void Set(int franchaseId, int teamId, int sizeId, int? imageTypeId, string imagePath)
+    public void Set(int franchaseId, int teamId, int sizeId, int? imageTypeId, string imageFileName)
     {
         FranchiseId = franchaseId;
         TeamId = teamId;
         SizeId = sizeId;
         ImageTypeId = imageTypeId;
-        ImagePath = imagePath;
+        ImageFileName = imageFileName;
     }
 }

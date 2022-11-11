@@ -18,8 +18,8 @@ public partial class ViewAwards : ImagePage
                                                               CompareOptions.IgnoreNonSpace) > -1;
     }
 
-    private async Task OnInputChange(int awardTypeId)
+    private async Task OnInputChange(AwardType awardType)
     {
-        _viewModel = await QueryRouter.Send(new GetAwards(awardTypeId));
+        _viewModel = await QueryRouter.Send(new GetAwards(awardType));
     }
 }
