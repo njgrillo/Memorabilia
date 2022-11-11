@@ -49,6 +49,9 @@ namespace Memorabilia.Web
             services.AddTransient<LeaderRepository>();
             services.AddTransient<ILeaderRepository, LeaderCacheRepository>();
 
+            //services.AddTransient<MemorabiliaItemRepository>();
+            //services.AddTransient<IMemorabiliaItemRepository, MemorabiliaItemCacheRepository>();
+
             services.AddTransient<PersonAccomplishmentRepository>();
             services.AddTransient<IPersonAccomplishmentRepository, PersonAccomplishmentCacheRepository>();
 
@@ -68,10 +71,7 @@ namespace Memorabilia.Web
             services.AddTransient<IRetiredNumberRepository, RetiredNumberCacheRepository>();
 
             services.AddTransient<SingleSeasonRecordRepository>();
-            services.AddTransient<ISingleSeasonRecordRepository, SingleSeasonRecordCacheRepository>();
-
-            //services.AddTransient<MemorabiliaItemRepository>();
-            //services.AddTransient<IMemorabiliaItemRepository, MemorabiliaItemCacheRepository>();
+            services.AddTransient<ISingleSeasonRecordRepository, SingleSeasonRecordCacheRepository>();            
 
             services.AddMudServices(config =>
             {

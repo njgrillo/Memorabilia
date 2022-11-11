@@ -4,6 +4,48 @@ public class Memorabilia : Framework.Library.Domain.Entity.DomainEntity
 {
     public Memorabilia() { }
 
+    public Memorabilia(Memorabilia memorabilia)
+    {
+        Id = memorabilia.Id;
+
+        Autographs = memorabilia.Autographs;
+        Bammer = memorabilia.Bammer;
+        Baseball = memorabilia.Baseball;
+        Basketball = memorabilia.Basketball;
+        Bat = memorabilia.Bat;
+        Bobblehead = memorabilia.Bobblehead;
+        Book = memorabilia.Book;
+        Brand = memorabilia.Brand;
+        Card = memorabilia.Card;
+        Commissioner = memorabilia.Commissioner;
+        ConditionId = memorabilia.ConditionId;
+        CreateDate = memorabilia.CreateDate;
+        Denominator = memorabilia.Denominator;
+        Figure = memorabilia.Figure;
+        Football = memorabilia.Football;
+        EstimatedValue = memorabilia.EstimatedValue;
+        Game = memorabilia.Game;
+        Glove = memorabilia.Glove;
+        Helmet = memorabilia.Helmet;
+        Images = memorabilia.Images;
+        ItemTypeId = memorabilia.ItemTypeId;
+        Jersey = memorabilia.Jersey;
+        LastModifiedDate = memorabilia.LastModifiedDate;
+        LevelType = memorabilia.LevelType;
+        Magazine = memorabilia.Magazine;
+        MemorabiliaAcquisition = memorabilia.MemorabiliaAcquisition;
+        Note = memorabilia.Note;
+        Numerator = memorabilia.Numerator;
+        People = memorabilia.People;
+        Picture = memorabilia.Picture;
+        PrivacyTypeId = memorabilia.PrivacyTypeId;
+        Size = memorabilia.Size;
+        Sports = memorabilia.Sports;
+        Teams = memorabilia.Teams;
+        User = memorabilia.User;
+        UserId = memorabilia.UserId;
+    }
+
     public Memorabilia(DateTime? acquiredDate,
                        bool acquiredWithAutograph,
                        int acquisitionTypeId,

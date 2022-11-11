@@ -31,6 +31,7 @@ global using Memorabilia.Application.Features.Admin.GloveTypes;
 global using Memorabilia.Application.Features.Admin.HelmetFinishes;
 global using Memorabilia.Application.Features.Admin.HelmetQualityTypes;
 global using Memorabilia.Application.Features.Admin.HelmetTypes;
+global using Memorabilia.Application.Features.Admin.ImageMaintenance;
 global using Memorabilia.Application.Features.Admin.ImageTypes;
 global using Memorabilia.Application.Features.Admin.InscriptionTypes;
 global using Memorabilia.Application.Features.Admin.InternationalHallOfFameTypes;

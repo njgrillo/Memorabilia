@@ -49,7 +49,15 @@ public class MemorabiliaItemRepository : MemorabiliaRepository<Domain.Entities.M
 
     public async Task<IEnumerable<Domain.Entities.Memorabilia>> GetAll(int userId)
     {
-        return await Memorabilia.Where(memorabilia => memorabilia.UserId == userId).ToListAsync();
+        return await Memorabilia.Where(memorabilia => memorabilia.UserId == userId)
+                                .ToListAsync();
+
+        //var query =
+        //    from memorabilia in Context.Memorabilia
+        //    where memorabilia.UserId == userId
+        //    select new Domain.Entities.Memorabilia(memorabilia);
+
+        //return await query.ToListAsync();
     }
 
     public async Task<IEnumerable<Domain.Entities.Memorabilia>> GetAllUnsigned(int userId)

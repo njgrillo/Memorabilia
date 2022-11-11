@@ -17,6 +17,13 @@ public class MemorabiliaItemCacheRepository : MemorabiliaRepository<Domain.Entit
         await _memorabiliaItemRepository.Add(item, cancellationToken);
     }
 
+    public override async Task Delete(Domain.Entities.Memorabilia item, CancellationToken cancellationToken = default)
+    {
+        RemoveFromCache($"MemorabiliaItem_GetAll_{item.UserId}");
+
+        await _memorabiliaItemRepository.Delete(item, cancellationToken);
+    }
+
     public Task<IEnumerable<Domain.Entities.Memorabilia>> GetAll(int userId)
     {
         return GetFromCache($"MemorabiliaItem_GetAll_{userId}", entry =>
@@ -33,5 +40,12 @@ public class MemorabiliaItemCacheRepository : MemorabiliaRepository<Domain.Entit
             entry.SetAbsoluteExpiration(TimeSpan.FromDays(1));
             return _memorabiliaItemRepository.GetAllUnsigned(userId);
         });
+    }
+
+    public override async Task Update(Domain.Entities.Memorabilia item, CancellationToken cancellationToken = default)
+    {
+        RemoveFromCache($"MemorabiliaItem_GetAll_{item.UserId}");
+
+        await _memorabiliaItemRepository.Update(item, cancellationToken);
     }
 }

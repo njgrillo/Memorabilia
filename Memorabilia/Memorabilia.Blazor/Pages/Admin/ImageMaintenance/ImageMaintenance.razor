@@ -1,0 +1,61 @@
+﻿@inherits CommandQuery
+
+<DivRowCol6>
+    <Content>
+        <MudTable Bordered="false"
+                  Dense="false"
+                  Hover="true"
+                  Items="@_viewModel.ExistingImageFileNames.OrderBy(item => item)"
+                  Striped="true">
+            <ToolBarContent>
+                <MudText Typo="Typo.h6">Existing Images</MudText>
+                <MudSpacer />
+            </ToolBarContent>
+            <HeaderContent>
+                <MudTh>File Name</MudTh>
+                <MudTh></MudTh>
+            </HeaderContent>
+            <RowTemplate>
+                <MudTd DataLabel="Name">@context</MudTd>
+            </RowTemplate>
+            <PagerContent>
+                <MudTablePager />
+            </PagerContent>
+        </MudTable>
+    </Content>
+</DivRowCol6>
+<br/>
+<DivRowCol6>
+    <Content>
+        <MudTable Bordered="false"
+                  Dense="false"
+                  Hover="true"
+                  Items="@_viewModel.OrphanedImageFileNames.OrderBy(item => item)"
+                  Striped="true">
+            <ToolBarContent>
+                <MudText Typo="Typo.h6">Orphaned Images</MudText>
+                <MudSpacer />
+            </ToolBarContent>
+            <HeaderContent>
+                <MudTh>File Name</MudTh>
+                <MudTh></MudTh>
+            </HeaderContent>
+            <RowTemplate>
+                <MudTd DataLabel="Name">@context</MudTd>
+            </RowTemplate>
+            <PagerContent>
+                <MudTablePager />
+            </PagerContent>
+        </MudTable>
+    </Content>
+</DivRowCol6>
+<br/>
+<DivRowCol3>
+    <Content>
+        <MudButton ButtonType="MudBlazor.ButtonType.Button" 
+                   Color="MudBlazor.Color.Dark"
+                   OnClick="Delete"
+                   Size="MudBlazor.Size.Medium"                                  
+                   Variant="Variant.Filled">Delete Orphaned Images</MudButton>
+    </Content>
+</DivRowCol3>
