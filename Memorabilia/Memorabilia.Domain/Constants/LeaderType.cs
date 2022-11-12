@@ -130,4 +130,9 @@ public sealed class LeaderType : DomainItemConstant
 
         return leaderTypes.OrderBy(leaderType => leaderType.Name).ToArray();
     }
+
+    public override string ToString()
+    {
+        return Name;
+    }
 }

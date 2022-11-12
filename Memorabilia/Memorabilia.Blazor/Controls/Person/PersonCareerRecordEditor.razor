@@ -7,9 +7,9 @@
                                 SportIds="_viewModel.SportIds" />
     </Content>
     <ContentColumn2>
-        <NullableDecimalField Label="Amount"
-                              Value="_viewModel.Amount"
-                              ValueChanged="@((p) => _viewModel.Amount = p)" />
+        <TextField Label="Record"
+                   SelectedText="@_viewModel.Record"
+                   SelectedTextChanged="@((p) => _viewModel.Record = p)" />
     </ContentColumn2>
 </DivRowCol3>
 <DivLeftAlign>
@@ -36,13 +36,13 @@
                    Items="@CareerRecords.Where(record => !record.IsDeleted).ToList()"    
                    Striped="true">
             <HeaderContent>
+                <MudTh>Record Type</MudTh>
                 <MudTh>Record</MudTh>
-                <MudTh>Amount</MudTh>
                 <MudTh></MudTh>
             </HeaderContent>
             <RowTemplate>
-                <MudTd DataLabel="Record">@context.RecordTypeName</MudTd>
-                <MudTd DataLabel="Amount">@context.DisplayAmount</MudTd>
+                <MudTd DataLabel="RecordType">@context.RecordTypeName</MudTd>
+                <MudTd DataLabel="Record">@context.Record</MudTd>
                 <MudTd DataLabel="">
                     <MudTooltip Text="Edit">
                         <MudFab Color="MudBlazor.Color.Primary"                                

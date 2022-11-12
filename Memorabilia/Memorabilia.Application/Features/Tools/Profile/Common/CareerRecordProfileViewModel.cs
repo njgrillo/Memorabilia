@@ -9,9 +9,7 @@ public class CareerRecordProfileViewModel
     public CareerRecordProfileViewModel(CareerRecord record)
     {
         _record = record;
-    }
-
-    public string Amount => _record.Amount?.ToString("G29");
+    }    
 
     public Domain.Constants.RecordType CareerRecordType => Domain.Constants.RecordType.Find(CareerRecordTypeId);
 
@@ -21,8 +19,10 @@ public class CareerRecordProfileViewModel
 
     public string CareerRecordTypeName => CareerRecordType?.Name;
 
+    public string Record => _record.Record;
+
     public override string ToString()
     {
-        return $"{Amount} {CareerRecordTypeAbbreviatedName}";
+        return $"{Record} {CareerRecordTypeAbbreviatedName}";
     }
 }

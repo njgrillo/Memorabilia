@@ -273,22 +273,20 @@ public class Person : Framework.Library.Domain.Entity.DomainEntity
         award.Set(awardTypeId, year);
     }
 
-    public void SetCareerRecord(int careerRecordId, int recordTypeId, decimal? amount)
+    public void SetCareerRecord(int careerRecordId, int recordTypeId, string record)
     {
         if (careerRecordId == 0)
         {
-            CareerRecords.Add(new CareerRecord(Id, recordTypeId, amount));
+            CareerRecords.Add(new CareerRecord(Id, recordTypeId, record));
             return;
         }
 
-        var record = CareerRecords.Single(record => record.Id == careerRecordId);
-
-        record.Set(recordTypeId, amount);
+        CareerRecords.Single(record => record.Id == careerRecordId).Set(recordTypeId, record);
     }
 
     public void SetCollege(int collegeId, int? beginYear, int? endYear)
-    {
-        var college = Colleges.SingleOrDefault(college => college.Id == collegeId && college.BeginYear == beginYear);
+    {  
+        var college = Colleges.SingleOrDefault(college => college.CollegeId == collegeId && college.BeginYear == beginYear);
 
         if (college == null)
         {
@@ -422,17 +420,15 @@ public class Person : Framework.Library.Domain.Entity.DomainEntity
         Service.Set(debutDate, freeAgentSigningDate, lastAppearanceDate);
     }
 
-    public void SetSingleSeasonRecord(int singleSeasonRecordId, int recordTypeId, int year, decimal? amount)
+    public void SetSingleSeasonRecord(int singleSeasonRecordId, int recordTypeId, int year, string record)
     {
         if (singleSeasonRecordId == 0)
         {
-            SingleSeasonRecords.Add(new SingleSeasonRecord(Id, recordTypeId, year, amount));
+            SingleSeasonRecords.Add(new SingleSeasonRecord(Id, recordTypeId, year, record));
             return;
         }
 
-        var record = SingleSeasonRecords.Single(record => record.Id == singleSeasonRecordId);
-
-        record.Set(recordTypeId, year, amount);
+        SingleSeasonRecords.Single(record => record.Id == singleSeasonRecordId).Set(recordTypeId, year, record);
     }
 
     public void SetSport(int sportId)

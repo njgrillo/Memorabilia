@@ -10,6 +10,10 @@ public partial class PersonAccomplishmentEditor : ComponentBase
     [Parameter]
     public AccomplishmentType[] AccomplishmentTypes { get; set; } = AccomplishmentType.All;
 
+    protected bool IsDateAccomplishment => AccomplishmentType.IsDateAccomplishment(_viewModel.AccomplishmentTypeId);
+
+    protected bool IsYearAccomplishment => AccomplishmentType.IsYearAccomplishment(_viewModel.AccomplishmentTypeId);
+
     private bool _canAdd = true;
     private bool _canEditAccomplishmentType = true;
     private bool _canUpdate;

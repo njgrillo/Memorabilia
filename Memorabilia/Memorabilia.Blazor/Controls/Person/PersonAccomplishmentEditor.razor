@@ -4,12 +4,12 @@
                                     SelectedValue="_viewModel.AccomplishmentTypeId"
                                     SelectionChanged="(p) => _viewModel.AccomplishmentTypeId = p" />
     </div>
-    <div class="col-1">
+    <div class="col-1" hidden="@(!IsYearAccomplishment)">
         <NullableIntField Label="Year" 
                           Value="_viewModel.Year"
                           ValueChanged="@((p) => _viewModel.Year = p)" />
     </div>
-    <div class="col-2">
+    <div class="col-2" hidden="@(!IsDateAccomplishment)">
         <MudDatePicker @bind-Date="_viewModel.Date"
                        DateFormat="MM/dd/yyyy"
                        Editable="true"

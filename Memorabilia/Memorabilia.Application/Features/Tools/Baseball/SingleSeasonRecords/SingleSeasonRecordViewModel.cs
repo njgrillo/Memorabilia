@@ -9,9 +9,7 @@ public class SingleSeasonRecordViewModel
     public SingleSeasonRecordViewModel(SingleSeasonRecord singleSeasonRecord)
     {
         _singleSeasonRecord = singleSeasonRecord;
-    }
-
-    public string Amount => string.Format("{0:0,0.###}", _singleSeasonRecord.Amount);    
+    }      
 
     public int PersonId => _singleSeasonRecord.PersonId;
 
@@ -20,6 +18,8 @@ public class SingleSeasonRecordViewModel
     public string PersonName => _singleSeasonRecord.Person.DisplayName;
 
     public string ProfileLink => $"/Tools/BaseballProfile/{PersonId}";
+
+    public string Record => _singleSeasonRecord.Record;
 
     public int SingleSeasonRecordTypeId => _singleSeasonRecord.RecordTypeId;
 

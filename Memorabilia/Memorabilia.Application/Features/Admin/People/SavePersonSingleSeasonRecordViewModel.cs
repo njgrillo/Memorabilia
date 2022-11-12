@@ -8,19 +8,17 @@ public class SavePersonSingleSeasonRecordViewModel : SaveViewModel
 
     public SavePersonSingleSeasonRecordViewModel(SingleSeasonRecord record)
     {
-        Amount = record.Amount;
         Id = record.Id;
         PersonId = record.PersonId;
+        Record = record.Record;
         RecordType = Domain.Constants.RecordType.Find(record.RecordTypeId);
         SportIds = record.Person.Teams.Select(team => team.Team.Franchise.SportLeagueLevel.SportId).Distinct().ToArray();
         Year = record.Year;
-    }
-
-    public decimal? Amount { get; set; }
-
-    public string DisplayAmount => Amount?.ToString("G29");
+    }   
 
     public int PersonId { get; set; }
+
+    public string Record { get; set; }
 
     public Domain.Constants.RecordType RecordType { get; set; }
 

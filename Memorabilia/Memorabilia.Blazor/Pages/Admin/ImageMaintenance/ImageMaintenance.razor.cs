@@ -1,7 +1,5 @@
 ﻿#nullable disable
 
-using System.IO;
-
 namespace Memorabilia.Blazor.Pages.Admin.ImageMaintenance;
 
 public partial class ImageMaintenance : CommandQuery
@@ -50,9 +48,6 @@ public partial class ImageMaintenance : CommandQuery
                 }
             }
         }
-
-
-
 
         foreach (var imageFile in _viewModel.OrphanedImageFileNames)
         {

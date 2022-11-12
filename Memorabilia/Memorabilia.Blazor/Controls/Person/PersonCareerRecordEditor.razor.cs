@@ -25,7 +25,7 @@ public partial class PersonCareerRecordEditor : ComponentBase
     private void Edit(SavePersonCareerRecordViewModel record)
     {
         _viewModel.RecordType = record.RecordType;
-        _viewModel.Amount = record.Amount;
+        _viewModel.Record = record.Record;
 
         _canAdd = false;
         _canEditRecordType = false;
@@ -36,7 +36,7 @@ public partial class PersonCareerRecordEditor : ComponentBase
     {
         var record = CareerRecords.Single(record => record.RecordType.Id == _viewModel.RecordType.Id);
 
-        record.Amount = _viewModel.Amount;
+        record.Record = _viewModel.Record;
 
         _viewModel = new SavePersonCareerRecordViewModel();
 

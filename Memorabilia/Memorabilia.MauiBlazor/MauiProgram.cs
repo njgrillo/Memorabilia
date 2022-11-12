@@ -1,4 +1,5 @@
 ﻿using Memorabilia.Application.Features.Admin.AccomplishmentTypes;
+using Memorabilia.Repository.Cache;
 
 namespace Memorabilia.MauiBlazor;
 
@@ -58,7 +59,55 @@ public static class MauiProgram
         builder.Services.AddTransient<ITeamDivisionRepository, TeamDivisionRepository>();
         builder.Services.AddTransient<ITeamLeagueRepository, TeamLeagueRepository>();
         builder.Services.AddTransient<ITeamRepository, TeamRepository>();
-        builder.Services.AddMediatR(typeof(GetAccomplishmentTypes));              
+        builder.Services.AddMediatR(typeof(GetAccomplishmentTypes));
+
+        builder.Services.AddTransient<AllStarRepository>();
+        builder.Services.AddTransient<IAllStarRepository, AllStarCacheRepository>();
+
+        builder.Services.AddTransient<CareerRecordRepository>();
+        builder.Services.AddTransient<ICareerRecordRepository, CareerRecordCacheRepository>();
+
+        builder.Services.AddTransient<ChampionRepository>();
+        builder.Services.AddTransient<IChampionRepository, ChampionCacheRepository>();
+
+        builder.Services.AddTransient<DraftRepository>();
+        builder.Services.AddTransient<IDraftRepository, DraftCacheRepository>();
+
+        builder.Services.AddTransient<FranchiseHallOfFameRepository>();
+        builder.Services.AddTransient<IFranchiseHallOfFameRepository, FranchiseHallOfFameCacheRepository>();
+
+        builder.Services.AddTransient<HallOfFameRepository>();
+        builder.Services.AddTransient<IHallOfFameRepository, HallOfFameCacheRepository>();
+
+        builder.Services.AddTransient<InternationalHallOfFameRepository>();
+        builder.Services.AddTransient<IInternationalHallOfFameRepository, InternationalHallOfFameCacheRepository>();
+
+        builder.Services.AddTransient<LeaderRepository>();
+        builder.Services.AddTransient<ILeaderRepository, LeaderCacheRepository>();
+
+        //builder.Services.AddTransient<MemorabiliaItemRepository>();
+        //builder.Services.AddTransient<IMemorabiliaItemRepository, MemorabiliaItemCacheRepository>();
+
+        builder.Services.AddTransient<PersonAccomplishmentRepository>();
+        builder.Services.AddTransient<IPersonAccomplishmentRepository, PersonAccomplishmentCacheRepository>();
+
+        builder.Services.AddTransient<PersonAwardRepository>();
+        builder.Services.AddTransient<IPersonAwardRepository, PersonAwardCacheRepository>();
+
+        builder.Services.AddTransient<PersonCollegeRepository>();
+        builder.Services.AddTransient<IPersonCollegeRepository, PersonCollegeCacheRepository>();
+
+        builder.Services.AddTransient<PersonRepository>();
+        builder.Services.AddTransient<IPersonRepository, PersonCacheRepository>();
+
+        builder.Services.AddTransient<PersonTeamRepository>();
+        builder.Services.AddTransient<IPersonTeamRepository, PersonTeamCacheRepository>();
+
+        builder.Services.AddTransient<RetiredNumberRepository>();
+        builder.Services.AddTransient<IRetiredNumberRepository, RetiredNumberCacheRepository>();
+
+        builder.Services.AddTransient<SingleSeasonRecordRepository>();
+        builder.Services.AddTransient<ISingleSeasonRecordRepository, SingleSeasonRecordCacheRepository>();
 
         //var autofacBuilder = new ContainerBuilder();
         //autofacBuilder.Populate(builder.Services);

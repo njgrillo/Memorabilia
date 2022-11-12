@@ -11,7 +11,7 @@ public class SingleSeasonRecordProfileViewModel
         _record = record;
     }
 
-    public string Amount => _record.Amount?.ToString("G29");
+    public string Record => _record.Record;
 
     public Domain.Constants.RecordType RecordType => Domain.Constants.RecordType.Find(RecordTypeId);
 
@@ -25,6 +25,6 @@ public class SingleSeasonRecordProfileViewModel
 
     public override string ToString()
     {
-        return $"{Year} {Amount} {RecordTypeAbbreviatedName}";
+        return $"{Year} {Record} {RecordTypeAbbreviatedName}";
     }
 }

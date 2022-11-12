@@ -9,9 +9,7 @@ public class CareerRecordViewModel
     public CareerRecordViewModel(CareerRecord careerRecord)
     {
         _careerRecord = careerRecord;
-    }
-
-    public string Amount => string.Format("{0:0,0.###}", _careerRecord.Amount); 
+    }     
 
     public int CareerRecordTypeId => _careerRecord.RecordTypeId;
 
@@ -23,5 +21,7 @@ public class CareerRecordViewModel
 
     public string PersonName => _careerRecord.Person.DisplayName;
 
-    public string ProfileLink => $"/Tools/BaseballProfile/{PersonId}";    
+    public string ProfileLink => $"/Tools/BaseballProfile/{PersonId}";
+
+    public string Record => _careerRecord.Record;
 }

@@ -58,7 +58,7 @@ public class SavePersonAccolades
 
             foreach (var record in command.CareerRecords)
             {
-                person.SetCareerRecord(record.Id, record.RecordType.Id, record.Amount);
+                person.SetCareerRecord(record.Id, record.RecordType.Id, record.Record);
             }
         }
 
@@ -88,7 +88,7 @@ public class SavePersonAccolades
 
             foreach (var record in command.SingleSeasonRecords)
             {
-                person.SetSingleSeasonRecord(record.Id, record.RecordType.Id, record.Year ?? 0, record.Amount);
+                person.SetSingleSeasonRecord(record.Id, record.RecordType.Id, record.Year ?? 0, record.Record);
             }
         }
     }

@@ -651,4 +651,9 @@ public sealed class College : DomainItemConstant
     {
         return All.SingleOrDefault(college => college.Id == id);
     }
+
+    public override string ToString()
+    {
+        return Name;
+    }
 }

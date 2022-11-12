@@ -194,4 +194,9 @@ public sealed class AwardType : DomainItemConstant
 
         return awardTypes.OrderBy(awardType => awardType.Name).ToArray();
     }
+
+    public override string ToString()
+    {
+        return Name;
+    }
 }

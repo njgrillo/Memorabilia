@@ -12,9 +12,9 @@
                           ValueChanged="@((p) => _viewModel.Year = p)" />
     </div>
     <div class="col-2">
-        <NullableDecimalField Label="Amount"
-                              Value="_viewModel.Amount"
-                              ValueChanged="@((p) => _viewModel.Amount = p)" />
+        <TextField Label="Record"
+                   SelectedText="@_viewModel.Record"
+                   SelectedTextChanged="@((p) => _viewModel.Record = p)" />
     </div>
 </div>
 <br />
@@ -42,15 +42,15 @@
                    Items="@SingleSeasonRecords.Where(record => !record.IsDeleted).ToList()"    
                    Striped="true">
             <HeaderContent>
-                <MudTh>Record</MudTh>
+                <MudTh>Record Type</MudTh>
                 <MudTh>Year</MudTh>
-                <MudTh>Amount</MudTh>
+                <MudTh>Record</MudTh>
                 <MudTh></MudTh>
             </HeaderContent>
             <RowTemplate>
-                <MudTd DataLabel="Record">@context.RecordTypeName</MudTd>
+                <MudTd DataLabel="RecordType">@context.RecordTypeName</MudTd>
                 <MudTd DataLabel="Year">@context.Year</MudTd>
-                <MudTd DataLabel="Amount">@context.DisplayAmount</MudTd>
+                <MudTd DataLabel="Record">@context.Record</MudTd>
                 <MudTd DataLabel="">
                     <MudTooltip Text="Edit">
                         <MudFab Color="MudBlazor.Color.Primary"                                

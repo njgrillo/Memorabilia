@@ -17,6 +17,7 @@ global using Memorabilia.Application.Features.Services.Gallery.Memorabilia.Rules
 global using Memorabilia.Application.Features.Services.Tools.Profile;
 global using Memorabilia.Application.Features.Services.Tools.Profile.Rules;
 global using Memorabilia.Application.Features.Tools.Baseball.Accomplishments;
+global using Memorabilia.Application.Features.Tools.Common.HallOfFames;
 global using Memorabilia.Application.Features.Tools.Profile.Baseball;
 global using Memorabilia.Application.Features.Tools.Profile.Common;
 global using Memorabilia.Application.Features.User.Dashboard;

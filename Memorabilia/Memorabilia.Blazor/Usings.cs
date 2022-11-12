@@ -140,6 +140,7 @@ global using Memorabilia.Application.Features.Tools.Baseball.RetiredNumbers;
 global using Memorabilia.Application.Features.Tools.Baseball.SingleSeasonRecords;
 global using Memorabilia.Application.Features.Tools.Profile;
 global using Memorabilia.Application.Features.Tools.Profile.Baseball;
+global using Memorabilia.Application.Features.Tools.Profile.Common;
 global using Memorabilia.Application.Features.User;
 global using Memorabilia.Application.Features.User.Dashboard;
 global using Memorabilia.Application.Features.User.Login;

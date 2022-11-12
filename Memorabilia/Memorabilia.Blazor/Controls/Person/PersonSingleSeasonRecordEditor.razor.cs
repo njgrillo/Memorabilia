@@ -26,7 +26,7 @@ public partial class PersonSingleSeasonRecordEditor : ComponentBase
     {
         _viewModel.RecordType = record.RecordType;
         _viewModel.Year = record.Year;
-        _viewModel.Amount = record.Amount;
+        _viewModel.Record = record.Record;
 
         _canAdd = false;
         _canEditRecordType = false;
@@ -39,7 +39,7 @@ public partial class PersonSingleSeasonRecordEditor : ComponentBase
 
         record.RecordType = _viewModel.RecordType;
         record.Year = _viewModel.Year;
-        record.Amount = _viewModel.Amount;
+        record.Record = _viewModel.Record;
 
         _viewModel = new SavePersonSingleSeasonRecordViewModel();
 
