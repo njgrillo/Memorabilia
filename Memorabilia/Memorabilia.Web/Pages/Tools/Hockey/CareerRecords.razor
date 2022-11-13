@@ -1,0 +1,11 @@
+﻿@page "/Tools/Hockey/CareerRecords"
+
+@inherits WebPage
+
+<PageLoader>
+    <Content>
+        <ViewCareerRecords DomainImageRootPath="@DomainImageRootPath"
+                           ImageRootPath="@PersonImageRootPath"
+                           SportLeagueLevel="@SportLeagueLevel.NationalHockeyLeague" />
+    </Content>
+</PageLoader>

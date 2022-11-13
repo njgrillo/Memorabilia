@@ -1,4 +1,6 @@
-﻿namespace Memorabilia.Blazor.Pages.Admin;
+﻿#nullable disable
+
+namespace Memorabilia.Blazor.Pages.Admin;
 
 public abstract class EditItem<TSaveViewModel, TViewModel> : ImagePage
 {

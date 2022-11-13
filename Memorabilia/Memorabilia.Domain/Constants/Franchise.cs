@@ -335,4 +335,20 @@ public sealed class Franchise : DomainItemConstant
 
         return franchises.OrderBy(franchise => franchise.Name).ToArray();
     }
+
+    public static Sport GetSport(int id)
+    {
+        var franchise = Find(id);
+
+        if (Baseball.Contains(franchise))
+            return Sport.Baseball;
+
+        if (Basketball.Contains(franchise))
+            return Sport.Basketball;
+
+        if (Football.Contains(franchise))
+            return Sport.Football;
+
+        return null;
+    }
 }

@@ -2,10 +2,10 @@
 
 public sealed class SportLeagueLevel : DomainItemConstant
 {
-    public static readonly SportLeagueLevel MajorLeagueBaseball = new(1, "Major League Baseball", "MLB");
-    public static readonly SportLeagueLevel NationalFootballLeague = new(2, "National Football League", "NFL");
-    public static readonly SportLeagueLevel NationalBasketballAssociation = new(3, "National Basketball Association", "NBA");
-    public static readonly SportLeagueLevel NationalHockeyLeague = new(4, "National Hockey League", "NHL");
+    public static readonly SportLeagueLevel MajorLeagueBaseball = new(1, "Major League Baseball", "MLB", Sport.Baseball);
+    public static readonly SportLeagueLevel NationalFootballLeague = new(2, "National Football League", "NFL", Sport.Football);
+    public static readonly SportLeagueLevel NationalBasketballAssociation = new(3, "National Basketball Association", "NBA", Sport.Basketball);
+    public static readonly SportLeagueLevel NationalHockeyLeague = new(4, "National Hockey League", "NHL", Sport.Hockey);
 
     public static readonly SportLeagueLevel[] All =
     {
@@ -22,7 +22,12 @@ public sealed class SportLeagueLevel : DomainItemConstant
         NationalHockeyLeague
     };
 
-    private SportLeagueLevel(int id, string name, string abbreviation) : base(id, name, abbreviation) { }
+    private SportLeagueLevel(int id, string name, string abbreviation, Sport sport) : base(id, name, abbreviation) 
+    { 
+        Sport = sport;
+    }
+
+    public Sport Sport { get; private set; }
 
     public static SportLeagueLevel Find(int id)
     {

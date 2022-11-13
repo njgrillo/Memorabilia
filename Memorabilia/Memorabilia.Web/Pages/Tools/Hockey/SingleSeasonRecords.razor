@@ -1,0 +1,11 @@
+﻿@page "/Tools/Hockey/SingleSeasonRecords"
+
+@inherits WebPage
+
+<PageLoader>
+    <Content>
+        <ViewSingleSeasonRecords DomainImageRootPath="@DomainImageRootPath"
+                                 ImageRootPath="@PersonImageRootPath"
+                                 SportLeagueLevel="@SportLeagueLevel.NationalHockeyLeague" />
+    </Content>
+</PageLoader>

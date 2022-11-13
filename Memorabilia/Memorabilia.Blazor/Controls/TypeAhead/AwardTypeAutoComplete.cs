@@ -7,6 +7,9 @@ public class AwardTypeAutoComplete : DomainEntityAutoComplete<AwardType>
     [Parameter]
     public int[] SportIds { get; set; } = Array.Empty<int>();
 
+    [Parameter]
+    public SportLeagueLevel SportLeagueLevel { get; set; }
+
     private bool _loaded;
 
     protected override void OnInitialized()
@@ -30,6 +33,18 @@ public class AwardTypeAutoComplete : DomainEntityAutoComplete<AwardType>
 
     private void LoadItems()
     {
-        Items = SportIds != null && SportIds.Any() ? AwardType.GetAll(SportIds) : AwardType.All;
+        if (SportIds != null && SportIds.Any())
+        {
+            Items = AwardType.GetAll(SportIds);
+            return;
+        }            
+
+        if (SportLeagueLevel != null)
+        {
+            Items = AwardType.GetAll(SportLeagueLevel);
+            return;
+        }           
+
+        Items = AwardType.All;
     }
 }

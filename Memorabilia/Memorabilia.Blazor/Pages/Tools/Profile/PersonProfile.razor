@@ -1,4 +1,4 @@
-﻿<Page OnLoad="OnLoad">
+﻿<Page>
     <Content>
         <DivPad2>
             <Content>
@@ -7,7 +7,7 @@
                         <PersonProfileAutoComplete IsCulturalSearch="true"
                                                    ResetValueOnEmptyText="true"
                                                    SelectedValue="ViewModel"
-                                                   SelectionChanged="(p) => ViewModel = p" />
+                                                   SelectionChanged="(person) => SelectedPersonChanged(person)" />
                         <br />
                     </Content>
                 </DivRowCol6>

@@ -23,7 +23,7 @@ namespace Memorabilia.Web
             services.AddDbContext<DomainContext>(options => options.UseSqlServer("name=ConnectionStrings:Memorabilia"), ServiceLifetime.Transient);
             services.AddTransient<CommandRouter>();
             services.AddTransient<QueryRouter>();
-            services.AddMediatR(typeof(GetAccomplishments).Assembly);            
+            services.AddMediatR(typeof(GetCommissioner).Assembly);            
 
             services.AddTransient<AllStarRepository>();
             services.AddTransient<IAllStarRepository, AllStarCacheRepository>();

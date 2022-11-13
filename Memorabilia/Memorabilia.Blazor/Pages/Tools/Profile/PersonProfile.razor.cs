@@ -13,17 +13,7 @@ public partial class PersonProfile : ComponentBase
     [Parameter]
     public PersonViewModel SelectedPerson { get; set; }
 
-    public PersonViewModel ViewModel
-    {
-        get => SelectedPerson;
-        set
-        {
-            SelectedPerson = value;
-            SelectedPersonChanged(SelectedPerson);
-        }
-    }
-
-    protected void OnLoad() { }
+    public PersonViewModel ViewModel { get; set; }
 
     private async Task SelectedPersonChanged(PersonViewModel person)
     {

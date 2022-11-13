@@ -1,4 +1,6 @@
-﻿namespace Memorabilia.Blazor.Controls.DropDowns;
+﻿#nullable disable
+
+namespace Memorabilia.Blazor.Controls.DropDowns;
 
 public class TeamRoleTypeDropDown : DropDown<TeamRoleType, int>, INotifyPropertyChanged
 {

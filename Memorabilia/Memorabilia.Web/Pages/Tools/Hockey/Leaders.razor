@@ -1,0 +1,11 @@
+﻿@page "/Tools/Hockey/Leaders"
+
+@inherits WebPage
+
+<PageLoader>
+    <Content>
+        <ViewLeaders DomainImageRootPath="@DomainImageRootPath"
+                     ImageRootPath="@PersonImageRootPath"
+                     SportLeagueLevel="@SportLeagueLevel.NationalHockeyLeague" />
+    </Content>
+</PageLoader>

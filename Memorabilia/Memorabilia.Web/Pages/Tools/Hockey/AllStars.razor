@@ -1,0 +1,11 @@
+﻿@page "/Tools/Hockey/AllStars"
+
+@inherits WebPage
+
+<PageLoader>
+    <Content>
+        <ViewAllStars DomainImageRootPath="@DomainImageRootPath"
+                      ImageRootPath="@PersonImageRootPath"
+                      SportLeagueLevel="@SportLeagueLevel.NationalHockeyLeague" />
+    </Content>
+</PageLoader>

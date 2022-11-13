@@ -1,0 +1,11 @@
+﻿@page "/Tools/Hockey/Players"
+
+@inherits WebPage
+
+<PageLoader>
+    <Content>
+        <ViewPlayers DomainImageRootPath="@DomainImageRootPath"
+                     ImageRootPath="@PersonImageRootPath"
+                     SportLeagueLevel="@SportLeagueLevel.NationalHockeyLeague" />
+    </Content>
+</PageLoader>

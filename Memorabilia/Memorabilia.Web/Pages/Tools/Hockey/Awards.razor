@@ -1,0 +1,11 @@
+﻿@page "/Tools/Hockey/Awards"
+
+@inherits WebPage
+
+<PageLoader>
+    <Content>
+        <ViewAwards DomainImageRootPath="@DomainImageRootPath"
+                    ImageRootPath="@PersonImageRootPath"
+                    SportLeagueLevel="@SportLeagueLevel.NationalHockeyLeague" />
+    </Content>
+</PageLoader>

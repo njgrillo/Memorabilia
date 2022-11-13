@@ -29,16 +29,9 @@ public class SaveProjectViewModel : SaveViewModel
 
     public int ItemTypeId { get; set; }
 
-    public IEnumerable<Domain.Constants.ItemType> ItemTypes => Domain.Constants.ItemType.All;
-
-    [Required]
-    public string Name { get; set; }
-
     public override string PageTitle => "Project";
 
     public List<SaveProjectPersonViewModel> People { get; set; } = new();
-
-    public IEnumerable<Domain.Constants.PriorityType> PriorityTypes => Domain.Constants.PriorityType.All;
 
     public override string RoutePrefix => "Projects";
 

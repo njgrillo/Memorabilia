@@ -1,4 +1,6 @@
-﻿namespace Memorabilia.Blazor.Pages.Admin.Commissioners;
+﻿#nullable disable
+
+namespace Memorabilia.Blazor.Pages.Admin.Commissioners;
 
 public partial class ViewCommissioners : ViewItem<CommissionersViewModel, CommissionerViewModel>
 {

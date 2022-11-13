@@ -195,6 +195,18 @@ public sealed class AwardType : DomainItemConstant
         return awardTypes.OrderBy(awardType => awardType.Name).ToArray();
     }
 
+    public static AwardType[] GetAll(SportLeagueLevel sportLeagueLevel)
+    {
+        var awardTypes = new List<AwardType>();
+
+        awardTypes.AddRange(Generic);
+
+        if (sportLeagueLevel == SportLeagueLevel.MajorLeagueBaseball)
+            awardTypes.AddRange(Baseball);
+
+        return awardTypes.OrderBy(awardType => awardType.Name).ToArray();
+    }
+
     public override string ToString()
     {
         return Name;

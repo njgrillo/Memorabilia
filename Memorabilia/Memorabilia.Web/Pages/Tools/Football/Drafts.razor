@@ -1,0 +1,11 @@
+﻿@page "/Tools/Football/Drafts"
+
+@inherits WebPage
+
+<PageLoader>
+    <Content>
+        <ViewDrafts DomainImageRootPath="@DomainImageRootPath"
+                    ImageRootPath="@PersonImageRootPath"
+                    SportLeagueLevel="@SportLeagueLevel.NationalFootballLeague" />
+    </Content>
+</PageLoader>

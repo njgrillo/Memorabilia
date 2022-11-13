@@ -35,7 +35,7 @@ public class SaveDivisionViewModel : SaveViewModel
     [Required]
     [StringLength(100, ErrorMessage = "Name is too long.")]
     [MinLength(1, ErrorMessage = "Name is too short.")]
-    public string Name { get; set; }
+    public override string Name { get; set; }
 
     public override string RoutePrefix => AdminDomainItem.Divisions.Page;
 }

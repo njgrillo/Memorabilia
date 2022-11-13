@@ -1,0 +1,11 @@
+﻿@page "/Tools/Basketball/Leaders"
+
+@inherits WebPage
+
+<PageLoader>
+    <Content>
+        <ViewLeaders DomainImageRootPath="@DomainImageRootPath" 
+                     ImageRootPath="@PersonImageRootPath"
+                     SportLeagueLevel="@SportLeagueLevel.NationalBasketballAssociation" />
+    </Content>
+</PageLoader>

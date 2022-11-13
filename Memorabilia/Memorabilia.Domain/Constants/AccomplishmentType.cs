@@ -108,6 +108,14 @@ public sealed class AccomplishmentType : DomainItemConstant
         return accomplishmentTypes.OrderBy(accomplishmentType => accomplishmentType.Name).ToArray();
     }
 
+    public static AccomplishmentType[] GetAll(SportLeagueLevel sportLeagueLevel)
+    {
+        if (sportLeagueLevel == SportLeagueLevel.MajorLeagueBaseball)
+            return Baseball;
+
+        return All;
+    }
+
     public static bool IsDateAccomplishment(int id)
     {
         return DateAccomplishment.Any(accomplishmentType => accomplishmentType.Id == id);

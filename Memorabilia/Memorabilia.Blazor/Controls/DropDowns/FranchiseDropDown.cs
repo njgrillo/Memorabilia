@@ -8,7 +8,7 @@ public class FranchiseDropDown : DropDown<Franchise, int>, INotifyPropertyChange
     public int[] SportIds { get; set; } = Array.Empty<int>();
 
     [Parameter]
-    public int SportLeagueLevelId { get; set; }
+    public SportLeagueLevel SportLeagueLevel { get; set; }
 
     public event PropertyChangedEventHandler PropertyChanged;
 
@@ -19,7 +19,7 @@ public class FranchiseDropDown : DropDown<Franchise, int>, INotifyPropertyChange
 
     public void FranchiseDropDown_PropertyChanged(object sender, PropertyChangedEventArgs e)
     {
-        if (e.PropertyName == nameof(SportLeagueLevelId) || e.PropertyName == nameof(SportIds))
+        if (e.PropertyName == nameof(SportLeagueLevel) || e.PropertyName == nameof(SportIds))
         {
             LoadItems();
         }
@@ -40,11 +40,11 @@ public class FranchiseDropDown : DropDown<Franchise, int>, INotifyPropertyChange
 
     private void LoadItems()
     {
-        if (SportLeagueLevelId > 0)
+        if (SportLeagueLevel != null)
         {
-            Items = Franchise.GetAll(SportLeagueLevel.Find(SportLeagueLevelId));
+            Items = Franchise.GetAll(SportLeagueLevel);
             return;
-        }            
+        }           
 
         if (SportIds.Any())
         {
@@ -52,6 +52,6 @@ public class FranchiseDropDown : DropDown<Franchise, int>, INotifyPropertyChange
             return;
         }            
 
-        Items = SportLeagueLevelId > 0 ? Franchise.GetAll(SportLeagueLevel.Find(SportLeagueLevelId)) : Franchise.All;
+        Items = Franchise.All;
     }
 }

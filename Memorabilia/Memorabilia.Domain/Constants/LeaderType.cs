@@ -131,6 +131,14 @@ public sealed class LeaderType : DomainItemConstant
         return leaderTypes.OrderBy(leaderType => leaderType.Name).ToArray();
     }
 
+    public static LeaderType[] GetAll(SportLeagueLevel sportLeagueLevel)
+    {
+        if (sportLeagueLevel == SportLeagueLevel.MajorLeagueBaseball)
+            return Baseball;
+
+        return All;
+    }
+
     public override string ToString()
     {
         return Name;

@@ -1,0 +1,11 @@
+﻿@page "/Tools/Basketball/SingleSeasonRecords"
+
+@inherits WebPage
+
+<PageLoader>
+    <Content>
+        <ViewSingleSeasonRecords DomainImageRootPath="@DomainImageRootPath"
+                                 ImageRootPath="@PersonImageRootPath"
+                                 SportLeagueLevel="@SportLeagueLevel.NationalBasketballAssociation" />
+    </Content>
+</PageLoader>

@@ -1,0 +1,13 @@
+﻿@page "/Tools/Football/HallOfFamers"
+
+@inherits WebPage
+
+<PageLoader>
+    <Content>
+        <ViewHallOfFamers DisplayBallot="false"
+                          DisplayVotePercentage="false"
+                          DomainImageRootPath="@DomainImageRootPath"
+                          ImageRootPath="@PersonImageRootPath"
+                          SportLeagueLevel="@SportLeagueLevel.NationalFootballLeague" />
+    </Content>
+</PageLoader>

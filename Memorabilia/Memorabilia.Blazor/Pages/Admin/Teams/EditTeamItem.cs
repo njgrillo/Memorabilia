@@ -1,4 +1,6 @@
-﻿namespace Memorabilia.Blazor.Pages.Admin.Teams;
+﻿#nullable disable
+
+namespace Memorabilia.Blazor.Pages.Admin.Teams;
 
 public abstract class EditTeamItem<TSaveViewModel, TViewModel> : EditItem<TSaveViewModel, TViewModel>
 {
