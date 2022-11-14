@@ -27,7 +27,8 @@
                                   SelectionChanged="(p) => _viewModel.ItemTypeId = p" />
             </Content>
         </DivRowCol3>
-        <DivRowCol3>
+        <DivRowCol3 HideColumn3="@(!_viewModel.CanHaveCost)"
+                    HideColumn4="@(!_viewModel.CanHaveCost)">
             <Content>
                 <ConditionDropDown SelectedValue="_viewModel.ConditionId"
                                    SelectionChanged="(p) => _viewModel.ConditionId = p" />
@@ -38,15 +39,15 @@
                                          SelectionChanged="(p) => _viewModel.AcquisitionTypeId = p" />
             </ContentColumn2>
             <ContentColumn3>
-                <DivHidden Hidden="@(!_viewModel.CanHaveCost)">
-                    <Content>
-                        <NumericField Label="Cost ($)" 
-                                      TType="decimal?"
-                                      Value="_viewModel.Cost"
-                                      ValueChanged="@((p) => _viewModel.Cost = p)" />
-                    </Content>
-                </DivHidden>
+                <NumericField Label="Cost ($)" 
+                              TType="decimal?"
+                              Value="_viewModel.Cost"
+                              ValueChanged="@((p) => _viewModel.Cost = p)" />
             </ContentColumn3>
+            <ContentColumn4>
+                <PurchaseTypeDropDown SelectedValue="_viewModel.PurchaseTypeId"
+                                      SelectionChanged="(p) => _viewModel.PurchaseTypeId = p" />
+            </ContentColumn4>
         </DivRowCol3>
         <DivRowCol3>
             <Content>
@@ -61,12 +62,10 @@
                                Variant="Variant.Outlined" />
             </ContentColumn2>
             <ContentColumn3>
-                <DivHidden Hidden="@(!_viewModel.CanHaveCost)">
-                    <Content>
-                        <PurchaseTypeDropDown SelectedValue="_viewModel.PurchaseTypeId"
-                                              SelectionChanged="(p) => _viewModel.PurchaseTypeId = p" />
-                    </Content>
-                </DivHidden>
+                <CheckBox Checked="@_viewModel.AcquiredWithAutograph"
+                          CheckedChanged="(p) => _viewModel.AcquiredWithAutograph = p"
+                          Label="Acquired with Autograph(s)"
+                          TType="bool"/> 
             </ContentColumn3>
         </DivRowCol3>
         <DivRowCol3>
@@ -74,12 +73,6 @@
                 <PrivacyTypeDropDown SelectedValue="_viewModel.PrivacyTypeId"
                                      SelectionChanged="(p) => _viewModel.PrivacyTypeId = p" />
             </Content>
-            <ContentColumn2>
-                <CheckBox Checked="@_viewModel.AcquiredWithAutograph"
-                          CheckedChanged="(p) => _viewModel.AcquiredWithAutograph = p"
-                          Label="Acquired with Autograph(s)"
-                          TType="bool"/> 
-            </ContentColumn2>
         </DivRowCol3>
         <DivRowCol3>
             <Content>
@@ -91,20 +84,17 @@
         </DivRowCol3>
         <DivRowCol1 Hidden="@(!_viewModel.IsNumbered)">
             <Content>
-                <NumericField Label="Numerator"
+                <NumericField Label="Left"
                               TType="int?"
                               Value="_viewModel.Numerator"
                               ValueChanged="@((p) => _viewModel.Numerator = p)" />  
             </Content>
             <ContentColumn2>
-                <label for="of">of</label>  
-            </ContentColumn2>
-            <ContentColumn3>
-                <NumericField Label="Denominator"
+                <NumericField Label="Right"
                               TType="int?"
                               Value="_viewModel.Denominator"
                               ValueChanged="@((p) => _viewModel.Denominator = p)" />
-            </ContentColumn3>
+            </ContentColumn2>
         </DivRowCol1>  
         <DivRowCol3>
             <Content>
