@@ -4,9 +4,6 @@ namespace Memorabilia.Blazor.Controls.DropDowns;
 
 public partial class TeamDropDown : DropDown<TeamViewModel, int>
 {
-    [Inject]
-    public QueryRouter QueryRouter { get; set; }
-
     [Parameter]
     public Franchise Franchise { get; set; }
 

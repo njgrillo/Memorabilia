@@ -10,6 +10,7 @@ public sealed class Occupation : DomainItemConstant
     public static readonly Occupation Coach = new(9, "Coach", string.Empty);
     public static readonly Occupation Comedian = new(6, "Comedian", string.Empty);
     public static readonly Occupation Commissioner = new(8, "Commissioner", string.Empty);        
+    public static readonly Occupation LeaguePresident = new(12, "League President", string.Empty);       
     public static readonly Occupation Manager = new(7, "Manager", string.Empty);       
 
     public static readonly Occupation[] All =
@@ -22,6 +23,7 @@ public sealed class Occupation : DomainItemConstant
         Coach,
         Comedian,
         Commissioner,
+        LeaguePresident,
         Manager
     };
 
@@ -30,6 +32,7 @@ public sealed class Occupation : DomainItemConstant
         Athlete,
         Coach,
         Commissioner,
+        LeaguePresident,
         Manager
     };
 

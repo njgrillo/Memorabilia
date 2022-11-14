@@ -43,6 +43,7 @@ public sealed class AdminDomainItem
     public static readonly AdminDomainItem JerseyStyleTypes = new("Jersey Style Types", "Defines variations of jersey style types", Constants.ImageFileName.JerseyStyleTypes);
     public static readonly AdminDomainItem JerseyTypes = new("Jersey Types", "Defines variations of jersey types", Constants.ImageFileName.JerseyTypes);
     public static readonly AdminDomainItem LeaderTypes = new("Leader Types", "Defines variations of leaders", Constants.ImageFileName.LeaderTypes);
+    public static readonly AdminDomainItem LeaguePresidents = new("League Presidents", "Specifies the jleague presidents of each sport", Constants.ImageFileName.LeaguePresidents);
     public static readonly AdminDomainItem Leagues = new("Leagues", "Defines leagues of a sport", Constants.ImageFileName.Leagues);
     public static readonly AdminDomainItem LevelTypes = new("Level Types", "Defines memorabila level types", Constants.ImageFileName.LevelTypes);
     public static readonly AdminDomainItem MagazineTypes = new("Magazine Types", "Defines variations of magazine types", Constants.ImageFileName.MagazineTypes);
@@ -50,7 +51,7 @@ public sealed class AdminDomainItem
     public static readonly AdminDomainItem Orientations = new("Orientations", "Defines orientations of memorabilia", Constants.ImageFileName.Orientations);
     public static readonly AdminDomainItem People = new("People", "Defines people", Constants.ImageFileName.Athletes, "Person");
     public static readonly AdminDomainItem Pewters = new("Pewters", "Defines variations of pewters", Constants.ImageFileName.Pewters);
-    public static readonly AdminDomainItem PhotoTypes = new("Photo Types", "Defines variations of photos", Constants.ImageFileName.Photo);
+    public static readonly AdminDomainItem PhotoTypes = new("Photo Types", "Defines variations of photos", Constants.ImageFileName.Photo);    
     public static readonly AdminDomainItem PriorityTypes = new("Priority Types", "Defines the priority types of projects", Constants.ImageFileName.PriorityTypes);
     public static readonly AdminDomainItem PrivacyTypes = new("Privacy Types", "Defines the privacy types of memorabilia", Constants.ImageFileName.PrivacyTypes);
     public static readonly AdminDomainItem ProjectTypes = new("Project Types", "Defines the project types of memorabilia", Constants.ImageFileName.ProjectTypes);
@@ -106,6 +107,7 @@ public sealed class AdminDomainItem
         JerseyStyleTypes,
         JerseyTypes,
         LeaderTypes,
+        LeaguePresidents,
         Leagues,
         LevelTypes,
         MagazineTypes,
@@ -113,7 +115,7 @@ public sealed class AdminDomainItem
         Orientations,
         People,
         Pewters,
-        PhotoTypes,
+        PhotoTypes,        
         PriorityTypes,
         PrivacyTypes,
         ProjectTypes,

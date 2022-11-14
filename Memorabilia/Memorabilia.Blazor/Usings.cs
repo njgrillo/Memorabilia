@@ -46,6 +46,7 @@ global using Memorabilia.Application.Features.Admin.JerseyQualityTypes;
 global using Memorabilia.Application.Features.Admin.JerseyStyleTypes;
 global using Memorabilia.Application.Features.Admin.JerseyTypes;
 global using Memorabilia.Application.Features.Admin.LeaderTypes;
+global using Memorabilia.Application.Features.Admin.LeaguePresidents;
 global using Memorabilia.Application.Features.Admin.Leagues;
 global using Memorabilia.Application.Features.Admin.LevelTypes;
 global using Memorabilia.Application.Features.Admin.MagazineTypes;

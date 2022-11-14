@@ -1,0 +1,11 @@
+﻿@page "/LeaguePresidents/Edit"
+@page "/LeaguePresidents/Edit/{id:int}"
+
+@inherits EditItem
+
+<PageLoader>
+    <Content>
+        <LeaguePresidentEditor DomainImageRootPath="@DomainImageRootPath"
+                               Id="Id" />
+    </Content>
+</PageLoader>

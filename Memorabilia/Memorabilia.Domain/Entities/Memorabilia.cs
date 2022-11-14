@@ -207,6 +207,7 @@ public class Memorabilia : Framework.Library.Domain.Entity.DomainEntity
                             int commissionerId, 
                             DateTime? gameDate,
                             int? gameStyleTypeId,
+                            int? leaguePresidentId,
                             int levelTypeId,
                             int? personId,
                             int sizeId, 
@@ -219,7 +220,7 @@ public class Memorabilia : Framework.Library.Domain.Entity.DomainEntity
         SetSize(sizeId);
         SetSports(sportId);
         SetTeams(teamIds);
-        SetBaseballType(baseballTypeId, year, anniversary);
+        SetBaseballType(baseballTypeId, leaguePresidentId, year, anniversary);
         SetCommissioner(commissionerId);
         SetGame(gameStyleTypeId, personId, gameDate);
 
@@ -1120,7 +1121,7 @@ public class Memorabilia : Framework.Library.Domain.Entity.DomainEntity
         }
     }
 
-    private void SetBaseballType(int? baseballTypeId, int? year, string anniversary)
+    private void SetBaseballType(int? baseballTypeId, int? leaguePresidentId, int? year, string anniversary)
     {
         if (baseballTypeId.HasValue)
         {
@@ -1129,11 +1130,11 @@ public class Memorabilia : Framework.Library.Domain.Entity.DomainEntity
 
             if (Baseball == null)
             {
-                Baseball = new MemorabiliaBaseball(Id, baseballTypeId.Value, year, anniversary);
+                Baseball = new MemorabiliaBaseball(Id, baseballTypeId.Value, leaguePresidentId, year, anniversary);
                 return;
             }
 
-            Baseball.Set(baseballTypeId.Value, year, anniversary);
+            Baseball.Set(baseballTypeId.Value, leaguePresidentId, year, anniversary);
         }
         else
         {

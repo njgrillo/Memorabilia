@@ -52,6 +52,28 @@ public sealed class BaseballType : DomainItemConstant
         WorldSeries
     };
 
+    public static readonly BaseballType[] Commissioner =
+    {
+        AllStar,
+        AllStarFuturesGame,
+        Black,
+        Commemorative,
+        CyYoung,
+        FathersDay,
+        Gold,
+        GoldGlove,
+        GoldWorldSeries,
+        HallOfFame,
+        HomeRunDerby,
+        MothersDay,
+        Official,
+        OpeningDay,
+        PostSeason,
+        SpringTraining,
+        TeamAnniversary,
+        WorldSeries
+    };
+
     public static readonly BaseballType[] GameWorthly =
     {
         AllStar,
@@ -68,6 +90,12 @@ public sealed class BaseballType : DomainItemConstant
         SpringTraining,
         TeamAnniversary,
         WorldSeries
+    };
+
+    public static readonly BaseballType[] LeaguePresident =
+    {
+        AmericanLeague,
+        NationalLeague
     };
 
     public static readonly BaseballType[] Yearly =
@@ -109,8 +137,18 @@ public sealed class BaseballType : DomainItemConstant
         return GameWorthly;
     }
 
+    public static bool IsCommissionerType(BaseballType baseballType)
+    {
+        return Commissioner.Contains(baseballType);
+    }
+
     public static bool IsGameWorthly(BaseballType baseballType)
     {
         return GameWorthly.Contains(baseballType);
+    }    
+
+    public static bool IsLeaguePresidentType(BaseballType baseballType)
+    {
+        return LeaguePresident.Contains(baseballType);
     }
 }

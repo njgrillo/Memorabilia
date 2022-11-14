@@ -5,6 +5,9 @@ namespace Memorabilia.Blazor.Controls.TypeAhead;
 public class PersonDomainAutoComplete : NamedEntityAutoComplete<PersonViewModel>, INotifyPropertyChanged
 {
     [Parameter]
+    public Sport Sport { get; set; }
+
+    [Parameter]
     public int SportLeagueLevelId { get; set; }
 
     public event PropertyChangedEventHandler PropertyChanged;
@@ -24,7 +27,7 @@ public class PersonDomainAutoComplete : NamedEntityAutoComplete<PersonViewModel>
 
     private async void PersonDomainAutoComplete_PropertyChanged(object sender, PropertyChangedEventArgs e)
     {
-        if (e.PropertyName == nameof(SportLeagueLevelId))
+        if (e.PropertyName == nameof(SportLeagueLevelId) || e.PropertyName == nameof(Sport))
         {
             await LoadItems();
         }        
@@ -32,6 +35,6 @@ public class PersonDomainAutoComplete : NamedEntityAutoComplete<PersonViewModel>
 
     private async Task LoadItems()
     {
-        Items = (await QueryRouter.Send(new GetPeople(SportLeagueLevelId: SportLeagueLevelId > 0 ? SportLeagueLevelId : null))).People;
+        Items = (await QueryRouter.Send(new GetPeople(Sport?.Id, SportLeagueLevelId > 0 ? SportLeagueLevelId : null))).People;
     }
 }

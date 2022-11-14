@@ -43,7 +43,7 @@
                                       SelectionChanged="(p) => ViewModel.BaseballTypeId = p" />
             </ContentColumn4>
         </DivRowCol3>
-        <DivRowCol3 HideColumn2="@(!ViewModel.DisplayCommissioner)"
+        <DivRowCol3 HideColumn2="@(!ViewModel.DisplayCommissioner && !ViewModel.DisplayLeaguePresident)"
                     HideColumn3="@(!ViewModel.DisplayGameDate)">
             <Content>
                 <ItemTypeSizeDropDown ItemType="ViewModel.ItemType"
@@ -51,9 +51,21 @@
                                       SelectionChanged="(p) => ViewModel.SizeId = p" />
             </Content>
             <ContentColumn2>
-                <CommissionerDropDown SelectedValue="@ViewModel.CommissionerId"
-                                      SelectionChanged="(p) => ViewModel.CommissionerId = p"
-                                      SportLeagueLevelId="SportLeagueLevel.MajorLeagueBaseball.Id" />
+                <PrettyBlazor.Condition Evaluation="ViewModel.DisplayCommissioner">
+                    <Match>
+                        <CommissionerDropDown SelectedValue="@ViewModel.CommissionerId"
+                                              SelectionChanged="(p) => ViewModel.CommissionerId = p"
+                                              SportLeagueLevelId="SportLeagueLevel.MajorLeagueBaseball.Id" />
+                    </Match>
+                </PrettyBlazor.Condition>
+                <PrettyBlazor.Condition Evaluation="ViewModel.DisplayLeaguePresident">
+                    <Match>
+                        <LeaguePresidentDropDown League="@ViewModel.League" 
+                                                 SelectedValue="@ViewModel.LeaguePresidentId"
+                                                 SelectionChanged="(p) => ViewModel.LeaguePresidentId = p"
+                                                 SportLeagueLevel="SportLeagueLevel.MajorLeagueBaseball" />
+                    </Match>
+                </PrettyBlazor.Condition>                                    
             </ContentColumn2>
             <ContentColumn3>
                 <MudDatePicker @bind-Date="ViewModel.GameDate"

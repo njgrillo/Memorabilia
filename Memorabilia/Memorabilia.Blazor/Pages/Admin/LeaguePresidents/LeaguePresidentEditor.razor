@@ -1,0 +1,54 @@
+﻿@inherits EditItem<SaveLeaguePresidentViewModel, LeaguePresidentViewModel>
+
+<EditPage ContinueNavigationPath="@ViewModel.RoutePrefix"
+          DomainImageRootPath="@DomainImageRootPath"
+          EditMode="ViewModel.EditModeType" 
+          ExitNavigationPath="@ViewModel.RoutePrefix"
+          ImageFileName="@ViewModel.ImageFileName"
+          ItemName="@ViewModel.ItemTitle"
+          Model="ViewModel"          
+          OnLoad="OnLoad"
+          OnSave="HandleValidSubmit"
+          PageFooterButtonText="@ViewModel.ExitButtonText"
+          PageFooterNavigationPath="@ViewModel.ExitNavigationPath"
+          PageTitle="@ViewModel.PageTitle"
+          TItem="SaveLeaguePresidentViewModel">
+    <Content>
+        <DivRowCol3>
+            <Content>
+                <SportLeagueLevelDropDown Disabled="@(!ViewModel.IsNew)" 
+                                          SelectedValue="ViewModel.SportLeagueLevelId"
+                                          SelectionChanged="(p) => ViewModel.SportLeagueLevelId = p" />
+            </Content>
+        </DivRowCol3>
+        <DivRowCol3>
+            <Content>
+                <LeagueDropDown Disabled="@(!ViewModel.IsNew)" 
+                                SelectedValue="ViewModel.LeagueId"
+                                SelectionChanged="(p) => ViewModel.LeagueId = p"
+                                SportLeagueLevel="@SportLeagueLevel.MajorLeagueBaseball" />
+            </Content>
+        </DivRowCol3>
+        <DivRowCol3>
+            <Content>
+                <PersonDomainAutoComplete Disabled="@(!ViewModel.IsNew)" 
+                                          SelectedValue="ViewModel.Person"
+                                          SelectionChanged="(p) => ViewModel.Person = p" />
+            </Content>
+        </DivRowCol3>
+        <DivRowCol3>
+            <Content>
+                <NullableIntField Label="Begin Year"
+                                  Value="ViewModel.BeginYear"
+                                  ValueChanged="@((p) => ViewModel.BeginYear = p)" />
+            </Content>
+        </DivRowCol3>
+        <DivRowCol3>
+            <Content>
+                <NullableIntField Label="End Year"
+                                  Value="ViewModel.EndYear"
+                                  ValueChanged="@((p) => ViewModel.EndYear = p)" />
+            </Content>
+        </DivRowCol3>
+    </Content>
+</EditPage>

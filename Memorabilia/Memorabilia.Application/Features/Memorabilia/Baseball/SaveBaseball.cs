@@ -21,6 +21,7 @@ public class SaveBaseball
                                     command.CommissionerId, 
                                     command.GameDate,
                                     command.GameStyleTypeId,
+                                    command.LeaguePresidentId,
                                     command.LevelTypeId,
                                     command.PersonId,
                                     command.SizeId, 
@@ -52,6 +53,8 @@ public class SaveBaseball
         public DateTime? GameDate => _viewModel.GameDate;
 
         public int? GameStyleTypeId => _viewModel.GameStyleTypeId > 0 ? _viewModel.GameStyleTypeId : 0;
+
+        public int? LeaguePresidentId => _viewModel.LeaguePresidentId > 0 ? _viewModel.LeaguePresidentId : null;
 
         public int LevelTypeId => _viewModel.LevelTypeId;
 

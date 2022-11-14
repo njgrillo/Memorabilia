@@ -43,12 +43,13 @@ public static class MauiProgram
         builder.Services.AddTransient<IItemTypeSizeRepository, ItemTypeSizeRepository>();
         builder.Services.AddTransient<IItemTypeSportRepository, ItemTypeSportRepository>();
         builder.Services.AddTransient<IItemTypeSpotRepository, ItemTypeSpotRepository>();        
-        builder.Services.AddTransient<ILeaderRepository, LeaderRepository>();        
+        builder.Services.AddTransient<ILeaderRepository, LeaderRepository>();
+        builder.Services.AddTransient<ILeaguePresidentRepository, LeaguePresidentRepository>();
         builder.Services.AddTransient<IPersonAccomplishmentRepository, PersonAccomplishmentRepository>();
         builder.Services.AddTransient<IPersonAwardRepository, PersonAwardRepository>();
         builder.Services.AddTransient<IPersonCollegeRepository, PersonCollegeRepository>();
         builder.Services.AddTransient<IPersonRepository, PersonRepository>();
-        builder.Services.AddTransient<IPersonTeamRepository, PersonTeamRepository>();
+        builder.Services.AddTransient<IPersonTeamRepository, PersonTeamRepository>();        
         builder.Services.AddTransient<IProfileRuleFactory, ProfileRuleFactory>();
         builder.Services.AddTransient<IProfileService, ProfileService>();
         builder.Services.AddTransient<IProjectRepository, ProjectRepository>();

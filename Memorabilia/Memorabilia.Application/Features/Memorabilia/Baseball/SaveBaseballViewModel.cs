@@ -15,6 +15,7 @@ public class SaveBaseballViewModel : SaveItemViewModel
         CommissionerId = viewModel.Commissioner?.CommissionerId ?? 0;
         GameDate = viewModel.Game?.GameDate;
         GameStyleTypeId = viewModel.Game?.GameStyleTypeId ?? 0;
+        LeaguePresidentId = viewModel.Baseball?.LeaguePresidentId ?? 0;
         LevelTypeId = viewModel.Level.LevelTypeId;
         MemorabiliaId = viewModel.MemorabiliaId;
         SizeId = viewModel.Size.SizeId;
@@ -55,7 +56,8 @@ public class SaveBaseballViewModel : SaveItemViewModel
 
     public bool DisplayBaseballTypeYear => DisplayBaseballType && BaseballType.CanHaveYear(BaseballType);
 
-    public bool DisplayCommissioner => Brand.IsGameWorthlyBaseballBrand(Brand);
+    public bool DisplayCommissioner => Brand.IsGameWorthlyBaseballBrand(Brand) &&
+                                       BaseballType.IsCommissionerType(BaseballType);
 
     public bool DisplayGameDate => Brand.IsGameWorthlyBaseballBrand(Brand) &&
                                    SizeId == Size.Standard.Id && 
@@ -64,6 +66,9 @@ public class SaveBaseballViewModel : SaveItemViewModel
 
     public bool DisplayGameStyleType => Brand.IsGameWorthlyBaseballBrand(Brand) &&
                                         SizeId == Size.Standard.Id;
+
+    public bool DisplayLeaguePresident => Brand.IsGameWorthlyBaseballBrand(Brand) &&
+                                          BaseballType.IsLeaguePresidentType(BaseballType);
 
     public override EditModeType EditModeType => MemorabiliaId > 0 ? EditModeType.Update : EditModeType.Add;
 
@@ -100,6 +105,22 @@ public class SaveBaseballViewModel : SaveItemViewModel
     }
 
     public override ItemType ItemType => ItemType.Baseball;
+
+    public League League
+    {
+        get
+        {
+            if (BaseballType == BaseballType.AmericanLeague)
+                return League.AmericanLeague;
+
+            if (BaseballType == BaseballType.NationalLeague)
+                return League.NationalLeague;
+
+            return null;
+        }
+    }
+
+    public int LeaguePresidentId { get; set; }
 
     [Required]
     [Range(1, int.MaxValue, ErrorMessage = "Level is required.")]

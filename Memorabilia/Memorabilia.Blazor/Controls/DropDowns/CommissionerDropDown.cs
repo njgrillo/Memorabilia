@@ -4,9 +4,6 @@ namespace Memorabilia.Blazor.Controls.DropDowns;
 
 public class CommissionerDropDown : DropDown<CommissionerViewModel, int>
 {
-    [Inject]
-    public QueryRouter QueryRouter { get; set; }
-
     [Parameter]
     public int? SportLeagueLevelId { get; set; }
 
@@ -14,5 +11,10 @@ public class CommissionerDropDown : DropDown<CommissionerViewModel, int>
     {
         Items = (await QueryRouter.Send(new GetCommissioners(SportLeagueLevelId))).Commissioners.ToArray();
         Label = "Commissioner";
+    }
+
+    protected override string GetItemDisplayText(CommissionerViewModel item)
+    {
+        return $"{item.Person.DisplayName} ({item.BeginYear} - {(item.EndYear.HasValue ? item.EndYear : "current")})";
     }
 }

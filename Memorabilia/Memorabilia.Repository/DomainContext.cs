@@ -58,30 +58,19 @@ public class DomainContext : DbContext, IDomainContext
         modelBuilder.Entity<JerseyType>();
         modelBuilder.Entity<LeaderType>();
         modelBuilder.Entity<League>();
+        modelBuilder.Entity<LeaguePresident>();
         modelBuilder.Entity<LevelType>();
         modelBuilder.Entity<MagazineType>();
         modelBuilder.Entity<Occupation>();
         modelBuilder.Entity<Orientation>();
         modelBuilder.Entity<Person>();
-
-        //modelBuilder.Entity<Person>().HasMany(b => b.Awards)
-        //                             .WithOne(p => p.Person)
-        //                             .HasForeignKey(p => p.PersonId)
-        //                             .OnDelete(DeleteBehavior.Cascade);
-
-        //modelBuilder.Entity<Person>().HasMany(b => b.Nicknames)
-        //                             .WithOne(p => p.PersonId)
-        //                             .HasForeignKey(p => p.PersonId)
-        //                             .OnDelete(DeleteBehavior.Cascade);
-
-
         modelBuilder.Entity<PersonAward>();
         modelBuilder.Entity<PersonNickname>();
         modelBuilder.Entity<PersonOccupation>();
         modelBuilder.Entity<PersonSport>();
         modelBuilder.Entity<PersonTeam>();
         modelBuilder.Entity<Pewter>();
-        modelBuilder.Entity<PhotoType>();
+        modelBuilder.Entity<PhotoType>();        
         modelBuilder.Entity<PriorityType>();
         modelBuilder.Entity<PrivacyType>();            
         modelBuilder.Entity<ProjectType>();            

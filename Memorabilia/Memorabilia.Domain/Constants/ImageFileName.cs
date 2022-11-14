@@ -124,6 +124,8 @@ public static class ImageFileName
 
     public static string LeaderTypes => "leadertypes.jpg";
 
+    public static string LeaguePresidents => "leaguepresidents.jpg";
+
     public static string Leagues => "leagues.jpg";
 
     public static string LevelTypes => "leveltypes.jpg";
@@ -150,7 +152,7 @@ public static class ImageFileName
 
     public static string PlayingCard => "playingcard.jpg";
 
-    public static string Poster => "poster.jpg";
+    public static string Poster => "poster.jpg";    
 
     public static string PriorityTypes => "prioritytypes.jpg";
 
