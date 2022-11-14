@@ -1,0 +1,10 @@
+﻿@page "/Memorabilia/Bammer/Edit/{memorabiliaId:int}"
+
+@inherits MemorabiliaItem
+
+<PageLoader>
+    <Content>
+        <BammerEditor DomainImageRootPath="@DomainImageRootPath" 
+                      MemorabiliaId="@MemorabiliaId" />
+    </Content>
+</PageLoader>

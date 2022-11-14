@@ -13,8 +13,8 @@
             LeftPadding="10">
     <Content>
         <TeamAutoComplete ResetValueOnEmptyText="false" 
-                          SelectedValue="_viewModel"
-                          SelectionChanged="(p) => _viewModel = p"
+                          SelectedValue="SelectedTeam"
+                          SelectionChanged="(p) => SelectedTeam = p"
                           SportLeagueLevel="SportLeagueLevel" />
     </Content>
 </DivRowCol6>
@@ -24,7 +24,7 @@
         <DivLeftAlign>
             <Content>
                 <MudButton ButtonType="MudBlazor.ButtonType.Button" 
-                           Color="MudBlazor.Color.Secondary"
+                           Color="MudBlazor.Color.Success"
                            OnClick="Add"
                            Size="MudBlazor.Size.Medium"                                  
                            Variant="Variant.Filled">Add Team</MudButton>
@@ -33,7 +33,7 @@
         <MudTable Bordered="false"
                   Dense="false" 
                   Hover="true"
-                  Items="@Teams.Where(team => !team.IsDeleted).ToList()"    
+                  Items="@SelectedTeams.Where(team => !team.IsDeleted).ToList()"    
                   Striped="true">
             <HeaderContent>
                 <MudTh>Team</MudTh>

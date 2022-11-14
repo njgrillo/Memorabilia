@@ -4,9 +4,6 @@ namespace Memorabilia.Blazor.Controls.Team;
 
 public partial class MultiTeamSelector : ComponentBase
 {
-    [Inject]
-    public QueryRouter QueryRouter { get; set; }
-
     [Parameter]
     public bool CanToggle { get; set; }
 
@@ -17,23 +14,12 @@ public partial class MultiTeamSelector : ComponentBase
     public SportLeagueLevel SportLeagueLevel { get; set; }
 
     [Parameter]
-    public SaveTeamViewModel SelectedTeam { get; set; }
+    public List<SaveTeamViewModel> SelectedTeams { get; set; }
 
     [Parameter]
-    public EventCallback<SaveTeamViewModel> SelectedTeamChanged { get; set; }
+    public EventCallback<List<SaveTeamViewModel>> SelectedTeamsChanged { get; set; }
 
-    [Parameter]
-    public List<SaveTeamViewModel> Teams { get; set; } = new();
-
-    SaveTeamViewModel _viewModel
-    {
-        get => SelectedTeam;
-        set
-        {
-            SelectedTeam = value;
-            SelectedTeamChanged.InvokeAsync(value);
-        }
-    }
+    protected SaveTeamViewModel SelectedTeam { get; set; }
 
     private bool _displayTeams;
     private bool _hasTeams;
@@ -41,20 +27,23 @@ public partial class MultiTeamSelector : ComponentBase
 
     protected override void OnInitialized()
     {
-        _displayTeams = !CanToggle || SelectedTeam?.Id > 0 || Teams.Any();
-        _hasTeams = SelectedTeam?.Id > 0 || Teams.Any();
+        _displayTeams = !CanToggle || SelectedTeams.Any();
+        _hasTeams = SelectedTeams.Any();
     }
 
     private void Add()
     {
-        var team = Teams.SingleOrDefault(team => team.Id == _viewModel.Id);
+        var team = SelectedTeams.SingleOrDefault(team => team.Id == SelectedTeam.Id);
 
         if (team != null)
             team.IsDeleted = false;
         else
-            Teams.Add(_viewModel);
+        {
+            SelectedTeams.Add(SelectedTeam);
+            SelectedTeamsChanged.InvokeAsync(SelectedTeams);
+        }
 
-        _viewModel = new();
+        SelectedTeam = new();
     }
 
     private void TeamCheckboxClicked(bool isChecked)
@@ -62,7 +51,11 @@ public partial class MultiTeamSelector : ComponentBase
         _displayTeams = CanToggle && isChecked;
 
         if (!_displayTeams)
-            SelectedTeam = null;
+        {
+            SelectedTeam = new();
+            SelectedTeams = new();            
+            SelectedTeamsChanged.InvokeAsync(SelectedTeams);
+        }            
 
         _hasTeams = isChecked;
     }

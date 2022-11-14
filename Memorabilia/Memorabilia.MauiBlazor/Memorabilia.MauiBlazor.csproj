@@ -68,7 +68,6 @@
 
     <ItemGroup>
       <Folder Include="Pages\Autograph\" />
-      <Folder Include="Pages\MemorabiliaItems\" />
     </ItemGroup>
 
 </Project>

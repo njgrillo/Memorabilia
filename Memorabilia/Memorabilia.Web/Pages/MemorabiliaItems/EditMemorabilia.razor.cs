@@ -1,8 +1,7 @@
-﻿namespace Memorabilia.Web.Pages.MemorabiliaItems
+﻿namespace Memorabilia.Web.Pages.MemorabiliaItems;
+
+public partial class EditMemorabilia : WebPage
 {
-    public partial class EditMemorabilia : WebPage
-    {
-        [Parameter]
-        public int Id { get; set; }
-    }
+    [Parameter]
+    public int Id { get; set; }
 }

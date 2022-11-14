@@ -58,7 +58,10 @@
             </Content>
             <ContentColumn2>
                 <MudDatePicker @bind-Date="_viewModel.AcquiredDate"
+                               DateFormat="MM/dd/yyyy"
+                               Editable="true"
                                Label="Acquired Date"
+                               Mask="@(new DateMask("MM/dd/yyyy"))"
                                Variant="Variant.Outlined" />
             </ContentColumn2>
             <ContentColumn3>

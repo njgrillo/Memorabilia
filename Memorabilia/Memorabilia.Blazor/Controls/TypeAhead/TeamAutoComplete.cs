@@ -17,4 +17,14 @@ public class TeamAutoComplete : NamedEntityAutoComplete<SaveTeamViewModel>
         ResetValueOnEmptyText = true;
         Items = (await QueryRouter.Send(new GetTeams(FranchiseId > 0 ? FranchiseId : null, SportLeagueLevel?.Id))).Teams.Select(team => new SaveTeamViewModel(team));        
     }
+
+    protected override string GetItemSelectedText(SaveTeamViewModel item)
+    {
+        return item.DisplayName;
+    }
+
+    protected override string GetItemText(SaveTeamViewModel item)
+    {
+        return item.DisplayName;
+    }
 }

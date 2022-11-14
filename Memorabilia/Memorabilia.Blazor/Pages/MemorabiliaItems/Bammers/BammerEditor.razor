@@ -31,37 +31,35 @@
                 <BammerTypeDropDown SelectedValue="ViewModel.BammerTypeId"
                                     SelectionChanged="(p) => ViewModel.BammerTypeId = p" />               
             </ContentColumn2>
-        </DivRowCol3>
-        <DivRowCol3>
-            <Content>
+            <ContentColumn3>
                 <ItemTypeLevelDropDown ItemType="ViewModel.ItemType"
                                        SelectedValue="ViewModel.LevelTypeId"
                                        SelectionChanged="(p) => ViewModel.LevelTypeId = p" />
-            </Content>
-            <ContentColumn2>
-                <NullableIntField Label="Year"
-                                  Value="ViewModel.Year"
-                                  ValueChanged="@((p) => ViewModel.Year = p)" />
-            </ContentColumn2>
+            </ContentColumn3>
+            <ContentColumn4>
+                <SportDropDown SelectedValue="@ViewModel.SportId"
+                               SelectionChanged="(p) => ViewModel.SportId = p" />
+            </ContentColumn4>
         </DivRowCol3>
         <DivRowCol3>
             <Content>
+                <NullableIntField Label="Year"
+                                  Value="ViewModel.Year"
+                                  ValueChanged="@((p) => ViewModel.Year = p)" />                
+            </Content>
+            <ContentColumn2>
                 <BooleanCheckBox Checked="@ViewModel.InPackage"
                                  CheckedChanged="(p) => ViewModel.InPackage = p"
                                  Label="In Package" />
-            </Content>
+            </ContentColumn2>
         </DivRowCol3>
         <MultiPersonSelector CanToggle="true"
                              ItemType="ViewModel.ItemType"
-                             People="ViewModel.People" />
-        <DivRowCol3>
-            <Content>
-                <SportDropDown SelectedValue="@ViewModel.SportId"
-                               SelectionChanged="(p) => ViewModel.SportId = p" />
-            </Content>
-        </DivRowCol3> 
+                             SelectedPeople="ViewModel.People"
+                             SelectedPeopleChanged="@((people) => ViewModel.People = people)" />
         <MultiTeamSelector CanToggle="true" 
                            ItemType="ViewModel.ItemType"
-                           Teams="ViewModel.Teams" />
+                           SelectedTeams="ViewModel.Teams"
+                           SelectedTeamsChanged="@((teams) => ViewModel.Teams = teams)" />
     </Content>
 </EditPage>

@@ -23,10 +23,6 @@ public class SaveBammerViewModel : SaveItemViewModel
 
     public int BammerTypeId { get; set; }
 
-    public BammerType[] BammerTypes => BammerType.All;
-
-    public Brand Brand => Brand.Find(BrandId);
-
     public override EditModeType EditModeType => MemorabiliaId > 0 ? EditModeType.Update : EditModeType.Add;
 
     [Required]

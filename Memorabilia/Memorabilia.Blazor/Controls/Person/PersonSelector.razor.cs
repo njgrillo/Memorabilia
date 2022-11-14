@@ -69,8 +69,6 @@ public partial class PersonSelector : ComponentBase
     private void PersonFilterCheckboxClicked(bool isChecked)
     {
         _filterPeople = isChecked;
-
-        if (_filterPeople)
-            Sport = _sportFilter;
+        Sport = _filterPeople ? _sportFilter : null;
     }
 }

@@ -4,7 +4,6 @@ namespace Memorabilia.Blazor.Controls.Person;
 
 public partial class MultiPersonSelector : ComponentBase
 {
-
     [Parameter]
     public bool CanFilterBySport { get; set; }
 
@@ -15,26 +14,15 @@ public partial class MultiPersonSelector : ComponentBase
     public ItemType ItemType { get; set; }
 
     [Parameter]
-    public List<SavePersonViewModel> People { get; set; } = new();
+    public List<SavePersonViewModel> SelectedPeople { get; set; }
 
     [Parameter]
-    public SavePersonViewModel SelectedPerson { get; set; }
+    public EventCallback<List<SavePersonViewModel>> SelectedPeopleChanged { get; set; }
 
-    [Parameter]
-    public EventCallback<SavePersonViewModel> SelectedPersonChanged { get; set; }
+    protected SavePersonViewModel SelectedPerson { get; set; }
 
     [Parameter]
     public Sport Sport { get; set; }
-
-    public SavePersonViewModel ViewModel
-    {
-        get => SelectedPerson;
-        set
-        {
-            SelectedPerson = value;
-            SelectedPersonChanged.InvokeAsync(value);
-        }
-    }
 
     private bool _displayPeople;
     private bool _filterPeople = true;
@@ -45,7 +33,7 @@ public partial class MultiPersonSelector : ComponentBase
 
     protected override void OnInitialized()
     {
-        _hasPeople = SelectedPerson?.Id > 0 || People.Any();
+        _hasPeople = SelectedPerson?.Id > 0 || SelectedPeople.Any();
         _displayPeople = !CanToggle || _hasPeople;  
         _sportFilter = Sport;
 
@@ -55,14 +43,17 @@ public partial class MultiPersonSelector : ComponentBase
 
     private void Add()
     {
-        var person = People.SingleOrDefault(person => person.Id == ViewModel.Id);
+        var person = SelectedPeople.SingleOrDefault(person => person.Id == SelectedPerson.Id);
 
         if (person != null)
             person.IsDeleted = false;
         else
-            People.Add(ViewModel);
+        {
+            SelectedPeople.Add(SelectedPerson);
+            SelectedPeopleChanged.InvokeAsync(SelectedPeople);
+        }            
 
-        ViewModel = new();
+        SelectedPerson = new();
     }
 
     private void PersonCheckboxClicked(bool isChecked)
@@ -70,7 +61,11 @@ public partial class MultiPersonSelector : ComponentBase
         _displayPeople = CanToggle && isChecked;
 
         if (!_displayPeople)
-            SelectedPerson = null;
+        {
+            SelectedPerson = new();
+            SelectedPeople = new();
+            SelectedPeopleChanged.InvokeAsync(SelectedPeople);
+        }
 
         _hasPeople = isChecked;
     }

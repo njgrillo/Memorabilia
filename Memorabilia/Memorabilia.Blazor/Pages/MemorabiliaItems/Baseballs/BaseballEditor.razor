@@ -86,7 +86,8 @@
                         Sport="ViewModel.Sport" />  
         <MultiTeamSelector CanToggle="true" 
                            ItemType="ViewModel.ItemType"
-                           Teams="ViewModel.Teams" />
+                           SelectedTeams="ViewModel.Teams"
+                           SelectedTeamsChanged="@((teams) => ViewModel.Teams = teams)" />
     </Content>
 </EditPage>
 
