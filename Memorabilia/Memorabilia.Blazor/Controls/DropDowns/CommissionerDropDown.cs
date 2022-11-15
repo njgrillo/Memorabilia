@@ -5,11 +5,11 @@ namespace Memorabilia.Blazor.Controls.DropDowns;
 public class CommissionerDropDown : DropDown<CommissionerViewModel, int>
 {
     [Parameter]
-    public int? SportLeagueLevelId { get; set; }
+    public SportLeagueLevel SportLeagueLevel { get; set; }
 
     protected override async Task OnInitializedAsync()
     {
-        Items = (await QueryRouter.Send(new GetCommissioners(SportLeagueLevelId))).Commissioners.ToArray();
+        Items = (await QueryRouter.Send(new GetCommissioners(SportLeagueLevel?.Id))).Commissioners.ToArray();
         Label = "Commissioner";
     }
 

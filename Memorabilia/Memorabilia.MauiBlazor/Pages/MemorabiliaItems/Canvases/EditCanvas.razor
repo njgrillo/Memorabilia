@@ -1,0 +1,11 @@
+﻿@page "/Memorabilia/Canvas/Edit/{memorabiliaId:int}"
+
+@inherits MemorabiliaItem
+
+<PageLoader>
+    <Content>
+        <CanvasEditor DomainImageRootPath="@DomainImageRootPath" 
+                      MemorabiliaId="@MemorabiliaId" />
+    </Content>
+</PageLoader>
+

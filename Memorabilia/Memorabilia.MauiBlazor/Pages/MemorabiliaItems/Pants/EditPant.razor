@@ -1,0 +1,10 @@
+﻿@page "/Memorabilia/Pant/Edit/{memorabiliaId:int}"
+
+@inherits MemorabiliaItem
+
+<PageLoader>
+    <Content>
+        <PantEditor DomainImageRootPath="@DomainImageRootPath" 
+                    MemorabiliaId="@MemorabiliaId" />
+    </Content>
+</PageLoader>

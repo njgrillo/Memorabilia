@@ -1,10 +1,9 @@
 ﻿namespace Memorabilia.Blazor.Controls.DropDowns;
 
-public class JerseyTypeDropDown : DropDown<JerseyType, int>
+public class JerseyTypeDropDown : GameStyleDropDown<JerseyType>
 {
-    protected override void OnInitialized()
+    protected override void LoadItems()
     {
         Items = JerseyType.All;
-        Label = "Type";
     }
 }

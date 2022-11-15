@@ -1,0 +1,11 @@
+﻿@page "/Memorabilia/PinFlag/Edit/{memorabiliaId:int}"
+@page "/Memorabilia/Pin Flag/Edit/{memorabiliaId:int}"
+
+@inherits MemorabiliaItem
+
+<PageLoader>
+    <Content>
+        <PinFlagEditor DomainImageRootPath="@DomainImageRootPath" 
+                       MemorabiliaId="@MemorabiliaId" />
+    </Content>
+</PageLoader>

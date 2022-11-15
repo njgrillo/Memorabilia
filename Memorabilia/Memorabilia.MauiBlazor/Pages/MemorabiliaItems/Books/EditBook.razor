@@ -1,0 +1,10 @@
+﻿@page "/Memorabilia/Book/Edit/{memorabiliaId:int}"
+
+@inherits MemorabiliaItem
+
+<PageLoader>
+    <Content>
+        <BookEditor DomainImageRootPath="@DomainImageRootPath" 
+                    MemorabiliaId="@MemorabiliaId" />
+    </Content>
+</PageLoader>

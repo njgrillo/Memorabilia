@@ -1,0 +1,10 @@
+﻿@page "/Memorabilia/Shoe/Edit/{memorabiliaId:int}"
+
+@inherits MemorabiliaItem
+
+<PageLoader>
+    <Content>
+        <ShoeEditor DomainImageRootPath="@DomainImageRootPath" 
+                    MemorabiliaId="@MemorabiliaId" />
+    </Content>
+</PageLoader>

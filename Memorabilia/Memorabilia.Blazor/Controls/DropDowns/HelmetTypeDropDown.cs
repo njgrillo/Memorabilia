@@ -1,10 +1,9 @@
 ﻿namespace Memorabilia.Blazor.Controls.DropDowns;
 
-public class HelmetTypeDropDown : DropDown<HelmetType, int>
+public class HelmetTypeDropDown : GameStyleDropDown<HelmetType>
 {
-    protected override void OnInitialized()
+    protected override void LoadItems()
     {
-        Items = HelmetType.All;
-        Label = "Type";
+        Items = GameStyleType != null ? HelmetType.GetAll(GameStyleType) : HelmetType.All;
     }
 }

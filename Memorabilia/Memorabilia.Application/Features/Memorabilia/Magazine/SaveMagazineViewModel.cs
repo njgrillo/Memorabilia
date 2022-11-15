@@ -42,8 +42,6 @@ public class SaveMagazineViewModel : SaveItemViewModel
 
     public int OrientationId { get; set; }
 
-    public Orientation[] Orientations => Orientation.All;
-
     public List<SavePersonViewModel> People { get; set; } = new();
 
     [Required]

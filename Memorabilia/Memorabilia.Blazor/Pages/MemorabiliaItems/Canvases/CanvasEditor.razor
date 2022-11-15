@@ -32,12 +32,15 @@
                                       SelectedValue="@ViewModel.SizeId"
                                       SelectionChanged="(p) => ViewModel.SizeId = p" />
             </ContentColumn2>
-        </DivRowCol3>
-        <DivRowCol3>
-            <Content>
+            <ContentColumn3>
                 <OrientationDropDown SelectedValue="ViewModel.OrientationId"
                                      SelectionChanged="(p) => ViewModel.OrientationId = p" />
-            </Content>
+            </ContentColumn3>
+            <ContentColumn4>
+                <SportDropDown MultiSelect="true"
+                               SelectedItems="ViewModel.SportIds"
+                               SelectedItemsChanged="(p) => ViewModel.SportIds = p.ToList()" />
+            </ContentColumn4>
         </DivRowCol3>
         <DivRowCol3>
             <Content>
@@ -52,26 +55,21 @@
                                  CheckedChanged="(p) => ViewModel.Matted = p"
                                  Label="Matted" />
             </Content>
-        </DivRowCol3>
-        <DivRowCol3>
+       </DivRowCol3>
+       <DivRowCol3>
             <Content>
                 <BooleanCheckBox Checked="@ViewModel.Stretched"
                                  CheckedChanged="(p) => ViewModel.Stretched = p"
                                  Label="Stretched" />
             </Content>
-        </DivRowCol3>
+       </DivRowCol3>
         <MultiPersonSelector CanToggle="true"
                              ItemType="ViewModel.ItemType"
-                             People="ViewModel.People" />    
-        <DivRowCol3>
-            <Content>
-                <SportDropDown MultiSelect="true"
-                               SelectedItems="ViewModel.SportIds"
-                               SelectedItemsChanged="(p) => ViewModel.SportIds = p.ToList()" />
-            </Content>
-       </DivRowCol3>
+                             SelectedPeople="ViewModel.People"
+                             SelectedPeopleChanged="@((people) => ViewModel.People = people)" /> 
         <MultiTeamSelector CanToggle="true" 
                            ItemType="ViewModel.ItemType"
-                           Teams="ViewModel.Teams" />
+                           SelectedTeams="ViewModel.Teams"
+                           SelectedTeamsChanged="@((teams) => ViewModel.Teams = teams)" />
     </Content>
 </EditPage>

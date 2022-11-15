@@ -23,8 +23,6 @@ public class SaveHelmetViewModel : SaveItemViewModel
         Throwback = viewModel.Helmet.Throwback;
     }
 
-    private int _gameStyleTypeId;
-
     public override string BackNavigationPath => $"Memorabilia/{EditModeType.Update.Name}/{MemorabiliaId}";
 
     [Required]
@@ -33,7 +31,9 @@ public class SaveHelmetViewModel : SaveItemViewModel
 
     public bool CanEditHelmetQualityType { get; private set; } = true;
 
-    public bool DisplayGameDate => IsGameWorthly;
+    public bool DisplayGameDate => IsGameWorthly && DisplayGameStyle;
+
+    public bool DisplayGameStyle => SizeId == Size.Full.Id;
 
     public bool DisplayHelmetFinish => !IsGameWorthly;
 
@@ -49,38 +49,11 @@ public class SaveHelmetViewModel : SaveItemViewModel
 
     [Required]
     [Range(1, int.MaxValue, ErrorMessage = "Game Style Type is required.")]
-    public int GameStyleTypeId
-    {
-        get
-        {
-            return _gameStyleTypeId;
-        }
-        set
-        {
-            _gameStyleTypeId = value;
-
-            HelmetTypes = HelmetType.GetAll(GameStyleType.Find(value));
-
-            CanEditHelmetQualityType = !IsGameWorthly;
-
-            if (IsGameWorthly)
-            {
-                HelmetQualityTypeId = HelmetQualityType.Authentic.Id;                    
-            }                    
-        }
-    }
-
-    public GameStyleType[] GameStyleTypes => GameStyleType.GetAll(ItemType.Helmet);
-
-    public HelmetFinish[] HelmetFinishes => HelmetFinish.All;
+    public int GameStyleTypeId { get; set; } = GameStyleType.None.Id;
 
     public int HelmetFinishId { get; set; }
 
     public int HelmetQualityTypeId { get; set; }
-
-    public HelmetQualityType[] HelmetQualityTypes => HelmetQualityType.All;
-
-    public HelmetType HelmetType => HelmetType.Find(HelmetTypeId);
 
     public int HelmetTypeId { get; set; }
 
@@ -100,7 +73,7 @@ public class SaveHelmetViewModel : SaveItemViewModel
 
     [Required]
     [Range(1, int.MaxValue, ErrorMessage = "Size is required.")]
-    public int SizeId { get; set; }
+    public int SizeId { get; set; } = Size.Mini.Id;
 
     public List<int> SportIds { get; set; } = new();
 

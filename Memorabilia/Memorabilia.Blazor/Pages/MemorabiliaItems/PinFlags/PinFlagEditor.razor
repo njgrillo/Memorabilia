@@ -21,20 +21,21 @@
                                  MemorabiliaItemStep="ViewModel.MemorabiliaItemStep" />
     </TimelineContent>
     <Content>
-        <DivRowCol3>
+        <DivRowCol3 HideColumn2="@(!ViewModel.DisplayGameDate)">
             <Content>
                 <ItemTypeGameStyleDropDown ItemType="ViewModel.ItemType"
                                            Label="Tournament Style Type"
                                            SelectedValue="ViewModel.GameStyleTypeId"
                                            SelectionChanged="(p) => ViewModel.GameStyleTypeId = p" />
             </Content>
-        </DivRowCol3>
-        <DivRowCol3 Hidden="@(!ViewModel.DisplayGameDate)">
-            <Content>
+            <ContentColumn2>
                 <MudDatePicker @bind-Date="ViewModel.GameDate"
+                               DateFormat="MM/dd/yyyy"
+                               Editable="true"
                                Label="Tournament Date"
+                               Mask="@(new DateMask("MM/dd/yyyy"))"
                                Variant="Variant.Outlined" />
-            </Content>
+            </ContentColumn2>
         </DivRowCol3>
         <PersonSelector CanFilterBySport="true"
                         CanToggle="true"

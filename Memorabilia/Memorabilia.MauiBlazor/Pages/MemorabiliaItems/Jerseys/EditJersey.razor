@@ -1,0 +1,10 @@
+﻿@page "/Memorabilia/Jersey/Edit/{memorabiliaId:int}"
+
+@inherits MemorabiliaItem
+
+<PageLoader>
+    <Content>
+        <JerseyEditor DomainImageRootPath="@DomainImageRootPath" 
+                      MemorabiliaId="@MemorabiliaId" />
+    </Content>
+</PageLoader>

@@ -1,0 +1,10 @@
+﻿@page "/Memorabilia/Pylon/Edit/{memorabiliaId:int}"
+
+@inherits MemorabiliaItem
+
+<PageLoader>
+    <Content>
+        <PylonEditor DomainImageRootPath="@DomainImageRootPath" 
+                     MemorabiliaId="@MemorabiliaId" />
+    </Content>
+</PageLoader>

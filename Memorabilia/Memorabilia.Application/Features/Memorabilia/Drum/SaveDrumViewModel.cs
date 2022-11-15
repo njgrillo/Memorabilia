@@ -25,8 +25,6 @@ public class SaveDrumViewModel : SaveItemViewModel
 
     public override string ExitNavigationPath => "Memorabilia/Items";
 
-    public bool HasPerson => People.Any();
-
     public override string ImageFileName => Domain.Constants.ImageFileName.Drum;
 
     public override ItemType ItemType => ItemType.Drum;

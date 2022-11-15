@@ -7,10 +7,7 @@ public partial class JerseyEditor : MemorabiliaItem<SaveJerseyViewModel>
         var viewModel = await QueryRouter.Send(new GetJersey(MemorabiliaId));
 
         if (viewModel.Brand == null)
-        {
-            SetDefaults();
             return;
-        }
 
         ViewModel = new SaveJerseyViewModel(viewModel);
     }
@@ -18,10 +15,5 @@ public partial class JerseyEditor : MemorabiliaItem<SaveJerseyViewModel>
     protected async Task OnSave()
     {
         await CommandRouter.Send(new SaveJersey.Command(ViewModel));
-    }
-
-    private void SetDefaults()
-    {
-        ViewModel.GameStyleTypeId = GameStyleType.None.Id;
     }
 }

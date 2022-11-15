@@ -1,0 +1,11 @@
+﻿@page "/Memorabilia/Guitar/Edit/{memorabiliaId:int}"
+
+@inherits MemorabiliaItem
+
+<PageLoader>
+    <Content>
+        <GuitarEditor DomainImageRootPath="@DomainImageRootPath" 
+                      MemorabiliaId="@MemorabiliaId" />
+    </Content>
+</PageLoader>
+

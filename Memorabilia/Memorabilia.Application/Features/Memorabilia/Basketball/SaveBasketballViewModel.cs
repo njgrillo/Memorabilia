@@ -24,15 +24,9 @@ public class SaveBasketballViewModel : SaveItemViewModel
             Team = new SaveTeamViewModel(new TeamViewModel(viewModel.Teams.First().Team));
     }
 
-    private int _gameStyleTypeId;
-
     public override string BackNavigationPath => $"Memorabilia/{EditModeType.Update.Name}/{MemorabiliaId}";
 
-    public BasketballType BasketballType => BasketballType.Find(BasketballTypeId);
-
     public int BasketballTypeId { get; set; } = BasketballType.Official.Id;
-
-    public BasketballType[] BasketballTypes { get; set; } = BasketballType.All;
 
     [Required]
     [Range(1, int.MaxValue, ErrorMessage = "Brand is required.")]
@@ -40,7 +34,9 @@ public class SaveBasketballViewModel : SaveItemViewModel
 
     public int CommissionerId { get; set; }
 
-    public bool DisplayGameDate => GameStyleType == GameStyleType.GameUsed;
+    public bool DisplayGameDate => GameStyleType.IsGameWorthly(GameStyleType) && DisplayGameStyle;
+
+    public bool DisplayGameStyle => SizeId == Size.Full.Id;
 
     public override EditModeType EditModeType => MemorabiliaId > 0 ? EditModeType.Update : EditModeType.Add;
 
@@ -52,18 +48,7 @@ public class SaveBasketballViewModel : SaveItemViewModel
 
     [Required]
     [Range(1, int.MaxValue, ErrorMessage = "Game Style Type is required.")]
-    public int GameStyleTypeId
-    {
-        get
-        {
-            return _gameStyleTypeId;
-        }
-        set
-        {
-            _gameStyleTypeId = value;
-            BasketballTypes = BasketballType.GetAll(GameStyleType.Find(value));              
-        }
-    }
+    public int GameStyleTypeId { get; set; } = GameStyleType.None.Id;
 
     public override string ImageFileName => Domain.Constants.ImageFileName.Basketball;
 
@@ -73,7 +58,7 @@ public class SaveBasketballViewModel : SaveItemViewModel
     [Range(1, int.MaxValue, ErrorMessage = "Level is required.")]
     public int LevelTypeId { get; set; } = LevelType.Professional.Id;
 
-    public SavePersonViewModel Person;
+    public SavePersonViewModel Person { get; set; }
 
     [Required]
     [Range(1, int.MaxValue, ErrorMessage = "Size is required.")]

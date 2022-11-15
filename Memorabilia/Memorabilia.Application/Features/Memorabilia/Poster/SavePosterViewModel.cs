@@ -38,8 +38,6 @@ public class SavePosterViewModel : SaveItemViewModel
 
     public int OrientationId { get; set; } = Orientation.Portrait.Id;
 
-    public Orientation[] Orientations => Orientation.All;
-
     public List<SavePersonViewModel> People { get; set; } = new();
 
     [Required]

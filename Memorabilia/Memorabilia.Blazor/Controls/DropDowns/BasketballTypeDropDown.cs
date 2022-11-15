@@ -1,11 +1,10 @@
 ﻿
 namespace Memorabilia.Blazor.Controls.DropDowns;
 
-public class BasketballTypeDropDown : DropDown<BasketballType, int>
+public class BasketballTypeDropDown : GameStyleDropDown<BasketballType>
 {
-    protected override void OnInitialized()
+    protected override void LoadItems()
     {
-        Items = BasketballType.All;
-        Label = "Type";
+        Items = GameStyleType != null ? BasketballType.GetAll(GameStyleType) : BasketballType.All;
     }
 }

@@ -21,18 +21,33 @@
                                  MemorabiliaItemStep="ViewModel.MemorabiliaItemStep" />
     </TimelineContent>
     <Content>
-        <MultiPersonSelector CanToggle="true"
-                             ItemType="ViewModel.ItemType"
-                             People="ViewModel.People" />    
         <DivRowCol3>
             <Content>
+                <ItemTypeSizeDropDown ItemType="ViewModel.ItemType"
+                                      SelectedValue="@ViewModel.SizeId"
+                                      SelectionChanged="(p) => ViewModel.SizeId = p" />
+            </Content>
+            <ContentColumn2>
+                <MudDatePicker @bind-Date="ViewModel.Date"
+                               DateFormat="MM/dd/yyyy"
+                               Editable="true"
+                               Label="Date"
+                               Mask="@(new DateMask("MM/dd/yyyy"))"
+                               Variant="Variant.Outlined" /> 
+            </ContentColumn2>
+            <ContentColumn3>
                 <SportDropDown MultiSelect="true"
                                SelectedItems="ViewModel.SportIds"
                                SelectedItemsChanged="(p) => ViewModel.SportIds = p.ToList()" />
-            </Content>
+            </ContentColumn3>
         </DivRowCol3>
-        <MultiTeamSelector CanToggle="true" 
+        <MultiPersonSelector CanToggle="true"
+                             ItemType="ViewModel.ItemType"
+                             SelectedPeople="ViewModel.People"
+                             SelectedPeopleChanged="@((people) => ViewModel.People = people)" />
+        <MultiTeamSelector CanToggle="true"
                            ItemType="ViewModel.ItemType"
-                           Teams="ViewModel.Teams" />
+                           SelectedTeams="ViewModel.Teams"
+                           SelectedTeamsChanged="@((teams) => ViewModel.Teams = teams)" />
     </Content>
 </EditPage>

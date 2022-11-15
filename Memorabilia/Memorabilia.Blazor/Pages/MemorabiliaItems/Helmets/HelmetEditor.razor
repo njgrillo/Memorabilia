@@ -32,37 +32,42 @@
                                        SelectedValue="ViewModel.BrandId"
                                        SelectionChanged="(p) => ViewModel.BrandId = p" />
             </ContentColumn2>
-        </DivRowCol3>
-        <DivRowCol3>
-            <Content>
+            <ContentColumn3>
                 <ItemTypeSizeDropDown ItemType="ViewModel.ItemType"
                                       SelectedValue="@ViewModel.SizeId"
                                       SelectionChanged="(p) => ViewModel.SizeId = p"/> 
-            </Content>
-            <ContentColumn2>
+            </ContentColumn3>
+            <ContentColumn4>
+                <SportDropDown MultiSelect="true"
+                               SelectedItems="ViewModel.SportIds"
+                               SelectedItemsChanged="(p) => ViewModel.SportIds = p.ToList()" />
+            </ContentColumn4>
+        </DivRowCol3>
+        <DivRowCol3 HideColumn1="@(!ViewModel.DisplayGameStyle)"
+                    HideColumn2="@(!ViewModel.DisplayGameDate)">
+            <Content>
                 <ItemTypeGameStyleDropDown ItemType="ViewModel.ItemType"
                                            SelectedValue="ViewModel.GameStyleTypeId"
                                            SelectionChanged="(p) => ViewModel.GameStyleTypeId = p" /> 
-            </ContentColumn2>
-        </DivRowCol3>
-        <DivRowCol3>
+            </Content>
             <ContentColumn2>
-                <DivHidden Hidden="@(!ViewModel.DisplayGameDate)">
-                    <Content>
-                        <MudDatePicker @bind-Date="ViewModel.GameDate"
-                                       Label="Game Date"
-                                       Variant="Variant.Outlined" />
-                    </Content>
-                </DivHidden>
+                <MudDatePicker @bind-Date="ViewModel.GameDate"
+                               DateFormat="MM/dd/yyyy"
+                               Editable="true"
+                               Label="Game Date"
+                               Mask="@(new DateMask("MM/dd/yyyy"))"
+                               Variant="Variant.Outlined" />
             </ContentColumn2>
         </DivRowCol3>
-        <DivRowCol3>
+        <DivRowCol3 HideColumn2="@(!ViewModel.DisplayHelmetQualityType)"
+                    HideColumn3="@(!ViewModel.DisplayHelmetFinish)">
             <Content>
-                <HelmetTypeDropDown SelectedValue="ViewModel.HelmetTypeId"
+                <HelmetTypeDropDown GameStyleType="ViewModel.GameStyleType" 
+                                    SelectedValue="ViewModel.HelmetTypeId"
                                     SelectionChanged="(p) => ViewModel.HelmetTypeId = p" /> 
             </Content>
             <ContentColumn2>
-                <DivHidden Hidden="@(!ViewModel.DisplayHelmetQualityType)">
+                <DivHidden >
                     <Content>
                         <HelmetQualityTypeDropDown Disabled="!ViewModel.CanEditHelmetQualityType"
                                                    SelectedValue="ViewModel.HelmetQualityTypeId"
@@ -70,16 +75,10 @@
                     </Content>
                 </DivHidden> 
             </ContentColumn2>
-        </DivRowCol3>
-        <DivRowCol3>
-            <Content>
-                <DivHidden Hidden="@(!ViewModel.DisplayHelmetFinish)">
-                    <Content>
-                        <HelmetFinishDropDown SelectedValue="ViewModel.HelmetFinishId"
-                                              SelectionChanged="(p) => ViewModel.HelmetFinishId = p" /> 
-                    </Content>
-                </DivHidden>
-            </Content>
+            <ContentColumn3>
+                <HelmetFinishDropDown SelectedValue="ViewModel.HelmetFinishId"
+                                      SelectionChanged="(p) => ViewModel.HelmetFinishId = p" /> 
+            </ContentColumn3>
         </DivRowCol3>
         <DivRowCol3>
             <Content>
@@ -90,16 +89,11 @@
         </DivRowCol3>
         <MultiPersonSelector CanToggle="true"
                              ItemType="ViewModel.ItemType"
-                             People="ViewModel.People" />   
-        <DivRowCol3>
-            <Content>
-                <SportDropDown MultiSelect="true"
-                               SelectedItems="ViewModel.SportIds"
-                               SelectedItemsChanged="(p) => ViewModel.SportIds = p.ToList()" />
-            </Content>
-        </DivRowCol3>
+                             SelectedPeople="ViewModel.People"
+                             SelectedPeopleChanged="@((people) => ViewModel.People = people)" />
         <MultiTeamSelector CanToggle="true" 
                            ItemType="ViewModel.ItemType"
-                           Teams="ViewModel.Teams" />
+                           SelectedTeams="ViewModel.Teams"
+                           SelectedTeamsChanged="@((teams) => ViewModel.Teams = teams)" />
     </Content>
 </EditPage>

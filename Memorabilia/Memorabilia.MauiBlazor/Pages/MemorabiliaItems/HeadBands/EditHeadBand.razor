@@ -1,0 +1,11 @@
+﻿@page "/Memorabilia/HeadBand/Edit/{memorabiliaId:int}"
+
+@inherits MemorabiliaItem
+
+<PageLoader>
+    <Content>
+        <HeadBandEditor DomainImageRootPath="@DomainImageRootPath" 
+                        MemorabiliaId="@MemorabiliaId" />
+    </Content>
+</PageLoader>
+

@@ -4,7 +4,12 @@ public partial class GloveEditor : MemorabiliaItem<SaveGloveViewModel>
 {
     protected async Task OnLoad()
     {
-        ViewModel = new SaveGloveViewModel(await QueryRouter.Send(new GetGlove(MemorabiliaId)));
+        var viewModel = await QueryRouter.Send(new GetGlove(MemorabiliaId));
+
+        if (viewModel.Brand == null)
+            return;
+
+        ViewModel = new SaveGloveViewModel(viewModel);
     }
 
     protected async Task OnSave()

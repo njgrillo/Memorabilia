@@ -23,9 +23,9 @@
     <Content>
         <DivRowCol3>
             <Content>
-                <ItemTypeGameStyleDropDown ItemType="ViewModel.ItemType"
-                                           SelectedValue="ViewModel.GameStyleTypeId"
-                                           SelectionChanged="(p) => ViewModel.GameStyleTypeId = p" />
+                <ItemTypeLevelDropDown ItemType="ViewModel.ItemType"
+                                       SelectedValue="ViewModel.LevelTypeId"
+                                       SelectionChanged="(p) => ViewModel.LevelTypeId = p" />                
             </Content>
             <ContentColumn2>
                 <ItemTypeSizeDropDown ItemType="ViewModel.ItemType"
@@ -33,23 +33,20 @@
                                       SelectionChanged="(p) => ViewModel.SizeId = p" />
             </ContentColumn2>
         </DivRowCol3>
-        <DivRowCol3>
+        <DivRowCol3 HideColumn2="@(!ViewModel.DisplayGameDate)">
             <Content>
-                <DivHidden Hidden="@(!ViewModel.DisplayGameDate)">
-                    <Content>
-                        <MudDatePicker @bind-Date="ViewModel.GameDate"
-                                       Label="Game Date"
-                                       Variant="Variant.Outlined" /> 
-                    </Content>
-                </DivHidden>
+                <ItemTypeGameStyleDropDown ItemType="ViewModel.ItemType"
+                                           SelectedValue="ViewModel.GameStyleTypeId"
+                                           SelectionChanged="(p) => ViewModel.GameStyleTypeId = p" />
             </Content>
-        </DivRowCol3>
-        <DivRowCol3>
-            <Content>
-                <ItemTypeLevelDropDown ItemType="ViewModel.ItemType"
-                                       SelectedValue="ViewModel.LevelTypeId"
-                                       SelectionChanged="(p) => ViewModel.LevelTypeId = p" />
-            </Content>
+            <ContentColumn2>
+                <MudDatePicker @bind-Date="ViewModel.GameDate"
+                               DateFormat="MM/dd/yyyy"
+                               Editable="true"
+                               Label="Game Date"
+                               Mask="@(new DateMask("MM/dd/yyyy"))"
+                               Variant="Variant.Outlined" />
+            </ContentColumn2>
         </DivRowCol3>               
         <DivRowCol6>
             <Content>

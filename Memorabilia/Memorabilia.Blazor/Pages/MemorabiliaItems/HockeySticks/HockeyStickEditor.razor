@@ -32,31 +32,27 @@
                                        SelectedValue="ViewModel.BrandId"
                                        SelectionChanged="(p) => ViewModel.BrandId = p" />
             </ContentColumn2>
-        </DivRowCol3>
-        <DivRowCol3>
-            <Content>
+            <ContentColumn3>
                 <ItemTypeSizeDropDown ItemType="ViewModel.ItemType"
                                       SelectedValue="@ViewModel.SizeId"
                                       SelectionChanged="(p) => ViewModel.SizeId = p"/> 
-            </Content>
+            </ContentColumn3>
         </DivRowCol3>
-        <DivRowCol3>
+        <DivRowCol3 HideColumn1="@(!ViewModel.DisplayGameStyle)"
+                    HideColumn2="@(!ViewModel.DisplayGameDate)">
             <Content>
                 <ItemTypeGameStyleDropDown ItemType="ViewModel.ItemType"
                                            SelectedValue="ViewModel.GameStyleTypeId"
                                            SelectionChanged="(p) => ViewModel.GameStyleTypeId = p" />
             </Content>
-        </DivRowCol3>
-        <DivRowCol3>
-            <Content>
-                <DivHidden Hidden="@(!ViewModel.DisplayGameDate)">
-                    <Content>
-                        <MudDatePicker @bind-Date="ViewModel.GameDate"
-                                       Label="Game Date"
-                                       Variant="Variant.Outlined" />
-                    </Content>
-                </DivHidden>
-            </Content>
+            <ContentColumn2>
+                <MudDatePicker @bind-Date="ViewModel.GameDate"
+                               DateFormat="MM/dd/yyyy"
+                               Editable="true"
+                               Label="Game Date"
+                               Mask="@(new DateMask("MM/dd/yyyy"))"
+                               Variant="Variant.Outlined" />
+            </ContentColumn2>
         </DivRowCol3>
         <PersonSelector CanFilterBySport="true"
                         CanToggle="true"

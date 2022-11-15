@@ -26,11 +26,7 @@ public class SaveBatViewModel : SaveItemViewModel
 
     public override string BackNavigationPath => $"Memorabilia/{EditModeType.Update.Name}/{MemorabiliaId}";
 
-    public BatType BatType => BatType.Find(BatTypeId);
-
     public int BatTypeId { get; set; } = BatType.BigStick.Id;
-
-    public BatType[] BatTypes => BatType.All;
 
     [Required]
     [Range(1, int.MaxValue, ErrorMessage = "Brand is required.")]
@@ -38,9 +34,9 @@ public class SaveBatViewModel : SaveItemViewModel
 
     public int ColorId { get; set; } = Color.Black.Id;
 
-    public Color[] Colors => Color.GetAll(ItemType);
+    public bool DisplayGameDate => GameStyleType.IsGameWorthly(GameStyleType) && DisplayGameStyle;
 
-    public bool DisplayGameDate => GameStyleType == GameStyleType.GameUsed;
+    public bool DisplayGameStyle => SizeId == Size.Full.Id;
 
     public override EditModeType EditModeType => MemorabiliaId > 0 ? EditModeType.Update : EditModeType.Add;
 
@@ -53,12 +49,6 @@ public class SaveBatViewModel : SaveItemViewModel
     [Required]
     [Range(1, int.MaxValue, ErrorMessage = "Game Style Type is required.")]
     public int GameStyleTypeId { get; set; } = GameStyleType.None.Id;
-
-    public GameStyleType[] GameStyleTypes => GameStyleType.GetAll(ItemType.Baseball);
-
-    public bool HasPerson => Person?.Id > 0;
-
-    public bool HasTeam => Team?.Id > 0;
 
     public override string ImageFileName => Domain.Constants.ImageFileName.Bat;
 

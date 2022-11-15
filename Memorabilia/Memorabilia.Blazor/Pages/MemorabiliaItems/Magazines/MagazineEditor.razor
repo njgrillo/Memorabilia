@@ -40,8 +40,11 @@
             </Content>
             <ContentColumn2>
                 <MudDatePicker @bind-Date="ViewModel.Date"
+                               DateFormat="MM/dd/yyyy"
+                               Editable="true"
                                Label="Date"
-                               Variant="Variant.Outlined" /> 
+                               Mask="@(new DateMask("MM/dd/yyyy"))"
+                               Variant="Variant.Outlined" />
             </ContentColumn2>
         </DivRowCol3>
         <DivRowCol3>
@@ -56,9 +59,6 @@
                                  Label="Matted" />
             </ContentColumn2>
         </DivRowCol3>
-        <MultiPersonSelector CanToggle="true"
-                             ItemType="ViewModel.ItemType"
-                             People="ViewModel.People" />   
         <DivRowCol3>
             <Content>
                 <SportDropDown MultiSelect="true"
@@ -66,8 +66,13 @@
                                SelectedItemsChanged="(p) => ViewModel.SportIds = p.ToList()" />
             </Content>
         </DivRowCol3>
+        <MultiPersonSelector CanToggle="true"
+                             ItemType="ViewModel.ItemType"
+                             SelectedPeople="ViewModel.People"
+                             SelectedPeopleChanged="@((people) => ViewModel.People = people)" />
         <MultiTeamSelector CanToggle="true" 
                            ItemType="ViewModel.ItemType"
-                           Teams="ViewModel.Teams" />
+                           SelectedTeams="ViewModel.Teams"
+                           SelectedTeamsChanged="@((teams) => ViewModel.Teams = teams)" />
     </Content>
 </EditPage>

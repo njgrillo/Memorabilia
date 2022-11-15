@@ -39,8 +39,6 @@ public class SaveCanvasViewModel : SaveItemViewModel
     public bool Matted { get; set; }
 
     public int OrientationId { get; set; } = Orientation.Portrait.Id;
-
-    public Orientation[] Orientations => Orientation.All;
   
     public List<SavePersonViewModel> People { get; set; } = new();
 

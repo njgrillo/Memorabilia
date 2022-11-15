@@ -1,4 +1,6 @@
-﻿namespace Memorabilia.Domain.Entities;
+﻿using Memorabilia.Domain.Constants;
+
+namespace Memorabilia.Domain.Entities;
 
 public class Memorabilia : Framework.Library.Domain.Entity.DomainEntity
 {
@@ -110,6 +112,8 @@ public class Memorabilia : Framework.Library.Domain.Entity.DomainEntity
     public int? Denominator { get; private set; }
 
     public virtual MemorabiliaFigure Figure { get; private set; }
+
+    public virtual MemorabiliaFirstDayCover FirstDayCover { get; private set; }
 
     public virtual MemorabiliaFootball Football { get; private set; }
 
@@ -432,10 +436,12 @@ public class Memorabilia : Framework.Library.Domain.Entity.DomainEntity
 
     public void SetFirstDayCover(int[] personIds,
                                  int sizeId,
+                                 DateTime? date,
                                  int[] sportIds,
                                  int[] teamIds)
     {
         SetSize(sizeId);
+        SetFirstDayCover(date);
         SetPeople(personIds);
         SetSports(sportIds);
         SetTeams(teamIds);
@@ -601,7 +607,6 @@ public class Memorabilia : Framework.Library.Domain.Entity.DomainEntity
 
     public void SetHockeyStick(int brandId,
                                DateTime? gameDate,
-                               int? gamePersonId,
                                int? gameStyleTypeId,
                                int levelTypeId,
                                int? personId,
@@ -612,7 +617,7 @@ public class Memorabilia : Framework.Library.Domain.Entity.DomainEntity
         SetBrand(brandId);
         SetLevelType(levelTypeId);
         SetSize(sizeId);
-        SetGame(gameStyleTypeId, gamePersonId, gameDate);
+        SetGame(gameStyleTypeId, personId, gameDate);
         SetSports(sportId);
 
         if (!personId.HasValue)
@@ -650,7 +655,6 @@ public class Memorabilia : Framework.Library.Domain.Entity.DomainEntity
 
     public void SetJersey(int brandId, 
                           DateTime? gameDate,
-                          int? gamePersonId,
                           int? gameStyleTypeId,
                           int levelTypeId,
                           int[] personIds,
@@ -665,7 +669,7 @@ public class Memorabilia : Framework.Library.Domain.Entity.DomainEntity
         SetLevelType(levelTypeId);
         SetSize(sizeId);
         SetJersey(qualityTypeId, styleTypeId, typeId);
-        SetGame(gameStyleTypeId, gamePersonId, gameDate);
+        SetGame(gameStyleTypeId, personIds.FirstOrDefault(), gameDate);
         SetPeople(personIds);
         SetTeams(teamIds);
 
@@ -846,7 +850,6 @@ public class Memorabilia : Framework.Library.Domain.Entity.DomainEntity
 
     public void SetPuck(int brandId,
                         DateTime? gameDate,
-                        int? gamePersonId,
                         int? gameStyleTypeId,
                         int levelTypeId,
                         int? personId,
@@ -857,7 +860,7 @@ public class Memorabilia : Framework.Library.Domain.Entity.DomainEntity
         SetBrand(brandId);
         SetLevelType(levelTypeId);
         SetSize(sizeId);
-        SetGame(gameStyleTypeId, gamePersonId, gameDate);
+        SetGame(gameStyleTypeId, personId, gameDate);
         SetSports(sportId);
 
         if (!personId.HasValue)
@@ -891,7 +894,6 @@ public class Memorabilia : Framework.Library.Domain.Entity.DomainEntity
 
     public void SetShirt(int brandId,
                          DateTime? gameDate,
-                         int? gamePersonId,
                          int? gameStyleTypeId,
                          int levelTypeId,
                          int? personId,
@@ -902,7 +904,7 @@ public class Memorabilia : Framework.Library.Domain.Entity.DomainEntity
         SetBrand(brandId);
         SetLevelType(levelTypeId);
         SetSize(sizeId);
-        SetGame(gameStyleTypeId, gamePersonId, gameDate);
+        SetGame(gameStyleTypeId, personId, gameDate);
 
         if (!personId.HasValue)
             People = new List<MemorabiliaPerson>();
@@ -922,7 +924,6 @@ public class Memorabilia : Framework.Library.Domain.Entity.DomainEntity
 
     public void SetShoe(int brandId,
                         DateTime? gameDate,
-                        int? gamePersonId,
                         int? gameStyleTypeId,
                         int levelTypeId,
                         int? personId,
@@ -933,7 +934,7 @@ public class Memorabilia : Framework.Library.Domain.Entity.DomainEntity
         SetBrand(brandId);
         SetLevelType(levelTypeId);
         SetSize(sizeId);
-        SetGame(gameStyleTypeId, gamePersonId, gameDate);
+        SetGame(gameStyleTypeId, personId, gameDate);
 
         if (!personId.HasValue)
             People = new List<MemorabiliaPerson>();
@@ -953,7 +954,6 @@ public class Memorabilia : Framework.Library.Domain.Entity.DomainEntity
 
     public void SetSoccerball(int brandId,
                               DateTime? gameDate,
-                              int? gamePersonId,
                               int? gameStyleTypeId,
                               int levelTypeId,
                               int? personId,
@@ -964,7 +964,7 @@ public class Memorabilia : Framework.Library.Domain.Entity.DomainEntity
         SetBrand(brandId);
         SetLevelType(levelTypeId);
         SetSize(sizeId);
-        SetGame(gameStyleTypeId, gamePersonId, gameDate);
+        SetGame(gameStyleTypeId, personId, gameDate);
 
         if (!personId.HasValue)
             People = new List<MemorabiliaPerson>();
@@ -1023,7 +1023,6 @@ public class Memorabilia : Framework.Library.Domain.Entity.DomainEntity
     }
 
     public void SetTicket(DateTime? gameDate,
-                          int? gamePersonId,
                           int? gameStyleTypeId,
                           int levelTypeId,
                           int? personId,
@@ -1033,7 +1032,7 @@ public class Memorabilia : Framework.Library.Domain.Entity.DomainEntity
     {
         SetLevelType(levelTypeId);
         SetSize(sizeId);
-        SetGame(gameStyleTypeId, gamePersonId, gameDate);
+        SetGame(gameStyleTypeId, personId, gameDate);
         SetTeams(teamIds);
 
         if (!personId.HasValue)
@@ -1261,6 +1260,17 @@ public class Memorabilia : Framework.Library.Domain.Entity.DomainEntity
             if (Figure?.Id > 0)
                 Figure = null;
         }
+    }
+
+    private void SetFirstDayCover(DateTime? date)
+    {
+        if (FirstDayCover == null)
+        {
+            FirstDayCover = new MemorabiliaFirstDayCover(Id, date);
+            return;
+        }
+
+        FirstDayCover.Set(date);
     }
 
     private void SetFootballType(int? footballTypeId)

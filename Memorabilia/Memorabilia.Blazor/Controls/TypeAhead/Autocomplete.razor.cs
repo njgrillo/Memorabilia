@@ -2,7 +2,7 @@
 
 namespace Memorabilia.Blazor.Controls.TypeAhead;
 
-public abstract partial class Autocomplete<TItem> where TItem : class, IWithName
+public abstract partial class Autocomplete<TItem> : CommandQuery where TItem : class, IWithName
 {
     [Parameter]
     public Color AdornmentColor { get; set; } = Color.Primary;

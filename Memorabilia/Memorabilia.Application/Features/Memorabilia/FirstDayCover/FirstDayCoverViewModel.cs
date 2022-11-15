@@ -13,6 +13,8 @@ public class FirstDayCoverViewModel
         _memorabilia = memorabilia;
     }
 
+    public MemorabiliaFirstDayCover FirstDayCover => _memorabilia.FirstDayCover;
+
     public int MemorabiliaId => _memorabilia.Id;
 
     public IEnumerable<MemorabiliaPerson> People => _memorabilia.People;

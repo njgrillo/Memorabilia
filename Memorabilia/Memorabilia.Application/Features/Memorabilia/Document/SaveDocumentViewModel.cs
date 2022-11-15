@@ -20,10 +20,6 @@ public class SaveDocumentViewModel : SaveItemViewModel
 
     public override string ExitNavigationPath => "Memorabilia/Items";
 
-    public bool HasPerson => People.Any();
-
-    public bool HasTeam => Teams.Any();
-
     public override string ImageFileName => Domain.Constants.ImageFileName.Document;
 
     public override ItemType ItemType => ItemType.Document;

@@ -20,11 +20,9 @@ public class SaveBookplateViewModel : SaveItemViewModel
 
     public override string ExitNavigationPath => "Memorabilia/Items";
 
-    public bool HasPerson => Person?.Id > 0;
-
     public override string ImageFileName => Domain.Constants.ImageFileName.Bookplate;
 
     public override ItemType ItemType => ItemType.Bookplate;
-    
+
     public SavePersonViewModel Person { get; set; }
 }

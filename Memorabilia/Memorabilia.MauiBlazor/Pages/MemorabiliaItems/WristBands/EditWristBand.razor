@@ -1,0 +1,10 @@
+﻿@page "/Memorabilia/WristBand/Edit/{memorabiliaId:int}"
+
+@inherits MemorabiliaItem
+
+<PageLoader>
+    <Content>
+        <WristBandEditor DomainImageRootPath="@DomainImageRootPath" 
+                         MemorabiliaId="@MemorabiliaId" />
+    </Content>
+</PageLoader>

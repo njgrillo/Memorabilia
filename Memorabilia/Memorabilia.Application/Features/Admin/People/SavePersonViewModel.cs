@@ -81,5 +81,10 @@ public class SavePersonViewModel : SaveViewModel, IWithName, IWithValue<int>
 
     public List<SavePersonTeamViewModel> Teams { get; set; } = new();
 
+    public override string ToString()
+    {
+        return Name;
+    }
+
     int IWithValue<int>.Value => Id;
 }

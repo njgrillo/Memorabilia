@@ -20,6 +20,8 @@ public class MemorabiliaItemRepository : MemorabiliaRepository<Domain.Entities.M
                                                                         .Include(memorabilia => memorabilia.Brand)
                                                                         .Include(memorabilia => memorabilia.Card)
                                                                         .Include(memorabilia => memorabilia.Commissioner)
+                                                                        .Include(memorabilia => memorabilia.Figure)
+                                                                        .Include(memorabilia => memorabilia.FirstDayCover)
                                                                         .Include(memorabilia => memorabilia.Football)
                                                                         .Include(memorabilia => memorabilia.Game)
                                                                         .Include(memorabilia => memorabilia.Glove)

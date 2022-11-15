@@ -25,8 +25,6 @@ public class SaveBaseballViewModel : SaveItemViewModel
             Person = new SavePersonViewModel(new PersonViewModel(viewModel.People.First().Person));
     }
 
-    private int _gameStyleTypeId;
-
     public override string BackNavigationPath => $"Memorabilia/{EditModeType.Update.Name}/{MemorabiliaId}";
 
     [StringLength(5, ErrorMessage = "Anniversary is too long.")]
@@ -80,18 +78,7 @@ public class SaveBaseballViewModel : SaveItemViewModel
 
     [Required]
     [Range(1, int.MaxValue, ErrorMessage = "Game Style Type is required.")]
-    public int GameStyleTypeId
-    {
-        get
-        {
-            return _gameStyleTypeId;
-        }
-        set
-        {
-            _gameStyleTypeId = value;
-            BaseballTypes = BaseballType.GetAll(GameStyleType.Find(value));               
-        }
-    }
+    public int GameStyleTypeId { get; set; } = GameStyleType.None.Id;
 
     public override string ImageFileName
     {

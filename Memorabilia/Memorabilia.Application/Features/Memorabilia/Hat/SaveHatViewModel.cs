@@ -26,7 +26,7 @@ public class SaveHatViewModel : SaveItemViewModel
     [Range(1, int.MaxValue, ErrorMessage = "Brand is required.")]
     public int BrandId { get; set; } = Brand.NewEra.Id;
 
-    public bool DisplayGameDate => GameStyleType == GameStyleType.GameUsed;
+    public bool DisplayGameDate => GameStyleType.IsGameWorthly(GameStyleType);
 
     public override EditModeType EditModeType => MemorabiliaId > 0 ? EditModeType.Update : EditModeType.Add;
 

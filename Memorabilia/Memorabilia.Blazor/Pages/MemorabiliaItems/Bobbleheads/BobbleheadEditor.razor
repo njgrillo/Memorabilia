@@ -32,42 +32,40 @@
                                       SelectedValue="@ViewModel.SizeId"
                                       SelectionChanged="(p) => ViewModel.SizeId = p" />
             </ContentColumn2>
-        </DivRowCol3>
-        <DivRowCol3>
-            <Content>
+            <ContentColumn3>
                 <ItemTypeLevelDropDown ItemType="ViewModel.ItemType"
                                        SelectedValue="ViewModel.LevelTypeId"
                                        SelectionChanged="(p) => ViewModel.LevelTypeId = p" />
-            </Content>
-            <ContentColumn2>
-                <NullableIntField Label="Year"
-                                  Value="ViewModel.Year"
-                                  ValueChanged="@((p) => ViewModel.Year = p)" /> 
-            </ContentColumn2>
+            </ContentColumn3>
         </DivRowCol3>
         <DivRowCol3>
             <Content>
+                <NullableIntField Label="Year"
+                                  Maximum="int.MaxValue"
+                                  Value="ViewModel.Year"
+                                  ValueChanged="@((p) => ViewModel.Year = p)" />
+            </Content>
+            <ContentColumn2>
                 <BooleanCheckBox Checked="@ViewModel.HasBox"
                                  CheckedChanged="(p) => ViewModel.HasBox = p"
                                  Label="Has Box" />
-            </Content>
+            </ContentColumn2>
+            <ContentColumn3>
+                <SportDropDown SelectedValue="@ViewModel.SportId"
+                               SelectionChanged="(p) => ViewModel.SportId = p" />
+            </ContentColumn3>
         </DivRowCol3>
-        <PersonSelector CanFilterBySport="false"
+        <PersonSelector CanFilterBySport="true"
                         CanToggle="true"
                         ItemType="ViewModel.ItemType"
                         SelectedPerson="ViewModel.Person"
-                        SelectedPersonChanged="(p) => ViewModel.Person = p" /> 
-        <DivRowCol3>
-            <Content>
-                <SportDropDown SelectedValue="@ViewModel.SportId"
-                               SelectionChanged="(p) => ViewModel.SportId = p" />
-            </Content>
-        </DivRowCol3>
+                        SelectedPersonChanged="(p) => ViewModel.Person = p"
+                        Sport="ViewModel.Sport" />        
         <DivRowCol6>
             <Content>
-                <NamedEntityAutoComplete SelectedValue="ViewModel.Team"
-                                         SelectionChanged="(p) => ViewModel.Team = p"
-                                         T="SaveTeamViewModel" />
+                <TeamAutoComplete SelectedValue="ViewModel.Team"
+                                  SelectionChanged="(p) => ViewModel.Team = p"
+                                  Sport="@ViewModel.Sport" />
             </Content>
         </DivRowCol6>
     </Content>

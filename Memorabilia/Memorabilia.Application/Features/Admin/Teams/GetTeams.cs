@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Application.Features.Admin.Teams;
 
-public record GetTeams(int? FranchiseId = null, int? SportLeagueLevelId = null) : IQuery<TeamsViewModel>
+public record GetTeams(int? FranchiseId = null, int? SportLeagueLevelId = null, int? SportId = null) : IQuery<TeamsViewModel>
 {
     public class Handler : QueryHandler<GetTeams, TeamsViewModel>
     {
@@ -13,7 +13,7 @@ public record GetTeams(int? FranchiseId = null, int? SportLeagueLevelId = null) 
 
         protected override async Task<TeamsViewModel> Handle(GetTeams query)
         {
-            return new TeamsViewModel(await _teamRepository.GetAll(query.FranchiseId, query.SportLeagueLevelId));
+            return new TeamsViewModel(await _teamRepository.GetAll(query.FranchiseId, query.SportLeagueLevelId, query.SportId));
         }
     }
 }

@@ -32,9 +32,9 @@ public class SaveFigureViewModel : SaveItemViewModel
 
     public int FigureSpecialtyTypeId { get; set; }
 
-    public int FigureTypeId { get; set; }
+    public FigureType FigureType => FigureType.Find(FigureTypeId);
 
-    public FigureType[] FigureTypes => FigureType.All;
+    public int FigureTypeId { get; set; }
 
     public override string ImageFileName => Domain.Constants.ImageFileName.Figure;
 

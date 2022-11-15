@@ -10,7 +10,6 @@ public class SaveJerseyViewModel : SaveItemViewModel
     {            
         BrandId = viewModel.Brand.BrandId;
         GameDate = viewModel.Game?.GameDate;
-        GamePersonId = viewModel.Game?.PersonId ?? 0;
         GameStyleTypeId = viewModel.Game?.GameStyleTypeId ?? 0;
         JerseyQualityTypeId = viewModel.Jersey.JerseyQualityTypeId;
         JerseyStyleTypeId = viewModel.Jersey.JerseyStyleTypeId;
@@ -23,19 +22,15 @@ public class SaveJerseyViewModel : SaveItemViewModel
         Teams = viewModel.Teams.Select(team => new SaveTeamViewModel(new TeamViewModel(team.Team))).ToList();
     }
 
-    private int _gameStyleTypeId;
-
     public override string BackNavigationPath => $"Memorabilia/{EditModeType.Update.Name}/{MemorabiliaId}";
 
     [Required]
     [Range(1, int.MaxValue, ErrorMessage = "Brand is required.")]
     public int BrandId { get; set; }
 
-    public bool CanEditJerseyQualityType { get; private set; } = true;
+    public bool DisplayGameDate => DisplayGameStyle && GameStyleType.IsGameWorthly(GameStyleType);
 
-    public bool DisplayGameDate => DisplayGameStyleType && GameStyleType.IsGameWorthly(GameStyleType);
-
-    public bool DisplayGameStyleType => JerseyQualityTypeId == JerseyQualityType.Authentic.Id;
+    public bool DisplayGameStyle => JerseyQualityTypeId == JerseyQualityType.Authentic.Id;
 
     public override EditModeType EditModeType => MemorabiliaId > 0 ? EditModeType.Update : EditModeType.Add;
 
@@ -43,31 +38,11 @@ public class SaveJerseyViewModel : SaveItemViewModel
 
     public DateTime? GameDate { get; set; }
 
-    public int GamePersonId { get; set; }
-
     public GameStyleType GameStyleType => GameStyleType.Find(GameStyleTypeId);
 
     [Required]
     [Range(1, int.MaxValue, ErrorMessage = "Game Style Type is required.")]
-    public int GameStyleTypeId
-    {
-        get
-        {
-            return _gameStyleTypeId;
-        }
-        set
-        {
-            _gameStyleTypeId = value;
-            CanEditJerseyQualityType = !IsGameWorthly;
-
-            if (IsGameWorthly)
-            {
-                JerseyQualityTypeId = JerseyQualityType.Authentic.Id;
-            }
-        }
-    }
-
-    public GameStyleType[] GameStyleTypes => GameStyleType.GetAll(ItemType.Jersey);
+    public int GameStyleTypeId { get; set; } = GameStyleType.None.Id;
 
     public override string ImageFileName => Domain.Constants.ImageFileName.ItemTypes;
 
@@ -79,19 +54,13 @@ public class SaveJerseyViewModel : SaveItemViewModel
     [Range(1, int.MaxValue, ErrorMessage = "Quality is required.")]
     public int JerseyQualityTypeId { get; set; }
 
-    public JerseyQualityType[] JerseyQualityTypes => JerseyQualityType.All;
-
     [Required]
     [Range(1, int.MaxValue, ErrorMessage = "Style is required.")]
     public int JerseyStyleTypeId { get; set; }
 
-    public JerseyStyleType[] JerseyStyleTypes => JerseyStyleType.All;
-
     [Required]
     [Range(1, int.MaxValue, ErrorMessage = "Type is required.")]
     public int JerseyTypeId { get; set; } = JerseyType.Stitched.Id;
-
-    public JerseyType[] JerseyTypes => JerseyType.All;
 
     [Required]
     [Range(1, int.MaxValue, ErrorMessage = "Level is required.")]

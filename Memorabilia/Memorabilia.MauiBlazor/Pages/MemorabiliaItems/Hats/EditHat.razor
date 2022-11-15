@@ -1,0 +1,11 @@
+﻿@page "/Memorabilia/Hat/Edit/{memorabiliaId:int}"
+
+@inherits MemorabiliaItem
+
+<PageLoader>
+    <Content>
+        <HatEditor DomainImageRootPath="@DomainImageRootPath" 
+                   MemorabiliaId="@MemorabiliaId" />
+    </Content>
+</PageLoader>
+

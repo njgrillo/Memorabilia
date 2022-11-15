@@ -24,8 +24,6 @@ public class SaveHeadBandViewModel : SaveItemViewModel
 
     public override string BackNavigationPath => $"Memorabilia/{EditModeType.Update.Name}/{MemorabiliaId}";
 
-    public Brand Brand => Brand.Find(BrandId);
-
     [Required]
     [Range(1, int.MaxValue, ErrorMessage = "Brand is required.")]
     public int BrandId { get; set; } = Brand.None.Id;

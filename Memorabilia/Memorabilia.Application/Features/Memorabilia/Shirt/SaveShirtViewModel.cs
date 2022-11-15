@@ -10,7 +10,6 @@ public class SaveShirtViewModel : SaveItemViewModel
     {
         BrandId = viewModel.Brand.BrandId;
         GameDate = viewModel.Game?.GameDate;
-        GamePersonId = viewModel.Game?.PersonId ?? 0;
         GameStyleTypeId = viewModel.Game?.GameStyleTypeId ?? 0;
         LevelTypeId = viewModel.Level.LevelTypeId;
         MemorabiliaId = viewModel.MemorabiliaId;
@@ -30,13 +29,13 @@ public class SaveShirtViewModel : SaveItemViewModel
     [Range(1, int.MaxValue, ErrorMessage = "Brand is required.")]
     public int BrandId { get; set; } = Brand.Rawlings.Id;
 
+    public bool DisplayGameDate => GameStyleType.IsGameWorthly(GameStyleType);
+
     public override EditModeType EditModeType => MemorabiliaId > 0 ? EditModeType.Update : EditModeType.Add;
 
     public override string ExitNavigationPath => "Memorabilia/Items";
 
     public DateTime? GameDate { get; set; }
-
-    public int GamePersonId { get; set; }
 
     public GameStyleType GameStyleType => GameStyleType.Find(GameStyleTypeId);
 
@@ -45,8 +44,6 @@ public class SaveShirtViewModel : SaveItemViewModel
     public int GameStyleTypeId { get; set; } = GameStyleType.None.Id;
 
     public override string ImageFileName => Domain.Constants.ImageFileName.Shirt;
-
-    public bool IsGameWorthly => GameStyleType.IsGameWorthly(GameStyleType);
 
     public override ItemType ItemType => ItemType.Shirt;
 

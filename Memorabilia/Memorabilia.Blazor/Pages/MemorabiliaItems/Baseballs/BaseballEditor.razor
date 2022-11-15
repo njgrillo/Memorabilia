@@ -39,7 +39,8 @@
                                            SelectionChanged="(p) => ViewModel.GameStyleTypeId = p" />
             </ContentColumn3>
             <ContentColumn4>                
-                <BaseballTypeDropDown SelectedValue="ViewModel.BaseballTypeId"
+                <BaseballTypeDropDown GameStyleType="ViewModel.GameStyleType" 
+                                      SelectedValue="ViewModel.BaseballTypeId"
                                       SelectionChanged="(p) => ViewModel.BaseballTypeId = p" />
             </ContentColumn4>
         </DivRowCol3>
@@ -55,7 +56,7 @@
                     <Match>
                         <CommissionerDropDown SelectedValue="@ViewModel.CommissionerId"
                                               SelectionChanged="(p) => ViewModel.CommissionerId = p"
-                                              SportLeagueLevelId="SportLeagueLevel.MajorLeagueBaseball.Id" />
+                                              SportLeagueLevel="SportLeagueLevel.MajorLeagueBaseball" />
                     </Match>
                 </PrettyBlazor.Condition>
                 <PrettyBlazor.Condition Evaluation="ViewModel.DisplayLeaguePresident">
@@ -69,13 +70,17 @@
             </ContentColumn2>
             <ContentColumn3>
                 <MudDatePicker @bind-Date="ViewModel.GameDate"
+                               DateFormat="MM/dd/yyyy"
+                               Editable="true"
                                Label="Game Date"
-                               Variant="Variant.Outlined" />                
+                               Mask="@(new DateMask("MM/dd/yyyy"))"
+                               Variant="Variant.Outlined" />               
             </ContentColumn3>
             <ContentColumn4>
                 <PrettyBlazor.Condition Evaluation="ViewModel.DisplayBaseballTypeYear">
                     <Match>
                         <NullableIntField Label="Year"
+                                          Maximum="int.MaxValue"
                                           Value="ViewModel.BaseballTypeYear"
                                           ValueChanged="@((p) => ViewModel.BaseballTypeYear = p)" />
                     </Match>
@@ -84,6 +89,7 @@
                     <Match>
                         <TextField HelperText="Example: 25th"
                                    Label="Anniversary"
+                                   MaxLength="5"
                                    SelectedText="@ViewModel.BaseballTypeAnniversary"
                                    SelectedTextChanged="@((p) => ViewModel.BaseballTypeAnniversary = p)" />
                     </Match>

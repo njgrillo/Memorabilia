@@ -40,15 +40,11 @@ public class SavePhotoViewModel : SaveItemViewModel
 
     public int OrientationId { get; set; } = Orientation.Portrait.Id;
 
-    public Orientation[] Orientations => Orientation.All;
-
     public List<SavePersonViewModel> People { get; set; } = new();
 
     [Required]
     [Range(1, int.MaxValue, ErrorMessage = "Type is required.")]
     public int PhotoTypeId { get; set; } = PhotoType.Glossy.Id;
-
-    public PhotoType[] PhotoTypes => PhotoType.All;
 
     [Required]
     [Range(1, int.MaxValue, ErrorMessage = "Size is required.")]

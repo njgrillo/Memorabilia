@@ -1,0 +1,10 @@
+﻿@page "/Memorabilia/Tennisball/Edit/{memorabiliaId:int}"
+
+@inherits MemorabiliaItem
+
+<PageLoader>
+    <Content>
+        <TennisballEditor DomainImageRootPath="@DomainImageRootPath" 
+                          MemorabiliaId="@MemorabiliaId" />
+    </Content>
+</PageLoader>

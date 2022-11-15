@@ -21,7 +21,7 @@
                                  MemorabiliaItemStep="ViewModel.MemorabiliaItemStep" />
     </TimelineContent>
     <Content>
-        <DivRowCol3>
+        <DivRowCol3> 
             <Content>
                 <ItemTypeLevelDropDown ItemType="ViewModel.ItemType"
                                        SelectedValue="ViewModel.LevelTypeId"
@@ -32,19 +32,18 @@
                                        SelectedValue="ViewModel.BrandId"
                                        SelectionChanged="(p) => ViewModel.BrandId = p"/>
             </ContentColumn2>
-        </DivRowCol3>
-        <DivRowCol3>
-            <Content>
+            <ContentColumn3>
                 <ItemTypeSizeDropDown ItemType="ViewModel.ItemType"
                                       SelectedValue="@ViewModel.SizeId"
                                       SelectionChanged="(p) => ViewModel.SizeId = p" />
-            </Content>
-            <ContentColumn2>
-                <FootballTypeDropDown SelectedValue="ViewModel.FootballTypeId"
+            </ContentColumn3>
+            <ContentColumn4>
+                <FootballTypeDropDown GameStyleType="ViewModel.GameStyleType" 
+                                      SelectedValue="ViewModel.FootballTypeId"
                                       SelectionChanged="(p) => ViewModel.FootballTypeId = p" />
-            </ContentColumn2>
+            </ContentColumn4>
         </DivRowCol3>
-        <DivRowCol3>
+        <DivRowCol3 HideColumn1="@(!ViewModel.DisplayGameStyle)">
             <Content>
                 <ItemTypeGameStyleDropDown ItemType="ViewModel.ItemType"
                                            SelectedValue="ViewModel.GameStyleTypeId"
@@ -53,13 +52,16 @@
             <ContentColumn2>
                 <CommissionerDropDown SelectedValue="@ViewModel.CommissionerId"
                                       SelectionChanged="(p) => ViewModel.CommissionerId = p"
-                                      SportLeagueLevelId="SportLeagueLevel.NationalFootballLeague.Id" />
+                                      SportLeagueLevel="@SportLeagueLevel.NationalFootballLeague" />
             </ContentColumn2>
         </DivRowCol3>
-        <DivRowCol3>
+        <DivRowCol3 Hidden="@(!ViewModel.DisplayGameDate)">
             <Content>
                 <MudDatePicker @bind-Date="ViewModel.GameDate"
+                               DateFormat="MM/dd/yyyy"
+                               Editable="true"
                                Label="Game Date"
+                               Mask="@(new DateMask("MM/dd/yyyy"))"
                                Variant="Variant.Outlined" />
             </Content>
         </DivRowCol3>

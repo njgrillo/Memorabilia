@@ -10,7 +10,6 @@ public class SavePuckViewModel : SaveItemViewModel
     {
         BrandId = viewModel.Brand.BrandId;
         GameDate = viewModel.Game?.GameDate;
-        GamePersonId = viewModel.Game?.PersonId ?? 0;
         GameStyleTypeId = viewModel.Game?.GameStyleTypeId ?? 0;
         LevelTypeId = viewModel.Level.LevelTypeId;
         MemorabiliaId = viewModel.MemorabiliaId;
@@ -29,15 +28,15 @@ public class SavePuckViewModel : SaveItemViewModel
     [Range(1, int.MaxValue, ErrorMessage = "Brand is required.")]
     public int BrandId { get; set; } = Brand.CCM.Id;
 
-    public bool DisplayGameDate => GameStyleType == GameStyleType.GameUsed;
+    public bool DisplayGameDate => GameStyleType.IsGameWorthly(GameStyleType) && DisplayGameStyle;
+
+    public bool DisplayGameStyle => SizeId == Size.Standard.Id;
 
     public override EditModeType EditModeType => MemorabiliaId > 0 ? EditModeType.Update : EditModeType.Add;
 
     public override string ExitNavigationPath => "Memorabilia/Items";
 
     public DateTime? GameDate { get; set; }
-
-    public int GamePersonId { get; set; }
 
     public GameStyleType GameStyleType => GameStyleType.Find(GameStyleTypeId);
 

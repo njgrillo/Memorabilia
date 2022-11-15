@@ -32,33 +32,29 @@
                                        SelectedValue="ViewModel.BrandId"
                                        SelectionChanged="(p) => ViewModel.BrandId = p" />
             </ContentColumn2>
-        </DivRowCol3>
-        <DivRowCol3>
-            <Content>
+            <ContentColumn3>
                 <ItemTypeSizeDropDown ItemType="ViewModel.ItemType"
                                       SelectedValue="@ViewModel.SizeId"
                                       SelectionChanged="(p) => ViewModel.SizeId = p" />
-            </Content>
-            <ContentColumn2>
-                <BaseballTypeDropDown SelectedValue="ViewModel.FigureTypeId"
-                                      SelectionChanged="(p) => ViewModel.FigureTypeId = p" />
-            </ContentColumn2>
+            </ContentColumn3>
         </DivRowCol3>
         <DivRowCol3>
             <Content>
                 <NullableIntField Label="Year"
+                                  Maximum="int.MaxValue"
                                   Value="ViewModel.Year"
                                   ValueChanged="@((p) => ViewModel.Year = p)" />
             </Content>
             <ContentColumn2>
-                @*<FigureSpecialtyTypeDropDown @bind-Value="@ViewModel.FigureSpecialtyTypeId" 
-                                             @bind-Value:event="ValueChanged"
-                                             FigureType="FigureType.Find(ViewModel.FigureTypeId)" />*@
+                <FigureTypeDropDown SelectedValue="ViewModel.FigureTypeId"
+                                    SelectionChanged="(p) => ViewModel.FigureTypeId = p" />
             </ContentColumn2>
+            <ContentColumn3>
+                <FigureSpecialtyTypeDropDown FigureType="ViewModel.FigureType"
+                                             SelectedValue="ViewModel.FigureSpecialtyTypeId"
+                                             SelectionChanged="(p) => ViewModel.FigureSpecialtyTypeId = p" />
+            </ContentColumn3>
         </DivRowCol3>
-        <MultiPersonSelector CanToggle="true"
-                             ItemType="ViewModel.ItemType"
-                             People="ViewModel.People" />    
         <DivRowCol3>
             <Content>
                 <SportDropDown MultiSelect="true"
@@ -66,8 +62,13 @@
                                SelectedItemsChanged="(p) => ViewModel.SportIds = p.ToList()" />
             </Content>
         </DivRowCol3>
-        <MultiTeamSelector CanToggle="true" 
+        <MultiPersonSelector CanToggle="true"
+                             ItemType="ViewModel.ItemType"
+                             SelectedPeople="ViewModel.People"
+                             SelectedPeopleChanged="@((people) => ViewModel.People = people)" />
+        <MultiTeamSelector CanToggle="true"
                            ItemType="ViewModel.ItemType"
-                           Teams="ViewModel.Teams" />
+                           SelectedTeams="ViewModel.Teams"
+                           SelectedTeamsChanged="@((teams) => ViewModel.Teams = teams)" />
     </Content>
 </EditPage>

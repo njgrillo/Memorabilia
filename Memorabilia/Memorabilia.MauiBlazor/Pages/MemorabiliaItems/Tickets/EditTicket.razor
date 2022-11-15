@@ -1,0 +1,10 @@
+﻿@page "/Memorabilia/Ticket/Edit/{memorabiliaId:int}"
+
+@inherits MemorabiliaItem
+
+<PageLoader>
+    <Content>
+        <TicketEditor DomainImageRootPath="@DomainImageRootPath" 
+                      MemorabiliaId="@MemorabiliaId" />
+    </Content>
+</PageLoader>

@@ -6,11 +6,13 @@ public sealed class Brand : DomainItemConstant
     public static readonly Brand Beckett = new(14, "Beckett", string.Empty);
     public static readonly Brand Callaway = new(24, "Callaway", string.Empty);
     public static readonly Brand CCM = new(26, "CCM", string.Empty);
+    public static readonly Brand Easton = new(1026, "Easton", string.Empty);
     public static readonly Brand Fender = new(22, "Fender", string.Empty);
     public static readonly Brand Fotoball = new(27, "Fotoball", string.Empty);
     public static readonly Brand Funko = new(19, "Funko Inc.", string.Empty);
     public static readonly Brand Hasbro = new(18, "Hasbro", string.Empty);
     public static readonly Brand Kenner = new(17, "Kenner", string.Empty);
+    public static readonly Brand LouisvilleSlugger = new(1025, "Louisville Slugger", "LS");
     public static readonly Brand Majestic = new(5, "Majestic", string.Empty);
     public static readonly Brand MitchellAndNess = new(1022, "Mitchell & Ness", "MN");
     public static readonly Brand Muslady = new(21, "Muslady", string.Empty);
@@ -38,11 +40,13 @@ public sealed class Brand : DomainItemConstant
         Beckett,
         Callaway,
         CCM,
+        Easton,
         Fender,
         Fotoball,
         Funko,
         Hasbro,
         Kenner,
+        LouisvilleSlugger,
         Majestic,
         MitchellAndNess,
         Muslady,

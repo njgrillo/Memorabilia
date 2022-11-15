@@ -28,22 +28,21 @@
                                       SelectionChanged="(p) => ViewModel.SizeId = p" />
             </Content>
         </DivRowCol3>
-        <PersonSelector CanFilterBySport="true"
-                        CanToggle="true"
-                        ItemType="ViewModel.ItemType"
-                        SelectedPerson="ViewModel.Person"
-                        SelectedPersonChanged="(p) => ViewModel.Person = p" />    
         <DivRowCol3>
             <Content>
                 <SportDropDown SelectedValue="@ViewModel.SportId"
                                SelectionChanged="(p) => ViewModel.SportId = p" />
             </Content>
         </DivRowCol3> 
+        <PersonSelector CanFilterBySport="true"
+                        CanToggle="true"
+                        ItemType="ViewModel.ItemType"
+                        SelectedPerson="ViewModel.Person"
+                        SelectedPersonChanged="(p) => ViewModel.Person = p" /> 
         <DivRowCol6>
             <Content>
-                <NamedEntityAutoComplete SelectedValue="ViewModel.Team"
-                                         SelectionChanged="(p) => ViewModel.Team = p"
-                                         T="SaveTeamViewModel" />
+                <TeamAutoComplete SelectedValue="ViewModel.Team"
+                                  SelectionChanged="(p) => ViewModel.Team = p" />
             </Content>
         </DivRowCol6>
     </Content>

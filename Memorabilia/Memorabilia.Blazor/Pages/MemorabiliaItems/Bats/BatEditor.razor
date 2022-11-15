@@ -33,10 +33,11 @@
                                       SelectionChanged="(p) => ViewModel.SizeId = p" />
             </ContentColumn2>
         </DivRowCol3>
-        <DivRowCol3>
+        <DivRowCol3 HideColumn2="@(!ViewModel.DisplayGameStyle)">
             <Content>
-                <BaseballTypeDropDown SelectedValue="ViewModel.BatTypeId"
-                                      SelectionChanged="(p) => ViewModel.BatTypeId = p" />
+                <BatTypeDropDown GameStyleType="ViewModel.GameStyleType" 
+                                 SelectedValue="ViewModel.BatTypeId"
+                                 SelectionChanged="(p) => ViewModel.BatTypeId = p" />
             </Content>
             <ContentColumn2>
                 <ItemTypeGameStyleDropDown ItemType="ViewModel.ItemType"
@@ -44,15 +45,14 @@
                                            SelectionChanged="(p) => ViewModel.GameStyleTypeId = p" />
             </ContentColumn2>
         </DivRowCol3>
-        <DivRowCol3>
+        <DivRowCol3 HideColumn2="@(!ViewModel.DisplayGameDate)">
             <ContentColumn2>
-                <DivHidden Hidden="@(!ViewModel.DisplayGameDate)">
-                    <Content>
-                        <MudDatePicker @bind-Date="ViewModel.GameDate"
-                                       Label="Game Date"
-                                       Variant="Variant.Outlined" />
-                    </Content>
-                </DivHidden>
+                <MudDatePicker @bind-Date="ViewModel.GameDate"
+                               DateFormat="MM/dd/yyyy"
+                               Editable="true"
+                               Label="Game Date"
+                               Mask="@(new DateMask("MM/dd/yyyy"))"
+                               Variant="Variant.Outlined" />
             </ContentColumn2>
         </DivRowCol3>
         <DivRowCol3>
@@ -62,7 +62,8 @@
                                SelectionChanged="(p) => ViewModel.ColorId = p" />
             </Content>
             <ContentColumn2>
-                <NullableIntField Label="CLength"
+                <NullableIntField Label="Length"
+                                  Maximum="int.MaxValue"
                                   Value="ViewModel.Length"
                                   ValueChanged="@((p) => ViewModel.Length = p)" />
             </ContentColumn2>

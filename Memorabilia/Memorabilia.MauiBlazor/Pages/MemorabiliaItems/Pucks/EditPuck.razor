@@ -1,0 +1,10 @@
+﻿@page "/Memorabilia/Puck/Edit/{memorabiliaId:int}"
+
+@inherits MemorabiliaItem
+
+<PageLoader>
+    <Content>
+        <PuckEditor DomainImageRootPath="@DomainImageRootPath" 
+                    MemorabiliaId="@MemorabiliaId" />
+    </Content>
+</PageLoader>

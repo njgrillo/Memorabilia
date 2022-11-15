@@ -7,10 +7,7 @@ public partial class BasketballEditor : MemorabiliaItem<SaveBasketballViewModel>
         var viewModel = await QueryRouter.Send(new GetBasketball(MemorabiliaId));
 
         if (viewModel.Brand == null)
-        {
-            ViewModel.GameStyleTypeId = GameStyleType.None.Id;
             return;
-        }    
 
         ViewModel = new SaveBasketballViewModel(viewModel);
     }    

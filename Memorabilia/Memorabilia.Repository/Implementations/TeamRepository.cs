@@ -16,22 +16,12 @@ public class TeamRepository : DomainRepository<Team>, ITeamRepository
         return await Team.SingleOrDefaultAsync(team => team.Id == id);
     }
 
-    public async Task<IEnumerable<Team>> GetAll(int? franchiseId = null, int? sportLeagueLevelId = null)
+    public async Task<IEnumerable<Team>> GetAll(int? franchiseId = null, int? sportLeagueLevelId = null, int? sportId = null)
     {
-        if (franchiseId.HasValue)
-        {
-            return (await Team.Where(team => team.FranchiseId == franchiseId)
-                              .ToListAsync()).OrderBy(team => team.Name);
-        }
-
-        if (sportLeagueLevelId.HasValue)
-        {
-            return (await Team.Where(team => team.Franchise.SportLeagueLevelId == sportLeagueLevelId)
-                              .ToListAsync()).OrderBy(team => team.Franchise.SportLeagueLevelName)
-                                             .ThenBy(team => team.Name);
-        }
-
-        return (await Team.ToListAsync()).OrderBy(team => team.Franchise.SportLeagueLevelName)
-                                         .ThenBy(team => team.Name);
+        return (await Team.Where(team => (!franchiseId.HasValue || team.FranchiseId == franchiseId)
+                                          && (!sportLeagueLevelId.HasValue || team.Franchise.SportLeagueLevelId == sportLeagueLevelId)
+                                          && (!sportId.HasValue || team.Franchise.SportLeagueLevel.SportId == sportId))
+                          .ToListAsync())
+               .OrderBy(team => team.Name);
     }
 }

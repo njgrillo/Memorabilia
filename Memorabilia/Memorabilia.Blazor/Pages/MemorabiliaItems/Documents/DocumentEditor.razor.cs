@@ -6,6 +6,9 @@ public partial class DocumentEditor : MemorabiliaItem<SaveDocumentViewModel>
     {
         var viewModel = await QueryRouter.Send(new GetDocument(MemorabiliaId));
 
+        if (viewModel.Size == null)
+            return;
+
         ViewModel = new SaveDocumentViewModel(viewModel);
     }
 

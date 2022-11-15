@@ -1,0 +1,12 @@
+﻿@page "/Memorabilia/CerealBox/Edit/{memorabiliaId:int}"
+@page "/Memorabilia/Cereal Box/Edit/{memorabiliaId:int}"
+
+@inherits MemorabiliaItem
+
+<PageLoader>
+    <Content>
+        <CerealBoxEditor DomainImageRootPath="@DomainImageRootPath" 
+                         MemorabiliaId="@MemorabiliaId" />
+    </Content>
+</PageLoader>
+

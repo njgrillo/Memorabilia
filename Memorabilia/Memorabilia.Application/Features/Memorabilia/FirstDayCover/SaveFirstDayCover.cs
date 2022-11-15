@@ -17,6 +17,7 @@ public class SaveFirstDayCover
 
             memorabilia.SetFirstDayCover(command.PersonIds,
                                          command.SizeId,
+                                         command.Date,
                                          command.SportIds,
                                          command.TeamIds);
 
@@ -32,6 +33,8 @@ public class SaveFirstDayCover
         {
             _viewModel = viewModel;
         }
+
+        public DateTime? Date => _viewModel.Date;
 
         public int MemorabiliaId => _viewModel.MemorabiliaId;
 

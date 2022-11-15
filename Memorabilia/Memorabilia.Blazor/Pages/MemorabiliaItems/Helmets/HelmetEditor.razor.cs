@@ -7,10 +7,7 @@ public partial class HelmetEditor : MemorabiliaItem<SaveHelmetViewModel>
         var viewModel = await QueryRouter.Send(new GetHelmet(MemorabiliaId));
 
         if (viewModel.Brand == null)
-        {
-            ViewModel.GameStyleTypeId = GameStyleType.None.Id;
             return;
-        }
 
         ViewModel = new SaveHelmetViewModel(viewModel);
     }

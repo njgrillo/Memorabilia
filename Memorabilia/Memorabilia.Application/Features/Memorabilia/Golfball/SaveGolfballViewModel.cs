@@ -25,7 +25,9 @@ public class SaveGolfballViewModel : SaveItemViewModel
     [Range(1, int.MaxValue, ErrorMessage = "Brand is required.")]
     public int BrandId { get; set; } = Brand.Titleist.Id;
 
-    public bool DisplayGameDate => GameStyleType.IsGameWorthly(GameStyleType);
+    public bool DisplayGameDate => GameStyleType.IsGameWorthly(GameStyleType) && DisplayGameStyle;
+
+    public bool DisplayGameStyle => SizeId == Size.Standard.Id;
 
     public override EditModeType EditModeType => MemorabiliaId > 0 ? EditModeType.Update : EditModeType.Add;
 
@@ -38,8 +40,6 @@ public class SaveGolfballViewModel : SaveItemViewModel
     [Required]
     [Range(1, int.MaxValue, ErrorMessage = "Tournament Style Type is required.")]
     public int GameStyleTypeId { get; set; } = GameStyleType.None.Id;
-
-    public GameStyleType[] GameStyleTypes => GameStyleType.GetAll(ItemType.Golfball);
 
     public override string ImageFileName => Domain.Constants.ImageFileName.Golfball;
 

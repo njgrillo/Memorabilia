@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Application.Features.Admin.Commissioners;
 
-public record GetCommissioners(int? SportId = null) : IQuery<CommissionersViewModel>
+public record GetCommissioners(int? SportLeagueLevelId = null) : IQuery<CommissionersViewModel>
 {
     public class Handler : QueryHandler<GetCommissioners, CommissionersViewModel>
     {
@@ -13,7 +13,7 @@ public record GetCommissioners(int? SportId = null) : IQuery<CommissionersViewMo
 
         protected override async Task<CommissionersViewModel> Handle(GetCommissioners query)
         {
-            return new CommissionersViewModel(await _commissionerRepository.GetAll(query.SportId));
+            return new CommissionersViewModel(await _commissionerRepository.GetAll(query.SportLeagueLevelId));
         }
     }
 }

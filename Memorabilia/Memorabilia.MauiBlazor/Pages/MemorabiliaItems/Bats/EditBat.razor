@@ -1,0 +1,10 @@
+﻿@page "/Memorabilia/Bat/Edit/{memorabiliaId:int}"
+
+@inherits MemorabiliaItem
+
+<PageLoader>
+    <Content>
+        <BatEditor DomainImageRootPath="@DomainImageRootPath" 
+                   MemorabiliaId="@MemorabiliaId" />
+    </Content>
+</PageLoader>

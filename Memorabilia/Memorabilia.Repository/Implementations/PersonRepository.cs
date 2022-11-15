@@ -31,7 +31,7 @@ public class PersonRepository : DomainRepository<Person>, IPersonRepository
 
     public async Task<IEnumerable<Person>> GetAll(int? sportId = null, int? sportLeagueLevelId = null)
     {
-        return await Items.Where(person => (!sportId.HasValue || person.Teams.Any(team => team.Team.Franchise.SportLeagueLevel.SportId == sportId.Value))
+        return await Items.Where(person => (!sportId.HasValue || person.Sports.Any(sport => sport.SportId == sportId.Value))
                                         && (!sportLeagueLevelId.HasValue || person.Teams.Any(team => team.Team.Franchise.SportLeagueLevel.Id == sportLeagueLevelId.Value)))
                           .ToListAsync();
     }

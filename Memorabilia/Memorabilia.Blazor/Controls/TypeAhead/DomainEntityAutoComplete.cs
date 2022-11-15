@@ -4,9 +4,6 @@ namespace Memorabilia.Blazor.Controls.TypeAhead;
 
 public class DomainEntityAutoComplete<T> : Autocomplete<T> where T : DomainItemConstant, IWithName, IWithValue<int>
 {
-    [Inject]
-    public QueryRouter QueryRouter { get; set; }
-
     [Parameter]
     public bool IsCulturalSearch { get; set; }
 

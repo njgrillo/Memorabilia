@@ -25,15 +25,11 @@ public class SavePantViewModel : SaveItemViewModel
 
     public override string BackNavigationPath => $"Memorabilia/{EditModeType.Update.Name}/{MemorabiliaId}";
 
-    public Brand Brand => Brand.Find(BrandId);
-
     [Required]
     [Range(1, int.MaxValue, ErrorMessage = "Brand is required.")]
     public int BrandId { get; set; } = Brand.Rawlings.Id;
 
-    public bool DisplayGameDate => GameStyleType.IsGameWorthly(GameStyleType);
-
-    public bool DisplayPantType => LevelTypeId == LevelType.Professional.Id;        
+    public bool DisplayGameDate => GameStyleType.IsGameWorthly(GameStyleType);       
 
     public override EditModeType EditModeType => MemorabiliaId > 0 ? EditModeType.Update : EditModeType.Add;
 
@@ -59,7 +55,7 @@ public class SavePantViewModel : SaveItemViewModel
 
     [Required]
     [Range(1, int.MaxValue, ErrorMessage = "Size is required.")]
-    public int SizeId { get; set; } = Domain.Constants.Size.Large.Id;
+    public int SizeId { get; set; } = Size.Large.Id;
 
     public int SportId { get; set; }
 

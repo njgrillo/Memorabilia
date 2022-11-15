@@ -30,9 +30,11 @@
         </DivRowCol3>
         <MultiPersonSelector CanToggle="true"
                              ItemType="ViewModel.ItemType"
-                             People="ViewModel.People" />    
-        <MultiTeamSelector CanToggle="true" 
+                             SelectedPeople="ViewModel.People"
+                             SelectedPeopleChanged="@((people) => ViewModel.People = people)" />
+        <MultiTeamSelector CanToggle="true"
                            ItemType="ViewModel.ItemType"
-                           Teams="ViewModel.Teams" />
+                           SelectedTeams="ViewModel.Teams"
+                           SelectedTeamsChanged="@((teams) => ViewModel.Teams = teams)" />
     </Content>
 </EditPage>

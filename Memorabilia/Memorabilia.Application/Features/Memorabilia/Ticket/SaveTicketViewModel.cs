@@ -9,7 +9,6 @@ public class SaveTicketViewModel : SaveItemViewModel
     public SaveTicketViewModel(TicketViewModel viewModel)
     {
         GameDate = viewModel.Game?.GameDate;
-        GamePersonId = viewModel.Game?.PersonId ?? 0;
         GameStyleTypeId = viewModel.Game?.GameStyleTypeId ?? 0;
         LevelTypeId = viewModel.Level.LevelTypeId;
         MemorabiliaId = viewModel.MemorabiliaId;
@@ -30,8 +29,6 @@ public class SaveTicketViewModel : SaveItemViewModel
     public override string ExitNavigationPath => "Memorabilia/Items";
 
     public DateTime? GameDate { get; set; }
-
-    public int GamePersonId { get; set; }
 
     public GameStyleType GameStyleType => GameStyleType.Find(GameStyleTypeId);
 

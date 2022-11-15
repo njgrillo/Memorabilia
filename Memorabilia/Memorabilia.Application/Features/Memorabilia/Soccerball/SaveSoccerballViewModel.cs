@@ -10,7 +10,6 @@ public class SaveSoccerballViewModel : SaveItemViewModel
     {
         BrandId = viewModel.Brand.BrandId;
         GameDate = viewModel.Game?.GameDate;
-        GamePersonId = viewModel.Game?.PersonId ?? 0;
         GameStyleTypeId = viewModel.Game?.GameStyleTypeId ?? 0;
         LevelTypeId = viewModel.Level.LevelTypeId;
         MemorabiliaId = viewModel.MemorabiliaId;
@@ -37,8 +36,6 @@ public class SaveSoccerballViewModel : SaveItemViewModel
 
     public DateTime? GameDate { get; set; }
 
-    public int GamePersonId { get; set; }
-
     public GameStyleType GameStyleType => GameStyleType.Find(GameStyleTypeId);
 
     [Required]
@@ -58,6 +55,8 @@ public class SaveSoccerballViewModel : SaveItemViewModel
     [Required]
     [Range(1, int.MaxValue, ErrorMessage = "Size is required.")]
     public int SizeId { get; set; } = Size.Standard.Id;
+
+    public Sport Sport => Sport.Soccer;
 
     public SaveTeamViewModel Team { get; set; } 
 }

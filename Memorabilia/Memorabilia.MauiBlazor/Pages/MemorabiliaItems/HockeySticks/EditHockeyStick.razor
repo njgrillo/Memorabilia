@@ -1,0 +1,11 @@
+﻿@page "/Memorabilia/HockeyStick/Edit/{memorabiliaId:int}"
+
+@inherits MemorabiliaItem
+
+<PageLoader>
+    <Content>
+        <HockeyStickEditor DomainImageRootPath="@DomainImageRootPath" 
+                           MemorabiliaId="@MemorabiliaId" />
+    </Content>
+</PageLoader>
+

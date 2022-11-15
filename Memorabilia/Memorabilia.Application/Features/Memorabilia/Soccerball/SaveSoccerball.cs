@@ -17,7 +17,6 @@ public class SaveSoccerball
 
             memorabilia.SetSoccerball(command.BrandId,
                                       command.GameDate,
-                                      command.GamePersonId,
                                       command.GameStyleTypeId,
                                       command.LevelTypeId,
                                       command.PersonId,
@@ -41,8 +40,6 @@ public class SaveSoccerball
         public int BrandId => _viewModel.BrandId;
 
         public DateTime? GameDate => _viewModel.GameDate;
-
-        public int? GamePersonId => _viewModel.GamePersonId > 0 ? _viewModel.GamePersonId : null;
 
         public int? GameStyleTypeId => _viewModel.GameStyleTypeId > 0 ? _viewModel.GameStyleTypeId : 0;
 
