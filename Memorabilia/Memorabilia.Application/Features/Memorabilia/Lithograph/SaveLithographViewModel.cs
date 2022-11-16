@@ -2,9 +2,13 @@
 
 namespace Memorabilia.Application.Features.Memorabilia.Lithograph;
 
-public class SaveLithographViewModel : SaveItemViewModel
+public class SaveLithographViewModel : MemorabiliaItemEditViewModel
 {
-    public SaveLithographViewModel() { }
+    public SaveLithographViewModel()
+    { 
+        BrandId = Brand.None.Id;
+        SizeId = Size.EightByTen.Id;
+    }
 
     public SaveLithographViewModel(LithographViewModel viewModel)
     {
@@ -19,16 +23,6 @@ public class SaveLithographViewModel : SaveItemViewModel
         Teams = viewModel.Teams.Select(team => new SaveTeamViewModel(new TeamViewModel(team.Team))).ToList();
     }
 
-    public override string BackNavigationPath => $"Memorabilia/{EditModeType.Update.Name}/{MemorabiliaId}";
-
-    [Required]
-    [Range(1, int.MaxValue, ErrorMessage = "Brand is required.")]
-    public int BrandId { get; set; } = Brand.None.Id;
-
-    public override EditModeType EditModeType => MemorabiliaId > 0 ? EditModeType.Update : EditModeType.Add;
-
-    public override string ExitNavigationPath => "Memorabilia/Items";
-
     public bool Framed { get; set; }
 
     public override string ImageFileName => Domain.Constants.ImageFileName.Lithograph;
@@ -38,14 +32,4 @@ public class SaveLithographViewModel : SaveItemViewModel
     public bool Matted { get; set; }
 
     public int OrientationId { get; set; } = Orientation.Portrait.Id;
-   
-    public List<SavePersonViewModel> People { get; set; } = new();
-
-    [Required]
-    [Range(1, int.MaxValue, ErrorMessage = "Size is required.")]
-    public int SizeId { get; set; } = Size.EightByTen.Id;
-
-    public List<int> SportIds { get; set; } = new();
-
-    public List<SaveTeamViewModel> Teams { get; set; } = new();
 }

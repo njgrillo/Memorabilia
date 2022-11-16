@@ -2,9 +2,15 @@
 
 namespace Memorabilia.Application.Features.Memorabilia.Shoe;
 
-public class SaveShoeViewModel : SaveItemViewModel
+public class SaveShoeViewModel : MemorabiliaItemEditViewModel
 {
-    public SaveShoeViewModel() { }
+    public SaveShoeViewModel() 
+    {
+        BrandId = Brand.Nike.Id;
+        GameStyleTypeId = GameStyleType.None.Id;
+        LevelTypeId = LevelType.Professional.Id;
+        SizeId = Size.Standard.Id;
+    }
 
     public SaveShoeViewModel(ShoeViewModel viewModel)
     {
@@ -23,39 +29,7 @@ public class SaveShoeViewModel : SaveItemViewModel
             Team = new SaveTeamViewModel(new TeamViewModel(viewModel.Teams.First().Team));
     }
 
-    public override string BackNavigationPath => $"Memorabilia/{EditModeType.Update.Name}/{MemorabiliaId}";
-
-    [Required]
-    [Range(1, int.MaxValue, ErrorMessage = "Brand is required.")]
-    public int BrandId { get; set; } = Brand.Nike.Id;
-
-    public bool DisplayGameDate => GameStyleType == GameStyleType.GameUsed;
-
-    public override EditModeType EditModeType => MemorabiliaId > 0 ? EditModeType.Update : EditModeType.Add;
-
-    public override string ExitNavigationPath => "Memorabilia/Items";
-
-    public DateTime? GameDate { get; set; }
-
-    public GameStyleType GameStyleType => GameStyleType.Find(GameStyleTypeId);
-
-    public int GameStyleTypeId { get; set; } = GameStyleType.None.Id;
-
     public override string ImageFileName => Domain.Constants.ImageFileName.Shoe;
 
     public override ItemType ItemType => ItemType.Shoe;
-
-    [Required]
-    [Range(1, int.MaxValue, ErrorMessage = "Level is required.")]
-    public int LevelTypeId { get; set; } = LevelType.Professional.Id;
-
-    public SavePersonViewModel Person { get; set; }
-
-    [Required]
-    [Range(1, int.MaxValue, ErrorMessage = "Size is required.")]
-    public int SizeId { get; set; } = Size.Standard.Id;
-
-    public int SportId { get; set; } 
-
-    public SaveTeamViewModel Team { get; set; } 
 }

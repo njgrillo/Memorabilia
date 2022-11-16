@@ -2,9 +2,15 @@
 
 namespace Memorabilia.Application.Features.Memorabilia.Baseball;
 
-public class SaveBaseballViewModel : SaveItemViewModel
+public class SaveBaseballViewModel : MemorabiliaItemEditViewModel
 {
-    public SaveBaseballViewModel() { }
+    public SaveBaseballViewModel() 
+    {
+        BrandId = Brand.Rawlings.Id;
+        GameStyleTypeId = GameStyleType.None.Id;
+        LevelTypeId = LevelType.Professional.Id;
+        SizeId = Size.Standard.Id;
+    }
 
     public SaveBaseballViewModel(BaseballViewModel viewModel)
     {
@@ -25,8 +31,6 @@ public class SaveBaseballViewModel : SaveItemViewModel
             Person = new SavePersonViewModel(new PersonViewModel(viewModel.People.First().Person));
     }
 
-    public override string BackNavigationPath => $"Memorabilia/{EditModeType.Update.Name}/{MemorabiliaId}";
-
     [StringLength(5, ErrorMessage = "Anniversary is too long.")]
     public string BaseballTypeAnniversary { get; set; }
 
@@ -34,15 +38,9 @@ public class SaveBaseballViewModel : SaveItemViewModel
 
     public int BaseballTypeId { get; set; } = BaseballType.Official.Id;
 
-    public BaseballType[] BaseballTypes { get; set; } = BaseballType.All;
-
     public int? BaseballTypeYear { get; set; }
 
     public Brand Brand => Brand.Find(BrandId);
-
-    [Required]
-    [Range(1, int.MaxValue, ErrorMessage = "Brand is required.")]
-    public int BrandId { get; set; } = Brand.Rawlings.Id;
 
     public int CommissionerId { get; set; }
 
@@ -57,28 +55,15 @@ public class SaveBaseballViewModel : SaveItemViewModel
     public bool DisplayCommissioner => Brand.IsGameWorthlyBaseballBrand(Brand) &&
                                        BaseballType.IsCommissionerType(BaseballType);
 
-    public bool DisplayGameDate => Brand.IsGameWorthlyBaseballBrand(Brand) &&
-                                   SizeId == Size.Standard.Id && 
-                                   BaseballType.IsGameWorthly(BaseballType) && 
-                                   GameStyleType.IsGameWorthly(GameStyleType);
+    public override bool DisplayGameDate => DisplayGameStyleType && 
+                                            BaseballType.IsGameWorthly(BaseballType) && 
+                                            GameStyleType.IsGameWorthly(GameStyleType);
 
-    public bool DisplayGameStyleType => Brand.IsGameWorthlyBaseballBrand(Brand) &&
-                                        SizeId == Size.Standard.Id;
+    public override bool DisplayGameStyleType => Brand.IsGameWorthlyBaseballBrand(Brand) &&
+                                                 SizeId == Size.Standard.Id;
 
     public bool DisplayLeaguePresident => Brand.IsGameWorthlyBaseballBrand(Brand) &&
                                           BaseballType.IsLeaguePresidentType(BaseballType);
-
-    public override EditModeType EditModeType => MemorabiliaId > 0 ? EditModeType.Update : EditModeType.Add;
-
-    public override string ExitNavigationPath => "Memorabilia/Items";
-
-    public DateTime? GameDate { get; set; }
-
-    public GameStyleType GameStyleType => GameStyleType.Find(GameStyleTypeId);        
-
-    [Required]
-    [Range(1, int.MaxValue, ErrorMessage = "Game Style Type is required.")]
-    public int GameStyleTypeId { get; set; } = GameStyleType.None.Id;
 
     public override string ImageFileName
     {
@@ -109,17 +94,7 @@ public class SaveBaseballViewModel : SaveItemViewModel
 
     public int LeaguePresidentId { get; set; }
 
-    [Required]
-    [Range(1, int.MaxValue, ErrorMessage = "Level is required.")]
-    public int LevelTypeId { get; set; } = LevelType.Professional.Id;
+    public override Sport Sport => Sport.Baseball;
 
-    public SavePersonViewModel Person { get; set; }
-
-    [Required]
-    [Range(1, int.MaxValue, ErrorMessage = "Size is required.")]
-    public int SizeId { get; set; } = Size.Standard.Id;
-
-    public Sport Sport => Sport.Baseball;
-
-    public List<SaveTeamViewModel> Teams { get; set; } = new();
+    public override SportLeagueLevel SportLeagueLevel => SportLeagueLevel.MajorLeagueBaseball;
 }

@@ -2,7 +2,7 @@
 
 namespace Memorabilia.Application.Features.Memorabilia.Bookplate;
 
-public class SaveBookplateViewModel : SaveItemViewModel
+public class SaveBookplateViewModel : MemorabiliaItemEditViewModel
 {
     public SaveBookplateViewModel() { }
 
@@ -14,15 +14,7 @@ public class SaveBookplateViewModel : SaveItemViewModel
             Person = new SavePersonViewModel(new PersonViewModel(viewModel.People.First().Person));
     }
 
-    public override string BackNavigationPath => $"Memorabilia/{EditModeType.Update.Name}/{MemorabiliaId}";
-
-    public override EditModeType EditModeType => MemorabiliaId > 0 ? EditModeType.Update : EditModeType.Add;
-
-    public override string ExitNavigationPath => "Memorabilia/Items";
-
     public override string ImageFileName => Domain.Constants.ImageFileName.Bookplate;
 
     public override ItemType ItemType => ItemType.Bookplate;
-
-    public SavePersonViewModel Person { get; set; }
 }

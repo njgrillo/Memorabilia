@@ -21,10 +21,12 @@
                                  MemorabiliaItemStep="ViewModel.MemorabiliaItemStep" />
     </TimelineContent>
     <Content>
-        <PersonSelector CanFilterBySport="false"
-                        CanToggle="true"
-                        ItemType="ViewModel.ItemType"
-                        SelectedPerson="ViewModel.Person"
-                        SelectedPersonChanged="(p) => ViewModel.Person = p" />  
+        <MemorabiliaItemEditor DisplayItemTypeBrand="false" 
+                               DisplayItemTypeGameStyle="false"
+                               DisplayItemTypeLevel="false"
+                               DisplayItemTypeSize="false"
+                               DisplaySinglePersonSelector="true"
+                               TItem="SaveBookplateViewModel"
+                               ViewModel="ViewModel" />
     </Content>
 </EditPage>

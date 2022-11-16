@@ -2,7 +2,7 @@
 
 namespace Memorabilia.Application.Features.Memorabilia.JerseyNumber;
 
-public class SaveJerseyNumberViewModel : SaveItemViewModel
+public class SaveJerseyNumberViewModel : MemorabiliaItemEditViewModel
 {
     public SaveJerseyNumberViewModel() { }
 
@@ -18,19 +18,7 @@ public class SaveJerseyNumberViewModel : SaveItemViewModel
             Team = new SaveTeamViewModel(new TeamViewModel(viewModel.Teams.First().Team));
     }
 
-    public override string BackNavigationPath => $"Memorabilia/{EditModeType.Update.Name}/{MemorabiliaId}";
-
-    public override EditModeType EditModeType => MemorabiliaId > 0 ? EditModeType.Update : EditModeType.Add;
-
-    public override string ExitNavigationPath => "Memorabilia/Items";
-
     public override string ImageFileName => Domain.Constants.ImageFileName.JerseyNumber;
 
     public override ItemType ItemType => ItemType.JerseyNumber;
-   
-    public SavePersonViewModel Person { get; set; }
-
-    public int SportId { get; set; }
-
-    public SaveTeamViewModel Team { get; set; }
 }

@@ -21,33 +21,26 @@
                                  MemorabiliaItemStep="ViewModel.MemorabiliaItemStep" />
     </TimelineContent>
     <Content>
-        <DivRowCol3>
-            <Content>
-                <ItemTypeSizeDropDown ItemType="ViewModel.ItemType"
-                                      SelectedValue="@ViewModel.SizeId"
-                                      SelectionChanged="(p) => ViewModel.SizeId = p" />
-            </Content>
-            <ContentColumn2>
-                <MudDatePicker @bind-Date="ViewModel.Date"
-                               DateFormat="MM/dd/yyyy"
-                               Editable="true"
-                               Label="Date"
-                               Mask="@(new DateMask("MM/dd/yyyy"))"
-                               Variant="Variant.Outlined" /> 
-            </ContentColumn2>
-            <ContentColumn3>
-                <SportDropDown MultiSelect="true"
-                               SelectedItems="ViewModel.SportIds"
-                               SelectedItemsChanged="(p) => ViewModel.SportIds = p.ToList()" />
-            </ContentColumn3>
-        </DivRowCol3>
-        <MultiPersonSelector CanToggle="true"
-                             ItemType="ViewModel.ItemType"
-                             SelectedPeople="ViewModel.People"
-                             SelectedPeopleChanged="@((people) => ViewModel.People = people)" />
-        <MultiTeamSelector CanToggle="true"
-                           ItemType="ViewModel.ItemType"
-                           SelectedTeams="ViewModel.Teams"
-                           SelectedTeamsChanged="@((teams) => ViewModel.Teams = teams)" />
+        <MemorabiliaItemEditor DisplayItemTypeBrand="false"
+                               DisplayItemTypeGameStyle="false"
+                               DisplayItemTypeLevel="false"
+                               DisplayMultiPersonSelector="true"
+                               DisplayMultiSportSelector="true"
+                               DisplayMultiTeamSelector="true"
+                               TItem="SaveFirstDayCoverViewModel"
+                               ViewModel="ViewModel">
+            <AdditionalContent>
+                <DivRowCol3>
+                    <Content>
+                        <MudDatePicker @bind-Date="ViewModel.Date"
+                                       DateFormat="MM/dd/yyyy"
+                                       Editable="true"
+                                       Label="Date"
+                                       Mask="@(new DateMask("MM/dd/yyyy"))"
+                                       Variant="Variant.Outlined" />
+                    </Content>
+                </DivRowCol3>
+            </AdditionalContent>
+        </MemorabiliaItemEditor>        
     </Content>
 </EditPage>

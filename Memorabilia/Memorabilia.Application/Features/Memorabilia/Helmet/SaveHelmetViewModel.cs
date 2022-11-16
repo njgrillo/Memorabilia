@@ -2,9 +2,15 @@
 
 namespace Memorabilia.Application.Features.Memorabilia.Helmet;
 
-public class SaveHelmetViewModel : SaveItemViewModel
+public class SaveHelmetViewModel : MemorabiliaItemEditViewModel
 {
-    public SaveHelmetViewModel() { }
+    public SaveHelmetViewModel()
+    { 
+        BrandId = Brand.Riddell.Id;
+        GameStyleTypeId = GameStyleType.None.Id;
+        LevelTypeId = LevelType.Professional.Id;
+        SizeId = Size.Mini.Id;
+    }
 
     public SaveHelmetViewModel(HelmetViewModel viewModel)
     {
@@ -23,33 +29,15 @@ public class SaveHelmetViewModel : SaveItemViewModel
         Throwback = viewModel.Helmet.Throwback;
     }
 
-    public override string BackNavigationPath => $"Memorabilia/{EditModeType.Update.Name}/{MemorabiliaId}";
-
-    [Required]
-    [Range(1, int.MaxValue, ErrorMessage = "Brand is required.")]
-    public int BrandId { get; set; } = Brand.Riddell.Id;
-
     public bool CanEditHelmetQualityType { get; private set; } = true;
 
-    public bool DisplayGameDate => IsGameWorthly && DisplayGameStyle;
+    public override bool DisplayGameDate => IsGameWorthly && DisplayGameStyleType;
 
-    public bool DisplayGameStyle => SizeId == Size.Full.Id;
+    public override bool DisplayGameStyleType => SizeId == Size.Full.Id;
 
     public bool DisplayHelmetFinish => !IsGameWorthly;
 
     public bool DisplayHelmetQualityType => Size.Find(SizeId) == Size.Full;
-
-    public override EditModeType EditModeType => MemorabiliaId > 0 ? EditModeType.Update : EditModeType.Add;
-
-    public override string ExitNavigationPath => "Memorabilia/Items";
-
-    public DateTime? GameDate { get; set; }
-
-    public GameStyleType GameStyleType => GameStyleType.Find(GameStyleTypeId);
-
-    [Required]
-    [Range(1, int.MaxValue, ErrorMessage = "Game Style Type is required.")]
-    public int GameStyleTypeId { get; set; } = GameStyleType.None.Id;
 
     public int HelmetFinishId { get; set; }
 
@@ -57,27 +45,11 @@ public class SaveHelmetViewModel : SaveItemViewModel
 
     public int HelmetTypeId { get; set; }
 
-    public HelmetType[] HelmetTypes { get; set; } = HelmetType.All;
-
     public override string ImageFileName => Domain.Constants.ImageFileName.Helmet;
 
     public bool IsGameWorthly => GameStyleType.IsGameWorthly(GameStyleType);
 
     public override ItemType ItemType => ItemType.Helmet;
-
-    [Required]
-    [Range(1, int.MaxValue, ErrorMessage = "Level is required.")]
-    public int LevelTypeId { get; set; } = LevelType.Professional.Id;
-
-    public List<SavePersonViewModel> People { get; set; } = new();
-
-    [Required]
-    [Range(1, int.MaxValue, ErrorMessage = "Size is required.")]
-    public int SizeId { get; set; } = Size.Mini.Id;
-
-    public List<int> SportIds { get; set; } = new();
-
-    public List<SaveTeamViewModel> Teams { get; set; } = new();
 
     public bool Throwback { get; set; }
 }

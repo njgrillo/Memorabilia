@@ -21,65 +21,30 @@
                                  MemorabiliaItemStep="ViewModel.MemorabiliaItemStep" />
     </TimelineContent>
     <Content>
-        <DivRowCol3>
-            <Content>
-                <ItemTypeBrandDropDown ItemType="ViewModel.ItemType"
-                                       SelectedValue="ViewModel.BrandId"
-                                       SelectionChanged="(p) => ViewModel.BrandId = p" />
-            </Content>
-            <ContentColumn2>
-                <ItemTypeSizeDropDown ItemType="ViewModel.ItemType"
-                                      SelectedValue="@ViewModel.SizeId"
-                                      SelectionChanged="(p) => ViewModel.SizeId = p" />
-            </ContentColumn2>
-        </DivRowCol3>
-        <DivRowCol3 HideColumn2="@(!ViewModel.DisplayGameStyle)">
-            <Content>
-                <BatTypeDropDown GameStyleType="ViewModel.GameStyleType" 
-                                 SelectedValue="ViewModel.BatTypeId"
-                                 SelectionChanged="(p) => ViewModel.BatTypeId = p" />
-            </Content>
-            <ContentColumn2>
-                <ItemTypeGameStyleDropDown ItemType="ViewModel.ItemType"
-                                           SelectedValue="ViewModel.GameStyleTypeId"
-                                           SelectionChanged="(p) => ViewModel.GameStyleTypeId = p" />
-            </ContentColumn2>
-        </DivRowCol3>
-        <DivRowCol3 HideColumn2="@(!ViewModel.DisplayGameDate)">
-            <ContentColumn2>
-                <MudDatePicker @bind-Date="ViewModel.GameDate"
-                               DateFormat="MM/dd/yyyy"
-                               Editable="true"
-                               Label="Game Date"
-                               Mask="@(new DateMask("MM/dd/yyyy"))"
-                               Variant="Variant.Outlined" />
-            </ContentColumn2>
-        </DivRowCol3>
-        <DivRowCol3>
-            <Content>
-                <ColorDropDown ItemType="ViewModel.ItemType" 
-                               SelectedValue="ViewModel.ColorId"
-                               SelectionChanged="(p) => ViewModel.ColorId = p" />
-            </Content>
-            <ContentColumn2>
-                <NullableIntField Label="Length"
-                                  Maximum="int.MaxValue"
-                                  Value="ViewModel.Length"
-                                  ValueChanged="@((p) => ViewModel.Length = p)" />
-            </ContentColumn2>
-        </DivRowCol3>
-        <PersonSelector CanFilterBySport="true"
-                        CanToggle="true"
-                        ItemType="ViewModel.ItemType"
-                        SelectedPerson="ViewModel.Person"
-                        SelectedPersonChanged="(p) => ViewModel.Person = p"
-                        Sport="ViewModel.Sport" />    
-        <DivRowCol6>
-            <Content>
-                <TeamAutoComplete SelectedValue="ViewModel.Team"
-                                  SelectionChanged="(p) => ViewModel.Team = p"
-                                  SportLeagueLevel="ViewModel.SportLeagueLevel" />
-            </Content>
-        </DivRowCol6>
+        <MemorabiliaItemEditor DisplaySinglePersonSelector="true"
+                               DisplaySingleTeamSelector="true"
+                               TItem="SaveBatViewModel"
+                               ViewModel="ViewModel">
+            <AdditionalContent>
+                <DivRowCol3>
+                    <Content>
+                        <BatTypeDropDown GameStyleType="ViewModel.GameStyleType" 
+                                         SelectedValue="ViewModel.BatTypeId"
+                                         SelectionChanged="(p) => ViewModel.BatTypeId = p" />
+                    </Content>
+                    <ContentColumn2>
+                        <ColorDropDown ItemType="ViewModel.ItemType" 
+                                       SelectedValue="ViewModel.ColorId"
+                                       SelectionChanged="(p) => ViewModel.ColorId = p" />
+                    </ContentColumn2>
+                    <ContentColumn3>
+                        <NullableIntField Label="Length"
+                                          Maximum="int.MaxValue"
+                                          Value="ViewModel.Length"
+                                          ValueChanged="@((p) => ViewModel.Length = p)" />
+                    </ContentColumn3>
+                </DivRowCol3>
+            </AdditionalContent>
+        </MemorabiliaItemEditor>        
     </Content>
 </EditPage>

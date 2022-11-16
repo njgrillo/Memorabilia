@@ -21,47 +21,42 @@
                                  MemorabiliaItemStep="ViewModel.MemorabiliaItemStep" />
     </TimelineContent>
     <Content>
-        <DivRowCol3>
-            <Content>
-                <TextField Label="Title"
-                           MaxLength="200"
-                           SelectedText="@ViewModel.Title"
-                           SelectedTextChanged="@((p) => ViewModel.Title = p)" />
-            </Content>
-            <ContentColumn2>
-                <TextField Label="Edition"
-                           MaxLength="5"
-                           SelectedText="@ViewModel.Edition"
-                           SelectedTextChanged="@((p) => ViewModel.Edition = p)" />
-            </ContentColumn2>
-            <ContentColumn3>
-                <TextField Label="Publisher"
-                           MaxLength="200"
-                           SelectedText="@ViewModel.Publisher"
-                           SelectedTextChanged="@((p) => ViewModel.Publisher = p)" />
-            </ContentColumn3>
-        </DivRowCol3>
-        <DivRowCol3>
-            <Content>
-                <SportDropDown MultiSelect="true"
-                               SelectedItems="ViewModel.SportIds"
-                               SelectedItemsChanged="(p) => ViewModel.SportIds = p.ToList()" />
-            </Content>
-        </DivRowCol3>    
-        <DivRowCol3>
-            <Content>
-                <BooleanCheckBox Checked="@ViewModel.HardCover"
-                                 CheckedChanged="(p) => ViewModel.HardCover = p"
-                                 Label="Hard Cover" />
-            </Content>
-        </DivRowCol3>
-        <MultiPersonSelector CanToggle="true"
-                             ItemType="ViewModel.ItemType"
-                             SelectedPeople="ViewModel.People"
-                             SelectedPeopleChanged="@((people) => ViewModel.People = people)" />
-        <MultiTeamSelector CanToggle="true" 
-                           ItemType="ViewModel.ItemType"
-                           SelectedTeams="ViewModel.Teams"
-                           SelectedTeamsChanged="@((teams) => ViewModel.Teams = teams)" />
+        <MemorabiliaItemEditor DisplayItemTypeBrand="false" 
+                               DisplayItemTypeGameStyle="false"
+                               DisplayItemTypeLevel="false"
+                               DisplayItemTypeSize="false"
+                               DisplayMultiPersonSelector="true"
+                               DisplayMultiSportSelector="true"
+                               DisplayMultiTeamSelector="true"
+                               TItem="SaveBookViewModel"
+                               ViewModel="ViewModel">
+            <AdditionalContent>
+                <DivRowCol3>
+                    <Content>
+                        <TextField Label="Title"
+                                   MaxLength="200"
+                                   SelectedText="@ViewModel.Title"
+                                   SelectedTextChanged="@((p) => ViewModel.Title = p)" />
+                    </Content>
+                    <ContentColumn2>
+                        <TextField Label="Edition"
+                                   MaxLength="5"
+                                   SelectedText="@ViewModel.Edition"
+                                   SelectedTextChanged="@((p) => ViewModel.Edition = p)" />
+                    </ContentColumn2>
+                    <ContentColumn3>
+                        <TextField Label="Publisher"
+                                   MaxLength="200"
+                                   SelectedText="@ViewModel.Publisher"
+                                   SelectedTextChanged="@((p) => ViewModel.Publisher = p)" />
+                    </ContentColumn3>
+                    <ContentColumn4>
+                        <BooleanCheckBox Checked="@ViewModel.HardCover"
+                                         CheckedChanged="(p) => ViewModel.HardCover = p"
+                                         Label="Hard Cover" />
+                    </ContentColumn4>
+                </DivRowCol3>
+            </AdditionalContent>
+        </MemorabiliaItemEditor>
     </Content>
 </EditPage>

@@ -2,7 +2,7 @@
 
 namespace Memorabilia.Application.Features.Memorabilia.Book;
 
-public class SaveBookViewModel : SaveItemViewModel
+public class SaveBookViewModel : MemorabiliaItemEditViewModel
 {
     public SaveBookViewModel() { }
 
@@ -18,13 +18,7 @@ public class SaveBookViewModel : SaveItemViewModel
         Title = viewModel.Book?.Title;
     }
 
-    public override string BackNavigationPath => $"Memorabilia/{EditModeType.Update.Name}/{MemorabiliaId}";
-
     public string Edition { get; set; }
-
-    public override EditModeType EditModeType => MemorabiliaId > 0 ? EditModeType.Update : EditModeType.Add;
-
-    public override string ExitNavigationPath => "Memorabilia/Items";
 
     public bool HardCover { get; set; }
 
@@ -32,13 +26,7 @@ public class SaveBookViewModel : SaveItemViewModel
 
     public override ItemType ItemType => ItemType.Book;
 
-    public List<SavePersonViewModel> People { get; set; } = new();
-
     public string Publisher { get; set; }
-
-    public List<int> SportIds { get; set; } = new();
-
-    public List<SaveTeamViewModel> Teams { get; set; } = new();
 
     public string Title { get; set; }
 }

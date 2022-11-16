@@ -2,9 +2,12 @@
 
 namespace Memorabilia.Application.Features.Memorabilia.FirstDayCover;
 
-public class SaveFirstDayCoverViewModel : SaveItemViewModel
+public class SaveFirstDayCoverViewModel : MemorabiliaItemEditViewModel
 {
-    public SaveFirstDayCoverViewModel() { }
+    public SaveFirstDayCoverViewModel()
+    { 
+        SizeId = Size.Standard.Id;
+    }
 
     public SaveFirstDayCoverViewModel(FirstDayCoverViewModel viewModel)
     {
@@ -16,25 +19,9 @@ public class SaveFirstDayCoverViewModel : SaveItemViewModel
         Teams = viewModel.Teams.Select(team => new SaveTeamViewModel(new TeamViewModel(team.Team))).ToList();
     }
 
-    public override string BackNavigationPath => $"Memorabilia/{EditModeType.Update.Name}/{MemorabiliaId}";
-
     public DateTime? Date { get; set; }
-
-    public override EditModeType EditModeType => MemorabiliaId > 0 ? EditModeType.Update : EditModeType.Add;
-
-    public override string ExitNavigationPath => "Memorabilia/Items";
 
     public override string ImageFileName => Domain.Constants.ImageFileName.FirstDayCover;
 
     public override ItemType ItemType => ItemType.FirstDayCover;
-
-    public List<SavePersonViewModel> People { get; set; } = new();
-
-    [Required]
-    [Range(1, int.MaxValue, ErrorMessage = "Size is required.")]
-    public int SizeId { get; set; } = Size.Standard.Id;
-
-    public List<int> SportIds { get; set; } = new();
-
-    public List<SaveTeamViewModel> Teams { get; set; } = new();
 }

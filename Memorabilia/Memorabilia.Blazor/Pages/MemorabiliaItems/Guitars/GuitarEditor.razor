@@ -21,21 +21,10 @@
                                  MemorabiliaItemStep="ViewModel.MemorabiliaItemStep" />
     </TimelineContent>
     <Content>
-        <DivRowCol3>
-            <Content>
-                <ItemTypeBrandDropDown ItemType="ViewModel.ItemType"
-                                       SelectedValue="ViewModel.BrandId"
-                                       SelectionChanged="(p) => ViewModel.BrandId = p" />
-            </Content>
-            <ContentColumn2>
-                <ItemTypeSizeDropDown ItemType="ViewModel.ItemType"
-                                      SelectedValue="@ViewModel.SizeId"
-                                      SelectionChanged="(p) => ViewModel.SizeId = p" />
-            </ContentColumn2>
-        </DivRowCol3>
-        <MultiPersonSelector CanToggle="true"
-                             ItemType="ViewModel.ItemType"
-                             SelectedPeople="ViewModel.People"
-                             SelectedPeopleChanged="@((people) => ViewModel.People = people)" />
+        <MemorabiliaItemEditor DisplayItemTypeGameStyle="false"
+                               DisplayItemTypeLevel="false"
+                               DisplayMultiPersonSelector="true"
+                               TItem="SaveGuitarViewModel"
+                               ViewModel="ViewModel" />
     </Content>
 </EditPage>

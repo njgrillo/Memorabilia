@@ -21,64 +21,24 @@
                                  MemorabiliaItemStep="ViewModel.MemorabiliaItemStep" />
     </TimelineContent>
     <Content>
-        <DivRowCol3>
-            <Content>
-                <ItemTypeLevelDropDown ItemType="ViewModel.ItemType"
-                                       SelectedValue="ViewModel.LevelTypeId" 
-                                       SelectionChanged="(p) => ViewModel.LevelTypeId = p" /> 
-            </Content>
-            <ContentColumn2>
-                <ItemTypeBrandDropDown ItemType="ViewModel.ItemType"
-                                       SelectedValue="ViewModel.BrandId"
-                                       SelectionChanged="(p) => ViewModel.BrandId = p" />
-            </ContentColumn2>
-        </DivRowCol3>
-        <DivRowCol3>
-            <Content>
-                <ItemTypeSizeDropDown ItemType="ViewModel.ItemType"
-                                      SelectedValue="@ViewModel.SizeId"
-                                      SelectionChanged="(p) => ViewModel.SizeId = p" /> 
-            </Content>
-            <ContentColumn2>
-                <BasketballTypeDropDown GameStyleType="@ViewModel.GameStyleType" 
-                                        SelectedValue="@ViewModel.BasketballTypeId"
-                                        SelectionChanged="(p) => ViewModel.BasketballTypeId = p" />
-            </ContentColumn2>
-        </DivRowCol3>
-        <DivRowCol3 HideColumn1="@(!ViewModel.DisplayGameStyle)">
-            <Content>
-                <ItemTypeGameStyleDropDown ItemType="ViewModel.ItemType"
-                                           SelectedValue="ViewModel.GameStyleTypeId"
-                                           SelectionChanged="(p) => ViewModel.GameStyleTypeId = p"/> 
-            </Content>
-            <ContentColumn2>
-                <CommissionerDropDown SelectedValue="@ViewModel.CommissionerId"
-                                      SelectionChanged="(p) => ViewModel.CommissionerId = p"
-                                      SportLeagueLevel="@SportLeagueLevel.NationalBasketballAssociation" />
-            </ContentColumn2>
-        </DivRowCol3>
-        <DivRowCol3 HideColumn1="@(!ViewModel.DisplayGameDate)">
-            <Content>
-                <MudDatePicker @bind-Date="ViewModel.GameDate"
-                               DateFormat="MM/dd/yyyy"
-                               Editable="true"
-                               Label="Game Date"
-                               Mask="@(new DateMask("MM/dd/yyyy"))"
-                               Variant="Variant.Outlined" />  
-            </Content>
-        </DivRowCol3>
-        <PersonSelector CanFilterBySport="true"
-                        CanToggle="true"
-                        ItemType="ViewModel.ItemType"
-                        SelectedPerson="ViewModel.Person"
-                        SelectedPersonChanged="(p) => ViewModel.Person = p"
-                        Sport="ViewModel.Sport" />
-        <DivRowCol6>
-            <Content>
-                <TeamAutoComplete SelectedValue="ViewModel.Team"
-                                  SelectionChanged="(p) => ViewModel.Team = p"
-                                  SportLeagueLevel="ViewModel.SportLeagueLevel" />
-            </Content>
-        </DivRowCol6>
+        <MemorabiliaItemEditor DisplaySinglePersonSelector="true"
+                               DisplaySingleTeamSelector="true"
+                               TItem="SaveBasketballViewModel"
+                               ViewModel="ViewModel">
+            <AdditionalContent>
+                <DivRowCol3>
+                    <Content>
+                        <BasketballTypeDropDown GameStyleType="@ViewModel.GameStyleType"
+                                                SelectedValue="@ViewModel.BasketballTypeId"
+                                                SelectionChanged="(p) => ViewModel.BasketballTypeId = p" />
+                    </Content>
+                    <ContentColumn2>
+                        <CommissionerDropDown SelectedValue="@ViewModel.CommissionerId"
+                                              SelectionChanged="(p) => ViewModel.CommissionerId = p"
+                                              SportLeagueLevel="@SportLeagueLevel.NationalBasketballAssociation" />
+                    </ContentColumn2>
+                </DivRowCol3>
+            </AdditionalContent>
+        </MemorabiliaItemEditor>
     </Content>
 </EditPage>

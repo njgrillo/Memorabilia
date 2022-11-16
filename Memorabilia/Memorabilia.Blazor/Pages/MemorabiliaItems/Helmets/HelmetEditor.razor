@@ -21,79 +21,41 @@
                                  MemorabiliaItemStep="ViewModel.MemorabiliaItemStep" />
     </TimelineContent>
     <Content>
-        <DivRowCol3>
-            <Content>
-                <ItemTypeLevelDropDown ItemType="ViewModel.ItemType"
-                                       SelectedValue="ViewModel.LevelTypeId"
-                                       SelectionChanged="(p) => ViewModel.LevelTypeId = p" />
-            </Content>
-            <ContentColumn2>
-                <ItemTypeBrandDropDown ItemType="ViewModel.ItemType"
-                                       SelectedValue="ViewModel.BrandId"
-                                       SelectionChanged="(p) => ViewModel.BrandId = p" />
-            </ContentColumn2>
-            <ContentColumn3>
-                <ItemTypeSizeDropDown ItemType="ViewModel.ItemType"
-                                      SelectedValue="@ViewModel.SizeId"
-                                      SelectionChanged="(p) => ViewModel.SizeId = p"/> 
-            </ContentColumn3>
-            <ContentColumn4>
-                <SportDropDown MultiSelect="true"
-                               SelectedItems="ViewModel.SportIds"
-                               SelectedItemsChanged="(p) => ViewModel.SportIds = p.ToList()" />
-            </ContentColumn4>
-        </DivRowCol3>
-        <DivRowCol3 HideColumn1="@(!ViewModel.DisplayGameStyle)"
-                    HideColumn2="@(!ViewModel.DisplayGameDate)">
-            <Content>
-                <ItemTypeGameStyleDropDown ItemType="ViewModel.ItemType"
-                                           SelectedValue="ViewModel.GameStyleTypeId"
-                                           SelectionChanged="(p) => ViewModel.GameStyleTypeId = p" /> 
-            </Content>
-            <ContentColumn2>
-                <MudDatePicker @bind-Date="ViewModel.GameDate"
-                               DateFormat="MM/dd/yyyy"
-                               Editable="true"
-                               Label="Game Date"
-                               Mask="@(new DateMask("MM/dd/yyyy"))"
-                               Variant="Variant.Outlined" />
-            </ContentColumn2>
-        </DivRowCol3>
-        <DivRowCol3 HideColumn2="@(!ViewModel.DisplayHelmetQualityType)"
-                    HideColumn3="@(!ViewModel.DisplayHelmetFinish)">
-            <Content>
-                <HelmetTypeDropDown GameStyleType="ViewModel.GameStyleType" 
-                                    SelectedValue="ViewModel.HelmetTypeId"
-                                    SelectionChanged="(p) => ViewModel.HelmetTypeId = p" /> 
-            </Content>
-            <ContentColumn2>
-                <DivHidden >
+        <MemorabiliaItemEditor DisplayMultiPersonSelector="true"
+                               DisplayMultiSportSelector="true"
+                               DisplayMultiTeamSelector="true"
+                               TItem="SaveHelmetViewModel"
+                               ViewModel="ViewModel">
+            <AdditionalContent>
+                <DivRowCol3 HideColumn2="@(!ViewModel.DisplayHelmetQualityType)"
+                            HideColumn3="@(!ViewModel.DisplayHelmetFinish)">
                     <Content>
-                        <HelmetQualityTypeDropDown Disabled="!ViewModel.CanEditHelmetQualityType"
-                                                   SelectedValue="ViewModel.HelmetQualityTypeId"
-                                                   SelectionChanged="(p) => ViewModel.HelmetQualityTypeId = p" />
+                        <HelmetTypeDropDown GameStyleType="ViewModel.GameStyleType" 
+                                            SelectedValue="ViewModel.HelmetTypeId"
+                                            SelectionChanged="(p) => ViewModel.HelmetTypeId = p" /> 
                     </Content>
-                </DivHidden> 
-            </ContentColumn2>
-            <ContentColumn3>
-                <HelmetFinishDropDown SelectedValue="ViewModel.HelmetFinishId"
-                                      SelectionChanged="(p) => ViewModel.HelmetFinishId = p" /> 
-            </ContentColumn3>
-        </DivRowCol3>
-        <DivRowCol3>
-            <Content>
-                <BooleanCheckBox Checked="@ViewModel.Throwback"
-                                 CheckedChanged="(p) => ViewModel.Throwback = p"
-                                 Label="Is a Throwback?" />
-            </Content>
-        </DivRowCol3>
-        <MultiPersonSelector CanToggle="true"
-                             ItemType="ViewModel.ItemType"
-                             SelectedPeople="ViewModel.People"
-                             SelectedPeopleChanged="@((people) => ViewModel.People = people)" />
-        <MultiTeamSelector CanToggle="true" 
-                           ItemType="ViewModel.ItemType"
-                           SelectedTeams="ViewModel.Teams"
-                           SelectedTeamsChanged="@((teams) => ViewModel.Teams = teams)" />
+                    <ContentColumn2>
+                        <DivHidden >
+                            <Content>
+                                <HelmetQualityTypeDropDown Disabled="!ViewModel.CanEditHelmetQualityType"
+                                                           SelectedValue="ViewModel.HelmetQualityTypeId"
+                                                           SelectionChanged="(p) => ViewModel.HelmetQualityTypeId = p" />
+                            </Content>
+                        </DivHidden> 
+                    </ContentColumn2>
+                    <ContentColumn3>
+                        <HelmetFinishDropDown SelectedValue="ViewModel.HelmetFinishId"
+                                              SelectionChanged="(p) => ViewModel.HelmetFinishId = p" /> 
+                    </ContentColumn3>
+                </DivRowCol3>
+                <DivRowCol3>
+                    <Content>
+                        <BooleanCheckBox Checked="@ViewModel.Throwback"
+                                         CheckedChanged="(p) => ViewModel.Throwback = p"
+                                         Label="Is a Throwback?" />
+                    </Content>
+                </DivRowCol3>
+            </AdditionalContent>
+        </MemorabiliaItemEditor>        
     </Content>
 </EditPage>

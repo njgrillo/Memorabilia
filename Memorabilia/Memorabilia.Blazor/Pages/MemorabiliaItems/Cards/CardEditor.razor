@@ -21,58 +21,34 @@
                                  MemorabiliaItemStep="ViewModel.MemorabiliaItemStep" />
     </TimelineContent>
     <Content>
-        <DivRowCol3>
-            <Content>
-                <ItemTypeLevelDropDown ItemType="ViewModel.ItemType"
-                                       SelectedValue="ViewModel.LevelTypeId"
-                                       SelectionChanged="(p) => ViewModel.LevelTypeId = p" />
-            </Content>
-            <ContentColumn2>
-                <ItemTypeBrandDropDown ItemType="ViewModel.ItemType"
-                                       SelectedValue="ViewModel.BrandId"
-                                       SelectionChanged="(p) => ViewModel.BrandId = p" />
-            </ContentColumn2>
-        </DivRowCol3>
-        <DivRowCol3>
-            <Content>
-                 <ItemTypeSizeDropDown ItemType="ViewModel.ItemType"
-                                       SelectedValue="@ViewModel.SizeId"
-                                       SelectionChanged="(p) => ViewModel.SizeId = p" />
-            </Content>
-            <ContentColumn2>
-                <OrientationDropDown SelectedValue="ViewModel.OrientationId"
-                                     SelectionChanged="(p) => ViewModel.OrientationId = p" />                
-            </ContentColumn2>
-        </DivRowCol3>
-        <DivRowCol3>
-            <Content>
-                <NullableIntField Label="Year"
-                                  Value="ViewModel.Year"
-                                  ValueChanged="@((p) => ViewModel.Year = p)" /> 
-            </Content>
-            <ContentColumn2>
-                <BooleanCheckBox Checked="@ViewModel.Licensed"
-                                 CheckedChanged="(p) => ViewModel.Licensed = p"
-                                 Label="Licensed" />
-            </ContentColumn2>
-            <ContentColumn3>
-                <BooleanCheckBox Checked="@ViewModel.Custom"
-                                 CheckedChanged="(p) => ViewModel.Custom = p"
-                                 Label="Custom" />
-            </ContentColumn3>
-        </DivRowCol3>             
-        <MultiPersonSelector CanToggle="true"
-                             ItemType="ViewModel.ItemType"
-                             People="ViewModel.People" />         
-        <DivRowCol3>
-            <Content>
-                <SportDropDown MultiSelect="true"
-                               SelectedItems="ViewModel.SportIds"
-                               SelectedItemsChanged="(p) => ViewModel.SportIds = p.ToList()" />
-            </Content>
-       </DivRowCol3>
-        <MultiTeamSelector CanToggle="true" 
-                           ItemType="ViewModel.ItemType"
-                           Teams="ViewModel.Teams" />
+        <MemorabiliaItemEditor DisplayMultiPersonSelector="true"
+                               DisplayMultiSportSelector="true"
+                               DisplayMultiTeamSelector="true"
+                               TItem="SaveCardViewModel"
+                               ViewModel="ViewModel">
+            <AdditionalContent>
+                <DivRowCol3>
+                    <Content>
+                        <OrientationDropDown SelectedValue="ViewModel.OrientationId"
+                                             SelectionChanged="(p) => ViewModel.OrientationId = p" />                
+                    </Content>
+                    <ContentColumn2>
+                        <NullableIntField Label="Year"
+                                          Value="ViewModel.Year"
+                                          ValueChanged="@((p) => ViewModel.Year = p)" />
+                    </ContentColumn2>
+                    <ContentColumn3>
+                        <BooleanCheckBox Checked="@ViewModel.Licensed"
+                                         CheckedChanged="(p) => ViewModel.Licensed = p"
+                                         Label="Licensed" />
+                    </ContentColumn3>
+                    <ContentColumn4>
+                        <BooleanCheckBox Checked="@ViewModel.Custom"
+                                         CheckedChanged="(p) => ViewModel.Custom = p"
+                                         Label="Custom" />
+                    </ContentColumn4>
+                </DivRowCol3>
+            </AdditionalContent>
+        </MemorabiliaItemEditor>     
     </Content>
 </EditPage>

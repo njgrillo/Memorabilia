@@ -21,46 +21,32 @@
                                  MemorabiliaItemStep="ViewModel.MemorabiliaItemStep" />
     </TimelineContent>
     <Content>
-        <DivRowCol3>
-            <Content>
-                <ItemTypeBrandDropDown ItemType="ViewModel.ItemType"
-                                       SelectedValue="ViewModel.BrandId"
-                                       SelectionChanged="(p) => ViewModel.BrandId = p" />
-            </Content>
-            <ContentColumn2>
-                <BammerTypeDropDown SelectedValue="ViewModel.BammerTypeId"
-                                    SelectionChanged="(p) => ViewModel.BammerTypeId = p" />               
-            </ContentColumn2>
-            <ContentColumn3>
-                <ItemTypeLevelDropDown ItemType="ViewModel.ItemType"
-                                       SelectedValue="ViewModel.LevelTypeId"
-                                       SelectionChanged="(p) => ViewModel.LevelTypeId = p" />
-            </ContentColumn3>
-            <ContentColumn4>
-                <SportDropDown SelectedValue="@ViewModel.SportId"
-                               SelectionChanged="(p) => ViewModel.SportId = p" />
-            </ContentColumn4>
-        </DivRowCol3>
-        <DivRowCol3>
-            <Content>
-                <NullableIntField Label="Year"
-                                  Maximum="int.MaxValue"
-                                  Value="ViewModel.Year"
-                                  ValueChanged="@((p) => ViewModel.Year = p)" />                
-            </Content>
-            <ContentColumn2>
-                <BooleanCheckBox Checked="@ViewModel.InPackage"
-                                 CheckedChanged="(p) => ViewModel.InPackage = p"
-                                 Label="In Package" />
-            </ContentColumn2>
-        </DivRowCol3>
-        <MultiPersonSelector CanToggle="true"
-                             ItemType="ViewModel.ItemType"
-                             SelectedPeople="ViewModel.People"
-                             SelectedPeopleChanged="@((people) => ViewModel.People = people)" />
-        <MultiTeamSelector CanToggle="true" 
-                           ItemType="ViewModel.ItemType"
-                           SelectedTeams="ViewModel.Teams"
-                           SelectedTeamsChanged="@((teams) => ViewModel.Teams = teams)" />
+        <MemorabiliaItemEditor DisplayItemTypeGameStyle="false" 
+                               DisplayItemTypeSize="false"
+                               DisplayMultiPersonSelector="true"
+                               DisplayMultiTeamSelector="true"
+                               DisplaySingleSportSelector="true"
+                               TItem="SaveBammerViewModel"
+                               ViewModel="ViewModel">
+            <AdditionalContent>
+                <DivRowCol3>
+                    <Content>
+                        <BammerTypeDropDown SelectedValue="ViewModel.BammerTypeId"
+                                            SelectionChanged="(p) => ViewModel.BammerTypeId = p" />               
+                    </Content>
+                    <ContentColumn2>
+                        <NullableIntField Label="Year"
+                                          Maximum="int.MaxValue"
+                                          Value="ViewModel.Year"
+                                          ValueChanged="@((p) => ViewModel.Year = p)" />                
+                    </ContentColumn2>
+                    <ContentColumn3>
+                        <BooleanCheckBox Checked="@ViewModel.InPackage"
+                                         CheckedChanged="(p) => ViewModel.InPackage = p"
+                                         Label="In Package" />
+                    </ContentColumn3>
+                </DivRowCol3>
+            </AdditionalContent>
+        </MemorabiliaItemEditor>        
     </Content>
 </EditPage>

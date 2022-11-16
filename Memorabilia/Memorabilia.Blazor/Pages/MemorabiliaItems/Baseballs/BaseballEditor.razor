@@ -21,91 +21,57 @@
                                  MemorabiliaItemStep="ViewModel.MemorabiliaItemStep" />
     </TimelineContent>
     <Content>
-        <DivRowCol3 HideColumn3="@(!ViewModel.DisplayGameStyleType)"
-                    HideColumn4="@(!ViewModel.DisplayBaseballType)">
-            <Content>
-                <ItemTypeBrandDropDown ItemType="ViewModel.ItemType"
-                                       SelectedValue="ViewModel.BrandId"
-                                       SelectionChanged="(p) => ViewModel.BrandId = p" />
-            </Content>
-            <ContentColumn2>
-                <ItemTypeLevelDropDown ItemType="ViewModel.ItemType"
-                                       SelectedValue="ViewModel.LevelTypeId"
-                                       SelectionChanged="(p) => ViewModel.LevelTypeId = p" />
-            </ContentColumn2>
-            <ContentColumn3>
-                <ItemTypeGameStyleDropDown ItemType="ViewModel.ItemType"
-                                           SelectedValue="ViewModel.GameStyleTypeId"
-                                           SelectionChanged="(p) => ViewModel.GameStyleTypeId = p" />
-            </ContentColumn3>
-            <ContentColumn4>                
-                <BaseballTypeDropDown GameStyleType="ViewModel.GameStyleType" 
-                                      SelectedValue="ViewModel.BaseballTypeId"
-                                      SelectionChanged="(p) => ViewModel.BaseballTypeId = p" />
-            </ContentColumn4>
-        </DivRowCol3>
-        <DivRowCol3 HideColumn2="@(!ViewModel.DisplayCommissioner && !ViewModel.DisplayLeaguePresident)"
-                    HideColumn3="@(!ViewModel.DisplayGameDate)">
-            <Content>
-                <ItemTypeSizeDropDown ItemType="ViewModel.ItemType"
-                                      SelectedValue="@ViewModel.SizeId"
-                                      SelectionChanged="(p) => ViewModel.SizeId = p" />
-            </Content>
-            <ContentColumn2>
-                <PrettyBlazor.Condition Evaluation="ViewModel.DisplayCommissioner">
-                    <Match>
-                        <CommissionerDropDown SelectedValue="@ViewModel.CommissionerId"
-                                              SelectionChanged="(p) => ViewModel.CommissionerId = p"
-                                              SportLeagueLevel="SportLeagueLevel.MajorLeagueBaseball" />
-                    </Match>
-                </PrettyBlazor.Condition>
-                <PrettyBlazor.Condition Evaluation="ViewModel.DisplayLeaguePresident">
-                    <Match>
-                        <LeaguePresidentDropDown League="@ViewModel.League" 
-                                                 SelectedValue="@ViewModel.LeaguePresidentId"
-                                                 SelectionChanged="(p) => ViewModel.LeaguePresidentId = p"
-                                                 SportLeagueLevel="SportLeagueLevel.MajorLeagueBaseball" />
-                    </Match>
-                </PrettyBlazor.Condition>                                    
-            </ContentColumn2>
-            <ContentColumn3>
-                <MudDatePicker @bind-Date="ViewModel.GameDate"
-                               DateFormat="MM/dd/yyyy"
-                               Editable="true"
-                               Label="Game Date"
-                               Mask="@(new DateMask("MM/dd/yyyy"))"
-                               Variant="Variant.Outlined" />               
-            </ContentColumn3>
-            <ContentColumn4>
-                <PrettyBlazor.Condition Evaluation="ViewModel.DisplayBaseballTypeYear">
-                    <Match>
-                        <NullableIntField Label="Year"
-                                          Maximum="int.MaxValue"
-                                          Value="ViewModel.BaseballTypeYear"
-                                          ValueChanged="@((p) => ViewModel.BaseballTypeYear = p)" />
-                    </Match>
-                </PrettyBlazor.Condition>
-                <PrettyBlazor.Condition Evaluation="ViewModel.DisplayBaseballTypeAnniversary">
-                    <Match>
-                        <TextField HelperText="Example: 25th"
-                                   Label="Anniversary"
-                                   MaxLength="5"
-                                   SelectedText="@ViewModel.BaseballTypeAnniversary"
-                                   SelectedTextChanged="@((p) => ViewModel.BaseballTypeAnniversary = p)" />
-                    </Match>
-                </PrettyBlazor.Condition>  
-            </ContentColumn4>
-        </DivRowCol3>
-        <PersonSelector CanFilterBySport="true"
-                        CanToggle="true"
-                        ItemType="ViewModel.ItemType"
-                        SelectedPerson="ViewModel.Person"
-                        SelectedPersonChanged="(p) => ViewModel.Person = p"
-                        Sport="ViewModel.Sport" />  
-        <MultiTeamSelector CanToggle="true" 
-                           ItemType="ViewModel.ItemType"
-                           SelectedTeams="ViewModel.Teams"
-                           SelectedTeamsChanged="@((teams) => ViewModel.Teams = teams)" />
+        <MemorabiliaItemEditor DisplaySinglePersonSelector="true"
+                               DisplayMultiTeamSelector="true"
+                               TItem="SaveBaseballViewModel"
+                               ViewModel="ViewModel">
+            <AdditionalContent>
+                <DivRowCol3 HideColumn1="@(!ViewModel.DisplayBaseballType)"
+                            HideColumn2="@(!ViewModel.DisplayCommissioner && !ViewModel.DisplayLeaguePresident)">
+                    <Content>                
+                        <BaseballTypeDropDown GameStyleType="ViewModel.GameStyleType" 
+                                              SelectedValue="ViewModel.BaseballTypeId"
+                                              SelectionChanged="(p) => ViewModel.BaseballTypeId = p" />
+                    </Content>
+                    <ContentColumn2>
+                        <PrettyBlazor.Condition Evaluation="ViewModel.DisplayCommissioner">
+                            <Match>
+                                <CommissionerDropDown SelectedValue="@ViewModel.CommissionerId"
+                                                      SelectionChanged="(p) => ViewModel.CommissionerId = p"
+                                                      SportLeagueLevel="SportLeagueLevel.MajorLeagueBaseball" />
+                            </Match>
+                        </PrettyBlazor.Condition>
+                        <PrettyBlazor.Condition Evaluation="ViewModel.DisplayLeaguePresident">
+                            <Match>
+                                <LeaguePresidentDropDown League="@ViewModel.League" 
+                                                         SelectedValue="@ViewModel.LeaguePresidentId"
+                                                         SelectionChanged="(p) => ViewModel.LeaguePresidentId = p"
+                                                         SportLeagueLevel="SportLeagueLevel.MajorLeagueBaseball" />
+                            </Match>
+                        </PrettyBlazor.Condition>                                    
+                    </ContentColumn2>
+                    <ContentColumn3>
+                        <PrettyBlazor.Condition Evaluation="ViewModel.DisplayBaseballTypeYear">
+                            <Match>
+                                <NullableIntField Label="Year"
+                                                  Maximum="int.MaxValue"
+                                                  Value="ViewModel.BaseballTypeYear"
+                                                  ValueChanged="@((p) => ViewModel.BaseballTypeYear = p)" />
+                            </Match>
+                        </PrettyBlazor.Condition>
+                        <PrettyBlazor.Condition Evaluation="ViewModel.DisplayBaseballTypeAnniversary">
+                            <Match>
+                                <TextField HelperText="Example: 25th"
+                                           Label="Anniversary"
+                                           MaxLength="5"
+                                           SelectedText="@ViewModel.BaseballTypeAnniversary"
+                                           SelectedTextChanged="@((p) => ViewModel.BaseballTypeAnniversary = p)" />
+                            </Match>
+                        </PrettyBlazor.Condition>  
+                    </ContentColumn3>
+                </DivRowCol3>
+            </AdditionalContent>
+        </MemorabiliaItemEditor>         
     </Content>
 </EditPage>
 

@@ -2,9 +2,15 @@
 
 namespace Memorabilia.Application.Features.Memorabilia.HockeyStick;
 
-public class SaveHockeyStickViewModel : SaveItemViewModel
+public class SaveHockeyStickViewModel : MemorabiliaItemEditViewModel
 {
-    public SaveHockeyStickViewModel() { }
+    public SaveHockeyStickViewModel()
+    { 
+        BrandId = Brand.CCM.Id;
+        GameStyleTypeId = GameStyleType.None.Id;
+        LevelTypeId = LevelType.Professional.Id;
+        SizeId = Size.Full.Id;
+    }
 
     public SaveHockeyStickViewModel(HockeyStickViewModel viewModel)
     {
@@ -22,43 +28,15 @@ public class SaveHockeyStickViewModel : SaveItemViewModel
             Team = new SaveTeamViewModel(new TeamViewModel(viewModel.Teams.First().Team));
     }
 
-    public override string BackNavigationPath => $"Memorabilia/{EditModeType.Update.Name}/{MemorabiliaId}";
+    public override bool DisplayGameDate => GameStyleType.IsGameWorthly(GameStyleType) && DisplayGameStyleType;
 
-    [Required]
-    [Range(1, int.MaxValue, ErrorMessage = "Brand is required.")]
-    public int BrandId { get; set; } = Brand.CCM.Id;
-
-    public bool DisplayGameDate => GameStyleType.IsGameWorthly(GameStyleType) && DisplayGameStyle;
-
-    public bool DisplayGameStyle => SizeId == Size.Full.Id;
-
-    public override EditModeType EditModeType => MemorabiliaId > 0 ? EditModeType.Update : EditModeType.Add;
-
-    public override string ExitNavigationPath => "Memorabilia/Items";
-
-    public DateTime? GameDate { get; set; }
-
-    public GameStyleType GameStyleType => GameStyleType.Find(GameStyleTypeId);
-
-    public int GameStyleTypeId { get; set; } = GameStyleType.None.Id;
+    public override bool DisplayGameStyleType => SizeId == Size.Full.Id;
 
     public override string ImageFileName => Domain.Constants.ImageFileName.HockeyStick;
 
     public override ItemType ItemType => ItemType.HockeyStick;
 
-    [Required]
-    [Range(1, int.MaxValue, ErrorMessage = "Level is required.")]
-    public int LevelTypeId { get; set; } = LevelType.Professional.Id;
+    public override Sport Sport => Sport.Hockey;
 
-    public SavePersonViewModel Person { get; set; } 
-
-    [Required]
-    [Range(1, int.MaxValue, ErrorMessage = "Size is required.")]
-    public int SizeId { get; set; } = Size.Full.Id;
-
-    public Sport Sport => Sport.Hockey;
-
-    public SportLeagueLevel SportLeagueLevel => SportLeagueLevel.NationalHockeyLeague;
-
-    public SaveTeamViewModel Team { get; set; } 
+    public override SportLeagueLevel SportLeagueLevel => SportLeagueLevel.NationalHockeyLeague;
 }

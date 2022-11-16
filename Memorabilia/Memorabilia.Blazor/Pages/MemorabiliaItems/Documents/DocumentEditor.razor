@@ -21,20 +21,12 @@
                                  MemorabiliaItemStep="ViewModel.MemorabiliaItemStep" />
     </TimelineContent>
     <Content>
-        <DivRowCol3>
-            <Content>
-                <ItemTypeSizeDropDown ItemType="ViewModel.ItemType"
-                                      SelectedValue="@ViewModel.SizeId"
-                                      SelectionChanged="(p) => ViewModel.SizeId = p" />
-            </Content>
-        </DivRowCol3>
-        <MultiPersonSelector CanToggle="true"
-                             ItemType="ViewModel.ItemType"
-                             SelectedPeople="ViewModel.People"
-                             SelectedPeopleChanged="@((people) => ViewModel.People = people)" />
-        <MultiTeamSelector CanToggle="true"
-                           ItemType="ViewModel.ItemType"
-                           SelectedTeams="ViewModel.Teams"
-                           SelectedTeamsChanged="@((teams) => ViewModel.Teams = teams)" />
+        <MemorabiliaItemEditor DisplayItemTypeBrand="false"
+                               DisplayItemTypeGameStyle="false"
+                               DisplayItemTypeLevel="false"
+                               DisplayMultiPersonSelector="true"
+                               DisplayMultiSportSelector="true"
+                               TItem="SaveDocumentViewModel"
+                               ViewModel="ViewModel" />
     </Content>
 </EditPage>

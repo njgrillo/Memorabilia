@@ -2,9 +2,12 @@
 
 namespace Memorabilia.Application.Features.Memorabilia.Drum;
 
-public class SaveDrumViewModel : SaveItemViewModel
+public class SaveDrumViewModel : MemorabiliaItemEditViewModel
 {
-    public SaveDrumViewModel() { }
+    public SaveDrumViewModel() 
+    { 
+        BrandId = Brand.Muslady.Id;
+    }
 
     public SaveDrumViewModel(DrumViewModel viewModel)
     {
@@ -13,21 +16,7 @@ public class SaveDrumViewModel : SaveItemViewModel
         People = viewModel.People.Select(person => new SavePersonViewModel(new PersonViewModel(person.Person))).ToList();
     }
 
-    public override string BackNavigationPath => $"Memorabilia/{EditModeType.Update.Name}/{MemorabiliaId}";
-
-    public Brand Brand => Brand.Find(BrandId);
-
-    [Required]
-    [Range(1, int.MaxValue, ErrorMessage = "Brand is required.")]
-    public int BrandId { get; set; } = Brand.Muslady.Id;
-
-    public override EditModeType EditModeType => MemorabiliaId > 0 ? EditModeType.Update : EditModeType.Add;
-
-    public override string ExitNavigationPath => "Memorabilia/Items";
-
     public override string ImageFileName => Domain.Constants.ImageFileName.Drum;
 
     public override ItemType ItemType => ItemType.Drum;
-
-    public List<SavePersonViewModel> People { get; set; } = new();
 }

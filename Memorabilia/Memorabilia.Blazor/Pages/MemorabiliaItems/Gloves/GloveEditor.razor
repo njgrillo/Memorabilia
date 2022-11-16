@@ -21,54 +21,19 @@
                                  MemorabiliaItemStep="ViewModel.MemorabiliaItemStep" />
     </TimelineContent>
     <Content>
-        <DivRowCol3>
-            <Content>
-                <ItemTypeLevelDropDown ItemType="ViewModel.ItemType"
-                                       SelectedValue="ViewModel.LevelTypeId"
-                                       SelectionChanged="(p) => ViewModel.LevelTypeId = p" />
-            </Content>
-            <ContentColumn2>
-                <ItemTypeBrandDropDown ItemType="ViewModel.ItemType"
-                                       SelectedValue="ViewModel.BrandId"
-                                       SelectionChanged="(p) => ViewModel.BrandId = p"/>
-            </ContentColumn2>
-            <ContentColumn3>
-                <GloveTypeDropDown SelectedValue="ViewModel.GloveTypeId"
-                                   SelectionChanged="(p) => ViewModel.GloveTypeId = p" />
-            </ContentColumn3>
-            <ContentColumn4>
-                <ItemTypeSizeDropDown ItemType="ViewModel.ItemType"
-                                      SelectedValue="@ViewModel.SizeId"
-                                      SelectionChanged="(p) => ViewModel.SizeId = p" />
-            </ContentColumn4>
-        </DivRowCol3>
-        <DivRowCol3 HideColumn2="@(!ViewModel.DisplayGameStyle)"
-                    HideColumn3="@(!ViewModel.DisplayGameDate)">
-            <Content>
-                <SportDropDown SelectedValue="@ViewModel.SportId"
-                               SelectionChanged="(p) => ViewModel.SportId = p" />
-            </Content>
-            <ContentColumn2>
-                <ItemTypeGameStyleDropDown ItemType="ViewModel.ItemType"
-                                           SelectedValue="ViewModel.GameStyleTypeId"
-                                           SelectionChanged="(p) => ViewModel.GameStyleTypeId = p"/> 
-            </ContentColumn2>
-            <ContentColumn3>
-                <MudDatePicker @bind-Date="ViewModel.GameDate"
-                               DateFormat="MM/dd/yyyy"
-                               Editable="true"
-                               Label="Game Date"
-                               Mask="@(new DateMask("MM/dd/yyyy"))"
-                               Variant="Variant.Outlined" />
-            </ContentColumn3>
-        </DivRowCol3>
-        <MultiPersonSelector CanToggle="true"
-                             ItemType="ViewModel.ItemType"
-                             SelectedPeople="ViewModel.People"
-                             SelectedPeopleChanged="@((people) => ViewModel.People = people)" />
-        <MultiTeamSelector CanToggle="true"
-                           ItemType="ViewModel.ItemType"
-                           SelectedTeams="ViewModel.Teams"
-                           SelectedTeamsChanged="@((teams) => ViewModel.Teams = teams)" />
+        <MemorabiliaItemEditor DisplayMultiPersonSelector="true"
+                               DisplayMultiTeamSelector="true"
+                               DisplaySingleSportSelector="true"
+                               TItem="SaveGloveViewModel"
+                               ViewModel="ViewModel">
+            <AdditionalContent>
+                <DivRowCol3>
+                    <Content>
+                        <GloveTypeDropDown SelectedValue="ViewModel.GloveTypeId"
+                                           SelectionChanged="(p) => ViewModel.GloveTypeId = p" />
+                    </Content>
+                </DivRowCol3>
+            </AdditionalContent>
+        </MemorabiliaItemEditor>
     </Content>
 </EditPage>

@@ -2,9 +2,14 @@
 
 namespace Memorabilia.Application.Features.Memorabilia.Pylon;
 
-public class SavePylonViewModel : SaveItemViewModel
+public class SavePylonViewModel : MemorabiliaItemEditViewModel
 {
-    public SavePylonViewModel() { }
+    public SavePylonViewModel() 
+    {
+        GameStyleTypeId = GameStyleType.None.Id;
+        LevelTypeId = LevelType.Professional.Id;
+        SizeId = Size.Standard.Id;
+    }
 
     public SavePylonViewModel(PylonViewModel viewModel)
     {
@@ -18,33 +23,11 @@ public class SavePylonViewModel : SaveItemViewModel
             Team = new SaveTeamViewModel(new TeamViewModel(viewModel.Teams.First().Team));
     }
 
-    public override string BackNavigationPath => $"Memorabilia/{EditModeType.Update.Name}/{MemorabiliaId}";
-
-    public bool DisplayGameDate => GameStyleType == GameStyleType.GameUsed;
-
-    public override EditModeType EditModeType => MemorabiliaId > 0 ? EditModeType.Update : EditModeType.Add;
-
-    public override string ExitNavigationPath => "Memorabilia/Items";
-
-    public DateTime? GameDate { get; set; }
-
-    public GameStyleType GameStyleType => GameStyleType.Find(GameStyleTypeId);
-
-    public int GameStyleTypeId { get; set; } = GameStyleType.None.Id;
-
     public override string ImageFileName => Domain.Constants.ImageFileName.Pylon;
 
     public override ItemType ItemType => ItemType.Pylon;
 
-    [Required]
-    [Range(1, int.MaxValue, ErrorMessage = "Level is required.")]
-    public int LevelTypeId { get; set; } = LevelType.Professional.Id;
+    public override Sport Sport => Sport.Tennis;
 
-    [Required]
-    [Range(1, int.MaxValue, ErrorMessage = "Size is required.")]
-    public int SizeId { get; set; } = Size.Standard.Id;
-
-    public SportLeagueLevel SportLeagueLevel => SportLeagueLevel.NationalFootballLeague;
-
-    public SaveTeamViewModel Team { get; set; }
+    public override SportLeagueLevel SportLeagueLevel => SportLeagueLevel.NationalFootballLeague;
 }

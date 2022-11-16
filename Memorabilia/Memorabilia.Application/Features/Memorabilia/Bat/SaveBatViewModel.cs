@@ -2,9 +2,14 @@
 
 namespace Memorabilia.Application.Features.Memorabilia.Bat;
 
-public class SaveBatViewModel : SaveItemViewModel
+public class SaveBatViewModel : MemorabiliaItemEditViewModel
 {
-    public SaveBatViewModel() { }
+    public SaveBatViewModel() 
+    {
+        BrandId = Brand.Rawlings.Id;
+        GameStyleTypeId = GameStyleType.None.Id;
+        SizeId = Size.Full.Id;
+    }
 
     public SaveBatViewModel(BatViewModel viewModel)
     {
@@ -24,31 +29,13 @@ public class SaveBatViewModel : SaveItemViewModel
             Team = new SaveTeamViewModel(new TeamViewModel(viewModel.Teams.First().Team));
     }
 
-    public override string BackNavigationPath => $"Memorabilia/{EditModeType.Update.Name}/{MemorabiliaId}";
-
     public int BatTypeId { get; set; } = BatType.BigStick.Id;
-
-    [Required]
-    [Range(1, int.MaxValue, ErrorMessage = "Brand is required.")]
-    public int BrandId { get; set; } = Brand.Rawlings.Id;
 
     public int ColorId { get; set; } = Color.Black.Id;
 
-    public bool DisplayGameDate => GameStyleType.IsGameWorthly(GameStyleType) && DisplayGameStyle;
+    public override bool DisplayGameDate => GameStyleType.IsGameWorthly(GameStyleType) && DisplayGameStyleType;
 
-    public bool DisplayGameStyle => SizeId == Size.Full.Id;
-
-    public override EditModeType EditModeType => MemorabiliaId > 0 ? EditModeType.Update : EditModeType.Add;
-
-    public override string ExitNavigationPath => "Memorabilia/Items";
-
-    public DateTime? GameDate { get; set; }
-
-    public GameStyleType GameStyleType => GameStyleType.Find(GameStyleTypeId);
-
-    [Required]
-    [Range(1, int.MaxValue, ErrorMessage = "Game Style Type is required.")]
-    public int GameStyleTypeId { get; set; } = GameStyleType.None.Id;
+    public override bool DisplayGameStyleType => SizeId == Size.Full.Id;
 
     public override string ImageFileName => Domain.Constants.ImageFileName.Bat;
 
@@ -56,15 +43,7 @@ public class SaveBatViewModel : SaveItemViewModel
 
     public int? Length { get; set; }
 
-    public SavePersonViewModel Person { get; set; }
+    public override Sport Sport => Sport.Baseball;
 
-    [Required]
-    [Range(1, int.MaxValue, ErrorMessage = "Size is required.")]
-    public int SizeId { get; set; } = Size.Full.Id;
-
-    public Sport Sport => Sport.Baseball;
-
-    public SportLeagueLevel SportLeagueLevel => SportLeagueLevel.MajorLeagueBaseball;
-
-    public SaveTeamViewModel Team { get; set; }
+    public override SportLeagueLevel SportLeagueLevel => SportLeagueLevel.MajorLeagueBaseball;
 }

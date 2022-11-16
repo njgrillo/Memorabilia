@@ -21,52 +21,35 @@
                                  MemorabiliaItemStep="ViewModel.MemorabiliaItemStep" />
     </TimelineContent>
     <Content>
-        <DivRowCol3>
-            <Content>
-                <ItemTypeBrandDropDown ItemType="ViewModel.ItemType"
-                                       SelectedValue="ViewModel.BrandId" 
-                                       SelectionChanged="(p) => ViewModel.BrandId = p" />
-            </Content>
-            <ContentColumn2>
-                <ItemTypeSizeDropDown ItemType="ViewModel.ItemType"
-                                      SelectedValue="@ViewModel.SizeId"
-                                      SelectionChanged="(p) => ViewModel.SizeId = p" /> 
-            </ContentColumn2>
-        </DivRowCol3>
-        <DivRowCol3>
-            <Content>
-                <OrientationDropDown SelectedValue="ViewModel.OrientationId"
-                                     SelectionChanged="(p) => ViewModel.OrientationId = p" />
-            </Content>
-        </DivRowCol3>
-        <DivRowCol3>
-            <Content>
-                <BooleanCheckBox Checked="@ViewModel.Framed"
-                                 CheckedChanged="(p) => ViewModel.Framed = p"
-                                 Label="Framed" />
-            </Content>
-        </DivRowCol3>
-        <DivRowCol3>
-            <Content>
-                <BooleanCheckBox Checked="@ViewModel.Matted"
-                                 CheckedChanged="(p) => ViewModel.Matted = p"  
-                                 Label="Matted" /> 
-            </Content>
-        </DivRowCol3>
-        <DivRowCol3>
-            <Content>
-                <SportDropDown MultiSelect="true"
-                               SelectedItems="ViewModel.SportIds"
-                               SelectedItemsChanged="(p) => ViewModel.SportIds = p.ToList()" />
-            </Content>
-        </DivRowCol3>
-        <MultiPersonSelector CanToggle="true"
-                             ItemType="ViewModel.ItemType"
-                             SelectedPeople="ViewModel.People"
-                             SelectedPeopleChanged="@((people) => ViewModel.People = people)" />
-        <MultiTeamSelector CanToggle="true"
-                           ItemType="ViewModel.ItemType"
-                           SelectedTeams="ViewModel.Teams"
-                           SelectedTeamsChanged="@((teams) => ViewModel.Teams = teams)" />
+        <MemorabiliaItemEditor DisplayItemTypeGameStyle="false" 
+                               DisplayItemTypeLevel="false"
+                               DisplayMultiPersonSelector="true"
+                               DisplayMultiSportSelector="true"
+                               DisplayMultiTeamSelector="true"
+                               TItem="SavePaintingViewModel"
+                               ViewModel="ViewModel">
+            <AdditionalContent>
+                <DivRowCol3>
+                    <Content>
+                        <OrientationDropDown SelectedValue="ViewModel.OrientationId"
+                                             SelectionChanged="(p) => ViewModel.OrientationId = p" />
+                    </Content>
+                </DivRowCol3>
+                <DivRowCol3>
+                    <Content>
+                        <BooleanCheckBox Checked="@ViewModel.Framed"
+                                         CheckedChanged="(p) => ViewModel.Framed = p"
+                                         Label="Framed" />
+                    </Content>
+                </DivRowCol3>
+                <DivRowCol3>
+                    <Content>
+                        <BooleanCheckBox Checked="@ViewModel.Matted"
+                                         CheckedChanged="(p) => ViewModel.Matted = p"  
+                                         Label="Matted" /> 
+                    </Content>
+                </DivRowCol3>
+            </AdditionalContent>
+        </MemorabiliaItemEditor>
     </Content>
 </EditPage>

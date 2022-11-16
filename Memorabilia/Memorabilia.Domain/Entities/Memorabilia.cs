@@ -479,7 +479,6 @@ public class Memorabilia : Framework.Library.Domain.Entity.DomainEntity
 
     public void SetGlove(int brandId,
                          DateTime? gameDate,
-                         int? gamePersonId,
                          int? gameStyleTypeId,
                          int? gloveTypeId,
                          int levelTypeId,
@@ -491,7 +490,7 @@ public class Memorabilia : Framework.Library.Domain.Entity.DomainEntity
         SetBrand(brandId);
         SetLevelType(levelTypeId);
         SetSize(sizeId);
-        SetGame(gameStyleTypeId, gamePersonId, gameDate);
+        SetGame(gameStyleTypeId, personIds.FirstOrDefault(), gameDate);
         SetGloveType(gloveTypeId);
         SetPeople(personIds);
         SetTeams(teamIds);
@@ -531,7 +530,6 @@ public class Memorabilia : Framework.Library.Domain.Entity.DomainEntity
 
     public void SetHat(int brandId,
                        DateTime? gameDate,
-                       int? gamePersonId,
                        int? gameStyleTypeId,
                        int levelTypeId,
                        int[] personIds,
@@ -542,7 +540,7 @@ public class Memorabilia : Framework.Library.Domain.Entity.DomainEntity
         SetBrand(brandId);
         SetLevelType(levelTypeId);
         SetSize(sizeId);
-        SetGame(gameStyleTypeId, gamePersonId, gameDate);
+        SetGame(gameStyleTypeId, personIds.FirstOrDefault(), gameDate);
         SetPeople(personIds);
         SetTeams(teamIds);
 

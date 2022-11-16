@@ -21,9 +21,12 @@
                                  MemorabiliaItemStep="ViewModel.MemorabiliaItemStep" />
     </TimelineContent>
     <Content>
-        <MultiPersonSelector CanToggle="true"
-                             ItemType="ViewModel.ItemType"
-                             SelectedPeople="ViewModel.People"
-                             SelectedPeopleChanged="@((people) => ViewModel.People = people)" />
+        <MemorabiliaItemEditor DisplayItemTypeBrand="false"
+                               DisplayItemTypeGameStyle="false"
+                               DisplayItemTypeLevel="false"
+                               DisplayItemTypeSize="false"
+                               DisplayMultiPersonSelector="true"
+                               TItem="SaveCompactDiscViewModel"
+                               ViewModel="ViewModel" />
     </Content>
 </EditPage>

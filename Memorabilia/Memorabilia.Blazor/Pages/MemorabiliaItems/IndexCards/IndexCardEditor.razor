@@ -21,12 +21,10 @@
                                  MemorabiliaItemStep="ViewModel.MemorabiliaItemStep" />
     </TimelineContent>
     <Content>
-        <DivRowCol3>
-            <Content>
-                <ItemTypeSizeDropDown ItemType="ViewModel.ItemType"
-                                      SelectedValue="@ViewModel.SizeId"
-                                      SelectionChanged="(p) => ViewModel.SizeId = p" />
-            </Content>
-        </DivRowCol3>
+        <MemorabiliaItemEditor DisplayItemTypeBrand="false"
+                               DisplayItemTypeGameStyle="false"
+                               DisplayItemTypeLevel="false"
+                               TItem="SaveIndexCardViewModel"
+                               ViewModel="ViewModel" />
     </Content>
 </EditPage>

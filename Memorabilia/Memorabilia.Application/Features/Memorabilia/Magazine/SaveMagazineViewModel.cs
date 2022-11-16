@@ -2,9 +2,12 @@
 
 namespace Memorabilia.Application.Features.Memorabilia.Magazine;
 
-public class SaveMagazineViewModel : SaveItemViewModel
+public class SaveMagazineViewModel : MemorabiliaItemEditViewModel
 {
-    public SaveMagazineViewModel() { }
+    public SaveMagazineViewModel()
+    { 
+        SizeId = Size.Standard.Id;
+    }
 
     public SaveMagazineViewModel(MagazineViewModel viewModel)
     {
@@ -20,17 +23,7 @@ public class SaveMagazineViewModel : SaveItemViewModel
         Teams = viewModel.Teams.Select(team => new SaveTeamViewModel(new TeamViewModel(team.Team))).ToList();
     }
 
-    public override string BackNavigationPath => $"Memorabilia/{EditModeType.Update.Name}/{MemorabiliaId}";
-
-    [Required]
-    [Range(1, int.MaxValue, ErrorMessage = "Brand is required.")]
-    public int BrandId { get; set; }
-
     public DateTime? Date { get; set; }
-
-    public override EditModeType EditModeType => MemorabiliaId > 0 ? EditModeType.Update : EditModeType.Add;
-
-    public override string ExitNavigationPath => "Memorabilia/Items";
 
     public bool Framed { get; set; }
 
@@ -41,14 +34,4 @@ public class SaveMagazineViewModel : SaveItemViewModel
     public bool Matted { get; set; }
 
     public int OrientationId { get; set; }
-
-    public List<SavePersonViewModel> People { get; set; } = new();
-
-    [Required]
-    [Range(1, int.MaxValue, ErrorMessage = "Size is required.")]
-    public int SizeId { get; set; } = Size.Standard.Id;
-
-    public List<int> SportIds { get; set; } = new();
-
-    public List<SaveTeamViewModel> Teams { get; set; } = new();
 }

@@ -2,9 +2,15 @@
 
 namespace Memorabilia.Application.Features.Memorabilia.Basketball;
 
-public class SaveBasketballViewModel : SaveItemViewModel
+public class SaveBasketballViewModel : MemorabiliaItemEditViewModel
 {
-    public SaveBasketballViewModel() { }
+    public SaveBasketballViewModel() 
+    { 
+        BrandId = Brand.Spalding.Id;
+        GameStyleTypeId = GameStyleType.None.Id;
+        LevelTypeId = LevelType.Professional.Id;
+        SizeId = Size.Standard.Id;
+    }
 
     public SaveBasketballViewModel(BasketballViewModel viewModel)
     {
@@ -24,49 +30,19 @@ public class SaveBasketballViewModel : SaveItemViewModel
             Team = new SaveTeamViewModel(new TeamViewModel(viewModel.Teams.First().Team));
     }
 
-    public override string BackNavigationPath => $"Memorabilia/{EditModeType.Update.Name}/{MemorabiliaId}";
-
     public int BasketballTypeId { get; set; } = BasketballType.Official.Id;
-
-    [Required]
-    [Range(1, int.MaxValue, ErrorMessage = "Brand is required.")]
-    public int BrandId { get; set; } = Brand.Spalding.Id;
 
     public int CommissionerId { get; set; }
 
-    public bool DisplayGameDate => GameStyleType.IsGameWorthly(GameStyleType) && DisplayGameStyle;
+    public override bool DisplayGameDate => GameStyleType.IsGameWorthly(GameStyleType) && DisplayGameStyleType;
 
-    public bool DisplayGameStyle => SizeId == Size.Full.Id;
-
-    public override EditModeType EditModeType => MemorabiliaId > 0 ? EditModeType.Update : EditModeType.Add;
-
-    public override string ExitNavigationPath => "Memorabilia/Items";
-
-    public DateTime? GameDate { get; set; }
-
-    public GameStyleType GameStyleType => GameStyleType.Find(GameStyleTypeId);
-
-    [Required]
-    [Range(1, int.MaxValue, ErrorMessage = "Game Style Type is required.")]
-    public int GameStyleTypeId { get; set; } = GameStyleType.None.Id;
+    public override bool DisplayGameStyleType => SizeId == Size.Full.Id;
 
     public override string ImageFileName => Domain.Constants.ImageFileName.Basketball;
 
     public override ItemType ItemType => ItemType.Basketball;
 
-    [Required]
-    [Range(1, int.MaxValue, ErrorMessage = "Level is required.")]
-    public int LevelTypeId { get; set; } = LevelType.Professional.Id;
+    public override Sport Sport => Sport.Basketball;
 
-    public SavePersonViewModel Person { get; set; }
-
-    [Required]
-    [Range(1, int.MaxValue, ErrorMessage = "Size is required.")]
-    public int SizeId { get; set; } = Size.Standard.Id;
-
-    public Sport Sport => Sport.Basketball;
-
-    public SportLeagueLevel SportLeagueLevel => SportLeagueLevel.NationalBasketballAssociation;
-
-    public SaveTeamViewModel Team { get; set; }
+    public override SportLeagueLevel SportLeagueLevel => SportLeagueLevel.NationalBasketballAssociation;
 }

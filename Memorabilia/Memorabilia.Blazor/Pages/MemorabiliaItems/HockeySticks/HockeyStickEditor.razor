@@ -21,51 +21,9 @@
                                  MemorabiliaItemStep="ViewModel.MemorabiliaItemStep" />
     </TimelineContent>
     <Content>
-        <DivRowCol3>
-            <Content>
-                <ItemTypeLevelDropDown ItemType="ViewModel.ItemType"
-                                       SelectedValue="ViewModel.LevelTypeId"
-                                       SelectionChanged="(p) => ViewModel.LevelTypeId = p"/> 
-            </Content>
-            <ContentColumn2>
-                <ItemTypeBrandDropDown ItemType="ViewModel.ItemType"
-                                       SelectedValue="ViewModel.BrandId"
-                                       SelectionChanged="(p) => ViewModel.BrandId = p" />
-            </ContentColumn2>
-            <ContentColumn3>
-                <ItemTypeSizeDropDown ItemType="ViewModel.ItemType"
-                                      SelectedValue="@ViewModel.SizeId"
-                                      SelectionChanged="(p) => ViewModel.SizeId = p"/> 
-            </ContentColumn3>
-        </DivRowCol3>
-        <DivRowCol3 HideColumn1="@(!ViewModel.DisplayGameStyle)"
-                    HideColumn2="@(!ViewModel.DisplayGameDate)">
-            <Content>
-                <ItemTypeGameStyleDropDown ItemType="ViewModel.ItemType"
-                                           SelectedValue="ViewModel.GameStyleTypeId"
-                                           SelectionChanged="(p) => ViewModel.GameStyleTypeId = p" />
-            </Content>
-            <ContentColumn2>
-                <MudDatePicker @bind-Date="ViewModel.GameDate"
-                               DateFormat="MM/dd/yyyy"
-                               Editable="true"
-                               Label="Game Date"
-                               Mask="@(new DateMask("MM/dd/yyyy"))"
-                               Variant="Variant.Outlined" />
-            </ContentColumn2>
-        </DivRowCol3>
-        <PersonSelector CanFilterBySport="true"
-                        CanToggle="true"
-                        ItemType="ViewModel.ItemType"
-                        SelectedPerson="ViewModel.Person"
-                        SelectedPersonChanged="(p) => ViewModel.Person = p"
-                        Sport="ViewModel.Sport" />                 
-        <DivRowCol6>
-            <Content>
-                <TeamAutoComplete SelectedValue="ViewModel.Team"
-                                  SelectionChanged="(p) => ViewModel.Team = p"
-                                  SportLeagueLevel="ViewModel.SportLeagueLevel" />
-            </Content>
-        </DivRowCol6>
+        <MemorabiliaItemEditor DisplaySinglePersonSelector="true"
+                               DisplaySingleTeamSelector="true"
+                               TItem="SaveHockeyStickViewModel"
+                               ViewModel="ViewModel" />
     </Content>
 </EditPage>

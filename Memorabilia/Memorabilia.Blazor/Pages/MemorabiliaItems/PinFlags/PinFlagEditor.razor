@@ -21,26 +21,13 @@
                                  MemorabiliaItemStep="ViewModel.MemorabiliaItemStep" />
     </TimelineContent>
     <Content>
-        <DivRowCol3 HideColumn2="@(!ViewModel.DisplayGameDate)">
-            <Content>
-                <ItemTypeGameStyleDropDown ItemType="ViewModel.ItemType"
-                                           Label="Tournament Style Type"
-                                           SelectedValue="ViewModel.GameStyleTypeId"
-                                           SelectionChanged="(p) => ViewModel.GameStyleTypeId = p" />
-            </Content>
-            <ContentColumn2>
-                <MudDatePicker @bind-Date="ViewModel.GameDate"
-                               DateFormat="MM/dd/yyyy"
-                               Editable="true"
-                               Label="Tournament Date"
-                               Mask="@(new DateMask("MM/dd/yyyy"))"
-                               Variant="Variant.Outlined" />
-            </ContentColumn2>
-        </DivRowCol3>
-        <PersonSelector CanFilterBySport="true"
-                        CanToggle="true"
-                        ItemType="ViewModel.ItemType"
-                        SelectedPerson="ViewModel.Person"
-                        SelectedPersonChanged="(p) => ViewModel.Person = p" />                 
+        <MemorabiliaItemEditor DisplayItemTypeBrand="false" 
+                               DisplayItemTypeLevel="false"
+                               DisplayItemTypeSize="false"
+                               DisplaySinglePersonSelector="true"
+                               GameDateDisplayText="Tournament Date"
+                               GameStyleTypeDisplayText="Tournament Style"
+                               TItem="SavePinFlagViewModel"
+                               ViewModel="ViewModel" />               
     </Content>
 </EditPage>

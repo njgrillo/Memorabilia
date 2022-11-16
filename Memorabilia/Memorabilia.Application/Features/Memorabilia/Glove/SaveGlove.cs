@@ -17,7 +17,6 @@ public class SaveGlove
 
             memorabilia.SetGlove(command.BrandId,
                                  command.GameDate,
-                                 command.GamePersonId,
                                  command.GameStyleTypeId,
                                  command.GloveTypeId,
                                  command.LevelTypeId,
@@ -42,8 +41,6 @@ public class SaveGlove
         public int BrandId => _viewModel.BrandId;
 
         public DateTime? GameDate => _viewModel.GameDate;
-
-        public int? GamePersonId => _viewModel.GamePersonId > 0 ? _viewModel.GamePersonId : null;
 
         public int? GameStyleTypeId => _viewModel.GameStyleTypeId > 0 ? _viewModel.GameStyleTypeId : null;
 

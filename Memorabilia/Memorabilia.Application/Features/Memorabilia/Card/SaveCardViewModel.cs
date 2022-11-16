@@ -2,9 +2,13 @@
 
 namespace Memorabilia.Application.Features.Memorabilia.Card;
 
-public class SaveCardViewModel : SaveItemViewModel
+public class SaveCardViewModel : MemorabiliaItemEditViewModel
 {
-    public SaveCardViewModel() { }
+    public SaveCardViewModel() 
+    {
+        LevelTypeId = LevelType.Professional.Id;
+        SizeId = Size.Standard.Id;
+    }
 
     public SaveCardViewModel(CardViewModel viewModel)
     {
@@ -21,43 +25,15 @@ public class SaveCardViewModel : SaveItemViewModel
         Year = viewModel.Card.Year;
     }
 
-    public override string BackNavigationPath => $"Memorabilia/{EditModeType.Update.Name}/{MemorabiliaId}";
-
-    [Required]
-    [Range(1, int.MaxValue, ErrorMessage = "Brand is required.")]
-    public int BrandId { get; set; }
-
     public bool Custom { get; set; }
-
-    public override EditModeType EditModeType => MemorabiliaId > 0 ? EditModeType.Update : EditModeType.Add;
-
-    public override string ExitNavigationPath => "Memorabilia/Items";
 
     public override string ImageFileName => Domain.Constants.ImageFileName.TradingCard;
 
     public override ItemType ItemType => ItemType.TradingCard;
 
-    public string ItemTypeName => ItemType.Name.Replace(" ", "");
-
-    [Required]
-    [Range(1, int.MaxValue, ErrorMessage = "Level is required.")]
-    public int LevelTypeId { get; set; } = LevelType.Professional.Id;
-
     public bool Licensed { get; set; }
 
     public int OrientationId { get; set; }
-
-    public Orientation[] Orientations => Orientation.All;
-
-    public List<SavePersonViewModel> People { get; set; } = new();
-
-    [Required]
-    [Range(1, int.MaxValue, ErrorMessage = "Size is required.")]
-    public int SizeId { get; set; } = Size.Standard.Id;
-
-    public List<int> SportIds { get; set; } = new();
-
-    public List<SaveTeamViewModel> Teams { get; set; } = new();
 
     public int? Year { get; set; }
 }

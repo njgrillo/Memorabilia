@@ -2,9 +2,13 @@
 
 namespace Memorabilia.Application.Features.Memorabilia.Jersey;
 
-public class SaveJerseyViewModel : SaveItemViewModel
+public class SaveJerseyViewModel : MemorabiliaItemEditViewModel
 {
-    public SaveJerseyViewModel() { }
+    public SaveJerseyViewModel() 
+    { 
+        GameStyleTypeId = GameStyleType.None.Id;
+        LevelTypeId = LevelType.Professional.Id;
+    }
 
     public SaveJerseyViewModel(JerseyViewModel viewModel)
     {            
@@ -22,27 +26,9 @@ public class SaveJerseyViewModel : SaveItemViewModel
         Teams = viewModel.Teams.Select(team => new SaveTeamViewModel(new TeamViewModel(team.Team))).ToList();
     }
 
-    public override string BackNavigationPath => $"Memorabilia/{EditModeType.Update.Name}/{MemorabiliaId}";
+    public override bool DisplayGameDate => DisplayGameStyleType && IsGameWorthly;
 
-    [Required]
-    [Range(1, int.MaxValue, ErrorMessage = "Brand is required.")]
-    public int BrandId { get; set; }
-
-    public bool DisplayGameDate => DisplayGameStyle && GameStyleType.IsGameWorthly(GameStyleType);
-
-    public bool DisplayGameStyle => JerseyQualityTypeId == JerseyQualityType.Authentic.Id;
-
-    public override EditModeType EditModeType => MemorabiliaId > 0 ? EditModeType.Update : EditModeType.Add;
-
-    public override string ExitNavigationPath => "Memorabilia/Items";
-
-    public DateTime? GameDate { get; set; }
-
-    public GameStyleType GameStyleType => GameStyleType.Find(GameStyleTypeId);
-
-    [Required]
-    [Range(1, int.MaxValue, ErrorMessage = "Game Style Type is required.")]
-    public int GameStyleTypeId { get; set; } = GameStyleType.None.Id;
+    public override bool DisplayGameStyleType => JerseyQualityTypeId == JerseyQualityType.Authentic.Id;
 
     public override string ImageFileName => Domain.Constants.ImageFileName.ItemTypes;
 
@@ -62,17 +48,4 @@ public class SaveJerseyViewModel : SaveItemViewModel
     [Range(1, int.MaxValue, ErrorMessage = "Type is required.")]
     public int JerseyTypeId { get; set; } = JerseyType.Stitched.Id;
 
-    [Required]
-    [Range(1, int.MaxValue, ErrorMessage = "Level is required.")]
-    public int LevelTypeId { get; set; } = LevelType.Professional.Id;
-
-    public List<SavePersonViewModel> People { get; set; } = new();
-
-    [Required]
-    [Range(1, int.MaxValue, ErrorMessage = "Size is required.")]
-    public int SizeId { get; set; }
-
-    public int SportId { get; set; } 
-
-    public List<SaveTeamViewModel> Teams { get; set; } = new();
 }
