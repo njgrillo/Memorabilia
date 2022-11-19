@@ -1,12 +1,12 @@
 ﻿namespace Memorabilia.Application.Features.Services.Filters.Memorabilia.Rules;
 
-public class GameStyleTypeFilterRule : IFilterRule<MemorabiliaItemViewModel>
+public class GameStyleTypeFilterRule : IFilterRule<Domain.Entities.Memorabilia>
 {
     private int[] _gameStyleTypeIds;
 
-    public bool Applies(FilterItemEnum filterItemEnum, object value)
+    public bool Applies(FilterItemEnum filterItem, object value)
     {
-        if (filterItemEnum != FilterItemEnum.MemorabiliaGameStyleType)
+        if (filterItem != FilterItemEnum.MemorabiliaGameStyleType)
             return false;
 
         _gameStyleTypeIds = (int[])value;
@@ -14,10 +14,8 @@ public class GameStyleTypeFilterRule : IFilterRule<MemorabiliaItemViewModel>
         return _gameStyleTypeIds.Any();
     }
 
-    public Expression<Func<MemorabiliaItemViewModel, bool>> GetExpression()
+    public Expression<Func<Domain.Entities.Memorabilia, bool>> GetExpression()
     {
-        Expression<Func<MemorabiliaItemViewModel, bool>> expression = item => _gameStyleTypeIds.Contains(item.GameStyleTypeId ?? 0);
-
-        return expression;
+        return item => _gameStyleTypeIds.Contains(item.Game.GameStyleTypeId);
     }
 }

@@ -1,4 +1,5 @@
-﻿global using Framework.Library.Extension;
+﻿global using Framework.Library.Domain.Paging;
+global using Framework.Library.Extension;
 global using Framework.Library.Handler;
 global using Framework.Library.Web;
 global using MediatR;
@@ -159,6 +160,7 @@ global using Microsoft.AspNetCore.Components.Forms;
 global using Microsoft.AspNetCore.Components.Web;
 global using Microsoft.Extensions.Logging;
 global using MudBlazor;
+global using System.Collections.Generic;
 global using System.ComponentModel;
 global using System.Data;
 global using System.Globalization;

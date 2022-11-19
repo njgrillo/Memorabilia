@@ -1,12 +1,12 @@
 ﻿namespace Memorabilia.Application.Features.Services.Filters.Memorabilia.Rules;
 
-public class PurchaseTypeFilterRule : IFilterRule<MemorabiliaItemViewModel>
+public class PurchaseTypeFilterRule : IFilterRule<Domain.Entities.Memorabilia>
 {
     private int[] _purchaseTypeIds;
 
-    public bool Applies(FilterItemEnum filterItemEnum, object value)
+    public bool Applies(FilterItemEnum filterItem, object value)
     {
-        if (filterItemEnum != FilterItemEnum.MemorabiliaPurchaseType)
+        if (filterItem != FilterItemEnum.MemorabiliaPurchaseType)
             return false;
 
         _purchaseTypeIds = (int[])value;
@@ -14,10 +14,8 @@ public class PurchaseTypeFilterRule : IFilterRule<MemorabiliaItemViewModel>
         return _purchaseTypeIds.Any();
     }
 
-    public Expression<Func<MemorabiliaItemViewModel, bool>> GetExpression()
+    public Expression<Func<Domain.Entities.Memorabilia, bool>> GetExpression()
     {
-        Expression<Func<MemorabiliaItemViewModel, bool>> expression = item => _purchaseTypeIds.Contains(item.PurchaseTypeId ?? 0);
-
-        return expression;
+        return item => _purchaseTypeIds.Contains(item.Acquisition.PurchaseTypeId ?? 0);
     }
 }

@@ -1,15 +1,17 @@
 ﻿@inherits ImagePage
 
-<Page OnLoad="OnLoad">
+<Page>
    <Content>
-        <MemorabiliaFilter Items="_initialItems"
-                           ResultsChanged="OnFilter" />
+        @*<MemorabiliaFilter OnFilter="OnFilter" />*@
         <DivPad2>
             <Content>
-                <MudTable Bordered="false"
+                <MudTable @ref="_table" 
+                          Bordered="false"
                           Dense="false" 
                           Hover="true"
-                          Items="@_viewModel.MemorabiliaItems"    
+                          Items="@_viewModel.MemorabiliaItems" 
+                          Loading="true"
+                          ServerData="@(new Func<TableState, Task<TableData<MemorabiliaItemViewModel>>>(OnRead))"
                           Striped="true">
                     <ToolBarContent>
                         <MudText Typo="Typo.h6">My Memorabilia</MudText>

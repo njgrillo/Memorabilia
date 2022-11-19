@@ -1,23 +1,26 @@
 ﻿namespace Memorabilia.Application.Features.Services.Filters.Memorabilia.Rules;
 
-public class PersonFilterRule : IFilterRule<MemorabiliaItemViewModel>
+public class PersonFilterRule : IFilterRule<Domain.Entities.Memorabilia>
 {
+    private FilterItemEnum _filterItem;
     private int? _personId;
 
-    public bool Applies(FilterItemEnum filterItemEnum, object value)
+    public bool Applies(FilterItemEnum filterItem, object value)
     {
-        if (filterItemEnum != FilterItemEnum.MemorabiliaPerson)
+        if (filterItem != FilterItemEnum.AutographPerson &&
+            filterItem != FilterItemEnum.MemorabiliaPerson)
             return false;
 
+        _filterItem = filterItem;
         _personId = (int?)value;
 
         return _personId.HasValue && _personId.Value > 0;
     }
 
-    public Expression<Func<MemorabiliaItemViewModel, bool>> GetExpression()
+    public Expression<Func<Domain.Entities.Memorabilia, bool>> GetExpression()
     {
-        Expression<Func<MemorabiliaItemViewModel, bool>> expression = item => item.People.Select(person => person.PersonId).Contains(_personId.Value);
-
-        return expression;
+        return _filterItem == FilterItemEnum.AutographPerson
+            ? item => item.Autographs.Any(autograph => autograph.PersonId == _personId)
+            : item => item.People.Select(person => person.PersonId).Contains(_personId.Value);
     }
 }

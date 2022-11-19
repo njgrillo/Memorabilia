@@ -1,4 +1,8 @@
-﻿namespace Memorabilia.Repository.Implementations;
+﻿using Microsoft.EntityFrameworkCore;
+using System.Data;
+using System.Linq.Expressions;
+
+namespace Memorabilia.Repository.Implementations;
 
 public class MemorabiliaItemRepository : MemorabiliaRepository<Domain.Entities.Memorabilia>, IMemorabiliaItemRepository
 {
@@ -60,6 +64,29 @@ public class MemorabiliaItemRepository : MemorabiliaRepository<Domain.Entities.M
         //    select new Domain.Entities.Memorabilia(memorabilia);
 
         //return await query.ToListAsync();
+    }
+
+    public async Task<PagedResult<Domain.Entities.Memorabilia>> GetAll(
+        int userId, 
+        PageInfo pageInfo,
+        Expression<Func<Domain.Entities.Memorabilia, bool>> filter = null)
+    {
+        Expression<Func<Domain.Entities.Memorabilia, bool>> expression = memorabilia => memorabilia.UserId == userId;
+
+        Func<Domain.Entities.Memorabilia, bool> test = expression.Compile();
+
+        if (filter != null)
+            expression = expression.And(filter);
+
+        var query =
+            from memorabilia in Context.Memorabilia
+            where memorabilia.UserId == userId
+            select new Domain.Entities.Memorabilia(memorabilia);
+
+        return await query.ToPagedResult(pageInfo);
+
+        //return await Memorabilia.Where(expression)
+        //                        .ToPagedResult(pageInfo);
     }
 
     public async Task<IEnumerable<Domain.Entities.Memorabilia>> GetAllUnsigned(int userId)

@@ -1,12 +1,12 @@
 ﻿namespace Memorabilia.Application.Features.Services.Filters.Memorabilia.Rules;
 
-public class BrandFilterRule : IFilterRule<MemorabiliaItemViewModel>
+public class BrandFilterRule : IFilterRule<Domain.Entities.Memorabilia>
 {
     private int[] _brandIds;
 
-    public bool Applies(FilterItemEnum filterItemEnum, object value)
+    public bool Applies(FilterItemEnum filterItem, object value)
     {
-        if (filterItemEnum != FilterItemEnum.MemorabiliaBrand)
+        if (filterItem != FilterItemEnum.MemorabiliaBrand)
             return false;
 
         _brandIds = (int[])value;
@@ -14,10 +14,8 @@ public class BrandFilterRule : IFilterRule<MemorabiliaItemViewModel>
         return _brandIds.Any();
     }
 
-    public Expression<Func<MemorabiliaItemViewModel, bool>> GetExpression()
+    public Expression<Func<Domain.Entities.Memorabilia, bool>> GetExpression()
     {
-        Expression<Func<MemorabiliaItemViewModel, bool>> expression = item => _brandIds.Contains(item.BrandId ?? 0);
-
-        return expression;
+        return item => _brandIds.Contains(item.Brand.BrandId);
     }
 }

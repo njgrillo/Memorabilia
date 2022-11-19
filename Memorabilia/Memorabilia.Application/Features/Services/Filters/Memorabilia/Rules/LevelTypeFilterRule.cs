@@ -1,12 +1,12 @@
 ﻿namespace Memorabilia.Application.Features.Services.Filters.Memorabilia.Rules;
 
-public class LevelTypeFilterRule : IFilterRule<MemorabiliaItemViewModel>
+public class LevelTypeFilterRule : IFilterRule<Domain.Entities.Memorabilia>
 {
     private int[] _levelTypeIds;
 
-    public bool Applies(FilterItemEnum filterItemEnum, object value)
+    public bool Applies(FilterItemEnum filterItem, object value)
     {
-        if (filterItemEnum != FilterItemEnum.MemorabiliaLevelType)
+        if (filterItem != FilterItemEnum.MemorabiliaLevelType)
             return false;
 
         _levelTypeIds = (int[])value;
@@ -14,10 +14,8 @@ public class LevelTypeFilterRule : IFilterRule<MemorabiliaItemViewModel>
         return _levelTypeIds.Any();
     }
 
-    public Expression<Func<MemorabiliaItemViewModel, bool>> GetExpression()
+    public Expression<Func<Domain.Entities.Memorabilia, bool>> GetExpression()
     {
-        Expression<Func<MemorabiliaItemViewModel, bool>> expression = item => _levelTypeIds.Contains(item.LevelTypeId ?? 0);
-
-        return expression;
+        return item => _levelTypeIds.Contains(item.LevelType.LevelTypeId);
     }
 }

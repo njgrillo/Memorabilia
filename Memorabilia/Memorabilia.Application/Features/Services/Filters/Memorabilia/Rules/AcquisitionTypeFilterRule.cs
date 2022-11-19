@@ -1,23 +1,26 @@
 ﻿namespace Memorabilia.Application.Features.Services.Filters.Memorabilia.Rules;
 
-public class AcquisitionTypeFilterRule : IFilterRule<MemorabiliaItemViewModel>
-{
-    private int[] _acquiredTypeIds;
+public class AcquisitionTypeFilterRule : IFilterRule<Domain.Entities.Memorabilia>
+{    
+    private int[] _acquisitionTypeIds;
+    private FilterItemEnum _filterItem;
 
-    public bool Applies(FilterItemEnum filterItemEnum, object value)
+    public bool Applies(FilterItemEnum filterItem, object value)
     {
-        if (filterItemEnum != FilterItemEnum.MemorabiliaAcquisitionType)
+        if (filterItem != FilterItemEnum.AutographAcquisitionType &&
+            filterItem != FilterItemEnum.MemorabiliaAcquisitionType)
             return false;
 
-        _acquiredTypeIds = (int[])value;
+        _acquisitionTypeIds = (int[])value;
+        _filterItem = filterItem;
 
-        return _acquiredTypeIds.Any();
+        return _acquisitionTypeIds.Any();
     }
 
-    public Expression<Func<MemorabiliaItemViewModel, bool>> GetExpression()
+    public Expression<Func<Domain.Entities.Memorabilia, bool>> GetExpression()
     {
-        Expression<Func<MemorabiliaItemViewModel, bool>> expression = item => _acquiredTypeIds.Contains(item.Acquisition.AcquisitionTypeId);
-
-        return expression;
+        return _filterItem == FilterItemEnum.AutographAcquisitionType
+            ? item => item.Autographs.Any(autograph => _acquisitionTypeIds.Contains(autograph.Acquisition.AcquisitionTypeId))
+            : item => _acquisitionTypeIds.Contains(item.Acquisition.AcquisitionTypeId);
     }
 }

@@ -12,6 +12,8 @@ public abstract class ViewModel : IWithName, IWithValue<int>
 
     public virtual string Name { get; set; }
 
+    public virtual PageInfoResult PageInfo { get; set; }
+
     public virtual string PageTitle { get; }
 
     public virtual string RoutePrefix { get; }

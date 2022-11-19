@@ -1,14 +1,13 @@
 ﻿namespace Memorabilia.Application.Features.Memorabilia;
 
-public class MemorabiliaGalleryItemsViewModel
+public class MemorabiliaGalleryItemsViewModel : ViewModel
 {
-	public MemorabiliaGalleryItemsViewModel(IEnumerable<Domain.Entities.Memorabilia> items)
+	public MemorabiliaGalleryItemsViewModel(IEnumerable<Domain.Entities.Memorabilia> items,
+                                            PageInfoResult pageInfo = null)
 	{
-		FilterItems = items.Select(item => new MemorabiliaItemViewModel(item));
 		Items = items.Select(item => new MemorabiliaGalleryItemViewModel(item));
-	}
-
-	public IEnumerable<MemorabiliaItemViewModel> FilterItems { get; set; } = Enumerable.Empty<MemorabiliaItemViewModel>();
+        PageInfo = pageInfo;
+    }
 
 	public IEnumerable<MemorabiliaGalleryItemViewModel> Items { get; set; } = Enumerable.Empty<MemorabiliaGalleryItemViewModel>();
 }

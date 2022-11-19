@@ -1,12 +1,12 @@
 ﻿namespace Memorabilia.Application.Features.Services.Filters.Memorabilia.Rules;
 
-public class TeamFilterRule : IFilterRule<MemorabiliaItemViewModel>
+public class TeamFilterRule : IFilterRule<Domain.Entities.Memorabilia>
 {
     private int? _teamId;
 
-    public bool Applies(FilterItemEnum filterItemEnum, object value)
+    public bool Applies(FilterItemEnum filterItem, object value)
     {
-        if (filterItemEnum != FilterItemEnum.MemorabiliaTeam)
+        if (filterItem != FilterItemEnum.MemorabiliaTeam)
             return false;
 
         _teamId = (int?)value;
@@ -14,10 +14,8 @@ public class TeamFilterRule : IFilterRule<MemorabiliaItemViewModel>
         return _teamId.HasValue && _teamId.Value > 0;
     }
 
-    public Expression<Func<MemorabiliaItemViewModel, bool>> GetExpression()
+    public Expression<Func<Domain.Entities.Memorabilia, bool>> GetExpression()
     {
-        Expression<Func<MemorabiliaItemViewModel, bool>> expression = item => item.Teams.Select(team => team.TeamId).Contains(_teamId.Value);
-
-        return expression;
+        return item => item.Teams.Select(team => team.TeamId).Contains(_teamId.Value);
     }
 }

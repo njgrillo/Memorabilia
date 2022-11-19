@@ -1,12 +1,12 @@
 ﻿namespace Memorabilia.Application.Features.Services.Filters.Memorabilia.Rules;
 
-public class SportLeagueLevelFilterRule : IFilterRule<MemorabiliaItemViewModel>
+public class SportLeagueLevelFilterRule : IFilterRule<Domain.Entities.Memorabilia>
 {
     private int[] _sportLeagueLevelIds;
 
-    public bool Applies(FilterItemEnum filterItemEnum, object value)
+    public bool Applies(FilterItemEnum filterItem, object value)
     {
-        if (filterItemEnum != FilterItemEnum.MemorabiliaSportLeagueLevel)
+        if (filterItem != FilterItemEnum.MemorabiliaSportLeagueLevel)
             return false;
 
         _sportLeagueLevelIds = (int[])value;
@@ -14,10 +14,8 @@ public class SportLeagueLevelFilterRule : IFilterRule<MemorabiliaItemViewModel>
         return _sportLeagueLevelIds.Any();
     }
 
-    public Expression<Func<MemorabiliaItemViewModel, bool>> GetExpression()
+    public Expression<Func<Domain.Entities.Memorabilia, bool>> GetExpression()
     {
-        Expression<Func<MemorabiliaItemViewModel, bool>> expression = item => item.SportLeagueLevels.Select(sportLeagueLevel => sportLeagueLevel.Id).Any(sportLeagueLevelId => _sportLeagueLevelIds.Contains(sportLeagueLevelId));
-
-        return expression;
+        return item => item.Teams.Any(team => _sportLeagueLevelIds.Contains(team.Team.Franchise.SportLeagueLevel.Id));
     }
 }

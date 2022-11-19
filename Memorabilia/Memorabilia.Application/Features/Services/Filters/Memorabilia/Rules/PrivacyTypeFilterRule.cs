@@ -1,12 +1,12 @@
 ﻿namespace Memorabilia.Application.Features.Services.Filters.Memorabilia.Rules;
 
-public class PrivacyTypeFilterRule : IFilterRule<MemorabiliaItemViewModel>
+public class PrivacyTypeFilterRule : IFilterRule<Domain.Entities.Memorabilia>
 {
     private int[] _privacyTypeIds;
 
-    public bool Applies(FilterItemEnum filterItemEnum, object value)
+    public bool Applies(FilterItemEnum filterItem, object value)
     {
-        if (filterItemEnum != FilterItemEnum.MemorabiliaPrivacyType)
+        if (filterItem != FilterItemEnum.MemorabiliaPrivacyType)
             return false;
 
         _privacyTypeIds = (int[])value;
@@ -14,10 +14,8 @@ public class PrivacyTypeFilterRule : IFilterRule<MemorabiliaItemViewModel>
         return _privacyTypeIds.Any();
     }
 
-    public Expression<Func<MemorabiliaItemViewModel, bool>> GetExpression()
+    public Expression<Func<Domain.Entities.Memorabilia, bool>> GetExpression()
     {
-        Expression<Func<MemorabiliaItemViewModel, bool>> expression = item => _privacyTypeIds.Contains(item.PrivacyTypeId);
-
-        return expression;
+        return item => _privacyTypeIds.Contains(item.PrivacyTypeId);
     }
 }

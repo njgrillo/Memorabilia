@@ -1,51 +1,40 @@
 ﻿@inherits ImagePage
 
-<PrettyBlazor.Condition Evaluation="@false">
-    <Match>
-        <div class="spinnerDiv">
-            <MudImage Class="spinnerImage"
-                      Src="images/spinner.gif" />
-        </div>
-    </Match>
-    <NotMatch>
-        <Page OnLoad="OnLoad">
+<Page OnLoad="OnLoad">
+    <Content>
+        @*<MemorabiliaFilter OnFilter="OnFilter" />*@
+        <DivPad2>
             <Content>
-                <MemorabiliaFilter Items="_viewModel.FilterItems.ToList()"
-                                   ResultsChanged="OnFilter" />
-                <DivPad2>
-                    <Content>
-                        <div class="row">
-                            <Iterations Items="_displayedItems" Context="item">
-                                <div class="col-md-4">
-                                    <MemorabiliaItemGalleryCard Description="@GetDescription(item)"
-                                                                DomainImageRootPath="@DomainImageRootPath"
-                                                                EditNavigationPath="@item.EditNavigationPath"
-                                                                ImageRootPath="@ImageRootPath"
-                                                                MemorabiliaItem="@item"
-                                                                PrimaryImageFileName="@item.ImageFileName"
-                                                                PrimaryImageNavigationPath="@item.PrimaryImageNavigationPath"                                                                
-                                                                Subtitle="@GetSubtitle(item)"
-                                                                Title="@GetTitle(item)"
-                                                                TooltipText="@item.TooltipText" />
-                                </div>
-                            </Iterations>
+                <div class="row">
+                    <Iterations Items="_items" Context="item">
+                        <div class="col-md-4">
+                            <MemorabiliaItemGalleryCard Description="@GetDescription(item)"
+                                                        DomainImageRootPath="@DomainImageRootPath"
+                                                        EditNavigationPath="@item.EditNavigationPath"
+                                                        ImageRootPath="@ImageRootPath"
+                                                        MemorabiliaItem="@item"
+                                                        PrimaryImageFileName="@item.ImageFileName"
+                                                        PrimaryImageNavigationPath="@item.PrimaryImageNavigationPath"
+                                                        Subtitle="@GetSubtitle(item)"
+                                                        Title="@GetTitle(item)"
+                                                        TooltipText="@item.TooltipText" />
                         </div>
-                        <DivHidden Hidden="@(!_displayLoadMoreButton)">
+                    </Iterations>
+                </div>
+                <DivHidden Hidden="@(!DisplayLoadMoreButton)">
+                    <Content>
+                        <DivRowCol12Center>
                             <Content>
-                                <DivRowCol12Center>
-                                    <Content>
-                                        <MudButton ButtonType="MudBlazor.ButtonType.Button"
-                                                   Color="MudBlazor.Color.Primary"
-                                                   OnClick="LoadMore"
-                                                   Size="MudBlazor.Size.Small"
-                                                   Variant="Variant.Filled">Load More</MudButton>
-                                    </Content>
-                                </DivRowCol12Center>
+                                <MudButton ButtonType="MudBlazor.ButtonType.Button"
+                                           Color="MudBlazor.Color.Primary"
+                                           OnClick="LoadMore"
+                                           Size="MudBlazor.Size.Small"
+                                           Variant="Variant.Filled">Load More</MudButton>
                             </Content>
-                        </DivHidden>
+                        </DivRowCol12Center>
                     </Content>
-                </DivPad2>
+                </DivHidden>
             </Content>
-        </Page>
-    </NotMatch>
-</PrettyBlazor.Condition>
+        </DivPad2>
+    </Content>
+</Page>

@@ -10,10 +10,10 @@ public partial class ViewGallery : ImagePage
     [Parameter]
     public int UserId { get; set; }
 
-    private List<MemorabiliaGalleryItemViewModel> _displayedItems;
-    private bool _displayLoadMoreButton;
-    private int _index = 12;
-    private List<MemorabiliaGalleryItemViewModel> _initialItems;
+    private bool DisplayLoadMoreButton => _viewModel?.PageInfo?.TotalItems > _pageSize;
+    private IMemorabiliaFilterPredicateBuilder _filter;
+    private List<MemorabiliaGalleryItemViewModel> _items = new();
+    private readonly int _pageSize = 12;
     private MemorabiliaGalleryItemsViewModel _viewModel;
 
     protected string GetDescription(MemorabiliaGalleryItemViewModel item)
@@ -31,31 +31,34 @@ public partial class ViewGallery : ImagePage
         return GalleryService.GetTitle(item.Memorabilia);
     }
     
-    private void LoadMore()
+    private async void LoadMore()
     {
-        var range = new Range(_index, _index + 12);
-        var items = _viewModel.Items.Take(range).ToList();
-
-        _displayedItems.AddRange(items);
-
-        _index += 12;
-        _displayLoadMoreButton = _viewModel.Items.Count() > _index;
+        await LoadItems(_viewModel.PageInfo.PageNumber + 1);
     }
 
-    protected void OnFilter(IEnumerable<int> ids)
+    protected async Task OnFilter(IMemorabiliaFilterPredicateBuilder filter)
     {
-        _index = 12;
+        _filter = filter;
 
-        _viewModel.Items = _initialItems.Where(item => ids.Contains(item.Id));
-        _displayedItems = _viewModel.Items.Take(Math.Min(_index, _viewModel.Items.Count())).ToList();
-        _displayLoadMoreButton = _viewModel.Items.Count() > _index;
+        await LoadItems(1, true);
     }
 
     protected async Task OnLoad()
     {
-         _viewModel = await QueryRouter.Send(new GetMemorabiliaGalleryItems(UserId));
-        _initialItems = _viewModel.Items.ToList();
-        _displayedItems = _initialItems.Take(_index).ToList();
-        _displayLoadMoreButton = _viewModel.Items.Count() > _index;
+        await LoadItems(1);
+    }
+
+    private async Task LoadItems(int pageNumber, bool resetItems = false)
+    {
+        var pageInfo = new PageInfo(pageNumber, _pageSize);
+
+        _viewModel = _filter != null
+            ? await QueryRouter.Send(new GetMemorabiliaGalleryItems(UserId, pageInfo, _filter.Predicate))
+            : await QueryRouter.Send(new GetMemorabiliaGalleryItems(UserId, pageInfo));
+
+        if (resetItems)
+            _items = new();
+
+        _items.AddRange(_viewModel.Items);
     }
 }

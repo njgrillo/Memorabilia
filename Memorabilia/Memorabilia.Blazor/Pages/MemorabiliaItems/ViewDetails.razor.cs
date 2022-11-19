@@ -13,8 +13,10 @@ public partial class ViewDetails : ImagePage
     [Parameter]
     public int UserId { get; set; }
 
-    private List<MemorabiliaItemViewModel> _initialItems;
-    private MemorabiliaItemsViewModel _viewModel;
+    private IMemorabiliaFilterPredicateBuilder _filter;
+    private bool _resetPaging;
+    private MudTable<MemorabiliaItemViewModel> _table;
+    private MemorabiliaItemsViewModel _viewModel = new();
 
     protected async Task DeleteAutograph(int id)
     {
@@ -50,15 +52,23 @@ public partial class ViewDetails : ImagePage
         Snackbar.Add($"{itemToDelete.ItemTypeName} was deleted successfully!", Severity.Success);
     }
 
-    protected void OnFilter(IEnumerable<int> ids)
+    protected async Task OnFilter(IMemorabiliaFilterPredicateBuilder filter)
     {
-        _viewModel.MemorabiliaItems = _initialItems.Where(item => ids.Contains(item.Id)).ToList();
+        _filter = filter;
+        _resetPaging = true;
+
+        await _table.ReloadServerData();
     }
 
-    protected async Task OnLoad()
+    protected async Task<TableData<MemorabiliaItemViewModel>> OnRead(TableState state)
     {
-        _viewModel = await QueryRouter.Send(new GetMemorabiliaItems(UserId));
-        _initialItems = _viewModel.MemorabiliaItems;
+        var pageInfo = new PageInfo(_resetPaging ? 1 : state.Page + 1, state.PageSize);
+        _viewModel = _filter != null
+            ? await QueryRouter.Send(new GetMemorabiliaItemsPaged(UserId, pageInfo, _filter.Predicate))
+            : await QueryRouter.Send(new GetMemorabiliaItemsPaged(UserId, pageInfo));
+
+        return new TableData<MemorabiliaItemViewModel>() { Items = _viewModel.MemorabiliaItems, 
+                                                           TotalItems = _viewModel.PageInfo.TotalItems };
     }
 
     protected async Task ShowDeleteAutographConfirm(int id)

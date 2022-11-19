@@ -1,25 +1,26 @@
-﻿using System.Linq;
+﻿namespace Memorabilia.Application.Features.Services.Filters.Memorabilia.Rules;
 
-namespace Memorabilia.Application.Features.Services.Filters.Memorabilia.Rules;
-
-public class ConditionFilterRule : IFilterRule<MemorabiliaItemViewModel>
+public class ConditionFilterRule : IFilterRule<Domain.Entities.Memorabilia>
 {
     private int[] _conditionIds;
+    private FilterItemEnum _filterItem;
 
-    public bool Applies(FilterItemEnum filterItemEnum, object value)
+    public bool Applies(FilterItemEnum filterItem, object value)
     {
-        if (filterItemEnum != FilterItemEnum.MemorabiliaCondition)
+        if (filterItem != FilterItemEnum.AutographCondition &&
+            filterItem != FilterItemEnum.MemorabiliaCondition)
             return false;
 
         _conditionIds = (int[])value;
+        _filterItem = filterItem;
 
         return _conditionIds.Any();
     }
 
-    public Expression<Func<MemorabiliaItemViewModel, bool>> GetExpression()
+    public Expression<Func<Domain.Entities.Memorabilia, bool>> GetExpression()
     {
-        Expression<Func<MemorabiliaItemViewModel, bool>> expression = item => _conditionIds.Contains(item.ConditionId ?? 0);
-
-        return expression;
+        return _filterItem == FilterItemEnum.AutographCondition
+            ? item => item.Autographs.Any(autograph => _conditionIds.Contains(autograph.ConditionId))
+            : item => _conditionIds.Contains(item.ConditionId ?? 0);
     }
 }

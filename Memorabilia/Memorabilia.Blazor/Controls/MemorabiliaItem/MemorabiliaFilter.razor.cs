@@ -5,21 +5,10 @@ namespace Memorabilia.Blazor.Controls.MemorabiliaItem;
 public partial class MemorabiliaFilter : ComponentBase
 {
     [Inject]
-    public IAutographFilterPredicateBuilder AutographFilterPredicateBuilder { get; set; }
-
-    [Inject]
     public IMemorabiliaFilterPredicateBuilder MemorabiliaFilterPredicateBuilder { get; set; } 
 
     [Parameter]
-    public List<MemorabiliaItemViewModel> Items { get; set; }
-
-    [Parameter]
-    public List<MemorabiliaItemViewModel> Results { get; set; }
-
-    [Parameter]
-    public EventCallback<IEnumerable<int>> ResultsChanged { get; set; }
-
-    private List<AutographViewModel> _autographs => Items.SelectMany(item => item.Autographs).ToList();
+    public EventCallback<IMemorabiliaFilterPredicateBuilder> OnFilter { get; set; }
 
     private bool _hasFilter => _autographAcquiredDate.HasValue ||
                                _autographAcquisitionTypeIds.Any() ||
@@ -93,9 +82,11 @@ public partial class MemorabiliaFilter : ComponentBase
     private IEnumerable<int> _spotIds = Enumerable.Empty<int>();
     private IEnumerable<int> _writingInstrumentIds = Enumerable.Empty<int>();
 
-    protected async Task HandleValidSubmit()
+    protected async Task FilterItems()
     {
-        await FilterResults();
+        BuildPredicate();
+
+        await OnFilter.InvokeAsync(MemorabiliaFilterPredicateBuilder);
     }
 
     protected override async Task OnInitializedAsync()
@@ -103,7 +94,7 @@ public partial class MemorabiliaFilter : ComponentBase
         if (!_hasFilter)
             return;
 
-        await FilterResults();
+        await FilterItems();
     }
 
     protected async Task ResetCriteria()
@@ -144,29 +135,27 @@ public partial class MemorabiliaFilter : ComponentBase
         _spotIds = Enumerable.Empty<int>();
         _writingInstrumentIds = Enumerable.Empty<int>();
 
-        await FilterResults();
+        await FilterItems();
     }
 
-    private List<AutographViewModel> FilterAutographs()
+    private void BuildAutographPredicate()
     {
-        AutographFilterPredicateBuilder.AppendPredicateAnd(FilterItemEnum.AutographAcquiredDate, _autographAcquiredDate);
-        AutographFilterPredicateBuilder.AppendPredicateAnd(FilterItemEnum.AutographAcquisitionType, _autographAcquisitionTypeIds.ToArray());
-        AutographFilterPredicateBuilder.AppendPredicateAnd(FilterItemEnum.AutographAuthentication, _hasAutographAuthentication);
-        AutographFilterPredicateBuilder.AppendPredicateAnd(FilterItemEnum.AutographColor, _colorIds.ToArray());
-        AutographFilterPredicateBuilder.AppendPredicateAnd(FilterItemEnum.AutographCondition, _autographConditionIds.ToArray());
-        AutographFilterPredicateBuilder.AppendPredicateAnd(FilterItemEnum.AutographCost, new Range<decimal?>(_autographCostLow, _autographCostHigh));
-        AutographFilterPredicateBuilder.AppendPredicateAnd(FilterItemEnum.AutographEstimatedValue, new Range<decimal?>(_autographEstimatedValueLow, _autographEstimatedValueHigh));
-        AutographFilterPredicateBuilder.AppendPredicateAnd(FilterItemEnum.AutographGrade, _autographGrade);
-        AutographFilterPredicateBuilder.AppendPredicateAnd(FilterItemEnum.AutographImage, _noAutographImages);
-        AutographFilterPredicateBuilder.AppendPredicateAnd(FilterItemEnum.AutographInscription, _hasAutographInscription);
-        AutographFilterPredicateBuilder.AppendPredicateAnd(FilterItemEnum.AutographPerson, _autographPerson?.Id);
-        AutographFilterPredicateBuilder.AppendPredicateAnd(FilterItemEnum.AutographSpot, _spotIds.ToArray());
-        AutographFilterPredicateBuilder.AppendPredicateAnd(FilterItemEnum.AutographWritingInstrument, _writingInstrumentIds.ToArray());
-
-        return _autographs.AsQueryable().Where(AutographFilterPredicateBuilder.Predicate).ToList();
+        MemorabiliaFilterPredicateBuilder.AppendPredicateAnd(FilterItemEnum.AutographAcquiredDate, _autographAcquiredDate);
+        MemorabiliaFilterPredicateBuilder.AppendPredicateAnd(FilterItemEnum.AutographAcquisitionType, _autographAcquisitionTypeIds.ToArray());
+        MemorabiliaFilterPredicateBuilder.AppendPredicateAnd(FilterItemEnum.AutographAuthentication, _hasAutographAuthentication);
+        MemorabiliaFilterPredicateBuilder.AppendPredicateAnd(FilterItemEnum.AutographColor, _colorIds.ToArray());
+        MemorabiliaFilterPredicateBuilder.AppendPredicateAnd(FilterItemEnum.AutographCondition, _autographConditionIds.ToArray());
+        MemorabiliaFilterPredicateBuilder.AppendPredicateAnd(FilterItemEnum.AutographCost, new Range<decimal?>(_autographCostLow, _autographCostHigh));
+        MemorabiliaFilterPredicateBuilder.AppendPredicateAnd(FilterItemEnum.AutographEstimatedValue, new Range<decimal?>(_autographEstimatedValueLow, _autographEstimatedValueHigh));
+        MemorabiliaFilterPredicateBuilder.AppendPredicateAnd(FilterItemEnum.AutographGrade, _autographGrade);
+        MemorabiliaFilterPredicateBuilder.AppendPredicateAnd(FilterItemEnum.AutographImage, _noAutographImages);
+        MemorabiliaFilterPredicateBuilder.AppendPredicateAnd(FilterItemEnum.AutographInscription, _hasAutographInscription);
+        MemorabiliaFilterPredicateBuilder.AppendPredicateAnd(FilterItemEnum.AutographPerson, _autographPerson?.Id);
+        MemorabiliaFilterPredicateBuilder.AppendPredicateAnd(FilterItemEnum.AutographSpot, _spotIds.ToArray());
+        MemorabiliaFilterPredicateBuilder.AppendPredicateAnd(FilterItemEnum.AutographWritingInstrument, _writingInstrumentIds.ToArray());
     }
 
-    private List<MemorabiliaItemViewModel> FilterMemorabiliaItems()
+    private void BuildMemorabiliaPredicate()
     {
         MemorabiliaFilterPredicateBuilder.AppendPredicateAnd(FilterItemEnum.MemorabiliaAcquiredDate, _memorabiliaAcquiredDate);
         MemorabiliaFilterPredicateBuilder.AppendPredicateAnd(FilterItemEnum.MemorabiliaAcquisitionType, _memorabiliaAcquisitionTypeIds.ToArray());
@@ -185,21 +174,25 @@ public partial class MemorabiliaFilter : ComponentBase
         MemorabiliaFilterPredicateBuilder.AppendPredicateAnd(FilterItemEnum.MemorabiliaSport, _sportIds.ToArray());
         MemorabiliaFilterPredicateBuilder.AppendPredicateAnd(FilterItemEnum.MemorabiliaSportLeagueLevel, _sportLeagueLevelIds.ToArray());
         MemorabiliaFilterPredicateBuilder.AppendPredicateAnd(FilterItemEnum.MemorabiliaTeam, _memorabiliaTeam?.Id);
-
-        return Items.AsQueryable().Where(MemorabiliaFilterPredicateBuilder.Predicate).ToList();
     }
+
+    private void BuildPredicate()
+    {
+        BuildAutographPredicate();
+        BuildMemorabiliaPredicate();
+    }    
 
     private async Task FilterResults()
     {
-        var filteredMemorabilaItems = FilterMemorabiliaItems();
-        var autographResults = FilterAutographs();
-        var memorabiliaIds = autographResults.Select(x => x.MemorabiliaId).ToArray();
+        //var filteredMemorabilaItems = FilterMemorabiliaItems();
+        //var autographResults = FilterAutographs();
+        //var memorabiliaIds = autographResults.Select(x => x.MemorabiliaId).ToArray();
 
-        Results = filteredMemorabilaItems.Where(item => memorabiliaIds.Contains(item.Id)).ToList();
+        //Results = filteredMemorabilaItems.Where(item => memorabiliaIds.Contains(item.Id)).ToList();
 
-        await ResultsChanged.InvokeAsync(Results.Select(result => result.Id));
+        //await ResultsChanged.InvokeAsync(Results.Select(result => result.Id));
 
-        _autographPerson = null;
-        _memorabiliaPerson = null;
+        //_autographPerson = null;
+        //_memorabiliaPerson = null;
     }
 }

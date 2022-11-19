@@ -1,12 +1,12 @@
 ﻿namespace Memorabilia.Application.Features.Services.Filters.Memorabilia.Rules;
 
-public class FranchiseFilterRule : IFilterRule<MemorabiliaItemViewModel>
+public class FranchiseFilterRule : IFilterRule<Domain.Entities.Memorabilia>
 {
     private int[] _franchiseIds;
 
-    public bool Applies(FilterItemEnum filterItemEnum, object value)
+    public bool Applies(FilterItemEnum filterItem, object value)
     {
-        if (filterItemEnum != FilterItemEnum.MemorabiliaFranchise)
+        if (filterItem != FilterItemEnum.MemorabiliaFranchise)
             return false;
 
         _franchiseIds = (int[])value;
@@ -14,10 +14,11 @@ public class FranchiseFilterRule : IFilterRule<MemorabiliaItemViewModel>
         return _franchiseIds.Any();
     }
 
-    public Expression<Func<MemorabiliaItemViewModel, bool>> GetExpression()
+    public Expression<Func<Domain.Entities.Memorabilia, bool>> GetExpression()
     {
-        Expression<Func<MemorabiliaItemViewModel, bool>> expression = item => item.Franchises.Select(franchise => franchise.Id).Any(franchiseId => _franchiseIds.Contains(franchiseId));
-
-        return expression;
+        return item => item.Teams
+                           .Select(team => team.Team.Franchise)
+                           .Select(franchise => franchise.Id)
+                           .Any(franchiseId => _franchiseIds.Contains(franchiseId));
     }
 }

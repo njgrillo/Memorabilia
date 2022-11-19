@@ -1,7 +1,7 @@
 ﻿namespace Memorabilia.Application.Features.Services.Filters;
 
 public abstract class FilterPredicateBuilder<T> : IFilterPredicateBuilder<T>
-{   
+{
     private readonly List<IFilterRule<T>> _rules;
 
     public Expression<Func<T, bool>> Predicate { get; set; }
