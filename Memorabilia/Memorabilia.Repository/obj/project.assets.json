@@ -2,7 +2,7 @@
   "version": 3,
   "targets": {
     "net6.0": {
-      "Autofac/6.4.0": {
+      "Autofac/6.5.0": {
         "type": "package",
         "dependencies": {
           "System.Diagnostics.DiagnosticSource": "4.7.1"
@@ -90,7 +90,7 @@
           "buildTransitive/netcoreapp3.0/EntityFramework.targets": {}
         }
       },
-      "MediatR/10.0.1": {
+      "MediatR/11.0.0": {
         "type": "package",
         "dependencies": {
           "MediatR.Contracts": "1.0.1"
@@ -2114,7 +2114,7 @@
         "framework": ".NETCoreApp,Version=v6.0",
         "dependencies": {
           "EntityFramework": "6.4.4",
-          "MediatR": "10.0.1"
+          "MediatR": "11.0.0"
         },
         "compile": {
           "bin/placeholder/Framework.Library.dll": {}
@@ -2128,7 +2128,7 @@
         "framework": ".NETCoreApp,Version=v6.0",
         "dependencies": {
           "Framework.Library": "1.0.0",
-          "MediatR": "10.0.1",
+          "MediatR": "11.0.0",
           "Microsoft.EntityFrameworkCore.Proxies": "6.0.2"
         },
         "compile": {
@@ -2141,15 +2141,15 @@
     }
   },
   "libraries": {
-    "Autofac/6.4.0": {
-      "sha512": "tkFxl6wAPuwVhrlN8wuNADnd+k2tv4ReP7ZZSL0vjfcN0RcfC9v25ogxK6b03HC7D4NwWjSLf1G/zTG8Bw43wQ==",
+    "Autofac/6.5.0": {
+      "sha512": "sm6HWWBDEoTPGXeyOchMygJ/7L89VxmVH72BFxakG88J34AVjA8RMi5jbv3PdpUtXI/d9ZLKOaxCmOSIo2K4aA==",
       "type": "package",
-      "path": "autofac/6.4.0",
+      "path": "autofac/6.5.0",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
         "README.md",
-        "autofac.6.4.0.nupkg.sha512",
+        "autofac.6.5.0.nupkg.sha512",
         "autofac.nuspec",
         "icon.png",
         "lib/net5.0/Autofac.dll",
@@ -2264,17 +2264,17 @@
         "tools/netcoreapp3.0/any/ef6.runtimeconfig.json"
       ]
     },
-    "MediatR/10.0.1": {
-      "sha512": "vnjbk4giDJzJelh34Ygt0eorApCKrRFB7j0pauFPY1oxfO3cEZ7FugBrIOjCM76SDGTOmPFfbfmVnz1t3iFrGA==",
+    "MediatR/11.0.0": {
+      "sha512": "8klzVGZQiA2oxZRzQFBZbdPD/IQUm9RYtfiyTDKhxDQ99Gi93+GXt1ZJjH2D7Lh7ZFHCv5XdkwbmfHEQBCatPg==",
       "type": "package",
-      "path": "mediatr/10.0.1",
+      "path": "mediatr/11.0.0",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
         "gradient_128x128.png",
         "lib/netstandard2.1/MediatR.dll",
         "lib/netstandard2.1/MediatR.xml",
-        "mediatr.10.0.1.nupkg.sha512",
+        "mediatr.11.0.0.nupkg.sha512",
         "mediatr.nuspec"
       ]
     },
@@ -6934,7 +6934,7 @@
   },
   "projectFileDependencyGroups": {
     "net6.0": [
-      "Autofac >= 6.4.0",
+      "Autofac >= 6.5.0",
       "Autofac.Extensions.DependencyInjection >= 8.0.0",
       "Memorabilia.Domain >= 1.0.0",
       "Microsoft.EntityFrameworkCore.Proxies >= 6.0.2"
@@ -6994,7 +6994,7 @@
         "dependencies": {
           "Autofac": {
             "target": "Package",
-            "version": "[6.4.0, )"
+            "version": "[6.5.0, )"
           },
           "Autofac.Extensions.DependencyInjection": {
             "target": "Package",

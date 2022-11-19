@@ -54,7 +54,7 @@
             },
             "MediatR": {
               "target": "Package",
-              "version": "[10.0.1, )"
+              "version": "[11.0.0, )"
             }
           },
           "imports": [
@@ -130,7 +130,7 @@
           "dependencies": {
             "Autofac": {
               "target": "Package",
-              "version": "[6.4.0, )"
+              "version": "[6.5.0, )"
             },
             "Autofac.Extensions.DependencyInjection": {
               "target": "Package",
@@ -223,7 +223,7 @@
             },
             "MediatR": {
               "target": "Package",
-              "version": "[10.0.1, )"
+              "version": "[11.0.0, )"
             },
             "Microsoft.AspNetCore.Components": {
               "target": "Package",
@@ -243,7 +243,7 @@
             },
             "PropertyChanged.Fody": {
               "target": "Package",
-              "version": "[4.0.5, )"
+              "version": "[4.1.0, )"
             }
           },
           "imports": [
@@ -316,7 +316,7 @@
           "dependencies": {
             "MediatR": {
               "target": "Package",
-              "version": "[10.0.1, )"
+              "version": "[11.0.0, )"
             },
             "Microsoft.EntityFrameworkCore.Proxies": {
               "target": "Package",
@@ -393,7 +393,7 @@
           "dependencies": {
             "Autofac": {
               "target": "Package",
-              "version": "[6.4.0, )"
+              "version": "[6.5.0, )"
             },
             "Autofac.Extensions.DependencyInjection": {
               "target": "Package",
@@ -483,7 +483,7 @@
           "dependencies": {
             "Autofac": {
               "target": "Package",
-              "version": "[6.4.0, )"
+              "version": "[6.5.0, )"
             },
             "Autofac.Extensions.DependencyInjection": {
               "target": "Package",
@@ -491,11 +491,11 @@
             },
             "MediatR": {
               "target": "Package",
-              "version": "[10.0.1, )"
+              "version": "[11.0.0, )"
             },
             "MediatR.Extensions.Microsoft.DependencyInjection": {
               "target": "Package",
-              "version": "[10.0.1, )"
+              "version": "[11.0.0, )"
             },
             "Microsoft.AspNetCore.Components": {
               "target": "Package",

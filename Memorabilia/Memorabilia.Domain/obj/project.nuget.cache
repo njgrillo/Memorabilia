@@ -1,12 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "+VpFycbJrBKbXMWZKkx9J+YJ7eTVxFHncDnVpDu5/1dkC/qD2A/rYOLGoWnT3RpK5FULAApbdbHZ8DJK6XxV/w==",
+  "dgSpecHash": "M3ylHhf0To61cuaWGIKGRiCUxsfcYJKA1eDn9SqpsxHimLr13zf3nJ6gDNvZrT0G9JYEPChbmDp82/zJfeYcbQ==",
   "success": true,
   "projectFilePath": "D:\\Projects\\njgrillo\\Memorabilia\\Memorabilia\\Memorabilia.Domain\\Memorabilia.Domain.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\njgri\\.nuget\\packages\\castle.core\\4.4.1\\castle.core.4.4.1.nupkg.sha512",
     "C:\\Users\\njgri\\.nuget\\packages\\entityframework\\6.4.4\\entityframework.6.4.4.nupkg.sha512",
-    "C:\\Users\\njgri\\.nuget\\packages\\mediatr\\10.0.1\\mediatr.10.0.1.nupkg.sha512",
+    "C:\\Users\\njgri\\.nuget\\packages\\mediatr\\11.0.0\\mediatr.11.0.0.nupkg.sha512",
     "C:\\Users\\njgri\\.nuget\\packages\\mediatr.contracts\\1.0.1\\mediatr.contracts.1.0.1.nupkg.sha512",
     "C:\\Users\\njgri\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512",
     "C:\\Users\\njgri\\.nuget\\packages\\microsoft.entityframeworkcore\\6.0.2\\microsoft.entityframeworkcore.6.0.2.nupkg.sha512",

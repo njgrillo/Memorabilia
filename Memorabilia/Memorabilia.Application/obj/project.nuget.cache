@@ -1,14 +1,14 @@
 {
   "version": 2,
-  "dgSpecHash": "4q7z8sdB+JUCh92j6UShH/xQGH0CmVrjJhi5oEJVwBEPbaX3D/kMLkT1XyVt/ESemVm6u50FAhApZIjdyvSnwQ==",
+  "dgSpecHash": "Ote4bHQvhoGWQjZ6NXdxVq2fLHyxmzz0TSdsoafzRBnfSyYmHq5SS+dt/Ui1wrpw8GUAp8d87YKDzfelgs5kIg==",
   "success": true,
   "projectFilePath": "D:\\Projects\\njgrillo\\Memorabilia\\Memorabilia\\Memorabilia.Application\\Memorabilia.Application.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\njgri\\.nuget\\packages\\autofac\\6.4.0\\autofac.6.4.0.nupkg.sha512",
+    "C:\\Users\\njgri\\.nuget\\packages\\autofac\\6.5.0\\autofac.6.5.0.nupkg.sha512",
     "C:\\Users\\njgri\\.nuget\\packages\\autofac.extensions.dependencyinjection\\8.0.0\\autofac.extensions.dependencyinjection.8.0.0.nupkg.sha512",
     "C:\\Users\\njgri\\.nuget\\packages\\castle.core\\4.4.1\\castle.core.4.4.1.nupkg.sha512",
     "C:\\Users\\njgri\\.nuget\\packages\\entityframework\\6.4.4\\entityframework.6.4.4.nupkg.sha512",
-    "C:\\Users\\njgri\\.nuget\\packages\\mediatr\\10.0.1\\mediatr.10.0.1.nupkg.sha512",
+    "C:\\Users\\njgri\\.nuget\\packages\\mediatr\\11.0.0\\mediatr.11.0.0.nupkg.sha512",
     "C:\\Users\\njgri\\.nuget\\packages\\mediatr.contracts\\1.0.1\\mediatr.contracts.1.0.1.nupkg.sha512",
     "C:\\Users\\njgri\\.nuget\\packages\\microsoft.aspnetcore.authorization\\6.0.8\\microsoft.aspnetcore.authorization.6.0.8.nupkg.sha512",
     "C:\\Users\\njgri\\.nuget\\packages\\microsoft.aspnetcore.components\\6.0.8\\microsoft.aspnetcore.components.6.0.8.nupkg.sha512",
