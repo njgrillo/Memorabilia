@@ -1,5 +1,4 @@
 ﻿using Memorabilia.Domain.Entities;
-using System.Reflection.Metadata;
 
 namespace Memorabilia.Repository;
 

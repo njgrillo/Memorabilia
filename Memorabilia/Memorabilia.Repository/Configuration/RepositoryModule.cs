@@ -17,5 +17,8 @@ public class RepositoryModule : Module
         builder.RegisterGeneric(typeof(DomainRepository<>))
            .As(typeof(IDomainRepository<>))
         .InstancePerDependency();
+
+        builder.RegisterType<ContextLoader>().As<IContextLoader>()
+            .InstancePerDependency();
     }
 }

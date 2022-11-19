@@ -74,6 +74,7 @@ global using Memorabilia.Application.Features.Autograph.Image;
 global using Memorabilia.Application.Features.Autograph.Inscriptions;
 global using Memorabilia.Application.Features.Autograph.Spot;
 global using Memorabilia.Application.Features.Image;
+global using Memorabilia.Application.Features.Initialize;
 global using Memorabilia.Application.Features.Memorabilia;
 global using Memorabilia.Application.Features.Memorabilia.Bammer;
 global using Memorabilia.Application.Features.Memorabilia.Baseball;

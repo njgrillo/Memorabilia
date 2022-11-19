@@ -1,7 +1,4 @@
-﻿using Memorabilia.Application.Features.Admin.AccomplishmentTypes;
-using Memorabilia.Repository.Cache;
-
-namespace Memorabilia.MauiBlazor;
+﻿namespace Memorabilia.MauiBlazor;
 
 public static class MauiProgram
 {
@@ -33,6 +30,7 @@ public static class MauiProgram
         builder.Services.AddTransient<ICareerRecordRepository, CareerRecordRepository>();
         builder.Services.AddTransient<IChampionRepository, ChampionRepository>();       
         builder.Services.AddTransient<ICommissionerRepository, CommissionerRepository>();
+        builder.Services.AddTransient<IContextLoader, ContextLoader>();
         builder.Services.AddTransient<IDraftRepository, DraftRepository>();
         builder.Services.AddTransient<IFranchiseHallOfFameRepository, FranchiseHallOfFameRepository>();
         builder.Services.AddTransient<IHallOfFameRepository, HallOfFameRepository>();
@@ -85,9 +83,6 @@ public static class MauiProgram
 
         builder.Services.AddTransient<LeaderRepository>();
         builder.Services.AddTransient<ILeaderRepository, LeaderCacheRepository>();
-
-        //builder.Services.AddTransient<MemorabiliaItemRepository>();
-        //builder.Services.AddTransient<IMemorabiliaItemRepository, MemorabiliaItemCacheRepository>();
 
         builder.Services.AddTransient<PersonAccomplishmentRepository>();
         builder.Services.AddTransient<IPersonAccomplishmentRepository, PersonAccomplishmentCacheRepository>();
