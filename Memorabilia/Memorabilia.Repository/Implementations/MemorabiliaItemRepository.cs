@@ -1,8 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-using System.Data;
-using System.Linq.Expressions;
-
-namespace Memorabilia.Repository.Implementations;
+﻿namespace Memorabilia.Repository.Implementations;
 
 public class MemorabiliaItemRepository : MemorabiliaRepository<Domain.Entities.Memorabilia>, IMemorabiliaItemRepository
 {
