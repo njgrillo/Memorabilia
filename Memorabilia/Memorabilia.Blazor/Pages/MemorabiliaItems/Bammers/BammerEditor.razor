@@ -1,25 +1,10 @@
 ﻿@inherits MemorabiliaItem<SaveBammerViewModel>
 
-<EditPage ContinueNavigationPath="@ViewModel.ContinueNavigationPath"
-          DomainImageRootPath="@DomainImageRootPath"
-          EditMode="ViewModel.EditModeType"
-          ExitNavigationPath="@ViewModel.ExitNavigationPath"
-          ImageFileName="@ViewModel.ImageFileName"
-          ItemName="@ViewModel.ItemType.Name"
-          Model="ViewModel"
-          OnLoad="OnLoad"
-          OnSave="OnSave"
-          PageFooterButtonText="@ViewModel.ExitButtonText"
-          PageFooterNavigationPath="@ViewModel.BackNavigationPath"
-          PageTitle="@ViewModel.PageTitle"
-          TItem="SaveBammerViewModel"
-          UseMultipleButtons="true">
-    <TimelineContent>
-        <MemorabiliaItemTimeline EditMode="ViewModel.EditModeType"
-                                 ItemTypeName="@ViewModel.ItemType.Name"
-                                 MemorabiliaId="ViewModel.MemorabiliaId"
-                                 MemorabiliaItemStep="ViewModel.MemorabiliaItemStep" />
-    </TimelineContent>
+<EditMemorabiliaPage DomainImageRootPath="@DomainImageRootPath"
+                     Item="ViewModel"
+                     OnLoad="OnLoad"
+                     OnSave="OnSave" 
+                     TItem="SaveBammerViewModel">
     <Content>
         <MemorabiliaItemEditor DisplayItemTypeGameStyle="false" 
                                DisplayItemTypeSize="false"
@@ -47,6 +32,6 @@
                     </ContentColumn3>
                 </DivRowCol3>
             </AdditionalContent>
-        </MemorabiliaItemEditor>        
+        </MemorabiliaItemEditor>  
     </Content>
-</EditPage>
+</EditMemorabiliaPage>

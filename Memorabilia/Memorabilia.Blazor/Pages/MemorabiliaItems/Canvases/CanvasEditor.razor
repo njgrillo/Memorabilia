@@ -1,25 +1,10 @@
 ﻿@inherits MemorabiliaItem<SaveCanvasViewModel>
 
-<EditPage ContinueNavigationPath="@ViewModel.ContinueNavigationPath"
-          DomainImageRootPath="@DomainImageRootPath"
-          EditMode="ViewModel.EditModeType"
-          ExitNavigationPath="@ViewModel.ExitNavigationPath"
-          ImageFileName="@ViewModel.ImageFileName"
-          ItemName="@ViewModel.ItemType.Name"
-          Model="ViewModel"
-          OnLoad="OnLoad"
-          OnSave="OnSave"
-          PageFooterButtonText="@ViewModel.ExitButtonText"
-          PageFooterNavigationPath="@ViewModel.ExitNavigationPath"
-          PageTitle="@ViewModel.PageTitle"
-          TItem="SaveCanvasViewModel"
-          UseMultipleButtons="true">
-    <TimelineContent>
-        <MemorabiliaItemTimeline EditMode="ViewModel.EditModeType"
-                                 ItemTypeName="@ViewModel.ItemType.Name"
-                                 MemorabiliaId="ViewModel.MemorabiliaId"
-                                 MemorabiliaItemStep="ViewModel.MemorabiliaItemStep" />
-    </TimelineContent>
+<EditMemorabiliaPage DomainImageRootPath="@DomainImageRootPath"
+                     Item="ViewModel"
+                     OnLoad="OnLoad"
+                     OnSave="OnSave" 
+                     TItem="SaveCanvasViewModel">
     <Content>
         <MemorabiliaItemEditor DisplayItemTypeGameStyle="false"
                                DisplayMultiPersonSelector="true"
@@ -52,4 +37,4 @@
             </AdditionalContent>
         </MemorabiliaItemEditor>
     </Content>
-</EditPage>
+</EditMemorabiliaPage>

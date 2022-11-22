@@ -1,25 +1,10 @@
 ﻿@inherits MemorabiliaItem<SaveBatViewModel>
 
-<EditPage ContinueNavigationPath="@ViewModel.ContinueNavigationPath"
-          DomainImageRootPath="@DomainImageRootPath"
-          EditMode="ViewModel.EditModeType"
-          ExitNavigationPath="@ViewModel.ExitNavigationPath"
-          ImageFileName="@ViewModel.ImageFileName"
-          ItemName="@ViewModel.ItemType.Name"
-          Model="ViewModel"
-          OnLoad="OnLoad"
-          OnSave="OnSave"
-          PageFooterButtonText="@ViewModel.ExitButtonText"
-          PageFooterNavigationPath="@ViewModel.ExitNavigationPath"
-          PageTitle="@ViewModel.PageTitle"
-          TItem="SaveBatViewModel"
-          UseMultipleButtons="true">
-    <TimelineContent>
-        <MemorabiliaItemTimeline EditMode="ViewModel.EditModeType"
-                                 ItemTypeName="@ViewModel.ItemType.Name"
-                                 MemorabiliaId="ViewModel.MemorabiliaId"
-                                 MemorabiliaItemStep="ViewModel.MemorabiliaItemStep" />
-    </TimelineContent>
+<EditMemorabiliaPage DomainImageRootPath="@DomainImageRootPath"
+                     Item="ViewModel"
+                     OnLoad="OnLoad"
+                     OnSave="OnSave" 
+                     TItem="SaveBatViewModel">
     <Content>
         <MemorabiliaItemEditor DisplaySinglePersonSelector="true"
                                DisplaySingleTeamSelector="true"
@@ -28,12 +13,12 @@
             <AdditionalContent>
                 <DivRowCol3>
                     <Content>
-                        <BatTypeDropDown GameStyleType="ViewModel.GameStyleType" 
+                        <BatTypeDropDown GameStyleType="ViewModel.GameStyleType"
                                          SelectedValue="ViewModel.BatTypeId"
                                          SelectionChanged="(p) => ViewModel.BatTypeId = p" />
                     </Content>
                     <ContentColumn2>
-                        <ColorDropDown ItemType="ViewModel.ItemType" 
+                        <ColorDropDown ItemType="ViewModel.ItemType"
                                        SelectedValue="ViewModel.ColorId"
                                        SelectionChanged="(p) => ViewModel.ColorId = p" />
                     </ContentColumn2>
@@ -45,6 +30,6 @@
                     </ContentColumn3>
                 </DivRowCol3>
             </AdditionalContent>
-        </MemorabiliaItemEditor>        
+        </MemorabiliaItemEditor>
     </Content>
-</EditPage>
+</EditMemorabiliaPage>

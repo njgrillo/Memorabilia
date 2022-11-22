@@ -35,7 +35,8 @@
         </PrettyBlazor.Condition>
     </ContentColumn4>
 </DivRowCol3>
-<DivRowCol3 HideColumn1="@(!ViewModel.DisplayGameStyleType)"
+<DivRowCol3 Hidden="@(!DisplayItemTypeGameStyle)" 
+            HideColumn1="@(!ViewModel.DisplayGameStyleType)"
             HideColumn2="@(!ViewModel.DisplayGameDate)">
     <Content>
         <ItemTypeGameStyleDropDown ItemType="ViewModel.ItemType"

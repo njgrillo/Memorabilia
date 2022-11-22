@@ -1,26 +1,11 @@
 ﻿@inherits MemorabiliaItem<SaveJerseyNumberViewModel>
 
-<EditPage ContinueNavigationPath="@ViewModel.ContinueNavigationPath"
-          DomainImageRootPath="@DomainImageRootPath"
-          EditMode="ViewModel.EditModeType"
-          ExitNavigationPath="@ViewModel.ExitNavigationPath"
-          ImageFileName="@ViewModel.ImageFileName"
-          ItemName="@ViewModel.ItemType.Name"
-          Model="ViewModel"
-          OnLoad="OnLoad"
-          OnSave="OnSave"
-          PageFooterButtonText="@ViewModel.ExitButtonText"
-          PageFooterNavigationPath="@ViewModel.BackNavigationPath"
-          PageTitle="@ViewModel.PageTitle"
-          TItem="SaveJerseyNumberViewModel"
-          UseMultipleButtons="true">
-    <TimelineContent>
-        <MemorabiliaItemTimeline EditMode="ViewModel.EditModeType"
-                                 ItemTypeName="@ViewModel.ItemType.Name"
-                                 MemorabiliaId="ViewModel.MemorabiliaId"
-                                 MemorabiliaItemStep="ViewModel.MemorabiliaItemStep" />
-    </TimelineContent>
-    <Content>     
+<EditMemorabiliaPage DomainImageRootPath="@DomainImageRootPath"
+                     Item="ViewModel"
+                     OnLoad="OnLoad"
+                     OnSave="OnSave" 
+                     TItem="SaveJerseyNumberViewModel">
+    <Content>
         <MemorabiliaItemEditor DisplayItemTypeBrand="false"
                                DisplayItemTypeGameStyle="false"
                                DisplayItemTypeLevel="false"
@@ -31,4 +16,4 @@
                                TItem="SaveJerseyNumberViewModel"
                                ViewModel="ViewModel" />
     </Content>
-</EditPage>
+</EditMemorabiliaPage>

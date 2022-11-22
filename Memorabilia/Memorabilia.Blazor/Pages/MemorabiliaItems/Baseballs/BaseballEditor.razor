@@ -1,25 +1,10 @@
 ﻿@inherits MemorabiliaItem<SaveBaseballViewModel>
 
-<EditPage ContinueNavigationPath="@ViewModel.ContinueNavigationPath"
-          DomainImageRootPath="@DomainImageRootPath"
-          EditMode="ViewModel.EditModeType"
-          ExitNavigationPath="@ViewModel.ExitNavigationPath"
-          ImageFileName="@ViewModel.ImageFileName"
-          ItemName="@ViewModel.ItemType.Name"
-          Model="ViewModel"
-          OnLoad="OnLoad"
-          OnSave="OnSave"
-          PageFooterButtonText="@ViewModel.ExitButtonText"
-          PageFooterNavigationPath="@ViewModel.BackNavigationPath"
-          PageTitle="@ViewModel.PageTitle"
-          TItem="SaveBaseballViewModel"
-          UseMultipleButtons="true">
-    <TimelineContent>
-        <MemorabiliaItemTimeline EditMode="ViewModel.EditModeType"
-                                 ItemTypeName="@ViewModel.ItemType.Name"
-                                 MemorabiliaId="ViewModel.MemorabiliaId"
-                                 MemorabiliaItemStep="ViewModel.MemorabiliaItemStep" />
-    </TimelineContent>
+<EditMemorabiliaPage DomainImageRootPath="@DomainImageRootPath"
+                     Item="ViewModel"
+                     OnLoad="OnLoad"
+                     OnSave="OnSave"
+                     TItem="SaveBaseballViewModel">
     <Content>
         <MemorabiliaItemEditor DisplaySinglePersonSelector="true"
                                DisplayMultiTeamSelector="true"
@@ -28,8 +13,8 @@
             <AdditionalContent>
                 <DivRowCol3 HideColumn1="@(!ViewModel.DisplayBaseballType)"
                             HideColumn2="@(!ViewModel.DisplayCommissioner && !ViewModel.DisplayLeaguePresident)">
-                    <Content>                
-                        <BaseballTypeDropDown GameStyleType="ViewModel.GameStyleType" 
+                    <Content>
+                        <BaseballTypeDropDown GameStyleType="ViewModel.GameStyleType"
                                               SelectedValue="ViewModel.BaseballTypeId"
                                               SelectionChanged="(p) => ViewModel.BaseballTypeId = p" />
                     </Content>
@@ -43,12 +28,12 @@
                         </PrettyBlazor.Condition>
                         <PrettyBlazor.Condition Evaluation="ViewModel.DisplayLeaguePresident">
                             <Match>
-                                <LeaguePresidentDropDown League="@ViewModel.League" 
+                                <LeaguePresidentDropDown League="@ViewModel.League"
                                                          SelectedValue="@ViewModel.LeaguePresidentId"
                                                          SelectionChanged="(p) => ViewModel.LeaguePresidentId = p"
                                                          SportLeagueLevel="SportLeagueLevel.MajorLeagueBaseball" />
                             </Match>
-                        </PrettyBlazor.Condition>                                    
+                        </PrettyBlazor.Condition>
                     </ContentColumn2>
                     <ContentColumn3>
                         <PrettyBlazor.Condition Evaluation="ViewModel.DisplayBaseballTypeYear">
@@ -67,11 +52,10 @@
                                            SelectedText="@ViewModel.BaseballTypeAnniversary"
                                            SelectedTextChanged="@((p) => ViewModel.BaseballTypeAnniversary = p)" />
                             </Match>
-                        </PrettyBlazor.Condition>  
+                        </PrettyBlazor.Condition>
                     </ContentColumn3>
                 </DivRowCol3>
             </AdditionalContent>
-        </MemorabiliaItemEditor>         
+        </MemorabiliaItemEditor>
     </Content>
-</EditPage>
-
+</EditMemorabiliaPage>

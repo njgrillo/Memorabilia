@@ -1,0 +1,28 @@
+﻿@typeparam TItem
+
+@inherits MemorabiliaItem<TItem>
+
+<EditPage ContinueNavigationPath="@Item.ContinueNavigationPath"
+          DomainImageRootPath="@DomainImageRootPath"
+          EditMode="Item.EditModeType"
+          ExitNavigationPath="@Item.ExitNavigationPath"
+          ImageFileName="@Item.ImageFileName"
+          ItemName="@Item.ItemType.Name"
+          Model="Item"
+          OnLoad="Load"
+          OnSave="Save"
+          PageFooterButtonText="@Item.ExitButtonText"
+          PageFooterNavigationPath="@Item.BackNavigationPath"
+          PageTitle="@Item.PageTitle"
+          TItem="TItem"
+          UseMultipleButtons="true">
+    <TimelineContent>
+        <MemorabiliaItemTimeline EditMode="Item.EditModeType"
+                                 ItemTypeName="@Item.ItemType.Name"
+                                 MemorabiliaId="Item.MemorabiliaId"
+                                 MemorabiliaItemStep="Item.MemorabiliaItemStep" />
+    </TimelineContent>
+    <Content>
+        @Content
+    </Content>
+</EditPage>

@@ -1,30 +1,15 @@
 ﻿@inherits MemorabiliaItem<SaveTennisRacketViewModel>
 
-<EditPage ContinueNavigationPath="@ViewModel.ContinueNavigationPath"
-          DomainImageRootPath="@DomainImageRootPath"
-          EditMode="ViewModel.EditModeType"
-          ExitNavigationPath="@ViewModel.ExitNavigationPath"
-          ImageFileName="@ViewModel.ImageFileName"
-          ItemName="@ViewModel.ItemType.Name"
-          Model="ViewModel"
-          OnLoad="OnLoad"
-          OnSave="OnSave"
-          PageFooterButtonText="@ViewModel.ExitButtonText"
-          PageFooterNavigationPath="@ViewModel.BackNavigationPath"
-          PageTitle="@ViewModel.PageTitle"
-          TItem="SaveTennisRacketViewModel"
-          UseMultipleButtons="true">
-    <TimelineContent>
-        <MemorabiliaItemTimeline EditMode="ViewModel.EditModeType"
-                                 ItemTypeName="@ViewModel.ItemType.Name"
-                                 MemorabiliaId="ViewModel.MemorabiliaId"
-                                 MemorabiliaItemStep="ViewModel.MemorabiliaItemStep" />
-    </TimelineContent>
+<EditMemorabiliaPage DomainImageRootPath="@DomainImageRootPath"
+                     Item="ViewModel"
+                     OnLoad="OnLoad"
+                     OnSave="OnSave" 
+                     TItem="SaveTennisRacketViewModel">
     <Content>
-        <MemorabiliaItemEditor DisplaySinglePersonSelector="true" 
+        <MemorabiliaItemEditor DisplaySinglePersonSelector="true"
                                GameDateDisplayText="Match Date"
                                GameStyleTypeDisplayText="Match Style"
                                TItem="SaveTennisRacketViewModel"
                                ViewModel="ViewModel" />
     </Content>
-</EditPage>
+</EditMemorabiliaPage>

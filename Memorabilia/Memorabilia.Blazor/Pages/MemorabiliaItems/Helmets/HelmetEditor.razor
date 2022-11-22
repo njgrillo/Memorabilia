@@ -1,25 +1,10 @@
 ﻿@inherits MemorabiliaItem<SaveHelmetViewModel>
 
-<EditPage ContinueNavigationPath="@ViewModel.ContinueNavigationPath"
-          DomainImageRootPath="@DomainImageRootPath"
-          EditMode="ViewModel.EditModeType"
-          ExitNavigationPath="@ViewModel.ExitNavigationPath"
-          ImageFileName="@ViewModel.ImageFileName"
-          ItemName="@ViewModel.ItemType.Name"
-          Model="ViewModel"
-          OnLoad="OnLoad"
-          OnSave="OnSave"
-          PageFooterButtonText="@ViewModel.ExitButtonText"
-          PageFooterNavigationPath="@ViewModel.ExitNavigationPath"
-          PageTitle="@ViewModel.PageTitle"
-          TItem="SaveHelmetViewModel"
-          UseMultipleButtons="true">
-    <TimelineContent>
-        <MemorabiliaItemTimeline EditMode="ViewModel.EditModeType"
-                                 ItemTypeName="@ViewModel.ItemType.Name"
-                                 MemorabiliaId="ViewModel.MemorabiliaId"
-                                 MemorabiliaItemStep="ViewModel.MemorabiliaItemStep" />
-    </TimelineContent>
+<EditMemorabiliaPage DomainImageRootPath="@DomainImageRootPath"
+                     Item="ViewModel"
+                     OnLoad="OnLoad"
+                     OnSave="OnSave" 
+                     TItem="SaveHelmetViewModel">
     <Content>
         <MemorabiliaItemEditor DisplayMultiPersonSelector="true"
                                DisplayMultiSportSelector="true"
@@ -30,22 +15,22 @@
                 <DivRowCol3 HideColumn2="@(!ViewModel.DisplayHelmetQualityType)"
                             HideColumn3="@(!ViewModel.DisplayHelmetFinish)">
                     <Content>
-                        <HelmetTypeDropDown GameStyleType="ViewModel.GameStyleType" 
+                        <HelmetTypeDropDown GameStyleType="ViewModel.GameStyleType"
                                             SelectedValue="ViewModel.HelmetTypeId"
-                                            SelectionChanged="(p) => ViewModel.HelmetTypeId = p" /> 
+                                            SelectionChanged="(p) => ViewModel.HelmetTypeId = p" />
                     </Content>
                     <ContentColumn2>
-                        <DivHidden >
+                        <DivHidden>
                             <Content>
                                 <HelmetQualityTypeDropDown Disabled="!ViewModel.CanEditHelmetQualityType"
                                                            SelectedValue="ViewModel.HelmetQualityTypeId"
                                                            SelectionChanged="(p) => ViewModel.HelmetQualityTypeId = p" />
                             </Content>
-                        </DivHidden> 
+                        </DivHidden>
                     </ContentColumn2>
                     <ContentColumn3>
                         <HelmetFinishDropDown SelectedValue="ViewModel.HelmetFinishId"
-                                              SelectionChanged="(p) => ViewModel.HelmetFinishId = p" /> 
+                                              SelectionChanged="(p) => ViewModel.HelmetFinishId = p" />
                     </ContentColumn3>
                 </DivRowCol3>
                 <DivRowCol3>
@@ -56,6 +41,6 @@
                     </Content>
                 </DivRowCol3>
             </AdditionalContent>
-        </MemorabiliaItemEditor>        
+        </MemorabiliaItemEditor>
     </Content>
-</EditPage>
+</EditMemorabiliaPage>

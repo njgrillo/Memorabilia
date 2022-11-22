@@ -1,31 +1,16 @@
 ﻿@inherits MemorabiliaItem<SavePosterViewModel>
 
-<EditPage ContinueNavigationPath="@ViewModel.ContinueNavigationPath"
-          DomainImageRootPath="@DomainImageRootPath"
-          EditMode="ViewModel.EditModeType"
-          ExitNavigationPath="@ViewModel.ExitNavigationPath"
-          ImageFileName="@ViewModel.ImageFileName"
-          ItemName="@ViewModel.ItemType.Name"
-          Model="ViewModel"
-          OnLoad="OnLoad"
-          OnSave="OnSave"
-          PageFooterButtonText="@ViewModel.ExitButtonText"
-          PageFooterNavigationPath="@ViewModel.ExitNavigationPath"
-          PageTitle="@ViewModel.PageTitle"
-          TItem="SavePosterViewModel"
-          UseMultipleButtons="true">
-    <TimelineContent>
-        <MemorabiliaItemTimeline EditMode="ViewModel.EditModeType"
-                                 ItemTypeName="@ViewModel.ItemType.Name"
-                                 MemorabiliaId="ViewModel.MemorabiliaId"
-                                 MemorabiliaItemStep="ViewModel.MemorabiliaItemStep" />
-    </TimelineContent>
+<EditMemorabiliaPage DomainImageRootPath="@DomainImageRootPath"
+                     Item="ViewModel"
+                     OnLoad="OnLoad"
+                     OnSave="OnSave" 
+                     TItem="SavePosterViewModel">
     <Content>
         <MemorabiliaItemEditor DisplayItemTypeGameStyle="false"
                                DisplayItemTypeLevel="false"
                                DisplayMultiPersonSelector="true"
                                DisplayMultiSportSelector="true"
-                               DisplayMultiTeamSelector="true"                               
+                               DisplayMultiTeamSelector="true"
                                TItem="SavePosterViewModel"
                                ViewModel="ViewModel">
             <AdditionalContent>
@@ -48,8 +33,8 @@
                                          CheckedChanged="(p) => ViewModel.Matted = p"
                                          Label="Matted" />
                     </Content>
-                </DivRowCol3> 
+                </DivRowCol3>
             </AdditionalContent>
-        </MemorabiliaItemEditor>              
+        </MemorabiliaItemEditor>
     </Content>
-</EditPage>
+</EditMemorabiliaPage>

@@ -1,27 +1,12 @@
 ﻿@inherits MemorabiliaItem<SaveLithographViewModel>
 
-<EditPage ContinueNavigationPath="@ViewModel.ContinueNavigationPath"
-          DomainImageRootPath="@DomainImageRootPath"
-          EditMode="ViewModel.EditModeType"
-          ExitNavigationPath="@ViewModel.ExitNavigationPath"
-          ImageFileName="@ViewModel.ImageFileName"
-          ItemName="@ViewModel.ItemType.Name"
-          Model="ViewModel"
-          OnLoad="OnLoad"
-          OnSave="OnSave"
-          PageFooterButtonText="@ViewModel.ExitButtonText"
-          PageFooterNavigationPath="@ViewModel.ExitNavigationPath"
-          PageTitle="@ViewModel.PageTitle"
-          TItem="SaveLithographViewModel"
-          UseMultipleButtons="true">
-    <TimelineContent>
-        <MemorabiliaItemTimeline EditMode="ViewModel.EditModeType"
-                                 ItemTypeName="@ViewModel.ItemType.Name"
-                                 MemorabiliaId="ViewModel.MemorabiliaId"
-                                 MemorabiliaItemStep="ViewModel.MemorabiliaItemStep" />
-    </TimelineContent>
+<EditMemorabiliaPage DomainImageRootPath="@DomainImageRootPath"
+                     Item="ViewModel"
+                     OnLoad="OnLoad"
+                     OnSave="OnSave" 
+                     TItem="SaveLithographViewModel">
     <Content>
-        <MemorabiliaItemEditor DisplayItemTypeGameStyle="false" 
+        <MemorabiliaItemEditor DisplayItemTypeGameStyle="false"
                                DisplayItemTypeLevel="false"
                                DisplayMultiPersonSelector="true"
                                DisplayMultiSportSelector="true"
@@ -38,8 +23,8 @@
                 <DivRowCol3>
                     <Content>
                         <BooleanCheckBox Checked="@ViewModel.Framed"
-                                         CheckedChanged="(p) => ViewModel.Framed = p"  
-                                         Label="Framed" /> 
+                                         CheckedChanged="(p) => ViewModel.Framed = p"
+                                         Label="Framed" />
                     </Content>
                 </DivRowCol3>
                 <DivRowCol3>
@@ -50,6 +35,6 @@
                     </Content>
                 </DivRowCol3>
             </AdditionalContent>
-        </MemorabiliaItemEditor>        
+        </MemorabiliaItemEditor>
     </Content>
-</EditPage>
+</EditMemorabiliaPage>

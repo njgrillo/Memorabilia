@@ -1,32 +1,17 @@
 ﻿@inherits MemorabiliaItem<SaveTicketViewModel>
 
-<EditPage ContinueNavigationPath="@ViewModel.ContinueNavigationPath"
-          DomainImageRootPath="@DomainImageRootPath"
-          EditMode="ViewModel.EditModeType"
-          ExitNavigationPath="@ViewModel.ExitNavigationPath"
-          ImageFileName="@ViewModel.ImageFileName"
-          ItemName="@ViewModel.ItemType.Name"
-          Model="ViewModel"
-          OnLoad="OnLoad"
-          OnSave="OnSave"
-          PageFooterButtonText="@ViewModel.ExitButtonText"
-          PageFooterNavigationPath="@ViewModel.BackNavigationPath"
-          PageTitle="@ViewModel.PageTitle"
-          TItem="SaveTicketViewModel"
-          UseMultipleButtons="true">
-    <TimelineContent>
-        <MemorabiliaItemTimeline EditMode="ViewModel.EditModeType"
-                                 ItemTypeName="@ViewModel.ItemType.Name"
-                                 MemorabiliaId="ViewModel.MemorabiliaId"
-                                 MemorabiliaItemStep="ViewModel.MemorabiliaItemStep" />
-    </TimelineContent>
+<EditMemorabiliaPage DomainImageRootPath="@DomainImageRootPath"
+                     Item="ViewModel"
+                     OnLoad="OnLoad"
+                     OnSave="OnSave" 
+                     TItem="SaveTicketViewModel">
     <Content>
-        <MemorabiliaItemEditor DisplayItemTypeBrand="false"     
+        <MemorabiliaItemEditor DisplayItemTypeBrand="false"
                                DisplaySinglePersonSelector="true"
                                DisplaySingleSportSelector="true"
-                               DisplayMultiTeamSelector="true"                               
+                               DisplayMultiTeamSelector="true"
                                GameDateDisplayText="Event Date"
                                TItem="SaveTicketViewModel"
                                ViewModel="ViewModel" />
     </Content>
-</EditPage>
+</EditMemorabiliaPage>

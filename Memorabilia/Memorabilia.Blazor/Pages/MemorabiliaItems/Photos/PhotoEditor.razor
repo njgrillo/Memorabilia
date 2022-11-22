@@ -1,25 +1,10 @@
 ﻿@inherits MemorabiliaItem<SavePhotoViewModel>
 
-<EditPage ContinueNavigationPath="@ViewModel.ContinueNavigationPath"
-          DomainImageRootPath="@DomainImageRootPath"
-          EditMode="ViewModel.EditModeType"
-          ExitNavigationPath="@ViewModel.ExitNavigationPath"
-          ImageFileName="@ViewModel.ImageFileName"
-          ItemName="@ViewModel.ItemType.Name"
-          Model="ViewModel"
-          OnLoad="OnLoad"
-          OnSave="OnSave"
-          PageFooterButtonText="@ViewModel.ExitButtonText"
-          PageFooterNavigationPath="@ViewModel.ExitNavigationPath"
-          PageTitle="@ViewModel.PageTitle"
-          TItem="SavePhotoViewModel"
-          UseMultipleButtons="true">
-    <TimelineContent>
-        <MemorabiliaItemTimeline EditMode="ViewModel.EditModeType"
-                                 ItemTypeName="@ViewModel.ItemType.Name"
-                                 MemorabiliaId="ViewModel.MemorabiliaId"
-                                 MemorabiliaItemStep="ViewModel.MemorabiliaItemStep" />
-    </TimelineContent>
+<EditMemorabiliaPage DomainImageRootPath="@DomainImageRootPath"
+                     Item="ViewModel"
+                     OnLoad="OnLoad"
+                     OnSave="OnSave" 
+                     TItem="SavePhotoViewModel">
     <Content>
         <MemorabiliaItemEditor DisplayItemTypeLevel="false"
                                DisplayMultiPersonSelector="true"
@@ -42,7 +27,7 @@
                     <Content>
                         <BooleanCheckBox Checked="@ViewModel.Framed"
                                          CheckedChanged="(p) => ViewModel.Framed = p"
-                                         Label="Framed" /> 
+                                         Label="Framed" />
                     </Content>
                     <ContentColumn2>
                         <BooleanCheckBox Checked="@ViewModel.Matted"
@@ -53,4 +38,4 @@
             </AdditionalContent>
         </MemorabiliaItemEditor>
     </Content>
-</EditPage>
+</EditMemorabiliaPage>

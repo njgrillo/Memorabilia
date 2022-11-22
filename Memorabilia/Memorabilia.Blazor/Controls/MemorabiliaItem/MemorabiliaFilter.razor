@@ -1,262 +1,136 @@
 ﻿<div style="border: 1px solid black; margin-top: 2%; margin-bottom: 2%; margin-left: 2%; margin-right: 2%;">
-    <DivPad2>
-        <Content>
-            <div class="row">
-                <div class="col-md-6" style="text-align: left">
-                    <h3>Memorabilia Filters</h3>
-                </div>
-                <div class="col-md-6" style="text-align: left">
-                    <h3>Autograph Filters</h3>
-                </div>
-            </div>
+    <MudExpansionPanels MultiExpansion="true">
+        <MudExpansionPanel Text="Memorabilia Filters">
             <div class="row">
                 <div class="col-lg-2">
                     <div class="form-group">
                         <ItemTypeDropDown MultiSelect="true"
-                                            SelectedItems="_itemTypeIds"
-                                            SelectedItemsChanged="(p) => _itemTypeIds = p" />
+                                          SelectedItems="_itemTypeIds"
+                                          SelectedItemsChanged="(p) => _itemTypeIds = p" />
                     </div>
                 </div>    
                 <div class="col-lg-2">
                     <div class="form-group">
                         <BrandDropDown MultiSelect="true"
-                                        SelectedItems="_brandIds"
-                                        SelectedItemsChanged="(p) => _brandIds = p" />
+                                       SelectedItems="_brandIds"
+                                       SelectedItemsChanged="(p) => _brandIds = p" />
                     </div>
                 </div>
                 <div class="col-lg-2">
                     <div class="form-group">
                         <AcquisitionTypeDropDown MultiSelect="true"
-                                                    SelectedItems="_memorabiliaAcquisitionTypeIds"
-                                                    SelectedItemsChanged="(p) => _memorabiliaAcquisitionTypeIds = p" />
-                    </div>
-                </div> 
-                <div class="col-lg-2">
-                    <div class="form-group">
-                        <PersonAutoComplete IsCulturalSearch="true" 
-                                            SelectedValue="_autographPerson"
-                                            SelectionChanged="(p) => _autographPerson = p" />
-                    </div>                    
-                </div>
-                <div class="col-lg-2">
-                    <div class="form-group">
-                        <WritingInstrumentDropDown MultiSelect="true"
-                                                    SelectedItems="_writingInstrumentIds"
-                                                    SelectedItemsChanged="(p) => _writingInstrumentIds = p" />
-                    </div>
-                </div> 
-                <div class="col-lg-2">
-                    <div class="form-group">
-                        <AcquisitionTypeDropDown IsAutograph="true" 
-                                                    MultiSelect="true"
-                                                    SelectedItems="_autographAcquisitionTypeIds"
-                                                    SelectedItemsChanged="(p) => _autographAcquisitionTypeIds = p" />
-                    </div>
-                </div> 
-            </div>
-            <div class="row">
-                <div class="col-lg-2">
-                    <div class="form-group">
-                        <ConditionDropDown MultiSelect="true"
-                                            SelectedItems="_memorabiliaConditionIds"
-                                            SelectedItemsChanged="(p) => _memorabiliaConditionIds = p" />
-                    </div>
-                </div>    
-                <div class="col-lg-2">
-                    <div class="form-group">
-                        <SizeDropDown MultiSelect="true"
-                                        SelectedItems="_sizeIds"
-                                        SelectedItemsChanged="(p) => _sizeIds = p" />
+                                                 SelectedItems="_memorabiliaAcquisitionTypeIds"
+                                                 SelectedItemsChanged="(p) => _memorabiliaAcquisitionTypeIds = p" />
                     </div>
                 </div> 
                 <div class="col-lg-2">
                     <div class="form-group">
                         <MudDatePicker @bind-Date="_memorabiliaAcquiredDate"
-                                        Label="Acquired Date"
-                                        Variant="Variant.Outlined" />
+                                       Label="Acquired Date"
+                                       Variant="Variant.Outlined" />
+                    </div>                    
+                </div>
+                <div class="col-lg-2">
+                    <div class="form-group">
+                        <SizeDropDown MultiSelect="true"
+                                      SelectedItems="_sizeIds"
+                                      SelectedItemsChanged="(p) => _sizeIds = p" />
                     </div>
-                </div> 
+                </div>
                 <div class="col-lg-2">
                     <div class="form-group">
                         <ConditionDropDown MultiSelect="true"
-                                            SelectedItems="_autographConditionIds"
-                                            SelectedItemsChanged="(p) => _autographConditionIds = p" />
+                                           SelectedItems="_memorabiliaConditionIds"
+                                           SelectedItemsChanged="(p) => _memorabiliaConditionIds = p" />
                     </div>
-                </div> 
-                <div class="col-lg-2">
-                    <div class="form-group">
-                        <ColorDropDown MultiSelect="true"
-                                        SelectedItems="_colorIds"
-                                        SelectedItemsChanged="(p) => _colorIds = p" />
-                    </div>
-                </div> 
-                <div class="col-lg-2">
-                    <div class="form-group">
-                        <MudDatePicker @bind-Date="_autographAcquiredDate"
-                                        Label="Acquired Date"
-                                        Variant="Variant.Outlined" />
-                    </div>
-                </div> 
+                </div>
             </div>
             <div class="row">
                 <div class="col-lg-2">
                     <div class="form-group">
                         <NullableIntField Label="Grade"
-                                            Value="_memorabiliaGrade"
-                                            ValueChanged="@((p) => _memorabiliaGrade = p)" />
+                                          Value="_memorabiliaGrade"
+                                          ValueChanged="@((p) => _memorabiliaGrade = p)" />
                     </div>
-                </div> 
+                </div>
                 <div class="col-lg-2">
                     <div class="form-group">
                         <NullableDecimalField Label="Estimated Value Low ($)"
-                                                Value="_memorabiliaEstimatedValueLow"
-                                                ValueChanged="@((p) => _memorabiliaEstimatedValueLow = p)" />
+                                              Value="_memorabiliaEstimatedValueLow"
+                                              ValueChanged="@((p) => _memorabiliaEstimatedValueLow = p)" />
                     </div>
-                </div> 
+                </div>
                 <div class="col-lg-2">
                     <div class="form-group">
                         <NullableDecimalField Label="Estimated Value High ($)"
-                                                Value="_memorabiliaEstimatedValueHigh"
-                                                ValueChanged="@((p) => _memorabiliaEstimatedValueHigh = p)" />
+                                              Value="_memorabiliaEstimatedValueHigh"
+                                              ValueChanged="@((p) => _memorabiliaEstimatedValueHigh = p)" />
                     </div>
-                </div> 
-                <div class="col-lg-2">
-                    <div class="form-group">
-                        <NullableIntField Label="Grade"
-                                            Value="_autographGrade"
-                                            ValueChanged="@((p) => _autographGrade = p)" />
-                    </div>
-                </div>                 
-                <div class="col-lg-2">
-                    <div class="form-group">
-                        <SpotDropDown MultiSelect="true"
-                                        SelectedItems="_spotIds"
-                                        SelectedItemsChanged="(p) => _spotIds = p" />
-                    </div>
-                </div> 
-                <div class="col-lg-2">
-                    <div class="form-group">
-                        <BooleanCheckBox Checked="@_hasAutographAuthentication"
-                                            CheckedChanged="(p) => _hasAutographAuthentication = p"  
-                                            Label="Has Authentication(s)" /> 
-                    </div>
-                </div> 
-            </div>
-            <div class="row">
+                </div>
                 <div class="col-lg-2">
                     <div class="form-group">
                         <LevelTypeDropDown MultiSelect="true"
-                                            SelectedItems="_levelTypeIds"
-                                            SelectedItemsChanged="(p) => _levelTypeIds = p" />
+                                           SelectedItems="_levelTypeIds"
+                                           SelectedItemsChanged="(p) => _levelTypeIds = p" />
                     </div>
-                </div> 
+                </div>
                 <div class="col-lg-2">
                     <div class="form-group">
                         <NullableDecimalField Label="Cost Low ($)"
-                                                Value="_memorabiliaCostLow"
-                                                ValueChanged="@((p) => _memorabiliaCostLow = p)" />
+                                              Value="_memorabiliaCostLow"
+                                              ValueChanged="@((p) => _memorabiliaCostLow = p)" />
                     </div>
-                </div> 
+                </div>
                 <div class="col-lg-2">
                     <div class="form-group">
                         <NullableDecimalField Label="Cost High ($)"
-                                                Value="_memorabiliaCostHigh"
-                                                ValueChanged="@((p) => _memorabiliaCostHigh = p)" />
-                    </div>
-                </div> 
-                <div class="col-lg-2">
-                    <div class="form-group">
-                        <NullableDecimalField Label="Estimated Value Low ($)"
-                                                Value="_autographEstimatedValueLow"
-                                                ValueChanged="@((p) => _autographEstimatedValueLow = p)" />
-                    </div>
-                </div>
-                <div class="col-lg-2">
-                    <div class="form-group">
-                        <NullableDecimalField Label="Estimated Value High ($)"
-                                                Value="_autographEstimatedValueHigh"
-                                                ValueChanged="@((p) => _autographEstimatedValueHigh = p)" />
-                    </div>
-                </div> 
-                <div class="col-lg-2">
-                    <div class="form-group">
-                        <BooleanCheckBox Checked="@_hasAutographInscription"
-                                            CheckedChanged="(p) => _hasAutographInscription = p"  
-                                            Label="Has Inscription(s)" /> 
+                                              Value="_memorabiliaCostHigh"
+                                              ValueChanged="@((p) => _memorabiliaCostHigh = p)" />
                     </div>
                 </div>
             </div>
             <div class="row">
                 <div class="col-lg-2">
                     <div class="form-group">
-                        <PersonAutoComplete IsCulturalSearch="true" 
+                        <PersonAutoComplete IsCulturalSearch="true"
                                             SelectedValue="_memorabiliaPerson"
                                             SelectionChanged="(p) => _memorabiliaPerson = p" />
-                    </div>                    
-                </div> 
+                    </div>
+                </div>
                 <div class="col-lg-2">
                     <div class="form-group">
                         <SportDropDown MultiSelect="true"
-                                        SelectedItems="_sportIds"
-                                        SelectedItemsChanged="(p) => _sportIds = p" />
-                    </div>                    
-                </div> 
+                                       SelectedItems="_sportIds"
+                                       SelectedItemsChanged="(p) => _sportIds = p" />
+                    </div>
+                </div>
                 <div class="col-lg-2">
                     <div class="form-group">
                         <SportLeagueLevelDropDown MultiSelect="true"
-                                                    SelectedItems="_sportLeagueLevelIds"
-                                                    SelectedItemsChanged="(p) => _sportLeagueLevelIds = p" />
-                    </div>                    
-                </div> 
-                <div class="col-lg-2">
-                    <div class="form-group">
-                        <NullableDecimalField Label="Cost Low ($)"
-                                                Value="_autographCostLow"
-                                                ValueChanged="@((p) => _autographCostLow = p)" />
+                                                  SelectedItems="_sportLeagueLevelIds"
+                                                  SelectedItemsChanged="(p) => _sportLeagueLevelIds = p" />
                     </div>
                 </div>
-                <div class="col-lg-2">
-                    <div class="form-group">
-                        <NullableDecimalField Label="Cost High ($)" 
-                                                Value="_autographCostHigh"
-                                                ValueChanged="@((p) => _autographCostHigh = p)" />
-                    </div>
-                </div>
-                <div class="col-lg-2">
-                    <div class="form-group">
-                        <BooleanCheckBox Checked="@_noAutographImages"
-                                            CheckedChanged="(p) => _noAutographImages = p"  
-                                            Label="No Image(s)" />  
-                    </div>
-                </div>
-            </div>
-            <div class="row">
                 <div class="col-lg-2">
                     <div class="form-group">
                         <FranchiseDropDown MultiSelect="true"
-                                            SelectedItems="_franchiseIds"
-                                            SelectedItemsChanged="(p) => _franchiseIds = p" />
+                                           SelectedItems="_franchiseIds"
+                                           SelectedItemsChanged="(p) => _franchiseIds = p" />
                     </div>                    
                 </div>
                 <div class="col-lg-2">
                     <div class="form-group">
                         <PrivacyTypeDropDown MultiSelect="true"
-                                                SelectedItems="_privacyTypeIds"
-                                                SelectedItemsChanged="(p) => _privacyTypeIds = p" />
+                                             SelectedItems="_privacyTypeIds"
+                                             SelectedItemsChanged="(p) => _privacyTypeIds = p" />
                     </div>
                 </div> 
                 <div class="col-lg-2">
                     <div class="form-group">
                         <PurchaseTypeDropDown MultiSelect="true"
-                                                SelectedItems="_memorabiliaPurchaseTypeIds"
-                                                SelectedItemsChanged="(p) => _memorabiliaPurchaseTypeIds = p" />
+                                              SelectedItems="_memorabiliaPurchaseTypeIds"
+                                              SelectedItemsChanged="(p) => _memorabiliaPurchaseTypeIds = p" />
                     </div>
-                </div>
-                <div class="col-lg-2">
-                        
-                </div>
-                <div class="col-lg-2">
-                        
                 </div>
             </div>
             <div class="row">
@@ -274,6 +148,124 @@
                     </div>
                 </div> 
             </div>
+        </MudExpansionPanel>
+        <MudExpansionPanel Text="Autograph Filters">
+            <div class="row">
+                <div class="col-lg-2">
+                    <div class="form-group">
+                        <PersonAutoComplete IsCulturalSearch="true"
+                                            SelectedValue="_autographPerson"
+                                            SelectionChanged="(p) => _autographPerson = p" />
+                    </div>
+                </div>
+                <div class="col-lg-2">
+                    <div class="form-group">
+                        <WritingInstrumentDropDown MultiSelect="true"
+                                                   SelectedItems="_writingInstrumentIds"
+                                                   SelectedItemsChanged="(p) => _writingInstrumentIds = p" />
+                    </div>
+                </div>
+                <div class="col-lg-2">
+                    <div class="form-group">
+                        <AcquisitionTypeDropDown IsAutograph="true"
+                                                 MultiSelect="true"
+                                                 SelectedItems="_autographAcquisitionTypeIds"
+                                                 SelectedItemsChanged="(p) => _autographAcquisitionTypeIds = p" />
+                    </div>
+                </div>
+                <div class="col-lg-2">
+                    <div class="form-group">
+                        <MudDatePicker @bind-Date="_autographAcquiredDate"
+                                       Label="Acquired Date"
+                                       Variant="Variant.Outlined" />
+                    </div>                    
+                </div>
+                <div class="col-lg-2">
+                    <div class="form-group">
+                        <ColorDropDown MultiSelect="true"
+                                       SelectedItems="_colorIds"
+                                       SelectedItemsChanged="(p) => _colorIds = p" />
+                    </div>
+                </div>
+                <div class="col-lg-2">
+                    <div class="form-group">
+                        <ConditionDropDown MultiSelect="true"
+                                           SelectedItems="_autographConditionIds"
+                                           SelectedItemsChanged="(p) => _autographConditionIds = p" />
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-2">
+                    <div class="form-group">
+                        <NullableIntField Label="Grade"
+                                            Value="_autographGrade"
+                                            ValueChanged="@((p) => _autographGrade = p)" />
+                    </div>
+                </div>                 
+                <div class="col-lg-2">
+                    <div class="form-group">
+                        <SpotDropDown MultiSelect="true"
+                                        SelectedItems="_spotIds"
+                                        SelectedItemsChanged="(p) => _spotIds = p" />
+                    </div>
+                </div> 
+                <div class="col-lg-2">
+                    <div class="form-group">                        
+                        <BooleanCheckBox Checked="@_hasAutographAuthentication"
+                                         CheckedChanged="(p) => _hasAutographAuthentication = p"
+                                         Label="Has Authentication(s)" />
+                    </div>
+                </div> 
+                <div class="col-lg-2">
+                    <div class="form-group">
+                        <BooleanCheckBox Checked="@_hasAutographInscription"
+                                            CheckedChanged="(p) => _hasAutographInscription = p"  
+                                            Label="Has Inscription(s)" /> 
+                    </div>
+                </div>
+                <div class="col-lg-2">
+                    <div class="form-group">
+                        <BooleanCheckBox Checked="@_noAutographImages"
+                                         CheckedChanged="(p) => _noAutographImages = p"
+                                         Label="No Image(s)" />
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-2">
+                    <div class="form-group">
+                        <NullableDecimalField Label="Cost Low ($)"
+                                              Value="_autographCostLow"
+                                              ValueChanged="@((p) => _autographCostLow = p)" />
+                    </div>
+                </div>
+                <div class="col-lg-2">
+                    <div class="form-group">
+                        <NullableDecimalField Label="Cost High ($)"
+                                              Value="_autographCostHigh"
+                                              ValueChanged="@((p) => _autographCostHigh = p)" />
+                    </div>
+                </div>
+                <div class="col-lg-2">
+                    <div class="form-group">
+                        <NullableDecimalField Label="Estimated Value Low ($)"
+                                              Value="_autographEstimatedValueLow"
+                                              ValueChanged="@((p) => _autographEstimatedValueLow = p)" />
+                    </div>
+                </div>
+                <div class="col-lg-2">
+                    <div class="form-group">
+                        <NullableDecimalField Label="Estimated Value High ($)"
+                                              Value="_autographEstimatedValueHigh"
+                                              ValueChanged="@((p) => _autographEstimatedValueHigh = p)" />
+                    </div>
+                </div>                
+            </div>
+        </MudExpansionPanel>
+    </MudExpansionPanels>
+    <DivPad2>
+        <Content>  
             <DivRowCol12Center>
                 <Content>
                     <MudButton ButtonType="MudBlazor.ButtonType.Button" 
