@@ -5,6 +5,9 @@ namespace Memorabilia.Blazor.Controls.DropDowns;
 public class ColorDropDown : DropDown<Domain.Constants.Color, int>
 {
     [Parameter]
+    public bool DisplayAutographColorsOnly { get; set; }
+
+    [Parameter]
     public ItemType ItemType { get; set; }
 
     protected override string GetMultiSelectionText(List<string> selectedValues)
@@ -16,7 +19,9 @@ public class ColorDropDown : DropDown<Domain.Constants.Color, int>
 
     protected override void OnInitialized()
     {
-        Items = Domain.Constants.Color.GetAll(ItemType);
+        Items = DisplayAutographColorsOnly
+            ? Domain.Constants.Color.Autograph 
+            : Domain.Constants.Color.GetAll(ItemType);
         Label = "Color";
     }
 }

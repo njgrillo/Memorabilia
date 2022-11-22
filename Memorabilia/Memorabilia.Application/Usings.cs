@@ -23,6 +23,7 @@ global using Memorabilia.Application.Features.Tools.Profile.Baseball;
 global using Memorabilia.Application.Features.Tools.Profile.Common;
 global using Memorabilia.Application.Features.User.Dashboard;
 global using Memorabilia.Domain;
+global using Memorabilia.Domain.SearchModels.Memorabilia;
 global using Memorabilia.Repository.Interfaces;
 global using System;
 global using System.Collections.Generic;

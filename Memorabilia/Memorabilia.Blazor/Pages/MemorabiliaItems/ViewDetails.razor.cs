@@ -13,7 +13,7 @@ public partial class ViewDetails : ImagePage
     [Parameter]
     public int UserId { get; set; }
 
-    private IMemorabiliaFilterPredicateBuilder _filter;
+    private MemorabiliaSearchCriteria _filter = new();
     private bool _resetPaging;
     private MudTable<MemorabiliaItemViewModel> _table;
     private MemorabiliaItemsViewModel _viewModel = new();
@@ -52,7 +52,7 @@ public partial class ViewDetails : ImagePage
         Snackbar.Add($"{itemToDelete.ItemTypeName} was deleted successfully!", Severity.Success);
     }
 
-    protected async Task OnFilter(IMemorabiliaFilterPredicateBuilder filter)
+    protected async Task OnFilter(MemorabiliaSearchCriteria filter)
     {
         _filter = filter;
         _resetPaging = true;
@@ -63,8 +63,9 @@ public partial class ViewDetails : ImagePage
     protected async Task<TableData<MemorabiliaItemViewModel>> OnRead(TableState state)
     {
         var pageInfo = new PageInfo(_resetPaging ? 1 : state.Page + 1, state.PageSize);
+
         _viewModel = _filter != null
-            ? await QueryRouter.Send(new GetMemorabiliaItemsPaged(UserId, pageInfo, _filter.Predicate))
+            ? await QueryRouter.Send(new GetMemorabiliaItemsPaged(UserId, pageInfo, _filter))
             : await QueryRouter.Send(new GetMemorabiliaItemsPaged(UserId, pageInfo));
 
         return new TableData<MemorabiliaItemViewModel>() { Items = _viewModel.MemorabiliaItems, 

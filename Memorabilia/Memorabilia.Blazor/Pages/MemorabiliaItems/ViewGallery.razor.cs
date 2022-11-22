@@ -11,7 +11,7 @@ public partial class ViewGallery : ImagePage
     public int UserId { get; set; }
 
     private bool DisplayLoadMoreButton => _viewModel?.PageInfo?.TotalItems > _pageSize;
-    private IMemorabiliaFilterPredicateBuilder _filter;
+    private MemorabiliaSearchCriteria _filter = new();
     private List<MemorabiliaGalleryItemViewModel> _items = new();
     private readonly int _pageSize = 12;
     private MemorabiliaGalleryItemsViewModel _viewModel;
@@ -36,7 +36,7 @@ public partial class ViewGallery : ImagePage
         await LoadItems(_viewModel.PageInfo.PageNumber + 1);
     }
 
-    protected async Task OnFilter(IMemorabiliaFilterPredicateBuilder filter)
+    protected async Task OnFilter(MemorabiliaSearchCriteria filter)
     {
         _filter = filter;
 
@@ -53,7 +53,7 @@ public partial class ViewGallery : ImagePage
         var pageInfo = new PageInfo(pageNumber, _pageSize);
 
         _viewModel = _filter != null
-            ? await QueryRouter.Send(new GetMemorabiliaGalleryItems(UserId, pageInfo, _filter.Predicate))
+            ? await QueryRouter.Send(new GetMemorabiliaGalleryItems(UserId, pageInfo, _filter))
             : await QueryRouter.Send(new GetMemorabiliaGalleryItems(UserId, pageInfo));
 
         if (resetItems)

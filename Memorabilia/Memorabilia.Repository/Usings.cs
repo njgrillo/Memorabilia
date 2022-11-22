@@ -2,6 +2,7 @@
 global using Framework.Library.Domain.Entity;
 global using Framework.Library.Extension;
 global using Framework.Library.Domain.Paging;
+global using Memorabilia.Domain.SearchModels.Memorabilia;
 global using Memorabilia.Repository.Extensions;
 global using Memorabilia.Repository.Implementations;
 global using Memorabilia.Repository.Interfaces;

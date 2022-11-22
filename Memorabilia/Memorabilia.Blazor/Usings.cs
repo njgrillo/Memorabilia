@@ -156,6 +156,7 @@ global using Memorabilia.Blazor.Pages.Admin;
 global using Memorabilia.Domain;
 global using Memorabilia.Domain.Constants;
 global using Memorabilia.Domain.Extensions;
+global using Memorabilia.Domain.SearchModels.Memorabilia;
 global using Microsoft.AspNetCore.Components;
 global using Microsoft.AspNetCore.Components.Forms;
 global using Microsoft.AspNetCore.Components.Web;

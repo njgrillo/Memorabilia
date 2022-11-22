@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Application.Features.Memorabilia;
 
-public record GetMemorabiliaGalleryItems(int UserId, PageInfo PageInfo, Expression<Func<Domain.Entities.Memorabilia, bool>> Filter = null) : IQuery<MemorabiliaGalleryItemsViewModel>
+public record GetMemorabiliaGalleryItems(int UserId, PageInfo PageInfo, MemorabiliaSearchCriteria Filter = null) : IQuery<MemorabiliaGalleryItemsViewModel>
 {
     public class Handler : QueryHandler<GetMemorabiliaGalleryItems, MemorabiliaGalleryItemsViewModel>
     {
