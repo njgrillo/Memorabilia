@@ -1,0 +1,20 @@
+﻿@typeparam TItemType
+
+<div class="d-flex ms-1 flex-row">
+    <Iterations Items="CheckboxNames" Context="option">
+        <div class="form-check me-4">
+            <input class="form-check-input"
+                   type="checkbox"
+                   checked="@(option == SelectedOptionCheckedValue(SelectedOption))"
+                   value="@(option == SelectedOptionValue(SelectedOption))"
+                   @onchange="(e) => CheckChanged(option, e)" />
+            <label class="form-check-label">
+                @option
+            </label>
+        </div>
+
+        @*<MudCheckBox @onchange="(e) => CheckChanged(option, e)"
+                     Checked="@(option == SelectedOptionCheckedValue(SelectedOption))"
+                     Label="@option" />*@
+    </Iterations>
+</div>

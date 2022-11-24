@@ -1,4 +1,5 @@
-﻿using Memorabilia.Domain.Entities;
+﻿using Memorabilia.Domain.Constants;
+using Memorabilia.Domain.Entities;
 
 namespace Memorabilia.Domain.SearchModels;
 
@@ -20,7 +21,7 @@ public class SearchCriteria
 
     public decimal? EstimatedValueLow { get; set; }
 
-    public bool HasImages { get; set; }
+    public ImageFilter ImageFilter { get; set; } = ImageFilter.None;
 
     public Person Person { get; set; }
 

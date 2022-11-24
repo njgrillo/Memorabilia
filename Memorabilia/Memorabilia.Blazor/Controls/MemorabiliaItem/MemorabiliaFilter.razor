@@ -95,14 +95,7 @@
                     </div>
                 </div>
             </div>
-            <div class="row">
-                @*<div class="col-lg-2">
-                    <div class="form-group">
-                        <PersonAutoComplete IsCulturalSearch="true"
-                                            SelectedValue="_memorabiliaPerson"
-                                            SelectionChanged="(p) => _memorabiliaPerson = p" />
-                    </div>
-                </div>*@
+            <div class="row">                
                 <div class="col-lg-2">
                     <div class="form-group">
                         <SportDropDown MultiSelect="true"
@@ -138,19 +131,35 @@
                                               SelectedItemsChanged="(p) => ViewModel.PurchaseTypeIds = p" />
                     </div>
                 </div>
-            </div>
-            <div class="row">
-                @*<div class="col-lg-4">
-                    <div class="form-group">
-                        <TeamAutoComplete SelectedValue="_memorabiliaTeam"
-                                          SelectionChanged="(p) => _memorabiliaTeam = p" />
-                    </div>
-                </div>*@
                 <div class="col-lg-2">
                     <div class="form-group">
                         <GameStyleTypeDropDown MultiSelect="true"
                                                SelectedItems="ViewModel.GameStyleTypeIds"
                                                SelectedItemsChanged="(p) => ViewModel.GameStyleTypeIds = p" />
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                @*<div class="col-lg-2">
+                    <div class="form-group">
+                        <PersonAutoComplete IsCulturalSearch="true"
+                                            SelectedValue="_memorabiliaPerson"
+                                            SelectionChanged="(p) => _memorabiliaPerson = p" />
+                    </div>
+                </div>*@
+                @*<div class="col-lg-4">
+                <div class="form-group">
+                <TeamAutoComplete SelectedValue="_memorabiliaTeam"
+                SelectionChanged="(p) => _memorabiliaTeam = p" />
+                </div>
+                </div>*@
+                <div class="col-lg-2">
+                    <div class="form-group">
+                        <RadioField EmptyValue="ImageFilter.None"
+                                    Options="ImageFilter.FilterItems"
+                                    SelectionChanged="(p) => ViewModel.ImageFilter = p"
+                                    SelectedOption="ViewModel.ImageFilter"
+                                    TItemType="ImageFilter" />
                     </div>
                 </div>
             </div>
@@ -236,29 +245,6 @@
                 </div>
                 <div class="col-lg-2">
                     <div class="form-group">
-                        <BooleanCheckBox Checked="@ViewModel.AutographSearchCriteria.IsAuthenticated"
-                                         CheckedChanged="(p) => ViewModel.AutographSearchCriteria.IsAuthenticated = p"
-                                         Label="Is Authenticated" />
-                    </div>
-                </div>
-                <div class="col-lg-2">
-                    <div class="form-group">
-                        <BooleanCheckBox Checked="@ViewModel.AutographSearchCriteria.IsInscribed"
-                                         CheckedChanged="(p) => ViewModel.AutographSearchCriteria.IsInscribed = p"
-                                         Label="Has Inscription(s)" />
-                    </div>
-                </div>
-                <div class="col-lg-2">
-                    <div class="form-group">
-                        <BooleanCheckBox Checked="@ViewModel.AutographSearchCriteria.HasImages"
-                                         CheckedChanged="(p) => ViewModel.AutographSearchCriteria.HasImages = p"
-                                         Label="No Image(s)" />
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-2">
-                    <div class="form-group">
                         <NullableDecimalField Label="Cost Low ($)"
                                               Value="ViewModel.AutographSearchCriteria.CostLow"
                                               ValueChanged="@((p) => ViewModel.AutographSearchCriteria.CostLow = p)" />
@@ -283,6 +269,44 @@
                         <NullableDecimalField Label="Estimated Value High ($)"
                                               Value="ViewModel.AutographSearchCriteria.EstimatedValueHigh"
                                               ValueChanged="@((p) => ViewModel.AutographSearchCriteria.EstimatedValueHigh = p)" />
+                    </div>
+                </div>                
+            </div>
+            <div class="row">
+                <div class="col-lg-2">
+                    <div class="form-group">
+                        <RadioField EmptyValue="AuthenticationFilter.None"
+                                    Options="AuthenticationFilter.FilterItems"
+                                    SelectionChanged="(p) => ViewModel.AutographSearchCriteria.AuthenticationFilter = p"
+                                    SelectedOption="ViewModel.AutographSearchCriteria.AuthenticationFilter"
+                                    TItemType="AuthenticationFilter" />
+                    </div>
+                </div>
+                <div class="col-lg-2">
+                    <div class="form-group">
+                        <RadioField EmptyValue="InscriptionFilter.None"
+                                    Options="InscriptionFilter.FilterItems"
+                                    SelectionChanged="(p) => ViewModel.AutographSearchCriteria.InscriptionFilter = p"
+                                    SelectedOption="ViewModel.AutographSearchCriteria.InscriptionFilter"
+                                    TItemType="InscriptionFilter" />
+                    </div>
+                </div>
+                <div class="col-lg-2">
+                    <div class="form-group">
+                        <RadioField EmptyValue="PersonalizationFilter.None" 
+                                    Options="PersonalizationFilter.FilterItems"
+                                    SelectionChanged="(p) => ViewModel.AutographSearchCriteria.PersonalizationFilter = p"
+                                    SelectedOption="ViewModel.AutographSearchCriteria.PersonalizationFilter"
+                                    TItemType="PersonalizationFilter" />
+                    </div>
+                </div>
+                <div class="col-lg-2">
+                    <div class="form-group">
+                        <RadioField EmptyValue="ImageFilter.None"
+                                    Options="ImageFilter.FilterItems"
+                                    SelectionChanged="(p) => ViewModel.AutographSearchCriteria.ImageFilter = p"
+                                    SelectedOption="ViewModel.AutographSearchCriteria.ImageFilter"
+                                    TItemType="ImageFilter" />
                     </div>
                 </div>
             </div>

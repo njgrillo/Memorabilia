@@ -1,4 +1,6 @@
-﻿namespace Memorabilia.Domain.SearchModels.Autographs;
+﻿using Memorabilia.Domain.Constants;
+
+namespace Memorabilia.Domain.SearchModels.Autographs;
 
 public class AutographSearchCriteria : SearchCriteria
 {
@@ -6,11 +8,11 @@ public class AutographSearchCriteria : SearchCriteria
 
     public int? Grade { get; set; }
 
-    public bool IsAuthenticated { get; set; }
+    public AuthenticationFilter AuthenticationFilter { get; set; } = AuthenticationFilter.None;
 
-    public bool IsInscribed { get; set; }
+    public InscriptionFilter InscriptionFilter { get; set; } = InscriptionFilter.None;
 
-    public bool? IsPersonalized { get; set; }
+    public PersonalizationFilter PersonalizationFilter { get; set; } = PersonalizationFilter.None;
 
     public IEnumerable<int> SpotIds { get; set; } = Enumerable.Empty<int>();
 
