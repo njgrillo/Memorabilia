@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Domain.Entities;
 
-public class Person : Framework.Library.Domain.Entity.DomainEntity
+public class Person : Framework.Library.Domain.Entity.DomainEntity, IWithName
 {
     public Person() { }
 
@@ -71,6 +71,8 @@ public class Person : Framework.Library.Domain.Entity.DomainEntity
     public string LegalName { get; private set; }
 
     public string MiddleName { get; private set; }
+
+    public string Name => ProfileName;
 
     public string Nickname { get; private set; }
 

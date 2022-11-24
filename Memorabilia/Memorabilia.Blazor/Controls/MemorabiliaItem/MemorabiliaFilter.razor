@@ -2,35 +2,35 @@
     <MudExpansionPanels MultiExpansion="true">
         <MudExpansionPanel Text="Memorabilia Filters">
             <div class="row">
-                <div class="col-lg-2">
+                <div class="col-2">
                     <div class="form-group">
                         <ItemTypeDropDown MultiSelect="true"
                                           SelectedItems="ViewModel.ItemTypeIds"
                                           SelectedItemsChanged="(p) => ViewModel.ItemTypeIds = p" />
                     </div>
                 </div>
-                <div class="col-lg-2">
+                <div class="col-2">
                     <div class="form-group">
                         <BrandDropDown MultiSelect="true"
                                        SelectedItems="ViewModel.BrandIds"
                                        SelectedItemsChanged="(p) => ViewModel.BrandIds = p" />
                     </div>
                 </div>                
-                <div class="col-lg-2">
+                <div class="col-2">
                     <div class="form-group">
                         <SizeDropDown MultiSelect="true"
                                       SelectedItems="ViewModel.SizeIds"
                                       SelectedItemsChanged="(p) => ViewModel.SizeIds = p" />
                     </div>
                 </div>
-                <div class="col-lg-2">
+                <div class="col-2">
                     <div class="form-group">
                         <AcquisitionTypeDropDown MultiSelect="true"
                                                  SelectedItems="ViewModel.AcquisitionTypeIds"
                                                  SelectedItemsChanged="(p) => ViewModel.AcquisitionTypeIds = p" />
                     </div>
                 </div>
-                <div class="col-lg-2">
+                <div class="col-2">
                     <div class="form-group">
                         <MudDatePicker @bind-Date="ViewModel.AcquiredDateBegin"
                                        DateFormat="MM/dd/yyyy"
@@ -40,7 +40,7 @@
                                        Variant="Variant.Outlined" />
                     </div>
                 </div>
-                <div class="col-lg-2">
+                <div class="col-2">
                     <div class="form-group">
                         <MudDatePicker @bind-Date="ViewModel.AcquiredDateEnd"
                                        DateFormat="MM/dd/yyyy"
@@ -52,42 +52,42 @@
                 </div>                
             </div>
             <div class="row">                
-                <div class="col-lg-2">
+                <div class="col-2">
                     <div class="form-group">
                         <ConditionDropDown MultiSelect="true"
                                            SelectedItems="ViewModel.ConditionIds"
                                            SelectedItemsChanged="(p) => ViewModel.ConditionIds = p" />
                     </div>
                 </div>
-                <div class="col-lg-2">
+                <div class="col-2">
                     <div class="form-group">
                         <LevelTypeDropDown MultiSelect="true"
                                            SelectedItems="ViewModel.LevelTypeIds"
                                            SelectedItemsChanged="(p) => ViewModel.LevelTypeIds = p" />
                     </div>
                 </div>
-                <div class="col-lg-2">
+                <div class="col-2">
                     <div class="form-group">
                         <NullableDecimalField Label="Estimated Value Low ($)"
                                               Value="ViewModel.EstimatedValueLow"
                                               ValueChanged="@((p) => ViewModel.EstimatedValueLow = p)" />
                     </div>
                 </div>
-                <div class="col-lg-2">
+                <div class="col-2">
                     <div class="form-group">
                         <NullableDecimalField Label="Estimated Value High ($)"
                                               Value="ViewModel.EstimatedValueHigh"
                                               ValueChanged="@((p) => ViewModel.EstimatedValueHigh = p)" />
                     </div>
                 </div>
-                <div class="col-lg-2">
+                <div class="col-2">
                     <div class="form-group">
                         <NullableDecimalField Label="Cost Low ($)"
                                               Value="ViewModel.CostLow"
                                               ValueChanged="@((p) => ViewModel.CostLow = p)" />
                     </div>
                 </div>
-                <div class="col-lg-2">
+                <div class="col-2">
                     <div class="form-group">
                         <NullableDecimalField Label="Cost High ($)"
                                               Value="ViewModel.CostHigh"
@@ -96,42 +96,42 @@
                 </div>
             </div>
             <div class="row">                
-                <div class="col-lg-2">
+                <div class="col-2">
                     <div class="form-group">
                         <SportDropDown MultiSelect="true"
                                        SelectedItems="ViewModel.SportIds"
                                        SelectedItemsChanged="(p) => ViewModel.SportIds = p" />
                     </div>
                 </div>
-                <div class="col-lg-2">
+                <div class="col-2">
                     <div class="form-group">
                         <SportLeagueLevelDropDown MultiSelect="true"
                                                   SelectedItems="ViewModel.SportLeagueLevelIds"
                                                   SelectedItemsChanged="(p) => ViewModel.SportLeagueLevelIds = p" />
                     </div>
                 </div>
-                <div class="col-lg-2">
+                <div class="col-2">
                     <div class="form-group">
                         <FranchiseDropDown MultiSelect="true"
                                            SelectedItems="ViewModel.FranchiseIds"
                                            SelectedItemsChanged="(p) => ViewModel.FranchiseIds = p" />
                     </div>
                 </div>
-                <div class="col-lg-2">
+                <div class="col-2">
                     <div class="form-group">
                         <PrivacyTypeDropDown MultiSelect="true"
                                              SelectedItems="ViewModel.PrivacyTypeIds"
                                              SelectedItemsChanged="(p) => ViewModel.PrivacyTypeIds = p" />
                     </div>
                 </div>
-                <div class="col-lg-2">
+                <div class="col-2">
                     <div class="form-group">
                         <PurchaseTypeDropDown MultiSelect="true"
                                               SelectedItems="ViewModel.PurchaseTypeIds"
                                               SelectedItemsChanged="(p) => ViewModel.PurchaseTypeIds = p" />
                     </div>
                 </div>
-                <div class="col-lg-2">
+                <div class="col-2">
                     <div class="form-group">
                         <GameStyleTypeDropDown MultiSelect="true"
                                                SelectedItems="ViewModel.GameStyleTypeIds"
@@ -140,20 +140,19 @@
                 </div>
             </div>
             <div class="row">
-                @*<div class="col-lg-2">
+                <div class="col-4">
                     <div class="form-group">
-                        <PersonAutoComplete IsCulturalSearch="true"
-                                            SelectedValue="_memorabiliaPerson"
-                                            SelectionChanged="(p) => _memorabiliaPerson = p" />
+                        <SearchPersonSelector SelectedPeople="ViewModel.People"
+                                              SelectedPeopleChanged="@((people) => ViewModel.People = people)" />
                     </div>
-                </div>*@
-                @*<div class="col-lg-4">
-                <div class="form-group">
-                <TeamAutoComplete SelectedValue="_memorabiliaTeam"
-                SelectionChanged="(p) => _memorabiliaTeam = p" />
                 </div>
-                </div>*@
-                <div class="col-lg-2">
+                <div class="col-4">
+                    <div class="form-group">
+                        <SearchTeamSelector SelectedTeams="ViewModel.Teams"
+                                            SelectedTeamsChanged="(teams) => ViewModel.Teams = teams" />
+                    </div>
+                </div>
+                <div class="col-2">
                     <div class="form-group">
                         <RadioField EmptyValue="ImageFilter.None"
                                     Options="ImageFilter.FilterItems"
@@ -164,18 +163,9 @@
                 </div>
             </div>
         </MudExpansionPanel>
-        <MudExpansionPanel Text="Autograph Filters">
-            <div class="row">
-                @*<div class="col-lg-2">
-                <div class="form-group">
-                <PersonAutoComplete IsCulturalSearch="true"
-                SelectedValue="_autographPerson"
-                SelectionChanged="(p) => _autographPerson = p" />
-                </div>
-                </div>*@
-            </div>
+        <MudExpansionPanel Text="Autograph Filters">            
             <div class="row">   
-                <div class="col-lg-2">
+                <div class="col-2">
                     <div class="form-group">
                         <ColorDropDown DisplayAutographColorsOnly="true"
                                        MultiSelect="true"
@@ -183,21 +173,21 @@
                                        SelectedItemsChanged="(p) => ViewModel.AutographSearchCriteria.ColorIds = p" />
                     </div>
                 </div>
-                <div class="col-lg-2">
+                <div class="col-2">
                     <div class="form-group">
                         <WritingInstrumentDropDown MultiSelect="true"
                                                    SelectedItems="ViewModel.AutographSearchCriteria.WritingInstrumentIds"
                                                    SelectedItemsChanged="(p) => ViewModel.AutographSearchCriteria.WritingInstrumentIds = p" />
                     </div>
                 </div>
-                <div class="col-lg-2">
+                <div class="col-2">
                     <div class="form-group">
                         <ConditionDropDown MultiSelect="true"
                                            SelectedItems="ViewModel.AutographSearchCriteria.ConditionIds"
                                            SelectedItemsChanged="(p) => ViewModel.AutographSearchCriteria.ConditionIds = p" />
                     </div>
                 </div>
-                <div class="col-lg-2">
+                <div class="col-2">
                     <div class="form-group">
                         <AcquisitionTypeDropDown IsAutograph="true"
                                                  MultiSelect="true"
@@ -205,7 +195,7 @@
                                                  SelectedItemsChanged="(p) => ViewModel.AutographSearchCriteria.AcquisitionTypeIds = p" />
                     </div>
                 </div>
-                <div class="col-lg-2">
+                <div class="col-2">
                     <div class="form-group">
                         <MudDatePicker @bind-Date="ViewModel.AutographSearchCriteria.AcquiredDateBegin"
                                        DateFormat="MM/dd/yyyy"
@@ -215,7 +205,7 @@
                                        Variant="Variant.Outlined" />
                     </div>
                 </div> 
-                <div class="col-lg-2">
+                <div class="col-2">
                     <div class="form-group">
                         <MudDatePicker @bind-Date="ViewModel.AutographSearchCriteria.AcquiredDateEnd"
                                        DateFormat="MM/dd/yyyy"
@@ -227,7 +217,7 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-lg-2">
+                <div class="col-2">
                     <div class="form-group">
                         <NullableIntField HideSpinButtons="false" 
                                           Label="Grade"
@@ -236,35 +226,35 @@
                                           ValueChanged="@((p) => ViewModel.AutographSearchCriteria.Grade = p)" />
                     </div>
                 </div>
-                <div class="col-lg-2">
+                <div class="col-2">
                     <div class="form-group">
                         <SpotDropDown MultiSelect="true"
                                       SelectedItems="ViewModel.AutographSearchCriteria.SpotIds"
                                       SelectedItemsChanged="(p) => ViewModel.AutographSearchCriteria.SpotIds = p" />
                     </div>
                 </div>
-                <div class="col-lg-2">
+                <div class="col-2">
                     <div class="form-group">
                         <NullableDecimalField Label="Cost Low ($)"
                                               Value="ViewModel.AutographSearchCriteria.CostLow"
                                               ValueChanged="@((p) => ViewModel.AutographSearchCriteria.CostLow = p)" />
                     </div>
                 </div>
-                <div class="col-lg-2">
+                <div class="col-2">
                     <div class="form-group">
                         <NullableDecimalField Label="Cost High ($)"
                                               Value="ViewModel.AutographSearchCriteria.CostHigh"
                                               ValueChanged="@((p) => ViewModel.AutographSearchCriteria.CostHigh = p)" />
                     </div>
                 </div>
-                <div class="col-lg-2">
+                <div class="col-2">
                     <div class="form-group">
                         <NullableDecimalField Label="Estimated Value Low ($)"
                                               Value="ViewModel.AutographSearchCriteria.EstimatedValueLow"
                                               ValueChanged="@((p) => ViewModel.AutographSearchCriteria.EstimatedValueLow = p)" />
                     </div>
                 </div>
-                <div class="col-lg-2">
+                <div class="col-2">
                     <div class="form-group">
                         <NullableDecimalField Label="Estimated Value High ($)"
                                               Value="ViewModel.AutographSearchCriteria.EstimatedValueHigh"
@@ -273,7 +263,30 @@
                 </div>                
             </div>
             <div class="row">
-                <div class="col-lg-2">
+                <div class="col-2">
+                    <div class="form-group">
+                        <SportDropDown MultiSelect="true"
+                                       SelectedItems="ViewModel.AutographSearchCriteria.SportIds"
+                                       SelectedItemsChanged="(p) => ViewModel.AutographSearchCriteria.SportIds = p" />
+                    </div>
+                </div>
+                <div class="col-2">
+                    <div class="form-group">
+                        <SportLeagueLevelDropDown MultiSelect="true"
+                                                  SelectedItems="ViewModel.AutographSearchCriteria.SportLeagueLevelIds"
+                                                  SelectedItemsChanged="(p) => ViewModel.AutographSearchCriteria.SportLeagueLevelIds = p" />
+                    </div>
+                </div>
+                <div class="col-2">
+                    <div class="form-group">
+                        <FranchiseDropDown MultiSelect="true"
+                                           SelectedItems="ViewModel.AutographSearchCriteria.FranchiseIds"
+                                           SelectedItemsChanged="(p) => ViewModel.AutographSearchCriteria.FranchiseIds = p" />
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-2">
                     <div class="form-group">
                         <RadioField EmptyValue="AuthenticationFilter.None"
                                     Options="AuthenticationFilter.FilterItems"
@@ -282,7 +295,7 @@
                                     TItemType="AuthenticationFilter" />
                     </div>
                 </div>
-                <div class="col-lg-2">
+                <div class="col-2">
                     <div class="form-group">
                         <RadioField EmptyValue="InscriptionFilter.None"
                                     Options="InscriptionFilter.FilterItems"
@@ -291,7 +304,7 @@
                                     TItemType="InscriptionFilter" />
                     </div>
                 </div>
-                <div class="col-lg-2">
+                <div class="col-2">
                     <div class="form-group">
                         <RadioField EmptyValue="PersonalizationFilter.None" 
                                     Options="PersonalizationFilter.FilterItems"
@@ -300,13 +313,27 @@
                                     TItemType="PersonalizationFilter" />
                     </div>
                 </div>
-                <div class="col-lg-2">
+                <div class="col-2">
                     <div class="form-group">
                         <RadioField EmptyValue="ImageFilter.None"
                                     Options="ImageFilter.FilterItems"
                                     SelectionChanged="(p) => ViewModel.AutographSearchCriteria.ImageFilter = p"
                                     SelectedOption="ViewModel.AutographSearchCriteria.ImageFilter"
                                     TItemType="ImageFilter" />
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-4">
+                    <div class="form-group">
+                        <SearchPersonSelector SelectedPeople="ViewModel.AutographSearchCriteria.People"
+                                              SelectedPeopleChanged="@((people) => ViewModel.AutographSearchCriteria.People = people)" />
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="form-group">
+                        <SearchTeamSelector SelectedTeams="ViewModel.AutographSearchCriteria.Teams"
+                                            SelectedTeamsChanged="(teams) => ViewModel.AutographSearchCriteria.Teams = teams" />
                     </div>
                 </div>
             </div>

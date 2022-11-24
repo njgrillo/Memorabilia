@@ -4,9 +4,7 @@ public class MemorabiliaSearchCriteria : SearchCriteria
 {
     public AutographSearchCriteria AutographSearchCriteria { get; set; } = new();
 
-    public IEnumerable<int> BrandIds { get; set; } = Enumerable.Empty<int>();
-
-    public IEnumerable<int> FranchiseIds { get; set; } = Enumerable.Empty<int>();
+    public IEnumerable<int> BrandIds { get; set; } = Enumerable.Empty<int>();    
 
     public IEnumerable<int> GameStyleTypeIds { get; set; } = Enumerable.Empty<int>();
 
@@ -16,9 +14,5 @@ public class MemorabiliaSearchCriteria : SearchCriteria
 
     public IEnumerable<int> PrivacyTypeIds { get; set; } = Enumerable.Empty<int>();
 
-    public IEnumerable<int> SizeIds { get; set; } = Enumerable.Empty<int>();
-
-    public IEnumerable<int> SportIds { get; set; } = Enumerable.Empty<int>();
-
-    public IEnumerable<int> SportLeagueLevelIds { get; set; } = Enumerable.Empty<int>();    
+    public IEnumerable<int> SizeIds { get; set; } = Enumerable.Empty<int>();       
 }

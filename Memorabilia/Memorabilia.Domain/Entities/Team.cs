@@ -1,6 +1,8 @@
-﻿namespace Memorabilia.Domain.Entities;
+﻿using Memorabilia.Domain.Constants;
 
-public class Team : Framework.Library.Domain.Entity.DomainEntity
+namespace Memorabilia.Domain.Entities;
+
+public class Team : Framework.Library.Domain.Entity.DomainEntity, IWithName
 {
     public Team() { }
 
@@ -30,6 +32,10 @@ public class Team : Framework.Library.Domain.Entity.DomainEntity
     public virtual List<Champion> Championships { get; private set; } = new();
 
     public virtual List<TeamConference> Conferences { get; private set; } = new();
+
+    public string DisplayName => Franchise != null
+        ? $"{AdminDomainItem.Franchises.Item}: {Franchise.FullName}, {AdminDomainItem.Teams.Item}: {Location} {Name} ({BeginYear} - {(EndYear.HasValue ? EndYear : "current")})"
+        : string.Empty;
 
     public virtual List<TeamDivision> Divisions { get; private set; } = new();
 

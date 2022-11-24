@@ -21,11 +21,21 @@ public class SearchCriteria
 
     public decimal? EstimatedValueLow { get; set; }
 
+    public IEnumerable<int> FranchiseIds { get; set; } = Enumerable.Empty<int>();
+
     public ImageFilter ImageFilter { get; set; } = ImageFilter.None;
 
-    public Person Person { get; set; }
+    public List<Person> People { get; set; } = new();
+
+    public int[] PersonIds => People.Select(person => person.Id).Distinct().ToArray();
 
     public IEnumerable<int> PurchaseTypeIds { get; set; } = Enumerable.Empty<int>();
 
-    public Team Team { get; set; }
+    public IEnumerable<int> SportIds { get; set; } = Enumerable.Empty<int>();
+
+    public IEnumerable<int> SportLeagueLevelIds { get; set; } = Enumerable.Empty<int>();
+
+    public int[] TeamIds => Teams.Select(team => team.Id).Distinct().ToArray();
+
+    public List<Team> Teams { get; set; } = new();
 }
