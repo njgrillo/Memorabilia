@@ -106,6 +106,8 @@ public static class ImageFileName
 
     public static string ImageTypes => "imagetypes.jpg";
 
+    public static string Import => "import.jpg";
+
     public static string IndexCard => "indexcard.jpg";
 
     public static string InscriptionTypes => "inscriptiontypes.jpg";
