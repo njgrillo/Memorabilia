@@ -29,6 +29,7 @@ public sealed class Brand : DomainItemConstant
     public static readonly Brand Spalding = new(10, "Spalding", string.Empty);  
     public static readonly Brand Spinneybeck = new(9, "Spinneybeck", string.Empty);  
     public static readonly Brand SportsIllustrated = new(13, "Sports Illustrated", "SI");
+    public static readonly Brand TeamworkAthleticApparel = new(1027, "Teamwork Athelic Apparel", string.Empty);
     public static readonly Brand Titleist = new(23, "Titleist", string.Empty);
     public static readonly Brand Topps = new(15, "Topps", string.Empty);  
     public static readonly Brand UpperDeck = new(16, "Upper Deck", "UD");  
@@ -63,6 +64,7 @@ public sealed class Brand : DomainItemConstant
         Spalding,
         Spinneybeck,
         SportsIllustrated,
+        TeamworkAthleticApparel,
         Titleist,
         Topps,
         UpperDeck,

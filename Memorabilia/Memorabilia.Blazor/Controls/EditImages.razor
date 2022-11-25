@@ -19,15 +19,30 @@
                     </Content>
                 </DivRowCol12Center>
                 <div class="row">
-                    <InputFile id="fileInput" 
-                               @bind-Value="@Images"
-                               accept="image/*" hidden multiple
-                               OnChange="@LoadFiles"   />
-                    <MudFab Color="MudBlazor.Color.Secondary"
-                            HtmlTag="label"
-                            Icon="@Icons.Filled.Image"
-                            Label="Load pictures"
-                            for="fileInput" />                    
+                    <div>
+                        <InputFile id="fileInput"
+                                   @bind-Value="@Images"
+                                   accept="image/*" hidden multiple
+                                   OnChange="@LoadFiles" />
+                        <MudFab Color="MudBlazor.Color.Secondary"
+                                HtmlTag="label"
+                                Icon="@Icons.Filled.Image"
+                                Label="Load pictures"
+                                for="fileInput" />
+                    </div>
+                    <div style="padding-left:15px;">
+                        <PrettyBlazor.Condition Evaluation="CanImportImages">
+                            <Match>
+                                <MudFab Color="MudBlazor.Color.Secondary"
+                                        HtmlTag="label"
+                                        Icon="@Icons.Filled.Image"
+                                        Label="@ImportButtonText"
+                                        for="importButton" />
+                                <MudButton id="importButton" 
+                                           OnClick="Import" />
+                            </Match>
+                        </PrettyBlazor.Condition>
+                    </div>                    
                 </div>
                 <div class="row">
                     <PrettyBlazor.Condition Evaluation="_files != null">
@@ -64,7 +79,7 @@
                     <Content>
                         @AdditionalButtons
                         <SaveButton OnClick="@(()=> _continue = true)"
-                                    Text="Save & Continue" />
+                                    Text="@SaveButtonText" />
                         <SaveButton Text="Save & Exit" />
                         <CancelButton OnClick="Cancel" />
                     </Content>

@@ -6,6 +6,11 @@ public class SaveButton : CustomButton
     {
         Color = Color.Primary;
         StartIcon = Icons.Material.Filled.Save;
-        Text = "Save";
+    }
+
+    protected override void OnAfterRender(bool firstRender)
+    {
+        if (Text.IsNullOrEmpty())
+            Text = "Save";
     }
 }

@@ -22,6 +22,7 @@ public sealed class Size : DomainItemConstant
     public static readonly Size Standard = new(5, "Standard", string.Empty);
     public static readonly Size ThreeByFive = new(15, "3x5", string.Empty);
     public static readonly Size TwentyByThirty = new(14, "20x30", string.Empty);
+    public static readonly Size Unknown = new(1022, "Unknown", string.Empty);
 
     public static readonly Size[] All =
     {
@@ -44,7 +45,8 @@ public sealed class Size : DomainItemConstant
         Small,
         Standard,
         ThreeByFive,
-        TwentyByThirty
+        TwentyByThirty,
+        Unknown
     };
 
     private Size(int id, string name, string abbreviation) : base(id, name, abbreviation) { }

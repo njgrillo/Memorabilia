@@ -12,7 +12,7 @@ public partial class AutographImageEditor : AutographItem<SaveAutographImagesVie
 
     private EditImages<SaveAutographImagesViewModel> EditImages;
 
-    protected async Task OnImportClick()
+    protected async Task OnImport()
     {
         var query = new GetMemorabiliaImages(ViewModel.MemorabiliaId);
         var memorabliaImagesViewModel = await QueryRouter.Send(query);

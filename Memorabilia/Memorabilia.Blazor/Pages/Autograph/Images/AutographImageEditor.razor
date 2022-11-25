@@ -8,14 +8,17 @@
                            DisplaySpot="ViewModel.CanHaveSpot" 
                            EditMode="ViewModel.EditModeType"
                            MemorabiliaId="ViewModel.MemorabiliaId" />
-        <EditImages @ref="EditImages" 
+        <EditImages @ref="EditImages"
+                    CanImportImages="true"
                     ContinueNavigationPath="@ViewModel.ContinueNavigationPath"
                     DomainImageRootPath="@DomainImageRootPath"
                     ExitNavigationPath="@ViewModel.ExitNavigationPath"
                     Images="@ViewModel.Images"
+                    ImportButtonText="Import from Memorabilia"
                     MaximumAllowedFiles="10"
                     MaximumFileSize="10240000"
                     Model="ViewModel"
+                    OnImport="OnImport"
                     OnLoad="OnLoad"
                     OnSave="OnSave"
                     PageTitle="@ViewModel.PageTitle"
@@ -24,12 +27,6 @@
                     TItem="SaveAutographImagesViewModel"
                     UploadPath="@UploadPath"
                     UserId="@UserId">
-            <AdditionalButtons>
-                <CustomButton ButtonType="MudBlazor.ButtonType.Button"
-                              Color="MudBlazor.Color.Secondary"
-                              OnClick="OnImportClick"
-                              Text="Import from Memorabilia" />
-            </AdditionalButtons>
         </EditImages>
         <PageFooter NavigationPath="@ViewModel.BackNavigationPath" />
     </Content>

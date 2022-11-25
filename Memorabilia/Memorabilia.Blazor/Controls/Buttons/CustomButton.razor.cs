@@ -18,7 +18,7 @@ public partial class CustomButton : ComponentBase
     public string StartIcon { get; set; } = string.Empty;
 
     [Parameter]
-    public string Text { get; set; } = "Save";
+    public string Text { get; set; } = string.Empty;
 
     [Parameter]
     public Variant Variant { get; set; } = Variant.Filled;

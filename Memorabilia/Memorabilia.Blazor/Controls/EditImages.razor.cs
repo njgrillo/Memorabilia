@@ -12,7 +12,10 @@ public partial class EditImages<TItem> : ImagePage
 
     [Parameter]
     public RenderFragment AdditionalButtons { get; set; }
-    
+
+    [Parameter]
+    public bool CanImportImages { get; set; }
+
     [Parameter]
     public string ContinueNavigationPath { get; set; }
 
@@ -23,6 +26,9 @@ public partial class EditImages<TItem> : ImagePage
     public List<SaveImageViewModel> Images { get; set; } = new();
 
     [Parameter]
+    public string ImportButtonText { get; set; }    
+
+    [Parameter]
     public int MaximumAllowedFiles { get; set; }
 
     [Parameter]
@@ -30,6 +36,9 @@ public partial class EditImages<TItem> : ImagePage
 
     [Parameter]
     public TItem Model { get; set; }
+
+    [Parameter]
+    public EventCallback OnImport { get; set; }
 
     [Parameter]
     public EventCallback OnLoad { get; set; }
@@ -44,7 +53,7 @@ public partial class EditImages<TItem> : ImagePage
     public bool ReplaceImages { get; set; } = true;
 
     [Parameter]
-    public string SaveButtonText { get; set; }
+    public string SaveButtonText { get; set; } = "Save & Continue";
 
     [Parameter]
     public string UploadPath { get; set; }
@@ -81,6 +90,11 @@ public partial class EditImages<TItem> : ImagePage
 
         NavigationManager.NavigateTo(url);
         Snackbar.Add("Images were saved successfully!", Severity.Success);
+    }
+
+    protected async Task Import()
+    {
+        await OnImport.InvokeAsync();
     }
 
     protected async Task LoadFiles(InputFileChangeEventArgs e)
