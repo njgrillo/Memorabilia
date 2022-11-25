@@ -17,7 +17,7 @@ public class SaveMemorabiliaItemViewModel : SaveViewModel
         Denominator = viewModel.Denominator;
         EstimatedValue = viewModel.EstimatedValue;
         Id = viewModel.Id;
-        ItemTypeId = viewModel.ItemTypeId;
+        ItemType = ItemType.Find(viewModel.ItemTypeId);
         LastModifiedDate = viewModel.LastModifiedDate;
         Note = viewModel.Note;
         Numerator = viewModel.Numerator;
@@ -34,15 +34,11 @@ public class SaveMemorabiliaItemViewModel : SaveViewModel
     [Range(1, int.MaxValue, ErrorMessage = "Acquisition Type is required.")]
     public int AcquisitionTypeId { get; set; } = AcquisitionType.Purchase.Id;
 
-    public AcquisitionType[] AcquisitionTypes => AcquisitionType.MemorabiliaAcquisitionTypes;
-
     public bool CanEditItemType => Id == 0;
 
     public bool CanHaveCost => AcquisitionType.CanHaveCost(AcquisitionType.Find(AcquisitionTypeId));
 
     public int ConditionId { get; set; } = Condition.Pristine.Id;
-
-    public Condition[] Conditions => Condition.All;
 
     public decimal? Cost { get; set; }
 
@@ -77,13 +73,9 @@ public class SaveMemorabiliaItemViewModel : SaveViewModel
         }
     }
 
-    [Required]
-    [Range(1, int.MaxValue, ErrorMessage = "Item Type is required.")]
-    public int ItemTypeId { get; set; }
+    public ItemType ItemType { get; set; }
 
-    public string ItemTypeName => ItemType.Find(ItemTypeId)?.Name;
-
-    public ItemType[] ItemTypes => ItemType.All;
+    public string ItemTypeName => ItemType?.Name;
 
     public DateTime? LastModifiedDate { get; set; }
 
@@ -93,17 +85,13 @@ public class SaveMemorabiliaItemViewModel : SaveViewModel
 
     public int? Numerator { get; set; }
 
-    public override string PageTitle => $"{(Id > 0 ? EditModeType.Update.Name : EditModeType.Add.Name)} {(ItemTypeId > 0 ? ItemTypeName : "Memorabilia")}";
+    public override string PageTitle => $"{(Id > 0 ? EditModeType.Update.Name : EditModeType.Add.Name)} {(ItemType?.Id > 0 ? ItemTypeName : "Memorabilia")}";
 
     [Required]
     [Range(1, int.MaxValue, ErrorMessage = "Privacy Type is required.")]
     public int PrivacyTypeId { get; set; } = PrivacyType.Public.Id;
 
-    public PrivacyType[] PrivacyTypes => PrivacyType.All;
-
     public int PurchaseTypeId { get; set; }
-
-    public PurchaseType[] PurchaseTypes => PurchaseType.All;
 
     public int UserId { get; set; }
 }

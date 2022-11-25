@@ -5,7 +5,7 @@ public class AddButton : CustomButton
     protected override void OnInitialized()
     {
         ButtonType = ButtonType.Button;
-        Color = Color.Secondary;
+        Color = Color.Success;
         Text = "Add";
     }
 }

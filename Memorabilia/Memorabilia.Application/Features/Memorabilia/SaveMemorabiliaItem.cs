@@ -97,7 +97,7 @@ public class SaveMemorabiliaItem
 
         public bool IsNew => _viewModel.IsNew;
 
-        public int ItemTypeId => _viewModel.ItemTypeId;
+        public int ItemTypeId => _viewModel.ItemType?.Id ?? 0;
 
         public DateTime? LastModifiedDate => _viewModel.LastModifiedDate;
 

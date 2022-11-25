@@ -22,9 +22,12 @@
     <Content>
         <DivRowCol3>
             <Content>
-                <ItemTypeDropDown Disabled="@(!_viewModel.CanEditItemType)"
+                <ItemTypeAutoComplete Disabled="@(!_viewModel.CanEditItemType)" 
+                                      SelectedValue="_viewModel.ItemType"
+                                      SelectionChanged="(p) => _viewModel.ItemType = p" />
+                @*<ItemTypeDropDown Disabled="@(!_viewModel.CanEditItemType)"
                                   SelectedValue="_viewModel.ItemTypeId"
-                                  SelectionChanged="(p) => _viewModel.ItemTypeId = p" />
+                                  SelectionChanged="(p) => _viewModel.ItemTypeId = p" />*@
             </Content>
         </DivRowCol3>
         <DivRowCol3 HideColumn3="@(!_viewModel.CanHaveCost)"

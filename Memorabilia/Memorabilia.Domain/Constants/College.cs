@@ -127,6 +127,7 @@ public sealed class College : DomainItemConstant
     public static readonly College KutztownPennsylvania = new(289, "Kutztown of Pennsylvania", "KU");
     public static readonly College LafayetteCollege = new(320, "Lafayette College", string.Empty);
     public static readonly College LakeLandCollege = new(196, "Lake Land College", string.Empty);
+    public static readonly College LamarCommunityCollege = new(327, "Lamar Community College", string.Empty);
     public static readonly College LaneyCollege = new (283, "Laney College", string.Empty);
     public static readonly College LewisAndClarkCommunityCollege = new(206, "Lewis and Clark Community College", string.Empty);
     public static readonly College LewisClarkStateCollege = new (287, "Lewis-Clark State College", string.Empty);
@@ -191,6 +192,7 @@ public sealed class College : DomainItemConstant
     public static readonly College NortheasternOklahomaAMCollege = new(275, "Northeastern Oklahoma A&M College", "NEO");
     public static readonly College NortheasternState = new(324, "Northeastern State", "NSU");
     public static readonly College NorthwesternOklahomaState = new(258, "Northwestern Oklahoma State", "NWOSU");
+    public static readonly College NorthwesternStateLouisiana = new(326, "Northwestern State Louisiana", "NSU");
     public static readonly College NorthwestMissouriState = new(195, "Northwest Missouri State", string.Empty);
     public static readonly College Northwestern = new(66, "Northwestern", string.Empty);
     public static readonly College NotreDame = new (139, "Notre Dame", "ND");
@@ -449,6 +451,7 @@ public sealed class College : DomainItemConstant
         KutztownPennsylvania,
         LafayetteCollege,
         LakeLandCollege,
+        LamarCommunityCollege,
         LaneyCollege,
         LewisAndClarkCommunityCollege,
         LewisClarkStateCollege,
@@ -513,6 +516,7 @@ public sealed class College : DomainItemConstant
         NortheasternOklahomaAMCollege,
         NortheasternState,
         NorthwesternOklahomaState,
+        NorthwesternStateLouisiana,
         NorthwestMissouriState,
         Northwestern,
         NotreDame,

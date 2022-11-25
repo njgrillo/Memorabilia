@@ -34,8 +34,7 @@ namespace Memorabilia.Blazor.Pages.MemorabiliaItems
 
             await CommandRouter.Send(command);
 
-            var itemTypeName = ItemType.Find(_viewModel.ItemTypeId).Name;
-            _viewModel.ContinueNavigationPath = $"Memorabilia/{itemTypeName.Replace(" ", "")}/Edit/{command.Id}";
+            _viewModel.ContinueNavigationPath = $"Memorabilia/{_viewModel.ItemTypeName.Replace(" ", "")}/Edit/{command.Id}";
         }
     }
 }

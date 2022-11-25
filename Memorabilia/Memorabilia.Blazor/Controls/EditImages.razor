@@ -34,12 +34,9 @@
                         <PrettyBlazor.Condition Evaluation="CanImportImages">
                             <Match>
                                 <MudFab Color="MudBlazor.Color.Secondary"
-                                        HtmlTag="label"
                                         Icon="@Icons.Filled.Image"
                                         Label="@ImportButtonText"
-                                        for="importButton" />
-                                <MudButton id="importButton" 
-                                           OnClick="Import" />
+                                        OnClick="Import" />
                             </Match>
                         </PrettyBlazor.Condition>
                     </div>                    
@@ -78,9 +75,9 @@
                 <DivLeftAlign>
                     <Content>
                         @AdditionalButtons
-                        <SaveButton OnClick="@(()=> _continue = true)"
-                                    Text="@SaveButtonText" />
                         <SaveButton Text="Save & Exit" />
+                        <SaveButton OnClick="@(()=> _continue = true)"
+                                    Text="@SaveButtonText" />                        
                         <CancelButton OnClick="Cancel" />
                     </Content>
                 </DivLeftAlign>

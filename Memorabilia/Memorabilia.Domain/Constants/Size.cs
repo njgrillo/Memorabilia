@@ -6,6 +6,7 @@ public sealed class Size : DomainItemConstant
     public static readonly Size ElevenByFourteen = new(12, "11x14", string.Empty);
     public static readonly Size ExtraExtraLarge = new(1018, "Extra Extra Large", "XXL");
     public static readonly Size ExtraLarge = new(10, "Extra Large", "XL");
+    public static readonly Size Fifty = new(1023, "50", string.Empty);
     public static readonly Size FiftyFour = new(1017, "54", string.Empty);
     public static readonly Size FiftySix = new(1019, "56", "XXXL");
     public static readonly Size FiftyTwo = new(1016, "52", string.Empty);
@@ -30,6 +31,7 @@ public sealed class Size : DomainItemConstant
         ElevenByFourteen,
         ExtraExtraLarge,
         ExtraLarge,
+        Fifty,
         FiftyFour,
         FiftySix,
         FiftyTwo,
