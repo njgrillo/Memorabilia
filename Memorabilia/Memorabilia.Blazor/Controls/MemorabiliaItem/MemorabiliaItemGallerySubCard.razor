@@ -10,9 +10,9 @@
             <MudText Typo="Typo.body2">@Title</MudText>
         </MudCardContent>
         <MudCardActions>
-            <MudButton @onclick="OnEditClick"
-                       Color="MudBlazor.Color.Primary"
-                       Variant="Variant.Text">Edit Autograph</MudButton>
+            <CustomButton OnClick="OnEditClick"
+                          Text="Edit Autograph"
+                          Variant="Variant.Text" />
         </MudCardActions>
     </MudCard>
 </MudTooltip>

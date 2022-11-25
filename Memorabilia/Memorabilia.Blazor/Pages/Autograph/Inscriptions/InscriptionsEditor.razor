@@ -38,18 +38,16 @@
         </DivRowCol4>    
         <DivLeftAlign>
             <Content>
-                <MudButton hidden="@(!_canAddInscription)"
-                           ButtonType="MudBlazor.ButtonType.Button" 
-                           Color="MudBlazor.Color.Secondary"
-                           OnClick="AddInscription"
-                           Size="MudBlazor.Size.Medium"                                  
-                           Variant="Variant.Filled">Add</MudButton>
-                <MudButton hidden="@(!_canUpdateInscription)"
-                           ButtonType="MudBlazor.ButtonType.Button" 
-                           Color="MudBlazor.Color.Secondary"
-                           OnClick="UpdateInscription"
-                           Size="MudBlazor.Size.Medium"                                  
-                           Variant="Variant.Filled">Update</MudButton>
+                <DivHidden Hidden="@(!_canAddInscription)">
+                    <Content>
+                        <AddButton OnClick="AddInscription" />
+                    </Content>
+                </DivHidden>
+                <DivHidden Hidden="@(!_canUpdateInscription)">
+                    <Content>
+                        <UpdateButton OnClick="UpdateInscription" />
+                    </Content>
+                </DivHidden>
             </Content>
         </DivLeftAlign>
         <DivRowCol6>

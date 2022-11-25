@@ -7,13 +7,19 @@
         <MudText Typo="Typo.h5">@ImageType.Name</MudText>
     </MudCardContent>
     <MudCardActions>
-        <MudButton hidden="@(!HasPrimary || IsPrimary)"
-                   Color="MudBlazor.Color.Primary" 
-                   OnClick="@(_ => SetPrimary(ImageFileName))"
-                   Variant="Variant.Text">Make Primary</MudButton>
-        <MudButton hidden="@(!CanRemove)"
-                   Color="MudBlazor.Color.Primary" 
-                   OnClick="@(_ => Remove(ImageFileName))"
-                   Variant="Variant.Text" >Remove</MudButton>
+        <DivHidden Hidden="@(!HasPrimary || IsPrimary)">
+            <Content>
+                <CustomButton OnClick="@(_ => SetPrimary(ImageFileName))"
+                              Text="Make Primary"
+                              Variant="Variant.Text" />
+            </Content>
+        </DivHidden>
+        <DivHidden Hidden="@(!CanRemove)">
+            <Content>
+                <CustomButton OnClick="@(_ => Remove(ImageFileName))"
+                              Text="Remove"
+                              Variant="Variant.Text" />
+            </Content>
+        </DivHidden>
     </MudCardActions>
 </MudCard>

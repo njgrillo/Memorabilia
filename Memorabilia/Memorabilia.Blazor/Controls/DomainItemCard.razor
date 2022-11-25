@@ -10,9 +10,10 @@
                 <MudText Typo="Typo.body2">@Description</MudText>
             </MudCardContent>
             <MudCardActions>
-                <MudButton @onclick="OnClick" 
-                           Color="MudBlazor.Color.Primary" 
-                           Variant="Variant.Text">View</MudButton>
+                <CustomButton Color="MudBlazor.Color.Primary"
+                              OnClick="OnClick"
+                              Text="View"
+                              Variant="Variant.Text" />
             </MudCardActions>
         </MudCard>
     </Content>

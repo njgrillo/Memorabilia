@@ -42,11 +42,7 @@
                                SelectedTextChanged="@((p) => _viewModel.Phone = p)" />
                 </div>
                 <div class="text-right">
-                    <MudButton ButtonType="MudBlazor.ButtonType.Submit"
-                               Color="MudBlazor.Color.Info"
-                               Size="MudBlazor.Size.Medium"
-                               StartIcon="@Icons.Material.Filled.Save"
-                               Variant="Variant.Filled">Save</MudButton>
+                    <SaveButton />
                 </div>
                 <ValidationSummary />
             </EditForm>

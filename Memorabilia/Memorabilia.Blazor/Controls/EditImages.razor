@@ -63,22 +63,10 @@
                 <DivLeftAlign>
                     <Content>
                         @AdditionalButtons
-                        <MudButton ButtonType="MudBlazor.ButtonType.Submit" 
-                                   Color="MudBlazor.Color.Info"
-                                   OnClick="@(()=> _continue = true)"
-                                   Size="MudBlazor.Size.Medium"
-                                   StartIcon="@Icons.Material.Filled.Save"                                   
-                                   Variant="Variant.Filled">@SaveButtonText</MudButton>
-                        <MudButton ButtonType="MudBlazor.ButtonType.Submit" 
-                                   Color="MudBlazor.Color.Info"
-                                   Size="MudBlazor.Size.Medium"
-                                   StartIcon="@Icons.Material.Filled.Save"                                   
-                                   Variant="Variant.Filled">Save & Exit</MudButton>
-                        <MudButton ButtonType="MudBlazor.ButtonType.Button" 
-                                   Color="MudBlazor.Color.Secondary"
-                                   OnClick="Cancel"
-                                   Size="MudBlazor.Size.Medium"                                  
-                                   Variant="Variant.Filled">Cancel</MudButton>
+                        <SaveButton OnClick="@(()=> _continue = true)"
+                                    Text="Save & Continue" />
+                        <SaveButton Text="Save & Exit" />
+                        <CancelButton OnClick="Cancel" />
                     </Content>
                 </DivLeftAlign>
             </Content>

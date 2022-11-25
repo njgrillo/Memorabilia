@@ -62,18 +62,16 @@
         </DivRowCol2>
         <DivLeftAlign>
             <Content>
-                <MudButton hidden="@(!_canAddAuthentication)"
-                           ButtonType="MudBlazor.ButtonType.Button" 
-                           Color="MudBlazor.Color.Secondary"
-                           OnClick="AddAuthentication"
-                           Size="MudBlazor.Size.Medium"                                  
-                           Variant="Variant.Filled">Add</MudButton>
-                <MudButton hidden="@(!_canUpdateAuthentication)"
-                           ButtonType="MudBlazor.ButtonType.Button" 
-                           Color="MudBlazor.Color.Secondary"
-                           OnClick="UpdateAuthentication"
-                           Size="MudBlazor.Size.Medium"                                  
-                           Variant="Variant.Filled">Update</MudButton>
+                <DivHidden Hidden="@(!_canAddAuthentication)">
+                    <Content>
+                        <AddButton OnClick="AddAuthentication" />
+                    </Content>
+                </DivHidden>
+                <DivHidden Hidden="@(!_canUpdateAuthentication)">
+                    <Content>
+                        <UpdateButton OnClick="UpdateAuthentication" />
+                    </Content>
+                </DivHidden>
             </Content>
         </DivLeftAlign>        
         <DivRowCol12>

@@ -150,6 +150,7 @@ global using Memorabilia.Application.Features.User.Login;
 global using Memorabilia.Application.Features.User.Register;
 global using Memorabilia.Application.Features.User.Settings;
 global using Memorabilia.Blazor.Controls;
+global using Memorabilia.Blazor.Controls.Buttons;
 global using Memorabilia.Blazor.Controls.Dialogs;
 global using Memorabilia.Blazor.Pages;
 global using Memorabilia.Blazor.Pages.Admin;

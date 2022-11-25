@@ -55,11 +55,7 @@
         </DivRowCol12>
     </Content>
     <AdditionalButtons>
-        <MudButton ButtonType="MudBlazor.ButtonType.Submit" 
-                   Color="MudBlazor.Color.Info"
-                   OnClick="OnSaveReturnClick"
-                   Size="MudBlazor.Size.Medium"   
-                   StartIcon="@Icons.Material.Filled.Save"  
-                   Variant="Variant.Filled">Save & Return to People</MudButton>
+        <SaveButton OnClick="OnSaveReturnClick"
+                    Text="Save & Return to People" />
     </AdditionalButtons>
 </EditPage>

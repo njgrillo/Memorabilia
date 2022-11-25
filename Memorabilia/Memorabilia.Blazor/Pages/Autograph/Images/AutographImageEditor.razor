@@ -25,11 +25,10 @@
                     UploadPath="@UploadPath"
                     UserId="@UserId">
             <AdditionalButtons>
-                <MudButton ButtonType="MudBlazor.ButtonType.Button" 
-                           Color="MudBlazor.Color.Secondary"
-                           OnClick="OnImportClick"
-                           Size="MudBlazor.Size.Medium"                                  
-                           Variant="Variant.Filled">Import from Memorabilia</MudButton>
+                <CustomButton ButtonType="MudBlazor.ButtonType.Button"
+                              Color="MudBlazor.Color.Secondary"
+                              OnClick="OnImportClick"
+                              Text="Import from Memorabilia" />
             </AdditionalButtons>
         </EditImages>
         <PageFooter NavigationPath="@ViewModel.BackNavigationPath" />

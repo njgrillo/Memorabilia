@@ -34,9 +34,10 @@
                     </div>                    
                 </MudCardContent>
                 <MudCardActions>
-                    <MudButton @onclick="OnEditClick"
-                               Color="MudBlazor.Color.Primary"
-                               Variant="Variant.Text">Edit Memorabilia</MudButton>
+                    <CustomButton Color="MudBlazor.Color.Primary"
+                                  OnClick="OnEditClick"
+                                  Text="Edit Memorabilia"
+                                  Variant="Variant.Text" />
                 </MudCardActions>
             </MudCard>
         </MudTooltip>        

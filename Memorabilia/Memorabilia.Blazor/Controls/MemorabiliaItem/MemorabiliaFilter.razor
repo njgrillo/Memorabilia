@@ -343,17 +343,11 @@
         <Content>
             <DivRowCol12Center>
                 <Content>
-                    <MudButton ButtonType="MudBlazor.ButtonType.Button"
-                               Color="MudBlazor.Color.Primary"
-                               OnClick="@FilterItems"
-                               Size="MudBlazor.Size.Medium"
-                               StartIcon="@Icons.Material.Filled.Save"
-                               Variant="Variant.Filled">Filter</MudButton>
-                    <MudButton ButtonType="MudBlazor.ButtonType.Button"
-                               Color="MudBlazor.Color.Secondary"
-                               OnClick="@ResetCriteria"
-                               Size="MudBlazor.Size.Medium"
-                               Variant="Variant.Filled">Reset Criteria</MudButton>
+                    <CustomButton OnClick="FilterItems"
+                                  Text="Filter" />
+                    <CustomButton Color="MudBlazor.Color.Secondary"
+                                  OnClick="ResetCriteria"
+                                  Text="Reset Criteria" />
                 </Content>
             </DivRowCol12Center>
         </Content>

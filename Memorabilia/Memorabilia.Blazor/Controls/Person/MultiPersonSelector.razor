@@ -43,11 +43,8 @@
     <Content>
         <DivLeftAlign>
             <Content>
-                <MudButton ButtonType="MudBlazor.ButtonType.Button" 
-                           Color="MudBlazor.Color.Success"
-                           OnClick="Add"
-                           Size="MudBlazor.Size.Medium"                                  
-                           Variant="Variant.Filled">Add Person</MudButton>
+                <AddButton OnClick="Add"
+                           Text="Add Person" />
             </Content>
         </DivLeftAlign>
         <MudTable Bordered="false"

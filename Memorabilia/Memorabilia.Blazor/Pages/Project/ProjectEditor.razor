@@ -80,18 +80,16 @@
         </DivRowCol3>
         <DivLeftAlign>
             <Content>
-                <MudButton hidden="@(!_canAddProjectPerson)"
-                           ButtonType="MudBlazor.ButtonType.Button" 
-                           Color="MudBlazor.Color.Secondary"
-                           OnClick="AddProjectPerson"
-                           Size="MudBlazor.Size.Medium"                                  
-                           Variant="Variant.Filled">Add</MudButton>
-                <MudButton hidden="@(!_canUpdateProjectPerson)"
-                           ButtonType="MudBlazor.ButtonType.Button" 
-                           Color="MudBlazor.Color.Secondary"
-                           OnClick="UpdateProjectPerson"
-                           Size="MudBlazor.Size.Medium"                                  
-                           Variant="Variant.Filled">Update</MudButton>
+                <DivHidden Hidden="@(!_canAddProjectPerson)">
+                    <Content>
+                        <AddButton OnClick="AddProjectPerson" />
+                    </Content>
+                </DivHidden>
+                <DivHidden Hidden="@(!_canUpdateProjectPerson)">
+                    <Content>
+                        <UpdateButton OnClick="UpdateProjectPerson" />
+                    </Content>
+                </DivHidden>
             </Content>
         </DivLeftAlign> 
         <DivRowCol12>
