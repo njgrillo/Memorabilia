@@ -25,21 +25,36 @@
                 <ItemTypeAutoComplete Disabled="@(!_viewModel.CanEditItemType)" 
                                       SelectedValue="_viewModel.ItemType"
                                       SelectionChanged="(p) => _viewModel.ItemType = p" />
-                @*<ItemTypeDropDown Disabled="@(!_viewModel.CanEditItemType)"
-                                  SelectedValue="_viewModel.ItemTypeId"
-                                  SelectionChanged="(p) => _viewModel.ItemTypeId = p" />*@
             </Content>
+            <ContentColumn2>
+                <ConditionDropDown SelectedValue="_viewModel.ConditionId"
+                                   SelectionChanged="(p) => _viewModel.ConditionId = p" />
+            </ContentColumn2>
+            <ContentColumn3>
+                <NumericField Label="Estimated Value ($)"
+                              TType="decimal?"
+                              Value="_viewModel.EstimatedValue"
+                              ValueChanged="@((p) => _viewModel.EstimatedValue = p)" />
+            </ContentColumn3>
+            <ContentColumn4>
+                <PrivacyTypeDropDown SelectedValue="_viewModel.PrivacyTypeId"
+                                     SelectionChanged="(p) => _viewModel.PrivacyTypeId = p" />
+            </ContentColumn4>
         </DivRowCol3>
         <DivRowCol3 HideColumn3="@(!_viewModel.CanHaveCost)"
                     HideColumn4="@(!_viewModel.CanHaveCost)">
             <Content>
-                <ConditionDropDown SelectedValue="_viewModel.ConditionId"
-                                   SelectionChanged="(p) => _viewModel.ConditionId = p" />
-            </Content>
-            <ContentColumn2>
-                <AcquisitionTypeDropDown IsAutograph="false" 
+                <AcquisitionTypeDropDown IsAutograph="false"
                                          SelectedValue="_viewModel.AcquisitionTypeId"
                                          SelectionChanged="(p) => _viewModel.AcquisitionTypeId = p" />
+            </Content>
+            <ContentColumn2>
+                <MudDatePicker @bind-Date="_viewModel.AcquiredDate"
+                               DateFormat="MM/dd/yyyy"
+                               Editable="true"
+                               Label="Acquired Date"
+                               Mask="@(new DateMask("MM/dd/yyyy"))"
+                               Variant="Variant.Outlined" />
             </ContentColumn2>
             <ContentColumn3>
                 <NumericField Label="Cost ($)" 
@@ -52,62 +67,46 @@
                                       SelectionChanged="(p) => _viewModel.PurchaseTypeId = p" />
             </ContentColumn4>
         </DivRowCol3>
+        <DivRowCol6>
+            <Content>
+                <TextField Label="Notes"
+                           Lines="10"
+                           SelectedText="@_viewModel.Note"
+                           SelectedTextChanged="@((p) => _viewModel.Note = p)" />
+            </Content>
+        </DivRowCol6>
         <DivRowCol3>
             <Content>
-                <NumericField Label="Estimated Value ($)"
-                              TType="decimal?"
-                              Value="_viewModel.EstimatedValue"
-                              ValueChanged="@((p) => _viewModel.EstimatedValue = p)" />
-            </Content>
-            <ContentColumn2>
-                <MudDatePicker @bind-Date="_viewModel.AcquiredDate"
-                               DateFormat="MM/dd/yyyy"
-                               Editable="true"
-                               Label="Acquired Date"
-                               Mask="@(new DateMask("MM/dd/yyyy"))"
-                               Variant="Variant.Outlined" />
-            </ContentColumn2>
-            <ContentColumn3>
                 <CheckBox Checked="@_viewModel.AcquiredWithAutograph"
                           CheckedChanged="(p) => _viewModel.AcquiredWithAutograph = p"
                           Label="Acquired with Autograph(s)"
-                          TType="bool"/> 
-            </ContentColumn3>
-        </DivRowCol3>
-        <DivRowCol3>
-            <Content>
-                <PrivacyTypeDropDown SelectedValue="_viewModel.PrivacyTypeId"
-                                     SelectionChanged="(p) => _viewModel.PrivacyTypeId = p" />
+                          TType="bool" />
             </Content>
         </DivRowCol3>
         <DivRowCol3>
             <Content>
                 <CheckBox Checked="@_viewModel.IsNumbered"
-                          CheckedChanged="(p) => _viewModel.IsNumbered = p"  
+                          CheckedChanged="(p) => _viewModel.IsNumbered = p"
                           Label="Numbered"
-                          TType="bool"/> 
+                          TType="bool" />                
             </Content>
-        </DivRowCol3>
-        <DivRowCol1 Hidden="@(!_viewModel.IsNumbered)">
+        </DivRowCol3> 
+        <DivRowCol3 Hidden="@(!_viewModel.IsNumbered)">
             <Content>
-                <NumericField Label="Left"
-                              TType="int?"
-                              Value="_viewModel.Numerator"
-                              ValueChanged="@((p) => _viewModel.Numerator = p)" />  
-            </Content>
-            <ContentColumn2>
-                <NumericField Label="Right"
-                              TType="int?"
-                              Value="_viewModel.Denominator"
-                              ValueChanged="@((p) => _viewModel.Denominator = p)" />
-            </ContentColumn2>
-        </DivRowCol1>  
-        <DivRowCol3>
-            <Content>
-                <TextField Label="Note"
-                           Lines="10"
-                           SelectedText="@_viewModel.Note"
-                           SelectedTextChanged="@((p) => _viewModel.Note = p)"/>
+                <div class="row">
+                    <div style="padding-left:15px; width:45%; flex:auto;">
+                        <NumericField Label="Left Serial #"
+                                      TType="int?"
+                                      Value="_viewModel.Numerator"
+                                      ValueChanged="@((p) => _viewModel.Numerator = p)" />
+                    </div>
+                    <div style="padding-right:15px; padding-left:5px; width:45%; flex:auto;">
+                        <NumericField Label="Right Serial #"
+                                      TType="int?"
+                                      Value="_viewModel.Denominator"
+                                      ValueChanged="@((p) => _viewModel.Denominator = p)" />
+                    </div>
+                </div>
             </Content>
         </DivRowCol3>
     </Content>

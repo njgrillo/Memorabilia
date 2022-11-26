@@ -57,8 +57,6 @@ public class SaveAutographViewModel : SaveViewModel
 
     public int AcquisitionTypeId { get; set; }
 
-    public AcquisitionType[] AcquisitionTypes => AcquisitionType.All;
-
     public AutographStep AutographStep => AutographStep.Autograph;
 
     public override string BackNavigationPath => $"Memorabilia/Image/{EditModeType.Update.Name}/{MemorabiliaId}";
@@ -75,13 +73,9 @@ public class SaveAutographViewModel : SaveViewModel
     [Range(1, int.MaxValue, ErrorMessage = "Color is required.")]
     public int ColorId { get; set; }
 
-    public Color[] Colors => Color.Autograph;
-
     [Required]
     [Range(1, int.MaxValue, ErrorMessage = "Condition is required.")]
-    public int ConditionId { get; set; }
-
-    public Condition[] Conditions => Condition.All;
+    public int ConditionId { get; set; } = Condition.Pristine.Id;
 
     public decimal? Cost { get; set; }
 
@@ -102,31 +96,6 @@ public class SaveAutographViewModel : SaveViewModel
     public int? Grade { get; set; }
 
     public string ImageFileName => Domain.Constants.ImageFileName.Autographs;
-
-    public bool IsAcquisitionFromMemorabilia
-    {
-        get
-        {
-            if (AcquisitionTypeId == MemorabiliaAcquisitionTypeId &&
-                AcquiredDate == MemorabiliaAcquiredDate &&
-                Cost == MemorabiliaCost &&
-                PurchaseTypeId == MemorabiliaPurchaseTypeId)
-                return true;
-
-            return false;
-        }
-    }
-
-    public bool IsEstimatedValueFromMemorabilia
-    {
-        get => EstimatedValue == MemorabiliaEstimatedValue
-               && MemorabiliaEstimatedValue.HasValue;
-        set
-        {
-            if (!value)
-                EstimatedValue = null;
-        }
-    }
 
     private bool? _isNumbered;
     public bool IsNumbered
@@ -202,15 +171,9 @@ public class SaveAutographViewModel : SaveViewModel
     [Required]
     public SavePersonViewModel Person { get; set; } = new();
 
-    [Required]
-    [Range(1, int.MaxValue, ErrorMessage = "Person is required.")]
-    public int? PersonId => Person?.Id;
-
     public string PersonalizationText { get; set; }
 
     public int PurchaseTypeId { get; set; }
-
-    public PurchaseType[] PurchaseTypes => PurchaseType.All;
 
     public DateTime? ReceivedDate { get; set; }
 
@@ -221,6 +184,4 @@ public class SaveAutographViewModel : SaveViewModel
     [Required]
     [Range(1, int.MaxValue, ErrorMessage = "Writing Instrument is required.")]
     public int WritingInstrumentId { get; set; }
-
-    public WritingInstrument[] WritingInstruments => WritingInstrument.All;
 }

@@ -4,25 +4,20 @@ namespace Memorabilia.Blazor.Pages.Autograph;
 
 public partial class AutographEditor : AutographItem<SaveAutographViewModel>
 {   
-
     [Parameter]
     public int MemorabiliaId { get; set; }       
 
     private bool _displayAcquisitionDetails = true;
-    private bool _displayPersonImport;
 
     protected async Task OnLoad()
     {
-        var viewModel = await QueryRouter.Send(new GetMemorabiliaItem(MemorabiliaId));
-
-        _displayPersonImport = viewModel.People.Any() && viewModel.People.Count() == 1;            
+        var viewModel = await QueryRouter.Send(new GetMemorabiliaItem(MemorabiliaId));           
 
         if (viewModel.Autographs.Any())
         {
             if (AutographId == 0)
             {
                 ViewModel = new SaveAutographViewModel(viewModel);
-                SetDefaults();
                 return;
             }
 
@@ -31,7 +26,6 @@ public partial class AutographEditor : AutographItem<SaveAutographViewModel>
         else
         {
             ViewModel = new SaveAutographViewModel(viewModel);
-            SetDefaults();
         }
     }
 
@@ -44,19 +38,6 @@ public partial class AutographEditor : AutographItem<SaveAutographViewModel>
         ViewModel.ContinueNavigationPath = $"Autographs/Inscriptions/{EditModeType.Update.Name}/{command.Id}";
     }
 
-    private void AcquisitionDetailsCheckboxClicked(bool isChecked)
-    {
-        _displayAcquisitionDetails = !isChecked;
-
-        if (!_displayAcquisitionDetails)
-        {
-            ViewModel.AcquisitionTypeId = 0;
-            ViewModel.AcquiredDate = null;
-            ViewModel.Cost = null;
-            ViewModel.PurchaseTypeId = 0;
-        }
-    }
-
     private void GetViewModel(MemorabiliaItemViewModel viewModel)
     {
         var autograph = AutographId == -1
@@ -66,17 +47,15 @@ public partial class AutographEditor : AutographItem<SaveAutographViewModel>
         if (autograph == null)
         {
             ViewModel = new SaveAutographViewModel(viewModel);
-            SetDefaults();
             return;
         }
 
         ViewModel = new SaveAutographViewModel(autograph);
 
         _displayAcquisitionDetails = ViewModel.AcquisitionTypeId > 0;
-        _displayPersonImport = ViewModel.MemorabiliaPerson?.Id > 0;
     }
 
-    private void OnImportAcquisitionClick()
+    private void OnImportAcquisition()
     {
         ViewModel.AcquisitionTypeId = ViewModel.MemorabiliaAcquisitionTypeId;
         ViewModel.AcquiredDate = ViewModel.MemorabiliaAcquiredDate;
@@ -84,8 +63,8 @@ public partial class AutographEditor : AutographItem<SaveAutographViewModel>
         ViewModel.PurchaseTypeId = ViewModel.MemorabiliaPurchaseTypeId ?? 0;
     }
 
-    private void SetDefaults()
+    private void OnImportEstimatedValue()
     {
-        ViewModel.ConditionId = Condition.Pristine.Id;
+        ViewModel.EstimatedValue = ViewModel.MemorabiliaEstimatedValue;
     }
 }

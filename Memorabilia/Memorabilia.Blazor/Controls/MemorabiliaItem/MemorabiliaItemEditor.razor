@@ -1,23 +1,22 @@
 ﻿@typeparam TItem
 
-<DivRowCol3 HideColumn1="@(!DisplayItemTypeLevel)"
-            HideColumn2="@(!DisplayItemTypeBrand)"
-            HideColumn3="@(!DisplayItemTypeSize)">
+<DivRowCol3 HideColumn1="@(!DisplayItemTypeBrand)"
+            HideColumn2="@(!DisplayItemTypeSize)"
+            HideColumn3="@(!DisplayItemTypeLevel)">
     <Content>
-        <ItemTypeLevelDropDown ItemType="ViewModel.ItemType"
-                               SelectedValue="ViewModel.LevelTypeId"
-                               SelectionChanged="(p) => ViewModel.LevelTypeId = p" />
-    </Content>
-    <ContentColumn2>
         <ItemTypeBrandDropDown ItemType="ViewModel.ItemType"
                                SelectedValue="ViewModel.BrandId"
-                               SelectionChanged="(p) => ViewModel.BrandId = p" />
-    </ContentColumn2>
-    <ContentColumn3>
+                               SelectionChanged="(p) => ViewModel.BrandId = p" />        
+    </Content>
+    <ContentColumn2>
         <ItemTypeSizeDropDown ItemType="ViewModel.ItemType"
                               SelectedValue="@ViewModel.SizeId"
                               SelectionChanged="(p) => ViewModel.SizeId = p" />
-
+    </ContentColumn2>
+    <ContentColumn3>
+        <ItemTypeLevelDropDown ItemType="ViewModel.ItemType"
+                               SelectedValue="ViewModel.LevelTypeId"
+                               SelectionChanged="(p) => ViewModel.LevelTypeId = p" />
     </ContentColumn3>
     <ContentColumn4>
         <PrettyBlazor.Condition Evaluation="DisplaySingleSportSelector">
