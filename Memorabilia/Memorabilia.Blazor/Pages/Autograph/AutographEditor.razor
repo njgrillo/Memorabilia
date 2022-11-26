@@ -21,7 +21,13 @@
                            EditMode="ViewModel.EditModeType"
                            MemorabiliaId="ViewModel.MemorabiliaId" />
     </TimelineContent>
-    <Content>
+    <ImagePreview>
+        <ImagePanel DomainImageRootPath="@DomainImageRootPath"
+                    ImageNames="@ViewModel.MemorabiliaImageNames"
+                    ImageRootPath="@UploadPath"
+                    PanelText="Memorabilia Images" />
+    </ImagePreview>
+    <Content>        
         <DivRowCol6>
             <Content>
                 <PrettyBlazor.Condition Evaluation="ViewModel.CanImportPerson">

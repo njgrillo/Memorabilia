@@ -23,6 +23,7 @@ public class SaveAutographViewModel : SaveViewModel
         ItemType = viewModel.ItemType;
         LastModifiedDate = viewModel.LastModifiedDate;
         MemorabiliaId = viewModel.MemorabiliaId;
+        MemorabiliaImageNames = viewModel.MemorabiliaImageNames;
         Note = viewModel.Note;
         Numerator = viewModel.Numerator;    
         Person = new SavePersonViewModel(new PersonViewModel(viewModel.Person));
@@ -41,6 +42,7 @@ public class SaveAutographViewModel : SaveViewModel
         MemorabiliaCost = viewModel.Acquisition.Cost;
         MemorabiliaEstimatedValue = viewModel.EstimatedValue;
         MemorabiliaId = viewModel.Id;
+        MemorabiliaImageNames = viewModel.Images.Select(image => image.FileName).ToArray();
         MemorabiliaPurchaseTypeId = viewModel.Acquisition.PurchaseTypeId;
         ItemType = ItemType.Find(viewModel.ItemTypeId);
         UserFirstName = viewModel.UserFirstName;
@@ -157,6 +159,8 @@ public class SaveAutographViewModel : SaveViewModel
 
     [Required]
     public int MemorabiliaId { get; set; }
+
+    public string[] MemorabiliaImageNames { get; }
 
     public PersonViewModel MemorabiliaPerson { get; set; }
 

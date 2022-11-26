@@ -35,6 +35,9 @@ public partial class EditPage<TItem> : ImagePage
     public string ImageFileName { get; set; }
 
     [Parameter]
+    public RenderFragment ImagePreview { get; set; }    
+
+    [Parameter]
     public string ItemName { get; set; }
 
     [Parameter]

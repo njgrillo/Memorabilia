@@ -9,12 +9,14 @@ public class SaveInscriptionsViewModel : SaveViewModel
     public SaveInscriptionsViewModel(IEnumerable<Domain.Entities.Inscription> inscriptions, 
                                      int itemTypeId, 
                                      int memorabiliaId,
-                                     int autographId)
+                                     int autographId,
+                                     string[] memorabiliaImageNames)
     {
         Inscriptions = inscriptions.Select(inscription => new SaveInscriptionViewModel(new InscriptionViewModel(inscription))).ToList();
         ItemType = ItemType.Find(itemTypeId);
         MemorabiliaId = memorabiliaId;
         AutographId = autographId;
+        MemorabiliaImageNames = memorabiliaImageNames;
     }
 
     public int AutographId { get; set; }
@@ -35,9 +37,9 @@ public class SaveInscriptionsViewModel : SaveViewModel
 
     public ItemType ItemType { get; set; }
 
-    public string ItemTypeName => ItemType.Find(ItemType.Id)?.Name;
-
     public int MemorabiliaId { get; }
+
+    public string[] MemorabiliaImageNames { get; }
 
     public override string PageTitle => $"{(EditModeType == EditModeType.Add ? EditModeType.Add.Name : EditModeType.Update.Name)} Inscription(s)";
 }

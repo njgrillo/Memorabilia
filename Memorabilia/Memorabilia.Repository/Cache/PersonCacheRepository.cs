@@ -19,15 +19,6 @@ public class PersonCacheRepository : DomainCacheRepository<Person>, IPersonRepos
         await _personRepository.Add(person, cancellationToken);
     }
 
-    public override Task<Person> Get(int id)
-    {
-        return Get($"Person_Get_{id}", entry =>
-        {
-            entry.SetAbsoluteExpiration(TimeSpan.FromDays(1));
-            return _personRepository.Get(id);
-        });
-    }
-
     public Task<IEnumerable<Person>> GetAll(int? sportId = null, int? sportLeagueLevelId = null)
     {
         if (sportId == null && sportLeagueLevelId == null)

@@ -21,6 +21,12 @@
                            EditMode="AuthenticationsViewModel.EditModeType"
                            MemorabiliaId="AuthenticationsViewModel.MemorabiliaId"/>
     </TimelineContent>
+    <ImagePreview>
+        <ImagePanel DomainImageRootPath="@DomainImageRootPath"
+                    ImageNames="@AuthenticationsViewModel.MemorabiliaImageNames"
+                    ImageRootPath="@UploadPath"
+                    PanelText="Memorabilia Images" />
+    </ImagePreview>
     <Content>
         <DivRowCol4>
             <Content>

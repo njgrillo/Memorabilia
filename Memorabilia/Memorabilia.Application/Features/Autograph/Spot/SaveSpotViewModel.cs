@@ -11,6 +11,7 @@ public class SaveSpotViewModel : SaveViewModel
         AutographId = viewModel.AutographId;
         ItemType = ItemType.Find(viewModel.ItemTypeId);
         MemorabiliaId = viewModel.MemorabiliaId;
+        MemorabiliaImageNames = viewModel.MemorabiliaImageNames;
         SpotId = viewModel.SpotId;
     }
 
@@ -35,6 +36,8 @@ public class SaveSpotViewModel : SaveViewModel
     public string ItemTypeName => ItemType?.Name;
 
     public int MemorabiliaId { get; }
+
+    public string[] MemorabiliaImageNames { get; }
 
     public override string PageTitle => $"{(EditModeType == EditModeType.Add ? EditModeType.Add.Name : EditModeType.Update.Name)} Spot";
 

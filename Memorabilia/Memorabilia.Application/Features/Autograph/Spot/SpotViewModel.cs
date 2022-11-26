@@ -17,5 +17,7 @@ public class SpotViewModel
 
     public int MemorabiliaId => _autograph.Memorabilia.Id;
 
+    public string[] MemorabiliaImageNames => _autograph.Memorabilia.Images.Select(image => image.FileName).ToArray();   
+
     public int SpotId => _autograph?.Spot?.SpotId ?? 0;
 }

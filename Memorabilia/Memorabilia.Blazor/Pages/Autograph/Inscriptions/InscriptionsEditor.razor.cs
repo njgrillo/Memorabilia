@@ -4,6 +4,9 @@ namespace Memorabilia.Blazor.Pages.Autograph.Inscriptions;
 
 public partial class InscriptionsEditor : AutographItem<SaveInscriptionViewModel>
 {
+    [Parameter]
+    public string UploadPath { get; set; }
+
     private bool _canAddInscription = true;
     private bool _canEditInscriptionType = true;
     private bool _canUpdateInscription;
@@ -16,7 +19,8 @@ public partial class InscriptionsEditor : AutographItem<SaveInscriptionViewModel
         _inscriptionsViewModel = new SaveInscriptionsViewModel(autograph.Inscriptions, 
                                                                autograph.ItemTypeId, 
                                                                autograph.MemorabiliaId,
-                                                               autograph.Id);
+                                                               autograph.Id,
+                                                               autograph.MemorabiliaImageNames);
     }
 
     protected async Task OnSave()

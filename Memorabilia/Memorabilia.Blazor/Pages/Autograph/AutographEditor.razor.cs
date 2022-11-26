@@ -5,7 +5,10 @@ namespace Memorabilia.Blazor.Pages.Autograph;
 public partial class AutographEditor : AutographItem<SaveAutographViewModel>
 {   
     [Parameter]
-    public int MemorabiliaId { get; set; }       
+    public int MemorabiliaId { get; set; }
+
+    [Parameter]
+    public string UploadPath { get; set; }
 
     private bool _displayAcquisitionDetails = true;
 

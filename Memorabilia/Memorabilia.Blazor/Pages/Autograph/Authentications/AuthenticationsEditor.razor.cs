@@ -4,6 +4,9 @@ namespace Memorabilia.Blazor.Pages.Autograph.Authentications;
 
 public partial class AuthenticationsEditor : AutographItem<SaveAuthenticationViewModel>
 {
+    [Parameter]
+    public string UploadPath { get; set; }
+
     private SaveAuthenticationsViewModel AuthenticationsViewModel = new ();
     private bool _canAddAuthentication = true;
     private bool _canEditAuthenticationCompany = true;
@@ -14,9 +17,10 @@ public partial class AuthenticationsEditor : AutographItem<SaveAuthenticationVie
         var autograph = await QueryRouter.Send(new GetAutograph.Query(AutographId));
 
         AuthenticationsViewModel = new SaveAuthenticationsViewModel(autograph.Authentications, 
-                                                                     autograph.ItemType, 
-                                                                     autograph.MemorabiliaId,
-                                                                     autograph.Id);
+                                                                    autograph.ItemType, 
+                                                                    autograph.MemorabiliaId,
+                                                                    autograph.Id,
+                                                                    autograph.MemorabiliaImageNames);
     }
 
     protected async Task OnSave()

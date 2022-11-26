@@ -9,12 +9,14 @@ public class SaveAuthenticationsViewModel : SaveViewModel
     public SaveAuthenticationsViewModel(IEnumerable<Domain.Entities.AutographAuthentication> authentications, 
                                         ItemType itemType, 
                                         int memorabiliaId,
-                                        int autographId)
+                                        int autographId,
+                                        string[] memorabiliaImageNames)
     {
         Authentications = authentications.Select(authentication => new SaveAuthenticationViewModel(new AuthenticationViewModel(authentication))).ToList();
         ItemType = itemType;
         MemorabiliaId = memorabiliaId;
         AutographId = autographId;
+        MemorabiliaImageNames = memorabiliaImageNames;
     }
 
     public List<SaveAuthenticationViewModel> Authentications { get; set; } = new();
@@ -39,9 +41,9 @@ public class SaveAuthenticationsViewModel : SaveViewModel
 
     public ItemType ItemType { get; }
 
-    public string ItemTypeName => ItemType.Find(ItemType.Id)?.Name;
-
     public int MemorabiliaId { get; }
+
+    public string[] MemorabiliaImageNames { get; }
 
     public override string PageTitle => $"{(EditModeType == EditModeType.Add ? EditModeType.Add.Name : EditModeType.Update.Name)} Authentication(s)";
 }

@@ -95,6 +95,8 @@ public class AutographViewModel : ViewModel
 
     public int MemorabiliaId => _autograph.MemorabiliaId;
 
+    public string[] MemorabiliaImageNames => _autograph.Memorabilia.Images.Select(image => image.FileName).ToArray();
+
     public string Note => _autograph.Note;
 
     public int? Numerator => _autograph.Numerator;

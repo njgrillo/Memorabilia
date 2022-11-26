@@ -11,6 +11,8 @@ public abstract class WebPage : ComponentBase
     [Inject]
     public NavigationManager NavigationManager { get; set; }
 
+    protected string UploadPath { get; set; }
+
     public int UserId { get; set; }
 
     protected string DomainImageRootPath => Configuration["DomainImageRootPath"];
@@ -43,6 +45,8 @@ public abstract class WebPage : ComponentBase
                 NavigationManager.NavigateTo("Login");
 
             await LocalStorage.SetAsync("UserId", UserId);
+
+            UploadPath = Path.Combine(MemorabiliaImageRootPath, UserId.ToString());
         }
     }    
 }

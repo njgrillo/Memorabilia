@@ -21,6 +21,12 @@
                            EditMode="ViewModel.EditModeType"
                            MemorabiliaId="ViewModel.MemorabiliaId" />
     </TimelineContent>
+    <ImagePreview>
+        <ImagePanel DomainImageRootPath="@DomainImageRootPath"
+                    ImageNames="@ViewModel.MemorabiliaImageNames"
+                    ImageRootPath="@UploadPath"
+                    PanelText="Memorabilia Images" />
+    </ImagePreview>
     <Content>
         <DivRowCol3>
             <Content>

@@ -1,7 +1,5 @@
 ﻿#nullable disable
 
-using Memorabilia.Blazor.Pages;
-
 namespace Memorabilia.Blazor;
 
 public class ImagePage : CommandQuery
@@ -19,7 +17,7 @@ public class ImagePage : CommandQuery
 
     protected string GetImageData(string imageFileName)
     {
-        if (imageFileName == Domain.Constants.ImageFileName.ImageNotAvailable)
+        if (imageFileName == ImageFileName.ImageNotAvailable)
             return GetImageData(DomainImageRootPath, imageFileName);
 
         return GetImageData(ImageRootPath, imageFileName);
