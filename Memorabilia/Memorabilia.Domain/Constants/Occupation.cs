@@ -2,16 +2,16 @@
 
 public sealed class Occupation : DomainItemConstant
 {       
-    public static readonly Occupation Actor = new(2, "Actor", string.Empty);
-    public static readonly Occupation Actress = new(3, "Actress", string.Empty);
-    public static readonly Occupation Athlete = new(1, "Athlete", string.Empty);
-    public static readonly Occupation Broadcaster = new(5, "Broadcaster", string.Empty);
-    public static readonly Occupation Celebrity = new(4, "Celebrity", string.Empty);
-    public static readonly Occupation Coach = new(9, "Coach", string.Empty);
-    public static readonly Occupation Comedian = new(6, "Comedian", string.Empty);
-    public static readonly Occupation Commissioner = new(8, "Commissioner", string.Empty);        
-    public static readonly Occupation LeaguePresident = new(12, "League President", string.Empty);       
-    public static readonly Occupation Manager = new(7, "Manager", string.Empty);       
+    public static readonly Occupation Actor = new(2, "Actor");
+    public static readonly Occupation Actress = new(3, "Actress");
+    public static readonly Occupation Athlete = new(1, "Athlete");
+    public static readonly Occupation Broadcaster = new(5, "Broadcaster");
+    public static readonly Occupation Celebrity = new(4, "Celebrity");
+    public static readonly Occupation Coach = new(9, "Coach");
+    public static readonly Occupation Comedian = new(6, "Comedian");
+    public static readonly Occupation Commissioner = new(8, "Commissioner");        
+    public static readonly Occupation LeaguePresident = new(12, "League President");       
+    public static readonly Occupation Manager = new(7, "Manager");       
 
     public static readonly Occupation[] All =
     {
@@ -36,7 +36,7 @@ public sealed class Occupation : DomainItemConstant
         Manager
     };
 
-    private Occupation(int id, string name, string abbreviation) : base(id, name, abbreviation) { }
+    private Occupation(int id, string name, string abbreviation = null) : base(id, name, abbreviation) { }
 
     public static Occupation Find(int id)
     {

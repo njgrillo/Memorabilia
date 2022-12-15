@@ -6,6 +6,7 @@ public sealed class Brand : DomainItemConstant
     public static readonly Brand Beckett = new(14, "Beckett");
     public static readonly Brand Callaway = new(24, "Callaway");
     public static readonly Brand CCM = new(26, "CCM");
+    public static readonly Brand Champion = new(1032, "Champion");
     public static readonly Brand Easton = new(1026, "Easton");
     public static readonly Brand Fender = new(22, "Fender");
     public static readonly Brand Fotoball = new(27, "Fotoball");
@@ -45,6 +46,7 @@ public sealed class Brand : DomainItemConstant
         Beckett,
         Callaway,
         CCM,
+        Champion,
         Easton,
         Fender,
         Fotoball,

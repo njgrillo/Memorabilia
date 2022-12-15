@@ -2,12 +2,12 @@
 
 public sealed class JerseyQualityType : DomainItemConstant
 {
-    public static readonly JerseyQualityType Authentic = new(1, "Authentic", string.Empty);
-    public static readonly JerseyQualityType Replica = new(2, "Replica", string.Empty);
-    public static readonly JerseyQualityType China = new(3, "China", string.Empty);
-    public static readonly JerseyQualityType Custom = new(4, "Custom", string.Empty);
-    public static readonly JerseyQualityType Other = new(5, "Other", string.Empty);
-    public static readonly JerseyQualityType Unknown = new(6, "Unknown", string.Empty);
+    public static readonly JerseyQualityType Authentic = new(1, "Authentic");
+    public static readonly JerseyQualityType Replica = new(2, "Replica");
+    public static readonly JerseyQualityType China = new(3, "China");
+    public static readonly JerseyQualityType Custom = new(4, "Custom");
+    public static readonly JerseyQualityType Other = new(5, "Other");
+    public static readonly JerseyQualityType Unknown = new(6, "Unknown");
 
     public static readonly JerseyQualityType[] All =
     {
@@ -19,7 +19,7 @@ public sealed class JerseyQualityType : DomainItemConstant
         Unknown
     };
 
-    private JerseyQualityType(int id, string name, string abbreviation) : base(id, name, abbreviation) { }
+    private JerseyQualityType(int id, string name, string abbreviation = null) : base(id, name, abbreviation) { }
 
     public static JerseyQualityType Find(int id)
     {

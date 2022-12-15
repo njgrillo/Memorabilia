@@ -2,11 +2,11 @@
 
 public sealed class PurchaseType : DomainItemConstant
 {
-    public static readonly PurchaseType Ebay = new(1, "eBay", string.Empty);
-    public static readonly PurchaseType Amazon = new(2, "Amazon", string.Empty);
-    public static readonly PurchaseType Other = new(3, "Other", string.Empty);
-    public static readonly PurchaseType Retail = new(4, "Retail Store", string.Empty);
-    public static readonly PurchaseType Facebook = new(5, "Facebook", string.Empty);
+    public static readonly PurchaseType Ebay = new(1, "eBay");
+    public static readonly PurchaseType Amazon = new(2, "Amazon");
+    public static readonly PurchaseType Other = new(3, "Other");
+    public static readonly PurchaseType Retail = new(4, "Retail Store");
+    public static readonly PurchaseType Facebook = new(5, "Facebook");
 
     public static readonly PurchaseType[] All =
     {
@@ -17,7 +17,7 @@ public sealed class PurchaseType : DomainItemConstant
         Retail
     };
 
-    private PurchaseType(int id, string name, string abbreviation) : base(id, name, abbreviation) { }
+    private PurchaseType(int id, string name, string abbreviation = null) : base(id, name, abbreviation) { }
 
     public static PurchaseType Find(int id)
     {

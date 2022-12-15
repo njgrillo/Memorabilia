@@ -3,7 +3,7 @@
 public sealed class FigureType : DomainItemConstant
 {
     public static readonly FigureType StartingLineup = new(1, "Starting Lineup", "SLU");
-    public static readonly FigureType FunkoPop = new(2, "Funko Pop", string.Empty);
+    public static readonly FigureType FunkoPop = new(2, "Funko Pop");
 
     public static readonly FigureType[] All =
     {
@@ -11,7 +11,7 @@ public sealed class FigureType : DomainItemConstant
         FunkoPop
     };
 
-    private FigureType(int id, string name, string abbreviation) : base(id, name, abbreviation) { }
+    private FigureType(int id, string name, string abbreviation = null) : base(id, name, abbreviation) { }
 
     public static FigureType Find(int id)
     {

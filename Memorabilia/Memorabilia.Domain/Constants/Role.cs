@@ -2,14 +2,12 @@
 
 public sealed class Role : DomainItemConstant
 {
-    public static readonly Role SuperAdmin = new(1, "Super Admin");
-    public static readonly Role Admin = new(2, "Admin");
-    public static readonly Role User = new(3, "User");
+    public static readonly Role Admin = new(1, "Admin");
+    public static readonly Role User = new(2, "User");
 
     public static readonly Role[] All =
     {            
         Admin,
-        SuperAdmin,
         User
     };
 

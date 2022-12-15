@@ -2,23 +2,23 @@
 
 public sealed class TeamRoleType : DomainItemConstant
 {
-    public static readonly TeamRoleType Coach = new(1, "Coach", string.Empty);
+    public static readonly TeamRoleType Coach = new(1, "Coach");
     public static readonly TeamRoleType DefensiveCoordinator = new(2, "Defensive Coordinator", "DC");
     public static readonly TeamRoleType DefensiveLineCoach = new(3, "Defensive Line Coach", "D-Line Coach");
     public static readonly TeamRoleType Executive = new(4, "Executive", "Exec");
     public static readonly TeamRoleType GeneralManager = new(5, "General Manager", "GM");
-    public static readonly TeamRoleType HeadCoach = new(6, "Head Coach", string.Empty);
-    public static readonly TeamRoleType LinebackerCoach = new(7, "Linebacker Coach", string.Empty);
+    public static readonly TeamRoleType HeadCoach = new(6, "Head Coach");
+    public static readonly TeamRoleType LinebackerCoach = new(7, "Linebacker Coach");
     public static readonly TeamRoleType Manager = new(8, "Manager", "M");
     public static readonly TeamRoleType OffensiveCoordinator = new(9, "Offensive Coordinator", "OC");
     public static readonly TeamRoleType OffensiveLineCoach = new(10, "Offensive Line Coach", "O-Line Coach");
-    public static readonly TeamRoleType Owner = new(11, "Owner", string.Empty);
-    public static readonly TeamRoleType Player = new(12, "Player", string.Empty);
-    public static readonly TeamRoleType QuarterbackCoach = new(13, "Quarterback Coach", string.Empty);
-    public static readonly TeamRoleType RunningBackCoach = new(14, "Running Back Coach", string.Empty);
-    public static readonly TeamRoleType SecondaryCoach = new(15, "Secondary Coach", string.Empty);
-    public static readonly TeamRoleType SpecialTeamsCoach = new(16, "Special Teams Coach", string.Empty);
-    public static readonly TeamRoleType TightEndCoach = new(17, "Tight End Coach", string.Empty);
+    public static readonly TeamRoleType Owner = new(11, "Owner");
+    public static readonly TeamRoleType Player = new(12, "Player");
+    public static readonly TeamRoleType QuarterbackCoach = new(13, "Quarterback Coach");
+    public static readonly TeamRoleType RunningBackCoach = new(14, "Running Back Coach");
+    public static readonly TeamRoleType SecondaryCoach = new(15, "Secondary Coach");
+    public static readonly TeamRoleType SpecialTeamsCoach = new(16, "Special Teams Coach");
+    public static readonly TeamRoleType TightEndCoach = new(17, "Tight End Coach");
 
     public static readonly TeamRoleType[] All =
     {
@@ -69,7 +69,7 @@ public sealed class TeamRoleType : DomainItemConstant
         TightEndCoach
     };
 
-    private TeamRoleType(int id, string name, string abbreviation) : base(id, name, abbreviation) { }
+    private TeamRoleType(int id, string name, string abbreviation = null) : base(id, name, abbreviation) { }
 
     public static TeamRoleType Find(int id)
     {

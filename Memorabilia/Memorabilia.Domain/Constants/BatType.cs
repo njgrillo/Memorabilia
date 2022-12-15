@@ -2,11 +2,11 @@
 
 public sealed class BatType : DomainItemConstant
 {
-    public static readonly BatType BigStick = new(1, "Big Stick", string.Empty);
-    public static readonly BatType GameModel = new(2, "Game Model", string.Empty);
-    public static readonly BatType Commemorative = new(3, "Commemorative", string.Empty);
-    public static readonly BatType None = new(4, "None", string.Empty);
-    public static readonly BatType Other = new(5, "Other", string.Empty);
+    public static readonly BatType BigStick = new(1, "Big Stick");
+    public static readonly BatType GameModel = new(2, "Game Model");
+    public static readonly BatType Commemorative = new(3, "Commemorative");
+    public static readonly BatType None = new(4, "None");
+    public static readonly BatType Other = new(5, "Other");
 
     public static readonly BatType[] All =
     {
@@ -17,7 +17,7 @@ public sealed class BatType : DomainItemConstant
         Other
     };
 
-    private BatType(int id, string name, string abbreviation) : base(id, name, abbreviation) { }
+    private BatType(int id, string name, string abbreviation = null) : base(id, name, abbreviation) { }
 
     public static BatType Find(int id)
     {

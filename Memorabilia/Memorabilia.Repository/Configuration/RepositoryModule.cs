@@ -1,4 +1,6 @@
-﻿namespace Memorabilia.Repository.Configuration;
+﻿using Framework.Library.Handler;
+
+namespace Memorabilia.Repository.Configuration;
 
 public class RepositoryModule : Module
 {
@@ -8,7 +10,7 @@ public class RepositoryModule : Module
             .InstancePerDependency();
 
         builder.RegisterType<DomainContext>().As<IDomainContext>()
-            .InstancePerDependency();
+            .InstancePerDependency();        
 
         builder.RegisterAssemblyTypes(typeof(AutographRepository).Assembly)
                .Where(t => t.Name.EndsWith("Repository"))

@@ -2,13 +2,13 @@
 
 public sealed class AcquisitionType : DomainItemConstant
 {
-    public static readonly AcquisitionType PrivateSigning = new(1, "Private Signing", string.Empty);
-    public static readonly AcquisitionType PublicSigning = new(2, "Public Signing", string.Empty);
+    public static readonly AcquisitionType PrivateSigning = new(1, "Private Signing");
+    public static readonly AcquisitionType PublicSigning = new(2, "Public Signing");
     public static readonly AcquisitionType InPerson = new(3, "In Person", "IP");
     public static readonly AcquisitionType ThroughTheMail = new(4, "Through the Mail", "TTM");
-    public static readonly AcquisitionType Trade = new(5, "Trade", string.Empty);
-    public static readonly AcquisitionType Purchase = new(6, "Purchase", string.Empty);
-    public static readonly AcquisitionType Gift = new(7, "Gift", string.Empty);
+    public static readonly AcquisitionType Trade = new(5, "Trade");
+    public static readonly AcquisitionType Purchase = new(6, "Purchase");
+    public static readonly AcquisitionType Gift = new(7, "Gift");
 
     public static readonly AcquisitionType[] All =
     {        
@@ -28,7 +28,7 @@ public sealed class AcquisitionType : DomainItemConstant
         Trade
     };
 
-    private AcquisitionType(int id, string name, string abbreviation) : base(id, name, abbreviation) { }
+    private AcquisitionType(int id, string name, string abbreviation = null) : base(id, name, abbreviation) { }
 
     public static bool CanHaveCost(AcquisitionType acquisitionType)
     {

@@ -6,8 +6,6 @@ public abstract class MemorabiliaItemEditViewModel : SaveItemViewModel
 {
     public override string BackNavigationPath => $"Memorabilia/{EditModeType.Update.Name}/{MemorabiliaId}";
 
-    [Required]
-    [Range(1, int.MaxValue, ErrorMessage = "Brand is required.")]
     public int BrandId { get; set; }
 
     public virtual bool DisplayGameDate => GameStyleType.IsGameWorthly(GameStyleType);
@@ -22,10 +20,6 @@ public abstract class MemorabiliaItemEditViewModel : SaveItemViewModel
 
     public GameStyleType GameStyleType => GameStyleType.Find(GameStyleTypeId);
 
-    //[Required]
-    //[Range(1, int.MaxValue, ErrorMessage = "Game Style Type is required.")]
-    //public int GameStyleTypeId { get; set; } = GameStyleType.None.Id;
-
     private int _gameStyleTypeId = GameStyleType.None.Id;
     public int GameStyleTypeId
     {
@@ -39,16 +33,12 @@ public abstract class MemorabiliaItemEditViewModel : SaveItemViewModel
         }
     }
 
-    [Required]
-    [Range(1, int.MaxValue, ErrorMessage = "Level is required.")]
     public int LevelTypeId { get; set; }
 
     public List<SavePersonViewModel> People { get; set; } = new();
 
     public SavePersonViewModel Person { get; set; }
 
-    //[Required]
-    //[Range(1, int.MaxValue, ErrorMessage = "Size is required.")]
     public int SizeId { get; set; }
 
     public virtual Sport Sport => Sport.Find(SportId);

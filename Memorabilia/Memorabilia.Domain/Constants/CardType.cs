@@ -2,8 +2,8 @@
 
 public sealed class CardType : DomainItemConstant
 {
-    public static readonly CardType Trading = new(1, "Trading Card", string.Empty);
-    public static readonly CardType Playing = new(2, "Playing Card", string.Empty);
+    public static readonly CardType Trading = new(1, "Trading Card");
+    public static readonly CardType Playing = new(2, "Playing Card");
 
     public static readonly CardType[] All =
     {
@@ -11,7 +11,7 @@ public sealed class CardType : DomainItemConstant
         Playing
     };
 
-    private CardType(int id, string name, string abbreviation) : base(id, name, abbreviation) { }
+    private CardType(int id, string name, string abbreviation = null) : base(id, name, abbreviation) { }
 
     public static CardType Find(int id)
     {

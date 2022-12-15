@@ -2,11 +2,11 @@
 
 public sealed class BasketballType : DomainItemConstant
 {
-    public static readonly BasketballType Official = new(1, "Official", string.Empty);
-    public static readonly BasketballType Finals = new(2, "Finals", string.Empty);
-    public static readonly BasketballType Commemorative = new(3, "Commemorative", string.Empty);
-    public static readonly BasketballType Other = new(4, "Other", string.Empty);
-    public static readonly BasketballType None = new(5, "None", string.Empty);
+    public static readonly BasketballType Official = new(1, "Official");
+    public static readonly BasketballType Finals = new(2, "Finals");
+    public static readonly BasketballType Commemorative = new(3, "Commemorative");
+    public static readonly BasketballType Other = new(4, "Other");
+    public static readonly BasketballType None = new(5, "None");
 
     public static readonly BasketballType[] All =
     {
@@ -23,7 +23,7 @@ public sealed class BasketballType : DomainItemConstant
         Official
     };
 
-    private BasketballType(int id, string name, string abbreviation) : base(id, name, abbreviation) { }    
+    private BasketballType(int id, string name, string abbreviation = null) : base(id, name, abbreviation) { }    
 
     public static BasketballType Find(int id)
     {

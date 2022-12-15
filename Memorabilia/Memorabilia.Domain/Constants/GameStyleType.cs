@@ -2,13 +2,13 @@
 
 public sealed class GameStyleType : DomainItemConstant
 {
-    public static readonly GameStyleType GameUsed = new(1, "Game Used", string.Empty);
-    public static readonly GameStyleType GameWorn = new(2, "Game Worn", string.Empty);
-    public static readonly GameStyleType GameIssued = new(3, "Game Issued", string.Empty);
-    public static readonly GameStyleType MatchUsed = new(7, "Match Used", string.Empty);
-    public static readonly GameStyleType None = new(4, "None", string.Empty);
-    public static readonly GameStyleType Other = new(5, "Other", string.Empty);
-    public static readonly GameStyleType TournametUsed = new(6, "Tournamet Used", string.Empty);
+    public static readonly GameStyleType GameUsed = new(1, "Game Used");
+    public static readonly GameStyleType GameWorn = new(2, "Game Worn");
+    public static readonly GameStyleType GameIssued = new(3, "Game Issued");
+    public static readonly GameStyleType MatchUsed = new(7, "Match Used");
+    public static readonly GameStyleType None = new(4, "None");
+    public static readonly GameStyleType Other = new(5, "Other");
+    public static readonly GameStyleType TournametUsed = new(6, "Tournamet Used");
 
     public static readonly GameStyleType[] All =
     {
@@ -40,7 +40,7 @@ public sealed class GameStyleType : DomainItemConstant
         TournametUsed
     };
 
-    private GameStyleType(int id, string name, string abbreviation) : base(id, name, abbreviation) { }
+    private GameStyleType(int id, string name, string abbreviation = null) : base(id, name, abbreviation) { }
 
     public static GameStyleType Find(int id)
     {

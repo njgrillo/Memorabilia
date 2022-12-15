@@ -2,8 +2,8 @@
 
 public sealed class FigureSpecialtyType : DomainItemConstant
 {
-    public static readonly FigureSpecialtyType ClassicDoubles = new(1, "Classic Doubles", string.Empty);
-    public static readonly FigureSpecialtyType CooperstownCollection = new(2, "Cooperstown Collection", string.Empty);
+    public static readonly FigureSpecialtyType ClassicDoubles = new(1, "Classic Doubles");
+    public static readonly FigureSpecialtyType CooperstownCollection = new(2, "Cooperstown Collection");
 
     public static readonly FigureSpecialtyType[] All =
     {
@@ -22,7 +22,7 @@ public sealed class FigureSpecialtyType : DomainItemConstant
         CooperstownCollection
     };
 
-    private FigureSpecialtyType(int id, string name, string abbreviation) : base(id, name, abbreviation) { }
+    private FigureSpecialtyType(int id, string name, string abbreviation = null) : base(id, name, abbreviation) { }
 
     public static FigureSpecialtyType Find(int id)
     {

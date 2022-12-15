@@ -2,8 +2,8 @@
 
 public sealed class ChampionType : DomainItemConstant
 {   
-    public static readonly ChampionType NBAFinals = new(4, "NBA Finals", string.Empty);
-    public static readonly ChampionType StanleyCup = new(3, "Stanley Cup", string.Empty);
+    public static readonly ChampionType NBAFinals = new(4, "NBA Finals");
+    public static readonly ChampionType StanleyCup = new(3, "Stanley Cup");
     public static readonly ChampionType SuperBowl = new(2, "Super Bowl", "SB");
     public static readonly ChampionType WorldSeries = new(1, "World Series", "WS");
 
@@ -15,7 +15,7 @@ public sealed class ChampionType : DomainItemConstant
         WorldSeries
     };
 
-    private ChampionType(int id, string name, string abbreviation) : base(id, name, abbreviation) { }
+    private ChampionType(int id, string name, string abbreviation = null) : base(id, name, abbreviation) { }
 
     public static ChampionType Find(int id)
     {

@@ -13,9 +13,7 @@ public class User : Framework.Library.Domain.Entity.DomainEntity
         LastName = lastName;
         Phone = phone;
         CreateDate = DateTime.UtcNow;
-
-        //Delete this later:
-        RoleId = 1;
+        UserRoleId = Constants.Role.User.Id;
     }
 
     public DateTime CreateDate { get; private set; }
@@ -30,13 +28,13 @@ public class User : Framework.Library.Domain.Entity.DomainEntity
 
     public string Password { get; private set; }
 
-    public string Phone { get; private set; }
-
-    public int RoleId { get; private set; }
+    public string Phone { get; private set; }    
 
     public DateTime? UpdateDate { get; private set; }
 
     public string Username { get; private set; }
+
+    public int UserRoleId { get; private set; }
 
     public void SetDashboardItems(params int[] dashboardItemsIds)
     {

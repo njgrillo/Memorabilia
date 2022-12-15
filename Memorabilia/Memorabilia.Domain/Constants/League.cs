@@ -6,8 +6,8 @@ public sealed class League : DomainItemConstant
     public static readonly League NationalLeague = new(2, "National League", "NL");
     public static readonly League NationalFootballLeague = new(3, "National Football League", "NFL");
     public static readonly League AmericanFootballLeague = new(4, "American Football League", "AFL");
-    public static readonly League WesternLeague = new(5, "Western League", string.Empty);
-    public static readonly League AmericanAssociation = new(6, "American Association", string.Empty);
+    public static readonly League WesternLeague = new(5, "Western League");
+    public static readonly League AmericanAssociation = new(6, "American Association");
 
     public static readonly League[] All =
     {
@@ -33,7 +33,7 @@ public sealed class League : DomainItemConstant
         AmericanFootballLeague
     };
 
-    private League(int id, string name, string abbreviation) : base(id, name, abbreviation) { }
+    private League(int id, string name, string abbreviation = null) : base(id, name, abbreviation) { }
 
     public static League Find(int id)
     {
