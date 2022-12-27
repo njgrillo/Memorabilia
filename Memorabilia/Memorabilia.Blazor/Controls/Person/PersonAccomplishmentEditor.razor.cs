@@ -1,6 +1,4 @@
-﻿#nullable disable
-
-namespace Memorabilia.Blazor.Controls.Person;
+﻿namespace Memorabilia.Blazor.Controls.Person;
 
 public partial class PersonAccomplishmentEditor : ComponentBase
 {
@@ -8,11 +6,11 @@ public partial class PersonAccomplishmentEditor : ComponentBase
     public List<SavePersonAccomplishmentViewModel> Accomplishments { get; set; } = new();
 
     [Parameter]
-    public AccomplishmentType[] AccomplishmentTypes { get; set; } = AccomplishmentType.All;
+    public int[] SportIds { get; set; }
 
-    protected bool IsDateAccomplishment => AccomplishmentType.IsDateAccomplishment(_viewModel.AccomplishmentTypeId);
+    protected bool IsDateAccomplishment => AccomplishmentType.IsDateAccomplishment(_viewModel.AccomplishmentType?.Id ?? 0);
 
-    protected bool IsYearAccomplishment => AccomplishmentType.IsYearAccomplishment(_viewModel.AccomplishmentTypeId);
+    protected bool IsYearAccomplishment => AccomplishmentType.IsYearAccomplishment(_viewModel.AccomplishmentType?.Id ?? 0);
 
     private bool _canAdd = true;
     private bool _canEditAccomplishmentType = true;
@@ -28,7 +26,7 @@ public partial class PersonAccomplishmentEditor : ComponentBase
 
     private void Edit(SavePersonAccomplishmentViewModel accomplishment)
     {
-        _viewModel.AccomplishmentTypeId = accomplishment.AccomplishmentTypeId;
+        _viewModel.AccomplishmentType = accomplishment.AccomplishmentType;
         _viewModel.Year = accomplishment.Year;
         _viewModel.Date = accomplishment.Date;
 
@@ -39,7 +37,7 @@ public partial class PersonAccomplishmentEditor : ComponentBase
 
     private void Update()
     {
-        var accomplishment = Accomplishments.Single(accomplishment => accomplishment.AccomplishmentTypeId == _viewModel.AccomplishmentTypeId);
+        var accomplishment = Accomplishments.Single(accomplishment => accomplishment.AccomplishmentType.Id == _viewModel.AccomplishmentType.Id);
 
         accomplishment.Year = _viewModel.Year;
         accomplishment.Date = _viewModel.Date;

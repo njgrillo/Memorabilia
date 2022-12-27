@@ -1,12 +1,15 @@
 ﻿<DivRowCol3>
     <Content>
-        <OccupationDropDown Disabled="@(!_canEditOccupation)" 
-                            SelectedValue="_viewModel.OccupationId"
-                            SelectionChanged="(p) => _viewModel.OccupationId = p" />
+        <OccupationAutoComplete Disabled="@(!_canEditOccupation)"
+                                SelectedValue="_viewModel.Occupation"
+                                SelectionChanged="(p) => _viewModel.Occupation = p" />
     </Content>
     <ContentColumn2>
-        <OccupationTypeDropDown SelectedValue="_viewModel.OccupationTypeId"
-                                SelectionChanged="(p) => _viewModel.OccupationTypeId = p" />
+        <MudSwitch Checked="@(_viewModel.OccupationType == OccupationType.Primary)"
+                   CheckedChanged="OnOccupationTypeChange"
+                   Color="MudBlazor.Color.Success"
+                   Label="Is Primary?"
+                   T="bool" />
     </ContentColumn2>
 </DivRowCol3>
 <DivLeftAlign>
@@ -47,7 +50,7 @@
                     <MudTooltip Text="Delete">
                         <MudFab Color="MudBlazor.Color.Secondary"
                                 Icon="@Icons.Outlined.DeleteOutline"
-                                OnClick="@(_ => context.IsDeleted = true)" />
+                                OnClick="@(_ => Delete(context))" />
                     </MudTooltip>  
                 </MudTd>
             </RowTemplate>

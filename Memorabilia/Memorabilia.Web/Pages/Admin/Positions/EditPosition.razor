@@ -1,0 +1,11 @@
+﻿@page "/Positions/Edit"
+@page "/Positions/Edit/{id:int}"
+
+@inherits EditItem
+
+<PageLoader>
+    <Content>
+        <PositionEditor DomainImageRootPath="@DomainImageRootPath"
+                        Id="Id" />
+    </Content>
+</PageLoader>

@@ -9,7 +9,8 @@
     <MudCardActions>
         <DivHidden Hidden="@(!HasPrimary || IsPrimary)">
             <Content>
-                <CustomButton OnClick="@(_ => SetPrimary(ImageFileName))"
+                <CustomButton ButtonType="ButtonType.Button" 
+                              OnClick="@(_ => SetPrimary(ImageFileName))"
                               Text="Make Primary"
                               Variant="Variant.Text" />
             </Content>

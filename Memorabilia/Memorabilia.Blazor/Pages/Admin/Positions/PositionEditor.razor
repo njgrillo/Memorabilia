@@ -1,0 +1,39 @@
+﻿@inherits EditItem<SavePositionViewModel, PositionViewModel>
+
+<EditPage ContinueNavigationPath="@ViewModel.RoutePrefix"
+          DomainImageRootPath="@DomainImageRootPath"
+          EditMode="ViewModel.EditModeType"
+          ExitNavigationPath="@ViewModel.RoutePrefix"
+          ImageFileName="@ViewModel.ImageFileName"
+          ItemName="@ViewModel.ItemTitle"
+          Model="ViewModel"
+          OnLoad="OnLoad"
+          OnSave="HandleValidSubmit"
+          PageFooterButtonText="@ViewModel.ExitButtonText"
+          PageFooterNavigationPath="@ViewModel.ExitNavigationPath"
+          PageTitle="@ViewModel.PageTitle"
+          TItem="SavePositionViewModel">
+    <Content>
+        <DivRowCol3>
+            <Content>
+                <SportDropDown Disabled="@(!ViewModel.IsNew)"
+                               SelectedValue="ViewModel.SportId"
+                               SelectionChanged="(p) => ViewModel.SportId = p" />
+            </Content>
+        </DivRowCol3>
+        <DivRowCol3>
+            <Content>
+                <TextField Label="Name"
+                           SelectedText="@ViewModel.Name"
+                           SelectedTextChanged="@((p) => ViewModel.Name = p)" />
+            </Content>
+        </DivRowCol3>
+        <DivRowCol3>
+            <Content>
+                <TextField Label="Abbreviation"
+                           SelectedText="@ViewModel.Abbreviation"
+                           SelectedTextChanged="@((p) => ViewModel.Abbreviation = p)" />
+            </Content>
+        </DivRowCol3>
+    </Content>
+</EditPage>

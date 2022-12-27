@@ -1,4 +1,6 @@
-﻿namespace Memorabilia.Domain.Entities;
+﻿using Memorabilia.Domain.Enums;
+
+namespace Memorabilia.Domain.Entities;
 
 public class Person : Framework.Library.Domain.Entity.DomainEntity, IWithName
 {
@@ -79,6 +81,8 @@ public class Person : Framework.Library.Domain.Entity.DomainEntity, IWithName
     public virtual List<PersonNickname> Nicknames { get; private set; } = new();
 
     public virtual List<PersonOccupation> Occupations { get; private set; } = new();
+
+    public virtual List<PersonPosition> Positions { get; private set; } = new();
 
     public string ProfileName { get; private set; }
 
@@ -172,6 +176,14 @@ public class Person : Framework.Library.Domain.Entity.DomainEntity, IWithName
             return;
 
         Occupations.RemoveAll(occupation => ids.Contains(occupation.Id));
+    }
+
+    public void RemovePositions(params int[] ids)
+    {
+        if (ids == null || ids.Length == 0)
+            return;
+
+        Positions.RemoveAll(position => ids.Contains(position.Id));
     }
 
     public void RemoveRetiredNumbers(params int[] ids)
@@ -396,6 +408,19 @@ public class Person : Framework.Library.Domain.Entity.DomainEntity, IWithName
         }
 
         occupation.Set(occupationId, occupationTypeId);
+    }
+
+    public void SetPosition(int positionId, PositionType positionType)
+    {
+        var position = Positions.SingleOrDefault(p => p.PositionId == positionId);
+
+        if (position == null)
+        {
+            Positions.Add(new PersonPosition(Id, positionId, positionType));
+            return;
+        }
+
+        position.Set(positionId, positionType);
     }
 
     public void SetRetiredNumber(int retiredNumberId, int franchiseId, int playerNumber)

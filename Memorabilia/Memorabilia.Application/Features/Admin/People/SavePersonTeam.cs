@@ -20,7 +20,7 @@ public class SavePersonTeam
 
             foreach (var team in command.Teams.Where(x => !x.IsDeleted))
             {
-                person.SetTeam(team.Id, team.TeamId, team.BeginYear, team.EndYear, team.TeamRoleTypeId);
+                person.SetTeam(team.Id, team.TeamId, team.BeginYear, team.EndYear, team.TeamRoleType.Id);
             }
 
             await _personRepository.Update(person);

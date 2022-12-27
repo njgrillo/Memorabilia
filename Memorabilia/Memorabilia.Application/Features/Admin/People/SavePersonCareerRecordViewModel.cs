@@ -12,7 +12,6 @@ public class SavePersonCareerRecordViewModel : SaveViewModel
         PersonId = record.PersonId;
         Record = record.Record;
         RecordType = Domain.Constants.RecordType.Find(record.RecordTypeId);
-        SportIds = record.Person.Teams.Select(team => team.Team.Franchise.SportLeagueLevel.SportId).Distinct().ToArray();
     }    
 
     public int PersonId { get; set; }
@@ -22,6 +21,4 @@ public class SavePersonCareerRecordViewModel : SaveViewModel
     public Domain.Constants.RecordType RecordType { get; set; }
 
     public string RecordTypeName => RecordType?.Name;
-
-    public int[] SportIds { get; }
 }

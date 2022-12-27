@@ -8,15 +8,13 @@ public class SavePersonRetiredNumberViewModel : SaveViewModel
 
     public SavePersonRetiredNumberViewModel(RetiredNumber retiredNumber)
     {
-        FranchiseId = retiredNumber.FranchiseId;
+        Franchise = Domain.Constants.Franchise.Find(retiredNumber.FranchiseId);
         Id = retiredNumber.Id;
         PersonId = retiredNumber.PersonId;
         PlayerNumber = retiredNumber.PlayerNumber;
     }
 
-    public Domain.Constants.Franchise Franchise => Domain.Constants.Franchise.Find(FranchiseId);
-
-    public int FranchiseId { get; set; }
+    public Domain.Constants.Franchise Franchise { get; set; }
 
     public string FranchiseName => Franchise?.Name;    
 

@@ -1,6 +1,4 @@
-﻿#nullable disable
-
-namespace Memorabilia.Blazor.Controls.Person;
+﻿namespace Memorabilia.Blazor.Controls.Person;
 
 public partial class PersonFranchiseHallOfFameEditor : ComponentBase
 {

@@ -70,6 +70,7 @@ public class DomainContext : DbContext, IDomainContext
         modelBuilder.Entity<PersonTeam>();
         modelBuilder.Entity<Pewter>();
         modelBuilder.Entity<PhotoType>();        
+        modelBuilder.Entity<Position>();        
         modelBuilder.Entity<PriorityType>();
         modelBuilder.Entity<PrivacyType>();            
         modelBuilder.Entity<ProjectType>();            

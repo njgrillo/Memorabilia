@@ -18,6 +18,7 @@ public class SavePersonOccupation
             var person = await _personRepository.Get(command.PersonId);
 
             UpdateOccupations(command, person);
+            UpdatePositions(command, person);
             UpdateSports(command, person);
 
             await _personRepository.Update(person);
@@ -29,7 +30,17 @@ public class SavePersonOccupation
 
             foreach (var occupation in command.Occupations.Where(occupation => !occupation.IsDeleted))
             {
-                person.SetOccupation(occupation.OccupationId, occupation.OccupationTypeId);
+                person.SetOccupation(occupation.Occupation.Id, occupation.OccupationType.Id);
+            }
+        }
+
+        private static void UpdatePositions(Command command, Person person)
+        {
+            person.RemovePositions(command.DeletedPositionIds);
+
+            foreach (var personPosition in command.Positions.Where(position => !position.IsDeleted))
+            {
+                person.SetPosition(personPosition.Position.Id, personPosition.PositionType);
             }
         }
 
@@ -39,7 +50,7 @@ public class SavePersonOccupation
 
             foreach (var sport in command.Sports.Where(sport => !sport.IsDeleted))
             {
-                person.SetSport(sport.SportId);
+                person.SetSport(sport.Sport.Id);
             }
         }
     }
@@ -56,12 +67,16 @@ public class SavePersonOccupation
 
         public int[] DeletedOccupationIds => _viewModel.Occupations.Where(occupation => occupation.IsDeleted).Select(occupation => occupation.Id).ToArray();
 
+        public int[] DeletedPositionIds => _viewModel.Positions.Where(position => position.IsDeleted).Select(position => position.Id).ToArray();
+
         public int[] DeletedSportsIds => _viewModel.Sports.Where(sport => sport.IsDeleted).Select(sport => sport.Id).ToArray();
 
         public SavePersonOccupationViewModel[] Occupations => _viewModel.Occupations.ToArray();
 
-        public SavePersonSportViewModel[] Sports => _viewModel.Sports.ToArray();
-
         public int PersonId { get; }
+
+        public SavePersonPositionViewModel[] Positions => _viewModel.Positions.ToArray();
+
+        public SavePersonSportViewModel[] Sports => _viewModel.Sports.ToArray();        
     }
 }

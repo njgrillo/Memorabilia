@@ -1,6 +1,4 @@
-﻿#nullable disable
-
-namespace Memorabilia.Blazor.Controls.RadioFields;
+﻿namespace Memorabilia.Blazor.Controls.RadioFields;
 
 public partial class RadioField<TItemType>
 {

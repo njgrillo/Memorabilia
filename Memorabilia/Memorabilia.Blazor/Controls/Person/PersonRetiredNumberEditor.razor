@@ -1,9 +1,9 @@
 ﻿<DivRowCol3>
     <Content>
-        <FranchiseDropDown Disabled="@(!_canEditFranchise)" 
-                           SelectedValue="_viewModel.FranchiseId"
-                           SelectionChanged="(p) => _viewModel.FranchiseId = p"
-                           SportIds="SportIds"/>
+        <FranchiseAutoComplete Disabled="@(!_canEditFranchise)"
+                               SelectedValue="_viewModel.Franchise"
+                               SelectionChanged="(p) => _viewModel.Franchise = p"
+                               SportIds="SportIds" />
     </Content>
     <ContentColumn2>
         <NullableIntField Label="Number"

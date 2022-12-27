@@ -18,8 +18,6 @@ public class SavePersonFranchiseHallOfFameViewModel : SaveViewModel
 
     public string FranchiseName => Domain.Constants.Franchise.Find(FranchiseId)?.Name;
 
-    public Domain.Constants.Franchise[] Franchises => Domain.Constants.Franchise.All;
-
     public int PersonId { get; set; }
 
     public int? Year { get; set; }

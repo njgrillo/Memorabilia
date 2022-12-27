@@ -1,14 +1,12 @@
-﻿#nullable disable
-
-namespace Memorabilia.Blazor.Controls.Person;
+﻿namespace Memorabilia.Blazor.Controls.Person;
 
 public partial class PersonSingleSeasonRecordEditor : ComponentBase
 {
     [Parameter]
-    public RecordType[] RecordTypes { get; set; } = RecordType.All;
+    public List<SavePersonSingleSeasonRecordViewModel> SingleSeasonRecords { get; set; } = new();
 
     [Parameter]
-    public List<SavePersonSingleSeasonRecordViewModel> SingleSeasonRecords { get; set; } = new();
+    public int[] SportIds { get; set; }
 
     private bool _canAdd = true;
     private bool _canEditRecordType = true;

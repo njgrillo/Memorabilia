@@ -6,7 +6,10 @@ public class PersonViewModel : ViewModel, IWithName, IWithValue<int>
 {
     private readonly Person _person;
 
-    public PersonViewModel() { }
+    public PersonViewModel() 
+    {
+        _person = new();
+    }
 
     public PersonViewModel(Person person)
     {

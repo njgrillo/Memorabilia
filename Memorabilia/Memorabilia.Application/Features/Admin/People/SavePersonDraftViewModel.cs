@@ -13,7 +13,7 @@ public class SavePersonDraftViewModel : SaveViewModel
 
     public SavePersonDraftViewModel(Draft draft)
     {
-        FranchiseId = draft.FranchiseId;
+        Franchise = Domain.Constants.Franchise.Find(draft.FranchiseId);
         Id = draft.Id;
         Overall = draft.Overall;
         PersonId = draft.PersonId;
@@ -22,11 +22,9 @@ public class SavePersonDraftViewModel : SaveViewModel
         Year = draft.Year;
     }
 
-    public int FranchiseId { get; set; }
+    public Domain.Constants.Franchise Franchise { get; set; }
 
-    public string FranchiseName => Domain.Constants.Franchise.Find(FranchiseId)?.Name;
-
-    public Domain.Constants.Franchise[] Franchises => Domain.Constants.Franchise.GetAll(SportIds);
+    public string FranchiseName => Franchise?.Name;
 
     public int? Overall { get; set; }
 

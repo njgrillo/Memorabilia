@@ -154,6 +154,8 @@ public static class ImageFileName
 
     public static string PlayingCard => "playingcard.jpg";
 
+    public static string Positions => "positions.jpg";
+
     public static string Poster => "poster.jpg";    
 
     public static string PriorityTypes => "prioritytypes.jpg";

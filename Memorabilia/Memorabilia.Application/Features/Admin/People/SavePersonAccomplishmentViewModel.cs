@@ -8,16 +8,16 @@ public class SavePersonAccomplishmentViewModel : SaveViewModel
 
     public SavePersonAccomplishmentViewModel(PersonAccomplishment accomplishment)
     {
-        AccomplishmentTypeId = accomplishment.AccomplishmentTypeId;
+        AccomplishmentType = Domain.Constants.AccomplishmentType.Find(accomplishment.AccomplishmentTypeId);
         Date = accomplishment.Date;
         Id = accomplishment.Id;
         PersonId = accomplishment.PersonId;
         Year = accomplishment.Year;
     }
 
-    public int AccomplishmentTypeId { get; set; }
+    public Domain.Constants.AccomplishmentType AccomplishmentType { get; set; }
 
-    public string AccomplishmentTypeName => Domain.Constants.AccomplishmentType.Find(AccomplishmentTypeId)?.Name;
+    public string AccomplishmentTypeName => AccomplishmentType?.Name;
 
     public DateTime? Date { get; set; }
 

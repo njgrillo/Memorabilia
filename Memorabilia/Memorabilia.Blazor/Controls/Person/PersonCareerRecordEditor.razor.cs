@@ -1,6 +1,4 @@
-﻿#nullable disable
-
-namespace Memorabilia.Blazor.Controls.Person;
+﻿namespace Memorabilia.Blazor.Controls.Person;
 
 public partial class PersonCareerRecordEditor : ComponentBase
 {
@@ -8,7 +6,7 @@ public partial class PersonCareerRecordEditor : ComponentBase
     public List<SavePersonCareerRecordViewModel> CareerRecords { get; set; } = new();
 
     [Parameter]
-    public RecordType[] RecordTypes { get; set; } = RecordType.All;
+    public int[] SportIds { get; set; }
 
     private bool _canAdd = true;
     private bool _canEditRecordType = true;

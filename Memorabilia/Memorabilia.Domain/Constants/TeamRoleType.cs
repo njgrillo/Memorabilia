@@ -2,7 +2,12 @@
 
 public sealed class TeamRoleType : DomainItemConstant
 {
+    public static readonly TeamRoleType Administrator = new(24, "Administrator");
+    public static readonly TeamRoleType Assistant = new(21, "Assistant");
+    public static readonly TeamRoleType AssistantHeadCoach = new(22, "Assistant Head Coach");
+    public static readonly TeamRoleType BackfieldCoach = new (23, "Backfield Coach");
     public static readonly TeamRoleType Coach = new(1, "Coach");
+    public static readonly TeamRoleType DefensiveBacksCoach = new(20, "Defensive Backs Coach");
     public static readonly TeamRoleType DefensiveCoordinator = new(2, "Defensive Coordinator", "DC");
     public static readonly TeamRoleType DefensiveLineCoach = new(3, "Defensive Line Coach", "D-Line Coach");
     public static readonly TeamRoleType Executive = new(4, "Executive", "Exec");
@@ -22,7 +27,12 @@ public sealed class TeamRoleType : DomainItemConstant
 
     public static readonly TeamRoleType[] All =
     {
+        Administrator,
+        Assistant,
+        AssistantHeadCoach,
+        BackfieldCoach,
         Coach,
+        DefensiveBacksCoach,
         DefensiveCoordinator,
         DefensiveLineCoach,
         Executive,
@@ -53,6 +63,11 @@ public sealed class TeamRoleType : DomainItemConstant
 
     public static readonly TeamRoleType[] FootballRoleTypes =
     {
+        Administrator,
+        Assistant,
+        AssistantHeadCoach,
+        BackfieldCoach,
+        DefensiveBacksCoach,
         DefensiveCoordinator,
         DefensiveLineCoach,
         Executive,

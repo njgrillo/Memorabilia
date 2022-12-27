@@ -10,6 +10,7 @@ public class SavePersonOccupationsViewModel : SaveViewModel
     {
         Occupations = viewModel.Occupations.Select(occupation => new SavePersonOccupationViewModel(occupation)).ToList();
         PersonId = personId;
+        Positions = viewModel.Positions.Select(position => new SavePersonPositionViewModel(position)).ToList();
         Sports = viewModel.Sports.Select(sport => new SavePersonSportViewModel(sport)).ToList();
     }
 
@@ -19,7 +20,10 @@ public class SavePersonOccupationsViewModel : SaveViewModel
 
     public override EditModeType EditModeType => Occupations.Any() || Sports.Any() ? EditModeType.Update : EditModeType.Add;
 
-    public bool HasAthleteOccupation => Occupations.Any(occupation => Occupation.IsSportOccupation(occupation.OccupationId));
+    public bool HasAthleteOccupation => Occupations.Any(occupation => !occupation.IsDeleted && Occupation.IsSportOccupation(occupation.Occupation.Id));
+
+    public bool HasPositionSport => Occupations.Any(occupation => !occupation.IsDeleted && occupation.Occupation.Id == Occupation.Athlete.Id) 
+                                    && Sports.Any(sport => !sport.IsDeleted && Sport.IsPositionSport(sport.Sport.Id));
 
     public string ImageFileName => AdminDomainItem.Occupations.ImageFileName;
 
@@ -30,6 +34,8 @@ public class SavePersonOccupationsViewModel : SaveViewModel
     public int PersonId { get; set; }        
 
     public PersonStep PersonStep => PersonStep.Occupation;
+
+    public List<SavePersonPositionViewModel> Positions { get; set; } = new();
 
     public List<SavePersonSportViewModel> Sports { get; set; } = new();
 }

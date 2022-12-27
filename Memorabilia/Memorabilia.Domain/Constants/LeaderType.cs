@@ -110,6 +110,10 @@ public sealed class LeaderType : DomainItemConstant
         NationalLeagueWinsLeader
     };
 
+    public static readonly LeaderType[] Football =
+    {
+    };
+
     private LeaderType(int id, string name, string abbreviation) : base(id, name, abbreviation) { } 
 
     public static LeaderType Find(int id)
@@ -127,6 +131,9 @@ public sealed class LeaderType : DomainItemConstant
 
         if (sports.Any(sport => sport == Sport.Baseball))
             leaderTypes.AddRange(Baseball);
+
+        if (sports.Any(sport => sport == Sport.Football))
+            leaderTypes.AddRange(Football);
 
         return leaderTypes.OrderBy(leaderType => leaderType.Name).ToArray();
     }

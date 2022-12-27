@@ -10,14 +10,12 @@ public class SavePersonSportViewModel : SaveViewModel
     {
         Id = sport.Id;
         PersonId = sport.PersonId;
-        SportId = sport.SportId;
+        Sport = Domain.Constants.Sport.Find(sport.SportId);
     }
 
     public int PersonId { get; set; }
 
-    public int SportId { get; set; }
+    public Domain.Constants.Sport Sport { get; set; }
 
-    public string SportName => Domain.Constants.Sport.Find(SportId)?.Name;
-
-    public Domain.Constants.Sport[] Sports => Domain.Constants.Sport.All;
+    public string SportName => Sport?.Name;
 }

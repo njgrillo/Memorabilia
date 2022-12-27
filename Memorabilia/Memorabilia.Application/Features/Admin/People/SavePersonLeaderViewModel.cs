@@ -11,7 +11,6 @@ public class SavePersonLeaderViewModel : SaveViewModel
         LeaderType = Domain.Constants.LeaderType.Find(leader.LeaderTypeId);
         Id = leader.Id;
         PersonId = leader.PersonId;
-        SportIds = leader.Person.Teams.Select(team => team.Team.Franchise.SportLeagueLevel.SportId).Distinct().ToArray();
         Year = leader.Year;
     }
 
@@ -20,8 +19,6 @@ public class SavePersonLeaderViewModel : SaveViewModel
     public string LeaderTypeName => LeaderType?.Name;
 
     public int PersonId { get; set; }
-
-    public int[] SportIds { get; }
 
     public int Year { get; set; }
 }

@@ -1,10 +1,12 @@
 ﻿<DivRowCol6>
     <Content>
-        <PersonTeamAutoComplete Disabled="@(!_canEditTeam)"
+        <PersonTeamAutoComplete BeginYear="_viewModel.BeginYear" 
+                                Disabled="@(!_canEditTeam)"
+                                EndYear="_viewModel.EndYear"
                                 PersonId="@PersonId"
-                                ResetValueOnEmptyText="false" 
-                                SelectedValue="_viewModel"
-                                SelectionChanged="(p) => _viewModel = p"
+                                ResetValueOnEmptyText="true" 
+                                SelectedValue="_selectedTeam"
+                                SelectionChanged="(p) => _selectedTeam = p"
                                 SportIds="@SportIds" />
     </Content>
 </DivRowCol6>
@@ -20,10 +22,9 @@
                          ValueChanged="@((p) => _viewModel.EndYear = p)" />
     </div> 
     <div class="col-lg-2">
-        <TeamRoleTypeDropDown Label="Role" 
-                              SelectedValue="_viewModel.TeamRoleTypeId"
-                              SelectionChanged="(p) => _viewModel.TeamRoleTypeId = p"
-                              SportLeagueLevelId="_viewModel.SportLeagueLevelId" />
+        <TeamRoleTypeAutoComplete SelectedValue="_viewModel.TeamRoleType"
+                                  SelectionChanged="(p) => _viewModel.TeamRoleType = p"
+                                  SportLeagueLevel="_viewModel.SportLeagueLevel" />
     </div> 
 </div> 
 <br/>

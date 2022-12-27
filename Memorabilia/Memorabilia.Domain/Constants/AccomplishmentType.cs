@@ -18,6 +18,7 @@ public sealed class AccomplishmentType : DomainItemConstant
     public static readonly AccomplishmentType PerfectGame = new(9, "Perfect Game");
     public static readonly AccomplishmentType ThirtyThirtyClub = new(3, "30-30 Club");               
     public static readonly AccomplishmentType TwoGrandSlamsInOneInning = new(16, "2 Grand Slams in One Inning");               
+    public static readonly AccomplishmentType TwoBasesLoadedTriplesInAGame = new(24, "2 Bases Loaded Triples in a Game");               
     public static readonly AccomplishmentType UnassistedTriplePlay = new(17, "Unassisted Triple Play");
       
     public static readonly AccomplishmentType[] All =
@@ -37,6 +38,7 @@ public sealed class AccomplishmentType : DomainItemConstant
         NoHitter,
         PerfectGame,
         ThirtyThirtyClub,
+        TwoBasesLoadedTriplesInAGame,
         TwoGrandSlamsInOneInning,
         UnassistedTriplePlay
     };
@@ -58,6 +60,7 @@ public sealed class AccomplishmentType : DomainItemConstant
         NoHitter,
         PerfectGame,
         ThirtyThirtyClub,
+        TwoBasesLoadedTriplesInAGame,
         TwoGrandSlamsInOneInning,
         UnassistedTriplePlay
     };
@@ -70,8 +73,14 @@ public sealed class AccomplishmentType : DomainItemConstant
         ImmaculateInning,
         NoHitter,
         PerfectGame,
+        TwoBasesLoadedTriplesInAGame,
         TwoGrandSlamsInOneInning,
         UnassistedTriplePlay
+    };
+
+    public static readonly AccomplishmentType[] Football =
+    {
+        
     };
 
     public static readonly AccomplishmentType[] YearAccomplishment =
@@ -103,7 +112,10 @@ public sealed class AccomplishmentType : DomainItemConstant
         var accomplishmentTypes = new List<AccomplishmentType>();
 
         if (sports.Any(sport => sport == Sport.Baseball))
-            accomplishmentTypes.AddRange(Baseball);            
+            accomplishmentTypes.AddRange(Baseball);
+
+        if (sports.Any(sport => sport == Sport.Football))
+            accomplishmentTypes.AddRange(Football);
 
         return accomplishmentTypes.OrderBy(accomplishmentType => accomplishmentType.Name).ToArray();
     }

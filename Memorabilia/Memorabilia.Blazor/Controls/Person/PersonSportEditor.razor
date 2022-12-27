@@ -1,7 +1,7 @@
 ﻿<DivRowCol3>
     <Content>
-        <SportDropDown SelectedValue="@_viewModel.SportId"
-                       SelectionChanged="(p) => _viewModel.SportId = p" />
+        <SportAutoComplete SelectedValue="_viewModel.Sport"
+                           SelectionChanged="(p) => _viewModel.Sport = p" />
     </Content>
 </DivRowCol3>
 <DivLeftAlign>

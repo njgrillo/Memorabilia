@@ -28,6 +28,15 @@ public sealed class Sport : DomainItemConstant
         Hockey
     };
 
+    public static readonly Sport[] PositionSports =
+    {
+        Baseball,
+        Basketball,
+        Football,
+        Hockey,
+        Soccer
+    };
+
     public static readonly Sport[] ProBowlGameSports =
     {
         Football
@@ -53,5 +62,10 @@ public sealed class Sport : DomainItemConstant
     public static bool HasProBowlGames(params int[] sportIds)
     {
         return sportIds.Select(id => Find(id)).Any(sport => ProBowlGameSports.Contains(sport));
+    }
+
+    public static bool IsPositionSport(params int[] sportIds)
+    {
+        return sportIds.Select(id => Find(id)).Any(sport => PositionSports.Contains(sport));
     }
 }

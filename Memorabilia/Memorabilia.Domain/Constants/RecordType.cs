@@ -30,12 +30,16 @@ public sealed class RecordType : DomainItemConstant
     public static readonly RecordType MostConsecutiveStrikeoutsInAGame = new (21, "Most Consecutive Strikeouts in a Game");
     public static readonly RecordType MostConsecutiveStrikeoutsWithoutIssuingAWalkToStartSeason = new (55, "Most Consecutive Strikeouts Without Issuing a Walk to Start a Season");
     public static readonly RecordType MostCycles = new (42, "Most Cycles");
+    public static readonly RecordType MostHitsInADoubleHeader = new(59, "Most Hits in a Double Header");
     public static readonly RecordType MostHitsInAFourGameSeries = new (48, "Most Hits in a 4 Game Series");
     public static readonly RecordType MostImmaculateInnings = new (38, "Most Immaculate Innings");
-    public static readonly RecordType MostRunsBattedInOneInning = new (41, "Most RBI in One Inning");
+    public static readonly RecordType MostRunsBattedInAGame = new(62, "Most RBI in a Game");
+    public static readonly RecordType MostRunsBattedInOneInning = new (41, "Most RBI in One Inning");    
     public static readonly RecordType MostStrikeoutsInANineInningGame = new (39, "Most Strikeouts in a 9 Inning Game");
+    public static readonly RecordType NationalLeagueOnBasePercentage = new(63, "National League On-Base Percentage", "NL OBP");
+    public static readonly RecordType NationalLeagueOnBasePlusSlugging = new(60, "National League On-Base Plus Slugging", "NL OPS");
     public static readonly RecordType NoHitters = new (25, "No Hitters");
-    public static readonly RecordType OnBasePercentage = new (6, "On-Base Percentage");
+    public static readonly RecordType OnBasePercentage = new (6, "On-Base Percentage");    
     public static readonly RecordType OutfieldAssists = new (35, "Outfield Assists");
     public static readonly RecordType PinchHitHomeRuns = new (52, "Pinch Hit Home Runs");
     public static readonly RecordType PlateAppearances = new (32, "Plate Appearances");
@@ -51,7 +55,8 @@ public sealed class RecordType : DomainItemConstant
     public static readonly RecordType StolenBases = new (12, "Stolen Bases", "Steals");        
     public static readonly RecordType Strikeouts = new (26, "Strikeouts");
     public static readonly RecordType StrikeoutToWalkRatio = new(36, "Strikeout-to-Walk ratio");
-    public static readonly RecordType TotalBases = new(3, "Total Bases");
+    public static readonly RecordType TotalBases = new(3, "Total Bases");    
+    public static readonly RecordType Triples = new(58, "Triples");    
     public static readonly RecordType TwoThousandStrikeoutsInFewestInningsPitched = new (37, "2000 Strikeouts in Fewest Innings Pitched");
     public static readonly RecordType Walks = new(5, "Walks");
     public static readonly RecordType WHIP = new(15, "Walks plus hits per inning pitched", "WHIP");
@@ -88,10 +93,14 @@ public sealed class RecordType : DomainItemConstant
         MostConsecutiveStrikeoutsInAGame,
         MostConsecutiveStrikeoutsWithoutIssuingAWalkToStartSeason,
         MostCycles,
+        MostHitsInADoubleHeader,
         MostHitsInAFourGameSeries,
         MostImmaculateInnings,
+        MostRunsBattedInAGame,
         MostRunsBattedInOneInning,
         MostStrikeoutsInANineInningGame,
+        NationalLeagueOnBasePercentage,
+        NationalLeagueOnBasePlusSlugging,
         NoHitters,
         OnBasePercentage,
         OutfieldAssists,
@@ -110,6 +119,7 @@ public sealed class RecordType : DomainItemConstant
         Strikeouts,
         StrikeoutToWalkRatio,
         TotalBases,
+        Triples,
         TwoThousandStrikeoutsInFewestInningsPitched,
         Walks,
         Wins,
@@ -147,10 +157,14 @@ public sealed class RecordType : DomainItemConstant
         MostConsecutiveStrikeoutsInAGame,
         MostConsecutiveStrikeoutsWithoutIssuingAWalkToStartSeason,
         MostCycles,
+        MostHitsInADoubleHeader,
         MostHitsInAFourGameSeries,
         MostImmaculateInnings,
+        MostRunsBattedInAGame,
         MostRunsBattedInOneInning,
         MostStrikeoutsInANineInningGame,
+        NationalLeagueOnBasePercentage,
+        NationalLeagueOnBasePlusSlugging,
         NoHitters,
         OnBasePercentage,
         OutfieldAssists,
@@ -169,11 +183,17 @@ public sealed class RecordType : DomainItemConstant
         Strikeouts,
         StrikeoutToWalkRatio,
         TotalBases,
+        Triples,
         TwoThousandStrikeoutsInFewestInningsPitched,
         Walks,
         Wins,
         WHIP,
         WorldSeriesEarnedRunAverage
+    };
+
+    public static readonly RecordType[] Football =
+    {
+
     };
 
     private RecordType(int id, string name, string abbreviation = null) : base(id, name, abbreviation) { }
@@ -193,6 +213,9 @@ public sealed class RecordType : DomainItemConstant
 
         if (sports.Any(sport => sport == Sport.Baseball))
             recordTypes.AddRange(Baseball);
+
+        if (sports.Any(sport => sport == Sport.Football))
+            recordTypes.AddRange(Football);
 
         return recordTypes.OrderBy(recordType => recordType.Name).ToArray();
     }

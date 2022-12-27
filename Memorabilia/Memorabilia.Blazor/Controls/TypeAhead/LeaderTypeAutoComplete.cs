@@ -1,6 +1,4 @@
-﻿#nullable disable
-
-namespace Memorabilia.Blazor.Controls.TypeAhead;
+﻿namespace Memorabilia.Blazor.Controls.TypeAhead;
 
 public class LeaderTypeAutoComplete : DomainEntityAutoComplete<LeaderType>
 {

@@ -23,6 +23,7 @@ public sealed class Brand : DomainItemConstant
     public static readonly Brand None = new(8, "None");
     public static readonly Brand Other = new(7, "Other");
     public static readonly Brand Photofile = new(12, "Photofile");
+    public static readonly Brand PlayersOfTheCentury = new (1034, "Players of the Century");
     public static readonly Brand Rawlings = new(1, "Rawlings");
     public static readonly Brand Reach = new(28, "Reach");
     public static readonly Brand Reebok = new(3, "Reebok", "RBK");  
@@ -32,6 +33,8 @@ public sealed class Brand : DomainItemConstant
     public static readonly Brand Spalding = new(10, "Spalding");  
     public static readonly Brand Spinneybeck = new(9, "Spinneybeck");  
     public static readonly Brand SportsIllustrated = new(13, "Sports Illustrated", "SI");
+    public static readonly Brand Starter = new(1035, "Starter");
+    public static readonly Brand TeamSpirit = new (1033, "Team Spirit");
     public static readonly Brand TeamworkAthleticApparel = new(1027, "Teamwork Athelic Apparel");
     public static readonly Brand Titleist = new(23, "Titleist");
     public static readonly Brand Topps = new(15, "Topps");  
@@ -63,6 +66,7 @@ public sealed class Brand : DomainItemConstant
         None,
         Other,
         Photofile,
+        PlayersOfTheCentury,
         Rawlings,
         Reach,
         Reebok,
@@ -72,6 +76,8 @@ public sealed class Brand : DomainItemConstant
         Spalding,
         Spinneybeck,
         SportsIllustrated,
+        Starter,
+        TeamSpirit,
         TeamworkAthleticApparel,
         Titleist,
         Topps,

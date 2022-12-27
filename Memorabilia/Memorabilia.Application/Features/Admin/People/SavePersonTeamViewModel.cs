@@ -6,6 +6,8 @@ public class SavePersonTeamViewModel : SaveViewModel, IWithName, IWithValue<int>
 
     public SavePersonTeamViewModel(int personId, TeamViewModel team)
     {
+        BeginYear = team.BeginYear;
+        EndYear = team.EndYear;
         FranchiseName = team.FranchiseName;
         PersonId = personId;
         SportId = team.SportId;
@@ -28,14 +30,14 @@ public class SavePersonTeamViewModel : SaveViewModel, IWithName, IWithValue<int>
         EndYear = team.EndYear;
         SportId = team.SportId;
         SportLeagueLevelId = team.SportLeagueLevelId;
-        TeamRoleTypeId = team.TeamRoleTypeId;
+        TeamRoleType = Domain.Constants.TeamRoleType.Find(team.TeamRoleTypeId);
     }
 
     public int? BeginYear { get; set; }        
 
     public int? EndYear { get; set; }
 
-    public string FranchiseName { get; }
+    public string FranchiseName { get; set; }
 
     public override string Name => TeamDisplayName;
 
@@ -51,15 +53,13 @@ public class SavePersonTeamViewModel : SaveViewModel, IWithName, IWithValue<int>
 
     public int TeamId { get; set; }
 
-    public string TeamLocation { get; }
+    public string TeamLocation { get; set; }
 
-    public string TeamName { get; }
+    public string TeamName { get; set; }
 
-    public int TeamRoleTypeId { get; set; }
+    public Domain.Constants.TeamRoleType TeamRoleType { get; set; } = Domain.Constants.TeamRoleType.Player;
 
-    public string TeamRoleTypeName => Domain.Constants.TeamRoleType.Find(TeamRoleTypeId)?.Name;
-
-    public Domain.Constants.TeamRoleType[] TeamRoleTypes => Domain.Constants.TeamRoleType.Get(SportLeagueLevel);
+    public string TeamRoleTypeName => TeamRoleType?.Name;
 
     int IWithValue<int>.Value => Id;
 }

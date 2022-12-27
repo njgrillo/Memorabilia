@@ -52,6 +52,7 @@ public sealed class AdminDomainItem
     public static readonly AdminDomainItem People = new("People", "Defines people", Constants.ImageFileName.Athletes, "Person");
     public static readonly AdminDomainItem Pewters = new("Pewters", "Defines variations of pewters", Constants.ImageFileName.Pewters);
     public static readonly AdminDomainItem PhotoTypes = new("Photo Types", "Defines variations of photos", Constants.ImageFileName.Photo);    
+    public static readonly AdminDomainItem Positions = new("Positions", "Defines variations of positions", Constants.ImageFileName.Positions);    
     public static readonly AdminDomainItem PriorityTypes = new("Priority Types", "Defines the priority types of projects", Constants.ImageFileName.PriorityTypes);
     public static readonly AdminDomainItem PrivacyTypes = new("Privacy Types", "Defines the privacy types of memorabilia", Constants.ImageFileName.PrivacyTypes);
     public static readonly AdminDomainItem ProjectTypes = new("Project Types", "Defines the project types of memorabilia", Constants.ImageFileName.ProjectTypes);
@@ -115,7 +116,8 @@ public sealed class AdminDomainItem
         Orientations,
         People,
         Pewters,
-        PhotoTypes,        
+        PhotoTypes,   
+        Positions,
         PriorityTypes,
         PrivacyTypes,
         ProjectTypes,

@@ -166,6 +166,10 @@ public sealed class AwardType : DomainItemConstant
         WorldSeriesMostValuablePlayer
     };
 
+    public static readonly AwardType[] Football =
+    {
+    };
+
     public static readonly AwardType[] Generic =
     {
         AssociatedPressAthleteOfTheYear,
@@ -191,6 +195,9 @@ public sealed class AwardType : DomainItemConstant
 
         if (sports.Any(sport => sport == Sport.Baseball))
             awardTypes.AddRange(Baseball);
+
+        if (sports.Any(sport => sport == Sport.Football))
+            awardTypes.AddRange(Football);
 
         return awardTypes.OrderBy(awardType => awardType.Name).ToArray();
     }

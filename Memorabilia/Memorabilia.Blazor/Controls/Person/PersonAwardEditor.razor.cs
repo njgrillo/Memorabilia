@@ -1,6 +1,4 @@
-﻿#nullable disable
-
-namespace Memorabilia.Blazor.Controls.Person;
+﻿namespace Memorabilia.Blazor.Controls.Person;
 
 public partial class PersonAwardEditor : ComponentBase
 {
@@ -8,7 +6,7 @@ public partial class PersonAwardEditor : ComponentBase
     public List<SavePersonAwardViewModel> Awards { get; set; } = new();
 
     [Parameter]
-    public AwardType[] AwardTypes { get; set; } = AwardType.All;
+    public int[] SportIds { get; set; }
 
     private SavePersonAwardViewModel _viewModel = new();
     private string _years;

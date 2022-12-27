@@ -56,6 +56,7 @@ global using Memorabilia.Application.Features.Admin.Orientations;
 global using Memorabilia.Application.Features.Admin.People;
 global using Memorabilia.Application.Features.Admin.Pewters;
 global using Memorabilia.Application.Features.Admin.PhotoTypes;
+global using Memorabilia.Application.Features.Admin.Positions;
 global using Memorabilia.Application.Features.Admin.PriorityTypes;
 global using Memorabilia.Application.Features.Admin.PrivacyTypes;
 global using Memorabilia.Application.Features.Admin.ProjectTypes;

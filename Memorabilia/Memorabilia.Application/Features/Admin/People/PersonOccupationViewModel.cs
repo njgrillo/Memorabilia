@@ -17,5 +17,7 @@ public class PersonOccupationViewModel
 
     public int PersonId => _person.Id;
 
+    public List<PersonPosition> Positions => _person.Positions;
+
     public List<PersonSport> Sports => _person.Sports;
 }

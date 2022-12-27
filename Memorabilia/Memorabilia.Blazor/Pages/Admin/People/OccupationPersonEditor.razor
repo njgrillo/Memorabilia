@@ -23,16 +23,31 @@
         <DivRowCol12>
             <Content>
                 <MudText Typo="Typo.h3">Occupations</MudText>
-                <PersonOccupationSelector Occupations="ViewModel.Occupations" />
+                <PersonOccupationSelector Occupations="ViewModel.Occupations"
+                                          OnOccupationChange="@(() => StateHasChanged())" />
             </Content>
         </DivRowCol12>
         <br />
-        @*<DivRowCol12 Hidden="@(!ViewModel.HasAthleteOccupation)">*@
-        <DivRowCol12>
-            <Content>
-                <MudText Typo="Typo.h3">Sports</MudText>
-                <PersonSportEditor Sports="ViewModel.Sports" />
-            </Content>
-        </DivRowCol12>
+        <PrettyBlazor.Condition Evaluation="@ViewModel.HasAthleteOccupation">
+            <Match>
+                <DivRowCol12>
+                    <Content>
+                        <MudText Typo="Typo.h3">Sports</MudText>
+                        <PersonSportEditor OnSportChange="@(() => StateHasChanged())" 
+                                           Sports="ViewModel.Sports" />
+                    </Content>
+                </DivRowCol12>
+            </Match>
+        </PrettyBlazor.Condition>     
+        <PrettyBlazor.Condition Evaluation="@ViewModel.HasPositionSport">
+            <Match>
+                <DivRowCol12>
+                    <Content>
+                        <MudText Typo="Typo.h3">Positions</MudText>
+                        <PersonPositionEditor Positions="ViewModel.Positions" />
+                    </Content>
+                </DivRowCol12>
+            </Match>
+        </PrettyBlazor.Condition>
     </Content>
 </EditPage>

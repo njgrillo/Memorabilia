@@ -9,21 +9,15 @@ public class SavePersonOccupationViewModel : SaveViewModel
     public SavePersonOccupationViewModel(PersonOccupation occupation)
     {
         Id = occupation.Id;
-        OccupationId = occupation.OccupationId;
-        OccupationTypeId = occupation.OccupationTypeId;
+        Occupation = Domain.Constants.Occupation.Find(occupation.OccupationId);
+        OccupationType = Domain.Constants.OccupationType.Find(occupation.OccupationTypeId);
     }
 
-    [Required]
-    public int OccupationId { get; set; }
+    public Domain.Constants.Occupation Occupation { get; set; }
 
-    public string OccupationName => Domain.Constants.Occupation.Find(OccupationId)?.Name;
+    public string OccupationName => Occupation?.Name;
 
-    public Domain.Constants.Occupation[] Occupations => Domain.Constants.Occupation.All;
+    public Domain.Constants.OccupationType OccupationType { get; set; } = Domain.Constants.OccupationType.Primary;
 
-    [Required]
-    public int OccupationTypeId { get; set; }
-
-    public string OccupationTypeName => Domain.Constants.OccupationType.Find(OccupationTypeId)?.Name;
-
-    public Domain.Constants.OccupationType[] OccupationTypes => Domain.Constants.OccupationType.All;
+    public string OccupationTypeName => OccupationType?.Name;
 }

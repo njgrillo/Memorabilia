@@ -1,6 +1,4 @@
-﻿#nullable disable
-
-namespace Memorabilia.Blazor.Controls.Person;
+﻿namespace Memorabilia.Blazor.Controls.Person;
 
 public partial class PersonRetiredNumberEditor : ComponentBase
 {
@@ -24,7 +22,7 @@ public partial class PersonRetiredNumberEditor : ComponentBase
 
     private void Edit(SavePersonRetiredNumberViewModel retiredNumber)
     {
-        _viewModel.FranchiseId = retiredNumber.FranchiseId;
+        _viewModel.Franchise = retiredNumber.Franchise;
         _viewModel.PlayerNumber = retiredNumber.PlayerNumber;
 
         _canAdd = false;
@@ -34,9 +32,9 @@ public partial class PersonRetiredNumberEditor : ComponentBase
 
     private void Update()
     {
-        var number = RetiredNumbers.Single(number => number.FranchiseId == _viewModel.FranchiseId);
+        var number = RetiredNumbers.Single(number => number.Franchise.Id == _viewModel.Franchise.Id);
 
-        number.FranchiseId = _viewModel.FranchiseId;
+        number.Franchise = _viewModel.Franchise;
         number.PlayerNumber = _viewModel.PlayerNumber;
 
         _viewModel = new SavePersonRetiredNumberViewModel();

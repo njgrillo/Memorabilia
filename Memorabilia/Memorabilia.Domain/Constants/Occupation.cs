@@ -4,36 +4,56 @@ public sealed class Occupation : DomainItemConstant
 {       
     public static readonly Occupation Actor = new(2, "Actor");
     public static readonly Occupation Actress = new(3, "Actress");
+    public static readonly Occupation Administrator = new(20, "Administrator");
+    public static readonly Occupation Astronaut = new(19, "Astronaut");
     public static readonly Occupation Athlete = new(1, "Athlete");
     public static readonly Occupation Broadcaster = new(5, "Broadcaster");
     public static readonly Occupation Celebrity = new(4, "Celebrity");
     public static readonly Occupation Coach = new(9, "Coach");
     public static readonly Occupation Comedian = new(6, "Comedian");
     public static readonly Occupation Commissioner = new(8, "Commissioner");        
+    public static readonly Occupation Executive = new(15, "Executive");        
+    public static readonly Occupation GeneralManager = new(14, "General Manager");        
     public static readonly Occupation LeaguePresident = new(12, "League President");       
     public static readonly Occupation Manager = new(7, "Manager");       
+    public static readonly Occupation Musician = new(18, "Musician");
+    public static readonly Occupation Owner = new(13, "Owner");
+    public static readonly Occupation Politician = new(16, "Politician");
+    public static readonly Occupation President = new(17, "President");  
 
     public static readonly Occupation[] All =
     {
-        Athlete,
         Actor,
         Actress,
+        Administrator,
+        Astronaut,
+        Athlete,
         Broadcaster,
         Celebrity,  
         Coach,
         Comedian,
         Commissioner,
+        Executive,
+        GeneralManager,
         LeaguePresident,
-        Manager
+        Manager,
+        Musician,
+        Owner,
+        Politician,
+        President
     };
 
     public static readonly Occupation[] SportOccupations =
     {
+        Administrator,
         Athlete,
         Coach,
         Commissioner,
+        Executive,
+        GeneralManager,
         LeaguePresident,
-        Manager
+        Manager,
+        Owner
     };
 
     private Occupation(int id, string name, string abbreviation = null) : base(id, name, abbreviation) { }

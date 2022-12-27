@@ -1,6 +1,4 @@
-﻿#nullable disable
-
-namespace Memorabilia.Blazor.Controls.Person;
+﻿namespace Memorabilia.Blazor.Controls.Person;
 
 public partial class PersonTeamSelector : ComponentBase
 {
@@ -16,17 +14,25 @@ public partial class PersonTeamSelector : ComponentBase
     private bool _canAdd = true;
     private bool _canEditTeam = true;
     private bool _canUpdate;
+    private SavePersonTeamViewModel _selectedTeam = new();
     private SavePersonTeamViewModel _viewModel = new();
 
     private void Add()
     {
+        _viewModel.TeamId = _selectedTeam.TeamId;
+        _viewModel.FranchiseName = _selectedTeam.FranchiseName;
+        _viewModel.TeamLocation = _selectedTeam.TeamLocation;
+        _viewModel.TeamName = _selectedTeam.TeamName;
+
         Teams.Add(_viewModel);
 
-        _viewModel = new SavePersonTeamViewModel();
+        _selectedTeam = new();
+        _viewModel = new();
     }
 
     private void Edit(SavePersonTeamViewModel team)
     {
+        _selectedTeam = team;
         _viewModel = team;
 
         _canAdd = false;
@@ -38,13 +44,14 @@ public partial class PersonTeamSelector : ComponentBase
     {
         var team = _viewModel.Id > 0
             ? Teams.Single(team => team.Id == _viewModel.Id)
-            : Teams.Single(team => team.TeamId == _viewModel.TeamId && team.TeamRoleTypeId == _viewModel.TeamRoleTypeId);
+            : Teams.Single(team => team.TeamId == _viewModel.TeamId && team.TeamRoleType.Id == _viewModel.TeamRoleType.Id);
 
         team.BeginYear = _viewModel.BeginYear;
         team.EndYear = _viewModel.EndYear;
-        team.TeamRoleTypeId = _viewModel.TeamRoleTypeId;
+        team.TeamRoleType = _viewModel.TeamRoleType;
 
-        _viewModel = new SavePersonTeamViewModel();
+        _selectedTeam = new();
+        _viewModel = new();
 
         _canAdd = true;
         _canEditTeam = true;

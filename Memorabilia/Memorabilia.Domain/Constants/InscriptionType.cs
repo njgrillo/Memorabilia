@@ -13,6 +13,7 @@ public sealed class InscriptionType : DomainItemConstant
     public static readonly InscriptionType MostValuablePlayer = new(2, "Most Valuable Player", "MVP");
     public static readonly InscriptionType Nickname = new(12, "Nickname");
     public static readonly InscriptionType Number = new(3, "Number");
+    public static readonly InscriptionType Other = new(18, "Other");
     public static readonly InscriptionType RookieOfTheYear = new(4, "Rookie of the Year", "ROY");
     public static readonly InscriptionType Statistic = new(9, "Statistic", "STAT");
     public static readonly InscriptionType Team = new(14, "Team");
@@ -31,6 +32,7 @@ public sealed class InscriptionType : DomainItemConstant
         MostValuablePlayer,
         Nickname,
         Number,
+        Other,
         RookieOfTheYear,
         Statistic,
         Team,

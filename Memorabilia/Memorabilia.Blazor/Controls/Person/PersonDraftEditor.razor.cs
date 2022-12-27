@@ -29,7 +29,7 @@ public partial class PersonDraftEditor : ComponentBase
 
     private void Edit(SavePersonDraftViewModel draft)
     {
-        _viewModel.FranchiseId = draft.FranchiseId;
+        _viewModel.Franchise = draft.Franchise;
         _viewModel.Year = draft.Year;
         _viewModel.Round = draft.Round;
         _viewModel.Pick = draft.Pick;
@@ -42,9 +42,9 @@ public partial class PersonDraftEditor : ComponentBase
 
     private void Update()
     {
-        var draft = Drafts.Single(draft => draft.FranchiseId == _viewModel.FranchiseId);
+        var draft = Drafts.Single(draft => draft.Franchise.Id == _viewModel.Franchise.Id);
 
-        draft.FranchiseId = _viewModel.FranchiseId;
+        draft.Franchise = _viewModel.Franchise;
         draft.Year = _viewModel.Year;
         draft.Round = _viewModel.Round;
         draft.Pick = _viewModel.Pick;

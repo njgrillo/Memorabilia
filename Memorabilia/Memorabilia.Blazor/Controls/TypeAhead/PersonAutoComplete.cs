@@ -1,9 +1,7 @@
-﻿#nullable disable
-
-namespace Memorabilia.Blazor.Controls.TypeAhead;
+﻿namespace Memorabilia.Blazor.Controls.TypeAhead;
 
 public class PersonAutoComplete : NamedEntityAutoComplete<SavePersonViewModel>, INotifyPropertyChanged
-{
+{   
     [Parameter]
     public Sport Sport { get; set; }
 

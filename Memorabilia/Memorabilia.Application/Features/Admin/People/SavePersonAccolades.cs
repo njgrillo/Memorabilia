@@ -36,7 +36,7 @@ public class SavePersonAccolades
             foreach (var accomplishment in command.Accomplishments)
             {
                 person.SetAccomplishments(accomplishment.Id, 
-                                          accomplishment.AccomplishmentTypeId, 
+                                          accomplishment.AccomplishmentType.Id, 
                                           accomplishment.Date, 
                                           accomplishment.Year);
             }
@@ -78,7 +78,7 @@ public class SavePersonAccolades
 
             foreach (var retiredNumber in command.RetiredNumbers)
             {
-                person.SetRetiredNumber(retiredNumber.Id, retiredNumber.FranchiseId, retiredNumber.PlayerNumber ?? 0);
+                person.SetRetiredNumber(retiredNumber.Id, retiredNumber.Franchise.Id, retiredNumber.PlayerNumber ?? 0);
             }
         }
 
