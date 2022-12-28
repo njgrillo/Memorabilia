@@ -7,6 +7,8 @@ public sealed class FranchiseHallOfFameType : DomainItemConstant
     public static readonly FranchiseHallOfFameType BravesHallOfFame = new(1, "Braves Hall of Fame", Franchise.AtlantaBraves);
     public static readonly FranchiseHallOfFameType CardinalsHallOfFame = new(7, "Cardinals Hall of Fame", Franchise.SaintLouisCardinals);
     public static readonly FranchiseHallOfFameType CubsHallOfFame = new(8, "Cubs Hall of Fame", Franchise.ChicagoCubs);
+    public static readonly FranchiseHallOfFameType DallasCowboysRingOfHonor = new(27, "Dallas Cowboys Ring of Honor", Franchise.DallasCowboys);
+    public static readonly FranchiseHallOfFameType GreenBayPackersHallOfFame = new(26, "Green Bay Packers Hall of Fame", Franchise.GreenBayPackers);
     public static readonly FranchiseHallOfFameType GuardiansHallOfFame = new(10, "Guardians Hall of Fame", Franchise.ClevelandGuardians);
     public static readonly FranchiseHallOfFameType HoustonAstrosHallOfFame = new(5, "Houston Astros Hall of Fame", Franchise.HoustonAstros);
     public static readonly FranchiseHallOfFameType KansasCityRoyalsHallOfFame = new(22, "Kansas City Royals Hall of Fame", Franchise.KansasCityRoyals);
@@ -33,6 +35,8 @@ public sealed class FranchiseHallOfFameType : DomainItemConstant
         BravesHallOfFame,
         CardinalsHallOfFame,
         CubsHallOfFame,
+        DallasCowboysRingOfHonor,
+        GreenBayPackersHallOfFame,
         GuardiansHallOfFame,
         HoustonAstrosHallOfFame,
         KansasCityRoyalsHallOfFame,
@@ -80,6 +84,12 @@ public sealed class FranchiseHallOfFameType : DomainItemConstant
         TorontoBlueJaysLevelOfExcellence
     };
 
+    public static readonly FranchiseHallOfFameType[] Football =
+    {
+        DallasCowboysRingOfHonor,
+        GreenBayPackersHallOfFame
+    };
+
     private FranchiseHallOfFameType(int id, string name, Franchise franchise) : base(id, name)
     {
         Franchise = franchise;
@@ -107,6 +117,9 @@ public sealed class FranchiseHallOfFameType : DomainItemConstant
 
         if (sports.Any(sport => sport == Sport.Baseball))
             franchiseHallOfFameTypes.AddRange(Baseball);
+
+        if (sports.Any(sport => sport == Sport.Football))
+            franchiseHallOfFameTypes.AddRange(Football);
 
         return franchiseHallOfFameTypes.OrderBy(franchiseHallOfFameType => franchiseHallOfFameType.Franchise.Name).ToArray();
     }

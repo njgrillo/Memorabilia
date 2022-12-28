@@ -5,6 +5,9 @@ public partial class PersonFranchiseHallOfFameEditor : ComponentBase
     [Parameter]
     public List<SavePersonFranchiseHallOfFameViewModel> FranchiseHallOfFames { get; set; } = new();
 
+    [Parameter]
+    public int[] SportIds { get; set; }
+
     private bool _canAdd = true;
     private bool _canEditFranchise = true;
     private bool _canUpdate;
@@ -19,7 +22,7 @@ public partial class PersonFranchiseHallOfFameEditor : ComponentBase
 
     private void Edit(SavePersonFranchiseHallOfFameViewModel hallOfFame)
     {
-        _viewModel.FranchiseId = hallOfFame.FranchiseId;
+        _viewModel.FranchiseHallOfFameType = hallOfFame.FranchiseHallOfFameType;
         _viewModel.Year = hallOfFame.Year;
 
         _canAdd = false;
@@ -29,9 +32,9 @@ public partial class PersonFranchiseHallOfFameEditor : ComponentBase
 
     private void Update()
     {
-        var hallOfFame = FranchiseHallOfFames.Single(hof => hof.FranchiseId == _viewModel.FranchiseId);
+        var hallOfFame = FranchiseHallOfFames.Single(hof => hof.FranchiseHallOfFameType.Id == _viewModel.FranchiseHallOfFameType.Id);
 
-        hallOfFame.FranchiseId = _viewModel.FranchiseId;
+        hallOfFame.FranchiseHallOfFameType = _viewModel.FranchiseHallOfFameType;
         hallOfFame.Year = _viewModel.Year;
 
         _viewModel = new SavePersonFranchiseHallOfFameViewModel();

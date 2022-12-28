@@ -43,5 +43,5 @@ public class SavePersonHallOfFamesViewModel : SaveViewModel
 
     public int[] SportIds { get; set; } = Array.Empty<int>();
 
-    public Domain.Constants.SportLeagueLevel[] SportLeagueLevels { get; set; } = Domain.Constants.SportLeagueLevel.All;
+    public SportLeagueLevel[] SportLeagueLevels { get; set; } = SportLeagueLevel.All;
 }

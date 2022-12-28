@@ -1,4 +1,8 @@
-﻿namespace Memorabilia.Domain.Constants;
+﻿using Memorabilia.Domain.Entities;
+using System.Net;
+using System.Text;
+
+namespace Memorabilia.Domain.Constants;
 
 public sealed class AccomplishmentType : DomainItemConstant
 {    
@@ -7,6 +11,8 @@ public sealed class AccomplishmentType : DomainItemConstant
     public static readonly AccomplishmentType AllWorldBaseballClassicTeam = new(11, "All-World Baseball Classic Team");
     public static readonly AccomplishmentType AmericanLeagueTripleCrown = new(2, "American League Triple Crown", "AL Triple Crown");
     public static readonly AccomplishmentType CombinedNoHitter = new(8, "Combined No Hitter");
+    public static readonly AccomplishmentType ConsensusAllAmerican = new (28, "Consensus All-American");
+    public static readonly AccomplishmentType FirstTeamAllPro = new (25, "First-team All-Pro");
     public static readonly AccomplishmentType FortyFortyClub = new(18, "40-40 Club");
     public static readonly AccomplishmentType FourHomeRunsInAGame = new(12, "4 Home Runs in a Game");
     public static readonly AccomplishmentType HitForTheCycle = new(13, "Hit for the Cycle");
@@ -14,8 +20,11 @@ public sealed class AccomplishmentType : DomainItemConstant
     public static readonly AccomplishmentType MajorLeagueBaseballAllCenturyTeam = new(6, "Major League Baseball All-Century Team");
     public static readonly AccomplishmentType MajorLeagueBaseballAllTimeTeam = new(7, "Major League Baseball All-Time Team");
     public static readonly AccomplishmentType NationalLeagueTripleCrown = new(10, "National League Triple Crown", "NL Triple Crown");
+    public static readonly AccomplishmentType NineteenSixtiesAllDecadeTeam = new(27, "1960s All-Decade Team");
     public static readonly AccomplishmentType NoHitter = new(1, "No Hitter");
     public static readonly AccomplishmentType PerfectGame = new(9, "Perfect Game");
+    public static readonly AccomplishmentType PFWAAllRookieTeam = new(29, "PFWA All-Rookie Team");
+    public static readonly AccomplishmentType SecondTeamAllPro = new(26, "Second-team All-Pro");
     public static readonly AccomplishmentType ThirtyThirtyClub = new(3, "30-30 Club");               
     public static readonly AccomplishmentType TwoGrandSlamsInOneInning = new(16, "2 Grand Slams in One Inning");               
     public static readonly AccomplishmentType TwoBasesLoadedTriplesInAGame = new(24, "2 Bases Loaded Triples in a Game");               
@@ -28,6 +37,8 @@ public sealed class AccomplishmentType : DomainItemConstant
         AllWorldBaseballClassicTeam,
         AmericanLeagueTripleCrown,
         CombinedNoHitter,
+        ConsensusAllAmerican,
+        FirstTeamAllPro,
         FortyFortyClub,
         FourHomeRunsInAGame,
         HitForTheCycle,
@@ -35,8 +46,11 @@ public sealed class AccomplishmentType : DomainItemConstant
         MajorLeagueBaseballAllCenturyTeam,
         MajorLeagueBaseballAllTimeTeam,
         NationalLeagueTripleCrown,
+        NineteenSixtiesAllDecadeTeam,
         NoHitter,
         PerfectGame,
+        PFWAAllRookieTeam,
+        SecondTeamAllPro,
         ThirtyThirtyClub,
         TwoBasesLoadedTriplesInAGame,
         TwoGrandSlamsInOneInning,
@@ -80,7 +94,11 @@ public sealed class AccomplishmentType : DomainItemConstant
 
     public static readonly AccomplishmentType[] Football =
     {
-        
+        ConsensusAllAmerican,
+        FirstTeamAllPro,
+        NineteenSixtiesAllDecadeTeam,
+        PFWAAllRookieTeam,
+        SecondTeamAllPro
     };
 
     public static readonly AccomplishmentType[] YearAccomplishment =
@@ -89,10 +107,15 @@ public sealed class AccomplishmentType : DomainItemConstant
         AllMLBSecondTeam,
         AllWorldBaseballClassicTeam,
         AmericanLeagueTripleCrown,
+        ConsensusAllAmerican,
+        FirstTeamAllPro,
         FortyFortyClub,
         MajorLeagueBaseballAllCenturyTeam,
         MajorLeagueBaseballAllTimeTeam,
         NationalLeagueTripleCrown,
+        NineteenSixtiesAllDecadeTeam,
+        PFWAAllRookieTeam,
+        SecondTeamAllPro,
         ThirtyThirtyClub
     };
 

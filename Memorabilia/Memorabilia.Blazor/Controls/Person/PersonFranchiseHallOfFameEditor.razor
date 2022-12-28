@@ -1,8 +1,9 @@
 ﻿<DivRowCol3>
     <Content>
-        <FranchiseHallOfFameDropDown Disabled="@(!_canEditFranchise)"
-                                     SelectedValue="_viewModel.FranchiseId"
-                                     SelectionChanged="(p) => _viewModel.FranchiseId = p" />
+        <FranchiseHallOfFameAutoComplete Disabled="@(!_canEditFranchise)"
+                                         SelectedValue="_viewModel.FranchiseHallOfFameType"
+                                         SelectionChanged="(p) => _viewModel.FranchiseHallOfFameType = p"
+                                         SportIds="SportIds" />
     </Content>
     <ContentColumn2>
         <NullableIntField Label="Induction Year"

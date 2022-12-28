@@ -8,15 +8,15 @@ public class SavePersonFranchiseHallOfFameViewModel : SaveViewModel
 
     public SavePersonFranchiseHallOfFameViewModel(FranchiseHallOfFame hof)
     {
-        FranchiseId = hof.FranchiseId;
+        FranchiseHallOfFameType = Domain.Constants.FranchiseHallOfFameType.Find(hof.FranchiseId);
         Id = hof.Id;
         PersonId = hof.PersonId;
         Year = hof.Year;
     }
 
-    public int FranchiseId { get; set; }
+    public Domain.Constants.FranchiseHallOfFameType FranchiseHallOfFameType { get; set; }
 
-    public string FranchiseName => Domain.Constants.Franchise.Find(FranchiseId)?.Name;
+    public string FranchiseName => FranchiseHallOfFameType?.Franchise?.Name;
 
     public int PersonId { get; set; }
 

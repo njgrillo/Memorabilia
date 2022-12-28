@@ -30,7 +30,7 @@ public class SavePersonHallOfFame
 
             foreach (var hallOfFame in command.FranchiseHallOfFames.Where(hof => !hof.IsDeleted))
             {
-                person.SetFranchiseHallOfFame(hallOfFame.FranchiseId, hallOfFame.Year);
+                person.SetFranchiseHallOfFame(hallOfFame.FranchiseHallOfFameType.Franchise.Id, hallOfFame.Year);
             }
         }
 

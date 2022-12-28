@@ -13,6 +13,7 @@ public sealed class LeaderType : DomainItemConstant
     public static readonly LeaderType AmericanLeagueStrikeoutLeader = new(13, "American League Strikeout Leader", "AL Strikeout Leader");
     public static readonly LeaderType AmericanLeagueTriplesLeader = new(26, "American League Triples Leader", "AL Triples Leader");
     public static readonly LeaderType AmericanLeagueWinsLeader = new(15, "American League Wins Leader", "AL Wins Leader");
+    public static readonly LeaderType CompletionPercentage = new (36, "Completion Percentage");    
     public static readonly LeaderType MajorLeagueBaseballBattingChampion = new(32, "Major League Baseball Batting Champion", "MLB Batting Champ");
     public static readonly LeaderType MajorLeagueBaseballEarnedRunAverageLeader = new(23, "Major League Baseball Earned Run Average Leader", "MLB ERA Leader");
     public static readonly LeaderType MajorLeagueBaseballHitsLeader = new(20, "Major League Baseball Hits Leader", "MLB Hits Leader");
@@ -49,6 +50,7 @@ public sealed class LeaderType : DomainItemConstant
         AmericanLeagueStrikeoutLeader,
         AmericanLeagueTriplesLeader,
         AmericanLeagueWinsLeader,
+        CompletionPercentage,
         MajorLeagueBaseballBattingChampion,
         MajorLeagueBaseballEarnedRunAverageLeader,
         MajorLeagueBaseballHitsLeader,
@@ -112,9 +114,10 @@ public sealed class LeaderType : DomainItemConstant
 
     public static readonly LeaderType[] Football =
     {
+        CompletionPercentage
     };
 
-    private LeaderType(int id, string name, string abbreviation) : base(id, name, abbreviation) { } 
+    private LeaderType(int id, string name, string abbreviation = null) : base(id, name, abbreviation) { } 
 
     public static LeaderType Find(int id)
     {
