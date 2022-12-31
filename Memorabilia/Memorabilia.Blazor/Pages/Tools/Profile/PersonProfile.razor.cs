@@ -1,4 +1,4 @@
-﻿#nullable disable
+﻿using Memorabilia.Domain.Entities;
 
 namespace Memorabilia.Blazor.Pages.Tools.Profile;
 
@@ -10,12 +10,9 @@ public partial class PersonProfile : ComponentBase
     [Inject]
     public IProfileService ProfileService { get; set; }
 
-    [Parameter]
-    public PersonViewModel SelectedPerson { get; set; }
+    public Person ViewModel { get; set; }
 
-    public PersonViewModel ViewModel { get; set; }
-
-    private async Task SelectedPersonChanged(PersonViewModel person)
+    private async Task SelectedPersonChanged(Person person)
     {
         var profiles = await ProfileService.GetProfileTypes(person.Id);
         var profile = profiles.FirstOrDefault();

@@ -1,0 +1,11 @@
+﻿@page "/Tools/FootballProfile/{personId:int}"
+
+@inherits WebPage
+
+<PageLoader>
+    <Content>
+        <FootballProfile DomainImageRootPath="@DomainImageRootPath"
+                         ImageRootPath="@PersonImageRootPath"
+                         PersonId="@PersonId" />
+    </Content>
+</PageLoader>

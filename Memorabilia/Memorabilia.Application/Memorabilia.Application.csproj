@@ -23,7 +23,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Features\Tools\Profile\Football\" />
     <Folder Include="Features\Tools\Profile\Basketball\" />
   </ItemGroup>
 

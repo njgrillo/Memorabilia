@@ -16,36 +16,33 @@
                             <MudText Typo="Typo.h6">@context.ToString()</MudText>
                         </Iterations>
                     </Match>
-                </PrettyBlazor.Condition>  
+                </PrettyBlazor.Condition>
                 <PrettyBlazor.Condition Evaluation="_viewModel.HasFreeAgentSigningData">
                     <Match>
                         <MudText Typo="Typo.h6">@_viewModel.FreeAgentSigning</MudText>
                     </Match>
-                </PrettyBlazor.Condition>  
+                </PrettyBlazor.Condition>
                 <br />
                 <MudText Typo="Typo.h6">@_viewModel.Debut</MudText>
-                <MudText Typo="Typo.h6">@_viewModel.LastAppearance</MudText>                
+                <MudText Typo="Typo.h6">@_viewModel.LastAppearance</MudText>
             </ContentColumn2>
             <ContentColumn3>
-                <MudText Typo="Typo.h6">Batting Average</MudText>
-                <MudText Typo="Typo.h6">Hits</MudText>
-                <MudText Typo="Typo.h6">Home Runs</MudText>
-                <MudText Typo="Typo.h6">RBIs</MudText>                
+                
             </ContentColumn3>
         </DivRowCol4>
         <DivRowCol4>
             <Content>
                 <MudImage Class="rounded-lg ma-4"
                           Elevation="25"
-                          Height="650" 
+                          Height="650"
                           Src="@(GetImageData(_viewModel.PersonImageFileName))"
-                          Width="500"   />
+                          Width="500" />
             </Content>
             <ContentColumn2>
                 <MudTable Bordered="false"
-                          Dense="false" 
+                          Dense="false"
                           Hover="true"
-                          Items="@_viewModel.Teams"    
+                          Items="@_viewModel.Teams"
                           Striped="true">
                     <ToolBarContent>
                         <MudText Typo="Typo.h6"><b>Teams</b></MudText>
@@ -64,18 +61,18 @@
                         <MudTablePager />
                     </PagerContent>
                 </MudTable>
-                @*Stats table*@                
+                @*Stats table*@
             </ContentColumn2>
             <ContentColumn3>
                 <PrettyBlazor.Condition Evaluation="_viewModel.HasHallOfFameData">
                     <Match>
                         <MudTable Bordered="false"
-                                  Dense="false" 
+                                  Dense="false"
                                   Hover="true"
-                                  Items="@_viewModel.HallOfFames"    
+                                  Items="@_viewModel.HallOfFames"
                                   Striped="true">
                             <ToolBarContent>
-                                <MudText Typo="Typo.h6"><b>MLB Hall of Fame</b></MudText>
+                                <MudText Typo="Typo.h6"><b>NFL Hall of Fame</b></MudText>
                             </ToolBarContent>
                             <HeaderContent>
                                 <MudTh>Induction Year</MudTh>
@@ -90,13 +87,13 @@
                         </MudTable>
                         <br />
                     </Match>
-                </PrettyBlazor.Condition>                  
+                </PrettyBlazor.Condition>
                 <PrettyBlazor.Condition Evaluation="_viewModel.HasFranchiseHallOfFameData">
                     <Match>
                         <MudTable Bordered="false"
-                                  Dense="false" 
+                                  Dense="false"
                                   Hover="true"
-                                  Items="@_viewModel.FranchiseHallOfFames"    
+                                  Items="@_viewModel.FranchiseHallOfFames"
                                   Striped="true">
                             <ToolBarContent>
                                 <MudText Typo="Typo.h6"><b>Franchise Hall of Fames</b></MudText>
@@ -111,12 +108,12 @@
                             </RowTemplate>
                         </MudTable>
                     </Match>
-                </PrettyBlazor.Condition> 
+                </PrettyBlazor.Condition>
             </ContentColumn3>
         </DivRowCol4>
         <DivRowCol4>
             <Content>
-                <MudChipSet @bind-SelectedChip="_selectedAccomplishment" 
+                <MudChipSet @bind-SelectedChip="_selectedAccomplishment"
                             Filter="true">
                     <PrettyBlazor.Condition Evaluation="_viewModel.HasAccomplishments">
                         <Match>
@@ -129,7 +126,7 @@
                         <PrettyBlazor.Condition Evaluation="_viewModel.HasAllStarData">
                             <Match>
                                 <MudChip Color="MudBlazor.Color.Success"
-                                         Text="AllStar">@_viewModel.AllStarSummaryDisplayText</MudChip>
+                                         Text="ProBowls">@_viewModel.AllStarSummaryDisplayText</MudChip>
                             </Match>
                         </PrettyBlazor.Condition>
                         <PrettyBlazor.Condition Evaluation="_viewModel.HasAwards">
@@ -145,7 +142,7 @@
                                 <MudChip Color="MudBlazor.Color.Primary"
                                          Text="Championship">@_viewModel.ChampionshipSummaryDisplayText</MudChip>
                             </Match>
-                        </PrettyBlazor.Condition>  
+                        </PrettyBlazor.Condition>
                         <PrettyBlazor.Condition Evaluation="_viewModel.HasLeaders">
                             <Match>
                                 <Iterations Items="@_viewModel.DistinctLeaders">
@@ -167,11 +164,11 @@
                 <Content>
                     <PrettyBlazor.Condition Evaluation="DisplayAccomplishments">
                         <Match>
-                           <MudTable Bordered="false"
-                                     Dense="false" 
-                                     Hover="true"
-                                     Items="@_viewModel.Accomplishments"
-                                     Striped="true">
+                            <MudTable Bordered="false"
+                                      Dense="false"
+                                      Hover="true"
+                                      Items="@_viewModel.Accomplishments"
+                                      Striped="true">
                                 <ToolBarContent>
                                     <MudText Typo="Typo.h6"><b>Accomplishments</b></MudText>
                                 </ToolBarContent>
@@ -189,15 +186,15 @@
                             </MudTable>
                         </Match>
                     </PrettyBlazor.Condition>
-                    <PrettyBlazor.Condition Evaluation="DisplayAllStars">
+                    <PrettyBlazor.Condition Evaluation="DisplayProBowls">
                         <Match>
-                           <MudTable Bordered="false"
-                                     Dense="false" 
-                                     Hover="true"
-                                     Items="@_viewModel.AllStars"    
-                                     Striped="true">
+                            <MudTable Bordered="false"
+                                      Dense="false"
+                                      Hover="true"
+                                      Items="@_viewModel.AllStars"
+                                      Striped="true">
                                 <ToolBarContent>
-                                    <MudText Typo="Typo.h6"><b>All Star Game Selections</b></MudText>
+                                    <MudText Typo="Typo.h6"><b>Pro Bowl Game Selections</b></MudText>
                                 </ToolBarContent>
                                 <HeaderContent>
                                     <MudTh>Team</MudTh>
@@ -215,11 +212,11 @@
                     </PrettyBlazor.Condition>
                     <PrettyBlazor.Condition Evaluation="DisplayAwards">
                         <Match>
-                           <MudTable Bordered="false"
-                                     Dense="false" 
-                                     Hover="true"
-                                     Items="@_viewModel.Awards"    
-                                     Striped="true">
+                            <MudTable Bordered="false"
+                                      Dense="false"
+                                      Hover="true"
+                                      Items="@_viewModel.Awards"
+                                      Striped="true">
                                 <ToolBarContent>
                                     <MudText Typo="Typo.h6"><b>Awards</b></MudText>
                                 </ToolBarContent>
@@ -239,11 +236,11 @@
                     </PrettyBlazor.Condition>
                     <PrettyBlazor.Condition Evaluation="DisplayChampionships">
                         <Match>
-                           <MudTable Bordered="false"
-                                     Dense="false" 
-                                     Hover="true"
-                                     Items="@_viewModel.Championships"    
-                                     Striped="true">
+                            <MudTable Bordered="false"
+                                      Dense="false"
+                                      Hover="true"
+                                      Items="@_viewModel.Championships"
+                                      Striped="true">
                                 <ToolBarContent>
                                     <MudText Typo="Typo.h6"><b>Championships</b></MudText>
                                 </ToolBarContent>
@@ -265,11 +262,11 @@
                     </PrettyBlazor.Condition>
                     <PrettyBlazor.Condition Evaluation="DisplayLeaders">
                         <Match>
-                           <MudTable Bordered="false"
-                                     Dense="false" 
-                                     Hover="true"
-                                     Items="@_viewModel.Leaders"    
-                                     Striped="true">
+                            <MudTable Bordered="false"
+                                      Dense="false"
+                                      Hover="true"
+                                      Items="@_viewModel.Leaders"
+                                      Striped="true">
                                 <ToolBarContent>
                                     <MudText Typo="Typo.h6"><b>Leaders</b></MudText>
                                 </ToolBarContent>
@@ -290,9 +287,9 @@
                 </Content>
                 <ContentColumn2>
                     <MudTable Bordered="false"
-                              Dense="false" 
+                              Dense="false"
                               Hover="true"
-                              Items="@_viewModel.CareerRecords"    
+                              Items="@_viewModel.CareerRecords"
                               Striped="true">
                         <ToolBarContent>
                             <MudText Typo="Typo.h6"><b>Career Records</b></MudText>
@@ -312,9 +309,9 @@
                 </ContentColumn2>
                 <ContentColumn3>
                     <MudTable Bordered="false"
-                              Dense="false" 
+                              Dense="false"
                               Hover="true"
-                              Items="@_viewModel.SingleSeasonRecords"    
+                              Items="@_viewModel.SingleSeasonRecords"
                               Striped="true">
                         <ToolBarContent>
                             <MudText Typo="Typo.h6"><b>Single Season Records</b></MudText>
@@ -330,7 +327,7 @@
                         <PagerContent>
                             <MudTablePager />
                         </PagerContent>
-                    </MudTable> 
+                    </MudTable>
                 </ContentColumn3>
             </DivRowCol4>
         </Content>
