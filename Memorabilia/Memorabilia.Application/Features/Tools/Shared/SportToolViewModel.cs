@@ -6,5 +6,5 @@ public abstract class SportToolViewModel : IWithName
 
     public virtual string ProfileLink { get; set; }
 
-    public Domain.Constants.SportLeagueLevel SportLeagueLevel { get; set; }
+    public Domain.Constants.Sport Sport { get; set; }
 }

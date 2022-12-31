@@ -7,7 +7,7 @@
                 <AwardTypeAutoComplete ResetValueOnEmptyText="false"
                                        SelectedValue="_viewModel.AwardType"
                                        SelectionChanged="(awardType) => OnInputChange(awardType)"
-                                       SportLeagueLevel="@SportLeagueLevel" />
+                                       Sports="@(new [] { Sport })" />
             </Content>
         </DivRowCol3>
         <DivRowCol6 Hidden="@(_viewModel.AwardType?.Id == null)">

@@ -6,10 +6,10 @@ public class HallOfFameViewModel : PersonSportToolViewModel
 {
     private readonly HallOfFame _hallOfFame;
 
-    public HallOfFameViewModel(HallOfFame hallOfFame, Domain.Constants.SportLeagueLevel sportLeagueLevel)
+    public HallOfFameViewModel(HallOfFame hallOfFame, Domain.Constants.Sport sport)
     {
         _hallOfFame = hallOfFame;
-        SportLeagueLevel = sportLeagueLevel;
+        Sport = sport;
     }
 
     public string BallotNumber => _hallOfFame.BallotNumber.HasValue ? _hallOfFame.BallotNumber.ToString() : string.Empty;

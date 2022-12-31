@@ -6,7 +6,7 @@ public partial class PersonRetiredNumberEditor : ComponentBase
     public List<SavePersonRetiredNumberViewModel> RetiredNumbers { get; set; } = new();
 
     [Parameter]
-    public int[] SportIds { get; set; }    
+    public Sport[] Sports { get; set; }    
 
     private bool _canAdd = true;
     private bool _canEditFranchise = true;

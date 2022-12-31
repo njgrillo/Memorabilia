@@ -3,7 +3,7 @@
 public class AccomplishmentTypeAutoComplete : DomainEntityAutoComplete<AccomplishmentType>
 {
     [Parameter]
-    public int[] SportIds { get; set; } = Array.Empty<int>();
+    public Sport[] Sports { get; set; } = Array.Empty<Sport>();
 
     private bool _loaded;
 
@@ -28,8 +28,8 @@ public class AccomplishmentTypeAutoComplete : DomainEntityAutoComplete<Accomplis
 
     private void LoadItems()
     {
-        Items = SportIds != null && SportIds.Any() 
-            ? AccomplishmentType.GetAll(SportIds) 
+        Items = Sports != null && Sports.Any() 
+            ? AccomplishmentType.GetAll(Sports) 
             : AccomplishmentType.All;
     }
 }

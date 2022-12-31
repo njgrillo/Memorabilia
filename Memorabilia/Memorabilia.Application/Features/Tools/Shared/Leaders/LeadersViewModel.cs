@@ -6,9 +6,9 @@ public class LeadersViewModel
 {
     public LeadersViewModel() { }
 
-    public LeadersViewModel(IEnumerable<Leader> leaders, Domain.Constants.SportLeagueLevel sportLeagueLevel)
+    public LeadersViewModel(IEnumerable<Leader> leaders, Domain.Constants.Sport sport)
     {
-        Leaders = leaders.Select(leader => new LeaderViewModel(leader, sportLeagueLevel))
+        Leaders = leaders.Select(leader => new LeaderViewModel(leader, sport))
                          .OrderByDescending(leader => leader.Year)
                          .ThenBy(leader => leader.LeaderTypeName)
                          .ThenBy(leader => leader.PersonName);

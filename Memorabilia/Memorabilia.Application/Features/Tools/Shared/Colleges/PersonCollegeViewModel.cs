@@ -6,10 +6,10 @@ public class PersonCollegeViewModel : PersonSportToolViewModel
 {
     private readonly PersonCollege _personCollege;
 
-    public PersonCollegeViewModel(PersonCollege personCollege, Domain.Constants.SportLeagueLevel sportLeagueLevel)
+    public PersonCollegeViewModel(PersonCollege personCollege, Domain.Constants.Sport sport)
     {
         _personCollege = personCollege;
-        SportLeagueLevel = sportLeagueLevel;
+        Sport = sport;
     }    
 
     public string BeginYear => _personCollege.BeginYear.HasValue ? _personCollege.BeginYear.ToString() : string.Empty;

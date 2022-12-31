@@ -32,24 +32,17 @@ public class SavePersonAccoladeViewModel : SaveViewModel
         SingleSeasonRecords = viewModel.SingleSeasonRecords.Select(singleSeasonRecord => new SavePersonSingleSeasonRecordViewModel(singleSeasonRecord))
                                                            .OrderBy(singleSeasonRecord => singleSeasonRecord.RecordTypeName)
                                                            .ToList();
-        SportIds = viewModel.Sports.Select(sport => sport.SportId).ToArray();
-        AccomplishmentTypes = AccomplishmentType.GetAll(SportIds);
-        AwardTypes = AwardType.GetAll(SportIds);
-        Franchises = Franchise.GetAll(SportIds);
-        LeaderTypes = LeaderType.GetAll(SportIds);
-        RecordTypes = RecordType.GetAll(SportIds);
+        Sports = viewModel.Sports.Select(sport => Sport.Find(sport.SportId)).ToArray();
     }
 
     public List<SavePersonAccomplishmentViewModel> Accomplishments { get; set; } = new();
-
-    public AccomplishmentType[] AccomplishmentTypes { get; set; } = AccomplishmentType.All;
 
     public string AllStarGameLabel
     {
         get
         {
-            var hasAllStarGames = Sport.HasAllStarGames(SportIds);
-            var hasProBowlGames = Sport.HasProBowlGames(SportIds);
+            var hasAllStarGames = Sport.HasAllStarGames(Sports);
+            var hasProBowlGames = Sport.HasProBowlGames(Sports);
 
             if (hasAllStarGames && hasProBowlGames)
                 return "All Star & Pro Bowl Games";
@@ -66,19 +59,15 @@ public class SavePersonAccoladeViewModel : SaveViewModel
 
     public List<SavePersonAwardViewModel> Awards { get; set; } = new();
 
-    public AwardType[] AwardTypes { get; set; } = AwardType.All;
-
     public override string BackNavigationPath => $"{AdminDomainItem.People.Title}/{AdminDomainItem.Teams.Item}/{EditModeType.Update.Name}/{PersonId}";
 
     public List<SavePersonCareerRecordViewModel> CareerRecords { get; set; } = new();
 
     public override string ContinueNavigationPath => $"{AdminDomainItem.People.Title}/HallOfFame/{EditModeType.Update.Name}/{PersonId}";
 
-    public bool DisplayAllStars => Sport.HasAllStarGames(SportIds) || Sport.HasProBowlGames(SportIds);
+    public bool DisplayAllStars => Sport.HasAllStarGames(Sports) || Sport.HasProBowlGames(Sports);
 
     public override EditModeType EditModeType => AllStarYears.Any() ? EditModeType.Update : EditModeType.Add;
-
-    public Franchise[] Franchises { get; set; } = Franchise.All;
 
     public string ImageFileName => Domain.Constants.ImageFileName.Athletes;
 
@@ -86,19 +75,15 @@ public class SavePersonAccoladeViewModel : SaveViewModel
 
     public List<SavePersonLeaderViewModel> Leaders { get; set; } = new();
 
-    public LeaderType[] LeaderTypes { get; set; } = LeaderType.All;
-
     public override string PageTitle => $"{(EditModeType == EditModeType.Update ? EditModeType.Update.Name : EditModeType.Add.Name)} Accolades";
 
     public int PersonId { get; set; }
 
     public PersonStep PersonStep => PersonStep.Accolade;
 
-    public RecordType[] RecordTypes { get; set; } = RecordType.All;
-
     public List<SavePersonRetiredNumberViewModel> RetiredNumbers { get; set; } = new();
 
     public List<SavePersonSingleSeasonRecordViewModel> SingleSeasonRecords { get; set; } = new();
 
-    public int[] SportIds { get; set; } = Array.Empty<int>();
+    public Sport[] Sports { get; set; } = Array.Empty<Sport>();
 }

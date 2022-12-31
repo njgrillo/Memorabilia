@@ -6,16 +6,16 @@ public class PlayersViewModel
 {
     public PlayersViewModel() { }
 
-    public PlayersViewModel(IEnumerable<PersonTeam> players, Domain.Constants.SportLeagueLevel sportLeagueLevel)
+    public PlayersViewModel(IEnumerable<PersonTeam> players, Domain.Constants.Sport sport)
     {
-        Players = players.Select(player => new PlayerViewModel(player, sportLeagueLevel))
+        Players = players.Select(player => new PlayerViewModel(player, sport))
                          .OrderByDescending(player => player.BeginYear)
                          .ThenBy(player => player.PersonName);
     }    
 
-    public int FranchiseId { get; set; }
+    public Domain.Constants.Franchise Franchise { get; set; }
 
-    public string FranchiseName => Domain.Constants.Franchise.Find(FranchiseId)?.Name;
+    public string FranchiseName => Franchise?.Name;
 
     public IEnumerable<PlayerViewModel> Players { get; set; } = Enumerable.Empty<PlayerViewModel>();
 

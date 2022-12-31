@@ -1,6 +1,8 @@
-﻿namespace Memorabilia.Application.Features.Tools.Shared.Leaders;
+﻿using Memorabilia.Domain.Constants;
 
-public record GetLeaders(Domain.Constants.LeaderType LeaderType, Domain.Constants.SportLeagueLevel SportLeagueLevel) : IQuery<LeadersViewModel>
+namespace Memorabilia.Application.Features.Tools.Shared.Leaders;
+
+public record GetLeaders(LeaderType LeaderType, Sport Sport) : IQuery<LeadersViewModel>
 {
     public class Handler : QueryHandler<GetLeaders, LeadersViewModel>
     {
@@ -13,7 +15,7 @@ public record GetLeaders(Domain.Constants.LeaderType LeaderType, Domain.Constant
 
         protected override async Task<LeadersViewModel> Handle(GetLeaders query)
         {
-            return new LeadersViewModel(await _leaderRepository.GetAll(query.LeaderType.Id), query.SportLeagueLevel)
+            return new LeadersViewModel(await _leaderRepository.GetAll(query.LeaderType.Id), query.Sport)
             {
                 LeaderType = query.LeaderType
             };

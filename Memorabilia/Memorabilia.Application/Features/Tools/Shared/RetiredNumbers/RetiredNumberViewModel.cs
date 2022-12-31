@@ -6,10 +6,10 @@ public class RetiredNumberViewModel : PersonSportToolViewModel
 {
     private readonly RetiredNumber _retiredNumber;
 
-    public RetiredNumberViewModel(RetiredNumber retiredNumber, Domain.Constants.SportLeagueLevel sportLeagueLevel)
+    public RetiredNumberViewModel(RetiredNumber retiredNumber, Domain.Constants.Sport sport)
     {
         _retiredNumber = retiredNumber;
-        SportLeagueLevel = sportLeagueLevel;
+        Sport = sport;
     }
 
     public string FranchiseName => _retiredNumber.Franchise.FullName;   

@@ -6,10 +6,10 @@ public class LeaderViewModel : PersonSportToolViewModel
 {
     private readonly Leader _leader;
 
-    public LeaderViewModel(Leader leader, Domain.Constants.SportLeagueLevel sportLeagueLevel)
+    public LeaderViewModel(Leader leader, Domain.Constants.Sport sport)
     {
         _leader = leader;
-        SportLeagueLevel = sportLeagueLevel;
+        Sport = sport;
     }
 
     public int LeaderTypeId => _leader.LeaderTypeId;

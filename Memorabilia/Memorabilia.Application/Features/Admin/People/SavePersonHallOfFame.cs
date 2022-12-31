@@ -17,11 +17,22 @@ public class SavePersonHallOfFame
         {
             var person = await _personRepository.Get(command.PersonId);
 
+            UpdateCollegeHallOfFames(command, person);
             UpdateFranchiseHallOfFames(command, person);
             UpdateHallOfFames(command, person);
             UpdateInternationalHallOfFames(command, person);
 
             await _personRepository.Update(person);
+        }
+
+        private static void UpdateCollegeHallOfFames(Command command, Person person)
+        {
+            person.RemoveCollegeHallOfFames(command.DeletedCollegeHallOfFameIds);
+
+            foreach (var hallOfFame in command.CollegeHallOfFames.Where(hof => !hof.IsDeleted))
+            {
+                person.SetCollegeHallOfFame(hallOfFame.College.Id, hallOfFame.Sport.Id, hallOfFame.Year);
+            }
         }
 
         private static void UpdateFranchiseHallOfFames(Command command, Person person)
@@ -70,11 +81,15 @@ public class SavePersonHallOfFame
             _viewModel = viewModel;
         }
 
+        public int[] DeletedCollegeHallOfFameIds => _viewModel.CollegeHallOfFames.Where(hof => hof.IsDeleted).Select(hof => hof.Id).ToArray();
+
         public int[] DeletedFranchiseHallOfFameIds => _viewModel.FranchiseHallOfFames.Where(hof => hof.IsDeleted).Select(hof => hof.Id).ToArray();
 
         public int[] DeletedHallOfFameIds => _viewModel.HallOfFames.Where(hof => hof.IsDeleted).Select(hof => hof.Id).ToArray();
 
         public int[] DeletedInternationalHallOfFameIds => _viewModel.InternationalHallOfFames.Where(hof => hof.IsDeleted).Select(hof => hof.Id).ToArray();
+
+        public SavePersonCollegeHallOfFameViewModel[] CollegeHallOfFames => _viewModel.CollegeHallOfFames.ToArray();
 
         public SavePersonFranchiseHallOfFameViewModel[] FranchiseHallOfFames => _viewModel.FranchiseHallOfFames.ToArray();
 

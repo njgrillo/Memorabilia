@@ -4,8 +4,8 @@ public partial class ViewAccomplishments : ViewSportTools<AccomplishmentViewMode
 {
     private AccomplishmentsViewModel _viewModel = new();        
 
-    private async Task OnInputChange(int accomplishmentTypeId)
+    private async Task OnInputChange(AccomplishmentType accomplishmentType)
     {
-        _viewModel = await QueryRouter.Send(new GetAccomplishments(accomplishmentTypeId, SportLeagueLevel));
+        _viewModel = await QueryRouter.Send(new GetAccomplishments(accomplishmentType, Sport));
     }
 }

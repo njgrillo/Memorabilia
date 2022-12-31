@@ -4,8 +4,8 @@ public partial class ViewPlayers : ViewSportTools<PlayerViewModel>
 {
     private PlayersViewModel _viewModel = new();  
 
-    private async Task OnInputChange(int franchiseId)
+    private async Task OnInputChange(Franchise franchise)
     {
-        _viewModel = await QueryRouter.Send(new GetPlayers(franchiseId, SportLeagueLevel));
+        _viewModel = await QueryRouter.Send(new GetPlayers(franchise, Sport));
     }
 }

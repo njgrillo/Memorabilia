@@ -27,6 +27,8 @@ public class TeamRoleTypeAutoComplete : DomainEntityAutoComplete<TeamRoleType>
 
     private void LoadItems()
     {
-        Items = SportLeagueLevel != null ? TeamRoleType.Get(SportLeagueLevel) : TeamRoleType.All;
+        Items = SportLeagueLevel != null 
+            ? TeamRoleType.Get(SportLeagueLevel) 
+            : TeamRoleType.All;
     }
 }

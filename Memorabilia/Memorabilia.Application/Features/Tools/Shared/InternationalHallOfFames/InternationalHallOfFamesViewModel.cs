@@ -6,9 +6,9 @@ public class InternationalHallOfFamesViewModel
 {
     public InternationalHallOfFamesViewModel() { }
 
-    public InternationalHallOfFamesViewModel(IEnumerable<InternationalHallOfFame> internationalHallOfFames, Domain.Constants.SportLeagueLevel sportLeagueLevel)
+    public InternationalHallOfFamesViewModel(IEnumerable<InternationalHallOfFame> internationalHallOfFames, Domain.Constants.Sport sport)
     {
-        InternationalHallOfFames = internationalHallOfFames.Select(hallOfFame => new InternationalHallOfFameViewModel(hallOfFame, sportLeagueLevel))
+        InternationalHallOfFames = internationalHallOfFames.Select(hallOfFame => new InternationalHallOfFameViewModel(hallOfFame, sport))
                                                            .OrderByDescending(hallOfFame => hallOfFame.InductionYear)
                                                            .ThenBy(hallOfFame => hallOfFame.PersonName);
     }

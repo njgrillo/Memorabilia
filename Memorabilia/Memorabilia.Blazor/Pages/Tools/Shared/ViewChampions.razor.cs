@@ -6,6 +6,6 @@ public partial class ViewChampions : ViewSportTools<ChampionViewModel>
 
     protected override async Task OnInitializedAsync()
     {
-        _viewModel = await QueryRouter.Send(new GetChampions(ChampionType.WorldSeries.Id, SportLeagueLevel));
+        _viewModel = await QueryRouter.Send(new GetChampions(ChampionType.WorldSeries.Id, Sport));
     }
 }

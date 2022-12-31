@@ -1,11 +1,12 @@
-﻿#nullable disable
-
-namespace Memorabilia.Blazor.Pages.MemorabiliaItems;
+﻿namespace Memorabilia.Blazor.Pages.MemorabiliaItems;
 
 public partial class ViewGallery : ImagePage
 {
     [Inject]
     public IGalleryService GalleryService { get; set; }
+
+    [Parameter]
+    public string PersonImageRootPath { get; set; }
 
     [Parameter]
     public int UserId { get; set; }

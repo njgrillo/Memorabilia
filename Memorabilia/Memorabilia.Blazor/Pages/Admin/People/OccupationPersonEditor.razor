@@ -44,7 +44,8 @@
                 <DivRowCol12>
                     <Content>
                         <MudText Typo="Typo.h3">Positions</MudText>
-                        <PersonPositionEditor Positions="ViewModel.Positions" />
+                        <PersonPositionEditor Positions="ViewModel.Positions"
+                                              Sports="@(ViewModel.Sports.Select(sport => sport.Sport).ToArray())" />
                     </Content>
                 </DivRowCol12>
             </Match>

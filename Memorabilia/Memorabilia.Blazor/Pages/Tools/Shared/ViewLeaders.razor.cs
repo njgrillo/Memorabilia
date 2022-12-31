@@ -6,6 +6,6 @@ public partial class ViewLeaders : ViewSportTools<LeaderViewModel>
 
     private async Task OnInputChange(LeaderType leaderType)
     {
-        _viewModel = await QueryRouter.Send(new GetLeaders(leaderType, SportLeagueLevel));
+        _viewModel = await QueryRouter.Send(new GetLeaders(leaderType, Sport));
     }
 }

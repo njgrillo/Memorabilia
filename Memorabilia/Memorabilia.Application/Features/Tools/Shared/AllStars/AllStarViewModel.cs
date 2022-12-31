@@ -6,10 +6,10 @@ public class AllStarViewModel : PersonSportToolViewModel
 {
     private readonly AllStar _allstar;
 
-    public AllStarViewModel(AllStar allstar, Domain.Constants.SportLeagueLevel sportLeagueLevel)
+    public AllStarViewModel(AllStar allstar, Domain.Constants.Sport sport)
     {
         _allstar = allstar;
-        SportLeagueLevel = sportLeagueLevel;
+        Sport = sport;
     }
 
     public override int PersonId => _allstar.PersonId;

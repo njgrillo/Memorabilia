@@ -6,10 +6,10 @@ public class InternationalHallOfFameViewModel : PersonSportToolViewModel
 {
     private readonly InternationalHallOfFame _internationalHallOfFame;
 
-    public InternationalHallOfFameViewModel(InternationalHallOfFame internationalHallOfFame, Domain.Constants.SportLeagueLevel sportLeagueLevel)
+    public InternationalHallOfFameViewModel(InternationalHallOfFame internationalHallOfFame, Domain.Constants.Sport sport)
     {
         _internationalHallOfFame = internationalHallOfFame;
-        SportLeagueLevel = sportLeagueLevel;
+        Sport = sport;
     }    
 
     public string InductionYear => _internationalHallOfFame.InductionYear.ToString();

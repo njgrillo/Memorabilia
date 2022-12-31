@@ -6,10 +6,10 @@ public class AccomplishmentViewModel : PersonSportToolViewModel
 {
     private readonly PersonAccomplishment _personAccomplishment;
 
-    public AccomplishmentViewModel(PersonAccomplishment personAccomplishment, Domain.Constants.SportLeagueLevel sportLeagueLevel)
+    public AccomplishmentViewModel(PersonAccomplishment personAccomplishment, Domain.Constants.Sport sport)
     {
         _personAccomplishment = personAccomplishment;
-        SportLeagueLevel = sportLeagueLevel;
+        Sport = sport;
     }
 
     public string Date => _personAccomplishment.Date?.ToString("MM/dd/yyyy");

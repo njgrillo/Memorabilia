@@ -6,9 +6,9 @@ public class SingleSeasonRecordsViewModel
 {
     public SingleSeasonRecordsViewModel() { }
 
-    public SingleSeasonRecordsViewModel(IEnumerable<SingleSeasonRecord> singleSeasonRecords, Domain.Constants.SportLeagueLevel sportLeagueLevel)
+    public SingleSeasonRecordsViewModel(IEnumerable<SingleSeasonRecord> singleSeasonRecords, Domain.Constants.Sport sport)
     {
-        SingleSeasonRecords = singleSeasonRecords.Select(record => new SingleSeasonRecordViewModel(record, sportLeagueLevel))
+        SingleSeasonRecords = singleSeasonRecords.Select(record => new SingleSeasonRecordViewModel(record, sport))
                                                  .OrderBy(record => record.SingleSeasonRecordTypeName);
     }
 

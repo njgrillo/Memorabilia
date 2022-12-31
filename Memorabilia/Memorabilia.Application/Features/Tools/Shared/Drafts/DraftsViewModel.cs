@@ -6,9 +6,9 @@ public class DraftsViewModel
 {
     public DraftsViewModel() { }
 
-    public DraftsViewModel(IEnumerable<Draft> drafts, Domain.Constants.SportLeagueLevel sportLeagueLevel)
+    public DraftsViewModel(IEnumerable<Draft> drafts, Domain.Constants.Sport sport)
     {
-        Drafts = drafts.Select(draft => new DraftViewModel(draft, sportLeagueLevel))
+        Drafts = drafts.Select(draft => new DraftViewModel(draft, sport))
                        .OrderByDescending(draft => draft.Year)
                        .ThenBy(draft => draft.Round)
                        .ThenBy(draft => draft.Pick);
@@ -16,9 +16,9 @@ public class DraftsViewModel
 
     public IEnumerable<DraftViewModel> Drafts { get; set; } = Enumerable.Empty<DraftViewModel>();
 
-    public int FranchiseId { get; set; }
+    public Domain.Constants.Franchise Franchise { get; set; }
 
-    public string FranchiseName => Domain.Constants.Franchise.Find(FranchiseId)?.Name;
+    public string FranchiseName => Franchise?.Name;
 
     public string ResultsTitle => $"{FranchiseName} Draft Picks";
 }

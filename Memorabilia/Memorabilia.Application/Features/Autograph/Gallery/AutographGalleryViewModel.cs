@@ -13,19 +13,20 @@ public class AutographGalleryViewModel
 
     public string EditNavigationPath => $"/Autographs/{EditModeType.Update.Name}/{_autograph.MemorabiliaId}/{_autograph.Id}";
 
-    public string ImageFileName
+    public string ImageFileName =>
+        !_autograph.Person.ImageFileName.IsNullOrEmpty()
+            ? _autograph.Person.ImageFileName
+            : Domain.Constants.ImageFileName.ImageNotAvailable;
+
+    public string ImageNavigationPath
     {
         get
         {
-            var primaryImageFileName = _autograph.Images.Any()
-                ? _autograph.Images.SingleOrDefault(image => image.ImageTypeId == ImageType.Primary.Id)?.FileName ?? Domain.Constants.ImageFileName.ImageNotAvailable
-                : Domain.Constants.ImageFileName.ImageNotAvailable;
-
-            return !primaryImageFileName.IsNullOrEmpty() ? primaryImageFileName : Domain.Constants.ImageFileName.ImageNotAvailable;
-        }
+            return _autograph.Person.Sports.Any()
+            ? $"/Tools/{_autograph.Person.Sports.First().Sport.Name}Profile/{_autograph.Person.Id}"
+            : "/Tools/PersonProfile";
+        } 
     }
-
-    public string ImageNavigationPath => $"/Autographs/Image/{EditModeType.Update.Name}/{_autograph.Id}";
 
     public string PersonName => _autograph.Person.ProfileName;
 }

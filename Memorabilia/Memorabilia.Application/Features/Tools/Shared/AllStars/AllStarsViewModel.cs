@@ -6,9 +6,9 @@ public class AllStarsViewModel
 {
     public AllStarsViewModel() { }
 
-    public AllStarsViewModel(IEnumerable<AllStar> allStars, Domain.Constants.SportLeagueLevel sportLeagueLevel)
+    public AllStarsViewModel(IEnumerable<AllStar> allStars, Domain.Constants.Sport sport)
     {
-        AllStars = allStars.Select(allStar => new AllStarViewModel(allStar, sportLeagueLevel))
+        AllStars = allStars.Select(allStar => new AllStarViewModel(allStar, sport))
                            .OrderBy(allStar => allStar.PersonName);
     }    
 

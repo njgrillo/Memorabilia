@@ -1,6 +1,8 @@
-﻿namespace Memorabilia.Application.Features.Tools.Shared.RetiredNumbers;
+﻿using Memorabilia.Domain.Constants;
 
-public record GetRetiredNumbers(int FranchiseId, Domain.Constants.SportLeagueLevel SportLeagueLevel) : IQuery<RetiredNumbersViewModel>
+namespace Memorabilia.Application.Features.Tools.Shared.RetiredNumbers;
+
+public record GetRetiredNumbers(Franchise Franchise, Sport Sport) : IQuery<RetiredNumbersViewModel>
 {
     public class Handler : QueryHandler<GetRetiredNumbers, RetiredNumbersViewModel>
     {
@@ -13,9 +15,9 @@ public record GetRetiredNumbers(int FranchiseId, Domain.Constants.SportLeagueLev
 
         protected override async Task<RetiredNumbersViewModel> Handle(GetRetiredNumbers query)
         {
-            return new RetiredNumbersViewModel(await _retiredNumberRepository.GetAll(query.FranchiseId), query.SportLeagueLevel)
+            return new RetiredNumbersViewModel(await _retiredNumberRepository.GetAll(query.Franchise.Id), query.Sport)
             {
-                FranchiseId = query.FranchiseId
+                Franchise = query.Franchise
             };
         }
     }

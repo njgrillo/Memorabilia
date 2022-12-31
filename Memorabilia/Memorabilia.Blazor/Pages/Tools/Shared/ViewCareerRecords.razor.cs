@@ -6,6 +6,6 @@ public partial class ViewCareerRecords : ViewSportTools<CareerRecordViewModel>
 
     protected override async Task OnInitializedAsync()
     {
-        _viewModel = await QueryRouter.Send(new GetCareerRecords(SportLeagueLevel));
+        _viewModel = await QueryRouter.Send(new GetCareerRecords(Sport));
     }
 }

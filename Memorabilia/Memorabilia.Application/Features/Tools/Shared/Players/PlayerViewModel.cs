@@ -6,10 +6,10 @@ public class PlayerViewModel : PersonSportToolViewModel
 {
     private readonly PersonTeam _personTeam;
 
-    public PlayerViewModel(PersonTeam personTeam, Domain.Constants.SportLeagueLevel sportLeagueLevel)
+    public PlayerViewModel(PersonTeam personTeam, Domain.Constants.Sport sport)
     {
         _personTeam = personTeam;
-        SportLeagueLevel = sportLeagueLevel;
+        Sport = sport;
     }
 
     public string BeginYear => _personTeam.BeginYear.HasValue ? _personTeam.BeginYear.ToString() : string.Empty;

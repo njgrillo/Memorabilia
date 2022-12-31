@@ -4,8 +4,8 @@ public partial class ViewRetiredNumbers : ViewSportTools<RetiredNumberViewModel>
 {
     private RetiredNumbersViewModel _viewModel = new();
 
-    private async Task OnInputChange(int franchiseId)
+    private async Task OnInputChange(Franchise franchise)
     {
-        _viewModel = await QueryRouter.Send(new GetRetiredNumbers(franchiseId, SportLeagueLevel));
+        _viewModel = await QueryRouter.Send(new GetRetiredNumbers(franchise, Sport));
     }
 }

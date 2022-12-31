@@ -1,6 +1,8 @@
-﻿namespace Memorabilia.Application.Features.Tools.Shared.CareerRecords;
+﻿using Memorabilia.Domain.Constants;
 
-public record GetCareerRecords(Domain.Constants.SportLeagueLevel SportLeagueLevel) : IQuery<CareerRecordsViewModel>
+namespace Memorabilia.Application.Features.Tools.Shared.CareerRecords;
+
+public record GetCareerRecords(Sport Sport) : IQuery<CareerRecordsViewModel>
 {
     public class Handler : QueryHandler<GetCareerRecords, CareerRecordsViewModel>
     {
@@ -13,7 +15,7 @@ public record GetCareerRecords(Domain.Constants.SportLeagueLevel SportLeagueLeve
 
         protected override async Task<CareerRecordsViewModel> Handle(GetCareerRecords query)
         {
-            return new CareerRecordsViewModel(await _careerRecordRepository.GetAll(query.SportLeagueLevel.Sport.Id), query.SportLeagueLevel);
+            return new CareerRecordsViewModel(await _careerRecordRepository.GetAll(query.Sport.Id), query.Sport);
         }
     }
 }

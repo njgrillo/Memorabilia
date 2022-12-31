@@ -1,6 +1,8 @@
-﻿namespace Memorabilia.Application.Features.Tools.Shared.FranchiseHallOfFames;
+﻿using Memorabilia.Domain.Constants;
 
-public record GetFranchiseHallOfFames(int FranchiseId, Domain.Constants.SportLeagueLevel SportLeagueLevel) : IQuery<FranchiseHallOfFamesViewModel>
+namespace Memorabilia.Application.Features.Tools.Shared.FranchiseHallOfFames;
+
+public record GetFranchiseHallOfFames(Franchise Franchise, Sport Sport) : IQuery<FranchiseHallOfFamesViewModel>
 {
     public class Handler : QueryHandler<GetFranchiseHallOfFames, FranchiseHallOfFamesViewModel>
     {
@@ -13,9 +15,9 @@ public record GetFranchiseHallOfFames(int FranchiseId, Domain.Constants.SportLea
 
         protected override async Task<FranchiseHallOfFamesViewModel> Handle(GetFranchiseHallOfFames query)
         {
-            return new FranchiseHallOfFamesViewModel(await _franchiseHallOfFameRepository.GetAll(query.FranchiseId), query.SportLeagueLevel)
+            return new FranchiseHallOfFamesViewModel(await _franchiseHallOfFameRepository.GetAll(query.Franchise.Id), query.Sport)
             {
-                FranchiseId = query.FranchiseId
+                Franchise = query.Franchise
             };
         }
     }

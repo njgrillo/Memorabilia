@@ -6,15 +6,15 @@ public class RetiredNumbersViewModel
 {
     public RetiredNumbersViewModel() { }
 
-    public RetiredNumbersViewModel(IEnumerable<RetiredNumber> retiredNumbers, Domain.Constants.SportLeagueLevel sportLeagueLevel)
+    public RetiredNumbersViewModel(IEnumerable<RetiredNumber> retiredNumbers, Domain.Constants.Sport sport)
     {
-        RetiredNumbers = retiredNumbers.Select(retiredNumber => new RetiredNumberViewModel(retiredNumber, sportLeagueLevel))
+        RetiredNumbers = retiredNumbers.Select(retiredNumber => new RetiredNumberViewModel(retiredNumber, sport))
                                        .OrderBy(retiredNumber => retiredNumber.PersonName);
     }
 
-    public int FranchiseId { get; set; }
+    public Domain.Constants.Franchise Franchise { get; set; }
 
-    public string FranchiseName => Domain.Constants.Franchise.Find(FranchiseId)?.Name;
+    public string FranchiseName => Franchise?.Name;
 
     public string ResultsTitle => $"{FranchiseName} Retired Numbers";
 

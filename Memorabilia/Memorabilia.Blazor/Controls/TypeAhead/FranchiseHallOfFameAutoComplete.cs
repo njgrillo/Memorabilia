@@ -3,7 +3,7 @@
 public class FranchiseHallOfFameAutoComplete : DomainEntityAutoComplete<FranchiseHallOfFameType>
 {
     [Parameter]
-    public int[] SportIds { get; set; } = Array.Empty<int>();
+    public Sport[] Sports { get; set; } = Array.Empty<Sport>();
 
     private bool _loaded;
 
@@ -28,8 +28,8 @@ public class FranchiseHallOfFameAutoComplete : DomainEntityAutoComplete<Franchis
 
     private void LoadItems()
     {
-        Items = SportIds != null && SportIds.Any() 
-            ? FranchiseHallOfFameType.GetAll(SportIds) 
+        Items = Sports != null && Sports.Any() 
+            ? FranchiseHallOfFameType.GetAll(Sports) 
             : FranchiseHallOfFameType.All;
     }
 }

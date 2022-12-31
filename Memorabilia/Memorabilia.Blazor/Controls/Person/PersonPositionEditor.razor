@@ -1,7 +1,8 @@
 ﻿<DivRowCol3>
     <Content>
         <PositionAutoComplete SelectedValue="_viewModel.Position"
-                              SelectionChanged="(p) => _viewModel.Position = p" />
+                              SelectionChanged="(p) => _viewModel.Position = p"
+                              Sports="Sports" />
     </Content>
     <ContentColumn2>
         <MudSwitch Checked="@(_viewModel.PositionType == PositionType.Primary)"

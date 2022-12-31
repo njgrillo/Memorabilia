@@ -6,10 +6,10 @@ public class CareerRecordViewModel : PersonSportToolViewModel
 {
     private readonly CareerRecord _careerRecord;
 
-    public CareerRecordViewModel(CareerRecord careerRecord, Domain.Constants.SportLeagueLevel sportLeagueLevel)
+    public CareerRecordViewModel(CareerRecord careerRecord, Domain.Constants.Sport sport)
     {
         _careerRecord = careerRecord;
-        SportLeagueLevel = sportLeagueLevel;
+        Sport = sport;
     }     
 
     public int CareerRecordTypeId => _careerRecord.RecordTypeId;

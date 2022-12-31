@@ -13,6 +13,8 @@ public class PersonHallOfFameViewModel
         _person = person;
     }
 
+    public List<CollegeHallOfFame> CollegeHallOfFames => _person.CollegeHallOfFames;
+
     public List<FranchiseHallOfFame> FranchiseHallOfFames => _person.FranchiseHallOfFames;
 
     public List<HallOfFame> HallOfFames => _person.HallOfFames;

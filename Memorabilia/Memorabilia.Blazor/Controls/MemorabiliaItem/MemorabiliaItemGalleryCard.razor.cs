@@ -1,6 +1,4 @@
-﻿#nullable disable
-
-namespace Memorabilia.Blazor.Controls.MemorabiliaItem;
+﻿namespace Memorabilia.Blazor.Controls.MemorabiliaItem;
 
 public partial class MemorabiliaItemGalleryCard : ImagePage
 {
@@ -12,6 +10,9 @@ public partial class MemorabiliaItemGalleryCard : ImagePage
 
     [Parameter]
     public MemorabiliaGalleryItemViewModel MemorabiliaItem { get; set; }
+
+    [Parameter]
+    public string PersonImageRootPath { get; set; }
 
     [Parameter]
     public string PrimaryImageFileName { get; set; }

@@ -6,6 +6,6 @@ public partial class ViewAllStars : ViewSportTools<AllStarViewModel>
 
     private async Task OnInputChange(int awardTypeId)
     {
-        _viewModel = await QueryRouter.Send(new GetAllStars(awardTypeId, SportLeagueLevel));
+        _viewModel = await QueryRouter.Send(new GetAllStars(awardTypeId, Sport));
     }
 }

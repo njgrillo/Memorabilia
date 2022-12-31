@@ -4,12 +4,12 @@
     <Content>
         <DivRowCol3>
             <Content>
-                <AccomplishmentTypeDropDown SelectedValue="_viewModel.AccomplishmentTypeId"
-                                            SelectionChanged="(p) => OnInputChange(p)"
-                                            SportLeagueLevel="@SportLeagueLevel" />
+                <AccomplishmentTypeAutoComplete SelectedValue="_viewModel.AccomplishmentType"
+                                                SelectionChanged="(p) => OnInputChange(p)"
+                                                Sports="@(new [] { Sport })" />
             </Content>
         </DivRowCol3>
-        <DivRowCol6 Hidden="@(_viewModel.AccomplishmentTypeId == 0)">
+        <DivRowCol6 Hidden="@(_viewModel.AccomplishmentType == null)">
             <Content>
                 <MudTable Bordered="false"
                           Dense="false"

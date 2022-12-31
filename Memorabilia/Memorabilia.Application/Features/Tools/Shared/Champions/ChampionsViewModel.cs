@@ -6,9 +6,9 @@ public class ChampionsViewModel
 {
     public ChampionsViewModel() { }
 
-    public ChampionsViewModel(IEnumerable<Champion> champions, Domain.Constants.SportLeagueLevel sportLeagueLevel)
+    public ChampionsViewModel(IEnumerable<Champion> champions, Domain.Constants.Sport sport)
     {
-        Champions = champions.Select(champion => new ChampionViewModel(champion, sportLeagueLevel));
+        Champions = champions.Select(champion => new ChampionViewModel(champion, sport));
     }
 
     public IEnumerable<ChampionViewModel> Champions { get; set; } = Enumerable.Empty<ChampionViewModel>();

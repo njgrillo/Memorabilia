@@ -1,11 +1,9 @@
-﻿#nullable disable
-
-namespace Memorabilia.Blazor.Pages.Tools.Shared;
+﻿namespace Memorabilia.Blazor.Pages.Tools.Shared;
 
 public abstract class ViewSportTools<T> : ImagePage where T : SportToolViewModel, IWithName
 {
     [Parameter]
-    public SportLeagueLevel SportLeagueLevel { get; set; }
+    public Sport Sport { get; set; }
 
     protected string Search;
 

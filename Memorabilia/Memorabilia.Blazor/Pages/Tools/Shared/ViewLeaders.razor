@@ -7,7 +7,7 @@
                 <LeaderTypeAutoComplete ResetValueOnEmptyText="false"
                                         SelectedValue="_viewModel.LeaderType"
                                         SelectionChanged="(leaderType) => OnInputChange(leaderType)"
-                                        SportLeagueLevel="@SportLeagueLevel" />
+                                        Sports="@(new [] { Sport })" />
             </Content>
         </DivRowCol3>
         <DivRowCol6 Hidden="@(_viewModel.LeaderType?.Id == null)">

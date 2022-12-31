@@ -10,6 +10,7 @@ public class PersonRepository : DomainRepository<Person>, IPersonRepository
                                               .Include(person => person.AllStars)
                                               .Include(person => person.Awards)
                                               .Include(person => person.CareerRecords)
+                                              .Include(person => person.CollegeHallOfFames)
                                               .Include(person => person.Colleges)
                                               .Include(person => person.FranchiseHallOfFames)
                                               .Include(person => person.HallOfFames)

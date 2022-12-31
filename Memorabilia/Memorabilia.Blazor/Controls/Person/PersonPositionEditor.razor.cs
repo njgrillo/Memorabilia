@@ -7,6 +7,9 @@ public partial class PersonPositionEditor
     [Parameter]
     public List<SavePersonPositionViewModel> Positions { get; set; } = new();
 
+    [Parameter]
+    public Sport[] Sports { get; set; } = Array.Empty<Sport>();
+
     private SavePersonPositionViewModel _viewModel = new();
 
     private void Add()

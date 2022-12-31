@@ -3,7 +3,7 @@
 public class RecordTypeAutoComplete : DomainEntityAutoComplete<RecordType>
 {
     [Parameter]
-    public int[] SportIds { get; set; } = Array.Empty<int>();
+    public Sport[] Sports { get; set; } = Array.Empty<Sport>();
 
     private bool _loaded;
 
@@ -28,6 +28,8 @@ public class RecordTypeAutoComplete : DomainEntityAutoComplete<RecordType>
 
     private void LoadItems()
     {
-        Items = SportIds != null && SportIds.Any() ? RecordType.GetAll(SportIds) : RecordType.All;
+        Items = Sports != null && Sports.Any() 
+            ? RecordType.GetAll(Sports) 
+            : RecordType.All;
     }
 }

@@ -1,6 +1,8 @@
-﻿namespace Memorabilia.Application.Features.Tools.Shared.HallOfFamers;
+﻿using Memorabilia.Domain.Constants;
 
-public record GetHallOfFames(Domain.Constants.SportLeagueLevel SportLeagueLevel, int? InductionYear = null) : IQuery<HallOfFamesViewModel>
+namespace Memorabilia.Application.Features.Tools.Shared.HallOfFamers;
+
+public record GetHallOfFames(Sport Sport, int? InductionYear = null) : IQuery<HallOfFamesViewModel>
 {
     public class Handler : QueryHandler<GetHallOfFames, HallOfFamesViewModel>
     {
@@ -13,7 +15,7 @@ public record GetHallOfFames(Domain.Constants.SportLeagueLevel SportLeagueLevel,
 
         protected override async Task<HallOfFamesViewModel> Handle(GetHallOfFames query)
         {
-            return new HallOfFamesViewModel(await _hallOfFameRepository.GetAll(query.SportLeagueLevel.Id, query.InductionYear), query.SportLeagueLevel)
+            return new HallOfFamesViewModel(await _hallOfFameRepository.GetAll(query.Sport.Id, query.InductionYear), query.Sport)
             {
                 InductionYear = query.InductionYear ?? 0
             };

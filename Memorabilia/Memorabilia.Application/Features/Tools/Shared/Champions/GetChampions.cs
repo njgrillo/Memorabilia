@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Application.Features.Tools.Shared.Champions;
 
-public record GetChampions(int ChampionTypeId, Domain.Constants.SportLeagueLevel SportLeagueLevel) : IQuery<ChampionsViewModel>
+public record GetChampions(int ChampionTypeId, Domain.Constants.Sport Sport) : IQuery<ChampionsViewModel>
 {
     public class Handler : QueryHandler<GetChampions, ChampionsViewModel>
     {
@@ -13,7 +13,7 @@ public record GetChampions(int ChampionTypeId, Domain.Constants.SportLeagueLevel
 
         protected override async Task<ChampionsViewModel> Handle(GetChampions query)
         {
-            return new ChampionsViewModel(await _championRepository.GetAll(query.ChampionTypeId), query.SportLeagueLevel);
+            return new ChampionsViewModel(await _championRepository.GetAll(query.ChampionTypeId), query.Sport);
         }
     }
 }

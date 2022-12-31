@@ -6,10 +6,10 @@ public class SingleSeasonRecordViewModel : PersonSportToolViewModel
 {
     private readonly SingleSeasonRecord _singleSeasonRecord;
 
-    public SingleSeasonRecordViewModel(SingleSeasonRecord singleSeasonRecord, Domain.Constants.SportLeagueLevel sportLeagueLevel)
+    public SingleSeasonRecordViewModel(SingleSeasonRecord singleSeasonRecord, Domain.Constants.Sport sport)
     {
         _singleSeasonRecord = singleSeasonRecord;
-        SportLeagueLevel = sportLeagueLevel;
+        Sport = sport;
     }      
 
     public override int PersonId => _singleSeasonRecord.PersonId;

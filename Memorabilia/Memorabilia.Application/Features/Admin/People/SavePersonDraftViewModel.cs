@@ -8,7 +8,7 @@ public class SavePersonDraftViewModel : SaveViewModel
 
     public SavePersonDraftViewModel(IEnumerable<int> sportIds)
     {
-        SportIds = sportIds.ToArray();
+        Sports = sportIds.Select(sportId => Domain.Constants.Sport.Find(sportId)).ToArray();
     }
 
     public SavePersonDraftViewModel(Draft draft)
@@ -36,7 +36,7 @@ public class SavePersonDraftViewModel : SaveViewModel
     [Range(1, 50, ErrorMessage = "Round is required and must be 1 or greater.")]
     public int? Round { get; set; }
 
-    public int[] SportIds { get; set; } = Array.Empty<int>();
+    public Domain.Constants.Sport[] Sports { get; set; } = Array.Empty<Domain.Constants.Sport>();
 
     [Required]
     [Range(1965, 3000, ErrorMessage = "Year is required and must be 1965 or later.")]

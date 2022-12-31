@@ -1,14 +1,9 @@
-﻿#nullable disable
-
-namespace Memorabilia.Blazor.Controls.TypeAhead;
+﻿namespace Memorabilia.Blazor.Controls.TypeAhead;
 
 public class AwardTypeAutoComplete : DomainEntityAutoComplete<AwardType>
 {
     [Parameter]
-    public int[] SportIds { get; set; } = Array.Empty<int>();
-
-    [Parameter]
-    public SportLeagueLevel SportLeagueLevel { get; set; }
+    public Sport[] Sports { get; set; } = Array.Empty<Sport>();
 
     private bool _loaded;
 
@@ -33,18 +28,8 @@ public class AwardTypeAutoComplete : DomainEntityAutoComplete<AwardType>
 
     private void LoadItems()
     {
-        if (SportIds != null && SportIds.Any())
-        {
-            Items = AwardType.GetAll(SportIds);
-            return;
-        }            
-
-        if (SportLeagueLevel != null)
-        {
-            Items = AwardType.GetAll(SportLeagueLevel);
-            return;
-        }           
-
-        Items = AwardType.All;
+        Items = Sports != null && Sports.Any()
+            ? AwardType.GetAll(Sports)
+            : AwardType.All;
     }
 }

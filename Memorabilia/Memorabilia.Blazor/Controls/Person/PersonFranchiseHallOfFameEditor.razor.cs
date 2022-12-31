@@ -6,7 +6,7 @@ public partial class PersonFranchiseHallOfFameEditor : ComponentBase
     public List<SavePersonFranchiseHallOfFameViewModel> FranchiseHallOfFames { get; set; } = new();
 
     [Parameter]
-    public int[] SportIds { get; set; }
+    public Sport[] Sports { get; set; }
 
     private bool _canAdd = true;
     private bool _canEditFranchise = true;

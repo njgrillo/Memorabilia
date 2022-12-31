@@ -9,10 +9,12 @@ public sealed class Position : DomainItemConstant
     public static readonly Position DefensiveEnd = new(19, "Defensive End", "DE");
     public static readonly Position DefensiveTackle = new(24, "Defensive Tackle", "DT");
     public static readonly Position DesignatedHitter = new(10, "Designated Hitter", "DH");
+    public static readonly Position End = new(30, "End");
     public static readonly Position FirstBase = new(3, "First Base", "1B");
     public static readonly Position Fullback = new(17, "Fullback", "FB");
     public static readonly Position Guard = new(18, "Guard", "G");
     public static readonly Position Halfback = new(16, "Halfback", "HB");
+    public static readonly Position Infielder = new(32, "Infielder", "IF");
     public static readonly Position Kicker = new(27, "Kicker", "K");
     public static readonly Position LeftField = new(8, "Left Field", "LF");
     public static readonly Position Linebacker = new(28, "Linebacker");
@@ -23,10 +25,11 @@ public sealed class Position : DomainItemConstant
     public static readonly Position Punter = new(26, "Punter", "P");
     public static readonly Position Quarterback = new(12, "Quarterback", "QB");
     public static readonly Position RightField = new(9, "Right Field", "RF");
-    public static readonly Position Runningback = new(13, "Runningback", "RB");
+    public static readonly Position Runningback = new(13, "Running back", "RB");
     public static readonly Position Safety = new(20, "Safety", "S");
     public static readonly Position SecondBase = new(4, "Second Base", "2B");
     public static readonly Position Shortstop = new(5, "Shortstop", "SS");
+    public static readonly Position SplitEnd = new (31, "Split End");
     public static readonly Position ThirdBase = new(6, "Third Base", "3B");
     public static readonly Position TightEnd = new(15, "Tight End", "TE");
     public static readonly Position Utility = new(11, "Utility", "U");
@@ -41,10 +44,12 @@ public sealed class Position : DomainItemConstant
         DefensiveEnd,
         DefensiveTackle,
         DesignatedHitter,
+        End,
         FirstBase,
         Fullback,
         Guard,
         Halfback,
+        Infielder,
         Kicker,
         LeftField,
         Linebacker,
@@ -59,6 +64,7 @@ public sealed class Position : DomainItemConstant
         Safety,
         SecondBase,
         Shortstop,
+        SplitEnd,
         ThirdBase,
         TightEnd,
         Utility,
@@ -71,6 +77,7 @@ public sealed class Position : DomainItemConstant
         CenterField,
         DesignatedHitter,
         FirstBase,
+        Infielder,
         LeftField,
         Outfielder,
         Pitcher,
@@ -87,6 +94,7 @@ public sealed class Position : DomainItemConstant
         Cornerback,
         DefensiveEnd,
         DefensiveTackle,
+        End,
         Fullback,
         Guard,
         Halfback,
@@ -98,6 +106,7 @@ public sealed class Position : DomainItemConstant
         Quarterback,
         Runningback,
         Safety,
+        SplitEnd,
         TightEnd,
         WideReceiver
     };
@@ -109,12 +118,11 @@ public sealed class Position : DomainItemConstant
         return All.SingleOrDefault(Position => Position.Id == id);
     }
 
-    public static Position[] GetAll(params int[] sportIds)
+    public static Position[] GetAll(params Sport[] sports)
     {
-        if (!sportIds.Any())
+        if (!sports.Any())
             return All;
 
-        var sports = sportIds.Select(id => Sport.Find(id));
         var positions = new List<Position>();
 
         if (sports.Any(sport => sport == Sport.Baseball))

@@ -1,6 +1,8 @@
-﻿namespace Memorabilia.Application.Features.Tools.Shared.SingleSeasonRecords;
+﻿using Memorabilia.Domain.Constants;
 
-public record GetSingleSeasonRecords(Domain.Constants.SportLeagueLevel SportLeagueLevel) : IQuery<SingleSeasonRecordsViewModel>
+namespace Memorabilia.Application.Features.Tools.Shared.SingleSeasonRecords;
+
+public record GetSingleSeasonRecords(Sport Sport) : IQuery<SingleSeasonRecordsViewModel>
 {
     public class Handler : QueryHandler<GetSingleSeasonRecords, SingleSeasonRecordsViewModel>
     {
@@ -13,7 +15,7 @@ public record GetSingleSeasonRecords(Domain.Constants.SportLeagueLevel SportLeag
 
         protected override async Task<SingleSeasonRecordsViewModel> Handle(GetSingleSeasonRecords query)
         {
-            return new SingleSeasonRecordsViewModel(await _singleSeasonRecordRepository.GetAll(query.SportLeagueLevel.Sport.Id), query.SportLeagueLevel);
+            return new SingleSeasonRecordsViewModel(await _singleSeasonRecordRepository.GetAll(query.Sport.Id), query.Sport);
         }
     }
 }

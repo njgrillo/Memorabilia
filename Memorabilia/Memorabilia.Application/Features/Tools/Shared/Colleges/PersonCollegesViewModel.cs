@@ -6,9 +6,9 @@ public class PersonCollegesViewModel
 {
     public PersonCollegesViewModel() { }
 
-    public PersonCollegesViewModel(IEnumerable<PersonCollege> personColleges, Domain.Constants.SportLeagueLevel sportLeagueLevel)
+    public PersonCollegesViewModel(IEnumerable<PersonCollege> personColleges, Domain.Constants.Sport sport)
     {
-        Colleges = personColleges.Select(college => new PersonCollegeViewModel(college, sportLeagueLevel))
+        Colleges = personColleges.Select(college => new PersonCollegeViewModel(college, sport))
                                  .OrderBy(college => college.PersonName);
     }
 

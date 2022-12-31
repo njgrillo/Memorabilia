@@ -6,7 +6,7 @@ public partial class PersonCareerRecordEditor : ComponentBase
     public List<SavePersonCareerRecordViewModel> CareerRecords { get; set; } = new();
 
     [Parameter]
-    public int[] SportIds { get; set; }
+    public Sport[] Sports { get; set; }
 
     private bool _canAdd = true;
     private bool _canEditRecordType = true;

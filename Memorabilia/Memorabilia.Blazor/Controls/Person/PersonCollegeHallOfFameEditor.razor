@@ -1,23 +1,20 @@
-﻿<div class="row">
-    <div class="col-3">
-        <RecordTypeAutoComplete Disabled="@(!_canEditRecordType)" 
-                                ResetValueOnEmptyText="false"
-                                SelectedValue="_viewModel.RecordType"
-                                SelectionChanged="(p) => _viewModel.RecordType = p"
-                                Sports="Sports" />
-    </div>
-    <div class="col-1">
-        <NullableIntField Label="Year"
+﻿<DivRowCol4>
+    <Content>
+        <CollegeAutoComplete Disabled="@(!_canEditCollege)"
+                             ResetValueOnEmptyText="false"
+                             SelectedValue="_viewModel.College"
+                             SelectionChanged="(p) => _viewModel.College = p" />
+    </Content>
+    <ContentColumn2>
+        <SportAutoComplete SelectedValue="_viewModel.Sport"
+                           SelectionChanged="(p) => _viewModel.Sport = p" />
+    </ContentColumn2>
+    <ContentColumn3>
+        <NullableIntField Label="Induction Year"
                           Value="_viewModel.Year"
                           ValueChanged="@((p) => _viewModel.Year = p)" />
-    </div>
-    <div class="col-2">
-        <TextField Label="Record"
-                   SelectedText="@_viewModel.Record"
-                   SelectedTextChanged="@((p) => _viewModel.Record = p)" />
-    </div>
-</div>
-<br />
+    </ContentColumn3>
+</DivRowCol4>
 <DivLeftAlign>
     <Content>
         <DivHidden Hidden="@(!_canAdd)">
@@ -34,32 +31,32 @@
 </DivLeftAlign>
 <DivRowCol6>
     <Content>
-         <MudTable Bordered="false"
-                   Dense="false" 
-                   Hover="true"
-                   Items="@SingleSeasonRecords.Where(record => !record.IsDeleted).ToList()"    
-                   Striped="true">
+        <MudTable Bordered="false"
+                  Dense="false"
+                  Hover="true"
+                  Items="@CollegeHallOfFames.Where(hof => !hof.IsDeleted).ToList()"
+                  Striped="true">
             <HeaderContent>
-                <MudTh>Record Type</MudTh>
+                <MudTh>College</MudTh>
+                <MudTh>Sport</MudTh>
                 <MudTh>Year</MudTh>
-                <MudTh>Record</MudTh>
                 <MudTh></MudTh>
             </HeaderContent>
             <RowTemplate>
-                <MudTd DataLabel="RecordType">@context.RecordTypeName</MudTd>
+                <MudTd DataLabel="College">@context.CollegeName</MudTd>
+                <MudTd DataLabel="Sport">@context.SportName</MudTd>
                 <MudTd DataLabel="Year">@context.Year</MudTd>
-                <MudTd DataLabel="Record">@context.Record</MudTd>
                 <MudTd DataLabel="">
                     <MudTooltip Text="Edit">
-                        <MudFab Color="MudBlazor.Color.Primary"                                
+                        <MudFab Color="MudBlazor.Color.Primary"
                                 Icon="@Icons.Outlined.ModeEditOutline"
                                 OnClick="@(_ => Edit(context))" />
-                    </MudTooltip> 
+                    </MudTooltip>
                     <MudTooltip Text="Delete">
                         <MudFab Color="MudBlazor.Color.Secondary"
                                 Icon="@Icons.Outlined.DeleteOutline"
                                 OnClick="@(_ => context.IsDeleted = true)" />
-                    </MudTooltip>  
+                    </MudTooltip>
                 </MudTd>
             </RowTemplate>
         </MudTable>

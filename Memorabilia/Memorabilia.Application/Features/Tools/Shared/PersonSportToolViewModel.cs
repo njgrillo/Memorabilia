@@ -12,5 +12,5 @@ public abstract class PersonSportToolViewModel : SportToolViewModel, IWithName
 
     public abstract string PersonName { get; }
 
-    public override string ProfileLink => $"/Tools/{SportLeagueLevel.Sport.Name}Profile/{PersonId}";    
+    public override string ProfileLink => $"/Tools/{Sport.Name}Profile/{PersonId}";    
 }

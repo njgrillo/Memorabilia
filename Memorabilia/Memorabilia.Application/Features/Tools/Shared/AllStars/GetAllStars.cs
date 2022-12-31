@@ -1,6 +1,8 @@
-﻿namespace Memorabilia.Application.Features.Tools.Shared.AllStars;
+﻿using Memorabilia.Domain.Constants;
 
-public record GetAllStars(int Year, Domain.Constants.SportLeagueLevel SportLeagueLevel) : IQuery<AllStarsViewModel>
+namespace Memorabilia.Application.Features.Tools.Shared.AllStars;
+
+public record GetAllStars(int Year, Sport Sport) : IQuery<AllStarsViewModel>
 {
     public class Handler : QueryHandler<GetAllStars, AllStarsViewModel>
     {
@@ -13,7 +15,7 @@ public record GetAllStars(int Year, Domain.Constants.SportLeagueLevel SportLeagu
 
         protected override async Task<AllStarsViewModel> Handle(GetAllStars query)
         {
-            return new AllStarsViewModel(await _allStarRepository.GetAll(query.Year), query.SportLeagueLevel)
+            return new AllStarsViewModel(await _allStarRepository.GetAll(query.Year), query.Sport)
             {
                 Year = query.Year
             };

@@ -6,6 +6,6 @@ public partial class ViewCollegesTool : ViewSportTools<PersonCollegeViewModel>
 
     private async Task OnInputChange(College college)
     {
-        _viewModel = await QueryRouter.Send(new GetPersonColleges(college, SportLeagueLevel));
+        _viewModel = await QueryRouter.Send(new GetPersonColleges(college, Sport));
     }
 }

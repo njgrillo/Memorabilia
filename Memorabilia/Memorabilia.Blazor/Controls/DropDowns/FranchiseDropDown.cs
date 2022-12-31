@@ -1,6 +1,4 @@
-﻿#nullable disable
-
-namespace Memorabilia.Blazor.Controls.DropDowns;
+﻿namespace Memorabilia.Blazor.Controls.DropDowns;
 
 public class FranchiseDropDown : DropDown<Franchise, int>, INotifyPropertyChanged
 {
@@ -48,7 +46,7 @@ public class FranchiseDropDown : DropDown<Franchise, int>, INotifyPropertyChange
 
         if (SportIds.Any())
         {
-            Items = Franchise.GetAll(SportIds);
+            Items = Franchise.GetAll(SportIds.Select(id => Sport.Find(id)).ToArray());
             return;
         }            
 

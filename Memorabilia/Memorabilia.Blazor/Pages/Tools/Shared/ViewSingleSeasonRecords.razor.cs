@@ -6,6 +6,6 @@ public partial class ViewSingleSeasonRecords : ViewSportTools<SingleSeasonRecord
 
     protected override async Task OnInitializedAsync()
     {
-        _viewModel = await QueryRouter.Send(new GetSingleSeasonRecords(SportLeagueLevel));
+        _viewModel = await QueryRouter.Send(new GetSingleSeasonRecords(Sport));
     }
 }

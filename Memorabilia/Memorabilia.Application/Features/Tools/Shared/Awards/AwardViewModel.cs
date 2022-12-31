@@ -6,10 +6,10 @@ public class AwardViewModel : PersonSportToolViewModel
 {
     private readonly PersonAward _personAward;
 
-    public AwardViewModel(PersonAward personAward, Domain.Constants.SportLeagueLevel sportLeagueLevel)
+    public AwardViewModel(PersonAward personAward, Domain.Constants.Sport sport)
     {
         _personAward = personAward;
-        SportLeagueLevel = sportLeagueLevel;
+        Sport = sport;
     }
 
     public override int PersonId => _personAward.PersonId;

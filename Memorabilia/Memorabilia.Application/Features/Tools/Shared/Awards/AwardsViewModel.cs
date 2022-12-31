@@ -6,9 +6,9 @@ public class AwardsViewModel
 {
     public AwardsViewModel() { }
 
-    public AwardsViewModel(IEnumerable<PersonAward> personAwards, Domain.Constants.SportLeagueLevel sportLeagueLevel)
+    public AwardsViewModel(IEnumerable<PersonAward> personAwards, Domain.Constants.Sport sport)
     {
-        PersonAwards = personAwards.Select(award => new AwardViewModel(award, sportLeagueLevel))
+        PersonAwards = personAwards.Select(award => new AwardViewModel(award, sport))
                                    .OrderByDescending(personAward => personAward.Year)
                                    .ThenBy(personAward => personAward.PersonName);
     }

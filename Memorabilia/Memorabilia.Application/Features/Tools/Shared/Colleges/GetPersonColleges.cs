@@ -1,6 +1,8 @@
-﻿namespace Memorabilia.Application.Features.Tools.Shared.Colleges;
+﻿using Memorabilia.Domain.Constants;
 
-public record GetPersonColleges(Domain.Constants.College College, Domain.Constants.SportLeagueLevel SportLeagueLevel) : IQuery<PersonCollegesViewModel>
+namespace Memorabilia.Application.Features.Tools.Shared.Colleges;
+
+public record GetPersonColleges(College College, Sport Sport) : IQuery<PersonCollegesViewModel>
 {
     public class Handler : QueryHandler<GetPersonColleges, PersonCollegesViewModel>
     {
@@ -13,7 +15,7 @@ public record GetPersonColleges(Domain.Constants.College College, Domain.Constan
 
         protected override async Task<PersonCollegesViewModel> Handle(GetPersonColleges query)
         {
-            return new PersonCollegesViewModel(await _collegeRepository.GetAll(query.College.Id, query.SportLeagueLevel.Id), query.SportLeagueLevel)
+            return new PersonCollegesViewModel(await _collegeRepository.GetAll(query.College.Id, query.Sport.Id), query.Sport)
             {
                 College = query.College
             };

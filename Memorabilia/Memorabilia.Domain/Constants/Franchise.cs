@@ -316,12 +316,11 @@ public sealed class Franchise : DomainItemConstant
         return All;
     }
 
-    public static Franchise[] GetAll(int[] sportIds)
+    public static Franchise[] GetAll(params Sport[] sports)
     {
-        if (!sportIds.Any())
+        if (!sports.Any())
             return All;
 
-        var sports = sportIds.Select(id => Sport.Find(id));
         var franchises = new List<Franchise>();
 
         if (sports.Any(sport => sport == Sport.Baseball))

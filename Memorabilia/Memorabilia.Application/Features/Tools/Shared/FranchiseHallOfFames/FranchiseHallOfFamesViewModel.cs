@@ -6,18 +6,18 @@ public class FranchiseHallOfFamesViewModel
 {
     public FranchiseHallOfFamesViewModel() { }
 
-    public FranchiseHallOfFamesViewModel(IEnumerable<FranchiseHallOfFame> franchiseHallOfFames, Domain.Constants.SportLeagueLevel sportLeagueLevel)
+    public FranchiseHallOfFamesViewModel(IEnumerable<FranchiseHallOfFame> franchiseHallOfFames, Domain.Constants.Sport sport)
     {
-        FranchiseHallOfFames = franchiseHallOfFames.Select(hallOfFame => new FranchiseHallOfFameViewModel(hallOfFame, sportLeagueLevel))
+        FranchiseHallOfFames = franchiseHallOfFames.Select(hallOfFame => new FranchiseHallOfFameViewModel(hallOfFame, sport))
                                                    .OrderBy(hallOfFame => hallOfFame.InductionYear)
                                                    .ThenBy(hallOfFame => hallOfFame.PersonName);
-    }    
+    }
+    
+    public Domain.Constants.Franchise Franchise { get; set; }
 
     public IEnumerable<FranchiseHallOfFameViewModel> FranchiseHallOfFames { get; set; } = Enumerable.Empty<FranchiseHallOfFameViewModel>();
 
-    public int FranchiseId { get; set; }
-
-    public string FranchiseName => Domain.Constants.Franchise.Find(FranchiseId)?.Name;
+    public string FranchiseName => Franchise?.Name;
 
     public string ResultsTitle => $"{FranchiseName} Hall of Famers";
 }

@@ -1,14 +1,14 @@
 ﻿<div class="row">
     <div class="col-3">
-        <AccomplishmentTypeAutoComplete Disabled="@(!_canEditAccomplishmentType)"
-                                        SelectedValue="_viewModel.AccomplishmentType"
+        <AccomplishmentTypeAutoComplete SelectedValue="_viewModel.AccomplishmentType"
                                         SelectionChanged="(p) => _viewModel.AccomplishmentType = p"
-                                        SportIds="SportIds" />
+                                        Sports="Sports" />
     </div>
-    <div class="col-1" hidden="@(!IsYearAccomplishment)">
-        <NullableIntField Label="Year" 
-                          Value="_viewModel.Year"
-                          ValueChanged="@((p) => _viewModel.Year = p)" />
+    <div class="col-3" hidden="@(!IsYearAccomplishment)">
+        <TextField HelperText="Ex. 1999 or 1999-2002 or 2003, 2005-2008"
+                   Label="Years"
+                   SelectedText="@_years"
+                   SelectedTextChanged="@((p) => _years = p)" />
     </div>
     <div class="col-2" hidden="@(!IsDateAccomplishment)">
         <MudDatePicker @bind-Date="_viewModel.Date"
@@ -22,16 +22,7 @@
 <br />
 <DivLeftAlign>
     <Content>
-        <DivHidden Hidden="@(!_canAdd)">
-            <Content>
-                <AddButton OnClick="Add" />
-            </Content>
-        </DivHidden>
-        <DivHidden Hidden="@(!_canUpdate)">
-            <Content>
-                <UpdateButton OnClick="Update" />
-            </Content>
-        </DivHidden>
+        <AddButton OnClick="Add" />
     </Content>
 </DivLeftAlign>
 <DivRowCol6>
@@ -52,11 +43,6 @@
                 <MudTd DataLabel="Date">@context.FormattedDate</MudTd>
                 <MudTd DataLabel="Year">@context.Year</MudTd>
                 <MudTd DataLabel="">
-                    <MudTooltip Text="Edit">
-                        <MudFab Color="MudBlazor.Color.Primary"                                
-                                Icon="@Icons.Outlined.ModeEditOutline"
-                                OnClick="@(_ => Edit(context))" />
-                    </MudTooltip> 
                     <MudTooltip Text="Delete">
                         <MudFab Color="MudBlazor.Color.Secondary"
                                 Icon="@Icons.Outlined.DeleteOutline"

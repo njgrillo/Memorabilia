@@ -25,6 +25,7 @@ public sealed class Sport : DomainItemConstant
     {
         Baseball,
         Basketball,
+        Football,
         Hockey
     };
 
@@ -54,18 +55,18 @@ public sealed class Sport : DomainItemConstant
         return All.SingleOrDefault(sport => sport.Id == id);
     }
 
-    public static bool HasAllStarGames(params int[] sportIds)
+    public static bool HasAllStarGames(params Sport[] sports)
     {
-        return sportIds.Select(id => Find(id)).Any(sport => AllStarGameSports.Contains(sport));
+        return sports.Any(sport => AllStarGameSports.Contains(sport));
     }
 
-    public static bool HasProBowlGames(params int[] sportIds)
+    public static bool HasProBowlGames(params Sport[] sports)
     {
-        return sportIds.Select(id => Find(id)).Any(sport => ProBowlGameSports.Contains(sport));
+        return sports.Any(sport => ProBowlGameSports.Contains(sport));
     }
 
-    public static bool IsPositionSport(params int[] sportIds)
+    public static bool IsPositionSport(params Sport[] sports)
     {
-        return sportIds.Select(id => Find(id)).Any(sport => PositionSports.Contains(sport));
+        return sports.Any(sport => PositionSports.Contains(sport));
     }
 }

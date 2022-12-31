@@ -4,12 +4,12 @@
     <Content>
         <DivRowCol3>
             <Content>
-                <FranchiseDropDown SelectedValue="_viewModel.FranchiseId"
-                                   SelectionChanged="(p) => OnInputChange(p)"
-                                   SportLeagueLevel="@SportLeagueLevel" />
+                <FranchiseAutoComplete SelectedValue="_viewModel.Franchise"
+                                       SelectionChanged="(p) => OnInputChange(p)"
+                                       Sports="@(new [] { Sport })" />
             </Content>
         </DivRowCol3>
-        <DivRowCol6 Hidden="@(_viewModel.FranchiseId == 0)">
+        <DivRowCol6 Hidden="@(_viewModel.Franchise == null)">
             <Content>
                 <MudTable Bordered="false"
                           Dense="false"

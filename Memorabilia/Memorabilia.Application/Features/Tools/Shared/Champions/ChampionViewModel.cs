@@ -6,10 +6,10 @@ public class ChampionViewModel : TeamSportToolViewModel
 {
     private readonly Champion _champion;
 
-    public ChampionViewModel(Champion champion, Domain.Constants.SportLeagueLevel sportLeagueLevel)
+    public ChampionViewModel(Champion champion, Domain.Constants.Sport sport)
     {
         _champion = champion;
-        SportLeagueLevel = sportLeagueLevel;
+        Sport = sport;
     }
 
     public string Franchise => _champion.Team.Franchise.FullName;

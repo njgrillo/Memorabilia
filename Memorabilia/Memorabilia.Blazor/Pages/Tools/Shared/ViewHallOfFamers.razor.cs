@@ -1,6 +1,4 @@
-﻿#nullable disable
-
-namespace Memorabilia.Blazor.Pages.Tools.Shared;
+﻿namespace Memorabilia.Blazor.Pages.Tools.Shared;
 
 public partial class ViewHallOfFamers : ViewSportTools<HallOfFameViewModel>
 {
@@ -14,11 +12,11 @@ public partial class ViewHallOfFamers : ViewSportTools<HallOfFameViewModel>
 
     protected override async Task OnInitializedAsync()
     {
-        _viewModel = await QueryRouter.Send(new GetHallOfFames(SportLeagueLevel));
+        _viewModel = await QueryRouter.Send(new GetHallOfFames(Sport));
     }
 
     private async Task OnInputChange(int inductionYear)
     {
-        _viewModel = await QueryRouter.Send(new GetHallOfFames(SportLeagueLevel, inductionYear > 0 ? inductionYear : null));
+        _viewModel = await QueryRouter.Send(new GetHallOfFames(Sport, inductionYear > 0 ? inductionYear : null));
     }
 }

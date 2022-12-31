@@ -6,9 +6,9 @@ public class CareerRecordsViewModel
 {
     public CareerRecordsViewModel() { }
 
-    public CareerRecordsViewModel(IEnumerable<CareerRecord> careerRecords, Domain.Constants.SportLeagueLevel sportLeagueLevel)
+    public CareerRecordsViewModel(IEnumerable<CareerRecord> careerRecords, Domain.Constants.Sport sport)
     {
-        CareerRecords = careerRecords.Select(record => new CareerRecordViewModel(record, sportLeagueLevel))
+        CareerRecords = careerRecords.Select(record => new CareerRecordViewModel(record, sport))
                                      .OrderBy(record => record.CareerRecordTypeName);
     }        
 

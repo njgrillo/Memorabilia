@@ -6,7 +6,7 @@ public partial class PersonAwardEditor : ComponentBase
     public List<SavePersonAwardViewModel> Awards { get; set; } = new();
 
     [Parameter]
-    public int[] SportIds { get; set; }
+    public Sport[] Sports { get; set; }
 
     private SavePersonAwardViewModel _viewModel = new();
     private string _years;

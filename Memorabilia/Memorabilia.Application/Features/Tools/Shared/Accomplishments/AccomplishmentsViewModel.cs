@@ -6,18 +6,18 @@ public class AccomplishmentsViewModel
 {
     public AccomplishmentsViewModel() { }
 
-    public AccomplishmentsViewModel(IEnumerable<PersonAccomplishment> personAccomplishments, Domain.Constants.SportLeagueLevel sportLeagueLevel)
+    public AccomplishmentsViewModel(IEnumerable<PersonAccomplishment> personAccomplishments, Domain.Constants.Sport sport)
     {
-        PersonAccomplishments = personAccomplishments.Select(accomplishment => new AccomplishmentViewModel(accomplishment, sportLeagueLevel));
+        PersonAccomplishments = personAccomplishments.Select(accomplishment => new AccomplishmentViewModel(accomplishment, sport));
     }
 
-    public int AccomplishmentTypeId { get; set; }
+    public Domain.Constants.AccomplishmentType AccomplishmentType { get; set; }
 
-    public string AccomplishmentTypeName => Domain.Constants.AccomplishmentType.Find(AccomplishmentTypeId)?.Name;
+    public string AccomplishmentTypeName => AccomplishmentType?.Name;
 
-    public bool IsDateAccomplishment => AccomplishmentTypeId > 0 && Domain.Constants.AccomplishmentType.IsDateAccomplishment(AccomplishmentTypeId);
+    public bool IsDateAccomplishment => AccomplishmentType != null && Domain.Constants.AccomplishmentType.IsDateAccomplishment(AccomplishmentType.Id);
 
-    public bool IsYearAccomplishment => AccomplishmentTypeId > 0 && Domain.Constants.AccomplishmentType.IsYearAccomplishment(AccomplishmentTypeId);
+    public bool IsYearAccomplishment => AccomplishmentType != null && Domain.Constants.AccomplishmentType.IsYearAccomplishment(AccomplishmentType.Id);
 
     public IEnumerable<AccomplishmentViewModel> PersonAccomplishments { get; set; } = Enumerable.Empty<AccomplishmentViewModel>();
 }

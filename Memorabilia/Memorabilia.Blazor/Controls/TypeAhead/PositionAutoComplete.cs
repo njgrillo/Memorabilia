@@ -3,7 +3,7 @@
 public class PositionAutoComplete : DomainEntityAutoComplete<Domain.Constants.Position>
 {
     [Parameter]
-    public int[] SportIds { get; set; } = Array.Empty<int>();
+    public Sport[] Sports { get; set; } = Array.Empty<Sport>();
 
     private bool _loaded;
 
@@ -27,6 +27,8 @@ public class PositionAutoComplete : DomainEntityAutoComplete<Domain.Constants.Po
 
     private void LoadItems()
     {
-        Items = SportIds != null && SportIds.Any() ? Domain.Constants.Position.GetAll(SportIds) : Domain.Constants.Position.All;
+        Items = Sports != null && Sports.Any() 
+            ? Domain.Constants.Position.GetAll(Sports) 
+            : Domain.Constants.Position.All;
     }
 }

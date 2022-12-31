@@ -9,23 +9,23 @@ public class SavePersonHallOfFamesViewModel : SaveViewModel
     public SavePersonHallOfFamesViewModel(int personId, PersonHallOfFameViewModel viewModel)
     {
         PersonId = personId;
+        CollegeHallOfFames = viewModel.CollegeHallOfFames.Select(hof => new SavePersonCollegeHallOfFameViewModel(hof)).ToList();
         FranchiseHallOfFames = viewModel.FranchiseHallOfFames.Select(hof => new SavePersonFranchiseHallOfFameViewModel(hof)).ToList();
         HallOfFames = viewModel.HallOfFames.Select(hof => new SavePersonHallOfFameViewModel(hof)).ToList();
         InternationalHallOfFames = viewModel.InternationalHallOfFames.Select(hof => new SavePersonInternationalHallOfFameViewModel(hof)).ToList();
-        SportIds = viewModel.Sports.Select(sport => sport.SportId).ToArray();
-        FranchiseHallOfFameTypes = FranchiseHallOfFameType.GetAll(SportIds);
-        SportLeagueLevels = Domain.Constants.SportLeagueLevel.GetAll(SportIds);
+        Sports = viewModel.Sports.Select(sport => Sport.Find(sport.SportId)).ToArray();
+        SportLeagueLevels = SportLeagueLevel.GetAll(viewModel.Sports.Select(sport => sport.SportId).ToArray());
     }
 
     public override string BackNavigationPath => $"{AdminDomainItem.People.Title}/Accolade/{EditModeType.Update.Name}/{PersonId}";
+
+    public List<SavePersonCollegeHallOfFameViewModel> CollegeHallOfFames { get; set; } = new();
 
     public override string ContinueNavigationPath => $"{AdminDomainItem.People.Title}/Image/{EditModeType.Update.Name}/{PersonId}";
 
     public override EditModeType EditModeType => HallOfFames.Any() ? EditModeType.Update : EditModeType.Add;
 
     public List<SavePersonFranchiseHallOfFameViewModel> FranchiseHallOfFames { get; set; } = new();
-
-    public FranchiseHallOfFameType[] FranchiseHallOfFameTypes { get; set; } = FranchiseHallOfFameType.All;
 
     public List<SavePersonHallOfFameViewModel> HallOfFames { get; set; } = new();
 
@@ -41,7 +41,7 @@ public class SavePersonHallOfFamesViewModel : SaveViewModel
 
     public PersonStep PersonStep => PersonStep.HallOfFame;
 
-    public int[] SportIds { get; set; } = Array.Empty<int>();
+    public Sport[] Sports { get; set; } = Array.Empty<Sport>();
 
     public SportLeagueLevel[] SportLeagueLevels { get; set; } = SportLeagueLevel.All;
 }

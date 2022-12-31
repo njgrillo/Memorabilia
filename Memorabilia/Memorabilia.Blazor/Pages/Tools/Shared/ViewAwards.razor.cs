@@ -6,6 +6,6 @@ public partial class ViewAwards : ViewSportTools<AwardViewModel>
 
     private async Task OnInputChange(AwardType awardType)
     {
-        _viewModel = await QueryRouter.Send(new GetAwards(awardType, SportLeagueLevel));
+        _viewModel = await QueryRouter.Send(new GetAwards(awardType, Sport));
     }
 }

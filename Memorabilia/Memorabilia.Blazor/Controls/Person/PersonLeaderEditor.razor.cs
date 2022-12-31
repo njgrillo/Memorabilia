@@ -6,7 +6,7 @@ public partial class PersonLeaderEditor : ComponentBase
     public List<SavePersonLeaderViewModel> Leaders { get; set; } = new();
 
     [Parameter]
-    public int[] SportIds { get; set; }
+    public Sport[] Sports { get; set; }
 
     private SavePersonLeaderViewModel _viewModel = new();
     private string _years;

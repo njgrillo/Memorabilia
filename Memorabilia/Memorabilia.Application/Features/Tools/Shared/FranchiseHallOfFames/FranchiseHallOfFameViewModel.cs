@@ -6,10 +6,10 @@ public class FranchiseHallOfFameViewModel : PersonSportToolViewModel
 {
     private readonly FranchiseHallOfFame _franchiseHallOfFame;
 
-    public FranchiseHallOfFameViewModel(FranchiseHallOfFame franchiseHallOfFame, Domain.Constants.SportLeagueLevel sportLeagueLevel)
+    public FranchiseHallOfFameViewModel(FranchiseHallOfFame franchiseHallOfFame, Domain.Constants.Sport sport)
     {
         _franchiseHallOfFame = franchiseHallOfFame;
-        SportLeagueLevel = sportLeagueLevel;
+        Sport = sport;
     }
 
     public string FranchiseName => _franchiseHallOfFame.Franchise.FullName;

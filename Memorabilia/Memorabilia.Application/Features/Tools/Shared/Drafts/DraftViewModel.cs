@@ -6,10 +6,10 @@ public class DraftViewModel : PersonSportToolViewModel
 {
     private readonly Draft _draft;
 
-    public DraftViewModel(Draft draft, Domain.Constants.SportLeagueLevel sportLeagueLevel)
+    public DraftViewModel(Draft draft, Domain.Constants.Sport sport)
     {
         _draft = draft;
-        SportLeagueLevel = sportLeagueLevel;
+        Sport = sport;
     }
 
     public int FranchiseId => _draft.FranchiseId;

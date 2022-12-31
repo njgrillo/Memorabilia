@@ -3,10 +3,7 @@
 public class LeaderTypeAutoComplete : DomainEntityAutoComplete<LeaderType>
 {
     [Parameter]
-    public int[] SportIds { get; set; } = Array.Empty<int>();
-
-    [Parameter]
-    public SportLeagueLevel SportLeagueLevel { get; set; }
+    public Sport[] Sports { get; set; } = Array.Empty<Sport>();
 
     private bool _loaded;
 
@@ -31,12 +28,8 @@ public class LeaderTypeAutoComplete : DomainEntityAutoComplete<LeaderType>
 
     private void LoadItems()
     {
-        if (SportLeagueLevel != null)
-        {
-            Items = LeaderType.GetAll(SportLeagueLevel);
-            return;
-        }
-
-        Items = SportIds != null && SportIds.Any() ? LeaderType.GetAll(SportIds) : LeaderType.All;
+        Items = Sports != null && Sports.Any() 
+            ? LeaderType.GetAll(Sports) 
+            : LeaderType.All;
     }
 }

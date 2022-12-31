@@ -1,6 +1,8 @@
-﻿namespace Memorabilia.Application.Features.Tools.Shared.Accomplishments;
+﻿using Memorabilia.Domain.Constants;
 
-public record GetAccomplishments(int AccomplishmentTypeId, Domain.Constants.SportLeagueLevel SportLeagueLevel) : IQuery<AccomplishmentsViewModel>
+namespace Memorabilia.Application.Features.Tools.Shared.Accomplishments;
+
+public record GetAccomplishments(AccomplishmentType AccomplishmentType, Sport Sport) : IQuery<AccomplishmentsViewModel>
 {
     public class Handler : QueryHandler<GetAccomplishments, AccomplishmentsViewModel>
     {
@@ -13,9 +15,9 @@ public record GetAccomplishments(int AccomplishmentTypeId, Domain.Constants.Spor
 
         protected override async Task<AccomplishmentsViewModel> Handle(GetAccomplishments query)
         {
-            return new AccomplishmentsViewModel(await _personAccomplishmentRepository.GetAll(query.AccomplishmentTypeId), query.SportLeagueLevel)
+            return new AccomplishmentsViewModel(await _personAccomplishmentRepository.GetAll(query.AccomplishmentType.Id), query.Sport)
             {
-                AccomplishmentTypeId = query.AccomplishmentTypeId
+                AccomplishmentType = query.AccomplishmentType
             };
         }
     }

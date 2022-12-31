@@ -44,6 +44,8 @@ public class Person : Framework.Library.Domain.Entity.DomainEntity, IWithName
 
     public virtual List<CareerRecord> CareerRecords { get; private set; } = new();
 
+    public virtual List<CollegeHallOfFame> CollegeHallOfFames { get; private set; } = new();
+
     public virtual List<PersonCollege> Colleges { get; private set; } = new();
 
     public DateTime CreateDate { get; private set; }
@@ -120,6 +122,14 @@ public class Person : Framework.Library.Domain.Entity.DomainEntity, IWithName
             return;
 
         CareerRecords.RemoveAll(record => ids.Contains(record.Id));
+    }
+
+    public void RemoveCollegeHallOfFames(params int[] ids)
+    {
+        if (ids == null || ids.Length == 0)
+            return;
+
+        CollegeHallOfFames.RemoveAll(hof => ids.Contains(hof.Id));
     }
 
     public void RemoveColleges(params int[] ids)
@@ -309,6 +319,19 @@ public class Person : Framework.Library.Domain.Entity.DomainEntity, IWithName
         }
 
         college.Set(collegeId, beginYear, endYear);
+    }
+
+    public void SetCollegeHallOfFame(int collegeId, int sportId, int? year)
+    {
+        var hallOfFame = CollegeHallOfFames.SingleOrDefault(hof => hof.CollegeId == collegeId && hof.SportId == sportId);
+
+        if (hallOfFame == null)
+        {
+            CollegeHallOfFames.Add(new CollegeHallOfFame(Id, collegeId, sportId, year));
+            return;
+        }
+
+        hallOfFame.Set(collegeId, sportId, year);
     }
 
     public void SetDraft(int franchiseId, int year, int round, int? pick, int? overall)

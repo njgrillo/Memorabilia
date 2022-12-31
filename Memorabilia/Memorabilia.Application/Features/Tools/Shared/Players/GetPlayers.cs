@@ -1,6 +1,8 @@
-﻿namespace Memorabilia.Application.Features.Tools.Shared.Players;
+﻿using Memorabilia.Domain.Constants;
 
-public record GetPlayers(int FranchiseId, Domain.Constants.SportLeagueLevel SportLeagueLevel) : IQuery<PlayersViewModel>
+namespace Memorabilia.Application.Features.Tools.Shared.Players;
+
+public record GetPlayers(Franchise Franchise, Sport Sport) : IQuery<PlayersViewModel>
 {
     public class Handler : QueryHandler<GetPlayers, PlayersViewModel>
     {
@@ -13,9 +15,9 @@ public record GetPlayers(int FranchiseId, Domain.Constants.SportLeagueLevel Spor
 
         protected override async Task<PlayersViewModel> Handle(GetPlayers query)
         {
-            return new PlayersViewModel(await _personTeamRepository.GetAll(query.FranchiseId), query.SportLeagueLevel)
+            return new PlayersViewModel(await _personTeamRepository.GetAll(query.Franchise.Id), query.Sport)
             {
-                FranchiseId = query.FranchiseId
+                Franchise = query.Franchise
             };
         }
     }

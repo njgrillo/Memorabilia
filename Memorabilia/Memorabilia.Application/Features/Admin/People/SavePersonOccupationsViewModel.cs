@@ -23,7 +23,7 @@ public class SavePersonOccupationsViewModel : SaveViewModel
     public bool HasAthleteOccupation => Occupations.Any(occupation => !occupation.IsDeleted && Occupation.IsSportOccupation(occupation.Occupation.Id));
 
     public bool HasPositionSport => Occupations.Any(occupation => !occupation.IsDeleted && occupation.Occupation.Id == Occupation.Athlete.Id) 
-                                    && Sports.Any(sport => !sport.IsDeleted && Sport.IsPositionSport(sport.Sport.Id));
+                                    && Sports.Any(sport => !sport.IsDeleted && Sport.IsPositionSport(sport.Sport));
 
     public string ImageFileName => AdminDomainItem.Occupations.ImageFileName;
 

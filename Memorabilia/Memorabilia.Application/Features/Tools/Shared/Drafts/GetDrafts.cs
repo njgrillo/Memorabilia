@@ -1,6 +1,8 @@
-﻿namespace Memorabilia.Application.Features.Tools.Shared.Drafts;
+﻿using Memorabilia.Domain.Constants;
 
-public record GetDrafts(int FranchiseId, Domain.Constants.SportLeagueLevel SportLeagueLevel) : IQuery<DraftsViewModel>
+namespace Memorabilia.Application.Features.Tools.Shared.Drafts;
+
+public record GetDrafts(Franchise Franchise, Sport Sport) : IQuery<DraftsViewModel>
 {
     public class Handler : QueryHandler<GetDrafts, DraftsViewModel>
     {
@@ -13,9 +15,9 @@ public record GetDrafts(int FranchiseId, Domain.Constants.SportLeagueLevel Sport
 
         protected override async Task<DraftsViewModel> Handle(GetDrafts query)
         {
-            return new DraftsViewModel(await _draftRepository.GetAll(query.FranchiseId), query.SportLeagueLevel)
+            return new DraftsViewModel(await _draftRepository.GetAll(query.Franchise.Id), query.Sport)
             {
-                FranchiseId = query.FranchiseId
+                Franchise = query.Franchise
             };
         }
     }
