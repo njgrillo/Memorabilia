@@ -13,6 +13,7 @@ public sealed class TeamRoleType : DomainItemConstant
     public static readonly TeamRoleType DefensiveCoordinator = new(2, "Defensive Coordinator", "DC");
     public static readonly TeamRoleType DefensiveLineCoach = new(3, "Defensive Line Coach", "D-Line Coach");
     public static readonly TeamRoleType DirectorOfPlayerPersonnel = new(28, "Director of Player Personnel");
+    public static readonly TeamRoleType DirectorOfStaffDevelopment = new (35, "Director of Staff Development");
     public static readonly TeamRoleType Executive = new(4, "Executive", "Exec");
     public static readonly TeamRoleType GeneralManager = new(5, "General Manager", "GM");
     public static readonly TeamRoleType HeadCoach = new(6, "Head Coach");
@@ -25,12 +26,14 @@ public sealed class TeamRoleType : DomainItemConstant
     public static readonly TeamRoleType OffensiveLineCoach = new(10, "Offensive Line Coach", "O-Line Coach");
     public static readonly TeamRoleType Owner = new(11, "Owner");
     public static readonly TeamRoleType Player = new(12, "Player");
+    public static readonly TeamRoleType President = new(34, "President");
     public static readonly TeamRoleType QuarterbackCoach = new(13, "Quarterback Coach");
     public static readonly TeamRoleType RunningBackCoach = new(14, "Running Back Coach");
     public static readonly TeamRoleType Scout = new(29, "Scout");
     public static readonly TeamRoleType SecondaryCoach = new(15, "Secondary Coach");    
     public static readonly TeamRoleType SpecialTeamsCoach = new(16, "Special Teams Coach");
     public static readonly TeamRoleType TightEndCoach = new(17, "Tight End Coach");
+    public static readonly TeamRoleType VicePresident = new(33, "Vice President");
     public static readonly TeamRoleType WideReceiverCoach = new(30, "Wide Receiver Coach");
 
     public static readonly TeamRoleType[] All =
@@ -46,6 +49,7 @@ public sealed class TeamRoleType : DomainItemConstant
         DefensiveCoordinator,
         DefensiveLineCoach,
         DirectorOfPlayerPersonnel,
+        DirectorOfStaffDevelopment,
         Executive,
         GeneralManager,
         HeadCoach,
@@ -58,12 +62,14 @@ public sealed class TeamRoleType : DomainItemConstant
         OffensiveLineCoach,
         Owner,
         Player,
+        President,
         QuarterbackCoach,
         RunningBackCoach,
         Scout,
         SecondaryCoach,        
         SpecialTeamsCoach,
         TightEndCoach,
+        VicePresident,
         WideReceiverCoach
     };
 
@@ -74,7 +80,9 @@ public sealed class TeamRoleType : DomainItemConstant
         GeneralManager,
         Manager,
         Owner,
-        Player
+        Player,
+        President,
+        VicePresident
     };
 
     public static readonly TeamRoleType[] FootballRoleTypes =
@@ -89,6 +97,7 @@ public sealed class TeamRoleType : DomainItemConstant
         DefensiveCoordinator,
         DefensiveLineCoach,
         DirectorOfPlayerPersonnel,
+        DirectorOfStaffDevelopment,
         Executive,
         HeadCoach,
         HeadOfPlayerPersonnel,
@@ -99,12 +108,14 @@ public sealed class TeamRoleType : DomainItemConstant
         OffensiveLineCoach,
         Owner,
         Player,
+        President,
         QuarterbackCoach,
         RunningBackCoach,
         Scout,
         SecondaryCoach,        
         SpecialTeamsCoach,
         TightEndCoach,
+        VicePresident,
         WideReceiverCoach
     };
 

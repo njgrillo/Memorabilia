@@ -20,6 +20,7 @@ public sealed class LeaderType : DomainItemConstant
     public static readonly LeaderType AmericanLeagueWinsLeader = new(15, "American League Wins Leader", "AL Wins Leader");
     public static readonly LeaderType CompletionPercentage = new (36, "Completion Percentage");    
     public static readonly LeaderType Interceptions = new (43, "Interceptions");    
+    public static readonly LeaderType KickoffReturnYards = new (56, "Kickoff Return Yards");    
     public static readonly LeaderType MajorLeagueBaseballBattingChampion = new(32, "Major League Baseball Batting Champion", "MLB Batting Champ");
     public static readonly LeaderType MajorLeagueBaseballEarnedRunAverageLeader = new(23, "Major League Baseball Earned Run Average Leader", "MLB ERA Leader");
     public static readonly LeaderType MajorLeagueBaseballHitsLeader = new(20, "Major League Baseball Hits Leader", "MLB Hits Leader");
@@ -31,6 +32,7 @@ public sealed class LeaderType : DomainItemConstant
     public static readonly LeaderType MajorLeagueBaseballStrikeoutLeader = new(21, "Major League Baseball Strikeout Leader", "MLB Strikeout Leader");
     public static readonly LeaderType MajorLeagueBaseballTriplesLeader = new(28, "Major League Baseball Triples Leader", "MLB Triples Leader");
     public static readonly LeaderType MajorLeagueBaseballWinsLeader = new(10, "Major League Baseball Wins Leader", "MLB Wins Leader");
+    public static readonly LeaderType NationalLeagueAssists = new(55, "National League Assists", "NL Assists");
     public static readonly LeaderType NationalLeagueBattingChampion = new(4, "National League Batting Champion", "NL Batting Champ");
     public static readonly LeaderType NationalLeagueHitsLeader = new(19, "National League Hits Leader", "NL Hits Leader");
     public static readonly LeaderType NationalLeagueEarnedRunAverageLeader = new(12, "National League Earned Run Average Leader", "NL ERA Leader");
@@ -74,6 +76,7 @@ public sealed class LeaderType : DomainItemConstant
         AmericanLeagueWinsLeader,
         CompletionPercentage,
         Interceptions,
+        KickoffReturnYards,
         MajorLeagueBaseballBattingChampion,
         MajorLeagueBaseballEarnedRunAverageLeader,
         MajorLeagueBaseballHitsLeader,
@@ -85,6 +88,7 @@ public sealed class LeaderType : DomainItemConstant
         MajorLeagueBaseballStrikeoutLeader,
         MajorLeagueBaseballTriplesLeader,
         MajorLeagueBaseballWinsLeader,
+        NationalLeagueAssists,
         NationalLeagueBattingChampion,
         NationalLeagueEarnedRunAverageLeader,
         NationalLeagueHitsLeader,
@@ -133,6 +137,7 @@ public sealed class LeaderType : DomainItemConstant
         MajorLeagueBaseballStrikeoutLeader,
         MajorLeagueBaseballTriplesLeader,
         MajorLeagueBaseballWinsLeader,
+        NationalLeagueAssists,
         NationalLeagueBattingChampion,
         NationalLeagueEarnedRunAverageLeader,
         NationalLeagueHitsLeader,
@@ -155,6 +160,7 @@ public sealed class LeaderType : DomainItemConstant
         AFLReceptions,
         CompletionPercentage,
         Interceptions,
+        KickoffReturnYards,
         PasserRating,
         PassingTouchdowns,
         PassingYards,

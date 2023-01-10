@@ -1,4 +1,6 @@
-﻿namespace Memorabilia.Domain.Constants;
+﻿using Memorabilia.Domain.Entities;
+
+namespace Memorabilia.Domain.Constants;
 
 public sealed class AccomplishmentType : DomainItemConstant
 {    
@@ -10,6 +12,8 @@ public sealed class AccomplishmentType : DomainItemConstant
     public static readonly AccomplishmentType AllRookieTeam = new(46, "All-Rookie Team");
     public static readonly AccomplishmentType AllWorldBaseballClassicTeam = new(11, "All-World Baseball Classic Team");
     public static readonly AccomplishmentType AmericanLeagueTripleCrown = new(2, "American League Triple Crown", "AL Triple Crown");
+    public static readonly AccomplishmentType BostonPatriotsAll1960sTeam = new(71, "Boston Patriots All-1960s Team");
+    public static readonly AccomplishmentType CFB150GreatestCollegeFootballPlayerEver = new (69, "CFB150 Greatest College Football Player Ever");
     public static readonly AccomplishmentType CombinedNoHitter = new(8, "Combined No Hitter");
     public static readonly AccomplishmentType ConsensusAllAmerican = new (28, "Consensus All-American");
     public static readonly AccomplishmentType DenverBroncos50thAnniversaryTeam = new (48, "Denver Broncos 50th Anniversary Team");
@@ -19,9 +23,11 @@ public sealed class AccomplishmentType : DomainItemConstant
     public static readonly AccomplishmentType FiftyAnniversaryAllTimeTeam = new (55, "50th Anniversary All-Time Team");
     public static readonly AccomplishmentType FirstTeamAllAFL = new (37, "First-team All-AFL");
     public static readonly AccomplishmentType FirstTeamAllAmerican = new (41, "First-team All-American");
+    public static readonly AccomplishmentType FirstTeamAllBigEight = new (68, "First-team All-Big Eight");
     public static readonly AccomplishmentType FirstTeamAllBigTen = new (42, "First-team All-Big Ten");
     public static readonly AccomplishmentType FirstTeamAllPac10 = new (60, "First-team All-Pac-10");
     public static readonly AccomplishmentType FirstTeamAllPro = new (25, "First-team All-Pro");
+    public static readonly AccomplishmentType FirstTeamLittleAllAmerican = new (70, "First-team Little All-American");
     public static readonly AccomplishmentType FortyFortyClub = new(18, "40-40 Club");
     public static readonly AccomplishmentType FourHomeRunsInAGame = new(12, "4 Home Runs in a Game");
     public static readonly AccomplishmentType HitForTheCycle = new(13, "Hit for the Cycle");
@@ -33,6 +39,7 @@ public sealed class AccomplishmentType : DomainItemConstant
     public static readonly AccomplishmentType NewEnglandPatriotsAll2000sTeam = new(63, "New England Patriots All-2000s Team");
     public static readonly AccomplishmentType NewEnglandPatriotsAll2010sTeam = new(64, "New England Patriots All-2010s Team");
     public static readonly AccomplishmentType NewEnglandPatriotsAllDynastyTeam = new(66, "New England Patriots All-Dynasty Team");
+    public static readonly AccomplishmentType NewEnglandPatriots35thAnniversaryTeam = new (72, "New England Patriots 35th Anniversary Team");
     public static readonly AccomplishmentType NewEnglandPatriots50thAnniversaryTeam = new (65, "New England Patriots 50th Anniversary Team");
     public static readonly AccomplishmentType NineteenEightiesAllDecadeTeam = new(40, "1980s All-Decade Team");
     public static readonly AccomplishmentType NineteenFiftiesAllDecadeTeam = new(54, "1950s All-Decade Team");
@@ -56,6 +63,7 @@ public sealed class AccomplishmentType : DomainItemConstant
     public static readonly AccomplishmentType SecondTeamAllPro = new(26, "Second-team All-Pro");
     public static readonly AccomplishmentType SeventyFifthAnniversaryAllTimeTeam = new(36, "75th Anniversary All-Time Team");
     public static readonly AccomplishmentType ThirtyThirtyClub = new(3, "30-30 Club");
+    public static readonly AccomplishmentType ToppsAllStarRookieTeam = new (67, "Topps All-Star Rookie Team");
     public static readonly AccomplishmentType TwoBasesLoadedTriplesInAGame = new(24, "2 Bases Loaded Triples in a Game");
     public static readonly AccomplishmentType TwoGrandSlamsInOneInning = new(16, "2 Grand Slams in One Inning");    
     public static readonly AccomplishmentType TwoThousandsAllDecadeTeam = new(32, "2000s All-Decade Team");    
@@ -73,6 +81,8 @@ public sealed class AccomplishmentType : DomainItemConstant
         AllRookieTeam,
         AllWorldBaseballClassicTeam,
         AmericanLeagueTripleCrown,
+        BostonPatriotsAll1960sTeam,
+        CFB150GreatestCollegeFootballPlayerEver,
         CombinedNoHitter,
         ConsensusAllAmerican,
         DenverBroncos50thAnniversaryTeam,
@@ -82,9 +92,11 @@ public sealed class AccomplishmentType : DomainItemConstant
         FiftyAnniversaryAllTimeTeam,
         FirstTeamAllAFL,
         FirstTeamAllAmerican,
+        FirstTeamAllBigEight,
         FirstTeamAllBigTen,
         FirstTeamAllPac10,
         FirstTeamAllPro,
+        FirstTeamLittleAllAmerican,
         FortyFortyClub,
         FourHomeRunsInAGame,
         HitForTheCycle,
@@ -96,6 +108,7 @@ public sealed class AccomplishmentType : DomainItemConstant
         NewEnglandPatriotsAll2000sTeam,
         NewEnglandPatriotsAll2010sTeam,
         NewEnglandPatriotsAllDynastyTeam,
+        NewEnglandPatriots35thAnniversaryTeam,
         NewEnglandPatriots50thAnniversaryTeam,
         NineteenEightiesAllDecadeTeam,
         NineteenFiftiesAllDecadeTeam,
@@ -119,6 +132,7 @@ public sealed class AccomplishmentType : DomainItemConstant
         SecondTeamAllPro,
         SeventyFifthAnniversaryAllTimeTeam,
         ThirtyThirtyClub,
+        ToppsAllStarRookieTeam,
         TwoBasesLoadedTriplesInAGame,
         TwoGrandSlamsInOneInning,
         TwoThousandsAllDecadeTeam,
@@ -144,6 +158,7 @@ public sealed class AccomplishmentType : DomainItemConstant
         NoHitter,
         PerfectGame,
         ThirtyThirtyClub,
+        ToppsAllStarRookieTeam,
         TwoBasesLoadedTriplesInAGame,
         TwoGrandSlamsInOneInning,
         UnassistedTriplePlay
@@ -168,6 +183,8 @@ public sealed class AccomplishmentType : DomainItemConstant
         AllAmerican,
         AllPro,
         AllRookieTeam,
+        BostonPatriotsAll1960sTeam,
+        CFB150GreatestCollegeFootballPlayerEver,
         ConsensusAllAmerican,
         DenverBroncos50thAnniversaryTeam,
         DetroitLions75thAnniversaryTeam,
@@ -176,13 +193,16 @@ public sealed class AccomplishmentType : DomainItemConstant
         FiftyAnniversaryAllTimeTeam,
         FirstTeamAllAFL,
         FirstTeamAllAmerican,
+        FirstTeamAllBigEight,
         FirstTeamAllBigTen,
         FirstTeamAllPac10,
         FirstTeamAllPro,
+        FirstTeamLittleAllAmerican,
         NewEnglandPatriotsAll1980sTeam,
         NewEnglandPatriotsAll2000sTeam,
         NewEnglandPatriotsAll2010sTeam,
         NewEnglandPatriotsAllDynastyTeam,
+        NewEnglandPatriots35thAnniversaryTeam,
         NewEnglandPatriots50thAnniversaryTeam,
         NineteenEightiesAllDecadeTeam,
         NineteenFiftiesAllDecadeTeam,
@@ -219,10 +239,12 @@ public sealed class AccomplishmentType : DomainItemConstant
         AmericanLeagueTripleCrown,
         ConsensusAllAmerican,
         FirstTeamAllAFL,
+        FirstTeamAllBigEight,
         FirstTeamAllBigTen,
         FirstTeamAllAmerican,
         FirstTeamAllPac10,
         FirstTeamAllPro,
+        FirstTeamLittleAllAmerican,
         FortyFortyClub,
         MajorLeagueBaseballAllCenturyTeam,
         MajorLeagueBaseballAllTimeTeam,
@@ -232,7 +254,8 @@ public sealed class AccomplishmentType : DomainItemConstant
         SecondTeamAllAmerican,
         SecondTeamAllBigTen,
         SecondTeamAllPro,
-        ThirtyThirtyClub
+        ThirtyThirtyClub,
+        ToppsAllStarRookieTeam
     };
 
     private AccomplishmentType(int id, string name, string abbreviation = null) : base(id, name, abbreviation) { }

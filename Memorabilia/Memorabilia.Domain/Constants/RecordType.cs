@@ -1,4 +1,6 @@
-﻿namespace Memorabilia.Domain.Constants;
+﻿using System.Security.Policy;
+
+namespace Memorabilia.Domain.Constants;
 
 public sealed class RecordType : DomainItemConstant
 {
@@ -7,6 +9,7 @@ public sealed class RecordType : DomainItemConstant
     public static readonly RecordType ConsecutiveGamesPlayed = new(23, "Consecutive Games Played");
     public static readonly RecordType ConsecutiveHitlessInningsPitched = new (46, "Consecutive Hitless Innings Pitched");
     public static readonly RecordType ConsecutiveSavesToBeginCareer = new(27, "Consecutive Saves to Begin Career");
+    public static readonly RecordType ConsecutiveStrikeoutsByReliefPitcher = new (84, "Consecutive Strikeouts by a Relief Pitcher");
     public static readonly RecordType DoublePlaysTurned = new(33, "Double Plays Turned");
     public static readonly RecordType Doubles = new(34, "Doubles");
     public static readonly RecordType EarnedRunAverage = new(16, "Earned Run Average", "ERA");
@@ -25,6 +28,7 @@ public sealed class RecordType : DomainItemConstant
     public static readonly RecordType HomeRuns = new (4, "Home Runs");
     public static readonly RecordType HomeRunsHitByPitcher = new (54, "Home Runs Hit by Pitcher");
     public static readonly RecordType InningsPitched = new (43, "Innings Pitched");
+    public static readonly RecordType LongestTenuredCoachForAFranchise = new (83, "Longest-tenured Coach for one Franchise");
     public static readonly RecordType LongestTouchdownPass = new (79, "Longest Touchdown Pass");
     public static readonly RecordType ManagerialLosses = new (19, "Managerial Losses");
     public static readonly RecordType ManagerialWins = new (18, "Managerial Wins");
@@ -32,6 +36,7 @@ public sealed class RecordType : DomainItemConstant
     public static readonly RecordType MostConsecutiveHitlessAppearances = new (50, "Most Consecutive Hitless Appearances");
     public static readonly RecordType MostConsecutiveOutsViaStrikeout = new (49, "Most Consecutive Outs via Strikeout");
     public static readonly RecordType MostConsecutiveSeasonsWith250Strikeouts = new (40, "Most Consecutive Seasons with 250 Strikeouts");
+    public static readonly RecordType MostConsecutiveStartsByWideReceiver = new (85, "Most Consecutive Starts by a Wide Receiver");
     public static readonly RecordType MostConsecutiveStrikeoutsInAGame = new (21, "Most Consecutive Strikeouts in a Game");
     public static readonly RecordType MostConsecutiveStrikeoutsWithoutIssuingAWalkToStartSeason = new (55, "Most Consecutive Strikeouts Without Issuing a Walk to Start a Season");
     public static readonly RecordType MostCycles = new (42, "Most Cycles");
@@ -41,12 +46,14 @@ public sealed class RecordType : DomainItemConstant
     public static readonly RecordType MostHitsInAFourGameSeries = new (48, "Most Hits in a 4 Game Series");
     public static readonly RecordType MostImmaculateInnings = new (38, "Most Immaculate Innings");
     public static readonly RecordType MostInterceptionsReturnedForTouchdownInASeasonByARookie = new (68, "Most Interceptions Returned for Touchdown in a Season by a Rookie");
+    public static readonly RecordType MostPassesInterceptedInASingleGame = new (86, "Most Passes Intercepted in a Single Game");
     public static readonly RecordType MostRunsBattedInAGame = new(62, "Most RBI in a Game");
     public static readonly RecordType MostRunsBattedInOneInning = new (41, "Most RBI in One Inning");    
     public static readonly RecordType MostStrikeoutsInANineInningGame = new (39, "Most Strikeouts in a 9 Inning Game");
     public static readonly RecordType NationalLeagueOnBasePercentage = new(63, "National League On-Base Percentage", "NL OBP");
     public static readonly RecordType NationalLeagueOnBasePlusSlugging = new(60, "National League On-Base Plus Slugging", "NL OPS");
     public static readonly RecordType NoHitters = new (25, "No Hitters");
+    public static readonly RecordType OldestPlayerToTriple = new (82, "Oldest Player to hit a Triple");    
     public static readonly RecordType OnBasePercentage = new (6, "On-Base Percentage");    
     public static readonly RecordType OutfieldAssists = new (35, "Outfield Assists");
     public static readonly RecordType PassesDefended = new (67, "Passes Defended");
@@ -55,6 +62,7 @@ public sealed class RecordType : DomainItemConstant
     public static readonly RecordType PassingTouchdowns = new (77, "Passing Touchdowns");
     public static readonly RecordType PassingYards = new (80, "Passing Yards");
     public static readonly RecordType PinchHitHomeRuns = new (52, "Pinch Hit Home Runs");
+    public static readonly RecordType PinchRunningAppearances = new (81, "Pinch Running Appearances");
     public static readonly RecordType PlateAppearances = new (32, "Plate Appearances");
     public static readonly RecordType PostseasonInningsPitched = new (9, "Postseason Innings Pitched");
     public static readonly RecordType PutoutsAsOutfielder = new (17, "Putouts as Outfielder");
@@ -87,6 +95,7 @@ public sealed class RecordType : DomainItemConstant
         ConsecutiveGamesPlayed,
         ConsecutiveHitlessInningsPitched,
         ConsecutiveSavesToBeginCareer,
+        ConsecutiveStrikeoutsByReliefPitcher,
         DoublePlaysTurned,
         Doubles,
         EarnedRunAverage,
@@ -105,6 +114,7 @@ public sealed class RecordType : DomainItemConstant
         HomeRuns,
         HomeRunsHitByPitcher,
         InningsPitched,
+        LongestTenuredCoachForAFranchise,
         LongestTouchdownPass,
         ManagerialLosses,
         ManagerialWins,
@@ -112,6 +122,7 @@ public sealed class RecordType : DomainItemConstant
         MostConsecutiveHitlessAppearances,
         MostConsecutiveOutsViaStrikeout,
         MostConsecutiveSeasonsWith250Strikeouts,
+        MostConsecutiveStartsByWideReceiver,
         MostConsecutiveStrikeoutsInAGame,
         MostConsecutiveStrikeoutsWithoutIssuingAWalkToStartSeason,
         MostCycles,
@@ -121,12 +132,14 @@ public sealed class RecordType : DomainItemConstant
         MostHitsInAFourGameSeries,
         MostImmaculateInnings,
         MostInterceptionsReturnedForTouchdownInASeasonByARookie,
+        MostPassesInterceptedInASingleGame,
         MostRunsBattedInAGame,
         MostRunsBattedInOneInning,
         MostStrikeoutsInANineInningGame,
         NationalLeagueOnBasePercentage,
         NationalLeagueOnBasePlusSlugging,
         NoHitters,
+        OldestPlayerToTriple,
         OnBasePercentage,
         OutfieldAssists,
         PassesDefended,
@@ -135,6 +148,7 @@ public sealed class RecordType : DomainItemConstant
         PassingTouchdowns,
         PassingYards,
         PinchHitHomeRuns,
+        PinchRunningAppearances,
         PlateAppearances,
         PostseasonInningsPitched,
         PutoutsAsOutfielder,
@@ -168,6 +182,7 @@ public sealed class RecordType : DomainItemConstant
         ConsecutiveGamesPlayed,
         ConsecutiveHitlessInningsPitched,
         ConsecutiveSavesToBeginCareer,
+        ConsecutiveStrikeoutsByReliefPitcher,
         DoublePlaysTurned,
         Doubles,
         EarnedRunAverage,
@@ -183,6 +198,7 @@ public sealed class RecordType : DomainItemConstant
         HomeRuns,
         HomeRunsHitByPitcher,
         InningsPitched,
+        LongestTenuredCoachForAFranchise,
         ManagerialLosses,
         ManagerialWins,
         MostConsecutiveHitlessAppearances,
@@ -200,9 +216,11 @@ public sealed class RecordType : DomainItemConstant
         NationalLeagueOnBasePercentage,
         NationalLeagueOnBasePlusSlugging,
         NoHitters,
+        OldestPlayerToTriple,
         OnBasePercentage,
         OutfieldAssists,
         PinchHitHomeRuns,
+        PinchRunningAppearances,
         PlateAppearances,
         PostseasonInningsPitched,
         PutoutsAsOutfielder,
@@ -232,9 +250,11 @@ public sealed class RecordType : DomainItemConstant
         HighestAveragePuntingYards,
         LongestTouchdownPass,
         MostConsecutiveGamesScoring,
+        MostConsecutiveStartsByWideReceiver,
         MostFiftyPlusYearFieldGoalsInAGame,
         MostGamesPlayed,
         MostInterceptionsReturnedForTouchdownInASeasonByARookie,
+        MostPassesInterceptedInASingleGame,
         PassesDefended,
         PassingAttempts,
         PassingCompletions,
