@@ -22,6 +22,7 @@ public class SavePersonAccolades
             UpdateAccomplishments(command, person);
             UpdateAwards(command, person);
             UpdateCareerRecords(command, person);
+            UpdateCollegeRetiredNumbers(command, person);
             UpdateLeaders(command, person);
             UpdateRetiredNumbers(command, person);
             UpdateSingleSeasonRecords(command, person); 
@@ -59,6 +60,16 @@ public class SavePersonAccolades
             foreach (var record in command.CareerRecords)
             {
                 person.SetCareerRecord(record.Id, record.RecordType.Id, record.Record);
+            }
+        }
+
+        private static void UpdateCollegeRetiredNumbers(Command command, Person person)
+        {
+            person.RemoveCollegeRetiredNumbers(command.DeletedCollegeRetiredNumberIds);
+
+            foreach (var retiredNumber in command.CollegeRetiredNumbers)
+            {
+                person.SetCollegeRetiredNumber(retiredNumber.Id, retiredNumber.College.Id, retiredNumber.PlayerNumber ?? 0);
             }
         }
 
@@ -103,32 +114,85 @@ public class SavePersonAccolades
             _viewModel = viewModel;
         }
 
-        public SavePersonAccomplishmentViewModel[] Accomplishments => _viewModel.Accomplishments.Where(accomplishment => !accomplishment.IsDeleted).ToArray();
+        public SavePersonAccomplishmentViewModel[] Accomplishments 
+            => _viewModel.Accomplishments
+                         .Where(accomplishment => !accomplishment.IsDeleted)
+                         .ToArray();
 
         public int[] AllStarYears => _viewModel.AllStarYears.ToArray();
 
-        public SavePersonAwardViewModel[] Awards => _viewModel.Awards.Where(award => !award.IsDeleted).ToArray();
+        public SavePersonAwardViewModel[] Awards 
+            => _viewModel.Awards
+                         .Where(award => !award.IsDeleted)
+                         .ToArray();
 
-        public SavePersonCareerRecordViewModel[] CareerRecords => _viewModel.CareerRecords.Where(record => !record.IsDeleted).ToArray();
+        public SavePersonCareerRecordViewModel[] CareerRecords 
+            => _viewModel.CareerRecords
+                         .Where(record => !record.IsDeleted)
+                         .ToArray();
 
-        public int[] DeletedAccomplishmentIds => _viewModel.Accomplishments.Where(accomplishment => accomplishment.IsDeleted).Select(accomplishment => accomplishment.Id).ToArray();
+        public SavePersonCollegeRetiredNumberViewModel[] CollegeRetiredNumbers 
+            => _viewModel.CollegeRetiredNumbers
+                         .Where(retiredNumber => !retiredNumber.IsDeleted)
+                         .ToArray();
 
-        public int[] DeletedAwardIds => _viewModel.Awards.Where(award => award.IsDeleted).Select(award => award.Id).ToArray();
+        public int[] DeletedAccomplishmentIds
+            => _viewModel.Accomplishments
+                         .Where(accomplishment => accomplishment.IsDeleted)
+                         .Select(accomplishment => accomplishment.Id)
+                         .ToArray();
 
-        public int[] DeletedCareerRecordIds => _viewModel.CareerRecords.Where(record => record.IsDeleted).Select(record => record.Id).ToArray();
+        public int[] DeletedAwardIds 
+            => _viewModel.Awards
+                         .Where(award => award.IsDeleted)
+                         .Select(award => award.Id)
+                         .ToArray();
 
-        public int[] DeletedLeaderIds => _viewModel.Leaders.Where(leader => leader.IsDeleted).Select(leader => leader.Id).ToArray();
+        public int[] DeletedCareerRecordIds 
+            => _viewModel.CareerRecords
+                         .Where(record => record.IsDeleted)
+                         .Select(record => record.Id)
+                         .ToArray();
 
-        public int[] DeletedRetiredNumberIds => _viewModel.RetiredNumbers.Where(retiredNumber => retiredNumber.IsDeleted).Select(retiredNumber => retiredNumber.Id).ToArray();
+        public int[] DeletedCollegeRetiredNumberIds
+            => _viewModel.CollegeRetiredNumbers
+                         .Where(retiredNumber => retiredNumber.IsDeleted)
+                         .Select(retiredNumber => retiredNumber.Id)
+                         .ToArray();
 
-        public int[] DeletedSingleSeasonRecordIds => _viewModel.SingleSeasonRecords.Where(record => record.IsDeleted).Select(record => record.Id).ToArray();
+        public int[] DeletedLeaderIds 
+            => _viewModel.Leaders
+                         .Where(leader => leader.IsDeleted)
+                         .Select(leader => leader.Id)
+                         .ToArray();
 
-        public SavePersonLeaderViewModel[] Leaders => _viewModel.Leaders.Where(leader => !leader.IsDeleted).ToArray();
+        public int[] DeletedRetiredNumberIds 
+            => _viewModel.RetiredNumbers
+                         .Where(retiredNumber => retiredNumber.IsDeleted)
+                         .Select(retiredNumber => retiredNumber.Id)
+                         .ToArray();
+
+        public int[] DeletedSingleSeasonRecordIds 
+            => _viewModel.SingleSeasonRecords
+                         .Where(record => record.IsDeleted)
+                         .Select(record => record.Id)
+                         .ToArray();
+
+        public SavePersonLeaderViewModel[] Leaders 
+            => _viewModel.Leaders
+                         .Where(leader => !leader.IsDeleted)
+                         .ToArray();
 
         public int PersonId { get; }
 
-        public SavePersonRetiredNumberViewModel[] RetiredNumbers => _viewModel.RetiredNumbers.Where(retiredNumber => !retiredNumber.IsDeleted).ToArray();
+        public SavePersonRetiredNumberViewModel[] RetiredNumbers 
+            => _viewModel.RetiredNumbers
+                         .Where(retiredNumber => !retiredNumber.IsDeleted)
+                         .ToArray();
 
-        public SavePersonSingleSeasonRecordViewModel[] SingleSeasonRecords => _viewModel.SingleSeasonRecords.Where(leader => !leader.IsDeleted).ToArray();
+        public SavePersonSingleSeasonRecordViewModel[] SingleSeasonRecords 
+            => _viewModel.SingleSeasonRecords
+                         .Where(leader => !leader.IsDeleted)
+                         .ToArray();
     }
 }

@@ -9,30 +9,44 @@ public class SavePersonAccoladeViewModel : SaveViewModel
     public SavePersonAccoladeViewModel(int personId, PersonAccoladeViewModel viewModel)
     {
         PersonId = personId;
-        Accomplishments = viewModel.Accomplishments.Select(accomplishment => new SavePersonAccomplishmentViewModel(accomplishment))
-                                                   .OrderBy(accomplishment => accomplishment.AccomplishmentTypeName)
-                                                   .ToList();
-        AllStarYears = viewModel.AllStars.Select(allStar => allStar.Year)
-                                         .OrderBy(year => year)
-                                         .ToList();
-        Awards = viewModel.Awards.Select(award => new SavePersonAwardViewModel(award))
-                                 .OrderBy(award => award.AwardTypeName)
-                                 .ThenBy(award => award.Year)
-                                 .ToList();
-        CareerRecords = viewModel.CareerRecords.Select(careerRecord => new SavePersonCareerRecordViewModel(careerRecord))
-                                               .OrderBy(careerRecord => careerRecord.RecordTypeName)
-                                               .ToList();
-        Leaders = viewModel.Leaders.Select(leader => new SavePersonLeaderViewModel(leader))
-                                   .OrderBy(leader => leader.LeaderTypeName)
-                                   .ThenBy(leader => leader.Year)
+        Accomplishments = viewModel.Accomplishments
+                                   .Select(accomplishment => new SavePersonAccomplishmentViewModel(accomplishment))
+                                   .OrderBy(accomplishment => accomplishment.AccomplishmentTypeName)
                                    .ToList();
-        RetiredNumbers = viewModel.RetiredNumbers.Select(retiredNumber => new SavePersonRetiredNumberViewModel(retiredNumber))
-                                                 .OrderBy(retiredNumber => retiredNumber.FranchiseName)
-                                                 .ToList();
-        SingleSeasonRecords = viewModel.SingleSeasonRecords.Select(singleSeasonRecord => new SavePersonSingleSeasonRecordViewModel(singleSeasonRecord))
-                                                           .OrderBy(singleSeasonRecord => singleSeasonRecord.RecordTypeName)
-                                                           .ToList();
-        Sports = viewModel.Sports.Select(sport => Sport.Find(sport.SportId)).ToArray();
+        AllStarYears = viewModel.AllStars
+                                .Select(allStar => allStar.Year)
+                                .OrderBy(year => year)
+                                .ToList();
+        Awards = viewModel.Awards
+                          .Select(award => new SavePersonAwardViewModel(award))
+                          .OrderBy(award => award.AwardTypeName)
+                          .ThenBy(award => award.Year)
+                          .ToList();
+        CareerRecords = viewModel.CareerRecords
+                                 .Select(careerRecord => new SavePersonCareerRecordViewModel(careerRecord))
+                                 .OrderBy(careerRecord => careerRecord.RecordTypeName)
+                                 .ToList();
+        CollegeRetiredNumbers = viewModel.CollegeRetiredNumbers
+                                         .Select(retiredNumber => new SavePersonCollegeRetiredNumberViewModel(retiredNumber))
+                                         .OrderBy(retiredNumber => retiredNumber.CollegeName)
+                                         .ToList();
+        Colleges = viewModel.Colleges;
+        Leaders = viewModel.Leaders
+                           .Select(leader => new SavePersonLeaderViewModel(leader))
+                           .OrderBy(leader => leader.LeaderTypeName)
+                           .ThenBy(leader => leader.Year)
+                           .ToList();
+        RetiredNumbers = viewModel.RetiredNumbers
+                                  .Select(retiredNumber => new SavePersonRetiredNumberViewModel(retiredNumber))
+                                  .OrderBy(retiredNumber => retiredNumber.FranchiseName)
+                                  .ToList();
+        SingleSeasonRecords = viewModel.SingleSeasonRecords
+                                       .Select(singleSeasonRecord => new SavePersonSingleSeasonRecordViewModel(singleSeasonRecord))
+                                       .OrderBy(singleSeasonRecord => singleSeasonRecord.RecordTypeName)
+                                       .ToList();
+        Sports = viewModel.Sports
+                          .Select(sport => Sport.Find(sport.SportId))
+                          .ToArray();
     }
 
     public List<SavePersonAccomplishmentViewModel> Accomplishments { get; set; } = new();
@@ -62,6 +76,10 @@ public class SavePersonAccoladeViewModel : SaveViewModel
     public override string BackNavigationPath => $"{AdminDomainItem.People.Title}/{AdminDomainItem.Teams.Item}/{EditModeType.Update.Name}/{PersonId}";
 
     public List<SavePersonCareerRecordViewModel> CareerRecords { get; set; } = new();
+
+    public List<SavePersonCollegeRetiredNumberViewModel> CollegeRetiredNumbers { get; set; } = new();
+
+    public College[] Colleges = Array.Empty<College>();
 
     public override string ContinueNavigationPath => $"{AdminDomainItem.People.Title}/HallOfFame/{EditModeType.Update.Name}/{PersonId}";
 

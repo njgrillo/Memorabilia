@@ -1,13 +1,18 @@
-﻿namespace Memorabilia.Blazor.Controls.TypeAhead;
+﻿using Memorabilia.Domain.Constants;
+
+namespace Memorabilia.Blazor.Controls.TypeAhead;
 
 public class CollegeAutoComplete : DomainEntityAutoComplete<College>
 {
+    [Parameter]
+    public College[] Colleges { get; set; } = Array.Empty<College>();
+
     protected override void OnInitialized()
     {
         Label = "College";
         Placeholder = "Search by college...";
         ResetValueOnEmptyText = true;
-        Items = College.All;
+        Items = Colleges.Any() ? Colleges : College.All;
     }
 
     public override async Task<IEnumerable<College>> Search(string searchText)

@@ -21,6 +21,12 @@ public class PersonAccoladeViewModel
 
     public List<CareerRecord> CareerRecords => _person.CareerRecords;
 
+    public List<CollegeRetiredNumber> CollegeRetiredNumbers => _person.CollegeRetiredNumbers;
+
+    public Domain.Constants.College[] Colleges => _person.Colleges
+                                                         .Select(college => Domain.Constants.College.Find(college.CollegeId))
+                                                         .ToArray();
+
     public List<Leader> Leaders => _person.Leaders;
 
     public int PersonId => _person.Id;

@@ -46,6 +46,8 @@ public class Person : Framework.Library.Domain.Entity.DomainEntity, IWithName
 
     public virtual List<CollegeHallOfFame> CollegeHallOfFames { get; private set; } = new();
 
+    public virtual List<CollegeRetiredNumber> CollegeRetiredNumbers { get; private set; } = new();
+
     public virtual List<PersonCollege> Colleges { get; private set; } = new();
 
     public DateTime CreateDate { get; private set; }
@@ -130,6 +132,14 @@ public class Person : Framework.Library.Domain.Entity.DomainEntity, IWithName
             return;
 
         CollegeHallOfFames.RemoveAll(hof => ids.Contains(hof.Id));
+    }
+
+    public void RemoveCollegeRetiredNumbers(params int[] ids)
+    {
+        if (ids == null || ids.Length == 0)
+            return;
+
+        CollegeRetiredNumbers.RemoveAll(retiredNumber => ids.Contains(retiredNumber.Id));
     }
 
     public void RemoveColleges(params int[] ids)
@@ -334,6 +344,19 @@ public class Person : Framework.Library.Domain.Entity.DomainEntity, IWithName
         hallOfFame.Set(collegeId, sportId, year);
     }
 
+    public void SetCollegeRetiredNumber(int collegeRetiredNumberId, int collegeId, int playerNumber)
+    {
+        if (collegeRetiredNumberId == 0)
+        {
+            CollegeRetiredNumbers.Add(new CollegeRetiredNumber(Id, collegeId, playerNumber));
+            return;
+        }
+
+        var collegeRetiredNumber = CollegeRetiredNumbers.Single(number => number.Id == collegeRetiredNumberId);
+
+        collegeRetiredNumber.Set(collegeId, playerNumber);
+    }
+
     public void SetDraft(int franchiseId, int year, int round, int? pick, int? overall)
     {
         var draft = Drafts.SingleOrDefault(draft => draft.FranchiseId == franchiseId && draft.Year == year);
@@ -454,7 +477,7 @@ public class Person : Framework.Library.Domain.Entity.DomainEntity, IWithName
             return;
         }
 
-        var retiredNumber = RetiredNumbers.Single(award => award.Id == retiredNumberId);
+        var retiredNumber = RetiredNumbers.Single(number => number.Id == retiredNumberId);
 
         retiredNumber.Set(franchiseId, playerNumber);
     }
