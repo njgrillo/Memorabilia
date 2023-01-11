@@ -6,6 +6,13 @@ public class Person : Framework.Library.Domain.Entity.DomainEntity, IWithName
 {
     public Person() { }
 
+    public Person(Person person)
+    {
+        Occupations = person.Occupations;
+        Positions = person.Positions;
+        Sports = person.Sports;
+    }
+
     public Person(string firstName, 
                   string lastName, 
                   string middleName,

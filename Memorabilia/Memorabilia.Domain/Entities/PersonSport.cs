@@ -16,8 +16,11 @@ public class PersonSport : Framework.Library.Domain.Entity.DomainEntity
 
     public int SportId { get; private set; }
 
+    public override string ToString()
+        => $"{Sport?.Name}";
+
     public void Set(int sportId)
     {
         SportId = sportId;
-    }
+    }    
 }

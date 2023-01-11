@@ -2,32 +2,32 @@
 
 public class DomainRepository<T> : BaseRepository<T>, IDomainRepository<T> where T : DomainEntity
 {
-    private readonly DomainContext _context;
+    protected readonly DomainContext Context;
 
     public DomainRepository(DomainContext context, IMemoryCache memoryCache) : base(context, memoryCache)
     {
-        _context = context;
+        Context = context;
     }
 
-    protected IQueryable<T> Items => _context.Set<T>();
+    protected IQueryable<T> Items => Context.Set<T>();
 
     public virtual async Task Add(T item, CancellationToken cancellationToken = default)
     {
-        _context.Add(item);
+        Context.Add(item);
 
-        await _context.SaveChangesAsync(cancellationToken);
+        await Context.SaveChangesAsync(cancellationToken);
     }
 
     public void CommitTransaction()
     {
-        CommitTransaction(_context);
+        CommitTransaction(Context);
     }
 
     public async Task Delete(T item, CancellationToken cancellationToken = default)
     {
-        _context.Set<T>().Remove(item);
+        Context.Set<T>().Remove(item);
 
-        await _context.SaveChangesAsync(cancellationToken);
+        await Context.SaveChangesAsync(cancellationToken);
     }
 
     public virtual async Task<T> Get(int id)
@@ -42,18 +42,18 @@ public class DomainRepository<T> : BaseRepository<T>, IDomainRepository<T> where
 
     public IDbContextTransaction GetTransaction()
     {
-        return GetTransaction(_context);
+        return GetTransaction(Context);
     }
 
     public void RollbackTransaction()
     {
-        RollbackTransaction(_context);
+        RollbackTransaction(Context);
     }
 
     public async Task Update(T item, CancellationToken cancellationToken = default)
     {
-        _context.Set<T>().Update(item);
+        Context.Set<T>().Update(item);
 
-        await _context.SaveChangesAsync(cancellationToken);
+        await Context.SaveChangesAsync(cancellationToken);
     }
 }

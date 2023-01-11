@@ -4,6 +4,8 @@ namespace Memorabilia.Repository;
 
 public class DomainContext : DbContext, IDomainContext
 {
+    public DbSet<Person> Person { get; set; }
+
     public DomainContext(DbContextOptions<DomainContext> options) : base(options) { }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

@@ -37,4 +37,17 @@ public class PersonRepository : DomainRepository<Person>, IPersonRepository
                                         && (!sportLeagueLevelId.HasValue || person.Teams.Any(team => team.Team.Franchise.SportLeagueLevel.Id == sportLeagueLevelId.Value)))
                           .ToListAsync();
     }
+
+    public async Task<Person[]> GetMostRecent()
+    {
+        var query =
+            from person in Context.Person
+            where
+                person.Occupations.Any() || person.Positions.Any() || person.Sports.Any()
+            orderby person.Id descending
+            select new Person(person);
+
+        return await query.Take(5)
+                          .ToArrayAsync();
+    }
 }

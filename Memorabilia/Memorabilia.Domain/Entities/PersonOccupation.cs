@@ -21,6 +21,9 @@ public class PersonOccupation : Framework.Library.Domain.Entity.DomainEntity
 
     public int PersonId { get; private set; }
 
+    public override string ToString()
+        => $"{OccupationName} {Constants.OccupationType.Find(OccupationTypeId)?.Name}";
+
     public void Set(int occupationId, int occupationTypeId)
     {
         OccupationId = occupationId;

@@ -10,7 +10,7 @@ public class PersonPosition : Framework.Library.Domain.Entity.DomainEntity
     {
         PersonId = personId;
         PositionId = positionId;
-        IsPrimary= positionType == PositionType.Primary;    
+        IsPrimary = positionType == PositionType.Primary;    
     }
 
     public bool IsPrimary { get; private set; }
@@ -21,9 +21,12 @@ public class PersonPosition : Framework.Library.Domain.Entity.DomainEntity
 
     public int PositionId { get; private set; }
 
+    public override string ToString()
+        => $"{Position?.Name} {(IsPrimary ? "Primary" : "Secondary")}";
+
     public void Set(int positionId, PositionType positionType)
     {
         PositionId = positionId;
         IsPrimary = positionType == PositionType.Primary;
-    }
+    }    
 }

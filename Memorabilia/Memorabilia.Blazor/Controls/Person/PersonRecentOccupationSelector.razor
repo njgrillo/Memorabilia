@@ -1,0 +1,27 @@
+﻿<MudTable Bordered="false"
+          Dense="false"
+          Hover="true"
+          Items="@RecentOccupations"
+          Striped="true">
+    <ToolBarContent>
+        <MudText Typo="Typo.h6">Use Recent Template</MudText>
+    </ToolBarContent>
+    <HeaderContent>        
+        <MudTh>Occupations</MudTh>
+        <MudTh>Positions</MudTh>
+        <MudTh>Sports</MudTh>     
+        <MudTh></MudTh>
+    </HeaderContent>
+    <RowTemplate>        
+        <MudTd DataLabel="Occupations">@context.OccupationsDisplayText</MudTd>
+        <MudTd DataLabel="Positions">@context.PositionsDisplayText</MudTd>
+        <MudTd DataLabel="Sports">@context.SportsDisplayText</MudTd>
+        <MudTd DataLabel="">
+            <MudTooltip Text="Select">
+                <MudFab Color="MudBlazor.Color.Primary"
+                        Icon="@Icons.Outlined.AddCircleOutline"
+                        OnClick="@(_ => Select(context))" />
+            </MudTooltip>
+        </MudTd>
+    </RowTemplate>
+</MudTable>
