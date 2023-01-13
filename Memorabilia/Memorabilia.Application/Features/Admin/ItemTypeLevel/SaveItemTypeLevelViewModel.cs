@@ -9,7 +9,7 @@ public class SaveItemTypeLevelViewModel : SaveViewModel
     public SaveItemTypeLevelViewModel(ItemTypeLevelViewModel viewModel)
     {
         Id = viewModel.Id;
-        ItemTypeId = viewModel.ItemTypeId;
+        ItemType = ItemType.Find(viewModel.ItemTypeId);
         LevelTypeId = viewModel.LevelTypeId;
     }
 
@@ -19,17 +19,11 @@ public class SaveItemTypeLevelViewModel : SaveViewModel
 
     public override string ItemTitle => AdminDomainItem.ItemTypeLevels.Item;
 
-    [Required]
-    [Range(1, int.MaxValue, ErrorMessage = "Item Type is required.")]
-    public int ItemTypeId { get; set; }
-
-    public ItemType[] ItemTypes => ItemType.All;
+    public ItemType ItemType { get; set; }
 
     [Required]
     [Range(1, int.MaxValue, ErrorMessage = "Level Type is required.")]
     public int LevelTypeId { get; set; }
-
-    public LevelType[] LevelTypes => LevelType.All;
 
     public override string RoutePrefix => AdminDomainItem.ItemTypeLevels.Page;
 }

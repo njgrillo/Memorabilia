@@ -12,7 +12,7 @@ public class SaveTeamViewModel : SaveViewModel, IWithName, IWithValue<int>
         BeginYear = viewModel.BeginYear;
         DisplayName = viewModel.DisplayName;
         EndYear = viewModel.EndYear;
-        FranchiseId = viewModel.FranchiseId;
+        Franchise = Franchise.Find(viewModel.FranchiseId);
         Id = viewModel.Id;
         Location = viewModel.Location;
         Name = viewModel.Name;
@@ -37,8 +37,7 @@ public class SaveTeamViewModel : SaveViewModel, IWithName, IWithValue<int>
 
     public int? EndYear { get; set; }
 
-    [Required]
-    public int FranchiseId { get; set; }
+    public Franchise Franchise { get; set; }
 
     public string ImageFileName => AdminDomainItem.Teams.ImageFileName;
 
@@ -60,6 +59,10 @@ public class SaveTeamViewModel : SaveViewModel, IWithName, IWithValue<int>
     public SportLeagueLevel SportLeagueLevel => SportLeagueLevel.Find(SportLeagueLevelId);
 
     public int SportLeagueLevelId { get; set; }
+
+    public Sport[] Sports => SportLeagueLevel != null 
+        ? new[] { SportLeagueLevel.Sport }
+        : Array.Empty<Sport>();
 
     public TeamStep TeamStep => TeamStep.Team;
 

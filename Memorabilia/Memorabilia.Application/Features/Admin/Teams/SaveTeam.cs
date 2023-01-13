@@ -72,7 +72,7 @@ public class SaveTeam
 
         public int? EndYear => _viewModel.EndYear;
 
-        public int FranchiseId => _viewModel.FranchiseId;
+        public int FranchiseId => _viewModel.Franchise.Id;
 
         public int Id { get; set; } 
 

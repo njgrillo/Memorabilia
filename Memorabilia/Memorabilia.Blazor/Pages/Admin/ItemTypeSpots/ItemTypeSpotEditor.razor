@@ -16,14 +16,14 @@
     <Content>
         <DivRowCol3 Hidden="@(!DisplayItemType)">
             <Content>
-                <ItemTypeDropDown SelectedValue="ViewModel.ItemTypeId"
-                                  SelectionChanged="(p) => ViewModel.ItemTypeId = p" />
+                <ItemTypeAutoComplete SelectedValue="ViewModel.ItemType"
+                                      SelectionChanged="(p) => ViewModel.ItemType = p" />
             </Content>
         </DivRowCol3>
         <DivRowCol3>
             <Content>
-                <SpotDropDown SelectedValue="ViewModel.SpotId"
-                              SelectionChanged="(p) => ViewModel.SpotId = p" />
+                <SpotAutoComplete SelectedValue="ViewModel.Spot"
+                                  SelectionChanged="(p) => ViewModel.Spot = p" />
             </Content>
         </DivRowCol3>
     </Content>

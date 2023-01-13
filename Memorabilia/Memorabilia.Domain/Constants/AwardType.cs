@@ -2,8 +2,11 @@
 
 public sealed class AwardType : DomainItemConstant
 {
+    public static readonly AwardType AAFCMostValuablePlayer = new (109, "AAFC Most Valuable Player");
     public static readonly AwardType ACCBaseballPlayerOfTheYear = new(43, "ACC Baseball Player of the Year");
     public static readonly AwardType ACCDefensivePlayerOfTheYear = new (86, "ACC Defensive Player of the Year");
+    public static readonly AwardType AFLChampionshipMostValuablePlayer = new (101, "AFL Championship Most Valuable Player");
+    public static readonly AwardType AFLCoachOfTheYear = new (99, "AFL Coach of the Year");
     public static readonly AwardType AFLMostValuablePlayer = new (82, "AFL Most Valuable Player", "AFL MVP");
     public static readonly AwardType AFLPlayerOfTheYear = new(74, "AFL Player of the Year");
     public static readonly AwardType AllStarGameMostValuablePlayer = new(1, "All Star Most Valuable Player", "All Star MVP");
@@ -23,7 +26,12 @@ public sealed class AwardType : DomainItemConstant
     public static readonly AwardType BartStarrAward = new(87, "Bart Starr Award");
     public static readonly AwardType BaseballAmericaCollegePlayerOfTheYear = new(52, "Baseball America College Player of the Year");
     public static readonly AwardType BertBellAward = new (83, "Bert Bell Award");
+    public static readonly AwardType BestCoachManagerESPYAward = new (98, "Best Coach/Manager ESPY Award");
+    public static readonly AwardType BigTenMostValuablePlayer = new (95, "Big Ten Most Valuable Player");
+    public static readonly AwardType BigTenOffensiveLinemanOfTheYear = new (112, "Big Ten Offensive Lineman of the Year");
+    public static readonly AwardType BigTenPlayerOfTheYear = new (108, "Big Ten Player of the Year");
     public static readonly AwardType BronkoNagurskiTrophy = new (76, "Bronko Nagurski Trophy");
+    public static readonly AwardType ChicagoTribuneSilverFootball = new (110, "Chicago Tribune Silver Football");
     public static readonly AwardType CoachOfTheYear = new (66, "Coach of the Year");
     public static readonly AwardType CollegeWorldSeriesMostOutstandingPlayer = new (40, "College World Series Most Outstanding Player", "CWS Most Outstanding Player");
     public static readonly AwardType ComebackPlayerOfTheYear = new(69, "Comeback Player of the Year");
@@ -39,12 +47,15 @@ public sealed class AwardType : DomainItemConstant
     public static readonly AwardType FieldingBibleAward = new(21, "Fielding Bible Award");
     public static readonly AwardType FinalsMostValuablePlayer = new(4, "Finals Most Valuable Player", "Finals MVP");
     public static readonly AwardType FordFrickAward = new(49, "Ford C. Frick Award");
+    public static readonly AwardType GeorgeHalasAward = new(96, "George Halas Award");
     public static readonly AwardType GoldenSpikes = new(5, "Golden Spikes");
     public static readonly AwardType GoldenToeAward = new(75, "Golden Toe Award");
     public static readonly AwardType GoldGlove = new(6, "Gold Glove");
     public static readonly AwardType HeartAndHustleAward = new (51, "Heart and Hustle Award");
     public static readonly AwardType HeismanTrophy = new (70, "Heisman Trophy");
     public static readonly AwardType JackLambertTrophy = new (88, "Jack Lambert Trophy");
+    public static readonly AwardType JacobsBlockingTrophy = new (106, "Jacobs Blocking Trophy");
+    public static readonly AwardType LamarHuntAward = new (104, "Lamar Hunt Award");
     public static readonly AwardType MajorLeagueBaseballRookieOfTheYear = new(47, "Major League Baseball Rookie of the Year", "MLB ROY");
     public static readonly AwardType ManagerOfTheYear = new(7, "Manager of the Year");
     public static readonly AwardType ManOfTheYear = new (63, "Man of the Year");
@@ -73,17 +84,24 @@ public sealed class AwardType : DomainItemConstant
     public static readonly AwardType RelieverOfTheYear = new(42, "Reliever of the Year");
     public static readonly AwardType RobertoClementeAward = new(23, "Roberto Clemente Award");
     public static readonly AwardType RookieOfTheYear = new (89, "Rookie of the Year", "ROY");
+    public static readonly AwardType SammyBaughTrophy = new(105, "Sammy Baugh Trophy");
     public static readonly AwardType SECPitcherOfTheYear = new(44, "SEC Pitcher of the Year");
     public static readonly AwardType SilverSlugguer = new(11, "Silver Slugger");
     public static readonly AwardType SportingNewsCoachOfTheYear  = new (92, "Sporting News Coach of the Year ");
     public static readonly AwardType SportingNewsPlayerOfTheYear  = new (93, "Sporting News Player of the Year ");
     public static readonly AwardType SportsIllustratedSportspersonOfTheYear = new(30, "Sports Illustrated Sportsperson Of The Year", "SI Sportsperson Of The Year");
     public static readonly AwardType SuperBowlMostValuablePlayer = new(65, "Super Bowl Most Valuable Player", "SB MVP");
+    public static readonly AwardType SWCOffensivePlayerOfTheYear = new (103, "SWC Offensive Player of the Year");
     public static readonly AwardType TipONeillAward = new(39, "Tip O'Neill Award");
     public static readonly AwardType TonyConigliaroAward = new(50, "Tony Conigliaro Award");
+    public static readonly AwardType UPIAFCOffensivePlayerOfTheYear = new (100, "UPI AFC Offensive Player of the Year");
     public static readonly AwardType UPICoachOfTheYear = new (91, "UPI Coach of the Year");
     public static readonly AwardType UPILinemanOfTheYear = new(80, "UPI Lineman of the Year");
+    public static readonly AwardType UPINFCDefensivePlayerOfTheYear = new(111, "UPI NFC Defensive Player of the Year");
+    public static readonly AwardType UPINFCOffensivePlayerOfTheYear = new(102, "UPI NFC Offensive Player of the Year");
     public static readonly AwardType UPIPlayerOfTheYear = new(94, "UPI Player of the Year");
+    public static readonly AwardType WACOffensivePlayerOfTheYear = new (107, "WAC Offensive Player of the Year");
+    public static readonly AwardType WalterCampAlumniOfTheYear = new (97, "Walter Camp Alumni of the Year");
     public static readonly AwardType WalterCampAward = new(72, "Walter Camp Award");
     public static readonly AwardType WalterPaytonNFLManOfTheYear = new(81, "Walter Payton NFL Man of the Year");
     public static readonly AwardType WillieMacAward = new(54, "Willie Mac Award");
@@ -93,8 +111,11 @@ public sealed class AwardType : DomainItemConstant
 
     public static readonly AwardType[] All =
     {
+        AAFCMostValuablePlayer,
         ACCBaseballPlayerOfTheYear,
         ACCDefensivePlayerOfTheYear,
+        AFLChampionshipMostValuablePlayer,
+        AFLCoachOfTheYear,
         AFLMostValuablePlayer,
         AFLPlayerOfTheYear,
         AllStarGameMostValuablePlayer,
@@ -114,7 +135,12 @@ public sealed class AwardType : DomainItemConstant
         BartStarrAward,
         BaseballAmericaCollegePlayerOfTheYear,
         BertBellAward,
+        BestCoachManagerESPYAward,
+        BigTenMostValuablePlayer,
+        BigTenOffensiveLinemanOfTheYear,
+        BigTenPlayerOfTheYear,
         BronkoNagurskiTrophy,
+        ChicagoTribuneSilverFootball,
         CoachOfTheYear,
         CollegeWorldSeriesMostOutstandingPlayer,
         ComebackPlayerOfTheYear,
@@ -130,12 +156,15 @@ public sealed class AwardType : DomainItemConstant
         FieldingBibleAward,
         FinalsMostValuablePlayer,
         FordFrickAward,
+        GeorgeHalasAward,
         GoldenSpikes,
         GoldenToeAward,
         GoldGlove,
         HeartAndHustleAward,
         HeismanTrophy,
         JackLambertTrophy,
+        JacobsBlockingTrophy,
+        LamarHuntAward,
         MajorLeagueBaseballRookieOfTheYear,
         ManagerOfTheYear,
         ManOfTheYear,
@@ -164,17 +193,24 @@ public sealed class AwardType : DomainItemConstant
         RelieverOfTheYear,
         RobertoClementeAward,
         RookieOfTheYear,
+        SammyBaughTrophy,
         SECPitcherOfTheYear,
         SilverSlugguer,
         SportsIllustratedSportspersonOfTheYear,
         SportingNewsCoachOfTheYear,
         SportingNewsPlayerOfTheYear,
         SuperBowlMostValuablePlayer,
+        SWCOffensivePlayerOfTheYear,
         TipONeillAward,
         TonyConigliaroAward,
+        UPIAFCOffensivePlayerOfTheYear,
         UPICoachOfTheYear,
         UPILinemanOfTheYear,
+        UPINFCDefensivePlayerOfTheYear,
+        UPINFCOffensivePlayerOfTheYear,
         UPIPlayerOfTheYear,
+        WACOffensivePlayerOfTheYear,
+        WalterCampAlumniOfTheYear,
         WalterCampAward,
         WalterPaytonNFLManOfTheYear,
         WillieMacAward,
@@ -236,21 +272,32 @@ public sealed class AwardType : DomainItemConstant
 
     public static readonly AwardType[] Football =
     {
+        AAFCMostValuablePlayer,
         ACCDefensivePlayerOfTheYear,
+        AFLChampionshipMostValuablePlayer,
+        AFLCoachOfTheYear,
         AFLMostValuablePlayer,
         AFLPlayerOfTheYear,
         BartStarrAward,
         BertBellAward,
+        BestCoachManagerESPYAward,
+        BigTenMostValuablePlayer,
+        BigTenOffensiveLinemanOfTheYear,
+        BigTenPlayerOfTheYear,
         BronkoNagurskiTrophy,
+        ChicagoTribuneSilverFootball,
         CoachOfTheYear,
         ComebackPlayerOfTheYear,
         CottonBowlMostValuablePlayer,
         DaveyOBrienAward,
         DefensivePlayerOfTheYear,
         DefensiveRookieOfTheYear,
+        GeorgeHalasAward,
         GoldenToeAward,
         HeismanTrophy,
         JackLambertTrophy,
+        JacobsBlockingTrophy,
+        LamarHuntAward,
         ManOfTheYear,
         MaxwellAward,
         MorrisTrophy,
@@ -261,12 +308,19 @@ public sealed class AwardType : DomainItemConstant
         Pac10OffensivePlayerOfTheYear,
         Pac10PlayerOfTheYear,
         RookieOfTheYear,
+        SammyBaughTrophy,
         SportingNewsCoachOfTheYear,
         SportingNewsPlayerOfTheYear,
         SuperBowlMostValuablePlayer,
+        SWCOffensivePlayerOfTheYear,
+        UPIAFCOffensivePlayerOfTheYear,
         UPICoachOfTheYear,
         UPILinemanOfTheYear,
+        UPINFCDefensivePlayerOfTheYear,
+        UPINFCOffensivePlayerOfTheYear,
         UPIPlayerOfTheYear,
+        WACOffensivePlayerOfTheYear,
+        WalterCampAlumniOfTheYear,
         WalterCampAward,
         WalterPaytonNFLManOfTheYear
     };

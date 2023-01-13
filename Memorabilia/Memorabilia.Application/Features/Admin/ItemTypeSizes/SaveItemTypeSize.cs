@@ -19,7 +19,7 @@ public record SaveItemTypeSize(SaveItemTypeSizeViewModel ViewModel) : ICommand
 
             if (request.ViewModel.IsNew)
             {
-                itemTypeSize = new ItemTypeSize(request.ViewModel.ItemTypeId, request.ViewModel.SizeId);
+                itemTypeSize = new ItemTypeSize(request.ViewModel.ItemType.Id, request.ViewModel.Size.Id);
 
                 await _itemTypeSizeRepository.Add(itemTypeSize);
 
@@ -35,7 +35,7 @@ public record SaveItemTypeSize(SaveItemTypeSizeViewModel ViewModel) : ICommand
                 return;
             }
 
-            itemTypeSize.Set(request.ViewModel.SizeId);
+            itemTypeSize.Set(request.ViewModel.Size.Id);
 
             await _itemTypeSizeRepository.Update(itemTypeSize);
         }

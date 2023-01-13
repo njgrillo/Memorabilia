@@ -20,6 +20,7 @@ public sealed class Occupation : DomainItemConstant
     public static readonly Occupation Owner = new(13, "Owner");
     public static readonly Occupation Politician = new(16, "Politician");
     public static readonly Occupation President = new(17, "President");  
+    public static readonly Occupation Umpire = new(21, "Umpire");  
 
     public static readonly Occupation[] All =
     {
@@ -40,7 +41,8 @@ public sealed class Occupation : DomainItemConstant
         Musician,
         Owner,
         Politician,
-        President
+        President,
+        Umpire
     };
 
     public static readonly Occupation[] SportOccupations =
@@ -53,7 +55,8 @@ public sealed class Occupation : DomainItemConstant
         GeneralManager,
         LeaguePresident,
         Manager,
-        Owner
+        Owner,
+        Umpire
     };
 
     private Occupation(int id, string name, string abbreviation = null) : base(id, name, abbreviation) { }

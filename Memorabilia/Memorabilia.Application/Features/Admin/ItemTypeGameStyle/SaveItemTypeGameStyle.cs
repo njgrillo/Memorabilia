@@ -17,7 +17,7 @@ public record SaveItemTypeGameStyle(SaveItemTypeGameStyleViewModel ViewModel) : 
 
             if (request.ViewModel.IsNew)
             {
-                itemTypeGameStyle = new Domain.Entities.ItemTypeGameStyleType(request.ViewModel.ItemTypeId, request.ViewModel.GameStyleTypeId);
+                itemTypeGameStyle = new Domain.Entities.ItemTypeGameStyleType(request.ViewModel.ItemType.Id, request.ViewModel.GameStyleTypeId);
 
                 await _itemTypeGameStyleRepository.Add(itemTypeGameStyle);
 

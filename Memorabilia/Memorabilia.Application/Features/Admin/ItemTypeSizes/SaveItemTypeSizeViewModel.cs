@@ -9,8 +9,8 @@ public class SaveItemTypeSizeViewModel : SaveViewModel
     public SaveItemTypeSizeViewModel(ItemTypeSizeViewModel viewModel)
     {
         Id = viewModel.Id;
-        ItemTypeId = viewModel.ItemTypeId;
-        SizeId = viewModel.SizeId;
+        ItemType = ItemType.Find(viewModel.ItemTypeId);
+        Size = Size.Find(viewModel.SizeId);
     }
 
     public override string ExitNavigationPath => AdminDomainItem.ItemTypeSizes.Page;
@@ -19,17 +19,9 @@ public class SaveItemTypeSizeViewModel : SaveViewModel
 
     public override string ItemTitle => AdminDomainItem.ItemTypeSizes.Item;
 
-    [Required]
-    [Range(1, int.MaxValue, ErrorMessage = "Item Type is required.")]
-    public int ItemTypeId { get; set; }
-
-    public ItemType[] ItemTypes => ItemType.All;
+    public ItemType ItemType { get; set; }
 
     public override string RoutePrefix => AdminDomainItem.ItemTypeSizes.Page;
 
-    [Required]
-    [Range(1, int.MaxValue, ErrorMessage = "Size is required.")]
-    public int SizeId { get; set; }
-
-    public Size[] Sizes => Size.All;
+    public Size Size { get; set; }
 }

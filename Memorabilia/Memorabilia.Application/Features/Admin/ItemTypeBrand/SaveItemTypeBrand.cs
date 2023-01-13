@@ -17,7 +17,7 @@ public record SaveItemTypeBrand(SaveItemTypeBrandViewModel ViewModel) : ICommand
 
             if (request.ViewModel.IsNew)
             {
-                itemTypeBrand = new Domain.Entities.ItemTypeBrand(request.ViewModel.ItemTypeId, request.ViewModel.BrandId);
+                itemTypeBrand = new Domain.Entities.ItemTypeBrand(request.ViewModel.ItemType.Id, request.ViewModel.Brand.Id);
 
                 await _itemTypeBrandRepository.Add(itemTypeBrand);
 
@@ -33,7 +33,7 @@ public record SaveItemTypeBrand(SaveItemTypeBrandViewModel ViewModel) : ICommand
                 return;
             }
 
-            itemTypeBrand.Set(request.ViewModel.BrandId);
+            itemTypeBrand.Set(request.ViewModel.Brand.Id);
 
             await _itemTypeBrandRepository.Update(itemTypeBrand);
         }

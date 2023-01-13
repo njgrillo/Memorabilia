@@ -19,7 +19,7 @@ public record SaveItemTypeSport(SaveItemTypeSportViewModel ViewModel) : ICommand
 
             if (request.ViewModel.IsNew)
             {
-                itemTypeSport = new ItemTypeSport(request.ViewModel.ItemTypeId, request.ViewModel.SportId);
+                itemTypeSport = new ItemTypeSport(request.ViewModel.ItemType.Id, request.ViewModel.SportId);
 
                 await _itemTypeSportRepository.Add(itemTypeSport);
 

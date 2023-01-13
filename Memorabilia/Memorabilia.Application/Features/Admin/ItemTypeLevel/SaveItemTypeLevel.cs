@@ -17,7 +17,7 @@ public record SaveItemTypeLevel(SaveItemTypeLevelViewModel ViewModel) : ICommand
 
             if (request.ViewModel.IsNew)
             {
-                itemTypeLevel = new Domain.Entities.ItemTypeLevel(request.ViewModel.ItemTypeId, request.ViewModel.LevelTypeId);
+                itemTypeLevel = new Domain.Entities.ItemTypeLevel(request.ViewModel.ItemType.Id, request.ViewModel.LevelTypeId);
 
                 await _itemTypeLevelRepository.Add(itemTypeLevel);
 

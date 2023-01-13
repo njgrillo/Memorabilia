@@ -9,7 +9,7 @@ public class SaveItemTypeSportViewModel : SaveViewModel
     public SaveItemTypeSportViewModel(ItemTypeSportViewModel viewModel)
     {
         Id = viewModel.Id;
-        ItemTypeId = viewModel.ItemTypeId;
+        ItemType = ItemType.Find(viewModel.ItemTypeId);
         SportId = viewModel.SportId;
     }
 
@@ -19,17 +19,11 @@ public class SaveItemTypeSportViewModel : SaveViewModel
 
     public override string ItemTitle => AdminDomainItem.ItemTypeSports.Item;
 
-    [Required]
-    [Range(1, int.MaxValue, ErrorMessage = "Item Type is required.")]
-    public int ItemTypeId { get; set; }
-
-    public ItemType[] ItemTypes => ItemType.All;
+    public ItemType ItemType { get; set; }
 
     public override string RoutePrefix => AdminDomainItem.ItemTypeSports.Page;
 
     [Required]
     [Range(1, int.MaxValue, ErrorMessage = "Sport is required.")]
     public int SportId { get; set; }
-
-    public Sport[] Sports => Sport.All;
 }

@@ -12,9 +12,12 @@ public sealed class TeamRoleType : DomainItemConstant
     public static readonly TeamRoleType DefensiveBacksCoach = new(20, "Defensive Backs Coach");
     public static readonly TeamRoleType DefensiveCoordinator = new(2, "Defensive Coordinator", "DC");
     public static readonly TeamRoleType DefensiveLineCoach = new(3, "Defensive Line Coach", "D-Line Coach");
+    public static readonly TeamRoleType DirectorOfPlanningAndResearch = new (38, "Director of Planning and Research");
+    public static readonly TeamRoleType DirectorOfPlayerAndCommunityRelations = new (36, "Director of Player and Community Relations");
     public static readonly TeamRoleType DirectorOfPlayerPersonnel = new(28, "Director of Player Personnel");
     public static readonly TeamRoleType DirectorOfStaffDevelopment = new (35, "Director of Staff Development");
     public static readonly TeamRoleType Executive = new(4, "Executive", "Exec");
+    public static readonly TeamRoleType ExecutiveOfFootballOperationsForPlayerDevelopment = new(37, "Executive of Football Operations for Player Development");
     public static readonly TeamRoleType GeneralManager = new(5, "General Manager", "GM");
     public static readonly TeamRoleType HeadCoach = new(6, "Head Coach");
     public static readonly TeamRoleType HeadOfPlayerPersonnel = new (27, "Head of Player Personnel");
@@ -48,9 +51,12 @@ public sealed class TeamRoleType : DomainItemConstant
         DefensiveBacksCoach,
         DefensiveCoordinator,
         DefensiveLineCoach,
+        DirectorOfPlanningAndResearch,
+        DirectorOfPlayerAndCommunityRelations,
         DirectorOfPlayerPersonnel,
         DirectorOfStaffDevelopment,
         Executive,
+        ExecutiveOfFootballOperationsForPlayerDevelopment,
         GeneralManager,
         HeadCoach,
         HeadOfPlayerPersonnel,
@@ -96,9 +102,12 @@ public sealed class TeamRoleType : DomainItemConstant
         DefensiveBacksCoach,
         DefensiveCoordinator,
         DefensiveLineCoach,
+        DirectorOfPlanningAndResearch,
+        DirectorOfPlayerAndCommunityRelations,
         DirectorOfPlayerPersonnel,
         DirectorOfStaffDevelopment,
         Executive,
+        ExecutiveOfFootballOperationsForPlayerDevelopment,
         HeadCoach,
         HeadOfPlayerPersonnel,
         LinebackerCoach,

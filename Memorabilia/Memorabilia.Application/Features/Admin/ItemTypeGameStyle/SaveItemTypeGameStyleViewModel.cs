@@ -9,7 +9,7 @@ public class SaveItemTypeGameStyleViewModel : SaveViewModel
     public SaveItemTypeGameStyleViewModel(ItemTypeGameStyleViewModel viewModel)
     {
         Id = viewModel.Id;
-        ItemTypeId = viewModel.ItemTypeId;
+        ItemType = ItemType.Find(viewModel.ItemTypeId);
         GameStyleTypeId = viewModel.GameStyleTypeId;
     }
 
@@ -19,17 +19,11 @@ public class SaveItemTypeGameStyleViewModel : SaveViewModel
     [Range(1, int.MaxValue, ErrorMessage = "Game Style Type is required.")]
     public int GameStyleTypeId { get; set; }
 
-    public GameStyleType[] GameStyleTypes => GameStyleType.All;
-
     public string ImageFileName => AdminDomainItem.ItemTypeGameStyles.ImageFileName;
 
     public override string ItemTitle => AdminDomainItem.ItemTypeGameStyles.Item;
 
-    [Required]
-    [Range(1, int.MaxValue, ErrorMessage = "Item Type is required.")]
-    public int ItemTypeId { get; set; }
-
-    public ItemType[] ItemTypes => ItemType.All;
+    public ItemType ItemType { get; set; }
 
     public override string RoutePrefix => AdminDomainItem.ItemTypeGameStyles.Page;
 }

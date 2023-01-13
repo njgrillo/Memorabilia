@@ -9,7 +9,7 @@ public class SaveTeamDivisionViewModel : SaveViewModel
     public SaveTeamDivisionViewModel(TeamDivisionViewModel teamDivision)
     {
         Id = teamDivision.Id;
-        DivisionId = teamDivision.DivisionId;
+        Division = Division.Find(teamDivision.DivisionId);
         TeamId = teamDivision.TeamId;
         BeginYear = teamDivision.BeginYear;
         EndYear = teamDivision.EndYear;
@@ -17,9 +17,9 @@ public class SaveTeamDivisionViewModel : SaveViewModel
 
     public int? BeginYear { get; set; }
 
-    public int DivisionId { get; set; }
+    public Division Division { get; set; }
 
-    public string DivisionName => Division.Find(DivisionId)?.Name;
+    public string DivisionName => Division?.Name;
 
     public int? EndYear { get; set; }
 

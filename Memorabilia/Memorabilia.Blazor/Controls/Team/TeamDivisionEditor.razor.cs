@@ -24,7 +24,7 @@ public partial class TeamDivisionEditor : ComponentBase
 
     private void Edit(SaveTeamDivisionViewModel division)
     {
-        _viewModel.DivisionId = division.DivisionId;
+        _viewModel.Division = division.Division;
         _viewModel.BeginYear = division.BeginYear;
         _viewModel.EndYear = division.EndYear;
 
@@ -35,9 +35,9 @@ public partial class TeamDivisionEditor : ComponentBase
 
     private void Update()
     {
-        var division = Divisions.Single(division => division.DivisionId == _viewModel.DivisionId);
+        var division = Divisions.Single(division => division.Division.Id == _viewModel.Division.Id);
 
-        division.DivisionId = _viewModel.DivisionId;
+        division.Division = _viewModel.Division;
         division.BeginYear = _viewModel.BeginYear;
         division.EndYear = _viewModel.EndYear;
 

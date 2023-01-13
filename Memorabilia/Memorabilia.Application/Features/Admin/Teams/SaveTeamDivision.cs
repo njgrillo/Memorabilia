@@ -20,7 +20,10 @@ public class SaveTeamDivision
 
             foreach (var teamDivision in command.Items.Where(item => item.IsNew))
             {
-                team.SetDivision(teamDivision.Id, teamDivision.DivisionId, teamDivision.BeginYear, teamDivision.EndYear);
+                team.SetDivision(teamDivision.Id, 
+                                 teamDivision.Division.Id, 
+                                 teamDivision.BeginYear, 
+                                 teamDivision.EndYear);
             }                
 
             await _teamRepository.Update(team);

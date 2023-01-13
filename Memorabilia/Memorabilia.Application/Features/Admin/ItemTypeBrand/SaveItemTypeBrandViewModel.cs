@@ -9,15 +9,11 @@ public class SaveItemTypeBrandViewModel : SaveViewModel
     public SaveItemTypeBrandViewModel(ItemTypeBrandViewModel viewModel)
     {
         Id = viewModel.Id;
-        ItemTypeId = viewModel.ItemTypeId;
-        BrandId = viewModel.BrandId;
+        ItemType = ItemType.Find(viewModel.ItemTypeId);
+        Brand = Brand.Find(viewModel.BrandId);
     }
 
-    [Required]
-    [Range(1, int.MaxValue, ErrorMessage = "Brand is required.")]
-    public int BrandId { get; set; }
-
-    public Brand[] Brands => Brand.All;
+    public Brand Brand { get; set; }
 
     public override string ExitNavigationPath => AdminDomainItem.ItemTypeBrands.Page;
 
@@ -25,11 +21,7 @@ public class SaveItemTypeBrandViewModel : SaveViewModel
 
     public override string ItemTitle => AdminDomainItem.ItemTypeBrands.Item;
 
-    [Required]
-    [Range(1, int.MaxValue, ErrorMessage = "Item Type is required.")]
-    public int ItemTypeId { get; set; }      
-    
-    public ItemType[] ItemTypes => ItemType.All;
+    public ItemType ItemType { get; set; }     
 
     public override string RoutePrefix => AdminDomainItem.ItemTypeBrands.Page;
 }

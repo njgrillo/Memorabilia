@@ -16,13 +16,14 @@
     <Content>
         <DivRowCol3>
             <Content>
-                <FranchiseDropDown SelectedValue="ViewModel.FranchiseId"
-                                   SelectionChanged="(p) => ViewModel.FranchiseId = p" />
+                <FranchiseAutoComplete SelectedValue="ViewModel.Franchise"
+                                       SelectionChanged="(p) => ViewModel.Franchise = p"
+                                       Sports="@(new [] { Sport.Football })" />
             </Content>
         </DivRowCol3>
         <DivRowCol3>
             <Content>
-                <TeamDropDown Franchise="@Franchise.Find(ViewModel.FranchiseId)" 
+                <TeamDropDown Franchise="@ViewModel.Franchise" 
                               SelectedValue="@ViewModel.TeamId"
                               SelectionChanged="(p) => ViewModel.TeamId = p"
                               SportLeagueLevel="@SportLeagueLevel.NationalFootballLeague"/> 

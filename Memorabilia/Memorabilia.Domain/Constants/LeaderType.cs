@@ -2,6 +2,8 @@
 
 public sealed class LeaderType : DomainItemConstant
 {
+    public static readonly LeaderType AFLCompletionPercentage = new(58, "AFL Completion Percentage");
+    public static readonly LeaderType AFLPasserRating = new(57, "AFL Passer Rating");
     public static readonly LeaderType AFLPassingTouchdowns = new(54, "AFL Passing Touchdowns");
     public static readonly LeaderType AFLPassingYards = new(53, "AFL Passing Yards");
     public static readonly LeaderType AFLReceivingTouchdowns = new(42, "AFL Receiving Touchdowns");
@@ -19,6 +21,7 @@ public sealed class LeaderType : DomainItemConstant
     public static readonly LeaderType AmericanLeagueTriplesLeader = new(26, "American League Triples Leader", "AL Triples Leader");
     public static readonly LeaderType AmericanLeagueWinsLeader = new(15, "American League Wins Leader", "AL Wins Leader");
     public static readonly LeaderType CompletionPercentage = new (36, "Completion Percentage");    
+    public static readonly LeaderType ForcedFumbles = new (60, "Forced Fumbles");    
     public static readonly LeaderType Interceptions = new (43, "Interceptions");    
     public static readonly LeaderType KickoffReturnYards = new (56, "Kickoff Return Yards");    
     public static readonly LeaderType MajorLeagueBaseballBattingChampion = new(32, "Major League Baseball Batting Champion", "MLB Batting Champ");
@@ -54,10 +57,13 @@ public sealed class LeaderType : DomainItemConstant
     public static readonly LeaderType Receptions = new (51, "Receptions");
     public static readonly LeaderType RushingTouchdowns = new (37, "Rushing Touchdowns");
     public static readonly LeaderType RushingYards = new (38, "Rushing Yards");
+    public static readonly LeaderType Sacks = new (59, "Sacks");
     public static readonly LeaderType Scoring = new (39, "Scoring");
 
     public static readonly LeaderType[] All =
     {
+        AFLCompletionPercentage,
+        AFLPasserRating,
         AFLPassingTouchdowns,
         AFLPassingYards,
         AFLReceivingTouchdowns,
@@ -75,6 +81,7 @@ public sealed class LeaderType : DomainItemConstant
         AmericanLeagueTriplesLeader,
         AmericanLeagueWinsLeader,
         CompletionPercentage,
+        ForcedFumbles,
         Interceptions,
         KickoffReturnYards,
         MajorLeagueBaseballBattingChampion,
@@ -110,6 +117,7 @@ public sealed class LeaderType : DomainItemConstant
         Receptions,
         RushingTouchdowns,
         RushingYards,
+        Sacks,
         Scoring
     };
 
@@ -153,12 +161,15 @@ public sealed class LeaderType : DomainItemConstant
 
     public static readonly LeaderType[] Football =
     {
+        AFLCompletionPercentage,
+        AFLPasserRating,
         AFLPassingTouchdowns,
         AFLPassingYards,
         AFLReceivingTouchdowns,
         AFLReceivingYards,
         AFLReceptions,
         CompletionPercentage,
+        ForcedFumbles,
         Interceptions,
         KickoffReturnYards,
         PasserRating,
@@ -171,6 +182,7 @@ public sealed class LeaderType : DomainItemConstant
         Receptions,
         RushingTouchdowns,
         RushingYards,
+        Sacks,
         Scoring
     };
 

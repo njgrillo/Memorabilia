@@ -1,9 +1,9 @@
 ﻿<DivRowCol3>
     <Content>
-        <DivisionDropDown Disabled="@(!_canEditDivision)" 
-                          SelectedValue="_viewModel.DivisionId"
-                          SelectionChanged="(p) => _viewModel.DivisionId = p"
-                          SportLeagueLevel="@SportLeagueLevel" />  
+        <DivisionAutoComplete Disabled="@(!_canEditDivision)"
+                              SelectedValue="_viewModel.Division"
+                              SelectionChanged="(p) => _viewModel.Division = p"
+                              SportLeagueLevel="@SportLeagueLevel" />
     </Content>
 </DivRowCol3>
 <DivRowCol3>

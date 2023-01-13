@@ -19,7 +19,7 @@ public record SavePewter(SavePewterViewModel ViewModel) : ICommand
 
             if (request.ViewModel.IsNew)
             {
-                pewter = new Pewter(request.ViewModel.FranchiseId,
+                pewter = new Pewter(request.ViewModel.Franchise.Id,
                                     request.ViewModel.TeamId,
                                     request.ViewModel.SizeId,
                                     !request.ViewModel.FileName.IsNullOrEmpty() ? Domain.Constants.ImageType.Primary.Id : null,
@@ -39,7 +39,7 @@ public record SavePewter(SavePewterViewModel ViewModel) : ICommand
                 return;
             }
 
-            pewter.Set(request.ViewModel.FranchiseId,
+            pewter.Set(request.ViewModel.Franchise.Id,
                        request.ViewModel.TeamId,
                        request.ViewModel.SizeId,
                        !request.ViewModel.FileName.IsNullOrEmpty() ? Domain.Constants.ImageType.Primary.Id : null,

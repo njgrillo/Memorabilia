@@ -2,6 +2,8 @@
 
 public sealed class Position : DomainItemConstant
 {
+    public static readonly Position Back = new(33, "Back");
+    public static readonly Position BlockingBack = new (34, "Blocking Back");
     public static readonly Position Catcher = new(2, "Catcher", "C");
     public static readonly Position Center = new(22, "Center", "C");
     public static readonly Position CenterField = new(7, "Center Field", "CF");
@@ -11,6 +13,7 @@ public sealed class Position : DomainItemConstant
     public static readonly Position DesignatedHitter = new(10, "Designated Hitter", "DH");
     public static readonly Position End = new(30, "End");
     public static readonly Position FirstBase = new(3, "First Base", "1B");
+    public static readonly Position Flanker = new(36, "Flanker");
     public static readonly Position Fullback = new(17, "Fullback", "FB");
     public static readonly Position Guard = new(18, "Guard", "G");
     public static readonly Position Halfback = new(16, "Halfback", "HB");
@@ -24,7 +27,8 @@ public sealed class Position : DomainItemConstant
     public static readonly Position Pitcher = new(1, "Pitcher", "P");
     public static readonly Position Punter = new(26, "Punter", "P");
     public static readonly Position Quarterback = new(12, "Quarterback", "QB");
-    public static readonly Position RightField = new(9, "Right Field", "RF");
+    public static readonly Position ReturnSpecialist = new(35, "Return Specialist");
+    public static readonly Position RightField = new(9, "Right Field", "RF");    
     public static readonly Position Runningback = new(13, "Running back", "RB");
     public static readonly Position Safety = new(20, "Safety", "S");
     public static readonly Position SecondBase = new(4, "Second Base", "2B");
@@ -37,6 +41,8 @@ public sealed class Position : DomainItemConstant
 
     public static readonly Position[] All =
     {
+        Back,
+        BlockingBack,
         Catcher,
         Center,
         CenterField,
@@ -46,6 +52,7 @@ public sealed class Position : DomainItemConstant
         DesignatedHitter,
         End,
         FirstBase,
+        Flanker,
         Fullback,
         Guard,
         Halfback,
@@ -59,6 +66,7 @@ public sealed class Position : DomainItemConstant
         Pitcher,
         Punter,
         Quarterback,
+        ReturnSpecialist,
         RightField, 
         Runningback,
         Safety,
@@ -90,11 +98,14 @@ public sealed class Position : DomainItemConstant
 
     public static readonly Position[] Football =
     {
+        Back,
+        BlockingBack,
         Center,
         Cornerback,
         DefensiveEnd,
         DefensiveTackle,
         End,
+        Flanker,
         Fullback,
         Guard,
         Halfback,
@@ -104,6 +115,7 @@ public sealed class Position : DomainItemConstant
         OffensiveTackle,
         Punter,
         Quarterback,
+        ReturnSpecialist,
         Runningback,
         Safety,
         SplitEnd,

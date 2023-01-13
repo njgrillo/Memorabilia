@@ -19,7 +19,7 @@ public record SaveItemTypeSpot(SaveItemTypeSpotViewModel ViewModel) : ICommand
 
             if (request.ViewModel.IsNew)
             {
-                itemTypeSpot = new ItemTypeSpot(request.ViewModel.ItemTypeId, request.ViewModel.SpotId);
+                itemTypeSpot = new ItemTypeSpot(request.ViewModel.ItemType.Id, request.ViewModel.Spot.Id);
 
                 await _itemTypeSpotRepository.Add(itemTypeSpot);
 
@@ -35,7 +35,7 @@ public record SaveItemTypeSpot(SaveItemTypeSpotViewModel ViewModel) : ICommand
                 return;
             }
 
-            itemTypeSpot.Set(request.ViewModel.SpotId);
+            itemTypeSpot.Set(request.ViewModel.Spot.Id);
 
             await _itemTypeSpotRepository.Update(itemTypeSpot);
         }

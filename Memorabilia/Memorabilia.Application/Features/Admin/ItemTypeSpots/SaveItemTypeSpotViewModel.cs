@@ -9,8 +9,8 @@ public class SaveItemTypeSpotViewModel : SaveViewModel
     public SaveItemTypeSpotViewModel(ItemTypeSpotViewModel viewModel)
     {
         Id = viewModel.Id;
-        ItemTypeId = viewModel.ItemTypeId;
-        SpotId = viewModel.SpotId;
+        ItemType = ItemType.Find(viewModel.ItemTypeId);
+        Spot = Spot.Find(viewModel.SpotId);
     }
 
     public override string ExitNavigationPath => AdminDomainItem.ItemTypeSpots.Page;
@@ -19,17 +19,9 @@ public class SaveItemTypeSpotViewModel : SaveViewModel
 
     public override string ItemTitle => AdminDomainItem.ItemTypeSpots.Item;
 
-    [Required]
-    [Range(1, int.MaxValue, ErrorMessage = "Item Type is required.")]
-    public int ItemTypeId { get; set; }
-
-    public ItemType[] ItemTypes => ItemType.All;
+    public ItemType ItemType { get; set; }
 
     public override string RoutePrefix => AdminDomainItem.ItemTypeSpots.Page;
 
-    [Required]
-    [Range(1, int.MaxValue, ErrorMessage = "Spot is required.")]
-    public int SpotId { get; set; }        
-
-    public Spot[] Spots => Spot.All;
+    public Spot Spot { get; set; }    
 }
