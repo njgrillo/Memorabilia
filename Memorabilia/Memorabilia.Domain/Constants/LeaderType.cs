@@ -2,6 +2,8 @@
 
 public sealed class LeaderType : DomainItemConstant
 {
+    public static readonly LeaderType AAFCReceivingYards = new(61, "AAFC Receiving Yards");
+    public static readonly LeaderType AAFCReceptions = new(62, "AAFC Receptions");
     public static readonly LeaderType AFLCompletionPercentage = new(58, "AFL Completion Percentage");
     public static readonly LeaderType AFLPasserRating = new(57, "AFL Passer Rating");
     public static readonly LeaderType AFLPassingTouchdowns = new(54, "AFL Passing Touchdowns");
@@ -59,9 +61,12 @@ public sealed class LeaderType : DomainItemConstant
     public static readonly LeaderType RushingYards = new (38, "Rushing Yards");
     public static readonly LeaderType Sacks = new (59, "Sacks");
     public static readonly LeaderType Scoring = new (39, "Scoring");
+    public static readonly LeaderType Tackles = new (63, "Tackles");
 
     public static readonly LeaderType[] All =
     {
+        AAFCReceivingYards, 
+        AAFCReceptions,
         AFLCompletionPercentage,
         AFLPasserRating,
         AFLPassingTouchdowns,
@@ -118,7 +123,8 @@ public sealed class LeaderType : DomainItemConstant
         RushingTouchdowns,
         RushingYards,
         Sacks,
-        Scoring
+        Scoring,
+        Tackles
     };
 
     public static readonly LeaderType[] Baseball =
@@ -161,6 +167,8 @@ public sealed class LeaderType : DomainItemConstant
 
     public static readonly LeaderType[] Football =
     {
+        AAFCReceivingYards,
+        AAFCReceptions,
         AFLCompletionPercentage,
         AFLPasserRating,
         AFLPassingTouchdowns,
@@ -183,7 +191,8 @@ public sealed class LeaderType : DomainItemConstant
         RushingTouchdowns,
         RushingYards,
         Sacks,
-        Scoring
+        Scoring,
+        Tackles
     };
 
     private LeaderType(int id, string name, string abbreviation = null) : base(id, name, abbreviation) { } 

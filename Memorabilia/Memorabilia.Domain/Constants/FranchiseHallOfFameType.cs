@@ -10,6 +10,7 @@ public sealed class FranchiseHallOfFameType : DomainItemConstant
     public static readonly FranchiseHallOfFameType BravesHallOfFame = new(1, "Braves Hall of Fame", Franchise.AtlantaBraves);
     public static readonly FranchiseHallOfFameType BuffaloBillsWallOfFame = new(48, "Buffalo Bills Wall of Fame", Franchise.BuffaloBills);
     public static readonly FranchiseHallOfFameType CardinalsHallOfFame = new(7, "Cardinals Hall of Fame", Franchise.SaintLouisCardinals);
+    public static readonly FranchiseHallOfFameType CarolinaPanthersHallOfHonor = new(55, "Carolina Panthers Hall of Honor", Franchise.CarolinaPanthers);
     public static readonly FranchiseHallOfFameType CincinnatiBengalsRingOfHonor = new(41, "Cincinnati Bengals Ring of Honor", Franchise.CincinnatiBengals);
     public static readonly FranchiseHallOfFameType ClevelandBrownsRingOfHonor = new(40, "Cleveland Browns Ring of Honor", Franchise.ClevelandBrowns);
     public static readonly FranchiseHallOfFameType CubsHallOfFame = new(8, "Cubs Hall of Fame", Franchise.ChicagoCubs);
@@ -63,6 +64,7 @@ public sealed class FranchiseHallOfFameType : DomainItemConstant
         BravesHallOfFame,
         BuffaloBillsWallOfFame,
         CardinalsHallOfFame,
+        CarolinaPanthersHallOfHonor,
         CincinnatiBengalsRingOfHonor,
         ClevelandBrownsRingOfHonor,
         CubsHallOfFame,
@@ -140,6 +142,7 @@ public sealed class FranchiseHallOfFameType : DomainItemConstant
         AtlantaFalconsRingOfHonor,
         BaltimoreRavensRingOfHonor,
         BuffaloBillsWallOfFame,
+        CarolinaPanthersHallOfHonor,
         CincinnatiBengalsRingOfHonor,
         ClevelandBrownsRingOfHonor,
         DallasCowboysRingOfHonor,
