@@ -15,21 +15,13 @@ public class ProjectPersonViewModel
 
     public int Id => _projectPerson.Id;
 
-    public Domain.Constants.ItemType ItemType => Domain.Constants.ItemType.Find(ItemTypeId ?? 0);
-
     public int? ItemTypeId => _projectPerson.ItemTypeId;
-
-    public string ItemTypeName => ItemType?.Name;
 
     public Person Person => _projectPerson.Person;
 
-    public int PersonId => _projectPerson.PersonId;
-
-    public string PersonName => _projectPerson.Person.DisplayName;
-
     public int? PriorityTypeId => _projectPerson.PriorityTypeId;
 
-    public string PriorityTypeName => Domain.Constants.PriorityType.Find(PriorityTypeId ?? 0)?.Name;
+    public int? ProjectStatusTypeId => _projectPerson.ProjectStatusTypeId;
 
     public int? Rank => _projectPerson.Rank;
 

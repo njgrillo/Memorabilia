@@ -59,7 +59,8 @@ public class SaveProject
                                   projectPerson.ItemTypeId,
                                   projectPerson.Upgrade,
                                   projectPerson.Rank,
-                                  projectPerson.PriorityTypeId);
+                                  projectPerson.PriorityTypeId,
+                                  projectPerson.ProjectStatusTypeId > 0 ? projectPerson.ProjectStatusTypeId : null);
             }
         }
 

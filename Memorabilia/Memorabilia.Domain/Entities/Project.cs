@@ -37,7 +37,13 @@ public class Project : Framework.Library.Domain.Entity.DomainEntity
         EndDate = endDate;
     }
 
-    public void SetPerson(int id, int personId, int? itemTypeId, bool upgrade, int? rank, int? priorityTypeId)
+    public void SetPerson(int id, 
+        int personId, 
+        int? itemTypeId, 
+        bool upgrade, 
+        int? rank, 
+        int? priorityTypeId,
+        int? projectStatusTypeId)
     {
         var person = id > 0 
             ? People.SingleOrDefault(person => person.Id == id)
@@ -45,10 +51,22 @@ public class Project : Framework.Library.Domain.Entity.DomainEntity
 
         if (person == null)
         {
-            People.Add(new ProjectPerson(Id, personId, itemTypeId, upgrade, rank, priorityTypeId));
+            People.Add(new ProjectPerson(Id, 
+                personId, 
+                itemTypeId, 
+                upgrade, 
+                rank, 
+                priorityTypeId,
+                projectStatusTypeId));
+
             return;
         }
 
-        person.Set(personId, itemTypeId, upgrade, rank, priorityTypeId);
+        person.Set(personId, 
+            itemTypeId, 
+            upgrade, 
+            rank, 
+            priorityTypeId,
+            projectStatusTypeId);
     }
 }

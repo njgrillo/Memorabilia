@@ -75,6 +75,7 @@ public class DomainContext : DbContext, IDomainContext
         modelBuilder.Entity<Position>();        
         modelBuilder.Entity<PriorityType>();
         modelBuilder.Entity<PrivacyType>();            
+        modelBuilder.Entity<ProjectStatusType>();            
         modelBuilder.Entity<ProjectType>();            
         modelBuilder.Entity<PurchaseType>();
         modelBuilder.Entity<RecordType>();

@@ -1,5 +1,4 @@
-﻿
-namespace Memorabilia.Blazor.Controls.DropDowns;
+﻿namespace Memorabilia.Blazor.Controls.DropDowns;
 
 public class ItemTypeDropDown : DropDown<ItemType, int>
 {

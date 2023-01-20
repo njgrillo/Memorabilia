@@ -9,7 +9,8 @@ public class ProjectPerson : Framework.Library.Domain.Entity.DomainEntity
                          int? itemTypeId, 
                          bool upgrade, 
                          int? rank, 
-                         int? priorityTypeId)
+                         int? priorityTypeId,
+                         int? projectStatusTypeId)
     {
         ProjectId = projectId;
         PersonId = personId;
@@ -17,6 +18,7 @@ public class ProjectPerson : Framework.Library.Domain.Entity.DomainEntity
         Upgrade = upgrade;
         Rank = rank;
         PriorityTypeId = priorityTypeId;
+        ProjectStatusTypeId = projectStatusTypeId;
     }
 
     public int? ItemTypeId { get; set; }
@@ -29,16 +31,24 @@ public class ProjectPerson : Framework.Library.Domain.Entity.DomainEntity
     
     public int ProjectId { get; set; }
 
+    public int? ProjectStatusTypeId { get; set; }
+
     public int? Rank { get; set; }
 
     public bool Upgrade { get; set; }
 
-    public void Set(int personId, int? itemTypeId, bool upgrade, int? rank, int? priorityTypeId)
+    public void Set(int personId, 
+        int? itemTypeId, 
+        bool upgrade, 
+        int? rank, 
+        int? priorityTypeId,
+        int? projectStatusTypeId)
     {
         PersonId = personId;
         ItemTypeId = itemTypeId;
         Upgrade = upgrade;
         Rank = rank;
         PriorityTypeId = priorityTypeId;
+        ProjectStatusTypeId = projectStatusTypeId;
     }
 }

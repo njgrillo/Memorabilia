@@ -162,6 +162,8 @@ public static class ImageFileName
 
     public static string PrivacyTypes => "privacytypes.jpg";
 
+    public static string ProjectStatusTypes => "projectstatustypes.jpg";
+
     public static string ProjectTypes => "projecttypes.jpg";
 
     public static string Puck => "puck.jpg";

@@ -11,6 +11,7 @@ public class SaveProjectPersonViewModel : SaveViewModel
         Rank = viewModel.Rank;
         Upgrade = viewModel.Upgrade;
         PriorityTypeId = viewModel.PriorityTypeId ?? 0;
+        ProjectStatusTypeId = viewModel.ProjectStatusTypeId ?? 0;
         Person =  new SavePersonViewModel(new PersonViewModel(viewModel.Person));
     }
 
@@ -35,7 +36,14 @@ public class SaveProjectPersonViewModel : SaveViewModel
 
     public int PriorityTypeId { get; set; }
 
-    public string PriorityTypeName => Domain.Constants.PriorityType.Find(PriorityTypeId)?.Name;
+    public string PriorityTypeName 
+        => Domain.Constants.PriorityType.Find(PriorityTypeId)?.Name;
+
+    public int ProjectStatusTypeId { get; set; } = Domain.Constants.ProjectStatusType.NotStarted.Id;
+
+    public string ProjectStatusTypeName 
+        => Domain.Constants.ProjectStatusType.Find(ProjectStatusTypeId)?.Name 
+        ?? Domain.Constants.ProjectStatusType.NotStarted.Name;
 
     public int? Rank { get; set; }
 

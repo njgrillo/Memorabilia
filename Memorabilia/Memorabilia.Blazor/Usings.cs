@@ -59,6 +59,7 @@ global using Memorabilia.Application.Features.Admin.PhotoTypes;
 global using Memorabilia.Application.Features.Admin.Positions;
 global using Memorabilia.Application.Features.Admin.PriorityTypes;
 global using Memorabilia.Application.Features.Admin.PrivacyTypes;
+global using Memorabilia.Application.Features.Admin.ProjectStatusTypes;
 global using Memorabilia.Application.Features.Admin.ProjectTypes;
 global using Memorabilia.Application.Features.Admin.PurchaseTypes;
 global using Memorabilia.Application.Features.Admin.RecordTypes;

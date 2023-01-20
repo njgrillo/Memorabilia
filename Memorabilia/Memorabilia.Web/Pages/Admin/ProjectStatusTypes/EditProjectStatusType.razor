@@ -1,0 +1,10 @@
+﻿@page "/ProjectStatusTypes/Edit/{id:int}"
+
+@inherits EditItem
+
+<PageLoader>
+    <Content>
+        <ProjectStatusTypeEditor DomainImageRootPath="@DomainImageRootPath"
+                                 Id=@Id />
+    </Content>
+</PageLoader>

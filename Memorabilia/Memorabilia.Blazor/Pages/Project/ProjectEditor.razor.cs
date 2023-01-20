@@ -1,6 +1,4 @@
-﻿#nullable disable
-
-namespace Memorabilia.Blazor.Pages.Project;
+﻿namespace Memorabilia.Blazor.Pages.Project;
 
 public partial class ProjectEditor : ImagePage
 {
@@ -14,7 +12,11 @@ public partial class ProjectEditor : ImagePage
     private bool _canEditPerson = true;
     private bool _canUpdateProjectPerson;
     private SaveProjectPersonViewModel _projectPersonViewModel = new();
-    private SaveProjectViewModel _viewModel = new();    
+    private string _search;
+    private SaveProjectViewModel _viewModel = new();
+
+    private bool FilterFunc1(SaveProjectPersonViewModel projectPersonViewModel)
+        => FilterFunc(projectPersonViewModel, _search);
 
     protected async Task HandleValidSubmit()
     {
@@ -53,12 +55,20 @@ public partial class ProjectEditor : ImagePage
         _projectPersonViewModel.Person = projectPerson.Person;
         _projectPersonViewModel.ItemTypeId = projectPerson.ItemTypeId;
         _projectPersonViewModel.PriorityTypeId = projectPerson.PriorityTypeId;
+        _projectPersonViewModel.ProjectStatusTypeId = projectPerson.ProjectStatusTypeId;
         _projectPersonViewModel.Rank = projectPerson.Rank;
         _projectPersonViewModel.Upgrade = projectPerson.Upgrade;
 
         _canAddProjectPerson = false;
         _canEditPerson = false;
         _canUpdateProjectPerson = true;
+    }
+
+    private static bool FilterFunc(SaveProjectPersonViewModel projectPersonViewModel, string search)
+    {
+        return search.IsNullOrEmpty() ||
+               projectPersonViewModel.Person.Name.Contains(search, StringComparison.OrdinalIgnoreCase) ||
+               (!projectPersonViewModel.Person.Nickname.IsNullOrEmpty() && projectPersonViewModel.Person.Nickname.Contains(search, StringComparison.OrdinalIgnoreCase));
     }
 
     private void MoveDown(int rank)
@@ -141,6 +151,7 @@ public partial class ProjectEditor : ImagePage
         var person = _viewModel.People.Single(person => person.Person.Id == _projectPersonViewModel.Person.Id);
 
         person.PriorityTypeId = _projectPersonViewModel.PriorityTypeId;
+        person.ProjectStatusTypeId = _projectPersonViewModel.ProjectStatusTypeId;
         person.Rank = _projectPersonViewModel.Rank;
         person.Upgrade = _projectPersonViewModel.Upgrade;
 
