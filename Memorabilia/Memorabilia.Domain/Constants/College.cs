@@ -142,6 +142,7 @@ public sealed class College : DomainItemConstant
     public static readonly College FresnoState = new(37, "Fresno State");
     public static readonly College FullertonCollege = new (465, "Fullerton College", "FC");
     public static readonly College GalvestonCollege = new (235, "Galveston College", "GC");
+    public static readonly College GardnerWebb = new (480, "Gardner-Webb", "GWU");
     public static readonly College GenevaCollege = new (385, "Geneva College");
     public static readonly College Georgetown = new (409, "Georgetown");
     public static readonly College GeorgeWashington = new (391, "George Washington", "GW");
@@ -277,6 +278,7 @@ public sealed class College : DomainItemConstant
     public static readonly College NewMexicoMilitaryInstitute = new (352, "New Mexico Military Institute", "NMMI");
     public static readonly College NewMexicoState = new (464, "New Mexico State", "NMSU");
     public static readonly College NewYork = new (403, "New York", "NYU");
+    public static readonly College NorfolkState = new (482, "Norfolk State", "NSU");
     public static readonly College NorthAlabama = new (294, "North Alabama", "UNA");
     public static readonly College NorthCarolina = new(73, "North Carolina", "UNC");
     public static readonly College NorthCarolinaATState = new(239, "North Carolina A&T State");
@@ -398,6 +400,7 @@ public sealed class College : DomainItemConstant
     public static readonly College TacomaCommunityCollege = new(339, "Tacoma Community College", "TCC");
     public static readonly College TallahasseeCommunityCollege = new(337, "Tallahassee Community College", "TCC");
     public static readonly College Tampa = new(101, "Tampa", "UT");
+    public static readonly College Temple = new(478, "Temple");
     public static readonly College Tennessee = new(75, "Tennessee", "UT");
     public static readonly College TennesseeChattanooga = new(360, "Tennessee at Chattanooga", "UTC");
     public static readonly College TennesseeState = new (372, "Tennessee State", "TSU");
@@ -430,10 +433,12 @@ public sealed class College : DomainItemConstant
     public static readonly College UtahState = new (401, "Utah State", "USU");
     public static readonly College Vanderbilt = new(55, "Vanderbilt");
     public static readonly College Villanova = new(338, "Villanova");
+    public static readonly College Vincennes = new(483, "Vincennes", "VU");
     public static readonly College Virginia = new(34, "Virginia", "UVA");
     public static readonly College VirginaCommonwealth = new (262, "Virgina Commonwealth", "VCU");   
     public static readonly College VirginiaState = new(16, "Virginia State", "VSU");
     public static readonly College VirginiaTech = new(321, "Virginia Tech", "VT");
+    public static readonly College VirginiaUnion = new (481, "Virginia Union");
     public static readonly College VolunteerStateCommunityCollege = new (351, "Volunteer State Community College", "Vol State");
     public static readonly College WagnerCollege = new (173, "Wagner College");
     public static readonly College WakeForest = new(24, "Wake Forest");
@@ -457,6 +462,7 @@ public sealed class College : DomainItemConstant
     public static readonly College WestminsterCollege = new (266, "Westminster College");
     public static readonly College WestValleyCollege = new(256, "West Valley College");
     public static readonly College WestVirginia = new(318, "West Virginia", "WVU");
+    public static readonly College WestVirginiaState = new(479, "West Virginia State", "WVSU");
     public static readonly College WestVirginiaWesleyanCollege = new (363, "West Virginia Wesleyan College");
     public static readonly College WheatonCollegeMassachusetts = new (301, "Wheaton College (Massachusetts)");
     public static readonly College WichitaState = new(20, "Wichita State", "WSU");
@@ -616,6 +622,7 @@ public sealed class College : DomainItemConstant
         FresnoState,
         FullertonCollege,
         GalvestonCollege,
+        GardnerWebb,
         GenevaCollege,
         Georgetown,
         GeorgeWashington,
@@ -751,6 +758,7 @@ public sealed class College : DomainItemConstant
         NewMexicoMilitaryInstitute,
         NewMexicoState,
         NewYork,
+        NorfolkState,
         NorthAlabama,
         NorthCarolina,
         NorthCarolinaATState,
@@ -872,6 +880,7 @@ public sealed class College : DomainItemConstant
         TacomaCommunityCollege,
         TallahasseeCommunityCollege,
         Tampa,
+        Temple,
         Tennessee,
         TennesseeChattanooga,
         TennesseeState,
@@ -904,10 +913,12 @@ public sealed class College : DomainItemConstant
         UtahState,
         Vanderbilt,
         Villanova,
+        Vincennes,
         Virginia,
         VirginaCommonwealth,        
         VirginiaState,
         VirginiaTech,
+        VirginiaUnion,
         VolunteerStateCommunityCollege,
         WagnerCollege,
         WakeForest,
@@ -931,6 +942,7 @@ public sealed class College : DomainItemConstant
         WestminsterCollege,
         WestValleyCollege,
         WestVirginia,
+        WestVirginiaState,
         WestVirginiaWesleyanCollege,
         WheatonCollegeMassachusetts,
         WichitaState,

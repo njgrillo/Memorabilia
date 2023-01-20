@@ -4,7 +4,10 @@ public sealed class LeaderType : DomainItemConstant
 {
     public static readonly LeaderType AAFCReceivingYards = new(61, "AAFC Receiving Yards");
     public static readonly LeaderType AAFCReceptions = new(62, "AAFC Receptions");
+    public static readonly LeaderType AAFCRushingTouchdowns = new(65, "AAFC Rushing Touchdowns");
+    public static readonly LeaderType AAFCRushingYards = new(64, "AAFC Rushing Yards");
     public static readonly LeaderType AFLCompletionPercentage = new(58, "AFL Completion Percentage");
+    public static readonly LeaderType AFLInterceptions = new(67, "AFL Interceptions");
     public static readonly LeaderType AFLPasserRating = new(57, "AFL Passer Rating");
     public static readonly LeaderType AFLPassingTouchdowns = new(54, "AFL Passing Touchdowns");
     public static readonly LeaderType AFLPassingYards = new(53, "AFL Passing Yards");
@@ -57,6 +60,7 @@ public sealed class LeaderType : DomainItemConstant
     public static readonly LeaderType ReceivingTouchdowns = new (52, "Receiving Touchdowns");
     public static readonly LeaderType ReceivingYards = new (50, "Receiving Yards");
     public static readonly LeaderType Receptions = new (51, "Receptions");
+    public static readonly LeaderType Rushes = new (66, "Rushes");
     public static readonly LeaderType RushingTouchdowns = new (37, "Rushing Touchdowns");
     public static readonly LeaderType RushingYards = new (38, "Rushing Yards");
     public static readonly LeaderType Sacks = new (59, "Sacks");
@@ -67,7 +71,10 @@ public sealed class LeaderType : DomainItemConstant
     {
         AAFCReceivingYards, 
         AAFCReceptions,
+        AAFCRushingTouchdowns, 
+        AAFCRushingYards,
         AFLCompletionPercentage,
+        AFLInterceptions,
         AFLPasserRating,
         AFLPassingTouchdowns,
         AFLPassingYards,
@@ -120,6 +127,7 @@ public sealed class LeaderType : DomainItemConstant
         ReceivingTouchdowns,
         ReceivingYards,
         Receptions,
+        Rushes,
         RushingTouchdowns,
         RushingYards,
         Sacks,
@@ -169,7 +177,10 @@ public sealed class LeaderType : DomainItemConstant
     {
         AAFCReceivingYards,
         AAFCReceptions,
+        AAFCRushingTouchdowns,
+        AAFCRushingYards,
         AFLCompletionPercentage,
+        AFLInterceptions,
         AFLPasserRating,
         AFLPassingTouchdowns,
         AFLPassingYards,
@@ -188,6 +199,7 @@ public sealed class LeaderType : DomainItemConstant
         ReceivingTouchdowns,
         ReceivingYards,
         Receptions,
+        Rushes,
         RushingTouchdowns,
         RushingYards,
         Sacks,

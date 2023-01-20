@@ -1,4 +1,6 @@
-﻿namespace Memorabilia.Domain.Constants;
+﻿using Memorabilia.Domain.Entities;
+
+namespace Memorabilia.Domain.Constants;
 
 public sealed class AccomplishmentType : DomainItemConstant
 {    
@@ -17,8 +19,10 @@ public sealed class AccomplishmentType : DomainItemConstant
     public static readonly AccomplishmentType AllSouthern = new (94, "All-Southern");
     public static readonly AccomplishmentType AllSWAC = new (75, "All-SWAC");
     public static readonly AccomplishmentType AllSWC = new (105, "All-SWC");
+    public static readonly AccomplishmentType AllUSFL = new (112, "All-USFL");
     public static readonly AccomplishmentType AllWorldBaseballClassicTeam = new(11, "All-World Baseball Classic Team");
     public static readonly AccomplishmentType AmericanLeagueTripleCrown = new(2, "American League Triple Crown", "AL Triple Crown");
+    public static readonly AccomplishmentType Bills50thAnniversaryTeam = new (116, "Bills 50th Anniversary Team");
     public static readonly AccomplishmentType BostonPatriotsAll1960sTeam = new(71, "Boston Patriots All-1960s Team");
     public static readonly AccomplishmentType CFB150GreatestCollegeFootballPlayerEver = new (69, "CFB150 Greatest College Football Player Ever");
     public static readonly AccomplishmentType CombinedNoHitter = new(8, "Combined No Hitter");
@@ -37,7 +41,9 @@ public sealed class AccomplishmentType : DomainItemConstant
     public static readonly AccomplishmentType FirstTeamAllBigEast = new (104, "First-team All-Big East");
     public static readonly AccomplishmentType FirstTeamAllBigEight = new (68, "First-team All-Big Eight");
     public static readonly AccomplishmentType FirstTeamAllBigTen = new (42, "First-team All-Big Ten");
+    public static readonly AccomplishmentType FirstTeamAllMAC = new (117, "First-team All-MAC");
     public static readonly AccomplishmentType FirstTeamAllPac10 = new (60, "First-team All-Pac-10");
+    public static readonly AccomplishmentType FirstTeamAllPacificCoast = new (114, "First-team All-Pacific Coast");
     public static readonly AccomplishmentType FirstTeamAllPro = new (25, "First-team All-Pro");
     public static readonly AccomplishmentType FirstTeamAllSEC = new (86, "First-team All-SEC");
     public static readonly AccomplishmentType FirstTeamAllSouthern = new (110, "First-team All-Southern");
@@ -94,8 +100,10 @@ public sealed class AccomplishmentType : DomainItemConstant
     public static readonly AccomplishmentType SeventyFifthAnniversaryAllTimeTeam = new(36, "75th Anniversary All-Time Team");
     public static readonly AccomplishmentType SeventyGreatestRedskins = new(84, "70 Greatest Redskins");
     public static readonly AccomplishmentType SportsIllustrated1940sAllDecadeTeam = new(89, "Sports Illustrated 1940s All-Decade Team");
-    public static readonly AccomplishmentType TechAllEraTeam = new (96, "Tech All-Era Team");
+    public static readonly AccomplishmentType TechAllEraTeam = new (96, "Tech All-Era Team");    
+    public static readonly AccomplishmentType ThirdTeamAllAmerican = new (118, "Third-team All-American");
     public static readonly AccomplishmentType ThirdTeamAllPro = new (93, "Third-team All-Pro");
+    public static readonly AccomplishmentType ThirdTeamLittleAllAmerican = new(115, "Third-team Little All-American");
     public static readonly AccomplishmentType ThirtyThirtyClub = new(3, "30-30 Club");
     public static readonly AccomplishmentType ToppsAllStarRookieTeam = new (67, "Topps All-Star Rookie Team");
     public static readonly AccomplishmentType TwoBasesLoadedTriplesInAGame = new(24, "2 Bases Loaded Triples in a Game");
@@ -124,8 +132,10 @@ public sealed class AccomplishmentType : DomainItemConstant
         AllSouthern,
         AllSWAC,
         AllSWC,
+        AllUSFL,
         AllWorldBaseballClassicTeam,
         AmericanLeagueTripleCrown,
+        Bills50thAnniversaryTeam,
         BostonPatriotsAll1960sTeam,
         CFB150GreatestCollegeFootballPlayerEver,
         CombinedNoHitter,
@@ -144,7 +154,9 @@ public sealed class AccomplishmentType : DomainItemConstant
         FirstTeamAllBigEast,
         FirstTeamAllBigEight,
         FirstTeamAllBigTen,
+        FirstTeamAllMAC,
         FirstTeamAllPac10,
+        FirstTeamAllPacificCoast,
         FirstTeamAllPro,
         FirstTeamAllSEC,
         FirstTeamAllSouthern,
@@ -202,7 +214,9 @@ public sealed class AccomplishmentType : DomainItemConstant
         SeventyGreatestRedskins,
         SportsIllustrated1940sAllDecadeTeam,
         TechAllEraTeam,
+        ThirdTeamAllAmerican,
         ThirdTeamAllPro,
+        ThirdTeamLittleAllAmerican,
         ThirtyThirtyClub,
         ToppsAllStarRookieTeam,
         TwoBasesLoadedTriplesInAGame,
@@ -266,6 +280,8 @@ public sealed class AccomplishmentType : DomainItemConstant
         AllSouthern,
         AllSWAC,
         AllSWC,
+        AllUSFL,
+        Bills50thAnniversaryTeam,
         BostonPatriotsAll1960sTeam,
         CFB150GreatestCollegeFootballPlayerEver,
         ConsensusAllAmerican,
@@ -283,7 +299,9 @@ public sealed class AccomplishmentType : DomainItemConstant
         FirstTeamAllBigEast,
         FirstTeamAllBigEight,
         FirstTeamAllBigTen,
+        FirstTeamAllMAC,
         FirstTeamAllPac10,
+        FirstTeamAllPacificCoast,
         FirstTeamAllPro,
         FirstTeamAllSEC,
         FirstTeamAllSouthern,
@@ -332,7 +350,9 @@ public sealed class AccomplishmentType : DomainItemConstant
         SeventyGreatestRedskins,
         SportsIllustrated1940sAllDecadeTeam,
         TechAllEraTeam,
+        ThirdTeamAllAmerican,
         ThirdTeamAllPro,
+        ThirdTeamLittleAllAmerican,
         TwoThousandsAllDecadeTeam,
         TwoThousandTensAllDecadeTeam,
         USFLAllLeagueTeam,
@@ -355,6 +375,7 @@ public sealed class AccomplishmentType : DomainItemConstant
         AllSouthern,
         AllSWAC,
         AllSWC,
+        AllUSFL,
         AllWorldBaseballClassicTeam,
         AmericanLeagueTripleCrown,
         ConsensusAllAmerican,
@@ -362,11 +383,13 @@ public sealed class AccomplishmentType : DomainItemConstant
         FirstTeamAllAAFC,
         FirstTeamAllACC,
         FirstTeamAllAFL,
+        FirstTeamAllAmerican,
         FirstTeamAllBigEast,
         FirstTeamAllBigEight,
-        FirstTeamAllBigTen,
-        FirstTeamAllAmerican,
+        FirstTeamAllBigTen,        
+        FirstTeamAllMAC,
         FirstTeamAllPac10,
+        FirstTeamAllPacificCoast,
         FirstTeamAllPro,
         FirstTeamAllSEC,
         FirstTeamAllSouthern,
@@ -387,7 +410,9 @@ public sealed class AccomplishmentType : DomainItemConstant
         SecondTeamAllPro,
         SecondTeamAllSEC,
         SecondTeamLittleAllAmerican,
+        ThirdTeamAllAmerican,
         ThirdTeamAllPro,
+        ThirdTeamLittleAllAmerican,
         ThirtyThirtyClub,
         ToppsAllStarRookieTeam,
         USFLAllLeagueTeam
