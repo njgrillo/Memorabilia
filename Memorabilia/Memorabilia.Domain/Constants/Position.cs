@@ -17,6 +17,7 @@ public sealed class Position : DomainItemConstant
     public static readonly Position Flanker = new(36, "Flanker");
     public static readonly Position FootballCenter = new(22, "Center", "C");
     public static readonly Position FootballGuard = new(18, "Guard", "G");
+    public static readonly Position Forward = new(43, "Forward");
     public static readonly Position Fullback = new(17, "Fullback", "FB");    
     public static readonly Position Halfback = new(16, "Halfback", "HB");
     public static readonly Position Infielder = new(32, "Infielder", "IF");
@@ -62,6 +63,7 @@ public sealed class Position : DomainItemConstant
         Flanker,
         FootballCenter,
         FootballGuard,
+        Forward,
         Fullback,
         Halfback,
         Infielder,
@@ -112,6 +114,7 @@ public sealed class Position : DomainItemConstant
     {
         BasketballCenter,
         BasketballGuard,
+        Forward,
         PointGuard,
         PowerForward,
         ShootingGuard,

@@ -45,6 +45,7 @@ public sealed class RecordType : DomainItemConstant
     public static readonly RecordType MostCareerReceptionsTightEnd = new (95, "Most Career Receptions by a Tight End");
     public static readonly RecordType MostCareerStartsWithOneTeam = new (107, "Most Career Starts with one Team");
     public static readonly RecordType MostConsecutive100YardReceivingGames = new (103, "Most Consecutive 100-yard Receiving Games");
+    public static readonly RecordType MostConsecutive1000YardReceivingSeasonsToBeginCareer = new (144, "Most Consecutive 1,000 Yard Receiving Seasons to Start Career");
     public static readonly RecordType MostConsecutiveGamesScoring = new (65, "Most Consecutive Games Scoring");
     public static readonly RecordType MostConsecutiveGamesWithTouchdown = new (109, "Most Consecutive Games with a Touchdown");
     public static readonly RecordType MostConsecutiveHitlessAppearances = new (50, "Most Consecutive Hitless Appearances");
@@ -72,10 +73,12 @@ public sealed class RecordType : DomainItemConstant
     public static readonly RecordType MostInterceptionsReturnedForTouchdownInASeasonByARookie = new (68, "Most Interceptions Returned for Touchdown in a Season by a Rookie");    
     public static readonly RecordType MostPassesInterceptedInASingleGame = new (86, "Most Passes Intercepted in a Single Game");
     public static readonly RecordType MostPointsScoredInAGame = new(112, "Most Points Scored in a Game");
+    public static readonly RecordType MostReboundsInAGame = new(146, "Most Rebounds in a Game");
     public static readonly RecordType MostReceivingYards = new(102, "Most Receiving Yards");
     public static readonly RecordType MostReceivingYardsInAGameByATightEnd = new(124, "Most Receiving Yards in a Game by a Tight End");
     public static readonly RecordType MostRunsBattedInAGame = new(62, "Most RBI in a Game");
     public static readonly RecordType MostRunsBattedInOneInning = new (41, "Most RBI in One Inning");
+    public static readonly RecordType MostRushingYardsInAGame = new (145, "Most Rushing Yards in a Game");
     public static readonly RecordType MostSeasonsLeadingLeagueInInterceptions = new(118, "Most Seasons Leading League in Interceptions");
     public static readonly RecordType MostSeasonsLeadingLeagueInPointsScored = new(100, "Most Seasons Leading League in Points Scored");
     public static readonly RecordType MostSeasonsLeadingLeagueInSacks = new(97, "Most Seasons Leading League in Sacks");
@@ -186,6 +189,7 @@ public sealed class RecordType : DomainItemConstant
         MostCareerReceptionsTightEnd,
         MostCareerStartsWithOneTeam,
         MostConsecutive100YardReceivingGames,
+        MostConsecutive1000YardReceivingSeasonsToBeginCareer,
         MostConsecutiveGamesScoring,
         MostConsecutiveGamesWithTouchdown,
         MostConsecutiveHitlessAppearances,
@@ -213,10 +217,12 @@ public sealed class RecordType : DomainItemConstant
         MostInterceptionsReturnedForTouchdownInASeasonByARookie,
         MostPassesInterceptedInASingleGame,
         MostPointsScoredInAGame,
+        MostReboundsInAGame,
         MostReceivingYards,
         MostReceivingYardsInAGameByATightEnd,
         MostRunsBattedInAGame,
         MostRunsBattedInOneInning,
+        MostRushingYardsInAGame,
         MostSeasonsLeadingLeagueInInterceptions,
         MostSeasonsLeadingLeagueInPointsScored,
         MostSeasonsLeadingLeagueInSacks,
@@ -351,6 +357,12 @@ public sealed class RecordType : DomainItemConstant
         WorldSeriesEarnedRunAverage
     };
 
+    public static readonly RecordType[] Basketball =
+    {
+        MostPointsScoredInAGame,
+        MostReboundsInAGame
+    };
+
     public static readonly RecordType[] Football =
     {
         AllPurposeTouchdownsInAGame,
@@ -372,6 +384,7 @@ public sealed class RecordType : DomainItemConstant
         MostCareerReceptionsTightEnd,
         MostCareerStartsWithOneTeam,
         MostConsecutive100YardReceivingGames,
+        MostConsecutive1000YardReceivingSeasonsToBeginCareer,
         MostConsecutiveGamesScoring,
         MostConsecutiveGamesWithTouchdown,
         MostConsecutiveSeasonsWithInterception,
@@ -392,6 +405,7 @@ public sealed class RecordType : DomainItemConstant
         MostPointsScoredInAGame,
         MostReceivingYards,
         MostReceivingYardsInAGameByATightEnd,
+        MostRushingYardsInAGame,
         MostSeasonsLeadingLeagueInInterceptions,
         MostSeasonsLeadingLeagueInPointsScored,
         MostSeasonsLeadingLeagueInSacks,
@@ -445,6 +459,9 @@ public sealed class RecordType : DomainItemConstant
 
         if (sports.Any(sport => sport == Sport.Baseball))
             recordTypes.AddRange(Baseball);
+
+        if (sports.Any(sport => sport == Sport.Basketball))
+            recordTypes.AddRange(Basketball);
 
         if (sports.Any(sport => sport == Sport.Football))
             recordTypes.AddRange(Football);

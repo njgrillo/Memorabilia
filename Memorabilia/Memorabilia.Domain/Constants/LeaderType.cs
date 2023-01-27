@@ -6,6 +6,8 @@ public sealed class LeaderType : DomainItemConstant
     public static readonly LeaderType AAFCReceptions = new(62, "AAFC Receptions");
     public static readonly LeaderType AAFCRushingTouchdowns = new(65, "AAFC Rushing Touchdowns");
     public static readonly LeaderType AAFCRushingYards = new(64, "AAFC Rushing Yards");
+    public static readonly LeaderType ABAScoringChampion = new (77, "ABA Scoring Champion");
+    public static readonly LeaderType ABLScoring = new (73, "ABL Scoring");
     public static readonly LeaderType AFLCompletionPercentage = new(58, "AFL Completion Percentage");
     public static readonly LeaderType AFLInterceptions = new(67, "AFL Interceptions");
     public static readonly LeaderType AFLPasserRating = new(57, "AFL Passer Rating");
@@ -25,6 +27,7 @@ public sealed class LeaderType : DomainItemConstant
     public static readonly LeaderType AmericanLeagueStrikeoutLeader = new(13, "American League Strikeout Leader", "AL Strikeout Leader");
     public static readonly LeaderType AmericanLeagueTriplesLeader = new(26, "American League Triples Leader", "AL Triples Leader");
     public static readonly LeaderType AmericanLeagueWinsLeader = new(15, "American League Wins Leader", "AL Wins Leader");
+    public static readonly LeaderType BAAScoringChampion = new (75, "BAA Scoring Champion");    
     public static readonly LeaderType CompletionPercentage = new (36, "Completion Percentage");    
     public static readonly LeaderType ForcedFumbles = new (60, "Forced Fumbles");    
     public static readonly LeaderType Interceptions = new (43, "Interceptions");    
@@ -52,6 +55,14 @@ public sealed class LeaderType : DomainItemConstant
     public static readonly LeaderType NationalLeagueStrikeoutLeader = new(14, "National League Strikeout Leader", "NL Strikeout Leader");
     public static readonly LeaderType NationalLeagueTriplesLeader = new(27, "National League Triples Leader", "NL Triples Leader");
     public static readonly LeaderType NationalLeagueWinsLeader = new(16, "National League Wins Leader", "NL Wins Leader");
+    public static readonly LeaderType NBAAssists = new(74, "NBA Assists");
+    public static readonly LeaderType NBABlocks = new(78, "NBA Blocks");
+    public static readonly LeaderType NBAReboundingLeader = new(71, "NBA Rebounding Leader");
+    public static readonly LeaderType NBAScoringChampion = new(70, "NBA Scoring Champion");
+    public static readonly LeaderType NBASteals = new(76, "NBA Steals");
+    public static readonly LeaderType NBLScoring = new(72, "NBL Scoring");
+    public static readonly LeaderType NBLScoringChampion = new(69, "NBL Scoring Champion");
+    public static readonly LeaderType NCAADivisionIScoringLeader = new (68, "NCAA Division I Scoring Leader");
     public static readonly LeaderType PasserRating = new (46, "Passer Rating");
     public static readonly LeaderType PassingTouchdowns = new (45, "Passing Touchdowns");
     public static readonly LeaderType PassingYards = new (44, "Passing Yards");
@@ -65,7 +76,7 @@ public sealed class LeaderType : DomainItemConstant
     public static readonly LeaderType RushingYards = new (38, "Rushing Yards");
     public static readonly LeaderType Sacks = new (59, "Sacks");
     public static readonly LeaderType Scoring = new (39, "Scoring");
-    public static readonly LeaderType Tackles = new (63, "Tackles");
+    public static readonly LeaderType Tackles = new (63, "Tackles");    
 
     public static readonly LeaderType[] All =
     {
@@ -73,6 +84,8 @@ public sealed class LeaderType : DomainItemConstant
         AAFCReceptions,
         AAFCRushingTouchdowns, 
         AAFCRushingYards,
+        ABAScoringChampion,
+        ABLScoring,
         AFLCompletionPercentage,
         AFLInterceptions,
         AFLPasserRating,
@@ -92,6 +105,7 @@ public sealed class LeaderType : DomainItemConstant
         AmericanLeagueStrikeoutLeader,
         AmericanLeagueTriplesLeader,
         AmericanLeagueWinsLeader,
+        BAAScoringChampion,
         CompletionPercentage,
         ForcedFumbles,
         Interceptions,
@@ -119,6 +133,14 @@ public sealed class LeaderType : DomainItemConstant
         NationalLeagueStrikeoutLeader,
         NationalLeagueTriplesLeader,
         NationalLeagueWinsLeader,
+        NBAAssists,
+        NBABlocks,
+        NBAReboundingLeader,
+        NBAScoringChampion,
+        NBASteals,
+        NBLScoring,
+        NBLScoringChampion,
+        NCAADivisionIScoringLeader,
         PasserRating,
         PassingTouchdowns,
         PassingYards,
@@ -173,6 +195,21 @@ public sealed class LeaderType : DomainItemConstant
         NationalLeagueWinsLeader
     };
 
+    public static readonly LeaderType[] Basketball =
+    {
+        ABAScoringChampion,
+        ABLScoring,
+        BAAScoringChampion,
+        NBAAssists,
+        NBABlocks,
+        NBAReboundingLeader,
+        NBAScoringChampion,
+        NBASteals,
+        NBLScoring,
+        NBLScoringChampion,
+        NCAADivisionIScoringLeader
+    };
+
     public static readonly LeaderType[] Football =
     {
         AAFCReceivingYards,
@@ -224,18 +261,13 @@ public sealed class LeaderType : DomainItemConstant
         if (sports.Any(sport => sport == Sport.Baseball))
             leaderTypes.AddRange(Baseball);
 
+        if (sports.Any(sport => sport == Sport.Basketball))
+            leaderTypes.AddRange(Basketball);
+
         if (sports.Any(sport => sport == Sport.Football))
             leaderTypes.AddRange(Football);
 
         return leaderTypes.OrderBy(leaderType => leaderType.Name).ToArray();
-    }
-
-    public static LeaderType[] GetAll(SportLeagueLevel sportLeagueLevel)
-    {
-        if (sportLeagueLevel == SportLeagueLevel.MajorLeagueBaseball)
-            return Baseball;
-
-        return All;
     }
 
     public override string ToString()
