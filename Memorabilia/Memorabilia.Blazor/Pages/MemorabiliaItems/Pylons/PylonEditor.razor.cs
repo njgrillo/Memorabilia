@@ -4,7 +4,7 @@ public partial class PylonEditor : MemorabiliaItem<SavePylonViewModel>
 {
     protected async Task OnLoad()
     {
-        var viewModel = await QueryRouter.Send(new GetPylon.Query(MemorabiliaId));
+        var viewModel = await QueryRouter.Send(new GetPylon(MemorabiliaId));
 
         if (viewModel.Size == null)
             return;

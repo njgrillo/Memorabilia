@@ -7,6 +7,7 @@ public class SaveTicketViewModel : MemorabiliaItemEditViewModel
     public SaveTicketViewModel() 
     {
         GameStyleTypeId = GameStyleType.None.Id;
+        SizeId = Size.Standard.Id;
     }
 
     public SaveTicketViewModel(TicketViewModel viewModel)

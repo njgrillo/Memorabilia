@@ -6,7 +6,8 @@
                      OnSave="OnSave" 
                      TItem="SavePosterViewModel">
     <Content>
-        <MemorabiliaItemEditor DisplayItemTypeGameStyle="false"
+        <MemorabiliaItemEditor DisplayItemTypeBrand="false" 
+                               DisplayItemTypeGameStyle="false"
                                DisplayItemTypeLevel="false"
                                DisplayMultiPersonSelector="true"
                                DisplayMultiSportSelector="true"
@@ -22,17 +23,19 @@
                 </DivRowCol3>
                 <DivRowCol3>
                     <Content>
-                        <BooleanCheckBox Checked="@ViewModel.Framed"
-                                         CheckedChanged="(p) => ViewModel.Framed = p"
-                                         Label="Framed" />
+                        <MudSwitch Checked="@ViewModel.Framed"
+                                   CheckedChanged="(p) => ViewModel.Framed = p"
+                                   Color="MudBlazor.Color.Success"
+                                   Label="Is Framed?"
+                                   T="bool" />
                     </Content>
-                </DivRowCol3>
-                <DivRowCol3>
-                    <Content>
-                        <BooleanCheckBox Checked="@ViewModel.Matted"
-                                         CheckedChanged="(p) => ViewModel.Matted = p"
-                                         Label="Matted" />
-                    </Content>
+                    <ContentColumn2>
+                        <MudSwitch Checked="@ViewModel.Matted"
+                                   CheckedChanged="(p) => ViewModel.Matted = p"
+                                   Color="MudBlazor.Color.Success"
+                                   Label="Is Matted?"
+                                   T="bool" />
+                    </ContentColumn2>
                 </DivRowCol3>
             </AdditionalContent>
         </MemorabiliaItemEditor>

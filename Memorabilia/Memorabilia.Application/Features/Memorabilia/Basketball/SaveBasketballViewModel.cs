@@ -9,7 +9,7 @@ public class SaveBasketballViewModel : MemorabiliaItemEditViewModel
         BrandId = Brand.Spalding.Id;
         GameStyleTypeId = GameStyleType.None.Id;
         LevelTypeId = LevelType.Professional.Id;
-        SizeId = Size.Standard.Id;
+        SizeId = Size.Full.Id;
     }
 
     public SaveBasketballViewModel(BasketballViewModel viewModel)

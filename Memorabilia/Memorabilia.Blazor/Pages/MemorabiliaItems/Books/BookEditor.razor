@@ -36,9 +36,11 @@
                                    SelectedTextChanged="@((p) => ViewModel.Publisher = p)" />
                     </ContentColumn3>
                     <ContentColumn4>
-                        <BooleanCheckBox Checked="@ViewModel.HardCover"
-                                         CheckedChanged="(p) => ViewModel.HardCover = p"
-                                         Label="Hard Cover" />
+                        <MudSwitch Checked="@ViewModel.HardCover"
+                                   CheckedChanged="(p) => ViewModel.HardCover = p"
+                                   Color="MudBlazor.Color.Success"
+                                   Label="Is Hard Cover?"
+                                   T="bool" />
                     </ContentColumn4>
                 </DivRowCol3>
             </AdditionalContent>

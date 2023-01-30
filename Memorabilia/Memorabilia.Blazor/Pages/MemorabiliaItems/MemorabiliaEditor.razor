@@ -77,18 +77,20 @@
         </DivRowCol6>
         <DivRowCol3>
             <Content>
-                <CheckBox Checked="@_viewModel.AcquiredWithAutograph"
-                          CheckedChanged="(p) => _viewModel.AcquiredWithAutograph = p"
-                          Label="Acquired with Autograph(s)"
-                          TType="bool" />
+                <MudSwitch Checked="@_viewModel.AcquiredWithAutograph"
+                           CheckedChanged="(p) => _viewModel.AcquiredWithAutograph = p"
+                           Color="MudBlazor.Color.Success"
+                           Label="Acquired with Autograph(s)?"
+                           T="bool" />
             </Content>
         </DivRowCol3>
         <DivRowCol3>
             <Content>
-                <CheckBox Checked="@_viewModel.IsNumbered"
-                          CheckedChanged="(p) => _viewModel.IsNumbered = p"
-                          Label="Numbered"
-                          TType="bool" />                
+                <MudSwitch Checked="@_viewModel.IsNumbered"
+                           CheckedChanged="(p) => _viewModel.IsNumbered = p"
+                           Color="MudBlazor.Color.Success"
+                           Label="Is Numbered?"
+                           T="bool" />              
             </Content>
         </DivRowCol3> 
         <DivRowCol3 Hidden="@(!_viewModel.IsNumbered)">

@@ -8,6 +8,7 @@ public sealed class Brand : DomainItemConstant
     public static readonly Brand CCM = new(26, "CCM");
     public static readonly Brand Champion = new(1032, "Champion");
     public static readonly Brand Easton = new(1026, "Easton");
+    public static readonly Brand Everlast = new(1036, "Everlast");
     public static readonly Brand Fender = new(22, "Fender");
     public static readonly Brand Fotoball = new(27, "Fotoball");
     public static readonly Brand Funko = new(19, "Funko Inc.");
@@ -51,6 +52,7 @@ public sealed class Brand : DomainItemConstant
         CCM,
         Champion,
         Easton,
+        Everlast,
         Fender,
         Fotoball,
         Funko,

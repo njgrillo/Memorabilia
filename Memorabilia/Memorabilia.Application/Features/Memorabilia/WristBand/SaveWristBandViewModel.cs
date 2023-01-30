@@ -6,7 +6,7 @@ public class SaveWristBandViewModel : MemorabiliaItemEditViewModel
 {
     public SaveWristBandViewModel() 
     {
-        BrandId = Brand.Rawlings.Id;
+        BrandId = Brand.Adidas.Id;
         GameStyleTypeId = GameStyleType.None.Id;
         LevelTypeId = LevelType.Professional.Id;
     }

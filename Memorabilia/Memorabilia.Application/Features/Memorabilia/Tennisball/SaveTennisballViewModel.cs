@@ -6,7 +6,7 @@ public class SaveTennisballViewModel : MemorabiliaItemEditViewModel
 {
     public SaveTennisballViewModel() 
     { 
-        BrandId = Brand.Nike.Id;
+        BrandId = Brand.Wilson.Id;
         GameStyleTypeId = GameStyleType.None.Id;
         LevelTypeId = LevelType.Professional.Id;
         SizeId = Size.Standard.Id;

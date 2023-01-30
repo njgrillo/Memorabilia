@@ -35,9 +35,11 @@
                 </DivRowCol3>
                 <DivRowCol3>
                     <Content>
-                        <BooleanCheckBox Checked="@ViewModel.Throwback"
-                                         CheckedChanged="(p) => ViewModel.Throwback = p"
-                                         Label="Is a Throwback?" />
+                        <MudSwitch Checked="@ViewModel.Throwback"
+                                   CheckedChanged="(p) => ViewModel.Throwback = p"
+                                   Color="MudBlazor.Color.Success"
+                                   Label="Is a Throwback?"
+                                   T="bool" />
                     </Content>
                 </DivRowCol3>
             </AdditionalContent>

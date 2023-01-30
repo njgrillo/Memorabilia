@@ -30,14 +30,18 @@
                 </DivRowCol3>
                 <DivRowCol3>
                     <Content>
-                        <BooleanCheckBox Checked="@ViewModel.Framed"
-                                         CheckedChanged="(p) => ViewModel.Framed = p"
-                                         Label="Framed" />
+                        <MudSwitch Checked="@ViewModel.Framed"
+                                   CheckedChanged="(p) => ViewModel.Framed = p"
+                                   Color="MudBlazor.Color.Success"
+                                   Label="Is Framed?"
+                                   T="bool" />
                     </Content>
                     <ContentColumn2>
-                        <BooleanCheckBox Checked="@ViewModel.Matted"
-                                         CheckedChanged="(p) => ViewModel.Matted = p"
-                                         Label="Matted" />
+                        <MudSwitch Checked="@ViewModel.Matted"
+                                   CheckedChanged="(p) => ViewModel.Matted = p"
+                                   Color="MudBlazor.Color.Success"
+                                   Label="Is Matted?"
+                                   T="bool" />
                     </ContentColumn2>
                 </DivRowCol3>
             </AdditionalContent>

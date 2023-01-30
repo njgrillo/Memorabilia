@@ -174,7 +174,10 @@ public partial class Memorabilia
     private void SetPeople(params int[] personIds)
     {
         if (personIds == null || !personIds.Any())
+        {
             People = new List<MemorabiliaPerson>();
+            return;
+        }            
 
         People.RemoveAll(team => !personIds.Contains(team.PersonId));
         People.AddRange(personIds.Where(personId => !People.Select(person => person.PersonId).Contains(personId)).Select(personId => new MemorabiliaPerson(Id, personId)));

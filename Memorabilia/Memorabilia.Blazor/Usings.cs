@@ -131,6 +131,7 @@ global using Memorabilia.Application.Features.Services.Gallery.Memorabilia;
 global using Memorabilia.Application.Features.Services.Tools.Profile;
 global using Memorabilia.Application.Features.Tools.Profile;
 global using Memorabilia.Application.Features.Tools.Profile.Baseball;
+global using Memorabilia.Application.Features.Tools.Profile.Basketball;
 global using Memorabilia.Application.Features.Tools.Profile.Football;
 global using Memorabilia.Application.Features.Tools.Shared;
 global using Memorabilia.Application.Features.Tools.Shared.Accomplishments;

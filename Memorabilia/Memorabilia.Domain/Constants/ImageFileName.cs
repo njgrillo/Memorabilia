@@ -144,7 +144,7 @@ public static class ImageFileName
 
     public static string Painting => "painting.jpg";
 
-    public static string Pant => "pant.jpg";
+    public static string Pants => "pants.jpg";
 
     public static string Pewters => "pewters.jpg";
 

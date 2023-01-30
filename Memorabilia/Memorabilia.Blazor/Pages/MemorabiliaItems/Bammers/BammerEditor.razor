@@ -6,7 +6,9 @@
                      OnSave="OnSave" 
                      TItem="SaveBammerViewModel">
     <Content>
-        <MemorabiliaItemEditor DisplayItemTypeGameStyle="false" 
+        <MemorabiliaItemEditor CanFilterPersonBySport="true" 
+                               DisplayItemTypeGameStyle="false" 
+                               DisplayItemTypeLevel="false"
                                DisplayItemTypeSize="false"
                                DisplayMultiPersonSelector="true"
                                DisplayMultiTeamSelector="true"
@@ -14,22 +16,30 @@
                                TItem="SaveBammerViewModel"
                                ViewModel="ViewModel">
             <AdditionalContent>
+                <PrettyBlazor.Condition Evaluation="ViewModel.CanHaveBammerType">
+                    <Match>
+                        <DivRowCol3>
+                            <Content>
+                                <BammerTypeDropDown SelectedValue="ViewModel.BammerTypeId"
+                                                    SelectionChanged="(p) => ViewModel.BammerTypeId = p" />
+                            </Content>
+                        </DivRowCol3>
+                    </Match>
+                </PrettyBlazor.Condition>                
                 <DivRowCol3>
                     <Content>
-                        <BammerTypeDropDown SelectedValue="ViewModel.BammerTypeId"
-                                            SelectionChanged="(p) => ViewModel.BammerTypeId = p" />               
-                    </Content>
-                    <ContentColumn2>
                         <NullableIntField Label="Year"
                                           Maximum="int.MaxValue"
                                           Value="ViewModel.Year"
-                                          ValueChanged="@((p) => ViewModel.Year = p)" />                
+                                          ValueChanged="@((p) => ViewModel.Year = p)" />
+                    </Content>
+                    <ContentColumn2>
+                        <MudSwitch Checked="@ViewModel.InPackage"
+                                   CheckedChanged="(p) => ViewModel.InPackage = p"
+                                   Color="MudBlazor.Color.Success"
+                                   Label="Is In Package?"
+                                   T="bool" />
                     </ContentColumn2>
-                    <ContentColumn3>
-                        <BooleanCheckBox Checked="@ViewModel.InPackage"
-                                         CheckedChanged="(p) => ViewModel.InPackage = p"
-                                         Label="In Package" />
-                    </ContentColumn3>
                 </DivRowCol3>
             </AdditionalContent>
         </MemorabiliaItemEditor>  

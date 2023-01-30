@@ -6,7 +6,8 @@
                      OnSave="OnSave" 
                      TItem="SaveBobbleheadViewModel">
     <Content>
-        <MemorabiliaItemEditor DisplayItemTypeGameStyle="false"
+        <MemorabiliaItemEditor DisplayItemTypeBrand="false" 
+                               DisplayItemTypeGameStyle="false"
                                DisplaySinglePersonSelector="true"
                                DisplaySingleSportSelector="true"
                                DisplaySingleTeamSelector="true"
@@ -21,9 +22,11 @@
                                           ValueChanged="@((p) => ViewModel.Year = p)" />
                     </Content>
                     <ContentColumn2>
-                        <BooleanCheckBox Checked="@ViewModel.HasBox"
-                                         CheckedChanged="(p) => ViewModel.HasBox = p"
-                                         Label="Has Box" />
+                        <MudSwitch Checked="@ViewModel.HasBox"
+                                   CheckedChanged="(p) => ViewModel.HasBox = p"
+                                   Color="MudBlazor.Color.Success"
+                                   Label="Has Box?"
+                                   T="bool" />
                     </ContentColumn2>
                 </DivRowCol3>
             </AdditionalContent>

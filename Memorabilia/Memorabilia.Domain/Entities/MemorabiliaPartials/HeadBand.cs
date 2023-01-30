@@ -7,14 +7,12 @@ public partial class Memorabilia
                             int? gameStyleTypeId,
                             int levelTypeId,
                             int? personId,
-                            int sizeId,
                             int? sportId,
                             int? teamId)
     {
         SetBrand(brandId);
         SetLevelType(levelTypeId);
         SetGame(gameStyleTypeId, personId, gameDate);
-        SetSize(sizeId);
 
         if (!personId.HasValue)
             People = new List<MemorabiliaPerson>();

@@ -20,7 +20,6 @@ public class SaveHeadBand
                                     command.GameStyleTypeId,
                                     command.LevelTypeId,
                                     command.PersonId,
-                                    command.SizeId,
                                     command.SportId,
                                     command.TeamId);
 
@@ -48,8 +47,6 @@ public class SaveHeadBand
         public int MemorabiliaId => _viewModel.MemorabiliaId;
 
         public int? PersonId => _viewModel.Person?.Id > 0 ? _viewModel.Person?.Id : null;
-
-        public int SizeId => _viewModel.SizeId;
 
         public int? SportId => _viewModel.SportId > 0 ? _viewModel.SportId : null;
 

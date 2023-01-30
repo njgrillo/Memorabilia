@@ -29,7 +29,7 @@ public class SavePantViewModel : MemorabiliaItemEditViewModel
             Team = new SaveTeamViewModel(new TeamViewModel(viewModel.Teams.First().Team));
     }
 
-    public override string ImageFileName => Domain.Constants.ImageFileName.Pant;
+    public override string ImageFileName => Domain.Constants.ImageFileName.Pants;
 
     public override ItemType ItemType => ItemType.Pants;
 }

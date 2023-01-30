@@ -6,10 +6,10 @@ public class SaveTrunkViewModel : MemorabiliaItemEditViewModel
 {
     public SaveTrunkViewModel() 
     {
-        BrandId = Brand.Nike.Id;
+        BrandId = Brand.Everlast.Id;
         GameStyleTypeId = GameStyleType.None.Id;
         LevelTypeId = LevelType.Professional.Id;
-        SizeId = Size.Standard.Id;
+        SizeId = Size.None.Id;
     }
 
     public SaveTrunkViewModel(TrunkViewModel viewModel)

@@ -2,9 +2,11 @@
     <Match>
         <DivRowCol3>
             <Content>
-                <BooleanCheckBox Checked="@_hasTeams"
-                                 CheckedChanged="TeamCheckboxClicked"
-                                 Label="@_itemTypeNameLabel" />  
+                <MudSwitch Checked="@_hasTeams"
+                           CheckedChanged="TeamCheckboxClicked"
+                           Color="MudBlazor.Color.Success"
+                           Label="@_itemTypeNameLabel"
+                           T="bool" />
             </Content>
         </DivRowCol3>
     </Match>    

@@ -7,6 +7,7 @@
                      TItem="SaveCanvasViewModel">
     <Content>
         <MemorabiliaItemEditor DisplayItemTypeGameStyle="false"
+                               DisplayItemTypeLevel="false"
                                DisplayMultiPersonSelector="true"
                                DisplayMultiSportSelector="true"
                                DisplayMultiTeamSelector="true"
@@ -17,22 +18,30 @@
                     <Content>
                         <OrientationDropDown SelectedValue="ViewModel.OrientationId"
                                              SelectionChanged="(p) => ViewModel.OrientationId = p" />
+                    </Content>                    
+                </DivRowCol3>
+                <DivRowCol3>
+                    <Content>
+                        <MudSwitch Checked="@ViewModel.Framed"
+                                   CheckedChanged="(p) => ViewModel.Framed = p"
+                                   Color="MudBlazor.Color.Success"
+                                   Label="Framed?"
+                                   T="bool" />
                     </Content>
                     <ContentColumn2>
-                        <BooleanCheckBox Checked="@ViewModel.Framed"
-                                         CheckedChanged="(p) => ViewModel.Framed = p"
-                                         Label="Framed" />
+                        <MudSwitch Checked="@ViewModel.Matted"
+                                   CheckedChanged="(p) => ViewModel.Matted = p"
+                                   Color="MudBlazor.Color.Success"
+                                   Label="Matted?"
+                                   T="bool" />
                     </ContentColumn2>
                     <ContentColumn3>
-                        <BooleanCheckBox Checked="@ViewModel.Matted"
-                                         CheckedChanged="(p) => ViewModel.Matted = p"
-                                         Label="Matted" />
+                        <MudSwitch Checked="@ViewModel.Stretched"
+                                   CheckedChanged="(p) => ViewModel.Stretched = p"
+                                   Color="MudBlazor.Color.Success"
+                                   Label="Stretched?"
+                                   T="bool" />
                     </ContentColumn3>
-                    <ContentColumn4>
-                        <BooleanCheckBox Checked="@ViewModel.Stretched"
-                                         CheckedChanged="(p) => ViewModel.Stretched = p"
-                                         Label="Stretched" />
-                    </ContentColumn4>
                 </DivRowCol3>
             </AdditionalContent>
         </MemorabiliaItemEditor>

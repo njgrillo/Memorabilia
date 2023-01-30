@@ -16,9 +16,4 @@ public record GetPylon(int MemorabiliaId) : IQuery<PylonViewModel>
             return new PylonViewModel(await _memorabiliaRepository.Get(query.MemorabiliaId));
         }
     }
-
-    public class Query : MemorabiliaQuery, IQuery<PylonViewModel>
-    {
-        public Query(int memorabiliaId) : base(memorabiliaId) { }
-    }
 }

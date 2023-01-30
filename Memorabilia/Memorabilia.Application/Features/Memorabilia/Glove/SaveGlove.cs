@@ -42,20 +42,29 @@ public class SaveGlove
 
         public DateTime? GameDate => _viewModel.GameDate;
 
-        public int? GameStyleTypeId => _viewModel.GameStyleTypeId > 0 ? _viewModel.GameStyleTypeId : null;
+        public int? GameStyleTypeId 
+            => _viewModel.GameStyleTypeId > 0 ? _viewModel.GameStyleTypeId : null;
 
-        public int? GloveTypeId => _viewModel.GloveTypeId > 0 ? _viewModel.GloveTypeId : null;
+        public int? GloveTypeId 
+            => _viewModel.GloveTypeId > 0 ? _viewModel.GloveTypeId : null;
 
         public int LevelTypeId => _viewModel.LevelTypeId;
 
         public int MemorabiliaId => _viewModel.MemorabiliaId;
 
-        public int[] PersonIds => _viewModel.People.Where(person => !person.IsDeleted).Select(person => person.Id).ToArray();
+        public int[] PersonIds => _viewModel.People
+                                            .Where(person => !person.IsDeleted)
+                                            .Select(person => person.Id)
+                                            .ToArray();
 
         public int SizeId => _viewModel.SizeId;
 
-        public int? SportId => _viewModel.SportId > 0 ? _viewModel.SportId : null;
+        public int? SportId 
+            => _viewModel.SportId > 0 ? _viewModel.SportId : null;
 
-        public int[] TeamIds => _viewModel.Teams.Where(team => !team.IsDeleted).Select(team => team.Id).ToArray();
+        public int[] TeamIds => _viewModel.Teams
+                                          .Where(team => !team.IsDeleted)
+                                          .Select(team => team.Id)
+                                          .ToArray();
     }
 }

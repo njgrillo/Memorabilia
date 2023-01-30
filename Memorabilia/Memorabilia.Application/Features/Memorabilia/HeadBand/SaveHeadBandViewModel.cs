@@ -9,7 +9,6 @@ public class SaveHeadBandViewModel : MemorabiliaItemEditViewModel
         BrandId = Brand.None.Id;
         GameStyleTypeId = GameStyleType.None.Id;
         LevelTypeId = LevelType.Professional.Id;
-        SizeId = Size.Standard.Id;
     }
 
     public SaveHeadBandViewModel(HeadBandViewModel viewModel)

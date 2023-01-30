@@ -7,6 +7,7 @@ public class ProfileRuleFactory : IProfileRuleFactory
     public ProfileRuleFactory()
     {
         _rules.Add(new BaseballProfileRule());
+        _rules.Add(new BasketballProfileRule());
         _rules.Add(new FootballProfileRule());
     }
 

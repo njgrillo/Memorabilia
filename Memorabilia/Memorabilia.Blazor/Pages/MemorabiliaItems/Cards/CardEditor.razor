@@ -6,7 +6,8 @@
                      OnSave="OnSave" 
                      TItem="SaveCardViewModel">
     <Content>
-        <MemorabiliaItemEditor DisplayMultiPersonSelector="true"
+        <MemorabiliaItemEditor DisplayItemTypeGameStyle="false" 
+                               DisplayMultiPersonSelector="true"
                                DisplayMultiSportSelector="true"
                                DisplayMultiTeamSelector="true"
                                TItem="SaveCardViewModel"
@@ -23,14 +24,18 @@
                                           ValueChanged="@((p) => ViewModel.Year = p)" />
                     </ContentColumn2>
                     <ContentColumn3>
-                        <BooleanCheckBox Checked="@ViewModel.Licensed"
-                                         CheckedChanged="(p) => ViewModel.Licensed = p"
-                                         Label="Licensed" />
+                        <MudSwitch Checked="@ViewModel.Licensed"
+                                   CheckedChanged="(p) => ViewModel.Licensed = p"
+                                   Color="MudBlazor.Color.Success"
+                                   Label="Licensed?"
+                                   T="bool" />
                     </ContentColumn3>
                     <ContentColumn4>
-                        <BooleanCheckBox Checked="@ViewModel.Custom"
-                                         CheckedChanged="(p) => ViewModel.Custom = p"
-                                         Label="Custom" />
+                        <MudSwitch Checked="@ViewModel.Custom"
+                                   CheckedChanged="(p) => ViewModel.Custom = p"
+                                   Color="MudBlazor.Color.Success"
+                                   Label="Custom?"
+                                   T="bool" />
                     </ContentColumn4>
                 </DivRowCol3>
             </AdditionalContent>
