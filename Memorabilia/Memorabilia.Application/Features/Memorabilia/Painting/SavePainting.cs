@@ -16,7 +16,6 @@ public class SavePainting
             var memorabilia = await _memorabiliaRepository.Get(command.MemorabiliaId);
 
             memorabilia.SetPainting(command.BrandId,
-                                    command.Framed,
                                     command.Matted,
                                     command.OrientationId,
                                     command.PersonIds,
@@ -38,8 +37,6 @@ public class SavePainting
         }
 
         public int BrandId => _viewModel.BrandId;
-
-        public bool Framed => _viewModel.Framed;
 
         public bool Matted => _viewModel.Matted;
 

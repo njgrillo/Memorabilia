@@ -13,7 +13,6 @@ public class SaveLithographViewModel : MemorabiliaItemEditViewModel
     public SaveLithographViewModel(LithographViewModel viewModel)
     {
         BrandId = viewModel.Brand.BrandId;
-        Framed = viewModel.Picture.Framed;
         Matted = viewModel.Picture.Matted;
         MemorabiliaId = viewModel.MemorabiliaId;
         OrientationId = viewModel.Picture.OrientationId;
@@ -22,8 +21,6 @@ public class SaveLithographViewModel : MemorabiliaItemEditViewModel
         SportIds = viewModel.Sports.Select(sport => sport.SportId).ToList();
         Teams = viewModel.Teams.Select(team => new SaveTeamViewModel(new TeamViewModel(team.Team))).ToList();
     }
-
-    public bool Framed { get; set; }
 
     public override string ImageFileName => Domain.Constants.ImageFileName.Lithograph;
 

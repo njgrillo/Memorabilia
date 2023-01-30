@@ -12,7 +12,6 @@ public class SavePosterViewModel : MemorabiliaItemEditViewModel
 
     public SavePosterViewModel(PosterViewModel viewModel)
     {
-        Framed = viewModel.Picture.Framed;
         Matted = viewModel.Picture.Matted;
         MemorabiliaId = viewModel.MemorabiliaId;
         OrientationId = viewModel.Picture.OrientationId;
@@ -21,8 +20,6 @@ public class SavePosterViewModel : MemorabiliaItemEditViewModel
         SportIds = viewModel.Sports.Select(sport => sport.SportId).ToList();
         Teams = viewModel.Teams.Select(team => new SaveTeamViewModel(new TeamViewModel(team.Team))).ToList();
     }
-
-    public bool Framed { get; set; }
 
     public override string ImageFileName => Domain.Constants.ImageFileName.Poster;
 

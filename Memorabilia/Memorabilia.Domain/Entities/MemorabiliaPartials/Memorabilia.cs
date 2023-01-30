@@ -23,6 +23,7 @@ public partial class Memorabilia
         Denominator = memorabilia.Denominator;
         Figure = memorabilia.Figure;
         Football = memorabilia.Football;
+        Framed = memorabilia.Framed;
         EstimatedValue = memorabilia.EstimatedValue;
         Game = memorabilia.Game;
         Glove = memorabilia.Glove;
@@ -53,6 +54,7 @@ public partial class Memorabilia
                        decimal? cost,
                        int? denominator,
                        decimal? estimatedValue,
+                       bool framed,
                        int itemTypeId,
                        string note,
                        int? numerator,
@@ -64,6 +66,7 @@ public partial class Memorabilia
         CreateDate = DateTime.UtcNow;
         Denominator = denominator;
         EstimatedValue = estimatedValue;
+        Framed = framed;
         Numerator = numerator;
         Note = note;
         ItemTypeId = itemTypeId;
@@ -86,6 +89,7 @@ public partial class Memorabilia
                     decimal? cost,
                     int? denominator,
                     decimal? estimatedValue,
+                    bool framed,
                     string note,
                     int? numerator,
                     int privacyTypeId,
@@ -94,6 +98,7 @@ public partial class Memorabilia
         ConditionId = conditionId;
         Denominator = denominator;
         EstimatedValue = estimatedValue;
+        Framed = framed;
         LastModifiedDate = DateTime.UtcNow;
         Numerator = numerator;
         Note = note;
@@ -184,18 +189,17 @@ public partial class Memorabilia
     }
 
     private void SetPicture(int orientationId,
-                            bool framed,
                             bool matted,
                             bool stretched = false,
                             int? photoTypeId = null)
     {
         if (Picture == null)
         {
-            Picture = new MemorabiliaPicture(Id, orientationId, framed, matted, stretched, photoTypeId);
+            Picture = new MemorabiliaPicture(Id, orientationId, matted, stretched, photoTypeId);
             return;
         }
 
-        Picture.Set(orientationId, framed, matted, stretched, photoTypeId);
+        Picture.Set(orientationId, matted, stretched, photoTypeId);
     }
 
     private void SetSize(int sizeId)

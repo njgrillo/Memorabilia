@@ -6,7 +6,7 @@ public class SaveCerealBoxViewModel : MemorabiliaItemEditViewModel
 {
     public SaveCerealBoxViewModel() 
     {
-        BrandId = Brand.None.Id;
+        BrandId = Brand.GeneralMills.Id;
         LevelTypeId = LevelType.Professional.Id;
     }
 

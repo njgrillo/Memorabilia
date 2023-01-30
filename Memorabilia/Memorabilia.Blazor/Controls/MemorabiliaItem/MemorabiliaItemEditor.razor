@@ -21,7 +21,8 @@
     <ContentColumn4>
         <PrettyBlazor.Condition Evaluation="DisplaySingleSportSelector">
             <Match>
-                <SportDropDown SelectedValue="@ViewModel.SportId"
+                <SportDropDown ItemType="@ViewModel.ItemType" 
+                               SelectedValue="@ViewModel.SportId"
                                SelectionChanged="(p) => ViewModel.SportId = p" />
             </Match>
         </PrettyBlazor.Condition>

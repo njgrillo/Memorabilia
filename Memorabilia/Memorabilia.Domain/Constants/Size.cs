@@ -2,8 +2,11 @@
 
 public sealed class Size : DomainItemConstant
 {
+    public static readonly Size Eight = new(1027, "8");
     public static readonly Size EightByTen = new(11, "8x10");
+    public static readonly Size Eleven = new(1031, "11");
     public static readonly Size ElevenByFourteen = new(12, "11x14");
+    public static readonly Size ElevenHalf = new(1032, "11.5");
     public static readonly Size ExtraExtraLarge = new(1018, "Extra Extra Large", "XXL");
     public static readonly Size ExtraLarge = new(10, "Extra Large", "XL");
     public static readonly Size Fifty = new(1023, "50");
@@ -17,6 +20,7 @@ public sealed class Size : DomainItemConstant
     public static readonly Size Large = new(3, "Large", "L");
     public static readonly Size Medium = new(9, "Medium", "M");
     public static readonly Size Mini = new(1, "Mini");
+    public static readonly Size Nine = new(1028, "9");
     public static readonly Size None = new(8, "None");
     public static readonly Size Other = new(7, "Other");
     public static readonly Size Oversized = new(6, "Oversized");
@@ -24,14 +28,20 @@ public sealed class Size : DomainItemConstant
     public static readonly Size Sixty = new(1024, "60");
     public static readonly Size Small = new(4, "Small", "S");
     public static readonly Size Standard = new(5, "Standard");
+    public static readonly Size Ten = new(1029, "10");
+    public static readonly Size TenHalf = new(1030, "10.5");
     public static readonly Size ThreeByFive = new(15, "3x5");
+    public static readonly Size Twelve = new(1033, "12");
     public static readonly Size TwentyByThirty = new(14, "20x30");
     public static readonly Size Unknown = new(1022, "Unknown");
 
     public static readonly Size[] All =
     {
+        Eight,
         EightByTen,
+        Eleven,
         ElevenByFourteen,
+        ElevenHalf,
         ExtraExtraLarge,
         ExtraLarge,
         Fifty,
@@ -45,6 +55,7 @@ public sealed class Size : DomainItemConstant
         Large,
         Medium,
         Mini,
+        Nine,
         None,
         Other,
         Oversized,
@@ -52,7 +63,10 @@ public sealed class Size : DomainItemConstant
         Sixty,
         Small,
         Standard,
+        Ten,
+        TenHalf,
         ThreeByFive,
+        Twelve,
         TwentyByThirty,
         Unknown
     };

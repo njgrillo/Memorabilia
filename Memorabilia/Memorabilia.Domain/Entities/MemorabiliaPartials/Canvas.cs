@@ -3,7 +3,6 @@
 public partial class Memorabilia
 {
     public void SetCanvas(int brandId,
-                          bool framed,
                           bool matted,
                           int orientationId,
                           int[] personIds,
@@ -14,7 +13,7 @@ public partial class Memorabilia
     {
         SetBrand(brandId);
         SetSize(sizeId);
-        SetPicture(orientationId, framed, matted, stretched);
+        SetPicture(orientationId, matted, stretched);
         SetPeople(personIds);
         SetSports(sportIds);
         SetTeams(teamIds);

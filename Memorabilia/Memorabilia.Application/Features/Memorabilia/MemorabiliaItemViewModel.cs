@@ -45,6 +45,8 @@ public class MemorabiliaItemViewModel
 
     public string FormattedTotalValue => ((EstimatedValue ?? 0) + _memorabilia.Autographs.Sum(autograph => autograph.EstimatedValue ?? 0)).ToString("c");
 
+    public bool Framed => _memorabilia.Framed;
+
     public IEnumerable<Franchise> Franchises => Teams.Select(team => team.Team.Franchise);
 
     public int? GameStyleTypeId => _memorabilia.Game?.GameStyleTypeId;

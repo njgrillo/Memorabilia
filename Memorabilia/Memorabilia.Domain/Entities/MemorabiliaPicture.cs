@@ -6,20 +6,16 @@ public class MemorabiliaPicture : Framework.Library.Domain.Entity.DomainEntity
 
     public MemorabiliaPicture(int memorabiliaId, 
                               int orientationId,
-                              bool framed, 
                               bool matted, 
                               bool stretched, 
                               int? photoTypeId)
     {
         MemorabiliaId = memorabiliaId;
-        OrientationId = orientationId;            
-        Framed = framed;
+        OrientationId = orientationId; 
         Matted = matted;
         Stretched = stretched;
         PhotoTypeId = photoTypeId;
     }
-
-    public bool Framed { get; set; }
 
     public bool Matted { get; set; }
 
@@ -32,13 +28,11 @@ public class MemorabiliaPicture : Framework.Library.Domain.Entity.DomainEntity
     public bool Stretched { get; private set; }
 
     public void Set(int orientationId, 
-                    bool framed, 
                     bool matted, 
                     bool stretched, 
                     int? photoTypeId)
     {
-        OrientationId = orientationId;            
-        Framed = framed;
+        OrientationId = orientationId;   
         Matted = matted;
         Stretched = stretched;
         PhotoTypeId = photoTypeId;

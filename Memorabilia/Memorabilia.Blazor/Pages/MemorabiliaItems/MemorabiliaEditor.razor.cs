@@ -1,6 +1,4 @@
-﻿#nullable disable
-
-namespace Memorabilia.Blazor.Pages.MemorabiliaItems
+﻿namespace Memorabilia.Blazor.Pages.MemorabiliaItems
 {
     public partial class MemorabiliaEditor : ImagePage
     {   

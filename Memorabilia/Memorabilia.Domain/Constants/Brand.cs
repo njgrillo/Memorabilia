@@ -12,6 +12,7 @@ public sealed class Brand : DomainItemConstant
     public static readonly Brand Fender = new(22, "Fender");
     public static readonly Brand Fotoball = new(27, "Fotoball");
     public static readonly Brand Funko = new(19, "Funko Inc.");
+    public static readonly Brand GeneralMills = new (1037, "General Mills");
     public static readonly Brand Hasbro = new(18, "Hasbro");
     public static readonly Brand HighSchoolDayz = new(1030, "High School Dayz");
     public static readonly Brand Kenner = new(17, "Kenner");
@@ -56,6 +57,7 @@ public sealed class Brand : DomainItemConstant
         Fender,
         Fotoball,
         Funko,
+        GeneralMills,
         Hasbro,
         HighSchoolDayz,
         Kenner,

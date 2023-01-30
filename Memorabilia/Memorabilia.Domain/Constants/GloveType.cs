@@ -19,10 +19,39 @@ public sealed class GloveType : DomainItemConstant
         MMA
     };
 
-    private GloveType(int id, string name, string abbreviation = null) : base(id, name, abbreviation) { }
+    public static readonly GloveType[] BaseballTypes =
+    {
+        Baseball,
+        Batting,
+    };
+
+    private GloveType(int id, string name, string abbreviation = null) 
+        : base(id, name, abbreviation) { }
 
     public static GloveType Find(int id)
     {
         return All.SingleOrDefault(gloveType => gloveType.Id == id);
+    }
+
+    public static GloveType[] GetAll(params Sport[] sports)
+    {
+        var gloveTypes = new List<GloveType>(); 
+
+        if (sports.Contains(Sport.Baseball))
+            gloveTypes.AddRange(BaseballTypes);
+
+        if (sports.Contains(Sport.Boxing))
+            gloveTypes.Add(Boxing);
+
+        if (sports.Contains(Sport.Football))
+            gloveTypes.Add(Football);
+
+        if (sports.Contains(Sport.Hockey))
+            gloveTypes.Add(Hockey);
+
+        if (sports.Contains(Sport.MixedMartialArts))
+            gloveTypes.Add(MMA);
+
+        return gloveTypes.ToArray();
     }
 }

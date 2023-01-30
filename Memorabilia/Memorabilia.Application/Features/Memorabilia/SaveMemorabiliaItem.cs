@@ -24,6 +24,7 @@ public class SaveMemorabiliaItem
                                                               command.Cost,
                                                               command.Denominator,
                                                               command.EstimatedValue,
+                                                              command.Framed,
                                                               command.ItemTypeId,
                                                               command.Note,
                                                               command.Numerator,
@@ -54,6 +55,7 @@ public class SaveMemorabiliaItem
                             command.Cost,
                             command.Denominator,
                             command.EstimatedValue,
+                            command.Framed,
                             command.Note,
                             command.Numerator,
                             command.PrivacyTypeId,
@@ -88,6 +90,8 @@ public class SaveMemorabiliaItem
         public int? Denominator => _viewModel.Denominator;
 
         public decimal? EstimatedValue => _viewModel.EstimatedValue;
+
+        public bool Framed => _viewModel.Framed;
 
         public int Id { get; set; }
 

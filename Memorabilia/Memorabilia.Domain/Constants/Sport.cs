@@ -47,7 +47,14 @@ public sealed class Sport : DomainItemConstant
         Football
     };
 
-    private Sport(int id, string name, string alternateName = null) : base(id, name)
+    public static readonly Sport[] TrunkSports =
+    {
+        Boxing,
+        MixedMartialArts
+    };
+
+    private Sport(int id, string name, string alternateName = null) 
+        : base(id, name)
     {
         AlternateName = alternateName;
     }
@@ -57,6 +64,13 @@ public sealed class Sport : DomainItemConstant
     public static Sport Find(int id)
     {
         return All.SingleOrDefault(sport => sport.Id == id);
+    }
+
+    public static Sport[] GetAll(ItemType itemType)
+    {
+        return itemType == ItemType.Trunks
+            ? TrunkSports
+            : All;
     }
 
     public static bool HasAllStarGames(params Sport[] sports)

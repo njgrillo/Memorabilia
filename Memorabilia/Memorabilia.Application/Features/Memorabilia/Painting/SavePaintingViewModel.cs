@@ -13,7 +13,6 @@ public class SavePaintingViewModel : MemorabiliaItemEditViewModel
     public SavePaintingViewModel(PaintingViewModel viewModel)
     {
         BrandId = viewModel.Brand.BrandId;
-        Framed = viewModel.Picture.Framed;
         Matted = viewModel.Picture.Matted;
         MemorabiliaId = viewModel.MemorabiliaId;
         OrientationId = viewModel.Picture.OrientationId;
@@ -22,8 +21,6 @@ public class SavePaintingViewModel : MemorabiliaItemEditViewModel
         SportIds = viewModel.Sports.Select(sport => sport.SportId).ToList();
         Teams = viewModel.Teams.Select(team => new SaveTeamViewModel(new TeamViewModel(team.Team))).ToList();
     }
-
-    public bool Framed { get; set; }
 
     public override string ImageFileName => Domain.Constants.ImageFileName.Painting;
 

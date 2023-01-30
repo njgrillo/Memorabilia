@@ -16,7 +16,6 @@ public class SaveCanvas
             var memorabilia = await _memorabiliaRepository.Get(command.MemorabiliaId);
 
             memorabilia.SetCanvas(command.BrandId,
-                                  command.Framed,
                                   command.Matted,
                                   command.OrientationId,
                                   command.PersonIds,
@@ -39,8 +38,6 @@ public class SaveCanvas
         }
 
         public int BrandId => _viewModel.BrandId;
-
-        public bool Framed => _viewModel.Framed;
 
         public bool Matted => _viewModel.Matted;
 

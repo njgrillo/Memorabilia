@@ -13,7 +13,6 @@ public class SaveCanvasViewModel : MemorabiliaItemEditViewModel
     public SaveCanvasViewModel(CanvasViewModel viewModel)
     {
         BrandId = viewModel.Brand.BrandId;
-        Framed = viewModel.Picture.Framed;
         Matted = viewModel.Picture.Matted;
         MemorabiliaId = viewModel.MemorabiliaId;
         OrientationId = viewModel.Picture.OrientationId;
@@ -23,8 +22,6 @@ public class SaveCanvasViewModel : MemorabiliaItemEditViewModel
         Stretched = viewModel.Picture.Stretched;
         Teams = viewModel.Teams.Select(team => new SaveTeamViewModel(new TeamViewModel(team.Team))).ToList();
     }
-
-    public bool Framed { get; set; }
 
     public override string ImageFileName => Domain.Constants.ImageFileName.Canvas;
 
