@@ -1,8 +1,6 @@
-﻿#nullable disable
+﻿namespace Memorabilia.Blazor.Controls;
 
-namespace Memorabilia.Blazor.Controls;
-
-public partial class EditPage<TItem> : ImagePage
+public partial class EditPage<TItem> : ImagePage, INotifyPropertyChanged
 {
     [Inject]
     public ISnackbar Snackbar { get; set; }
@@ -41,7 +39,7 @@ public partial class EditPage<TItem> : ImagePage
     public string ItemName { get; set; }
 
     [Parameter]
-    public TItem Model { get; set; }
+    public TItem Model { get; set; }    
 
     [Parameter]
     public EventCallback OnLoad { get; set; }
@@ -59,25 +57,53 @@ public partial class EditPage<TItem> : ImagePage
     public string PageTitle { get; set; }
 
     [Parameter]
+    public bool PerformValidation { get; set; }
+
+    [Parameter]
     public RenderFragment TimelineContent { get; set; }
 
     [Parameter]
     public bool UseMultipleButtons { get; set; }
 
+    [Parameter]
+    public ValidationResult ValidationResult { get; set; }
+
+    public Alert[] ValidationResultAlerts => ValidationResult != null
+        ? ValidationResult.Errors.Select(error => new Alert(error.ErrorMessage, Severity.Error)).ToArray()
+        : Array.Empty<Alert>();
+
     private bool _continue;
+
+    public EditPage()
+    {
+        PropertyChanged += EditPage_PropertyChanged;
+    }
 
     protected async Task HandleValidSubmit()
     {
         await OnSave.InvokeAsync(Model);
 
-        var url = _continue ? ContinueNavigationPath : ExitNavigationPath;
-
-        NavigationManager.NavigateTo(url);
-        Snackbar.Add($"{ItemName} {(ItemName.EndsWith("s") ? "were " : "was ")} {(EditMode == EditModeType.Add ? "added" : "updated")} successfully!", Severity.Success);
+        if (!PerformValidation)
+            NavigateAway();
     }
 
     protected async Task Load()
     {
         await OnLoad.InvokeAsync();
+    }
+
+    private void EditPage_PropertyChanged(object sender, PropertyChangedEventArgs e)
+    {
+        if (e.PropertyName == nameof(ContinueNavigationPath))
+        {
+            if (ValidationResult != null && ValidationResult.IsValid)
+                NavigateAway();
+        }
+    }
+
+    private void NavigateAway()
+    {
+        NavigationManager.NavigateTo(_continue ? ContinueNavigationPath : ExitNavigationPath);
+        Snackbar.Add($"{ItemName} {(ItemName.EndsWith("s") ? "were " : "was ")} {(EditMode == EditModeType.Add ? "added" : "updated")} successfully!", Severity.Success);
     }
 }

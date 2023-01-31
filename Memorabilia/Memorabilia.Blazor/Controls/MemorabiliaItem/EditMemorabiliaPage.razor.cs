@@ -1,6 +1,4 @@
-﻿#nullable disable
-
-namespace Memorabilia.Blazor.Controls.MemorabiliaItem;
+﻿namespace Memorabilia.Blazor.Controls.MemorabiliaItem;
 
 public partial class EditMemorabiliaPage<TItem> where TItem : MemorabiliaItemEditViewModel
 {

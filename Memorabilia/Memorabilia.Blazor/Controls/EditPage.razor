@@ -9,6 +9,11 @@
         @ImagePreview
         <PageBorder>
             <Content>
+                <PrettyBlazor.Condition Evaluation="@(ValidationResultAlerts.Any())">
+                    <Match>
+                        <AlertPanel Alerts="ValidationResultAlerts" />
+                    </Match>
+                </PrettyBlazor.Condition>                
                 <PageImage DomainImageRootPath="@DomainImageRootPath" 
                            ImageFileName="@ImageFileName"
                            ImageRootPath="@ImageRootPath" />

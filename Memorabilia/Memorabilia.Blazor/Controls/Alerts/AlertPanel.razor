@@ -1,0 +1,16 @@
+﻿<Condition Evaluation="@(Alerts.Any())">
+    <Match>
+        <div style="border:1px solid black;margin-top:2%;margin-bottom:2%;margin-left:2%;margin-right:2%;">
+            <MudExpansionPanel IsExpanded="true"
+                               Text="Alerts">
+                <Iterations Items="@Alerts">
+                    <div class="row" 
+                         style="text-align:left;margin-top:1%;margin-bottom:1%;margin-left:1%;margin-right:1%;">
+                        <AlertBox Severity="context.Severity"
+                                  Text="@context.Message" />
+                    </div>
+                </Iterations>
+            </MudExpansionPanel>
+        </div>
+    </Match>
+</Condition>

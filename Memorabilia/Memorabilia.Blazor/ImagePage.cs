@@ -1,6 +1,4 @@
-﻿#nullable disable
-
-namespace Memorabilia.Blazor;
+﻿namespace Memorabilia.Blazor;
 
 public class ImagePage : CommandQuery
 {

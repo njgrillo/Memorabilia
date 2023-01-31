@@ -1,3 +1,5 @@
+using Memorabilia.Application.Validators.Memorabilia;
+
 namespace Memorabilia.Web;
 
 public class Startup
@@ -23,7 +25,9 @@ public class Startup
         services.AddDbContext<DomainContext>(options => options.UseSqlServer("name=ConnectionStrings:Memorabilia"), ServiceLifetime.Transient);
         services.AddTransient<CommandRouter>();
         services.AddTransient<QueryRouter>();
-        services.AddMediatR(typeof(GetCommissioner).Assembly);            
+        services.AddMediatR(typeof(GetCommissioner).Assembly);
+
+        services.AddSingleton<MemorabiliaItemValidator>();
 
         services.AddTransient<AllStarRepository>();
         services.AddTransient<IAllStarRepository, AllStarCacheRepository>();

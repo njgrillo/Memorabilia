@@ -1,6 +1,4 @@
-﻿#nullable disable
-
-namespace Memorabilia.Blazor.Pages;
+﻿namespace Memorabilia.Blazor.Pages;
 
 public abstract class CommandQuery : NavigationItem
 {

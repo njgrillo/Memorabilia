@@ -1,6 +1,4 @@
-﻿#nullable disable
-
-namespace Memorabilia.Blazor.Pages.MemorabiliaItems;
+﻿namespace Memorabilia.Blazor.Pages.MemorabiliaItems;
 
 public abstract class MemorabiliaItem<T> : ImagePage where T : SaveItemViewModel
 {

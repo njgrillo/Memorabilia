@@ -31,8 +31,6 @@ public class SaveMemorabiliaItemViewModel : SaveViewModel
 
     public bool AcquiredWithAutograph { get; set; }
 
-    [Required]
-    [Range(1, int.MaxValue, ErrorMessage = "Acquisition Type is required.")]
     public int AcquisitionTypeId { get; set; } = AcquisitionType.Purchase.Id;
 
     public bool CanEditItemType => Id == 0;
@@ -90,8 +88,6 @@ public class SaveMemorabiliaItemViewModel : SaveViewModel
 
     public override string PageTitle => $"{(Id > 0 ? EditModeType.Update.Name : EditModeType.Add.Name)} {(ItemType?.Id > 0 ? ItemTypeName : "Memorabilia")}";
 
-    [Required]
-    [Range(1, int.MaxValue, ErrorMessage = "Privacy Type is required.")]
     public int PrivacyTypeId { get; set; } = PrivacyType.Public.Id;
 
     public int PurchaseTypeId { get; set; }

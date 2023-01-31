@@ -11,8 +11,10 @@
           OnLoad="OnLoad"
           OnSave="OnSave"
           PageTitle="@_viewModel.PageTitle"
+          PerformValidation="true"
           TItem="SaveMemorabiliaItemViewModel"
-          UseMultipleButtons="true">
+          UseMultipleButtons="true"
+          ValidationResult="@_viewModel.ValidationResult">
     <TimelineContent>
         <MemorabiliaItemTimeline EditMode="_viewModel.EditModeType"
                                  ItemTypeName="@_viewModel.ItemTypeName"
@@ -46,7 +48,7 @@
             <Content>
                 <AcquisitionTypeDropDown IsAutograph="false"
                                          SelectedValue="_viewModel.AcquisitionTypeId"
-                                         SelectionChanged="(p) => _viewModel.AcquisitionTypeId = p" />
+                                         SelectionChanged="OnAcquisitionTypeChange" />
             </Content>
             <ContentColumn2>
                 <MudDatePicker @bind-Date="_viewModel.AcquiredDate"

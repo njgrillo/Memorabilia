@@ -1,4 +1,5 @@
-﻿global using Framework.Library.Domain.Paging;
+﻿global using FluentValidation.Results;
+global using Framework.Library.Domain.Paging;
 global using Framework.Library.Extension;
 global using Framework.Library.Handler;
 global using Framework.Library.Web;
@@ -153,6 +154,7 @@ global using Memorabilia.Application.Features.User.Dashboard;
 global using Memorabilia.Application.Features.User.Login;
 global using Memorabilia.Application.Features.User.Register;
 global using Memorabilia.Application.Features.User.Settings;
+global using Memorabilia.Application.Validators.Memorabilia;
 global using Memorabilia.Blazor.Controls;
 global using Memorabilia.Blazor.Controls.Buttons;
 global using Memorabilia.Blazor.Controls.Dialogs;
