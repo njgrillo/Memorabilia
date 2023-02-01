@@ -2,6 +2,9 @@
 
 public partial class PhotoEditor : MemorabiliaItem<SavePhotoViewModel>
 {
+    [Inject]
+    public PhotoValidator Validator { get; set; }
+
     protected async Task OnLoad()
     {
         var viewModel = await QueryRouter.Send(new GetPhoto(MemorabiliaId));
@@ -14,6 +17,15 @@ public partial class PhotoEditor : MemorabiliaItem<SavePhotoViewModel>
 
     protected async Task OnSave()
     {
-        await CommandRouter.Send(new SavePhoto.Command(ViewModel));
+        var command = new SavePhoto.Command(ViewModel);
+
+        ViewModel.ValidationResult = Validator.Validate(command);
+
+        if (!ViewModel.ValidationResult.IsValid)
+            return;
+
+        await CommandRouter.Send(command);
+
+        ViewModel.SavedSuccessfully = true;
     }
 }

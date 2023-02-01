@@ -2,6 +2,9 @@
 
 public partial class TicketEditor : MemorabiliaItem<SaveTicketViewModel>
 {
+    [Inject]
+    public TicketValidator Validator { get; set; }
+
     protected async Task OnLoad()
     {
         var viewModel = await QueryRouter.Send(new GetTicket(MemorabiliaId));
@@ -14,6 +17,15 @@ public partial class TicketEditor : MemorabiliaItem<SaveTicketViewModel>
 
     protected async Task OnSave()
     {
-        await CommandRouter.Send(new SaveTicket.Command(ViewModel));
+        var command = new SaveTicket.Command(ViewModel);
+
+        ViewModel.ValidationResult = Validator.Validate(command);
+
+        if (!ViewModel.ValidationResult.IsValid)
+            return;
+
+        await CommandRouter.Send(command);
+
+        ViewModel.SavedSuccessfully = true;
     }
 }

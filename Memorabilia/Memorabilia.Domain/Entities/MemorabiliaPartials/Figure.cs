@@ -27,11 +27,11 @@ public partial class Memorabilia
         {
             if (Figure == null)
             {
-                Figure = new MemorabiliaFigure(Id, figureSpecialtyTypeId.Value, figureTypeId.Value, year.Value);
+                Figure = new MemorabiliaFigure(Id, figureSpecialtyTypeId, figureTypeId, year);
                 return;
             }
 
-            Figure.Set(figureSpecialtyTypeId.Value, figureTypeId.Value, year.Value);
+            Figure.Set(figureSpecialtyTypeId, figureTypeId, year);
         }
         else
         {

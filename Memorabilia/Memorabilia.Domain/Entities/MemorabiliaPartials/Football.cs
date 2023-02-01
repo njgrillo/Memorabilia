@@ -17,7 +17,7 @@ public partial class Memorabilia
         SetLevelType(levelTypeId);
         SetSize(sizeId);
         SetSports(sportId);
-        SetFootballType(footballTypeId.Value);
+        SetFootballType(footballTypeId);
         SetCommissioner(commissionerId);
         SetGame(gameStyleTypeId, personId, gameDate);
 

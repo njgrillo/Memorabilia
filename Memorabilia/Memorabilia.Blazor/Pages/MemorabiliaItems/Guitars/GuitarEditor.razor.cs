@@ -2,6 +2,9 @@
 
 public partial class GuitarEditor : MemorabiliaItem<SaveGuitarViewModel>
 {
+    [Inject]
+    public GuitarValidator Validator { get; set; }
+
     protected async Task OnLoad()
     {
         var viewModel = await QueryRouter.Send(new GetGuitar(MemorabiliaId));
@@ -14,6 +17,15 @@ public partial class GuitarEditor : MemorabiliaItem<SaveGuitarViewModel>
 
     protected async Task OnSave()
     {
-        await CommandRouter.Send(new SaveGuitar.Command(ViewModel));
+        var command = new SaveGuitar.Command(ViewModel);
+
+        ViewModel.ValidationResult = Validator.Validate(command);
+
+        if (!ViewModel.ValidationResult.IsValid)
+            return;
+
+        await CommandRouter.Send(command);
+
+        ViewModel.SavedSuccessfully = true;
     }
 }

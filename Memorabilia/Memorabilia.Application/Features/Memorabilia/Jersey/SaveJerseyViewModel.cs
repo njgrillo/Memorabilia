@@ -36,16 +36,9 @@ public class SaveJerseyViewModel : MemorabiliaItemEditViewModel
 
     public override ItemType ItemType => ItemType.Jersey;
 
-    [Required]
-    [Range(1, int.MaxValue, ErrorMessage = "Quality is required.")]
     public int JerseyQualityTypeId { get; set; }
 
-    [Required]
-    [Range(1, int.MaxValue, ErrorMessage = "Style is required.")]
     public int JerseyStyleTypeId { get; set; }
 
-    [Required]
-    [Range(1, int.MaxValue, ErrorMessage = "Type is required.")]
     public int JerseyTypeId { get; set; } = JerseyType.Stitched.Id;
-
 }

@@ -2,6 +2,9 @@
 
 public partial class WristBandEditor : MemorabiliaItem<SaveWristBandViewModel>
 {
+    [Inject]
+    public WristBandValidator Validator { get; set; }
+
     protected async Task OnLoad()
     {
         var viewModel = await QueryRouter.Send(new GetWristBand(MemorabiliaId));
@@ -14,6 +17,15 @@ public partial class WristBandEditor : MemorabiliaItem<SaveWristBandViewModel>
 
     protected async Task OnSave()
     {
-        await CommandRouter.Send(new SaveWristBand.Command(ViewModel));
+        var command = new SaveWristBand.Command(ViewModel);
+
+        ViewModel.ValidationResult = Validator.Validate(command);
+
+        if (!ViewModel.ValidationResult.IsValid)
+            return;
+
+        await CommandRouter.Send(command);
+
+        ViewModel.SavedSuccessfully = true;
     }
 }

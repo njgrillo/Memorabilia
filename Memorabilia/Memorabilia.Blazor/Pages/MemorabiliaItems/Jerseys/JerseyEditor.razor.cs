@@ -2,6 +2,9 @@
 
 public partial class JerseyEditor : MemorabiliaItem<SaveJerseyViewModel>
 {
+    [Inject]
+    public JerseyValidator Validator { get; set; }
+
     protected async Task OnLoad()
     {
         var viewModel = await QueryRouter.Send(new GetJersey(MemorabiliaId));
@@ -14,6 +17,15 @@ public partial class JerseyEditor : MemorabiliaItem<SaveJerseyViewModel>
 
     protected async Task OnSave()
     {
-        await CommandRouter.Send(new SaveJersey.Command(ViewModel));
+        var command = new SaveJersey.Command(ViewModel);
+
+        ViewModel.ValidationResult = Validator.Validate(command);
+
+        if (!ViewModel.ValidationResult.IsValid)
+            return;
+
+        await CommandRouter.Send(command);
+
+        ViewModel.SavedSuccessfully = true;
     }
 }

@@ -1,7 +1,12 @@
-﻿namespace Memorabilia.Blazor.Pages.MemorabiliaItems.Shoes;
+﻿using FluentValidation;
+
+namespace Memorabilia.Blazor.Pages.MemorabiliaItems.Shoes;
 
 public partial class ShoeEditor : MemorabiliaItem<SaveShoeViewModel>
 {
+    [Inject]
+    public ShoeValidator Validator { get; set; }
+
     protected async Task OnLoad()
     {
         var viewModel = await QueryRouter.Send(new GetShoe(MemorabiliaId));
@@ -14,6 +19,15 @@ public partial class ShoeEditor : MemorabiliaItem<SaveShoeViewModel>
 
     protected async Task OnSave()
     {
-        await CommandRouter.Send(new SaveShoe.Command(ViewModel));
+        var command = new SaveShoe.Command(ViewModel);
+
+        ViewModel.ValidationResult = Validator.Validate(command);
+
+        if (!ViewModel.ValidationResult.IsValid)
+            return;
+
+        await CommandRouter.Send(command);
+
+        ViewModel.SavedSuccessfully = true;
     }
 }

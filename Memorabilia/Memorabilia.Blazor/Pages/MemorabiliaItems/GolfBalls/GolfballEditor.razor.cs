@@ -2,6 +2,9 @@
 
 public partial class GolfballEditor : MemorabiliaItem<SaveGolfballViewModel>
 {
+    [Inject]
+    public GolfballValidator Validator { get; set; }
+
     protected async Task OnLoad()
     {
         var viewModel = await QueryRouter.Send(new GetGolfball(MemorabiliaId));
@@ -14,6 +17,15 @@ public partial class GolfballEditor : MemorabiliaItem<SaveGolfballViewModel>
 
     protected async Task OnSave()
     {
-        await CommandRouter.Send(new SaveGolfball.Command(ViewModel));
+        var command = new SaveGolfball.Command(ViewModel);
+
+        ViewModel.ValidationResult = Validator.Validate(command);
+
+        if (!ViewModel.ValidationResult.IsValid)
+            return;
+
+        await CommandRouter.Send(command);
+
+        ViewModel.SavedSuccessfully = true;
     }
 }

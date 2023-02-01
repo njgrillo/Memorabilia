@@ -7,6 +7,7 @@ public sealed class JerseyStyleType : DomainItemConstant
     public static readonly JerseyStyleType Away = new(2, "Away");
     public static readonly JerseyStyleType Finals = new(7, "Finals");
     public static readonly JerseyStyleType Home = new(1, "Home");
+    public static readonly JerseyStyleType None = new(15, "None");
     public static readonly JerseyStyleType Other = new(9, "Other");
     public static readonly JerseyStyleType ProBowl = new(6, "Pro Bowl");
     public static readonly JerseyStyleType SuperBowl = new(14, "Super Bowl");
@@ -22,6 +23,7 @@ public sealed class JerseyStyleType : DomainItemConstant
         Away,
         Finals,
         Home,
+        None,
         Other,
         ProBowl,
         SuperBowl,

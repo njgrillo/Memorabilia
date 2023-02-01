@@ -2,7 +2,8 @@
 
 @inherits MemorabiliaItem<TItem>
 
-<EditPage ContinueNavigationPath="@Item.ContinueNavigationPath"
+<EditPage ContinueNavigation="@Item.SavedSuccessfully" 
+          ContinueNavigationPath="@Item.ContinueNavigationPath"
           DomainImageRootPath="@DomainImageRootPath"
           EditMode="Item.EditModeType"
           ExitNavigationPath="@Item.ExitNavigationPath"
@@ -14,8 +15,10 @@
           PageFooterButtonText="@Item.ExitButtonText"
           PageFooterNavigationPath="@Item.BackNavigationPath"
           PageTitle="@Item.PageTitle"
+          PerformValidation="PerformValidation"
           TItem="TItem"
-          UseMultipleButtons="true">
+          UseMultipleButtons="true"
+          ValidationResult="@Item.ValidationResult">
     <TimelineContent>
         <MemorabiliaItemTimeline EditMode="Item.EditModeType"
                                  ItemTypeName="@Item.ItemType.Name"

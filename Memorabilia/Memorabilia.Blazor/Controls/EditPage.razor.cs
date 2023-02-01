@@ -15,6 +15,9 @@ public partial class EditPage<TItem> : ImagePage, INotifyPropertyChanged
     public RenderFragment Content { get; set; }
 
     [Parameter]
+    public bool ContinueNavigation { get; set; }
+
+    [Parameter]
     public string ContinueNavigationPath { get; set; }
 
     [Parameter]
@@ -94,7 +97,8 @@ public partial class EditPage<TItem> : ImagePage, INotifyPropertyChanged
 
     private void EditPage_PropertyChanged(object sender, PropertyChangedEventArgs e)
     {
-        if (e.PropertyName == nameof(ContinueNavigationPath))
+        if (e.PropertyName == nameof(ContinueNavigationPath) 
+            || (e.PropertyName == nameof(ContinueNavigation) && ContinueNavigation))
         {
             if (ValidationResult != null && ValidationResult.IsValid)
                 NavigateAway();

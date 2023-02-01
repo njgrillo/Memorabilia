@@ -17,9 +17,11 @@ public sealed class Size : DomainItemConstant
     public static readonly Size FortyEight = new(1025, "48");
     public static readonly Size FortyFour = new(1015, "44");
     public static readonly Size Full = new(2, "Full Size");
+    public static readonly Size Gumball = new(1035, "Gumball");
     public static readonly Size Large = new(3, "Large", "L");
     public static readonly Size Medium = new(9, "Medium", "M");
-    public static readonly Size Mini = new(1, "Mini");
+    public static readonly Size Micro = new(1034, "Micro");
+    public static readonly Size Mini = new(1, "Mini");    
     public static readonly Size Nine = new(1028, "9");
     public static readonly Size None = new(8, "None");
     public static readonly Size Other = new(7, "Other");
@@ -52,8 +54,10 @@ public sealed class Size : DomainItemConstant
         FortyEight,
         FortyFour,
         Full,
+        Gumball,
         Large,
         Medium,
+        Micro,
         Mini,
         Nine,
         None,
@@ -71,7 +75,8 @@ public sealed class Size : DomainItemConstant
         Unknown
     };
 
-    private Size(int id, string name, string abbreviation = null) : base(id, name, abbreviation) { }
+    private Size(int id, string name, string abbreviation = null) 
+        : base(id, name, abbreviation) { }
 
     public static Size Find(int id)
     {

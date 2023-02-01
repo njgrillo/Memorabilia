@@ -40,7 +40,7 @@ public class SaveFigure
 
         public int BrandId => _viewModel.BrandId;
 
-        public int? FigureSpecialtyTypeId => _viewModel.FigureSpecialtyTypeId > 0 ? _viewModel.FigureSpecialtyTypeId : 0;
+        public int? FigureSpecialtyTypeId => _viewModel.FigureSpecialtyTypeId > 0 ? _viewModel.FigureSpecialtyTypeId : null;
 
         public int? FigureTypeId => _viewModel.FigureTypeId > 0 ? _viewModel.FigureTypeId : null;
 

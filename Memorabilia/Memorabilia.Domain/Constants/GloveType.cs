@@ -8,6 +8,8 @@ public sealed class GloveType : DomainItemConstant
     public static readonly GloveType Hockey = new(4, "Hockey Glove");
     public static readonly GloveType Boxing = new(5, "Boxing Glove");
     public static readonly GloveType MMA = new(5, "MMA Glove", "MMA");
+    public static readonly GloveType Other = new(10, "Other");
+    public static readonly GloveType Soccer = new(11, "Soccer");
 
     public static readonly GloveType[] All =
     {
@@ -16,7 +18,9 @@ public sealed class GloveType : DomainItemConstant
         Boxing,
         Football,
         Hockey,            
-        MMA
+        MMA,
+        Other,
+        Soccer
     };
 
     public static readonly GloveType[] BaseballTypes =
@@ -52,6 +56,12 @@ public sealed class GloveType : DomainItemConstant
         if (sports.Contains(Sport.MixedMartialArts))
             gloveTypes.Add(MMA);
 
-        return gloveTypes.ToArray();
+        if (sports.Contains(Sport.Soccer))
+            gloveTypes.Add(Soccer);
+
+        gloveTypes.Add(Other);
+
+        return gloveTypes.OrderBy(x => x.Name)
+                         .ToArray();
     }
 }

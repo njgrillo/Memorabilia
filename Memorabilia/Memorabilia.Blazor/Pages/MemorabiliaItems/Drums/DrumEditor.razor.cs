@@ -2,6 +2,9 @@
 
 public partial class DrumEditor : MemorabiliaItem<SaveDrumViewModel>
 {
+    [Inject]
+    public DrumValidator Validator { get; set; }
+
     protected async Task OnLoad()
     {
         var viewModel = await QueryRouter.Send(new GetDrum(MemorabiliaId));
@@ -14,6 +17,15 @@ public partial class DrumEditor : MemorabiliaItem<SaveDrumViewModel>
 
     protected async Task OnSave()
     {
-        await CommandRouter.Send(new SaveDrum.Command(ViewModel));
+        var command = new SaveDrum.Command(ViewModel);
+
+        ViewModel.ValidationResult = Validator.Validate(command);
+
+        if (!ViewModel.ValidationResult.IsValid)
+            return;
+
+        await CommandRouter.Send(command);
+
+        ViewModel.SavedSuccessfully = true;
     }
 }

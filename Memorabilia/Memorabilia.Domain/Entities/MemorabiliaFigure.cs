@@ -4,7 +4,7 @@ public class MemorabiliaFigure : Framework.Library.Domain.Entity.DomainEntity
 {
     public MemorabiliaFigure() { }
 
-    public MemorabiliaFigure(int memorabiliaId, int figureSpecialtyTypeId, int? figureTypeId, int? year)
+    public MemorabiliaFigure(int memorabiliaId, int? figureSpecialtyTypeId, int? figureTypeId, int? year)
     {
         MemorabiliaId = memorabiliaId;
         FigureSpecialtyTypeId = figureSpecialtyTypeId;
@@ -20,7 +20,7 @@ public class MemorabiliaFigure : Framework.Library.Domain.Entity.DomainEntity
 
     public int? Year { get; private set; }
 
-    public void Set(int figureSpecialtyTypeId, int? figureTypeId, int? year)
+    public void Set(int? figureSpecialtyTypeId, int? figureTypeId, int? year)
     {
         FigureSpecialtyTypeId = figureSpecialtyTypeId;
         FigureTypeId = figureTypeId;

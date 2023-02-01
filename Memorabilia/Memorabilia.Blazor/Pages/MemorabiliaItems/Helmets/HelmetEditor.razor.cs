@@ -2,6 +2,9 @@
 
 public partial class HelmetEditor : MemorabiliaItem<SaveHelmetViewModel>
 {
+    [Inject]
+    public HelmetValidator Validator { get; set; }
+
     protected async Task OnLoad()
     {
         var viewModel = await QueryRouter.Send(new GetHelmet(MemorabiliaId));
@@ -14,6 +17,15 @@ public partial class HelmetEditor : MemorabiliaItem<SaveHelmetViewModel>
 
     protected async Task OnSave()
     {
-        await CommandRouter.Send(new SaveHelmet.Command(ViewModel));
+        var command = new SaveHelmet.Command(ViewModel);
+
+        ViewModel.ValidationResult = Validator.Validate(command);
+
+        if (!ViewModel.ValidationResult.IsValid)
+            return;
+
+        await CommandRouter.Send(command);
+
+        ViewModel.SavedSuccessfully = true;
     }
 }

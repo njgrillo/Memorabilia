@@ -15,7 +15,7 @@ public class SaveFootballViewModel : MemorabiliaItemEditViewModel
     public SaveFootballViewModel(FootballViewModel viewModel)
     {            
         BrandId = viewModel.Brand.BrandId;
-        CommissionerId = viewModel.Commissioner.CommissionerId;
+        CommissionerId = viewModel.Commissioner?.CommissionerId ?? 0;
         FootballTypeId = viewModel.Football?.FootballTypeId ?? 0;
         GameDate = viewModel.Game?.GameDate;
         GameStyleTypeId = viewModel.Game?.GameStyleTypeId ?? 0;

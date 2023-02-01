@@ -18,5 +18,5 @@ public class SaveViewModel : ViewModel
 
     public override string PageTitle => $"{(EditModeType == EditModeType.Update ? EditModeType.Update.Name : EditModeType.Add.Name)} {ItemTitle}";
 
-    public FluentValidation.Results.ValidationResult ValidationResult { get; set; }    
+    public FluentValidation.Results.ValidationResult ValidationResult { get; set; } = new(); 
 }

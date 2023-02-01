@@ -1,5 +1,3 @@
-using Memorabilia.Application.Validators.Memorabilia;
-
 namespace Memorabilia.Web;
 
 public class Startup
@@ -27,7 +25,48 @@ public class Startup
         services.AddTransient<QueryRouter>();
         services.AddMediatR(typeof(GetCommissioner).Assembly);
 
+        services.AddSingleton<BammerValidator>();
+        services.AddSingleton<BaseballValidator>();
+        services.AddSingleton<BasketballValidator>();
+        services.AddSingleton<BatValidator>();
+        services.AddSingleton<BobbleheadValidator>();
+        services.AddSingleton<BookValidator>();
+        services.AddSingleton<CanvasValidator>();
+        services.AddSingleton<CardValidator>();
+        services.AddSingleton<CerealBoxValidator>();
+        services.AddSingleton<DocumentValidator>();
+        services.AddSingleton<DrumValidator>();
+        services.AddSingleton<FigureValidator>();
+        services.AddSingleton<FirstDayCoverValidator>();
+        services.AddSingleton<FootballValidator>();
+        services.AddSingleton<GloveValidator>();
+        services.AddSingleton<GolfballValidator>();
+        services.AddSingleton<GuitarValidator>();
+        services.AddSingleton<HatValidator>();
+        services.AddSingleton<HeadBandValidator>();
+        services.AddSingleton<HelmetValidator>();
+        services.AddSingleton<HockeyStickValidator>();
+        services.AddSingleton<IndexCardValidator>();
+        services.AddSingleton<JerseyValidator>();
+        services.AddSingleton<LithographValidator>();
+        services.AddSingleton<MagazineValidator>();
         services.AddSingleton<MemorabiliaItemValidator>();
+        services.AddSingleton<PaintingValidator>();
+        services.AddSingleton<PantValidator>();
+        services.AddSingleton<PhotoValidator>();
+        services.AddSingleton<PinFlagValidator>();
+        services.AddSingleton<PlayingCardValidator>();
+        services.AddSingleton<PosterValidator>();
+        services.AddSingleton<PuckValidator>();
+        services.AddSingleton<PylonValidator>();
+        services.AddSingleton<ShirtValidator>();
+        services.AddSingleton<ShoeValidator>();
+        services.AddSingleton<SoccerballValidator>();
+        services.AddSingleton<TennisballValidator>();
+        services.AddSingleton<TennisRacketValidator>();
+        services.AddSingleton<TicketValidator>();
+        services.AddSingleton<TrunkValidator>();
+        services.AddSingleton<WristBandValidator>();
 
         services.AddTransient<AllStarRepository>();
         services.AddTransient<IAllStarRepository, AllStarCacheRepository>();

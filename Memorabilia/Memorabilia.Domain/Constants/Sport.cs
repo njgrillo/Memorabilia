@@ -33,6 +33,17 @@ public sealed class Sport : DomainItemConstant
         Hockey
     };
 
+    public static readonly Sport[] GloveSports =
+    {
+        Baseball,
+        Boxing,
+        Football,
+        Golf,
+        Hockey,
+        MixedMartialArts,
+        Soccer
+    };
+
     public static readonly Sport[] PositionSports =
     {
         Baseball,

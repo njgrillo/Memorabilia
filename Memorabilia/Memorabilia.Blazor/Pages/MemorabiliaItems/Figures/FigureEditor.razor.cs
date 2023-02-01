@@ -2,6 +2,9 @@
 
 public partial class FigureEditor : MemorabiliaItem<SaveFigureViewModel>
 {
+    [Inject]
+    public FigureValidator Validator { get; set; }
+
     protected async Task OnLoad()
     {
         var viewModel = await QueryRouter.Send(new GetFigure(MemorabiliaId));
@@ -14,6 +17,15 @@ public partial class FigureEditor : MemorabiliaItem<SaveFigureViewModel>
 
     protected async Task OnSave()
     {
-        await CommandRouter.Send(new SaveFigure.Command(ViewModel));
+        var command = new SaveFigure.Command(ViewModel);
+
+        ViewModel.ValidationResult = Validator.Validate(command);
+
+        if (!ViewModel.ValidationResult.IsValid)
+            return;
+
+        await CommandRouter.Send(command);
+
+        ViewModel.SavedSuccessfully = true;
     }
 }

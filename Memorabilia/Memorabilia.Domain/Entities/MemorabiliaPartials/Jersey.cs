@@ -18,7 +18,7 @@ public partial class Memorabilia
         SetLevelType(levelTypeId);
         SetSize(sizeId);
         SetJersey(qualityTypeId, styleTypeId, typeId);
-        SetGame(gameStyleTypeId, personIds.FirstOrDefault(), gameDate);
+        SetGame(gameStyleTypeId, personIds.Any() ? personIds.First() : null, gameDate);
         SetPeople(personIds);
         SetTeams(teamIds);
 

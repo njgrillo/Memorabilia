@@ -2,6 +2,9 @@
 
 public partial class BasketballEditor : MemorabiliaItem<SaveBasketballViewModel>
 {
+    [Inject]
+    public BasketballValidator Validator { get; set; }
+
     protected async Task OnLoad()
     {      
         var viewModel = await QueryRouter.Send(new GetBasketball(MemorabiliaId));
@@ -14,6 +17,15 @@ public partial class BasketballEditor : MemorabiliaItem<SaveBasketballViewModel>
 
     protected async Task OnSave()
     {
-        await CommandRouter.Send(new SaveBasketball.Command(ViewModel));
+        var command = new SaveBasketball.Command(ViewModel);
+
+        ViewModel.ValidationResult = Validator.Validate(command);
+
+        if (!ViewModel.ValidationResult.IsValid)
+            return;
+
+        await CommandRouter.Send(command);
+
+        ViewModel.SavedSuccessfully = true;
     }
 }

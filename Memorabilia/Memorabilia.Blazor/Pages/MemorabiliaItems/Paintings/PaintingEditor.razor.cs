@@ -2,6 +2,9 @@
 
 public partial class PaintingEditor : MemorabiliaItem<SavePaintingViewModel>
 {
+    [Inject]
+    public PaintingValidator Validator { get; set; }
+
     protected async Task OnLoad()
     {
         var viewModel = await QueryRouter.Send(new GetPainting(MemorabiliaId));
@@ -14,6 +17,15 @@ public partial class PaintingEditor : MemorabiliaItem<SavePaintingViewModel>
 
     protected async Task OnSave()
     {
-        await CommandRouter.Send(new SavePainting.Command(ViewModel));
+        var command = new SavePainting.Command(ViewModel);
+
+        ViewModel.ValidationResult = Validator.Validate(command);
+
+        if (!ViewModel.ValidationResult.IsValid)
+            return;
+
+        await CommandRouter.Send(command);
+
+        ViewModel.SavedSuccessfully = true;
     }
 }

@@ -22,6 +22,8 @@ public sealed class Spot : DomainItemConstant
     public static readonly Spot OnBooklet = new(34, "On Booklet");
     public static readonly Spot OnBookplate = new(8, "On Bookplate");
     public static readonly Spot OnBox = new(31, "On Box");
+    public static readonly Spot OnBrimBottomSide = new(42, "On Brim - Bottom Side");
+    public static readonly Spot OnBrimTopSide = new(41, "On Brim - Top Side");
     public static readonly Spot OnCardboard = new(12, "On Cardboard");
     public static readonly Spot OnCD = new(35, "On CD");
     public static readonly Spot OnCloth = new(3, "On Cloth");
@@ -63,6 +65,8 @@ public sealed class Spot : DomainItemConstant
         OnBooklet,
         OnBookplate,
         OnBox,
+        OnBrimBottomSide,
+        OnBrimTopSide,
         OnCardboard,
         OnCD,
         OnCloth,

@@ -1,7 +1,10 @@
 ﻿namespace Memorabilia.Blazor.Pages.MemorabiliaItems.Cards;
 
 public partial class CardEditor : MemorabiliaItem<SaveCardViewModel>
-{ 
+{
+    [Inject]
+    public CardValidator Validator { get; set; }
+
     protected async Task OnLoad()
     {
         var viewModel = await QueryRouter.Send(new GetCard(MemorabiliaId));
@@ -14,6 +17,15 @@ public partial class CardEditor : MemorabiliaItem<SaveCardViewModel>
 
     protected async Task OnSave()
     {
-        await CommandRouter.Send(new SaveCard.Command(ViewModel));
+        var command = new SaveCard.Command(ViewModel);
+
+        ViewModel.ValidationResult = Validator.Validate(command);
+
+        if (!ViewModel.ValidationResult.IsValid)
+            return;
+
+        await CommandRouter.Send(command);
+
+        ViewModel.SavedSuccessfully = true;
     }
 }

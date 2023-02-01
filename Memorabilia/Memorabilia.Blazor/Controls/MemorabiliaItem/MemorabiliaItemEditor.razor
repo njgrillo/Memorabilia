@@ -30,7 +30,8 @@
             <Match>
                 <SportDropDown MultiSelect="true"
                                SelectedItems="ViewModel.SportIds"
-                               SelectedItemsChanged="(p) => ViewModel.SportIds = p.ToList()" />
+                               SelectedItemsChanged="(p) => ViewModel.SportIds = p.ToList()"
+                               UseGloveSportsOnly="UseGloveSportsOnly" />
             </Match>
         </PrettyBlazor.Condition>
     </ContentColumn4>

@@ -29,8 +29,6 @@ public class SaveGloveViewModel : MemorabiliaItemEditViewModel
 
     public override bool DisplayGameStyleType => SizeId == Size.Standard.Id;
 
-    [Required]
-    [Range(1, int.MaxValue, ErrorMessage = "Glove Type is required.")]
     public int GloveTypeId { get; set; }
 
     public override string ImageFileName => Domain.Constants.ImageFileName.Glove;

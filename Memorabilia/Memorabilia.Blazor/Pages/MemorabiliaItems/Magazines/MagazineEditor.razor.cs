@@ -2,6 +2,9 @@
 
 public partial class MagazineEditor : MemorabiliaItem<SaveMagazineViewModel>
 {
+    [Inject]
+    public MagazineValidator Validator { get; set; }
+
     protected async Task OnLoad()
     {
         var viewModel = await QueryRouter.Send(new GetMagazine(MemorabiliaId));
@@ -14,6 +17,15 @@ public partial class MagazineEditor : MemorabiliaItem<SaveMagazineViewModel>
 
     protected async Task OnSave()
     {
-        await CommandRouter.Send(new SaveMagazine.Command(ViewModel));
+        var command = new SaveMagazine.Command(ViewModel);
+
+        ViewModel.ValidationResult = Validator.Validate(command);
+
+        if (!ViewModel.ValidationResult.IsValid)
+            return;
+
+        await CommandRouter.Send(command);
+
+        ViewModel.SavedSuccessfully = true;
     }
 }

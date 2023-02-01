@@ -2,6 +2,9 @@
 
 public partial class GloveEditor : MemorabiliaItem<SaveGloveViewModel>
 {
+    [Inject]
+    public GloveValidator Validator { get; set; }
+
     protected async Task OnLoad()
     {
         var viewModel = await QueryRouter.Send(new GetGlove(MemorabiliaId));
@@ -14,6 +17,15 @@ public partial class GloveEditor : MemorabiliaItem<SaveGloveViewModel>
 
     protected async Task OnSave()
     {
-        await CommandRouter.Send(new SaveGlove.Command(ViewModel));
+        var command = new SaveGlove.Command(ViewModel);
+
+        ViewModel.ValidationResult = Validator.Validate(command);
+
+        if (!ViewModel.ValidationResult.IsValid)
+            return;
+
+        await CommandRouter.Send(command);
+
+        ViewModel.SavedSuccessfully = true;
     }
 }

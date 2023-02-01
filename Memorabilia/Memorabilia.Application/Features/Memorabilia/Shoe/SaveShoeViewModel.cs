@@ -9,7 +9,6 @@ public class SaveShoeViewModel : MemorabiliaItemEditViewModel
         BrandId = Brand.Nike.Id;
         GameStyleTypeId = GameStyleType.None.Id;
         LevelTypeId = LevelType.Professional.Id;
-        SizeId = Size.Standard.Id;
     }
 
     public SaveShoeViewModel(ShoeViewModel viewModel)

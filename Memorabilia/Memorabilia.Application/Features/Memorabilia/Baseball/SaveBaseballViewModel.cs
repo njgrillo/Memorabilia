@@ -31,7 +31,6 @@ public class SaveBaseballViewModel : MemorabiliaItemEditViewModel
             Person = new SavePersonViewModel(new PersonViewModel(viewModel.People.First().Person));
     }
 
-    [StringLength(5, ErrorMessage = "Anniversary is too long.")]
     public string BaseballTypeAnniversary { get; set; }
 
     public BaseballType BaseballType => BaseballType.Find(BaseballTypeId);

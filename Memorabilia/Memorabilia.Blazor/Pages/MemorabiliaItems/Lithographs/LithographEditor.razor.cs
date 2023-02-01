@@ -2,6 +2,9 @@
 
 public partial class LithographEditor : MemorabiliaItem<SaveLithographViewModel>
 {
+    [Inject]
+    public LithographValidator Validator { get; set; }
+
     protected async Task OnLoad()
     {
         var viewModel = await QueryRouter.Send(new GetLithograph(MemorabiliaId));
@@ -14,6 +17,15 @@ public partial class LithographEditor : MemorabiliaItem<SaveLithographViewModel>
 
     protected async Task OnSave()
     {
-        await CommandRouter.Send(new SaveLithograph.Command(ViewModel));
+        var command = new SaveLithograph.Command(ViewModel);
+
+        ViewModel.ValidationResult = Validator.Validate(command);
+
+        if (!ViewModel.ValidationResult.IsValid)
+            return;
+
+        await CommandRouter.Send(command);
+
+        ViewModel.SavedSuccessfully = true;
     }
 }

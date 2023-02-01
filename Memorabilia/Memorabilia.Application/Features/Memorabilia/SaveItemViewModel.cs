@@ -16,4 +16,6 @@ public class SaveItemViewModel : SaveViewModel
     public MemorabiliaItemStep MemorabiliaItemStep => MemorabiliaItemStep.Detail;
 
     public override string PageTitle => $"{(EditModeType == EditModeType.Update ? EditModeType.Update.Name : EditModeType.Add.Name)} {ItemType?.Name} Details";
+
+    public bool SavedSuccessfully { get; set; }
 }

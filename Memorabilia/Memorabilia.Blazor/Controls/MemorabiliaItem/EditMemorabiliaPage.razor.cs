@@ -12,7 +12,10 @@ public partial class EditMemorabiliaPage<TItem> where TItem : MemorabiliaItemEdi
     public EventCallback OnLoad { get; set; }
 
     [Parameter]
-    public EventCallback<TItem> OnSave { get; set; }    
+    public EventCallback<TItem> OnSave { get; set; }
+
+    [Parameter]
+    public bool PerformValidation { get; set; } = true;
 
     protected async Task Load()
     {

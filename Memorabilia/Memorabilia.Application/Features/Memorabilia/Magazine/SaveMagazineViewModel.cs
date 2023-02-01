@@ -33,5 +33,5 @@ public class SaveMagazineViewModel : MemorabiliaItemEditViewModel
 
     public bool Matted { get; set; }
 
-    public int OrientationId { get; set; }
+    public int OrientationId { get; set; } = Domain.Constants.Orientation.Portrait.Id;
 }
