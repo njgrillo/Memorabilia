@@ -58,10 +58,29 @@ public sealed class Sport : DomainItemConstant
         Football
     };
 
+    public static readonly Sport[] ShoeSports =
+    {
+        Baseball,
+        Basketball,
+        Boxing,
+        Football,
+        Golf,
+        Soccer
+    };
+
     public static readonly Sport[] TrunkSports =
     {
         Boxing,
         MixedMartialArts
+    };
+
+    public static readonly Sport[] WristBandSports =
+    {
+        Baseball,
+        Basketball,
+        Football,
+        Soccer,
+        Tennis
     };
 
     private Sport(int id, string name, string alternateName = null) 
@@ -79,9 +98,16 @@ public sealed class Sport : DomainItemConstant
 
     public static Sport[] GetAll(ItemType itemType)
     {
-        return itemType == ItemType.Trunks
-            ? TrunkSports
-            : All;
+        if (itemType == ItemType.Shoe)
+            return ShoeSports;
+
+        if (itemType == ItemType.Trunks)
+            return TrunkSports;
+
+        if (itemType == ItemType.WristBand)
+            return WristBandSports;
+
+        return All;
     }
 
     public static bool HasAllStarGames(params Sport[] sports)
