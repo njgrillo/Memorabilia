@@ -40,6 +40,8 @@ public static class ImageFileName
 
     public static string CerealBox => "cerealbox.jpg";
 
+    public static string CerealTypes => "cerealtypes.jpg";
+
     public static string ChampionshipTypes => "championtypes.jpg";
 
     public static string Colleges => "colleges.jpg";

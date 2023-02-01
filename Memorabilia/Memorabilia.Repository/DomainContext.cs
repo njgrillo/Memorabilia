@@ -24,6 +24,7 @@ public class DomainContext : DbContext, IDomainContext
         modelBuilder.Entity<BasketballType>();
         modelBuilder.Entity<BatType>();
         modelBuilder.Entity<Brand>();
+        modelBuilder.Entity<CerealType>();
         modelBuilder.Entity<ChampionType>();
         modelBuilder.Entity<College>();
         modelBuilder.Entity<Color>();

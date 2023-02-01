@@ -30,6 +30,7 @@ global using Memorabilia.Application.Validators.Memorabilia.Helmet;
 global using Memorabilia.Application.Validators.Memorabilia.HockeyStick;
 global using Memorabilia.Application.Validators.Memorabilia.IndexCard;
 global using Memorabilia.Application.Validators.Memorabilia.Jersey;
+global using Memorabilia.Application.Validators.Memorabilia.JerseyNumber;
 global using Memorabilia.Application.Validators.Memorabilia.Lithograph;
 global using Memorabilia.Application.Validators.Memorabilia.Magazine;
 global using Memorabilia.Application.Validators.Memorabilia.Painting;

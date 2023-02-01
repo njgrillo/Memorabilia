@@ -44,6 +44,14 @@ public sealed class Sport : DomainItemConstant
         Soccer
     };
 
+    public static readonly Sport[] JerseySports =
+    {
+        Baseball,
+        Basketball,
+        Football,
+        Hockey        
+    };
+
     public static readonly Sport[] PositionSports =
     {
         Baseball,
@@ -98,6 +106,12 @@ public sealed class Sport : DomainItemConstant
 
     public static Sport[] GetAll(ItemType itemType)
     {
+        if (itemType == ItemType.Glove)
+            return GloveSports;
+
+        if (itemType == ItemType.Jersey || itemType == ItemType.JerseyNumber)
+            return JerseySports;
+
         if (itemType == ItemType.Shoe)
             return ShoeSports;
 

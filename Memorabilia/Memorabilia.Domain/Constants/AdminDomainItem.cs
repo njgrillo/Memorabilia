@@ -11,6 +11,7 @@ public sealed class AdminDomainItem
     public static readonly AdminDomainItem BasketballTypes = new("Basketball Types", "Defines variations of basketballs", Constants.ImageFileName.BasketballTypes);
     public static readonly AdminDomainItem BatTypes = new("Bat Types", "Defines variations of bats", Constants.ImageFileName.BatTypes);
     public static readonly AdminDomainItem Brands = new("Brands", "Defines the brands memorabilia can have", Constants.ImageFileName.Brands);
+    public static readonly AdminDomainItem CerealTypes = new("Cereal Types", "Defines the types of cereal", Constants.ImageFileName.CerealTypes);
     public static readonly AdminDomainItem ChampionTypes = new("Champion Types", "Defines the championships in various sports", Constants.ImageFileName.ChampionshipTypes);
     public static readonly AdminDomainItem Colleges = new("Colleges", "Defines colleges", Constants.ImageFileName.Colleges);
     public static readonly AdminDomainItem Colors = new("Colors", "Defines the colors for autographs", Constants.ImageFileName.Colors);
@@ -78,6 +79,7 @@ public sealed class AdminDomainItem
         BasketballTypes,
         BatTypes,
         Brands,
+        CerealTypes,
         ChampionTypes,
         Colleges,
         Colors,

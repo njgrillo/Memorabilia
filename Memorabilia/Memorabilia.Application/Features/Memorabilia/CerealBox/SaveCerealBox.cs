@@ -16,6 +16,7 @@ public class SaveCerealBox
             var memorabilia = await _memorabiliaRepository.Get(command.MemorabiliaId);
 
             memorabilia.SetCerealBox(command.BrandId,
+                                     command.CerealTypeId,
                                      command.LevelTypeId,
                                      command.PersonIds,
                                      command.SportIds,
@@ -35,6 +36,8 @@ public class SaveCerealBox
         }
 
         public int BrandId => _viewModel.BrandId;
+
+        public int? CerealTypeId => _viewModel.CerealTypeId > 0 ? _viewModel.CerealTypeId : null;
 
         public int LevelTypeId => _viewModel.LevelTypeId;
 

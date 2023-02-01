@@ -16,9 +16,11 @@ public sealed class Brand : DomainItemConstant
     public static readonly Brand Hasbro = new(18, "Hasbro");
     public static readonly Brand HighSchoolDayz = new(1030, "High School Dayz");
     public static readonly Brand Kenner = new(17, "Kenner");
+    public static readonly Brand Lindys = new(1039, "Lindy's");
     public static readonly Brand LouisvilleSlugger = new(1025, "Louisville Slugger", "LS");
     public static readonly Brand Majestic = new(5, "Majestic");
     public static readonly Brand MitchellAndNess = new(1022, "Mitchell & Ness", "MN");
+    public static readonly Brand Mizuno = new(1038, "Mizuno");
     public static readonly Brand Muslady = new(21, "Muslady");
     public static readonly Brand NewEra = new(25, "New Era");
     public static readonly Brand Nike = new(2, "Nike");
@@ -61,9 +63,11 @@ public sealed class Brand : DomainItemConstant
         Hasbro,
         HighSchoolDayz,
         Kenner,
+        Lindys,
         LouisvilleSlugger,
         Majestic,
         MitchellAndNess,
+        Mizuno,
         Muslady,
         NewEra,
         Nike,
@@ -98,7 +102,8 @@ public sealed class Brand : DomainItemConstant
         Spalding
     };
 
-    private Brand(int id, string name, string abbreviation = null) : base(id, name, abbreviation) { }
+    private Brand(int id, string name, string abbreviation = null) 
+        : base(id, name, abbreviation) { }
 
     public static Brand Find(int id)
     {

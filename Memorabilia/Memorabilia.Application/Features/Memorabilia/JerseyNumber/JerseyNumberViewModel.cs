@@ -15,6 +15,8 @@ public class JerseyNumberViewModel
 
     public int MemorabiliaId => _memorabilia.Id;
 
+    public int? Number => _memorabilia.JerseyNumber?.Number ?? null;
+
     public IEnumerable<MemorabiliaPerson> People => _memorabilia.People;
 
     public IEnumerable<MemorabiliaSport> Sports => _memorabilia.Sports;

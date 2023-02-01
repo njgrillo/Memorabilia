@@ -15,7 +15,10 @@ public class SaveJerseyNumber
         {
             var memorabilia = await _memorabiliaRepository.Get(command.MemorabiliaId);
 
-            memorabilia.SetJerseyNumber(command.PersonId, command.SportId, command.TeamId);
+            memorabilia.SetJerseyNumber(command.Number,
+                                        command.PersonId, 
+                                        command.SportId, 
+                                        command.TeamId);
 
             await _memorabiliaRepository.Update(memorabilia);
         }
@@ -31,6 +34,8 @@ public class SaveJerseyNumber
         }
 
         public int MemorabiliaId => _viewModel.MemorabiliaId;
+
+        public int? Number => _viewModel.Number;
 
         public int? PersonId => _viewModel.Person?.Id > 0 ? _viewModel.Person.Id : null;
 

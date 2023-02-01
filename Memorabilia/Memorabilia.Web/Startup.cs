@@ -48,6 +48,7 @@ public class Startup
         services.AddSingleton<HockeyStickValidator>();
         services.AddSingleton<IndexCardValidator>();
         services.AddSingleton<JerseyValidator>();
+        services.AddSingleton<JerseyNumberValidator>();
         services.AddSingleton<LithographValidator>();
         services.AddSingleton<MagazineValidator>();
         services.AddSingleton<MemorabiliaItemValidator>();

@@ -33,6 +33,7 @@ global using Memorabilia.Application.Features.Memorabilia.Helmet;
 global using Memorabilia.Application.Features.Memorabilia.HockeyStick;
 global using Memorabilia.Application.Features.Memorabilia.IndexCard;
 global using Memorabilia.Application.Features.Memorabilia.Jersey;
+global using Memorabilia.Application.Features.Memorabilia.JerseyNumber;
 global using Memorabilia.Application.Features.Memorabilia.Lithograph;
 global using Memorabilia.Application.Features.Memorabilia.Magazine;
 global using Memorabilia.Application.Features.Memorabilia.Painting;

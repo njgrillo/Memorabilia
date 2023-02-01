@@ -13,12 +13,15 @@ public class SaveCerealBoxViewModel : MemorabiliaItemEditViewModel
     public SaveCerealBoxViewModel(CerealBoxViewModel viewModel)
     {
         BrandId = viewModel.Brand.BrandId;
+        CerealTypeId = viewModel.Cereal?.CerealTypeId ?? 0;
         LevelTypeId = viewModel.Level.LevelTypeId;
         MemorabiliaId = viewModel.MemorabiliaId;
         People = viewModel.People.Select(person => new SavePersonViewModel(new PersonViewModel(person.Person))).ToList();
         SportIds = viewModel.Sports.Select(x => x.SportId).ToList();
         Teams = viewModel.Teams.Select(team => new SaveTeamViewModel(new TeamViewModel(team.Team))).ToList();
     }
+
+    public int CerealTypeId { get; set; }
 
     public override string ImageFileName => Domain.Constants.ImageFileName.CerealBox;
 

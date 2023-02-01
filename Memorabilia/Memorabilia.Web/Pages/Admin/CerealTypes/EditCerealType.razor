@@ -1,0 +1,10 @@
+﻿@page "/CerealTypes/Edit/{id:int}"
+
+@inherits EditItem
+
+<PageLoader>
+    <Content>
+        <CerealTypeEditor DomainImageRootPath="@DomainImageRootPath"
+                          Id=@Id />
+    </Content>
+</PageLoader>

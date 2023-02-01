@@ -9,6 +9,7 @@ public class SaveJerseyNumberViewModel : MemorabiliaItemEditViewModel
     public SaveJerseyNumberViewModel(JerseyNumberViewModel viewModel)
     {
         MemorabiliaId = viewModel.MemorabiliaId;
+        Number = viewModel.Number;
         SportId = viewModel.Sports.Select(sport => sport.SportId).FirstOrDefault();
 
         if (viewModel.People.Any())
@@ -21,4 +22,6 @@ public class SaveJerseyNumberViewModel : MemorabiliaItemEditViewModel
     public override string ImageFileName => Domain.Constants.ImageFileName.JerseyNumber;
 
     public override ItemType ItemType => ItemType.JerseyNumber;
+
+    public int? Number { get; set; }
 }

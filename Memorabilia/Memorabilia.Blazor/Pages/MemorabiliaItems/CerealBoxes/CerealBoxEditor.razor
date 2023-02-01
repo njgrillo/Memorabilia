@@ -13,6 +13,15 @@
                                DisplayMultiSportSelector="true"
                                DisplayMultiTeamSelector="true"
                                TItem="SaveCerealBoxViewModel"
-                               ViewModel="ViewModel" />
+                               ViewModel="ViewModel">
+            <AdditionalContent>
+                <DivRowCol3>
+                    <Content>
+                        <CerealTypeDropDown SelectedValue="ViewModel.CerealTypeId"
+                                            SelectionChanged="(p) => ViewModel.CerealTypeId = p" />
+                    </Content>
+                </DivRowCol3>
+            </AdditionalContent>
+        </MemorabiliaItemEditor>
     </Content>
 </EditMemorabiliaPage>

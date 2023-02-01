@@ -32,6 +32,7 @@ public class MemorabiliaContext : DbContext, IMemorabiliaContext
         modelBuilder.Entity<MemorabiliaBook>();
         modelBuilder.Entity<MemorabiliaBrand>();
         modelBuilder.Entity<MemorabiliaCard>();
+        modelBuilder.Entity<MemorabiliaCereal>();
         modelBuilder.Entity<MemorabiliaCommissioner>();
         modelBuilder.Entity<MemorabiliaFigure>();
         modelBuilder.Entity<MemorabiliaFootball>();
@@ -40,6 +41,7 @@ public class MemorabiliaContext : DbContext, IMemorabiliaContext
         modelBuilder.Entity<MemorabiliaHelmet>();
         modelBuilder.Entity<MemorabiliaImage>();
         modelBuilder.Entity<MemorabiliaJersey>();
+        modelBuilder.Entity<MemorabiliaJerseyNumber>();
         modelBuilder.Entity<MemorabiliaLevelType>();
         modelBuilder.Entity<MemorabiliaMagazine>();
         modelBuilder.Entity<MemorabiliaPerson>();

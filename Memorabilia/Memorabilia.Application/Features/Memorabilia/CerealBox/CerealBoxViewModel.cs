@@ -15,6 +15,8 @@ public class CerealBoxViewModel
 
     public MemorabiliaBrand Brand => _memorabilia.Brand;
 
+    public MemorabiliaCereal Cereal => _memorabilia.Cereal;
+
     public int MemorabiliaId => _memorabilia.Id;
 
     public MemorabiliaLevelType Level => _memorabilia.LevelType;

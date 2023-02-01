@@ -4,7 +4,6 @@
                      Item="ViewModel"
                      OnLoad="OnLoad"
                      OnSave="OnSave" 
-                     PerformValidation="false"
                      TItem="SaveJerseyNumberViewModel">
     <Content>
         <MemorabiliaItemEditor DisplayItemTypeBrand="false"
@@ -15,6 +14,17 @@
                                DisplaySingleSportSelector="true"
                                DisplaySingleTeamSelector="true"
                                TItem="SaveJerseyNumberViewModel"
-                               ViewModel="ViewModel" />
+                               ViewModel="ViewModel">
+            <AdditionalContent>
+                <DivRowCol3>
+                    <Content>
+                        <NullableIntField Label="Number"
+                                          Maximum="99"
+                                          Value="ViewModel.Number"
+                                          ValueChanged="@((p) => ViewModel.Number = p)" />
+                    </Content>
+                </DivRowCol3>
+            </AdditionalContent>
+        </MemorabiliaItemEditor>
     </Content>
 </EditMemorabiliaPage>

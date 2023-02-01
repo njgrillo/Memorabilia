@@ -51,8 +51,5 @@ public partial class MemorabiliaItemEditor<TItem> where TItem : MemorabiliaItemE
     public string GameStyleTypeDisplayText { get; set; } = "Game Style";
 
     [Parameter]
-    public bool UseGloveSportsOnly { get; set; }
-
-    [Parameter]
     public TItem ViewModel { get; set; }
 }

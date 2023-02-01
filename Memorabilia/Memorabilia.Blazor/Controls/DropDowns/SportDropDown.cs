@@ -5,12 +5,8 @@ public class SportDropDown : DropDown<Sport, int>
     [Parameter]
     public ItemType ItemType { get; set; }
 
-    [Parameter]
-    public bool UseGloveSportsOnly { get; set; }
-
     private ItemType _itemType;
     private bool _loaded;
-    private bool _useGloveSportsOnly;
 
     protected override string GetMultiSelectionText(List<string> selectedValues)
     {
@@ -33,15 +29,12 @@ public class SportDropDown : DropDown<Sport, int>
 
     private void SetItems()
     {
-        if (_loaded && _itemType == ItemType && _useGloveSportsOnly == UseGloveSportsOnly)
+        if (_loaded && _itemType == ItemType)
             return;
 
-        Items = UseGloveSportsOnly
-            ? Sport.All
-            : ItemType != null ? Sport.GetAll(ItemType) : Sport.All;
+        Items = ItemType != null ? Sport.GetAll(ItemType) : Sport.All;
 
         _itemType = ItemType;
         _loaded = true;
-        _useGloveSportsOnly = UseGloveSportsOnly;
     }
 }
