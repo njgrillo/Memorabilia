@@ -6,19 +6,35 @@ public class SaveMemorabiliaImagesViewModel : SaveViewModel
 {
     public SaveMemorabiliaImagesViewModel() { }
 
-    public SaveMemorabiliaImagesViewModel(List<Domain.Entities.MemorabiliaImage> images, string itemTypeName)
+    public SaveMemorabiliaImagesViewModel(MemorabiliaItemViewModel memorabiliaItemViewModel)
     {
-        Images = images.Select(image => new SaveImageViewModel(image)).ToList();
-        ItemTypeName = itemTypeName;
+        AutographId = memorabiliaItemViewModel.HasAutographs ? memorabiliaItemViewModel.Autographs.First().Id : null;
+        HasAutographs = memorabiliaItemViewModel.HasAutographs;
+        HasMultipleAutographs = memorabiliaItemViewModel.AutographsCount > 1;
+        Images = memorabiliaItemViewModel.Images.Select(image => new SaveImageViewModel(image)).ToList();
+        ItemTypeName = memorabiliaItemViewModel.ItemTypeName;
+        MemorabiliaId = memorabiliaItemViewModel.Id;
     }
 
-    public override string BackNavigationPath => $"Memorabilia/{ItemTypeName}/{EditModeType.Update.Name}/{MemorabiliaId}";
+    public int? AutographId { get; private set; }
 
-    public override string ContinueNavigationPath => $"Autographs/{EditModeType.Update.Name}/{MemorabiliaId}/-1";
+    public string AutographNavigationPath 
+        => $"Autographs/{EditModeType.Update.Name}/{MemorabiliaId}/{(AutographId.HasValue ? AutographId : "-1")}";
 
-    public override EditModeType EditModeType => Images.Any() ? EditModeType.Update : EditModeType.Add;
+    public override string BackNavigationPath 
+        => $"Memorabilia/{ItemTypeName}/{EditModeType.Update.Name}/{MemorabiliaId}";
+
+    public override string ContinueNavigationPath 
+        => $"Autographs/{EditModeType.Update.Name}/{MemorabiliaId}/-1";
+
+    public override EditModeType EditModeType 
+        => Images.Any() ? EditModeType.Update : EditModeType.Add;
 
     public override string ExitNavigationPath => "Memorabilia/Items";
+
+    public bool HasAutographs { get; private set; }
+
+    public bool HasMultipleAutographs { get; private set; }
 
     public List<SaveImageViewModel> Images { get; set; } = new();
 

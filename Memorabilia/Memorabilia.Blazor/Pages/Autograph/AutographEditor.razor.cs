@@ -1,6 +1,4 @@
-﻿#nullable disable
-
-namespace Memorabilia.Blazor.Pages.Autograph;
+﻿namespace Memorabilia.Blazor.Pages.Autograph;
 
 public partial class AutographEditor : AutographItem<SaveAutographViewModel>
 {   
@@ -14,22 +12,15 @@ public partial class AutographEditor : AutographItem<SaveAutographViewModel>
 
     protected async Task OnLoad()
     {
-        var viewModel = await QueryRouter.Send(new GetMemorabiliaItem(MemorabiliaId));           
+        var viewModel = await QueryRouter.Send(new GetMemorabiliaItem(MemorabiliaId));
 
-        if (viewModel.Autographs.Any())
-        {
-            if (AutographId == 0)
-            {
-                ViewModel = new SaveAutographViewModel(viewModel);
-                return;
-            }
-
-            GetViewModel(viewModel);
-        }
-        else
+        if (!viewModel.Autographs.Any() || AutographId <= 0)
         {
             ViewModel = new SaveAutographViewModel(viewModel);
+            return;
         }
+
+        GetViewModel(viewModel);
     }
 
     protected async Task OnSave()
@@ -43,9 +34,7 @@ public partial class AutographEditor : AutographItem<SaveAutographViewModel>
 
     private void GetViewModel(MemorabiliaItemViewModel viewModel)
     {
-        var autograph = AutographId == -1
-            ? viewModel.Autographs.FirstOrDefault()
-            : viewModel.Autographs.SingleOrDefault(autograph => autograph.Id == AutographId);
+        var autograph = viewModel.Autographs.SingleOrDefault(autograph => autograph.Id == AutographId);
 
         if (autograph == null)
         {

@@ -1,6 +1,4 @@
-﻿#nullable disable
-
-namespace Memorabilia.Blazor.Controls;
+﻿namespace Memorabilia.Blazor.Controls;
 
 public partial class EditImages<TItem> : ImagePage
 {
@@ -82,13 +80,11 @@ public partial class EditImages<TItem> : ImagePage
         NavigationManager.NavigateTo(ExitNavigationPath);
     }
 
-    protected async Task HandleValidSubmit()
+    protected async Task SaveAndExit()
     {
         await OnSave.InvokeAsync();
 
-        var url = _continue ? ContinueNavigationPath : ExitNavigationPath;
-
-        NavigationManager.NavigateTo(url);
+        NavigationManager.NavigateTo(ExitNavigationPath);
         Snackbar.Add("Images were saved successfully!", Severity.Success);
     }
 

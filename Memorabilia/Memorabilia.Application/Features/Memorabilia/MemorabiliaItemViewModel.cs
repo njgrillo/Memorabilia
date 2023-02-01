@@ -13,11 +13,14 @@ public class MemorabiliaItemViewModel
         _memorabilia = memorabilia;
     }
 
-    public Acquisition Acquisition => _memorabilia.MemorabiliaAcquisition.Acquisition;
+    public Acquisition Acquisition 
+        => _memorabilia.MemorabiliaAcquisition.Acquisition;
 
-    public string AcquisitionTypeName => Domain.Constants.AcquisitionType.Find(_memorabilia.MemorabiliaAcquisition.Acquisition.AcquisitionTypeId).Name;
+    public string AcquisitionTypeName 
+        => Domain.Constants.AcquisitionType.Find(_memorabilia.MemorabiliaAcquisition.Acquisition.AcquisitionTypeId).Name;
 
-    public List<AutographViewModel> Autographs => _memorabilia.Autographs.Select(autograph => new AutographViewModel(autograph)).ToList();
+    public List<AutographViewModel> Autographs 
+        => _memorabilia.Autographs.Select(autograph => new AutographViewModel(autograph)).ToList();
 
     public int AutographsCount => _memorabilia.Autographs.Count();
 
@@ -41,13 +44,16 @@ public class MemorabiliaItemViewModel
 
     public string FormattedLastModifiedDate => LastModifiedDate?.ToString("MM-dd-yyyy");
 
-    public string FormattedTotalCost => ((Acquisition?.Cost ?? 0) + _memorabilia.Autographs.Sum(autograph => autograph.Acquisition?.Cost ?? 0)).ToString("c");
+    public string FormattedTotalCost 
+        => ((Acquisition?.Cost ?? 0) + _memorabilia.Autographs.Sum(autograph => autograph.Acquisition?.Cost ?? 0)).ToString("c");
 
-    public string FormattedTotalValue => ((EstimatedValue ?? 0) + _memorabilia.Autographs.Sum(autograph => autograph.EstimatedValue ?? 0)).ToString("c");
+    public string FormattedTotalValue 
+        => ((EstimatedValue ?? 0) + _memorabilia.Autographs.Sum(autograph => autograph.EstimatedValue ?? 0)).ToString("c");
 
     public bool Framed => _memorabilia.Framed;
 
-    public IEnumerable<Franchise> Franchises => Teams.Select(team => team.Team.Franchise);
+    public IEnumerable<Franchise> Franchises 
+        => Teams.Select(team => team.Team.Franchise);
 
     public int? GameStyleTypeId => _memorabilia.Game?.GameStyleTypeId;
 
@@ -99,15 +105,18 @@ public class MemorabiliaItemViewModel
 
     public int PrivacyTypeId => _memorabilia.PrivacyTypeId;
 
-    public string PrivacyTypeName => Domain.Constants.PrivacyType.Find(_memorabilia.PrivacyTypeId).Name;        
+    public string PrivacyTypeName 
+        => Domain.Constants.PrivacyType.Find(_memorabilia.PrivacyTypeId).Name;        
 
     public int? PurchaseTypeId => _memorabilia.MemorabiliaAcquisition.Acquisition.PurchaseTypeId;
 
-    public string PurchaseTypeName => Domain.Constants.PurchaseType.Find(_memorabilia.MemorabiliaAcquisition.Acquisition.PurchaseTypeId ?? 0)?.Name;
+    public string PurchaseTypeName 
+        => Domain.Constants.PurchaseType.Find(_memorabilia.MemorabiliaAcquisition.Acquisition.PurchaseTypeId ?? 0)?.Name;
 
     public int? SizeId => _memorabilia.Size?.SizeId;        
 
-    public IEnumerable<SportLeagueLevel> SportLeagueLevels => Franchises.Select(franchise => franchise.SportLeagueLevel);
+    public IEnumerable<SportLeagueLevel> SportLeagueLevels 
+        => Franchises.Select(franchise => franchise.SportLeagueLevel);
 
     public IEnumerable<MemorabiliaSport> Sports => _memorabilia.Sports;
 

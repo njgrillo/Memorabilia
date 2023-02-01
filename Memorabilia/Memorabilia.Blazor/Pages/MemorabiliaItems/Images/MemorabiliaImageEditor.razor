@@ -22,7 +22,20 @@
                     SaveButtonText="Save & Continue"
                     TItem="SaveMemorabiliaImagesViewModel"
                     UploadPath="@UploadPath"
-                    UserId="@UserId"/>    
+                    UserId="@UserId">
+            <AdditionalButtons>
+                <PrettyBlazor.Condition Evaluation="@ViewModel.HasAutographs">
+                    <Match>
+                        <SaveButton OnClick="SaveAndEditAutograph"
+                                    Text="Save & Edit Autograph" />
+                    </Match>
+                </PrettyBlazor.Condition>
+                <SaveButton OnClick="SaveAndAddAutograph"
+                            Text="Save & Add Autograph" />
+                <SaveButton OnClick="SaveAndAddItem"
+                            Text="Save & Add Item" />
+            </AdditionalButtons>
+        </EditImages>
         <PageFooter NavigationPath="@ViewModel.BackNavigationPath" />
     </Content>
 </Page>

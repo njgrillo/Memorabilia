@@ -3,9 +3,7 @@
 @inherits ImagePage
 
 <div style="border: 1px solid black; margin-top: 2%; margin-bottom: 2%; margin-left: 2%; margin-right: 2%;">
-    <EditForm Model="Model" OnValidSubmit="HandleValidSubmit">
-        <DataAnnotationsValidator />
-        <ValidationSummary />   
+    <EditForm Model="Model">
         <DivPad2>
             <Content>
                 <DivRowCol12Center>
@@ -75,9 +73,10 @@
                 <DivLeftAlign>
                     <Content>
                         @AdditionalButtons
-                        <SaveButton Text="Save & Exit" />
-                        <SaveButton OnClick="@(()=> _continue = true)"
-                                    Text="@SaveButtonText" />                        
+                        @*<SaveButton OnClick="@(()=> _continue = true)"
+                                    Text="@SaveButtonText" />*@
+                        <SaveButton OnClick="SaveAndExit" 
+                                    Text="Save & Exit" />                                              
                         <CancelButton OnClick="Cancel" />
                     </Content>
                 </DivLeftAlign>
