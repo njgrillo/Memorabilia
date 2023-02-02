@@ -12,8 +12,10 @@
           PageFooterButtonText="@ViewModel.ExitButtonText"
           PageFooterNavigationPath="@ViewModel.BackNavigationPath"
           PageTitle="@ViewModel.PageTitle"
+          PerformValidation="true"
           TItem="SaveAutographViewModel"
-          UseMultipleButtons="true">
+          UseMultipleButtons="true"
+          ValidationResult="@ViewModel.ValidationResult">
     <TimelineContent>
         <AutographTimeline AutographId="ViewModel.Id" 
                            AutographStep="ViewModel.AutographStep"  
@@ -22,10 +24,14 @@
                            MemorabiliaId="ViewModel.MemorabiliaId" />
     </TimelineContent>
     <ImagePreview>
-        <ImagePanel DomainImageRootPath="@DomainImageRootPath"
-                    ImageNames="@ViewModel.MemorabiliaImageNames"
-                    ImageRootPath="@UploadPath"
-                    PanelText="Memorabilia Images" />
+        <PrettyBlazor.Condition Evaluation="ViewModel.HasMemorabiliaImages">
+            <Match>
+                <ImagePanel DomainImageRootPath="@DomainImageRootPath"
+                            ImageNames="@ViewModel.MemorabiliaImageNames"
+                            ImageRootPath="@UploadPath"
+                            PanelText="Memorabilia Images" />
+            </Match>
+        </PrettyBlazor.Condition>        
     </ImagePreview>
     <Content>        
         <DivRowCol6>
@@ -81,18 +87,20 @@
                             HideColumn3="@(!_displayAcquisitionDetails || !ViewModel.CanHaveCost)"
                             HideColumn4="@(!_displayAcquisitionDetails || !ViewModel.CanHavePlaceOfPurchase)">
                     <Content>
-                        <MudTooltip Text="Import from memorabilia item">
-                            <MudImage @onclick="OnImportAcquisition"
-                                      Class="rounded-lg can-click"
-                                      Elevation="5"
-                                      Height="20"
-                                      ObjectFit="@ObjectFit.Cover"
-                                      Src="@(GetDomainImageData(ImageFileName.Import))"
-                                      Width="20" />
-                        </MudTooltip>
-                        <AcquisitionTypeDropDown IsAutograph="true"
-                                                 SelectedValue="ViewModel.AcquisitionTypeId"
-                                                 SelectionChanged="(p) => ViewModel.AcquisitionTypeId = p" />
+                        <div style="display:flex">
+                            <AcquisitionTypeDropDown IsAutograph="true"
+                                                     SelectedValue="ViewModel.AcquisitionTypeId"
+                                                     SelectionChanged="OnAcquisitionTypeChange" />
+                            <MudTooltip Text="Import from memorabilia item">
+                                <MudImage @onclick="OnImportAcquisition"
+                                          Class="rounded-lg can-click"
+                                          Elevation="5"
+                                          Height="20"
+                                          ObjectFit="@ObjectFit.Cover"
+                                          Src="@(GetDomainImageData(ImageFileName.Import))"
+                                          Width="20" />
+                            </MudTooltip>                            
+                        </div>                        
                     </Content>
                     <ContentColumn2>
                         <MudDatePicker @bind-Date="ViewModel.AcquiredDate"
@@ -127,34 +135,40 @@
                 </PrettyBlazor.Condition>  
                 <DivRowCol3>
                     <Content>
-                        <MudTooltip Text="Import from estimated value from item">
-                            <MudImage @onclick="OnImportEstimatedValue"
-                                      Class="rounded-lg can-click"
-                                      Elevation="5"
-                                      Height="20"
-                                      ObjectFit="@ObjectFit.Cover"
-                                      Src="@(GetDomainImageData(ImageFileName.Import))"
-                                      Width="20" />
-                        </MudTooltip>
-                        <NullableDecimalField Label="Estimated Value ($)"
-                                              Value="ViewModel.EstimatedValue"
-                                              ValueChanged="@((p) => ViewModel.EstimatedValue = p)" />
+                        <div style="display:flex">
+                            <NullableDecimalField Label="Estimated Value ($)"
+                                                  Value="ViewModel.EstimatedValue"
+                                                  ValueChanged="@((p) => ViewModel.EstimatedValue = p)" />
+                            <MudTooltip Text="Import from estimated value from item">
+                                <MudImage @onclick="OnImportEstimatedValue"
+                                          Class="rounded-lg can-click"
+                                          Elevation="5"
+                                          Height="20"
+                                          ObjectFit="@ObjectFit.Cover"
+                                          Src="@(GetDomainImageData(ImageFileName.Import))"
+                                          Width="20" />
+                            </MudTooltip>
+                        </div>
                     </Content>
                 </DivRowCol3>
             </Match>
         </PrettyBlazor.Condition>
         <DivRowCol3>
             <Content>
-                <BooleanCheckBox Checked="@ViewModel.FullName"
-                                 CheckedChanged="(p) => ViewModel.FullName = p"
-                                 Label="Is Full Name" />
+                <MudSwitch Checked="@ViewModel.FullName"
+                           CheckedChanged="(p) => ViewModel.FullName = p"
+                           Color="MudBlazor.Color.Success"
+                           Label="Is Full Name?"
+                           T="bool" />
             </Content>
         </DivRowCol3>       
         <DivRowCol3>
             <Content>
-                <BooleanCheckBox Checked="@ViewModel.IsPersonalized"
-                                 CheckedChanged="(p) => ViewModel.IsPersonalized = p"
-                                 Label="Has Personalization" />
+                <MudSwitch Checked="@ViewModel.IsPersonalized"
+                           CheckedChanged="(p) => ViewModel.IsPersonalized = p"
+                           Color="MudBlazor.Color.Success"
+                           Label="Is Personalized?"
+                           T="bool" />
             </Content>
         </DivRowCol3>
         <PrettyBlazor.Condition Evaluation="ViewModel.IsPersonalized">
@@ -171,10 +185,11 @@
         </PrettyBlazor.Condition>        
         <DivRowCol3>
             <Content>
-                <CheckBox Checked="@ViewModel.IsNumbered"
-                          CheckedChanged="(p) => ViewModel.IsNumbered = p"
-                          Label="Numbered"
-                          TType="bool" />
+                <MudSwitch Checked="@ViewModel.IsNumbered"
+                           CheckedChanged="(p) => ViewModel.IsNumbered = p"
+                           Color="MudBlazor.Color.Success"
+                           Label="Is Numbered?"
+                           T="bool" />
             </Content>
         </DivRowCol3>
         <PrettyBlazor.Condition Evaluation="ViewModel.IsNumbered">

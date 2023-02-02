@@ -29,7 +29,8 @@ public class SaveAutographImagesViewModel : SaveViewModel
 
     public bool CanHaveSpot => Domain.Constants.ItemType.CanHaveSpot(ItemType);
 
-    public override string ContinueNavigationPath => $"Autographs/{EditModeType.Update.Name}/{MemorabiliaId}";
+    public override string ContinueNavigationPath 
+        => $"Autographs/{EditModeType.Update.Name}/{MemorabiliaId}/-1";
 
     public override EditModeType EditModeType => Images.Any() ? EditModeType.Update : EditModeType.Add;
 
@@ -41,5 +42,6 @@ public class SaveAutographImagesViewModel : SaveViewModel
 
     public int MemorabiliaId { get; }
 
-    public override string PageTitle => $"{(EditModeType == EditModeType.Add ? EditModeType.Add.Name : EditModeType.Update.Name)} Image(s)";
+    public override string PageTitle 
+        => $"{(EditModeType == EditModeType.Add ? EditModeType.Add.Name : EditModeType.Update.Name)} Image(s)";
 }

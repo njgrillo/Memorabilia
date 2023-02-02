@@ -25,6 +25,8 @@ public class Startup
         services.AddTransient<QueryRouter>();
         services.AddMediatR(typeof(GetCommissioner).Assembly);
 
+        services.AddSingleton<AuthenticationValidator>();
+        services.AddSingleton<AutographValidator>();
         services.AddSingleton<BammerValidator>();
         services.AddSingleton<BaseballValidator>();
         services.AddSingleton<BasketballValidator>();
@@ -47,6 +49,7 @@ public class Startup
         services.AddSingleton<HelmetValidator>();
         services.AddSingleton<HockeyStickValidator>();
         services.AddSingleton<IndexCardValidator>();
+        services.AddSingleton<InscriptionValidator>();
         services.AddSingleton<JerseyValidator>();
         services.AddSingleton<JerseyNumberValidator>();
         services.AddSingleton<LithographValidator>();

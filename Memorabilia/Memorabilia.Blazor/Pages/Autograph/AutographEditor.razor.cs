@@ -1,7 +1,10 @@
 ﻿namespace Memorabilia.Blazor.Pages.Autograph;
 
 public partial class AutographEditor : AutographItem<SaveAutographViewModel>
-{   
+{
+    [Inject]
+    public AutographValidator Validator { get; set; }
+
     [Parameter]
     public int MemorabiliaId { get; set; }
 
@@ -27,6 +30,11 @@ public partial class AutographEditor : AutographItem<SaveAutographViewModel>
     {
         var command = new SaveAutograph.Command(ViewModel);
 
+        ViewModel.ValidationResult = Validator.Validate(command);
+
+        if (!ViewModel.ValidationResult.IsValid)
+            return;
+
         await CommandRouter.Send(command);
 
         ViewModel.ContinueNavigationPath = $"Autographs/Inscriptions/{EditModeType.Update.Name}/{command.Id}";
@@ -45,6 +53,25 @@ public partial class AutographEditor : AutographItem<SaveAutographViewModel>
         ViewModel = new SaveAutographViewModel(autograph);
 
         _displayAcquisitionDetails = ViewModel.AcquisitionTypeId > 0;
+    }
+
+    private void OnAcquisitionTypeChange(int acquisitionTypeId)
+    {
+        ViewModel.AcquisitionTypeId = acquisitionTypeId;
+
+        var acquisitionType = AcquisitionType.Find(acquisitionTypeId);
+
+        if (!AcquisitionType.CanHaveCost(acquisitionType))
+            ViewModel.Cost = null;
+
+        if (!AcquisitionType.CanHavePurchaseType(acquisitionType))
+            ViewModel.PurchaseTypeId = 0;
+
+        if (!AcquisitionType.CanHaveSendAndReceiveDates(acquisitionType))
+        {
+            ViewModel.ReceivedDate = null;
+            ViewModel.SentDate = null;
+        }
     }
 
     private void OnImportAcquisition()

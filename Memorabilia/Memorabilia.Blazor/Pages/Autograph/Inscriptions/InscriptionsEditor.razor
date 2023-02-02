@@ -13,7 +13,8 @@
           PageFooterNavigationPath="@_inscriptionsViewModel.BackNavigationPath"
           PageTitle="@_inscriptionsViewModel.PageTitle"
           TItem="SaveInscriptionsViewModel"
-          UseMultipleButtons="true">
+          UseMultipleButtons="true"
+          ValidationResult="@ViewModel.ValidationResult">
     <TimelineContent>
         <AutographTimeline AutographId="_inscriptionsViewModel.AutographId" 
                            AutographStep="_inscriptionsViewModel.AutographStep"  
@@ -22,10 +23,14 @@
                            MemorabiliaId="_inscriptionsViewModel.MemorabiliaId" />
     </TimelineContent>
     <ImagePreview>
-        <ImagePanel DomainImageRootPath="@DomainImageRootPath"
-                    ImageNames="@_inscriptionsViewModel.MemorabiliaImageNames"
-                    ImageRootPath="@UploadPath"
-                    PanelText="Memorabilia Images" />
+        <PrettyBlazor.Condition Evaluation="_inscriptionsViewModel.HasMemorabiliaImages">
+            <Match>
+                <ImagePanel DomainImageRootPath="@DomainImageRootPath"
+                            ImageNames="@_inscriptionsViewModel.MemorabiliaImageNames"
+                            ImageRootPath="@UploadPath"
+                            PanelText="Memorabilia Images" />
+            </Match>
+        </PrettyBlazor.Condition>
     </ImagePreview>
     <Content>
         <DivRowCol4>

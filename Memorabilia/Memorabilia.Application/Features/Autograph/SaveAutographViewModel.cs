@@ -71,12 +71,8 @@ public class SaveAutographViewModel : SaveViewModel
 
     public bool CanImportPerson => MemorabiliaPerson?.Id > 0;
 
-    [Required]
-    [Range(1, int.MaxValue, ErrorMessage = "Color is required.")]
     public int ColorId { get; set; }
 
-    [Required]
-    [Range(1, int.MaxValue, ErrorMessage = "Condition is required.")]
     public int ConditionId { get; set; } = Condition.Pristine.Id;
 
     public decimal? Cost { get; set; }
@@ -96,6 +92,8 @@ public class SaveAutographViewModel : SaveViewModel
     public bool FullName { get; set; }
 
     public int? Grade { get; set; }
+
+    public bool HasMemorabiliaImages => MemorabiliaImageNames.Any();
 
     public string ImageFileName => Domain.Constants.ImageFileName.Autographs;
 
@@ -157,7 +155,6 @@ public class SaveAutographViewModel : SaveViewModel
 
     public decimal? MemorabiliaEstimatedValue { get; set; }
 
-    [Required]
     public int MemorabiliaId { get; set; }
 
     public string[] MemorabiliaImageNames { get; }
@@ -172,7 +169,6 @@ public class SaveAutographViewModel : SaveViewModel
 
     public override string PageTitle => $"{(Id > 0 ? EditModeType.Update.Name : EditModeType.Add.Name)} Autograph";
 
-    [Required]
     public SavePersonViewModel Person { get; set; } = new();
 
     public string PersonalizationText { get; set; }
@@ -185,7 +181,5 @@ public class SaveAutographViewModel : SaveViewModel
 
     public string UserFirstName { get; set; }
 
-    [Required]
-    [Range(1, int.MaxValue, ErrorMessage = "Writing Instrument is required.")]
     public int WritingInstrumentId { get; set; }
 }

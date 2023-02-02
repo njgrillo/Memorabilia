@@ -19,15 +19,20 @@ public class SaveSpotViewModel : SaveViewModel
 
     public AutographStep AutographStep => AutographStep.Spot;
 
-    public override string BackNavigationPath => $"Autographs/Authentications/{EditModeType.Update.Name}/{AutographId}";
+    public override string BackNavigationPath
+        => $"Autographs/Authentications/{EditModeType.Update.Name}/{AutographId}";
 
     public bool CanHaveSpot => ItemType.CanHaveSpot(ItemType);
 
-    public override string ContinueNavigationPath => $"Autographs/Image/{EditModeType.Update.Name}/{AutographId}";
+    public override string ContinueNavigationPath 
+        => $"Autographs/Image/{EditModeType.Update.Name}/{AutographId}";
 
-    public override EditModeType EditModeType => SpotId > 0 ? EditModeType.Update : EditModeType.Add;
+    public override EditModeType EditModeType 
+        => SpotId > 0 ? EditModeType.Update : EditModeType.Add;
 
     public override string ExitNavigationPath => "Memorabilia/Items";
+
+    public bool HasMemorabiliaImages => MemorabiliaImageNames.Any();
 
     public virtual string ImageFileName => AdminDomainItem.Spots.ImageFileName;
 
@@ -37,11 +42,10 @@ public class SaveSpotViewModel : SaveViewModel
 
     public int MemorabiliaId { get; }
 
-    public string[] MemorabiliaImageNames { get; }
+    public string[] MemorabiliaImageNames { get; } = Array.Empty<string>();
 
-    public override string PageTitle => $"{(EditModeType == EditModeType.Add ? EditModeType.Add.Name : EditModeType.Update.Name)} Spot";
+    public override string PageTitle 
+        => $"{(EditModeType == EditModeType.Add ? EditModeType.Add.Name : EditModeType.Update.Name)} Spot";
 
-    [Required]
-    [Range(1, int.MaxValue, ErrorMessage = "Spot is required.")]
     public int SpotId { get; set; }
 }

@@ -1,9 +1,10 @@
-﻿#nullable disable
-
-namespace Memorabilia.Blazor.Pages.Autograph.Authentications;
+﻿namespace Memorabilia.Blazor.Pages.Autograph.Authentications;
 
 public partial class AuthenticationsEditor : AutographItem<SaveAuthenticationViewModel>
 {
+    [Inject]
+    public AuthenticationValidator Validator { get; set; }
+
     [Parameter]
     public string UploadPath { get; set; }
 
@@ -32,6 +33,11 @@ public partial class AuthenticationsEditor : AutographItem<SaveAuthenticationVie
 
     private void AddAuthentication()
     {
+        ViewModel.ValidationResult = Validator.Validate(ViewModel);
+
+        if (!ViewModel.ValidationResult.IsValid)
+            return;
+
         AuthenticationsViewModel.Authentications.Add(ViewModel);
 
         ViewModel = new SaveAuthenticationViewModel();
@@ -52,7 +58,13 @@ public partial class AuthenticationsEditor : AutographItem<SaveAuthenticationVie
 
     private void UpdateAuthentication()
     {
-        var authentication = AuthenticationsViewModel.Authentications.Single(authentication => authentication.AuthenticationCompanyId == ViewModel.AuthenticationCompanyId);
+        ViewModel.ValidationResult = Validator.Validate(ViewModel);
+
+        if (!ViewModel.ValidationResult.IsValid)
+            return;
+
+        var authentication = AuthenticationsViewModel.Authentications
+                                                     .Single(authentication => authentication.AuthenticationCompanyId == ViewModel.AuthenticationCompanyId);
 
         authentication.HasHologram = ViewModel.HasHologram;
         authentication.HasLetter = ViewModel.HasLetter;

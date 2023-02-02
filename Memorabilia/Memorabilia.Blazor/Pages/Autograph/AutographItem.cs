@@ -1,6 +1,4 @@
-﻿#nullable disable
-
-namespace Memorabilia.Blazor.Pages.Autograph;
+﻿namespace Memorabilia.Blazor.Pages.Autograph;
 
 public abstract class AutographItem<T> : ImagePage where T : SaveViewModel
 {

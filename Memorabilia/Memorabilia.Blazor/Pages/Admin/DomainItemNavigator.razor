@@ -1,21 +1,30 @@
 ﻿@inherits ImagePage
 
+<div class="row">
+    <div class="col-md-4">
+        <DivPad5>
+            <Content>
+                <span hidden="@(!_displayItemTypeNotFound)"
+                      style="background-color:red;">
+                    Item Type Not Found
+                </span>
+            </Content>
+        </DivPad5>
+    </div>
+</div>
 <div class="row" @onkeydown="@Enter">
     <div class="col-md-4">
         <DivPad5>
             <Content> 
-                <TextField Label="Quick Jump"
-                           SelectedText="@DomainItemQuickJump"
-                           SelectedTextChanged="@((p) => DomainItemQuickJump = p)" />
-                <br />
-                <span style="background-color:red;" hidden="@(!_displayItemTypeNotFound)">
-                    Item Type Not Found
-                </span>
-                <br />
-                <CustomButton ButtonType="MudBlazor.ButtonType.Button"
-                              OnClick="QuickJump"
-                              Size="MudBlazor.Size.Small"
-                              Text="Go" />                
+                <div style="display:flex">
+                    <TextField Label="Quick Jump"
+                               SelectedText="@DomainItemQuickJump"
+                               SelectedTextChanged="@((p) => DomainItemQuickJump = p)" />
+                    <CustomButton ButtonType="MudBlazor.ButtonType.Button"
+                                  OnClick="QuickJump"
+                                  Size="MudBlazor.Size.Small"
+                                  Text="Go" />
+                </div>                             
             </Content>                    
         </DivPad5>                
     </div>

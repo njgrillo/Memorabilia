@@ -11,6 +11,7 @@ public sealed class Color : DomainItemConstant
     public static readonly Color Other = new(7, "Other");
     public static readonly Color Red = new(5, "Red");
     public static readonly Color Silver = new(3, "Silver");        
+    public static readonly Color Unknown = new(14, "Unknown");        
     public static readonly Color White = new(10, "White");
 
     public static readonly Color[] All =
@@ -24,6 +25,7 @@ public sealed class Color : DomainItemConstant
         Other,
         Red,
         Silver,
+        Unknown,
         White
     };
 
@@ -36,6 +38,7 @@ public sealed class Color : DomainItemConstant
         Other,
         Red,
         Silver,
+        Unknown,
         White
     };
 
@@ -47,10 +50,12 @@ public sealed class Color : DomainItemConstant
         Blue,
         Gold,
         Other,
-        Red
+        Red,
+        Unknown
     };
 
-    private Color(int id, string name, string abbreviation = null) : base(id, name, abbreviation) { }
+    private Color(int id, string name, string abbreviation = null) 
+        : base(id, name, abbreviation) { }
 
     public static Color Find(int id)
     {

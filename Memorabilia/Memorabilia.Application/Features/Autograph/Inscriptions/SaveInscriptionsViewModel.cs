@@ -23,13 +23,20 @@ public class SaveInscriptionsViewModel : SaveViewModel
 
     public AutographStep AutographStep => AutographStep.Inscription;
 
-    public override string BackNavigationPath => $"Autographs/{EditModeType.Update.Name}/{MemorabiliaId}/{AutographId}";
+    public override string BackNavigationPath 
+        => $"Autographs/{EditModeType.Update.Name}/{MemorabiliaId}/{AutographId}";
 
     public bool CanHaveSpot => ItemType.CanHaveSpot(ItemType);
 
-    public override EditModeType EditModeType => Inscriptions.Any() ? EditModeType.Update : EditModeType.Add;
+    public override string ContinueNavigationPath
+        => $"Autographs/Authentications/{EditModeType.Update.Name}/{AutographId}";
+
+    public override EditModeType EditModeType 
+        => Inscriptions.Any() ? EditModeType.Update : EditModeType.Add;
 
     public override string ExitNavigationPath => "Memorabilia/Items";
+
+    public bool HasMemorabiliaImages => MemorabiliaImageNames.Any();
 
     public string ImageFileName => AdminDomainItem.InscriptionTypes.ImageFileName;
 
@@ -39,7 +46,8 @@ public class SaveInscriptionsViewModel : SaveViewModel
 
     public int MemorabiliaId { get; }
 
-    public string[] MemorabiliaImageNames { get; }
+    public string[] MemorabiliaImageNames { get; } = Array.Empty<string>();
 
-    public override string PageTitle => $"{(EditModeType == EditModeType.Add ? EditModeType.Add.Name : EditModeType.Update.Name)} Inscription(s)";
+    public override string PageTitle 
+        => $"{(EditModeType == EditModeType.Add ? EditModeType.Add.Name : EditModeType.Update.Name)} Inscription(s)";
 }

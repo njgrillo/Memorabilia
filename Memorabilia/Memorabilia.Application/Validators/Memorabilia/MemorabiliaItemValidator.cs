@@ -41,6 +41,12 @@ public class MemorabiliaItemValidator : AbstractValidator<SaveMemorabiliaItem.Co
             .WithMessage($"Right Serial # must be {int.MaxValue} or less.");
 
         RuleFor(x => x.EstimatedValue)
+            .GreaterThanOrEqualTo(0)
+            .When(x => x.EstimatedValue.HasValue)
+            .WithName("Estimated Value")
+            .WithMessage("Estimated Value must be greater than or equal to 0.");
+
+        RuleFor(x => x.EstimatedValue)
             .LessThanOrEqualTo(9999999999)
             .When(x => x.EstimatedValue.HasValue)
             .WithName("Estimated Value")

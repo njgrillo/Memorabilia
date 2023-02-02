@@ -27,6 +27,12 @@
                     TItem="SaveAutographImagesViewModel"
                     UploadPath="@UploadPath"
                     UserId="@UserId">
+            <AdditionalButtons>
+                <SaveButton OnClick="SaveAndAddAutograph"
+                            Text="Save & Add Autograph" />
+                <SaveButton OnClick="SaveAndAddItem"
+                            Text="Save & Add Item" />
+            </AdditionalButtons>
         </EditImages>
         <PageFooter NavigationPath="@ViewModel.BackNavigationPath" />
     </Content>

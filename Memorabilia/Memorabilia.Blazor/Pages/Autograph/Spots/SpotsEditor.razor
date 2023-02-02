@@ -22,10 +22,14 @@
                            MemorabiliaId="ViewModel.MemorabiliaId" />
     </TimelineContent>
     <ImagePreview>
-        <ImagePanel DomainImageRootPath="@DomainImageRootPath"
-                    ImageNames="@ViewModel.MemorabiliaImageNames"
-                    ImageRootPath="@UploadPath"
-                    PanelText="Memorabilia Images" />
+        <PrettyBlazor.Condition Evaluation="ViewModel.HasMemorabiliaImages">
+            <Match>
+                <ImagePanel DomainImageRootPath="@DomainImageRootPath"
+                            ImageNames="@ViewModel.MemorabiliaImageNames"
+                            ImageRootPath="@UploadPath"
+                            PanelText="Memorabilia Images" />
+            </Match>
+        </PrettyBlazor.Condition>
     </ImagePreview>
     <Content>
         <DivRowCol3>

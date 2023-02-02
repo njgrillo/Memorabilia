@@ -1,9 +1,12 @@
-﻿#nullable disable
+﻿using Memorabilia.Domain.Entities;
 
 namespace Memorabilia.Blazor.Pages.Autograph.Images;
 
 public partial class AutographImageEditor : AutographItem<SaveAutographImagesViewModel>
 {
+    [Inject]
+    public ISnackbar Snackbar { get; set; }
+
     [Parameter]
     public string UploadPath { get; set; }
 
@@ -39,5 +42,21 @@ public partial class AutographImageEditor : AutographItem<SaveAutographImagesVie
         ViewModel.Images = EditImages.Images;
 
         await CommandRouter.Send(new SaveAutographImage.Command(ViewModel));
+    }
+
+    protected async Task SaveAndAddAutograph()
+    {
+        await OnSave();
+
+        NavigationManager.NavigateTo(ViewModel.ContinueNavigationPath);
+        Snackbar.Add("Images were saved successfully!", Severity.Success);
+    }
+
+    protected async Task SaveAndAddItem()
+    {
+        await OnSave();
+
+        NavigationManager.NavigateTo("/Memorabilia/Edit");
+        Snackbar.Add("Images were saved successfully!", Severity.Success);
     }
 }

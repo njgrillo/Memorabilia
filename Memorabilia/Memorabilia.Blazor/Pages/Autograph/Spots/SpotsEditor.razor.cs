@@ -1,6 +1,4 @@
-﻿#nullable disable
-
-namespace Memorabilia.Blazor.Pages.Autograph.Spots;
+﻿namespace Memorabilia.Blazor.Pages.Autograph.Spots;
 
 public partial class SpotsEditor : AutographItem<SaveSpotViewModel>
 {
@@ -14,6 +12,9 @@ public partial class SpotsEditor : AutographItem<SaveSpotViewModel>
 
     protected async Task OnSave()
     {
+        if (ViewModel.SpotId == 0)
+            return;
+
         await CommandRouter.Send(new Application.Features.Autograph.Spot.SaveSpot.Command(ViewModel));
     }
 }

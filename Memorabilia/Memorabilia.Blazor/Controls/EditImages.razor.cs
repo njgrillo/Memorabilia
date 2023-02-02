@@ -62,7 +62,6 @@ public partial class EditImages<TItem> : ImagePage
     [Parameter]
     public EventCallback<List<SaveImageViewModel>> ValueChanged { get; set; }
 
-    private bool _continue;
     private IReadOnlyList<IBrowserFile> _files;
 
     protected void Cancel()

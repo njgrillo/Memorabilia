@@ -13,7 +13,8 @@
           PageFooterNavigationPath="@AuthenticationsViewModel.BackNavigationPath"
           PageTitle="@AuthenticationsViewModel.PageTitle"
           TItem="SaveAuthenticationsViewModel"
-          UseMultipleButtons="true">
+          UseMultipleButtons="true"
+          ValidationResult="@ViewModel.ValidationResult">
     <TimelineContent>
         <AutographTimeline AutographId="AuthenticationsViewModel.AutographId" 
                            AutographStep="AuthenticationsViewModel.AutographStep"  
@@ -22,10 +23,14 @@
                            MemorabiliaId="AuthenticationsViewModel.MemorabiliaId"/>
     </TimelineContent>
     <ImagePreview>
-        <ImagePanel DomainImageRootPath="@DomainImageRootPath"
-                    ImageNames="@AuthenticationsViewModel.MemorabiliaImageNames"
-                    ImageRootPath="@UploadPath"
-                    PanelText="Memorabilia Images" />
+        <PrettyBlazor.Condition Evaluation="AuthenticationsViewModel.HasMemorabiliaImages">
+            <Match>
+                <ImagePanel DomainImageRootPath="@DomainImageRootPath"
+                            ImageNames="@AuthenticationsViewModel.MemorabiliaImageNames"
+                            ImageRootPath="@UploadPath"
+                            PanelText="Memorabilia Images" />
+            </Match>
+        </PrettyBlazor.Condition>
     </ImagePreview>
     <Content>
         <DivRowCol4>
@@ -44,26 +49,34 @@
         </DivRowCol4>
         <DivRowCol2>
             <Content>
-                <BooleanCheckBox Checked="@ViewModel.HasHologram"
-                                 CheckedChanged="(p) => ViewModel.HasHologram = p"
-                                 Label="Has Hologram" /> 
+                <MudSwitch Checked="@ViewModel.HasHologram"
+                           CheckedChanged="(p) => ViewModel.HasHologram = p"
+                           Color="MudBlazor.Color.Success"
+                           Label="Has Hologram?"
+                           T="bool" />
             </Content>
             <ContentColumn2>
-                <BooleanCheckBox Checked="@ViewModel.HasCertificationCard"
-                                 CheckedChanged="(p) => ViewModel.HasCertificationCard = p"
-                                 Label="Has Certification Card" />
+                <MudSwitch Checked="@ViewModel.HasCertificationCard"
+                           CheckedChanged="(p) => ViewModel.HasCertificationCard = p"
+                           Color="MudBlazor.Color.Success"
+                           Label="Has Cert Card?"
+                           T="bool" />
             </ContentColumn2>
         </DivRowCol2>
         <DivRowCol2>
             <Content>
-                <BooleanCheckBox Checked="@ViewModel.HasLetter"
-                                 CheckedChanged="(p) => ViewModel.HasLetter = p"
-                                 Label="Has Letter" />
+                <MudSwitch Checked="@ViewModel.HasLetter"
+                           CheckedChanged="(p) => ViewModel.HasLetter = p"
+                           Color="MudBlazor.Color.Success"
+                           Label="Has LOA?"
+                           T="bool" />
             </Content>
             <ContentColumn2>
-                <BooleanCheckBox Checked="@ViewModel.Witnessed"
-                                 CheckedChanged="(p) => ViewModel.Witnessed = p"
-                                 Label="Witnessed" /> 
+                <MudSwitch Checked="@ViewModel.Witnessed"
+                           CheckedChanged="(p) => ViewModel.Witnessed = p"
+                           Color="MudBlazor.Color.Success"
+                           Label="Was Witnessed?"
+                           T="bool" />
             </ContentColumn2>
         </DivRowCol2>
         <DivLeftAlign>

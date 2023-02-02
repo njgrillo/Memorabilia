@@ -1,9 +1,10 @@
-﻿#nullable disable
-
-namespace Memorabilia.Blazor.Pages.Autograph.Inscriptions;
+﻿namespace Memorabilia.Blazor.Pages.Autograph.Inscriptions;
 
 public partial class InscriptionsEditor : AutographItem<SaveInscriptionViewModel>
 {
+    [Inject]
+    public InscriptionValidator Validator { get; set; }
+
     [Parameter]
     public string UploadPath { get; set; }
 
@@ -26,12 +27,15 @@ public partial class InscriptionsEditor : AutographItem<SaveInscriptionViewModel
     protected async Task OnSave()
     {
         await CommandRouter.Send(new SaveInscriptions.Command(_inscriptionsViewModel));
-
-        _inscriptionsViewModel.ContinueNavigationPath = $"Autographs/Authentications/{EditModeType.Update.Name}/{AutographId}";
     }
 
     private void AddInscription()
     {
+        ViewModel.ValidationResult = Validator.Validate(ViewModel);
+
+        if (!ViewModel.ValidationResult.IsValid)
+            return;
+
         _inscriptionsViewModel.Inscriptions.Add(ViewModel);
 
         ViewModel = new SaveInscriptionViewModel();
@@ -49,11 +53,17 @@ public partial class InscriptionsEditor : AutographItem<SaveInscriptionViewModel
 
     private void UpdateInscription()
     {
-        var inscription = _inscriptionsViewModel.Inscriptions.Single(inscription => inscription.InscriptionTypeId == ViewModel.InscriptionTypeId);
+        ViewModel.ValidationResult = Validator.Validate(ViewModel);
+
+        if (!ViewModel.ValidationResult.IsValid)
+            return;
+
+        var inscription = _inscriptionsViewModel.Inscriptions
+                                                .Single(inscription => inscription.InscriptionTypeId == ViewModel.InscriptionTypeId);
 
         inscription.InscriptionText = ViewModel.InscriptionText;
 
-        ViewModel = new SaveInscriptionViewModel();
+        ViewModel = new SaveInscriptionViewModel();        
 
         _canAddInscription = true;
         _canEditInscriptionType = true;

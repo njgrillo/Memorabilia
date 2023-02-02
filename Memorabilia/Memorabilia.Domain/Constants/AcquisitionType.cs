@@ -28,7 +28,8 @@ public sealed class AcquisitionType : DomainItemConstant
         Trade
     };
 
-    private AcquisitionType(int id, string name, string abbreviation = null) : base(id, name, abbreviation) { }
+    private AcquisitionType(int id, string name, string abbreviation = null) 
+        : base(id, name, abbreviation) { }
 
     public static bool CanHaveCost(AcquisitionType acquisitionType)
     {
@@ -44,13 +45,15 @@ public sealed class AcquisitionType : DomainItemConstant
         return acquisitionTypes.Contains(acquisitionType);
     }
 
+    public static bool CanHavePurchaseType(AcquisitionType acquisitionType)
+        => acquisitionType == Purchase;
+
+    public static bool CanHaveSendAndReceiveDates(AcquisitionType acquisitionType)
+        => acquisitionType == ThroughTheMail;
+
     public static AcquisitionType Find(int id)
-    {
-        return All.SingleOrDefault(acquisitionType => acquisitionType.Id == id);
-    }    
-    
+        => All.SingleOrDefault(acquisitionType => acquisitionType.Id == id);
+
     public static AcquisitionType Find(string name)
-    {
-        return All.SingleOrDefault(acquisitionType => acquisitionType.Name == name);
-    }
+        => All.SingleOrDefault(acquisitionType => acquisitionType.Name == name);
 }

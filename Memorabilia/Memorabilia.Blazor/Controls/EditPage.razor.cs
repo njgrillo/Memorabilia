@@ -3,6 +3,9 @@
 public partial class EditPage<TItem> : ImagePage, INotifyPropertyChanged
 {
     [Inject]
+    public IJSRuntime JSRuntime { get; set; }
+
+    [Inject]
     public ISnackbar Snackbar { get; set; }
 
     [Parameter]
@@ -82,6 +85,14 @@ public partial class EditPage<TItem> : ImagePage, INotifyPropertyChanged
         PropertyChanged += EditPage_PropertyChanged;
     }
 
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (ValidationResult != null && !ValidationResult.IsValid)
+        {
+            await JSRuntime.ScrollToAlert();
+        }
+    }
+
     protected async Task HandleValidSubmit()
     {
         await OnSave.InvokeAsync(Model);
@@ -97,10 +108,13 @@ public partial class EditPage<TItem> : ImagePage, INotifyPropertyChanged
 
     private void EditPage_PropertyChanged(object sender, PropertyChangedEventArgs e)
     {
+        if (!PerformValidation)
+            return;
+
         if (e.PropertyName == nameof(ContinueNavigationPath) 
             || (e.PropertyName == nameof(ContinueNavigation) && ContinueNavigation))
         {
-            if (ValidationResult != null && ValidationResult.IsValid)
+            if (ValidationResult?.IsValid ?? false)
                 NavigateAway();
         }
     }
