@@ -3,6 +3,9 @@
 public partial class MemorabiliaImageEditor : ImagePage
 {
     [Inject]
+    public IDialogService DialogService { get; set; }
+
+    [Inject]
     public ISnackbar Snackbar { get; set; }
 
     [Parameter]
@@ -13,7 +16,7 @@ public partial class MemorabiliaImageEditor : ImagePage
 
     [Parameter]
     public int UserId { get; set; }
-
+    
     private EditImages<SaveMemorabiliaImagesViewModel> EditImages;
     private SaveMemorabiliaImagesViewModel ViewModel = new ();
 
@@ -57,7 +60,32 @@ public partial class MemorabiliaImageEditor : ImagePage
         }
         else
         {
-            //Open Modal
+            var parameters = new DialogParameters
+            {
+                ["MemorabiliaId"] = ViewModel.MemorabiliaId,
+                ["DomainImageRootPath"] = DomainImageRootPath,
+                ["ImageRootPath"] = ImageRootPath
+            };
+            var options = new DialogOptions() 
+            { 
+                MaxWidth = MaxWidth.Large, 
+                FullWidth = true, 
+                DisableBackdropClick = true
+            };
+            var dialog = DialogService.Show<SelectAutographDialog>("Select Autograph", parameters, options);
+            var result = await dialog.Result;
+
+            if (result.Cancelled)
+                return;
+
+            int.TryParse(result.Data.ToString(), out int autographId);
+
+            if (autographId == 0)
+                return;
+
+            var url = $"Autographs/{EditModeType.Update.Name}/{ViewModel.MemorabiliaId}/{autographId}";
+
+            NavigationManager.NavigateTo(url);
         }   
     }
 }
