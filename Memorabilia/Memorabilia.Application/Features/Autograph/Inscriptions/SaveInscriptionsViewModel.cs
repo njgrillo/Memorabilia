@@ -10,13 +10,15 @@ public class SaveInscriptionsViewModel : SaveViewModel
                                      int itemTypeId, 
                                      int memorabiliaId,
                                      int autographId,
-                                     string[] memorabiliaImageNames)
+                                     string[] memorabiliaImageNames,
+                                     int personId)
     {
         Inscriptions = inscriptions.Select(inscription => new SaveInscriptionViewModel(new InscriptionViewModel(inscription))).ToList();
         ItemType = ItemType.Find(itemTypeId);
         MemorabiliaId = memorabiliaId;
         AutographId = autographId;
         MemorabiliaImageNames = memorabiliaImageNames;
+        PersonId = personId;
     }
 
     public int AutographId { get; set; }
@@ -50,4 +52,6 @@ public class SaveInscriptionsViewModel : SaveViewModel
 
     public override string PageTitle 
         => $"{(EditModeType == EditModeType.Add ? EditModeType.Add.Name : EditModeType.Update.Name)} Inscription(s)";
+
+    public int PersonId { get; }
 }

@@ -1,6 +1,4 @@
-﻿using Memorabilia.Application.Features.Services.Gallery.Memorabilia.Rules;
-
-namespace Memorabilia.Application.Features.Services.Gallery.Memorabilia;
+﻿namespace Memorabilia.Application.Features.Services.Gallery.Memorabilia;
 
 public interface IGalleryRuleFactory
 {

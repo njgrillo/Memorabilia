@@ -33,6 +33,12 @@
         </PrettyBlazor.Condition>
     </ImagePreview>
     <Content>
+        <DivRowCol6>
+            <Content>
+                <SuggestedInscriptions InscriptionSelected="OnSuggestedInscriptionSelected"
+                                       PersonId="_inscriptionsViewModel.PersonId" />
+            </Content>
+        </DivRowCol6>
         <DivRowCol4>
             <Content>
                 <InscriptionTypeDropDown Disabled="@(!_canEditInscriptionType)" 

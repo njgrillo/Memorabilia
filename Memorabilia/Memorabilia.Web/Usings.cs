@@ -6,6 +6,7 @@ global using MediatR;
 global using Memorabilia.Application.Configuration;
 global using Memorabilia.Application.Features.Admin;
 global using Memorabilia.Application.Features.Admin.Commissioners;
+global using Memorabilia.Application.Features.Services.Autographs.Inscriptions;
 global using Memorabilia.Application.Validators.Autograph;
 global using Memorabilia.Application.Validators.Memorabilia;
 global using Memorabilia.Application.Validators.Memorabilia.Bammer;

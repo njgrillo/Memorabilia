@@ -21,7 +21,8 @@ public partial class InscriptionsEditor : AutographItem<SaveInscriptionViewModel
                                                                autograph.ItemTypeId, 
                                                                autograph.MemorabiliaId,
                                                                autograph.Id,
-                                                               autograph.MemorabiliaImageNames);
+                                                               autograph.MemorabiliaImageNames,
+                                                               autograph.PersonId);
     }
 
     protected async Task OnSave()
@@ -49,6 +50,12 @@ public partial class InscriptionsEditor : AutographItem<SaveInscriptionViewModel
         _canAddInscription = false;
         _canEditInscriptionType = false;
         _canUpdateInscription = true;
+    }
+
+    private void OnSuggestedInscriptionSelected(SuggestedInscriptionViewModel inscription)
+    {
+        ViewModel.InscriptionTypeId = inscription.InscriptionType.Id;
+        ViewModel.InscriptionText = inscription.Text;
     }
 
     private void UpdateInscription()

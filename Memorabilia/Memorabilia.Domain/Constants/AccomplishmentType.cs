@@ -35,6 +35,7 @@ public sealed class AccomplishmentType : DomainItemConstant
     public static readonly AccomplishmentType AllWorldBaseballClassicTeam = new(11, "All-World Baseball Classic Team");
     public static readonly AccomplishmentType AllWPBTFirstTeam = new(129, "All-WPBT First Team");
     public static readonly AccomplishmentType AllWPBTSecondTeam = new(150, "All-WPBT Second Team");
+    public static readonly AccomplishmentType AmericanLeaguePitchingTripleCrown = new(169, "American League Pitching Triple Crown", "AL Triple Crown");
     public static readonly AccomplishmentType AmericanLeagueTripleCrown = new(2, "American League Triple Crown", "AL Triple Crown");
     public static readonly AccomplishmentType Bills50thAnniversaryTeam = new (116, "Bills 50th Anniversary Team");
     public static readonly AccomplishmentType BostonPatriotsAll1960sTeam = new(71, "Boston Patriots All-1960s Team");
@@ -70,7 +71,7 @@ public sealed class AccomplishmentType : DomainItemConstant
     public static readonly AccomplishmentType FirstTeamAllPac10 = new (60, "First-team All-Pac-10");
     public static readonly AccomplishmentType FirstTeamAllPacificCoast = new (114, "First-team All-Pacific Coast");
     public static readonly AccomplishmentType FirstTeamAllPCC = new (122, "First-team All-PCC");
-    public static readonly AccomplishmentType FirstTeamAllPro = new (25, "First-team All-Pro");
+    public static readonly AccomplishmentType FirstTeamAllPro = new (25, "First-team All-Pro", "All Pro");
     public static readonly AccomplishmentType FirstTeamAllSEC = new (86, "First-team All-SEC");
     public static readonly AccomplishmentType FirstTeamAllSouthern = new (110, "First-team All-Southern");
     public static readonly AccomplishmentType FirstTeamAllSouthland = new (161, "First-team All-Southland");
@@ -81,17 +82,18 @@ public sealed class AccomplishmentType : DomainItemConstant
     public static readonly AccomplishmentType FirstTeamAllWesternConference = new (130, "First-team All-Western Conference");
     public static readonly AccomplishmentType FirstTeamLittleAllAmerican = new (70, "First-team Little All-American");
     public static readonly AccomplishmentType FirstTeamParadeAllAmerican = new (143, "First-team Parade All-American");
-    public static readonly AccomplishmentType FortyFortyClub = new(18, "40-40 Club");
-    public static readonly AccomplishmentType FourHomeRunsInAGame = new(12, "4 Home Runs in a Game");
+    public static readonly AccomplishmentType FortyFortyClub = new(18, "40-40 Club", "40-40");
+    public static readonly AccomplishmentType FourHomeRunsInAGame = new(12, "4 Home Runs in a Game", "4 HRs");
     public static readonly AccomplishmentType HelmsAllAmerican = new (135, "Helms All-American");
-    public static readonly AccomplishmentType HitForTheCycle = new(13, "Hit for the Cycle");
-    public static readonly AccomplishmentType ImmaculateInning = new(14, "Immaculate Inning");
+    public static readonly AccomplishmentType HitForTheCycle = new(13, "Hit for the Cycle", "Cycle");
+    public static readonly AccomplishmentType ImmaculateInning = new(14, "Immaculate Inning", "II");
     public static readonly AccomplishmentType MajorLeagueBaseballAllCenturyTeam = new(6, "Major League Baseball All-Century Team");
     public static readonly AccomplishmentType MajorLeagueBaseballAllTimeTeam = new(7, "Major League Baseball All-Time Team");
     public static readonly AccomplishmentType McDonaldsAllAmerican = new(160, "McDonald's All-American");
     public static readonly AccomplishmentType MinnesotaVikings25thAnniversaryTeam = new (85, "Minnesota Vikings 25th Anniversary Team");
     public static readonly AccomplishmentType MinnesotaVikings40thAnniversaryTeam = new (77, "Minnesota Vikings 40th Anniversary Team");
     public static readonly AccomplishmentType NAIAAllAmerican = new (168, "NAIA All-American");
+    public static readonly AccomplishmentType NationalLeaguePitchingTripleCrown = new(170, "National League Pitching Triple Crown", "NL Triple Crown");
     public static readonly AccomplishmentType NationalLeagueTripleCrown = new(10, "National League Triple Crown", "NL Triple Crown");
     public static readonly AccomplishmentType NBA25thAnniversaryTeam = new (125, "NBA 25th Anniversary Team");
     public static readonly AccomplishmentType NBA35thAnniversaryTeam = new (126, "NBA 35th Anniversary Team");
@@ -100,8 +102,8 @@ public sealed class AccomplishmentType : DomainItemConstant
     public static readonly AccomplishmentType NBAAllDefensiveFirstTeam = new (139, "NBA All-Defensive First Team");
     public static readonly AccomplishmentType NBAAllDefensiveSecondTeam = new (144, "NBA All-Defensive Second Team");
     public static readonly AccomplishmentType NBAAllRookieTeam = new (145, "NBA All-Rookie Team");
-    public static readonly AccomplishmentType NBASlamDunkContestChampion = new (162, "NBA Slam Dunk Contest Champion");
-    public static readonly AccomplishmentType NBAThreePointContestChampion = new (159, "NBA Three-Point Contest Champion");
+    public static readonly AccomplishmentType NBASlamDunkContestChampion = new (162, "NBA Slam Dunk Contest Champion", "Dunk Contest Champ");
+    public static readonly AccomplishmentType NBAThreePointContestChampion = new (159, "NBA Three-Point Contest Champion", "3 Pt Contest Champ");
     public static readonly AccomplishmentType NBLAllTimeTeam = new (149, "NBL All-Time Team");
     public static readonly AccomplishmentType NewEnglandPatriotsAll1970sTeam = new(98, "New England Patriots All-1970s Team");
     public static readonly AccomplishmentType NewEnglandPatriotsAll1980sTeam = new(58, "New England Patriots All-1980s Team");
@@ -123,7 +125,7 @@ public sealed class AccomplishmentType : DomainItemConstant
     public static readonly AccomplishmentType NoHitter = new(1, "No Hitter");
     public static readonly AccomplishmentType OneHundredAnniversaryAllTimeTeam = new(33, "100th Anniversary All-Time Team");
     public static readonly AccomplishmentType OneHundredGreatestBearsOfAllTime = new(44, "100 Greatest Bears of All-Time");
-    public static readonly AccomplishmentType PerfectGame = new(9, "Perfect Game");
+    public static readonly AccomplishmentType PerfectGame = new(9, "Perfect Game", "PG");
     public static readonly AccomplishmentType PFWAAllRookieTeam = new(29, "PFWA All-Rookie Team");
     public static readonly AccomplishmentType PhiladelphiaEagles75thAnniversaryTeam = new (56, "Philadelphia Eagles 75th Anniversary Team");
     public static readonly AccomplishmentType PittsburghSteelersAllTimeTeam = new (59, "Pittsburgh Steelers All-Time Team");
@@ -150,13 +152,13 @@ public sealed class AccomplishmentType : DomainItemConstant
     public static readonly AccomplishmentType ThirdTeamAllAmerican = new (118, "Third-team All-American");
     public static readonly AccomplishmentType ThirdTeamAllPro = new (93, "Third-team All-Pro");
     public static readonly AccomplishmentType ThirdTeamLittleAllAmerican = new(115, "Third-team Little All-American");
-    public static readonly AccomplishmentType ThirtyThirtyClub = new(3, "30-30 Club");
+    public static readonly AccomplishmentType ThirtyThirtyClub = new(3, "30-30 Club", "30-30");
     public static readonly AccomplishmentType ToppsAllStarRookieTeam = new (67, "Topps All-Star Rookie Team");
     public static readonly AccomplishmentType TwoBasesLoadedTriplesInAGame = new(24, "2 Bases Loaded Triples in a Game");
     public static readonly AccomplishmentType TwoGrandSlamsInOneInning = new(16, "2 Grand Slams in One Inning");    
     public static readonly AccomplishmentType TwoThousandsAllDecadeTeam = new(32, "2000s All-Decade Team");    
     public static readonly AccomplishmentType TwoThousandTensAllDecadeTeam = new(62, "2010s All-Decade Team");    
-    public static readonly AccomplishmentType UnassistedTriplePlay = new(17, "Unassisted Triple Play");
+    public static readonly AccomplishmentType UnassistedTriplePlay = new(17, "Unassisted Triple Play", "UTP");
     public static readonly AccomplishmentType USFLAllLeagueTeam = new(107, "USFL All-League Team");
     public static readonly AccomplishmentType USFLAllTimeTeam = new(108, "USFL All-Time Team");
     public static readonly AccomplishmentType WashingtonCommandersNinetyGreatest = new (47, "Washington Commanders 90 Greatest");
@@ -196,6 +198,7 @@ public sealed class AccomplishmentType : DomainItemConstant
         AllWorldBaseballClassicTeam,
         AllWPBTFirstTeam,
         AllWPBTSecondTeam,
+        AmericanLeaguePitchingTripleCrown,
         AmericanLeagueTripleCrown,
         Bills50thAnniversaryTeam,
         BostonPatriotsAll1960sTeam,
@@ -253,6 +256,7 @@ public sealed class AccomplishmentType : DomainItemConstant
         MinnesotaVikings25thAnniversaryTeam,
         MinnesotaVikings40thAnniversaryTeam,
         NAIAAllAmerican,
+        NationalLeaguePitchingTripleCrown,
         NationalLeagueTripleCrown,
         NBA25thAnniversaryTeam,
         NBA35thAnniversaryTeam,
@@ -328,6 +332,7 @@ public sealed class AccomplishmentType : DomainItemConstant
         AllMLBFirstTeam,
         AllMLBSecondTeam,
         AllWorldBaseballClassicTeam,
+        AmericanLeaguePitchingTripleCrown,
         AmericanLeagueTripleCrown,
         CombinedNoHitter,
         FortyFortyClub,
@@ -336,6 +341,7 @@ public sealed class AccomplishmentType : DomainItemConstant
         ImmaculateInning,
         MajorLeagueBaseballAllCenturyTeam,
         MajorLeagueBaseballAllTimeTeam,
+        NationalLeaguePitchingTripleCrown,
         NationalLeagueTripleCrown,
         NoHitter,
         PerfectGame,
@@ -549,6 +555,7 @@ public sealed class AccomplishmentType : DomainItemConstant
         AllWorldBaseballClassicTeam,
         AllWPBTFirstTeam,
         AllWPBTSecondTeam,
+        AmericanLeaguePitchingTripleCrown,
         AmericanLeagueTripleCrown,
         CAAAllDefensiveTeam,
         ConsensusAllAmerican,
@@ -591,6 +598,7 @@ public sealed class AccomplishmentType : DomainItemConstant
         MajorLeagueBaseballAllTimeTeam,
         McDonaldsAllAmerican,
         NAIAAllAmerican,
+        NationalLeaguePitchingTripleCrown,
         NationalLeagueTripleCrown,
         NBAAllDefensiveFirstTeam,
         NBAAllDefensiveSecondTeam,
@@ -617,7 +625,8 @@ public sealed class AccomplishmentType : DomainItemConstant
         USFLAllLeagueTeam
     };
 
-    private AccomplishmentType(int id, string name, string abbreviation = null) : base(id, name, abbreviation) { }
+    private AccomplishmentType(int id, string name, string abbreviation = null) 
+        : base(id, name, abbreviation) { }
 
     public static AccomplishmentType Find(int id)
     {

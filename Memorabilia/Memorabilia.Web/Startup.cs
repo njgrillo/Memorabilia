@@ -1,3 +1,6 @@
+using Memorabilia.Application.Features.Services.Autographs.Inscriptions.Accomplishments;
+using Memorabilia.Application.Features.Services.Autographs.Inscriptions.Awards;
+
 namespace Memorabilia.Web;
 
 public class Startup
@@ -71,6 +74,10 @@ public class Startup
         services.AddSingleton<TicketValidator>();
         services.AddSingleton<TrunkValidator>();
         services.AddSingleton<WristBandValidator>();
+
+        services.AddSingleton<AccomplishmentRuleFactory>();
+        services.AddSingleton<AwardRuleFactory>();
+        services.AddSingleton<SuggestedInscriptionService>();
 
         services.AddTransient<AllStarRepository>();
         services.AddTransient<IAllStarRepository, AllStarCacheRepository>();
