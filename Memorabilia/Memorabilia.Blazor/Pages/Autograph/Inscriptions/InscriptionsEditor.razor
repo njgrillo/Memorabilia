@@ -33,73 +33,85 @@
         </PrettyBlazor.Condition>
     </ImagePreview>
     <Content>
-        <DivRowCol6>
-            <Content>
-                <SuggestedInscriptions InscriptionSelected="OnSuggestedInscriptionSelected"
-                                       PersonId="_inscriptionsViewModel.PersonId" />
-            </Content>
-        </DivRowCol6>
-        <DivRowCol4>
-            <Content>
-                <InscriptionTypeDropDown Disabled="@(!_canEditInscriptionType)" 
-                                         SelectedValue="ViewModel.InscriptionTypeId"
-                                         SelectionChanged="(p) => ViewModel.InscriptionTypeId = p" />
-            </Content>
-        </DivRowCol4>
-        <DivRowCol4>
-            <Content>
-                <TextField Label="Inscription"
-                           SelectedText="@ViewModel.InscriptionText"
-                           SelectedTextChanged="@((p) => ViewModel.InscriptionText = p)" />
-            </Content>
-        </DivRowCol4>    
-        <DivLeftAlign>
-            <Content>
-                <DivHidden Hidden="@(!_canAddInscription)">
+        <div class="d-flex justify-content-between" style="width:100%">
+            <div style="width:48%">
+                <DivRowCol6>
                     <Content>
-                        <AddButton OnClick="AddInscription" />
+                        <InscriptionTypeDropDown Disabled="@(!_canEditInscriptionType)"
+                                                 SelectedValue="ViewModel.InscriptionTypeId"
+                                                 SelectionChanged="(p) => ViewModel.InscriptionTypeId = p" />
                     </Content>
-                </DivHidden>
-                <DivHidden Hidden="@(!_canUpdateInscription)">
+                </DivRowCol6>
+                <DivRowCol6>
                     <Content>
-                        <UpdateButton OnClick="UpdateInscription" />
+                        <TextField Label="Inscription"
+                                   SelectedText="@ViewModel.InscriptionText"
+                                   SelectedTextChanged="@((p) => ViewModel.InscriptionText = p)" />
                     </Content>
-                </DivHidden>
-            </Content>
-        </DivLeftAlign>
-        <DivRowCol6>
-            <Content>
-                <MudTable Bordered="false"
-                          Dense="false" 
-                          Hover="true"
-                          Items="@_inscriptionsViewModel.Inscriptions.Where(inscription => !inscription.IsDeleted)"    
-                          Striped="true">
-                    <ToolBarContent>
-                        <MudText Typo="Typo.h6">Inscriptions</MudText>
-                    </ToolBarContent>
-                    <HeaderContent>
-                        <MudTh>Inscription Type</MudTh>
-                        <MudTh>Inscription Text</MudTh>
-                        <MudTh></MudTh>
-                    </HeaderContent>
-                    <RowTemplate Context="inscription">
-                        <MudTd DataLabel="Inscription Type">@inscription.InscriptionTypeName</MudTd>
-                        <MudTd DataLabel="Inscription Text">@inscription.InscriptionText</MudTd>
-                        <MudTd DataLabel="">
-                            <MudTooltip Text="Edit">
-                                <MudFab Color="MudBlazor.Color.Primary"                                
-                                        Icon="@Icons.Outlined.ModeEditOutline"
-                                        OnClick="@(_ => Edit(inscription))" />
-                            </MudTooltip>    
-                            <MudTooltip Text="Delete">
-                                <MudFab Color="MudBlazor.Color.Secondary"
-                                        Icon="@Icons.Outlined.DeleteOutline"
-                                        OnClick="@(_ => inscription.IsDeleted = true)" />
-                            </MudTooltip>
-                        </MudTd>
-                    </RowTemplate>
-                </MudTable>
-            </Content>
-        </DivRowCol6>    
+                </DivRowCol6>
+                <br/>
+                <DivRowCol12>
+                    <Content>
+                        <DivLeftAlign>
+                            <Content>
+                                <DivHidden Hidden="@(!_canAddInscription)">
+                                    <Content>
+                                        <AddButton OnClick="AddInscription" />
+                                    </Content>
+                                </DivHidden>
+                                <DivHidden Hidden="@(!_canUpdateInscription)">
+                                    <Content>
+                                        <UpdateButton OnClick="UpdateInscription" />
+                                    </Content>
+                                </DivHidden>
+                            </Content>
+                        </DivLeftAlign>
+                    </Content>
+                </DivRowCol12>
+                <DivRowCol12>
+                    <Content>
+                        <MudTable Bordered="false"
+                                  Dense="false"
+                                  Hover="true"
+                                  Items="@_inscriptionsViewModel.Inscriptions.Where(inscription => !inscription.IsDeleted)"
+                                  Striped="true">
+                            <ToolBarContent>
+                                <MudText Typo="Typo.h6">Inscriptions</MudText>
+                            </ToolBarContent>
+                            <HeaderContent>
+                                <MudTh>Inscription Type</MudTh>
+                                <MudTh>Inscription Text</MudTh>
+                                <MudTh></MudTh>
+                            </HeaderContent>
+                            <RowTemplate Context="inscription">
+                                <MudTd DataLabel="Inscription Type">@inscription.InscriptionTypeName</MudTd>
+                                <MudTd DataLabel="Inscription Text">@inscription.InscriptionText</MudTd>
+                                <MudTd DataLabel="">
+                                    <MudTooltip Text="Edit">
+                                        <MudFab Color="MudBlazor.Color.Primary"
+                                                Icon="@Icons.Outlined.ModeEditOutline"
+                                                OnClick="@(_ => Edit(inscription))" />
+                                    </MudTooltip>
+                                    <MudTooltip Text="Delete">
+                                        <MudFab Color="MudBlazor.Color.Secondary"
+                                                Icon="@Icons.Outlined.DeleteOutline"
+                                                OnClick="@(_ => inscription.IsDeleted = true)" />
+                                    </MudTooltip>
+                                </MudTd>
+                            </RowTemplate>
+                        </MudTable>
+                    </Content>
+                </DivRowCol12>
+                <br />
+            </div>
+            <div style="width:48%">
+                <DivRowCol12>
+                    <Content>
+                        <SuggestedInscriptions InscriptionSelected="OnSuggestedInscriptionSelected"
+                                               PersonId="_inscriptionsViewModel.PersonId" />
+                    </Content>
+                </DivRowCol12>
+            </div>
+        </div>      
     </Content>
 </EditPage>
