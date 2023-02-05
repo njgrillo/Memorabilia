@@ -21,12 +21,8 @@ public sealed class WritingInstrument : DomainItemConstant
         : base(id, name, abbreviation) { }
 
     public static WritingInstrument Find(int id)
-    {
-        return All.SingleOrDefault(writingInstrument => writingInstrument.Id == id);
-    }
+        => All.SingleOrDefault(writingInstrument => writingInstrument.Id == id);
 
     public static WritingInstrument Find(string name)
-    {
-        return All.SingleOrDefault(writingInstrument => writingInstrument.Name == name);
-    }
+        => All.SingleOrDefault(writingInstrument => writingInstrument.Name == name);
 }

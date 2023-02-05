@@ -35,7 +35,5 @@ public sealed class InscriptionType : DomainItemConstant
         : base(id, name, abbreviation) { }
 
     public static InscriptionType Find(int id)
-    {
-        return All.SingleOrDefault(inscriptionType => inscriptionType.Id == id);
-    }    
+        => All.SingleOrDefault(inscriptionType => inscriptionType.Id == id);
 }

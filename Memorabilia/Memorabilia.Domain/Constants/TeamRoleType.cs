@@ -6,6 +6,7 @@ public sealed class TeamRoleType : DomainItemConstant
     public static readonly TeamRoleType Assistant = new(21, "Assistant");
     public static readonly TeamRoleType AssistantHeadCoach = new(22, "Assistant Head Coach");
     public static readonly TeamRoleType BackfieldCoach = new (23, "Backfield Coach");
+    public static readonly TeamRoleType Broadcaster = new (40, "Broadcaster");
     public static readonly TeamRoleType Coach = new(1, "Coach");    
     public static readonly TeamRoleType Consultant = new(26, "Consultant");
     public static readonly TeamRoleType CoOwner = new(32, "Co-Owner");
@@ -34,53 +35,20 @@ public sealed class TeamRoleType : DomainItemConstant
     public static readonly TeamRoleType RunningBackCoach = new(14, "Running Back Coach");
     public static readonly TeamRoleType Scout = new(29, "Scout");
     public static readonly TeamRoleType SecondaryCoach = new(15, "Secondary Coach");    
+    public static readonly TeamRoleType SpecialAdvisor = new (39, "Special Advisor");
     public static readonly TeamRoleType SpecialTeamsCoach = new(16, "Special Teams Coach");
     public static readonly TeamRoleType TightEndCoach = new(17, "Tight End Coach");
     public static readonly TeamRoleType VicePresident = new(33, "Vice President");
     public static readonly TeamRoleType WideReceiverCoach = new(30, "Wide Receiver Coach");
 
-    public static readonly TeamRoleType[] All =
-    {
-        Administrator,
-        Assistant,
-        AssistantHeadCoach,
-        BackfieldCoach,
-        Coach,        
-        Consultant,
-        CoOwner,
-        DefensiveBacksCoach,
-        DefensiveCoordinator,
-        DefensiveLineCoach,
-        DirectorOfPlanningAndResearch,
-        DirectorOfPlayerAndCommunityRelations,
-        DirectorOfPlayerPersonnel,
-        DirectorOfStaffDevelopment,
-        Executive,
-        ExecutiveOfFootballOperationsForPlayerDevelopment,
-        GeneralManager,
-        HeadCoach,
-        HeadOfPlayerPersonnel,
-        LinebackerCoach,
-        Manager,
-        MinorityOwner,
-        OffensiveCoordinator,
-        OffensiveEndsCoach,
-        OffensiveLineCoach,
-        Owner,
-        Player,
-        President,
-        QuarterbackCoach,
-        RunningBackCoach,
-        Scout,
-        SecondaryCoach,        
-        SpecialTeamsCoach,
-        TightEndCoach,
-        VicePresident,
-        WideReceiverCoach
-    };
+    public static TeamRoleType[] All
+        => BaseballRoleTypes.Union(FootballRoleTypes)
+                            .Distinct()
+                            .ToArray();
 
     public static readonly TeamRoleType[] BaseballRoleTypes =
     {
+        Broadcaster,
         Coach,
         Executive,
         GeneralManager,
@@ -121,19 +89,19 @@ public sealed class TeamRoleType : DomainItemConstant
         QuarterbackCoach,
         RunningBackCoach,
         Scout,
-        SecondaryCoach,        
+        SecondaryCoach,    
+        SpecialAdvisor,
         SpecialTeamsCoach,
         TightEndCoach,
         VicePresident,
         WideReceiverCoach
     };
 
-    private TeamRoleType(int id, string name, string abbreviation = null) : base(id, name, abbreviation) { }
+    private TeamRoleType(int id, string name, string abbreviation = null) 
+        : base(id, name, abbreviation) { }
 
     public static TeamRoleType Find(int id)
-    {
-        return All.SingleOrDefault(teamRoleType => teamRoleType.Id == id);
-    }
+        => All.SingleOrDefault(teamRoleType => teamRoleType.Id == id);
 
     public static TeamRoleType[] Get(SportLeagueLevel sportLeagueLevel)
     {

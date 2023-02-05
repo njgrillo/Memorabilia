@@ -20,42 +20,45 @@
                         PersonStep="ViewModel.PersonStep" />
     </TimelineContent>
     <Content>
-        <DivRowCol6>
-            <Content>
+        <div class="d-flex justify-content-between" style="width:100%">
+            <div style="width:48%">
+                <DivRowCol12>
+                    <Content>
+                        <MudText Typo="Typo.h3">Occupations</MudText>
+                        <PersonOccupationSelector Occupations="ViewModel.Occupations"
+                                                  OnOccupationChange="@(() => StateHasChanged())" />
+                    </Content>
+                </DivRowCol12>
+                <br />
+                <PrettyBlazor.Condition Evaluation="@ViewModel.HasAthleteOccupation">
+                    <Match>
+                        <DivRowCol12>
+                            <Content>
+                                <MudText Typo="Typo.h3">Sports</MudText>
+                                <PersonSportEditor OnSportChange="@(() => StateHasChanged())"
+                                                   Sports="ViewModel.Sports" />
+                            </Content>
+                        </DivRowCol12>
+                        <br/>
+                    </Match>
+                </PrettyBlazor.Condition>
+                <PrettyBlazor.Condition Evaluation="@ViewModel.HasPositionSport">
+                    <Match>
+                        <DivRowCol12>
+                            <Content>
+                                <MudText Typo="Typo.h3">Positions</MudText>
+                                <PersonPositionEditor Positions="ViewModel.Positions"
+                                                      Sports="@(ViewModel.Sports.Select(sport => sport.Sport).ToArray())" />
+                            </Content>
+                        </DivRowCol12>
+                    </Match>
+                </PrettyBlazor.Condition>
+            </div>
+            <div style="width:48%">
                 <PersonRecentOccupationSelector OnRecentOccupationChange="OnRecentOccupationChange"
                                                 RecentOccupations="RecentPersonOccupations" />
-            </Content>
-        </DivRowCol6>
-        <br />
-        <DivRowCol12>
-            <Content>
-                <MudText Typo="Typo.h3">Occupations</MudText>
-                <PersonOccupationSelector Occupations="ViewModel.Occupations"
-                                          OnOccupationChange="@(() => StateHasChanged())" />
-            </Content>
-        </DivRowCol12>
-        <br />
-        <PrettyBlazor.Condition Evaluation="@ViewModel.HasAthleteOccupation">
-            <Match>
-                <DivRowCol12>
-                    <Content>
-                        <MudText Typo="Typo.h3">Sports</MudText>
-                        <PersonSportEditor OnSportChange="@(() => StateHasChanged())" 
-                                           Sports="ViewModel.Sports" />
-                    </Content>
-                </DivRowCol12>
-            </Match>
-        </PrettyBlazor.Condition>     
-        <PrettyBlazor.Condition Evaluation="@ViewModel.HasPositionSport">
-            <Match>
-                <DivRowCol12>
-                    <Content>
-                        <MudText Typo="Typo.h3">Positions</MudText>
-                        <PersonPositionEditor Positions="ViewModel.Positions"
-                                              Sports="@(ViewModel.Sports.Select(sport => sport.Sport).ToArray())" />
-                    </Content>
-                </DivRowCol12>
-            </Match>
-        </PrettyBlazor.Condition>
+            </div>
+        </div>
+        <br/>
     </Content>
 </EditPage>

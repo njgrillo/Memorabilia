@@ -11,10 +11,9 @@ public sealed class MagazineType : DomainItemConstant
         Program
     };
 
-    private MagazineType(int id, string name, string abbreviation = null) : base(id, name, abbreviation) { }
+    private MagazineType(int id, string name, string abbreviation = null) 
+        : base(id, name, abbreviation) { }
 
     public static MagazineType Find(int id)
-    {
-        return All.SingleOrDefault(magazineType => magazineType.Id == id);
-    }
+        => All.SingleOrDefault(magazineType => magazineType.Id == id);
 }

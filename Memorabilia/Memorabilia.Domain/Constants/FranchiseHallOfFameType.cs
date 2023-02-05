@@ -19,6 +19,7 @@ public sealed class FranchiseHallOfFameType : DomainItemConstant
     public static readonly FranchiseHallOfFameType GreenBayPackersHallOfFame = new(26, "Green Bay Packers Hall of Fame", Franchise.GreenBayPackers);
     public static readonly FranchiseHallOfFameType GuardiansHallOfFame = new(10, "Guardians Hall of Fame", Franchise.ClevelandGuardians);
     public static readonly FranchiseHallOfFameType HoustonAstrosHallOfFame = new(5, "Houston Astros Hall of Fame", Franchise.HoustonAstros);
+    public static readonly FranchiseHallOfFameType HoustonTexansRingOfHonor = new(55, "Houston Texans Ring of Honor", Franchise.HoustonTexans);
     public static readonly FranchiseHallOfFameType IndianapolisColtsRingOfHonor = new(50, "Indianapolis Colts Ring of Honor", Franchise.IndianapolisColts);
     public static readonly FranchiseHallOfFameType KansasCityChiefsHallOfFame = new(34, "Kansas City Chiefs Hall of Fame", Franchise.KansasCityChiefs);
     public static readonly FranchiseHallOfFameType KansasCityRoyalsHallOfFame = new(22, "Kansas City Royals Hall of Fame", Franchise.KansasCityRoyals);
@@ -54,60 +55,9 @@ public sealed class FranchiseHallOfFameType : DomainItemConstant
     public static readonly FranchiseHallOfFameType TorontoBlueJaysLevelOfExcellence = new(19, "Toronto Blue Jays Level Of Excellence", Franchise.TorontoBlueJays);
     public static readonly FranchiseHallOfFameType WashingtonCommandersRingOfFame = new(28, "Washington Commanders Ring of Fame", Franchise.WashingtonCommanders);
 
-    public static readonly FranchiseHallOfFameType[] All =
-    {
-        AngelsHallOfFame,
-        ArizonaCardinalsRingOfHonor,
-        AthleticsHallOfFame,
-        AtlantaFalconsRingOfHonor,
-        BaltimoreRavensRingOfHonor,
-        BravesHallOfFame,
-        BuffaloBillsWallOfFame,
-        CardinalsHallOfFame,
-        CarolinaPanthersHallOfHonor,
-        CincinnatiBengalsRingOfHonor,
-        ClevelandBrownsRingOfHonor,
-        CubsHallOfFame,
-        DallasCowboysRingOfHonor,
-        DenverBroncosRingOfFame,
-        GreenBayPackersHallOfFame,
-        GuardiansHallOfFame,
-        HoustonAstrosHallOfFame,
-        IndianapolisColtsRingOfHonor,
-        KansasCityChiefsHallOfFame,
-        KansasCityRoyalsHallOfFame,
-        LosAngelesChargersHallOfFame,
-        MetsHallOfFame,
-        MiamiDolphinsHonorRoll,
-        MilwaukeeBrewersWallOfHonor,
-        MinnesotaTwinsHallOfFame,
-        MinnesotaVikingsRinOfHonor,
-        MonumentPark,
-        NationalsHallOfFame,
-        NewEnglandPatriotsHallOfFame,
-        NewOrleansSaintsHallOfFame,
-        NewOrleansSaintsRingOfHonor,
-        NewYorkGiantsRingOfHonor,
-        NewYorkJetsRingOfHonor,
-        OriolesHallOfFame,
-        PadresHallOfFame,
-        PhiladelphiaEaglesHallOfFame,
-        PhilliesHallOfFame,
-        PittsburghSteelersHallOfHonor,
-        RedsHallOfFame,
-        RedSoxHallOfFame,
-        SanDiegoPadresHallOfFame,
-        SanFrancisco49ersHallOfFame,
-        SanFranciscoGiantsWallOfFame,
-        SeattleMarinersHallOfFame,
-        SeattleSeahawksRingOfHonor,
-        StLouisFootballRingOfFame,
-        TampaBayBuccaneersRingOfHonor,
-        TexasRangersHallOfFame,
-        TitansOilersRingOfHonor,
-        TorontoBlueJaysLevelOfExcellence,
-        WashingtonCommandersRingOfFame
-    };
+    public static FranchiseHallOfFameType[] All
+        => Baseball.Union(Football)
+                   .ToArray();
 
     public static readonly FranchiseHallOfFameType[] Baseball =
     {
@@ -148,6 +98,7 @@ public sealed class FranchiseHallOfFameType : DomainItemConstant
         DallasCowboysRingOfHonor,
         DenverBroncosRingOfFame,
         GreenBayPackersHallOfFame,
+        HoustonTexansRingOfHonor,
         IndianapolisColtsRingOfHonor,
         KansasCityChiefsHallOfFame,
         LosAngelesChargersHallOfFame,
@@ -168,7 +119,8 @@ public sealed class FranchiseHallOfFameType : DomainItemConstant
         WashingtonCommandersRingOfFame
     };
 
-    private FranchiseHallOfFameType(int id, string name, Franchise franchise) : base(id, name)
+    private FranchiseHallOfFameType(int id, string name, Franchise franchise) 
+        : base(id, name)
     {
         Franchise = franchise;
     }
@@ -176,14 +128,10 @@ public sealed class FranchiseHallOfFameType : DomainItemConstant
     public Franchise Franchise { get; }
 
     public static FranchiseHallOfFameType Find(int franchiseId)
-    {
-        return All.SingleOrDefault(franchiseHallOfFameType => franchiseHallOfFameType.Franchise == Franchise.Find(franchiseId));
-    }
+        => All.SingleOrDefault(franchiseHallOfFameType => franchiseHallOfFameType.Franchise == Franchise.Find(franchiseId));
 
     public static FranchiseHallOfFameType Find(Franchise franchise)
-    {
-        return All.SingleOrDefault(franchiseHallOfFameType => franchiseHallOfFameType.Franchise == franchise);
-    }
+        => All.SingleOrDefault(franchiseHallOfFameType => franchiseHallOfFameType.Franchise == franchise);
 
     public static FranchiseHallOfFameType[] GetAll(params Sport[] sports)
     {
@@ -202,7 +150,5 @@ public sealed class FranchiseHallOfFameType : DomainItemConstant
     }
 
     public override string ToString()
-    {
-        return $"{Franchise.Name} ({Name})";
-    }
+        => $"{Franchise.Name} ({Name})";
 }

@@ -42,12 +42,11 @@ public sealed class Conference : DomainItemConstant
         NFLWesternConference
     };
 
-    private Conference(int id, string name, string abbreviation = null) : base(id, name, abbreviation) { }
+    private Conference(int id, string name, string abbreviation = null) 
+        : base(id, name, abbreviation) { }
 
     public static Conference Find(int id)
-    {
-        return All.SingleOrDefault(conference => conference.Id == id);
-    }
+        => All.SingleOrDefault(conference => conference.Id == id);
 
     public static Conference[] GetAll(SportLeagueLevel sportLeagueLevel)
     {

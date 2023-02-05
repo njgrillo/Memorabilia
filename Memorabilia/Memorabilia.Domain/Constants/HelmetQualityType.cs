@@ -11,10 +11,9 @@ public sealed class HelmetQualityType : DomainItemConstant
         Replica
     };
 
-    private HelmetQualityType(int id, string name, string abbreviation) : base(id, name, abbreviation) { }
+    private HelmetQualityType(int id, string name, string abbreviation) 
+        : base(id, name, abbreviation) { }
 
     public static HelmetQualityType Find(int id)
-    {
-        return All.SingleOrDefault(helmetQualityType => helmetQualityType.Id == id);
-    }
+        => All.SingleOrDefault(helmetQualityType => helmetQualityType.Id == id);
 }

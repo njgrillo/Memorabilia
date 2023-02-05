@@ -7,7 +7,8 @@ public sealed class DashboardChartType : DomainItemConstant
     public static readonly DashboardChartType Pie = new (1, "Pie");
     public static readonly DashboardChartType StackedColumn = new (2, "Stacked Column");
 
-    private DashboardChartType(int id, string name) : base(id, name) { }
+    private DashboardChartType(int id, string name) 
+        : base(id, name) { }
 
     public static readonly DashboardChartType[] All =
     {
@@ -18,7 +19,5 @@ public sealed class DashboardChartType : DomainItemConstant
     };
 
     public static DashboardChartType Find(int id)
-    {
-        return All.SingleOrDefault(dashboardChartType => dashboardChartType.Id == id);
-    }
+        => All.SingleOrDefault(dashboardChartType => dashboardChartType.Id == id);
 }

@@ -75,7 +75,8 @@ public sealed class DashboardItem : DomainItemConstant
         WritingInstrumentPieChart
     };
 
-    private DashboardItem(int id, string name, string description, DashboardChartType dashboardChartType) : base(id, name)
+    private DashboardItem(int id, string name, string description, DashboardChartType dashboardChartType)
+        : base(id, name)
     {
         Description = description;
         DashboardChartType = dashboardChartType;
@@ -86,7 +87,5 @@ public sealed class DashboardItem : DomainItemConstant
     public string Description { get; }
 
     public static DashboardItem Find(int id)
-    {
-        return All.SingleOrDefault(dashboardItem => dashboardItem.Id == id);
-    }
+        => All.SingleOrDefault(dashboardItem => dashboardItem.Id == id);
 }

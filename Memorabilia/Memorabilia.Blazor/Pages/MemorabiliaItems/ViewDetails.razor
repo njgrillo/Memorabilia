@@ -135,7 +135,8 @@
                                                 <MudTd DataLabel="Purchase Place">@autograph.PurchaseTypeName</MudTd>
                                                 <MudTd DataLabel="Writing Instrument">@autograph.WritingInstrumentName</MudTd>
                                                 <MudTd DataLabel="Color">@autograph.ColorName</MudTd>
-                                                <MudTd DataLabel="Authentications">
+                                                <MudTd DataLabel="Authentications"
+                                                       Style="text-align:center">
                                                     <MudTooltip Text="@autograph.AuthenticationTooltip">
                                                         <MudChip Color="MudBlazor.Color.Info" 
                                                                  OnClick="@(_ => NavigationManager.NavigateTo($"Autographs/Authentications/Edit/{@autograph.Id}"))"
@@ -143,7 +144,8 @@
                                                                  Text="@autograph.AuthenticationText" />
                                                     </MudTooltip> 
                                                 </MudTd>
-                                                <MudTd DataLabel="Inscriptions">
+                                                <MudTd DataLabel="Inscriptions"
+                                                       Style="text-align:center">
                                                     <MudTooltip Text="@autograph.InscriptionTooltip">
                                                         <MudChip Color="MudBlazor.Color.Info"
                                                                  OnClick="@(_ => NavigationManager.NavigateTo($"Autographs/Inscriptions/Edit/{@autograph.Id}"))"

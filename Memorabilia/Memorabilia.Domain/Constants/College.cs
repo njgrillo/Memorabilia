@@ -181,6 +181,7 @@ public sealed class College : DomainItemConstant
     public static readonly College HolyCrossCollege = new(342, "Holy Cross College");
     public static readonly College Houston = new(60, "Houston", "UH");
     public static readonly College Idaho = new(388, "Idaho", "U of I");
+    public static readonly College IdahoState = new(511, "Idaho State", "ISU");
     public static readonly College Illinois = new(82, "Illinois", "UIUC");
     public static readonly College IllinoisCentralCollege = new(131, "Illinois Central College", "ICC");
     public static readonly College IllinoisChicago = new (263, "Illinois Chicago", "UIC");
@@ -449,6 +450,7 @@ public sealed class College : DomainItemConstant
     public static readonly College Trinity = new(246, "Trinity");
     public static readonly College TrinityValleyCommunityCollege = new (405, "Trinity Valley Community College", "TVCC");
     public static readonly College TritonCollege = new(110, "Triton College");
+    public static readonly College Troy = new(512, "Troy");
     public static readonly College TrumanState = new (492, "Truman State", "TSU");
     public static readonly College Tulane = new(295, "Tulane");
     public static readonly College Tulsa = new(272, "Tulsa", "TU");
@@ -688,6 +690,7 @@ public sealed class College : DomainItemConstant
         HolyCrossCollege,
         Houston,
         Idaho,
+        IdahoState,
         Illinois,
         IllinoisCentralCollege,
         IllinoisChicago,
@@ -956,6 +959,7 @@ public sealed class College : DomainItemConstant
         Trinity,
         TrinityValleyCommunityCollege,
         TritonCollege,
+        Troy,
         TrumanState,
         Tulane,
         Tulsa,
@@ -1015,15 +1019,12 @@ public sealed class College : DomainItemConstant
         YoungstownState,
     };
 
-    private College(int id, string name, string abbreviation = null) : base(id, name, abbreviation) { }
+    private College(int id, string name, string abbreviation = null) 
+        : base(id, name, abbreviation) { }
 
     public static College Find(int id)
-    {
-        return All.SingleOrDefault(college => college.Id == id);
-    }
+        => All.SingleOrDefault(college => college.Id == id);
 
     public override string ToString()
-    {
-        return Name;
-    }
+        => Name;
 }

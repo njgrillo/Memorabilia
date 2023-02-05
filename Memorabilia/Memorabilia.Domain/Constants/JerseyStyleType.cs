@@ -33,10 +33,9 @@ public sealed class JerseyStyleType : DomainItemConstant
         WorldSeries
     };
 
-    private JerseyStyleType(int id, string name, string abbreviation = null) : base(id, name, abbreviation) { }
+    private JerseyStyleType(int id, string name, string abbreviation = null) 
+        : base(id, name, abbreviation) { }
 
     public static JerseyStyleType Find(int id)
-    {
-        return All.SingleOrDefault(jerseyStyleType => jerseyStyleType.Id == id);
-    }
+        => All.SingleOrDefault(jerseyStyleType => jerseyStyleType.Id == id);
 }

@@ -13,10 +13,9 @@ public sealed class PhotoType : DomainItemConstant
         Unknown
     };
 
-    private PhotoType(int id, string name, string abbreviation = null) : base(id, name, abbreviation) { }
+    private PhotoType(int id, string name, string abbreviation = null) 
+        : base(id, name, abbreviation) { }
 
     public static PhotoType Find(int id)
-    {
-        return All.SingleOrDefault(photoType => photoType.Id == id);
-    }
+        => All.SingleOrDefault(photoType => photoType.Id == id);
 }

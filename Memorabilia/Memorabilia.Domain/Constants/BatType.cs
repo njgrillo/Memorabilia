@@ -17,10 +17,9 @@ public sealed class BatType : DomainItemConstant
         Other
     };
 
-    private BatType(int id, string name, string abbreviation = null) : base(id, name, abbreviation) { }
+    private BatType(int id, string name, string abbreviation = null) 
+        : base(id, name, abbreviation) { }
 
     public static BatType Find(int id)
-    {
-        return All.SingleOrDefault(batType => batType.Id == id);
-    }
+        => All.SingleOrDefault(batType => batType.Id == id);
 }

@@ -6,7 +6,8 @@ public sealed class ImageFilter : Filter<ImageFilter>
     public static readonly ImageFilter NoImages = new("No Images(s)");
     public static readonly ImageFilter Images = new("Image(s)");
 
-    private ImageFilter(string name) : base(name) { }
+    private ImageFilter(string name) 
+        : base(name) { }
 
     public static readonly ImageFilter[] All =
     {

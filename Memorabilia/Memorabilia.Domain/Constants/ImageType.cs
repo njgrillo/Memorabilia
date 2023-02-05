@@ -11,10 +11,9 @@ public sealed class ImageType : DomainItemConstant
         Secondary
     };
 
-    private ImageType(int id, string name) : base(id, name) { }
+    private ImageType(int id, string name) 
+        : base(id, name) { }
 
     public static ImageType Find(int id)
-    {
-        return All.SingleOrDefault(imageType => imageType.Id == id);
-    }
+        => All.SingleOrDefault(imageType => imageType.Id == id);
 }

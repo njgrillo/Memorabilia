@@ -19,10 +19,9 @@ public sealed class JerseyQualityType : DomainItemConstant
         Unknown
     };
 
-    private JerseyQualityType(int id, string name, string abbreviation = null) : base(id, name, abbreviation) { }
+    private JerseyQualityType(int id, string name, string abbreviation = null) 
+        : base(id, name, abbreviation) { }
 
     public static JerseyQualityType Find(int id)
-    {
-        return All.SingleOrDefault(jerseyQualityType => jerseyQualityType.Id == id);
-    }
+        => All.SingleOrDefault(jerseyQualityType => jerseyQualityType.Id == id);
 }

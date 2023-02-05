@@ -6,7 +6,8 @@ public sealed class AuthenticationFilter : Filter<AuthenticationFilter>
     public static readonly AuthenticationFilter NotAuthenticated = new("Not Authenticated");
     public static readonly AuthenticationFilter Authenticated = new("Authenticated");
 
-    private AuthenticationFilter(string name) : base(name) { }
+    private AuthenticationFilter(string name)
+        : base(name) { }
 
     public static readonly AuthenticationFilter[] All =
     {

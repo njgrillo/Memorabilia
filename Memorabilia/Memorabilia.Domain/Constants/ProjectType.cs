@@ -23,10 +23,9 @@ public sealed class ProjectType : DomainItemConstant
         WorldSeries
     };
 
-    private ProjectType(int id, string name, string abbreviation = null) : base(id, name, abbreviation) { }
+    private ProjectType(int id, string name, string abbreviation = null) 
+        : base(id, name, abbreviation) { }
 
     public static ProjectType Find(int id)
-    {
-        return All.SingleOrDefault(projectType => projectType.Id == id);
-    }
+        => All.SingleOrDefault(projectType => projectType.Id == id);
 }

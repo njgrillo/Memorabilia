@@ -95,101 +95,11 @@ public sealed class Franchise : DomainItemConstant
     public static readonly Franchise WashingtonNationals = new(20, "Washington Nationals");
     public static readonly Franchise WashingtonWizards = new(91, "Washington Wizards");
 
-    public static readonly Franchise[] All =
-    {
-        ArizonaCardinals,
-        ArizonaDiamondbacks,
-        AtlantaBraves,
-        AtlantaFalcons,
-        AtlantaHawks,
-        BaltimoreOrioles,
-        BaltimoreRavens,
-        BostonCeltics,
-        BostonRedSox,
-        BrooklynNets,
-        BuffaloBills,
-        CarolinaPanthers,
-        CharlotteHornets,
-        ChicagoBears,
-        ChicagoBulls,
-        ChicagoCubs,
-        ChicagoWhiteSox,
-        CincinnatiBengals,
-        CincinnatiReds,
-        ClevelandBrowns,
-        ClevelandCavaliers,
-        ClevelandGuardians,
-        ColoradoRockies,
-        DallasCowboys,
-        DallasMavericks,
-        DenverBroncos,
-        DenverNuggets,
-        DetroitLions,
-        DetroitPistons,
-        DetroitTigers,
-        GoldenStateWarriors,
-        GreenBayPackers,
-        HoustonAstros,
-        HoustonRockets,
-        HoustonTexans,
-        IndianaPacers,
-        IndianapolisColts,
-        JacksonvilleJaguars,
-        KansasCityChiefs,
-        KansasCityRoyals,
-        LasVegasRaiders,
-        LosAngelesAngels,
-        LosAngelesChargers,
-        LosAngelesClippers,
-        LosAngelesDodgers,
-        LosAngelesLakers,
-        LosAngelesRams,
-        MemphisGrizzlies,
-        MiamiDolphins,
-        MiamiHeat,
-        MiamiMarlins,
-        MilwaukeeBrewers,
-        MilwaukeeBucks,
-        MinnesotaTimberwolves,
-        MinnesotaTwins,
-        MinnesotaVikings,
-        NewEnglandPatriots,
-        NewOrleansPelicans,
-        NewOrleansSaints,
-        NewYorkGiants,
-        NewYorkJets,
-        NewYorkKnicks,
-        NewYorkMets,
-        NewYorkYankees,
-        OaklandAthletics,
-        OklahomaCityThunder,
-        OrlandoMagic,
-        Philadelphia76ers,
-        PhiladelphiaEagles,
-        PhiladelphiaPhillies,
-        PhoenixSuns,
-        PittsburghPirates,
-        PittsburghSteelers,
-        PortlandTrailBlazers,
-        SacrementoKings,
-        SaintLouisCardinals,
-        SanAntonioSpurs,
-        SanDiegoPadres,
-        SanFranciscoFortyNiners,
-        SanFranciscoGiants,
-        SeattleMariners,
-        SeattleSeahawks,
-        TampaBayBuccaneers,
-        TampaBayRays,
-        TennesseeTitans,
-        TexasRangers,
-        TorontoBlueJays,
-        TorontoRaptors,
-        UtahJazz,
-        WashingtonCommanders,
-        WashingtonNationals,
-        WashingtonWizards
-    };
+    public static Franchise[] All
+        => Baseball.Union(Basketball)
+                   .Union(Football)
+                   .Distinct()
+                   .ToArray();
 
     public static readonly Franchise[] Baseball =
     {
@@ -295,12 +205,11 @@ public sealed class Franchise : DomainItemConstant
         WashingtonCommanders
     };
 
-    private Franchise(int id, string name) : base(id, name) { }
+    private Franchise(int id, string name) 
+        : base(id, name) { }
 
     public static Franchise Find(int id)
-    {
-        return All.SingleOrDefault(franchise => franchise.Id == id);
-    }
+        => All.SingleOrDefault(franchise => franchise.Id == id);
 
     public static Franchise[] GetAll(SportLeagueLevel sport)
     {

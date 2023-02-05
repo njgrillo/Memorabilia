@@ -15,12 +15,11 @@ public sealed class ChampionType : DomainItemConstant
         WorldSeries
     };
 
-    private ChampionType(int id, string name, string abbreviation = null) : base(id, name, abbreviation) { }
+    private ChampionType(int id, string name, string abbreviation = null) 
+        : base(id, name, abbreviation) { }
 
     public static ChampionType Find(int id)
-    {
-        return All.SingleOrDefault(championType => championType.Id == id);
-    }
+        => All.SingleOrDefault(championType => championType.Id == id);
 
     public static ChampionType Find(SportLeagueLevel sportLeagueLevel)
     {

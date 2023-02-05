@@ -46,52 +46,11 @@ public sealed class Position : DomainItemConstant
     public static readonly Position Utility = new(11, "Utility", "U");
     public static readonly Position WideReceiver = new(14, "Wide Receiver", "WR");
 
-    public static readonly Position[] All =
-    {
-        Back,
-        BasketballCenter,
-        BasketballGuard,
-        BlockingBack,
-        Catcher,
-        CenterField,
-        Cornerback,
-        DefensiveEnd,
-        DefensiveTackle,
-        DesignatedHitter,
-        End,
-        FirstBase,
-        Flanker,
-        FootballCenter,
-        FootballGuard,
-        Forward,
-        Fullback,
-        Halfback,
-        Infielder,
-        Kicker,
-        LeftField,
-        Linebacker,
-        LongSnapper,
-        OffensiveTackle,
-        Outfielder,
-        Pitcher,
-        PointGuard,
-        PowerForward,
-        Punter,
-        Quarterback,
-        ReturnSpecialist,
-        RightField, 
-        Runningback,
-        Safety,
-        SecondBase,
-        ShootingGuard,
-        Shortstop,
-        SmallForward,
-        SplitEnd,
-        ThirdBase,
-        TightEnd,
-        Utility,
-        WideReceiver
-    };
+    public static Position[] All
+        => Baseball.Union(Basketball)
+                   .Union(Football)
+                   .Distinct()
+                   .ToArray();
 
     public static readonly Position[] Baseball =
     {
@@ -148,12 +107,11 @@ public sealed class Position : DomainItemConstant
         WideReceiver
     };
 
-    private Position(int id, string name, string abbreviation = null) : base(id, name, abbreviation) { }
+    private Position(int id, string name, string abbreviation = null) 
+        : base(id, name, abbreviation) { }
 
     public static Position Find(int id)
-    {
-        return All.SingleOrDefault(Position => Position.Id == id);
-    }
+        => All.SingleOrDefault(Position => Position.Id == id);
 
     public static Position[] GetAll(params Sport[] sports)
     {

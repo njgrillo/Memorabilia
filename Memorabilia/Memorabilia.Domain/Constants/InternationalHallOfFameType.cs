@@ -17,10 +17,9 @@ public sealed class InternationalHallOfFameType : DomainItemConstant
         MexicanHallOfFame
     };
 
-    private InternationalHallOfFameType(int id, string name) : base(id, name) { }
+    private InternationalHallOfFameType(int id, string name) 
+        : base(id, name) { }
 
     public static InternationalHallOfFameType Find(int id)
-    {
-        return All.SingleOrDefault(internationalHallOfFameType => internationalHallOfFameType.Id == id);
-    }
+        => All.SingleOrDefault(internationalHallOfFameType => internationalHallOfFameType.Id == id);
 }

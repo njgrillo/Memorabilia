@@ -37,10 +37,9 @@ public sealed class HelmetFinish : DomainItemConstant
         TwentyFourKaratGoldPlated
     };
 
-    private HelmetFinish(int id, string name, string abbreviation = null) : base(id, name, abbreviation) { }
+    private HelmetFinish(int id, string name, string abbreviation = null) 
+        : base(id, name, abbreviation) { }
 
     public static HelmetFinish Find(int id)
-    {
-        return All.SingleOrDefault(helmetFinish => helmetFinish.Id == id);
-    }
+        => All.SingleOrDefault(helmetFinish => helmetFinish.Id == id);
 }

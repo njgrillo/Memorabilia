@@ -6,7 +6,8 @@ public sealed class PersonalizationFilter : Filter<PersonalizationFilter>
     public static readonly PersonalizationFilter NotPersonalized = new("Not Personalized");
     public static readonly PersonalizationFilter Personalized = new("Personalized");
 
-    private PersonalizationFilter(string name) : base(name) { }
+    private PersonalizationFilter(string name) 
+        : base(name) { }
 
     public static readonly PersonalizationFilter[] All =
     {

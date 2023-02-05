@@ -22,7 +22,8 @@ public sealed class SportLeagueLevel : DomainItemConstant
         NationalHockeyLeague
     };
 
-    private SportLeagueLevel(int id, string name, string abbreviation, Sport sport) : base(id, name, abbreviation) 
+    private SportLeagueLevel(int id, string name, string abbreviation, Sport sport) 
+        : base(id, name, abbreviation) 
     { 
         Sport = sport;
     }
@@ -30,9 +31,7 @@ public sealed class SportLeagueLevel : DomainItemConstant
     public Sport Sport { get; private set; }
 
     public static SportLeagueLevel Find(int id)
-    {
-        return All.SingleOrDefault(sportLeagueLevel => sportLeagueLevel.Id == id);
-    }
+        => All.SingleOrDefault(sportLeagueLevel => sportLeagueLevel.Id == id);
 
     public static SportLeagueLevel[] GetAll(params int[] sportIds)
     {

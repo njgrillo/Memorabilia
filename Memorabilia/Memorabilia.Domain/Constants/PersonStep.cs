@@ -21,10 +21,9 @@ public sealed class PersonStep : DomainItemConstant
        Team
     };
 
-    private PersonStep(int id, string name) : base(id, name) { }
+    private PersonStep(int id, string name) 
+        : base(id, name) { }
 
     public static PersonStep Find(int id)
-    {
-        return All.SingleOrDefault(personStep => personStep.Id == id);
-    }
+        => All.SingleOrDefault(personStep => personStep.Id == id);
 }

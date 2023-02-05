@@ -79,12 +79,8 @@ public sealed class Size : DomainItemConstant
         : base(id, name, abbreviation) { }
 
     public static Size Find(int id)
-    {
-        return All.SingleOrDefault(size => size.Id == id);
-    }
+        => All.SingleOrDefault(size => size.Id == id);
 
     public static Size Find(string name)
-    {
-        return All.SingleOrDefault(size => size.Name == name);
-    }
+        => All.SingleOrDefault(size => size.Name == name);
 }

@@ -224,38 +224,27 @@ public sealed class ItemType : DomainItemConstant
         WristBand
     };
 
-    private ItemType(int id, string name, bool displaySizeInTitles = false) : base(id, name) 
+    private ItemType(int id, string name, bool displaySizeInTitles = false) 
+        : base(id, name) 
     { 
         DisplaySizeInTitles = displaySizeInTitles;
     }
 
     public static bool CanHaveSize(ItemType itemType)
-    {
-        return SizeTypes.Contains(itemType);
-    }
+        => SizeTypes.Contains(itemType);
 
     public static bool CanHaveSpot(ItemType itemType)
-    {
-        return SpotTypes.Contains(itemType);
-    }
+        => SpotTypes.Contains(itemType);
 
     public static bool CanHaveTeam(ItemType itemType)
-    {
-        return TeamTypes.Contains(itemType);
-    }
+        => TeamTypes.Contains(itemType);
 
     public static ItemType Find(int id)
-    {
-        return All.SingleOrDefault(itemType => itemType.Id == id);
-    }
+        => All.SingleOrDefault(itemType => itemType.Id == id);
 
     public static bool IsGameType(ItemType itemType)
-    {
-        return GameTypes.Contains(itemType);
-    }
+        => GameTypes.Contains(itemType);
 
     public static bool IsWearable(ItemType itemType)
-    {
-        return WearableTypes.Contains(itemType);
-    }
+        => WearableTypes.Contains(itemType);
 }

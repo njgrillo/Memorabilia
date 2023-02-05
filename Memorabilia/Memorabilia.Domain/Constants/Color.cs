@@ -58,14 +58,10 @@ public sealed class Color : DomainItemConstant
         : base(id, name, abbreviation) { }
 
     public static Color Find(int id)
-    {
-        return All.SingleOrDefault(color => color.Id == id);
-    }
+        => All.SingleOrDefault(color => color.Id == id);
 
     public static Color Find(string name)
-    {
-        return All.SingleOrDefault(color => color.Name == name);
-    }
+        => All.SingleOrDefault(color => color.Name == name);
 
     public static Color[] GetAll(ItemType itemType)
     {

@@ -11,10 +11,9 @@ public sealed class PrivacyType : DomainItemConstant
         Private
     };
 
-    private PrivacyType(int id, string name) : base(id, name) { }
+    private PrivacyType(int id, string name) 
+        : base(id, name) { }
 
     public static PrivacyType Find(int id)
-    {
-        return All.SingleOrDefault(privacyType => privacyType.Id == id);
-    }
+        => All.SingleOrDefault(privacyType => privacyType.Id == id);
 }

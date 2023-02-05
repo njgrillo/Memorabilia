@@ -162,170 +162,12 @@ public sealed class AccomplishmentType : DomainItemConstant
     public static readonly AccomplishmentType USFLAllLeagueTeam = new(107, "USFL All-League Team");
     public static readonly AccomplishmentType USFLAllTimeTeam = new(108, "USFL All-Time Team");
     public static readonly AccomplishmentType WashingtonCommandersNinetyGreatest = new (47, "Washington Commanders 90 Greatest");
-      
-    public static readonly AccomplishmentType[] All =
-    {
-        AAUAllAmerican,
-        ABAAllDefensiveFirstTeam,
-        ABAAllTimeTeam,
-        ABASlamDunkChampion,
-        AFLAllTimeSecondTeam,
-        AFLAllTimeTeam,
-        AllABAFirstTeam,
-        AllABASecondTeam,
-        AllABLFirstTeam,
-        AllAFL,
-        AllAIC,
-        AllAmerican,
-        AllBAAFirstTeam,
-        AllBAANBAFirstTeam,
-        AllBAASecondTeam,
-        AllBig7,
-        AllBigEast,
-        AllMLBFirstTeam,
-        AllMLBSecondTeam,
-        AllNBAFirstTeam,
-        AllNBASecondTeam,
-        AllNBLFirstTeam,
-        AllNBLSecondTeam,
-        AllPAC8,
-        AllPro,
-        AllRookieTeam,
-        AllSouthern,
-        AllSWAC,
-        AllSWC,
-        AllUSFL,
-        AllWorldBaseballClassicTeam,
-        AllWPBTFirstTeam,
-        AllWPBTSecondTeam,
-        AmericanLeaguePitchingTripleCrown,
-        AmericanLeagueTripleCrown,
-        Bills50thAnniversaryTeam,
-        BostonPatriotsAll1960sTeam,
-        CAAAllDefensiveTeam,
-        CFB150GreatestCollegeFootballPlayerEver,
-        CombinedNoHitter,
-        ConsensusAllAmerican,
-        ConsensusFirstTeamAllAmerican,
-        ConsensusNAIAAllAmerican,
-        ConsensusSecondTeamAllAmerican,
-        DenverBroncos50thAnniversaryTeam,
-        DetroitLions75thAnniversaryTeam,
-        DetroitLionsAllTimeTeam,
-        DivisionIAAAllAmerican,
-        EightyGreatestRedskins,
-        FiftyAnniversaryAllTimeTeam,
-        FiftyFortyNinetyClub,
-        FiftyGreatestVikings,
-        FirstTeamAllAAFC,
-        FirstTeamAllAAWU,
-        FirstTeamAllACC,
-        FirstTeamAllAFL,
-        FirstTeamAllAmerican,
-        FirstTeamAllBigEast,
-        FirstTeamAllBigEight,
-        FirstTeamAllBigSeven,
-        FirstTeamAllBigTen,
-        FirstTeamAllBigTwelve,
-        FirstTeamAllCAA,
-        FirstTeamAllMAC,
-        FirstTeamAllMIAA,
-        FirstTeamAllMVC,
-        FirstTeamAllPac10,
-        FirstTeamAllPacificCoast,
-        FirstTeamAllPCC,
-        FirstTeamAllPro,
-        FirstTeamAllSEC,
-        FirstTeamAllSouthern,
-        FirstTeamAllSouthland,
-        FirstTeamAllSWC,
-        FirstTeamAllWAC,
-        FirstTeamAllWCAC,
-        FirstTeamAllWCC,
-        FirstTeamAllWesternConference,
-        FirstTeamLittleAllAmerican,
-        FirstTeamParadeAllAmerican,
-        FortyFortyClub,
-        FourHomeRunsInAGame,
-        HelmsAllAmerican,
-        HitForTheCycle,
-        ImmaculateInning,
-        MajorLeagueBaseballAllCenturyTeam,
-        MajorLeagueBaseballAllTimeTeam,
-        McDonaldsAllAmerican,
-        MinnesotaVikings25thAnniversaryTeam,
-        MinnesotaVikings40thAnniversaryTeam,
-        NAIAAllAmerican,
-        NationalLeaguePitchingTripleCrown,
-        NationalLeagueTripleCrown,
-        NBA25thAnniversaryTeam,
-        NBA35thAnniversaryTeam,
-        NBA50thAnniversaryTeam,
-        NBA75thAnniversaryTeam,
-        NBAAllDefensiveFirstTeam,
-        NBAAllDefensiveSecondTeam,
-        NBAAllRookieTeam,
-        NBASlamDunkContestChampion,
-        NBAThreePointContestChampion,
-        NBLAllTimeTeam,
-        NewEnglandPatriotsAll1970sTeam,
-        NewEnglandPatriotsAll1980sTeam,
-        NewEnglandPatriotsAll1990sTeam,
-        NewEnglandPatriotsAll2000sTeam,
-        NewEnglandPatriotsAll2010sTeam,
-        NewEnglandPatriotsAllDynastyTeam,
-        NewEnglandPatriots35thAnniversaryTeam,
-        NewEnglandPatriots50thAnniversaryTeam,
-        NewOrleansSaints45thAnniversaryTeam,
-        NineteenEightiesAllDecadeTeam,
-        NineteenFiftiesAllDecadeTeam,
-        NineteenFortiesAllDecadeTeam,
-        NineteenNinetiesAllDecadeTeam,
-        NineteenSeventiesAllDecadeTeam,
-        NineteenSixtiesAllDecadeTeam,
-        NineteenThirtiesAllDecadeTeam,
-        NineteenTwentiesAllDecadeTeam,
-        NoHitter,
-        OneHundredAnniversaryAllTimeTeam,
-        OneHundredGreatestBearsOfAllTime,
-        PerfectGame,
-        PFWAAllRookieTeam,
-        PhiladelphiaEagles75thAnniversaryTeam,
-        PittsburghSteelersAllTimeTeam,
-        PittsburghSteelersLegendsTeam,
-        PrideOfTheJaguars,
-        PrideOfTheLions,
-        SanDiegoChargers40thAnniversaryTeam,
-        SanDiegoChargers50thAnniversaryTeam,
-        SecondTeamAllAAFC,
-        SecondTeamAllACC,
-        SecondTeamAllAFL,
-        SecondTeamAllAmerican,
-        SecondTeamAllBigEast,
-        SecondTeamAllBigNine,
-        SecondTeamAllBigTen,
-        SecondTeamAllPro,
-        SecondTeamAllSEC,
-        SecondTeamLittleAllAmerican,
-        SecondTeamParadeAllAmerican,
-        SeventyFifthAnniversaryAllTimeTeam,
-        SeventyGreatestRedskins,
-        SportsIllustrated1940sAllDecadeTeam,
-        TechAllEraTeam,
-        ThirdTeamAllAmerican,
-        ThirdTeamAllPro,
-        ThirdTeamLittleAllAmerican,
-        ThirtyThirtyClub,
-        ToppsAllStarRookieTeam,
-        TwoBasesLoadedTriplesInAGame,
-        TwoGrandSlamsInOneInning,
-        TwoThousandsAllDecadeTeam,
-        TwoThousandTensAllDecadeTeam,
-        UnassistedTriplePlay,
-        USFLAllLeagueTeam,
-        USFLAllTimeTeam,
-        WashingtonCommandersNinetyGreatest
-    };
+
+    public static AccomplishmentType[] All
+        => Baseball.Union(Basketball)
+                   .Union(Football)
+                   .Distinct()
+                   .ToArray();
 
     public static readonly AccomplishmentType[] Baseball =
     {
@@ -629,9 +471,7 @@ public sealed class AccomplishmentType : DomainItemConstant
         : base(id, name, abbreviation) { }
 
     public static AccomplishmentType Find(int id)
-    {
-        return All.SingleOrDefault(accomplishmentType => accomplishmentType.Id == id);
-    }
+        => All.SingleOrDefault(accomplishmentType => accomplishmentType.Id == id);
 
     public static AccomplishmentType[] GetAll(params Sport[] sports)
     {
@@ -667,12 +507,8 @@ public sealed class AccomplishmentType : DomainItemConstant
     }
 
     public static bool IsDateAccomplishment(int id)
-    {
-        return DateAccomplishment.Any(accomplishmentType => accomplishmentType.Id == id);
-    }
+        => DateAccomplishment.Any(accomplishmentType => accomplishmentType.Id == id);
 
     public static bool IsYearAccomplishment(int id)
-    {
-        return YearAccomplishment.Any(accomplishmentType => accomplishmentType.Id == id);
-    }
+        => YearAccomplishment.Any(accomplishmentType => accomplishmentType.Id == id);
 }

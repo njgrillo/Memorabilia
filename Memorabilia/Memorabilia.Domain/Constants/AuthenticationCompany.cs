@@ -48,18 +48,15 @@ public sealed class AuthenticationCompany : DomainItemConstant
         PSA
     };
 
-    private AuthenticationCompany(int id, string name, string abbreviation = null, string websitePath = null) : base(id, name, abbreviation) 
+    private AuthenticationCompany(int id, string name, string abbreviation = null, string websitePath = null) 
+        : base(id, name, abbreviation) 
     {
         WebsitePath = websitePath;
     }
 
     public static AuthenticationCompany Find(int id)
-    {
-        return All.SingleOrDefault(authenticationCompany => authenticationCompany.Id == id);
-    }
+        => All.SingleOrDefault(authenticationCompany => authenticationCompany.Id == id);
 
     public static bool IsNavigatable(AuthenticationCompany authenticationCompany)
-    {
-        return Navigatable.Contains(authenticationCompany);
-    }
+        => Navigatable.Contains(authenticationCompany);
 }

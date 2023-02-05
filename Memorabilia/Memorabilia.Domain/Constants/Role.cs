@@ -11,10 +11,9 @@ public sealed class Role : DomainItemConstant
         User
     };
 
-    private Role(int id, string name) : base(id, name) { }
+    private Role(int id, string name) 
+        : base(id, name) { }
 
     public static Role Find(int id)
-    {
-        return All.SingleOrDefault(role => role.Id == id);
-    }
+        => All.SingleOrDefault(role => role.Id == id);
 }

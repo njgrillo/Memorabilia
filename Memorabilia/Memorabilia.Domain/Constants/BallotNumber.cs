@@ -39,10 +39,9 @@ public sealed class BallotNumber : DomainItemConstant
         Sixteenth
     };
 
-    private BallotNumber(int id, string name) : base(id, name) { }
+    private BallotNumber(int id, string name) 
+        : base(id, name) { }
 
     public static BallotNumber Find(int id)
-    {
-        return All.SingleOrDefault(ballotNumber => ballotNumber.Id == id);
-    }
+        => All.SingleOrDefault(ballotNumber => ballotNumber.Id == id);
 }

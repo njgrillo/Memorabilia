@@ -33,9 +33,7 @@ public sealed class GloveType : DomainItemConstant
         : base(id, name, abbreviation) { }
 
     public static GloveType Find(int id)
-    {
-        return All.SingleOrDefault(gloveType => gloveType.Id == id);
-    }
+        => All.SingleOrDefault(gloveType => gloveType.Id == id);
 
     public static GloveType[] GetAll(params Sport[] sports)
     {

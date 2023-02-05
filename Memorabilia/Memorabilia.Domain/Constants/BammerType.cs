@@ -17,10 +17,9 @@ public sealed class BammerType : DomainItemConstant
         OpeningDay
     };
 
-    private BammerType(int id, string name, string abbreviation = null) : base(id, name, abbreviation) { }
+    private BammerType(int id, string name, string abbreviation = null) 
+        : base(id, name, abbreviation) { }
 
     public static BammerType Find(int id)
-    {
-        return All.SingleOrDefault(bammerType => bammerType.Id == id);
-    }
+        => All.SingleOrDefault(bammerType => bammerType.Id == id);
 }

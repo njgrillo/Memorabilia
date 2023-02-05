@@ -11,10 +11,9 @@ public sealed class CardType : DomainItemConstant
         Playing
     };
 
-    private CardType(int id, string name, string abbreviation = null) : base(id, name, abbreviation) { }
+    private CardType(int id, string name, string abbreviation = null) 
+        : base(id, name, abbreviation) { }
 
     public static CardType Find(int id)
-    {
-        return All.SingleOrDefault(CardType => CardType.Id == id);
-    }
+        => All.SingleOrDefault(CardType => CardType.Id == id);
 }

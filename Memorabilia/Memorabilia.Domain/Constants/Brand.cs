@@ -106,22 +106,14 @@ public sealed class Brand : DomainItemConstant
         : base(id, name, abbreviation) { }
 
     public static Brand Find(int id)
-    {
-        return All.SingleOrDefault(brand => brand.Id == id);
-    }
+        => All.SingleOrDefault(brand => brand.Id == id);
 
     public static Brand Find(string name)
-    {
-        return All.SingleOrDefault(brand => brand.Name == name);
-    }
+        => All.SingleOrDefault(brand => brand.Name == name);
 
     public static bool IsGameWorthlyBaseballBrand(int id)
-    {
-        return GameWorthlyBaseballBrand.Contains(Find(id));
-    }
+        => GameWorthlyBaseballBrand.Contains(Find(id));
 
     public static bool IsGameWorthlyBaseballBrand(Brand brand)
-    {
-        return GameWorthlyBaseballBrand.Contains(brand);
-    }
+        => GameWorthlyBaseballBrand.Contains(brand);
 }

@@ -13,10 +13,9 @@ public sealed class MemorabiliaItemStep : DomainItemConstant
        Item
     };
 
-    private MemorabiliaItemStep(int id, string name) : base(id, name) { }
+    private MemorabiliaItemStep(int id, string name) 
+        : base(id, name) { }
 
     public static MemorabiliaItemStep Find(int id)
-    {
-        return All.SingleOrDefault(memorabiliaItemStep => memorabiliaItemStep.Id == id);
-    }
+        => All.SingleOrDefault(memorabiliaItemStep => memorabiliaItemStep.Id == id);
 }

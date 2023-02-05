@@ -27,12 +27,8 @@ public sealed class Condition : DomainItemConstant
         : base(id, name, abbreviation) { }
 
     public static Condition Find(int id)
-    {
-        return All.SingleOrDefault(condition => condition.Id == id);
-    }
+        => All.SingleOrDefault(condition => condition.Id == id);
 
     public static Condition Find(string name)
-    {
-        return All.SingleOrDefault(condition => condition.Name == name);
-    }
+        => All.SingleOrDefault(condition => condition.Name == name);    
 }

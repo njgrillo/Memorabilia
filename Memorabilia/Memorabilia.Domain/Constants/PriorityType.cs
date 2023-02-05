@@ -15,10 +15,9 @@ public sealed class PriorityType : DomainItemConstant
         TakeItOrLeaveIt
     };
 
-    private PriorityType(int id, string name, string abbreviation = null) : base(id, name, abbreviation) { }
+    private PriorityType(int id, string name, string abbreviation = null) 
+        : base(id, name, abbreviation) { }
 
     public static PriorityType Find(int id)
-    {
-        return All.SingleOrDefault(priorityType => priorityType.Id == id);
-    }
+        => All.SingleOrDefault(priorityType => priorityType.Id == id);
 }

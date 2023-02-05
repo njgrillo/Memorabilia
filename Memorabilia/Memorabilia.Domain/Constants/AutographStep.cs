@@ -17,10 +17,9 @@ public sealed class AutographStep : DomainItemConstant
        Spot
     };
 
-    private AutographStep(int id, string name) : base(id, name) { }
+    private AutographStep(int id, string name) 
+        : base(id, name) { }
 
     public static AutographStep Find(int id)
-    {
-        return All.SingleOrDefault(autographStep => autographStep.Id == id);
-    }
+        => All.SingleOrDefault(autographStep => autographStep.Id == id);
 }

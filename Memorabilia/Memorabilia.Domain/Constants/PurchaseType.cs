@@ -24,12 +24,8 @@ public sealed class PurchaseType : DomainItemConstant
         : base(id, name, abbreviation) { }
 
     public static PurchaseType Find(int id)
-    {
-        return All.SingleOrDefault(purchaseType => purchaseType.Id == id);
-    }
+        => All.SingleOrDefault(purchaseType => purchaseType.Id == id);
 
     public static PurchaseType Find(string name)
-    {
-        return All.SingleOrDefault(purchaseType => purchaseType.Name == name);
-    }
+        => All.SingleOrDefault(purchaseType => purchaseType.Name == name);
 }

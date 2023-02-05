@@ -87,15 +87,12 @@ public sealed class Spot : DomainItemConstant
         UnderLogo
     };
 
-    private Spot(int id, string name, string abbreviation = null) : base(id, name, abbreviation) { }
+    private Spot(int id, string name, string abbreviation = null) 
+        : base(id, name, abbreviation) { }
 
     public static Spot Find(int id)
-    {
-        return All.SingleOrDefault(spot => spot.Id == id);
-    }
+        => All.SingleOrDefault(spot => spot.Id == id);
 
     public static Spot Find(string name)
-    {
-        return All.SingleOrDefault(spot => spot.Name == name);
-    }
+        => All.SingleOrDefault(spot => spot.Name == name);
 }

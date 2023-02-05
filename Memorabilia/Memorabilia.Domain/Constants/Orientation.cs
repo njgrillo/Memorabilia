@@ -11,10 +11,9 @@ public sealed class Orientation : DomainItemConstant
         Landscape
     };
 
-    private Orientation(int id, string name, string abbreviation = null) : base(id, name, abbreviation) { }
+    private Orientation(int id, string name, string abbreviation = null) 
+        : base(id, name, abbreviation) { }
 
     public static Orientation Find(int id)
-    {
-        return All.SingleOrDefault(orientation => orientation.Id == id);
-    }
+        => All.SingleOrDefault(orientation => orientation.Id == id);
 }

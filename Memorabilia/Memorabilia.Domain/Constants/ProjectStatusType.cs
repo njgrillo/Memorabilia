@@ -13,10 +13,9 @@ public sealed class ProjectStatusType : DomainItemConstant
         NotStarted
     };
 
-    private ProjectStatusType(int id, string name, string abbreviation = null) : base(id, name, abbreviation) { }
+    private ProjectStatusType(int id, string name, string abbreviation = null) 
+        : base(id, name, abbreviation) { }
 
     public static ProjectStatusType Find(int id)
-    {
-        return All.SingleOrDefault(projectStatusType => projectStatusType.Id == id);
-    }
+        => All.SingleOrDefault(projectStatusType => projectStatusType.Id == id);
 }

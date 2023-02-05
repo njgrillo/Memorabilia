@@ -31,10 +31,9 @@ public sealed class LevelType : DomainItemConstant
         Unknown
     };
 
-    private LevelType(int id, string name, string abbreviation = null) : base(id, name, abbreviation) { }
+    private LevelType(int id, string name, string abbreviation = null) 
+        : base(id, name, abbreviation) { }
 
     public static LevelType Find(int id)
-    {
-        return All.SingleOrDefault(levelType => levelType.Id == id);
-    }
+        => All.SingleOrDefault(levelType => levelType.Id == id);
 }

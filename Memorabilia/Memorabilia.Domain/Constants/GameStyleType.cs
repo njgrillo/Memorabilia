@@ -40,12 +40,11 @@ public sealed class GameStyleType : DomainItemConstant
         TournametUsed
     };
 
-    private GameStyleType(int id, string name, string abbreviation = null) : base(id, name, abbreviation) { }
+    private GameStyleType(int id, string name, string abbreviation = null) 
+        : base(id, name, abbreviation) { }
 
     public static GameStyleType Find(int id)
-    {
-        return All.SingleOrDefault(gameStyleType => gameStyleType.Id == id);
-    }
+        => All.SingleOrDefault(gameStyleType => gameStyleType.Id == id);
 
     public static GameStyleType[] GetAll(ItemType itemType)
     {
@@ -56,7 +55,5 @@ public sealed class GameStyleType : DomainItemConstant
     }
 
     public static bool IsGameWorthly(GameStyleType gameStyleType)
-    {
-        return GameWorthly.Contains(gameStyleType);
-    }
+        => GameWorthly.Contains(gameStyleType);
 }

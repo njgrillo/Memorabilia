@@ -23,12 +23,11 @@ public sealed class BasketballType : DomainItemConstant
         Official
     };
 
-    private BasketballType(int id, string name, string abbreviation = null) : base(id, name, abbreviation) { }    
+    private BasketballType(int id, string name, string abbreviation = null) 
+        : base(id, name, abbreviation) { }    
 
     public static BasketballType Find(int id)
-    {
-        return All.SingleOrDefault(basketballType => basketballType.Id == id);
-    }
+        => All.SingleOrDefault(basketballType => basketballType.Id == id);
 
     public static BasketballType[] GetAll(GameStyleType gameStyleType)
     {

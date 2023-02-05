@@ -68,6 +68,7 @@ public sealed class LeaderType : DomainItemConstant
     public static readonly LeaderType PassingYards = new (44, "Passing Yards");
     public static readonly LeaderType PuntingAverage = new (48, "Punting Average");
     public static readonly LeaderType PuntingYards = new (49, "Punting Yards");
+    public static readonly LeaderType PuntReturnYards = new (79, "Punt Return Yards");
     public static readonly LeaderType ReceivingTouchdowns = new (52, "Receiving Touchdowns");
     public static readonly LeaderType ReceivingYards = new (50, "Receiving Yards");
     public static readonly LeaderType Receptions = new (51, "Receptions");
@@ -76,86 +77,13 @@ public sealed class LeaderType : DomainItemConstant
     public static readonly LeaderType RushingYards = new (38, "Rushing Yards");
     public static readonly LeaderType Sacks = new (59, "Sacks");
     public static readonly LeaderType Scoring = new (39, "Scoring");
-    public static readonly LeaderType Tackles = new (63, "Tackles");    
+    public static readonly LeaderType Tackles = new (63, "Tackles");
 
-    public static readonly LeaderType[] All =
-    {
-        AAFCReceivingYards, 
-        AAFCReceptions,
-        AAFCRushingTouchdowns, 
-        AAFCRushingYards,
-        ABAScoringChampion,
-        ABLScoring,
-        AFLCompletionPercentage,
-        AFLInterceptions,
-        AFLPasserRating,
-        AFLPassingTouchdowns,
-        AFLPassingYards,
-        AFLReceivingTouchdowns,
-        AFLReceivingYards,
-        AFLReceptions,
-        AmericanLeagueBattingChampion,
-        AmericanLeagueEarnedRunAverageLeader,
-        AmericanLeagueHitsLeader,
-        AmericanLeagueHomeRunLeader,
-        AmericanLeagueRunBattedInLeader,
-        AmericanLeagueRunsLeader,
-        AmericanLeagueSavesLeader,
-        AmericanLeagueStolenBaseLeader,
-        AmericanLeagueStrikeoutLeader,
-        AmericanLeagueTriplesLeader,
-        AmericanLeagueWinsLeader,
-        BAAScoringChampion,
-        CompletionPercentage,
-        ForcedFumbles,
-        Interceptions,
-        KickoffReturnYards,
-        MajorLeagueBaseballBattingChampion,
-        MajorLeagueBaseballEarnedRunAverageLeader,
-        MajorLeagueBaseballHitsLeader,
-        MajorLeagueBaseballHomeRunLeader,
-        MajorLeagueBaseballRunsBattedInLeader,
-        MajorLeagueBaseballRunsLeader,
-        MajorLeagueBaseballSavesLeader,
-        MajorLeagueBaseballStolenBaseLeader,
-        MajorLeagueBaseballStrikeoutLeader,
-        MajorLeagueBaseballTriplesLeader,
-        MajorLeagueBaseballWinsLeader,
-        NationalLeagueAssists,
-        NationalLeagueBattingChampion,
-        NationalLeagueEarnedRunAverageLeader,
-        NationalLeagueHitsLeader,
-        NationalLeagueHomeRunLeader,
-        NationalLeagueRunBattedInLeader,
-        NationalLeagueRunsLeader,
-        NationalLeagueSavesLeader,
-        NationalLeagueStolenBaseLeader,
-        NationalLeagueStrikeoutLeader,
-        NationalLeagueTriplesLeader,
-        NationalLeagueWinsLeader,
-        NBAAssists,
-        NBABlocks,
-        NBAReboundingLeader,
-        NBAScoringChampion,
-        NBASteals,
-        NBLScoring,
-        NBLScoringChampion,
-        NCAADivisionIScoringLeader,
-        PasserRating,
-        PassingTouchdowns,
-        PassingYards,
-        PuntingAverage,
-        PuntingYards,
-        ReceivingTouchdowns,
-        ReceivingYards,
-        Receptions,
-        Rushes,
-        RushingTouchdowns,
-        RushingYards,
-        Sacks,
-        Scoring,
-        Tackles
-    };
+    public static LeaderType[] All
+        => Baseball.Union(Basketball)
+                   .Union(Football)
+                   .Distinct()
+                   .ToArray();
 
     public static readonly LeaderType[] Baseball =
     {
@@ -233,6 +161,7 @@ public sealed class LeaderType : DomainItemConstant
         PassingYards,
         PuntingAverage,
         PuntingYards,
+        PuntReturnYards,
         ReceivingTouchdowns,
         ReceivingYards,
         Receptions,
@@ -244,12 +173,11 @@ public sealed class LeaderType : DomainItemConstant
         Tackles
     };
 
-    private LeaderType(int id, string name, string abbreviation = null) : base(id, name, abbreviation) { } 
+    private LeaderType(int id, string name, string abbreviation = null) 
+        : base(id, name, abbreviation) { } 
 
     public static LeaderType Find(int id)
-    {
-        return All.SingleOrDefault(leaderType => leaderType.Id == id);
-    }
+        => All.SingleOrDefault(leaderType => leaderType.Id == id);
 
     public static LeaderType[] GetAll(params Sport[] sports)
     {
@@ -271,7 +199,5 @@ public sealed class LeaderType : DomainItemConstant
     }
 
     public override string ToString()
-    {
-        return Name;
-    }
+        => Name;
 }

@@ -25,7 +25,7 @@ public class AutographViewModel : ViewModel
 
     public List<Domain.Entities.AutographAuthentication> Authentications => _autograph.Authentications;
 
-    public string AuthenticationText => Authentications.Any() ? "Has Authentication(s)" : "No Authentication(s)";
+    public string AuthenticationText => Authentications.Count().ToString();
 
     public string AuthenticationTooltip => $"{Authentications.Count} Authentication(s)";
 
@@ -77,7 +77,7 @@ public class AutographViewModel : ViewModel
 
     public List<Domain.Entities.AutographImage> Images => _autograph.Images;        
 
-    public string InscriptionText => Inscriptions.Any() ? "Has Inscription(s)" : "No Inscription(s)";
+    public string InscriptionText => Inscriptions.Count().ToString();
 
     public string InscriptionTooltip => $"{Inscriptions.Count} Inscription(s)"; 
 

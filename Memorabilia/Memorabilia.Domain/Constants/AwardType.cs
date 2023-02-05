@@ -62,6 +62,7 @@ public sealed class AwardType : DomainItemConstant
     public static readonly AwardType BiletnikoffAward = new (113, "Biletnikoff Award");
     public static readonly AwardType BillWillisTrophy = new (149, "Bill Willis Trophy");
     public static readonly AwardType BronkoNagurskiTrophy = new (76, "Bronko Nagurski Trophy");
+    public static readonly AwardType BuckBuchananAward = new (240, "Buck Buchanan Award");
     public static readonly AwardType ButkusAward = new (159, "Butkus Award");
     public static readonly AwardType CAAPlayerOfTheYear = new (230, "CAA Player of the Year");
     public static readonly AwardType CAARookieOfTheYear = new (231, "CAA Rookie of the Year", "CAA ROY");
@@ -164,6 +165,7 @@ public sealed class AwardType : DomainItemConstant
     public static readonly AwardType NCAAInspirationAward = new(120, "NCAA Inspiration Award");
     public static readonly AwardType NCAATournamentMostOutstandingPlayer = new(193, "NCAA Tournament Most Outstanding Player");
     public static readonly AwardType NFCPlayerOfTheYear = new(157, "NFC Player of the Year");
+    public static readonly AwardType NFLAlumniSpecialTeamsPlayerOfTheYear = new (239, "NFL Alumni Special Teams Player of the Year");
     public static readonly AwardType NITMostValuablePlayer = new (196, "NIT Most Valuable Player", "NIT MVP");
     public static readonly AwardType OffensivePlayerOfTheYear = new (67, "Offensive Player of the Year", "OPOY");
     public static readonly AwardType OffensiveRookieOfTheYear = new (68, "Offensive Rookie of the Year", "ROY");
@@ -234,240 +236,12 @@ public sealed class AwardType : DomainItemConstant
     public static readonly AwardType WorldSeriesMostValuablePlayer = new(12, "World Series Most Valuable Player", "WS MVP");
     public static readonly AwardType WPBTMostValuablePlayer = new (179, "WPBT Most Valuable Player", "WPBT MVP");
 
-    public static readonly AwardType[] All =
-    {
-        AAFCMostValuablePlayer,
-        ABAAllStarGameMostValuablePlayer,
-        ABACoachOfTheYear,
-        ABAMostValuablePlayer,
-        ABAPlayoffsMostValuablePlayer,
-        ABARookieOfTheYear,
-        ABLMostValuablePlayer,
-        ACCAthleteOfTheYear,
-        ACCBaseballPlayerOfTheYear,
-        ACCDefensivePlayerOfTheYear,
-        ACCOffensiveRookieOfTheYear,
-        ACCPlayerOfTheYear,
-        ACCRookieOfTheYear,
-        AFLChampionshipMostValuablePlayer,
-        AFLCoachOfTheYear,
-        AFLMostValuablePlayer,
-        AFLPlayerOfTheYear,
-        AFLRookieOfTheYear,
-        AllStarGameMostValuablePlayer,
-        AlumniOffensiveLinemanOfTheYear,
-        AmericanLeagueChampionshipSeriesMostValuablePlayer,
-        AmericanLeagueComebackPlayerOfTheYear,
-        AmericanLeagueCyYoung,
-        AmericanLeagueHankAaronAward,
-        AmericanLeagueManagerOfTheYear,
-        AmericanLeagueMostValuablePlayer,
-        AmericanLeagueRelieverOfTheYear,
-        AmericanLeagueRolaidsReliefManAward,
-        AmericanLeagueRookieOfTheYear,
-        AmosAlonzoStaggAward,
-        ArtRooneyAward,
-        AssociatedPressAthleteOfTheYear,       
-        AssociatedPressCoachOfTheYear,
-        AssociatedPressCollegeCoachOfTheYear,
-        AssociatedPressCollegePlayerOfTheYear,
-        AssociatedPressMaleAthleteOfTheYear,
-        AssociatedPressPlayerOfTheYear,
-        BabeRuthAward,
-        BartStarrAward,
-        BaseballAmericaCollegePlayerOfTheYear,
-        BertBellAward,
-        BestCoachManagerESPYAward,
-        BestLinemanAward,
-        BigEastDefensivePlayerOfTheYear,
-        BigEastPlayerOfTheYear,
-        BigEastRookieOfTheYear,
-        BigEastTournamentMostValuablePlayer,
-        BigEightOffensivePlayerOfTheYear,
-        BigTenDefensivePlayerOfTheYear,
-        BigTenFreshmanOfTheYear,
-        BigTenMedalOfHonor,
-        BigTenMostValuablePlayer,
-        BigTenOffensiveLinemanOfTheYear,
-        BigTenOffensivePlayerOfTheYear,
-        BigTenPlayerOfTheYear,
-        BigTwelveOffensiveFreshmanOfTheYear,
-        BigTwelveOffensiveNewcomerOfTheYear,
-        BiletnikoffAward,
-        BillWillisTrophy,
-        BronkoNagurskiTrophy,
-        ButkusAward,
-        CAAPlayerOfTheYear,
-        CAARookieOfTheYear,
-        CampbellTrophy,
-        ChicHarleyAward,
-        ChicagoTribuneSilverFootball,
-        ChuckBednarikAward,
-        ChuckDalyLifetimeAchievementAward,
-        CoachOfTheYear,
-        CollegeWorldSeriesMostOutstandingPlayer,
-        ComebackPlayerOfTheYear,
-        CommissionersHistoricAchievementAward,
-        ConsensusNationalCollegePlayerOfTheYear,
-        CottonBowlMostValuablePlayer,
-        CyYoungAward,
-        DaveyOBrienAward,
-        DaveyOBrienMemorialTrophy,
-        DefensivePlayerOfTheYear,
-        DefensiveRookieOfTheYear,
-        DeliveryManOfTheYear,
-        DickHowserTrophy,
-        DoakWalkerAward,
-        EBAMostValuablePlayer,
-        EddieRobinsonAward,
-        EdgarMartinezAward,
-        ExecutiveOfTheYear,
-        FieldingBibleAward,
-        FinalsMostValuablePlayer,
-        FordFrickAward,
-        GeorgeHalasAward,
-        GoldenSpikes,
-        GoldenToeAward,
-        GoldGlove,
-        GreatestPlayerOfTheFirstHalfCentury,
-        GrieseBreesQuarterbackoftheYear,
-        HaggertyAward,
-        HeartAndHustleAward,
-        HeismanTrophy,
-        HelmsCollegePlayerOfTheYear,
-        HelmsFoundationCollegePlayerOfTheYear,
-        HelmsFoundationPlayerOfTheYear,
-        HelmsNationalPlayerOfTheYear,
-        HelmsPlayerOfTheYear,
-        HenryIbaAward,
-        IBMAward,
-        JackLambertTrophy,
-        JackTatumTrophy,
-        JacobsBlockingTrophy,
-        JeffNicklinMemorialTrophy,
-        JimParkerAward,
-        JimThorpeAward,
-        JohnnyUnitasGoldenArmAward,
-        JohnRWoodenAward,
-        JWalterKennedyCitizenshipAward,
-        LamarHuntAward,
-        LombardiAward,
-        MACDefensivePlayerOfTheYear,
-        MACMostValuablePlayer,
-        MACOffensivePlayerOfTheYear,
-        MajorLeagueBaseballRookieOfTheYear,
-        ManagerOfTheYear,
-        ManOfTheYear,
-        MarvinMillerManOfTheYear,
-        MaxwellAward,
-        MaxwellClubNFLCoachOfTheYear,
-        McDonaldsAllAmericanGameMostValuablePlayer,
-        MEACCoachOfTheYear,
-        MorrisTrophy,
-        MostValuablePlayer,
-        MrBasketballUSA,
-        NABCCoachOfTheYear,
-        NationalCollegePlayerOfTheYear,
-        NationalHighSchoolPlayerOfTheYear,
-        NationalLeagueChampionshipSeriesMostValuablePlayer,
-        NationalLeagueComebackPlayerOfTheYear,
-        NationalLeagueCyYoung,
-        NationalLeagueHankAaronAward,
-        NationalLeagueManagerOfTheYear,
-        NationalLeagueMostValuablePlayer,
-        NationalLeagueRelieverOfTheYear,
-        NationalLeagueRolaidsReliefManAward,
-        NationalLeagueRookieOfTheYear,
-        NationalPitcherOfTheYear,
-        NationalPlayerOfTheYear,
-        NBAAllStarGameMVP,
-        NBACoachOfTheYear,
-        NBAComebackPlayerOfTheYear,
-        NBADefensivePlayerOfTheYear,
-        NBAExecutiveOfTheYear,        
-        NBALifetimeAchievementAward,
-        NBAMostImprovedPlayer,
-        NBAMostValuablePlayer,
-        NBARookieOfTheYear,
-        NBASixthManOfTheYear,
-        NBASportsmanshipAward,
-        NBLCoachOfTheYear,
-        NBLMostValuablePlayer,
-        NBLRookieOfTheYear,
-        NCAAFinalFourMostOutstandingPlayer,
-        NCAAInspirationAward,
-        NCAATournamentMostOutstandingPlayer,
-        NFCPlayerOfTheYear,
-        NITMostValuablePlayer,
-        OffensivePlayerOfTheYear,
-        OffensiveRookieOfTheYear,
-        OneHundredOneAwardsNFCCoachOfTheYear,
-        OscarRobertsonTrophy,
-        OutlandTrophy,
-        Pac8CoachOfTheYear,
-        Pac8PlayerOfTheYear,
-        Pac10DefensivePlayerOfTheYear,
-        Pac10OffensivePlayerOfTheYear,
-        Pac10PlayerOfTheYear,
-        Pac12PitcherOfTheYear,
-        PeachBowlOffensiveMostValuablePlayer,
-        PFWAExecutiveOfTheYear,
-        PFWAFLCoachOfTheYear,
-        PlatinumGlove,
-        PresidentialMedalOfFreedom,
-        ProBowlMostValuablePlayer,
-        ProFootballWeeklyCoachOfTheYear,
-        RelieverOfTheYear,
-        RobertoClementeAward,
-        RobertVGeaseyTrophy,
-        RookieOfTheYear,
-        SammyBaughTrophy,
-        SECMostValuablePlayer,
-        SECPitcherOfTheYear,
-        SECPlayerOfTheYear,
-        SilverSlugguer,
-        SoConPlayerOfTheYear,
-        SouthlandPlayerOfTheYear,
-        SportsIllustratedSportspersonOfTheYear,
-        SportingNewsCoachOfTheYear,
-        SportingNewsCollegePlayerOfTheYear,
-        SportingNewsCoordinatorOfTheYear,
-        SportingNewsPlayerOfTheYear,
-        SuperBowlMostValuablePlayer,
-        SWACCoachOfTheYear,
-        SWCOffensivePlayerOfTheYear,
-        SWCPlayerOfTheYear,
-        TipONeillAward,
-        TonyConigliaroAward,
-        UPIAFCCoachOfTheYear,
-        UPIAFCOffensivePlayerOfTheYear,
-        UPIAFLCoachOfTheYear,
-        UPICoachOfTheYear,
-        UPICollegePlayerOfTheYear,
-        UPILinemanOfTheYear,
-        UPINFCCoachOfTheYear,
-        UPINFCDefensivePlayerOfTheYear,
-        UPINFCOffensivePlayerOfTheYear,
-        UPINFCRookieOfTheYear,
-        UPIPlayerOfTheYear,
-        USABasketballMaleAthleteOfTheYear,
-        USBWACollegePlayerOfTheYear,
-        USFLMostValuablePlayer,
-        USFLRookieOfTheYear,
-        WACOffensivePlayerOfTheYear,
-        WalterCampAlumniOfTheYear,
-        WalterCampAward,
-        WalterCampCoachOfTheYear,
-        WalterPaytonNFLManOfTheYear,
-        WCACPlayerOfTheYear,
-        WCCPlayerOfTheYear,
-        WhizzerWhiteNFLMaOfTheYearAward,
-        WillieMacAward,
-        WilsonDefensivePlayerOfTheYearAward,
-        WorldBaseballClassicMostValuablePlayer,
-        WorldSeriesMostValuablePlayer,
-        WPBTMostValuablePlayer
-    };
+    public static AwardType[] All
+        => Baseball.Union(Basketball)
+                   .Union(Football)
+                   .Union(Generic)
+                   .Distinct()
+                   .ToArray();
 
     public static readonly AwardType[] Baseball =
     {
@@ -631,6 +405,7 @@ public sealed class AwardType : DomainItemConstant
         BiletnikoffAward,
         BillWillisTrophy,
         BronkoNagurskiTrophy,
+        BuckBuchananAward,
         ButkusAward,
         CampbellTrophy,
         ChicHarleyAward,
@@ -670,6 +445,7 @@ public sealed class AwardType : DomainItemConstant
         MostValuablePlayer,
         NCAAInspirationAward,
         NFCPlayerOfTheYear,
+        NFLAlumniSpecialTeamsPlayerOfTheYear,
         OffensivePlayerOfTheYear,
         OffensiveRookieOfTheYear,
         OneHundredOneAwardsNFCCoachOfTheYear,
@@ -688,9 +464,7 @@ public sealed class AwardType : DomainItemConstant
         SECMostValuablePlayer,
         SECPlayerOfTheYear,
         SportingNewsCoachOfTheYear,
-        SportingNewsCollegePlayerOfTheYear,
         SportingNewsCoordinatorOfTheYear,
-        SportingNewsPlayerOfTheYear,
         SuperBowlMostValuablePlayer,
         SWACCoachOfTheYear,
         SWCOffensivePlayerOfTheYear,
@@ -758,12 +532,11 @@ public sealed class AwardType : DomainItemConstant
         USFLRookieOfTheYear
     };
 
-    private AwardType(int id, string name, string abbreviation = null) : base(id, name, abbreviation) { }
+    private AwardType(int id, string name, string abbreviation = null) 
+        : base(id, name, abbreviation) { }
 
     public static AwardType Find(int id)
-    {
-        return All.SingleOrDefault(awardType => awardType.Id == id);
-    }
+        => All.SingleOrDefault(awardType => awardType.Id == id);
 
     public static AwardType[] GetAll(params Sport[] sports)
     {
@@ -787,22 +560,14 @@ public sealed class AwardType : DomainItemConstant
     }
 
     public static bool IsCyYoungAward(AwardType awardType)
-    {
-        return CyYoungAwards.Contains(awardType);
-    }
+        => CyYoungAwards.Contains(awardType);
 
     public static bool IsMostValuablePlayerAward(AwardType awardType)
-    {
-        return MostValuablePlayerAwards.Contains(awardType);
-    }
+        => MostValuablePlayerAwards.Contains(awardType);
 
     public static bool IsRookieOfTheYearAward(AwardType awardType)
-    {
-        return RookieOfTheYearAwards.Contains(awardType);
-    }
+        => RookieOfTheYearAwards.Contains(awardType);
 
     public override string ToString()
-    {
-        return Name;
-    }
+        => Name;
 }

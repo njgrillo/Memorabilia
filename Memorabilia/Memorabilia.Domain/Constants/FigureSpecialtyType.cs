@@ -32,9 +32,7 @@ public sealed class FigureSpecialtyType : DomainItemConstant
         : base(id, name, abbreviation) { }
 
     public static FigureSpecialtyType Find(int id)
-    {
-        return All.SingleOrDefault(figureSpecialtyType => figureSpecialtyType.Id == id);
-    }
+        => All.SingleOrDefault(figureSpecialtyType => figureSpecialtyType.Id == id);
 
     public static FigureSpecialtyType[] GetAll(FigureType figureType)
     {

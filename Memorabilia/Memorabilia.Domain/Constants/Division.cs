@@ -84,12 +84,11 @@ public sealed class Division : DomainItemConstant
         WesternDivision
     };
 
-    private Division(int id, string name, string abbreviation = null) : base(id, name, abbreviation) { }
+    private Division(int id, string name, string abbreviation = null) 
+        : base(id, name, abbreviation) { }
 
     public static Division Find(int id)
-    {
-        return All.SingleOrDefault(Division => Division.Id == id);
-    }
+        => All.SingleOrDefault(Division => Division.Id == id);
 
     public static Division[] GetAll(SportLeagueLevel sportLeagueLevel)
     {

@@ -9,15 +9,10 @@ public sealed class League : DomainItemConstant
     public static readonly League WesternLeague = new(5, "Western League");
     public static readonly League AmericanAssociation = new(6, "American Association");
 
-    public static readonly League[] All =
-    {
-        AmericanLeague,
-        AmericanFootballLeague,
-        NationalFootballLeague,
-        NationalLeague,
-        WesternLeague,
-        AmericanAssociation
-    };
+    public static League[] All 
+        => MLB.Union(NFL)
+              .Distinct()   
+              .ToArray();
 
     public static readonly League[] MLB =
     {
@@ -33,12 +28,11 @@ public sealed class League : DomainItemConstant
         AmericanFootballLeague
     };
 
-    private League(int id, string name, string abbreviation = null) : base(id, name, abbreviation) { }
+    private League(int id, string name, string abbreviation = null) 
+        : base(id, name, abbreviation) { }
 
     public static League Find(int id)
-    {
-        return All.SingleOrDefault(league => league.Id == id);
-    }
+        => All.SingleOrDefault(league => league.Id == id);
 
     public static League[] GetAll(SportLeagueLevel sportLeagueLevel)
     {

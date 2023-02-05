@@ -49,6 +49,7 @@ public sealed class Occupation : DomainItemConstant
     {
         Administrator,
         Athlete,
+        Broadcaster,
         Coach,
         Commissioner,
         Executive,
@@ -59,15 +60,12 @@ public sealed class Occupation : DomainItemConstant
         Umpire
     };
 
-    private Occupation(int id, string name, string abbreviation = null) : base(id, name, abbreviation) { }
+    private Occupation(int id, string name, string abbreviation = null)
+        : base(id, name, abbreviation) { }
 
     public static Occupation Find(int id)
-    {
-        return All.SingleOrDefault(occupation => occupation.Id == id);
-    }
+        => All.SingleOrDefault(occupation => occupation.Id == id);
 
     public static bool IsSportOccupation(int id)
-    {
-        return SportOccupations.Contains(Find(id));
-    }
+        => SportOccupations.Contains(Find(id));
 }

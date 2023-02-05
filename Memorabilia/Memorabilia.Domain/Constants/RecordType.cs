@@ -10,6 +10,7 @@ public sealed class RecordType : DomainItemConstant
     public static readonly RecordType ConsecutiveGamesPlayed = new(23, "Consecutive Games Played");
     public static readonly RecordType ConsecutiveHitlessInningsPitched = new (46, "Consecutive Hitless Innings Pitched");
     public static readonly RecordType ConsecutiveSavesToBeginCareer = new(27, "Consecutive Saves to Begin Career");
+    public static readonly RecordType ConsecutiveSnapsPlayed = new(149, "Consecutive Snaps Played");
     public static readonly RecordType ConsecutiveStrikeoutsByReliefPitcher = new (84, "Consecutive Strikeouts by a Relief Pitcher");
     public static readonly RecordType DoublePlaysTurned = new(33, "Double Plays Turned");
     public static readonly RecordType Doubles = new(34, "Doubles");
@@ -103,12 +104,14 @@ public sealed class RecordType : DomainItemConstant
     public static readonly RecordType PointsScored = new (139, "Points Scored");
     public static readonly RecordType PostseasonInningsPitched = new (9, "Postseason Innings Pitched");
     public static readonly RecordType PostseasonInterceptions = new (117, "Postseason Interceptions");
+    public static readonly RecordType PuntReturnTouchdowns = new (148, "Punt Return Touchdowns");
     public static readonly RecordType PutoutsAsOutfielder = new (17, "Putouts as Outfielder");
     public static readonly RecordType QuarterbackWins = new (74, "Quarterback Wins");
     public static readonly RecordType ReceivingTouchdowns = new (110, "Receiving Touchdowns");
     public static readonly RecordType ReceivingTouchdownsByRookie = new (111, "Receiving Touchdowns by a Rookie");
     public static readonly RecordType Receptions = new (119, "Receptions");
     public static readonly RecordType RegularSeasonWinsAsHeadCoach = new (125, "Regular Season Wins as a Head Coach");
+    public static readonly RecordType ReturnTouchdowns = new (147, "Return Touchdowns");
     public static readonly RecordType Runs = new(13, "Runs");
     public static readonly RecordType RunsBattingIn = new(2, "Runs Batting In", "RBI");
     public static readonly RecordType RunsBattedInByALeadoffHitter = new(47, "RBIs by a Leadoff Hitter");
@@ -144,150 +147,11 @@ public sealed class RecordType : DomainItemConstant
     public static readonly RecordType Wins = new(22, "Wins");
     public static readonly RecordType WorldSeriesEarnedRunAverage = new(8, "World Series Earned Run Average", "WS ERA");
 
-    public static readonly RecordType[] All =
-    {
-        AllPurposeTouchdownsInAGame,
-        AllPurposeYards,
-        AtBats,
-        CombinedTackles,
-        CompleteGames,
-        ConsecutiveGamesPlayed,
-        ConsecutiveHitlessInningsPitched,
-        ConsecutiveSavesToBeginCareer,
-        ConsecutiveStrikeoutsByReliefPitcher,
-        DoublePlaysTurned,
-        Doubles,
-        EarnedRunAverage,
-        ExtraBaseHits,
-        ExtraPointsAttempted,
-        ExtraPointsMade,
-        FastestPitch,
-        FastestTo400Strikeouts,
-        FumbleReturnTouchdowns,
-        Games,
-        GamesManaged,
-        GamesPitched,
-        GamesStarted,
-        GrandSlamsByPitcher,
-        HighestAveragePuntingYards,
-        Hits,
-        HomeRuns,
-        HomeRunsHitByPitcher,
-        InningsPitched,
-        InterceptionReturnYards,
-        Interceptions,
-        InterceptionsReturnedForTouchdown,
-        LongestInterceptionReturn,
-        LongestReceivingTouchdown,
-        LongestRushingTouchdown,
-        LongestTenuredCoachForAFranchise,
-        LongestTouchdownPass,
-        ManagerialLosses,
-        ManagerialWins,
-        MostCareerInterceptionsThrown,
-        MostCareerReceivingYardsTightEnd,
-        MostCareerReceptionsTightEnd,
-        MostCareerStartsWithOneTeam,
-        MostConsecutive100YardReceivingGames,
-        MostConsecutive1000YardReceivingSeasonsToBeginCareer,
-        MostConsecutiveGamesScoring,
-        MostConsecutiveGamesWithTouchdown,
-        MostConsecutiveHitlessAppearances,
-        MostConsecutiveOutsViaStrikeout,
-        MostConsecutiveSeasonsWith250Strikeouts,
-        MostConsecutiveSeasonsWithInterception,
-        MostConsecutiveSeasonsWithInterceptionReturnTouchdown,
-        MostConsecutiveStartsByOffensiveLineman,
-        MostConsecutiveStartsByOffensiveLinemanIncludingPlayoffs,
-        MostConsecutiveStartsByQuarterback,
-        MostConsecutiveStartsByQuarterbackIncludingPlayoffs,
-        MostConsecutiveStartsByRunningBack,
-        MostConsecutiveStartsByWideReceiver,
-        MostConsecutiveStartsToBeginCareer,
-        MostConsecutiveStartsToBeginCareerIncludingPlayoffs,
-        MostConsecutiveStrikeoutsInAGame,
-        MostConsecutiveStrikeoutsWithoutIssuingAWalkToStartSeason,
-        MostCycles,
-        MostFiftyPlusYearFieldGoalsInAGame,
-        MostGamesPlayed,
-        MostHitsInADoubleHeader,
-        MostHitsInAFourGameSeries,
-        MostImmaculateInnings,
-        MostInterceptionsReturnedForTouchdownInASeason,
-        MostInterceptionsReturnedForTouchdownInASeasonByARookie,
-        MostPassesInterceptedInASingleGame,
-        MostPointsScoredInAGame,
-        MostReboundsInAGame,
-        MostReceivingYards,
-        MostReceivingYardsInAGameByATightEnd,
-        MostRunsBattedInAGame,
-        MostRunsBattedInOneInning,
-        MostRushingYardsInAGame,
-        MostSeasonsLeadingLeagueInInterceptions,
-        MostSeasonsLeadingLeagueInPointsScored,
-        MostSeasonsLeadingLeagueInSacks,
-        MostSeasonsLeadingLeagueInTouchdowns,
-        MostSeasonsWithOneOrMoreSacks,
-        MostSeasonsWithTenOrMoreSacks,
-        MostStrikeoutsInANineInningGame,
-        NationalLeagueOnBasePercentage,
-        NationalLeagueOnBasePlusSlugging,
-        NoHitters,
-        OldestPlayerToTriple,
-        OnBasePercentage,
-        OutfieldAssists,
-        PassesDefended,
-        PassingAttempts,
-        PassingCompletions,
-        PassingTouchdowns,
-        PassingYards,
-        PinchHitHomeRuns,
-        PinchRunningAppearances,
-        PlateAppearances,
-        PointsScored,
-        PostseasonInningsPitched,
-        PostseasonInterceptions,
-        PutoutsAsOutfielder,
-        QuarterbackWins,
-        ReceivingTouchdowns,
-        ReceivingTouchdownsByRookie,
-        Receptions,
-        RegularSeasonWinsAsHeadCoach,
-        Runs,
-        RunsBattingIn,
-        RunsBattedInByALeadoffHitter,
-        RushingAttempts,
-        RushingTouchdowns,
-        RushingTouchdownsInAGame,
-        RushingYards,
-        RushingYardsAsARookie,
-        RushingYardsInAPlayoffGame,
-        Sacked,
-        Sacks,
-        SacksInAGame,
-        Safeties,
-        Saves,
-        ScrimmageTouchdowns,
-        SeasonsPlayed,
-        Shutouts,
-        Singles,
-        SluggingPercentage,
-        StolenBases,
-        Strikeouts,
-        StrikeoutToWalkRatio,
-        Tackles,
-        TotalBases,
-        TotalTouchdowns,
-        TotalWinsAsHeadCoach,
-        TouchdownPassesInAGame,
-        TouchdownsByARookie,
-        Triples,
-        TwoThousandStrikeoutsInFewestInningsPitched,
-        Walks,
-        Wins,
-        WHIP,
-        WorldSeriesEarnedRunAverage
-    };
+    public static RecordType[] All
+        => Baseball.Union(Basketball)
+                   .Union(Football)
+                   .Distinct()
+                   .ToArray();
 
     public static readonly RecordType[] Baseball =
     {
@@ -368,6 +232,7 @@ public sealed class RecordType : DomainItemConstant
         AllPurposeTouchdownsInAGame,
         AllPurposeYards,
         CombinedTackles,
+        ConsecutiveSnapsPlayed,
         ExtraPointsAttempted,
         ExtraPointsMade,
         FumbleReturnTouchdowns,
@@ -419,11 +284,13 @@ public sealed class RecordType : DomainItemConstant
         PassingYards,
         PointsScored,
         PostseasonInterceptions,
+        PuntReturnTouchdowns,
         QuarterbackWins,
         ReceivingTouchdowns,
         ReceivingTouchdownsByRookie,
         Receptions,
         RegularSeasonWinsAsHeadCoach,
+        ReturnTouchdowns,
         RushingAttempts,
         RushingTouchdowns,
         RushingTouchdownsInAGame,
@@ -443,7 +310,8 @@ public sealed class RecordType : DomainItemConstant
         TouchdownsByARookie
     };
 
-    private RecordType(int id, string name, string abbreviation = null) : base(id, name, abbreviation) { }
+    private RecordType(int id, string name, string abbreviation = null) 
+        : base(id, name, abbreviation) { }
 
     public static RecordType Find(int id)
     {

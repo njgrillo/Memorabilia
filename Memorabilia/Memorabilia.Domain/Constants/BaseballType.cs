@@ -112,22 +112,17 @@ public sealed class BaseballType : DomainItemConstant
         WorldSeries
     };
 
-    private BaseballType(int id, string name, string abbreviation = null) : base(id, name, abbreviation) { }        
+    private BaseballType(int id, string name, string abbreviation = null) 
+        : base(id, name, abbreviation) { }        
 
     public static bool CanHaveAnniversary(BaseballType baseballType)
-    {
-        return baseballType == TeamAnniversary;
-    }
+        => baseballType == TeamAnniversary;
 
     public static bool CanHaveYear(BaseballType baseballType)
-    {
-        return Yearly.Contains(baseballType);
-    }
+        => Yearly.Contains(baseballType);
 
     public static BaseballType Find(int id)
-    {
-        return All.SingleOrDefault(baseballType => baseballType.Id == id);
-    }
+        => All.SingleOrDefault(baseballType => baseballType.Id == id);
 
     public static BaseballType[] GetAll(GameStyleType gameStyleType)
     {
@@ -138,17 +133,11 @@ public sealed class BaseballType : DomainItemConstant
     }
 
     public static bool IsCommissionerType(BaseballType baseballType)
-    {
-        return Commissioner.Contains(baseballType);
-    }
+        => Commissioner.Contains(baseballType);
 
     public static bool IsGameWorthly(BaseballType baseballType)
-    {
-        return GameWorthly.Contains(baseballType);
-    }    
+        => GameWorthly.Contains(baseballType);
 
     public static bool IsLeaguePresidentType(BaseballType baseballType)
-    {
-        return LeaguePresident.Contains(baseballType);
-    }
+        => LeaguePresident.Contains(baseballType);
 }

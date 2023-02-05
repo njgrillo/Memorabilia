@@ -21,7 +21,5 @@ public sealed class FigureType : DomainItemConstant
         : base(id, name, abbreviation) { }
 
     public static FigureType Find(int id)
-    {
-        return All.SingleOrDefault(figureType => figureType.Id == id);
-    }
+        => All.SingleOrDefault(figureType => figureType.Id == id);
 }

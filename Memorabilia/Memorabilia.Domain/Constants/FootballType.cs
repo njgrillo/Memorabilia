@@ -21,12 +21,11 @@ public sealed class FootballType : DomainItemConstant
         Other
     };
 
-    private FootballType(int id, string name, string abbreviation = null) : base(id, name, abbreviation) { }
+    private FootballType(int id, string name, string abbreviation = null) 
+        : base(id, name, abbreviation) { }
 
     public static FootballType Find(int id)
-    {
-        return All.SingleOrDefault(footballType => footballType.Id == id);
-    }
+        => All.SingleOrDefault(footballType => footballType.Id == id);
 
     public static FootballType[] GetAll(GameStyleType gameStyleType)
     {
@@ -37,7 +36,5 @@ public sealed class FootballType : DomainItemConstant
     }
 
     public static bool IsGameWorthly(FootballType footballType)
-    {
-        return GameWorthly.Contains(footballType);
-    }
+        => GameWorthly.Contains(footballType);
 }

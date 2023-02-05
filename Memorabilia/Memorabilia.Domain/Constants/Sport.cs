@@ -100,9 +100,7 @@ public sealed class Sport : DomainItemConstant
     public string AlternateName { get; }
 
     public static Sport Find(int id)
-    {
-        return All.SingleOrDefault(sport => sport.Id == id);
-    }
+        => All.SingleOrDefault(sport => sport.Id == id);
 
     public static Sport[] GetAll(ItemType itemType)
     {
@@ -125,17 +123,11 @@ public sealed class Sport : DomainItemConstant
     }
 
     public static bool HasAllStarGames(params Sport[] sports)
-    {
-        return sports.Any(sport => AllStarGameSports.Contains(sport));
-    }
+        => sports.Any(sport => AllStarGameSports.Contains(sport));
 
     public static bool HasProBowlGames(params Sport[] sports)
-    {
-        return sports.Any(sport => ProBowlGameSports.Contains(sport));
-    }
+        => sports.Any(sport => ProBowlGameSports.Contains(sport));
 
     public static bool IsPositionSport(params Sport[] sports)
-    {
-        return sports.Any(sport => PositionSports.Contains(sport));
-    }
+        => sports.Any(sport => PositionSports.Contains(sport));
 }

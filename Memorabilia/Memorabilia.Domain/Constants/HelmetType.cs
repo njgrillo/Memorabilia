@@ -29,12 +29,11 @@ public sealed class HelmetType : DomainItemConstant
         VSR4
     };
 
-    private HelmetType(int id, string name, string abbreviation = null) : base(id, name, abbreviation) { }
+    private HelmetType(int id, string name, string abbreviation = null) 
+        : base(id, name, abbreviation) { }
 
     public static HelmetType Find(int id)
-    {
-        return All.SingleOrDefault(helmetType => helmetType.Id == id);
-    }
+        => All.SingleOrDefault(helmetType => helmetType.Id == id);
 
     public static HelmetType[] GetAll(GameStyleType gameStyleType)
     {
@@ -45,7 +44,5 @@ public sealed class HelmetType : DomainItemConstant
     }
 
     public static bool IsGameWorthly(HelmetType helmetType)
-    {
-        return GameWorthly.Contains(helmetType);
-    }
+        => GameWorthly.Contains(helmetType);
 }

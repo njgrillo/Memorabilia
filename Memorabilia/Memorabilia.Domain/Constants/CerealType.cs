@@ -19,7 +19,5 @@ public sealed class CerealType : DomainItemConstant
         : base(id, name, abbreviation) { }
 
     public static CerealType Find(int id)
-    {
-        return All.SingleOrDefault(CerealType => CerealType.Id == id);
-    }
+        => All.SingleOrDefault(CerealType => CerealType.Id == id);
 }
