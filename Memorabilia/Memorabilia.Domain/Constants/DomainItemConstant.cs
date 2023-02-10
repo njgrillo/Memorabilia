@@ -18,5 +18,5 @@ public abstract class DomainItemConstant : IWithName, IWithValue<int>
     }
 
     public override string ToString()
-        => !Abbreviation.IsNullOrEmpty() ? Abbreviation : Name;
+        => Name;
 }

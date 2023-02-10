@@ -2,20 +2,26 @@
 
 <DivPad2>
     <Content>
-        <DivRowCol3>
+        <DivRowCol6 Column2Style="">
             <Content>
                 <AccomplishmentTypeAutoComplete SelectedValue="_viewModel.AccomplishmentType"
                                                 SelectionChanged="(p) => OnInputChange(p)"
-                                                Sports="@(new [] { Sport })" />
+                                                Sports="@(new [] { Sport })" />               
             </Content>
-        </DivRowCol3>
-        <DivRowCol6 Hidden="@(_viewModel.AccomplishmentType == null)">
+            <ContentColumn2>
+                <CustomButton ButtonType="MudBlazor.ButtonType.Button"
+                              OnClick="Browse"
+                              Size="MudBlazor.Size.Small"
+                              Text="View All" />
+            </ContentColumn2>
+        </DivRowCol6>
+        <DivRowCol12 Hidden="@(_viewModel.AccomplishmentType == null)">
             <Content>
                 <MudTable Bordered="false"
                           Dense="false"
                           Filter="new Func<AccomplishmentViewModel,bool>(FilterFunc1)"
                           Hover="true"
-                          Items="@_viewModel.PersonAccomplishments.ToList()"
+                          Items="@_viewModel.PersonAccomplishments"
                           Striped="true">
                     <ToolBarContent>
                         <MudText Typo="Typo.h6">@_viewModel.AccomplishmentTypeName</MudText>
@@ -27,11 +33,12 @@
                                       IconSize="MudBlazor.Size.Medium"
                                       Placeholder="Search" />
                     </ToolBarContent>
-                    <HeaderContent>
+                    <HeaderContent>                        
                         <MudTh></MudTh>
-                        <MudTh>Person</MudTh>
-                        <MudTh hidden="@(_viewModel.IsYearAccomplishment)">Date</MudTh>
-                        <MudTh hidden="@(_viewModel.IsDateAccomplishment)">Year</MudTh>
+                        <MudTh><MudTableSortLabel SortBy="new Func<AccomplishmentViewModel, object>(x=>x.PersonName)">Person</MudTableSortLabel></MudTh>
+                        <MudTh hidden="@(!_viewModel.IsNoHitter)"><MudTableSortLabel SortBy="new Func<AccomplishmentViewModel, object>(x=>x.AccomplishmentTypeName)">Type</MudTableSortLabel></MudTh>
+                        <MudTh hidden="@(_viewModel.IsYearAccomplishment)"><MudTableSortLabel SortBy="new Func<AccomplishmentViewModel, object>(x=>x.Date)">Date</MudTableSortLabel></MudTh>
+                        <MudTh hidden="@(_viewModel.IsDateAccomplishment)"><MudTableSortLabel SortBy="new Func<AccomplishmentViewModel, object>(x=>x.Year)">Year</MudTableSortLabel></MudTh>
                     </HeaderContent>
                     <RowTemplate>
                         <MudTd DataLabel="">
@@ -48,14 +55,15 @@
                         <MudTd DataLabel="Person">
                             <MudLink Href="@context.ProfileLink">@context.PersonName</MudLink>
                         </MudTd>
-                        <MudTd DataLabel="Date" hidden="@(_viewModel.IsYearAccomplishment)">@context.Date</MudTd>
-                        <MudTd DataLabel="Year" hidden="@(_viewModel.IsDateAccomplishment)">@context.Year</MudTd>
+                        <MudTd DataLabel="Type" hidden="@(!_viewModel.IsNoHitter)">@context.AccomplishmentTypeName</MudTd>
+                        <MudTd DataLabel="Date" hidden="@(_viewModel.IsYearAccomplishment)">@(context.Date.HasValue ? context.Date.Value.ToString("MM/dd/yyyy") : string.Empty)</MudTd>
+                        <MudTd DataLabel="Year" hidden="@(_viewModel.IsDateAccomplishment)">@(context.Year.HasValue ? context.Year : string.Empty)</MudTd>
                     </RowTemplate>
                     <PagerContent>
                         <MudTablePager />
                     </PagerContent>
                 </MudTable>
             </Content>
-        </DivRowCol6>
+        </DivRowCol12>
     </Content>
 </DivPad2>

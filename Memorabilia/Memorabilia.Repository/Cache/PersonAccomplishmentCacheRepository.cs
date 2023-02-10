@@ -6,10 +6,19 @@ public class PersonAccomplishmentCacheRepository : DomainCacheRepository<PersonA
 {
     private readonly PersonAccomplishmentRepository _personAccomplishmentRepository;
 
-    public PersonAccomplishmentCacheRepository(DomainContext context, PersonAccomplishmentRepository personAccomplishmentRepository, IMemoryCache memoryCache)
+    public PersonAccomplishmentCacheRepository(DomainContext context, 
+        PersonAccomplishmentRepository personAccomplishmentRepository, 
+        IMemoryCache memoryCache)
         : base(context, memoryCache)
     {
         _personAccomplishmentRepository = personAccomplishmentRepository;
+    }
+
+    public override async Task Add(PersonAccomplishment item, CancellationToken cancellationToken = default)
+    {
+        RemoveFromCache($"PersonAccomplishment_GetAll_{item.AccomplishmentTypeId}");
+
+        await _personAccomplishmentRepository.Add(item, cancellationToken);
     }
 
     public Task<IEnumerable<PersonAccomplishment>> GetAll(int accomplishmentTypeId)

@@ -6,7 +6,9 @@ public class PersonCacheRepository : DomainCacheRepository<Person>, IPersonRepos
 {
     private readonly PersonRepository _personRepository;
 
-    public PersonCacheRepository(DomainContext context, PersonRepository personRepository, IMemoryCache memoryCache) 
+    public PersonCacheRepository(DomainContext context, 
+        PersonRepository personRepository, 
+        IMemoryCache memoryCache) 
         : base(context, memoryCache) 
     {
         _personRepository = personRepository;

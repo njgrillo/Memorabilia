@@ -1,0 +1,42 @@
+﻿<MudDialog Class="mud-dialog-width-lg" 
+           Style="max-height: 80vh;  overflow-y: auto;">
+    <DialogContent>
+        <DivPad2>
+            <Content>
+                <MudTable Bordered="false"
+                          Dense="false"
+                          Hover="true"
+                          Items="@DomainItems"
+                          Striped="true">
+                    <ToolBarContent>
+                        <MudText Typo="Typo.h6">@Title</MudText>
+                        <MudSpacer />
+                    </ToolBarContent>
+                    <HeaderContent>
+                        <MudTh>Name</MudTh>
+                        <MudTh>Abbreviation</MudTh>
+                        <MudTh></MudTh>
+                    </HeaderContent>
+                    <RowTemplate Context="item">
+                        <MudTd DataLabel="Name">@item.Name</MudTd>
+                        <MudTd DataLabel="Abbreviation">@item.Abbreviation</MudTd>
+                        <MudTd>
+                            <MudTooltip Text="Select">
+                                <MudFab Color="MudBlazor.Color.Primary"
+                                        Icon="@Icons.Outlined.Edit"
+                                        OnClick="@(_ => Select(@item.Id))"
+                                        Size="@MudBlazor.Size.Small" />
+                            </MudTooltip>
+                        </MudTd>
+                    </RowTemplate>
+                    <PagerContent>
+                        <MudTablePager />
+                    </PagerContent>
+                </MudTable>
+            </Content>
+        </DivPad2>
+    </DialogContent>
+    <DialogActions>
+        <CancelButton OnClick="Cancel" />
+    </DialogActions>
+</MudDialog>

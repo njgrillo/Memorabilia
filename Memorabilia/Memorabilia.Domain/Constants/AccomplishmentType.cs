@@ -489,7 +489,8 @@ public sealed class AccomplishmentType : DomainItemConstant
         if (sports.Any(sport => sport == Sport.Football))
             accomplishmentTypes.AddRange(Football);
 
-        return accomplishmentTypes.OrderBy(accomplishmentType => accomplishmentType.Name).ToArray();
+        return accomplishmentTypes.OrderBy(accomplishmentType => accomplishmentType.Name)
+                                  .ToArray();
     }
 
     public static AccomplishmentType[] GetAll(SportLeagueLevel sportLeagueLevel)

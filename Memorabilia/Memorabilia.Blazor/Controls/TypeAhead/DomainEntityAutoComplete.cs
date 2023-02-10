@@ -1,8 +1,7 @@
-﻿#nullable disable
+﻿namespace Memorabilia.Blazor.Controls.TypeAhead;
 
-namespace Memorabilia.Blazor.Controls.TypeAhead;
-
-public class DomainEntityAutoComplete<T> : Autocomplete<T> where T : DomainItemConstant, IWithName, IWithValue<int>
+public class DomainEntityAutoComplete<T> 
+    : Autocomplete<T> where T : DomainItemConstant, IWithName, IWithValue<int>
 {
     [Parameter]
     public bool IsCulturalSearch { get; set; }

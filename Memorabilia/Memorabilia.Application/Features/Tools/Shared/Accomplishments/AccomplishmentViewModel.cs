@@ -12,7 +12,10 @@ public class AccomplishmentViewModel : PersonSportToolViewModel
         Sport = sport;
     }
 
-    public string Date => _personAccomplishment.Date?.ToString("MM/dd/yyyy");
+    public string AccomplishmentTypeName 
+        => Domain.Constants.AccomplishmentType.Find(_personAccomplishment.AccomplishmentTypeId)?.Name;
+
+    public DateTime? Date => _personAccomplishment.Date;
 
     public override int PersonId => _personAccomplishment.PersonId;
 
@@ -20,5 +23,5 @@ public class AccomplishmentViewModel : PersonSportToolViewModel
 
     public override string PersonName => _personAccomplishment.Person.DisplayName;
 
-    public string Year => _personAccomplishment?.Year.ToString();
+    public int? Year => _personAccomplishment?.Year ?? null;
 }
