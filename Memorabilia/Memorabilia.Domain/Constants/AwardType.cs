@@ -158,6 +158,7 @@ public sealed class AwardType : DomainItemConstant
     public static readonly AwardType NBARookieOfTheYear = new (198, "NBA Rookie of the Year", "ROY");    
     public static readonly AwardType NBASixthManOfTheYear = new (218, "NBA Sixth Man of the Year", "6th Man");    
     public static readonly AwardType NBASportsmanshipAward = new (221, "NBA Sportsmanship Award");    
+    public static readonly AwardType NBATeammateOfTheYear = new (242, "NBA Teammate of the Year");    
     public static readonly AwardType NBLCoachOfTheYear = new (208, "NBL Coach of the Year");
     public static readonly AwardType NBLMostValuablePlayer = new (175, "NBL Most Valuable Player", "NBL MVP");
     public static readonly AwardType NBLRookieOfTheYear = new (189, "NBL Rookie of the Year", "NBL ROY");
@@ -227,6 +228,7 @@ public sealed class AwardType : DomainItemConstant
     public static readonly AwardType WalterCampAward = new(72, "Walter Camp Award");
     public static readonly AwardType WalterCampCoachOfTheYear = new(116, "Walter Camp Coach of the Year");
     public static readonly AwardType WalterPaytonNFLManOfTheYear = new(81, "Walter Payton NFL Man of the Year", "Walter Payton MOY");
+    public static readonly AwardType WCACCoachOfTheYear = new(241, "WCAC Coach of the Year");
     public static readonly AwardType WCACPlayerOfTheYear = new(232, "WCAC Player of the Year");
     public static readonly AwardType WCCPlayerOfTheYear = new(195, "WCC Player of the Year");
     public static readonly AwardType WhizzerWhiteNFLMaOfTheYearAward = new (158, "Whizzer White NFL Man of the Year Award");
@@ -344,6 +346,7 @@ public sealed class AwardType : DomainItemConstant
         NBARookieOfTheYear,
         NBASixthManOfTheYear,
         NBASportsmanshipAward,
+        NBATeammateOfTheYear,
         NBLCoachOfTheYear,
         NBLMostValuablePlayer,
         NBLRookieOfTheYear,
@@ -361,6 +364,7 @@ public sealed class AwardType : DomainItemConstant
         UPIPlayerOfTheYear,
         USABasketballMaleAthleteOfTheYear,
         USBWACollegePlayerOfTheYear,
+        WCACCoachOfTheYear,
         WCACPlayerOfTheYear,
         WCCPlayerOfTheYear,
         WPBTMostValuablePlayer

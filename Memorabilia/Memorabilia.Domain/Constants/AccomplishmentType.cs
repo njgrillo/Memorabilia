@@ -13,9 +13,7 @@ public sealed class AccomplishmentType : DomainItemConstant
     public static readonly AccomplishmentType AllABLFirstTeam = new (151, "All-ABL First Team");
     public static readonly AccomplishmentType AllAFL = new (101, "All-AFL");
     public static readonly AccomplishmentType AllAIC = new (99, "All-AIC");
-    public static readonly AccomplishmentType AllAmerican = new (34, "All-American");
-    public static readonly AccomplishmentType AllBAAFirstTeam = new (141, "All-BAA First Team");    
-    public static readonly AccomplishmentType AllBAANBAFirstTeam = new (123, "All-BAA/NBA First Team");
+    public static readonly AccomplishmentType AllAmerican = new (34, "All-American");  
     public static readonly AccomplishmentType AllBAASecondTeam = new(156, "All-BAA Second Team");
     public static readonly AccomplishmentType AllBig7 = new (111, "All-Big-7");
     public static readonly AccomplishmentType AllBigEast = new (100, "All-Big East");
@@ -204,8 +202,6 @@ public sealed class AccomplishmentType : DomainItemConstant
         AllABASecondTeam,
         AllABLFirstTeam,
         AllAmerican,
-        AllBAAFirstTeam,
-        AllBAANBAFirstTeam,
         AllBAASecondTeam,
         AllNBAFirstTeam,
         AllNBASecondTeam,
@@ -254,6 +250,11 @@ public sealed class AccomplishmentType : DomainItemConstant
         SecondTeamAllBigEast,
         SecondTeamParadeAllAmerican,
         ThirdTeamAllAmerican
+    };
+
+    public static readonly AccomplishmentType[] Collegiate =
+    {
+
     };
 
     public static readonly AccomplishmentType[] DateAccomplishment =
@@ -376,8 +377,6 @@ public sealed class AccomplishmentType : DomainItemConstant
         AllAIC,
         AllAFL,
         AllAmerican,
-        AllBAAFirstTeam,
-        AllBAANBAFirstTeam,
         AllBAASecondTeam,
         AllBig7,
         AllBigEast,
