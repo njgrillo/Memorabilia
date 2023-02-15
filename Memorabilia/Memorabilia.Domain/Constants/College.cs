@@ -6,9 +6,11 @@ public sealed class College : DomainItemConstant
     public static readonly College Alabama = new(152, "Alabama", "UA");
     public static readonly College AlabamaAM = new(414, "Alabama A&M");
     public static readonly College AlabamaBirmingham = new(450, "Alabama at Birmingham", "UAB");
+    public static readonly College AlbanyState = new (524, "Albany State");
     public static readonly College AlbrightCollege = new (476, "Albright College");
     public static readonly College AllanHancockCollege = new (436, "Allan Hancock College");
     public static readonly College AlleganyCollegeOfMaryland = new (203, "Allegany College of Maryland", "ACM");
+    public static readonly College American = new (527, "American", "AU");
     public static readonly College AmericanRiverCollege = new (471, "American River College", "ARC");
     public static readonly College AngelinaCollege = new (177, "Angelina College");
     public static readonly College AntelopeValleyCollege = new(170, "Antelope Valley College", "AVC");
@@ -31,6 +33,7 @@ public sealed class College : DomainItemConstant
     public static readonly College BishopCollege = new (417, "Bishop College");
     public static readonly College BlinnCollege = new (273, "Blinn College");
     public static readonly College BoiseState = new(491, "Boise State", "BSU");
+    public static readonly College Boston = new(526, "Boston", "BU");
     public static readonly College BostonCollege = new(28, "Boston College", "BC");
     public static readonly College BowlingGreenState = new(71, "Bowling Green State", "BGSU");
     public static readonly College Bradley = new(109, "Bradley");
@@ -171,6 +174,7 @@ public sealed class College : DomainItemConstant
     public static readonly College GuilfordCollege = new (220, "Guilford College");
     public static readonly College GulfCoastStateCollege = new (290, "Gulf Coast State College");
     public static readonly College Hamline = new (502, "Hamline");
+    public static readonly College Hampton = new (528, "Hampton");
     public static readonly College HardinSimmons = new (420, "Hardin-Simmons", "HSU");
     public static readonly College HarperCollege = new(90, "Harper College");
     public static readonly College Hartford = new(7, "Hartford", "UHart");
@@ -193,7 +197,7 @@ public sealed class College : DomainItemConstant
     public static readonly College IllinoisState = new (456, "Illinois State", "ISU");
     public static readonly College IllinoisUrbanaChampaign = new (455, "Illinois Urbana-Champaign", "UIUC");
     public static readonly College IllinoisWesleyan = new (305, "Illinois Wesleyan");
-    public static readonly College IndianaBloomington = new(125, "Indiana, Bloomington", "IU");        
+    public static readonly College Indiana = new(125, "Indiana", "IU");        
     public static readonly College IndianaPennsylvania = new (408, "Indiana of Pennsylvania", "IUP");
     public static readonly College IndianaState = new (178, "Indiana State", "ISU");
     public static readonly College IndianHillsCommunityCollege = new (276, "Indian Hills Community College", "IHCC");
@@ -283,6 +287,7 @@ public sealed class College : DomainItemConstant
     public static readonly College MoberlyAreaCommunityCollege = new (497, "Moberly Area Community College", "MACC");
     public static readonly College ModestoJuniorCollege = new (209, "Modesto Junior College", "MJC");
     public static readonly College Monmouth = new (517, "Monmouth");
+    public static readonly College Montana = new (525, "Montana", "MU");
     public static readonly College MontanaState = new (415, "Montana State", "MSU");
     public static readonly College MontclairState = new (249, "Montclair State", "MSU");
     public static readonly College Montevallo = new (200, "Montevallo");
@@ -526,9 +531,11 @@ public sealed class College : DomainItemConstant
         Alabama,
         AlabamaAM,
         AlabamaBirmingham,
+        AlbanyState,
         AlbrightCollege,
         AllanHancockCollege,
         AlleganyCollegeOfMaryland,
+        American,
         AmericanRiverCollege,
         AngelinaCollege,
         AntelopeValleyCollege,
@@ -551,6 +558,7 @@ public sealed class College : DomainItemConstant
         BishopCollege,
         BlinnCollege,
         BoiseState,
+        Boston,
         BostonCollege,
         BowlingGreenState,
         Bradley,
@@ -691,6 +699,7 @@ public sealed class College : DomainItemConstant
         GuilfordCollege,
         GulfCoastStateCollege,
         Hamline,
+        Hampton,
         HardinSimmons,
         HarperCollege,
         Hartford,
@@ -713,7 +722,7 @@ public sealed class College : DomainItemConstant
         IllinoisState,
         IllinoisUrbanaChampaign,
         IllinoisWesleyan,
-        IndianaBloomington,
+        Indiana,
         IndianaPennsylvania,
         IndianaState,
         IndianHillsCommunityCollege,
@@ -803,6 +812,7 @@ public sealed class College : DomainItemConstant
         MoberlyAreaCommunityCollege,
         ModestoJuniorCollege,
         Monmouth,
+        Montana,
         MontanaState,
         MontclairState,
         Montevallo,

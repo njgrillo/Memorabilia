@@ -14,13 +14,13 @@ public sealed class AccomplishmentType : DomainItemConstant
     public static readonly AccomplishmentType AllAFL = new (101, "All-AFL");
     public static readonly AccomplishmentType AllAIC = new (99, "All-AIC");
     public static readonly AccomplishmentType AllAmerican = new (34, "All-American");  
-    public static readonly AccomplishmentType AllBAASecondTeam = new(156, "All-BAA Second Team");
     public static readonly AccomplishmentType AllBig7 = new (111, "All-Big-7");
     public static readonly AccomplishmentType AllBigEast = new (100, "All-Big East");
     public static readonly AccomplishmentType AllMLBFirstTeam = new(5, "All-MLB First Team");
     public static readonly AccomplishmentType AllMLBSecondTeam = new(4, "All-MLB Second Team");
     public static readonly AccomplishmentType AllNBAFirstTeam = new (131, "All-NBA First Team");
     public static readonly AccomplishmentType AllNBASecondTeam = new (132, "All-NBA Second Team");
+    public static readonly AccomplishmentType AllNBAThirdTeam = new (171, "All-NBA Third Team");
     public static readonly AccomplishmentType AllNBLFirstTeam = new (124, "All-NBL First Team");
     public static readonly AccomplishmentType AllNBLSecondTeam = new (138, "All-NBL Second Team");
     public static readonly AccomplishmentType AllPAC8 = new(90, "All-Pac-8");
@@ -99,7 +99,8 @@ public sealed class AccomplishmentType : DomainItemConstant
     public static readonly AccomplishmentType NBA75thAnniversaryTeam = new (128, "NBA 75th Anniversary Team");
     public static readonly AccomplishmentType NBAAllDefensiveFirstTeam = new (139, "NBA All-Defensive First Team");
     public static readonly AccomplishmentType NBAAllDefensiveSecondTeam = new (144, "NBA All-Defensive Second Team");
-    public static readonly AccomplishmentType NBAAllRookieTeam = new (145, "NBA All-Rookie Team");
+    public static readonly AccomplishmentType NBAAllRookieFirstTeam = new (145, "NBA All-Rookie First Team");
+    public static readonly AccomplishmentType NBAAllRookieSecondTeam = new (172, "NBA All-Rookie Second Team");
     public static readonly AccomplishmentType NBASlamDunkContestChampion = new (162, "NBA Slam Dunk Contest Champion", "Dunk Contest Champ");
     public static readonly AccomplishmentType NBAThreePointContestChampion = new (159, "NBA Three-Point Contest Champion", "3 Pt Contest Champ");
     public static readonly AccomplishmentType NBLAllTimeTeam = new (149, "NBL All-Time Team");
@@ -202,9 +203,9 @@ public sealed class AccomplishmentType : DomainItemConstant
         AllABASecondTeam,
         AllABLFirstTeam,
         AllAmerican,
-        AllBAASecondTeam,
         AllNBAFirstTeam,
         AllNBASecondTeam,
+        AllNBAThirdTeam,
         AllNBLFirstTeam,
         AllNBLSecondTeam,
         AllWPBTFirstTeam,
@@ -242,7 +243,8 @@ public sealed class AccomplishmentType : DomainItemConstant
         NBA75thAnniversaryTeam,
         NBAAllDefensiveFirstTeam,
         NBAAllDefensiveSecondTeam,
-        NBAAllRookieTeam,
+        NBAAllRookieFirstTeam,
+        NBAAllRookieSecondTeam,
         NBASlamDunkContestChampion,
         NBAThreePointContestChampion,
         NBLAllTimeTeam,
@@ -377,13 +379,13 @@ public sealed class AccomplishmentType : DomainItemConstant
         AllAIC,
         AllAFL,
         AllAmerican,
-        AllBAASecondTeam,
         AllBig7,
         AllBigEast,
         AllMLBFirstTeam,
         AllMLBSecondTeam,
         AllNBAFirstTeam,
         AllNBASecondTeam,
+        AllNBAThirdTeam,
         AllNBLFirstTeam,
         AllNBLSecondTeam,
         AllPAC8,
@@ -443,7 +445,8 @@ public sealed class AccomplishmentType : DomainItemConstant
         NationalLeagueTripleCrown,
         NBAAllDefensiveFirstTeam,
         NBAAllDefensiveSecondTeam,
-        NBAAllRookieTeam,
+        NBAAllRookieFirstTeam,
+        NBAAllRookieSecondTeam,
         NBASlamDunkContestChampion,
         NBAThreePointContestChampion,
         PFWAAllRookieTeam,

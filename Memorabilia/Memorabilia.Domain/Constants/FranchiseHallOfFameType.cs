@@ -23,22 +23,23 @@ public sealed class FranchiseHallOfFameType : DomainItemConstant
     public static readonly FranchiseHallOfFameType IndianapolisColtsRingOfHonor = new(50, "Indianapolis Colts Ring of Honor", Franchise.IndianapolisColts);
     public static readonly FranchiseHallOfFameType KansasCityChiefsHallOfFame = new(34, "Kansas City Chiefs Hall of Fame", Franchise.KansasCityChiefs);
     public static readonly FranchiseHallOfFameType KansasCityRoyalsHallOfFame = new(22, "Kansas City Royals Hall of Fame", Franchise.KansasCityRoyals);
-    public static readonly FranchiseHallOfFameType LosAngelesChargersHallOfFame = new (29, "Los Angeles Chargers Hall of Fame", Franchise.LosAngelesChargers);
+    public static readonly FranchiseHallOfFameType LosAngelesChargersHallOfFame = new(29, "Los Angeles Chargers Hall of Fame", Franchise.LosAngelesChargers);
     public static readonly FranchiseHallOfFameType MetsHallOfFame = new(11, "Mets Hall of Fame", Franchise.NewYorkMets);
-    public static readonly FranchiseHallOfFameType MiamiDolphinsHonorRoll = new (46, "Miami Dolphins Honor Roll", Franchise.MiamiDolphins);
+    public static readonly FranchiseHallOfFameType MiamiDolphinsHonorRoll = new(46, "Miami Dolphins Honor Roll", Franchise.MiamiDolphins);
     public static readonly FranchiseHallOfFameType MilwaukeeBrewersWallOfHonor = new(2, "Milwaukee Brewers Wall of Honor", Franchise.MilwaukeeBrewers);
     public static readonly FranchiseHallOfFameType MinnesotaTwinsHallOfFame = new(23, "Minnesota Twins Hall of Fame", Franchise.MinnesotaTwins);
     public static readonly FranchiseHallOfFameType MinnesotaVikingsRinOfHonor = new(45, "Minnesota Vikings Ring of Honor", Franchise.MinnesotaVikings);
     public static readonly FranchiseHallOfFameType MonumentPark = new(18, "Monument Park", Franchise.NewYorkYankees);
     public static readonly FranchiseHallOfFameType NationalsHallOfFame = new(12, "Nationals Hall of Fame", Franchise.WashingtonNationals);
-    public static readonly FranchiseHallOfFameType NewEnglandPatriotsHallOfFame = new (53, "New England Patriots Hall of Fame", Franchise.NewEnglandPatriots);
-    public static readonly FranchiseHallOfFameType NewOrleansSaintsHallOfFame = new (30, "New Orleans Saints Hall of Fame", Franchise.NewOrleansSaints);
-    public static readonly FranchiseHallOfFameType NewOrleansSaintsRingOfHonor = new (31, "New Orleans Saints Ring of Honor", Franchise.NewOrleansSaints);
-    public static readonly FranchiseHallOfFameType NewYorkGiantsRingOfHonor = new (42, "New York Giants Ring of Honor", Franchise.NewYorkGiants);
-    public static readonly FranchiseHallOfFameType NewYorkJetsRingOfHonor = new (52, "New York Jets Ring of Honor", Franchise.NewYorkJets);
+    public static readonly FranchiseHallOfFameType NewEnglandPatriotsHallOfFame = new(53, "New England Patriots Hall of Fame", Franchise.NewEnglandPatriots);
+    public static readonly FranchiseHallOfFameType NewOrleansSaintsHallOfFame = new(30, "New Orleans Saints Hall of Fame", Franchise.NewOrleansSaints);
+    public static readonly FranchiseHallOfFameType NewOrleansSaintsRingOfHonor = new(31, "New Orleans Saints Ring of Honor", Franchise.NewOrleansSaints);
+    public static readonly FranchiseHallOfFameType NewYorkGiantsRingOfHonor = new(42, "New York Giants Ring of Honor", Franchise.NewYorkGiants);
+    public static readonly FranchiseHallOfFameType NewYorkJetsRingOfHonor = new(52, "New York Jets Ring of Honor", Franchise.NewYorkJets);
     public static readonly FranchiseHallOfFameType OriolesHallOfFame = new(13, "Orioles Hall of Fame", Franchise.BaltimoreOrioles);
     public static readonly FranchiseHallOfFameType PhiladelphiaEaglesHallOfFame = new(33, "Philadelphia Eagles Hall of Fame", Franchise.PhiladelphiaEagles);
     public static readonly FranchiseHallOfFameType PhilliesHallOfFame = new(15, "Phillies Hall of Fame", Franchise.PhiladelphiaPhillies);
+    public static readonly FranchiseHallOfFameType PhoenixSunsRingOfHonor = new(57, "Phoenix Suns Ring of Honor", Franchise.PhoenixSuns);
     public static readonly FranchiseHallOfFameType PittsburghSteelersHallOfHonor = new(37, "Pittsburgh Steelers Hall of Honor", Franchise.PittsburghSteelers);
     public static readonly FranchiseHallOfFameType RedSoxHallOfFame = new(16, "Red Sox Hall of Fame", Franchise.BostonRedSox);
     public static readonly FranchiseHallOfFameType RedsHallOfFame = new(17, "Reds Hall of Fame", Franchise.CincinnatiReds);
@@ -48,7 +49,7 @@ public sealed class FranchiseHallOfFameType : DomainItemConstant
     public static readonly FranchiseHallOfFameType SeattleMarinersHallOfFame = new(20, "Seattle Mariners Hall of Fame", Franchise.SeattleMariners);
     public static readonly FranchiseHallOfFameType SeattleSeahawksRingOfHonor = new(51, "Seattle Seahawks Ring of Honor", Franchise.SeattleSeahawks);
     public static readonly FranchiseHallOfFameType StLouisFootballRingOfFame = new(49, "St. Louis Football Ring of Fame", Franchise.LosAngelesRams);
-    public static readonly FranchiseHallOfFameType TampaBayBuccaneersRingOfHonor = new (39, "Tampa Bay Buccaneers Ring of Honor", Franchise.TampaBayBuccaneers);
+    public static readonly FranchiseHallOfFameType TampaBayBuccaneersRingOfHonor = new(39, "Tampa Bay Buccaneers Ring of Honor", Franchise.TampaBayBuccaneers);
     public static readonly FranchiseHallOfFameType TexasRangersHallOfFame = new(3, "Texas Rangers Hall of Fame", Franchise.TexasRangers);
     public static readonly FranchiseHallOfFameType TitansOilersRingOfHonor = new(36, "Titans/Oilers Ring of Honor", Franchise.TennesseeTitans);
     public static readonly FranchiseHallOfFameType TorontoBlueJaysLevelOfExcellence = new(19, "Toronto Blue Jays Level Of Excellence", Franchise.TorontoBlueJays);
@@ -82,6 +83,11 @@ public sealed class FranchiseHallOfFameType : DomainItemConstant
         SeattleMarinersHallOfFame,
         TexasRangersHallOfFame,
         TorontoBlueJaysLevelOfExcellence
+    };
+
+    public static readonly FranchiseHallOfFameType[] Basketball =
+    {
+        PhoenixSunsRingOfHonor
     };
 
     public static readonly FranchiseHallOfFameType[] Football =
@@ -140,6 +146,9 @@ public sealed class FranchiseHallOfFameType : DomainItemConstant
 
         if (sports.Any(sport => sport == Sport.Baseball))
             franchiseHallOfFameTypes.AddRange(Baseball);
+
+        if (sports.Any(sport => sport == Sport.Basketball))
+            franchiseHallOfFameTypes.AddRange(Basketball);
 
         if (sports.Any(sport => sport == Sport.Football))
             franchiseHallOfFameTypes.AddRange(Football);
