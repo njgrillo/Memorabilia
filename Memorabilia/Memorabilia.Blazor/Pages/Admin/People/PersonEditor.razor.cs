@@ -22,7 +22,7 @@ public partial class PersonEditor : EditItem<SavePersonViewModel, PersonViewMode
     public void OnNameFieldBlur()
     {
         ViewModel.DisplayName = $"{ViewModel.LastName}"
-                                + (!ViewModel.Nickname.IsNullOrEmpty() ? $" {ViewModel.Nickname}" : $" {ViewModel.FirstName}");
+                                + (!ViewModel.Nickname.IsNullOrEmpty() ? $", {ViewModel.Nickname}" : $", {ViewModel.FirstName}");
 
         ViewModel.ProfileName = $"{(!ViewModel.Nickname.IsNullOrEmpty() ? ViewModel.Nickname : ViewModel.FirstName)}"
                                + $" {ViewModel.LastName}";
@@ -30,6 +30,6 @@ public partial class PersonEditor : EditItem<SavePersonViewModel, PersonViewMode
         ViewModel.LegalName = $"{ViewModel.FirstName}"
                                 + (!ViewModel.MiddleName.IsNullOrEmpty() ? $" {ViewModel.MiddleName}" : string.Empty)
                                 + (!ViewModel.LastName.IsNullOrEmpty() ? $" {ViewModel.LastName}" : string.Empty)
-                                + (!ViewModel.Suffix.IsNullOrEmpty() ? $" {ViewModel.Suffix}," : ",");
+                                + (!ViewModel.Suffix.IsNullOrEmpty() ? $" {ViewModel.Suffix}" : string.Empty);
     }
 }

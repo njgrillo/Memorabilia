@@ -12,6 +12,12 @@ public partial class PersonPositionEditor
 
     private SavePersonPositionViewModel _viewModel = new();
 
+    protected override void OnParametersSet()
+    {
+        if (Positions.Any())
+            _viewModel.PositionType = PositionType.Secondary;
+    }
+
     private void Add()
     {
         if (_viewModel.Position == null)

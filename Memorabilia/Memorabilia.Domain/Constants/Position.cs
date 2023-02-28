@@ -40,6 +40,7 @@ public sealed class Position : DomainItemConstant
     public static readonly Position ShootingGuard = new (38, "Shooting Guard");
     public static readonly Position Shortstop = new(5, "Shortstop", "SS");
     public static readonly Position SmallForward = new (37, "Small Forward");
+    public static readonly Position SpecialTeamer = new (44, "Special Teamer");
     public static readonly Position SplitEnd = new (31, "Split End");
     public static readonly Position ThirdBase = new(6, "Third Base", "3B");
     public static readonly Position TightEnd = new(15, "Tight End", "TE");
@@ -102,6 +103,7 @@ public sealed class Position : DomainItemConstant
         ReturnSpecialist,
         Runningback,
         Safety,
+        SpecialTeamer,
         SplitEnd,
         TightEnd,
         WideReceiver

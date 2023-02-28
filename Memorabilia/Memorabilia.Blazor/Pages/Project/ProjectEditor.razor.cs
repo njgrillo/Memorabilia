@@ -2,16 +2,16 @@
 
 public partial class ProjectEditor : ImagePage
 {
+    [Inject]
+    public IDialogService DialogService { get; set; }
+
     [Parameter]
     public int Id { get; set; }
 
     [Parameter]
     public int UserId { get; set; }
 
-    private bool _canAddProjectPerson = true;
-    private bool _canEditPerson = true;
-    private bool _canUpdateProjectPerson;
-    private SaveProjectPersonViewModel _projectPersonViewModel = new();
+    private SaveProjectPersonViewModel _elementBeforeEdit;
     private string _search;
     private SaveProjectViewModel _viewModel = new();
 
@@ -41,32 +41,48 @@ public partial class ProjectEditor : ImagePage
         _viewModel = new SaveProjectViewModel(await QueryRouter.Send(new GetProjectQuery(Id)));
     }
 
-    private void AddProjectPerson()
+    private async Task AddProjectPerson()
     {
-        if (_viewModel.ItemTypeId > 0)
-            _projectPersonViewModel.ItemTypeId = _viewModel.ItemTypeId;
+        var parameters = new DialogParameters
+        {
+            ["ItemTypeId"] = _viewModel.ItemTypeId,
+        };
+        var options = new DialogOptions()
+        {
+            MaxWidth = MaxWidth.Large,
+            FullWidth = true,
+            DisableBackdropClick = true
+        };
+        var dialog = DialogService.Show<AddProjectPersonDialog>("Add Project Person", parameters, options);
+        var result = await dialog.Result;
 
-        _viewModel.People.Add(_projectPersonViewModel);
-        _projectPersonViewModel = new SaveProjectPersonViewModel();
+        if (result.Cancelled)
+            return;
+
+        SaveProjectPersonViewModel projectPerson 
+            = (SaveProjectPersonViewModel)result.Data;
+
+        _viewModel.People.Add(projectPerson);
     }
 
-    private void Edit(SaveProjectPersonViewModel projectPerson)
+    private void BackupItem(object element)
     {
-        _projectPersonViewModel.Person = projectPerson.Person;
-        _projectPersonViewModel.ItemTypeId = projectPerson.ItemTypeId;
-        _projectPersonViewModel.PriorityTypeId = projectPerson.PriorityTypeId;
-        _projectPersonViewModel.ProjectStatusTypeId = projectPerson.ProjectStatusTypeId;
-        _projectPersonViewModel.Rank = projectPerson.Rank;
-        _projectPersonViewModel.Upgrade = projectPerson.Upgrade;
-
-        _canAddProjectPerson = false;
-        _canEditPerson = false;
-        _canUpdateProjectPerson = true;
+        _elementBeforeEdit = new()
+        {
+            Rank = ((SaveProjectPersonViewModel)element).Rank,
+            Upgrade = ((SaveProjectPersonViewModel)element).Upgrade,
+            PriorityTypeId = ((SaveProjectPersonViewModel)element).PriorityTypeId,
+            ProjectStatusTypeId = ((SaveProjectPersonViewModel)element).ProjectStatusTypeId,
+        };
     }
 
     private static bool FilterFunc(SaveProjectPersonViewModel projectPersonViewModel, string search)
     {
         return search.IsNullOrEmpty() ||
+               (search.Equals("deceased", StringComparison.OrdinalIgnoreCase) && projectPersonViewModel.Deceased) ||
+               (search.Equals("upgrade", StringComparison.OrdinalIgnoreCase) && projectPersonViewModel.Upgrade) ||
+               projectPersonViewModel.PriorityTypeName.Contains(search, StringComparison.OrdinalIgnoreCase) ||
+               projectPersonViewModel.ProjectStatusTypeName.Contains(search, StringComparison.OrdinalIgnoreCase) ||
                projectPersonViewModel.Person.Name.Contains(search, StringComparison.OrdinalIgnoreCase) ||
                (!projectPersonViewModel.Person.Nickname.IsNullOrEmpty() && projectPersonViewModel.Person.Nickname.Contains(search, StringComparison.OrdinalIgnoreCase));
     }
@@ -146,19 +162,42 @@ public partial class ProjectEditor : ImagePage
         }
     }
 
-    private void UpdateProjectPerson()
+    private void ResetItemToOriginalValues(object element)
     {
-        var person = _viewModel.People.Single(person => person.Person.Id == _projectPersonViewModel.Person.Id);
-
-        person.PriorityTypeId = _projectPersonViewModel.PriorityTypeId;
-        person.ProjectStatusTypeId = _projectPersonViewModel.ProjectStatusTypeId;
-        person.Rank = _projectPersonViewModel.Rank;
-        person.Upgrade = _projectPersonViewModel.Upgrade;
-
-        _projectPersonViewModel = new SaveProjectPersonViewModel();
-
-        _canAddProjectPerson = true;
-        _canEditPerson = true;
-        _canUpdateProjectPerson = false;
+        ((SaveProjectPersonViewModel)element).Rank = _elementBeforeEdit.Rank;
+        ((SaveProjectPersonViewModel)element).Upgrade = _elementBeforeEdit.Upgrade;
+        ((SaveProjectPersonViewModel)element).PriorityTypeId = _elementBeforeEdit.PriorityTypeId;
+        ((SaveProjectPersonViewModel)element).ProjectStatusTypeId = _elementBeforeEdit.ProjectStatusTypeId;
     }
+
+    private void UpdateRanks(object element)
+    {
+        var item = ((SaveProjectPersonViewModel)element);
+
+        if (_elementBeforeEdit.Rank == item.Rank)
+            return;
+
+        if (item.Rank < _elementBeforeEdit.Rank)
+        {
+            foreach (var person in _viewModel.People.Where(x => x.Rank < _elementBeforeEdit.Rank && x.Rank >= item.Rank))
+            {
+                if (person.Id == item.Id)
+                    continue;
+
+                person.Rank += 1;
+            }
+        }
+        else
+        {
+            foreach (var person in _viewModel.People.Where(x => x.Rank > _elementBeforeEdit.Rank && x.Rank <= item.Rank))
+            {
+                if (person.Id == item.Id)
+                    continue;
+
+                person.Rank -= 1;
+            }
+        }
+
+        StateHasChanged();
+    } 
 }

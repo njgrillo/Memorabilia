@@ -1,6 +1,4 @@
-﻿#nullable disable
-
-namespace Memorabilia.Blazor.Controls.Person;
+﻿namespace Memorabilia.Blazor.Controls.Person;
 
 public partial class PersonDraftEditor : ComponentBase
 {
@@ -38,6 +36,16 @@ public partial class PersonDraftEditor : ComponentBase
         _canAdd = false;
         _canEditFranchise = false;
         _canUpdate = true;
+    }
+
+    private void OnPickChange(int? value)
+    {
+        _viewModel.Pick = value;
+
+        if (_viewModel.Round != 1)
+            return;
+
+        _viewModel.Overall = _viewModel.Pick;
     }
 
     private void Update()

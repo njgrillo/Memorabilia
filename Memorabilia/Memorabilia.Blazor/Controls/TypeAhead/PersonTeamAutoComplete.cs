@@ -41,10 +41,17 @@ public class PersonTeamAutoComplete : NamedEntityAutoComplete<SavePersonTeamView
             Items = Items.Where(team => SportIds.Contains(team.SportId));
         }
 
-        if ((BeginYear.HasValue || EndYear.HasValue) && (BeginYear > 0 || EndYear >0))
+        if (BeginYear.HasValue || EndYear.HasValue)
         {
+            if (!EndYear.HasValue)
+            {
+                Items = Items.Where(team => BeginYear >= team.BeginYear
+                                                        && !team.EndYear.HasValue);
+                return;
+            }
+
             Items = Items.Where(team => (!BeginYear.HasValue || BeginYear == 0 || BeginYear >= team.BeginYear)
-                                     && (!EndYear.HasValue || EndYear == 0 || !team.EndYear.HasValue || EndYear <= team.EndYear));
+                                     && (!team.EndYear.HasValue || EndYear <= team.EndYear));
         }
     }
 

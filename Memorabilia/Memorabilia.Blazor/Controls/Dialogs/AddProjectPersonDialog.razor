@@ -1,0 +1,41 @@
+﻿<MudDialog Class="mud-dialog-width-lg"
+           Style="max-height:80vh;">
+    <DialogContent>
+        <div style="margin-top:2%;margin-bottom:2%;margin-left:2%;margin-right:2%;">
+            <DivRowCol6>
+                <Content>
+                    <PersonSelector SelectedPerson="_viewModel.Person"
+                                    SelectedPersonChanged="(p) => _viewModel.Person = p" />
+                </Content>
+            </DivRowCol6>
+            <DivRowCol3>
+                <Content>
+                    <NullableIntField Label="Rank"
+                                      Value="_viewModel.Rank"
+                                      ValueChanged="@((p) => _viewModel.Rank = p)" />
+                </Content>
+                <ContentColumn2>
+                    <PriorityTypeDropDown SelectedValue="_viewModel.PriorityTypeId"
+                                          SelectionChanged="(p) => _viewModel.PriorityTypeId = p" />
+                </ContentColumn2>
+                <ContentColumn3>
+                    <ProjectStatusTypeDropDown SelectedValue="_viewModel.ProjectStatusTypeId"
+                                               SelectionChanged="(p) => _viewModel.ProjectStatusTypeId = p" />
+                </ContentColumn3>                
+            </DivRowCol3>
+            <DivRowCol3>
+                <Content>
+                    <MudSwitch Checked="@_viewModel.Upgrade"
+                               CheckedChanged="(p) => _viewModel.Upgrade = p"
+                               Color="MudBlazor.Color.Success"
+                               Label="Is Upgrade?"
+                               T="bool" />
+                </Content>
+            </DivRowCol3>
+        </div>
+    </DialogContent>
+    <DialogActions>
+        <AddButton OnClick="Add" />
+        <CancelButton OnClick="Cancel" />
+    </DialogActions>
+</MudDialog>

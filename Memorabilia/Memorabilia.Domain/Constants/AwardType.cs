@@ -193,7 +193,8 @@ public sealed class AwardType : DomainItemConstant
     public static readonly AwardType SammyBaughTrophy = new(105, "Sammy Baugh Trophy");
     public static readonly AwardType SECMostValuablePlayer = new(153, "SEC Most Valuable Player", "SEC MVP");
     public static readonly AwardType SECPitcherOfTheYear = new(44, "SEC Pitcher of the Year");
-    public static readonly AwardType SECPlayerOfTheYear = new(130, "SEC Player of the Year");
+    public static readonly AwardType SECPlayerOfTheYearBasketball = new(130, "SEC Player of the Year (Basketball)");
+    public static readonly AwardType SECPlayerOfTheYearFootball = new(243, "SEC Player of the Year (Football)");
     public static readonly AwardType SilverSlugguer = new(11, "Silver Slugger", "SS");
     public static readonly AwardType SoConPlayerOfTheYear = new(205, "SoCon Player of the Year");
     public static readonly AwardType SouthlandPlayerOfTheYear = new(222, "Southland Player of the Year");
@@ -356,7 +357,7 @@ public sealed class AwardType : DomainItemConstant
         OscarRobertsonTrophy,
         Pac10PlayerOfTheYear,
         RobertVGeaseyTrophy,
-        SECPlayerOfTheYear,
+        SECPlayerOfTheYearBasketball,
         SoConPlayerOfTheYear,
         SouthlandPlayerOfTheYear,
         SWCPlayerOfTheYear,
@@ -466,7 +467,7 @@ public sealed class AwardType : DomainItemConstant
         RookieOfTheYear,
         SammyBaughTrophy,
         SECMostValuablePlayer,
-        SECPlayerOfTheYear,
+        SECPlayerOfTheYearFootball,
         SportingNewsCoachOfTheYear,
         SportingNewsCoordinatorOfTheYear,
         SuperBowlMostValuablePlayer,

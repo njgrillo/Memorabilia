@@ -13,6 +13,12 @@ public partial class PersonOccupationSelector : ComponentBase
     private bool _canUpdate;
     private SavePersonOccupationViewModel _viewModel = new();
 
+    protected override void OnParametersSet()
+    {
+        if (Occupations.Any())
+            _viewModel.OccupationType = OccupationType.Secondary;
+    }
+
     private async void Add()
     {
         if (_viewModel.Occupation == null || _viewModel.OccupationType == null)

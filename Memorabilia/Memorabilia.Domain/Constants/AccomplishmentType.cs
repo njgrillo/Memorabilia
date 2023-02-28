@@ -4,8 +4,8 @@ public sealed class AccomplishmentType : DomainItemConstant
 {    
     public static readonly AccomplishmentType AAUAllAmerican = new (120, "AAU All-American");
     public static readonly AccomplishmentType ABAAllDefensiveFirstTeam = new (153, "ABA All-Defensive First Team");
+    public static readonly AccomplishmentType ABAAllRookieFirstTeam = new (173, "ABA All-Rookie First Team");
     public static readonly AccomplishmentType ABAAllTimeTeam = new (148, "ABA All-Time Team");
-    public static readonly AccomplishmentType ABASlamDunkChampion = new (155, "ABA Slam Dunk Champion");
     public static readonly AccomplishmentType AFLAllTimeSecondTeam = new (102, "AFL All-Time 2nd Team");
     public static readonly AccomplishmentType AFLAllTimeTeam = new (39, "AFL All-Time Team");
     public static readonly AccomplishmentType AllABAFirstTeam = new (147, "All-ABA First Team");
@@ -13,7 +13,8 @@ public sealed class AccomplishmentType : DomainItemConstant
     public static readonly AccomplishmentType AllABLFirstTeam = new (151, "All-ABL First Team");
     public static readonly AccomplishmentType AllAFL = new (101, "All-AFL");
     public static readonly AccomplishmentType AllAIC = new (99, "All-AIC");
-    public static readonly AccomplishmentType AllAmerican = new (34, "All-American");  
+    public static readonly AccomplishmentType AllAmericanBasketball = new(175, "All-American (Basketball)");
+    public static readonly AccomplishmentType AllAmericanFootball = new (34, "All-American (Football)");       
     public static readonly AccomplishmentType AllBig7 = new (111, "All-Big-7");
     public static readonly AccomplishmentType AllBigEast = new (100, "All-Big East");
     public static readonly AccomplishmentType AllMLBFirstTeam = new(5, "All-MLB First Team");
@@ -35,12 +36,14 @@ public sealed class AccomplishmentType : DomainItemConstant
     public static readonly AccomplishmentType AllWPBTSecondTeam = new(150, "All-WPBT Second Team");
     public static readonly AccomplishmentType AmericanLeaguePitchingTripleCrown = new(169, "American League Pitching Triple Crown", "AL Triple Crown");
     public static readonly AccomplishmentType AmericanLeagueTripleCrown = new(2, "American League Triple Crown", "AL Triple Crown");
+    public static readonly AccomplishmentType Bills25thAnniversaryTeam = new (180, "Bills 25th Anniversary Team");
     public static readonly AccomplishmentType Bills50thAnniversaryTeam = new (116, "Bills 50th Anniversary Team");
     public static readonly AccomplishmentType BostonPatriotsAll1960sTeam = new(71, "Boston Patriots All-1960s Team");
     public static readonly AccomplishmentType CAAAllDefensiveTeam = new(165, "CAA All-Defensive Team");
     public static readonly AccomplishmentType CFB150GreatestCollegeFootballPlayerEver = new (69, "CFB150 Greatest College Football Player Ever");
     public static readonly AccomplishmentType CombinedNoHitter = new(8, "Combined No Hitter");
-    public static readonly AccomplishmentType ConsensusAllAmerican = new (28, "Consensus All-American");    
+    public static readonly AccomplishmentType ConsensusAllAmericanBasketball = new (176, "Consensus All-American (Basketball)");    
+    public static readonly AccomplishmentType ConsensusAllAmericanFootball = new (28, "Consensus All-American (Football)");    
     public static readonly AccomplishmentType ConsensusFirstTeamAllAmerican = new (121, "Consensus First-team All-American");
     public static readonly AccomplishmentType ConsensusNAIAAllAmerican = new(167, "Consensus NAIA All-American");
     public static readonly AccomplishmentType ConsensusSecondTeamAllAmerican = new (137, "Consensus Second-team All-American");
@@ -51,14 +54,16 @@ public sealed class AccomplishmentType : DomainItemConstant
     public static readonly AccomplishmentType EightyGreatestRedskins = new (30, "80 Greatest Redskins");
     public static readonly AccomplishmentType FiftyAnniversaryAllTimeTeam = new (55, "50th Anniversary All-Time Team");
     public static readonly AccomplishmentType FiftyFortyNinetyClub = new (158, "50-40-90 Club");
+    public static readonly AccomplishmentType FiftyGreatestNBAPlayers = new (174, "50 Greatest Players in NBA History");
     public static readonly AccomplishmentType FiftyGreatestVikings = new (76, "50 Greatest Vikings");
     public static readonly AccomplishmentType FirstTeamAllAAFC = new (91, "First-team All-AAFC");
     public static readonly AccomplishmentType FirstTeamAllAAWU = new (157, "First-team All-AAWU");
     public static readonly AccomplishmentType FirstTeamAllACC = new (79, "First-team All-ACC");
     public static readonly AccomplishmentType FirstTeamAllAFL = new (37, "First-team All-AFL");
-    public static readonly AccomplishmentType FirstTeamAllAmerican = new (41, "First-team All-American");
+    public static readonly AccomplishmentType FirstTeamAllAmericanBasketball = new (178, "First-team All-American (Basketball)");
+    public static readonly AccomplishmentType FirstTeamAllAmericanFootball = new (41, "First-team All-American (Football)");
     public static readonly AccomplishmentType FirstTeamAllBigEast = new (104, "First-team All-Big East");
-    public static readonly AccomplishmentType FirstTeamAllBigEight = new (68, "First-team All-Big Eight");
+    public static readonly AccomplishmentType FirstTeamAllBigEightFootball = new (68, "First-team All-Big Eight (Football)");
     public static readonly AccomplishmentType FirstTeamAllBigSeven = new (142, "First-team All-Big 7");
     public static readonly AccomplishmentType FirstTeamAllBigTen = new (42, "First-team All-Big Ten");
     public static readonly AccomplishmentType FirstTeamAllBigTwelve = new (119, "First-team All-Big 12");
@@ -66,7 +71,8 @@ public sealed class AccomplishmentType : DomainItemConstant
     public static readonly AccomplishmentType FirstTeamAllMAC = new (117, "First-team All-MAC");
     public static readonly AccomplishmentType FirstTeamAllMIAA = new (136, "First-team All-MIAA");
     public static readonly AccomplishmentType FirstTeamAllMVC = new (134, "First-team All-MVC");
-    public static readonly AccomplishmentType FirstTeamAllPac10 = new (60, "First-team All-Pac-10");
+    public static readonly AccomplishmentType FirstTeamAllPac10Basketball = new (60, "First-team All-Pac-10 (Basketball)");
+    public static readonly AccomplishmentType FirstTeamAllPac10Football = new (181, "First-team All-Pac-10 (Football)");
     public static readonly AccomplishmentType FirstTeamAllPacificCoast = new (114, "First-team All-Pacific Coast");
     public static readonly AccomplishmentType FirstTeamAllPCC = new (122, "First-team All-PCC");
     public static readonly AccomplishmentType FirstTeamAllPro = new (25, "First-team All-Pro", "All Pro");
@@ -74,7 +80,8 @@ public sealed class AccomplishmentType : DomainItemConstant
     public static readonly AccomplishmentType FirstTeamAllSouthern = new (110, "First-team All-Southern");
     public static readonly AccomplishmentType FirstTeamAllSouthland = new (161, "First-team All-Southland");
     public static readonly AccomplishmentType FirstTeamAllSWC = new (83, "First-team All-SWC");
-    public static readonly AccomplishmentType FirstTeamAllWAC = new (87, "First-team All-WAC");
+    public static readonly AccomplishmentType FirstTeamAllWACBasketball = new (87, "First-team All-WAC (Basketball)");
+    public static readonly AccomplishmentType FirstTeamAllWACFootball = new (182, "First-team All-WAC (Football)");
     public static readonly AccomplishmentType FirstTeamAllWCAC = new (166, "First-team All-WCAC");
     public static readonly AccomplishmentType FirstTeamAllWCC = new (140, "First-team All-WCC");
     public static readonly AccomplishmentType FirstTeamAllWesternConference = new (130, "First-team All-Western Conference");
@@ -136,7 +143,8 @@ public sealed class AccomplishmentType : DomainItemConstant
     public static readonly AccomplishmentType SecondTeamAllAAFC = new(92, "Second-team All-AAFC");
     public static readonly AccomplishmentType SecondTeamAllACC = new(106, "Second-team All-ACC");
     public static readonly AccomplishmentType SecondTeamAllAFL = new(38, "Second-team All-AFL");
-    public static readonly AccomplishmentType SecondTeamAllAmerican = new(35, "Second-team All-American");    
+    public static readonly AccomplishmentType SecondTeamAllAmericanBasketball = new(35, "Second-team All-American (Basketball)");    
+    public static readonly AccomplishmentType SecondTeamAllAmericanFootball = new(179, "Second-team All-American (Football)");    
     public static readonly AccomplishmentType SecondTeamAllBigEast = new(163, "Second-team All-Big East");    
     public static readonly AccomplishmentType SecondTeamAllBigNine = new(88, "Second-team All-Big Nine");    
     public static readonly AccomplishmentType SecondTeamAllBigTen = new(43, "Second-team All-Big Ten");    
@@ -148,7 +156,8 @@ public sealed class AccomplishmentType : DomainItemConstant
     public static readonly AccomplishmentType SeventyGreatestRedskins = new(84, "70 Greatest Redskins");
     public static readonly AccomplishmentType SportsIllustrated1940sAllDecadeTeam = new(89, "Sports Illustrated 1940s All-Decade Team");
     public static readonly AccomplishmentType TechAllEraTeam = new (96, "Tech All-Era Team");    
-    public static readonly AccomplishmentType ThirdTeamAllAmerican = new (118, "Third-team All-American");
+    public static readonly AccomplishmentType ThirdTeamAllAmericanBasketball = new (118, "Third-team All-American (Basketball)");
+    public static readonly AccomplishmentType ThirdTeamAllAmericanFootball = new (177, "Third-team All-American (Football)");
     public static readonly AccomplishmentType ThirdTeamAllPro = new (93, "Third-team All-Pro");
     public static readonly AccomplishmentType ThirdTeamLittleAllAmerican = new(115, "Third-team Little All-American");
     public static readonly AccomplishmentType ThirtyThirtyClub = new(3, "30-30 Club", "30-30");
@@ -197,12 +206,12 @@ public sealed class AccomplishmentType : DomainItemConstant
     {
         AAUAllAmerican,
         ABAAllDefensiveFirstTeam,
+        ABAAllRookieFirstTeam,
         ABAAllTimeTeam,
-        ABASlamDunkChampion,
         AllABAFirstTeam,
         AllABASecondTeam,
         AllABLFirstTeam,
-        AllAmerican,
+        AllAmericanBasketball,
         AllNBAFirstTeam,
         AllNBASecondTeam,
         AllNBAThirdTeam,
@@ -211,14 +220,15 @@ public sealed class AccomplishmentType : DomainItemConstant
         AllWPBTFirstTeam,
         AllWPBTSecondTeam,
         CAAAllDefensiveTeam,
-        ConsensusAllAmerican,
+        ConsensusAllAmericanBasketball,
         ConsensusFirstTeamAllAmerican,
         ConsensusNAIAAllAmerican,
         ConsensusSecondTeamAllAmerican,
         FiftyFortyNinetyClub,
+        FiftyGreatestNBAPlayers,
         FirstTeamAllAAWU,
         FirstTeamAllACC,
-        FirstTeamAllAmerican,
+        FirstTeamAllAmericanBasketball,
         FirstTeamAllBigEast,
         FirstTeamAllBigSeven,
         FirstTeamAllBigTen,
@@ -226,10 +236,10 @@ public sealed class AccomplishmentType : DomainItemConstant
         FirstTeamAllMAC,
         FirstTeamAllMIAA,
         FirstTeamAllMVC,
-        FirstTeamAllPac10,
+        FirstTeamAllPac10Basketball,
         FirstTeamAllPCC,
         FirstTeamAllSouthland,
-        FirstTeamAllWAC,
+        FirstTeamAllWACBasketball,
         FirstTeamAllWCAC,
         FirstTeamAllWCC,
         FirstTeamAllWesternConference,
@@ -248,10 +258,10 @@ public sealed class AccomplishmentType : DomainItemConstant
         NBASlamDunkContestChampion,
         NBAThreePointContestChampion,
         NBLAllTimeTeam,
-        SecondTeamAllAmerican,
+        SecondTeamAllAmericanBasketball,
         SecondTeamAllBigEast,
         SecondTeamParadeAllAmerican,
-        ThirdTeamAllAmerican
+        ThirdTeamAllAmericanBasketball
     };
 
     public static readonly AccomplishmentType[] Collegiate =
@@ -278,7 +288,7 @@ public sealed class AccomplishmentType : DomainItemConstant
         AFLAllTimeTeam,
         AllAFL,
         AllAIC,
-        AllAmerican,
+        AllAmericanFootball,
         AllBig7,
         AllBigEast,
         AllPAC8,
@@ -288,10 +298,11 @@ public sealed class AccomplishmentType : DomainItemConstant
         AllSWAC,
         AllSWC,
         AllUSFL,
+        Bills25thAnniversaryTeam,
         Bills50thAnniversaryTeam,
         BostonPatriotsAll1960sTeam,
         CFB150GreatestCollegeFootballPlayerEver,
-        ConsensusAllAmerican,
+        ConsensusAllAmericanFootball,
         DenverBroncos50thAnniversaryTeam,
         DetroitLions75thAnniversaryTeam,
         DetroitLionsAllTimeTeam,
@@ -302,19 +313,19 @@ public sealed class AccomplishmentType : DomainItemConstant
         FirstTeamAllAAFC,
         FirstTeamAllACC,
         FirstTeamAllAFL,
-        FirstTeamAllAmerican,
+        FirstTeamAllAmericanFootball,
         FirstTeamAllBigEast,
-        FirstTeamAllBigEight,
+        FirstTeamAllBigEightFootball,
         FirstTeamAllBigTen,
         FirstTeamAllBigTwelve,
         FirstTeamAllMAC,
-        FirstTeamAllPac10,
+        FirstTeamAllPac10Football,
         FirstTeamAllPacificCoast,
         FirstTeamAllPro,
         FirstTeamAllSEC,
         FirstTeamAllSouthern,
         FirstTeamAllSWC,
-        FirstTeamAllWAC,
+        FirstTeamAllWACFootball,
         FirstTeamLittleAllAmerican,
         MinnesotaVikings25thAnniversaryTeam,
         MinnesotaVikings40thAnniversaryTeam,
@@ -348,7 +359,7 @@ public sealed class AccomplishmentType : DomainItemConstant
         SecondTeamAllAAFC,
         SecondTeamAllACC,
         SecondTeamAllAFL,
-        SecondTeamAllAmerican,
+        SecondTeamAllAmericanFootball,
         SecondTeamAllBigNine,
         SecondTeamAllBigTen,
         SecondTeamAllPro,
@@ -358,7 +369,7 @@ public sealed class AccomplishmentType : DomainItemConstant
         SeventyGreatestRedskins,
         SportsIllustrated1940sAllDecadeTeam,
         TechAllEraTeam,
-        ThirdTeamAllAmerican,
+        ThirdTeamAllAmericanFootball,
         ThirdTeamAllPro,
         ThirdTeamLittleAllAmerican,
         TwoThousandsAllDecadeTeam,
@@ -372,13 +383,14 @@ public sealed class AccomplishmentType : DomainItemConstant
     {
         AAUAllAmerican,
         ABAAllDefensiveFirstTeam,
-        ABASlamDunkChampion,
+        ABAAllRookieFirstTeam,
         AllABAFirstTeam,
         AllABASecondTeam,
         AllABLFirstTeam,
         AllAIC,
         AllAFL,
-        AllAmerican,
+        AllAmericanBasketball,
+        AllAmericanFootball,
         AllBig7,
         AllBigEast,
         AllMLBFirstTeam,
@@ -401,7 +413,8 @@ public sealed class AccomplishmentType : DomainItemConstant
         AmericanLeaguePitchingTripleCrown,
         AmericanLeagueTripleCrown,
         CAAAllDefensiveTeam,
-        ConsensusAllAmerican,
+        ConsensusAllAmericanBasketball,
+        ConsensusAllAmericanFootball,
         ConsensusFirstTeamAllAmerican,
         ConsensusNAIAAllAmerican,
         ConsensusSecondTeamAllAmerican,
@@ -411,9 +424,10 @@ public sealed class AccomplishmentType : DomainItemConstant
         FirstTeamAllAAWU,
         FirstTeamAllACC,
         FirstTeamAllAFL,
-        FirstTeamAllAmerican,
+        FirstTeamAllAmericanBasketball,
+        FirstTeamAllAmericanFootball,
         FirstTeamAllBigEast,
-        FirstTeamAllBigEight,
+        FirstTeamAllBigEightFootball,
         FirstTeamAllBigSeven,
         FirstTeamAllBigTen,
         FirstTeamAllBigTwelve,
@@ -421,7 +435,8 @@ public sealed class AccomplishmentType : DomainItemConstant
         FirstTeamAllMAC,
         FirstTeamAllMIAA,
         FirstTeamAllMVC,
-        FirstTeamAllPac10,
+        FirstTeamAllPac10Basketball,
+        FirstTeamAllPac10Football,
         FirstTeamAllPacificCoast,
         FirstTeamAllPCC,
         FirstTeamAllPro,
@@ -429,7 +444,8 @@ public sealed class AccomplishmentType : DomainItemConstant
         FirstTeamAllSouthern,
         FirstTeamAllSouthland,
         FirstTeamAllSWC,
-        FirstTeamAllWAC,
+        FirstTeamAllWACBasketball,
+        FirstTeamAllWACFootball,
         FirstTeamAllWCAC,
         FirstTeamAllWCC,
         FirstTeamAllWesternConference,
@@ -453,7 +469,8 @@ public sealed class AccomplishmentType : DomainItemConstant
         SecondTeamAllAAFC,
         SecondTeamAllACC,
         SecondTeamAllAFL,
-        SecondTeamAllAmerican,
+        SecondTeamAllAmericanBasketball,
+        SecondTeamAllAmericanFootball,
         SecondTeamAllBigEast,
         SecondTeamAllBigNine,
         SecondTeamAllBigTen,
@@ -461,7 +478,8 @@ public sealed class AccomplishmentType : DomainItemConstant
         SecondTeamAllSEC,
         SecondTeamLittleAllAmerican,
         SecondTeamParadeAllAmerican,
-        ThirdTeamAllAmerican,
+        ThirdTeamAllAmericanBasketball,
+        ThirdTeamAllAmericanFootball,
         ThirdTeamAllPro,
         ThirdTeamLittleAllAmerican,
         ThirtyThirtyClub,
