@@ -19,78 +19,94 @@
                         PersonId="ViewModel.Id"
                         PersonStep="ViewModel.PersonStep" />
     </TimelineContent>
-    <Content>        
-        <DivRowCol3>
-            <Content>
-                <TextField Label="First Name"
-                           OnBlur="OnNameFieldBlur"
-                           SelectedText="@ViewModel.FirstName"
-                           SelectedTextChanged="@((p) => ViewModel.FirstName = p)" />
-            </Content>
-            <ContentColumn2>
-                <TextField Label="Middle Name"
-                           SelectedText="@ViewModel.MiddleName"
-                           SelectedTextChanged="@((p) => ViewModel.MiddleName = p)" />
-            </ContentColumn2>
-            <ContentColumn3>
-                <TextField Label="Last Name"
-                           OnBlur="OnNameFieldBlur"
-                           SelectedText="@ViewModel.LastName"
-                           SelectedTextChanged="@((p) => ViewModel.LastName = p)" />
-            </ContentColumn3>
-            <ContentColumn4>
-                <TextField Label="Suffix"
-                           OnBlur="OnNameFieldBlur"
-                           SelectedText="@ViewModel.Suffix"
-                           SelectedTextChanged="@((p) => ViewModel.Suffix = p)" />
-            </ContentColumn4>
-        </DivRowCol3>
-        <DivRowCol3>
-            <Content>
-                <TextField Label="Calling Name"
-                           OnBlur="OnNameFieldBlur"
-                           SelectedText="@ViewModel.Nickname"
-                           SelectedTextChanged="@((p) => ViewModel.Nickname = p)" />
-            </Content>
-            <ContentColumn2>
-                <TextField Label="Legal Name"
-                           SelectedText="@ViewModel.LegalName"
-                           SelectedTextChanged="@((p) => ViewModel.LegalName = p)" />
-            </ContentColumn2>
-            <ContentColumn3>
-                <TextField Label="Display Name"
-                           SelectedText="@ViewModel.DisplayName"
-                           SelectedTextChanged="@((p) => ViewModel.DisplayName = p)" />
-            </ContentColumn3>
-            <ContentColumn4>
-                <TextField Label="Profile Name"
-                           SelectedText="@ViewModel.ProfileName"
-                           SelectedTextChanged="@((p) => ViewModel.ProfileName = p)" />
-            </ContentColumn4>
-        </DivRowCol3>
-        <DivRowCol3>
-            <Content>
-                <MudDatePicker @bind-Date="ViewModel.BirthDate"
-                               DateFormat="MM/dd/yyyy"
-                               Editable="true"
-                               Label="Birth Date"
-                               Mask="@(new DateMask("MM/dd/yyyy"))"
-                               Variant="Variant.Outlined" />
-            </Content>
-            <ContentColumn2>
-                <MudDatePicker @bind-Date="ViewModel.DeathDate"
-                               DateFormat="MM/dd/yyyy"
-                               Editable="true"
-                               Label="Death Date"
-                               Mask="@(new DateMask("MM/dd/yyyy"))"
-                               Variant="Variant.Outlined" />
-            </ContentColumn2>
-        </DivRowCol3>
-        <DivRowCol12>
-            <Content>
-                <MudText Typo="Typo.h3">Nicknames</MudText>
-                <PersonNicknameEditor Nicknames="ViewModel.Nicknames" />
-            </Content>
-        </DivRowCol12>
+    <Content>   
+        <div style="margin-bottom:1%;">
+            <MudTabs ApplyEffectsToContainer="true"
+                     Centered="true"
+                     Elevation="2"
+                     PanelClass="pa-6"
+                     Rounded="true">
+                <MudTabPanel Text="Details">
+                    <DivRowCol3>
+                        <Content>
+                            <TextField Label="First Name"
+                                       OnBlur="OnNameFieldBlur"
+                                       SelectedText="@ViewModel.FirstName"
+                                       SelectedTextChanged="@((p) => ViewModel.FirstName = p)" />
+                        </Content>
+                        <ContentColumn2>
+                            <TextField Label="Middle Name"
+                                       SelectedText="@ViewModel.MiddleName"
+                                       SelectedTextChanged="@((p) => ViewModel.MiddleName = p)" />
+                        </ContentColumn2>
+                        <ContentColumn3>
+                            <TextField Label="Last Name"
+                                       OnBlur="OnNameFieldBlur"
+                                       SelectedText="@ViewModel.LastName"
+                                       SelectedTextChanged="@((p) => ViewModel.LastName = p)" />
+                        </ContentColumn3>
+                        <ContentColumn4>
+                            <TextField Label="Suffix"
+                                       OnBlur="OnNameFieldBlur"
+                                       SelectedText="@ViewModel.Suffix"
+                                       SelectedTextChanged="@((p) => ViewModel.Suffix = p)" />
+                        </ContentColumn4>
+                    </DivRowCol3>
+                    <DivRowCol3>
+                        <Content>
+                            <TextField Label="Calling Name"
+                                       OnBlur="OnNameFieldBlur"
+                                       SelectedText="@ViewModel.Nickname"
+                                       SelectedTextChanged="@((p) => ViewModel.Nickname = p)" />
+                        </Content>
+                        <ContentColumn2>
+                            <TextField Label="Legal Name"
+                                       SelectedText="@ViewModel.LegalName"
+                                       SelectedTextChanged="@((p) => ViewModel.LegalName = p)" />
+                        </ContentColumn2>
+                        <ContentColumn3>
+                            <TextField Label="Display Name"
+                                       SelectedText="@ViewModel.DisplayName"
+                                       SelectedTextChanged="@((p) => ViewModel.DisplayName = p)" />
+                        </ContentColumn3>
+                        <ContentColumn4>
+                            <TextField Label="Profile Name"
+                                       SelectedText="@ViewModel.ProfileName"
+                                       SelectedTextChanged="@((p) => ViewModel.ProfileName = p)" />
+                        </ContentColumn4>
+                    </DivRowCol3>
+                    <DivRowCol3>
+                        <Content>
+                            <MudDatePicker @bind-Date="ViewModel.BirthDate"
+                                           DateFormat="MM/dd/yyyy"
+                                           Editable="true"
+                                           Label="Birth Date"
+                                           Mask="@(new DateMask("MM/dd/yyyy"))"
+                                           Variant="Variant.Outlined" />
+                        </Content>
+                        <ContentColumn2>
+                            <MudDatePicker @bind-Date="ViewModel.DeathDate"
+                                           DateFormat="MM/dd/yyyy"
+                                           Editable="true"
+                                           Label="Death Date"
+                                           Mask="@(new DateMask("MM/dd/yyyy"))"
+                                           Variant="Variant.Outlined" />
+                        </ContentColumn2>
+                    </DivRowCol3>
+                </MudTabPanel>
+                <MudTabPanel BadgeColor="MudBlazor.Color.Success"
+                             BadgeData="ViewModel.Nicknames.Count(nickname => !nickname.IsDeleted)"
+                             Text="Nicknames">
+                    <DivRowCol12>
+                        <Content>
+                            <PersonNicknameEditor Nicknames="ViewModel.Nicknames" />
+                        </Content>
+                    </DivRowCol12>
+                </MudTabPanel>
+            </MudTabs>
+        </div>
+
+        
+        
     </Content>
 </EditPage>

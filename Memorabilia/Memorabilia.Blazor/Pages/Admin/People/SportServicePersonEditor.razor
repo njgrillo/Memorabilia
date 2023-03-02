@@ -20,51 +20,60 @@
                         PersonStep="ViewModel.PersonStep" />
     </TimelineContent>
     <Content>  
-        <DivRowCol12>
-            <Content>
-                <MudText Typo="Typo.h3">Colleges</MudText>
-                <PersonCollegeEditor Colleges="ViewModel.Colleges" />
-            </Content>
-        </DivRowCol12>
-        <br />
-        <DivRowCol12>
-            <Content>
-                <MudText Typo="Typo.h3">Drafts</MudText>
-                <PersonDraftEditor Drafts="ViewModel.Drafts"
-                                   SportIds="ViewModel.SportIds" />
-            </Content>
-        </DivRowCol12>  
-        <br />
-        <DivRowCol6>
-            <Content>
-                <MudText Typo="Typo.h3">Service Details</MudText>
-            </Content>
-        </DivRowCol6>
-        <DivRowCol3>
-            <Content>
-                <MudDatePicker @bind-Date="ViewModel.DebutDate"
-                               DateFormat="MM/dd/yyyy"
-                               Editable="true"
-                               Label="Debut Date"
-                               Mask="@(new DateMask("MM/dd/yyyy"))"
-                               Variant="Variant.Outlined" />
-            </Content>
-            <ContentColumn2>
-                <MudDatePicker @bind-Date="ViewModel.LastAppearanceDate"
-                               DateFormat="MM/dd/yyyy" 
-                               Editable="true"
-                               Label="Last Appearance Date"
-                               Mask="@(new DateMask("MM/dd/yyyy"))"
-                               Variant="Variant.Outlined" />                       
-            </ContentColumn2>
-            <ContentColumn3>
-                <MudDatePicker @bind-Date="ViewModel.FreeAgentSigningDate"
-                               DateFormat="MM/dd/yyyy"
-                               Editable="true"
-                               Label="Free Agent Signing Date"
-                               Mask="@(new DateMask("MM/dd/yyyy"))"
-                               Variant="Variant.Outlined" /> 
-            </ContentColumn3>
-        </DivRowCol3>
+        <div style="margin-bottom:1%;">
+            <MudTabs ApplyEffectsToContainer="true"
+                     Centered="true"
+                     Elevation="2"
+                     PanelClass="pa-6"
+                     Rounded="true">
+                <MudTabPanel BadgeColor="MudBlazor.Color.Success" 
+                             BadgeData="ViewModel.Colleges.Count(college => !college.IsDeleted)"
+                             Text="Colleges">
+                    <DivRowCol12>
+                        <Content>
+                            <PersonCollegeEditor Colleges="ViewModel.Colleges" />
+                        </Content>
+                    </DivRowCol12>
+                </MudTabPanel>
+                <MudTabPanel BadgeColor="MudBlazor.Color.Success"
+                             BadgeData="ViewModel.Drafts.Count(draft => !draft.IsDeleted)"
+                             Text="Drafts">
+                    <DivRowCol12>
+                        <Content>
+                            <PersonDraftEditor Drafts="ViewModel.Drafts"
+                                               SportIds="ViewModel.SportIds" />
+                        </Content>
+                    </DivRowCol12>
+                </MudTabPanel>
+                <MudTabPanel Text="Service">
+                    <DivRowCol3>
+                        <Content>
+                            <MudDatePicker @bind-Date="ViewModel.DebutDate"
+                                           DateFormat="MM/dd/yyyy"
+                                           Editable="true"
+                                           Label="Debut Date"
+                                           Mask="@(new DateMask("MM/dd/yyyy"))"
+                                           Variant="Variant.Outlined" />
+                        </Content>
+                        <ContentColumn2>
+                            <MudDatePicker @bind-Date="ViewModel.LastAppearanceDate"
+                                           DateFormat="MM/dd/yyyy"
+                                           Editable="true"
+                                           Label="Last Appearance Date"
+                                           Mask="@(new DateMask("MM/dd/yyyy"))"
+                                           Variant="Variant.Outlined" />
+                        </ContentColumn2>
+                        <ContentColumn3>
+                            <MudDatePicker @bind-Date="ViewModel.FreeAgentSigningDate"
+                                           DateFormat="MM/dd/yyyy"
+                                           Editable="true"
+                                           Label="Free Agent Signing Date"
+                                           Mask="@(new DateMask("MM/dd/yyyy"))"
+                                           Variant="Variant.Outlined" />
+                        </ContentColumn3>
+                    </DivRowCol3>
+                </MudTabPanel>
+            </MudTabs>
+        </div>              
     </Content>
 </EditPage>

@@ -20,34 +20,51 @@
                         PersonStep="ViewModel.PersonStep" />
     </TimelineContent>
     <Content>
-        <DivRowCol12>
-            <Content>
-                <MudText Typo="Typo.h3">Sport Hall of Fames</MudText>
-                <PersonHallOfFameEditor HallOfFames="ViewModel.HallOfFames"
-                                        SportLeagueLevels="ViewModel.SportLeagueLevels" />
-            </Content>
-        </DivRowCol12>
-        <br />
-        <DivRowCol12>
-            <Content>
-                <MudText Typo="Typo.h3">Franchise Hall of Fames</MudText>
-                <PersonFranchiseHallOfFameEditor FranchiseHallOfFames="ViewModel.FranchiseHallOfFames"
-                                                 Sports="ViewModel.Sports" />
-            </Content>
-        </DivRowCol12>
-        <br />
-        <DivRowCol12>
-            <Content>
-                <MudText Typo="Typo.h3">College Hall of Fames</MudText>
-                <PersonCollegeHallOfFameEditor CollegeHallOfFames="ViewModel.CollegeHallOfFames" />
-            </Content>
-        </DivRowCol12>
-        <br />
-        <DivRowCol12>
-            <Content>
-                <MudText Typo="Typo.h3">International Hall of Fames</MudText>
-                <PersonInternationalHallOfFameEditor InternationalHallOfFames="ViewModel.InternationalHallOfFames" />
-            </Content>
-        </DivRowCol12>
+        <div style="margin-bottom:1%;">
+            <MudTabs ApplyEffectsToContainer="true"
+                     Centered="true"
+                     Elevation="2"
+                     PanelClass="pa-6"
+                     Rounded="true">
+                <MudTabPanel BadgeColor="MudBlazor.Color.Success"
+                             BadgeData="ViewModel.HallOfFames.Count(hof => !hof.IsDeleted)"
+                             Text="Sports">
+                    <DivRowCol12>
+                        <Content>
+                            <PersonHallOfFameEditor HallOfFames="ViewModel.HallOfFames"
+                                                    SportLeagueLevels="ViewModel.SportLeagueLevels" />
+                        </Content>
+                    </DivRowCol12>
+                </MudTabPanel>
+                <MudTabPanel BadgeColor="MudBlazor.Color.Success"
+                             BadgeData="ViewModel.FranchiseHallOfFames.Count(hof => !hof.IsDeleted)"
+                             Text="Franchises">
+                    <DivRowCol12>
+                        <Content>
+                            <PersonFranchiseHallOfFameEditor FranchiseHallOfFames="ViewModel.FranchiseHallOfFames"
+                                                             Sports="ViewModel.Sports" />
+                        </Content>
+                    </DivRowCol12>
+                </MudTabPanel>
+                <MudTabPanel BadgeColor="MudBlazor.Color.Success"
+                             BadgeData="ViewModel.CollegeHallOfFames.Count(hof => !hof.IsDeleted)"
+                             Text="College">
+                    <DivRowCol12>
+                        <Content>
+                            <PersonCollegeHallOfFameEditor CollegeHallOfFames="ViewModel.CollegeHallOfFames" />
+                        </Content>
+                    </DivRowCol12>
+                </MudTabPanel>
+                <MudTabPanel BadgeColor="MudBlazor.Color.Success"
+                             BadgeData="ViewModel.InternationalHallOfFames.Count(hof => !hof.IsDeleted)"
+                             Text="International">
+                    <DivRowCol12>
+                        <Content>
+                            <PersonInternationalHallOfFameEditor InternationalHallOfFames="ViewModel.InternationalHallOfFames" />
+                        </Content>
+                    </DivRowCol12>
+                </MudTabPanel>
+            </MudTabs>
+        </div>
     </Content>
 </EditPage>

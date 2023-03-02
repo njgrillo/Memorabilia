@@ -20,69 +20,90 @@
                         PersonStep="ViewModel.PersonStep" />
     </TimelineContent>
     <Content>      
-        <DivRowCol12>
-            <Content>
-                <MudText Typo="Typo.h3">Accomplishments</MudText>
-                <br/>
-                <PersonAccomplishmentEditor Accomplishments="ViewModel.Accomplishments"
-                                            Sports="ViewModel.Sports" />
-            </Content>
-        </DivRowCol12>
-        <br />
-        <DivRowCol12 Hidden="@(!ViewModel.DisplayAllStars)">
-            <Content>
-                <MudText Typo="Typo.h3">@ViewModel.AllStarGameLabel</MudText>
-                <PersonAllStarEditor AllStarYears="ViewModel.AllStarYears" />
-            </Content>
-        </DivRowCol12>
-        <br />
-        <DivRowCol12>
-            <Content>
-                <MudText Typo="Typo.h3">Awards</MudText>
-                <PersonAwardEditor Awards="ViewModel.Awards"
-                                   Sports="ViewModel.Sports" />
-            </Content>
-        </DivRowCol12>
-        <br />
-        <DivRowCol12>
-            <Content>
-                <MudText Typo="Typo.h3">Career Records</MudText>
-                <PersonCareerRecordEditor CareerRecords="ViewModel.CareerRecords"
-                                          Sports="ViewModel.Sports" />
-            </Content>
-        </DivRowCol12>
-        <br />
-        <DivRowCol12>
-            <Content>
-                <MudText Typo="Typo.h3">Leaders</MudText>
-                <PersonLeaderEditor Leaders="ViewModel.Leaders"
-                                    Sports="ViewModel.Sports" />
-            </Content>
-        </DivRowCol12>
-        <br />
-        <DivRowCol12>
-            <Content>
-                <MudText Typo="Typo.h3">Franchise Retired Numbers</MudText>
-                <PersonRetiredNumberEditor RetiredNumbers="ViewModel.RetiredNumbers"
-                                           Sports="ViewModel.Sports" />
-            </Content>
-        </DivRowCol12>
-        <br />
-        <DivRowCol12>
-            <Content>
-                <MudText Typo="Typo.h3">College Retired Numbers</MudText>
-                <PersonCollegeRetiredNumberEditor CollegeRetiredNumbers="ViewModel.CollegeRetiredNumbers"
-                                                  Colleges="ViewModel.Colleges"/>
-            </Content>
-        </DivRowCol12>
-        <br />
-        <DivRowCol12>
-            <Content>
-                <MudText Typo="Typo.h3">Single Season Records</MudText>
-                <br/>
-                <PersonSingleSeasonRecordEditor SingleSeasonRecords="ViewModel.SingleSeasonRecords"
+        <div style="margin-bottom:1%;">
+            <MudTabs ApplyEffectsToContainer="true"
+                     Centered="true"
+                     Elevation="2"
+                     PanelClass="pa-6"
+                     Rounded="true">
+                <MudTabPanel BadgeColor="MudBlazor.Color.Success"
+                             BadgeData="ViewModel.Accomplishments.Count(accomplishment => !accomplishment.IsDeleted)"
+                             Text="Accomplishments">
+                    <DivRowCol12>
+                        <Content>
+                            <PersonAccomplishmentEditor Accomplishments="ViewModel.Accomplishments"
+                                                        Sports="ViewModel.Sports" />
+                        </Content>
+                    </DivRowCol12>                    
+                </MudTabPanel>
+                <Condition Evaluation="ViewModel.DisplayAllStars">
+                    <Match>
+                        <MudTabPanel BadgeColor="MudBlazor.Color.Success"
+                                     BadgeData="ViewModel.AllStarYears.Count"
+                                     Text="@ViewModel.AllStarGameLabel">
+                            <DivRowCol12>
+                                <Content>
+                                    <PersonAllStarEditor AllStarYears="ViewModel.AllStarYears" />
+                                </Content>
+                            </DivRowCol12>
+                        </MudTabPanel>
+                    </Match>
+                </Condition>                
+                <MudTabPanel BadgeColor="MudBlazor.Color.Success"
+                             BadgeData="ViewModel.Awards.Count(award => !award.IsDeleted)"
+                             Text="Awards">
+                    <DivRowCol12>
+                        <Content>
+                            <PersonAwardEditor Awards="ViewModel.Awards"
+                                               Sports="ViewModel.Sports" />
+                        </Content>
+                    </DivRowCol12>
+                </MudTabPanel>
+                <MudTabPanel BadgeColor="MudBlazor.Color.Success"
+                             BadgeData="ViewModel.Leaders.Count(leader => !leader.IsDeleted)"
+                             Text="Leaders">
+                    <DivRowCol12>
+                        <Content>
+                            <PersonLeaderEditor Leaders="ViewModel.Leaders"
                                                 Sports="ViewModel.Sports" />
-            </Content>
-        </DivRowCol12>   
+                        </Content>
+                    </DivRowCol12>
+                </MudTabPanel>
+                <MudTabPanel Text="Records">
+                    <DivRowCol12>
+                        <Content>
+                            <MudText Typo="Typo.h3">Career Records</MudText>
+                            <PersonCareerRecordEditor CareerRecords="ViewModel.CareerRecords"
+                                                      Sports="ViewModel.Sports" />
+                        </Content>
+                    </DivRowCol12>
+                    <br/>
+                    <DivRowCol12>
+                        <Content>
+                            <MudText Typo="Typo.h3">Single Season Records</MudText>
+                            <PersonSingleSeasonRecordEditor SingleSeasonRecords="ViewModel.SingleSeasonRecords"
+                                                            Sports="ViewModel.Sports" />
+                        </Content>
+                    </DivRowCol12>
+                </MudTabPanel>
+                <MudTabPanel Text="Retired Numbers">
+                    <DivRowCol12>
+                        <Content>
+                            <MudText Typo="Typo.h3">College Retired Numbers</MudText>
+                            <PersonCollegeRetiredNumberEditor CollegeRetiredNumbers="ViewModel.CollegeRetiredNumbers"
+                                                              Colleges="ViewModel.Colleges" />
+                        </Content>
+                    </DivRowCol12>
+                    <br />
+                    <DivRowCol12>
+                        <Content>
+                            <MudText Typo="Typo.h3">Franchise Retired Numbers</MudText>
+                            <PersonRetiredNumberEditor RetiredNumbers="ViewModel.RetiredNumbers"
+                                                       Sports="ViewModel.Sports" />
+                        </Content>
+                    </DivRowCol12>
+                </MudTabPanel>
+            </MudTabs>
+        </div>          
     </Content>
 </EditPage>
