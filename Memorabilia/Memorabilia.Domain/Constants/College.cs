@@ -332,6 +332,7 @@ public sealed class College : DomainItemConstant
     public static readonly College Northeastern = new(216, "Northeastern", "NU");
     public static readonly College NortheasternOklahomaAMCollege = new(275, "Northeastern Oklahoma A&M College", "NEO");
     public static readonly College NortheasternState = new(324, "Northeastern State", "NSU");
+    public static readonly College NorthernArizona = new (549, "Northern Arizona", "NAU");
     public static readonly College NorthernIowa = new (421, "Northern Iowa", "UNI");
     public static readonly College NorthTexas = new (374, "North Texas", "UNT");
     public static readonly College NorthwesternOklahomaState = new(258, "Northwestern Oklahoma State", "NWOSU");
@@ -877,6 +878,7 @@ public sealed class College : DomainItemConstant
         Northeastern,
         NortheasternOklahomaAMCollege,
         NortheasternState,
+        NorthernArizona,
         NorthernIowa,
         NorthTexas,
         NorthwesternOklahomaState,

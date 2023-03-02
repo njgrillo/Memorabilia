@@ -62,11 +62,13 @@ public sealed class AccomplishmentType : DomainItemConstant
     public static readonly AccomplishmentType FirstTeamAllAFL = new (37, "First-team All-AFL");
     public static readonly AccomplishmentType FirstTeamAllAmericanBasketball = new (178, "First-team All-American (Basketball)");
     public static readonly AccomplishmentType FirstTeamAllAmericanFootball = new (41, "First-team All-American (Football)");
-    public static readonly AccomplishmentType FirstTeamAllBigEast = new (104, "First-team All-Big East");
+    public static readonly AccomplishmentType FirstTeamAllBigEastBasketball = new (104, "First-team All-Big East (Basketball)");
+    public static readonly AccomplishmentType FirstTeamAllBigEastFootball = new (183, "First-team All-Big East (Football)");
     public static readonly AccomplishmentType FirstTeamAllBigEightFootball = new (68, "First-team All-Big Eight (Football)");
     public static readonly AccomplishmentType FirstTeamAllBigSeven = new (142, "First-team All-Big 7");
-    public static readonly AccomplishmentType FirstTeamAllBigTen = new (42, "First-team All-Big Ten");
-    public static readonly AccomplishmentType FirstTeamAllBigTwelve = new (119, "First-team All-Big 12");
+    public static readonly AccomplishmentType FirstTeamAllBigTenBasketball = new (42, "First-team All-Big Ten (Basketball)");
+    public static readonly AccomplishmentType FirstTeamAllBigTenFootball = new (184, "First-team All-Big Ten (Football)");
+    public static readonly AccomplishmentType FirstTeamAllBigTwelveFootball = new (119, "First-team All-Big 12 (Football)");
     public static readonly AccomplishmentType FirstTeamAllCAA = new (164, "First-team All-CAA");
     public static readonly AccomplishmentType FirstTeamAllMAC = new (117, "First-team All-MAC");
     public static readonly AccomplishmentType FirstTeamAllMIAA = new (136, "First-team All-MIAA");
@@ -76,7 +78,7 @@ public sealed class AccomplishmentType : DomainItemConstant
     public static readonly AccomplishmentType FirstTeamAllPacificCoast = new (114, "First-team All-Pacific Coast");
     public static readonly AccomplishmentType FirstTeamAllPCC = new (122, "First-team All-PCC");
     public static readonly AccomplishmentType FirstTeamAllPro = new (25, "First-team All-Pro", "All Pro");
-    public static readonly AccomplishmentType FirstTeamAllSEC = new (86, "First-team All-SEC");
+    public static readonly AccomplishmentType FirstTeamAllSECFootball = new (86, "First-team All-SEC (Football)");
     public static readonly AccomplishmentType FirstTeamAllSouthern = new (110, "First-team All-Southern");
     public static readonly AccomplishmentType FirstTeamAllSouthland = new (161, "First-team All-Southland");
     public static readonly AccomplishmentType FirstTeamAllSWC = new (83, "First-team All-SWC");
@@ -229,9 +231,9 @@ public sealed class AccomplishmentType : DomainItemConstant
         FirstTeamAllAAWU,
         FirstTeamAllACC,
         FirstTeamAllAmericanBasketball,
-        FirstTeamAllBigEast,
+        FirstTeamAllBigEastBasketball,
         FirstTeamAllBigSeven,
-        FirstTeamAllBigTen,
+        FirstTeamAllBigTenBasketball,
         FirstTeamAllCAA,
         FirstTeamAllMAC,
         FirstTeamAllMIAA,
@@ -314,15 +316,15 @@ public sealed class AccomplishmentType : DomainItemConstant
         FirstTeamAllACC,
         FirstTeamAllAFL,
         FirstTeamAllAmericanFootball,
-        FirstTeamAllBigEast,
+        FirstTeamAllBigEastFootball,
         FirstTeamAllBigEightFootball,
-        FirstTeamAllBigTen,
-        FirstTeamAllBigTwelve,
+        FirstTeamAllBigTenFootball,
+        FirstTeamAllBigTwelveFootball,
         FirstTeamAllMAC,
         FirstTeamAllPac10Football,
         FirstTeamAllPacificCoast,
         FirstTeamAllPro,
-        FirstTeamAllSEC,
+        FirstTeamAllSECFootball,
         FirstTeamAllSouthern,
         FirstTeamAllSWC,
         FirstTeamAllWACFootball,
@@ -426,11 +428,13 @@ public sealed class AccomplishmentType : DomainItemConstant
         FirstTeamAllAFL,
         FirstTeamAllAmericanBasketball,
         FirstTeamAllAmericanFootball,
-        FirstTeamAllBigEast,
+        FirstTeamAllBigEastBasketball,
+        FirstTeamAllBigEastFootball,
         FirstTeamAllBigEightFootball,
         FirstTeamAllBigSeven,
-        FirstTeamAllBigTen,
-        FirstTeamAllBigTwelve,
+        FirstTeamAllBigTenBasketball,
+        FirstTeamAllBigTenFootball,
+        FirstTeamAllBigTwelveFootball,
         FirstTeamAllCAA,
         FirstTeamAllMAC,
         FirstTeamAllMIAA,
@@ -440,7 +444,7 @@ public sealed class AccomplishmentType : DomainItemConstant
         FirstTeamAllPacificCoast,
         FirstTeamAllPCC,
         FirstTeamAllPro,
-        FirstTeamAllSEC,
+        FirstTeamAllSECFootball,
         FirstTeamAllSouthern,
         FirstTeamAllSouthland,
         FirstTeamAllSWC,
