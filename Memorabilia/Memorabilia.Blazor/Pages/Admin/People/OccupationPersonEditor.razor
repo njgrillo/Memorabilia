@@ -22,43 +22,55 @@
     <Content>
         <div class="d-flex justify-content-between" style="width:100%">
             <div style="width:48%">
-                <DivRowCol12>
-                    <Content>
-                        <MudText Typo="Typo.h3">Occupations</MudText>
-                        <PersonOccupationSelector Occupations="ViewModel.Occupations"
-                                                  OnOccupationChange="@(() => StateHasChanged())" />
-                    </Content>
-                </DivRowCol12>
-                <br />
-                <PrettyBlazor.Condition Evaluation="@ViewModel.HasAthleteOccupation">
-                    <Match>
+                <MudTabs ApplyEffectsToContainer="true"
+                         Centered="true"
+                         Elevation="2"
+                         PanelClass="pa-6"
+                         Rounded="true">
+                    <MudTabPanel BadgeColor="MudBlazor.Color.Success"
+                                 BadgeData="ViewModel.Occupations.Count(occupation => !occupation.IsDeleted)"
+                                 Text="Occupations">
                         <DivRowCol12>
                             <Content>
-                                <MudText Typo="Typo.h3">Sports</MudText>
-                                <PersonSportEditor OnSportChange="@(() => StateHasChanged())"
-                                                   Sports="ViewModel.Sports" />
+                                <PersonOccupationSelector Occupations="ViewModel.Occupations"
+                                                          OnOccupationChange="@(() => StateHasChanged())" />
                             </Content>
                         </DivRowCol12>
-                        <br/>
-                    </Match>
-                </PrettyBlazor.Condition>
-                <PrettyBlazor.Condition Evaluation="@ViewModel.HasPositionSport">
-                    <Match>
-                        <DivRowCol12>
-                            <Content>
-                                <MudText Typo="Typo.h3">Positions</MudText>
-                                <PersonPositionEditor Positions="ViewModel.Positions"
-                                                      Sports="@(ViewModel.Sports.Select(sport => sport.Sport).ToArray())" />
-                            </Content>
-                        </DivRowCol12>
-                    </Match>
-                </PrettyBlazor.Condition>
+                    </MudTabPanel>
+                    <PrettyBlazor.Condition Evaluation="@ViewModel.HasAthleteOccupation">
+                        <Match>
+                            <MudTabPanel BadgeColor="MudBlazor.Color.Success"
+                                         BadgeData="ViewModel.Sports.Count(sport => !sport.IsDeleted)"
+                                         Text="Sports">
+                                <DivRowCol12>
+                                    <Content>
+                                        <PersonSportEditor OnSportChange="@(() => StateHasChanged())"
+                                                           Sports="ViewModel.Sports" />
+                                    </Content>
+                                </DivRowCol12>
+                            </MudTabPanel>
+                        </Match>
+                    </PrettyBlazor.Condition>
+                    <PrettyBlazor.Condition Evaluation="@ViewModel.HasPositionSport">
+                        <Match>
+                            <MudTabPanel BadgeColor="MudBlazor.Color.Success"
+                                         BadgeData="ViewModel.Positions.Count(position => !position.IsDeleted)"
+                                         Text="Positions">
+                                <DivRowCol12>
+                                    <Content>
+                                        <PersonPositionEditor Positions="ViewModel.Positions"
+                                                              Sports="@(ViewModel.Sports.Select(sport => sport.Sport).ToArray())" />
+                                    </Content>
+                                </DivRowCol12>
+                            </MudTabPanel>
+                        </Match>                        
+                    </PrettyBlazor.Condition>                    
+                </MudTabs>
             </div>
             <div style="width:48%">
                 <PersonRecentOccupationSelector OnRecentOccupationChange="OnRecentOccupationChange"
                                                 RecentOccupations="RecentPersonOccupations" />
-            </div>
+            </div>        
         </div>
-        <br/>
     </Content>
 </EditPage>
