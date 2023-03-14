@@ -6,6 +6,7 @@ public sealed class College : DomainItemConstant
     public static readonly College Alabama = new(152, "Alabama", "UA");
     public static readonly College AlabamaAM = new(414, "Alabama A&M");
     public static readonly College AlabamaBirmingham = new(450, "Alabama at Birmingham", "UAB");
+    public static readonly College AlabamaState = new(574, "Alabama State", "ASU");
     public static readonly College AlbanyState = new (524, "Albany State");
     public static readonly College AlbrightCollege = new (476, "Albright College");
     public static readonly College AlcornState = new (533, "Alcorn State", "ASU");
@@ -20,6 +21,9 @@ public sealed class College : DomainItemConstant
     public static readonly College ArizonaWesternCollege = new(288, "Arizona Western College", "AWC");
     public static readonly College Arkansas = new(52, "Arkansas", "UA");
     public static readonly College ArkansasLittleRock = new(115, "Arkansas, Little Rock", "UA Little Rock");
+    public static readonly College ArkansasPineBluff = new(555, "Arkansas, Pine Bluff", "UAPB");
+    public static readonly College ArkansasTech = new (570, "Arkansas Tech", "ATU");
+    public static readonly College Assumption = new(575, "Assumption");
     public static readonly College AthensState = new(331, "Athens State");
     public static readonly College Auburn = new(27, "Auburn", "AU");
     public static readonly College AzusaPacific = new (154, "Azusa Pacific", "APU");
@@ -33,6 +37,7 @@ public sealed class College : DomainItemConstant
     public static readonly College Biola = new(251, "Biola");
     public static readonly College BishopCollege = new (417, "Bishop College");
     public static readonly College BlinnCollege = new (273, "Blinn College");
+    public static readonly College BloomsburgPennsylvania = new (563, "Bloomsburg of Pennsylvania", "BU");
     public static readonly College Bluffton = new (543, "Bluffton");
     public static readonly College BoiseState = new(491, "Boise State", "BSU");
     public static readonly College Boston = new(526, "Boston", "BU");
@@ -46,6 +51,7 @@ public sealed class College : DomainItemConstant
     public static readonly College BrowardCollege = new(31, "Broward College");
     public static readonly College Brown = new(404, "Brown");
     public static readonly College Bucknell = new (382, "Bucknell");
+    public static readonly College Buffalo = new (566, "Buffalo", "UB");
     public static readonly College ButteCollege = new (361, "Butte College");
     public static readonly College CaguasMilitaryAcademy = new(323, "Caguas Military Academy");
     public static readonly College CalhounCommunityCollege = new(112, "Calhoun Community College");
@@ -53,6 +59,7 @@ public sealed class College : DomainItemConstant
     public static readonly College CaliforniaDavis = new(514, "California, Davis", "UCD");
     public static readonly College CaliforniaIrvine = new(48, "California, Irvine", "UCI");
     public static readonly College CaliforniaLosAngeles = new(59, "California, Los Angeles", "UCLA");
+    public static readonly College CaliforniaLutheran = new (553, "California Lutheran", "CLU");
     public static readonly College CaliforniaPolytechnicState = new(122, "California Polytechnic State");
     public static readonly College CaliforniaRiverside = new (217, "California, Riverside", "UCR");
     public static readonly College CaliforniaSanDiego = new(463, "California, San Diego", "UCSD");
@@ -107,6 +114,7 @@ public sealed class College : DomainItemConstant
     public static readonly College ColoradoState = new (369, "Colorado State");
     public static readonly College Columbia = new (358, "Columbia");
     public static readonly College ComptonCollege = new (398, "Compton College");
+    public static readonly College ConcordiaCollegeMinnesota = new (551, "Concordia College (Minnesota)");
     public static readonly College ConcordiaCollegeNewYork = new (172, "Concordia College (New York)", "CCNY");
     public static readonly College Connecticut = new(128, "Connecticut", "UConn");
     public static readonly College ConnorsStateCollege = new(279, "Connors State College");
@@ -124,6 +132,7 @@ public sealed class College : DomainItemConstant
     public static readonly College DartmouthCollege = new (377, "Dartmouth College");
     public static readonly College DavidsonCollege = new (510, "Davidson College");
     public static readonly College Dayton = new (400, "Dayton", "UD");
+    public static readonly College DelawareState = new (567, "Delaware State", "DSU");
     public static readonly College DePaul = new (490, "DePaul");
     public static readonly College DetroitMercy = new (485, "Detroit Mercy");
     public static readonly College DiabloValleyCollege = new (168, "Diablo Valley College", "DVC");
@@ -172,10 +181,12 @@ public sealed class College : DomainItemConstant
     public static readonly College GeorgiaPerimeterCollege = new(180, "Georgia Perimeter College");
     public static readonly College GeorgiaSouthern = new (520, "Georgia Southern");
     public static readonly College GeorgiaTech = new(51, "Georgia Tech");
+    public static readonly College GlendaleCommunityCollege = new(552, "Glendale Community College", "GCC");
     public static readonly College Gonzaga = new(267, "Gonzaga", "GU");
     public static readonly College GramblingState = new(41, "Grambling State", "GSU");
     public static readonly College GrandCanyon = new(117, "Grand Canyon", "GCU");
     public static readonly College GrandRapidsCommunityCollege = new (308, "Grand Rapids Community College", "GRCC");
+    public static readonly College GrandView = new (572, "Grand View");
     public static readonly College GraysHarborCollege = new (395, "Grays Harbor College");
     public static readonly College GrossmontCollege = new (198, "Grossmont College");
     public static readonly College GroveCityCollege = new (255, "Grove City College", "GCC");
@@ -192,11 +203,13 @@ public sealed class College : DomainItemConstant
     public static readonly College HighPoint = new (439, "High Point");
     public static readonly College HillCollege = new (454, "Hill College");
     public static readonly College HillsboroughCommunityCollege = new (458, "Hillsborough Community College", "HCC");
+    public static readonly College HillsdaleCollege = new (569, "Hillsdale College");
     public static readonly College HiramCollege = new (298, "Hiram College");
     public static readonly College Hofstra = new(435, "Hofstra");
     public static readonly College HolmesCommunityCollege = new(105, "Holmes Community College");
     public static readonly College HolyCrossCollege = new(342, "Holy Cross College");
     public static readonly College Houston = new(60, "Houston", "UH");
+    public static readonly College HutchinsonCommunityCollege = new(565, "Hutchinson Community College", "HCC");
     public static readonly College Idaho = new(388, "Idaho", "U of I");
     public static readonly College IdahoState = new(511, "Idaho State", "ISU");
     public static readonly College Illinois = new(82, "Illinois", "UIUC");
@@ -213,6 +226,7 @@ public sealed class College : DomainItemConstant
     public static readonly College Iona = new (499, "Iona");
     public static readonly College Iowa = new (181, "Iowa", "IU");
     public static readonly College IowaState = new (508, "Iowa State", "ISU");
+    public static readonly College ItawambaCommunityCollege = new (564, "Itawamba Community College");
     public static readonly College JacksonState = new (182, "Jackson State", "JSU");
     public static readonly College Jacksonville = new(81, "Jacksonville", "JU");
     public static readonly College JamesMadison = new (375, "James Madison", "JMU");
@@ -239,6 +253,7 @@ public sealed class College : DomainItemConstant
     public static readonly College Liberty = new(184, "Liberty", "LU");
     public static readonly College Linfield = new(183, "Linfield");
     public static readonly College Lipscomb = new(347, "Lipscomb");
+    public static readonly College LivingstoneCollege = new (558, "Livingstone College");
     public static readonly College LongBeachCityCollege = new (194, "Long Beach City College", "LBCC");
     public static readonly College LosAngelesHarborCollege = new (243, "Los Angeles Harbor College", "LAHC");
     public static readonly College LosAngelesPierceCollege = new (189, "Los Angeles Pierce College");
@@ -289,12 +304,14 @@ public sealed class College : DomainItemConstant
     public static readonly College MiraCostaCollege = new (253, "MiraCosta College");
     public static readonly College MissionCollege = new (330, "Mission College", "MC");
     public static readonly College Mississippi = new(4, "Mississippi", "Ole Miss");
+    public static readonly College MississippiCollege = new (562, "Mississippi College", "MC");
     public static readonly College MississippiGulfCoastCommunityCollege = new(329, "Mississippi Gulf Coast Community College", "MGCCC");
     public static readonly College MississippiState = new(21, "Mississippi State", "MS");
     public static readonly College MississippiValleyState = new(386, "Mississippi Valley State", "MVSU");
     public static readonly College Missouri = new(94, "Missouri", "MU");
     public static readonly College MissouriSouthernState = new(548, "Missouri Southern State", "MSSU");
     public static readonly College MissouriState = new(80, "Missouri State", "MSU");
+    public static readonly College MissouriValleyCollege = new(556, "Missouri Valley College");
     public static readonly College MoberlyAreaCommunityCollege = new (497, "Moberly Area Community College", "MACC");
     public static readonly College ModestoJuniorCollege = new (209, "Modesto Junior College", "MJC");
     public static readonly College Monmouth = new (517, "Monmouth");
@@ -329,14 +346,17 @@ public sealed class College : DomainItemConstant
     public static readonly College NorthCarolinaState = new(133, "North Carolina State", "NC State");
     public static readonly College NorthCentralTexasCollege = new (438, "North Central Texas College", "NCTC");
     public static readonly College NorthDakota = new (349, "North Dakota", "UND");
+    public static readonly College NorthDakotaState = new (557, "North Dakota State", "NDSU");
     public static readonly College Northeastern = new(216, "Northeastern", "NU");
     public static readonly College NortheasternOklahomaAMCollege = new(275, "Northeastern Oklahoma A&M College", "NEO");
     public static readonly College NortheasternState = new(324, "Northeastern State", "NSU");
     public static readonly College NorthernArizona = new (549, "Northern Arizona", "NAU");
     public static readonly College NorthernIowa = new (421, "Northern Iowa", "UNI");
+    public static readonly College NorthernMichigan = new (561, "Northern Michigan", "NMU");
     public static readonly College NorthTexas = new (374, "North Texas", "UNT");
     public static readonly College NorthwesternOklahomaState = new(258, "Northwestern Oklahoma State", "NWOSU");
     public static readonly College NorthwesternStateLouisiana = new(326, "Northwestern State Louisiana", "NSU");
+    public static readonly College NorthwestMississippiCommunityCollege = new (573, "Northwest Mississippi Community College");
     public static readonly College NorthwestMissouriState = new(195, "Northwest Missouri State");
     public static readonly College Northwestern = new(66, "Northwestern");
     public static readonly College NotreDame = new (139, "Notre Dame", "ND");
@@ -432,9 +452,11 @@ public sealed class College : DomainItemConstant
     public static readonly College SoutheasternOklahomaState = new (175, "Southeastern Oklahoma State", "SOSU");
     public static readonly College Southern = new(15, "Southern", "SU");
     public static readonly College SouthernCalifornia = new(53, "Southern California", "USC");
+    public static readonly College SouthernConnecticutState = new(559, "Southern Connecticut State", "SCSU");
     public static readonly College SouthernIllinois = new (120, "Southern Illinois", "SIU");
     public static readonly College SouthernMethodist = new (357, "Southern Methodist", "SMU");
     public static readonly College SouthernMississippi = new(3, "Southern Mississippi", "Southern Miss");
+    public static readonly College SouthernUtah = new (571, "Southern Utah", "SUU");
     public static readonly College SouthFlorida = new(325, "South Florida", "USF");
     public static readonly College Southwestern = new(466, "Southwestern", "SU");
     public static readonly College SouthwesternCollegeCalifornia = new(332, "Southwestern College (California)");
@@ -466,6 +488,7 @@ public sealed class College : DomainItemConstant
     public static readonly College TexarkanaCollege = new (225, "Texarkana College");
     public static readonly College Texas = new(22, "Texas", "UT");
     public static readonly College TexasAM = new(92, "Texas A&M", "TAMU");
+    public static readonly College TexasAMCommerce = new(554, "Texas A&M Commerce");
     public static readonly College TexasAMKingsville = new(406, "Texas A&M Kingsville");
     public static readonly College TexasArlington = new(95, "Texas at Arlington", "UTA");
     public static readonly College TexasAustin = new(158, "Texas at Austin", "UT Austin");
@@ -515,6 +538,7 @@ public sealed class College : DomainItemConstant
     public static readonly College WashingtonStLouis = new(302, "Washington in St. Louis", "WUSTL");
     public static readonly College WeatherfordCollege = new(50, "Weatherford College", "WC");
     public static readonly College WeberState = new (505, "Weber State");
+    public static readonly College WestAlabama = new (560, "West Alabama", "UWA");
     public static readonly College WestChester = new (333, "West Chester", "WCU");
     public static readonly College WesternCarolina = new (234, "Western Carolina", "WCU");
     public static readonly College WesternIllinois = new (312, "Western Illinois", "WIU");
@@ -531,11 +555,13 @@ public sealed class College : DomainItemConstant
     public static readonly College WestVirginiaWesleyanCollege = new (363, "West Virginia Wesleyan College");
     public static readonly College WheatonCollegeMassachusetts = new (301, "Wheaton College (Massachusetts)");
     public static readonly College WichitaState = new(20, "Wichita State", "WSU");
+    public static readonly College Widener = new(568, "Widener");
     public static readonly College WilliamMary = new (371, "College of William & Mary", "W&M");
     public static readonly College WinstonSalemState = new (486, "Winston-Salem State", "WSSU");
     public static readonly College WisconsinLaCrosse = new (457, "Wisconsin-La Crosse", "UWL");
     public static readonly College WisconsinMadison = new (379, "Wisconsin-Madison", "UW");
     public static readonly College WisconsinStevensPoint = new(143, "Wisconsin-Stevens Point", "UWSP");
+    public static readonly College WisconsinSuperior = new (550, "Wisconsin-Superior", "UWS");
     public static readonly College WisconsinWhitewater = new (218, "Wisconsin–Whitewater");
     public static readonly College WrightState = new (169, "Wright State");
     public static readonly College Wyoming = new (392, "Wyoming", "UW");
@@ -552,6 +578,7 @@ public sealed class College : DomainItemConstant
         Alabama,
         AlabamaAM,
         AlabamaBirmingham,
+        AlabamaState,
         AlbanyState,
         AlbrightCollege,
         AlcornState,
@@ -566,6 +593,9 @@ public sealed class College : DomainItemConstant
         ArizonaWesternCollege,
         Arkansas,
         ArkansasLittleRock,
+        ArkansasPineBluff,
+        ArkansasTech,
+        Assumption,
         AthensState,
         Auburn,
         AzusaPacific,
@@ -579,6 +609,7 @@ public sealed class College : DomainItemConstant
         Biola,
         BishopCollege,
         BlinnCollege,
+        BloomsburgPennsylvania,
         Bluffton,
         BoiseState,
         Boston,
@@ -592,6 +623,7 @@ public sealed class College : DomainItemConstant
         BrowardCollege,
         Brown,
         Bucknell,
+        Buffalo,
         ButteCollege,
         CaguasMilitaryAcademy,
         CalhounCommunityCollege,
@@ -599,6 +631,7 @@ public sealed class College : DomainItemConstant
         CaliforniaDavis,
         CaliforniaIrvine,
         CaliforniaLosAngeles,
+        CaliforniaLutheran,
         CaliforniaPolytechnicState,
         CaliforniaRiverside,
         CaliforniaSanDiego,
@@ -653,6 +686,7 @@ public sealed class College : DomainItemConstant
         ColoradoState,
         Columbia,
         ComptonCollege,
+        ConcordiaCollegeMinnesota,
         ConcordiaCollegeNewYork,
         Connecticut,
         ConnorsStateCollege,
@@ -670,6 +704,7 @@ public sealed class College : DomainItemConstant
         DartmouthCollege,
         DavidsonCollege,
         Dayton,
+        DelawareState,
         DePaul,
         DetroitMercy,
         DiabloValleyCollege,
@@ -718,10 +753,12 @@ public sealed class College : DomainItemConstant
         GeorgiaPerimeterCollege,
         GeorgiaSouthern,
         GeorgiaTech,
+        GlendaleCommunityCollege,
         Gonzaga,
         GramblingState,
         GrandCanyon,
         GrandRapidsCommunityCollege,
+        GrandView,
         GraysHarborCollege,
         GrossmontCollege,
         GroveCityCollege,
@@ -738,11 +775,13 @@ public sealed class College : DomainItemConstant
         HighPoint,
         HillCollege,
         HillsboroughCommunityCollege,
+        HillsdaleCollege,
         HiramCollege,
         Hofstra,
         HolmesCommunityCollege,
         HolyCrossCollege,
         Houston,
+        HutchinsonCommunityCollege,
         Idaho,
         IdahoState,
         Illinois,
@@ -759,6 +798,7 @@ public sealed class College : DomainItemConstant
         Iona,
         Iowa,
         IowaState,
+        ItawambaCommunityCollege,
         JacksonState,
         Jacksonville,
         JamesMadison,
@@ -785,6 +825,7 @@ public sealed class College : DomainItemConstant
         Liberty,
         Linfield,
         Lipscomb,
+        LivingstoneCollege,
         LongBeachCityCollege,
         LosAngelesHarborCollege,
         LosAngelesPierceCollege,
@@ -835,12 +876,14 @@ public sealed class College : DomainItemConstant
         MiraCostaCollege,
         MissionCollege,
         Mississippi,
+        MississippiCollege,
         MississippiGulfCoastCommunityCollege,
         MississippiState,
         MississippiValleyState,
         Missouri,
         MissouriSouthernState,
         MissouriState,
+        MissouriValleyCollege,
         MoberlyAreaCommunityCollege,
         ModestoJuniorCollege,
         Monmouth,
@@ -875,14 +918,17 @@ public sealed class College : DomainItemConstant
         NorthCarolinaState,
         NorthCentralTexasCollege,
         NorthDakota,
+        NorthDakotaState,
         Northeastern,
         NortheasternOklahomaAMCollege,
         NortheasternState,
         NorthernArizona,
         NorthernIowa,
+        NorthernMichigan,
         NorthTexas,
         NorthwesternOklahomaState,
         NorthwesternStateLouisiana,
+        NorthwestMississippiCommunityCollege,
         NorthwestMissouriState,
         Northwestern,
         NotreDame,
@@ -978,9 +1024,11 @@ public sealed class College : DomainItemConstant
         SoutheasternOklahomaState,
         Southern,
         SouthernCalifornia,
+        SouthernConnecticutState,
         SouthernIllinois,
         SouthernMethodist,
         SouthernMississippi,
+        SouthernUtah,
         SouthFlorida,
         Southwestern,
         SouthwesternCollegeCalifornia,
@@ -1012,6 +1060,7 @@ public sealed class College : DomainItemConstant
         TexarkanaCollege,
         Texas,
         TexasAM,
+        TexasAMCommerce,
         TexasAMKingsville,
         TexasArlington,
         TexasAustin,
@@ -1061,6 +1110,7 @@ public sealed class College : DomainItemConstant
         WashingtonStLouis,
         WeatherfordCollege,
         WeberState,
+        WestAlabama,
         WestChester,
         WesternCarolina,
         WesternIllinois,
@@ -1077,11 +1127,13 @@ public sealed class College : DomainItemConstant
         WestVirginiaWesleyanCollege,
         WheatonCollegeMassachusetts,
         WichitaState,
+        Widener,
         WilliamMary,
         WinstonSalemState,
         WisconsinLaCrosse,
         WisconsinMadison,
         WisconsinStevensPoint,
+        WisconsinSuperior,
         WisconsinWhitewater,
         WrightState,
         Wyoming,

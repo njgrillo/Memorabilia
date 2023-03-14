@@ -2,7 +2,8 @@
 
 namespace Memorabilia.Application.Features.Tools.Shared.HallOfFamers;
 
-public record GetHallOfFames(Sport Sport, int? InductionYear = null) : IQuery<HallOfFamesViewModel>
+public record GetHallOfFames(Sport Sport, int? InductionYear = null) 
+    : IQuery<HallOfFamesViewModel>
 {
     public class Handler : QueryHandler<GetHallOfFames, HallOfFamesViewModel>
     {
