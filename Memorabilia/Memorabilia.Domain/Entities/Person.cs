@@ -1,4 +1,5 @@
-﻿using Memorabilia.Domain.Enums;
+﻿using Memorabilia.Domain.Constants;
+using Memorabilia.Domain.Enums;
 
 namespace Memorabilia.Domain.Entities;
 
@@ -115,6 +116,14 @@ public class Person : Framework.Library.Domain.Entity.DomainEntity, IWithName
             return;
 
         Accomplishments.RemoveAll(accomplishment => ids.Contains(accomplishment.Id));
+    }
+
+    public void RemoveAllStars(params int[] ids)
+    {
+        if (ids == null || ids.Length == 0)
+            return;
+
+        AllStars.RemoveAll(allStar => ids.Contains(allStar.Id));
     }
 
     public void RemoveAwards(params int[] ids)
@@ -270,23 +279,7 @@ public class Person : Framework.Library.Domain.Entity.DomainEntity, IWithName
         LastModifiedDate = DateTime.UtcNow;
 
         SetNicknames(nicknames);
-    }
-
-    public void SetAllStars(int[] years)
-    {
-        if (!years.Any())
-        {
-            AllStars = new();
-            return;
-        }
-
-        var existingYears = AllStars.Select(allStar => allStar.Year);
-
-        foreach (var year in years.Where(year => !existingYears.Contains(year)))
-        {
-            AllStars.Add(new AllStar(Id, year));
-        }
-    }
+    }    
 
     public void SetAccomplishments(int accomplishmentId, int accomplishmentTypeId, DateTime? date, int? year)
     {
@@ -299,6 +292,19 @@ public class Person : Framework.Library.Domain.Entity.DomainEntity, IWithName
         var accomplishment = Accomplishments.Single(accomplishment => accomplishment.Id == accomplishmentId);
 
         accomplishment.Set(accomplishmentTypeId, date, year);
+    }
+
+    public void SetAllStars(int allStarId, int sportId, int year)
+    {
+        if (allStarId == 0)
+        {
+            AllStars.Add(new AllStar(Id, sportId, year));
+            return;
+        }
+
+        var allStar = AllStars.Single(item => item.Id == allStarId);
+
+        allStar.Set(sportId, year);
     }
 
     public void SetAward(int awardId, int awardTypeId, int year)
@@ -511,17 +517,17 @@ public class Person : Framework.Library.Domain.Entity.DomainEntity, IWithName
         SingleSeasonRecords.Single(record => record.Id == singleSeasonRecordId).Set(recordTypeId, year, record);
     }
 
-    public void SetSport(int sportId)
+    public void SetSport(int sportId, bool isPrimary)
     {
         var sport = Sports.SingleOrDefault(sport => sport.SportId == sportId);
 
         if (sport == null)
         {
-            Sports.Add(new PersonSport(Id, sportId));
+            Sports.Add(new PersonSport(Id, sportId, isPrimary));
             return;
         }
 
-        sport.Set(sportId);
+        sport.Set(sportId, isPrimary);
     }
 
     public void SetTeam(int id, int teamId, int? beginYear, int? endYear, int teamRoleTypeId)

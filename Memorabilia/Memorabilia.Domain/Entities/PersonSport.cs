@@ -4,11 +4,14 @@ public class PersonSport : Framework.Library.Domain.Entity.DomainEntity
 {
     public PersonSport() { }
 
-    public PersonSport(int personId, int sportId)
+    public PersonSport(int personId, int sportId, bool isPrimary)
     {
         PersonId = personId;
         SportId = sportId;
+        IsPrimary = isPrimary;
     }
+
+    public bool IsPrimary { get; private set; }
 
     public int PersonId { get; private set; }
 
@@ -19,8 +22,9 @@ public class PersonSport : Framework.Library.Domain.Entity.DomainEntity
     public override string ToString()
         => $"{Sport?.Name}";
 
-    public void Set(int sportId)
+    public void Set(int sportId, bool isPrimary)
     {
         SportId = sportId;
+        IsPrimary = isPrimary;
     }    
 }

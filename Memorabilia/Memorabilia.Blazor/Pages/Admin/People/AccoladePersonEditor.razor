@@ -39,11 +39,12 @@
                 <Condition Evaluation="ViewModel.DisplayAllStars">
                     <Match>
                         <MudTabPanel BadgeColor="MudBlazor.Color.Success"
-                                     BadgeData="ViewModel.AllStarYears.Count"
+                                     BadgeData="ViewModel.AllStars.Count"
                                      Text="@ViewModel.AllStarGameLabel">
                             <DivRowCol12>
                                 <Content>
-                                    <PersonAllStarEditor AllStarYears="ViewModel.AllStarYears" />
+                                    <PersonAllStarEditor AllStars="ViewModel.AllStars"
+                                                         Sports="ViewModel.Sports" />
                                 </Content>
                             </DivRowCol12>
                         </MudTabPanel>

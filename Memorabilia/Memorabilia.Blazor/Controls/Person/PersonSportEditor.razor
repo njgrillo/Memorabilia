@@ -2,7 +2,14 @@
     <Content>
         <SportAutoComplete SelectedValue="_viewModel.Sport"
                            SelectionChanged="(p) => _viewModel.Sport = p" />
-    </Content>
+    </Content>    
+    <ContentColumn2>
+        <MudSwitch Checked="_viewModel.IsPrimary"
+                   CheckedChanged="(p) => _viewModel.IsPrimary = p"
+                   Color="MudBlazor.Color.Success"
+                   Label="Is Primary?"
+                   T="bool" />
+    </ContentColumn2>
 </DivRowCol6>
 <DivLeftAlign>
     <Content>
@@ -18,15 +25,17 @@
                   Striped="true">
             <HeaderContent>
                 <MudTh>Sport</MudTh>
+                <MudTh>Type</MudTh>
                 <MudTh></MudTh>
             </HeaderContent>
             <RowTemplate>
                 <MudTd DataLabel="Sport">@context.SportName</MudTd>
+                <MudTd DataLabel="Type">@context.TypeName</MudTd>
                 <MudTd DataLabel="">
                     <MudTooltip Text="Delete">
                         <MudFab Color="MudBlazor.Color.Secondary"
                                 Icon="@Icons.Outlined.DeleteOutline"
-                                OnClick="@(_ => context.IsDeleted = true)" />
+                                OnClick="@(_ => Delete(context))" />
                     </MudTooltip>  
                 </MudTd>
             </RowTemplate>

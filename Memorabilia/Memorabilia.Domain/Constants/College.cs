@@ -180,6 +180,7 @@ public sealed class College : DomainItemConstant
     public static readonly College Georgia = new(307, "Georgia", "UGA");
     public static readonly College GeorgiaPerimeterCollege = new(180, "Georgia Perimeter College");
     public static readonly College GeorgiaSouthern = new (520, "Georgia Southern");
+    public static readonly College GeorgiaState = new (576, "Georgia State", "GSU");
     public static readonly College GeorgiaTech = new(51, "Georgia Tech");
     public static readonly College GlendaleCommunityCollege = new(552, "Glendale Community College", "GCC");
     public static readonly College Gonzaga = new(267, "Gonzaga", "GU");
@@ -752,6 +753,7 @@ public sealed class College : DomainItemConstant
         Georgia,
         GeorgiaPerimeterCollege,
         GeorgiaSouthern,
+        GeorgiaState,
         GeorgiaTech,
         GlendaleCommunityCollege,
         Gonzaga,

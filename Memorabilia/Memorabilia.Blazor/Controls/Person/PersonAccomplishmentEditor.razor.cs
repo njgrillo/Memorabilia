@@ -40,7 +40,7 @@ public partial class PersonAccomplishmentEditor
         }
         else
         {
-            foreach (var year in _years.ToIntArray())
+            foreach (var year in years)
             {
                 Accomplishments.Add(new SavePersonAccomplishmentViewModel() { AccomplishmentType = _viewModel.AccomplishmentType, Year = year });
             }

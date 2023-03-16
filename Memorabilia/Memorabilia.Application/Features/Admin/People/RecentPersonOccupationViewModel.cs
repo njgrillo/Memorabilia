@@ -8,7 +8,7 @@ public class RecentPersonOccupationViewModel : RecentPersonEntityViewModel
 
     public RecentPersonOccupationViewModel(PersonOccupation personOccupation)
 	{
-        DisplayText = $"{Domain.Constants.Occupation.Find(personOccupation.OccupationId)?.Name} - {(Domain.Constants.OccupationType.Find(personOccupation.OccupationTypeId)?.Name)}";
+        DisplayText = $"{Domain.Constants.Occupation.Find(personOccupation.OccupationId)?.Name} - {Domain.Constants.OccupationType.Find(personOccupation.OccupationTypeId)?.Name}";
         Id = personOccupation.OccupationId;
         OccupationTypeId = personOccupation.OccupationTypeId;
     }    

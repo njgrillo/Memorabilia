@@ -17,9 +17,8 @@ public class SavePersonAccolades
         {
             var person = await _personRepository.Get(command.PersonId);
 
-            person.SetAllStars(command.AllStarYears);
-
             UpdateAccomplishments(command, person);
+            UpdateAllStars(command, person);
             UpdateAwards(command, person);
             UpdateCareerRecords(command, person);
             UpdateCollegeRetiredNumbers(command, person);
@@ -40,6 +39,18 @@ public class SavePersonAccolades
                                           accomplishment.AccomplishmentType.Id, 
                                           accomplishment.Date, 
                                           accomplishment.Year);
+            }
+        }
+
+        private static void UpdateAllStars(Command command, Person person)
+        {
+            person.RemoveAllStars(command.DeletedAllStars);
+
+            foreach (var allStar in command.AllStars)
+            {
+                person.SetAllStars(allStar.Id,
+                                   allStar.Sport.Id,
+                                   allStar.Year);
             }
         }
 
@@ -119,7 +130,10 @@ public class SavePersonAccolades
                          .Where(accomplishment => !accomplishment.IsDeleted)
                          .ToArray();
 
-        public int[] AllStarYears => _viewModel.AllStarYears.ToArray();
+        public SavePersonAllStarViewModel[] AllStars
+            => _viewModel.AllStars
+                         .Where(allStar => !allStar.IsDeleted)
+                         .ToArray();
 
         public SavePersonAwardViewModel[] Awards 
             => _viewModel.Awards
@@ -140,6 +154,12 @@ public class SavePersonAccolades
             => _viewModel.Accomplishments
                          .Where(accomplishment => accomplishment.IsDeleted)
                          .Select(accomplishment => accomplishment.Id)
+                         .ToArray();
+
+        public int[] DeletedAllStars
+            => _viewModel.AllStars
+                         .Where(allStar => allStar.IsDeleted)
+                         .Select(allStar => allStar.Id)
                          .ToArray();
 
         public int[] DeletedAwardIds 

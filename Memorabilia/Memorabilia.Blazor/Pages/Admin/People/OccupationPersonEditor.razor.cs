@@ -1,6 +1,7 @@
 ﻿namespace Memorabilia.Blazor.Pages.Admin.People;
 
-public partial class OccupationPersonEditor : EditPersonItem<SavePersonOccupationsViewModel, PersonOccupationViewModel>
+public partial class OccupationPersonEditor 
+    : EditPersonItem<SavePersonOccupationsViewModel, PersonOccupationViewModel>
 {
     protected RecentPersonOccupationsViewModel[] RecentPersonOccupations { get; private set; }
         = Array.Empty<RecentPersonOccupationsViewModel>();
@@ -26,7 +27,7 @@ public partial class OccupationPersonEditor : EditPersonItem<SavePersonOccupatio
                                               .Select(position => new SavePersonPositionViewModel(new Domain.Entities.PersonPosition(ViewModel.PersonId, position.Id, position.PositionType)))
                                               .ToList();
         ViewModel.Sports = recentOccupation.Sports
-                                           .Select(sport => new SavePersonSportViewModel(new Domain.Entities.PersonSport(ViewModel.PersonId, sport.Id)))
+                                           .Select(sport => new SavePersonSportViewModel(new Domain.Entities.PersonSport(ViewModel.PersonId, sport.Id, sport.IsPrimary)))
                                            .ToList();
     }
 }

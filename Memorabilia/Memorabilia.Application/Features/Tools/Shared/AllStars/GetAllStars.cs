@@ -15,7 +15,7 @@ public record GetAllStars(int Year, Sport Sport) : IQuery<AllStarsViewModel>
 
         protected override async Task<AllStarsViewModel> Handle(GetAllStars query)
         {
-            return new AllStarsViewModel(await _allStarRepository.GetAll(query.Year), query.Sport)
+            return new AllStarsViewModel(await _allStarRepository.GetAll(query.Year, query.Sport), query.Sport)
             {
                 Year = query.Year
             };

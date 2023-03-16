@@ -10,6 +10,11 @@ public partial class PersonSportEditor : ComponentBase
 
     private SavePersonSportViewModel _viewModel = new();
 
+    protected override void OnInitialized()
+    {
+        _viewModel.IsPrimary = Sports.Count == 0;
+    }
+
     private async void Add()
     {
         if (_viewModel.Sport == null)
@@ -18,7 +23,15 @@ public partial class PersonSportEditor : ComponentBase
         Sports.Add(_viewModel);
 
         _viewModel = new SavePersonSportViewModel();
+        _viewModel.IsPrimary = false;
 
         await OnSportChange.InvokeAsync();
+    }
+
+    private void Delete(SavePersonSportViewModel sport)
+    {
+        sport.IsDeleted = true;
+
+        _viewModel.IsPrimary = Sports.All(sport => sport.IsDeleted);
     }
 }

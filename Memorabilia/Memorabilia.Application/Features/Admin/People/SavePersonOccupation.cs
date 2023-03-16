@@ -50,7 +50,7 @@ public class SavePersonOccupation
 
             foreach (var sport in command.Sports.Where(sport => !sport.IsDeleted))
             {
-                person.SetSport(sport.Sport.Id);
+                person.SetSport(sport.Sport.Id, sport.IsPrimary);
             }
         }
     }

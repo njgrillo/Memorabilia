@@ -8,9 +8,9 @@ public class AllStarRepository : DomainRepository<AllStar>, IAllStarRepository
 
     private IQueryable<AllStar> AllStars => Items.Include(allStar => allStar.Person);
 
-    public async Task<IEnumerable<AllStar>> GetAll(int year)
+    public async Task<IEnumerable<AllStar>> GetAll(int year, Domain.Constants.Sport sport = null)
     {
-        return (await AllStars.Where(allStar => allStar.Year == year)
+        return (await AllStars.Where(allStar => allStar.Year == year && (sport == null || allStar.SportId == sport.Id))
                               .AsNoTracking()
                               .ToListAsync())                              
                      .OrderByDescending(allStar => allStar.Person.DisplayName); 

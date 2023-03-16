@@ -5,6 +5,14 @@
                    SelectedText="@_years"
                    SelectedTextChanged="@((p) => _years = p)" />
     </Content>
+    <ContentColumn2>
+        <PrettyBlazor.Condition Evaluation="@DisplaySports">
+            <Match>
+                <SportAutoComplete SelectedValue="_viewModel.Sport"
+                                   SelectionChanged="(p) => _viewModel.Sport = p" />
+            </Match>
+        </PrettyBlazor.Condition>
+    </ContentColumn2>
 </DivRowCol3>
 <DivLeftAlign>
     <Content>
@@ -16,19 +24,29 @@
          <MudTable Bordered="false"
                    Dense="false" 
                    Hover="true"
-                   Items="@AllStarYears"    
+                   Items="@AllStars"    
                    Striped="true">
             <HeaderContent>
                 <MudTh>Year</MudTh>
+                <PrettyBlazor.Condition Evaluation="@DisplaySports">
+                    <Match>
+                        <MudTh>Sport</MudTh>
+                    </Match>
+                </PrettyBlazor.Condition>
                 <MudTh></MudTh>
             </HeaderContent>
             <RowTemplate>
-                <MudTd DataLabel="Year">@context</MudTd>
+                <MudTd DataLabel="Year">@context.Year</MudTd>
+                <PrettyBlazor.Condition Evaluation="@DisplaySports">
+                    <Match>
+                        <MudTd DataLabel="Sport">@context.SportName</MudTd>
+                    </Match>
+                </PrettyBlazor.Condition>
                 <MudTd DataLabel="">
                     <MudTooltip Text="Delete">
                         <MudFab Color="MudBlazor.Color.Secondary"
                                 Icon="@Icons.Outlined.DeleteOutline"
-                                OnClick="@(_ => AllStarYears.Remove(context))" />
+                                OnClick="@(_ => AllStars.Remove(context))" />
                     </MudTooltip>  
                 </MudTd>
             </RowTemplate>

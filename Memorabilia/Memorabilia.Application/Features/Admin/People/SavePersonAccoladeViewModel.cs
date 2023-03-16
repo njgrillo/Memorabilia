@@ -13,10 +13,10 @@ public class SavePersonAccoladeViewModel : SaveViewModel
                                    .Select(accomplishment => new SavePersonAccomplishmentViewModel(accomplishment))
                                    .OrderBy(accomplishment => accomplishment.AccomplishmentTypeName)
                                    .ToList();
-        AllStarYears = viewModel.AllStars
-                                .Select(allStar => allStar.Year)
-                                .OrderBy(year => year)
-                                .ToList();
+        AllStars = viewModel.AllStars
+                            .Select(allStar => new SavePersonAllStarViewModel(allStar))
+                            .OrderBy(allStar => allStar.Year)
+                            .ToList();
         Awards = viewModel.Awards
                           .Select(award => new SavePersonAwardViewModel(award))
                           .OrderBy(award => award.AwardTypeName)
@@ -69,7 +69,7 @@ public class SavePersonAccoladeViewModel : SaveViewModel
         }
     }
 
-    public List<int> AllStarYears { get; set; } = new();
+    public List<SavePersonAllStarViewModel> AllStars { get; set; } = new();
 
     public List<SavePersonAwardViewModel> Awards { get; set; } = new();
 
@@ -85,7 +85,7 @@ public class SavePersonAccoladeViewModel : SaveViewModel
 
     public bool DisplayAllStars => Sport.HasAllStarGames(Sports) || Sport.HasProBowlGames(Sports);
 
-    public override EditModeType EditModeType => AllStarYears.Any() ? EditModeType.Update : EditModeType.Add;
+    public override EditModeType EditModeType => AllStars.Any() ? EditModeType.Update : EditModeType.Add;
 
     public string ImageFileName => Domain.Constants.ImageFileName.Athletes;
 

@@ -12,12 +12,12 @@ public class AllStarCacheRepository : DomainCacheRepository<AllStar>, IAllStarRe
         _allStarRepository = allStarRepository;
     }
 
-    public Task<IEnumerable<AllStar>> GetAll(int year)
+    public Task<IEnumerable<AllStar>> GetAll(int year, Domain.Constants.Sport sport = null)
     {
-        return GetAll($"AllStar_GetAll_{year}", entry =>
+        return GetAll($"AllStar_GetAll_{year}_{sport?.Id ?? 0}", entry =>
         {
             entry.SetAbsoluteExpiration(TimeSpan.FromDays(1));
-            return _allStarRepository.GetAll(year);
+            return _allStarRepository.GetAll(year, sport);
         });
     }
 }
