@@ -1,4 +1,5 @@
 ﻿using Memorabilia.Domain.Entities;
+using Memorabilia.Domain.Extensions;
 
 namespace Memorabilia.Repository.Implementations;
 
@@ -8,10 +9,10 @@ public class PersonCollegeRepository : DomainRepository<PersonCollege>, IPersonC
 
     private IQueryable<PersonCollege> Colleges => Items.Include(record => record.Person);
 
-    public async Task<IEnumerable<PersonCollege>> GetAll(int? collegeId = null, int? sportLeagueLevelId = null)
+    public async Task<IEnumerable<PersonCollege>> GetAll(int? collegeId = null, int? sportId = null)
     {
         return (await Colleges.Where(college => (collegeId == null || college.CollegeId == collegeId)
-                                             && (sportLeagueLevelId == null || college.Person.Teams.Select(team => team.Team.Franchise.SportLeagueLevelId).Contains(sportLeagueLevelId.Value)))
+                                             && (sportId == null || college.Person.Sports.Single(sport => sport.IsPrimary).SportId == sportId))
                               .AsNoTracking()
                               .ToListAsync())
                 .OrderByDescending(college => college.Person.DisplayName);

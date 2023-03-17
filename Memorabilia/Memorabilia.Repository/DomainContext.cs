@@ -4,6 +4,8 @@ namespace Memorabilia.Repository;
 
 public class DomainContext : DbContext, IDomainContext
 {
+    public DbSet<College> College { get; set; }
+
     public DbSet<Person> Person { get; set; }
 
     public DomainContext(DbContextOptions<DomainContext> options) : base(options) { }

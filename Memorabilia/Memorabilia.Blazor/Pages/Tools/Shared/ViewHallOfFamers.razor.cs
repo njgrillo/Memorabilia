@@ -8,15 +8,18 @@ public partial class ViewHallOfFamers : ViewSportTools<HallOfFameViewModel>
     [Parameter]
     public bool DisplayVotePercentage { get; set; }
 
+    [Parameter]
+    public SportLeagueLevel SportLeagueLevel { get; set; }
+
     private HallOfFamesViewModel _viewModel = new();
 
     protected override async Task OnInitializedAsync()
     {
-        _viewModel = await QueryRouter.Send(new GetHallOfFames(Sport));
+        _viewModel = await QueryRouter.Send(new GetHallOfFames(SportLeagueLevel));
     }
 
     private async Task OnInputChange(int inductionYear)
     {
-        _viewModel = await QueryRouter.Send(new GetHallOfFames(Sport, inductionYear > 0 ? inductionYear : null));
+        _viewModel = await QueryRouter.Send(new GetHallOfFames(SportLeagueLevel, inductionYear > 0 ? inductionYear : null));
     }
 }
