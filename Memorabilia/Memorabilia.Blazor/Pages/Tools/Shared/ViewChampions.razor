@@ -11,7 +11,7 @@
                           Items="@_viewModel.Champions.ToList()"
                           Striped="true">
                     <ToolBarContent>
-                        <MudText Typo="Typo.h6">World Series Champs</MudText>
+                        <MudText Typo="Typo.h6">@ChampionType.Name</MudText>
                         <MudSpacer />
                         <MudTextField @bind-Value="Search"
                                       Adornment="Adornment.Start"

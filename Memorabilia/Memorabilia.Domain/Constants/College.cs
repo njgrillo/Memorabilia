@@ -16,12 +16,14 @@ public sealed class College : DomainItemConstant
     public static readonly College AmericanRiverCollege = new (471, "American River College", "ARC");
     public static readonly College AngelinaCollege = new (177, "Angelina College");
     public static readonly College AntelopeValleyCollege = new(170, "Antelope Valley College", "AVC");
+    public static readonly College AppalachianState = new (577, "Appalachian State", "ASU");
     public static readonly College Arizona = new(78, "Arizona", "UA");
     public static readonly College ArizonaState = new(12, "Arizona State", "ASU");
     public static readonly College ArizonaWesternCollege = new(288, "Arizona Western College", "AWC");
     public static readonly College Arkansas = new(52, "Arkansas", "UA");
     public static readonly College ArkansasLittleRock = new(115, "Arkansas, Little Rock", "UA Little Rock");
     public static readonly College ArkansasPineBluff = new(555, "Arkansas, Pine Bluff", "UAPB");
+    public static readonly College ArkansasState = new (578, "Arkansas State", "ASU");
     public static readonly College ArkansasTech = new (570, "Arkansas Tech", "ATU");
     public static readonly College Assumption = new(575, "Assumption");
     public static readonly College AthensState = new(331, "Athens State");
@@ -299,6 +301,7 @@ public sealed class College : DomainItemConstant
     public static readonly College MichiganState = new(42, "Michigan State", "MSU");
     public static readonly College MiddleGeorgiaState = new(208, "Middle Georgia State");
     public static readonly College MiddleTennesseeState = new(280, "Middle Tennessee State", "MTSU");
+    public static readonly College MidwesternState = new (579, "Midwestern State");
     public static readonly College Millikin = new(399, "Millikin");
     public static readonly College Minnesota = new(146, "Minnesota", "UMN");
     public static readonly College MinnesotaStateMankato = new(523, "Minnesota State, Mankato", "MSU");
@@ -423,6 +426,7 @@ public sealed class College : DomainItemConstant
     public static readonly College SanFrancisco = new (142, "San Francisco", "USF");
     public static readonly College SanFranciscoState = new (300, "San Francisco State", "SFSU");
     public static readonly College SanJacintoCollege = new (159, "San Jacinto College");
+    public static readonly College SanJoaquinDeltaCollege = new (580, "San Joaquin Delta College");
     public static readonly College SanJoseCityCollege = new (119, "San Jose City College", "SJCC");
     public static readonly College SanJoseStateUniversity = new(58, "San Jose State", "SJSU");
     public static readonly College SantaAnaCollege = new (328, "Santa Ana College");
@@ -589,12 +593,14 @@ public sealed class College : DomainItemConstant
         AmericanRiverCollege,
         AngelinaCollege,
         AntelopeValleyCollege,
+        AppalachianState,
         Arizona,
         ArizonaState,
         ArizonaWesternCollege,
         Arkansas,
         ArkansasLittleRock,
         ArkansasPineBluff,
+        ArkansasState,
         ArkansasTech,
         Assumption,
         AthensState,
@@ -872,6 +878,7 @@ public sealed class College : DomainItemConstant
         Michigan,
         MiddleGeorgiaState,
         MiddleTennesseeState,
+        MidwesternState,
         Millikin,
         Minnesota,
         MinnesotaStateMankato,
@@ -996,6 +1003,7 @@ public sealed class College : DomainItemConstant
         SanFrancisco,
         SanFranciscoState,
         SanJacintoCollege,
+        SanJoaquinDeltaCollege,
         SanJoseCityCollege,
         SanJoseStateUniversity,
         SantaAnaCollege,

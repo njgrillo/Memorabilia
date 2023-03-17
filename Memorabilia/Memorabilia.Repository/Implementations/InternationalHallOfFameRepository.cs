@@ -1,4 +1,5 @@
-﻿using Memorabilia.Domain.Entities;
+﻿using Memorabilia.Domain.Constants;
+using Memorabilia.Domain.Entities;
 
 namespace Memorabilia.Repository.Implementations;
 
@@ -8,10 +9,10 @@ public class InternationalHallOfFameRepository : DomainRepository<InternationalH
 
     private IQueryable<InternationalHallOfFame> InternationalHallOfFames => Items.Include(hallOfFame => hallOfFame.Person);
 
-    public async Task<IEnumerable<InternationalHallOfFame>> GetAll(int? internationalHallOfFameTypeId = null, int? sportLeagueLevelId = null)
+    public async Task<IEnumerable<InternationalHallOfFame>> GetAll(int? internationalHallOfFameTypeId = null, int? sportId = null)
     {
         return (await InternationalHallOfFames.Where(hallOfFame => (internationalHallOfFameTypeId == null || hallOfFame.InternationalHallOfFameTypeId == internationalHallOfFameTypeId)
-                                                                && (sportLeagueLevelId == null || hallOfFame.Person.Teams.Select(team => team.Team.Franchise.SportLeagueLevelId).Contains(sportLeagueLevelId.Value)))
+                                                                && (sportId == null || hallOfFame.Person.Sports.Single(sport => sport.IsPrimary).SportId == sportId))
                                               .AsNoTracking()
                                               .ToListAsync())
                   .OrderByDescending(hallOfFame => hallOfFame.Person.DisplayName);
