@@ -18,3 +18,4 @@ public class InternationalHallOfFameRepository : DomainRepository<InternationalH
                   .OrderByDescending(hallOfFame => hallOfFame.Person.DisplayName);
     }
 }
+
