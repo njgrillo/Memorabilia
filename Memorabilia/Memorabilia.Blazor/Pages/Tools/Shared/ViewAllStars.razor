@@ -9,6 +9,21 @@
                               SelectionChanged="(p) => OnInputChange(p)" />
             </Content>
         </DivRowCol3>
+        <PrettyBlazor.Condition Evaluation="_viewModel.IsDoubleHeaderAllStarGame">
+            <Match>
+                <DivRowCol12>
+                    <Content>
+                        <p>
+                            Between 1959 and 1962, the Baseball All Star Exhibition consisted of 2 All Star Games featured as a doubleheader.
+                        </p>
+                        <p>
+                            As a result, players could potentially be credited with 2 All Star Games per year during this period.
+                        </p>
+                        <br />
+                    </Content>
+                </DivRowCol12>
+            </Match>
+        </PrettyBlazor.Condition>        
         <DivRowCol6 Hidden="@(_viewModel.Year == 0)">
             <Content>
                 <MudTable Bordered="false"
@@ -31,6 +46,11 @@
                         <MudTh></MudTh>
                         <MudTh>Person</MudTh>
                         <MudTh>Year</MudTh>
+                        <PrettyBlazor.Condition Evaluation="_viewModel.IsDoubleHeaderAllStarGame">
+                            <Match>
+                                <MudTh>Number of Games</MudTh>
+                            </Match>
+                        </PrettyBlazor.Condition>                        
                     </HeaderContent>
                     <RowTemplate>
                         <MudTd DataLabel="">
@@ -48,6 +68,11 @@
                             <MudLink Href="@context.ProfileLink">@context.PersonName</MudLink>
                         </MudTd>
                         <MudTd DataLabel="Year">@context.Year</MudTd>
+                        <PrettyBlazor.Condition Evaluation="_viewModel.IsDoubleHeaderAllStarGame">
+                            <Match>
+                                <MudTd DataLabel="Number of Games">@context.NumberOfGames</MudTd>
+                            </Match>
+                        </PrettyBlazor.Condition>
                     </RowTemplate>
                     <PagerContent>
                         <MudTablePager />

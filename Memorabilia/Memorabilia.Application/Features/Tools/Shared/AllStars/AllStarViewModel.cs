@@ -12,6 +12,8 @@ public class AllStarViewModel : PersonSportToolViewModel
         Sport = sport;
     }
 
+    public int NumberOfGames { get; set; } = 1;
+
     public override int PersonId => _allstar.PersonId;
 
     public override string PersonImageFileName => _allstar.Person.ImageFileName;

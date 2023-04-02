@@ -4,7 +4,7 @@ namespace Memorabilia.Application.Features.Tools.Shared.AllStars;
 
 public class AllStarsViewModel
 {
-    private Domain.Constants.Sport _sport;
+    private readonly Domain.Constants.Sport _sport;
 
     public AllStarsViewModel() { }
 
@@ -17,6 +17,11 @@ public class AllStarsViewModel
     }    
 
     public IEnumerable<AllStarViewModel> AllStars { get; set; } = Enumerable.Empty<AllStarViewModel>();
+
+    public bool IsDoubleHeaderAllStarGame
+        => _sport == Domain.Constants.Sport.Baseball &&
+           Year >= 1959 &&
+           Year <= 1962;
 
     public string ResultsTitle 
         => $"{Year} {(_sport == Domain.Constants.Sport.Football ? "Pro Bowlers" : "All Stars")}";
