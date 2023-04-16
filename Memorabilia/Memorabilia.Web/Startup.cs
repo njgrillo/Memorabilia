@@ -122,7 +122,14 @@ public class Startup
         services.AddTransient<IRetiredNumberRepository, RetiredNumberCacheRepository>();
 
         services.AddTransient<SingleSeasonRecordRepository>();
-        services.AddTransient<ISingleSeasonRecordRepository, SingleSeasonRecordCacheRepository>();            
+        services.AddTransient<ISingleSeasonRecordRepository, SingleSeasonRecordCacheRepository>();
+
+        services
+            .AddServerSideBlazor()
+            .AddHubOptions(opt =>
+            {
+                opt.DisableImplicitFromServicesParameters = true;
+            });
 
         services.AddMudServices(config =>
         {

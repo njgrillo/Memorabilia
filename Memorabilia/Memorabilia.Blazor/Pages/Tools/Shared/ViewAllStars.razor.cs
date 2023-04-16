@@ -2,6 +2,15 @@
 
 public partial class ViewAllStars : ViewSportTools<AllStarViewModel>
 {
+    public int BeginYear
+        => Sport.Name switch
+        {
+            "Baseball" => 1933,
+            "Basketball" => 1951,
+            "Football" => 1951,
+            _ => 1950
+        };
+
     private AllStarsViewModel _viewModel = new();
 
     private async Task OnInputChange(int year)

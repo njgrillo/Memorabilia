@@ -4,7 +4,7 @@
     <Content>
         <DivRowCol3>
             <Content>
-                <YearDropDown MinYear="1933" 
+                <YearDropDown MinYear="@BeginYear"
                               SelectedValue="_viewModel.Year"
                               SelectionChanged="(p) => OnInputChange(p)" />
             </Content>
@@ -23,7 +23,19 @@
                     </Content>
                 </DivRowCol12>
             </Match>
-        </PrettyBlazor.Condition>        
+        </PrettyBlazor.Condition>    
+        <PrettyBlazor.Condition Evaluation="_viewModel.DisplayCanceledMessage">
+            <Match>
+                <DivRowCol12>
+                    <Content>
+                        <p>
+                            2020 All Star Game canceled due to Covid-19.
+                        </p>
+                        <br />
+                    </Content>
+                </DivRowCol12>
+            </Match>
+        </PrettyBlazor.Condition>
         <DivRowCol6 Hidden="@(_viewModel.Year == 0)">
             <Content>
                 <MudTable Bordered="false"

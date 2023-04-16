@@ -18,6 +18,10 @@ public class AllStarsViewModel
 
     public IEnumerable<AllStarViewModel> AllStars { get; set; } = Enumerable.Empty<AllStarViewModel>();
 
+    public bool DisplayCanceledMessage
+        => _sport == Domain.Constants.Sport.Baseball &&
+           Year == 2020;
+
     public bool IsDoubleHeaderAllStarGame
         => _sport == Domain.Constants.Sport.Baseball &&
            Year >= 1959 &&

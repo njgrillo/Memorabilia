@@ -40,6 +40,7 @@ public sealed class FranchiseHallOfFameType : DomainItemConstant
     public static readonly FranchiseHallOfFameType PhiladelphiaEaglesHallOfFame = new(33, "Philadelphia Eagles Hall of Fame", Franchise.PhiladelphiaEagles);
     public static readonly FranchiseHallOfFameType PhilliesHallOfFame = new(15, "Phillies Hall of Fame", Franchise.PhiladelphiaPhillies);
     public static readonly FranchiseHallOfFameType PhoenixSunsRingOfHonor = new(57, "Phoenix Suns Ring of Honor", Franchise.PhoenixSuns);
+    public static readonly FranchiseHallOfFameType PittsburghPiratesHallOfFame = new(58, "Pittsburgh Pirates Hall of Fame", Franchise.PittsburghPirates);
     public static readonly FranchiseHallOfFameType PittsburghSteelersHallOfHonor = new(37, "Pittsburgh Steelers Hall of Honor", Franchise.PittsburghSteelers);
     public static readonly FranchiseHallOfFameType RedSoxHallOfFame = new(16, "Red Sox Hall of Fame", Franchise.BostonRedSox);
     public static readonly FranchiseHallOfFameType RedsHallOfFame = new(17, "Reds Hall of Fame", Franchise.CincinnatiReds);
@@ -76,6 +77,7 @@ public sealed class FranchiseHallOfFameType : DomainItemConstant
         NationalsHallOfFame,
         OriolesHallOfFame,
         PhilliesHallOfFame,
+        PittsburghPiratesHallOfFame,
         RedsHallOfFame,
         RedSoxHallOfFame,
         SanDiegoPadresHallOfFame,
