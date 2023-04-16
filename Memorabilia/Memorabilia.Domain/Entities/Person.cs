@@ -294,17 +294,17 @@ public class Person : Framework.Library.Domain.Entity.DomainEntity, IWithName
         accomplishment.Set(accomplishmentTypeId, date, year);
     }
 
-    public void SetAllStars(int allStarId, int sportId, int year)
+    public void SetAllStars(int allStarId, int sportId, int? sportLeagueLevelId, int year)
     {
         if (allStarId == 0)
         {
-            AllStars.Add(new AllStar(Id, sportId, year));
+            AllStars.Add(new AllStar(Id, sportId, sportLeagueLevelId, year));
             return;
         }
 
         var allStar = AllStars.Single(item => item.Id == allStarId);
 
-        allStar.Set(sportId, year);
+        allStar.Set(sportId, sportLeagueLevelId, year);
     }
 
     public void SetAward(int awardId, int awardTypeId, int year)

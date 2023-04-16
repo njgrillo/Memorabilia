@@ -6,6 +6,12 @@
                    SelectedTextChanged="@((p) => _years = p)" />
     </Content>
     <ContentColumn2>
+        <PrettyBlazor.Condition Evaluation="@DisplaySportLeagueLevels">
+            <Match>
+                <SportLeagueLevelDropDown SelectedValue="_viewModel.SportLeagueLevelId"
+                                          SelectionChanged="(p) => _viewModel.SportLeagueLevelId = p" />
+            </Match>
+        </PrettyBlazor.Condition>
         <PrettyBlazor.Condition Evaluation="@DisplaySports">
             <Match>
                 <SportAutoComplete SelectedValue="_viewModel.Sport"
@@ -28,6 +34,11 @@
                    Striped="true">
             <HeaderContent>
                 <MudTh>Year</MudTh>
+                <PrettyBlazor.Condition Evaluation="@DisplaySportLeagueLevels">
+                    <Match>
+                        <MudTh>Sport League Level</MudTh>
+                    </Match>
+                </PrettyBlazor.Condition>
                 <PrettyBlazor.Condition Evaluation="@DisplaySports">
                     <Match>
                         <MudTh>Sport</MudTh>
@@ -37,6 +48,11 @@
             </HeaderContent>
             <RowTemplate>
                 <MudTd DataLabel="Year">@context.Year</MudTd>
+                <PrettyBlazor.Condition Evaluation="@DisplaySportLeagueLevels">
+                    <Match>
+                        <MudTd DataLabel="Sport League Level">@context.SportLeagueLevelName</MudTd>
+                    </Match>
+                </PrettyBlazor.Condition>
                 <PrettyBlazor.Condition Evaluation="@DisplaySports">
                     <Match>
                         <MudTd DataLabel="Sport">@context.SportName</MudTd>

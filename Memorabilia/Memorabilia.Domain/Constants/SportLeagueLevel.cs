@@ -2,6 +2,7 @@
 
 public sealed class SportLeagueLevel : DomainItemConstant
 {
+    public static readonly SportLeagueLevel AmericanBasketballAssociation = new(8, "American Basketball Association", "ABA", Sport.Basketball);
     public static readonly SportLeagueLevel MajorLeagueBaseball = new(1, "Major League Baseball", "MLB", Sport.Baseball);
     public static readonly SportLeagueLevel NationalFootballLeague = new(2, "National Football League", "NFL", Sport.Football);
     public static readonly SportLeagueLevel NationalBasketballAssociation = new(3, "National Basketball Association", "NBA", Sport.Basketball);
@@ -9,6 +10,7 @@ public sealed class SportLeagueLevel : DomainItemConstant
 
     public static readonly SportLeagueLevel[] All =
     {
+        AmericanBasketballAssociation,
         MajorLeagueBaseball,
         NationalBasketballAssociation,
         NationalFootballLeague,        
@@ -41,7 +43,10 @@ public sealed class SportLeagueLevel : DomainItemConstant
             sportLeagueLevels.Add(MajorLeagueBaseball);
 
         if (sportIds.Contains(Sport.Basketball.Id))
+        {
+            sportLeagueLevels.Add(AmericanBasketballAssociation);
             sportLeagueLevels.Add(NationalBasketballAssociation);
+        }            
 
         if (sportIds.Contains(Sport.Football.Id))
             sportLeagueLevels.Add(NationalFootballLeague);

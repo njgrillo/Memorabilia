@@ -8,10 +8,20 @@ public partial class PersonAllStarEditor : ComponentBase
     [Parameter]
     public Sport[] Sports { get; set; }
 
+    private bool DisplaySportLeagueLevels => Sports.Any(sport => sport == Sport.Basketball);
+
     private bool DisplaySports => Sports.Length > 1;
 
     private SavePersonAllStarViewModel _viewModel = new();
     private string _years;
+
+    protected override void OnInitialized()
+    {
+        if (!DisplaySportLeagueLevels)
+            return;
+
+        _viewModel.SportLeagueLevelId = SportLeagueLevel.NationalBasketballAssociation.Id;
+    }
 
     private void Add()
     {
@@ -24,11 +34,17 @@ public partial class PersonAllStarEditor : ComponentBase
         {
             AllStars.Add(new SavePersonAllStarViewModel
             {   Sport = _viewModel.Sport, 
+                SportLeagueLevelId = _viewModel.SportLeagueLevelId,
                 Year = year 
             });
         }
 
         _viewModel = new();
         _years = string.Empty;
+
+        if (!DisplaySportLeagueLevels)
+            return;
+
+        _viewModel.SportLeagueLevelId = SportLeagueLevel.NationalBasketballAssociation.Id;
     }
 }

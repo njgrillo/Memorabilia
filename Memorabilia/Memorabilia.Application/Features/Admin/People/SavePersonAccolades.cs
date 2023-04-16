@@ -50,6 +50,7 @@ public class SavePersonAccolades
             {
                 person.SetAllStars(allStar.Id,
                                    allStar.Sport.Id,
+                                   allStar.SportLeagueLevelId > 0 ? allStar.SportLeagueLevelId : null,
                                    allStar.Year);
             }
         }
