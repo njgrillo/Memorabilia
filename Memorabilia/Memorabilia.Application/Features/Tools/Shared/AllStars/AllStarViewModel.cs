@@ -20,5 +20,10 @@ public class AllStarViewModel : PersonSportToolViewModel
 
     public override string PersonName => _allstar.Person.DisplayName;
 
+    public Domain.Constants.SportLeagueLevel SportLeagueLevel
+        => _allstar.SportLeagueLevelId.HasValue
+               ? Domain.Constants.SportLeagueLevel.Find(_allstar.SportLeagueLevelId.Value)
+               : null; 
+
     public string Year => _allstar.Year.ToString();
 }

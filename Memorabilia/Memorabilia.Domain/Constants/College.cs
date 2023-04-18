@@ -55,6 +55,7 @@ public sealed class College : DomainItemConstant
     public static readonly College Brown = new(404, "Brown");
     public static readonly College Bucknell = new (382, "Bucknell");
     public static readonly College Buffalo = new (566, "Buffalo", "UB");
+    public static readonly College Butler = new (596, "Butler");
     public static readonly College ButteCollege = new (361, "Butte College");
     public static readonly College CaguasMilitaryAcademy = new(323, "Caguas Military Academy");
     public static readonly College CalhounCommunityCollege = new(112, "Calhoun Community College");
@@ -647,6 +648,7 @@ public sealed class College : DomainItemConstant
         Brown,
         Bucknell,
         Buffalo,
+        Butler,
         ButteCollege,
         CaguasMilitaryAcademy,
         CalhounCommunityCollege,
