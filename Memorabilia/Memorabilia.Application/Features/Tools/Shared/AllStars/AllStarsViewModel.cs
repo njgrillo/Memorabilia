@@ -44,6 +44,11 @@ public class AllStarsViewModel
     public bool DisplayCanceledMessage
         => IsBaseballCanceled || IsBasketballCanceled;
 
+    public bool DisplayNoProBowlMessage
+        => _sport == Domain.Constants.Sport.Football &&
+           Year > 1942 &&
+           Year < 1951;
+
     public bool IsBaseballCanceled
         => _sport == Domain.Constants.Sport.Baseball &&
            Year == 2020;

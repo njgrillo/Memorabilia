@@ -36,6 +36,18 @@
                 </DivRowCol12>
             </Match>
         </PrettyBlazor.Condition>
+        <PrettyBlazor.Condition Evaluation="_viewModel.DisplayNoProBowlMessage">
+            <Match>
+                <DivRowCol12>
+                    <Content>
+                        <p>
+                            There was no NFL All-Star Game/Pro Bowl played from 1943-1950.
+                        </p>
+                        <br />
+                    </Content>
+                </DivRowCol12>
+            </Match>
+        </PrettyBlazor.Condition>
         <DivRowCol12 Hidden="@(_viewModel.Year == 0)">
             <Content>
                 <div class="row">
