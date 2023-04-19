@@ -30,7 +30,7 @@
          <MudTable Bordered="false"
                    Dense="false" 
                    Hover="true"
-                   Items="@AllStars"    
+                   Items="@AllStars.Where(allStar => !allStar.IsDeleted).ToList()"
                    Striped="true">
             <HeaderContent>
                 <MudTh>Year</MudTh>
@@ -61,8 +61,8 @@
                 <MudTd DataLabel="">
                     <MudTooltip Text="Delete">
                         <MudFab Color="MudBlazor.Color.Secondary"
-                                Icon="@Icons.Outlined.DeleteOutline"
-                                OnClick="@(_ => AllStars.Remove(context))" />
+                                Icon="@Icons.Material.Outlined.DeleteOutline"
+                                OnClick="@(_ => context.IsDeleted = true)" />
                     </MudTooltip>  
                 </MudTd>
             </RowTemplate>

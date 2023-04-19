@@ -29,7 +29,6 @@ public sealed class Sport : DomainItemConstant
     {
         Baseball,
         Basketball,
-        Football,
         Hockey
     };
 

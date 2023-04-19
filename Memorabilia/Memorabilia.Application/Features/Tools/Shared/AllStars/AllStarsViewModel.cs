@@ -65,7 +65,7 @@ public class AllStarsViewModel
     public string MainGridTitle
         => DisplayABAAllStars
            ? $"{Year} {Domain.Constants.SportLeagueLevel.NationalBasketballAssociation.Name} All Stars"
-           : $"{Year} {(_sport == Domain.Constants.Sport.Football ? "Pro Bowlers" : "All Stars")}";
+           : $"{Year} {(_sport == Domain.Constants.Sport.Football && Year > 1942 ? "Pro Bowlers" : "All Stars")}";
 
     public IEnumerable<AllStarViewModel> SecondaryAllStars { get; set; } = Enumerable.Empty<AllStarViewModel>();
 

@@ -59,13 +59,13 @@ public class SavePersonAccoladeViewModel : SaveViewModel
             var hasProBowlGames = Sport.HasProBowlGames(Sports);
 
             if (hasAllStarGames && hasProBowlGames)
-                return "All Star & Pro Bowl";
+                return "All Stars & Pro Bowls";
             else if (hasAllStarGames)
-                return "All Star";
+                return "All Stars";
             else if (hasProBowlGames)
-                return "Pro Bowl";
+                return "Pro Bowls";
 
-            return "All Star";
+            return "All Stars";
         }
     }
 
