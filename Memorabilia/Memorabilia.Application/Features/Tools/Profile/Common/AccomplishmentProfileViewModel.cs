@@ -11,13 +11,24 @@ public class AccomplishmentProfileViewModel
         _accomplishment = accomplishment;
     }
 
-    public int AccomplishmentTypeId => _accomplishment.AccomplishmentTypeId;
+    public Domain.Constants.AccomplishmentType AccomplishmentType 
+        => Domain.Constants.AccomplishmentType.Find(AccomplishmentTypeId);
 
-    public string AccomplishmentTypeName => Domain.Constants.AccomplishmentType.Find(AccomplishmentTypeId)?.Name;
+    public string AccomplishmentTypeAbbreviation 
+        => AccomplishmentType?.Abbreviation;
 
-    public DateTime? Date => _accomplishment.Date;  
+    public int AccomplishmentTypeId 
+        => _accomplishment.AccomplishmentTypeId;    
 
-    public string TimeFrame => Date?.ToString("MM/dd/yyyy") ?? Year?.ToString() ?? string.Empty;
+    public string AccomplishmentTypeName 
+        => AccomplishmentType?.Name;
 
-    public int? Year => _accomplishment.Year;
+    public DateTime? Date 
+        => _accomplishment.Date;  
+
+    public string TimeFrame 
+        => Date?.ToString("MM/dd/yyyy") ?? Year?.ToString() ?? string.Empty;
+
+    public int? Year 
+        => _accomplishment.Year;
 }

@@ -1,0 +1,14 @@
+﻿<MudTable Bordered="false"
+          Dense="false"
+          Hover="true"
+          Items="@InternationalHallOfFames"
+          Striped="true">
+    <HeaderContent>
+        <MudTh>Type</MudTh>
+        <MudTh>Induction Year</MudTh>
+    </HeaderContent>
+    <RowTemplate>
+        <MudTd DataLabel="Type">@context.InternationalHallOfFameType.Name</MudTd>
+        <MudTd DataLabel="Induction Year">@(context.InductionYear.HasValue ? context.InductionYear : string.Empty)</MudTd>
+    </RowTemplate>
+</MudTable>

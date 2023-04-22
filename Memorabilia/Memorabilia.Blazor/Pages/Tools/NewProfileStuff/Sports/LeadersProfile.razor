@@ -1,0 +1,20 @@
+﻿<MudTable Bordered="false"
+          Dense="false" 
+          Hover="true"
+          Items="@Leaders"    
+          Striped="true">
+<ToolBarContent>
+    <MudText Typo="Typo.h6"><b>Leaders</b></MudText>
+</ToolBarContent>
+<HeaderContent>
+    <MudTh>Name</MudTh>
+    <MudTh>Year</MudTh>
+</HeaderContent>
+<RowTemplate>
+    <MudTd DataLabel="Name">@context.LeaderTypeName</MudTd>
+    <MudTd DataLabel="Year">@context.Year</MudTd>
+</RowTemplate>
+<PagerContent>
+    <MudTablePager />
+</PagerContent>
+</MudTable>

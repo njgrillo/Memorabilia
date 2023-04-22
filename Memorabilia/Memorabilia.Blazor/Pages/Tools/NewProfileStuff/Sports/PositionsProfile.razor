@@ -1,0 +1,17 @@
+﻿<MudTable Bordered="false"
+          Dense="false"
+          Hover="true"
+          Items="@Positions"
+          Striped="true">
+    <ToolBarContent>
+        <MudText Typo="Typo.h6"><b>Positions</b></MudText>
+    </ToolBarContent>
+    <HeaderContent>
+        <MudTh>Position</MudTh>
+        <MudTh>Type</MudTh>
+    </HeaderContent>
+    <RowTemplate>
+        <MudTd DataLabel="Position">@context.Position.Name</MudTd>
+        <MudTd DataLabel="Type">@(context.IsPrimary ? "Primary" : "Secondary") </MudTd>
+    </RowTemplate>
+</MudTable>

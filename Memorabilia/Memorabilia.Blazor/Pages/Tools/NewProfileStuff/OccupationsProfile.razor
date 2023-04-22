@@ -1,0 +1,20 @@
+﻿@if (_viewModel != null)
+{
+    <MudTabs ApplyEffectsToContainer="true"
+             Centered="false"
+             Elevation="2"
+             PanelClass="pa-6"
+             Rounded="true">
+        <Iterations Context="occupation"
+                Items="_viewModel.Occupations">
+            <MudTabPanel BadgeColor="MudBlazor.Color.Success"
+                         Text="@occupation.OccupationName">
+                <DivRowCol12>
+                    <Content>
+                        <RolesProfile Person="Person" />
+                    </Content>
+                </DivRowCol12>
+            </MudTabPanel>
+        </Iterations>
+    </MudTabs>
+}

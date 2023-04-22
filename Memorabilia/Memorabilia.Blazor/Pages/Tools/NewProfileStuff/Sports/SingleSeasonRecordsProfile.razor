@@ -1,0 +1,20 @@
+﻿<MudTable Bordered="false"
+          Dense="false"
+          Hover="true"
+          Items="@SingleSeasonRecords"
+          Striped="true">
+    <ToolBarContent>
+        <MudText Typo="Typo.h6"><b>Single Season Records</b></MudText>
+    </ToolBarContent>
+    <HeaderContent>
+        <MudTh>Record</MudTh>
+        <MudTh></MudTh>
+    </HeaderContent>
+    <RowTemplate>
+        <MudTd DataLabel="Record">@context.RecordTypeName</MudTd>
+        <MudTd DataLabel="">@context.Record</MudTd>
+    </RowTemplate>
+    <PagerContent>
+        <MudTablePager />
+    </PagerContent>
+</MudTable>

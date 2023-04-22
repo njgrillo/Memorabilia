@@ -1,0 +1,19 @@
+﻿<MudTable Bordered="false"
+          Dense="false"
+          Hover="true"
+          Items="@Colleges"
+          Striped="true">
+    <ToolBarContent>
+        <MudText Typo="Typo.h6"><b>Colleges</b></MudText>
+    </ToolBarContent>
+    <HeaderContent>
+        <MudTh>Name</MudTh>
+        <MudTh>Begin Year</MudTh>
+        <MudTh>End Year</MudTh>
+    </HeaderContent>
+    <RowTemplate>
+        <MudTd DataLabel="Name">@(Domain.Constants.College.Find(context.CollegeId)?.Name ?? string.Empty)</MudTd>
+        <MudTd DataLabel="Begin Year">@(context.BeginYear.HasValue ? context.BeginYear.Value : string.Empty)</MudTd>
+            <MudTd DataLabel="End Year">@(context.EndYear.HasValue ? context.EndYear.Value : string.Empty)</MudTd>
+    </RowTemplate>
+</MudTable>

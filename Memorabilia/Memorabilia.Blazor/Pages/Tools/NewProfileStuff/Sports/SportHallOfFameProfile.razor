@@ -1,0 +1,19 @@
+﻿<MudTable Bordered="false"
+          Dense="false"
+          Hover="true"
+          Items="@HallOfFames"
+          Striped="true">
+    <ToolBarContent>
+        <MudText Typo="Typo.h6"><b>MLB Hall of Fame</b></MudText>
+    </ToolBarContent>
+    <HeaderContent>
+        <MudTh>Induction Year</MudTh>
+        <MudTh>Ballot</MudTh>
+        <MudTh>Vote (%)</MudTh>
+    </HeaderContent>
+    <RowTemplate>
+        <MudTd DataLabel="Induction Year">@context.InductionYear</MudTd>
+        <MudTd DataLabel="Ballot">@context.BallotNumberName</MudTd>
+        <MudTd DataLabel="Vote (%)">@context.VotePercentage</MudTd>
+    </RowTemplate>
+</MudTable>

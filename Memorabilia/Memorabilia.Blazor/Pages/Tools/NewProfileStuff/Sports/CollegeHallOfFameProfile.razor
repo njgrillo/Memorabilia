@@ -1,0 +1,16 @@
+﻿<MudTable Bordered="false"
+          Dense="false"
+          Hover="true"
+          Items="@CollegeHallOfFames"
+          Striped="true">
+    <HeaderContent>
+        <MudTh>College</MudTh>
+        <MudTh>Sport</MudTh>
+        <MudTh>Year</MudTh>
+    </HeaderContent>
+    <RowTemplate>
+        <MudTd DataLabel="College">@context.College.Name</MudTd>
+        <MudTd DataLabel="Sport">@(context.Sport?.Name ?? string.Empty)</MudTd>
+        <MudTd DataLabel="Year">@(context.Year.HasValue ? context.Year : string.Empty)</MudTd>
+    </RowTemplate>
+</MudTable>

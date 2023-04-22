@@ -1,0 +1,38 @@
+﻿<MudChipSet>
+    <PrettyBlazor.Condition Evaluation="Accomplishments.Any()">
+        <Match>
+            <Iterations Items="@Accomplishments">
+                <MudChip Color="MudBlazor.Color.Info"
+                         Text="Accomplishment">@($"{context.AccomplishmentTypeName}")</MudChip>
+                </Iterations>
+            </Match>
+        </PrettyBlazor.Condition>
+    <PrettyBlazor.Condition Evaluation="AllStars.Any()">
+        <Match>
+            <MudChip Color="MudBlazor.Color.Success"
+                    Text="AllStar">@AllStarSummaryDisplayText</MudChip>
+        </Match>
+    </PrettyBlazor.Condition>
+    <PrettyBlazor.Condition Evaluation="Awards.Any()">
+        <Match>
+            <Iterations Items="@Awards">
+                <MudChip Color="MudBlazor.Color.Warning"
+                        Text="Award">@($"{Awards.Where(award => award.AwardTypeId == context.AwardTypeId).Count()}x {context.AwardTypeAbbreviatedName}")</MudChip>
+            </Iterations>
+        </Match>
+    </PrettyBlazor.Condition>
+    <PrettyBlazor.Condition Evaluation="Championships.Any()">
+        <Match>
+            <MudChip Color="MudBlazor.Color.Primary"
+                    Text="Championship">@ChampionshipSummaryDisplayText</MudChip>
+        </Match>
+    </PrettyBlazor.Condition>
+    <PrettyBlazor.Condition Evaluation="Leaders.Any()">
+        <Match>
+            <Iterations Items="@Leaders">
+                <MudChip Color="MudBlazor.Color.Secondary"
+                        Text="Leader">@($"{Leaders.Where(leader => leader.LeaderTypeId == context.LeaderTypeId).Count()}x {context.LeaderTypeAbbreviatedName}")</MudChip>
+            </Iterations>
+        </Match>
+    </PrettyBlazor.Condition>
+</MudChipSet>

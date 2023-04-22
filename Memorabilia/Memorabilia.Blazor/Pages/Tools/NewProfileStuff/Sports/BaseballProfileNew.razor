@@ -1,0 +1,98 @@
+﻿<div class="row" style="overflow-y:auto;max-height:600px;">
+    <div style="width:49%;">
+        <AccomplishmentSummaryProfile Person="Person" 
+                                      Sport="Sport" />
+        <Condition Evaluation="Person.Service.HasService()">
+            <Match>
+                <br />
+                <BaseballServiceProfile Person="@Person" />
+            </Match>
+        </Condition>
+        <Condition Evaluation="Person.Teams.Filter(Sport).Any()">
+            <Match>
+                <br />
+                <TeamsProfile Person="@Person"
+                              Sport="Sport" />                
+            </Match>
+        </Condition>    
+        <Condition Evaluation="Person.Positions.Filter(Sport).Any()">
+            <Match>
+                <br />
+                <PositionsProfile Person="@Person"
+                                  Sport="Sport" />
+            </Match>
+        </Condition>
+        <Condition Evaluation="Person.Teams.HasChampionships(Sport)">
+            <Match>
+                <br />
+                <ChampionshipProfile Person="@Person"
+                                     Sport="Sport" />
+            </Match>
+        </Condition>
+        <Condition Evaluation="Person.HallOfFames.Filter(Sport).Any()">
+            <Match>
+                <br />
+                <SportHallOfFameProfile Person="@Person"
+                                        Sport="Sport" />
+            </Match>
+        </Condition>
+        <Condition Evaluation="Person.FranchiseHallOfFames.Filter(Sport).Any()">
+            <Match>
+                <br />
+                <FranchiseHallOfFameProfile Person="@Person"
+                                            Sport="Sport" />
+            </Match>
+        </Condition>
+        <Condition Evaluation="Person.Drafts.Filter(Sport).Any()">
+            <Match>
+                <br />
+                <DraftsProfile Person="@Person"
+                               Sport="Sport" />
+            </Match>
+        </Condition>
+    </div>
+    <div style="width:49%;margin-left:1%">
+        <Condition Evaluation="Person.Accomplishments.Filter(Sport).Any()">
+            <Match>
+                <AccomplishmentsProfile Person="@Person"
+                                        Sport="Sport" />
+                <br />
+            </Match>
+        </Condition>
+        <Condition Evaluation="Person.AllStars.Filter(Sport).Any()">
+            <Match>
+                <AllStarProfile Person="@Person"
+                                Sport="Sport" />
+                <br />
+            </Match>
+        </Condition>
+        <Condition Evaluation="Person.Awards.Filter(Sport).Any()">
+            <Match>
+                <AwardsProfile Person="@Person"
+                               Sport="Sport" />
+                <br />
+            </Match>
+        </Condition>
+        <Condition Evaluation="Person.Leaders.Filter(Sport).Any()">
+            <Match>
+                <LeadersProfile Person="@Person"
+                                Sport="Sport" />
+                <br />
+            </Match>
+        </Condition>
+        <Condition Evaluation="Person.CareerRecords.Filter(Sport).Any()">
+            <Match>
+                <CareerRecordsProfile Person="@Person"
+                                      Sport="Sport" />
+                <br />
+            </Match>
+        </Condition>
+        <Condition Evaluation="Person.SingleSeasonRecords.Filter(Sport).Any()">
+            <Match>
+                <SingleSeasonRecordsProfile Person="@Person"
+                                            Sport="Sport" />
+                <br />
+            </Match>
+        </Condition>        
+    </div>
+</div>

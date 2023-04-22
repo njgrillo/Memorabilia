@@ -137,6 +137,7 @@ global using Memorabilia.Application.Features.Shared.Person;
 global using Memorabilia.Application.Features.Tools.Profile;
 global using Memorabilia.Application.Features.Tools.Profile.Baseball;
 global using Memorabilia.Application.Features.Tools.Profile.Basketball;
+global using Memorabilia.Application.Features.Tools.Profile.Common;
 global using Memorabilia.Application.Features.Tools.Profile.Football;
 global using Memorabilia.Application.Features.Tools.Shared;
 global using Memorabilia.Application.Features.Tools.Shared.Accomplishments;

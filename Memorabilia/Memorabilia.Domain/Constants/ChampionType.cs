@@ -37,4 +37,21 @@ public sealed class ChampionType : DomainItemConstant
 
         return null;
     }
+
+    public static ChampionType Find(Sport sport)
+    {
+        if (sport == Sport.Baseball)
+            return WorldSeries;
+
+        if (sport == Sport.Basketball)
+            return NBAFinals;
+
+        if (sport == Sport.Football)
+            return SuperBowl;
+
+        if (sport == Sport.Hockey)
+            return StanleyCup;
+
+        return null;
+    }
 }

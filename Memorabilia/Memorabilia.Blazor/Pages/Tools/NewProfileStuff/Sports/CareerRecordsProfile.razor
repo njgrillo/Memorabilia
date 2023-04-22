@@ -1,0 +1,20 @@
+﻿<MudTable Bordered="false"
+          Dense="false"
+          Hover="true"
+          Items="@CareerRecords"
+          Striped="true">
+    <ToolBarContent>
+        <MudText Typo="Typo.h6"><b>Career Records</b></MudText>
+    </ToolBarContent>
+    <HeaderContent>
+        <MudTh>Record</MudTh>
+        <MudTh></MudTh>
+    </HeaderContent>
+    <RowTemplate>
+        <MudTd DataLabel="Record">@context.CareerRecordTypeName</MudTd>
+        <MudTd DataLabel="">@context.Record</MudTd>
+    </RowTemplate>
+    <PagerContent>
+        <MudTablePager />
+    </PagerContent>
+</MudTable>

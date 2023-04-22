@@ -1,0 +1,20 @@
+﻿<MudTable Bordered="false"
+          Dense="false"
+          Hover="true"
+          Items="@Accomplishments"
+          Striped="true">
+    <ToolBarContent>
+        <MudText Typo="Typo.h6"><b>Accomplishments</b></MudText>
+    </ToolBarContent>
+    <HeaderContent>
+        <MudTh>Name</MudTh>
+        <MudTh>Date/Year</MudTh>
+    </HeaderContent>
+    <RowTemplate>
+        <MudTd DataLabel="Name">@context.AccomplishmentTypeName</MudTd>
+            <MudTd DataLabel="Date/Year">@context.TimeFrame</MudTd>
+    </RowTemplate>
+    <PagerContent>
+        <MudTablePager />
+    </PagerContent>
+</MudTable>

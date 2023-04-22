@@ -1,0 +1,17 @@
+﻿<MudTable Bordered="false"
+          Dense="false"
+          Hover="true"
+          Items="@FranchiseRetiredNumbers"
+          Striped="true">
+    <ToolBarContent>
+        <MudText Typo="Typo.h6"><b>Franchise Retired Numbers</b></MudText>
+    </ToolBarContent>
+    <HeaderContent>
+        <MudTh>Franchise</MudTh>
+        <MudTh>Number</MudTh>
+    </HeaderContent>
+    <RowTemplate>
+        <MudTd DataLabel="Franchise">@context.Franchise.FullName</MudTd>
+        <MudTd DataLabel="Number">@context.PlayerNumber</MudTd>
+    </RowTemplate>
+</MudTable>

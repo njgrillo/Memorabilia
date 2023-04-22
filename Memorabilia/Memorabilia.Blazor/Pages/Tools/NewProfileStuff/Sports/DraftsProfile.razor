@@ -1,0 +1,23 @@
+﻿<MudTable Bordered="false"
+          Dense="false"
+          Hover="true"
+          Items="@Drafts"
+          Striped="true">
+    <ToolBarContent>
+        <MudText Typo="Typo.h6"><b>Draft</b></MudText>
+    </ToolBarContent>
+    <HeaderContent>
+        <MudTh>Franchise</MudTh>
+        <MudTh>Year</MudTh>
+        <MudTh>Round</MudTh>
+        <MudTh>Pick</MudTh>
+        <MudTh>Overall</MudTh>
+    </HeaderContent>
+    <RowTemplate>
+        <MudTd DataLabel="Franchise">@context.Franchise.FullName</MudTd>
+        <MudTd DataLabel="Year">@context.Year</MudTd>
+        <MudTd DataLabel="Round">@context.Round</MudTd>
+        <MudTd DataLabel="Pick">@(context.Pick.HasValue ? context.Pick : string.Empty)</MudTd>
+        <MudTd DataLabel="Overall">@(context.Overall.HasValue ? context.Overall : string.Empty)</MudTd>
+    </RowTemplate>
+</MudTable>
