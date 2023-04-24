@@ -1,6 +1,4 @@
-﻿#nullable disable
-
-namespace Memorabilia.Blazor.Controls.DropDowns;
+﻿namespace Memorabilia.Blazor.Controls.DropDowns;
 
 public abstract class GameStyleDropDown<T> : DropDown<T, int>, INotifyPropertyChanged where T : DomainItemConstant
 {
@@ -23,7 +21,7 @@ public abstract class GameStyleDropDown<T> : DropDown<T, int>, INotifyPropertyCh
         LoadItems();
     }
 
-    private async void GameStyleDropDown_PropertyChanged(object sender, PropertyChangedEventArgs e)
+    private void GameStyleDropDown_PropertyChanged(object sender, PropertyChangedEventArgs e)
     {
         if (e.PropertyName == nameof(GameStyleType))
             LoadItems();

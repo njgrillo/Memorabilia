@@ -41,7 +41,7 @@ public partial class DomainTable : ComponentBase
         var dialog = DialogService.Show<DeleteDialog>(DeleteText);
         var result = await dialog.Result;
 
-        if (result.Cancelled)
+        if (result.Canceled)
             return;
 
         await Delete(id);

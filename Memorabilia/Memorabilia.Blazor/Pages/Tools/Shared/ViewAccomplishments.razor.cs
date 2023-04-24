@@ -24,10 +24,10 @@ public partial class ViewAccomplishments
         var dialog = DialogService.Show<DomainItemBrowseDialog>("Accomplishments", parameters, options);
         var result = await dialog.Result;
 
-        if (result.Cancelled)
+        if (result.Canceled)
             return;
 
-        int.TryParse(result.Data.ToString(), out int id);
+        _ = int.TryParse(result.Data.ToString(), out int id);
 
         if (id == 0)
             return;

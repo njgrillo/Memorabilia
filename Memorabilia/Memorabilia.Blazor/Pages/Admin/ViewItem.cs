@@ -1,4 +1,4 @@
-﻿#nullable disable
+﻿
 
 namespace Memorabilia.Blazor.Pages.Admin;
 
@@ -34,7 +34,7 @@ public abstract class ViewItem<TViewModel, TItemViewModel> : ImagePage
         var dialog = DialogService.Show<DeleteDialog>(text);
         var result = await dialog.Result;
 
-        if (result.Cancelled)
+        if (result.Canceled)
             return;
 
         await Delete(id);

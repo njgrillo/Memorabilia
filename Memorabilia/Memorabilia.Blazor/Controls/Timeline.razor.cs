@@ -1,6 +1,4 @@
-﻿#nullable disable
-
-namespace Memorabilia.Blazor.Controls;
+﻿namespace Memorabilia.Blazor.Controls;
 
 public partial class Timeline : ComponentBase
 {

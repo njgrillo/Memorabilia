@@ -1,6 +1,4 @@
-﻿#nullable disable
-
-namespace Memorabilia.Blazor.Controls.Autographs;
+﻿namespace Memorabilia.Blazor.Controls.Autographs;
 
 public partial class AutographTimeline : ComponentBase
 {

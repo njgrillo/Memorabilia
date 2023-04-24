@@ -2,11 +2,8 @@
 
 namespace Memorabilia.Blazor.Pages.Tools.NewProfileStuff.Sports;
 
-public partial class CollegeHallOfFameProfile
+public partial class CollegeHallOfFameProfile : SportProfile
 {
-    [Parameter]
-    public Person Person { get; set; }
-
     private CollegeHallOfFame[] CollegeHallOfFames;
 
     protected override void OnParametersSet()

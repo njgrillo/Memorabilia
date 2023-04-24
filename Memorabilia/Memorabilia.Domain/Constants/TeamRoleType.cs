@@ -46,6 +46,14 @@ public sealed class TeamRoleType : DomainItemConstant
                             .Distinct()
                             .ToArray();
 
+    public static readonly TeamRoleType[] AdministratorRoleTypes =
+    {
+        Administrator,
+        Assistant,
+        Consultant,
+        Scout,
+    };
+
     public static readonly TeamRoleType[] BaseballRoleTypes =
     {
         Broadcaster,
@@ -56,6 +64,48 @@ public sealed class TeamRoleType : DomainItemConstant
         Owner,
         Player,
         President,
+        VicePresident
+    };
+
+    public static readonly TeamRoleType[] CoachRoleTypes =
+    {
+        Assistant,
+        AssistantHeadCoach,
+        BackfieldCoach,
+        Coach,
+        DefensiveBacksCoach,
+        DefensiveCoordinator,
+        DefensiveLineCoach,
+        HeadCoach,
+        LinebackerCoach,
+        OffensiveCoordinator,
+        OffensiveEndsCoach,
+        OffensiveLineCoach,
+        QuarterbackCoach,
+        RunningBackCoach,
+        SecondaryCoach,
+        SpecialTeamsCoach,
+        TightEndCoach,
+        WideReceiverCoach
+    };
+
+    public static readonly TeamRoleType[] ExecutiveRoleTypes =
+    {
+        Assistant,
+        Consultant,
+        CoOwner,
+        DirectorOfPlanningAndResearch,
+        DirectorOfPlayerAndCommunityRelations,
+        DirectorOfPlayerPersonnel,
+        DirectorOfStaffDevelopment,
+        Executive,
+        ExecutiveOfFootballOperationsForPlayerDevelopment,
+        GeneralManager,
+        HeadOfPlayerPersonnel,
+        MinorityOwner,
+        Owner,
+        President,
+        SpecialAdvisor,
         VicePresident
     };
 
@@ -112,5 +162,21 @@ public sealed class TeamRoleType : DomainItemConstant
             return FootballRoleTypes;
 
         return All;
+    }
+
+    public static TeamRoleType[] ValidTypes(Occupation occupation)
+    {
+        return occupation.Name switch
+        {
+            "Administrator" => AdministratorRoleTypes,
+            "Athlete" => new TeamRoleType[] { Player },
+            "Broadcaster" => new TeamRoleType[] { Broadcaster },
+            "Coach" => CoachRoleTypes,
+            "Executive" => ExecutiveRoleTypes,
+            "GeneralManager" => new TeamRoleType[] { GeneralManager },
+            "Manager" => new TeamRoleType[] { Manager },
+            "Owner" => new TeamRoleType[] { Owner },
+            _ => throw new NotImplementedException(),
+        };
     }
 }

@@ -1,13 +1,7 @@
 ﻿namespace Memorabilia.Blazor.Pages.Tools.NewProfileStuff.Sports;
 
-public partial class SingleSeasonRecordsProfile
+public partial class SingleSeasonRecordsProfile : SportProfile
 {
-    [Parameter]
-    public Domain.Entities.Person Person { get; set; }
-
-    [Parameter]
-    public Sport Sport { get; set; }
-
     private SingleSeasonRecordProfileViewModel[] SingleSeasonRecords = Array.Empty<SingleSeasonRecordProfileViewModel>();   
 
     protected override void OnParametersSet()

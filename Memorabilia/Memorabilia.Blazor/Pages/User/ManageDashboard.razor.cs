@@ -1,6 +1,4 @@
-﻿#nullable disable
-
-namespace Memorabilia.Blazor.Pages.User;
+﻿namespace Memorabilia.Blazor.Pages.User;
 
 public partial class ManageDashboard : ComponentBase
 {

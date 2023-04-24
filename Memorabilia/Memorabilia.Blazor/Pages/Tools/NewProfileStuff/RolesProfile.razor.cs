@@ -1,17 +1,9 @@
-﻿using Memorabilia.Blazor.Pages.Tools.NewProfileStuff.Sports;
+﻿namespace Memorabilia.Blazor.Pages.Tools.NewProfileStuff;
 
-namespace Memorabilia.Blazor.Pages.Tools.NewProfileStuff;
-
-public partial class RolesProfile
+public partial class RolesProfile : PersonProfile
 {
     [Inject]
     public IProfileService ProfileService { get; set; }
-
-    [Parameter]
-    public Domain.Entities.Person Person { get; set; }
-
-    [Parameter]
-    public Domain.Entities.PersonOccupation Occupation { get; set; }
 
     protected Dictionary<string, object> Parameters { get; set; } = new();
     protected List<ProfileType> ProfileTypes = new();
@@ -24,18 +16,21 @@ public partial class RolesProfile
         ProfileTypes = await ProfileService.GetProfileTypes(Person.Id);
         Parameters = new Dictionary<string, object>
         {
+            { "Occupation", Occupation },
             { "Person", Person }
         };
     }
 
     private Type GetComponent(string profileTypeName)
     {
-        return profileTypeName switch
-        {
-            "Baseball" => Type.GetType($"{typeof(BaseballProfileNew).FullName}"),
-            "Basketball" => Type.GetType($"{typeof(BasketballProfileNew).FullName}"),
-            "Football" => Type.GetType($"{typeof(FootballProfileNew).FullName}"),
-            _ => throw new NotImplementedException(),
-        };
+        return Type.GetType($"Memorabilia.Blazor.Pages.Tools.NewProfileStuff.{profileTypeName}{Occupation.OccupationName}Profile"); 
+
+        //return profileTypeName switch
+        //{
+        //    "Baseball" => Type.GetType($"{typeof(BaseballAthleteProfile).FullName}"),
+        //    "Basketball" => Type.GetType($"{typeof(BasketballAthleteProfile).FullName}"),
+        //    "Football" => Type.GetType($"{typeof(FootballAthleteProfile).FullName}"),
+        //    _ => throw new NotImplementedException(),
+        //};
     }
 }

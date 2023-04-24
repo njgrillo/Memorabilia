@@ -54,25 +54,25 @@
                         <MudTd DataLabel="">
                             <MudTooltip Text="Add Autograph">
                                 <MudFab Color="MudBlazor.Color.Primary"
-                                        Icon="@Icons.Outlined.AddCircleOutline"
+                                        Icon="@Icons.Material.Outlined.AddCircleOutline"
                                         OnClick="@(_ => NavigationManager.NavigateTo($"Autographs/Edit/{@context.Id}/0"))"
                                         Size="@MudBlazor.Size.Small" />
                             </MudTooltip> 
                             <MudTooltip Text="Details">
                                 <MudFab Color="MudBlazor.Color.Info"
-                                        Icon="@Icons.Outlined.Info"                                        
+                                        Icon="@Icons.Material.Outlined.Info"
                                         OnClick="@(_ => NavigationManager.NavigateTo($"Memorabilia/{@context.ItemTypeName.Replace(" ", "")}/Edit/{@context.Id}"))"
                                         Size="@MudBlazor.Size.Small" />
                             </MudTooltip>  
                             <MudTooltip Text="Edit">
                                 <MudFab Color="MudBlazor.Color.Primary"
-                                        Icon="@Icons.Outlined.ModeEditOutline"
+                                        Icon="@Icons.Material.Outlined.ModeEditOutline"
                                         OnClick="@(_ => NavigationManager.NavigateTo($"Memorabilia/Edit/{@context.Id}"))"
                                         Size="@MudBlazor.Size.Small" />
                             </MudTooltip> 
                             <MudTooltip Text="Delete">
                                 <MudFab Color="MudBlazor.Color.Secondary"
-                                        Icon="@Icons.Outlined.DeleteOutline"
+                                        Icon="@Icons.Material.Outlined.DeleteOutline"
                                         OnClick="@(_ => ShowDeleteMemorabiliaConfirm(@context.Id))"
                                         Size="@MudBlazor.Size.Small" />
                             </MudTooltip>
@@ -158,7 +158,7 @@
                                                         <Match>
                                                             <MudTooltip Text="Details">
                                                                 <MudFab Color="MudBlazor.Color.Info"
-                                                                        Icon="@Icons.Outlined.Info"
+                                                                        Icon="@Icons.Material.Outlined.Info"
                                                                         OnClick="@(_ => NavigationManager.NavigateTo($"Autographs/Spot/Edit/{@autograph.Id}"))"
                                                                         Size="@MudBlazor.Size.Small" />
                                                             </MudTooltip> 
@@ -166,13 +166,13 @@
                                                     </PrettyBlazor.Condition>  
                                                     <MudTooltip Text="Edit">
                                                         <MudFab Color="MudBlazor.Color.Primary"
-                                                                Icon="@Icons.Outlined.ModeEditOutline"
+                                                                Icon="@Icons.Material.Outlined.ModeEditOutline"
                                                                 OnClick="@(_ => NavigationManager.NavigateTo($"Autographs/Edit/{@autograph.MemorabiliaId}/{@autograph.Id}"))"
                                                                 Size="@MudBlazor.Size.Small" />
                                                     </MudTooltip> 
                                                     <MudTooltip Text="Delete">
                                                             <MudFab Color="MudBlazor.Color.Secondary"
-                                                                    Icon="@Icons.Outlined.DeleteOutline"
+                                                                Icon="@Icons.Material.Outlined.DeleteOutline"
                                                                     OnClick="@(_ => ShowDeleteAutographConfirm(@autograph.Id))"
                                                                     Size="@MudBlazor.Size.Small" />
                                                     </MudTooltip>
@@ -197,7 +197,7 @@
             <Content>
                 <MudTooltip Text="@_viewModel.AddText">
                     <MudFab Color="MudBlazor.Color.Primary"
-                            Icon="@Icons.Outlined.AddCircleOutline"
+                            Icon="@Icons.Material.Outlined.AddCircleOutline"
                             OnClick="@(_ => NavigationManager.NavigateTo(@_viewModel.AddRoute))" />
                 </MudTooltip> 
             </Content>

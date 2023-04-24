@@ -1,6 +1,4 @@
-﻿#nullable disable
-
-namespace Memorabilia.Blazor.Controls.DropDowns;
+﻿namespace Memorabilia.Blazor.Controls.DropDowns;
 
 public class LeaguePresidentDropDown : DropDown<LeaguePresidentViewModel, int>, INotifyPropertyChanged
 {

@@ -11,13 +11,21 @@ public class AwardProfileViewModel
         _award = award;
     }
 
-    public Domain.Constants.AwardType AwardType => Domain.Constants.AwardType.Find(AwardTypeId);
+    public Domain.Constants.AwardType AwardType 
+        => Domain.Constants.AwardType.Find(AwardTypeId);
 
-    public string AwardTypeAbbreviatedName => AwardType?.ToString();
+    public string AwardTypeAbbreviatedName 
+        => AwardType?.ToString() ?? string.Empty;
 
     public int AwardTypeId => _award.AwardTypeId;
 
-    public string AwardTypeName => AwardType?.Name;
+    public string AwardTypeName 
+        => AwardType?.Name ?? string.Empty;
 
     public int Year => _award.Year;
+
+    public override string ToString()
+    {
+        return AwardType.Abbreviation ?? AwardTypeName;
+    }
 }

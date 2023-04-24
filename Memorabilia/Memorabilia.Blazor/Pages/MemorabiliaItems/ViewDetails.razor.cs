@@ -75,7 +75,7 @@ public partial class ViewDetails : ImagePage
         var dialog = DialogService.Show<DeleteDialog>("Delete Autograph");
         var result = await dialog.Result;
 
-        if (result.Cancelled)
+        if (result.Canceled)
             return;
 
         await DeleteAutograph(id);
@@ -86,7 +86,7 @@ public partial class ViewDetails : ImagePage
         var dialog = DialogService.Show<DeleteDialog>("Delete Memorabilia");
         var result = await dialog.Result;
 
-        if (result.Cancelled)
+        if (result.Canceled)
             return;
 
         await DeleteMemorabiliaItem(id);

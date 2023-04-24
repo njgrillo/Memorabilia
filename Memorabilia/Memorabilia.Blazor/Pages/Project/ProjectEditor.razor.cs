@@ -56,7 +56,7 @@ public partial class ProjectEditor : ImagePage
         var dialog = DialogService.Show<AddProjectPersonDialog>("Add Project Person", parameters, options);
         var result = await dialog.Result;
 
-        if (result.Cancelled)
+        if (result.Canceled)
             return;
 
         SaveProjectPersonViewModel projectPerson 

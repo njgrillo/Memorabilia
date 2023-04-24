@@ -1,9 +1,13 @@
 ﻿@page "/Tools/PersonProfileNew/{personId:int}"
 
+@inherits WebPage
+
 @using Memorabilia.Blazor.Pages.Tools.NewProfileStuff
 
 <PageLoader>
     <Content>
-        <PersonProfileNew PersonId="PersonId" />
+        <PersonProfileNew DomainImageRootPath="@DomainImageRootPath"
+                          ImageRootPath="@PersonImageRootPath"
+                          PersonId="PersonId" />
     </Content>
 </PageLoader>

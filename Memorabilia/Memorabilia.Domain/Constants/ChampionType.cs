@@ -54,4 +54,9 @@ public sealed class ChampionType : DomainItemConstant
 
         return null;
     }
+
+    public override string ToString()
+    {
+        return Abbreviation ?? Name;
+    }
 }

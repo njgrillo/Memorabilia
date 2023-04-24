@@ -1,4 +1,4 @@
-﻿#nullable disable
+﻿
 
 namespace Memorabilia.Blazor.Controls.MemorabiliaItem;
 

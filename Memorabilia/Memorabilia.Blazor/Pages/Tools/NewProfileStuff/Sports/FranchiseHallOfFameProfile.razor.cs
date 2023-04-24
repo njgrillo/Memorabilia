@@ -2,14 +2,8 @@
 
 namespace Memorabilia.Blazor.Pages.Tools.NewProfileStuff.Sports;
 
-public partial class FranchiseHallOfFameProfile
+public partial class FranchiseHallOfFameProfile : SportProfile
 {
-    [Parameter]
-    public Person Person { get; set; }
-
-    [Parameter]
-    public Domain.Constants.Sport Sport { get; set; }
-
     private FranchiseHallOfFameProfileViewModel[] FranchiseHallOfFames = Array.Empty<FranchiseHallOfFameProfileViewModel>();
 
     protected override void OnParametersSet()

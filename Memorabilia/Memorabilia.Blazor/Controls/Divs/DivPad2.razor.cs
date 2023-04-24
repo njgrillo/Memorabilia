@@ -1,6 +1,4 @@
-﻿#nullable disable
-
-namespace Memorabilia.Blazor.Controls.Divs;
+﻿namespace Memorabilia.Blazor.Controls.Divs;
 
 public partial class DivPad2 : ComponentBase
 {

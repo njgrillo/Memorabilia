@@ -1,10 +1,7 @@
 ﻿namespace Memorabilia.Blazor.Pages.Tools.NewProfileStuff.Sports;
 
-public partial class FranchiseRetiredNumbersProfile
+public partial class FranchiseRetiredNumbersProfile : SportProfile
 {
-    [Parameter]
-    public Domain.Entities.Person Person { get; set; }
-
     private Domain.Entities.RetiredNumber[] FranchiseRetiredNumbers;
 
     protected override void OnParametersSet()

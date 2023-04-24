@@ -39,7 +39,7 @@
                             <GridEditButton NavigationPath="@($"{ViewModel.RoutePrefix}/{EditModeType.Update.Name}/{context.Id}")" />    
                             <MudTooltip Text="Delete">
                                 <MudFab Color="MudBlazor.Color.Secondary"
-                                        Icon="@Icons.Outlined.DeleteOutline"
+                                        Icon="@Icons.Material.Outlined.DeleteOutline"
                                         OnClick="@(_ => ShowDeleteConfirm(context.Id, "Delete League"))" />
                             </MudTooltip>
                         </MudTd>

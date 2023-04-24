@@ -1,10 +1,12 @@
-﻿<MudTable Bordered="false"
+﻿@inherits SportProfile
+
+<MudTable Bordered="false"
           Dense="false"
           Hover="true"
           Items="@HallOfFames"
           Striped="true">
     <ToolBarContent>
-        <MudText Typo="Typo.h6"><b>MLB Hall of Fame</b></MudText>
+        <MudText Typo="Typo.h6"><b>@($"{Sport.Name} Hall of Fame")</b></MudText>
     </ToolBarContent>
     <HeaderContent>
         <MudTh>Induction Year</MudTh>

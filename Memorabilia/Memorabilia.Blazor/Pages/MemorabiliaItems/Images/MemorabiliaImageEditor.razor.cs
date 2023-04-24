@@ -75,10 +75,10 @@ public partial class MemorabiliaImageEditor : ImagePage
             var dialog = DialogService.Show<SelectAutographDialog>("Select Autograph", parameters, options);
             var result = await dialog.Result;
 
-            if (result.Cancelled)
+            if (result.Canceled)
                 return;
 
-            int.TryParse(result.Data.ToString(), out int autographId);
+            _ = int.TryParse(result.Data.ToString(), out int autographId);
 
             if (autographId == 0)
                 return;

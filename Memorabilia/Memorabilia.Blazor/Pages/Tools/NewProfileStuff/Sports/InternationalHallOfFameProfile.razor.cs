@@ -2,11 +2,8 @@
 
 namespace Memorabilia.Blazor.Pages.Tools.NewProfileStuff.Sports;
 
-public partial class InternationalHallOfFameProfile
+public partial class InternationalHallOfFameProfile : SportProfile
 {
-    [Parameter]
-    public Person Person { get; set; }
-
     private InternationalHallOfFame[] InternationalHallOfFames;
 
     protected override void OnParametersSet()

@@ -1,4 +1,4 @@
-﻿@inherits PersonProfile
+﻿@inherits SportProfile
 
 <MudTable Bordered="false"
           Dense="false"
@@ -6,7 +6,7 @@
           Items="@AllStars"
           Striped="true">
     <ToolBarContent>
-        <MudText Typo="Typo.h6"><b>All Star Game Selections</b></MudText>
+        <MudText Typo="Typo.h6"><b>@($"{HeaderText} Selection(s)")</b></MudText>
     </ToolBarContent>
     <HeaderContent>
         <MudTh>Team</MudTh>

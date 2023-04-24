@@ -1,6 +1,4 @@
-﻿#nullable disable
-
-namespace Memorabilia.Blazor.Controls.CheckBoxes;
+﻿namespace Memorabilia.Blazor.Controls.CheckBoxes;
 
 public partial class CheckBox<TType>
 {

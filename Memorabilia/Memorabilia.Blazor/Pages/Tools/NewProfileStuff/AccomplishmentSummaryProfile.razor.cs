@@ -1,10 +1,7 @@
 ﻿namespace Memorabilia.Blazor.Pages.Tools.NewProfileStuff;
 
-public partial class AccomplishmentSummaryProfile
+public partial class AccomplishmentSummaryProfile : PersonProfile
 {
-    [Parameter]
-    public Domain.Entities.Person Person { get; set; }
-
     [Parameter]
     public Sport Sport { get; set; }
 
@@ -24,48 +21,57 @@ public partial class AccomplishmentSummaryProfile
     private ChampionshipProfileViewModel[] Championships = Array.Empty<ChampionshipProfileViewModel>();
 
     private string ChampionshipSummaryDisplayText 
-        => $"{Championships?.Length ?? 0}x {ChampionType.Find(Sport)?.Name} Champion";
+        => $"{Championships?.Length ?? 0}x {ChampionType.Find(Sport)?.ToString()} Champion";
+
+    private AwardProfileViewModel[] DistinctAwards = Array.Empty<AwardProfileViewModel>();
+
+    private LeaderProfileViewModel[] DistinctLeaders = Array.Empty<LeaderProfileViewModel>();
 
     private LeaderProfileViewModel[] Leaders = Array.Empty<LeaderProfileViewModel>();
 
     protected override void OnInitialized()
     {
         Accomplishments = Person.Accomplishments
-                                .Filter(Sport)
+                                .Filter(Sport, OccupationType)
                                 .Select(accomplishment => new AccomplishmentProfileViewModel(accomplishment))
                                 .DistinctBy(accomplishment => accomplishment.AccomplishmentTypeId)
                                 .ToArray();
 
         Domain.Entities.PersonTeam[] teams
             = Person.Teams
+                    .Filter(Sport, OccupationType)
                     .Where(team => Sport == null || Sport.Id == team.Team.Franchise.SportLeagueLevel.SportId)
                     .ToArray();
 
         AllStars = Person.AllStars
-                         .Filter(Sport)
+                         .Filter(Sport, OccupationType)
                          .Select(allStar => new AllStarProfileViewModel(allStar, teams.FirstOrDefault(team => team.BeginYear <= allStar.Year && team.EndYear >= allStar.Year)))
                          .OrderBy(allStar => allStar.Year)
                          .ToArray();
 
         Awards = Person.Awards
-                       .Filter(Sport)
+                       .Filter(Sport, OccupationType)
                        .Select(award => new AwardProfileViewModel(award))
-                       .DistinctBy(award => award.AwardTypeId)
                        .OrderBy(award => award.Year)
                        .ThenBy(award => award.AwardTypeName)
                        .ToArray();
 
+        DistinctAwards = Awards.DistinctBy(award => award.AwardTypeId)
+                               .ToArray();
+
         Championships = Person.Teams
-                              .Championships(Sport)
+                              .Championships(Sport, OccupationType)
                               .Select(championship => new ChampionshipProfileViewModel(championship))
                               .ToArray();
 
         Leaders = Person.Leaders
-                        .Filter(Sport)
+                        .Filter(Sport, OccupationType)
                         .Select(leader => new LeaderProfileViewModel(leader))
-                        .DistinctBy(leader => leader.LeaderTypeId)
                         .OrderBy(leader => leader.Year)
                         .ThenBy(leader => leader.LeaderTypeName)                        
                         .ToArray();
+
+        DistinctLeaders = Leaders.DistinctBy(leader => leader.LeaderTypeId)
+                                 .ToArray();
     }
 }

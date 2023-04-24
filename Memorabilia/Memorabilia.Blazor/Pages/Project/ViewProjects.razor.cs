@@ -1,6 +1,4 @@
-﻿#nullable disable
-
-namespace Memorabilia.Blazor.Pages.Project;
+﻿namespace Memorabilia.Blazor.Pages.Project;
 
 public partial class ViewProjects : ComponentBase
 {
@@ -31,7 +29,7 @@ public partial class ViewProjects : ComponentBase
         var dialog = DialogService.Show<DeleteDialog>("Delete Project");
         var result = await dialog.Result;
 
-        if (result.Cancelled)
+        if (result.Canceled)
             return;
 
         await Delete(id);

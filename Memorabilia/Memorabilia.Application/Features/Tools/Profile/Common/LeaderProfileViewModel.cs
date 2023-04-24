@@ -11,13 +11,23 @@ public class LeaderProfileViewModel
         _leader = leader;
     }
 
-    public Domain.Constants.LeaderType LeaderType => Domain.Constants.LeaderType.Find(LeaderTypeId);
+    public Domain.Constants.LeaderType LeaderType 
+        => Domain.Constants.LeaderType.Find(LeaderTypeId);
 
-    public string LeaderTypeAbbreviatedName => LeaderType?.ToString();
+    public string LeaderTypeAbbreviatedName 
+        => LeaderType?.ToString() ?? string.Empty;
 
     public int LeaderTypeId => _leader.LeaderTypeId;
 
-    public string LeaderTypeName => LeaderType?.Name;
+    public string LeaderTypeName 
+        => LeaderType?.Name ?? string.Empty;
 
     public int Year => _leader.Year;
+
+    public override string ToString()
+    {
+        return !LeaderType.Abbreviation.IsNullOrEmpty() 
+            ? LeaderType.Abbreviation
+            : LeaderType.Name;
+    }
 }

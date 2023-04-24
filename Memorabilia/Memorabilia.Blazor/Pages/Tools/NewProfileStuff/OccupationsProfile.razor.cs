@@ -1,13 +1,9 @@
 ﻿using Memorabilia.Application.Features.Tools.ProfileNew;
-using Memorabilia.Domain.Entities;
 
 namespace Memorabilia.Blazor.Pages.Tools.NewProfileStuff;
 
-public partial class OccupationsProfile
+public partial class OccupationsProfile : PersonProfile
 {
-    [Parameter]
-    public Person Person { get; set; }
-
     private OccupationsProfileViewModel _viewModel;
 
     protected override void OnParametersSet()

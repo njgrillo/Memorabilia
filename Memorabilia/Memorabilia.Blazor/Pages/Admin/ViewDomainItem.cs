@@ -1,6 +1,4 @@
-﻿#nullable disable
-
-namespace Memorabilia.Blazor.Pages.Admin;
+﻿namespace Memorabilia.Blazor.Pages.Admin;
 
 public abstract class ViewDomainItem<T> : CommandQuery where T : ViewModel
 {

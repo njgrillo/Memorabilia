@@ -1,5 +1,4 @@
-﻿using Memorabilia.Domain.Constants;
-using Memorabilia.Domain.Entities;
+﻿using Memorabilia.Domain.Entities;
 
 namespace Memorabilia.Application.Features.Tools.ProfileNew;
 
@@ -14,6 +13,6 @@ public class OccupationsProfileViewModel
 
     public PersonOccupation[] Occupations 
         => _person.Occupations
-                  .OrderBy(occupation => occupation.OccupationTypeId == OccupationType.Primary.Id)
+                  .OrderBy(occupation => occupation.OccupationTypeId)
                   .ToArray();
 }
