@@ -4,5 +4,5 @@ namespace Memorabilia.Application.Features.Services.Tools.Profile;
 
 public interface IProfileService
 {
-    Task<List<ProfileType>> GetProfileTypes(int personId);
+    ProfileType[] GetProfileTypes(Domain.Entities.Person person, Domain.Entities.PersonOccupation occupation);
 }

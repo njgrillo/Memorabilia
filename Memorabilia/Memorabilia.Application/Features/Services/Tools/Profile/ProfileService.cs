@@ -4,28 +4,25 @@ namespace Memorabilia.Application.Features.Services.Tools.Profile;
 
 public class ProfileService : IProfileService
 {
-    private readonly IPersonRepository _personRepository;
     private readonly IProfileRuleFactory _profileRuleFactory;
 
-    public ProfileService(IPersonRepository personRepository, IProfileRuleFactory profileRuleFactory)
+    public ProfileService(IProfileRuleFactory profileRuleFactory)
     {
-        _personRepository = personRepository;
         _profileRuleFactory = profileRuleFactory;
     }
 
-    public async Task<List<ProfileType>> GetProfileTypes(int personId)
+    public ProfileType[] GetProfileTypes(Domain.Entities.Person person, Domain.Entities.PersonOccupation occupation)
     {
-        var person = await _personRepository.Get(personId);
         var profileTypes = new List<ProfileType>();
 
         foreach (var rule in _profileRuleFactory.Rules)
         {
-            if (rule.Applies(person))
+            if (rule.Applies(person, occupation))
             {
                 profileTypes.Add(rule.GetProfileType());
             }
         }
 
-        return profileTypes;
+        return profileTypes.ToArray();
     }
 }

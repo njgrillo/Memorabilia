@@ -9,21 +9,17 @@
              Rounded="true">
         <Iterations Context="profileType"
                     Items="ProfileTypes">
-            <Condition Evaluation="@(ProfileIsValid(profileType.Name))">
-                <Match>
-                    <MudTabPanel BadgeColor="MudBlazor.Color.Success"
-                                 Text="@profileType.Name">
-                        <DivRowCol12>
-                            <Content>
-                                <div>
-                                    <DynamicComponent Parameters="@Parameters"
-                                                      Type="@(GetComponent(profileType.Name))" />
-                                </div>
-                            </Content>
-                        </DivRowCol12>
-                    </MudTabPanel>
-                </Match>
-            </Condition>            
+            <MudTabPanel BadgeColor="MudBlazor.Color.Success"
+                         Text="@profileType.Name">
+                <DivRowCol12>
+                    <Content>
+                        <div>
+                            <DynamicComponent Parameters="@Parameters"
+                                              Type="@(GetComponent(profileType.Name))" />
+                        </div>
+                    </Content>
+                </DivRowCol12>
+            </MudTabPanel>
         </Iterations>
     </MudTabs>
 }

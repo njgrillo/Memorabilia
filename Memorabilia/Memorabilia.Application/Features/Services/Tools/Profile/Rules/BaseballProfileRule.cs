@@ -5,9 +5,10 @@ namespace Memorabilia.Application.Features.Services.Tools.Profile.Rules;
 
 public class BaseballProfileRule : IProfileRule
 {
-    public bool Applies(Person person)
+    public bool Applies(Person person, PersonOccupation occupation)
     {
-        return person.Sports.Any(sport => sport.SportId == Domain.Constants.Sport.Baseball.Id);
+        return Domain.Constants.Occupation.IsBaseballOccupation(occupation.OccupationId)
+            && person.Sports.Any(sport => sport.SportId == Domain.Constants.Sport.Baseball.Id);
     }
 
     public ProfileType GetProfileType()
