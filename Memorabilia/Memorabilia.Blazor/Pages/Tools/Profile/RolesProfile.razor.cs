@@ -21,6 +21,16 @@ public partial class RolesProfile : PersonProfile
         };
     }
 
+    private bool ProfileIsValid(string profileTypeName)
+    {
+        var occupation = Domain.Constants.Occupation.Find(Occupation.OccupationId);
+
+        if (occupation == Domain.Constants.Occupation.Umpire)
+            return profileTypeName == "Baseball";
+
+        return true;
+    }
+
     private Type GetComponent(string profileTypeName)
     {
         return Type.GetType($"Memorabilia.Blazor.Pages.Tools.Profile.{profileTypeName}{Occupation.OccupationName}Profile"); 

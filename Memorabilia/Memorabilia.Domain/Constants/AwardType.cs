@@ -567,6 +567,13 @@ public sealed class AwardType : DomainItemConstant
         WorldSeriesMostValuablePlayer
     };
 
+    public static readonly AwardType[] BaseballBroadcaster =
+    {
+        CommissionersHistoricAchievementAward,
+        FordFrickAward,
+        PresidentialMedalOfFreedom
+    };
+
     public static readonly AwardType[] BaseballManager =
     {
         AmericanLeagueManagerOfTheYear,
@@ -1075,6 +1082,7 @@ public sealed class AwardType : DomainItemConstant
         {
             "BaseballAdministrator" => BaseballAdministrator,
             "BaseballAthlete" => BaseballAthlete,
+            "BaseballBroadcaster" => BaseballBroadcaster,
             "BaseballCoach" => Array.Empty<AwardType>(),
             "BaseballExecutive" => BaseballAdministrator,
             "BaseballManager" => BaseballManager,
@@ -1084,6 +1092,7 @@ public sealed class AwardType : DomainItemConstant
             "BasketballExecutive" => BasketballAdministrator,
             "FootballAdministrator" => FootballAdministrator,
             "FootballAthlete" => FootballAthlete,
+            "FootballBroadcaster" => Array.Empty<AwardType>(),
             "FootballCoach" => FootballCoach,
             "FootballExecutive" => FootballAdministrator,
             _ => throw new NotImplementedException(),

@@ -1,0 +1,28 @@
+﻿@inherits PersonProfile
+
+<div class="row" style="overflow-y:auto;max-height:600px;">
+    <div style="width:49%;">
+        <Condition Evaluation="Person.HallOfFames.Filter(Sport.Football).Any()">
+            <Match>
+                <br />
+                <SportHallOfFameProfile Person="Person"
+                                        Sport="Sport.Football" />
+            </Match>
+        </Condition>
+    </div>
+    <div style="width:49%;margin-left:1%">
+        <br />
+        <AccomplishmentSummaryProfile Occupation="Occupation"
+                                      Person="Person"
+                                      Sport="Sport.Football" />
+        <br />
+        <Condition Evaluation="Person.Awards.Filter(Sport.Football, OccupationType).Any()">
+            <Match>
+                <AwardsProfile Occupation="Occupation"
+                               Person="Person"
+                               Sport="Sport.Football" />
+                <br />
+            </Match>
+        </Condition>
+    </div>
+</div>
