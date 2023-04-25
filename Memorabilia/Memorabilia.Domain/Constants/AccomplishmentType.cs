@@ -75,7 +75,7 @@ public sealed class AccomplishmentType : DomainItemConstant
     public static readonly AccomplishmentType FirstTeamAllPac10Football = new (181, "First-team All-Pac-10 (Football)");
     public static readonly AccomplishmentType FirstTeamAllPacificCoastFootball = new (114, "First-team All-Pacific Coast (Football)");
     public static readonly AccomplishmentType FirstTeamAllPCC = new (122, "First-team All-PCC");
-    public static readonly AccomplishmentType FirstTeamAllPro = new (25, "First-team All-Pro", "All Pro");
+    public static readonly AccomplishmentType FirstTeamAllPro = new (25, "First-team All-Pro");
     public static readonly AccomplishmentType FirstTeamAllSECFootball = new (86, "First-team All-SEC (Football)");
     public static readonly AccomplishmentType FirstTeamAllSouthernFootball = new (110, "First-team All-Southern (Football)");
     public static readonly AccomplishmentType FirstTeamAllSouthland = new (161, "First-team All-Southland");
@@ -87,7 +87,7 @@ public sealed class AccomplishmentType : DomainItemConstant
     public static readonly AccomplishmentType FirstTeamAllWesternConference = new (130, "First-team All-Western Conference");
     public static readonly AccomplishmentType FirstTeamLittleAllAmerican = new (70, "First-team Little All-American");
     public static readonly AccomplishmentType FirstTeamParadeAllAmerican = new (143, "First-team Parade All-American");
-    public static readonly AccomplishmentType FortyFortyClub = new(18, "40-40 Club", "40-40");
+    public static readonly AccomplishmentType FortyFortyClub = new(18, "40-40 Club");
     public static readonly AccomplishmentType FourHomeRunsInAGame = new(12, "4 Home Runs in a Game", "4 HRs");
     public static readonly AccomplishmentType HelmsAllAmerican = new (135, "Helms All-American");
     public static readonly AccomplishmentType HitForTheCycle = new(13, "Hit for the Cycle", "Cycle");
@@ -162,7 +162,7 @@ public sealed class AccomplishmentType : DomainItemConstant
     public static readonly AccomplishmentType ThirdTeamAllAmericanFootball = new (177, "Third-team All-American (Football)");
     public static readonly AccomplishmentType ThirdTeamAllPro = new (93, "Third-team All-Pro");
     public static readonly AccomplishmentType ThirdTeamLittleAllAmerican = new(115, "Third-team Little All-American");
-    public static readonly AccomplishmentType ThirtyThirtyClub = new(3, "30-30 Club", "30-30");
+    public static readonly AccomplishmentType ThirtyThirtyClub = new(3, "30-30 Club");
     public static readonly AccomplishmentType ToppsAllStarRookieTeam = new (67, "Topps All-Star Rookie Team");
     public static readonly AccomplishmentType TwoBasesLoadedTriplesInAGame = new(24, "2 Bases Loaded Triples in a Game");
     public static readonly AccomplishmentType TwoGrandSlamsInOneInning = new(16, "2 Grand Slams in One Inning");    

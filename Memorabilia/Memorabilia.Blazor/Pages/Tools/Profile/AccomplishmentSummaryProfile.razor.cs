@@ -20,8 +20,12 @@ public partial class AccomplishmentSummaryProfile : PersonProfile
 
     private ChampionshipProfileViewModel[] Championships = Array.Empty<ChampionshipProfileViewModel>();
 
-    private string ChampionshipSummaryDisplayText 
-        => $"{Championships?.Length ?? 0}x {ChampionType.Find(Sport)?.ToString()} Champion";
+    private string ChampionshipSummaryDisplayText
+        => Championships?.Length > 0
+        ? $"{(Championships.Length > 1 ? Championships.Length : Championships.First().Year)}x {ChampionType.Find(Sport)?.ToString()} Champion"
+        : string.Empty;
+
+    private AccomplishmentProfileViewModel[] DistinctAccomplishments = Array.Empty<AccomplishmentProfileViewModel>();
 
     private AwardProfileViewModel[] DistinctAwards = Array.Empty<AwardProfileViewModel>();
 
@@ -34,8 +38,10 @@ public partial class AccomplishmentSummaryProfile : PersonProfile
         Accomplishments = Person.Accomplishments
                                 .Filter(Sport, OccupationType)
                                 .Select(accomplishment => new AccomplishmentProfileViewModel(accomplishment))
-                                .DistinctBy(accomplishment => accomplishment.AccomplishmentTypeId)
                                 .ToArray();
+
+        DistinctAccomplishments = Accomplishments.DistinctBy(accomplishment => accomplishment.AccomplishmentTypeId)
+                                                 .ToArray();
 
         Domain.Entities.PersonTeam[] teams
             = Person.Teams
@@ -73,5 +79,29 @@ public partial class AccomplishmentSummaryProfile : PersonProfile
 
         DistinctLeaders = Leaders.DistinctBy(leader => leader.LeaderTypeId)
                                  .ToArray();
+    }
+
+    private string GetAccomplishmentDisplayText(AccomplishmentProfileViewModel accomplishment)
+    {
+        int count = Accomplishments.Where(x => x.AccomplishmentTypeId == accomplishment.AccomplishmentTypeId)
+                                   .Count();
+
+        return $"{(count > 1 ? $"{count}x" : accomplishment.Year)} {accomplishment}";
+    }
+
+    private string GetAwardDisplayText(AwardProfileViewModel award)
+    {
+        int count = Awards.Where(x => x.AwardTypeId == award.AwardTypeId)
+                          .Count();
+
+        return $"{(count > 1 ? $"{count}x" : award.Year)} {award}";
+    }
+
+    private string GetLeaderDisplayText(LeaderProfileViewModel leader)
+    {
+        int count = Leaders.Where(x => x.LeaderTypeId == leader.LeaderTypeId)
+                           .Count();
+
+        return $"{(count > 1 ? $"{count}x" : leader.Year)} {leader} Leader";
     }
 }

@@ -3,9 +3,9 @@
 <MudChipSet>
     <PrettyBlazor.Condition Evaluation="Accomplishments.Any()">
         <Match>
-            <Iterations Items="@Accomplishments">
+            <Iterations Items="@DistinctAccomplishments">
                 <MudChip Color="MudBlazor.Color.Info"
-                         Text="Accomplishment">@($"{context.ToString()}")</MudChip>
+                         Text="Accomplishment">@(GetAccomplishmentDisplayText(context))</MudChip>
                 </Iterations>
             </Match>
         </PrettyBlazor.Condition>
@@ -19,7 +19,7 @@
         <Match>
             <Iterations Items="@DistinctAwards">
                 <MudChip Color="MudBlazor.Color.Warning"
-                         Text="Award">@($"{Awards.Where(award => award.AwardTypeId == context.AwardTypeId).Count()}x {context.ToString()}")</MudChip>
+                         Text="Award">@(GetAwardDisplayText(context))</MudChip>
             </Iterations>
         </Match>
     </PrettyBlazor.Condition>
@@ -33,7 +33,7 @@
         <Match>
             <Iterations Items="@DistinctLeaders">
                 <MudChip Color="MudBlazor.Color.Secondary"
-                        Text="Leader">@($"{Leaders.Where(leader => leader.LeaderTypeId == context.LeaderTypeId).Count()}x {context.ToString()}")</MudChip>
+                         Text="Leader">@(GetLeaderDisplayText(context))</MudChip>
             </Iterations>
         </Match>
     </PrettyBlazor.Condition>

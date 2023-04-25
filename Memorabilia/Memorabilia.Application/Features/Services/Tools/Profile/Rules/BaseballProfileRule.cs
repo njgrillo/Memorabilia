@@ -8,7 +8,7 @@ public class BaseballProfileRule : IProfileRule
     public bool Applies(Person person)
     {
         return person.Occupations.Any(occupation => occupation.OccupationId == Domain.Constants.Occupation.Athlete.Id) &&
-               person.Teams.Any(team => team.Team.Franchise.SportLeagueLevel.SportId == Domain.Constants.Sport.Baseball.Id);
+               person.Sports.Any(sport => sport.SportId == Domain.Constants.Sport.Baseball.Id);
     }
 
     public ProfileType GetProfileType()
