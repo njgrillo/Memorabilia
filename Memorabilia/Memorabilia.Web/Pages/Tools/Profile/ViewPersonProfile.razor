@@ -1,7 +1,11 @@
-﻿@page "/Tools/PersonProfile"
+﻿@page "/Tools/PersonProfile/{personId:int}"
+
+@inherits WebPage
 
 <PageLoader>
     <Content>
-        <PersonProfile />
+        <PersonProfileMain DomainImageRootPath="@DomainImageRootPath"
+                           ImageRootPath="@PersonImageRootPath"
+                           PersonId="PersonId" />
     </Content>
 </PageLoader>

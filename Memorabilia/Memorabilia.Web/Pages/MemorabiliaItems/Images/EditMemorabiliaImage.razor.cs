@@ -5,8 +5,6 @@
         [Parameter]
         public int MemorabiliaId { get; set; }
 
-        protected string UploadPath { get; set; }
-
         protected override async Task OnInitializedAsync()
         {
             var userId = await LocalStorage.GetAsync<int>("UserId");

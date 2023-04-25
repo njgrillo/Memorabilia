@@ -1,0 +1,59 @@
+﻿@inherits ImagePage
+
+@if(_viewModel != null)
+{
+    <div class="row" style="margin-left:1%;margin-top:1%;">
+        <div class="col-3">
+            <div style="margin-left:1%">
+                <MudText Typo="Typo.h4">
+                    <b>@_viewModel.NameHeader</b>
+                </MudText>
+                <MudText Typo="Typo.h6">
+                    @_viewModel.Nicknames
+                </MudText>
+                <br />
+                <MudText Typo="Typo.h6">
+                    @_viewModel.LifespanHeader
+                </MudText>
+            </div>
+            <MudImage Class="rounded-lg ma-4"
+                      Elevation="25"
+                      Height="520"
+                      Src="@(GetImageData(_viewModel.PersonImageFileName))"
+                      Width="400" />
+            <Condition Evaluation="_person.Colleges.Any()">
+                <Match>
+                    <CollegesProfile Person="@_person" />
+                    <br />
+                </Match>
+            </Condition>
+            <Condition Evaluation="_person.CollegeHallOfFames.Any()">
+                <Match>
+                    <CollegeHallOfFameProfile Person="@_person" />
+                    <br />
+                </Match>
+            </Condition>
+            <Condition Evaluation="_person.InternationalHallOfFames.Any()">
+                <Match>
+                    <InternationalHallOfFameProfile Person="@_person" />
+                    <br />
+                </Match>
+            </Condition>
+            <Condition Evaluation="_person.CollegeRetiredNumbers.Any()">
+                <Match>
+                    <CollegeRetiredNumbersProfile Person="@_person" />
+                    <br />
+                </Match>
+            </Condition>
+            <Condition Evaluation="_person.RetiredNumbers.Any()">
+                <Match>
+                    <FranchiseRetiredNumbersProfile Person="@_person" />
+                    <br />
+                </Match>
+            </Condition>
+        </div>
+        <div class="col-8" style="margin-left:2%;margin-right:1%;">
+            <OccupationsProfile Person="_person" />
+        </div>        
+    </div>    
+}
