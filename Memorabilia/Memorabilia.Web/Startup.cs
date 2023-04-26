@@ -1,6 +1,3 @@
-using Memorabilia.Application.Features.Services.Autographs.Inscriptions.Accomplishments;
-using Memorabilia.Application.Features.Services.Autographs.Inscriptions.Awards;
-
 namespace Memorabilia.Web;
 
 public class Startup
@@ -27,102 +24,10 @@ public class Startup
         services.AddTransient<CommandRouter>();
         services.AddTransient<QueryRouter>();
         services.AddMediatR(typeof(GetCommissioner).Assembly);
-
-        services.AddSingleton<AuthenticationValidator>();
-        services.AddSingleton<AutographValidator>();
-        services.AddSingleton<BammerValidator>();
-        services.AddSingleton<BaseballValidator>();
-        services.AddSingleton<BasketballValidator>();
-        services.AddSingleton<BatValidator>();
-        services.AddSingleton<BobbleheadValidator>();
-        services.AddSingleton<BookValidator>();
-        services.AddSingleton<CanvasValidator>();
-        services.AddSingleton<CardValidator>();
-        services.AddSingleton<CerealBoxValidator>();
-        services.AddSingleton<DocumentValidator>();
-        services.AddSingleton<DrumValidator>();
-        services.AddSingleton<FigureValidator>();
-        services.AddSingleton<FirstDayCoverValidator>();
-        services.AddSingleton<FootballValidator>();
-        services.AddSingleton<GloveValidator>();
-        services.AddSingleton<GolfballValidator>();
-        services.AddSingleton<GuitarValidator>();
-        services.AddSingleton<HatValidator>();
-        services.AddSingleton<HeadBandValidator>();
-        services.AddSingleton<HelmetValidator>();
-        services.AddSingleton<HockeyStickValidator>();
-        services.AddSingleton<IndexCardValidator>();
-        services.AddSingleton<InscriptionValidator>();
-        services.AddSingleton<JerseyValidator>();
-        services.AddSingleton<JerseyNumberValidator>();
-        services.AddSingleton<LithographValidator>();
-        services.AddSingleton<MagazineValidator>();
-        services.AddSingleton<MemorabiliaItemValidator>();
-        services.AddSingleton<PaintingValidator>();
-        services.AddSingleton<PantValidator>();
-        services.AddSingleton<PhotoValidator>();
-        services.AddSingleton<PinFlagValidator>();
-        services.AddSingleton<PlayingCardValidator>();
-        services.AddSingleton<PosterValidator>();
-        services.AddSingleton<PuckValidator>();
-        services.AddSingleton<PylonValidator>();
-        services.AddSingleton<ShirtValidator>();
-        services.AddSingleton<ShoeValidator>();
-        services.AddSingleton<SoccerballValidator>();
-        services.AddSingleton<TennisballValidator>();
-        services.AddSingleton<TennisRacketValidator>();
-        services.AddSingleton<TicketValidator>();
-        services.AddSingleton<TrunkValidator>();
-        services.AddSingleton<WristBandValidator>();
-
-        services.AddSingleton<AccomplishmentRuleFactory>();
-        services.AddSingleton<AwardRuleFactory>();
-        services.AddSingleton<SuggestedInscriptionService>();
-
-        services.AddTransient<AllStarRepository>();
-        services.AddTransient<IAllStarRepository, AllStarCacheRepository>();
-
-        services.AddTransient<CareerRecordRepository>();
-        services.AddTransient<ICareerRecordRepository, CareerRecordCacheRepository>();
-
-        services.AddTransient<ChampionRepository>();
-        services.AddTransient<IChampionRepository, ChampionCacheRepository>();
-
-        services.AddTransient<DraftRepository>();
-        services.AddTransient<IDraftRepository, DraftCacheRepository>();
-
-        services.AddTransient<FranchiseHallOfFameRepository>();
-        services.AddTransient<IFranchiseHallOfFameRepository, FranchiseHallOfFameCacheRepository>();
-
-        services.AddTransient<HallOfFameRepository>();
-        services.AddTransient<IHallOfFameRepository, HallOfFameCacheRepository>();
-
-        services.AddTransient<InternationalHallOfFameRepository>();
-        services.AddTransient<IInternationalHallOfFameRepository, InternationalHallOfFameCacheRepository>();
-
-        services.AddTransient<LeaderRepository>();
-        services.AddTransient<ILeaderRepository, LeaderCacheRepository>();
-
-        services.AddTransient<PersonAccomplishmentRepository>();
-        services.AddTransient<IPersonAccomplishmentRepository, PersonAccomplishmentCacheRepository>();
-
-        services.AddTransient<PersonAwardRepository>();
-        services.AddTransient<IPersonAwardRepository, PersonAwardCacheRepository>();
-
-        services.AddTransient<PersonCollegeRepository>();
-        services.AddTransient<IPersonCollegeRepository, PersonCollegeCacheRepository>();
-
-        services.AddTransient<PersonRepository>();
-        services.AddTransient<IPersonRepository, PersonCacheRepository>();
-
-        services.AddTransient<PersonTeamRepository>();
-        services.AddTransient<IPersonTeamRepository, PersonTeamCacheRepository>();
-
-        services.AddTransient<RetiredNumberRepository>();
-        services.AddTransient<IRetiredNumberRepository, RetiredNumberCacheRepository>();
-
-        services.AddTransient<SingleSeasonRecordRepository>();
-        services.AddTransient<ISingleSeasonRecordRepository, SingleSeasonRecordCacheRepository>();
+        services.RegisterValidators();
+        services.RegisterFactories();
+        services.RegisterServices();
+        services.RegisterCachedRepositories();       
 
         services
             .AddServerSideBlazor()

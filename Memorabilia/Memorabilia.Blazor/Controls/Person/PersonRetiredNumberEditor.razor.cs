@@ -15,6 +15,9 @@ public partial class PersonRetiredNumberEditor : ComponentBase
 
     private void Add()
     {
+        if (_viewModel.Franchise == null || !_viewModel.PlayerNumber.HasValue)
+            return;
+
         RetiredNumbers.Add(_viewModel);
 
         _viewModel = new SavePersonRetiredNumberViewModel();

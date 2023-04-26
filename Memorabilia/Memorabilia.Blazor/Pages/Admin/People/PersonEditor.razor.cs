@@ -2,13 +2,27 @@
 
 public partial class PersonEditor : EditItem<SavePersonViewModel, PersonViewModel>
 {
+    [Inject]
+    public PersonValidator Validator { get; set; }
+
+    private bool PerformValidation;
+
     protected async Task HandleValidSubmit()
     {
         var command = new SavePerson.Command(ViewModel);
 
+        PerformValidation = true;
+
+        ViewModel.ValidationResult = Validator.Validate(command);        
+
+        if (!ViewModel.ValidationResult.IsValid)
+            return;
+
         await HandleValidSubmit(command);
 
         ViewModel.Id = command.Id;
+
+        PerformValidation = false;
     }
 
     protected async Task OnLoad()

@@ -15,6 +15,9 @@ public partial class PersonCareerRecordEditor : ComponentBase
 
     private void Add()
     {
+        if (_viewModel.RecordType == null)
+            return;
+
         CareerRecords.Add(_viewModel);
 
         _viewModel = new SavePersonCareerRecordViewModel();

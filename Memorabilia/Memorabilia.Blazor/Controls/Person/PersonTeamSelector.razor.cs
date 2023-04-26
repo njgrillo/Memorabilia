@@ -19,6 +19,9 @@ public partial class PersonTeamSelector : ComponentBase
 
     private void Add()
     {
+        if (_selectedTeam.TeamId == 0)
+            return;
+
         _viewModel.TeamId = _selectedTeam.TeamId;
         _viewModel.FranchiseName = _selectedTeam.FranchiseName;
         _viewModel.TeamLocation = _selectedTeam.TeamLocation;

@@ -17,9 +17,11 @@ public class SavePersonSportServiceViewModel : SaveViewModel
         SportIds = viewModel.Sports.Select(sport => sport.SportId).ToList();    
     }
 
-    public override string BackNavigationPath => $"{AdminDomainItem.People.Title}/{AdminDomainItem.Occupations.Item}/{EditModeType.Update.Name}/{PersonId}";
+    public override string BackNavigationPath
+        => $"{AdminDomainItem.People.Title}/{AdminDomainItem.Occupations.Item}/{EditModeType.Update.Name}/{PersonId}";
 
-    public override string ContinueNavigationPath => $"{AdminDomainItem.People.Title}/{AdminDomainItem.Teams.Item}/{EditModeType.Update.Name}/{PersonId}";
+    public override string ContinueNavigationPath 
+        => $"{AdminDomainItem.People.Title}/{AdminDomainItem.Teams.Item}/{EditModeType.Update.Name}/{PersonId}";
 
     public List<SavePersonCollegeViewModel> Colleges { get; set; } = new();
 
@@ -36,15 +38,19 @@ public class SavePersonSportServiceViewModel : SaveViewModel
 
     public DateTime? LastAppearanceDate { get; set; }
 
-    public string ImageFileName => Domain.Constants.ImageFileName.Athletes;
+    public string ImageFileName 
+        => Domain.Constants.ImageFileName.Athletes;
 
-    public override string ItemTitle => "Sport Service";
+    public override string ItemTitle 
+        => "Sport Service";
 
-    public override string PageTitle => $"{(EditModeType == EditModeType.Update ? EditModeType.Update.Name : EditModeType.Add.Name)} {ItemTitle}";
+    public override string PageTitle 
+        => $"{(EditModeType == EditModeType.Update ? EditModeType.Update.Name : EditModeType.Add.Name)} {ItemTitle}";
 
     public int PersonId { get; set; }
 
-    public PersonStep PersonStep => PersonStep.SportService;
+    public PersonStep PersonStep
+        => PersonStep.SportService;
 
     public SavePersonSportServiceViewModel Service { get; set; }
 

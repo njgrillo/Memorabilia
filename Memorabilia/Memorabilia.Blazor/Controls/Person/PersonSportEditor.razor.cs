@@ -22,8 +22,10 @@ public partial class PersonSportEditor : ComponentBase
 
         Sports.Add(_viewModel);
 
-        _viewModel = new SavePersonSportViewModel();
-        _viewModel.IsPrimary = false;
+        _viewModel = new SavePersonSportViewModel
+        {
+            IsPrimary = false
+        };
 
         await OnSportChange.InvokeAsync();
     }

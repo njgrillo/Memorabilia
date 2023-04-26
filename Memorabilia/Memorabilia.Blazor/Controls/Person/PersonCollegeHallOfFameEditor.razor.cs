@@ -15,6 +15,9 @@ public partial class PersonCollegeHallOfFameEditor
 
     private void Add()
     {
+        if (_viewModel.College == null)
+            return;
+
         CollegeHallOfFames.Add(_viewModel);
 
         _viewModel = new SavePersonCollegeHallOfFameViewModel();

@@ -12,8 +12,10 @@
           PageFooterButtonText="@ViewModel.ExitButtonText"
           PageFooterNavigationPath="@ViewModel.BackNavigationPath"
           PageTitle="@ViewModel.PageTitle"
+          PerformValidation="PerformValidation"
           TItem="SavePersonViewModel"
-          UseMultipleButtons="true">
+          UseMultipleButtons="true"
+          ValidationResult="@ViewModel.ValidationResult">
     <TimelineContent>
         <PersonTimeline EditMode="ViewModel.EditModeType"
                         PersonId="ViewModel.Id"
@@ -30,23 +32,27 @@
                     <DivRowCol3>
                         <Content>
                             <TextField Label="First Name"
+                                       MaxLength="50"
                                        OnBlur="OnNameFieldBlur"
                                        SelectedText="@ViewModel.FirstName"
                                        SelectedTextChanged="@((p) => ViewModel.FirstName = p)" />
                         </Content>
                         <ContentColumn2>
                             <TextField Label="Middle Name"
+                                       MaxLength="50"
                                        SelectedText="@ViewModel.MiddleName"
                                        SelectedTextChanged="@((p) => ViewModel.MiddleName = p)" />
                         </ContentColumn2>
                         <ContentColumn3>
                             <TextField Label="Last Name"
+                                       MaxLength="50"
                                        OnBlur="OnNameFieldBlur"
                                        SelectedText="@ViewModel.LastName"
                                        SelectedTextChanged="@((p) => ViewModel.LastName = p)" />
                         </ContentColumn3>
                         <ContentColumn4>
                             <TextField Label="Suffix"
+                                       MaxLength="25"
                                        OnBlur="OnNameFieldBlur"
                                        SelectedText="@ViewModel.Suffix"
                                        SelectedTextChanged="@((p) => ViewModel.Suffix = p)" />
@@ -55,22 +61,26 @@
                     <DivRowCol3>
                         <Content>
                             <TextField Label="Calling Name"
+                                       MaxLength="50"
                                        OnBlur="OnNameFieldBlur"
                                        SelectedText="@ViewModel.Nickname"
                                        SelectedTextChanged="@((p) => ViewModel.Nickname = p)" />
                         </Content>
                         <ContentColumn2>
                             <TextField Label="Legal Name"
+                                       MaxLength="225"
                                        SelectedText="@ViewModel.LegalName"
                                        SelectedTextChanged="@((p) => ViewModel.LegalName = p)" />
                         </ContentColumn2>
                         <ContentColumn3>
                             <TextField Label="Display Name"
+                                       MaxLength="225"
                                        SelectedText="@ViewModel.DisplayName"
                                        SelectedTextChanged="@((p) => ViewModel.DisplayName = p)" />
                         </ContentColumn3>
                         <ContentColumn4>
                             <TextField Label="Profile Name"
+                                       MaxLength="225"
                                        SelectedText="@ViewModel.ProfileName"
                                        SelectedTextChanged="@((p) => ViewModel.ProfileName = p)" />
                         </ContentColumn4>
@@ -104,9 +114,6 @@
                     </DivRowCol12>
                 </MudTabPanel>
             </MudTabs>
-        </div>
-
-        
-        
+        </div>        
     </Content>
 </EditPage>

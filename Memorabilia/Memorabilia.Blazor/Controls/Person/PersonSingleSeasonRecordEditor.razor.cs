@@ -15,6 +15,9 @@ public partial class PersonSingleSeasonRecordEditor : ComponentBase
 
     private void Add()
     {
+        if (_viewModel.RecordType == null)
+            return;
+
         SingleSeasonRecords.Add(_viewModel);
 
         _viewModel = new SavePersonSingleSeasonRecordViewModel();

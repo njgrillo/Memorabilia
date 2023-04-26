@@ -15,6 +15,9 @@ public partial class PersonFranchiseHallOfFameEditor : ComponentBase
 
     private void Add()
     {
+        if (_viewModel.FranchiseHallOfFameType == null)
+            return;
+
         FranchiseHallOfFames.Add(_viewModel);
 
         _viewModel = new SavePersonFranchiseHallOfFameViewModel();

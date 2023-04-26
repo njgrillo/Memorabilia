@@ -159,6 +159,8 @@ global using Memorabilia.Application.Features.User.Dashboard;
 global using Memorabilia.Application.Features.User.Login;
 global using Memorabilia.Application.Features.User.Register;
 global using Memorabilia.Application.Features.User.Settings;
+global using Memorabilia.Application.Validators.Admin;
+global using Memorabilia.Application.Validators.Admin.People;
 global using Memorabilia.Application.Validators.Autograph;
 global using Memorabilia.Application.Validators.Memorabilia;
 global using Memorabilia.Application.Validators.Memorabilia.Bammer;

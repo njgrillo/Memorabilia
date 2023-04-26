@@ -25,8 +25,10 @@ public partial class PersonPositionEditor
 
         Positions.Add(_viewModel);
 
-        _viewModel = new SavePersonPositionViewModel();
-        _viewModel.PositionType = PositionType.Secondary;
+        _viewModel = new SavePersonPositionViewModel
+        {
+            PositionType = PositionType.Secondary
+        };
     }
 
     private void Delete(SavePersonPositionViewModel position)

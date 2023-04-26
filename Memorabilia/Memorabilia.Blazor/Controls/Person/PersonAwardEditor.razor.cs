@@ -13,6 +13,9 @@ public partial class PersonAwardEditor : ComponentBase
 
     private void Add()
     {
+        if (_viewModel.AwardType == null)
+            return;
+
         foreach (var year in _years.ToIntArray())
         {
             Awards.Add(new SavePersonAwardViewModel() { AwardType = _viewModel.AwardType, Year = year });

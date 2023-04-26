@@ -35,7 +35,8 @@ public class SavePersonTeam
             Teams = teams.ToArray();
         }
 
-        public int[] DeletedTeamIds => Teams.Where(team => team.IsDeleted).Select(team => team.Id).ToArray();
+        public int[] DeletedTeamIds 
+            => Teams.Where(team => team.IsDeleted).Select(team => team.Id).ToArray();
 
         public SavePersonTeamViewModel[] Teams { get; }
 

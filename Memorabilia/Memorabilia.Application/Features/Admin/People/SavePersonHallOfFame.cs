@@ -81,21 +81,29 @@ public class SavePersonHallOfFame
             _viewModel = viewModel;
         }
 
-        public int[] DeletedCollegeHallOfFameIds => _viewModel.CollegeHallOfFames.Where(hof => hof.IsDeleted).Select(hof => hof.Id).ToArray();
+        public int[] DeletedCollegeHallOfFameIds 
+            => _viewModel.CollegeHallOfFames.Where(hof => hof.IsDeleted).Select(hof => hof.Id).ToArray();
 
-        public int[] DeletedFranchiseHallOfFameIds => _viewModel.FranchiseHallOfFames.Where(hof => hof.IsDeleted).Select(hof => hof.Id).ToArray();
+        public int[] DeletedFranchiseHallOfFameIds 
+            => _viewModel.FranchiseHallOfFames.Where(hof => hof.IsDeleted).Select(hof => hof.Id).ToArray();
 
-        public int[] DeletedHallOfFameIds => _viewModel.HallOfFames.Where(hof => hof.IsDeleted).Select(hof => hof.Id).ToArray();
+        public int[] DeletedHallOfFameIds 
+            => _viewModel.HallOfFames.Where(hof => hof.IsDeleted).Select(hof => hof.Id).ToArray();
 
-        public int[] DeletedInternationalHallOfFameIds => _viewModel.InternationalHallOfFames.Where(hof => hof.IsDeleted).Select(hof => hof.Id).ToArray();
+        public int[] DeletedInternationalHallOfFameIds 
+            => _viewModel.InternationalHallOfFames.Where(hof => hof.IsDeleted).Select(hof => hof.Id).ToArray();
 
-        public SavePersonCollegeHallOfFameViewModel[] CollegeHallOfFames => _viewModel.CollegeHallOfFames.ToArray();
+        public SavePersonCollegeHallOfFameViewModel[] CollegeHallOfFames 
+            => _viewModel.CollegeHallOfFames.Where(hof => !hof.IsDeleted).ToArray();
 
-        public SavePersonFranchiseHallOfFameViewModel[] FranchiseHallOfFames => _viewModel.FranchiseHallOfFames.ToArray();
+        public SavePersonFranchiseHallOfFameViewModel[] FranchiseHallOfFames 
+            => _viewModel.FranchiseHallOfFames.Where(hof => !hof.IsDeleted).ToArray();
 
-        public SavePersonHallOfFameViewModel[] HallOfFames => _viewModel.HallOfFames.ToArray();
+        public SavePersonHallOfFameViewModel[] HallOfFames 
+            => _viewModel.HallOfFames.Where(hof => !hof.IsDeleted).ToArray();
 
-        public SavePersonInternationalHallOfFameViewModel[] InternationalHallOfFames => _viewModel.InternationalHallOfFames.ToArray();
+        public SavePersonInternationalHallOfFameViewModel[] InternationalHallOfFames 
+            => _viewModel.InternationalHallOfFames.Where(hof => !hof.IsDeleted).ToArray();
 
         public int PersonId { get; }
     }

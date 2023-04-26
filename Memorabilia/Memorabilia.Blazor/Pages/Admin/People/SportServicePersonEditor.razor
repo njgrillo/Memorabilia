@@ -12,8 +12,10 @@
           PageFooterButtonText="@ViewModel.ExitButtonText"
           PageFooterNavigationPath="@ViewModel.BackNavigationPath"
           PageTitle="@ViewModel.PageTitle"
+          PerformValidation="PerformValidation"
           TItem="SavePersonSportServiceViewModel"
-          UseMultipleButtons="true">
+          UseMultipleButtons="true"
+          ValidationResult="@ViewModel.ValidationResult">
     <TimelineContent>
         <PersonTimeline EditMode="ViewModel.EditModeType"
                         PersonId="ViewModel.PersonId"

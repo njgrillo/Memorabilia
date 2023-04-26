@@ -3,7 +3,7 @@
 public partial class PersonCollegeEditor : ComponentBase
 {
     [Parameter]
-    public List<SavePersonCollegeViewModel> Colleges { get; set; } = new();
+    public List<SavePersonCollegeViewModel> Colleges { get; set; } = new();    
 
     private bool _canAdd = true;
     private bool _canEditCollege = true;
@@ -12,6 +12,9 @@ public partial class PersonCollegeEditor : ComponentBase
 
     private void Add()
     {
+        if (_viewModel.College == null)
+            return;
+
         Colleges.Add(_viewModel);
 
         _viewModel = new SavePersonCollegeViewModel();

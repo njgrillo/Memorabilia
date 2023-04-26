@@ -24,6 +24,9 @@ public partial class PersonAccomplishmentEditor
 
     private void Add()
     {
+        if (_viewModel.AccomplishmentType == null)
+            return;
+
         var years = _years.ToIntArray();
 
         if (!years.Any())

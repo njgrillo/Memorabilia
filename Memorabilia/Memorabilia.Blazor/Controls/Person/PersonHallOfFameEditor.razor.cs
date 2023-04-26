@@ -23,6 +23,9 @@ public partial class PersonHallOfFameEditor : ComponentBase
 
     private void Add()
     {
+        if (_viewModel.SportLeagueLevelId == 0)
+            return;
+
         HallOfFames.Add(_viewModel);
 
         _viewModel = new SavePersonHallOfFameViewModel();

@@ -20,6 +20,9 @@ public partial class PersonDraftEditor : ComponentBase
 
     private void Add()
     {
+        if (_viewModel.Franchise == null)
+            return;
+
         Drafts.Add(_viewModel);
 
         _viewModel = new SavePersonDraftViewModel(SportIds);

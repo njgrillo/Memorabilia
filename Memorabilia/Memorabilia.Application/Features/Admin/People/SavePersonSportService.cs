@@ -19,7 +19,7 @@ public class SavePersonSportService
 
             person.SetService(command.DebutDate,
                               command.FreeAgentSigningDate,
-                              command.LastAppearnceDate);
+                              command.LastAppearanceDate);
 
             UpdateColleges(command, person);
             UpdateDrafts(command, person);
@@ -58,19 +58,26 @@ public class SavePersonSportService
             _viewModel = viewModel;
         }
 
-        public SavePersonCollegeViewModel[] Colleges => _viewModel.Colleges.Where(college => !college.IsDeleted).ToArray();
+        public SavePersonCollegeViewModel[] Colleges 
+            => _viewModel.Colleges.Where(college => !college.IsDeleted).ToArray();
 
-        public DateTime? DebutDate => _viewModel.DebutDate;
+        public DateTime? DebutDate 
+            => _viewModel.DebutDate;
 
-        public int[] DeletedCollegeIds => _viewModel.Colleges.Where(college => college.IsDeleted).Select(college => college.Id).ToArray();
+        public int[] DeletedCollegeIds 
+            => _viewModel.Colleges.Where(college => college.IsDeleted).Select(college => college.Id).ToArray();
 
-        public int[] DeletedDraftIds => _viewModel.Drafts.Where(draft => draft.IsDeleted).Select(draft => draft.Id).ToArray();
+        public int[] DeletedDraftIds 
+            => _viewModel.Drafts.Where(draft => draft.IsDeleted).Select(draft => draft.Id).ToArray();
 
-        public SavePersonDraftViewModel[] Drafts => _viewModel.Drafts.Where(record => !record.IsDeleted).ToArray();
+        public SavePersonDraftViewModel[] Drafts 
+            => _viewModel.Drafts.Where(record => !record.IsDeleted).ToArray();
 
-        public DateTime? FreeAgentSigningDate => _viewModel.FreeAgentSigningDate;
+        public DateTime? FreeAgentSigningDate 
+            => _viewModel.FreeAgentSigningDate;
 
-        public DateTime? LastAppearnceDate => _viewModel.LastAppearanceDate;
+        public DateTime? LastAppearanceDate 
+            => _viewModel.LastAppearanceDate;
 
         public int PersonId { get; set; }
     }

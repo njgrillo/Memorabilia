@@ -25,6 +25,9 @@ public partial class PersonAllStarEditor : ComponentBase
 
     private void Add()
     {
+        if (_years.IsNullOrEmpty())
+            return;
+
         if (Sports.Length == 1)
             _viewModel.Sport = Sports.FirstOrDefault();
 

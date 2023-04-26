@@ -26,8 +26,10 @@ public partial class PersonOccupationSelector : ComponentBase
 
         Occupations.Add(_viewModel);
 
-        _viewModel = new SavePersonOccupationViewModel();
-        _viewModel.OccupationType = OccupationType.Secondary;        
+        _viewModel = new SavePersonOccupationViewModel
+        {
+            OccupationType = OccupationType.Secondary
+        };
 
         await OnOccupationChange.InvokeAsync();
     }

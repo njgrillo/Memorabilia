@@ -15,6 +15,9 @@ public partial class PersonCollegeRetiredNumberEditor
 
     private void Add()
     {
+        if (_viewModel.College == null || !_viewModel.PlayerNumber.HasValue)
+            return;
+
         CollegeRetiredNumbers.Add(_viewModel);
 
         _viewModel = new SavePersonCollegeRetiredNumberViewModel();

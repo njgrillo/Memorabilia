@@ -14,6 +14,9 @@ public partial class PersonInternationalHallOfFameEditor : ComponentBase
 
     private void Add()
     {
+        if (_viewModel.InternationalHallOfFameTypeId == 0)
+            return;
+
         InternationalHallOfFames.Add(_viewModel);
 
         _viewModel = new SavePersonInternationalHallOfFameViewModel();
