@@ -1,9 +1,10 @@
 ﻿@page "/Settings"
 
-@inherits ImagePage
+@inherits WebPage
 
 <PageLoader>
     <Content>
-        <Settings DomainImageRootPath="@DomainImageRootPath"  />
+        <Settings DomainImageRootPath="@DomainImageRootPath"
+                  ImageRootPath="@PersonImageRootPath" />
     </Content>
 </PageLoader>
