@@ -20,8 +20,8 @@ public record GetDashboard(int UserId) : IQuery<DashboardViewModel>
         protected override async Task<DashboardViewModel> Handle(GetDashboard query)
         {
             var user = await _userRepository.Get(query.UserId);
-            var memorabiliaItems = await _memorabiliaRepository.GetAll(query.UserId);
             var dashboardItems = user.DashboardItems.Select(userDashboard => Domain.Constants.DashboardItem.Find(userDashboard.DashboardItemId));
+            var memorabiliaItems = await _memorabiliaRepository.GetAll(query.UserId);           
 
             var dashboardItemViewModels = new List<DashboardItemViewModel>();
 

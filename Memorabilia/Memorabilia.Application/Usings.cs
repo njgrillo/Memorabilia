@@ -4,6 +4,7 @@ global using Framework.Library.Domain.Command;
 global using Framework.Library.Domain.Paging;
 global using Framework.Library.Extension;
 global using Framework.Library.Handler;
+global using MediatR;
 global using Memorabilia.Application.Features.Admin.People;
 global using Memorabilia.Application.Features.Admin.Teams;
 global using Memorabilia.Application.Features.Autograph;

@@ -3,10 +3,10 @@
 public abstract class WebPage : ComponentBase
 {
     [Inject]
-    public IConfiguration Configuration { get; set; }   
+    public IConfiguration Configuration { get; set; }    
 
     [Inject]
-    public ProtectedLocalStorage LocalStorage { get; set; }
+    public ProtectedLocalStorage LocalStorage { get; set; }    
 
     [Inject]
     public NavigationManager NavigationManager { get; set; }
@@ -46,7 +46,7 @@ public abstract class WebPage : ComponentBase
 
             await LocalStorage.SetAsync("UserId", UserId);
 
-            UploadPath = Path.Combine(MemorabiliaImageRootPath, UserId.ToString());
+            UploadPath = Path.Combine(MemorabiliaImageRootPath, UserId.ToString());            
         }
     }    
 }

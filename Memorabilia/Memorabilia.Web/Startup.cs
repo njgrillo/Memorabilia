@@ -36,6 +36,8 @@ public class Startup
                 opt.DisableImplicitFromServicesParameters = true;
             });
 
+        services.AddCourier(typeof(UserLoggedInNotification).Assembly);
+
         services.AddMudServices(config =>
         {
             config.SnackbarConfiguration.PositionClass = Defaults.Classes.Position.BottomRight;

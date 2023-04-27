@@ -19,6 +19,7 @@
     <PackageReference Include="Autofac" Version="7.0.0" />
     <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="8.0.0" />
     <PackageReference Include="FluentValidation" Version="11.5.1" />
+    <PackageReference Include="MediatR" Version="11.0.0" />
     <PackageReference Include="MudBlazor" Version="6.2.0" />
   </ItemGroup>
 
