@@ -1,0 +1,15 @@
+﻿<Page OnLoad="OnLoad">
+    <Content>
+        <PageHeader PageTitle="@_viewModel.PageTitle" />
+        <div class="row">
+            <Iterations Context="userDashboardItem" 
+                        Items="_viewModel.UserDashboardItems">
+                <div class="col-4">
+                    <DynamicComponent Parameters="@(GetParameters(userDashboardItem.DashboardItem))"
+                                      Type="@(GetComponent(userDashboardItem.DashboardItem))" />
+                </div>
+            </Iterations>   
+        </div>
+    </Content>
+</Page>
+

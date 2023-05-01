@@ -30,4 +30,39 @@ public class AutographRepository : MemorabiliaRepository<Autograph>, IAutographR
 
         return await Autograph.ToListAsync();
     }
+
+    public int[] GetAcquisitionTypeIds(int userId)
+    {
+        return Items.Where(autograph => autograph.Memorabilia.UserId == userId && autograph.Acquisition != null)
+                    .Select(autograph => autograph.Acquisition.AcquisitionTypeId)
+                    .ToArray();
+    }
+
+    public int[] GetColorIds(int userId)
+    {
+        return Items.Where(autograph => autograph.Memorabilia.UserId == userId)
+                    .Select(autograph => autograph.ColorId)
+                    .ToArray();
+    }
+
+    public int[] GetConditionIds(int userId)
+    {
+        return Items.Where(autograph => autograph.Memorabilia.UserId == userId)
+                    .Select(autograph => autograph.ConditionId)
+                    .ToArray();
+    }
+
+    public int[] GetSpotIds(int userId)
+    {
+        return Items.Where(autograph => autograph.Memorabilia.UserId == userId && autograph.Spot != null)
+                    .Select(autograph => autograph.Spot.SpotId)
+                    .ToArray();
+    }
+
+    public int[] GetWritingInstrumentIds(int userId)
+    {
+        return Items.Where(autograph => autograph.Memorabilia.UserId == userId)
+                    .Select(autograph => autograph.WritingInstrumentId)
+                    .ToArray();
+    }
 }

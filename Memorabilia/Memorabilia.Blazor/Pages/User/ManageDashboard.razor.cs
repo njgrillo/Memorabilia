@@ -32,6 +32,6 @@ public partial class ManageDashboard : ComponentBase
         if (UserId == 0)
             NavigationManager.NavigateTo("Login");
 
-        _viewModel = new SaveUserDashboardViewModel(await QueryRouter.Send(new GetUserDashboardItems.Query(UserId)));
+        _viewModel = new SaveUserDashboardViewModel(await QueryRouter.Send(new GetUserDashboardItems(UserId)));
     }
 }

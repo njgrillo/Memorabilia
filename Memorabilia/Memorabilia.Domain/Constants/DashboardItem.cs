@@ -22,7 +22,7 @@ public sealed class DashboardItem : DomainItemConstant
     public static readonly DashboardItem ItemTypePieChart = new(1, "Item Types Pie Chart", "Displays a pie chart of all the item types in your collection.", DashboardChartType.Pie);
     public static readonly DashboardItem MemorabiliaAcquisitionTypeDonutChart = new(28, "Memorabilia Acquisition Type Donut Chart", "Displays a donut chart of the different acquisition types of the memorabilia in your collection.", DashboardChartType.Donut);
     public static readonly DashboardItem MemorabiliaAcquisitionTypePieChart = new(4, "Memorabilia Acquisition Type Pie Chart", "Displays a pie chart of the different acquisition types of the memorabilia in your collection.", DashboardChartType.Pie);
-    public static readonly DashboardItem MemorabiliaConditionDonutChart = new(29, "Memorabilia Condition Donut Chart", "Displays a donut chart of the different conditions of the memorabilia in your collection.", DashboardChartType.Donut);
+    public static readonly DashboardItem MemorabiliaConditionDonutChart = new(38, "Memorabilia Condition Donut Chart", "Displays a donut chart of the different conditions of the memorabilia in your collection.", DashboardChartType.Donut);
     public static readonly DashboardItem MemorabiliaConditionPieChart = new(7, "Memorabilia Condition Pie Chart", "Displays a pie chart of the different conditions of the memorabilia in your collection.", DashboardChartType.Pie);
     public static readonly DashboardItem MemorabiliaPurchaseTypeDonutChart = new(30, "Memorabilia Purchase Type Donut Chart", "Displays a donut chart of all the purchase types of the memorabilia in your collection.", DashboardChartType.Donut);
     public static readonly DashboardItem MemorabiliaPurchaseTypePieChart = new(10, "Memorabilia Purchase Type Pie Chart", "Displays a pie chart of all the purchase types of the memorabilia in your collection.", DashboardChartType.Pie);
@@ -88,4 +88,9 @@ public sealed class DashboardItem : DomainItemConstant
 
     public static DashboardItem Find(int id)
         => All.SingleOrDefault(dashboardItem => dashboardItem.Id == id);
+
+    public override string ToString()
+    {
+        return Name.Replace(" ", "");
+    }
 }

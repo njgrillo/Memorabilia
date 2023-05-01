@@ -51,6 +51,13 @@ public class MemorabiliaItemRepository : MemorabiliaRepository<Domain.Entities.M
         return await Memorabilia.SingleOrDefaultAsync(memorabilia => memorabilia.Id == id);
     }
 
+    public int[] GetAcquisitionTypeIds(int userId)
+    {
+        return Items.Where(memorabilia => memorabilia.UserId == userId && memorabilia.Acquisition != null)
+                    .Select(memorabilia => memorabilia.Acquisition.AcquisitionTypeId)
+                    .ToArray();
+    }
+
     public async Task<IEnumerable<Domain.Entities.Memorabilia>> GetAll(int userId)
     {
         var query =
@@ -120,5 +127,40 @@ public class MemorabiliaItemRepository : MemorabiliaRepository<Domain.Entities.M
     public async Task<IEnumerable<Domain.Entities.Memorabilia>> GetAllUnsigned(int userId)
     {
         return await Memorabilia.Where(memorabilia => memorabilia.UserId == userId && !memorabilia.Autographs.Any()).ToListAsync();
+    }
+
+    public int[] GetBrandIds(int userId)
+    {
+        return Items.Where(memorabilia => memorabilia.UserId == userId && memorabilia.Brand != null)
+                    .Select(memorabilia => memorabilia.Brand.BrandId)
+                    .ToArray();
+    }
+
+    public int[] GetConditionIds(int userId)
+    {
+        return Items.Where(memorabilia => memorabilia.UserId == userId && memorabilia.ConditionId.HasValue)
+                    .Select(memorabilia => memorabilia.ConditionId.Value)
+                    .ToArray();
+    }
+
+    public int[] GetPurchaseTypeIds(int userId)
+    {
+        return Items.Where(memorabilia => memorabilia.UserId == userId && memorabilia.Acquisition != null && memorabilia.Acquisition.PurchaseTypeId.HasValue)
+                    .Select(memorabilia => memorabilia.Acquisition.PurchaseTypeId.Value)
+                    .ToArray();
+    }
+
+    public int[] GetSizeIds(int userId)
+    {
+        return Items.Where(memorabilia => memorabilia.UserId == userId && memorabilia.Size != null)
+                    .Select(memorabilia => memorabilia.Size.SizeId)
+                    .ToArray();
+    }
+
+    public int[] GetSportIds(int userId)
+    {
+        return Items.Where(memorabilia => memorabilia.UserId == userId && memorabilia.Sports.Any())
+                    .SelectMany(memorabilia => memorabilia.Sports.Select(sport => sport.SportId))
+                    .ToArray();
     }
 }

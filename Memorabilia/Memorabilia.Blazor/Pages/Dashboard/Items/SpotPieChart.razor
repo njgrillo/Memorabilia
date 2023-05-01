@@ -1,0 +1,9 @@
+﻿@inherits DashboardChartItem
+
+<UserDashboardItemNew Description="@DashboardItem.Description"
+                      Title="@DashboardItem.Name">
+    <Content>
+        <PieChart Data="@Data"
+                  Labels="@Labels" />
+    </Content>
+</UserDashboardItemNew>

@@ -1,8 +1,8 @@
 ﻿namespace Memorabilia.Application.Features.User.Dashboard;
 
-public class GetUserDashboardItems
+public record GetUserDashboardItems(int UserId) : IQuery<UserDashboardsViewModel>
 {
-    public class Handler : QueryHandler<Query, UserDashboardsViewModel>
+    public class Handler : QueryHandler<GetUserDashboardItems, UserDashboardsViewModel>
     {
         private readonly IUserRepository _userRepository;
 
@@ -11,7 +11,7 @@ public class GetUserDashboardItems
             _userRepository = userRepository;
         }
 
-        protected override async Task<UserDashboardsViewModel> Handle(Query query)
+        protected override async Task<UserDashboardsViewModel> Handle(GetUserDashboardItems query)
         {
             var user = await _userRepository.Get(query.UserId);                
 
@@ -19,15 +19,5 @@ public class GetUserDashboardItems
                                                user.DashboardItems
                                                    .OrderBy(dashboardItem => Domain.Constants.DashboardItem.Find(dashboardItem.DashboardItemId).Name));
         }
-    }
-
-    public class Query : IQuery<UserDashboardsViewModel>
-    {
-        public Query(int userId) 
-        {
-            UserId = userId;
-        }
-
-        public int UserId { get; }
     }
 }

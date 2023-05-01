@@ -1,6 +1,4 @@
-﻿
-
-namespace Memorabilia.Blazor.Controls.UserDashboard;
+﻿namespace Memorabilia.Blazor.Controls.UserDashboard;
 
 public partial class UserDashboardItem : ComponentBase
 {

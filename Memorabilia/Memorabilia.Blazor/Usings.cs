@@ -78,6 +78,7 @@ global using Memorabilia.Application.Features.Autograph.Image;
 global using Memorabilia.Application.Features.Autograph.Inscriptions;
 global using Memorabilia.Application.Features.Autograph.Inscriptions.Suggested;
 global using Memorabilia.Application.Features.Autograph.Spot;
+global using Memorabilia.Application.Features.Dashboard;
 global using Memorabilia.Application.Features.Image;
 global using Memorabilia.Application.Features.Initialize;
 global using Memorabilia.Application.Features.Memorabilia;

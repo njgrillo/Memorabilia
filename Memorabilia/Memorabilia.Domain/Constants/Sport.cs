@@ -101,6 +101,9 @@ public sealed class Sport : DomainItemConstant
     public static Sport Find(int id)
         => All.SingleOrDefault(sport => sport.Id == id);
 
+    public static Sport Find(string name)
+        => All.SingleOrDefault(sport => sport.Name == name);
+
     public static Sport[] GetAll(ItemType itemType)
     {
         if (itemType == ItemType.Glove)

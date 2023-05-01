@@ -47,6 +47,8 @@ public class Autograph : Framework.Library.Domain.Entity.DomainEntity
 
     public virtual Acquisition Acquisition { get; private set; }
 
+    public int? AcquisitionId { get; set; }
+
     public virtual List<AutographAuthentication> Authentications { get; private set; } = new();
 
     public int ColorId { get; private set; }
