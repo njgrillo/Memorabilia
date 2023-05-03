@@ -10,16 +10,14 @@ public sealed class DashboardItem : DomainItemConstant
     public static readonly DashboardItem BrandPieChart = new(6, "Brand Pie Chart", "Displays a pie chart of the brands of the memorabilia in your collection.", DashboardChartType.Pie);
     public static readonly DashboardItem ColorDonutChart = new(23, "Color Donut Chart", "Displays a donut chart of the colors of the autographs in your collection.", DashboardChartType.Donut);
     public static readonly DashboardItem ColorPieChart = new(12, "Color Pie Chart", "Displays a pie chart of the colors of the autographs in your collection.", DashboardChartType.Pie);
-    public static readonly DashboardItem CostBarChart = new(15, "Cost Bar Chart", "Displays a bar chart of the cost of the memorabilia and autographs in your collection.", DashboardChartType.Bar);
     public static readonly DashboardItem CostDonutChart = new(24, "Cost Donut Chart", "Displays a donut chart of the cost of the memorabilia and autographs in your collection.", DashboardChartType.Donut);
     public static readonly DashboardItem CostPieChart = new(14, "Cost Pie Chart", "Displays a pie chart of the cost of the memorabilia and autographs in your collection.", DashboardChartType.Pie);
-    public static readonly DashboardItem EstimatedValueBarChart = new(2, "Estimated Value Bar Chart", "Displays a bar chart of the estimated value of the memorabilia and autographs in your collection.", DashboardChartType.Bar);
     public static readonly DashboardItem EstimatedValueDonutChart = new(25, "Estimated Value Donut Chart", "Displays a donut chart of the estimated value of the memorabilia and autographs in your collection.", DashboardChartType.Donut);
     public static readonly DashboardItem EstimatedValuePieChart = new(3, "Estimated Value Pie Chart", "Displays a pie chart of the estimated value of the memorabilia and autographs in your collection.", DashboardChartType.Pie);
     public static readonly DashboardItem FranchiseDonutChart = new(26, "Franchise Donut Chart", "Displays a donut chart of the franchises of the memorabilia in your collection.", DashboardChartType.Donut);
     public static readonly DashboardItem FranchisePieChart = new(17, "Franchise Pie Chart", "Displays a pie chart of the franchises of the memorabilia in your collection.", DashboardChartType.Pie);
-    public static readonly DashboardItem ItemTypeDonutChart = new(27, "Item Types Donut Chart", "Displays a donut chart of all the item types in your collection.", DashboardChartType.Donut);
-    public static readonly DashboardItem ItemTypePieChart = new(1, "Item Types Pie Chart", "Displays a pie chart of all the item types in your collection.", DashboardChartType.Pie);
+    public static readonly DashboardItem ItemTypeDonutChart = new(27, "Item Type Donut Chart", "Displays a donut chart of all the item types in your collection.", DashboardChartType.Donut);
+    public static readonly DashboardItem ItemTypePieChart = new(1, "Item Type Pie Chart", "Displays a pie chart of all the item types in your collection.", DashboardChartType.Pie);
     public static readonly DashboardItem MemorabiliaAcquisitionTypeDonutChart = new(28, "Memorabilia Acquisition Type Donut Chart", "Displays a donut chart of the different acquisition types of the memorabilia in your collection.", DashboardChartType.Donut);
     public static readonly DashboardItem MemorabiliaAcquisitionTypePieChart = new(4, "Memorabilia Acquisition Type Pie Chart", "Displays a pie chart of the different acquisition types of the memorabilia in your collection.", DashboardChartType.Pie);
     public static readonly DashboardItem MemorabiliaConditionDonutChart = new(38, "Memorabilia Condition Donut Chart", "Displays a donut chart of the different conditions of the memorabilia in your collection.", DashboardChartType.Donut);
@@ -47,10 +45,8 @@ public sealed class DashboardItem : DomainItemConstant
         BrandPieChart,
         ColorDonutChart,
         ColorPieChart,
-        CostBarChart,
         CostDonutChart,
         CostPieChart,
-        EstimatedValueBarChart,
         EstimatedValueDonutChart,
         EstimatedValuePieChart,
         FranchiseDonutChart,

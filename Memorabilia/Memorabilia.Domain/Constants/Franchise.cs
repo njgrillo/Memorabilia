@@ -211,6 +211,9 @@ public sealed class Franchise : DomainItemConstant
     public static Franchise Find(int id)
         => All.SingleOrDefault(franchise => franchise.Id == id);
 
+    public static Franchise Find(string name)
+        => All.SingleOrDefault(franchise => franchise.Name == name);
+
     public static Franchise[] GetAll(SportLeagueLevel sport)
     {
         if (sport == SportLeagueLevel.MajorLeagueBaseball)

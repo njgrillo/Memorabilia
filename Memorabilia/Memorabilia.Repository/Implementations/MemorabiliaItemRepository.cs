@@ -53,8 +53,8 @@ public class MemorabiliaItemRepository : MemorabiliaRepository<Domain.Entities.M
 
     public int[] GetAcquisitionTypeIds(int userId)
     {
-        return Items.Where(memorabilia => memorabilia.UserId == userId && memorabilia.Acquisition != null)
-                    .Select(memorabilia => memorabilia.Acquisition.AcquisitionTypeId)
+        return Items.Where(memorabilia => memorabilia.UserId == userId && memorabilia.MemorabiliaAcquisition.Acquisition != null)
+                    .Select(memorabilia => memorabilia.MemorabiliaAcquisition.Acquisition.AcquisitionTypeId)
                     .ToArray();
     }
 
@@ -143,10 +143,36 @@ public class MemorabiliaItemRepository : MemorabiliaRepository<Domain.Entities.M
                     .ToArray();
     }
 
+    public decimal GetCostTotal(int userId)
+    {
+        return Items.Where(memorabilia => memorabilia.UserId == userId && memorabilia.MemorabiliaAcquisition.Acquisition != null)
+                    .Sum(memorabilia => memorabilia.MemorabiliaAcquisition.Acquisition.Cost ?? 0);
+    }
+
+    public decimal GetEstimatedValueTotal(int userId)
+    {
+        return Items.Where(memorabilia => memorabilia.UserId == userId)
+                    .Sum(memorabilia => memorabilia.EstimatedValue ?? 0);
+    }
+
+    public int[] GetFranchiseIds(int userId)
+    {
+        return Items.Where(memorabilia => memorabilia.UserId == userId && memorabilia.Teams.Any())
+                    .SelectMany(memorabilia => memorabilia.Teams.Select(team => team.Team.Franchise.Id))
+                    .ToArray();
+    }
+
     public int[] GetPurchaseTypeIds(int userId)
     {
-        return Items.Where(memorabilia => memorabilia.UserId == userId && memorabilia.Acquisition != null && memorabilia.Acquisition.PurchaseTypeId.HasValue)
-                    .Select(memorabilia => memorabilia.Acquisition.PurchaseTypeId.Value)
+        return Items.Where(memorabilia => memorabilia.UserId == userId && memorabilia.MemorabiliaAcquisition.Acquisition != null && memorabilia.MemorabiliaAcquisition.Acquisition.PurchaseTypeId.HasValue)
+                    .Select(memorabilia => memorabilia.MemorabiliaAcquisition.Acquisition.PurchaseTypeId.Value)
+                    .ToArray();
+    }
+
+    public int[] GetItemTypeIds(int userId)
+    {
+        return Items.Where(memorabilia => memorabilia.UserId == userId)
+                    .Select(memorabilia => memorabilia.ItemTypeId)
                     .ToArray();
     }
 
@@ -161,6 +187,13 @@ public class MemorabiliaItemRepository : MemorabiliaRepository<Domain.Entities.M
     {
         return Items.Where(memorabilia => memorabilia.UserId == userId && memorabilia.Sports.Any())
                     .SelectMany(memorabilia => memorabilia.Sports.Select(sport => sport.SportId))
+                    .ToArray();
+    }
+
+    public int[] GetSportLeagueLevelIds(int userId)
+    {
+        return Items.Where(memorabilia => memorabilia.UserId == userId && memorabilia.Teams.Any())
+                    .SelectMany(memorabilia => memorabilia.Teams.Select(team => team.Team.Franchise.SportLeagueLevel.Id))
                     .ToArray();
     }
 }

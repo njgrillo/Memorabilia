@@ -12,6 +12,10 @@ public interface IAutographRepository : IDomainRepository<Autograph>
 
     int[] GetConditionIds(int userId);
 
+    public decimal GetCostTotal(int userId);
+
+    public decimal GetEstimatedValueTotal(int userId);
+
     int[] GetSpotIds(int userId);
 
     int[] GetWritingInstrumentIds(int userId);   

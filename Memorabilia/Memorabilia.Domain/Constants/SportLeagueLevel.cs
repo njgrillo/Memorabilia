@@ -35,6 +35,9 @@ public sealed class SportLeagueLevel : DomainItemConstant
     public static SportLeagueLevel Find(int id)
         => All.SingleOrDefault(sportLeagueLevel => sportLeagueLevel.Id == id);
 
+    public static SportLeagueLevel Find(string name)
+        => All.SingleOrDefault(sportLeagueLevel => sportLeagueLevel.Name == name);
+
     public static SportLeagueLevel[] GetAll(params int[] sportIds)
     {
         var sportLeagueLevels = new List<SportLeagueLevel>();

@@ -1,4 +1,6 @@
-﻿namespace Memorabilia.Application.Features.Memorabilia;
+﻿using Memorabilia.Application.Features.Dashboard;
+
+namespace Memorabilia.Application.Features.Memorabilia;
 
 public class DashboardViewModel : ViewModel
 {

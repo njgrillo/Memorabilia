@@ -52,6 +52,18 @@ public class AutographRepository : MemorabiliaRepository<Autograph>, IAutographR
                     .ToArray();
     }
 
+    public decimal GetCostTotal(int userId)
+    {
+        return Items.Where(autograph => autograph.Memorabilia.UserId == userId && autograph.Acquisition != null)
+                    .Sum(autograph => autograph.Acquisition.Cost ?? 0);
+    }
+
+    public decimal GetEstimatedValueTotal(int userId)
+    {
+        return Items.Where(autograph => autograph.Memorabilia.UserId == userId)
+                    .Sum(autograph => autograph.EstimatedValue ?? 0);
+    }
+
     public int[] GetSpotIds(int userId)
     {
         return Items.Where(autograph => autograph.Memorabilia.UserId == userId && autograph.Spot != null)

@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Blazor.Pages.Dashboard;
 
-public partial class ViewDashboardNew
+public partial class ViewDashboard
 {
     [Inject]
     public QueryRouter QueryRouter { get; set; }

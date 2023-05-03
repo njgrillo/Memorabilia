@@ -60,7 +60,6 @@ global using Memorabilia.Application.Features.Services.Autographs.Inscriptions.A
 global using Memorabilia.Application.Features.Services.Autographs.Inscriptions.Awards;
 global using Memorabilia.Application.Features.Services.Autographs.Inscriptions.Accomplishments.Rules;
 global using Memorabilia.Application.Features.Services.Autographs.Inscriptions.Awards.Rules;
-global using Memorabilia.Application.Features.Services.Dashboard;
 global using Memorabilia.Application.Features.Services.Filters;
 global using Memorabilia.Application.Features.Services.Filters.Autographs;
 global using Memorabilia.Application.Features.Services.Filters.Autographs.Rules;

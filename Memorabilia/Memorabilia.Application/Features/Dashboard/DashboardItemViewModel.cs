@@ -1,6 +1,6 @@
 ﻿using Memorabilia.Domain.Constants;
 
-namespace Memorabilia.Application.Features.User.Dashboard;
+namespace Memorabilia.Application.Features.Dashboard;
 
 public class DashboardItemViewModel
 {

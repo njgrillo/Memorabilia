@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Blazor.Pages.Dashboard;
 
-public partial class UserDashboardItemNew
+public partial class UserDashboardItem
 {
     [Parameter]
     public RenderFragment Content { get; set; }

@@ -4,9 +4,6 @@ public class ApplicationModule : Module
 {
     protected override void Load(ContainerBuilder builder)
     {   
-        builder.RegisterType<DashboardItemFactory>().As<IDashboardItemFactory>()
-            .InstancePerDependency();
-
         builder.RegisterType<GalleryRuleFactory>().As<IGalleryRuleFactory>()
             .InstancePerDependency();
 

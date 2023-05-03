@@ -242,6 +242,9 @@ public sealed class ItemType : DomainItemConstant
     public static ItemType Find(int id)
         => All.SingleOrDefault(itemType => itemType.Id == id);
 
+    public static ItemType Find(string name)
+        => All.SingleOrDefault(itemType => itemType.Name == name);
+
     public static bool IsGameType(ItemType itemType)
         => GameTypes.Contains(itemType);
 

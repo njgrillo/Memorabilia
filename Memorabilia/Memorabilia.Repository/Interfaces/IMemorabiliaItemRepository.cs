@@ -17,9 +17,19 @@ public interface IMemorabiliaItemRepository : IDomainRepository<Domain.Entities.
 
     int[] GetConditionIds(int userId);
 
+    decimal GetCostTotal(int userId);
+
+    decimal GetEstimatedValueTotal(int userId); 
+
+    int[] GetFranchiseIds(int userId);
+
+    int[] GetItemTypeIds(int userId);
+
     int[] GetPurchaseTypeIds(int userId);
 
     int[] GetSizeIds(int userId);
 
     int[] GetSportIds(int userId);
+
+    int[] GetSportLeagueLevelIds(int userId);
 }
