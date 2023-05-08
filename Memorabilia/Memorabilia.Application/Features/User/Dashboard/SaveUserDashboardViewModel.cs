@@ -10,7 +10,10 @@ public class SaveUserDashboardViewModel : SaveViewModel
         UserId = userDashboardsViewModel.UserId;
     }
 
-    public override string BackNavigationPath => "Settings";
+    public bool AllItemsSelected
+        => UserDashboardItems.Count(item => item.IsSelected) == UserDashboardItems.Count;
+
+    public override string BackNavigationPath => "Settings";    
 
     public override string ContinueNavigationPath => "Settings";
 

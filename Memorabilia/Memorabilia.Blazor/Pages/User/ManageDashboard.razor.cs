@@ -17,6 +17,11 @@ public partial class ManageDashboard : ComponentBase
     [Parameter]
     public int UserId { get; set; }
 
+    private string SelectAllButtonText
+        => _viewModel != null && _viewModel.AllItemsSelected
+            ? "Deselect All" 
+            : "Select All";
+
     private SaveUserDashboardViewModel _viewModel = new();
 
     protected async Task HandleValidSubmit()
@@ -33,5 +38,15 @@ public partial class ManageDashboard : ComponentBase
             NavigationManager.NavigateTo("Login");
 
         _viewModel = new SaveUserDashboardViewModel(await QueryRouter.Send(new GetUserDashboardItems(UserId)));
+    }
+
+    protected void OnSelectAll()
+    {
+        bool selectAll = !_viewModel.AllItemsSelected;
+
+        foreach (UserDashboardViewModel dashboardItem in _viewModel.UserDashboardItems)
+        {
+            dashboardItem.IsSelected = selectAll;
+        }
     }
 }
