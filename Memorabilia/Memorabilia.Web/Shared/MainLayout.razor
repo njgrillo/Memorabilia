@@ -47,6 +47,8 @@
         <NavMenu />
     </MudDrawer>
     <MudMainContent>
-        @Body
+        <ErrorBoundary @ref="_errorBoundary">
+            @Body
+        </ErrorBoundary>        
     </MudMainContent>
 </MudLayout>

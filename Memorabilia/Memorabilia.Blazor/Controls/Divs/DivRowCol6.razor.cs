@@ -1,6 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore.Diagnostics;
-
-namespace Memorabilia.Blazor.Controls.Divs;
+﻿namespace Memorabilia.Blazor.Controls.Divs;
 
 public partial class DivRowCol6 : ComponentBase
 {

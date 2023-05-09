@@ -1,6 +1,4 @@
-﻿using FluentValidation;
-
-namespace Memorabilia.Blazor.Pages.MemorabiliaItems.Shoes;
+﻿namespace Memorabilia.Blazor.Pages.MemorabiliaItems.Shoes;
 
 public partial class ShoeEditor : MemorabiliaItem<SaveShoeViewModel>
 {

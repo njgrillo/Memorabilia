@@ -1,6 +1,4 @@
-﻿using Memorabilia.Domain.Enums;
-
-namespace Memorabilia.Domain.Entities;
+﻿namespace Memorabilia.Domain.Entities;
 
 public class PersonPosition : Framework.Library.Domain.Entity.DomainEntity
 {

@@ -1,4 +1,5 @@
-﻿global using Memorabilia.Domain.Extensions;
+﻿global using Memorabilia.Domain.Enums;
+global using Memorabilia.Domain.Extensions;
 global using Framework.Library.Extension;
 global using Memorabilia.Domain.SearchModels.Autographs;
 global using System;

@@ -1,6 +1,4 @@
-﻿using Framework.Library.Handler;
-
-namespace Memorabilia.Repository.Configuration;
+﻿namespace Memorabilia.Repository.Configuration;
 
 public class RepositoryModule : Module
 {

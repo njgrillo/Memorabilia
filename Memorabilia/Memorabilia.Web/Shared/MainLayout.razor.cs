@@ -1,6 +1,4 @@
-﻿using System.Runtime.InteropServices;
-
-namespace Memorabilia.Web.Shared;
+﻿namespace Memorabilia.Web.Shared;
 
 public partial class MainLayout : LayoutComponentBase
 {
@@ -11,11 +9,17 @@ public partial class MainLayout : LayoutComponentBase
     public NavigationManager NavigationManager { get; set; }
 
     private bool _drawerOpen = true;
+    private ErrorBoundary _errorBoundary;
     private bool _userLoggedIn;
 
     protected override void OnInitialized()
     {
         Courier.Subscribe<UserLoggedInNotification>(OnUserLoginAsync);
+    }
+
+    protected override void OnParametersSet()
+    {
+        _errorBoundary?.Recover();
     }
 
     public void DrawerToggle()

@@ -1,5 +1,4 @@
 ﻿using Memorabilia.Domain.Entities;
-using Memorabilia.Domain.Extensions;
 
 namespace Memorabilia.Repository.Implementations;
 
