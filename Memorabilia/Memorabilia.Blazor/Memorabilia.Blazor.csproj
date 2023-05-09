@@ -12,14 +12,14 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Fody" Version="6.6.4">
+    <PackageReference Include="Fody" Version="6.7.0">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="MediatR" Version="11.0.0" />
-    <PackageReference Include="Microsoft.AspNetCore.Components" Version="7.0.4" />
-    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="7.0.4" />
-    <PackageReference Include="MudBlazor" Version="6.2.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Components" Version="7.0.5" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="7.0.5" />
+    <PackageReference Include="MudBlazor" Version="6.2.3" />
     <PackageReference Include="PrettyBlazor" Version="1.2.0" />
     <PackageReference Include="PropertyChanged.Fody" Version="4.1.0" />
   </ItemGroup>
