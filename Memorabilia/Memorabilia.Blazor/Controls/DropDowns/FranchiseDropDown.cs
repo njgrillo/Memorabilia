@@ -8,7 +8,9 @@ public class FranchiseDropDown : DropDown<Franchise, int>, INotifyPropertyChange
     [Parameter]
     public SportLeagueLevel SportLeagueLevel { get; set; }
 
+#pragma warning disable CS0067
     public event PropertyChangedEventHandler PropertyChanged;
+#pragma warning restore CS0067
 
     public FranchiseDropDown()
     {

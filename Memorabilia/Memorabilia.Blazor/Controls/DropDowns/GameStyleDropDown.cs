@@ -5,7 +5,9 @@ public abstract class GameStyleDropDown<T> : DropDown<T, int>, INotifyPropertyCh
     [Parameter]
     public GameStyleType GameStyleType { get; set; }
 
+#pragma warning disable CS0067
     public event PropertyChangedEventHandler PropertyChanged;
+#pragma warning restore CS0067
 
     public GameStyleDropDown()
     {

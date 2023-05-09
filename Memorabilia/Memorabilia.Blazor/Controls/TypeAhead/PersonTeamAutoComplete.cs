@@ -14,7 +14,9 @@ public class PersonTeamAutoComplete : NamedEntityAutoComplete<SavePersonTeamView
     [Parameter]
     public int[] SportIds { get; set; } = Array.Empty<int>();
 
+#pragma warning disable CS0067
     public event PropertyChangedEventHandler PropertyChanged;
+#pragma warning restore CS0067
 
     public PersonTeamAutoComplete()
     {

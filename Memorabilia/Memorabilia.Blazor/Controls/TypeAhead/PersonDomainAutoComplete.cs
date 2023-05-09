@@ -10,7 +10,9 @@ public class PersonDomainAutoComplete : NamedEntityAutoComplete<PersonViewModel>
     [Parameter]
     public int SportLeagueLevelId { get; set; }
 
+#pragma warning disable CS0067
     public event PropertyChangedEventHandler PropertyChanged;
+#pragma warning restore CS0067
 
     public PersonDomainAutoComplete()
     {

@@ -8,7 +8,9 @@ public class PersonSearchAutoComplete : Autocomplete<Domain.Entities.Person>, IN
     [Parameter]
     public Sport Sport { get; set; }
 
+#pragma warning disable CS0067
     public event PropertyChangedEventHandler PropertyChanged;
+#pragma warning restore CS0067
 
     protected IEnumerable<Domain.Entities.Person> Items { get; set; } = Enumerable.Empty<Domain.Entities.Person>();
 

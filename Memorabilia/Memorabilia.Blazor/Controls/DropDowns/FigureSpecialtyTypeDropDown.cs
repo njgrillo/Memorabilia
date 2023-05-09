@@ -7,7 +7,9 @@ public class FigureSpecialtyTypeDropDown : DropDown<FigureSpecialtyType, int>, I
     [Parameter]
     public FigureType FigureType { get; set; }
 
+#pragma warning disable CS0067
     public event PropertyChangedEventHandler PropertyChanged;
+#pragma warning restore CS0067
 
     public FigureSpecialtyTypeDropDown()
     {

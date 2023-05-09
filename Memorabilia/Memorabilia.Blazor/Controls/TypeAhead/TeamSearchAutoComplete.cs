@@ -5,7 +5,9 @@ public class TeamSearchAutoComplete : Autocomplete<Domain.Entities.Team>, INotif
     [Parameter]
     public Sport Sport { get; set; }
 
+#pragma warning disable CS0067
     public event PropertyChangedEventHandler PropertyChanged;
+#pragma warning restore CS0067
 
     protected IEnumerable<Domain.Entities.Team> Items { get; set; } = Enumerable.Empty<Domain.Entities.Team>();
 
