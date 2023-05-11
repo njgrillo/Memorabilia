@@ -23,6 +23,7 @@ public partial class Memorabilia
         Denominator = memorabilia.Denominator;
         Figure = memorabilia.Figure;
         Football = memorabilia.Football;
+        ForTrade = memorabilia.ForTrade;
         Framed = memorabilia.Framed;
         EstimatedValue = memorabilia.EstimatedValue;
         Game = memorabilia.Game;
@@ -54,6 +55,7 @@ public partial class Memorabilia
                        decimal? cost,
                        int? denominator,
                        decimal? estimatedValue,
+                       bool forTrade,
                        bool framed,
                        int itemTypeId,
                        string note,
@@ -66,6 +68,7 @@ public partial class Memorabilia
         CreateDate = DateTime.UtcNow;
         Denominator = denominator;
         EstimatedValue = estimatedValue;
+        ForTrade = forTrade;
         Framed = framed;
         Numerator = numerator;
         Note = note;
@@ -89,6 +92,7 @@ public partial class Memorabilia
                     decimal? cost,
                     int? denominator,
                     decimal? estimatedValue,
+                    bool forTrade,
                     bool framed,
                     string note,
                     int? numerator,
@@ -98,6 +102,7 @@ public partial class Memorabilia
         ConditionId = conditionId;
         Denominator = denominator;
         EstimatedValue = estimatedValue;
+        ForTrade = forTrade;
         Framed = framed;
         LastModifiedDate = DateTime.UtcNow;
         Numerator = numerator;

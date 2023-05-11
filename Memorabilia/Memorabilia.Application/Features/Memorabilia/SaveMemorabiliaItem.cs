@@ -24,6 +24,7 @@ public class SaveMemorabiliaItem
                                                               command.Cost,
                                                               command.Denominator,
                                                               command.EstimatedValue,
+                                                              command.ForTrade,
                                                               command.Framed,
                                                               command.ItemTypeId,
                                                               command.Note,
@@ -55,6 +56,7 @@ public class SaveMemorabiliaItem
                             command.Cost,
                             command.Denominator,
                             command.EstimatedValue,
+                            command.ForTrade,
                             command.Framed,
                             command.Note,
                             command.Numerator,
@@ -90,6 +92,8 @@ public class SaveMemorabiliaItem
         public int? Denominator => _viewModel.Denominator;
 
         public decimal? EstimatedValue => _viewModel.EstimatedValue;
+
+        public bool ForTrade => _viewModel.ForTrade;
 
         public bool Framed => _viewModel.Framed;
 

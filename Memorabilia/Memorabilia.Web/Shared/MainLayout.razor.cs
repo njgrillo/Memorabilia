@@ -8,8 +8,9 @@ public partial class MainLayout : LayoutComponentBase
     [Inject]
     public NavigationManager NavigationManager { get; set; }
 
+    private Exception _currentException;
     private bool _drawerOpen = true;
-    private ErrorBoundary _errorBoundary;
+    private CustomErrorBoundary _errorBoundary;
     private bool _userLoggedIn;
 
     protected override void OnInitialized()
@@ -37,14 +38,23 @@ public partial class MainLayout : LayoutComponentBase
         NavigationManager.NavigateTo("Logout");
     }
 
+    public void OnAlertClose()
+    {
+        _currentException = null;
+    }
+
+    public void OnError(Exception error) 
+    {
+        _currentException = error;
+
+        NavigationManager.NavigateTo("Home");
+    }
+
     public async void OnUserLoginAsync(UserLoggedInNotification notification)
     {
         _userLoggedIn = true;
 
-        await InvokeAsync(() =>
-        {
-            StateHasChanged();
-        });        
+        await InvokeAsync(StateHasChanged);        
     }
 
     public void UserSettings()

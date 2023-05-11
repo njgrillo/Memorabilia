@@ -104,6 +104,15 @@
                            T="bool" />              
             </Content>
         </DivRowCol3> 
+        <DivRowCol3>
+            <Content>
+                <MudSwitch Checked="@_viewModel.ForTrade"
+                           CheckedChanged="(p) => _viewModel.ForTrade = p"
+                           Color="MudBlazor.Color.Success"
+                           Label="Available For Trade?"
+                           T="bool" />              
+            </Content>
+        </DivRowCol3> 
         <DivRowCol3 Hidden="@(!_viewModel.IsNumbered)">
             <Content>
                 <div class="row">

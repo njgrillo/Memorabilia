@@ -47,8 +47,19 @@
         <NavMenu />
     </MudDrawer>
     <MudMainContent>
-        <ErrorBoundary @ref="_errorBoundary">
-            @Body
-        </ErrorBoundary>        
+        <CustomErrorBoundary @ref="_errorBoundary"
+                             ErrorHasOccurred="OnError">
+            <Condition Evaluation="@(_currentException != null)">
+                <Match>
+                    <AlertBox Close="OnAlertClose" 
+                              Severity="Severity.Error"
+                              Text="@_currentException.Message" />
+                    @Body
+                </Match>
+                <NotMatch>
+                    @Body
+                </NotMatch>
+            </Condition>
+        </CustomErrorBoundary>        
     </MudMainContent>
 </MudLayout>

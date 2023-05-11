@@ -60,6 +60,7 @@ global using Memorabilia.Application.Validators.Memorabilia.Trunk;
 global using Memorabilia.Application.Validators.Memorabilia.WristBand;
 global using Memorabilia.Blazor;
 global using Memorabilia.Blazor.Controls.Dialogs;
+global using Memorabilia.Blazor.Controls.Errors;
 global using Memorabilia.Blazor.Pages;
 global using Memorabilia.Domain.Constants;
 global using Memorabilia.Repository;

@@ -16,6 +16,7 @@ public class SaveMemorabiliaItemViewModel : SaveViewModel
         CreateDate = viewModel.CreateDate;
         Denominator = viewModel.Denominator;
         EstimatedValue = viewModel.EstimatedValue;
+        ForTrade = viewModel.ForTrade;
         Framed = viewModel.Framed;
         Id = viewModel.Id;
         ItemType = ItemType.Find(viewModel.ItemTypeId);
@@ -48,6 +49,8 @@ public class SaveMemorabiliaItemViewModel : SaveViewModel
     public decimal? EstimatedValue { get; set; }
 
     public override string ExitNavigationPath => "Memorabilia/Items";
+
+    public bool ForTrade { get; set; }
 
     public bool Framed { get; set; }
 
