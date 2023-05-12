@@ -1,9 +1,10 @@
-﻿
-
-namespace Memorabilia.Blazor.Controls.Person;
+﻿namespace Memorabilia.Blazor.Controls.Person;
 
 public partial class SearchPersonSelector : ComponentBase
 {
+    [Inject]
+    public IDialogService DialogService { get; set; }
+
     [Parameter]
     public List<Domain.Entities.Person> SelectedPeople { get; set; }
 
@@ -36,5 +37,23 @@ public partial class SearchPersonSelector : ComponentBase
         {
             SelectedPeople.Remove(removedPerson);
         }
+    }
+
+    private async Task ShowPersonProfile(int personId)
+    {
+        var parameters = new DialogParameters
+        {
+            ["PersonId"] = personId
+        };
+
+        var options = new DialogOptions()
+        {
+            MaxWidth = MaxWidth.ExtraLarge,
+            FullWidth = true,
+            DisableBackdropClick = true
+        };
+
+        var dialog = DialogService.Show<PersonProfileDialog>(string.Empty, parameters, options);
+        var result = await dialog.Result;
     }
 }

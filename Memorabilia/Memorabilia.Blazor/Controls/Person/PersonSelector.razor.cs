@@ -1,9 +1,9 @@
-﻿
-
-namespace Memorabilia.Blazor.Controls.Person;
+﻿namespace Memorabilia.Blazor.Controls.Person;
 
 public partial class PersonSelector : ComponentBase
 {
+    [Inject]
+    public IDialogService DialogService { get; set; }
 
     [Parameter]
     public bool CanFilterBySport { get; set; }
@@ -16,9 +16,6 @@ public partial class PersonSelector : ComponentBase
 
     [Parameter]
     public ItemType ItemType { get; set; }
-
-    [Parameter]
-    public List<SavePersonViewModel> People { get; set; } = new();
 
     [Parameter]
     public SavePersonViewModel SelectedPerson { get; set; }
@@ -48,7 +45,7 @@ public partial class PersonSelector : ComponentBase
 
     protected override void OnInitialized()
     {
-        _hasPeople = SelectedPerson?.Id > 0 || People.Any();
+        _hasPeople = SelectedPerson?.Id > 0;
         _displayPeople = !CanToggle || _hasPeople;        
         _sportFilter = Sport;
 
@@ -70,5 +67,26 @@ public partial class PersonSelector : ComponentBase
     {
         _filterPeople = isChecked;
         Sport = _filterPeople ? _sportFilter : null;
+    }
+
+    private async Task ShowPersonProfile()
+    {
+        if (!_hasPeople)
+            return;
+
+        var parameters = new DialogParameters
+        {
+            ["PersonId"] = SelectedPerson.Id
+        };
+
+        var options = new DialogOptions()
+        {            
+            MaxWidth = MaxWidth.ExtraLarge,
+            FullWidth = true,
+            DisableBackdropClick = true
+        };
+
+        var dialog = DialogService.Show<PersonProfileDialog>(string.Empty, parameters, options);
+        var result = await dialog.Result;
     }
 }

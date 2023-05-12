@@ -20,16 +20,24 @@
         <HeaderContent>
             <MudTh>Selected People</MudTh>
             <MudTh></MudTh>
+            <MudTh></MudTh>
         </HeaderContent>
         <RowTemplate>
             <MudTd DataLabel="Person">@context.DisplayName</MudTd>
+            <MudTd DataLabel="">
+                <MudTooltip Text="View Profile">
+                    <MudFab Color="MudBlazor.Color.Secondary"
+                            Icon="@Icons.Material.Filled.Person"
+                            OnClick="@(_ => ShowPersonProfile(context.Id))" />
+                </MudTooltip>
+            </MudTd>
             <MudTd DataLabel="">
                 <MudTooltip Text="Delete">
                     <MudFab Color="MudBlazor.Color.Secondary"
                             Icon="@Icons.Material.Outlined.DeleteOutline"
                             OnClick="@(_ => RemovePerson(context))" />
                 </MudTooltip>
-            </MudTd>
+            </MudTd>            
         </RowTemplate>
     </MudTable>
 </div>

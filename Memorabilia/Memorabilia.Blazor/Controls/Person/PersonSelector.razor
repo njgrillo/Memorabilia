@@ -28,11 +28,21 @@
         </PrettyBlazor.Condition>    
         <DivRowCol6>
             <Content>
-                <PersonAutoComplete Disabled="Disabled" 
-                                    IsCulturalSearch="true" 
-                                    SelectedValue="ViewModel"
-                                    SelectionChanged="(p) => ViewModel = p"
-                                    Sport="Sport" />
+                <div class="d-flex justify-context-between">
+                    <PersonAutoComplete Disabled="Disabled"
+                                        IsCulturalSearch="true"
+                                        SelectedValue="ViewModel"
+                                        SelectionChanged="(p) => ViewModel = p"
+                                        Sport="Sport" />
+                    <Condition Evaluation="@_hasPeople">
+                        <Match>
+                            <MudTooltip Text="View Profile">
+                                <MudIconButton Icon="@Icons.Material.Filled.Person"
+                                               OnClick="ShowPersonProfile" />
+                            </MudTooltip>
+                        </Match>
+                    </Condition>                    
+                </div>                             
                 <br />   
             </Content>
         </DivRowCol6>
