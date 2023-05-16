@@ -12,13 +12,15 @@
                                           SelectionChanged="(p) => _viewModel.SportLeagueLevelId = p" />
             </Match>
         </PrettyBlazor.Condition>
+    </ContentColumn2>
+    <ContentColumn3>
         <PrettyBlazor.Condition Evaluation="@DisplaySports">
             <Match>
                 <SportAutoComplete SelectedValue="_viewModel.Sport"
                                    SelectionChanged="(p) => _viewModel.Sport = p" />
             </Match>
         </PrettyBlazor.Condition>
-    </ContentColumn2>
+    </ContentColumn3>
 </DivRowCol3>
 <DivLeftAlign>
     <Content>

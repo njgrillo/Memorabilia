@@ -16,6 +16,8 @@ public class SavePersonFranchiseHallOfFameViewModel : SaveViewModel
 
     public Domain.Constants.FranchiseHallOfFameType FranchiseHallOfFameType { get; set; }
 
+    public string FranchiseHallOfFameTypeName => FranchiseHallOfFameType?.Name;
+
     public string FranchiseName => FranchiseHallOfFameType?.Franchise?.Name;
 
     public int PersonId { get; set; }

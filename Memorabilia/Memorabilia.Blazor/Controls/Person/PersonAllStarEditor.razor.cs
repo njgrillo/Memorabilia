@@ -8,7 +8,8 @@ public partial class PersonAllStarEditor : ComponentBase
     [Parameter]
     public Sport[] Sports { get; set; }
 
-    private bool DisplaySportLeagueLevels => Sports.Any(sport => sport == Sport.Basketball);
+    private bool DisplaySportLeagueLevels => Sports.Any(sport => sport == Sport.Basketball) ||
+        Sports.Any(sport => sport == Sport.Football);
 
     private bool DisplaySports => Sports.Length > 1;
 
@@ -20,7 +21,11 @@ public partial class PersonAllStarEditor : ComponentBase
         if (!DisplaySportLeagueLevels)
             return;
 
-        _viewModel.SportLeagueLevelId = SportLeagueLevel.NationalBasketballAssociation.Id;
+        if (Sports.Any(sport => sport == Sport.Basketball))
+            _viewModel.SportLeagueLevelId = SportLeagueLevel.NationalBasketballAssociation.Id;
+
+        if (Sports.Any(sport => sport == Sport.Football))
+            _viewModel.SportLeagueLevelId = SportLeagueLevel.NationalFootballLeague.Id;
     }
 
     private void Add()
@@ -48,6 +53,10 @@ public partial class PersonAllStarEditor : ComponentBase
         if (!DisplaySportLeagueLevels)
             return;
 
-        _viewModel.SportLeagueLevelId = SportLeagueLevel.NationalBasketballAssociation.Id;
+        if (Sports.Any(sport => sport == Sport.Basketball))
+            _viewModel.SportLeagueLevelId = SportLeagueLevel.NationalBasketballAssociation.Id;
+
+        if (Sports.Any(sport => sport == Sport.Football))
+            _viewModel.SportLeagueLevelId = SportLeagueLevel.NationalFootballLeague.Id;
     }
 }

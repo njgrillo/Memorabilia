@@ -34,11 +34,13 @@
                    Striped="true">
             <HeaderContent>
                 <MudTh>Franchise</MudTh>
+                <MudTh>HOF</MudTh>
                 <MudTh>Year</MudTh>
                 <MudTh></MudTh>
             </HeaderContent>
             <RowTemplate>
                 <MudTd DataLabel="Franchise">@context.FranchiseName</MudTd>
+                <MudTd DataLabel="HOF">@context.FranchiseHallOfFameTypeName</MudTd>
                 <MudTd DataLabel="Year">@context.Year</MudTd>
                 <MudTd DataLabel="">
                     <MudTooltip Text="Edit">
