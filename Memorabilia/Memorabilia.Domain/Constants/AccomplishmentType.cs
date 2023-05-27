@@ -531,10 +531,4 @@ public sealed class AccomplishmentType : DomainItemConstant
 
         return All;
     }
-
-    public static bool IsDateAccomplishment(int id)
-        => DateAccomplishment.Any(accomplishmentType => accomplishmentType.Id == id);
-
-    public static bool IsYearAccomplishment(int id)
-        => YearAccomplishment.Any(accomplishmentType => accomplishmentType.Id == id);
 }

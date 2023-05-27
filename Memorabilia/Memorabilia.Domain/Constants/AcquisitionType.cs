@@ -21,6 +21,15 @@ public sealed class AcquisitionType : DomainItemConstant
         Trade            
     };
 
+    public static readonly AcquisitionType[] CostAcquisitionTypes =
+    {
+        InPerson,
+        PrivateSigning,
+        PublicSigning,
+        Purchase,
+        ThroughTheMail
+    };
+
     public static readonly AcquisitionType[] MemorabiliaAcquisitionTypes =
     {
         Gift,
@@ -30,26 +39,6 @@ public sealed class AcquisitionType : DomainItemConstant
 
     private AcquisitionType(int id, string name, string abbreviation = null) 
         : base(id, name, abbreviation) { }
-
-    public static bool CanHaveCost(AcquisitionType acquisitionType)
-    {
-        var acquisitionTypes = new List<AcquisitionType>
-        {
-            InPerson,
-            PrivateSigning,
-            PublicSigning,
-            Purchase,
-            ThroughTheMail
-        };
-
-        return acquisitionTypes.Contains(acquisitionType);
-    }
-
-    public static bool CanHavePurchaseType(AcquisitionType acquisitionType)
-        => acquisitionType == Purchase;
-
-    public static bool CanHaveSendAndReceiveDates(AcquisitionType acquisitionType)
-        => acquisitionType == ThroughTheMail;
 
     public static AcquisitionType Find(int id)
         => All.SingleOrDefault(acquisitionType => acquisitionType.Id == id);

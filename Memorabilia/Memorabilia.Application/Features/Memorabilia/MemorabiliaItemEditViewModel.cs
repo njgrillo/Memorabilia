@@ -4,21 +4,28 @@ namespace Memorabilia.Application.Features.Memorabilia;
 
 public abstract class MemorabiliaItemEditViewModel : SaveItemViewModel
 {
-    public override string BackNavigationPath => $"Memorabilia/{EditModeType.Update.Name}/{MemorabiliaId}";
+    public override string BackNavigationPath 
+        => $"Memorabilia/{EditModeType.Update.Name}/{MemorabiliaId}";
 
     public int BrandId { get; set; }
 
-    public virtual bool DisplayGameDate => GameStyleType.IsGameWorthly(GameStyleType);
+    public virtual bool DisplayGameDate 
+        => (GameStyleType?.IsGameWorthly() ?? false);
 
     public virtual bool DisplayGameStyleType { get; } = true;
 
-    public override EditModeType EditModeType => MemorabiliaId > 0 ? EditModeType.Update : EditModeType.Add;
+    public override EditModeType EditModeType 
+        => MemorabiliaId > 0 
+        ? EditModeType.Update 
+        : EditModeType.Add;
 
-    public override string ExitNavigationPath => "Memorabilia/Items";
+    public override string ExitNavigationPath 
+        => "Memorabilia/Items";
 
     public DateTime? GameDate { get; set; }
 
-    public GameStyleType GameStyleType => GameStyleType.Find(GameStyleTypeId);
+    public GameStyleType GameStyleType 
+        => GameStyleType.Find(GameStyleTypeId);
 
     private int _gameStyleTypeId = GameStyleType.None.Id;
     public int GameStyleTypeId
@@ -28,7 +35,7 @@ public abstract class MemorabiliaItemEditViewModel : SaveItemViewModel
         {
             _gameStyleTypeId = value;
 
-            if (!GameStyleType.IsGameWorthly(GameStyleType))
+            if (!(GameStyleType?.IsGameWorthly() ?? false))
                 GameDate = null;
         }
     }
@@ -41,7 +48,8 @@ public abstract class MemorabiliaItemEditViewModel : SaveItemViewModel
 
     public int SizeId { get; set; }
 
-    public virtual Sport Sport => Sport.Find(SportId);
+    public virtual Sport Sport 
+        => Sport.Find(SportId);
 
     public int SportId { get; set; }
 

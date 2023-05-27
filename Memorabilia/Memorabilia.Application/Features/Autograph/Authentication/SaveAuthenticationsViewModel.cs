@@ -23,25 +23,31 @@ public class SaveAuthenticationsViewModel : SaveViewModel
 
     public int AutographId { get; set; }
 
-    public AutographStep AutographStep => AutographStep.Authentication;
+    public AutographStep AutographStep 
+        => AutographStep.Authentication;
 
     public override string BackNavigationPath 
         => $"Autographs/Inscriptions/{EditModeType.Update.Name}/{AutographId}";
 
-    public bool CanHaveSpot => ItemType.CanHaveSpot(ItemType);
+    public bool CanHaveSpot 
+        => ItemType.CanHaveSpot();
 
-    public override string ContinueNavigationPath => CanHaveSpot
+    public override string ContinueNavigationPath 
+        => CanHaveSpot
             ? $"Autographs/{AdminDomainItem.Spots.Item}/{EditModeType.Update.Name}/{AutographId}"
             : $"Autographs/Image/{EditModeType.Update.Name}/{AutographId}";
 
     public override EditModeType EditModeType 
         => Authentications.Any() ? EditModeType.Update : EditModeType.Add;
 
-    public override string ExitNavigationPath => "Memorabilia/Items";
+    public override string ExitNavigationPath 
+        => "Memorabilia/Items";
 
-    public bool HasMemorabiliaImages => MemorabiliaImageNames.Any();
+    public bool HasMemorabiliaImages 
+        => MemorabiliaImageNames.Any();
 
-    public string ImageFileName => AdminDomainItem.AuthenticationCompanies.ImageFileName;
+    public string ImageFileName 
+        => AdminDomainItem.AuthenticationCompanies.ImageFileName;
 
     public ItemType ItemType { get; }
 

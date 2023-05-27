@@ -47,22 +47,28 @@ public class SaveBaseballViewModel : MemorabiliaItemEditViewModel
                                        LevelTypeId == LevelType.Professional.Id &&
                                        SizeId == Size.Standard.Id;
 
-    public bool DisplayBaseballTypeAnniversary => DisplayBaseballType && BaseballType.CanHaveAnniversary(BaseballType);
+    public bool DisplayBaseballTypeAnniversary 
+        => DisplayBaseballType && BaseballType.CanHaveAnniversary();
 
-    public bool DisplayBaseballTypeYear => DisplayBaseballType && BaseballType.CanHaveYear(BaseballType);
+    public bool DisplayBaseballTypeYear 
+        => DisplayBaseballType && BaseballType.CanHaveYear();
 
-    public bool DisplayCommissioner => Brand.IsGameWorthlyBaseballBrand(Brand) &&
-                                       BaseballType.IsCommissionerType(BaseballType);
+    public bool DisplayCommissioner 
+        => (Brand?.IsGameWorthlyBaseballBrand() ?? false) &&
+           (BaseballType?.IsCommissionerType() ?? false);
 
-    public override bool DisplayGameDate => DisplayGameStyleType && 
-                                            BaseballType.IsGameWorthly(BaseballType) && 
-                                            GameStyleType.IsGameWorthly(GameStyleType);
+    public override bool DisplayGameDate 
+        => DisplayGameStyleType &&
+           (BaseballType?.IsGameWorthly() ?? false) && 
+           (GameStyleType?.IsGameWorthly() ?? false);
 
-    public override bool DisplayGameStyleType => Brand.IsGameWorthlyBaseballBrand(Brand) &&
-                                                 SizeId == Size.Standard.Id;
+    public override bool DisplayGameStyleType 
+        => (Brand?.IsGameWorthlyBaseballBrand() ?? false) &&
+           SizeId == Size.Standard.Id;
 
-    public bool DisplayLeaguePresident => Brand.IsGameWorthlyBaseballBrand(Brand) &&
-                                          BaseballType.IsLeaguePresidentType(BaseballType);
+    public bool DisplayLeaguePresident 
+        => (Brand?.IsGameWorthlyBaseballBrand() ?? false) &&
+           (BaseballType?.IsLeaguePresidentType() ?? false);
 
     public override string ImageFileName
     {

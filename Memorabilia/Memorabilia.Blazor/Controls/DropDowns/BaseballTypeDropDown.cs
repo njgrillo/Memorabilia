@@ -2,8 +2,15 @@
 
 public class BaseballTypeDropDown : GameStyleDropDown<BaseballType>
 {
+    [Parameter]
+    public bool UseProjectTypes { get; set; }
+
     protected override void LoadItems()
     {
-        Items = GameStyleType != null ? BaseballType.GetAll(GameStyleType) : BaseballType.All;
+        Items = UseProjectTypes
+            ? BaseballType.ProjectTypes
+            : GameStyleType != null 
+                ? BaseballType.GetAll(GameStyleType) 
+                : BaseballType.All;
     }
 }

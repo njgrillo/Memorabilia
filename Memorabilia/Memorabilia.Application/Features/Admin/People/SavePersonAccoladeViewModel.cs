@@ -81,7 +81,8 @@ public class SavePersonAccoladeViewModel : SaveViewModel
 
     public College[] Colleges = Array.Empty<College>();
 
-    public override string ContinueNavigationPath => $"{AdminDomainItem.People.Title}/HallOfFame/{EditModeType.Update.Name}/{PersonId}";
+    public override string ContinueNavigationPath 
+        => $"{AdminDomainItem.People.Title}/HallOfFame/{EditModeType.Update.Name}/{PersonId}";
 
     public bool DisplayAllStars => Sport.HasAllStarGames(Sports) || Sport.HasProBowlGames(Sports);
 

@@ -32,11 +32,14 @@ public class SaveMemorabiliaItemViewModel : SaveViewModel
 
     public bool AcquiredWithAutograph { get; set; }
 
+    public AcquisitionType AcquisitionType
+        => AcquisitionType.Find(AcquisitionTypeId);
+
     public int AcquisitionTypeId { get; set; } = AcquisitionType.Purchase.Id;
 
     public bool CanEditItemType => Id == 0;
 
-    public bool CanHaveCost => AcquisitionType.CanHaveCost(AcquisitionType.Find(AcquisitionTypeId));
+    public bool CanHaveCost => AcquisitionType?.CanHaveCost() ?? false;
 
     public int ConditionId { get; set; } = Condition.Pristine.Id;
 

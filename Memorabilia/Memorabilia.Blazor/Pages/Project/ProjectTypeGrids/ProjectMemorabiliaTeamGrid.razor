@@ -1,0 +1,219 @@
+﻿<MudTable Bordered="false"
+          CanCancelEdit="true"
+          CommitEditTooltip="Save"
+          Dense="false"
+          Filter="new Func<SaveProjectMemorabiliaTeamViewModel,bool>(FilterFunc1)"
+          Hover="true"
+          Items="@Items.Where(item => !item.IsDeleted).OrderBy(item => item.Rank)"
+          RowEditCancel="ResetItemToOriginalValues"
+          RowEditCommit="UpdateRanks"
+          RowEditPreview="BackupItem"
+          Striped="true">
+    <ToolBarContent>
+        <MudText Typo="Typo.h6">Project Teams</MudText>
+        <MudSpacer />
+        <MudTextField @bind-Value="_search"
+                      Adornment="Adornment.Start"
+                      AdornmentIcon="@Icons.Material.Filled.Search"
+                      Class="mt-0"
+                      IconSize="MudBlazor.Size.Medium"
+                      Placeholder="Search" />
+    </ToolBarContent>
+    <HeaderContent>
+        <MudTh></MudTh>
+        <MudTh></MudTh>
+        <MudTh>
+            <MudTableSortLabel SortBy="new Func<SaveProjectMemorabiliaTeamViewModel, object>(x=>x.Rank)">
+                Rank
+            </MudTableSortLabel>
+        </MudTh>
+        <MudTh>
+            <MudTableSortLabel SortBy="new Func<SaveProjectMemorabiliaTeamViewModel, object>(x=>x.PriorityTypeName)">
+                Priority
+            </MudTableSortLabel>
+        </MudTh>
+        <MudTh>
+            <MudTableSortLabel SortBy="new Func<SaveProjectMemorabiliaTeamViewModel, object>(x=>x.Team.DisplayName)">
+                Team
+            </MudTableSortLabel>
+        </MudTh>
+        <MudTh>
+            <MudTableSortLabel SortBy="new Func<SaveProjectMemorabiliaTeamViewModel, object>(x=>x.Upgrade)">
+                Upgrade
+            </MudTableSortLabel>
+        </MudTh>        
+        <MudTh>
+            <MudTableSortLabel SortBy="new Func<SaveProjectMemorabiliaTeamViewModel, object>(x=>x.ProjectStatusTypeName)">
+                Status
+            </MudTableSortLabel>
+        </MudTh>
+        <MudTh>
+            Memorabilia
+        </MudTh>
+        <MudTh></MudTh>
+        <MudTh></MudTh>
+        <MudTh></MudTh>
+    </HeaderContent>
+    <RowTemplate Context="projectMemorabiliaTeam">
+        <MudTd>
+            <MudIconButton @onclick="@(_ => MoveToTop(projectMemorabiliaTeam.Rank ?? 0))"
+                           hidden="@(!projectMemorabiliaTeam.DisplayDoubleUpIcon)"
+                           Icon="@projectMemorabiliaTeam.DoubleUpIcon"></MudIconButton>
+            <MudIconButton @onclick="@(_ => MoveUp(projectMemorabiliaTeam.Rank ?? 0))"
+                           hidden="@(!projectMemorabiliaTeam.DisplayUpIcon)"
+                           Icon="@projectMemorabiliaTeam.UpIcon"></MudIconButton>
+            <MudIconButton @onclick="@(_ => MoveDown(projectMemorabiliaTeam.Rank ?? 0))"
+                           Icon="@projectMemorabiliaTeam.DownIcon"></MudIconButton>
+            <MudIconButton @onclick="@(_ => MoveToBottom(projectMemorabiliaTeam.Rank ?? 0))"
+                           Icon="@projectMemorabiliaTeam.DoubleDownIcon"></MudIconButton>
+        </MudTd>
+        <Condition Evaluation="@(!projectMemorabiliaTeam.TemplateImageFileName.IsNullOrEmpty())">
+            <Match>
+                <MudImage Class="rounded-lg"
+                          Elevation="5"
+                          Height="200"
+                          ObjectFit="@ObjectFit.Cover"
+                          Src="@(ImageHelper.GetDomainImageData(projectMemorabiliaTeam.TemplateImageFileName))"
+                          Width="200" />
+            </Match>
+            <NotMatch>
+                <MudTd DataLabel="" />
+            </NotMatch>
+        </Condition>
+        <MudTd DataLabel="Rank">@projectMemorabiliaTeam.Rank</MudTd>
+        <MudTd DataLabel="Priority">@projectMemorabiliaTeam.PriorityTypeName</MudTd>
+        <MudTd DataLabel="Team">@projectMemorabiliaTeam.Team.DisplayName</MudTd>
+        <MudTd DataLabel="Upgrade">@(projectMemorabiliaTeam.Upgrade ? "Yes" : "No")</MudTd>
+        <MudTd DataLabel="Status">@projectMemorabiliaTeam.ProjectStatusTypeName</MudTd>
+        <MudTd DataLabel="">
+            <Condition Evaluation="@(projectMemorabiliaTeam.MemorabiliaId > 0)">
+                <Match>
+                    <MudImage Class="rounded-lg can-click"
+                              Elevation="5"
+                              Height="75"
+                              ObjectFit="@ObjectFit.Cover"
+                              Src="@(ImageHelper.GetUserImageData(projectMemorabiliaTeam.MemorabiliaFileName, projectMemorabiliaTeam.UserId))"
+                              Width="75" />
+                </Match>
+            </Condition>
+        </MudTd>
+        <MudTd DataLabel="">
+            <Condition Evaluation="@(projectMemorabiliaTeam.MemorabiliaId > 0)">
+                <Match>
+                    <MudTooltip Text="Remove link to Memorabilia">
+                        <MudFab Color="MudBlazor.Color.Secondary"
+                                Icon="@Icons.Material.Outlined.LinkOff"
+                                OnClick="@(_ => projectMemorabiliaTeam.MemorabiliaId = 0)" />
+                    </MudTooltip>
+                </Match>
+                <NotMatch>
+                        <MudTooltip Text="Link to Memorabilia">
+                        <MudFab Color="MudBlazor.Color.Secondary"
+                                Icon="@Icons.Material.Outlined.AddLink"
+                                OnClick="@(_ => AddMemorabiliaLink(projectMemorabiliaTeam))" />
+                    </MudTooltip>
+                </NotMatch>
+            </Condition>
+        </MudTd>
+        <MudTd DataLabel="">
+            <Condition Evaluation="@(projectMemorabiliaTeam.MemorabiliaId > 0)">
+                <Match>
+                    <MudTooltip Text="View All Images">
+                        <MudFab Color="MudBlazor.Color.Secondary"
+                                Icon="@Icons.Material.Outlined.Image"
+                                OnClick="@(_ => ViewImages(projectMemorabiliaTeam))" />
+                    </MudTooltip>
+                </Match>
+            </Condition>
+        </MudTd>
+        <MudTd DataLabel="">
+            <MudTooltip Text="Delete">
+                <MudFab Color="MudBlazor.Color.Secondary"
+                        Icon="@Icons.Material.Outlined.DeleteOutline"
+                        OnClick="@(_ => Remove(projectMemorabiliaTeam.Id, projectMemorabiliaTeam.Team.Id, projectMemorabiliaTeam.Rank, projectMemorabiliaTeam.ItemTypeId))" />
+            </MudTooltip>
+        </MudTd>
+    </RowTemplate>
+    <RowEditingTemplate>
+        <MudTd>
+            <MudIconButton @onclick="@(_ => MoveToTop(context.Rank ?? 0))"
+                           hidden="@(!context.DisplayDoubleUpIcon)"
+                           Icon="@context.DoubleUpIcon"></MudIconButton>
+            <MudIconButton @onclick="@(_ => MoveUp(context.Rank ?? 0))"
+                           hidden="@(!context.DisplayUpIcon)"
+                           Icon="@context.UpIcon"></MudIconButton>
+            <MudIconButton @onclick="@(_ => MoveDown(context.Rank ?? 0))"
+                           Icon="@context.DownIcon"></MudIconButton>
+            <MudIconButton @onclick="@(_ => MoveToBottom(context.Rank ?? 0))"
+                           Icon="@context.DoubleDownIcon"></MudIconButton>
+        </MudTd>
+        <MudTd DataLabel="Rank">
+            <MudNumericField @bind-Value="@context.Rank" Required Min="1" />
+        </MudTd>
+        <MudTd DataLabel="Priority">
+            <PriorityTypeDropDown SelectedValue="@context.PriorityTypeId"
+                                  SelectionChanged="(p) => context.PriorityTypeId = p" />
+        </MudTd>
+        <MudTd DataLabel="Team">@context.Team.DisplayName</MudTd> 
+        <MudTd DataLabel="Upgrade">
+            <BooleanCheckBox Checked="@context.Upgrade"
+                             CheckedChanged="(p) => context.Upgrade = p"
+                             Label="Is Upgrade" />
+        </MudTd>        
+        <MudTd DataLabel="Status">
+            <ProjectStatusTypeDropDown SelectedValue="@context.ProjectStatusTypeId"
+                                       SelectionChanged="(p) => context.ProjectStatusTypeId = p" />
+        </MudTd>
+        <MudTd DataLabel="">
+                <Condition Evaluation="@(context.MemorabiliaId > 0)">
+                <Match>
+                    <MudImage Class="rounded-lg"
+                              Elevation="5"
+                              Height="75"
+                              ObjectFit="@ObjectFit.Cover"                              
+                              Src="@(ImageHelper.GetUserImageData(context.MemorabiliaFileName, context.UserId))"
+                              Width="75" />                      
+                </Match>
+            </Condition>            
+        </MudTd>
+        <MudTd DataLabel="">
+                <Condition Evaluation="@(context.MemorabiliaId > 0)">
+                <Match>
+                    <MudTooltip Text="Remove link to Memorabilia">
+                        <MudFab Color="MudBlazor.Color.Secondary"
+                                Icon="@Icons.Material.Outlined.LinkOff"
+                                OnClick="@(_ => context.MemorabiliaId = 0)" />
+                    </MudTooltip>                    
+                </Match>
+                <NotMatch>
+                    <MudTooltip Text="Link to Memorabilia">
+                        <MudFab Color="MudBlazor.Color.Secondary"
+                                Icon="@Icons.Material.Outlined.AddLink"
+                                OnClick="@(_ => AddMemorabiliaLink(context))" />
+                    </MudTooltip>                   
+                </NotMatch>
+            </Condition>            
+        </MudTd>
+        <MudTd DataLabel="">
+            <Condition Evaluation="@(context.MemorabiliaId > 0)">
+                <Match>
+                    <MudTooltip Text="View All Images">
+                        <MudFab Color="MudBlazor.Color.Secondary"
+                                Icon="@Icons.Material.Outlined.Image"
+                                OnClick="@(_ => ViewImages(context))" />
+                    </MudTooltip>
+                </Match>
+            </Condition>
+        </MudTd>
+        <MudTd DataLabel="">
+            <MudTooltip Text="Delete">
+                <MudFab Color="MudBlazor.Color.Secondary"
+                        Icon="@Icons.Material.Outlined.DeleteOutline"
+                        OnClick="@(_ => Remove(context.Id, context.Team.Id, context.Rank, context.ItemTypeId))" />
+            </MudTooltip>
+        </MudTd>
+    </RowEditingTemplate>
+    <PagerContent>
+        <MudTablePager />
+    </PagerContent>
+</MudTable>

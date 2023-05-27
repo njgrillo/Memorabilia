@@ -1,6 +1,4 @@
-﻿
-
-namespace Memorabilia.Blazor.Controls.TypeAhead;
+﻿namespace Memorabilia.Blazor.Controls.TypeAhead;
 
 public class TeamAutoComplete : NamedEntityAutoComplete<SaveTeamViewModel>, INotifyPropertyChanged
 {

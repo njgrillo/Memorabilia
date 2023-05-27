@@ -28,10 +28,9 @@ public class HockeyStickValidator : AbstractValidator<SaveHockeyStick.Command>
 
     private static bool CanHaveGameDate(SaveHockeyStick.Command command)
     {
-        var gameStyle = Domain.Constants.GameStyleType.Find(command.GameStyleTypeId ?? 0);
         var size = Domain.Constants.Size.Find(command.SizeId);
 
-        return Domain.Constants.GameStyleType.IsGameWorthly(gameStyle) &&
+        return (Domain.Constants.GameStyleType.Find(command.GameStyleTypeId ?? 0)?.IsGameWorthly() ?? false) &&
                size == Domain.Constants.Size.Full;
     }
 }

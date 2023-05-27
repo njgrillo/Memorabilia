@@ -13,7 +13,7 @@ public class CyYoungRule : AwardRule, IAwardRule
     {
         _awardType = awardType;
 
-        return Domain.Constants.AwardType.IsCyYoungAward(_awardType);
+        return _awardType.IsCyYoungAward();
     }
 
     public string[] GenerateInscriptions(PersonAward[] awards)

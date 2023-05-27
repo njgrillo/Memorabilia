@@ -22,9 +22,5 @@ public class WristBandValidator : AbstractValidator<SaveWristBand.Command>
     }
 
     private static bool CanHaveGameDate(SaveWristBand.Command command)
-    {
-        var gameStyle = Domain.Constants.GameStyleType.Find(command.GameStyleTypeId ?? 0);
-
-        return Domain.Constants.GameStyleType.IsGameWorthly(gameStyle);
-    }
+        => Domain.Constants.GameStyleType.Find(command.GameStyleTypeId ?? 0)?.IsGameWorthly() ?? false;
 }

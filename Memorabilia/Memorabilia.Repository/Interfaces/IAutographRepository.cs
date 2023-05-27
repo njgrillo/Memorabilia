@@ -8,6 +8,8 @@ public interface IAutographRepository : IDomainRepository<Autograph>
 
     Task<IEnumerable<Autograph>> GetAll(int? memorabiliaId = null, int? userId = null);
 
+    Task<Autograph[]> GetAll(Dictionary<string, object> parameters);
+
     int[] GetColorIds(int userId);
 
     int[] GetConditionIds(int userId);

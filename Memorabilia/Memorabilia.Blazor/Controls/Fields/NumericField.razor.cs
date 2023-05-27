@@ -1,9 +1,10 @@
-﻿
-
-namespace Memorabilia.Blazor.Controls.Fields;
+﻿namespace Memorabilia.Blazor.Controls.Fields;
 
 public partial class NumericField<TType> : Field
 {
+    [Parameter]
+    public bool Disabled { get; set; }
+
     [Parameter]
     public bool HideSpinButtons { get; set; } = true;
 

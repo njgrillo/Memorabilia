@@ -46,10 +46,10 @@ public partial class MemorabiliaEditor : ImagePage
 
         var acquisitionType = AcquisitionType.Find(acquisitionTypeId);
 
-        if (!AcquisitionType.CanHaveCost(acquisitionType))
+        if (!acquisitionType.CanHaveCost())
             _viewModel.Cost = null;
 
-        if (!AcquisitionType.CanHavePurchaseType(acquisitionType))
+        if (!acquisitionType.CanHavePurchaseType())
             _viewModel.PurchaseTypeId = 0;
     }
 }

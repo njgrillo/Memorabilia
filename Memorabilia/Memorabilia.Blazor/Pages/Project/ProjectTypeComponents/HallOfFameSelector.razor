@@ -1,0 +1,25 @@
+﻿<DivRowCol3>
+    <Content>
+        <h3>
+            Hall of Fame
+        </h3>
+    </Content>
+</DivRowCol3>
+<DivRowCol3>
+    <Content>
+        <SportLeagueLevelDropDown Disabled="Disabled" 
+                                  SelectedValue="SportLeagueLevelId"
+                                  SelectionChanged="(p) => SportLeagueLevelChanged(p)" />
+    </Content>
+    <ContentColumn2>
+        <NullableIntField Disabled="Disabled" 
+                          Label="Year"
+                          Value="Year"
+                          ValueChanged="@((p) => YearChanged(p))" />
+    </ContentColumn2>
+    <ContentColumn3>
+        <ItemTypeAutoComplete Disabled="Disabled" 
+                              SelectedValue="ItemType"
+                              SelectionChanged="(p) => ItemTypeChanged(p)" />
+    </ContentColumn3>
+</DivRowCol3>

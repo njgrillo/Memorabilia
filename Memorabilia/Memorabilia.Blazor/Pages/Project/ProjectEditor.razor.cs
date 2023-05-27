@@ -1,9 +1,24 @@
 ﻿namespace Memorabilia.Blazor.Pages.Project;
 
-public partial class ProjectEditor : ImagePage
+public partial class ProjectEditor
 {
     [Inject]
+    public CommandRouter CommandRouter { get; set; }
+
+    [Inject]
     public IDialogService DialogService { get; set; }
+
+    [Inject]
+    public IJSRuntime JSRuntime { get; set; }
+
+    [Inject]
+    public QueryRouter QueryRouter { get; set; }
+
+    [Inject]
+    public ISnackbar Snackbar { get; set; }
+
+    [Inject]
+    public ProjectValidator Validator { get; set; }
 
     [Parameter]
     public int Id { get; set; }
@@ -11,22 +26,31 @@ public partial class ProjectEditor : ImagePage
     [Parameter]
     public int UserId { get; set; }
 
-    private SaveProjectPersonViewModel _elementBeforeEdit;
-    private string _search;
-    private SaveProjectViewModel _viewModel = new();
+    protected Type ProjectTypeComponent;
 
-    private bool FilterFunc1(SaveProjectPersonViewModel projectPersonViewModel)
-        => FilterFunc(projectPersonViewModel, _search);
+    protected ValidationResult ValidationResult { get; set; }
 
-    protected async Task HandleValidSubmit()
+    protected Alert[] ValidationResultAlerts => ValidationResult != null
+        ? ValidationResult.Errors.Select(error => new Alert(error.ErrorMessage, Severity.Error)).ToArray()
+        : Array.Empty<Alert>();
+
+    private SaveProjectViewModel _viewModel = new();    
+
+    protected Dictionary<string, object> ProjectTypeParameters { get; set; } 
+        = new Dictionary<string, object>();
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
     {
-        await CommandRouter.Send(new SaveProject.Command(_viewModel));
+        if (ValidationResult != null && !ValidationResult.IsValid)
+        {
+            await JSRuntime.ScrollToAlert();
+        }
     }
 
-    protected async Task OnLoad()
-    {            
-        if (UserId == 0)
-            NavigationManager.NavigateTo("Login");
+    protected override async Task OnInitializedAsync()
+    {
+        ProjectTypeParameters.Add("ProjectDetailsSet",
+            EventCallback.Factory.Create<Dictionary<string, object>>(this, OnProjectDetailsSet));
 
         if (Id == 0)
         {
@@ -39,165 +63,200 @@ public partial class ProjectEditor : ImagePage
         }
 
         _viewModel = new SaveProjectViewModel(await QueryRouter.Send(new GetProjectQuery(Id)));
+
+        ProjectTypeComponent = Type.GetType($"Memorabilia.Blazor.Pages.Project.ProjectTypeComponents.{_viewModel.ProjectType}Selector");
+        
+        SetProjectDetailsParameters();
     }
 
-    private async Task AddProjectPerson()
+    protected void OnProjectTypeSelected(ProjectType projectType)
     {
-        var parameters = new DialogParameters
+        _viewModel.ProjectType = projectType;
+
+        ProjectTypeComponent = Type.GetType($"Memorabilia.Blazor.Pages.Project.ProjectTypeComponents.{_viewModel.ProjectType}Selector");
+     }
+
+    protected void OnProjectDetailsSet(Dictionary<string, object> parameters)
+    {
+        var projectTypeParameters = new Dictionary<string, object>();
+
+        switch (_viewModel.ProjectType.ToString())
         {
-            ["ItemTypeId"] = _viewModel.ItemTypeId,
-        };
-        var options = new DialogOptions()
-        {
-            MaxWidth = MaxWidth.Large,
-            FullWidth = true,
-            DisableBackdropClick = true
-        };
-        var dialog = DialogService.Show<AddProjectPersonDialog>("Add Project Person", parameters, options);
-        var result = await dialog.Result;
+            case "BaseballType":
+                _viewModel.Baseball.BaseballTypeId = (int)parameters["BaseballTypeId"];
 
-        if (result.Canceled)
-            return;
+                if (parameters.ContainsKey("TeamId"))
+                    _viewModel.Baseball.TeamId = (int?)parameters["TeamId"];
 
-        SaveProjectPersonViewModel projectPerson 
-            = (SaveProjectPersonViewModel)result.Data;
+                if (parameters.ContainsKey("Year"))
+                    _viewModel.Baseball.Year = (int?)parameters["Year"];
 
-        _viewModel.People.Add(projectPerson);
-    }
+                break;
+            case "Card":
+                _viewModel.Card.BrandId = (int)parameters["BrandId"];
 
-    private void BackupItem(object element)
-    {
-        _elementBeforeEdit = new()
-        {
-            Rank = ((SaveProjectPersonViewModel)element).Rank,
-            Upgrade = ((SaveProjectPersonViewModel)element).Upgrade,
-            PriorityTypeId = ((SaveProjectPersonViewModel)element).PriorityTypeId,
-            ProjectStatusTypeId = ((SaveProjectPersonViewModel)element).ProjectStatusTypeId,
-        };
-    }
+                if (parameters.ContainsKey("TeamId"))
+                    _viewModel.Card.TeamId = (int?)parameters["TeamId"];
 
-    private static bool FilterFunc(SaveProjectPersonViewModel projectPersonViewModel, string search)
-    {
-        return search.IsNullOrEmpty() ||
-               (search.Equals("deceased", StringComparison.OrdinalIgnoreCase) && projectPersonViewModel.Deceased) ||
-               (search.Equals("upgrade", StringComparison.OrdinalIgnoreCase) && projectPersonViewModel.Upgrade) ||
-               projectPersonViewModel.PriorityTypeName.Contains(search, StringComparison.OrdinalIgnoreCase) ||
-               projectPersonViewModel.ProjectStatusTypeName.Contains(search, StringComparison.OrdinalIgnoreCase) ||
-               projectPersonViewModel.Person.Name.Contains(search, StringComparison.OrdinalIgnoreCase) ||
-               (!projectPersonViewModel.Person.Nickname.IsNullOrEmpty() && projectPersonViewModel.Person.Nickname.Contains(search, StringComparison.OrdinalIgnoreCase));
-    }
+                if (parameters.ContainsKey("Year"))
+                    _viewModel.Card.Year = (int?)parameters["Year"];
 
-    private void MoveDown(int rank)
-    {
-        var itemToMove = _viewModel.People.Single(person => person.Rank == rank);
-        var nextItem = _viewModel.People.SingleOrDefault(person => person.Rank == rank + 1);
+                break;
+            case "HallOfFame":
+                _viewModel.HallOfFame.SportLeagueLevelId = (int)parameters["SportLeagueLevelId"];
 
-        if (nextItem == null)
-            return;
+                if (parameters.ContainsKey("Year"))
+                    _viewModel.HallOfFame.Year = (int?)parameters["Year"];
 
-        itemToMove.Rank = rank + 1;
-        nextItem.Rank = rank;
-    }
+                if (parameters.ContainsKey("ItemTypeId"))
+                    _viewModel.HallOfFame.ItemTypeId = (int?)parameters["ItemTypeId"];
 
-    private void MoveToBottom(int rank)
-    {
-        var maxRank = _viewModel.People.Max(person => person.Rank);
+                break;
+            case "HelmetType":
+                _viewModel.Helmet.HelmetTypeId = (int)parameters["HelmetTypeId"];
 
-        if (rank == maxRank)
-            return;
+                if (parameters.ContainsKey("HelmetFinishId"))
+                    _viewModel.Helmet.HelmetFinishId = (int?)parameters["HelmetFinishId"];
 
-        var itemToMove = _viewModel.People.Single(person => person.Rank == rank);
+                if (parameters.ContainsKey("SizeId"))
+                    _viewModel.Helmet.SizeId = (int?)parameters["SizeId"];
 
-        foreach (var item in _viewModel.People.Where(person => person.Rank > rank))
-        {
-            item.Rank--;
-        }
+                break;
+            case "ItemType":
+                _viewModel.Item.ItemTypeId = (int)parameters["ItemTypeId"];
 
-        itemToMove.Rank = maxRank;
-    }
+                if (parameters.ContainsKey("MultiSignedItem"))
+                    _viewModel.Item.MultiSignedItem = (bool)parameters["MultiSignedItem"];
 
-    private void MoveToTop(int rank)
-    {
-        if (rank <= 1)
-            return;
+                break;
+            case "Team":
+                _viewModel.Team.TeamId = (int)parameters["TeamId"];
 
-        var itemToMove = _viewModel.People.Single(person => person.Rank == rank);
+                if (parameters.ContainsKey("Year"))
+                    _viewModel.Team.Year = (int?)parameters["Year"];
+                break;
+            case "WorldSeries":
+                _viewModel.WorldSeries.TeamId = (int)parameters["TeamId"];
 
-        foreach (var item in _viewModel.People.Where(person => person.Rank < rank))
-        {
-            item.Rank++;
-        }
+                if (parameters.ContainsKey("Year"))
+                    _viewModel.WorldSeries.Year = (int?)parameters["Year"];
 
-        itemToMove.Rank = 1;
-    }
+                if (parameters.ContainsKey("ItemTypeId"))
+                    _viewModel.WorldSeries.ItemTypeId = (int?)parameters["ItemTypeId"];
 
-    private void MoveUp(int rank)
-    {
-        if (rank <= 1)
-            return;
-
-        var itemToMove = _viewModel.People.Single(person => person.Rank == rank);
-        var previousItem = _viewModel.People.SingleOrDefault(person => person.Rank == rank - 1);
-
-        if (previousItem == null)
-            return;
-
-        itemToMove.Rank = rank - 1;
-        previousItem.Rank = rank;
-    }
-
-    private void Remove(int projectPersonId, int personId, int? itemTypeId)
-    {
-        var projectPerson = projectPersonId > 0
-            ? _viewModel.People.Single(person => person.Id == projectPersonId)
-            : _viewModel.People.Single(person => person.Person.Id == personId && person.ItemTypeId == itemTypeId);
-
-        projectPerson.IsDeleted = true;
-
-        var deletedRank = projectPerson.Rank;
-
-        foreach(var person in _viewModel.People.Where(person => person.Rank > deletedRank))
-        {
-            person.Rank--;
+                break;
+            default:
+                break;
         }
     }
 
-    private void ResetItemToOriginalValues(object element)
+    protected async Task OnSave()
     {
-        ((SaveProjectPersonViewModel)element).Rank = _elementBeforeEdit.Rank;
-        ((SaveProjectPersonViewModel)element).Upgrade = _elementBeforeEdit.Upgrade;
-        ((SaveProjectPersonViewModel)element).PriorityTypeId = _elementBeforeEdit.PriorityTypeId;
-        ((SaveProjectPersonViewModel)element).ProjectStatusTypeId = _elementBeforeEdit.ProjectStatusTypeId;
-    }
+        var command = new SaveProject.Command(_viewModel);
 
-    private void UpdateRanks(object element)
-    {
-        var item = ((SaveProjectPersonViewModel)element);
+        _viewModel.ValidationResult = Validator.Validate(command);
 
-        if (_elementBeforeEdit.Rank == item.Rank)
+        if (!_viewModel.ValidationResult.IsValid)
             return;
 
-        if (item.Rank < _elementBeforeEdit.Rank)
+        await CommandRouter.Send(command);
+
+        Snackbar.Add("Project was saved successfully!", Severity.Success);
+
+        await GetProjectMemorabiliaTeamUpdatedIds();
+        await GetProjectPersonUpdatedIds();
+    }
+
+    protected async Task GetProjectMemorabiliaTeamUpdatedIds()
+    {
+        if (!_viewModel.MemorabiliaTeams.Any())
+            return;
+
+        var viewModel = new SaveProjectViewModel(await QueryRouter.Send(new GetProjectQuery(Id)));
+
+        _viewModel.MemorabiliaTeams = viewModel.MemorabiliaTeams;
+    }
+
+    protected async Task GetProjectPersonUpdatedIds()
+    {
+        if (!_viewModel.People.Any())
+            return;
+
+        var viewModel = new SaveProjectViewModel(await QueryRouter.Send(new GetProjectQuery(Id)));
+
+        _viewModel.People = viewModel.People;
+    }
+
+    protected void SetProjectDetailsParameters()
+    {
+        ProjectTypeParameters.Add("Disabled", _viewModel.Id > 0);
+
+        switch (_viewModel.ProjectType.ToString())
         {
-            foreach (var person in _viewModel.People.Where(x => x.Rank < _elementBeforeEdit.Rank && x.Rank >= item.Rank))
-            {
-                if (person.Id == item.Id)
-                    continue;
+            case "BaseballType":
+                ProjectTypeParameters.Add("BaseballTypeId", _viewModel.Baseball.BaseballTypeId);
 
-                person.Rank += 1;
-            }
+                if (_viewModel.Baseball.TeamId.HasValue)
+                    ProjectTypeParameters.Add("TeamId", _viewModel.Baseball.TeamId);
+
+                if (_viewModel.Baseball.Year.HasValue)
+                    ProjectTypeParameters.Add("Year", _viewModel.Baseball.Year);
+
+                break;
+            case "Card":
+                ProjectTypeParameters.Add("BrandId", _viewModel.Card.BrandId);
+
+                if (_viewModel.Card.TeamId.HasValue)
+                    ProjectTypeParameters.Add("TeamId", _viewModel.Card.TeamId);
+
+                if (_viewModel.Card.Year.HasValue)
+                    ProjectTypeParameters.Add("Year", _viewModel.Card.Year);
+
+                break;
+            case "HallOfFame":
+                ProjectTypeParameters.Add("SportLeagueLevelId", _viewModel.HallOfFame.SportLeagueLevelId);
+
+                if (_viewModel.HallOfFame.ItemTypeId.HasValue)
+                    ProjectTypeParameters.Add("ItemTypeId", _viewModel.HallOfFame.ItemTypeId);
+
+                if (_viewModel.HallOfFame.Year.HasValue)
+                    ProjectTypeParameters.Add("Year", _viewModel.HallOfFame.Year);
+
+                break;
+            case "HelmetType":
+                ProjectTypeParameters.Add("HelmetTypeId", _viewModel.Helmet.HelmetTypeId);
+
+                if (_viewModel.Helmet.HelmetFinishId.HasValue)
+                    ProjectTypeParameters.Add("HelmetFinishId", _viewModel.Helmet.HelmetFinishId);
+
+                if (_viewModel.Helmet.SizeId.HasValue)
+                    ProjectTypeParameters.Add("SizeId", _viewModel.Helmet.SizeId);
+
+                break;
+            case "ItemType":
+                ProjectTypeParameters.Add("ItemTypeId", _viewModel.Item.ItemTypeId);
+                ProjectTypeParameters.Add("MultiSignedItem", _viewModel.Item.MultiSignedItem);
+
+                break;
+            case "Team":
+                ProjectTypeParameters.Add("TeamId", _viewModel.Team.TeamId);
+
+                if (_viewModel.Team.Year.HasValue)
+                    ProjectTypeParameters.Add("Year", _viewModel.Team.Year);
+
+                break;
+            case "WorldSeries":
+                ProjectTypeParameters.Add("TeamId", _viewModel.WorldSeries.TeamId);
+
+                if (_viewModel.WorldSeries.ItemTypeId.HasValue)
+                    ProjectTypeParameters.Add("ItemTypeId", _viewModel.WorldSeries.ItemTypeId);
+
+                if (_viewModel.WorldSeries.Year.HasValue)
+                    ProjectTypeParameters.Add("Year", _viewModel.WorldSeries.Year);
+
+                break;
+            default:
+                break;
         }
-        else
-        {
-            foreach (var person in _viewModel.People.Where(x => x.Rank > _elementBeforeEdit.Rank && x.Rank <= item.Rank))
-            {
-                if (person.Id == item.Id)
-                    continue;
-
-                person.Rank -= 1;
-            }
-        }
-
-        StateHasChanged();
-    } 
+    }    
 }

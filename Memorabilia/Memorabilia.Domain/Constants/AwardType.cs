@@ -1100,15 +1100,6 @@ public sealed class AwardType : DomainItemConstant
         };
     }
 
-    public static bool IsCyYoungAward(AwardType awardType)
-        => CyYoungAwards.Contains(awardType);
-
-    public static bool IsMostValuablePlayerAward(AwardType awardType)
-        => MostValuablePlayerAwards.Contains(awardType);
-
-    public static bool IsRookieOfTheYearAward(AwardType awardType)
-        => RookieOfTheYearAwards.Contains(awardType);
-
     public override string ToString()
         => Name;
 }

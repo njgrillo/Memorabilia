@@ -70,12 +70,6 @@ public sealed class Occupation : DomainItemConstant
     public static bool IsBaseballOccupation(int id)
         => BaseballOccupations.Contains(Find(id));
 
-    public static bool IsBaseballOccupation(Occupation occupation)
-        => BaseballOccupations.Contains(occupation);
-
     public static bool IsSportOccupation(int id)
         => SportOccupations.Contains(Find(id));
-
-    public static bool IsSportOccupation(Occupation occupation)
-        => SportOccupations.Contains(occupation);
 }

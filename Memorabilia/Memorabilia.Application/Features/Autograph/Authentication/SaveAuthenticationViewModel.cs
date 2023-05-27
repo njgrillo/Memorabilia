@@ -16,17 +16,21 @@ public class SaveAuthenticationViewModel : SaveViewModel
         Witnessed = authentication.Witnessed;
     }
 
-    public Domain.Constants.AuthenticationCompany[] AuthenticationCompanies => Domain.Constants.AuthenticationCompany.All;
+    public Domain.Constants.AuthenticationCompany[] AuthenticationCompanies 
+        => Domain.Constants.AuthenticationCompany.All;
 
-    public Domain.Constants.AuthenticationCompany AuthenticationCompany => Domain.Constants.AuthenticationCompany.Find(AuthenticationCompanyId);
+    public Domain.Constants.AuthenticationCompany AuthenticationCompany 
+        => Domain.Constants.AuthenticationCompany.Find(AuthenticationCompanyId);
 
     public int AuthenticationCompanyId { get; set; }    
 
-    public string AuthenticationCompanyName => Domain.Constants.AuthenticationCompany.Find(AuthenticationCompanyId)?.Name;
+    public string AuthenticationCompanyName
+        => Domain.Constants.AuthenticationCompany.Find(AuthenticationCompanyId)?.Name;
 
     public int AutographId { get; set; }
 
-    public bool CanNavigateToWebsite => Domain.Constants.AuthenticationCompany.IsNavigatable(AuthenticationCompany) && !Verification.IsNullOrEmpty();
+    public bool CanNavigateToWebsite
+        => (AuthenticationCompany?.IsNavigatable() ?? false) && !Verification.IsNullOrEmpty();
 
     public bool HasCertificationCard { get; set; }
 
@@ -36,9 +40,13 @@ public class SaveAuthenticationViewModel : SaveViewModel
 
     public string Verification { get; set; }
 
-    public string VerificationWebsiteLink => CanNavigateToWebsite ? $"{AuthenticationCompany.WebsitePath}{Verification}" : string.Empty;
+    public string VerificationWebsiteLink 
+        => CanNavigateToWebsite 
+        ? $"{AuthenticationCompany.WebsitePath}{Verification}" 
+        : string.Empty;
 
-    public string VerificationWebsiteLinkText => $"Verify through {AuthenticationCompanyName}";
+    public string VerificationWebsiteLinkText 
+        => $"Verify through {AuthenticationCompanyName}";
 
     public bool Witnessed { get; set; }
 }

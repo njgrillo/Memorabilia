@@ -17,12 +17,14 @@ public class SaveSpotViewModel : SaveViewModel
 
     public int AutographId { get; set; }
 
-    public AutographStep AutographStep => AutographStep.Spot;
+    public AutographStep AutographStep 
+        => AutographStep.Spot;
 
     public override string BackNavigationPath
         => $"Autographs/Authentications/{EditModeType.Update.Name}/{AutographId}";
 
-    public bool CanHaveSpot => ItemType.CanHaveSpot(ItemType);
+    public bool CanHaveSpot 
+        => ItemType?.CanHaveSpot() ?? false;
 
     public override string ContinueNavigationPath 
         => $"Autographs/Image/{EditModeType.Update.Name}/{AutographId}";
@@ -30,15 +32,19 @@ public class SaveSpotViewModel : SaveViewModel
     public override EditModeType EditModeType 
         => SpotId > 0 ? EditModeType.Update : EditModeType.Add;
 
-    public override string ExitNavigationPath => "Memorabilia/Items";
+    public override string ExitNavigationPath 
+        => "Memorabilia/Items";
 
-    public bool HasMemorabiliaImages => MemorabiliaImageNames.Any();
+    public bool HasMemorabiliaImages
+        => MemorabiliaImageNames.Any();
 
-    public virtual string ImageFileName => AdminDomainItem.Spots.ImageFileName;
+    public virtual string ImageFileName 
+        => AdminDomainItem.Spots.ImageFileName;
 
     public ItemType ItemType { get; set; }
 
-    public string ItemTypeName => ItemType?.Name;
+    public string ItemTypeName 
+        => ItemType?.Name;
 
     public int MemorabiliaId { get; }
 

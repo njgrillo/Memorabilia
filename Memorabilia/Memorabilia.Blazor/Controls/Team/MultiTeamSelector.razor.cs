@@ -1,6 +1,4 @@
-﻿
-
-namespace Memorabilia.Blazor.Controls.Team;
+﻿namespace Memorabilia.Blazor.Controls.Team;
 
 public partial class MultiTeamSelector : ComponentBase
 {

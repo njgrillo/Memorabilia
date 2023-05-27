@@ -12,49 +12,49 @@ public partial class AutographTimeline : ComponentBase
     public EditModeType EditMode { get; set; } = EditModeType.Add;
 
     [Parameter]
-    public Severity AutographAuthenticationEditAlertSeverity { get; set; } = MudBlazor.Severity.Info;
+    public Severity AutographAuthenticationEditAlertSeverity { get; set; } = Severity.Info;
 
     [Parameter]
     public string AutographAuthenticationEditAlertTitle { get; set; }
 
     [Parameter]
-    public Color AutographAuthenticationEditColor { get; set; } = MudBlazor.Color.Info;
+    public Color AutographAuthenticationEditColor { get; set; } = Color.Info;
 
     [Parameter]
-    public Severity AutographEditAlertSeverity { get; set; } = MudBlazor.Severity.Info;
+    public Severity AutographEditAlertSeverity { get; set; } = Severity.Info;
 
     [Parameter]
     public string AutographEditAlertTitle { get; set; }
 
     [Parameter]
-    public Color AutographEditColor { get; set; } = MudBlazor.Color.Info;
+    public Color AutographEditColor { get; set; } = Color.Info;
 
     [Parameter]
-    public Severity AutographImageEditAlertSeverity { get; set; } = MudBlazor.Severity.Info;
+    public Severity AutographImageEditAlertSeverity { get; set; } = Severity.Info;
 
     [Parameter]
     public string AutographImageEditAlertTitle { get; set; }
 
     [Parameter]
-    public Color AutographImageEditColor { get; set; } = MudBlazor.Color.Info;
+    public Color AutographImageEditColor { get; set; } = Color.Info;
 
     [Parameter]
-    public Severity AutographInscriptionEditAlertSeverity { get; set; } = MudBlazor.Severity.Info;
+    public Severity AutographInscriptionEditAlertSeverity { get; set; } = Severity.Info;
 
     [Parameter]
     public string AutographInscriptionEditAlertTitle { get; set; }
 
     [Parameter]
-    public Color AutographInscriptionEditColor { get; set; } = MudBlazor.Color.Info;
+    public Color AutographInscriptionEditColor { get; set; } = Color.Info;
 
     [Parameter]
-    public Severity AutographSpotEditAlertSeverity { get; set; } = MudBlazor.Severity.Info;
+    public Severity AutographSpotEditAlertSeverity { get; set; } = Severity.Info;
 
     [Parameter]
     public string AutographSpotEditAlertTitle { get; set; }
 
     [Parameter]
-    public Color AutographSpotEditColor { get; set; } = MudBlazor.Color.Info;
+    public Color AutographSpotEditColor { get; set; } = Color.Info;
 
     [Parameter]
     public AutographStep AutographStep { get; set; }

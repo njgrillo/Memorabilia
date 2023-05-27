@@ -26,19 +26,26 @@ public class SaveJerseyViewModel : MemorabiliaItemEditViewModel
         Teams = viewModel.Teams.Select(team => new SaveTeamViewModel(new TeamViewModel(team.Team))).ToList();
     }
 
-    public override bool DisplayGameDate => DisplayGameStyleType && IsGameWorthly;
+    public override bool DisplayGameDate 
+        => DisplayGameStyleType && 
+           IsGameWorthly;
 
-    public override bool DisplayGameStyleType => JerseyQualityTypeId == JerseyQualityType.Authentic.Id;
+    public override bool DisplayGameStyleType 
+        => JerseyQualityTypeId == JerseyQualityType.Authentic.Id;
 
-    public override string ImageFileName => Domain.Constants.ImageFileName.ItemTypes;
+    public override string ImageFileName 
+        => Domain.Constants.ImageFileName.ItemTypes;
 
-    public bool IsGameWorthly => GameStyleType.IsGameWorthly(GameStyleType);
+    public bool IsGameWorthly
+        => (GameStyleType?.IsGameWorthly() ?? false);
 
-    public override ItemType ItemType => ItemType.Jersey;
+    public override ItemType ItemType 
+        => ItemType.Jersey;
 
     public int JerseyQualityTypeId { get; set; }
 
     public int JerseyStyleTypeId { get; set; }
 
-    public int JerseyTypeId { get; set; } = JerseyType.Stitched.Id;
+    public int JerseyTypeId { get; set; } 
+        = JerseyType.Stitched.Id;
 }

@@ -10,7 +10,9 @@ public class ProjectPerson : Framework.Library.Domain.Entity.DomainEntity
                          bool upgrade, 
                          int? rank, 
                          int? priorityTypeId,
-                         int? projectStatusTypeId)
+                         int? projectStatusTypeId,
+                         int? memorabiliaId,
+                         int? autographId)
     {
         ProjectId = projectId;
         PersonId = personId;
@@ -19,15 +21,25 @@ public class ProjectPerson : Framework.Library.Domain.Entity.DomainEntity
         Rank = rank;
         PriorityTypeId = priorityTypeId;
         ProjectStatusTypeId = projectStatusTypeId;
+        MemorabiliaId = memorabiliaId;
+        AutographId = autographId;
     }
 
+    public virtual Autograph Autograph { get; set; }
+
+    public int? AutographId { get; set; }
+
     public int? ItemTypeId { get; set; }
+
+    public int? MemorabiliaId { get; set; }
 
     public virtual Person Person { get; set; }
 
     public int PersonId { get; set; }   
     
     public int? PriorityTypeId { get; set; }
+
+    public virtual Project Project { get; set; }
     
     public int ProjectId { get; set; }
 
@@ -42,7 +54,9 @@ public class ProjectPerson : Framework.Library.Domain.Entity.DomainEntity
         bool upgrade, 
         int? rank, 
         int? priorityTypeId,
-        int? projectStatusTypeId)
+        int? projectStatusTypeId,
+        int? memorabliaId,
+        int? autographId)
     {
         PersonId = personId;
         ItemTypeId = itemTypeId;
@@ -50,5 +64,7 @@ public class ProjectPerson : Framework.Library.Domain.Entity.DomainEntity
         Rank = rank;
         PriorityTypeId = priorityTypeId;
         ProjectStatusTypeId = projectStatusTypeId;
+        MemorabiliaId = memorabliaId;
+        AutographId = autographId;
     }
 }

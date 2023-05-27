@@ -1,0 +1,29 @@
+﻿<DivRowCol3>
+    <Content>
+        <h3>
+            Baseball Type
+        </h3>
+    </Content>
+</DivRowCol3>
+<DivRowCol3 HideColumn2="@(!IsYearly)"
+            HideColumn3="@(!IsTeam)">
+    <Content>
+        <BaseballTypeDropDown Disabled="Disabled" 
+                              SelectedValue="BaseballTypeId"
+                              SelectionChanged="(p) => BaseballTypeChanged(p)"
+                              UseProjectTypes="true" />
+    </Content>
+    <ContentColumn2>
+        <NullableIntField Disabled="Disabled" 
+                          Label="Year"
+                          Value="Year"
+                          ValueChanged="@((p) => YearChanged(p))" />
+    </ContentColumn2>
+    <ContentColumn3>
+        <TeamAutoComplete Disabled="Disabled" 
+                          SelectedValue="Team"
+                          SelectionChanged="(p) => TeamChanged(p)"
+                          Sport="Sport.Baseball"
+                          SportLeagueLevel="SportLeagueLevel.MajorLeagueBaseball" />
+    </ContentColumn3>
+</DivRowCol3>

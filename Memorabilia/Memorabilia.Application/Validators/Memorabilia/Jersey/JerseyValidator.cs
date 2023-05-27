@@ -43,10 +43,9 @@ public class JerseyValidator : AbstractValidator<SaveJersey.Command>
 
     private static bool CanHaveGameDate(SaveJersey.Command command)
     {
-        var gameStyle = Domain.Constants.GameStyleType.Find(command.GameStyleTypeId ?? 0);
         var jerseyQualityType = Domain.Constants.JerseyQualityType.Find(command.QualityTypeId);
 
-        return Domain.Constants.GameStyleType.IsGameWorthly(gameStyle) &&
+        return (Domain.Constants.GameStyleType.Find(command.GameStyleTypeId ?? 0)?.IsGameWorthly() ?? false) &&
                jerseyQualityType == Domain.Constants.JerseyQualityType.Authentic;
     }
 }

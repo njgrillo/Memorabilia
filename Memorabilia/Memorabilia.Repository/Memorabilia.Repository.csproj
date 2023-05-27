@@ -17,6 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\..\Framework\Framework.Library\Framework.Library.csproj" />
     <ProjectReference Include="..\Memorabilia.Domain\Memorabilia.Domain.csproj" />
   </ItemGroup>
 

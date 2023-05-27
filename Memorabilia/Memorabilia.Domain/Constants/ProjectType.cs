@@ -2,30 +2,55 @@
 
 public sealed class ProjectType : DomainItemConstant
 {
-    public static readonly ProjectType Baseball = new(1, "Baseball");
-    public static readonly ProjectType Card = new(2, "Card");
-    public static readonly ProjectType HallOfFame = new(3, "Hall of Fame");
-    public static readonly ProjectType Helmet = new(4, "Helmet");
-    public static readonly ProjectType ItemType = new(5, "Item Type");
-    public static readonly ProjectType MultiSignedItemType = new(6, "Multi Signed Item Type");
-    public static readonly ProjectType Team = new(7, "Team");
-    public static readonly ProjectType WorldSeries = new(8, "World Series");
+    public static readonly ProjectType BaseballType = new(1, "Baseball Type", "A project based on a baseball type.");
+    public static readonly ProjectType Card = new(2, "Card", "A project based on a card set.");
+    public static readonly ProjectType HallOfFame = new(3, "Hall of Fame", "A project based on Hall of Famers.");
+    public static readonly ProjectType HelmetType = new(4, "Helmet Type", "A project based on a helmet type.");
+    public static readonly ProjectType ItemType = new(5, "Item Type", "A project based on an item type.");
+    public static readonly ProjectType MultiSignedItemType = new(6, "Multi Signed Item Type", "A project based on an item type signed by multiple people.");
+    public static readonly ProjectType Team = new(7, "Team", "A project based on a team.");
+    public static readonly ProjectType WorldSeries = new(8, "World Series", "A project based on a World Series.");
 
     public static readonly ProjectType[] All =
     {
-        Baseball,
+        BaseballType,
         Card,
         HallOfFame,
-        Helmet,
+        HelmetType,
         ItemType,
         MultiSignedItemType,
         Team,
         WorldSeries
     };
 
-    private ProjectType(int id, string name, string abbreviation = null) 
-        : base(id, name, abbreviation) { }
+    public static readonly ProjectType[] PersonProject =
+    {
+        BaseballType,
+        Card,
+        HallOfFame,
+        ItemType
+    };
+
+    public static readonly ProjectType[] TeamProject =
+    {
+        HelmetType,
+        Team,
+        WorldSeries
+    };
+
+    private ProjectType(int id, string name, string description, string abbreviation = null) 
+        : base(id, name, abbreviation) 
+    { 
+        Description = description;
+    }
 
     public static ProjectType Find(int id)
         => All.SingleOrDefault(projectType => projectType.Id == id);
+
+    public string Description { get; set; }
+
+    public override string ToString()
+    {
+        return Name.Replace(" ", "");
+    }
 }

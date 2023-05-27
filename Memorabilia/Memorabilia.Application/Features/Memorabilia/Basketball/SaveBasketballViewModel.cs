@@ -30,19 +30,25 @@ public class SaveBasketballViewModel : MemorabiliaItemEditViewModel
             Team = new SaveTeamViewModel(new TeamViewModel(viewModel.Teams.First().Team));
     }
 
-    public int BasketballTypeId { get; set; } = BasketballType.Official.Id;
+    public int BasketballTypeId { get; set; } 
+        = BasketballType.Official.Id;
 
     public int CommissionerId { get; set; }
 
-    public override bool DisplayGameDate => GameStyleType.IsGameWorthly(GameStyleType) && DisplayGameStyleType;
+    public override bool DisplayGameDate 
+        => (GameStyleType?.IsGameWorthly() ?? false) && 
+           DisplayGameStyleType;
 
-    public override bool DisplayGameStyleType => SizeId == Size.Full.Id;
+    public override bool DisplayGameStyleType 
+        => SizeId == Size.Full.Id;
 
-    public override string ImageFileName => Domain.Constants.ImageFileName.Basketball;
+    public override string ImageFileName 
+        => Domain.Constants.ImageFileName.Basketball;
 
     public override ItemType ItemType => ItemType.Basketball;
 
     public override Sport Sport => Sport.Basketball;
 
-    public override SportLeagueLevel SportLeagueLevel => SportLeagueLevel.NationalBasketballAssociation;
+    public override SportLeagueLevel SportLeagueLevel 
+        => SportLeagueLevel.NationalBasketballAssociation;
 }

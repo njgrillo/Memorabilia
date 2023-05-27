@@ -35,6 +35,11 @@ public class PersonCacheRepository : DomainCacheRepository<Person>, IPersonRepos
         return _personRepository.GetAll(sportId, sportLeagueLevelId);
     }
 
+    public Task<Person[]> GetAll(Dictionary<string, object> parameters)
+    {
+        return _personRepository.GetAll(parameters);    
+    }
+
     public Task<Person[]> GetMostRecent()
     {
         return _personRepository.GetMostRecent();

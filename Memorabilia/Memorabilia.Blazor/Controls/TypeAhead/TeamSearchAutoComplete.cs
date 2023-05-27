@@ -49,12 +49,12 @@ public class TeamSearchAutoComplete : Autocomplete<Domain.Entities.Team>, INotif
 
     public override async Task<IEnumerable<Domain.Entities.Team>> Search(string searchText)
     {
-        if (searchText.IsNullOrEmpty())
+        if (searchText.IsNullOrEmpty()) 
             return Array.Empty<Domain.Entities.Team>();
 
         return await Task.FromResult(Items.Where(item => item.Name.Contains(searchText, StringComparison.OrdinalIgnoreCase)
                                                       || item.Location.Contains(searchText, StringComparison.OrdinalIgnoreCase)
                                                       || item.DisplayName.Contains(searchText, StringComparison.OrdinalIgnoreCase))
-                                          .DistinctBy(item => item.ToString()));
+                                          .DistinctBy(item => item.Id));
     }
 }

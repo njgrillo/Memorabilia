@@ -21,20 +21,25 @@ public class SaveAutographImagesViewModel : SaveViewModel
     [Required]
     public int AutographId { get; set; }
 
-    public AutographStep AutographStep => AutographStep.Image;
+    public AutographStep AutographStep 
+        => AutographStep.Image;
 
-    public override string BackNavigationPath => CanHaveSpot 
+    public override string BackNavigationPath 
+        => CanHaveSpot 
         ? $"Autographs/{AdminDomainItem.Spots.Item}/{EditModeType.Update.Name}/{AutographId}" 
         : $"Autographs/Authentications/{EditModeType.Update.Name}/{AutographId}";
 
-    public bool CanHaveSpot => Domain.Constants.ItemType.CanHaveSpot(ItemType);
+    public bool CanHaveSpot 
+        => ItemType?.CanHaveSpot() ?? false;
 
     public override string ContinueNavigationPath 
         => $"Autographs/{EditModeType.Update.Name}/{MemorabiliaId}/-1";
 
-    public override EditModeType EditModeType => Images.Any() ? EditModeType.Update : EditModeType.Add;
+    public override EditModeType EditModeType 
+        => Images.Any() ? EditModeType.Update : EditModeType.Add;
 
-    public override string ExitNavigationPath => "Memorabilia/Items";
+    public override string ExitNavigationPath 
+        => "Memorabilia/Items";
 
     public List<SaveImageViewModel> Images { get; set; } = new();
 

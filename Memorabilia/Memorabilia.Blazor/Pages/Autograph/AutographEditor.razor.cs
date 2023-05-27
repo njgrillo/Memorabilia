@@ -61,13 +61,13 @@ public partial class AutographEditor : AutographItem<SaveAutographViewModel>
 
         var acquisitionType = AcquisitionType.Find(acquisitionTypeId);
 
-        if (!AcquisitionType.CanHaveCost(acquisitionType))
+        if (!acquisitionType.CanHaveCost())
             ViewModel.Cost = null;
 
-        if (!AcquisitionType.CanHavePurchaseType(acquisitionType))
+        if (!acquisitionType.CanHavePurchaseType())
             ViewModel.PurchaseTypeId = 0;
 
-        if (!AcquisitionType.CanHaveSendAndReceiveDates(acquisitionType))
+        if (!acquisitionType.CanHaveSendAndReceiveDates())
         {
             ViewModel.ReceivedDate = null;
             ViewModel.SentDate = null;

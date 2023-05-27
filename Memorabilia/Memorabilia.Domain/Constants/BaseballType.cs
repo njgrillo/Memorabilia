@@ -92,10 +92,47 @@ public sealed class BaseballType : DomainItemConstant
         WorldSeries
     };
 
+    public static readonly BaseballType[] ImportByYear =
+    {
+        GoldWorldSeries,
+        WorldSeries
+    };
+
+    public static readonly BaseballType[] ImportByYearRange =
+    {
+        AllStar,
+        GoldGlove
+    };
+
     public static readonly BaseballType[] LeaguePresident =
     {
         AmericanLeague,
         NationalLeague
+    };
+
+    public static readonly BaseballType[] ProjectTypes =
+    {
+        AllStar,
+        AllStarFuturesGame,
+        AmericanLeague,
+        Black,
+        Commemorative,
+        CyYoung,
+        FathersDay,
+        Gold,
+        GoldGlove,
+        GoldWorldSeries,
+        HallOfFame,
+        HomeRunDerby,
+        MothersDay,
+        NationalLeague,
+        Official,
+        OpeningDay,
+        Other,
+        PostSeason,
+        SpringTraining,
+        TeamAnniversary,
+        WorldSeries
     };
 
     public static readonly BaseballType[] Yearly =
@@ -113,13 +150,7 @@ public sealed class BaseballType : DomainItemConstant
     };
 
     private BaseballType(int id, string name, string abbreviation = null) 
-        : base(id, name, abbreviation) { }        
-
-    public static bool CanHaveAnniversary(BaseballType baseballType)
-        => baseballType == TeamAnniversary;
-
-    public static bool CanHaveYear(BaseballType baseballType)
-        => Yearly.Contains(baseballType);
+        : base(id, name, abbreviation) { }   
 
     public static BaseballType Find(int id)
         => All.SingleOrDefault(baseballType => baseballType.Id == id);
@@ -131,13 +162,4 @@ public sealed class BaseballType : DomainItemConstant
 
         return GameWorthly;
     }
-
-    public static bool IsCommissionerType(BaseballType baseballType)
-        => Commissioner.Contains(baseballType);
-
-    public static bool IsGameWorthly(BaseballType baseballType)
-        => GameWorthly.Contains(baseballType);
-
-    public static bool IsLeaguePresidentType(BaseballType baseballType)
-        => LeaguePresident.Contains(baseballType);
 }

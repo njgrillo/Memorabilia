@@ -1,0 +1,22 @@
+﻿<DivRowCol3>
+    <Content>
+        <h3>
+            Item Type
+        </h3>
+    </Content>
+</DivRowCol3>
+<DivRowCol3>
+    <Content>
+        <ItemTypeAutoComplete Disabled="Disabled" 
+                              SelectedValue="SelectedItemType"
+                              SelectionChanged="(p) => ItemTypeChanged(p)" />
+    </Content>
+    <ContentColumn2>
+        <MudSwitch Checked="@MultiSignedItem"
+                   CheckedChanged="(p) => MultiSignedItemChanged(p)"
+                   Color="MudBlazor.Color.Success"
+                   Disabled="Disabled" 
+                   Label="Multi Signed?"
+                   T="bool" />
+    </ContentColumn2>
+</DivRowCol3>

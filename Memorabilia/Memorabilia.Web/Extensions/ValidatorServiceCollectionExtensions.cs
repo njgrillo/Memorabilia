@@ -43,6 +43,7 @@ public static class ValidatorServiceCollectionExtensions
         services.AddSingleton<PinFlagValidator>();
         services.AddSingleton<PlayingCardValidator>();
         services.AddSingleton<PosterValidator>();
+        services.AddSingleton<ProjectValidator>();
         services.AddSingleton<PuckValidator>();
         services.AddSingleton<PylonValidator>();
         services.AddSingleton<ShirtValidator>();

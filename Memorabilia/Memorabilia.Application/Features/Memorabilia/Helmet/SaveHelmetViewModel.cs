@@ -31,13 +31,17 @@ public class SaveHelmetViewModel : MemorabiliaItemEditViewModel
 
     public bool CanEditHelmetQualityType { get; private set; } = true;
 
-    public override bool DisplayGameDate => IsGameWorthly && DisplayGameStyleType;
+    public override bool DisplayGameDate 
+        => IsGameWorthly && DisplayGameStyleType;
 
-    public override bool DisplayGameStyleType => SizeId == Size.Full.Id;
+    public override bool DisplayGameStyleType 
+        => SizeId == Size.Full.Id;
 
-    public bool DisplayHelmetFinish => !IsGameWorthly;
+    public bool DisplayHelmetFinish 
+        => !IsGameWorthly;
 
-    public bool DisplayHelmetQualityType => Size.Find(SizeId) == Size.Full;
+    public bool DisplayHelmetQualityType 
+        => Size.Find(SizeId) == Size.Full;
 
     public int HelmetFinishId { get; set; }
 
@@ -45,11 +49,14 @@ public class SaveHelmetViewModel : MemorabiliaItemEditViewModel
 
     public int HelmetTypeId { get; set; }
 
-    public override string ImageFileName => Domain.Constants.ImageFileName.Helmet;
+    public override string ImageFileName 
+        => Domain.Constants.ImageFileName.Helmet;
 
-    public bool IsGameWorthly => GameStyleType.IsGameWorthly(GameStyleType);
+    public bool IsGameWorthly 
+        => (GameStyleType?.IsGameWorthly() ?? false);
 
-    public override ItemType ItemType => ItemType.Helmet;
+    public override ItemType ItemType 
+        => ItemType.Helmet;
 
     public bool Throwback { get; set; }
 }

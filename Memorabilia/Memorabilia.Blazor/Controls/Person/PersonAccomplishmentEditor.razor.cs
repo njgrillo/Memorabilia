@@ -8,9 +8,11 @@ public partial class PersonAccomplishmentEditor
     [Parameter]
     public Sport[] Sports { get; set; }
 
-    protected bool IsDateAccomplishment => AccomplishmentType.IsDateAccomplishment(_viewModel.AccomplishmentType?.Id ?? 0);
+    protected bool IsDateAccomplishment 
+        => _viewModel.AccomplishmentType?.IsDateAccomplishment() ?? false;
 
-    protected bool IsYearAccomplishment => AccomplishmentType.IsYearAccomplishment(_viewModel.AccomplishmentType?.Id ?? 0);
+    protected bool IsYearAccomplishment 
+        => _viewModel.AccomplishmentType?.IsYearAccomplishment() ?? false;
 
     protected List<SavePersonAccomplishmentViewModel> Items
         => Accomplishments.OrderBy(accomplishment => accomplishment.Year.HasValue)

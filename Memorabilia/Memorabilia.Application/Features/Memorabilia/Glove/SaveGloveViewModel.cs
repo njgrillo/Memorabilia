@@ -25,13 +25,18 @@ public class SaveGloveViewModel : MemorabiliaItemEditViewModel
         Teams = viewModel.Teams.Select(team => new SaveTeamViewModel(new TeamViewModel(team.Team))).ToList();
     }
 
-    public override bool DisplayGameDate => GameStyleType.IsGameWorthly(GameStyleType) && DisplayGameStyleType;
+    public override bool DisplayGameDate
+        => (GameStyleType?.IsGameWorthly() ?? false) && 
+           DisplayGameStyleType;
 
-    public override bool DisplayGameStyleType => SizeId == Size.Standard.Id;
+    public override bool DisplayGameStyleType 
+        => SizeId == Size.Standard.Id;
 
     public int GloveTypeId { get; set; }
 
-    public override string ImageFileName => Domain.Constants.ImageFileName.Glove;
+    public override string ImageFileName 
+        => Domain.Constants.ImageFileName.Glove;
 
-    public override ItemType ItemType => ItemType.Glove;
+    public override ItemType ItemType 
+        => ItemType.Glove;
 }

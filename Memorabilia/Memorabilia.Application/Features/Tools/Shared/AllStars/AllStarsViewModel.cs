@@ -16,17 +16,23 @@ public class AllStarsViewModel
         var items = allStars.Select(allStar => new AllStarViewModel(allStar, sport))
                             .OrderBy(allStar => allStar.PersonName);
 
-        if (!DisplayABAAllStars)
+        if (!DisplayABAAllStars && !DisplayAFLProBowlers)
         {
             AllStars = items;
             return;
         }
 
-        AllStars = items.Where(allStar => allStar.SportLeagueLevel == Domain.Constants.SportLeagueLevel.NationalBasketballAssociation)
-                        .OrderBy(allStar => allStar.PersonName);
+        AllStars = _sport == Domain.Constants.Sport.Basketball
+            ? items.Where(allStar => allStar.SportLeagueLevel == Domain.Constants.SportLeagueLevel.NationalBasketballAssociation)
+                   .OrderBy(allStar => allStar.PersonName)
+            : items.Where(allStar => allStar.SportLeagueLevel == Domain.Constants.SportLeagueLevel.NationalFootballLeague)
+                   .OrderBy(allStar => allStar.PersonName);
 
-        SecondaryAllStars = items.Where(allStar => allStar.SportLeagueLevel == Domain.Constants.SportLeagueLevel.AmericanBasketballAssociation)
-                                 .OrderBy(allStar => allStar.PersonName);
+        SecondaryAllStars = _sport == Domain.Constants.Sport.Basketball
+            ? items.Where(allStar => allStar.SportLeagueLevel == Domain.Constants.SportLeagueLevel.AmericanBasketballAssociation)
+                   .OrderBy(allStar => allStar.PersonName)
+            : items.Where(allStar => allStar.SportLeagueLevel == Domain.Constants.SportLeagueLevel.AmericanFootballLeague)
+                   .OrderBy(allStar => allStar.PersonName);
     }    
 
     public IEnumerable<AllStarViewModel> AllStars { get; set; } = Enumerable.Empty<AllStarViewModel>();
@@ -41,13 +47,18 @@ public class AllStarsViewModel
            Year >= 1968 &&
            Year <= 1976;
 
+    public bool DisplayAFLProBowlers
+        => _sport == Domain.Constants.Sport.Football &&
+           Year >= 1961 &&
+           Year <= 1969;
+
     public bool DisplayCanceledMessage
         => IsBaseballCanceled || IsBasketballCanceled;
 
     public bool DisplayNoProBowlMessage
         => _sport == Domain.Constants.Sport.Football &&
            Year > 1942 &&
-           Year < 1951;
+           Year < 1950;
 
     public bool IsBaseballCanceled
         => _sport == Domain.Constants.Sport.Baseball &&
@@ -67,10 +78,13 @@ public class AllStarsViewModel
            ? $"{Year} {Domain.Constants.SportLeagueLevel.NationalBasketballAssociation.Name} All Stars"
            : $"{Year} {(_sport == Domain.Constants.Sport.Football && Year > 1942 ? "Pro Bowlers" : "All Stars")}";
 
-    public IEnumerable<AllStarViewModel> SecondaryAllStars { get; set; } = Enumerable.Empty<AllStarViewModel>();
+    public IEnumerable<AllStarViewModel> SecondaryAllStars { get; set; } 
+        = Enumerable.Empty<AllStarViewModel>();
 
     public string SecondaryGridTitle
-        => $"{Year} {Domain.Constants.SportLeagueLevel.AmericanBasketballAssociation.Name} All Stars";
+        => _sport == Domain.Constants.Sport.Basketball
+        ? $"{Year} {Domain.Constants.SportLeagueLevel.AmericanBasketballAssociation.Name} All Stars"
+        : $"{Year} {Domain.Constants.SportLeagueLevel.AmericanFootballLeague.Name} Pro Bowlers";
 
     public int Year { get; set; }
 }

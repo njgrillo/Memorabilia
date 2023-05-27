@@ -19,14 +19,12 @@ public class AccomplishmentsViewModel
     public string AccomplishmentTypeName => AccomplishmentType?.Name;
 
     public bool IsDateAccomplishment 
-        => AccomplishmentType != null && 
-           Domain.Constants.AccomplishmentType.IsDateAccomplishment(AccomplishmentType.Id);
+        => AccomplishmentType?.IsDateAccomplishment() ?? false;
 
     public bool IsNoHitter => true;
 
     public bool IsYearAccomplishment 
-        => AccomplishmentType != null && 
-           Domain.Constants.AccomplishmentType.IsYearAccomplishment(AccomplishmentType.Id);
+        => AccomplishmentType?.IsYearAccomplishment() ?? false;
 
     public List<AccomplishmentViewModel> PersonAccomplishments { get; set; } = new();
 }

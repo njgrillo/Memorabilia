@@ -8,6 +8,10 @@ public class DomainContext : DbContext, IDomainContext
 
     public DbSet<Person> Person { get; set; }
 
+    public DbSet<PersonTeam> PersonTeam { get; set; }
+
+    public DbSet<Team> Team { get; set; }
+
     public DomainContext(DbContextOptions<DomainContext> options) : base(options) { }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

@@ -6,6 +6,9 @@ public static class ImagePath
     public static string DomainImageRootPath
         => "D:\\Graphinallday\\Resources\\SiteImages\\domain";
 
+    public static string MemorabiliaImageRootPath
+        => "D:\\Graphinallday\\Resources\\UserImages";
+
     public static string PersonImageRootPath
         => "D:\\Graphinallday\\Resources\\SiteImages\\people";
 }

@@ -24,4 +24,12 @@ public class TeamRepository : DomainRepository<Team>, ITeamRepository
                           .ToListAsync())
                .OrderBy(team => team.Name);
     }
+
+    public async Task<Team[]> GetAllCurrentTeams(int? sportId = null)
+    {
+        return await Team.Where(team => (!sportId.HasValue || team.Franchise.SportLeagueLevel.SportId == sportId)
+                                     && team.EndYear == null)
+                         .OrderBy(team => team.Franchise.FullName)
+                         .ToArrayAsync();
+    }
 }

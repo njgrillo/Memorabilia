@@ -28,15 +28,22 @@ public class SaveHockeyStickViewModel : MemorabiliaItemEditViewModel
             Team = new SaveTeamViewModel(new TeamViewModel(viewModel.Teams.First().Team));
     }
 
-    public override bool DisplayGameDate => GameStyleType.IsGameWorthly(GameStyleType) && DisplayGameStyleType;
+    public override bool DisplayGameDate 
+        => (GameStyleType?.IsGameWorthly() ?? false) && 
+           DisplayGameStyleType;
 
-    public override bool DisplayGameStyleType => SizeId == Size.Full.Id;
+    public override bool DisplayGameStyleType 
+        => SizeId == Size.Full.Id;
 
-    public override string ImageFileName => Domain.Constants.ImageFileName.HockeyStick;
+    public override string ImageFileName 
+        => Domain.Constants.ImageFileName.HockeyStick;
 
-    public override ItemType ItemType => ItemType.HockeyStick;
+    public override ItemType ItemType 
+        => ItemType.HockeyStick;
 
-    public override Sport Sport => Sport.Hockey;
+    public override Sport Sport 
+        => Sport.Hockey;
 
-    public override SportLeagueLevel SportLeagueLevel => SportLeagueLevel.NationalHockeyLeague;
+    public override SportLeagueLevel SportLeagueLevel 
+        => SportLeagueLevel.NationalHockeyLeague;
 }

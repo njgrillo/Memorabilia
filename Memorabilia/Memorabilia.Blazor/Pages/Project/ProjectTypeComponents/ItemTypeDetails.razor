@@ -1,0 +1,19 @@
+﻿<div class="row">
+    <div class="col-3">
+        <MudSwitch Checked="@_displayCompleted"
+                   CheckedChanged="(p) => _displayCompleted = p"
+                   Color="MudBlazor.Color.Success"
+                   Label="Display Completed?"
+                   T="bool" />
+    </div>
+    <div class="col-3" />
+    <div class="col-3" />
+    <div class="col-3">
+        <AddButton OnClick="AddProjectPerson"
+                   Text="Add Project Person" />
+    </div>
+</div>
+<div style="margin-right:1%;">
+    <ProjectPersonGrid Items="Model.People.Where(person => _displayCompleted || person.ProjectStatusTypeId != ProjectStatusType.Completed.Id).ToList()"
+                       ItemTypeId="@Model.ItemTypeId" />
+</div>

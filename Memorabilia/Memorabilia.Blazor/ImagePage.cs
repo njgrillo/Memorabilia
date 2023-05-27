@@ -3,7 +3,7 @@
 public class ImagePage : CommandQuery
 {
     [Parameter]
-    public string DomainImageRootPath { get; set; }
+    public string DomainImageRootPath { get; set; } = ImagePath.DomainImageRootPath;
 
     [Parameter]
     public string ImageRootPath { get; set; }

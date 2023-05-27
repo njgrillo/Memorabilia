@@ -13,53 +13,79 @@ public class AutographViewModel : ViewModel
         _autograph = autograph;
     }
 
-    public bool AcquiredWithAutograph => _autograph.Memorabilia.Acquisition?.AcquiredWithAutograph ?? false;
+    public bool AcquiredWithAutograph 
+        => _autograph.Memorabilia.Acquisition?.AcquiredWithAutograph ?? false;
 
-    public Domain.Entities.Acquisition Acquisition => _autograph.Acquisition;
+    public Domain.Entities.Acquisition Acquisition 
+        => _autograph.Acquisition;
 
-    public DateTime? AcquisitionDate => Acquisition?.AcquiredDate;
+    public DateTime? AcquisitionDate 
+        => Acquisition?.AcquiredDate;
 
-    public int AcquisitionTypeId => Acquisition?.AcquisitionTypeId ?? 0;
+    public int AcquisitionTypeId 
+        => Acquisition?.AcquisitionTypeId ?? 0;
 
-    public string AcquisitionTypeName => AcquisitionType.Find(Acquisition?.AcquisitionTypeId ?? 0)?.Name;        
+    public string AcquisitionTypeName 
+        => AcquisitionType.Find(Acquisition?.AcquisitionTypeId ?? 0)?.Name;        
 
-    public List<Domain.Entities.AutographAuthentication> Authentications => _autograph.Authentications;
+    public List<Domain.Entities.AutographAuthentication> Authentications 
+        => _autograph.Authentications;
 
-    public string AuthenticationText => Authentications.Count().ToString();
+    public string AuthenticationText 
+        => Authentications.Count().ToString();
 
-    public string AuthenticationTooltip => $"{Authentications.Count} Authentication(s)";
+    public string AuthenticationTooltip 
+        => $"{Authentications.Count} Authentication(s)";
 
-    public string AutographImageName => !PrimaryImageName.IsNullOrEmpty() ? PrimaryImageName : ImageFileName.ImageNotAvailable;
+    public string AutographImageName 
+        => !PrimaryImageName.IsNullOrEmpty() 
+        ? PrimaryImageName 
+        : ImageFileName.ImageNotAvailable;
 
-    public int ColorId => _autograph.ColorId;
+    public int ColorId 
+        => _autograph.ColorId;
 
-    public string ColorName => Color.Find(_autograph.ColorId)?.Name;
+    public string ColorName 
+        => Color.Find(_autograph.ColorId)?.Name;
 
-    public int ConditionId => _autograph.ConditionId;
+    public int ConditionId 
+        => _autograph.ConditionId;
 
-    public string ConditionName => Condition.Find(_autograph.ConditionId)?.Name;
+    public string ConditionName 
+        => Condition.Find(_autograph.ConditionId)?.Name;
 
-    public decimal? Cost => Acquisition?.Cost;  
+    public decimal? Cost 
+        => Acquisition?.Cost;  
 
-    public DateTime CreateDate => _autograph.CreateDate;
+    public DateTime CreateDate 
+        => _autograph.CreateDate;
 
-    public int? Denominator => _autograph.Denominator;
+    public int? Denominator 
+        => _autograph.Denominator;
 
-    public bool DisplaySpot => ItemType.CanHaveSpot(ItemType.Find(ItemTypeId));
+    public bool DisplaySpot 
+        => ItemType.Find(ItemTypeId)?.CanHaveSpot() ?? false;
 
-    public decimal? EstimatedValue => _autograph.EstimatedValue;
+    public decimal? EstimatedValue 
+        => _autograph.EstimatedValue;
 
-    public string FormattedAcquisitionDate => AcquisitionDate?.ToString("MM-dd-yyyy") ?? string.Empty;
+    public string FormattedAcquisitionDate 
+        => AcquisitionDate?.ToString("MM-dd-yyyy") ?? string.Empty;
 
-    public string FormattedCost => Acquisition?.Cost?.ToString("c") ?? string.Empty;
+    public string FormattedCost 
+        => Acquisition?.Cost?.ToString("c") ?? string.Empty;
 
-    public string FormattedEstimatedValue => EstimatedValue?.ToString("c") ?? string.Empty;
+    public string FormattedEstimatedValue 
+        => EstimatedValue?.ToString("c") ?? string.Empty;
 
-    public bool? FullName => _autograph.FullName;   
+    public bool? FullName 
+        => _autograph.FullName;   
 
-    public int? Grade => _autograph.Grade;
+    public int? Grade 
+        => _autograph.Grade;
 
-    public int Id => _autograph.Id;
+    public int Id 
+        => _autograph.Id;
 
     public string ImageDisplayCount
     {
@@ -75,61 +101,93 @@ public class AutographViewModel : ViewModel
         }
     }
 
-    public List<Domain.Entities.AutographImage> Images => _autograph.Images;        
+    public List<Domain.Entities.AutographImage> Images 
+        => _autograph.Images;        
 
-    public string InscriptionText => Inscriptions.Count().ToString();
+    public string InscriptionText 
+        => Inscriptions.Count().ToString();
 
-    public string InscriptionTooltip => $"{Inscriptions.Count} Inscription(s)"; 
+    public string InscriptionTooltip
+        => $"{Inscriptions.Count} Inscription(s)"; 
 
-    public List<Domain.Entities.Inscription> Inscriptions => _autograph.Inscriptions;
+    public List<Domain.Entities.Inscription> Inscriptions 
+        => _autograph.Inscriptions;
 
-    public bool IsPersonalized => Personalization?.Id > 0;
+    public bool IsPersonalized 
+        => Personalization?.Id > 0;
 
-    public ItemType ItemType => _autograph.Memorabilia.ItemType;
+    public ItemType ItemType 
+        => _autograph.Memorabilia.ItemType;
 
-    public int ItemTypeId => _autograph.Memorabilia.ItemTypeId;
+    public int ItemTypeId 
+        => _autograph.Memorabilia.ItemTypeId;
 
-    public string ItemTypeName => ItemType.Find(_autograph.Memorabilia.ItemTypeId)?.Name;
+    public string ItemTypeName 
+        => ItemType.Find(_autograph.Memorabilia.ItemTypeId)?.Name;
 
-    public DateTime? LastModifiedDate => _autograph.LastModifiedDate;
+    public DateTime? LastModifiedDate 
+        => _autograph.LastModifiedDate;
 
-    public int MemorabiliaId => _autograph.MemorabiliaId;
+    public int MemorabiliaId 
+        => _autograph.MemorabiliaId;
 
-    public string[] MemorabiliaImageNames => _autograph.Memorabilia.Images.Select(image => image.FileName).ToArray();
+    public string[] MemorabiliaImageNames 
+        => _autograph.Memorabilia.Images.Select(image => image.FileName).ToArray();
 
-    public string Note => _autograph.Note;
+    public string Note 
+        => _autograph.Note;
 
-    public int? Numerator => _autograph.Numerator;
+    public int? Numerator 
+        => _autograph.Numerator;
 
-    public Domain.Entities.Person Person => _autograph.Person;
+    public Domain.Entities.Person Person 
+        => _autograph.Person;
 
-    public Domain.Entities.Personalization Personalization => _autograph.Personalization;
+    public Domain.Entities.Personalization Personalization 
+        => _autograph.Personalization;
 
-    public string PersonalizationText => IsPersonalized ? "Personalized" : "Not Personalized";
+    public string PersonalizationText 
+        => IsPersonalized 
+        ? "Personalized" 
+        : "Not Personalized";
 
-    public string PersonalizationTooltip => IsPersonalized ? _autograph.Personalization?.Text : "Not Personalized";
+    public string PersonalizationTooltip 
+        => IsPersonalized 
+        ? _autograph.Personalization?.Text 
+        : "Not Personalized";
 
-    public int PersonId => _autograph.PersonId;
+    public int PersonId
+        => _autograph.PersonId;
 
-    public string PersonName => _autograph.Person?.DisplayName;
+    public string PersonName 
+        => _autograph.Person?.DisplayName;
 
-    public string PrimaryImageName => Images.Any()
+    public string PrimaryImageName 
+        => Images.Any()
         ? Images.SingleOrDefault(image => image.ImageTypeId == ImageType.Primary.Id)?.FileName ?? ImageFileName.ImageNotAvailable
         : ImageFileName.ImageNotAvailable;        
 
-    public int? PurchaseTypeId => _autograph?.Acquisition?.PurchaseTypeId;
+    public int? PurchaseTypeId 
+        => _autograph?.Acquisition?.PurchaseTypeId;
 
-    public string PurchaseTypeName => PurchaseType.Find(PurchaseTypeId ?? 0)?.Name;
+    public string PurchaseTypeName 
+        => PurchaseType.Find(PurchaseTypeId ?? 0)?.Name;
 
-    public DateTime? ReceivedDate => _autograph.ThroughTheMail?.ReceivedDate;
+    public DateTime? ReceivedDate 
+        => _autograph.ThroughTheMail?.ReceivedDate;
 
-    public DateTime? SentDate => _autograph.ThroughTheMail?.SentDate;
+    public DateTime? SentDate 
+        => _autograph.ThroughTheMail?.SentDate;
 
-    public int? SpotId => _autograph?.Spot?.SpotId;
+    public int? SpotId 
+        => _autograph?.Spot?.SpotId;
 
-    public string UserFirstName => _autograph.Memorabilia.User.FirstName;
+    public string UserFirstName 
+        => _autograph.Memorabilia.User.FirstName;
 
-    public int WritingInstrumentId => _autograph.WritingInstrumentId;
+    public int WritingInstrumentId 
+        => _autograph.WritingInstrumentId;
 
-    public string WritingInstrumentName => WritingInstrument.Find(_autograph.WritingInstrumentId)?.Name;
+    public string WritingInstrumentName 
+        => WritingInstrument.Find(_autograph.WritingInstrumentId)?.Name;
 }

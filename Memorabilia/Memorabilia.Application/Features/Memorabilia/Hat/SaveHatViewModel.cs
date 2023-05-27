@@ -25,9 +25,12 @@ public class SaveHatViewModel : MemorabiliaItemEditViewModel
         Teams = viewModel.Teams.Select(team => new SaveTeamViewModel(new TeamViewModel(team.Team))).ToList();
     }
 
-    public override bool DisplayGameDate => GameStyleType.IsGameWorthly(GameStyleType);
+    public override bool DisplayGameDate 
+        => (GameStyleType?.IsGameWorthly() ?? false);
 
-    public override string ImageFileName => Domain.Constants.ImageFileName.Hat;
+    public override string ImageFileName 
+        => Domain.Constants.ImageFileName.Hat;
 
-    public override ItemType ItemType => ItemType.Hat;
+    public override ItemType ItemType 
+        => ItemType.Hat;
 }

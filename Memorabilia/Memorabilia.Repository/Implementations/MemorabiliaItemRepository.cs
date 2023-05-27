@@ -1,4 +1,6 @@
-﻿namespace Memorabilia.Repository.Implementations;
+﻿using Memorabilia.Domain.Entities;
+
+namespace Memorabilia.Repository.Implementations;
 
 public class MemorabiliaItemRepository : MemorabiliaRepository<Domain.Entities.Memorabilia>, IMemorabiliaItemRepository
 {
@@ -122,6 +124,25 @@ public class MemorabiliaItemRepository : MemorabiliaRepository<Domain.Entities.M
             select new Domain.Entities.Memorabilia(memorabilia);
 
         return await query.ToPagedResult(pageInfo);
+    }
+
+    public async Task<Domain.Entities.Memorabilia[]> GetAll(Dictionary<string, object> parameters)
+    {
+        _ = parameters.TryGetValue("HelmetTypeId", out object helmetTypeId);
+        _ = parameters.TryGetValue("HelmetSizeId", out object helmetSizeId);
+        _ = parameters.TryGetValue("HelmetFinishId", out object helmetFinishId);
+        _ = parameters.TryGetValue("ItemTypeId", out object itemTypeId);
+        _ = parameters.TryGetValue("TeamId", out object teamId);
+        _ = parameters.TryGetValue("TeamYear", out object teamYear);
+        _ = parameters.TryGetValue("UserId", out object userId);        
+
+        return await Items.Where(memorabilia => (userId == null || memorabilia.UserId == (int)userId)
+                                                 && (teamId == null || memorabilia.Teams.Any(team => team.TeamId == (int)teamId))
+                                                 && (helmetTypeId == null || (memorabilia.Helmet != null && memorabilia.Helmet.HelmetTypeId == (int)helmetTypeId))
+                                                 && (helmetFinishId == null || (memorabilia.Helmet != null && memorabilia.Helmet.HelmetFinishId == (int)helmetFinishId))
+                                                 && (helmetSizeId == null || (memorabilia.Size != null && memorabilia.Size.SizeId == (int)helmetSizeId))
+                                                )
+                          .ToArrayAsync();
     }
 
     public async Task<IEnumerable<Domain.Entities.Memorabilia>> GetAllUnsigned(int userId)

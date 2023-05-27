@@ -21,6 +21,8 @@ public class MemorabiliaContext : DbContext, IMemorabiliaContext
         modelBuilder.Entity<AutographImage>();
         modelBuilder.Entity<AutographSpot>();
         modelBuilder.Entity<AutographThroughTheMail>();
+        modelBuilder.Entity<Collection>();
+        modelBuilder.Entity<CollectionMemorabilia>();
         modelBuilder.Entity<Inscription>();
         modelBuilder.Entity<Domain.Entities.Memorabilia>().Property(x => x.EstimatedValue).HasPrecision(12, 2);
         modelBuilder.Entity<MemorabiliaAcquisition>();
@@ -51,6 +53,14 @@ public class MemorabiliaContext : DbContext, IMemorabiliaContext
         modelBuilder.Entity<MemorabiliaTeam>();
         modelBuilder.Entity<Personalization>();          
         modelBuilder.Entity<Project>();          
+        modelBuilder.Entity<ProjectBaseball>();          
+        modelBuilder.Entity<ProjectCard>();          
+        modelBuilder.Entity<ProjectHallOfFame>();          
+        modelBuilder.Entity<ProjectHelmet>();          
+        modelBuilder.Entity<ProjectItem>();          
+        modelBuilder.Entity<ProjectMemorabiliaTeam>();         
         modelBuilder.Entity<ProjectPerson>();         
+        modelBuilder.Entity<ProjectTeam>();         
+        modelBuilder.Entity<ProjectWorldSeries>();         
     }
 }

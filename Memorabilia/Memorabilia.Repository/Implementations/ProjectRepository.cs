@@ -6,7 +6,15 @@ public class ProjectRepository : MemorabiliaRepository<Project>, IProjectReposit
 {
     public ProjectRepository(MemorabiliaContext context, IMemoryCache memoryCache) : base(context, memoryCache) { }
 
-    private IQueryable<Project> Project => Items.Include(project => project.People);
+    private IQueryable<Project> Project => Items.Include(project => project.Baseball)
+                                                .Include(project => project.Card)
+                                                .Include(project => project.HallOfFame)
+                                                .Include(project => project.Helmet)
+                                                .Include(project => project.Item)
+                                                .Include(project => project.MemorabiliaTeams)
+                                                .Include(project => project.People)
+                                                .Include(project => project.Team)
+                                                .Include(project => project.WorldSeries);
 
     public override async Task<Project> Get(int id)
     {

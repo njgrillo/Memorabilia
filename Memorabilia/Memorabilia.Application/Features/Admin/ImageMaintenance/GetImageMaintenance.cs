@@ -6,11 +6,11 @@ public record GetImageMaintenance(string MemorabiliaImageRootPath, string Person
 {
     public class Handler : QueryHandler<GetImageMaintenance, ImageMaintenanceViewModel>
     {
-        private readonly IDomainRepository<AutographImage> _autographImageRepository;
+        private readonly IAutographImageRepository _autographImageRepository;
         private readonly IMemorabiliaImageRepository _memorabiliaImageRepository;
         private readonly IDomainRepository<Person> _personRepository;
 
-        public Handler(IDomainRepository<AutographImage> autographImageRepository,
+        public Handler(IAutographImageRepository autographImageRepository,
                        IMemorabiliaImageRepository memorabiliaImageRepository, 
                        IDomainRepository<Person> personRepository)
         {

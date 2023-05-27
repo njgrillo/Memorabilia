@@ -46,10 +46,10 @@ public class MemorabiliaGalleryItemViewModel
 
             sb.Append($"{(_memorabilia.Autographs.Any() ? "Autographed" : "Unsigned")}");
 
-            if (ItemType.CanHaveTeam(_memorabilia.ItemType) && _memorabilia.Teams.Any())
+            if (_memorabilia.ItemType.CanHaveTeam() && _memorabilia.Teams.Any())
                 sb.Append($" {string.Join(", ", _memorabilia.Teams.Select(team => team.Team.Name))}");
 
-            if (ItemType.CanHaveSize(_memorabilia.ItemType) && _memorabilia.ItemType.DisplaySizeInTitles)
+            if (_memorabilia.ItemType.CanHaveSize() && _memorabilia.ItemType.DisplaySizeInTitles)
                 sb.Append($" {Size.Find(_memorabilia.Size.SizeId)?.Name}");
 
             sb.Append($" {_memorabilia.ItemType.Name}");

@@ -32,17 +32,25 @@ public class SaveFootballViewModel : MemorabiliaItemEditViewModel
 
     public int CommissionerId { get; set; }
 
-    public override bool DisplayGameDate => GameStyleType.IsGameWorthly(GameStyleType) && DisplayGameStyleType;
+    public override bool DisplayGameDate 
+        => (GameStyleType?.IsGameWorthly() ?? false) && 
+           DisplayGameStyleType;
 
-    public override bool DisplayGameStyleType => SizeId == Size.Full.Id;
+    public override bool DisplayGameStyleType 
+        => SizeId == Size.Full.Id;
 
-    public int FootballTypeId { get; set; } = FootballType.Duke.Id;
+    public int FootballTypeId { get; set; }
+        = FootballType.Duke.Id;
 
-    public override string ImageFileName => Domain.Constants.ImageFileName.Football;
+    public override string ImageFileName 
+        => Domain.Constants.ImageFileName.Football;
 
-    public override ItemType ItemType => ItemType.Football;
+    public override ItemType ItemType 
+        => ItemType.Football;
 
-    public override Sport Sport => Sport.Football;
+    public override Sport Sport 
+        => Sport.Football;
 
-    public override SportLeagueLevel SportLeagueLevel => SportLeagueLevel.NationalFootballLeague;
+    public override SportLeagueLevel SportLeagueLevel 
+        => SportLeagueLevel.NationalFootballLeague;
 }

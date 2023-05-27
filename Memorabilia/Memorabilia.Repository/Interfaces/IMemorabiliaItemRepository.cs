@@ -11,6 +11,8 @@ public interface IMemorabiliaItemRepository : IDomainRepository<Domain.Entities.
         PageInfo pageInfo,
         MemorabiliaSearchCriteria memorabiliaSearchCriteria = null);
 
+    Task<Domain.Entities.Memorabilia[]> GetAll(Dictionary<string, object> parameters);
+
     Task<IEnumerable<Domain.Entities.Memorabilia>> GetAllUnsigned(int userId);
 
     int[] GetBrandIds(int userId);

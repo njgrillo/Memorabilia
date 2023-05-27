@@ -11,7 +11,7 @@ public partial class ViewAllStars : ViewSportTools<AllStarViewModel>
         {
             "Baseball" => 1933,
             "Basketball" => 1951,
-            "Football" => 1939,
+            "Football" => 1938,
             _ => 1950
         };
 

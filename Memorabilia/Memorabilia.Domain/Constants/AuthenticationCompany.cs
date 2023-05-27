@@ -56,7 +56,4 @@ public sealed class AuthenticationCompany : DomainItemConstant
 
     public static AuthenticationCompany Find(int id)
         => All.SingleOrDefault(authenticationCompany => authenticationCompany.Id == id);
-
-    public static bool IsNavigatable(AuthenticationCompany authenticationCompany)
-        => Navigatable.Contains(authenticationCompany);
 }

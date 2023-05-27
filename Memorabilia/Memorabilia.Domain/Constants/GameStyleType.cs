@@ -47,13 +47,7 @@ public sealed class GameStyleType : DomainItemConstant
         => All.SingleOrDefault(gameStyleType => gameStyleType.Id == id);
 
     public static GameStyleType[] GetAll(ItemType itemType)
-    {
-        if (ItemType.IsWearable(itemType))
-            return All;
-
-        return NonWearableStyles;
-    }
-
-    public static bool IsGameWorthly(GameStyleType gameStyleType)
-        => GameWorthly.Contains(gameStyleType);
+        => itemType.IsWearable()
+            ? All
+            : NonWearableStyles;
 }

@@ -38,6 +38,65 @@ public class PersonRepository : DomainRepository<Person>, IPersonRepository
                           .ToListAsync();
     }
 
+    public async Task<Person[]> GetAll(Dictionary<string, object> parameters)
+    {
+        _ = parameters.TryGetValue("IsAllStar", out object isAllStar);
+        _ = parameters.TryGetValue("IsWorldSeries", out object isWorldSeries);
+        _ = parameters.TryGetValue("AwardTypeId", out object awardTypeId);
+        _ = parameters.TryGetValue("BeginYear", out object beginYear);
+        _ = parameters.TryGetValue("EndYear", out object endYear);
+        _ = parameters.TryGetValue("SportId", out object sportId);
+
+        IQueryable<Person> query;
+
+        if (isAllStar != null && (bool)isAllStar)
+        {
+            query = from person in Context.Person
+                    where
+                        person.AllStars.Any(allStar => allStar.SportId == (int)sportId
+                                            && ((endYear == null && allStar.Year == (int)beginYear)
+                                                || (endYear != null && allStar.Year >= (int)beginYear))
+                                            && (endYear == null || allStar.Year <= (int)endYear))
+                    orderby person.DisplayName
+                    select person;
+
+            return await query.ToArrayAsync();
+        }
+
+        if (isWorldSeries != null && (bool)isWorldSeries)
+        {
+            query = from team in Context.Team
+                    join personTeam in Context.PersonTeam on team.Id equals personTeam.TeamId
+                    join person in Context.Person on personTeam.PersonId equals person.Id
+                    where
+                        team.Championships.Any(chip => chip.ChampionTypeId == Domain.Constants.ChampionType.WorldSeries.Id 
+                                                    && chip.Year == (int)beginYear
+                                                    && person.Teams.Any(team => team.TeamId == chip.TeamId 
+                                                                        && team.BeginYear <= chip.Year
+                                                                        && (team.EndYear == null || team.EndYear >= chip.Year)))
+                    orderby person.DisplayName
+                    select person;
+
+            return await query.ToArrayAsync();
+        }
+
+        if (awardTypeId != null)
+        {
+            query = from person in Context.Person
+                    where
+                        person.Awards.Any(award => award.AwardTypeId == (int)awardTypeId
+                                          && ((endYear == null && award.Year == (int)beginYear) 
+                                              || (endYear != null && award.Year >= (int)beginYear))
+                                          && (endYear == null || award.Year <= (int)endYear))
+                    orderby person.DisplayName
+                    select person;
+
+            return await query.ToArrayAsync();
+        }
+
+        return Array.Empty<Person>();
+    }
+
     public async Task<Person[]> GetMostRecent()
     {
         var query =

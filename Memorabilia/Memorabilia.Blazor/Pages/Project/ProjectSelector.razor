@@ -1,0 +1,17 @@
+﻿<DivRowCol3>
+    <Content>
+        <ProjectTypeAutoComplete Disabled="Disabled" 
+                                 ResetValueOnEmptyText="false"
+                                 SelectedValue="SelectedProjectType"
+                                 SelectionChanged="(p) => ProjectTypeSelected(p)" />
+    </Content>
+</DivRowCol3>
+<Condition Evaluation="@(SelectedProjectType != null)">
+    <Match> 
+        <DivRowCol12>
+            <Content>
+                @SelectedProjectType.Description
+            </Content>
+        </DivRowCol12>
+    </Match>
+</Condition>

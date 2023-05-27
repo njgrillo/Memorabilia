@@ -1,6 +1,4 @@
-﻿using Memorabilia.Domain.Entities;
-
-namespace Memorabilia.Application.Features.Memorabilia;
+﻿namespace Memorabilia.Application.Features.Memorabilia;
 
 public class SelectMemorabiliaItemViewModel
 {

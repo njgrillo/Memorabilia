@@ -153,6 +153,54 @@
                             </div>
                         </Match>
                     </PrettyBlazor.Condition>
+                    <PrettyBlazor.Condition Evaluation="_viewModel.DisplayAFLProBowlers">
+                        <Match>
+                            <div class="col-6">
+                                <MudTable Bordered="false"
+                                          Dense="false"
+                                          Filter="new Func<AllStarViewModel,bool>(FilterFuncSecondaryGrid)"
+                                          Hover="true"
+                                          Items="@_viewModel.SecondaryAllStars.ToList()"
+                                          Striped="true">
+                                    <ToolBarContent>
+                                        <MudText Typo="Typo.h6">@_viewModel.SecondaryGridTitle</MudText>
+                                        <MudSpacer />
+                                        <MudTextField @bind-Value="SecondarySearch"
+                                                      Adornment="Adornment.Start"
+                                                      AdornmentIcon="@Icons.Material.Filled.Search"
+                                                      Class="mt-0"
+                                                      IconSize="MudBlazor.Size.Medium"
+                                                      Placeholder="Search" />
+                                    </ToolBarContent>
+                                    <HeaderContent>
+                                        <MudTh></MudTh>
+                                        <MudTh>Person</MudTh>
+                                        <MudTh>Year</MudTh>
+                                    </HeaderContent>
+                                    <RowTemplate>
+                                        <MudTd DataLabel="">
+                                            <MudTooltip>
+                                                <MudImage @onclick="@(_ => NavigationManager.NavigateTo(context.ProfileLink))"
+                                                          Class="rounded-lg can-click"
+                                                          Elevation="5"
+                                                          Height="200"
+                                                          ObjectFit="@ObjectFit.Cover"
+                                                          Src="@(GetImageData(context.PersonImageFileName))"
+                                                          Width="200" />
+                                            </MudTooltip>
+                                        </MudTd>
+                                        <MudTd DataLabel="Person">
+                                            <MudLink Href="@context.ProfileLink">@context.PersonName</MudLink>
+                                        </MudTd>
+                                        <MudTd DataLabel="Year">@context.Year</MudTd>
+                                    </RowTemplate>
+                                    <PagerContent>
+                                        <MudTablePager />
+                                    </PagerContent>
+                                </MudTable>
+                            </div>
+                        </Match>
+                    </PrettyBlazor.Condition>
                 </div>                
             </Content>             
         </DivRowCol12>        

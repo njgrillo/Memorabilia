@@ -34,7 +34,4 @@ public sealed class FootballType : DomainItemConstant
 
         return GameWorthly;
     }
-
-    public static bool IsGameWorthly(FootballType footballType)
-        => GameWorthly.Contains(footballType);
 }

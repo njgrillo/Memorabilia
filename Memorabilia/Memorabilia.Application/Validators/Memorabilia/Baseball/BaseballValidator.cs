@@ -75,12 +75,8 @@ public class BaseballValidator : AbstractValidator<SaveBaseball.Command>
     }
 
     private static bool CanHaveAnniversary(SaveBaseball.Command command)
-    {
-        var baseballType = Domain.Constants.BaseballType.Find(command.BaseballTypeId ?? 0);
-
-        return Domain.Constants.BaseballType.CanHaveAnniversary(baseballType) &&
-               CanHaveBaseballType(command);
-    }
+        => (Domain.Constants.BaseballType.Find(command.BaseballTypeId ?? 0)?.CanHaveAnniversary() ?? false) &&
+           CanHaveBaseballType(command);
 
     private static bool CanHaveBaseballType(SaveBaseball.Command command)
     {
@@ -94,41 +90,24 @@ public class BaseballValidator : AbstractValidator<SaveBaseball.Command>
     }
 
     private static bool CanHaveCommissioner(SaveBaseball.Command command)
-    {
-        var brand = Domain.Constants.Brand.Find(command.BrandId);
-        var baseballType = Domain.Constants.BaseballType.Find(command.BaseballTypeId ?? 0);
-
-        return Domain.Constants.Brand.IsGameWorthlyBaseballBrand(brand) &&
-               Domain.Constants.BaseballType.IsCommissionerType(baseballType);
-    }
+        => (Domain.Constants.Brand.Find(command.BrandId)?.IsGameWorthlyBaseballBrand() ?? false) &&
+           (Domain.Constants.BaseballType.Find(command.BaseballTypeId ?? 0)?.IsCommissionerType() ?? false);
 
     private static bool CanHaveGameDate(SaveBaseball.Command command)
     {
-        var brand = Domain.Constants.Brand.Find(command.BrandId);
-        var baseballType = Domain.Constants.BaseballType.Find(command.BaseballTypeId ?? 0);
-        var gameStyle = Domain.Constants.GameStyleType.Find(command.GameStyleTypeId ?? 0);
         var size = Domain.Constants.Size.Find(command.SizeId);
 
-        return Domain.Constants.BaseballType.IsGameWorthly(baseballType) &&
-               Domain.Constants.Brand.IsGameWorthlyBaseballBrand(brand) && 
-               Domain.Constants.GameStyleType.IsGameWorthly(gameStyle) &&
+        return (Domain.Constants.BaseballType.Find(command.BaseballTypeId ?? 0)?.IsGameWorthly() ?? false) &&
+               (Domain.Constants.Brand.Find(command.BrandId)?.IsGameWorthlyBaseballBrand() ?? false) &&
+               (Domain.Constants.GameStyleType.Find(command.GameStyleTypeId ?? 0)?.IsGameWorthly() ?? false) &&
                size == Domain.Constants.Size.Standard;
     }
 
     private static bool CanHavePresident(SaveBaseball.Command command)
-    {
-        var brand = Domain.Constants.Brand.Find(command.BrandId);
-        var baseballType = Domain.Constants.BaseballType.Find(command.BaseballTypeId ?? 0);
-
-        return Domain.Constants.Brand.IsGameWorthlyBaseballBrand(brand) &&
-               Domain.Constants.BaseballType.IsLeaguePresidentType(baseballType);
-    }
+        => (Domain.Constants.Brand.Find(command.BrandId)?.IsGameWorthlyBaseballBrand() ?? false) &&
+           (Domain.Constants.BaseballType.Find(command.BaseballTypeId ?? 0)?.IsLeaguePresidentType() ?? false);
 
     private static bool CanHaveYear(SaveBaseball.Command command)
-    {
-        var baseballType = Domain.Constants.BaseballType.Find(command.BaseballTypeId ?? 0);
-
-        return Domain.Constants.BaseballType.CanHaveYear(baseballType) &&
-               CanHaveBaseballType(command);
-    }
+        => (Domain.Constants.BaseballType.Find(command.BaseballTypeId ?? 0)?.CanHaveYear() ?? false) &&
+           CanHaveBaseballType(command);
 }

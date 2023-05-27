@@ -41,8 +41,5 @@ public sealed class HelmetType : DomainItemConstant
             return All;
 
         return GameWorthly;
-    }
-
-    public static bool IsGameWorthly(HelmetType helmetType)
-        => GameWorthly.Contains(helmetType);
+    }    
 }

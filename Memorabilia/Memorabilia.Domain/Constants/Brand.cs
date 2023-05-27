@@ -110,10 +110,4 @@ public sealed class Brand : DomainItemConstant
 
     public static Brand Find(string name)
         => All.SingleOrDefault(brand => brand.Name == name);
-
-    public static bool IsGameWorthlyBaseballBrand(int id)
-        => GameWorthlyBaseballBrand.Contains(Find(id));
-
-    public static bool IsGameWorthlyBaseballBrand(Brand brand)
-        => GameWorthlyBaseballBrand.Contains(brand);
 }

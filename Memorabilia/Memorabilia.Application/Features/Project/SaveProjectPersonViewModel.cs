@@ -13,7 +13,16 @@ public class SaveProjectPersonViewModel : SaveViewModel
         PriorityTypeId = viewModel.PriorityTypeId ?? 0;
         ProjectStatusTypeId = viewModel.ProjectStatusTypeId ?? 0;
         Person =  new SavePersonViewModel(new PersonViewModel(viewModel.Person));
+        MemorabiliaId = viewModel.MemorabiliaId ?? 0;
+        AutographId = viewModel.AutographId ?? 0;
+        UserId = viewModel.UserId;
+        AutographFileName = viewModel.AutographFileName;
+        Project = viewModel.Project;
     }
+
+    public int AutographId { get; set; }
+
+    public string AutographFileName { get; set; }
 
     public bool Deceased => Person?.DeathDate.HasValue ?? false;
 
@@ -31,6 +40,8 @@ public class SaveProjectPersonViewModel : SaveViewModel
 
     public string ItemTypeName => Domain.Constants.ItemType.Find(ItemTypeId)?.Name;
 
+    public int MemorabiliaId { get; set; }
+
     [Required]
     public SavePersonViewModel Person { get; set; } = new();              
 
@@ -38,6 +49,8 @@ public class SaveProjectPersonViewModel : SaveViewModel
 
     public string PriorityTypeName 
         => Domain.Constants.PriorityType.Find(PriorityTypeId)?.Name;
+
+    public Domain.Entities.Project Project { get; } 
 
     public int ProjectStatusTypeId { get; set; } = Domain.Constants.ProjectStatusType.NotStarted.Id;
 
@@ -50,4 +63,6 @@ public class SaveProjectPersonViewModel : SaveViewModel
     public string UpIcon => MudBlazor.Icons.Material.Filled.ArrowUpward;
 
     public bool Upgrade { get; set; }
+
+    public int UserId { get; set; }
 }

@@ -230,24 +230,9 @@ public sealed class ItemType : DomainItemConstant
         DisplaySizeInTitles = displaySizeInTitles;
     }
 
-    public static bool CanHaveSize(ItemType itemType)
-        => SizeTypes.Contains(itemType);
-
-    public static bool CanHaveSpot(ItemType itemType)
-        => SpotTypes.Contains(itemType);
-
-    public static bool CanHaveTeam(ItemType itemType)
-        => TeamTypes.Contains(itemType);
-
     public static ItemType Find(int id)
         => All.SingleOrDefault(itemType => itemType.Id == id);
 
     public static ItemType Find(string name)
         => All.SingleOrDefault(itemType => itemType.Name == name);
-
-    public static bool IsGameType(ItemType itemType)
-        => GameTypes.Contains(itemType);
-
-    public static bool IsWearable(ItemType itemType)
-        => WearableTypes.Contains(itemType);
 }

@@ -1,0 +1,41 @@
+﻿<MudDialog Class="mud-dialog-width-lg"
+           Style="max-height:80vh;">
+    <DialogContent>
+        <div style="text-align:right;">
+            <MudIconButton Icon="@Icons.Material.Filled.Close"
+                           OnClick="Cancel" />
+        </div>
+        <Condition Evaluation="Images.Any()">
+            <Match>
+                <DivRowCol12>
+                    <Content>
+                        <MudImage Class="rounded-lg"
+                                  Elevation="5"
+                                  Height="600"
+                                  ObjectFit="@ObjectFit.Fill"
+                                  Src="@(ImageHelper.GetUserImageData(SelectedImage.FileName, UserId))"
+                                  Width="600" />
+                    </Content>
+                </DivRowCol12>
+                <br />
+                <div class="row">
+                    <Iterations Context="image"
+                                Items="Images.Where(image => image.Id != SelectedImage.Id)">
+                        <div class="col-1">
+                            <MudImage @onclick="@(() => SelectedImage = image)"
+                                      Class="rounded-lg can-click"
+                                      Elevation="5"
+                                      Height="100"
+                                      ObjectFit="@ObjectFit.Fill"
+                                      Src="@(ImageHelper.GetUserImageData(image.FileName, UserId))"
+                                      Width="100" />
+                        </div>
+                    </Iterations>
+                </div>                
+            </Match>
+        </Condition>        
+    </DialogContent>
+    <DialogActions>
+        <CancelButton OnClick="Cancel" />
+    </DialogActions>
+</MudDialog>

@@ -27,9 +27,12 @@ public class SaveHeadBandViewModel : MemorabiliaItemEditViewModel
             Team = new SaveTeamViewModel(new TeamViewModel(viewModel.Teams.First().Team));
     }
 
-    public override bool DisplayGameDate => GameStyleType.IsGameWorthly(GameStyleType);
+    public override bool DisplayGameDate 
+        => (GameStyleType?.IsGameWorthly() ?? false);
 
-    public override string ImageFileName => Domain.Constants.ImageFileName.HeadBand;
+    public override string ImageFileName 
+        => Domain.Constants.ImageFileName.HeadBand;
 
-    public override ItemType ItemType => ItemType.HeadBand;
+    public override ItemType ItemType
+        => ItemType.HeadBand;
 }

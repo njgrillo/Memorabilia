@@ -25,13 +25,19 @@ public class SaveGolfballViewModel : MemorabiliaItemEditViewModel
             Person = new SavePersonViewModel(new PersonViewModel(viewModel.People.First().Person));
     }
 
-    public override bool DisplayGameDate => GameStyleType.IsGameWorthly(GameStyleType) && DisplayGameStyleType;
+    public override bool DisplayGameDate 
+        => (GameStyleType?.IsGameWorthly() ?? false) && 
+           DisplayGameStyleType;
 
-    public override bool DisplayGameStyleType => SizeId == Size.Standard.Id;
+    public override bool DisplayGameStyleType 
+        => SizeId == Size.Standard.Id;
 
-    public override string ImageFileName => Domain.Constants.ImageFileName.Golfball;
+    public override string ImageFileName
+        => Domain.Constants.ImageFileName.Golfball;
 
-    public override ItemType ItemType => ItemType.Golfball;
+    public override ItemType ItemType 
+        => ItemType.Golfball;
 
-    public override Sport Sport => Sport.Golf;
+    public override Sport Sport 
+        => Sport.Golf;
 }

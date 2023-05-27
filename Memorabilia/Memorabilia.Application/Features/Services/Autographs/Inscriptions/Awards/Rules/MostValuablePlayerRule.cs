@@ -13,7 +13,7 @@ public class MostValuablePlayerRule : AwardRule, IAwardRule
     {
         _awardType = awardType;
 
-        return Domain.Constants.AwardType.IsMostValuablePlayerAward(_awardType);
+        return _awardType.IsMostValuablePlayerAward();
     }
 
     public string[] GenerateInscriptions(PersonAward[] awards)

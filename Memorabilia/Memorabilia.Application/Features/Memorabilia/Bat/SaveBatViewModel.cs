@@ -33,11 +33,15 @@ public class SaveBatViewModel : MemorabiliaItemEditViewModel
 
     public int ColorId { get; set; } = Color.Black.Id;
 
-    public override bool DisplayGameDate => GameStyleType.IsGameWorthly(GameStyleType) && DisplayGameStyleType;
+    public override bool DisplayGameDate 
+        => (GameStyleType?.IsGameWorthly() ?? false) && 
+           DisplayGameStyleType;
 
-    public override bool DisplayGameStyleType => SizeId == Size.Full.Id;
+    public override bool DisplayGameStyleType 
+        => SizeId == Size.Full.Id;
 
-    public override string ImageFileName => Domain.Constants.ImageFileName.Bat;
+    public override string ImageFileName 
+        => Domain.Constants.ImageFileName.Bat;
 
     public override ItemType ItemType => ItemType.Bat;
 
@@ -45,5 +49,6 @@ public class SaveBatViewModel : MemorabiliaItemEditViewModel
 
     public override Sport Sport => Sport.Baseball;
 
-    public override SportLeagueLevel SportLeagueLevel => SportLeagueLevel.MajorLeagueBaseball;
+    public override SportLeagueLevel SportLeagueLevel 
+        => SportLeagueLevel.MajorLeagueBaseball;
 }

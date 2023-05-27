@@ -58,6 +58,7 @@ global using Memorabilia.Application.Validators.Memorabilia.TennisRacket;
 global using Memorabilia.Application.Validators.Memorabilia.Ticket;
 global using Memorabilia.Application.Validators.Memorabilia.Trunk;
 global using Memorabilia.Application.Validators.Memorabilia.WristBand;
+global using Memorabilia.Application.Validators.Project;
 global using Memorabilia.Blazor;
 global using Memorabilia.Blazor.Controls.Dialogs;
 global using Memorabilia.Blazor.Controls.Errors;

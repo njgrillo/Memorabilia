@@ -1,0 +1,25 @@
+﻿<DivRowCol3>
+    <Content>
+        <h3>
+            Helmet Type
+        </h3>
+    </Content>
+</DivRowCol3>
+<DivRowCol3>
+    <Content>
+        <HelmetTypeDropDown Disabled="Disabled" 
+                            SelectedValue="HelmetTypeId"
+                            SelectionChanged="(p) => HelmetTypeChanged(p)" />
+    </Content>
+    <ContentColumn2>
+        <HelmetFinishDropDown Disabled="Disabled"
+                              SelectedValue="HelmetFinishId"
+                              SelectionChanged="(p) => HelmetFinishId = p" />
+    </ContentColumn2>
+    <ContentColumn3>
+        <SizeAutoComplete Disabled="Disabled" 
+                          SelectedValue="Size"
+                          SelectionChanged="(p) => SizeChanged(p)"
+                          Sizes="new Domain.Constants.Size[] { Domain.Constants.Size.Mini, Domain.Constants.Size.Full }" />
+    </ContentColumn3>
+</DivRowCol3>

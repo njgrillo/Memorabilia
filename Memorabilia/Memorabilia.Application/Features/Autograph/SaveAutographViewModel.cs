@@ -55,21 +55,28 @@ public class SaveAutographViewModel : SaveViewModel
 
     public bool AcquiredWithAutograph { get; set; }
 
-    public AcquisitionType AcquisitionType => AcquisitionType.Find(AcquisitionTypeId);
+    public AcquisitionType AcquisitionType
+        => AcquisitionType.Find(AcquisitionTypeId);
 
     public int AcquisitionTypeId { get; set; }
 
-    public AutographStep AutographStep => AutographStep.Autograph;
+    public AutographStep AutographStep 
+        => AutographStep.Autograph;
 
-    public override string BackNavigationPath => $"Memorabilia/Image/{EditModeType.Update.Name}/{MemorabiliaId}";
+    public override string BackNavigationPath 
+        => $"Memorabilia/Image/{EditModeType.Update.Name}/{MemorabiliaId}";
 
-    public bool CanHaveCost => AcquisitionType.CanHaveCost(AcquisitionType.Find(AcquisitionTypeId));
+    public bool CanHaveCost 
+        => AcquisitionType?.CanHaveCost() ?? false;
 
-    public bool CanHavePlaceOfPurchase => AcquisitionType == AcquisitionType.Purchase;
+    public bool CanHavePlaceOfPurchase 
+        => AcquisitionType == AcquisitionType.Purchase;
 
-    public bool CanHaveSpot => ItemType.CanHaveSpot(ItemType);
+    public bool CanHaveSpot 
+        => ItemType?.CanHaveSpot() ?? false;
 
-    public bool CanImportPerson => MemorabiliaPerson?.Id > 0;
+    public bool CanImportPerson 
+        => MemorabiliaPerson?.Id > 0;
 
     public int ColorId { get; set; }
 
@@ -81,21 +88,26 @@ public class SaveAutographViewModel : SaveViewModel
 
     public int? Denominator { get; set; }
 
-    public bool DisplayAcquisitionDetails => !AcquiredWithAutograph;
+    public bool DisplayAcquisitionDetails 
+        => !AcquiredWithAutograph;
 
-    public bool DisplayThroughTheMailDetails => AcquisitionType == AcquisitionType.ThroughTheMail;
+    public bool DisplayThroughTheMailDetails 
+        => AcquisitionType == AcquisitionType.ThroughTheMail;
 
     public decimal? EstimatedValue { get; set; }
 
-    public override string ExitNavigationPath => "Memorabilia/Items";
+    public override string ExitNavigationPath 
+        => "Memorabilia/Items";
 
     public bool FullName { get; set; }
 
     public int? Grade { get; set; }
 
-    public bool HasMemorabiliaImages => MemorabiliaImageNames.Any();
+    public bool HasMemorabiliaImages 
+        => MemorabiliaImageNames.Any();
 
-    public string ImageFileName => Domain.Constants.ImageFileName.Autographs;
+    public string ImageFileName 
+        => Domain.Constants.ImageFileName.Autographs;
 
     private bool? _isNumbered;
     public bool IsNumbered
@@ -167,7 +179,8 @@ public class SaveAutographViewModel : SaveViewModel
 
     public int? Numerator { get; set; }
 
-    public override string PageTitle => $"{(Id > 0 ? EditModeType.Update.Name : EditModeType.Add.Name)} Autograph";
+    public override string PageTitle 
+        => $"{(Id > 0 ? EditModeType.Update.Name : EditModeType.Add.Name)} Autograph";
 
     public SavePersonViewModel Person { get; set; } = new();
 

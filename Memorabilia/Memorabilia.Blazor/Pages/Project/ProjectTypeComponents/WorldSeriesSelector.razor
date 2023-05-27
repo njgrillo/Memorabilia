@@ -1,0 +1,28 @@
+﻿<DivRowCol3>
+    <Content>
+        <h3>
+            World Series
+        </h3>
+    </Content>
+</DivRowCol3>
+<DivRowCol3>
+    <Content>
+        <TeamAutoComplete Disabled="Disabled" 
+                          SelectedValue="Team"
+                          SelectionChanged="(p) => TeamChanged(p)"
+                          Sport="Sport.Baseball"
+                          SportLeagueLevel="SportLeagueLevel.MajorLeagueBaseball" />
+    </Content>
+    <ContentColumn2>
+        <NullableIntField Disabled="Disabled" 
+                          Label="Year"
+                          Value="Year"
+                          ValueChanged="@((p) => YearChanged(p))" />
+    </ContentColumn2>
+    <ContentColumn3>
+        <ItemTypeAutoComplete Disabled="Disabled" 
+                              SelectedValue="ItemType"
+                              SelectionChanged="(p) => ItemTypeChanged(p)" />
+    </ContentColumn3>
+</DivRowCol3>
+
