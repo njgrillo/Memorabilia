@@ -84,7 +84,7 @@ public class AllStarsViewModel
     public string SecondaryGridTitle
         => _sport == Domain.Constants.Sport.Basketball
         ? $"{Year} {Domain.Constants.SportLeagueLevel.AmericanBasketballAssociation.Name} All Stars"
-        : $"{Year} {Domain.Constants.SportLeagueLevel.AmericanFootballLeague.Name} Pro Bowlers";
+        : $"{Year} {Domain.Constants.SportLeagueLevel.AmericanFootballLeague.Name} All Stars";
 
     public int Year { get; set; }
 }
