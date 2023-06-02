@@ -102,7 +102,7 @@ public partial class ProjectEditor
                     _viewModel.Card.Year = (int?)parameters["Year"];
 
                 break;
-            case "HallOfFame":
+            case "HallofFame":
                 _viewModel.HallOfFame.SportLeagueLevelId = (int)parameters["SportLeagueLevelId"];
 
                 if (parameters.ContainsKey("Year"))
@@ -213,7 +213,7 @@ public partial class ProjectEditor
                     ProjectTypeParameters.Add("Year", _viewModel.Card.Year);
 
                 break;
-            case "HallOfFame":
+            case "HallofFame":
                 ProjectTypeParameters.Add("SportLeagueLevelId", _viewModel.HallOfFame.SportLeagueLevelId);
 
                 if (_viewModel.HallOfFame.ItemTypeId.HasValue)

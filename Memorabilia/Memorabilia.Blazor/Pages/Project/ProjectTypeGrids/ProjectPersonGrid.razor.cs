@@ -190,7 +190,7 @@ public partial class ProjectPersonGrid
                     parameters.Add("CardYear", projectPerson.Project.Card.Year);
 
                 break;
-            case "HallOfFame":
+            case "HallofFame":
                 parameters.Add("HallOfFameSportLeagueLevelId", projectPerson.Project.HallOfFame.SportLeagueLevelId);
 
                 if (projectPerson.Project.HallOfFame.ItemTypeId.HasValue)

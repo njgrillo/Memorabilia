@@ -109,7 +109,7 @@ public class SaveProjectViewModel : SaveViewModel
                 Card.TeamId = viewModel.Card.TeamId;
                 Card.Year = viewModel.Card.Year;
                 break;
-            case "HallOfFame":
+            case "HallofFame":
                 HallOfFame.SportLeagueLevelId = viewModel.HallOfFame.SportLeagueLevelId;
                 HallOfFame.ItemTypeId = viewModel.HallOfFame.ItemTypeId;
                 HallOfFame.Year = viewModel.HallOfFame.Year;

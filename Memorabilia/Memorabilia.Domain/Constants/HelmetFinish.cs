@@ -37,6 +37,11 @@ public sealed class HelmetFinish : DomainItemConstant
         TwentyFourKaratGoldPlated
     };
 
+    public static readonly HelmetFinish[] Project =
+    {
+        Pewter
+    };
+
     private HelmetFinish(int id, string name, string abbreviation = null) 
         : base(id, name, abbreviation) { }
 

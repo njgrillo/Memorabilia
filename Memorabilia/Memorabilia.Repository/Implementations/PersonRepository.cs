@@ -97,6 +97,31 @@ public class PersonRepository : DomainRepository<Person>, IPersonRepository
         return Array.Empty<Person>();
     }
 
+    public async Task<Person[]> GetAll(int teamId, int year)
+    {
+
+        IQueryable<Person> query = from person in Context.Person
+                                   where person.Teams.Any(team => team.TeamId == teamId
+                                                               && team.BeginYear <= year
+                                                               && (team.EndYear == null || team.EndYear >= year))
+                                   orderby person.DisplayName
+                                   select person;
+
+        return await query.ToArrayAsync();
+    }
+
+    public async Task<Person[]> GetAllHallOfFamers(int sportLeagueLevelId, int? year)
+    {
+
+        IQueryable<Person> query = from person in Context.Person
+                                   where person.HallOfFames.Any(hof => hof.SportLeagueLevelId == sportLeagueLevelId
+                                                                && (year == null || hof.InductionYear == year))
+                                   orderby person.DisplayName
+                                   select person;
+
+        return await query.ToArrayAsync();
+    }
+
     public async Task<Person[]> GetMostRecent()
     {
         var query =

@@ -43,6 +43,12 @@ public partial class WorldSeriesDetails
 
     protected async Task OnImport()
     {
+        var parameters = new DialogParameters
+        {
+            ["TeamId"] = Model.WorldSeries.TeamId,
+            ["Year"] = Model.WorldSeries.Year.HasValue ? Model.WorldSeries.Year : null
+        };
+
         var options = new DialogOptions()
         {
             MaxWidth = MaxWidth.Large,
@@ -50,28 +56,30 @@ public partial class WorldSeriesDetails
             DisableBackdropClick = true
         };
 
-        var dialog = DialogService.Show<ImportProjectTeamDialog>("Import Project Team", options);
+        var dialog = DialogService.Show<ImportProjectPersonTeamDialog>("Import World Series Roster", parameters, options);
         var result = await dialog.Result;
 
         if (result.Canceled)
             return;
 
-        var teams = (Domain.Entities.Team[])result.Data;
+        var persons = (Domain.Entities.Person[])result.Data;
 
-        if (!teams.Any())
+        if (!persons.Any())
             return;
 
-        var projectTeams = teams.Select(team => new ProjectMemorabiliaTeamViewModel(new Domain.Entities.ProjectMemorabiliaTeam
-                                {
-                                    ItemTypeId = Domain.Constants.ItemType.Helmet.Id,
-                                    Project = new Domain.Entities.Project(Model.Name, Model.StartDate, Model.EndDate, Model.UserId, Model.ProjectType.Id),
-                                    ProjectId = Model.Id,
-                                    Team = team,
-                                    TeamId = team.Id
-                                }))
-                                .Select(projectPerson => new SaveProjectMemorabiliaTeamViewModel(projectPerson))
-                                .ToArray();
+        var projectPersons = persons.Select(person => new PersonViewModel(person))
+                                    .Select(personModel => new SavePersonViewModel(personModel))
+                                    .Select(savePersonModel => new ProjectPersonViewModel(new Domain.Entities.ProjectPerson
+                                    {
+                                        ItemTypeId = Model.WorldSeries.ItemTypeId ?? Model.ItemTypeId,
+                                        Person = persons.Single(person => person.Id == savePersonModel.Id),
+                                        PersonId = savePersonModel.Id,
+                                        Project = new Domain.Entities.Project(Model.Name, Model.StartDate, Model.EndDate, Model.UserId, Model.ProjectType.Id),
+                                        ProjectId = Model.Id
+                                    }))
+                                    .Select(projectPerson => new SaveProjectPersonViewModel(projectPerson))
+                                    .ToArray();
 
-        Model.MemorabiliaTeams.AddRange(projectTeams);
+        Model.People.AddRange(projectPersons);
     }
 }

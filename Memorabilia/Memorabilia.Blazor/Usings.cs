@@ -136,6 +136,7 @@ global using Memorabilia.Application.Features.Services.Gallery.Memorabilia;
 global using Memorabilia.Application.Features.Services.Tools.Profile;
 global using Memorabilia.Application.Features.Shared.Images;
 global using Memorabilia.Application.Features.Shared.Person;
+global using Memorabilia.Application.Features.Shared.Team;
 global using Memorabilia.Application.Features.Tools.Profile;
 global using Memorabilia.Application.Features.Tools.Profile.Baseball;
 global using Memorabilia.Application.Features.Tools.Profile.Basketball;

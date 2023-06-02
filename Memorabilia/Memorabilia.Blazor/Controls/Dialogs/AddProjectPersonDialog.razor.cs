@@ -116,7 +116,7 @@ public partial class AddProjectPersonDialog
                     parameters.Add("CardYear", _project.Card.Year);
 
                 break;
-            case "HallOfFame":
+            case "HallofFame":
                 parameters.Add("HallOfFameSportLeagueLevelId", _project.HallOfFame.SportLeagueLevelId);
 
                 if (_project.HallOfFame.ItemTypeId.HasValue)

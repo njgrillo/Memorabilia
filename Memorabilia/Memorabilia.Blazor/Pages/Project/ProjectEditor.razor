@@ -60,10 +60,43 @@
                 </MudProgressLinear>
             </div>
         </Match>
-    </Condition>
-    @*ProjectPersonGrid*@
+    </Condition>    
     <Condition Evaluation="@(_viewModel.ProjectType.IsPersonProject())"> 
         <Match>
+            <Condition Evaluation="_viewModel.People.Any()">
+                <Match>
+                    <div class="row" style="margin-left:1%;margin-right:1%">
+                        <div class="col-6">
+                            <ProjectPriority MustHaveCount="_viewModel.People.Count(person => person.PriorityTypeId == Domain.Constants.PriorityType.MustHave.Id)"
+                                             NiceToHaveCount="_viewModel.People.Count(person => person.PriorityTypeId == Domain.Constants.PriorityType.NiceToHave.Id)"
+                                             NoWayCount="_viewModel.People.Count(person => person.PriorityTypeId == Domain.Constants.PriorityType.NoWay.Id)"
+                                             TakeItOrLeaveItCount="_viewModel.People.Count(person => person.PriorityTypeId == Domain.Constants.PriorityType.TakeItOrLeaveIt.Id)" />
+                        </div>
+                        <div class="col-2" />
+                        <div class="col-4">
+                            <ProjectStatus CompletedCount="_viewModel.People.Count(person => person.ProjectStatusTypeId == Domain.Constants.ProjectStatusType.Completed.Id)"
+                                           InProgressCount="_viewModel.People.Count(person => person.ProjectStatusTypeId == Domain.Constants.ProjectStatusType.InProgress.Id)"
+                                           NotStartedCount="_viewModel.People.Count(person => person.ProjectStatusTypeId == 0 || person.ProjectStatusTypeId == Domain.Constants.ProjectStatusType.NotStarted.Id)" />
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row" style="margin-left:1%;margin-right:1%">
+                        <MudChipSet>
+                            <MudChip Color="MudBlazor.Color.Success">@($"Linked to Autograph - {_viewModel.People.Count(person => person.AutographId > 0)}")</MudChip>
+                                <MudChip Color="MudBlazor.Color.Info">@($"Not Linked to Autograph - {_viewModel.People.Count(person => person.AutographId == 0)}")</MudChip>
+                            </MudChipSet>
+                            <MudChipSet>
+                                <MudChip Color="MudBlazor.Color.Success">@($"Upgrade - {_viewModel.People.Count(person => person.Upgrade)}")</MudChip>
+                                <MudChip Color="MudBlazor.Color.Info">@($"Not Upgrade - {_viewModel.People.Count(person => !person.Upgrade)}")</MudChip>
+                            </MudChipSet>
+                            <MudChipSet>
+                                <MudChip Color="MudBlazor.Color.Success">@($"Living - {_viewModel.People.Count(person => !person.Deceased)}")</MudChip>
+                                <MudChip Color="MudBlazor.Color.Info">@($"Deceased - {_viewModel.People.Count(person => person.Deceased)}")</MudChip>
+                            </MudChipSet>
+                        </div>
+                        <br />
+                </Match>
+            </Condition>            
             <Condition Evaluation="@(_viewModel.ProjectType == ProjectType.BaseballType)"> 
                 <Match>
                     <BaseballTypeDetails Model="_viewModel" />
@@ -78,7 +111,7 @@
             </Condition>
             <Condition Evaluation="@(_viewModel.ProjectType == ProjectType.HallOfFame)">
                 <Match>
-                    <HallOfFameDetails Model="_viewModel" />
+                    <HallofFameDetails Model="_viewModel" />
                     <br />
                 </Match>
             </Condition>
@@ -88,29 +121,58 @@
                     <br />
                 </Match>
             </Condition>
-        </Match>
-    </Condition>
-    @*ProjectMemorabiliaGrid*@
-    <Condition Evaluation="@(_viewModel.ProjectType.IsTeamProject())">
-        <Match>
-            <Condition Evaluation="@(_viewModel.ProjectType == ProjectType.HelmetType)">
-                <Match>
-                    <HelmetTypeDetails Model="_viewModel" />
-                    <br />
-                </Match>
-            </Condition>    
             <Condition Evaluation="@(_viewModel.ProjectType == ProjectType.Team)">
                 <Match>
                     <TeamDetails Model="_viewModel" />
                     <br />
                 </Match>
-            </Condition>
+            </Condition>  
             <Condition Evaluation="@(_viewModel.ProjectType == ProjectType.WorldSeries)">
                 <Match>
                     <WorldSeriesDetails Model="_viewModel" />
                     <br />
                 </Match>
             </Condition>
+        </Match>
+    </Condition>
+    <Condition Evaluation="@(_viewModel.ProjectType.IsTeamProject())">
+        <Match>
+            <Condition Evaluation="_viewModel.MemorabiliaTeams.Any()">
+                <Match>
+                        <div class="row" style="margin-left:1%;margin-right:1%">
+                            <div class="col-6">
+                                <ProjectPriority MustHaveCount="_viewModel.MemorabiliaTeams.Count(team => team.PriorityTypeId == Domain.Constants.PriorityType.MustHave.Id)"
+                                                 NiceToHaveCount="_viewModel.MemorabiliaTeams.Count(team => team.PriorityTypeId == Domain.Constants.PriorityType.NiceToHave.Id)"
+                                                 NoWayCount="_viewModel.MemorabiliaTeams.Count(team => team.PriorityTypeId == Domain.Constants.PriorityType.NoWay.Id)"
+                                                 TakeItOrLeaveItCount="_viewModel.MemorabiliaTeams.Count(team => team.PriorityTypeId == Domain.Constants.PriorityType.TakeItOrLeaveIt.Id)" />
+                            </div>
+                            <div class="col-2" />
+                            <div class="col-4">
+                                <ProjectStatus CompletedCount="_viewModel.MemorabiliaTeams.Count(team => team.ProjectStatusTypeId == Domain.Constants.ProjectStatusType.Completed.Id)"
+                                               InProgressCount="_viewModel.MemorabiliaTeams.Count(team => team.ProjectStatusTypeId == Domain.Constants.ProjectStatusType.InProgress.Id)"
+                                               NotStartedCount="_viewModel.MemorabiliaTeams.Count(team => team.ProjectStatusTypeId == 0 || team.ProjectStatusTypeId == Domain.Constants.ProjectStatusType.NotStarted.Id)" />
+                            </div>
+                        </div>
+                        <br />
+                        <div class="row" style="margin-left:1%;margin-right:1%">
+                            <MudChipSet>
+                                <MudChip Color="MudBlazor.Color.Success">@($"Linked to Memorabilia - {_viewModel.MemorabiliaTeams.Count(team => team.MemorabiliaId > 0)}")</MudChip>
+                                <MudChip Color="MudBlazor.Color.Info">@($"Not Linked to Memorabilia - {_viewModel.MemorabiliaTeams.Count(team => team.MemorabiliaId == 0)}")</MudChip>
+                            </MudChipSet>
+                            <MudChipSet>
+                                <MudChip Color="MudBlazor.Color.Success">@($"Upgrade - {_viewModel.MemorabiliaTeams.Count(team => team.Upgrade)}")</MudChip>
+                                <MudChip Color="MudBlazor.Color.Info">@($"Not Upgrade - {_viewModel.MemorabiliaTeams.Count(team => !team.Upgrade)}")</MudChip>
+                            </MudChipSet>
+                        </div>
+                        <br />
+                </Match>
+            </Condition>            
+            <Condition Evaluation="@(_viewModel.ProjectType == ProjectType.HelmetType)">
+                <Match>
+                    <HelmetTypeDetails Model="_viewModel" />
+                    <br />
+                </Match>
+            </Condition>                          
         </Match>
     </Condition>
     <Condition Evaluation="@(_viewModel.ProjectType != null)">

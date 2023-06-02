@@ -17,7 +17,7 @@
     </div>
 </div>
 <div style="margin-right:1%;">
-    <ProjectMemorabiliaTeamGrid Items="Model.MemorabiliaTeams.Where(item => _displayCompleted || item.ProjectStatusTypeId != ProjectStatusType.Completed.Id).ToList()"
-                                ItemTypeId="@Model.ItemTypeId" />
+    <ProjectPersonGrid Items="Model.People.Where(item => _displayCompleted || item.ProjectStatusTypeId != ProjectStatusType.Completed.Id).ToList()"
+                       ItemTypeId="@Model.ItemTypeId" />
 </div>
 

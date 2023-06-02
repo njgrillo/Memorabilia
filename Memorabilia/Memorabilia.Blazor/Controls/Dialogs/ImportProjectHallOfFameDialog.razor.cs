@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Blazor.Controls.Dialogs;
 
-public partial class ImportProjectPersonDialog
+public partial class ImportProjectHallOfFameDialog
 {
     [Inject]
     public QueryRouter QueryRouter { get; set; }
@@ -9,27 +9,18 @@ public partial class ImportProjectPersonDialog
     public MudDialogInstance MudDialog { get; set; }
 
     [Parameter]
-    public int BaseballTypeId { get; set; }
+    public int SportLeagueLevelId { get; set; }
 
     [Parameter]
     public int? Year { get; set; }
 
-    protected int? BeginYear;
-    protected int? EndYear;
-
-    protected BaseballType BaseballType
-        => BaseballType.Find(BaseballTypeId);
-
-    protected bool CanImportByYearRange
-        => BaseballType?.CanImportByYearRange() ?? false;
-
-    private bool FilterFunc1(Domain.Entities.Person person)
-        => FilterFunc(person, _search);
-
     protected int MaxYear
         => DateTime.UtcNow.Year;
 
-    protected Domain.Entities.Person[] People { get; set; } = Array.Empty<Domain.Entities.Person>();
+    protected Domain.Entities.Person[] People { get; set; } = Array.Empty<Domain.Entities.Person>();     
+
+    private bool FilterFunc1(Domain.Entities.Person person)
+        => FilterFunc(person, _search);
 
     private string _search;
 
@@ -37,8 +28,8 @@ public partial class ImportProjectPersonDialog
         => People != null && People.Length == SelectedPeople.Count
             ? "Deselect All"
             : "Select All";
-    
-    private List<Domain.Entities.Person> SelectedPeople = new(); 
+
+    private List<Domain.Entities.Person> SelectedPeople = new();
 
     public void Cancel()
     {
@@ -96,27 +87,8 @@ public partial class ImportProjectPersonDialog
 
     protected async Task Search()
     {
-        var parameters = new Dictionary<string, object>();
-        var baseballType = BaseballType.Find(BaseballTypeId);
-
-        if (baseballType == BaseballType.GoldWorldSeries || baseballType == BaseballType.WorldSeries)
-            parameters.Add("IsWorldSeries", true);
-
-        if (baseballType == BaseballType.AllStar)
-        {
-            parameters.Add("IsAllStar", true);
-            parameters.Add("SportId", Sport.Baseball.Id);
-        }            
-
-        if (baseballType == BaseballType.GoldGlove)
-            parameters.Add("AwardTypeId", AwardType.GoldGlove.Id);
-
-        parameters.Add("BeginYear", Year ?? BeginYear);
-
-        if (EndYear.HasValue)
-            parameters.Add("EndYear", EndYear.Value);
-
-        People = (await QueryRouter.Send(new GetImportProjectPersons(parameters))).DistinctBy(person => person.Id)
-                                                                                  .ToArray();
+        People = (await QueryRouter.Send(new GetImportProjectHallOfFamePersons(SportLeagueLevelId, Year)))
+                     .DistinctBy(person => person.Id)
+                     .ToArray();
     }
 }

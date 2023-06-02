@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Blazor.Pages.Project.ProjectTypeComponents;
 
-public partial class HallOfFameDetails
+public partial class HallofFameDetails
 {
     [Inject]
     public IDialogService DialogService { get; set; }
@@ -56,7 +56,7 @@ public partial class HallOfFameDetails
             DisableBackdropClick = true
         };
 
-        var dialog = DialogService.Show<ImportProjectPersonDialog>("Import Project People", parameters, options);
+        var dialog = DialogService.Show<ImportProjectHallOfFameDialog>("Import Hall of Famers", parameters, options);
         var result = await dialog.Result;
 
         if (result.Canceled)
@@ -71,7 +71,7 @@ public partial class HallOfFameDetails
                                     .Select(personModel => new SavePersonViewModel(personModel))
                                     .Select(savePersonModel => new ProjectPersonViewModel(new Domain.Entities.ProjectPerson
                                     {
-                                        ItemTypeId = Model.ItemTypeId,
+                                        ItemTypeId = Model.HallOfFame.ItemTypeId ?? Model.ItemTypeId,
                                         Person = persons.Single(person => person.Id == savePersonModel.Id),
                                         PersonId = savePersonModel.Id,
                                         Project = new Domain.Entities.Project(Model.Name, Model.StartDate, Model.EndDate, Model.UserId, Model.ProjectType.Id),

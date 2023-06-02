@@ -8,5 +8,9 @@ public interface IPersonRepository : IDomainRepository<Person>
 
     Task<Person[]> GetAll(Dictionary<string, object> parameters);
 
+    Task<Person[]> GetAll(int teamId, int year);
+
+    Task<Person[]> GetAllHallOfFamers(int sportLeagueLevelId, int? year);
+
     Task<Person[]> GetMostRecent();
 }

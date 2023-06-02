@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Blazor.Pages.Project.ProjectTypeComponents;
 
-public partial class HallOfFameSelector
+public partial class HallofFameSelector
 {
     [Parameter]
     public bool Disabled { get; set; }

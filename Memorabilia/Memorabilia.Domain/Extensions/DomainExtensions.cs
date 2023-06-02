@@ -32,7 +32,7 @@ public static class DomainExtensions
         => BaseballType.ImportByYear.Contains(baseballType);
 
     public static bool CanImportByYearRange(this BaseballType baseballType)
-        => BaseballType.ImportByYearRange.Contains(baseballType);
+        => BaseballType.ImportByYearRange.Contains(baseballType);    
 
     public static bool IsCommissionerType(this BaseballType baseballType)
         => BaseballType.Commissioner.Contains(baseballType);
@@ -63,6 +63,9 @@ public static class DomainExtensions
 
     public static bool IsPersonProject(this ProjectType projectType)
         => ProjectType.PersonProject.Contains(projectType);
+
+    public static bool IsProjectHelmet(this HelmetFinish helmetFinish)
+        => HelmetFinish.Project.Contains(helmetFinish);
 
     public static bool IsTeamProject(this ProjectType projectType)
         => ProjectType.TeamProject.Contains(projectType);

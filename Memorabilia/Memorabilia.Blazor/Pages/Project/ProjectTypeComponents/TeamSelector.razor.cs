@@ -21,6 +21,9 @@ public partial class TeamSelector
 
     protected override async Task OnInitializedAsync()
     {
+        if (TeamId == 0)
+            return;
+
         TeamViewModel team = await QueryRouter.Send(new GetTeam(TeamId));
 
         SelectedTeam = new SaveTeamViewModel(team);

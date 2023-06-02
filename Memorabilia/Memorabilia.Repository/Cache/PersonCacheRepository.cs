@@ -40,6 +40,16 @@ public class PersonCacheRepository : DomainCacheRepository<Person>, IPersonRepos
         return _personRepository.GetAll(parameters);    
     }
 
+    public Task<Person[]> GetAll(int teamId, int year)
+    {
+        return _personRepository.GetAll(teamId, year);
+    }
+
+    public Task<Person[]> GetAllHallOfFamers(int sportLeagueLevelId, int? year)
+    {
+        return _personRepository.GetAllHallOfFamers(sportLeagueLevelId, year);
+    }
+
     public Task<Person[]> GetMostRecent()
     {
         return _personRepository.GetMostRecent();

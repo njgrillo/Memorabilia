@@ -28,14 +28,14 @@ public sealed class ProjectType : DomainItemConstant
         BaseballType,
         Card,
         HallOfFame,
-        ItemType
+        ItemType,
+        Team,
+        WorldSeries
     };
 
     public static readonly ProjectType[] TeamProject =
     {
-        HelmetType,
-        Team,
-        WorldSeries
+        HelmetType
     };
 
     private ProjectType(int id, string name, string description, string abbreviation = null) 

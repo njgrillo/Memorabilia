@@ -26,12 +26,15 @@ public partial class WorldSeriesSelector
 
     protected override async Task OnInitializedAsync()
     {
+        if (TeamId == 0)
+            return;
+
         TeamViewModel team = await QueryRouter.Send(new GetTeam(TeamId));
 
         Team = new SaveTeamViewModel(team);
 
         if (ItemTypeId.HasValue)
-            ItemType = Domain.Constants.ItemType.Find(ItemType.Value);
+            ItemType = ItemType.Find(ItemType.Value);
     }
 
     protected async Task ItemTypeChanged(Domain.Constants.ItemType itemType)
