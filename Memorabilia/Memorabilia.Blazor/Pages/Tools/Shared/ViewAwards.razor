@@ -2,14 +2,20 @@
 
 <DivPad2>
     <Content>
-        <DivRowCol3>
+        <DivRowCol6>
             <Content>
                 <AwardTypeAutoComplete ResetValueOnEmptyText="false"
                                        SelectedValue="_viewModel.AwardType"
                                        SelectionChanged="(awardType) => OnInputChange(awardType)"
                                        Sports="@(new [] { Sport })" />
             </Content>
-        </DivRowCol3>
+            <ContentColumn2>
+                <CustomButton ButtonType="MudBlazor.ButtonType.Button"
+                              OnClick="Browse"
+                              Size="MudBlazor.Size.Small"
+                              Text="View All" />
+            </ContentColumn2>
+        </DivRowCol6>
         <DivRowCol6 Hidden="@(_viewModel.AwardType?.Id == null)">
             <Content>
                 <MudTable Bordered="false"

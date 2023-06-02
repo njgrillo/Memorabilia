@@ -20,7 +20,7 @@ public partial class WorldSeriesSelector
     [Parameter]
     public int? Year { get; set; }
 
-    protected Domain.Constants.ItemType ItemType { get; set; }    
+    protected ItemType ItemType { get; set; }    
 
     protected SaveTeamViewModel Team { get; set; }
 
@@ -37,7 +37,7 @@ public partial class WorldSeriesSelector
             ItemType = ItemType.Find(ItemType.Value);
     }
 
-    protected async Task ItemTypeChanged(Domain.Constants.ItemType itemType)
+    protected async Task ItemTypeChanged(ItemType itemType)
     {
         ItemType = itemType;
 

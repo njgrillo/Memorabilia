@@ -39,6 +39,9 @@ public partial class AddProjectMemorabiliaTeamDialog
 
     protected void Add()
     {
+        if (_viewModel.Team == null)
+            return;
+
         _viewModel.ItemTypeId = ItemTypeId;
         _viewModel.Id = ProjectId;
         _viewModel.UserId = UserId;

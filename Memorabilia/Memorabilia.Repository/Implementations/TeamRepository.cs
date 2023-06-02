@@ -28,8 +28,9 @@ public class TeamRepository : DomainRepository<Team>, ITeamRepository
     public async Task<Team[]> GetAllCurrentTeams(int? sportId = null)
     {
         return await Team.Where(team => (!sportId.HasValue || team.Franchise.SportLeagueLevel.SportId == sportId)
-                                     && team.EndYear == null)
-                         .OrderBy(team => team.Franchise.FullName)
-                         .ToArrayAsync();
+                                                 && team.EndYear == null)
+                                     .OrderBy(team => team.Franchise.Location)
+                                     .ThenBy(team => team.Franchise.Name)
+                                     .ToArrayAsync();
     }
 }

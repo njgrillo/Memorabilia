@@ -39,6 +39,9 @@ public partial class AddProjectPersonDialog
 
     protected void Add()
     {
+        if (_viewModel.Person == null)
+            return;
+
         _viewModel.ItemTypeId = ItemTypeId;
         _viewModel.Id = ProjectId;
         _viewModel.UserId = UserId;

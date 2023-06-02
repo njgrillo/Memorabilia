@@ -47,6 +47,7 @@ public partial class BaseballTypeDetails
             = (SaveProjectPersonViewModel)result.Data;
 
         //TODO: Add - Don't Link - Then link from grid - See HelmetTypeDetails
+        //projectPerson.ProjectType = Model.ProjectType.Id;
 
         Model.People.Add(projectPerson);
     }

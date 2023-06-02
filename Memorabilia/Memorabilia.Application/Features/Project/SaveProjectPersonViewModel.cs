@@ -50,7 +50,7 @@ public class SaveProjectPersonViewModel : SaveViewModel
     public string PriorityTypeName 
         => Domain.Constants.PriorityType.Find(PriorityTypeId)?.Name;
 
-    public Domain.Entities.Project Project { get; } 
+    public Domain.Entities.Project Project { get; set; } 
 
     public int ProjectStatusTypeId { get; set; } = Domain.Constants.ProjectStatusType.NotStarted.Id;
 
