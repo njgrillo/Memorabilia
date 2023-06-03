@@ -3,6 +3,9 @@
 public partial class CollectionMemorabiliaGrid
 {
     [Inject]
+    public ImageService ImageService { get; set; }
+
+    [Inject]
     public NavigationManager NavigationManager { get; set; }
 
     [Parameter]

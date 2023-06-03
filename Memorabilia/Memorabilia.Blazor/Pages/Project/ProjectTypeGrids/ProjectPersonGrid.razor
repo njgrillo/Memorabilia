@@ -79,7 +79,7 @@
                       Elevation="5"
                       Height="200"
                       ObjectFit="@ObjectFit.Cover"
-                      Src="@(ImageHelper.GetPersonImageData(projectPerson.Person.PersonImageFileName))"
+                      Src="@(ImageService.GetPersonImageData(projectPerson.Person.PersonImageFileName))"
                       Width="200" />
         </MudTd>
         <MudTd DataLabel="Person">@projectPerson.Person.DisplayName</MudTd>
@@ -93,7 +93,7 @@
                               Elevation="5"
                               Height="75"
                               ObjectFit="@ObjectFit.Cover"
-                              Src="@(ImageHelper.GetUserImageData(projectPerson.AutographFileName, projectPerson.UserId))"
+                              Src="@(ImageService.GetUserImageData(projectPerson.AutographFileName, projectPerson.UserId))"
                               Width="75" />                      
                 </Match>
             </Condition>            
@@ -160,7 +160,7 @@
                       Elevation="5"
                       Height="200"
                       ObjectFit="@ObjectFit.Cover"
-                      Src="@(ImageHelper.GetPersonImageData(context.Person.PersonImageFileName))"
+                      Src="@(ImageService.GetPersonImageData(context.Person.PersonImageFileName))"
                       Width="200" />
         </MudTd>
         <MudTd DataLabel="Person">@context.Person.DisplayName</MudTd> 
@@ -181,7 +181,7 @@
                               Elevation="5"
                               Height="75"
                               ObjectFit="@ObjectFit.Cover"
-                              Src="@(ImageHelper.GetUserImageData(context.AutographFileName, context.UserId))"
+                              Src="@(ImageService.GetUserImageData(context.AutographFileName, context.UserId))"
                               Width="75" />                      
                 </Match>
             </Condition>            

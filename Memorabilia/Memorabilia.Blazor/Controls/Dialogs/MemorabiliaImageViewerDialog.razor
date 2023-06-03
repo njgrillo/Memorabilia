@@ -13,7 +13,7 @@
                                   Elevation="5"
                                   Height="600"
                                   ObjectFit="@ObjectFit.Fill"
-                                  Src="@(ImageHelper.GetUserImageData(SelectedImage.FileName, UserId))"
+                                  Src="@(ImageService.GetUserImageData(SelectedImage.FileName, UserId))"
                                   Width="600" />
                     </Content>
                 </DivRowCol12>
@@ -27,7 +27,7 @@
                                       Elevation="5"
                                       Height="100"
                                       ObjectFit="@ObjectFit.Fill"
-                                      Src="@(ImageHelper.GetUserImageData(image.FileName, UserId))"
+                                      Src="@(ImageService.GetUserImageData(image.FileName, UserId))"
                                       Width="100" />
                         </div>
                     </Iterations>

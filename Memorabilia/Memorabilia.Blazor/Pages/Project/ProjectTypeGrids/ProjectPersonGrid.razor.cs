@@ -5,6 +5,9 @@ public partial class ProjectPersonGrid
     [Inject]
     public IDialogService DialogService { get; set; }
 
+    [Inject]
+    public ImageService ImageService { get; set; }
+
     [Parameter]
     public List<SaveProjectPersonViewModel> Items { get; set; } = new();
 

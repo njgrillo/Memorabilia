@@ -3,6 +3,9 @@
 public partial class ImportProjectHallOfFameDialog
 {
     [Inject]
+    public ImageService ImageService { get; set; }
+
+    [Inject]
     public QueryRouter QueryRouter { get; set; }
 
     [CascadingParameter]

@@ -5,6 +5,9 @@ public partial class ProjectMemorabiliaTeamGrid
     [Inject]
     public IDialogService DialogService { get; set; }
 
+    [Inject]
+    public ImageService ImageService { get; set; }
+
     [Parameter]
     public List<SaveProjectMemorabiliaTeamViewModel> Items { get; set; } = new();
 

@@ -23,7 +23,7 @@
                                   Elevation="5"
                                   Height="20"
                                   ObjectFit="@ObjectFit.Cover"
-                                  Src="@(ImageHelper.GetDomainImageData(ImageFileName.Import))"
+                                  Src="@(ImageService.GetDomainImageData(ImageFileName.Import))"
                                   Width="20" />
                     </MudTooltip>
                 </Content>
@@ -71,7 +71,7 @@
                                               Elevation="5"
                                               Height="100"
                                               ObjectFit="@ObjectFit.Cover"
-                                              Src="@(ImageHelper.GetUserImageData(_viewModel.AutographFileName, UserId))"
+                                              Src="@(ImageService.GetUserImageData(_viewModel.AutographFileName, UserId))"
                                               Width="100" />
                                 </Match>
                             </Condition>

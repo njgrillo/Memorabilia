@@ -73,7 +73,7 @@
                           Elevation="5"
                           Height="200"
                           ObjectFit="@ObjectFit.Cover"
-                          Src="@(ImageHelper.GetDomainImageData(projectMemorabiliaTeam.TemplateImageFileName))"
+                          Src="@(ImageService.GetDomainImageData(projectMemorabiliaTeam.TemplateImageFileName))"
                           Width="200" />
             </Match>
             <NotMatch>
@@ -92,7 +92,7 @@
                               Elevation="5"
                               Height="75"
                               ObjectFit="@ObjectFit.Cover"
-                              Src="@(ImageHelper.GetUserImageData(projectMemorabiliaTeam.MemorabiliaFileName, projectMemorabiliaTeam.UserId))"
+                              Src="@(ImageService.GetUserImageData(projectMemorabiliaTeam.MemorabiliaFileName, projectMemorabiliaTeam.UserId))"
                               Width="75" />
                 </Match>
             </Condition>
@@ -171,7 +171,7 @@
                               Elevation="5"
                               Height="75"
                               ObjectFit="@ObjectFit.Cover"                              
-                              Src="@(ImageHelper.GetUserImageData(context.MemorabiliaFileName, context.UserId))"
+                              Src="@(ImageService.GetUserImageData(context.MemorabiliaFileName, context.UserId))"
                               Width="75" />                      
                 </Match>
             </Condition>            

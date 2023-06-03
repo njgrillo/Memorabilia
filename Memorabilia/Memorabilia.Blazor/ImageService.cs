@@ -1,10 +1,10 @@
 ﻿namespace Memorabilia.Blazor;
 
-public static class ImageHelper
+public class ImageService
 {
     public static string GetDomainImageData(string imageFileName)
     {
-        return Path.Combine(ImagePath.DomainImageRootPath, 
+        return Path.Combine(ImagePath.DomainImageRootPath,
                             imageFileName.IsNullOrEmpty() ? ImageFileName.ImageNotAvailable : imageFileName).ToImageData();
     }
 

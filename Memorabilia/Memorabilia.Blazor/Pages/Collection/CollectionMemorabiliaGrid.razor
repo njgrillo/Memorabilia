@@ -36,7 +36,7 @@
                           Elevation="5"
                           Height="200"
                           ObjectFit="@ObjectFit.Cover"
-                          Src="@(ImageHelper.GetUserImageData(context.MemorabiliaPrimaryImage, context.UserId))"
+                          Src="@(ImageService.GetUserImageData(context.MemorabiliaPrimaryImage, context.UserId))"
                           Width="200" />
             </MudTooltip>
         </MudTd>

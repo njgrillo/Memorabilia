@@ -69,7 +69,7 @@
                                       Elevation="5"
                                       Height="200"
                                       ObjectFit="@ObjectFit.Cover"
-                                      Src="@(ImageHelper.GetPersonImageData(context.ImageFileName))"
+                                      Src="@(ImageService.GetPersonImageData(context.ImageFileName))"
                                       Width="200" />
                         </MudTd>
                         <MudTd DataLabel="Display Name">@context.DisplayName</MudTd>
