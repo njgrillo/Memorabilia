@@ -1,8 +1,8 @@
 ﻿namespace Memorabilia.Application.Features.Collection;
 
-public record GetCollections(int UserId) : IQuery<CollectionsViewModel>
+public record GetCollections(int UserId) : IQuery<Domain.Entities.Collection[]>
 {
-    public class Handler : QueryHandler<GetCollections, CollectionsViewModel>
+    public class Handler : QueryHandler<GetCollections, Domain.Entities.Collection[]>
     {
         private readonly ICollectionRepository _collectionRepository;
 
@@ -11,12 +11,11 @@ public record GetCollections(int UserId) : IQuery<CollectionsViewModel>
             _collectionRepository = collectionRepository;
         }
 
-        protected override async Task<CollectionsViewModel> Handle(GetCollections query)
+        protected override async Task<Domain.Entities.Collection[]> Handle(GetCollections query)
         {
-            var collections = (await _collectionRepository.GetAll(query.UserId))
-                                                          .OrderBy(collection => collection.Name);
-
-            return new CollectionsViewModel(collections);
+            return (await _collectionRepository.GetAll(query.UserId))
+                       .OrderBy(collection => collection.Name)
+                       .ToArray();
         }
     }
 }

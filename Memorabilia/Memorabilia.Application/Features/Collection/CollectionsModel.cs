@@ -2,13 +2,14 @@
 
 namespace Memorabilia.Application.Features.Collection;
 
-public class CollectionsViewModel : ViewModel
+public class CollectionsModel : ViewModel
 {
-    public CollectionsViewModel() { }
+    public CollectionsModel() { }
 
-    public CollectionsViewModel(IEnumerable<Domain.Entities.Collection> collections)
+    public CollectionsModel(IEnumerable<Domain.Entities.Collection> collections)
     {
-        Collections = collections.Select(collection => new CollectionViewModel(collection)).ToList();
+        Collections = collections.Select(collection => new CollectionModel(collection))
+                                 .ToList();
     }
 
     public string AddRoute => $"{RoutePrefix}/{EditModeType.Update.Name}/0";
@@ -21,7 +22,7 @@ public class CollectionsViewModel : ViewModel
 
     public override string PageTitle => "Collections";
 
-    public List<CollectionViewModel> Collections { get; set; } = new();
+    public List<CollectionModel> Collections { get; set; } = new();
 
     public override string RoutePrefix => "Collections";
 }

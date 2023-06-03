@@ -1,6 +1,6 @@
 ﻿<MudTable Bordered="false"
           Dense="false"
-          Filter="new Func<SaveCollectionMemorabiliaViewModel,bool>(FilterFunc1)"
+          Filter="new Func<CollectionMemorabiliaEditModel,bool>(FilterFunc1)"
           Hover="true"
           Items="@Items"
           Striped="true">
@@ -17,12 +17,12 @@
     <HeaderContent>
         <MudTh></MudTh>
         <MudTh>
-            <MudTableSortLabel SortBy="new Func<SaveCollectionMemorabiliaViewModel, object>(x => x.ItemTypeName)">
+            <MudTableSortLabel SortBy="new Func<CollectionMemorabiliaEditModel, object>(x => x.ItemTypeName)">
                 Item
             </MudTableSortLabel>
         </MudTh>
         <MudTh>
-            <MudTableSortLabel SortBy="new Func<SaveCollectionMemorabiliaViewModel, object>(x => x.EstimatedValue)">
+            <MudTableSortLabel SortBy="new Func<CollectionMemorabiliaEditModel, object>(x => x.EstimatedValue)">
                 Value
             </MudTableSortLabel>
         </MudTh>

@@ -2,13 +2,13 @@
 
 namespace Memorabilia.Application.Features.Collection;
 
-public class CollectionViewModel
+public class CollectionModel
 {
     private readonly Domain.Entities.Collection _collection;
 
-    public CollectionViewModel() { }
+    public CollectionModel() { }
 
-    public CollectionViewModel(Domain.Entities.Collection collection)
+    public CollectionModel(Domain.Entities.Collection collection)
     {
         _collection = collection;
     }

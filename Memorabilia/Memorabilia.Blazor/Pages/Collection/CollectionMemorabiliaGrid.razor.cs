@@ -6,14 +6,14 @@ public partial class CollectionMemorabiliaGrid
     public NavigationManager NavigationManager { get; set; }
 
     [Parameter]
-    public List<SaveCollectionMemorabiliaViewModel> Items { get; set; } = new();
+    public List<CollectionMemorabiliaEditModel> Items { get; set; } = new();
 
     private string _search;
 
-    private bool FilterFunc1(SaveCollectionMemorabiliaViewModel collectionMemorabiliaViewModel)
+    private bool FilterFunc1(CollectionMemorabiliaEditModel collectionMemorabiliaViewModel)
         => FilterFunc(collectionMemorabiliaViewModel, _search);
 
-    private static bool FilterFunc(SaveCollectionMemorabiliaViewModel collectionMemorabiliaViewModel, string search)
+    private static bool FilterFunc(CollectionMemorabiliaEditModel collectionMemorabiliaViewModel, string search)
     {
         return search.IsNullOrEmpty();
 

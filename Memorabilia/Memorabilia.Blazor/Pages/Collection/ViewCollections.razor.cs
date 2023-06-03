@@ -17,11 +17,13 @@ public partial class ViewCollections
     [Parameter]
     public int UserId { get; set; }
 
-    private CollectionsViewModel _viewModel = new();
+    protected CollectionsModel Model = new();
 
     protected async Task OnLoad()
     {
-        _viewModel = await QueryRouter.Send(new GetCollections(UserId));
+        Domain.Entities.Collection[] collections = await QueryRouter.Send(new GetCollections(UserId));
+
+        Model = new CollectionsModel(collections);
     }
 
     protected async Task ShowDeleteConfirm(int id)
@@ -37,16 +39,16 @@ public partial class ViewCollections
 
     protected async Task Delete(int id)
     {
-        var deletedItem = _viewModel.Collections.Single(collection => collection.Id == id);
-        var viewModel = new SaveCollectionViewModel(deletedItem)
+        var deletedItem = Model.Collections.Single(collection => collection.Id == id);
+        var viewModel = new CollectionEditModel(deletedItem)
         {
             IsDeleted = true
         };
 
         await CommandRouter.Send(new SaveCollection.Command(viewModel));
 
-        _viewModel.Collections.Remove(deletedItem);
+        Model.Collections.Remove(deletedItem);
 
-        Snackbar.Add($"{_viewModel.ItemTitle} was deleted successfully!", Severity.Success);
+        Snackbar.Add($"{Model.ItemTitle} was deleted successfully!", Severity.Success);
     }
 }

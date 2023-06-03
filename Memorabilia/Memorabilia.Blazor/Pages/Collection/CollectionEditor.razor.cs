@@ -32,7 +32,7 @@ public partial class CollectionEditor
         ? ValidationResult.Errors.Select(error => new Alert(error.ErrorMessage, Severity.Error)).ToArray()
         : Array.Empty<Alert>();
 
-    private SaveCollectionViewModel _viewModel = new();
+    protected CollectionEditModel Model = new();
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
@@ -46,7 +46,7 @@ public partial class CollectionEditor
     {
         if (Id == 0)
         {
-            _viewModel = new SaveCollectionViewModel
+            Model = new CollectionEditModel
             {
                 UserId = UserId
             };
@@ -54,14 +54,16 @@ public partial class CollectionEditor
             return;
         }
 
-        _viewModel = new SaveCollectionViewModel(await QueryRouter.Send(new GetCollection(Id)));
+        Domain.Entities.Collection collection = await QueryRouter.Send(new GetCollection(Id));
+
+        Model = new CollectionEditModel(collection);
     }
 
     protected async Task AddMemorabilia()
     {
         var parameters = new DialogParameters
         {
-            ["UserId"] = _viewModel.UserId
+            ["UserId"] = Model.UserId
         };
 
         var options = new DialogOptions()
@@ -78,18 +80,18 @@ public partial class CollectionEditor
         if (result.Canceled)
             return;
 
-        var items = (List<SaveCollectionMemorabiliaViewModel>)result.Data;
+        var items = (List<CollectionMemorabiliaEditModel>)result.Data;
 
-        _viewModel.Items.AddRange(items);
+        Model.Items.AddRange(items);
     }
 
     protected async Task OnSave()
     {
-        var command = new SaveCollection.Command(_viewModel);
+        var command = new SaveCollection.Command(Model);
 
-        _viewModel.ValidationResult = Validator.Validate(command);
+        Model.ValidationResult = Validator.Validate(command);
 
-        if (!_viewModel.ValidationResult.IsValid)
+        if (!Model.ValidationResult.IsValid)
             return;
 
         await CommandRouter.Send(command);

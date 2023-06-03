@@ -46,9 +46,9 @@ public class SaveCollection
 
     public class Command : DomainCommand, ICommand
     {
-        private readonly SaveCollectionViewModel _viewModel;
+        private readonly CollectionEditModel _viewModel;
 
-        public Command(SaveCollectionViewModel viewModel)
+        public Command(CollectionEditModel viewModel)
         {
             _viewModel = viewModel;
             Id = _viewModel.Id;

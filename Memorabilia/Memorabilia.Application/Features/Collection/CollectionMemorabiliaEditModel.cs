@@ -1,10 +1,10 @@
 ﻿namespace Memorabilia.Application.Features.Collection;
 
-public class SaveCollectionMemorabiliaViewModel : SaveViewModel
+public class CollectionMemorabiliaEditModel : SaveViewModel
 {
-    public SaveCollectionMemorabiliaViewModel() { }
+    public CollectionMemorabiliaEditModel() { }
 
-    public SaveCollectionMemorabiliaViewModel(CollectionMemorabiliaViewModel viewModel)
+    public CollectionMemorabiliaEditModel(CollectionMemorabiliaModel viewModel)
     {
         CollectionId = viewModel.CollectionId;
         EstimatedValue = viewModel.EstimatedValue ?? 0;
