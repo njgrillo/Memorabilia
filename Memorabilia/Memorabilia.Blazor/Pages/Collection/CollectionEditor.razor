@@ -1,0 +1,43 @@
+﻿<div style="margin-top:1%;margin-left:1%">
+    <PrettyBlazor.Condition Evaluation="@(ValidationResultAlerts.Any())">
+        <Match>
+            <AlertPanel Alerts="ValidationResultAlerts" />
+        </Match>
+    </PrettyBlazor.Condition>
+    <DivRowCol3>
+        <Content>
+            <h3>
+                Collection Details
+            </h3>
+        </Content>
+    </DivRowCol3>
+    <DivRowCol3>
+        <Content>
+            <TextField Label="Name"
+                       MaxLength="250"
+                       SelectedText="@_viewModel.Name"
+                       SelectedTextChanged="@((p) => _viewModel.Name = p)" />
+        </Content>
+        <ContentColumn2>
+            <TextField Label="Description"
+                       MaxLength="1000"
+                       SelectedText="@_viewModel.Description"
+                       SelectedTextChanged="@((p) => _viewModel.Description = p)" />
+        </ContentColumn2>
+    </DivRowCol3>
+    <DivRowCol3>
+        <Content>
+            <AddButton OnClick="AddMemorabilia"
+                       Text="Add Memorabilia" />
+        </Content>        
+    </DivRowCol3>
+    <DivRowCol12>
+        <Content>
+            <CollectionMemorabiliaGrid Items="_viewModel.Items" />
+        </Content>
+    </DivRowCol12>
+    <div style="margin-bottom:1%">
+        <SaveButton OnClick="OnSave"
+                    Text="Save" />
+    </div> 
+</div>

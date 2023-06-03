@@ -6,9 +6,6 @@ public partial class ProjectEditor
     public CommandRouter CommandRouter { get; set; }
 
     [Inject]
-    public IDialogService DialogService { get; set; }
-
-    [Inject]
     public IJSRuntime JSRuntime { get; set; }
 
     [Inject]

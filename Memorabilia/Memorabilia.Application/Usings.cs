@@ -12,6 +12,7 @@ global using Memorabilia.Application.Features.Autograph.Authentication;
 global using Memorabilia.Application.Features.Autograph.Gallery; 
 global using Memorabilia.Application.Features.Autograph.Inscriptions;
 global using Memorabilia.Application.Features.Autograph.Inscriptions.Suggested;
+global using Memorabilia.Application.Features.Collection;
 global using Memorabilia.Application.Features.Image;
 global using Memorabilia.Application.Features.Memorabilia;
 global using Memorabilia.Application.Features.Memorabilia.Bammer;

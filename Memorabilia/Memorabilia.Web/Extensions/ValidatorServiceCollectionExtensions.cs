@@ -16,6 +16,7 @@ public static class ValidatorServiceCollectionExtensions
         services.AddSingleton<CanvasValidator>();
         services.AddSingleton<CardValidator>();
         services.AddSingleton<CerealBoxValidator>();
+        services.AddSingleton<CollectionValidator>();
         services.AddSingleton<DocumentValidator>();
         services.AddSingleton<DrumValidator>();
         services.AddSingleton<FigureValidator>();

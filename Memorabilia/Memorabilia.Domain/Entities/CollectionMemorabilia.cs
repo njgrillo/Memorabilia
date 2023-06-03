@@ -13,6 +13,8 @@ public class CollectionMemorabilia : Framework.Library.Domain.Entity.DomainEntit
 
     public int CollectionId { get; set; }
 
+    public virtual Memorabilia Memorabilia { get; set; }
+
     public int MemorabiliaId { get; set; }
 
     public void Set(int memorabiliaId)
