@@ -11,6 +11,8 @@ public class CollectionMemorabilia : Framework.Library.Domain.Entity.DomainEntit
         MemorabiliaId = memorabiliaId;
     }
 
+    public virtual Collection Collection { get; set; }
+
     public int CollectionId { get; set; }
 
     public virtual Memorabilia Memorabilia { get; set; }

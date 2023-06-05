@@ -9,7 +9,7 @@ public partial class MemorabiliaItemGalleryCard : ImagePage
     public string EditNavigationPath { get; set; }
 
     [Parameter]
-    public MemorabiliaGalleryItemViewModel MemorabiliaItem { get; set; }
+    public MemorabiliaGalleryItemModel MemorabiliaItem { get; set; }
 
     [Parameter]
     public string PersonImageRootPath { get; set; }

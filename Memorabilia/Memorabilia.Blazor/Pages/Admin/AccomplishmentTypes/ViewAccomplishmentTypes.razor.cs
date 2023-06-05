@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Blazor.Pages.Admin.AccomplishmentTypes;
 
-public partial class ViewAccomplishmentTypes : ViewDomainItem<AccomplishmentTypesViewModel>, IDeleteDomainItem, IViewDomainItem
+public partial class ViewAccomplishmentTypes : ViewDomainItem<AccomplishmentTypesModel>, IDeleteDomainItem, IViewDomainItem
 {
     public async Task OnDelete(SaveDomainViewModel viewModel)
     {

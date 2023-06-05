@@ -13,7 +13,7 @@ public class SaveAuthentications
 
         protected override async Task Handle(Command command)
         {
-            var autograph = await _autographRepository.Get(command.AutographId);
+            Entity.Autograph autograph = await _autographRepository.Get(command.AutographId);
 
             autograph.RemoveAuthentications(command.DeletedIds);
 
@@ -34,9 +34,9 @@ public class SaveAuthentications
 
     public class Command : DomainCommand, ICommand
     {
-        private readonly SaveAuthenticationsViewModel _viewModel;
+        private readonly AuthenticationsEditModel _viewModel;
 
-        public Command(SaveAuthenticationsViewModel viewModel)
+        public Command(AuthenticationsEditModel viewModel)
         {
             _viewModel = viewModel;
             Items = _viewModel.Authentications;
@@ -46,6 +46,6 @@ public class SaveAuthentications
 
         public int[] DeletedIds => Items.Where(item => item.IsDeleted).Select(item => item.Id).ToArray();
 
-        public IEnumerable<SaveAuthenticationViewModel> Items { get; set; }
+        public IEnumerable<AuthenticationEditModel> Items { get; set; }
     }
 }

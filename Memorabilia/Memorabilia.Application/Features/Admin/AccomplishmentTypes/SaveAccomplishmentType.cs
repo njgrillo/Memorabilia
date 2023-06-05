@@ -1,25 +1,23 @@
-﻿using Memorabilia.Domain.Entities;
-
-namespace Memorabilia.Application.Features.Admin.AccomplishmentTypes;
+﻿namespace Memorabilia.Application.Features.Admin.AccomplishmentTypes;
 
 public record SaveAccomplishmentType(SaveDomainViewModel ViewModel) : ICommand
 {
     public class Handler : CommandHandler<SaveAccomplishmentType>
     {
-        private readonly IDomainRepository<AccomplishmentType> _accomplishmentTypeRepository;
+        private readonly IDomainRepository<Entity.AccomplishmentType> _accomplishmentTypeRepository;
 
-        public Handler(IDomainRepository<AccomplishmentType> accomplishmentTypeRepository)
+        public Handler(IDomainRepository<Entity.AccomplishmentType> accomplishmentTypeRepository)
         {
             _accomplishmentTypeRepository = accomplishmentTypeRepository;
         }
 
         protected override async Task Handle(SaveAccomplishmentType request)
         {
-            AccomplishmentType accomplishmentType;
+            Entity.AccomplishmentType accomplishmentType;
 
             if (request.ViewModel.IsNew)
             {
-                accomplishmentType = new AccomplishmentType(request.ViewModel.Name, request.ViewModel.Abbreviation);
+                accomplishmentType = new Entity.AccomplishmentType(request.ViewModel.Name, request.ViewModel.Abbreviation);
 
                 await _accomplishmentTypeRepository.Add(accomplishmentType);
 

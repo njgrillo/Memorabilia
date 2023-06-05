@@ -1,6 +1,4 @@
-﻿using Memorabilia.Domain.Entities;
-
-namespace Memorabilia.Repository.Implementations;
+﻿namespace Memorabilia.Repository.Implementations;
 
 public class MemorabiliaItemRepository : MemorabiliaRepository<Domain.Entities.Memorabilia>, IMemorabiliaItemRepository
 {
@@ -22,6 +20,7 @@ public class MemorabiliaItemRepository : MemorabiliaRepository<Domain.Entities.M
                                                                         .Include(memorabilia => memorabilia.Brand)
                                                                         .Include(memorabilia => memorabilia.Card)
                                                                         .Include(memorabilia => memorabilia.Cereal)
+                                                                        .Include(memorabilia => memorabilia.CollectionMemorabilias)
                                                                         .Include(memorabilia => memorabilia.Commissioner)
                                                                         .Include(memorabilia => memorabilia.Figure)
                                                                         .Include(memorabilia => memorabilia.FirstDayCover)

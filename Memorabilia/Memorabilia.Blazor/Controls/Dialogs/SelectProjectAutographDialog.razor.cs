@@ -19,7 +19,7 @@ public partial class SelectProjectAutographDialog
         ? (int)Parameters["UserId"]
         : 0;
 
-    private AutographViewModel[] _viewModel = Array.Empty<AutographViewModel>();
+    private AutographModel[] _viewModel = Array.Empty<AutographModel>();
 
     protected override async Task OnInitializedAsync()
     {
@@ -34,7 +34,7 @@ public partial class SelectProjectAutographDialog
         MudDialog.Cancel();
     }
 
-    protected void Select(AutographViewModel autograph)
+    protected void Select(AutographModel autograph)
     {
         var results = new Dictionary<string, string>()
         {

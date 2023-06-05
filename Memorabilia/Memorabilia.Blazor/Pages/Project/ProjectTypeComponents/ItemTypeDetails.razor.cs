@@ -6,7 +6,7 @@ public partial class ItemTypeDetails
     public IDialogService DialogService { get; set; }
 
     [Parameter]
-    public SaveProjectViewModel Model { get; set; }
+    public ProjectEditModel Model { get; set; }
 
     private bool _displayCompleted;
 
@@ -33,8 +33,8 @@ public partial class ItemTypeDetails
         if (result.Canceled)
             return;
 
-        SaveProjectPersonViewModel projectPerson
-            = (SaveProjectPersonViewModel)result.Data;
+        ProjectPersonEditModel projectPerson
+            = (ProjectPersonEditModel)result.Data;
 
         //TODO: Add - Don't Link - Then link from grid - See HelmetTypeDetails
 

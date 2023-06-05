@@ -2,7 +2,7 @@
           CanCancelEdit="true"
           CommitEditTooltip="Save"
           Dense="false"
-          Filter="new Func<SaveProjectMemorabiliaTeamViewModel,bool>(FilterFunc1)"
+          Filter="new Func<ProjectMemorabiliaTeamEditModel,bool>(FilterFunc1)"
           Hover="true"
           Items="@Items.Where(item => !item.IsDeleted).OrderBy(item => item.Rank)"
           RowEditCancel="ResetItemToOriginalValues"
@@ -23,27 +23,27 @@
         <MudTh></MudTh>
         <MudTh></MudTh>
         <MudTh>
-            <MudTableSortLabel SortBy="new Func<SaveProjectMemorabiliaTeamViewModel, object>(x=>x.Rank)">
+            <MudTableSortLabel SortBy="new Func<ProjectMemorabiliaTeamEditModel, object>(x=>x.Rank)">
                 Rank
             </MudTableSortLabel>
         </MudTh>
         <MudTh>
-            <MudTableSortLabel SortBy="new Func<SaveProjectMemorabiliaTeamViewModel, object>(x=>x.PriorityTypeName)">
+            <MudTableSortLabel SortBy="new Func<ProjectMemorabiliaTeamEditModel, object>(x=>x.PriorityTypeName)">
                 Priority
             </MudTableSortLabel>
         </MudTh>
         <MudTh>
-            <MudTableSortLabel SortBy="new Func<SaveProjectMemorabiliaTeamViewModel, object>(x=>x.Team.DisplayName)">
+            <MudTableSortLabel SortBy="new Func<ProjectMemorabiliaTeamEditModel, object>(x=>x.Team.DisplayName)">
                 Team
             </MudTableSortLabel>
         </MudTh>
         <MudTh>
-            <MudTableSortLabel SortBy="new Func<SaveProjectMemorabiliaTeamViewModel, object>(x=>x.Upgrade)">
+            <MudTableSortLabel SortBy="new Func<ProjectMemorabiliaTeamEditModel, object>(x=>x.Upgrade)">
                 Upgrade
             </MudTableSortLabel>
         </MudTh>        
         <MudTh>
-            <MudTableSortLabel SortBy="new Func<SaveProjectMemorabiliaTeamViewModel, object>(x=>x.ProjectStatusTypeName)">
+            <MudTableSortLabel SortBy="new Func<ProjectMemorabiliaTeamEditModel, object>(x=>x.ProjectStatusTypeName)">
                 Status
             </MudTableSortLabel>
         </MudTh>

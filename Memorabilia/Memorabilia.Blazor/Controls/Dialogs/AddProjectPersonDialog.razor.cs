@@ -29,30 +29,31 @@ public partial class AddProjectPersonDialog
     [Parameter]
     public int UserId { get; set; }
 
-    private SaveProjectViewModel _project;
-    private SaveProjectPersonViewModel _viewModel = new();
+    protected ProjectEditModel Project;
+
+    protected ProjectPersonEditModel ProjectPerson = new();
 
     protected override async Task OnInitializedAsync()
     {
         if (ProjectId == 0)
             return;
 
-        _project = new SaveProjectViewModel(await QueryRouter.Send(new GetProjectQuery(ProjectId)));
+        Project = new ProjectEditModel(new ProjectModel(await QueryRouter.Send(new GetProjectQuery(ProjectId))));
     }
 
     protected void Add()
     {
-        if (_viewModel.Person == null)
+        if (ProjectPerson.Person == null)
             return;
 
-        _viewModel.ItemTypeId = ItemTypeId;
-        _viewModel.Id = ProjectId;
-        _viewModel.UserId = UserId;
+        ProjectPerson.ItemTypeId = ItemTypeId;
+        ProjectPerson.Id = ProjectId;
+        ProjectPerson.UserId = UserId;
 
-        MudDialog.Close(DialogResult.Ok(_viewModel));
+        MudDialog.Close(DialogResult.Ok(ProjectPerson));
     }
 
-    private async Task AddAutographLink(SaveProjectPersonViewModel projectPerson)
+    private async Task AddAutographLink(ProjectPersonEditModel projectPerson)
     {
         var parameters = new Dictionary<string, object>
         {
@@ -98,62 +99,62 @@ public partial class AddProjectPersonDialog
 
     protected void SetProjectDetailsParameters(Dictionary<string, object> parameters)
     {
-        var projectType = ProjectType.Find(_project.ProjectType.Id);
+        var projectType = ProjectType.Find(Project.ProjectType.Id);
 
         switch (projectType.ToString())
         {
             case "BaseballType":
-                parameters.Add("BaseballTypeId", _project.Baseball.BaseballTypeId);
+                parameters.Add("BaseballTypeId", Project.Baseball.BaseballTypeId);
 
-                if (_project.Baseball.TeamId.HasValue)
-                    parameters.Add("BaseballTypeTeamId", _project.Baseball.TeamId);
+                if (Project.Baseball.TeamId.HasValue)
+                    parameters.Add("BaseballTypeTeamId", Project.Baseball.TeamId);
 
-                if (_project.Baseball.Year.HasValue)
-                    parameters.Add("BaseballTypeYear", _project.Baseball.Year);
+                if (Project.Baseball.Year.HasValue)
+                    parameters.Add("BaseballTypeYear", Project.Baseball.Year);
 
                 break;
             case "Card":
-                parameters.Add("CardBrandId", _project.Card.BrandId);
+                parameters.Add("CardBrandId", Project.Card.BrandId);
 
-                if (_project.Card.TeamId.HasValue)
-                    parameters.Add("CardTeamId", _project.Card.TeamId);
+                if (Project.Card.TeamId.HasValue)
+                    parameters.Add("CardTeamId", Project.Card.TeamId);
 
-                if (_project.Card.Year.HasValue)
-                    parameters.Add("CardYear", _project.Card.Year);
+                if (Project.Card.Year.HasValue)
+                    parameters.Add("CardYear", Project.Card.Year);
 
                 break;
             case "HallofFame":
-                parameters.Add("HallOfFameSportLeagueLevelId", _project.HallOfFame.SportLeagueLevelId);
+                parameters.Add("HallOfFameSportLeagueLevelId", Project.HallOfFame.SportLeagueLevelId);
 
-                if (_project.HallOfFame.ItemTypeId.HasValue)
-                    parameters.Add("HallOfFameItemTypeId", _project.HallOfFame.ItemTypeId);
+                if (Project.HallOfFame.ItemTypeId.HasValue)
+                    parameters.Add("HallOfFameItemTypeId", Project.HallOfFame.ItemTypeId);
 
-                if (_project.HallOfFame.Year.HasValue)
-                    parameters.Add("HallOfFameYear", _project.HallOfFame.Year);
+                if (Project.HallOfFame.Year.HasValue)
+                    parameters.Add("HallOfFameYear", Project.HallOfFame.Year);
 
                 break;
             case "ItemType":
                 if (!parameters.ContainsKey("ItemTypeId"))
-                    parameters.Add("ItemTypeId", _project.Item.ItemTypeId);
+                    parameters.Add("ItemTypeId", Project.Item.ItemTypeId);
 
-                parameters.Add("MultiSignedItem", _project.Item.MultiSignedItem);
+                parameters.Add("MultiSignedItem", Project.Item.MultiSignedItem);
 
                 break;
             case "Team":
-                parameters.Add("TeamId", _project.Team.TeamId);
+                parameters.Add("TeamId", Project.Team.TeamId);
 
-                if (_project.Team.Year.HasValue)
-                    parameters.Add("TeamYear", _project.Team.Year);
+                if (Project.Team.Year.HasValue)
+                    parameters.Add("TeamYear", Project.Team.Year);
 
                 break;
             case "WorldSeries":
-                parameters.Add("WorldSeriesTeamId", _project.WorldSeries.TeamId);
+                parameters.Add("WorldSeriesTeamId", Project.WorldSeries.TeamId);
 
-                if (_project.WorldSeries.ItemTypeId.HasValue)
-                    parameters.Add("WorldSeriesItemTypeId", _project.WorldSeries.ItemTypeId);
+                if (Project.WorldSeries.ItemTypeId.HasValue)
+                    parameters.Add("WorldSeriesItemTypeId", Project.WorldSeries.ItemTypeId);
 
-                if (_project.WorldSeries.Year.HasValue)
-                    parameters.Add("WorldSeriesYear", _project.WorldSeries.Year);
+                if (Project.WorldSeries.Year.HasValue)
+                    parameters.Add("WorldSeriesYear", Project.WorldSeries.Year);
 
                 break;
             default:

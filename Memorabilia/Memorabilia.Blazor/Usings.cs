@@ -232,3 +232,5 @@ global using System.Data;
 global using System.Globalization;
 
 global using Color = MudBlazor.Color;
+global using Constant = Memorabilia.Domain.Constants;
+global using Entity = Memorabilia.Domain.Entities;

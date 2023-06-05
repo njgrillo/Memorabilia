@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Blazor.Pages.Autograph.Authentications;
 
-public partial class AuthenticationsEditor : AutographItem<SaveAuthenticationViewModel>
+public partial class AuthenticationsEditor : AutographItem<AuthenticationEditModel>
 {
     [Inject]
     public AuthenticationValidator Validator { get; set; }
@@ -8,20 +8,20 @@ public partial class AuthenticationsEditor : AutographItem<SaveAuthenticationVie
     [Parameter]
     public string UploadPath { get; set; }
 
-    private SaveAuthenticationsViewModel AuthenticationsViewModel = new ();
+    private AuthenticationsEditModel AuthenticationsViewModel = new ();
     private bool _canAddAuthentication = true;
     private bool _canEditAuthenticationCompany = true;
     private bool _canUpdateAuthentication;     
 
     protected async Task OnLoad()
     {
-        var autograph = await QueryRouter.Send(new GetAutograph.Query(AutographId));
+        var autograph = new AutographModel(await QueryRouter.Send(new GetAutograph(AutographId)));
 
-        AuthenticationsViewModel = new SaveAuthenticationsViewModel(autograph.Authentications, 
-                                                                    autograph.ItemType, 
-                                                                    autograph.MemorabiliaId,
-                                                                    autograph.Id,
-                                                                    autograph.MemorabiliaImageNames);
+        AuthenticationsViewModel = new AuthenticationsEditModel(autograph.Authentications, 
+                                                                autograph.ItemType, 
+                                                                autograph.MemorabiliaId,
+                                                                autograph.Id,
+                                                                autograph.MemorabiliaImageNames);
     }
 
     protected async Task OnSave()
@@ -40,10 +40,10 @@ public partial class AuthenticationsEditor : AutographItem<SaveAuthenticationVie
 
         AuthenticationsViewModel.Authentications.Add(ViewModel);
 
-        ViewModel = new SaveAuthenticationViewModel();
+        ViewModel = new AuthenticationEditModel();
     }
 
-    private void Edit(SaveAuthenticationViewModel authentication)
+    private void Edit(AuthenticationEditModel authentication)
     {
         ViewModel.AuthenticationCompanyId = authentication.AuthenticationCompanyId;
         ViewModel.HasHologram = authentication.HasHologram;
@@ -71,7 +71,7 @@ public partial class AuthenticationsEditor : AutographItem<SaveAuthenticationVie
         authentication.Verification = ViewModel.Verification;
         authentication.Witnessed = ViewModel.Witnessed;
 
-        ViewModel = new SaveAuthenticationViewModel();
+        ViewModel = new AuthenticationEditModel();
 
         _canAddAuthentication = true;
         _canEditAuthenticationCompany = true;

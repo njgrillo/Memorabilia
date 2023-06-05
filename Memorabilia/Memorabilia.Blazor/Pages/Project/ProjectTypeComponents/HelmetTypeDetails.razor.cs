@@ -6,7 +6,7 @@ public partial class HelmetTypeDetails
     public IDialogService DialogService { get; set; }
 
     [Parameter]
-    public SaveProjectViewModel Model { get; set; }
+    public ProjectEditModel Model { get; set; }
 
     protected static int ItemTypeId => ItemType.Helmet.Id;
 
@@ -35,8 +35,8 @@ public partial class HelmetTypeDetails
         if (result.Canceled)
             return;
 
-        SaveProjectMemorabiliaTeamViewModel projectMemorabiliaTeam
-            = (SaveProjectMemorabiliaTeamViewModel)result.Data;
+        ProjectMemorabiliaTeamEditModel projectMemorabiliaTeam
+            = (ProjectMemorabiliaTeamEditModel)result.Data;
 
         //TODO: Add - Don't Link - Then link from grid
 
@@ -58,20 +58,20 @@ public partial class HelmetTypeDetails
         if (result.Canceled)
             return;
 
-        var teams = (Domain.Entities.Team[])result.Data;
+        var teams = (Entity.Team[])result.Data;
 
         if (!teams.Any())
             return;
 
-        var projectTeams = teams.Select(team => new ProjectMemorabiliaTeamViewModel(new Domain.Entities.ProjectMemorabiliaTeam
+        var projectTeams = teams.Select(team => new ProjectMemorabiliaTeamModel(new Entity.ProjectMemorabiliaTeam
                                                 {
-                                                    ItemTypeId = Domain.Constants.ItemType.Helmet.Id,
-                                                    Project = new Domain.Entities.Project(Model.Name, Model.StartDate, Model.EndDate, Model.UserId, Model.ProjectType.Id),
+                                                    ItemTypeId = Constant.ItemType.Helmet.Id,
+                                                    Project = new Entity.Project(Model.Name, Model.StartDate, Model.EndDate, Model.UserId, Model.ProjectType.Id),
                                                     ProjectId = Model.Id,
                                                     Team = team,
                                                     TeamId = team.Id
                                                 }))
-                                .Select(projectPerson => new SaveProjectMemorabiliaTeamViewModel(projectPerson))
+                                .Select(projectPerson => new ProjectMemorabiliaTeamEditModel(projectPerson))
                                 .ToArray();
 
         Model.MemorabiliaTeams.AddRange(projectTeams);

@@ -1,8 +1,9 @@
 ﻿namespace Memorabilia.Application.Features.Memorabilia;
 
-public record GetMemorabiliaItem(int Id) : IQuery<MemorabiliaItemViewModel>
+public record GetMemorabiliaItem(int Id) 
+    : IQuery<Entity.Memorabilia>
 {
-    public class Handler : QueryHandler<GetMemorabiliaItem, MemorabiliaItemViewModel>
+    public class Handler : QueryHandler<GetMemorabiliaItem, Entity.Memorabilia>
     {
         private readonly IMemorabiliaItemRepository _memorabiliaRepository;
 
@@ -11,9 +12,9 @@ public record GetMemorabiliaItem(int Id) : IQuery<MemorabiliaItemViewModel>
             _memorabiliaRepository = memorabiliaRepository;
         }
 
-        protected override async Task<MemorabiliaItemViewModel> Handle(GetMemorabiliaItem query)
+        protected override async Task<Entity.Memorabilia> Handle(GetMemorabiliaItem query)
         {
-            return new MemorabiliaItemViewModel(await _memorabiliaRepository.Get(query.Id));
+            return await _memorabiliaRepository.Get(query.Id);
         }
     }
 }

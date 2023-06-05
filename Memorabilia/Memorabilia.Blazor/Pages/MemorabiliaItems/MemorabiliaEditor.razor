@@ -12,7 +12,7 @@
           OnSave="OnSave"
           PageTitle="@_viewModel.PageTitle"
           PerformValidation="true"
-          TItem="SaveMemorabiliaItemViewModel"
+          TItem="MemorabiliaItemEditModel"
           UseMultipleButtons="true"
           ValidationResult="@_viewModel.ValidationResult">
     <TimelineContent>
@@ -76,6 +76,10 @@
                            SelectedText="@_viewModel.Note"
                            SelectedTextChanged="@((p) => _viewModel.Note = p)" />
             </Content>
+            <ContentColumn2>
+                <MultiCollectionSelector SelectedCollections="_viewModel.Collections" 
+                                         UserId="_viewModel.UserId" />
+            </ContentColumn2>
         </DivRowCol6>
         <DivRowCol3>
             <Content>
@@ -130,6 +134,6 @@
                     </div>
                 </div>
             </Content>
-        </DivRowCol3>
+        </DivRowCol3>        
     </Content>
 </EditPage>

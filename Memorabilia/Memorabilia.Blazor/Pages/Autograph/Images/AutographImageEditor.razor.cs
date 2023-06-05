@@ -2,7 +2,7 @@
 
 namespace Memorabilia.Blazor.Pages.Autograph.Images;
 
-public partial class AutographImageEditor : AutographItem<SaveAutographImagesViewModel>
+public partial class AutographImageEditor : AutographItem<AutographImagesEditModel>
 {
     [Inject]
     public ISnackbar Snackbar { get; set; }
@@ -13,7 +13,7 @@ public partial class AutographImageEditor : AutographItem<SaveAutographImagesVie
     [Parameter]
     public int UserId { get; set; }
 
-    private EditImages<SaveAutographImagesViewModel> EditImages;
+    private EditImages<AutographImagesEditModel> EditImages;
 
     protected async Task OnImport()
     {
@@ -26,14 +26,14 @@ public partial class AutographImageEditor : AutographItem<SaveAutographImagesVie
                                                                                                   image.UploadDate))
                                               .ToList();
 
-        ViewModel = new SaveAutographImagesViewModel(images, ViewModel.ItemType, ViewModel.MemorabiliaId, AutographId);
+        ViewModel = new AutographImagesEditModel(images, ViewModel.ItemType, ViewModel.MemorabiliaId, AutographId);
     }
 
     protected async Task OnLoad()
     {
-        var autograph = await QueryRouter.Send(new GetAutograph.Query(AutographId));
+        var autograph = new AutographModel(await QueryRouter.Send(new GetAutograph(AutographId)));
 
-        ViewModel = new SaveAutographImagesViewModel(autograph.Images, autograph.ItemType, autograph.MemorabiliaId, autograph.Id);
+        ViewModel = new AutographImagesEditModel(autograph.Images, autograph.ItemType, autograph.MemorabiliaId, autograph.Id);
     }
 
     protected async Task OnSave()

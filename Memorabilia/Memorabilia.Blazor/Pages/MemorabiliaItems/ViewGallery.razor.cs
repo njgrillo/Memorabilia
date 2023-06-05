@@ -13,21 +13,21 @@ public partial class ViewGallery : ImagePage
 
     private bool DisplayLoadMoreButton => _viewModel?.PageInfo?.TotalItems > _pageSize;
     private MemorabiliaSearchCriteria _filter = new();
-    private List<MemorabiliaGalleryItemViewModel> _items = new();
+    private List<MemorabiliaGalleryItemModel> _items = new();
     private readonly int _pageSize = 12;
-    private MemorabiliaGalleryItemsViewModel _viewModel;
+    private MemorabiliaGalleryItemsModel _viewModel;
 
-    protected string GetDescription(MemorabiliaGalleryItemViewModel item)
+    protected string GetDescription(MemorabiliaGalleryItemModel item)
     {
         return GalleryService.GetDescription(item.Memorabilia);
     }
 
-    protected string GetSubtitle(MemorabiliaGalleryItemViewModel item)
+    protected string GetSubtitle(MemorabiliaGalleryItemModel item)
     {
         return GalleryService.GetSubtitle(item.Memorabilia);
     }
 
-    protected string GetTitle(MemorabiliaGalleryItemViewModel item)
+    protected string GetTitle(MemorabiliaGalleryItemModel item)
     {
         return GalleryService.GetTitle(item.Memorabilia);
     }

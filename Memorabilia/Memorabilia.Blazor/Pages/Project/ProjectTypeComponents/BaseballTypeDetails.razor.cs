@@ -6,7 +6,7 @@ public partial class BaseballTypeDetails
     public IDialogService DialogService { get; set; }
 
     [Parameter]
-    public SaveProjectViewModel Model { get; set; }
+    public ProjectEditModel Model { get; set; }
 
     protected BaseballType BaseballType
         => BaseballType.Find(Model.Baseball.BaseballTypeId);
@@ -43,8 +43,8 @@ public partial class BaseballTypeDetails
         if (result.Canceled)
             return;
 
-        SaveProjectPersonViewModel projectPerson
-            = (SaveProjectPersonViewModel)result.Data;
+        ProjectPersonEditModel projectPerson
+            = (ProjectPersonEditModel)result.Data;
 
         //TODO: Add - Don't Link - Then link from grid - See HelmetTypeDetails
         //projectPerson.ProjectType = Model.ProjectType.Id;
@@ -80,7 +80,7 @@ public partial class BaseballTypeDetails
 
         var projectPersons = persons.Select(person => new PersonViewModel(person))
                                     .Select(personModel => new SavePersonViewModel(personModel))
-                                    .Select(savePersonModel => new ProjectPersonViewModel(new Domain.Entities.ProjectPerson
+                                    .Select(savePersonModel => new ProjectPersonModel(new Domain.Entities.ProjectPerson
                                     {
                                         ItemTypeId = ItemType.Baseball.Id,
                                         Person = persons.Single(person => person.Id == savePersonModel.Id),
@@ -88,7 +88,7 @@ public partial class BaseballTypeDetails
                                         Project = new Domain.Entities.Project(Model.Name, Model.StartDate, Model.EndDate, Model.UserId, Model.ProjectType.Id),
                                         ProjectId = Model.Id
                                     }))
-                                    .Select(projectPerson => new SaveProjectPersonViewModel(projectPerson))
+                                    .Select(projectPerson => new ProjectPersonEditModel(projectPerson))
                                     .ToArray();
 
         Model.People.AddRange(projectPersons);

@@ -13,8 +13,8 @@ public partial class ViewDetails : ImagePage
 
     private MemorabiliaSearchCriteria _filter = new();
     private bool _resetPaging;
-    private MudTable<MemorabiliaItemViewModel> _table;
-    private MemorabiliaItemsViewModel _viewModel = new();
+    private MudTable<MemorabiliaItemModel> _table;
+    private MemorabiliaItemsModel _viewModel = new();
 
     protected async Task DeleteAutograph(int id)
     {
@@ -22,7 +22,7 @@ public partial class ViewDetails : ImagePage
                                      .SelectMany(item => item.Autographs)
                                      .Single(autograph => autograph.Id == id);
 
-        var viewModel = new SaveAutographViewModel(itemToDelete)
+        var viewModel = new AutographEditModel(itemToDelete)
         {
             IsDeleted = true
         };
@@ -38,7 +38,7 @@ public partial class ViewDetails : ImagePage
     protected async Task DeleteMemorabiliaItem(int id)
     {
         var itemToDelete = _viewModel.MemorabiliaItems.Single(item => item.Id == id);
-        var viewModel = new SaveMemorabiliaItemViewModel(itemToDelete)
+        var viewModel = new MemorabiliaItemEditModel(itemToDelete)
         {
             IsDeleted = true
         };
@@ -58,7 +58,7 @@ public partial class ViewDetails : ImagePage
         await _table.ReloadServerData();
     }
 
-    protected async Task<TableData<MemorabiliaItemViewModel>> OnRead(TableState state)
+    protected async Task<TableData<MemorabiliaItemModel>> OnRead(TableState state)
     {
         var pageInfo = new PageInfo(_resetPaging ? 1 : state.Page + 1, state.PageSize);
 
@@ -66,7 +66,7 @@ public partial class ViewDetails : ImagePage
             ? await QueryRouter.Send(new GetMemorabiliaItemsPaged(UserId, pageInfo, _filter))
             : await QueryRouter.Send(new GetMemorabiliaItemsPaged(UserId, pageInfo));
 
-        return new TableData<MemorabiliaItemViewModel>() { Items = _viewModel.MemorabiliaItems, 
+        return new TableData<MemorabiliaItemModel>() { Items = _viewModel.MemorabiliaItems, 
                                                            TotalItems = _viewModel.PageInfo.TotalItems };
     }
 

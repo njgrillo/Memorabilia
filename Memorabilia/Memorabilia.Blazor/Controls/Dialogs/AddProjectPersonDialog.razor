@@ -8,17 +8,17 @@
         <div style="margin-top:2%;margin-bottom:2%;margin-left:2%;margin-right:2%;">
             <DivRowCol6>
                 <Content>
-                    <PersonSelector SelectedPerson="_viewModel.Person"
-                                    SelectedPersonChanged="(p) => _viewModel.Person = p" />
+                    <PersonSelector SelectedPerson="ProjectPerson.Person"
+                                    SelectedPersonChanged="(p) => ProjectPerson.Person = p" />
                 </Content>                
             </DivRowCol6>
             <DivRowCol3>
                 <Content>
                     <NullableIntField Label="Rank"
-                                      Value="_viewModel.Rank"
-                                      ValueChanged="@((p) => _viewModel.Rank = p)" />
+                                      Value="ProjectPerson.Rank"
+                                      ValueChanged="@((p) => ProjectPerson.Rank = p)" />
                     <MudTooltip Text="Import Max Rank">
-                        <MudImage @onclick="@(() => _viewModel.Rank = MaxRank)"
+                        <MudImage @onclick="@(() => ProjectPerson.Rank = MaxRank)"
                                   Class="rounded-lg can-click"
                                   Elevation="5"
                                   Height="20"
@@ -28,50 +28,50 @@
                     </MudTooltip>
                 </Content>
                 <ContentColumn2>
-                    <PriorityTypeDropDown SelectedValue="_viewModel.PriorityTypeId"
-                                          SelectionChanged="(p) => _viewModel.PriorityTypeId = p" />
+                    <PriorityTypeDropDown SelectedValue="ProjectPerson.PriorityTypeId"
+                                          SelectionChanged="(p) => ProjectPerson.PriorityTypeId = p" />
                 </ContentColumn2>
                 <ContentColumn3>
-                    <ProjectStatusTypeDropDown SelectedValue="_viewModel.ProjectStatusTypeId"
-                                               SelectionChanged="(p) => _viewModel.ProjectStatusTypeId = p" />
+                    <ProjectStatusTypeDropDown SelectedValue="ProjectPerson.ProjectStatusTypeId"
+                                               SelectionChanged="(p) => ProjectPerson.ProjectStatusTypeId = p" />
                 </ContentColumn3>
                 <ContentColumn4>
-                    <MudSwitch Checked="@_viewModel.Upgrade"
-                               CheckedChanged="(p) => _viewModel.Upgrade = p"
+                    <MudSwitch Checked="@ProjectPerson.Upgrade"
+                               CheckedChanged="(p) => ProjectPerson.Upgrade = p"
                                Color="MudBlazor.Color.Success"
                                Label="Is Upgrade?"
                                T="bool" />
                 </ContentColumn4>
             </DivRowCol3>
-            <Condition Evaluation="@(ProjectId > 0 && _viewModel.Person != null && _viewModel.Person.Id > 0)">
+            <Condition Evaluation="@(ProjectId > 0 && ProjectPerson.Person != null && ProjectPerson.Person.Id > 0)">
                 <Match>
                     <DivRowCol3>
                         <Content>
-                            <Condition Evaluation="@(_viewModel.AutographId > 0)">
+                            <Condition Evaluation="@(ProjectPerson.AutographId > 0)">
                                 <Match>
                                     <MudTooltip Text="Remove link to Autograph">
                                         <MudFab Color="MudBlazor.Color.Secondary"
                                                 Icon="@Icons.Material.Outlined.LinkOff"
-                                                OnClick="@(_ => _viewModel.AutographId = 0)" />
+                                                OnClick="@(_ => ProjectPerson.AutographId = 0)" />
                                     </MudTooltip>
                                 </Match>
                                 <NotMatch>
                                     <MudTooltip Text="Link to Autograph">
                                         <MudFab Color="MudBlazor.Color.Secondary"
                                                 Icon="@Icons.Material.Outlined.AddLink"
-                                                OnClick="@(_ => AddAutographLink(_viewModel))" />
+                                                OnClick="@(_ => AddAutographLink(ProjectPerson))" />
                                     </MudTooltip>
                                 </NotMatch>
                             </Condition>
                         </Content>
                         <ContentColumn2>
-                            <Condition Evaluation="@(_viewModel.AutographId > 0)">
+                            <Condition Evaluation="@(ProjectPerson.AutographId > 0)">
                                 <Match>
                                     <MudImage Class="rounded-lg can-click"
                                               Elevation="5"
                                               Height="100"
                                               ObjectFit="@ObjectFit.Cover"
-                                              Src="@(ImageService.GetUserImageData(_viewModel.AutographFileName, UserId))"
+                                              Src="@(ImageService.GetUserImageData(ProjectPerson.AutographFileName, UserId))"
                                               Width="100" />
                                 </Match>
                             </Condition>

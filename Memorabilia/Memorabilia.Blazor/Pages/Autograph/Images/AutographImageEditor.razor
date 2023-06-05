@@ -1,4 +1,4 @@
-﻿@inherits AutographItem<SaveAutographImagesViewModel>
+﻿@inherits AutographItem<AutographImagesEditModel>
 
 <Page OnLoad="OnLoad">
     <Content>
@@ -24,7 +24,7 @@
                     PageTitle="@ViewModel.PageTitle"
                     ReplaceImages="false"
                     SaveButtonText="Save & Add Another Autograph"
-                    TItem="SaveAutographImagesViewModel"
+                    TItem="AutographImagesEditModel"
                     UploadPath="@UploadPath"
                     UserId="@UserId">
             <AdditionalButtons>

@@ -9,7 +9,7 @@ public partial class SuggestedInscriptions
     public SuggestedInscriptionService SuggestedInscriptionService { get; set; }
 
     [Parameter]
-    public EventCallback<SuggestedInscriptionViewModel> InscriptionSelected { get; set; }
+    public EventCallback<SuggestedInscriptionModel> InscriptionSelected { get; set; }
 
     [Parameter]
     public int PersonId { get; set; }
@@ -17,9 +17,9 @@ public partial class SuggestedInscriptions
     private bool _loaded;
     private int _personId;
     private string _search;
-    private readonly SuggestedInscriptionsViewModel _viewModel = new();
+    private readonly SuggestedInscriptionsModel _viewModel = new();
 
-    private bool FilterFunc1(SuggestedInscriptionViewModel inscription) 
+    private bool FilterFunc1(SuggestedInscriptionModel inscription) 
         => FilterFunc(inscription, _search);
 
     protected override async Task OnInitializedAsync()
@@ -35,12 +35,12 @@ public partial class SuggestedInscriptions
         _personId = PersonId;
     }
 
-    protected async Task Add(SuggestedInscriptionViewModel inscription)
+    protected async Task Add(SuggestedInscriptionModel inscription)
     {
         await InscriptionSelected.InvokeAsync(inscription);
     }
 
-    private static bool FilterFunc(SuggestedInscriptionViewModel inscription, string search)
+    private static bool FilterFunc(SuggestedInscriptionModel inscription, string search)
     {
         return search.IsNullOrEmpty() ||
                inscription.Text.Contains(search, StringComparison.OrdinalIgnoreCase);

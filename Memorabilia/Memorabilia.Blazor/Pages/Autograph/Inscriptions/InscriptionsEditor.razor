@@ -1,32 +1,32 @@
-﻿@inherits AutographItem<SaveInscriptionViewModel>
+﻿@inherits AutographItem<InscriptionEditModel>
 
-<EditPage ContinueNavigationPath="@_inscriptionsViewModel.ContinueNavigationPath"
+<EditPage ContinueNavigationPath="@_InscriptionsModel.ContinueNavigationPath"
           DomainImageRootPath="@DomainImageRootPath"
-          EditMode="_inscriptionsViewModel.EditModeType"
-          ExitNavigationPath="@_inscriptionsViewModel.ExitNavigationPath"
-          ImageFileName="@_inscriptionsViewModel.ImageFileName"
-          ItemName="@_inscriptionsViewModel.PageTitle"
-          Model="_inscriptionsViewModel"
+          EditMode="_InscriptionsModel.EditModeType"
+          ExitNavigationPath="@_InscriptionsModel.ExitNavigationPath"
+          ImageFileName="@_InscriptionsModel.ImageFileName"
+          ItemName="@_InscriptionsModel.PageTitle"
+          Model="_InscriptionsModel"
           OnLoad="OnLoad"
           OnSave="OnSave"
-          PageFooterButtonText="@_inscriptionsViewModel.ExitButtonText"
-          PageFooterNavigationPath="@_inscriptionsViewModel.BackNavigationPath"
-          PageTitle="@_inscriptionsViewModel.PageTitle"
-          TItem="SaveInscriptionsViewModel"
+          PageFooterButtonText="@_InscriptionsModel.ExitButtonText"
+          PageFooterNavigationPath="@_InscriptionsModel.BackNavigationPath"
+          PageTitle="@_InscriptionsModel.PageTitle"
+          TItem="InscriptionsEditModel"
           UseMultipleButtons="true"
           ValidationResult="@ViewModel.ValidationResult">
     <TimelineContent>
-        <AutographTimeline AutographId="_inscriptionsViewModel.AutographId" 
-                           AutographStep="_inscriptionsViewModel.AutographStep"  
-                           DisplaySpot="_inscriptionsViewModel.CanHaveSpot" 
-                           EditMode="_inscriptionsViewModel.EditModeType"
-                           MemorabiliaId="_inscriptionsViewModel.MemorabiliaId" />
+        <AutographTimeline AutographId="_InscriptionsModel.AutographId" 
+                           AutographStep="_InscriptionsModel.AutographStep"  
+                           DisplaySpot="_InscriptionsModel.CanHaveSpot" 
+                           EditMode="_InscriptionsModel.EditModeType"
+                           MemorabiliaId="_InscriptionsModel.MemorabiliaId" />
     </TimelineContent>
     <ImagePreview>
-        <PrettyBlazor.Condition Evaluation="_inscriptionsViewModel.HasMemorabiliaImages">
+        <PrettyBlazor.Condition Evaluation="_InscriptionsModel.HasMemorabiliaImages">
             <Match>
                 <ImagePanel DomainImageRootPath="@DomainImageRootPath"
-                            ImageNames="@_inscriptionsViewModel.MemorabiliaImageNames"
+                            ImageNames="@_InscriptionsModel.MemorabiliaImageNames"
                             ImageRootPath="@UploadPath"
                             PanelText="Memorabilia Images" />
             </Match>
@@ -73,7 +73,7 @@
                         <MudTable Bordered="false"
                                   Dense="false"
                                   Hover="true"
-                                  Items="@_inscriptionsViewModel.Inscriptions.Where(inscription => !inscription.IsDeleted)"
+                                  Items="@_InscriptionsModel.Inscriptions.Where(inscription => !inscription.IsDeleted)"
                                   Striped="true">
                             <ToolBarContent>
                                 <MudText Typo="Typo.h6">Inscriptions</MudText>
@@ -108,7 +108,7 @@
                 <DivRowCol12>
                     <Content>
                         <SuggestedInscriptions InscriptionSelected="OnSuggestedInscriptionSelected"
-                                               PersonId="_inscriptionsViewModel.PersonId" />
+                                               PersonId="_InscriptionsModel.PersonId" />
                     </Content>
                 </DivRowCol12>
             </div>

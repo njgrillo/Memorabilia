@@ -13,25 +13,26 @@ public class SaveMemorabiliaItem
 
         protected override async Task Handle(Command command)
         {
-            Domain.Entities.Memorabilia memorabilia;
+            Entity.Memorabilia memorabilia;
 
             if (command.IsNew)
             {
-                memorabilia = new Domain.Entities.Memorabilia(command.AcquiredDate,
-                                                              command.AcquiredWithAutograph,
-                                                              command.AcquisitionTypeId,
-                                                              command.ConditionId,                                                                  
-                                                              command.Cost,
-                                                              command.Denominator,
-                                                              command.EstimatedValue,
-                                                              command.ForTrade,
-                                                              command.Framed,
-                                                              command.ItemTypeId,
-                                                              command.Note,
-                                                              command.Numerator,
-                                                              command.PrivacyTypeId,                                                                  
-                                                              command.PurchaseTypeId,
-                                                              command.UserId);
+                memorabilia = new Entity.Memorabilia(command.AcquiredDate,
+                                                     command.AcquiredWithAutograph,
+                                                     command.AcquisitionTypeId,
+                                                     command.Collections,
+                                                     command.ConditionId,                                                                  
+                                                     command.Cost,
+                                                     command.Denominator,
+                                                     command.EstimatedValue,
+                                                     command.ForTrade,
+                                                     command.Framed,
+                                                     command.ItemTypeId,
+                                                     command.Note,
+                                                     command.Numerator,
+                                                     command.PrivacyTypeId,                                                                  
+                                                     command.PurchaseTypeId,
+                                                     command.UserId);
 
                 await _memorabiliaRepository.Add(memorabilia);
 
@@ -52,6 +53,7 @@ public class SaveMemorabiliaItem
             memorabilia.Set(command.AcquiredDate,    
                             command.AcquiredWithAutograph,
                             command.AcquisitionTypeId,
+                            command.Collections,
                             command.ConditionId,
                             command.Cost,
                             command.Denominator,
@@ -69,9 +71,9 @@ public class SaveMemorabiliaItem
 
     public class Command : DomainCommand, ICommand
     {
-        private readonly SaveMemorabiliaItemViewModel _viewModel;
+        private readonly MemorabiliaItemEditModel _viewModel;
 
-        public Command(SaveMemorabiliaItemViewModel viewModel)
+        public Command(MemorabiliaItemEditModel viewModel)
         {
             _viewModel = viewModel;
             Id = _viewModel.Id;
@@ -83,7 +85,10 @@ public class SaveMemorabiliaItem
 
         public bool AcquiredWithAutograph => _viewModel.AcquiredWithAutograph;
 
-        public int? ConditionId => _viewModel.ConditionId > 0 ? _viewModel.ConditionId : null;
+        public Entity.Collection[] Collections => _viewModel.Collections.ToArray();
+
+        public int? ConditionId 
+            => _viewModel.ConditionId > 0 ? _viewModel.ConditionId : null;
 
         public decimal? Cost => _viewModel.Cost;
 
@@ -115,7 +120,8 @@ public class SaveMemorabiliaItem
 
         public int PrivacyTypeId => _viewModel.PrivacyTypeId;
 
-        public int? PurchaseTypeId => _viewModel.PurchaseTypeId > 0 ? _viewModel.PurchaseTypeId : null;
+        public int? PurchaseTypeId 
+            => _viewModel.PurchaseTypeId > 0 ? _viewModel.PurchaseTypeId : null;
 
         public int UserId => _viewModel.UserId;
     }

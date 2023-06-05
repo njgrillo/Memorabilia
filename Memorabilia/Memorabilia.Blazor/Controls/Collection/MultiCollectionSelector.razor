@@ -1,0 +1,30 @@
+﻿<CollectionAutoComplete SelectedValue="SelectedCollection"
+                        SelectionChanged="(p) => SelectedCollection = p"
+                        UserId="@UserId" />
+<br />
+<AddButton OnClick="Add"
+           Text="Add Collection" />
+<br />
+<br />
+<MudTable Bordered="false"
+          Dense="false"
+          Hover="true"
+          Items="@SelectedCollections"
+          Striped="true">
+    <HeaderContent>
+        <MudTh>Name</MudTh>
+        <MudTh>Description</MudTh>
+        <MudTh></MudTh>
+    </HeaderContent>
+    <RowTemplate>
+        <MudTd DataLabel="Name">@context.Name</MudTd>
+        <MudTd DataLabel="Description">@context.Description</MudTd>
+        <MudTd DataLabel="">
+            <MudTooltip Text="Delete">
+                <MudFab Color="MudBlazor.Color.Secondary"
+                        Icon="@Icons.Material.Outlined.DeleteOutline"
+                        OnClick="@(_ => Remove(context))" />
+            </MudTooltip>
+        </MudTd>
+    </RowTemplate>
+</MudTable>

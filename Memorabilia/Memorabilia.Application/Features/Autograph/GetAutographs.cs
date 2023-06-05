@@ -1,8 +1,9 @@
 ﻿namespace Memorabilia.Application.Features.Autograph;
 
-public class GetAutographs
+public record GetAutographs(int? MemorabiliaId = null, int? UserId = null)
+    : IQuery<Entity.Autograph[]>
 {
-    public class Handler : QueryHandler<Query, AutographsViewModel>
+    public class Handler : QueryHandler<GetAutographs, Entity.Autograph[]>
     {
         private readonly IAutographRepository _autographRepository;
 
@@ -11,22 +12,10 @@ public class GetAutographs
             _autographRepository = autographRepository;
         }
 
-        protected override async Task<AutographsViewModel> Handle(Query query)
+        protected override async Task<Entity.Autograph[]> Handle(GetAutographs query)
         {
-            return new AutographsViewModel(await _autographRepository.GetAll(query.MemorabiliaId));
+            return (await _autographRepository.GetAll(query.MemorabiliaId))
+                       .ToArray();
         }
-    }
-
-    public class Query : IQuery<AutographsViewModel>
-    {
-        public Query(int? memorabiliaId = null, int? userId = null)
-        {
-            MemorabiliaId = memorabiliaId;
-            UserId = userId;
-        }
-
-        public int? MemorabiliaId { get; }
-
-        public int? UserId { get; }
     }
 }

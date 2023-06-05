@@ -29,30 +29,31 @@ public partial class AddProjectMemorabiliaTeamDialog
     [Parameter]
     public int UserId { get; set; }
 
-    private SaveProjectViewModel _project;
-    private SaveProjectMemorabiliaTeamViewModel _viewModel = new();
+    protected ProjectEditModel Project;
+
+    protected ProjectMemorabiliaTeamEditModel ProjectMemorabiliaTeam = new();
 
     protected override async Task OnInitializedAsync()
     {
         if (ProjectId == 0)
             return;
 
-        _project = new SaveProjectViewModel(await QueryRouter.Send(new GetProjectQuery(ProjectId)));
+        Project = new ProjectEditModel(new ProjectModel(await QueryRouter.Send(new GetProjectQuery(ProjectId))));
     }
 
     protected void Add()
     {
-        if (_viewModel.Team == null)
+        if (ProjectMemorabiliaTeam.Team == null)
             return;
 
-        _viewModel.ItemTypeId = ItemTypeId;
-        _viewModel.Id = ProjectId;
-        _viewModel.UserId = UserId;
+        ProjectMemorabiliaTeam.ItemTypeId = ItemTypeId;
+        ProjectMemorabiliaTeam.Id = ProjectId;
+        ProjectMemorabiliaTeam.UserId = UserId;
 
-        MudDialog.Close(DialogResult.Ok(_viewModel));
+        MudDialog.Close(DialogResult.Ok(ProjectMemorabiliaTeam));
     }
 
-    private async Task AddMemorabiliaLink(SaveProjectMemorabiliaTeamViewModel projectMemorabiliaTeam)
+    private async Task AddMemorabiliaLink(ProjectMemorabiliaTeamEditModel projectMemorabiliaTeam)
     {
         var parameters = new Dictionary<string, object>
         {
@@ -98,25 +99,25 @@ public partial class AddProjectMemorabiliaTeamDialog
 
     protected void SetProjectDetailsParameters(Dictionary<string, object> parameters)
     {
-        var projectType = ProjectType.Find(_project.ProjectType.Id);
+        var projectType = ProjectType.Find(Project.ProjectType.Id);
 
         switch (projectType.ToString())
         {
             case "HelmetType":
-                parameters.Add("HelmetTypeId", _project.Helmet.HelmetTypeId);
+                parameters.Add("HelmetTypeId", Project.Helmet.HelmetTypeId);
 
-                if (_project.Helmet.HelmetFinishId.HasValue)
-                    parameters.Add("HelmetFinishId", _project.Helmet.HelmetFinishId);
+                if (Project.Helmet.HelmetFinishId.HasValue)
+                    parameters.Add("HelmetFinishId", Project.Helmet.HelmetFinishId);
 
-                if (_project.Helmet.SizeId.HasValue)
-                    parameters.Add("HelmetSizeId", _project.Helmet.SizeId);
+                if (Project.Helmet.SizeId.HasValue)
+                    parameters.Add("HelmetSizeId", Project.Helmet.SizeId);
 
                 break;
             case "Team":
-                parameters.Add("TeamId", _project.Team.TeamId);
+                parameters.Add("TeamId", Project.Team.TeamId);
 
-                if (_project.Team.Year.HasValue)
-                    parameters.Add("TeamYear", _project.Team.Year);
+                if (Project.Team.Year.HasValue)
+                    parameters.Add("TeamYear", Project.Team.Year);
 
                 break;
             default:

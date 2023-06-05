@@ -23,15 +23,15 @@ public partial class ProjectEditor
     [Parameter]
     public int UserId { get; set; }
 
+    protected ProjectEditModel Model = new();
+
     protected Type ProjectTypeComponent;
 
     protected ValidationResult ValidationResult { get; set; }
 
     protected Alert[] ValidationResultAlerts => ValidationResult != null
         ? ValidationResult.Errors.Select(error => new Alert(error.ErrorMessage, Severity.Error)).ToArray()
-        : Array.Empty<Alert>();
-
-    private SaveProjectViewModel _viewModel = new();    
+        : Array.Empty<Alert>();    
 
     protected Dictionary<string, object> ProjectTypeParameters { get; set; } 
         = new Dictionary<string, object>();
@@ -51,7 +51,7 @@ public partial class ProjectEditor
 
         if (Id == 0)
         {
-            _viewModel = new SaveProjectViewModel
+            Model = new ProjectEditModel
             {
                 UserId = UserId
             };
@@ -59,87 +59,87 @@ public partial class ProjectEditor
             return;
         }
 
-        _viewModel = new SaveProjectViewModel(await QueryRouter.Send(new GetProjectQuery(Id)));
+        Model = new ProjectEditModel(new ProjectModel(await QueryRouter.Send(new GetProjectQuery(Id))));
 
-        ProjectTypeComponent = Type.GetType($"Memorabilia.Blazor.Pages.Project.ProjectTypeComponents.{_viewModel.ProjectType}Selector");
+        ProjectTypeComponent = Type.GetType($"Memorabilia.Blazor.Pages.Project.ProjectTypeComponents.{Model.ProjectType}Selector");
         
         SetProjectDetailsParameters();
     }
 
     protected void OnProjectTypeSelected(ProjectType projectType)
     {
-        _viewModel.ProjectType = projectType;
+        Model.ProjectType = projectType;
 
-        ProjectTypeComponent = Type.GetType($"Memorabilia.Blazor.Pages.Project.ProjectTypeComponents.{_viewModel.ProjectType}Selector");
+        ProjectTypeComponent = Type.GetType($"Memorabilia.Blazor.Pages.Project.ProjectTypeComponents.{Model.ProjectType}Selector");
      }
 
     protected void OnProjectDetailsSet(Dictionary<string, object> parameters)
     {
         var projectTypeParameters = new Dictionary<string, object>();
 
-        switch (_viewModel.ProjectType.ToString())
+        switch (Model.ProjectType.ToString())
         {
             case "BaseballType":
-                _viewModel.Baseball.BaseballTypeId = (int)parameters["BaseballTypeId"];
+                Model.Baseball.BaseballTypeId = (int)parameters["BaseballTypeId"];
 
                 if (parameters.ContainsKey("TeamId"))
-                    _viewModel.Baseball.TeamId = (int?)parameters["TeamId"];
+                    Model.Baseball.TeamId = (int?)parameters["TeamId"];
 
                 if (parameters.ContainsKey("Year"))
-                    _viewModel.Baseball.Year = (int?)parameters["Year"];
+                    Model.Baseball.Year = (int?)parameters["Year"];
 
                 break;
             case "Card":
-                _viewModel.Card.BrandId = (int)parameters["BrandId"];
+                Model.Card.BrandId = (int)parameters["BrandId"];
 
                 if (parameters.ContainsKey("TeamId"))
-                    _viewModel.Card.TeamId = (int?)parameters["TeamId"];
+                    Model.Card.TeamId = (int?)parameters["TeamId"];
 
                 if (parameters.ContainsKey("Year"))
-                    _viewModel.Card.Year = (int?)parameters["Year"];
+                    Model.Card.Year = (int?)parameters["Year"];
 
                 break;
             case "HallofFame":
-                _viewModel.HallOfFame.SportLeagueLevelId = (int)parameters["SportLeagueLevelId"];
+                Model.HallOfFame.SportLeagueLevelId = (int)parameters["SportLeagueLevelId"];
 
                 if (parameters.ContainsKey("Year"))
-                    _viewModel.HallOfFame.Year = (int?)parameters["Year"];
+                    Model.HallOfFame.Year = (int?)parameters["Year"];
 
                 if (parameters.ContainsKey("ItemTypeId"))
-                    _viewModel.HallOfFame.ItemTypeId = (int?)parameters["ItemTypeId"];
+                    Model.HallOfFame.ItemTypeId = (int?)parameters["ItemTypeId"];
 
                 break;
             case "HelmetType":
-                _viewModel.Helmet.HelmetTypeId = (int)parameters["HelmetTypeId"];
+                Model.Helmet.HelmetTypeId = (int)parameters["HelmetTypeId"];
 
                 if (parameters.ContainsKey("HelmetFinishId"))
-                    _viewModel.Helmet.HelmetFinishId = (int?)parameters["HelmetFinishId"];
+                    Model.Helmet.HelmetFinishId = (int?)parameters["HelmetFinishId"];
 
                 if (parameters.ContainsKey("SizeId"))
-                    _viewModel.Helmet.SizeId = (int?)parameters["SizeId"];
+                    Model.Helmet.SizeId = (int?)parameters["SizeId"];
 
                 break;
             case "ItemType":
-                _viewModel.Item.ItemTypeId = (int)parameters["ItemTypeId"];
+                Model.Item.ItemTypeId = (int)parameters["ItemTypeId"];
 
                 if (parameters.ContainsKey("MultiSignedItem"))
-                    _viewModel.Item.MultiSignedItem = (bool)parameters["MultiSignedItem"];
+                    Model.Item.MultiSignedItem = (bool)parameters["MultiSignedItem"];
 
                 break;
             case "Team":
-                _viewModel.Team.TeamId = (int)parameters["TeamId"];
+                Model.Team.TeamId = (int)parameters["TeamId"];
 
                 if (parameters.ContainsKey("Year"))
-                    _viewModel.Team.Year = (int?)parameters["Year"];
+                    Model.Team.Year = (int?)parameters["Year"];
                 break;
             case "WorldSeries":
-                _viewModel.WorldSeries.TeamId = (int)parameters["TeamId"];
+                Model.WorldSeries.TeamId = (int)parameters["TeamId"];
 
                 if (parameters.ContainsKey("Year"))
-                    _viewModel.WorldSeries.Year = (int?)parameters["Year"];
+                    Model.WorldSeries.Year = (int?)parameters["Year"];
 
                 if (parameters.ContainsKey("ItemTypeId"))
-                    _viewModel.WorldSeries.ItemTypeId = (int?)parameters["ItemTypeId"];
+                    Model.WorldSeries.ItemTypeId = (int?)parameters["ItemTypeId"];
 
                 break;
             default:
@@ -149,11 +149,11 @@ public partial class ProjectEditor
 
     protected async Task OnSave()
     {
-        var command = new SaveProject.Command(_viewModel);
+        var command = new SaveProject.Command(Model);
 
-        _viewModel.ValidationResult = Validator.Validate(command);
+        Model.ValidationResult = Validator.Validate(command);
 
-        if (!_viewModel.ValidationResult.IsValid)
+        if (!Model.ValidationResult.IsValid)
             return;
 
         await CommandRouter.Send(command);
@@ -166,90 +166,90 @@ public partial class ProjectEditor
 
     protected async Task GetProjectMemorabiliaTeamUpdatedIds()
     {
-        if (!_viewModel.MemorabiliaTeams.Any())
+        if (!Model.MemorabiliaTeams.Any())
             return;
 
-        var viewModel = new SaveProjectViewModel(await QueryRouter.Send(new GetProjectQuery(Id)));
+        var viewModel = new ProjectEditModel(new ProjectModel(await QueryRouter.Send(new GetProjectQuery(Id))));
 
-        _viewModel.MemorabiliaTeams = viewModel.MemorabiliaTeams;
+        Model.MemorabiliaTeams = viewModel.MemorabiliaTeams;
     }
 
     protected async Task GetProjectPersonUpdatedIds()
     {
-        if (!_viewModel.People.Any())
+        if (!Model.People.Any())
             return;
 
-        var viewModel = new SaveProjectViewModel(await QueryRouter.Send(new GetProjectQuery(Id)));
+        var viewModel = new ProjectEditModel(new ProjectModel(await QueryRouter.Send(new GetProjectQuery(Id))));
 
-        _viewModel.People = viewModel.People;
+        Model.People = viewModel.People;
     }
 
     protected void SetProjectDetailsParameters()
     {
-        ProjectTypeParameters.Add("Disabled", _viewModel.Id > 0);
+        ProjectTypeParameters.Add("Disabled", Model.Id > 0);
 
-        switch (_viewModel.ProjectType.ToString())
+        switch (Model.ProjectType.ToString())
         {
             case "BaseballType":
-                ProjectTypeParameters.Add("BaseballTypeId", _viewModel.Baseball.BaseballTypeId);
+                ProjectTypeParameters.Add("BaseballTypeId", Model.Baseball.BaseballTypeId);
 
-                if (_viewModel.Baseball.TeamId.HasValue)
-                    ProjectTypeParameters.Add("TeamId", _viewModel.Baseball.TeamId);
+                if (Model.Baseball.TeamId.HasValue)
+                    ProjectTypeParameters.Add("TeamId", Model.Baseball.TeamId);
 
-                if (_viewModel.Baseball.Year.HasValue)
-                    ProjectTypeParameters.Add("Year", _viewModel.Baseball.Year);
+                if (Model.Baseball.Year.HasValue)
+                    ProjectTypeParameters.Add("Year", Model.Baseball.Year);
 
                 break;
             case "Card":
-                ProjectTypeParameters.Add("BrandId", _viewModel.Card.BrandId);
+                ProjectTypeParameters.Add("BrandId", Model.Card.BrandId);
 
-                if (_viewModel.Card.TeamId.HasValue)
-                    ProjectTypeParameters.Add("TeamId", _viewModel.Card.TeamId);
+                if (Model.Card.TeamId.HasValue)
+                    ProjectTypeParameters.Add("TeamId", Model.Card.TeamId);
 
-                if (_viewModel.Card.Year.HasValue)
-                    ProjectTypeParameters.Add("Year", _viewModel.Card.Year);
+                if (Model.Card.Year.HasValue)
+                    ProjectTypeParameters.Add("Year", Model.Card.Year);
 
                 break;
             case "HallofFame":
-                ProjectTypeParameters.Add("SportLeagueLevelId", _viewModel.HallOfFame.SportLeagueLevelId);
+                ProjectTypeParameters.Add("SportLeagueLevelId", Model.HallOfFame.SportLeagueLevelId);
 
-                if (_viewModel.HallOfFame.ItemTypeId.HasValue)
-                    ProjectTypeParameters.Add("ItemTypeId", _viewModel.HallOfFame.ItemTypeId);
+                if (Model.HallOfFame.ItemTypeId.HasValue)
+                    ProjectTypeParameters.Add("ItemTypeId", Model.HallOfFame.ItemTypeId);
 
-                if (_viewModel.HallOfFame.Year.HasValue)
-                    ProjectTypeParameters.Add("Year", _viewModel.HallOfFame.Year);
+                if (Model.HallOfFame.Year.HasValue)
+                    ProjectTypeParameters.Add("Year", Model.HallOfFame.Year);
 
                 break;
             case "HelmetType":
-                ProjectTypeParameters.Add("HelmetTypeId", _viewModel.Helmet.HelmetTypeId);
+                ProjectTypeParameters.Add("HelmetTypeId", Model.Helmet.HelmetTypeId);
 
-                if (_viewModel.Helmet.HelmetFinishId.HasValue)
-                    ProjectTypeParameters.Add("HelmetFinishId", _viewModel.Helmet.HelmetFinishId);
+                if (Model.Helmet.HelmetFinishId.HasValue)
+                    ProjectTypeParameters.Add("HelmetFinishId", Model.Helmet.HelmetFinishId);
 
-                if (_viewModel.Helmet.SizeId.HasValue)
-                    ProjectTypeParameters.Add("SizeId", _viewModel.Helmet.SizeId);
+                if (Model.Helmet.SizeId.HasValue)
+                    ProjectTypeParameters.Add("SizeId", Model.Helmet.SizeId);
 
                 break;
             case "ItemType":
-                ProjectTypeParameters.Add("ItemTypeId", _viewModel.Item.ItemTypeId);
-                ProjectTypeParameters.Add("MultiSignedItem", _viewModel.Item.MultiSignedItem);
+                ProjectTypeParameters.Add("ItemTypeId", Model.Item.ItemTypeId);
+                ProjectTypeParameters.Add("MultiSignedItem", Model.Item.MultiSignedItem);
 
                 break;
             case "Team":
-                ProjectTypeParameters.Add("TeamId", _viewModel.Team.TeamId);
+                ProjectTypeParameters.Add("TeamId", Model.Team.TeamId);
 
-                if (_viewModel.Team.Year.HasValue)
-                    ProjectTypeParameters.Add("Year", _viewModel.Team.Year);
+                if (Model.Team.Year.HasValue)
+                    ProjectTypeParameters.Add("Year", Model.Team.Year);
 
                 break;
             case "WorldSeries":
-                ProjectTypeParameters.Add("TeamId", _viewModel.WorldSeries.TeamId);
+                ProjectTypeParameters.Add("TeamId", Model.WorldSeries.TeamId);
 
-                if (_viewModel.WorldSeries.ItemTypeId.HasValue)
-                    ProjectTypeParameters.Add("ItemTypeId", _viewModel.WorldSeries.ItemTypeId);
+                if (Model.WorldSeries.ItemTypeId.HasValue)
+                    ProjectTypeParameters.Add("ItemTypeId", Model.WorldSeries.ItemTypeId);
 
-                if (_viewModel.WorldSeries.Year.HasValue)
-                    ProjectTypeParameters.Add("Year", _viewModel.WorldSeries.Year);
+                if (Model.WorldSeries.Year.HasValue)
+                    ProjectTypeParameters.Add("Year", Model.WorldSeries.Year);
 
                 break;
             default:

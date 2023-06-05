@@ -24,6 +24,8 @@ public partial class Memorabilia : Framework.Library.Domain.Entity.DomainEntity
 
     public virtual MemorabiliaCereal Cereal { get; private set; }
 
+    public virtual List<CollectionMemorabilia> CollectionMemorabilias { get; private set; } = new();
+
     public virtual MemorabiliaCommissioner Commissioner { get; private set; }
 
     public Constants.Condition Condition => Constants.Condition.Find(ConditionId ?? 0);

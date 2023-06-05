@@ -175,9 +175,9 @@ public class SaveProject
 
     public class Command : DomainCommand, ICommand
     {
-        private readonly SaveProjectViewModel _viewModel;
+        private readonly ProjectEditModel _viewModel;
 
-        public Command(SaveProjectViewModel viewModel)
+        public Command(ProjectEditModel viewModel)
         {
             _viewModel = viewModel;
             Id = _viewModel.Id;
@@ -215,11 +215,11 @@ public class SaveProject
 
         public ProjectItem Item => _viewModel.Item;
 
-        public List<SaveProjectMemorabiliaTeamViewModel> MemorabiliaTeams => _viewModel.MemorabiliaTeams;
+        public List<ProjectMemorabiliaTeamEditModel> MemorabiliaTeams => _viewModel.MemorabiliaTeams;
 
         public string Name => _viewModel.Name;
 
-        public List<SaveProjectPersonViewModel> People => _viewModel.People;
+        public List<ProjectPersonEditModel> People => _viewModel.People;
 
         public DateTime? StartDate => _viewModel.StartDate;
 

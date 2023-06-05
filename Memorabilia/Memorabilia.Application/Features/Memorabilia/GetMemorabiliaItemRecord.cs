@@ -13,7 +13,7 @@ public record GetMemorabiliaItem<T, TResponse>(int MemorabiliaId) : IQuery<TResp
 
         protected override async Task<TResponse> Handle(GetMemorabiliaItem<T, TResponse> request)
         {
-            var item = await _memorabiliaRepository.Get(request.MemorabiliaId);
+            Entity.Memorabilia item = await _memorabiliaRepository.Get(request.MemorabiliaId);
 
             return (TResponse)Activator.CreateInstance(typeof(TResponse), item);
         }

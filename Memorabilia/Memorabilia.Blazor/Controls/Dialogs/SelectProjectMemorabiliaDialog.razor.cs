@@ -22,7 +22,7 @@ public partial class SelectProjectMemorabiliaDialog
         ? (int)Parameters["UserId"]
         : 0;
 
-    private MemorabiliaItemViewModel[] _viewModel = Array.Empty<MemorabiliaItemViewModel>();
+    private MemorabiliaItemModel[] _viewModel = Array.Empty<MemorabiliaItemModel>();
 
     protected override async Task OnInitializedAsync()
     {
@@ -37,7 +37,7 @@ public partial class SelectProjectMemorabiliaDialog
         MudDialog.Cancel();
     }
 
-    protected void Select(MemorabiliaItemViewModel memorabilia)
+    protected void Select(MemorabiliaItemModel memorabilia)
     {
         var results = new Dictionary<string, string>()
         {

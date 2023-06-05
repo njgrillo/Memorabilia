@@ -1,6 +1,4 @@
-﻿using Memorabilia.Domain.Constants;
-
-namespace Memorabilia.Application.Features.Autograph.Image;
+﻿namespace Memorabilia.Application.Features.Autograph.Image;
 
 public class SaveAutographImage
 {
@@ -15,7 +13,7 @@ public class SaveAutographImage
 
         protected override async Task Handle(Command command)
         {     
-            var autograph = await _autographRepository.Get(command.AutographId);
+            Entity.Autograph autograph = await _autographRepository.Get(command.AutographId);
 
             command.MemorabiliaId = autograph.MemorabiliaId;
 
@@ -27,9 +25,9 @@ public class SaveAutographImage
 
     public class Command : DomainCommand, ICommand
     {
-        private readonly SaveAutographImagesViewModel _viewModel;
+        private readonly AutographImagesEditModel _viewModel;
 
-        public Command(SaveAutographImagesViewModel viewModel)
+        public Command(AutographImagesEditModel viewModel)
         {
             _viewModel = viewModel;
         }
@@ -38,8 +36,10 @@ public class SaveAutographImage
 
         public int MemorabiliaId { get; set; }
 
-        public IEnumerable<string> FileNames => _viewModel.Images.Select(image => image.FileName);            
+        public IEnumerable<string> FileNames 
+            => _viewModel.Images.Select(image => image.FileName);            
 
-        public string PrimaryImageFileName => _viewModel.Images.SingleOrDefault(image => image.ImageTypeId == ImageType.Primary.Id)?.FileName;
+        public string PrimaryImageFileName 
+            => _viewModel.Images.SingleOrDefault(image => image.ImageTypeId == Constant.ImageType.Primary.Id)?.FileName;
     }
 }

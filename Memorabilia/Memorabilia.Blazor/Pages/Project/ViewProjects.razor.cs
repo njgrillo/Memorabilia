@@ -17,11 +17,11 @@ public partial class ViewProjects : ComponentBase
     [Parameter]
     public int UserId { get; set; }
 
-    private ProjectsViewModel _viewModel = new();
+    protected ProjectsModel Model = new();
 
     protected async Task OnLoad()
     {
-        _viewModel = await QueryRouter.Send(new GetProjects(UserId));
+        Model = new ProjectsModel(await QueryRouter.Send(new GetProjects(UserId)));
     }
 
     protected async Task ShowDeleteConfirm(int id)
@@ -37,16 +37,16 @@ public partial class ViewProjects : ComponentBase
 
     protected async Task Delete(int id)
     {
-        var deletedItem = _viewModel.Projects.Single(project => project.Id == id);
-        var viewModel = new SaveProjectViewModel(deletedItem)
+        var deletedItem = Model.Projects.Single(project => project.Id == id);
+        var viewModel = new ProjectEditModel(deletedItem)
         {
             IsDeleted = true
         };
 
         await CommandRouter.Send(new SaveProject.Command(viewModel));
 
-        _viewModel.Projects.Remove(deletedItem);
+        Model.Projects.Remove(deletedItem);
 
-        Snackbar.Add($"{_viewModel.ItemTitle} was deleted successfully!", Severity.Success);
+        Snackbar.Add($"{Model.ItemTitle} was deleted successfully!", Severity.Success);
     }
 }

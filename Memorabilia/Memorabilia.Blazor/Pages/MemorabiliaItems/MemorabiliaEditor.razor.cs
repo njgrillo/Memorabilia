@@ -11,14 +11,14 @@ public partial class MemorabiliaEditor : ImagePage
     [Parameter]
     public int UserId { get; set; }
 
-    private SaveMemorabiliaItemViewModel _viewModel = new ();        
+    private MemorabiliaItemEditModel _viewModel = new ();        
 
     protected async Task OnLoad()
     {
         if (Id == 0)
             return;
 
-        _viewModel = new SaveMemorabiliaItemViewModel(await QueryRouter.Send(new GetMemorabiliaItem(Id)));
+        _viewModel = new MemorabiliaItemEditModel(new MemorabiliaItemModel(await QueryRouter.Send(new GetMemorabiliaItem(Id))));
     }
 
     protected async Task OnSave()

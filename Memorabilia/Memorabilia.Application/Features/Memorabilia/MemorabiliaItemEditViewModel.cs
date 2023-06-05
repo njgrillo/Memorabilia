@@ -2,7 +2,7 @@
 
 namespace Memorabilia.Application.Features.Memorabilia;
 
-public abstract class MemorabiliaItemEditViewModel : SaveItemViewModel
+public abstract class MemorabiliaItemEditViewModel : ItemEditModel
 {
     public override string BackNavigationPath 
         => $"Memorabilia/{EditModeType.Update.Name}/{MemorabiliaId}";

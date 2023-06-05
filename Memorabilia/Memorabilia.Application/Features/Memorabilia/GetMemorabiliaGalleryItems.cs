@@ -1,8 +1,9 @@
 ﻿namespace Memorabilia.Application.Features.Memorabilia;
 
-public record GetMemorabiliaGalleryItems(int UserId, PageInfo PageInfo, MemorabiliaSearchCriteria Filter = null) : IQuery<MemorabiliaGalleryItemsViewModel>
+public record GetMemorabiliaGalleryItems(int UserId, PageInfo PageInfo, MemorabiliaSearchCriteria Filter = null) 
+    : IQuery<MemorabiliaGalleryItemsModel>
 {
-    public class Handler : QueryHandler<GetMemorabiliaGalleryItems, MemorabiliaGalleryItemsViewModel>
+    public class Handler : QueryHandler<GetMemorabiliaGalleryItems, MemorabiliaGalleryItemsModel>
     {
         private readonly IMemorabiliaItemRepository _memorabiliaRepository;
 
@@ -11,11 +12,12 @@ public record GetMemorabiliaGalleryItems(int UserId, PageInfo PageInfo, Memorabi
             _memorabiliaRepository = memorabiliaRepository;
         }
 
-        protected override async Task<MemorabiliaGalleryItemsViewModel> Handle(GetMemorabiliaGalleryItems query)
+        protected override async Task<MemorabiliaGalleryItemsModel> Handle(GetMemorabiliaGalleryItems query)
         {
-            var result = await _memorabiliaRepository.GetAll(query.UserId, query.PageInfo, query.Filter);
+            PagedResult<Entity.Memorabilia> result 
+                = await _memorabiliaRepository.GetAll(query.UserId, query.PageInfo, query.Filter);
 
-            return new MemorabiliaGalleryItemsViewModel(result.Data, result.PageInfo);
+            return new MemorabiliaGalleryItemsModel(result.Data, result.PageInfo);
         }
     }
 }

@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Blazor.Pages.Autograph;
 
-public partial class AutographEditor : AutographItem<SaveAutographViewModel>
+public partial class AutographEditor : AutographItem<AutographEditModel>
 {
     [Inject]
     public AutographValidator Validator { get; set; }
@@ -15,11 +15,11 @@ public partial class AutographEditor : AutographItem<SaveAutographViewModel>
 
     protected async Task OnLoad()
     {
-        var viewModel = await QueryRouter.Send(new GetMemorabiliaItem(MemorabiliaId));
+        var viewModel = new MemorabiliaItemModel(await QueryRouter.Send(new GetMemorabiliaItem(MemorabiliaId)));
 
         if (!viewModel.Autographs.Any() || AutographId <= 0)
         {
-            ViewModel = new SaveAutographViewModel(viewModel);
+            ViewModel = new AutographEditModel(viewModel);
             return;
         }
 
@@ -40,17 +40,17 @@ public partial class AutographEditor : AutographItem<SaveAutographViewModel>
         ViewModel.ContinueNavigationPath = $"Autographs/Inscriptions/{EditModeType.Update.Name}/{command.Id}";
     }
 
-    private void GetViewModel(MemorabiliaItemViewModel viewModel)
+    private void GetViewModel(MemorabiliaItemModel viewModel)
     {
         var autograph = viewModel.Autographs.SingleOrDefault(autograph => autograph.Id == AutographId);
 
         if (autograph == null)
         {
-            ViewModel = new SaveAutographViewModel(viewModel);
+            ViewModel = new AutographEditModel(viewModel);
             return;
         }
 
-        ViewModel = new SaveAutographViewModel(autograph);
+        ViewModel = new AutographEditModel(autograph);
 
         _displayAcquisitionDetails = ViewModel.AcquisitionTypeId > 0;
     }

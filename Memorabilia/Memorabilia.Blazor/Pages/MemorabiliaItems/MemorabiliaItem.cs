@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Blazor.Pages.MemorabiliaItems;
 
-public abstract class MemorabiliaItem<T> : ImagePage where T : SaveItemViewModel
+public abstract class MemorabiliaItem<T> : ImagePage where T : ItemEditModel
 {
     [Parameter]
     public int MemorabiliaId { get; set; }

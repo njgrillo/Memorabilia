@@ -1,8 +1,9 @@
 ﻿namespace Memorabilia.Application.Features.Autograph.Spot;
 
-public class GetSpot
+public record GetSpot(int AutographId)
+    : IQuery<Entity.Autograph>
 {
-    public class Handler : QueryHandler<Query, SpotViewModel>
+    public class Handler : QueryHandler<GetSpot, Entity.Autograph>
     {
         private readonly IAutographRepository _autographRepository;
 
@@ -11,19 +12,9 @@ public class GetSpot
             _autographRepository = autographRepository;
         }
 
-        protected override async Task<SpotViewModel> Handle(Query query)
+        protected override async Task<Entity.Autograph> Handle(GetSpot query)
         {
-            return new SpotViewModel(await _autographRepository.Get(query.AutographId));
+            return await _autographRepository.Get(query.AutographId);
         }
-    }
-
-    public class Query : IQuery<SpotViewModel>
-    {
-        public Query(int autographId)
-        {
-            AutographId = autographId;
-        }
-
-        public int AutographId { get; }
     }
 }

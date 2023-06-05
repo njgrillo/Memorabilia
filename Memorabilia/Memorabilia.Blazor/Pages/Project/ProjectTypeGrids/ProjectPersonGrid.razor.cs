@@ -9,18 +9,18 @@ public partial class ProjectPersonGrid
     public ImageService ImageService { get; set; }
 
     [Parameter]
-    public List<SaveProjectPersonViewModel> Items { get; set; } = new();
+    public List<ProjectPersonEditModel> Items { get; set; } = new();
 
     [Parameter]
     public int? ItemTypeId { get; set; }
 
-    private SaveProjectPersonViewModel _elementBeforeEdit;
+    private ProjectPersonEditModel _elementBeforeEdit;
     private string _search;
 
-    private bool FilterFunc1(SaveProjectPersonViewModel projectPersonViewModel)
+    private bool FilterFunc1(ProjectPersonEditModel projectPersonViewModel)
         => FilterFunc(projectPersonViewModel, _search);
 
-    private async Task AddAutographLink(SaveProjectPersonViewModel projectPerson)
+    private async Task AddAutographLink(ProjectPersonEditModel projectPerson)
     {
         var parameters = new Dictionary<string, object>
         {
@@ -65,14 +65,14 @@ public partial class ProjectPersonGrid
     {
         _elementBeforeEdit = new()
         {
-            Rank = ((SaveProjectPersonViewModel)element).Rank,
-            Upgrade = ((SaveProjectPersonViewModel)element).Upgrade,
-            PriorityTypeId = ((SaveProjectPersonViewModel)element).PriorityTypeId,
-            ProjectStatusTypeId = ((SaveProjectPersonViewModel)element).ProjectStatusTypeId,
+            Rank = ((ProjectPersonEditModel)element).Rank,
+            Upgrade = ((ProjectPersonEditModel)element).Upgrade,
+            PriorityTypeId = ((ProjectPersonEditModel)element).PriorityTypeId,
+            ProjectStatusTypeId = ((ProjectPersonEditModel)element).ProjectStatusTypeId,
         };
     }
 
-    private static bool FilterFunc(SaveProjectPersonViewModel projectPersonViewModel, string search)
+    private static bool FilterFunc(ProjectPersonEditModel projectPersonViewModel, string search)
     {
         return search.IsNullOrEmpty() ||
                (search.Equals("deceased", StringComparison.OrdinalIgnoreCase) && projectPersonViewModel.Deceased) ||
@@ -160,13 +160,13 @@ public partial class ProjectPersonGrid
 
     private void ResetItemToOriginalValues(object element)
     {
-        ((SaveProjectPersonViewModel)element).Rank = _elementBeforeEdit.Rank;
-        ((SaveProjectPersonViewModel)element).Upgrade = _elementBeforeEdit.Upgrade;
-        ((SaveProjectPersonViewModel)element).PriorityTypeId = _elementBeforeEdit.PriorityTypeId;
-        ((SaveProjectPersonViewModel)element).ProjectStatusTypeId = _elementBeforeEdit.ProjectStatusTypeId;
+        ((ProjectPersonEditModel)element).Rank = _elementBeforeEdit.Rank;
+        ((ProjectPersonEditModel)element).Upgrade = _elementBeforeEdit.Upgrade;
+        ((ProjectPersonEditModel)element).PriorityTypeId = _elementBeforeEdit.PriorityTypeId;
+        ((ProjectPersonEditModel)element).ProjectStatusTypeId = _elementBeforeEdit.ProjectStatusTypeId;
     }
 
-    protected static void SetProjectDetailsParameters(SaveProjectPersonViewModel projectPerson, 
+    protected static void SetProjectDetailsParameters(ProjectPersonEditModel projectPerson, 
         Dictionary<string, object> parameters)
     {
         var projectType = ProjectType.Find(projectPerson.Project.ProjectTypeId);
@@ -239,7 +239,7 @@ public partial class ProjectPersonGrid
 
     private void UpdateRanks(object element)
     {
-        var item = ((SaveProjectPersonViewModel)element);
+        var item = ((ProjectPersonEditModel)element);
 
         if (_elementBeforeEdit.Rank == item.Rank)
             return;
@@ -268,7 +268,7 @@ public partial class ProjectPersonGrid
         StateHasChanged();
     }
 
-    private async Task ViewImages(SaveProjectPersonViewModel projectPerson)
+    private async Task ViewImages(ProjectPersonEditModel projectPerson)
     {
         var parameters = new DialogParameters
         {

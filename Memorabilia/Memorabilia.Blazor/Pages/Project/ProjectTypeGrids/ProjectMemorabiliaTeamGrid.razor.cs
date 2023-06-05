@@ -9,18 +9,18 @@ public partial class ProjectMemorabiliaTeamGrid
     public ImageService ImageService { get; set; }
 
     [Parameter]
-    public List<SaveProjectMemorabiliaTeamViewModel> Items { get; set; } = new();
+    public List<ProjectMemorabiliaTeamEditModel> Items { get; set; } = new();
 
     [Parameter]
     public int? ItemTypeId { get; set; }
 
-    private SaveProjectMemorabiliaTeamViewModel _elementBeforeEdit;
+    private ProjectMemorabiliaTeamEditModel _elementBeforeEdit;
     private string _search;
 
-    private bool FilterFunc1(SaveProjectMemorabiliaTeamViewModel projectMemorabiliaTeamViewModel)
+    private bool FilterFunc1(ProjectMemorabiliaTeamEditModel projectMemorabiliaTeamViewModel)
         => FilterFunc(projectMemorabiliaTeamViewModel, _search);
 
-    private async Task AddMemorabiliaLink(SaveProjectMemorabiliaTeamViewModel projectMemorabiliaTeam)
+    private async Task AddMemorabiliaLink(ProjectMemorabiliaTeamEditModel projectMemorabiliaTeam)
     {
         var parameters = new Dictionary<string, object>
         {
@@ -47,7 +47,7 @@ public partial class ProjectMemorabiliaTeamGrid
             DisableBackdropClick = true
         };
 
-        var dialog = DialogService.Show<SelectProjectMemorabiliaDialog>("Select Autograph", dialogParameters, options); 
+        var dialog = DialogService.Show<SelectProjectMemorabiliaDialog>("Select Memorabilia", dialogParameters, options); 
         var result = await dialog.Result;
 
         if (result.Canceled)
@@ -65,14 +65,14 @@ public partial class ProjectMemorabiliaTeamGrid
     {
         _elementBeforeEdit = new()
         {
-            Rank = ((SaveProjectMemorabiliaTeamViewModel)element).Rank,
-            Upgrade = ((SaveProjectMemorabiliaTeamViewModel)element).Upgrade,
-            PriorityTypeId = ((SaveProjectMemorabiliaTeamViewModel)element).PriorityTypeId,
-            ProjectStatusTypeId = ((SaveProjectMemorabiliaTeamViewModel)element).ProjectStatusTypeId,
+            Rank = ((ProjectMemorabiliaTeamEditModel)element).Rank,
+            Upgrade = ((ProjectMemorabiliaTeamEditModel)element).Upgrade,
+            PriorityTypeId = ((ProjectMemorabiliaTeamEditModel)element).PriorityTypeId,
+            ProjectStatusTypeId = ((ProjectMemorabiliaTeamEditModel)element).ProjectStatusTypeId,
         };
     }
 
-    private static bool FilterFunc(SaveProjectMemorabiliaTeamViewModel projectMemorabiliaTeamViewModel, string search)
+    private static bool FilterFunc(ProjectMemorabiliaTeamEditModel projectMemorabiliaTeamViewModel, string search)
     {
         return search.IsNullOrEmpty() ||
                (search.Equals("upgrade", StringComparison.OrdinalIgnoreCase) && projectMemorabiliaTeamViewModel.Upgrade) ||
@@ -158,13 +158,13 @@ public partial class ProjectMemorabiliaTeamGrid
 
     private void ResetItemToOriginalValues(object element)
     {
-        ((SaveProjectMemorabiliaTeamViewModel)element).Rank = _elementBeforeEdit.Rank;
-        ((SaveProjectMemorabiliaTeamViewModel)element).Upgrade = _elementBeforeEdit.Upgrade;
-        ((SaveProjectMemorabiliaTeamViewModel)element).PriorityTypeId = _elementBeforeEdit.PriorityTypeId;
-        ((SaveProjectMemorabiliaTeamViewModel)element).ProjectStatusTypeId = _elementBeforeEdit.ProjectStatusTypeId;
+        ((ProjectMemorabiliaTeamEditModel)element).Rank = _elementBeforeEdit.Rank;
+        ((ProjectMemorabiliaTeamEditModel)element).Upgrade = _elementBeforeEdit.Upgrade;
+        ((ProjectMemorabiliaTeamEditModel)element).PriorityTypeId = _elementBeforeEdit.PriorityTypeId;
+        ((ProjectMemorabiliaTeamEditModel)element).ProjectStatusTypeId = _elementBeforeEdit.ProjectStatusTypeId;
     }
 
-    protected static void SetProjectDetailsParameters(SaveProjectMemorabiliaTeamViewModel projectMemorabiliaTeam,
+    protected static void SetProjectDetailsParameters(ProjectMemorabiliaTeamEditModel projectMemorabiliaTeam,
         Dictionary<string, object> parameters)
     {
         var projectType = ProjectType.Find(projectMemorabiliaTeam.Project.ProjectTypeId);
@@ -195,7 +195,7 @@ public partial class ProjectMemorabiliaTeamGrid
 
     private void UpdateRanks(object element)
     {
-        var item = ((SaveProjectMemorabiliaTeamViewModel)element);
+        var item = ((ProjectMemorabiliaTeamEditModel)element);
 
         if (_elementBeforeEdit.Rank == item.Rank)
             return;
@@ -224,7 +224,7 @@ public partial class ProjectMemorabiliaTeamGrid
         StateHasChanged();
     }
 
-    private async Task ViewImages(SaveProjectMemorabiliaTeamViewModel projectMemorabiliaTeam)
+    private async Task ViewImages(ProjectMemorabiliaTeamEditModel projectMemorabiliaTeam)
     {
         var parameters = new DialogParameters
         {

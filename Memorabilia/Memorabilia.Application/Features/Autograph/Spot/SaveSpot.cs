@@ -13,7 +13,7 @@ public class SaveSpot
 
         protected override async Task Handle(Command command)
         {
-            var autograph = await _autographRepository.Get(command.AutographId);
+            Entity.Autograph autograph = await _autographRepository.Get(command.AutographId);
 
             autograph.SetSpot(command.SpotId);
 
@@ -23,9 +23,9 @@ public class SaveSpot
 
     public class Command : DomainCommand, ICommand
     {
-        private readonly SaveSpotViewModel _viewModel;
+        private readonly SpotEditModel _viewModel;
 
-        public Command(SaveSpotViewModel viewModel)
+        public Command(SpotEditModel viewModel)
         {
             _viewModel = viewModel;
         }

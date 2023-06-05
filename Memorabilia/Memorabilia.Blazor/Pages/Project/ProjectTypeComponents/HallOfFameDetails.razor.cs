@@ -6,7 +6,7 @@ public partial class HallofFameDetails
     public IDialogService DialogService { get; set; }
 
     [Parameter]
-    public SaveProjectViewModel Model { get; set; }
+    public ProjectEditModel Model { get; set; }
 
     private bool _displayCompleted;
 
@@ -33,8 +33,8 @@ public partial class HallofFameDetails
         if (result.Canceled)
             return;
 
-        SaveProjectPersonViewModel projectPerson
-            = (SaveProjectPersonViewModel)result.Data;
+        ProjectPersonEditModel projectPerson
+            = (ProjectPersonEditModel)result.Data;
 
         //TODO: Add - Don't Link - Then link from grid - See HelmetTypeDetails
 
@@ -69,7 +69,7 @@ public partial class HallofFameDetails
 
         var projectPersons = persons.Select(person => new PersonViewModel(person))
                                     .Select(personModel => new SavePersonViewModel(personModel))
-                                    .Select(savePersonModel => new ProjectPersonViewModel(new Domain.Entities.ProjectPerson
+                                    .Select(savePersonModel => new ProjectPersonModel(new Domain.Entities.ProjectPerson
                                     {
                                         ItemTypeId = Model.HallOfFame.ItemTypeId ?? Model.ItemTypeId,
                                         Person = persons.Single(person => person.Id == savePersonModel.Id),
@@ -77,7 +77,7 @@ public partial class HallofFameDetails
                                         Project = new Domain.Entities.Project(Model.Name, Model.StartDate, Model.EndDate, Model.UserId, Model.ProjectType.Id),
                                         ProjectId = Model.Id
                                     }))
-                                    .Select(projectPerson => new SaveProjectPersonViewModel(projectPerson))
+                                    .Select(projectPerson => new ProjectPersonEditModel(projectPerson))
                                     .ToArray();
 
         Model.People.AddRange(projectPersons);

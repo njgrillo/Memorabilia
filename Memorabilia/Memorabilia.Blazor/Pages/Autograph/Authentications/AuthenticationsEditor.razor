@@ -1,4 +1,4 @@
-﻿@inherits AutographItem<SaveAuthenticationViewModel>
+﻿@inherits AutographItem<AuthenticationEditModel>
 
 <EditPage ContinueNavigationPath="@AuthenticationsViewModel.ContinueNavigationPath"
           DomainImageRootPath="@DomainImageRootPath"
@@ -12,7 +12,7 @@
           PageFooterButtonText="@AuthenticationsViewModel.ExitButtonText"
           PageFooterNavigationPath="@AuthenticationsViewModel.BackNavigationPath"
           PageTitle="@AuthenticationsViewModel.PageTitle"
-          TItem="SaveAuthenticationsViewModel"
+          TItem="AuthenticationsEditModel"
           UseMultipleButtons="true"
           ValidationResult="@ViewModel.ValidationResult">
     <TimelineContent>

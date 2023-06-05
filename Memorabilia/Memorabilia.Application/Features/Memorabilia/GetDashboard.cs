@@ -1,11 +1,9 @@
-﻿using Memorabilia.Application.Features.Dashboard;
-using Memorabilia.Domain.Constants;
+﻿namespace Memorabilia.Application.Features.Memorabilia;
 
-namespace Memorabilia.Application.Features.Memorabilia;
-
-public record GetDashboard(int UserId) : IQuery<DashboardViewModel>
+public record GetDashboard(int UserId) 
+    : IQuery<DashboardModel>
 {
-    public class Handler : QueryHandler<GetDashboard, DashboardViewModel>
+    public class Handler : QueryHandler<GetDashboard, DashboardModel>
     {
         private readonly IUserRepository _userRepository;
 
@@ -14,12 +12,12 @@ public record GetDashboard(int UserId) : IQuery<DashboardViewModel>
             _userRepository = userRepository;
         }
 
-        protected override async Task<DashboardViewModel> Handle(GetDashboard query)
+        protected override async Task<DashboardModel> Handle(GetDashboard query)
         {
             var user = await _userRepository.Get(query.UserId);
-            var dashboardItems = user.DashboardItems.Select(userDashboard => DashboardItem.Find(userDashboard.DashboardItemId));
+            var dashboardItems = user.DashboardItems.Select(userDashboard => Constant.DashboardItem.Find(userDashboard.DashboardItemId));
          
-            return new DashboardViewModel(dashboardItems.Select(x => new DashboardItemViewModel { DashboardItem = x }).OrderBy(dashboardItem => dashboardItem.DashboardItem.Name));
+            return new DashboardModel(dashboardItems.Select(x => new DashboardItemViewModel { DashboardItem = x }).OrderBy(dashboardItem => dashboardItem.DashboardItem.Name));
         }
     }
 }

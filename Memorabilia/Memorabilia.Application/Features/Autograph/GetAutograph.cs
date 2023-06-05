@@ -1,8 +1,9 @@
 ﻿namespace Memorabilia.Application.Features.Autograph;
 
-public class GetAutograph
+public record GetAutograph(int Id)
+    : IQuery<Entity.Autograph>
 {
-    public class Handler : QueryHandler<Query, AutographViewModel>
+    public class Handler : QueryHandler<GetAutograph, Entity.Autograph>
     {
         private readonly IAutographRepository _autographRepository;
 
@@ -11,19 +12,9 @@ public class GetAutograph
             _autographRepository = autographRepository;
         }
 
-        protected override async Task<AutographViewModel> Handle(Query query)
+        protected override async Task<Entity.Autograph> Handle(GetAutograph query)
         {
-            return new AutographViewModel(await _autographRepository.Get(query.Id));
+            return await _autographRepository.Get(query.Id);
         }
-    }
-
-    public class Query : IQuery<AutographViewModel>
-    {
-        public Query(int id)
-        {
-            Id = id;
-        }
-
-        public int Id { get; }
     }
 }

@@ -6,7 +6,7 @@ public partial class CardDetails
     public IDialogService DialogService { get; set; }
 
     [Parameter]
-    public SaveProjectViewModel Model { get; set; }
+    public ProjectEditModel Model { get; set; }
 
     protected static int ItemTypeId => ItemType.TradingCard.Id;
 
@@ -35,8 +35,8 @@ public partial class CardDetails
         if (result.Canceled)
             return;
 
-        SaveProjectPersonViewModel projectPerson
-            = (SaveProjectPersonViewModel)result.Data;
+        ProjectPersonEditModel projectPerson
+            = (ProjectPersonEditModel)result.Data;
 
         //TODO: Add - Don't Link - Then link from grid - See HelmetTypeDetails
 

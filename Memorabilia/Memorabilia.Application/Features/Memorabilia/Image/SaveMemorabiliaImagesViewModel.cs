@@ -6,7 +6,7 @@ public class SaveMemorabiliaImagesViewModel : SaveViewModel
 {
     public SaveMemorabiliaImagesViewModel() { }
 
-    public SaveMemorabiliaImagesViewModel(MemorabiliaItemViewModel memorabiliaItemViewModel)
+    public SaveMemorabiliaImagesViewModel(MemorabiliaItemModel memorabiliaItemViewModel)
     {
         AutographId = memorabiliaItemViewModel.HasAutographs ? memorabiliaItemViewModel.Autographs.First().Id : null;
         HasAutographs = memorabiliaItemViewModel.HasAutographs;

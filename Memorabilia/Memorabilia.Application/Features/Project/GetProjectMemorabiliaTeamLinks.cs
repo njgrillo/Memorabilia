@@ -1,9 +1,9 @@
 ﻿namespace Memorabilia.Application.Features.Project;
 
 public record GetProjectMemorabiliaTeamLinks(Dictionary<string, object> Parameters)
-     : IQuery<MemorabiliaItemViewModel[]>
+     : IQuery<MemorabiliaItemModel[]>
 {
-    public class Handler : QueryHandler<GetProjectMemorabiliaTeamLinks, MemorabiliaItemViewModel[]>
+    public class Handler : QueryHandler<GetProjectMemorabiliaTeamLinks, MemorabiliaItemModel[]>
 {
     private readonly IMemorabiliaItemRepository _memorabiliaRepository;
 
@@ -12,14 +12,14 @@ public record GetProjectMemorabiliaTeamLinks(Dictionary<string, object> Paramete
             _memorabiliaRepository = memorabiliaRepository;
     }
 
-    protected override async Task<MemorabiliaItemViewModel[]> Handle(GetProjectMemorabiliaTeamLinks query)
+    protected override async Task<MemorabiliaItemModel[]> Handle(GetProjectMemorabiliaTeamLinks query)
     {
         Domain.Entities.Memorabilia[] memorabilia = await _memorabiliaRepository.GetAll(query.Parameters);
 
         return memorabilia.Any()
-            ? memorabilia.Select(item => new MemorabiliaItemViewModel(item))
+            ? memorabilia.Select(item => new MemorabiliaItemModel(item))
                          .ToArray()
-            : Array.Empty<MemorabiliaItemViewModel>();
+            : Array.Empty<MemorabiliaItemModel>();
     }
 }
 }

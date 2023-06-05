@@ -17,6 +17,7 @@ public partial class Memorabilia
         Book = memorabilia.Book;
         Brand = memorabilia.Brand;
         Card = memorabilia.Card;
+        CollectionMemorabilias = memorabilia.CollectionMemorabilias;
         Commissioner = memorabilia.Commissioner;
         ConditionId = memorabilia.ConditionId;
         CreateDate = memorabilia.CreateDate;
@@ -51,6 +52,7 @@ public partial class Memorabilia
     public Memorabilia(DateTime? acquiredDate,
                        bool acquiredWithAutograph,
                        int acquisitionTypeId,
+                       Collection[] collections,
                        int? conditionId,
                        decimal? cost,
                        int? denominator,
@@ -83,11 +85,14 @@ public partial class Memorabilia
                                                                 acquiredWithAutograph,
                                                                 cost,
                                                                 purchaseTypeId);
+
+        SetCollections(collections);
     }
 
     public void Set(DateTime? acquiredDate,
                     bool acquiredWithAutograph,
                     int acquisitionTypeId,
+                    Collection[] collections,
                     int? conditionId,
                     decimal? cost,
                     int? denominator,
@@ -110,6 +115,8 @@ public partial class Memorabilia
         PrivacyTypeId = privacyTypeId;
 
         MemorabiliaAcquisition.Set(acquisitionTypeId, acquiredDate, acquiredWithAutograph, cost, purchaseTypeId);
+
+        SetCollections(collections);
     }    
         
     public void SetImages(IEnumerable<string> fileNames, string primaryImageFileName)
@@ -138,6 +145,19 @@ public partial class Memorabilia
         }
 
         Brand.Set(brandId);
+    }
+
+    private void SetCollections(Collection[] collections)
+    {
+        if (!collections.Any())
+        {
+            CollectionMemorabilias = new List<CollectionMemorabilia>();
+            return;
+        }
+
+        CollectionMemorabilias 
+            = collections.Select(collection =>
+                                    new CollectionMemorabilia(collection.Id, Id)).ToList();
     }
 
     private void SetCommissioner(int commissionerId)

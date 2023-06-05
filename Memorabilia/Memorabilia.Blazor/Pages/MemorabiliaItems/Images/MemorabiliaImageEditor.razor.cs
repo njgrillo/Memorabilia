@@ -22,7 +22,7 @@ public partial class MemorabiliaImageEditor : ImagePage
 
     protected async Task OnLoad()
     {
-        ViewModel = new SaveMemorabiliaImagesViewModel(await QueryRouter.Send(new GetMemorabiliaItem(MemorabiliaId)));
+        ViewModel = new SaveMemorabiliaImagesViewModel(new MemorabiliaItemModel(await QueryRouter.Send(new GetMemorabiliaItem(MemorabiliaId))));
     }
 
     protected async Task OnSave()

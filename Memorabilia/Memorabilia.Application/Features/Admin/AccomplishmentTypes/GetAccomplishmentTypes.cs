@@ -1,21 +1,19 @@
-﻿using Memorabilia.Domain.Entities;
+﻿namespace Memorabilia.Application.Features.Admin.AccomplishmentTypes;
 
-namespace Memorabilia.Application.Features.Admin.AccomplishmentTypes;
-
-public record GetAccomplishmentTypes() : IQuery<AccomplishmentTypesViewModel>
+public record GetAccomplishmentTypes() : IQuery<AccomplishmentTypesModel>
 {
-    public class Handler : QueryHandler<GetAccomplishmentTypes, AccomplishmentTypesViewModel>
+    public class Handler : QueryHandler<GetAccomplishmentTypes, AccomplishmentTypesModel>
     {
-        private readonly IDomainRepository<AccomplishmentType> _accomplishmentTypeRepository;
+        private readonly IDomainRepository<Entity.AccomplishmentType> _accomplishmentTypeRepository;
 
-        public Handler(IDomainRepository<AccomplishmentType> accomplishmentTypeRepository)
+        public Handler(IDomainRepository<Entity.AccomplishmentType> accomplishmentTypeRepository)
         {
             _accomplishmentTypeRepository = accomplishmentTypeRepository;
         }
 
-        protected override async Task<AccomplishmentTypesViewModel> Handle(GetAccomplishmentTypes query)
+        protected override async Task<AccomplishmentTypesModel> Handle(GetAccomplishmentTypes query)
         {
-            return new AccomplishmentTypesViewModel(await _accomplishmentTypeRepository.GetAll());
+            return new AccomplishmentTypesModel(await _accomplishmentTypeRepository.GetAll());
         }
     }
 }

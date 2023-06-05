@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Application.Validators.Autograph;
 
-public class AuthenticationValidator : AbstractValidator<SaveAuthenticationViewModel>
+public class AuthenticationValidator : AbstractValidator<AuthenticationEditModel>
 {
 	public AuthenticationValidator()
 	{

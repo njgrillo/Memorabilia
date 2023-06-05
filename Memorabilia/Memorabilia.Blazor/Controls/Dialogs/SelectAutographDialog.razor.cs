@@ -10,7 +10,7 @@ public partial class SelectAutographDialog : ImagePage
 
     private bool _loaded;
     private int _memorabiliaId;
-    private SelectMemorabiliaItemViewModel _viewModel = new();
+    private SelectMemorabiliaItemModel _viewModel = new();
 
     public void Cancel()
     {
@@ -22,7 +22,7 @@ public partial class SelectAutographDialog : ImagePage
         if (MemorabiliaId == 0 || (_loaded && MemorabiliaId == _memorabiliaId))
             return;
 
-        _viewModel = await QueryRouter.Send(new GetSelectMemorabiliaItem(MemorabiliaId));
+        _viewModel = new SelectMemorabiliaItemModel(await QueryRouter.Send(new GetSelectMemorabiliaItem(MemorabiliaId)));
 
         _loaded = true;
         _memorabiliaId = MemorabiliaId;

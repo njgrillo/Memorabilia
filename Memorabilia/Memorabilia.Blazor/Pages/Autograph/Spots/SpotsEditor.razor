@@ -1,4 +1,4 @@
-﻿@inherits AutographItem<SaveSpotViewModel>
+﻿@inherits AutographItem<SpotEditModel>
 
 <EditPage ContinueNavigationPath="@ViewModel.ContinueNavigationPath"
           DomainImageRootPath="@DomainImageRootPath"
@@ -12,7 +12,7 @@
           PageFooterButtonText="@ViewModel.ExitButtonText"
           PageFooterNavigationPath="@ViewModel.BackNavigationPath"
           PageTitle="@ViewModel.PageTitle"
-          TItem="SaveSpotViewModel"
+          TItem="SpotEditModel"
           UseMultipleButtons="true">
     <TimelineContent>
         <AutographTimeline AutographId="ViewModel.AutographId" 

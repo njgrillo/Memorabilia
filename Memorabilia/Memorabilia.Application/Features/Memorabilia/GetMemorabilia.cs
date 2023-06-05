@@ -1,6 +1,7 @@
 ﻿namespace Memorabilia.Application.Features.Memorabilia;
 
-public record GetMemorabilia<T>(int MemorabiliaId) : IQuery<T> where T : new()
+public record GetMemorabilia<T>(int MemorabiliaId) 
+    : IQuery<T> where T : new()
 {
     public class Handler : QueryHandler<GetMemorabilia<T>, T>
     {
@@ -13,7 +14,7 @@ public record GetMemorabilia<T>(int MemorabiliaId) : IQuery<T> where T : new()
 
         protected override async Task<T> Handle(GetMemorabilia<T> request)
         {
-            var memorabilia = await _memorabiliaRepository.Get(request.MemorabiliaId);
+            Entity.Memorabilia memorabilia = await _memorabiliaRepository.Get(request.MemorabiliaId);
 
             return (T)Activator.CreateInstance(typeof(T), memorabilia);
         }

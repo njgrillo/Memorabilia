@@ -16,11 +16,11 @@ public class SuggestedInscriptionService
 		_awardRuleFactory = awardRuleFactory;
     }
 
-	public SuggestedInscriptionViewModel[] GenerateInscriptions(Domain.Entities.Person person)
+	public SuggestedInscriptionModel[] GenerateInscriptions(Domain.Entities.Person person)
 	{
         _person = person;
 
-        var inscriptions = new List<SuggestedInscriptionViewModel>();
+        var inscriptions = new List<SuggestedInscriptionModel>();
 
         Domain.Constants.AccomplishmentType[] accomplishmentTypes
             = _person.Accomplishments
@@ -55,9 +55,9 @@ public class SuggestedInscriptionService
         return inscriptions.ToArray();
 	}
 
-	private SuggestedInscriptionViewModel[] GenerateAccomplishmentInscriptions(Domain.Constants.AccomplishmentType[] accomplishmentTypes)
+	private SuggestedInscriptionModel[] GenerateAccomplishmentInscriptions(Domain.Constants.AccomplishmentType[] accomplishmentTypes)
 	{
-		var inscriptions = new List<SuggestedInscriptionViewModel>();
+		var inscriptions = new List<SuggestedInscriptionModel>();
 
 		foreach (Domain.Constants.AccomplishmentType accomplishmentType in accomplishmentTypes)
 		{
@@ -76,7 +76,7 @@ public class SuggestedInscriptionService
 
 					if (items.Any())
 					{
-						inscriptions.AddRange(items.Select(item => new SuggestedInscriptionViewModel
+						inscriptions.AddRange(items.Select(item => new SuggestedInscriptionModel
 							{
 								InscriptionType = Domain.Constants.InscriptionType.Accomplishment,
 								Text = item
@@ -90,18 +90,18 @@ public class SuggestedInscriptionService
 		return inscriptions.ToArray();
 	}
 
-    private static SuggestedInscriptionViewModel[] GenerateAllStarInscriptions(AllStar[] allStars)
+    private static SuggestedInscriptionModel[] GenerateAllStarInscriptions(AllStar[] allStars)
     {
-        var inscriptions = new List<SuggestedInscriptionViewModel>
+        var inscriptions = new List<SuggestedInscriptionModel>
         {
-            new SuggestedInscriptionViewModel
+            new SuggestedInscriptionModel
             {
                 InscriptionType = Domain.Constants.InscriptionType.Other,
                 Text = $"{allStars.Length}x All Star"
             }
         };
 
-        inscriptions.AddRange(allStars.Select(x => new SuggestedInscriptionViewModel
+        inscriptions.AddRange(allStars.Select(x => new SuggestedInscriptionModel
         {
             InscriptionType = Domain.Constants.InscriptionType.Other,
             Text = $"{x.Year} All Star"
@@ -111,9 +111,9 @@ public class SuggestedInscriptionService
         return inscriptions.ToArray();
     }
 
-    private SuggestedInscriptionViewModel[] GenerateAwardInscriptions(Domain.Constants.AwardType[] awardTypes)
+    private SuggestedInscriptionModel[] GenerateAwardInscriptions(Domain.Constants.AwardType[] awardTypes)
     {
-        var inscriptions = new List<SuggestedInscriptionViewModel>();
+        var inscriptions = new List<SuggestedInscriptionModel>();
 
         foreach (Domain.Constants.AwardType awardType in awardTypes)
         {
@@ -132,7 +132,7 @@ public class SuggestedInscriptionService
 
                     if (items.Any())
                     {
-                        inscriptions.AddRange(items.Select(item => new SuggestedInscriptionViewModel
+                        inscriptions.AddRange(items.Select(item => new SuggestedInscriptionModel
                         {
                             InscriptionType = Domain.Constants.InscriptionType.Award,
                             Text = item
@@ -146,13 +146,13 @@ public class SuggestedInscriptionService
         return inscriptions.ToArray();
     }
 
-    private static SuggestedInscriptionViewModel[] GenerateDraftInscriptions(Domain.Entities.Draft[] drafts)
+    private static SuggestedInscriptionModel[] GenerateDraftInscriptions(Domain.Entities.Draft[] drafts)
     {
-        var inscriptions = new List<SuggestedInscriptionViewModel>();
+        var inscriptions = new List<SuggestedInscriptionModel>();
  
         if (drafts.Any(draft => draft.Round == 1))
         {
-            inscriptions.Add(new SuggestedInscriptionViewModel 
+            inscriptions.Add(new SuggestedInscriptionModel 
             {
                 InscriptionType = Domain.Constants.InscriptionType.Draft,
                 Text = "1st Round Pick"
@@ -162,18 +162,18 @@ public class SuggestedInscriptionService
         return inscriptions.ToArray();
     }
 
-    private static SuggestedInscriptionViewModel[] GenerateHallOfFameInscriptions(Domain.Entities.HallOfFame[] hallOfFames)
+    private static SuggestedInscriptionModel[] GenerateHallOfFameInscriptions(Domain.Entities.HallOfFame[] hallOfFames)
     {
-        var inscriptions = new List<SuggestedInscriptionViewModel>();
+        var inscriptions = new List<SuggestedInscriptionModel>();
 
-        inscriptions.AddRange(hallOfFames.Select(hof => new SuggestedInscriptionViewModel
+        inscriptions.AddRange(hallOfFames.Select(hof => new SuggestedInscriptionModel
         {
             InscriptionType = Domain.Constants.InscriptionType.HallOfFame,
             Text = $"HOF{(hof.InductionYear.HasValue ? " " + hof.InductionYear.Value.ToString()[2..] : "")}"
         })
         );
 
-        inscriptions.AddRange(hallOfFames.Select(hof => new SuggestedInscriptionViewModel
+        inscriptions.AddRange(hallOfFames.Select(hof => new SuggestedInscriptionModel
         {
             InscriptionType = Domain.Constants.InscriptionType.HallOfFame,
             Text = $"HOF{(hof.InductionYear.HasValue ? " " + hof.InductionYear.Value : "")}"
@@ -184,11 +184,11 @@ public class SuggestedInscriptionService
                            .ToArray();
     }
 
-    private static SuggestedInscriptionViewModel[] GenerateNicknameInscriptions(Domain.Entities.PersonNickname[] nicknames)
+    private static SuggestedInscriptionModel[] GenerateNicknameInscriptions(Domain.Entities.PersonNickname[] nicknames)
     {
-        var inscriptions = new List<SuggestedInscriptionViewModel>();
+        var inscriptions = new List<SuggestedInscriptionModel>();
 
-        inscriptions.AddRange(nicknames.Select(nickname => new SuggestedInscriptionViewModel
+        inscriptions.AddRange(nicknames.Select(nickname => new SuggestedInscriptionModel
         {
             InscriptionType = Domain.Constants.InscriptionType.Nickname,
             Text = nickname.Nickname

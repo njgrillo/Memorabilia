@@ -13,7 +13,7 @@ public class SaveInscriptions
 
         protected override async Task Handle(Command command)
         {
-            var autograph = await _autographRepository.Get(command.AutographId);
+            Entity.Autograph autograph = await _autographRepository.Get(command.AutographId);
 
             autograph.RemoveInscriptions(command.DeletedIds);
 
@@ -30,9 +30,9 @@ public class SaveInscriptions
 
     public class Command : DomainCommand, ICommand
     {
-        private readonly SaveInscriptionsViewModel _viewModel;
+        private readonly InscriptionsEditModel _viewModel;
 
-        public Command(SaveInscriptionsViewModel viewModel)
+        public Command(InscriptionsEditModel viewModel)
         {
             _viewModel = viewModel;
             Items = _viewModel.Inscriptions;
@@ -40,8 +40,11 @@ public class SaveInscriptions
 
         public int AutographId => _viewModel.AutographId;
 
-        public int[] DeletedIds => Items.Where(item => item.IsDeleted).Select(item => item.Id).ToArray();
+        public int[] DeletedIds
+            => Items.Where(item => item.IsDeleted)
+                    .Select(item => item.Id)
+                    .ToArray();
 
-        public IEnumerable<SaveInscriptionViewModel> Items { get; set; }
+        public IEnumerable<InscriptionEditModel> Items { get; set; }
     }
 }

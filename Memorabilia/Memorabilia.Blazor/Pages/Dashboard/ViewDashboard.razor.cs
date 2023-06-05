@@ -8,7 +8,7 @@ public partial class ViewDashboard
     [Parameter]
     public int UserId { get; set; }
 
-    private DashboardViewModel _viewModel = new();
+    private DashboardModel _viewModel = new();
 
     protected async Task OnLoad()
     {

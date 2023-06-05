@@ -1,9 +1,9 @@
 ﻿namespace Memorabilia.Application.Features.Project;
 
 public record GetProjectPersonAutographLinks(Dictionary<string, object> Parameters)
-     : IQuery<AutographViewModel[]>
+     : IQuery<AutographModel[]>
 {
-    public class Handler : QueryHandler<GetProjectPersonAutographLinks, AutographViewModel[]>
+    public class Handler : QueryHandler<GetProjectPersonAutographLinks, AutographModel[]>
     {
         private readonly IAutographRepository _autographRepository;
 
@@ -12,14 +12,14 @@ public record GetProjectPersonAutographLinks(Dictionary<string, object> Paramete
             _autographRepository = autographRepository;
         }
 
-        protected override async Task<AutographViewModel[]> Handle(GetProjectPersonAutographLinks query)
+        protected override async Task<AutographModel[]> Handle(GetProjectPersonAutographLinks query)
         {
             Domain.Entities.Autograph[] autographs = await _autographRepository.GetAll(query.Parameters);
 
             return autographs.Any()
-                ? autographs.Select(autograph => new AutographViewModel(autograph))
+                ? autographs.Select(autograph => new AutographModel(autograph))
                             .ToArray()
-                : Array.Empty<AutographViewModel>();
+                : Array.Empty<AutographModel>();
         }
     }
 }

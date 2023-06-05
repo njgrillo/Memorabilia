@@ -13,28 +13,28 @@ public class SaveAutograph
 
         protected override async Task Handle(Command command)
         {
-            Domain.Entities.Autograph autograph;
+            Entity.Autograph autograph;
 
             if (command.IsNew)
             {
-                autograph = new Domain.Entities.Autograph(command.AcquiredDate,
-                                                          command.AcquisitionTypeId,
-                                                          command.ColorId,
-                                                          command.ConditionId,
-                                                          command.Cost,
-                                                          command.Denominator,
-                                                          command.EstimatedValue,
-                                                          command.FullName,
-                                                          command.Grade,
-                                                          command.MemorabiliaId,
-                                                          command.Note,
-                                                          command.Numerator,
-                                                          command.PersonalizationText,
-                                                          command.PersonId,
-                                                          command.PurchaseTypeId,
-                                                          command.ReceivedDate,
-                                                          command.SentDate,
-                                                          command.WritingInstrumentId);
+                autograph = new Entity.Autograph(command.AcquiredDate,
+                                                 command.AcquisitionTypeId,
+                                                 command.ColorId,
+                                                 command.ConditionId,
+                                                 command.Cost,
+                                                 command.Denominator,
+                                                 command.EstimatedValue,
+                                                 command.FullName,
+                                                 command.Grade,
+                                                 command.MemorabiliaId,
+                                                 command.Note,
+                                                 command.Numerator,
+                                                 command.PersonalizationText,
+                                                 command.PersonId,
+                                                 command.PurchaseTypeId,
+                                                 command.ReceivedDate,
+                                                 command.SentDate,
+                                                 command.WritingInstrumentId);
 
                 await _autographRepository.Add(autograph);
 
@@ -76,9 +76,9 @@ public class SaveAutograph
 
     public class Command : DomainCommand, ICommand
     {
-        private readonly SaveAutographViewModel _viewModel;
+        private readonly AutographEditModel _viewModel;
 
-        public Command(SaveAutographViewModel viewModel)
+        public Command(AutographEditModel viewModel)
         {
             _viewModel = viewModel;
             Id = _viewModel.Id;
@@ -124,7 +124,8 @@ public class SaveAutograph
 
         public int PersonId => _viewModel.Person.Id;
 
-        public int? PurchaseTypeId => _viewModel.PurchaseTypeId > 0 ? _viewModel.PurchaseTypeId : null;
+        public int? PurchaseTypeId 
+            => _viewModel.PurchaseTypeId > 0 ? _viewModel.PurchaseTypeId : null;
 
         public DateTime? ReceivedDate => _viewModel.ReceivedDate;
 
