@@ -12,14 +12,14 @@ public class SaveDomainViewModel : EditModel
         NavigationPath = navigationPath;
     }
 
-    public SaveDomainViewModel(DomainViewModel viewModel)
+    public SaveDomainViewModel(DomainModel viewModel)
     {
         Abbreviation = viewModel.Abbreviation;
         Id = viewModel.Id;
         Name = viewModel.Name;
     }
 
-    public SaveDomainViewModel(DomainViewModel viewModel, string domainTypeName, string imageFileName, string navigationPath)
+    public SaveDomainViewModel(DomainModel viewModel, string domainTypeName, string imageFileName, string navigationPath)
     {
         Abbreviation = viewModel.Abbreviation;
         Id = viewModel.Id;

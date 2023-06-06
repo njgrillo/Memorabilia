@@ -4,11 +4,11 @@ namespace Memorabilia.Application.Features.Memorabilia.Golfball;
 
 public class GolfballViewModel
 {
-    private readonly Domain.Entities.Memorabilia _memorabilia;
+    private readonly Entity.Memorabilia _memorabilia;
 
     public GolfballViewModel() { }
 
-    public GolfballViewModel(Domain.Entities.Memorabilia memorabilia)
+    public GolfballViewModel(Entity.Memorabilia memorabilia)
     {
         _memorabilia = memorabilia;
     }

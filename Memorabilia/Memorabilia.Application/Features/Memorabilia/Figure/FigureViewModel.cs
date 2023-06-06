@@ -4,11 +4,11 @@ namespace Memorabilia.Application.Features.Memorabilia.Figure;
 
 public class FigureViewModel
 {
-    private readonly Domain.Entities.Memorabilia _memorabilia;
+    private readonly Entity.Memorabilia _memorabilia;
 
     public FigureViewModel() { }
 
-    public FigureViewModel(Domain.Entities.Memorabilia memorabilia)
+    public FigureViewModel(Entity.Memorabilia memorabilia)
     {
         _memorabilia = memorabilia;
     }

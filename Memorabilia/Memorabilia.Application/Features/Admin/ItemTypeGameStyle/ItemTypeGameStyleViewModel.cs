@@ -4,11 +4,11 @@ namespace Memorabilia.Application.Features.Admin.ItemTypeGameStyle;
 
 public class ItemTypeGameStyleViewModel : IWithValue<int>, IWithName
 {
-    private readonly Domain.Entities.ItemTypeGameStyleType _itemTypeGameStyle;
+    private readonly Entity.ItemTypeGameStyleType _itemTypeGameStyle;
 
     public ItemTypeGameStyleViewModel() { }
 
-    public ItemTypeGameStyleViewModel(Domain.Entities.ItemTypeGameStyleType itemTypeGameStyle)
+    public ItemTypeGameStyleViewModel(Entity.ItemTypeGameStyleType itemTypeGameStyle)
     {
         _itemTypeGameStyle = itemTypeGameStyle;
     }

@@ -1,14 +1,18 @@
 ﻿namespace Memorabilia.Application.Features.Admin.AccomplishmentTypes;
 
-public class AccomplishmentTypesModel : DomainsViewModel
+public class AccomplishmentTypesModel : DomainsModel
 {
     public AccomplishmentTypesModel() { }
 
-    public AccomplishmentTypesModel(IEnumerable<Entity.DomainEntity> domainEntities) : base(domainEntities) { }
+    public AccomplishmentTypesModel(IEnumerable<Entity.DomainEntity> domainEntities) 
+        : base(domainEntities) { }
 
-    public override string ItemTitle => Constant.AdminDomainItem.AccomplishmentTypes.Item;
+    public override string ItemTitle 
+        => Constant.AdminDomainItem.AccomplishmentTypes.Item;
 
-    public override string PageTitle => Constant.AdminDomainItem.AccomplishmentTypes.Title;
+    public override string PageTitle 
+        => Constant.AdminDomainItem.AccomplishmentTypes.Title;
 
-    public override string RoutePrefix => Constant.AdminDomainItem.AccomplishmentTypes.Page;
+    public override string RoutePrefix 
+        => Constant.AdminDomainItem.AccomplishmentTypes.Page;
 }

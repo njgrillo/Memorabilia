@@ -3,7 +3,7 @@ using Memorabilia.Domain.Entities;
 
 namespace Memorabilia.Application.Features.Admin.PhotoTypes;
 
-public class PhotoTypesViewModel : DomainsViewModel
+public class PhotoTypesViewModel : DomainsModel
 {
     public PhotoTypesViewModel() { }
 

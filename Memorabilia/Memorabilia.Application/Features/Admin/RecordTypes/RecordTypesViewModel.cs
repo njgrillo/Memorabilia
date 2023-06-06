@@ -3,7 +3,7 @@ using Memorabilia.Domain.Entities;
 
 namespace Memorabilia.Application.Features.Admin.RecordTypes;
 
-public class RecordTypesViewModel : DomainsViewModel
+public class RecordTypesViewModel : DomainsModel
 {
     public RecordTypesViewModel() { }
 

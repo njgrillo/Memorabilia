@@ -2,9 +2,9 @@
 
 namespace Memorabilia.Application.Features.Admin.ProjectStatusTypes;
 
-public record GetProjectStatusType(int Id) : IQuery<DomainViewModel>
+public record GetProjectStatusType(int Id) : IQuery<DomainModel>
 {
-    public class Handler : QueryHandler<GetProjectStatusType, DomainViewModel>
+    public class Handler : QueryHandler<GetProjectStatusType, DomainModel>
     {
         private readonly IDomainRepository<ProjectStatusType> _projectStatusTypeRepository;
 
@@ -13,9 +13,9 @@ public record GetProjectStatusType(int Id) : IQuery<DomainViewModel>
             _projectStatusTypeRepository = projectStatusTypeRepository;
         }
 
-        protected override async Task<DomainViewModel> Handle(GetProjectStatusType query)
+        protected override async Task<DomainModel> Handle(GetProjectStatusType query)
         {
-            return new DomainViewModel(await _projectStatusTypeRepository.Get(query.Id));
+            return new DomainModel(await _projectStatusTypeRepository.Get(query.Id));
         }
     }
 }

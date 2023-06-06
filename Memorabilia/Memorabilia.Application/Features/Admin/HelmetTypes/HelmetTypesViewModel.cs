@@ -3,7 +3,7 @@ using Memorabilia.Domain.Entities;
 
 namespace Memorabilia.Application.Features.Admin.HelmetTypes;
 
-public class HelmetTypesViewModel : DomainsViewModel
+public class HelmetTypesViewModel : DomainsModel
 {
     public HelmetTypesViewModel() { }
 

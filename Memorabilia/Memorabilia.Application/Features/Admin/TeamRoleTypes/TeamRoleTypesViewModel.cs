@@ -3,7 +3,7 @@ using Memorabilia.Domain.Entities;
 
 namespace Memorabilia.Application.Features.Admin.TeamRoleTypes;
 
-public class TeamRoleTypesViewModel : DomainsViewModel
+public class TeamRoleTypesViewModel : DomainsModel
 {
     public TeamRoleTypesViewModel() { }
 

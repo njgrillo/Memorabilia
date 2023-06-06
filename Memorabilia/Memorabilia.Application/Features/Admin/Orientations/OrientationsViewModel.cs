@@ -3,7 +3,7 @@ using Memorabilia.Domain.Entities;
 
 namespace Memorabilia.Application.Features.Admin.Orientations;
 
-public class OrientationsViewModel : DomainsViewModel
+public class OrientationsViewModel : DomainsModel
 {
     public OrientationsViewModel() { }
 

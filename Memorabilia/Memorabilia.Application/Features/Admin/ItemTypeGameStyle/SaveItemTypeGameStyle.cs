@@ -13,11 +13,11 @@ public record SaveItemTypeGameStyle(SaveItemTypeGameStyleViewModel ViewModel) : 
 
         protected override async Task Handle(SaveItemTypeGameStyle request)
         {
-            Domain.Entities.ItemTypeGameStyleType itemTypeGameStyle;
+            Entity.ItemTypeGameStyleType itemTypeGameStyle;
 
             if (request.ViewModel.IsNew)
             {
-                itemTypeGameStyle = new Domain.Entities.ItemTypeGameStyleType(request.ViewModel.ItemType.Id, request.ViewModel.GameStyleTypeId);
+                itemTypeGameStyle = new Entity.ItemTypeGameStyleType(request.ViewModel.ItemType.Id, request.ViewModel.GameStyleTypeId);
 
                 await _itemTypeGameStyleRepository.Add(itemTypeGameStyle);
 

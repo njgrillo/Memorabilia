@@ -1,8 +1,8 @@
 ﻿namespace Memorabilia.Application.Features.Memorabilia.Bammer;
 
-public record GetBammer(int MemorabiliaId) : IQuery<BammerViewModel>
+public record GetBammer(int MemorabiliaId) : IQuery<BammerModel>
 {
-    public class Handler : QueryHandler<GetBammer, BammerViewModel>
+    public class Handler : QueryHandler<GetBammer, BammerModel>
     {
         private readonly IMemorabiliaItemRepository _memorabiliaRepository;
 
@@ -11,9 +11,9 @@ public record GetBammer(int MemorabiliaId) : IQuery<BammerViewModel>
             _memorabiliaRepository = memorabiliaRepository;
         }
 
-        protected override async Task<BammerViewModel> Handle(GetBammer query)
+        protected override async Task<BammerModel> Handle(GetBammer query)
         {
-            return new BammerViewModel(await _memorabiliaRepository.Get(query.MemorabiliaId));
+            return new BammerModel(await _memorabiliaRepository.Get(query.MemorabiliaId));
         }
     }
 }

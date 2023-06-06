@@ -2,9 +2,9 @@
 
 namespace Memorabilia.Application.Features.Admin.AwardTypes;
 
-public record GetAwardType(int Id) : IQuery<DomainViewModel>
+public record GetAwardType(int Id) : IQuery<DomainModel>
 {
-    public class Handler : QueryHandler<GetAwardType, DomainViewModel>
+    public class Handler : QueryHandler<GetAwardType, DomainModel>
     {
         private readonly IDomainRepository<AwardType> _awardTypeRepository;
 
@@ -13,9 +13,9 @@ public record GetAwardType(int Id) : IQuery<DomainViewModel>
             _awardTypeRepository = awardTypeRepository;
         }
 
-        protected override async Task<DomainViewModel> Handle(GetAwardType query)
+        protected override async Task<DomainModel> Handle(GetAwardType query)
         {
-            return new DomainViewModel(await _awardTypeRepository.Get(query.Id));
+            return new DomainModel(await _awardTypeRepository.Get(query.Id));
         }
     }
 }

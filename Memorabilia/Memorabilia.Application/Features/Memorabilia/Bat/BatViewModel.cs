@@ -4,11 +4,11 @@ namespace Memorabilia.Application.Features.Memorabilia.Bat;
 
 public class BatViewModel
 {
-    private readonly Domain.Entities.Memorabilia _memorabilia;
+    private readonly Entity.Memorabilia _memorabilia;
 
     public BatViewModel() { }
 
-    public BatViewModel(Domain.Entities.Memorabilia memorabilia)
+    public BatViewModel(Entity.Memorabilia memorabilia)
     {
         _memorabilia = memorabilia;
     }

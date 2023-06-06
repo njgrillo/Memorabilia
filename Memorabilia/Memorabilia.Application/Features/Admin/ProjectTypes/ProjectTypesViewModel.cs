@@ -3,7 +3,7 @@ using Memorabilia.Domain.Entities;
 
 namespace Memorabilia.Application.Features.Admin.ProjectTypes;
 
-public class ProjectTypesViewModel : DomainsViewModel
+public class ProjectTypesViewModel : DomainsModel
 {
     public ProjectTypesViewModel() { }
 

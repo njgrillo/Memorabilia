@@ -2,11 +2,11 @@
 
 public class UserViewModel
 {
-    private readonly Domain.Entities.User _user;
+    private readonly Entity.User _user;
 
     public UserViewModel() { }
 
-    public UserViewModel(Domain.Entities.User user)
+    public UserViewModel(Entity.User user)
     {
         _user = user;
     }

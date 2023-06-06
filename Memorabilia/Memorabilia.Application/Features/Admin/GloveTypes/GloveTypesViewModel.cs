@@ -3,7 +3,7 @@ using Memorabilia.Domain.Entities;
 
 namespace Memorabilia.Application.Features.Admin.GloveTypes;
 
-public class GloveTypesViewModel : DomainsViewModel
+public class GloveTypesViewModel : DomainsModel
 {
     public GloveTypesViewModel() { }
 

@@ -3,7 +3,7 @@ using Memorabilia.Domain.Entities;
 
 namespace Memorabilia.Application.Features.Admin.Conditions;
 
-public class ConditionsViewModel : DomainsViewModel
+public class ConditionsViewModel : DomainsModel
 {
     public ConditionsViewModel() { }
 

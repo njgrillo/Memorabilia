@@ -4,11 +4,11 @@ namespace Memorabilia.Application.Features.Memorabilia.Lithograph;
 
 public class LithographViewModel
 {
-    private readonly Domain.Entities.Memorabilia _memorabilia;
+    private readonly Entity.Memorabilia _memorabilia;
 
     public LithographViewModel() { }
 
-    public LithographViewModel(Domain.Entities.Memorabilia memorabilia)
+    public LithographViewModel(Entity.Memorabilia memorabilia)
     {
         _memorabilia = memorabilia;
     }

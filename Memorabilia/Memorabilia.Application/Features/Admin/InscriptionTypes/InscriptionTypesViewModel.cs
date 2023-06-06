@@ -3,7 +3,7 @@ using Memorabilia.Domain.Entities;
 
 namespace Memorabilia.Application.Features.Admin.InscriptionTypes;
 
-public class InscriptionTypesViewModel : DomainsViewModel
+public class InscriptionTypesViewModel : DomainsModel
 {
     public InscriptionTypesViewModel() { }
 

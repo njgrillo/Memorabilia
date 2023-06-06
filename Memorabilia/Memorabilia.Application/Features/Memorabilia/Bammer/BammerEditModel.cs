@@ -1,16 +1,14 @@
-﻿using Memorabilia.Domain.Constants;
+﻿namespace Memorabilia.Application.Features.Memorabilia.Bammer;
 
-namespace Memorabilia.Application.Features.Memorabilia.Bammer;
-
-public class SaveBammerViewModel : MemorabiliaItemEditViewModel
+public class BammerEditModel : MemorabiliaItemEditViewModel
 {
-    public SaveBammerViewModel() 
+    public BammerEditModel() 
     {
-        BrandId = Brand.Salvino.Id;
-        LevelTypeId = LevelType.Professional.Id;
+        BrandId = Constant.Brand.Salvino.Id;
+        LevelTypeId = Constant.LevelType.Professional.Id;
     }
 
-    public SaveBammerViewModel(BammerViewModel viewModel)
+    public BammerEditModel(BammerModel viewModel)
     {
         BammerTypeId = viewModel.Bammer?.BammerTypeId ?? 0;
         BrandId = viewModel.Brand.BrandId;
@@ -25,13 +23,16 @@ public class SaveBammerViewModel : MemorabiliaItemEditViewModel
 
     public int BammerTypeId { get; set; }
 
-    public bool CanHaveBammerType => BrandId == Brand.Salvino.Id;
+    public bool CanHaveBammerType 
+        => BrandId == Constant.Brand.Salvino.Id;
 
-    public override string ImageFileName => Constant.ImageFileName.Bammer;
+    public override string ImageFileName 
+        => Constant.ImageFileName.Bammer;
 
     public bool InPackage { get; set; }
 
-    public override ItemType ItemType => ItemType.Bammer;
+    public override Constant.ItemType ItemType 
+        => Constant.ItemType.Bammer;
 
     public int? Year { get; set; }
 }

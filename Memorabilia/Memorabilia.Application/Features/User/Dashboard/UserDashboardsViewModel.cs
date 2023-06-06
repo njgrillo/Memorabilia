@@ -22,7 +22,7 @@ public class UserDashboardsViewModel : Model
             }
             else
             {
-                userDashboardItems.Add(new UserDashboardViewModel(new Domain.Entities.UserDashboard(UserId, dashboardItem.Id)));
+                userDashboardItems.Add(new UserDashboardViewModel(new Entity.UserDashboard(UserId, dashboardItem.Id)));
             }
         }
 

@@ -3,7 +3,7 @@ using Memorabilia.Domain.Entities;
 
 namespace Memorabilia.Application.Features.Admin.Spots;
 
-public class SpotsViewModel : DomainsViewModel
+public class SpotsViewModel : DomainsModel
 {
     public SpotsViewModel() { }
 

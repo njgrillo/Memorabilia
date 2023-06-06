@@ -2,11 +2,11 @@
 
 public class SportLeagueLevelViewModel
 {
-    private readonly Domain.Entities.SportLeagueLevel _sportLeagueLevel;
+    private readonly Entity.SportLeagueLevel _sportLeagueLevel;
 
     public SportLeagueLevelViewModel() { }
 
-    public SportLeagueLevelViewModel(Domain.Entities.SportLeagueLevel sportLeagueLevel)
+    public SportLeagueLevelViewModel(Entity.SportLeagueLevel sportLeagueLevel)
     {
         _sportLeagueLevel = sportLeagueLevel;
     }

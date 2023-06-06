@@ -4,11 +4,11 @@ namespace Memorabilia.Application.Features.Memorabilia.Pylon;
 
 public class PylonViewModel
 {
-    private readonly Domain.Entities.Memorabilia _memorabilia;
+    private readonly Entity.Memorabilia _memorabilia;
 
     public PylonViewModel() { }
 
-    public PylonViewModel(Domain.Entities.Memorabilia memorabilia)
+    public PylonViewModel(Entity.Memorabilia memorabilia)
     {
         _memorabilia = memorabilia;
     }

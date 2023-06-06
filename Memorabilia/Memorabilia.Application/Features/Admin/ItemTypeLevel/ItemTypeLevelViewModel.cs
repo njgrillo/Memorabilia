@@ -4,11 +4,11 @@ namespace Memorabilia.Application.Features.Admin.ItemTypeLevel;
 
 public class ItemTypeLevelViewModel : IWithValue<int>, IWithName
 {
-    private readonly Domain.Entities.ItemTypeLevel _itemTypeLevel;
+    private readonly Entity.ItemTypeLevel _itemTypeLevel;
 
     public ItemTypeLevelViewModel() { }
 
-    public ItemTypeLevelViewModel(Domain.Entities.ItemTypeLevel itemTypeLevel)
+    public ItemTypeLevelViewModel(Entity.ItemTypeLevel itemTypeLevel)
     {
         _itemTypeLevel = itemTypeLevel;
     }

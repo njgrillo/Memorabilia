@@ -3,7 +3,7 @@ using Memorabilia.Domain.Entities;
 
 namespace Memorabilia.Application.Features.Admin.Occupations;
 
-public class OccupationsViewModel : DomainsViewModel
+public class OccupationsViewModel : DomainsModel
 {
     public OccupationsViewModel() { }
 

@@ -3,7 +3,7 @@ using Memorabilia.Domain.Entities;
 
 namespace Memorabilia.Application.Features.Admin.JerseyTypes;
 
-public class JerseyTypesViewModel : DomainsViewModel
+public class JerseyTypesViewModel : DomainsModel
 {
     public JerseyTypesViewModel() { }
 

@@ -3,7 +3,7 @@ using Memorabilia.Domain.Entities;
 
 namespace Memorabilia.Application.Features.Admin.CerealTypes;
 
-public class CerealTypesViewModel : DomainsViewModel
+public class CerealTypesViewModel : DomainsModel
 {
     public CerealTypesViewModel() { }
 

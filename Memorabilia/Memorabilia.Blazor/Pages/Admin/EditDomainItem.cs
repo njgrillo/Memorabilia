@@ -23,7 +23,7 @@ public abstract class EditDomainItem<T> : CommandQuery where T : DomainItemConst
        ViewModel = new SaveDomainViewModel(Id, DomainTypeName, ImageFileName, NavigationPath);
     }
 
-    protected async Task OnLoad(IRequest<DomainViewModel> request)
+    protected async Task OnLoad(IRequest<DomainModel> request)
     {
         ViewModel = new SaveDomainViewModel(await QueryRouter.Send(request),
                                             DomainTypeName,

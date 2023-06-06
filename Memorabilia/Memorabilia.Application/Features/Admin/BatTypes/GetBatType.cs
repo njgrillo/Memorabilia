@@ -2,9 +2,9 @@
 
 namespace Memorabilia.Application.Features.Admin.BatTypes;
 
-public record GetBatType(int Id) : IQuery<DomainViewModel>
+public record GetBatType(int Id) : IQuery<DomainModel>
 {
-    public class Handler : QueryHandler<GetBatType, DomainViewModel>
+    public class Handler : QueryHandler<GetBatType, DomainModel>
     {
         private readonly IDomainRepository<BatType> _batTypeRepository;
 
@@ -13,9 +13,9 @@ public record GetBatType(int Id) : IQuery<DomainViewModel>
             _batTypeRepository = batTypeRepository;
         }
 
-        protected override async Task<DomainViewModel> Handle(GetBatType query)
+        protected override async Task<DomainModel> Handle(GetBatType query)
         {
-            return new DomainViewModel(await _batTypeRepository.Get(query.Id));
+            return new DomainModel(await _batTypeRepository.Get(query.Id));
         }
     }
 }

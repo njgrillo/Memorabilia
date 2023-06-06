@@ -1,12 +1,12 @@
 ﻿namespace Memorabilia.Application.Features.Admin;
 
-public class DomainViewModel
+public class DomainModel
 {
-    private readonly Domain.Entities.DomainEntity _domainEntity;
+    private readonly Entity.DomainEntity _domainEntity;
 
-    public DomainViewModel() { }
+    public DomainModel() { }
 
-    public DomainViewModel(Domain.Entities.DomainEntity domainEntity)
+    public DomainModel(Entity.DomainEntity domainEntity)
     {
         _domainEntity = domainEntity;
     }

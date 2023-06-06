@@ -2,7 +2,7 @@
     <Content>
         <MudTable Bordered="false"
                   Dense="false"
-                  Filter="new Func<DomainViewModel,bool>(FilterFunc1)"
+                  Filter="new Func<DomainModel,bool>(FilterFunc1)"
                   Hover="true"
                   Items="@DomainEntities.OrderBy(item => item.Name)"
                   Striped="true">

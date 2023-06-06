@@ -4,11 +4,11 @@ namespace Memorabilia.Application.Features.Memorabilia.Ticket;
 
 public class TicketViewModel
 {
-    private readonly Domain.Entities.Memorabilia _memorabilia;
+    private readonly Entity.Memorabilia _memorabilia;
 
     public TicketViewModel() { }
 
-    public TicketViewModel(Domain.Entities.Memorabilia memorabilia)
+    public TicketViewModel(Entity.Memorabilia memorabilia)
     {
         _memorabilia = memorabilia;
     }

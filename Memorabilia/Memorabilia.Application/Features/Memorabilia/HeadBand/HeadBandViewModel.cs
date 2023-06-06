@@ -4,11 +4,11 @@ namespace Memorabilia.Application.Features.Memorabilia.HeadBand;
 
 public class HeadBandViewModel
 {
-    private readonly Domain.Entities.Memorabilia _memorabilia;
+    private readonly Entity.Memorabilia _memorabilia;
 
     public HeadBandViewModel() { }
 
-    public HeadBandViewModel(Domain.Entities.Memorabilia memorabilia)
+    public HeadBandViewModel(Entity.Memorabilia memorabilia)
     {
         _memorabilia = memorabilia;
     }

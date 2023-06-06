@@ -4,11 +4,11 @@ namespace Memorabilia.Application.Features.Memorabilia.CompactDisc;
 
 public class CompactDiscViewModel
 {
-    private readonly Domain.Entities.Memorabilia _memorabilia;
+    private readonly Entity.Memorabilia _memorabilia;
 
     public CompactDiscViewModel() { }
 
-    public CompactDiscViewModel(Domain.Entities.Memorabilia memorabilia)
+    public CompactDiscViewModel(Entity.Memorabilia memorabilia)
     {
         _memorabilia = memorabilia;
     }

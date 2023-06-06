@@ -4,11 +4,11 @@ namespace Memorabilia.Application.Features.Memorabilia.Trunks;
 
 public class TrunkViewModel : Model
 {
-    private readonly Domain.Entities.Memorabilia _memorabilia;
+    private readonly Entity.Memorabilia _memorabilia;
 
     public TrunkViewModel() { }
 
-    public TrunkViewModel(Domain.Entities.Memorabilia memorabilia)
+    public TrunkViewModel(Entity.Memorabilia memorabilia)
     {
         _memorabilia = memorabilia;
     }

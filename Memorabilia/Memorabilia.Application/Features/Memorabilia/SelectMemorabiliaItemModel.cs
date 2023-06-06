@@ -4,7 +4,7 @@ public class SelectMemorabiliaItemModel
 {
     public SelectMemorabiliaItemModel() { }
 
-    public SelectMemorabiliaItemModel(Domain.Entities.Memorabilia memorabilia)
+    public SelectMemorabiliaItemModel(Entity.Memorabilia memorabilia)
     {
         Autographs = memorabilia.Autographs
                                 .Select(autograph => new AutographModel(autograph));

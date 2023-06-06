@@ -4,11 +4,11 @@ namespace Memorabilia.Application.Features.Memorabilia.IndexCard;
 
 public class IndexCardViewModel
 {
-    private readonly Domain.Entities.Memorabilia _memorabilia;
+    private readonly Entity.Memorabilia _memorabilia;
 
     public IndexCardViewModel() { }
 
-    public IndexCardViewModel(Domain.Entities.Memorabilia memorabilia)
+    public IndexCardViewModel(Entity.Memorabilia memorabilia)
     {
         _memorabilia = memorabilia;
     }

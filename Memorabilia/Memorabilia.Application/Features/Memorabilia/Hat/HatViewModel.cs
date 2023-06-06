@@ -4,11 +4,11 @@ namespace Memorabilia.Application.Features.Memorabilia.Hat;
 
 public class HatViewModel
 {
-    private readonly Domain.Entities.Memorabilia _memorabilia;
+    private readonly Entity.Memorabilia _memorabilia;
 
     public HatViewModel() { }
 
-    public HatViewModel(Domain.Entities.Memorabilia memorabilia)
+    public HatViewModel(Entity.Memorabilia memorabilia)
     {
         _memorabilia = memorabilia;
     }

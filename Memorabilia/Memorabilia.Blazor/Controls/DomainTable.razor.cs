@@ -12,7 +12,7 @@ public partial class DomainTable : ComponentBase
     public ISnackbar Snackbar { get; set; }
 
     [Parameter]
-    public List<DomainViewModel> DomainEntities { get; set; }
+    public List<DomainModel> DomainEntities { get; set; }
 
     [Parameter]
     public string DomainItemName { get; set; }
@@ -34,7 +34,7 @@ public partial class DomainTable : ComponentBase
 
     private string _search;
 
-    private bool FilterFunc1(DomainViewModel domainViewModel) => FilterFunc(domainViewModel, _search);
+    private bool FilterFunc1(DomainModel domainViewModel) => FilterFunc(domainViewModel, _search);
 
     protected async Task ShowDeleteConfirm(int id)
     {
@@ -62,7 +62,7 @@ public partial class DomainTable : ComponentBase
         Snackbar.Add($"{DomainItemName} was deleted successfully!", Severity.Success);
     }
 
-    private static bool FilterFunc(DomainViewModel domainViewModel, string search)
+    private static bool FilterFunc(DomainModel domainViewModel, string search)
     {
         return search.IsNullOrEmpty() ||
                domainViewModel.Name.Contains(search, StringComparison.OrdinalIgnoreCase) ||

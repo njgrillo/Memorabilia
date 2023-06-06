@@ -3,7 +3,7 @@ using Memorabilia.Domain.Entities;
 
 namespace Memorabilia.Application.Features.Admin.LeaderTypes;
 
-public class LeaderTypesViewModel : DomainsViewModel
+public class LeaderTypesViewModel : DomainsModel
 {
     public LeaderTypesViewModel() { }
 

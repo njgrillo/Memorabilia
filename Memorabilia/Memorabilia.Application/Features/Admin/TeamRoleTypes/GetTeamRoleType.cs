@@ -2,9 +2,9 @@
 
 namespace Memorabilia.Application.Features.Admin.TeamRoleTypes;
 
-public record GetTeamRoleType(int Id) : IQuery<DomainViewModel>
+public record GetTeamRoleType(int Id) : IQuery<DomainModel>
 {
-    public class Handler : QueryHandler<GetTeamRoleType, DomainViewModel>
+    public class Handler : QueryHandler<GetTeamRoleType, DomainModel>
     {
         private readonly IDomainRepository<TeamRoleType> _TeamRoleTypeRepository;
 
@@ -13,9 +13,9 @@ public record GetTeamRoleType(int Id) : IQuery<DomainViewModel>
             _TeamRoleTypeRepository = TeamRoleTypeRepository;
         }
 
-        protected override async Task<DomainViewModel> Handle(GetTeamRoleType query)
+        protected override async Task<DomainModel> Handle(GetTeamRoleType query)
         {
-            return new DomainViewModel(await _TeamRoleTypeRepository.Get(query.Id));
+            return new DomainModel(await _TeamRoleTypeRepository.Get(query.Id));
         }
     }
 }

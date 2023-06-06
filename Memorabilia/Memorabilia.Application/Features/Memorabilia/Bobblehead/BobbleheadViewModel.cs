@@ -4,11 +4,11 @@ namespace Memorabilia.Application.Features.Memorabilia.Bobblehead;
 
 public class BobbleheadViewModel
 {
-    private readonly Domain.Entities.Memorabilia _memorabilia;
+    private readonly Entity.Memorabilia _memorabilia;
 
     public BobbleheadViewModel() { }
 
-    public BobbleheadViewModel(Domain.Entities.Memorabilia memorabilia)
+    public BobbleheadViewModel(Entity.Memorabilia memorabilia)
     {
         _memorabilia = memorabilia;
     }

@@ -2,9 +2,9 @@
 
 namespace Memorabilia.Application.Features.Admin.CerealTypes;
 
-public record GetCerealType(int Id) : IQuery<DomainViewModel>
+public record GetCerealType(int Id) : IQuery<DomainModel>
 {
-    public class Handler : QueryHandler<GetCerealType, DomainViewModel>
+    public class Handler : QueryHandler<GetCerealType, DomainModel>
     {
         private readonly IDomainRepository<CerealType> _CerealTypeRepository;
 
@@ -13,9 +13,9 @@ public record GetCerealType(int Id) : IQuery<DomainViewModel>
             _CerealTypeRepository = CerealTypeRepository;
         }
 
-        protected override async Task<DomainViewModel> Handle(GetCerealType query)
+        protected override async Task<DomainModel> Handle(GetCerealType query)
         {
-            return new DomainViewModel(await _CerealTypeRepository.Get(query.Id));
+            return new DomainModel(await _CerealTypeRepository.Get(query.Id));
         }
     }
 }

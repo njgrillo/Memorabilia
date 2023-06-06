@@ -3,7 +3,7 @@ using Memorabilia.Domain.Entities;
 
 namespace Memorabilia.Application.Features.Admin.AuthenticationCompanies;
 
-public class AuthenticationCompaniesViewModel : DomainsViewModel
+public class AuthenticationCompaniesViewModel : DomainsModel
 {
     public AuthenticationCompaniesViewModel() { }
 

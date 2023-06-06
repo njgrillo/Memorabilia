@@ -3,7 +3,7 @@ using Memorabilia.Domain.Entities;
 
 namespace Memorabilia.Application.Features.Admin.Colors;
 
-public class ColorsViewModel : DomainsViewModel
+public class ColorsViewModel : DomainsModel
 {
     public ColorsViewModel() { }
 

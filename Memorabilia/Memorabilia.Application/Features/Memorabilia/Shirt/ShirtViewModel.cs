@@ -4,11 +4,11 @@ namespace Memorabilia.Application.Features.Memorabilia.Shirt;
 
 public class ShirtViewModel
 {
-    private readonly Domain.Entities.Memorabilia _memorabilia;
+    private readonly Entity.Memorabilia _memorabilia;
 
     public ShirtViewModel() { }
 
-    public ShirtViewModel(Domain.Entities.Memorabilia memorabilia)
+    public ShirtViewModel(Entity.Memorabilia memorabilia)
     {
         _memorabilia = memorabilia;
     }

@@ -4,11 +4,11 @@ namespace Memorabilia.Application.Features.Memorabilia.Tennisball;
 
 public class TennisballViewModel
 {
-    private readonly Domain.Entities.Memorabilia _memorabilia;
+    private readonly Entity.Memorabilia _memorabilia;
 
     public TennisballViewModel() { }
 
-    public TennisballViewModel(Domain.Entities.Memorabilia memorabilia)
+    public TennisballViewModel(Entity.Memorabilia memorabilia)
     {
         _memorabilia = memorabilia;
     }

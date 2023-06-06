@@ -1,10 +1,8 @@
-﻿using Memorabilia.Domain.Constants;
+﻿namespace Memorabilia.Application.Features.Admin;
 
-namespace Memorabilia.Application.Features.Admin;
-
-public class AdminDomainItemViewModel
+public class AdminDomainItemModel
 {
-    public AdminDomainItemViewModel(AdminDomainItem adminDomainItem)
+    public AdminDomainItemModel(Constant.AdminDomainItem adminDomainItem)
     {
         Description = adminDomainItem.Description;
         ImageFileName = adminDomainItem.ImageFileName; 

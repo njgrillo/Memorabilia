@@ -1,10 +1,10 @@
-﻿@inherits MemorabiliaItem<SaveBammerViewModel>
+﻿@inherits MemorabiliaItem<BammerEditModel>
 
 <EditMemorabiliaPage DomainImageRootPath="@DomainImageRootPath"
                      Item="ViewModel"
                      OnLoad="OnLoad"
                      OnSave="OnSave" 
-                     TItem="SaveBammerViewModel">
+                     TItem="BammerEditModel">
     <Content>
         <MemorabiliaItemEditor CanFilterPersonBySport="true" 
                                DisplayItemTypeGameStyle="false" 
@@ -13,7 +13,7 @@
                                DisplayMultiPersonSelector="true"
                                DisplayMultiTeamSelector="true"
                                DisplaySingleSportSelector="true"
-                               TItem="SaveBammerViewModel"
+                               TItem="BammerEditModel"
                                ViewModel="ViewModel">
             <AdditionalContent>
                 <PrettyBlazor.Condition Evaluation="ViewModel.CanHaveBammerType">

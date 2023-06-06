@@ -3,7 +3,7 @@ using Memorabilia.Domain.Entities;
 
 namespace Memorabilia.Application.Features.Admin.BammerTypes;
 
-public class BammerTypesViewModel : DomainsViewModel
+public class BammerTypesViewModel : DomainsModel
 {
     public BammerTypesViewModel() { }
 

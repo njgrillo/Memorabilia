@@ -4,11 +4,11 @@ namespace Memorabilia.Application.Features.Memorabilia.Glove;
 
 public class GloveViewModel
 {
-    private readonly Domain.Entities.Memorabilia _memorabilia;
+    private readonly Entity.Memorabilia _memorabilia;
 
     public GloveViewModel() { }
 
-    public GloveViewModel(Domain.Entities.Memorabilia memorabilia)
+    public GloveViewModel(Entity.Memorabilia memorabilia)
     {
         _memorabilia = memorabilia;
     }

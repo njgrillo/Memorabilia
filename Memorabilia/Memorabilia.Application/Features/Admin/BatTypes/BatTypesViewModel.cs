@@ -3,7 +3,7 @@ using Memorabilia.Domain.Entities;
 
 namespace Memorabilia.Application.Features.Admin.BatTypes;
 
-public class BatTypesViewModel : DomainsViewModel
+public class BatTypesViewModel : DomainsModel
 {
     public BatTypesViewModel() { }
 

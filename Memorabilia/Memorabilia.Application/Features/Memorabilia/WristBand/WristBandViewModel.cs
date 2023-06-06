@@ -4,11 +4,11 @@ namespace Memorabilia.Application.Features.Memorabilia.WristBand;
 
 public class WristBandViewModel : Model
 {
-    private readonly Domain.Entities.Memorabilia _memorabilia;
+    private readonly Entity.Memorabilia _memorabilia;
 
     public WristBandViewModel() { }
 
-    public WristBandViewModel(Domain.Entities.Memorabilia memorabilia)
+    public WristBandViewModel(Entity.Memorabilia memorabilia)
     {
         _memorabilia = memorabilia;
     }

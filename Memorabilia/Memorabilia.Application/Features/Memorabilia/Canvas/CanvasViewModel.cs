@@ -4,11 +4,11 @@ namespace Memorabilia.Application.Features.Memorabilia.Canvas;
 
 public class CanvasViewModel
 {
-    private readonly Domain.Entities.Memorabilia _memorabilia;
+    private readonly Entity.Memorabilia _memorabilia;
 
     public CanvasViewModel() { }
 
-    public CanvasViewModel(Domain.Entities.Memorabilia memorabilia)
+    public CanvasViewModel(Entity.Memorabilia memorabilia)
     {
         _memorabilia = memorabilia;
     }

@@ -5,7 +5,7 @@ namespace Memorabilia.Blazor.Controls;
 public partial class DomainItems : ComponentBase
 {
     [Parameter]
-    public DomainsViewModel Items
+    public DomainsModel Items
     {
         get
         {
@@ -23,7 +23,7 @@ public partial class DomainItems : ComponentBase
     [Parameter]
     public EventCallback OnLoad { get; set; }
 
-    protected DomainsViewModel ViewModel;
+    protected DomainsModel ViewModel;
 
     protected async Task Delete(SaveDomainViewModel viewModel)
     {

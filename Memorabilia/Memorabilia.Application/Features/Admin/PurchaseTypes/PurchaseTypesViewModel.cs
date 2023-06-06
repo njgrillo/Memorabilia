@@ -3,7 +3,7 @@ using Memorabilia.Domain.Entities;
 
 namespace Memorabilia.Application.Features.Admin.PurchaseTypes;
 
-public class PurchaseTypesViewModel : DomainsViewModel
+public class PurchaseTypesViewModel : DomainsModel
 {
     public PurchaseTypesViewModel() { }
 

@@ -3,7 +3,7 @@ using Memorabilia.Domain.Entities;
 
 namespace Memorabilia.Application.Features.Admin.Sizes;
 
-public class SizesViewModel : DomainsViewModel
+public class SizesViewModel : DomainsModel
 {
     public SizesViewModel() { }
 

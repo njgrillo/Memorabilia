@@ -3,7 +3,7 @@ using Memorabilia.Domain.Entities;
 
 namespace Memorabilia.Application.Features.Admin.BaseballTypes;
 
-public class BaseballTypesViewModel : DomainsViewModel
+public class BaseballTypesViewModel : DomainsModel
 {
     public BaseballTypesViewModel() { }
 

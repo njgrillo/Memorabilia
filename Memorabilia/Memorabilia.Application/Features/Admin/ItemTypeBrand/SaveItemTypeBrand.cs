@@ -13,11 +13,11 @@ public record SaveItemTypeBrand(SaveItemTypeBrandViewModel ViewModel) : ICommand
 
         protected override async Task Handle(SaveItemTypeBrand request)
         {
-            Domain.Entities.ItemTypeBrand itemTypeBrand;
+            Entity.ItemTypeBrand itemTypeBrand;
 
             if (request.ViewModel.IsNew)
             {
-                itemTypeBrand = new Domain.Entities.ItemTypeBrand(request.ViewModel.ItemType.Id, request.ViewModel.Brand.Id);
+                itemTypeBrand = new Entity.ItemTypeBrand(request.ViewModel.ItemType.Id, request.ViewModel.Brand.Id);
 
                 await _itemTypeBrandRepository.Add(itemTypeBrand);
 

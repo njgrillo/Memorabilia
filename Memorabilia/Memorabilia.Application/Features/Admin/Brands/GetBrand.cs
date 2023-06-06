@@ -2,9 +2,9 @@
 
 namespace Memorabilia.Application.Features.Admin.Brands;
 
-public record GetBrand(int Id) : IQuery<DomainViewModel>
+public record GetBrand(int Id) : IQuery<DomainModel>
 {
-    public class Handler : QueryHandler<GetBrand, DomainViewModel>
+    public class Handler : QueryHandler<GetBrand, DomainModel>
     {
         private readonly IDomainRepository<Brand> _brandRepository;
 
@@ -13,9 +13,9 @@ public record GetBrand(int Id) : IQuery<DomainViewModel>
             _brandRepository = brandRepository;
         }
 
-        protected override async Task<DomainViewModel> Handle(GetBrand query)
+        protected override async Task<DomainModel> Handle(GetBrand query)
         {
-            return new DomainViewModel(await _brandRepository.Get(query.Id));
+            return new DomainModel(await _brandRepository.Get(query.Id));
         }
     }
 }

@@ -3,7 +3,7 @@ using Memorabilia.Domain.Entities;
 
 namespace Memorabilia.Application.Features.Admin.MagazineTypes;
 
-public class MagazineTypesViewModel : DomainsViewModel
+public class MagazineTypesViewModel : DomainsModel
 {
     public MagazineTypesViewModel() { }
 

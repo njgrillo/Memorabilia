@@ -2,9 +2,9 @@
 
 namespace Memorabilia.Application.Features.Admin.BammerTypes;
 
-public record GetBammerType(int Id) : IQuery<DomainViewModel>
+public record GetBammerType(int Id) : IQuery<DomainModel>
 {
-    public class Handler : QueryHandler<GetBammerType, DomainViewModel>
+    public class Handler : QueryHandler<GetBammerType, DomainModel>
     {
         private readonly IDomainRepository<BammerType> _bammerTypeRepository;
 
@@ -13,9 +13,9 @@ public record GetBammerType(int Id) : IQuery<DomainViewModel>
             _bammerTypeRepository = bammerTypeRepository;
         }
 
-        protected override async Task<DomainViewModel> Handle(GetBammerType query)
+        protected override async Task<DomainModel> Handle(GetBammerType query)
         {
-            return new DomainViewModel(await _bammerTypeRepository.Get(query.Id));
+            return new DomainModel(await _bammerTypeRepository.Get(query.Id));
         }
     }
 }

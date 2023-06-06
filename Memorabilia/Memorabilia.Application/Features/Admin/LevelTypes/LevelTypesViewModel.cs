@@ -3,7 +3,7 @@ using Memorabilia.Domain.Entities;
 
 namespace Memorabilia.Application.Features.Admin.LevelTypes;
 
-public class LevelTypesViewModel : DomainsViewModel
+public class LevelTypesViewModel : DomainsModel
 {
     public LevelTypesViewModel() { }
 

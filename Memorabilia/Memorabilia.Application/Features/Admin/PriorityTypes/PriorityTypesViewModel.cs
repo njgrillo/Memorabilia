@@ -3,7 +3,7 @@ using Memorabilia.Domain.Entities;
 
 namespace Memorabilia.Application.Features.Admin.PriorityTypes;
 
-public class PriorityTypesViewModel : DomainsViewModel
+public class PriorityTypesViewModel : DomainsModel
 {
     public PriorityTypesViewModel() { }
 

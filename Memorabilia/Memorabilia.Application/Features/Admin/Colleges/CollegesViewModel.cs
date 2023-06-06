@@ -3,7 +3,7 @@ using Memorabilia.Domain.Entities;
 
 namespace Memorabilia.Application.Features.Admin.Colleges;
 
-public class CollegesViewModel : DomainsViewModel
+public class CollegesViewModel : DomainsModel
 {
     public CollegesViewModel() { }
 

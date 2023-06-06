@@ -3,7 +3,7 @@ using Memorabilia.Domain.Entities;
 
 namespace Memorabilia.Application.Features.Admin.ProjectStatusTypes;
 
-public class ProjectStatusTypesViewModel : DomainsViewModel
+public class ProjectStatusTypesViewModel : DomainsModel
 {
     public ProjectStatusTypesViewModel() { }
 

@@ -4,11 +4,11 @@ namespace Memorabilia.Application.Features.Memorabilia.Painting;
 
 public class PaintingViewModel
 {
-    private readonly Domain.Entities.Memorabilia _memorabilia;
+    private readonly Entity.Memorabilia _memorabilia;
 
     public PaintingViewModel() { }
 
-    public PaintingViewModel(Domain.Entities.Memorabilia memorabilia)
+    public PaintingViewModel(Entity.Memorabilia memorabilia)
     {
         _memorabilia = memorabilia;
     }

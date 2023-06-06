@@ -3,7 +3,7 @@ using Memorabilia.Domain.Entities;
 
 namespace Memorabilia.Application.Features.Admin.PrivacyTypes;
 
-public class PrivacyTypesViewModel : DomainsViewModel
+public class PrivacyTypesViewModel : DomainsModel
 {
     public PrivacyTypesViewModel() { }
 

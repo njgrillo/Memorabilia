@@ -3,7 +3,7 @@ using Memorabilia.Domain.Entities;
 
 namespace Memorabilia.Application.Features.Admin.InternationalHallOfFameTypes;
 
-public class InternationalHallOfFameTypesViewModel : DomainsViewModel
+public class InternationalHallOfFameTypesViewModel : DomainsModel
 {
     public InternationalHallOfFameTypesViewModel() { }
 

@@ -2,9 +2,9 @@
 
 namespace Memorabilia.Application.Features.Admin.PriorityTypes;
 
-public record GetPriorityType(int Id) : IQuery<DomainViewModel>
+public record GetPriorityType(int Id) : IQuery<DomainModel>
 {
-    public class Handler : QueryHandler<GetPriorityType, DomainViewModel>
+    public class Handler : QueryHandler<GetPriorityType, DomainModel>
     {
         private readonly IDomainRepository<PriorityType> _priorityTypeRepository;
 
@@ -13,9 +13,9 @@ public record GetPriorityType(int Id) : IQuery<DomainViewModel>
             _priorityTypeRepository = priorityTypeRepository;
         }
 
-        protected override async Task<DomainViewModel> Handle(GetPriorityType query)
+        protected override async Task<DomainModel> Handle(GetPriorityType query)
         {
-            return new DomainViewModel(await _priorityTypeRepository.Get(query.Id));
+            return new DomainModel(await _priorityTypeRepository.Get(query.Id));
         }
     }
 }

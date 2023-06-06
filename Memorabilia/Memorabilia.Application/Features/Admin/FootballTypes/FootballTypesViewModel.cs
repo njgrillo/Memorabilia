@@ -3,7 +3,7 @@ using Memorabilia.Domain.Entities;
 
 namespace Memorabilia.Application.Features.Admin.FootballTypes;
 
-public class FootballTypesViewModel : DomainsViewModel
+public class FootballTypesViewModel : DomainsModel
 {
     public FootballTypesViewModel() { }
 

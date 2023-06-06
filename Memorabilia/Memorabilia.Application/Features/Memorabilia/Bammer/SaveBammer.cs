@@ -30,14 +30,17 @@ public class SaveBammer
 
     public class Command : DomainCommand, ICommand
     {
-        private readonly SaveBammerViewModel _viewModel;
+        private readonly BammerEditModel _viewModel;
 
-        public Command(SaveBammerViewModel viewModel)
+        public Command(BammerEditModel viewModel)
         {
             _viewModel = viewModel;
         }
 
-        public int? BammerTypeId => _viewModel.BammerTypeId > 0 ? _viewModel.BammerTypeId : null;
+        public int? BammerTypeId 
+            => _viewModel.BammerTypeId > 0 
+            ? _viewModel.BammerTypeId 
+            : null;
 
         public int BrandId => _viewModel.BrandId;
 
@@ -47,11 +50,21 @@ public class SaveBammer
 
         public int MemorabiliaId => _viewModel.MemorabiliaId;
 
-        public int[] PersonIds => _viewModel.People.Where(person => !person.IsDeleted).Select(person => person.Id).ToArray();
+        public int[] PersonIds 
+            => _viewModel.People
+                         .Where(person => !person.IsDeleted).Select(person => person.Id)
+                         .ToArray();
 
-        public int? SportId => _viewModel.SportId > 0 ? _viewModel.SportId : null;
+        public int? SportId 
+            => _viewModel.SportId > 0 
+            ? _viewModel.SportId 
+            : null;
 
-        public int[] TeamIds => _viewModel.Teams.Where(team => !team.IsDeleted).Select(team => team.Id).ToArray();
+        public int[] TeamIds 
+            => _viewModel.Teams
+                         .Where(team => !team.IsDeleted)
+                         .Select(team => team.Id)
+                         .ToArray();
 
         public int? Year => _viewModel.Year;
     }

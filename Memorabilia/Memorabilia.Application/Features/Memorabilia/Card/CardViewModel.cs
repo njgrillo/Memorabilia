@@ -4,11 +4,11 @@ namespace Memorabilia.Application.Features.Memorabilia.Card;
 
 public class CardViewModel
 {
-    private readonly Domain.Entities.Memorabilia _memorabilia;
+    private readonly Entity.Memorabilia _memorabilia;
 
     public CardViewModel() { }
 
-    public CardViewModel(Domain.Entities.Memorabilia memorabilia)
+    public CardViewModel(Entity.Memorabilia memorabilia)
     {
         _memorabilia = memorabilia;
     }

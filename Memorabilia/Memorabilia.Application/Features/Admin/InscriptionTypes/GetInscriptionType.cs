@@ -2,9 +2,9 @@
 
 namespace Memorabilia.Application.Features.Admin.InscriptionTypes;
 
-public record GetInscriptionType(int Id) : IQuery<DomainViewModel>
+public record GetInscriptionType(int Id) : IQuery<DomainModel>
 {
-    public class Handler : QueryHandler<GetInscriptionType, DomainViewModel>
+    public class Handler : QueryHandler<GetInscriptionType, DomainModel>
     {
         private readonly IDomainRepository<InscriptionType> _inscriptionTypeRepository;
 
@@ -13,9 +13,9 @@ public record GetInscriptionType(int Id) : IQuery<DomainViewModel>
             _inscriptionTypeRepository = inscriptionTypeRepository;
         }
 
-        protected override async Task<DomainViewModel> Handle(GetInscriptionType query)
+        protected override async Task<DomainModel> Handle(GetInscriptionType query)
         {
-            return new DomainViewModel(await _inscriptionTypeRepository.Get(query.Id));
+            return new DomainModel(await _inscriptionTypeRepository.Get(query.Id));
         }
     }
 }

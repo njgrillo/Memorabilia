@@ -3,7 +3,7 @@ using Memorabilia.Domain.Entities;
 
 namespace Memorabilia.Application.Features.Admin.FranchiseHallOfFameTypes;
 
-public class FranchiseHallOfFameTypesViewModel : DomainsViewModel
+public class FranchiseHallOfFameTypesViewModel : DomainsModel
 {
     public FranchiseHallOfFameTypesViewModel() { }
 

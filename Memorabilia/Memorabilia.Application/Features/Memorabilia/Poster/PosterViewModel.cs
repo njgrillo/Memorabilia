@@ -4,11 +4,11 @@ namespace Memorabilia.Application.Features.Memorabilia.Poster;
 
 public class PosterViewModel : Model
 {
-    private readonly Domain.Entities.Memorabilia _memorabilia;
+    private readonly Entity.Memorabilia _memorabilia;
 
     public PosterViewModel() { }
 
-    public PosterViewModel(Domain.Entities.Memorabilia memorabilia)
+    public PosterViewModel(Entity.Memorabilia memorabilia)
     {
         _memorabilia = memorabilia;
     }

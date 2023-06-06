@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Blazor.Pages.MemorabiliaItems.Bammers;
 
-public partial class BammerEditor : MemorabiliaItem<SaveBammerViewModel>
+public partial class BammerEditor : MemorabiliaItem<BammerEditModel>
 {
     [Inject]
     public BammerValidator Validator { get; set; }
@@ -12,7 +12,7 @@ public partial class BammerEditor : MemorabiliaItem<SaveBammerViewModel>
         if (viewModel.Brand == null)
             return;
 
-        ViewModel = new SaveBammerViewModel(viewModel);
+        ViewModel = new BammerEditModel(viewModel);
     }
 
     protected async Task OnSave()

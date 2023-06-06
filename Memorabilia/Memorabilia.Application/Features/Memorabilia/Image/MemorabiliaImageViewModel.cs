@@ -2,11 +2,11 @@
 
 public class MemorabiliaImageViewModel : ImageModel
 {
-    private readonly Domain.Entities.MemorabiliaImage _image;
+    private readonly Entity.MemorabiliaImage _image;
 
     public MemorabiliaImageViewModel() { }
 
-    public MemorabiliaImageViewModel(Domain.Entities.MemorabiliaImage image) : base(image)
+    public MemorabiliaImageViewModel(Entity.MemorabiliaImage image) : base(image)
     {
         _image = image;
     }

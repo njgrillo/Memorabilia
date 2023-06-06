@@ -3,7 +3,7 @@ using Memorabilia.Domain.Entities;
 
 namespace Memorabilia.Application.Features.Admin.ChampionTypes;
 
-public class ChampionTypesViewModel : DomainsViewModel
+public class ChampionTypesViewModel : DomainsModel
 {
     public ChampionTypesViewModel() { }
 

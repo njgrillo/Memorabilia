@@ -4,11 +4,11 @@ namespace Memorabilia.Application.Features.Memorabilia.Drum;
 
 public class DrumViewModel : Model
 {
-    private readonly Domain.Entities.Memorabilia _memorabilia;
+    private readonly Entity.Memorabilia _memorabilia;
 
     public DrumViewModel() { }
 
-    public DrumViewModel(Domain.Entities.Memorabilia memorabilia)
+    public DrumViewModel(Entity.Memorabilia memorabilia)
     {
         _memorabilia = memorabilia;
     }

@@ -4,11 +4,11 @@ namespace Memorabilia.Application.Features.Memorabilia.JerseyNumber;
 
 public class JerseyNumberViewModel
 {
-    private readonly Domain.Entities.Memorabilia _memorabilia;
+    private readonly Entity.Memorabilia _memorabilia;
 
     public JerseyNumberViewModel() { }
 
-    public JerseyNumberViewModel(Domain.Entities.Memorabilia memorabilia)
+    public JerseyNumberViewModel(Entity.Memorabilia memorabilia)
     {
         _memorabilia = memorabilia;
     }

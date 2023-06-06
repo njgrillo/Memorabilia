@@ -4,11 +4,11 @@ namespace Memorabilia.Application.Features.Memorabilia.Shoe;
 
 public class ShoeViewModel
 {
-    private readonly Domain.Entities.Memorabilia _memorabilia;
+    private readonly Entity.Memorabilia _memorabilia;
 
     public ShoeViewModel() { }
 
-    public ShoeViewModel(Domain.Entities.Memorabilia memorabilia)
+    public ShoeViewModel(Entity.Memorabilia memorabilia)
     {
         _memorabilia = memorabilia;
     }

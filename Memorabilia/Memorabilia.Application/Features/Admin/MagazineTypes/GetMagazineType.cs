@@ -2,9 +2,9 @@
 
 namespace Memorabilia.Application.Features.Admin.MagazineTypes;
 
-public record GetMagazineType(int Id) : IQuery<DomainViewModel>
+public record GetMagazineType(int Id) : IQuery<DomainModel>
 {
-    public class Handler : QueryHandler<GetMagazineType, DomainViewModel>
+    public class Handler : QueryHandler<GetMagazineType, DomainModel>
     {
         private readonly IDomainRepository<MagazineType> _magazineTypeRepository;
 
@@ -13,9 +13,9 @@ public record GetMagazineType(int Id) : IQuery<DomainViewModel>
             _magazineTypeRepository = magazineTypeRepository;
         }
 
-        protected override async Task<DomainViewModel> Handle(GetMagazineType query)
+        protected override async Task<DomainModel> Handle(GetMagazineType query)
         {
-            return new DomainViewModel(await _magazineTypeRepository.Get(query.Id));
+            return new DomainModel(await _magazineTypeRepository.Get(query.Id));
         }
     }
 }

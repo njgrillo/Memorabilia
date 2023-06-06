@@ -4,11 +4,11 @@ namespace Memorabilia.Application.Features.Memorabilia.Pants;
 
 public class PantViewModel : Model
 {
-    private readonly Domain.Entities.Memorabilia _memorabilia;
+    private readonly Entity.Memorabilia _memorabilia;
 
     public PantViewModel() { }
 
-    public PantViewModel(Domain.Entities.Memorabilia memorabilia)
+    public PantViewModel(Entity.Memorabilia memorabilia)
     {
         _memorabilia = memorabilia;
     }

@@ -4,11 +4,11 @@ namespace Memorabilia.Application.Features.Memorabilia.CerealBox;
 
 public class CerealBoxViewModel
 {
-    private readonly Domain.Entities.Memorabilia _memorabilia;
+    private readonly Entity.Memorabilia _memorabilia;
 
     public CerealBoxViewModel() { }
 
-    public CerealBoxViewModel(Domain.Entities.Memorabilia memorabilia)
+    public CerealBoxViewModel(Entity.Memorabilia memorabilia)
     {
         _memorabilia = memorabilia;
     }

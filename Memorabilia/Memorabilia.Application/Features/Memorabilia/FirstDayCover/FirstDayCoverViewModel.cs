@@ -4,11 +4,11 @@ namespace Memorabilia.Application.Features.Memorabilia.FirstDayCover;
 
 public class FirstDayCoverViewModel
 {
-    private readonly Domain.Entities.Memorabilia _memorabilia;
+    private readonly Entity.Memorabilia _memorabilia;
 
     public FirstDayCoverViewModel() { }
 
-    public FirstDayCoverViewModel(Domain.Entities.Memorabilia memorabilia)
+    public FirstDayCoverViewModel(Entity.Memorabilia memorabilia)
     {
         _memorabilia = memorabilia;
     }

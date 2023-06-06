@@ -3,7 +3,7 @@ using Memorabilia.Domain.Entities;
 
 namespace Memorabilia.Application.Features.Admin.WritingInstruments;
 
-public class WritingInstrumentsViewModel : DomainsViewModel
+public class WritingInstrumentsViewModel : DomainsModel
 {
     public WritingInstrumentsViewModel() { }
 

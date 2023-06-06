@@ -3,7 +3,7 @@ using Memorabilia.Domain.Entities;
 
 namespace Memorabilia.Application.Features.Admin.JerseyQualityTypes;
 
-public class JerseyQualityTypesViewModel : DomainsViewModel
+public class JerseyQualityTypesViewModel : DomainsModel
 {
     public JerseyQualityTypesViewModel() { }
 

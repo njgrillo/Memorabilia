@@ -4,11 +4,11 @@ namespace Memorabilia.Application.Features.Admin.ItemTypeBrand;
 
 public class ItemTypeBrandViewModel : IWithValue<int>, IWithName
 {
-    private readonly Domain.Entities.ItemTypeBrand _itemTypeBrand;
+    private readonly Entity.ItemTypeBrand _itemTypeBrand;
 
     public ItemTypeBrandViewModel() { }
 
-    public ItemTypeBrandViewModel(Domain.Entities.ItemTypeBrand itemTypeBrand)
+    public ItemTypeBrandViewModel(Entity.ItemTypeBrand itemTypeBrand)
     {
         _itemTypeBrand = itemTypeBrand;
     }

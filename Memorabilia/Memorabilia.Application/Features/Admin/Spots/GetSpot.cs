@@ -2,9 +2,9 @@
 
 namespace Memorabilia.Application.Features.Admin.Spots;
 
-public record GetSpot(int Id) : IQuery<DomainViewModel>
+public record GetSpot(int Id) : IQuery<DomainModel>
 {
-    public class Handler : QueryHandler<GetSpot, DomainViewModel>
+    public class Handler : QueryHandler<GetSpot, DomainModel>
     {
         private readonly IDomainRepository<Spot> _spotRepository;
 
@@ -13,9 +13,9 @@ public record GetSpot(int Id) : IQuery<DomainViewModel>
             _spotRepository = spotRepository;
         }
 
-        protected override async Task<DomainViewModel> Handle(GetSpot query)
+        protected override async Task<DomainModel> Handle(GetSpot query)
         {
-            return new DomainViewModel(await _spotRepository.Get(query.Id));
+            return new DomainModel(await _spotRepository.Get(query.Id));
         }
     }
 }

@@ -4,11 +4,11 @@ namespace Memorabilia.Application.Features.Memorabilia.PinFlag;
 
 public class PinFlagViewModel : Model
 {
-    private readonly Domain.Entities.Memorabilia _memorabilia;
+    private readonly Entity.Memorabilia _memorabilia;
 
     public PinFlagViewModel() { }
 
-    public PinFlagViewModel(Domain.Entities.Memorabilia memorabilia)
+    public PinFlagViewModel(Entity.Memorabilia memorabilia)
     {
         _memorabilia = memorabilia;
     }

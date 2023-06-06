@@ -4,11 +4,11 @@ namespace Memorabilia.Application.Features.Memorabilia.Helmet;
 
 public class HelmetViewModel
 {
-    private readonly Domain.Entities.Memorabilia _memorabilia;
+    private readonly Entity.Memorabilia _memorabilia;
 
     public HelmetViewModel() { }
 
-    public HelmetViewModel(Domain.Entities.Memorabilia memorabilia)
+    public HelmetViewModel(Entity.Memorabilia memorabilia)
     {
         _memorabilia = memorabilia;
     }

@@ -2,9 +2,9 @@
 
 namespace Memorabilia.Application.Features.Admin.LeaderTypes;
 
-public record GetLeaderType(int Id) : IQuery<DomainViewModel>
+public record GetLeaderType(int Id) : IQuery<DomainModel>
 {
-    public class Handler : QueryHandler<GetLeaderType, DomainViewModel>
+    public class Handler : QueryHandler<GetLeaderType, DomainModel>
     {
         private readonly IDomainRepository<LeaderType> _leaderTypeRepository;
 
@@ -13,9 +13,9 @@ public record GetLeaderType(int Id) : IQuery<DomainViewModel>
             _leaderTypeRepository = leaderTypeRepository;
         }
 
-        protected override async Task<DomainViewModel> Handle(GetLeaderType query)
+        protected override async Task<DomainModel> Handle(GetLeaderType query)
         {
-            return new DomainViewModel(await _leaderTypeRepository.Get(query.Id));
+            return new DomainModel(await _leaderTypeRepository.Get(query.Id));
         }
     }
 }

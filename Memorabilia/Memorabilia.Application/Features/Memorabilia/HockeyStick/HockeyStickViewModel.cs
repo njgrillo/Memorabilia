@@ -4,11 +4,11 @@ namespace Memorabilia.Application.Features.Memorabilia.HockeyStick;
 
 public class HockeyStickViewModel
 {
-    private readonly Domain.Entities.Memorabilia _memorabilia;
+    private readonly Entity.Memorabilia _memorabilia;
 
     public HockeyStickViewModel() { }
 
-    public HockeyStickViewModel(Domain.Entities.Memorabilia memorabilia)
+    public HockeyStickViewModel(Entity.Memorabilia memorabilia)
     {
         _memorabilia = memorabilia;
     }

@@ -3,7 +3,7 @@ using Memorabilia.Domain.Entities;
 
 namespace Memorabilia.Application.Features.Admin.GameStyleTypes;
 
-public class GameStyleTypesViewModel : DomainsViewModel
+public class GameStyleTypesViewModel : DomainsModel
 {
     public GameStyleTypesViewModel() { }
 

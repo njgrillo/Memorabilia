@@ -3,7 +3,7 @@ using Memorabilia.Domain.Entities;
 
 namespace Memorabilia.Application.Features.Admin.Brands;
 
-public class BrandsViewModel : DomainsViewModel
+public class BrandsViewModel : DomainsModel
 {
     public BrandsViewModel() { }
 

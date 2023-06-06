@@ -3,7 +3,7 @@ using Memorabilia.Domain.Entities;
 
 namespace Memorabilia.Application.Features.Admin.HelmetFinishes;
 
-public class HelmetFinishesViewModel : DomainsViewModel
+public class HelmetFinishesViewModel : DomainsModel
 {
     public HelmetFinishesViewModel() { }
 

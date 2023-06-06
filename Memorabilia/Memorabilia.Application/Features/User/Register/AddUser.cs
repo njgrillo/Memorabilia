@@ -21,7 +21,7 @@ public class AddUser
                 return;
             }
 
-            user = new Domain.Entities.User(command.Username, command.Password, command.EmailAddress, command.FirstName, command.LastName, command.Phone);
+            user = new Entity.User(command.Username, command.Password, command.EmailAddress, command.FirstName, command.LastName, command.Phone);
 
             await _userRepository.Add(user);
 

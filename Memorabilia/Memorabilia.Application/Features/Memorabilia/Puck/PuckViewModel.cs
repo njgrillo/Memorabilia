@@ -4,11 +4,11 @@ namespace Memorabilia.Application.Features.Memorabilia.Puck;
 
 public class PuckViewModel
 {
-    private readonly Domain.Entities.Memorabilia _memorabilia;
+    private readonly Entity.Memorabilia _memorabilia;
 
     public PuckViewModel() { }
 
-    public PuckViewModel(Domain.Entities.Memorabilia memorabilia)
+    public PuckViewModel(Entity.Memorabilia memorabilia)
     {
         _memorabilia = memorabilia;
     }

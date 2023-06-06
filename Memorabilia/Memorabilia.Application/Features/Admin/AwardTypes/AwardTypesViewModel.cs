@@ -3,7 +3,7 @@ using Memorabilia.Domain.Entities;
 
 namespace Memorabilia.Application.Features.Admin.AwardTypes;
 
-public class AwardTypesViewModel : DomainsViewModel
+public class AwardTypesViewModel : DomainsModel
 {
     public AwardTypesViewModel() { }
 

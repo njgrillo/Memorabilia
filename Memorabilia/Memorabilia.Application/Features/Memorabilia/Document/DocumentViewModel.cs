@@ -4,11 +4,11 @@ namespace Memorabilia.Application.Features.Memorabilia.Document;
 
 public class DocumentViewModel
 {
-    private readonly Domain.Entities.Memorabilia _memorabilia;
+    private readonly Entity.Memorabilia _memorabilia;
 
     public DocumentViewModel() { }
 
-    public DocumentViewModel(Domain.Entities.Memorabilia memorabilia)
+    public DocumentViewModel(Entity.Memorabilia memorabilia)
     {
         _memorabilia = memorabilia;
     }
