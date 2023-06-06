@@ -2,7 +2,7 @@
 
 namespace Memorabilia.Application.Features.Admin.Sizes;
 
-public record SaveSize(SaveDomainViewModel ViewModel) : ICommand
+public record SaveSize(DomainEditModel ViewModel) : ICommand
 {
     public class Handler : CommandHandler<SaveSize>
     {

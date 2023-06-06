@@ -2,7 +2,7 @@
 
 public partial class ViewWritingInstruments : ViewDomainItem<WritingInstrumentsViewModel>, IDeleteDomainItem, IViewDomainItem
 {
-    public async Task OnDelete(SaveDomainViewModel viewModel)
+    public async Task OnDelete(DomainEditModel viewModel)
     {
         await OnDelete(new SaveWritingInstrument(viewModel));
     }

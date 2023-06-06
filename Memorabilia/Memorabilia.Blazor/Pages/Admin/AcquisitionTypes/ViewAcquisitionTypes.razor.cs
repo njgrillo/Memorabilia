@@ -2,7 +2,7 @@
 
 public partial class ViewAcquisitionTypes : ViewDomainItem<AcquisitionTypesViewModel>, IDeleteDomainItem, IViewDomainItem
 {
-    public async Task OnDelete(SaveDomainViewModel viewModel)
+    public async Task OnDelete(DomainEditModel viewModel)
     {
         await OnDelete(new SaveAcquisitionType(viewModel));
     }

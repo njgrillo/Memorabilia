@@ -18,14 +18,14 @@ public partial class DomainItems : ComponentBase
     }
 
     [Parameter]
-    public EventCallback<SaveDomainViewModel> OnDelete { get; set; }
+    public EventCallback<DomainEditModel> OnDelete { get; set; }
 
     [Parameter]
     public EventCallback OnLoad { get; set; }
 
     protected DomainsModel ViewModel;
 
-    protected async Task Delete(SaveDomainViewModel viewModel)
+    protected async Task Delete(DomainEditModel viewModel)
     {
         await OnDelete.InvokeAsync(viewModel);
     }

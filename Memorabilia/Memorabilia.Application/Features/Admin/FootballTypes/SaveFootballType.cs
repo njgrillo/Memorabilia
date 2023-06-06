@@ -2,7 +2,7 @@
 
 namespace Memorabilia.Application.Features.Admin.FootballTypes;
 
-public record SaveFootballType(SaveDomainViewModel ViewModel) : ICommand
+public record SaveFootballType(DomainEditModel ViewModel) : ICommand
 {
     public class Handler : CommandHandler<SaveFootballType>
     {

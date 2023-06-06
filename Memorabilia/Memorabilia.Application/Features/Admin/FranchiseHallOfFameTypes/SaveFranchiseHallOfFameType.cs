@@ -2,7 +2,7 @@
 
 namespace Memorabilia.Application.Features.Admin.FranchiseHallOfFameTypes;
 
-public record SaveFranchiseHallOfFameType(SaveDomainViewModel ViewModel) : ICommand
+public record SaveFranchiseHallOfFameType(DomainEditModel ViewModel) : ICommand
 {
     public class Handler : CommandHandler<SaveFranchiseHallOfFameType>
     {

@@ -2,7 +2,7 @@
 
 namespace Memorabilia.Application.Features.Admin.InternationalHallOfFameTypes;
 
-public record SaveInternationalHallOfFameType(SaveDomainViewModel ViewModel) : ICommand
+public record SaveInternationalHallOfFameType(DomainEditModel ViewModel) : ICommand
 {
     public class Handler : CommandHandler<SaveInternationalHallOfFameType>
     {

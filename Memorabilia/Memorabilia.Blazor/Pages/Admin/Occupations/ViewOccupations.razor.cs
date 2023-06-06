@@ -2,7 +2,7 @@
 
 public partial class ViewOccupations : ViewDomainItem<OccupationsViewModel>, IDeleteDomainItem, IViewDomainItem
 {
-    public async Task OnDelete(SaveDomainViewModel viewModel)
+    public async Task OnDelete(DomainEditModel viewModel)
     {
         await OnDelete(new SaveOccupation(viewModel));
     }

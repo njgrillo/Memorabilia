@@ -2,7 +2,7 @@
 
 namespace Memorabilia.Application.Features.Admin.MagazineTypes;
 
-public record SaveMagazineType(SaveDomainViewModel ViewModel) : ICommand
+public record SaveMagazineType(DomainEditModel ViewModel) : ICommand
 {
     public class Handler : CommandHandler<SaveMagazineType>
     {

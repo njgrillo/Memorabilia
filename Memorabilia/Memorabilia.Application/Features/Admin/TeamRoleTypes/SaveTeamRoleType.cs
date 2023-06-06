@@ -2,7 +2,7 @@
 
 namespace Memorabilia.Application.Features.Admin.TeamRoleTypes;
 
-public record SaveTeamRoleType(SaveDomainViewModel ViewModel) : ICommand
+public record SaveTeamRoleType(DomainEditModel ViewModel) : ICommand
 {
     public class Handler : CommandHandler<SaveTeamRoleType>
     {

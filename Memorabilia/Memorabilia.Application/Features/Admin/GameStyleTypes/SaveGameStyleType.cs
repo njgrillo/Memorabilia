@@ -2,7 +2,7 @@
 
 namespace Memorabilia.Application.Features.Admin.GameStyleTypes;
 
-public record SaveGameStyleType(SaveDomainViewModel ViewModel) : ICommand
+public record SaveGameStyleType(DomainEditModel ViewModel) : ICommand
 {
     public class Handler : CommandHandler<SaveGameStyleType>
     {

@@ -2,7 +2,7 @@
 
 namespace Memorabilia.Application.Features.Admin.RecordTypes;
 
-public record SaveRecordType(SaveDomainViewModel ViewModel) : ICommand
+public record SaveRecordType(DomainEditModel ViewModel) : ICommand
 {
     public class Handler : CommandHandler<SaveRecordType>
     {

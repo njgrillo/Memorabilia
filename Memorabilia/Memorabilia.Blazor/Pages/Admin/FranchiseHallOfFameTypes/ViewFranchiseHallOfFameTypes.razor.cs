@@ -2,7 +2,7 @@
 
 public partial class ViewFranchiseHallOfFameTypes : ViewDomainItem<FranchiseHallOfFameTypesViewModel>, IDeleteDomainItem, IViewDomainItem
 {
-    public async Task OnDelete(SaveDomainViewModel viewModel)
+    public async Task OnDelete(DomainEditModel viewModel)
     {
         await CommandRouter.Send(new SaveFranchiseHallOfFameType(viewModel));
     }

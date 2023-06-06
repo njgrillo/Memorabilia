@@ -2,7 +2,7 @@
 
 namespace Memorabilia.Application.Features.Admin.GloveTypes;
 
-public record SaveGloveType(SaveDomainViewModel ViewModel) : ICommand
+public record SaveGloveType(DomainEditModel ViewModel) : ICommand
 {
     public class Handler : CommandHandler<SaveGloveType>
     {

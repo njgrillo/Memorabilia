@@ -2,7 +2,7 @@
 
 namespace Memorabilia.Application.Features.Admin.Conditions;
 
-public record SaveCondition(SaveDomainViewModel ViewModel) : ICommand
+public record SaveCondition(DomainEditModel ViewModel) : ICommand
 {
     public class Handler : CommandHandler<SaveCondition>
     {

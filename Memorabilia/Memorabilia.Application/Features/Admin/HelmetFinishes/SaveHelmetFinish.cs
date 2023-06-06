@@ -2,7 +2,7 @@
 
 namespace Memorabilia.Application.Features.Admin.HelmetFinishes;
 
-public record SaveHelmetFinish(SaveDomainViewModel ViewModel) : ICommand
+public record SaveHelmetFinish(DomainEditModel ViewModel) : ICommand
 {
     public class Handler : CommandHandler<SaveHelmetFinish>
     {

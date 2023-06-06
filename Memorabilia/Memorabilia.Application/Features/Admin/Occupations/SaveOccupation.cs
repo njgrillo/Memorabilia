@@ -2,7 +2,7 @@
 
 namespace Memorabilia.Application.Features.Admin.Occupations;
 
-public record SaveOccupation(SaveDomainViewModel ViewModel) : ICommand
+public record SaveOccupation(DomainEditModel ViewModel) : ICommand
 {
     public class Handler : CommandHandler<SaveOccupation>
     {

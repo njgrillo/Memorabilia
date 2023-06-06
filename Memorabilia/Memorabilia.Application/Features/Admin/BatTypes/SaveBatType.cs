@@ -2,7 +2,7 @@
 
 namespace Memorabilia.Application.Features.Admin.BatTypes;
 
-public record SaveBatType(SaveDomainViewModel ViewModel) : ICommand
+public record SaveBatType(DomainEditModel ViewModel) : ICommand
 {
     public class Handler : CommandHandler<SaveBatType>
     {

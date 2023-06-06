@@ -2,7 +2,7 @@
 
 public partial class ViewColors : ViewDomainItem<ColorsViewModel>, IDeleteDomainItem, IViewDomainItem
 {
-    public async Task OnDelete(SaveDomainViewModel viewModel)
+    public async Task OnDelete(DomainEditModel viewModel)
     {
         await CommandRouter.Send(new SaveColor(viewModel));
     }

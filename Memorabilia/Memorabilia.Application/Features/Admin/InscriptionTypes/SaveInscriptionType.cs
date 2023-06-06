@@ -2,7 +2,7 @@
 
 namespace Memorabilia.Application.Features.Admin.InscriptionTypes;
 
-public record SaveInscriptionType(SaveDomainViewModel ViewModel) : ICommand
+public record SaveInscriptionType(DomainEditModel ViewModel) : ICommand
 {
     public class Handler : CommandHandler<SaveInscriptionType>
     {

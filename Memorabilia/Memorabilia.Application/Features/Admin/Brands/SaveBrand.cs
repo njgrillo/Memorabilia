@@ -2,7 +2,7 @@
 
 namespace Memorabilia.Application.Features.Admin.Brands;
 
-public record SaveBrand(SaveDomainViewModel ViewModel) : ICommand
+public record SaveBrand(DomainEditModel ViewModel) : ICommand
 {
     public class Handler : CommandHandler<SaveBrand>
     {

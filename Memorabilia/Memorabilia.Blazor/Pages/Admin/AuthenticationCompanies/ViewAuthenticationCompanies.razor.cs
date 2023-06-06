@@ -2,7 +2,7 @@
 
 public partial class ViewAuthenticationCompanies : ViewDomainItem<AuthenticationCompaniesViewModel>, IViewDomainItem, IDeleteDomainItem
 {
-    public async Task OnDelete(SaveDomainViewModel viewModel)
+    public async Task OnDelete(DomainEditModel viewModel)
     {
         await OnDelete(new SaveAuthenticationCompany(viewModel));
     }

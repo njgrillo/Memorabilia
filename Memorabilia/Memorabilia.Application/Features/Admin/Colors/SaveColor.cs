@@ -2,7 +2,7 @@
 
 namespace Memorabilia.Application.Features.Admin.Colors;
 
-public record SaveColor(SaveDomainViewModel ViewModel) : ICommand
+public record SaveColor(DomainEditModel ViewModel) : ICommand
 {
     public class Handler : CommandHandler<SaveColor>
     {

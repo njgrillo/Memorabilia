@@ -2,7 +2,7 @@
 
 namespace Memorabilia.Application.Features.Admin.Spots;
 
-public record SaveSpot(SaveDomainViewModel ViewModel) : ICommand
+public record SaveSpot(DomainEditModel ViewModel) : ICommand
 {
     public class Handler : CommandHandler<SaveSpot>
     {

@@ -2,7 +2,7 @@
 
 public partial class ViewAwardTypes : ViewDomainItem<AwardTypesViewModel>, IDeleteDomainItem, IViewDomainItem
 {
-    public async Task OnDelete(SaveDomainViewModel viewModel)
+    public async Task OnDelete(DomainEditModel viewModel)
     {
         await OnDelete(new SaveAwardType(viewModel));
     }

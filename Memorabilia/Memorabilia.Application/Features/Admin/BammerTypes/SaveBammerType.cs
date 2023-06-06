@@ -2,7 +2,7 @@
 
 namespace Memorabilia.Application.Features.Admin.BammerTypes;
 
-public record SaveBammerType(SaveDomainViewModel ViewModel) : ICommand
+public record SaveBammerType(DomainEditModel ViewModel) : ICommand
 {
     public class Handler : CommandHandler<SaveBammerType>
     {

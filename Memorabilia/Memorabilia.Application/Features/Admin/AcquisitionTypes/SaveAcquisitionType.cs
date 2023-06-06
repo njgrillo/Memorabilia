@@ -2,7 +2,7 @@
 
 namespace Memorabilia.Application.Features.Admin.AcquisitionTypes;
 
-public record SaveAcquisitionType(SaveDomainViewModel ViewModel) : ICommand
+public record SaveAcquisitionType(DomainEditModel ViewModel) : ICommand
 {
     public class Handler : CommandHandler<SaveAcquisitionType>
     {

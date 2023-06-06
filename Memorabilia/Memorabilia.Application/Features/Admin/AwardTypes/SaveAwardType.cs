@@ -2,7 +2,7 @@
 
 namespace Memorabilia.Application.Features.Admin.AwardTypes;
 
-public record SaveAwardType(SaveDomainViewModel ViewModel) : ICommand
+public record SaveAwardType(DomainEditModel ViewModel) : ICommand
 {
     public class Handler : CommandHandler<SaveAwardType>
     {

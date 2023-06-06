@@ -2,7 +2,7 @@
 
 public partial class ViewChampionTypes : ViewDomainItem<ChampionTypesViewModel>, IDeleteDomainItem, IViewDomainItem
 {
-    public async Task OnDelete(SaveDomainViewModel viewModel)
+    public async Task OnDelete(DomainEditModel viewModel)
     {
         await CommandRouter.Send(new SaveChampionType(viewModel));
     }

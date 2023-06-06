@@ -2,7 +2,7 @@
 
 namespace Memorabilia.Application.Features.Admin.CerealTypes;
 
-public record SaveCerealType(SaveDomainViewModel ViewModel) : ICommand
+public record SaveCerealType(DomainEditModel ViewModel) : ICommand
 {
     public class Handler : CommandHandler<SaveCerealType>
     {

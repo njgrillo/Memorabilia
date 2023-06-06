@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Application.Features.Admin.AccomplishmentTypes;
 
-public record SaveAccomplishmentType(SaveDomainViewModel ViewModel) : ICommand
+public record SaveAccomplishmentType(DomainEditModel ViewModel) : ICommand
 {
     public class Handler : CommandHandler<SaveAccomplishmentType>
     {

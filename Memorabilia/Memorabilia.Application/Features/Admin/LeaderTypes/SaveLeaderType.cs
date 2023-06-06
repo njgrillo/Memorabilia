@@ -2,7 +2,7 @@
 
 namespace Memorabilia.Application.Features.Admin.LeaderTypes;
 
-public record SaveLeaderType(SaveDomainViewModel ViewModel) : ICommand
+public record SaveLeaderType(DomainEditModel ViewModel) : ICommand
 {
     public class Handler : CommandHandler<SaveLeaderType>
     {

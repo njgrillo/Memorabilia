@@ -2,7 +2,7 @@
 
 namespace Memorabilia.Application.Features.Admin.PhotoTypes;
 
-public record SavePhotoType(SaveDomainViewModel ViewModel) : ICommand
+public record SavePhotoType(DomainEditModel ViewModel) : ICommand
 {
     public class Handler : CommandHandler<SavePhotoType>
     {

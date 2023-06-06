@@ -2,7 +2,7 @@
 
 namespace Memorabilia.Application.Features.Admin.PrivacyTypes;
 
-public record SavePrivacyType(SaveDomainViewModel ViewModel) : ICommand
+public record SavePrivacyType(DomainEditModel ViewModel) : ICommand
 {
     public class Handler : CommandHandler<SavePrivacyType>
     {

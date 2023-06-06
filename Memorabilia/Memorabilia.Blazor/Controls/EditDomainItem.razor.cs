@@ -8,7 +8,7 @@ public partial class EditDomainItem : ComponentBase
     public string DomainImageRootPath { get; set; }
 
     [Parameter]
-    public SaveDomainViewModel Item
+    public DomainEditModel Item
     {
         get
         {
@@ -30,9 +30,9 @@ public partial class EditDomainItem : ComponentBase
     public EventCallback OnLoad { get; set; }
 
     [Parameter]
-    public EventCallback<SaveDomainViewModel> OnSave { get; set; }
+    public EventCallback<DomainEditModel> OnSave { get; set; }
 
-    private SaveDomainViewModel _viewModel;
+    private DomainEditModel _viewModel;
 
     protected async Task Load()
     {

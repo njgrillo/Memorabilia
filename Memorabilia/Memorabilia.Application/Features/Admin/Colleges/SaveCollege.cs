@@ -2,7 +2,7 @@
 
 namespace Memorabilia.Application.Features.Admin.Colleges;
 
-public record SaveCollege(SaveDomainViewModel ViewModel) : ICommand
+public record SaveCollege(DomainEditModel ViewModel) : ICommand
 {
     public class Handler : CommandHandler<SaveCollege>
     {

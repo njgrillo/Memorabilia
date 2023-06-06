@@ -2,7 +2,7 @@
 
 namespace Memorabilia.Application.Features.Admin.JerseyQualityTypes;
 
-public record SaveJerseyQualityType(SaveDomainViewModel ViewModel) : ICommand
+public record SaveJerseyQualityType(DomainEditModel ViewModel) : ICommand
 {
     public class Handler : CommandHandler<SaveJerseyQualityType>
     {

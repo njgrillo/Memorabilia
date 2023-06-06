@@ -2,7 +2,7 @@
 
 public partial class ViewHelmetFinishes : ViewDomainItem<HelmetFinishesViewModel>, IDeleteDomainItem, IViewDomainItem
 {
-    public async Task OnDelete(SaveDomainViewModel viewModel)
+    public async Task OnDelete(DomainEditModel viewModel)
     {
         await CommandRouter.Send(new SaveHelmetFinish(viewModel));
     }

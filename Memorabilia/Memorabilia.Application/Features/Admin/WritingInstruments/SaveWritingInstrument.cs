@@ -2,7 +2,7 @@
 
 namespace Memorabilia.Application.Features.Admin.WritingInstruments;
 
-public record SaveWritingInstrument(SaveDomainViewModel ViewModel) : ICommand
+public record SaveWritingInstrument(DomainEditModel ViewModel) : ICommand
 {
     public class Handler : CommandHandler<SaveWritingInstrument>
     {

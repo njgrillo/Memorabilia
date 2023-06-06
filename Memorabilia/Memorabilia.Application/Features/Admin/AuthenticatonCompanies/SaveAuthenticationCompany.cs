@@ -2,7 +2,7 @@
 
 namespace Memorabilia.Application.Features.Admin.AuthenticationCompanies;
 
-public record SaveAuthenticationCompany(SaveDomainViewModel ViewModel) : ICommand
+public record SaveAuthenticationCompany(DomainEditModel ViewModel) : ICommand
 {
     public class Handler : CommandHandler<SaveAuthenticationCompany>
     {

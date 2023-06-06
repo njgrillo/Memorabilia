@@ -2,7 +2,7 @@
 
 namespace Memorabilia.Application.Features.Admin.Orientations;
 
-public record SaveOrientation(SaveDomainViewModel ViewModel) : ICommand
+public record SaveOrientation(DomainEditModel ViewModel) : ICommand
 {
     public class Handler : CommandHandler<SaveOrientation>
     {

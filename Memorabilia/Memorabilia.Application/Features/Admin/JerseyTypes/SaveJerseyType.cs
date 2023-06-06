@@ -2,7 +2,7 @@
 
 namespace Memorabilia.Application.Features.Admin.JerseyTypes;
 
-public record SaveJerseyType(SaveDomainViewModel ViewModel) : ICommand
+public record SaveJerseyType(DomainEditModel ViewModel) : ICommand
 {
     public class Handler : CommandHandler<SaveJerseyType>
     {

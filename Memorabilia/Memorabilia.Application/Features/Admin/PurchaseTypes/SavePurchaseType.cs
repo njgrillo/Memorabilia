@@ -2,7 +2,7 @@
 
 namespace Memorabilia.Application.Features.Admin.PurchaseTypes;
 
-public record SavePurchaseType(SaveDomainViewModel ViewModel) : ICommand
+public record SavePurchaseType(DomainEditModel ViewModel) : ICommand
 {
     public class Handler : CommandHandler<SavePurchaseType>
     {

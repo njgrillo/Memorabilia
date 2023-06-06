@@ -2,7 +2,7 @@
 
 namespace Memorabilia.Application.Features.Admin.FigureSpecialtyTypes;
 
-public record SaveFigureSpecialtyType(SaveDomainViewModel ViewModel) : ICommand
+public record SaveFigureSpecialtyType(DomainEditModel ViewModel) : ICommand
 {
     public class Handler : CommandHandler<SaveFigureSpecialtyType>
     {

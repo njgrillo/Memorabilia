@@ -14,18 +14,18 @@ public abstract class EditDomainItem<T> : CommandQuery where T : DomainItemConst
 
     protected virtual string NavigationPath { get; } = $"{type.Name.ToPlural()}";
 
-    protected SaveDomainViewModel ViewModel { get; set; } 
+    protected DomainEditModel ViewModel { get; set; } 
 
     private static readonly Type type = typeof(T);
 
     protected override void OnInitialized()
     {
-       ViewModel = new SaveDomainViewModel(Id, DomainTypeName, ImageFileName, NavigationPath);
+       ViewModel = new DomainEditModel(Id, DomainTypeName, ImageFileName, NavigationPath);
     }
 
     protected async Task OnLoad(IRequest<DomainModel> request)
     {
-        ViewModel = new SaveDomainViewModel(await QueryRouter.Send(request),
+        ViewModel = new DomainEditModel(await QueryRouter.Send(request),
                                             DomainTypeName,
                                             ImageFileName,
                                             NavigationPath);

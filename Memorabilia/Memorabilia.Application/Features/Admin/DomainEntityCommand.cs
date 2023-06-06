@@ -2,9 +2,9 @@
 
 public class DomainEntityCommand : DomainCommand, ICommand
 {
-    private readonly SaveDomainViewModel _viewModel;
+    private readonly DomainEditModel _viewModel;
 
-    public DomainEntityCommand(SaveDomainViewModel viewModel)
+    public DomainEntityCommand(DomainEditModel viewModel)
     {
         _viewModel = viewModel;
     }

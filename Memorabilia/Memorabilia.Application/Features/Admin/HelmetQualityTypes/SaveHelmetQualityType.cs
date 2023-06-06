@@ -2,7 +2,7 @@
 
 namespace Memorabilia.Application.Features.Admin.HelmetQualityTypes;
 
-public record SaveHelmetQualityType(SaveDomainViewModel ViewModel) : ICommand
+public record SaveHelmetQualityType(DomainEditModel ViewModel) : ICommand
 {
     public class Handler : CommandHandler<SaveHelmetQualityType>
     {

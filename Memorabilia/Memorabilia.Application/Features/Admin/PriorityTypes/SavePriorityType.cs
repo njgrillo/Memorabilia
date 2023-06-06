@@ -2,7 +2,7 @@
 
 namespace Memorabilia.Application.Features.Admin.PriorityTypes;
 
-public record SavePriorityType(SaveDomainViewModel ViewModel) : ICommand
+public record SavePriorityType(DomainEditModel ViewModel) : ICommand
 {
     public class Handler : CommandHandler<SavePriorityType>
     {

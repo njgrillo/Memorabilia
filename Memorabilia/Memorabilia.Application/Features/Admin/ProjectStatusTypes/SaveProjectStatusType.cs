@@ -2,7 +2,7 @@
 
 namespace Memorabilia.Application.Features.Admin.ProjectStatusTypes;
 
-public record SaveProjectStatusType(SaveDomainViewModel ViewModel) : ICommand
+public record SaveProjectStatusType(DomainEditModel ViewModel) : ICommand
 {
     public class Handler : CommandHandler<SaveProjectStatusType>
     {

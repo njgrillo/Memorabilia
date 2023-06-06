@@ -21,7 +21,7 @@ public partial class DomainTable : ComponentBase
     public string DomainItemTitle { get; set; }
 
     [Parameter]
-    public EventCallback<SaveDomainViewModel> OnDelete { get; set; }
+    public EventCallback<DomainEditModel> OnDelete { get; set; }
 
     [Parameter]
     public string RoutePrefix { get; set; }
@@ -50,7 +50,7 @@ public partial class DomainTable : ComponentBase
     private async Task Delete(int id)
     {
         var deletedItem = DomainEntities.Single(domainEntity => domainEntity.Id == id);
-        var viewModel = new SaveDomainViewModel(deletedItem)
+        var viewModel = new DomainEditModel(deletedItem)
         {
             IsDeleted = true
         };

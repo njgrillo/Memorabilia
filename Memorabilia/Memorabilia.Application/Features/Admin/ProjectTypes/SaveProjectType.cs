@@ -2,7 +2,7 @@
 
 namespace Memorabilia.Application.Features.Admin.ProjectTypes;
 
-public record SaveProjectType(SaveDomainViewModel ViewModel) : ICommand
+public record SaveProjectType(DomainEditModel ViewModel) : ICommand
 {
     public class Handler : CommandHandler<SaveProjectType>
 {

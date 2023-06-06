@@ -2,7 +2,7 @@
 
 namespace Memorabilia.Application.Features.Admin.LevelTypes;
 
-public record SaveLevelType(SaveDomainViewModel ViewModel) : ICommand
+public record SaveLevelType(DomainEditModel ViewModel) : ICommand
 {
     public class Handler : CommandHandler<SaveLevelType>
     {

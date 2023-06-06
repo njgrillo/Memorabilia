@@ -2,7 +2,7 @@
 
 namespace Memorabilia.Application.Features.Admin.ChampionTypes;
 
-public record SaveChampionType(SaveDomainViewModel ViewModel) : ICommand
+public record SaveChampionType(DomainEditModel ViewModel) : ICommand
 {
     public class Handler : CommandHandler<SaveChampionType>
     {
