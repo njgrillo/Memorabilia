@@ -37,7 +37,7 @@ public class AutographImagesEditModel : SaveViewModel
         => Images.Any() ? Constant.EditModeType.Update : Constant.EditModeType.Add;
 
     public override string ExitNavigationPath 
-        => "Memorabilia/Items";
+        => "Memorabilia/View";
 
     public List<SaveImageViewModel> Images { get; set; } = new();
 

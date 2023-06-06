@@ -20,7 +20,7 @@ public abstract class MemorabiliaItemEditViewModel : ItemEditModel
         : EditModeType.Add;
 
     public override string ExitNavigationPath 
-        => "Memorabilia/Items";
+        => "Memorabilia/View";
 
     public DateTime? GameDate { get; set; }
 

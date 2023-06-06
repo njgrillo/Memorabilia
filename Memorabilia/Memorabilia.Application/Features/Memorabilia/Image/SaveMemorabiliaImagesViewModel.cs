@@ -30,7 +30,7 @@ public class SaveMemorabiliaImagesViewModel : SaveViewModel
     public override EditModeType EditModeType 
         => Images.Any() ? EditModeType.Update : EditModeType.Add;
 
-    public override string ExitNavigationPath => "Memorabilia/Items";
+    public override string ExitNavigationPath => "Memorabilia/View";
 
     public bool HasAutographs { get; private set; }
 

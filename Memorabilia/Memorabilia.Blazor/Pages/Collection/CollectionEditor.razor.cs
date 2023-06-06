@@ -1,4 +1,6 @@
-﻿namespace Memorabilia.Blazor.Pages.Collection;
+﻿using System.Runtime.InteropServices;
+
+namespace Memorabilia.Blazor.Pages.Collection;
 
 public partial class CollectionEditor
 {
@@ -26,13 +28,17 @@ public partial class CollectionEditor
     [Parameter]
     public int UserId { get; set; }
 
+    protected CollectionEditModel Model = new();
+
+    protected List<MemorabiliaItemModel> SelectedMemorabilia = new();
+
     protected ValidationResult ValidationResult { get; set; }
 
     protected Alert[] ValidationResultAlerts => ValidationResult != null
         ? ValidationResult.Errors.Select(error => new Alert(error.ErrorMessage, Severity.Error)).ToArray()
-        : Array.Empty<Alert>();
+        : Array.Empty<Alert>();     
 
-    protected CollectionEditModel Model = new();
+    private MemorabiliaSearchCriteria _filter = new();
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
@@ -40,6 +46,11 @@ public partial class CollectionEditor
         {
             await JSRuntime.ScrollToAlert();
         }
+    }
+
+    protected void OnFilter(MemorabiliaSearchCriteria filter)
+    {
+        _filter = filter;
     }
 
     protected override async Task OnInitializedAsync()
@@ -54,35 +65,43 @@ public partial class CollectionEditor
             return;
         }
 
-        Domain.Entities.Collection collection = await QueryRouter.Send(new GetCollection(Id));
-
-        Model = new CollectionEditModel(collection);
+        await Load();
     }
 
     protected async Task AddMemorabilia()
     {
         var parameters = new DialogParameters
         {
+            ["CollectionId"] = Model.Id,
             ["UserId"] = Model.UserId
         };
 
         var options = new DialogOptions()
         {
-            MaxWidth = MaxWidth.Large,
+            MaxWidth = MaxWidth.ExtraLarge,
             FullWidth = true,
             DisableBackdropClick = true
         };
 
-        //TODO: Create a select memorabilia dialog
-        var dialog = DialogService.Show<SelectAutographDialog>("Select Memorabilia", parameters, options);
+        var dialog = DialogService.Show<AddCollectionMemorabiliaDialog>("Select Memorabilia", parameters, options);
         var result = await dialog.Result;
 
         if (result.Canceled)
             return;
 
-        var items = (List<CollectionMemorabiliaEditModel>)result.Data;
+        var items = (List<MemorabiliaItemModel>)result.Data;
 
-        Model.Items.AddRange(items);
+        var collectionMemorabilias 
+            = items.Select(item => new CollectionMemorabiliaEditModel
+              {
+                  CollectionId = Model.Id,
+                  MemorabiliaId = item.Id
+              }).ToList();
+
+        Model.Items.AddRange(collectionMemorabilias);
+
+        await OnSave();
+        await Load();
     }
 
     protected async Task OnSave()
@@ -97,5 +116,16 @@ public partial class CollectionEditor
         await CommandRouter.Send(command);
 
         Snackbar.Add("Collection was saved successfully!", Severity.Success);
+
+        Id = command.Id;
+
+        await Load();
+    }
+
+    private async Task Load()
+    {
+        Entity.Collection collection = await QueryRouter.Send(new GetCollection(Id));
+
+        Model = new CollectionEditModel(collection);
     }
 }

@@ -42,7 +42,7 @@ public class MemorabiliaItemEditModel : SaveViewModel
     public bool CanHaveCost 
         => AcquisitionType?.CanHaveCost() ?? false;
 
-    public List<Entity.Collection> Collections { get; set; }
+    public List<Entity.Collection> Collections { get; set; } = new();
 
     public int ConditionId { get; set; } 
         = Constant.Condition.Pristine.Id;
@@ -55,7 +55,7 @@ public class MemorabiliaItemEditModel : SaveViewModel
 
     public decimal? EstimatedValue { get; set; }
 
-    public override string ExitNavigationPath => "Memorabilia/Items";
+    public override string ExitNavigationPath => "Memorabilia/View";
 
     public bool ForTrade { get; set; }
 

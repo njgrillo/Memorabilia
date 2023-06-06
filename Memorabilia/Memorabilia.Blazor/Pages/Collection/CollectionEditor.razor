@@ -24,20 +24,27 @@
                        SelectedText="@Model.Description"
                        SelectedTextChanged="@((p) => Model.Description = p)" />
         </ContentColumn2>
-    </DivRowCol3>
-    <DivRowCol3>
-        <Content>
+        <ContentColumn3>
             <AddButton OnClick="AddMemorabilia"
                        Text="Add Memorabilia" />
-        </Content>        
+        </ContentColumn3>
     </DivRowCol3>
-    <DivRowCol12>
-        <Content>
-            <CollectionMemorabiliaGrid Items="Model.Items" />
-        </Content>
-    </DivRowCol12>
+    <Condition Evaluation="Model.Items.Any()">
+        <Match>
+            <div class="row">
+                <MemorabiliaFilter OnFilter="OnFilter" />                
+            </div>
+            <div class="row" style="margin-left:1%;margin-right:1%;">
+                <CollectionMemorabiliaDetailGrid CollectionId="Model.Id"
+                                                 Filter="_filter"
+                                                 MemorabiliaSelected="@((p) => SelectedMemorabilia = p)"
+                                                 UserId="UserId" />
+            </div>
+            <br />
+        </Match>
+    </Condition> 
     <div style="margin-bottom:1%">
         <SaveButton OnClick="OnSave"
                     Text="Save" />
-    </div> 
+    </div>
 </div>

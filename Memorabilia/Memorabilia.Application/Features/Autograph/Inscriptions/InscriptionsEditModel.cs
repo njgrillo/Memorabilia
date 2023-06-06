@@ -38,7 +38,7 @@ public class InscriptionsEditModel : SaveViewModel
         => Inscriptions.Any() ? Constant.EditModeType.Update : Constant.EditModeType.Add;
 
     public override string ExitNavigationPath 
-        => "Memorabilia/Items";
+        => "Memorabilia/View";
 
     public bool HasMemorabiliaImages 
         => MemorabiliaImageNames.Any();

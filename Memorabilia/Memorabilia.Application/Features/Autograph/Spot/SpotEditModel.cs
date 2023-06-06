@@ -31,7 +31,7 @@ public class SpotEditModel : SaveViewModel
         => SpotId > 0 ? Constant.EditModeType.Update : Constant.EditModeType.Add;
 
     public override string ExitNavigationPath 
-        => "Memorabilia/Items";
+        => "Memorabilia/View";
 
     public bool HasMemorabiliaImages
         => MemorabiliaImageNames.Any();

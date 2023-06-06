@@ -1,8 +1,8 @@
 ﻿namespace Memorabilia.Application.Features.Collection;
 
-public record GetCollection(int Id) : IQuery<Domain.Entities.Collection>
+public record GetCollection(int Id) : IQuery<Entity.Collection>
 {
-    public class Handler : QueryHandler<GetCollection, Domain.Entities.Collection>
+    public class Handler : QueryHandler<GetCollection, Entity.Collection>
     {
         private readonly ICollectionRepository _collectionRepository;
 
@@ -11,7 +11,7 @@ public record GetCollection(int Id) : IQuery<Domain.Entities.Collection>
             _collectionRepository = collectionRepository;
         }
 
-        protected override async Task<Domain.Entities.Collection> Handle(GetCollection query)
+        protected override async Task<Entity.Collection> Handle(GetCollection query)
         {
             return await _collectionRepository.Get(query.Id);
         }

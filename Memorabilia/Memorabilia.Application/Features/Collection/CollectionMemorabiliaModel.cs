@@ -1,14 +1,12 @@
-﻿using Memorabilia.Domain.Entities;
-
-namespace Memorabilia.Application.Features.Collection;
+﻿namespace Memorabilia.Application.Features.Collection;
 
 public class CollectionMemorabiliaModel
 {
-    private readonly CollectionMemorabilia _collectionMemorabilia;
+    private readonly Entity.CollectionMemorabilia _collectionMemorabilia;
 
     public CollectionMemorabiliaModel() { }
 
-    public CollectionMemorabiliaModel(CollectionMemorabilia collectionMemorabilia)
+    public CollectionMemorabiliaModel(Entity.CollectionMemorabilia collectionMemorabilia)
     {
         _collectionMemorabilia = collectionMemorabilia;
     }
@@ -36,15 +34,16 @@ public class CollectionMemorabiliaModel
         }
     }
 
-    public string ItemTypeName => _collectionMemorabilia.Memorabilia.ItemType?.Name;
+    public string ItemTypeName 
+        => _collectionMemorabilia.Memorabilia.ItemType?.Name;
 
     public int MemorabiliaId 
         => _collectionMemorabilia.MemorabiliaId;
 
     public string MemorabiliaPrimaryImage 
         => !_collectionMemorabilia.Memorabilia.Images.Any()
-            ? Domain.Constants.ImageFileName.ImageNotAvailable
-            : _collectionMemorabilia.Memorabilia.Images.FirstOrDefault(image => image.ImageTypeId == Domain.Constants.ImageType.Primary.Id)?.FileName 
+            ? Constant.ImageFileName.ImageNotAvailable
+            : _collectionMemorabilia.Memorabilia.Images.FirstOrDefault(image => image.ImageTypeId == Constant.ImageType.Primary.Id)?.FileName 
               ?? _collectionMemorabilia.Memorabilia.Images.First().FileName;
 
     public int UserId 

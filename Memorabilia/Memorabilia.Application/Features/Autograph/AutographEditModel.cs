@@ -95,7 +95,7 @@ public class AutographEditModel : SaveViewModel
     public decimal? EstimatedValue { get; set; }
 
     public override string ExitNavigationPath 
-        => "Memorabilia/Items";
+        => "Memorabilia/View";
 
     public bool FullName { get; set; }
 

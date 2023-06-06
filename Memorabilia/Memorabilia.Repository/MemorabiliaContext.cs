@@ -4,6 +4,8 @@ namespace Memorabilia.Repository;
 
 public class MemorabiliaContext : DbContext, IMemorabiliaContext
 {
+    public DbSet<Domain.Entities.CollectionMemorabilia> CollectionMemorabilia { get; set; }
+
     public DbSet<Domain.Entities.Memorabilia> Memorabilia { get; set; }
 
     public MemorabiliaContext(DbContextOptions<MemorabiliaContext> options) : base(options) { }        

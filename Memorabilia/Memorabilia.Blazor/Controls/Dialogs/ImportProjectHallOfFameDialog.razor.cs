@@ -20,9 +20,9 @@ public partial class ImportProjectHallOfFameDialog
     protected int MaxYear
         => DateTime.UtcNow.Year;
 
-    protected Domain.Entities.Person[] People { get; set; } = Array.Empty<Domain.Entities.Person>();     
+    protected Entity.Person[] People { get; set; } = Array.Empty<Entity.Person>();     
 
-    private bool FilterFunc1(Domain.Entities.Person person)
+    private bool FilterFunc1(Entity.Person person)
         => FilterFunc(person, _search);
 
     private string _search;
@@ -32,14 +32,14 @@ public partial class ImportProjectHallOfFameDialog
             ? "Deselect All"
             : "Select All";
 
-    private List<Domain.Entities.Person> SelectedPeople = new();
+    private List<Entity.Person> SelectedPeople = new();
 
     public void Cancel()
     {
         MudDialog.Cancel();
     }
 
-    protected static bool FilterFunc(Domain.Entities.Person person, string search)
+    protected static bool FilterFunc(Entity.Person person, string search)
     {
         return search.IsNullOrEmpty() ||
                person.DisplayName.Contains(search, StringComparison.OrdinalIgnoreCase) ||
@@ -77,7 +77,7 @@ public partial class ImportProjectHallOfFameDialog
             : People.ToList();
     }
 
-    protected void PersonSelected(Domain.Entities.Person person)
+    protected void PersonSelected(Entity.Person person)
     {
         if (!SelectedPeople.Contains(person))
         {

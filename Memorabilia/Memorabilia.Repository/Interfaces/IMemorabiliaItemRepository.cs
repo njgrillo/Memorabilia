@@ -13,6 +13,11 @@ public interface IMemorabiliaItemRepository : IDomainRepository<Domain.Entities.
 
     Task<Domain.Entities.Memorabilia[]> GetAll(Dictionary<string, object> parameters);
 
+    Task<PagedResult<Domain.Entities.Memorabilia>> GetAllByCollection(
+        int collectionId,
+        PageInfo pageInfo,
+        MemorabiliaSearchCriteria memorabiliaSearchCriteria = null);
+
     Task<IEnumerable<Domain.Entities.Memorabilia>> GetAllUnsigned(int userId);
 
     int[] GetBrandIds(int userId);

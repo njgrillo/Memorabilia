@@ -13,13 +13,14 @@ public class SaveCollection
 
         protected override async Task Handle(Command command)
         {
-            Domain.Entities.Collection collection;
+            Entity.Collection collection;
 
             if (command.IsNew)
             {
-                collection = new Domain.Entities.Collection(command.Name,
-                                                            command.Description,
-                                                            command.UserId);
+                collection = new Entity.Collection(command.Name,
+                                                   command.Description,
+                                                   command.UserId,
+                                                   command.MemorabiliaIds);
 
                 await _collectionRepository.Add(collection);
 
@@ -38,7 +39,8 @@ public class SaveCollection
             }
 
             collection.Set(command.Name,
-                           command.Description);
+                           command.Description,
+                           command.MemorabiliaIds);
 
             await _collectionRepository.Update(collection);
         }
@@ -63,6 +65,9 @@ public class SaveCollection
         public bool IsModified => _viewModel.IsModified;
 
         public bool IsNew => _viewModel.IsNew;
+
+        public int[] MemorabiliaIds 
+            => _viewModel.Items.Select(item => item.MemorabiliaId).ToArray();
 
         public string Name => _viewModel.Name;
 

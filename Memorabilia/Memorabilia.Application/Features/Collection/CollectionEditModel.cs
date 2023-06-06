@@ -4,7 +4,7 @@ public class CollectionEditModel : SaveViewModel
 {
     public CollectionEditModel() { }
 
-    public CollectionEditModel(Domain.Entities.Collection collection)
+    public CollectionEditModel(Entity.Collection collection)
     {
         Description = collection.Description;
         Id = collection.Id;
@@ -12,6 +12,7 @@ public class CollectionEditModel : SaveViewModel
                           .Select(item => new CollectionMemorabiliaEditModel(new CollectionMemorabiliaModel(item)))
                           .ToList();
         Name = collection.Name;
+        UserId = collection.UserId;
     }
 
     public CollectionEditModel(CollectionModel viewModel)
@@ -22,6 +23,7 @@ public class CollectionEditModel : SaveViewModel
                          .Select(item => new CollectionMemorabiliaEditModel(new CollectionMemorabiliaModel(item)))
                          .ToList();
         Name = viewModel.Name;
+        UserId = viewModel.UserId;
     }
 
     public string Description { get; set; }

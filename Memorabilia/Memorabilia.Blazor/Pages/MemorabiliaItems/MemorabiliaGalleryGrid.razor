@@ -1,0 +1,29 @@
+﻿<div class="row">
+    <Iterations Items="_items" Context="item">
+        <div class="col-md-4">
+            <MemorabiliaItemGalleryCard Description="@GetDescription(item)"
+                                        DomainImageRootPath="@ImagePath.DomainImageRootPath"
+                                        EditNavigationPath="@item.EditNavigationPath"
+                                        ImageRootPath="@(Path.Combine(ImagePath.MemorabiliaImageRootPath, UserId.ToString()))"
+                                        MemorabiliaItem="@item"
+                                        PersonImageRootPath="@ImagePath.PersonImageRootPath"
+                                        PrimaryImageFileName="@item.ImageFileName"
+                                        PrimaryImageNavigationPath="@item.PrimaryImageNavigationPath"
+                                        Subtitle="@GetSubtitle(item)"
+                                        Title="@GetTitle(item)"
+                                        TooltipText="@item.TooltipText" />
+        </div>
+    </Iterations>
+</div>
+<DivHidden Hidden="@(!DisplayLoadMoreButton)">
+    <Content>
+        <DivRowCol12Center>
+            <Content>
+                <CustomButton ButtonType="MudBlazor.ButtonType.Button"
+                              OnClick="LoadMore"
+                              Size="MudBlazor.Size.Small"
+                              Text="Load More" />
+            </Content>
+        </DivRowCol12Center>
+    </Content>
+</DivHidden>
