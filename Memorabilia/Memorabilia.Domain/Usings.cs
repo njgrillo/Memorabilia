@@ -6,3 +6,5 @@ global using System;
 global using System.Collections.Generic;
 global using System.ComponentModel;
 global using System.Linq;
+global using Constant = Memorabilia.Domain.Constants;
+global using Entity = Memorabilia.Domain.Entities;
