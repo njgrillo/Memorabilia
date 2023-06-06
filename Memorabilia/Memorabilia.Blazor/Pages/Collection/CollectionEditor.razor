@@ -34,11 +34,29 @@
             <div class="row">
                 <MemorabiliaFilter OnFilter="OnFilter" />                
             </div>
+            <div class="row">
+                <div class="col-3">
+                    <MudSwitch Checked="@IsDetailView"
+                               CheckedChanged="(p) => IsDetailView = p"
+                               Color="MudBlazor.Color.Success"
+                               Label="Detail View"
+                               T="bool" />
+                </div>
+            </div>
             <div class="row" style="margin-left:1%;margin-right:1%;">
-                <CollectionMemorabiliaDetailGrid CollectionId="Model.Id"
-                                                 Filter="_filter"
-                                                 MemorabiliaSelected="@((p) => SelectedMemorabilia = p)"
-                                                 UserId="UserId" />
+                <Condition Evaluation="IsDetailView">
+                    <Match>
+                        <CollectionMemorabiliaDetailGrid CollectionId="Model.Id"
+                                                         Filter="_filter"
+                                                         MemorabiliaSelected="@((p) => SelectedMemorabilia = p)"
+                                                         UserId="UserId" />
+                    </Match>
+                    <NotMatch>
+                        <CollectionMemorabiliaGalleryGrid CollectionId="Model.Id" 
+                                                          Filter="_filter"
+                                                          UserId="@UserId" />
+                    </NotMatch>
+                </Condition>                
             </div>
             <br />
         </Match>

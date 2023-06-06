@@ -28,6 +28,8 @@ public partial class CollectionEditor
     [Parameter]
     public int UserId { get; set; }
 
+    protected bool IsDetailView = true;
+
     protected CollectionEditModel Model = new();
 
     protected List<MemorabiliaItemModel> SelectedMemorabilia = new();

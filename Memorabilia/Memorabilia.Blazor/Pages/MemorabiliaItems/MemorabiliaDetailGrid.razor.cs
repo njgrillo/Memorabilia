@@ -101,6 +101,11 @@ public partial class MemorabiliaDetailGrid
         Snackbar.Add($"{itemToDelete.ItemTypeName} was deleted successfully!", Severity.Success);
     }
 
+    protected void OnImageLoaded()
+    {
+        StateHasChanged();
+    }
+
     protected async Task OnMemorabiliaSelected(MemorabiliaItemModel item)
     {
         if (!SelectedMemorabilia.Contains(item))

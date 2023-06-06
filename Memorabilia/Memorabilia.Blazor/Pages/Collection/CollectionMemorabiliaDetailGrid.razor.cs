@@ -54,20 +54,11 @@ public partial class CollectionMemorabiliaDetailGrid
         await _table.ReloadServerData();
 
         _resetPaging = false;
-    }
+    }    
 
-    protected async Task RemoveMemorabiliaItem(params int[] ids)
+    protected void OnImageLoaded()
     {
-        MemorabiliaItemModel[] itemsToDelete = Model.MemorabiliaItems.Where(item => ids.Contains(item.Id)).ToArray();
-
-        await CommandRouter.Send(new RemoveCollectionMemorabilia(CollectionId, ids));
-
-        foreach (MemorabiliaItemModel item in itemsToDelete)
-        {
-            Model.MemorabiliaItems.Remove(item);
-        }        
-
-        Snackbar.Add("Item(s) removed successfully!", Severity.Success);
+        StateHasChanged();
     }
 
     protected async Task OnMemorabiliaSelected(MemorabiliaItemModel item)
@@ -118,6 +109,20 @@ public partial class CollectionMemorabiliaDetailGrid
             : Model.MemorabiliaItems.ToList();
 
         await MemorabiliaSelected.InvokeAsync(SelectedMemorabilia);
+    }
+
+    protected async Task RemoveMemorabiliaItem(params int[] ids)
+    {
+        MemorabiliaItemModel[] itemsToDelete = Model.MemorabiliaItems.Where(item => ids.Contains(item.Id)).ToArray();
+
+        await CommandRouter.Send(new RemoveCollectionMemorabilia(CollectionId, ids));
+
+        foreach (MemorabiliaItemModel item in itemsToDelete)
+        {
+            Model.MemorabiliaItems.Remove(item);
+        }
+
+        Snackbar.Add("Item(s) removed successfully!", Severity.Success);
     }
 
     protected async Task ShowRemoveMemorabiliaConfirm(params int[] ids)

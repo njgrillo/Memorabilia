@@ -45,13 +45,10 @@
         </MudTd>
         <MudTd DataLabel="">
             <MudTooltip Text="@context.ImageDisplayCount">
-                <MudImage @onclick="@(_ => NavigationManager.NavigateTo($"Memorabilia/Image/Edit/{@context.Id}"))" 
-                          Class="rounded-lg can-click" 
-                          Elevation="5" 
-                          Height="200"
-                          ObjectFit="@ObjectFit.Cover"
-                          Src="@(ImageService.GetUserImageData(context.ImageFileName, UserId))"
-                          Width="200" />
+                <GridImage ImageLoaded="OnImageLoaded" 
+                           ImageFileName="@context.ImageFileName"
+                           NavigationPath="@($"Memorabilia/Image/Edit/{@context.Id}")"
+                           UserId="UserId" />
             </MudTooltip> 
         </MudTd>
         <MudTd DataLabel="Item">@context.ItemTypeName</MudTd>

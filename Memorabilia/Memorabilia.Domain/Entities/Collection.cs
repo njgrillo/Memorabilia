@@ -58,6 +58,9 @@ public class Collection : Framework.Library.Domain.Entity.DomainEntity, IWithNam
 
         foreach (int memorabiliaId in memorabiliaIds)
         {
+            if (Memorabilia.Any(item => item.MemorabiliaId == memorabiliaId))
+                continue;
+
             Memorabilia.Add(new CollectionMemorabilia(Id, memorabiliaId));
         }
     }
