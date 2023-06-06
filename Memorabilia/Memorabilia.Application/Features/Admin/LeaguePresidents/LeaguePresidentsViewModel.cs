@@ -3,7 +3,7 @@ using Memorabilia.Domain.Entities;
 
 namespace Memorabilia.Application.Features.Admin.LeaguePresidents;
 
-public class LeaguePresidentsViewModel : ViewModel
+public class LeaguePresidentsViewModel : Model
 {
     public LeaguePresidentsViewModel() { }
 

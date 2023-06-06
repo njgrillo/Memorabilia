@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Application.Features.User.Dashboard;
 
-public class UserDashboardsViewModel : ViewModel
+public class UserDashboardsViewModel : Model
 {
     public UserDashboardsViewModel() { }
 

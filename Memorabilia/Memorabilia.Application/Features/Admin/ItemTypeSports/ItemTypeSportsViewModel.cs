@@ -3,7 +3,7 @@ using Memorabilia.Domain.Entities;
 
 namespace Memorabilia.Application.Features.Admin.ItemTypeSports;
 
-public class ItemTypeSportsViewModel : ViewModel
+public class ItemTypeSportsViewModel : Model
 {
     public ItemTypeSportsViewModel() { }
 

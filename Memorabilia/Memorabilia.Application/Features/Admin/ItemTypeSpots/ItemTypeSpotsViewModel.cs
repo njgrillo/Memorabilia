@@ -3,7 +3,7 @@ using Memorabilia.Domain.Entities;
 
 namespace Memorabilia.Application.Features.Admin.ItemTypeSpots;
 
-public class ItemTypeSpotsViewModel : ViewModel
+public class ItemTypeSpotsViewModel : Model
 {
     public ItemTypeSpotsViewModel() { }
 

@@ -2,7 +2,7 @@
 
 namespace Memorabilia.Application.Features.Memorabilia.Trunks;
 
-public class TrunkViewModel : ViewModel
+public class TrunkViewModel : Model
 {
     private readonly Domain.Entities.Memorabilia _memorabilia;
 

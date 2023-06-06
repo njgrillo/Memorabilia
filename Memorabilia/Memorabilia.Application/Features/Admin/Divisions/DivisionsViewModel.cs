@@ -2,7 +2,7 @@
 
 namespace Memorabilia.Application.Features.Admin.Divisions;
 
-public class DivisionsViewModel : ViewModel
+public class DivisionsViewModel : Model
 {
     public DivisionsViewModel() { }
 

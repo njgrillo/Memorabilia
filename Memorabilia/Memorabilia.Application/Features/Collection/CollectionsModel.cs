@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Application.Features.Collection;
 
-public class CollectionsModel : ViewModel
+public class CollectionsModel : Model
 {
     public CollectionsModel() { }
 

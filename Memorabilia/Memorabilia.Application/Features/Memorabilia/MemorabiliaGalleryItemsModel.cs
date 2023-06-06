@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Application.Features.Memorabilia;
 
-public class MemorabiliaGalleryItemsModel : ViewModel
+public class MemorabiliaGalleryItemsModel : Model
 {
 	public MemorabiliaGalleryItemsModel(IEnumerable<Entity.Memorabilia> items,
                                         PageInfoResult pageInfo = null)

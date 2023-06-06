@@ -2,7 +2,7 @@
 
 namespace Memorabilia.Application.Features.Admin.Commissioners;
 
-public class CommissionersViewModel : ViewModel
+public class CommissionersViewModel : Model
 {
     public CommissionersViewModel() { }
 

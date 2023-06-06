@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Application.Features;
 
-public abstract class ViewModel : IWithName, IWithValue<int>
+public abstract class Model : IWithName, IWithValue<int>
 {
     public virtual string BackNavigationPath { get; set; }
 

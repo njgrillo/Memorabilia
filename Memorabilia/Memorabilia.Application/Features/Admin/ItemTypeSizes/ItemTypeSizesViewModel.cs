@@ -3,7 +3,7 @@ using Memorabilia.Domain.Entities;
 
 namespace Memorabilia.Application.Features.Admin.ItemTypeSizes;
 
-public class ItemTypeSizesViewModel : ViewModel
+public class ItemTypeSizesViewModel : Model
 {
     public ItemTypeSizesViewModel() { }
 

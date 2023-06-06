@@ -2,7 +2,7 @@
 
 namespace Memorabilia.Application.Features.Admin.Leagues;
 
-public class LeaguesViewModel : ViewModel
+public class LeaguesViewModel : Model
 {
     public LeaguesViewModel() { }
 

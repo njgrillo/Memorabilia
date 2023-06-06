@@ -2,7 +2,7 @@
 
 namespace Memorabilia.Application.Features.Admin.ItemTypeBrand;
 
-public class ItemTypeBrandsViewModel : ViewModel
+public class ItemTypeBrandsViewModel : Model
 {
     public ItemTypeBrandsViewModel() { }
 

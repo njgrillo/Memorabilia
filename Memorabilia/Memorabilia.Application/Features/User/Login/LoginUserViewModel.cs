@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Application.Features.User.Login;
 
-public class LoginUserViewModel : ViewModel
+public class LoginUserViewModel : Model
 {
     public LoginUserViewModel() { }
 

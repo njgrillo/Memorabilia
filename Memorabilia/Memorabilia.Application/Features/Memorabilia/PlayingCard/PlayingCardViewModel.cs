@@ -2,7 +2,7 @@
 
 namespace Memorabilia.Application.Features.Memorabilia.PlayingCard;
 
-public class PlayingCardViewModel : ViewModel
+public class PlayingCardViewModel : Model
 {
     private readonly Domain.Entities.Memorabilia _memorabilia;
 

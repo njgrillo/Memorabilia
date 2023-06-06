@@ -2,7 +2,7 @@
 
 namespace Memorabilia.Application.Features.Admin.SportLeagueLevels;
 
-public class SportLeagueLevelsViewModel : ViewModel
+public class SportLeagueLevelsViewModel : Model
 {
     public SportLeagueLevelsViewModel() { }
 

@@ -2,7 +2,7 @@
 
 namespace Memorabilia.Application.Features.Memorabilia.TennisRacket;
 
-public class TennisRacketViewModel : ViewModel
+public class TennisRacketViewModel : Model
 {
     private readonly Domain.Entities.Memorabilia _memorabilia;
 

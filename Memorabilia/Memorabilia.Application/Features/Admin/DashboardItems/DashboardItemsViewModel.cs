@@ -2,7 +2,7 @@
 
 namespace Memorabilia.Application.Features.Admin.DashboardItems;
 
-public class DashboardItemsViewModel : ViewModel
+public class DashboardItemsViewModel : Model
 {
     public DashboardItemsViewModel() { }
 

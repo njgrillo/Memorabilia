@@ -2,7 +2,7 @@
 
 namespace Memorabilia.Application.Features.Memorabilia.Baseball;
 
-public class BaseballViewModel : ViewModel
+public class BaseballViewModel : Model
 {
     private readonly Domain.Entities.Memorabilia _memorabilia;
 

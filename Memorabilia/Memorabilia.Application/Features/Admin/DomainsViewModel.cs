@@ -2,7 +2,7 @@
 
 namespace Memorabilia.Application.Features.Admin;
 
-public class DomainsViewModel : ViewModel
+public class DomainsViewModel : Model
 {
     public DomainsViewModel() { }
 

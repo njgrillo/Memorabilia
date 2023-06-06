@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Application.Features.Autograph;
 
-public class AutographModel : ViewModel
+public class AutographModel : Model
 {
     private readonly Entity.Autograph _autograph;
 

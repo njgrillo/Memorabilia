@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Application.Features.User.Settings;
 
-public class UserSettingsViewModel : ViewModel
+public class UserSettingsViewModel : Model
 {
     public UserSettingsViewModel() { }
 

@@ -2,7 +2,7 @@
 
 namespace Memorabilia.Application.Features.Memorabilia.Guitar;
 
-public class GuitarViewModel : ViewModel
+public class GuitarViewModel : Model
 {
     private readonly Domain.Entities.Memorabilia _memorabilia;
 

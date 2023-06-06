@@ -3,7 +3,7 @@ using Memorabilia.Domain.Entities;
 
 namespace Memorabilia.Application.Features.Admin.Pewters;
 
-public class PewtersViewModel : ViewModel
+public class PewtersViewModel : Model
 {
     public PewtersViewModel() { }
 

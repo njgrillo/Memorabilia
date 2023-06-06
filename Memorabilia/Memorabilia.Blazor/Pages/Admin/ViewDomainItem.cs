@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Blazor.Pages.Admin;
 
-public abstract class ViewDomainItem<T> : CommandQuery where T : ViewModel
+public abstract class ViewDomainItem<T> : CommandQuery where T : Model
 {
     protected T ViewModel = (T)Activator.CreateInstance(typeof(T));
 

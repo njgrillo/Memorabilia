@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Blazor.Controls.TypeAhead;
 
-public class NamedEntityAutoComplete<T> : Autocomplete<T> where T : ViewModel, IWithName, IWithValue<int>
+public class NamedEntityAutoComplete<T> : Autocomplete<T> where T : Model, IWithName, IWithValue<int>
 {
     [Parameter]
     public bool IsCulturalSearch { get; set; }

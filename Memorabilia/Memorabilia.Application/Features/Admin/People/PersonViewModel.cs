@@ -2,7 +2,7 @@
 
 namespace Memorabilia.Application.Features.Admin.People;
 
-public class PersonViewModel : ViewModel, IWithName, IWithValue<int>
+public class PersonViewModel : Model, IWithName, IWithValue<int>
 {
     private readonly Person _person;
 

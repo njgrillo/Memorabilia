@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Application.Features.Memorabilia;
 
-public class MemorabiliaItemsModel : ViewModel
+public class MemorabiliaItemsModel : Model
 {
     public MemorabiliaItemsModel() { }
 

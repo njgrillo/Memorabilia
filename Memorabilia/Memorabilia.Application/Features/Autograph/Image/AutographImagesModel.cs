@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Application.Features.Autograph.Image;
 
-public class AutographImagesModel : ViewModel
+public class AutographImagesModel : Model
 {
     public AutographImagesModel() { }
 

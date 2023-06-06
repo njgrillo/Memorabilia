@@ -2,7 +2,7 @@
 
 namespace Memorabilia.Application.Features.Admin.ItemTypeLevel;
 
-public class ItemTypeLevelsViewModel : ViewModel
+public class ItemTypeLevelsViewModel : Model
 {
     public ItemTypeLevelsViewModel() { }
 

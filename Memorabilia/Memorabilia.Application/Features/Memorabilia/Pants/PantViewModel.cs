@@ -2,7 +2,7 @@
 
 namespace Memorabilia.Application.Features.Memorabilia.Pants;
 
-public class PantViewModel : ViewModel
+public class PantViewModel : Model
 {
     private readonly Domain.Entities.Memorabilia _memorabilia;
 

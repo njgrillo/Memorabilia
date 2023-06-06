@@ -3,7 +3,7 @@ using Memorabilia.Domain.Entities;
 
 namespace Memorabilia.Application.Features.Admin.Teams;
 
-public class TeamsViewModel : ViewModel
+public class TeamsViewModel : Model
 {
     public TeamsViewModel() { }
 

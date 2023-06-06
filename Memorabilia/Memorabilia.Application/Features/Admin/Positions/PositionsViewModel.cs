@@ -2,7 +2,7 @@
 
 namespace Memorabilia.Application.Features.Admin.Positions;
 
-public class PositionsViewModel : ViewModel
+public class PositionsViewModel : Model
 {
     public PositionsViewModel() { }
 

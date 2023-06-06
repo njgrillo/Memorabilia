@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Application.Features.Tools.Profile.Common;
 
-public class ProfileModel : ViewModel
+public class ProfileModel : Model
 {
     protected readonly Entity.Person Person;
 

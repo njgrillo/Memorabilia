@@ -2,7 +2,7 @@
 
 namespace Memorabilia.Application.Features.Memorabilia.WristBand;
 
-public class WristBandViewModel : ViewModel
+public class WristBandViewModel : Model
 {
     private readonly Domain.Entities.Memorabilia _memorabilia;
 

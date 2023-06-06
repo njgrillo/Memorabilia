@@ -2,7 +2,7 @@
 
 namespace Memorabilia.Application.Features.Memorabilia.Drum;
 
-public class DrumViewModel : ViewModel
+public class DrumViewModel : Model
 {
     private readonly Domain.Entities.Memorabilia _memorabilia;
 

@@ -3,7 +3,7 @@ using Memorabilia.Domain.Entities;
 
 namespace Memorabilia.Application.Features.Admin.People;
 
-public class PeopleViewModel : ViewModel
+public class PeopleViewModel : Model
 {
     public PeopleViewModel() { }
 

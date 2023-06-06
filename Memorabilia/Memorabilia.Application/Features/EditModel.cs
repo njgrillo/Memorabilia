@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Application.Features;
 
-public class EditModel : ViewModel
+public class EditModel : Model
 {   
     public virtual Constant.EditModeType EditModeType 
         => Id > 0 

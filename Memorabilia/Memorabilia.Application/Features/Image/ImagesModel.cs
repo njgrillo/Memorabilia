@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Application.Features.Image;
 
-public class ImagesModel : ViewModel
+public class ImagesModel : Model
 {
     public ImagesModel() { }
 

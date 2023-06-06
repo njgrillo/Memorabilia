@@ -2,7 +2,7 @@
 
 namespace Memorabilia.Application.Features.Memorabilia.PinFlag;
 
-public class PinFlagViewModel : ViewModel
+public class PinFlagViewModel : Model
 {
     private readonly Domain.Entities.Memorabilia _memorabilia;
 

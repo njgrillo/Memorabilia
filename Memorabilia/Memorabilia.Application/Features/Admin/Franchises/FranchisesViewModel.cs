@@ -2,7 +2,7 @@
 
 namespace Memorabilia.Application.Features.Admin.Franchises;
 
-public class FranchisesViewModel : ViewModel
+public class FranchisesViewModel : Model
 {
     public FranchisesViewModel() { }
 

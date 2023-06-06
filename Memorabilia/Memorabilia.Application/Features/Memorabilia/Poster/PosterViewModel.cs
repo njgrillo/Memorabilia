@@ -2,7 +2,7 @@
 
 namespace Memorabilia.Application.Features.Memorabilia.Poster;
 
-public class PosterViewModel : ViewModel
+public class PosterViewModel : Model
 {
     private readonly Domain.Entities.Memorabilia _memorabilia;
 

@@ -3,7 +3,7 @@ using Memorabilia.Domain.Entities;
 
 namespace Memorabilia.Application.Features.Admin.Conferences;
 
-public class ConferencesViewModel : ViewModel
+public class ConferencesViewModel : Model
 {
     public ConferencesViewModel() { }
 

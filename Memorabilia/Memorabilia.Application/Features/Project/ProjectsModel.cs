@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Application.Features.Project;
 
-public class ProjectsModel : ViewModel
+public class ProjectsModel : Model
 {
     public ProjectsModel() { }
 
