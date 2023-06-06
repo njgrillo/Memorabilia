@@ -2,13 +2,13 @@
 
 public partial class SportHallOfFameProfile : SportProfile
 {
-    private HallOfFameProfileViewModel[] HallOfFames = Array.Empty<HallOfFameProfileViewModel>();
+    private HallOfFameProfileModel[] HallOfFames = Array.Empty<HallOfFameProfileModel>();
 
     protected override void OnParametersSet()
     {
         HallOfFames = Person.HallOfFames
                             .Filter(Sport)
-                            .Select(hof => new HallOfFameProfileViewModel(hof))
+                            .Select(hof => new HallOfFameProfileModel(hof))
                             .ToArray();
     }
 }

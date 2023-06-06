@@ -17,7 +17,7 @@ public class SaveGuitarViewModel : MemorabiliaItemEditViewModel
         People = viewModel.People.Select(person => new SavePersonViewModel(new PersonViewModel(person.Person))).ToList();
     }
 
-    public override string ImageFileName => Domain.Constants.ImageFileName.Guitar;
+    public override string ImageFileName => Constant.ImageFileName.Guitar;
 
     public override ItemType ItemType => ItemType.Guitar;
 }

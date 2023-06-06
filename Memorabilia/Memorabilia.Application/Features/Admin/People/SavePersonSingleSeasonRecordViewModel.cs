@@ -2,7 +2,7 @@
 
 namespace Memorabilia.Application.Features.Admin.People;
 
-public class SavePersonSingleSeasonRecordViewModel : SaveViewModel
+public class SavePersonSingleSeasonRecordViewModel : EditModel
 {
     public SavePersonSingleSeasonRecordViewModel() { }
 
@@ -11,7 +11,7 @@ public class SavePersonSingleSeasonRecordViewModel : SaveViewModel
         Id = record.Id;
         PersonId = record.PersonId;
         Record = record.Record;
-        RecordType = Domain.Constants.RecordType.Find(record.RecordTypeId);
+        RecordType = Constant.RecordType.Find(record.RecordTypeId);
         Year = record.Year;
     }   
 
@@ -19,7 +19,7 @@ public class SavePersonSingleSeasonRecordViewModel : SaveViewModel
 
     public string Record { get; set; }
 
-    public Domain.Constants.RecordType RecordType { get; set; }
+    public Constant.RecordType RecordType { get; set; }
 
     public string RecordTypeName => RecordType?.Name;
 

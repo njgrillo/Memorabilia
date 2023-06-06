@@ -15,7 +15,7 @@ public class DivisionViewModel
 
     public string Abbreviation => _division.Abbreviation;
 
-    public Domain.Constants.Conference Conference => Domain.Constants.Conference.Find(ConferenceId ?? 0);
+    public Constant.Conference Conference => Constant.Conference.Find(ConferenceId ?? 0);
 
     public int? ConferenceId => _division.ConferenceId;
 
@@ -25,7 +25,7 @@ public class DivisionViewModel
 
     public int? LeagueId => _division.LeagueId;
 
-    public string LeagueName => Domain.Constants.League.Find(LeagueId ?? 0)?.Name;  
+    public string LeagueName => Constant.League.Find(LeagueId ?? 0)?.Name;  
 
     public string Name => _division.Name;       
 }

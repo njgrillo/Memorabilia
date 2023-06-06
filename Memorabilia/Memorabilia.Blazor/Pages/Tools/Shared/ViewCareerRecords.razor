@@ -1,4 +1,4 @@
-﻿@inherits ViewSportTools<CareerRecordViewModel>
+﻿@inherits ViewSportTools<CareerRecordModel>
 
 <DivPad2>
     <Content>
@@ -6,7 +6,7 @@
             <Content>
                 <MudTable Bordered="false"
                           Dense="false"
-                          Filter="new Func<CareerRecordViewModel,bool>(FilterFunc1)"
+                          Filter="new Func<CareerRecordModel,bool>(FilterFunc1)"
                           Hover="true"
                           Items="@_viewModel.CareerRecords.ToList()"
                           Striped="true">

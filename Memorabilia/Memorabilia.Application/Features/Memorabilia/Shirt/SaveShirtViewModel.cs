@@ -29,7 +29,7 @@ public class SaveShirtViewModel : MemorabiliaItemEditViewModel
             Team = new SaveTeamViewModel(new TeamViewModel(viewModel.Teams.First().Team));
     }
 
-    public override string ImageFileName => Domain.Constants.ImageFileName.Shirt;
+    public override string ImageFileName => Constant.ImageFileName.Shirt;
 
     public override ItemType ItemType => ItemType.Shirt;
 }

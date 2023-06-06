@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Application.Features.Services.Filters.Memorabilia.Rules;
 
-public class FranchiseFilterRule : IFilterRule<Domain.Entities.Memorabilia>
+public class FranchiseFilterRule : IFilterRule<Entity.Memorabilia>
 {
     private int[] _franchiseIds;
 
@@ -14,7 +14,7 @@ public class FranchiseFilterRule : IFilterRule<Domain.Entities.Memorabilia>
         return _franchiseIds.Any();
     }
 
-    public Expression<Func<Domain.Entities.Memorabilia, bool>> GetExpression()
+    public Expression<Func<Entity.Memorabilia, bool>> GetExpression()
     {
         return item => item.Teams
                            .Select(team => team.Team.Franchise)

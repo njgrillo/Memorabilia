@@ -25,7 +25,7 @@ public class SaveTennisballViewModel : MemorabiliaItemEditViewModel
             Person = new SavePersonViewModel(new PersonViewModel(viewModel.People.First().Person));
     }
 
-    public override string ImageFileName => Domain.Constants.ImageFileName.Tennisball;
+    public override string ImageFileName => Constant.ImageFileName.Tennisball;
 
     public override ItemType ItemType => ItemType.Tennisball;
 

@@ -1,8 +1,8 @@
 ﻿namespace Memorabilia.Application.Features.Tools.Profile.Basketball;
 
-public class GetBasketballProfile
+public record GetBasketballProfile(int PersonId) : IQuery<BasketballProfileModel>
 {
-    public class Handler : QueryHandler<Query, BasketballProfileViewModel>
+    public class Handler : QueryHandler<GetBasketballProfile, BasketballProfileModel>
     {
         private readonly IPersonRepository _personRepository;
 
@@ -11,19 +11,9 @@ public class GetBasketballProfile
             _personRepository = personRepository;
         }
 
-        protected override async Task<BasketballProfileViewModel> Handle(Query query)
+        protected override async Task<BasketballProfileModel> Handle(GetBasketballProfile query)
         {
-            return new BasketballProfileViewModel(await _personRepository.Get(query.PersonId));
+            return new BasketballProfileModel(await _personRepository.Get(query.PersonId));
         }
-    }
-
-    public class Query : IQuery<BasketballProfileViewModel>
-    {
-        public Query(int personId)
-        {
-            PersonId = personId;
-        }
-
-        public int PersonId { get; }
     }
 }

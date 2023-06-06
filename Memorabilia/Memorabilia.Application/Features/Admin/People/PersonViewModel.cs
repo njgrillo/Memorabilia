@@ -31,7 +31,7 @@ public class PersonViewModel : ViewModel, IWithName, IWithValue<int>
     public int Id => _person.Id;
 
     public string ImageFileName => _person.ImageFileName.IsNullOrEmpty()
-        ? Domain.Constants.ImageFileName.ImageNotAvailable
+        ? Constant.ImageFileName.ImageNotAvailable
         : _person.ImageFileName;
 
     public DateTime? LastModifiedDate => _person.LastModifiedDate;

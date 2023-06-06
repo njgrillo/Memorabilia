@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Application.Features.Services.Filters.Memorabilia.Rules;
 
-public class PrivacyTypeFilterRule : IFilterRule<Domain.Entities.Memorabilia>
+public class PrivacyTypeFilterRule : IFilterRule<Entity.Memorabilia>
 {
     private int[] _privacyTypeIds;
 
@@ -14,7 +14,7 @@ public class PrivacyTypeFilterRule : IFilterRule<Domain.Entities.Memorabilia>
         return _privacyTypeIds.Any();
     }
 
-    public Expression<Func<Domain.Entities.Memorabilia, bool>> GetExpression()
+    public Expression<Func<Entity.Memorabilia, bool>> GetExpression()
     {
         return item => _privacyTypeIds.Contains(item.PrivacyTypeId);
     }

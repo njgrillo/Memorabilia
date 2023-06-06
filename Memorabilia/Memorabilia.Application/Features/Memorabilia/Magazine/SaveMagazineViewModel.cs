@@ -27,11 +27,11 @@ public class SaveMagazineViewModel : MemorabiliaItemEditViewModel
 
     public bool Framed { get; set; }
 
-    public override string ImageFileName => Domain.Constants.ImageFileName.Magazine;
+    public override string ImageFileName => Constant.ImageFileName.Magazine;
 
     public override ItemType ItemType => ItemType.Magazine;
 
     public bool Matted { get; set; }
 
-    public int OrientationId { get; set; } = Domain.Constants.Orientation.Portrait.Id;
+    public int OrientationId { get; set; } = Constant.Orientation.Portrait.Id;
 }

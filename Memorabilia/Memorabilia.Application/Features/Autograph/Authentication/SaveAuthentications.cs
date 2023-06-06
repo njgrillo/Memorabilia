@@ -44,7 +44,10 @@ public class SaveAuthentications
 
         public int AutographId => _viewModel.AutographId;
 
-        public int[] DeletedIds => Items.Where(item => item.IsDeleted).Select(item => item.Id).ToArray();
+        public int[] DeletedIds 
+            => Items.Where(item => item.IsDeleted)
+                    .Select(item => item.Id)
+                    .ToArray();
 
         public IEnumerable<AuthenticationEditModel> Items { get; set; }
     }

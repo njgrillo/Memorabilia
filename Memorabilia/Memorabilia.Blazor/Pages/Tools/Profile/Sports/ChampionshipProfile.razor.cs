@@ -2,13 +2,13 @@
 
 public partial class ChampionshipProfile : SportProfile
 {
-    private ChampionshipProfileViewModel[] Championships = Array.Empty<ChampionshipProfileViewModel>();
+    private ChampionshipProfileModel[] Championships = Array.Empty<ChampionshipProfileModel>();
 
     protected override void OnParametersSet()
     {
         Championships = Person.Teams
                               .Championships(Sport, OccupationType)
-                              .Select(championship => new ChampionshipProfileViewModel(championship))
+                              .Select(championship => new ChampionshipProfileModel(championship))
                               .ToArray();
     }
 }

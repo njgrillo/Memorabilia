@@ -2,7 +2,7 @@
 
 namespace Memorabilia.Application.Features.Admin.DashboardItems;
 
-public class SaveDashboardItemViewModel : SaveViewModel
+public class SaveDashboardItemViewModel : EditModel
 {
     public SaveDashboardItemViewModel() { }
 

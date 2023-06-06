@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Application.Features.Autograph.Image;
 
-public class AutographImageModel : ImageViewModel
+public class AutographImageModel : ImageModel
 {
     private readonly Entity.AutographImage _image;
 

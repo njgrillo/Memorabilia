@@ -26,7 +26,7 @@ public class TeamViewModel : IWithName, IWithValue<int>
 
     public int FranchiseId => _team.FranchiseId;
 
-    public string FranchiseName => Domain.Constants.Franchise.Find(FranchiseId).Name;
+    public string FranchiseName => Constant.Franchise.Find(FranchiseId).Name;
 
     public int Id => _team.Id;
 
@@ -42,7 +42,7 @@ public class TeamViewModel : IWithName, IWithValue<int>
 
     public int SportId => _team.Franchise.SportLeagueLevel.SportId;
 
-    public Domain.Constants.SportLeagueLevel SportLeagueLevel => Domain.Constants.SportLeagueLevel.Find(_team.Franchise.SportLeagueLevelId);
+    public Constant.SportLeagueLevel SportLeagueLevel => Constant.SportLeagueLevel.Find(_team.Franchise.SportLeagueLevelId);
 
     int IWithValue<int>.Value => Id;
 }

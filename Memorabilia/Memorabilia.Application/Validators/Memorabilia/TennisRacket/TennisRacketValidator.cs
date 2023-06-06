@@ -28,10 +28,10 @@ public class TennisRacketValidator : AbstractValidator<SaveTennisRacket.Command>
 
     private static bool CanHaveGameDate(SaveTennisRacket.Command command)
     {
-        var gameStyle = Domain.Constants.GameStyleType.Find(command.GameStyleTypeId ?? 0);
-        var size = Domain.Constants.Size.Find(command.SizeId);
+        var gameStyle = Constant.GameStyleType.Find(command.GameStyleTypeId ?? 0);
+        var size = Constant.Size.Find(command.SizeId);
 
-        return (Domain.Constants.GameStyleType.Find(command.GameStyleTypeId ?? 0)?.IsGameWorthly() ?? false) &&
-               size == Domain.Constants.Size.Standard;
+        return (Constant.GameStyleType.Find(command.GameStyleTypeId ?? 0)?.IsGameWorthly() ?? false) &&
+               size == Constant.Size.Standard;
     }
 }

@@ -20,9 +20,9 @@ public class ItemTypeSportViewModel
 
     public int ItemTypeId => _itemTypeSport.ItemTypeId;
 
-    public string ItemTypeName => Domain.Constants.ItemType.Find(ItemTypeId).Name;
+    public string ItemTypeName => Constant.ItemType.Find(ItemTypeId).Name;
 
     public int SportId => _itemTypeSport.SportId;
 
-    public string SportName => Domain.Constants.Sport.Find(SportId).Name;
+    public string SportName => Constant.Sport.Find(SportId).Name;
 }

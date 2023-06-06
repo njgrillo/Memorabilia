@@ -21,13 +21,13 @@ public class ItemTypeSizeViewModel : IWithValue<int>, IWithName
 
     public int ItemTypeId => _itemTypeSize.ItemTypeId;
 
-    public string ItemTypeName => Domain.Constants.ItemType.Find(ItemTypeId).Name;
+    public string ItemTypeName => Constant.ItemType.Find(ItemTypeId).Name;
 
     string IWithName.Name => SizeName;
 
     public int SizeId => _itemTypeSize.SizeId;
 
-    public string SizeName => Domain.Constants.Size.Find(SizeId).Name;
+    public string SizeName => Constant.Size.Find(SizeId).Name;
 
     int IWithValue<int>.Value => SizeId;    
 }

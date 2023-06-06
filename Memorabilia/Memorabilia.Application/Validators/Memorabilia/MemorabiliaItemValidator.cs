@@ -23,7 +23,7 @@ public class MemorabiliaItemValidator : AbstractValidator<SaveMemorabiliaItem.Co
             .WithMessage("Acquisition Type is required.");
 
         RuleFor(x => x.AcquisitionTypeId)
-            .Must(x => x == Domain.Constants.AcquisitionType.Purchase.Id)
+            .Must(x => x == Constant.AcquisitionType.Purchase.Id)
             .When(x => x.Cost.HasValue || x.PurchaseTypeId.HasValue)
             .WithName("Acquisition Type")
             .WithMessage("Acquisition Type must be Purchase when Cost or Purchase Type is entered.");

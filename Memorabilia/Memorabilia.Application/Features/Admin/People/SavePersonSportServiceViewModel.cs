@@ -2,7 +2,7 @@
 
 namespace Memorabilia.Application.Features.Admin.People;
 
-public class SavePersonSportServiceViewModel : SaveViewModel
+public class SavePersonSportServiceViewModel : EditModel
 {
     public SavePersonSportServiceViewModel() { }
 
@@ -39,7 +39,7 @@ public class SavePersonSportServiceViewModel : SaveViewModel
     public DateTime? LastAppearanceDate { get; set; }
 
     public string ImageFileName 
-        => Domain.Constants.ImageFileName.Athletes;
+        => Constant.ImageFileName.Athletes;
 
     public override string ItemTitle 
         => "Sport Service";

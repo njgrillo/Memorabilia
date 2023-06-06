@@ -1,38 +1,36 @@
-﻿using Memorabilia.Domain.Entities;
-
-namespace Memorabilia.Application.Features.Services.Autographs.Inscriptions.Awards;
+﻿namespace Memorabilia.Application.Features.Services.Autographs.Inscriptions.Awards;
 
 public abstract class AwardRule
 {
-    public abstract Domain.Constants.AwardType AwardType { get; }
+    public abstract Constant.AwardType AwardType { get; }
 
-    public virtual bool Applies(Domain.Constants.AwardType awardType)
+    public virtual bool Applies(Constant.AwardType awardType)
     {
         return awardType == AwardType;
     }
 
-    protected string GetMultipleAwardName(PersonAward[] items)
+    protected string GetMultipleAwardName(Entity.PersonAward[] items)
     {
         return $"{items.Length} {AwardType.Name}s";
     }
 
-    protected string GetMultipleTimeAwardAbbreviation(PersonAward[] items)
+    protected string GetMultipleTimeAwardAbbreviation(Entity.PersonAward[] items)
     {
         return $"{items.Length}x {AwardType.Abbreviation}";
     }
 
-    protected string GetMultipleTimeAwardName(PersonAward[] items)
+    protected string GetMultipleTimeAwardName(Entity.PersonAward[] items)
     {
         return $"{items.Length}x {AwardType.Name}";
     }
 
-    protected string[] GetYearlyAwardAbbreviations(PersonAward[] items)
+    protected string[] GetYearlyAwardAbbreviations(Entity.PersonAward[] items)
     {
         return items.Select(x => $"{x.Year} {AwardType.Abbreviation}")
                     .ToArray();
     }
 
-    protected string[] GetYearlyAwardNames(PersonAward[] items)
+    protected string[] GetYearlyAwardNames(Entity.PersonAward[] items)
     {
         return items.Select(x => $"{x.Year} {AwardType.Name}")
                     .ToArray();

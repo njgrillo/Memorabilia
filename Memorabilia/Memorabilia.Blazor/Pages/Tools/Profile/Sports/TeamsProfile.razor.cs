@@ -2,13 +2,13 @@
 
 public partial class TeamsProfile : SportProfile
 {
-    private TeamProfileViewModel[] Teams = Array.Empty<TeamProfileViewModel>(); 
+    private TeamProfileModel[] Teams = Array.Empty<TeamProfileModel>(); 
 
     protected override void OnParametersSet()
     {
         Teams = Person.Teams
                       .Filter(Sport, OccupationType)
-                      .Select(team => new TeamProfileViewModel(team))
+                      .Select(team => new TeamProfileModel(team))
                       .ToArray();
     }
 }

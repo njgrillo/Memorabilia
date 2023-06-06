@@ -1,8 +1,8 @@
 ﻿namespace Memorabilia.Blazor.Pages.Tools.Shared;
 
-public partial class ViewInternationalHallOfFamers : ViewSportTools<InternationalHallOfFameViewModel>
+public partial class ViewInternationalHallOfFamers : ViewSportTools<InternationalHallOfFameModel>
 {
-    private InternationalHallOfFamesViewModel _viewModel = new();
+    private InternationalHallOfFamesModel _viewModel = new();
 
     private async Task OnInputChange(int internationalHallOfFameTypeId)
     {

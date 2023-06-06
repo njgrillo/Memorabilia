@@ -2,9 +2,9 @@
 
 namespace Memorabilia.Application.Features.Tools.Shared.CareerRecords;
 
-public record GetCareerRecords(Sport Sport) : IQuery<CareerRecordsViewModel>
+public record GetCareerRecords(Sport Sport) : IQuery<CareerRecordsModel>
 {
-    public class Handler : QueryHandler<GetCareerRecords, CareerRecordsViewModel>
+    public class Handler : QueryHandler<GetCareerRecords, CareerRecordsModel>
     {
         private readonly ICareerRecordRepository _careerRecordRepository;
 
@@ -13,9 +13,9 @@ public record GetCareerRecords(Sport Sport) : IQuery<CareerRecordsViewModel>
             _careerRecordRepository = careerRecordRepository;
         }
 
-        protected override async Task<CareerRecordsViewModel> Handle(GetCareerRecords query)
+        protected override async Task<CareerRecordsModel> Handle(GetCareerRecords query)
         {
-            return new CareerRecordsViewModel(await _careerRecordRepository.GetAll(query.Sport.Id), query.Sport);
+            return new CareerRecordsModel(await _careerRecordRepository.GetAll(query.Sport.Id), query.Sport);
         }
     }
 }

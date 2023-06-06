@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Application.Features.Services.Filters.Memorabilia.Rules;
 
-public class AcquiredDateFilterRule : IFilterRule<Domain.Entities.Memorabilia>
+public class AcquiredDateFilterRule : IFilterRule<Entity.Memorabilia>
 {
     private FilterItemEnum _filterItem;
     private DateTime? _acquiredDate;
@@ -17,7 +17,7 @@ public class AcquiredDateFilterRule : IFilterRule<Domain.Entities.Memorabilia>
         return _acquiredDate.HasValue;
     }
 
-    public Expression<Func<Domain.Entities.Memorabilia, bool>> GetExpression()
+    public Expression<Func<Entity.Memorabilia, bool>> GetExpression()
     {
         return _filterItem == FilterItemEnum.AutographAcquiredDate
             ? item => item.Autographs.Any(autograph => autograph.Acquisition.AcquiredDate == _acquiredDate)

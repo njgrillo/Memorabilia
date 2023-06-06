@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Blazor.Pages.Tools.Shared;
 
-public abstract class ViewSportTools<T> : ImagePage where T : SportToolViewModel, IWithName
+public abstract class ViewSportTools<T> : ImagePage where T : SportToolModel, IWithName
 {
     [Parameter]
     public Sport Sport { get; set; }

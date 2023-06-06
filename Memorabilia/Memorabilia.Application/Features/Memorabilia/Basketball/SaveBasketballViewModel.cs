@@ -43,7 +43,7 @@ public class SaveBasketballViewModel : MemorabiliaItemEditViewModel
         => SizeId == Size.Full.Id;
 
     public override string ImageFileName 
-        => Domain.Constants.ImageFileName.Basketball;
+        => Constant.ImageFileName.Basketball;
 
     public override ItemType ItemType => ItemType.Basketball;
 

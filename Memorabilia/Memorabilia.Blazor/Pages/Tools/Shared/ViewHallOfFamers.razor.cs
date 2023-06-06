@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Blazor.Pages.Tools.Shared;
 
-public partial class ViewHallOfFamers : ViewSportTools<HallOfFameViewModel>
+public partial class ViewHallOfFamers : ViewSportTools<HallOfFameModel>
 {
     [Parameter]
     public bool DisplayBallot { get; set; }
@@ -11,7 +11,7 @@ public partial class ViewHallOfFamers : ViewSportTools<HallOfFameViewModel>
     [Parameter]
     public SportLeagueLevel SportLeagueLevel { get; set; }
 
-    private HallOfFamesViewModel _viewModel = new();
+    private HallOfFamesModel _viewModel = new();
 
     protected override async Task OnInitializedAsync()
     {

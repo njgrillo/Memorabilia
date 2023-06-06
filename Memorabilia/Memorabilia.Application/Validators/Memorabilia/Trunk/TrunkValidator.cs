@@ -27,5 +27,5 @@ public class TrunkValidator : AbstractValidator<SaveTrunk.Command>
     }
 
     private static bool CanHaveGameDate(SaveTrunk.Command command)
-        => Domain.Constants.GameStyleType.Find(command.GameStyleTypeId ?? 0)?.IsGameWorthly() ?? false;
+        => Constant.GameStyleType.Find(command.GameStyleTypeId ?? 0)?.IsGameWorthly() ?? false;
 }

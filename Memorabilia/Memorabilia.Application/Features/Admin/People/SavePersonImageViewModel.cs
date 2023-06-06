@@ -2,7 +2,7 @@
 
 namespace Memorabilia.Application.Features.Admin.People;
 
-public class SavePersonImageViewModel : SaveViewModel
+public class SavePersonImageViewModel : EditModel
 {
     public SavePersonImageViewModel() { }
 
@@ -18,7 +18,7 @@ public class SavePersonImageViewModel : SaveViewModel
 
     public override EditModeType EditModeType => !PersonImageFileName.IsNullOrEmpty() ? EditModeType.Update : EditModeType.Add;
 
-    public string ImageFileName => Domain.Constants.ImageFileName.Images;       
+    public string ImageFileName => Constant.ImageFileName.Images;       
 
     public override string ItemTitle => "Image";    
 

@@ -1,4 +1,4 @@
-﻿@inherits ViewSportTools<RetiredNumberViewModel>
+﻿@inherits ViewSportTools<RetiredNumberModel>
 
 <DivPad2>
     <Content>
@@ -13,7 +13,7 @@
             <Content>
                 <MudTable Bordered="false"
                           Dense="false"
-                          Filter="new Func<RetiredNumberViewModel,bool>(FilterFunc1)"
+                          Filter="new Func<RetiredNumberModel,bool>(FilterFunc1)"
                           Hover="true"
                           Items="@_viewModel.RetiredNumbers.ToList()"
                           Striped="true">

@@ -2,7 +2,7 @@
 
 namespace Memorabilia.Application.Features.Admin.People;
 
-public class SavePersonOccupationsViewModel : SaveViewModel
+public class SavePersonOccupationsViewModel : EditModel
 {
     public SavePersonOccupationsViewModel() { }
 

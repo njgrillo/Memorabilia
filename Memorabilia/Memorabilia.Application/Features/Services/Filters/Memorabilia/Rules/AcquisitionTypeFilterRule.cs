@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Application.Features.Services.Filters.Memorabilia.Rules;
 
-public class AcquisitionTypeFilterRule : IFilterRule<Domain.Entities.Memorabilia>
+public class AcquisitionTypeFilterRule : IFilterRule<Entity.Memorabilia>
 {    
     private int[] _acquisitionTypeIds;
     private FilterItemEnum _filterItem;
@@ -17,7 +17,7 @@ public class AcquisitionTypeFilterRule : IFilterRule<Domain.Entities.Memorabilia
         return _acquisitionTypeIds.Any();
     }
 
-    public Expression<Func<Domain.Entities.Memorabilia, bool>> GetExpression()
+    public Expression<Func<Entity.Memorabilia, bool>> GetExpression()
     {
         return _filterItem == FilterItemEnum.AutographAcquisitionType
             ? item => item.Autographs.Any(autograph => _acquisitionTypeIds.Contains(autograph.Acquisition.AcquisitionTypeId))

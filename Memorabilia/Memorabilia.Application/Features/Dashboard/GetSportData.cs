@@ -1,8 +1,8 @@
 ﻿namespace Memorabilia.Application.Features.Dashboard;
 
-public record GetSportData(int UserId) : IQuery<DashboardChartViewModel>
+public record GetSportData(int UserId) : IQuery<DashboardChartModel>
 {
-    public class Handler : QueryHandler<GetSportData, DashboardChartViewModel>
+    public class Handler : QueryHandler<GetSportData, DashboardChartModel>
     {
         private readonly IMemorabiliaItemRepository _repository;
 
@@ -11,10 +11,10 @@ public record GetSportData(int UserId) : IQuery<DashboardChartViewModel>
             _repository = repository;
         }
 
-        protected override async Task<DashboardChartViewModel> Handle(GetSportData query)
+        protected override async Task<DashboardChartModel> Handle(GetSportData query)
         {
             var sportIds = _repository.GetSportIds(query.UserId);
-            var sportNames = sportIds.Select(sportId => Domain.Constants.Sport.Find(sportId).Name)
+            var sportNames = sportIds.Select(sportId => Constant.Sport.Find(sportId).Name)
                                      .Distinct();
 
             var labels = new List<string>();
@@ -22,14 +22,14 @@ public record GetSportData(int UserId) : IQuery<DashboardChartViewModel>
 
             foreach (var sportName in sportNames)
             {
-                var sport = Domain.Constants.Sport.Find(sportName);
+                var sport = Constant.Sport.Find(sportName);
                 var count = sportIds.Count(sportId => sportId == sport.Id);
 
                 counts.Add(count);
                 labels.Add($"{sportName} ({count})");
             }
 
-            return await Task.FromResult(new DashboardChartViewModel(counts.ToArray(), labels.ToArray()));
+            return await Task.FromResult(new DashboardChartModel(counts.ToArray(), labels.ToArray()));
         }
     }
 }

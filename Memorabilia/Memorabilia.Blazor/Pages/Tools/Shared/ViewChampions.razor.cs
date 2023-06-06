@@ -1,11 +1,11 @@
 ﻿namespace Memorabilia.Blazor.Pages.Tools.Shared;
 
-public partial class ViewChampions : ViewSportTools<ChampionViewModel>
+public partial class ViewChampions : ViewSportTools<ChampionModel>
 {
     [Parameter]
     public ChampionType ChampionType { get; set; }
 
-    private ChampionsViewModel _viewModel = new();
+    private ChampionsModel _viewModel = new();
 
     protected override async Task OnInitializedAsync()
     {

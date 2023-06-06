@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Application.Features.User.Register;
 
-public class SaveUserViewModel : SaveViewModel
+public class SaveUserViewModel : EditModel
 {
     public SaveUserViewModel() { }
 

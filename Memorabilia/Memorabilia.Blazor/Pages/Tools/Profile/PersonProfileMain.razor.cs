@@ -9,7 +9,7 @@ public partial class PersonProfileMain : ImagePage
     public int PersonId { get; set; }
 
     private Domain.Entities.Person _person;
-    private PersonProfileViewModel _viewModel;
+    private PersonProfileModel _viewModel;
 
     protected override async Task OnParametersSetAsync()
     {
@@ -18,6 +18,6 @@ public partial class PersonProfileMain : ImagePage
 
         _person = await Mediator.Send(new GetPersonGeneric(PersonId));
 
-        _viewModel = new PersonProfileViewModel(_person);
+        _viewModel = new PersonProfileModel(_person);
     }
 }

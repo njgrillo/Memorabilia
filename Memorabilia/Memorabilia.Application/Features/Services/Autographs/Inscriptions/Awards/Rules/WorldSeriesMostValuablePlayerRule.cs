@@ -1,13 +1,11 @@
-﻿using Memorabilia.Domain.Entities;
-
-namespace Memorabilia.Application.Features.Services.Autographs.Inscriptions.Awards.Rules;
+﻿namespace Memorabilia.Application.Features.Services.Autographs.Inscriptions.Awards.Rules;
 
 public class WorldSeriesMostValuablePlayerRule : AwardRule, IAwardRule
 {
-    public override Domain.Constants.AwardType AwardType
-        => Domain.Constants.AwardType.WorldSeriesMostValuablePlayer;
+    public override Constant.AwardType AwardType 
+        => Constant.AwardType.WorldSeriesMostValuablePlayer;
 
-    public string[] GenerateInscriptions(PersonAward[] awards)
+    public string[] GenerateInscriptions(Entity.PersonAward[] awards)
     {
         var inscriptions = new List<string>()
         {

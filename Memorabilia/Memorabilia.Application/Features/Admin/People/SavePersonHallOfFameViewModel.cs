@@ -2,7 +2,7 @@
 
 namespace Memorabilia.Application.Features.Admin.People;
 
-public class SavePersonHallOfFameViewModel : SaveViewModel
+public class SavePersonHallOfFameViewModel : EditModel
 {
     public SavePersonHallOfFameViewModel() { }
 
@@ -18,9 +18,9 @@ public class SavePersonHallOfFameViewModel : SaveViewModel
 
     public int BallotNumber { get; set; }
 
-    public string BallotNumberName => Domain.Constants.BallotNumber.Find(BallotNumber)?.Name;
+    public string BallotNumberName => Constant.BallotNumber.Find(BallotNumber)?.Name;
 
-    public Domain.Constants.BallotNumber[] BallotNumbers => Domain.Constants.BallotNumber.All;
+    public Constant.BallotNumber[] BallotNumbers => Constant.BallotNumber.All;
 
     public int? InductionYear { get; set; }
 
@@ -28,9 +28,9 @@ public class SavePersonHallOfFameViewModel : SaveViewModel
 
     public int SportLeagueLevelId { get; set; }
 
-    public Domain.Constants.SportLeagueLevel[] SportLeagueLevels => Domain.Constants.SportLeagueLevel.All;
+    public Constant.SportLeagueLevel[] SportLeagueLevels => Constant.SportLeagueLevel.All;
 
-    public string SportName => Domain.Constants.SportLeagueLevel.Find(SportLeagueLevelId)?.Name;    
+    public string SportName => Constant.SportLeagueLevel.Find(SportLeagueLevelId)?.Name;    
 
     public decimal? VotePercentage { get; set; }
 }

@@ -1,4 +1,4 @@
-﻿@inherits ViewSportTools<LeaderViewModel>
+﻿@inherits ViewSportTools<LeaderModel>
 
 <DivPad2>
     <Content>
@@ -14,7 +14,7 @@
             <Content>
                 <MudTable Bordered="false"
                           Dense="false"
-                          Filter="new Func<LeaderViewModel,bool>(FilterFunc1)"
+                          Filter="new Func<LeaderModel,bool>(FilterFunc1)"
                           Hover="true"
                           Items="@_viewModel.Leaders.ToList()"
                           Striped="true">

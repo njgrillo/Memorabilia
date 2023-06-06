@@ -24,7 +24,7 @@ public class SaveTicketViewModel : MemorabiliaItemEditViewModel
             Person = new SavePersonViewModel(new PersonViewModel(viewModel.People.First().Person));
     }
 
-    public override string ImageFileName => Domain.Constants.ImageFileName.Ticket;
+    public override string ImageFileName => Constant.ImageFileName.Ticket;
 
     public override ItemType ItemType => ItemType.Ticket;
 }

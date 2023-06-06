@@ -28,7 +28,7 @@ public class SaveSoccerballViewModel : MemorabiliaItemEditViewModel
             Team = new SaveTeamViewModel(new TeamViewModel(viewModel.Teams.First().Team));
     }
 
-    public override string ImageFileName => Domain.Constants.ImageFileName.Soccerball;
+    public override string ImageFileName => Constant.ImageFileName.Soccerball;
 
     public override ItemType ItemType => ItemType.Soccerball;
 

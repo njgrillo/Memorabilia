@@ -22,7 +22,7 @@ public class SavePlayingCardViewModel : MemorabiliaItemEditViewModel
             Team = new SaveTeamViewModel(new TeamViewModel(viewModel.Teams.First().Team));
     }
 
-    public override string ImageFileName => Domain.Constants.ImageFileName.PlayingCard;
+    public override string ImageFileName => Constant.ImageFileName.PlayingCard;
 
     public override ItemType ItemType => ItemType.PlayingCard;
 }

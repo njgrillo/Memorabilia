@@ -21,7 +21,7 @@ public class LeaguePresidentViewModel : IWithName, IWithValue<int>
 
     public int LeagueId => _president.LeagueId;
 
-    public string LeagueName => Domain.Constants.League.Find(LeagueId)?.Name;
+    public string LeagueName => Constant.League.Find(LeagueId)?.Name;
 
     string IWithName.Name => Person.DisplayName;
 

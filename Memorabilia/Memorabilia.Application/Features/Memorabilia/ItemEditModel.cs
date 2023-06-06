@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Application.Features.Memorabilia;
 
-public class ItemEditModel : SaveViewModel
+public class ItemEditModel : EditModel
 {   
     public override string ContinueNavigationPath 
         => $"Memorabilia/Image/{Constant.EditModeType.Update.Name}/{MemorabiliaId}";       

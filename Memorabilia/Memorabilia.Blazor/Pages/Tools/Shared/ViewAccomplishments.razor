@@ -1,4 +1,4 @@
-﻿@inherits ViewSportTools<AccomplishmentViewModel>
+﻿@inherits ViewSportTools<AccomplishmentModel>
 
 <DivPad2>
     <Content>
@@ -19,7 +19,7 @@
             <Content>
                 <MudTable Bordered="false"
                           Dense="false"
-                          Filter="new Func<AccomplishmentViewModel,bool>(FilterFunc1)"
+                          Filter="new Func<AccomplishmentModel,bool>(FilterFunc1)"
                           Hover="true"
                           Items="@_viewModel.PersonAccomplishments"
                           Striped="true">
@@ -35,10 +35,10 @@
                     </ToolBarContent>
                     <HeaderContent>                        
                         <MudTh></MudTh>
-                        <MudTh><MudTableSortLabel SortBy="new Func<AccomplishmentViewModel, object>(x=>x.PersonName)">Person</MudTableSortLabel></MudTh>
-                        <MudTh hidden="@(!_viewModel.IsNoHitter)"><MudTableSortLabel SortBy="new Func<AccomplishmentViewModel, object>(x=>x.AccomplishmentTypeName)">Type</MudTableSortLabel></MudTh>
-                        <MudTh hidden="@(_viewModel.IsYearAccomplishment)"><MudTableSortLabel SortBy="new Func<AccomplishmentViewModel, object>(x=>x.Date)">Date</MudTableSortLabel></MudTh>
-                        <MudTh hidden="@(_viewModel.IsDateAccomplishment)"><MudTableSortLabel SortBy="new Func<AccomplishmentViewModel, object>(x=>x.Year)">Year</MudTableSortLabel></MudTh>
+                        <MudTh><MudTableSortLabel SortBy="new Func<AccomplishmentModel, object>(x=>x.PersonName)">Person</MudTableSortLabel></MudTh>
+                        <MudTh hidden="@(!_viewModel.IsNoHitter)"><MudTableSortLabel SortBy="new Func<AccomplishmentModel, object>(x=>x.AccomplishmentTypeName)">Type</MudTableSortLabel></MudTh>
+                        <MudTh hidden="@(_viewModel.IsYearAccomplishment)"><MudTableSortLabel SortBy="new Func<AccomplishmentModel, object>(x=>x.Date)">Date</MudTableSortLabel></MudTh>
+                        <MudTh hidden="@(_viewModel.IsDateAccomplishment)"><MudTableSortLabel SortBy="new Func<AccomplishmentModel, object>(x=>x.Year)">Year</MudTableSortLabel></MudTh>
                     </HeaderContent>
                     <RowTemplate>
                         <MudTd DataLabel="">

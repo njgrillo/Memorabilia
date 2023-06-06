@@ -2,9 +2,9 @@
 
 namespace Memorabilia.Application.Features.Tools.Shared.RetiredNumbers;
 
-public record GetRetiredNumbers(Franchise Franchise, Sport Sport) : IQuery<RetiredNumbersViewModel>
+public record GetRetiredNumbers(Franchise Franchise, Sport Sport) : IQuery<RetiredNumbersModel>
 {
-    public class Handler : QueryHandler<GetRetiredNumbers, RetiredNumbersViewModel>
+    public class Handler : QueryHandler<GetRetiredNumbers, RetiredNumbersModel>
     {
         private readonly IRetiredNumberRepository _retiredNumberRepository;
 
@@ -13,9 +13,9 @@ public record GetRetiredNumbers(Franchise Franchise, Sport Sport) : IQuery<Retir
             _retiredNumberRepository = retiredNumberRepository;
         }
 
-        protected override async Task<RetiredNumbersViewModel> Handle(GetRetiredNumbers query)
+        protected override async Task<RetiredNumbersModel> Handle(GetRetiredNumbers query)
         {
-            return new RetiredNumbersViewModel(await _retiredNumberRepository.GetAll(query.Franchise.Id), query.Sport)
+            return new RetiredNumbersModel(await _retiredNumberRepository.GetAll(query.Franchise.Id), query.Sport)
             {
                 Franchise = query.Franchise
             };

@@ -22,7 +22,7 @@ public class SavePaintingViewModel : MemorabiliaItemEditViewModel
         Teams = viewModel.Teams.Select(team => new SaveTeamViewModel(new TeamViewModel(team.Team))).ToList();
     }
 
-    public override string ImageFileName => Domain.Constants.ImageFileName.Painting;
+    public override string ImageFileName => Constant.ImageFileName.Painting;
 
     public override ItemType ItemType => ItemType.Painting;
 

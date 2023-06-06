@@ -36,7 +36,7 @@ public class SaveHockeyStickViewModel : MemorabiliaItemEditViewModel
         => SizeId == Size.Full.Id;
 
     public override string ImageFileName 
-        => Domain.Constants.ImageFileName.HockeyStick;
+        => Constant.ImageFileName.HockeyStick;
 
     public override ItemType ItemType 
         => ItemType.HockeyStick;

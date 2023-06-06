@@ -1,14 +1,12 @@
-﻿using Memorabilia.Domain.Entities;
-
-namespace Memorabilia.Application.Features.Collection;
+﻿namespace Memorabilia.Application.Features.Collection;
 
 public class CollectionModel
 {
-    private readonly Domain.Entities.Collection _collection;
+    private readonly Entity.Collection _collection;
 
     public CollectionModel() { }
 
-    public CollectionModel(Domain.Entities.Collection collection)
+    public CollectionModel(Entity.Collection collection)
     {
         _collection = collection;
     }
@@ -17,7 +15,8 @@ public class CollectionModel
 
     public int Id => _collection.Id;
 
-    public List<CollectionMemorabilia> Memorabilia => _collection.Memorabilia;
+    public List<Entity.CollectionMemorabilia> Memorabilia 
+        => _collection.Memorabilia;
 
     public string Name => _collection.Name;
 

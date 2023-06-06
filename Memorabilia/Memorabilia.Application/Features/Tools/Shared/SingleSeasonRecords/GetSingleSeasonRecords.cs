@@ -2,9 +2,9 @@
 
 namespace Memorabilia.Application.Features.Tools.Shared.SingleSeasonRecords;
 
-public record GetSingleSeasonRecords(Sport Sport) : IQuery<SingleSeasonRecordsViewModel>
+public record GetSingleSeasonRecords(Sport Sport) : IQuery<SingleSeasonRecordsModel>
 {
-    public class Handler : QueryHandler<GetSingleSeasonRecords, SingleSeasonRecordsViewModel>
+    public class Handler : QueryHandler<GetSingleSeasonRecords, SingleSeasonRecordsModel>
     {
         private readonly ISingleSeasonRecordRepository _singleSeasonRecordRepository;
 
@@ -13,9 +13,9 @@ public record GetSingleSeasonRecords(Sport Sport) : IQuery<SingleSeasonRecordsVi
             _singleSeasonRecordRepository = singleSeasonRecordRepository;
         }
 
-        protected override async Task<SingleSeasonRecordsViewModel> Handle(GetSingleSeasonRecords query)
+        protected override async Task<SingleSeasonRecordsModel> Handle(GetSingleSeasonRecords query)
         {
-            return new SingleSeasonRecordsViewModel(await _singleSeasonRecordRepository.GetAll(query.Sport.Id), query.Sport);
+            return new SingleSeasonRecordsModel(await _singleSeasonRecordRepository.GetAll(query.Sport.Id), query.Sport);
         }
     }
 }

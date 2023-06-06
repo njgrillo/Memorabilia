@@ -1,8 +1,6 @@
-﻿using Memorabilia.Domain.Entities;
+﻿namespace Memorabilia.Application.Features.Project;
 
-namespace Memorabilia.Application.Features.Project;
-
-public class ProjectEditModel : SaveViewModel
+public class ProjectEditModel : EditModel
 {
     public ProjectEditModel() { }
 
@@ -19,7 +17,7 @@ public class ProjectEditModel : SaveViewModel
                                     .ToList();
         StartDate = viewModel.StartDate;
         UserId = viewModel.UserId;
-        ProjectType = Domain.Constants.ProjectType.Find(viewModel.ProjectTypeId);
+        ProjectType = Constant.ProjectType.Find(viewModel.ProjectTypeId);
 
         if (MemorabiliaTeams.Any() && MemorabiliaTeams.Select(item => item.ItemTypeId).Distinct().Count() == 1)
             ItemTypeId = MemorabiliaTeams.First().ItemTypeId;
@@ -30,29 +28,30 @@ public class ProjectEditModel : SaveViewModel
         SetProjectDetailsParameters(viewModel);
     }
 
-    public ProjectBaseball Baseball { get; set; } = new();
+    public Entity.ProjectBaseball Baseball { get; set; } = new();
 
-    public ProjectCard Card { get; set; } = new();
+    public Entity.ProjectCard Card { get; set; } = new();
 
     public double CompletedMemorabiliaTeamCount
-        => MemorabiliaTeams.Count(item => item.ProjectStatusTypeId == Domain.Constants.ProjectStatusType.Completed.Id);
+        => MemorabiliaTeams.Count(item => item.ProjectStatusTypeId == Constant.ProjectStatusType.Completed.Id);
 
     public double CompletedPersonCount
-        => People.Count(person => person.ProjectStatusTypeId == Domain.Constants.ProjectStatusType.Completed.Id);
+        => People.Count(person => person.ProjectStatusTypeId == Constant.ProjectStatusType.Completed.Id);
 
     public DateTime? EndDate { get; set; }
 
     public override string ExitNavigationPath => "Projects";
 
-    public ProjectHallOfFame HallOfFame { get; set; } = new();
+    public Entity.ProjectHallOfFame HallOfFame { get; set; } = new();
 
     public bool HasDefaultItemType => ItemTypeId > 0;
 
-    public ProjectHelmet Helmet { get; set; } = new();
+    public Entity.ProjectHelmet Helmet { get; set; } = new();
 
-    public string ImageFileName => Domain.Constants.ImageFileName.ProjectTypes;
+    public string ImageFileName 
+        => Constant.ImageFileName.ProjectTypes;
 
-    public ProjectItem Item { get; set; } = new();
+    public Entity.ProjectItem Item { get; set; } = new();
 
     public override string ItemTitle => "Project";
 
@@ -64,7 +63,7 @@ public class ProjectEditModel : SaveViewModel
 
     public List<ProjectPersonEditModel> People { get; set; } = new();
 
-    public Domain.Constants.ProjectType ProjectType { get; set; }
+    public Constant.ProjectType ProjectType { get; set; }
 
     public override string RoutePrefix => "Projects";
 
@@ -77,12 +76,12 @@ public class ProjectEditModel : SaveViewModel
             if (Id == 0)
                 return 0;
 
-            if (ProjectType == Domain.Constants.ProjectType.BaseballType)
+            if (ProjectType == Constant.ProjectType.BaseballType)
                 return People.Count > 0
                     ? (int)((double)(CompletedPersonCount / People.Count) * 100)
                     : 0;
 
-            if (ProjectType == Domain.Constants.ProjectType.HelmetType)
+            if (ProjectType == Constant.ProjectType.HelmetType)
                 return MemorabiliaTeams.Count > 0
                     ? (int)((double)(CompletedMemorabiliaTeamCount / MemorabiliaTeams.Count) * 100)
                     : 0;
@@ -91,13 +90,13 @@ public class ProjectEditModel : SaveViewModel
         }
     }
 
-    public ProjectTeam Team { get; set; } = new();
+    public Entity.ProjectTeam Team { get; set; } = new();
 
     [Required]
     [Range(1, int.MaxValue, ErrorMessage = "User Id is required.")]
     public int UserId { get; set; }
 
-    public ProjectWorldSeries WorldSeries { get; set; } = new();
+    public Entity.ProjectWorldSeries WorldSeries { get; set; } = new();
 
     protected void SetProjectDetailsParameters(ProjectModel viewModel)
     {

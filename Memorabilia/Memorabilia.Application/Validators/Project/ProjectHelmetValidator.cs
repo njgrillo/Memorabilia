@@ -4,9 +4,9 @@ public class ProjectHelmetValidator : AbstractValidator<Domain.Entities.ProjectH
 {
     public ProjectHelmetValidator(int projectTypeId)
     {
-        var projectType = Domain.Constants.ProjectType.Find(projectTypeId);
+        var projectType = Constant.ProjectType.Find(projectTypeId);
 
-        if (projectType != Domain.Constants.ProjectType.HelmetType)
+        if (projectType != Constant.ProjectType.HelmetType)
             return;
 
         RuleFor(x => x.HelmetTypeId)

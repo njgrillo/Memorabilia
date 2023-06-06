@@ -1,4 +1,4 @@
-﻿@inherits ViewSportTools<HallOfFameViewModel>
+﻿@inherits ViewSportTools<HallOfFameModel>
 
 <DivPad2>
     <Content>
@@ -13,7 +13,7 @@
             <Content>
                 <MudTable Bordered="false"
                           Dense="false"
-                          Filter="new Func<HallOfFameViewModel,bool>(FilterFunc1)"
+                          Filter="new Func<HallOfFameModel,bool>(FilterFunc1)"
                           Hover="true"
                           Items="@_viewModel.HallOfFames.ToList()"
                           Striped="true">

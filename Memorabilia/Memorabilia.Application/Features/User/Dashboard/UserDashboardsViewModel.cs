@@ -13,7 +13,7 @@ public class UserDashboardsViewModel : ViewModel
 
         var userDashboardItemIds = userDashboardItems.Select(userDashboard => userDashboard.DashboardItemId).ToArray();
 
-        foreach (var dashboardItem in Domain.Constants.DashboardItem.All)
+        foreach (var dashboardItem in Constant.DashboardItem.All)
         {
             if (userDashboardItemIds.Contains(dashboardItem.Id))
             {

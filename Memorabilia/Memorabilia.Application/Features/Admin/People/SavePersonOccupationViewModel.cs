@@ -2,22 +2,22 @@
 
 namespace Memorabilia.Application.Features.Admin.People;
 
-public class SavePersonOccupationViewModel : SaveViewModel
+public class SavePersonOccupationViewModel : EditModel
 {
     public SavePersonOccupationViewModel() { }
 
     public SavePersonOccupationViewModel(PersonOccupation occupation)
     {
         Id = occupation.Id;
-        Occupation = Domain.Constants.Occupation.Find(occupation.OccupationId);
-        OccupationType = Domain.Constants.OccupationType.Find(occupation.OccupationTypeId);
+        Occupation = Constant.Occupation.Find(occupation.OccupationId);
+        OccupationType = Constant.OccupationType.Find(occupation.OccupationTypeId);
     }
 
-    public Domain.Constants.Occupation Occupation { get; set; }
+    public Constant.Occupation Occupation { get; set; }
 
     public string OccupationName => Occupation?.Name;
 
-    public Domain.Constants.OccupationType OccupationType { get; set; } = Domain.Constants.OccupationType.Primary;
+    public Constant.OccupationType OccupationType { get; set; } = Constant.OccupationType.Primary;
 
     public string OccupationTypeName => OccupationType?.Name;
 }

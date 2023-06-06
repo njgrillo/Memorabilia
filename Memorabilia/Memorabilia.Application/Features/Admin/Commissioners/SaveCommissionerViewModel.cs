@@ -2,7 +2,7 @@
 
 namespace Memorabilia.Application.Features.Admin.Commissioners;
 
-public class SaveCommissionerViewModel : SaveViewModel
+public class SaveCommissionerViewModel : EditModel
 {
     public SaveCommissionerViewModel() { }
 

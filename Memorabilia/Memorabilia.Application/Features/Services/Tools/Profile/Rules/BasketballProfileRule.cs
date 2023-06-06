@@ -1,18 +1,11 @@
-﻿using Memorabilia.Domain.Constants;
-using Memorabilia.Domain.Entities;
-
-namespace Memorabilia.Application.Features.Services.Tools.Profile.Rules;
+﻿namespace Memorabilia.Application.Features.Services.Tools.Profile.Rules;
 
 public class BasketballProfileRule : IProfileRule
 {
-    public bool Applies(Person person, PersonOccupation occupation)
-    {
-        return Domain.Constants.Occupation.IsSportOccupation(occupation.OccupationId)
-            && person.Sports.Any(sport => sport.SportId == Domain.Constants.Sport.Basketball.Id);
-    }
+    public bool Applies(Entity.Person person, Entity.PersonOccupation occupation)
+        => Constant.Occupation.IsSportOccupation(occupation.OccupationId) 
+        && person.Sports.Any(sport => sport.SportId == Constant.Sport.Basketball.Id);
 
-    public ProfileType GetProfileType()
-    {
-        return ProfileType.Basketball;
-    }
+    public Constant.ProfileType GetProfileType()
+        => Constant.ProfileType.Basketball;
 }

@@ -1,13 +1,11 @@
-﻿using Memorabilia.Domain.Entities;
-
-namespace Memorabilia.Application.Features.Services.Autographs.Inscriptions.Accomplishments.Rules;
+﻿namespace Memorabilia.Application.Features.Services.Autographs.Inscriptions.Accomplishments.Rules;
 
 public class CombinedNoHitterRule : AccomplishmentRule, IAccomplishmentRule
 {
-    public override Domain.Constants.AccomplishmentType AccomplishmentType
-        => Domain.Constants.AccomplishmentType.CombinedNoHitter;
+    public override Constant.AccomplishmentType AccomplishmentType
+        => Constant.AccomplishmentType.CombinedNoHitter;
 
-    public string[] GenerateInscriptions(PersonAccomplishment[] accomplishments)
+    public string[] GenerateInscriptions(Entity.PersonAccomplishment[] accomplishments)
     {
         var inscriptions = new List<string>();
 

@@ -5,9 +5,9 @@ public partial class AccomplishmentSummaryProfile : PersonProfile
     [Parameter]
     public Sport Sport { get; set; }
 
-    private AccomplishmentProfileViewModel[] Accomplishments = Array.Empty<AccomplishmentProfileViewModel>();
+    private AccomplishmentProfileModel[] Accomplishments = Array.Empty<AccomplishmentProfileModel>();
 
-    private AllStarProfileViewModel[] AllStars = Array.Empty<AllStarProfileViewModel>();
+    private AllStarProfileModel[] AllStars = Array.Empty<AllStarProfileModel>();
 
     private string AllStarSummaryDisplayText 
         => Sport.HasAllStarGames(Sport)
@@ -16,28 +16,28 @@ public partial class AccomplishmentSummaryProfile : PersonProfile
             ? $"{AllStars?.Length ?? 0}x Pro Bowler"
             : string.Empty;
 
-    private AwardProfileViewModel[] Awards = Array.Empty<AwardProfileViewModel>();
+    private AwardProfileModel[] Awards = Array.Empty<AwardProfileModel>();
 
-    private ChampionshipProfileViewModel[] Championships = Array.Empty<ChampionshipProfileViewModel>();
+    private ChampionshipProfileModel[] Championships = Array.Empty<ChampionshipProfileModel>();
 
     private string ChampionshipSummaryDisplayText
         => Championships?.Length > 0
         ? $"{(Championships.Length > 1 ? Championships.Length : Championships.First().Year)}x {ChampionType.Find(Sport)?.ToString()} Champion"
         : string.Empty;
 
-    private AccomplishmentProfileViewModel[] DistinctAccomplishments = Array.Empty<AccomplishmentProfileViewModel>();
+    private AccomplishmentProfileModel[] DistinctAccomplishments = Array.Empty<AccomplishmentProfileModel>();
 
-    private AwardProfileViewModel[] DistinctAwards = Array.Empty<AwardProfileViewModel>();
+    private AwardProfileModel[] DistinctAwards = Array.Empty<AwardProfileModel>();
 
-    private LeaderProfileViewModel[] DistinctLeaders = Array.Empty<LeaderProfileViewModel>();
+    private LeaderProfileModel[] DistinctLeaders = Array.Empty<LeaderProfileModel>();
 
-    private LeaderProfileViewModel[] Leaders = Array.Empty<LeaderProfileViewModel>();
+    private LeaderProfileModel[] Leaders = Array.Empty<LeaderProfileModel>();
 
     protected override void OnInitialized()
     {
         Accomplishments = Person.Accomplishments
                                 .Filter(Sport, OccupationType)
-                                .Select(accomplishment => new AccomplishmentProfileViewModel(accomplishment))
+                                .Select(accomplishment => new AccomplishmentProfileModel(accomplishment))
                                 .ToArray();
 
         DistinctAccomplishments = Accomplishments.DistinctBy(accomplishment => accomplishment.AccomplishmentTypeId)
@@ -51,13 +51,13 @@ public partial class AccomplishmentSummaryProfile : PersonProfile
 
         AllStars = Person.AllStars
                          .Filter(Sport, OccupationType)
-                         .Select(allStar => new AllStarProfileViewModel(allStar, teams.FirstOrDefault(team => team.BeginYear <= allStar.Year && team.EndYear >= allStar.Year)))
+                         .Select(allStar => new AllStarProfileModel(allStar, teams.FirstOrDefault(team => team.BeginYear <= allStar.Year && team.EndYear >= allStar.Year)))
                          .OrderBy(allStar => allStar.Year)
                          .ToArray();
 
         Awards = Person.Awards
                        .Filter(Sport, OccupationType)
-                       .Select(award => new AwardProfileViewModel(award))
+                       .Select(award => new AwardProfileModel(award))
                        .OrderBy(award => award.Year)
                        .ThenBy(award => award.AwardTypeName)
                        .ToArray();
@@ -67,12 +67,12 @@ public partial class AccomplishmentSummaryProfile : PersonProfile
 
         Championships = Person.Teams
                               .Championships(Sport, OccupationType)
-                              .Select(championship => new ChampionshipProfileViewModel(championship))
+                              .Select(championship => new ChampionshipProfileModel(championship))
                               .ToArray();
 
         Leaders = Person.Leaders
                         .Filter(Sport, OccupationType)
-                        .Select(leader => new LeaderProfileViewModel(leader))
+                        .Select(leader => new LeaderProfileModel(leader))
                         .OrderBy(leader => leader.Year)
                         .ThenBy(leader => leader.LeaderTypeName)                        
                         .ToArray();
@@ -81,7 +81,7 @@ public partial class AccomplishmentSummaryProfile : PersonProfile
                                  .ToArray();
     }
 
-    private string GetAccomplishmentDisplayText(AccomplishmentProfileViewModel accomplishment)
+    private string GetAccomplishmentDisplayText(AccomplishmentProfileModel accomplishment)
     {
         int count = Accomplishments.Where(x => x.AccomplishmentTypeId == accomplishment.AccomplishmentTypeId)
                                    .Count();
@@ -89,7 +89,7 @@ public partial class AccomplishmentSummaryProfile : PersonProfile
         return $"{(count > 1 ? $"{count}x" : accomplishment.Year)} {accomplishment}";
     }
 
-    private string GetAwardDisplayText(AwardProfileViewModel award)
+    private string GetAwardDisplayText(AwardProfileModel award)
     {
         int count = Awards.Where(x => x.AwardTypeId == award.AwardTypeId)
                           .Count();
@@ -97,7 +97,7 @@ public partial class AccomplishmentSummaryProfile : PersonProfile
         return $"{(count > 1 ? $"{count}x" : award.Year)} {award}";
     }
 
-    private string GetLeaderDisplayText(LeaderProfileViewModel leader)
+    private string GetLeaderDisplayText(LeaderProfileModel leader)
     {
         int count = Leaders.Where(x => x.LeaderTypeId == leader.LeaderTypeId)
                            .Count();

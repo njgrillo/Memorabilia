@@ -2,9 +2,9 @@
 
 public interface IGalleryService
 {
-    string GetDescription(Domain.Entities.Memorabilia memorabilia);
+    string GetDescription(Entity.Memorabilia memorabilia);
 
-    string GetSubtitle(Domain.Entities.Memorabilia memorabilia);
+    string GetSubtitle(Entity.Memorabilia memorabilia);
 
-    string GetTitle(Domain.Entities.Memorabilia memorabilia);
+    string GetTitle(Entity.Memorabilia memorabilia);
 }

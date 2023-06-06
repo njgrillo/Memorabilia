@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Application.Features.Services.Filters.Memorabilia.Rules;
 
-public class EstimatedValueFilterRule : IFilterRule<Domain.Entities.Memorabilia>
+public class EstimatedValueFilterRule : IFilterRule<Entity.Memorabilia>
 {
     private FilterItemEnum _filterItem;
     private MudBlazor.Range<decimal?> _range;
@@ -17,7 +17,7 @@ public class EstimatedValueFilterRule : IFilterRule<Domain.Entities.Memorabilia>
         return _range.Start.HasValue || _range.End.HasValue;
     }
 
-    public Expression<Func<Domain.Entities.Memorabilia, bool>> GetExpression()
+    public Expression<Func<Entity.Memorabilia, bool>> GetExpression()
     {
         return _filterItem == FilterItemEnum.AutographEstimatedValue
             ? item => item.Autographs.Any(autograph => autograph.EstimatedValue >= (_range.Start ?? 0) && autograph.EstimatedValue <= (_range.End ?? decimal.MaxValue))

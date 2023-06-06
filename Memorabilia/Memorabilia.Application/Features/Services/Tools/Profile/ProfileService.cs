@@ -1,6 +1,4 @@
-﻿using Memorabilia.Domain.Constants;
-
-namespace Memorabilia.Application.Features.Services.Tools.Profile;
+﻿namespace Memorabilia.Application.Features.Services.Tools.Profile;
 
 public class ProfileService : IProfileService
 {
@@ -11,9 +9,9 @@ public class ProfileService : IProfileService
         _profileRuleFactory = profileRuleFactory;
     }
 
-    public ProfileType[] GetProfileTypes(Domain.Entities.Person person, Domain.Entities.PersonOccupation occupation)
+    public Constant.ProfileType[] GetProfileTypes(Entity.Person person, Entity.PersonOccupation occupation)
     {
-        var profileTypes = new List<ProfileType>();
+        var profileTypes = new List<Constant.ProfileType>();
 
         foreach (var rule in _profileRuleFactory.Rules)
         {

@@ -2,9 +2,9 @@
 
 namespace Memorabilia.Blazor.Pages.Tools.Shared;
 
-public partial class ViewFranchiseHallOfFamers : ViewSportTools<FranchiseHallOfFameViewModel>
+public partial class ViewFranchiseHallOfFamers : ViewSportTools<FranchiseHallOfFameModel>
 {
-    private FranchiseHallOfFamesViewModel _viewModel = new();
+    private FranchiseHallOfFamesModel _viewModel = new();
 
     private async Task OnInputChange(Franchise franchise)
     {

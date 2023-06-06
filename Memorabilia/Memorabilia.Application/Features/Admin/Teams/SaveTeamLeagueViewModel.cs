@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Application.Features.Admin.Teams;
 
-public class SaveTeamLeagueViewModel : SaveViewModel
+public class SaveTeamLeagueViewModel : EditModel
 {
     public SaveTeamLeagueViewModel() { }
 
@@ -19,7 +19,7 @@ public class SaveTeamLeagueViewModel : SaveViewModel
 
     public int LeagueId { get; set; }
 
-    public string LeagueName => Domain.Constants.League.Find(LeagueId)?.Name;
+    public string LeagueName => Constant.League.Find(LeagueId)?.Name;
 
     public int TeamId { get; set; }
 }

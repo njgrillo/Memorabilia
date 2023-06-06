@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Application.Features.Autograph.Inscriptions;
 
-public class InscriptionsEditModel : SaveViewModel
+public class InscriptionsEditModel : EditModel
 {
     public InscriptionsEditModel() { }
 

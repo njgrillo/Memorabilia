@@ -2,7 +2,7 @@
 
 namespace Memorabilia.Application.Features.Admin.People;
 
-public class SavePersonInternationalHallOfFameViewModel : SaveViewModel
+public class SavePersonInternationalHallOfFameViewModel : EditModel
 {
     public SavePersonInternationalHallOfFameViewModel() { }
 
@@ -16,9 +16,9 @@ public class SavePersonInternationalHallOfFameViewModel : SaveViewModel
 
     public int InternationalHallOfFameTypeId { get; set; }
 
-    public string InternationalHallOfFameTypeName => Domain.Constants.InternationalHallOfFameType.Find(InternationalHallOfFameTypeId)?.Name;
+    public string InternationalHallOfFameTypeName => Constant.InternationalHallOfFameType.Find(InternationalHallOfFameTypeId)?.Name;
 
-    public Domain.Constants.InternationalHallOfFameType[] InternationalHallOfFameTypes => Domain.Constants.InternationalHallOfFameType.All;
+    public Constant.InternationalHallOfFameType[] InternationalHallOfFameTypes => Constant.InternationalHallOfFameType.All;
 
     public int PersonId { get; set; }
 

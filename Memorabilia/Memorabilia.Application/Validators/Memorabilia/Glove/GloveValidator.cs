@@ -34,9 +34,9 @@ public class GloveValidator : AbstractValidator<SaveGlove.Command>
 
     private static bool CanHaveGameDate(SaveGlove.Command command)
     {
-        var size = Domain.Constants.Size.Find(command.SizeId);
+        var size = Constant.Size.Find(command.SizeId);
 
-        return (Domain.Constants.GameStyleType.Find(command.GameStyleTypeId ?? 0)?.IsGameWorthly() ?? false) &&
-               size == Domain.Constants.Size.Standard;
+        return (Constant.GameStyleType.Find(command.GameStyleTypeId ?? 0)?.IsGameWorthly() ?? false) &&
+               size == Constant.Size.Standard;
     }
 }

@@ -17,7 +17,7 @@ public record GetDashboard(int UserId)
             var user = await _userRepository.Get(query.UserId);
             var dashboardItems = user.DashboardItems.Select(userDashboard => Constant.DashboardItem.Find(userDashboard.DashboardItemId));
          
-            return new DashboardModel(dashboardItems.Select(x => new DashboardItemViewModel { DashboardItem = x }).OrderBy(dashboardItem => dashboardItem.DashboardItem.Name));
+            return new DashboardModel(dashboardItems.Select(x => new DashboardItemModel { DashboardItem = x }).OrderBy(dashboardItem => dashboardItem.DashboardItem.Name));
         }
     }
 }

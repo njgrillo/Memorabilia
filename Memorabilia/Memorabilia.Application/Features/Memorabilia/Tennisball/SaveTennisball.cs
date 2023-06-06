@@ -50,6 +50,6 @@ public class SaveTennisball
 
         public int SizeId => _viewModel.SizeId;
 
-        public int SportId => Domain.Constants.Sport.Tennis.Id;
+        public int SportId => Constant.Sport.Tennis.Id;
     }
 }

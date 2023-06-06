@@ -1,8 +1,8 @@
 ﻿namespace Memorabilia.Application.Features.Shared.Team;
 
-public record GetTeamGeneric(int Id) : IQuery<Domain.Entities.Team>
+public record GetTeamGeneric(int Id) : IQuery<Entity.Team>
 {
-    public class Handler : QueryHandler<GetTeamGeneric, Domain.Entities.Team>
+    public class Handler : QueryHandler<GetTeamGeneric, Entity.Team>
     {
         private readonly ITeamRepository _teamRepository;
 
@@ -11,7 +11,7 @@ public record GetTeamGeneric(int Id) : IQuery<Domain.Entities.Team>
             _teamRepository = teamRepository;
         }
 
-        protected override async Task<Domain.Entities.Team> Handle(GetTeamGeneric query)
+        protected override async Task<Entity.Team> Handle(GetTeamGeneric query)
         {
             return await _teamRepository.Get(query.Id);
         }

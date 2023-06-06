@@ -51,7 +51,7 @@ public class SaveHockeyStick
 
         public int SizeId => _viewModel.SizeId;
 
-        public int SportId => Domain.Constants.Sport.Hockey.Id;
+        public int SportId => Constant.Sport.Hockey.Id;
 
         public int? TeamId => _viewModel.Team?.Id > 0 ? _viewModel.Team.Id : null;
     }

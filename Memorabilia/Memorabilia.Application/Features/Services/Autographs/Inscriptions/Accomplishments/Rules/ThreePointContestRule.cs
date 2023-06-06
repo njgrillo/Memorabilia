@@ -1,13 +1,11 @@
-﻿using Memorabilia.Domain.Entities;
-
-namespace Memorabilia.Application.Features.Services.Autographs.Inscriptions.Accomplishments.Rules;
+﻿namespace Memorabilia.Application.Features.Services.Autographs.Inscriptions.Accomplishments.Rules;
 
 public class ThreePointContestRule : AccomplishmentRule, IAccomplishmentRule
 {
-    public override Domain.Constants.AccomplishmentType AccomplishmentType
-        => Domain.Constants.AccomplishmentType.NBAThreePointContestChampion;
+    public override Constant.AccomplishmentType AccomplishmentType 
+        => Constant.AccomplishmentType.NBAThreePointContestChampion;
 
-    public string[] GenerateInscriptions(PersonAccomplishment[] accomplishments)
+    public string[] GenerateInscriptions(Entity.PersonAccomplishment[] accomplishments)
     {
         var inscriptions = new List<string>
         {
@@ -19,7 +17,8 @@ public class ThreePointContestRule : AccomplishmentRule, IAccomplishmentRule
             inscriptions.Add(GetMultipleTimeAccomplishmentAbbreviation(accomplishments));
         }
 
-        PersonAccomplishment[] items = accomplishments.Where(x => x.Year.HasValue).ToArray();
+        Entity.PersonAccomplishment[] items = accomplishments.Where(x => x.Year.HasValue)
+                                                             .ToArray();
 
         inscriptions.AddRange(GetYearlyAccomplishmentAbbreviations(items));
 

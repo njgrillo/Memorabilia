@@ -34,7 +34,7 @@ public class SaveJerseyViewModel : MemorabiliaItemEditViewModel
         => JerseyQualityTypeId == JerseyQualityType.Authentic.Id;
 
     public override string ImageFileName 
-        => Domain.Constants.ImageFileName.ItemTypes;
+        => Constant.ImageFileName.ItemTypes;
 
     public bool IsGameWorthly
         => (GameStyleType?.IsGameWorthly() ?? false);

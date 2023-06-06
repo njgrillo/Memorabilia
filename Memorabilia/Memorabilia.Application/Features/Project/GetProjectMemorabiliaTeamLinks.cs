@@ -14,7 +14,7 @@ public record GetProjectMemorabiliaTeamLinks(Dictionary<string, object> Paramete
 
     protected override async Task<MemorabiliaItemModel[]> Handle(GetProjectMemorabiliaTeamLinks query)
     {
-        Domain.Entities.Memorabilia[] memorabilia = await _memorabiliaRepository.GetAll(query.Parameters);
+        Entity.Memorabilia[] memorabilia = await _memorabiliaRepository.GetAll(query.Parameters);
 
         return memorabilia.Any()
             ? memorabilia.Select(item => new MemorabiliaItemModel(item))

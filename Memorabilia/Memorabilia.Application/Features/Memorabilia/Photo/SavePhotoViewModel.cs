@@ -22,7 +22,7 @@ public class SavePhotoViewModel : MemorabiliaItemEditViewModel
         Teams = viewModel.Teams.Select(team => new SaveTeamViewModel(new TeamViewModel(team.Team))).ToList();
     }
 
-    public override string ImageFileName => Domain.Constants.ImageFileName.Photo;
+    public override string ImageFileName => Constant.ImageFileName.Photo;
 
     public override ItemType ItemType => ItemType.Photo;       
     

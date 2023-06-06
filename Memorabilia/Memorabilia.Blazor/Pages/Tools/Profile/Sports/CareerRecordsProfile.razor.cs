@@ -2,13 +2,13 @@
 
 public partial class CareerRecordsProfile : SportProfile
 {
-    private CareerRecordProfileViewModel[] CareerRecords = Array.Empty<CareerRecordProfileViewModel>();
+    private CareerRecordProfileModel[] CareerRecords = Array.Empty<CareerRecordProfileModel>();
 
     protected override void OnParametersSet()
     {
         CareerRecords = Person.CareerRecords
                               .Filter(Sport, OccupationType)
-                              .Select(record => new CareerRecordProfileViewModel(record))
+                              .Select(record => new CareerRecordProfileModel(record))
                               .OrderBy(record => record.CareerRecordTypeName)
                               .ToArray();
     }

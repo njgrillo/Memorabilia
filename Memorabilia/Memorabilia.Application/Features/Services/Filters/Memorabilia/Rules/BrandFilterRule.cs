@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Application.Features.Services.Filters.Memorabilia.Rules;
 
-public class BrandFilterRule : IFilterRule<Domain.Entities.Memorabilia>
+public class BrandFilterRule : IFilterRule<Entity.Memorabilia>
 {
     private int[] _brandIds;
 
@@ -14,7 +14,7 @@ public class BrandFilterRule : IFilterRule<Domain.Entities.Memorabilia>
         return _brandIds.Any();
     }
 
-    public Expression<Func<Domain.Entities.Memorabilia, bool>> GetExpression()
+    public Expression<Func<Entity.Memorabilia, bool>> GetExpression()
     {
         return item => _brandIds.Contains(item.Brand.BrandId);
     }

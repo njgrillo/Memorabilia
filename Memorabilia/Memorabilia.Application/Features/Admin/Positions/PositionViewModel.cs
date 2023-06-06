@@ -21,5 +21,5 @@ public class PositionViewModel
 
     public int SportId => _position.SportId;
 
-    public string SportName => Domain.Constants.Sport.Find(SportId)?.Name;
+    public string SportName => Constant.Sport.Find(SportId)?.Name;
 }

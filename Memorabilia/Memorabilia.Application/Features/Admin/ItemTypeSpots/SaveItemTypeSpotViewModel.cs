@@ -2,7 +2,7 @@
 
 namespace Memorabilia.Application.Features.Admin.ItemTypeSpots;
 
-public class SaveItemTypeSpotViewModel : SaveViewModel
+public class SaveItemTypeSpotViewModel : EditModel
 {
     public SaveItemTypeSpotViewModel() { }
 

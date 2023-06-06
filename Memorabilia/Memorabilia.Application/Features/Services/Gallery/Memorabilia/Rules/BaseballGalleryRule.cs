@@ -2,19 +2,19 @@
 
 public class BaseballGalleryRule : GalleryRule, IGalleryRule
 {
-    public bool Applies(Domain.Constants.ItemType itemType)
+    public bool Applies(Constant.ItemType itemType)
     {
-        return itemType == Domain.Constants.ItemType.Baseball;
+        return itemType == Constant.ItemType.Baseball;
     }
 
-    public override string GetTitle(Domain.Entities.Memorabilia memorabilia)
+    public override string GetTitle(Entity.Memorabilia memorabilia)
     {
         return $"{AutographTitleText(memorabilia)} {PlayerTeamText(memorabilia)} {GetBaseballTypeText(memorabilia)} {ItemTypeText(memorabilia)}";
     }
 
-    private static string GetBaseballTypeText(Domain.Entities.Memorabilia memorabilia)
+    private static string GetBaseballTypeText(Entity.Memorabilia memorabilia)
     {
-        var type = Domain.Constants.BaseballType.Find(memorabilia.Baseball?.BaseballTypeId ?? 0)?.Name ?? string.Empty;
+        var type = Constant.BaseballType.Find(memorabilia.Baseball?.BaseballTypeId ?? 0)?.Name ?? string.Empty;
 
         return type.Replace("baseball", string.Empty, StringComparison.OrdinalIgnoreCase);
     }

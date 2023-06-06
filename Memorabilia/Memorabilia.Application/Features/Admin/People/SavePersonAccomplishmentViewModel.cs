@@ -2,20 +2,20 @@
 
 namespace Memorabilia.Application.Features.Admin.People;
 
-public class SavePersonAccomplishmentViewModel : SaveViewModel
+public class SavePersonAccomplishmentViewModel : EditModel
 {
     public SavePersonAccomplishmentViewModel() { }
 
     public SavePersonAccomplishmentViewModel(PersonAccomplishment accomplishment)
     {
-        AccomplishmentType = Domain.Constants.AccomplishmentType.Find(accomplishment.AccomplishmentTypeId);
+        AccomplishmentType = Constant.AccomplishmentType.Find(accomplishment.AccomplishmentTypeId);
         Date = accomplishment.Date;
         Id = accomplishment.Id;
         PersonId = accomplishment.PersonId;
         Year = accomplishment.Year;
     }
 
-    public Domain.Constants.AccomplishmentType AccomplishmentType { get; set; }
+    public Constant.AccomplishmentType AccomplishmentType { get; set; }
 
     public string AccomplishmentTypeName => AccomplishmentType?.Name;
 

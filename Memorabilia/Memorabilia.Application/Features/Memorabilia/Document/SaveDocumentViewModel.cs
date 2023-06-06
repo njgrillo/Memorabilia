@@ -14,7 +14,7 @@ public class SaveDocumentViewModel : MemorabiliaItemEditViewModel
         Teams = viewModel.Teams.Select(team => new SaveTeamViewModel(new TeamViewModel(team.Team))).ToList();
     }
 
-    public override string ImageFileName => Domain.Constants.ImageFileName.Document;
+    public override string ImageFileName => Constant.ImageFileName.Document;
 
     public override ItemType ItemType => ItemType.Document;
 }

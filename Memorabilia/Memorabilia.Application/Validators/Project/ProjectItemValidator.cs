@@ -4,9 +4,9 @@ public class ProjectItemValidator : AbstractValidator<Domain.Entities.ProjectIte
 {
     public ProjectItemValidator(int projectTypeId)
     {
-        var projectType = Domain.Constants.ProjectType.Find(projectTypeId);
+        var projectType = Constant.ProjectType.Find(projectTypeId);
 
-        if (projectType != Domain.Constants.ProjectType.ItemType)
+        if (projectType != Constant.ProjectType.ItemType)
             return;
 
         RuleFor(x => x.ItemTypeId)

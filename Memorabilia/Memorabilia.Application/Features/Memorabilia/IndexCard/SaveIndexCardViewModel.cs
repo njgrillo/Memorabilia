@@ -15,7 +15,7 @@ public class SaveIndexCardViewModel : MemorabiliaItemEditViewModel
         SizeId = viewModel.Size.SizeId;
     }
 
-    public override string ImageFileName => Domain.Constants.ImageFileName.IndexCard;
+    public override string ImageFileName => Constant.ImageFileName.IndexCard;
 
     public override ItemType ItemType => ItemType.IndexCard;
 }

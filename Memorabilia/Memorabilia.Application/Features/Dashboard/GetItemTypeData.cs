@@ -1,8 +1,8 @@
 ﻿namespace Memorabilia.Application.Features.Dashboard;
 
-public record GetItemTypeData(int UserId) : IQuery<DashboardChartViewModel>
+public record GetItemTypeData(int UserId) : IQuery<DashboardChartModel>
 {
-    public class Handler : QueryHandler<GetItemTypeData, DashboardChartViewModel>
+    public class Handler : QueryHandler<GetItemTypeData, DashboardChartModel>
     {
         private readonly IMemorabiliaItemRepository _repository;
 
@@ -11,10 +11,10 @@ public record GetItemTypeData(int UserId) : IQuery<DashboardChartViewModel>
             _repository = repository;
         }
 
-        protected override async Task<DashboardChartViewModel> Handle(GetItemTypeData query)
+        protected override async Task<DashboardChartModel> Handle(GetItemTypeData query)
         {
             var itemTypeIds = _repository.GetItemTypeIds(query.UserId);
-            var itemTypeNames = itemTypeIds.Select(itemTypeId => Domain.Constants.ItemType.Find(itemTypeId).Name)
+            var itemTypeNames = itemTypeIds.Select(itemTypeId => Constant.ItemType.Find(itemTypeId).Name)
                                            .Distinct();
 
             var labels = new List<string>();
@@ -22,14 +22,14 @@ public record GetItemTypeData(int UserId) : IQuery<DashboardChartViewModel>
 
             foreach (var itemTypeName in itemTypeNames)
             {
-                var itemType = Domain.Constants.ItemType.Find(itemTypeName);
+                var itemType = Constant.ItemType.Find(itemTypeName);
                 var count = itemTypeIds.Count(itemTypeId => itemTypeId == itemType.Id);
 
                 counts.Add(count);
                 labels.Add($"{itemTypeName} ({count})");
             }
 
-            return await Task.FromResult(new DashboardChartViewModel(counts.ToArray(), labels.ToArray()));
+            return await Task.FromResult(new DashboardChartModel(counts.ToArray(), labels.ToArray()));
         }
     }
 }

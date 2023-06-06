@@ -27,7 +27,7 @@ public class SaveBammerViewModel : MemorabiliaItemEditViewModel
 
     public bool CanHaveBammerType => BrandId == Brand.Salvino.Id;
 
-    public override string ImageFileName => Domain.Constants.ImageFileName.Bammer;
+    public override string ImageFileName => Constant.ImageFileName.Bammer;
 
     public bool InPackage { get; set; }
 

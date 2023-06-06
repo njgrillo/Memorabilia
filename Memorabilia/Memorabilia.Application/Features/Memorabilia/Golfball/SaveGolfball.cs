@@ -50,6 +50,6 @@ public class SaveGolfball
 
         public int SizeId => _viewModel.SizeId;
 
-        public int SportId => Domain.Constants.Sport.Golf.Id;
+        public int SportId => Constant.Sport.Golf.Id;
     }
 }

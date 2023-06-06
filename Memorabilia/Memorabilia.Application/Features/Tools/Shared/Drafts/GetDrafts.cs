@@ -2,9 +2,9 @@
 
 namespace Memorabilia.Application.Features.Tools.Shared.Drafts;
 
-public record GetDrafts(Franchise Franchise, Sport Sport) : IQuery<DraftsViewModel>
+public record GetDrafts(Franchise Franchise, Sport Sport) : IQuery<DraftsModel>
 {
-    public class Handler : QueryHandler<GetDrafts, DraftsViewModel>
+    public class Handler : QueryHandler<GetDrafts, DraftsModel>
     {
         private readonly IDraftRepository _draftRepository;
 
@@ -13,9 +13,9 @@ public record GetDrafts(Franchise Franchise, Sport Sport) : IQuery<DraftsViewMod
             _draftRepository = draftRepository;
         }
 
-        protected override async Task<DraftsViewModel> Handle(GetDrafts query)
+        protected override async Task<DraftsModel> Handle(GetDrafts query)
         {
-            return new DraftsViewModel(await _draftRepository.GetAll(query.Franchise.Id), query.Sport)
+            return new DraftsModel(await _draftRepository.GetAll(query.Franchise.Id), query.Sport)
             {
                 Franchise = query.Franchise
             };

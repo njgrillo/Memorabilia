@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Application.Features.Services.Filters.Memorabilia.Rules;
 
-public class SizeFilterRule : IFilterRule<Domain.Entities.Memorabilia>
+public class SizeFilterRule : IFilterRule<Entity.Memorabilia>
 {
     private int[] _sizeIds;
 
@@ -14,7 +14,7 @@ public class SizeFilterRule : IFilterRule<Domain.Entities.Memorabilia>
         return _sizeIds.Any();
     }
 
-    public Expression<Func<Domain.Entities.Memorabilia, bool>> GetExpression()
+    public Expression<Func<Entity.Memorabilia, bool>> GetExpression()
     {
         return item => _sizeIds.Contains(item.Size.SizeId);
     }

@@ -2,14 +2,14 @@
 
 namespace Memorabilia.Application.Features.Admin.People;
 
-public class SavePersonCollegeViewModel : SaveViewModel
+public class SavePersonCollegeViewModel : EditModel
 {
     public SavePersonCollegeViewModel() { }
 
     public SavePersonCollegeViewModel(PersonCollege college)
     {
         BeginYear = college.BeginYear;
-        College = Domain.Constants.College.Find(college.CollegeId);
+        College = Constant.College.Find(college.CollegeId);
         EndYear = college.EndYear;
         Id = college.Id;
         PersonId = college.PersonId;
@@ -17,7 +17,7 @@ public class SavePersonCollegeViewModel : SaveViewModel
 
     public int? BeginYear { get; set; }
 
-    public Domain.Constants.College College { get; set; }
+    public Constant.College College { get; set; }
 
     public string CollegeName => College?.Name;
 

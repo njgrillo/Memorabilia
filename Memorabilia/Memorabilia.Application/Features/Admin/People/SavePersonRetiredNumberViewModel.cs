@@ -2,19 +2,19 @@
 
 namespace Memorabilia.Application.Features.Admin.People;
 
-public class SavePersonRetiredNumberViewModel : SaveViewModel
+public class SavePersonRetiredNumberViewModel : EditModel
 {
     public SavePersonRetiredNumberViewModel() { }
 
     public SavePersonRetiredNumberViewModel(RetiredNumber retiredNumber)
     {
-        Franchise = Domain.Constants.Franchise.Find(retiredNumber.FranchiseId);
+        Franchise = Constant.Franchise.Find(retiredNumber.FranchiseId);
         Id = retiredNumber.Id;
         PersonId = retiredNumber.PersonId;
         PlayerNumber = retiredNumber.PlayerNumber;
     }
 
-    public Domain.Constants.Franchise Franchise { get; set; }
+    public Constant.Franchise Franchise { get; set; }
 
     public string FranchiseName => Franchise?.Name;    
 

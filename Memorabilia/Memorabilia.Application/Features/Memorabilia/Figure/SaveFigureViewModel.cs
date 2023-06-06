@@ -30,7 +30,7 @@ public class SaveFigureViewModel : MemorabiliaItemEditViewModel
 
     public int FigureTypeId { get; set; }
 
-    public override string ImageFileName => Domain.Constants.ImageFileName.Figure;
+    public override string ImageFileName => Constant.ImageFileName.Figure;
 
     public override ItemType ItemType => ItemType.Figure;
 

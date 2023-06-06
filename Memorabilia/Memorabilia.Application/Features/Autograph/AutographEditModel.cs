@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Application.Features.Autograph;
 
-public class AutographEditModel : SaveViewModel
+public class AutographEditModel : EditModel
 {
     public AutographEditModel() { }
 
@@ -45,7 +45,8 @@ public class AutographEditModel : SaveViewModel
         ItemType = Constant.ItemType.Find(viewModel.ItemTypeId);
         UserFirstName = viewModel.UserFirstName;
 
-        var person = viewModel.People.FirstOrDefault()?.Person;
+        Entity.Person person = viewModel.People.FirstOrDefault()?.Person;
+
         MemorabiliaPerson = person != null ? new PersonViewModel(person) : new PersonViewModel();
     }
 
@@ -78,7 +79,8 @@ public class AutographEditModel : SaveViewModel
 
     public int ColorId { get; set; }
 
-    public int ConditionId { get; set; } = Constant.Condition.Pristine.Id;
+    public int ConditionId { get; set; } 
+        = Constant.Condition.Pristine.Id;
 
     public decimal? Cost { get; set; }
 

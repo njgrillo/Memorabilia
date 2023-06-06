@@ -2,19 +2,19 @@
 
 namespace Memorabilia.Application.Features.Admin.People;
 
-public class SavePersonAwardViewModel : SaveViewModel
+public class SavePersonAwardViewModel : EditModel
 {
     public SavePersonAwardViewModel() { }
 
     public SavePersonAwardViewModel(PersonAward award)
     {
-        AwardType = Domain.Constants.AwardType.Find(award.AwardTypeId);
+        AwardType = Constant.AwardType.Find(award.AwardTypeId);
         Id = award.Id;
         PersonId = award.PersonId;
         Year = award.Year;
     }
 
-    public Domain.Constants.AwardType AwardType { get; set; }
+    public Constant.AwardType AwardType { get; set; }
 
     public string AwardTypeName => AwardType?.Name;
 

@@ -30,7 +30,7 @@ public class SaveBobbleheadViewModel : MemorabiliaItemEditViewModel
 
     public bool HasBox { get; set; }
 
-    public override string ImageFileName => Domain.Constants.ImageFileName.Bobblehead;
+    public override string ImageFileName => Constant.ImageFileName.Bobblehead;
 
     public override ItemType ItemType => ItemType.Bobble;   
 

@@ -2,7 +2,7 @@
 
 namespace Memorabilia.Application.Features.Admin.People;
 
-public class SavePersonTeamsViewModel : SaveViewModel
+public class SavePersonTeamsViewModel : EditModel
 {
     public SavePersonTeamsViewModel() { }
 
@@ -26,7 +26,7 @@ public class SavePersonTeamsViewModel : SaveViewModel
 
     public override EditModeType EditModeType => Teams.Any() ? EditModeType.Update : EditModeType.Add;
 
-    public string ImageFileName => Domain.Constants.ImageFileName.Athletes;
+    public string ImageFileName => Constant.ImageFileName.Athletes;
 
     public override string ItemTitle => AdminDomainItem.Teams.Title;
 

@@ -1,14 +1,12 @@
-﻿using Memorabilia.Domain.Entities;
-
-namespace Memorabilia.Application.Features.Project;
+﻿namespace Memorabilia.Application.Features.Project;
 
 public class ProjectModel
 {
-    private readonly Domain.Entities.Project _project;
+    private readonly Entity.Project _project;
 
     public ProjectModel() { }
 
-    public ProjectModel(Domain.Entities.Project project)
+    public ProjectModel(Entity.Project project)
     {
         _project = project;
 
@@ -25,9 +23,9 @@ public class ProjectModel
             : new();
     }
 
-    public ProjectBaseball Baseball => _project.Baseball;
+    public Entity.ProjectBaseball Baseball => _project.Baseball;
 
-    public ProjectCard Card => _project.Card;
+    public Entity.ProjectCard Card => _project.Card;
 
     public DateTime? EndDate => _project.EndDate;
 
@@ -35,13 +33,13 @@ public class ProjectModel
 
     public string FormattedStartDate => StartDate?.ToString("MM/dd/yyyy");
 
-    public ProjectHallOfFame HallOfFame => _project.HallOfFame;
+    public Entity.ProjectHallOfFame HallOfFame => _project.HallOfFame;
 
-    public ProjectHelmet Helmet => _project.Helmet;
+    public Entity.ProjectHelmet Helmet => _project.Helmet;
 
     public int Id => _project.Id;
 
-    public ProjectItem Item => _project.Item;
+    public Entity.ProjectItem Item => _project.Item;
 
     public List<ProjectMemorabiliaTeamModel> MemorabiliaTeams { get; set; } = new();
 
@@ -53,9 +51,9 @@ public class ProjectModel
 
     public DateTime? StartDate => _project.StartDate;
 
-    public ProjectTeam Team => _project.Team;
+    public Entity.ProjectTeam Team => _project.Team;
 
     public int UserId => _project.UserId;
 
-    public ProjectWorldSeries WorldSeries => _project.WorldSeries;
+    public Entity.ProjectWorldSeries WorldSeries => _project.WorldSeries;
 }

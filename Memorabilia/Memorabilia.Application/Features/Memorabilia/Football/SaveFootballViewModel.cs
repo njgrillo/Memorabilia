@@ -43,7 +43,7 @@ public class SaveFootballViewModel : MemorabiliaItemEditViewModel
         = FootballType.Duke.Id;
 
     public override string ImageFileName 
-        => Domain.Constants.ImageFileName.Football;
+        => Constant.ImageFileName.Football;
 
     public override ItemType ItemType 
         => ItemType.Football;

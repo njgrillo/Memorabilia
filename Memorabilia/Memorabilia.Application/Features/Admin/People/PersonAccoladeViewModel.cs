@@ -23,8 +23,8 @@ public class PersonAccoladeViewModel
 
     public List<CollegeRetiredNumber> CollegeRetiredNumbers => _person.CollegeRetiredNumbers;
 
-    public Domain.Constants.College[] Colleges => _person.Colleges
-                                                         .Select(college => Domain.Constants.College.Find(college.CollegeId))
+    public Constant.College[] Colleges => _person.Colleges
+                                                         .Select(college => Constant.College.Find(college.CollegeId))
                                                          .ToArray();
 
     public List<Leader> Leaders => _person.Leaders;

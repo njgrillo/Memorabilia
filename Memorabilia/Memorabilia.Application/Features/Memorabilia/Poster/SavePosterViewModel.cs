@@ -21,7 +21,7 @@ public class SavePosterViewModel : MemorabiliaItemEditViewModel
         Teams = viewModel.Teams.Select(team => new SaveTeamViewModel(new TeamViewModel(team.Team))).ToList();
     }
 
-    public override string ImageFileName => Domain.Constants.ImageFileName.Poster;
+    public override string ImageFileName => Constant.ImageFileName.Poster;
 
     public override ItemType ItemType => ItemType.Poster;
 

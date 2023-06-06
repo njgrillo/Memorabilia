@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Application.Features.Services.Filters.Autographs.Rules;
 
-public class InscriptionFilterRule : IFilterRule<Domain.Entities.Memorabilia>
+public class InscriptionFilterRule : IFilterRule<Entity.Memorabilia>
 {
     private bool _hasInscriptions;
 
@@ -14,7 +14,7 @@ public class InscriptionFilterRule : IFilterRule<Domain.Entities.Memorabilia>
         return _hasInscriptions;
     }
 
-    public Expression<Func<Domain.Entities.Memorabilia, bool>> GetExpression()
+    public Expression<Func<Entity.Memorabilia, bool>> GetExpression()
     {
         return item => item.Autographs.Any(autograph => autograph.Inscriptions.Count > 0);
     }

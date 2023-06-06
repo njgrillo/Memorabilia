@@ -2,18 +2,18 @@
 
 namespace Memorabilia.Application.Features.Admin.People;
 
-public class SavePersonDraftViewModel : SaveViewModel
+public class SavePersonDraftViewModel : EditModel
 {
     public SavePersonDraftViewModel() { }
 
     public SavePersonDraftViewModel(IEnumerable<int> sportIds)
     {
-        Sports = sportIds.Select(sportId => Domain.Constants.Sport.Find(sportId)).ToArray();
+        Sports = sportIds.Select(sportId => Constant.Sport.Find(sportId)).ToArray();
     }
 
     public SavePersonDraftViewModel(Draft draft)
     {
-        Franchise = Domain.Constants.Franchise.Find(draft.FranchiseId);
+        Franchise = Constant.Franchise.Find(draft.FranchiseId);
         Id = draft.Id;
         Overall = draft.Overall;
         PersonId = draft.PersonId;
@@ -22,7 +22,7 @@ public class SavePersonDraftViewModel : SaveViewModel
         Year = draft.Year;
     }
 
-    public Domain.Constants.Franchise Franchise { get; set; }
+    public Constant.Franchise Franchise { get; set; }
 
     public string FranchiseName => Franchise?.Name;
 
@@ -36,7 +36,7 @@ public class SavePersonDraftViewModel : SaveViewModel
     [Range(1, 50, ErrorMessage = "Round is required and must be 1 or greater.")]
     public int? Round { get; set; }
 
-    public Domain.Constants.Sport[] Sports { get; set; } = Array.Empty<Domain.Constants.Sport>();
+    public Constant.Sport[] Sports { get; set; } = Array.Empty<Constant.Sport>();
 
     [Required]
     [Range(1965, 3000, ErrorMessage = "Year is required and must be 1965 or later.")]

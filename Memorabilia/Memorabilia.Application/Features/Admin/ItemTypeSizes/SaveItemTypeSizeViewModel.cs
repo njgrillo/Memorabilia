@@ -2,7 +2,7 @@
 
 namespace Memorabilia.Application.Features.Admin.ItemTypeSizes;
 
-public class SaveItemTypeSizeViewModel : SaveViewModel
+public class SaveItemTypeSizeViewModel : EditModel
 {
     public SaveItemTypeSizeViewModel() { }
 

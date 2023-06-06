@@ -2,7 +2,7 @@
 
 namespace Memorabilia.Application.Features.Admin.Teams;
 
-public class SaveTeamLeaguesViewModel : SaveViewModel
+public class SaveTeamLeaguesViewModel : EditModel
 {
     public SaveTeamLeaguesViewModel() { }
 
@@ -19,7 +19,7 @@ public class SaveTeamLeaguesViewModel : SaveViewModel
 
     public override string BackNavigationPath => $"{AdminDomainItem.Teams.Item}/{AdminDomainItem.Divisions.Item}/{EditModeType.Update.Name}/{TeamId}/{SportLeagueLevel?.Id}";
 
-    public bool CanHaveConference => SportLeagueLevel != Domain.Constants.SportLeagueLevel.MajorLeagueBaseball;
+    public bool CanHaveConference => SportLeagueLevel != Constant.SportLeagueLevel.MajorLeagueBaseball;
 
     public override string ContinueNavigationPath => $"{AdminDomainItem.Teams.Item}/Championship/{EditModeType.Update.Name}/{TeamId}/{SportLeagueLevel?.Id}";
 
@@ -29,7 +29,7 @@ public class SaveTeamLeaguesViewModel : SaveViewModel
 
     public List<SaveTeamLeagueViewModel> Leagues { get; set; } = new();
 
-    public Domain.Constants.SportLeagueLevel SportLeagueLevel { get; set; }
+    public Constant.SportLeagueLevel SportLeagueLevel { get; set; }
 
     public int TeamId { get; set; }
 

@@ -1,9 +1,9 @@
 ﻿namespace Memorabilia.Application.Features.Project;
 
 public record GetImportProjectPersons(Dictionary<string, object> Parameters)
-    : IQuery<Domain.Entities.Person[]>
+    : IQuery<Entity.Person[]>
 {
-    public class Handler : QueryHandler<GetImportProjectPersons, Domain.Entities.Person[]>
+    public class Handler : QueryHandler<GetImportProjectPersons, Entity.Person[]>
     {
         private readonly IPersonRepository _personRepository;
 
@@ -12,7 +12,7 @@ public record GetImportProjectPersons(Dictionary<string, object> Parameters)
             _personRepository = personRepository;
         }
 
-        protected override async Task<Domain.Entities.Person[]> Handle(GetImportProjectPersons query)
+        protected override async Task<Entity.Person[]> Handle(GetImportProjectPersons query)
         {
             return await _personRepository.GetAll(query.Parameters);
         }

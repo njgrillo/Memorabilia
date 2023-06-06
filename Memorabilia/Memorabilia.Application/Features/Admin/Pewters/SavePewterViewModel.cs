@@ -2,7 +2,7 @@
 
 namespace Memorabilia.Application.Features.Admin.Pewters;
 
-public class SavePewterViewModel : SaveViewModel
+public class SavePewterViewModel : EditModel
 {
     public SavePewterViewModel() { }
 

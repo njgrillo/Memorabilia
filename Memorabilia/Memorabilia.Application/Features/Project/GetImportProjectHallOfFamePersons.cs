@@ -1,9 +1,9 @@
 ﻿namespace Memorabilia.Application.Features.Project;
 
 public record GetImportProjectHallOfFamePersons(int SportLeagueLevelId, int? Year)
-    : IQuery<Domain.Entities.Person[]>
+    : IQuery<Entity.Person[]>
 {
-    public class Handler : QueryHandler<GetImportProjectHallOfFamePersons, Domain.Entities.Person[]>
+    public class Handler : QueryHandler<GetImportProjectHallOfFamePersons, Entity.Person[]>
     {
         private readonly IPersonRepository _personRepository;
 
@@ -12,7 +12,7 @@ public record GetImportProjectHallOfFamePersons(int SportLeagueLevelId, int? Yea
             _personRepository = personRepository;
         }
 
-        protected override async Task<Domain.Entities.Person[]> Handle(GetImportProjectHallOfFamePersons query)
+        protected override async Task<Entity.Person[]> Handle(GetImportProjectHallOfFamePersons query)
         {
             return await _personRepository.GetAllHallOfFamers(query.SportLeagueLevelId, query.Year);
         }

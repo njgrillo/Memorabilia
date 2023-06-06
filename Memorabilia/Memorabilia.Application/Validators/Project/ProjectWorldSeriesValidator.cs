@@ -4,9 +4,9 @@ public class ProjectWorldSeriesValidator : AbstractValidator<Domain.Entities.Pro
 {
     public ProjectWorldSeriesValidator(int projectTypeId)
     {
-        var projectType = Domain.Constants.ProjectType.Find(projectTypeId);
+        var projectType = Constant.ProjectType.Find(projectTypeId);
 
-        if (projectType != Domain.Constants.ProjectType.WorldSeries)
+        if (projectType != Constant.ProjectType.WorldSeries)
             return;
 
         RuleFor(x => x.TeamId)

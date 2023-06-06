@@ -2,7 +2,7 @@
 
 namespace Memorabilia.Application.Features.Admin.ItemTypeBrand;
 
-public class SaveItemTypeBrandViewModel : SaveViewModel
+public class SaveItemTypeBrandViewModel : EditModel
 {
     public SaveItemTypeBrandViewModel() { }
 

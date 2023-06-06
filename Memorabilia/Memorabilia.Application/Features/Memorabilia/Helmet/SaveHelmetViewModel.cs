@@ -50,7 +50,7 @@ public class SaveHelmetViewModel : MemorabiliaItemEditViewModel
     public int HelmetTypeId { get; set; }
 
     public override string ImageFileName 
-        => Domain.Constants.ImageFileName.Helmet;
+        => Constant.ImageFileName.Helmet;
 
     public bool IsGameWorthly 
         => (GameStyleType?.IsGameWorthly() ?? false);

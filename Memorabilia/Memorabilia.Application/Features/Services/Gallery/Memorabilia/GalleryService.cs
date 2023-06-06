@@ -9,7 +9,7 @@ public class GalleryService : IGalleryService
         _galleryRuleFactory = galleryRuleFactory;
     }
 
-    public string GetDescription(Domain.Entities.Memorabilia memorabilia)
+    public string GetDescription(Entity.Memorabilia memorabilia)
     {
         foreach (var rule in _galleryRuleFactory.Rules)
         {
@@ -22,7 +22,7 @@ public class GalleryService : IGalleryService
         return string.Empty;
     }
 
-    public string GetSubtitle(Domain.Entities.Memorabilia memorabilia)
+    public string GetSubtitle(Entity.Memorabilia memorabilia)
     {
         foreach (var rule in _galleryRuleFactory.Rules)
         {
@@ -35,7 +35,7 @@ public class GalleryService : IGalleryService
         return string.Empty;
     }
 
-    public string GetTitle(Domain.Entities.Memorabilia memorabilia)
+    public string GetTitle(Entity.Memorabilia memorabilia)
     {
         foreach(var rule in _galleryRuleFactory.Rules)
         {

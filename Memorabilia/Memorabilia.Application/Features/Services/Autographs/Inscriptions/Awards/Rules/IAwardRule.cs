@@ -2,7 +2,7 @@
 
 public interface IAwardRule
 {
-    bool Applies(Domain.Constants.AwardType awardType);
+    bool Applies(Constant.AwardType awardType);
 
-    string[] GenerateInscriptions(Domain.Entities.PersonAward[] awards);
+    string[] GenerateInscriptions(Entity.PersonAward[] awards);
 }

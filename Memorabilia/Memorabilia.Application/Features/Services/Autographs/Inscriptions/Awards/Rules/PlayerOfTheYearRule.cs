@@ -1,23 +1,21 @@
-﻿using Memorabilia.Domain.Entities;
-
-namespace Memorabilia.Application.Features.Services.Autographs.Inscriptions.Awards.Rules;
+﻿namespace Memorabilia.Application.Features.Services.Autographs.Inscriptions.Awards.Rules;
 
 public class PlayerOfTheYearRule : AwardRule, IAwardRule
 {
-    private Domain.Constants.AwardType _awardType;
+    private Constant.AwardType _awardType;
 
-    public override Domain.Constants.AwardType AwardType
+    public override Constant.AwardType AwardType
         => _awardType;
 
-    public override bool Applies(Domain.Constants.AwardType awardType)
+    public override bool Applies(Constant.AwardType awardType)
     {
         _awardType = awardType;
 
-        return awardType == Domain.Constants.AwardType.DefensivePlayerOfTheYear ||
-               awardType == Domain.Constants.AwardType.OffensivePlayerOfTheYear;
+        return awardType == Constant.AwardType.DefensivePlayerOfTheYear ||
+               awardType == Constant.AwardType.OffensivePlayerOfTheYear;
     }
 
-    public string[] GenerateInscriptions(PersonAward[] awards)
+    public string[] GenerateInscriptions(Entity.PersonAward[] awards)
     {
         var inscriptions = new List<string>
         {

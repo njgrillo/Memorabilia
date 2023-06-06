@@ -4,9 +4,9 @@ public class ProjectCardValidator : AbstractValidator<Domain.Entities.ProjectCar
 {
     public ProjectCardValidator(int projectTypeId)
     {
-        var projectType = Domain.Constants.ProjectType.Find(projectTypeId);
+        var projectType = Constant.ProjectType.Find(projectTypeId);
 
-        if (projectType != Domain.Constants.ProjectType.Card)
+        if (projectType != Constant.ProjectType.Card)
             return;
 
         RuleFor(x => x.BrandId)

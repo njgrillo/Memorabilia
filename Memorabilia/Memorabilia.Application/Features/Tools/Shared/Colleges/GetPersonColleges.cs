@@ -2,9 +2,9 @@
 
 namespace Memorabilia.Application.Features.Tools.Shared.Colleges;
 
-public record GetPersonColleges(College College, Sport Sport) : IQuery<PersonCollegesViewModel>
+public record GetPersonColleges(College College, Sport Sport) : IQuery<PersonCollegesModel>
 {
-    public class Handler : QueryHandler<GetPersonColleges, PersonCollegesViewModel>
+    public class Handler : QueryHandler<GetPersonColleges, PersonCollegesModel>
     {
         private readonly IPersonCollegeRepository _collegeRepository;
 
@@ -13,9 +13,9 @@ public record GetPersonColleges(College College, Sport Sport) : IQuery<PersonCol
             _collegeRepository = collegeRepository;
         }
 
-        protected override async Task<PersonCollegesViewModel> Handle(GetPersonColleges query)
+        protected override async Task<PersonCollegesModel> Handle(GetPersonColleges query)
         {
-            return new PersonCollegesViewModel(await _collegeRepository.GetAll(query.College.Id, query.Sport.Id), query.Sport)
+            return new PersonCollegesModel(await _collegeRepository.GetAll(query.College.Id, query.Sport.Id), query.Sport)
             {
                 College = query.College
             };

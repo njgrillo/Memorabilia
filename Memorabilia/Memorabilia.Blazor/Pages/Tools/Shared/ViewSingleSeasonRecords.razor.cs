@@ -1,8 +1,8 @@
 ﻿namespace Memorabilia.Blazor.Pages.Tools.Shared;
 
-public partial class ViewSingleSeasonRecords : ViewSportTools<SingleSeasonRecordViewModel>
+public partial class ViewSingleSeasonRecords : ViewSportTools<SingleSeasonRecordModel>
 {
-    private SingleSeasonRecordsViewModel _viewModel = new();
+    private SingleSeasonRecordsModel _viewModel = new();
 
     protected override async Task OnInitializedAsync()
     {

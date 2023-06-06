@@ -2,7 +2,7 @@
 
 namespace Memorabilia.Application.Features.Admin.People;
 
-public class SavePersonHallOfFamesViewModel : SaveViewModel
+public class SavePersonHallOfFamesViewModel : EditModel
 {
     public SavePersonHallOfFamesViewModel() { }
 
@@ -29,7 +29,7 @@ public class SavePersonHallOfFamesViewModel : SaveViewModel
 
     public List<SavePersonHallOfFameViewModel> HallOfFames { get; set; } = new();
 
-    public string ImageFileName => Domain.Constants.ImageFileName.Athletes;
+    public string ImageFileName => Constant.ImageFileName.Athletes;
 
     public List<SavePersonInternationalHallOfFameViewModel> InternationalHallOfFames { get; set; } = new();
 

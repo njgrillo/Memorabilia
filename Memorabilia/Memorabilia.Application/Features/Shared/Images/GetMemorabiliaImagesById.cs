@@ -1,8 +1,8 @@
 ﻿namespace Memorabilia.Application.Features.Shared.Images;
 
-public record GetMemorabiliaImagesById(int MemorabiliaId) : IQuery<Domain.Entities.MemorabiliaImage[]>
+public record GetMemorabiliaImagesById(int MemorabiliaId) : IQuery<Entity.MemorabiliaImage[]>
 {
-    public class Handler : QueryHandler<GetMemorabiliaImagesById, Domain.Entities.MemorabiliaImage[]>
+    public class Handler : QueryHandler<GetMemorabiliaImagesById, Entity.MemorabiliaImage[]>
     {
         private readonly IMemorabiliaImageRepository _memorabiliaImageRepository;
 
@@ -11,7 +11,7 @@ public record GetMemorabiliaImagesById(int MemorabiliaId) : IQuery<Domain.Entiti
             _memorabiliaImageRepository = memorabiliaImageRepository;
         }
 
-        protected override async Task<Domain.Entities.MemorabiliaImage[]> Handle(GetMemorabiliaImagesById query)
+        protected override async Task<Entity.MemorabiliaImage[]> Handle(GetMemorabiliaImagesById query)
         {
             return (await _memorabiliaImageRepository.GetAll(query.MemorabiliaId)).ToArray();
         }

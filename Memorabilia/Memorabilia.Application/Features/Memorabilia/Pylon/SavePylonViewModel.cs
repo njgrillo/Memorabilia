@@ -23,7 +23,7 @@ public class SavePylonViewModel : MemorabiliaItemEditViewModel
             Team = new SaveTeamViewModel(new TeamViewModel(viewModel.Teams.First().Team));
     }
 
-    public override string ImageFileName => Domain.Constants.ImageFileName.Pylon;
+    public override string ImageFileName => Constant.ImageFileName.Pylon;
 
     public override ItemType ItemType => ItemType.Pylon;
 

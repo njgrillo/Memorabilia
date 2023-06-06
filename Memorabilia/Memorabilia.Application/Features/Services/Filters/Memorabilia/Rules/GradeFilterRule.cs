@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Application.Features.Services.Filters.Memorabilia.Rules;
 
-public class GradeFilterRule : IFilterRule<Domain.Entities.Memorabilia>
+public class GradeFilterRule : IFilterRule<Entity.Memorabilia>
 {
     private int? _grade;
 
@@ -14,7 +14,7 @@ public class GradeFilterRule : IFilterRule<Domain.Entities.Memorabilia>
         return _grade.HasValue && _grade.Value > 0;
     }
 
-    public Expression<Func<Domain.Entities.Memorabilia, bool>> GetExpression()
+    public Expression<Func<Entity.Memorabilia, bool>> GetExpression()
     {
         return item => item.Autographs.Any(autograph => autograph.Grade == _grade);
     }

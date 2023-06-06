@@ -22,7 +22,7 @@ public class SaveLithographViewModel : MemorabiliaItemEditViewModel
         Teams = viewModel.Teams.Select(team => new SaveTeamViewModel(new TeamViewModel(team.Team))).ToList();
     }
 
-    public override string ImageFileName => Domain.Constants.ImageFileName.Lithograph;
+    public override string ImageFileName => Constant.ImageFileName.Lithograph;
 
     public override ItemType ItemType => ItemType.Lithograph;
 

@@ -5,21 +5,21 @@ public partial class AccomplishmentsProfile : PersonProfile
     [Parameter]
     public Sport Sport { get; set; }
 
-    private AccomplishmentProfileViewModel[] Accomplishments = Array.Empty<AccomplishmentProfileViewModel>();
+    private AccomplishmentProfileModel[] Accomplishments = Array.Empty<AccomplishmentProfileModel>();
     private string _search;
 
     protected override void OnParametersSet()
     {
         Accomplishments = Person.Accomplishments
                                 .Filter(Sport, OccupationType)
-                                .Select(accomplishment => new AccomplishmentProfileViewModel(accomplishment))
+                                .Select(accomplishment => new AccomplishmentProfileModel(accomplishment))
                                 .ToArray();
     }
 
-    private bool FilterFunc1(AccomplishmentProfileViewModel viewModel)
+    private bool FilterFunc1(AccomplishmentProfileModel viewModel)
         => FilterFunc(viewModel, _search);
 
-    private static bool FilterFunc(AccomplishmentProfileViewModel viewModel, string search)
+    private static bool FilterFunc(AccomplishmentProfileModel viewModel, string search)
     {
         return search.IsNullOrEmpty() ||
                viewModel.AccomplishmentTypeName.Contains(search, StringComparison.OrdinalIgnoreCase) ||

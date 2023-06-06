@@ -41,6 +41,6 @@ public class SavePinFlag
 
         public int? PersonId => _viewModel.Person?.Id > 0 ? _viewModel.Person?.Id : null;
 
-        public int SportId => Domain.Constants.Sport.Golf.Id;
+        public int SportId => Constant.Sport.Golf.Id;
     }
 }

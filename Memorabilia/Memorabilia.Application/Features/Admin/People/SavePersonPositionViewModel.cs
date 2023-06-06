@@ -3,7 +3,7 @@ using Memorabilia.Domain.Enums;
 
 namespace Memorabilia.Application.Features.Admin.People;
 
-public class SavePersonPositionViewModel : SaveViewModel
+public class SavePersonPositionViewModel : EditModel
 {
     public SavePersonPositionViewModel() { }
 
@@ -11,13 +11,13 @@ public class SavePersonPositionViewModel : SaveViewModel
     {
         Id = position.Id;
         PersonId = position.PersonId;
-        Position = Domain.Constants.Position.Find(position.PositionId);
+        Position = Constant.Position.Find(position.PositionId);
         PositionType = position.IsPrimary ? PositionType.Primary : PositionType.Secondary;
     }
 
     public int PersonId { get; set; }
 
-    public Domain.Constants.Position Position { get; set; }
+    public Constant.Position Position { get; set; }
 
     public string PositionName => Position?.Name;
 

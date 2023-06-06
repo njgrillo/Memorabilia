@@ -2,7 +2,7 @@
 
 namespace Memorabilia.Application.Features.Admin.Divisions;
 
-public class SaveDivisionViewModel : SaveViewModel
+public class SaveDivisionViewModel : EditModel
 {
     public SaveDivisionViewModel() { }
 

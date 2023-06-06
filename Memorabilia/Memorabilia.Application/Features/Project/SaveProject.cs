@@ -1,6 +1,4 @@
-﻿using Memorabilia.Domain.Entities;
-
-namespace Memorabilia.Application.Features.Project;
+﻿namespace Memorabilia.Application.Features.Project;
 
 public class SaveProject
 {
@@ -15,15 +13,15 @@ public class SaveProject
 
         protected override async Task Handle(Command command)
         {
-            Domain.Entities.Project project;
+            Entity.Project project;
 
             if (command.IsNew)
             {
-                project = new Domain.Entities.Project(command.Name, 
-                                                      command.StartDate,
-                                                      command.EndDate,
-                                                      command.UserId,
-                                                      command.ProjectTypeId);
+                project = new Entity.Project(command.Name, 
+                                             command.StartDate,
+                                             command.EndDate,
+                                             command.UserId,
+                                             command.ProjectTypeId);
 
                 SetProjectDetails(command, project);
                 SetProjectPeople(project, command);
@@ -59,7 +57,7 @@ public class SaveProject
             await _projectRepository.Update(project);
         }
 
-        private static void DeleteProjectMemorabiliaTeams(Domain.Entities.Project project, Command command)
+        private static void DeleteProjectMemorabiliaTeams(Entity.Project project, Command command)
         {
             if (!command.DeleteMemorabiliaTeamIds.Any())
                 return;
@@ -67,7 +65,7 @@ public class SaveProject
             project.RemoveMemorabiliaTeams(command.DeleteMemorabiliaTeamIds);
         }
 
-        private static void DeleteProjectPeople(Domain.Entities.Project project, Command command)
+        private static void DeleteProjectPeople(Entity.Project project, Command command)
         {
             if (!command.DeletePeopleIds.Any())
                 return;
@@ -75,11 +73,11 @@ public class SaveProject
             project.RemovePeople(command.DeletePeopleIds);
         }
 
-        private static void SetProjectDetails(Command command, Domain.Entities.Project project)
+        private static void SetProjectDetails(Command command, Entity.Project project)
         {
-            var projectType = Domain.Constants.ProjectType.Find(command.ProjectTypeId);
+            var projectType = Constant.ProjectType.Find(command.ProjectTypeId);
 
-            if (projectType == Domain.Constants.ProjectType.BaseballType)
+            if (projectType == Constant.ProjectType.BaseballType)
             {
                 project.SetBaseball(command.Baseball.BaseballTypeId,
                                     command.Baseball.TeamId,
@@ -88,7 +86,7 @@ public class SaveProject
                 return;
             }
 
-            if (projectType == Domain.Constants.ProjectType.Card)
+            if (projectType == Constant.ProjectType.Card)
             {
                 project.SetCard(command.Card.BrandId,
                                 command.Card.TeamId,
@@ -97,7 +95,7 @@ public class SaveProject
                 return;
             }
 
-            if (projectType == Domain.Constants.ProjectType.HallOfFame)
+            if (projectType == Constant.ProjectType.HallOfFame)
             {
                 project.SetHallOfFame(command.HallOfFame.SportLeagueLevelId,
                                       command.HallOfFame.Year,
@@ -106,7 +104,7 @@ public class SaveProject
                 return;
             }
 
-            if (projectType == Domain.Constants.ProjectType.HelmetType)
+            if (projectType == Constant.ProjectType.HelmetType)
             {
                 project.SetHelmet(command.Helmet.HelmetTypeId,
                                   command.Helmet.HelmetFinishId,
@@ -115,7 +113,7 @@ public class SaveProject
                 return;
             }
 
-            if (projectType == Domain.Constants.ProjectType.ItemType)
+            if (projectType == Constant.ProjectType.ItemType)
             {
                 project.SetItem(command.Item.ItemTypeId,
                                 command.Item.MultiSignedItem);
@@ -123,7 +121,7 @@ public class SaveProject
                 return;
             }
 
-            if (projectType == Domain.Constants.ProjectType.Team)
+            if (projectType == Constant.ProjectType.Team)
             {
                 project.SetTeam(command.Team.TeamId, 
                                 command.Team.Year);
@@ -131,7 +129,7 @@ public class SaveProject
                 return;
             }
 
-            if (projectType == Domain.Constants.ProjectType.WorldSeries)
+            if (projectType == Constant.ProjectType.WorldSeries)
             {
                 project.SetWorldSeries(command.WorldSeries.TeamId,
                                        command.WorldSeries.Year,
@@ -141,7 +139,7 @@ public class SaveProject
             }
         }
 
-        private static void SetProjectMemorabiliaTeams(Domain.Entities.Project project, Command command)
+        private static void SetProjectMemorabiliaTeams(Entity.Project project, Command command)
         {
             foreach (var projectMemorabiliaTeam in command.MemorabiliaTeams.Where(item => !item.IsDeleted))
             {
@@ -156,7 +154,7 @@ public class SaveProject
             }
         }
 
-        private static void SetProjectPeople(Domain.Entities.Project project, Command command)
+        private static void SetProjectPeople(Entity.Project project, Command command)
         {
             foreach (var projectPerson in command.People.Where(person => !person.IsDeleted))
             {
@@ -183,9 +181,9 @@ public class SaveProject
             Id = _viewModel.Id;
         }
 
-        public ProjectBaseball Baseball => _viewModel.Baseball;
+        public Entity.ProjectBaseball Baseball => _viewModel.Baseball;
 
-        public ProjectCard Card => _viewModel.Card;
+        public Entity.ProjectCard Card => _viewModel.Card;
 
         public int[] DeleteMemorabiliaTeamIds 
             => _viewModel.MemorabiliaTeams
@@ -201,9 +199,9 @@ public class SaveProject
 
         public DateTime? EndDate => _viewModel.EndDate;
 
-        public ProjectHallOfFame HallOfFame => _viewModel.HallOfFame;
+        public Entity.ProjectHallOfFame HallOfFame => _viewModel.HallOfFame;
 
-        public ProjectHelmet Helmet => _viewModel.Helmet;
+        public Entity.ProjectHelmet Helmet => _viewModel.Helmet;
 
         public int Id { get; set; }
 
@@ -213,9 +211,10 @@ public class SaveProject
 
         public bool IsNew => _viewModel.IsNew;
 
-        public ProjectItem Item => _viewModel.Item;
+        public Entity.ProjectItem Item => _viewModel.Item;
 
-        public List<ProjectMemorabiliaTeamEditModel> MemorabiliaTeams => _viewModel.MemorabiliaTeams;
+        public List<ProjectMemorabiliaTeamEditModel> MemorabiliaTeams 
+            => _viewModel.MemorabiliaTeams;
 
         public string Name => _viewModel.Name;
 
@@ -225,10 +224,11 @@ public class SaveProject
 
         public int ProjectTypeId => _viewModel.ProjectType.Id;
 
-        public ProjectTeam Team => _viewModel.Team;
+        public Entity.ProjectTeam Team => _viewModel.Team;
 
         public int UserId => _viewModel.UserId;
 
-        public ProjectWorldSeries WorldSeries => _viewModel.WorldSeries;
+        public Entity.ProjectWorldSeries WorldSeries 
+            => _viewModel.WorldSeries;
     }
 }

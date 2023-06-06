@@ -33,7 +33,7 @@ public class SaveGolfballViewModel : MemorabiliaItemEditViewModel
         => SizeId == Size.Standard.Id;
 
     public override string ImageFileName
-        => Domain.Constants.ImageFileName.Golfball;
+        => Constant.ImageFileName.Golfball;
 
     public override ItemType ItemType 
         => ItemType.Golfball;

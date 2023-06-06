@@ -1,8 +1,8 @@
 ﻿namespace Memorabilia.Application.Features.Dashboard;
 
-public record GetWritingInstrumentData(int UserId) : IQuery<DashboardChartViewModel>
+public record GetWritingInstrumentData(int UserId) : IQuery<DashboardChartModel>
 {
-    public class Handler : QueryHandler<GetWritingInstrumentData, DashboardChartViewModel>
+    public class Handler : QueryHandler<GetWritingInstrumentData, DashboardChartModel>
     {
         private readonly IAutographRepository _repository;
 
@@ -11,10 +11,10 @@ public record GetWritingInstrumentData(int UserId) : IQuery<DashboardChartViewMo
             _repository = repository;
         }
 
-        protected override async Task<DashboardChartViewModel> Handle(GetWritingInstrumentData query)
+        protected override async Task<DashboardChartModel> Handle(GetWritingInstrumentData query)
         {
             var writingInstrumentIds = _repository.GetWritingInstrumentIds(query.UserId);
-            var writingInstrumentNames = writingInstrumentIds.Select(writingInstrumentId => Domain.Constants.WritingInstrument.Find(writingInstrumentId).Name)
+            var writingInstrumentNames = writingInstrumentIds.Select(writingInstrumentId => Constant.WritingInstrument.Find(writingInstrumentId).Name)
                                                              .Distinct();
 
             var labels = new List<string>();
@@ -22,14 +22,14 @@ public record GetWritingInstrumentData(int UserId) : IQuery<DashboardChartViewMo
 
             foreach (var writingInstrumentName in writingInstrumentNames)
             {
-                var writingInstrument = Domain.Constants.WritingInstrument.Find(writingInstrumentName);
+                var writingInstrument = Constant.WritingInstrument.Find(writingInstrumentName);
                 var count = writingInstrumentIds.Count(writingInstrumentId => writingInstrumentId == writingInstrument.Id);
 
                 counts.Add(count);
                 labels.Add($"{writingInstrumentName} ({count})");
             }
 
-            return await Task.FromResult(new DashboardChartViewModel(counts.ToArray(), labels.ToArray()));
+            return await Task.FromResult(new DashboardChartModel(counts.ToArray(), labels.ToArray()));
         }
     }
 }

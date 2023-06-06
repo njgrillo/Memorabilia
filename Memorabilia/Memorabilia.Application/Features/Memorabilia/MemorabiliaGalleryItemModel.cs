@@ -26,7 +26,7 @@ public class MemorabiliaGalleryItemModel
         get
         {
             var imageFileName = _memorabilia.Images.Any()
-                ? _memorabilia.Images.SingleOrDefault(image => image.ImageTypeId == Constant.ImageType.Primary.Id)?.FileName ?? Domain.Constants.ImageFileName.ImageNotAvailable
+                ? _memorabilia.Images.SingleOrDefault(image => image.ImageTypeId == Constant.ImageType.Primary.Id)?.FileName ?? Constant.ImageFileName.ImageNotAvailable
                 : Constant.ImageFileName.ImageNotAvailable;
 
             return !imageFileName.IsNullOrEmpty() ? imageFileName : Constant.ImageFileName.ImageNotAvailable;

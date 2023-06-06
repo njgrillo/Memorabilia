@@ -108,7 +108,7 @@ public class AutographModel : ViewModel
     public string InscriptionTooltip
         => $"{Inscriptions.Count} Inscription(s)"; 
 
-    public List<Domain.Entities.Inscription> Inscriptions 
+    public List<Entity.Inscription> Inscriptions 
         => _autograph.Inscriptions;
 
     public bool IsPersonalized 

@@ -1,8 +1,8 @@
 ﻿namespace Memorabilia.Application.Features.Dashboard;
 
-public record GetFranchiseData(int UserId) : IQuery<DashboardChartViewModel>
+public record GetFranchiseData(int UserId) : IQuery<DashboardChartModel>
 {
-    public class Handler : QueryHandler<GetFranchiseData, DashboardChartViewModel>
+    public class Handler : QueryHandler<GetFranchiseData, DashboardChartModel>
     {
         private readonly IMemorabiliaItemRepository _repository;
 
@@ -11,10 +11,10 @@ public record GetFranchiseData(int UserId) : IQuery<DashboardChartViewModel>
             _repository = repository;
         }
 
-        protected override async Task<DashboardChartViewModel> Handle(GetFranchiseData query)
+        protected override async Task<DashboardChartModel> Handle(GetFranchiseData query)
         {
             var franchiseIds = _repository.GetFranchiseIds(query.UserId);
-            var franchiseNames = franchiseIds.Select(franchiseId => Domain.Constants.Franchise.Find(franchiseId).Name)
+            var franchiseNames = franchiseIds.Select(franchiseId => Constant.Franchise.Find(franchiseId).Name)
                                              .Distinct();
 
             var labels = new List<string>();
@@ -22,14 +22,14 @@ public record GetFranchiseData(int UserId) : IQuery<DashboardChartViewModel>
 
             foreach (var franchiseName in franchiseNames)
             {
-                var franchise = Domain.Constants.Franchise.Find(franchiseName);
+                var franchise = Constant.Franchise.Find(franchiseName);
                 var count = franchiseIds.Count(franchiseId => franchiseId == franchise.Id);
 
                 counts.Add(count);
                 labels.Add($"{franchiseName} ({count})");
             }
 
-            return await Task.FromResult(new DashboardChartViewModel(counts.ToArray(), labels.ToArray()));
+            return await Task.FromResult(new DashboardChartModel(counts.ToArray(), labels.ToArray()));
         }
     }
 }

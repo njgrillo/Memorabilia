@@ -1,4 +1,4 @@
-﻿@inherits ViewSportTools<DraftViewModel>
+﻿@inherits ViewSportTools<DraftModel>
 
 <DivPad2>
     <Content>
@@ -13,7 +13,7 @@
             <Content>
                 <MudTable Bordered="false"
                           Dense="false"
-                          Filter="new Func<DraftViewModel,bool>(FilterFunc1)"
+                          Filter="new Func<DraftModel,bool>(FilterFunc1)"
                           Hover="true"
                           Items="@_viewModel.Drafts.ToList()"
                           Striped="true">

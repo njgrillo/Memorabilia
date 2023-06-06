@@ -17,7 +17,7 @@ public record GetUserDashboardItems(int UserId) : IQuery<UserDashboardsViewModel
 
             return new UserDashboardsViewModel(user.Id, 
                                                user.DashboardItems
-                                                   .OrderBy(dashboardItem => Domain.Constants.DashboardItem.Find(dashboardItem.DashboardItemId).Name));
+                                                   .OrderBy(dashboardItem => Constant.DashboardItem.Find(dashboardItem.DashboardItemId).Name));
         }
     }
 }

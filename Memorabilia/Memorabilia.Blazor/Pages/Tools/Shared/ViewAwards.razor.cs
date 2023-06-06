@@ -1,11 +1,11 @@
 ﻿namespace Memorabilia.Blazor.Pages.Tools.Shared;
 
-public partial class ViewAwards : ViewSportTools<AwardViewModel>
+public partial class ViewAwards : ViewSportTools<AwardModel>
 {
     [Inject]
     public IDialogService DialogService { get; set; }
 
-    private AwardsViewModel _viewModel = new();
+    private AwardsModel _viewModel = new();
 
     protected async Task Browse()
     {

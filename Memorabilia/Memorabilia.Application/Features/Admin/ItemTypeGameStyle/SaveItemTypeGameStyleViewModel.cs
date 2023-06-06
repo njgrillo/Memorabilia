@@ -2,7 +2,7 @@
 
 namespace Memorabilia.Application.Features.Admin.ItemTypeGameStyle;
 
-public class SaveItemTypeGameStyleViewModel : SaveViewModel
+public class SaveItemTypeGameStyleViewModel : EditModel
 {
     public SaveItemTypeGameStyleViewModel() { }
 

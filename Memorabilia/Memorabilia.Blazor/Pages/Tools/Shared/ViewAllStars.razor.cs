@@ -1,8 +1,8 @@
 ﻿namespace Memorabilia.Blazor.Pages.Tools.Shared;
 
-public partial class ViewAllStars : ViewSportTools<AllStarViewModel>
+public partial class ViewAllStars : ViewSportTools<AllStarModel>
 {
-    protected bool FilterFuncSecondaryGrid(AllStarViewModel viewModel) => FilterFuncSecondary(viewModel, SecondarySearch);
+    protected bool FilterFuncSecondaryGrid(AllStarModel viewModel) => FilterFuncSecondary(viewModel, SecondarySearch);
 
     protected string SecondarySearch;
 
@@ -15,7 +15,7 @@ public partial class ViewAllStars : ViewSportTools<AllStarViewModel>
             _ => 1950
         };
 
-    private AllStarsViewModel _viewModel = new();
+    private AllStarsModel _viewModel = new();
 
     private async Task OnInputChange(int year)
     {
@@ -33,14 +33,14 @@ public partial class ViewAllStars : ViewSportTools<AllStarViewModel>
                                             .DistinctBy(allStar => allStar.PersonId)
                                             .ToList();
 
-            foreach (AllStarViewModel allStar in _viewModel.AllStars.Where(allStar => personIds.Contains(allStar.PersonId)))
+            foreach (AllStarModel allStar in _viewModel.AllStars.Where(allStar => personIds.Contains(allStar.PersonId)))
             {
                 allStar.NumberOfGames = 2;
             }
         }
     }    
 
-    protected bool FilterFuncSecondary(AllStarViewModel viewModel, string search)
+    protected bool FilterFuncSecondary(AllStarModel viewModel, string search)
     {
         return search.IsNullOrEmpty() ||
                viewModel.Name.Contains(search, StringComparison.OrdinalIgnoreCase) ||

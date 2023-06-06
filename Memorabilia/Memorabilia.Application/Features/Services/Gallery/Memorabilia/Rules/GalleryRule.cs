@@ -2,12 +2,12 @@
 
 public abstract class GalleryRule
 {
-    public virtual string AcquisitionTypeText(Domain.Entities.Memorabilia memorabilia)
+    public virtual string AcquisitionTypeText(Entity.Memorabilia memorabilia)
     {
-        return $"Acquired:{Domain.Constants.AcquisitionType.Find(memorabilia.MemorabiliaAcquisition?.Acquisition?.AcquisitionTypeId ?? 0)?.Name ?? string.Empty}";
+        return $"Acquired:{Constant.AcquisitionType.Find(memorabilia.MemorabiliaAcquisition?.Acquisition?.AcquisitionTypeId ?? 0)?.Name ?? string.Empty}";
     }
 
-    public virtual string AutographTitleText(Domain.Entities.Memorabilia memorabilia)
+    public virtual string AutographTitleText(Entity.Memorabilia memorabilia)
     {
         return memorabilia.Autographs.Count switch
         {
@@ -19,12 +19,12 @@ public abstract class GalleryRule
         };
     }
 
-    public virtual string ConditionText(Domain.Entities.Memorabilia memorabilia)
+    public virtual string ConditionText(Entity.Memorabilia memorabilia)
     {
         return $"Condition: {memorabilia.Condition?.Name ?? string.Empty}";
     }
 
-    public virtual string CostText(Domain.Entities.Memorabilia memorabilia)
+    public virtual string CostText(Entity.Memorabilia memorabilia)
     {
         var cost = (memorabilia.MemorabiliaAcquisition?.Acquisition?.Cost ?? 0) 
             + memorabilia.Autographs?.Sum(autograph => autograph?.Acquisition?.Cost ?? 0);
@@ -32,34 +32,34 @@ public abstract class GalleryRule
         return $"Cost: {cost?.ToString("C") ?? string.Empty}";
     }
 
-    public virtual string EstimatedValueText(Domain.Entities.Memorabilia memorabilia)
+    public virtual string EstimatedValueText(Entity.Memorabilia memorabilia)
     {
         var value = (memorabilia.EstimatedValue ?? 0) + memorabilia.Autographs?.Sum(autograph => autograph?.EstimatedValue ?? 0);
 
         return $"Value: {value?.ToString("C") ?? string.Empty}";
     }
 
-    public virtual string GetDescription(Domain.Entities.Memorabilia memorabilia)
+    public virtual string GetDescription(Entity.Memorabilia memorabilia)
     {
         return $"{ConditionText(memorabilia)}, {AcquisitionTypeText(memorabilia)}";
     }
 
-    public virtual string GetSubtitle(Domain.Entities.Memorabilia memorabilia)
+    public virtual string GetSubtitle(Entity.Memorabilia memorabilia)
     {
         return $"{CostText(memorabilia)}, {EstimatedValueText(memorabilia)}, {ProfitLossText(memorabilia)}";
     }
 
-    public virtual string GetTitle(Domain.Entities.Memorabilia memorabilia)
+    public virtual string GetTitle(Entity.Memorabilia memorabilia)
     {
         return string.Empty;
     }
 
-    public virtual string ItemTypeText(Domain.Entities.Memorabilia memorabilia)
+    public virtual string ItemTypeText(Entity.Memorabilia memorabilia)
     {
         return memorabilia.ItemType?.Name ?? string.Empty;
     }
 
-    public virtual string PlayerTeamText(Domain.Entities.Memorabilia memorabilia)
+    public virtual string PlayerTeamText(Entity.Memorabilia memorabilia)
     {
         if (memorabilia.Autographs.Count == 1)
         {
@@ -77,12 +77,12 @@ public abstract class GalleryRule
         }
     }
 
-    public virtual string SizeText(Domain.Entities.Memorabilia memorabilia)
+    public virtual string SizeText(Entity.Memorabilia memorabilia)
     {
-        return Domain.Constants.Size.Find(memorabilia.Size?.SizeId ?? 0)?.Name ?? string.Empty;
+        return Constant.Size.Find(memorabilia.Size?.SizeId ?? 0)?.Name ?? string.Empty;
     }
 
-    private static string ProfitLossText(Domain.Entities.Memorabilia memorabilia)
+    private static string ProfitLossText(Entity.Memorabilia memorabilia)
     {
         var value = (memorabilia.EstimatedValue ?? 0) + memorabilia.Autographs?.Sum(autograph => autograph?.EstimatedValue ?? 0);
         var cost = (memorabilia.MemorabiliaAcquisition?.Acquisition?.Cost ?? 0)

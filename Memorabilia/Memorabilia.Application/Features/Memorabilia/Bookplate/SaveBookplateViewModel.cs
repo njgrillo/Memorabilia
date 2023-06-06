@@ -14,7 +14,7 @@ public class SaveBookplateViewModel : MemorabiliaItemEditViewModel
             Person = new SavePersonViewModel(new PersonViewModel(viewModel.People.First().Person));
     }
 
-    public override string ImageFileName => Domain.Constants.ImageFileName.Bookplate;
+    public override string ImageFileName => Constant.ImageFileName.Bookplate;
 
     public override ItemType ItemType => ItemType.Bookplate;
 }

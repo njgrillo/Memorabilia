@@ -1,50 +1,48 @@
-﻿using Memorabilia.Domain.Entities;
-
-namespace Memorabilia.Application.Features.Services.Autographs.Inscriptions.Accomplishments;
+﻿namespace Memorabilia.Application.Features.Services.Autographs.Inscriptions.Accomplishments;
 
 public abstract class AccomplishmentRule
 {
-    public abstract Domain.Constants.AccomplishmentType AccomplishmentType { get; }
+    public abstract Constant.AccomplishmentType AccomplishmentType { get; }
 
-    public virtual bool Applies(Domain.Constants.AccomplishmentType accomplishmentType)
+    public virtual bool Applies(Constant.AccomplishmentType accomplishmentType)
     {
         return accomplishmentType == AccomplishmentType;
     }
 
-    protected string[] GetDateAccomplishmentAbbreviations(PersonAccomplishment[] items)
+    protected string[] GetDateAccomplishmentAbbreviations(Entity.PersonAccomplishment[] items)
     {
         return items.Select(x => $"{x.Date.Value:M/d/yy} {AccomplishmentType.Abbreviation}")
                     .ToArray();
     }
 
-    protected string[] GetDateAccomplishmentNames(PersonAccomplishment[] items)
+    protected string[] GetDateAccomplishmentNames(Entity.PersonAccomplishment[] items)
     {
         return items.Select(x => $"{x.Date.Value:M/d/yy} {AccomplishmentType.Name}")
                     .ToArray();
     }
 
-    protected string GetMultipleAccomplishmentName(PersonAccomplishment[] items)
+    protected string GetMultipleAccomplishmentName(Entity.PersonAccomplishment[] items)
     {
         return $"{items.Length} {AccomplishmentType.Name}s";
     }
 
-    protected string GetMultipleTimeAccomplishmentAbbreviation(PersonAccomplishment[] items)
+    protected string GetMultipleTimeAccomplishmentAbbreviation(Entity.PersonAccomplishment[] items)
     {
         return $"{items.Length}x {AccomplishmentType.Abbreviation}";
     }
 
-    protected string GetMultipleTimeAccomplishmentName(PersonAccomplishment[] items)
+    protected string GetMultipleTimeAccomplishmentName(Entity.PersonAccomplishment[] items)
     {
         return $"{items.Length}x {AccomplishmentType.Name}";
     }
 
-    protected string[] GetYearlyAccomplishmentAbbreviations(PersonAccomplishment[] items)
+    protected string[] GetYearlyAccomplishmentAbbreviations(Entity.PersonAccomplishment[] items)
     {
         return items.Select(x => $"{x.Year.Value} {AccomplishmentType.Abbreviation}")
                     .ToArray();
     }
 
-    protected string[] GetYearlyAccomplishmentNames(PersonAccomplishment[] items)
+    protected string[] GetYearlyAccomplishmentNames(Entity.PersonAccomplishment[] items)
     {
         return items.Select(x => $"{x.Year.Value} {AccomplishmentType.Name}")
                     .ToArray();

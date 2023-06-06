@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Application.Features.Project;
 
-public class ProjectPersonEditModel : SaveViewModel
+public class ProjectPersonEditModel : EditModel
 {
     public ProjectPersonEditModel() { }
 
@@ -30,15 +30,19 @@ public class ProjectPersonEditModel : SaveViewModel
 
     public bool DisplayUpIcon => Rank > 1;
 
-    public string DoubleDownIcon => MudBlazor.Icons.Material.Filled.KeyboardDoubleArrowDown;
+    public string DoubleDownIcon 
+        => MudBlazor.Icons.Material.Filled.KeyboardDoubleArrowDown;
 
-    public string DoubleUpIcon => MudBlazor.Icons.Material.Filled.KeyboardDoubleArrowUp;
+    public string DoubleUpIcon 
+        => MudBlazor.Icons.Material.Filled.KeyboardDoubleArrowUp;
 
-    public string DownIcon => MudBlazor.Icons.Material.Filled.ArrowDownward;
+    public string DownIcon 
+        => MudBlazor.Icons.Material.Filled.ArrowDownward;
 
     public int ItemTypeId { get; set; }
 
-    public string ItemTypeName => Domain.Constants.ItemType.Find(ItemTypeId)?.Name;
+    public string ItemTypeName 
+        => Constant.ItemType.Find(ItemTypeId)?.Name;
 
     public int MemorabiliaId { get; set; }
 
@@ -48,19 +52,21 @@ public class ProjectPersonEditModel : SaveViewModel
     public int PriorityTypeId { get; set; }
 
     public string PriorityTypeName 
-        => Domain.Constants.PriorityType.Find(PriorityTypeId)?.Name;
+        => Constant.PriorityType.Find(PriorityTypeId)?.Name;
 
-    public Domain.Entities.Project Project { get; set; } 
+    public Entity.Project Project { get; set; } 
 
-    public int ProjectStatusTypeId { get; set; } = Domain.Constants.ProjectStatusType.NotStarted.Id;
+    public int ProjectStatusTypeId { get; set; } 
+        = Constant.ProjectStatusType.NotStarted.Id;
 
     public string ProjectStatusTypeName 
-        => Domain.Constants.ProjectStatusType.Find(ProjectStatusTypeId)?.Name 
-        ?? Domain.Constants.ProjectStatusType.NotStarted.Name;
+        => Constant.ProjectStatusType.Find(ProjectStatusTypeId)?.Name 
+        ?? Constant.ProjectStatusType.NotStarted.Name;
 
     public int? Rank { get; set; }
 
-    public string UpIcon => MudBlazor.Icons.Material.Filled.ArrowUpward;
+    public string UpIcon 
+        => MudBlazor.Icons.Material.Filled.ArrowUpward;
 
     public bool Upgrade { get; set; }
 

@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Application.Features.Admin.People;
 
-public class SavePersonNicknameViewModel : SaveViewModel
+public class SavePersonNicknameViewModel : EditModel
 {
     public SavePersonNicknameViewModel() { }
 

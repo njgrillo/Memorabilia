@@ -2,7 +2,7 @@
 
 namespace Memorabilia.Application.Features.Admin.Positions;
 
-public class SavePositionViewModel : SaveViewModel
+public class SavePositionViewModel : EditModel
 {
     public SavePositionViewModel() { }
 

@@ -31,7 +31,7 @@ public class SaveHeadBandViewModel : MemorabiliaItemEditViewModel
         => (GameStyleType?.IsGameWorthly() ?? false);
 
     public override string ImageFileName 
-        => Domain.Constants.ImageFileName.HeadBand;
+        => Constant.ImageFileName.HeadBand;
 
     public override ItemType ItemType
         => ItemType.HeadBand;

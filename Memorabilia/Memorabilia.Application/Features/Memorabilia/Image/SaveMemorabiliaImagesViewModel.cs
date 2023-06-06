@@ -2,7 +2,7 @@
 
 namespace Memorabilia.Application.Features.Memorabilia.Image;
 
-public class SaveMemorabiliaImagesViewModel : SaveViewModel
+public class SaveMemorabiliaImagesViewModel : EditModel
 {
     public SaveMemorabiliaImagesViewModel() { }
 
@@ -11,7 +11,7 @@ public class SaveMemorabiliaImagesViewModel : SaveViewModel
         AutographId = memorabiliaItemViewModel.HasAutographs ? memorabiliaItemViewModel.Autographs.First().Id : null;
         HasAutographs = memorabiliaItemViewModel.HasAutographs;
         HasMultipleAutographs = memorabiliaItemViewModel.AutographsCount > 1;
-        Images = memorabiliaItemViewModel.Images.Select(image => new SaveImageViewModel(image)).ToList();
+        Images = memorabiliaItemViewModel.Images.Select(image => new ImageEditModel(image)).ToList();
         ItemTypeName = memorabiliaItemViewModel.ItemTypeName;
         MemorabiliaId = memorabiliaItemViewModel.Id;
     }
@@ -36,7 +36,7 @@ public class SaveMemorabiliaImagesViewModel : SaveViewModel
 
     public bool HasMultipleAutographs { get; private set; }
 
-    public List<SaveImageViewModel> Images { get; set; } = new();
+    public List<ImageEditModel> Images { get; set; } = new();
 
     public string ItemTypeName { get; }
 

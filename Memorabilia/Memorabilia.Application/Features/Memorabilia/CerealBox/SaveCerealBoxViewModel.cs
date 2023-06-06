@@ -23,7 +23,7 @@ public class SaveCerealBoxViewModel : MemorabiliaItemEditViewModel
 
     public int CerealTypeId { get; set; }
 
-    public override string ImageFileName => Domain.Constants.ImageFileName.CerealBox;
+    public override string ImageFileName => Constant.ImageFileName.CerealBox;
 
     public override ItemType ItemType => ItemType.CerealBox;
 }

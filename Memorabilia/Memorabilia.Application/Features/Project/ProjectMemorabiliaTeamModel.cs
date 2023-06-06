@@ -1,14 +1,12 @@
-﻿using Memorabilia.Domain.Entities;
-
-namespace Memorabilia.Application.Features.Project;
+﻿namespace Memorabilia.Application.Features.Project;
 
 public class ProjectMemorabiliaTeamModel
 {
-    private readonly ProjectMemorabiliaTeam _projectMemorabiliaTeam;
+    private readonly Entity.ProjectMemorabiliaTeam _projectMemorabiliaTeam;
 
     public ProjectMemorabiliaTeamModel() { }
 
-    public ProjectMemorabiliaTeamModel(ProjectMemorabiliaTeam projectMemorabiliaTeam)
+    public ProjectMemorabiliaTeamModel(Entity.ProjectMemorabiliaTeam projectMemorabiliaTeam)
     {
         _projectMemorabiliaTeam = projectMemorabiliaTeam;
     }    
@@ -21,14 +19,14 @@ public class ProjectMemorabiliaTeamModel
         => _projectMemorabiliaTeam.Memorabilia != null
         ? _projectMemorabiliaTeam.Memorabilia
                                  .Images
-                                 .FirstOrDefault(image => image.ImageTypeId == Domain.Constants.ImageType.Primary.Id) ?.FileName ?? string.Empty
+                                 .FirstOrDefault(image => image.ImageTypeId == Constant.ImageType.Primary.Id) ?.FileName ?? string.Empty
         : string.Empty;
 
     public int? MemorabiliaId => _projectMemorabiliaTeam.MemorabiliaId;    
 
     public int? PriorityTypeId => _projectMemorabiliaTeam.PriorityTypeId;
 
-    public Domain.Entities.Project Project => _projectMemorabiliaTeam.Project;
+    public Entity.Project Project => _projectMemorabiliaTeam.Project;
 
     public int? ProjectStatusTypeId => _projectMemorabiliaTeam.ProjectStatusTypeId;
 
@@ -36,7 +34,7 @@ public class ProjectMemorabiliaTeamModel
 
     public int? Rank => _projectMemorabiliaTeam.Rank;
 
-    public Team Team => _projectMemorabiliaTeam.Team;
+    public Entity.Team Team => _projectMemorabiliaTeam.Team;
 
     public bool Upgrade => _projectMemorabiliaTeam.Upgrade;
 

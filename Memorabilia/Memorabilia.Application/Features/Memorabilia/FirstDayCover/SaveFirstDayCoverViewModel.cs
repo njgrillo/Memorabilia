@@ -21,7 +21,7 @@ public class SaveFirstDayCoverViewModel : MemorabiliaItemEditViewModel
 
     public DateTime? Date { get; set; }
 
-    public override string ImageFileName => Domain.Constants.ImageFileName.FirstDayCover;
+    public override string ImageFileName => Constant.ImageFileName.FirstDayCover;
 
     public override ItemType ItemType => ItemType.FirstDayCover;
 }

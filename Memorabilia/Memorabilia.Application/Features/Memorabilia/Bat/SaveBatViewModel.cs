@@ -41,7 +41,7 @@ public class SaveBatViewModel : MemorabiliaItemEditViewModel
         => SizeId == Size.Full.Id;
 
     public override string ImageFileName 
-        => Domain.Constants.ImageFileName.Bat;
+        => Constant.ImageFileName.Bat;
 
     public override ItemType ItemType => ItemType.Bat;
 

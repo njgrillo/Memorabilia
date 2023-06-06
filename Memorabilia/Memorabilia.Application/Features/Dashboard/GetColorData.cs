@@ -1,8 +1,8 @@
 ﻿namespace Memorabilia.Application.Features.Dashboard;
 
-public record GetColorData(int UserId) : IQuery<DashboardChartViewModel>
+public record GetColorData(int UserId) : IQuery<DashboardChartModel>
 {
-    public class Handler : QueryHandler<GetColorData, DashboardChartViewModel>
+    public class Handler : QueryHandler<GetColorData, DashboardChartModel>
     {
         private readonly IAutographRepository _repository;
 
@@ -11,10 +11,10 @@ public record GetColorData(int UserId) : IQuery<DashboardChartViewModel>
             _repository = repository;
         }
 
-        protected override async Task<DashboardChartViewModel> Handle(GetColorData query)
+        protected override async Task<DashboardChartModel> Handle(GetColorData query)
         {
             var colorIds = _repository.GetColorIds(query.UserId);
-            var colorNames = colorIds.Select(colorId => Domain.Constants.Color.Find(colorId).Name)
+            var colorNames = colorIds.Select(colorId => Constant.Color.Find(colorId).Name)
                                      .Distinct();
 
             var labels = new List<string>();
@@ -22,14 +22,14 @@ public record GetColorData(int UserId) : IQuery<DashboardChartViewModel>
 
             foreach (var colorName in colorNames)
             {
-                var color = Domain.Constants.Color.Find(colorName);
+                var color = Constant.Color.Find(colorName);
                 var count = colorIds.Count(colorId => colorId == color.Id);
 
                 counts.Add(count);
                 labels.Add($"{colorName} ({count})");
             }
 
-            return await Task.FromResult(new DashboardChartViewModel(counts.ToArray(), labels.ToArray()));
+            return await Task.FromResult(new DashboardChartModel(counts.ToArray(), labels.ToArray()));
         }
     }
 }

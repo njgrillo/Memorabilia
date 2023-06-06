@@ -1,23 +1,21 @@
-﻿using Memorabilia.Domain.Entities;
-
-namespace Memorabilia.Application.Features.Services.Autographs.Inscriptions.Accomplishments.Rules;
+﻿namespace Memorabilia.Application.Features.Services.Autographs.Inscriptions.Accomplishments.Rules;
 
 public class PitchingTripleCrownRule : AccomplishmentRule, IAccomplishmentRule
 {
-    private Domain.Constants.AccomplishmentType _accomplishmentType;
+    private Constant.AccomplishmentType _accomplishmentType;
 
-    public override Domain.Constants.AccomplishmentType AccomplishmentType
+    public override Constant.AccomplishmentType AccomplishmentType
         => _accomplishmentType;
 
-    public override bool Applies(Domain.Constants.AccomplishmentType accomplishmentType)
+    public override bool Applies(Constant.AccomplishmentType accomplishmentType)
     {
         _accomplishmentType = accomplishmentType;
 
-        return accomplishmentType == Domain.Constants.AccomplishmentType.AmericanLeaguePitchingTripleCrown ||
-               accomplishmentType == Domain.Constants.AccomplishmentType.NationalLeaguePitchingTripleCrown;
+        return accomplishmentType == Constant.AccomplishmentType.AmericanLeaguePitchingTripleCrown ||
+               accomplishmentType == Constant.AccomplishmentType.NationalLeaguePitchingTripleCrown;
     }
 
-    public string[] GenerateInscriptions(PersonAccomplishment[] accomplishments)
+    public string[] GenerateInscriptions(Entity.PersonAccomplishment[] accomplishments)
     {
         var inscriptions = new List<string>
         {
@@ -32,7 +30,8 @@ public class PitchingTripleCrownRule : AccomplishmentRule, IAccomplishmentRule
             inscriptions.Add(GetMultipleTimeAccomplishmentName(accomplishments));
         }
 
-        PersonAccomplishment[] items = accomplishments.Where(x => x.Year.HasValue).ToArray();
+        Entity.PersonAccomplishment[] items = accomplishments.Where(x => x.Year.HasValue)
+                                                             .ToArray();
 
         inscriptions.AddRange(GetYearlyAccomplishmentAbbreviations(items));
         inscriptions.AddRange(GetYearlyAccomplishmentNames(items));

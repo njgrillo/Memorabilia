@@ -1,8 +1,8 @@
 ﻿namespace Memorabilia.Blazor.Pages.Tools.Shared;
 
-public partial class ViewCareerRecords : ViewSportTools<CareerRecordViewModel>
+public partial class ViewCareerRecords : ViewSportTools<CareerRecordModel>
 {
-    private CareerRecordsViewModel _viewModel = new();
+    private CareerRecordsModel _viewModel = new();
 
     protected override async Task OnInitializedAsync()
     {

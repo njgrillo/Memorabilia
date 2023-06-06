@@ -2,13 +2,13 @@
 
 public partial class SingleSeasonRecordsProfile : SportProfile
 {
-    private SingleSeasonRecordProfileViewModel[] SingleSeasonRecords = Array.Empty<SingleSeasonRecordProfileViewModel>();   
+    private SingleSeasonRecordProfileModel[] SingleSeasonRecords = Array.Empty<SingleSeasonRecordProfileModel>();   
 
     protected override void OnParametersSet()
     {
         SingleSeasonRecords = Person.SingleSeasonRecords
                                     .Filter(Sport)
-                                    .Select(record => new SingleSeasonRecordProfileViewModel(record))
+                                    .Select(record => new SingleSeasonRecordProfileModel(record))
                                     .OrderBy(record => record.RecordTypeName)
                                     .ToArray();
     }

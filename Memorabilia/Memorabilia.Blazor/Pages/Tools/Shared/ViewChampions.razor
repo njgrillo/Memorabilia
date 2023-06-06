@@ -1,4 +1,4 @@
-﻿@inherits ViewSportTools<ChampionViewModel>
+﻿@inherits ViewSportTools<ChampionModel>
 
 <DivPad2>
     <Content>
@@ -6,7 +6,7 @@
             <Content>
                 <MudTable Bordered="false"
                           Dense="false"
-                          Filter="new Func<ChampionViewModel,bool>(FilterFunc1)"
+                          Filter="new Func<ChampionModel,bool>(FilterFunc1)"
                           Hover="true"
                           Items="@_viewModel.Champions.ToList()"
                           Striped="true">

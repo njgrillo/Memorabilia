@@ -1,13 +1,11 @@
-﻿using Memorabilia.Domain.Entities;
-
-namespace Memorabilia.Application.Features.Services.Autographs.Inscriptions.Awards.Rules;
+﻿namespace Memorabilia.Application.Features.Services.Autographs.Inscriptions.Awards.Rules;
 
 public class PlatinumGloveRule : AwardRule, IAwardRule
 {
-    public override Domain.Constants.AwardType AwardType
-        => Domain.Constants.AwardType.PlatinumGlove;
+    public override Constant.AwardType AwardType
+        => Constant.AwardType.PlatinumGlove;
 
-    public string[] GenerateInscriptions(PersonAward[] awards)
+    public string[] GenerateInscriptions(Entity.PersonAward[] awards)
     {
         var inscriptions = new List<string>();
 

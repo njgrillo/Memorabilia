@@ -12,7 +12,7 @@ public class SaveCompactDiscViewModel : MemorabiliaItemEditViewModel
         People = viewModel.People.Select(person => new SavePersonViewModel(new PersonViewModel(person.Person))).ToList();
     }
 
-    public override string ImageFileName => Domain.Constants.ImageFileName.CompactDisc;
+    public override string ImageFileName => Constant.ImageFileName.CompactDisc;
 
     public override ItemType ItemType => ItemType.CompactDisc;
 }

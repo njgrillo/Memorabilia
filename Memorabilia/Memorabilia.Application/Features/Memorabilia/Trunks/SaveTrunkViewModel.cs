@@ -26,7 +26,7 @@ public class SaveTrunkViewModel : MemorabiliaItemEditViewModel
             Person = new SavePersonViewModel(new PersonViewModel(viewModel.People.First().Person));
     }
 
-    public override string ImageFileName => Domain.Constants.ImageFileName.Trunks;
+    public override string ImageFileName => Constant.ImageFileName.Trunks;
 
     public override ItemType ItemType => ItemType.Trunks;
 }

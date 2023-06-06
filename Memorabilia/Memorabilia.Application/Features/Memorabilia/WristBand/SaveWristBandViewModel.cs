@@ -27,7 +27,7 @@ public class SaveWristBandViewModel : MemorabiliaItemEditViewModel
             Team = new SaveTeamViewModel(new TeamViewModel(viewModel.Teams.First().Team));
     }           
 
-    public override string ImageFileName => Domain.Constants.ImageFileName.WristBand;
+    public override string ImageFileName => Constant.ImageFileName.WristBand;
 
     public override ItemType ItemType => ItemType.WristBand;
 }

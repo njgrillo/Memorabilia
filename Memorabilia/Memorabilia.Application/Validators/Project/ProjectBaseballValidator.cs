@@ -4,9 +4,9 @@ public class ProjectBaseballValidator : AbstractValidator<Domain.Entities.Projec
 {
 	public ProjectBaseballValidator(int projectTypeId)
 	{
-		var projectType = Domain.Constants.ProjectType.Find(projectTypeId);
+		var projectType = Constant.ProjectType.Find(projectTypeId);
 
-		if (projectType != Domain.Constants.ProjectType.BaseballType)
+		if (projectType != Constant.ProjectType.BaseballType)
 			return;
 
         RuleFor(x => x.BaseballTypeId)

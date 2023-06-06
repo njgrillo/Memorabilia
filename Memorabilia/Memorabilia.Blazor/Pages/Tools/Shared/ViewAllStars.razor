@@ -1,4 +1,4 @@
-﻿@inherits ViewSportTools<AllStarViewModel>
+﻿@inherits ViewSportTools<AllStarModel>
 
 <DivPad2>
     <Content>
@@ -54,7 +54,7 @@
                     <div class="col-6">
                         <MudTable Bordered="false"
                                   Dense="false"
-                                  Filter="new Func<AllStarViewModel,bool>(FilterFunc1)"
+                                  Filter="new Func<AllStarModel,bool>(FilterFunc1)"
                                   Hover="true"
                                   Items="@_viewModel.AllStars.ToList()"
                                   Striped="true">
@@ -110,7 +110,7 @@
                             <div class="col-6">
                                 <MudTable Bordered="false"
                                           Dense="false"
-                                          Filter="new Func<AllStarViewModel,bool>(FilterFuncSecondaryGrid)"
+                                          Filter="new Func<AllStarModel,bool>(FilterFuncSecondaryGrid)"
                                           Hover="true"
                                           Items="@_viewModel.SecondaryAllStars.ToList()"
                                           Striped="true">
@@ -158,7 +158,7 @@
                             <div class="col-6">
                                 <MudTable Bordered="false"
                                           Dense="false"
-                                          Filter="new Func<AllStarViewModel,bool>(FilterFuncSecondaryGrid)"
+                                          Filter="new Func<AllStarModel,bool>(FilterFuncSecondaryGrid)"
                                           Hover="true"
                                           Items="@_viewModel.SecondaryAllStars.ToList()"
                                           Striped="true">

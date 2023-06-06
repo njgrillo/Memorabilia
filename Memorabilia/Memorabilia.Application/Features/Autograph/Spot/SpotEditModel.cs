@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Application.Features.Autograph.Spot;
 
-public class SpotEditModel : SaveViewModel
+public class SpotEditModel : EditModel
 {
     public SpotEditModel() { }
 

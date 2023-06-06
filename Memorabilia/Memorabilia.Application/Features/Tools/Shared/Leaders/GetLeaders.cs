@@ -2,9 +2,9 @@
 
 namespace Memorabilia.Application.Features.Tools.Shared.Leaders;
 
-public record GetLeaders(LeaderType LeaderType, Sport Sport) : IQuery<LeadersViewModel>
+public record GetLeaders(LeaderType LeaderType, Sport Sport) : IQuery<LeadersModel>
 {
-    public class Handler : QueryHandler<GetLeaders, LeadersViewModel>
+    public class Handler : QueryHandler<GetLeaders, LeadersModel>
     {
         private readonly ILeaderRepository _leaderRepository;
 
@@ -13,9 +13,9 @@ public record GetLeaders(LeaderType LeaderType, Sport Sport) : IQuery<LeadersVie
             _leaderRepository = leaderRepository;
         }
 
-        protected override async Task<LeadersViewModel> Handle(GetLeaders query)
+        protected override async Task<LeadersModel> Handle(GetLeaders query)
         {
-            return new LeadersViewModel(await _leaderRepository.GetAll(query.LeaderType.Id), query.Sport)
+            return new LeadersModel(await _leaderRepository.GetAll(query.LeaderType.Id), query.Sport)
             {
                 LeaderType = query.LeaderType
             };

@@ -1,19 +1,20 @@
-﻿using Memorabilia.Domain.Constants;
-
-namespace Memorabilia.Application.Features.Project;
+﻿namespace Memorabilia.Application.Features.Project;
 
 public class ProjectsModel : ViewModel
 {
     public ProjectsModel() { }
 
-    public ProjectsModel(IEnumerable<Domain.Entities.Project> projects)
+    public ProjectsModel(IEnumerable<Entity.Project> projects)
     {
-        Projects = projects.Select(project => new ProjectModel(project)).ToList();
+        Projects = projects.Select(project => new ProjectModel(project))
+                           .ToList();
     }
 
-    public string AddRoute => $"{RoutePrefix}/{EditModeType.Update.Name}/0";
+    public string AddRoute 
+        => $"{RoutePrefix}/{Constant.EditModeType.Update.Name}/0";
 
-    public string AddTitle => $"{EditModeType.Add.Name} {ItemTitle}";
+    public string AddTitle 
+        => $"{Constant.EditModeType.Add.Name} {ItemTitle}";
 
     public override string ExitNavigationPath => "Home";
 

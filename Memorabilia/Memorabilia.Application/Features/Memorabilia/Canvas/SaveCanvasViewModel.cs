@@ -23,7 +23,7 @@ public class SaveCanvasViewModel : MemorabiliaItemEditViewModel
         Teams = viewModel.Teams.Select(team => new SaveTeamViewModel(new TeamViewModel(team.Team))).ToList();
     }
 
-    public override string ImageFileName => Domain.Constants.ImageFileName.Canvas;
+    public override string ImageFileName => Constant.ImageFileName.Canvas;
 
     public override ItemType ItemType => ItemType.Canvas;
 

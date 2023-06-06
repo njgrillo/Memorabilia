@@ -2,7 +2,7 @@
 
 namespace Memorabilia.Application.Features.Admin.People;
 
-public class SavePersonSportViewModel : SaveViewModel
+public class SavePersonSportViewModel : EditModel
 {
     public SavePersonSportViewModel() { }
 
@@ -11,14 +11,14 @@ public class SavePersonSportViewModel : SaveViewModel
         Id = sport.Id;
         IsPrimary= sport.IsPrimary;
         PersonId = sport.PersonId;
-        Sport = Domain.Constants.Sport.Find(sport.SportId);
+        Sport = Constant.Sport.Find(sport.SportId);
     }
 
     public bool IsPrimary { get; set; } 
 
     public int PersonId { get; set; }
 
-    public Domain.Constants.Sport Sport { get; set; }
+    public Constant.Sport Sport { get; set; }
 
     public string SportName => Sport?.Name;
 

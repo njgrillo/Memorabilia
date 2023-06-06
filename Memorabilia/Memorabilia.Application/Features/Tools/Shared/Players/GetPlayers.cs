@@ -2,9 +2,9 @@
 
 namespace Memorabilia.Application.Features.Tools.Shared.Players;
 
-public record GetPlayers(Franchise Franchise, Sport Sport) : IQuery<PlayersViewModel>
+public record GetPlayers(Franchise Franchise, Sport Sport) : IQuery<PlayersModel>
 {
-    public class Handler : QueryHandler<GetPlayers, PlayersViewModel>
+    public class Handler : QueryHandler<GetPlayers, PlayersModel>
     {
         private readonly IPersonTeamRepository _personTeamRepository;
 
@@ -13,9 +13,9 @@ public record GetPlayers(Franchise Franchise, Sport Sport) : IQuery<PlayersViewM
             _personTeamRepository = personTeamRepository;
         }
 
-        protected override async Task<PlayersViewModel> Handle(GetPlayers query)
+        protected override async Task<PlayersModel> Handle(GetPlayers query)
         {
-            return new PlayersViewModel(await _personTeamRepository.GetAll(query.Franchise.Id), query.Sport)
+            return new PlayersModel(await _personTeamRepository.GetAll(query.Franchise.Id), query.Sport)
             {
                 Franchise = query.Franchise
             };

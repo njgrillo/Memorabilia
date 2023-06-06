@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Application.Features.Services.Filters.Memorabilia.Rules;
 
-public class SpotFilterRule : IFilterRule<Domain.Entities.Memorabilia>
+public class SpotFilterRule : IFilterRule<Entity.Memorabilia>
 {
     private int[] _spotIds;
 
@@ -14,7 +14,7 @@ public class SpotFilterRule : IFilterRule<Domain.Entities.Memorabilia>
         return _spotIds.Any();
     }
 
-    public Expression<Func<Domain.Entities.Memorabilia, bool>> GetExpression()
+    public Expression<Func<Entity.Memorabilia, bool>> GetExpression()
     {
         return item => item.Autographs.Any(autograph => _spotIds.Contains(autograph.Spot.SpotId));
     }

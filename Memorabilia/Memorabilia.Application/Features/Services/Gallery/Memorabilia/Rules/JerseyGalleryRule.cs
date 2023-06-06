@@ -2,12 +2,12 @@
 
 public class JerseyGalleryRule : GalleryRule, IGalleryRule
 {
-    public bool Applies(Domain.Constants.ItemType itemType)
+    public bool Applies(Constant.ItemType itemType)
     {
-        return itemType == Domain.Constants.ItemType.Jersey;
+        return itemType == Constant.ItemType.Jersey;
     }
 
-    public override string AutographTitleText(Domain.Entities.Memorabilia memorabilia)
+    public override string AutographTitleText(Entity.Memorabilia memorabilia)
     {
         return memorabilia.Autographs.Count switch
         {
@@ -18,7 +18,7 @@ public class JerseyGalleryRule : GalleryRule, IGalleryRule
         };
     }
 
-    public override string GetTitle(Domain.Entities.Memorabilia memorabilia)
+    public override string GetTitle(Entity.Memorabilia memorabilia)
     {
         return $"{AutographTitleText(memorabilia)} {PlayerTeamText(memorabilia)} {ItemTypeText(memorabilia)}";
     }

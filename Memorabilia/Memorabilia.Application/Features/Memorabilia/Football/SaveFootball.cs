@@ -57,7 +57,7 @@ public class SaveFootball
 
         public int SizeId => _viewModel.SizeId;
 
-        public int SportId => Domain.Constants.Sport.Football.Id;
+        public int SportId => Constant.Sport.Football.Id;
 
         public int? TeamId => _viewModel.Team?.Id > 0  ? _viewModel.Team?.Id : null;
     }

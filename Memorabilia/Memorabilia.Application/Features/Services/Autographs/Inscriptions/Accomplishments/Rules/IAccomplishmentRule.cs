@@ -2,7 +2,7 @@
 
 public interface IAccomplishmentRule
 {
-    bool Applies(Domain.Constants.AccomplishmentType accomplishmentType);
+    bool Applies(Constant.AccomplishmentType accomplishmentType);
 
-    string[] GenerateInscriptions(Domain.Entities.PersonAccomplishment[] accomplishments);
+    string[] GenerateInscriptions(Entity.PersonAccomplishment[] accomplishments);
 }

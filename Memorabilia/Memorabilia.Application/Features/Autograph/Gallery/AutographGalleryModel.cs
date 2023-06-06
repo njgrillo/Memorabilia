@@ -9,7 +9,8 @@ public class AutographGalleryModel
         _autograph = autograph;
     }
 
-    public string EditNavigationPath => $"/Autographs/{Constant.EditModeType.Update.Name}/{_autograph.MemorabiliaId}/{_autograph.Id}";
+    public string EditNavigationPath 
+        => $"/Autographs/{Constant.EditModeType.Update.Name}/{_autograph.MemorabiliaId}/{_autograph.Id}";
 
     public string ImageFileName =>
         !_autograph.Person.ImageFileName.IsNullOrEmpty()
@@ -17,14 +18,9 @@ public class AutographGalleryModel
             : Constant.ImageFileName.ImageNotAvailable;
 
     public string ImageNavigationPath
-    {
-        get
-        {
-            return _autograph.Person.Sports.Any()
+        => _autograph.Person.Sports.Any()
             ? $"/Tools/{_autograph.Person.Sports.First().Sport.Name}Profile/{_autograph.Person.Id}"
             : "/Tools/PersonProfile";
-        } 
-    }
 
     public string PersonName => _autograph.Person.ProfileName;
 }

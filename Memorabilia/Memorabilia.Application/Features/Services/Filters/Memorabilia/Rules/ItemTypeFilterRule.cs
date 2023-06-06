@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Application.Features.Services.Filters.Memorabilia.Rules;
 
-public class ItemTypeFilterRule : IFilterRule<Domain.Entities.Memorabilia>
+public class ItemTypeFilterRule : IFilterRule<Entity.Memorabilia>
 {
     private int[] _itemTypeIds;
 
@@ -14,7 +14,7 @@ public class ItemTypeFilterRule : IFilterRule<Domain.Entities.Memorabilia>
         return _itemTypeIds.Any();
     }
 
-    public Expression<Func<Domain.Entities.Memorabilia, bool>> GetExpression()
+    public Expression<Func<Entity.Memorabilia, bool>> GetExpression()
     {
         return item => _itemTypeIds.Contains(item.ItemTypeId);
     }

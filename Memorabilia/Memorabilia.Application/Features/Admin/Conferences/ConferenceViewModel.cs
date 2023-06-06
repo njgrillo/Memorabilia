@@ -21,5 +21,5 @@ public class ConferenceViewModel
 
     public int SportLeagueLevelId => _conference.SportLeagueLevelId;
 
-    public string SportLeagueLevelName => Domain.Constants.SportLeagueLevel.Find(SportLeagueLevelId)?.Name;
+    public string SportLeagueLevelName => Constant.SportLeagueLevel.Find(SportLeagueLevelId)?.Name;
 }

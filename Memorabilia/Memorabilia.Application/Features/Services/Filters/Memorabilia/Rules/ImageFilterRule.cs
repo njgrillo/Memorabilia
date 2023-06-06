@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Application.Features.Services.Filters.Memorabilia.Rules;
 
-public class ImageFilterRule : IFilterRule<Domain.Entities.Memorabilia>
+public class ImageFilterRule : IFilterRule<Entity.Memorabilia>
 {
     private bool _noImages;
 
@@ -14,7 +14,7 @@ public class ImageFilterRule : IFilterRule<Domain.Entities.Memorabilia>
         return _noImages;
     }
 
-    public Expression<Func<Domain.Entities.Memorabilia, bool>> GetExpression()
+    public Expression<Func<Entity.Memorabilia, bool>> GetExpression()
     {
         return item => item.Autographs.Any(autograph => autograph.Images.Count == 0);
     }

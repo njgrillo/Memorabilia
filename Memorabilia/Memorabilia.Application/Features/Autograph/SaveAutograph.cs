@@ -86,7 +86,10 @@ public class SaveAutograph
 
         public DateTime? AcquiredDate => _viewModel.AcquiredDate;
 
-        public int? AcquisitionTypeId => _viewModel.AcquisitionTypeId > 0 ? _viewModel.AcquisitionTypeId : null;
+        public int? AcquisitionTypeId 
+            => _viewModel.AcquisitionTypeId > 0 
+                ? _viewModel.AcquisitionTypeId 
+                : null;
 
         public int ColorId => _viewModel.ColorId;
 
@@ -125,7 +128,9 @@ public class SaveAutograph
         public int PersonId => _viewModel.Person.Id;
 
         public int? PurchaseTypeId 
-            => _viewModel.PurchaseTypeId > 0 ? _viewModel.PurchaseTypeId : null;
+            => _viewModel.PurchaseTypeId > 0 
+                ? _viewModel.PurchaseTypeId 
+                : null;
 
         public DateTime? ReceivedDate => _viewModel.ReceivedDate;
 

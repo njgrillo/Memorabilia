@@ -2,7 +2,7 @@
 
 namespace Memorabilia.Application.Features.Admin.People;
 
-public class SavePersonAllStarViewModel : SaveViewModel
+public class SavePersonAllStarViewModel : EditModel
 {
     public SavePersonAllStarViewModel() { }
 
@@ -10,18 +10,18 @@ public class SavePersonAllStarViewModel : SaveViewModel
     {
         Id = allStar.Id;
         PersonId = allStar.PersonId;
-        Sport = Domain.Constants.Sport.Find(allStar.SportId);
+        Sport = Constant.Sport.Find(allStar.SportId);
         SportLeagueLevelId = allStar.SportLeagueLevelId.HasValue ? allStar.SportLeagueLevelId.Value : 0;
         Year = allStar.Year;
     }
 
     public int PersonId { get; set; }
 
-    public Domain.Constants.Sport Sport { get; set; }
+    public Constant.Sport Sport { get; set; }
 
     public int SportLeagueLevelId { get; set; }
 
-    public string SportLeagueLevelName => Domain.Constants.SportLeagueLevel.Find(SportLeagueLevelId)?.Name;
+    public string SportLeagueLevelName => Constant.SportLeagueLevel.Find(SportLeagueLevelId)?.Name;
 
     public string SportName => Sport?.Name;
 

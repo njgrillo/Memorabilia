@@ -1,4 +1,4 @@
-﻿@inherits ViewSportTools<AwardViewModel>
+﻿@inherits ViewSportTools<AwardModel>
 
 <DivPad2>
     <Content>
@@ -20,7 +20,7 @@
             <Content>
                 <MudTable Bordered="false"
                           Dense="false"
-                          Filter="new Func<AwardViewModel,bool>(FilterFunc1)"
+                          Filter="new Func<AwardModel,bool>(FilterFunc1)"
                           Hover="true"
                           Items="@_viewModel.PersonAwards.ToList()"
                           Striped="true">

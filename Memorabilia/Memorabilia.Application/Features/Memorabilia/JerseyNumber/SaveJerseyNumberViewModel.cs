@@ -19,7 +19,7 @@ public class SaveJerseyNumberViewModel : MemorabiliaItemEditViewModel
             Team = new SaveTeamViewModel(new TeamViewModel(viewModel.Teams.First().Team));
     }
 
-    public override string ImageFileName => Domain.Constants.ImageFileName.JerseyNumber;
+    public override string ImageFileName => Constant.ImageFileName.JerseyNumber;
 
     public override ItemType ItemType => ItemType.JerseyNumber;
 

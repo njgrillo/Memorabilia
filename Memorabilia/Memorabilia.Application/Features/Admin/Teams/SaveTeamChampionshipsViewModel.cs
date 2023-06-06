@@ -2,7 +2,7 @@
 
 namespace Memorabilia.Application.Features.Admin.Teams;
 
-public class SaveTeamChampionshipsViewModel : SaveViewModel
+public class SaveTeamChampionshipsViewModel : EditModel
 {
     public SaveTeamChampionshipsViewModel() { }
 
@@ -27,7 +27,7 @@ public class SaveTeamChampionshipsViewModel : SaveViewModel
 
     public override EditModeType EditModeType => Championships.Any() ? EditModeType.Update : EditModeType.Add;
 
-    public string ImageFileName => Domain.Constants.ImageFileName.ChampionshipTypes;
+    public string ImageFileName => Constant.ImageFileName.ChampionshipTypes;
 
     public override string PageTitle => $"{(EditModeType == EditModeType.Update ? EditModeType.Update.Name : EditModeType.Add.Name)} Championships";
 

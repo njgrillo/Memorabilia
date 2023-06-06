@@ -2,9 +2,9 @@
 
 namespace Memorabilia.Application.Features.Tools.Shared.FranchiseHallOfFames;
 
-public record GetFranchiseHallOfFames(Franchise Franchise, Sport Sport) : IQuery<FranchiseHallOfFamesViewModel>
+public record GetFranchiseHallOfFames(Franchise Franchise, Sport Sport) : IQuery<FranchiseHallOfFamesModel>
 {
-    public class Handler : QueryHandler<GetFranchiseHallOfFames, FranchiseHallOfFamesViewModel>
+    public class Handler : QueryHandler<GetFranchiseHallOfFames, FranchiseHallOfFamesModel>
     {
         private readonly IFranchiseHallOfFameRepository _franchiseHallOfFameRepository;
 
@@ -13,9 +13,9 @@ public record GetFranchiseHallOfFames(Franchise Franchise, Sport Sport) : IQuery
             _franchiseHallOfFameRepository = franchiseHallOfFameRepository;
         }
 
-        protected override async Task<FranchiseHallOfFamesViewModel> Handle(GetFranchiseHallOfFames query)
+        protected override async Task<FranchiseHallOfFamesModel> Handle(GetFranchiseHallOfFames query)
         {
-            return new FranchiseHallOfFamesViewModel(await _franchiseHallOfFameRepository.GetAll(query.Franchise.Id), query.Sport)
+            return new FranchiseHallOfFamesModel(await _franchiseHallOfFameRepository.GetAll(query.Franchise.Id), query.Sport)
             {
                 Franchise = query.Franchise
             };

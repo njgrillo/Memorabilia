@@ -27,7 +27,7 @@ public class SaveCardViewModel : MemorabiliaItemEditViewModel
 
     public bool Custom { get; set; }
 
-    public override string ImageFileName => Domain.Constants.ImageFileName.TradingCard;
+    public override string ImageFileName => Constant.ImageFileName.TradingCard;
 
     public override ItemType ItemType => ItemType.TradingCard;
 

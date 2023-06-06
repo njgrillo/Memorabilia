@@ -6,5 +6,5 @@ public class UserSettingsViewModel : ViewModel
 
     public override string PageTitle => "User Settings";
 
-    public string DashboardImageFileName => Domain.Constants.ImageFileName.Dashboard;
+    public string DashboardImageFileName => Constant.ImageFileName.Dashboard;
 }

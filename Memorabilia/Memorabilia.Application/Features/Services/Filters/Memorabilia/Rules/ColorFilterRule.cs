@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Application.Features.Services.Filters.Memorabilia.Rules;
 
-public class ColorFilterRule : IFilterRule<Domain.Entities.Memorabilia>
+public class ColorFilterRule : IFilterRule<Entity.Memorabilia>
 {
     private int[] _colorIds;
 
@@ -14,7 +14,7 @@ public class ColorFilterRule : IFilterRule<Domain.Entities.Memorabilia>
         return _colorIds.Any();
     }
 
-    public Expression<Func<Domain.Entities.Memorabilia, bool>> GetExpression()
+    public Expression<Func<Entity.Memorabilia, bool>> GetExpression()
     {
         return item => item.Autographs.Any(autograph => _colorIds.Contains(autograph.ColorId));
     }

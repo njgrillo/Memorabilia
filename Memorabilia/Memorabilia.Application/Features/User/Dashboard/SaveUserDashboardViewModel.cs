@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Application.Features.User.Dashboard;
 
-public class SaveUserDashboardViewModel : SaveViewModel
+public class SaveUserDashboardViewModel : EditModel
 {
     public SaveUserDashboardViewModel() { }
 

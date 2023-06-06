@@ -35,7 +35,7 @@ public class SaveGloveViewModel : MemorabiliaItemEditViewModel
     public int GloveTypeId { get; set; }
 
     public override string ImageFileName 
-        => Domain.Constants.ImageFileName.Glove;
+        => Constant.ImageFileName.Glove;
 
     public override ItemType ItemType 
         => ItemType.Glove;

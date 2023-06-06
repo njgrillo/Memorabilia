@@ -4,9 +4,9 @@ public class ProjectHallOfFameValidator : AbstractValidator<Domain.Entities.Proj
 {
     public ProjectHallOfFameValidator(int projectTypeId)
     {
-        var projectType = Domain.Constants.ProjectType.Find(projectTypeId);
+        var projectType = Constant.ProjectType.Find(projectTypeId);
 
-        if (projectType != Domain.Constants.ProjectType.HallOfFame)
+        if (projectType != Constant.ProjectType.HallOfFame)
             return;
 
         RuleFor(x => x.SportLeagueLevelId)

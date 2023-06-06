@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Application.Features.Collection;
 
-public class CollectionEditModel : SaveViewModel
+public class CollectionEditModel : EditModel
 {
     public CollectionEditModel() { }
 

@@ -2,7 +2,7 @@
 
 namespace Memorabilia.Application.Features.Admin.People;
 
-public class SavePersonAccoladeViewModel : SaveViewModel
+public class SavePersonAccoladeViewModel : EditModel
 {
     public SavePersonAccoladeViewModel() { }
 
@@ -88,7 +88,7 @@ public class SavePersonAccoladeViewModel : SaveViewModel
 
     public override EditModeType EditModeType => AllStars.Any() ? EditModeType.Update : EditModeType.Add;
 
-    public string ImageFileName => Domain.Constants.ImageFileName.Athletes;
+    public string ImageFileName => Constant.ImageFileName.Athletes;
 
     public override string ItemTitle => "Accolade";
 

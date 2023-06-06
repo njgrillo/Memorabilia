@@ -2,7 +2,7 @@
 
 namespace Memorabilia.Application.Features.Admin.Sports;
 
-public class SaveSportViewModel : SaveViewModel
+public class SaveSportViewModel : EditModel
 {
     public SaveSportViewModel() { }
 

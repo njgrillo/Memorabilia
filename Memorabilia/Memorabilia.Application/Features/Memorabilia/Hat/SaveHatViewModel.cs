@@ -29,7 +29,7 @@ public class SaveHatViewModel : MemorabiliaItemEditViewModel
         => (GameStyleType?.IsGameWorthly() ?? false);
 
     public override string ImageFileName 
-        => Domain.Constants.ImageFileName.Hat;
+        => Constant.ImageFileName.Hat;
 
     public override ItemType ItemType 
         => ItemType.Hat;

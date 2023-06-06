@@ -2,19 +2,19 @@
 
 namespace Memorabilia.Application.Features.Admin.People;
 
-public class SavePersonCollegeRetiredNumberViewModel : SaveViewModel
+public class SavePersonCollegeRetiredNumberViewModel : EditModel
 {
     public SavePersonCollegeRetiredNumberViewModel() { }
 
     public SavePersonCollegeRetiredNumberViewModel(CollegeRetiredNumber collegeRetiredNumber)
     {
-        College = Domain.Constants.College.Find(collegeRetiredNumber.CollegeId);
+        College = Constant.College.Find(collegeRetiredNumber.CollegeId);
         Id = collegeRetiredNumber.Id;
         PersonId = collegeRetiredNumber.PersonId;
         PlayerNumber = collegeRetiredNumber.PlayerNumber;
     }
 
-    public Domain.Constants.College College { get; set; }
+    public Constant.College College { get; set; }
 
     public string CollegeName => College?.Name;
 

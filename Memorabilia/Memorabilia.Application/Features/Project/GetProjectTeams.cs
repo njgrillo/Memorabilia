@@ -1,8 +1,8 @@
 ﻿namespace Memorabilia.Application.Features.Project;
 
-public record GetProjectTeams(int? SportId = null) : IQuery<Domain.Entities.Team[]>
+public record GetProjectTeams(int? SportId = null) : IQuery<Entity.Team[]>
 {
-    public class Handler : QueryHandler<GetProjectTeams, Domain.Entities.Team[]>
+    public class Handler : QueryHandler<GetProjectTeams, Entity.Team[]>
     {
         private readonly ITeamRepository _teamRepository;
 
@@ -11,7 +11,7 @@ public record GetProjectTeams(int? SportId = null) : IQuery<Domain.Entities.Team
             _teamRepository = teamRepository;
         }
 
-        protected override async Task<Domain.Entities.Team[]> Handle(GetProjectTeams query)
+        protected override async Task<Entity.Team[]> Handle(GetProjectTeams query)
         {
             return await _teamRepository.GetAllCurrentTeams(sportId: query.SportId);
         }

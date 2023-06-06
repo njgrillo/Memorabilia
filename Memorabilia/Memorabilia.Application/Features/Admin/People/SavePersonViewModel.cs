@@ -2,7 +2,7 @@
 
 namespace Memorabilia.Application.Features.Admin.People;
 
-public class SavePersonViewModel : SaveViewModel, IWithName, IWithValue<int>
+public class SavePersonViewModel : EditModel, IWithName, IWithValue<int>
 {
     public SavePersonViewModel() { }
 
@@ -44,7 +44,7 @@ public class SavePersonViewModel : SaveViewModel, IWithName, IWithValue<int>
     [MinLength(1, ErrorMessage = "First Name is too short.")]
     public string FirstName { get; set; }
 
-    public string ImageFileName => Domain.Constants.ImageFileName.Athletes;
+    public string ImageFileName => Constant.ImageFileName.Athletes;
 
     public override string ItemTitle => AdminDomainItem.People.Item;
 

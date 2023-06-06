@@ -14,7 +14,7 @@ public record GetProjectPersonAutographLinks(Dictionary<string, object> Paramete
 
         protected override async Task<AutographModel[]> Handle(GetProjectPersonAutographLinks query)
         {
-            Domain.Entities.Autograph[] autographs = await _autographRepository.GetAll(query.Parameters);
+            Entity.Autograph[] autographs = await _autographRepository.GetAll(query.Parameters);
 
             return autographs.Any()
                 ? autographs.Select(autograph => new AutographModel(autograph))

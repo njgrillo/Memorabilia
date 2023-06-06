@@ -1,8 +1,8 @@
 ﻿namespace Memorabilia.Blazor.Pages.Tools.Shared;
 
-public partial class ViewPlayers : ViewSportTools<PlayerViewModel>
+public partial class ViewPlayers : ViewSportTools<PlayerModel>
 {
-    private PlayersViewModel _viewModel = new();  
+    private PlayersModel _viewModel = new();  
 
     private async Task OnInputChange(Franchise franchise)
     {

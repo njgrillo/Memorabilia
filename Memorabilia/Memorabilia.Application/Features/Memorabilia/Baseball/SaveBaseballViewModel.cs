@@ -77,7 +77,7 @@ public class SaveBaseballViewModel : MemorabiliaItemEditViewModel
             if (DisplayBaseballType && BaseballType != null)
                 return $"{BaseballType.Name.Replace(" ", "")}.jpg";
 
-            return Domain.Constants.ImageFileName.Baseball;
+            return Constant.ImageFileName.Baseball;
         }
     }
 

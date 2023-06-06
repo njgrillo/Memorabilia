@@ -21,7 +21,7 @@ public partial class EditImages<TItem> : ImagePage
     public string ExitNavigationPath { get; set; }
 
     [Parameter]
-    public List<SaveImageViewModel> Images { get; set; } = new();
+    public List<ImageEditModel> Images { get; set; } = new();
 
     [Parameter]
     public string ImportButtonText { get; set; }    
@@ -60,7 +60,7 @@ public partial class EditImages<TItem> : ImagePage
     public int UserId { get; set; }
 
     [Parameter]
-    public EventCallback<List<SaveImageViewModel>> ValueChanged { get; set; }
+    public EventCallback<List<ImageEditModel>> ValueChanged { get; set; }
 
     private IReadOnlyList<IBrowserFile> _files;
 
@@ -74,7 +74,7 @@ public partial class EditImages<TItem> : ImagePage
                 File.Delete(filePath);
         }
 
-        Images = new List<SaveImageViewModel>();
+        Images = new List<ImageEditModel>();
 
         NavigationManager.NavigateTo(ExitNavigationPath);
     }
@@ -138,7 +138,7 @@ public partial class EditImages<TItem> : ImagePage
 
     protected async Task Save()
     {
-        var images = new List<SaveImageViewModel>();
+        var images = new List<ImageEditModel>();
         var imageType = !Images.Any() ? ImageType.Primary : ImageType.Secondary;
 
         if (!Directory.Exists(UploadPath))
@@ -154,7 +154,7 @@ public partial class EditImages<TItem> : ImagePage
                 await using FileStream fs = new(path, FileMode.Create);
                 await file.OpenReadStream(MaximumFileSize).CopyToAsync(fs);
 
-                images.Add(new SaveImageViewModel(new ImageViewModel(new Domain.Entities.Image(fileName, imageType.Id))));
+                images.Add(new ImageEditModel(new ImageModel(new Domain.Entities.Image(fileName, imageType.Id))));
 
                 imageType = ImageType.Secondary;
             }

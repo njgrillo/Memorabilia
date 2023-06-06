@@ -1,8 +1,8 @@
 ﻿namespace Memorabilia.Application.Features.Dashboard;
 
-public record GetAutographConditionData(int UserId) : IQuery<DashboardChartViewModel>
+public record GetAutographConditionData(int UserId) : IQuery<DashboardChartModel>
 {
-    public class Handler : QueryHandler<GetAutographConditionData, DashboardChartViewModel>
+    public class Handler : QueryHandler<GetAutographConditionData, DashboardChartModel>
     {
         private readonly IAutographRepository _repository;
 
@@ -11,10 +11,10 @@ public record GetAutographConditionData(int UserId) : IQuery<DashboardChartViewM
             _repository = repository;
         }
 
-        protected override async Task<DashboardChartViewModel> Handle(GetAutographConditionData query)
+        protected override async Task<DashboardChartModel> Handle(GetAutographConditionData query)
         {
             var conditionTypeIds = _repository.GetConditionIds(query.UserId);
-            var conditionTypeNames = conditionTypeIds.Select(conditionTypeId => Domain.Constants.Condition.Find(conditionTypeId).Name)
+            var conditionTypeNames = conditionTypeIds.Select(conditionTypeId => Constant.Condition.Find(conditionTypeId).Name)
                                                      .Distinct();
 
             var labels = new List<string>();
@@ -22,14 +22,14 @@ public record GetAutographConditionData(int UserId) : IQuery<DashboardChartViewM
 
             foreach (var conditionTypeName in conditionTypeNames)
             {
-                var conditionType = Domain.Constants.Condition.Find(conditionTypeName);
+                var conditionType = Constant.Condition.Find(conditionTypeName);
                 var count = conditionTypeIds.Count(conditionTypeId => conditionTypeId == conditionType.Id);
 
                 counts.Add(count);
                 labels.Add($"{conditionTypeName} ({count})");
             }
 
-            return await Task.FromResult(new DashboardChartViewModel(counts.ToArray(), labels.ToArray()));
+            return await Task.FromResult(new DashboardChartModel(counts.ToArray(), labels.ToArray()));
         }
     }
 }

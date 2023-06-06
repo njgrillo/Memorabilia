@@ -1,10 +1,9 @@
-﻿using Memorabilia.Domain.Constants;
+﻿namespace Memorabilia.Application.Features.Tools.Shared.Accomplishments;
 
-namespace Memorabilia.Application.Features.Tools.Shared.Accomplishments;
-
-public record GetAccomplishments(AccomplishmentType AccomplishmentType, Sport Sport) : IQuery<AccomplishmentsViewModel>
+public record GetAccomplishments(Constant.AccomplishmentType AccomplishmentType, Constant.Sport Sport) 
+    : IQuery<AccomplishmentsModel>
 {
-    public class Handler : QueryHandler<GetAccomplishments, AccomplishmentsViewModel>
+    public class Handler : QueryHandler<GetAccomplishments, AccomplishmentsModel>
     {
         private readonly IPersonAccomplishmentRepository _personAccomplishmentRepository;
 
@@ -13,9 +12,9 @@ public record GetAccomplishments(AccomplishmentType AccomplishmentType, Sport Sp
             _personAccomplishmentRepository = personAccomplishmentRepository;
         }
 
-        protected override async Task<AccomplishmentsViewModel> Handle(GetAccomplishments query)
+        protected override async Task<AccomplishmentsModel> Handle(GetAccomplishments query)
         {
-            return new AccomplishmentsViewModel(await _personAccomplishmentRepository.GetAll(query.AccomplishmentType.Id), query.Sport)
+            return new AccomplishmentsModel(await _personAccomplishmentRepository.GetAll(query.AccomplishmentType.Id), query.Sport)
             {
                 AccomplishmentType = query.AccomplishmentType
             };

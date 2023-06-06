@@ -2,7 +2,7 @@
 
 namespace Memorabilia.Application.Features.Admin.Teams;
 
-public class SaveTeamDivisionViewModel : SaveViewModel
+public class SaveTeamDivisionViewModel : EditModel
 {
     public SaveTeamDivisionViewModel() { }
 

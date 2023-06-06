@@ -1,10 +1,8 @@
-﻿using Memorabilia.Domain.Constants;
+﻿namespace Memorabilia.Application.Features.Tools.Shared.Awards;
 
-namespace Memorabilia.Application.Features.Tools.Shared.Awards;
-
-public record GetAwards(AwardType AwardType, Sport Sport) : IQuery<AwardsViewModel>
+public record GetAwards(Constant.AwardType AwardType, Constant.Sport Sport) : IQuery<AwardsModel>
 {
-    public class Handler : QueryHandler<GetAwards, AwardsViewModel>
+    public class Handler : QueryHandler<GetAwards, AwardsModel>
     {
         private readonly IPersonAwardRepository _personAwardRepository;
 
@@ -13,9 +11,9 @@ public record GetAwards(AwardType AwardType, Sport Sport) : IQuery<AwardsViewMod
             _personAwardRepository = personAwardRepository;
         }
 
-        protected override async Task<AwardsViewModel> Handle(GetAwards query)
+        protected override async Task<AwardsModel> Handle(GetAwards query)
         {
-            return new AwardsViewModel(await _personAwardRepository.GetAll(query.AwardType.Id), query.Sport)
+            return new AwardsModel(await _personAwardRepository.GetAll(query.AwardType.Id), query.Sport)
             {
                 AwardType = query.AwardType
             };

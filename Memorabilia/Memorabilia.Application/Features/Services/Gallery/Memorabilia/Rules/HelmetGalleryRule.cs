@@ -2,17 +2,17 @@
 
 public class HelmetGalleryRule : GalleryRule, IGalleryRule
 {
-    public bool Applies(Domain.Constants.ItemType itemType)
+    public bool Applies(Constant.ItemType itemType)
     {
-        return itemType == Domain.Constants.ItemType.Helmet;
+        return itemType == Constant.ItemType.Helmet;
     }
 
-    public override string AutographTitleText(Domain.Entities.Memorabilia memorabilia)
+    public override string AutographTitleText(Entity.Memorabilia memorabilia)
     {
         return memorabilia.Autographs.Count switch
         {
-            0 => Domain.Constants.Size.Find(memorabilia.Size?.SizeId ?? 0) == Domain.Constants.Size.Full
-                    ? Domain.Constants.HelmetQualityType.Find(memorabilia.Helmet?.HelmetQualityTypeId ?? 0)?.Name ?? string.Empty
+            0 => Constant.Size.Find(memorabilia.Size?.SizeId ?? 0) == Constant.Size.Full
+                    ? Constant.HelmetQualityType.Find(memorabilia.Helmet?.HelmetQualityTypeId ?? 0)?.Name ?? string.Empty
                     : string.Empty,
             1 => "Autographed",
             2 => "Dual Signed",
@@ -21,7 +21,7 @@ public class HelmetGalleryRule : GalleryRule, IGalleryRule
         };
     }   
 
-    public override string GetTitle(Domain.Entities.Memorabilia memorabilia)
+    public override string GetTitle(Entity.Memorabilia memorabilia)
     {
         return $"{AutographTitleText(memorabilia)} {PlayerTeamText(memorabilia)} {SizeText(memorabilia)} {ItemTypeText(memorabilia)}";
     }    

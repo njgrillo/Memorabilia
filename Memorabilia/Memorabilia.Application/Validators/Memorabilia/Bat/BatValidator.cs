@@ -29,9 +29,9 @@ public class BatValidator : AbstractValidator<SaveBat.Command>
 
     private static bool CanHaveGameDate(SaveBat.Command command)
     {
-        var size = Domain.Constants.Size.Find(command.SizeId);
+        var size = Constant.Size.Find(command.SizeId);
 
-        return (Domain.Constants.GameStyleType.Find(command.GameStyleTypeId ?? 0)?.IsGameWorthly() ?? false) &&
-               size == Domain.Constants.Size.Full;
+        return (Constant.GameStyleType.Find(command.GameStyleTypeId ?? 0)?.IsGameWorthly() ?? false) &&
+               size == Constant.Size.Full;
     }
 }

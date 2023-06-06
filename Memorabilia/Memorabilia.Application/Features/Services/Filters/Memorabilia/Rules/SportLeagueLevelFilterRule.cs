@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Application.Features.Services.Filters.Memorabilia.Rules;
 
-public class SportLeagueLevelFilterRule : IFilterRule<Domain.Entities.Memorabilia>
+public class SportLeagueLevelFilterRule : IFilterRule<Entity.Memorabilia>
 {
     private int[] _sportLeagueLevelIds;
 
@@ -14,7 +14,7 @@ public class SportLeagueLevelFilterRule : IFilterRule<Domain.Entities.Memorabili
         return _sportLeagueLevelIds.Any();
     }
 
-    public Expression<Func<Domain.Entities.Memorabilia, bool>> GetExpression()
+    public Expression<Func<Entity.Memorabilia, bool>> GetExpression()
     {
         return item => item.Teams.Any(team => _sportLeagueLevelIds.Contains(team.Team.Franchise.SportLeagueLevel.Id));
     }

@@ -1,9 +1,9 @@
 ﻿namespace Memorabilia.Application.Features.Project;
 
 public record GetImportProjectTeamPersons(int TeamId, int Year)
-    : IQuery<Domain.Entities.Person[]>
+    : IQuery<Entity.Person[]>
 {
-    public class Handler : QueryHandler<GetImportProjectTeamPersons, Domain.Entities.Person[]>
+    public class Handler : QueryHandler<GetImportProjectTeamPersons, Entity.Person[]>
     {
         private readonly IPersonRepository _personRepository;
 
@@ -12,7 +12,7 @@ public record GetImportProjectTeamPersons(int TeamId, int Year)
             _personRepository = personRepository;
         }
 
-        protected override async Task<Domain.Entities.Person[]> Handle(GetImportProjectTeamPersons query)
+        protected override async Task<Entity.Person[]> Handle(GetImportProjectTeamPersons query)
         {
             return await _personRepository.GetAll(query.TeamId, query.Year);
         }

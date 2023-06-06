@@ -1,8 +1,8 @@
 ﻿namespace Memorabilia.Blazor.Pages.Tools.Shared;
 
-public partial class ViewCollegesTool : ViewSportTools<PersonCollegeViewModel>
+public partial class ViewCollegesTool : ViewSportTools<PersonCollegeModel>
 {
-    private PersonCollegesViewModel _viewModel = new();
+    private PersonCollegesModel _viewModel = new();
 
     private async Task OnInputChange(College college)
     {

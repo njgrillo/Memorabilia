@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Application.Features.Autograph.Image;
 
-public class AutographImagesEditModel : SaveViewModel
+public class AutographImagesEditModel : EditModel
 {
     public AutographImagesEditModel() { }
 
@@ -9,7 +9,7 @@ public class AutographImagesEditModel : SaveViewModel
                                     int memorabiliaId,
                                     int autographId)
     {
-        Images = images.Select(image => new SaveImageViewModel(image))
+        Images = images.Select(image => new ImageEditModel(image))
                        .ToList();
         ItemType = itemType;
         MemorabiliaId = memorabiliaId;
@@ -39,7 +39,7 @@ public class AutographImagesEditModel : SaveViewModel
     public override string ExitNavigationPath 
         => "Memorabilia/View";
 
-    public List<SaveImageViewModel> Images { get; set; } = new();
+    public List<ImageEditModel> Images { get; set; } = new();
 
     public Constant.ItemType ItemType { get; }
 

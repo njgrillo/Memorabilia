@@ -13,7 +13,7 @@ public class UserDashboardViewModel
         _userDashboard = userDashboard;
     }
 
-    public Domain.Constants.DashboardItem DashboardItem => Domain.Constants.DashboardItem.Find(_userDashboard.DashboardItemId);
+    public Constant.DashboardItem DashboardItem => Constant.DashboardItem.Find(_userDashboard.DashboardItemId);
 
     public int DashboardItemId => _userDashboard.DashboardItemId;   
 

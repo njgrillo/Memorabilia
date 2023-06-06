@@ -36,7 +36,7 @@ public class SavePuckViewModel : MemorabiliaItemEditViewModel
         => SizeId == Size.Standard.Id;
 
     public override string ImageFileName 
-        => Domain.Constants.ImageFileName.Puck;
+        => Constant.ImageFileName.Puck;
 
     public override ItemType ItemType 
         => ItemType.Puck;

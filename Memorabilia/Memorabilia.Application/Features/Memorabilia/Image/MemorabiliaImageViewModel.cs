@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Application.Features.Memorabilia.Image;
 
-public class MemorabiliaImageViewModel : ImageViewModel
+public class MemorabiliaImageViewModel : ImageModel
 {
     private readonly Domain.Entities.MemorabiliaImage _image;
 

@@ -1,8 +1,8 @@
 ﻿namespace Memorabilia.Blazor.Pages.Tools.Shared;
 
-public partial class ViewRetiredNumbers : ViewSportTools<RetiredNumberViewModel>
+public partial class ViewRetiredNumbers : ViewSportTools<RetiredNumberModel>
 {
-    private RetiredNumbersViewModel _viewModel = new();
+    private RetiredNumbersModel _viewModel = new();
 
     private async Task OnInputChange(Franchise franchise)
     {

@@ -1,8 +1,8 @@
 ﻿namespace Memorabilia.Blazor.Pages.Tools.Shared;
 
-public partial class ViewDrafts : ViewSportTools<DraftViewModel>
+public partial class ViewDrafts : ViewSportTools<DraftModel>
 {
-    private DraftsViewModel _viewModel = new();
+    private DraftsModel _viewModel = new();
 
     private async Task OnInputChange(Franchise franchise)
     {

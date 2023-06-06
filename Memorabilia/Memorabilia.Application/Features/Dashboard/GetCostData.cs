@@ -1,8 +1,8 @@
 ﻿namespace Memorabilia.Application.Features.Dashboard;
 
-public record GetCostData(int UserId) : IQuery<DashboardChartViewModel>
+public record GetCostData(int UserId) : IQuery<DashboardChartModel>
 {
-    public class Handler : QueryHandler<GetCostData, DashboardChartViewModel>
+    public class Handler : QueryHandler<GetCostData, DashboardChartModel>
     {
         private readonly IAutographRepository _autographRepository;
         private readonly IMemorabiliaItemRepository _memorabiliaItemRepository;
@@ -13,7 +13,7 @@ public record GetCostData(int UserId) : IQuery<DashboardChartViewModel>
             _memorabiliaItemRepository = memorabiliaItemRepository;
         }
 
-        protected override async Task<DashboardChartViewModel> Handle(GetCostData query)
+        protected override async Task<DashboardChartModel> Handle(GetCostData query)
         {
             var autographsCostTotal = _autographRepository.GetCostTotal(query.UserId);
             var memorabiliaCostTotal = _memorabiliaItemRepository.GetCostTotal(query.UserId);
@@ -21,7 +21,7 @@ public record GetCostData(int UserId) : IQuery<DashboardChartViewModel>
             var labels = new List<string>() { $"Memorabilia ({memorabiliaCostTotal:C})", $"Autographs ({autographsCostTotal:C})" }.ToArray();
             var data = new List<double>() { (double)memorabiliaCostTotal, (double)autographsCostTotal }.ToArray();
 
-            return await Task.FromResult(new DashboardChartViewModel(data, labels));
+            return await Task.FromResult(new DashboardChartModel(data, labels));
         }
     }
 }

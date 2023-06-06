@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Application.Features.Services.Filters.Memorabilia.Rules;
 
-public class WritingInstrumentFilterRule : IFilterRule<Domain.Entities.Memorabilia>
+public class WritingInstrumentFilterRule : IFilterRule<Entity.Memorabilia>
 {
     private int[] _writingInstrumentIds;
 
@@ -14,7 +14,7 @@ public class WritingInstrumentFilterRule : IFilterRule<Domain.Entities.Memorabil
         return _writingInstrumentIds.Any();
     }
 
-    public Expression<Func<Domain.Entities.Memorabilia, bool>> GetExpression()
+    public Expression<Func<Entity.Memorabilia, bool>> GetExpression()
     {
         return item => item.Autographs.Any(autograph => _writingInstrumentIds.Contains(autograph.WritingInstrumentId));
     }

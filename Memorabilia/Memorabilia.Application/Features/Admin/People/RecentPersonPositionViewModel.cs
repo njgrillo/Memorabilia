@@ -8,7 +8,7 @@ public class RecentPersonPositionViewModel : RecentPersonEntityViewModel
 
     public RecentPersonPositionViewModel(PersonPosition personPosition)
 	{
-        DisplayText = $"{Domain.Constants.Position.Find(personPosition.PositionId)?.Name} - {(personPosition.IsPrimary ? "Primary" : "Secondary")}";
+        DisplayText = $"{Constant.Position.Find(personPosition.PositionId)?.Name} - {(personPosition.IsPrimary ? "Primary" : "Secondary")}";
         Id = personPosition.PositionId;
         PositionType = personPosition.IsPrimary 
             ? Domain.Enums.PositionType.Primary 

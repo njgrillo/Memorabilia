@@ -2,19 +2,19 @@
 
 namespace Memorabilia.Application.Features.Admin.People;
 
-public class SavePersonFranchiseHallOfFameViewModel : SaveViewModel
+public class SavePersonFranchiseHallOfFameViewModel : EditModel
 {
     public SavePersonFranchiseHallOfFameViewModel() { }
 
     public SavePersonFranchiseHallOfFameViewModel(FranchiseHallOfFame hof)
     {
-        FranchiseHallOfFameType = Domain.Constants.FranchiseHallOfFameType.Find(hof.FranchiseId);
+        FranchiseHallOfFameType = Constant.FranchiseHallOfFameType.Find(hof.FranchiseId);
         Id = hof.Id;
         PersonId = hof.PersonId;
         Year = hof.Year;
     }
 
-    public Domain.Constants.FranchiseHallOfFameType FranchiseHallOfFameType { get; set; }
+    public Constant.FranchiseHallOfFameType FranchiseHallOfFameType { get; set; }
 
     public string FranchiseHallOfFameTypeName => FranchiseHallOfFameType?.Name;
 

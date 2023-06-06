@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Application.Features.Admin;
 
-public class SaveDomainViewModel : SaveViewModel
+public class SaveDomainViewModel : EditModel
 {
     public SaveDomainViewModel() { }
 
@@ -45,5 +45,5 @@ public class SaveDomainViewModel : SaveViewModel
 
     public virtual string PageFooterNavigationPath => NavigationPath;
 
-    public override string PageTitle => $"{(EditModeType == Domain.Constants.EditModeType.Update ? Domain.Constants.EditModeType.Update.Name : Domain.Constants.EditModeType.Add.Name)} {DomainTypeName}";
+    public override string PageTitle => $"{(EditModeType == Constant.EditModeType.Update ? Constant.EditModeType.Update.Name : Constant.EditModeType.Add.Name)} {DomainTypeName}";
 }

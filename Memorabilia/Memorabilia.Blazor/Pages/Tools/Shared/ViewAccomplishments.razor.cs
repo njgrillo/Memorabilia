@@ -1,12 +1,12 @@
 ﻿namespace Memorabilia.Blazor.Pages.Tools.Shared;
 
 public partial class ViewAccomplishments 
-    : ViewSportTools<AccomplishmentViewModel>
+    : ViewSportTools<AccomplishmentModel>
 {
     [Inject]
     public IDialogService DialogService { get; set; }
 
-    private AccomplishmentsViewModel _viewModel = new();
+    private AccomplishmentsModel _viewModel = new();
 
     protected async Task Browse()
     {
@@ -37,7 +37,7 @@ public partial class ViewAccomplishments
         await Load(accomplishmentType);
     }
 
-    protected override bool FilterFunc(AccomplishmentViewModel viewModel, string search)
+    protected override bool FilterFunc(AccomplishmentModel viewModel, string search)
     {
         bool canSearchByYear = int.TryParse(search, out int year);
 

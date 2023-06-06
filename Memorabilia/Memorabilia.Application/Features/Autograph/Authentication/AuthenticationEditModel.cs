@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Application.Features.Autograph.Authentication;
 
-public class AuthenticationEditModel : SaveViewModel
+public class AuthenticationEditModel : EditModel
 {
     public AuthenticationEditModel() { }
 

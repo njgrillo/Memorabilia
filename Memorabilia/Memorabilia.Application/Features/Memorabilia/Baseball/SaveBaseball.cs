@@ -64,7 +64,7 @@ public class SaveBaseball
 
         public int SizeId => _viewModel.SizeId;
 
-        public int SportId => Domain.Constants.Sport.Baseball.Id;
+        public int SportId => Constant.Sport.Baseball.Id;
 
         public int[] TeamIds => _viewModel.Teams.Where(team => !team.IsDeleted).Select(team => team.Id).ToArray();
 

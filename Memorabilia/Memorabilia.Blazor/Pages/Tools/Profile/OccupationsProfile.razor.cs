@@ -2,13 +2,13 @@
 
 public partial class OccupationsProfile : PersonProfile
 {
-    private OccupationsProfileViewModel _viewModel;
+    private OccupationsProfileModel _viewModel;
 
     protected override void OnParametersSet()
     {
         if (Person == null)
             return;
 
-        _viewModel = new OccupationsProfileViewModel(Person);
+        _viewModel = new OccupationsProfileModel(Person);
     }
 }

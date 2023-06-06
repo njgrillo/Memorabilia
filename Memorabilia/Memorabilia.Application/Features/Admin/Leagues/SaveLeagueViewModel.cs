@@ -2,7 +2,7 @@
 
 namespace Memorabilia.Application.Features.Admin.Leagues;
 
-public class SaveLeagueViewModel : SaveViewModel
+public class SaveLeagueViewModel : EditModel
 {
     public SaveLeagueViewModel() { }
 

@@ -9,7 +9,8 @@ public class AutographImagesModel : ViewModel
         Images = images.Select(image => new AutographImageModel(image));
     }
 
-    public IEnumerable<AutographImageModel> Images { get; set; } = Enumerable.Empty<AutographImageModel>();
+    public IEnumerable<AutographImageModel> Images { get; set; } 
+        = Enumerable.Empty<AutographImageModel>();
 
     public override string PageTitle => "Autograph Images";
 }

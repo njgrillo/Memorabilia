@@ -27,5 +27,5 @@ public class PantValidator : AbstractValidator<SavePant.Command>
     }
 
     private static bool CanHaveGameDate(SavePant.Command command)
-        => Domain.Constants.GameStyleType.Find(command.GameStyleTypeId ?? 0)?.IsGameWorthly() ?? false;
+        => Constant.GameStyleType.Find(command.GameStyleTypeId ?? 0)?.IsGameWorthly() ?? false;
 }
