@@ -235,11 +235,10 @@ public partial class ProjectMemorabiliaTeamGrid
         var options = new DialogOptions()
         {
             MaxWidth = MaxWidth.Small,
-            FullWidth = true,
             DisableBackdropClick = true
         };
 
-        var dialog = DialogService.Show<MemorabiliaImageViewerDialog>("View Images", parameters, options);
+        var dialog = DialogService.Show<MemorabiliaImageCarouselViewerDialog>(string.Empty, parameters, options);
         
         await dialog.Result;
     }

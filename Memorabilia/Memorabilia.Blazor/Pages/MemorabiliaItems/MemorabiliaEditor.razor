@@ -81,42 +81,32 @@
                                          UserId="_viewModel.UserId" />
             </ContentColumn2>
         </DivRowCol6>
-        <DivRowCol3>
+        <DivRowCol6>
             <Content>
-                <MudSwitch Checked="@_viewModel.Framed"
-                           CheckedChanged="(p) => _viewModel.Framed = p"
-                           Color="MudBlazor.Color.Success"
-                           Label="Is Framed?"
-                           T="bool" />
+                <MudStack Row="true">
+                    <MudSwitch Checked="@_viewModel.IsNumbered"
+                               CheckedChanged="(p) => _viewModel.IsNumbered = p"
+                               Color="MudBlazor.Color.Success"
+                               Label="Is Numbered?"
+                               T="bool" />
+                    <MudSwitch Checked="@_viewModel.Framed"
+                               CheckedChanged="(p) => _viewModel.Framed = p"
+                               Color="MudBlazor.Color.Success"
+                               Label="Is Framed?"
+                               T="bool" />
+                    <MudSwitch Checked="@_viewModel.AcquiredWithAutograph"
+                               CheckedChanged="(p) => _viewModel.AcquiredWithAutograph = p"
+                               Color="MudBlazor.Color.Success"
+                               Label="Acquired with Autograph(s)?"
+                               T="bool" />                    
+                    <MudSwitch Checked="@_viewModel.ForTrade"
+                               CheckedChanged="(p) => _viewModel.ForTrade = p"
+                               Color="MudBlazor.Color.Success"
+                               Label="Available For Trade?"
+                               T="bool" />
+                </MudStack>
             </Content>
-        </DivRowCol3>
-        <DivRowCol3>
-            <Content>
-                <MudSwitch Checked="@_viewModel.AcquiredWithAutograph"
-                           CheckedChanged="(p) => _viewModel.AcquiredWithAutograph = p"
-                           Color="MudBlazor.Color.Success"
-                           Label="Acquired with Autograph(s)?"
-                           T="bool" />
-            </Content>
-        </DivRowCol3>
-        <DivRowCol3>
-            <Content>
-                <MudSwitch Checked="@_viewModel.IsNumbered"
-                           CheckedChanged="(p) => _viewModel.IsNumbered = p"
-                           Color="MudBlazor.Color.Success"
-                           Label="Is Numbered?"
-                           T="bool" />              
-            </Content>
-        </DivRowCol3> 
-        <DivRowCol3>
-            <Content>
-                <MudSwitch Checked="@_viewModel.ForTrade"
-                           CheckedChanged="(p) => _viewModel.ForTrade = p"
-                           Color="MudBlazor.Color.Success"
-                           Label="Available For Trade?"
-                           T="bool" />              
-            </Content>
-        </DivRowCol3> 
+        </DivRowCol6>
         <DivRowCol3 Hidden="@(!_viewModel.IsNumbered)">
             <Content>
                 <div class="row">

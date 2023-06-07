@@ -103,14 +103,16 @@
                     <MudTooltip Text="Remove link to Memorabilia">
                         <MudFab Color="MudBlazor.Color.Secondary"
                                 Icon="@Icons.Material.Outlined.LinkOff"
-                                OnClick="@(_ => projectMemorabiliaTeam.MemorabiliaId = 0)" />
+                                OnClick="@(_ => projectMemorabiliaTeam.MemorabiliaId = 0)"
+                                Size="@MudBlazor.Size.Small" />
                     </MudTooltip>
                 </Match>
                 <NotMatch>
                         <MudTooltip Text="Link to Memorabilia">
                         <MudFab Color="MudBlazor.Color.Secondary"
                                 Icon="@Icons.Material.Outlined.AddLink"
-                                OnClick="@(_ => AddMemorabiliaLink(projectMemorabiliaTeam))" />
+                                OnClick="@(_ => AddMemorabiliaLink(projectMemorabiliaTeam))"
+                                Size="@MudBlazor.Size.Small" />
                     </MudTooltip>
                 </NotMatch>
             </Condition>
@@ -118,10 +120,11 @@
         <MudTd DataLabel="">
             <Condition Evaluation="@(projectMemorabiliaTeam.MemorabiliaId > 0)">
                 <Match>
-                    <MudTooltip Text="View All Images">
+                    <MudTooltip Text="View Images">
                         <MudFab Color="MudBlazor.Color.Secondary"
                                 Icon="@Icons.Material.Outlined.Image"
-                                OnClick="@(_ => ViewImages(projectMemorabiliaTeam))" />
+                                OnClick="@(_ => ViewImages(projectMemorabiliaTeam))"
+                                Size="@MudBlazor.Size.Small" />
                     </MudTooltip>
                 </Match>
             </Condition>
@@ -130,7 +133,8 @@
             <MudTooltip Text="Delete">
                 <MudFab Color="MudBlazor.Color.Secondary"
                         Icon="@Icons.Material.Outlined.DeleteOutline"
-                        OnClick="@(_ => Remove(projectMemorabiliaTeam.Id, projectMemorabiliaTeam.Team.Id, projectMemorabiliaTeam.Rank, projectMemorabiliaTeam.ItemTypeId))" />
+                        OnClick="@(_ => Remove(projectMemorabiliaTeam.Id, projectMemorabiliaTeam.Team.Id, projectMemorabiliaTeam.Rank, projectMemorabiliaTeam.ItemTypeId))"
+                        Size="@MudBlazor.Size.Small" />
             </MudTooltip>
         </MudTd>
     </RowTemplate>
@@ -182,14 +186,16 @@
                     <MudTooltip Text="Remove link to Memorabilia">
                         <MudFab Color="MudBlazor.Color.Secondary"
                                 Icon="@Icons.Material.Outlined.LinkOff"
-                                OnClick="@(_ => context.MemorabiliaId = 0)" />
+                                OnClick="@(_ => context.MemorabiliaId = 0)"
+                                Size="@MudBlazor.Size.Small" />
                     </MudTooltip>                    
                 </Match>
                 <NotMatch>
                     <MudTooltip Text="Link to Memorabilia">
                         <MudFab Color="MudBlazor.Color.Secondary"
                                 Icon="@Icons.Material.Outlined.AddLink"
-                                OnClick="@(_ => AddMemorabiliaLink(context))" />
+                                OnClick="@(_ => AddMemorabiliaLink(context))"
+                                Size="@MudBlazor.Size.Small" />
                     </MudTooltip>                   
                 </NotMatch>
             </Condition>            
@@ -200,7 +206,8 @@
                     <MudTooltip Text="View All Images">
                         <MudFab Color="MudBlazor.Color.Secondary"
                                 Icon="@Icons.Material.Outlined.Image"
-                                OnClick="@(_ => ViewImages(context))" />
+                                OnClick="@(_ => ViewImages(context))"
+                                Size="@MudBlazor.Size.Small" />
                     </MudTooltip>
                 </Match>
             </Condition>
@@ -209,7 +216,8 @@
             <MudTooltip Text="Delete">
                 <MudFab Color="MudBlazor.Color.Secondary"
                         Icon="@Icons.Material.Outlined.DeleteOutline"
-                        OnClick="@(_ => Remove(context.Id, context.Team.Id, context.Rank, context.ItemTypeId))" />
+                        OnClick="@(_ => Remove(context.Id, context.Team.Id, context.Rank, context.ItemTypeId))"
+                        Size="@MudBlazor.Size.Small" />
             </MudTooltip>
         </MudTd>
     </RowEditingTemplate>

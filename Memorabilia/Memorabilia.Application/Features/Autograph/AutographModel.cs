@@ -183,6 +183,9 @@ public class AutographModel : Model
     public string UserFirstName 
         => _autograph.Memorabilia.User.FirstName;
 
+    public int UserId
+        => _autograph.Memorabilia.UserId;
+
     public int WritingInstrumentId 
         => _autograph.WritingInstrumentId;
 

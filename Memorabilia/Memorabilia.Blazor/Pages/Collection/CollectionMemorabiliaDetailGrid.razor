@@ -3,7 +3,6 @@
           Dense="false"
           Hover="true"
           Items="@Model.MemorabiliaItems"
-          Loading="true"
           ServerData="@(new Func<TableState, Task<TableData<MemorabiliaItemModel>>>(OnRead))"
           Striped="true">
     <ToolBarContent>
@@ -60,6 +59,12 @@
         <MudTd DataLabel="Cost">@context.Acquisition.Cost?.ToString("c")</MudTd>
         <MudTd DataLabel="Purchase Place">@context.PurchaseTypeName</MudTd>
         <MudTd DataLabel="">
+            <MudTooltip Text="View Images">
+                <MudFab Color="MudBlazor.Color.Secondary"
+                        Icon="@Icons.Material.Outlined.Image"
+                        OnClick="@(_ => ViewMemorabiliaImages(context))"
+                        Size="@MudBlazor.Size.Small" />
+            </MudTooltip>
             <MudTooltip Text="Remove From Collection">
                 <MudFab Color="MudBlazor.Color.Secondary"
                         Icon="@Icons.Material.Outlined.DeleteOutline"
@@ -102,6 +107,7 @@
                                 <MudTh>Color</MudTh>
                                 <MudTh>Authentications</MudTh>
                                 <MudTh>Inscriptions</MudTh>
+                                <MudTh></MudTh>
                             </HeaderContent>
                             <RowTemplate Context="autograph">
                                 <MudTd DataLabel="Name">
@@ -137,6 +143,14 @@
                                         <MudChip Color="MudBlazor.Color.Info"
                                                  Size="@MudBlazor.Size.Small"
                                                  Text="@autograph.InscriptionText" />
+                                    </MudTooltip>
+                                </MudTd>
+                                <MudTd DataLabel="">
+                                    <MudTooltip Text="View Images">
+                                        <MudFab Color="MudBlazor.Color.Secondary"
+                                                Icon="@Icons.Material.Outlined.Image"
+                                                OnClick="@(_ => ViewAutographImages(autograph))"
+                                                Size="@MudBlazor.Size.Small" />
                                     </MudTooltip>
                                 </MudTd>
                             </RowTemplate>

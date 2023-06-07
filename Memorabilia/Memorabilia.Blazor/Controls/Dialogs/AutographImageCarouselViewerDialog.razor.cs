@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Blazor.Controls.Dialogs;
 
-public partial class AutographImageViewerDialog
+public partial class AutographImageCarouselViewerDialog
 {
     [Inject]
     public ImageService ImageService { get; set; }
@@ -17,15 +17,8 @@ public partial class AutographImageViewerDialog
     [Parameter]
     public int UserId { get; set; }
 
-    protected Domain.Entities.AutographImage[] Images { get; set; } 
-        = Array.Empty<Domain.Entities.AutographImage>();
-
-    protected Domain.Entities.AutographImage PrimaryImage
-        => Images.Any()
-        ? Images.FirstOrDefault(image => image.ImageTypeId == ImageType.Primary.Id)
-        : null;
-
-    protected Domain.Entities.AutographImage SelectedImage { get; set; }
+    protected Entity.AutographImage[] Images { get; set; }
+        = Array.Empty<Entity.AutographImage>();
 
     protected override async Task OnInitializedAsync()
     {
@@ -33,14 +26,9 @@ public partial class AutographImageViewerDialog
             return;
 
         Images = await QueryRouter.Send(new GetAutographImagesById(AutographId));
-
-        if (!Images.Any())
-            return;
-
-        SelectedImage = PrimaryImage;
     }
 
-    public void Cancel()
+    public void Close()
     {
         MudDialog.Cancel();
     }

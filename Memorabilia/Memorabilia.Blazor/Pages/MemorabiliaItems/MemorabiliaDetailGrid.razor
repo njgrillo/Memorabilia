@@ -3,7 +3,6 @@
           Dense="false" 
           Hover="true"
           Items="@Model.MemorabiliaItems" 
-          Loading="true"
           ServerData="@(new Func<TableState, Task<TableData<MemorabiliaItemModel>>>(OnRead))"
           Striped="true">
     <ToolBarContent>
@@ -61,6 +60,12 @@
         <Condition Evaluation="ShowActions">
             <Match>
                 <MudTd DataLabel="">
+                    <MudTooltip Text="View Images">
+                        <MudFab Color="MudBlazor.Color.Secondary"
+                                Icon="@Icons.Material.Outlined.Image"
+                                OnClick="@(_ => ViewMemorabiliaImages(context))"
+                                Size="@MudBlazor.Size.Small" />
+                    </MudTooltip>
                     <MudTooltip Text="Add Autograph">
                         <MudFab Color="MudBlazor.Color.Primary"
                                 Icon="@Icons.Material.Outlined.AddCircleOutline"
@@ -171,6 +176,12 @@
                                 <Condition Evaluation="ShowActions">
                                     <Match>
                                         <MudTd DataLabel="">
+                                            <MudTooltip Text="View Images">
+                                                <MudFab Color="MudBlazor.Color.Secondary"
+                                                        Icon="@Icons.Material.Outlined.Image"
+                                                        OnClick="@(_ => ViewAutographImages(autograph))"
+                                                        Size="@MudBlazor.Size.Small" />
+                                            </MudTooltip>
                                             <MudTooltip Text="Edit">
                                                 <MudFab Color="MudBlazor.Color.Primary"
                                                         Icon="@Icons.Material.Outlined.ModeEditOutline"

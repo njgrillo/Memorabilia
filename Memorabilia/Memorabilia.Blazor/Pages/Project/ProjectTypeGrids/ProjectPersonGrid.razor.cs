@@ -279,11 +279,10 @@ public partial class ProjectPersonGrid
         var options = new DialogOptions()
         {
             MaxWidth = MaxWidth.Small,
-            FullWidth = true,
             DisableBackdropClick = true
         };
 
-        var dialog = DialogService.Show<AutographImageViewerDialog>("View Images", parameters, options);
+        var dialog = DialogService.Show<AutographImageCarouselViewerDialog>(string.Empty, parameters, options);
 
         await dialog.Result;
     }

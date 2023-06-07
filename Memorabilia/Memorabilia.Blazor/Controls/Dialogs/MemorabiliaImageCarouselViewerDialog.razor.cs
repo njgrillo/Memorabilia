@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Blazor.Controls.Dialogs;
 
-public partial class MemorabiliaImageViewerDialog
+public partial class MemorabiliaImageCarouselViewerDialog
 {
     [Inject]
     public ImageService ImageService { get; set; }
@@ -17,15 +17,8 @@ public partial class MemorabiliaImageViewerDialog
     [Parameter]
     public int UserId { get; set; }
 
-    protected Domain.Entities.MemorabiliaImage[] Images { get; set; } 
-        = Array.Empty<Domain.Entities.MemorabiliaImage>();
-
-    protected Domain.Entities.MemorabiliaImage PrimaryImage
-        => Images.Any()
-        ? Images.FirstOrDefault(image => image.ImageTypeId == ImageType.Primary.Id)
-        : null;
-
-    protected Domain.Entities.MemorabiliaImage SelectedImage { get; set; }
+    protected Entity.MemorabiliaImage[] Images { get; set; }
+        = Array.Empty<Entity.MemorabiliaImage>();
 
     protected override async Task OnInitializedAsync()
     {
@@ -33,14 +26,9 @@ public partial class MemorabiliaImageViewerDialog
             return;
 
         Images = await QueryRouter.Send(new GetMemorabiliaImagesById(MemorabiliaId));
-
-        if (!Images.Any())
-            return;
-
-        SelectedImage = PrimaryImage;
     }
 
-    public void Cancel()
+    public void Close()
     {
         MudDialog.Cancel();
     }

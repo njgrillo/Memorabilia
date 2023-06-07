@@ -49,8 +49,8 @@ a, .btn-link {
     top: 45%;
     left: 44.5%;
     opacity: 1.0;
-    height: 500px;
-    width: 500px;
+    height: 150px;
+    width: 150px;
 }
 
 .validation-message {

@@ -177,4 +177,42 @@ public partial class MemorabiliaDetailGrid
             ? Icons.Material.Filled.ExpandLess
             : Icons.Material.Filled.ExpandMore;
     }
+
+    private async Task ViewAutographImages(AutographModel autographModel)
+    {
+        var parameters = new DialogParameters
+        {
+            ["AutographId"] = autographModel.Id,
+            ["UserId"] = autographModel.UserId
+        };
+
+        var options = new DialogOptions()
+        {
+            MaxWidth = MaxWidth.Small,
+            DisableBackdropClick = true
+        };
+
+        var dialog = DialogService.Show<AutographImageCarouselViewerDialog>(string.Empty, parameters, options);
+
+        await dialog.Result;
+    }
+
+    private async Task ViewMemorabiliaImages(MemorabiliaItemModel memorabiliaItemModel)
+    {
+        var parameters = new DialogParameters
+        {
+            ["MemorabiliaId"] = memorabiliaItemModel.Id,
+            ["UserId"] = memorabiliaItemModel.UserId
+        };
+
+        var options = new DialogOptions()
+        {
+            MaxWidth = MaxWidth.Small,
+            DisableBackdropClick = true
+        };
+
+        var dialog = DialogService.Show<MemorabiliaImageCarouselViewerDialog>(string.Empty, parameters, options);
+
+        await dialog.Result;
+    }
 }

@@ -66,35 +66,37 @@
             <Condition Evaluation="Model.People.Any()">
                 <Match>
                     <div class="row" style="margin-left:1%;margin-right:1%">
-                        <div class="col-6">
+                        <div class="col-2">
                             <ProjectPriority MustHaveCount="Model.People.Count(person => person.PriorityTypeId == Domain.Constants.PriorityType.MustHave.Id)"
                                              NiceToHaveCount="Model.People.Count(person => person.PriorityTypeId == Domain.Constants.PriorityType.NiceToHave.Id)"
                                              NoWayCount="Model.People.Count(person => person.PriorityTypeId == Domain.Constants.PriorityType.NoWay.Id)"
                                              TakeItOrLeaveItCount="Model.People.Count(person => person.PriorityTypeId == Domain.Constants.PriorityType.TakeItOrLeaveIt.Id)" />
                         </div>
-                        <div class="col-2" />
-                        <div class="col-4">
+                        <div class="col-2">
                             <ProjectStatus CompletedCount="Model.People.Count(person => person.ProjectStatusTypeId == Domain.Constants.ProjectStatusType.Completed.Id)"
                                            InProgressCount="Model.People.Count(person => person.ProjectStatusTypeId == Domain.Constants.ProjectStatusType.InProgress.Id)"
                                            NotStartedCount="Model.People.Count(person => person.ProjectStatusTypeId == 0 || person.ProjectStatusTypeId == Domain.Constants.ProjectStatusType.NotStarted.Id)" />
                         </div>
-                    </div>
-                    <br />
-                    <div class="row" style="margin-left:1%;margin-right:1%">
-                        <MudChipSet>
-                            <MudChip Color="MudBlazor.Color.Success">@($"Linked to Autograph - {Model.People.Count(person => person.AutographId > 0)}")</MudChip>
+                        <div class="col-2">
+                            <MudStack>
+                                <MudChip Color="MudBlazor.Color.Success">@($"Linked to Autograph - {Model.People.Count(person => person.AutographId > 0)}")</MudChip>
                                 <MudChip Color="MudBlazor.Color.Info">@($"Not Linked to Autograph - {Model.People.Count(person => person.AutographId == 0)}")</MudChip>
-                            </MudChipSet>
-                            <MudChipSet>
+                            </MudStack>
+                        </div>
+                        <div class="col-2">
+                            <MudStack>
                                 <MudChip Color="MudBlazor.Color.Success">@($"Upgrade - {Model.People.Count(person => person.Upgrade)}")</MudChip>
                                 <MudChip Color="MudBlazor.Color.Info">@($"Not Upgrade - {Model.People.Count(person => !person.Upgrade)}")</MudChip>
-                            </MudChipSet>
-                            <MudChipSet>
+                            </MudStack>
+                        </div>
+                        <div class="col-2">
+                            <MudStack>
                                 <MudChip Color="MudBlazor.Color.Success">@($"Living - {Model.People.Count(person => !person.Deceased)}")</MudChip>
                                 <MudChip Color="MudBlazor.Color.Info">@($"Deceased - {Model.People.Count(person => person.Deceased)}")</MudChip>
-                            </MudChipSet>
+                            </MudStack>
                         </div>
-                        <br />
+                    </div>
+                    <br />
                 </Match>
             </Condition>            
             <Condition Evaluation="@(Model.ProjectType == ProjectType.BaseballType)"> 
@@ -139,32 +141,32 @@
         <Match>
             <Condition Evaluation="Model.MemorabiliaTeams.Any()">
                 <Match>
-                        <div class="row" style="margin-left:1%;margin-right:1%">
-                            <div class="col-6">
-                                <ProjectPriority MustHaveCount="Model.MemorabiliaTeams.Count(team => team.PriorityTypeId == Domain.Constants.PriorityType.MustHave.Id)"
-                                                 NiceToHaveCount="Model.MemorabiliaTeams.Count(team => team.PriorityTypeId == Domain.Constants.PriorityType.NiceToHave.Id)"
-                                                 NoWayCount="Model.MemorabiliaTeams.Count(team => team.PriorityTypeId == Domain.Constants.PriorityType.NoWay.Id)"
-                                                 TakeItOrLeaveItCount="Model.MemorabiliaTeams.Count(team => team.PriorityTypeId == Domain.Constants.PriorityType.TakeItOrLeaveIt.Id)" />
-                            </div>
-                            <div class="col-2" />
-                            <div class="col-4">
-                                <ProjectStatus CompletedCount="Model.MemorabiliaTeams.Count(team => team.ProjectStatusTypeId == Domain.Constants.ProjectStatusType.Completed.Id)"
-                                               InProgressCount="Model.MemorabiliaTeams.Count(team => team.ProjectStatusTypeId == Domain.Constants.ProjectStatusType.InProgress.Id)"
-                                               NotStartedCount="Model.MemorabiliaTeams.Count(team => team.ProjectStatusTypeId == 0 || team.ProjectStatusTypeId == Domain.Constants.ProjectStatusType.NotStarted.Id)" />
-                            </div>
+                    <div class="row" style="margin-left:1%;margin-right:1%">
+                        <div class="col-2">
+                            <ProjectPriority MustHaveCount="Model.People.Count(person => person.PriorityTypeId == Domain.Constants.PriorityType.MustHave.Id)"
+                                                NiceToHaveCount="Model.People.Count(person => person.PriorityTypeId == Domain.Constants.PriorityType.NiceToHave.Id)"
+                                                NoWayCount="Model.People.Count(person => person.PriorityTypeId == Domain.Constants.PriorityType.NoWay.Id)"
+                                                TakeItOrLeaveItCount="Model.People.Count(person => person.PriorityTypeId == Domain.Constants.PriorityType.TakeItOrLeaveIt.Id)" />
                         </div>
-                        <br />
-                        <div class="row" style="margin-left:1%;margin-right:1%">
-                            <MudChipSet>
-                                <MudChip Color="MudBlazor.Color.Success">@($"Linked to Memorabilia - {Model.MemorabiliaTeams.Count(team => team.MemorabiliaId > 0)}")</MudChip>
-                                <MudChip Color="MudBlazor.Color.Info">@($"Not Linked to Memorabilia - {Model.MemorabiliaTeams.Count(team => team.MemorabiliaId == 0)}")</MudChip>
-                            </MudChipSet>
-                            <MudChipSet>
-                                <MudChip Color="MudBlazor.Color.Success">@($"Upgrade - {Model.MemorabiliaTeams.Count(team => team.Upgrade)}")</MudChip>
-                                <MudChip Color="MudBlazor.Color.Info">@($"Not Upgrade - {Model.MemorabiliaTeams.Count(team => !team.Upgrade)}")</MudChip>
-                            </MudChipSet>
+                        <div class="col-2">
+                            <ProjectStatus CompletedCount="Model.People.Count(person => person.ProjectStatusTypeId == Domain.Constants.ProjectStatusType.Completed.Id)"
+                                            InProgressCount="Model.People.Count(person => person.ProjectStatusTypeId == Domain.Constants.ProjectStatusType.InProgress.Id)"
+                                            NotStartedCount="Model.People.Count(person => person.ProjectStatusTypeId == 0 || person.ProjectStatusTypeId == Domain.Constants.ProjectStatusType.NotStarted.Id)" />
                         </div>
-                        <br />
+                        <div class="col-2">
+                            <MudStack>
+                                <MudChip Color="MudBlazor.Color.Success">@($"Linked to Autograph - {Model.People.Count(person => person.AutographId > 0)}")</MudChip>
+                                <MudChip Color="MudBlazor.Color.Info">@($"Not Linked to Autograph - {Model.People.Count(person => person.AutographId == 0)}")</MudChip>
+                            </MudStack>
+                        </div>
+                        <div class="col-2">
+                            <MudStack>
+                                <MudChip Color="MudBlazor.Color.Success">@($"Upgrade - {Model.People.Count(person => person.Upgrade)}")</MudChip>
+                                <MudChip Color="MudBlazor.Color.Info">@($"Not Upgrade - {Model.People.Count(person => !person.Upgrade)}")</MudChip>
+                            </MudStack>
+                        </div>
+                    </div>
+                    <br />
                 </Match>
             </Condition>            
             <Condition Evaluation="@(Model.ProjectType == ProjectType.HelmetType)">
@@ -177,7 +179,7 @@
     </Condition>
     <Condition Evaluation="@(Model.ProjectType != null)">
         <Match>
-            <div style="margin-bottom:1%">
+            <div style="margin-bottom:1%;margin-right:1%;text-align:right;">
                 <SaveButton OnClick="OnSave"
                             Text="Save" />
             </div>            
