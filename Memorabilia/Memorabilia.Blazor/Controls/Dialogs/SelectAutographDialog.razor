@@ -1,18 +1,11 @@
-﻿@inherits ImagePage
-
-<MudDialog Class="mud-dialog-width-lg" 
-           Style="max-height: 80vh;  overflow-y: auto;">
+﻿<MudDialog Style="max-height:85vh;overflow-y:auto;">
     <DialogContent>
-        <div style="text-align:right;">
-            <MudIconButton Icon="@Icons.Material.Filled.Close"
-                           OnClick="Cancel" />
-        </div>
         <DivPad2>
             <Content>
                 <MudTable Bordered="false"
                           Dense="false"
                           Hover="true"
-                          Items="@_viewModel.Autographs"
+                          Items="@Model.Autographs"
                           Striped="true">
                     <ToolBarContent>
                         <MudText Typo="Typo.h6">Autographs</MudText>
@@ -36,7 +29,7 @@
                                           Elevation="5"
                                           Height="200"
                                           ObjectFit="@ObjectFit.Cover"
-                                          Src="@(GetImageData(autograph.AutographImageName))"
+                                          Src="@(ImageService.GetUserImageData(autograph.AutographImageName, autograph.UserId))"
                                           Width="200" />
                             </MudTooltip>
                         </MudTd>

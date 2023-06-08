@@ -3,7 +3,8 @@
 public partial class MultiCollectionSelector
 {
     [Parameter]
-    public List<Entity.Collection> SelectedCollections { get; set; } = new();
+    public List<Entity.Collection> SelectedCollections { get; set; } 
+        = new();
 
     [Parameter]
     public int UserId { get; set; }

@@ -17,19 +17,20 @@ public partial class SelectProjectMemorabiliaDialog
     [Parameter]
     public Dictionary<string, object> Parameters { get; set; }
 
+    protected MemorabiliaItemModel[] Model 
+        = Array.Empty<MemorabiliaItemModel>();
+
     protected int UserId
         => Parameters.ContainsKey("UserId")
         ? (int)Parameters["UserId"]
         : 0;
-
-    private MemorabiliaItemModel[] _viewModel = Array.Empty<MemorabiliaItemModel>();
 
     protected override async Task OnInitializedAsync()
     {
         if (!Parameters.Any())
             return;
 
-        _viewModel = await QueryRouter.Send(new GetProjectMemorabiliaTeamLinks(Parameters));
+        Model = await QueryRouter.Send(new GetProjectMemorabiliaTeamLinks(Parameters));
     }
 
     public void Cancel()

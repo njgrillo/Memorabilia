@@ -1,25 +1,23 @@
-﻿@inherits ImagePage
-
-@if(_viewModel != null)
+﻿@if(Model != null)
 {
     <div class="row" style="margin-left:1%;margin-top:1%;">
         <div class="col-3">
             <div style="margin-left:1%">
                 <MudText Typo="Typo.h4">
-                    <b>@_viewModel.NameHeader</b>
+                    <b>@Model.NameHeader</b>
                 </MudText>
                 <MudText Typo="Typo.h6">
-                    @_viewModel.Nicknames
+                    @Model.Nicknames
                 </MudText>
                 <br />
                 <MudText Typo="Typo.h6">
-                    @_viewModel.LifespanHeader
+                    @Model.LifespanHeader
                 </MudText>
             </div>
             <MudImage Class="rounded-lg ma-4"
                       Elevation="25"
                       Height="520"
-                      Src="@(GetImageData(_viewModel.PersonImageFileName))"
+                      Src="@(ImageService.GetPersonImageData(Model.PersonImageFileName))"
                       Width="400" />
             <Condition Evaluation="_person.Colleges.Any()">
                 <Match>

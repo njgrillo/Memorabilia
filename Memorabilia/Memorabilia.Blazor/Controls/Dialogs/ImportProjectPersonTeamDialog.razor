@@ -1,31 +1,26 @@
-﻿<MudDialog Class="mud-dialog-width-lg"
-           Style="max-height:80vh;">
+﻿<MudDialog Style="max-height:85vh;">
     <DialogContent>
-        <div style="text-align:right;">
-            <MudIconButton Icon="@Icons.Material.Filled.Close"
-                           OnClick="Cancel" />
-        </div>
-        <DivRowCol6>
-            <Content>
+        <div class="row">
+            <div class="col-6">
                 <TeamSearchAutoComplete SelectedValue="Team"
                                         SelectionChanged="(p) => Team = p" />
-            </Content>
-            <ContentColumn2>
+            </div>
+            <div class="col-3">
                 <NullableIntField Label="Year"
                                   Maximum="MaxYear"
                                   Value="Year"
                                   ValueChanged="@((p) => Year = p)" />
-            </ContentColumn2>
-        </DivRowCol6>
-        <DivRowCol3>
-            <Content>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-3">
                 <CustomButton OnClick="Search"
                               Text="Search" />
-            </Content>
-        </DivRowCol3>
+            </div>
+        </div>
         <br />
-        <DivRowCol12>
-            <Content>
+        <div class="row">
+            <div class="col-12">
                 <MudTable Bordered="false"
                           Dense="false"
                           Filter="new Func<Domain.Entities.Person,bool>(FilterFunc1)"
@@ -86,8 +81,8 @@
                         <MudTablePager />
                     </PagerContent>
                 </MudTable>
-            </Content>
-        </DivRowCol12>
+            </div>
+        </div>
     </DialogContent>
     <DialogActions>
         <CancelButton OnClick="Cancel" />

@@ -62,16 +62,16 @@ public partial class MemorabiliaImageEditor : ImagePage
         {
             var parameters = new DialogParameters
             {
-                ["MemorabiliaId"] = ViewModel.MemorabiliaId,
-                ["DomainImageRootPath"] = DomainImageRootPath,
-                ["ImageRootPath"] = ImageRootPath
+                ["MemorabiliaId"] = ViewModel.MemorabiliaId
             };
+
             var options = new DialogOptions() 
             { 
                 MaxWidth = MaxWidth.Large, 
                 FullWidth = true, 
                 DisableBackdropClick = true
             };
+
             var dialog = DialogService.Show<SelectAutographDialog>("Select Autograph", parameters, options);
             var result = await dialog.Result;
 

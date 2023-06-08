@@ -1,6 +1,4 @@
-﻿using System.Runtime.InteropServices;
-
-namespace Memorabilia.Blazor.Pages.Collection;
+﻿namespace Memorabilia.Blazor.Pages.Collection;
 
 public partial class CollectionEditor
 {
@@ -36,7 +34,8 @@ public partial class CollectionEditor
 
     protected ValidationResult ValidationResult { get; set; }
 
-    protected Alert[] ValidationResultAlerts => ValidationResult != null
+    protected Alert[] ValidationResultAlerts 
+        => ValidationResult != null
         ? ValidationResult.Errors.Select(error => new Alert(error.ErrorMessage, Severity.Error)).ToArray()
         : Array.Empty<Alert>();     
 
@@ -74,7 +73,6 @@ public partial class CollectionEditor
     {
         var parameters = new DialogParameters
         {
-            ["CollectionId"] = Model.Id,
             ["UserId"] = Model.UserId
         };
 
@@ -85,7 +83,7 @@ public partial class CollectionEditor
             DisableBackdropClick = true
         };
 
-        var dialog = DialogService.Show<AddCollectionMemorabiliaDialog>("Select Memorabilia", parameters, options);
+        var dialog = DialogService.Show<AddCollectionMemorabiliaDialog>(string.Empty, parameters, options);
         var result = await dialog.Result;
 
         if (result.Canceled)
@@ -93,12 +91,12 @@ public partial class CollectionEditor
 
         var items = (List<MemorabiliaItemModel>)result.Data;
 
-        var collectionMemorabilias 
+        var collectionMemorabilias
             = items.Select(item => new CollectionMemorabiliaEditModel
-              {
-                  CollectionId = Model.Id,
-                  MemorabiliaId = item.Id
-              }).ToList();
+            {
+                CollectionId = Model.Id,
+                MemorabiliaId = item.Id
+            }).ToList();
 
         Model.Items.AddRange(collectionMemorabilias);
 

@@ -6,7 +6,8 @@ public abstract class Chart : ComponentBase
     public double[] Data { get; set; }
 
     [Parameter]
-    public string Height { get; set; } = "300px";
+    public string Height { get; set; } 
+        = "300px";
 
     [Parameter]
     public string[] Labels { get; set; }
@@ -15,5 +16,6 @@ public abstract class Chart : ComponentBase
     public string Summary { get; set; }
 
     [Parameter]
-    public string Width { get; set; } = "300px";
+    public string Width { get; set; } 
+        = "300px";
 }

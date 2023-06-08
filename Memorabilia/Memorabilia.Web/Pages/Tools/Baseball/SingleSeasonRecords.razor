@@ -1,11 +1,7 @@
 ﻿@page "/Tools/Baseball/SingleSeasonRecords"
 
-@inherits WebPage
-
 <PageLoader>
     <Content>
-        <ViewSingleSeasonRecords DomainImageRootPath="@DomainImageRootPath"
-                                 ImageRootPath="@PersonImageRootPath"
-                                 Sport="@Sport.Baseball" />
+        <ViewSingleSeasonRecords Sport="@Sport.Baseball" />
     </Content>
 </PageLoader>

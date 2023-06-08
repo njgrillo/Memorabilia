@@ -15,16 +15,18 @@ public partial class ImportProjectPersonTeamDialog
     public int TeamId { get; set; }
 
     [Parameter]
-    public int? Year { get; set; } = DateTime.UtcNow.Year;
+    public int? Year { get; set; } 
+        = DateTime.UtcNow.Year;
 
     protected int MaxYear
         => DateTime.UtcNow.Year;
 
-    protected Domain.Entities.Person[] People { get; set; } = Array.Empty<Domain.Entities.Person>();
+    protected Entity.Person[] People { get; set; } 
+        = Array.Empty<Entity.Person>();
 
-    protected Domain.Entities.Team Team { get; set; }
+    protected Entity.Team Team { get; set; }
 
-    private bool FilterFunc1(Domain.Entities.Person person)
+    private bool FilterFunc1(Entity.Person person)
         => FilterFunc(person, _search);
 
     private string _search;
@@ -34,7 +36,7 @@ public partial class ImportProjectPersonTeamDialog
             ? "Deselect All"
             : "Select All";
 
-    private List<Domain.Entities.Person> SelectedPeople = new();
+    private List<Entity.Person> SelectedPeople = new();
 
     protected override async Task OnInitializedAsync()
     {
@@ -49,31 +51,29 @@ public partial class ImportProjectPersonTeamDialog
         MudDialog.Cancel();
     }
 
-    protected static bool FilterFunc(Domain.Entities.Person person, string search)
-    {
-        return search.IsNullOrEmpty() ||
-               person.DisplayName.Contains(search, StringComparison.OrdinalIgnoreCase) ||
-               person.ProfileName.Contains(search, StringComparison.OrdinalIgnoreCase) ||
-               person.FirstName.Contains(search, StringComparison.OrdinalIgnoreCase) ||
-               person.LastName.Contains(search, StringComparison.OrdinalIgnoreCase) ||
-               person.LegalName.Contains(search, StringComparison.OrdinalIgnoreCase) ||
-               person.Nicknames.Any(nickname => nickname.Nickname.Contains(search, StringComparison.OrdinalIgnoreCase)) ||
-               CultureInfo.CurrentCulture.CompareInfo.IndexOf(person.LegalName,
-                                                              search,
-                                                              CompareOptions.IgnoreNonSpace) > -1 ||
-               CultureInfo.CurrentCulture.CompareInfo.IndexOf(person.DisplayName,
-                                                              search,
-                                                              CompareOptions.IgnoreNonSpace) > -1 ||
-               CultureInfo.CurrentCulture.CompareInfo.IndexOf(person.ProfileName,
-                                                              search,
-                                                              CompareOptions.IgnoreNonSpace) > -1 ||
-               CultureInfo.CurrentCulture.CompareInfo.IndexOf(person.FirstName,
-                                                              search,
-                                                              CompareOptions.IgnoreNonSpace) > -1 ||
-               CultureInfo.CurrentCulture.CompareInfo.IndexOf(person.LastName,
-                                                              search,
-                                                              CompareOptions.IgnoreNonSpace) > -1;
-    }    
+    protected static bool FilterFunc(Entity.Person person, string search)
+        => search.IsNullOrEmpty() ||
+           person.DisplayName.Contains(search, StringComparison.OrdinalIgnoreCase) ||
+           person.ProfileName.Contains(search, StringComparison.OrdinalIgnoreCase) ||
+           person.FirstName.Contains(search, StringComparison.OrdinalIgnoreCase) ||
+           person.LastName.Contains(search, StringComparison.OrdinalIgnoreCase) ||
+           person.LegalName.Contains(search, StringComparison.OrdinalIgnoreCase) ||
+           person.Nicknames.Any(nickname => nickname.Nickname.Contains(search, StringComparison.OrdinalIgnoreCase)) ||
+           CultureInfo.CurrentCulture.CompareInfo.IndexOf(person.LegalName,
+                                                          search,
+                                                          CompareOptions.IgnoreNonSpace) > -1 ||
+           CultureInfo.CurrentCulture.CompareInfo.IndexOf(person.DisplayName,
+                                                          search,
+                                                          CompareOptions.IgnoreNonSpace) > -1 ||
+           CultureInfo.CurrentCulture.CompareInfo.IndexOf(person.ProfileName,
+                                                          search,
+                                                          CompareOptions.IgnoreNonSpace) > -1 ||
+           CultureInfo.CurrentCulture.CompareInfo.IndexOf(person.FirstName,
+                                                          search,
+                                                          CompareOptions.IgnoreNonSpace) > -1 ||
+           CultureInfo.CurrentCulture.CompareInfo.IndexOf(person.LastName,
+                                                          search,
+                                                          CompareOptions.IgnoreNonSpace) > -1;    
 
     public void Import()
     {
@@ -87,7 +87,7 @@ public partial class ImportProjectPersonTeamDialog
             : People.ToList();
     }
 
-    protected void PersonSelected(Domain.Entities.Person person)
+    protected void PersonSelected(Entity.Person person)
     {
         if (!SelectedPeople.Contains(person))
         {

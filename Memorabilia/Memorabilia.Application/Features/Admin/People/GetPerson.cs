@@ -1,8 +1,9 @@
 ﻿namespace Memorabilia.Application.Features.Admin.People;
 
-public record GetPerson(int Id) : IQuery<PersonViewModel>
+public record GetPerson(int Id) 
+    : IQuery<Entity.Person>
 {
-    public class Handler : QueryHandler<GetPerson, PersonViewModel>
+    public class Handler : QueryHandler<GetPerson, Entity.Person>
     {
         private readonly IPersonRepository _personRepository;
 
@@ -11,9 +12,9 @@ public record GetPerson(int Id) : IQuery<PersonViewModel>
             _personRepository = personRepository;
         }
 
-        protected override async Task<PersonViewModel> Handle(GetPerson query)
+        protected override async Task<Entity.Person> Handle(GetPerson query)
         {
-            return new PersonViewModel(await _personRepository.Get(query.Id));
+            return await _personRepository.Get(query.Id);
         }
     }
 }

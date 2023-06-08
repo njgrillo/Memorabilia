@@ -1,11 +1,7 @@
 ﻿@page "/Tools/Baseball/Leaders"
 
-@inherits WebPage
-
 <PageLoader>
     <Content>
-        <ViewLeaders DomainImageRootPath="@DomainImageRootPath" 
-                     ImageRootPath="@PersonImageRootPath"
-                     Sport="@Sport.Baseball" />
+        <ViewLeaders Sport="@Sport.Baseball" />
     </Content>
 </PageLoader>

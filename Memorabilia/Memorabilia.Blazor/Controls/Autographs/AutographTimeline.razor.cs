@@ -9,52 +9,63 @@ public partial class AutographTimeline : ComponentBase
     public int AutographId { get; set; }
 
     [Parameter]
-    public EditModeType EditMode { get; set; } = EditModeType.Add;
+    public EditModeType EditMode { get; set; } 
+        = EditModeType.Add;
 
     [Parameter]
-    public Severity AutographAuthenticationEditAlertSeverity { get; set; } = Severity.Info;
+    public Severity AutographAuthenticationEditAlertSeverity { get; set; } 
+        = Severity.Info;
 
     [Parameter]
     public string AutographAuthenticationEditAlertTitle { get; set; }
 
     [Parameter]
-    public Color AutographAuthenticationEditColor { get; set; } = Color.Info;
+    public Color AutographAuthenticationEditColor { get; set; } 
+        = Color.Info;
 
     [Parameter]
-    public Severity AutographEditAlertSeverity { get; set; } = Severity.Info;
+    public Severity AutographEditAlertSeverity { get; set; } 
+        = Severity.Info;
 
     [Parameter]
     public string AutographEditAlertTitle { get; set; }
 
     [Parameter]
-    public Color AutographEditColor { get; set; } = Color.Info;
+    public Color AutographEditColor { get; set; } 
+        = Color.Info;
 
     [Parameter]
-    public Severity AutographImageEditAlertSeverity { get; set; } = Severity.Info;
+    public Severity AutographImageEditAlertSeverity { get; set; } 
+        = Severity.Info;
 
     [Parameter]
     public string AutographImageEditAlertTitle { get; set; }
 
     [Parameter]
-    public Color AutographImageEditColor { get; set; } = Color.Info;
+    public Color AutographImageEditColor { get; set; } 
+        = Color.Info;
 
     [Parameter]
-    public Severity AutographInscriptionEditAlertSeverity { get; set; } = Severity.Info;
+    public Severity AutographInscriptionEditAlertSeverity { get; set; } 
+        = Severity.Info;
 
     [Parameter]
     public string AutographInscriptionEditAlertTitle { get; set; }
 
     [Parameter]
-    public Color AutographInscriptionEditColor { get; set; } = Color.Info;
+    public Color AutographInscriptionEditColor { get; set; } 
+        = Color.Info;
 
     [Parameter]
-    public Severity AutographSpotEditAlertSeverity { get; set; } = Severity.Info;
+    public Severity AutographSpotEditAlertSeverity { get; set; } 
+        = Severity.Info;
 
     [Parameter]
     public string AutographSpotEditAlertTitle { get; set; }
 
     [Parameter]
-    public Color AutographSpotEditColor { get; set; } = Color.Info;
+    public Color AutographSpotEditColor { get; set; } 
+        = Color.Info;
 
     [Parameter]
     public AutographStep AutographStep { get; set; }
@@ -126,21 +137,19 @@ public partial class AutographTimeline : ComponentBase
     }
 
     private string GetMudAlertStyle(AutographStep autographStep)
-    {
-        return AutographStep == autographStep ? "border: 1px solid black;" : string.Empty;
-    }
+        => AutographStep == autographStep 
+        ? "border: 1px solid black;" 
+        : string.Empty;
 
     private void Navigate(string item = null)
     {
         if (AutographId == 0)
             return;
 
-        if (item.IsNullOrEmpty())
-        {
-            NavigationManager.NavigateTo($"Autographs/{EditModeType.Update.Name}/{MemorabiliaId}/{AutographId}");
-            return;
-        }
+        var url = !item.IsNullOrEmpty()
+            ? $"Autographs/{item}/{EditModeType.Update.Name}/{AutographId}"
+            : $"Autographs/{EditModeType.Update.Name}/{MemorabiliaId}/{AutographId}";
 
-        NavigationManager.NavigateTo($"Autographs/{item}/{EditModeType.Update.Name}/{AutographId}");
+        NavigationManager.NavigateTo(url);
     }
 }

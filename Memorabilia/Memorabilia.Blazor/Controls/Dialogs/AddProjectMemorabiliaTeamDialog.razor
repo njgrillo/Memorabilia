@@ -1,88 +1,90 @@
-﻿<MudDialog Class="mud-dialog-width-lg"
-           Style="max-height:80vh;">
+﻿<MudDialog Style="max-height:85vh;">
     <DialogContent>
-        <div style="text-align:right;">
-            <MudIconButton Icon="@Icons.Material.Filled.Close"
-                           OnClick="Cancel" />
-        </div>
-        <div style="margin-top:2%;margin-bottom:2%;margin-left:2%;margin-right:2%;">
-            <DivRowCol6>
-                <Content>
-                    <TeamSearchAutoComplete SelectedValue="ProjectMemorabiliaTeam.Team"
-                                            SelectionChanged="(p) => ProjectMemorabiliaTeam.Team = p" />
-                </Content>
-            </DivRowCol6>
-            <DivRowCol3>
-                <Content>
-                    <NullableIntField Label="Rank"
-                                      Value="ProjectMemorabiliaTeam.Rank"
-                                      ValueChanged="@((p) => ProjectMemorabiliaTeam.Rank = p)" />
-                    <MudTooltip Text="Import Max Rank">
-                        <MudImage @onclick="@(() => ProjectMemorabiliaTeam.Rank = MaxRank)"
-                                  Class="rounded-lg can-click"
-                                  Elevation="5"
-                                  Height="20"
-                                  ObjectFit="@ObjectFit.Cover"
-                                  Src="@(ImageService.GetDomainImageData(ImageFileName.Import))"
-                                  Width="20" />
-                    </MudTooltip>
-                </Content>
-                <ContentColumn2>
-                    <PriorityTypeDropDown SelectedValue="ProjectMemorabiliaTeam.PriorityTypeId"
-                                          SelectionChanged="(p) => ProjectMemorabiliaTeam.PriorityTypeId = p" />
-                </ContentColumn2>
-                <ContentColumn3>
-                    <ProjectStatusTypeDropDown SelectedValue="ProjectMemorabiliaTeam.ProjectStatusTypeId"
-                                               SelectionChanged="(p) => ProjectMemorabiliaTeam.ProjectStatusTypeId = p" />
-                </ContentColumn3>
-                <ContentColumn4>
-                    <MudSwitch Checked="@ProjectMemorabiliaTeam.Upgrade"
-                               CheckedChanged="(p) => ProjectMemorabiliaTeam.Upgrade = p"
-                               Color="MudBlazor.Color.Success"
-                               Label="Is Upgrade?"
-                               T="bool" />
-                </ContentColumn4>
-            </DivRowCol3>
-            <Condition Evaluation="@(ProjectId > 0 && ProjectMemorabiliaTeam.Team != null && ProjectMemorabiliaTeam.Team.Id > 0)">
-                <Match>
-                    <DivRowCol3>
-                        <Content>
-                            <Condition Evaluation="@(ProjectMemorabiliaTeam.MemorabiliaId > 0)">
-                                <Match>
-                                    <MudTooltip Text="Remove link to Autograph">
-                                        <MudFab Color="MudBlazor.Color.Secondary"
-                                                Icon="@Icons.Material.Outlined.LinkOff"
-                                                OnClick="@(_ => ProjectMemorabiliaTeam.MemorabiliaId = 0)" />
-                                    </MudTooltip>
-                                </Match>
-                                <NotMatch>
-                                    <MudTooltip Text="Link to Memorabilia">
-                                        <MudFab Color="MudBlazor.Color.Secondary"
-                                                Icon="@Icons.Material.Outlined.AddLink"
-                                                OnClick="@(_ => AddMemorabiliaLink(ProjectMemorabiliaTeam))" />
-                                    </MudTooltip>
-                                </NotMatch>
-                            </Condition>
-                        </Content>
-                        <ContentColumn2>
-                            <Condition Evaluation="@(ProjectMemorabiliaTeam.MemorabiliaId > 0)">
-                                <Match>
-                                    <MudImage Class="rounded-lg can-click"
-                                              Elevation="5"
-                                              Height="100"
-                                              ObjectFit="@ObjectFit.Cover"
-                                              Src="@(ImageService.GetUserImageData(ProjectMemorabiliaTeam.MemorabiliaFileName, UserId))"
-                                              Width="100" />
-                                </Match>
-                            </Condition>
-                        </ContentColumn2>
-                    </DivRowCol3>
-                </Match>
-            </Condition>
-        </div>
+        <DivPad2>
+            <Content>
+                <div class="row">
+                    <div class="col-6">
+                        <TeamSearchAutoComplete SelectedValue="ProjectMemorabiliaTeam.Team"
+                                                SelectionChanged="(p) => ProjectMemorabiliaTeam.Team = p" />
+                    </div>
+                </div>
+                <br />
+                <div class="row">
+                    <div class="col-3">
+                        <MudStack Row="true"
+                                  Spacing="0">
+                            <NullableIntField Label="Rank"
+                                              Value="ProjectMemorabiliaTeam.Rank"
+                                              ValueChanged="@((p) => ProjectMemorabiliaTeam.Rank = p)" />
+                            <MudTooltip Text="Import Max Rank">
+                                <MudImage @onclick="@(() => ProjectMemorabiliaTeam.Rank = MaxRank)"
+                                          Class="rounded-lg can-click"
+                                          Elevation="5"
+                                          Height="20"
+                                          ObjectFit="@ObjectFit.Cover"
+                                          Src="@(ImageService.GetDomainImageData(ImageFileName.Import))"
+                                          Width="20" />
+                            </MudTooltip>                            
+                        </MudStack>                        
+                    </div>
+                    <div class="col-3">
+                        <PriorityTypeDropDown SelectedValue="ProjectMemorabiliaTeam.PriorityTypeId"
+                                              SelectionChanged="(p) => ProjectMemorabiliaTeam.PriorityTypeId = p" />
+                    </div>
+                    <div class="col-3">
+                        <ProjectStatusTypeDropDown SelectedValue="ProjectMemorabiliaTeam.ProjectStatusTypeId"
+                                                   SelectionChanged="(p) => ProjectMemorabiliaTeam.ProjectStatusTypeId = p" />
+                    </div>
+                    <div class="col-3">
+                        <MudSwitch Checked="@ProjectMemorabiliaTeam.Upgrade"
+                                   CheckedChanged="(p) => ProjectMemorabiliaTeam.Upgrade = p"
+                                   Color="MudBlazor.Color.Success"
+                                   Label="Is Upgrade?"
+                                   T="bool" />
+                    </div>
+                </div>
+                <br />
+                <Condition Evaluation="@(ProjectId > 0 && ProjectMemorabiliaTeam.Team != null && ProjectMemorabiliaTeam.Team.Id > 0)">
+                    <Match>
+                        <div class="row">
+                            <div class="col-3">
+                                <Condition Evaluation="@(ProjectMemorabiliaTeam.MemorabiliaId > 0)">
+                                    <Match>
+                                        <MudTooltip Text="Remove link to Autograph">
+                                            <MudFab Color="MudBlazor.Color.Secondary"
+                                                    Icon="@Icons.Material.Outlined.LinkOff"
+                                                    OnClick="@(_ => ProjectMemorabiliaTeam.MemorabiliaId = 0)" />
+                                        </MudTooltip>
+                                    </Match>
+                                    <NotMatch>
+                                        <MudTooltip Text="Link to Memorabilia">
+                                            <MudFab Color="MudBlazor.Color.Secondary"
+                                                    Icon="@Icons.Material.Outlined.AddLink"
+                                                    OnClick="@(_ => AddMemorabiliaLink(ProjectMemorabiliaTeam))" />
+                                        </MudTooltip>
+                                    </NotMatch>
+                                </Condition>
+                            </div>
+                            <div class="col-3">
+                                <Condition Evaluation="@(ProjectMemorabiliaTeam.MemorabiliaId > 0)">
+                                    <Match>
+                                        <MudImage Class="rounded-lg can-click"
+                                                  Elevation="5"
+                                                  Height="100"
+                                                  ObjectFit="@ObjectFit.Cover"
+                                                  Src="@(ImageService.GetUserImageData(ProjectMemorabiliaTeam.MemorabiliaFileName, UserId))"
+                                                  Width="100" />
+                                    </Match>
+                                </Condition>
+                            </div>
+                        </div>
+                    </Match>
+                </Condition>
+            </Content>            
+        </DivPad2>
     </DialogContent>
-    <DialogActions>
-        <AddButton OnClick="Add" />
+    <DialogActions>        
         <CancelButton OnClick="Cancel" />
+        <AddButton OnClick="Add" />
     </DialogActions>
 </MudDialog>

@@ -14,10 +14,11 @@ public partial class SuggestedInscriptions
     [Parameter]
     public int PersonId { get; set; }
 
+    protected SuggestedInscriptionsModel Model = new();
+
     private bool _loaded;
     private int _personId;
-    private string _search;
-    private readonly SuggestedInscriptionsModel _viewModel = new();
+    private string _search;    
 
     private bool FilterFunc1(SuggestedInscriptionModel inscription) 
         => FilterFunc(inscription, _search);
@@ -27,9 +28,9 @@ public partial class SuggestedInscriptions
         if (PersonId == 0 || (_loaded && _personId == PersonId))
             return;
 
-        var person = await QueryRouter.Send(new GetPersonGeneric(PersonId));
+        Entity.Person person = await QueryRouter.Send(new GetPerson(PersonId));
 
-        _viewModel.Items = SuggestedInscriptionService.GenerateInscriptions(person).ToList();
+        Model.Items = SuggestedInscriptionService.GenerateInscriptions(person).ToList();
 
         _loaded = true;
         _personId = PersonId;
@@ -41,8 +42,6 @@ public partial class SuggestedInscriptions
     }
 
     private static bool FilterFunc(SuggestedInscriptionModel inscription, string search)
-    {
-        return search.IsNullOrEmpty() ||
-               inscription.Text.Contains(search, StringComparison.OrdinalIgnoreCase);
-    }
+        => search.IsNullOrEmpty() ||
+           inscription.Text.Contains(search, StringComparison.OrdinalIgnoreCase);
 }

@@ -1,30 +1,25 @@
-﻿<MudDialog Class="mud-dialog-width-lg"
-           Style="max-height:80vh;">
+﻿<MudDialog Style="max-height:85vh;">
     <DialogContent>
-        <div style="text-align:right;">
-            <MudIconButton Icon="@Icons.Material.Filled.Close"
-                           OnClick="Cancel" />
-        </div>
         <Condition Evaluation="@(Year.HasValue)">
             <Match>
-                <DivRowCol3>
-                    <Content>
+                <div class="row">
+                    <div class="col-3">
                         <NullableIntField Label="Year"
                                           Maximum="MaxYear"
                                           Value="Year"
                                           ValueChanged="@((p) => Year = p)" />
-                    </Content>
-                </DivRowCol3>
+                    </div>
+                </div>
             </Match>
             <NotMatch>
-                <DivRowCol3>
-                    <Content>
+                <div class="row">
+                    <div class="col-3">
                         <NullableIntField Label="Begin Year"
                                           Maximum="MaxYear"
                                           Value="BeginYear"
                                           ValueChanged="@((p) => BeginYear = p)" />
-                    </Content>
-                    <ContentColumn2>
+                    </div>
+                    <div class="col-3">
                         <Condition Evaluation="CanImportByYearRange">
                             <Match>
                                 <NullableIntField Label="End Year"
@@ -33,19 +28,19 @@
                                                   ValueChanged="@((p) => EndYear = p)" />
                             </Match>
                         </Condition>
-                    </ContentColumn2>
-                </DivRowCol3>
+                    </div>
+                </div>
             </NotMatch>
         </Condition>
-        <DivRowCol3>
-            <Content>
+        <div class="row">
+            <div class="col-3">
                 <CustomButton OnClick="Search"
                               Text="Search" />
-            </Content>            
-        </DivRowCol3>
+            </div>            
+        </div>
         <br />
-        <DivRowCol12>
-            <Content>
+        <div class="row">
+            <div class="col-12">
                 <MudTable Bordered="false"
                           Dense="false"
                           Filter="new Func<Domain.Entities.Person,bool>(FilterFunc1)"
@@ -106,8 +101,8 @@
                         <MudTablePager />
                     </PagerContent>
                 </MudTable>
-            </Content>
-        </DivRowCol12>
+            </div>
+        </div>
     </DialogContent>
     <DialogActions>
         <CancelButton OnClick="Cancel" />

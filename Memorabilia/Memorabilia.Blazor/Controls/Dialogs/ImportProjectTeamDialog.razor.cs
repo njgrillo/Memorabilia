@@ -11,10 +11,11 @@ public partial class ImportProjectTeamDialog
     [CascadingParameter]
     public MudDialogInstance MudDialog { get; set; }
 
-    private bool FilterFunc1(Domain.Entities.Team team)
+    private bool FilterFunc1(Entity.Team team)
         => FilterFunc(team, _search);
 
-    protected Domain.Entities.Team[] Teams { get; set; } = Array.Empty<Domain.Entities.Team>();
+    protected Entity.Team[] Teams { get; set; } 
+        = Array.Empty<Entity.Team>();
 
     private string _search;
 
@@ -23,7 +24,7 @@ public partial class ImportProjectTeamDialog
             ? "Deselect All"
             : "Select All";
 
-    private List<Domain.Entities.Team> SelectedTeams = new();
+    private List<Entity.Team> SelectedTeams = new();
 
     protected override async Task OnInitializedAsync()
     {
@@ -35,16 +36,14 @@ public partial class ImportProjectTeamDialog
         MudDialog.Cancel();
     }
 
-    protected static bool FilterFunc(Domain.Entities.Team team, string search)
-    {
-        return search.IsNullOrEmpty() ||
-               team.DisplayName.Contains(search, StringComparison.OrdinalIgnoreCase) ||
-               team.Location.Contains(search, StringComparison.OrdinalIgnoreCase) ||
-               team.Name.Contains(search, StringComparison.OrdinalIgnoreCase) ||
-               team.Nickname.Contains(search, StringComparison.OrdinalIgnoreCase) ||
-               team.Franchise.Name.Contains(search, StringComparison.OrdinalIgnoreCase) ||
-               team.Abbreviation.Contains(search, StringComparison.OrdinalIgnoreCase);
-    }
+    protected static bool FilterFunc(Entity.Team team, string search)
+        => search.IsNullOrEmpty() ||
+           team.DisplayName.Contains(search, StringComparison.OrdinalIgnoreCase) ||
+           team.Location.Contains(search, StringComparison.OrdinalIgnoreCase) ||
+           team.Name.Contains(search, StringComparison.OrdinalIgnoreCase) ||
+           team.Nickname.Contains(search, StringComparison.OrdinalIgnoreCase) ||
+           team.Franchise.Name.Contains(search, StringComparison.OrdinalIgnoreCase) ||
+           team.Abbreviation.Contains(search, StringComparison.OrdinalIgnoreCase);
 
     public void Import()
     {
@@ -58,7 +57,7 @@ public partial class ImportProjectTeamDialog
             : Teams.ToList();
     }
 
-    protected void TeamSelected(Domain.Entities.Team team)
+    protected void TeamSelected(Entity.Team team)
     {
         if (!SelectedTeams.Contains(team))
         {

@@ -19,14 +19,15 @@ public partial class SelectProjectAutographDialog
         ? (int)Parameters["UserId"]
         : 0;
 
-    private AutographModel[] _viewModel = Array.Empty<AutographModel>();
+    protected AutographModel[] Model 
+        = Array.Empty<AutographModel>();
 
     protected override async Task OnInitializedAsync()
     {
         if (!Parameters.Any())
             return;
 
-        _viewModel = await QueryRouter.Send(new GetProjectPersonAutographLinks(Parameters));
+        Model = await QueryRouter.Send(new GetProjectPersonAutographLinks(Parameters));
     }
 
     public void Cancel()

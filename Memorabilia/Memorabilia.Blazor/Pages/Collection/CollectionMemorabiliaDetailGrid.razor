@@ -4,7 +4,8 @@
           Hover="true"
           Items="@Model.MemorabiliaItems"
           ServerData="@(new Func<TableState, Task<TableData<MemorabiliaItemModel>>>(OnRead))"
-          Striped="true">
+          Striped="true"
+          Style="width:100%">
     <ToolBarContent>
         <MudText Typo="Typo.h6">Collection Memorabilia</MudText>
     </ToolBarContent>

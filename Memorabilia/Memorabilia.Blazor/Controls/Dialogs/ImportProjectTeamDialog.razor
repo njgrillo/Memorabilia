@@ -1,16 +1,10 @@
-﻿<MudDialog Class="mud-dialog-width-lg"
-           Style="max-height:80vh;">
+﻿<MudDialog Style="max-height:85vh;">
     <DialogContent>
-        <div style="text-align:right;">
-            <MudIconButton Icon="@Icons.Material.Filled.Close"
-                           OnClick="Cancel" />
-        </div>
-        <br />
-        <DivRowCol12>
-            <Content>
+        <div class="row">
+            <div class="col-12">
                 <MudTable Bordered="false"
                           Dense="false"
-                          Filter="new Func<Domain.Entities.Team,bool>(FilterFunc1)"
+                          Filter="new Func<Entity.Team, bool>(FilterFunc1)"
                           Hover="true"
                           Items="@Teams"
                           Striped="true">
@@ -43,8 +37,8 @@
                         <MudTablePager />
                     </PagerContent>
                 </MudTable>
-            </Content>
-        </DivRowCol12>
+            </div>
+        </div>
     </DialogContent>
     <DialogActions>
         <CancelButton OnClick="Cancel" />

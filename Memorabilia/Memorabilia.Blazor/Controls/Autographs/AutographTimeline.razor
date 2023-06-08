@@ -29,7 +29,7 @@
                                   Severity="@AutographAuthenticationEditAlertSeverity">@AutographAuthenticationEditAlertTitle</MudAlert>
                     </ItemContent>
                 </MudTimelineItem>
-                <PrettyBlazor.Condition Evaluation="@DisplaySpot">
+                <Condition Evaluation="@DisplaySpot">
                     <Match>
                         <MudTimelineItem Color="@AutographSpotEditColor"
                                          Variant="Variant.Filled">
@@ -41,7 +41,7 @@
                             </ItemContent>
                         </MudTimelineItem>
                     </Match>
-                </PrettyBlazor.Condition>                
+                </Condition>                
                 <MudTimelineItem Color="@AutographImageEditColor" 
                                  Variant="Variant.Filled">
                     <ItemContent>

@@ -1,13 +1,9 @@
 ﻿@page "/Tools/Baseball/HallOfFamers"
 
-@inherits WebPage
-
 <PageLoader>
     <Content>
         <ViewHallOfFamers DisplayBallot="true"
                           DisplayVotePercentage="true"
-                          DomainImageRootPath="@DomainImageRootPath"
-                          ImageRootPath="@PersonImageRootPath"
                           Sport="@Sport.Baseball"
                           SportLeagueLevel="@SportLeagueLevel.MajorLeagueBaseball" />
     </Content>

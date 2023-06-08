@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Blazor.Pages.Tools.Profile;
 
-public partial class PersonProfileMain : ImagePage
+public partial class PersonProfileMain
 {
     [Inject]
     public IMediator Mediator { get; set; }
@@ -8,16 +8,17 @@ public partial class PersonProfileMain : ImagePage
     [Parameter]
     public int PersonId { get; set; }
 
-    private Domain.Entities.Person _person;
-    private PersonProfileModel _viewModel;
+    protected PersonProfileModel Model;
+
+    private Entity.Person _person;    
 
     protected override async Task OnParametersSetAsync()
     {
         if (PersonId == 0)
             return;
 
-        _person = await Mediator.Send(new GetPersonGeneric(PersonId));
+        _person = await Mediator.Send(new GetPerson(PersonId));
 
-        _viewModel = new PersonProfileModel(_person);
+        Model = new PersonProfileModel(_person);
     }
 }

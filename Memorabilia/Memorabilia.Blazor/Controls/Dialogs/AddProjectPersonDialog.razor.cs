@@ -24,9 +24,6 @@ public partial class AddProjectPersonDialog
     public int ProjectId { get; set; }
 
     [Parameter]
-    public string Title { get; set; }
-
-    [Parameter]
     public int UserId { get; set; }
 
     protected ProjectEditModel Project;
