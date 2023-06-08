@@ -1,6 +1,4 @@
-﻿
-
-namespace Memorabilia.Blazor.Pages.Admin.Commissioners;
+﻿namespace Memorabilia.Blazor.Pages.Admin.Commissioners;
 
 public partial class ViewCommissioners : ViewItem<CommissionersViewModel, CommissionerViewModel>
 {

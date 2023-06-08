@@ -1,6 +1,4 @@
-﻿@inherits ImagePage
-
-<div style="border: 1px solid black; margin-top: 2%; margin-bottom: 2%; margin-left: 2%; margin-right: 2%;">
+﻿<div style="border: 1px solid black; margin-top: 2%; margin-bottom: 2%; margin-left: 2%; margin-right: 2%;">
     <MudExpansionPanel IsExpanded="false" 
                        Text="@PanelText">
         <div class="row" style="margin-top: 2%; margin-bottom: 2%;">
@@ -10,7 +8,7 @@
                               Elevation="5"
                               Height="200"
                               ObjectFit="@ObjectFit.Fill"
-                              Src="@(GetImageData(imageName))"
+                              Src="@(ImageService.GetUserImageData(imageName, UserId))"
                               Width="200" />
                 </div>
             </Iterations>

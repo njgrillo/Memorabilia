@@ -1,9 +1,12 @@
 ﻿namespace Memorabilia.Blazor.Controls;
 
-public partial class EditPage<TItem> : ImagePage, INotifyPropertyChanged
+public partial class EditPage<TItem> : INotifyPropertyChanged
 {
     [Inject]
     public IJSRuntime JSRuntime { get; set; }
+
+    [Inject]
+    public NavigationManager NavigationManager { get; set; }
 
     [Inject]
     public ISnackbar Snackbar { get; set; }
@@ -74,9 +77,10 @@ public partial class EditPage<TItem> : ImagePage, INotifyPropertyChanged
     [Parameter]
     public ValidationResult ValidationResult { get; set; }
 
-    public Alert[] ValidationResultAlerts => ValidationResult != null
-        ? ValidationResult.Errors.Select(error => new Alert(error.ErrorMessage, Severity.Error)).ToArray()
-        : Array.Empty<Alert>();
+    public Alert[] ValidationResultAlerts 
+        => ValidationResult != null
+            ? ValidationResult.Errors.Select(error => new Alert(error.ErrorMessage, Severity.Error)).ToArray()
+            : Array.Empty<Alert>();
 
     private bool _continue;
 

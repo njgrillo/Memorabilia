@@ -5,14 +5,16 @@ public class AuthenticationsEditModel : EditModel
     public AuthenticationsEditModel() { }
 
     public AuthenticationsEditModel(IEnumerable<Entity.AutographAuthentication> authentications, 
-                                    Constant.ItemType itemType, 
+                                    Constant.ItemType itemType,
+                                    int userId,
                                     int memorabiliaId,
-                                    int autographId,
+                                    int autographId,                                    
                                     string[] memorabiliaImageNames)
     {
         Authentications = authentications.Select(authentication => new AuthenticationEditModel(new AuthenticationModel(authentication)))
                                          .ToList();
         ItemType = itemType;
+        UserId = userId;
         MemorabiliaId = memorabiliaId;
         AutographId = autographId;
         MemorabiliaImageNames = memorabiliaImageNames;
@@ -37,7 +39,9 @@ public class AuthenticationsEditModel : EditModel
             : $"Autographs/Image/{Constant.EditModeType.Update.Name}/{AutographId}";
 
     public override Constant.EditModeType EditModeType 
-        => Authentications.Any() ? Constant.EditModeType.Update : Constant.EditModeType.Add;
+        => Authentications.Any() 
+            ? Constant.EditModeType.Update 
+            : Constant.EditModeType.Add;
 
     public override string ExitNavigationPath 
         => "Memorabilia/View";
@@ -52,8 +56,11 @@ public class AuthenticationsEditModel : EditModel
 
     public int MemorabiliaId { get; }
 
-    public string[] MemorabiliaImageNames { get; } = Array.Empty<string>();
+    public string[] MemorabiliaImageNames { get; } 
+        = Array.Empty<string>();
 
     public override string PageTitle 
         => $"{(EditModeType == Constant.EditModeType.Add ? Constant.EditModeType.Add.Name : Constant.EditModeType.Update.Name)} Authentication(s)";
+
+    public int UserId { get; }
 }

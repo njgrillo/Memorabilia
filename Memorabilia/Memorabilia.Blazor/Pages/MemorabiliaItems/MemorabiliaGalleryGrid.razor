@@ -2,16 +2,15 @@
     <Iterations Items="_items" Context="item">
         <div class="col-md-4">
             <MemorabiliaItemGalleryCard Description="@GetDescription(item)"
-                                        DomainImageRootPath="@ImagePath.DomainImageRootPath"
                                         EditNavigationPath="@item.EditNavigationPath"
-                                        ImageRootPath="@(Path.Combine(ImagePath.MemorabiliaImageRootPath, UserId.ToString()))"
                                         MemorabiliaItem="@item"
                                         PersonImageRootPath="@ImagePath.PersonImageRootPath"
                                         PrimaryImageFileName="@item.ImageFileName"
                                         PrimaryImageNavigationPath="@item.PrimaryImageNavigationPath"
                                         Subtitle="@GetSubtitle(item)"
                                         Title="@GetTitle(item)"
-                                        TooltipText="@item.TooltipText" />
+                                        TooltipText="@item.TooltipText"
+                                        UserId="UserId" />
         </div>
     </Iterations>
 </div>

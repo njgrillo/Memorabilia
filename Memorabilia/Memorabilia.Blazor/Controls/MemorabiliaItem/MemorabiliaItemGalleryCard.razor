@@ -1,6 +1,4 @@
-﻿@inherits ImagePage
-
-<DivPad5>
+﻿<DivPad5>
     <Content>
         <MudTooltip Text="@TooltipText">
             <MudCard Elevation="20">
@@ -12,7 +10,7 @@
                         <MudCardMedia @onclick="OnPrimaryImageClick"
                                       Class="rounded-lg can-click"
                                       Height="300"
-                                      Image="@(GetImageData(PrimaryImageFileName))" />
+                                      Image="@(ImageService.GetUserImageData(PrimaryImageFileName, UserId))" />
                     </MudCard>  
                     <br />
                     <MudText Typo="Typo.body2">@Subtitle</MudText>
@@ -22,13 +20,12 @@
                     <div class="row">
                         <Iterations Items="MemorabiliaItem.Autographs" Context="autograph">
                             <div class="col-md-4">
-                                <MemorabiliaItemGallerySubCard DomainImageRootPath="@DomainImageRootPath" 
-                                                               EditNavigationPath="@autograph.EditNavigationPath"                                
+                                <MemorabiliaItemGallerySubCard EditNavigationPath="@autograph.EditNavigationPath"                                
                                                                ImageFileName="@autograph.ImageFileName"
-                                                               ImageNavigationPath="@autograph.ImageNavigationPath"  
-                                                               ImageRootPath="@PersonImageRootPath"
+                                                               ImageNavigationPath="@autograph.ImageNavigationPath" 
                                                                Title="@autograph.PersonName"
-                                                               TooltipText="@autograph.PersonName" />
+                                                               TooltipText="@autograph.PersonName"
+                                                               UserId="UserId" />
                             </div>                        
                         </Iterations>
                     </div>                    

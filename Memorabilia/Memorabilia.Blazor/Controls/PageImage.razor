@@ -1,12 +1,10 @@
-﻿@inherits ImagePage
-
-<DivRowCol12Center>
+﻿<DivRowCol12Center>
     <Content>
         <MudImage Class="rounded-lg" 
                   Elevation="5" 
                   Height="150"
                   ObjectFit="@ObjectFit.Fill"
-                  Src="@(GetDomainImageData(ImageFileName))"
+                  Src="@(ImageService.GetDomainImageData(ImageFileName))"
                   Width="150" />
     </Content>
 </DivRowCol12Center>

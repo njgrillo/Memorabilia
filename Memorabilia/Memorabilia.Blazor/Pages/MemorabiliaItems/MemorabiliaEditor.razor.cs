@@ -1,7 +1,16 @@
 ﻿namespace Memorabilia.Blazor.Pages.MemorabiliaItems;
 
-public partial class MemorabiliaEditor : ImagePage
-{   
+public partial class MemorabiliaEditor
+{
+    [Inject]
+    public CommandRouter CommandRouter { get; set; }
+
+    [Inject]
+    public NavigationManager NavigationManager { get; set; }
+
+    [Inject]
+    public QueryRouter QueryRouter { get; set; }
+
     [Inject]
     public MemorabiliaItemValidator Validator { get; set; }        
 

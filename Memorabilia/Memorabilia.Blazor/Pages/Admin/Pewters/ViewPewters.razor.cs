@@ -1,8 +1,7 @@
-﻿
+﻿namespace Memorabilia.Blazor.Pages.Admin.Pewters;
 
-namespace Memorabilia.Blazor.Pages.Admin.Pewters;
-
-public partial class ViewPewters : ViewItem<PewtersViewModel, PewterViewModel>
+public partial class ViewPewters 
+    : ViewItem<PewtersViewModel, PewterViewModel>
 {
     protected async Task OnLoad()
     {
@@ -25,10 +24,8 @@ public partial class ViewPewters : ViewItem<PewtersViewModel, PewterViewModel>
     }
 
     protected override bool FilterFunc(PewterViewModel viewModel, string search)
-    {
-        return search.IsNullOrEmpty() ||
-               viewModel.FranchiseName.Contains(search, StringComparison.OrdinalIgnoreCase) ||
-               viewModel.TeamName.Contains(search, StringComparison.OrdinalIgnoreCase) ||
-               viewModel.SizeName.Contains(search, StringComparison.OrdinalIgnoreCase);
-    }
+        => search.IsNullOrEmpty() ||
+           viewModel.FranchiseName.Contains(search, StringComparison.OrdinalIgnoreCase) ||
+           viewModel.TeamName.Contains(search, StringComparison.OrdinalIgnoreCase) ||
+           viewModel.SizeName.Contains(search, StringComparison.OrdinalIgnoreCase);
 }

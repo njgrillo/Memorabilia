@@ -11,4 +11,7 @@ public static class ImagePath
 
     public static string PersonImageRootPath
         => "D:\\Graphinallday\\Resources\\SiteImages\\people";
+
+    public static string PewterImageRootPath
+        => "D:\\Graphinallday\\Resources\\SiteImages\\pewters";
 }

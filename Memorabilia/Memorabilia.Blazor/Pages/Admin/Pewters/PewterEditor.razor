@@ -1,7 +1,6 @@
 ﻿@inherits EditItem<SavePewterViewModel, PewterViewModel>
 
 <EditPage ContinueNavigationPath="@ViewModel.RoutePrefix"
-          DomainImageRootPath="@DomainImageRootPath"
           EditMode="ViewModel.EditModeType" 
           ExitNavigationPath="@ViewModel.RoutePrefix"
           ImageFileName="@ViewModel.ImageFileName"
@@ -51,17 +50,16 @@
         </DivRowCol3>
         <DivRowCol3>
             <Content>
-                <PrettyBlazor.Condition Evaluation="_hasImage">
+                <Condition Evaluation="_hasImage">
                     <Match>
                         <ImageEditor CanRemove="false"
-                                     DomainImageRootPath="@DomainImageRootPath"
                                      HasPrimary="false"                                     
                                      ImageFileName="@ViewModel.FileName"
-                                     ImageRootPath="@PewterImageRootPath"
+                                     ImageRootPath="@ImagePath.PewterImageRootPath"
                                      ImageType="ImageType.Primary"
                                      OnRemove="Remove" /> 
                     </Match>
-                </PrettyBlazor.Condition>
+                </Condition>
             </Content>
         </DivRowCol3>
     </Content>

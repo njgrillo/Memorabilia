@@ -25,9 +25,7 @@ public partial class ProjectMemorabiliaTeamGrid
         var parameters = new Dictionary<string, object>
         {
             ["UserId"] = projectMemorabiliaTeam.UserId,
-            ["TeamId"] = projectMemorabiliaTeam.Team.Id,
-            ["DomainImageRootPath"] = ImagePath.DomainImageRootPath,
-            ["ImageRootPath"] = Path.Combine(ImagePath.MemorabiliaImageRootPath, projectMemorabiliaTeam.UserId.ToString())
+            ["TeamId"] = projectMemorabiliaTeam.Team.Id
         };
 
         SetProjectDetailsParameters(projectMemorabiliaTeam, parameters);

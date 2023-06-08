@@ -1,9 +1,12 @@
 ﻿namespace Memorabilia.Blazor.Controls;
 
-public partial class EditImages<TItem> : ImagePage
+public partial class EditImages<TItem> 
 {
     [Inject]
     public ILogger<EditImages<TItem>> Logger { get; set; }
+
+    [Inject]
+    public NavigationManager NavigationManager { get; set; }
 
     [Inject]
     public ISnackbar Snackbar { get; set; }
@@ -19,6 +22,9 @@ public partial class EditImages<TItem> : ImagePage
 
     [Parameter]
     public string ExitNavigationPath { get; set; }
+
+    [Parameter]
+    public string ImageRootPath { get; set; }
 
     [Parameter]
     public List<ImageEditModel> Images { get; set; } = new();

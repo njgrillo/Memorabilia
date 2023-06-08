@@ -1,9 +1,13 @@
-﻿
+﻿namespace Memorabilia.Blazor.Pages.Admin;
 
-namespace Memorabilia.Blazor.Pages.Admin;
-
-public abstract class EditItem<TSaveViewModel, TViewModel> : ImagePage
+public abstract class EditItem<TSaveViewModel, TViewModel> : ComponentBase
 {
+    [Inject]
+    public CommandRouter CommandRouter { get; set; }
+
+    [Inject]
+    public QueryRouter QueryRouter { get; set; }
+
     [Parameter]
     public int Id { get; set; }
 

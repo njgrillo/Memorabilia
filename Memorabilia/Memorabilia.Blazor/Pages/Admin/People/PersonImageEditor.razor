@@ -1,7 +1,6 @@
 ﻿@inherits EditPersonItem<SavePersonImageViewModel, PersonImageViewModel>
 
 <EditPage ContinueNavigationPath="@ViewModel.ContinueNavigationPath"
-          DomainImageRootPath="@DomainImageRootPath"
           DisplaySaveContinueButton="false"
           EditMode="ViewModel.EditModeType"
           ExitNavigationPath="@ViewModel.ExitNavigationPath"
@@ -38,17 +37,16 @@
                 </DivRowCol3>
                 <DivRowCol3>
                     <Content>
-                        <PrettyBlazor.Condition Evaluation="_hasImage">
+                        <Condition Evaluation="_hasImage">
                             <Match>
                                 <ImageEditor CanRemove="true"
-                                             DomainImageRootPath="@DomainImageRootPath"
                                              HasPrimary="false"
                                              ImageFileName="@ViewModel.PersonImageFileName"
                                              ImageRootPath="@PersonImageRootPath"
                                              ImageType="ImageType.Primary"
                                              OnRemove="Remove" /> 
                             </Match>
-                        </PrettyBlazor.Condition>
+                        </Condition>
                     </Content>
                 </DivRowCol3>
             </Content>

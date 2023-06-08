@@ -25,9 +25,7 @@ public partial class ProjectPersonGrid
         var parameters = new Dictionary<string, object>
         {
             ["UserId"] = projectPerson.UserId,
-            ["PersonId"] = projectPerson.Person.Id,
-            ["DomainImageRootPath"] = ImagePath.DomainImageRootPath,
-            ["ImageRootPath"] = Path.Combine(ImagePath.MemorabiliaImageRootPath, projectPerson.UserId.ToString())
+            ["PersonId"] = projectPerson.Person.Id
         };
 
         SetProjectDetailsParameters(projectPerson, parameters);

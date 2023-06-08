@@ -1,8 +1,6 @@
-﻿
+﻿namespace Memorabilia.Blazor.Controls;
 
-namespace Memorabilia.Blazor.Controls;
-
-public partial class ImageEditor : ImagePage
+public partial class ImageEditor
 {
     [Parameter]
     public bool CanRemove { get; set; }
@@ -12,6 +10,9 @@ public partial class ImageEditor : ImagePage
 
     [Parameter]
     public string ImageFileName { get; set; }
+
+    [Parameter]
+    public string ImageRootPath { get; set; }
 
     [Parameter]
     public ImageType ImageType { get; set; }

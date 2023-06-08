@@ -1,7 +1,5 @@
 ﻿@typeparam TItem
 
-@inherits ImagePage
-
 <Page OnLoad="Load">
     <Content>
         <PageHeader PageTitle="@PageTitle" />
@@ -9,20 +7,18 @@
         @ImagePreview
         <PageBorder>
             <Content>
-                <PrettyBlazor.Condition Evaluation="@(ValidationResultAlerts.Any())">
+                <Condition Evaluation="@(ValidationResultAlerts.Any())">
                     <Match>
                         <AlertPanel Alerts="ValidationResultAlerts" />
                     </Match>
-                </PrettyBlazor.Condition>                
-                <PageImage DomainImageRootPath="@DomainImageRootPath" 
-                           ImageFileName="@ImageFileName"
-                           ImageRootPath="@ImageRootPath" />
+                </Condition>                
+                <PageImage ImageFileName="@ImageFileName" />
                 <EditForm Model="Model"
                           OnValidSubmit="HandleValidSubmit">
                     <DataAnnotationsValidator />
                     <ValidationSummary />
                     @Content
-                    <PrettyBlazor.Condition Evaluation="@UseMultipleButtons">
+                    <Condition Evaluation="@UseMultipleButtons">
                         <Match>
                             <DivLeftAlign>
                                 <Content>
@@ -41,15 +37,15 @@
                         <NotMatch>
                             <SaveButton Text="Save" />
                         </NotMatch>
-                    </PrettyBlazor.Condition>
+                    </Condition>
                 </EditForm>
             </Content>
         </PageBorder>
-        <PrettyBlazor.Condition Evaluation="@DisplayFooter">
+        <Condition Evaluation="@DisplayFooter">
             <Match>
                 <PageFooter NavigationPath="@PageFooterNavigationPath"
                             NavigationPathText="@PageFooterButtonText" />
             </Match>
-        </PrettyBlazor.Condition>
+        </Condition>
     </Content>
 </Page>

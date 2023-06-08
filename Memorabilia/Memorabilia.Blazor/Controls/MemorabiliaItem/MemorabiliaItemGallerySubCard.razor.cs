@@ -1,9 +1,10 @@
-﻿
+﻿namespace Memorabilia.Blazor.Controls.MemorabiliaItem;
 
-namespace Memorabilia.Blazor.Controls.MemorabiliaItem;
-
-public partial class MemorabiliaItemGallerySubCard : ImagePage
+public partial class MemorabiliaItemGallerySubCard
 {
+    [Inject]
+    public NavigationManager NavigationManager { get; set; }
+
     [Parameter]
     public string EditNavigationPath { get; set; }
 
@@ -18,6 +19,9 @@ public partial class MemorabiliaItemGallerySubCard : ImagePage
 
     [Parameter]
     public string TooltipText { get; set; }
+
+    [Parameter]
+    public int UserId { get; set; }
 
     protected void OnEditClick()
     {

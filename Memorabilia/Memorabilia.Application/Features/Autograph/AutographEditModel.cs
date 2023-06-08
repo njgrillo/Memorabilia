@@ -29,6 +29,7 @@ public class AutographEditModel : EditModel
         PurchaseTypeId = viewModel.Acquisition?.PurchaseTypeId ?? 0;
         ReceivedDate = viewModel.ReceivedDate;
         SentDate = viewModel.SentDate;
+        UserId = viewModel.UserId;
         WritingInstrumentId = viewModel.WritingInstrumentId;
     }
 
@@ -44,6 +45,7 @@ public class AutographEditModel : EditModel
         MemorabiliaPurchaseTypeId = viewModel.Acquisition.PurchaseTypeId;
         ItemType = Constant.ItemType.Find(viewModel.ItemTypeId);
         UserFirstName = viewModel.UserFirstName;
+        UserId = viewModel.UserId;
 
         Entity.Person person = viewModel.People.FirstOrDefault()?.Person;
 
@@ -193,6 +195,8 @@ public class AutographEditModel : EditModel
     public DateTime? SentDate { get; set; }
 
     public string UserFirstName { get; set; }
+
+    public int UserId { get; }
 
     public int WritingInstrumentId { get; set; }
 }

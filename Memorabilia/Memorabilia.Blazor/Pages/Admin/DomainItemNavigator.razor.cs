@@ -1,8 +1,6 @@
-﻿
+﻿namespace Memorabilia.Blazor.Pages.Admin;
 
-namespace Memorabilia.Blazor.Pages.Admin;
-
-public partial class DomainItemNavigator : ImagePage
+public partial class DomainItemNavigator
 {
     public string DomainItemQuickJump { get; set; }
     public AdminDomainItemsModel ViewModel = new ();

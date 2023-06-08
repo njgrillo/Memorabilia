@@ -1,6 +1,4 @@
-﻿@inherits ImagePage
-
-<Page OnLoad="OnLoad">
+﻿<Page OnLoad="OnLoad">
     <Content>
         <PageHeader PageTitle="@ViewModel.PageTitle" />
         <MemorabiliaItemTimeline EditMode="ViewModel.EditModeType" 
@@ -9,7 +7,6 @@
                                  MemorabiliaItemStep="ViewModel.MemorabiliaItemStep" />
         <EditImages @ref="EditImages"              
                     ContinueNavigationPath="@ViewModel.ContinueNavigationPath"
-                    DomainImageRootPath="@DomainImageRootPath"
                     ExitNavigationPath="@ViewModel.ExitNavigationPath"
                     Images="@ViewModel.Images"
                     MaximumAllowedFiles="10"
@@ -24,12 +21,12 @@
                     UploadPath="@UploadPath"
                     UserId="@UserId">
             <AdditionalButtons>
-                <PrettyBlazor.Condition Evaluation="@ViewModel.HasAutographs">
+                <Condition Evaluation="@ViewModel.HasAutographs">
                     <Match>
                         <SaveButton OnClick="SaveAndEditAutograph"
                                     Text="Save & Edit Autograph" />
                     </Match>
-                </PrettyBlazor.Condition>
+                </Condition>
                 <SaveButton OnClick="SaveAndAddAutograph"
                             Text="Save & Add Autograph" />
                 <SaveButton OnClick="SaveAndAddItem"

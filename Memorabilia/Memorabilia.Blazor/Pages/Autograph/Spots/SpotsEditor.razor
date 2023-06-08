@@ -1,7 +1,6 @@
 ﻿@inherits AutographItem<SpotEditModel>
 
 <EditPage ContinueNavigationPath="@ViewModel.ContinueNavigationPath"
-          DomainImageRootPath="@DomainImageRootPath"
           EditMode="ViewModel.EditModeType"
           ExitNavigationPath="@ViewModel.ExitNavigationPath"
           ImageFileName="@ViewModel.ImageFileName"
@@ -24,10 +23,9 @@
     <ImagePreview>
         <PrettyBlazor.Condition Evaluation="ViewModel.HasMemorabiliaImages">
             <Match>
-                <ImagePanel DomainImageRootPath="@DomainImageRootPath"
-                            ImageNames="@ViewModel.MemorabiliaImageNames"
-                            ImageRootPath="@UploadPath"
-                            PanelText="Memorabilia Images" />
+                <ImagePanel ImageNames="@ViewModel.MemorabiliaImageNames"
+                            PanelText="Memorabilia Images"
+                            UserId="ViewModel.UserId" />
             </Match>
         </PrettyBlazor.Condition>
     </ImagePreview>

@@ -1,14 +1,11 @@
-﻿@inherits ImagePage
-
-<Page>
+﻿<Page>
     <Content>
-        <PageHeader PageTitle="@_viewModel.PageTitle" /> 
+        <PageHeader PageTitle="@Model.PageTitle" /> 
         <DivPad2>
             <Content>
                 <DivRowCol4>
                     <Content>
-                        <DomainItemCard DomainImageRootPath="@DomainImageRootPath" 
-                                        ImageFileName="@_viewModel.DashboardImageFileName"
+                        <DomainItemCard ImageFileName="@Model.DashboardImageFileName"
                                         Page="User/ManageDashboard" 
                                         Title="Manage Dashboard" />
                     </Content>

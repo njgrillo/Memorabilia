@@ -1,7 +1,5 @@
 ﻿@typeparam TItem
 
-@inherits ImagePage
-
 <div style="border: 1px solid black; margin-top: 2%; margin-bottom: 2%; margin-left: 2%; margin-right: 2%;">
     <EditForm Model="Model">
         <DivPad2>
@@ -12,7 +10,7 @@
                                   Elevation="5" 
                                   Height="150"                                  
                                   ObjectFit="@ObjectFit.Cover"
-                                  Src="@(GetDomainImageData(Domain.Constants.ImageFileName.Images))"
+                                  Src="@(ImageService.GetDomainImageData(Constant.ImageFileName.Images))"
                                   Width="150" />
                     </Content>
                 </DivRowCol12Center>
@@ -29,18 +27,18 @@
                                 for="fileInput" />
                     </div>
                     <div style="padding-left:15px;">
-                        <PrettyBlazor.Condition Evaluation="CanImportImages">
+                        <Condition Evaluation="CanImportImages">
                             <Match>
                                 <MudFab Color="MudBlazor.Color.Secondary"
                                         Icon="@Icons.Material.Filled.Image"
                                         Label="@ImportButtonText"
                                         OnClick="Import" />
                             </Match>
-                        </PrettyBlazor.Condition>
+                        </Condition>
                     </div>                    
                 </div>
                 <div class="row">
-                    <PrettyBlazor.Condition Evaluation="_files != null">
+                    <Condition Evaluation="_files != null">
                         <Match>
                             <MudText Typo="@Typo.h6">@_files?.Count() File@(_files?.Count() == 1 ? "" : "s"):</MudText>
                             <MudList>
@@ -51,14 +49,13 @@
                                 </Iterations>
                             </MudList>
                         </Match>
-                    </PrettyBlazor.Condition>
+                    </Condition>
                 </div>
                 <br />
                 <div class="row">
                     <Iterations Items="Images" Context="image">
                         <div class="col-lg-3">
                             <ImageEditor CanRemove="true"
-                                         DomainImageRootPath="@DomainImageRootPath"
                                          HasPrimary="true"
                                          ImageFileName="@image.FileName"
                                          ImageRootPath="@UploadPath"

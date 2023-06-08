@@ -56,9 +56,7 @@ public partial class AddProjectPersonDialog
         {
             ["UserId"] = UserId,
             ["ItemTypeId"] = ItemTypeId,
-            ["PersonId"] = projectPerson.Person.Id,
-            ["DomainImageRootPath"] = ImagePath.DomainImageRootPath,
-            ["ImageRootPath"] = Path.Combine(ImagePath.MemorabiliaImageRootPath, UserId.ToString())
+            ["PersonId"] = projectPerson.Person.Id
         };
 
         SetProjectDetailsParameters(parameters);

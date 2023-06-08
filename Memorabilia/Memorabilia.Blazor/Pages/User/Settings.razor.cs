@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Blazor.Pages.User;
 
-public partial class Settings : ImagePage
+public partial class Settings
 {
-    private readonly UserSettingsViewModel _viewModel = new();
+    protected UserSettingsViewModel Model = new();
 }

@@ -1,6 +1,7 @@
 ﻿namespace Memorabilia.Blazor.Pages.Autograph;
 
-public partial class AutographEditor : AutographItem<AutographEditModel>
+public partial class AutographEditor 
+    : AutographItem<AutographEditModel>
 {
     [Inject]
     public AutographValidator Validator { get; set; }

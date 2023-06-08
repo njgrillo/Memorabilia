@@ -19,6 +19,7 @@ public partial class InscriptionsEditor : AutographItem<InscriptionEditModel>
 
         _InscriptionsModel = new InscriptionsEditModel(autograph.Inscriptions, 
                                                        autograph.ItemTypeId, 
+                                                       autograph.UserId,
                                                        autograph.MemorabiliaId,
                                                        autograph.Id,
                                                        autograph.MemorabiliaImageNames,

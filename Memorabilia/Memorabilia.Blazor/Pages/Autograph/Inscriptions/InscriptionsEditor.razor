@@ -1,7 +1,6 @@
 ﻿@inherits AutographItem<InscriptionEditModel>
 
 <EditPage ContinueNavigationPath="@_InscriptionsModel.ContinueNavigationPath"
-          DomainImageRootPath="@DomainImageRootPath"
           EditMode="_InscriptionsModel.EditModeType"
           ExitNavigationPath="@_InscriptionsModel.ExitNavigationPath"
           ImageFileName="@_InscriptionsModel.ImageFileName"
@@ -25,10 +24,9 @@
     <ImagePreview>
         <PrettyBlazor.Condition Evaluation="_InscriptionsModel.HasMemorabiliaImages">
             <Match>
-                <ImagePanel DomainImageRootPath="@DomainImageRootPath"
-                            ImageNames="@_InscriptionsModel.MemorabiliaImageNames"
-                            ImageRootPath="@UploadPath"
-                            PanelText="Memorabilia Images" />
+                <ImagePanel ImageNames="@_InscriptionsModel.MemorabiliaImageNames"
+                            PanelText="Memorabilia Images"
+                            UserId="_InscriptionsModel.UserId" />
             </Match>
         </PrettyBlazor.Condition>
     </ImagePreview>

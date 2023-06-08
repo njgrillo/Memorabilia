@@ -1,7 +1,6 @@
 ﻿@inherits AutographItem<AutographEditModel>
 
 <EditPage ContinueNavigationPath="@ViewModel.ContinueNavigationPath"
-          DomainImageRootPath="@DomainImageRootPath"
           EditMode="ViewModel.EditModeType"
           ExitNavigationPath="@ViewModel.ExitNavigationPath"
           ImageFileName="@ViewModel.ImageFileName"
@@ -24,14 +23,13 @@
                            MemorabiliaId="ViewModel.MemorabiliaId" />
     </TimelineContent>
     <ImagePreview>
-        <PrettyBlazor.Condition Evaluation="ViewModel.HasMemorabiliaImages">
+        <Condition Evaluation="ViewModel.HasMemorabiliaImages">
             <Match>
-                <ImagePanel DomainImageRootPath="@DomainImageRootPath"
-                            ImageNames="@ViewModel.MemorabiliaImageNames"
-                            ImageRootPath="@UploadPath"
-                            PanelText="Memorabilia Images" />
+                <ImagePanel ImageNames="@ViewModel.MemorabiliaImageNames"
+                            PanelText="Memorabilia Images"
+                            UserId="ViewModel.UserId" />
             </Match>
-        </PrettyBlazor.Condition>        
+        </Condition>        
     </ImagePreview>
     <Content>        
         <DivRowCol6>
@@ -44,7 +42,7 @@
                                       Elevation="5"
                                       Height="20"
                                       ObjectFit="@ObjectFit.Cover"
-                                      Src="@(GetDomainImageData(ImageFileName.Import))"
+                                      Src="@(ImageService.GetDomainImageData(ImageFileName.Import))"
                                       Width="20" />
                         </MudTooltip>
                     </Match>
@@ -81,7 +79,7 @@
                            SelectedTextChanged="@((p) => ViewModel.Note = p)" />
             </Content>
         </DivRowCol6>
-        <PrettyBlazor.Condition Evaluation="ViewModel.DisplayAcquisitionDetails">
+        <Condition Evaluation="ViewModel.DisplayAcquisitionDetails">
             <Match>
                 <DivRowCol3 HideColumn2="@(!_displayAcquisitionDetails)"
                             HideColumn3="@(!_displayAcquisitionDetails || !ViewModel.CanHaveCost)"
@@ -97,7 +95,7 @@
                                           Elevation="5"
                                           Height="20"
                                           ObjectFit="@ObjectFit.Cover"
-                                          Src="@(GetDomainImageData(ImageFileName.Import))"
+                                          Src="@(ImageService.GetDomainImageData(ImageFileName.Import))"
                                           Width="20" />
                             </MudTooltip>                            
                         </div>                        
@@ -117,7 +115,7 @@
                                               SelectionChanged="(p) => ViewModel.PurchaseTypeId = p" />
                     </ContentColumn4>
                 </DivRowCol3>
-                <PrettyBlazor.Condition Evaluation="ViewModel.DisplayThroughTheMailDetails">
+                <Condition Evaluation="ViewModel.DisplayThroughTheMailDetails">
                     <Match>
                         <DivRowCol3>
                             <Content>
@@ -132,7 +130,7 @@
                             </ContentColumn2>
                         </DivRowCol3>
                     </Match>
-                </PrettyBlazor.Condition>  
+                </Condition>  
                 <DivRowCol3>
                     <Content>
                         <div style="display:flex">
@@ -145,14 +143,14 @@
                                           Elevation="5"
                                           Height="20"
                                           ObjectFit="@ObjectFit.Cover"
-                                          Src="@(GetDomainImageData(ImageFileName.Import))"
+                                          Src="@(ImageService.GetDomainImageData(ImageFileName.Import))"
                                           Width="20" />
                             </MudTooltip>
                         </div>
                     </Content>
                 </DivRowCol3>
             </Match>
-        </PrettyBlazor.Condition>
+        </Condition>
         <DivRowCol3>
             <Content>
                 <MudSwitch Checked="@ViewModel.FullName"
@@ -171,7 +169,7 @@
                            T="bool" />
             </Content>
         </DivRowCol3>
-        <PrettyBlazor.Condition Evaluation="ViewModel.IsPersonalized">
+        <Condition Evaluation="ViewModel.IsPersonalized">
             <Match>
                 <DivRowCol3>
                     <Content>
@@ -182,7 +180,7 @@
                     </Content>
                 </DivRowCol3>
             </Match>
-        </PrettyBlazor.Condition>        
+        </Condition>        
         <DivRowCol3>
             <Content>
                 <MudSwitch Checked="@ViewModel.IsNumbered"
@@ -192,7 +190,7 @@
                            T="bool" />
             </Content>
         </DivRowCol3>
-        <PrettyBlazor.Condition Evaluation="ViewModel.IsNumbered">
+        <Condition Evaluation="ViewModel.IsNumbered">
             <Match>
                 <DivRowCol3>
                     <Content>
@@ -213,6 +211,6 @@
                     </Content>
                 </DivRowCol3>
             </Match>
-        </PrettyBlazor.Condition>        
+        </Condition>        
     </Content>
 </EditPage>

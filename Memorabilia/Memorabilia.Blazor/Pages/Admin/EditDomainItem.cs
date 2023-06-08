@@ -1,10 +1,8 @@
 ﻿namespace Memorabilia.Blazor.Pages.Admin;
 
-public abstract class EditDomainItem<T> : CommandQuery where T : DomainItemConstant
+public abstract class EditDomainItem<T> 
+    : CommandQuery where T : DomainItemConstant
 {
-    [Parameter]
-    public string DomainImageRootPath { get; set; }
-
     [Parameter]
     public int Id { get; set; }
 

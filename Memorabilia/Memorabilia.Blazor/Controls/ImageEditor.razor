@@ -1,8 +1,6 @@
-﻿@inherits ImagePage
-
-<MudCard>
+﻿<MudCard>
     <MudCardMedia Height="300" 
-                  Image="@(GetImageData(ImageFileName))" />
+                  Image="@(ImageService.GetImageData(ImageRootPath, ImageFileName))" />
     <MudCardContent>
         <MudText Typo="Typo.h5">@ImageType.Name</MudText>
     </MudCardContent>

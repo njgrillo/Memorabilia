@@ -24,4 +24,6 @@ public class SpotModel
                      .ToArray();   
 
     public int SpotId => _autograph?.Spot?.SpotId ?? 0;
+
+    public int UserId => _autograph?.Memorabilia?.UserId ?? 0;
 }

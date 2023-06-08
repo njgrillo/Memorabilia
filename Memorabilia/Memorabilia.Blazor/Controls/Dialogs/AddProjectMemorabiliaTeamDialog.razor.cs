@@ -56,9 +56,7 @@ public partial class AddProjectMemorabiliaTeamDialog
         {
             ["UserId"] = UserId,
             ["ItemTypeId"] = ItemTypeId,
-            ["TeamId"] = projectMemorabiliaTeam.Team.Id,
-            ["DomainImageRootPath"] = ImagePath.DomainImageRootPath,
-            ["ImageRootPath"] = Path.Combine(ImagePath.MemorabiliaImageRootPath, UserId.ToString())
+            ["TeamId"] = projectMemorabiliaTeam.Team.Id
         };
 
         SetProjectDetailsParameters(parameters);

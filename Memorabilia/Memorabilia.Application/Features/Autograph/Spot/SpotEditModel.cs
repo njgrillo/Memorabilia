@@ -11,6 +11,7 @@ public class SpotEditModel : EditModel
         MemorabiliaId = viewModel.MemorabiliaId;
         MemorabiliaImageNames = viewModel.MemorabiliaImageNames;
         SpotId = viewModel.SpotId;
+        UserId = viewModel.UserId;
     }
 
     public int AutographId { get; set; }
@@ -52,4 +53,6 @@ public class SpotEditModel : EditModel
         => $"{(EditModeType == Constant.EditModeType.Add ? Constant.EditModeType.Add.Name : Constant.EditModeType.Update.Name)} Spot";
 
     public int SpotId { get; set; }
+
+    public int UserId { get; }
 }

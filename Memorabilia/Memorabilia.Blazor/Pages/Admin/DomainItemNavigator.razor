@@ -1,6 +1,4 @@
-﻿@inherits ImagePage
-
-<div class="row">
+﻿<div class="row">
     <div class="col-md-4">
         <DivPad5>
             <Content>
@@ -33,7 +31,6 @@
     <Iterations Items="ViewModel.Items" Context="item">
         <div class="col-md-4">
             <DomainItemCard Description="@item.Description"
-                            DomainImageRootPath="@DomainImageRootPath"
                             ImageFileName="@item.ImageFileName"
                             Page="@item.Page"
                             Title="@item.Title" />

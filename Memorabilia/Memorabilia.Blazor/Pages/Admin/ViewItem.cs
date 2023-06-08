@@ -1,8 +1,6 @@
-﻿
+﻿namespace Memorabilia.Blazor.Pages.Admin;
 
-namespace Memorabilia.Blazor.Pages.Admin;
-
-public abstract class ViewItem<TViewModel, TItemViewModel> : ImagePage
+public abstract class ViewItem<TViewModel, TItemViewModel> : CommandQuery
 {
     [Inject]
     public IDialogService DialogService { get; set; }

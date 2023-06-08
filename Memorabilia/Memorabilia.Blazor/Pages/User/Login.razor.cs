@@ -1,9 +1,10 @@
-﻿
+﻿namespace Memorabilia.Blazor.Pages.User;
 
-namespace Memorabilia.Blazor.Pages.User;
+public partial class Login
+{
+    [Inject]
+    public QueryRouter QueryRouter { get; set; }
 
-public partial class Login : ImagePage
-{   
     [Parameter]
     public EventCallback<int> UserValidated { get; set; }
 

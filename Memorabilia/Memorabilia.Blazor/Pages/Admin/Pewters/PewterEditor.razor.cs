@@ -1,14 +1,10 @@
-﻿
+﻿namespace Memorabilia.Blazor.Pages.Admin.Pewters;
 
-namespace Memorabilia.Blazor.Pages.Admin.Pewters;
-
-public partial class PewterEditor : EditItem<SavePewterViewModel, PewterViewModel>
+public partial class PewterEditor 
+    : EditItem<SavePewterViewModel, PewterViewModel>
 {
     [Inject]
     public ILogger<PewterEditor> Logger { get; set; }
-
-    [Parameter]
-    public string PewterImageRootPath { get; set; }
 
     private bool _hasImage;
 
@@ -33,11 +29,11 @@ public partial class PewterEditor : EditItem<SavePewterViewModel, PewterViewMode
 
         try
         {
-            if (!Directory.Exists(PewterImageRootPath))
-                Directory.CreateDirectory(PewterImageRootPath);
+            if (!Directory.Exists(ImagePath.PewterImageRootPath))
+                Directory.CreateDirectory(ImagePath.PewterImageRootPath);
 
             var fileName = Path.GetRandomFileName();
-            var path = Path.Combine(PewterImageRootPath, fileName);
+            var path = Path.Combine(ImagePath.PewterImageRootPath, fileName);
 
             await using FileStream fs = new(path, FileMode.Create);
             await file.OpenReadStream(5120000).CopyToAsync(fs);

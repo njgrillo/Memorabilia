@@ -15,13 +15,9 @@ public abstract class WebPage : ComponentBase
 
     public int UserId { get; set; }
 
-    protected string DomainImageRootPath => Configuration["DomainImageRootPath"];
-
     protected string MemorabiliaImageRootPath => Configuration["MemorabiliaImageRootPath"];
 
     protected string PersonImageRootPath => Configuration["PersonImageRootPath"];
-
-    protected string PewterImageRootPath => Configuration["PewterImageRootPath"];
 
     protected async Task DeleteUserId()
     {

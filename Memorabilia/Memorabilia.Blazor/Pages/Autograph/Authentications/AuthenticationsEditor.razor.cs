@@ -19,6 +19,7 @@ public partial class AuthenticationsEditor : AutographItem<AuthenticationEditMod
 
         AuthenticationsViewModel = new AuthenticationsEditModel(autograph.Authentications, 
                                                                 autograph.ItemType, 
+                                                                autograph.UserId,
                                                                 autograph.MemorabiliaId,
                                                                 autograph.Id,
                                                                 autograph.MemorabiliaImageNames);

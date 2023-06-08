@@ -6,6 +6,7 @@ public class InscriptionsEditModel : EditModel
 
     public InscriptionsEditModel(IEnumerable<Entity.Inscription> inscriptions, 
                                  int itemTypeId, 
+                                 int userId,
                                  int memorabiliaId,
                                  int autographId,
                                  string[] memorabiliaImageNames,
@@ -14,6 +15,7 @@ public class InscriptionsEditModel : EditModel
         Inscriptions = inscriptions.Select(inscription => new InscriptionEditModel(new InscriptionModel(inscription)))
                                    .ToList();
         ItemType = Constant.ItemType.Find(itemTypeId);
+        UserId = userId;
         MemorabiliaId = memorabiliaId;
         AutographId = autographId;
         MemorabiliaImageNames = memorabiliaImageNames;
@@ -58,4 +60,6 @@ public class InscriptionsEditModel : EditModel
         => $"{(EditModeType == Constant.EditModeType.Add ? Constant.EditModeType.Add.Name : Constant.EditModeType.Update.Name)} Inscription(s)";
 
     public int PersonId { get; }
+
+    public int UserId { get; }
 }
