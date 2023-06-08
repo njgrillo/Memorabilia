@@ -20,9 +20,7 @@ public partial class AccomplishmentsProfile : PersonProfile
         => FilterFunc(viewModel, _search);
 
     private static bool FilterFunc(AccomplishmentProfileModel viewModel, string search)
-    {
-        return search.IsNullOrEmpty() ||
-               viewModel.AccomplishmentTypeName.Contains(search, StringComparison.OrdinalIgnoreCase) ||
-               viewModel.AccomplishmentTypeAbbreviation.Contains(search, StringComparison.OrdinalIgnoreCase);
-    }    
+        => search.IsNullOrEmpty() ||
+           viewModel.AccomplishmentTypeName.Contains(search, StringComparison.OrdinalIgnoreCase) ||
+           viewModel.AccomplishmentTypeAbbreviation.Contains(search, StringComparison.OrdinalIgnoreCase);
 }

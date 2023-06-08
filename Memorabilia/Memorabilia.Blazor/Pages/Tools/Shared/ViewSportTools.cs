@@ -1,10 +1,13 @@
 ﻿namespace Memorabilia.Blazor.Pages.Tools.Shared;
 
 public abstract class ViewSportTools<T> 
-    : ImagePage where T : SportToolModel, IWithName
+    : ComponentBase where T : SportToolModel, IWithName
 {
     [Inject]
     public IDialogService DialogService { get; set; }
+
+    [Inject]
+    public QueryRouter QueryRouter { get; set; }
 
     [Parameter]
     public Sport Sport { get; set; }
