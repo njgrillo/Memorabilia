@@ -1,6 +1,7 @@
 ﻿namespace Memorabilia.Blazor.Pages.Tools.Shared;
 
-public partial class ViewHallOfFamers : ViewSportTools<HallOfFameModel>
+public partial class ViewHallOfFamers 
+    : ViewSportTools<HallOfFameModel>
 {
     [Parameter]
     public bool DisplayBallot { get; set; }
@@ -11,15 +12,15 @@ public partial class ViewHallOfFamers : ViewSportTools<HallOfFameModel>
     [Parameter]
     public SportLeagueLevel SportLeagueLevel { get; set; }
 
-    private HallOfFamesModel _viewModel = new();
+    protected HallOfFamesModel Model = new();
 
     protected override async Task OnInitializedAsync()
     {
-        _viewModel = await QueryRouter.Send(new GetHallOfFames(SportLeagueLevel));
+        Model = await QueryRouter.Send(new GetHallOfFames(SportLeagueLevel));
     }
 
     private async Task OnInputChange(int inductionYear)
     {
-        _viewModel = await QueryRouter.Send(new GetHallOfFames(SportLeagueLevel, inductionYear > 0 ? inductionYear : null));
+        Model = await QueryRouter.Send(new GetHallOfFames(SportLeagueLevel, inductionYear > 0 ? inductionYear : null));
     }
 }

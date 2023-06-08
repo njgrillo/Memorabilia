@@ -2,13 +2,13 @@
 
 <DivPad2>
     <Content>
-        <DivRowCol6>
-            <Content>
+        <div class="row">
+            <div class="col-12">
                 <MudTable Bordered="false"
                           Dense="false"
                           Filter="new Func<ChampionModel,bool>(FilterFunc1)"
                           Hover="true"
-                          Items="@_viewModel.Champions.ToList()"
+                          Items="@Model.Champions.ToList()"
                           Striped="true">
                     <ToolBarContent>
                         <MudText Typo="Typo.h6">@ChampionType.Name</MudText>
@@ -21,9 +21,15 @@
                                       Placeholder="Search" />
                     </ToolBarContent>
                     <HeaderContent>
-                        <MudTh>Team</MudTh>
-                        <MudTh>Franchise</MudTh>
-                        <MudTh>Year</MudTh>
+                        <MudTh>
+                            <MudTableSortLabel SortBy="new Func<ChampionModel, object>(x => x.TeamName)">Team</MudTableSortLabel>
+                        </MudTh>
+                        <MudTh>
+                            <MudTableSortLabel SortBy="new Func<ChampionModel, object>(x => x.Franchise)">Franchise</MudTableSortLabel>
+                        </MudTh>
+                        <MudTh>
+                            <MudTableSortLabel SortBy="new Func<ChampionModel, object>(x => x.Year)">Year</MudTableSortLabel>
+                        </MudTh>
                     </HeaderContent>
                     <RowTemplate>
                         <MudTd DataLabel="Team">@context.TeamName</MudTd>
@@ -34,7 +40,7 @@
                         <MudTablePager />
                     </PagerContent>
                 </MudTable>
-            </Content>
-        </DivRowCol6>
+            </div>
+        </div>
     </Content>
 </DivPad2>

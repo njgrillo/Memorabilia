@@ -1,11 +1,51 @@
 ﻿namespace Memorabilia.Blazor.Pages.Tools.Shared;
 
-public partial class ViewLeaders : ViewSportTools<LeaderModel>
+public partial class ViewLeaders 
+    : ViewSportTools<LeaderModel>
 {
-    private LeadersModel _viewModel = new();
+    protected LeadersModel Model = new();
+
+    protected async Task Browse()
+    {
+        var parameters = new DialogParameters
+        {
+            ["DomainItems"] = LeaderType.GetAll(Sport),
+            ["Title"] = $"{Sport.Name} Leader Types"
+        };
+
+        var options = new DialogOptions()
+        {
+            MaxWidth = MaxWidth.Large,
+            FullWidth = true,
+            DisableBackdropClick = true
+        };
+
+        var dialog = DialogService.Show<DomainItemBrowseDialog>(string.Empty, parameters, options);
+        var result = await dialog.Result;
+
+        if (result.Canceled)
+            return;
+
+        _ = int.TryParse(result.Data.ToString(), out int id);
+
+        if (id == 0)
+            return;
+
+        var leaderType = LeaderType.Find(id);
+
+        await Load(leaderType);
+    }
+
+    private async Task Load(LeaderType leaderType)
+    {
+        if (leaderType == null)
+            return;
+
+        Model = await QueryRouter.Send(new GetLeaders(leaderType, Sport));
+    }
 
     private async Task OnInputChange(LeaderType leaderType)
     {
-        _viewModel = await QueryRouter.Send(new GetLeaders(leaderType, Sport));
+        Model = await QueryRouter.Send(new GetLeaders(leaderType, Sport));
     }
 }

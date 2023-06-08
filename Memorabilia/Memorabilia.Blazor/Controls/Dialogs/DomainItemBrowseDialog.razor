@@ -1,24 +1,30 @@
-﻿<MudDialog Class="mud-dialog-width-lg" 
-           Style="max-height:80vh;">
+﻿<MudDialog Style="max-height:85vh;">
     <DialogContent>
-        <div style="text-align:right;">
-            <MudIconButton Icon="@Icons.Material.Filled.Close"
-                           OnClick="Cancel" />
-        </div>
-        <div style="margin-top:2%;margin-bottom:2%;margin-left:2%;margin-right:2%;overflow-y:auto;">
+        <div style="margin-top:1%;margin-bottom:1%;margin-left:1%;margin-right:1%;overflow-y:auto;">
             <MudTable Bordered="false"
                       Dense="false"
+                      Filter="new Func<DomainItemConstant,bool>(FilterFunc1)"
                       Height="400px"
                       Hover="true"
                       Items="@DomainItems"
-                      Striped="true">
+                      Striped="true">   
                 <ToolBarContent>
                     <MudText Typo="Typo.h6">@Title</MudText>
                     <MudSpacer />
+                    <MudTextField @bind-Value="_search"
+                                  Adornment="Adornment.Start"
+                                  AdornmentIcon="@Icons.Material.Filled.Search"
+                                  Class="mt-0"
+                                  IconSize="MudBlazor.Size.Medium"
+                                  Placeholder="Search" />
                 </ToolBarContent>
                 <HeaderContent>
-                    <MudTh>Name</MudTh>
-                    <MudTh>Abbreviation</MudTh>
+                    <MudTh>
+                        <MudTableSortLabel SortBy="new Func<DomainItemConstant, object>(x => x.Name)">Name</MudTableSortLabel>
+                    </MudTh>
+                    <MudTh>
+                        <MudTableSortLabel SortBy="new Func<DomainItemConstant, object>(x => x.Abbreviation)">Abbreviation</MudTableSortLabel>
+                    </MudTh>
                     <MudTh></MudTh>
                 </HeaderContent>
                 <RowTemplate Context="item">

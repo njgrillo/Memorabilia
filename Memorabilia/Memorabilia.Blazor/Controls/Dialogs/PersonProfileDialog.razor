@@ -1,20 +1,13 @@
-﻿<MudDialog Class="mud-dialog-width-lg" 
-           Style="max-height:80vh;">
+﻿<MudDialog Style="max-height:90vh;">
     <DialogContent>
         <div style="text-align:right;">
             <MudIconButton Icon="@Icons.Material.Filled.Close"
-                           OnClick="Cancel" />
+                           OnClick="Close" />
         </div>
-        <div style="margin-top:1%;margin-bottom:1%;margin-left:2%;margin-right:2%;overflow-y:auto;">
+        <div style="margin-top:1%;margin-bottom:1%;margin-left:1%;margin-right:1%;overflow-y:auto;">
             <PersonProfileMain DomainImageRootPath="@ImagePath.DomainImageRootPath"
                                ImageRootPath="@ImagePath.PersonImageRootPath"
                                PersonId="@PersonId" />
         </div>
     </DialogContent>
-    <DialogActions>
-        <CustomButton ButtonType="ButtonType.Button" 
-                      Color="MudBlazor.Color.Secondary"
-                      OnClick="Cancel" 
-                      Text="Close" />
-    </DialogActions>
 </MudDialog>

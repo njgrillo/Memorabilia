@@ -2,17 +2,18 @@
 
 <DivPad2>
     <Content>
-        <DivRowCol3>
-            <Content>
+        <div class="row">
+            <div class="col-3">
                 <YearDropDown MinYear="@BeginYear"
-                              SelectedValue="_viewModel.Year"
+                              SelectedValue="Model.Year"
                               SelectionChanged="(p) => OnInputChange(p)" />
-            </Content>
-        </DivRowCol3>
-        <PrettyBlazor.Condition Evaluation="_viewModel.IsDoubleHeaderAllStarGame">
+            </div>
+        </div>
+        <br />
+        <Condition Evaluation="Model.IsDoubleHeaderAllStarGame">
             <Match>
-                <DivRowCol12>
-                    <Content>
+                <div class="row">
+                    <div class="col-12">
                         <p>
                             Between 1959 and 1962, the Baseball All Star Exhibition consisted of 2 All Star Games featured as a doubleheader.
                         </p>
@@ -20,48 +21,107 @@
                             As a result, players could potentially be credited with 2 All Star Games per year during this period.
                         </p>
                         <br />
-                    </Content>
-                </DivRowCol12>
+                    </div>
+                </div>
+                <br />
             </Match>
-        </PrettyBlazor.Condition>    
-        <PrettyBlazor.Condition Evaluation="_viewModel.DisplayCanceledMessage">
+        </Condition>    
+        <Condition Evaluation="Model.DisplayCanceledMessage">
             <Match>
-                <DivRowCol12>
-                    <Content>
+                <div class="row">
+                    <div class="col-12">
                         <p>
-                            @_viewModel.CanceledMessage
+                            @Model.CanceledMessage
                         </p>
                         <br />
-                    </Content>
-                </DivRowCol12>
+                    </div>
+                </div>
+                <br />
             </Match>
-        </PrettyBlazor.Condition>
-        <PrettyBlazor.Condition Evaluation="_viewModel.DisplayNoProBowlMessage">
+        </Condition>
+        <Condition Evaluation="Model.DisplayNoProBowlMessage">
             <Match>
-                <DivRowCol12>
-                    <Content>
+                <div class="row">
+                    <div class="col-12">
                         <p>
                             There was no NFL All-Star Game/Pro Bowl played from 1943-1950.
                         </p>
                         <br />
-                    </Content>
-                </DivRowCol12>
+                    </div>
+                </div>
+                <br />
             </Match>
-        </PrettyBlazor.Condition>
-        <DivRowCol12 Hidden="@(_viewModel.Year == 0)">
-            <Content>
-                <div class="row">
+        </Condition>
+        <div class="row" hidden="@(Model.Year == 0)">
+            <div class="@(Model.DisplayABAAllStars || Model.DisplayAFLProBowlers ? "col-6" : "col-12")">
+                <MudTable Bordered="false"
+                          Dense="false"
+                          Filter="new Func<AllStarModel,bool>(FilterFunc1)"
+                          Hover="true"
+                          Items="@Model.AllStars.ToList()"
+                          Striped="true">
+                    <ToolBarContent>
+                        <MudText Typo="Typo.h6">@Model.MainGridTitle</MudText>
+                        <MudSpacer />
+                        <MudTextField @bind-Value="Search"
+                                      Adornment="Adornment.Start"
+                                      AdornmentIcon="@Icons.Material.Filled.Search"
+                                      Class="mt-0"
+                                      IconSize="MudBlazor.Size.Medium"
+                                      Placeholder="Search" />
+                    </ToolBarContent>
+                    <HeaderContent>
+                        <MudTh></MudTh>
+                        <MudTh>
+                            <MudTableSortLabel SortBy="new Func<AllStarModel, object>(x => x.PersonName)">Person</MudTableSortLabel>
+                        </MudTh>
+                        <MudTh>Year</MudTh>
+                        <Condition Evaluation="Model.IsDoubleHeaderAllStarGame">
+                            <Match>
+                                <MudTh>Number of Games</MudTh>
+                            </Match>
+                        </Condition>
+                    </HeaderContent>
+                    <RowTemplate>
+                        <MudTd DataLabel="">
+                            <MudTooltip>
+                                <MudImage @onclick="@(_ => ShowPersonProfileDialog(context.PersonId))"
+                                          Class="rounded-lg can-click"
+                                          Elevation="5"
+                                          Height="200"
+                                          ObjectFit="@ObjectFit.Cover"
+                                          Src="@(ImageService.GetPersonImageData(context.PersonImageFileName))"
+                                          Width="200" />
+                            </MudTooltip>
+                        </MudTd>
+                        <MudTd DataLabel="Person">
+                            <MudLink Href="@context.ProfileLink">@context.PersonName</MudLink>
+                        </MudTd>
+                        <MudTd DataLabel="Year">@context.Year</MudTd>
+                        <Condition Evaluation="Model.IsDoubleHeaderAllStarGame">
+                            <Match>
+                                <MudTd DataLabel="Number of Games">@context.NumberOfGames</MudTd>
+                            </Match>
+                        </Condition>
+                    </RowTemplate>
+                    <PagerContent>
+                        <MudTablePager />
+                    </PagerContent>
+                </MudTable>
+            </div>
+            <Condition Evaluation="Model.DisplayABAAllStars">
+                <Match>
                     <div class="col-6">
                         <MudTable Bordered="false"
                                   Dense="false"
-                                  Filter="new Func<AllStarModel,bool>(FilterFunc1)"
+                                  Filter="new Func<AllStarModel,bool>(FilterFuncSecondaryGrid)"
                                   Hover="true"
-                                  Items="@_viewModel.AllStars.ToList()"
+                                  Items="@Model.SecondaryAllStars.ToList()"
                                   Striped="true">
                             <ToolBarContent>
-                                <MudText Typo="Typo.h6">@_viewModel.MainGridTitle</MudText>
+                                <MudText Typo="Typo.h6">@Model.SecondaryGridTitle</MudText>
                                 <MudSpacer />
-                                <MudTextField @bind-Value="Search"
+                                <MudTextField @bind-Value="_secondarySearch"
                                               Adornment="Adornment.Start"
                                               AdornmentIcon="@Icons.Material.Filled.Search"
                                               Class="mt-0"
@@ -70,23 +130,20 @@
                             </ToolBarContent>
                             <HeaderContent>
                                 <MudTh></MudTh>
-                                <MudTh>Person</MudTh>
+                                <MudTh>
+                                    <MudTableSortLabel SortBy="new Func<AllStarModel, object>(x => x.PersonName)">Person</MudTableSortLabel>
+                                </MudTh>
                                 <MudTh>Year</MudTh>
-                                <PrettyBlazor.Condition Evaluation="_viewModel.IsDoubleHeaderAllStarGame">
-                                    <Match>
-                                        <MudTh>Number of Games</MudTh>
-                                    </Match>
-                                </PrettyBlazor.Condition>
                             </HeaderContent>
                             <RowTemplate>
                                 <MudTd DataLabel="">
                                     <MudTooltip>
-                                        <MudImage @onclick="@(_ => NavigationManager.NavigateTo(context.ProfileLink))"
+                                        <MudImage @onclick="@(_ => ShowPersonProfileDialog(context.PersonId))"
                                                   Class="rounded-lg can-click"
                                                   Elevation="5"
                                                   Height="200"
                                                   ObjectFit="@ObjectFit.Cover"
-                                                  Src="@(GetImageData(context.PersonImageFileName))"
+                                                  Src="@(ImageService.GetPersonImageData(context.PersonImageFileName))"
                                                   Width="200" />
                                     </MudTooltip>
                                 </MudTd>
@@ -94,115 +151,64 @@
                                     <MudLink Href="@context.ProfileLink">@context.PersonName</MudLink>
                                 </MudTd>
                                 <MudTd DataLabel="Year">@context.Year</MudTd>
-                                <PrettyBlazor.Condition Evaluation="_viewModel.IsDoubleHeaderAllStarGame">
-                                    <Match>
-                                        <MudTd DataLabel="Number of Games">@context.NumberOfGames</MudTd>
-                                    </Match>
-                                </PrettyBlazor.Condition>
                             </RowTemplate>
                             <PagerContent>
                                 <MudTablePager />
                             </PagerContent>
                         </MudTable>
                     </div>
-                    <PrettyBlazor.Condition Evaluation="_viewModel.DisplayABAAllStars">
-                        <Match>
-                            <div class="col-6">
-                                <MudTable Bordered="false"
-                                          Dense="false"
-                                          Filter="new Func<AllStarModel,bool>(FilterFuncSecondaryGrid)"
-                                          Hover="true"
-                                          Items="@_viewModel.SecondaryAllStars.ToList()"
-                                          Striped="true">
-                                    <ToolBarContent>
-                                        <MudText Typo="Typo.h6">@_viewModel.SecondaryGridTitle</MudText>
-                                        <MudSpacer />
-                                        <MudTextField @bind-Value="SecondarySearch"
-                                                      Adornment="Adornment.Start"
-                                                      AdornmentIcon="@Icons.Material.Filled.Search"
-                                                      Class="mt-0"
-                                                      IconSize="MudBlazor.Size.Medium"
-                                                      Placeholder="Search" />
-                                    </ToolBarContent>
-                                    <HeaderContent>
-                                        <MudTh></MudTh>
-                                        <MudTh>Person</MudTh>
-                                        <MudTh>Year</MudTh>
-                                    </HeaderContent>
-                                    <RowTemplate>
-                                        <MudTd DataLabel="">
-                                            <MudTooltip>
-                                                <MudImage @onclick="@(_ => NavigationManager.NavigateTo(context.ProfileLink))"
-                                                          Class="rounded-lg can-click"
-                                                          Elevation="5"
-                                                          Height="200"
-                                                          ObjectFit="@ObjectFit.Cover"
-                                                          Src="@(GetImageData(context.PersonImageFileName))"
-                                                          Width="200" />
-                                            </MudTooltip>
-                                        </MudTd>
-                                        <MudTd DataLabel="Person">
-                                            <MudLink Href="@context.ProfileLink">@context.PersonName</MudLink>
-                                        </MudTd>
-                                        <MudTd DataLabel="Year">@context.Year</MudTd>
-                                    </RowTemplate>
-                                    <PagerContent>
-                                        <MudTablePager />
-                                    </PagerContent>
-                                </MudTable>
-                            </div>
-                        </Match>
-                    </PrettyBlazor.Condition>
-                    <PrettyBlazor.Condition Evaluation="_viewModel.DisplayAFLProBowlers">
-                        <Match>
-                            <div class="col-6">
-                                <MudTable Bordered="false"
-                                          Dense="false"
-                                          Filter="new Func<AllStarModel,bool>(FilterFuncSecondaryGrid)"
-                                          Hover="true"
-                                          Items="@_viewModel.SecondaryAllStars.ToList()"
-                                          Striped="true">
-                                    <ToolBarContent>
-                                        <MudText Typo="Typo.h6">@_viewModel.SecondaryGridTitle</MudText>
-                                        <MudSpacer />
-                                        <MudTextField @bind-Value="SecondarySearch"
-                                                      Adornment="Adornment.Start"
-                                                      AdornmentIcon="@Icons.Material.Filled.Search"
-                                                      Class="mt-0"
-                                                      IconSize="MudBlazor.Size.Medium"
-                                                      Placeholder="Search" />
-                                    </ToolBarContent>
-                                    <HeaderContent>
-                                        <MudTh></MudTh>
-                                        <MudTh>Person</MudTh>
-                                        <MudTh>Year</MudTh>
-                                    </HeaderContent>
-                                    <RowTemplate>
-                                        <MudTd DataLabel="">
-                                            <MudTooltip>
-                                                <MudImage @onclick="@(_ => NavigationManager.NavigateTo(context.ProfileLink))"
-                                                          Class="rounded-lg can-click"
-                                                          Elevation="5"
-                                                          Height="200"
-                                                          ObjectFit="@ObjectFit.Cover"
-                                                          Src="@(GetImageData(context.PersonImageFileName))"
-                                                          Width="200" />
-                                            </MudTooltip>
-                                        </MudTd>
-                                        <MudTd DataLabel="Person">
-                                            <MudLink Href="@context.ProfileLink">@context.PersonName</MudLink>
-                                        </MudTd>
-                                        <MudTd DataLabel="Year">@context.Year</MudTd>
-                                    </RowTemplate>
-                                    <PagerContent>
-                                        <MudTablePager />
-                                    </PagerContent>
-                                </MudTable>
-                            </div>
-                        </Match>
-                    </PrettyBlazor.Condition>
-                </div>                
-            </Content>             
-        </DivRowCol12>        
+                </Match>
+            </Condition>
+            <Condition Evaluation="Model.DisplayAFLProBowlers">
+                <Match>
+                    <div class="col-6">
+                        <MudTable Bordered="false"
+                                  Dense="false"
+                                  Filter="new Func<AllStarModel,bool>(FilterFuncSecondaryGrid)"
+                                  Hover="true"
+                                  Items="@Model.SecondaryAllStars.ToList()"
+                                  Striped="true">
+                            <ToolBarContent>
+                                <MudText Typo="Typo.h6">@Model.SecondaryGridTitle</MudText>
+                                <MudSpacer />
+                                <MudTextField @bind-Value="_secondarySearch"
+                                              Adornment="Adornment.Start"
+                                              AdornmentIcon="@Icons.Material.Filled.Search"
+                                              Class="mt-0"
+                                              IconSize="MudBlazor.Size.Medium"
+                                              Placeholder="Search" />
+                            </ToolBarContent>
+                            <HeaderContent>
+                                <MudTh></MudTh>
+                                <MudTh>
+                                    <MudTableSortLabel SortBy="new Func<AllStarModel, object>(x => x.PersonName)">Person</MudTableSortLabel>
+                                </MudTh>
+                                <MudTh>Year</MudTh>
+                            </HeaderContent>
+                            <RowTemplate>
+                                <MudTd DataLabel="">
+                                    <MudTooltip>
+                                        <MudImage @onclick="@(_ => ShowPersonProfileDialog(context.PersonId))"
+                                                  Class="rounded-lg can-click"
+                                                  Elevation="5"
+                                                  Height="200"
+                                                  ObjectFit="@ObjectFit.Cover"
+                                                  Src="@(ImageService.GetPersonImageData(context.PersonImageFileName))"
+                                                  Width="200" />
+                                    </MudTooltip>
+                                </MudTd>
+                                <MudTd DataLabel="Person">
+                                    <MudLink Href="@context.ProfileLink">@context.PersonName</MudLink>
+                                </MudTd>
+                                <MudTd DataLabel="Year">@context.Year</MudTd>
+                            </RowTemplate>
+                            <PagerContent>
+                                <MudTablePager />
+                            </PagerContent>
+                        </MudTable>
+                    </div>
+                </Match>
+            </Condition>
+        </div>        
     </Content>
 </DivPad2>

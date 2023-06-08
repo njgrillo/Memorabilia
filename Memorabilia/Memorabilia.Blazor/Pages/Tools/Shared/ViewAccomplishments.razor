@@ -2,29 +2,30 @@
 
 <DivPad2>
     <Content>
-        <DivRowCol6 Column2Style="">
-            <Content>
-                <AccomplishmentTypeAutoComplete SelectedValue="_viewModel.AccomplishmentType"
-                                                SelectionChanged="(p) => OnInputChange(p)"
-                                                Sports="@(new [] { Sport })" />               
-            </Content>
-            <ContentColumn2>
-                <CustomButton ButtonType="MudBlazor.ButtonType.Button"
-                              OnClick="Browse"
-                              Size="MudBlazor.Size.Small"
-                              Text="View All" />
-            </ContentColumn2>
-        </DivRowCol6>
-        <DivRowCol12 Hidden="@(_viewModel.AccomplishmentType == null)">
-            <Content>
+        <div class="row">
+            <div class="col-12">
+                <MudStack Row="true">
+                    <AccomplishmentTypeAutoComplete SelectedValue="Model.AccomplishmentType"
+                                                    SelectionChanged="(p) => OnInputChange(p)"
+                                                    Sports="@(new [] { Sport })" />
+                    <CustomButton ButtonType="MudBlazor.ButtonType.Button"
+                                  OnClick="Browse"
+                                  Size="MudBlazor.Size.Small"
+                                  Text="View All" />
+                </MudStack>                           
+            </div>
+        </div>
+        <br />
+        <div class="row" hidden="@(Model.AccomplishmentType == null)">
+            <div class="col-12">
                 <MudTable Bordered="false"
                           Dense="false"
                           Filter="new Func<AccomplishmentModel,bool>(FilterFunc1)"
                           Hover="true"
-                          Items="@_viewModel.PersonAccomplishments"
+                          Items="@Model.PersonAccomplishments"
                           Striped="true">
                     <ToolBarContent>
-                        <MudText Typo="Typo.h6">@_viewModel.AccomplishmentTypeName</MudText>
+                        <MudText Typo="Typo.h6">@Model.AccomplishmentTypeName</MudText>
                         <MudSpacer />
                         <MudTextField @bind-Value="Search"
                                       Adornment="Adornment.Start"
@@ -35,35 +36,43 @@
                     </ToolBarContent>
                     <HeaderContent>                        
                         <MudTh></MudTh>
-                        <MudTh><MudTableSortLabel SortBy="new Func<AccomplishmentModel, object>(x=>x.PersonName)">Person</MudTableSortLabel></MudTh>
-                        <MudTh hidden="@(!_viewModel.IsNoHitter)"><MudTableSortLabel SortBy="new Func<AccomplishmentModel, object>(x=>x.AccomplishmentTypeName)">Type</MudTableSortLabel></MudTh>
-                        <MudTh hidden="@(_viewModel.IsYearAccomplishment)"><MudTableSortLabel SortBy="new Func<AccomplishmentModel, object>(x=>x.Date)">Date</MudTableSortLabel></MudTh>
-                        <MudTh hidden="@(_viewModel.IsDateAccomplishment)"><MudTableSortLabel SortBy="new Func<AccomplishmentModel, object>(x=>x.Year)">Year</MudTableSortLabel></MudTh>
+                        <MudTh>
+                            <MudTableSortLabel SortBy="new Func<AccomplishmentModel, object>(x => x.PersonName)">Person</MudTableSortLabel>
+                        </MudTh>
+                        <MudTh hidden="@(!Model.IsNoHitter)">
+                            <MudTableSortLabel SortBy="new Func<AccomplishmentModel, object>(x => x.AccomplishmentTypeName)">Type</MudTableSortLabel>
+                        </MudTh>
+                        <MudTh hidden="@(Model.IsYearAccomplishment)">
+                            <MudTableSortLabel SortBy="new Func<AccomplishmentModel, object>(x => x.Date)">Date</MudTableSortLabel>
+                        </MudTh>
+                        <MudTh hidden="@(Model.IsDateAccomplishment)">
+                            <MudTableSortLabel SortBy="new Func<AccomplishmentModel, object>(x => x.Year)">Year</MudTableSortLabel>
+                        </MudTh>
                     </HeaderContent>
                     <RowTemplate>
                         <MudTd DataLabel="">
                             <MudTooltip>
-                                <MudImage @onclick="@(_ => NavigationManager.NavigateTo(context.ProfileLink))"
+                                <MudImage @onclick="@(_ => ShowPersonProfileDialog(context.PersonId))"
                                           Class="rounded-lg can-click"
                                           Elevation="5"
                                           Height="200"
                                           ObjectFit="@ObjectFit.Cover"
-                                          Src="@(GetImageData(context.PersonImageFileName))"
+                                          Src="@(ImageService.GetPersonImageData(context.PersonImageFileName))"
                                           Width="200" />
                             </MudTooltip>
                         </MudTd>
                         <MudTd DataLabel="Person">
                             <MudLink Href="@context.ProfileLink">@context.PersonName</MudLink>
                         </MudTd>
-                        <MudTd DataLabel="Type" hidden="@(!_viewModel.IsNoHitter)">@context.AccomplishmentTypeName</MudTd>
-                        <MudTd DataLabel="Date" hidden="@(_viewModel.IsYearAccomplishment)">@(context.Date.HasValue ? context.Date.Value.ToString("MM/dd/yyyy") : string.Empty)</MudTd>
-                        <MudTd DataLabel="Year" hidden="@(_viewModel.IsDateAccomplishment)">@(context.Year.HasValue ? context.Year : string.Empty)</MudTd>
+                        <MudTd DataLabel="Type" hidden="@(!Model.IsNoHitter)">@context.AccomplishmentTypeName</MudTd>
+                        <MudTd DataLabel="Date" hidden="@(Model.IsYearAccomplishment)">@(context.Date.HasValue ? context.Date.Value.ToString("MM/dd/yyyy") : string.Empty)</MudTd>
+                        <MudTd DataLabel="Year" hidden="@(Model.IsDateAccomplishment)">@(context.Year.HasValue ? context.Year : string.Empty)</MudTd>
                     </RowTemplate>
                     <PagerContent>
                         <MudTablePager />
                     </PagerContent>
                 </MudTable>
-            </Content>
-        </DivRowCol12>
+            </div>
+        </div>
     </Content>
 </DivPad2>

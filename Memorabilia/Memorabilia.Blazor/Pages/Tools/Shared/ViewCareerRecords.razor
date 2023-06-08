@@ -2,13 +2,13 @@
 
 <DivPad2>
     <Content>
-        <DivRowCol6>
-            <Content>
+        <div class="row">
+            <div class="col-12">
                 <MudTable Bordered="false"
                           Dense="false"
                           Filter="new Func<CareerRecordModel,bool>(FilterFunc1)"
                           Hover="true"
-                          Items="@_viewModel.CareerRecords.ToList()"
+                          Items="@Model.CareerRecords.ToList()"
                           Striped="true">
                     <ToolBarContent>
                         <MudText Typo="Typo.h6">Career Records</MudText>
@@ -21,34 +21,38 @@
                                       Placeholder="Search" />
                     </ToolBarContent>
                     <HeaderContent>
-                        <MudTh>Record Type</MudTh>
-                        <MudTh>Record</MudTh>
+                        <MudTh>
+                            <MudTableSortLabel SortBy="new Func<CareerRecordModel, object>(x => x.CareerRecordTypeName)">Record Type</MudTableSortLabel>
+                        </MudTh>
+                        <MudTh>Record</MudTh>                        
+                        <MudTh>
+                            <MudTableSortLabel SortBy="new Func<CareerRecordModel, object>(x => x.PersonName)">Person</MudTableSortLabel>
+                        </MudTh>
                         <MudTh></MudTh>
-                        <MudTh>Person</MudTh>                        
                     </HeaderContent>
                     <RowTemplate>
                         <MudTd DataLabel="RecordType">@context.CareerRecordTypeName</MudTd>
-                        <MudTd DataLabel="Record">@context.Record</MudTd>
+                        <MudTd DataLabel="Record">@context.Record</MudTd>                        
+                        <MudTd DataLabel="Person">
+                            <MudLink Href="@context.ProfileLink">@context.PersonName</MudLink>
+                        </MudTd>    
                         <MudTd DataLabel="">
                             <MudTooltip>
-                                <MudImage @onclick="@(_ => NavigationManager.NavigateTo(context.ProfileLink))"
+                                <MudImage @onclick="@(_ => ShowPersonProfileDialog(context.PersonId))"
                                           Class="rounded-lg can-click"
                                           Elevation="5"
                                           Height="200"
                                           ObjectFit="@ObjectFit.Cover"
-                                          Src="@(GetImageData(context.PersonImageFileName))"
+                                          Src="@(ImageService.GetPersonImageData(context.PersonImageFileName))"
                                           Width="200" />
                             </MudTooltip>
                         </MudTd>
-                        <MudTd DataLabel="Person">
-                            <MudLink Href="@context.ProfileLink">@context.PersonName</MudLink>
-                        </MudTd>                        
                     </RowTemplate>
                     <PagerContent>
                         <MudTablePager />
                     </PagerContent>
                 </MudTable>
-            </Content>
-        </DivRowCol6>
+            </div>
+        </div>
     </Content>
 </DivPad2>

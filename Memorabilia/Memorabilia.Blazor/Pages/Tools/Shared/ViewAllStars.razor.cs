@@ -1,12 +1,9 @@
 ﻿namespace Memorabilia.Blazor.Pages.Tools.Shared;
 
-public partial class ViewAllStars : ViewSportTools<AllStarModel>
+public partial class ViewAllStars 
+    : ViewSportTools<AllStarModel>
 {
-    protected bool FilterFuncSecondaryGrid(AllStarModel viewModel) => FilterFuncSecondary(viewModel, SecondarySearch);
-
-    protected string SecondarySearch;
-
-    public int BeginYear
+    protected int BeginYear
         => Sport.Name switch
         {
             "Baseball" => 1933,
@@ -15,37 +12,40 @@ public partial class ViewAllStars : ViewSportTools<AllStarModel>
             _ => 1950
         };
 
-    private AllStarsModel _viewModel = new();
+    protected AllStarsModel Model = new();
+
+    private string _secondarySearch;
+
+    protected bool FilterFuncSecondaryGrid(AllStarModel allStar)
+        => FilterFuncSecondary(allStar, _secondarySearch);
+
+    protected static bool FilterFuncSecondary(AllStarModel allStar, string search)
+        => search.IsNullOrEmpty() ||
+           allStar.Name.Contains(search, StringComparison.OrdinalIgnoreCase) ||
+           CultureInfo.CurrentCulture.CompareInfo.IndexOf(allStar.Name,
+                                                          search,
+                                                          CompareOptions.IgnoreNonSpace) > -1;
 
     private async Task OnInputChange(int year)
     {
-        _viewModel = await QueryRouter.Send(new GetAllStars(year, Sport));
+        Model = await QueryRouter.Send(new GetAllStars(year, Sport));
 
-        if (_viewModel.IsDoubleHeaderAllStarGame)
+        if (Model.IsDoubleHeaderAllStarGame)
         {
-            int[] personIds = _viewModel.AllStars
-                                        .GroupBy(allStar => allStar.PersonId)
-                                        .Where(g => g.Count() > 1)
-                                        .Select(x => x.Key)
-                                        .ToArray();
+            int[] personIds = Model.AllStars
+                                   .GroupBy(allStar => allStar.PersonId)
+                                   .Where(g => g.Count() > 1)
+                                   .Select(x => x.Key)
+                                   .ToArray();
 
-            _viewModel.AllStars = _viewModel.AllStars
-                                            .DistinctBy(allStar => allStar.PersonId)
-                                            .ToList();
+            Model.AllStars = Model.AllStars
+                                  .DistinctBy(allStar => allStar.PersonId)
+                                  .ToList();
 
-            foreach (AllStarModel allStar in _viewModel.AllStars.Where(allStar => personIds.Contains(allStar.PersonId)))
+            foreach (AllStarModel allStar in Model.AllStars.Where(allStar => personIds.Contains(allStar.PersonId)))
             {
                 allStar.NumberOfGames = 2;
             }
         }
-    }    
-
-    protected bool FilterFuncSecondary(AllStarModel viewModel, string search)
-    {
-        return search.IsNullOrEmpty() ||
-               viewModel.Name.Contains(search, StringComparison.OrdinalIgnoreCase) ||
-               CultureInfo.CurrentCulture.CompareInfo.IndexOf(viewModel.Name,
-                                                              search,
-                                                              CompareOptions.IgnoreNonSpace) > -1;
-    }
+    }        
 }

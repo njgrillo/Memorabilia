@@ -2,24 +2,31 @@
 
 <DivPad2>
     <Content>
-        <DivRowCol3>
-            <Content>
-                <LeaderTypeAutoComplete ResetValueOnEmptyText="false"
-                                        SelectedValue="_viewModel.LeaderType"
-                                        SelectionChanged="(leaderType) => OnInputChange(leaderType)"
-                                        Sports="@(new [] { Sport })" />
-            </Content>
-        </DivRowCol3>
-        <DivRowCol6 Hidden="@(_viewModel.LeaderType?.Id == null)">
-            <Content>
+        <div class="row">
+            <div class="col-6">
+                <MudStack Row="true">
+                    <LeaderTypeAutoComplete ResetValueOnEmptyText="false"
+                                            SelectedValue="Model.LeaderType"
+                                            SelectionChanged="(leaderType) => OnInputChange(leaderType)"
+                                            Sports="@(new [] { Sport })" />
+                    <CustomButton ButtonType="MudBlazor.ButtonType.Button"
+                                  OnClick="Browse"
+                                  Size="MudBlazor.Size.Small"
+                                  Text="View All" />
+                </MudStack>                
+            </div>
+        </div>
+        <br />
+        <div class="row" hidden="@(Model.LeaderType?.Id == null)">
+            <div class="col-12">
                 <MudTable Bordered="false"
                           Dense="false"
                           Filter="new Func<LeaderModel,bool>(FilterFunc1)"
                           Hover="true"
-                          Items="@_viewModel.Leaders.ToList()"
+                          Items="@Model.Leaders.ToList()"
                           Striped="true">
                     <ToolBarContent>
-                        <MudText Typo="Typo.h6">@_viewModel.ResultsTitle</MudText>
+                        <MudText Typo="Typo.h6">@Model.ResultsTitle</MudText>
                         <MudSpacer />
                         <MudTextField @bind-Value="Search"
                                       Adornment="Adornment.Start"
@@ -30,19 +37,21 @@
                     </ToolBarContent>
                     <HeaderContent>
                         <MudTh></MudTh>
-                        <MudTh>Person</MudTh>
+                        <MudTh>
+                            <MudTableSortLabel SortBy="new Func<LeaderModel, object>(x => x.PersonName)">Person</MudTableSortLabel>
+                        </MudTh>
                         <MudTh>Leader Type</MudTh>
                         <MudTh>Year</MudTh>
                     </HeaderContent>
                     <RowTemplate>
                         <MudTd DataLabel="">
                             <MudTooltip>
-                                <MudImage @onclick="@(_ => NavigationManager.NavigateTo(context.ProfileLink))" 
+                                <MudImage @onclick="@(_ => ShowPersonProfileDialog(context.PersonId))"
                                           Class="rounded-lg can-click"
                                           Elevation="5"
                                           Height="200"
                                           ObjectFit="@ObjectFit.Cover"
-                                          Src="@(GetImageData(context.PersonImageFileName))"
+                                          Src="@(ImageService.GetPersonImageData(context.PersonImageFileName))"
                                           Width="200" />
                             </MudTooltip>
                         </MudTd>
@@ -56,7 +65,7 @@
                         <MudTablePager />
                     </PagerContent>
                 </MudTable>
-            </Content>
-        </DivRowCol6>
+            </div>
+        </div>
     </Content>
 </DivPad2>

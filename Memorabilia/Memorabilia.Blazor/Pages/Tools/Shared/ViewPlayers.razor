@@ -2,23 +2,24 @@
 
 <DivPad2>
     <Content>
-        <DivRowCol3>
-            <Content>
-                <FranchiseAutoComplete SelectedValue="_viewModel.Franchise"
+        <div class="row">
+            <div class="col-3">
+                <FranchiseAutoComplete SelectedValue="Model.Franchise"
                                        SelectionChanged="(p) => OnInputChange(p)"
                                        Sports="@(new [] { Sport })" />
-            </Content>
-        </DivRowCol3>
-        <DivRowCol6 Hidden="@(_viewModel.Franchise == null)">
-            <Content>
+            </div>
+        </div>
+        <br />
+        <div class="row" hidden="@(Model.Franchise == null)">
+            <div class="col-12">
                 <MudTable Bordered="false"
                           Dense="false"
                           Filter="new Func<PlayerModel,bool>(FilterFunc1)"
                           Hover="true"
-                          Items="@_viewModel.Players.ToList()"
+                          Items="@Model.Players.ToList()"
                           Striped="true">
                     <ToolBarContent>
-                        <MudText Typo="Typo.h6">@_viewModel.ResultsTitle</MudText>
+                        <MudText Typo="Typo.h6">@Model.ResultsTitle</MudText>
                         <MudSpacer />
                         <MudTextField @bind-Value="Search"
                                       Adornment="Adornment.Start"
@@ -29,8 +30,12 @@
                     </ToolBarContent>
                     <HeaderContent>
                         <MudTh></MudTh>
-                        <MudTh>Person</MudTh>
-                        <MudTh>Team</MudTh>
+                        <MudTh>
+                            <MudTableSortLabel SortBy="new Func<PlayerModel, object>(x => x.PersonName)">Person</MudTableSortLabel>
+                        </MudTh>
+                        <MudTh>
+                            <MudTableSortLabel SortBy="new Func<PlayerModel, object>(x => x.TeamName)">Team</MudTableSortLabel>
+                        </MudTh>
                         <MudTh>Begin Year</MudTh>
                         <MudTh>End Year</MudTh>
                         <MudTh>Role</MudTh>
@@ -38,12 +43,12 @@
                     <RowTemplate>
                         <MudTd DataLabel="">
                             <MudTooltip>
-                                <MudImage @onclick="@(_ => NavigationManager.NavigateTo(context.ProfileLink))"
+                                <MudImage @onclick="@(_ => ShowPersonProfileDialog(context.PersonId))"
                                           Class="rounded-lg can-click"
                                           Elevation="5"
                                           Height="200"
                                           ObjectFit="@ObjectFit.Cover"
-                                          Src="@(GetImageData(context.PersonImageFileName))"
+                                          Src="@(ImageService.GetPersonImageData(context.PersonImageFileName))"
                                           Width="200" />
                             </MudTooltip>
                         </MudTd>
@@ -59,7 +64,7 @@
                         <MudTablePager />
                     </PagerContent>
                 </MudTable>
-            </Content>
-        </DivRowCol6>
+            </div>
+        </div>
     </Content>
 </DivPad2>

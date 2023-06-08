@@ -3,10 +3,7 @@
 public partial class ViewAccomplishments 
     : ViewSportTools<AccomplishmentModel>
 {
-    [Inject]
-    public IDialogService DialogService { get; set; }
-
-    private AccomplishmentsModel _viewModel = new();
+    protected AccomplishmentsModel Model = new();
 
     protected async Task Browse()
     {
@@ -15,13 +12,15 @@ public partial class ViewAccomplishments
             ["DomainItems"] = AccomplishmentType.GetAll(Sport),
             ["Title"] = $"{Sport.Name} Accomplishments"
         };
+
         var options = new DialogOptions()
         {
             MaxWidth = MaxWidth.Large,
             FullWidth = true,
             DisableBackdropClick = true
         };
-        var dialog = DialogService.Show<DomainItemBrowseDialog>("Accomplishments", parameters, options);
+
+        var dialog = DialogService.Show<DomainItemBrowseDialog>(string.Empty, parameters, options);
         var result = await dialog.Result;
 
         if (result.Canceled)
@@ -55,16 +54,18 @@ public partial class ViewAccomplishments
         if (accomplishmentType == null)
             return;        
 
-        _viewModel = await QueryRouter.Send(new GetAccomplishments(accomplishmentType, Sport));
+        Model = await QueryRouter.Send(new GetAccomplishments(accomplishmentType, Sport));
 
         if (accomplishmentType != AccomplishmentType.NoHitter)
             return;
 
-        var perfectGames = await QueryRouter.Send(new GetAccomplishments(AccomplishmentType.PerfectGame, Sport));
-        var combinedNoHitters = await QueryRouter.Send(new GetAccomplishments(AccomplishmentType.CombinedNoHitter, Sport));
-        var otherNoHitters = perfectGames.PersonAccomplishments.Union(combinedNoHitters.PersonAccomplishments);
+        AccomplishmentsModel perfectGames = await QueryRouter.Send(new GetAccomplishments(AccomplishmentType.PerfectGame, Sport));
+        AccomplishmentsModel combinedNoHitters = await QueryRouter.Send(new GetAccomplishments(AccomplishmentType.CombinedNoHitter, Sport));
+        
+        var otherNoHitters = perfectGames.PersonAccomplishments
+                                         .Union(combinedNoHitters.PersonAccomplishments);
 
-        _viewModel.PersonAccomplishments.AddRange(otherNoHitters);
+        Model.PersonAccomplishments.AddRange(otherNoHitters);
     }
 
     private async Task OnInputChange(AccomplishmentType accomplishmentType)

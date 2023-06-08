@@ -1,18 +1,16 @@
 ﻿namespace Memorabilia.Blazor.Pages.Tools.Shared;
 
-public partial class ViewAwards : ViewSportTools<AwardModel>
+public partial class ViewAwards 
+    : ViewSportTools<AwardModel>
 {
-    [Inject]
-    public IDialogService DialogService { get; set; }
-
-    private AwardsModel _viewModel = new();
+    protected AwardsModel Model = new();
 
     protected async Task Browse()
     {
         var parameters = new DialogParameters
         {
             ["DomainItems"] = AwardType.GetAll(Sport),
-            ["Title"] = $"{Sport.Name} Accomplishments"
+            ["Title"] = $"{Sport.Name} Awards"
         };
 
         var options = new DialogOptions()
@@ -22,7 +20,7 @@ public partial class ViewAwards : ViewSportTools<AwardModel>
             DisableBackdropClick = true
         };
 
-        var dialog = DialogService.Show<DomainItemBrowseDialog>("Awards", parameters, options);
+        var dialog = DialogService.Show<DomainItemBrowseDialog>(string.Empty, parameters, options);
         var result = await dialog.Result;
 
         if (result.Canceled)
@@ -43,11 +41,11 @@ public partial class ViewAwards : ViewSportTools<AwardModel>
         if (awardType == null)
             return;
 
-        _viewModel = await QueryRouter.Send(new GetAwards(awardType, Sport));
+        Model = await QueryRouter.Send(new GetAwards(awardType, Sport));
     }
 
     private async Task OnInputChange(AwardType awardType)
     {
-        _viewModel = await QueryRouter.Send(new GetAwards(awardType, Sport));
+        Model = await QueryRouter.Send(new GetAwards(awardType, Sport));
     }
 }

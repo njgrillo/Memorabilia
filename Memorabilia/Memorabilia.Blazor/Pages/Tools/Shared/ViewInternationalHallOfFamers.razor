@@ -2,22 +2,23 @@
 
 <DivPad2>
     <Content>
-        <DivRowCol3>
-            <Content>
-                <InternationalHallOfFameTypeDropDown SelectedValue="_viewModel.InternationalHallOfFameTypeId"
+        <div class="row">
+            <div class="col-3">
+                <InternationalHallOfFameTypeDropDown SelectedValue="Model.InternationalHallOfFameTypeId"
                                                      SelectionChanged="(p) => OnInputChange(p)" />
-            </Content>
-        </DivRowCol3>
-        <DivRowCol6 Hidden="@(_viewModel.InternationalHallOfFameTypeId == 0)">
-            <Content>
+            </div>
+        </div>
+        <br />
+        <div class="row" hidden="@(Model.InternationalHallOfFameTypeId == 0)">
+            <div class="col-12">
                 <MudTable Bordered="false"
                           Dense="false"
                           Filter="new Func<InternationalHallOfFameModel,bool>(FilterFunc1)"
                           Hover="true"
-                          Items="@_viewModel.InternationalHallOfFames.ToList()"
+                          Items="@Model.InternationalHallOfFames.ToList()"
                           Striped="true">
                     <ToolBarContent>
-                        <MudText Typo="Typo.h6">@_viewModel.ResultsTitle</MudText>
+                        <MudText Typo="Typo.h6">@Model.ResultsTitle</MudText>
                         <MudSpacer />
                         <MudTextField @bind-Value="Search"
                                       Adornment="Adornment.Start"
@@ -28,19 +29,21 @@
                     </ToolBarContent>
                     <HeaderContent>
                         <MudTh></MudTh>
-                        <MudTh>Person</MudTh>
+                        <MudTh>
+                            <MudTableSortLabel SortBy="new Func<InternationalHallOfFameModel, object>(x => x.PersonName)">Person</MudTableSortLabel>
+                        </MudTh>
                         <MudTh>Type</MudTh>
                         <MudTh>Induction Year</MudTh>
                     </HeaderContent>
                     <RowTemplate>
                         <MudTd DataLabel="">
                             <MudTooltip>
-                                <MudImage @onclick="@(_ => NavigationManager.NavigateTo(context.ProfileLink))"
+                                <MudImage @onclick="@(_ => ShowPersonProfileDialog(context.PersonId))"
                                           Class="rounded-lg can-click"
                                           Elevation="5"
                                           Height="200"
                                           ObjectFit="@ObjectFit.Cover"
-                                          Src="@(GetImageData(context.PersonImageFileName))"
+                                          Src="@(ImageService.GetPersonImageData(context.PersonImageFileName))"
                                           Width="200" />
                             </MudTooltip>
                         </MudTd>
@@ -54,7 +57,7 @@
                         <MudTablePager />
                     </PagerContent>
                 </MudTable>
-            </Content>
-        </DivRowCol6>
+            </div>
+        </div>
     </Content>
 </DivPad2>

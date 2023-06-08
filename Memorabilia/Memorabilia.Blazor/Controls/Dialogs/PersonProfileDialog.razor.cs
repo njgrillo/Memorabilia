@@ -8,7 +8,7 @@ public partial class PersonProfileDialog
     [Parameter]
     public int PersonId { get; set; }
 
-    public void Cancel()
+    public void Close()
     {
         MudDialog.Cancel();
     }

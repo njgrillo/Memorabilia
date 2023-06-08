@@ -19,6 +19,6 @@ public class AwardModel : PersonSportToolModel
     public override string PersonName 
         => _personAward.Person.DisplayName;
 
-    public string Year 
-        => _personAward.Year.ToString();
+    public int Year 
+        => _personAward.Year;
 }
