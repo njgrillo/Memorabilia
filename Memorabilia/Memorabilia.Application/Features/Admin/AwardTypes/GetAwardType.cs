@@ -1,14 +1,12 @@
-﻿using Memorabilia.Domain.Entities;
-
-namespace Memorabilia.Application.Features.Admin.AwardTypes;
+﻿namespace Memorabilia.Application.Features.Admin.AwardTypes;
 
 public record GetAwardType(int Id) : IQuery<DomainModel>
 {
     public class Handler : QueryHandler<GetAwardType, DomainModel>
     {
-        private readonly IDomainRepository<AwardType> _awardTypeRepository;
+        private readonly IDomainRepository<Entity.AwardType> _awardTypeRepository;
 
-        public Handler(IDomainRepository<AwardType> awardTypeRepository)
+        public Handler(IDomainRepository<Entity.AwardType> awardTypeRepository)
         {
             _awardTypeRepository = awardTypeRepository;
         }

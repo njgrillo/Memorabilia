@@ -1,25 +1,23 @@
-﻿using Memorabilia.Domain.Entities;
-
-namespace Memorabilia.Application.Features.Admin.AwardTypes;
+﻿namespace Memorabilia.Application.Features.Admin.AwardTypes;
 
 public record SaveAwardType(DomainEditModel ViewModel) : ICommand
 {
     public class Handler : CommandHandler<SaveAwardType>
     {
-        private readonly IDomainRepository<AwardType> _awardTypeRepository;
+        private readonly IDomainRepository<Entity.AwardType> _awardTypeRepository;
 
-        public Handler(IDomainRepository<AwardType> awardTypeRepository)
+        public Handler(IDomainRepository<Entity.AwardType> awardTypeRepository)
         {
             _awardTypeRepository = awardTypeRepository;
         }
 
         protected override async Task Handle(SaveAwardType request)
         {
-            AwardType awardType;
+            Entity.AwardType awardType;
 
             if (request.ViewModel.IsNew)
             {
-                awardType = new AwardType(request.ViewModel.Name, request.ViewModel.Abbreviation);
+                awardType = new Entity.AwardType(request.ViewModel.Name, request.ViewModel.Abbreviation);
 
                 await _awardTypeRepository.Add(awardType);
 

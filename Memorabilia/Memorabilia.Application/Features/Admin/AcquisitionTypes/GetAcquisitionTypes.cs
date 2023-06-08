@@ -1,21 +1,19 @@
-﻿using Memorabilia.Domain.Entities;
+﻿namespace Memorabilia.Application.Features.Admin.AcquisitionTypes;
 
-namespace Memorabilia.Application.Features.Admin.AcquisitionTypes;
-
-public record GetAcquisitionTypes() : IQuery<AcquisitionTypesViewModel>
+public record GetAcquisitionTypes() : IQuery<AcquisitionTypesModel>
 {
-    public class Handler : QueryHandler<GetAcquisitionTypes, AcquisitionTypesViewModel>
+    public class Handler : QueryHandler<GetAcquisitionTypes, AcquisitionTypesModel>
     {
-        private readonly IDomainRepository<AcquisitionType> _acquisitionTypeRepository;
+        private readonly IDomainRepository<Entity.AcquisitionType> _acquisitionTypeRepository;
 
-        public Handler(IDomainRepository<AcquisitionType> acquisitionTypeRepository)
+        public Handler(IDomainRepository<Entity.AcquisitionType> acquisitionTypeRepository)
         {
             _acquisitionTypeRepository = acquisitionTypeRepository;
         }
 
-        protected override async Task<AcquisitionTypesViewModel> Handle(GetAcquisitionTypes query)
+        protected override async Task<AcquisitionTypesModel> Handle(GetAcquisitionTypes query)
         {
-            return new AcquisitionTypesViewModel(await _acquisitionTypeRepository.GetAll());
+            return new AcquisitionTypesModel(await _acquisitionTypeRepository.GetAll());
         }
     }
 }

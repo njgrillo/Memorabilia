@@ -1,21 +1,19 @@
-﻿using Memorabilia.Domain.Entities;
+﻿namespace Memorabilia.Application.Features.Admin.AuthenticationCompanies;
 
-namespace Memorabilia.Application.Features.Admin.AuthenticationCompanies;
-
-public record GetAuthenticationCompanies() : IQuery<AuthenticationCompaniesViewModel>
+public record GetAuthenticationCompanies() : IQuery<AuthenticationCompaniesModel>
 {
-    public class Handler : QueryHandler<GetAuthenticationCompanies, AuthenticationCompaniesViewModel>
+    public class Handler : QueryHandler<GetAuthenticationCompanies, AuthenticationCompaniesModel>
     {
-        private readonly IDomainRepository<AuthenticationCompany> _authenticationCompanyRepository;
+        private readonly IDomainRepository<Entity.AuthenticationCompany> _authenticationCompanyRepository;
 
-        public Handler(IDomainRepository<AuthenticationCompany> authenticationCompanyRepository)
+        public Handler(IDomainRepository<Entity.AuthenticationCompany> authenticationCompanyRepository)
         {
             _authenticationCompanyRepository = authenticationCompanyRepository;
         }
 
-        protected override async Task<AuthenticationCompaniesViewModel> Handle(GetAuthenticationCompanies query)
+        protected override async Task<AuthenticationCompaniesModel> Handle(GetAuthenticationCompanies query)
         {
-            return new AuthenticationCompaniesViewModel(await _authenticationCompanyRepository.GetAll());
+            return new AuthenticationCompaniesModel(await _authenticationCompanyRepository.GetAll());
         }
     }
 }

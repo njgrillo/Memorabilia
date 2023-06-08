@@ -1,25 +1,23 @@
-﻿using Memorabilia.Domain.Entities;
-
-namespace Memorabilia.Application.Features.Admin.AuthenticationCompanies;
+﻿namespace Memorabilia.Application.Features.Admin.AuthenticationCompanies;
 
 public record SaveAuthenticationCompany(DomainEditModel ViewModel) : ICommand
 {
     public class Handler : CommandHandler<SaveAuthenticationCompany>
     {
-        private readonly IDomainRepository<AuthenticationCompany> _authenticationCompanyRepository;
+        private readonly IDomainRepository<Entity.AuthenticationCompany> _authenticationCompanyRepository;
 
-        public Handler(IDomainRepository<AuthenticationCompany> authenticationCompanyRepository)
+        public Handler(IDomainRepository<Entity.AuthenticationCompany> authenticationCompanyRepository)
         {
             _authenticationCompanyRepository = authenticationCompanyRepository;
         }
 
         protected override async Task Handle(SaveAuthenticationCompany request)
         {
-            AuthenticationCompany authenticationCompany;
+            Entity.AuthenticationCompany authenticationCompany;
 
             if (request.ViewModel.IsNew)
             {
-                authenticationCompany = new AuthenticationCompany(request.ViewModel.Name, request.ViewModel.Abbreviation);
+                authenticationCompany = new Entity.AuthenticationCompany(request.ViewModel.Name, request.ViewModel.Abbreviation);
 
                 await _authenticationCompanyRepository.Add(authenticationCompany);
 

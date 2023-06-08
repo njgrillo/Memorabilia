@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Blazor.Pages.Admin.AcquisitionTypes;
 
-public partial class ViewAcquisitionTypes : ViewDomainItem<AcquisitionTypesViewModel>, IDeleteDomainItem, IViewDomainItem
+public partial class ViewAcquisitionTypes : ViewDomainItem<AcquisitionTypesModel>, IDeleteDomainItem, IViewDomainItem
 {
     public async Task OnDelete(DomainEditModel viewModel)
     {

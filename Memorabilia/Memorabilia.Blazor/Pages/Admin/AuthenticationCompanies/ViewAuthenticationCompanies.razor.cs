@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Blazor.Pages.Admin.AuthenticationCompanies;
 
-public partial class ViewAuthenticationCompanies : ViewDomainItem<AuthenticationCompaniesViewModel>, IViewDomainItem, IDeleteDomainItem
+public partial class ViewAuthenticationCompanies : ViewDomainItem<AuthenticationCompaniesModel>, IViewDomainItem, IDeleteDomainItem
 {
     public async Task OnDelete(DomainEditModel viewModel)
     {

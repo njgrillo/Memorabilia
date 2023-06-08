@@ -1,25 +1,23 @@
-﻿using Memorabilia.Domain.Entities;
-
-namespace Memorabilia.Application.Features.Admin.AcquisitionTypes;
+﻿namespace Memorabilia.Application.Features.Admin.AcquisitionTypes;
 
 public record SaveAcquisitionType(DomainEditModel ViewModel) : ICommand
 {
     public class Handler : CommandHandler<SaveAcquisitionType>
     {
-        private readonly IDomainRepository<AcquisitionType> _acquisitionTypeRepository;
+        private readonly IDomainRepository<Entity.AcquisitionType> _acquisitionTypeRepository;
 
-        public Handler(IDomainRepository<AcquisitionType> acquisitionTypeRepository)
+        public Handler(IDomainRepository<Entity.AcquisitionType> acquisitionTypeRepository)
         {
             _acquisitionTypeRepository = acquisitionTypeRepository;
         }
 
         protected override async Task Handle(SaveAcquisitionType request)
         {
-            AcquisitionType acquisitionType;
+            Entity.AcquisitionType acquisitionType;
 
             if (request.ViewModel.IsNew)
             {
-                acquisitionType = new AcquisitionType(request.ViewModel.Name, request.ViewModel.Abbreviation);
+                acquisitionType = new Entity.AcquisitionType(request.ViewModel.Name, request.ViewModel.Abbreviation);
 
                 await _acquisitionTypeRepository.Add(acquisitionType);
 

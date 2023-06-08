@@ -1,14 +1,12 @@
-﻿using Memorabilia.Domain.Entities;
-
-namespace Memorabilia.Application.Features.Admin.AcquisitionTypes;
+﻿namespace Memorabilia.Application.Features.Admin.AcquisitionTypes;
 
 public record GetAcquisitionType(int Id) : IQuery<DomainModel>
 {
     public class Handler : QueryHandler<GetAcquisitionType, DomainModel>
     {
-        private readonly IDomainRepository<AcquisitionType> _acquisitionTypeRepository;
+        private readonly IDomainRepository<Entity.AcquisitionType> _acquisitionTypeRepository;
 
-        public Handler(IDomainRepository<AcquisitionType> acquisitionTypeRepository)
+        public Handler(IDomainRepository<Entity.AcquisitionType> acquisitionTypeRepository)
         {
             _acquisitionTypeRepository = acquisitionTypeRepository;
         }

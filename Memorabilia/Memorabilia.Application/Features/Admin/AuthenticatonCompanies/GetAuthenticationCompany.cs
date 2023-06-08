@@ -1,14 +1,12 @@
-﻿using Memorabilia.Domain.Entities;
-
-namespace Memorabilia.Application.Features.Admin.AuthenticationCompanies;
+﻿namespace Memorabilia.Application.Features.Admin.AuthenticationCompanies;
 
 public record GetAuthenticationCompany(int Id) : IQuery<DomainModel>
 {
     public class Handler : QueryHandler<GetAuthenticationCompany, DomainModel>
     {
-        private readonly IDomainRepository<AuthenticationCompany> _authenticationCompanyRepository;
+        private readonly IDomainRepository<Entity.AuthenticationCompany> _authenticationCompanyRepository;
 
-        public Handler(IDomainRepository<AuthenticationCompany> authenticationCompanyRepository)
+        public Handler(IDomainRepository<Entity.AuthenticationCompany> authenticationCompanyRepository)
         {
             _authenticationCompanyRepository = authenticationCompanyRepository;
         }

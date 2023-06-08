@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Blazor.Pages.Admin.AwardTypes;
 
-public partial class ViewAwardTypes : ViewDomainItem<AwardTypesViewModel>, IDeleteDomainItem, IViewDomainItem
+public partial class ViewAwardTypes : ViewDomainItem<AwardTypesModel>, IDeleteDomainItem, IViewDomainItem
 {
     public async Task OnDelete(DomainEditModel viewModel)
     {
