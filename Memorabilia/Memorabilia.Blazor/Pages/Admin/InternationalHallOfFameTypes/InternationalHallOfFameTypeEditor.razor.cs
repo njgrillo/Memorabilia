@@ -10,6 +10,6 @@ public partial class InternationalHallOfFameTypeEditor
 
     public async Task OnSave()
     {
-        await OnSave(new SaveInternationalHallOfFameType(Model));
+        await OnSave(new SaveInternationalHallOfFameType(EditModel));
     }
 }

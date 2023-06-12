@@ -1,6 +1,7 @@
 ﻿namespace Memorabilia.Blazor.Pages.Admin.Franchises;
 
-public partial class FranchiseEditor : EditItem<FranchiseEditModel, FranchiseModel>
+public partial class FranchiseEditor 
+    : EditItem<FranchiseEditModel, FranchiseModel>
 {
     private bool DisplaySportLeagueLevel
         => Id == 0;

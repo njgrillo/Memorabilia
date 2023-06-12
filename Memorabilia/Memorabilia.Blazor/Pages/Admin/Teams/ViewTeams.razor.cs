@@ -5,37 +5,38 @@ public partial class ViewTeams
 {
     protected async Task OnLoad()
     {
-        ViewModel = new TeamsModel(await QueryRouter.Send(new GetTeams()));
+        Model = new TeamsModel(await QueryRouter.Send(new GetTeams()));
     }
 
     protected override async Task Delete(int id)
     {
-        TeamModel deletedItem = ViewModel.Teams.Single(team => team.Id == id);
-        var viewModel = new TeamEditModel(deletedItem)
+        TeamModel deletedItem = Model.Teams.Single(team => team.Id == id);
+
+        var editModel = new TeamEditModel(deletedItem)
         {
             IsDeleted = true
         };
 
-        await CommandRouter.Send(new SaveTeam.Command(viewModel));
+        await CommandRouter.Send(new SaveTeam.Command(editModel));
 
-        ViewModel.Teams.Remove(deletedItem);
+        Model.Teams.Remove(deletedItem);
 
-        ShowDeleteSuccessfulMessage(ViewModel.ItemTitle);
+        ShowDeleteSuccessfulMessage(Model.ItemTitle);
     }
 
-    protected override bool FilterFunc(TeamModel viewModel, string search)
+    protected override bool FilterFunc(TeamModel model, string search)
     {
         var isYear = int.TryParse(search, out var year);
 
         return search.IsNullOrEmpty() ||
-               viewModel.FranchiseName.Contains(search, StringComparison.OrdinalIgnoreCase) ||
-               viewModel.Name.Contains(search, StringComparison.OrdinalIgnoreCase) ||
-               viewModel.Location.Contains(search, StringComparison.OrdinalIgnoreCase) ||
-               (!viewModel.Nickname.IsNullOrEmpty() &&
-                viewModel.Nickname.Contains(search, StringComparison.OrdinalIgnoreCase)) ||
-               (!viewModel.Abbreviation.IsNullOrEmpty() &&
-                viewModel.Abbreviation.Contains(search, StringComparison.OrdinalIgnoreCase)) ||
-               (isYear && viewModel?.BeginYear == year) ||
-               (isYear && viewModel?.EndYear == year);
+               model.FranchiseName.Contains(search, StringComparison.OrdinalIgnoreCase) ||
+               model.Name.Contains(search, StringComparison.OrdinalIgnoreCase) ||
+               model.Location.Contains(search, StringComparison.OrdinalIgnoreCase) ||
+               (!model.Nickname.IsNullOrEmpty() &&
+                model.Nickname.Contains(search, StringComparison.OrdinalIgnoreCase)) ||
+               (!model.Abbreviation.IsNullOrEmpty() &&
+                model.Abbreviation.Contains(search, StringComparison.OrdinalIgnoreCase)) ||
+               (isYear && model?.BeginYear == year) ||
+               (isYear && model?.EndYear == year);
     }
 }

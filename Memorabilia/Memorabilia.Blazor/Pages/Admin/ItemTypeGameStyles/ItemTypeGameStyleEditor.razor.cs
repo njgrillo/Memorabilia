@@ -1,6 +1,7 @@
 ﻿namespace Memorabilia.Blazor.Pages.Admin.ItemTypeGameStyles;
 
-public partial class ItemTypeGameStyleEditor : EditItemTypeItem<ItemTypeGameStyleEditModel, ItemTypeGameStyleModel>
+public partial class ItemTypeGameStyleEditor 
+    : EditItemTypeItem<ItemTypeGameStyleEditModel, ItemTypeGameStyleModel>
 {
     protected async Task HandleValidSubmit()
     {

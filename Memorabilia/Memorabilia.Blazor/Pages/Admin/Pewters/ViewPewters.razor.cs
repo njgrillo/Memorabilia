@@ -5,27 +5,28 @@ public partial class ViewPewters
 {
     protected async Task OnLoad()
     {
-        ViewModel = new PewtersModel(await QueryRouter.Send(new GetPewters()));
+        Model = new PewtersModel(await QueryRouter.Send(new GetPewters()));
     }
 
     protected override async Task Delete(int id)
     {
-        var deletedItem = ViewModel.Pewters.Single(pewter => pewter.Id == id);
-        var viewModel = new PewterEditModel(deletedItem)
+        PewterModel deletedItem = Model.Pewters.Single(pewter => pewter.Id == id);
+
+        var editModel = new PewterEditModel(deletedItem)
         {
             IsDeleted = true
         };
 
-        await CommandRouter.Send(new SavePewter(viewModel));
+        await CommandRouter.Send(new SavePewter(editModel));
 
-        ViewModel.Pewters.Remove(deletedItem);
+        Model.Pewters.Remove(deletedItem);
 
-        ShowDeleteSuccessfulMessage(ViewModel.ItemTitle);
+        ShowDeleteSuccessfulMessage(Model.ItemTitle);
     }
 
-    protected override bool FilterFunc(PewterModel viewModel, string search)
+    protected override bool FilterFunc(PewterModel model, string search)
         => search.IsNullOrEmpty() ||
-           viewModel.FranchiseName.Contains(search, StringComparison.OrdinalIgnoreCase) ||
-           viewModel.TeamName.Contains(search, StringComparison.OrdinalIgnoreCase) ||
-           viewModel.SizeName.Contains(search, StringComparison.OrdinalIgnoreCase);
+           model.FranchiseName.Contains(search, StringComparison.OrdinalIgnoreCase) ||
+           model.TeamName.Contains(search, StringComparison.OrdinalIgnoreCase) ||
+           model.SizeName.Contains(search, StringComparison.OrdinalIgnoreCase);
 }

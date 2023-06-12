@@ -1,6 +1,7 @@
 ﻿namespace Memorabilia.Blazor.Pages.Admin.FigureTypes;
 
-public partial class FigureTypeEditor  : EditDomainItem<FigureType>, IEditDomainItem
+public partial class FigureTypeEditor  
+    : EditDomainItem<FigureType>, IEditDomainItem
 {
     public async Task OnLoad()
     {
@@ -9,6 +10,6 @@ public partial class FigureTypeEditor  : EditDomainItem<FigureType>, IEditDomain
 
     public async Task OnSave()
     {
-        await OnSave(new SaveFigureType(Model));
+        await OnSave(new SaveFigureType(EditModel));
     }
 }

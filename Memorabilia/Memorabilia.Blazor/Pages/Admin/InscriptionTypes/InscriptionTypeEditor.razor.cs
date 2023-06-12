@@ -1,6 +1,7 @@
 ﻿namespace Memorabilia.Blazor.Pages.Admin.InscriptionTypes;
 
-public partial class InscriptionTypeEditor : EditDomainItem<InscriptionType>, IEditDomainItem
+public partial class InscriptionTypeEditor 
+    : EditDomainItem<InscriptionType>, IEditDomainItem
 {
     public async Task OnLoad()
     {
@@ -9,6 +10,6 @@ public partial class InscriptionTypeEditor : EditDomainItem<InscriptionType>, IE
 
     public async Task OnSave()
     {
-        await OnSave(new SaveInscriptionType(Model));
+        await OnSave(new SaveInscriptionType(EditModel));
     }
 }

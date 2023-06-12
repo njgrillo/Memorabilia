@@ -1,6 +1,7 @@
 ﻿namespace Memorabilia.Blazor.Pages.Admin.ImageTypes;
 
-public partial class ImageTypeEditor : EditDomainItem<ImageType>, IEditDomainItem
+public partial class ImageTypeEditor 
+    : EditDomainItem<ImageType>, IEditDomainItem
 {
     public async Task OnLoad()
     {
@@ -9,6 +10,6 @@ public partial class ImageTypeEditor : EditDomainItem<ImageType>, IEditDomainIte
 
     public async Task OnSave()
     {
-        await OnSave(new SaveImageType(Model));
+        await OnSave(new SaveImageType(EditModel));
     }
 }

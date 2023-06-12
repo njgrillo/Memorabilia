@@ -1,6 +1,7 @@
 ﻿namespace Memorabilia.Blazor.Pages.Admin.LevelTypes;
 
-public partial class LevelTypeEditor : EditDomainItem<LevelType>, IEditDomainItem
+public partial class LevelTypeEditor 
+    : EditDomainItem<LevelType>, IEditDomainItem
 {
     public async Task OnLoad()
     {
@@ -9,6 +10,6 @@ public partial class LevelTypeEditor : EditDomainItem<LevelType>, IEditDomainIte
 
     public async Task OnSave()
     {
-        await OnSave(new SaveLevelType(Model));
+        await OnSave(new SaveLevelType(EditModel));
     }
 }

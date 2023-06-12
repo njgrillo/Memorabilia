@@ -1,6 +1,7 @@
 ﻿namespace Memorabilia.Blazor.Pages.Admin.PriorityTypes;
 
-public partial class PriorityTypeEditor : EditDomainItem<PriorityType>, IEditDomainItem
+public partial class PriorityTypeEditor 
+    : EditDomainItem<PriorityType>, IEditDomainItem
 {
     public async Task OnLoad()
     {
@@ -9,6 +10,6 @@ public partial class PriorityTypeEditor : EditDomainItem<PriorityType>, IEditDom
 
     public async Task OnSave()
     {
-        await OnSave(new SavePriorityType(Model));
+        await OnSave(new SavePriorityType(EditModel));
     }
 }

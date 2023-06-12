@@ -1,6 +1,7 @@
 ﻿namespace Memorabilia.Blazor.Pages.Admin.HelmetFinishes;
 
-public partial class HelmetFinishEditor : EditDomainItem<HelmetFinish>, IEditDomainItem
+public partial class HelmetFinishEditor 
+    : EditDomainItem<HelmetFinish>, IEditDomainItem
 {
     public async Task OnLoad()
     {
@@ -9,6 +10,6 @@ public partial class HelmetFinishEditor : EditDomainItem<HelmetFinish>, IEditDom
 
     public async Task OnSave()
     {
-        await OnSave(new SaveHelmetFinish(Model));
+        await OnSave(new SaveHelmetFinish(EditModel));
     }
 }

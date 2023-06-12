@@ -1,6 +1,7 @@
 ﻿namespace Memorabilia.Blazor.Pages.Admin.MagazineTypes;
 
-public partial class MagazineTypeEditor : EditDomainItem<MagazineType>, IEditDomainItem
+public partial class MagazineTypeEditor 
+    : EditDomainItem<MagazineType>, IEditDomainItem
 {
     public async Task OnLoad()
     {
@@ -9,6 +10,6 @@ public partial class MagazineTypeEditor : EditDomainItem<MagazineType>, IEditDom
 
     public async Task OnSave()
     {
-        await OnSave(new SaveMagazineType(Model));
+        await OnSave(new SaveMagazineType(EditModel));
     }
 }

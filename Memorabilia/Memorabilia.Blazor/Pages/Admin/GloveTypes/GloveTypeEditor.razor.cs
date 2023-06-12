@@ -1,6 +1,7 @@
 ﻿namespace Memorabilia.Blazor.Pages.Admin.GloveTypes;
 
-public partial class GloveTypeEditor : EditDomainItem<GloveType>, IEditDomainItem
+public partial class GloveTypeEditor 
+    : EditDomainItem<GloveType>, IEditDomainItem
 {
     public async Task OnLoad()
     {
@@ -9,6 +10,6 @@ public partial class GloveTypeEditor : EditDomainItem<GloveType>, IEditDomainIte
 
     public async Task OnSave()
     {
-        await OnSave(new SaveGloveType(Model));
+        await OnSave(new SaveGloveType(EditModel));
     }
 }

@@ -5,26 +5,28 @@ public partial class ViewItemTypeLevels
 {
     protected async Task OnLoad()
     {
-        ViewModel = new ItemTypeLevelsModel(await QueryRouter.Send(new GetItemTypeLevels()));
+        Model = new ItemTypeLevelsModel(await QueryRouter.Send(new GetItemTypeLevels()));
     }
 
     protected override async Task Delete(int id)
     {
-        var deletedItem = ViewModel.ItemTypeLevels.Single(ItemTypeLevel => ItemTypeLevel.Id == id);
-        var viewModel = new ItemTypeLevelEditModel(deletedItem)
+        ItemTypeLevelModel deletedItem 
+            = Model.ItemTypeLevels.Single(ItemTypeLevel => ItemTypeLevel.Id == id);
+
+        var editModel = new ItemTypeLevelEditModel(deletedItem)
         {
             IsDeleted = true
         };
 
-        await CommandRouter.Send(new SaveItemTypeLevel(viewModel));
+        await CommandRouter.Send(new SaveItemTypeLevel(editModel));
 
-        ViewModel.ItemTypeLevels.Remove(deletedItem);
+        Model.ItemTypeLevels.Remove(deletedItem);
 
-        ShowDeleteSuccessfulMessage(ViewModel.ItemTitle);
+        ShowDeleteSuccessfulMessage(Model.ItemTitle);
     }
 
-    protected override bool FilterFunc(ItemTypeLevelModel viewModel, string search)
+    protected override bool FilterFunc(ItemTypeLevelModel model, string search)
         => search.IsNullOrEmpty() ||
-           viewModel.ItemTypeName.Contains(search, StringComparison.OrdinalIgnoreCase) ||
-           viewModel.LevelTypeName.Contains(search, StringComparison.OrdinalIgnoreCase);
+           model.ItemTypeName.Contains(search, StringComparison.OrdinalIgnoreCase) ||
+           model.LevelTypeName.Contains(search, StringComparison.OrdinalIgnoreCase);
 }

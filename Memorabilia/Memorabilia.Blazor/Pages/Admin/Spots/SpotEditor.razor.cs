@@ -1,6 +1,7 @@
 ﻿namespace Memorabilia.Blazor.Pages.Admin.Spots;
 
-public partial class SpotEditor : EditDomainItem<Spot>, IEditDomainItem
+public partial class SpotEditor 
+    : EditDomainItem<Spot>, IEditDomainItem
 {
     public async Task OnLoad()
     {
@@ -9,6 +10,6 @@ public partial class SpotEditor : EditDomainItem<Spot>, IEditDomainItem
 
     public async Task OnSave()
     {
-        await OnSave(new Application.Features.Admin.Spots.SaveSpot(Model));
+        await OnSave(new Application.Features.Admin.Spots.SaveSpot(EditModel));
     }
 }

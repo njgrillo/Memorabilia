@@ -5,33 +5,35 @@ public partial class ViewLeaguePresidents
 {
     protected async Task OnLoad()
     {
-        ViewModel = new LeaguePresidentsModel(await QueryRouter.Send(new GetLeaguePresidents()));
+        Model = new LeaguePresidentsModel(await QueryRouter.Send(new GetLeaguePresidents()));
     }
 
     protected override async Task Delete(int id)
     {
-        var deletedItem = ViewModel.Presidents.Single(president => president.Id == id);
-        var viewModel = new LeaguePresidentEditModel(deletedItem)
+        LeaguePresidentModel deletedItem 
+            = Model.Presidents.Single(president => president.Id == id);
+
+        var editModel = new LeaguePresidentEditModel(deletedItem)
         {
             IsDeleted = true
         };
 
-        await CommandRouter.Send(new SaveLeaguePresident(viewModel));
+        await CommandRouter.Send(new SaveLeaguePresident(editModel));
 
-        ViewModel.Presidents.Remove(deletedItem);
+        Model.Presidents.Remove(deletedItem);
 
-        ShowDeleteSuccessfulMessage(ViewModel.ItemTitle);
+        ShowDeleteSuccessfulMessage(Model.ItemTitle);
     }
 
-    protected override bool FilterFunc(LeaguePresidentModel viewModel, string search)
+    protected override bool FilterFunc(LeaguePresidentModel model, string search)
     {
         var isYear = int.TryParse(search, out var year);
 
         return search.IsNullOrEmpty() ||
-               viewModel.SportLeagueLevelName.Contains(search, StringComparison.OrdinalIgnoreCase) ||
-               (isYear && viewModel?.BeginYear == year) ||
-               (isYear && viewModel?.EndYear == year) ||
-               (viewModel.Person != null &&
-                viewModel.Person.DisplayName.Contains(search, StringComparison.OrdinalIgnoreCase));
+               model.SportLeagueLevelName.Contains(search, StringComparison.OrdinalIgnoreCase) ||
+               (isYear && model?.BeginYear == year) ||
+               (isYear && model?.EndYear == year) ||
+               (model.Person != null &&
+                model.Person.DisplayName.Contains(search, StringComparison.OrdinalIgnoreCase));
     }
 }

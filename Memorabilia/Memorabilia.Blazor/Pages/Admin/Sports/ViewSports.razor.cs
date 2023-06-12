@@ -5,27 +5,28 @@ public partial class ViewSports
 {
     protected async Task OnLoad()
     {
-        ViewModel = new SportsModel(await QueryRouter.Send(new GetSports()));
+        Model = new SportsModel(await QueryRouter.Send(new GetSports()));
     }
 
     protected override async Task Delete(int id)
     {
-        var deletedItem = ViewModel.Sports.Single(sport => sport.Id == id);
-        var viewModel = new SportEditModel(deletedItem)
+        SportModel deletedItem = Model.Sports.Single(sport => sport.Id == id);
+
+        var editModel = new SportEditModel(deletedItem)
         {
             IsDeleted = true
         };
 
-        await CommandRouter.Send(new SaveSport(viewModel));
+        await CommandRouter.Send(new SaveSport(editModel));
 
-        ViewModel.Sports.Remove(deletedItem);
+        Model.Sports.Remove(deletedItem);
 
-        ShowDeleteSuccessfulMessage(ViewModel.ItemTitle);
+        ShowDeleteSuccessfulMessage(Model.ItemTitle);
     }
 
-    protected override bool FilterFunc(SportModel viewModel, string search)
+    protected override bool FilterFunc(SportModel model, string search)
         => search.IsNullOrEmpty() ||
-           viewModel.Name.Contains(search, StringComparison.OrdinalIgnoreCase) ||
-           (!viewModel.AlternateName.IsNullOrEmpty() &&
-            viewModel.AlternateName.Contains(search, StringComparison.OrdinalIgnoreCase));
+           model.Name.Contains(search, StringComparison.OrdinalIgnoreCase) ||
+           (!model.AlternateName.IsNullOrEmpty() &&
+            model.AlternateName.Contains(search, StringComparison.OrdinalIgnoreCase));
 }

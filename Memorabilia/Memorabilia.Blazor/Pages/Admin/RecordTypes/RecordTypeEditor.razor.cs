@@ -1,6 +1,7 @@
 ﻿namespace Memorabilia.Blazor.Pages.Admin.RecordTypes;
 
-public partial class RecordTypeEditor : EditDomainItem<RecordType>, IEditDomainItem
+public partial class RecordTypeEditor 
+    : EditDomainItem<RecordType>, IEditDomainItem
 {
     public async Task OnLoad()
     {
@@ -9,6 +10,6 @@ public partial class RecordTypeEditor : EditDomainItem<RecordType>, IEditDomainI
 
     public async Task OnSave()
     {
-        await OnSave(new SaveRecordType(Model));
+        await OnSave(new SaveRecordType(EditModel));
     }
 }

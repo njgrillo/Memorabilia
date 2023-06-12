@@ -1,6 +1,7 @@
 ﻿namespace Memorabilia.Blazor.Pages.Admin.ItemTypeLevels;
 
-public partial class ItemTypeLevelEditor : EditItemTypeItem<ItemTypeLevelEditModel, ItemTypeLevelModel>
+public partial class ItemTypeLevelEditor 
+    : EditItemTypeItem<ItemTypeLevelEditModel, ItemTypeLevelModel>
 {
     protected async Task HandleValidSubmit()
     {

@@ -5,32 +5,33 @@ public partial class ViewFranchises
 {
     protected async Task OnLoad()
     {
-        ViewModel = new FranchisesModel(await QueryRouter.Send(new GetFranchises()));
+        Model = new FranchisesModel(await QueryRouter.Send(new GetFranchises()));
     }
 
     protected override async Task Delete(int id)
     {
-        var deletedItem = ViewModel.Franchises.Single(Franchise => Franchise.Id == id);
-        var viewModel = new FranchiseEditModel(deletedItem)
+        FranchiseModel deletedItem = Model.Franchises.Single(Franchise => Franchise.Id == id);
+
+        var editModel = new FranchiseEditModel(deletedItem)
         {
             IsDeleted = true
         };
 
-        await CommandRouter.Send(new SaveFranchise(viewModel));
+        await CommandRouter.Send(new SaveFranchise(editModel));
 
-        ViewModel.Franchises.Remove(deletedItem);
+        Model.Franchises.Remove(deletedItem);
 
-        ShowDeleteSuccessfulMessage(ViewModel.ItemTitle);
+        ShowDeleteSuccessfulMessage(Model.ItemTitle);
     }
 
-    protected override bool FilterFunc(FranchiseModel viewModel, string search)
+    protected override bool FilterFunc(FranchiseModel model, string search)
     {
         var isYear = int.TryParse(search, out var year);
 
         return search.IsNullOrEmpty() ||
-               viewModel.SportLeagueLevelName.Contains(search, StringComparison.OrdinalIgnoreCase) ||
-               viewModel.Name.Contains(search, StringComparison.OrdinalIgnoreCase) ||
-               viewModel.Location.Contains(search, StringComparison.OrdinalIgnoreCase) ||
-               (isYear && viewModel.FoundYear == year);
+               model.SportLeagueLevelName.Contains(search, StringComparison.OrdinalIgnoreCase) ||
+               model.Name.Contains(search, StringComparison.OrdinalIgnoreCase) ||
+               model.Location.Contains(search, StringComparison.OrdinalIgnoreCase) ||
+               (isYear && model.FoundYear == year);
     }
 }

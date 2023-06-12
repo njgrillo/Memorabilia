@@ -1,6 +1,7 @@
 ﻿namespace Memorabilia.Blazor.Pages.Admin.Divisions;
 
-public partial class DivisionEditor : EditItem<DivisionEditModel, DivisionModel>
+public partial class DivisionEditor 
+    : EditItem<DivisionEditModel, DivisionModel>
 {
     protected async Task HandleValidSubmit()
     {

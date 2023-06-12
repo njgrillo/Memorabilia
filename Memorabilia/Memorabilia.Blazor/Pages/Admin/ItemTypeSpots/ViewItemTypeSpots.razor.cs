@@ -5,26 +5,28 @@ public partial class ViewItemTypeSpots
 {
     protected async Task OnLoad()
     {
-        ViewModel = new ItemTypeSpotsModel(await QueryRouter.Send(new GetItemTypeSpots()));
+        Model = new ItemTypeSpotsModel(await QueryRouter.Send(new GetItemTypeSpots()));
     }
 
     protected override async Task Delete(int id)
     {
-        var deletedItem = ViewModel.ItemTypeSpots.Single(ItemTypeSpot => ItemTypeSpot.Id == id);
-        var viewModel = new ItemTypeSpotEditModel(deletedItem)
+        ItemTypeSpotModel deletedItem 
+            = Model.ItemTypeSpots.Single(ItemTypeSpot => ItemTypeSpot.Id == id);
+
+        var editModel = new ItemTypeSpotEditModel(deletedItem)
         {
             IsDeleted = true
         };
 
-        await CommandRouter.Send(new SaveItemTypeSpot(viewModel));
+        await CommandRouter.Send(new SaveItemTypeSpot(editModel));
 
-        ViewModel.ItemTypeSpots.Remove(deletedItem);
+        Model.ItemTypeSpots.Remove(deletedItem);
 
-        ShowDeleteSuccessfulMessage(ViewModel.ItemTitle);
+        ShowDeleteSuccessfulMessage(Model.ItemTitle);
     }
 
-    protected override bool FilterFunc(ItemTypeSpotModel viewModel, string search)
+    protected override bool FilterFunc(ItemTypeSpotModel model, string search)
         => search.IsNullOrEmpty() ||
-           viewModel.ItemTypeName.Contains(search, StringComparison.OrdinalIgnoreCase) ||
-           viewModel.SpotName.Contains(search, StringComparison.OrdinalIgnoreCase);
+           model.ItemTypeName.Contains(search, StringComparison.OrdinalIgnoreCase) ||
+           model.SpotName.Contains(search, StringComparison.OrdinalIgnoreCase);
 }

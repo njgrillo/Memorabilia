@@ -1,6 +1,7 @@
 ﻿namespace Memorabilia.Blazor.Pages.Admin.ItemTypeSizes;
 
-public partial class ItemTypeSizeEditor : EditItemTypeItem<ItemTypeSizeEditModel, ItemTypeSizeModel>
+public partial class ItemTypeSizeEditor 
+    : EditItemTypeItem<ItemTypeSizeEditModel, ItemTypeSizeModel>
 {
     protected async Task HandleValidSubmit()
     {

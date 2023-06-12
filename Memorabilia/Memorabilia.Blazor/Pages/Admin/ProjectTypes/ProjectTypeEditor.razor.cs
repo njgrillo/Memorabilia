@@ -1,6 +1,7 @@
 ﻿namespace Memorabilia.Blazor.Pages.Admin.ProjectTypes;
 
-public partial class ProjectTypeEditor : EditDomainItem<ProjectType>, IEditDomainItem
+public partial class ProjectTypeEditor 
+    : EditDomainItem<ProjectType>, IEditDomainItem
 {
     public async Task OnLoad()
     {
@@ -9,6 +10,6 @@ public partial class ProjectTypeEditor : EditDomainItem<ProjectType>, IEditDomai
 
     public async Task OnSave()
     {
-        await OnSave(new SaveProjectType(Model));
+        await OnSave(new SaveProjectType(EditModel));
     }
 }

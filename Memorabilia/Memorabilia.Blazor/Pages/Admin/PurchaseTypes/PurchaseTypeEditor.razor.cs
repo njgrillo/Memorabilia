@@ -1,6 +1,7 @@
 ﻿namespace Memorabilia.Blazor.Pages.Admin.PurchaseTypes;
 
-public partial class PurchaseTypeEditor : EditDomainItem<PurchaseType>, IEditDomainItem
+public partial class PurchaseTypeEditor 
+    : EditDomainItem<PurchaseType>, IEditDomainItem
 {
     public async Task OnLoad()
     {
@@ -9,6 +10,6 @@ public partial class PurchaseTypeEditor : EditDomainItem<PurchaseType>, IEditDom
 
     public async Task OnSave()
     {
-        await OnSave(new SavePurchaseType(Model));
+        await OnSave(new SavePurchaseType(EditModel));
     }
 }

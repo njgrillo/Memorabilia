@@ -10,19 +10,19 @@ public abstract class ViewItem<TModel, TItemModel> : CommandQuery
 
     protected string Search;
 
-    protected TModel ViewModel 
+    protected TModel Model 
         = (TModel)Activator.CreateInstance(typeof(TModel));
 
-    protected bool FilterFunc1(TItemModel viewModel) 
-        => FilterFunc(viewModel, Search);
+    protected bool FilterFunc1(TItemModel model) 
+        => FilterFunc(model, Search);
 
     protected abstract Task Delete(int id);
 
-    protected abstract bool FilterFunc(TItemModel viewModel, string search);
+    protected abstract bool FilterFunc(TItemModel model, string search);
 
     protected async Task OnLoad(IQuery<TModel> request)
     {
-        ViewModel = await QueryRouter.Send(request);
+        Model = await QueryRouter.Send(request);
     }
 
     protected async Task Save(ICommand command)

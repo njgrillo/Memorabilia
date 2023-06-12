@@ -1,6 +1,7 @@
 ﻿namespace Memorabilia.Blazor.Pages.Admin.Occupations;
 
-public partial class OccupationEditor : EditDomainItem<Occupation>, IEditDomainItem
+public partial class OccupationEditor 
+    : EditDomainItem<Occupation>, IEditDomainItem
 {
     public async Task OnLoad()
     {
@@ -9,6 +10,6 @@ public partial class OccupationEditor : EditDomainItem<Occupation>, IEditDomainI
 
     public async Task OnSave()
     {
-        await OnSave(new SaveOccupation(Model));
+        await OnSave(new SaveOccupation(EditModel));
     }
 }

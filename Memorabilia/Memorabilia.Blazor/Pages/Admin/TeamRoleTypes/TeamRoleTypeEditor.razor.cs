@@ -10,6 +10,6 @@ public partial class TeamRoleTypeEditor
 
     public async Task OnSave()
     {
-        await OnSave(new SaveTeamRoleType(Model));
+        await OnSave(new SaveTeamRoleType(EditModel));
     }
 }

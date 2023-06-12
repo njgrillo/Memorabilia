@@ -1,6 +1,7 @@
 ﻿namespace Memorabilia.Blazor.Pages.Admin.Orientations;
 
-public partial class OrientationEditor : EditDomainItem<Constant.Orientation>, IEditDomainItem
+public partial class OrientationEditor 
+    : EditDomainItem<Constant.Orientation>, IEditDomainItem
 {
     public async Task OnLoad()
     {
@@ -9,6 +10,6 @@ public partial class OrientationEditor : EditDomainItem<Constant.Orientation>, I
 
     public async Task OnSave()
     {
-        await OnSave(new SaveOrientation(Model));
+        await OnSave(new SaveOrientation(EditModel));
     }
 }

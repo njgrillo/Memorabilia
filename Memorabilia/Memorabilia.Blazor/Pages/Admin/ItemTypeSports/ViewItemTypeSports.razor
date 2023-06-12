@@ -1,11 +1,11 @@
 ﻿@inherits ViewItem<ItemTypeSportsModel, ItemTypeSportModel>
 
-<PageView AddRoute="@ViewModel.AddRoute" 
-          AddTitle="@ViewModel.AddTitle"
+<PageView AddRoute="@Model.AddRoute" 
+          AddTitle="@Model.AddTitle"
           DisplayPageHeader="false"
-          NavigationPath="@ViewModel.ExitNavigationPath"
+          NavigationPath="@Model.ExitNavigationPath"
           OnLoad="OnLoad"
-          PageTitle="@ViewModel.PageTitle">
+          PageTitle="@Model.PageTitle">
     <Content>
         <DivPad2>
             <Content>
@@ -13,10 +13,10 @@
                           Dense="false" 
                           Filter="new Func<ItemTypeSportModel,bool>(FilterFunc1)"
                           Hover="true"
-                          Items="@ViewModel.ItemTypeSports"    
+                          Items="@Model.ItemTypeSports"    
                           Striped="true">
                     <ToolBarContent>
-                        <MudText Typo="Typo.h6">@ViewModel.PageTitle</MudText>
+                        <MudText Typo="Typo.h6">@Model.PageTitle</MudText>
                         <MudSpacer />
                         <MudTextField @bind-Value="Search"
                                       Adornment="Adornment.Start"
@@ -34,7 +34,7 @@
                         <MudTd DataLabel="Item Type">@context.ItemTypeName</MudTd>
                         <MudTd DataLabel="Sport">@context.SportName</MudTd>
                         <MudTd DataLabel="">
-                            <GridEditButton NavigationPath="@($"{ViewModel.RoutePrefix}/{EditModeType.Update.Name}/{context.Id}")" />
+                            <GridEditButton NavigationPath="@($"{Model.RoutePrefix}/{EditModeType.Update.Name}/{context.Id}")" />
                             <MudTooltip Text="Delete">
                                 <MudFab Color="MudBlazor.Color.Secondary"
                                         Icon="@Icons.Material.Outlined.DeleteOutline"

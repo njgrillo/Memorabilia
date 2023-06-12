@@ -5,26 +5,28 @@ public partial class ViewItemTypeGameStyles
 {
     protected async Task OnLoad()
     {
-        ViewModel = new ItemTypeGameStylesModel(await QueryRouter.Send(new GetItemTypeGameStyles()));
+        Model = new ItemTypeGameStylesModel(await QueryRouter.Send(new GetItemTypeGameStyles()));
     }
 
     protected override async Task Delete(int id)
     {
-        var deletedItem = ViewModel.ItemTypeGameStyles.Single(itemTypeGameStyle => itemTypeGameStyle.Id == id);
-        var viewModel = new ItemTypeGameStyleEditModel(deletedItem)
+        ItemTypeGameStyleModel deletedItem 
+            = Model.ItemTypeGameStyles.Single(itemTypeGameStyle => itemTypeGameStyle.Id == id);
+
+        var editModel = new ItemTypeGameStyleEditModel(deletedItem)
         {
             IsDeleted = true
         };
 
-        await CommandRouter.Send(new SaveItemTypeGameStyle(viewModel));
+        await CommandRouter.Send(new SaveItemTypeGameStyle(editModel));
 
-        ViewModel.ItemTypeGameStyles.Remove(deletedItem);
+        Model.ItemTypeGameStyles.Remove(deletedItem);
 
-        ShowDeleteSuccessfulMessage(ViewModel.ItemTitle);
+        ShowDeleteSuccessfulMessage(Model.ItemTitle);
     }
 
-    protected override bool FilterFunc(ItemTypeGameStyleModel viewModel, string search)
+    protected override bool FilterFunc(ItemTypeGameStyleModel model, string search)
         => search.IsNullOrEmpty() ||
-           viewModel.ItemTypeName.Contains(search, StringComparison.OrdinalIgnoreCase) ||
-           viewModel.GameStyleTypeName.Contains(search, StringComparison.OrdinalIgnoreCase);
+           model.ItemTypeName.Contains(search, StringComparison.OrdinalIgnoreCase) ||
+           model.GameStyleTypeName.Contains(search, StringComparison.OrdinalIgnoreCase);
 }

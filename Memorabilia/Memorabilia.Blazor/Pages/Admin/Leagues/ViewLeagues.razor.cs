@@ -5,28 +5,29 @@ public partial class ViewLeagues
 {
     protected async Task OnLoad()
     {
-        ViewModel = new LeaguesModel(await QueryRouter.Send(new GetLeagues()));
+        Model = new LeaguesModel(await QueryRouter.Send(new GetLeagues()));
     }
 
     protected override async Task Delete(int id)
     {
-        var deletedItem = ViewModel.Leagues.Single(League => League.Id == id);
-        var viewModel = new LeagueEditModel(deletedItem)
+        LeagueModel deletedItem = Model.Leagues.Single(League => League.Id == id);
+
+        var editModel = new LeagueEditModel(deletedItem)
         {
             IsDeleted = true
         };
 
-        await CommandRouter.Send(new SaveLeague(viewModel));
+        await CommandRouter.Send(new SaveLeague(editModel));
 
-        ViewModel.Leagues.Remove(deletedItem);
+        Model.Leagues.Remove(deletedItem);
 
-        ShowDeleteSuccessfulMessage(ViewModel.ItemTitle);
+        ShowDeleteSuccessfulMessage(Model.ItemTitle);
     }
 
-    protected override bool FilterFunc(LeagueModel viewModel, string search)
+    protected override bool FilterFunc(LeagueModel model, string search)
         => search.IsNullOrEmpty() ||
-           viewModel.SportLeagueLevelName.Contains(search, StringComparison.OrdinalIgnoreCase) ||
-           viewModel.Name.Contains(search, StringComparison.OrdinalIgnoreCase) ||
-           (!viewModel.Abbreviation.IsNullOrEmpty() &&
-            viewModel.Abbreviation.Contains(search, StringComparison.OrdinalIgnoreCase));
+           model.SportLeagueLevelName.Contains(search, StringComparison.OrdinalIgnoreCase) ||
+           model.Name.Contains(search, StringComparison.OrdinalIgnoreCase) ||
+           (!model.Abbreviation.IsNullOrEmpty() &&
+            model.Abbreviation.Contains(search, StringComparison.OrdinalIgnoreCase));
 }

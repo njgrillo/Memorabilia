@@ -5,26 +5,28 @@ public partial class ViewItemTypeSports
 {
     protected async Task OnLoad()
     {
-        ViewModel = new ItemTypeSportsModel(await QueryRouter.Send(new GetItemTypeSports()));
+        Model = new ItemTypeSportsModel(await QueryRouter.Send(new GetItemTypeSports()));
     }
 
     protected override async Task Delete(int id)
     {
-        var deletedItem = ViewModel.ItemTypeSports.Single(ItemTypeSport => ItemTypeSport.Id == id);
-        var viewModel = new ItemTypeSportEditModel(deletedItem)
+        ItemTypeSportModel deletedItem 
+            = Model.ItemTypeSports.Single(ItemTypeSport => ItemTypeSport.Id == id);
+
+        var editModel = new ItemTypeSportEditModel(deletedItem)
         {
             IsDeleted = true
         };
 
-        await CommandRouter.Send(new SaveItemTypeSport(viewModel));
+        await CommandRouter.Send(new SaveItemTypeSport(editModel));
 
-        ViewModel.ItemTypeSports.Remove(deletedItem);
+        Model.ItemTypeSports.Remove(deletedItem);
 
-        ShowDeleteSuccessfulMessage(ViewModel.ItemTitle);
+        ShowDeleteSuccessfulMessage(Model.ItemTitle);
     }
 
-    protected override bool FilterFunc(ItemTypeSportModel viewModel, string search)
+    protected override bool FilterFunc(ItemTypeSportModel model, string search)
         => search.IsNullOrEmpty() ||
-           viewModel.ItemTypeName.Contains(search, StringComparison.OrdinalIgnoreCase) ||
-           viewModel.SportName.Contains(search, StringComparison.OrdinalIgnoreCase);
+           model.ItemTypeName.Contains(search, StringComparison.OrdinalIgnoreCase) ||
+           model.SportName.Contains(search, StringComparison.OrdinalIgnoreCase);
 }

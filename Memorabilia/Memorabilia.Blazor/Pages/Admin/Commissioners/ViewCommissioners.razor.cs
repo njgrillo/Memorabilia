@@ -5,33 +5,34 @@ public partial class ViewCommissioners
 {
     protected async Task OnLoad()
     {
-        ViewModel = new CommissionersModel(await QueryRouter.Send(new GetCommissioners()));
+        Model = new CommissionersModel(await QueryRouter.Send(new GetCommissioners()));
     }
 
     protected override async Task Delete(int id)
     {
-        CommissionerModel deletedItem = ViewModel.Commissioners.Single(Commissioner => Commissioner.Id == id);
-        var viewModel = new CommissionerEditModel(deletedItem)
+        CommissionerModel deletedItem = Model.Commissioners.Single(Commissioner => Commissioner.Id == id);
+
+        var editModel = new CommissionerEditModel(deletedItem)
         {
             IsDeleted = true
         };
 
-        await CommandRouter.Send(new SaveCommissioner(viewModel));
+        await CommandRouter.Send(new SaveCommissioner(editModel));
 
-        ViewModel.Commissioners.Remove(deletedItem);
+        Model.Commissioners.Remove(deletedItem);
 
-        ShowDeleteSuccessfulMessage(ViewModel.ItemTitle);
+        ShowDeleteSuccessfulMessage(Model.ItemTitle);
     }
 
-    protected override bool FilterFunc(CommissionerModel viewModel, string search)
+    protected override bool FilterFunc(CommissionerModel model, string search)
     {
         var isYear = int.TryParse(search, out var year);
 
         return search.IsNullOrEmpty() ||
-               viewModel.SportLeagueLevelName.Contains(search, StringComparison.OrdinalIgnoreCase) ||
-               (isYear && viewModel?.BeginYear == year) ||
-               (isYear && viewModel?.EndYear == year) ||
-               (viewModel.Person != null &&
-                viewModel.Person.DisplayName.Contains(search, StringComparison.OrdinalIgnoreCase));
+               model.SportLeagueLevelName.Contains(search, StringComparison.OrdinalIgnoreCase) ||
+               (isYear && model?.BeginYear == year) ||
+               (isYear && model?.EndYear == year) ||
+               (model.Person != null &&
+                model.Person.DisplayName.Contains(search, StringComparison.OrdinalIgnoreCase));
     }
 }

@@ -10,6 +10,6 @@ public partial class FigureSpecialtyTypeEditor
 
     public async Task OnSave()
     {
-        await OnSave(new SaveFigureSpecialtyType(Model));
+        await OnSave(new SaveFigureSpecialtyType(EditModel));
     }
 }

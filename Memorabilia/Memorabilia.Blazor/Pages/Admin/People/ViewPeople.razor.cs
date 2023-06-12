@@ -5,45 +5,46 @@ public partial class ViewPeople
 {
     protected async Task OnLoad()
     {
-        ViewModel = new PeopleModel(await QueryRouter.Send(new GetPeople()));
+        Model = new PeopleModel(await QueryRouter.Send(new GetPeople()));
     }
 
     protected override async Task Delete(int id)
     {
-        PersonModel deletedItem = ViewModel.People.Single(person => person.Id == id);
-        var viewModel = new PersonEditModel(deletedItem)
+        PersonModel deletedItem = Model.People.Single(person => person.Id == id);
+
+        var editModel = new PersonEditModel(deletedItem)
         {
             IsDeleted = true
         };
 
-        await CommandRouter.Send(new SavePerson.Command(viewModel));
+        await CommandRouter.Send(new SavePerson.Command(editModel));
 
-        ViewModel.People.Remove(deletedItem);
+        Model.People.Remove(deletedItem);
 
-        ShowDeleteSuccessfulMessage(ViewModel.ItemTitle);
+        ShowDeleteSuccessfulMessage(Model.ItemTitle);
     }
 
-    protected override bool FilterFunc(PersonModel viewModel, string search)
+    protected override bool FilterFunc(PersonModel model, string search)
         => search.IsNullOrEmpty() ||
-           viewModel.DisplayName.Contains(search, StringComparison.OrdinalIgnoreCase) ||
-           viewModel.ProfileName.Contains(search, StringComparison.OrdinalIgnoreCase) ||
-           viewModel.FirstName.Contains(search, StringComparison.OrdinalIgnoreCase) ||
-           viewModel.LastName.Contains(search, StringComparison.OrdinalIgnoreCase) ||
-           viewModel.LegalName.Contains(search, StringComparison.OrdinalIgnoreCase) ||
-           viewModel.Nicknames.Any(nickname => nickname.Nickname.Contains(search, StringComparison.OrdinalIgnoreCase)) ||
-           CultureInfo.CurrentCulture.CompareInfo.IndexOf(viewModel.LegalName,
+           model.DisplayName.Contains(search, StringComparison.OrdinalIgnoreCase) ||
+           model.ProfileName.Contains(search, StringComparison.OrdinalIgnoreCase) ||
+           model.FirstName.Contains(search, StringComparison.OrdinalIgnoreCase) ||
+           model.LastName.Contains(search, StringComparison.OrdinalIgnoreCase) ||
+           model.LegalName.Contains(search, StringComparison.OrdinalIgnoreCase) ||
+           model.Nicknames.Any(nickname => nickname.Nickname.Contains(search, StringComparison.OrdinalIgnoreCase)) ||
+           CultureInfo.CurrentCulture.CompareInfo.IndexOf(model.LegalName,
                                                           search,
                                                           CompareOptions.IgnoreNonSpace) > -1 ||
-           CultureInfo.CurrentCulture.CompareInfo.IndexOf(viewModel.DisplayName,
+           CultureInfo.CurrentCulture.CompareInfo.IndexOf(model.DisplayName,
                                                           search,
                                                           CompareOptions.IgnoreNonSpace) > -1 ||
-           CultureInfo.CurrentCulture.CompareInfo.IndexOf(viewModel.ProfileName,
+           CultureInfo.CurrentCulture.CompareInfo.IndexOf(model.ProfileName,
                                                           search,
                                                           CompareOptions.IgnoreNonSpace) > -1 ||
-           CultureInfo.CurrentCulture.CompareInfo.IndexOf(viewModel.FirstName,
+           CultureInfo.CurrentCulture.CompareInfo.IndexOf(model.FirstName,
                                                           search,
                                                           CompareOptions.IgnoreNonSpace) > -1 ||
-           CultureInfo.CurrentCulture.CompareInfo.IndexOf(viewModel.LastName,
+           CultureInfo.CurrentCulture.CompareInfo.IndexOf(model.LastName,
                                                           search,
                                                           CompareOptions.IgnoreNonSpace) > -1;
 }

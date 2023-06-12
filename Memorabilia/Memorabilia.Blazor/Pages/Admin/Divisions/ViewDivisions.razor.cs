@@ -1,34 +1,36 @@
 ﻿namespace Memorabilia.Blazor.Pages.Admin.Divisions;
 
-public partial class ViewDivisions : ViewItem<DivisionsModel, DivisionModel>
+public partial class ViewDivisions 
+    : ViewItem<DivisionsModel, DivisionModel>
 {
     protected async Task OnLoad()
     {
-        ViewModel = new DivisionsModel(await QueryRouter.Send(new GetDivisions()));
+        Model = new DivisionsModel(await QueryRouter.Send(new GetDivisions()));
     }
 
     protected override async Task Delete(int id)
     {
-        var deletedItem = ViewModel.Divisions.Single(Division => Division.Id == id);
-        var viewModel = new DivisionEditModel(deletedItem)
+        DivisionModel deletedItem = Model.Divisions.Single(Division => Division.Id == id);
+
+        var editModel = new DivisionEditModel(deletedItem)
         {
             IsDeleted = true
         };
 
-        await CommandRouter.Send(new SaveDivision(viewModel));
+        await CommandRouter.Send(new SaveDivision(editModel));
 
-        ViewModel.Divisions.Remove(deletedItem);
+        Model.Divisions.Remove(deletedItem);
 
-        ShowDeleteSuccessfulMessage(ViewModel.ItemTitle);
+        ShowDeleteSuccessfulMessage(Model.ItemTitle);
     }
 
-    protected override bool FilterFunc(DivisionModel viewModel, string search)
+    protected override bool FilterFunc(DivisionModel model, string search)
         => search.IsNullOrEmpty() ||
-           viewModel.Name.Contains(search, StringComparison.OrdinalIgnoreCase) ||
-           (!viewModel.ConferenceName.IsNullOrEmpty() &&
-            viewModel.ConferenceName.Contains(search, StringComparison.OrdinalIgnoreCase)) ||
-           (!viewModel.LeagueName.IsNullOrEmpty() &&
-            viewModel.LeagueName.Contains(search, StringComparison.OrdinalIgnoreCase)) ||
-           (!viewModel.Abbreviation.IsNullOrEmpty() &&
-            viewModel.Abbreviation.Contains(search, StringComparison.OrdinalIgnoreCase));
+           model.Name.Contains(search, StringComparison.OrdinalIgnoreCase) ||
+           (!model.ConferenceName.IsNullOrEmpty() &&
+            model.ConferenceName.Contains(search, StringComparison.OrdinalIgnoreCase)) ||
+           (!model.LeagueName.IsNullOrEmpty() &&
+            model.LeagueName.Contains(search, StringComparison.OrdinalIgnoreCase)) ||
+           (!model.Abbreviation.IsNullOrEmpty() &&
+            model.Abbreviation.Contains(search, StringComparison.OrdinalIgnoreCase));
 }

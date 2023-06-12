@@ -1,6 +1,7 @@
 ﻿namespace Memorabilia.Blazor.Pages.Admin.WritingInstruments;
 
-public partial class WritingInstrumentEditor : EditDomainItem<WritingInstrument>, IEditDomainItem
+public partial class WritingInstrumentEditor 
+    : EditDomainItem<WritingInstrument>, IEditDomainItem
 {
     public async Task OnLoad()
     {
@@ -9,6 +10,6 @@ public partial class WritingInstrumentEditor : EditDomainItem<WritingInstrument>
 
     public async Task OnSave()
     {
-        await OnSave(new SaveWritingInstrument(Model));
+        await OnSave(new SaveWritingInstrument(EditModel));
     }
 }

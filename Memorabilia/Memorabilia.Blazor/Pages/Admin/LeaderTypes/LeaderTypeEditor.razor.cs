@@ -1,6 +1,7 @@
 ﻿namespace Memorabilia.Blazor.Pages.Admin.LeaderTypes;
 
-public partial class LeaderTypeEditor : EditDomainItem<LeaderType>, IEditDomainItem
+public partial class LeaderTypeEditor 
+    : EditDomainItem<LeaderType>, IEditDomainItem
 {
     public async Task OnLoad()
     {
@@ -9,6 +10,6 @@ public partial class LeaderTypeEditor : EditDomainItem<LeaderType>, IEditDomainI
 
     public async Task OnSave()
     {
-        await OnSave(new SaveLeaderType(Model));
+        await OnSave(new SaveLeaderType(EditModel));
     }
 }

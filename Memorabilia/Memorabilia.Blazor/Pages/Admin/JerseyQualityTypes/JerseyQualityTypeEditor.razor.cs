@@ -1,6 +1,7 @@
 ﻿namespace Memorabilia.Blazor.Pages.Admin.JerseyQualityTypes;
 
-public partial class JerseyQualityTypeEditor : EditDomainItem<JerseyQualityType>, IEditDomainItem
+public partial class JerseyQualityTypeEditor 
+    : EditDomainItem<JerseyQualityType>, IEditDomainItem
 {
     public async Task OnLoad()
     {
@@ -9,6 +10,6 @@ public partial class JerseyQualityTypeEditor : EditDomainItem<JerseyQualityType>
 
     public async Task OnSave()
     {
-        await OnSave(new SaveJerseyQualityType(Model));
+        await OnSave(new SaveJerseyQualityType(EditModel));
     }
 }

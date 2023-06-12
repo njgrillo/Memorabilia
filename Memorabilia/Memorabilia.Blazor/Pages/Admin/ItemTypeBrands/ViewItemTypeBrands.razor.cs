@@ -5,26 +5,27 @@ public partial class ViewItemTypeBrands
 {
     protected async Task OnLoad()
     {
-        ViewModel = new ItemTypeBrandsModel(await QueryRouter.Send(new GetItemTypeBrands()));
+        Model = new ItemTypeBrandsModel(await QueryRouter.Send(new GetItemTypeBrands()));
     }
 
     protected override async Task Delete(int id)
     {
-        ItemTypeBrandModel deletedItem = ViewModel.ItemTypeBrands.Single(ItemTypeBrand => ItemTypeBrand.Id == id);
-        var viewModel = new ItemTypeBrandEditModel(deletedItem)
+        ItemTypeBrandModel deletedItem = Model.ItemTypeBrands.Single(ItemTypeBrand => ItemTypeBrand.Id == id);
+
+        var editModel = new ItemTypeBrandEditModel(deletedItem)
         {
             IsDeleted = true
         };
 
-        await Save(new SaveItemTypeBrand(viewModel));
+        await Save(new SaveItemTypeBrand(editModel));
 
-        ViewModel.ItemTypeBrands.Remove(deletedItem);
+        Model.ItemTypeBrands.Remove(deletedItem);
 
-        ShowDeleteSuccessfulMessage(ViewModel.ItemTitle);
+        ShowDeleteSuccessfulMessage(Model.ItemTitle);
     }
 
-    protected override bool FilterFunc(ItemTypeBrandModel viewModel, string search)
+    protected override bool FilterFunc(ItemTypeBrandModel model, string search)
         => search.IsNullOrEmpty() ||
-           viewModel.ItemTypeName.Contains(search, StringComparison.OrdinalIgnoreCase) ||
-           viewModel.BrandName.Contains(search, StringComparison.OrdinalIgnoreCase);
+           model.ItemTypeName.Contains(search, StringComparison.OrdinalIgnoreCase) ||
+           model.BrandName.Contains(search, StringComparison.OrdinalIgnoreCase);
 }

@@ -1,6 +1,7 @@
 ﻿namespace Memorabilia.Blazor.Pages.Admin.FootballTypes;
 
-public partial class FootballTypeEditor : EditDomainItem<FootballType>, IEditDomainItem
+public partial class FootballTypeEditor 
+    : EditDomainItem<FootballType>, IEditDomainItem
 {
     public async Task OnLoad()
     {
@@ -9,6 +10,6 @@ public partial class FootballTypeEditor : EditDomainItem<FootballType>, IEditDom
 
     public async Task OnSave()
     {
-        await OnSave(new SaveFootballType(Model));
+        await OnSave(new SaveFootballType(EditModel));
     }
 }

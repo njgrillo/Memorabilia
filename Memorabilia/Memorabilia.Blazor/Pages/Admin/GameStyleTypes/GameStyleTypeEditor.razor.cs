@@ -1,6 +1,7 @@
 ﻿namespace Memorabilia.Blazor.Pages.Admin.GameStyleTypes;
 
-public partial class GameStyleTypeEditor : EditDomainItem<GameStyleType>, IEditDomainItem
+public partial class GameStyleTypeEditor 
+    : EditDomainItem<GameStyleType>, IEditDomainItem
 {
     public async Task OnLoad()
     {
@@ -9,6 +10,6 @@ public partial class GameStyleTypeEditor : EditDomainItem<GameStyleType>, IEditD
 
     public async Task OnSave()
     {
-        await OnSave(new SaveGameStyleType(Model));
+        await OnSave(new SaveGameStyleType(EditModel));
     }
 }

@@ -5,28 +5,29 @@ public partial class ViewPositions
 {
     protected async Task OnLoad()
     {
-        ViewModel = new PositionsModel(await QueryRouter.Send(new GetPositions()));
+        Model = new PositionsModel(await QueryRouter.Send(new GetPositions()));
     }
 
     protected override async Task Delete(int id)
     {
-        PositionModel deletedItem = ViewModel.Positions.Single(position => position.Id == id);
-        var viewModel = new PositionEditModel(deletedItem)
+        PositionModel deletedItem = Model.Positions.Single(position => position.Id == id);
+
+        var editModel = new PositionEditModel(deletedItem)
         {
             IsDeleted = true
         };
 
-        await CommandRouter.Send(new SavePosition(viewModel));
+        await CommandRouter.Send(new SavePosition(editModel));
 
-        ViewModel.Positions.Remove(deletedItem);
+        Model.Positions.Remove(deletedItem);
 
-        ShowDeleteSuccessfulMessage(ViewModel.ItemTitle);
+        ShowDeleteSuccessfulMessage(Model.ItemTitle);
     }
 
-    protected override bool FilterFunc(PositionModel viewModel, string search)
+    protected override bool FilterFunc(PositionModel model, string search)
         => search.IsNullOrEmpty() ||
-           viewModel.SportName.Contains(search, StringComparison.OrdinalIgnoreCase) ||
-           viewModel.Name.Contains(search, StringComparison.OrdinalIgnoreCase) ||
-           (!viewModel.Abbreviation.IsNullOrEmpty() &&
-            viewModel.Abbreviation.Contains(search, StringComparison.OrdinalIgnoreCase));
+           model.SportName.Contains(search, StringComparison.OrdinalIgnoreCase) ||
+           model.Name.Contains(search, StringComparison.OrdinalIgnoreCase) ||
+           (!model.Abbreviation.IsNullOrEmpty() &&
+            model.Abbreviation.Contains(search, StringComparison.OrdinalIgnoreCase));
 }

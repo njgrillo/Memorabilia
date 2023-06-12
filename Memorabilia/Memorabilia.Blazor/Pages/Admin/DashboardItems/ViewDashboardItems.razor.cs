@@ -7,26 +7,28 @@ public partial class ViewDashboardItems
 {
     protected async Task OnLoad()
     {
-        ViewModel = new DashboardItemsModel(await QueryRouter.Send(new GetDashboardItems()));
+        Model = new DashboardItemsModel(await QueryRouter.Send(new GetDashboardItems()));
     }
 
     protected override async Task Delete(int id)
     {
-        var deletedItem = ViewModel.DashboardItems.Single(dashboardItem => dashboardItem.Id == id);
-        var viewModel = new DashboardItemEditModel(deletedItem)
+        DashboardItemModel deletedItem 
+            = Model.DashboardItems.Single(dashboardItem => dashboardItem.Id == id);
+
+        var editModel = new DashboardItemEditModel(deletedItem)
         {
             IsDeleted = true
         };
 
-        await CommandRouter.Send(new SaveDashboardItem(viewModel));
+        await CommandRouter.Send(new SaveDashboardItem(editModel));
 
-        ViewModel.DashboardItems.Remove(deletedItem);
+        Model.DashboardItems.Remove(deletedItem);
 
-        ShowDeleteSuccessfulMessage(ViewModel.ItemTitle);
+        ShowDeleteSuccessfulMessage(Model.ItemTitle);
     }
 
-    protected override bool FilterFunc(DashboardItemModel viewModel, string search)
+    protected override bool FilterFunc(DashboardItemModel model, string search)
         => search.IsNullOrEmpty() ||
-           viewModel.Name.Contains(search, StringComparison.OrdinalIgnoreCase) ||
-           viewModel.Description.Contains(search, StringComparison.OrdinalIgnoreCase);
+           model.Name.Contains(search, StringComparison.OrdinalIgnoreCase) ||
+           model.Description.Contains(search, StringComparison.OrdinalIgnoreCase);
 }

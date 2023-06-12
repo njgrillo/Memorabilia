@@ -1,31 +1,33 @@
 ﻿namespace Memorabilia.Blazor.Pages.Admin.Conferences;
 
-public partial class ViewConferences : ViewItem<ConferencesModel, ConferenceModel>
+public partial class ViewConferences 
+    : ViewItem<ConferencesModel, ConferenceModel>
 {
     protected async Task OnLoad()
     {
-        ViewModel = new ConferencesModel(await QueryRouter.Send(new GetConferences()));
+        Model = new ConferencesModel(await QueryRouter.Send(new GetConferences()));
     }
 
     protected override async Task Delete(int id)
     {
-        var deletedItem = ViewModel.Conferences.Single(conference => conference.Id == id);
-        var viewModel = new ConferenceEditModel(deletedItem)
+        ConferenceModel deletedItem = Model.Conferences.Single(conference => conference.Id == id);
+
+        var editModel = new ConferenceEditModel(deletedItem)
         {
             IsDeleted = true
         };
 
-        await CommandRouter.Send(new SaveConference(viewModel));
+        await CommandRouter.Send(new SaveConference(editModel));
 
-        ViewModel.Conferences.Remove(deletedItem);
+        Model.Conferences.Remove(deletedItem);
 
-        ShowDeleteSuccessfulMessage(ViewModel.ItemTitle);
+        ShowDeleteSuccessfulMessage(Model.ItemTitle);
     }
 
-    protected override bool FilterFunc(ConferenceModel viewModel, string search)
+    protected override bool FilterFunc(ConferenceModel model, string search)
         => search.IsNullOrEmpty() ||
-           viewModel.SportLeagueLevelName.Contains(search, StringComparison.OrdinalIgnoreCase) ||
-           viewModel.Name.Contains(search, StringComparison.OrdinalIgnoreCase) ||
-           (!viewModel.Abbreviation.IsNullOrEmpty() &&
-           viewModel.Abbreviation.Contains(search, StringComparison.OrdinalIgnoreCase));
+           model.SportLeagueLevelName.Contains(search, StringComparison.OrdinalIgnoreCase) ||
+           model.Name.Contains(search, StringComparison.OrdinalIgnoreCase) ||
+           (!model.Abbreviation.IsNullOrEmpty() &&
+           model.Abbreviation.Contains(search, StringComparison.OrdinalIgnoreCase));
 }

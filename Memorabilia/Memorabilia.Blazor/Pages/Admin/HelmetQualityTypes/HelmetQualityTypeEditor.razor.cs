@@ -1,6 +1,7 @@
 ﻿namespace Memorabilia.Blazor.Pages.Admin.HelmetQualityTypes;
 
-public partial class HelmetQualityTypeEditor : EditDomainItem<HelmetQualityType>, IEditDomainItem
+public partial class HelmetQualityTypeEditor 
+    : EditDomainItem<HelmetQualityType>, IEditDomainItem
 {
     public async Task OnLoad()
     {
@@ -9,6 +10,6 @@ public partial class HelmetQualityTypeEditor : EditDomainItem<HelmetQualityType>
 
     public async Task OnSave()
     {
-        await OnSave(new SaveHelmetQualityType(Model));
+        await OnSave(new SaveHelmetQualityType(EditModel));
     }
 }
