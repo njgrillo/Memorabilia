@@ -1,8 +1,7 @@
-﻿
+﻿namespace Memorabilia.Blazor.Pages.Admin.People;
 
-namespace Memorabilia.Blazor.Pages.Admin.People;
-
-public partial class PersonImageEditor : EditPersonItem<SavePersonImageViewModel, PersonImageViewModel>
+public partial class PersonImageEditor 
+    : EditPersonItem<PersonImageEditModel, PersonImageModel>
 {
     [Inject]
     public ILogger<PersonImageEditor> Logger { get; set; }
@@ -14,12 +13,15 @@ public partial class PersonImageEditor : EditPersonItem<SavePersonImageViewModel
 
     protected async Task HandleValidSubmit()
     {
-        await HandleValidSubmit(new SavePersonImage.Command(ViewModel));
+        await HandleValidSubmit(new SavePersonImage(ViewModel.PersonId, ViewModel.PersonImageFileName));
     }
 
     protected async Task OnLoad()
     {
-        ViewModel = new SavePersonImageViewModel(await Get(new GetPersonImage(PersonId)));
+        Entity.Person person = await QueryRouter.Send(new GetPerson(PersonId));
+
+        ViewModel = new PersonImageEditModel(new PersonImageModel(person));
+
         _hasImage = !ViewModel.PersonImageFileName.IsNullOrEmpty();
     }
 

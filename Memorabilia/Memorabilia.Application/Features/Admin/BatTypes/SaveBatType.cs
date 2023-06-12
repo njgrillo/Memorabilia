@@ -1,41 +1,41 @@
-﻿using Memorabilia.Domain.Entities;
+﻿namespace Memorabilia.Application.Features.Admin.BatTypes;
 
-namespace Memorabilia.Application.Features.Admin.BatTypes;
-
-public record SaveBatType(DomainEditModel ViewModel) : ICommand
+public record SaveBatType(DomainEditModel BatType) : ICommand
 {
     public class Handler : CommandHandler<SaveBatType>
     {
-        private readonly IDomainRepository<BatType> _batTypeRepository;
+        private readonly IDomainRepository<Entity.BatType> _batTypeRepository;
 
-        public Handler(IDomainRepository<BatType> batTypeRepository)
+        public Handler(IDomainRepository<Entity.BatType> batTypeRepository)
         {
             _batTypeRepository = batTypeRepository;
         }
 
         protected override async Task Handle(SaveBatType request)
         {
-            BatType batType;
+            Entity.BatType batType;
 
-            if (request.ViewModel.IsNew)
+            if (request.BatType.IsNew)
             {
-                batType = new BatType(request.ViewModel.Name, request.ViewModel.Abbreviation);
+                batType = new Entity.BatType(request.BatType.Name, 
+                                             request.BatType.Abbreviation);
 
                 await _batTypeRepository.Add(batType);
 
                 return;
             }
 
-            batType = await _batTypeRepository.Get(request.ViewModel.Id);
+            batType = await _batTypeRepository.Get(request.BatType.Id);
 
-            if (request.ViewModel.IsDeleted)
+            if (request.BatType.IsDeleted)
             {
                 await _batTypeRepository.Delete(batType);
 
                 return;
             }
 
-            batType.Set(request.ViewModel.Name, request.ViewModel.Abbreviation);
+            batType.Set(request.BatType.Name, 
+                        request.BatType.Abbreviation);
 
             await _batTypeRepository.Update(batType);
         }

@@ -3,7 +3,7 @@
 public partial class PersonCollegeHallOfFameEditor
 {
     [Parameter]
-    public List<SavePersonCollegeHallOfFameViewModel> CollegeHallOfFames { get; set; } = new();
+    public List<PersonCollegeHallOfFameEditModel> CollegeHallOfFames { get; set; } = new();
 
     [Parameter]
     public int[] SportIds { get; set; }
@@ -11,7 +11,7 @@ public partial class PersonCollegeHallOfFameEditor
     private bool _canAdd = true;
     private bool _canEditCollege = true;
     private bool _canUpdate;
-    private SavePersonCollegeHallOfFameViewModel _viewModel = new();
+    private PersonCollegeHallOfFameEditModel _viewModel = new();
 
     private void Add()
     {
@@ -20,10 +20,10 @@ public partial class PersonCollegeHallOfFameEditor
 
         CollegeHallOfFames.Add(_viewModel);
 
-        _viewModel = new SavePersonCollegeHallOfFameViewModel();
+        _viewModel = new PersonCollegeHallOfFameEditModel();
     }
 
-    private void Edit(SavePersonCollegeHallOfFameViewModel hallOfFame)
+    private void Edit(PersonCollegeHallOfFameEditModel hallOfFame)
     {
         _viewModel.College = hallOfFame.College;
         _viewModel.Sport = hallOfFame.Sport;
@@ -43,7 +43,7 @@ public partial class PersonCollegeHallOfFameEditor
         hallOfFame.Sport = _viewModel.Sport;
         hallOfFame.Year = _viewModel.Year;
 
-        _viewModel = new SavePersonCollegeHallOfFameViewModel();
+        _viewModel = new PersonCollegeHallOfFameEditModel();
 
         _canAdd = true;
         _canEditCollege = true;

@@ -12,8 +12,6 @@ public record InitializeContext() : ICommand
         }
 
         protected override async Task Handle(InitializeContext command)
-        {
-            await _contextLoader.Load();
-        }
+            => await _contextLoader.Load();
     }
 }

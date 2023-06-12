@@ -1,16 +1,17 @@
 ﻿namespace Memorabilia.Blazor.Pages.Admin.LeaguePresidents;
 
-public partial class ViewLeaguePresidents : ViewItem<LeaguePresidentsViewModel, LeaguePresidentViewModel>
+public partial class ViewLeaguePresidents 
+    : ViewItem<LeaguePresidentsModel, LeaguePresidentModel>
 {
     protected async Task OnLoad()
     {
-        await OnLoad(new GetLeaguePresidents());
+        ViewModel = new LeaguePresidentsModel(await QueryRouter.Send(new GetLeaguePresidents()));
     }
 
     protected override async Task Delete(int id)
     {
         var deletedItem = ViewModel.Presidents.Single(president => president.Id == id);
-        var viewModel = new SaveLeaguePresidentViewModel(deletedItem)
+        var viewModel = new LeaguePresidentEditModel(deletedItem)
         {
             IsDeleted = true
         };
@@ -22,7 +23,7 @@ public partial class ViewLeaguePresidents : ViewItem<LeaguePresidentsViewModel, 
         ShowDeleteSuccessfulMessage(ViewModel.ItemTitle);
     }
 
-    protected override bool FilterFunc(LeaguePresidentViewModel viewModel, string search)
+    protected override bool FilterFunc(LeaguePresidentModel viewModel, string search)
     {
         var isYear = int.TryParse(search, out var year);
 

@@ -1,21 +1,17 @@
-﻿using Memorabilia.Domain.Entities;
+﻿namespace Memorabilia.Application.Features.Admin.FigureTypes;
 
-namespace Memorabilia.Application.Features.Admin.FigureTypes;
-
-public record GetFigureType(int Id) : IQuery<DomainModel>
+public record GetFigureType(int Id) : IQuery<Entity.FigureType>
 {
-    public class Handler : QueryHandler<GetFigureType, DomainModel>
+    public class Handler : QueryHandler<GetFigureType, Entity.FigureType>
     {
-        private readonly IDomainRepository<FigureType> _figureTypeRepository;
+        private readonly IDomainRepository<Entity.FigureType> _figureTypeRepository;
 
-        public Handler(IDomainRepository<FigureType> figureTypeRepository)
+        public Handler(IDomainRepository<Entity.FigureType> figureTypeRepository)
         {
             _figureTypeRepository = figureTypeRepository;
         }
 
-        protected override async Task<DomainModel> Handle(GetFigureType query)
-        {
-            return new DomainModel(await _figureTypeRepository.Get(query.Id));
-        }
+        protected override async Task<Entity.FigureType> Handle(GetFigureType query)
+            => await _figureTypeRepository.Get(query.Id);
     }
 }

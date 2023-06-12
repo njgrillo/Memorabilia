@@ -4,24 +4,26 @@ public class ProjectMemorabiliaTeamEditModel : EditModel
 {
     public ProjectMemorabiliaTeamEditModel() { }
 
-    public ProjectMemorabiliaTeamEditModel(ProjectMemorabiliaTeamModel viewModel)
+    public ProjectMemorabiliaTeamEditModel(ProjectMemorabiliaTeamModel model)
     {
-        Id = viewModel.Id;
-        ItemTypeId = viewModel.ItemTypeId ?? 0;
-        Rank = viewModel.Rank;
-        Upgrade = viewModel.Upgrade;
-        PriorityTypeId = viewModel.PriorityTypeId ?? 0;
-        ProjectStatusTypeId = viewModel.ProjectStatusTypeId ?? 0;
-        Team = viewModel.Team;
-        MemorabiliaId = viewModel.MemorabiliaId ?? 0;
-        UserId = viewModel.UserId;
-        MemorabiliaFileName = viewModel.MemorabiliaFileName;
-        Project = viewModel.Project;
+        Id = model.Id;
+        ItemTypeId = model.ItemTypeId ?? 0;
+        Rank = model.Rank;
+        Upgrade = model.Upgrade;
+        PriorityTypeId = model.PriorityTypeId ?? 0;
+        ProjectStatusTypeId = model.ProjectStatusTypeId ?? 0;
+        Team = model.Team;
+        MemorabiliaId = model.MemorabiliaId ?? 0;
+        UserId = model.UserId;
+        MemorabiliaFileName = model.MemorabiliaFileName;
+        Project = model.Project;
     }
 
-    public bool DisplayDoubleUpIcon => Rank > 1;
+    public bool DisplayDoubleUpIcon 
+        => Rank > 1;
 
-    public bool DisplayUpIcon => Rank > 1;
+    public bool DisplayUpIcon 
+        => Rank > 1;
 
     public string DoubleDownIcon 
         => MudBlazor.Icons.Material.Filled.KeyboardDoubleArrowDown;
@@ -57,7 +59,8 @@ public class ProjectMemorabiliaTeamEditModel : EditModel
 
     public int? Rank { get; set; }
 
-    public Entity.Team Team { get; set; } = new();
+    public Entity.Team Team { get; set; } 
+        = new();
 
     public string TemplateImageFileName { get; set; }
 

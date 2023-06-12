@@ -1,21 +1,18 @@
-﻿using Memorabilia.Domain.Entities;
+﻿namespace Memorabilia.Application.Features.Admin.Leagues;
 
-namespace Memorabilia.Application.Features.Admin.Leagues;
-
-public record GetLeagues() : IQuery<LeaguesViewModel>
+public record GetLeagues() : IQuery<Entity.League[]>
 {
-    public class Handler : QueryHandler<GetLeagues, LeaguesViewModel>
+    public class Handler : QueryHandler<GetLeagues, Entity.League[]>
     {
-        private readonly IDomainRepository<League> _leagueRepository;
+        private readonly IDomainRepository<Entity.League> _leagueRepository;
 
-        public Handler(IDomainRepository<League> leagueRepository)
+        public Handler(IDomainRepository<Entity.League> leagueRepository)
         {
             _leagueRepository = leagueRepository;
         }
 
-        protected override async Task<LeaguesViewModel> Handle(GetLeagues query)
-        {
-            return new LeaguesViewModel(await _leagueRepository.GetAll());
-        }
+        protected override async Task<Entity.League[]> Handle(GetLeagues query)
+            => (await _leagueRepository.GetAll())
+                    .ToArray();
     }
 }

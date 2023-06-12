@@ -1,8 +1,8 @@
 ﻿namespace Memorabilia.Application.Features.Tools.Shared.AllStars;
 
-public record GetAllStars(int Year, Constant.Sport Sport) : IQuery<AllStarsModel>
+public record GetAllStars(int Year, Constant.Sport Sport) : IQuery<Entity.AllStar[]>
 {
-    public class Handler : QueryHandler<GetAllStars, AllStarsModel>
+    public class Handler : QueryHandler<GetAllStars, Entity.AllStar[]>
     {
         private readonly IAllStarRepository _allStarRepository;
 
@@ -11,9 +11,8 @@ public record GetAllStars(int Year, Constant.Sport Sport) : IQuery<AllStarsModel
             _allStarRepository = allStarRepository;
         }
 
-        protected override async Task<AllStarsModel> Handle(GetAllStars query)
-        {
-            return new AllStarsModel(await _allStarRepository.GetAll(query.Year, query.Sport), query.Sport, query.Year);
-        }
+        protected override async Task<Entity.AllStar[]> Handle(GetAllStars query)
+            => (await _allStarRepository.GetAll(query.Year, query.Sport))
+                    .ToArray();
     }
 }

@@ -17,19 +17,19 @@ public partial class TeamSelector
     [Parameter]
     public int? Year { get; set; }
 
-    protected SaveTeamViewModel SelectedTeam { get; set; }
+    protected TeamEditModel SelectedTeam { get; set; }
 
     protected override async Task OnInitializedAsync()
     {
         if (TeamId == 0)
             return;
 
-        TeamViewModel team = await QueryRouter.Send(new GetTeam(TeamId));
+        var team = new TeamModel(await QueryRouter.Send(new GetTeam(TeamId)));
 
-        SelectedTeam = new SaveTeamViewModel(team);
+        SelectedTeam = new TeamEditModel(team);
     }
 
-    protected async Task TeamChanged(SaveTeamViewModel team)
+    protected async Task TeamChanged(TeamEditModel team)
     {
         SelectedTeam = team;
 

@@ -15,7 +15,5 @@ public class SportFilterRule : IFilterRule<Entity.Memorabilia>
     }
 
     public Expression<Func<Entity.Memorabilia, bool>> GetExpression()
-    {
-        return item => item.Sports.Select(sport => sport.SportId).Any(sportId => _sportIds.Contains(sportId));
-    }
+        => item => item.Sports.Select(sport => sport.SportId).Any(sportId => _sportIds.Contains(sportId));
 }

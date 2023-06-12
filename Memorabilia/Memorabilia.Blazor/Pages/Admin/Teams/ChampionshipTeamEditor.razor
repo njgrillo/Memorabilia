@@ -1,4 +1,4 @@
-﻿@inherits EditTeamItem<SaveTeamChampionshipsViewModel, TeamChampionshipViewModel>
+﻿@inherits EditTeamItem<TeamChampionshipsEditModel, TeamChampionshipModel>
 
 <EditPage ContinueNavigationPath="@ViewModel.ContinueNavigationPath"
           DisplaySaveContinueButton="false"
@@ -12,7 +12,7 @@
           PageFooterButtonText="@ViewModel.ExitButtonText"
           PageFooterNavigationPath="@ViewModel.BackNavigationPath"
           PageTitle="@ViewModel.PageTitle"
-          TItem="SaveTeamChampionshipsViewModel"
+          TItem="TeamChampionshipsEditModel"
           UseMultipleButtons="true">
     <TimelineContent>
         <TeamTimeline DisplayConference="ViewModel.CanHaveConference" 

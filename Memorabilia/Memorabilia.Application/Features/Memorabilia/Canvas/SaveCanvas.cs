@@ -13,7 +13,7 @@ public class SaveCanvas
 
         protected override async Task Handle(Command command)
         {
-            var memorabilia = await _memorabiliaRepository.Get(command.MemorabiliaId);
+            Entity.Memorabilia memorabilia = await _memorabiliaRepository.Get(command.MemorabiliaId);
 
             memorabilia.SetCanvas(command.BrandId,
                                   command.Matted,
@@ -30,29 +30,38 @@ public class SaveCanvas
 
     public class Command : DomainCommand, ICommand
     {
-        private readonly SaveCanvasViewModel _viewModel;
+        private readonly CanvasEditModel _editModel;
 
-        public Command(SaveCanvasViewModel viewModel)
+        public Command(CanvasEditModel editModel)
         {
-            _viewModel = viewModel;
+            _editModel = editModel;
         }
 
-        public int BrandId => _viewModel.BrandId;
+        public int BrandId 
+            => _editModel.BrandId;
 
-        public bool Matted => _viewModel.Matted;
+        public bool Matted 
+            => _editModel.Matted;
 
-        public int MemorabiliaId => _viewModel.MemorabiliaId;
+        public int MemorabiliaId 
+            => _editModel.MemorabiliaId;
 
-        public int OrientationId => _viewModel.OrientationId;
+        public int OrientationId 
+            => _editModel.OrientationId;
 
-        public int[] PersonIds => _viewModel.People.Where(person => !person.IsDeleted).Select(person => person.Id).ToArray();
+        public int[] PersonIds 
+            => _editModel.People.ActiveIds();
 
-        public int SizeId => _viewModel.SizeId;
+        public int SizeId 
+            => _editModel.SizeId;
 
-        public int[] SportIds => _viewModel.SportIds.ToArray();
+        public int[] SportIds 
+            => _editModel.SportIds.ToArray();
 
-        public bool Stretched => _viewModel.Stretched;
+        public bool Stretched 
+            => _editModel.Stretched;
 
-        public int[] TeamIds => _viewModel.Teams.Where(person => !person.IsDeleted).Select(team => team.Id).ToArray();
+        public int[] TeamIds 
+            => _editModel.Teams.ActiveIds();
     }
 }

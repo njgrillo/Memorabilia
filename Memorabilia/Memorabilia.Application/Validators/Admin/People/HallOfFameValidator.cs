@@ -4,7 +4,7 @@ public class HallOfFameValidator : AbstractValidator<SavePersonHallOfFame.Comman
 {
     public HallOfFameValidator()
     {
-        var inductionYearMessage
+        string inductionYearMessage
             = $"Invalid Induction Year.  Induction Year must be after 1900 and on/before {DateTime.UtcNow.Year}";
 
         RuleFor(x => x.HallOfFames)
@@ -24,15 +24,14 @@ public class HallOfFameValidator : AbstractValidator<SavePersonHallOfFame.Comman
             .WithMessage(inductionYearMessage);
     }
 
-    private bool HasInvalidYear(SavePersonHallOfFameViewModel[] hofs)
+    private static bool HasInvalidYear(PersonHallOfFameEditModel[] hofs)
     {
         bool hasInvalidYear = false;
 
-        foreach (SavePersonHallOfFameViewModel hof in hofs)
+        foreach (PersonHallOfFameEditModel hof in hofs)
         {
-            hasInvalidYear = hof.InductionYear.HasValue
-                ? hof.InductionYear.Value > DateTime.UtcNow.Year || hof.InductionYear.Value < 1900
-                : false;
+            hasInvalidYear = hof.InductionYear.HasValue && 
+                             (hof.InductionYear.Value > DateTime.UtcNow.Year || hof.InductionYear.Value < 1900);
 
             if (hasInvalidYear)
                 break;
@@ -41,15 +40,14 @@ public class HallOfFameValidator : AbstractValidator<SavePersonHallOfFame.Comman
         return hasInvalidYear;
     }
 
-    private bool HasInvalidYear(SavePersonFranchiseHallOfFameViewModel[] hofs)
+    private static bool HasInvalidYear(PersonFranchiseHallOfFameEditModel[] hofs)
     {
         bool hasInvalidYear = false;
 
-        foreach (SavePersonFranchiseHallOfFameViewModel hof in hofs)
+        foreach (PersonFranchiseHallOfFameEditModel hof in hofs)
         {
-            hasInvalidYear = hof.Year.HasValue
-                ? hof.Year.Value > DateTime.UtcNow.Year || hof.Year.Value < 1900
-                : false;
+            hasInvalidYear = hof.Year.HasValue && 
+                             (hof.Year.Value > DateTime.UtcNow.Year || hof.Year.Value < 1900);
 
             if (hasInvalidYear)
                 break;
@@ -58,15 +56,14 @@ public class HallOfFameValidator : AbstractValidator<SavePersonHallOfFame.Comman
         return hasInvalidYear;
     }
 
-    private bool HasInvalidYear(SavePersonCollegeHallOfFameViewModel[] hofs)
+    private static bool HasInvalidYear(PersonCollegeHallOfFameEditModel[] hofs)
     {
         bool hasInvalidYear = false;
 
-        foreach (SavePersonCollegeHallOfFameViewModel hof in hofs)
+        foreach (PersonCollegeHallOfFameEditModel hof in hofs)
         {
-            hasInvalidYear = hof.Year.HasValue
-                ? hof.Year.Value > DateTime.UtcNow.Year || hof.Year.Value < 1900
-                : false;
+            hasInvalidYear = hof.Year.HasValue && 
+                             (hof.Year.Value > DateTime.UtcNow.Year || hof.Year.Value < 1900);
 
             if (hasInvalidYear)
                 break;
@@ -75,15 +72,14 @@ public class HallOfFameValidator : AbstractValidator<SavePersonHallOfFame.Comman
         return hasInvalidYear;
     }
 
-    private bool HasInvalidYear(SavePersonInternationalHallOfFameViewModel[] hofs)
+    private static bool HasInvalidYear(PersonInternationalHallOfFameEditModel[] hofs)
     {
         bool hasInvalidYear = false;
 
-        foreach (SavePersonInternationalHallOfFameViewModel hof in hofs)
+        foreach (PersonInternationalHallOfFameEditModel hof in hofs)
         {
-            hasInvalidYear = hof.Year.HasValue
-                ? hof.Year.Value > DateTime.UtcNow.Year || hof.Year.Value < 1900
-                : false;
+            hasInvalidYear = hof.Year.HasValue && 
+                             (hof.Year.Value > DateTime.UtcNow.Year || hof.Year.Value < 1900);
 
             if (hasInvalidYear)
                 break;

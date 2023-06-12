@@ -1,16 +1,17 @@
 ﻿namespace Memorabilia.Blazor.Pages.Admin.ItemTypeSizes;
 
-public partial class ViewItemTypeSizes : ViewItem<ItemTypeSizesViewModel, ItemTypeSizeViewModel>
+public partial class ViewItemTypeSizes 
+    : ViewItem<ItemTypeSizesModel, ItemTypeSizeModel>
 {
     protected async Task OnLoad()
     {
-        await OnLoad(new GetItemTypeSizes());
+        ViewModel = new ItemTypeSizesModel(await QueryRouter.Send(new GetItemTypeSizes()));
     }
 
     protected override async Task Delete(int id)
     {
         var deletedItem = ViewModel.ItemTypeSizes.Single(ItemTypeSize => ItemTypeSize.Id == id);
-        var viewModel = new SaveItemTypeSizeViewModel(deletedItem)
+        var viewModel = new ItemTypeSizeEditModel(deletedItem)
         {
             IsDeleted = true
         };
@@ -22,10 +23,8 @@ public partial class ViewItemTypeSizes : ViewItem<ItemTypeSizesViewModel, ItemTy
         ShowDeleteSuccessfulMessage(ViewModel.ItemTitle);
     }
 
-    protected override bool FilterFunc(ItemTypeSizeViewModel viewModel, string search)
-    {
-        return search.IsNullOrEmpty() ||
-               viewModel.ItemTypeName.Contains(search, StringComparison.OrdinalIgnoreCase) ||
-               viewModel.SizeName.Contains(search, StringComparison.OrdinalIgnoreCase);
-    }
+    protected override bool FilterFunc(ItemTypeSizeModel viewModel, string search)
+        => search.IsNullOrEmpty() ||
+           viewModel.ItemTypeName.Contains(search, StringComparison.OrdinalIgnoreCase) ||
+           viewModel.SizeName.Contains(search, StringComparison.OrdinalIgnoreCase);
 }

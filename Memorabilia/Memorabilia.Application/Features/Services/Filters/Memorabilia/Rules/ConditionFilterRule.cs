@@ -18,9 +18,7 @@ public class ConditionFilterRule : IFilterRule<Entity.Memorabilia>
     }
 
     public Expression<Func<Entity.Memorabilia, bool>> GetExpression()
-    {
-        return _filterItem == FilterItemEnum.AutographCondition
-            ? item => item.Autographs.Any(autograph => _conditionIds.Contains(autograph.ConditionId))
+        => _filterItem == FilterItemEnum.AutographCondition 
+            ? item => item.Autographs.Any(autograph => _conditionIds.Contains(autograph.ConditionId)) 
             : item => _conditionIds.Contains(item.ConditionId ?? 0);
-    }
 }

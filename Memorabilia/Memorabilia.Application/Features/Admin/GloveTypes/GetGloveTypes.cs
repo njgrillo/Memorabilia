@@ -1,21 +1,18 @@
-﻿using Memorabilia.Domain.Entities;
+﻿namespace Memorabilia.Application.Features.Admin.GloveTypes;
 
-namespace Memorabilia.Application.Features.Admin.GloveTypes;
-
-public record GetGloveTypes() : IQuery<GloveTypesViewModel>
+public record GetGloveTypes() : IQuery<Entity.GloveType[]>
 {
-    public class Handler : QueryHandler<GetGloveTypes, GloveTypesViewModel>
+    public class Handler : QueryHandler<GetGloveTypes, Entity.GloveType[]>
     {
-        private readonly IDomainRepository<GloveType> _gloveTypeRepository;
+        private readonly IDomainRepository<Entity.GloveType> _gloveTypeRepository;
 
-        public Handler(IDomainRepository<GloveType> gloveTypeRepository)
+        public Handler(IDomainRepository<Entity.GloveType> gloveTypeRepository)
         {
             _gloveTypeRepository = gloveTypeRepository;
         }
 
-        protected override async Task<GloveTypesViewModel> Handle(GetGloveTypes query)
-        {
-            return new GloveTypesViewModel(await _gloveTypeRepository.GetAll());
-        }
+        protected override async Task<Entity.GloveType[]> Handle(GetGloveTypes query)
+            => (await _gloveTypeRepository.GetAll())
+                    .ToArray();
     }
 }

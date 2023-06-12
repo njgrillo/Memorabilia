@@ -1,6 +1,7 @@
 ﻿namespace Memorabilia.Blazor.Pages.Admin.Occupations;
 
-public partial class ViewOccupations : ViewDomainItem<OccupationsViewModel>, IDeleteDomainItem, IViewDomainItem
+public partial class ViewOccupations 
+    : ViewDomainItem<OccupationsModel>, IDeleteDomainItem, IViewDomainItem
 {
     public async Task OnDelete(DomainEditModel viewModel)
     {
@@ -9,6 +10,6 @@ public partial class ViewOccupations : ViewDomainItem<OccupationsViewModel>, IDe
 
     public async Task OnLoad()
     {
-        await OnLoad(new GetOccupations());
+        ViewModel = new OccupationsModel(await QueryRouter.Send(new GetOccupations()));
     }
 }

@@ -1,25 +1,20 @@
-﻿using Memorabilia.Domain.Entities;
+﻿namespace Memorabilia.Application.Features.Admin.SportLeagueLevels;
 
-namespace Memorabilia.Application.Features.Admin.SportLeagueLevels;
-
-public record GetSportLeagueLevels() : IQuery<SportLeagueLevelsViewModel>
+public record GetSportLeagueLevels() : IQuery<Entity.SportLeagueLevel[]>
 {
-    public class Handler : QueryHandler<GetSportLeagueLevels, SportLeagueLevelsViewModel>
+    public class Handler : QueryHandler<GetSportLeagueLevels, Entity.SportLeagueLevel[]>
     {
-        private readonly IDomainRepository<SportLeagueLevel> _sportLeagueLevelRepository;
+        private readonly IDomainRepository<Entity.SportLeagueLevel> _sportLeagueLevelRepository;
 
-        public Handler(IDomainRepository<SportLeagueLevel> sportLeagueLevelRepository)
+        public Handler(IDomainRepository<Entity.SportLeagueLevel> sportLeagueLevelRepository)
         {
             _sportLeagueLevelRepository = sportLeagueLevelRepository;
         }
 
-        protected override async Task<SportLeagueLevelsViewModel> Handle(GetSportLeagueLevels query)
-        {
-            var sportLeagueLevels = (await _sportLeagueLevelRepository.GetAll())
-                                        .OrderBy(sportLeagueLevel => sportLeagueLevel.SportName)
-                                        .ThenBy(sportLeagueLevel => sportLeagueLevel.Name);
-
-            return new SportLeagueLevelsViewModel(sportLeagueLevels);
-        }
+        protected override async Task<Entity.SportLeagueLevel[]> Handle(GetSportLeagueLevels query)
+            => (await _sportLeagueLevelRepository.GetAll())
+                    .OrderBy(sportLeagueLevel => sportLeagueLevel.SportName)
+                    .ThenBy(sportLeagueLevel => sportLeagueLevel.Name)
+                    .ToArray();
     }
 }

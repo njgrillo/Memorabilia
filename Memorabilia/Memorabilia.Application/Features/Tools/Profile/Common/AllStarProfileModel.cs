@@ -16,5 +16,6 @@ public class AllStarProfileModel
         ? $"{_team.Team.Location} {_team.Team.Name}"
         : string.Empty;
 
-    public int Year => _allStar.Year;
+    public int Year 
+        => _allStar.Year;
 }

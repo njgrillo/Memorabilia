@@ -1,8 +1,9 @@
 ﻿namespace Memorabilia.Application.Features.Tools.Shared.Awards;
 
-public record GetAwards(Constant.AwardType AwardType, Constant.Sport Sport) : IQuery<AwardsModel>
+public record GetAwards(Constant.AwardType AwardType, Constant.Sport Sport) 
+    : IQuery<Entity.PersonAward[]>
 {
-    public class Handler : QueryHandler<GetAwards, AwardsModel>
+    public class Handler : QueryHandler<GetAwards, Entity.PersonAward[]>
     {
         private readonly IPersonAwardRepository _personAwardRepository;
 
@@ -11,12 +12,8 @@ public record GetAwards(Constant.AwardType AwardType, Constant.Sport Sport) : IQ
             _personAwardRepository = personAwardRepository;
         }
 
-        protected override async Task<AwardsModel> Handle(GetAwards query)
-        {
-            return new AwardsModel(await _personAwardRepository.GetAll(query.AwardType.Id), query.Sport)
-            {
-                AwardType = query.AwardType
-            };
-        }
+        protected override async Task<Entity.PersonAward[]> Handle(GetAwards query)
+            => (await _personAwardRepository.GetAll(query.AwardType.Id))
+                    .ToArray();
     }
 }

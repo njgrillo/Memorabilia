@@ -27,11 +27,11 @@ public class SportServiceValidator : AbstractValidator<SavePersonSportService.Co
             .WithMessage("Free Agent Signing Date cannot be after Debut Date.");
     }
 
-    private static bool HasInvalidYear(SavePersonCollegeViewModel[] colleges)
+    private static bool HasInvalidYear(PersonCollegeEditModel[] colleges)
     {
         bool hasInvalidYear = false;
 
-        foreach (SavePersonCollegeViewModel college in colleges)
+        foreach (PersonCollegeEditModel college in colleges)
         {
             if (!college.BeginYear.HasValue || !college.EndYear.HasValue)
                 continue;

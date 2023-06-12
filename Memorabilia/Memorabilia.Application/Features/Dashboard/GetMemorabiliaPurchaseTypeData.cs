@@ -13,14 +13,15 @@ public record GetMemorabiliaPurchaseTypeData(int UserId) : IQuery<DashboardChart
 
         protected override async Task<DashboardChartModel> Handle(GetMemorabiliaPurchaseTypeData query)
         {
-            var purchaseTypeIds = _repository.GetPurchaseTypeIds(query.UserId);
-            var purchaseTypeNames = purchaseTypeIds.Select(purchaseTypeId => Constant.PurchaseType.Find(purchaseTypeId).Name)
-                                                   .Distinct();
+            int[] purchaseTypeIds = _repository.GetPurchaseTypeIds(query.UserId);
+            string[] purchaseTypeNames = purchaseTypeIds.Select(purchaseTypeId => Constant.PurchaseType.Find(purchaseTypeId).Name)
+                                                        .Distinct()
+                                                        .ToArray();
 
             var labels = new List<string>();
             var counts = new List<double>();
 
-            foreach (var purchaseTypeName in purchaseTypeNames)
+            foreach (string purchaseTypeName in purchaseTypeNames)
             {
                 var purchaseType = Constant.PurchaseType.Find(purchaseTypeName);
                 var count = purchaseTypeIds.Count(purchaseTypeId => purchaseTypeId == purchaseType.Id);

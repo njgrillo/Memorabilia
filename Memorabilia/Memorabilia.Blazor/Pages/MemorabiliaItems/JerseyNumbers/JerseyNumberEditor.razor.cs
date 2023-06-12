@@ -1,13 +1,13 @@
 ﻿namespace Memorabilia.Blazor.Pages.MemorabiliaItems.JerseyNumbers;
 
-public partial class JerseyNumberEditor : MemorabiliaItem<SaveJerseyNumberViewModel>
+public partial class JerseyNumberEditor : MemorabiliaItem<JerseyNumberEditModel>
 {
     [Inject]
     public JerseyNumberValidator Validator { get; set; }
 
     protected async Task OnLoad()
     {
-        ViewModel = new SaveJerseyNumberViewModel(await QueryRouter.Send(new GetJerseyNumber(MemorabiliaId)));
+        ViewModel = new JerseyNumberEditModel(new JerseyNumberModel(await QueryRouter.Send(new GetMemorabiliaItem(MemorabiliaId))));
     }
 
     protected async Task OnSave()

@@ -1,41 +1,41 @@
-﻿using Memorabilia.Domain.Entities;
+﻿namespace Memorabilia.Application.Features.Admin.JerseyQualityTypes;
 
-namespace Memorabilia.Application.Features.Admin.JerseyQualityTypes;
-
-public record SaveJerseyQualityType(DomainEditModel ViewModel) : ICommand
+public record SaveJerseyQualityType(DomainEditModel JerseyQualityType) : ICommand
 {
     public class Handler : CommandHandler<SaveJerseyQualityType>
     {
-        private readonly IDomainRepository<JerseyQualityType> _jerseyQualityTypeRepository;
+        private readonly IDomainRepository<Entity.JerseyQualityType> _jerseyQualityTypeRepository;
 
-        public Handler(IDomainRepository<JerseyQualityType> jerseyQualityTypeRepository)
+        public Handler(IDomainRepository<Entity.JerseyQualityType> jerseyQualityTypeRepository)
         {
             _jerseyQualityTypeRepository = jerseyQualityTypeRepository;
         }
 
         protected override async Task Handle(SaveJerseyQualityType request)
         {
-            JerseyQualityType jerseyQualityType;
+            Entity.JerseyQualityType jerseyQualityType;
 
-            if (request.ViewModel.IsNew)
+            if (request.JerseyQualityType.IsNew)
             {
-                jerseyQualityType = new JerseyQualityType(request.ViewModel.Name, request.ViewModel.Abbreviation);
+                jerseyQualityType = new Entity.JerseyQualityType(request.JerseyQualityType.Name, 
+                                                                 request.JerseyQualityType.Abbreviation);
 
                 await _jerseyQualityTypeRepository.Add(jerseyQualityType);
 
                 return;
             }
 
-            jerseyQualityType = await _jerseyQualityTypeRepository.Get(request.ViewModel.Id);
+            jerseyQualityType = await _jerseyQualityTypeRepository.Get(request.JerseyQualityType.Id);
 
-            if (request.ViewModel.IsDeleted)
+            if (request.JerseyQualityType.IsDeleted)
             {
                 await _jerseyQualityTypeRepository.Delete(jerseyQualityType);
 
                 return;
             }
 
-            jerseyQualityType.Set(request.ViewModel.Name, request.ViewModel.Abbreviation);
+            jerseyQualityType.Set(request.JerseyQualityType.Name, 
+                                  request.JerseyQualityType.Abbreviation);
 
             await _jerseyQualityTypeRepository.Update(jerseyQualityType);
         }

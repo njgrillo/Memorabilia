@@ -1,21 +1,17 @@
-﻿using Memorabilia.Domain.Entities;
+﻿namespace Memorabilia.Application.Features.Admin.PrivacyTypes;
 
-namespace Memorabilia.Application.Features.Admin.PrivacyTypes;
-
-public record GetPrivacyType(int Id) : IQuery<DomainModel>
+public record GetPrivacyType(int Id) : IQuery<Entity.PrivacyType>
 {
-    public class Handler : QueryHandler<GetPrivacyType, DomainModel>
+    public class Handler : QueryHandler<GetPrivacyType, Entity.PrivacyType>
     {
-        private readonly IDomainRepository<PrivacyType> _privacyTypeRepository;
+        private readonly IDomainRepository<Entity.PrivacyType> _privacyTypeRepository;
 
-        public Handler(IDomainRepository<PrivacyType> privacyTypeRepository)
+        public Handler(IDomainRepository<Entity.PrivacyType> privacyTypeRepository)
         {
             _privacyTypeRepository = privacyTypeRepository;
         }
 
-        protected override async Task<DomainModel> Handle(GetPrivacyType query)
-        {
-            return new DomainModel(await _privacyTypeRepository.Get(query.Id));
-        }
+        protected override async Task<Entity.PrivacyType> Handle(GetPrivacyType query)
+            => await _privacyTypeRepository.Get(query.Id);
     }
 }

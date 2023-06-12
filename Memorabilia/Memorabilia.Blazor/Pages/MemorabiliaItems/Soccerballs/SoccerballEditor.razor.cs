@@ -1,18 +1,18 @@
 ﻿namespace Memorabilia.Blazor.Pages.MemorabiliaItems.Soccerballs;
 
-public partial class SoccerballEditor : MemorabiliaItem<SaveSoccerballViewModel>
+public partial class SoccerballEditor : MemorabiliaItem<SoccerballEditModel>
 {
     [Inject]
     public SoccerballValidator Validator { get; set; }
 
     protected async Task OnLoad()
     {
-        var viewModel = await QueryRouter.Send(new GetSoccerball(MemorabiliaId));
+        var viewModel = await QueryRouter.Send(new GetMemorabiliaItem(MemorabiliaId));
 
         if (viewModel.Brand == null)
             return;
 
-        ViewModel = new SaveSoccerballViewModel(viewModel);
+        ViewModel = new SoccerballEditModel(new SoccerballModel(viewModel));
     }
 
     protected async Task OnSave()

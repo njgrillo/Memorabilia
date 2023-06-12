@@ -47,10 +47,13 @@ public class SpotEditModel : EditModel
 
     public int MemorabiliaId { get; }
 
-    public string[] MemorabiliaImageNames { get; } = Array.Empty<string>();
+    public string[] MemorabiliaImageNames { get; } 
+        = Array.Empty<string>();
 
     public override string PageTitle 
-        => $"{(EditModeType == Constant.EditModeType.Add ? Constant.EditModeType.Add.Name : Constant.EditModeType.Update.Name)} Spot";
+        => $"{(EditModeType == Constant.EditModeType.Add 
+                ? Constant.EditModeType.Add.Name 
+                : Constant.EditModeType.Update.Name)} Spot";
 
     public int SpotId { get; set; }
 

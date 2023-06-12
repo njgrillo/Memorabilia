@@ -1,4 +1,4 @@
-﻿@inherits EditItemTypeItem<SaveItemTypeSizeViewModel, ItemTypeSizeViewModel>
+﻿@inherits EditItemTypeItem<ItemTypeSizeEditModel, ItemTypeSizeModel>
 
 <EditPage ContinueNavigationPath="@ViewModel.RoutePrefix"
           EditMode="ViewModel.EditModeType" 
@@ -11,7 +11,7 @@
           PageFooterButtonText="@ViewModel.ExitButtonText"
           PageFooterNavigationPath="@ViewModel.ExitNavigationPath"
           PageTitle="@ViewModel.PageTitle"
-          TItem="SaveItemTypeSizeViewModel">
+          TItem="ItemTypeSizeEditModel">
     <Content>
         <DivRowCol3 Hidden="@(!DisplayItemType)">
             <Content>

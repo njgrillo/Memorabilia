@@ -12,8 +12,6 @@ public record GetProjectTeams(int? SportId = null) : IQuery<Entity.Team[]>
         }
 
         protected override async Task<Entity.Team[]> Handle(GetProjectTeams query)
-        {
-            return await _teamRepository.GetAllCurrentTeams(sportId: query.SportId);
-        }
+            => await _teamRepository.GetAllCurrentTeams(sportId: query.SportId);
     }
 }

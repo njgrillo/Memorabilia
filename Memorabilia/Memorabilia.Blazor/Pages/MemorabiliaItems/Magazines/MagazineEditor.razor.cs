@@ -1,18 +1,18 @@
 ﻿namespace Memorabilia.Blazor.Pages.MemorabiliaItems.Magazines;
 
-public partial class MagazineEditor : MemorabiliaItem<SaveMagazineViewModel>
+public partial class MagazineEditor : MemorabiliaItem<MagazineEditModel>
 {
     [Inject]
     public MagazineValidator Validator { get; set; }
 
     protected async Task OnLoad()
     {
-        var viewModel = await QueryRouter.Send(new GetMagazine(MemorabiliaId));
+        var viewModel = await QueryRouter.Send(new GetMemorabiliaItem(MemorabiliaId));
 
         if (viewModel.Brand == null)
             return;
 
-        ViewModel = new SaveMagazineViewModel(viewModel);
+        ViewModel = new MagazineEditModel(new MagazineModel(viewModel));
     }
 
     protected async Task OnSave()

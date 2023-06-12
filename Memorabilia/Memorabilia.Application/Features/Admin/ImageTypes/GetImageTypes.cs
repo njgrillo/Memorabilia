@@ -1,21 +1,18 @@
-﻿using Memorabilia.Domain.Entities;
+﻿namespace Memorabilia.Application.Features.Admin.ImageTypes;
 
-namespace Memorabilia.Application.Features.Admin.ImageTypes;
-
-public record GetImageTypes() : IQuery<ImageTypesViewModel>
+public record GetImageTypes() : IQuery<Entity.ImageType[]>
 {
-    public class Handler : QueryHandler<GetImageTypes, ImageTypesViewModel>
+    public class Handler : QueryHandler<GetImageTypes, Entity.ImageType[]>
     {
-        private readonly IDomainRepository<ImageType> _imageTypeRepository;
+        private readonly IDomainRepository<Entity.ImageType> _imageTypeRepository;
 
-        public Handler(IDomainRepository<ImageType> imageTypeRepository)
+        public Handler(IDomainRepository<Entity.ImageType> imageTypeRepository)
         {
             _imageTypeRepository = imageTypeRepository;
         }
 
-        protected override async Task<ImageTypesViewModel> Handle(GetImageTypes query)
-        {
-            return new ImageTypesViewModel(await _imageTypeRepository.GetAll());
-        }
+        protected override async Task<Entity.ImageType[]> Handle(GetImageTypes query)
+            => (await _imageTypeRepository.GetAll())
+                    .ToArray();
     }
 }

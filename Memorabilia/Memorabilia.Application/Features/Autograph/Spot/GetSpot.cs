@@ -13,8 +13,6 @@ public record GetSpot(int AutographId)
         }
 
         protected override async Task<Entity.Autograph> Handle(GetSpot query)
-        {
-            return await _autographRepository.Get(query.AutographId);
-        }
+            => await _autographRepository.Get(query.AutographId);
     }
 }

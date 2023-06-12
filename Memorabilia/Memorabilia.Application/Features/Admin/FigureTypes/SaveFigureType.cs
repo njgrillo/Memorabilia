@@ -1,40 +1,41 @@
-﻿using Memorabilia.Domain.Entities;
+﻿namespace Memorabilia.Application.Features.Admin.FigureTypes;
 
-namespace Memorabilia.Application.Features.Admin.FigureTypes;
-
-public record SaveFigureType(DomainEditModel ViewModel) : ICommand
+public record SaveFigureType(DomainEditModel FigureType) : ICommand
 {
     public class Handler : CommandHandler<SaveFigureType>
     {
-        private readonly IDomainRepository<FigureType> _figureTypeRepository;
+        private readonly IDomainRepository<Entity.FigureType> _figureTypeRepository;
 
-        public Handler(IDomainRepository<FigureType> figureTypeRepository)
+        public Handler(IDomainRepository<Entity.FigureType> figureTypeRepository)
         {
             _figureTypeRepository = figureTypeRepository;
         }
 
         protected override async Task Handle(SaveFigureType request)
         {
-            FigureType figureType;
+            Entity.FigureType figureType;
 
-            if (request.ViewModel.IsNew)
+            if (request.FigureType.IsNew)
             {
-                figureType = new FigureType(request.ViewModel.Name, request.ViewModel.Abbreviation);
+                figureType = new Entity.FigureType(request.FigureType.Name, 
+                                                   request.FigureType.Abbreviation);
+
                 await _figureTypeRepository.Add(figureType);
 
                 return;
             }
 
-            figureType = await _figureTypeRepository.Get(request.ViewModel.Id);
+            figureType = await _figureTypeRepository.Get(request.FigureType.Id);
 
-            if (request.ViewModel.IsDeleted)
+            if (request.FigureType.IsDeleted)
             {
                 await _figureTypeRepository.Delete(figureType);
 
                 return;
             }
 
-            figureType.Set(request.ViewModel.Name, request.ViewModel.Abbreviation);
+            figureType.Set(request.FigureType.Name, 
+                          request.FigureType.Abbreviation);
 
             await _figureTypeRepository.Update(figureType);
         }

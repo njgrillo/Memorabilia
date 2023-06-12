@@ -41,11 +41,17 @@ public partial class ViewLeaders
         if (leaderType == null)
             return;
 
-        Model = await QueryRouter.Send(new GetLeaders(leaderType, Sport));
+        Model = new(await QueryRouter.Send(new GetLeaders(leaderType, Sport)), Sport)
+                {
+                    LeaderType = leaderType
+                };
     }
 
     private async Task OnInputChange(LeaderType leaderType)
     {
-        Model = await QueryRouter.Send(new GetLeaders(leaderType, Sport));
+        Model = new(await QueryRouter.Send(new GetLeaders(leaderType, Sport)), Sport)
+                {
+                    LeaderType = leaderType
+                };
     }
 }

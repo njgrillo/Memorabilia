@@ -1,21 +1,17 @@
-﻿using Memorabilia.Domain.Entities;
+﻿namespace Memorabilia.Application.Features.Admin.BasketballTypes;
 
-namespace Memorabilia.Application.Features.Admin.BasketballTypes;
-
-public record GetBasketballType(int Id) : IQuery<DomainModel>
+public record GetBasketballType(int Id) : IQuery<Entity.BasketballType>
 {
-    public class Handler : QueryHandler<GetBasketballType, DomainModel>
+    public class Handler : QueryHandler<GetBasketballType, Entity.BasketballType>
     {
-        private readonly IDomainRepository<BasketballType> _basketballTypeRepository;
+        private readonly IDomainRepository<Entity.BasketballType> _basketballTypeRepository;
 
-        public Handler(IDomainRepository<BasketballType> basketballTypeRepository)
+        public Handler(IDomainRepository<Entity.BasketballType> basketballTypeRepository)
         {
             _basketballTypeRepository = basketballTypeRepository;
         }
 
-        protected override async Task<DomainModel> Handle(GetBasketballType query)
-        {
-            return new DomainModel(await _basketballTypeRepository.Get(query.Id));
-        }
+        protected override async Task<Entity.BasketballType> Handle(GetBasketballType query)
+            => await _basketballTypeRepository.Get(query.Id);
     }
 }

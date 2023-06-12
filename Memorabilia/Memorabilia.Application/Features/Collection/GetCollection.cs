@@ -12,8 +12,6 @@ public record GetCollection(int Id) : IQuery<Entity.Collection>
         }
 
         protected override async Task<Entity.Collection> Handle(GetCollection query)
-        {
-            return await _collectionRepository.Get(query.Id);
-        }
+            => await _collectionRepository.Get(query.Id);
     }
 }

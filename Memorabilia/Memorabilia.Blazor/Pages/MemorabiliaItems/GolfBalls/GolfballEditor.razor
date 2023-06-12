@@ -1,12 +1,12 @@
-﻿@inherits MemorabiliaItem<SaveGolfballViewModel>
+﻿@inherits MemorabiliaItem<GolfballEditModel>
 
 <EditMemorabiliaPage Item="ViewModel"
                      OnLoad="OnLoad"
                      OnSave="OnSave" 
-                     TItem="SaveGolfballViewModel">
+                     TItem="GolfballEditModel">
     <Content>
         <MemorabiliaItemEditor DisplaySinglePersonSelector="true"
-                               TItem="SaveGolfballViewModel"
+                               TItem="GolfballEditModel"
                                ViewModel="ViewModel" />
     </Content>
 </EditMemorabiliaPage>

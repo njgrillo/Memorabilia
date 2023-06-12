@@ -13,7 +13,7 @@ public class SaveBookplate
 
         protected override async Task Handle(Command command)
         {
-            var memorabilia = await _memorabiliaRepository.Get(command.MemorabiliaId);
+            Entity.Memorabilia memorabilia = await _memorabiliaRepository.Get(command.MemorabiliaId);
 
             memorabilia.SetBookplate(command.PersonId);
 
@@ -23,15 +23,17 @@ public class SaveBookplate
 
     public class Command : DomainCommand, ICommand
     {
-        private readonly SaveBookplateViewModel _viewModel;
+        private readonly BookplateEditModel _editModel;
 
-        public Command(SaveBookplateViewModel viewModel)
+        public Command(BookplateEditModel editModel)
         {
-            _viewModel = viewModel;
+            _editModel = editModel;
         }
 
-        public int MemorabiliaId => _viewModel.MemorabiliaId;
+        public int MemorabiliaId 
+            => _editModel.MemorabiliaId;
 
-        public int? PersonId => _viewModel.Person?.Id > 0 ? _viewModel.Person?.Id : null;
+        public int? PersonId
+            => _editModel.Person?.Id.ToNullableInt() ?? null;
     }
 }

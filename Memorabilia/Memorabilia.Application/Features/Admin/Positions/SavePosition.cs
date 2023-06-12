@@ -1,45 +1,43 @@
-﻿using Memorabilia.Domain.Entities;
+﻿namespace Memorabilia.Application.Features.Admin.Positions;
 
-namespace Memorabilia.Application.Features.Admin.Positions;
-
-public record SavePosition(SavePositionViewModel ViewModel) : ICommand
+public record SavePosition(PositionEditModel Position) : ICommand
 {
     public class Handler : CommandHandler<SavePosition>
     {
-        private readonly IDomainRepository<Position> _positionRepository;
+        private readonly IDomainRepository<Entity.Position> _positionRepository;
 
-        public Handler(IDomainRepository<Position> positionRepository)
+        public Handler(IDomainRepository<Entity.Position> positionRepository)
         {
             _positionRepository = positionRepository;
         }
 
         protected override async Task Handle(SavePosition request)
         {
-            Position position;
+            Entity.Position position;
 
-            if (request.ViewModel.IsNew)
+            if (request.Position.IsNew)
             {
-                position = new Position(request.ViewModel.SportId,
-                                        request.ViewModel.Name,
-                                        request.ViewModel.Abbreviation);
+                position = new Entity.Position(request.Position.SportId,
+                                               request.Position.Name,
+                                               request.Position.Abbreviation);
 
                 await _positionRepository.Add(position);
 
                 return;
             }
 
-            position = await _positionRepository.Get(request.ViewModel.Id);
+            position = await _positionRepository.Get(request.Position.Id);
 
-            if (request.ViewModel.IsDeleted)
+            if (request.Position.IsDeleted)
             {
                 await _positionRepository.Delete(position);
 
                 return;
             }
 
-            position.Set(request.ViewModel.SportId,
-                         request.ViewModel.Name,
-                         request.ViewModel.Abbreviation);
+            position.Set(request.Position.SportId,
+                         request.Position.Name,
+                         request.Position.Abbreviation);
 
             await _positionRepository.Update(position);
         }

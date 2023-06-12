@@ -1,6 +1,7 @@
 ﻿namespace Memorabilia.Blazor.Controls.DropDowns;
 
-public class LeaguePresidentDropDown : DropDown<LeaguePresidentViewModel, int>, INotifyPropertyChanged
+public class LeaguePresidentDropDown 
+    : DropDown<LeaguePresidentModel, int>, INotifyPropertyChanged
 {
     [Parameter]
     public League League { get; set; }
@@ -24,10 +25,8 @@ public class LeaguePresidentDropDown : DropDown<LeaguePresidentViewModel, int>, 
         await LoadItems();
     }
 
-    protected override string GetItemDisplayText(LeaguePresidentViewModel item)
-    {
-        return $"{item.Person.DisplayName} ({item.BeginYear} - {(item.EndYear.HasValue ? item.EndYear : "current")})"; 
-    }
+    protected override string GetItemDisplayText(LeaguePresidentModel item)
+        => $"{item.Person.DisplayName} ({item.BeginYear} - {(item.EndYear.HasValue ? item.EndYear : "current")})";
 
     private async void LeaguePresidentDropDown_PropertyChanged(object sender, PropertyChangedEventArgs e)
     {
@@ -39,6 +38,8 @@ public class LeaguePresidentDropDown : DropDown<LeaguePresidentViewModel, int>, 
 
     private async Task LoadItems()
     {
-        Items = (await QueryRouter.Send(new GetLeaguePresidents(SportLeagueLevel?.Id, League?.Id))).Presidents.ToArray();
+        Entity.LeaguePresident[] presidents = await QueryRouter.Send(new GetLeaguePresidents(SportLeagueLevel?.Id, League?.Id));
+
+        Items = presidents.Select(president => new LeaguePresidentModel(president));
     }
 }

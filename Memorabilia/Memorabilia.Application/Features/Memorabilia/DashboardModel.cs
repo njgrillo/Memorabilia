@@ -4,12 +4,13 @@ public class DashboardModel : Model
 {
     public DashboardModel() { }
 
-    public DashboardModel(IEnumerable<DashboardItemModel> dashboardItemViewModels)
+    public DashboardModel(IEnumerable<DashboardItemModel> items)
     {
-        UserDashboardItems = dashboardItemViewModels;
+        UserDashboardItems = items;
     }        
 
-    public override string PageTitle => "Dashboard";
+    public override string PageTitle 
+        => "Dashboard";
 
     public IEnumerable<DashboardItemModel> UserDashboardItems { get; set; }
 }

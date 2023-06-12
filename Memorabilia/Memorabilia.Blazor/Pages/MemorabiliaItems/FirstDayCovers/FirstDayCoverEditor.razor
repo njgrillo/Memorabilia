@@ -1,9 +1,9 @@
-﻿@inherits MemorabiliaItem<SaveFirstDayCoverViewModel>
+﻿@inherits MemorabiliaItem<FirstDayCoverEditModel>
 
 <EditMemorabiliaPage Item="ViewModel"
                      OnLoad="OnLoad"
                      OnSave="OnSave" 
-                     TItem="SaveFirstDayCoverViewModel">
+                     TItem="FirstDayCoverEditModel">
     <Content>
         <MemorabiliaItemEditor DisplayItemTypeBrand="false"
                                DisplayItemTypeGameStyle="false"
@@ -11,7 +11,7 @@
                                DisplayMultiPersonSelector="true"
                                DisplayMultiSportSelector="true"
                                DisplayMultiTeamSelector="true"
-                               TItem="SaveFirstDayCoverViewModel"
+                               TItem="FirstDayCoverEditModel"
                                ViewModel="ViewModel">
             <AdditionalContent>
                 <DivRowCol3>

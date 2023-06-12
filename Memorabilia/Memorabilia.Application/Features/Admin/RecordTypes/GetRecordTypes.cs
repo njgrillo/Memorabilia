@@ -1,21 +1,18 @@
-﻿using Memorabilia.Domain.Entities;
+﻿namespace Memorabilia.Application.Features.Admin.RecordTypes;
 
-namespace Memorabilia.Application.Features.Admin.RecordTypes;
-
-public record GetRecordTypes() : IQuery<RecordTypesViewModel>
+public record GetRecordTypes() : IQuery<Entity.RecordType[]>
 {
-    public class Handler : QueryHandler<GetRecordTypes, RecordTypesViewModel>
+    public class Handler : QueryHandler<GetRecordTypes, Entity.RecordType[]>
     {
-        private readonly IDomainRepository<RecordType> _recordTypeRepository;
+        private readonly IDomainRepository<Entity.RecordType> _recordTypeRepository;
 
-        public Handler(IDomainRepository<RecordType> recordTypeRepository)
+        public Handler(IDomainRepository<Entity.RecordType> recordTypeRepository)
         {
             _recordTypeRepository = recordTypeRepository;
         }
 
-        protected override async Task<RecordTypesViewModel> Handle(GetRecordTypes query)
-        {
-            return new RecordTypesViewModel(await _recordTypeRepository.GetAll());
-        }
+        protected override async Task<Entity.RecordType[]> Handle(GetRecordTypes query)
+            => (await _recordTypeRepository.GetAll())
+                    .ToArray();
     }
 }

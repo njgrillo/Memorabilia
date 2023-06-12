@@ -13,14 +13,15 @@ public record GetItemTypeData(int UserId) : IQuery<DashboardChartModel>
 
         protected override async Task<DashboardChartModel> Handle(GetItemTypeData query)
         {
-            var itemTypeIds = _repository.GetItemTypeIds(query.UserId);
-            var itemTypeNames = itemTypeIds.Select(itemTypeId => Constant.ItemType.Find(itemTypeId).Name)
-                                           .Distinct();
+            int[] itemTypeIds = _repository.GetItemTypeIds(query.UserId);
+            string[] itemTypeNames = itemTypeIds.Select(itemTypeId => Constant.ItemType.Find(itemTypeId).Name)
+                                                .Distinct()
+                                                .ToArray();
 
             var labels = new List<string>();
             var counts = new List<double>();
 
-            foreach (var itemTypeName in itemTypeNames)
+            foreach (string itemTypeName in itemTypeNames)
             {
                 var itemType = Constant.ItemType.Find(itemTypeName);
                 var count = itemTypeIds.Count(itemTypeId => itemTypeId == itemType.Id);

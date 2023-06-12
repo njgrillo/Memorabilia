@@ -13,7 +13,7 @@ public class AddUser
 
         protected override async Task Handle(Command command)
         {
-            var user = await _userRepository.Get(command.Username, command.Password);
+            Entity.User user = await _userRepository.Get(command.Username, command.Password);
 
             if (user != null)
             {
@@ -36,26 +36,32 @@ public class AddUser
 
     public class Command : DomainCommand, ICommand
     {
-        private readonly SaveUserViewModel _viewModel;
+        private readonly UserEditModel _editModel;
 
-        public Command(SaveUserViewModel viewModel)
+        public Command(UserEditModel editModel)
         {
-            _viewModel = viewModel;
-            Id = viewModel.Id;
+            _editModel = editModel;
+            Id = editModel.Id;
         }
 
-        public string EmailAddress => _viewModel.EmailAddress;
+        public string EmailAddress 
+            => _editModel.EmailAddress;
 
-        public string FirstName => _viewModel.FirstName;
+        public string FirstName 
+            => _editModel.FirstName;
 
         public int Id { get; set; }
 
-        public string LastName => _viewModel.LastName;
+        public string LastName 
+            => _editModel.LastName;
 
-        public string Password => _viewModel.Password;
+        public string Password 
+            => _editModel.Password;
 
-        public string Phone => _viewModel.Phone;
+        public string Phone 
+            => _editModel.Phone;
 
-        public string Username => _viewModel.Username;
+        public string Username 
+            => _editModel.Username;
     }
 }

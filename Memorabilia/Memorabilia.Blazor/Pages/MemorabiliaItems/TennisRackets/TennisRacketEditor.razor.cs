@@ -1,18 +1,18 @@
 ﻿namespace Memorabilia.Blazor.Pages.MemorabiliaItems.TennisRackets;
 
-public partial class TennisRacketEditor : MemorabiliaItem<SaveTennisRacketViewModel>
+public partial class TennisRacketEditor : MemorabiliaItem<TennisRacketEditModel>
 {
     [Inject]
     public TennisRacketValidator Validator { get; set; }
 
     protected async Task OnLoad()
     {
-        var viewModel = await QueryRouter.Send(new GetTennisRacket(MemorabiliaId));
+        var viewModel = await QueryRouter.Send(new GetMemorabiliaItem(MemorabiliaId));
 
         if (viewModel.Brand == null)
             return;
 
-        ViewModel = new SaveTennisRacketViewModel(viewModel);
+        ViewModel = new TennisRacketEditModel(new TennisRacketModel(viewModel));
     }
 
     protected async Task OnSave()

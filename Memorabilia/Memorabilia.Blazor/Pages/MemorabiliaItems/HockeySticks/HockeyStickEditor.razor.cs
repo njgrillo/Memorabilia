@@ -1,18 +1,18 @@
 ﻿namespace Memorabilia.Blazor.Pages.MemorabiliaItems.HockeySticks;
 
-public partial class HockeyStickEditor : MemorabiliaItem<SaveHockeyStickViewModel>
+public partial class HockeyStickEditor : MemorabiliaItem<HockeyStickEditModel>
 {
     [Inject]
     public HockeyStickValidator Validator { get; set; }
 
     protected async Task OnLoad()
     {
-        var viewModel = await QueryRouter.Send(new GetHockeyStick(MemorabiliaId));
+        var viewModel = await QueryRouter.Send(new GetMemorabiliaItem(MemorabiliaId));
 
         if (viewModel.Brand == null)
             return;
 
-        ViewModel = new SaveHockeyStickViewModel(viewModel);
+        ViewModel = new HockeyStickEditModel(new HockeyStickModel(viewModel));
     }
 
     protected async Task OnSave()

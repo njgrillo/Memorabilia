@@ -1,21 +1,17 @@
-﻿using Memorabilia.Domain.Entities;
+﻿namespace Memorabilia.Application.Features.Admin.Spots;
 
-namespace Memorabilia.Application.Features.Admin.Spots;
-
-public record GetSpot(int Id) : IQuery<DomainModel>
+public record GetSpot(int Id) : IQuery<Entity.Spot>
 {
-    public class Handler : QueryHandler<GetSpot, DomainModel>
+    public class Handler : QueryHandler<GetSpot, Entity.Spot>
     {
-        private readonly IDomainRepository<Spot> _spotRepository;
+        private readonly IDomainRepository<Entity.Spot> _spotRepository;
 
-        public Handler(IDomainRepository<Spot> spotRepository)
+        public Handler(IDomainRepository<Entity.Spot> spotRepository)
         {
             _spotRepository = spotRepository;
         }
 
-        protected override async Task<DomainModel> Handle(GetSpot query)
-        {
-            return new DomainModel(await _spotRepository.Get(query.Id));
-        }
+        protected override async Task<Entity.Spot> Handle(GetSpot query)
+            => await _spotRepository.Get(query.Id);
     }
 }

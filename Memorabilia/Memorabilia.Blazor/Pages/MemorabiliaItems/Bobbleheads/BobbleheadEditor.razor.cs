@@ -1,18 +1,18 @@
 ﻿namespace Memorabilia.Blazor.Pages.MemorabiliaItems.Bobbleheads;
 
-public partial class BobbleheadEditor : MemorabiliaItem<SaveBobbleheadViewModel>
+public partial class BobbleheadEditor : MemorabiliaItem<BobbleheadEditModel>
 {
     [Inject]
     public BobbleheadValidator Validator { get; set; }
 
     protected async Task OnLoad()
     {
-        var viewModel = await QueryRouter.Send(new GetBobblehead(MemorabiliaId));
+        var viewModel = await QueryRouter.Send(new GetMemorabiliaItem(MemorabiliaId));
 
         if (viewModel.Brand == null)
             return;
 
-        ViewModel = new SaveBobbleheadViewModel(viewModel);
+        ViewModel = new BobbleheadEditModel(new BobbleheadModel(viewModel));
     }
 
     protected async Task OnSave()

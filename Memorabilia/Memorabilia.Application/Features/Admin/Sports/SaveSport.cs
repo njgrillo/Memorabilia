@@ -1,41 +1,41 @@
-﻿using Memorabilia.Domain.Entities;
+﻿namespace Memorabilia.Application.Features.Admin.Sports;
 
-namespace Memorabilia.Application.Features.Admin.Sports;
-
-public record SaveSport(SaveSportViewModel ViewModel) : ICommand
+public record SaveSport(SportEditModel Sport) : ICommand
 {
     public class Handler : CommandHandler<SaveSport>
     {
-        private readonly IDomainRepository<Sport> _sportRepository;
+        private readonly IDomainRepository<Entity.Sport> _sportRepository;
 
-        public Handler(IDomainRepository<Sport> sportRepository)
+        public Handler(IDomainRepository<Entity.Sport> sportRepository)
         {
             _sportRepository = sportRepository;
         }
 
         protected override async Task Handle(SaveSport request)
         {
-            Sport sport;
+            Entity.Sport sport;
 
-            if (request.ViewModel.IsNew)
+            if (request.Sport.IsNew)
             {
-                sport = new Sport(request.ViewModel.Name, request.ViewModel.AlternateName);
+                sport = new Entity.Sport(request.Sport.Name, 
+                                         request.Sport.AlternateName);
 
                 await _sportRepository.Add(sport);
 
                 return;
             }
 
-            sport = await _sportRepository.Get(request.ViewModel.Id);
+            sport = await _sportRepository.Get(request.Sport.Id);
 
-            if (request.ViewModel.IsDeleted)
+            if (request.Sport.IsDeleted)
             {
                 await _sportRepository.Delete(sport);
 
                 return;
             }
 
-            sport.Set(request.ViewModel.Name, request.ViewModel.AlternateName);
+            sport.Set(request.Sport.Name, 
+                      request.Sport.AlternateName);
 
             await _sportRepository.Update(sport);
         }

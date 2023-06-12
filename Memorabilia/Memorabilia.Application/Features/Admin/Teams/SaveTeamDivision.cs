@@ -13,7 +13,7 @@ public class SaveTeamDivision
 
         protected override async Task Handle(Command command)
         {
-            var team = await _teamRepository.Get(command.TeamId);
+            Entity.Team team = await _teamRepository.Get(command.TeamId);
 
             if (command.DeletedItemIds.Any())
                 team.RemoveDivisions(command.DeletedItemIds);
@@ -32,15 +32,18 @@ public class SaveTeamDivision
 
     public class Command : DomainCommand, ICommand
     {
-        public Command(int teamId, IEnumerable<SaveTeamDivisionViewModel> items)
+        public Command(int teamId, IEnumerable<TeamDivisionEditModel> items)
         {
             TeamId = teamId;
             Items = items.ToArray();
         }
 
-        public int[] DeletedItemIds => Items.Where(item => item.IsDeleted).Select(item => item.Id).ToArray();
+        public int[] DeletedItemIds 
+            => Items.Where(item => item.IsDeleted)
+                    .Select(item => item.Id)
+                    .ToArray();
 
-        public SaveTeamDivisionViewModel[] Items { get; }
+        public TeamDivisionEditModel[] Items { get; }
 
         public int TeamId { get; set; }
     }

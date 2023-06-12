@@ -1,41 +1,41 @@
-﻿using Memorabilia.Domain.Entities;
+﻿namespace Memorabilia.Application.Features.Admin.RecordTypes;
 
-namespace Memorabilia.Application.Features.Admin.RecordTypes;
-
-public record SaveRecordType(DomainEditModel ViewModel) : ICommand
+public record SaveRecordType(DomainEditModel RecordType) : ICommand
 {
     public class Handler : CommandHandler<SaveRecordType>
     {
-        private readonly IDomainRepository<RecordType> _recordTypeRepository;
+        private readonly IDomainRepository<Entity.RecordType> _recordTypeRepository;
 
-        public Handler(IDomainRepository<RecordType> recordTypeRepository)
+        public Handler(IDomainRepository<Entity.RecordType> recordTypeRepository)
         {
             _recordTypeRepository = recordTypeRepository;
         }
 
         protected override async Task Handle(SaveRecordType request)
         {
-            RecordType recordType;
+            Entity.RecordType recordType;
 
-            if (request.ViewModel.IsNew)
+            if (request.RecordType.IsNew)
             {
-                recordType = new RecordType(request.ViewModel.Name, request.ViewModel.Abbreviation);
+                recordType = new Entity.RecordType(request.RecordType.Name, 
+                                                   request.RecordType.Abbreviation);
 
                 await _recordTypeRepository.Add(recordType);
 
                 return;
             }
 
-            recordType = await _recordTypeRepository.Get(request.ViewModel.Id);
+            recordType = await _recordTypeRepository.Get(request.RecordType.Id);
 
-            if (request.ViewModel.IsDeleted)
+            if (request.RecordType.IsDeleted)
             {
                 await _recordTypeRepository.Delete(recordType);
 
                 return;
             }
 
-            recordType.Set(request.ViewModel.Name, request.ViewModel.Abbreviation);
+            recordType.Set(request.RecordType.Name, 
+                           request.RecordType.Abbreviation);
 
             await _recordTypeRepository.Update(recordType);
         }

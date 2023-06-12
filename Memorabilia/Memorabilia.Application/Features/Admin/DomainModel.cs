@@ -11,9 +11,12 @@ public class DomainModel
         _domainEntity = domainEntity;
     }
 
-    public string Abbreviation => _domainEntity.Abbreviation;
+    public string Abbreviation 
+        => _domainEntity.Abbreviation;
 
-    public int Id => _domainEntity.Id;
+    public int Id 
+        => _domainEntity.Id;
 
-    public string Name => _domainEntity.Name;
+    public string Name 
+        => _domainEntity.Name;
 }

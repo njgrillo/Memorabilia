@@ -4,16 +4,16 @@ public class CollectionMemorabiliaEditModel : EditModel
 {
     public CollectionMemorabiliaEditModel() { }
 
-    public CollectionMemorabiliaEditModel(CollectionMemorabiliaModel viewModel)
+    public CollectionMemorabiliaEditModel(CollectionMemorabiliaModel model)
     {
-        CollectionId = viewModel.CollectionId;
-        EstimatedValue = viewModel.EstimatedValue ?? 0;
-        Id = viewModel.Id;
-        ImageDisplayCount = viewModel.ImageDisplayCount;
-        ItemTypeName= viewModel.ItemTypeName;
-        MemorabiliaId = viewModel.MemorabiliaId;
-        MemorabiliaPrimaryImage = viewModel.MemorabiliaPrimaryImage;
-        UserId = viewModel.UserId;
+        CollectionId = model.CollectionId;
+        EstimatedValue = model.EstimatedValue ?? 0;
+        Id = model.Id;
+        ImageDisplayCount = model.ImageDisplayCount;
+        ItemTypeName= model.ItemTypeName;
+        MemorabiliaId = model.MemorabiliaId;
+        MemorabiliaPrimaryImage = model.MemorabiliaPrimaryImage;
+        UserId = model.UserId;
     }
 
     public int CollectionId { get; set; }

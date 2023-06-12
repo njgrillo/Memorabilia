@@ -1,14 +1,14 @@
-﻿@inherits MemorabiliaItem<SaveHelmetViewModel>
+﻿@inherits MemorabiliaItem<HelmetEditModel>
 
 <EditMemorabiliaPage Item="ViewModel"
                      OnLoad="OnLoad"
                      OnSave="OnSave" 
-                     TItem="SaveHelmetViewModel">
+                     TItem="HelmetEditModel">
     <Content>
         <MemorabiliaItemEditor DisplayMultiPersonSelector="true"
                                DisplayMultiSportSelector="true"
                                DisplayMultiTeamSelector="true"
-                               TItem="SaveHelmetViewModel"
+                               TItem="HelmetEditModel"
                                ViewModel="ViewModel">
             <AdditionalContent>
                 <DivRowCol3 HideColumn2="@(!ViewModel.DisplayHelmetQualityType)"

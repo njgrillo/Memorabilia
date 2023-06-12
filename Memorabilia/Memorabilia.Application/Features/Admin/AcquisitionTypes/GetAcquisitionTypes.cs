@@ -1,8 +1,8 @@
 ﻿namespace Memorabilia.Application.Features.Admin.AcquisitionTypes;
 
-public record GetAcquisitionTypes() : IQuery<AcquisitionTypesModel>
+public record GetAcquisitionTypes() : IQuery<Entity.AcquisitionType[]>
 {
-    public class Handler : QueryHandler<GetAcquisitionTypes, AcquisitionTypesModel>
+    public class Handler : QueryHandler<GetAcquisitionTypes, Entity.AcquisitionType[]>
     {
         private readonly IDomainRepository<Entity.AcquisitionType> _acquisitionTypeRepository;
 
@@ -11,9 +11,7 @@ public record GetAcquisitionTypes() : IQuery<AcquisitionTypesModel>
             _acquisitionTypeRepository = acquisitionTypeRepository;
         }
 
-        protected override async Task<AcquisitionTypesModel> Handle(GetAcquisitionTypes query)
-        {
-            return new AcquisitionTypesModel(await _acquisitionTypeRepository.GetAll());
-        }
+        protected override async Task<Entity.AcquisitionType[]> Handle(GetAcquisitionTypes query)
+            => (await _acquisitionTypeRepository.GetAll()).ToArray();
     }
 }

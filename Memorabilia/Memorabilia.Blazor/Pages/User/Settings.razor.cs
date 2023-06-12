@@ -2,5 +2,5 @@
 
 public partial class Settings
 {
-    protected UserSettingsViewModel Model = new();
+    protected UserSettingsModel Model = new();
 }

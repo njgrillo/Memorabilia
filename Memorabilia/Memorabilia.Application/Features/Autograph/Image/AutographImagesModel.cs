@@ -12,5 +12,6 @@ public class AutographImagesModel : Model
     public IEnumerable<AutographImageModel> Images { get; set; } 
         = Enumerable.Empty<AutographImageModel>();
 
-    public override string PageTitle => "Autograph Images";
+    public override string PageTitle 
+        => "Autograph Images";
 }

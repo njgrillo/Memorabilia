@@ -11,7 +11,8 @@ public class ImageModel
         _image = image;
     }
 
-    public string FileName => _image.FileName;
+    public string FileName 
+        => _image.FileName;
     
     public int Id => _image.Id;
 
@@ -21,5 +22,6 @@ public class ImageModel
     public bool IsPrimary 
         => _image.ImageTypeId == Constant.ImageType.Primary.Id;
 
-    public DateTime UploadDate => _image.UploadDate;
+    public DateTime UploadDate 
+        => _image.UploadDate;
 }

@@ -5,12 +5,12 @@ namespace Memorabilia.Blazor.Controls.Person;
 public partial class PersonPositionEditor
 {
     [Parameter]
-    public List<SavePersonPositionViewModel> Positions { get; set; } = new();
+    public List<PersonPositionEditModel> Positions { get; set; } = new();
 
     [Parameter]
     public Sport[] Sports { get; set; } = Array.Empty<Sport>();
 
-    private SavePersonPositionViewModel _viewModel = new();
+    private PersonPositionEditModel _viewModel = new();
 
     protected override void OnParametersSet()
     {
@@ -25,13 +25,13 @@ public partial class PersonPositionEditor
 
         Positions.Add(_viewModel);
 
-        _viewModel = new SavePersonPositionViewModel
+        _viewModel = new PersonPositionEditModel
         {
             PositionType = PositionType.Secondary
         };
     }
 
-    private void Delete(SavePersonPositionViewModel position)
+    private void Delete(PersonPositionEditModel position)
     {
         position.IsDeleted = true;
 

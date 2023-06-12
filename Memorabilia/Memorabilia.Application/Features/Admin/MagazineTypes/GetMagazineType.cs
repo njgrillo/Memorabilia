@@ -1,21 +1,17 @@
-﻿using Memorabilia.Domain.Entities;
+﻿namespace Memorabilia.Application.Features.Admin.MagazineTypes;
 
-namespace Memorabilia.Application.Features.Admin.MagazineTypes;
-
-public record GetMagazineType(int Id) : IQuery<DomainModel>
+public record GetMagazineType(int Id) : IQuery<Entity.MagazineType>
 {
-    public class Handler : QueryHandler<GetMagazineType, DomainModel>
+    public class Handler : QueryHandler<GetMagazineType, Entity.MagazineType>
     {
-        private readonly IDomainRepository<MagazineType> _magazineTypeRepository;
+        private readonly IDomainRepository<Entity.MagazineType> _magazineTypeRepository;
 
-        public Handler(IDomainRepository<MagazineType> magazineTypeRepository)
+        public Handler(IDomainRepository<Entity.MagazineType> magazineTypeRepository)
         {
             _magazineTypeRepository = magazineTypeRepository;
         }
 
-        protected override async Task<DomainModel> Handle(GetMagazineType query)
-        {
-            return new DomainModel(await _magazineTypeRepository.Get(query.Id));
-        }
+        protected override async Task<Entity.MagazineType> Handle(GetMagazineType query)
+            => await _magazineTypeRepository.Get(query.Id);
     }
 }

@@ -13,7 +13,7 @@ public class SaveDocument
 
         protected override async Task Handle(Command command)
         {
-            var memorabilia = await _memorabiliaRepository.Get(command.MemorabiliaId);
+            Entity.Memorabilia memorabilia = await _memorabiliaRepository.Get(command.MemorabiliaId);
 
             memorabilia.SetDocument(command.PersonIds,
                                     command.SizeId,
@@ -25,19 +25,23 @@ public class SaveDocument
 
     public class Command : DomainCommand, ICommand
     {
-        private readonly SaveDocumentViewModel _viewModel;
+        private readonly DocumentEditModel _editModel;
 
-        public Command(SaveDocumentViewModel viewModel)
+        public Command(DocumentEditModel editModel)
         {
-            _viewModel = viewModel;
+            _editModel = editModel;
         }
 
-        public int MemorabiliaId => _viewModel.MemorabiliaId;
+        public int MemorabiliaId 
+            => _editModel.MemorabiliaId;
 
-        public int[] PersonIds => _viewModel.People.Select(person => person.Id).ToArray();
+        public int[] PersonIds 
+            => _editModel.People.ActiveIds();
 
-        public int SizeId => _viewModel.SizeId;
+        public int SizeId 
+            => _editModel.SizeId;
 
-        public int[] TeamIds => _viewModel.Teams.Select(team => team.Id).ToArray();
+        public int[] TeamIds 
+            => _editModel.Teams.ActiveIds();
     }
 }

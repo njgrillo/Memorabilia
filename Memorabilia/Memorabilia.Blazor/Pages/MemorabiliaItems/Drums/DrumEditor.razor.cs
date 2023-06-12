@@ -1,18 +1,18 @@
 ﻿namespace Memorabilia.Blazor.Pages.MemorabiliaItems.Drums;
 
-public partial class DrumEditor : MemorabiliaItem<SaveDrumViewModel>
+public partial class DrumEditor : MemorabiliaItem<DrumEditModel>
 {
     [Inject]
     public DrumValidator Validator { get; set; }
 
     protected async Task OnLoad()
     {
-        var viewModel = await QueryRouter.Send(new GetDrum(MemorabiliaId));
+        var viewModel = await QueryRouter.Send(new GetMemorabiliaItem(MemorabiliaId));
 
         if (viewModel.Brand == null)
             return;
 
-        ViewModel = new SaveDrumViewModel(viewModel);
+        ViewModel = new DrumEditModel(new DrumModel(viewModel));
     }
 
     protected async Task OnSave()

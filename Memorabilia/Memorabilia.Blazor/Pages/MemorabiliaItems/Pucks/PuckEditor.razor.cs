@@ -1,18 +1,18 @@
 ﻿namespace Memorabilia.Blazor.Pages.MemorabiliaItems.Pucks;
 
-public partial class PuckEditor : MemorabiliaItem<SavePuckViewModel>
+public partial class PuckEditor : MemorabiliaItem<PuckEditModel>
 {
     [Inject]
     public PuckValidator Validator { get; set; }
 
     protected async Task OnLoad()
     {
-        var viewModel = await QueryRouter.Send(new GetPuck(MemorabiliaId));
+        var viewModel = await QueryRouter.Send(new GetMemorabiliaItem(MemorabiliaId));
 
         if (viewModel.Brand == null)
             return;
 
-        ViewModel = new SavePuckViewModel(viewModel);
+        ViewModel = new PuckEditModel(new PuckModel(viewModel));
     }
 
     protected async Task OnSave()

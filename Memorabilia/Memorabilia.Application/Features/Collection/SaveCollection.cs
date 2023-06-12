@@ -48,29 +48,37 @@ public class SaveCollection
 
     public class Command : DomainCommand, ICommand
     {
-        private readonly CollectionEditModel _viewModel;
+        private readonly CollectionEditModel _editModel;
 
-        public Command(CollectionEditModel viewModel)
+        public Command(CollectionEditModel editModel)
         {
-            _viewModel = viewModel;
-            Id = _viewModel.Id;
+            _editModel = editModel;
+            Id = _editModel.Id;
         }
 
-        public string Description => _viewModel.Description;
+        public string Description 
+            => _editModel.Description;
 
         public int Id { get; set; }
 
-        public bool IsDeleted => _viewModel.IsDeleted;
+        public bool IsDeleted 
+            => _editModel.IsDeleted;
 
-        public bool IsModified => _viewModel.IsModified;
+        public bool IsModified 
+            => _editModel.IsModified;
 
-        public bool IsNew => _viewModel.IsNew;
+        public bool IsNew 
+            => _editModel.IsNew;
 
         public int[] MemorabiliaIds 
-            => _viewModel.Items.Select(item => item.MemorabiliaId).ToArray();
+            => _editModel.Items
+                         .Select(item => item.MemorabiliaId)
+                         .ToArray();
 
-        public string Name => _viewModel.Name;
+        public string Name 
+            => _editModel.Name;
 
-        public int UserId => _viewModel.UserId;
+        public int UserId 
+            => _editModel.UserId;
     }
 }

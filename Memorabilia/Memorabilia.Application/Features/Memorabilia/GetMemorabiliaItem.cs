@@ -13,8 +13,6 @@ public record GetMemorabiliaItem(int Id)
         }
 
         protected override async Task<Entity.Memorabilia> Handle(GetMemorabiliaItem query)
-        {
-            return await _memorabiliaRepository.Get(query.Id);
-        }
+            => await _memorabiliaRepository.Get(query.Id);
     }
 }

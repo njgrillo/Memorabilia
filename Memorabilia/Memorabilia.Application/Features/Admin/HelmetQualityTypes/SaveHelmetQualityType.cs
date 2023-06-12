@@ -1,41 +1,41 @@
-﻿using Memorabilia.Domain.Entities;
+﻿namespace Memorabilia.Application.Features.Admin.HelmetQualityTypes;
 
-namespace Memorabilia.Application.Features.Admin.HelmetQualityTypes;
-
-public record SaveHelmetQualityType(DomainEditModel ViewModel) : ICommand
+public record SaveHelmetQualityType(DomainEditModel HelmetQualityType) : ICommand
 {
     public class Handler : CommandHandler<SaveHelmetQualityType>
     {
-        private readonly IDomainRepository<HelmetQualityType> _helmetQualityTypeRepository;
+        private readonly IDomainRepository<Entity.HelmetQualityType> _helmetQualityTypeRepository;
 
-        public Handler(IDomainRepository<HelmetQualityType> helmetQualityTypeRepository)
+        public Handler(IDomainRepository<Entity.HelmetQualityType> helmetQualityTypeRepository)
         {
             _helmetQualityTypeRepository = helmetQualityTypeRepository;
         }
 
         protected override async Task Handle(SaveHelmetQualityType request)
         {
-            HelmetQualityType helmetQualityType;
+            Entity.HelmetQualityType helmetQualityType;
 
-            if (request.ViewModel.IsNew)
+            if (request.HelmetQualityType.IsNew)
             {
-                helmetQualityType = new HelmetQualityType(request.ViewModel.Name, request.ViewModel.Abbreviation);
+                helmetQualityType = new Entity.HelmetQualityType(request.HelmetQualityType.Name, 
+                                                                 request.HelmetQualityType.Abbreviation);
 
                 await _helmetQualityTypeRepository.Add(helmetQualityType);
 
                 return;
             }
 
-            helmetQualityType = await _helmetQualityTypeRepository.Get(request.ViewModel.Id);
+            helmetQualityType = await _helmetQualityTypeRepository.Get(request.HelmetQualityType.Id);
 
-            if (request.ViewModel.IsDeleted)
+            if (request.HelmetQualityType.IsDeleted)
             {
                 await _helmetQualityTypeRepository.Delete(helmetQualityType);
 
                 return;
             }
 
-            helmetQualityType.Set(request.ViewModel.Name, request.ViewModel.Abbreviation);
+            helmetQualityType.Set(request.HelmetQualityType.Name, 
+                                  request.HelmetQualityType.Abbreviation);
 
             await _helmetQualityTypeRepository.Update(helmetQualityType);
         }

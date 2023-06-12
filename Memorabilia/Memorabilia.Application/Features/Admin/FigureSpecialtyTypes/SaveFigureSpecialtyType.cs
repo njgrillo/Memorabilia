@@ -1,40 +1,41 @@
-﻿using Memorabilia.Domain.Entities;
+﻿namespace Memorabilia.Application.Features.Admin.FigureSpecialtyTypes;
 
-namespace Memorabilia.Application.Features.Admin.FigureSpecialtyTypes;
-
-public record SaveFigureSpecialtyType(DomainEditModel ViewModel) : ICommand
+public record SaveFigureSpecialtyType(DomainEditModel FigureSpecialtyType) : ICommand
 {
     public class Handler : CommandHandler<SaveFigureSpecialtyType>
     {
-        private readonly IDomainRepository<FigureSpecialtyType> _figureSpecialtyTypeRepository;
+        private readonly IDomainRepository<Entity.FigureSpecialtyType> _figureSpecialtyTypeRepository;
 
-        public Handler(IDomainRepository<FigureSpecialtyType> figureSpecialtyTypeRepository)
+        public Handler(IDomainRepository<Entity.FigureSpecialtyType> figureSpecialtyTypeRepository)
         {
             _figureSpecialtyTypeRepository = figureSpecialtyTypeRepository;
         }
 
         protected override async Task Handle(SaveFigureSpecialtyType request)
         {
-            FigureSpecialtyType figureSpecialtyType;
+            Entity.FigureSpecialtyType figureSpecialtyType;
 
-            if (request.ViewModel.IsNew)
+            if (request.FigureSpecialtyType.IsNew)
             {
-                figureSpecialtyType = new FigureSpecialtyType(request.ViewModel.Name, request.ViewModel.Abbreviation);
+                figureSpecialtyType = new Entity.FigureSpecialtyType(request.FigureSpecialtyType.Name, 
+                                                                     request.FigureSpecialtyType.Abbreviation);
+
                 await _figureSpecialtyTypeRepository.Add(figureSpecialtyType);
 
                 return;
             }
 
-            figureSpecialtyType = await _figureSpecialtyTypeRepository.Get(request.ViewModel.Id);
+            figureSpecialtyType = await _figureSpecialtyTypeRepository.Get(request.FigureSpecialtyType.Id);
 
-            if (request.ViewModel.IsDeleted)
+            if (request.FigureSpecialtyType.IsDeleted)
             {
                 await _figureSpecialtyTypeRepository.Delete(figureSpecialtyType);
 
                 return;
             }
 
-            figureSpecialtyType.Set(request.ViewModel.Name, request.ViewModel.Abbreviation);
+            figureSpecialtyType.Set(request.FigureSpecialtyType.Name, 
+                                    request.FigureSpecialtyType.Abbreviation);
 
             await _figureSpecialtyTypeRepository.Update(figureSpecialtyType);
         }

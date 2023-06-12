@@ -1,25 +1,18 @@
 ﻿namespace Memorabilia.Application.Features.Project;
 
 public record GetProjectMemorabiliaTeamLinks(Dictionary<string, object> Parameters)
-     : IQuery<MemorabiliaItemModel[]>
+     : IQuery<Entity.Memorabilia[]>
 {
-    public class Handler : QueryHandler<GetProjectMemorabiliaTeamLinks, MemorabiliaItemModel[]>
-{
-    private readonly IMemorabiliaItemRepository _memorabiliaRepository;
-
-    public Handler(IMemorabiliaItemRepository memorabiliaRepository)
+    public class Handler : QueryHandler<GetProjectMemorabiliaTeamLinks, Entity.Memorabilia[]>
     {
-            _memorabiliaRepository = memorabiliaRepository;
-    }
+        private readonly IMemorabiliaItemRepository _memorabiliaRepository;
 
-    protected override async Task<MemorabiliaItemModel[]> Handle(GetProjectMemorabiliaTeamLinks query)
-    {
-        Entity.Memorabilia[] memorabilia = await _memorabiliaRepository.GetAll(query.Parameters);
+        public Handler(IMemorabiliaItemRepository memorabiliaRepository)
+        {
+                _memorabiliaRepository = memorabiliaRepository;
+        }
 
-        return memorabilia.Any()
-            ? memorabilia.Select(item => new MemorabiliaItemModel(item))
-                         .ToArray()
-            : Array.Empty<MemorabiliaItemModel>();
+        protected override async Task<Entity.Memorabilia[]> Handle(GetProjectMemorabiliaTeamLinks query)
+            => await _memorabiliaRepository.GetAll(query.Parameters);
     }
-}
 }

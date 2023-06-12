@@ -4,7 +4,8 @@ public class SuggestedInscriptionModel
 {
     public Constant.InscriptionType InscriptionType { get; set; }
 
-    public string InscriptionTypeName => InscriptionType?.Name;
+    public string InscriptionTypeName 
+        => InscriptionType?.Name;
 
     public string Text { get; set; }    
 }

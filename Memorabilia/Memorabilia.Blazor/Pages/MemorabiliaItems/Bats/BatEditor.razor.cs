@@ -1,18 +1,18 @@
 ﻿namespace Memorabilia.Blazor.Pages.MemorabiliaItems.Bats;
 
-public partial class BatEditor : MemorabiliaItem<SaveBatViewModel>
+public partial class BatEditor : MemorabiliaItem<BatEditModel>
 {
     [Inject]
     public BatValidator Validator { get; set; }
 
     protected async Task OnLoad()
     {
-        var viewModel = await QueryRouter.Send(new GetBat(MemorabiliaId));
+        var viewModel = await QueryRouter.Send(new GetMemorabiliaItem(MemorabiliaId));
 
         if (viewModel.Brand == null)
             return;
 
-        ViewModel = new SaveBatViewModel(viewModel);
+        ViewModel = new BatEditModel(new BatModel(viewModel));
     }
 
     protected async Task OnSave()

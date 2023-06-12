@@ -1,41 +1,41 @@
-﻿using Memorabilia.Domain.Entities;
+﻿namespace Memorabilia.Application.Features.Admin.Colleges;
 
-namespace Memorabilia.Application.Features.Admin.Colleges;
-
-public record SaveCollege(DomainEditModel ViewModel) : ICommand
+public record SaveCollege(DomainEditModel College) : ICommand
 {
     public class Handler : CommandHandler<SaveCollege>
     {
-        private readonly IDomainRepository<College> _collegeRepository;
+        private readonly IDomainRepository<Entity.College> _collegeRepository;
 
-        public Handler(IDomainRepository<College> collegeRepository)
+        public Handler(IDomainRepository<Entity.College> collegeRepository)
         {
             _collegeRepository = collegeRepository;
         }
 
         protected override async Task Handle(SaveCollege request)
         {
-            College college;
+            Entity.College college;
 
-            if (request.ViewModel.IsNew)
+            if (request.College.IsNew)
             {
-                college = new College(request.ViewModel.Name, request.ViewModel.Abbreviation);
+                college = new Entity.College(request.College.Name,
+                                             request.College.Abbreviation);
 
                 await _collegeRepository.Add(college);
 
                 return;
             }
 
-            college = await _collegeRepository.Get(request.ViewModel.Id);
+            college = await _collegeRepository.Get(request.College.Id);
 
-            if (request.ViewModel.IsDeleted)
+            if (request.College.IsDeleted)
             {
                 await _collegeRepository.Delete(college);
 
                 return;
             }
 
-            college.Set(request.ViewModel.Name, request.ViewModel.Abbreviation);
+            college.Set(request.College.Name, 
+                        request.College.Abbreviation);
 
             await _collegeRepository.Update(college);
         }

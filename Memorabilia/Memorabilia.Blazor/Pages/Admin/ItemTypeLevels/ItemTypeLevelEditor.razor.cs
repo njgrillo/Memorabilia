@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Blazor.Pages.Admin.ItemTypeLevels;
 
-public partial class ItemTypeLevelEditor : EditItemTypeItem<SaveItemTypeLevelViewModel, ItemTypeLevelViewModel>
+public partial class ItemTypeLevelEditor : EditItemTypeItem<ItemTypeLevelEditModel, ItemTypeLevelModel>
 {
     protected async Task HandleValidSubmit()
     {
@@ -14,6 +14,6 @@ public partial class ItemTypeLevelEditor : EditItemTypeItem<SaveItemTypeLevelVie
         if (DisplayItemType)
             return;
 
-        ViewModel = new SaveItemTypeLevelViewModel(await Get(new GetItemTypeLevel(Id)));
+        ViewModel = new ItemTypeLevelEditModel(new ItemTypeLevelModel(await QueryRouter.Send(new GetItemTypeLevel(Id))));
     }
 }

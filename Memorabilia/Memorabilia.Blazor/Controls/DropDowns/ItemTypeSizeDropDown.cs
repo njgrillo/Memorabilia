@@ -1,10 +1,12 @@
 ﻿namespace Memorabilia.Blazor.Controls.DropDowns;
 
-public class ItemTypeSizeDropDown : ItemTypeEntityDropDown<ItemTypeSizeViewModel>
+public class ItemTypeSizeDropDown : ItemTypeEntityDropDown<ItemTypeSizeModel>
 {
     protected override async Task OnInitializedAsync()
     {
-        Items = (await QueryRouter.Send(new GetItemTypeSizes(ItemType.Id))).ItemTypeSizes;
+        Entity.ItemTypeSize[] itemTypeSizes = await QueryRouter.Send(new GetItemTypeSizes(ItemType.Id));
+
+        Items = itemTypeSizes.Select(itemTypeSize => new ItemTypeSizeModel(itemTypeSize));
         Label = "Size";
     }
 }

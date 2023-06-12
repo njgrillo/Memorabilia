@@ -1,6 +1,7 @@
 ﻿namespace Memorabilia.Blazor.Pages.Admin.RecordTypes;
 
-public partial class ViewRecordTypes : ViewDomainItem<RecordTypesViewModel>, IDeleteDomainItem, IViewDomainItem
+public partial class ViewRecordTypes 
+    : ViewDomainItem<RecordTypesModel>, IDeleteDomainItem, IViewDomainItem
 {
     public async Task OnDelete(DomainEditModel viewModel)
     {
@@ -9,6 +10,6 @@ public partial class ViewRecordTypes : ViewDomainItem<RecordTypesViewModel>, IDe
 
     public async Task OnLoad()
     {
-        await OnLoad(new GetRecordTypes());
+        ViewModel = new RecordTypesModel(await QueryRouter.Send(new GetRecordTypes()));
     }
 }

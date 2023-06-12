@@ -1,18 +1,18 @@
 ﻿namespace Memorabilia.Blazor.Pages.MemorabiliaItems.Hats;
 
-public partial class HatEditor : MemorabiliaItem<SaveHatViewModel>
+public partial class HatEditor : MemorabiliaItem<HatEditModel>
 {
     [Inject]
     public HatValidator Validator { get; set; }
 
     protected async Task OnLoad()
     {
-        var viewModel = await QueryRouter.Send(new GetHat(MemorabiliaId));
+        var viewModel = await QueryRouter.Send(new GetMemorabiliaItem(MemorabiliaId));
 
         if (viewModel.Brand == null)
             return;
 
-        ViewModel = new SaveHatViewModel(viewModel);
+        ViewModel = new HatEditModel(new HatModel(viewModel));
     }
 
     protected async Task OnSave()

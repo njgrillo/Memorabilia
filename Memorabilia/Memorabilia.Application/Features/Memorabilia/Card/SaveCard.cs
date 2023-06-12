@@ -13,7 +13,7 @@ public class SaveCard
 
         protected override async Task Handle(Command command)
         {
-            var memorabilia = await _memorabiliaRepository.Get(command.MemorabiliaId);
+            Entity.Memorabilia memorabilia = await _memorabiliaRepository.Get(command.MemorabiliaId);
 
             memorabilia.SetCard(command.BrandId,
                                 command.Custom,
@@ -32,33 +32,45 @@ public class SaveCard
 
     public class Command : DomainCommand, ICommand
     {
-        private readonly SaveCardViewModel _viewModel;
+        private readonly CardEditModel _editModel;
 
-        public Command(SaveCardViewModel viewModel)
+        public Command(CardEditModel editModel)
         {
-            _viewModel = viewModel;
+            _editModel = editModel;
         }
 
-        public int BrandId => _viewModel.BrandId;
+        public int BrandId 
+            => _editModel.BrandId;
 
-        public bool Custom => _viewModel.Custom;
+        public bool Custom 
+            => _editModel.Custom;
 
-        public int LevelTypeId => _viewModel.LevelTypeId;
+        public int LevelTypeId 
+            => _editModel.LevelTypeId;
 
-        public bool Licensed => _viewModel.Licensed;
+        public bool Licensed 
+            => _editModel.Licensed;
 
-        public int MemorabiliaId => _viewModel.MemorabiliaId;
+        public int MemorabiliaId 
+            => _editModel.MemorabiliaId;
 
-        public int OrientationId => _viewModel.OrientationId;
+        public int OrientationId 
+            => _editModel.OrientationId;
 
-        public int[] PersonIds => _viewModel.People.Where(person => !person.IsDeleted).Select(person => person.Id).ToArray();
+        public int[] PersonIds 
+            => _editModel.People.ActiveIds();
 
-        public int SizeId => _viewModel.SizeId;
+        public int SizeId 
+            => _editModel.SizeId;
 
-        public int[] SportIds => _viewModel.SportIds.ToArray();
+        public int[] SportIds 
+            => _editModel.SportIds
+                         .ToArray();
 
-        public int[] TeamIds => _viewModel.Teams.Where(team => !team.IsDeleted).Select(team => team.Id).ToArray();
+        public int[] TeamIds 
+            => _editModel.Teams.ActiveIds();
 
-        public int? Year => _viewModel.Year > 0 ? _viewModel.Year : 0;
+        public int? Year 
+            => _editModel.Year;
     }
 }

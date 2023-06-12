@@ -1,41 +1,41 @@
-﻿using Memorabilia.Domain.Entities;
+﻿namespace Memorabilia.Application.Features.Admin.ItemTypes;
 
-namespace Memorabilia.Application.Features.Admin.ItemTypes;
-
-public record SaveItemType(DomainEditModel ViewModel) : ICommand
+public record SaveItemType(DomainEditModel ItemType) : ICommand
 {
     public class Handler : CommandHandler<SaveItemType>
     {
-        private readonly IDomainRepository<ItemType> _itemTypeRepository;
+        private readonly IDomainRepository<Entity.ItemType> _itemTypeRepository;
 
-        public Handler(IDomainRepository<ItemType> itemTypeRepository)
+        public Handler(IDomainRepository<Entity.ItemType> itemTypeRepository)
         {
             _itemTypeRepository = itemTypeRepository;
         }
 
         protected override async Task Handle(SaveItemType request)
         {
-            ItemType itemType;
+            Entity.ItemType itemType;
 
-            if (request.ViewModel.IsNew)
+            if (request.ItemType.IsNew)
             {
-                itemType = new ItemType(request.ViewModel.Name, request.ViewModel.Abbreviation);
+                itemType = new Entity.ItemType(request.ItemType.Name, 
+                                               request.ItemType.Abbreviation);
 
                 await _itemTypeRepository.Add(itemType);
 
                 return;
             }
 
-            itemType = await _itemTypeRepository.Get(request.ViewModel.Id);
+            itemType = await _itemTypeRepository.Get(request.ItemType.Id);
 
-            if (request.ViewModel.IsDeleted)
+            if (request.ItemType.IsDeleted)
             {
                 await _itemTypeRepository.Delete(itemType);
 
                 return;
             }
 
-            itemType.Set(request.ViewModel.Name, request.ViewModel.Abbreviation);
+            itemType.Set(request.ItemType.Name, 
+                         request.ItemType.Abbreviation);
 
             await _itemTypeRepository.Update(itemType);
         }

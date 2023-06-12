@@ -1,8 +1,8 @@
 ﻿namespace Memorabilia.Application.Features.Admin.ItemTypeLevel;
 
-public record GetItemTypeLevel(int Id) : IQuery<ItemTypeLevelViewModel>
+public record GetItemTypeLevel(int Id) : IQuery<Entity.ItemTypeLevel>
 {
-    public class Handler : QueryHandler<GetItemTypeLevel, ItemTypeLevelViewModel>
+    public class Handler : QueryHandler<GetItemTypeLevel, Entity.ItemTypeLevel>
     {
         private readonly IItemTypeLevelRepository _itemTypeLevelRepository;
 
@@ -11,9 +11,7 @@ public record GetItemTypeLevel(int Id) : IQuery<ItemTypeLevelViewModel>
             _itemTypeLevelRepository = itemTypeLevelRepository;
         }
 
-        protected override async Task<ItemTypeLevelViewModel> Handle(GetItemTypeLevel query)
-        {
-            return new ItemTypeLevelViewModel(await _itemTypeLevelRepository.Get(query.Id));
-        }
+        protected override async Task<Entity.ItemTypeLevel> Handle(GetItemTypeLevel query)
+            => await _itemTypeLevelRepository.Get(query.Id);
     }
 }

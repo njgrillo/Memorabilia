@@ -1,21 +1,17 @@
-﻿using Memorabilia.Domain.Entities;
+﻿namespace Memorabilia.Application.Features.Admin.ItemTypes;
 
-namespace Memorabilia.Application.Features.Admin.ItemTypes;
-
-public record GetItemType(int Id) : IQuery<DomainModel>
+public record GetItemType(int Id) : IQuery<Entity.ItemType>
 {
-    public class Handler : QueryHandler<GetItemType, DomainModel>
+    public class Handler : QueryHandler<GetItemType, Entity.ItemType>
     {
-        private readonly IDomainRepository<ItemType> _itemTypeRepository;
+        private readonly IDomainRepository<Entity.ItemType> _itemTypeRepository;
 
-        public Handler(IDomainRepository<ItemType> itemTypeRepository)
+        public Handler(IDomainRepository<Entity.ItemType> itemTypeRepository)
         {
             _itemTypeRepository = itemTypeRepository;
         }
 
-        protected override async Task<DomainModel> Handle(GetItemType query)
-        {
-            return new DomainModel(await _itemTypeRepository.Get(query.Id));
-        }
+        protected override async Task<Entity.ItemType> Handle(GetItemType query)
+            => await _itemTypeRepository.Get(query.Id);
     }
 }

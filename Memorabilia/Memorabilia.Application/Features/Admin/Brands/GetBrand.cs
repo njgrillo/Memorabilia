@@ -1,21 +1,17 @@
-﻿using Memorabilia.Domain.Entities;
+﻿namespace Memorabilia.Application.Features.Admin.Brands;
 
-namespace Memorabilia.Application.Features.Admin.Brands;
-
-public record GetBrand(int Id) : IQuery<DomainModel>
+public record GetBrand(int Id) : IQuery<Entity.Brand>
 {
-    public class Handler : QueryHandler<GetBrand, DomainModel>
+    public class Handler : QueryHandler<GetBrand, Entity.Brand>
     {
-        private readonly IDomainRepository<Brand> _brandRepository;
+        private readonly IDomainRepository<Entity.Brand> _brandRepository;
 
-        public Handler(IDomainRepository<Brand> brandRepository)
+        public Handler(IDomainRepository<Entity.Brand> brandRepository)
         {
             _brandRepository = brandRepository;
         }
 
-        protected override async Task<DomainModel> Handle(GetBrand query)
-        {
-            return new DomainModel(await _brandRepository.Get(query.Id));
-        }
+        protected override async Task<Entity.Brand> Handle(GetBrand query)
+            => await _brandRepository.Get(query.Id);
     }
 }

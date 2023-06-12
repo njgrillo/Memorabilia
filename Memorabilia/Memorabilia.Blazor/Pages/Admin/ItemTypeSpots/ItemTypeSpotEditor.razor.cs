@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Blazor.Pages.Admin.ItemTypeSpots;
 
-public partial class ItemTypeSpotEditor : EditItemTypeItem<SaveItemTypeSpotViewModel, ItemTypeSpotViewModel>
+public partial class ItemTypeSpotEditor : EditItemTypeItem<ItemTypeSpotEditModel, ItemTypeSpotModel>
 {
     protected async Task HandleValidSubmit()
     {
@@ -14,6 +14,6 @@ public partial class ItemTypeSpotEditor : EditItemTypeItem<SaveItemTypeSpotViewM
         if (DisplayItemType)
             return;
 
-        ViewModel = new SaveItemTypeSpotViewModel(await Get(new GetItemTypeSpot(Id)));
+        ViewModel = new ItemTypeSpotEditModel(new ItemTypeSpotModel(await QueryRouter.Send(new GetItemTypeSpot(Id))));
     }
 }

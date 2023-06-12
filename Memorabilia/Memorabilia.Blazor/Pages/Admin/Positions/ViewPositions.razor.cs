@@ -1,16 +1,17 @@
 ﻿namespace Memorabilia.Blazor.Pages.Admin.Positions;
 
-public partial class ViewPositions : ViewItem<PositionsViewModel, PositionViewModel>
+public partial class ViewPositions 
+    : ViewItem<PositionsModel, PositionModel>
 {
     protected async Task OnLoad()
     {
-        await OnLoad(new GetPositions());
+        ViewModel = new PositionsModel(await QueryRouter.Send(new GetPositions()));
     }
 
     protected override async Task Delete(int id)
     {
         var deletedItem = ViewModel.Positions.Single(position => position.Id == id);
-        var viewModel = new SavePositionViewModel(deletedItem)
+        var viewModel = new PositionEditModel(deletedItem)
         {
             IsDeleted = true
         };
@@ -22,12 +23,10 @@ public partial class ViewPositions : ViewItem<PositionsViewModel, PositionViewMo
         ShowDeleteSuccessfulMessage(ViewModel.ItemTitle);
     }
 
-    protected override bool FilterFunc(PositionViewModel viewModel, string search)
-    {
-        return search.IsNullOrEmpty() ||
-               viewModel.SportName.Contains(search, StringComparison.OrdinalIgnoreCase) ||
-               viewModel.Name.Contains(search, StringComparison.OrdinalIgnoreCase) ||
-               (!viewModel.Abbreviation.IsNullOrEmpty() &&
-                viewModel.Abbreviation.Contains(search, StringComparison.OrdinalIgnoreCase));
-    }
+    protected override bool FilterFunc(PositionModel viewModel, string search)
+        => search.IsNullOrEmpty() ||
+           viewModel.SportName.Contains(search, StringComparison.OrdinalIgnoreCase) ||
+           viewModel.Name.Contains(search, StringComparison.OrdinalIgnoreCase) ||
+           (!viewModel.Abbreviation.IsNullOrEmpty() &&
+            viewModel.Abbreviation.Contains(search, StringComparison.OrdinalIgnoreCase));
 }

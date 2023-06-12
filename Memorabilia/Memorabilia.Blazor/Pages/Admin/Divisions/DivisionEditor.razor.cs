@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Blazor.Pages.Admin.Divisions;
 
-public partial class DivisionEditor : EditItem<SaveDivisionViewModel, DivisionViewModel>
+public partial class DivisionEditor : EditItem<DivisionEditModel, DivisionModel>
 {
     protected async Task HandleValidSubmit()
     {
@@ -12,6 +12,6 @@ public partial class DivisionEditor : EditItem<SaveDivisionViewModel, DivisionVi
         if (Id == 0)
             return;
 
-        ViewModel = new SaveDivisionViewModel(await Get(new GetDivision(Id)));
+        ViewModel = new DivisionEditModel(new DivisionModel(await QueryRouter.Send(new GetDivision(Id))));
     }
 }

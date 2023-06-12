@@ -22,5 +22,6 @@ public class AutographGalleryModel
             ? $"/Tools/{_autograph.Person.Sports.First().Sport.Name}Profile/{_autograph.Person.Id}"
             : "/Tools/PersonProfile";
 
-    public string PersonName => _autograph.Person.ProfileName;
+    public string PersonName 
+        => _autograph.Person.ProfileName;
 }

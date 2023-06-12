@@ -1,7 +1,7 @@
 ﻿namespace Memorabilia.Blazor.Pages.Admin.People;
 
 public partial class PersonEditor 
-    : EditItem<SavePersonViewModel, PersonViewModel>
+    : EditItem<PersonEditModel, PersonModel>
 {
     [Inject]
     public PersonValidator Validator { get; set; }
@@ -33,7 +33,7 @@ public partial class PersonEditor
 
         Entity.Person person = await QueryRouter.Send(new GetPerson(Id));
 
-        ViewModel = new SavePersonViewModel(new PersonViewModel(person));
+        ViewModel = new PersonEditModel(new PersonModel(person));
     }
 
     public void OnNameFieldBlur()

@@ -1,14 +1,14 @@
-﻿@inherits MemorabiliaItem<SaveGloveViewModel>
+﻿@inherits MemorabiliaItem<GloveEditModel>
 
 <EditMemorabiliaPage Item="ViewModel"
                      OnLoad="OnLoad"
                      OnSave="OnSave" 
-                     TItem="SaveGloveViewModel">
+                     TItem="GloveEditModel">
     <Content>
         <MemorabiliaItemEditor DisplayMultiPersonSelector="true"
                                DisplayMultiTeamSelector="true"
                                DisplaySingleSportSelector="true"
-                               TItem="SaveGloveViewModel"
+                               TItem="GloveEditModel"
                                ViewModel="ViewModel">
             <AdditionalContent>
                 <DivRowCol3>

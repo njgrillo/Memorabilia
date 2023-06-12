@@ -6,14 +6,17 @@ public class InscriptionsModel : Model
 
     public InscriptionsModel(IEnumerable<Entity.Inscription> inscriptions)
     {
-        Inscriptions = inscriptions.Select(inscription => new InscriptionModel(inscription)).ToList();
+        Inscriptions = inscriptions.Select(inscription => new InscriptionModel(inscription))
+                                   .ToList();
     }
 
     public int AutographId { get; set; }
 
     public string ImageFileName { get; set; }
 
-    public List<InscriptionModel> Inscriptions { get; set; } = new();
+    public List<InscriptionModel> Inscriptions { get; set; } 
+        = new();
 
-    public override string PageTitle => "Inscriptions";
+    public override string PageTitle 
+        => "Inscriptions";
 }

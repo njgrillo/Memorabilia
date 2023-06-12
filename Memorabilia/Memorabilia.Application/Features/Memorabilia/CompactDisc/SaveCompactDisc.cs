@@ -13,7 +13,7 @@ public class SaveCompactDisc
 
         protected override async Task Handle(Command command)
         {
-            var memorabilia = await _memorabiliaRepository.Get(command.MemorabiliaId);
+            Entity.Memorabilia memorabilia = await _memorabiliaRepository.Get(command.MemorabiliaId);
 
             memorabilia.SetCompactDisc(command.PersonIds);
 
@@ -23,15 +23,17 @@ public class SaveCompactDisc
 
     public class Command : DomainCommand, ICommand
     {
-        private readonly SaveCompactDiscViewModel _viewModel;
+        private readonly CompactDiscEditModel _editModel;
 
-        public Command(SaveCompactDiscViewModel viewModel)
+        public Command(CompactDiscEditModel editModel)
         {
-            _viewModel = viewModel;
+            _editModel = editModel;
         }
 
-        public int MemorabiliaId => _viewModel.MemorabiliaId;
+        public int MemorabiliaId 
+            => _editModel.MemorabiliaId;
 
-        public int[] PersonIds => _viewModel.People.Select(person => person.Id).ToArray();
+        public int[] PersonIds 
+            => _editModel.People.ActiveIds();
     }
 }

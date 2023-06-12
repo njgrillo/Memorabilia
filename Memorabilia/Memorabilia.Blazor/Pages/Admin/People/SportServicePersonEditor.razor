@@ -1,4 +1,4 @@
-﻿@inherits EditPersonItem<SavePersonSportServiceViewModel, PersonSportServiceViewModel>
+﻿@inherits EditPersonItem<PersonSportServiceEditModel, PersonSportServiceModel>
 
 <EditPage ContinueNavigationPath="@ViewModel.ContinueNavigationPath"
           EditMode="ViewModel.EditModeType"
@@ -12,7 +12,7 @@
           PageFooterNavigationPath="@ViewModel.BackNavigationPath"
           PageTitle="@ViewModel.PageTitle"
           PerformValidation="PerformValidation"
-          TItem="SavePersonSportServiceViewModel"
+          TItem="PersonSportServiceEditModel"
           UseMultipleButtons="true"
           ValidationResult="@ViewModel.ValidationResult">
     <TimelineContent>

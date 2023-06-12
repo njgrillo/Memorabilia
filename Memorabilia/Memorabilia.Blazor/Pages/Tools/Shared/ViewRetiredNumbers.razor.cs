@@ -7,6 +7,9 @@ public partial class ViewRetiredNumbers
 
     private async Task OnInputChange(Franchise franchise)
     {
-        Model = await QueryRouter.Send(new GetRetiredNumbers(franchise, Sport));
+        Model = new(await QueryRouter.Send(new GetRetiredNumbers(franchise, Sport)), Sport)
+                {
+                    Franchise = franchise
+                };
     }
 }

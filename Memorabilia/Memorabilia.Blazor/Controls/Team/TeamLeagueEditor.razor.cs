@@ -5,7 +5,7 @@ namespace Memorabilia.Blazor.Controls.Team;
 public partial class TeamLeagueEditor : ComponentBase
 {
     [Parameter]
-    public List<SaveTeamLeagueViewModel> Leagues { get; set; } = new();
+    public List<TeamLeagueEditModel> Leagues { get; set; } = new();
 
     [Parameter]
     public SportLeagueLevel SportLeagueLevel { get; set; }
@@ -13,7 +13,7 @@ public partial class TeamLeagueEditor : ComponentBase
     private bool _canAdd = true;
     private bool _canEditLeague = true;
     private bool _canUpdate;
-    private SaveTeamLeagueViewModel _viewModel = new();
+    private TeamLeagueEditModel _viewModel = new();
 
     private void Add()
     {
@@ -22,7 +22,7 @@ public partial class TeamLeagueEditor : ComponentBase
         _viewModel = new();
     }
 
-    private void Edit(SaveTeamLeagueViewModel league)
+    private void Edit(TeamLeagueEditModel league)
     {
         _viewModel.LeagueId = league.LeagueId;
         _viewModel.BeginYear = league.BeginYear;

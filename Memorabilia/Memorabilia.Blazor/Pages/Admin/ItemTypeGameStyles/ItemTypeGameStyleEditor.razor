@@ -1,4 +1,4 @@
-﻿@inherits EditItemTypeItem<SaveItemTypeGameStyleViewModel, ItemTypeGameStyleViewModel>
+﻿@inherits EditItemTypeItem<ItemTypeGameStyleEditModel, ItemTypeGameStyleModel>
 
 <EditPage ContinueNavigationPath="@ViewModel.RoutePrefix"
           EditMode="ViewModel.EditModeType" 
@@ -11,7 +11,7 @@
           PageFooterButtonText="@ViewModel.ExitButtonText"
           PageFooterNavigationPath="@ViewModel.ExitNavigationPath"
           PageTitle="@ViewModel.PageTitle"
-          TItem="SaveItemTypeGameStyleViewModel">
+          TItem="ItemTypeGameStyleEditModel">
     <Content>
         <DivRowCol3 Hidden="@(!DisplayItemType)">
             <Content>

@@ -1,41 +1,41 @@
-﻿using Memorabilia.Domain.Entities;
+﻿namespace Memorabilia.Application.Features.Admin.LeaderTypes;
 
-namespace Memorabilia.Application.Features.Admin.LeaderTypes;
-
-public record SaveLeaderType(DomainEditModel ViewModel) : ICommand
+public record SaveLeaderType(DomainEditModel LeaderType) : ICommand
 {
     public class Handler : CommandHandler<SaveLeaderType>
     {
-        private readonly IDomainRepository<LeaderType> _leaderTypeRepository;
+        private readonly IDomainRepository<Entity.LeaderType> _leaderTypeRepository;
 
-        public Handler(IDomainRepository<LeaderType> leaderTypeRepository)
+        public Handler(IDomainRepository<Entity.LeaderType> leaderTypeRepository)
         {
             _leaderTypeRepository = leaderTypeRepository;
         }
 
         protected override async Task Handle(SaveLeaderType request)
         {
-            LeaderType leaderType;
+            Entity.LeaderType leaderType;
 
-            if (request.ViewModel.IsNew)
+            if (request.LeaderType.IsNew)
             {
-                leaderType = new LeaderType(request.ViewModel.Name, request.ViewModel.Abbreviation);
+                leaderType = new Entity.LeaderType(request.LeaderType.Name, 
+                                                   request.LeaderType.Abbreviation);
 
                 await _leaderTypeRepository.Add(leaderType);
 
                 return;
             }
 
-            leaderType = await _leaderTypeRepository.Get(request.ViewModel.Id);
+            leaderType = await _leaderTypeRepository.Get(request.LeaderType.Id);
 
-            if (request.ViewModel.IsDeleted)
+            if (request.LeaderType.IsDeleted)
             {
                 await _leaderTypeRepository.Delete(leaderType);
 
                 return;
             }
 
-            leaderType.Set(request.ViewModel.Name, request.ViewModel.Abbreviation);
+            leaderType.Set(request.LeaderType.Name, 
+                           request.LeaderType.Abbreviation);
 
             await _leaderTypeRepository.Update(leaderType);
         }

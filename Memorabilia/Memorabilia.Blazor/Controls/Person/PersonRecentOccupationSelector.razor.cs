@@ -3,13 +3,13 @@
 public partial class PersonRecentOccupationSelector
 {
     [Parameter]
-    public EventCallback<RecentPersonOccupationsViewModel> OnRecentOccupationChange { get; set; }
+    public EventCallback<RecentPersonOccupationsModel> OnRecentOccupationChange { get; set; }
 
     [Parameter]
-    public RecentPersonOccupationsViewModel[] RecentOccupations { get; set; } 
-        = Array.Empty<RecentPersonOccupationsViewModel>();
+    public RecentPersonOccupationsModel[] RecentOccupations { get; set; } 
+        = Array.Empty<RecentPersonOccupationsModel>();
 
-    private async void Select(RecentPersonOccupationsViewModel recentOccupation)
+    private async void Select(RecentPersonOccupationsModel recentOccupation)
     {
         await OnRecentOccupationChange.InvokeAsync(recentOccupation);
     }

@@ -1,8 +1,6 @@
-﻿using Memorabilia.Domain.Entities;
+﻿namespace Memorabilia.Application.Features.Admin.ItemTypeSizes;
 
-namespace Memorabilia.Application.Features.Admin.ItemTypeSizes;
-
-public record SaveItemTypeSize(SaveItemTypeSizeViewModel ViewModel) : ICommand
+public record SaveItemTypeSize(ItemTypeSizeEditModel ItemTypeSize) : ICommand
 {
     public class Handler : CommandHandler<SaveItemTypeSize>
     {
@@ -15,27 +13,28 @@ public record SaveItemTypeSize(SaveItemTypeSizeViewModel ViewModel) : ICommand
 
         protected override async Task Handle(SaveItemTypeSize request)
         {
-            ItemTypeSize itemTypeSize;
+            Entity.ItemTypeSize itemTypeSize;
 
-            if (request.ViewModel.IsNew)
+            if (request.ItemTypeSize.IsNew)
             {
-                itemTypeSize = new ItemTypeSize(request.ViewModel.ItemType.Id, request.ViewModel.Size.Id);
+                itemTypeSize = new Entity.ItemTypeSize(request.ItemTypeSize.ItemType.Id, 
+                                                       request.ItemTypeSize.Size.Id);
 
                 await _itemTypeSizeRepository.Add(itemTypeSize);
 
                 return;
             }
 
-            itemTypeSize = await _itemTypeSizeRepository.Get(request.ViewModel.Id);
+            itemTypeSize = await _itemTypeSizeRepository.Get(request.ItemTypeSize.Id);
 
-            if (request.ViewModel.IsDeleted)
+            if (request.ItemTypeSize.IsDeleted)
             {
                 await _itemTypeSizeRepository.Delete(itemTypeSize);
 
                 return;
             }
 
-            itemTypeSize.Set(request.ViewModel.Size.Id);
+            itemTypeSize.Set(request.ItemTypeSize.Size.Id);
 
             await _itemTypeSizeRepository.Update(itemTypeSize);
         }

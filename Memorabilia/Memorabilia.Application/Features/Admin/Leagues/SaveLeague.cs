@@ -1,45 +1,43 @@
-﻿using Memorabilia.Domain.Entities;
+﻿namespace Memorabilia.Application.Features.Admin.Leagues;
 
-namespace Memorabilia.Application.Features.Admin.Leagues;
-
-public record SaveLeague(SaveLeagueViewModel ViewModel) : ICommand
+public record SaveLeague(LeagueEditModel League) : ICommand
 {
     public class Handler : CommandHandler<SaveLeague>
     {
-        private readonly IDomainRepository<League> _leagueRepository;
+        private readonly IDomainRepository<Entity.League> _leagueRepository;
 
-        public Handler(IDomainRepository<League> leagueRepository)
+        public Handler(IDomainRepository<Entity.League> leagueRepository)
         {
             _leagueRepository = leagueRepository;
         }
 
         protected override async Task Handle(SaveLeague request)
         {
-            League league;
+            Entity.League league;
 
-            if (request.ViewModel.IsNew)
+            if (request.League.IsNew)
             {
-                league = new League(request.ViewModel.SportLeagueLevelId,
-                                    request.ViewModel.Name,
-                                    request.ViewModel.Abbreviation);
+                league = new Entity.League(request.League.SportLeagueLevelId,
+                                           request.League.Name,
+                                           request.League.Abbreviation);
 
                 await _leagueRepository.Add(league);
 
                 return;
             }
 
-            league = await _leagueRepository.Get(request.ViewModel.Id);
+            league = await _leagueRepository.Get(request.League.Id);
 
-            if (request.ViewModel.IsDeleted)
+            if (request.League.IsDeleted)
             {
                 await _leagueRepository.Delete(league);
 
                 return;
             }
 
-            league.Set(request.ViewModel.SportLeagueLevelId,
-                       request.ViewModel.Name,
-                       request.ViewModel.Abbreviation);
+            league.Set(request.League.SportLeagueLevelId,
+                       request.League.Name,
+                       request.League.Abbreviation);
 
             await _leagueRepository.Update(league);
         }

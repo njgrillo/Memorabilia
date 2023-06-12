@@ -1,9 +1,10 @@
 ﻿namespace Memorabilia.Application.Features.Tools.Shared.Accomplishments;
 
-public record GetAccomplishments(Constant.AccomplishmentType AccomplishmentType, Constant.Sport Sport) 
-    : IQuery<AccomplishmentsModel>
+public record GetAccomplishments(Constant.AccomplishmentType AccomplishmentType, 
+                                 Constant.Sport Sport) 
+    : IQuery<Entity.PersonAccomplishment[]>
 {
-    public class Handler : QueryHandler<GetAccomplishments, AccomplishmentsModel>
+    public class Handler : QueryHandler<GetAccomplishments, Entity.PersonAccomplishment[]>
     {
         private readonly IPersonAccomplishmentRepository _personAccomplishmentRepository;
 
@@ -12,12 +13,8 @@ public record GetAccomplishments(Constant.AccomplishmentType AccomplishmentType,
             _personAccomplishmentRepository = personAccomplishmentRepository;
         }
 
-        protected override async Task<AccomplishmentsModel> Handle(GetAccomplishments query)
-        {
-            return new AccomplishmentsModel(await _personAccomplishmentRepository.GetAll(query.AccomplishmentType.Id), query.Sport)
-            {
-                AccomplishmentType = query.AccomplishmentType
-            };
-        }
+        protected override async Task<Entity.PersonAccomplishment[]> Handle(GetAccomplishments query)
+            => (await _personAccomplishmentRepository.GetAll(query.AccomplishmentType.Id))
+                    .ToArray();            
     }
 }

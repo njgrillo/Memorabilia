@@ -11,5 +11,6 @@ public class AutographImageModel : ImageModel
         _image = image;
     }
 
-    public int AutographId => _image.AutographId;
+    public int AutographId 
+        => _image.AutographId;
 }

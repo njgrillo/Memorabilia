@@ -1,10 +1,9 @@
-﻿using Memorabilia.Domain.Constants;
+﻿namespace Memorabilia.Application.Features.Tools.Shared.Colleges;
 
-namespace Memorabilia.Application.Features.Tools.Shared.Colleges;
-
-public record GetPersonColleges(College College, Sport Sport) : IQuery<PersonCollegesModel>
+public record GetPersonColleges(Constant.College College, Constant.Sport Sport) 
+    : IQuery<Entity.PersonCollege[]>
 {
-    public class Handler : QueryHandler<GetPersonColleges, PersonCollegesModel>
+    public class Handler : QueryHandler<GetPersonColleges, Entity.PersonCollege[]>
     {
         private readonly IPersonCollegeRepository _collegeRepository;
 
@@ -13,12 +12,8 @@ public record GetPersonColleges(College College, Sport Sport) : IQuery<PersonCol
             _collegeRepository = collegeRepository;
         }
 
-        protected override async Task<PersonCollegesModel> Handle(GetPersonColleges query)
-        {
-            return new PersonCollegesModel(await _collegeRepository.GetAll(query.College.Id, query.Sport.Id), query.Sport)
-            {
-                College = query.College
-            };
-        }
+        protected override async Task<Entity.PersonCollege[]> Handle(GetPersonColleges query)
+            => (await _collegeRepository.GetAll(query.College.Id, query.Sport.Id))
+                    .ToArray();
     }
 }

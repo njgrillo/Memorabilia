@@ -1,14 +1,14 @@
-﻿@inherits MemorabiliaItem<SaveIndexCardViewModel>
+﻿@inherits MemorabiliaItem<IndexCardEditModel>
 
 <EditMemorabiliaPage Item="ViewModel"
                      OnLoad="OnLoad"
                      OnSave="OnSave" 
-                     TItem="SaveIndexCardViewModel">
+                     TItem="IndexCardEditModel">
     <Content>
         <MemorabiliaItemEditor DisplayItemTypeBrand="false"
                                DisplayItemTypeGameStyle="false"
                                DisplayItemTypeLevel="false"
-                               TItem="SaveIndexCardViewModel"
+                               TItem="IndexCardEditModel"
                                ViewModel="ViewModel" />
     </Content>
 </EditMemorabiliaPage>

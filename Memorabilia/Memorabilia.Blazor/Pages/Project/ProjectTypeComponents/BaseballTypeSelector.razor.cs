@@ -34,16 +34,16 @@ public partial class BaseballTypeSelector
         && ((BaseballType?.IsYearly() ?? false)
             || (BaseballType?.CanImportByYearRange() ?? false));
 
-    protected SaveTeamViewModel Team { get; set; }
+    protected TeamEditModel Team { get; set; }
 
     protected override async Task OnInitializedAsync()
     {
         if (!TeamId.HasValue)
             return;
 
-        TeamViewModel team = await QueryRouter.Send(new GetTeam(TeamId.Value));
+        var team = new TeamModel(await QueryRouter.Send(new GetTeam(TeamId.Value)));
 
-        Team = new SaveTeamViewModel(team);
+        Team = new TeamEditModel(team);
     }
 
     protected async Task BaseballTypeChanged(int baseballTypeId)
@@ -53,7 +53,7 @@ public partial class BaseballTypeSelector
         await OnParameterChanged();
     }
 
-    protected async Task TeamChanged(SaveTeamViewModel team)
+    protected async Task TeamChanged(TeamEditModel team)
     {
         Team = team;
 

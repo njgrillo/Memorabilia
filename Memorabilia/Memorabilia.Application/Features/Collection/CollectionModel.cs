@@ -11,14 +11,18 @@ public class CollectionModel
         _collection = collection;
     }
 
-    public string Description => _collection.Description;
+    public string Description 
+        => _collection.Description;
 
-    public int Id => _collection.Id;
+    public int Id 
+        => _collection.Id;
 
     public List<Entity.CollectionMemorabilia> Memorabilia 
         => _collection.Memorabilia;
 
-    public string Name => _collection.Name;
+    public string Name 
+        => _collection.Name;
 
-    public int UserId => _collection.UserId;
+    public int UserId 
+        => _collection.UserId;
 }

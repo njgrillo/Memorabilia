@@ -2,7 +2,8 @@
 
 public class GalleryRuleFactory : IGalleryRuleFactory
 {
-    public List<IGalleryRule> Rules { get; set; } = new();
+    public List<IGalleryRule> Rules { get; set; } 
+        = new();
 
     public GalleryRuleFactory()
     {

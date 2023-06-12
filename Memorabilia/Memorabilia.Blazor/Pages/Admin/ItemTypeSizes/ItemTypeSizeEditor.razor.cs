@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Blazor.Pages.Admin.ItemTypeSizes;
 
-public partial class ItemTypeSizeEditor : EditItemTypeItem<SaveItemTypeSizeViewModel, ItemTypeSizeViewModel>
+public partial class ItemTypeSizeEditor : EditItemTypeItem<ItemTypeSizeEditModel, ItemTypeSizeModel>
 {
     protected async Task HandleValidSubmit()
     {
@@ -14,6 +14,6 @@ public partial class ItemTypeSizeEditor : EditItemTypeItem<SaveItemTypeSizeViewM
         if (DisplayItemType)
             return;
 
-        ViewModel = new SaveItemTypeSizeViewModel(await Get(new GetItemTypeSize(Id)));
+        ViewModel = new ItemTypeSizeEditModel(new ItemTypeSizeModel(await QueryRouter.Send(new GetItemTypeSize(Id))));
     }
 }

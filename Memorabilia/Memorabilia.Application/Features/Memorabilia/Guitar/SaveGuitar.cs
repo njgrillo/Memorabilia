@@ -13,7 +13,7 @@ public class SaveGuitar
 
         protected override async Task Handle(Command command)
         {
-            var memorabilia = await _memorabiliaRepository.Get(command.MemorabiliaId);
+            Entity.Memorabilia memorabilia = await _memorabiliaRepository.Get(command.MemorabiliaId);
 
             memorabilia.SetGuitar(command.BrandId,
                                   command.PersonIds,
@@ -25,19 +25,23 @@ public class SaveGuitar
 
     public class Command : DomainCommand, ICommand
     {
-        private readonly SaveGuitarViewModel _viewModel;
+        private readonly GuitarEditModel _editModel;
 
-        public Command(SaveGuitarViewModel viewModel)
+        public Command(GuitarEditModel editModel)
         {
-            _viewModel = viewModel;
+            _editModel = editModel;
         }
 
-        public int BrandId => _viewModel.BrandId;
+        public int BrandId 
+            => _editModel.BrandId;
 
-        public int MemorabiliaId => _viewModel.MemorabiliaId;
+        public int MemorabiliaId 
+            => _editModel.MemorabiliaId;
 
-        public int[] PersonIds => _viewModel.People.Where(person => !person.IsDeleted).Select(person => person.Id).ToArray();
+        public int[] PersonIds 
+            => _editModel.People.ActiveIds();
 
-        public int SizeId => _viewModel.SizeId;
+        public int SizeId 
+            => _editModel.SizeId;
     }
 }

@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Blazor.Controls.MemorabiliaItem;
 
-public partial class EditMemorabiliaPage<TItem> where TItem : MemorabiliaItemEditViewModel
+public partial class EditMemorabiliaPage<TItem> where TItem : MemorabiliaItemEditModel
 {
     [Parameter]
     public RenderFragment Content { get; set; }

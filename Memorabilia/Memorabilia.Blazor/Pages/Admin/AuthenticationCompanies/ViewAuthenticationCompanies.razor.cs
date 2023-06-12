@@ -9,6 +9,6 @@ public partial class ViewAuthenticationCompanies : ViewDomainItem<Authentication
 
     public async Task OnLoad()
     {
-        await OnLoad(new GetAuthenticationCompanies());
+        ViewModel = new AuthenticationCompaniesModel(await QueryRouter.Send(new GetAuthenticationCompanies()));
     }
 }

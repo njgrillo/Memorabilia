@@ -1,10 +1,10 @@
-﻿using Memorabilia.Domain.Constants;
+﻿namespace Memorabilia.Application.Features.Tools.Shared.FranchiseHallOfFames;
 
-namespace Memorabilia.Application.Features.Tools.Shared.FranchiseHallOfFames;
-
-public record GetFranchiseHallOfFames(Franchise Franchise, Sport Sport) : IQuery<FranchiseHallOfFamesModel>
+public record GetFranchiseHallOfFames(Constant.Franchise Franchise, 
+                                      Constant.Sport Sport) 
+    : IQuery<Entity.FranchiseHallOfFame[]>
 {
-    public class Handler : QueryHandler<GetFranchiseHallOfFames, FranchiseHallOfFamesModel>
+    public class Handler : QueryHandler<GetFranchiseHallOfFames, Entity.FranchiseHallOfFame[]>
     {
         private readonly IFranchiseHallOfFameRepository _franchiseHallOfFameRepository;
 
@@ -13,12 +13,8 @@ public record GetFranchiseHallOfFames(Franchise Franchise, Sport Sport) : IQuery
             _franchiseHallOfFameRepository = franchiseHallOfFameRepository;
         }
 
-        protected override async Task<FranchiseHallOfFamesModel> Handle(GetFranchiseHallOfFames query)
-        {
-            return new FranchiseHallOfFamesModel(await _franchiseHallOfFameRepository.GetAll(query.Franchise.Id), query.Sport)
-            {
-                Franchise = query.Franchise
-            };
-        }
+        protected override async Task<Entity.FranchiseHallOfFame[]> Handle(GetFranchiseHallOfFames query)
+            => (await _franchiseHallOfFameRepository.GetAll(query.Franchise.Id))
+                    .ToArray();
     }
 }

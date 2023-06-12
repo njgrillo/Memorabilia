@@ -15,7 +15,5 @@ public class AuthenticationFilterRule : IFilterRule<Entity.Memorabilia>
     }
 
     public Expression<Func<Entity.Memorabilia, bool>> GetExpression()
-    {
-        return item => item.Autographs.Any(autograph => autograph.Authentications.Count > 0);
-    }
+        => item => item.Autographs.Any(autograph => autograph.Authentications.Count > 0);
 }

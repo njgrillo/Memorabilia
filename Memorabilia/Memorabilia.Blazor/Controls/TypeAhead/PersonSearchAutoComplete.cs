@@ -52,7 +52,7 @@ public class PersonSearchAutoComplete : Autocomplete<Domain.Entities.Person>, IN
 
     private async Task LoadItems()
     {
-        Items = await QueryRouter.Send(new GetDomainPeople(Sport?.Id ?? null));
+        Items = await QueryRouter.Send(new GetPeople(SportId: Sport?.Id ?? null));
     }
 
     private async void PersonAutoComplete_PropertyChanged(object sender, PropertyChangedEventArgs e)

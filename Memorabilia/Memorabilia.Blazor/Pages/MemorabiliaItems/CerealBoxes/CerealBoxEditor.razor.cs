@@ -1,18 +1,18 @@
 ﻿namespace Memorabilia.Blazor.Pages.MemorabiliaItems.CerealBoxes;
 
-public partial class CerealBoxEditor : MemorabiliaItem<SaveCerealBoxViewModel>
+public partial class CerealBoxEditor : MemorabiliaItem<CerealBoxEditModel>
 {
     [Inject]
     public CerealBoxValidator Validator { get; set; }
 
     protected async Task OnLoad()
     {
-        var viewModel = await QueryRouter.Send(new GetCerealBox(MemorabiliaId));
+        var viewModel = await QueryRouter.Send(new GetMemorabiliaItem(MemorabiliaId));
 
         if (viewModel.Brand == null)
             return;
 
-        ViewModel = new SaveCerealBoxViewModel(viewModel);
+        ViewModel = new CerealBoxEditModel(new CerealBoxModel(viewModel));
     }
 
     protected async Task OnSave()

@@ -10,7 +10,7 @@ public partial class ViewMemorabilia
 
     protected bool IsDetailView = true;
 
-    protected MemorabiliaItemsModel Model = new();
+    protected MemorabiliasModel Model = new();
 
     private MemorabiliaSearchCriteria _filter = new();
 

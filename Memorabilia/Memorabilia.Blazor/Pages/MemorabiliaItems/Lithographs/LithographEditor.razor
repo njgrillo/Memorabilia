@@ -1,9 +1,9 @@
-﻿@inherits MemorabiliaItem<SaveLithographViewModel>
+﻿@inherits MemorabiliaItem<LithographEditModel>
 
 <EditMemorabiliaPage Item="ViewModel"
                      OnLoad="OnLoad"
                      OnSave="OnSave" 
-                     TItem="SaveLithographViewModel">
+                     TItem="LithographEditModel">
     <Content>
         <MemorabiliaItemEditor DisplayItemTypeBrand="false" 
                                DisplayItemTypeGameStyle="false"
@@ -11,7 +11,7 @@
                                DisplayMultiPersonSelector="true"
                                DisplayMultiSportSelector="true"
                                DisplayMultiTeamSelector="true"
-                               TItem="SaveLithographViewModel"
+                               TItem="LithographEditModel"
                                ViewModel="ViewModel">
             <AdditionalContent>
                 <DivRowCol3>

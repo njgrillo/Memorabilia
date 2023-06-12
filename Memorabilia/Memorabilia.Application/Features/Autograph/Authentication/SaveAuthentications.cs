@@ -34,15 +34,16 @@ public class SaveAuthentications
 
     public class Command : DomainCommand, ICommand
     {
-        private readonly AuthenticationsEditModel _viewModel;
+        private readonly AuthenticationsEditModel _editModel;
 
-        public Command(AuthenticationsEditModel viewModel)
+        public Command(AuthenticationsEditModel editModel)
         {
-            _viewModel = viewModel;
-            Items = _viewModel.Authentications;
+            _editModel = editModel;
+            Items = _editModel.Authentications;
         }
 
-        public int AutographId => _viewModel.AutographId;
+        public int AutographId 
+            => _editModel.AutographId;
 
         public int[] DeletedIds 
             => Items.Where(item => item.IsDeleted)

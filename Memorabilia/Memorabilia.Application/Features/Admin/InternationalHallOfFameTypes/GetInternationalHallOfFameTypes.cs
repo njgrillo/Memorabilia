@@ -1,21 +1,18 @@
-﻿using Memorabilia.Domain.Entities;
+﻿namespace Memorabilia.Application.Features.Admin.InternationalHallOfFameTypes;
 
-namespace Memorabilia.Application.Features.Admin.InternationalHallOfFameTypes;
-
-public record GetInternationalHallOfFameTypes() : IQuery<InternationalHallOfFameTypesViewModel>
+public record GetInternationalHallOfFameTypes() : IQuery<Entity.InternationalHallOfFameType[]>
 {
-    public class Handler : QueryHandler<GetInternationalHallOfFameTypes, InternationalHallOfFameTypesViewModel>
+    public class Handler : QueryHandler<GetInternationalHallOfFameTypes, Entity.InternationalHallOfFameType[]>
     {
-        private readonly IDomainRepository<InternationalHallOfFameType> _internationalHallOfFameTypeRepository;
+        private readonly IDomainRepository<Entity.InternationalHallOfFameType> _internationalHallOfFameTypeRepository;
 
-        public Handler(IDomainRepository<InternationalHallOfFameType> internationalHallOfFameTypeRepository)
+        public Handler(IDomainRepository<Entity.InternationalHallOfFameType> internationalHallOfFameTypeRepository)
         {
             _internationalHallOfFameTypeRepository = internationalHallOfFameTypeRepository;
         }
 
-        protected override async Task<InternationalHallOfFameTypesViewModel> Handle(GetInternationalHallOfFameTypes query)
-        {
-            return new InternationalHallOfFameTypesViewModel(await _internationalHallOfFameTypeRepository.GetAll());
-        }
+        protected override async Task<Entity.InternationalHallOfFameType[]> Handle(GetInternationalHallOfFameTypes query)
+            => (await _internationalHallOfFameTypeRepository.GetAll())
+                    .ToArray();
     }
 }

@@ -1,16 +1,17 @@
 ﻿namespace Memorabilia.Blazor.Pages.Admin.Leagues;
 
-public partial class ViewLeagues : ViewItem<LeaguesViewModel, LeagueViewModel>
+public partial class ViewLeagues 
+    : ViewItem<LeaguesModel, LeagueModel>
 {
     protected async Task OnLoad()
     {
-        await OnLoad(new GetLeagues());
+        ViewModel = new LeaguesModel(await QueryRouter.Send(new GetLeagues()));
     }
 
     protected override async Task Delete(int id)
     {
         var deletedItem = ViewModel.Leagues.Single(League => League.Id == id);
-        var viewModel = new SaveLeagueViewModel(deletedItem)
+        var viewModel = new LeagueEditModel(deletedItem)
         {
             IsDeleted = true
         };
@@ -22,12 +23,10 @@ public partial class ViewLeagues : ViewItem<LeaguesViewModel, LeagueViewModel>
         ShowDeleteSuccessfulMessage(ViewModel.ItemTitle);
     }
 
-    protected override bool FilterFunc(LeagueViewModel viewModel, string search)
-    {
-        return search.IsNullOrEmpty() ||
-               viewModel.SportLeagueLevelName.Contains(search, StringComparison.OrdinalIgnoreCase) ||
-               viewModel.Name.Contains(search, StringComparison.OrdinalIgnoreCase) ||
-               (!viewModel.Abbreviation.IsNullOrEmpty() &&
-                viewModel.Abbreviation.Contains(search, StringComparison.OrdinalIgnoreCase));
-    }
+    protected override bool FilterFunc(LeagueModel viewModel, string search)
+        => search.IsNullOrEmpty() ||
+           viewModel.SportLeagueLevelName.Contains(search, StringComparison.OrdinalIgnoreCase) ||
+           viewModel.Name.Contains(search, StringComparison.OrdinalIgnoreCase) ||
+           (!viewModel.Abbreviation.IsNullOrEmpty() &&
+            viewModel.Abbreviation.Contains(search, StringComparison.OrdinalIgnoreCase));
 }

@@ -41,11 +41,17 @@ public partial class ViewCollegesTool
         if (college == null)
             return;
 
-        Model = await QueryRouter.Send(new GetPersonColleges(college, Sport));
+        Model = new(await QueryRouter.Send(new GetPersonColleges(college, Sport)), Sport)
+                {
+                    College = college
+                };
     }
 
     private async Task OnInputChange(College college)
     {
-        Model = await QueryRouter.Send(new GetPersonColleges(college, Sport));
+        Model = new(await QueryRouter.Send(new GetPersonColleges(college, Sport)), Sport)
+                {
+                    College = college
+                };
     }
 }

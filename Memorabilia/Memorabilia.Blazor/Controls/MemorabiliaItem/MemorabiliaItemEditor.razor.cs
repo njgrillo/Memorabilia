@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Blazor.Controls.MemorabiliaItem;
 
-public partial class MemorabiliaItemEditor<TItem> where TItem : MemorabiliaItemEditViewModel
+public partial class MemorabiliaItemEditor<TItem> where TItem : MemorabiliaItemEditModel
 {
     [Parameter]
     public RenderFragment AdditionalContent { get; set; }

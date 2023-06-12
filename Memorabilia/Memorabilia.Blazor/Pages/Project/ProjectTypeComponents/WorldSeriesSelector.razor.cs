@@ -22,16 +22,16 @@ public partial class WorldSeriesSelector
 
     protected ItemType ItemType { get; set; }    
 
-    protected SaveTeamViewModel Team { get; set; }
+    protected TeamEditModel Team { get; set; }
 
     protected override async Task OnInitializedAsync()
     {
         if (TeamId == 0)
             return;
 
-        TeamViewModel team = await QueryRouter.Send(new GetTeam(TeamId));
+        var team = new TeamModel(await QueryRouter.Send(new GetTeam(TeamId)));
 
-        Team = new SaveTeamViewModel(team);
+        Team = new TeamEditModel(team);
 
         if (ItemTypeId.HasValue)
             ItemType = ItemType.Find(ItemType.Value);
@@ -44,7 +44,7 @@ public partial class WorldSeriesSelector
         await OnParameterChanged();
     }
 
-    protected async Task TeamChanged(SaveTeamViewModel team)
+    protected async Task TeamChanged(TeamEditModel team)
     {
         Team = team;
 

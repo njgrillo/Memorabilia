@@ -1,41 +1,41 @@
-﻿using Memorabilia.Domain.Entities;
+﻿namespace Memorabilia.Application.Features.Admin.PriorityTypes;
 
-namespace Memorabilia.Application.Features.Admin.PriorityTypes;
-
-public record SavePriorityType(DomainEditModel ViewModel) : ICommand
+public record SavePriorityType(DomainEditModel PriorityType) : ICommand
 {
     public class Handler : CommandHandler<SavePriorityType>
     {
-        private readonly IDomainRepository<PriorityType> _priorityTypeRepository;
+        private readonly IDomainRepository<Entity.PriorityType> _priorityTypeRepository;
 
-        public Handler(IDomainRepository<PriorityType> priorityTypeRepository)
+        public Handler(IDomainRepository<Entity.PriorityType> priorityTypeRepository)
         {
             _priorityTypeRepository = priorityTypeRepository;
         }
 
         protected override async Task Handle(SavePriorityType request)
         {
-            PriorityType priorityType;
+            Entity.PriorityType priorityType;
 
-            if (request.ViewModel.IsNew)
+            if (request.PriorityType.IsNew)
             {
-                priorityType = new PriorityType(request.ViewModel.Name, request.ViewModel.Abbreviation);
+                priorityType = new Entity.PriorityType(request.PriorityType.Name, 
+                                                       request.PriorityType.Abbreviation);
 
                 await _priorityTypeRepository.Add(priorityType);
 
                 return;
             }
 
-            priorityType = await _priorityTypeRepository.Get(request.ViewModel.Id);
+            priorityType = await _priorityTypeRepository.Get(request.PriorityType.Id);
 
-            if (request.ViewModel.IsDeleted)
+            if (request.PriorityType.IsDeleted)
             {
                 await _priorityTypeRepository.Delete(priorityType);
 
                 return;
             }
 
-            priorityType.Set(request.ViewModel.Name, request.ViewModel.Abbreviation);
+            priorityType.Set(request.PriorityType.Name, 
+                             request.PriorityType.Abbreviation);
 
             await _priorityTypeRepository.Update(priorityType);
         }

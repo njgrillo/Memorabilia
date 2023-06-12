@@ -25,7 +25,5 @@ public class CareerRecordProfileModel
         => _record.Record;
 
     public override string ToString()
-    {
-        return $"{Record} {CareerRecordTypeAbbreviatedName}";
-    }
+        => $"{Record} {CareerRecordTypeAbbreviatedName}";
 }

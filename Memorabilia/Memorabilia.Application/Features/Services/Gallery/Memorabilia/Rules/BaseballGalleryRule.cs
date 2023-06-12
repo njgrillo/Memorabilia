@@ -3,14 +3,10 @@
 public class BaseballGalleryRule : GalleryRule, IGalleryRule
 {
     public bool Applies(Constant.ItemType itemType)
-    {
-        return itemType == Constant.ItemType.Baseball;
-    }
+        => itemType == Constant.ItemType.Baseball;
 
     public override string GetTitle(Entity.Memorabilia memorabilia)
-    {
-        return $"{AutographTitleText(memorabilia)} {PlayerTeamText(memorabilia)} {GetBaseballTypeText(memorabilia)} {ItemTypeText(memorabilia)}";
-    }
+        => $"{AutographTitleText(memorabilia)} {PlayerTeamText(memorabilia)} {GetBaseballTypeText(memorabilia)} {ItemTypeText(memorabilia)}";
 
     private static string GetBaseballTypeText(Entity.Memorabilia memorabilia)
     {

@@ -1,41 +1,41 @@
-﻿using Memorabilia.Domain.Entities;
+﻿namespace Memorabilia.Application.Features.Admin.InternationalHallOfFameTypes;
 
-namespace Memorabilia.Application.Features.Admin.InternationalHallOfFameTypes;
-
-public record SaveInternationalHallOfFameType(DomainEditModel ViewModel) : ICommand
+public record SaveInternationalHallOfFameType(DomainEditModel InternationalHallOfFameType) : ICommand
 {
     public class Handler : CommandHandler<SaveInternationalHallOfFameType>
     {
-        private readonly IDomainRepository<InternationalHallOfFameType> _internationalHallOfFameTypeRepository;
+        private readonly IDomainRepository<Entity.InternationalHallOfFameType> _internationalHallOfFameTypeRepository;
 
-        public Handler(IDomainRepository<InternationalHallOfFameType> internationalHallOfFameTypeRepository)
+        public Handler(IDomainRepository<Entity.InternationalHallOfFameType> internationalHallOfFameTypeRepository)
         {
             _internationalHallOfFameTypeRepository = internationalHallOfFameTypeRepository;
         }
 
         protected override async Task Handle(SaveInternationalHallOfFameType request)
         {
-            InternationalHallOfFameType internationalHallOfFameType;
+            Entity.InternationalHallOfFameType internationalHallOfFameType;
 
-            if (request.ViewModel.IsNew)
+            if (request.InternationalHallOfFameType.IsNew)
             {
-                internationalHallOfFameType = new InternationalHallOfFameType(request.ViewModel.Name, request.ViewModel.Abbreviation);
+                internationalHallOfFameType = new Entity.InternationalHallOfFameType(request.InternationalHallOfFameType.Name, 
+                                                                                     request.InternationalHallOfFameType.Abbreviation);
 
                 await _internationalHallOfFameTypeRepository.Add(internationalHallOfFameType);
 
                 return;
             }
 
-            internationalHallOfFameType = await _internationalHallOfFameTypeRepository.Get(request.ViewModel.Id);
+            internationalHallOfFameType = await _internationalHallOfFameTypeRepository.Get(request.InternationalHallOfFameType.Id);
 
-            if (request.ViewModel.IsDeleted)
+            if (request.InternationalHallOfFameType.IsDeleted)
             {
                 await _internationalHallOfFameTypeRepository.Delete(internationalHallOfFameType);
 
                 return;
             }
 
-            internationalHallOfFameType.Set(request.ViewModel.Name, request.ViewModel.Abbreviation);
+            internationalHallOfFameType.Set(request.InternationalHallOfFameType.Name, 
+                                            request.InternationalHallOfFameType.Abbreviation);
 
             await _internationalHallOfFameTypeRepository.Update(internationalHallOfFameType);
         }

@@ -1,18 +1,18 @@
 ﻿namespace Memorabilia.Blazor.Pages.MemorabiliaItems.Figures;
 
-public partial class FigureEditor : MemorabiliaItem<SaveFigureViewModel>
+public partial class FigureEditor : MemorabiliaItem<FigureEditModel>
 {
     [Inject]
     public FigureValidator Validator { get; set; }
 
     protected async Task OnLoad()
     {
-        var viewModel = await QueryRouter.Send(new GetFigure(MemorabiliaId));
+        var viewModel = await QueryRouter.Send(new GetMemorabiliaItem(MemorabiliaId));
 
         if (viewModel.Brand == null)
             return;
 
-        ViewModel = new SaveFigureViewModel(viewModel);
+        ViewModel = new FigureEditModel(new FigureModel(viewModel));
     }
 
     protected async Task OnSave()

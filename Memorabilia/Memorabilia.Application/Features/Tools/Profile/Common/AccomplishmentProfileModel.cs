@@ -31,9 +31,7 @@ public class AccomplishmentProfileModel
         => _accomplishment.Year;
 
     public override string ToString()
-    {
-        return !AccomplishmentTypeAbbreviation.IsNullOrEmpty() 
+        => !AccomplishmentTypeAbbreviation.IsNullOrEmpty()
             ? AccomplishmentTypeAbbreviation
             : AccomplishmentTypeName;
-    }
 }

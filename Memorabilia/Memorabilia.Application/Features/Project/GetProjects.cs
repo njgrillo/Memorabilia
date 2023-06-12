@@ -12,10 +12,8 @@ public record GetProjects(int UserId) : IQuery<Entity.Project[]>
         }
 
         protected override async Task<Entity.Project[]> Handle(GetProjects query)
-        {
-            return (await _projectRepository.GetAll(query.UserId))
+            => (await _projectRepository.GetAll(query.UserId))
                        .OrderBy(project => project.Name)
                        .ToArray();
-        }
     }
 }

@@ -1,18 +1,18 @@
 ﻿namespace Memorabilia.Blazor.Pages.MemorabiliaItems.Pants;
 
-public partial class PantEditor : MemorabiliaItem<SavePantViewModel>
+public partial class PantEditor : MemorabiliaItem<PantEditModel>
 {
     [Inject]
     public PantValidator Validator { get; set; }
 
     protected async Task OnLoad()
     {
-        var viewModel = await QueryRouter.Send(new GetPant(MemorabiliaId));
+        var viewModel = await QueryRouter.Send(new GetMemorabiliaItem(MemorabiliaId));
 
         if (viewModel.Brand == null)
             return;
 
-        ViewModel = new SavePantViewModel(viewModel);
+        ViewModel = new PantEditModel(new PantModel(viewModel));
     }
 
     protected async Task OnSave()

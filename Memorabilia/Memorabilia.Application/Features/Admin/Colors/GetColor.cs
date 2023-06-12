@@ -1,21 +1,17 @@
-﻿using Memorabilia.Domain.Entities;
+﻿namespace Memorabilia.Application.Features.Admin.Colors;
 
-namespace Memorabilia.Application.Features.Admin.Colors;
-
-public record GetColor(int Id) : IQuery<DomainModel>
+public record GetColor(int Id) : IQuery<Entity.Color>
 {
-    public class Handler : QueryHandler<GetColor, DomainModel>
+    public class Handler : QueryHandler<GetColor, Entity.Color>
     {
-        private readonly IDomainRepository<Color> _colorRepository;
+        private readonly IDomainRepository<Entity.Color> _colorRepository;
 
-        public Handler(IDomainRepository<Color> colorRepository)
+        public Handler(IDomainRepository<Entity.Color> colorRepository)
         {
             _colorRepository = colorRepository;
         }
 
-        protected override async Task<DomainModel> Handle(GetColor query)
-        {
-            return new DomainModel(await _colorRepository.Get(query.Id));
-        }
+        protected override async Task<Entity.Color> Handle(GetColor query)
+            => await _colorRepository.Get(query.Id);
     }
 }

@@ -1,6 +1,7 @@
 ﻿namespace Memorabilia.Blazor.Pages.Admin.Commissioners;
 
-public partial class CommissionerEditor : EditItem<SaveCommissionerViewModel, CommissionerViewModel>
+public partial class CommissionerEditor 
+    : EditItem<CommissionerEditModel, CommissionerModel>
 {
     protected async Task HandleValidSubmit()
     {
@@ -10,8 +11,8 @@ public partial class CommissionerEditor : EditItem<SaveCommissionerViewModel, Co
     protected async Task OnLoad()
     {
         if (Id == 0)
-            return;
+            return;        
 
-        ViewModel = new SaveCommissionerViewModel(await Get(new GetCommissioner(Id)));
+        ViewModel = new CommissionerEditModel(new CommissionerModel(await QueryRouter.Send(new GetCommissioner(Id))));
     }
 }

@@ -4,31 +4,34 @@ public class ProjectPersonEditModel : EditModel
 {
     public ProjectPersonEditModel() { }
 
-    public ProjectPersonEditModel(ProjectPersonModel viewModel)
+    public ProjectPersonEditModel(ProjectPersonModel model)
     {            
-        Id = viewModel.Id;
-        ItemTypeId = viewModel.ItemTypeId ?? 0;
-        Rank = viewModel.Rank;
-        Upgrade = viewModel.Upgrade;
-        PriorityTypeId = viewModel.PriorityTypeId ?? 0;
-        ProjectStatusTypeId = viewModel.ProjectStatusTypeId ?? 0;
-        Person =  new SavePersonViewModel(new PersonViewModel(viewModel.Person));
-        MemorabiliaId = viewModel.MemorabiliaId ?? 0;
-        AutographId = viewModel.AutographId ?? 0;
-        UserId = viewModel.UserId;
-        AutographFileName = viewModel.AutographFileName;
-        Project = viewModel.Project;
+        Id = model.Id;
+        ItemTypeId = model.ItemTypeId ?? 0;
+        Rank = model.Rank;
+        Upgrade = model.Upgrade;
+        PriorityTypeId = model.PriorityTypeId ?? 0;
+        ProjectStatusTypeId = model.ProjectStatusTypeId ?? 0;
+        Person = model.Person.ToEditModel();
+        MemorabiliaId = model.MemorabiliaId ?? 0;
+        AutographId = model.AutographId ?? 0;
+        UserId = model.UserId;
+        AutographFileName = model.AutographFileName;
+        Project = model.Project;
     }
 
     public int AutographId { get; set; }
 
     public string AutographFileName { get; set; }
 
-    public bool Deceased => Person?.DeathDate.HasValue ?? false;
+    public bool Deceased 
+        => Person?.DeathDate.HasValue ?? false;
 
-    public bool DisplayDoubleUpIcon => Rank > 1;
+    public bool DisplayDoubleUpIcon 
+        => Rank > 1;
 
-    public bool DisplayUpIcon => Rank > 1;
+    public bool DisplayUpIcon 
+        => Rank > 1;
 
     public string DoubleDownIcon 
         => MudBlazor.Icons.Material.Filled.KeyboardDoubleArrowDown;
@@ -47,7 +50,8 @@ public class ProjectPersonEditModel : EditModel
     public int MemorabiliaId { get; set; }
 
     [Required]
-    public SavePersonViewModel Person { get; set; } = new();              
+    public PersonEditModel Person { get; set; } 
+        = new();              
 
     public int PriorityTypeId { get; set; }
 

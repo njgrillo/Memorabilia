@@ -8,33 +8,41 @@ public class CollectionEditModel : EditModel
     {
         Description = collection.Description;
         Id = collection.Id;
+
         Items = collection.Memorabilia
                           .Select(item => new CollectionMemorabiliaEditModel(new CollectionMemorabiliaModel(item)))
                           .ToList();
+
         Name = collection.Name;
         UserId = collection.UserId;
     }
 
-    public CollectionEditModel(CollectionModel viewModel)
+    public CollectionEditModel(CollectionModel model)
     {
-        Description = viewModel.Description;
-        Id = viewModel.Id;
-        Items = viewModel.Memorabilia
-                         .Select(item => new CollectionMemorabiliaEditModel(new CollectionMemorabiliaModel(item)))
-                         .ToList();
-        Name = viewModel.Name;
-        UserId = viewModel.UserId;
+        Description = model.Description;
+        Id = model.Id;
+
+        Items = model.Memorabilia
+                     .Select(item => new CollectionMemorabiliaEditModel(new CollectionMemorabiliaModel(item)))
+                     .ToList();
+
+        Name = model.Name;
+        UserId = model.UserId;
     }
 
     public string Description { get; set; }
 
-    public List<CollectionMemorabiliaEditModel> Items { get; set; } = new();
+    public List<CollectionMemorabiliaEditModel> Items { get; set; } 
+        = new();
 
-    public override string ItemTitle => "Collection";
+    public override string ItemTitle 
+        => "Collection";
 
-    public override string PageTitle => "Collection";
+    public override string PageTitle 
+        => "Collection";
 
-    public override string RoutePrefix => "Collections";
+    public override string RoutePrefix 
+        => "Collections";
 
     [Required]
     [Range(1, int.MaxValue, ErrorMessage = "User Id is required.")]

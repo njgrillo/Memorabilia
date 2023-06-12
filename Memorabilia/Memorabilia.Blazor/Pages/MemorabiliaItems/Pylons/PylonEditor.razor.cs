@@ -1,18 +1,18 @@
 ﻿namespace Memorabilia.Blazor.Pages.MemorabiliaItems.Pylons;
 
-public partial class PylonEditor : MemorabiliaItem<SavePylonViewModel>
+public partial class PylonEditor : MemorabiliaItem<PylonEditModel>
 {
     [Inject]
     public PylonValidator Validator { get; set; }
 
     protected async Task OnLoad()
     {
-        var viewModel = await QueryRouter.Send(new GetPylon(MemorabiliaId));
+        var viewModel = await QueryRouter.Send(new GetMemorabiliaItem(MemorabiliaId));
 
         if (viewModel.Size == null)
             return;
 
-        ViewModel = new SavePylonViewModel(viewModel);
+        ViewModel = new PylonEditModel(new PylonModel(viewModel));
     }
 
     protected async Task OnSave()

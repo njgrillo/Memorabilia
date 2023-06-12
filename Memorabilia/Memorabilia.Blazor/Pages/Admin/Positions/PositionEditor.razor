@@ -1,4 +1,4 @@
-﻿@inherits EditItem<SavePositionViewModel, PositionViewModel>
+﻿@inherits EditItem<PositionEditModel, PositionModel>
 
 <EditPage ContinueNavigationPath="@ViewModel.RoutePrefix"
           EditMode="ViewModel.EditModeType"
@@ -11,7 +11,7 @@
           PageFooterButtonText="@ViewModel.ExitButtonText"
           PageFooterNavigationPath="@ViewModel.ExitNavigationPath"
           PageTitle="@ViewModel.PageTitle"
-          TItem="SavePositionViewModel">
+          TItem="PositionEditModel">
     <Content>
         <DivRowCol3>
             <Content>

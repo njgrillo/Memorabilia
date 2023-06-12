@@ -1,21 +1,18 @@
-﻿using Memorabilia.Domain.Entities;
+﻿namespace Memorabilia.Application.Features.Admin.LeaderTypes;
 
-namespace Memorabilia.Application.Features.Admin.LeaderTypes;
-
-public record GetLeaderTypes() : IQuery<LeaderTypesViewModel>
+public record GetLeaderTypes() : IQuery<Entity.LeaderType[]>
 {
-    public class Handler : QueryHandler<GetLeaderTypes, LeaderTypesViewModel>
+    public class Handler : QueryHandler<GetLeaderTypes, Entity.LeaderType[]>
     {
-        private readonly IDomainRepository<LeaderType> _leaderTypeRepository;
+        private readonly IDomainRepository<Entity.LeaderType> _leaderTypeRepository;
 
-        public Handler(IDomainRepository<LeaderType> leaderTypeRepository)
+        public Handler(IDomainRepository<Entity.LeaderType> leaderTypeRepository)
         {
             _leaderTypeRepository = leaderTypeRepository;
         }
 
-        protected override async Task<LeaderTypesViewModel> Handle(GetLeaderTypes query)
-        {
-            return new LeaderTypesViewModel(await _leaderTypeRepository.GetAll());
-        }
+        protected override async Task<Entity.LeaderType[]> Handle(GetLeaderTypes query)
+            => (await _leaderTypeRepository.GetAll())
+                    .ToArray();
     }
 }

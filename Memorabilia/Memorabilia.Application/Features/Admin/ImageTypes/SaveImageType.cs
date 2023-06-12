@@ -1,41 +1,41 @@
-﻿using Memorabilia.Domain.Entities;
+﻿namespace Memorabilia.Application.Features.Admin.ImageTypes;
 
-namespace Memorabilia.Application.Features.Admin.ImageTypes;
-
-public record SaveImageType(DomainEditModel ViewModel) : ICommand
+public record SaveImageType(DomainEditModel ImageType) : ICommand
 {
     public class Handler : CommandHandler<SaveImageType>
     {
-        private readonly IDomainRepository<ImageType> _imageTypeRepository;
+        private readonly IDomainRepository<Entity.ImageType> _imageTypeRepository;
 
-        public Handler(IDomainRepository<ImageType> imageTypeRepository)
+        public Handler(IDomainRepository<Entity.ImageType> imageTypeRepository)
         {
             _imageTypeRepository = imageTypeRepository;
         }
 
         protected override async Task Handle(SaveImageType request)
         {
-            ImageType imageType;
+            Entity.ImageType imageType;
 
-            if (request.ViewModel.IsNew)
+            if (request.ImageType.IsNew)
             {
-                imageType = new ImageType(request.ViewModel.Name, request.ViewModel.Abbreviation);
+                imageType = new Entity.ImageType(request.ImageType.Name, 
+                                                 request.ImageType.Abbreviation);
 
                 await _imageTypeRepository.Add(imageType);
 
                 return;
             }
 
-            imageType = await _imageTypeRepository.Get(request.ViewModel.Id);
+            imageType = await _imageTypeRepository.Get(request.ImageType.Id);
 
-            if (request.ViewModel.IsDeleted)
+            if (request.ImageType.IsDeleted)
             {
                 await _imageTypeRepository.Delete(imageType);
 
                 return;
             }
 
-            imageType.Set(request.ViewModel.Name, request.ViewModel.Abbreviation);
+            imageType.Set(request.ImageType.Name, 
+                          request.ImageType.Abbreviation);
 
             await _imageTypeRepository.Update(imageType);
         }

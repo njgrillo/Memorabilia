@@ -1,41 +1,41 @@
-﻿using Memorabilia.Domain.Entities;
+﻿namespace Memorabilia.Application.Features.Admin.Conditions;
 
-namespace Memorabilia.Application.Features.Admin.Conditions;
-
-public record SaveCondition(DomainEditModel ViewModel) : ICommand
+public record SaveCondition(DomainEditModel Condition) : ICommand
 {
     public class Handler : CommandHandler<SaveCondition>
     {
-        private readonly IDomainRepository<Condition> _conditionRepository;
+        private readonly IDomainRepository<Entity.Condition> _conditionRepository;
 
-        public Handler(IDomainRepository<Condition> conditionRepository)
+        public Handler(IDomainRepository<Entity.Condition> conditionRepository)
         {
             _conditionRepository = conditionRepository;
         }
 
         protected override async Task Handle(SaveCondition request)
         {
-            Condition condition;
+            Entity.Condition condition;
 
-            if (request.ViewModel.IsNew)
+            if (request.Condition.IsNew)
             {
-                condition = new Condition(request.ViewModel.Name, request.ViewModel.Abbreviation);
+                condition = new Entity.Condition(request.Condition.Name, 
+                                                 request.Condition.Abbreviation);
 
                 await _conditionRepository.Add(condition);
 
                 return;
             }
 
-            condition = await _conditionRepository.Get(request.ViewModel.Id);
+            condition = await _conditionRepository.Get(request.Condition.Id);
 
-            if (request.ViewModel.IsDeleted)
+            if (request.Condition.IsDeleted)
             {
                 await _conditionRepository.Delete(condition);
 
                 return;
             }
 
-            condition.Set(request.ViewModel.Name, request.ViewModel.Abbreviation);
+            condition.Set(request.Condition.Name, 
+                          request.Condition.Abbreviation);
 
             await _conditionRepository.Update(condition);
         }

@@ -1,35 +1,35 @@
-﻿using Memorabilia.Domain.Entities;
+﻿namespace Memorabilia.Application.Features.Admin.ImageMaintenance;
 
-namespace Memorabilia.Application.Features.Admin.ImageMaintenance;
-
-public record GetImageMaintenance(string MemorabiliaImageRootPath, string PersonImageRootPath) : IQuery<ImageMaintenanceViewModel>
+public record GetImageMaintenance(string MemorabiliaImageRootPath, 
+                                  string PersonImageRootPath) 
+    : IQuery<ImageMaintenanceModel>
 {
-    public class Handler : QueryHandler<GetImageMaintenance, ImageMaintenanceViewModel>
+    public class Handler : QueryHandler<GetImageMaintenance, ImageMaintenanceModel>
     {
         private readonly IAutographImageRepository _autographImageRepository;
         private readonly IMemorabiliaImageRepository _memorabiliaImageRepository;
-        private readonly IDomainRepository<Person> _personRepository;
+        private readonly IDomainRepository<Entity.Person> _personRepository;
 
         public Handler(IAutographImageRepository autographImageRepository,
                        IMemorabiliaImageRepository memorabiliaImageRepository, 
-                       IDomainRepository<Person> personRepository)
+                       IDomainRepository<Entity.Person> personRepository)
         {
             _autographImageRepository = autographImageRepository;
             _memorabiliaImageRepository = memorabiliaImageRepository;
             _personRepository = personRepository;
         }
 
-        protected override async Task<ImageMaintenanceViewModel> Handle(GetImageMaintenance query)
+        protected override async Task<ImageMaintenanceModel> Handle(GetImageMaintenance query)
         {
-            var autographImages = await _autographImageRepository.GetAll();
-            var memorabiliaImages = await _memorabiliaImageRepository.GetAll();
-            var people = await _personRepository.GetAll();   
+            IEnumerable<Entity.AutographImage> autographImages = await _autographImageRepository.GetAll();
+            IEnumerable<Entity.MemorabiliaImage> memorabiliaImages = await _memorabiliaImageRepository.GetAll();
+            IEnumerable<Entity.Person> people = await _personRepository.GetAll();   
 
-            return new ImageMaintenanceViewModel(query.MemorabiliaImageRootPath, 
-                                                 query.PersonImageRootPath, 
-                                                 autographImages, 
-                                                 memorabiliaImages, 
-                                                 people);
+            return new ImageMaintenanceModel(query.MemorabiliaImageRootPath, 
+                                             query.PersonImageRootPath, 
+                                             autographImages, 
+                                             memorabiliaImages, 
+                                             people);
         }
     }
 }

@@ -5,12 +5,12 @@ namespace Memorabilia.Blazor.Controls.Team;
 public partial class TeamChampionshipEditor : ComponentBase
 {
     [Parameter]
-    public List<SaveTeamChampionshipViewModel> Championships { get; set; } = new();
+    public List<TeamChampionshipEditModel> Championships { get; set; } = new();
 
     [Parameter]
     public SportLeagueLevel SportLeagueLevel { get; set; }
 
-    private SaveTeamChampionshipViewModel _viewModel = new();
+    private TeamChampionshipEditModel _viewModel = new();
     private string _years;
 
     private void Add()

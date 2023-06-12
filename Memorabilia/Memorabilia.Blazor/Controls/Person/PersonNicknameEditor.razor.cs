@@ -5,9 +5,9 @@ namespace Memorabilia.Blazor.Controls.Person;
 public partial class PersonNicknameEditor : ComponentBase
 {
     [Parameter]
-    public List<SavePersonNicknameViewModel> Nicknames { get; set; } = new();
+    public List<PersonNicknameEditModel> Nicknames { get; set; } = new();
 
-    private SavePersonNicknameViewModel _viewModel = new();
+    private PersonNicknameEditModel _viewModel = new();
 
     private void Add()
     {
@@ -16,6 +16,6 @@ public partial class PersonNicknameEditor : ComponentBase
 
         Nicknames.Add(_viewModel);
 
-        _viewModel = new SavePersonNicknameViewModel();
+        _viewModel = new PersonNicknameEditModel();
     }
 }

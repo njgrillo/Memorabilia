@@ -1,6 +1,4 @@
-﻿using Memorabilia.Domain.Constants;
-
-namespace Memorabilia.Application.Features.Memorabilia.Image;
+﻿namespace Memorabilia.Application.Features.Memorabilia.Image;
 
 public class SaveMemorabiliaImage
 {
@@ -15,7 +13,7 @@ public class SaveMemorabiliaImage
 
         protected override async Task Handle(Command command)
         {
-            var memorabilia = await _memorabiliaRepository.Get(command.MemorabiliaId);
+            Entity.Memorabilia memorabilia = await _memorabiliaRepository.Get(command.MemorabiliaId);
 
             memorabilia.SetImages(command.FileNames, command.PrimaryImageFileName);
 
@@ -25,17 +23,23 @@ public class SaveMemorabiliaImage
 
     public class Command : DomainCommand, ICommand
     {
-        private readonly SaveMemorabiliaImagesViewModel _viewModel;
+        private readonly MemorabiliaImagesEditModel _editModel;
 
-        public Command(SaveMemorabiliaImagesViewModel viewModel)
+        public Command(MemorabiliaImagesEditModel editModel)
         {
-            _viewModel = viewModel;
+            _editModel = editModel;
         }
 
-        public IEnumerable<string> FileNames => _viewModel.Images.Select(image => image.FileName);
+        public IEnumerable<string> FileNames 
+            => _editModel.Images
+                         .Select(image => image.FileName);
 
-        public int MemorabiliaId => _viewModel.MemorabiliaId;
+        public int MemorabiliaId 
+            => _editModel.MemorabiliaId;
 
-        public string PrimaryImageFileName => _viewModel.Images.SingleOrDefault(image => image.ImageTypeId == ImageType.Primary.Id)?.FileName;
+        public string PrimaryImageFileName 
+            => _editModel.Images
+                         .SingleOrDefault(image => image.ImageTypeId == Constant.ImageType.Primary.Id)?
+                         .FileName;
     }
 }

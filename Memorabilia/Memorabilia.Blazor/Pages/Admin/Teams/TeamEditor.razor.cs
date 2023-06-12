@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Blazor.Pages.Admin.Teams;
 
-public partial class TeamEditor : EditItem<SaveTeamViewModel, TeamViewModel>
+public partial class TeamEditor : EditItem<TeamEditModel, TeamModel>
 {
     protected async Task HandleValidSubmit()
     {
@@ -16,6 +16,6 @@ public partial class TeamEditor : EditItem<SaveTeamViewModel, TeamViewModel>
         if (Id == 0)
             return;
 
-        ViewModel = new SaveTeamViewModel(await Get(new GetTeam(Id)));
+        ViewModel = new TeamEditModel(new TeamModel(await QueryRouter.Send(new GetTeam(Id))));
     }
 }

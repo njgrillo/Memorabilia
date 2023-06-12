@@ -1,6 +1,7 @@
 ﻿namespace Memorabilia.Blazor.Pages.Admin.Brands;
 
-public partial class ViewBrands : ViewDomainItem<BrandsViewModel>, IDeleteDomainItem, IViewDomainItem
+public partial class ViewBrands 
+    : ViewDomainItem<BrandsModel>, IDeleteDomainItem, IViewDomainItem
 {
     public async Task OnDelete(DomainEditModel viewModel)
     {
@@ -9,6 +10,6 @@ public partial class ViewBrands : ViewDomainItem<BrandsViewModel>, IDeleteDomain
 
     public async Task OnLoad()
     {
-        ViewModel = await QueryRouter.Send(new GetBrands());
+        ViewModel = new BrandsModel(await QueryRouter.Send(new GetBrands()));
     }
 }

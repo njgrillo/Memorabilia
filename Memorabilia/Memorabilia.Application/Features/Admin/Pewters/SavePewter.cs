@@ -1,29 +1,27 @@
-﻿using Memorabilia.Domain.Entities;
+﻿namespace Memorabilia.Application.Features.Admin.Pewters;
 
-namespace Memorabilia.Application.Features.Admin.Pewters;
-
-public record SavePewter(SavePewterViewModel ViewModel) : ICommand
+public record SavePewter(PewterEditModel ViewModel) : ICommand
 {
     public class Handler : CommandHandler<SavePewter>
     {
-        private readonly IDomainRepository<Pewter> _pewterRepository;
+        private readonly IDomainRepository<Entity.Pewter> _pewterRepository;
 
-        public Handler(IDomainRepository<Pewter> pewterRepository)
+        public Handler(IDomainRepository<Entity.Pewter> pewterRepository)
         {
             _pewterRepository = pewterRepository;
         }
 
         protected override async Task Handle(SavePewter request)
         {
-            Pewter pewter;
+            Entity.Pewter pewter;
 
             if (request.ViewModel.IsNew)
             {
-                pewter = new Pewter(request.ViewModel.Franchise.Id,
-                                    request.ViewModel.TeamId,
-                                    request.ViewModel.SizeId,
-                                    !request.ViewModel.FileName.IsNullOrEmpty() ? Constant.ImageType.Primary.Id : null,
-                                    request.ViewModel.FileName);
+                pewter = new Entity.Pewter(request.ViewModel.Franchise.Id,
+                                           request.ViewModel.TeamId,
+                                           request.ViewModel.SizeId,
+                                           !request.ViewModel.FileName.IsNullOrEmpty() ? Constant.ImageType.Primary.Id : null,
+                                           request.ViewModel.FileName);
 
                 await _pewterRepository.Add(pewter);
 

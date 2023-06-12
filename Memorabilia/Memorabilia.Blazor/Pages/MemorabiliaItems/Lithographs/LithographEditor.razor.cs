@@ -1,18 +1,18 @@
 ﻿namespace Memorabilia.Blazor.Pages.MemorabiliaItems.Lithographs;
 
-public partial class LithographEditor : MemorabiliaItem<SaveLithographViewModel>
+public partial class LithographEditor : MemorabiliaItem<LithographEditModel>
 {
     [Inject]
     public LithographValidator Validator { get; set; }
 
     protected async Task OnLoad()
     {
-        var viewModel = await QueryRouter.Send(new GetLithograph(MemorabiliaId));
+        var viewModel = await QueryRouter.Send(new GetMemorabiliaItem(MemorabiliaId));
 
         if (viewModel.Brand == null)
             return;
 
-        ViewModel = new SaveLithographViewModel(viewModel);
+        ViewModel = new LithographEditModel(new LithographModel(viewModel));
     }
 
     protected async Task OnSave()

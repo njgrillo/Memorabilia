@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Application.Features.Admin.AwardTypes;
 
-public record SaveAwardType(DomainEditModel ViewModel) : ICommand
+public record SaveAwardType(DomainEditModel AwardType) : ICommand
 {
     public class Handler : CommandHandler<SaveAwardType>
     {
@@ -15,25 +15,27 @@ public record SaveAwardType(DomainEditModel ViewModel) : ICommand
         {
             Entity.AwardType awardType;
 
-            if (request.ViewModel.IsNew)
+            if (request.AwardType.IsNew)
             {
-                awardType = new Entity.AwardType(request.ViewModel.Name, request.ViewModel.Abbreviation);
+                awardType = new Entity.AwardType(request.AwardType.Name, 
+                                                 request.AwardType.Abbreviation);
 
                 await _awardTypeRepository.Add(awardType);
 
                 return;
             }
 
-            awardType = await _awardTypeRepository.Get(request.ViewModel.Id);
+            awardType = await _awardTypeRepository.Get(request.AwardType.Id);
 
-            if (request.ViewModel.IsDeleted)
+            if (request.AwardType.IsDeleted)
             {
                 await _awardTypeRepository.Delete(awardType);
 
                 return;
             }
 
-            awardType.Set(request.ViewModel.Name, request.ViewModel.Abbreviation);
+            awardType.Set(request.AwardType.Name, 
+                          request.AwardType.Abbreviation);
 
             await _awardTypeRepository.Update(awardType);
         }

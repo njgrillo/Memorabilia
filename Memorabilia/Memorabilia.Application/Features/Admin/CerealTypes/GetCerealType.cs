@@ -1,21 +1,17 @@
-﻿using Memorabilia.Domain.Entities;
+﻿namespace Memorabilia.Application.Features.Admin.CerealTypes;
 
-namespace Memorabilia.Application.Features.Admin.CerealTypes;
-
-public record GetCerealType(int Id) : IQuery<DomainModel>
+public record GetCerealType(int Id) : IQuery<Entity.CerealType>
 {
-    public class Handler : QueryHandler<GetCerealType, DomainModel>
+    public class Handler : QueryHandler<GetCerealType, Entity.CerealType>
     {
-        private readonly IDomainRepository<CerealType> _CerealTypeRepository;
+        private readonly IDomainRepository<Entity.CerealType> _CerealTypeRepository;
 
-        public Handler(IDomainRepository<CerealType> CerealTypeRepository)
+        public Handler(IDomainRepository<Entity.CerealType> CerealTypeRepository)
         {
             _CerealTypeRepository = CerealTypeRepository;
         }
 
-        protected override async Task<DomainModel> Handle(GetCerealType query)
-        {
-            return new DomainModel(await _CerealTypeRepository.Get(query.Id));
-        }
+        protected override async Task<Entity.CerealType> Handle(GetCerealType query)
+            => await _CerealTypeRepository.Get(query.Id);
     }
 }

@@ -1,14 +1,14 @@
-﻿@inherits MemorabiliaItem<SaveJerseyViewModel>
+﻿@inherits MemorabiliaItem<JerseyEditModel>
 
 <EditMemorabiliaPage Item="ViewModel"
                      OnLoad="OnLoad"
                      OnSave="OnSave" 
-                     TItem="SaveJerseyViewModel">
+                     TItem="JerseyEditModel">
     <Content>
         <MemorabiliaItemEditor DisplayMultiPersonSelector="true"
                                DisplayMultiTeamSelector="true"
                                DisplaySingleSportSelector="true"
-                               TItem="SaveJerseyViewModel"
+                               TItem="JerseyEditModel"
                                ViewModel="ViewModel">
             <AdditionalContent>
                 <DivRowCol3>

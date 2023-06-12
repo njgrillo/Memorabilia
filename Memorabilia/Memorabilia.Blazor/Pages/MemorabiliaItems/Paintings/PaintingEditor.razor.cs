@@ -1,18 +1,18 @@
 ﻿namespace Memorabilia.Blazor.Pages.MemorabiliaItems.Paintings;
 
-public partial class PaintingEditor : MemorabiliaItem<SavePaintingViewModel>
+public partial class PaintingEditor : MemorabiliaItem<PaintingEditModel>
 {
     [Inject]
     public PaintingValidator Validator { get; set; }
 
     protected async Task OnLoad()
     {
-        var viewModel = await QueryRouter.Send(new GetPainting(MemorabiliaId));
+        var viewModel = await QueryRouter.Send(new GetMemorabiliaItem(MemorabiliaId));
 
         if (viewModel.Brand == null)
             return;
 
-        ViewModel = new SavePaintingViewModel(viewModel);
+        ViewModel = new PaintingEditModel(new PaintingModel(viewModel));
     }
 
     protected async Task OnSave()

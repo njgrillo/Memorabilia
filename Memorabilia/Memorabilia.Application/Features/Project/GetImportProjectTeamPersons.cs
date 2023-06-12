@@ -13,8 +13,6 @@ public record GetImportProjectTeamPersons(int TeamId, int Year)
         }
 
         protected override async Task<Entity.Person[]> Handle(GetImportProjectTeamPersons query)
-        {
-            return await _personRepository.GetAll(query.TeamId, query.Year);
-        }
+            => await _personRepository.GetAll(query.TeamId, query.Year);
     }
 }

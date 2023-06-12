@@ -1,15 +1,15 @@
-﻿@inherits MemorabiliaItem<SaveSoccerballViewModel>
+﻿@inherits MemorabiliaItem<SoccerballEditModel>
 
 <EditMemorabiliaPage Item="ViewModel"
                      OnLoad="OnLoad"
                      OnSave="OnSave" 
-                     TItem="SaveSoccerballViewModel">
+                     TItem="SoccerballEditModel">
     <Content>
         <MemorabiliaItemEditor DisplaySinglePersonSelector="true" 
                                DisplaySingleTeamSelector="true"                           
                                GameDateDisplayText="Match Date"
                                GameStyleTypeDisplayText="Match Style"
-                               TItem="SaveSoccerballViewModel"
+                               TItem="SoccerballEditModel"
                                ViewModel="ViewModel" />
     </Content>
 </EditMemorabiliaPage>

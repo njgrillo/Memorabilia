@@ -13,14 +13,15 @@ public record GetWritingInstrumentData(int UserId) : IQuery<DashboardChartModel>
 
         protected override async Task<DashboardChartModel> Handle(GetWritingInstrumentData query)
         {
-            var writingInstrumentIds = _repository.GetWritingInstrumentIds(query.UserId);
-            var writingInstrumentNames = writingInstrumentIds.Select(writingInstrumentId => Constant.WritingInstrument.Find(writingInstrumentId).Name)
-                                                             .Distinct();
+            int[] writingInstrumentIds = _repository.GetWritingInstrumentIds(query.UserId);
+            string[] writingInstrumentNames = writingInstrumentIds.Select(writingInstrumentId => Constant.WritingInstrument.Find(writingInstrumentId).Name)
+                                                                  .Distinct()
+                                                                  .ToArray();
 
             var labels = new List<string>();
             var counts = new List<double>();
 
-            foreach (var writingInstrumentName in writingInstrumentNames)
+            foreach (string writingInstrumentName in writingInstrumentNames)
             {
                 var writingInstrument = Constant.WritingInstrument.Find(writingInstrumentName);
                 var count = writingInstrumentIds.Count(writingInstrumentId => writingInstrumentId == writingInstrument.Id);

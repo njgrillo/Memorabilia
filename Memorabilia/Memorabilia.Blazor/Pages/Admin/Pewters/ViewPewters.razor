@@ -1,4 +1,4 @@
-﻿@inherits ViewItem<PewtersViewModel, PewterViewModel>
+﻿@inherits ViewItem<PewtersModel, PewterModel>
 
 <PageView AddRoute="@ViewModel.AddRoute" 
           AddTitle="@ViewModel.AddTitle"
@@ -11,7 +11,7 @@
             <Content>
                 <MudTable Bordered="false"
                           Dense="false" 
-                          Filter="new Func<PewterViewModel,bool>(FilterFunc1)"
+                          Filter="new Func<PewterModel,bool>(FilterFunc1)"
                           Hover="true"
                           Items="@ViewModel.Pewters"    
                           Striped="true">

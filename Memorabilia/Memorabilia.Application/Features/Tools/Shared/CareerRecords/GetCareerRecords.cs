@@ -1,10 +1,8 @@
-﻿using Memorabilia.Domain.Constants;
+﻿namespace Memorabilia.Application.Features.Tools.Shared.CareerRecords;
 
-namespace Memorabilia.Application.Features.Tools.Shared.CareerRecords;
-
-public record GetCareerRecords(Sport Sport) : IQuery<CareerRecordsModel>
+public record GetCareerRecords(Constant.Sport Sport) : IQuery<Entity.CareerRecord[]>
 {
-    public class Handler : QueryHandler<GetCareerRecords, CareerRecordsModel>
+    public class Handler : QueryHandler<GetCareerRecords, Entity.CareerRecord[]>
     {
         private readonly ICareerRecordRepository _careerRecordRepository;
 
@@ -13,9 +11,8 @@ public record GetCareerRecords(Sport Sport) : IQuery<CareerRecordsModel>
             _careerRecordRepository = careerRecordRepository;
         }
 
-        protected override async Task<CareerRecordsModel> Handle(GetCareerRecords query)
-        {
-            return new CareerRecordsModel(await _careerRecordRepository.GetAll(query.Sport.Id), query.Sport);
-        }
+        protected override async Task<Entity.CareerRecord[]> Handle(GetCareerRecords query)
+            => (await _careerRecordRepository.GetAll(query.Sport.Id))
+                    .ToArray();
     }
 }

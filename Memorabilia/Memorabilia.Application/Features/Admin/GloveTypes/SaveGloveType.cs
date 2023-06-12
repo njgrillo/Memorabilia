@@ -1,40 +1,41 @@
-﻿using Memorabilia.Domain.Entities;
+﻿namespace Memorabilia.Application.Features.Admin.GloveTypes;
 
-namespace Memorabilia.Application.Features.Admin.GloveTypes;
-
-public record SaveGloveType(DomainEditModel ViewModel) : ICommand
+public record SaveGloveType(DomainEditModel GloveType) : ICommand
 {
     public class Handler : CommandHandler<SaveGloveType>
     {
-        private readonly IDomainRepository<GloveType> _gloveTypeRepository;
+        private readonly IDomainRepository<Entity.GloveType> _gloveTypeRepository;
 
-        public Handler(IDomainRepository<GloveType> gloveTypeRepository)
+        public Handler(IDomainRepository<Entity.GloveType> gloveTypeRepository)
         {
             _gloveTypeRepository = gloveTypeRepository;
         }
 
         protected override async Task Handle(SaveGloveType request)
         {
-            GloveType gloveType;
+            Entity.GloveType gloveType;
 
-            if (request.ViewModel.IsNew)
+            if (request.GloveType.IsNew)
             {
-                gloveType = new GloveType(request.ViewModel.Name, request.ViewModel.Abbreviation);
+                gloveType = new Entity.GloveType(request.GloveType.Name, 
+                                                 request.GloveType.Abbreviation);
+
                 await _gloveTypeRepository.Add(gloveType);
 
                 return;
             }
 
-            gloveType = await _gloveTypeRepository.Get(request.ViewModel.Id);
+            gloveType = await _gloveTypeRepository.Get(request.GloveType.Id);
 
-            if (request.ViewModel.IsDeleted)
+            if (request.GloveType.IsDeleted)
             {
                 await _gloveTypeRepository.Delete(gloveType);
 
                 return;
             }
 
-            gloveType.Set(request.ViewModel.Name, request.ViewModel.Abbreviation);
+            gloveType.Set(request.GloveType.Name, 
+                          request.GloveType.Abbreviation);
 
             await _gloveTypeRepository.Update(gloveType);
         }

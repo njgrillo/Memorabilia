@@ -1,41 +1,41 @@
-﻿using Memorabilia.Domain.Entities;
+﻿namespace Memorabilia.Application.Features.Admin.HelmetFinishes;
 
-namespace Memorabilia.Application.Features.Admin.HelmetFinishes;
-
-public record SaveHelmetFinish(DomainEditModel ViewModel) : ICommand
+public record SaveHelmetFinish(DomainEditModel HelmetFinish) : ICommand
 {
     public class Handler : CommandHandler<SaveHelmetFinish>
     {
-        private readonly IDomainRepository<HelmetFinish> _helmetFinishRepository;
+        private readonly IDomainRepository<Entity.HelmetFinish> _helmetFinishRepository;
 
-        public Handler(IDomainRepository<HelmetFinish> helmetFinishRepository)
+        public Handler(IDomainRepository<Entity.HelmetFinish> helmetFinishRepository)
         {
             _helmetFinishRepository = helmetFinishRepository;
         }
 
         protected override async Task Handle(SaveHelmetFinish request)
         {
-            HelmetFinish helmetFinish;
+            Entity.HelmetFinish helmetFinish;
 
-            if (request.ViewModel.IsNew)
+            if (request.HelmetFinish.IsNew)
             {
-                helmetFinish = new HelmetFinish(request.ViewModel.Name, request.ViewModel.Abbreviation);
+                helmetFinish = new Entity.HelmetFinish(request.HelmetFinish.Name, 
+                                                       request.HelmetFinish.Abbreviation);
 
                 await _helmetFinishRepository.Add(helmetFinish);
 
                 return;
             }
 
-            helmetFinish = await _helmetFinishRepository.Get(request.ViewModel.Id);
+            helmetFinish = await _helmetFinishRepository.Get(request.HelmetFinish.Id);
 
-            if (request.ViewModel.IsDeleted)
+            if (request.HelmetFinish.IsDeleted)
             {
                 await _helmetFinishRepository.Delete(helmetFinish);
 
                 return;
             }
 
-            helmetFinish.Set(request.ViewModel.Name, request.ViewModel.Abbreviation);
+            helmetFinish.Set(request.HelmetFinish.Name, 
+                             request.HelmetFinish.Abbreviation);
 
             await _helmetFinishRepository.Update(helmetFinish);
         }

@@ -1,8 +1,8 @@
 ﻿namespace Memorabilia.Application.Features.Admin.AuthenticationCompanies;
 
-public record GetAuthenticationCompany(int Id) : IQuery<DomainModel>
+public record GetAuthenticationCompany(int Id) : IQuery<Entity.AuthenticationCompany>
 {
-    public class Handler : QueryHandler<GetAuthenticationCompany, DomainModel>
+    public class Handler : QueryHandler<GetAuthenticationCompany, Entity.AuthenticationCompany>
     {
         private readonly IDomainRepository<Entity.AuthenticationCompany> _authenticationCompanyRepository;
 
@@ -11,9 +11,7 @@ public record GetAuthenticationCompany(int Id) : IQuery<DomainModel>
             _authenticationCompanyRepository = authenticationCompanyRepository;
         }
 
-        protected override async Task<DomainModel> Handle(GetAuthenticationCompany query)
-        {
-            return new DomainModel(await _authenticationCompanyRepository.Get(query.Id));
-        }
+        protected override async Task<Entity.AuthenticationCompany> Handle(GetAuthenticationCompany query)
+            => await _authenticationCompanyRepository.Get(query.Id);
     }
 }

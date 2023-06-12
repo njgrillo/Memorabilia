@@ -27,7 +27,8 @@ public class AuthenticationEditModel : EditModel
     public int AutographId { get; set; }
 
     public bool CanNavigateToWebsite
-        => (AuthenticationCompany?.IsNavigatable() ?? false) && !Verification.IsNullOrEmpty();
+        => (AuthenticationCompany?.IsNavigatable() ?? false) && 
+           !Verification.IsNullOrEmpty();
 
     public bool HasCertificationCard { get; set; }
 

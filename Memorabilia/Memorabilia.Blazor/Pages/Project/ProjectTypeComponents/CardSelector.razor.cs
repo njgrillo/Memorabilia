@@ -22,7 +22,7 @@ public partial class CardSelector
 
     protected Brand Brand { get; set; }
 
-    protected SaveTeamViewModel Team { get; set; }
+    protected TeamEditModel Team { get; set; }
 
     protected override async Task OnInitializedAsync()
     {
@@ -30,9 +30,9 @@ public partial class CardSelector
 
         if (TeamId.HasValue)
         {
-            TeamViewModel team = await QueryRouter.Send(new GetTeam(TeamId.Value));
+            var team = new TeamModel(await QueryRouter.Send(new GetTeam(TeamId.Value)));
 
-            Team = new SaveTeamViewModel(team);
+            Team = new TeamEditModel(team);
         }        
     }
 
@@ -43,7 +43,7 @@ public partial class CardSelector
         await OnParameterChanged();
     }
 
-    protected async Task TeamChanged(SaveTeamViewModel team)
+    protected async Task TeamChanged(TeamEditModel team)
     {
         Team = team;
 

@@ -5,7 +5,7 @@ public class AccomplishmentsModel
     public AccomplishmentsModel() { }
 
     public AccomplishmentsModel(IEnumerable<Entity.PersonAccomplishment> personAccomplishments, 
-        Constant.Sport sport)
+                                Constant.Sport sport)
     {
         PersonAccomplishments 
             = personAccomplishments.Select(accomplishment => new AccomplishmentModel(accomplishment, sport))

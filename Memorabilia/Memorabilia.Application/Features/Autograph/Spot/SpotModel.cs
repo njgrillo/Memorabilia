@@ -11,11 +11,14 @@ public class SpotModel
         _autograph = autograph;
     }
 
-    public int AutographId => _autograph.Id;
+    public int AutographId 
+        => _autograph.Id;
 
-    public int ItemTypeId => _autograph.Memorabilia.ItemTypeId;
+    public int ItemTypeId 
+        => _autograph.Memorabilia.ItemTypeId;
 
-    public int MemorabiliaId => _autograph.Memorabilia.Id;
+    public int MemorabiliaId 
+        => _autograph.Memorabilia.Id;
 
     public string[] MemorabiliaImageNames 
         => _autograph.Memorabilia
@@ -23,7 +26,9 @@ public class SpotModel
                      .Select(image => image.FileName)
                      .ToArray();   
 
-    public int SpotId => _autograph?.Spot?.SpotId ?? 0;
+    public int SpotId 
+        => _autograph?.Spot?.SpotId ?? 0;
 
-    public int UserId => _autograph?.Memorabilia?.UserId ?? 0;
+    public int UserId 
+        => _autograph?.Memorabilia?.UserId ?? 0;
 }

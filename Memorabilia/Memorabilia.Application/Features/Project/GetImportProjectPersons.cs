@@ -13,8 +13,6 @@ public record GetImportProjectPersons(Dictionary<string, object> Parameters)
         }
 
         protected override async Task<Entity.Person[]> Handle(GetImportProjectPersons query)
-        {
-            return await _personRepository.GetAll(query.Parameters);
-        }
+            => await _personRepository.GetAll(query.Parameters);
     }
 }

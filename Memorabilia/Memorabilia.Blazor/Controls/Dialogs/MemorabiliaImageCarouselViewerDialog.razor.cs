@@ -25,7 +25,7 @@ public partial class MemorabiliaImageCarouselViewerDialog
         if (MemorabiliaId == 0)
             return;
 
-        Images = await QueryRouter.Send(new GetMemorabiliaImagesById(MemorabiliaId));
+        Images = await QueryRouter.Send(new GetMemorabiliaImages(MemorabiliaId));
     }
 
     public void Close()

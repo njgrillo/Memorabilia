@@ -1,10 +1,10 @@
-﻿using Memorabilia.Domain.Constants;
+﻿namespace Memorabilia.Application.Features.Tools.Shared.Drafts;
 
-namespace Memorabilia.Application.Features.Tools.Shared.Drafts;
-
-public record GetDrafts(Franchise Franchise, Sport Sport) : IQuery<DraftsModel>
+public record GetDrafts(Constant.Franchise Franchise, 
+                        Constant.Sport Sport) 
+    : IQuery<Entity.Draft[]>
 {
-    public class Handler : QueryHandler<GetDrafts, DraftsModel>
+    public class Handler : QueryHandler<GetDrafts, Entity.Draft[]>
     {
         private readonly IDraftRepository _draftRepository;
 
@@ -13,12 +13,8 @@ public record GetDrafts(Franchise Franchise, Sport Sport) : IQuery<DraftsModel>
             _draftRepository = draftRepository;
         }
 
-        protected override async Task<DraftsModel> Handle(GetDrafts query)
-        {
-            return new DraftsModel(await _draftRepository.GetAll(query.Franchise.Id), query.Sport)
-            {
-                Franchise = query.Franchise
-            };
-        }
+        protected override async Task<Entity.Draft[]> Handle(GetDrafts query)
+            => (await _draftRepository.GetAll(query.Franchise.Id))
+                    .ToArray();
     }
 }

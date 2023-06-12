@@ -1,17 +1,17 @@
 ﻿namespace Memorabilia.Blazor.Pages.Admin.Pewters;
 
 public partial class ViewPewters 
-    : ViewItem<PewtersViewModel, PewterViewModel>
+    : ViewItem<PewtersModel, PewterModel>
 {
     protected async Task OnLoad()
     {
-        await OnLoad(new GetPewters());
+        ViewModel = new PewtersModel(await QueryRouter.Send(new GetPewters()));
     }
 
     protected override async Task Delete(int id)
     {
         var deletedItem = ViewModel.Pewters.Single(pewter => pewter.Id == id);
-        var viewModel = new SavePewterViewModel(deletedItem)
+        var viewModel = new PewterEditModel(deletedItem)
         {
             IsDeleted = true
         };
@@ -23,7 +23,7 @@ public partial class ViewPewters
         ShowDeleteSuccessfulMessage(ViewModel.ItemTitle);
     }
 
-    protected override bool FilterFunc(PewterViewModel viewModel, string search)
+    protected override bool FilterFunc(PewterModel viewModel, string search)
         => search.IsNullOrEmpty() ||
            viewModel.FranchiseName.Contains(search, StringComparison.OrdinalIgnoreCase) ||
            viewModel.TeamName.Contains(search, StringComparison.OrdinalIgnoreCase) ||

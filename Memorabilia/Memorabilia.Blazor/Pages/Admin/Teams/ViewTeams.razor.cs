@@ -1,16 +1,17 @@
 ﻿namespace Memorabilia.Blazor.Pages.Admin.Teams;
 
-public partial class ViewTeams : ViewItem<TeamsViewModel, TeamViewModel>
+public partial class ViewTeams 
+    : ViewItem<TeamsModel, TeamModel>
 {
     protected async Task OnLoad()
     {
-        await OnLoad(new GetTeams());
+        ViewModel = new TeamsModel(await QueryRouter.Send(new GetTeams()));
     }
 
     protected override async Task Delete(int id)
     {
         var deletedItem = ViewModel.Teams.Single(team => team.Id == id);
-        var viewModel = new SaveTeamViewModel(deletedItem)
+        var viewModel = new TeamEditModel(deletedItem)
         {
             IsDeleted = true
         };
@@ -22,7 +23,7 @@ public partial class ViewTeams : ViewItem<TeamsViewModel, TeamViewModel>
         ShowDeleteSuccessfulMessage(ViewModel.ItemTitle);
     }
 
-    protected override bool FilterFunc(TeamViewModel viewModel, string search)
+    protected override bool FilterFunc(TeamModel viewModel, string search)
     {
         var isYear = int.TryParse(search, out var year);
 

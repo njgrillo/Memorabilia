@@ -1,10 +1,12 @@
 ﻿namespace Memorabilia.Blazor.Controls.DropDowns;
 
-public class ItemTypeBrandDropDown : ItemTypeEntityDropDown<ItemTypeBrandViewModel>
+public class ItemTypeBrandDropDown : ItemTypeEntityDropDown<ItemTypeBrandModel>
 {
     protected override async Task OnInitializedAsync()
     {
-        Items = (await QueryRouter.Send(new GetItemTypeBrands(ItemType.Id))).ItemTypeBrands;
+        Entity.ItemTypeBrand[] itemTypeBrands = await QueryRouter.Send(new GetItemTypeBrands(ItemType.Id));
+
+        Items = itemTypeBrands.Select(itemTypeBrand => new ItemTypeBrandModel(itemTypeBrand));
         Label = "Brand";
     }
 }

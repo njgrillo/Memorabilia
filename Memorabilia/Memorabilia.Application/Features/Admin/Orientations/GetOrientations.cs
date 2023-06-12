@@ -1,21 +1,18 @@
-﻿using Memorabilia.Domain.Entities;
+﻿namespace Memorabilia.Application.Features.Admin.Orientations;
 
-namespace Memorabilia.Application.Features.Admin.Orientations;
-
-public record GetOrientations() : IQuery<OrientationsViewModel>
+public record GetOrientations() : IQuery<Entity.Orientation[]>
 {
-    public class Handler : QueryHandler<GetOrientations, OrientationsViewModel>
+    public class Handler : QueryHandler<GetOrientations, Entity.Orientation[]>
     {
-        private readonly IDomainRepository<Orientation> _orientationRepository;
+        private readonly IDomainRepository<Entity.Orientation> _orientationRepository;
 
-        public Handler(IDomainRepository<Orientation> orientationRepository)
+        public Handler(IDomainRepository<Entity.Orientation> orientationRepository)
         {
             _orientationRepository = orientationRepository;
         }
 
-        protected override async Task<OrientationsViewModel> Handle(GetOrientations query)
-        {
-            return new OrientationsViewModel(await _orientationRepository.GetAll());
-        }
+        protected override async Task<Entity.Orientation[]> Handle(GetOrientations query)
+            => (await _orientationRepository.GetAll())
+                    .ToArray();
     }
 }

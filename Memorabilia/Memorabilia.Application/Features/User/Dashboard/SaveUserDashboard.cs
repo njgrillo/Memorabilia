@@ -13,7 +13,7 @@ public class SaveUserDashboard
 
         protected override async Task Handle(Command command)
         {
-            var user = await _userRepository.Get(command.UserId);
+            Entity.User user = await _userRepository.Get(command.UserId);
 
             user.SetDashboardItems(command.DashboardItemIds);
 
@@ -23,18 +23,20 @@ public class SaveUserDashboard
 
     public class Command : DomainCommand, ICommand
     {
-        private readonly SaveUserDashboardViewModel _viewModel;
+        private readonly UserDashboardEditModel _editModel;
 
-        public Command(SaveUserDashboardViewModel viewModel)
+        public Command(UserDashboardEditModel editModel)
         {
-            _viewModel = viewModel;
+            _editModel = editModel;
         }
 
-        public int[] DashboardItemIds => _viewModel.UserDashboardItems
-                                                   .Where(userDashboardItem => userDashboardItem.IsSelected)
-                                                   .Select(userDashboardItem => userDashboardItem.DashboardItemId)
-                                                   .ToArray();
+        public int[] DashboardItemIds 
+            => _editModel.UserDashboardItems
+                         .Where(userDashboardItem => userDashboardItem.IsSelected)
+                         .Select(userDashboardItem => userDashboardItem.DashboardItemId)
+                         .ToArray();
 
-        public int UserId => _viewModel.UserId;
+        public int UserId 
+            => _editModel.UserId;
     }
 }

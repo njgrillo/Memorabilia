@@ -1,6 +1,7 @@
 ﻿namespace Memorabilia.Blazor.Pages.Admin.Leagues;
 
-public partial class LeagueEditor : EditItem<SaveLeagueViewModel, LeagueViewModel>
+public partial class LeagueEditor 
+    : EditItem<LeagueEditModel, LeagueModel>
 {
     protected async Task HandleValidSubmit()
     {
@@ -12,6 +13,6 @@ public partial class LeagueEditor : EditItem<SaveLeagueViewModel, LeagueViewMode
         if (Id == 0)
             return;
 
-        ViewModel = new SaveLeagueViewModel(await Get(new GetLeague(Id)));
+        ViewModel = new LeagueEditModel(new LeagueModel(await QueryRouter.Send(new GetLeague(Id))));
     }
 }

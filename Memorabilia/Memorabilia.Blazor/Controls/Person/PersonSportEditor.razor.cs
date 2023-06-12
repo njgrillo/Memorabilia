@@ -6,9 +6,9 @@ public partial class PersonSportEditor : ComponentBase
     public EventCallback OnSportChange { get; set; }
 
     [Parameter]
-    public List<SavePersonSportViewModel> Sports { get; set; } = new();
+    public List<PersonSportEditModel> Sports { get; set; } = new();
 
-    private SavePersonSportViewModel _viewModel = new();
+    private PersonSportEditModel _viewModel = new();
 
     protected override void OnInitialized()
     {
@@ -22,7 +22,7 @@ public partial class PersonSportEditor : ComponentBase
 
         Sports.Add(_viewModel);
 
-        _viewModel = new SavePersonSportViewModel
+        _viewModel = new PersonSportEditModel
         {
             IsPrimary = false
         };
@@ -30,7 +30,7 @@ public partial class PersonSportEditor : ComponentBase
         await OnSportChange.InvokeAsync();
     }
 
-    private void Delete(SavePersonSportViewModel sport)
+    private void Delete(PersonSportEditModel sport)
     {
         sport.IsDeleted = true;
 

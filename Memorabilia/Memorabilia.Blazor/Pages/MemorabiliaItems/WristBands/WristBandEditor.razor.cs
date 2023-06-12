@@ -1,18 +1,18 @@
 ﻿namespace Memorabilia.Blazor.Pages.MemorabiliaItems.WristBands;
 
-public partial class WristBandEditor : MemorabiliaItem<SaveWristBandViewModel>
+public partial class WristBandEditor : MemorabiliaItem<WristBandEditModel>
 {
     [Inject]
     public WristBandValidator Validator { get; set; }
 
     protected async Task OnLoad()
     {
-        var viewModel = await QueryRouter.Send(new GetWristBand(MemorabiliaId));
+        var viewModel = await QueryRouter.Send(new GetMemorabiliaItem(MemorabiliaId));
 
         if (viewModel.Brand == null)
             return;
 
-        ViewModel = new SaveWristBandViewModel(viewModel);
+        ViewModel = new WristBandEditModel(new WristBandModel(viewModel));
     }
 
     protected async Task OnSave()

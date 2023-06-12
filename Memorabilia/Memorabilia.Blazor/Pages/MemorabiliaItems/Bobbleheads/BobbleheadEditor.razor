@@ -1,16 +1,16 @@
-﻿@inherits MemorabiliaItem<SaveBobbleheadViewModel>
+﻿@inherits MemorabiliaItem<BobbleheadEditModel>
 
 <EditMemorabiliaPage Item="ViewModel"
                      OnLoad="OnLoad"
                      OnSave="OnSave" 
-                     TItem="SaveBobbleheadViewModel">
+                     TItem="BobbleheadEditModel">
     <Content>
         <MemorabiliaItemEditor DisplayItemTypeBrand="false" 
                                DisplayItemTypeGameStyle="false"
                                DisplaySinglePersonSelector="true"
                                DisplaySingleSportSelector="true"
                                DisplaySingleTeamSelector="true"
-                               TItem="SaveBobbleheadViewModel"
+                               TItem="BobbleheadEditModel"
                                ViewModel="ViewModel">
             <AdditionalContent>
                 <DivRowCol3>

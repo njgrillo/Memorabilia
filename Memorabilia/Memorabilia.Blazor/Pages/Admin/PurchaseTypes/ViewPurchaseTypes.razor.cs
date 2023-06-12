@@ -1,6 +1,7 @@
 ﻿namespace Memorabilia.Blazor.Pages.Admin.PurchaseTypes
 {
-    public partial class ViewPurchaseTypes : ViewDomainItem<PurchaseTypesViewModel>, IDeleteDomainItem, IViewDomainItem
+    public partial class ViewPurchaseTypes 
+        : ViewDomainItem<PurchaseTypesModel>, IDeleteDomainItem, IViewDomainItem
     {
         public async Task OnDelete(DomainEditModel viewModel)
         {
@@ -9,7 +10,7 @@
 
         public async Task OnLoad()
         {
-            await OnLoad(new GetPurchaseTypes());
+            ViewModel = new PurchaseTypesModel(await QueryRouter.Send(new GetPurchaseTypes()));
         }
     }
 }

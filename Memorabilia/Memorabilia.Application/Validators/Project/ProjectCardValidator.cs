@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Application.Validators.Project;
 
-public class ProjectCardValidator : AbstractValidator<Domain.Entities.ProjectCard>
+public class ProjectCardValidator : AbstractValidator<Entity.ProjectCard>
 {
     public ProjectCardValidator(int projectTypeId)
     {

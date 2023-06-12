@@ -1,6 +1,7 @@
 ﻿namespace Memorabilia.Blazor.Pages.Admin.Colors;
 
-public partial class ViewColors : ViewDomainItem<ColorsViewModel>, IDeleteDomainItem, IViewDomainItem
+public partial class ViewColors 
+    : ViewDomainItem<ColorsModel>, IDeleteDomainItem, IViewDomainItem
 {
     public async Task OnDelete(DomainEditModel viewModel)
     {
@@ -9,6 +10,6 @@ public partial class ViewColors : ViewDomainItem<ColorsViewModel>, IDeleteDomain
 
     public async Task OnLoad()
     {
-        ViewModel = await QueryRouter.Send(new GetColors());
+        ViewModel = new ColorsModel(await QueryRouter.Send(new GetColors()));
     }
 }

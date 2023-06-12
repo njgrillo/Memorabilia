@@ -130,7 +130,10 @@ public class AutographModel : Model
         => _autograph.MemorabiliaId;
 
     public string[] MemorabiliaImageNames 
-        => _autograph.Memorabilia.Images.Select(image => image.FileName).ToArray();
+        => _autograph.Memorabilia
+                     .Images
+                     .Select(image => image.FileName)
+                     .ToArray();
 
     public string Note 
         => _autograph.Note;

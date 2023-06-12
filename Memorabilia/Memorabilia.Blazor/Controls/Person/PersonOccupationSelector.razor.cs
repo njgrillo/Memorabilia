@@ -3,7 +3,7 @@
 public partial class PersonOccupationSelector : ComponentBase
 {
     [Parameter]
-    public List<SavePersonOccupationViewModel> Occupations { get; set; } = new();
+    public List<PersonOccupationEditModel> Occupations { get; set; } = new();
 
     [Parameter]
     public EventCallback OnOccupationChange { get; set; }
@@ -11,7 +11,7 @@ public partial class PersonOccupationSelector : ComponentBase
     private bool _canAdd = true;
     private bool _canEditOccupation = true;
     private bool _canUpdate;
-    private SavePersonOccupationViewModel _viewModel = new();
+    private PersonOccupationEditModel _viewModel = new();
 
     protected override void OnParametersSet()
     {
@@ -26,7 +26,7 @@ public partial class PersonOccupationSelector : ComponentBase
 
         Occupations.Add(_viewModel);
 
-        _viewModel = new SavePersonOccupationViewModel
+        _viewModel = new PersonOccupationEditModel
         {
             OccupationType = OccupationType.Secondary
         };
@@ -34,7 +34,7 @@ public partial class PersonOccupationSelector : ComponentBase
         await OnOccupationChange.InvokeAsync();
     }
 
-    private void Delete(SavePersonOccupationViewModel occupation)
+    private void Delete(PersonOccupationEditModel occupation)
     {
         occupation.IsDeleted = true;
 
@@ -43,7 +43,7 @@ public partial class PersonOccupationSelector : ComponentBase
             : OccupationType.Primary;
     }
 
-    private async void Edit(SavePersonOccupationViewModel occupation)
+    private async void Edit(PersonOccupationEditModel occupation)
     {
         _viewModel.Occupation = occupation.Occupation;
         _viewModel.OccupationType = occupation.OccupationType;
@@ -67,7 +67,7 @@ public partial class PersonOccupationSelector : ComponentBase
         occupation.Occupation = _viewModel.Occupation;
         occupation.OccupationType = _viewModel.OccupationType;
 
-        _viewModel = new SavePersonOccupationViewModel();
+        _viewModel = new PersonOccupationEditModel();
 
         _canAdd = true;
         _canEditOccupation = true;

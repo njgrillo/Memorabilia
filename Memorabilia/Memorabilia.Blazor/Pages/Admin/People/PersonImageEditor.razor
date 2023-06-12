@@ -1,4 +1,4 @@
-﻿@inherits EditPersonItem<SavePersonImageViewModel, PersonImageViewModel>
+﻿@inherits EditPersonItem<PersonImageEditModel, PersonImageModel>
 
 <EditPage ContinueNavigationPath="@ViewModel.ContinueNavigationPath"
           DisplaySaveContinueButton="false"
@@ -12,7 +12,7 @@
           PageFooterButtonText="@ViewModel.ExitButtonText"
           PageFooterNavigationPath="@ViewModel.BackNavigationPath"
           PageTitle="@ViewModel.PageTitle"
-          TItem="SavePersonImageViewModel"
+          TItem="PersonImageEditModel"
           UseMultipleButtons="true">
     <TimelineContent>
         <PersonTimeline EditMode="ViewModel.EditModeType"

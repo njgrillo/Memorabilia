@@ -15,7 +15,5 @@ public class PurchaseTypeFilterRule : IFilterRule<Entity.Memorabilia>
     }
 
     public Expression<Func<Entity.Memorabilia, bool>> GetExpression()
-    {
-        return item => _purchaseTypeIds.Contains(item.Acquisition.PurchaseTypeId ?? 0);
-    }
+        => item => _purchaseTypeIds.Contains(item.Acquisition.PurchaseTypeId ?? 0);
 }

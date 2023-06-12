@@ -1,41 +1,41 @@
-﻿using Memorabilia.Domain.Entities;
+﻿namespace Memorabilia.Application.Features.Admin.PurchaseTypes;
 
-namespace Memorabilia.Application.Features.Admin.PurchaseTypes;
-
-public record SavePurchaseType(DomainEditModel ViewModel) : ICommand
+public record SavePurchaseType(DomainEditModel PurchaseType) : ICommand
 {
     public class Handler : CommandHandler<SavePurchaseType>
     {
-        private readonly IDomainRepository<PurchaseType> _purchaseTypeRepository;
+        private readonly IDomainRepository<Entity.PurchaseType> _purchaseTypeRepository;
 
-        public Handler(IDomainRepository<PurchaseType> purchaseTypeRepository)
+        public Handler(IDomainRepository<Entity.PurchaseType> purchaseTypeRepository)
         {
             _purchaseTypeRepository = purchaseTypeRepository;
         }
 
         protected override async Task Handle(SavePurchaseType request)
         {
-            PurchaseType purchaseType;
+            Entity.PurchaseType purchaseType;
 
-            if (request.ViewModel.IsNew)
+            if (request.PurchaseType.IsNew)
             {
-                purchaseType = new PurchaseType(request.ViewModel.Name, request.ViewModel.Abbreviation);
+                purchaseType = new Entity.PurchaseType(request.PurchaseType.Name, 
+                                                       request.PurchaseType.Abbreviation);
 
                 await _purchaseTypeRepository.Add(purchaseType);
 
                 return;
             }
 
-            purchaseType = await _purchaseTypeRepository.Get(request.ViewModel.Id);
+            purchaseType = await _purchaseTypeRepository.Get(request.PurchaseType.Id);
 
-            if (request.ViewModel.IsDeleted)
+            if (request.PurchaseType.IsDeleted)
             {
                 await _purchaseTypeRepository.Delete(purchaseType);
 
                 return;
             }
 
-            purchaseType.Set(request.ViewModel.Name, request.ViewModel.Abbreviation);
+            purchaseType.Set(request.PurchaseType.Name, 
+                             request.PurchaseType.Abbreviation);
 
             await _purchaseTypeRepository.Update(purchaseType);
         }

@@ -15,7 +15,5 @@ public class GradeFilterRule : IFilterRule<Entity.Memorabilia>
     }
 
     public Expression<Func<Entity.Memorabilia, bool>> GetExpression()
-    {
-        return item => item.Autographs.Any(autograph => autograph.Grade == _grade);
-    }
+        => item => item.Autographs.Any(autograph => autograph.Grade == _grade);
 }

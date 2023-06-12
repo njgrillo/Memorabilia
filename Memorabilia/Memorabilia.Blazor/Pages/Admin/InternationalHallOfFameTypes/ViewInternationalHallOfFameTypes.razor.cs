@@ -1,6 +1,7 @@
 ﻿namespace Memorabilia.Blazor.Pages.Admin.InternationalHallOfFameTypes;
 
-public partial class ViewInternationalHallOfFameTypes : ViewDomainItem<InternationalHallOfFameTypesViewModel>, IDeleteDomainItem, IViewDomainItem
+public partial class ViewInternationalHallOfFameTypes 
+    : ViewDomainItem<InternationalHallOfFameTypesModel>, IDeleteDomainItem, IViewDomainItem
 {
     public async Task OnDelete(DomainEditModel viewModel)
     {
@@ -9,6 +10,6 @@ public partial class ViewInternationalHallOfFameTypes : ViewDomainItem<Internati
 
     public async Task OnLoad()
     {
-        ViewModel = await QueryRouter.Send(new GetInternationalHallOfFameTypes());
+        ViewModel = new InternationalHallOfFameTypesModel(await QueryRouter.Send(new GetInternationalHallOfFameTypes()));
     }
 }

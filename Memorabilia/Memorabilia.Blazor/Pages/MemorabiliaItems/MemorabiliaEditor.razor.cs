@@ -20,14 +20,14 @@ public partial class MemorabiliaEditor
     [Parameter]
     public int UserId { get; set; }
 
-    private MemorabiliaItemEditModel _viewModel = new ();        
+    private MemorabiliaEditModel _viewModel = new ();        
 
     protected async Task OnLoad()
     {
         if (Id == 0)
             return;
 
-        _viewModel = new MemorabiliaItemEditModel(new MemorabiliaItemModel(await QueryRouter.Send(new GetMemorabiliaItem(Id))));
+        _viewModel = new MemorabiliaEditModel(new MemorabiliaModel(await QueryRouter.Send(new GetMemorabiliaItem(Id))));
     }
 
     protected async Task OnSave()

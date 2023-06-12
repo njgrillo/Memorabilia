@@ -9,13 +9,13 @@ public partial class PersonTeamSelector : ComponentBase
     public int[] SportIds { get; set; } = Array.Empty<int>();
 
     [Parameter]
-    public List<SavePersonTeamViewModel> Teams { get; set; } = new();
+    public List<PersonTeamEditModel> Teams { get; set; } = new();
 
     private bool _canAdd = true;
     private bool _canEditTeam = true;
     private bool _canUpdate;
-    private SavePersonTeamViewModel _selectedTeam = new();
-    private SavePersonTeamViewModel _viewModel = new();
+    private PersonTeamEditModel _selectedTeam = new();
+    private PersonTeamEditModel _viewModel = new();
 
     private void Add()
     {
@@ -33,7 +33,7 @@ public partial class PersonTeamSelector : ComponentBase
         _viewModel = new();
     }
 
-    private void Edit(SavePersonTeamViewModel team)
+    private void Edit(PersonTeamEditModel team)
     {
         _selectedTeam = team;
         _viewModel = team;

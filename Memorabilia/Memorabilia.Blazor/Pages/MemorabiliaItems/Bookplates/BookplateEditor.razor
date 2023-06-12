@@ -1,10 +1,10 @@
-﻿@inherits MemorabiliaItem<SaveBookplateViewModel>
+﻿@inherits MemorabiliaItem<BookplateEditModel>
 
 <EditMemorabiliaPage Item="ViewModel"
                      OnLoad="OnLoad"
                      OnSave="OnSave" 
                      PerformValidation="false"
-                     TItem="SaveBookplateViewModel">
+                     TItem="BookplateEditModel">
     <Content>
         <MemorabiliaItemEditor CanFilterPersonBySport="false" 
                                DisplayItemTypeBrand="false"
@@ -12,7 +12,7 @@
                                DisplayItemTypeLevel="false"
                                DisplayItemTypeSize="false"
                                DisplaySinglePersonSelector="true"
-                               TItem="SaveBookplateViewModel"
+                               TItem="BookplateEditModel"
                                ViewModel="ViewModel" />
     </Content>
 </EditMemorabiliaPage>

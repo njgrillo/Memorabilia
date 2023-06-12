@@ -1,18 +1,17 @@
-﻿
+﻿namespace Memorabilia.Blazor.Pages.Admin.ItemTypeBrands;
 
-namespace Memorabilia.Blazor.Pages.Admin.ItemTypeBrands;
-
-public partial class ViewItemTypeBrands : ViewItem<ItemTypeBrandsViewModel, ItemTypeBrandViewModel>
+public partial class ViewItemTypeBrands 
+    : ViewItem<ItemTypeBrandsModel, ItemTypeBrandModel>
 {
     protected async Task OnLoad()
     {
-        await OnLoad(new GetItemTypeBrands());
+        ViewModel = new ItemTypeBrandsModel(await QueryRouter.Send(new GetItemTypeBrands()));
     }
 
     protected override async Task Delete(int id)
     {
         var deletedItem = ViewModel.ItemTypeBrands.Single(ItemTypeBrand => ItemTypeBrand.Id == id);
-        var viewModel = new SaveItemTypeBrandViewModel(deletedItem)
+        var viewModel = new ItemTypeBrandEditModel(deletedItem)
         {
             IsDeleted = true
         };
@@ -24,10 +23,8 @@ public partial class ViewItemTypeBrands : ViewItem<ItemTypeBrandsViewModel, Item
         ShowDeleteSuccessfulMessage(ViewModel.ItemTitle);
     }
 
-    protected override bool FilterFunc(ItemTypeBrandViewModel viewModel, string search)
-    {
-        return search.IsNullOrEmpty() ||
-               viewModel.ItemTypeName.Contains(search, StringComparison.OrdinalIgnoreCase) ||
-               viewModel.BrandName.Contains(search, StringComparison.OrdinalIgnoreCase);
-    }
+    protected override bool FilterFunc(ItemTypeBrandModel viewModel, string search)
+        => search.IsNullOrEmpty() ||
+           viewModel.ItemTypeName.Contains(search, StringComparison.OrdinalIgnoreCase) ||
+           viewModel.BrandName.Contains(search, StringComparison.OrdinalIgnoreCase);
 }

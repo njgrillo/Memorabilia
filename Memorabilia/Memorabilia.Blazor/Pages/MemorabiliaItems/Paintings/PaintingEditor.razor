@@ -1,9 +1,9 @@
-﻿@inherits MemorabiliaItem<SavePaintingViewModel>
+﻿@inherits MemorabiliaItem<PaintingEditModel>
 
 <EditMemorabiliaPage Item="ViewModel"
                      OnLoad="OnLoad"
                      OnSave="OnSave" 
-                     TItem="SavePaintingViewModel">
+                     TItem="PaintingEditModel">
     <Content>
         <MemorabiliaItemEditor DisplayItemTypeBrand="false" 
                                DisplayItemTypeGameStyle="false"
@@ -11,7 +11,7 @@
                                DisplayMultiPersonSelector="true"
                                DisplayMultiSportSelector="true"
                                DisplayMultiTeamSelector="true"
-                               TItem="SavePaintingViewModel"
+                               TItem="PaintingEditModel"
                                ViewModel="ViewModel">
             <AdditionalContent>
                 <DivRowCol3>

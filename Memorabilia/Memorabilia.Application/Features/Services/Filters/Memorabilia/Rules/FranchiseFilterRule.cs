@@ -15,10 +15,8 @@ public class FranchiseFilterRule : IFilterRule<Entity.Memorabilia>
     }
 
     public Expression<Func<Entity.Memorabilia, bool>> GetExpression()
-    {
-        return item => item.Teams
-                           .Select(team => team.Team.Franchise)
-                           .Select(franchise => franchise.Id)
-                           .Any(franchiseId => _franchiseIds.Contains(franchiseId));
-    }
+        => item => item.Teams
+                       .Select(team => team.Team.Franchise)
+                       .Select(franchise => franchise.Id)
+                       .Any(franchiseId => _franchiseIds.Contains(franchiseId));
 }

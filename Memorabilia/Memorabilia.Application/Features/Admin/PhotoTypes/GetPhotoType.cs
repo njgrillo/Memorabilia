@@ -1,21 +1,17 @@
-﻿using Memorabilia.Domain.Entities;
+﻿namespace Memorabilia.Application.Features.Admin.PhotoTypes;
 
-namespace Memorabilia.Application.Features.Admin.PhotoTypes;
-
-public record GetPhotoType(int Id) : IQuery<DomainModel>
+public record GetPhotoType(int Id) : IQuery<Entity.PhotoType>
 {
-    public class Handler : QueryHandler<GetPhotoType, DomainModel>
+    public class Handler : QueryHandler<GetPhotoType, Entity.PhotoType>
     {
-        private readonly IDomainRepository<PhotoType> _photoTypeRepository;
+        private readonly IDomainRepository<Entity.PhotoType> _photoTypeRepository;
 
-        public Handler(IDomainRepository<PhotoType> photoTypeRepository)
+        public Handler(IDomainRepository<Entity.PhotoType> photoTypeRepository)
         {
             _photoTypeRepository = photoTypeRepository;
         }
 
-        protected override async Task<DomainModel> Handle(GetPhotoType query)
-        {
-            return new DomainModel(await _photoTypeRepository.Get(query.Id));
-        }
+        protected override async Task<Entity.PhotoType> Handle(GetPhotoType query)
+            => await _photoTypeRepository.Get(query.Id);
     }
 }

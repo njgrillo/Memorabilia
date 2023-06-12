@@ -67,8 +67,8 @@ public partial class WorldSeriesDetails
         if (!persons.Any())
             return;
 
-        var projectPersons = persons.Select(person => new PersonViewModel(person))
-                                    .Select(personModel => new SavePersonViewModel(personModel))
+        var projectPersons = persons.Select(person => new PersonModel(person))
+                                    .Select(personModel => new PersonEditModel(personModel))
                                     .Select(savePersonModel => new ProjectPersonModel(new Domain.Entities.ProjectPerson
                                     {
                                         ItemTypeId = Model.WorldSeries.ItemTypeId ?? Model.ItemTypeId,

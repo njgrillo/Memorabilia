@@ -15,12 +15,12 @@ public partial class MultiPersonSelector : ComponentBase
     public ItemType ItemType { get; set; }
 
     [Parameter]
-    public List<SavePersonViewModel> SelectedPeople { get; set; }
+    public List<PersonEditModel> SelectedPeople { get; set; }
 
     [Parameter]
-    public EventCallback<List<SavePersonViewModel>> SelectedPeopleChanged { get; set; }
+    public EventCallback<List<PersonEditModel>> SelectedPeopleChanged { get; set; }
 
-    protected SavePersonViewModel SelectedPerson { get; set; }
+    protected PersonEditModel SelectedPerson { get; set; }
 
     [Parameter]
     public Sport Sport { get; set; }

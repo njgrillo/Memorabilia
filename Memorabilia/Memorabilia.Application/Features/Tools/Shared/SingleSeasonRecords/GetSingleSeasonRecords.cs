@@ -1,10 +1,9 @@
-﻿using Memorabilia.Domain.Constants;
+﻿namespace Memorabilia.Application.Features.Tools.Shared.SingleSeasonRecords;
 
-namespace Memorabilia.Application.Features.Tools.Shared.SingleSeasonRecords;
-
-public record GetSingleSeasonRecords(Sport Sport) : IQuery<SingleSeasonRecordsModel>
+public record GetSingleSeasonRecords(Constant.Sport Sport) 
+    : IQuery<Entity.SingleSeasonRecord[]>
 {
-    public class Handler : QueryHandler<GetSingleSeasonRecords, SingleSeasonRecordsModel>
+    public class Handler : QueryHandler<GetSingleSeasonRecords, Entity.SingleSeasonRecord[]>
     {
         private readonly ISingleSeasonRecordRepository _singleSeasonRecordRepository;
 
@@ -13,9 +12,8 @@ public record GetSingleSeasonRecords(Sport Sport) : IQuery<SingleSeasonRecordsMo
             _singleSeasonRecordRepository = singleSeasonRecordRepository;
         }
 
-        protected override async Task<SingleSeasonRecordsModel> Handle(GetSingleSeasonRecords query)
-        {
-            return new SingleSeasonRecordsModel(await _singleSeasonRecordRepository.GetAll(query.Sport.Id), query.Sport);
-        }
+        protected override async Task<Entity.SingleSeasonRecord[]> Handle(GetSingleSeasonRecords query)
+            => (await _singleSeasonRecordRepository.GetAll(query.Sport.Id))
+                    .ToArray();
     }
 }

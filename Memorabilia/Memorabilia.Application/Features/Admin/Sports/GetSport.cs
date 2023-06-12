@@ -1,21 +1,17 @@
-﻿using Memorabilia.Domain.Entities;
+﻿namespace Memorabilia.Application.Features.Admin.Sports;
 
-namespace Memorabilia.Application.Features.Admin.Sports;
-
-public record GetSport(int Id) : IQuery<SportViewModel>
+public record GetSport(int Id) : IQuery<Entity.Sport>
 {
-    public class Handler : QueryHandler<GetSport, SportViewModel>
+    public class Handler : QueryHandler<GetSport, Entity.Sport>
     {
-        private readonly IDomainRepository<Sport> _sportRepository;
+        private readonly IDomainRepository<Entity.Sport> _sportRepository;
 
-        public Handler(IDomainRepository<Sport> sportRepository)
+        public Handler(IDomainRepository<Entity.Sport> sportRepository)
         {
             _sportRepository = sportRepository;
         }
 
-        protected override async Task<SportViewModel> Handle(GetSport query)
-        {
-            return new SportViewModel(await _sportRepository.Get(query.Id));
-        }
+        protected override async Task<Entity.Sport> Handle(GetSport query)
+            => await _sportRepository.Get(query.Id);
     }
 }

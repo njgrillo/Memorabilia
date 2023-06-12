@@ -17,8 +17,8 @@ public partial class SelectProjectMemorabiliaDialog
     [Parameter]
     public Dictionary<string, object> Parameters { get; set; }
 
-    protected MemorabiliaItemModel[] Model 
-        = Array.Empty<MemorabiliaItemModel>();
+    protected MemorabiliaModel[] Model 
+        = Array.Empty<MemorabiliaModel>();
 
     protected int UserId
         => Parameters.ContainsKey("UserId")
@@ -30,7 +30,12 @@ public partial class SelectProjectMemorabiliaDialog
         if (!Parameters.Any())
             return;
 
-        Model = await QueryRouter.Send(new GetProjectMemorabiliaTeamLinks(Parameters));
+        Entity.Memorabilia[] memorabilia = await QueryRouter.Send(new GetProjectMemorabiliaTeamLinks(Parameters));
+
+        Model = memorabilia.Any()
+            ? memorabilia.Select(item => new MemorabiliaModel(item))
+                         .ToArray()
+            : Array.Empty<MemorabiliaModel>();
     }
 
     public void Cancel()
@@ -38,7 +43,7 @@ public partial class SelectProjectMemorabiliaDialog
         MudDialog.Cancel();
     }
 
-    protected void Select(MemorabiliaItemModel memorabilia)
+    protected void Select(MemorabiliaModel memorabilia)
     {
         var results = new Dictionary<string, string>()
         {

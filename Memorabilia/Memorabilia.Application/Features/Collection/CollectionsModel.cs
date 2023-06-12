@@ -16,13 +16,18 @@ public class CollectionsModel : Model
     public string AddTitle 
         => $"{Constant.EditModeType.Add.Name} {ItemTitle}";
 
-    public override string ExitNavigationPath => "Home";
+    public override string ExitNavigationPath 
+        => "Home";
 
-    public override string ItemTitle => "Collection";
+    public override string ItemTitle 
+        => "Collection";
 
-    public override string PageTitle => "Collections";
+    public override string PageTitle 
+        => "Collections";
 
-    public List<CollectionModel> Collections { get; set; } = new();
+    public List<CollectionModel> Collections { get; set; } 
+        = new();
 
-    public override string RoutePrefix => "Collections";
+    public override string RoutePrefix 
+        => "Collections";
 }

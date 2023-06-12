@@ -1,10 +1,10 @@
-﻿using Memorabilia.Domain.Constants;
+﻿namespace Memorabilia.Application.Features.Tools.Shared.Leaders;
 
-namespace Memorabilia.Application.Features.Tools.Shared.Leaders;
-
-public record GetLeaders(LeaderType LeaderType, Sport Sport) : IQuery<LeadersModel>
+public record GetLeaders(Constant.LeaderType LeaderType, 
+                         Constant.Sport Sport) 
+    : IQuery<Entity.Leader[]>
 {
-    public class Handler : QueryHandler<GetLeaders, LeadersModel>
+    public class Handler : QueryHandler<GetLeaders, Entity.Leader[]>
     {
         private readonly ILeaderRepository _leaderRepository;
 
@@ -13,12 +13,8 @@ public record GetLeaders(LeaderType LeaderType, Sport Sport) : IQuery<LeadersMod
             _leaderRepository = leaderRepository;
         }
 
-        protected override async Task<LeadersModel> Handle(GetLeaders query)
-        {
-            return new LeadersModel(await _leaderRepository.GetAll(query.LeaderType.Id), query.Sport)
-            {
-                LeaderType = query.LeaderType
-            };
-        }
+        protected override async Task<Entity.Leader[]> Handle(GetLeaders query)
+            => (await _leaderRepository.GetAll(query.LeaderType.Id))
+                    .ToArray();
     }
 }

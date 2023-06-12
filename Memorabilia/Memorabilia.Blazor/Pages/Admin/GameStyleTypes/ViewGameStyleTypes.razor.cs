@@ -1,6 +1,7 @@
 ﻿namespace Memorabilia.Blazor.Pages.Admin.GameStyleTypes;
 
-public partial class ViewGameStyleTypes : ViewDomainItem<GameStyleTypesViewModel>, IDeleteDomainItem, IViewDomainItem
+public partial class ViewGameStyleTypes 
+    : ViewDomainItem<GameStyleTypesModel>, IDeleteDomainItem, IViewDomainItem
 {
     public async Task OnDelete(DomainEditModel viewModel)
     {
@@ -9,6 +10,6 @@ public partial class ViewGameStyleTypes : ViewDomainItem<GameStyleTypesViewModel
 
     public async Task OnLoad()
     {
-        ViewModel = await QueryRouter.Send(new GetGameStyleTypes());
+        ViewModel = new GameStyleTypesModel(await QueryRouter.Send(new GetGameStyleTypes()));
     }
 }

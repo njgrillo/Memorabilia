@@ -1,8 +1,6 @@
-﻿using Memorabilia.Domain.Entities;
+﻿namespace Memorabilia.Application.Features.Admin.ItemTypeSports;
 
-namespace Memorabilia.Application.Features.Admin.ItemTypeSports;
-
-public record SaveItemTypeSport(SaveItemTypeSportViewModel ViewModel) : ICommand
+public record SaveItemTypeSport(ItemTypeSportEditModel ItemTypeSport) : ICommand
 {
     public class Handler : CommandHandler<SaveItemTypeSport>
     {
@@ -15,27 +13,28 @@ public record SaveItemTypeSport(SaveItemTypeSportViewModel ViewModel) : ICommand
 
         protected override async Task Handle(SaveItemTypeSport request)
         {
-            ItemTypeSport itemTypeSport;
+            Entity.ItemTypeSport itemTypeSport;
 
-            if (request.ViewModel.IsNew)
+            if (request.ItemTypeSport.IsNew)
             {
-                itemTypeSport = new ItemTypeSport(request.ViewModel.ItemType.Id, request.ViewModel.SportId);
+                itemTypeSport = new Entity.ItemTypeSport(request.ItemTypeSport.ItemType.Id, 
+                                                         request.ItemTypeSport.SportId);
 
                 await _itemTypeSportRepository.Add(itemTypeSport);
 
                 return;
             }
 
-            itemTypeSport = await _itemTypeSportRepository.Get(request.ViewModel.Id);
+            itemTypeSport = await _itemTypeSportRepository.Get(request.ItemTypeSport.Id);
 
-            if (request.ViewModel.IsDeleted)
+            if (request.ItemTypeSport.IsDeleted)
             {
                 await _itemTypeSportRepository.Delete(itemTypeSport);
 
                 return;
             }
 
-            itemTypeSport.Set(request.ViewModel.SportId);
+            itemTypeSport.Set(request.ItemTypeSport.SportId);
 
             await _itemTypeSportRepository.Update(itemTypeSport);
         }

@@ -1,18 +1,18 @@
 ﻿namespace Memorabilia.Blazor.Pages.MemorabiliaItems.Guitars;
 
-public partial class GuitarEditor : MemorabiliaItem<SaveGuitarViewModel>
+public partial class GuitarEditor : MemorabiliaItem<GuitarEditModel>
 {
     [Inject]
     public GuitarValidator Validator { get; set; }
 
     protected async Task OnLoad()
     {
-        var viewModel = await QueryRouter.Send(new GetGuitar(MemorabiliaId));
+        var viewModel = await QueryRouter.Send(new GetMemorabiliaItem(MemorabiliaId));
 
         if (viewModel.Brand == null)
             return;
 
-        ViewModel = new SaveGuitarViewModel(viewModel);
+        ViewModel = new GuitarEditModel(new GuitarModel(viewModel));
     }
 
     protected async Task OnSave()

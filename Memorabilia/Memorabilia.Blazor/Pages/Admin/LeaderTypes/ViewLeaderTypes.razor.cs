@@ -1,6 +1,7 @@
 ﻿namespace Memorabilia.Blazor.Pages.Admin.LeaderTypes;
 
-public partial class ViewLeaderTypes : ViewDomainItem<LeaderTypesViewModel>, IDeleteDomainItem, IViewDomainItem
+public partial class ViewLeaderTypes 
+    : ViewDomainItem<LeaderTypesModel>, IDeleteDomainItem, IViewDomainItem
 {   
     public async Task OnDelete(DomainEditModel viewModel)
     {
@@ -9,6 +10,6 @@ public partial class ViewLeaderTypes : ViewDomainItem<LeaderTypesViewModel>, IDe
 
     public async Task OnLoad()
     {
-        await OnLoad(new GetLeaderTypes());
+        ViewModel = new LeaderTypesModel(await QueryRouter.Send(new GetLeaderTypes()));
     }
 }

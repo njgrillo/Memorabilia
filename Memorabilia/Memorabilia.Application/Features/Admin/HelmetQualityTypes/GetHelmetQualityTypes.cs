@@ -1,21 +1,18 @@
-﻿using Memorabilia.Domain.Entities;
+﻿namespace Memorabilia.Application.Features.Admin.HelmetQualityTypes;
 
-namespace Memorabilia.Application.Features.Admin.HelmetQualityTypes;
-
-public record GetHelmetQualityTypes() : IQuery<HelmetQualityTypesViewModel>
+public record GetHelmetQualityTypes() : IQuery<Entity.HelmetQualityType[]>
 {
-    public class Handler : QueryHandler<GetHelmetQualityTypes, HelmetQualityTypesViewModel>
+    public class Handler : QueryHandler<GetHelmetQualityTypes, Entity.HelmetQualityType[]>
     {
-        private readonly IDomainRepository<HelmetQualityType> _helmetQualityTypeRepository;
+        private readonly IDomainRepository<Entity.HelmetQualityType> _helmetQualityTypeRepository;
 
-        public Handler(IDomainRepository<HelmetQualityType> helmetQualityTypeRepository)
+        public Handler(IDomainRepository<Entity.HelmetQualityType> helmetQualityTypeRepository)
         {
             _helmetQualityTypeRepository = helmetQualityTypeRepository;
         }
 
-        protected override async Task<HelmetQualityTypesViewModel> Handle(GetHelmetQualityTypes query)
-        {
-            return new HelmetQualityTypesViewModel(await _helmetQualityTypeRepository.GetAll());
-        }
+        protected override async Task<Entity.HelmetQualityType[]> Handle(GetHelmetQualityTypes query)
+            => (await _helmetQualityTypeRepository.GetAll())
+                    .ToArray();
     }
 }

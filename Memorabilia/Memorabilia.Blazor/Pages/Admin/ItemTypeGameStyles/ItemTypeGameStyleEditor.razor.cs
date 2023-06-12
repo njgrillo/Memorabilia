@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Blazor.Pages.Admin.ItemTypeGameStyles;
 
-public partial class ItemTypeGameStyleEditor : EditItemTypeItem<SaveItemTypeGameStyleViewModel, ItemTypeGameStyleViewModel>
+public partial class ItemTypeGameStyleEditor : EditItemTypeItem<ItemTypeGameStyleEditModel, ItemTypeGameStyleModel>
 {
     protected async Task HandleValidSubmit()
     {
@@ -14,6 +14,6 @@ public partial class ItemTypeGameStyleEditor : EditItemTypeItem<SaveItemTypeGame
         if (DisplayItemType)
             return;
 
-        ViewModel = new SaveItemTypeGameStyleViewModel(await Get(new GetItemTypeGameStyle(Id)));
+        ViewModel = new ItemTypeGameStyleEditModel(new ItemTypeGameStyleModel(await QueryRouter.Send(new GetItemTypeGameStyle(Id))));
     }
 }

@@ -6,7 +6,8 @@ public abstract class Model : IWithName, IWithValue<int>
 
     public virtual string ContinueNavigationPath { get; set; }
 
-    public virtual string ExitNavigationPath { get; set; } = "Admin/EditDomainItems";
+    public virtual string ExitNavigationPath { get; set; }
+        = "Admin/EditDomainItems";
 
     public virtual string ItemTitle { get; }
 

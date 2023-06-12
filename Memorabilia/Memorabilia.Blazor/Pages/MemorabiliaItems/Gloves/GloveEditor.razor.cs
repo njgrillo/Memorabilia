@@ -1,18 +1,18 @@
 ﻿namespace Memorabilia.Blazor.Pages.MemorabiliaItems.Gloves;
 
-public partial class GloveEditor : MemorabiliaItem<SaveGloveViewModel>
+public partial class GloveEditor : MemorabiliaItem<GloveEditModel>
 {
     [Inject]
     public GloveValidator Validator { get; set; }
 
     protected async Task OnLoad()
     {
-        var viewModel = await QueryRouter.Send(new GetGlove(MemorabiliaId));
+        var viewModel = await QueryRouter.Send(new GetMemorabiliaItem(MemorabiliaId));
 
         if (viewModel.Brand == null)
             return;
 
-        ViewModel = new SaveGloveViewModel(viewModel);
+        ViewModel = new GloveEditModel(new GloveModel(viewModel));
     }
 
     protected async Task OnSave()

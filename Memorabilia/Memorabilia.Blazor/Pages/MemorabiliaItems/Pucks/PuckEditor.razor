@@ -1,13 +1,13 @@
-﻿@inherits MemorabiliaItem<SavePuckViewModel>
+﻿@inherits MemorabiliaItem<PuckEditModel>
 
 <EditMemorabiliaPage Item="ViewModel"
                      OnLoad="OnLoad"
                      OnSave="OnSave" 
-                     TItem="SavePuckViewModel">
+                     TItem="PuckEditModel">
     <Content>
         <MemorabiliaItemEditor DisplaySinglePersonSelector="true"
                                DisplaySingleTeamSelector="true"
-                               TItem="SavePuckViewModel"
+                               TItem="PuckEditModel"
                                ViewModel="ViewModel" />
     </Content>
 </EditMemorabiliaPage>

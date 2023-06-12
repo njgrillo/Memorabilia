@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Blazor.Pages.Admin.Franchises;
 
-public partial class FranchiseEditor : EditItem<SaveFranchiseViewModel, FranchiseViewModel>
+public partial class FranchiseEditor : EditItem<FranchiseEditModel, FranchiseModel>
 {
     private bool DisplaySportLeagueLevel => Id == 0;
 
@@ -14,6 +14,6 @@ public partial class FranchiseEditor : EditItem<SaveFranchiseViewModel, Franchis
         if (Id == 0)
             return;
 
-        ViewModel = new SaveFranchiseViewModel(await Get(new GetFranchise(Id)));
+        ViewModel = new FranchiseEditModel(new FranchiseModel(await QueryRouter.Send(new GetFranchise(Id))));
     }
 }

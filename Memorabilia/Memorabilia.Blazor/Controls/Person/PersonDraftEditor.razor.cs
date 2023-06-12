@@ -3,7 +3,7 @@
 public partial class PersonDraftEditor : ComponentBase
 {
     [Parameter]
-    public List<SavePersonDraftViewModel> Drafts { get; set; } = new();
+    public List<PersonDraftEditModel> Drafts { get; set; } = new();
 
     [Parameter]
     public List<int> SportIds { get; set; } = new();
@@ -11,11 +11,11 @@ public partial class PersonDraftEditor : ComponentBase
     private bool _canAdd = true;
     private bool _canEditFranchise = true;
     private bool _canUpdate;
-    private SavePersonDraftViewModel _viewModel = new();
+    private PersonDraftEditModel _viewModel = new();
 
     protected override void OnInitialized()
     {
-        _viewModel = new SavePersonDraftViewModel(SportIds);
+        _viewModel = new PersonDraftEditModel(SportIds.ToArray());
     }
 
     private void Add()
@@ -25,10 +25,10 @@ public partial class PersonDraftEditor : ComponentBase
 
         Drafts.Add(_viewModel);
 
-        _viewModel = new SavePersonDraftViewModel(SportIds);
+        _viewModel = new PersonDraftEditModel(SportIds.ToArray());
     }
 
-    private void Edit(SavePersonDraftViewModel draft)
+    private void Edit(PersonDraftEditModel draft)
     {
         _viewModel.Franchise = draft.Franchise;
         _viewModel.Year = draft.Year;
@@ -61,7 +61,7 @@ public partial class PersonDraftEditor : ComponentBase
         draft.Pick = _viewModel.Pick;
         draft.Overall = _viewModel.Overall;
 
-        _viewModel = new SavePersonDraftViewModel(SportIds);
+        _viewModel = new PersonDraftEditModel(SportIds.ToArray());
 
         _canAdd = true;
         _canEditFranchise = true;

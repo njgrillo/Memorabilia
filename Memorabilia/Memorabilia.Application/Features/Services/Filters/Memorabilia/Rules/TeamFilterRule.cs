@@ -15,7 +15,5 @@ public class TeamFilterRule : IFilterRule<Entity.Memorabilia>
     }
 
     public Expression<Func<Entity.Memorabilia, bool>> GetExpression()
-    {
-        return item => item.Teams.Select(team => team.TeamId).Contains(_teamId.Value);
-    }
+        => item => item.Teams.Select(team => team.TeamId).Contains(_teamId.Value);
 }

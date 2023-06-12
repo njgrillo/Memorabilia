@@ -18,9 +18,7 @@ public class EstimatedValueFilterRule : IFilterRule<Entity.Memorabilia>
     }
 
     public Expression<Func<Entity.Memorabilia, bool>> GetExpression()
-    {
-        return _filterItem == FilterItemEnum.AutographEstimatedValue
+        => _filterItem == FilterItemEnum.AutographEstimatedValue
             ? item => item.Autographs.Any(autograph => autograph.EstimatedValue >= (_range.Start ?? 0) && autograph.EstimatedValue <= (_range.End ?? decimal.MaxValue))
             : item => item.EstimatedValue >= (_range.Start ?? 0) && item.EstimatedValue <= (_range.End ?? decimal.MaxValue);
-    }
 }

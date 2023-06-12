@@ -1,41 +1,41 @@
-﻿using Memorabilia.Domain.Entities;
+﻿namespace Memorabilia.Application.Features.Admin.TeamRoleTypes;
 
-namespace Memorabilia.Application.Features.Admin.TeamRoleTypes;
-
-public record SaveTeamRoleType(DomainEditModel ViewModel) : ICommand
+public record SaveTeamRoleType(DomainEditModel TeamRoleType) : ICommand
 {
     public class Handler : CommandHandler<SaveTeamRoleType>
     {
-        private readonly IDomainRepository<TeamRoleType> _teamRoleTypeRepository;
+        private readonly IDomainRepository<Entity.TeamRoleType> _teamRoleTypeRepository;
 
-        public Handler(IDomainRepository<TeamRoleType> teamRoleTypeRepository)
+        public Handler(IDomainRepository<Entity.TeamRoleType> teamRoleTypeRepository)
         {
             _teamRoleTypeRepository = teamRoleTypeRepository;
         }
 
         protected override async Task Handle(SaveTeamRoleType request)
         {
-            TeamRoleType teamRoleType;
+            Entity.TeamRoleType teamRoleType;
 
-            if (request.ViewModel.IsNew)
+            if (request.TeamRoleType.IsNew)
             {
-                teamRoleType = new TeamRoleType(request.ViewModel.Name, request.ViewModel.Abbreviation);
+                teamRoleType = new Entity.TeamRoleType(request.TeamRoleType.Name, 
+                                                       request.TeamRoleType.Abbreviation);
 
                 await _teamRoleTypeRepository.Add(teamRoleType);
 
                 return;
             }
 
-            teamRoleType = await _teamRoleTypeRepository.Get(request.ViewModel.Id);
+            teamRoleType = await _teamRoleTypeRepository.Get(request.TeamRoleType.Id);
 
-            if (request.ViewModel.IsDeleted)
+            if (request.TeamRoleType.IsDeleted)
             {
                 await _teamRoleTypeRepository.Delete(teamRoleType);
 
                 return;
             }
 
-            teamRoleType.Set(request.ViewModel.Name, request.ViewModel.Abbreviation);
+            teamRoleType.Set(request.TeamRoleType.Name, 
+                             request.TeamRoleType.Abbreviation);
 
             await _teamRoleTypeRepository.Update(teamRoleType);
         }

@@ -18,15 +18,15 @@ public partial class PersonSelector : ComponentBase
     public ItemType ItemType { get; set; }
 
     [Parameter]
-    public SavePersonViewModel SelectedPerson { get; set; }
+    public PersonEditModel SelectedPerson { get; set; }
 
     [Parameter]
-    public EventCallback<SavePersonViewModel> SelectedPersonChanged { get; set; }
+    public EventCallback<PersonEditModel> SelectedPersonChanged { get; set; }
 
     [Parameter]
     public Sport Sport { get; set; }
 
-    public SavePersonViewModel ViewModel
+    public PersonEditModel ViewModel
     {
         get => SelectedPerson;
         set

@@ -1,6 +1,7 @@
 ﻿namespace Memorabilia.Blazor.Pages.Admin.Orientations
 {
-    public partial class ViewOrientations : ViewDomainItem<OrientationsViewModel>, IDeleteDomainItem, IViewDomainItem
+    public partial class ViewOrientations 
+        : ViewDomainItem<OrientationsModel>, IDeleteDomainItem, IViewDomainItem
     {
         public async Task OnDelete(DomainEditModel viewModel)
         {
@@ -9,7 +10,7 @@
 
         public async Task OnLoad()
         {
-            await OnLoad(new GetOrientations());
+            ViewModel = new OrientationsModel(await QueryRouter.Send(new GetOrientations()));
         }
     }
 }

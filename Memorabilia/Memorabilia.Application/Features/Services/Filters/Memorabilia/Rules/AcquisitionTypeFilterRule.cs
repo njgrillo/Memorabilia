@@ -18,9 +18,7 @@ public class AcquisitionTypeFilterRule : IFilterRule<Entity.Memorabilia>
     }
 
     public Expression<Func<Entity.Memorabilia, bool>> GetExpression()
-    {
-        return _filterItem == FilterItemEnum.AutographAcquisitionType
-            ? item => item.Autographs.Any(autograph => _acquisitionTypeIds.Contains(autograph.Acquisition.AcquisitionTypeId))
-            : item => _acquisitionTypeIds.Contains(item.Acquisition.AcquisitionTypeId);
-    }
+    => _filterItem == FilterItemEnum.AutographAcquisitionType 
+        ? item => item.Autographs.Any(autograph => _acquisitionTypeIds.Contains(autograph.Acquisition.AcquisitionTypeId)) 
+        : item => _acquisitionTypeIds.Contains(item.Acquisition.AcquisitionTypeId);
 }

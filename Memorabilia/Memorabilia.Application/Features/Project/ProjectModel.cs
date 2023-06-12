@@ -23,37 +23,54 @@ public class ProjectModel
             : new();
     }
 
-    public Entity.ProjectBaseball Baseball => _project.Baseball;
+    public Entity.ProjectBaseball Baseball 
+        => _project.Baseball;
 
-    public Entity.ProjectCard Card => _project.Card;
+    public Entity.ProjectCard Card 
+        => _project.Card;
 
-    public DateTime? EndDate => _project.EndDate;
+    public DateTime? EndDate 
+        => _project.EndDate;
 
-    public string FormattedEndDate => EndDate?.ToString("MM/dd/yyyy");
+    public string FormattedEndDate 
+        => EndDate?.ToString("MM/dd/yyyy");
 
-    public string FormattedStartDate => StartDate?.ToString("MM/dd/yyyy");
+    public string FormattedStartDate 
+        => StartDate?.ToString("MM/dd/yyyy");
 
-    public Entity.ProjectHallOfFame HallOfFame => _project.HallOfFame;
+    public Entity.ProjectHallOfFame HallOfFame 
+        => _project.HallOfFame;
 
-    public Entity.ProjectHelmet Helmet => _project.Helmet;
+    public Entity.ProjectHelmet Helmet 
+        => _project.Helmet;
 
-    public int Id => _project.Id;
+    public int Id 
+        => _project.Id;
 
-    public Entity.ProjectItem Item => _project.Item;
+    public Entity.ProjectItem Item 
+        => _project.Item;
 
-    public List<ProjectMemorabiliaTeamModel> MemorabiliaTeams { get; set; } = new();
+    public List<ProjectMemorabiliaTeamModel> MemorabiliaTeams { get; set; } 
+        = new();
 
-    public string Name => _project.Name;
+    public string Name 
+        => _project.Name;
 
-    public List<ProjectPersonModel> People { get; set; } = new();
+    public List<ProjectPersonModel> People { get; set; } 
+        = new();
 
-    public int ProjectTypeId => _project.ProjectTypeId;
+    public int ProjectTypeId 
+        => _project.ProjectTypeId;
 
-    public DateTime? StartDate => _project.StartDate;
+    public DateTime? StartDate 
+        => _project.StartDate;
 
-    public Entity.ProjectTeam Team => _project.Team;
+    public Entity.ProjectTeam Team 
+        => _project.Team;
 
-    public int UserId => _project.UserId;
+    public int UserId 
+        => _project.UserId;
 
-    public Entity.ProjectWorldSeries WorldSeries => _project.WorldSeries;
+    public Entity.ProjectWorldSeries WorldSeries 
+        => _project.WorldSeries;
 }

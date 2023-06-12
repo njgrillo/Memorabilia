@@ -13,14 +13,15 @@ public record GetSportLeagueLevelData(int UserId) : IQuery<DashboardChartModel>
 
         protected override async Task<DashboardChartModel> Handle(GetSportLeagueLevelData query)
         {
-            var sportLeagueLevelIds = _repository.GetSportLeagueLevelIds(query.UserId);
-            var sportLeagueLevelNames = sportLeagueLevelIds.Select(sportLeagueLevelId => Constant.SportLeagueLevel.Find(sportLeagueLevelId).Name)
-                                                           .Distinct();
+            int[] sportLeagueLevelIds = _repository.GetSportLeagueLevelIds(query.UserId);
+            string[] sportLeagueLevelNames = sportLeagueLevelIds.Select(sportLeagueLevelId => Constant.SportLeagueLevel.Find(sportLeagueLevelId).Name)
+                                                                .Distinct()
+                                                                .ToArray();
 
             var labels = new List<string>();
             var counts = new List<double>();
 
-            foreach (var sportLeagueLevelName in sportLeagueLevelNames)
+            foreach (string sportLeagueLevelName in sportLeagueLevelNames)
             {
                 var sportLeagueLevel = Constant.SportLeagueLevel.Find(sportLeagueLevelName);
                 var count = sportLeagueLevelIds.Count(sportLeagueLevelId => sportLeagueLevelId == sportLeagueLevel.Id);

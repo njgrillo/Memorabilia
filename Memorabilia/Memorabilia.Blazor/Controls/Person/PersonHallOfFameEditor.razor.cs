@@ -5,7 +5,7 @@ namespace Memorabilia.Blazor.Controls.Person;
 public partial class PersonHallOfFameEditor : ComponentBase
 {
     [Parameter]
-    public List<SavePersonHallOfFameViewModel> HallOfFames { get; set; } = new();
+    public List<PersonHallOfFameEditModel> HallOfFames { get; set; } = new();
 
     [Parameter]
     public SportLeagueLevel[] SportLeagueLevels { get; set; } = SportLeagueLevel.All;
@@ -13,7 +13,7 @@ public partial class PersonHallOfFameEditor : ComponentBase
     private bool _canAddHallOfFame = true;
     private bool _canEditSportLeagueLevel = true;
     private bool _canUpdateHallOfFame;
-    private SavePersonHallOfFameViewModel _viewModel = new();
+    private PersonHallOfFameEditModel _viewModel = new();
 
     protected override void OnInitialized()
     {
@@ -28,13 +28,13 @@ public partial class PersonHallOfFameEditor : ComponentBase
 
         HallOfFames.Add(_viewModel);
 
-        _viewModel = new SavePersonHallOfFameViewModel();
+        _viewModel = new PersonHallOfFameEditModel();
 
         if (SportLeagueLevels.Count() == 1)
             _viewModel.SportLeagueLevelId = SportLeagueLevels.First().Id;
     }
 
-    private void Edit(SavePersonHallOfFameViewModel hallOfFame)
+    private void Edit(PersonHallOfFameEditModel hallOfFame)
     {
         _viewModel.BallotNumber = hallOfFame.BallotNumber;
         _viewModel.InductionYear = hallOfFame.InductionYear;
@@ -54,7 +54,7 @@ public partial class PersonHallOfFameEditor : ComponentBase
         hallOfFame.InductionYear = _viewModel.InductionYear;
         hallOfFame.VotePercentage = _viewModel.VotePercentage;
 
-        _viewModel = new SavePersonHallOfFameViewModel();
+        _viewModel = new PersonHallOfFameEditModel();
 
         _canAddHallOfFame = true;
         _canEditSportLeagueLevel = true;

@@ -1,18 +1,18 @@
 ﻿namespace Memorabilia.Blazor.Pages.MemorabiliaItems.Trunks;
 
-public partial class TrunkEditor : MemorabiliaItem<SaveTrunkViewModel>
+public partial class TrunkEditor : MemorabiliaItem<TrunkEditModel>
 {
     [Inject]
     public TrunkValidator Validator { get; set; }
 
     protected async Task OnLoad()
     {
-        var viewModel = await QueryRouter.Send(new GetTrunk(MemorabiliaId));
+        var viewModel = await QueryRouter.Send(new GetMemorabiliaItem(MemorabiliaId));
 
         if (viewModel.Brand == null)
             return;
 
-        ViewModel = new SaveTrunkViewModel(viewModel);
+        ViewModel = new TrunkEditModel(new TrunkModel(viewModel));
     }
 
     protected async Task OnSave()

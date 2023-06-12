@@ -11,6 +11,7 @@ public class AutographImagesEditModel : EditModel
     {
         Images = images.Select(image => new ImageEditModel(image))
                        .ToList();
+
         ItemType = itemType;
         MemorabiliaId = memorabiliaId;
         AutographId = autographId;
@@ -39,12 +40,15 @@ public class AutographImagesEditModel : EditModel
     public override string ExitNavigationPath 
         => "Memorabilia/View";
 
-    public List<ImageEditModel> Images { get; set; } = new();
+    public List<ImageEditModel> Images { get; set; } 
+        = new();
 
     public Constant.ItemType ItemType { get; }
 
     public int MemorabiliaId { get; }
 
     public override string PageTitle 
-        => $"{(EditModeType == Constant.EditModeType.Add ? Constant.EditModeType.Add.Name : Constant.EditModeType.Update.Name)} Image(s)";
+        => $"{(EditModeType == Constant.EditModeType.Add 
+                ? Constant.EditModeType.Add.Name 
+                : Constant.EditModeType.Update.Name)} Image(s)";
 }

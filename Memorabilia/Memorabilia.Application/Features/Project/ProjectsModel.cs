@@ -16,13 +16,18 @@ public class ProjectsModel : Model
     public string AddTitle 
         => $"{Constant.EditModeType.Add.Name} {ItemTitle}";
 
-    public override string ExitNavigationPath => "Home";
+    public override string ExitNavigationPath 
+        => "Home";
 
-    public override string ItemTitle => "Project";
+    public override string ItemTitle 
+        => "Project";
 
-    public override string PageTitle => "Projects";
+    public override string PageTitle 
+        => "Projects";
 
-    public List<ProjectModel> Projects { get; set; } = new();
+    public List<ProjectModel> Projects { get; set; } 
+        = new();
 
-    public override string RoutePrefix => "Projects";
+    public override string RoutePrefix 
+        => "Projects";
 }

@@ -7,6 +7,6 @@ public partial class ViewSingleSeasonRecords
 
     protected override async Task OnInitializedAsync()
     {
-        Model = await QueryRouter.Send(new GetSingleSeasonRecords(Sport));
+        Model = new(await QueryRouter.Send(new GetSingleSeasonRecords(Sport)), Sport);
     }
 }

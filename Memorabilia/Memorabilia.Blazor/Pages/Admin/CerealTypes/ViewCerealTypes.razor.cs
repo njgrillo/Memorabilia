@@ -1,6 +1,7 @@
 ﻿namespace Memorabilia.Blazor.Pages.Admin.CerealTypes;
 
-public partial class ViewCerealTypes : ViewDomainItem<CerealTypesViewModel>, IDeleteDomainItem, IViewDomainItem
+public partial class ViewCerealTypes 
+    : ViewDomainItem<CerealTypesModel>, IDeleteDomainItem, IViewDomainItem
 {
     public async Task OnDelete(DomainEditModel viewModel)
     {
@@ -9,6 +10,6 @@ public partial class ViewCerealTypes : ViewDomainItem<CerealTypesViewModel>, IDe
 
     public async Task OnLoad()
     {
-        await OnLoad(new GetCerealTypes());
+        ViewModel = new CerealTypesModel(await QueryRouter.Send(new GetCerealTypes()));
     }
 }

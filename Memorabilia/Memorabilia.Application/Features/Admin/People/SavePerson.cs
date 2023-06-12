@@ -1,6 +1,4 @@
-﻿using Memorabilia.Domain.Entities;
-
-namespace Memorabilia.Application.Features.Admin.People;
+﻿namespace Memorabilia.Application.Features.Admin.People;
 
 public class SavePerson
 {
@@ -15,21 +13,21 @@ public class SavePerson
 
         protected override async Task Handle(Command command)
         {
-            Person person;
+            Entity.Person person;
 
             if (command.IsNew)
             {
-                person = new Person(command.FirstName, 
-                                    command.LastName, 
-                                    command.MiddleName,
-                                    command.Suffix, 
-                                    command.Nickname, 
-                                    command.LegalName,
-                                    command.DisplayName,
-                                    command.ProfileName,
-                                    command.BirthDate, 
-                                    command.DeathDate,
-                                    command.Nicknames);
+                person = new Entity.Person(command.FirstName, 
+                                           command.LastName, 
+                                           command.MiddleName,
+                                           command.Suffix, 
+                                           command.Nickname, 
+                                           command.LegalName,
+                                           command.DisplayName,
+                                           command.ProfileName,
+                                           command.BirthDate, 
+                                           command.DeathDate,
+                                           command.Nicknames);
 
                 await _personRepository.Add(person);
 
@@ -65,69 +63,83 @@ public class SavePerson
 
     public class Command : DomainCommand, ICommand
     {
-        private readonly SavePersonViewModel _viewModel;
+        private readonly PersonEditModel _editModel;
 
-        public Command(SavePersonViewModel viewModel)
+        public Command(PersonEditModel editModel)
         {
-            _viewModel = viewModel;
-            Id = viewModel.Id;
+            _editModel = editModel;
+            Id = editModel.Id;
         }
 
-        public DateTime? BirthDate => _viewModel.BirthDate;
+        public DateTime? BirthDate 
+            => _editModel.BirthDate;
 
-        public DateTime? DeathDate => _viewModel.DeathDate;
+        public DateTime? DeathDate 
+            => _editModel.DeathDate;
 
         public string DisplayName
         {
             get
             {
-                if (!_viewModel.DisplayName.IsNullOrEmpty())
-                    return _viewModel.DisplayName;
+                if (!_editModel.DisplayName.IsNullOrEmpty())
+                    return _editModel.DisplayName;
 
-                return $"{_viewModel.LastName}"
-                    + (!_viewModel.Suffix.IsNullOrEmpty() ? $" {_viewModel.Suffix}, " : ", ")
-                    + (!_viewModel.Nickname.IsNullOrEmpty() ? $" {_viewModel.Nickname}" : string.Empty)
-                    + (!_viewModel.FirstName.IsNullOrEmpty() 
-                        ? (!_viewModel.Nickname.IsNullOrEmpty() 
-                            ? $" ({_viewModel.FirstName})" 
-                            : _viewModel.FirstName) 
+                return $"{_editModel.LastName}"
+                    + (!_editModel.Suffix.IsNullOrEmpty() ? $" {_editModel.Suffix}, " : ", ")
+                    + (!_editModel.Nickname.IsNullOrEmpty() ? $" {_editModel.Nickname}" : string.Empty)
+                    + (!_editModel.FirstName.IsNullOrEmpty() 
+                        ? (!_editModel.Nickname.IsNullOrEmpty() 
+                            ? $" ({_editModel.FirstName})" 
+                            : _editModel.FirstName) 
                         : string.Empty);
             }
         }
 
-        public string FirstName => _viewModel.FirstName;            
+        public string FirstName 
+            => _editModel.FirstName;            
 
         public int Id { get; set; }
 
-        public bool IsDeleted => _viewModel.IsDeleted;
+        public bool IsDeleted 
+            => _editModel.IsDeleted;
 
-        public bool IsModified => _viewModel.IsModified;
+        public bool IsModified 
+            => _editModel.IsModified;
 
-        public bool IsNew => _viewModel.IsNew;
+        public bool IsNew 
+            => _editModel.IsNew;
 
-        public string LastName => _viewModel.LastName;
+        public string LastName 
+            => _editModel.LastName;
 
-        public string LegalName => _viewModel.LegalName;
+        public string LegalName 
+            => _editModel.LegalName;
 
-        public string MiddleName => _viewModel.MiddleName;
+        public string MiddleName 
+            => _editModel.MiddleName;
 
-        public string Nickname => _viewModel.Nickname;
+        public string Nickname 
+            => _editModel.Nickname;
 
-        public string[] Nicknames => _viewModel.Nicknames.Select(nickname => nickname.Nickname).ToArray();
+        public string[] Nicknames 
+            => _editModel.Nicknames
+                         .Select(nickname => nickname.Nickname)
+                         .ToArray();
 
         public string  ProfileName
         {
             get
             {
-                if (!_viewModel.ProfileName.IsNullOrEmpty())
-                    return _viewModel.ProfileName;
+                if (!_editModel.ProfileName.IsNullOrEmpty())
+                    return _editModel.ProfileName;
 
-                return $"{(!_viewModel.Nickname.IsNullOrEmpty() ? _viewModel.Nickname : _viewModel.FirstName)}"
-                    + $" {_viewModel.LastName}"
-                    + (!_viewModel.Suffix.IsNullOrEmpty() ? $" {_viewModel.Suffix}" : string.Empty);
+                return $"{(!_editModel.Nickname.IsNullOrEmpty() ? _editModel.Nickname : _editModel.FirstName)}"
+                    + $" {_editModel.LastName}"
+                    + (!_editModel.Suffix.IsNullOrEmpty() ? $" {_editModel.Suffix}" : string.Empty);
             }
         }
 
-        public string Suffix => _viewModel.Suffix;
+        public string Suffix 
+            => _editModel.Suffix;
     }
 }

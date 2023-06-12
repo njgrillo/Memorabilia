@@ -20,7 +20,8 @@ public class AuthenticationsEditModel : EditModel
         MemorabiliaImageNames = memorabiliaImageNames;
     }
 
-    public List<AuthenticationEditModel> Authentications { get; set; } = new();
+    public List<AuthenticationEditModel> Authentications { get; set; } 
+        = new();
 
     public int AutographId { get; set; }
 
@@ -60,7 +61,9 @@ public class AuthenticationsEditModel : EditModel
         = Array.Empty<string>();
 
     public override string PageTitle 
-        => $"{(EditModeType == Constant.EditModeType.Add ? Constant.EditModeType.Add.Name : Constant.EditModeType.Update.Name)} Authentication(s)";
+        => $"{(EditModeType == Constant.EditModeType.Add 
+                ? Constant.EditModeType.Add.Name 
+                : Constant.EditModeType.Update.Name)} Authentication(s)";
 
     public int UserId { get; }
 }

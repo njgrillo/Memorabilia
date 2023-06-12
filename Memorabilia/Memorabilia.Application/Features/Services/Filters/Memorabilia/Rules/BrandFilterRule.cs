@@ -15,7 +15,5 @@ public class BrandFilterRule : IFilterRule<Entity.Memorabilia>
     }
 
     public Expression<Func<Entity.Memorabilia, bool>> GetExpression()
-    {
-        return item => _brandIds.Contains(item.Brand.BrandId);
-    }
+        => item => _brandIds.Contains(item.Brand.BrandId);
 }

@@ -24,16 +24,16 @@ public partial class MemorabiliaDetailGrid
     public bool CanSelect { get; set; }
 
     [Parameter]
-    public List<MemorabiliaItemModel> DisplayItems { get; set; } 
+    public List<MemorabiliaModel> DisplayItems { get; set; } 
 
     [Parameter]
     public MemorabiliaSearchCriteria Filter { get; set; }
 
     [Parameter]
-    public EventCallback<List<MemorabiliaItemModel>> MemorabiliaSelected { get; set; }
+    public EventCallback<List<MemorabiliaModel>> MemorabiliaSelected { get; set; }
 
     [Parameter]
-    public List<MemorabiliaItemModel> SelectedMemorabilia { get; set; } = new();
+    public List<MemorabiliaModel> SelectedMemorabilia { get; set; } = new();
 
     [Parameter]
     public bool ShowActions { get; set; } = true;
@@ -41,7 +41,7 @@ public partial class MemorabiliaDetailGrid
     [Parameter]
     public int UserId { get; set; }
 
-    protected MemorabiliaItemsModel Model = new();
+    protected MemorabiliasModel Model = new();
 
     protected string SelectAllButtonText
         => Model.MemorabiliaItems.Count == SelectedMemorabilia.Count
@@ -50,7 +50,7 @@ public partial class MemorabiliaDetailGrid
 
     private MemorabiliaSearchCriteria _filter = new();
     private bool _resetPaging;
-    private MudTable<MemorabiliaItemModel> _table = new();
+    private MudTable<MemorabiliaModel> _table = new();
 
     protected override async Task OnParametersSetAsync()
     {
@@ -78,7 +78,7 @@ public partial class MemorabiliaDetailGrid
 
         await CommandRouter.Send(new SaveAutograph.Command(viewModel));
 
-        MemorabiliaItemModel memorabiliaItem 
+        MemorabiliaModel memorabiliaItem 
             = Model.MemorabiliaItems.First(item => item.Id == itemToDelete.MemorabiliaId);
 
         memorabiliaItem.Autographs.Remove(itemToDelete);
@@ -88,8 +88,8 @@ public partial class MemorabiliaDetailGrid
 
     protected async Task DeleteMemorabiliaItem(int id)
     {
-        MemorabiliaItemModel itemToDelete = Model.MemorabiliaItems.Single(item => item.Id == id);
-        var viewModel = new MemorabiliaItemEditModel(itemToDelete)
+        MemorabiliaModel itemToDelete = Model.MemorabiliaItems.Single(item => item.Id == id);
+        var viewModel = new MemorabiliaEditModel(itemToDelete)
         {
             IsDeleted = true
         };
@@ -106,7 +106,7 @@ public partial class MemorabiliaDetailGrid
         StateHasChanged();
     }
 
-    protected async Task OnMemorabiliaSelected(MemorabiliaItemModel item)
+    protected async Task OnMemorabiliaSelected(MemorabiliaModel item)
     {
         if (!SelectedMemorabilia.Contains(item))
         {
@@ -122,7 +122,7 @@ public partial class MemorabiliaDetailGrid
         await MemorabiliaSelected.InvokeAsync(SelectedMemorabilia);
     }
 
-    protected async Task<TableData<MemorabiliaItemModel>> OnRead(TableState state)
+    protected async Task<TableData<MemorabiliaModel>> OnRead(TableState state)
     {
         var pageInfo = new PageInfo(_resetPaging ? 1 : state.Page + 1, state.PageSize);
 
@@ -130,7 +130,7 @@ public partial class MemorabiliaDetailGrid
             ? await QueryRouter.Send(new GetMemorabiliaItemsPaged(UserId, pageInfo, Filter))
             : await QueryRouter.Send(new GetMemorabiliaItemsPaged(UserId, pageInfo));
 
-        return new TableData<MemorabiliaItemModel>()
+        return new TableData<MemorabiliaModel>()
         {
             Items = Model.MemorabiliaItems,
             TotalItems = Model.PageInfo.TotalItems
@@ -170,7 +170,7 @@ public partial class MemorabiliaDetailGrid
 
     private void ToggleChildContent(int memorabiliaItemId)
     {
-        MemorabiliaItemModel memorabiliaItem = Model.MemorabiliaItems.Single(item => item.Id == memorabiliaItemId);
+        MemorabiliaModel memorabiliaItem = Model.MemorabiliaItems.Single(item => item.Id == memorabiliaItemId);
 
         memorabiliaItem.DisplayAutographDetails = !memorabiliaItem.DisplayAutographDetails;
         memorabiliaItem.ToggleIcon = memorabiliaItem.DisplayAutographDetails
@@ -197,7 +197,7 @@ public partial class MemorabiliaDetailGrid
         await dialog.Result;
     }
 
-    private async Task ViewMemorabiliaImages(MemorabiliaItemModel memorabiliaItemModel)
+    private async Task ViewMemorabiliaImages(MemorabiliaModel memorabiliaItemModel)
     {
         var parameters = new DialogParameters
         {

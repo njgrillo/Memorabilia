@@ -1,41 +1,41 @@
-﻿using Memorabilia.Domain.Entities;
+﻿namespace Memorabilia.Application.Features.Admin.ChampionTypes;
 
-namespace Memorabilia.Application.Features.Admin.ChampionTypes;
-
-public record SaveChampionType(DomainEditModel ViewModel) : ICommand
+public record SaveChampionType(DomainEditModel ChampionType) : ICommand
 {
     public class Handler : CommandHandler<SaveChampionType>
     {
-        private readonly IDomainRepository<ChampionType> _championTypeRepository;
+        private readonly IDomainRepository<Entity.ChampionType> _championTypeRepository;
 
-        public Handler(IDomainRepository<ChampionType> championTypeRepository)
+        public Handler(IDomainRepository<Entity.ChampionType> championTypeRepository)
         {
             _championTypeRepository = championTypeRepository;
         }
 
         protected override async Task Handle(SaveChampionType request)
         {
-            ChampionType championType;
+            Entity.ChampionType championType;
 
-            if (request.ViewModel.IsNew)
+            if (request.ChampionType.IsNew)
             {
-                championType = new ChampionType(request.ViewModel.Name, request.ViewModel.Abbreviation);
+                championType = new Entity.ChampionType(request.ChampionType.Name, 
+                                                       request.ChampionType.Abbreviation);
 
                 await _championTypeRepository.Add(championType);
 
                 return;
             }
 
-            championType = await _championTypeRepository.Get(request.ViewModel.Id);
+            championType = await _championTypeRepository.Get(request.ChampionType.Id);
 
-            if (request.ViewModel.IsDeleted)
+            if (request.ChampionType.IsDeleted)
             {
                 await _championTypeRepository.Delete(championType);
 
                 return;
             }
 
-            championType.Set(request.ViewModel.Name, request.ViewModel.Abbreviation);
+            championType.Set(request.ChampionType.Name, 
+                             request.ChampionType.Abbreviation);
 
             await _championTypeRepository.Update(championType);
         }

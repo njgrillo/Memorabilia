@@ -13,14 +13,17 @@ public class SaveTeamConference
 
         protected override async Task Handle(Command command)
         {
-            var team = await _teamRepository.Get(command.TeamId);
+            Entity.Team team = await _teamRepository.Get(command.TeamId);
 
             if (command.DeletedItemIds.Any())
                 team.RemoveConferences(command.DeletedItemIds);
 
             foreach (var teamConference in command.Items.Where(item => !item.IsDeleted))
             {
-                team.SetConference(teamConference.Id, teamConference.ConferenceId, teamConference.BeginYear, teamConference.EndYear);
+                team.SetConference(teamConference.Id, 
+                                   teamConference.ConferenceId, 
+                                   teamConference.BeginYear, 
+                                   teamConference.EndYear);
             }                
 
             await _teamRepository.Update(team);
@@ -29,15 +32,18 @@ public class SaveTeamConference
 
     public class Command : DomainCommand, ICommand
     {
-        public Command(int teamId, IEnumerable<SaveTeamConferenceViewModel> items)
+        public Command(int teamId, IEnumerable<TeamConferenceEditModel> items)
         {
             TeamId = teamId;
             Items = items.ToArray();
         }
 
-        public int[] DeletedItemIds => Items.Where(item => item.IsDeleted).Select(item => item.Id).ToArray();
+        public int[] DeletedItemIds 
+            => Items.Where(item => item.IsDeleted)
+                    .Select(item => item.Id)
+            .ToArray();
 
-        public SaveTeamConferenceViewModel[] Items { get; }
+        public TeamConferenceEditModel[] Items { get; }
 
         public int TeamId { get; set; }
     }

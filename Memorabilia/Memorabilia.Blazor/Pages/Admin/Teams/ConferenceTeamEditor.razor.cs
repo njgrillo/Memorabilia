@@ -1,6 +1,7 @@
 ﻿namespace Memorabilia.Blazor.Pages.Admin.Teams;
 
-public partial class ConferenceTeamEditor : EditTeamItem<SaveTeamConferencesViewModel, TeamConferenceViewModel>
+public partial class ConferenceTeamEditor 
+    : EditTeamItem<TeamConferencesEditModel, TeamConferenceModel>
 {
     protected async Task HandleValidSubmit()
     {
@@ -11,11 +12,13 @@ public partial class ConferenceTeamEditor : EditTeamItem<SaveTeamConferencesView
     {
         Initialize();
 
-        var conferences = (await QueryRouter.Send(new GetTeamConferences(TeamId)))
-                            .Select(teamConference => new SaveTeamConferenceViewModel(teamConference))
-                            .ToList();
+        Entity.TeamConference[] teamConferences 
+            = await QueryRouter.Send(new GetTeamConferences(TeamId));
 
-        ViewModel.Conferences = conferences;
+        ViewModel.Conferences 
+            = teamConferences.Select(teamConference => new TeamConferenceEditModel(new TeamConferenceModel(teamConference)))
+                             .ToList();
+
         ViewModel.SportLeagueLevel = SportLeagueLevel.Find(SportLeagueLevelId);           
     }    
 }

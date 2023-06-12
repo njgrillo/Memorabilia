@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Application.Validators.Project;
 
-public class ProjectHallOfFameValidator : AbstractValidator<Domain.Entities.ProjectHallOfFame>
+public class ProjectHallOfFameValidator : AbstractValidator<Entity.ProjectHallOfFame>
 {
     public ProjectHallOfFameValidator(int projectTypeId)
     {

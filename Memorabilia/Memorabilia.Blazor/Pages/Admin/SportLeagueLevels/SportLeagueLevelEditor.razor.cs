@@ -1,6 +1,7 @@
 ﻿namespace Memorabilia.Blazor.Pages.Admin.SportLeagueLevels;
 
-public partial class SportLeagueLevelEditor : EditItem<SaveSportLeagueLevelViewModel, SportLeagueLevelViewModel>
+public partial class SportLeagueLevelEditor 
+    : EditItem<SportLeagueLevelEditModel, SportLeagueLevelModel>
 {
     protected async Task HandleValidSubmit()
     {
@@ -12,6 +13,6 @@ public partial class SportLeagueLevelEditor : EditItem<SaveSportLeagueLevelViewM
         if (Id == 0)
             return;
 
-        ViewModel = new SaveSportLeagueLevelViewModel(await Get(new GetSportLeagueLevel(Id)));
+        ViewModel = new SportLeagueLevelEditModel(new SportLeagueLevelModel(await QueryRouter.Send(new GetSportLeagueLevel(Id))));
     }
 }

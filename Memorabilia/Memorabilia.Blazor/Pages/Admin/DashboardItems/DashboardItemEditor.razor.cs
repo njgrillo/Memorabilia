@@ -1,8 +1,9 @@
-﻿using DashboardItemViewModel = Memorabilia.Application.Features.Admin.DashboardItems.DashboardItemViewModel;
+﻿using DashboardItemModel = Memorabilia.Application.Features.Admin.DashboardItems.DashboardItemModel;
 
 namespace Memorabilia.Blazor.Pages.Admin.DashboardItems;
 
-public partial class DashboardItemEditor : EditItem<SaveDashboardItemViewModel, DashboardItemViewModel>
+public partial class DashboardItemEditor 
+    : EditItem<DashboardItemEditModel, DashboardItemModel>
 {
     protected async Task HandleValidSubmit()
     {
@@ -14,6 +15,6 @@ public partial class DashboardItemEditor : EditItem<SaveDashboardItemViewModel, 
         if (Id == 0)
             return;
 
-        ViewModel = new SaveDashboardItemViewModel(await Get(new GetDashboardItem(Id)));
+        ViewModel = new DashboardItemEditModel(new DashboardItemModel(await QueryRouter.Send(new GetDashboardItem(Id))));
     }
 }

@@ -1,21 +1,18 @@
-﻿using Memorabilia.Domain.Entities;
+﻿namespace Memorabilia.Application.Features.Admin.BatTypes;
 
-namespace Memorabilia.Application.Features.Admin.BatTypes;
-
-public record GetBatTypes() : IQuery<BatTypesViewModel>
+public record GetBatTypes() : IQuery<Entity.BatType[]>
 {
-    public class Handler : QueryHandler<GetBatTypes, BatTypesViewModel>
+    public class Handler : QueryHandler<GetBatTypes, Entity.BatType[]>
     {
-        private readonly IDomainRepository<BatType> _batTypeRepository;
+        private readonly IDomainRepository<Entity.BatType> _batTypeRepository;
 
-        public Handler(IDomainRepository<BatType> batTypeRepository)
+        public Handler(IDomainRepository<Entity.BatType> batTypeRepository)
         {
             _batTypeRepository = batTypeRepository;
         }
 
-        protected override async Task<BatTypesViewModel> Handle(GetBatTypes query)
-        {
-            return new BatTypesViewModel(await _batTypeRepository.GetAll());
-        }
+        protected override async Task<Entity.BatType[]> Handle(GetBatTypes query)
+            => (await _batTypeRepository.GetAll())
+                    .ToArray();
     }
 }

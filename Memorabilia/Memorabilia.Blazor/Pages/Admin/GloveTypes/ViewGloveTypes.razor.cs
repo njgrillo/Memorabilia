@@ -1,6 +1,7 @@
 ﻿namespace Memorabilia.Blazor.Pages.Admin.GloveTypes;
 
-public partial class ViewGloveTypes : ViewDomainItem<GloveTypesViewModel>, IDeleteDomainItem, IViewDomainItem
+public partial class ViewGloveTypes 
+    : ViewDomainItem<GloveTypesModel>, IDeleteDomainItem, IViewDomainItem
 {
     public async Task OnDelete(DomainEditModel viewModel)
     {
@@ -9,6 +10,6 @@ public partial class ViewGloveTypes : ViewDomainItem<GloveTypesViewModel>, IDele
 
     public async Task OnLoad()
     {
-        ViewModel = await QueryRouter.Send(new GetGloveTypes());
+        ViewModel = new GloveTypesModel(await QueryRouter.Send(new GetGloveTypes()));
     }
 }

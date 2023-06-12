@@ -15,7 +15,5 @@ public class SpotFilterRule : IFilterRule<Entity.Memorabilia>
     }
 
     public Expression<Func<Entity.Memorabilia, bool>> GetExpression()
-    {
-        return item => item.Autographs.Any(autograph => _spotIds.Contains(autograph.Spot.SpotId));
-    }
+        => item => item.Autographs.Any(autograph => _spotIds.Contains(autograph.Spot.SpotId));
 }

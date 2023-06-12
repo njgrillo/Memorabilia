@@ -4,5 +4,6 @@ public class SuggestedInscriptionsModel
 {
     public SuggestedInscriptionsModel() { }
 
-    public List<SuggestedInscriptionModel> Items { get; set; } = new();
+    public List<SuggestedInscriptionModel> Items { get; set; } 
+        = new();
 }

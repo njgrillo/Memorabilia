@@ -3,7 +3,7 @@
           Dense="false"
           Hover="true"
           Items="@Model.MemorabiliaItems"
-          ServerData="@(new Func<TableState, Task<TableData<MemorabiliaItemModel>>>(OnRead))"
+          ServerData="@(new Func<TableState, Task<TableData<MemorabiliaModel>>>(OnRead))"
           Striped="true"
           Style="width:100%">
     <ToolBarContent>

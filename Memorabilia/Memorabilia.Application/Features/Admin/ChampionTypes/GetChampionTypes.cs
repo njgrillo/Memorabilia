@@ -1,21 +1,18 @@
-﻿using Memorabilia.Domain.Entities;
+﻿namespace Memorabilia.Application.Features.Admin.ChampionTypes;
 
-namespace Memorabilia.Application.Features.Admin.ChampionTypes;
-
-public record GetChampionTypes() : IQuery<ChampionTypesViewModel>
+public record GetChampionTypes() : IQuery<Entity.ChampionType[]>
 {
-    public class Handler : QueryHandler<GetChampionTypes, ChampionTypesViewModel>
+    public class Handler : QueryHandler<GetChampionTypes, Entity.ChampionType[]>
     {
-        private readonly IDomainRepository<ChampionType> _championTypeRepository;
+        private readonly IDomainRepository<Entity.ChampionType> _championTypeRepository;
 
-        public Handler(IDomainRepository<ChampionType> championTypeRepository)
+        public Handler(IDomainRepository<Entity.ChampionType> championTypeRepository)
         {
             _championTypeRepository = championTypeRepository;
         }
 
-        protected override async Task<ChampionTypesViewModel> Handle(GetChampionTypes query)
-        {
-            return new ChampionTypesViewModel(await _championTypeRepository.GetAll());
-        }
+        protected override async Task<Entity.ChampionType[]> Handle(GetChampionTypes query)
+            => (await _championTypeRepository.GetAll())
+                    .ToArray();
     }
 }

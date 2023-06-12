@@ -1,4 +1,4 @@
-﻿@inherits ViewItem<DashboardItemsViewModel, DashboardItemViewModel>
+﻿@inherits ViewItem<DashboardItemsModel, DashboardItemModel>
 
 <PageView AddRoute="@ViewModel.AddRoute" 
           AddTitle="@ViewModel.AddTitle"
@@ -11,7 +11,7 @@
             <Content>
                 <MudTable Bordered="false"
                           Dense="false" 
-                          Filter="new Func<DashboardItemViewModel,bool>(FilterFunc1)"
+                          Filter="new Func<DashboardItemModel,bool>(FilterFunc1)"
                           Hover="true"
                           Items="@ViewModel.DashboardItems"    
                           Striped="true">

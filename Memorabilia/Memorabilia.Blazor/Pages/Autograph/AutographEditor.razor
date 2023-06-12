@@ -37,7 +37,7 @@
                 <PrettyBlazor.Condition Evaluation="ViewModel.CanImportPerson">
                     <Match>
                         <MudTooltip Text="Import from memorabilia item">
-                            <MudImage @onclick="@(_ => ViewModel.Person = new SavePersonViewModel(ViewModel.MemorabiliaPerson))"
+                            <MudImage @onclick="@(_ => ViewModel.Person = new PersonEditModel(ViewModel.MemorabiliaPerson))"
                                       Class="rounded-lg can-click"
                                       Elevation="5"
                                       Height="20"

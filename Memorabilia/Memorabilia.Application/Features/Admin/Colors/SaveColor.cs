@@ -1,41 +1,41 @@
-﻿using Memorabilia.Domain.Entities;
+﻿namespace Memorabilia.Application.Features.Admin.Colors;
 
-namespace Memorabilia.Application.Features.Admin.Colors;
-
-public record SaveColor(DomainEditModel ViewModel) : ICommand
+public record SaveColor(DomainEditModel Color) : ICommand
 {
     public class Handler : CommandHandler<SaveColor>
     {
-        private readonly IDomainRepository<Color> _colorRepository;
+        private readonly IDomainRepository<Entity.Color> _colorRepository;
 
-        public Handler(IDomainRepository<Color> colorRepository)
+        public Handler(IDomainRepository<Entity.Color> colorRepository)
         {
             _colorRepository = colorRepository;
         }
 
         protected override async Task Handle(SaveColor request)
         {
-            Color color;
+            Entity.Color color;
 
-            if (request.ViewModel.IsNew)
+            if (request.Color.IsNew)
             {
-                color = new Color(request.ViewModel.Name, request.ViewModel.Abbreviation);
+                color = new Entity.Color(request.Color.Name, 
+                                         request.Color.Abbreviation);
 
                 await _colorRepository.Add(color);
 
                 return;
             }
 
-            color = await _colorRepository.Get(request.ViewModel.Id);
+            color = await _colorRepository.Get(request.Color.Id);
 
-            if (request.ViewModel.IsDeleted)
+            if (request.Color.IsDeleted)
             {
                 await _colorRepository.Delete(color);
 
                 return;
             }
 
-            color.Set(request.ViewModel.Name, request.ViewModel.Abbreviation);
+            color.Set(request.Color.Name, 
+                      request.Color.Abbreviation);
 
             await _colorRepository.Update(color);
         }

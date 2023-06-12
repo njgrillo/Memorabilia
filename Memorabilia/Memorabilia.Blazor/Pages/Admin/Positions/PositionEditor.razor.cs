@@ -1,6 +1,7 @@
 ﻿namespace Memorabilia.Blazor.Pages.Admin.Positions;
 
-public partial class PositionEditor : EditItem<SavePositionViewModel, PositionViewModel>
+public partial class PositionEditor 
+    : EditItem<PositionEditModel, PositionModel>
 {
     protected async Task HandleValidSubmit()
     {
@@ -12,6 +13,6 @@ public partial class PositionEditor : EditItem<SavePositionViewModel, PositionVi
         if (Id == 0)
             return;
 
-        ViewModel = new SavePositionViewModel(await Get(new GetPosition(Id)));
+        ViewModel = new PositionEditModel(new PositionModel(await QueryRouter.Send(new GetPosition(Id))));
     }
 }

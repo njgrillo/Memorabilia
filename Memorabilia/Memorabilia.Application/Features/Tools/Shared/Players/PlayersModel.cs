@@ -1,12 +1,10 @@
-﻿using Memorabilia.Domain.Entities;
-
-namespace Memorabilia.Application.Features.Tools.Shared.Players;
+﻿namespace Memorabilia.Application.Features.Tools.Shared.Players;
 
 public class PlayersModel
 {
     public PlayersModel() { }
 
-    public PlayersModel(IEnumerable<PersonTeam> players, Constant.Sport sport)
+    public PlayersModel(IEnumerable<Entity.PersonTeam> players, Constant.Sport sport)
     {
         Players = players.Select(player => new PlayerModel(player, sport))
                          .OrderByDescending(player => player.BeginYear)
@@ -15,9 +13,12 @@ public class PlayersModel
 
     public Constant.Franchise Franchise { get; set; }
 
-    public string FranchiseName => Franchise?.Name;
+    public string FranchiseName 
+        => Franchise?.Name;
 
-    public IEnumerable<PlayerModel> Players { get; set; } = Enumerable.Empty<PlayerModel>();
+    public IEnumerable<PlayerModel> Players { get; set; } 
+        = Enumerable.Empty<PlayerModel>();
 
-    public string ResultsTitle => $"{FranchiseName} Players";
+    public string ResultsTitle 
+        => $"{FranchiseName} Players";
 }

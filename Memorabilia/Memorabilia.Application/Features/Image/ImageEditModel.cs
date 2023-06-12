@@ -4,11 +4,11 @@ public class ImageEditModel : EditModel
 {
     public ImageEditModel() { }
 
-    public ImageEditModel(ImageModel viewModel)
+    public ImageEditModel(ImageModel model)
     {
-        FileName = viewModel.FileName;
-        Id = viewModel.Id;
-        ImageTypeId = viewModel.ImageTypeId;
+        FileName = model.FileName;
+        Id = model.Id;
+        ImageTypeId = model.ImageTypeId;
     }
 
     public ImageEditModel(Entity.Image image)

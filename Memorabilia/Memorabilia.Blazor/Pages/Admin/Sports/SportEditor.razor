@@ -1,4 +1,4 @@
-﻿@inherits EditItem<SaveSportViewModel, SportViewModel>
+﻿@inherits EditItem<SportEditModel, SportModel>
 
 <EditPage ContinueNavigationPath="@ViewModel.RoutePrefix"
           EditMode="ViewModel.EditModeType" 
@@ -11,7 +11,7 @@
           PageFooterButtonText="@ViewModel.ExitButtonText"
           PageFooterNavigationPath="@ViewModel.ExitNavigationPath"
           PageTitle="@ViewModel.PageTitle"
-          TItem="SaveSportViewModel">
+          TItem="SportEditModel">
     <Content>
          <DivRowCol3>
             <Content>

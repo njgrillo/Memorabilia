@@ -7,6 +7,6 @@ public partial class ViewCareerRecords
 
     protected override async Task OnInitializedAsync()
     {
-        Model = await QueryRouter.Send(new GetCareerRecords(Sport));
+        Model = new(await QueryRouter.Send(new GetCareerRecords(Sport)), Sport);
     }
 }

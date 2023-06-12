@@ -7,7 +7,7 @@ public class SuggestedInscriptionService
     private Entity.Person _person;
 
 	public SuggestedInscriptionService(AccomplishmentRuleFactory accomplishmentRuleFactory,
-		AwardRuleFactory awardRuleFactory)
+		                               AwardRuleFactory awardRuleFactory)
 	{
 		_accomplishmentRuleFactory = accomplishmentRuleFactory;
 		_awardRuleFactory = awardRuleFactory;

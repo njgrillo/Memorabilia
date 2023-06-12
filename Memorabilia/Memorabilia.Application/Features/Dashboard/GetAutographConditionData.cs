@@ -13,17 +13,18 @@ public record GetAutographConditionData(int UserId) : IQuery<DashboardChartModel
 
         protected override async Task<DashboardChartModel> Handle(GetAutographConditionData query)
         {
-            var conditionTypeIds = _repository.GetConditionIds(query.UserId);
-            var conditionTypeNames = conditionTypeIds.Select(conditionTypeId => Constant.Condition.Find(conditionTypeId).Name)
-                                                     .Distinct();
+            int[] conditionTypeIds = _repository.GetConditionIds(query.UserId);
+            string[] conditionTypeNames = conditionTypeIds.Select(conditionTypeId => Constant.Condition.Find(conditionTypeId).Name)
+                                                          .Distinct()
+                                                          .ToArray();
 
             var labels = new List<string>();
             var counts = new List<double>();
 
-            foreach (var conditionTypeName in conditionTypeNames)
+            foreach (string conditionTypeName in conditionTypeNames)
             {
                 var conditionType = Constant.Condition.Find(conditionTypeName);
-                var count = conditionTypeIds.Count(conditionTypeId => conditionTypeId == conditionType.Id);
+                int count = conditionTypeIds.Count(conditionTypeId => conditionTypeId == conditionType.Id);
 
                 counts.Add(count);
                 labels.Add($"{conditionTypeName} ({count})");

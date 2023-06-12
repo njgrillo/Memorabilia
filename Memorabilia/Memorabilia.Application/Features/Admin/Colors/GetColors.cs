@@ -1,21 +1,18 @@
-﻿using Memorabilia.Domain.Entities;
+﻿namespace Memorabilia.Application.Features.Admin.Colors;
 
-namespace Memorabilia.Application.Features.Admin.Colors;
-
-public record GetColors() : IQuery<ColorsViewModel>
+public record GetColors() : IQuery<Entity.Color[]>
 {
-    public class Handler : QueryHandler<GetColors, ColorsViewModel>
+    public class Handler : QueryHandler<GetColors, Entity.Color[]>
     {
-        private readonly IDomainRepository<Color> _colorRepository;
+        private readonly IDomainRepository<Entity.Color> _colorRepository;
 
-        public Handler(IDomainRepository<Color> colorRepository)
+        public Handler(IDomainRepository<Entity.Color> colorRepository)
         {
             _colorRepository = colorRepository;
         }
 
-        protected override async Task<ColorsViewModel> Handle(GetColors query)
-        {
-            return new ColorsViewModel(await _colorRepository.GetAll());
-        }
+        protected override async Task<Entity.Color[]> Handle(GetColors query)
+            => (await _colorRepository.GetAll())
+                    .ToArray();
     }
 }

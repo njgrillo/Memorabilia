@@ -6,6 +6,9 @@ public partial class ViewFranchiseHallOfFamers : ViewSportTools<FranchiseHallOfF
 
     private async Task OnInputChange(Franchise franchise)
     {
-        Model = await QueryRouter.Send(new GetFranchiseHallOfFames(franchise, Sport));
+        Model = new(await QueryRouter.Send(new GetFranchiseHallOfFames(franchise, Sport)), Sport)
+                {
+                    Franchise = franchise
+                };
     }
 }

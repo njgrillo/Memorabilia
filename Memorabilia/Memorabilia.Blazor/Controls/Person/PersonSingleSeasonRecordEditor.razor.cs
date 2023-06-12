@@ -3,7 +3,7 @@
 public partial class PersonSingleSeasonRecordEditor : ComponentBase
 {
     [Parameter]
-    public List<SavePersonSingleSeasonRecordViewModel> SingleSeasonRecords { get; set; } = new();
+    public List<PersonSingleSeasonRecordEditModel> SingleSeasonRecords { get; set; } = new();
 
     [Parameter]
     public Sport[] Sports { get; set; }
@@ -11,7 +11,7 @@ public partial class PersonSingleSeasonRecordEditor : ComponentBase
     private bool _canAdd = true;
     private bool _canEditRecordType = true;
     private bool _canUpdate;
-    private SavePersonSingleSeasonRecordViewModel _viewModel = new();
+    private PersonSingleSeasonRecordEditModel _viewModel = new();
 
     private void Add()
     {
@@ -20,10 +20,10 @@ public partial class PersonSingleSeasonRecordEditor : ComponentBase
 
         SingleSeasonRecords.Add(_viewModel);
 
-        _viewModel = new SavePersonSingleSeasonRecordViewModel();
+        _viewModel = new PersonSingleSeasonRecordEditModel();
     }
 
-    private void Edit(SavePersonSingleSeasonRecordViewModel record)
+    private void Edit(PersonSingleSeasonRecordEditModel record)
     {
         _viewModel.RecordType = record.RecordType;
         _viewModel.Year = record.Year;
@@ -42,7 +42,7 @@ public partial class PersonSingleSeasonRecordEditor : ComponentBase
         record.Year = _viewModel.Year;
         record.Record = _viewModel.Record;
 
-        _viewModel = new SavePersonSingleSeasonRecordViewModel();
+        _viewModel = new PersonSingleSeasonRecordEditModel();
 
         _canAdd = true;
         _canEditRecordType = true;

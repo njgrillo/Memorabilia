@@ -1,6 +1,7 @@
 ﻿namespace Memorabilia.Blazor.Pages.Admin.TeamRoleTypes;
 
-public partial class ViewTeamRoleTypes : ViewDomainItem<TeamRoleTypesViewModel>, IDeleteDomainItem, IViewDomainItem
+public partial class ViewTeamRoleTypes 
+    : ViewDomainItem<TeamRoleTypesModel>, IDeleteDomainItem, IViewDomainItem
 {
     public async Task OnDelete(DomainEditModel viewModel)
     {
@@ -9,6 +10,6 @@ public partial class ViewTeamRoleTypes : ViewDomainItem<TeamRoleTypesViewModel>,
 
     public async Task OnLoad()
     {
-        await OnLoad(new GetTeamRoleTypes());
+        ViewModel = new TeamRoleTypesModel(await QueryRouter.Send(new GetTeamRoleTypes()));
     }
 }

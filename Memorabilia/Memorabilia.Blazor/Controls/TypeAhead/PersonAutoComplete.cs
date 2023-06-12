@@ -1,6 +1,7 @@
 ﻿namespace Memorabilia.Blazor.Controls.TypeAhead;
 
-public class PersonAutoComplete : NamedEntityAutoComplete<SavePersonViewModel>, INotifyPropertyChanged
+public class PersonAutoComplete 
+    : NamedEntityAutoComplete<PersonEditModel>, INotifyPropertyChanged
 {   
     [Parameter]
     public Sport Sport { get; set; }
@@ -24,7 +25,9 @@ public class PersonAutoComplete : NamedEntityAutoComplete<SavePersonViewModel>, 
 
     private async Task LoadItems()
     {
-        Items = (await QueryRouter.Send(new GetPeople(Sport?.Id ?? null))).People.Select(person => new SavePersonViewModel(person));
+        Entity.Person[] people = await QueryRouter.Send(new GetPeople(SportId: Sport?.Id ?? null));
+
+        Items = people.Select(person => new PersonEditModel(new PersonModel(person)));
     }
 
     private async void PersonAutoComplete_PropertyChanged(object sender, PropertyChangedEventArgs e)

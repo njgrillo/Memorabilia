@@ -1,4 +1,4 @@
-﻿@inherits EditItem<SaveFranchiseViewModel, FranchiseViewModel>
+﻿@inherits EditItem<FranchiseEditModel, FranchiseModel>
 
 <EditPage ContinueNavigationPath="@ViewModel.RoutePrefix"
           EditMode="ViewModel.EditModeType" 
@@ -11,7 +11,7 @@
           PageFooterButtonText="@ViewModel.ExitButtonText"
           PageFooterNavigationPath="@ViewModel.ExitNavigationPath"
           PageTitle="@ViewModel.PageTitle"
-          TItem="SaveFranchiseViewModel">
+          TItem="FranchiseEditModel">
     <Content>
         <DivRowCol3 Hidden="@(!DisplaySportLeagueLevel)">
             <Content>

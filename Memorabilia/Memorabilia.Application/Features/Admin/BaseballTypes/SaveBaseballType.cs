@@ -1,41 +1,41 @@
-﻿using Memorabilia.Domain.Entities;
+﻿namespace Memorabilia.Application.Features.Admin.BaseballTypes;
 
-namespace Memorabilia.Application.Features.Admin.BaseballTypes;
-
-public record SaveBaseballType(DomainEditModel ViewModel) : ICommand
+public record SaveBaseballType(DomainEditModel BaseballType) : ICommand
 {
     public class Handler : CommandHandler<SaveBaseballType>
     {
-        private readonly IDomainRepository<BaseballType> _baseballTypeRepository;
+        private readonly IDomainRepository<Entity.BaseballType> _baseballTypeRepository;
 
-        public Handler(IDomainRepository<BaseballType> baseballTypeRepository)
+        public Handler(IDomainRepository<Entity.BaseballType> baseballTypeRepository)
         {
             _baseballTypeRepository = baseballTypeRepository;
         }
 
         protected override async Task Handle(SaveBaseballType request)
         {
-            BaseballType baseballType;
+            Entity.BaseballType baseballType;
 
-            if (request.ViewModel.IsNew)
+            if (request.BaseballType.IsNew)
             {
-                baseballType = new BaseballType(request.ViewModel.Name, request.ViewModel.Abbreviation);
+                baseballType = new Entity.BaseballType(request.BaseballType.Name, 
+                                                       request.BaseballType.Abbreviation);
 
                 await _baseballTypeRepository.Add(baseballType);
 
                 return;
             }
 
-            baseballType = await _baseballTypeRepository.Get(request.ViewModel.Id);
+            baseballType = await _baseballTypeRepository.Get(request.BaseballType.Id);
 
-            if (request.ViewModel.IsDeleted)
+            if (request.BaseballType.IsDeleted)
             {
                 await _baseballTypeRepository.Delete(baseballType);
 
                 return;
             }
 
-            baseballType.Set(request.ViewModel.Name, request.ViewModel.Abbreviation);
+            baseballType.Set(request.BaseballType.Name, 
+                             request.BaseballType.Abbreviation);
 
             await _baseballTypeRepository.Update(baseballType);
         }

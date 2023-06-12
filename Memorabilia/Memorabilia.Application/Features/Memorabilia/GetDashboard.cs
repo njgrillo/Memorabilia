@@ -15,9 +15,12 @@ public record GetDashboard(int UserId)
         protected override async Task<DashboardModel> Handle(GetDashboard query)
         {
             Entity.User user = await _userRepository.Get(query.UserId);
-            var dashboardItems = user.DashboardItems.Select(userDashboard => Constant.DashboardItem.Find(userDashboard.DashboardItemId));
+
+            IEnumerable<Constant.DashboardItem> dashboardItems 
+                = user.DashboardItems.Select(userDashboard => Constant.DashboardItem.Find(userDashboard.DashboardItemId));
          
-            return new DashboardModel(dashboardItems.Select(x => new DashboardItemModel { DashboardItem = x }).OrderBy(dashboardItem => dashboardItem.DashboardItem.Name));
+            return new DashboardModel(dashboardItems.Select(x => new DashboardItemModel { DashboardItem = x })
+                                                    .OrderBy(dashboardItem => dashboardItem.DashboardItem.Name));
         }
     }
 }

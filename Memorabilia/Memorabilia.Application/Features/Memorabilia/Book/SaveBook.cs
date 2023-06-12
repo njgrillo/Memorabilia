@@ -13,7 +13,7 @@ public class SaveBook
 
         protected override async Task Handle(Command command)
         {
-            var memorabilia = await _memorabiliaRepository.Get(command.MemorabiliaId);
+            Entity.Memorabilia memorabilia = await _memorabiliaRepository.Get(command.MemorabiliaId);
 
             memorabilia.SetBook(command.Edition,
                                 command.HardCover,
@@ -29,27 +29,35 @@ public class SaveBook
 
     public class Command : DomainCommand, ICommand
     {
-        private readonly SaveBookViewModel _viewModel;
+        private readonly BookEditModel _editModel;
 
-        public Command(SaveBookViewModel viewModel)
+        public Command(BookEditModel editModel)
         {
-            _viewModel = viewModel;
+            _editModel = editModel;
         }
 
-        public string Edition => _viewModel.Edition;
+        public string Edition 
+            => _editModel.Edition;
 
-        public bool HardCover => _viewModel.HardCover;
+        public bool HardCover 
+            => _editModel.HardCover;
 
-        public int MemorabiliaId => _viewModel.MemorabiliaId;
+        public int MemorabiliaId 
+            => _editModel.MemorabiliaId;
 
-        public int[] PersonIds => _viewModel.People.Where(person => !person.IsDeleted).Select(person => person.Id).ToArray();
+        public int[] PersonIds 
+            => _editModel.People.ActiveIds();
 
-        public string Publisher => _viewModel.Publisher;
+        public string Publisher 
+            => _editModel.Publisher;
 
-        public int[] SportIds => _viewModel.SportIds.ToArray();
+        public int[] SportIds 
+            => _editModel.SportIds.ToArray();
 
-        public int[] TeamIds => _viewModel.Teams.Where(team => !team.IsDeleted).Select(team => team.Id).ToArray();
+        public int[] TeamIds 
+            => _editModel.Teams.ActiveIds();
 
-        public string Title => _viewModel.Title;
+        public string Title 
+            => _editModel.Title;
     }
 }

@@ -1,14 +1,14 @@
-﻿@inherits MemorabiliaItem<SaveBatViewModel>
+﻿@inherits MemorabiliaItem<BatEditModel>
 
 <EditMemorabiliaPage Item="ViewModel"
                      OnLoad="OnLoad"
                      OnSave="OnSave" 
-                     TItem="SaveBatViewModel">
+                     TItem="BatEditModel">
     <Content>
         <MemorabiliaItemEditor DisplayItemTypeLevel="false" 
                                DisplaySinglePersonSelector="true"
                                DisplaySingleTeamSelector="true"
-                               TItem="SaveBatViewModel"
+                               TItem="BatEditModel"
                                ViewModel="ViewModel">
             <AdditionalContent>
                 <DivRowCol3>

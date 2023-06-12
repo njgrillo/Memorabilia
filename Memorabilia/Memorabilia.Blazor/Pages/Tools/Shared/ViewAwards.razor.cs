@@ -41,11 +41,17 @@ public partial class ViewAwards
         if (awardType == null)
             return;
 
-        Model = await QueryRouter.Send(new GetAwards(awardType, Sport));
+        Model = new(await QueryRouter.Send(new GetAwards(awardType, Sport)), Sport) 
+                {
+                    AwardType = awardType
+                }; 
     }
 
     private async Task OnInputChange(AwardType awardType)
     {
-        Model = await QueryRouter.Send(new GetAwards(awardType, Sport));
+        Model = new(await QueryRouter.Send(new GetAwards(awardType, Sport)), Sport)
+                {
+                    AwardType = awardType
+                };
     }
 }

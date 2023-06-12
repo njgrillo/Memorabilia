@@ -76,66 +76,83 @@ public class SaveAutograph
 
     public class Command : DomainCommand, ICommand
     {
-        private readonly AutographEditModel _viewModel;
+        private readonly AutographEditModel _editModel;
 
-        public Command(AutographEditModel viewModel)
+        public Command(AutographEditModel editModel)
         {
-            _viewModel = viewModel;
-            Id = _viewModel.Id;
+            _editModel = editModel;
+            Id = _editModel.Id;
         }
 
-        public DateTime? AcquiredDate => _viewModel.AcquiredDate;
+        public DateTime? AcquiredDate 
+            => _editModel.AcquiredDate;
 
         public int? AcquisitionTypeId 
-            => _viewModel.AcquisitionTypeId > 0 
-                ? _viewModel.AcquisitionTypeId 
-                : null;
+            => _editModel.AcquisitionTypeId.ToNullableInt();
 
-        public int ColorId => _viewModel.ColorId;
+        public int ColorId 
+            => _editModel.ColorId;
 
-        public int ConditionId => _viewModel.ConditionId;
+        public int ConditionId 
+            => _editModel.ConditionId;
 
-        public decimal? Cost => _viewModel.Cost;
+        public decimal? Cost 
+            => _editModel.Cost;
 
-        public DateTime CreateDate => _viewModel.CreateDate;
+        public DateTime CreateDate 
+            => _editModel.CreateDate;
 
-        public int? Denominator => _viewModel.Denominator;
+        public int? Denominator 
+            => _editModel.Denominator;
 
-        public decimal? EstimatedValue => _viewModel.EstimatedValue;
+        public decimal? EstimatedValue 
+            => _editModel.EstimatedValue;
 
-        public bool FullName => _viewModel.FullName;
+        public bool FullName 
+            => _editModel.FullName;
 
-        public int? Grade => _viewModel.Grade;
+        public int? Grade 
+            => _editModel.Grade;
 
         public int Id { get; set; }
 
-        public bool IsDeleted => _viewModel.IsDeleted;
+        public bool IsDeleted 
+            => _editModel.IsDeleted;
 
-        public bool IsModified => _viewModel.IsModified;
+        public bool IsModified 
+            => _editModel.IsModified;
 
-        public bool IsNew => _viewModel.IsNew;
+        public bool IsNew 
+            => _editModel.IsNew;
 
-        public DateTime? LastModifiedDate => _viewModel.LastModifiedDate;
+        public DateTime? LastModifiedDate 
+            => _editModel.LastModifiedDate;
 
-        public int MemorabiliaId => _viewModel.MemorabiliaId;
+        public int MemorabiliaId 
+            => _editModel.MemorabiliaId;
 
-        public string Note => _viewModel.Note;
+        public string Note 
+            => _editModel.Note;
 
-        public int? Numerator => _viewModel.Numerator;
+        public int? Numerator 
+            => _editModel.Numerator;
 
-        public string PersonalizationText => _viewModel.PersonalizationText;
+        public string PersonalizationText 
+            => _editModel.PersonalizationText;
 
-        public int PersonId => _viewModel.Person.Id;
+        public int PersonId 
+            => _editModel.Person.Id;
 
         public int? PurchaseTypeId 
-            => _viewModel.PurchaseTypeId > 0 
-                ? _viewModel.PurchaseTypeId 
-                : null;
+            => _editModel.PurchaseTypeId.ToNullableInt();
 
-        public DateTime? ReceivedDate => _viewModel.ReceivedDate;
+        public DateTime? ReceivedDate 
+            => _editModel.ReceivedDate;
 
-        public DateTime? SentDate => _viewModel.SentDate;
+        public DateTime? SentDate 
+            => _editModel.SentDate;
 
-        public int WritingInstrumentId => _viewModel.WritingInstrumentId;
+        public int WritingInstrumentId 
+            => _editModel.WritingInstrumentId;
     }
 }

@@ -15,7 +15,5 @@ public class LevelTypeFilterRule : IFilterRule<Entity.Memorabilia>
     }
 
     public Expression<Func<Entity.Memorabilia, bool>> GetExpression()
-    {
-        return item => _levelTypeIds.Contains(item.LevelType.LevelTypeId);
-    }
+        => item => _levelTypeIds.Contains(item.LevelType.LevelTypeId);
 }

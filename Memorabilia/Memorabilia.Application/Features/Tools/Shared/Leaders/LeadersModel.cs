@@ -1,12 +1,10 @@
-﻿using Memorabilia.Domain.Entities;
-
-namespace Memorabilia.Application.Features.Tools.Shared.Leaders;
+﻿namespace Memorabilia.Application.Features.Tools.Shared.Leaders;
 
 public class LeadersModel
 {
     public LeadersModel() { }
 
-    public LeadersModel(IEnumerable<Leader> leaders, Constant.Sport sport)
+    public LeadersModel(IEnumerable<Entity.Leader> leaders, Constant.Sport sport)
     {
         Leaders = leaders.Select(leader => new LeaderModel(leader, sport))
                          .OrderByDescending(leader => leader.Year)
@@ -14,11 +12,14 @@ public class LeadersModel
                          .ThenBy(leader => leader.PersonName);
     }
 
-    public IEnumerable<LeaderModel> Leaders { get; set; } = Enumerable.Empty<LeaderModel>();
+    public IEnumerable<LeaderModel> Leaders { get; set; } 
+        = Enumerable.Empty<LeaderModel>();
 
     public Constant.LeaderType LeaderType { get; set; }
 
-    public string LeaderTypeName => LeaderType?.Name;
+    public string LeaderTypeName 
+        => LeaderType?.Name;
 
-    public string ResultsTitle => $"{LeaderTypeName} Leaders";
+    public string ResultsTitle 
+        => $"{LeaderTypeName} Leaders";
 }

@@ -1,41 +1,41 @@
-﻿using Memorabilia.Domain.Entities;
+﻿namespace Memorabilia.Application.Features.Admin.CerealTypes;
 
-namespace Memorabilia.Application.Features.Admin.CerealTypes;
-
-public record SaveCerealType(DomainEditModel ViewModel) : ICommand
+public record SaveCerealType(DomainEditModel CerealType) : ICommand
 {
     public class Handler : CommandHandler<SaveCerealType>
     {
-        private readonly IDomainRepository<CerealType> _cerealTypeRepository;
+        private readonly IDomainRepository<Entity.CerealType> _cerealTypeRepository;
 
-        public Handler(IDomainRepository<CerealType> cerealTypeRepository)
+        public Handler(IDomainRepository<Entity.CerealType> cerealTypeRepository)
         {
             _cerealTypeRepository = cerealTypeRepository;
         }
 
         protected override async Task Handle(SaveCerealType request)
         {
-            CerealType cerealType;
+            Entity.CerealType cerealType;
 
-            if (request.ViewModel.IsNew)
+            if (request.CerealType.IsNew)
             {
-                cerealType = new CerealType(request.ViewModel.Name, request.ViewModel.Abbreviation);
+                cerealType = new Entity.CerealType(request.CerealType.Name, 
+                                                   request.CerealType.Abbreviation);
 
                 await _cerealTypeRepository.Add(cerealType);
 
                 return;
             }
 
-            cerealType = await _cerealTypeRepository.Get(request.ViewModel.Id);
+            cerealType = await _cerealTypeRepository.Get(request.CerealType.Id);
 
-            if (request.ViewModel.IsDeleted)
+            if (request.CerealType.IsDeleted)
             {
                 await _cerealTypeRepository.Delete(cerealType);
 
                 return;
             }
 
-            cerealType.Set(request.ViewModel.Name, request.ViewModel.Abbreviation);
+            cerealType.Set(request.CerealType.Name, 
+                           request.CerealType.Abbreviation);
 
             await _cerealTypeRepository.Update(cerealType);
         }

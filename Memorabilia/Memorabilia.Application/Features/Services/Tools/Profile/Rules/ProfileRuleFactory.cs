@@ -2,7 +2,8 @@
 
 public class ProfileRuleFactory : IProfileRuleFactory
 {
-    private readonly List<IProfileRule> _rules = new ();
+    private readonly List<IProfileRule> _rules 
+        = new();
 
     public ProfileRuleFactory()
     {
@@ -11,5 +12,6 @@ public class ProfileRuleFactory : IProfileRuleFactory
         _rules.Add(new FootballProfileRule());
     }
 
-    public List<IProfileRule> Rules => _rules;
+    public List<IProfileRule> Rules 
+        => _rules;
 }

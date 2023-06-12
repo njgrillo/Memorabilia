@@ -13,7 +13,7 @@ public class SaveJersey
 
         protected override async Task Handle(Command command)
         {
-            var memorabilia = await _memorabiliaRepository.Get(command.MemorabiliaId);
+            Entity.Memorabilia memorabilia = await _memorabiliaRepository.Get(command.MemorabiliaId);
 
             memorabilia.SetJersey(command.BrandId,
                                   command.GameDate,
@@ -33,35 +33,47 @@ public class SaveJersey
 
     public class Command : DomainCommand, ICommand
     {
-        private readonly SaveJerseyViewModel _viewModel;
+        private readonly JerseyEditModel _editModel;
 
-        public Command(SaveJerseyViewModel viewModel)
+        public Command(JerseyEditModel editModel)
         {
-            _viewModel = viewModel;
+            _editModel = editModel;
         }            
 
-        public int BrandId => _viewModel.BrandId;
+        public int BrandId 
+            => _editModel.BrandId;
 
-        public DateTime? GameDate => _viewModel.GameDate;
+        public DateTime? GameDate 
+            => _editModel.GameDate;
 
-        public int? GameStyleTypeId => _viewModel.GameStyleTypeId > 0 ? _viewModel.GameStyleTypeId : 0;
+        public int? GameStyleTypeId 
+            => _editModel.GameStyleTypeId.ToNullableInt();
 
-        public int LevelTypeId => _viewModel.LevelTypeId;
+        public int LevelTypeId 
+            => _editModel.LevelTypeId;
 
-        public int MemorabiliaId => _viewModel.MemorabiliaId;
+        public int MemorabiliaId 
+            => _editModel.MemorabiliaId;
 
-        public int[] PersonIds => _viewModel.People.Where(person => !person.IsDeleted).Select(person => person.Id).ToArray();
+        public int[] PersonIds 
+            => _editModel.People.ActiveIds();
 
-        public int QualityTypeId => _viewModel.JerseyQualityTypeId;
+        public int QualityTypeId 
+            => _editModel.JerseyQualityTypeId;
 
-        public int SizeId => _viewModel.SizeId;
+        public int SizeId 
+            => _editModel.SizeId;
 
-        public int? SportId => _viewModel.SportId > 0 ? _viewModel.SportId : null;
+        public int? SportId 
+            => _editModel.SportId.ToNullableInt();
 
-        public int StyleTypeId => _viewModel.JerseyStyleTypeId;
+        public int StyleTypeId 
+            => _editModel.JerseyStyleTypeId;
 
-        public int[] TeamIds => _viewModel.Teams.Where(team => !team.IsDeleted).Select(team => team.Id).ToArray();
+        public int[] TeamIds 
+            => _editModel.Teams.ActiveIds();
 
-        public int TypeId => _viewModel.JerseyTypeId;
+        public int TypeId 
+            => _editModel.JerseyTypeId;
     }
 }

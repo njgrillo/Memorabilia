@@ -1,40 +1,41 @@
-﻿using Memorabilia.Domain.Entities;
+﻿namespace Memorabilia.Application.Features.Admin.FranchiseHallOfFameTypes;
 
-namespace Memorabilia.Application.Features.Admin.FranchiseHallOfFameTypes;
-
-public record SaveFranchiseHallOfFameType(DomainEditModel ViewModel) : ICommand
+public record SaveFranchiseHallOfFameType(DomainEditModel FranchiseHallOfFameType) : ICommand
 {
     public class Handler : CommandHandler<SaveFranchiseHallOfFameType>
     {
-        private readonly IDomainRepository<FranchiseHallOfFameType> _franchiseHallOfFameTypeRepository;
+        private readonly IDomainRepository<Entity.FranchiseHallOfFameType> _franchiseHallOfFameTypeRepository;
 
-        public Handler(IDomainRepository<FranchiseHallOfFameType> franchiseHallOfFameTypeRepository)
+        public Handler(IDomainRepository<Entity.FranchiseHallOfFameType> franchiseHallOfFameTypeRepository)
         {
             _franchiseHallOfFameTypeRepository = franchiseHallOfFameTypeRepository;
         }
 
         protected override async Task Handle(SaveFranchiseHallOfFameType request)
         {
-            FranchiseHallOfFameType franchiseHallOfFameType;
+            Entity.FranchiseHallOfFameType franchiseHallOfFameType;
 
-            if (request.ViewModel.IsNew)
+            if (request.FranchiseHallOfFameType.IsNew)
             {
-                franchiseHallOfFameType = new FranchiseHallOfFameType(request.ViewModel.Name, request.ViewModel.Abbreviation);
+                franchiseHallOfFameType = new Entity.FranchiseHallOfFameType(request.FranchiseHallOfFameType.Name, 
+                                                                             request.FranchiseHallOfFameType.Abbreviation);
+                
                 await _franchiseHallOfFameTypeRepository.Add(franchiseHallOfFameType);
 
                 return;
             }
 
-            franchiseHallOfFameType = await _franchiseHallOfFameTypeRepository.Get(request.ViewModel.Id);
+            franchiseHallOfFameType = await _franchiseHallOfFameTypeRepository.Get(request.FranchiseHallOfFameType.Id);
 
-            if (request.ViewModel.IsDeleted)
+            if (request.FranchiseHallOfFameType.IsDeleted)
             {
                 await _franchiseHallOfFameTypeRepository.Delete(franchiseHallOfFameType);
 
                 return;
             }
 
-            franchiseHallOfFameType.Set(request.ViewModel.Name, request.ViewModel.Abbreviation);
+            franchiseHallOfFameType.Set(request.FranchiseHallOfFameType.Name, 
+                                        request.FranchiseHallOfFameType.Abbreviation);
 
             await _franchiseHallOfFameTypeRepository.Update(franchiseHallOfFameType);
         }

@@ -1,6 +1,4 @@
-﻿using Memorabilia.Domain.Entities;
-
-namespace Memorabilia.Application.Features.Admin.People;
+﻿namespace Memorabilia.Application.Features.Admin.People;
 
 public class SavePersonHallOfFame
 {
@@ -15,7 +13,7 @@ public class SavePersonHallOfFame
 
         protected override async Task Handle(Command command)
         {
-            var person = await _personRepository.Get(command.PersonId);
+            Entity.Person person = await _personRepository.Get(command.PersonId);
 
             UpdateCollegeHallOfFames(command, person);
             UpdateFranchiseHallOfFames(command, person);
@@ -25,27 +23,30 @@ public class SavePersonHallOfFame
             await _personRepository.Update(person);
         }
 
-        private static void UpdateCollegeHallOfFames(Command command, Person person)
+        private static void UpdateCollegeHallOfFames(Command command, Entity.Person person)
         {
             person.RemoveCollegeHallOfFames(command.DeletedCollegeHallOfFameIds);
 
             foreach (var hallOfFame in command.CollegeHallOfFames.Where(hof => !hof.IsDeleted))
             {
-                person.SetCollegeHallOfFame(hallOfFame.College.Id, hallOfFame.Sport.Id, hallOfFame.Year);
+                person.SetCollegeHallOfFame(hallOfFame.College.Id, 
+                                            hallOfFame.Sport.Id, 
+                                            hallOfFame.Year);
             }
         }
 
-        private static void UpdateFranchiseHallOfFames(Command command, Person person)
+        private static void UpdateFranchiseHallOfFames(Command command, Entity.Person person)
         {
             person.RemoveFranchiseHallOfFames(command.DeletedFranchiseHallOfFameIds);
 
             foreach (var hallOfFame in command.FranchiseHallOfFames.Where(hof => !hof.IsDeleted))
             {
-                person.SetFranchiseHallOfFame(hallOfFame.FranchiseHallOfFameType.Franchise.Id, hallOfFame.Year);
+                person.SetFranchiseHallOfFame(hallOfFame.FranchiseHallOfFameType.Franchise.Id, 
+                                              hallOfFame.Year);
             }
         }
 
-        private static void UpdateHallOfFames(Command command, Person person)
+        private static void UpdateHallOfFames(Command command, Entity.Person person)
         {
             person.RemoveHallOfFames(command.DeletedHallOfFameIds);
 
@@ -58,7 +59,7 @@ public class SavePersonHallOfFame
             }
         }
 
-        private static void UpdateInternationalHallOfFames(Command command, Person person)
+        private static void UpdateInternationalHallOfFames(Command command, Entity.Person person)
         {
             person.RemoveInternationalHallOfFames(command.DeletedInternationalHallOfFameIds);
 
@@ -73,37 +74,57 @@ public class SavePersonHallOfFame
 
     public class Command : DomainCommand, ICommand
     {
-        private readonly SavePersonHallOfFamesViewModel _viewModel;
+        private readonly PersonHallOfFamesEditModel _editModel;
 
-        public Command(int personId, SavePersonHallOfFamesViewModel viewModel)
+        public Command(int personId, PersonHallOfFamesEditModel editModel)
         {               
             PersonId = personId;
-            _viewModel = viewModel;
+            _editModel = editModel;
         }
 
         public int[] DeletedCollegeHallOfFameIds 
-            => _viewModel.CollegeHallOfFames.Where(hof => hof.IsDeleted).Select(hof => hof.Id).ToArray();
+            => _editModel.CollegeHallOfFames
+                         .Where(hof => hof.IsDeleted)
+                         .Select(hof => hof.Id)
+                         .ToArray();
 
         public int[] DeletedFranchiseHallOfFameIds 
-            => _viewModel.FranchiseHallOfFames.Where(hof => hof.IsDeleted).Select(hof => hof.Id).ToArray();
+            => _editModel.FranchiseHallOfFames
+                         .Where(hof => hof.IsDeleted)
+                         .Select(hof => hof.Id)
+                         .ToArray();
 
         public int[] DeletedHallOfFameIds 
-            => _viewModel.HallOfFames.Where(hof => hof.IsDeleted).Select(hof => hof.Id).ToArray();
+            => _editModel.HallOfFames
+                         .Where(hof => hof.IsDeleted)
+                         .Select(hof => hof.Id)
+                         .ToArray();
 
         public int[] DeletedInternationalHallOfFameIds 
-            => _viewModel.InternationalHallOfFames.Where(hof => hof.IsDeleted).Select(hof => hof.Id).ToArray();
+            => _editModel.InternationalHallOfFames
+                         .Where(hof => hof.IsDeleted)
+                         .Select(hof => hof.Id)
+                         .ToArray();
 
-        public SavePersonCollegeHallOfFameViewModel[] CollegeHallOfFames 
-            => _viewModel.CollegeHallOfFames.Where(hof => !hof.IsDeleted).ToArray();
+        public PersonCollegeHallOfFameEditModel[] CollegeHallOfFames 
+            => _editModel.CollegeHallOfFames
+                         .Where(hof => !hof.IsDeleted)
+                         .ToArray();
 
-        public SavePersonFranchiseHallOfFameViewModel[] FranchiseHallOfFames 
-            => _viewModel.FranchiseHallOfFames.Where(hof => !hof.IsDeleted).ToArray();
+        public PersonFranchiseHallOfFameEditModel[] FranchiseHallOfFames 
+            => _editModel.FranchiseHallOfFames
+                         .Where(hof => !hof.IsDeleted)
+                         .ToArray();
 
-        public SavePersonHallOfFameViewModel[] HallOfFames 
-            => _viewModel.HallOfFames.Where(hof => !hof.IsDeleted).ToArray();
+        public PersonHallOfFameEditModel[] HallOfFames 
+            => _editModel.HallOfFames
+                         .Where(hof => !hof.IsDeleted)
+                         .ToArray();
 
-        public SavePersonInternationalHallOfFameViewModel[] InternationalHallOfFames 
-            => _viewModel.InternationalHallOfFames.Where(hof => !hof.IsDeleted).ToArray();
+        public PersonInternationalHallOfFameEditModel[] InternationalHallOfFames 
+            => _editModel.InternationalHallOfFames
+                         .Where(hof => !hof.IsDeleted)
+                         .ToArray();
 
         public int PersonId { get; }
     }

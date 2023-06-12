@@ -1,4 +1,4 @@
-﻿@inherits ViewItem<ItemTypeLevelsViewModel, ItemTypeLevelViewModel>
+﻿@inherits ViewItem<ItemTypeLevelsModel, ItemTypeLevelModel>
 
 <PageView AddRoute="@ViewModel.AddRoute" 
           AddTitle="@ViewModel.AddTitle"
@@ -11,7 +11,7 @@
             <Content>
                 <MudTable Bordered="false"
                           Dense="false" 
-                          Filter="new Func<ItemTypeLevelViewModel,bool>(FilterFunc1)"
+                          Filter="new Func<ItemTypeLevelModel,bool>(FilterFunc1)"
                           Hover="true"
                           Items="@ViewModel.ItemTypeLevels"    
                           Striped="true">

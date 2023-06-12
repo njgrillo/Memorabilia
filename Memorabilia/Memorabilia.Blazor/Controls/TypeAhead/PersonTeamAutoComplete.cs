@@ -1,6 +1,7 @@
 ﻿namespace Memorabilia.Blazor.Controls.TypeAhead;
 
-public class PersonTeamAutoComplete : NamedEntityAutoComplete<SavePersonTeamViewModel>, INotifyPropertyChanged
+public class PersonTeamAutoComplete 
+    : NamedEntityAutoComplete<PersonTeamEditModel>, INotifyPropertyChanged
 {
     [Parameter]
     public int? BeginYear { get; set; }
@@ -34,9 +35,10 @@ public class PersonTeamAutoComplete : NamedEntityAutoComplete<SavePersonTeamView
 
     private async Task LoadItems()
     {
-        var items = await QueryRouter.Send(new GetTeams());
+        var model = new TeamsModel(await QueryRouter.Send(new GetTeams()));
 
-        Items = items.Teams.Select(team => new SavePersonTeamViewModel(PersonId, team));
+        Items = model.Teams
+                     .Select(team => new PersonTeamEditModel(PersonId, team));
 
         if (SportIds.Any())
         {

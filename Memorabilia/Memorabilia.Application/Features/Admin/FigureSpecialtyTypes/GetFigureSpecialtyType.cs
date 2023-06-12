@@ -1,21 +1,17 @@
-﻿using Memorabilia.Domain.Entities;
+﻿namespace Memorabilia.Application.Features.Admin.FigureSpecialtyTypes;
 
-namespace Memorabilia.Application.Features.Admin.FigureSpecialtyTypes;
-
-public record GetFigureSpecialtyType(int Id) : IQuery<DomainModel>
+public record GetFigureSpecialtyType(int Id) : IQuery<Entity.FigureSpecialtyType>
 {
-    public class Handler : QueryHandler<GetFigureSpecialtyType, DomainModel>
+    public class Handler : QueryHandler<GetFigureSpecialtyType, Entity.FigureSpecialtyType>
     {
-        private readonly IDomainRepository<FigureSpecialtyType> _figureSpecialtyTypeRepository;
+        private readonly IDomainRepository<Entity.FigureSpecialtyType> _figureSpecialtyTypeRepository;
 
-        public Handler(IDomainRepository<FigureSpecialtyType> figureSpecialtyTypeRepository)
+        public Handler(IDomainRepository<Entity.FigureSpecialtyType> figureSpecialtyTypeRepository)
         {
             _figureSpecialtyTypeRepository = figureSpecialtyTypeRepository;
         }
 
-        protected override async Task<DomainModel> Handle(GetFigureSpecialtyType query)
-        {
-            return new DomainModel(await _figureSpecialtyTypeRepository.Get(query.Id));
-        }
+        protected override async Task<Entity.FigureSpecialtyType> Handle(GetFigureSpecialtyType query)
+            => await _figureSpecialtyTypeRepository.Get(query.Id);
     }
 }

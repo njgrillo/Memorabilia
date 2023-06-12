@@ -7,12 +7,12 @@ public partial class BammerEditor : MemorabiliaItem<BammerEditModel>
 
     protected async Task OnLoad()
     {
-        var viewModel = await QueryRouter.Send(new GetBammer(MemorabiliaId));
+        var viewModel = await QueryRouter.Send(new GetMemorabiliaItem(MemorabiliaId));
 
         if (viewModel.Brand == null)
             return;
 
-        ViewModel = new BammerEditModel(viewModel);
+        ViewModel = new BammerEditModel(new BammerModel(viewModel));
     }
 
     protected async Task OnSave()

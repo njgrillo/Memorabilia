@@ -1,7 +1,7 @@
 ﻿namespace Memorabilia.Blazor.Pages.Admin.People;
 
 public partial class TeamPersonEditor 
-    : EditPersonItem<SavePersonTeamsViewModel, PersonTeamViewModel>
+    : EditPersonItem<PersonTeamsEditModel, PersonTeamModel>
 {
     [Inject]
     public TeamValidator Validator { get; set; }
@@ -27,7 +27,9 @@ public partial class TeamPersonEditor
 
     protected async Task OnLoad()
     {
-        ViewModel = new SavePersonTeamsViewModel(await QueryRouter.Send(new GetPersonTeams(PersonId)));
+        Entity.Person person = await QueryRouter.Send(new GetPerson(PersonId));
+
+        ViewModel = new PersonTeamsEditModel(new PersonTeamsModel(person));
 
         PerformValidation = true;
     }    

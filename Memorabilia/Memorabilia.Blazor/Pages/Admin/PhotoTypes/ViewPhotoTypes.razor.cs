@@ -1,6 +1,7 @@
 ﻿namespace Memorabilia.Blazor.Pages.Admin.PhotoTypes;
 
-public partial class ViewPhotoTypes : ViewDomainItem<PhotoTypesViewModel>, IDeleteDomainItem, IViewDomainItem
+public partial class ViewPhotoTypes 
+    : ViewDomainItem<PhotoTypesModel>, IDeleteDomainItem, IViewDomainItem
 {
     public async Task OnDelete(DomainEditModel viewModel)
     {
@@ -9,6 +10,6 @@ public partial class ViewPhotoTypes : ViewDomainItem<PhotoTypesViewModel>, IDele
 
     public async Task OnLoad()
     {
-        await OnLoad(new GetPhotoTypes());
+        ViewModel = new PhotoTypesModel(await QueryRouter.Send(new GetPhotoTypes()));
     }
 }

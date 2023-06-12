@@ -3,7 +3,7 @@
 public partial class PersonAccomplishmentEditor
 {
     [Parameter]
-    public List<SavePersonAccomplishmentViewModel> Accomplishments { get; set; } = new();
+    public List<PersonAccomplishmentEditModel> Accomplishments { get; set; } = new();
 
     [Parameter]
     public Sport[] Sports { get; set; }
@@ -14,14 +14,14 @@ public partial class PersonAccomplishmentEditor
     protected bool IsYearAccomplishment 
         => _viewModel.AccomplishmentType?.IsYearAccomplishment() ?? false;
 
-    protected List<SavePersonAccomplishmentViewModel> Items
+    protected List<PersonAccomplishmentEditModel> Items
         => Accomplishments.OrderBy(accomplishment => accomplishment.Year.HasValue)
                           .ThenBy(accomplishment => accomplishment.Year)
                           .ThenBy(accomplishment => accomplishment.Name)
                           .Where(accomplishment => !accomplishment.IsDeleted)
                           .ToList();
 
-    private SavePersonAccomplishmentViewModel _viewModel = new();
+    private PersonAccomplishmentEditModel _viewModel = new();
     private string _years;
 
     private void Add()
@@ -33,7 +33,7 @@ public partial class PersonAccomplishmentEditor
 
         if (!years.Any())
         {
-            var accomplishment = new SavePersonAccomplishmentViewModel()
+            var accomplishment = new PersonAccomplishmentEditModel()
             {
                 AccomplishmentType = _viewModel.AccomplishmentType
             };
@@ -47,7 +47,7 @@ public partial class PersonAccomplishmentEditor
         {
             foreach (var year in years)
             {
-                Accomplishments.Add(new SavePersonAccomplishmentViewModel() { AccomplishmentType = _viewModel.AccomplishmentType, Year = year });
+                Accomplishments.Add(new PersonAccomplishmentEditModel() { AccomplishmentType = _viewModel.AccomplishmentType, Year = year });
             }
         }        
 

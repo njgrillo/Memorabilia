@@ -1,8 +1,6 @@
-﻿using Memorabilia.Domain.Entities;
+﻿namespace Memorabilia.Application.Features.Admin.ItemTypeSpots;
 
-namespace Memorabilia.Application.Features.Admin.ItemTypeSpots;
-
-public record SaveItemTypeSpot(SaveItemTypeSpotViewModel ViewModel) : ICommand
+public record SaveItemTypeSpot(ItemTypeSpotEditModel ItemTypeSpot) : ICommand
 {
     public class Handler : CommandHandler<SaveItemTypeSpot>
     {
@@ -15,27 +13,28 @@ public record SaveItemTypeSpot(SaveItemTypeSpotViewModel ViewModel) : ICommand
 
         protected override async Task Handle(SaveItemTypeSpot request)
         {
-            ItemTypeSpot itemTypeSpot;
+            Entity.ItemTypeSpot itemTypeSpot;
 
-            if (request.ViewModel.IsNew)
+            if (request.ItemTypeSpot.IsNew)
             {
-                itemTypeSpot = new ItemTypeSpot(request.ViewModel.ItemType.Id, request.ViewModel.Spot.Id);
+                itemTypeSpot = new Entity.ItemTypeSpot(request.ItemTypeSpot.ItemType.Id, 
+                                                       request.ItemTypeSpot.Spot.Id);
 
                 await _itemTypeSpotRepository.Add(itemTypeSpot);
 
                 return;
             }
 
-            itemTypeSpot = await _itemTypeSpotRepository.Get(request.ViewModel.Id);
+            itemTypeSpot = await _itemTypeSpotRepository.Get(request.ItemTypeSpot.Id);
 
-            if (request.ViewModel.IsDeleted)
+            if (request.ItemTypeSpot.IsDeleted)
             {
                 await _itemTypeSpotRepository.Delete(itemTypeSpot);
 
                 return;
             }
 
-            itemTypeSpot.Set(request.ViewModel.Spot.Id);
+            itemTypeSpot.Set(request.ItemTypeSpot.Spot.Id);
 
             await _itemTypeSpotRepository.Update(itemTypeSpot);
         }

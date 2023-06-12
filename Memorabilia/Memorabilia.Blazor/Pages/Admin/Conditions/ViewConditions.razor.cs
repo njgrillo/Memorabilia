@@ -1,6 +1,7 @@
 ﻿namespace Memorabilia.Blazor.Pages.Admin.Conditions;
 
-public partial class ViewConditions : ViewDomainItem<ConditionsViewModel>, IDeleteDomainItem, IViewDomainItem
+public partial class ViewConditions 
+    : ViewDomainItem<ConditionsModel>, IDeleteDomainItem, IViewDomainItem
 {
     public async Task OnDelete(DomainEditModel viewModel)
     {
@@ -9,6 +10,6 @@ public partial class ViewConditions : ViewDomainItem<ConditionsViewModel>, IDele
 
     public async Task OnLoad()
     {
-        ViewModel = await QueryRouter.Send(new GetConditions());
+        ViewModel = new ConditionsModel(await QueryRouter.Send(new GetConditions()));
     }
 }

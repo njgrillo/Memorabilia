@@ -1,41 +1,41 @@
-﻿using Memorabilia.Domain.Entities;
+﻿namespace Memorabilia.Application.Features.Admin.MagazineTypes;
 
-namespace Memorabilia.Application.Features.Admin.MagazineTypes;
-
-public record SaveMagazineType(DomainEditModel ViewModel) : ICommand
+public record SaveMagazineType(DomainEditModel MagazineType) : ICommand
 {
     public class Handler : CommandHandler<SaveMagazineType>
     {
-        private readonly IDomainRepository<MagazineType> _magazineTypeRepository;
+        private readonly IDomainRepository<Entity.MagazineType> _magazineTypeRepository;
 
-        public Handler(IDomainRepository<MagazineType> magazineTypeRepository)
+        public Handler(IDomainRepository<Entity.MagazineType> magazineTypeRepository)
         {
             _magazineTypeRepository = magazineTypeRepository;
         }
 
         protected override async Task Handle(SaveMagazineType request)
         {
-            MagazineType magazineType;
+            Entity.MagazineType magazineType;
 
-            if (request.ViewModel.IsNew)
+            if (request.MagazineType.IsNew)
             {
-                magazineType = new MagazineType(request.ViewModel.Name, request.ViewModel.Abbreviation);
+                magazineType = new Entity.MagazineType(request.MagazineType.Name, 
+                                                       request.MagazineType.Abbreviation);
 
                 await _magazineTypeRepository.Add(magazineType);
 
                 return;
             }
 
-            magazineType = await _magazineTypeRepository.Get(request.ViewModel.Id);
+            magazineType = await _magazineTypeRepository.Get(request.MagazineType.Id);
 
-            if (request.ViewModel.IsDeleted)
+            if (request.MagazineType.IsDeleted)
             {
                 await _magazineTypeRepository.Delete(magazineType);
 
                 return;
             }
 
-            magazineType.Set(request.ViewModel.Name, request.ViewModel.Abbreviation);
+            magazineType.Set(request.MagazineType.Name, 
+                             request.MagazineType.Abbreviation);
 
             await _magazineTypeRepository.Update(magazineType);
         }

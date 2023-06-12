@@ -1,6 +1,7 @@
 ﻿namespace Memorabilia.Blazor.Pages.Admin.HelmetQualityTypes;
 
-public partial class ViewHelmetQualityTypes : ViewDomainItem<HelmetQualityTypesViewModel>, IDeleteDomainItem, IViewDomainItem
+public partial class ViewHelmetQualityTypes 
+    : ViewDomainItem<HelmetQualityTypesModel>, IDeleteDomainItem, IViewDomainItem
 {
     public async Task OnDelete(DomainEditModel viewModel)
     {
@@ -9,6 +10,6 @@ public partial class ViewHelmetQualityTypes : ViewDomainItem<HelmetQualityTypesV
 
     public async Task OnLoad()
     {
-        ViewModel = await QueryRouter.Send(new GetHelmetQualityTypes());
+        ViewModel = new HelmetQualityTypesModel(await QueryRouter.Send(new GetHelmetQualityTypes()));
     }
 }

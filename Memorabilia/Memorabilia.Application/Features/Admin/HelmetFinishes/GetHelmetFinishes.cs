@@ -1,21 +1,18 @@
-﻿using Memorabilia.Domain.Entities;
+﻿namespace Memorabilia.Application.Features.Admin.HelmetFinishes;
 
-namespace Memorabilia.Application.Features.Admin.HelmetFinishes;
-
-public record GetHelmetFinishes() : IQuery<HelmetFinishesViewModel>
+public record GetHelmetFinishes() : IQuery<Entity.HelmetFinish[]>
 {
-    public class Handler : QueryHandler<GetHelmetFinishes, HelmetFinishesViewModel>
+    public class Handler : QueryHandler<GetHelmetFinishes, Entity.HelmetFinish[]>
     {
-        private readonly IDomainRepository<HelmetFinish> _helmetFinishRepository;
+        private readonly IDomainRepository<Entity.HelmetFinish> _helmetFinishRepository;
 
-        public Handler(IDomainRepository<HelmetFinish> helmetFinishRepository)
+        public Handler(IDomainRepository<Entity.HelmetFinish> helmetFinishRepository)
         {
             _helmetFinishRepository = helmetFinishRepository;
         }
 
-        protected override async Task<HelmetFinishesViewModel> Handle(GetHelmetFinishes query)
-        {
-            return new HelmetFinishesViewModel(await _helmetFinishRepository.GetAll());
-        }
+        protected override async Task<Entity.HelmetFinish[]> Handle(GetHelmetFinishes query)
+            => (await _helmetFinishRepository.GetAll())
+                    .ToArray();
     }
 }

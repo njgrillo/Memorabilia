@@ -13,7 +13,7 @@ public class SaveFirstDayCover
 
         protected override async Task Handle(Command command)
         {
-            var memorabilia = await _memorabiliaRepository.Get(command.MemorabiliaId);
+            Entity.Memorabilia memorabilia = await _memorabiliaRepository.Get(command.MemorabiliaId);
 
             memorabilia.SetFirstDayCover(command.PersonIds,
                                          command.SizeId,
@@ -27,23 +27,29 @@ public class SaveFirstDayCover
 
     public class Command : DomainCommand, ICommand
     {
-        private readonly SaveFirstDayCoverViewModel _viewModel;
+        private readonly FirstDayCoverEditModel _editModel;
 
-        public Command(SaveFirstDayCoverViewModel viewModel)
+        public Command(FirstDayCoverEditModel editModel)
         {
-            _viewModel = viewModel;
+            _editModel = editModel;
         }
 
-        public DateTime? Date => _viewModel.Date;
+        public DateTime? Date 
+            => _editModel.Date;
 
-        public int MemorabiliaId => _viewModel.MemorabiliaId;
+        public int MemorabiliaId 
+            => _editModel.MemorabiliaId;
 
-        public int[] PersonIds => _viewModel.People.Where(person => !person.IsDeleted).Select(person => person.Id).ToArray();
+        public int[] PersonIds 
+            => _editModel.People.ActiveIds();
 
-        public int SizeId => _viewModel.SizeId;
+        public int SizeId 
+            => _editModel.SizeId;
 
-        public int[] SportIds => _viewModel.SportIds.ToArray();
+        public int[] SportIds 
+            => _editModel.SportIds.ToArray();
 
-        public int[] TeamIds => _viewModel.Teams.Where(team => !team.IsDeleted).Select(team => team.Id).ToArray();
+        public int[] TeamIds 
+            => _editModel.Teams.ActiveIds();
     }
 }

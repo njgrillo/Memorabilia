@@ -1,4 +1,6 @@
-﻿namespace Memorabilia.Blazor.Pages.Admin;
+﻿using Framework.Library.Domain.Entity;
+
+namespace Memorabilia.Blazor.Pages.Admin;
 
 public abstract class EditDomainItem<T> 
     : CommandQuery where T : DomainItemConstant
@@ -6,11 +8,14 @@ public abstract class EditDomainItem<T>
     [Parameter]
     public int Id { get; set; }
 
-    protected virtual string DomainTypeName { get; } = type.Name.ToSentence();
+    protected virtual string DomainTypeName { get; } 
+        = type.Name.ToSentence();
 
-    protected virtual string ImageFileName { get; } = $"{type.Name.ToPlural()}.jpg";
+    protected virtual string ImageFileName { get; } 
+        = $"{type.Name.ToPlural()}.jpg";
 
-    protected virtual string NavigationPath { get; } = $"{type.Name.ToPlural()}";
+    protected virtual string NavigationPath { get; } 
+        = $"{type.Name.ToPlural()}";
 
     protected DomainEditModel ViewModel { get; set; } 
 
@@ -19,6 +24,14 @@ public abstract class EditDomainItem<T>
     protected override void OnInitialized()
     {
        ViewModel = new DomainEditModel(Id, DomainTypeName, ImageFileName, NavigationPath);
+    }
+
+    protected async Task OnLoad(IRequest<Entity.DomainEntity> request)
+    {
+        ViewModel = new DomainEditModel(new DomainModel(await QueryRouter.Send(request)),
+                                        DomainTypeName,
+                                        ImageFileName,
+                                        NavigationPath);
     }
 
     protected async Task OnLoad(IRequest<DomainModel> request)

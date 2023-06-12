@@ -1,18 +1,18 @@
 ﻿namespace Memorabilia.Blazor.Pages.MemorabiliaItems.FirstDayCovers;
 
-public partial class FirstDayCoverEditor : MemorabiliaItem<SaveFirstDayCoverViewModel>
+public partial class FirstDayCoverEditor : MemorabiliaItem<FirstDayCoverEditModel>
 {
     [Inject]
     public FirstDayCoverValidator Validator { get; set; }
 
     protected async Task OnLoad()
     {
-        var viewModel = await QueryRouter.Send(new GetFirstDayCover(MemorabiliaId));
+        var viewModel = await QueryRouter.Send(new GetMemorabiliaItem(MemorabiliaId));
 
         if (viewModel.Size == null)
             return;
 
-        ViewModel = new SaveFirstDayCoverViewModel(viewModel);
+        ViewModel = new FirstDayCoverEditModel(new FirstDayCoverModel(viewModel));
     }
 
     protected async Task OnSave()

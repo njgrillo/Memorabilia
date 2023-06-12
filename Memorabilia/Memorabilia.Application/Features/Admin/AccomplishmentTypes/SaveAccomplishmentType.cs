@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Application.Features.Admin.AccomplishmentTypes;
 
-public record SaveAccomplishmentType(DomainEditModel ViewModel) : ICommand
+public record SaveAccomplishmentType(DomainEditModel AccomplishmentType) : ICommand
 {
     public class Handler : CommandHandler<SaveAccomplishmentType>
     {
@@ -15,25 +15,27 @@ public record SaveAccomplishmentType(DomainEditModel ViewModel) : ICommand
         {
             Entity.AccomplishmentType accomplishmentType;
 
-            if (request.ViewModel.IsNew)
+            if (request.AccomplishmentType.IsNew)
             {
-                accomplishmentType = new Entity.AccomplishmentType(request.ViewModel.Name, request.ViewModel.Abbreviation);
+                accomplishmentType = new Entity.AccomplishmentType(request.AccomplishmentType.Name, 
+                                                                   request.AccomplishmentType.Abbreviation);
 
                 await _accomplishmentTypeRepository.Add(accomplishmentType);
 
                 return;
             }
 
-            accomplishmentType = await _accomplishmentTypeRepository.Get(request.ViewModel.Id);
+            accomplishmentType = await _accomplishmentTypeRepository.Get(request.AccomplishmentType.Id);
 
-            if (request.ViewModel.IsDeleted)
+            if (request.AccomplishmentType.IsDeleted)
             {
                 await _accomplishmentTypeRepository.Delete(accomplishmentType);
 
                 return;
             }
 
-            accomplishmentType.Set(request.ViewModel.Name, request.ViewModel.Abbreviation);
+            accomplishmentType.Set(request.AccomplishmentType.Name, 
+                                   request.AccomplishmentType.Abbreviation);
 
             await _accomplishmentTypeRepository.Update(accomplishmentType);
         }

@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Application.Validators.Project;
 
-public class ProjectWorldSeriesValidator : AbstractValidator<Domain.Entities.ProjectWorldSeries>
+public class ProjectWorldSeriesValidator : AbstractValidator<Entity.ProjectWorldSeries>
 {
     public ProjectWorldSeriesValidator(int projectTypeId)
     {

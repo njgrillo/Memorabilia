@@ -20,10 +20,9 @@ public class AwardProfileModel
     public string AwardTypeName 
         => AwardType?.Name ?? string.Empty;
 
-    public int Year => _award.Year;
+    public int Year 
+        => _award.Year;
 
     public override string ToString()
-    {
-        return AwardType.Abbreviation ?? AwardTypeName;
-    }
+        => AwardType.Abbreviation ?? AwardTypeName;
 }

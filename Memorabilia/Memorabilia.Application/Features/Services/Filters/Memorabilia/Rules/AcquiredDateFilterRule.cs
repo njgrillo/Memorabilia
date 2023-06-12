@@ -18,9 +18,7 @@ public class AcquiredDateFilterRule : IFilterRule<Entity.Memorabilia>
     }
 
     public Expression<Func<Entity.Memorabilia, bool>> GetExpression()
-    {
-        return _filterItem == FilterItemEnum.AutographAcquiredDate
+        => _filterItem == FilterItemEnum.AutographAcquiredDate
             ? item => item.Autographs.Any(autograph => autograph.Acquisition.AcquiredDate == _acquiredDate)
             : item => item.Acquisition.AcquiredDate == _acquiredDate;
-    }
 }

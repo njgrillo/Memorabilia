@@ -13,7 +13,7 @@ public class SaveBobblehead
 
         protected override async Task Handle(Command command)
         {
-            var memorabilia = await _memorabiliaRepository.Get(command.MemorabiliaId);
+            Entity.Memorabilia memorabilia = await _memorabiliaRepository.Get(command.MemorabiliaId);
 
             memorabilia.SetBobblehead(command.BrandId,
                                       command.HasBox,
@@ -30,29 +30,38 @@ public class SaveBobblehead
 
     public class Command : DomainCommand, ICommand
     {
-        private readonly SaveBobbleheadViewModel _viewModel;
+        private readonly BobbleheadEditModel _editModel;
 
-        public Command(SaveBobbleheadViewModel viewModel)
+        public Command(BobbleheadEditModel editModel)
         {
-            _viewModel = viewModel;
+            _editModel = editModel;
         }
 
-        public int BrandId => _viewModel.BrandId;
+        public int BrandId 
+            => _editModel.BrandId;
 
-        public bool HasBox => _viewModel.HasBox;
+        public bool HasBox 
+            => _editModel.HasBox;
 
-        public int LevelTypeId => _viewModel.LevelTypeId;
+        public int LevelTypeId 
+            => _editModel.LevelTypeId;
 
-        public int MemorabiliaId => _viewModel.MemorabiliaId;
+        public int MemorabiliaId 
+            => _editModel.MemorabiliaId;
 
-        public int? PersonId => _viewModel.Person?.Id > 0 ? _viewModel.Person?.Id : null;
+        public int? PersonId
+            => _editModel.Person?.Id.ToNullableInt() ?? null;
 
-        public int SizeId => _viewModel.SizeId;
+        public int SizeId 
+            => _editModel.SizeId;
 
-        public int? SportId => _viewModel.SportId > 0 ? _viewModel.SportId : null;
+        public int? SportId 
+            => _editModel.SportId.ToNullableInt();
 
-        public int? TeamId => _viewModel.Team?.Id > 0 ? _viewModel.Team?.Id : null;
+        public int? TeamId 
+            => _editModel.Team?.Id.ToNullableInt() ?? null;
 
-        public int? Year => _viewModel.Year;
+        public int? Year 
+            => _editModel.Year;
     }
 }

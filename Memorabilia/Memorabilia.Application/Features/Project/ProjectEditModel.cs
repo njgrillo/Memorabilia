@@ -4,20 +4,23 @@ public class ProjectEditModel : EditModel
 {
     public ProjectEditModel() { }
 
-    public ProjectEditModel(ProjectModel viewModel)
+    public ProjectEditModel(ProjectModel model)
     {
-        EndDate = viewModel.EndDate;
-        Id = viewModel.Id;
-        Name = viewModel.Name;
-        People = viewModel.People
-                          .Select(person => new ProjectPersonEditModel(person))
-                          .ToList();
-        MemorabiliaTeams = viewModel.MemorabiliaTeams
-                                    .Select(item => new ProjectMemorabiliaTeamEditModel(item))
-                                    .ToList();
-        StartDate = viewModel.StartDate;
-        UserId = viewModel.UserId;
-        ProjectType = Constant.ProjectType.Find(viewModel.ProjectTypeId);
+        EndDate = model.EndDate;
+        Id = model.Id;
+        Name = model.Name;
+
+        People = model.People
+                      .Select(person => new ProjectPersonEditModel(person))
+                      .ToList();
+
+        MemorabiliaTeams = model.MemorabiliaTeams
+                                .Select(item => new ProjectMemorabiliaTeamEditModel(item))
+                                .ToList();
+
+        StartDate = model.StartDate;
+        UserId = model.UserId;
+        ProjectType = Constant.ProjectType.Find(model.ProjectTypeId);
 
         if (MemorabiliaTeams.Any() && MemorabiliaTeams.Select(item => item.ItemTypeId).Distinct().Count() == 1)
             ItemTypeId = MemorabiliaTeams.First().ItemTypeId;
@@ -25,12 +28,14 @@ public class ProjectEditModel : EditModel
         if (People.Any() && People.Select(person => person.ItemTypeId).Distinct().Count() == 1)
             ItemTypeId = People.First().ItemTypeId;
 
-        SetProjectDetailsParameters(viewModel);
+        SetProjectDetailsParameters(model);
     }
 
-    public Entity.ProjectBaseball Baseball { get; set; } = new();
+    public Entity.ProjectBaseball Baseball { get; set; } 
+        = new();
 
-    public Entity.ProjectCard Card { get; set; } = new();
+    public Entity.ProjectCard Card { get; set; } 
+        = new();
 
     public double CompletedMemorabiliaTeamCount
         => MemorabiliaTeams.Count(item => item.ProjectStatusTypeId == Constant.ProjectStatusType.Completed.Id);
@@ -40,32 +45,42 @@ public class ProjectEditModel : EditModel
 
     public DateTime? EndDate { get; set; }
 
-    public override string ExitNavigationPath => "Projects";
+    public override string ExitNavigationPath 
+        => "Projects";
 
-    public Entity.ProjectHallOfFame HallOfFame { get; set; } = new();
+    public Entity.ProjectHallOfFame HallOfFame { get; set; } 
+        = new();
 
-    public bool HasDefaultItemType => ItemTypeId > 0;
+    public bool HasDefaultItemType 
+        => ItemTypeId > 0;
 
-    public Entity.ProjectHelmet Helmet { get; set; } = new();
+    public Entity.ProjectHelmet Helmet { get; set; } 
+        = new();
 
     public string ImageFileName 
         => Constant.ImageFileName.ProjectTypes;
 
-    public Entity.ProjectItem Item { get; set; } = new();
+    public Entity.ProjectItem Item { get; set; } 
+        = new();
 
-    public override string ItemTitle => "Project";
+    public override string ItemTitle 
+        => "Project";
 
     public int ItemTypeId { get; set; }
 
-    public List<ProjectMemorabiliaTeamEditModel> MemorabiliaTeams { get; set; } = new();
+    public List<ProjectMemorabiliaTeamEditModel> MemorabiliaTeams { get; set; } 
+        = new();
 
-    public override string PageTitle => "Project";
+    public override string PageTitle 
+        => "Project";
 
-    public List<ProjectPersonEditModel> People { get; set; } = new();
+    public List<ProjectPersonEditModel> People { get; set; } 
+        = new();
 
     public Constant.ProjectType ProjectType { get; set; }
 
-    public override string RoutePrefix => "Projects";
+    public override string RoutePrefix 
+        => "Projects";
 
     public DateTime? StartDate { get; set; }
 
@@ -90,53 +105,55 @@ public class ProjectEditModel : EditModel
         }
     }
 
-    public Entity.ProjectTeam Team { get; set; } = new();
+    public Entity.ProjectTeam Team { get; set; } 
+        = new();
 
     [Required]
     [Range(1, int.MaxValue, ErrorMessage = "User Id is required.")]
     public int UserId { get; set; }
 
-    public Entity.ProjectWorldSeries WorldSeries { get; set; } = new();
+    public Entity.ProjectWorldSeries WorldSeries { get; set; } 
+        = new();
 
-    protected void SetProjectDetailsParameters(ProjectModel viewModel)
+    protected void SetProjectDetailsParameters(ProjectModel model)
     {
         switch (ProjectType.ToString())
         {
             case "BaseballType":
-                Baseball.BaseballTypeId = viewModel.Baseball.BaseballTypeId;
-                Baseball.TeamId = viewModel.Baseball.TeamId;
-                Baseball.Year = viewModel.Baseball.Year;
+                Baseball.BaseballTypeId = model.Baseball.BaseballTypeId;
+                Baseball.TeamId = model.Baseball.TeamId;
+                Baseball.Year = model.Baseball.Year;
                 break;
             case "Card":
-                Card.BrandId = viewModel.Card.BrandId;
-                Card.TeamId = viewModel.Card.TeamId;
-                Card.Year = viewModel.Card.Year;
+                Card.BrandId = model.Card.BrandId;
+                Card.TeamId = model.Card.TeamId;
+                Card.Year = model.Card.Year;
                 break;
             case "HallofFame":
-                HallOfFame.SportLeagueLevelId = viewModel.HallOfFame.SportLeagueLevelId;
-                HallOfFame.ItemTypeId = viewModel.HallOfFame.ItemTypeId;
-                HallOfFame.Year = viewModel.HallOfFame.Year;
+                HallOfFame.SportLeagueLevelId = model.HallOfFame.SportLeagueLevelId;
+                HallOfFame.ItemTypeId = model.HallOfFame.ItemTypeId;
+                HallOfFame.Year = model.HallOfFame.Year;
                 break;
             case "HelmetType":
-                Helmet.HelmetTypeId = viewModel.Helmet.HelmetTypeId;
-                Helmet.HelmetFinishId = viewModel.Helmet.HelmetFinishId;
-                Helmet.SizeId = viewModel.Helmet.SizeId; 
+                Helmet.HelmetTypeId = model.Helmet.HelmetTypeId;
+                Helmet.HelmetFinishId = model.Helmet.HelmetFinishId;
+                Helmet.SizeId = model.Helmet.SizeId; 
                 break;
             case "ItemType":
-                Item.ItemTypeId = viewModel.Item.ItemTypeId;
-                Item.MultiSignedItem = viewModel.Item.MultiSignedItem;
+                Item.ItemTypeId = model.Item.ItemTypeId;
+                Item.MultiSignedItem = model.Item.MultiSignedItem;
                 break;
             case "Team":
-                Team.TeamId = viewModel.Team.TeamId;
-                Team.Year = viewModel.Team.Year;
+                Team.TeamId = model.Team.TeamId;
+                Team.Year = model.Team.Year;
                 break;
             case "WorldSeries":
-                WorldSeries.TeamId = viewModel.WorldSeries.TeamId;
-                WorldSeries.ItemTypeId = viewModel.WorldSeries.ItemTypeId;
-                WorldSeries.Year = viewModel.WorldSeries.Year;
+                WorldSeries.TeamId = model.WorldSeries.TeamId;
+                WorldSeries.ItemTypeId = model.WorldSeries.ItemTypeId;
+                WorldSeries.Year = model.WorldSeries.Year;
                 break;
             default:
-                break;
+                throw new NotImplementedException();
         }
     }
 }

@@ -1,10 +1,11 @@
 ﻿namespace Memorabilia.Blazor.Pages.MemorabiliaItems.Bookplates;
 
-public partial class BookplateEditor : MemorabiliaItem<SaveBookplateViewModel>
+public partial class BookplateEditor 
+    : MemorabiliaItem<BookplateEditModel>
 {
     protected async Task OnLoad()
     {
-        ViewModel = new SaveBookplateViewModel(await QueryRouter.Send(new GetBookplate(MemorabiliaId)));
+        ViewModel = new BookplateEditModel(new BookplateModel(await QueryRouter.Send(new GetMemorabiliaItem(MemorabiliaId))));
     }
 
     protected async Task OnSave()

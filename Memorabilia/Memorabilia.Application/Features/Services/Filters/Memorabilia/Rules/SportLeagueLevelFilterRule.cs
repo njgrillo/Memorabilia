@@ -15,7 +15,5 @@ public class SportLeagueLevelFilterRule : IFilterRule<Entity.Memorabilia>
     }
 
     public Expression<Func<Entity.Memorabilia, bool>> GetExpression()
-    {
-        return item => item.Teams.Any(team => _sportLeagueLevelIds.Contains(team.Team.Franchise.SportLeagueLevel.Id));
-    }
+        => item => item.Teams.Any(team => _sportLeagueLevelIds.Contains(team.Team.Franchise.SportLeagueLevel.Id));
 }

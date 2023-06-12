@@ -9,11 +9,11 @@ public class TeamValidator : AbstractValidator<SavePersonTeam.Command>
             .WithMessage("End Year cannot be before Begin Year.");
     }
 
-    private static bool HasInvalidYear(SavePersonTeamViewModel[] teams)
+    private static bool HasInvalidYear(PersonTeamEditModel[] teams)
     {
         bool hasInvalidYear = false;
 
-        foreach (SavePersonTeamViewModel team in teams)
+        foreach (PersonTeamEditModel team in teams)
         {
             if (!team.BeginYear.HasValue || !team.EndYear.HasValue)
                 continue;

@@ -1,41 +1,41 @@
-﻿using Memorabilia.Domain.Entities;
+﻿namespace Memorabilia.Application.Features.Admin.Occupations;
 
-namespace Memorabilia.Application.Features.Admin.Occupations;
-
-public record SaveOccupation(DomainEditModel ViewModel) : ICommand
+public record SaveOccupation(DomainEditModel Occupation) : ICommand
 {
     public class Handler : CommandHandler<SaveOccupation>
     {
-        private readonly IDomainRepository<Occupation> _occupationRepository;
+        private readonly IDomainRepository<Entity.Occupation> _occupationRepository;
 
-        public Handler(IDomainRepository<Occupation> occupationRepository)
+        public Handler(IDomainRepository<Entity.Occupation> occupationRepository)
         {
             _occupationRepository = occupationRepository;
         }
 
         protected override async Task Handle(SaveOccupation request)
         {
-            Occupation occupation;
+            Entity.Occupation occupation;
 
-            if (request.ViewModel.IsNew)
+            if (request.Occupation.IsNew)
             {
-                occupation = new Occupation(request.ViewModel.Name, request.ViewModel.Abbreviation);
+                occupation = new Entity.Occupation(request.Occupation.Name, 
+                                                   request.Occupation.Abbreviation);
 
                 await _occupationRepository.Add(occupation);
 
                 return;
             }
 
-            occupation = await _occupationRepository.Get(request.ViewModel.Id);
+            occupation = await _occupationRepository.Get(request.Occupation.Id);
 
-            if (request.ViewModel.IsDeleted)
+            if (request.Occupation.IsDeleted)
             {
                 await _occupationRepository.Delete(occupation);
 
                 return;
             }
 
-            occupation.Set(request.ViewModel.Name, request.ViewModel.Abbreviation);
+            occupation.Set(request.Occupation.Name, 
+                           request.Occupation.Abbreviation);
 
             await _occupationRepository.Update(occupation);
         }

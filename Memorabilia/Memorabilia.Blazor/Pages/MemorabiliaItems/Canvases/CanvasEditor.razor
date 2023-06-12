@@ -1,16 +1,16 @@
-﻿@inherits MemorabiliaItem<SaveCanvasViewModel>
+﻿@inherits MemorabiliaItem<CanvasEditModel>
 
 <EditMemorabiliaPage Item="ViewModel"
                      OnLoad="OnLoad"
                      OnSave="OnSave" 
-                     TItem="SaveCanvasViewModel">
+                     TItem="CanvasEditModel">
     <Content>
         <MemorabiliaItemEditor DisplayItemTypeGameStyle="false"
                                DisplayItemTypeLevel="false"
                                DisplayMultiPersonSelector="true"
                                DisplayMultiSportSelector="true"
                                DisplayMultiTeamSelector="true"
-                               TItem="SaveCanvasViewModel"
+                               TItem="CanvasEditModel"
                                ViewModel="ViewModel">
             <AdditionalContent>
                 <DivRowCol3>

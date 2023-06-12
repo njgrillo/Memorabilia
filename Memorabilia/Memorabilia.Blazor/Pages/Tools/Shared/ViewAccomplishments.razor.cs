@@ -52,16 +52,28 @@ public partial class ViewAccomplishments
     private async Task Load(AccomplishmentType accomplishmentType)
     {
         if (accomplishmentType == null)
-            return;        
+            return;  
 
-        Model = await QueryRouter.Send(new GetAccomplishments(accomplishmentType, Sport));
+        Model = new(await QueryRouter.Send(new GetAccomplishments(accomplishmentType, Sport)), Sport)
+                {
+                    AccomplishmentType = accomplishmentType
+                };
 
         if (accomplishmentType != AccomplishmentType.NoHitter)
             return;
 
-        AccomplishmentsModel perfectGames = await QueryRouter.Send(new GetAccomplishments(AccomplishmentType.PerfectGame, Sport));
-        AccomplishmentsModel combinedNoHitters = await QueryRouter.Send(new GetAccomplishments(AccomplishmentType.CombinedNoHitter, Sport));
-        
+        AccomplishmentsModel perfectGames 
+            = new(await QueryRouter.Send(new GetAccomplishments(AccomplishmentType.PerfectGame, Sport)), Sport)
+              {
+                  AccomplishmentType = AccomplishmentType.PerfectGame
+              };
+
+        AccomplishmentsModel combinedNoHitters
+            = new(await QueryRouter.Send(new GetAccomplishments(AccomplishmentType.CombinedNoHitter, Sport)), Sport)
+            {
+                AccomplishmentType = AccomplishmentType.CombinedNoHitter
+            };
+
         var otherNoHitters = perfectGames.PersonAccomplishments
                                          .Union(combinedNoHitters.PersonAccomplishments);
 

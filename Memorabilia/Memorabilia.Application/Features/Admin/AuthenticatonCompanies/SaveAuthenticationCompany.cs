@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Application.Features.Admin.AuthenticationCompanies;
 
-public record SaveAuthenticationCompany(DomainEditModel ViewModel) : ICommand
+public record SaveAuthenticationCompany(DomainEditModel AuthenticationCompany) : ICommand
 {
     public class Handler : CommandHandler<SaveAuthenticationCompany>
     {
@@ -15,25 +15,27 @@ public record SaveAuthenticationCompany(DomainEditModel ViewModel) : ICommand
         {
             Entity.AuthenticationCompany authenticationCompany;
 
-            if (request.ViewModel.IsNew)
+            if (request.AuthenticationCompany.IsNew)
             {
-                authenticationCompany = new Entity.AuthenticationCompany(request.ViewModel.Name, request.ViewModel.Abbreviation);
+                authenticationCompany = new Entity.AuthenticationCompany(request.AuthenticationCompany.Name, 
+                                                                         request.AuthenticationCompany.Abbreviation);
 
                 await _authenticationCompanyRepository.Add(authenticationCompany);
 
                 return;
             }
 
-            authenticationCompany = await _authenticationCompanyRepository.Get(request.ViewModel.Id);
+            authenticationCompany = await _authenticationCompanyRepository.Get(request.AuthenticationCompany.Id);
 
-            if (request.ViewModel.IsDeleted)
+            if (request.AuthenticationCompany.IsDeleted)
             {
                 await _authenticationCompanyRepository.Delete(authenticationCompany);
 
                 return;
             }
 
-            authenticationCompany.Set(request.ViewModel.Name, request.ViewModel.Abbreviation);
+            authenticationCompany.Set(request.AuthenticationCompany.Name, 
+                                      request.AuthenticationCompany.Abbreviation);
 
             await _authenticationCompanyRepository.Update(authenticationCompany);
         }

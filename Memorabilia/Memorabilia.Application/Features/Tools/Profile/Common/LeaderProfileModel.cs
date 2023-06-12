@@ -15,17 +15,17 @@ public class LeaderProfileModel
     public string LeaderTypeAbbreviatedName 
         => LeaderType?.ToString() ?? string.Empty;
 
-    public int LeaderTypeId => _leader.LeaderTypeId;
+    public int LeaderTypeId 
+        => _leader.LeaderTypeId;
 
     public string LeaderTypeName 
         => LeaderType?.Name ?? string.Empty;
 
-    public int Year => _leader.Year;
+    public int Year 
+        => _leader.Year;
 
     public override string ToString()
-    {
-        return !LeaderType.Abbreviation.IsNullOrEmpty() 
-            ? LeaderType.Abbreviation
+        => !LeaderType.Abbreviation.IsNullOrEmpty() 
+            ? LeaderType.Abbreviation 
             : LeaderType.Name;
-    }
 }

@@ -1,109 +1,66 @@
 ﻿namespace Memorabilia.Application.Features.Memorabilia;
 
-public class MemorabiliaItemEditModel : EditModel
+public abstract class MemorabiliaItemEditModel : ItemEditModel
 {
-    public MemorabiliaItemEditModel() { }
+    public override string BackNavigationPath 
+        => $"Memorabilia/{Constant.EditModeType.Update.Name}/{MemorabiliaId}";
 
-    public MemorabiliaItemEditModel(MemorabiliaItemModel viewModel)
+    public int BrandId { get; set; }
+
+    public virtual bool DisplayGameDate 
+        => (GameStyleType?.IsGameWorthly() ?? false);
+
+    public virtual bool DisplayGameStyleType { get; } 
+        = true;
+
+    public override Constant.EditModeType EditModeType 
+        => MemorabiliaId > 0 
+        ? Constant.EditModeType.Update 
+        : Constant.EditModeType.Add;
+
+    public override string ExitNavigationPath 
+        => "Memorabilia/View";
+
+    public DateTime? GameDate { get; set; }
+
+    public Constant.GameStyleType GameStyleType 
+        => Constant.GameStyleType.Find(GameStyleTypeId);
+
+    private int _gameStyleTypeId 
+        = Constant.GameStyleType.None.Id;
+    public int GameStyleTypeId
     {
-        AcquiredDate = viewModel.Acquisition.AcquiredDate;
-        AcquiredWithAutograph = viewModel.Acquisition.AcquiredWithAutograph ?? false;
-        AcquisitionTypeId = viewModel.Acquisition.AcquisitionTypeId;
-        Collections = viewModel.Collections;
-        ConditionId = viewModel.ConditionId ?? 0;
-        Cost = viewModel.Acquisition.Cost;
-        CreateDate = viewModel.CreateDate;
-        Denominator = viewModel.Denominator;
-        EstimatedValue = viewModel.EstimatedValue;
-        ForTrade = viewModel.ForTrade;
-        Framed = viewModel.Framed;
-        Id = viewModel.Id;
-        ItemType = Constant.ItemType.Find(viewModel.ItemTypeId);
-        LastModifiedDate = viewModel.LastModifiedDate;
-        Note = viewModel.Note;
-        Numerator = viewModel.Numerator;
-        PrivacyTypeId = viewModel.PrivacyTypeId;            
-        PurchaseTypeId = viewModel.PurchaseTypeId ?? 0;            
-        UserId = viewModel.UserId;
-    }
-
-    public DateTime? AcquiredDate { get; set; }
-
-    public bool AcquiredWithAutograph { get; set; }
-
-    public Constant.AcquisitionType AcquisitionType
-        => Constant.AcquisitionType.Find(AcquisitionTypeId);
-
-    public int AcquisitionTypeId { get; set; } 
-        = Constant.AcquisitionType.Purchase.Id;
-
-    public bool CanEditItemType => Id == 0;
-
-    public bool CanHaveCost 
-        => AcquisitionType?.CanHaveCost() ?? false;
-
-    public List<Entity.Collection> Collections { get; set; } = new();
-
-    public int ConditionId { get; set; } 
-        = Constant.Condition.Pristine.Id;
-
-    public decimal? Cost { get; set; }
-
-    public DateTime CreateDate { get; set; }
-
-    public int? Denominator { get; set; }
-
-    public decimal? EstimatedValue { get; set; }
-
-    public override string ExitNavigationPath => "Memorabilia/View";
-
-    public bool ForTrade { get; set; }
-
-    public bool Framed { get; set; }
-
-    public string ImageFileName 
-        => $"{(!ItemTypeName.IsNullOrEmpty() ? $"{ItemTypeName.Replace(" ", "")}.jpg" : "itemtypes.jpg")}";
-
-    private bool? _isNumbered;
-    public bool IsNumbered
-    {
-        get
-        {
-            _isNumbered ??= Numerator.HasValue || Denominator.HasValue;
-
-            return _isNumbered ?? false;
-        }
+        get => _gameStyleTypeId;
         set
         {
-            _isNumbered = value;
+            _gameStyleTypeId = value;
 
-            if (!_isNumbered ?? false)
-            {
-                Denominator = null;
-                Numerator = null;
-            }
+            if (!(GameStyleType?.IsGameWorthly() ?? false))
+                GameDate = null;
         }
     }
 
-    public Constant.ItemType ItemType { get; set; }
+    public int LevelTypeId { get; set; }
 
-    public string ItemTypeName => ItemType?.Name;
+    public List<PersonEditModel> People { get; set; } 
+        = new();
 
-    public DateTime? LastModifiedDate { get; set; }
+    public PersonEditModel Person { get; set; }
 
-    public Constant.MemorabiliaItemStep MemorabiliaItemStep => Constant.MemorabiliaItemStep.Item;
+    public int SizeId { get; set; }
 
-    public string Note { get; set; }
+    public virtual Constant.Sport Sport 
+        => Constant.Sport.Find(SportId);
 
-    public int? Numerator { get; set; }
+    public int SportId { get; set; }
 
-    public override string PageTitle 
-        => $"{(Id > 0 ? Constant.EditModeType.Update.Name : Constant.EditModeType.Add.Name)} {(ItemType?.Id > 0 ? ItemTypeName : "Memorabilia")}";
+    public List<int> SportIds { get; set; } 
+        = new();
 
-    public int PrivacyTypeId { get; set; } 
-        = Constant.PrivacyType.Public.Id;
+    public virtual Constant.SportLeagueLevel SportLeagueLevel { get; }
 
-    public int PurchaseTypeId { get; set; }
+    public TeamEditModel Team { get; set; }
 
-    public int UserId { get; set; }
+    public List<TeamEditModel> Teams { get; set; } 
+        = new();
 }

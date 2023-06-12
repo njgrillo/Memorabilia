@@ -7,6 +7,9 @@ public partial class ViewPlayers
 
     private async Task OnInputChange(Franchise franchise)
     {
-        Model = await QueryRouter.Send(new GetPlayers(franchise, Sport));
+        Model = new(await QueryRouter.Send(new GetPlayers(franchise, Sport)), Sport)
+                {
+                    Franchise = franchise
+                };
     }
 }

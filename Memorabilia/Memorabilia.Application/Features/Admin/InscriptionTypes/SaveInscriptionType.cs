@@ -1,41 +1,41 @@
-﻿using Memorabilia.Domain.Entities;
+﻿namespace Memorabilia.Application.Features.Admin.InscriptionTypes;
 
-namespace Memorabilia.Application.Features.Admin.InscriptionTypes;
-
-public record SaveInscriptionType(DomainEditModel ViewModel) : ICommand
+public record SaveInscriptionType(DomainEditModel InscriptionType) : ICommand
 {
     public class Handler : CommandHandler<SaveInscriptionType>
     {
-        private readonly IDomainRepository<InscriptionType> _inscriptionTypeRepository;
+        private readonly IDomainRepository<Entity.InscriptionType> _inscriptionTypeRepository;
 
-        public Handler(IDomainRepository<InscriptionType> inscriptionTypeRepository)
+        public Handler(IDomainRepository<Entity.InscriptionType> inscriptionTypeRepository)
         {
             _inscriptionTypeRepository = inscriptionTypeRepository;
         }
 
         protected override async Task Handle(SaveInscriptionType request)
         {
-            InscriptionType inscriptionType;
+            Entity.InscriptionType inscriptionType;
 
-            if (request.ViewModel.IsNew)
+            if (request.InscriptionType.IsNew)
             {
-                inscriptionType = new InscriptionType(request.ViewModel.Name, request.ViewModel.Abbreviation);
+                inscriptionType = new Entity.InscriptionType(request.InscriptionType.Name, 
+                                                             request.InscriptionType.Abbreviation);
 
                 await _inscriptionTypeRepository.Add(inscriptionType);
 
                 return;
             }
 
-            inscriptionType = await _inscriptionTypeRepository.Get(request.ViewModel.Id);
+            inscriptionType = await _inscriptionTypeRepository.Get(request.InscriptionType.Id);
 
-            if (request.ViewModel.IsDeleted)
+            if (request.InscriptionType.IsDeleted)
             {
                 await _inscriptionTypeRepository.Delete(inscriptionType);
 
                 return;
             }
 
-            inscriptionType.Set(request.ViewModel.Name, request.ViewModel.Abbreviation);
+            inscriptionType.Set(request.InscriptionType.Name, 
+                                request.InscriptionType.Abbreviation);
 
             await _inscriptionTypeRepository.Update(inscriptionType);
         }

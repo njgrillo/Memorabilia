@@ -1,41 +1,41 @@
-﻿using Memorabilia.Domain.Entities;
+﻿namespace Memorabilia.Application.Features.Admin.DashboardItems;
 
-namespace Memorabilia.Application.Features.Admin.DashboardItems;
-
-public record SaveDashboardItem(SaveDashboardItemViewModel ViewModel) : ICommand
+public record SaveDashboardItem(DashboardItemEditModel DashboardItem) : ICommand
 {
     public class Handler : CommandHandler<SaveDashboardItem>
     {
-        private readonly IDomainRepository<DashboardItem> _dashboardItemRepository;
+        private readonly IDomainRepository<Entity.DashboardItem> _dashboardItemRepository;
 
-        public Handler(IDomainRepository<DashboardItem> dashboardItemRepository)
+        public Handler(IDomainRepository<Entity.DashboardItem> dashboardItemRepository)
         {
             _dashboardItemRepository = dashboardItemRepository;
         }
 
         protected override async Task Handle(SaveDashboardItem request)
         {
-            DashboardItem dashboardItem;
+            Entity.DashboardItem dashboardItem;
 
-            if (request.ViewModel.IsNew)
+            if (request.DashboardItem.IsNew)
             {
-                dashboardItem = new DashboardItem(request.ViewModel.Name, request.ViewModel.Description);
+                dashboardItem = new Entity.DashboardItem(request.DashboardItem.Name,
+                                                         request.DashboardItem.Description);
 
                 await _dashboardItemRepository.Add(dashboardItem);
 
                 return;
             }
 
-            dashboardItem = await _dashboardItemRepository.Get(request.ViewModel.Id);
+            dashboardItem = await _dashboardItemRepository.Get(request.DashboardItem.Id);
 
-            if (request.ViewModel.IsDeleted)
+            if (request.DashboardItem.IsDeleted)
             {
                 await _dashboardItemRepository.Delete(dashboardItem);
 
                 return;
             }
 
-            dashboardItem.Set(request.ViewModel.Name, request.ViewModel.Description);
+            dashboardItem.Set(request.DashboardItem.Name, 
+                              request.DashboardItem.Description);
 
             await _dashboardItemRepository.Update(dashboardItem);
         }

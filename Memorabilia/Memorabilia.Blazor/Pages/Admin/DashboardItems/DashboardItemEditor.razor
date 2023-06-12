@@ -1,4 +1,4 @@
-﻿@inherits EditItem<SaveDashboardItemViewModel, DashboardItemViewModel>
+﻿@inherits EditItem<DashboardItemEditModel, DashboardItemModel>
 
 <EditPage ContinueNavigationPath="@ViewModel.RoutePrefix"
           EditMode="ViewModel.EditModeType" 
@@ -11,7 +11,7 @@
           PageFooterButtonText="@ViewModel.ExitButtonText"
           PageFooterNavigationPath="@ViewModel.ExitNavigationPath"
           PageTitle="@ViewModel.PageTitle"
-          TItem="SaveDashboardItemViewModel">
+          TItem="DashboardItemEditModel">
     <Content>
         <DivRowCol3>
             <Content>

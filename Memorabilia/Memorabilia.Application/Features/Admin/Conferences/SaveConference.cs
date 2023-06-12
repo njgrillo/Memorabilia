@@ -1,45 +1,43 @@
-﻿using Memorabilia.Domain.Entities;
+﻿namespace Memorabilia.Application.Features.Admin.Conferences;
 
-namespace Memorabilia.Application.Features.Admin.Conferences;
-
-public record SaveConference(SaveConferenceViewModel ViewModel) : ICommand
+public record SaveConference(ConferenceEditModel Conference) : ICommand
 {
     public class Handler : CommandHandler<SaveConference>
     {
-        private readonly IDomainRepository<Conference> _conferenceRepository;
+        private readonly IDomainRepository<Entity.Conference> _conferenceRepository;
 
-        public Handler(IDomainRepository<Conference> conferenceRepository)
+        public Handler(IDomainRepository<Entity.Conference> conferenceRepository)
         {
             _conferenceRepository = conferenceRepository;
         }
 
         protected override async Task Handle(SaveConference request)
         {
-            Conference conference;
+            Entity.Conference conference;
 
-            if (request.ViewModel.IsNew)
+            if (request.Conference.IsNew)
             {
-                conference = new Conference(request.ViewModel.SportLeagueLevelId,
-                                            request.ViewModel.Name,
-                                            request.ViewModel.Abbreviation);
+                conference = new Entity.Conference(request.Conference.SportLeagueLevelId,
+                                                   request.Conference.Name,
+                                                   request.Conference.Abbreviation);
 
                 await _conferenceRepository.Add(conference);
 
                 return;
             }
 
-            conference = await _conferenceRepository.Get(request.ViewModel.Id);
+            conference = await _conferenceRepository.Get(request.Conference.Id);
 
-            if (request.ViewModel.IsDeleted)
+            if (request.Conference.IsDeleted)
             {
                 await _conferenceRepository.Delete(conference);
 
                 return;
             }
 
-            conference.Set(request.ViewModel.SportLeagueLevelId,
-                           request.ViewModel.Name,
-                           request.ViewModel.Abbreviation);
+            conference.Set(request.Conference.SportLeagueLevelId,
+                           request.Conference.Name,
+                           request.Conference.Abbreviation);
 
             await _conferenceRepository.Update(conference);
         }

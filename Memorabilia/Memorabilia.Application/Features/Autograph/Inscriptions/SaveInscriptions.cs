@@ -30,15 +30,16 @@ public class SaveInscriptions
 
     public class Command : DomainCommand, ICommand
     {
-        private readonly InscriptionsEditModel _viewModel;
+        private readonly InscriptionsEditModel _editModel;
 
-        public Command(InscriptionsEditModel viewModel)
+        public Command(InscriptionsEditModel editModel)
         {
-            _viewModel = viewModel;
-            Items = _viewModel.Inscriptions;
+            _editModel = editModel;
+            Items = _editModel.Inscriptions;
         }
 
-        public int AutographId => _viewModel.AutographId;
+        public int AutographId 
+            => _editModel.AutographId;
 
         public int[] DeletedIds
             => Items.Where(item => item.IsDeleted)

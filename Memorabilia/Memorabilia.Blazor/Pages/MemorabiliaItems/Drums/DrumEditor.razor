@@ -1,15 +1,15 @@
-﻿@inherits MemorabiliaItem<SaveDrumViewModel>
+﻿@inherits MemorabiliaItem<DrumEditModel>
 
 <EditMemorabiliaPage Item="ViewModel"
                      OnLoad="OnLoad"
                      OnSave="OnSave" 
-                     TItem="SaveDrumViewModel">
+                     TItem="DrumEditModel">
     <Content>
         <MemorabiliaItemEditor DisplayItemTypeGameStyle="false"
                                DisplayItemTypeLevel="false"
                                DisplayItemTypeSize="false"
                                DisplayMultiPersonSelector="true"
-                               TItem="SaveDrumViewModel"
+                               TItem="DrumEditModel"
                                ViewModel="ViewModel" />
     </Content>
 </EditMemorabiliaPage>

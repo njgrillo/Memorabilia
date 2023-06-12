@@ -23,15 +23,17 @@ public class SaveSpot
 
     public class Command : DomainCommand, ICommand
     {
-        private readonly SpotEditModel _viewModel;
+        private readonly SpotEditModel _editModel;
 
-        public Command(SpotEditModel viewModel)
+        public Command(SpotEditModel editModel)
         {
-            _viewModel = viewModel;
+            _editModel = editModel;
         }
 
-        public int AutographId => _viewModel.AutographId;
+        public int AutographId 
+            => _editModel.AutographId;
 
-        public int SpotId => _viewModel.SpotId;
+        public int SpotId 
+            => _editModel.SpotId;
     }
 }

@@ -1,4 +1,4 @@
-﻿@inherits EditItem<SaveLeagueViewModel, LeagueViewModel>
+﻿@inherits EditItem<LeagueEditModel, LeagueModel>
 
 <EditPage ContinueNavigationPath="@ViewModel.RoutePrefix"
           EditMode="ViewModel.EditModeType" 
@@ -11,7 +11,7 @@
           PageFooterButtonText="@ViewModel.ExitButtonText"
           PageFooterNavigationPath="@ViewModel.ExitNavigationPath"
           PageTitle="@ViewModel.PageTitle"
-          TItem="SaveLeagueViewModel">
+          TItem="LeagueEditModel">
     <Content>
         <DivRowCol3>
             <Content>

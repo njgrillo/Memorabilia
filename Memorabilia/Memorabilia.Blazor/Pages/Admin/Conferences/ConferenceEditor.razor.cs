@@ -1,6 +1,7 @@
 ﻿namespace Memorabilia.Blazor.Pages.Admin.Conferences;
 
-public partial class ConferenceEditor : EditItem<SaveConferenceViewModel, ConferenceViewModel>
+public partial class ConferenceEditor 
+    : EditItem<ConferenceEditModel, ConferenceModel>
 {
     protected async Task HandleValidSubmit()
     {
@@ -12,6 +13,6 @@ public partial class ConferenceEditor : EditItem<SaveConferenceViewModel, Confer
         if (Id == 0)
             return;
 
-        ViewModel = new SaveConferenceViewModel(await Get(new GetConference(Id)));
+        ViewModel = new ConferenceEditModel(new ConferenceModel(await QueryRouter.Send(new GetConference(Id))));
     }
 }

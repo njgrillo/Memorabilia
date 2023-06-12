@@ -30,7 +30,7 @@ public partial class CollectionEditor
 
     protected CollectionEditModel Model = new();
 
-    protected List<MemorabiliaItemModel> SelectedMemorabilia = new();
+    protected List<MemorabiliaModel> SelectedMemorabilia = new();
 
     protected ValidationResult ValidationResult { get; set; }
 
@@ -89,7 +89,7 @@ public partial class CollectionEditor
         if (result.Canceled)
             return;
 
-        var items = (List<MemorabiliaItemModel>)result.Data;
+        var items = (List<MemorabiliaModel>)result.Data;
 
         var collectionMemorabilias
             = items.Select(item => new CollectionMemorabiliaEditModel

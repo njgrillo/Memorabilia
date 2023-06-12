@@ -1,6 +1,7 @@
 ﻿namespace Memorabilia.Blazor.Pages.Admin.JerseyStyleTypes;
 
-public partial class ViewJerseyStyleTypes : ViewDomainItem<JerseyStyleTypesViewModel>, IDeleteDomainItem, IViewDomainItem
+public partial class ViewJerseyStyleTypes 
+    : ViewDomainItem<JerseyStyleTypesModel>, IDeleteDomainItem, IViewDomainItem
 {
     public async Task OnDelete(DomainEditModel viewModel)
     {
@@ -9,6 +10,6 @@ public partial class ViewJerseyStyleTypes : ViewDomainItem<JerseyStyleTypesViewM
 
     public async Task OnLoad()
     {
-        ViewModel = await QueryRouter.Send(new GetJerseyStyleTypes());
+        ViewModel = new JerseyStyleTypesModel(await QueryRouter.Send(new GetJerseyStyleTypes()));
     }
 }

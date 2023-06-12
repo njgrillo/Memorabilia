@@ -12,5 +12,6 @@ public class ImagesModel : Model
     public virtual IEnumerable<ImageModel> Images { get; set; } 
         = Enumerable.Empty<ImageModel>();
 
-    public override string PageTitle => "Images";
+    public override string PageTitle 
+        => "Images";
 }

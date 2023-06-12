@@ -14,6 +14,7 @@ public class InscriptionsEditModel : EditModel
     {
         Inscriptions = inscriptions.Select(inscription => new InscriptionEditModel(new InscriptionModel(inscription)))
                                    .ToList();
+
         ItemType = Constant.ItemType.Find(itemTypeId);
         UserId = userId;
         MemorabiliaId = memorabiliaId;
@@ -37,7 +38,9 @@ public class InscriptionsEditModel : EditModel
         => $"Autographs/Authentications/{Constant.EditModeType.Update.Name}/{AutographId}";
 
     public override Constant.EditModeType EditModeType 
-        => Inscriptions.Any() ? Constant.EditModeType.Update : Constant.EditModeType.Add;
+        => Inscriptions.Any() 
+        ? Constant.EditModeType.Update 
+        : Constant.EditModeType.Add;
 
     public override string ExitNavigationPath 
         => "Memorabilia/View";
@@ -48,16 +51,20 @@ public class InscriptionsEditModel : EditModel
     public string ImageFileName
         => Constant.AdminDomainItem.InscriptionTypes.ImageFileName;
 
-    public List<InscriptionEditModel> Inscriptions { get; set; } = new();
+    public List<InscriptionEditModel> Inscriptions { get; set; } 
+        = new();
 
     public Constant.ItemType ItemType { get; set; }
 
     public int MemorabiliaId { get; }
 
-    public string[] MemorabiliaImageNames { get; } = Array.Empty<string>();
+    public string[] MemorabiliaImageNames { get; } 
+        = Array.Empty<string>();
 
     public override string PageTitle 
-        => $"{(EditModeType == Constant.EditModeType.Add ? Constant.EditModeType.Add.Name : Constant.EditModeType.Update.Name)} Inscription(s)";
+        => $"{(EditModeType == Constant.EditModeType.Add 
+                ? Constant.EditModeType.Add.Name 
+                : Constant.EditModeType.Update.Name)} Inscription(s)";
 
     public int PersonId { get; }
 

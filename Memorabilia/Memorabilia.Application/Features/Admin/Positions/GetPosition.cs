@@ -1,21 +1,17 @@
-﻿using Memorabilia.Domain.Entities;
+﻿namespace Memorabilia.Application.Features.Admin.Positions;
 
-namespace Memorabilia.Application.Features.Admin.Positions;
-
-public record GetPosition(int Id) : IQuery<PositionViewModel>
+public record GetPosition(int Id) : IQuery<Entity.Position>
 {
-    public class Handler : QueryHandler<GetPosition, PositionViewModel>
+    public class Handler : QueryHandler<GetPosition, Entity.Position>
     {
-        private readonly IDomainRepository<Position> _positionRepository;
+        private readonly IDomainRepository<Entity.Position> _positionRepository;
 
-        public Handler(IDomainRepository<Position> positionRepository)
+        public Handler(IDomainRepository<Entity.Position> positionRepository)
         {
             _positionRepository = positionRepository;
         }
 
-        protected override async Task<PositionViewModel> Handle(GetPosition query)
-        {
-            return new PositionViewModel(await _positionRepository.Get(query.Id));
-        }
+        protected override async Task<Entity.Position> Handle(GetPosition query)
+            => await _positionRepository.Get(query.Id);
     }
 }

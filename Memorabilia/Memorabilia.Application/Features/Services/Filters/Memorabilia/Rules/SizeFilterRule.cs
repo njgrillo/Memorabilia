@@ -15,7 +15,5 @@ public class SizeFilterRule : IFilterRule<Entity.Memorabilia>
     }
 
     public Expression<Func<Entity.Memorabilia, bool>> GetExpression()
-    {
-        return item => _sizeIds.Contains(item.Size.SizeId);
-    }
+        => item => _sizeIds.Contains(item.Size.SizeId);
 }

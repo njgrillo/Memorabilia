@@ -13,7 +13,7 @@ public class SaveIndexCard
 
         protected override async Task Handle(Command command)
         {
-            var memorabilia = await _memorabiliaRepository.Get(command.MemorabiliaId);
+            Entity.Memorabilia memorabilia = await _memorabiliaRepository.Get(command.MemorabiliaId);
 
             memorabilia.SetIndexCard(command.SizeId);
 
@@ -23,15 +23,17 @@ public class SaveIndexCard
 
     public class Command : DomainCommand, ICommand
     {
-        private readonly SaveIndexCardViewModel _viewModel;
+        private readonly IndexCardEditModel _editModel;
 
-        public Command(SaveIndexCardViewModel viewModel)
+        public Command(IndexCardEditModel editModel)
         {
-            _viewModel = viewModel;
+            _editModel = editModel;
         }
 
-        public int MemorabiliaId => _viewModel.MemorabiliaId;
+        public int MemorabiliaId 
+            => _editModel.MemorabiliaId;
 
-        public int SizeId => _viewModel.SizeId;
+        public int SizeId 
+            => _editModel.SizeId;
     }
 }

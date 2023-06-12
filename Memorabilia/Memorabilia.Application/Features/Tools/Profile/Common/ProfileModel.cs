@@ -15,12 +15,15 @@ public class ProfileModel : Model
 
         Accomplishments = Person.Accomplishments
                                 .Select(accomplishment => new AccomplishmentProfileModel(accomplishment));
+
         Awards = Person.Awards
                        .Select(award => new AwardProfileModel(award))
                        .OrderBy(award => award.Year)
                        .ThenBy(award => award.AwardTypeName);
+
         Colleges = Person.Colleges
                          .Select(college => new CollegeProfileModel(college));
+
         HallOfFames = Person.HallOfFames
                             .Select(hof => new HallOfFameProfileModel(hof));
 
@@ -36,10 +39,12 @@ public class ProfileModel : Model
         = Enumerable.Empty<CollegeProfileModel>();
 
     public virtual AccomplishmentProfileModel[] DistinctAccomplishments 
-        => Accomplishments.DistinctBy(accomplishment => accomplishment.AccomplishmentTypeId).ToArray();
+        => Accomplishments.DistinctBy(accomplishment => accomplishment.AccomplishmentTypeId)
+                          .ToArray();
 
     public virtual AwardProfileModel[] DistinctAwards 
-        => Awards.DistinctBy(award => award.AwardTypeId).ToArray();
+        => Awards.DistinctBy(award => award.AwardTypeId)
+                 .ToArray();
 
     public virtual IEnumerable<HallOfFameProfileModel> HallOfFames { get; set; } 
         = Enumerable.Empty<HallOfFameProfileModel>();
@@ -57,7 +62,7 @@ public class ProfileModel : Model
     {
         get
         {
-            var header = $"Born {Person.BirthDate?.ToString("MM/dd/yyyy")}";
+            string header = $"Born {Person.BirthDate?.ToString("MM/dd/yyyy")}";
 
             return Person.DeathDate.HasValue ? $"{header} | Died {Person.DeathDate?.ToString("MM/dd/yyyy")}" : header;
         }

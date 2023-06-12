@@ -1,41 +1,41 @@
-﻿using Memorabilia.Domain.Entities;
+﻿namespace Memorabilia.Application.Features.Admin.ProjectStatusTypes;
 
-namespace Memorabilia.Application.Features.Admin.ProjectStatusTypes;
-
-public record SaveProjectStatusType(DomainEditModel ViewModel) : ICommand
+public record SaveProjectStatusType(DomainEditModel ProjectStatusType) : ICommand
 {
     public class Handler : CommandHandler<SaveProjectStatusType>
     {
-        private readonly IDomainRepository<ProjectStatusType> _projectStatusTypeRepository;
+        private readonly IDomainRepository<Entity.ProjectStatusType> _projectStatusTypeRepository;
 
-        public Handler(IDomainRepository<ProjectStatusType> projectStatusTypeRepository)
+        public Handler(IDomainRepository<Entity.ProjectStatusType> projectStatusTypeRepository)
         {
             _projectStatusTypeRepository = projectStatusTypeRepository;
         }
 
         protected override async Task Handle(SaveProjectStatusType request)
         {
-            ProjectStatusType projectStatusType;
+            Entity.ProjectStatusType projectStatusType;
 
-            if (request.ViewModel.IsNew)
+            if (request.ProjectStatusType.IsNew)
             {
-                projectStatusType = new ProjectStatusType(request.ViewModel.Name, request.ViewModel.Abbreviation);
+                projectStatusType = new Entity.ProjectStatusType(request.ProjectStatusType.Name, 
+                                                                 request.ProjectStatusType.Abbreviation);
 
                 await _projectStatusTypeRepository.Add(projectStatusType);
 
                 return;
             }
 
-            projectStatusType = await _projectStatusTypeRepository.Get(request.ViewModel.Id);
+            projectStatusType = await _projectStatusTypeRepository.Get(request.ProjectStatusType.Id);
 
-            if (request.ViewModel.IsDeleted)
+            if (request.ProjectStatusType.IsDeleted)
             {
                 await _projectStatusTypeRepository.Delete(projectStatusType);
 
                 return;
             }
 
-            projectStatusType.Set(request.ViewModel.Name, request.ViewModel.Abbreviation);
+            projectStatusType.Set(request.ProjectStatusType.Name, 
+                                  request.ProjectStatusType.Abbreviation);
 
             await _projectStatusTypeRepository.Update(projectStatusType);
         }

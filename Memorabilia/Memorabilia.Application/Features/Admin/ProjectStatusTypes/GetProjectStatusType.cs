@@ -1,21 +1,17 @@
-﻿using Memorabilia.Domain.Entities;
+﻿namespace Memorabilia.Application.Features.Admin.ProjectStatusTypes;
 
-namespace Memorabilia.Application.Features.Admin.ProjectStatusTypes;
-
-public record GetProjectStatusType(int Id) : IQuery<DomainModel>
+public record GetProjectStatusType(int Id) : IQuery<Entity.ProjectStatusType>
 {
-    public class Handler : QueryHandler<GetProjectStatusType, DomainModel>
+    public class Handler : QueryHandler<GetProjectStatusType, Entity.ProjectStatusType>
     {
-        private readonly IDomainRepository<ProjectStatusType> _projectStatusTypeRepository;
+        private readonly IDomainRepository<Entity.ProjectStatusType> _projectStatusTypeRepository;
 
-        public Handler(IDomainRepository<ProjectStatusType> projectStatusTypeRepository)
+        public Handler(IDomainRepository<Entity.ProjectStatusType> projectStatusTypeRepository)
         {
             _projectStatusTypeRepository = projectStatusTypeRepository;
         }
 
-        protected override async Task<DomainModel> Handle(GetProjectStatusType query)
-        {
-            return new DomainModel(await _projectStatusTypeRepository.Get(query.Id));
-        }
+        protected override async Task<Entity.ProjectStatusType> Handle(GetProjectStatusType query)
+            => await _projectStatusTypeRepository.Get(query.Id);
     }
 }

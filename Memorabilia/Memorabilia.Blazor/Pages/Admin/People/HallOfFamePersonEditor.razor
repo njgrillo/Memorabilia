@@ -1,4 +1,4 @@
-﻿@inherits EditPersonItem<SavePersonHallOfFamesViewModel, PersonHallOfFameViewModel>
+﻿@inherits EditPersonItem<PersonHallOfFamesEditModel, PersonHallOfFameModel>
 
 <EditPage ContinueNavigationPath="@ViewModel.ContinueNavigationPath"
           EditMode="ViewModel.EditModeType"
@@ -12,7 +12,7 @@
           PageFooterNavigationPath="@ViewModel.BackNavigationPath"
           PageTitle="@ViewModel.PageTitle"
           PerformValidation="PerformValidation"
-          TItem="SavePersonHallOfFamesViewModel"
+          TItem="PersonHallOfFamesEditModel"
           UseMultipleButtons="true"
           ValidationResult="@ViewModel.ValidationResult">
     <TimelineContent>

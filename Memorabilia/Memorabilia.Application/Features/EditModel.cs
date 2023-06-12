@@ -15,13 +15,17 @@ public class EditModel : Model
     public bool IsDeleted { get; set; }
 
     public bool IsModified 
-        => Id > 0 && !IsDeleted;
+        => Id > 0 && 
+           !IsDeleted;
 
     public bool IsNew 
         => Id == 0;
 
     public override string PageTitle 
-        => $"{(EditModeType == Constant.EditModeType.Update ? Constant.EditModeType.Update.Name : Constant.EditModeType.Add.Name)} {ItemTitle}";
+        => $"{(EditModeType == Constant.EditModeType.Update 
+                ? Constant.EditModeType.Update.Name 
+            : Constant.EditModeType.Add.Name)} {ItemTitle}";
 
-    public FluentValidation.Results.ValidationResult ValidationResult { get; set; } = new(); 
+    public FluentValidation.Results.ValidationResult ValidationResult { get; set; } 
+        = new(); 
 }

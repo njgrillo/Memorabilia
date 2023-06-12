@@ -1,4 +1,4 @@
-﻿@inherits ViewItem<FranchisesViewModel, FranchiseViewModel>
+﻿@inherits ViewItem<FranchisesModel, FranchiseModel>
 
 <PageView AddRoute="@ViewModel.AddRoute" 
           AddTitle="@ViewModel.AddTitle"
@@ -11,7 +11,7 @@
             <Content>
                 <MudTable Bordered="false"
                           Dense="false" 
-                          Filter="new Func<FranchiseViewModel,bool>(FilterFunc1)"
+                          Filter="new Func<FranchiseModel,bool>(FilterFunc1)"
                           Hover="true"
                           Items="@ViewModel.Franchises"    
                           Striped="true">

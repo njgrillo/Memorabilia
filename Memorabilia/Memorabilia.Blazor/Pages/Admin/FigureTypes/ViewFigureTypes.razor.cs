@@ -1,6 +1,7 @@
 ﻿namespace Memorabilia.Blazor.Pages.Admin.FigureTypes;
 
-public partial class ViewFigureTypes : ViewDomainItem<FigureTypesViewModel>, IDeleteDomainItem, IViewDomainItem
+public partial class ViewFigureTypes 
+    : ViewDomainItem<FigureTypesModel>, IDeleteDomainItem, IViewDomainItem
 {
     public async Task OnDelete(DomainEditModel viewModel)
     {
@@ -9,6 +10,6 @@ public partial class ViewFigureTypes : ViewDomainItem<FigureTypesViewModel>, IDe
 
     public async Task OnLoad()
     {
-        ViewModel = await QueryRouter.Send(new GetFigureTypes());
+        ViewModel = new FigureTypesModel(await QueryRouter.Send(new GetFigureTypes()));
     }
 }

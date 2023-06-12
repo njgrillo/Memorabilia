@@ -1,6 +1,7 @@
 ﻿namespace Memorabilia.Blazor.Pages.Admin.PrivacyTypes;
 
-public partial class ViewPrivacyTypes : ViewDomainItem<PrivacyTypesViewModel>, IDeleteDomainItem, IViewDomainItem
+public partial class ViewPrivacyTypes 
+    : ViewDomainItem<PrivacyTypesModel>, IDeleteDomainItem, IViewDomainItem
 {
     public async Task OnDelete(DomainEditModel viewModel)
     {
@@ -9,6 +10,6 @@ public partial class ViewPrivacyTypes : ViewDomainItem<PrivacyTypesViewModel>, I
 
     public async Task OnLoad()
     {
-        await OnLoad(new GetPrivacyTypes());
+        ViewModel = new PrivacyTypesModel(await QueryRouter.Send(new GetPrivacyTypes()));
     }
 }

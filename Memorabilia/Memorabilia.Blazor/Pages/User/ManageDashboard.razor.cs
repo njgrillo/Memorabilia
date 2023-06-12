@@ -22,7 +22,8 @@ public partial class ManageDashboard : ComponentBase
             ? "Deselect All" 
             : "Select All";
 
-    private SaveUserDashboardViewModel _viewModel = new();
+    private UserDashboardEditModel _viewModel 
+        = new();
 
     protected async Task HandleValidSubmit()
     {
@@ -37,14 +38,19 @@ public partial class ManageDashboard : ComponentBase
         if (UserId == 0)
             NavigationManager.NavigateTo("Login");
 
-        _viewModel = new SaveUserDashboardViewModel(await QueryRouter.Send(new GetUserDashboardItems(UserId)));
+        Entity.User user = await QueryRouter.Send(new GetUserById(UserId));
+
+        _viewModel 
+            = new UserDashboardEditModel(new UserDashboardsModel(user.Id,
+                                                                 user.DashboardItems
+                                                                     .OrderBy(dashboardItem => DashboardItem.Find(dashboardItem.DashboardItemId).Name)));
     }
 
     protected void OnSelectAll()
     {
         bool selectAll = !_viewModel.AllItemsSelected;
 
-        foreach (UserDashboardViewModel dashboardItem in _viewModel.UserDashboardItems)
+        foreach (UserDashboardModel dashboardItem in _viewModel.UserDashboardItems)
         {
             dashboardItem.IsSelected = selectAll;
         }

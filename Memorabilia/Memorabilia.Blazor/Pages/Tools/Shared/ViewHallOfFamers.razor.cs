@@ -16,11 +16,14 @@ public partial class ViewHallOfFamers
 
     protected override async Task OnInitializedAsync()
     {
-        Model = await QueryRouter.Send(new GetHallOfFames(SportLeagueLevel));
+        Model = new(await QueryRouter.Send(new GetHallOfFames(SportLeagueLevel)), Sport);
     }
 
     private async Task OnInputChange(int inductionYear)
     {
-        Model = await QueryRouter.Send(new GetHallOfFames(SportLeagueLevel, inductionYear > 0 ? inductionYear : null));
+        Model = new(await QueryRouter.Send(new GetHallOfFames(SportLeagueLevel, inductionYear)), Sport)
+                {
+                    InductionYear = inductionYear
+                };
     }
 }

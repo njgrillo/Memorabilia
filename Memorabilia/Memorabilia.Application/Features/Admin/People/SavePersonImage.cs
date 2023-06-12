@@ -1,8 +1,8 @@
 ﻿namespace Memorabilia.Application.Features.Admin.People;
 
-public class SavePersonImage
+public record SavePersonImage(int PersonId, string ImageFileName) : ICommand
 {
-    public class Handler : CommandHandler<Command>
+    public class Handler : CommandHandler<SavePersonImage>
     {
         private readonly IPersonRepository _personRepository;
 
@@ -11,26 +11,13 @@ public class SavePersonImage
             _personRepository = personRepository;
         }
 
-        protected override async Task Handle(Command command)
+        protected override async Task Handle(SavePersonImage command)
         {
-            var person = await _personRepository.Get(command.PersonId);
+            Entity.Person person = await _personRepository.Get(command.PersonId);
 
             person.SetImage(command.ImageFileName);
 
             await _personRepository.Update(person);
         }
-    }
-
-    public class Command : DomainCommand, ICommand
-    {
-        public Command(SavePersonImageViewModel viewModel)
-        {
-            PersonId = viewModel.PersonId;
-            ImageFileName = viewModel.PersonImageFileName;
-        }
-
-        public string ImageFileName { get; }
-
-        public int PersonId { get; }
     }
 }

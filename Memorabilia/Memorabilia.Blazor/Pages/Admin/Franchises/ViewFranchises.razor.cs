@@ -1,16 +1,17 @@
 ﻿namespace Memorabilia.Blazor.Pages.Admin.Franchises;
 
-public partial class ViewFranchises : ViewItem<FranchisesViewModel, FranchiseViewModel>
+public partial class ViewFranchises 
+    : ViewItem<FranchisesModel, FranchiseModel>
 {
     protected async Task OnLoad()
     {
-        await OnLoad(new GetFranchises());
+        ViewModel = new FranchisesModel(await QueryRouter.Send(new GetFranchises()));
     }
 
     protected override async Task Delete(int id)
     {
         var deletedItem = ViewModel.Franchises.Single(Franchise => Franchise.Id == id);
-        var viewModel = new SaveFranchiseViewModel(deletedItem)
+        var viewModel = new FranchiseEditModel(deletedItem)
         {
             IsDeleted = true
         };
@@ -22,7 +23,7 @@ public partial class ViewFranchises : ViewItem<FranchisesViewModel, FranchiseVie
         ShowDeleteSuccessfulMessage(ViewModel.ItemTitle);
     }
 
-    protected override bool FilterFunc(FranchiseViewModel viewModel, string search)
+    protected override bool FilterFunc(FranchiseModel viewModel, string search)
     {
         var isYear = int.TryParse(search, out var year);
 

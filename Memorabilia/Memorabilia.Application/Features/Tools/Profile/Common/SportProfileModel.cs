@@ -9,28 +9,37 @@ public class SportProfileModel : ProfileModel
         AllStars = Person.AllStars
                          .Select(allStar => new AllStarProfileModel(allStar, Person.Teams.FirstOrDefault(team => team.BeginYear <= allStar.Year && team.EndYear >= allStar.Year)))
                          .OrderBy(allStar => allStar.Year);
+
         CareerRecords = Person.CareerRecords
                               .Select(record => new CareerRecordProfileModel(record))
                               .OrderBy(record => record.CareerRecordTypeName);
+
         Championships = Person.Teams
                               .SelectMany(team => team.Team.Championships)
                               .Where(chip => Person.Teams.Any(team => team.BeginYear <= chip.Year && (!team.EndYear.HasValue || team.EndYear >= chip.Year)))
                               .Select(championship => new ChampionshipProfileModel(championship));
+
         Drafts = Person.Drafts
                        .Select(draft => new DraftProfileModel(draft));
+
         FranchiseHallOfFames = Person.FranchiseHallOfFames
                                      .Select(hof => new FranchiseHallOfFameProfileModel(hof));
+
         Leaders = Person.Leaders
                         .Select(leader => new LeaderProfileModel(leader))
                         .OrderBy(leader => leader.Year)
                         .ThenBy(leader => leader.LeaderTypeName);
+
         RetiredNumbers = Person.RetiredNumbers
                                .Select(retiredNumber => new RetiredNumberProfileModel(retiredNumber))
                                .OrderBy(retiredNumber => retiredNumber.FranchiseName);
+
         Service = new SportServiceProfileModel(Person.Service);
+
         SingleSeasonRecords = Person.SingleSeasonRecords
                                     .Select(record => new SingleSeasonRecordProfileModel(record))
                                     .OrderBy(record => record.RecordTypeName);
+
         Teams = Person.Teams
                       .Select(team => new TeamProfileModel(team));
     }

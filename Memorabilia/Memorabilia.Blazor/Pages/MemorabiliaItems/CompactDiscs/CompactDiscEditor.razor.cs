@@ -1,12 +1,12 @@
 ﻿namespace Memorabilia.Blazor.Pages.MemorabiliaItems.CompactDiscs;
 
-public partial class CompactDiscEditor : MemorabiliaItem<SaveCompactDiscViewModel>
+public partial class CompactDiscEditor : MemorabiliaItem<CompactDiscEditModel>
 {
     protected async Task OnLoad()
     {
-        var viewModel = await QueryRouter.Send(new GetCompactDisc(MemorabiliaId));
+        var viewModel = await QueryRouter.Send(new GetMemorabiliaItem(MemorabiliaId));
 
-        ViewModel = new SaveCompactDiscViewModel(viewModel);
+        ViewModel = new CompactDiscEditModel(new CompactDiscModel(viewModel));
     }
 
     protected async Task OnSave()

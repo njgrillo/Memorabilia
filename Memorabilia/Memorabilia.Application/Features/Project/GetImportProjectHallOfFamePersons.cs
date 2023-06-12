@@ -13,8 +13,6 @@ public record GetImportProjectHallOfFamePersons(int SportLeagueLevelId, int? Yea
         }
 
         protected override async Task<Entity.Person[]> Handle(GetImportProjectHallOfFamePersons query)
-        {
-            return await _personRepository.GetAllHallOfFamers(query.SportLeagueLevelId, query.Year);
-        }
+            => await _personRepository.GetAllHallOfFamers(query.SportLeagueLevelId, query.Year);
     }
 }

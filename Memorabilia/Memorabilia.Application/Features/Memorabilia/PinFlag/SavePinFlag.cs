@@ -13,7 +13,7 @@ public class SavePinFlag
 
         protected override async Task Handle(Command command)
         {
-            var memorabilia = await _memorabiliaRepository.Get(command.MemorabiliaId);
+            Entity.Memorabilia memorabilia = await _memorabiliaRepository.Get(command.MemorabiliaId);
 
             memorabilia.SetPinFlag(command.GameDate, 
                                    command.GameStyleTypeId, 
@@ -26,21 +26,26 @@ public class SavePinFlag
 
     public class Command : DomainCommand, ICommand
     {
-        private readonly SavePinFlagViewModel _viewModel;
+        private readonly PinFlagEditModel _editModel;
 
-        public Command(SavePinFlagViewModel viewModel)
+        public Command(PinFlagEditModel editModel)
         {
-            _viewModel = viewModel;
+            _editModel = editModel;
         }
 
-        public DateTime? GameDate => _viewModel.GameDate;
+        public DateTime? GameDate 
+            => _editModel.GameDate;
 
-        public int? GameStyleTypeId => _viewModel.GameStyleTypeId > 0 ? _viewModel.GameStyleTypeId : 0;
+        public int? GameStyleTypeId 
+            => _editModel.GameStyleTypeId.ToNullableInt();
 
-        public int MemorabiliaId => _viewModel.MemorabiliaId;
+        public int MemorabiliaId 
+            => _editModel.MemorabiliaId;
 
-        public int? PersonId => _viewModel.Person?.Id > 0 ? _viewModel.Person?.Id : null;
+        public int? PersonId 
+            => _editModel.Person?.Id.ToNullableInt() ?? null;
 
-        public int SportId => Constant.Sport.Golf.Id;
+        public int SportId 
+            => Constant.Sport.Golf.Id;
     }
 }

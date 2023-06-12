@@ -13,14 +13,15 @@ public record GetSportData(int UserId) : IQuery<DashboardChartModel>
 
         protected override async Task<DashboardChartModel> Handle(GetSportData query)
         {
-            var sportIds = _repository.GetSportIds(query.UserId);
-            var sportNames = sportIds.Select(sportId => Constant.Sport.Find(sportId).Name)
-                                     .Distinct();
+            int[] sportIds = _repository.GetSportIds(query.UserId);
+            string[] sportNames = sportIds.Select(sportId => Constant.Sport.Find(sportId).Name)
+                                          .Distinct()
+                                          .ToArray();
 
             var labels = new List<string>();
             var counts = new List<double>();
 
-            foreach (var sportName in sportNames)
+            foreach (string sportName in sportNames)
             {
                 var sport = Constant.Sport.Find(sportName);
                 var count = sportIds.Count(sportId => sportId == sport.Id);

@@ -13,14 +13,15 @@ public record GetBrandData(int UserId) : IQuery<DashboardChartModel>
 
         protected override async Task<DashboardChartModel> Handle(GetBrandData query)
         {
-            var brandIds = _repository.GetBrandIds(query.UserId);
-            var brandNames = brandIds.Select(brandId => Constant.Brand.Find(brandId).Name)
-                                     .Distinct();
+            int[] brandIds = _repository.GetBrandIds(query.UserId);
+            string[] brandNames = brandIds.Select(brandId => Constant.Brand.Find(brandId).Name)
+                                         .Distinct()
+                                         .ToArray();
 
             var labels = new List<string>();
             var counts = new List<double>();
 
-            foreach (var brandName in brandNames)
+            foreach (string brandName in brandNames)
             {
                 var brand = Constant.Brand.Find(brandName);
                 var count = brandIds.Count(brandId => brandId == brand.Id);

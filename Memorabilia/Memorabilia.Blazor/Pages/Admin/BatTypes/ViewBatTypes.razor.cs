@@ -1,6 +1,7 @@
 ﻿namespace Memorabilia.Blazor.Pages.Admin.BatTypes;
 
-public partial class ViewBatTypes : ViewDomainItem<BatTypesViewModel>, IDeleteDomainItem, IViewDomainItem
+public partial class ViewBatTypes 
+    : ViewDomainItem<BatTypesModel>, IDeleteDomainItem, IViewDomainItem
 {
     public async Task OnDelete(DomainEditModel viewModel)
     {
@@ -9,6 +10,6 @@ public partial class ViewBatTypes : ViewDomainItem<BatTypesViewModel>, IDeleteDo
 
     public async Task OnLoad()
     {
-        ViewModel = await QueryRouter.Send(new GetBatTypes());
+        ViewModel = new BatTypesModel(await QueryRouter.Send(new GetBatTypes()));
     }
 }

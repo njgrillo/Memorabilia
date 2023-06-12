@@ -1,12 +1,10 @@
-﻿using Memorabilia.Domain.Entities;
-
-namespace Memorabilia.Application.Features.Tools.Shared.Drafts;
+﻿namespace Memorabilia.Application.Features.Tools.Shared.Drafts;
 
 public class DraftsModel
 {
     public DraftsModel() { }
 
-    public DraftsModel(IEnumerable<Draft> drafts, Constant.Sport sport)
+    public DraftsModel(IEnumerable<Entity.Draft> drafts, Constant.Sport sport)
     {
         Drafts = drafts.Select(draft => new DraftModel(draft, sport))
                        .OrderByDescending(draft => draft.Year)
@@ -14,11 +12,14 @@ public class DraftsModel
                        .ThenBy(draft => draft.Pick);
     }    
 
-    public IEnumerable<DraftModel> Drafts { get; set; } = Enumerable.Empty<DraftModel>();
+    public IEnumerable<DraftModel> Drafts { get; set; } 
+        = Enumerable.Empty<DraftModel>();
 
     public Constant.Franchise Franchise { get; set; }
 
-    public string FranchiseName => Franchise?.Name;
+    public string FranchiseName 
+        => Franchise?.Name;
 
-    public string ResultsTitle => $"{FranchiseName} Draft Picks";
+    public string ResultsTitle 
+        => $"{FranchiseName} Draft Picks";
 }

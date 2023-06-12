@@ -13,14 +13,15 @@ public record GetColorData(int UserId) : IQuery<DashboardChartModel>
 
         protected override async Task<DashboardChartModel> Handle(GetColorData query)
         {
-            var colorIds = _repository.GetColorIds(query.UserId);
-            var colorNames = colorIds.Select(colorId => Constant.Color.Find(colorId).Name)
-                                     .Distinct();
+            int[] colorIds = _repository.GetColorIds(query.UserId);
+            string[] colorNames = colorIds.Select(colorId => Constant.Color.Find(colorId).Name)
+                                          .Distinct()
+                                          .ToArray();
 
             var labels = new List<string>();
             var counts = new List<double>();
 
-            foreach (var colorName in colorNames)
+            foreach (string colorName in colorNames)
             {
                 var color = Constant.Color.Find(colorName);
                 var count = colorIds.Count(colorId => colorId == color.Id);

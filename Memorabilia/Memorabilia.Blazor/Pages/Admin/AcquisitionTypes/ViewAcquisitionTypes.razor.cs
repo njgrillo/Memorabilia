@@ -9,6 +9,6 @@ public partial class ViewAcquisitionTypes : ViewDomainItem<AcquisitionTypesModel
 
     public async Task OnLoad()
     {
-        await OnLoad(new GetAcquisitionTypes());
+        ViewModel = new AcquisitionTypesModel(await QueryRouter.Send(new GetAcquisitionTypes()));
     }
 }

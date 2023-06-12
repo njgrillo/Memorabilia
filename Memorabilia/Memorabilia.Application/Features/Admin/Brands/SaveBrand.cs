@@ -1,41 +1,41 @@
-﻿using Memorabilia.Domain.Entities;
+﻿namespace Memorabilia.Application.Features.Admin.Brands;
 
-namespace Memorabilia.Application.Features.Admin.Brands;
-
-public record SaveBrand(DomainEditModel ViewModel) : ICommand
+public record SaveBrand(DomainEditModel Brand) : ICommand
 {
     public class Handler : CommandHandler<SaveBrand>
     {
-        private readonly IDomainRepository<Brand> _brandRepository;
+        private readonly IDomainRepository<Entity.Brand> _brandRepository;
 
-        public Handler(IDomainRepository<Brand> brandRepository)
+        public Handler(IDomainRepository<Entity.Brand> brandRepository)
         {
             _brandRepository = brandRepository;
         }
 
         protected override async Task Handle(SaveBrand request)
         {
-            Brand brand;
+            Entity.Brand brand;
 
-            if (request.ViewModel.IsNew)
+            if (request.Brand.IsNew)
             {
-                brand = new Brand(request.ViewModel.Name, request.ViewModel.Abbreviation);
+                brand = new Entity.Brand(request.Brand.Name, 
+                                         request.Brand.Abbreviation);
 
                 await _brandRepository.Add(brand);
 
                 return;
             }
 
-            brand = await _brandRepository.Get(request.ViewModel.Id);
+            brand = await _brandRepository.Get(request.Brand.Id);
 
-            if (request.ViewModel.IsDeleted)
+            if (request.Brand.IsDeleted)
             {
                 await _brandRepository.Delete(brand);
 
                 return;
             }
 
-            brand.Set(request.ViewModel.Name, request.ViewModel.Abbreviation);
+            brand.Set(request.Brand.Name, 
+                      request.Brand.Abbreviation);
 
             await _brandRepository.Update(brand);
         }

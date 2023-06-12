@@ -24,15 +24,15 @@ public partial class CollectionMemorabiliaDetailGrid
     public MemorabiliaSearchCriteria Filter { get; set; }
 
     [Parameter]
-    public EventCallback<List<MemorabiliaItemModel>> MemorabiliaSelected { get; set; }
+    public EventCallback<List<MemorabiliaModel>> MemorabiliaSelected { get; set; }
 
     [Parameter]
-    public List<MemorabiliaItemModel> SelectedMemorabilia { get; set; } = new();
+    public List<MemorabiliaModel> SelectedMemorabilia { get; set; } = new();
 
     [Parameter]
     public int UserId { get; set; }
 
-    protected MemorabiliaItemsModel Model = new();
+    protected MemorabiliasModel Model = new();
 
     protected string SelectAllButtonText
         => Model.MemorabiliaItems.Count == SelectedMemorabilia.Count
@@ -41,7 +41,7 @@ public partial class CollectionMemorabiliaDetailGrid
 
     private MemorabiliaSearchCriteria _filter = new();
     private bool _resetPaging;
-    private MudTable<MemorabiliaItemModel> _table = new();
+    private MudTable<MemorabiliaModel> _table = new();
 
     protected override async Task OnParametersSetAsync()
     {
@@ -61,7 +61,7 @@ public partial class CollectionMemorabiliaDetailGrid
         StateHasChanged();
     }
 
-    protected async Task OnMemorabiliaSelected(MemorabiliaItemModel item)
+    protected async Task OnMemorabiliaSelected(MemorabiliaModel item)
     {
         if (!SelectedMemorabilia.Contains(item))
         {
@@ -77,7 +77,7 @@ public partial class CollectionMemorabiliaDetailGrid
         await MemorabiliaSelected.InvokeAsync(SelectedMemorabilia);
     }
 
-    protected async Task<TableData<MemorabiliaItemModel>> OnRead(TableState state)
+    protected async Task<TableData<MemorabiliaModel>> OnRead(TableState state)
     {
         var pageInfo = new PageInfo(_resetPaging ? 1 : state.Page + 1, state.PageSize);
 
@@ -85,7 +85,7 @@ public partial class CollectionMemorabiliaDetailGrid
             ? await QueryRouter.Send(new GetCollectionMemorabiliaItemsPaged(CollectionId, pageInfo, Filter))
             : await QueryRouter.Send(new GetCollectionMemorabiliaItemsPaged(CollectionId, pageInfo));
 
-        return new TableData<MemorabiliaItemModel>()
+        return new TableData<MemorabiliaModel>()
         {
             Items = Model.MemorabiliaItems,
             TotalItems = Model.PageInfo.TotalItems
@@ -113,11 +113,11 @@ public partial class CollectionMemorabiliaDetailGrid
 
     protected async Task RemoveMemorabiliaItem(params int[] ids)
     {
-        MemorabiliaItemModel[] itemsToDelete = Model.MemorabiliaItems.Where(item => ids.Contains(item.Id)).ToArray();
+        MemorabiliaModel[] itemsToDelete = Model.MemorabiliaItems.Where(item => ids.Contains(item.Id)).ToArray();
 
         await CommandRouter.Send(new RemoveCollectionMemorabilia(CollectionId, ids));
 
-        foreach (MemorabiliaItemModel item in itemsToDelete)
+        foreach (MemorabiliaModel item in itemsToDelete)
         {
             Model.MemorabiliaItems.Remove(item);
         }
@@ -138,7 +138,7 @@ public partial class CollectionMemorabiliaDetailGrid
 
     private void ToggleChildContent(int memorabiliaItemId)
     {
-        MemorabiliaItemModel memorabiliaItem = Model.MemorabiliaItems.Single(item => item.Id == memorabiliaItemId);
+        MemorabiliaModel memorabiliaItem = Model.MemorabiliaItems.Single(item => item.Id == memorabiliaItemId);
 
         memorabiliaItem.DisplayAutographDetails = !memorabiliaItem.DisplayAutographDetails;
         memorabiliaItem.ToggleIcon = memorabiliaItem.DisplayAutographDetails
@@ -165,7 +165,7 @@ public partial class CollectionMemorabiliaDetailGrid
         await dialog.Result;
     }
 
-    private async Task ViewMemorabiliaImages(MemorabiliaItemModel memorabiliaItemModel)
+    private async Task ViewMemorabiliaImages(MemorabiliaModel memorabiliaItemModel)
     {
         var parameters = new DialogParameters
         {

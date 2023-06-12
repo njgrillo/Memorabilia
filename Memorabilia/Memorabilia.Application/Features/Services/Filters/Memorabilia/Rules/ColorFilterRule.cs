@@ -15,7 +15,5 @@ public class ColorFilterRule : IFilterRule<Entity.Memorabilia>
     }
 
     public Expression<Func<Entity.Memorabilia, bool>> GetExpression()
-    {
-        return item => item.Autographs.Any(autograph => _colorIds.Contains(autograph.ColorId));
-    }
+        => item => item.Autographs.Any(autograph => _colorIds.Contains(autograph.ColorId));
 }

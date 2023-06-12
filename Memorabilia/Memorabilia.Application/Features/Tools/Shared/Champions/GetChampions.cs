@@ -1,8 +1,8 @@
 ﻿namespace Memorabilia.Application.Features.Tools.Shared.Champions;
 
-public record GetChampions(int ChampionTypeId, Constant.Sport Sport) : IQuery<ChampionsModel>
+public record GetChampions(int ChampionTypeId, Constant.Sport Sport) : IQuery<Entity.Champion[]>
 {
-    public class Handler : QueryHandler<GetChampions, ChampionsModel>
+    public class Handler : QueryHandler<GetChampions, Entity.Champion[]>
     {
         private readonly IChampionRepository _championRepository;
 
@@ -11,9 +11,8 @@ public record GetChampions(int ChampionTypeId, Constant.Sport Sport) : IQuery<Ch
             _championRepository = championRepository;
         }
 
-        protected override async Task<ChampionsModel> Handle(GetChampions query)
-        {
-            return new ChampionsModel(await _championRepository.GetAll(query.ChampionTypeId), query.Sport);
-        }
+        protected override async Task<Entity.Champion[]> Handle(GetChampions query)
+            => (await _championRepository.GetAll(query.ChampionTypeId))
+                    .ToArray();
     }
 }

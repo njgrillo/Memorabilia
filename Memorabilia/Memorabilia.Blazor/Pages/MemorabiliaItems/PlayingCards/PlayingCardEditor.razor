@@ -1,9 +1,9 @@
-﻿@inherits MemorabiliaItem<SavePlayingCardViewModel>
+﻿@inherits MemorabiliaItem<PlayingCardEditModel>
 
 <EditMemorabiliaPage Item="ViewModel"
                      OnLoad="OnLoad"
                      OnSave="OnSave" 
-                     TItem="SavePlayingCardViewModel">
+                     TItem="PlayingCardEditModel">
     <Content>
         <MemorabiliaItemEditor DisplayItemTypeBrand="false"
                                DisplayItemTypeGameStyle="false"
@@ -11,7 +11,7 @@
                                DisplaySinglePersonSelector="true"
                                DisplaySingleSportSelector="true"
                                DisplaySingleTeamSelector="true"
-                               TItem="SavePlayingCardViewModel"
+                               TItem="PlayingCardEditModel"
                                ViewModel="ViewModel" />
     </Content>
 </EditMemorabiliaPage>

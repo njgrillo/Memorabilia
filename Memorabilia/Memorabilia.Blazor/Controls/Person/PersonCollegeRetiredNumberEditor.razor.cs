@@ -3,7 +3,7 @@
 public partial class PersonCollegeRetiredNumberEditor
 {
     [Parameter]
-    public List<SavePersonCollegeRetiredNumberViewModel> CollegeRetiredNumbers { get; set; } = new();
+    public List<PersonCollegeRetiredNumberEditModel> CollegeRetiredNumbers { get; set; } = new();
 
     [Parameter]
     public College[] Colleges { get; set; }
@@ -11,7 +11,7 @@ public partial class PersonCollegeRetiredNumberEditor
     private bool _canAdd = true;
     private bool _canEditCollege = true;
     private bool _canUpdate;
-    private SavePersonCollegeRetiredNumberViewModel _viewModel = new();
+    private PersonCollegeRetiredNumberEditModel _viewModel = new();
 
     private void Add()
     {
@@ -20,10 +20,10 @@ public partial class PersonCollegeRetiredNumberEditor
 
         CollegeRetiredNumbers.Add(_viewModel);
 
-        _viewModel = new SavePersonCollegeRetiredNumberViewModel();
+        _viewModel = new PersonCollegeRetiredNumberEditModel();
     }
 
-    private void Edit(SavePersonCollegeRetiredNumberViewModel CollegeRetiredNumber)
+    private void Edit(PersonCollegeRetiredNumberEditModel CollegeRetiredNumber)
     {
         _viewModel.College = CollegeRetiredNumber.College;
         _viewModel.PlayerNumber = CollegeRetiredNumber.PlayerNumber;
@@ -40,7 +40,7 @@ public partial class PersonCollegeRetiredNumberEditor
         number.College = _viewModel.College;
         number.PlayerNumber = _viewModel.PlayerNumber;
 
-        _viewModel = new SavePersonCollegeRetiredNumberViewModel();
+        _viewModel = new PersonCollegeRetiredNumberEditModel();
 
         _canAdd = true;
         _canEditCollege = true;

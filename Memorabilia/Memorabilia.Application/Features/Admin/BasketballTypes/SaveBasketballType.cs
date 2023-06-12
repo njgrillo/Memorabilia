@@ -1,41 +1,41 @@
-﻿using Memorabilia.Domain.Entities;
+﻿namespace Memorabilia.Application.Features.Admin.BasketballTypes;
 
-namespace Memorabilia.Application.Features.Admin.BasketballTypes;
-
-public record SaveBasketballType(DomainEditModel ViewModel) : ICommand
+public record SaveBasketballType(DomainEditModel BasketballType) : ICommand
 {
     public class Handler : CommandHandler<SaveBasketballType>
     {
-        private readonly IDomainRepository<BasketballType> _basketballTypeRepository;
+        private readonly IDomainRepository<Entity.BasketballType> _basketballTypeRepository;
 
-        public Handler(IDomainRepository<BasketballType> basketballTypeRepository)
+        public Handler(IDomainRepository<Entity.BasketballType> basketballTypeRepository)
         {
             _basketballTypeRepository = basketballTypeRepository;
         }
 
         protected override async Task Handle(SaveBasketballType request)
         {
-            BasketballType basketballType;
+            Entity.BasketballType basketballType;
 
-            if (request.ViewModel.IsNew)
+            if (request.BasketballType.IsNew)
             {
-                basketballType = new BasketballType(request.ViewModel.Name, request.ViewModel.Abbreviation);
+                basketballType = new Entity.BasketballType(request.BasketballType.Name, 
+                                                           request.BasketballType.Abbreviation);
 
                 await _basketballTypeRepository.Add(basketballType);
 
                 return;
             }
 
-            basketballType = await _basketballTypeRepository.Get(request.ViewModel.Id);
+            basketballType = await _basketballTypeRepository.Get(request.BasketballType.Id);
 
-            if (request.ViewModel.IsDeleted)
+            if (request.BasketballType.IsDeleted)
             {
                 await _basketballTypeRepository.Delete(basketballType);
 
                 return;
             }
 
-            basketballType.Set(request.ViewModel.Name, request.ViewModel.Abbreviation);
+            basketballType.Set(request.BasketballType.Name, 
+                               request.BasketballType.Abbreviation);
 
             await _basketballTypeRepository.Update(basketballType);
         }

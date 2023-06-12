@@ -15,7 +15,5 @@ public class WritingInstrumentFilterRule : IFilterRule<Entity.Memorabilia>
     }
 
     public Expression<Func<Entity.Memorabilia, bool>> GetExpression()
-    {
-        return item => item.Autographs.Any(autograph => _writingInstrumentIds.Contains(autograph.WritingInstrumentId));
-    }
+        => item => item.Autographs.Any(autograph => _writingInstrumentIds.Contains(autograph.WritingInstrumentId));
 }

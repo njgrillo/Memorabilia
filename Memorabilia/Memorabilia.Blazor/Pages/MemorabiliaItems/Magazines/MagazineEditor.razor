@@ -1,16 +1,16 @@
-﻿@inherits MemorabiliaItem<SaveMagazineViewModel>
+﻿@inherits MemorabiliaItem<MagazineEditModel>
 
 <EditMemorabiliaPage Item="ViewModel"
                      OnLoad="OnLoad"
                      OnSave="OnSave" 
-                     TItem="SaveMagazineViewModel">
+                     TItem="MagazineEditModel">
     <Content>
         <MemorabiliaItemEditor DisplayItemTypeGameStyle="false"
                                DisplayItemTypeLevel="false"
                                DisplayMultiPersonSelector="true"
                                DisplayMultiSportSelector="true"
                                DisplayMultiTeamSelector="true"
-                               TItem="SaveMagazineViewModel"
+                               TItem="MagazineEditModel"
                                ViewModel="ViewModel">
             <AdditionalContent>
                 <DivRowCol3>

@@ -2,7 +2,8 @@
 
 public abstract class PersonSportToolModel : SportToolModel, IWithName
 {
-    public override string Name => PersonName;
+    public override string Name 
+        => PersonName;
 
     public abstract int PersonId { get; }
 

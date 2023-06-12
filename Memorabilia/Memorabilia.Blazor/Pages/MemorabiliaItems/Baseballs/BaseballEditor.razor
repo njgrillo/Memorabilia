@@ -1,13 +1,13 @@
-﻿@inherits MemorabiliaItem<SaveBaseballViewModel>
+﻿@inherits MemorabiliaItem<BaseballEditModel>
 
 <EditMemorabiliaPage Item="ViewModel"
                      OnLoad="OnLoad"
                      OnSave="OnSave"
-                     TItem="SaveBaseballViewModel">
+                     TItem="BaseballEditModel">
     <Content>
         <MemorabiliaItemEditor DisplaySinglePersonSelector="true"
                                DisplayMultiTeamSelector="true"
-                               TItem="SaveBaseballViewModel"
+                               TItem="BaseballEditModel"
                                ViewModel="ViewModel">
             <AdditionalContent>
                 <DivRowCol3 HideColumn1="@(!ViewModel.DisplayBaseballType)"

@@ -3,12 +3,12 @@
 public partial class PersonCollegeEditor : ComponentBase
 {
     [Parameter]
-    public List<SavePersonCollegeViewModel> Colleges { get; set; } = new();    
+    public List<PersonCollegeEditModel> Colleges { get; set; } = new();    
 
     private bool _canAdd = true;
     private bool _canEditCollege = true;
     private bool _canUpdate;
-    private SavePersonCollegeViewModel _viewModel = new();
+    private PersonCollegeEditModel _viewModel = new();
 
     private void Add()
     {
@@ -17,10 +17,10 @@ public partial class PersonCollegeEditor : ComponentBase
 
         Colleges.Add(_viewModel);
 
-        _viewModel = new SavePersonCollegeViewModel();
+        _viewModel = new PersonCollegeEditModel();
     }
 
-    private void Edit(SavePersonCollegeViewModel college)
+    private void Edit(PersonCollegeEditModel college)
     {
         _viewModel.College = college.College;
         _viewModel.BeginYear = college.BeginYear;
@@ -39,7 +39,7 @@ public partial class PersonCollegeEditor : ComponentBase
         college.BeginYear = _viewModel.BeginYear;
         college.EndYear = _viewModel.EndYear;
 
-        _viewModel = new SavePersonCollegeViewModel();
+        _viewModel = new PersonCollegeEditModel();
 
         _canAdd = false;
         _canEditCollege = false;

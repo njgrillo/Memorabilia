@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Application.Features.Admin.ItemTypeBrand;
 
-public record SaveItemTypeBrand(SaveItemTypeBrandViewModel ViewModel) : ICommand
+public record SaveItemTypeBrand(ItemTypeBrandEditModel ItemTypeBrand) : ICommand
 {
     public class Handler : CommandHandler<SaveItemTypeBrand>
     {
@@ -15,25 +15,26 @@ public record SaveItemTypeBrand(SaveItemTypeBrandViewModel ViewModel) : ICommand
         {
             Entity.ItemTypeBrand itemTypeBrand;
 
-            if (request.ViewModel.IsNew)
+            if (request.ItemTypeBrand.IsNew)
             {
-                itemTypeBrand = new Entity.ItemTypeBrand(request.ViewModel.ItemType.Id, request.ViewModel.Brand.Id);
+                itemTypeBrand = new Entity.ItemTypeBrand(request.ItemTypeBrand.ItemType.Id, 
+                                                         request.ItemTypeBrand.Brand.Id);
 
                 await _itemTypeBrandRepository.Add(itemTypeBrand);
 
                 return;
             }
 
-            itemTypeBrand = await _itemTypeBrandRepository.Get(request.ViewModel.Id);
+            itemTypeBrand = await _itemTypeBrandRepository.Get(request.ItemTypeBrand.Id);
 
-            if (request.ViewModel.IsDeleted)
+            if (request.ItemTypeBrand.IsDeleted)
             {
                 await _itemTypeBrandRepository.Delete(itemTypeBrand);
 
                 return;
             }
 
-            itemTypeBrand.Set(request.ViewModel.Brand.Id);
+            itemTypeBrand.Set(request.ItemTypeBrand.Brand.Id);
 
             await _itemTypeBrandRepository.Update(itemTypeBrand);
         }

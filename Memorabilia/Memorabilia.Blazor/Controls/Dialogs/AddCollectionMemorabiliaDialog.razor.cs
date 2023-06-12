@@ -11,7 +11,7 @@ public partial class AddCollectionMemorabiliaDialog
     [Parameter]
     public int UserId { get; set; }
 
-    protected List<MemorabiliaItemModel> SelectedMemorabilia = new();
+    protected List<MemorabiliaModel> SelectedMemorabilia = new();
 
     private MemorabiliaSearchCriteria _filter = new();
 

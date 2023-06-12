@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Blazor.Pages.Admin;
 
-public abstract class EditItem<TSaveViewModel, TViewModel> : ComponentBase
+public abstract class EditItem<TEditModel, TModel> : ComponentBase
 {
     [Inject]
     public CommandRouter CommandRouter { get; set; }
@@ -11,9 +11,10 @@ public abstract class EditItem<TSaveViewModel, TViewModel> : ComponentBase
     [Parameter]
     public int Id { get; set; }
 
-    protected TSaveViewModel ViewModel = (TSaveViewModel)Activator.CreateInstance(typeof(TSaveViewModel));
+    protected TEditModel ViewModel 
+        = (TEditModel)Activator.CreateInstance(typeof(TEditModel));
 
-    protected async Task<TViewModel> Get(IQuery<TViewModel> request)
+    protected async Task<TModel> Get(IQuery<TModel> request)
     {
         return await QueryRouter.Send(request);
     }

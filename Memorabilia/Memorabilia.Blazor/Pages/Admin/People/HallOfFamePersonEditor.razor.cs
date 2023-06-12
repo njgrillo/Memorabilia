@@ -1,7 +1,7 @@
 ﻿namespace Memorabilia.Blazor.Pages.Admin.People;
 
 public partial class HallOfFamePersonEditor 
-    : EditPersonItem<SavePersonHallOfFamesViewModel, PersonHallOfFameViewModel>
+    : EditPersonItem<PersonHallOfFamesEditModel, PersonHallOfFameModel>
 {
     [Inject]
     public HallOfFameValidator Validator { get; set; }
@@ -27,7 +27,9 @@ public partial class HallOfFamePersonEditor
 
     protected async Task OnLoad()
     {
-        ViewModel = new SavePersonHallOfFamesViewModel(PersonId, await Get(new GetPersonHallOfFames(PersonId)));
+        var model = new PersonHallOfFameModel(await QueryRouter.Send(new GetPerson(PersonId)));
+
+        ViewModel = new PersonHallOfFamesEditModel(PersonId, model);
 
         PerformValidation = true;
     }    

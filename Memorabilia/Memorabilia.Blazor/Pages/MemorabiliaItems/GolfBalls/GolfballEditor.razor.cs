@@ -1,18 +1,18 @@
 ﻿namespace Memorabilia.Blazor.Pages.MemorabiliaItems.GolfBalls;
 
-public partial class GolfballEditor : MemorabiliaItem<SaveGolfballViewModel>
+public partial class GolfballEditor : MemorabiliaItem<GolfballEditModel>
 {
     [Inject]
     public GolfballValidator Validator { get; set; }
 
     protected async Task OnLoad()
     {
-        var viewModel = await QueryRouter.Send(new GetGolfball(MemorabiliaId));
+        var viewModel = await QueryRouter.Send(new GetMemorabiliaItem(MemorabiliaId));
 
         if (viewModel.Brand == null)
             return;
 
-        ViewModel = new SaveGolfballViewModel(viewModel);
+        ViewModel = new GolfballEditModel(new GolfballModel(viewModel));
     }
 
     protected async Task OnSave()

@@ -1,16 +1,17 @@
 ﻿namespace Memorabilia.Blazor.Pages.Admin.ItemTypeLevels;
 
-public partial class ViewItemTypeLevels : ViewItem<ItemTypeLevelsViewModel, ItemTypeLevelViewModel>
+public partial class ViewItemTypeLevels 
+    : ViewItem<ItemTypeLevelsModel, ItemTypeLevelModel>
 {
     protected async Task OnLoad()
     {
-        await OnLoad(new GetItemTypeLevels());
+        ViewModel = new ItemTypeLevelsModel(await QueryRouter.Send(new GetItemTypeLevels()));
     }
 
     protected override async Task Delete(int id)
     {
         var deletedItem = ViewModel.ItemTypeLevels.Single(ItemTypeLevel => ItemTypeLevel.Id == id);
-        var viewModel = new SaveItemTypeLevelViewModel(deletedItem)
+        var viewModel = new ItemTypeLevelEditModel(deletedItem)
         {
             IsDeleted = true
         };
@@ -22,10 +23,8 @@ public partial class ViewItemTypeLevels : ViewItem<ItemTypeLevelsViewModel, Item
         ShowDeleteSuccessfulMessage(ViewModel.ItemTitle);
     }
 
-    protected override bool FilterFunc(ItemTypeLevelViewModel viewModel, string search)
-    {
-        return search.IsNullOrEmpty() ||
-               viewModel.ItemTypeName.Contains(search, StringComparison.OrdinalIgnoreCase) ||
-               viewModel.LevelTypeName.Contains(search, StringComparison.OrdinalIgnoreCase);
-    }
+    protected override bool FilterFunc(ItemTypeLevelModel viewModel, string search)
+        => search.IsNullOrEmpty() ||
+           viewModel.ItemTypeName.Contains(search, StringComparison.OrdinalIgnoreCase) ||
+           viewModel.LevelTypeName.Contains(search, StringComparison.OrdinalIgnoreCase);
 }

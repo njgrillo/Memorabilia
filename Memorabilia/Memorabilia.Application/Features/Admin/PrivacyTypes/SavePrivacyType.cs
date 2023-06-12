@@ -1,41 +1,41 @@
-﻿using Memorabilia.Domain.Entities;
+﻿namespace Memorabilia.Application.Features.Admin.PrivacyTypes;
 
-namespace Memorabilia.Application.Features.Admin.PrivacyTypes;
-
-public record SavePrivacyType(DomainEditModel ViewModel) : ICommand
+public record SavePrivacyType(DomainEditModel PrivacyType) : ICommand
 {
     public class Handler : CommandHandler<SavePrivacyType>
     {
-        private readonly IDomainRepository<PrivacyType> _privacyTypeRepository;
+        private readonly IDomainRepository<Entity.PrivacyType> _privacyTypeRepository;
 
-        public Handler(IDomainRepository<PrivacyType> privacyTypeRepository)
+        public Handler(IDomainRepository<Entity.PrivacyType> privacyTypeRepository)
         {
             _privacyTypeRepository = privacyTypeRepository;
         }
 
         protected override async Task Handle(SavePrivacyType request)
         {
-            PrivacyType privacyType;
+            Entity.PrivacyType privacyType;
 
-            if (request.ViewModel.IsNew)
+            if (request.PrivacyType.IsNew)
             {
-                privacyType = new PrivacyType(request.ViewModel.Name, request.ViewModel.Abbreviation);
+                privacyType = new Entity.PrivacyType(request.PrivacyType.Name, 
+                                                     request.PrivacyType.Abbreviation);
 
                 await _privacyTypeRepository.Add(privacyType);
 
                 return;
             }
 
-            privacyType = await _privacyTypeRepository.Get(request.ViewModel.Id);
+            privacyType = await _privacyTypeRepository.Get(request.PrivacyType.Id);
 
-            if (request.ViewModel.IsDeleted)
+            if (request.PrivacyType.IsDeleted)
             {
                 await _privacyTypeRepository.Delete(privacyType);
 
                 return;
             }
 
-            privacyType.Set(request.ViewModel.Name, request.ViewModel.Abbreviation);
+            privacyType.Set(request.PrivacyType.Name, 
+                            request.PrivacyType.Abbreviation);
 
             await _privacyTypeRepository.Update(privacyType);
         }

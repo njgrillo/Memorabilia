@@ -1,41 +1,41 @@
-﻿using Memorabilia.Domain.Entities;
+﻿namespace Memorabilia.Application.Features.Admin.JerseyStyleTypes;
 
-namespace Memorabilia.Application.Features.Admin.JerseyStyleTypes;
-
-public record SaveJerseyStyleType(DomainEditModel ViewModel) : ICommand
+public record SaveJerseyStyleType(DomainEditModel JerseyStyleType) : ICommand
 {
     public class Handler : CommandHandler<SaveJerseyStyleType>
     {
-        private readonly IDomainRepository<JerseyStyleType> _jerseyStyleTypeRepository;
+        private readonly IDomainRepository<Entity.JerseyStyleType> _jerseyStyleTypeRepository;
 
-        public Handler(IDomainRepository<JerseyStyleType> jerseyStyleTypeRepository)
+        public Handler(IDomainRepository<Entity.JerseyStyleType> jerseyStyleTypeRepository)
         {
             _jerseyStyleTypeRepository = jerseyStyleTypeRepository;
         }
 
         protected override async Task Handle(SaveJerseyStyleType request)
         {
-            JerseyStyleType jerseyStyleType;
+            Entity.JerseyStyleType jerseyStyleType;
 
-            if (request.ViewModel.IsNew)
+            if (request.JerseyStyleType.IsNew)
             {
-                jerseyStyleType = new JerseyStyleType(request.ViewModel.Name, request.ViewModel.Abbreviation);
+                jerseyStyleType = new Entity.JerseyStyleType(request.JerseyStyleType.Name, 
+                                                             request.JerseyStyleType.Abbreviation);
 
                 await _jerseyStyleTypeRepository.Add(jerseyStyleType);
 
                 return;
             }
 
-            jerseyStyleType = await _jerseyStyleTypeRepository.Get(request.ViewModel.Id);
+            jerseyStyleType = await _jerseyStyleTypeRepository.Get(request.JerseyStyleType.Id);
 
-            if (request.ViewModel.IsDeleted)
+            if (request.JerseyStyleType.IsDeleted)
             {
                 await _jerseyStyleTypeRepository.Delete(jerseyStyleType);
 
                 return;
             }
 
-            jerseyStyleType.Set(request.ViewModel.Name, request.ViewModel.Abbreviation);
+            jerseyStyleType.Set(request.JerseyStyleType.Name, 
+                                request.JerseyStyleType.Abbreviation);
 
             await _jerseyStyleTypeRepository.Update(jerseyStyleType);
         }

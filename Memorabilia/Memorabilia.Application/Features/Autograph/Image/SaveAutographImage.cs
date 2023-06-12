@@ -25,21 +25,25 @@ public class SaveAutographImage
 
     public class Command : DomainCommand, ICommand
     {
-        private readonly AutographImagesEditModel _viewModel;
+        private readonly AutographImagesEditModel _editModel;
 
-        public Command(AutographImagesEditModel viewModel)
+        public Command(AutographImagesEditModel editModel)
         {
-            _viewModel = viewModel;
+            _editModel = editModel;
         }
 
-        public int AutographId => _viewModel.AutographId;
+        public int AutographId 
+            => _editModel.AutographId;
 
         public int MemorabiliaId { get; set; }
 
         public IEnumerable<string> FileNames 
-            => _viewModel.Images.Select(image => image.FileName);            
+            => _editModel.Images
+                         .Select(image => image.FileName);            
 
         public string PrimaryImageFileName 
-            => _viewModel.Images.SingleOrDefault(image => image.ImageTypeId == Constant.ImageType.Primary.Id)?.FileName;
+            => _editModel.Images
+                         .SingleOrDefault(image => image.ImageTypeId == Constant.ImageType.Primary.Id)?
+                         .FileName;
     }
 }

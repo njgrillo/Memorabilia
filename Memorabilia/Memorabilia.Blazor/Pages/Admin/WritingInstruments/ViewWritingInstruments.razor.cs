@@ -1,6 +1,7 @@
 ﻿namespace Memorabilia.Blazor.Pages.Admin.WritingInstruments;
 
-public partial class ViewWritingInstruments : ViewDomainItem<WritingInstrumentsViewModel>, IDeleteDomainItem, IViewDomainItem
+public partial class ViewWritingInstruments 
+    : ViewDomainItem<WritingInstrumentsModel>, IDeleteDomainItem, IViewDomainItem
 {
     public async Task OnDelete(DomainEditModel viewModel)
     {
@@ -9,6 +10,6 @@ public partial class ViewWritingInstruments : ViewDomainItem<WritingInstrumentsV
 
     public async Task OnLoad()
     {
-        await OnLoad(new GetWritingInstruments());
+        ViewModel = new WritingInstrumentsModel(await QueryRouter.Send(new GetWritingInstruments()));
     }
 }

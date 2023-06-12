@@ -15,7 +15,5 @@ public class GameStyleTypeFilterRule : IFilterRule<Entity.Memorabilia>
     }
 
     public Expression<Func<Entity.Memorabilia, bool>> GetExpression()
-    {
-        return item => _gameStyleTypeIds.Contains(item.Game.GameStyleTypeId);
-    }
+     => item => _gameStyleTypeIds.Contains(item.Game.GameStyleTypeId);
 }

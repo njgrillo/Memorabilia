@@ -1,4 +1,4 @@
-﻿@inherits ViewItem<SportLeagueLevelsViewModel, SportLeagueLevelViewModel>
+﻿@inherits ViewItem<SportLeagueLevelsModel, SportLeagueLevelModel>
 
 <PageView AddRoute="@ViewModel.AddRoute" 
           AddTitle="@ViewModel.AddTitle"
@@ -11,7 +11,7 @@
             <Content>
                 <MudTable Bordered="false"
                           Dense="false" 
-                          Filter="new Func<SportLeagueLevelViewModel,bool>(FilterFunc1)"
+                          Filter="new Func<SportLeagueLevelModel,bool>(FilterFunc1)"
                           Hover="true"
                           Items="@ViewModel.SportLeagueLevels"    
                           Striped="true">

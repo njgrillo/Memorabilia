@@ -1,6 +1,7 @@
 ﻿namespace Memorabilia.Blazor.Pages.Admin.AccomplishmentTypes;
 
-public partial class AccomplishmentTypeEditor : EditDomainItem<AccomplishmentType>, IEditDomainItem
+public partial class AccomplishmentTypeEditor 
+    : EditDomainItem<AccomplishmentType>, IEditDomainItem
 {
     public async Task OnLoad()
     {
@@ -8,7 +9,7 @@ public partial class AccomplishmentTypeEditor : EditDomainItem<AccomplishmentTyp
     }
 
     public async Task OnSave()
-    {
+    {     
         await OnSave(new SaveAccomplishmentType(ViewModel));
     }
 }

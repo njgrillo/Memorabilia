@@ -1,8 +1,8 @@
 ﻿namespace Memorabilia.Application.Features.Admin.ItemTypeSizes;
 
-public record GetItemTypeSize(int Id) : IQuery<ItemTypeSizeViewModel>
+public record GetItemTypeSize(int Id) : IQuery<Entity.ItemTypeSize>
 {
-    public class Handler : QueryHandler<GetItemTypeSize, ItemTypeSizeViewModel>
+    public class Handler : QueryHandler<GetItemTypeSize, Entity.ItemTypeSize>
     {
         private readonly IItemTypeSizeRepository _itemTypeSizeRepository;
 
@@ -11,9 +11,7 @@ public record GetItemTypeSize(int Id) : IQuery<ItemTypeSizeViewModel>
             _itemTypeSizeRepository = itemTypeSizeRepository;
         }
 
-        protected override async Task<ItemTypeSizeViewModel> Handle(GetItemTypeSize query)
-        {
-            return new ItemTypeSizeViewModel(await _itemTypeSizeRepository.Get(query.Id));
-        }
+        protected override async Task<Entity.ItemTypeSize> Handle(GetItemTypeSize query)
+            => await _itemTypeSizeRepository.Get(query.Id);
     }
 }

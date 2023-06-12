@@ -1,6 +1,7 @@
 ﻿namespace Memorabilia.Blazor.Pages.Admin.Spots;
 
-public partial class ViewSpots : ViewDomainItem<SpotsViewModel>, IDeleteDomainItem, IViewDomainItem
+public partial class ViewSpots 
+    : ViewDomainItem<SpotsModel>, IDeleteDomainItem, IViewDomainItem
 {
     public async Task OnDelete(DomainEditModel viewModel)
     {
@@ -9,6 +10,6 @@ public partial class ViewSpots : ViewDomainItem<SpotsViewModel>, IDeleteDomainIt
 
     public async Task OnLoad()
     {
-        await OnLoad(new GetSpots());
+        ViewModel = new SpotsModel(await QueryRouter.Send(new GetSpots()));
     }
 }

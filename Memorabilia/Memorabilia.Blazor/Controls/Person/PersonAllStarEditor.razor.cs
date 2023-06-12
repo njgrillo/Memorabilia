@@ -3,7 +3,7 @@
 public partial class PersonAllStarEditor : ComponentBase
 {
     [Parameter]
-    public List<SavePersonAllStarViewModel> AllStars { get; set; } = new();
+    public List<PersonAllStarEditModel> AllStars { get; set; } = new();
 
     [Parameter]
     public Sport[] Sports { get; set; }
@@ -13,7 +13,7 @@ public partial class PersonAllStarEditor : ComponentBase
 
     private bool DisplaySports => Sports.Length > 1;
 
-    private SavePersonAllStarViewModel _viewModel = new();
+    private PersonAllStarEditModel _viewModel = new();
     private string _years;
 
     protected override void OnInitialized()
@@ -40,7 +40,7 @@ public partial class PersonAllStarEditor : ComponentBase
 
         foreach (var year in years)
         {
-            AllStars.Add(new SavePersonAllStarViewModel
+            AllStars.Add(new PersonAllStarEditModel
             {   Sport = _viewModel.Sport, 
                 SportLeagueLevelId = _viewModel.SportLeagueLevelId,
                 Year = year 

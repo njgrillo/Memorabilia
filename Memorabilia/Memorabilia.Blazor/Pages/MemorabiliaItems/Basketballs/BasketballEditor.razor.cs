@@ -1,18 +1,18 @@
 ﻿namespace Memorabilia.Blazor.Pages.MemorabiliaItems.Basketballs;
 
-public partial class BasketballEditor : MemorabiliaItem<SaveBasketballViewModel>
+public partial class BasketballEditor : MemorabiliaItem<BasketballEditModel>
 {
     [Inject]
     public BasketballValidator Validator { get; set; }
 
     protected async Task OnLoad()
     {      
-        var viewModel = await QueryRouter.Send(new GetBasketball(MemorabiliaId));
+        var viewModel = await QueryRouter.Send(new GetMemorabiliaItem(MemorabiliaId));
 
         if (viewModel.Brand == null)
             return;
 
-        ViewModel = new SaveBasketballViewModel(viewModel);
+        ViewModel = new BasketballEditModel(new BasketballModel(viewModel));
     }    
 
     protected async Task OnSave()

@@ -1,18 +1,18 @@
 ﻿namespace Memorabilia.Blazor.Pages.MemorabiliaItems.Shoes;
 
-public partial class ShoeEditor : MemorabiliaItem<SaveShoeViewModel>
+public partial class ShoeEditor : MemorabiliaItem<ShoeEditModel>
 {
     [Inject]
     public ShoeValidator Validator { get; set; }
 
     protected async Task OnLoad()
     {
-        var viewModel = await QueryRouter.Send(new GetShoe(MemorabiliaId));
+        var viewModel = await QueryRouter.Send(new GetMemorabiliaItem(MemorabiliaId));
 
         if (viewModel.Brand == null)
             return;
 
-        ViewModel = new SaveShoeViewModel(viewModel);
+        ViewModel = new ShoeEditModel(new ShoeModel(viewModel));
     }
 
     protected async Task OnSave()

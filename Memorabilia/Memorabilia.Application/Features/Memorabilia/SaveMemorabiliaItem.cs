@@ -71,58 +71,77 @@ public class SaveMemorabiliaItem
 
     public class Command : DomainCommand, ICommand
     {
-        private readonly MemorabiliaItemEditModel _viewModel;
+        private readonly MemorabiliaEditModel _editModel;
 
-        public Command(MemorabiliaItemEditModel viewModel)
+        public Command(MemorabiliaEditModel editModel)
         {
-            _viewModel = viewModel;
-            Id = _viewModel.Id;
+            _editModel = editModel;
+            Id = _editModel.Id;
         }
 
-        public int AcquisitionTypeId => _viewModel.AcquisitionTypeId;
+        public int AcquisitionTypeId 
+            => _editModel.AcquisitionTypeId;
 
-        public DateTime? AcquiredDate => _viewModel.AcquiredDate;
+        public DateTime? AcquiredDate 
+            => _editModel.AcquiredDate;
 
-        public bool AcquiredWithAutograph => _viewModel.AcquiredWithAutograph;
+        public bool AcquiredWithAutograph 
+            => _editModel.AcquiredWithAutograph;
 
-        public Entity.Collection[] Collections => _viewModel.Collections.ToArray();
+        public Entity.Collection[] Collections
+            => _editModel.Collections.ToArray();
 
         public int? ConditionId 
-            => _viewModel.ConditionId > 0 ? _viewModel.ConditionId : null;
+            => _editModel.ConditionId.ToNullableInt();
 
-        public decimal? Cost => _viewModel.Cost;
+        public decimal? Cost 
+            => _editModel.Cost;
 
-        public DateTime CreateDate => _viewModel.CreateDate;
+        public DateTime CreateDate 
+            => _editModel.CreateDate;
 
-        public int? Denominator => _viewModel.Denominator;
+        public int? Denominator 
+            => _editModel.Denominator;
 
-        public decimal? EstimatedValue => _viewModel.EstimatedValue;
+        public decimal? EstimatedValue 
+            => _editModel.EstimatedValue;
 
-        public bool ForTrade => _viewModel.ForTrade;
+        public bool ForTrade 
+            => _editModel.ForTrade;
 
-        public bool Framed => _viewModel.Framed;
+        public bool Framed 
+            => _editModel.Framed;
 
         public int Id { get; set; }
 
-        public bool IsDeleted => _viewModel.IsDeleted;
+        public bool IsDeleted 
+            => _editModel.IsDeleted;
 
-        public bool IsModified => _viewModel.IsModified;
+        public bool IsModified 
+            => _editModel.IsModified;
 
-        public bool IsNew => _viewModel.IsNew;
+        public bool IsNew 
+            => _editModel.IsNew;
 
-        public int ItemTypeId => _viewModel.ItemType?.Id ?? 0;
+        public int ItemTypeId 
+            => _editModel.ItemType?.Id ?? 0;
 
-        public DateTime? LastModifiedDate => _viewModel.LastModifiedDate;
+        public DateTime? LastModifiedDate 
+            => _editModel.LastModifiedDate;
 
-        public string Note => _viewModel.Note;  
+        public string Note 
+            => _editModel.Note;  
 
-        public int? Numerator => _viewModel.Numerator;
+        public int? Numerator 
+            => _editModel.Numerator;
 
-        public int PrivacyTypeId => _viewModel.PrivacyTypeId;
+        public int PrivacyTypeId 
+            => _editModel.PrivacyTypeId;
 
-        public int? PurchaseTypeId 
-            => _viewModel.PurchaseTypeId > 0 ? _viewModel.PurchaseTypeId : null;
+        public int? PurchaseTypeId
+            => _editModel.PurchaseTypeId.ToNullableInt();
 
-        public int UserId => _viewModel.UserId;
+        public int UserId 
+            => _editModel.UserId;
     }
 }

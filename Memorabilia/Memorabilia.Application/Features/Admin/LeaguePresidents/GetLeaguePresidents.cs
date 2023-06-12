@@ -1,8 +1,10 @@
 ﻿namespace Memorabilia.Application.Features.Admin.LeaguePresidents;
 
-public record GetLeaguePresidents(int? SportLeagueLevelId = null, int? LeagueId = null) : IQuery<LeaguePresidentsViewModel>
+public record GetLeaguePresidents(int? SportLeagueLevelId = null, 
+                                  int? LeagueId = null) 
+    : IQuery<Entity.LeaguePresident[]>
 {
-    public class Handler : QueryHandler<GetLeaguePresidents, LeaguePresidentsViewModel>
+    public class Handler : QueryHandler<GetLeaguePresidents, Entity.LeaguePresident[]>
     {
         private readonly ILeaguePresidentRepository _leaguePresidentRepository;
 
@@ -11,9 +13,8 @@ public record GetLeaguePresidents(int? SportLeagueLevelId = null, int? LeagueId 
             _leaguePresidentRepository = leaguePresidentRepository;
         }
 
-        protected override async Task<LeaguePresidentsViewModel> Handle(GetLeaguePresidents query)
-        {
-            return new LeaguePresidentsViewModel(await _leaguePresidentRepository.GetAll(query.SportLeagueLevelId, query.LeagueId));
-        }
+        protected override async Task<Entity.LeaguePresident[]> Handle(GetLeaguePresidents query)
+            => (await _leaguePresidentRepository.GetAll(query.SportLeagueLevelId, query.LeagueId))
+                    .ToArray();
     }
 }

@@ -1,18 +1,18 @@
 ﻿namespace Memorabilia.Blazor.Pages.MemorabiliaItems.Jerseys;
 
-public partial class JerseyEditor : MemorabiliaItem<SaveJerseyViewModel>
+public partial class JerseyEditor : MemorabiliaItem<JerseyEditModel>
 {
     [Inject]
     public JerseyValidator Validator { get; set; }
 
     protected async Task OnLoad()
     {
-        var viewModel = await QueryRouter.Send(new GetJersey(MemorabiliaId));
+        var viewModel = await QueryRouter.Send(new GetMemorabiliaItem(MemorabiliaId));
 
         if (viewModel.Brand == null)
             return;
 
-        ViewModel = new SaveJerseyViewModel(viewModel);
+        ViewModel = new JerseyEditModel(new JerseyModel(viewModel));
     }
 
     protected async Task OnSave()

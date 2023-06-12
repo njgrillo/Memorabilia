@@ -13,17 +13,18 @@ public record GetAutographAcquisitionData(int UserId) : IQuery<DashboardChartMod
 
         protected override async Task<DashboardChartModel> Handle(GetAutographAcquisitionData query)
         {
-            var acquisitionTypeIds = _repository.GetAcquisitionTypeIds(query.UserId);
-            var acquisitionTypeNames = acquisitionTypeIds.Select(acquisitionTypeId => Constant.AcquisitionType.Find(acquisitionTypeId).Name)
-                                                         .Distinct();
+            int[] acquisitionTypeIds = _repository.GetAcquisitionTypeIds(query.UserId);
+            string[] acquisitionTypeNames = acquisitionTypeIds.Select(acquisitionTypeId => Constant.AcquisitionType.Find(acquisitionTypeId).Name)
+                                                              .Distinct()
+                                                              .ToArray();
 
             var labels = new List<string>();
             var counts = new List<double>();
 
-            foreach (var acquisitionTypeName in acquisitionTypeNames)
+            foreach (string acquisitionTypeName in acquisitionTypeNames)
             {
                 var acquisitionType = Constant.AcquisitionType.Find(acquisitionTypeName);
-                var count = acquisitionTypeIds.Count(acquisitionTypeId => acquisitionTypeId == acquisitionType.Id);
+                int count = acquisitionTypeIds.Count(acquisitionTypeId => acquisitionTypeId == acquisitionType.Id);
 
                 counts.Add(count);
                 labels.Add($"{acquisitionTypeName} ({count})");

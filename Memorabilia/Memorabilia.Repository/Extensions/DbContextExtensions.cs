@@ -3,9 +3,7 @@
 public static class DbContextExtensions
 {
     public static IDbContextTransaction BeginTransaction(this DbContext context)
-    {
-        return context.Database.BeginTransaction();
-    }
+        => context.Database.BeginTransaction();
 
     public static void CommitTransaction(this DbContext context)
     {

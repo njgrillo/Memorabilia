@@ -1,8 +1,8 @@
 ﻿namespace Memorabilia.Application.Features.Admin.Teams;
 
-public record GetTeamDivisions(int TeamId) : IQuery<IEnumerable<TeamDivisionViewModel>>
+public record GetTeamDivisions(int TeamId) : IQuery<Entity.TeamDivision[]>
 {
-    public class Handler : QueryHandler<GetTeamDivisions, IEnumerable<TeamDivisionViewModel>>
+    public class Handler : QueryHandler<GetTeamDivisions, Entity.TeamDivision[]>
     {
         private readonly ITeamDivisionRepository _teamDivisionRepository;
 
@@ -11,13 +11,10 @@ public record GetTeamDivisions(int TeamId) : IQuery<IEnumerable<TeamDivisionView
             _teamDivisionRepository = teamDivisionRepository;
         }
 
-        protected override async Task<IEnumerable<TeamDivisionViewModel>> Handle(GetTeamDivisions query)
-        {
-            var teamDivisions = (await _teamDivisionRepository.GetAll(query.TeamId))
-                                        .OrderBy(teamDivision => teamDivision.DivisionName)
-                                        .ThenBy(teamDivision => teamDivision.Team?.Name);
-
-            return teamDivisions.Select(teamDivision => new TeamDivisionViewModel(teamDivision));
-        }
+        protected override async Task<Entity.TeamDivision[]> Handle(GetTeamDivisions query)
+            => (await _teamDivisionRepository.GetAll(query.TeamId))
+                    .OrderBy(teamDivision => teamDivision.DivisionName)
+                    .ThenBy(teamDivision => teamDivision.Team?.Name)
+                    .ToArray();
     }
 }

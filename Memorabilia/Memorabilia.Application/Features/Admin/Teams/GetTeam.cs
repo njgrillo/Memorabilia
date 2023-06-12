@@ -1,8 +1,8 @@
 ﻿namespace Memorabilia.Application.Features.Admin.Teams;
 
-public record GetTeam(int Id) : IQuery<TeamViewModel>
+public record GetTeam(int Id) : IQuery<Entity.Team>
 {
-    public class Handler : QueryHandler<GetTeam, TeamViewModel>
+    public class Handler : QueryHandler<GetTeam, Entity.Team>
     {
         private readonly ITeamRepository _teamRepository;
 
@@ -11,9 +11,7 @@ public record GetTeam(int Id) : IQuery<TeamViewModel>
             _teamRepository = teamRepository;
         }
 
-        protected override async Task<TeamViewModel> Handle(GetTeam query)
-        {
-            return new TeamViewModel(await _teamRepository.Get(query.Id));
-        }
+        protected override async Task<Entity.Team> Handle(GetTeam query)
+            => await _teamRepository.Get(query.Id);
     }
 }

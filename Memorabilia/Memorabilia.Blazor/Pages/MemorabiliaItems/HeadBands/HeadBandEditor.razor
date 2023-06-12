@@ -1,15 +1,15 @@
-﻿@inherits MemorabiliaItem<SaveHeadBandViewModel>
+﻿@inherits MemorabiliaItem<HeadBandEditModel>
 
 <EditMemorabiliaPage Item="ViewModel"
                      OnLoad="OnLoad"
                      OnSave="OnSave" 
-                     TItem="SaveHeadBandViewModel">
+                     TItem="HeadBandEditModel">
     <Content>
         <MemorabiliaItemEditor DisplayItemTypeSize="false" 
                                DisplaySinglePersonSelector="true"
                                DisplaySingleSportSelector="true"
                                DisplaySingleTeamSelector="true"
-                               TItem="SaveHeadBandViewModel"
+                               TItem="HeadBandEditModel"
                                ViewModel="ViewModel" />
     </Content>
 </EditMemorabiliaPage>

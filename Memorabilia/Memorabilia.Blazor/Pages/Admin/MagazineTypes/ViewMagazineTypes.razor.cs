@@ -1,6 +1,7 @@
 ﻿namespace Memorabilia.Blazor.Pages.Admin.MagazineTypes;
 
-public partial class ViewMagazineTypes : ViewDomainItem<MagazineTypesViewModel>, IDeleteDomainItem, IViewDomainItem
+public partial class ViewMagazineTypes 
+    : ViewDomainItem<MagazineTypesModel>, IDeleteDomainItem, IViewDomainItem
 {
     public async Task OnDelete(DomainEditModel viewModel)
     {
@@ -9,6 +10,6 @@ public partial class ViewMagazineTypes : ViewDomainItem<MagazineTypesViewModel>,
 
     public async Task OnLoad()
     {
-        await OnLoad(new GetMagazineTypes());
+        ViewModel = new MagazineTypesModel(await QueryRouter.Send(new GetMagazineTypes()));
     }
 }

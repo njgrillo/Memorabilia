@@ -27,7 +27,12 @@ public partial class SelectProjectAutographDialog
         if (!Parameters.Any())
             return;
 
-        Model = await QueryRouter.Send(new GetProjectPersonAutographLinks(Parameters));
+        Entity.Autograph[] autographs = await QueryRouter.Send(new GetProjectPersonAutographLinks(Parameters));
+
+        Model = autographs.Any()
+                ? autographs.Select(autograph => new AutographModel(autograph))
+                            .ToArray()
+                : Array.Empty<AutographModel>();
     }
 
     public void Cancel()

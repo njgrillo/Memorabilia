@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Application.Features.Admin.ItemTypeGameStyle;
 
-public record SaveItemTypeGameStyle(SaveItemTypeGameStyleViewModel ViewModel) : ICommand
+public record SaveItemTypeGameStyle(ItemTypeGameStyleEditModel ItemTypeGameStyle) : ICommand
 {
     public class Handler : CommandHandler<SaveItemTypeGameStyle>
     {
@@ -15,25 +15,26 @@ public record SaveItemTypeGameStyle(SaveItemTypeGameStyleViewModel ViewModel) : 
         {
             Entity.ItemTypeGameStyleType itemTypeGameStyle;
 
-            if (request.ViewModel.IsNew)
+            if (request.ItemTypeGameStyle.IsNew)
             {
-                itemTypeGameStyle = new Entity.ItemTypeGameStyleType(request.ViewModel.ItemType.Id, request.ViewModel.GameStyleTypeId);
+                itemTypeGameStyle = new Entity.ItemTypeGameStyleType(request.ItemTypeGameStyle.ItemType.Id, 
+                                                                     request.ItemTypeGameStyle.GameStyleTypeId);
 
                 await _itemTypeGameStyleRepository.Add(itemTypeGameStyle);
 
                 return;
             }
 
-            itemTypeGameStyle = await _itemTypeGameStyleRepository.Get(request.ViewModel.Id);
+            itemTypeGameStyle = await _itemTypeGameStyleRepository.Get(request.ItemTypeGameStyle.Id);
 
-            if (request.ViewModel.IsDeleted)
+            if (request.ItemTypeGameStyle.IsDeleted)
             {
                 await _itemTypeGameStyleRepository.Delete(itemTypeGameStyle);
 
                 return;
             }
 
-            itemTypeGameStyle.Set(request.ViewModel.GameStyleTypeId);
+            itemTypeGameStyle.Set(request.ItemTypeGameStyle.GameStyleTypeId);
 
             await _itemTypeGameStyleRepository.Update(itemTypeGameStyle);
         }

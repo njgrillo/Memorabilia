@@ -1,21 +1,17 @@
-﻿using Memorabilia.Domain.Entities;
+﻿namespace Memorabilia.Application.Features.Admin.ProjectTypes;
 
-namespace Memorabilia.Application.Features.Admin.ProjectTypes;
-
-public record GetProjectType(int Id) : IQuery<DomainModel>
+public record GetProjectType(int Id) : IQuery<Entity.ProjectType>
 {
-    public class Handler : QueryHandler<GetProjectType, DomainModel>
+    public class Handler : QueryHandler<GetProjectType, Entity.ProjectType>
     {
-        private readonly IDomainRepository<ProjectType> _projectTypeRepository;
+        private readonly IDomainRepository<Entity.ProjectType> _projectTypeRepository;
 
-        public Handler(IDomainRepository<ProjectType> projectTypeRepository)
+        public Handler(IDomainRepository<Entity.ProjectType> projectTypeRepository)
         {
             _projectTypeRepository = projectTypeRepository;
         }
 
-        protected override async Task<DomainModel> Handle(GetProjectType query)
-        {
-            return new DomainModel(await _projectTypeRepository.Get(query.Id));
-        }
+        protected override async Task<Entity.ProjectType> Handle(GetProjectType query)
+            => await _projectTypeRepository.Get(query.Id);
     }
 }

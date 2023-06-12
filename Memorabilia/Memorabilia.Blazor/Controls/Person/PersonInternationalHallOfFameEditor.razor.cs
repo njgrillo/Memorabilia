@@ -5,12 +5,12 @@ namespace Memorabilia.Blazor.Controls.Person;
 public partial class PersonInternationalHallOfFameEditor : ComponentBase
 {
     [Parameter]
-    public List<SavePersonInternationalHallOfFameViewModel> InternationalHallOfFames { get; set; } = new();
+    public List<PersonInternationalHallOfFameEditModel> InternationalHallOfFames { get; set; } = new();
 
     private bool _canAdd = true;
     private bool _canEditInternationalHallOfFameType = true;
     private bool _canUpdate;
-    private SavePersonInternationalHallOfFameViewModel _viewModel = new();
+    private PersonInternationalHallOfFameEditModel _viewModel = new();
 
     private void Add()
     {
@@ -19,10 +19,10 @@ public partial class PersonInternationalHallOfFameEditor : ComponentBase
 
         InternationalHallOfFames.Add(_viewModel);
 
-        _viewModel = new SavePersonInternationalHallOfFameViewModel();
+        _viewModel = new PersonInternationalHallOfFameEditModel();
     }
 
-    private void Edit(SavePersonInternationalHallOfFameViewModel hallOfFame)
+    private void Edit(PersonInternationalHallOfFameEditModel hallOfFame)
     {
         _viewModel.InternationalHallOfFameTypeId = hallOfFame.InternationalHallOfFameTypeId;
         _viewModel.Year = hallOfFame.Year;
@@ -39,7 +39,7 @@ public partial class PersonInternationalHallOfFameEditor : ComponentBase
         hallOfFame.InternationalHallOfFameTypeId = _viewModel.InternationalHallOfFameTypeId;
         hallOfFame.Year = _viewModel.Year;
 
-        _viewModel = new SavePersonInternationalHallOfFameViewModel();
+        _viewModel = new PersonInternationalHallOfFameEditModel();
 
         _canAdd = true;
         _canEditInternationalHallOfFameType = true;

@@ -1,9 +1,9 @@
-﻿@inherits MemorabiliaItem<SaveJerseyNumberViewModel>
+﻿@inherits MemorabiliaItem<JerseyNumberEditModel>
 
 <EditMemorabiliaPage Item="ViewModel"
                      OnLoad="OnLoad"
                      OnSave="OnSave" 
-                     TItem="SaveJerseyNumberViewModel">
+                     TItem="JerseyNumberEditModel">
     <Content>
         <MemorabiliaItemEditor DisplayItemTypeBrand="false"
                                DisplayItemTypeGameStyle="false"
@@ -12,7 +12,7 @@
                                DisplaySinglePersonSelector="true"
                                DisplaySingleSportSelector="true"
                                DisplaySingleTeamSelector="true"
-                               TItem="SaveJerseyNumberViewModel"
+                               TItem="JerseyNumberEditModel"
                                ViewModel="ViewModel">
             <AdditionalContent>
                 <DivRowCol3>

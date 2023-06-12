@@ -12,6 +12,5 @@ public abstract class ViewDomainItem<T> : CommandQuery where T : Model
     protected async Task OnLoad(IQuery<T> request)
     {
         ViewModel = await QueryRouter.Send(request);
-        //ViewModel = (T)Activator.CreateInstance(typeof(T), await QueryRouter.Send(request));
     }
 }

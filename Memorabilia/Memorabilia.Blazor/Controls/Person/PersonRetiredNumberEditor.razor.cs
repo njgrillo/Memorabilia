@@ -3,7 +3,7 @@
 public partial class PersonRetiredNumberEditor : ComponentBase
 {
     [Parameter]
-    public List<SavePersonRetiredNumberViewModel> RetiredNumbers { get; set; } = new();
+    public List<PersonRetiredNumberEditModel> RetiredNumbers { get; set; } = new();
 
     [Parameter]
     public Sport[] Sports { get; set; }    
@@ -11,7 +11,7 @@ public partial class PersonRetiredNumberEditor : ComponentBase
     private bool _canAdd = true;
     private bool _canEditFranchise = true;
     private bool _canUpdate;
-    private SavePersonRetiredNumberViewModel _viewModel = new();
+    private PersonRetiredNumberEditModel _viewModel = new();
 
     private void Add()
     {
@@ -20,10 +20,10 @@ public partial class PersonRetiredNumberEditor : ComponentBase
 
         RetiredNumbers.Add(_viewModel);
 
-        _viewModel = new SavePersonRetiredNumberViewModel();
+        _viewModel = new PersonRetiredNumberEditModel();
     }
 
-    private void Edit(SavePersonRetiredNumberViewModel retiredNumber)
+    private void Edit(PersonRetiredNumberEditModel retiredNumber)
     {
         _viewModel.Franchise = retiredNumber.Franchise;
         _viewModel.PlayerNumber = retiredNumber.PlayerNumber;
@@ -40,7 +40,7 @@ public partial class PersonRetiredNumberEditor : ComponentBase
         number.Franchise = _viewModel.Franchise;
         number.PlayerNumber = _viewModel.PlayerNumber;
 
-        _viewModel = new SavePersonRetiredNumberViewModel();
+        _viewModel = new PersonRetiredNumberEditModel();
 
         _canAdd = true;
         _canEditFranchise = true;

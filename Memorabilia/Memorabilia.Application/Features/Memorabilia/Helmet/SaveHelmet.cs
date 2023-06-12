@@ -13,7 +13,7 @@ public class SaveHelmet
 
         protected override async Task Handle(Command command)
         {
-            var memorabilia = await _memorabiliaRepository.Get(command.MemorabiliaId);
+            Entity.Memorabilia memorabilia = await _memorabiliaRepository.Get(command.MemorabiliaId);
 
             memorabilia.SetHelmet(command.BrandId,
                                   command.GameDate,
@@ -34,37 +34,50 @@ public class SaveHelmet
 
     public class Command : DomainCommand, ICommand
     {
-        private readonly SaveHelmetViewModel _viewModel;
+        private readonly HelmetEditModel _editModel;
 
-        public Command(SaveHelmetViewModel viewModel)
+        public Command(HelmetEditModel editModel)
         {
-            _viewModel = viewModel;
+            _editModel = editModel;
         }            
 
-        public int BrandId => _viewModel.BrandId;
+        public int BrandId 
+            => _editModel.BrandId;
 
-        public DateTime? GameDate => _viewModel.GameDate;
+        public DateTime? GameDate 
+            => _editModel.GameDate;
 
-        public int? GameStyleTypeId => _viewModel.GameStyleTypeId > 0 ? _viewModel.GameStyleTypeId : 0;
+        public int? GameStyleTypeId 
+            => _editModel.GameStyleTypeId.ToNullableInt();
 
-        public int? HelmetFinishId => _viewModel.HelmetFinishId > 0 ? _viewModel.HelmetFinishId : null;
+        public int? HelmetFinishId 
+            => _editModel.HelmetFinishId.ToNullableInt();
 
-        public int? HelmetQualityTypeId => _viewModel.HelmetQualityTypeId > 0 ? _viewModel.HelmetQualityTypeId : null;
+        public int? HelmetQualityTypeId 
+            => _editModel.HelmetQualityTypeId.ToNullableInt();
 
-        public int? HelmetTypeId => _viewModel.HelmetTypeId > 0 ? _viewModel.HelmetTypeId : null;
+        public int? HelmetTypeId 
+            => _editModel.HelmetTypeId.ToNullableInt();
 
-        public int LevelTypeId => _viewModel.LevelTypeId;
+        public int LevelTypeId 
+            => _editModel.LevelTypeId;
 
-        public int MemorabiliaId => _viewModel.MemorabiliaId;
+        public int MemorabiliaId 
+            => _editModel.MemorabiliaId;
 
-        public int[] PersonIds => _viewModel.People.Where(person => !person.IsDeleted).Select(person => person.Id).ToArray();
+        public int[] PersonIds 
+            => _editModel.People.ActiveIds();
 
-        public int SizeId => _viewModel.SizeId;
+        public int SizeId 
+            => _editModel.SizeId;
 
-        public int[] SportIds => _viewModel.SportIds.ToArray();
+        public int[] SportIds 
+            => _editModel.SportIds.ToArray();
 
-        public int[] TeamIds => _viewModel.Teams.Where(team => !team.IsDeleted).Select(team => team.Id).ToArray();
+        public int[] TeamIds 
+            => _editModel.Teams.ActiveIds();
 
-        public bool Throwback => _viewModel.Throwback;
+        public bool Throwback 
+            => _editModel.Throwback;
     }
 }

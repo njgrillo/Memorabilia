@@ -1,17 +1,17 @@
-﻿@inherits MemorabiliaItem<SaveCompactDiscViewModel>
+﻿@inherits MemorabiliaItem<CompactDiscEditModel>
 
 <EditMemorabiliaPage Item="ViewModel"
                      OnLoad="OnLoad"
                      OnSave="OnSave" 
                      PerformValidation="false"
-                     TItem="SaveCompactDiscViewModel">
+                     TItem="CompactDiscEditModel">
     <Content>
         <MemorabiliaItemEditor DisplayItemTypeBrand="false"
                                DisplayItemTypeGameStyle="false"
                                DisplayItemTypeLevel="false"
                                DisplayItemTypeSize="false"
                                DisplayMultiPersonSelector="true"
-                               TItem="SaveCompactDiscViewModel"
+                               TItem="CompactDiscEditModel"
                                ViewModel="ViewModel" />
     </Content>
 </EditMemorabiliaPage>

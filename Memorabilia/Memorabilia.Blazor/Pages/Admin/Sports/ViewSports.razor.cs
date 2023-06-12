@@ -1,16 +1,17 @@
 ﻿namespace Memorabilia.Blazor.Pages.Admin.Sports;
 
-public partial class ViewSports : ViewItem<SportsViewModel, SportViewModel>
+public partial class ViewSports 
+    : ViewItem<SportsModel, SportModel>
 {
     protected async Task OnLoad()
     {
-        await OnLoad(new GetSports());
+        ViewModel = new SportsModel(await QueryRouter.Send(new GetSports()));
     }
 
     protected override async Task Delete(int id)
     {
         var deletedItem = ViewModel.Sports.Single(sport => sport.Id == id);
-        var viewModel = new SaveSportViewModel(deletedItem)
+        var viewModel = new SportEditModel(deletedItem)
         {
             IsDeleted = true
         };
@@ -22,11 +23,9 @@ public partial class ViewSports : ViewItem<SportsViewModel, SportViewModel>
         ShowDeleteSuccessfulMessage(ViewModel.ItemTitle);
     }
 
-    protected override bool FilterFunc(SportViewModel viewModel, string search)
-    {
-        return search.IsNullOrEmpty() ||
-               viewModel.Name.Contains(search, StringComparison.OrdinalIgnoreCase) ||
-               (!viewModel.AlternateName.IsNullOrEmpty() &&
-                viewModel.AlternateName.Contains(search, StringComparison.OrdinalIgnoreCase));
-    }
+    protected override bool FilterFunc(SportModel viewModel, string search)
+        => search.IsNullOrEmpty() ||
+           viewModel.Name.Contains(search, StringComparison.OrdinalIgnoreCase) ||
+           (!viewModel.AlternateName.IsNullOrEmpty() &&
+            viewModel.AlternateName.Contains(search, StringComparison.OrdinalIgnoreCase));
 }

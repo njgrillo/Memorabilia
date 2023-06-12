@@ -1,15 +1,15 @@
-﻿@inherits MemorabiliaItem<SaveCardViewModel>
+﻿@inherits MemorabiliaItem<CardEditModel>
 
 <EditMemorabiliaPage Item="ViewModel"
                      OnLoad="OnLoad"
                      OnSave="OnSave" 
-                     TItem="SaveCardViewModel">
+                     TItem="CardEditModel">
     <Content>
         <MemorabiliaItemEditor DisplayItemTypeGameStyle="false" 
                                DisplayMultiPersonSelector="true"
                                DisplayMultiSportSelector="true"
                                DisplayMultiTeamSelector="true"
-                               TItem="SaveCardViewModel"
+                               TItem="CardEditModel"
                                ViewModel="ViewModel">
             <AdditionalContent>
                 <DivRowCol3>

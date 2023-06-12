@@ -1,14 +1,14 @@
-﻿@inherits MemorabiliaItem<SaveTennisRacketViewModel>
+﻿@inherits MemorabiliaItem<TennisRacketEditModel>
 
 <EditMemorabiliaPage Item="ViewModel"
                      OnLoad="OnLoad"
                      OnSave="OnSave" 
-                     TItem="SaveTennisRacketViewModel">
+                     TItem="TennisRacketEditModel">
     <Content>
         <MemorabiliaItemEditor DisplaySinglePersonSelector="true"
                                GameDateDisplayText="Match Date"
                                GameStyleTypeDisplayText="Match Style"
-                               TItem="SaveTennisRacketViewModel"
+                               TItem="TennisRacketEditModel"
                                ViewModel="ViewModel" />
     </Content>
 </EditMemorabiliaPage>

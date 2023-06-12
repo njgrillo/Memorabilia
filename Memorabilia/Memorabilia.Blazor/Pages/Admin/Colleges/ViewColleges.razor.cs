@@ -1,6 +1,7 @@
 ﻿namespace Memorabilia.Blazor.Pages.Admin.Colleges;
 
-public partial class ViewColleges : ViewDomainItem<CollegesViewModel>, IDeleteDomainItem, IViewDomainItem
+public partial class ViewColleges 
+    : ViewDomainItem<CollegesModel>, IDeleteDomainItem, IViewDomainItem
 {
     public async Task OnDelete(DomainEditModel viewModel)
     {
@@ -9,6 +10,6 @@ public partial class ViewColleges : ViewDomainItem<CollegesViewModel>, IDeleteDo
 
     public async Task OnLoad()
     {
-        ViewModel = await QueryRouter.Send(new GetColleges());
+        ViewModel = new CollegesModel(await QueryRouter.Send(new GetColleges()));
     }
 }

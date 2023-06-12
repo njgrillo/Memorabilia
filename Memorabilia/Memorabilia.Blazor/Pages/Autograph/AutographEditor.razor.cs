@@ -16,7 +16,7 @@ public partial class AutographEditor
 
     protected async Task OnLoad()
     {
-        var viewModel = new MemorabiliaItemModel(await QueryRouter.Send(new GetMemorabiliaItem(MemorabiliaId)));
+        var viewModel = new MemorabiliaModel(await QueryRouter.Send(new GetMemorabiliaItem(MemorabiliaId)));
 
         if (!viewModel.Autographs.Any() || AutographId <= 0)
         {
@@ -41,7 +41,7 @@ public partial class AutographEditor
         ViewModel.ContinueNavigationPath = $"Autographs/Inscriptions/{EditModeType.Update.Name}/{command.Id}";
     }
 
-    private void GetViewModel(MemorabiliaItemModel viewModel)
+    private void GetViewModel(MemorabiliaModel viewModel)
     {
         var autograph = viewModel.Autographs.SingleOrDefault(autograph => autograph.Id == AutographId);
 

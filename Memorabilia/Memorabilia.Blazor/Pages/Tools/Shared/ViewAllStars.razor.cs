@@ -28,7 +28,7 @@ public partial class ViewAllStars
 
     private async Task OnInputChange(int year)
     {
-        Model = await QueryRouter.Send(new GetAllStars(year, Sport));
+        Model = new AllStarsModel(await QueryRouter.Send(new GetAllStars(year, Sport)), Sport, year);
 
         if (Model.IsDoubleHeaderAllStarGame)
         {

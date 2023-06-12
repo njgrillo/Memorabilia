@@ -7,7 +7,9 @@ public class MemorabiliaGalleryItemModel
     public MemorabiliaGalleryItemModel(Entity.Memorabilia memorabilia)
     {
         _memorabilia = memorabilia;
-        Autographs = _memorabilia.Autographs.Select(autograph => new AutographGalleryModel(autograph));
+
+        Autographs = _memorabilia.Autographs
+                                 .Select(autograph => new AutographGalleryModel(autograph));
     }
 
     public IEnumerable<AutographGalleryModel> Autographs { get; set; } 
@@ -25,20 +27,25 @@ public class MemorabiliaGalleryItemModel
     {
         get
         {
-            var imageFileName = _memorabilia.Images.Any()
-                ? _memorabilia.Images.SingleOrDefault(image => image.ImageTypeId == Constant.ImageType.Primary.Id)?.FileName ?? Constant.ImageFileName.ImageNotAvailable
+            string imageFileName = _memorabilia.Images.Any()
+                ? _memorabilia.Images
+                              .SingleOrDefault(image => image.ImageTypeId == Constant.ImageType.Primary.Id)?.FileName ?? Constant.ImageFileName.ImageNotAvailable
                 : Constant.ImageFileName.ImageNotAvailable;
 
-            return !imageFileName.IsNullOrEmpty() ? imageFileName : Constant.ImageFileName.ImageNotAvailable;
+            return !imageFileName.IsNullOrEmpty() 
+                ? imageFileName 
+                : Constant.ImageFileName.ImageNotAvailable;
         }
     }
 
-    public Entity.Memorabilia Memorabilia => _memorabilia;
+    public Entity.Memorabilia Memorabilia 
+        => _memorabilia;
 
     public string PrimaryImageNavigationPath 
         => $"/Memorabilia/Image/{Constant.EditModeType.Update.Name}/{Id}";    
 
-    public string Subtitle => string.Empty;
+    public string Subtitle 
+        => string.Empty;
 
     public string Title
     {
@@ -60,5 +67,6 @@ public class MemorabiliaGalleryItemModel
         }
     }
 
-    public string TooltipText => Title;
+    public string TooltipText 
+        => Title;
 }

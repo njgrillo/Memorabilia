@@ -13,7 +13,7 @@ public partial class Register : ComponentBase
     [Parameter]
     public EventCallback<int> OnSaved { get; set; }
 
-    private readonly SaveUserViewModel _viewModel = new();
+    private readonly UserEditModel _viewModel = new();
 
     protected async Task HandleValidSubmit()
     {

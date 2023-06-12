@@ -1,18 +1,18 @@
 ﻿namespace Memorabilia.Blazor.Pages.MemorabiliaItems.Tickets;
 
-public partial class TicketEditor : MemorabiliaItem<SaveTicketViewModel>
+public partial class TicketEditor : MemorabiliaItem<TicketEditModel>
 {
     [Inject]
     public TicketValidator Validator { get; set; }
 
     protected async Task OnLoad()
     {
-        var viewModel = await QueryRouter.Send(new GetTicket(MemorabiliaId));
+        var viewModel = await QueryRouter.Send(new GetMemorabiliaItem(MemorabiliaId));
 
         if (viewModel.Size == null)
             return;
 
-        ViewModel = new SaveTicketViewModel(viewModel);
+        ViewModel = new TicketEditModel(new TicketModel(viewModel));
     }
 
     protected async Task OnSave()

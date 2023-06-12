@@ -1,11 +1,10 @@
-﻿using Memorabilia.Domain.Constants;
+﻿namespace Memorabilia.Application.Features.Tools.Shared.InternationalHallOfFames;
 
-namespace Memorabilia.Application.Features.Tools.Shared.InternationalHallOfFames;
-
-public record GetInternationalHallOfFames(int InternationalHallOfFameTypeId, Sport Sport) 
-    : IQuery<InternationalHallOfFamesModel>
+public record GetInternationalHallOfFames(int InternationalHallOfFameTypeId, 
+                                          Constant.Sport Sport) 
+    : IQuery<Entity.InternationalHallOfFame[]>
 {
-    public class Handler : QueryHandler<GetInternationalHallOfFames, InternationalHallOfFamesModel>
+    public class Handler : QueryHandler<GetInternationalHallOfFames, Entity.InternationalHallOfFame[]>
     {
         private readonly IInternationalHallOfFameRepository _internationalHallOfFameRepository;
 
@@ -14,12 +13,8 @@ public record GetInternationalHallOfFames(int InternationalHallOfFameTypeId, Spo
             _internationalHallOfFameRepository = internationalHallOfFameRepository;
         }
 
-        protected override async Task<InternationalHallOfFamesModel> Handle(GetInternationalHallOfFames query)
-        {
-            return new InternationalHallOfFamesModel(await _internationalHallOfFameRepository.GetAll(query.InternationalHallOfFameTypeId, query.Sport.Id), query.Sport)
-            {
-                InternationalHallOfFameTypeId = query.InternationalHallOfFameTypeId
-            };
-        }
+        protected override async Task<Entity.InternationalHallOfFame[]> Handle(GetInternationalHallOfFames query)
+            => (await _internationalHallOfFameRepository.GetAll(query.InternationalHallOfFameTypeId, query.Sport.Id))
+                    .ToArray();
     }
 }

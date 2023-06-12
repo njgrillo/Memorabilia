@@ -2,7 +2,8 @@
 
 public class AwardRuleFactory
 {
-    public List<IAwardRule> Rules { get; set; } = new();
+    public List<IAwardRule> Rules { get; set; } 
+        = new();
 
     public AwardRuleFactory()
     {

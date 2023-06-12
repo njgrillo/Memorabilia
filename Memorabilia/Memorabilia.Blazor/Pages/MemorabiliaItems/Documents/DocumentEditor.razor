@@ -1,16 +1,16 @@
-﻿@inherits MemorabiliaItem<SaveDocumentViewModel>
+﻿@inherits MemorabiliaItem<DocumentEditModel>
 
 <EditMemorabiliaPage Item="ViewModel"
                      OnLoad="OnLoad"
                      OnSave="OnSave" 
-                     TItem="SaveDocumentViewModel">
+                     TItem="DocumentEditModel">
     <Content>
         <MemorabiliaItemEditor DisplayItemTypeBrand="false"
                                DisplayItemTypeGameStyle="false"
                                DisplayItemTypeLevel="false"
                                DisplayMultiPersonSelector="true"
                                DisplayMultiSportSelector="false"
-                               TItem="SaveDocumentViewModel"
+                               TItem="DocumentEditModel"
                                ViewModel="ViewModel" />
     </Content>
 </EditMemorabiliaPage>

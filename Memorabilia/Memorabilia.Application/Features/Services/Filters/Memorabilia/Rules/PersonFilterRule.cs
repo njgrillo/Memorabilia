@@ -18,9 +18,7 @@ public class PersonFilterRule : IFilterRule<Entity.Memorabilia>
     }
 
     public Expression<Func<Entity.Memorabilia, bool>> GetExpression()
-    {
-        return _filterItem == FilterItemEnum.AutographPerson
+        => _filterItem == FilterItemEnum.AutographPerson
             ? item => item.Autographs.Any(autograph => autograph.PersonId == _personId)
             : item => item.People.Select(person => person.PersonId).Contains(_personId.Value);
-    }
 }

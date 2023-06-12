@@ -11,8 +11,8 @@ public class AllStarsModel
         _sport = sport;
         Year = year;
 
-        var items = allStars.Select(allStar => new AllStarModel(allStar, sport))
-                            .OrderBy(allStar => allStar.PersonName);
+        IOrderedEnumerable<AllStarModel> items = allStars.Select(allStar => new AllStarModel(allStar, sport))
+                                                         .OrderBy(allStar => allStar.PersonName);
 
         if (!DisplayABAAllStars && !DisplayAFLProBowlers)
         {

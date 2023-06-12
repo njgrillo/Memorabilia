@@ -1,9 +1,9 @@
-﻿@inherits MemorabiliaItem<SavePinFlagViewModel>
+﻿@inherits MemorabiliaItem<PinFlagEditModel>
 
 <EditMemorabiliaPage Item="ViewModel"
                      OnLoad="OnLoad"
                      OnSave="OnSave" 
-                     TItem="SavePinFlagViewModel">
+                     TItem="PinFlagEditModel">
     <Content>
         <MemorabiliaItemEditor DisplayItemTypeBrand="false"
                                DisplayItemTypeLevel="false"
@@ -11,7 +11,7 @@
                                DisplaySinglePersonSelector="true"
                                GameDateDisplayText="Tournament Date"
                                GameStyleTypeDisplayText="Tournament Style"
-                               TItem="SavePinFlagViewModel"
+                               TItem="PinFlagEditModel"
                                ViewModel="ViewModel" />
     </Content>
 </EditMemorabiliaPage>

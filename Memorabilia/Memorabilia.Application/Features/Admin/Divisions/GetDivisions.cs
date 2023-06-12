@@ -1,21 +1,18 @@
-﻿using Memorabilia.Domain.Entities;
+﻿namespace Memorabilia.Application.Features.Admin.Divisions;
 
-namespace Memorabilia.Application.Features.Admin.Divisions;
-
-public record GetDivisions() : IQuery<DivisionsViewModel>
+public record GetDivisions() : IQuery<Entity.Division[]>
 {
-    public class Handler : QueryHandler<GetDivisions, DivisionsViewModel>
+    public class Handler : QueryHandler<GetDivisions, Entity.Division[]>
     {
-        private readonly IDomainRepository<Division> _divisionRepository;
+        private readonly IDomainRepository<Entity.Division> _divisionRepository;
 
-        public Handler(IDomainRepository<Division> divisionRepository)
+        public Handler(IDomainRepository<Entity.Division> divisionRepository)
         {
             _divisionRepository = divisionRepository;
         }
 
-        protected override async Task<DivisionsViewModel> Handle(GetDivisions query)
-        {
-            return new DivisionsViewModel(await _divisionRepository.GetAll());
-        }
+        protected override async Task<Entity.Division[]> Handle(GetDivisions query)
+            => (await _divisionRepository.GetAll())
+                    .ToArray();
     }
 }

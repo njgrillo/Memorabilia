@@ -1,21 +1,17 @@
-﻿using Memorabilia.Domain.Entities;
+﻿namespace Memorabilia.Application.Features.Admin.WritingInstruments;
 
-namespace Memorabilia.Application.Features.Admin.WritingInstruments;
-
-public record GetWritingInstrument(int Id) : IQuery<DomainModel>
+public record GetWritingInstrument(int Id) : IQuery<Entity.WritingInstrument>
 {
-    public class Handler : QueryHandler<GetWritingInstrument, DomainModel>
+    public class Handler : QueryHandler<GetWritingInstrument, Entity.WritingInstrument>
     {
-        private readonly IDomainRepository<WritingInstrument> _writingInstrumentRepository;
+        private readonly IDomainRepository<Entity.WritingInstrument> _writingInstrumentRepository;
 
-        public Handler(IDomainRepository<WritingInstrument> writingInstrumentRepository)
+        public Handler(IDomainRepository<Entity.WritingInstrument> writingInstrumentRepository)
         {
             _writingInstrumentRepository = writingInstrumentRepository;
         }
 
-        protected override async Task<DomainModel> Handle(GetWritingInstrument query)
-        {
-            return new DomainModel(await _writingInstrumentRepository.Get(query.Id));
-        }
+        protected override async Task<Entity.WritingInstrument> Handle(GetWritingInstrument query)
+            => await _writingInstrumentRepository.Get(query.Id);
     }
 }

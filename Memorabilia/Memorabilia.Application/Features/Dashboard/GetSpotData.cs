@@ -13,14 +13,15 @@ public record GetSpotData(int UserId) : IQuery<DashboardChartModel>
 
         protected override async Task<DashboardChartModel> Handle(GetSpotData query)
         {
-            var spotIds = _repository.GetSpotIds(query.UserId);
-            var spotNames = spotIds.Select(spotId => Constant.Spot.Find(spotId).Name)
-                                   .Distinct();
+            int[] spotIds = _repository.GetSpotIds(query.UserId);
+            string[] spotNames = spotIds.Select(spotId => Constant.Spot.Find(spotId).Name)
+                                        .Distinct()
+                                        .ToArray();
 
             var labels = new List<string>();
             var counts = new List<double>();
 
-            foreach (var spotName in spotNames)
+            foreach (string spotName in spotNames)
             {
                 var spot = Constant.Spot.Find(spotName);
                 var count = spotIds.Count(spotId => spotId == spot.Id);

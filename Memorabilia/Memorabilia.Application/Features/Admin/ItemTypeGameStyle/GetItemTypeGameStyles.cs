@@ -1,8 +1,8 @@
 ﻿namespace Memorabilia.Application.Features.Admin.ItemTypeGameStyle;
 
-public record GetItemTypeGameStyles(int? ItemTypeId = null) : IQuery<ItemTypeGameStylesViewModel>
+public record GetItemTypeGameStyles(int? ItemTypeId = null) : IQuery<Entity.ItemTypeGameStyleType[]>
 {
-    public class Handler : QueryHandler<GetItemTypeGameStyles, ItemTypeGameStylesViewModel>
+    public class Handler : QueryHandler<GetItemTypeGameStyles, Entity.ItemTypeGameStyleType[]>
     {
         private readonly IItemTypeGameStyleTypeRepository _itemTypeGameStyleRepository;
 
@@ -11,9 +11,8 @@ public record GetItemTypeGameStyles(int? ItemTypeId = null) : IQuery<ItemTypeGam
             _itemTypeGameStyleRepository = itemTypeGameStyleRepository;
         }
 
-        protected override async Task<ItemTypeGameStylesViewModel> Handle(GetItemTypeGameStyles query)
-        {
-            return new ItemTypeGameStylesViewModel(await _itemTypeGameStyleRepository.GetAll(query.ItemTypeId));
-        }
+        protected override async Task<Entity.ItemTypeGameStyleType[]> Handle(GetItemTypeGameStyles query)
+            => (await _itemTypeGameStyleRepository.GetAll(query.ItemTypeId))
+                    .ToArray();
     }
 }

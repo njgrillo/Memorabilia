@@ -1,18 +1,18 @@
 ﻿namespace Memorabilia.Blazor.Pages.MemorabiliaItems.Canvases;
 
-public partial class CanvasEditor : MemorabiliaItem<SaveCanvasViewModel>
+public partial class CanvasEditor : MemorabiliaItem<CanvasEditModel>
 {
     [Inject]
     public CanvasValidator Validator { get; set; }
 
     protected async Task OnLoad()
     {
-        var viewModel = await QueryRouter.Send(new GetCanvas(MemorabiliaId));
+        var viewModel = await QueryRouter.Send(new GetMemorabiliaItem(MemorabiliaId));
 
         if (viewModel.Brand == null)
             return;
 
-        ViewModel = new SaveCanvasViewModel(viewModel);
+        ViewModel = new CanvasEditModel(new CanvasModel(viewModel));
     }
 
     protected async Task OnSave()

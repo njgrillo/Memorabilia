@@ -10,7 +10,7 @@ public partial class ImageMaintenance : CommandQuery
     [Parameter]
     public string PersonImageRootPath { get; set; }
 
-    private ImageMaintenanceViewModel _viewModel = new();
+    private ImageMaintenanceModel _viewModel = new();
 
     protected override async Task OnInitializedAsync()
     {

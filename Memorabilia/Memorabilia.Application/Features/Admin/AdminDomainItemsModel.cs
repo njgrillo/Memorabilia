@@ -9,5 +9,6 @@ public class AdminDomainItemsModel
 
     public IEnumerable<AdminDomainItemModel> Items { get; set; }
 
-    public static string Title => "Domain Items";
+    public static string Title 
+        => "Domain Items";
 }

@@ -3,7 +3,7 @@
 public partial class PersonCareerRecordEditor : ComponentBase
 {
     [Parameter]
-    public List<SavePersonCareerRecordViewModel> CareerRecords { get; set; } = new();
+    public List<PersonCareerRecordEditModel> CareerRecords { get; set; } = new();
 
     [Parameter]
     public Sport[] Sports { get; set; }
@@ -11,7 +11,7 @@ public partial class PersonCareerRecordEditor : ComponentBase
     private bool _canAdd = true;
     private bool _canEditRecordType = true;
     private bool _canUpdate;
-    private SavePersonCareerRecordViewModel _viewModel = new();
+    private PersonCareerRecordEditModel _viewModel = new();
 
     private void Add()
     {
@@ -20,10 +20,10 @@ public partial class PersonCareerRecordEditor : ComponentBase
 
         CareerRecords.Add(_viewModel);
 
-        _viewModel = new SavePersonCareerRecordViewModel();
+        _viewModel = new PersonCareerRecordEditModel();
     }
 
-    private void Edit(SavePersonCareerRecordViewModel record)
+    private void Edit(PersonCareerRecordEditModel record)
     {
         _viewModel.RecordType = record.RecordType;
         _viewModel.Record = record.Record;
@@ -39,7 +39,7 @@ public partial class PersonCareerRecordEditor : ComponentBase
 
         record.Record = _viewModel.Record;
 
-        _viewModel = new SavePersonCareerRecordViewModel();
+        _viewModel = new PersonCareerRecordEditModel();
 
         _canAdd = true;
         _canEditRecordType = true;

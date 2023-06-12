@@ -26,12 +26,12 @@ public partial class MemorabiliaImageEditor
     [Parameter]
     public int UserId { get; set; }
     
-    private EditImages<SaveMemorabiliaImagesViewModel> EditImages;
-    private SaveMemorabiliaImagesViewModel ViewModel = new ();
+    private EditImages<MemorabiliaImagesEditModel> EditImages;
+    private MemorabiliaImagesEditModel ViewModel = new ();
 
     protected async Task OnLoad()
     {
-        ViewModel = new SaveMemorabiliaImagesViewModel(new MemorabiliaItemModel(await QueryRouter.Send(new GetMemorabiliaItem(MemorabiliaId))));
+        ViewModel = new MemorabiliaImagesEditModel(new MemorabiliaModel(await QueryRouter.Send(new GetMemorabiliaItem(MemorabiliaId))));
     }
 
     protected async Task OnSave()

@@ -12,8 +12,6 @@ public record GetProjectQuery(int Id) : IQuery<Entity.Project>
         }
 
         protected override async Task<Entity.Project> Handle(GetProjectQuery query)
-        {
-            return await _projectRepository.Get(query.Id);
-        }
+            => await _projectRepository.Get(query.Id);
     }
 }

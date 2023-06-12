@@ -13,14 +13,16 @@ public class SaveTeamChampionship
 
         protected override async Task Handle(Command command)
         {
-            var team = await _teamRepository.Get(command.TeamId);
+            Entity.Team team = await _teamRepository.Get(command.TeamId);
 
             if (command.DeletedItemIds.Any())
                 team.RemoveChampionships(command.DeletedItemIds);
 
             foreach (var teamChampionship in command.Items.Where(item => !item.IsDeleted))
             {
-                team.SetChampionship(teamChampionship.Id, teamChampionship.ChampionshipTypeId, teamChampionship.Year);
+                team.SetChampionship(teamChampionship.Id, 
+                                     teamChampionship.ChampionshipTypeId, 
+                                     teamChampionship.Year);
             }
 
             await _teamRepository.Update(team);
@@ -29,15 +31,18 @@ public class SaveTeamChampionship
 
     public class Command : DomainCommand, ICommand
     {
-        public Command(int teamId, IEnumerable<SaveTeamChampionshipViewModel> items)
+        public Command(int teamId, IEnumerable<TeamChampionshipEditModel> items)
         {
             TeamId = teamId;
             Items = items.ToArray();
         }
 
-        public int[] DeletedItemIds => Items.Where(item => item.IsDeleted).Select(item => item.Id).ToArray();
+        public int[] DeletedItemIds 
+            => Items.Where(item => item.IsDeleted)
+                    .Select(item => item.Id)
+                    .ToArray();
 
-        public SaveTeamChampionshipViewModel[] Items { get; }
+        public TeamChampionshipEditModel[] Items { get; }
 
         public int TeamId { get; set; }
     }

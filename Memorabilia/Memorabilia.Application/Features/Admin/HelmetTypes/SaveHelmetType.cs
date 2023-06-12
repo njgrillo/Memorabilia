@@ -1,40 +1,41 @@
-﻿using Memorabilia.Domain.Entities;
+﻿namespace Memorabilia.Application.Features.Admin.HelmetTypes;
 
-namespace Memorabilia.Application.Features.Admin.HelmetTypes;
-
-public record SaveHelmetType(DomainEditModel ViewModel) : ICommand
+public record SaveHelmetType(DomainEditModel HelmetType) : ICommand
 {
     public class Handler : CommandHandler<SaveHelmetType>
     {
-        private readonly IDomainRepository<HelmetType> _helmetTypeRepository;
+        private readonly IDomainRepository<Entity.HelmetType> _helmetTypeRepository;
 
-        public Handler(IDomainRepository<HelmetType> helmetTypeRepository)
+        public Handler(IDomainRepository<Entity.HelmetType> helmetTypeRepository)
         {
             _helmetTypeRepository = helmetTypeRepository;
         }
 
         protected override async Task Handle(SaveHelmetType request)
         {
-            HelmetType helmetType;
+            Entity.HelmetType helmetType;
 
-            if (request.ViewModel.IsNew)
+            if (request.HelmetType.IsNew)
             {
-                helmetType = new HelmetType(request.ViewModel.Name, request.ViewModel.Abbreviation);
+                helmetType = new Entity.HelmetType(request.HelmetType.Name, 
+                                                   request.HelmetType.Abbreviation);
+
                 await _helmetTypeRepository.Add(helmetType);
 
                 return;
             }
 
-            helmetType = await _helmetTypeRepository.Get(request.ViewModel.Id);
+            helmetType = await _helmetTypeRepository.Get(request.HelmetType.Id);
 
-            if (request.ViewModel.IsDeleted)
+            if (request.HelmetType.IsDeleted)
             {
                 await _helmetTypeRepository.Delete(helmetType);
 
                 return;
             }
 
-            helmetType.Set(request.ViewModel.Name, request.ViewModel.Abbreviation);
+            helmetType.Set(request.HelmetType.Name, 
+                           request.HelmetType.Abbreviation);
 
             await _helmetTypeRepository.Update(helmetType);
         }

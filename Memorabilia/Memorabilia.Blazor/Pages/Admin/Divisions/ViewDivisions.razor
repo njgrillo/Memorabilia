@@ -1,4 +1,4 @@
-﻿@inherits ViewItem<DivisionsViewModel, DivisionViewModel>
+﻿@inherits ViewItem<DivisionsModel, DivisionModel>
 
 <PageView AddRoute="@ViewModel.AddRoute" 
           AddTitle="@ViewModel.AddTitle"
@@ -11,7 +11,7 @@
             <Content>
                 <MudTable Bordered="false"
                           Dense="false" 
-                          Filter="new Func<DivisionViewModel,bool>(FilterFunc1)"
+                          Filter="new Func<DivisionModel,bool>(FilterFunc1)"
                           Hover="true"
                           Items="@ViewModel.Divisions"    
                           Striped="true">

@@ -13,14 +13,15 @@ public record GetSizeData(int UserId) : IQuery<DashboardChartModel>
 
         protected override async Task<DashboardChartModel> Handle(GetSizeData query)
         {
-            var sizeIds = _repository.GetSizeIds(query.UserId);
-            var sizeNames = sizeIds.Select(sizeId => Constant.Size.Find(sizeId).Name)
-                                   .Distinct();
+            int[] sizeIds = _repository.GetSizeIds(query.UserId);
+            string[] sizeNames = sizeIds.Select(sizeId => Constant.Size.Find(sizeId).Name)
+                                        .Distinct()
+                                        .ToArray();
 
             var labels = new List<string>();
             var counts = new List<double>();
 
-            foreach (var sizeName in sizeNames)
+            foreach (string sizeName in sizeNames)
             {
                 var size = Constant.Size.Find(sizeName);
                 var count = sizeIds.Count(sizeId => sizeId == size.Id);

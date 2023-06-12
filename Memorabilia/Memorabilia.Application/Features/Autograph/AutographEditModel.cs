@@ -4,52 +4,56 @@ public class AutographEditModel : EditModel
 {
     public AutographEditModel() { }
 
-    public AutographEditModel(AutographModel viewModel)
+    public AutographEditModel(AutographModel model)
     {
-        AcquiredDate = viewModel.Acquisition?.AcquiredDate;
-        AcquiredWithAutograph = viewModel.AcquiredWithAutograph;
-        AcquisitionTypeId = viewModel.Acquisition?.AcquisitionTypeId ?? 0;
-        ColorId = viewModel.ColorId;
-        ConditionId = viewModel.ConditionId;
-        Cost = viewModel.Acquisition?.Cost;
-        CreateDate = viewModel.CreateDate;
-        Denominator = viewModel.Denominator;
-        EstimatedValue = viewModel.EstimatedValue;
-        FullName = viewModel.FullName ?? false;
-        Grade = viewModel.Grade;
-        Id = viewModel.Id;
-        ItemType = viewModel.ItemType;
-        LastModifiedDate = viewModel.LastModifiedDate;
-        MemorabiliaId = viewModel.MemorabiliaId;
-        MemorabiliaImageNames = viewModel.MemorabiliaImageNames;
-        Note = viewModel.Note;
-        Numerator = viewModel.Numerator;    
-        Person = new SavePersonViewModel(new PersonViewModel(viewModel.Person));
-        PersonalizationText = viewModel.Personalization?.Text;
-        PurchaseTypeId = viewModel.Acquisition?.PurchaseTypeId ?? 0;
-        ReceivedDate = viewModel.ReceivedDate;
-        SentDate = viewModel.SentDate;
-        UserId = viewModel.UserId;
-        WritingInstrumentId = viewModel.WritingInstrumentId;
+        AcquiredDate = model.Acquisition?.AcquiredDate;
+        AcquiredWithAutograph = model.AcquiredWithAutograph;
+        AcquisitionTypeId = model.Acquisition?.AcquisitionTypeId ?? 0;
+        ColorId = model.ColorId;
+        ConditionId = model.ConditionId;
+        Cost = model.Acquisition?.Cost;
+        CreateDate = model.CreateDate;
+        Denominator = model.Denominator;
+        EstimatedValue = model.EstimatedValue;
+        FullName = model.FullName ?? false;
+        Grade = model.Grade;
+        Id = model.Id;
+        ItemType = model.ItemType;
+        LastModifiedDate = model.LastModifiedDate;
+        MemorabiliaId = model.MemorabiliaId;
+        MemorabiliaImageNames = model.MemorabiliaImageNames;
+        Note = model.Note;
+        Numerator = model.Numerator;
+        Person = model.Person.ToEditModel();
+        PersonalizationText = model.Personalization?.Text;
+        PurchaseTypeId = model.Acquisition?.PurchaseTypeId ?? 0;
+        ReceivedDate = model.ReceivedDate;
+        SentDate = model.SentDate;
+        UserId = model.UserId;
+        WritingInstrumentId = model.WritingInstrumentId;
     }
 
-    public AutographEditModel(MemorabiliaItemModel viewModel)
+    public AutographEditModel(MemorabiliaModel model)
     {
-        AcquiredWithAutograph = viewModel.Acquisition?.AcquiredWithAutograph ?? false;
-        MemorabiliaAcquiredDate = viewModel.Acquisition.AcquiredDate;
-        MemorabiliaAcquisitionTypeId = viewModel.Acquisition.AcquisitionTypeId;
-        MemorabiliaCost = viewModel.Acquisition.Cost;
-        MemorabiliaEstimatedValue = viewModel.EstimatedValue;
-        MemorabiliaId = viewModel.Id;
-        MemorabiliaImageNames = viewModel.Images.Select(image => image.FileName).ToArray();
-        MemorabiliaPurchaseTypeId = viewModel.Acquisition.PurchaseTypeId;
-        ItemType = Constant.ItemType.Find(viewModel.ItemTypeId);
-        UserFirstName = viewModel.UserFirstName;
-        UserId = viewModel.UserId;
+        AcquiredWithAutograph = model.Acquisition?.AcquiredWithAutograph ?? false;
+        MemorabiliaAcquiredDate = model.Acquisition.AcquiredDate;
+        MemorabiliaAcquisitionTypeId = model.Acquisition.AcquisitionTypeId;
+        MemorabiliaCost = model.Acquisition.Cost;
+        MemorabiliaEstimatedValue = model.EstimatedValue;
+        MemorabiliaId = model.Id;
 
-        Entity.Person person = viewModel.People.FirstOrDefault()?.Person;
+        MemorabiliaImageNames = model.Images
+                                     .Select(image => image.FileName)
+                                     .ToArray();
 
-        MemorabiliaPerson = person != null ? new PersonViewModel(person) : new PersonViewModel();
+        MemorabiliaPurchaseTypeId = model.Acquisition.PurchaseTypeId;
+        ItemType = Constant.ItemType.Find(model.ItemTypeId);
+        UserFirstName = model.UserFirstName;
+        UserId = model.UserId;
+
+        Entity.Person person = model.People.FirstOrDefault()?.Person;
+
+        MemorabiliaPerson = person != null ? new PersonModel(person) : new PersonModel();
     }
 
     public DateTime? AcquiredDate { get; set; }
@@ -157,7 +161,8 @@ public class AutographEditModel : EditModel
 
     public Constant.ItemType ItemType { get; set; }
 
-    public string ItemTypeName => ItemType?.Name;
+    public string ItemTypeName 
+        => ItemType?.Name;
 
     public DateTime? LastModifiedDate { get; set; }
 
@@ -173,7 +178,7 @@ public class AutographEditModel : EditModel
 
     public string[] MemorabiliaImageNames { get; }
 
-    public PersonViewModel MemorabiliaPerson { get; set; }
+    public PersonModel MemorabiliaPerson { get; set; }
 
     public int? MemorabiliaPurchaseTypeId { get; set; }
 
@@ -184,7 +189,8 @@ public class AutographEditModel : EditModel
     public override string PageTitle 
         => $"{(Id > 0 ? Constant.EditModeType.Update.Name : Constant.EditModeType.Add.Name)} Autograph";
 
-    public SavePersonViewModel Person { get; set; } = new();
+    public PersonEditModel Person { get; set; } 
+        = new();
 
     public string PersonalizationText { get; set; }
 

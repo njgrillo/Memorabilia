@@ -18,9 +18,7 @@ public class CostFilterRule : IFilterRule<Entity.Memorabilia>
     }
 
     public Expression<Func<Entity.Memorabilia, bool>> GetExpression()
-    {
-        return _filterItem == FilterItemEnum.AutographCost
-            ? item => item.Autographs.Any(autograph => autograph.Acquisition.Cost >= (_range.Start ?? 0) && autograph.Acquisition.Cost <= (_range.End ?? decimal.MaxValue))
+        => _filterItem == FilterItemEnum.AutographCost 
+            ? item => item.Autographs.Any(autograph => autograph.Acquisition.Cost >= (_range.Start ?? 0) && autograph.Acquisition.Cost <= (_range.End ?? decimal.MaxValue)) 
             : item => item.Acquisition.Cost >= (_range.Start ?? 0) && item.Acquisition.Cost <= (_range.End ?? decimal.MaxValue);
-    }
 }

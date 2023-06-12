@@ -141,7 +141,7 @@ public class SaveProject
 
         private static void SetProjectMemorabiliaTeams(Entity.Project project, Command command)
         {
-            foreach (var projectMemorabiliaTeam in command.MemorabiliaTeams.Where(item => !item.IsDeleted))
+            foreach (ProjectMemorabiliaTeamEditModel projectMemorabiliaTeam in command.MemorabiliaTeams.Where(item => !item.IsDeleted))
             {
                 project.SetMemorabliaTeam(projectMemorabiliaTeam.Id,
                                           projectMemorabiliaTeam.Team.Id,
@@ -156,7 +156,7 @@ public class SaveProject
 
         private static void SetProjectPeople(Entity.Project project, Command command)
         {
-            foreach (var projectPerson in command.People.Where(person => !person.IsDeleted))
+            foreach (ProjectPersonEditModel projectPerson in command.People.Where(person => !person.IsDeleted))
             {
                 project.SetPerson(projectPerson.Id,
                                   projectPerson.Person.Id,
@@ -173,62 +173,78 @@ public class SaveProject
 
     public class Command : DomainCommand, ICommand
     {
-        private readonly ProjectEditModel _viewModel;
+        private readonly ProjectEditModel _editModel;
 
-        public Command(ProjectEditModel viewModel)
+        public Command(ProjectEditModel editModel)
         {
-            _viewModel = viewModel;
-            Id = _viewModel.Id;
+            _editModel = editModel;
+
+            Id = _editModel.Id;
         }
 
-        public Entity.ProjectBaseball Baseball => _viewModel.Baseball;
+        public Entity.ProjectBaseball Baseball 
+            => _editModel.Baseball;
 
-        public Entity.ProjectCard Card => _viewModel.Card;
+        public Entity.ProjectCard Card 
+            => _editModel.Card;
 
         public int[] DeleteMemorabiliaTeamIds 
-            => _viewModel.MemorabiliaTeams
+            => _editModel.MemorabiliaTeams
                          .Where(item => item.IsDeleted)
                          .Select(item => item.Id)
                          .ToArray();
 
         public int[] DeletePeopleIds 
-            => _viewModel.People
+            => _editModel.People
                          .Where(person => person.IsDeleted)
                          .Select(person => person.Id)
                          .ToArray();
 
-        public DateTime? EndDate => _viewModel.EndDate;
+        public DateTime? EndDate 
+            => _editModel.EndDate;
 
-        public Entity.ProjectHallOfFame HallOfFame => _viewModel.HallOfFame;
+        public Entity.ProjectHallOfFame HallOfFame 
+            => _editModel.HallOfFame;
 
-        public Entity.ProjectHelmet Helmet => _viewModel.Helmet;
+        public Entity.ProjectHelmet Helmet 
+            => _editModel.Helmet;
 
         public int Id { get; set; }
 
-        public bool IsDeleted => _viewModel.IsDeleted;
+        public bool IsDeleted 
+            => _editModel.IsDeleted;
 
-        public bool IsModified => _viewModel.IsModified;
+        public bool IsModified 
+            => _editModel.IsModified;
 
-        public bool IsNew => _viewModel.IsNew;
+        public bool IsNew 
+            => _editModel.IsNew;
 
-        public Entity.ProjectItem Item => _viewModel.Item;
+        public Entity.ProjectItem Item 
+            => _editModel.Item;
 
         public List<ProjectMemorabiliaTeamEditModel> MemorabiliaTeams 
-            => _viewModel.MemorabiliaTeams;
+            => _editModel.MemorabiliaTeams;
 
-        public string Name => _viewModel.Name;
+        public string Name 
+            => _editModel.Name;
 
-        public List<ProjectPersonEditModel> People => _viewModel.People;
+        public List<ProjectPersonEditModel> People 
+            => _editModel.People;
 
-        public DateTime? StartDate => _viewModel.StartDate;
+        public DateTime? StartDate 
+            => _editModel.StartDate;
 
-        public int ProjectTypeId => _viewModel.ProjectType.Id;
+        public int ProjectTypeId 
+            => _editModel.ProjectType.Id;
 
-        public Entity.ProjectTeam Team => _viewModel.Team;
+        public Entity.ProjectTeam Team 
+            => _editModel.Team;
 
-        public int UserId => _viewModel.UserId;
+        public int UserId 
+            => _editModel.UserId;
 
         public Entity.ProjectWorldSeries WorldSeries 
-            => _viewModel.WorldSeries;
+            => _editModel.WorldSeries;
     }
 }

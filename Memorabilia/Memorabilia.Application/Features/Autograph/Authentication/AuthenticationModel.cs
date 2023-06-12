@@ -11,19 +11,27 @@ public class AuthenticationModel
         _authentication = authentication;
     }
 
-    public int AuthenticationCompanyId => _authentication.AuthenticationCompanyId;
+    public int AuthenticationCompanyId 
+        => _authentication.AuthenticationCompanyId;
 
-    public int AutographId => _authentication.AutographId;
+    public int AutographId 
+        => _authentication.AutographId;
 
-    public bool? HasCertificationCard => _authentication.HasCertificationCard;
+    public bool? HasCertificationCard 
+        => _authentication.HasCertificationCard;
 
-    public bool? HasHologram => _authentication.HasHologram;
+    public bool? HasHologram 
+        => _authentication.HasHologram;
 
-    public bool? HasLetter => _authentication.HasLetter;
+    public bool? HasLetter 
+        => _authentication.HasLetter;
 
-    public int Id => _authentication.Id;
+    public int Id 
+        => _authentication.Id;
 
-    public string Verification => _authentication.Verification;
+    public string Verification 
+        => _authentication.Verification;
 
-    public bool Witnessed => _authentication.Witnessed;
+    public bool Witnessed 
+        => _authentication.Witnessed;
 }

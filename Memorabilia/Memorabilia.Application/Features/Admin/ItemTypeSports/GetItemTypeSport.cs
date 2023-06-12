@@ -1,8 +1,8 @@
 ﻿namespace Memorabilia.Application.Features.Admin.ItemTypeSports;
 
-public record GetItemTypeSport(int Id) : IQuery<ItemTypeSportViewModel>
+public record GetItemTypeSport(int Id) : IQuery<Entity.ItemTypeSport>
 {
-    public class Handler : QueryHandler<GetItemTypeSport, ItemTypeSportViewModel>
+    public class Handler : QueryHandler<GetItemTypeSport, Entity.ItemTypeSport>
     {
         private readonly IItemTypeSportRepository _itemTypeSportRepository;
 
@@ -11,9 +11,7 @@ public record GetItemTypeSport(int Id) : IQuery<ItemTypeSportViewModel>
             _itemTypeSportRepository = itemTypeSportRepository;
         }
 
-        protected override async Task<ItemTypeSportViewModel> Handle(GetItemTypeSport query)
-        {
-            return new ItemTypeSportViewModel(await _itemTypeSportRepository.Get(query.Id));
-        }
+        protected override async Task<Entity.ItemTypeSport> Handle(GetItemTypeSport query)
+            => await _itemTypeSportRepository.Get(query.Id);
     }
 }

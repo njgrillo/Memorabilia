@@ -10,7 +10,8 @@ public class AllStarModel : PersonSportToolModel
         Sport = sport;
     }
 
-    public int NumberOfGames { get; set; } = 1;
+    public int NumberOfGames { get; set; } 
+        = 1;
 
     public override int PersonId 
         => _allstar.PersonId;

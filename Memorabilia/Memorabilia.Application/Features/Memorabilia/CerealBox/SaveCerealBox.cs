@@ -13,7 +13,7 @@ public class SaveCerealBox
 
         protected override async Task Handle(Command command)
         {
-            var memorabilia = await _memorabiliaRepository.Get(command.MemorabiliaId);
+            Entity.Memorabilia memorabilia = await _memorabiliaRepository.Get(command.MemorabiliaId);
 
             memorabilia.SetCerealBox(command.BrandId,
                                      command.CerealTypeId,
@@ -28,25 +28,32 @@ public class SaveCerealBox
 
     public class Command : DomainCommand, ICommand
     {
-        private readonly SaveCerealBoxViewModel _viewModel;
+        private readonly CerealBoxEditModel _editModel;
 
-        public Command(SaveCerealBoxViewModel viewModel)
+        public Command(CerealBoxEditModel editModel)
         {
-            _viewModel = viewModel;
+            _editModel = editModel;
         }
 
-        public int BrandId => _viewModel.BrandId;
+        public int BrandId 
+            => _editModel.BrandId;
 
-        public int? CerealTypeId => _viewModel.CerealTypeId > 0 ? _viewModel.CerealTypeId : null;
+        public int? CerealTypeId 
+            => _editModel.CerealTypeId.ToNullableInt();
 
-        public int LevelTypeId => _viewModel.LevelTypeId;
+        public int LevelTypeId 
+            => _editModel.LevelTypeId;
 
-        public int MemorabiliaId => _viewModel.MemorabiliaId;
+        public int MemorabiliaId 
+            => _editModel.MemorabiliaId;
 
-        public int[] PersonIds => _viewModel.People.Where(person => !person.IsDeleted).Select(person => person.Id).ToArray();
+        public int[] PersonIds 
+            => _editModel.People.ActiveIds();
 
-        public int[] SportIds => _viewModel.SportIds.ToArray();
+        public int[] SportIds 
+            => _editModel.SportIds.ToArray();
 
-        public int[] TeamIds => _viewModel.Teams.Where(team => !team.IsDeleted).Select(team => team.Id).ToArray();
+        public int[] TeamIds 
+            => _editModel.Teams.ActiveIds();
     }
 }

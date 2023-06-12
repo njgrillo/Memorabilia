@@ -8,11 +8,11 @@ public partial class Login
     [Parameter]
     public EventCallback<int> UserValidated { get; set; }
 
-    private readonly LoginUserViewModel _viewModel = new();
+    private readonly LoginUserModel _viewModel = new();
 
     protected async Task HandleValidSubmit()
     {
-        var viewModel = await QueryRouter.Send(new GetUser.Query(_viewModel.Username, _viewModel.Password));
+        var viewModel = new UserModel(await QueryRouter.Send(new GetUser(_viewModel.Username, _viewModel.Password)));
 
         if (!viewModel.IsValid || viewModel.Id == 0)
         {

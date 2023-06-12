@@ -1,18 +1,18 @@
 ﻿namespace Memorabilia.Blazor.Pages.MemorabiliaItems.Photos;
 
-public partial class PhotoEditor : MemorabiliaItem<SavePhotoViewModel>
+public partial class PhotoEditor : MemorabiliaItem<PhotoEditModel>
 {
     [Inject]
     public PhotoValidator Validator { get; set; }
 
     protected async Task OnLoad()
     {
-        var viewModel = await QueryRouter.Send(new GetPhoto(MemorabiliaId));
+        var viewModel = await QueryRouter.Send(new GetMemorabiliaItem(MemorabiliaId));
 
         if (viewModel.Brand == null)
             return;
 
-        ViewModel = new SavePhotoViewModel(viewModel);
+        ViewModel = new PhotoEditModel(new PhotoModel(viewModel));
     }
 
     protected async Task OnSave()

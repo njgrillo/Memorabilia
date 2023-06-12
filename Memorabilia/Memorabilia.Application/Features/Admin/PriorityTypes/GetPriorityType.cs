@@ -1,21 +1,17 @@
-﻿using Memorabilia.Domain.Entities;
+﻿namespace Memorabilia.Application.Features.Admin.PriorityTypes;
 
-namespace Memorabilia.Application.Features.Admin.PriorityTypes;
-
-public record GetPriorityType(int Id) : IQuery<DomainModel>
+public record GetPriorityType(int Id) : IQuery<Entity.PriorityType>
 {
-    public class Handler : QueryHandler<GetPriorityType, DomainModel>
+    public class Handler : QueryHandler<GetPriorityType, Entity.PriorityType>
     {
-        private readonly IDomainRepository<PriorityType> _priorityTypeRepository;
+        private readonly IDomainRepository<Entity.PriorityType> _priorityTypeRepository;
 
-        public Handler(IDomainRepository<PriorityType> priorityTypeRepository)
+        public Handler(IDomainRepository<Entity.PriorityType> priorityTypeRepository)
         {
             _priorityTypeRepository = priorityTypeRepository;
         }
 
-        protected override async Task<DomainModel> Handle(GetPriorityType query)
-        {
-            return new DomainModel(await _priorityTypeRepository.Get(query.Id));
-        }
+        protected override async Task<Entity.PriorityType> Handle(GetPriorityType query)
+            => await _priorityTypeRepository.Get(query.Id);
     }
 }

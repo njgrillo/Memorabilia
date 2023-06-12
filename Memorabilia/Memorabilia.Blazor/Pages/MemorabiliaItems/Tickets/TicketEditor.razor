@@ -1,9 +1,9 @@
-﻿@inherits MemorabiliaItem<SaveTicketViewModel>
+﻿@inherits MemorabiliaItem<TicketEditModel>
 
 <EditMemorabiliaPage Item="ViewModel"
                      OnLoad="OnLoad"
                      OnSave="OnSave" 
-                     TItem="SaveTicketViewModel">
+                     TItem="TicketEditModel">
     <Content>
         <MemorabiliaItemEditor DisplayItemTypeBrand="false"
                                DisplayItemTypeGameStyle="false"
@@ -12,7 +12,7 @@
                                DisplaySingleSportSelector="true"
                                DisplayMultiTeamSelector="true"
                                GameDateDisplayText="Event Date"
-                               TItem="SaveTicketViewModel"
+                               TItem="TicketEditModel"
                                ViewModel="ViewModel" />
     </Content>
 </EditMemorabiliaPage>

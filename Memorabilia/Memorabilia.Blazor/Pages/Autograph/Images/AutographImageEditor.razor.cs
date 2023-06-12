@@ -17,8 +17,9 @@ public partial class AutographImageEditor : AutographItem<AutographImagesEditMod
 
     protected async Task OnImport()
     {
-        var query = new GetMemorabiliaImages(ViewModel.MemorabiliaId);
-        var memorabliaImagesViewModel = await QueryRouter.Send(query);
+        var memorabliaImagesViewModel 
+            = new MemorabiliaImagesModel(await QueryRouter.Send(new GetMemorabiliaImages(ViewModel.MemorabiliaId)));
+
         var images = memorabliaImagesViewModel.Images
                                               .Select(image => new Domain.Entities.AutographImage(ViewModel.AutographId,
                                                                                                   image.FileName,

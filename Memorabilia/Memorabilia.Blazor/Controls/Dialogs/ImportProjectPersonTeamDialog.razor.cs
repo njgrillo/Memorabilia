@@ -43,7 +43,7 @@ public partial class ImportProjectPersonTeamDialog
         if (TeamId == 0)
             return;
 
-        Team = await QueryRouter.Send(new GetTeamGeneric(TeamId));
+        Team = await QueryRouter.Send(new GetTeam(TeamId));
     }
 
     public void Cancel()

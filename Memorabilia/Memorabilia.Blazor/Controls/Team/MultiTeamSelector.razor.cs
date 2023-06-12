@@ -12,12 +12,12 @@ public partial class MultiTeamSelector : ComponentBase
     public SportLeagueLevel SportLeagueLevel { get; set; }
 
     [Parameter]
-    public List<SaveTeamViewModel> SelectedTeams { get; set; }
+    public List<TeamEditModel> SelectedTeams { get; set; }
 
     [Parameter]
-    public EventCallback<List<SaveTeamViewModel>> SelectedTeamsChanged { get; set; }
+    public EventCallback<List<TeamEditModel>> SelectedTeamsChanged { get; set; }
 
-    protected SaveTeamViewModel SelectedTeam { get; set; }
+    protected TeamEditModel SelectedTeam { get; set; }
 
     private bool _displayTeams;
     private bool _hasTeams;

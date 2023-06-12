@@ -1,6 +1,7 @@
 ﻿namespace Memorabilia.Blazor.Controls.TypeAhead;
 
-public class TeamSearchAutoComplete : Autocomplete<Domain.Entities.Team>, INotifyPropertyChanged
+public class TeamSearchAutoComplete 
+    : Autocomplete<Entity.Team>, INotifyPropertyChanged
 {
     [Parameter]
     public Sport Sport { get; set; }
@@ -9,7 +10,8 @@ public class TeamSearchAutoComplete : Autocomplete<Domain.Entities.Team>, INotif
     public event PropertyChangedEventHandler PropertyChanged;
 #pragma warning restore CS0067
 
-    protected IEnumerable<Domain.Entities.Team> Items { get; set; } = Enumerable.Empty<Domain.Entities.Team>();
+    protected IEnumerable<Entity.Team> Items { get; set; } 
+        = Enumerable.Empty<Entity.Team>();
 
     public TeamSearchAutoComplete()
     {
@@ -24,19 +26,19 @@ public class TeamSearchAutoComplete : Autocomplete<Domain.Entities.Team>, INotif
         await LoadItems();
     }
 
-    protected override string GetItemSelectedText(Domain.Entities.Team item)
+    protected override string GetItemSelectedText(Entity.Team item)
     {
         return item.DisplayName;
     }
 
-    protected override string GetItemText(Domain.Entities.Team item)
+    protected override string GetItemText(Entity.Team item)
     {
         return item.DisplayName;
     }
 
     private async Task LoadItems()
     {
-        Items = await QueryRouter.Send(new GetDomainTeams(Sport?.Id ?? null));
+        Items = await QueryRouter.Send(new GetTeams(SportId: Sport?.Id ?? null));
     }
 
     private async void TeamSearchAutoComplete_PropertyChanged(object sender, PropertyChangedEventArgs e)
@@ -47,10 +49,10 @@ public class TeamSearchAutoComplete : Autocomplete<Domain.Entities.Team>, INotif
         }
     }
 
-    public override async Task<IEnumerable<Domain.Entities.Team>> Search(string searchText)
+    public override async Task<IEnumerable<Entity.Team>> Search(string searchText)
     {
         if (searchText.IsNullOrEmpty()) 
-            return Array.Empty<Domain.Entities.Team>();
+            return Array.Empty<Entity.Team>();
 
         return await Task.FromResult(Items.Where(item => item.Name.Contains(searchText, StringComparison.OrdinalIgnoreCase)
                                                       || item.Location.Contains(searchText, StringComparison.OrdinalIgnoreCase)

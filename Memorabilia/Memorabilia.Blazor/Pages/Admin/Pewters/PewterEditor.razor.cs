@@ -1,7 +1,7 @@
 ﻿namespace Memorabilia.Blazor.Pages.Admin.Pewters;
 
 public partial class PewterEditor 
-    : EditItem<SavePewterViewModel, PewterViewModel>
+    : EditItem<PewterEditModel, PewterModel>
 {
     [Inject]
     public ILogger<PewterEditor> Logger { get; set; }
@@ -18,7 +18,7 @@ public partial class PewterEditor
         if (Id == 0)
             return;
 
-        ViewModel = new SavePewterViewModel(await Get(new GetPewter(Id)));
+        ViewModel = new PewterEditModel(new PewterModel(await QueryRouter.Send(new GetPewter(Id))));
 
         _hasImage = !ViewModel.FileName.IsNullOrEmpty();
     }

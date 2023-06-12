@@ -1,9 +1,11 @@
 ﻿namespace Memorabilia.Application.Features.Memorabilia;
 
-public record GetMemorabiliaItemsPaged(int UserId, PageInfo PageInfo, MemorabiliaSearchCriteria MemorabiliaSearchCriteria = null) 
-    : IQuery<MemorabiliaItemsModel>
+public record GetMemorabiliaItemsPaged(int UserId, 
+                                       PageInfo PageInfo, 
+                                       MemorabiliaSearchCriteria MemorabiliaSearchCriteria = null) 
+    : IQuery<MemorabiliasModel>
 {
-    public class Handler : QueryHandler<GetMemorabiliaItemsPaged, MemorabiliaItemsModel>
+    public class Handler : QueryHandler<GetMemorabiliaItemsPaged, MemorabiliasModel>
     {
         private readonly IMemorabiliaItemRepository _memorabiliaRepository;
 
@@ -12,11 +14,14 @@ public record GetMemorabiliaItemsPaged(int UserId, PageInfo PageInfo, Memorabili
             _memorabiliaRepository = memorabiliaRepository;
         }
 
-        protected override async Task<MemorabiliaItemsModel> Handle(GetMemorabiliaItemsPaged query)
+        protected override async Task<MemorabiliasModel> Handle(GetMemorabiliaItemsPaged query)
         {
-            var result = await _memorabiliaRepository.GetAll(query.UserId, query.PageInfo, query.MemorabiliaSearchCriteria);
+            PagedResult<Entity.Memorabilia> result 
+                = await _memorabiliaRepository.GetAll(query.UserId, 
+                                                      query.PageInfo, 
+                                                      query.MemorabiliaSearchCriteria);
 
-            return new MemorabiliaItemsModel(result.Data, result.PageInfo);
+            return new MemorabiliasModel(result.Data, result.PageInfo);
         }
     }
 }

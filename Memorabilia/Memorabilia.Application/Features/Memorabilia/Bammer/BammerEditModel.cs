@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Application.Features.Memorabilia.Bammer;
 
-public class BammerEditModel : MemorabiliaItemEditViewModel
+public class BammerEditModel : MemorabiliaItemEditModel
 {
     public BammerEditModel() 
     {
@@ -8,17 +8,27 @@ public class BammerEditModel : MemorabiliaItemEditViewModel
         LevelTypeId = Constant.LevelType.Professional.Id;
     }
 
-    public BammerEditModel(BammerModel viewModel)
+    public BammerEditModel(BammerModel model)
     {
-        BammerTypeId = viewModel.Bammer?.BammerTypeId ?? 0;
-        BrandId = viewModel.Brand.BrandId;
-        InPackage = viewModel.Bammer?.InPackage ?? false;
-        LevelTypeId = viewModel.Level.LevelTypeId;
-        MemorabiliaId = viewModel.MemorabiliaId;
-        People = viewModel.People.Select(person => new SavePersonViewModel(new PersonViewModel(person.Person))).ToList();
-        SportId = viewModel.Sports.Select(x => x.SportId).FirstOrDefault();
-        Teams = viewModel.Teams.Select(team => new SaveTeamViewModel(new TeamViewModel(team.Team))).ToList();
-        Year = viewModel.Bammer?.Year;
+        BammerTypeId = model.Bammer?.BammerTypeId ?? 0;
+        BrandId = model.Brand.BrandId;
+        InPackage = model.Bammer?.InPackage ?? false;
+        LevelTypeId = model.Level.LevelTypeId;
+        MemorabiliaId = model.MemorabiliaId;
+
+        People = model.People
+                      .Select(person => person.Person.ToEditModel())
+                      .ToList();
+
+        SportId = model.Sports
+                       .Select(x => x.SportId)
+                       .FirstOrDefault();
+
+        Teams = model.Teams
+                     .Select(team => team.Team.ToEditModel())
+                     .ToList();
+
+        Year = model.Bammer?.Year;
     }
 
     public int BammerTypeId { get; set; }

@@ -1,21 +1,17 @@
-﻿using Memorabilia.Domain.Entities;
+﻿namespace Memorabilia.Application.Features.Admin.Colleges;
 
-namespace Memorabilia.Application.Features.Admin.Colleges;
-
-public record GetCollege(int Id) : IQuery<DomainModel>
+public record GetCollege(int Id) : IQuery<Entity.College>
 {
-    public class Handler : QueryHandler<GetCollege, DomainModel>
+    public class Handler : QueryHandler<GetCollege, Entity.College>
     {
-        private readonly IDomainRepository<College> _collegeRepository;
+        private readonly IDomainRepository<Entity.College> _collegeRepository;
 
-        public Handler(IDomainRepository<College> collegeRepository)
+        public Handler(IDomainRepository<Entity.College> collegeRepository)
         {
             _collegeRepository = collegeRepository;
         }
 
-        protected override async Task<DomainModel> Handle(GetCollege query)
-        {
-            return new DomainModel(await _collegeRepository.Get(query.Id));
-        }
+        protected override async Task<Entity.College> Handle(GetCollege query)
+            => await _collegeRepository.Get(query.Id);
     }
 }

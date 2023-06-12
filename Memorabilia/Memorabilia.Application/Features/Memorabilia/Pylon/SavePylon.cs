@@ -13,7 +13,7 @@ public class SavePylon
 
         protected override async Task Handle(Command command)
         {
-            var memorabilia = await _memorabiliaRepository.Get(command.MemorabiliaId);
+            Entity.Memorabilia memorabilia = await _memorabiliaRepository.Get(command.MemorabiliaId);
 
             memorabilia.SetPylon(command.GameDate,
                                  command.GameStyleTypeId,
@@ -28,25 +28,32 @@ public class SavePylon
 
     public class Command : DomainCommand, ICommand
     {
-        private readonly SavePylonViewModel _viewModel;
+        private readonly PylonEditModel _editModel;
 
-        public Command(SavePylonViewModel viewModel)
+        public Command(PylonEditModel editModel)
         {
-            _viewModel = viewModel;
+            _editModel = editModel;
         }
 
-        public DateTime? GameDate => _viewModel.GameDate;
+        public DateTime? GameDate 
+            => _editModel.GameDate;
 
-        public int? GameStyleTypeId => _viewModel.GameStyleTypeId > 0 ? _viewModel.GameStyleTypeId : 0;
+        public int? GameStyleTypeId 
+            => _editModel.GameStyleTypeId.ToNullableInt();
 
-        public int LevelTypeId => _viewModel.LevelTypeId;
+        public int LevelTypeId 
+            => _editModel.LevelTypeId;
 
-        public int MemorabiliaId => _viewModel.MemorabiliaId;
+        public int MemorabiliaId 
+            => _editModel.MemorabiliaId;
 
-        public int SizeId => _viewModel.SizeId;
+        public int SizeId 
+            => _editModel.SizeId;
 
-        public int SportId => Constant.Sport.Football.Id;
+        public int SportId 
+            => Constant.Sport.Football.Id;
 
-        public int? TeamId => _viewModel.Team?.Id > 0 ? _viewModel.Team?.Id : null;
+        public int? TeamId 
+            => _editModel.Team?.Id.ToNullableInt() ?? null;
     }
 }

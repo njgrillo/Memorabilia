@@ -1,21 +1,17 @@
-﻿using Memorabilia.Domain.Entities;
+﻿namespace Memorabilia.Application.Features.Admin.FootballTypes;
 
-namespace Memorabilia.Application.Features.Admin.FootballTypes;
-
-public record GetFootballType(int Id) : IQuery<DomainModel>
+public record GetFootballType(int Id) : IQuery<Entity.FootballType>
 {
-    public class Handler : QueryHandler<GetFootballType, DomainModel>
+    public class Handler : QueryHandler<GetFootballType, Entity.FootballType>
     {
-        private readonly IDomainRepository<FootballType> _footballTypeRepository;
+        private readonly IDomainRepository<Entity.FootballType> _footballTypeRepository;
 
-        public Handler(IDomainRepository<FootballType> footballTypeRepository)
+        public Handler(IDomainRepository<Entity.FootballType> footballTypeRepository)
         {
             _footballTypeRepository = footballTypeRepository;
         }
 
-        protected override async Task<DomainModel> Handle(GetFootballType query)
-        {
-            return new DomainModel(await _footballTypeRepository.Get(query.Id));
-        }
+        protected override async Task<Entity.FootballType> Handle(GetFootballType query)
+            => await _footballTypeRepository.Get(query.Id);
     }
 }

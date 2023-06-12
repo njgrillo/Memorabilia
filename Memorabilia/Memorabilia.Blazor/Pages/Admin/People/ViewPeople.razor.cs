@@ -1,16 +1,17 @@
 ﻿namespace Memorabilia.Blazor.Pages.Admin.People;
 
-public partial class ViewPeople : ViewItem<PeopleViewModel, PersonViewModel>
+public partial class ViewPeople 
+    : ViewItem<PeopleModel, PersonModel>
 {
     protected async Task OnLoad()
     {
-        await OnLoad(new GetPeople());
+        ViewModel = new PeopleModel(await QueryRouter.Send(new GetPeople()));
     }
 
     protected override async Task Delete(int id)
     {
         var deletedItem = ViewModel.People.Single(person => person.Id == id);
-        var viewModel = new SavePersonViewModel(deletedItem)
+        var viewModel = new PersonEditModel(deletedItem)
         {
             IsDeleted = true
         };
@@ -22,7 +23,7 @@ public partial class ViewPeople : ViewItem<PeopleViewModel, PersonViewModel>
         ShowDeleteSuccessfulMessage(ViewModel.ItemTitle);
     }
 
-    protected override bool FilterFunc(PersonViewModel viewModel, string search)
+    protected override bool FilterFunc(PersonModel viewModel, string search)
         => search.IsNullOrEmpty() ||
            viewModel.DisplayName.Contains(search, StringComparison.OrdinalIgnoreCase) ||
            viewModel.ProfileName.Contains(search, StringComparison.OrdinalIgnoreCase) ||

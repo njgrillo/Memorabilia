@@ -12,18 +12,18 @@ public class DomainEditModel : EditModel
         NavigationPath = navigationPath;
     }
 
-    public DomainEditModel(DomainModel viewModel)
+    public DomainEditModel(DomainModel model)
     {
-        Abbreviation = viewModel.Abbreviation;
-        Id = viewModel.Id;
-        Name = viewModel.Name;
+        Abbreviation = model.Abbreviation;
+        Id = model.Id;
+        Name = model.Name;
     }
 
-    public DomainEditModel(DomainModel viewModel, string domainTypeName, string imageFileName, string navigationPath)
+    public DomainEditModel(DomainModel model, string domainTypeName, string imageFileName, string navigationPath)
     {
-        Abbreviation = viewModel.Abbreviation;
-        Id = viewModel.Id;
-        Name = viewModel.Name;
+        Abbreviation = model.Abbreviation;
+        Id = model.Id;
+        Name = model.Name;
 
         DomainTypeName = domainTypeName;
         ImageFileName = imageFileName;

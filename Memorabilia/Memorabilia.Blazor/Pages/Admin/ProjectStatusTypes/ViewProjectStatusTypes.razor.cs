@@ -1,7 +1,7 @@
 ﻿namespace Memorabilia.Blazor.Pages.Admin.ProjectStatusTypes;
 
 public partial class ViewProjectStatusTypes 
-    : ViewDomainItem<ProjectStatusTypesViewModel>, IDeleteDomainItem, IViewDomainItem
+    : ViewDomainItem<ProjectStatusTypesModel>, IDeleteDomainItem, IViewDomainItem
 {
     public async Task OnDelete(DomainEditModel viewModel)
     {
@@ -10,6 +10,6 @@ public partial class ViewProjectStatusTypes
 
     public async Task OnLoad()
     {
-        await OnLoad(new GetProjectStatusTypes());
+        ViewModel = new ProjectStatusTypesModel(await QueryRouter.Send(new GetProjectStatusTypes()));
     }
 }

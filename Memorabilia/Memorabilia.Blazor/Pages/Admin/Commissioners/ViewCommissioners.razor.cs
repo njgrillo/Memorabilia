@@ -1,16 +1,16 @@
 ﻿namespace Memorabilia.Blazor.Pages.Admin.Commissioners;
 
-public partial class ViewCommissioners : ViewItem<CommissionersViewModel, CommissionerViewModel>
+public partial class ViewCommissioners : ViewItem<CommissionersModel, CommissionerModel>
 {
     protected async Task OnLoad()
     {
-        await OnLoad(new GetCommissioners());
+        ViewModel = new CommissionersModel(await QueryRouter.Send(new GetCommissioners()));
     }
 
     protected override async Task Delete(int id)
     {
         var deletedItem = ViewModel.Commissioners.Single(Commissioner => Commissioner.Id == id);
-        var viewModel = new SaveCommissionerViewModel(deletedItem)
+        var viewModel = new CommissionerEditModel(deletedItem)
         {
             IsDeleted = true
         };
@@ -22,7 +22,7 @@ public partial class ViewCommissioners : ViewItem<CommissionersViewModel, Commis
         ShowDeleteSuccessfulMessage(ViewModel.ItemTitle);
     }
 
-    protected override bool FilterFunc(CommissionerViewModel viewModel, string search)
+    protected override bool FilterFunc(CommissionerModel viewModel, string search)
     {
         var isYear = int.TryParse(search, out var year);
 

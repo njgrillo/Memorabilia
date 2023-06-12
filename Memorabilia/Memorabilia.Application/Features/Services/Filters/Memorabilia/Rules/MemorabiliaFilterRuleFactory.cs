@@ -2,7 +2,8 @@
 
 public class MemorabiliaFilterRuleFactory : IMemorabiliaFilterRuleFactory
 {
-    public List<IFilterRule<Entity.Memorabilia>> Rules { get; set; } = new();
+    public List<IFilterRule<Entity.Memorabilia>> Rules { get; set; } 
+        = new();
 
     public MemorabiliaFilterRuleFactory()
     {

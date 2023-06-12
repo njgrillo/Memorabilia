@@ -15,7 +15,5 @@ public class ItemTypeFilterRule : IFilterRule<Entity.Memorabilia>
     }
 
     public Expression<Func<Entity.Memorabilia, bool>> GetExpression()
-    {
-        return item => _itemTypeIds.Contains(item.ItemTypeId);
-    }
+        => item => _itemTypeIds.Contains(item.ItemTypeId);
 }

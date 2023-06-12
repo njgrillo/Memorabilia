@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Application.Validators.Project;
 
-public class ProjectTeamValidator : AbstractValidator<Domain.Entities.ProjectTeam>
+public class ProjectTeamValidator : AbstractValidator<Entity.ProjectTeam>
 {
     public ProjectTeamValidator(int projectTypeId)
     {

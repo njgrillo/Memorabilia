@@ -1,21 +1,18 @@
-﻿using Memorabilia.Domain.Entities;
+﻿namespace Memorabilia.Application.Features.Admin.Conferences;
 
-namespace Memorabilia.Application.Features.Admin.Conferences;
-
-public record GetConferences() : IQuery<ConferencesViewModel>
+public record GetConferences() : IQuery<Entity.Conference[]>
 {
-    public class Handler : QueryHandler<GetConferences, ConferencesViewModel>
+    public class Handler : QueryHandler<GetConferences, Entity.Conference[]>
     {
-        private readonly IDomainRepository<Conference> _conferenceRepository;
+        private readonly IDomainRepository<Entity.Conference> _conferenceRepository;
 
-        public Handler(IDomainRepository<Conference> conferenceRepository)
+        public Handler(IDomainRepository<Entity.Conference> conferenceRepository)
         {
             _conferenceRepository = conferenceRepository;
         }
 
-        protected override async Task<ConferencesViewModel> Handle(GetConferences query)
-        {
-            return new ConferencesViewModel(await _conferenceRepository.GetAll());
-        }
+        protected override async Task<Entity.Conference[]> Handle(GetConferences query)
+            => (await _conferenceRepository.GetAll())
+                            .ToArray();
     }
 }

@@ -1,6 +1,7 @@
 ﻿namespace Memorabilia.Blazor.Pages.Admin.FranchiseHallOfFameTypes;
 
-public partial class ViewFranchiseHallOfFameTypes : ViewDomainItem<FranchiseHallOfFameTypesViewModel>, IDeleteDomainItem, IViewDomainItem
+public partial class ViewFranchiseHallOfFameTypes 
+    : ViewDomainItem<FranchiseHallOfFameTypesModel>, IDeleteDomainItem, IViewDomainItem
 {
     public async Task OnDelete(DomainEditModel viewModel)
     {
@@ -9,6 +10,6 @@ public partial class ViewFranchiseHallOfFameTypes : ViewDomainItem<FranchiseHall
 
     public async Task OnLoad()
     {
-        ViewModel = await QueryRouter.Send(new GetFranchiseHallOfFameTypes());
+        ViewModel = new FranchiseHallOfFameTypesModel(await QueryRouter.Send(new GetFranchiseHallOfFameTypes()));
     }
 }

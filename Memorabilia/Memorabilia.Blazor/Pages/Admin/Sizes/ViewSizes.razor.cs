@@ -1,6 +1,7 @@
 ﻿namespace Memorabilia.Blazor.Pages.Admin.Sizes;
 
-public partial class ViewSizes : ViewDomainItem<SizesViewModel>, IDeleteDomainItem, IViewDomainItem
+public partial class ViewSizes 
+    : ViewDomainItem<SizesModel>, IDeleteDomainItem, IViewDomainItem
 {
     public async Task OnDelete(DomainEditModel viewModel)
     {
@@ -9,6 +10,6 @@ public partial class ViewSizes : ViewDomainItem<SizesViewModel>, IDeleteDomainIt
 
     public async Task OnLoad()
     {
-        await OnLoad(new GetSizes());
+        ViewModel = new SizesModel(await QueryRouter.Send(new GetSizes()));
     }
 }

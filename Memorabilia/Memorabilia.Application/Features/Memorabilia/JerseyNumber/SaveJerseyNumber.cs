@@ -13,7 +13,7 @@ public class SaveJerseyNumber
 
         protected override async Task Handle(Command command)
         {
-            var memorabilia = await _memorabiliaRepository.Get(command.MemorabiliaId);
+            Entity.Memorabilia memorabilia = await _memorabiliaRepository.Get(command.MemorabiliaId);
 
             memorabilia.SetJerseyNumber(command.Number,
                                         command.PersonId, 
@@ -26,21 +26,26 @@ public class SaveJerseyNumber
 
     public class Command : DomainCommand, ICommand
     {
-        private readonly SaveJerseyNumberViewModel _viewModel;
+        private readonly JerseyNumberEditModel _editModel;
 
-        public Command(SaveJerseyNumberViewModel viewModel)
+        public Command(JerseyNumberEditModel editModel)
         {
-            _viewModel = viewModel;
+            _editModel = editModel;
         }
 
-        public int MemorabiliaId => _viewModel.MemorabiliaId;
+        public int MemorabiliaId 
+            => _editModel.MemorabiliaId;
 
-        public int? Number => _viewModel.Number;
+        public int? Number 
+            => _editModel.Number;
 
-        public int? PersonId => _viewModel.Person?.Id > 0 ? _viewModel.Person.Id : null;
+        public int? PersonId 
+            => _editModel.Person?.Id.ToNullableInt() ?? null;
 
-        public int? SportId => _viewModel.SportId > 0 ? _viewModel.SportId : null;
+        public int? SportId 
+            => _editModel.SportId.ToNullableInt();
 
-        public int? TeamId => _viewModel.Team?.Id > 0 ? _viewModel.Team.Id : null;
+        public int? TeamId 
+            => _editModel.Team?.Id.ToNullableInt() ?? null;
     }
 }

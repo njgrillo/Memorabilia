@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Application.Features.Admin.ItemTypeLevel;
 
-public record SaveItemTypeLevel(SaveItemTypeLevelViewModel ViewModel) : ICommand
+public record SaveItemTypeLevel(ItemTypeLevelEditModel ItemTypeLevel) : ICommand
 {
     public class Handler : CommandHandler<SaveItemTypeLevel>
     {
@@ -15,25 +15,26 @@ public record SaveItemTypeLevel(SaveItemTypeLevelViewModel ViewModel) : ICommand
         {
             Entity.ItemTypeLevel itemTypeLevel;
 
-            if (request.ViewModel.IsNew)
+            if (request.ItemTypeLevel.IsNew)
             {
-                itemTypeLevel = new Entity.ItemTypeLevel(request.ViewModel.ItemType.Id, request.ViewModel.LevelTypeId);
+                itemTypeLevel = new Entity.ItemTypeLevel(request.ItemTypeLevel.ItemType.Id, 
+                                                         request.ItemTypeLevel.LevelTypeId);
 
                 await _itemTypeLevelRepository.Add(itemTypeLevel);
 
                 return;
             }
 
-            itemTypeLevel = await _itemTypeLevelRepository.Get(request.ViewModel.Id);
+            itemTypeLevel = await _itemTypeLevelRepository.Get(request.ItemTypeLevel.Id);
 
-            if (request.ViewModel.IsDeleted)
+            if (request.ItemTypeLevel.IsDeleted)
             {
                 await _itemTypeLevelRepository.Delete(itemTypeLevel);
 
                 return;
             }
 
-            itemTypeLevel.Set(request.ViewModel.LevelTypeId);
+            itemTypeLevel.Set(request.ItemTypeLevel.LevelTypeId);
 
             await _itemTypeLevelRepository.Update(itemTypeLevel);
         }

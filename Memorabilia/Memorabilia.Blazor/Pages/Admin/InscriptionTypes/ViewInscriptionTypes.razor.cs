@@ -1,6 +1,7 @@
 ﻿namespace Memorabilia.Blazor.Pages.Admin.InscriptionTypes;
 
-public partial class ViewInscriptionTypes : ViewDomainItem<InscriptionTypesViewModel>, IDeleteDomainItem, IViewDomainItem
+public partial class ViewInscriptionTypes 
+    : ViewDomainItem<InscriptionTypesModel>, IDeleteDomainItem, IViewDomainItem
 {
     public async Task OnDelete(DomainEditModel viewModel)
     {
@@ -9,6 +10,6 @@ public partial class ViewInscriptionTypes : ViewDomainItem<InscriptionTypesViewM
 
     public async Task OnLoad()
     {
-        ViewModel = await QueryRouter.Send(new GetInscriptionTypes());
+        ViewModel = new InscriptionTypesModel(await QueryRouter.Send(new GetInscriptionTypes()));
     }
 }

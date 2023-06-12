@@ -12,5 +12,6 @@ public class AutographsModel : Model
     public IEnumerable<AutographModel> Autographs { get; set; } 
         = Enumerable.Empty<AutographModel>();
 
-    public override string PageTitle => "Autographs";
+    public override string PageTitle 
+        => "Autographs";
 }

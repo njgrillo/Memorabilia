@@ -1,4 +1,4 @@
-﻿@inherits ViewItem<LeaguePresidentsViewModel, LeaguePresidentViewModel>
+﻿@inherits ViewItem<LeaguePresidentsModel, LeaguePresidentModel>
 
 <PageView AddRoute="@ViewModel.AddRoute" 
           AddTitle="@ViewModel.AddTitle"
@@ -11,7 +11,7 @@
             <Content>
                 <MudTable Bordered="false"
                           Dense="false" 
-                          Filter="new Func<LeaguePresidentViewModel,bool>(FilterFunc1)"
+                          Filter="new Func<LeaguePresidentModel,bool>(FilterFunc1)"
                           Hover="true"
                           Items="@ViewModel.Presidents"    
                           Striped="true">

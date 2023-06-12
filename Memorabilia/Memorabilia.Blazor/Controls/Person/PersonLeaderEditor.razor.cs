@@ -3,12 +3,12 @@
 public partial class PersonLeaderEditor : ComponentBase
 {
     [Parameter]
-    public List<SavePersonLeaderViewModel> Leaders { get; set; } = new();
+    public List<PersonLeaderEditModel> Leaders { get; set; } = new();
 
     [Parameter]
     public Sport[] Sports { get; set; }
 
-    private SavePersonLeaderViewModel _viewModel = new();
+    private PersonLeaderEditModel _viewModel = new();
     private string _years;
 
     private void Add()
@@ -18,10 +18,10 @@ public partial class PersonLeaderEditor : ComponentBase
 
         foreach (var year in _years.ToIntArray())
         {
-            Leaders.Add(new SavePersonLeaderViewModel() { LeaderType = _viewModel.LeaderType, Year = year });
+            Leaders.Add(new PersonLeaderEditModel() { LeaderType = _viewModel.LeaderType, Year = year });
         }
 
-        _viewModel = new SavePersonLeaderViewModel();
+        _viewModel = new PersonLeaderEditModel();
         _years = string.Empty;
     }
 }

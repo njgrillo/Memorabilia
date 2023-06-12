@@ -1,8 +1,6 @@
-﻿
+﻿namespace Memorabilia.Blazor.Controls.DropDowns;
 
-namespace Memorabilia.Blazor.Controls.DropDowns;
-
-public partial class TeamDropDown : DropDown<TeamViewModel, int>
+public partial class TeamDropDown : DropDown<TeamModel, int>
 {
     [Parameter]
     public Franchise Franchise { get; set; }
@@ -10,7 +8,7 @@ public partial class TeamDropDown : DropDown<TeamViewModel, int>
     [Parameter]
     public SportLeagueLevel SportLeagueLevel { get; set; }
 
-    protected override string GetItemDisplayText(TeamViewModel item)
+    protected override string GetItemDisplayText(TeamModel item)
     {
         return Franchise?.Id > 0
             ? item.NameWithYear 
@@ -19,7 +17,10 @@ public partial class TeamDropDown : DropDown<TeamViewModel, int>
 
     protected override async Task OnInitializedAsync()
     {
-        Items = (await QueryRouter.Send(new GetTeams(Franchise?.Id, SportLeagueLevel?.Id))).Teams;
+        Entity.Team[] teams 
+            = await QueryRouter.Send(new GetTeams(FranchiseId: Franchise?.Id, SportLeagueLevelId: SportLeagueLevel?.Id));
+
+        Items = teams.Select(team => new TeamModel(team));
         Label = "Team";
     }
 }

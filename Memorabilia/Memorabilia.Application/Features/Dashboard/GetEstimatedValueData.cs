@@ -17,11 +17,20 @@ public record GetEstimatedValueData(int UserId)
 
         protected override async Task<DashboardChartModel> Handle(GetEstimatedValueData query)
         {
-            var autographsEstimatedValueTotal = _autographRepository.GetEstimatedValueTotal(query.UserId);
-            var memorabiliaEstimatedValueTotal = _memorabiliaItemRepository.GetEstimatedValueTotal(query.UserId);
+            decimal autographsEstimatedValueTotal = _autographRepository.GetEstimatedValueTotal(query.UserId);
+            decimal memorabiliaEstimatedValueTotal = _memorabiliaItemRepository.GetEstimatedValueTotal(query.UserId);
 
-            var labels = new List<string>() { $"Memorabilia ({memorabiliaEstimatedValueTotal:C})", $"Autographs ({autographsEstimatedValueTotal:C})" }.ToArray();
-            var data = new List<double>() { (double)memorabiliaEstimatedValueTotal, (double)autographsEstimatedValueTotal }.ToArray();
+            var labels = new List<string>() 
+            { 
+                $"Memorabilia ({memorabiliaEstimatedValueTotal:C})", 
+                $"Autographs ({autographsEstimatedValueTotal:C})" 
+            }.ToArray();
+
+            var data = new List<double>() 
+            { 
+                (double)memorabiliaEstimatedValueTotal, 
+                (double)autographsEstimatedValueTotal 
+            }.ToArray();
 
             return await Task.FromResult(new DashboardChartModel(data, labels));
         }

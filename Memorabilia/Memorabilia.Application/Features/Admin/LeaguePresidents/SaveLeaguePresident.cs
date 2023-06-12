@@ -1,8 +1,6 @@
-﻿using Memorabilia.Domain.Entities;
+﻿namespace Memorabilia.Application.Features.Admin.LeaguePresidents;
 
-namespace Memorabilia.Application.Features.Admin.LeaguePresidents;
-
-public record SaveLeaguePresident(SaveLeaguePresidentViewModel ViewModel) : ICommand
+public record SaveLeaguePresident(LeaguePresidentEditModel LeaguePresident) : ICommand
 {
     public class Handler : CommandHandler<SaveLeaguePresident>
     {
@@ -15,31 +13,32 @@ public record SaveLeaguePresident(SaveLeaguePresidentViewModel ViewModel) : ICom
 
         protected override async Task Handle(SaveLeaguePresident request)
         {
-            LeaguePresident president;
+            Entity.LeaguePresident president;
 
-            if (request.ViewModel.IsNew)
+            if (request.LeaguePresident.IsNew)
             {
-                president = new LeaguePresident(request.ViewModel.SportLeagueLevelId,
-                                          request.ViewModel.LeagueId,
-                                          request.ViewModel.Person.Id,
-                                          request.ViewModel.BeginYear,
-                                          request.ViewModel.EndYear);
+                president = new Entity.LeaguePresident(request.LeaguePresident.SportLeagueLevelId,
+                                                       request.LeaguePresident.LeagueId,
+                                                       request.LeaguePresident.Person.Id,
+                                                       request.LeaguePresident.BeginYear,
+                                                       request.LeaguePresident.EndYear);
 
                 await _presidentRepository.Add(president);
 
                 return;
             }
 
-            president = await _presidentRepository.Get(request.ViewModel.Id);
+            president = await _presidentRepository.Get(request.LeaguePresident.Id);
 
-            if (request.ViewModel.IsDeleted)
+            if (request.LeaguePresident.IsDeleted)
             {
                 await _presidentRepository.Delete(president);
 
                 return;
             }
 
-            president.Set(request.ViewModel.BeginYear, request.ViewModel.EndYear);
+            president.Set(request.LeaguePresident.BeginYear, 
+                          request.LeaguePresident.EndYear);
 
             await _presidentRepository.Update(president);
         }

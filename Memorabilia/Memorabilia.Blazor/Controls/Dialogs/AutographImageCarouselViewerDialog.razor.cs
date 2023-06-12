@@ -25,7 +25,7 @@ public partial class AutographImageCarouselViewerDialog
         if (AutographId == 0)
             return;
 
-        Images = await QueryRouter.Send(new GetAutographImagesById(AutographId));
+        Images = await QueryRouter.Send(new GetAutographImages(AutographId));
     }
 
     public void Close()

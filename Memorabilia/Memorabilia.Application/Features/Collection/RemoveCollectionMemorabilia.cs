@@ -1,6 +1,7 @@
 ﻿namespace Memorabilia.Application.Features.Collection;
 
-public record RemoveCollectionMemorabilia(int CollectionId, params int[] DeletedMemorabiliaIds)
+public record RemoveCollectionMemorabilia(int CollectionId, 
+                                          params int[] DeletedMemorabiliaIds)
     : ICommand
 {
     public class Handler : CommandHandler<RemoveCollectionMemorabilia>

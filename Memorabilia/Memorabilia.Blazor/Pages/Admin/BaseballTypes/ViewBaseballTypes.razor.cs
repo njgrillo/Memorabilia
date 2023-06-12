@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Blazor.Pages.Admin.BaseballTypes;
 
-public partial class ViewBaseballTypes : ViewDomainItem<BaseballTypesViewModel>, IDeleteDomainItem, IViewDomainItem
+public partial class ViewBaseballTypes : ViewDomainItem<BaseballTypesModel>, IDeleteDomainItem, IViewDomainItem
 {
     public async Task OnDelete(DomainEditModel viewModel)
     {
@@ -9,6 +9,6 @@ public partial class ViewBaseballTypes : ViewDomainItem<BaseballTypesViewModel>,
 
     public async Task OnLoad()
     {
-        ViewModel = await QueryRouter.Send(new GetBaseballTypes());
+        ViewModel = new BaseballTypesModel(await QueryRouter.Send(new GetBaseballTypes()));
     }
 }

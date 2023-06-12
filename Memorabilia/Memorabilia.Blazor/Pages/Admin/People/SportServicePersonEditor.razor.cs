@@ -1,7 +1,7 @@
 ﻿namespace Memorabilia.Blazor.Pages.Admin.People;
 
 public partial class SportServicePersonEditor 
-    : EditPersonItem<SavePersonSportServiceViewModel, PersonSportServiceViewModel>
+    : EditPersonItem<PersonSportServiceEditModel, PersonSportServiceModel>
 {
     [Inject]
     public SportServiceValidator Validator { get; set; }
@@ -26,10 +26,11 @@ public partial class SportServicePersonEditor
     }
 
     protected async Task OnLoad()
-    {       
-         ViewModel = new SavePersonSportServiceViewModel(PersonId, 
-                                                        await QueryRouter.Send(new GetPersonSportService(PersonId)));
+    {
+        Entity.Person person = await QueryRouter.Send(new GetPerson(PersonId));
 
-         PerformValidation = true;
+        ViewModel = new PersonSportServiceEditModel(PersonId, new PersonSportServiceModel(person));
+
+        PerformValidation = true;
     }    
 }

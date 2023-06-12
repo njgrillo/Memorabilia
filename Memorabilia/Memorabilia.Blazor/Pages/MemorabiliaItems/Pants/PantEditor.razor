@@ -1,15 +1,15 @@
-﻿@inherits MemorabiliaItem<SavePantViewModel>
+﻿@inherits MemorabiliaItem<PantEditModel>
 
 <EditMemorabiliaPage Item="ViewModel"
                      OnLoad="OnLoad"
                      OnSave="OnSave" 
-                     TItem="SavePantViewModel">
+                     TItem="PantEditModel">
     <Content>
         <MemorabiliaItemEditor DisplayItemTypeSize="true"
                                DisplaySinglePersonSelector="true"
                                DisplaySingleSportSelector="true"
                                DisplaySingleTeamSelector="true"
-                               TItem="SavePantViewModel"
+                               TItem="PantEditModel"
                                ViewModel="ViewModel" />
     </Content>
 </EditMemorabiliaPage>

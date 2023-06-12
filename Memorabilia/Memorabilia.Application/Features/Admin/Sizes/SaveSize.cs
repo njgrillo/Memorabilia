@@ -1,41 +1,41 @@
-﻿using Memorabilia.Domain.Entities;
+﻿namespace Memorabilia.Application.Features.Admin.Sizes;
 
-namespace Memorabilia.Application.Features.Admin.Sizes;
-
-public record SaveSize(DomainEditModel ViewModel) : ICommand
+public record SaveSize(DomainEditModel Size) : ICommand
 {
     public class Handler : CommandHandler<SaveSize>
     {
-        private readonly IDomainRepository<Size> _sizeRepository;
+        private readonly IDomainRepository<Entity.Size> _sizeRepository;
 
-        public Handler(IDomainRepository<Size> sizeRepository)
+        public Handler(IDomainRepository<Entity.Size> sizeRepository)
         {
             _sizeRepository = sizeRepository;
         }
 
         protected override async Task Handle(SaveSize request)
         {
-            Size size;
+            Entity.Size size;
 
-            if (request.ViewModel.IsNew)
+            if (request.Size.IsNew)
             {
-                size = new Size(request.ViewModel.Name, request.ViewModel.Abbreviation);
+                size = new Entity.Size(request.Size.Name, 
+                                       request.Size.Abbreviation);
 
                 await _sizeRepository.Add(size);
 
                 return;
             }
 
-            size = await _sizeRepository.Get(request.ViewModel.Id);
+            size = await _sizeRepository.Get(request.Size.Id);
 
-            if (request.ViewModel.IsDeleted)
+            if (request.Size.IsDeleted)
             {
                 await _sizeRepository.Delete(size);
 
                 return;
             }
 
-            size.Set(request.ViewModel.Name, request.ViewModel.Abbreviation);
+            size.Set(request.Size.Name, 
+                     request.Size.Abbreviation);
 
             await _sizeRepository.Update(size);
         }

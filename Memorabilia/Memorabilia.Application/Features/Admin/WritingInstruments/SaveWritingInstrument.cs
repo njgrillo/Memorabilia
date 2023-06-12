@@ -1,41 +1,41 @@
-﻿using Memorabilia.Domain.Entities;
+﻿namespace Memorabilia.Application.Features.Admin.WritingInstruments;
 
-namespace Memorabilia.Application.Features.Admin.WritingInstruments;
-
-public record SaveWritingInstrument(DomainEditModel ViewModel) : ICommand
+public record SaveWritingInstrument(DomainEditModel WritingInstrument) : ICommand
 {
     public class Handler : CommandHandler<SaveWritingInstrument>
     {
-        private readonly IDomainRepository<WritingInstrument> _writingInstrumentRepository;
+        private readonly IDomainRepository<Entity.WritingInstrument> _writingInstrumentRepository;
 
-        public Handler(IDomainRepository<WritingInstrument> writingInstrumentRepository)
+        public Handler(IDomainRepository<Entity.WritingInstrument> writingInstrumentRepository)
         {
             _writingInstrumentRepository = writingInstrumentRepository;
         }
 
         protected override async Task Handle(SaveWritingInstrument request)
         {
-            WritingInstrument writingInstrument;
+            Entity.WritingInstrument writingInstrument;
 
-            if (request.ViewModel.IsNew)
+            if (request.WritingInstrument.IsNew)
             {
-                writingInstrument = new WritingInstrument(request.ViewModel.Name, request.ViewModel.Abbreviation);
+                writingInstrument = new Entity.WritingInstrument(request.WritingInstrument.Name, 
+                                                                 request.WritingInstrument.Abbreviation);
 
                 await _writingInstrumentRepository.Add(writingInstrument);
 
                 return;
             }
 
-            writingInstrument = await _writingInstrumentRepository.Get(request.ViewModel.Id);
+            writingInstrument = await _writingInstrumentRepository.Get(request.WritingInstrument.Id);
 
-            if (request.ViewModel.IsDeleted)
+            if (request.WritingInstrument.IsDeleted)
             {
                 await _writingInstrumentRepository.Delete(writingInstrument);
 
                 return;
             }
 
-            writingInstrument.Set(request.ViewModel.Name, request.ViewModel.Abbreviation);
+            writingInstrument.Set(request.WritingInstrument.Name, 
+                                  request.WritingInstrument.Abbreviation);
 
             await _writingInstrumentRepository.Update(writingInstrument);
         }

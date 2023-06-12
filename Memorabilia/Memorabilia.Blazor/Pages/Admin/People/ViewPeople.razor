@@ -1,4 +1,4 @@
-﻿@inherits ViewItem<PeopleViewModel, PersonViewModel>
+﻿@inherits ViewItem<PeopleModel, PersonModel>
 
 <PageView AddRoute="@ViewModel.AddRoute" 
           AddTitle="@ViewModel.AddTitle"
@@ -11,7 +11,7 @@
             <Content>
                 <MudTable Bordered="false"
                           Dense="false" 
-                          Filter="new Func<PersonViewModel,bool>(FilterFunc1)"
+                          Filter="new Func<PersonModel,bool>(FilterFunc1)"
                           Hover="true"
                           Items="@ViewModel.People.OrderBy(person => person.DisplayName)"    
                           Striped="true">

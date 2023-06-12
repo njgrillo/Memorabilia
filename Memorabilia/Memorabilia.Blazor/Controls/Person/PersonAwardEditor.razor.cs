@@ -3,12 +3,12 @@
 public partial class PersonAwardEditor : ComponentBase
 {
     [Parameter]
-    public List<SavePersonAwardViewModel> Awards { get; set; } = new();
+    public List<PersonAwardEditModel> Awards { get; set; } = new();
 
     [Parameter]
     public Sport[] Sports { get; set; }
 
-    private SavePersonAwardViewModel _viewModel = new();
+    private PersonAwardEditModel _viewModel = new();
     private string _years;
 
     private void Add()
@@ -18,10 +18,10 @@ public partial class PersonAwardEditor : ComponentBase
 
         foreach (var year in _years.ToIntArray())
         {
-            Awards.Add(new SavePersonAwardViewModel() { AwardType = _viewModel.AwardType, Year = year });
+            Awards.Add(new PersonAwardEditModel() { AwardType = _viewModel.AwardType, Year = year });
         }
 
-        _viewModel = new SavePersonAwardViewModel();
+        _viewModel = new PersonAwardEditModel();
         _years = string.Empty;
     }
 }

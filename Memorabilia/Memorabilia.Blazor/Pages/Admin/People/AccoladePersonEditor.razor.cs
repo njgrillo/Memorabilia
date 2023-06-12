@@ -1,7 +1,7 @@
 ﻿namespace Memorabilia.Blazor.Pages.Admin.People;
 
 public partial class AccoladePersonEditor 
-    : EditPersonItem<SavePersonAccoladeViewModel, PersonAccoladeViewModel>
+    : EditPersonItem<PersonAccoladeEditModel, PersonAccoladeModel>
 {
     [Inject]
     public AccoladeValidator Validator { get; set; }
@@ -27,7 +27,9 @@ public partial class AccoladePersonEditor
 
     protected async Task OnLoad()
     {
-        ViewModel = new SavePersonAccoladeViewModel(PersonId, await Get(new GetPersonAccomplishments(PersonId)));
+        PersonAccoladeModel model = new PersonAccoladeModel(await QueryRouter.Send(new GetPerson(PersonId)));
+
+        ViewModel = new PersonAccoladeEditModel(PersonId, model);
 
         PerformValidation = true;
     }    

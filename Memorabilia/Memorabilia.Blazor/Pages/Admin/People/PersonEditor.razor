@@ -1,4 +1,4 @@
-﻿@inherits EditItem<SavePersonViewModel, PersonViewModel>
+﻿@inherits EditItem<PersonEditModel, PersonModel>
 
 <EditPage ContinueNavigationPath="@ViewModel.ContinueNavigationPath"
           EditMode="ViewModel.EditModeType"
@@ -12,7 +12,7 @@
           PageFooterNavigationPath="@ViewModel.BackNavigationPath"
           PageTitle="@ViewModel.PageTitle"
           PerformValidation="PerformValidation"
-          TItem="SavePersonViewModel"
+          TItem="PersonEditModel"
           UseMultipleButtons="true"
           ValidationResult="@ViewModel.ValidationResult">
     <TimelineContent>

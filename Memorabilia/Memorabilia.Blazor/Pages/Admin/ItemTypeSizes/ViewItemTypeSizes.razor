@@ -1,4 +1,4 @@
-﻿@inherits ViewItem<ItemTypeSizesViewModel, ItemTypeSizeViewModel>
+﻿@inherits ViewItem<ItemTypeSizesModel, ItemTypeSizeModel>
 
 <PageView AddRoute="@ViewModel.AddRoute" 
           AddTitle="@ViewModel.AddTitle"
@@ -11,7 +11,7 @@
             <Content>
                 <MudTable Bordered="false"
                           Dense="false" 
-                          Filter="new Func<ItemTypeSizeViewModel,bool>(FilterFunc1)"
+                          Filter="new Func<ItemTypeSizeModel,bool>(FilterFunc1)"
                           Hover="true"
                           Items="@ViewModel.ItemTypeSizes"    
                           Striped="true">

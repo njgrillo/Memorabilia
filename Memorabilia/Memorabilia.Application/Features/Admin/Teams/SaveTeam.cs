@@ -1,6 +1,4 @@
-﻿using Memorabilia.Domain.Entities;
-
-namespace Memorabilia.Application.Features.Admin.Teams;
+﻿namespace Memorabilia.Application.Features.Admin.Teams;
 
 public class SaveTeam
 {
@@ -15,18 +13,18 @@ public class SaveTeam
 
         protected override async Task Handle(Command command)
         {
-            Team team;
+            Entity.Team team;
 
             if (command.IsNew)
             {
-                team = new Team(command.FranchiseId, 
-                                command.Name, 
-                                command.Location, 
-                                command.Nickname,
-                                command.Abbreviation, 
-                                command.BeginYear, 
-                                command.EndYear, 
-                                command.ImageFileName);
+                team = new Entity.Team(command.FranchiseId, 
+                                       command.Name, 
+                                       command.Location, 
+                                       command.Nickname,
+                                       command.Abbreviation, 
+                                       command.BeginYear, 
+                                       command.EndYear, 
+                                       command.ImageFileName);
 
                 await _teamRepository.Add(team);
 
@@ -58,36 +56,47 @@ public class SaveTeam
 
     public class Command : DomainCommand, ICommand
     {
-        private readonly SaveTeamViewModel _viewModel;
+        private readonly TeamEditModel _editModel;
 
-        public Command(SaveTeamViewModel viewModel)
+        public Command(TeamEditModel editModel)
         {
-            _viewModel = viewModel;
-            Id = _viewModel.Id;
+            _editModel = editModel;
+            Id = _editModel.Id;
         }
 
-        public string Abbreviation => _viewModel.Abbreviation;
+        public string Abbreviation 
+            => _editModel.Abbreviation;
 
-        public int? BeginYear => _viewModel.BeginYear;
+        public int? BeginYear 
+            => _editModel.BeginYear;
 
-        public int? EndYear => _viewModel.EndYear;
+        public int? EndYear 
+            => _editModel.EndYear;
 
-        public int FranchiseId => _viewModel.Franchise.Id;
+        public int FranchiseId 
+            => _editModel.Franchise.Id;
 
         public int Id { get; set; } 
 
-        public string ImageFileName => _viewModel.ImageFileName;
+        public string ImageFileName 
+            => _editModel.ImageFileName;
 
-        public bool IsDeleted => _viewModel.IsDeleted;
+        public bool IsDeleted 
+            => _editModel.IsDeleted;
 
-        public bool IsModified => _viewModel.IsModified;
+        public bool IsModified 
+            => _editModel.IsModified;
 
-        public bool IsNew => _viewModel.IsNew;
+        public bool IsNew 
+            => _editModel.IsNew;
 
-        public string Location => _viewModel.Location;
+        public string Location 
+            => _editModel.Location;
 
-        public string Name => _viewModel.Name;
+        public string Name 
+            => _editModel.Name;
 
-        public string Nickname => _viewModel.Nickname;
+        public string Nickname 
+            => _editModel.Nickname;
     }
 }

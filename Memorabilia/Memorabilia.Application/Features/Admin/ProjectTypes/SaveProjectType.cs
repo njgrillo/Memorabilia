@@ -1,41 +1,41 @@
-﻿using Memorabilia.Domain.Entities;
+﻿namespace Memorabilia.Application.Features.Admin.ProjectTypes;
 
-namespace Memorabilia.Application.Features.Admin.ProjectTypes;
-
-public record SaveProjectType(DomainEditModel ViewModel) : ICommand
+public record SaveProjectType(DomainEditModel ProjectType) : ICommand
 {
     public class Handler : CommandHandler<SaveProjectType>
 {
-    private readonly IDomainRepository<ProjectType> _projectTypeRepository;
+    private readonly IDomainRepository<Entity.ProjectType> _projectTypeRepository;
 
-    public Handler(IDomainRepository<ProjectType> projectTypeRepository)
+    public Handler(IDomainRepository<Entity.ProjectType> projectTypeRepository)
     {
         _projectTypeRepository = projectTypeRepository;
     }
 
     protected override async Task Handle(SaveProjectType request)
     {
-        ProjectType projectType;
+        Entity.ProjectType projectType;
 
-        if (request.ViewModel.IsNew)
+        if (request.ProjectType.IsNew)
         {
-            projectType = new ProjectType(request.ViewModel.Name, request.ViewModel.Abbreviation);
+            projectType = new Entity.ProjectType(request.ProjectType.Name, 
+                                                 request.ProjectType.Abbreviation);
 
             await _projectTypeRepository.Add(projectType);
 
             return;
         }
 
-        projectType = await _projectTypeRepository.Get(request.ViewModel.Id);
+        projectType = await _projectTypeRepository.Get(request.ProjectType.Id);
 
-        if (request.ViewModel.IsDeleted)
+        if (request.ProjectType.IsDeleted)
         {
             await _projectTypeRepository.Delete(projectType);
 
             return;
         }
 
-        projectType.Set(request.ViewModel.Name, request.ViewModel.Abbreviation);
+        projectType.Set(request.ProjectType.Name, 
+                        request.ProjectType.Abbreviation);
 
         await _projectTypeRepository.Update(projectType);
     }

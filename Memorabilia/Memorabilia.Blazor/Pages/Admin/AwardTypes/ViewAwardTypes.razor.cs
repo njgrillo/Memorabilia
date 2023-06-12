@@ -9,6 +9,6 @@ public partial class ViewAwardTypes : ViewDomainItem<AwardTypesModel>, IDeleteDo
 
     public async Task OnLoad()
     {
-        await OnLoad(new GetAwardTypes());
+        ViewModel = new AwardTypesModel(await QueryRouter.Send(new GetAwardTypes()));
     }
 }

@@ -1,6 +1,7 @@
 ﻿namespace Memorabilia.Blazor.Pages.Admin.ItemTypeBrands;
 
-public partial class ItemTypeBrandEditor : EditItemTypeItem<SaveItemTypeBrandViewModel, ItemTypeBrandViewModel>
+public partial class ItemTypeBrandEditor 
+    : EditItemTypeItem<ItemTypeBrandEditModel, ItemTypeBrandModel>
 {
     protected async Task HandleValidSubmit()
     {
@@ -14,6 +15,6 @@ public partial class ItemTypeBrandEditor : EditItemTypeItem<SaveItemTypeBrandVie
         if (DisplayItemType)
             return;
 
-        ViewModel = new SaveItemTypeBrandViewModel(await Get(new GetItemTypeBrand(Id)));
+        ViewModel = new ItemTypeBrandEditModel(new ItemTypeBrandModel(await QueryRouter.Send(new GetItemTypeBrand(Id))));
     }
 }

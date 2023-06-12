@@ -1,8 +1,7 @@
-﻿
+﻿namespace Memorabilia.Blazor.Controls.TypeAhead;
 
-namespace Memorabilia.Blazor.Controls.TypeAhead;
-
-public class PersonDomainAutoComplete : NamedEntityAutoComplete<PersonViewModel>, INotifyPropertyChanged
+public class PersonDomainAutoComplete 
+    : NamedEntityAutoComplete<PersonModel>, INotifyPropertyChanged
 {
     [Parameter]
     public Sport Sport { get; set; }
@@ -37,6 +36,9 @@ public class PersonDomainAutoComplete : NamedEntityAutoComplete<PersonViewModel>
 
     private async Task LoadItems()
     {
-        Items = (await QueryRouter.Send(new GetPeople(Sport?.Id, SportLeagueLevelId > 0 ? SportLeagueLevelId : null))).People;
+        Entity.Person[] people 
+            = await QueryRouter.Send(new GetPeople(SportId: Sport?.Id ?? null, SportLeagueLevelId: SportLeagueLevelId > 0 ? SportLeagueLevelId : null));
+
+        Items = people.Select(person => new PersonModel(person));
     }
 }
