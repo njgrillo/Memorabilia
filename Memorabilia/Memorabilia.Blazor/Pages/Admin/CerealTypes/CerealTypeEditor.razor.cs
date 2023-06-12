@@ -1,6 +1,7 @@
 ﻿namespace Memorabilia.Blazor.Pages.Admin.CerealTypes;
 
-public partial class CerealTypeEditor : EditDomainItem<CerealType>, IEditDomainItem
+public partial class CerealTypeEditor 
+    : EditDomainItem<CerealType>, IEditDomainItem
 {
     public async Task OnLoad()
     {
@@ -9,6 +10,6 @@ public partial class CerealTypeEditor : EditDomainItem<CerealType>, IEditDomainI
 
     public async Task OnSave()
     {
-        await OnSave(new SaveCerealType(Model));
+        await OnSave(new SaveCerealType(EditModel));
     }
 }

@@ -9,6 +9,6 @@ public partial class PhotoTypeEditor : EditDomainItem<PhotoType>, IEditDomainIte
 
     public async Task OnSave()
     {
-        await OnSave(new SavePhotoType(ViewModel));
+        await OnSave(new SavePhotoType(Model));
     }
 }

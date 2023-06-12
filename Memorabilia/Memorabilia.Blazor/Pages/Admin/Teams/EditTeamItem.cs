@@ -1,8 +1,6 @@
-﻿
+﻿namespace Memorabilia.Blazor.Pages.Admin.Teams;
 
-namespace Memorabilia.Blazor.Pages.Admin.Teams;
-
-public abstract class EditTeamItem<TSaveViewModel, TViewModel> : EditItem<TSaveViewModel, TViewModel>
+public abstract class EditTeamItem<TSaveModel, TModel> : EditItem<TSaveModel, TModel>
 {
     [Parameter]
     public int SportLeagueLevelId { get; set; }
@@ -12,6 +10,6 @@ public abstract class EditTeamItem<TSaveViewModel, TViewModel> : EditItem<TSaveV
 
     protected override void Initialize()
     {
-        ViewModel = (TSaveViewModel)Activator.CreateInstance(typeof(TSaveViewModel), TeamId);
+        EditModel = (TSaveModel)Activator.CreateInstance(typeof(TSaveModel), TeamId);
     }
 }

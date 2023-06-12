@@ -5,7 +5,7 @@ public partial class ConferenceTeamEditor
 {
     protected async Task HandleValidSubmit()
     {
-        await HandleValidSubmit(new SaveTeamConference.Command(TeamId, ViewModel.Conferences));
+        await HandleValidSubmit(new SaveTeamConference.Command(TeamId, EditModel.Conferences));
     }
 
     protected async Task OnLoad()
@@ -15,10 +15,10 @@ public partial class ConferenceTeamEditor
         Entity.TeamConference[] teamConferences 
             = await QueryRouter.Send(new GetTeamConferences(TeamId));
 
-        ViewModel.Conferences 
+        EditModel.Conferences 
             = teamConferences.Select(teamConference => new TeamConferenceEditModel(new TeamConferenceModel(teamConference)))
                              .ToList();
 
-        ViewModel.SportLeagueLevel = SportLeagueLevel.Find(SportLeagueLevelId);           
+        EditModel.SportLeagueLevel = SportLeagueLevel.Find(SportLeagueLevelId);           
     }    
 }

@@ -9,6 +9,6 @@ public partial class SpotEditor : EditDomainItem<Spot>, IEditDomainItem
 
     public async Task OnSave()
     {
-        await OnSave(new Application.Features.Admin.Spots.SaveSpot(ViewModel));
+        await OnSave(new Application.Features.Admin.Spots.SaveSpot(Model));
     }
 }

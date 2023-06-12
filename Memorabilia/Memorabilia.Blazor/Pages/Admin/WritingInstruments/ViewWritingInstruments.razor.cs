@@ -5,11 +5,11 @@ public partial class ViewWritingInstruments
 {
     public async Task OnDelete(DomainEditModel editModel)
     {
-        await OnDelete(new SaveWritingInstrument(viewModel));
+        await OnDelete(new SaveWritingInstrument(editModel));
     }
 
     public async Task OnLoad()
     {
-        ViewModel = new WritingInstrumentsModel(await QueryRouter.Send(new GetWritingInstruments()));
+        Model = new WritingInstrumentsModel(await QueryRouter.Send(new GetWritingInstruments()));
     }
 }

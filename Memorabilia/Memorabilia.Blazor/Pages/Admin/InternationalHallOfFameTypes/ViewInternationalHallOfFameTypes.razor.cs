@@ -5,11 +5,11 @@ public partial class ViewInternationalHallOfFameTypes
 {
     public async Task OnDelete(DomainEditModel editModel)
     {
-        await CommandRouter.Send(new SaveInternationalHallOfFameType(viewModel));
+        await CommandRouter.Send(new SaveInternationalHallOfFameType(editModel));
     }
 
     public async Task OnLoad()
     {
-        ViewModel = new InternationalHallOfFameTypesModel(await QueryRouter.Send(new GetInternationalHallOfFameTypes()));
+        Model = new InternationalHallOfFameTypesModel(await QueryRouter.Send(new GetInternationalHallOfFameTypes()));
     }
 }

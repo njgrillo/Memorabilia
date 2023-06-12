@@ -9,6 +9,6 @@ public partial class HelmetQualityTypeEditor : EditDomainItem<HelmetQualityType>
 
     public async Task OnSave()
     {
-        await OnSave(new SaveHelmetQualityType(ViewModel));
+        await OnSave(new SaveHelmetQualityType(Model));
     }
 }

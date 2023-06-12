@@ -5,11 +5,11 @@ public partial class ViewProjectTypes
 {
     public async Task OnDelete(DomainEditModel editModel)
     {
-        await OnDelete(new SaveProjectType(viewModel));
+        await OnDelete(new SaveProjectType(editModel));
     }
 
     public async Task OnLoad()
     {
-        ViewModel = new ProjectTypesModel(await QueryRouter.Send(new GetProjectTypes()));
+        Model = new ProjectTypesModel(await QueryRouter.Send(new GetProjectTypes()));
     }
 }

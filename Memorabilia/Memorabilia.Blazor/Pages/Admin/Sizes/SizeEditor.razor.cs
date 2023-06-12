@@ -9,6 +9,6 @@ public partial class SizeEditor : EditDomainItem<Constant.Size>, IEditDomainItem
 
     public async Task OnSave()
     {
-        await OnSave(new SaveSize(ViewModel));
+        await OnSave(new SaveSize(Model));
     }
 }

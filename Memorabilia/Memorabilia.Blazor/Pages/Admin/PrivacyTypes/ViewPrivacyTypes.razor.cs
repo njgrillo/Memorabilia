@@ -5,11 +5,11 @@ public partial class ViewPrivacyTypes
 {
     public async Task OnDelete(DomainEditModel editModel)
     {
-        await OnDelete(new SavePrivacyType(viewModel));
+        await OnDelete(new SavePrivacyType(editModel));
     }
 
     public async Task OnLoad()
     {
-        ViewModel = new PrivacyTypesModel(await QueryRouter.Send(new GetPrivacyTypes()));
+        Model = new PrivacyTypesModel(await QueryRouter.Send(new GetPrivacyTypes()));
     }
 }

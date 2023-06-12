@@ -5,7 +5,7 @@
         <MudTable Bordered="false"
                   Dense="false"
                   Hover="true"
-                  Items="@_viewModel.ExistingImageFileNames.OrderBy(item => item)"
+                  Items="@Model.ExistingImageFileNames.OrderBy(item => item)"
                   Striped="true">
             <ToolBarContent>
                 <MudText Typo="Typo.h6">Existing Images</MudText>
@@ -30,7 +30,7 @@
         <MudTable Bordered="false"
                   Dense="false"
                   Hover="true"
-                  Items="@_viewModel.OrphanedImageFileNames.OrderBy(item => item)"
+                  Items="@Model.OrphanedImageFileNames.OrderBy(item => item)"
                   Striped="true">
             <ToolBarContent>
                 <MudText Typo="Typo.h6">Orphaned Images</MudText>

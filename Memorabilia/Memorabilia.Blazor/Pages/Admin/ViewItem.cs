@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Blazor.Pages.Admin;
 
-public abstract class ViewItem<TViewModel, TItemViewModel> : CommandQuery
+public abstract class ViewItem<TModel, TItemModel> : CommandQuery
 {
     [Inject]
     public IDialogService DialogService { get; set; }
@@ -9,15 +9,18 @@ public abstract class ViewItem<TViewModel, TItemViewModel> : CommandQuery
     public ISnackbar Snackbar { get; set; }
 
     protected string Search;
-    protected TViewModel ViewModel = (TViewModel)Activator.CreateInstance(typeof(TViewModel));
 
-    protected bool FilterFunc1(TItemViewModel viewModel) => FilterFunc(viewModel, Search);
+    protected TModel ViewModel 
+        = (TModel)Activator.CreateInstance(typeof(TModel));
+
+    protected bool FilterFunc1(TItemModel viewModel) 
+        => FilterFunc(viewModel, Search);
 
     protected abstract Task Delete(int id);
 
-    protected abstract bool FilterFunc(TItemViewModel viewModel, string search);
+    protected abstract bool FilterFunc(TItemModel viewModel, string search);
 
-    protected async Task OnLoad(IQuery<TViewModel> request)
+    protected async Task OnLoad(IQuery<TModel> request)
     {
         ViewModel = await QueryRouter.Send(request);
     }

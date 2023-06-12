@@ -1,31 +1,31 @@
 ﻿@inherits EditPersonItem<PersonTeamsEditModel, PersonTeamModel>
 
-<EditPage ContinueNavigationPath="@ViewModel.ContinueNavigationPath"
-          EditMode="ViewModel.EditModeType"
-          ExitNavigationPath="@ViewModel.ExitNavigationPath"
-          ImageFileName="@ViewModel.ImageFileName"
-          ItemName="@ViewModel.ItemTitle"
-          Model="ViewModel"
+<EditPage ContinueNavigationPath="@EditModel.ContinueNavigationPath"
+          EditMode="EditModel.EditModeType"
+          ExitNavigationPath="@EditModel.ExitNavigationPath"
+          ImageFileName="@EditModel.ImageFileName"
+          ItemName="@EditModel.ItemTitle"
+          Model="EditModel"
           OnLoad="OnLoad"
           OnSave="HandleValidSubmit"
-          PageFooterButtonText="@ViewModel.ExitButtonText"
-          PageFooterNavigationPath="@ViewModel.BackNavigationPath"
-          PageTitle="@ViewModel.PageTitle"
+          PageFooterButtonText="@EditModel.ExitButtonText"
+          PageFooterNavigationPath="@EditModel.BackNavigationPath"
+          PageTitle="@EditModel.PageTitle"
           PerformValidation="PerformValidation"
           TItem="PersonTeamsEditModel"
           UseMultipleButtons="true"
-          ValidationResult="@ViewModel.ValidationResult">
+          ValidationResult="@EditModel.ValidationResult">
     <TimelineContent>
-        <PersonTimeline EditMode="ViewModel.EditModeType"
-                        PersonId="ViewModel.PersonId"
-                        PersonStep="ViewModel.PersonStep" />
+        <PersonTimeline EditMode="EditModel.EditModeType"
+                        PersonId="EditModel.PersonId"
+                        PersonStep="EditModel.PersonStep" />
     </TimelineContent>
     <Content>
         <DivRowCol12>
             <Content>
                 <PersonTeamSelector PersonId="PersonId" 
-                                    SportIds="ViewModel.SportIds.ToArray()"
-                                    Teams="ViewModel.Teams" />
+                                    SportIds="EditModel.SportIds.ToArray()"
+                                    Teams="EditModel.Teams" />
             </Content>
         </DivRowCol12>
         <br />

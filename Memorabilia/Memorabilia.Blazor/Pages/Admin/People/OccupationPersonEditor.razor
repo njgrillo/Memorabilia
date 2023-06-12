@@ -1,22 +1,22 @@
 ﻿@inherits EditPersonItem<PersonOccupationsEditModel, PersonOccupationModel>
 
-<EditPage ContinueNavigationPath="@ViewModel.ContinueNavigationPath"
-          EditMode="ViewModel.EditModeType"
-          ExitNavigationPath="@ViewModel.ExitNavigationPath"
-          ImageFileName="@ViewModel.ImageFileName"
-          ItemName="@ViewModel.ItemTitle"
-          Model="ViewModel"
+<EditPage ContinueNavigationPath="@EditModel.ContinueNavigationPath"
+          EditMode="EditModel.EditModeType"
+          ExitNavigationPath="@EditModel.ExitNavigationPath"
+          ImageFileName="@EditModel.ImageFileName"
+          ItemName="@EditModel.ItemTitle"
+          Model="EditModel"
           OnLoad="OnLoad"
           OnSave="HandleValidSubmit"
-          PageFooterButtonText="@ViewModel.ExitButtonText"
-          PageFooterNavigationPath="@ViewModel.BackNavigationPath"
-          PageTitle="@ViewModel.PageTitle"
+          PageFooterButtonText="@EditModel.ExitButtonText"
+          PageFooterNavigationPath="@EditModel.BackNavigationPath"
+          PageTitle="@EditModel.PageTitle"
           TItem="PersonOccupationsEditModel"
           UseMultipleButtons="true">
     <TimelineContent>
-        <PersonTimeline EditMode="ViewModel.EditModeType"
-                        PersonId="ViewModel.PersonId"
-                        PersonStep="ViewModel.PersonStep" />
+        <PersonTimeline EditMode="EditModel.EditModeType"
+                        PersonId="EditModel.PersonId"
+                        PersonStep="EditModel.PersonStep" />
     </TimelineContent>
     <Content>
         <div class="d-flex justify-content-between" style="width:100%">
@@ -27,38 +27,38 @@
                          PanelClass="pa-6"
                          Rounded="true">
                     <MudTabPanel BadgeColor="MudBlazor.Color.Success"
-                                 BadgeData="ViewModel.Occupations.Count(occupation => !occupation.IsDeleted)"
+                                 BadgeData="EditModel.Occupations.Count(occupation => !occupation.IsDeleted)"
                                  Text="Occupations">
                         <DivRowCol12>
                             <Content>
-                                <PersonOccupationSelector Occupations="ViewModel.Occupations"
+                                <PersonOccupationSelector Occupations="EditModel.Occupations"
                                                           OnOccupationChange="@(() => StateHasChanged())" />
                             </Content>
                         </DivRowCol12>
                     </MudTabPanel>
-                    <PrettyBlazor.Condition Evaluation="@ViewModel.HasAthleteOccupation">
+                    <PrettyBlazor.Condition Evaluation="@EditModel.HasAthleteOccupation">
                         <Match>
                             <MudTabPanel BadgeColor="MudBlazor.Color.Success"
-                                         BadgeData="ViewModel.Sports.Count(sport => !sport.IsDeleted)"
+                                         BadgeData="EditModel.Sports.Count(sport => !sport.IsDeleted)"
                                          Text="Sports">
                                 <DivRowCol12>
                                     <Content>
                                         <PersonSportEditor OnSportChange="@(() => StateHasChanged())"
-                                                           Sports="ViewModel.Sports" />
+                                                           Sports="EditModel.Sports" />
                                     </Content>
                                 </DivRowCol12>
                             </MudTabPanel>
                         </Match>
                     </PrettyBlazor.Condition>
-                    <PrettyBlazor.Condition Evaluation="@ViewModel.HasPositionSport">
+                    <PrettyBlazor.Condition Evaluation="@EditModel.HasPositionSport">
                         <Match>
                             <MudTabPanel BadgeColor="MudBlazor.Color.Success"
-                                         BadgeData="ViewModel.Positions.Count(position => !position.IsDeleted)"
+                                         BadgeData="EditModel.Positions.Count(position => !position.IsDeleted)"
                                          Text="Positions">
                                 <DivRowCol12>
                                     <Content>
-                                        <PersonPositionEditor Positions="ViewModel.Positions"
-                                                              Sports="@(ViewModel.Sports.Select(sport => sport.Sport).ToArray())" />
+                                        <PersonPositionEditor Positions="EditModel.Positions"
+                                                              Sports="@(EditModel.Sports.Select(sport => sport.Sport).ToArray())" />
                                     </Content>
                                 </DivRowCol12>
                             </MudTabPanel>

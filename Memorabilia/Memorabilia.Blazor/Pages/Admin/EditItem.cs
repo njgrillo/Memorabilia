@@ -15,9 +15,7 @@ public abstract class EditItem<TEditModel, TModel> : ComponentBase
         = (TEditModel)Activator.CreateInstance(typeof(TEditModel));
 
     protected async Task<TModel> Get(IQuery<TModel> request)
-    {
-        return await QueryRouter.Send(request);
-    }
+        => await QueryRouter.Send(request);
 
     protected async Task HandleValidSubmit(ICommand command)
     {

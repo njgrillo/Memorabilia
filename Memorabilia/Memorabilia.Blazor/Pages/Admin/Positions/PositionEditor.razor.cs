@@ -5,7 +5,7 @@ public partial class PositionEditor
 {
     protected async Task HandleValidSubmit()
     {
-        await HandleValidSubmit(new SavePosition(ViewModel));
+        await HandleValidSubmit(new SavePosition(EditModel));
     }
 
     protected async Task OnLoad()
@@ -13,6 +13,6 @@ public partial class PositionEditor
         if (Id == 0)
             return;
 
-        ViewModel = new PositionEditModel(new PositionModel(await QueryRouter.Send(new GetPosition(Id))));
+        EditModel = new PositionEditModel(new PositionModel(await QueryRouter.Send(new GetPosition(Id))));
     }
 }

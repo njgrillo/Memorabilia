@@ -5,11 +5,11 @@ public partial class ViewLeaderTypes
 {   
     public async Task OnDelete(DomainEditModel editModel)
     {
-        await OnDelete(new SaveLeaderType(viewModel));
+        await OnDelete(new SaveLeaderType(editModel));
     }
 
     public async Task OnLoad()
     {
-        ViewModel = new LeaderTypesModel(await QueryRouter.Send(new GetLeaderTypes()));
+        Model = new LeaderTypesModel(await QueryRouter.Send(new GetLeaderTypes()));
     }
 }

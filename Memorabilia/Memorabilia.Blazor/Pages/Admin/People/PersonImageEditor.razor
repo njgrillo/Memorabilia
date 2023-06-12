@@ -1,23 +1,23 @@
 ﻿@inherits EditPersonItem<PersonImageEditModel, PersonImageModel>
 
-<EditPage ContinueNavigationPath="@ViewModel.ContinueNavigationPath"
+<EditPage ContinueNavigationPath="@EditModel.ContinueNavigationPath"
           DisplaySaveContinueButton="false"
-          EditMode="ViewModel.EditModeType"
-          ExitNavigationPath="@ViewModel.ExitNavigationPath"
-          ImageFileName="@ViewModel.ImageFileName" 
-          ItemName="@ViewModel.ItemTitle"
-          Model="ViewModel"
+          EditMode="EditModel.EditModeType"
+          ExitNavigationPath="@EditModel.ExitNavigationPath"
+          ImageFileName="@EditModel.ImageFileName" 
+          ItemName="@EditModel.ItemTitle"
+          Model="EditModel"
           OnLoad="OnLoad"
           OnSave="HandleValidSubmit"
-          PageFooterButtonText="@ViewModel.ExitButtonText"
-          PageFooterNavigationPath="@ViewModel.BackNavigationPath"
-          PageTitle="@ViewModel.PageTitle"
+          PageFooterButtonText="@EditModel.ExitButtonText"
+          PageFooterNavigationPath="@EditModel.BackNavigationPath"
+          PageTitle="@EditModel.PageTitle"
           TItem="PersonImageEditModel"
           UseMultipleButtons="true">
     <TimelineContent>
-        <PersonTimeline EditMode="ViewModel.EditModeType"
-                        PersonId="ViewModel.PersonId"
-                        PersonStep="ViewModel.PersonStep" />
+        <PersonTimeline EditMode="EditModel.EditModeType"
+                        PersonId="EditModel.PersonId"
+                        PersonStep="EditModel.PersonStep" />
     </TimelineContent>
     <Content>
         <DivRowCol12>
@@ -41,7 +41,7 @@
                             <Match>
                                 <ImageEditor CanRemove="true"
                                              HasPrimary="false"
-                                             ImageFileName="@ViewModel.PersonImageFileName"
+                                             ImageFileName="@EditModel.PersonImageFileName"
                                              ImageRootPath="@PersonImageRootPath"
                                              ImageType="ImageType.Primary"
                                              OnRemove="Remove" /> 

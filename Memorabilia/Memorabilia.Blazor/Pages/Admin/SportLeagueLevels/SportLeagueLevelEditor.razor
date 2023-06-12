@@ -1,44 +1,44 @@
 ﻿@inherits EditItem<SportLeagueLevelEditModel, SportLeagueLevelModel>
 
-<EditPage ContinueNavigationPath="@ViewModel.RoutePrefix"
-          EditMode="ViewModel.EditModeType" 
-          ExitNavigationPath="@ViewModel.RoutePrefix" 
-          ImageFileName="@ViewModel.ImageFileName" 
-          ItemName="@ViewModel.ItemTitle"
-          Model="ViewModel"
+<EditPage ContinueNavigationPath="@EditModel.RoutePrefix"
+          EditMode="EditModel.EditModeType" 
+          ExitNavigationPath="@EditModel.RoutePrefix" 
+          ImageFileName="@EditModel.ImageFileName" 
+          ItemName="@EditModel.ItemTitle"
+          Model="EditModel"
           OnLoad="OnLoad"
           OnSave="HandleValidSubmit"
-          PageFooterButtonText="@ViewModel.ExitButtonText"
-          PageFooterNavigationPath="@ViewModel.ExitNavigationPath"
-          PageTitle="@ViewModel.PageTitle"
+          PageFooterButtonText="@EditModel.ExitButtonText"
+          PageFooterNavigationPath="@EditModel.ExitNavigationPath"
+          PageTitle="@EditModel.PageTitle"
           TItem="SportLeagueLevelEditModel">
     <Content>
         <DivRowCol3>
             <Content>
-                <SportDropDown Disabled="@(!ViewModel.IsNew)" 
-                               SelectedValue="ViewModel.SportId"
-                               SelectionChanged="(p) => ViewModel.SportId = p" />
+                <SportDropDown Disabled="@(!EditModel.IsNew)" 
+                               SelectedValue="EditModel.SportId"
+                               SelectionChanged="(p) => EditModel.SportId = p" />
             </Content>
         </DivRowCol3>
         <DivRowCol3>
             <Content>
-                <LevelTypeDropDown Disabled="@(!ViewModel.IsNew)" 
-                                   SelectedValue="ViewModel.LevelTypeId"
-                                   SelectionChanged="(p) => ViewModel.LevelTypeId = p" />
+                <LevelTypeDropDown Disabled="@(!EditModel.IsNew)" 
+                                   SelectedValue="EditModel.LevelTypeId"
+                                   SelectionChanged="(p) => EditModel.LevelTypeId = p" />
             </Content>
         </DivRowCol3>
         <DivRowCol3>
             <Content>
                 <TextField Label="Name"
-                           SelectedText="@ViewModel.Name"
-                           SelectedTextChanged="@((p) => ViewModel.Name = p)" />
+                           SelectedText="@EditModel.Name"
+                           SelectedTextChanged="@((p) => EditModel.Name = p)" />
             </Content>
         </DivRowCol3>
         <DivRowCol3>
             <Content>
                 <TextField Label="Abbreviation"
-                           SelectedText="@ViewModel.Abbreviation"
-                           SelectedTextChanged="@((p) => ViewModel.Abbreviation = p)" />
+                           SelectedText="@EditModel.Abbreviation"
+                           SelectedTextChanged="@((p) => EditModel.Abbreviation = p)" />
             </Content>
         </DivRowCol3>
     </Content>

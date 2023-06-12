@@ -4,7 +4,7 @@ public partial class ItemTypeGameStyleEditor : EditItemTypeItem<ItemTypeGameStyl
 {
     protected async Task HandleValidSubmit()
     {
-        await HandleValidSubmit(new SaveItemTypeGameStyle(ViewModel));
+        await HandleValidSubmit(new SaveItemTypeGameStyle(EditModel));
     }
 
     protected async Task OnLoad()
@@ -14,6 +14,6 @@ public partial class ItemTypeGameStyleEditor : EditItemTypeItem<ItemTypeGameStyl
         if (DisplayItemType)
             return;
 
-        ViewModel = new ItemTypeGameStyleEditModel(new ItemTypeGameStyleModel(await QueryRouter.Send(new GetItemTypeGameStyle(Id))));
+        EditModel = new ItemTypeGameStyleEditModel(new ItemTypeGameStyleModel(await QueryRouter.Send(new GetItemTypeGameStyle(Id))));
     }
 }

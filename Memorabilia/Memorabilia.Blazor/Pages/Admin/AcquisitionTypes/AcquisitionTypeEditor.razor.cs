@@ -1,6 +1,7 @@
 ﻿namespace Memorabilia.Blazor.Pages.Admin.AcquisitionTypes;
 
-public partial class AcquisitionTypeEditor : EditDomainItem<AcquisitionType>, IEditDomainItem
+public partial class AcquisitionTypeEditor 
+    : EditDomainItem<AcquisitionType>, IEditDomainItem
 {
     public async Task OnLoad()
     {
@@ -9,6 +10,6 @@ public partial class AcquisitionTypeEditor : EditDomainItem<AcquisitionType>, IE
 
     public async Task OnSave()
     {
-        await OnSave(new SaveAcquisitionType(Model));
+        await OnSave(new SaveAcquisitionType(EditModel));
     }
 }

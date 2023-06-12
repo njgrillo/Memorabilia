@@ -1,28 +1,28 @@
 ﻿@inherits EditItemTypeItem<ItemTypeSizeEditModel, ItemTypeSizeModel>
 
-<EditPage ContinueNavigationPath="@ViewModel.RoutePrefix"
-          EditMode="ViewModel.EditModeType" 
-          ExitNavigationPath="@ViewModel.RoutePrefix"
-          ImageFileName="@ViewModel.ImageFileName"
-          ItemName="@ViewModel.ItemTitle"
-          Model="ViewModel"
+<EditPage ContinueNavigationPath="@EditModel.RoutePrefix"
+          EditMode="EditModel.EditModeType" 
+          ExitNavigationPath="@EditModel.RoutePrefix"
+          ImageFileName="@EditModel.ImageFileName"
+          ItemName="@EditModel.ItemTitle"
+          Model="EditModel"
           OnLoad="OnLoad"
           OnSave="HandleValidSubmit"
-          PageFooterButtonText="@ViewModel.ExitButtonText"
-          PageFooterNavigationPath="@ViewModel.ExitNavigationPath"
-          PageTitle="@ViewModel.PageTitle"
+          PageFooterButtonText="@EditModel.ExitButtonText"
+          PageFooterNavigationPath="@EditModel.ExitNavigationPath"
+          PageTitle="@EditModel.PageTitle"
           TItem="ItemTypeSizeEditModel">
     <Content>
         <DivRowCol3 Hidden="@(!DisplayItemType)">
             <Content>
-                <ItemTypeAutoComplete SelectedValue="ViewModel.ItemType"
-                                      SelectionChanged="(p) => ViewModel.ItemType = p" />
+                <ItemTypeAutoComplete SelectedValue="EditModel.ItemType"
+                                      SelectionChanged="(p) => EditModel.ItemType = p" />
             </Content>
         </DivRowCol3>
         <DivRowCol3>
             <Content>
-                <SizeAutoComplete SelectedValue="ViewModel.Size"
-                                  SelectionChanged="(p) => ViewModel.Size = p" />
+                <SizeAutoComplete SelectedValue="EditModel.Size"
+                                  SelectionChanged="(p) => EditModel.Size = p" />
             </Content>
         </DivRowCol3>
     </Content>

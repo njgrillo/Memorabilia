@@ -5,11 +5,11 @@ public partial class ViewHelmetTypes
 {
     public async Task OnDelete(DomainEditModel editModel)
     {
-        await CommandRouter.Send(new SaveHelmetType(viewModel));
+        await CommandRouter.Send(new SaveHelmetType(editModel));
     }
 
     public async Task OnLoad()
     {
-        ViewModel = new HelmetTypesModel(await QueryRouter.Send(new GetHelmetTypes()));
+        Model = new HelmetTypesModel(await QueryRouter.Send(new GetHelmetTypes()));
     }
 }

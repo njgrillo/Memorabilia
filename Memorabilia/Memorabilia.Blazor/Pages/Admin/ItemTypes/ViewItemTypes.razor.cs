@@ -5,11 +5,11 @@ public partial class ViewItemTypes
 {
     public async Task OnDelete(DomainEditModel editModel)
     {
-        await CommandRouter.Send(new SaveItemType(viewModel));
+        await CommandRouter.Send(new SaveItemType(editModel));
     }
 
     public async Task OnLoad()
     {
-        ViewModel = new ItemTypesModel(await QueryRouter.Send(new GetItemTypes()));
+        Model = new ItemTypesModel(await QueryRouter.Send(new GetItemTypes()));
     }
 }

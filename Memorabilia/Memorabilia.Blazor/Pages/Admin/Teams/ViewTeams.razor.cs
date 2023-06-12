@@ -10,7 +10,7 @@ public partial class ViewTeams
 
     protected override async Task Delete(int id)
     {
-        var deletedItem = ViewModel.Teams.Single(team => team.Id == id);
+        TeamModel deletedItem = ViewModel.Teams.Single(team => team.Id == id);
         var viewModel = new TeamEditModel(deletedItem)
         {
             IsDeleted = true

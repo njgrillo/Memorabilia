@@ -1,6 +1,7 @@
 ﻿namespace Memorabilia.Blazor.Pages.Admin.Conditions;
 
-public partial class ConditionEditor : EditDomainItem<Constant.Condition>, IEditDomainItem
+public partial class ConditionEditor 
+    : EditDomainItem<Condition>, IEditDomainItem
 {
     public async Task OnLoad()
     {
@@ -9,6 +10,6 @@ public partial class ConditionEditor : EditDomainItem<Constant.Condition>, IEdit
 
     public async Task OnSave()
     {
-        await OnSave(new SaveCondition(Model));
+        await OnSave(new SaveCondition(EditModel));
     }
 }

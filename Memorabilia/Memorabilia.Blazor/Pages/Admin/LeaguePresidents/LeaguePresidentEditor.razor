@@ -1,52 +1,52 @@
 ﻿@inherits EditItem<LeaguePresidentEditModel, LeaguePresidentModel>
 
-<EditPage ContinueNavigationPath="@ViewModel.RoutePrefix"
-          EditMode="ViewModel.EditModeType" 
-          ExitNavigationPath="@ViewModel.RoutePrefix"
-          ImageFileName="@ViewModel.ImageFileName"
-          ItemName="@ViewModel.ItemTitle"
-          Model="ViewModel"          
+<EditPage ContinueNavigationPath="@EditModel.RoutePrefix"
+          EditMode="EditModel.EditModeType" 
+          ExitNavigationPath="@EditModel.RoutePrefix"
+          ImageFileName="@EditModel.ImageFileName"
+          ItemName="@EditModel.ItemTitle"
+          Model="EditModel"          
           OnLoad="OnLoad"
           OnSave="HandleValidSubmit"
-          PageFooterButtonText="@ViewModel.ExitButtonText"
-          PageFooterNavigationPath="@ViewModel.ExitNavigationPath"
-          PageTitle="@ViewModel.PageTitle"
+          PageFooterButtonText="@EditModel.ExitButtonText"
+          PageFooterNavigationPath="@EditModel.ExitNavigationPath"
+          PageTitle="@EditModel.PageTitle"
           TItem="LeaguePresidentEditModel">
     <Content>
         <DivRowCol3>
             <Content>
-                <SportLeagueLevelDropDown Disabled="@(!ViewModel.IsNew)" 
-                                          SelectedValue="ViewModel.SportLeagueLevelId"
-                                          SelectionChanged="(p) => ViewModel.SportLeagueLevelId = p" />
+                <SportLeagueLevelDropDown Disabled="@(!EditModel.IsNew)" 
+                                          SelectedValue="EditModel.SportLeagueLevelId"
+                                          SelectionChanged="(p) => EditModel.SportLeagueLevelId = p" />
             </Content>
         </DivRowCol3>
         <DivRowCol3>
             <Content>
-                <LeagueDropDown Disabled="@(!ViewModel.IsNew)" 
-                                SelectedValue="ViewModel.LeagueId"
-                                SelectionChanged="(p) => ViewModel.LeagueId = p"
+                <LeagueDropDown Disabled="@(!EditModel.IsNew)" 
+                                SelectedValue="EditModel.LeagueId"
+                                SelectionChanged="(p) => EditModel.LeagueId = p"
                                 SportLeagueLevel="@SportLeagueLevel.MajorLeagueBaseball" />
             </Content>
         </DivRowCol3>
         <DivRowCol3>
             <Content>
-                <PersonDomainAutoComplete Disabled="@(!ViewModel.IsNew)" 
-                                          SelectedValue="ViewModel.Person"
-                                          SelectionChanged="(p) => ViewModel.Person = p" />
+                <PersonDomainAutoComplete Disabled="@(!EditModel.IsNew)" 
+                                          SelectedValue="EditModel.Person"
+                                          SelectionChanged="(p) => EditModel.Person = p" />
             </Content>
         </DivRowCol3>
         <DivRowCol3>
             <Content>
                 <NullableIntField Label="Begin Year"
-                                  Value="ViewModel.BeginYear"
-                                  ValueChanged="@((p) => ViewModel.BeginYear = p)" />
+                                  Value="EditModel.BeginYear"
+                                  ValueChanged="@((p) => EditModel.BeginYear = p)" />
             </Content>
         </DivRowCol3>
         <DivRowCol3>
             <Content>
                 <NullableIntField Label="End Year"
-                                  Value="ViewModel.EndYear"
-                                  ValueChanged="@((p) => ViewModel.EndYear = p)" />
+                                  Value="EditModel.EndYear"
+                                  ValueChanged="@((p) => EditModel.EndYear = p)" />
             </Content>
         </DivRowCol3>
     </Content>

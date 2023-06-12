@@ -5,11 +5,11 @@ public partial class ViewOccupations
 {
     public async Task OnDelete(DomainEditModel editModel)
     {
-        await OnDelete(new SaveOccupation(viewModel));
+        await OnDelete(new SaveOccupation(editModel));
     }
 
     public async Task OnLoad()
     {
-        ViewModel = new OccupationsModel(await QueryRouter.Send(new GetOccupations()));
+        Model = new OccupationsModel(await QueryRouter.Send(new GetOccupations()));
     }
 }

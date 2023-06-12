@@ -9,6 +9,6 @@ public partial class GloveTypeEditor : EditDomainItem<GloveType>, IEditDomainIte
 
     public async Task OnSave()
     {
-        await OnSave(new SaveGloveType(ViewModel));
+        await OnSave(new SaveGloveType(Model));
     }
 }

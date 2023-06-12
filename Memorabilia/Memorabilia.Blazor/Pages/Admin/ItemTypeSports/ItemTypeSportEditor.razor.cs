@@ -1,10 +1,11 @@
 ﻿namespace Memorabilia.Blazor.Pages.Admin.ItemTypeSports;
 
-public partial class ItemTypeSportEditor : EditItemTypeItem<ItemTypeSportEditModel, ItemTypeSportModel>
+public partial class ItemTypeSportEditor 
+    : EditItemTypeItem<ItemTypeSportEditModel, ItemTypeSportModel>
 {
     protected async Task HandleValidSubmit()
     {
-        await HandleValidSubmit(new SaveItemTypeSport(ViewModel));
+        await HandleValidSubmit(new SaveItemTypeSport(EditModel));
     }
 
     protected async Task OnLoad()
@@ -14,6 +15,6 @@ public partial class ItemTypeSportEditor : EditItemTypeItem<ItemTypeSportEditMod
         if (DisplayItemType)
             return;
 
-        ViewModel = new ItemTypeSportEditModel(new ItemTypeSportModel(await QueryRouter.Send(new GetItemTypeSport(Id))));
+        EditModel = new ItemTypeSportEditModel(new ItemTypeSportModel(await QueryRouter.Send(new GetItemTypeSport(Id))));
     }
 }

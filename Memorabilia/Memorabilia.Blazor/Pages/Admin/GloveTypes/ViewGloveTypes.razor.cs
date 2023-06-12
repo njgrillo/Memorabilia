@@ -5,11 +5,11 @@ public partial class ViewGloveTypes
 {
     public async Task OnDelete(DomainEditModel editModel)
     {
-        await CommandRouter.Send(new SaveGloveType(viewModel));
+        await CommandRouter.Send(new SaveGloveType(editModel));
     }
 
     public async Task OnLoad()
     {
-        ViewModel = new GloveTypesModel(await QueryRouter.Send(new GetGloveTypes()));
+        Model = new GloveTypesModel(await QueryRouter.Send(new GetGloveTypes()));
     }
 }

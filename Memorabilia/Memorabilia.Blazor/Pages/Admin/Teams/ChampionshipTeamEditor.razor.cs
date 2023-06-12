@@ -5,7 +5,7 @@ public partial class ChampionshipTeamEditor
 {
     protected async Task HandleValidSubmit()
     {
-        await HandleValidSubmit(new SaveTeamChampionship.Command(TeamId, ViewModel.Championships));
+        await HandleValidSubmit(new SaveTeamChampionship.Command(TeamId, EditModel.Championships));
     }
 
     protected async Task OnLoad()
@@ -14,10 +14,10 @@ public partial class ChampionshipTeamEditor
 
         Entity.Champion[] champions = await QueryRouter.Send(new GetTeamChampionships(TeamId));
 
-        ViewModel.Championships 
+        EditModel.Championships 
             = champions.Select(teamChampionship => new TeamChampionshipEditModel(new TeamChampionshipModel(teamChampionship)))
                        .ToList();
 
-        ViewModel.SportLeagueLevel = SportLeagueLevel.Find(SportLeagueLevelId);
+        EditModel.SportLeagueLevel = SportLeagueLevel.Find(SportLeagueLevelId);
     }    
 }

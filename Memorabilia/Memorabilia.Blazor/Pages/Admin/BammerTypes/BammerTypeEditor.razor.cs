@@ -1,6 +1,7 @@
 ﻿namespace Memorabilia.Blazor.Pages.Admin.BammerTypes;
 
-public partial class BammerTypeEditor : EditDomainItem<BammerType>, IEditDomainItem
+public partial class BammerTypeEditor 
+    : EditDomainItem<BammerType>, IEditDomainItem
 {
     public async Task OnLoad()
     {
@@ -9,6 +10,6 @@ public partial class BammerTypeEditor : EditDomainItem<BammerType>, IEditDomainI
 
     public async Task OnSave()
     {
-        await OnSave(new SaveBammerType(Model));
+        await OnSave(new SaveBammerType(EditModel));
     }
 }

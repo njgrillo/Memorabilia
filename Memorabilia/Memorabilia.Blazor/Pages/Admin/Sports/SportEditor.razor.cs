@@ -5,7 +5,7 @@ public partial class SportEditor
 {
     protected async Task HandleValidSubmit()
     {
-        await HandleValidSubmit(new SaveSport(ViewModel));
+        await HandleValidSubmit(new SaveSport(EditModel));
     }
 
     protected async Task OnLoad()
@@ -13,6 +13,6 @@ public partial class SportEditor
         if (Id == 0)
             return;
 
-        ViewModel = new SportEditModel(new SportModel(await QueryRouter.Send(new GetSport(Id))));
+        EditModel = new SportEditModel(new SportModel(await QueryRouter.Send(new GetSport(Id))));
     }
 }

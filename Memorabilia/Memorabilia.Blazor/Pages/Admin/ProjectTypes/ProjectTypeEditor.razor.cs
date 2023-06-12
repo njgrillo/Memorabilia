@@ -9,6 +9,6 @@ public partial class ProjectTypeEditor : EditDomainItem<ProjectType>, IEditDomai
 
     public async Task OnSave()
     {
-        await OnSave(new SaveProjectType(ViewModel));
+        await OnSave(new SaveProjectType(Model));
     }
 }

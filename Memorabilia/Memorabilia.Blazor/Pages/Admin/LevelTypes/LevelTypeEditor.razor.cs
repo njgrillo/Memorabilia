@@ -9,6 +9,6 @@ public partial class LevelTypeEditor : EditDomainItem<LevelType>, IEditDomainIte
 
     public async Task OnSave()
     {
-        await OnSave(new SaveLevelType(ViewModel));
+        await OnSave(new SaveLevelType(Model));
     }
 }

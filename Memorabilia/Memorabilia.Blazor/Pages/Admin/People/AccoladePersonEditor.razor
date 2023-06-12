@@ -1,24 +1,24 @@
 ﻿@inherits EditPersonItem<PersonAccoladeEditModel, PersonAccoladeModel>
 
-<EditPage ContinueNavigationPath="@ViewModel.ContinueNavigationPath"
-          EditMode="ViewModel.EditModeType"
-          ExitNavigationPath="@ViewModel.ExitNavigationPath"
-          ImageFileName="@ViewModel.ImageFileName"
-          ItemName="@ViewModel.ItemTitle"
-          Model="ViewModel"
+<EditPage ContinueNavigationPath="@EditModel.ContinueNavigationPath"
+          EditMode="EditModel.EditModeType"
+          ExitNavigationPath="@EditModel.ExitNavigationPath"
+          ImageFileName="@EditModel.ImageFileName"
+          ItemName="@EditModel.ItemTitle"
+          Model="EditModel"
           OnLoad="OnLoad"
           OnSave="HandleValidSubmit"
-          PageFooterButtonText="@ViewModel.ExitButtonText"
-          PageFooterNavigationPath="@ViewModel.BackNavigationPath"
-          PageTitle="@ViewModel.PageTitle"
+          PageFooterButtonText="@EditModel.ExitButtonText"
+          PageFooterNavigationPath="@EditModel.BackNavigationPath"
+          PageTitle="@EditModel.PageTitle"
           PerformValidation="PerformValidation"
           TItem="PersonAccoladeEditModel"
           UseMultipleButtons="true"
-          ValidationResult="@ViewModel.ValidationResult">
+          ValidationResult="@EditModel.ValidationResult">
     <TimelineContent>
-        <PersonTimeline EditMode="ViewModel.EditModeType"
-                        PersonId="ViewModel.PersonId"
-                        PersonStep="ViewModel.PersonStep" />
+        <PersonTimeline EditMode="EditModel.EditModeType"
+                        PersonId="EditModel.PersonId"
+                        PersonStep="EditModel.PersonStep" />
     </TimelineContent>
     <Content>      
         <div style="margin-bottom:1%;">
@@ -28,46 +28,46 @@
                      PanelClass="pa-6"
                      Rounded="true">
                 <MudTabPanel BadgeColor="MudBlazor.Color.Success"
-                             BadgeData="ViewModel.Accomplishments.Count(accomplishment => !accomplishment.IsDeleted)"                             
+                             BadgeData="EditModel.Accomplishments.Count(accomplishment => !accomplishment.IsDeleted)"                             
                              Text="Accomplishments">
                     <DivRowCol12>
                         <Content>
-                            <PersonAccomplishmentEditor Accomplishments="ViewModel.Accomplishments"
-                                                        Sports="ViewModel.Sports" />
+                            <PersonAccomplishmentEditor Accomplishments="EditModel.Accomplishments"
+                                                        Sports="EditModel.Sports" />
                         </Content>
                     </DivRowCol12>                    
                 </MudTabPanel>
-                <Condition Evaluation="ViewModel.DisplayAllStars">
+                <Condition Evaluation="EditModel.DisplayAllStars">
                     <Match>
                         <MudTabPanel BadgeColor="MudBlazor.Color.Success"
-                                     BadgeData="ViewModel.AllStars.Count"
-                                     Text="@ViewModel.AllStarGameLabel">
+                                     BadgeData="EditModel.AllStars.Count"
+                                     Text="@EditModel.AllStarGameLabel">
                             <DivRowCol12>
                                 <Content>
-                                    <PersonAllStarEditor AllStars="ViewModel.AllStars"
-                                                         Sports="ViewModel.Sports" />
+                                    <PersonAllStarEditor AllStars="EditModel.AllStars"
+                                                         Sports="EditModel.Sports" />
                                 </Content>
                             </DivRowCol12>
                         </MudTabPanel>
                     </Match>
                 </Condition>                
                 <MudTabPanel BadgeColor="MudBlazor.Color.Success"
-                             BadgeData="ViewModel.Awards.Count(award => !award.IsDeleted)"
+                             BadgeData="EditModel.Awards.Count(award => !award.IsDeleted)"
                              Text="Awards">
                     <DivRowCol12>
                         <Content>
-                            <PersonAwardEditor Awards="ViewModel.Awards"
-                                               Sports="ViewModel.Sports" />
+                            <PersonAwardEditor Awards="EditModel.Awards"
+                                               Sports="EditModel.Sports" />
                         </Content>
                     </DivRowCol12>
                 </MudTabPanel>
                 <MudTabPanel BadgeColor="MudBlazor.Color.Success"
-                             BadgeData="ViewModel.Leaders.Count(leader => !leader.IsDeleted)"
+                             BadgeData="EditModel.Leaders.Count(leader => !leader.IsDeleted)"
                              Text="Leaders">
                     <DivRowCol12>
                         <Content>
-                            <PersonLeaderEditor Leaders="ViewModel.Leaders"
-                                                Sports="ViewModel.Sports" />
+                            <PersonLeaderEditor Leaders="EditModel.Leaders"
+                                                Sports="EditModel.Sports" />
                         </Content>
                     </DivRowCol12>
                 </MudTabPanel>
@@ -75,16 +75,16 @@
                     <DivRowCol12>
                         <Content>
                             <MudText Typo="Typo.h3">Career Records</MudText>
-                            <PersonCareerRecordEditor CareerRecords="ViewModel.CareerRecords"
-                                                      Sports="ViewModel.Sports" />
+                            <PersonCareerRecordEditor CareerRecords="EditModel.CareerRecords"
+                                                      Sports="EditModel.Sports" />
                         </Content>
                     </DivRowCol12>
                     <br/>
                     <DivRowCol12>
                         <Content>
                             <MudText Typo="Typo.h3">Single Season Records</MudText>
-                            <PersonSingleSeasonRecordEditor SingleSeasonRecords="ViewModel.SingleSeasonRecords"
-                                                            Sports="ViewModel.Sports" />
+                            <PersonSingleSeasonRecordEditor SingleSeasonRecords="EditModel.SingleSeasonRecords"
+                                                            Sports="EditModel.Sports" />
                         </Content>
                     </DivRowCol12>
                 </MudTabPanel>
@@ -92,16 +92,16 @@
                     <DivRowCol12>
                         <Content>
                             <MudText Typo="Typo.h3">College Retired Numbers</MudText>
-                            <PersonCollegeRetiredNumberEditor CollegeRetiredNumbers="ViewModel.CollegeRetiredNumbers"
-                                                              Colleges="ViewModel.Colleges" />
+                            <PersonCollegeRetiredNumberEditor CollegeRetiredNumbers="EditModel.CollegeRetiredNumbers"
+                                                              Colleges="EditModel.Colleges" />
                         </Content>
                     </DivRowCol12>
                     <br />
                     <DivRowCol12>
                         <Content>
                             <MudText Typo="Typo.h3">Franchise Retired Numbers</MudText>
-                            <PersonRetiredNumberEditor RetiredNumbers="ViewModel.RetiredNumbers"
-                                                       Sports="ViewModel.Sports" />
+                            <PersonRetiredNumberEditor RetiredNumbers="EditModel.RetiredNumbers"
+                                                       Sports="EditModel.Sports" />
                         </Content>
                     </DivRowCol12>
                 </MudTabPanel>

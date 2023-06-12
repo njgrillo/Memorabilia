@@ -10,17 +10,17 @@ public partial class HallOfFamePersonEditor
 
     protected async Task HandleValidSubmit()
     {
-        var command = new SavePersonHallOfFame.Command(PersonId, ViewModel);
+        var command = new SavePersonHallOfFame.Command(PersonId, EditModel);
 
-        ViewModel.ValidationResult = Validator.Validate(command);
+        EditModel.ValidationResult = Validator.Validate(command);
 
-        if (!ViewModel.ValidationResult.IsValid)
+        if (!EditModel.ValidationResult.IsValid)
         {
             PerformValidation = true;
             return;
         }
 
-        await HandleValidSubmit(new SavePersonHallOfFame.Command(PersonId, ViewModel));
+        await HandleValidSubmit(new SavePersonHallOfFame.Command(PersonId, EditModel));
 
         PerformValidation = false;
     }
@@ -29,7 +29,7 @@ public partial class HallOfFamePersonEditor
     {
         var model = new PersonHallOfFameModel(await QueryRouter.Send(new GetPerson(PersonId)));
 
-        ViewModel = new PersonHallOfFamesEditModel(PersonId, model);
+        EditModel = new PersonHallOfFamesEditModel(PersonId, model);
 
         PerformValidation = true;
     }    

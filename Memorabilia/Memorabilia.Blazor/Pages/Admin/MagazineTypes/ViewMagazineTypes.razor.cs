@@ -5,11 +5,11 @@ public partial class ViewMagazineTypes
 {
     public async Task OnDelete(DomainEditModel editModel)
     {
-        await OnDelete(new SaveMagazineType(viewModel));
+        await OnDelete(new SaveMagazineType(editModel));
     }
 
     public async Task OnLoad()
     {
-        ViewModel = new MagazineTypesModel(await QueryRouter.Send(new GetMagazineTypes()));
+        Model = new MagazineTypesModel(await QueryRouter.Send(new GetMagazineTypes()));
     }
 }

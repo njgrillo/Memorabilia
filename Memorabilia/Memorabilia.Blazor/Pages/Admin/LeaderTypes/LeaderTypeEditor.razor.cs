@@ -9,6 +9,6 @@ public partial class LeaderTypeEditor : EditDomainItem<LeaderType>, IEditDomainI
 
     public async Task OnSave()
     {
-        await OnSave(new SaveLeaderType(ViewModel));
+        await OnSave(new SaveLeaderType(Model));
     }
 }

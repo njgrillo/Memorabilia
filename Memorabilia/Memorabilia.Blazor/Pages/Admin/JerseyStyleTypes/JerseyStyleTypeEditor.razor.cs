@@ -10,6 +10,6 @@ public partial class JerseyStyleTypeEditor
 
     public async Task OnSave()
     {
-        await OnSave(new SaveJerseyStyleType(ViewModel));
+        await OnSave(new SaveJerseyStyleType(Model));
     }
 }

@@ -9,6 +9,6 @@ public partial class JerseyQualityTypeEditor : EditDomainItem<JerseyQualityType>
 
     public async Task OnSave()
     {
-        await OnSave(new SaveJerseyQualityType(ViewModel));
+        await OnSave(new SaveJerseyQualityType(Model));
     }
 }

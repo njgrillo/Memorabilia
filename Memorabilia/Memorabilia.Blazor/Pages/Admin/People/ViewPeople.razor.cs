@@ -10,7 +10,7 @@ public partial class ViewPeople
 
     protected override async Task Delete(int id)
     {
-        var deletedItem = ViewModel.People.Single(person => person.Id == id);
+        PersonModel deletedItem = ViewModel.People.Single(person => person.Id == id);
         var viewModel = new PersonEditModel(deletedItem)
         {
             IsDeleted = true

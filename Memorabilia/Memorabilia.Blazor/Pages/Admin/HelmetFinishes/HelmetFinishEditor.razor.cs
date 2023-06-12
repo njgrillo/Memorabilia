@@ -9,6 +9,6 @@ public partial class HelmetFinishEditor : EditDomainItem<HelmetFinish>, IEditDom
 
     public async Task OnSave()
     {
-        await OnSave(new SaveHelmetFinish(ViewModel));
+        await OnSave(new SaveHelmetFinish(Model));
     }
 }

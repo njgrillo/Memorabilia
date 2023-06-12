@@ -5,11 +5,11 @@ public partial class ViewRecordTypes
 {
     public async Task OnDelete(DomainEditModel editModel)
     {
-        await OnDelete(new SaveRecordType(viewModel));
+        await OnDelete(new SaveRecordType(editModel));
     }
 
     public async Task OnLoad()
     {
-        ViewModel = new RecordTypesModel(await QueryRouter.Send(new GetRecordTypes()));
+        Model = new RecordTypesModel(await QueryRouter.Send(new GetRecordTypes()));
     }
 }

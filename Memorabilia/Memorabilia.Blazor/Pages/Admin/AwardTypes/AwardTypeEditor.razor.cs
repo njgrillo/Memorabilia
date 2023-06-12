@@ -1,6 +1,7 @@
 ﻿namespace Memorabilia.Blazor.Pages.Admin.AwardTypes;
 
-public partial class AwardTypeEditor : EditDomainItem<AwardType>, IEditDomainItem
+public partial class AwardTypeEditor 
+    : EditDomainItem<AwardType>, IEditDomainItem
 {
     public async Task OnLoad()
     {
@@ -9,6 +10,6 @@ public partial class AwardTypeEditor : EditDomainItem<AwardType>, IEditDomainIte
 
     public async Task OnSave()
     {
-        await OnSave(new SaveAwardType(Model));
+        await OnSave(new SaveAwardType(EditModel));
     }
 }

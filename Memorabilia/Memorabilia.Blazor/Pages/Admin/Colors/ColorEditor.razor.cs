@@ -1,6 +1,7 @@
 ﻿namespace Memorabilia.Blazor.Pages.Admin.Colors;
 
-public partial class ColorEditor : EditDomainItem<Constant.Color>, IEditDomainItem
+public partial class ColorEditor 
+    : EditDomainItem<Constant.Color>, IEditDomainItem
 {
     public async Task OnLoad()
     {
@@ -9,6 +10,6 @@ public partial class ColorEditor : EditDomainItem<Constant.Color>, IEditDomainIt
 
     public async Task OnSave()
     {
-        await OnSave(new SaveColor(Model));
+        await OnSave(new SaveColor(EditModel));
     }
 }

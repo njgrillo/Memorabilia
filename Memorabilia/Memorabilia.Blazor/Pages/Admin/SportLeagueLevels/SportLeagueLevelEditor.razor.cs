@@ -5,7 +5,7 @@ public partial class SportLeagueLevelEditor
 {
     protected async Task HandleValidSubmit()
     {
-        await HandleValidSubmit(new SaveSportLeagueLevel(ViewModel));
+        await HandleValidSubmit(new SaveSportLeagueLevel(EditModel));
     }
 
     protected async Task OnLoad()
@@ -13,6 +13,6 @@ public partial class SportLeagueLevelEditor
         if (Id == 0)
             return;
 
-        ViewModel = new SportLeagueLevelEditModel(new SportLeagueLevelModel(await QueryRouter.Send(new GetSportLeagueLevel(Id))));
+        EditModel = new SportLeagueLevelEditModel(new SportLeagueLevelModel(await QueryRouter.Send(new GetSportLeagueLevel(Id))));
     }
 }

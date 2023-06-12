@@ -5,11 +5,11 @@ public partial class ViewLevelTypes
 {
     public async Task OnDelete(DomainEditModel editModel)
     {
-        await OnDelete(new SaveLevelType(viewModel));
+        await OnDelete(new SaveLevelType(editModel));
     }
 
     public async Task OnLoad()
     {
-        ViewModel = new LevelTypesModel(await QueryRouter.Send(new GetLevelTypes()));
+        Model = new LevelTypesModel(await QueryRouter.Send(new GetLevelTypes()));
     }
 }

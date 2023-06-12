@@ -9,6 +9,6 @@ public partial class InscriptionTypeEditor : EditDomainItem<InscriptionType>, IE
 
     public async Task OnSave()
     {
-        await OnSave(new SaveInscriptionType(ViewModel));
+        await OnSave(new SaveInscriptionType(Model));
     }
 }

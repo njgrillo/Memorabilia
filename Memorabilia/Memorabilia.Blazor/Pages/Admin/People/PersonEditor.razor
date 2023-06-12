@@ -1,24 +1,24 @@
 ﻿@inherits EditItem<PersonEditModel, PersonModel>
 
-<EditPage ContinueNavigationPath="@ViewModel.ContinueNavigationPath"
-          EditMode="ViewModel.EditModeType"
-          ExitNavigationPath="@ViewModel.ExitNavigationPath"
-          ImageFileName="@ViewModel.ImageFileName"
-          ItemName="@ViewModel.ItemTitle"
-          Model="ViewModel"
+<EditPage ContinueNavigationPath="@EditModel.ContinueNavigationPath"
+          EditMode="EditModel.EditModeType"
+          ExitNavigationPath="@EditModel.ExitNavigationPath"
+          ImageFileName="@EditModel.ImageFileName"
+          ItemName="@EditModel.ItemTitle"
+          Model="EditModel"
           OnLoad="OnLoad"
           OnSave="HandleValidSubmit"
-          PageFooterButtonText="@ViewModel.ExitButtonText"
-          PageFooterNavigationPath="@ViewModel.BackNavigationPath"
-          PageTitle="@ViewModel.PageTitle"
+          PageFooterButtonText="@EditModel.ExitButtonText"
+          PageFooterNavigationPath="@EditModel.BackNavigationPath"
+          PageTitle="@EditModel.PageTitle"
           PerformValidation="PerformValidation"
           TItem="PersonEditModel"
           UseMultipleButtons="true"
-          ValidationResult="@ViewModel.ValidationResult">
+          ValidationResult="@EditModel.ValidationResult">
     <TimelineContent>
-        <PersonTimeline EditMode="ViewModel.EditModeType"
-                        PersonId="ViewModel.Id"
-                        PersonStep="ViewModel.PersonStep" />
+        <PersonTimeline EditMode="EditModel.EditModeType"
+                        PersonId="EditModel.Id"
+                        PersonStep="EditModel.PersonStep" />
     </TimelineContent>
     <Content>   
         <div style="margin-bottom:1%;">
@@ -33,28 +33,28 @@
                             <TextField Label="First Name"
                                        MaxLength="50"
                                        OnBlur="OnNameFieldBlur"
-                                       SelectedText="@ViewModel.FirstName"
-                                       SelectedTextChanged="@((p) => ViewModel.FirstName = p)" />
+                                       SelectedText="@EditModel.FirstName"
+                                       SelectedTextChanged="@((p) => EditModel.FirstName = p)" />
                         </Content>
                         <ContentColumn2>
                             <TextField Label="Middle Name"
                                        MaxLength="50"
-                                       SelectedText="@ViewModel.MiddleName"
-                                       SelectedTextChanged="@((p) => ViewModel.MiddleName = p)" />
+                                       SelectedText="@EditModel.MiddleName"
+                                       SelectedTextChanged="@((p) => EditModel.MiddleName = p)" />
                         </ContentColumn2>
                         <ContentColumn3>
                             <TextField Label="Last Name"
                                        MaxLength="50"
                                        OnBlur="OnNameFieldBlur"
-                                       SelectedText="@ViewModel.LastName"
-                                       SelectedTextChanged="@((p) => ViewModel.LastName = p)" />
+                                       SelectedText="@EditModel.LastName"
+                                       SelectedTextChanged="@((p) => EditModel.LastName = p)" />
                         </ContentColumn3>
                         <ContentColumn4>
                             <TextField Label="Suffix"
                                        MaxLength="25"
                                        OnBlur="OnNameFieldBlur"
-                                       SelectedText="@ViewModel.Suffix"
-                                       SelectedTextChanged="@((p) => ViewModel.Suffix = p)" />
+                                       SelectedText="@EditModel.Suffix"
+                                       SelectedTextChanged="@((p) => EditModel.Suffix = p)" />
                         </ContentColumn4>
                     </DivRowCol3>
                     <DivRowCol3>
@@ -62,31 +62,31 @@
                             <TextField Label="Calling Name"
                                        MaxLength="50"
                                        OnBlur="OnNameFieldBlur"
-                                       SelectedText="@ViewModel.Nickname"
-                                       SelectedTextChanged="@((p) => ViewModel.Nickname = p)" />
+                                       SelectedText="@EditModel.Nickname"
+                                       SelectedTextChanged="@((p) => EditModel.Nickname = p)" />
                         </Content>
                         <ContentColumn2>
                             <TextField Label="Legal Name"
                                        MaxLength="225"
-                                       SelectedText="@ViewModel.LegalName"
-                                       SelectedTextChanged="@((p) => ViewModel.LegalName = p)" />
+                                       SelectedText="@EditModel.LegalName"
+                                       SelectedTextChanged="@((p) => EditModel.LegalName = p)" />
                         </ContentColumn2>
                         <ContentColumn3>
                             <TextField Label="Display Name"
                                        MaxLength="225"
-                                       SelectedText="@ViewModel.DisplayName"
-                                       SelectedTextChanged="@((p) => ViewModel.DisplayName = p)" />
+                                       SelectedText="@EditModel.DisplayName"
+                                       SelectedTextChanged="@((p) => EditModel.DisplayName = p)" />
                         </ContentColumn3>
                         <ContentColumn4>
                             <TextField Label="Profile Name"
                                        MaxLength="225"
-                                       SelectedText="@ViewModel.ProfileName"
-                                       SelectedTextChanged="@((p) => ViewModel.ProfileName = p)" />
+                                       SelectedText="@EditModel.ProfileName"
+                                       SelectedTextChanged="@((p) => EditModel.ProfileName = p)" />
                         </ContentColumn4>
                     </DivRowCol3>
                     <DivRowCol3>
                         <Content>
-                            <MudDatePicker @bind-Date="ViewModel.BirthDate"
+                            <MudDatePicker @bind-Date="EditModel.BirthDate"
                                            DateFormat="MM/dd/yyyy"
                                            Editable="true"
                                            Label="Birth Date"
@@ -94,7 +94,7 @@
                                            Variant="Variant.Outlined" />
                         </Content>
                         <ContentColumn2>
-                            <MudDatePicker @bind-Date="ViewModel.DeathDate"
+                            <MudDatePicker @bind-Date="EditModel.DeathDate"
                                            DateFormat="MM/dd/yyyy"
                                            Editable="true"
                                            Label="Death Date"
@@ -104,11 +104,11 @@
                     </DivRowCol3>
                 </MudTabPanel>
                 <MudTabPanel BadgeColor="MudBlazor.Color.Success"
-                             BadgeData="ViewModel.Nicknames.Count(nickname => !nickname.IsDeleted)"
+                             BadgeData="EditModel.Nicknames.Count(nickname => !nickname.IsDeleted)"
                              Text="Nicknames">
                     <DivRowCol12>
                         <Content>
-                            <PersonNicknameEditor Nicknames="ViewModel.Nicknames" />
+                            <PersonNicknameEditor Nicknames="EditModel.Nicknames" />
                         </Content>
                     </DivRowCol12>
                 </MudTabPanel>

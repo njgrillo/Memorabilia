@@ -9,6 +9,6 @@ public partial class PrivacyTypeEditor : EditDomainItem<PrivacyType>, IEditDomai
 
     public async Task OnSave()
     {
-        await OnSave(new SavePrivacyType(ViewModel));
+        await OnSave(new SavePrivacyType(Model));
     }
 }

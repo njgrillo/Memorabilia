@@ -1,8 +1,10 @@
 ﻿namespace Memorabilia.Blazor.Pages.Admin;
 
-public abstract class ViewDomainItem<T> : CommandQuery where T : Model
+public abstract class ViewDomainItem<T> 
+    : CommandQuery where T : Model
 {
-    protected T Model = (T)Activator.CreateInstance(typeof(T));
+    protected T Model 
+        = (T)Activator.CreateInstance(typeof(T));
 
     protected async Task OnDelete(ICommand command)
     {

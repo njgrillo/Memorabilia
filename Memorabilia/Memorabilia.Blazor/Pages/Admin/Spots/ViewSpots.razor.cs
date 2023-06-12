@@ -5,11 +5,11 @@ public partial class ViewSpots
 {
     public async Task OnDelete(DomainEditModel editModel)
     {
-        await OnDelete(new Application.Features.Admin.Spots.SaveSpot(viewModel));
+        await OnDelete(new Application.Features.Admin.Spots.SaveSpot(editModel));
     }
 
     public async Task OnLoad()
     {
-        ViewModel = new SpotsModel(await QueryRouter.Send(new GetSpots()));
+        Model = new SpotsModel(await QueryRouter.Send(new GetSpots()));
     }
 }

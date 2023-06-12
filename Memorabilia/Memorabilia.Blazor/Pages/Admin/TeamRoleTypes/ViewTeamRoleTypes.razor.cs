@@ -5,11 +5,11 @@ public partial class ViewTeamRoleTypes
 {
     public async Task OnDelete(DomainEditModel editModel)
     {
-        await OnDelete(new SaveTeamRoleType(viewModel));
+        await OnDelete(new SaveTeamRoleType(editModel));
     }
 
     public async Task OnLoad()
     {
-        ViewModel = new TeamRoleTypesModel(await QueryRouter.Send(new GetTeamRoleTypes()));
+        Model = new TeamRoleTypesModel(await QueryRouter.Send(new GetTeamRoleTypes()));
     }
 }

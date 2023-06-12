@@ -1,6 +1,7 @@
 ﻿namespace Memorabilia.Blazor.Pages.Admin.InternationalHallOfFameTypes;
 
-public partial class InternationalHallOfFameTypeEditor : EditDomainItem<InternationalHallOfFameType>, IEditDomainItem
+public partial class InternationalHallOfFameTypeEditor 
+    : EditDomainItem<InternationalHallOfFameType>, IEditDomainItem
 {
     public async Task OnLoad()
     {
@@ -9,6 +10,6 @@ public partial class InternationalHallOfFameTypeEditor : EditDomainItem<Internat
 
     public async Task OnSave()
     {
-        await OnSave(new SaveInternationalHallOfFameType(ViewModel));
+        await OnSave(new SaveInternationalHallOfFameType(Model));
     }
 }

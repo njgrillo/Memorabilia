@@ -5,11 +5,11 @@ public partial class ViewSizes
 {
     public async Task OnDelete(DomainEditModel editModel)
     {
-        await OnDelete(new SaveSize(viewModel));
+        await OnDelete(new SaveSize(editModel));
     }
 
     public async Task OnLoad()
     {
-        ViewModel = new SizesModel(await QueryRouter.Send(new GetSizes()));
+        Model = new SizesModel(await QueryRouter.Send(new GetSizes()));
     }
 }

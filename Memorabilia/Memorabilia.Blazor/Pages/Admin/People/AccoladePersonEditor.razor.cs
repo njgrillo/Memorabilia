@@ -10,11 +10,11 @@ public partial class AccoladePersonEditor
 
     protected async Task HandleValidSubmit()
     {
-        var command = new SavePersonAccolades.Command(PersonId, ViewModel);        
+        var command = new SavePersonAccolades.Command(PersonId, EditModel);        
 
-        ViewModel.ValidationResult = Validator.Validate(command);
+        EditModel.ValidationResult = Validator.Validate(command);
 
-        if (!ViewModel.ValidationResult.IsValid)
+        if (!EditModel.ValidationResult.IsValid)
         {
             PerformValidation = true;
             return;
@@ -27,9 +27,10 @@ public partial class AccoladePersonEditor
 
     protected async Task OnLoad()
     {
-        PersonAccoladeModel model = new PersonAccoladeModel(await QueryRouter.Send(new GetPerson(PersonId)));
+        PersonAccoladeModel model 
+            = new PersonAccoladeModel(await QueryRouter.Send(new GetPerson(PersonId)));
 
-        ViewModel = new PersonAccoladeEditModel(PersonId, model);
+        EditModel = new PersonAccoladeEditModel(PersonId, model);
 
         PerformValidation = true;
     }    

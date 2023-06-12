@@ -5,7 +5,7 @@ public partial class ItemTypeBrandEditor
 {
     protected async Task HandleValidSubmit()
     {
-        await HandleValidSubmit(new SaveItemTypeBrand(ViewModel));
+        await HandleValidSubmit(new SaveItemTypeBrand(EditModel));
     }
 
     protected async Task OnLoad()
@@ -15,6 +15,6 @@ public partial class ItemTypeBrandEditor
         if (DisplayItemType)
             return;
 
-        ViewModel = new ItemTypeBrandEditModel(new ItemTypeBrandModel(await QueryRouter.Send(new GetItemTypeBrand(Id))));
+        EditModel = new ItemTypeBrandEditModel(new ItemTypeBrandModel(await QueryRouter.Send(new GetItemTypeBrand(Id))));
     }
 }

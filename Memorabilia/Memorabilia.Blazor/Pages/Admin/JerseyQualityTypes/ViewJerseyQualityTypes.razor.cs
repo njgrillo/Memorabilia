@@ -5,11 +5,11 @@ public partial class ViewJerseyQualityTypes
 {
     public async Task OnDelete(DomainEditModel editModel)
     {
-        await CommandRouter.Send(new SaveJerseyQualityType(viewModel));
+        await CommandRouter.Send(new SaveJerseyQualityType(editModel));
     }
 
     public async Task OnLoad()
     {
-        ViewModel = new JerseyQualityTypesModel(await QueryRouter.Send(new GetJerseyQualityTypes()));
+        Model = new JerseyQualityTypesModel(await QueryRouter.Send(new GetJerseyQualityTypes()));
     }
 }

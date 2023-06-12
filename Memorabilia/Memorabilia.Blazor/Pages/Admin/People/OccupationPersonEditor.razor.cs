@@ -8,7 +8,7 @@ public partial class OccupationPersonEditor
 
     protected async Task HandleValidSubmit()
     {
-        await HandleValidSubmit(new SavePersonOccupation.Command(PersonId, ViewModel));
+        await HandleValidSubmit(new SavePersonOccupation.Command(PersonId, EditModel));
     }
 
     protected async Task OnLoad()
@@ -20,21 +20,21 @@ public partial class OccupationPersonEditor
 
         Entity.Person person = await QueryRouter.Send(new GetPerson(PersonId));
 
-        ViewModel = new PersonOccupationsEditModel(PersonId, new PersonOccupationModel(person));
+        EditModel = new PersonOccupationsEditModel(PersonId, new PersonOccupationModel(person));
     }    
 
     protected void OnRecentOccupationChange(RecentPersonOccupationsModel recentOccupation)
     {
-        ViewModel.Occupations = recentOccupation.Occupations
-                                                .Select(occupation => new PersonOccupationEditModel(new Entity.PersonOccupation(occupation.Id, occupation.OccupationTypeId, ViewModel.PersonId)))
+        EditModel.Occupations = recentOccupation.Occupations
+                                                .Select(occupation => new PersonOccupationEditModel(new Entity.PersonOccupation(occupation.Id, occupation.OccupationTypeId, EditModel.PersonId)))
                                                 .ToList();
 
-        ViewModel.Positions = recentOccupation.Positions
-                                              .Select(position => new PersonPositionEditModel(new Entity.PersonPosition(ViewModel.PersonId, position.Id, position.PositionType)))
+        EditModel.Positions = recentOccupation.Positions
+                                              .Select(position => new PersonPositionEditModel(new Entity.PersonPosition(EditModel.PersonId, position.Id, position.PositionType)))
                                               .ToList();
 
-        ViewModel.Sports = recentOccupation.Sports
-                                           .Select(sport => new PersonSportEditModel(new Entity.PersonSport(ViewModel.PersonId, sport.Id, sport.IsPrimary)))
+        EditModel.Sports = recentOccupation.Sports
+                                           .Select(sport => new PersonSportEditModel(new Entity.PersonSport(EditModel.PersonId, sport.Id, sport.IsPrimary)))
                                            .ToList();
     }
 }

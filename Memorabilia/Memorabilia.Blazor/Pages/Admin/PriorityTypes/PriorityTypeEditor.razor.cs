@@ -9,6 +9,6 @@ public partial class PriorityTypeEditor : EditDomainItem<PriorityType>, IEditDom
 
     public async Task OnSave()
     {
-        await OnSave(new SavePriorityType(ViewModel));
+        await OnSave(new SavePriorityType(Model));
     }
 }

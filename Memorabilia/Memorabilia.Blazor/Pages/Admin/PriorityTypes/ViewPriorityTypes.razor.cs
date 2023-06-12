@@ -5,12 +5,12 @@
     {
         public async Task OnDelete(DomainEditModel editModel)
         {
-            await OnDelete(new SavePriorityType(viewModel));
+            await OnDelete(new SavePriorityType(editModel));
         }
 
         public async Task OnLoad()
         {
-            ViewModel= new PriorityTypesModel(await QueryRouter.Send(new GetPriorityTypes()));
+            Model = new PriorityTypesModel(await QueryRouter.Send(new GetPriorityTypes()));
         }
     }
 }

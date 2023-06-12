@@ -5,12 +5,12 @@
     {
         public async Task OnDelete(DomainEditModel editModel)
         {
-            await OnDelete(new SavePurchaseType(viewModel));
+            await OnDelete(new SavePurchaseType(editModel));
         }
 
         public async Task OnLoad()
         {
-            ViewModel = new PurchaseTypesModel(await QueryRouter.Send(new GetPurchaseTypes()));
+            Model = new PurchaseTypesModel(await QueryRouter.Send(new GetPurchaseTypes()));
         }
     }
 }

@@ -4,7 +4,7 @@ public partial class ItemTypeSizeEditor : EditItemTypeItem<ItemTypeSizeEditModel
 {
     protected async Task HandleValidSubmit()
     {
-        await HandleValidSubmit(new SaveItemTypeSize(ViewModel));
+        await HandleValidSubmit(new SaveItemTypeSize(EditModel));
     }
 
     protected async Task OnLoad()
@@ -14,6 +14,6 @@ public partial class ItemTypeSizeEditor : EditItemTypeItem<ItemTypeSizeEditModel
         if (DisplayItemType)
             return;
 
-        ViewModel = new ItemTypeSizeEditModel(new ItemTypeSizeModel(await QueryRouter.Send(new GetItemTypeSize(Id))));
+        EditModel = new ItemTypeSizeEditModel(new ItemTypeSizeModel(await QueryRouter.Send(new GetItemTypeSize(Id))));
     }
 }

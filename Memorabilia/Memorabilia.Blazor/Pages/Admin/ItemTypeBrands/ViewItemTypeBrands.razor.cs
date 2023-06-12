@@ -10,7 +10,7 @@ public partial class ViewItemTypeBrands
 
     protected override async Task Delete(int id)
     {
-        var deletedItem = ViewModel.ItemTypeBrands.Single(ItemTypeBrand => ItemTypeBrand.Id == id);
+        ItemTypeBrandModel deletedItem = ViewModel.ItemTypeBrands.Single(ItemTypeBrand => ItemTypeBrand.Id == id);
         var viewModel = new ItemTypeBrandEditModel(deletedItem)
         {
             IsDeleted = true

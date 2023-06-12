@@ -1,6 +1,7 @@
 ﻿namespace Memorabilia.Blazor.Pages.Admin.Brands;
 
-public partial class BrandEditor : EditDomainItem<Brand>, IEditDomainItem
+public partial class BrandEditor 
+    : EditDomainItem<Brand>, IEditDomainItem
 {
     public async Task OnLoad()
     {
@@ -9,6 +10,6 @@ public partial class BrandEditor : EditDomainItem<Brand>, IEditDomainItem
 
     public async Task OnSave()
     {
-        await OnSave(new SaveBrand(Model));
+        await OnSave(new SaveBrand(EditModel));
     }
 }

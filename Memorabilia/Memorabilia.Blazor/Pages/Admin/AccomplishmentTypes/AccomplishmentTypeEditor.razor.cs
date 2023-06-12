@@ -10,6 +10,6 @@ public partial class AccomplishmentTypeEditor
 
     public async Task OnSave()
     {     
-        await OnSave(new SaveAccomplishmentType(Model));
+        await OnSave(new SaveAccomplishmentType(EditModel));
     }
 }

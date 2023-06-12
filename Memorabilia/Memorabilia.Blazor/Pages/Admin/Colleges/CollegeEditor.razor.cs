@@ -1,6 +1,7 @@
 ﻿namespace Memorabilia.Blazor.Pages.Admin.Colleges;
 
-public partial class CollegeEditor : EditDomainItem<College>, IEditDomainItem
+public partial class CollegeEditor 
+    : EditDomainItem<College>, IEditDomainItem
 {
     public async Task OnLoad()
     {
@@ -9,6 +10,6 @@ public partial class CollegeEditor : EditDomainItem<College>, IEditDomainItem
 
     public async Task OnSave()
     {
-        await OnSave(new SaveCollege(Model));
+        await OnSave(new SaveCollege(EditModel));
     }
 }

@@ -1,75 +1,75 @@
 ﻿@inherits EditItem<TeamEditModel, TeamModel>
 
-<EditPage ContinueNavigationPath="@ViewModel.ContinueNavigationPath"
-          EditMode="ViewModel.EditModeType"
-          ExitNavigationPath="@ViewModel.ExitNavigationPath"
-          ImageFileName="@ViewModel.ImageFileName"
-          ItemName="@ViewModel.ItemTitle"
-          Model="ViewModel"
+<EditPage ContinueNavigationPath="@EditModel.ContinueNavigationPath"
+          EditMode="EditModel.EditModeType"
+          ExitNavigationPath="@EditModel.ExitNavigationPath"
+          ImageFileName="@EditModel.ImageFileName"
+          ItemName="@EditModel.ItemTitle"
+          Model="EditModel"
           OnLoad="OnLoad"
           OnSave="HandleValidSubmit"
-          PageFooterButtonText="@ViewModel.ExitButtonText"
-          PageFooterNavigationPath="@ViewModel.BackNavigationPath"
-          PageTitle="@ViewModel.PageTitle"
+          PageFooterButtonText="@EditModel.ExitButtonText"
+          PageFooterNavigationPath="@EditModel.BackNavigationPath"
+          PageTitle="@EditModel.PageTitle"
           TItem="TeamEditModel"
           UseMultipleButtons="true">
     <TimelineContent>
-        <TeamTimeline DisplayConference="ViewModel.CanHaveConference" 
-                      EditMode="ViewModel.EditModeType"
-                      SportLeagueLevel="ViewModel.SportLeagueLevel"
-                      TeamId="ViewModel.Id"
-                      TeamStep="ViewModel.TeamStep" />
+        <TeamTimeline DisplayConference="EditModel.CanHaveConference" 
+                      EditMode="EditModel.EditModeType"
+                      SportLeagueLevel="EditModel.SportLeagueLevel"
+                      TeamId="EditModel.Id"
+                      TeamStep="EditModel.TeamStep" />
     </TimelineContent>
     <Content>
-        <DivRowCol3 Hidden="@(!ViewModel.DisplayFranchise)">
+        <DivRowCol3 Hidden="@(!EditModel.DisplayFranchise)">
             <Content>
-                <SportLeagueLevelDropDown SelectedValue="ViewModel.SportLeagueLevelId"
-                                          SelectionChanged="(p) => ViewModel.SportLeagueLevelId = p" />
+                <SportLeagueLevelDropDown SelectedValue="EditModel.SportLeagueLevelId"
+                                          SelectionChanged="(p) => EditModel.SportLeagueLevelId = p" />
             </Content>
         </DivRowCol3>
         <DivRowCol3>
             <Content>
-                <FranchiseAutoComplete SelectedValue="ViewModel.Franchise"
-                                       SelectionChanged="(p) => ViewModel.Franchise = p"
-                                       Sports="ViewModel.Sports" />
+                <FranchiseAutoComplete SelectedValue="EditModel.Franchise"
+                                       SelectionChanged="(p) => EditModel.Franchise = p"
+                                       Sports="EditModel.Sports" />
             </Content>
         </DivRowCol3>
         <DivRowCol3>
             <Content>
                 <TextField Label="Name"
-                           SelectedText="@ViewModel.Name"
-                           SelectedTextChanged="@((p) => ViewModel.Name = p)" />
+                           SelectedText="@EditModel.Name"
+                           SelectedTextChanged="@((p) => EditModel.Name = p)" />
             </Content>
         </DivRowCol3>
         <DivRowCol3>
             <Content>
                 <TextField Label="Location"
-                           SelectedText="@ViewModel.Location"
-                           SelectedTextChanged="@((p) => ViewModel.Location = p)" />
+                           SelectedText="@EditModel.Location"
+                           SelectedTextChanged="@((p) => EditModel.Location = p)" />
             </Content>
         </DivRowCol3>
         <DivRowCol3>
             <Content>
                 <TextField Label="Nickname"
-                           SelectedText="@ViewModel.Nickname"
-                           SelectedTextChanged="@((p) => ViewModel.Nickname = p)" />
+                           SelectedText="@EditModel.Nickname"
+                           SelectedTextChanged="@((p) => EditModel.Nickname = p)" />
             </Content>
             <ContentColumn2>
                 <TextField Label="Abbreviation"
-                           SelectedText="@ViewModel.Abbreviation"
-                           SelectedTextChanged="@((p) => ViewModel.Abbreviation = p)" />
+                           SelectedText="@EditModel.Abbreviation"
+                           SelectedTextChanged="@((p) => EditModel.Abbreviation = p)" />
             </ContentColumn2>
         </DivRowCol3>
          <DivRowCol3>
             <Content>
                 <NullableIntField Label="Begin Year"
-                                  Value="ViewModel.BeginYear"
-                                  ValueChanged="@((p) => ViewModel.BeginYear = p)" />
+                                  Value="EditModel.BeginYear"
+                                  ValueChanged="@((p) => EditModel.BeginYear = p)" />
             </Content>
             <ContentColumn2>
                 <NullableIntField Label="End Year"
-                                  Value="ViewModel.EndYear"
-                                  ValueChanged="@((p) => ViewModel.EndYear = p)" />
+                                  Value="EditModel.EndYear"
+                                  ValueChanged="@((p) => EditModel.EndYear = p)" />
             </ContentColumn2>
         </DivRowCol3>
     </Content>

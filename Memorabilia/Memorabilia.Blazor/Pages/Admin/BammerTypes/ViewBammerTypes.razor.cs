@@ -1,6 +1,7 @@
 ﻿namespace Memorabilia.Blazor.Pages.Admin.BammerTypes;
 
-public partial class ViewBammerTypes : ViewDomainItem<BammerTypesModel>, IDeleteDomainItem, IViewDomainItem
+public partial class ViewBammerTypes 
+    : ViewDomainItem<BammerTypesModel>, IDeleteDomainItem, IViewDomainItem
 {
     public async Task OnDelete(DomainEditModel editModel)
     {

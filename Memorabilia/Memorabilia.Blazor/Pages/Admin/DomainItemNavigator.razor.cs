@@ -3,7 +3,8 @@
 public partial class DomainItemNavigator
 {
     public string DomainItemQuickJump { get; set; }
-    public AdminDomainItemsModel ViewModel = new ();
+
+    public AdminDomainItemsModel Model = new ();
 
     [Parameter]
     public EventCallback<string> OnNavigate { get; set; }
@@ -26,7 +27,8 @@ public partial class DomainItemNavigator
             return;
         }
 
-        var domainItem = ViewModel.Items.SingleOrDefault(item => item.Title.Equals(DomainItemQuickJump, StringComparison.OrdinalIgnoreCase));
+        AdminDomainItemModel domainItem 
+            = Model.Items.SingleOrDefault(item => item.Title.Equals(DomainItemQuickJump, StringComparison.OrdinalIgnoreCase));
 
         if (domainItem == null)
         {

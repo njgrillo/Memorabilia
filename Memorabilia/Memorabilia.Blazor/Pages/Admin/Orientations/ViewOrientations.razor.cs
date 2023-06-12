@@ -5,12 +5,12 @@
     {
         public async Task OnDelete(DomainEditModel editModel)
         {
-            await OnDelete(new SaveOrientation(viewModel));
+            await OnDelete(new SaveOrientation(editModel));
         }
 
         public async Task OnLoad()
         {
-            ViewModel = new OrientationsModel(await QueryRouter.Send(new GetOrientations()));
+            Model = new OrientationsModel(await QueryRouter.Send(new GetOrientations()));
         }
     }
 }

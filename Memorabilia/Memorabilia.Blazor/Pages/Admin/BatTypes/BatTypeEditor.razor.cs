@@ -1,6 +1,7 @@
 ﻿namespace Memorabilia.Blazor.Pages.Admin.BatTypes;
 
-public partial class BatTypeEditor : EditDomainItem<BatType>, IEditDomainItem
+public partial class BatTypeEditor 
+    : EditDomainItem<BatType>, IEditDomainItem
 {
     public async Task OnLoad()
     {
@@ -9,6 +10,6 @@ public partial class BatTypeEditor : EditDomainItem<BatType>, IEditDomainItem
 
     public async Task OnSave()
     {
-        await OnSave(new SaveBatType(Model));
+        await OnSave(new SaveBatType(EditModel));
     }
 }

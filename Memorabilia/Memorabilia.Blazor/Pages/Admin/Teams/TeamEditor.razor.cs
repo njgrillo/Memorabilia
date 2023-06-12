@@ -4,11 +4,11 @@ public partial class TeamEditor : EditItem<TeamEditModel, TeamModel>
 {
     protected async Task HandleValidSubmit()
     {
-        var command = new SaveTeam.Command(ViewModel);
+        var command = new SaveTeam.Command(EditModel);
 
         await CommandRouter.Send(command);
 
-        ViewModel.Id = command.Id;
+        EditModel.Id = command.Id;
     }
 
     protected async Task OnLoad()
@@ -16,6 +16,6 @@ public partial class TeamEditor : EditItem<TeamEditModel, TeamModel>
         if (Id == 0)
             return;
 
-        ViewModel = new TeamEditModel(new TeamModel(await QueryRouter.Send(new GetTeam(Id))));
+        EditModel = new TeamEditModel(new TeamModel(await QueryRouter.Send(new GetTeam(Id))));
     }
 }

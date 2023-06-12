@@ -1,6 +1,7 @@
 ﻿namespace Memorabilia.Blazor.Pages.Admin.ChampionTypes;
 
-public partial class ChampionTypeEditor : EditDomainItem<ChampionType>, IEditDomainItem
+public partial class ChampionTypeEditor 
+    : EditDomainItem<ChampionType>, IEditDomainItem
 {
     public async Task OnLoad()
     {
@@ -9,6 +10,6 @@ public partial class ChampionTypeEditor : EditDomainItem<ChampionType>, IEditDom
 
     public async Task OnSave()
     {
-        await OnSave(new SaveChampionType(Model));
+        await OnSave(new SaveChampionType(EditModel));
     }
 }

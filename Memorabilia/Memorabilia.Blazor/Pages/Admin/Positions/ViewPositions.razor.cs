@@ -10,7 +10,7 @@ public partial class ViewPositions
 
     protected override async Task Delete(int id)
     {
-        var deletedItem = ViewModel.Positions.Single(position => position.Id == id);
+        PositionModel deletedItem = ViewModel.Positions.Single(position => position.Id == id);
         var viewModel = new PositionEditModel(deletedItem)
         {
             IsDeleted = true

@@ -5,11 +5,11 @@ public partial class ViewPhotoTypes
 {
     public async Task OnDelete(DomainEditModel editModel)
     {
-        await OnDelete(new SavePhotoType(viewModel));
+        await OnDelete(new SavePhotoType(editModel));
     }
 
     public async Task OnLoad()
     {
-        ViewModel = new PhotoTypesModel(await QueryRouter.Send(new GetPhotoTypes()));
+        Model = new PhotoTypesModel(await QueryRouter.Send(new GetPhotoTypes()));
     }
 }

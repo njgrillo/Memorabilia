@@ -10,6 +10,6 @@ public partial class AuthenticationCompanyEditor : EditDomainItem<Authentication
     public async Task OnSave()
     {
 
-        await OnSave(new SaveAuthenticationCompany(Model));
+        await OnSave(new SaveAuthenticationCompany(EditModel));
     }
 }

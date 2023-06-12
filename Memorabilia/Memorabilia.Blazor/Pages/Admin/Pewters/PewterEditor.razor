@@ -1,38 +1,38 @@
 ﻿@inherits EditItem<PewterEditModel, PewterModel>
 
-<EditPage ContinueNavigationPath="@ViewModel.RoutePrefix"
-          EditMode="ViewModel.EditModeType" 
-          ExitNavigationPath="@ViewModel.RoutePrefix"
-          ImageFileName="@ViewModel.ImageFileName"
-          ItemName="@ViewModel.ItemTitle"
-          Model="ViewModel"
+<EditPage ContinueNavigationPath="@EditModel.RoutePrefix"
+          EditMode="EditModel.EditModeType" 
+          ExitNavigationPath="@EditModel.RoutePrefix"
+          ImageFileName="@EditModel.ImageFileName"
+          ItemName="@EditModel.ItemTitle"
+          Model="EditModel"
           OnLoad="OnLoad"
           OnSave="HandleValidSubmit"
-          PageFooterButtonText="@ViewModel.ExitButtonText"
-          PageFooterNavigationPath="@ViewModel.ExitNavigationPath"
-          PageTitle="@ViewModel.PageTitle"
+          PageFooterButtonText="@EditModel.ExitButtonText"
+          PageFooterNavigationPath="@EditModel.ExitNavigationPath"
+          PageTitle="@EditModel.PageTitle"
           TItem="PewterEditModel">
     <Content>
         <DivRowCol3>
             <Content>
-                <FranchiseAutoComplete SelectedValue="ViewModel.Franchise"
-                                       SelectionChanged="(p) => ViewModel.Franchise = p"
+                <FranchiseAutoComplete SelectedValue="EditModel.Franchise"
+                                       SelectionChanged="(p) => EditModel.Franchise = p"
                                        Sports="@(new [] { Sport.Football })" />
             </Content>
         </DivRowCol3>
         <DivRowCol3>
             <Content>
-                <TeamDropDown Franchise="@ViewModel.Franchise" 
-                              SelectedValue="@ViewModel.TeamId"
-                              SelectionChanged="(p) => ViewModel.TeamId = p"
+                <TeamDropDown Franchise="@EditModel.Franchise" 
+                              SelectedValue="@EditModel.TeamId"
+                              SelectionChanged="(p) => EditModel.TeamId = p"
                               SportLeagueLevel="@SportLeagueLevel.NationalFootballLeague"/> 
             </Content>
         </DivRowCol3>
         <DivRowCol3>
             <Content>
                 <ItemTypeSizeDropDown ItemType="@ItemType.Helmet"
-                                      SelectedValue="@ViewModel.SizeId"
-                                      SelectionChanged="(p) => ViewModel.SizeId = p" />
+                                      SelectedValue="@EditModel.SizeId"
+                                      SelectionChanged="(p) => EditModel.SizeId = p" />
             </Content>
         </DivRowCol3>
         <DivRowCol3>
@@ -54,7 +54,7 @@
                     <Match>
                         <ImageEditor CanRemove="false"
                                      HasPrimary="false"                                     
-                                     ImageFileName="@ViewModel.FileName"
+                                     ImageFileName="@EditModel.FileName"
                                      ImageRootPath="@ImagePath.PewterImageRootPath"
                                      ImageType="ImageType.Primary"
                                      OnRemove="Remove" /> 

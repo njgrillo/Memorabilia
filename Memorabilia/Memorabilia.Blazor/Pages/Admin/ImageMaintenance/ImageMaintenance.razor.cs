@@ -1,6 +1,4 @@
-﻿
-
-namespace Memorabilia.Blazor.Pages.Admin.ImageMaintenance;
+﻿namespace Memorabilia.Blazor.Pages.Admin.ImageMaintenance;
 
 public partial class ImageMaintenance : CommandQuery
 {
@@ -10,25 +8,26 @@ public partial class ImageMaintenance : CommandQuery
     [Parameter]
     public string PersonImageRootPath { get; set; }
 
-    private ImageMaintenanceModel _viewModel = new();
+    protected ImageMaintenanceModel Model 
+        = new();
 
     protected override async Task OnInitializedAsync()
     {
-        _viewModel = await QueryRouter.Send(new GetImageMaintenance(MemorabiliaImageRootPath, PersonImageRootPath));
+        Model = await QueryRouter.Send(new GetImageMaintenance(MemorabiliaImageRootPath, PersonImageRootPath));
     }
 
     private void Delete()
     {
-        if (!_viewModel.OrphanedImageFileNames.Any())
+        if (!Model.OrphanedImageFileNames.Any())
             return;
 
-        foreach (var file in _viewModel.OrphanedImageFileNames)
+        foreach (string file in Model.OrphanedImageFileNames)
         {
-            var found = false;
+            bool found = false;
 
-            foreach (var directory in Directory.GetDirectories(MemorabiliaImageRootPath))
+            foreach (string directory in Directory.GetDirectories(MemorabiliaImageRootPath))
             {
-                var path = Path.Combine(directory, file);
+                string path = Path.Combine(directory, file);
 
                 if (File.Exists(path))
                 {
@@ -40,7 +39,7 @@ public partial class ImageMaintenance : CommandQuery
 
             if (!found)
             {
-                var path = Path.Combine(PersonImageRootPath, file);
+                string path = Path.Combine(PersonImageRootPath, file);
 
                 if (File.Exists(path))
                 {
@@ -49,7 +48,7 @@ public partial class ImageMaintenance : CommandQuery
             }
         }
 
-        foreach (var imageFile in _viewModel.OrphanedImageFileNames)
+        foreach (string imageFile in Model.OrphanedImageFileNames)
         {
             if (File.Exists(Path.Combine(MemorabiliaImageRootPath, imageFile)))
             {

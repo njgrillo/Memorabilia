@@ -13,34 +13,34 @@ public partial class PersonImageEditor
 
     protected async Task HandleValidSubmit()
     {
-        await HandleValidSubmit(new SavePersonImage(ViewModel.PersonId, ViewModel.PersonImageFileName));
+        await HandleValidSubmit(new SavePersonImage(EditModel.PersonId, EditModel.PersonImageFileName));
     }
 
     protected async Task OnLoad()
     {
         Entity.Person person = await QueryRouter.Send(new GetPerson(PersonId));
 
-        ViewModel = new PersonImageEditModel(new PersonImageModel(person));
+        EditModel = new PersonImageEditModel(new PersonImageModel(person));
 
-        _hasImage = !ViewModel.PersonImageFileName.IsNullOrEmpty();
+        _hasImage = !EditModel.PersonImageFileName.IsNullOrEmpty();
     }
 
     private async Task LoadFile(InputFileChangeEventArgs e)
     {
-        var file = e.File;
+        IBrowserFile file = e.File;
 
         try
         {
             if (!Directory.Exists(PersonImageRootPath))
                 Directory.CreateDirectory(PersonImageRootPath);
 
-            var fileName = Path.GetRandomFileName();
-            var path = Path.Combine(PersonImageRootPath, fileName);
+            string fileName = Path.GetRandomFileName();
+            string path = Path.Combine(PersonImageRootPath, fileName);
 
             await using FileStream fs = new(path, FileMode.Create);
             await file.OpenReadStream(5120000).CopyToAsync(fs);
 
-            ViewModel.PersonImageFileName = fileName;
+            EditModel.PersonImageFileName = fileName;
             _hasImage = true;
         }
         catch (Exception ex)
@@ -51,12 +51,12 @@ public partial class PersonImageEditor
 
     protected void OnSaveReturnClick()
     {
-        ViewModel.ExitNavigationPath = ViewModel.SaveReturnNavigationPath;
+        EditModel.ExitNavigationPath = EditModel.SaveReturnNavigationPath;
     }
 
     private void Remove()
     {
-        ViewModel.PersonImageFileName = null;
+        EditModel.PersonImageFileName = null;
         _hasImage = false;
     }
 }

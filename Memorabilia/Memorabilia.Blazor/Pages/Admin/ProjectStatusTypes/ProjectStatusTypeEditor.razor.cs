@@ -9,6 +9,6 @@ public partial class ProjectStatusTypeEditor : EditDomainItem<ProjectStatusType>
 
     public async Task OnSave()
     {
-        await OnSave(new SaveProjectStatusType(ViewModel));
+        await OnSave(new SaveProjectStatusType(Model));
     }
 }

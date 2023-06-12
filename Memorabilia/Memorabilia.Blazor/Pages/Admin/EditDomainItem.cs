@@ -15,29 +15,30 @@ public abstract class EditDomainItem<T>
     protected virtual string NavigationPath { get; } 
         = $"{type.Name.ToPlural()}";
 
-    protected DomainEditModel Model { get; set; } 
+    protected DomainEditModel EditModel { get; set; } 
 
-    private static readonly Type type = typeof(T);
+    private static readonly Type type 
+        = typeof(T);
 
     protected override void OnInitialized()
     {
-       Model = new DomainEditModel(Id, DomainTypeName, ImageFileName, NavigationPath);
+        EditModel = new DomainEditModel(Id, DomainTypeName, ImageFileName, NavigationPath);
     }
 
     protected async Task OnLoad(IRequest<Entity.DomainEntity> request)
     {
-        Model = new DomainEditModel(new DomainModel(await QueryRouter.Send(request)),
-                                    DomainTypeName,
-                                    ImageFileName,
-                                    NavigationPath);
+        EditModel = new DomainEditModel(new DomainModel(await QueryRouter.Send(request)),
+                                        DomainTypeName,
+                                        ImageFileName,
+                                        NavigationPath);
     }
 
     protected async Task OnLoad(IRequest<DomainModel> request)
     {
-        Model = new DomainEditModel(await QueryRouter.Send(request),
-                                    DomainTypeName,
-                                    ImageFileName,
-                                    NavigationPath);
+        EditModel = new DomainEditModel(await QueryRouter.Send(request),
+                                        DomainTypeName,
+                                        ImageFileName,
+                                        NavigationPath);
     }
 
     protected async Task OnSave(ICommand command)

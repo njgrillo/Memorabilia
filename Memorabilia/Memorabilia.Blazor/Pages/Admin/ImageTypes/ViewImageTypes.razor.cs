@@ -5,11 +5,11 @@ public partial class ViewImageTypes
 {
     public async Task OnDelete(DomainEditModel editModel)
     {
-        await CommandRouter.Send(new SaveImageType(viewModel));
+        await CommandRouter.Send(new SaveImageType(editModel));
     }
 
     public async Task OnLoad()
     {
-        ViewModel = new ImageTypesModel(await QueryRouter.Send(new GetImageTypes()));
+        Model = new ImageTypesModel(await QueryRouter.Send(new GetImageTypes()));
     }
 }

@@ -10,18 +10,18 @@ public partial class PersonEditor
 
     protected async Task HandleValidSubmit()
     {
-        var command = new SavePerson.Command(ViewModel);
+        var command = new SavePerson.Command(EditModel);
 
         PerformValidation = true;
 
-        ViewModel.ValidationResult = Validator.Validate(command);        
+        EditModel.ValidationResult = Validator.Validate(command);        
 
-        if (!ViewModel.ValidationResult.IsValid)
+        if (!EditModel.ValidationResult.IsValid)
             return;
 
         await HandleValidSubmit(command);
 
-        ViewModel.Id = command.Id;
+        EditModel.Id = command.Id;
 
         PerformValidation = false;
     }
@@ -33,20 +33,20 @@ public partial class PersonEditor
 
         Entity.Person person = await QueryRouter.Send(new GetPerson(Id));
 
-        ViewModel = new PersonEditModel(new PersonModel(person));
+        EditModel = new PersonEditModel(new PersonModel(person));
     }
 
     public void OnNameFieldBlur()
     {
-        ViewModel.DisplayName = $"{ViewModel.LastName}"
-                                + (!ViewModel.Nickname.IsNullOrEmpty() ? $", {ViewModel.Nickname}" : $", {ViewModel.FirstName}");
+        EditModel.DisplayName = $"{EditModel.LastName}"
+                                + (!EditModel.Nickname.IsNullOrEmpty() ? $", {EditModel.Nickname}" : $", {EditModel.FirstName}");
 
-        ViewModel.ProfileName = $"{(!ViewModel.Nickname.IsNullOrEmpty() ? ViewModel.Nickname : ViewModel.FirstName)}"
-                               + $" {ViewModel.LastName}";
+        EditModel.ProfileName = $"{(!EditModel.Nickname.IsNullOrEmpty() ? EditModel.Nickname : EditModel.FirstName)}"
+                               + $" {EditModel.LastName}";
 
-        ViewModel.LegalName = $"{ViewModel.FirstName}"
-                                + (!ViewModel.MiddleName.IsNullOrEmpty() ? $" {ViewModel.MiddleName}" : string.Empty)
-                                + (!ViewModel.LastName.IsNullOrEmpty() ? $" {ViewModel.LastName}" : string.Empty)
-                                + (!ViewModel.Suffix.IsNullOrEmpty() ? $" {ViewModel.Suffix}" : string.Empty);
+        EditModel.LegalName = $"{EditModel.FirstName}"
+                                + (!EditModel.MiddleName.IsNullOrEmpty() ? $" {EditModel.MiddleName}" : string.Empty)
+                                + (!EditModel.LastName.IsNullOrEmpty() ? $" {EditModel.LastName}" : string.Empty)
+                                + (!EditModel.Suffix.IsNullOrEmpty() ? $" {EditModel.Suffix}" : string.Empty);
     }
 }

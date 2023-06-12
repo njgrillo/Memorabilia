@@ -10,11 +10,11 @@ public partial class TeamPersonEditor
 
     protected async Task HandleValidSubmit()
     {
-        var command = new SavePersonTeam.Command(PersonId, ViewModel.Teams);
+        var command = new SavePersonTeam.Command(PersonId, EditModel.Teams);
 
-        ViewModel.ValidationResult = Validator.Validate(command);        
+        EditModel.ValidationResult = Validator.Validate(command);        
 
-        if (!ViewModel.ValidationResult.IsValid)
+        if (!EditModel.ValidationResult.IsValid)
         {
             PerformValidation = true;
             return;
@@ -29,7 +29,7 @@ public partial class TeamPersonEditor
     {
         Entity.Person person = await QueryRouter.Send(new GetPerson(PersonId));
 
-        ViewModel = new PersonTeamsEditModel(new PersonTeamsModel(person));
+        EditModel = new PersonTeamsEditModel(new PersonTeamsModel(person));
 
         PerformValidation = true;
     }    

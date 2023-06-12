@@ -4,7 +4,7 @@ public partial class ItemTypeLevelEditor : EditItemTypeItem<ItemTypeLevelEditMod
 {
     protected async Task HandleValidSubmit()
     {
-        await HandleValidSubmit(new SaveItemTypeLevel(ViewModel));
+        await HandleValidSubmit(new SaveItemTypeLevel(EditModel));
     }
 
     protected async Task OnLoad()
@@ -14,6 +14,6 @@ public partial class ItemTypeLevelEditor : EditItemTypeItem<ItemTypeLevelEditMod
         if (DisplayItemType)
             return;
 
-        ViewModel = new ItemTypeLevelEditModel(new ItemTypeLevelModel(await QueryRouter.Send(new GetItemTypeLevel(Id))));
+        EditModel = new ItemTypeLevelEditModel(new ItemTypeLevelModel(await QueryRouter.Send(new GetItemTypeLevel(Id))));
     }
 }

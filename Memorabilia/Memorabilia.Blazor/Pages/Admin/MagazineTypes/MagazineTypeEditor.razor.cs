@@ -9,6 +9,6 @@ public partial class MagazineTypeEditor : EditDomainItem<MagazineType>, IEditDom
 
     public async Task OnSave()
     {
-        await OnSave(new SaveMagazineType(ViewModel));
+        await OnSave(new SaveMagazineType(Model));
     }
 }

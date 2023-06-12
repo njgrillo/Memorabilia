@@ -1,37 +1,37 @@
 ﻿@inherits EditItem<LeagueEditModel, LeagueModel>
 
-<EditPage ContinueNavigationPath="@ViewModel.RoutePrefix"
-          EditMode="ViewModel.EditModeType" 
-          ExitNavigationPath="@ViewModel.RoutePrefix"
-          ImageFileName="@ViewModel.ImageFileName"
-          ItemName="@ViewModel.ItemTitle"
-          Model="ViewModel"
+<EditPage ContinueNavigationPath="@EditModel.RoutePrefix"
+          EditMode="EditModel.EditModeType" 
+          ExitNavigationPath="@EditModel.RoutePrefix"
+          ImageFileName="@EditModel.ImageFileName"
+          ItemName="@EditModel.ItemTitle"
+          Model="EditModel"
           OnLoad="OnLoad"
           OnSave="HandleValidSubmit"
-          PageFooterButtonText="@ViewModel.ExitButtonText"
-          PageFooterNavigationPath="@ViewModel.ExitNavigationPath"
-          PageTitle="@ViewModel.PageTitle"
+          PageFooterButtonText="@EditModel.ExitButtonText"
+          PageFooterNavigationPath="@EditModel.ExitNavigationPath"
+          PageTitle="@EditModel.PageTitle"
           TItem="LeagueEditModel">
     <Content>
         <DivRowCol3>
             <Content>
-                <SportLeagueLevelDropDown Disabled="@(!ViewModel.IsNew)" 
-                                          SelectedValue="ViewModel.SportLeagueLevelId"
-                                          SelectionChanged="(p) => ViewModel.SportLeagueLevelId = p" />
+                <SportLeagueLevelDropDown Disabled="@(!EditModel.IsNew)" 
+                                          SelectedValue="EditModel.SportLeagueLevelId"
+                                          SelectionChanged="(p) => EditModel.SportLeagueLevelId = p" />
             </Content>
         </DivRowCol3>
          <DivRowCol3>
             <Content>
                 <TextField Label="Name"
-                           SelectedText="@ViewModel.Name"
-                           SelectedTextChanged="@((p) => ViewModel.Name = p)" />
+                           SelectedText="@EditModel.Name"
+                           SelectedTextChanged="@((p) => EditModel.Name = p)" />
             </Content>            
         </DivRowCol3>
         <DivRowCol3>
             <Content>
                 <TextField Label="Abbreviation"
-                           SelectedText="@ViewModel.Abbreviation"
-                           SelectedTextChanged="@((p) => ViewModel.Abbreviation = p)" />
+                           SelectedText="@EditModel.Abbreviation"
+                           SelectedTextChanged="@((p) => EditModel.Abbreviation = p)" />
             </Content>            
         </DivRowCol3>
     </Content>

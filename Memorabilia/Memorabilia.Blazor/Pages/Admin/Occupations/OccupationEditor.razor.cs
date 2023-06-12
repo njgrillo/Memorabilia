@@ -9,6 +9,6 @@ public partial class OccupationEditor : EditDomainItem<Occupation>, IEditDomainI
 
     public async Task OnSave()
     {
-        await OnSave(new SaveOccupation(ViewModel));
+        await OnSave(new SaveOccupation(Model));
     }
 }

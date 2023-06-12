@@ -9,6 +9,6 @@ public partial class WritingInstrumentEditor : EditDomainItem<WritingInstrument>
 
     public async Task OnSave()
     {
-        await OnSave(new SaveWritingInstrument(ViewModel));
+        await OnSave(new SaveWritingInstrument(Model));
     }
 }

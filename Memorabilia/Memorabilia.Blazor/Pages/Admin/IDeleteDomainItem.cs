@@ -2,5 +2,5 @@
 
 public interface IDeleteDomainItem
 {
-    Task OnDelete(DomainEditModel viewModel);
+    Task OnDelete(DomainEditModel editModel);
 }

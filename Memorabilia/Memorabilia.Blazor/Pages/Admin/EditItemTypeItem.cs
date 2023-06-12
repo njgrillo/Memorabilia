@@ -1,6 +1,7 @@
 ﻿namespace Memorabilia.Blazor.Pages.Admin;
 
-public abstract class EditItemTypeItem<TSaveViewModel, TViewModel> : EditItem<TSaveViewModel, TViewModel>
+public abstract class EditItemTypeItem<TSaveModel, TModel> 
+    : EditItem<TSaveModel, TModel>
 {
     protected bool DisplayItemType;
 

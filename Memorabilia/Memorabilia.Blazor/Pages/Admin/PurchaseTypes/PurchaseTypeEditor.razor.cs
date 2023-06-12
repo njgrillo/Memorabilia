@@ -9,6 +9,6 @@ public partial class PurchaseTypeEditor : EditDomainItem<PurchaseType>, IEditDom
 
     public async Task OnSave()
     {
-        await OnSave(new SavePurchaseType(ViewModel));
+        await OnSave(new SavePurchaseType(Model));
     }
 }

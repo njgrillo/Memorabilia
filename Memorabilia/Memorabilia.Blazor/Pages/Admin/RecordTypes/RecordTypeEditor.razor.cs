@@ -9,6 +9,6 @@ public partial class RecordTypeEditor : EditDomainItem<RecordType>, IEditDomainI
 
     public async Task OnSave()
     {
-        await OnSave(new SaveRecordType(ViewModel));
+        await OnSave(new SaveRecordType(Model));
     }
 }

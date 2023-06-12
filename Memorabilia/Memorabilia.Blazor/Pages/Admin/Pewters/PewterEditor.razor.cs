@@ -10,7 +10,7 @@ public partial class PewterEditor
 
     protected async Task HandleValidSubmit()
     {
-        await HandleValidSubmit(new SavePewter(ViewModel));
+        await HandleValidSubmit(new SavePewter(EditModel));
     }
 
     protected async Task OnLoad()
@@ -18,27 +18,27 @@ public partial class PewterEditor
         if (Id == 0)
             return;
 
-        ViewModel = new PewterEditModel(new PewterModel(await QueryRouter.Send(new GetPewter(Id))));
+        EditModel = new PewterEditModel(new PewterModel(await QueryRouter.Send(new GetPewter(Id))));
 
-        _hasImage = !ViewModel.FileName.IsNullOrEmpty();
+        _hasImage = !EditModel.FileName.IsNullOrEmpty();
     }
 
     private async Task LoadFile(InputFileChangeEventArgs e)
     {
-        var file = e.File;
+        IBrowserFile file = e.File;
 
         try
         {
             if (!Directory.Exists(ImagePath.PewterImageRootPath))
                 Directory.CreateDirectory(ImagePath.PewterImageRootPath);
 
-            var fileName = Path.GetRandomFileName();
-            var path = Path.Combine(ImagePath.PewterImageRootPath, fileName);
+            string fileName = Path.GetRandomFileName();
+            string path = Path.Combine(ImagePath.PewterImageRootPath, fileName);
 
             await using FileStream fs = new(path, FileMode.Create);
             await file.OpenReadStream(5120000).CopyToAsync(fs);
 
-            ViewModel.FileName = fileName;
+            EditModel.FileName = fileName;
             _hasImage = true;
         }
         catch (Exception ex)
@@ -49,7 +49,7 @@ public partial class PewterEditor
 
     private void Remove()
     {
-        ViewModel.FileName = null;
+        EditModel.FileName = null;
         _hasImage = false;
     }
 }

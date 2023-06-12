@@ -5,7 +5,7 @@ public partial class LeaguePresidentEditor
 {
     protected async Task HandleValidSubmit()
     {
-        await HandleValidSubmit(new SaveLeaguePresident(ViewModel));
+        await HandleValidSubmit(new SaveLeaguePresident(EditModel));
     }
 
     protected async Task OnLoad()
@@ -13,6 +13,6 @@ public partial class LeaguePresidentEditor
         if (Id == 0)
             return;
 
-        ViewModel = new LeaguePresidentEditModel(new LeaguePresidentModel(await QueryRouter.Send(new GetLeaguePresident(Id))));
+        EditModel = new LeaguePresidentEditModel(new LeaguePresidentModel(await QueryRouter.Send(new GetLeaguePresident(Id))));
     }
 }

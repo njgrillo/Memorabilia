@@ -1,6 +1,7 @@
 ﻿namespace Memorabilia.Blazor.Pages.Admin.Commissioners;
 
-public partial class ViewCommissioners : ViewItem<CommissionersModel, CommissionerModel>
+public partial class ViewCommissioners 
+    : ViewItem<CommissionersModel, CommissionerModel>
 {
     protected async Task OnLoad()
     {
@@ -9,7 +10,7 @@ public partial class ViewCommissioners : ViewItem<CommissionersModel, Commission
 
     protected override async Task Delete(int id)
     {
-        var deletedItem = ViewModel.Commissioners.Single(Commissioner => Commissioner.Id == id);
+        CommissionerModel deletedItem = ViewModel.Commissioners.Single(Commissioner => Commissioner.Id == id);
         var viewModel = new CommissionerEditModel(deletedItem)
         {
             IsDeleted = true

@@ -9,6 +9,6 @@ public partial class OrientationEditor : EditDomainItem<Constant.Orientation>, I
 
     public async Task OnSave()
     {
-        await OnSave(new SaveOrientation(ViewModel));
+        await OnSave(new SaveOrientation(Model));
     }
 }

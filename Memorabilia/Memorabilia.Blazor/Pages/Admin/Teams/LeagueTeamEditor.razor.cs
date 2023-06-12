@@ -5,7 +5,7 @@ public partial class LeagueTeamEditor
 {
     protected async Task HandleValidSubmit()
     {
-        await HandleValidSubmit(new SaveTeamLeague.Command(TeamId, ViewModel.Leagues));
+        await HandleValidSubmit(new SaveTeamLeague.Command(TeamId, EditModel.Leagues));
     }
 
     protected async Task OnLoad()
@@ -14,10 +14,10 @@ public partial class LeagueTeamEditor
 
         Entity.TeamLeague[] leagues = await QueryRouter.Send(new GetTeamLeagues(TeamId));
 
-        ViewModel.Leagues 
+        EditModel.Leagues 
             = leagues.Select(teamLeague => new TeamLeagueEditModel(new TeamLeagueModel(teamLeague)))
                      .ToList();
 
-        ViewModel.SportLeagueLevel = SportLeagueLevel.Find(SportLeagueLevelId);
+        EditModel.SportLeagueLevel = SportLeagueLevel.Find(SportLeagueLevelId);
     }    
 }

@@ -1,24 +1,24 @@
 ﻿@inherits EditPersonItem<PersonSportServiceEditModel, PersonSportServiceModel>
 
-<EditPage ContinueNavigationPath="@ViewModel.ContinueNavigationPath"
-          EditMode="ViewModel.EditModeType"
-          ExitNavigationPath="@ViewModel.ExitNavigationPath"
-          ImageFileName="@ViewModel.ImageFileName"
-          ItemName="@ViewModel.ItemTitle"
-          Model="ViewModel"
+<EditPage ContinueNavigationPath="@EditModel.ContinueNavigationPath"
+          EditMode="EditModel.EditModeType"
+          ExitNavigationPath="@EditModel.ExitNavigationPath"
+          ImageFileName="@EditModel.ImageFileName"
+          ItemName="@EditModel.ItemTitle"
+          Model="EditModel"
           OnLoad="OnLoad"
           OnSave="HandleValidSubmit"
-          PageFooterButtonText="@ViewModel.ExitButtonText"
-          PageFooterNavigationPath="@ViewModel.BackNavigationPath"
-          PageTitle="@ViewModel.PageTitle"
+          PageFooterButtonText="@EditModel.ExitButtonText"
+          PageFooterNavigationPath="@EditModel.BackNavigationPath"
+          PageTitle="@EditModel.PageTitle"
           PerformValidation="PerformValidation"
           TItem="PersonSportServiceEditModel"
           UseMultipleButtons="true"
-          ValidationResult="@ViewModel.ValidationResult">
+          ValidationResult="@EditModel.ValidationResult">
     <TimelineContent>
-        <PersonTimeline EditMode="ViewModel.EditModeType"
-                        PersonId="ViewModel.PersonId"
-                        PersonStep="ViewModel.PersonStep" />
+        <PersonTimeline EditMode="EditModel.EditModeType"
+                        PersonId="EditModel.PersonId"
+                        PersonStep="EditModel.PersonStep" />
     </TimelineContent>
     <Content>  
         <div style="margin-bottom:1%;">
@@ -28,28 +28,28 @@
                      PanelClass="pa-6"
                      Rounded="true">
                 <MudTabPanel BadgeColor="MudBlazor.Color.Success" 
-                             BadgeData="ViewModel.Colleges.Count(college => !college.IsDeleted)"
+                             BadgeData="EditModel.Colleges.Count(college => !college.IsDeleted)"
                              Text="Colleges">
                     <DivRowCol12>
                         <Content>
-                            <PersonCollegeEditor Colleges="ViewModel.Colleges" />
+                            <PersonCollegeEditor Colleges="EditModel.Colleges" />
                         </Content>
                     </DivRowCol12>
                 </MudTabPanel>
                 <MudTabPanel BadgeColor="MudBlazor.Color.Success"
-                             BadgeData="ViewModel.Drafts.Count(draft => !draft.IsDeleted)"
+                             BadgeData="EditModel.Drafts.Count(draft => !draft.IsDeleted)"
                              Text="Drafts">
                     <DivRowCol12>
                         <Content>
-                            <PersonDraftEditor Drafts="ViewModel.Drafts"
-                                               SportIds="ViewModel.SportIds" />
+                            <PersonDraftEditor Drafts="EditModel.Drafts"
+                                               SportIds="EditModel.SportIds" />
                         </Content>
                     </DivRowCol12>
                 </MudTabPanel>
                 <MudTabPanel Text="Service">
                     <DivRowCol3>
                         <Content>
-                            <MudDatePicker @bind-Date="ViewModel.DebutDate"
+                            <MudDatePicker @bind-Date="EditModel.DebutDate"
                                            DateFormat="MM/dd/yyyy"
                                            Editable="true"
                                            Label="Debut Date"
@@ -57,7 +57,7 @@
                                            Variant="Variant.Outlined" />
                         </Content>
                         <ContentColumn2>
-                            <MudDatePicker @bind-Date="ViewModel.LastAppearanceDate"
+                            <MudDatePicker @bind-Date="EditModel.LastAppearanceDate"
                                            DateFormat="MM/dd/yyyy"
                                            Editable="true"
                                            Label="Last Appearance Date"
@@ -65,7 +65,7 @@
                                            Variant="Variant.Outlined" />
                         </ContentColumn2>
                         <ContentColumn3>
-                            <MudDatePicker @bind-Date="ViewModel.FreeAgentSigningDate"
+                            <MudDatePicker @bind-Date="EditModel.FreeAgentSigningDate"
                                            DateFormat="MM/dd/yyyy"
                                            Editable="true"
                                            Label="Free Agent Signing Date"

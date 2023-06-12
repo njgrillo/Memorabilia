@@ -1,30 +1,30 @@
 ﻿@inherits EditTeamItem<TeamConferencesEditModel, TeamConferenceModel>
 
-<EditPage ContinueNavigationPath="@ViewModel.ContinueNavigationPath"
-          EditMode="ViewModel.EditModeType"
-          ExitNavigationPath="@ViewModel.ExitNavigationPath"
-          ImageFileName="@ViewModel.ImageFileName"
-          ItemName="@ViewModel.PageTitle"
-          Model="ViewModel"
+<EditPage ContinueNavigationPath="@EditModel.ContinueNavigationPath"
+          EditMode="EditModel.EditModeType"
+          ExitNavigationPath="@EditModel.ExitNavigationPath"
+          ImageFileName="@EditModel.ImageFileName"
+          ItemName="@EditModel.PageTitle"
+          Model="EditModel"
           OnLoad="OnLoad"
           OnSave="HandleValidSubmit"
-          PageFooterButtonText="@ViewModel.ExitButtonText"
-          PageFooterNavigationPath="@ViewModel.BackNavigationPath"
-          PageTitle="@ViewModel.PageTitle"
+          PageFooterButtonText="@EditModel.ExitButtonText"
+          PageFooterNavigationPath="@EditModel.BackNavigationPath"
+          PageTitle="@EditModel.PageTitle"
           TItem="TeamConferencesEditModel"
           UseMultipleButtons="true">
     <TimelineContent>
-        <TeamTimeline DisplayConference="ViewModel.CanHaveConference" 
-                      EditMode="ViewModel.EditModeType"
-                      SportLeagueLevel="ViewModel.SportLeagueLevel"
-                      TeamId="ViewModel.TeamId"
-                      TeamStep="ViewModel.TeamStep" />
+        <TeamTimeline DisplayConference="EditModel.CanHaveConference" 
+                      EditMode="EditModel.EditModeType"
+                      SportLeagueLevel="EditModel.SportLeagueLevel"
+                      TeamId="EditModel.TeamId"
+                      TeamStep="EditModel.TeamStep" />
     </TimelineContent>
     <Content>
         <DivRowCol12>
             <Content>
-                <TeamConferenceEditor Conferences="ViewModel.Conferences"
-                                      SportLeagueLevel="ViewModel.SportLeagueLevel" />
+                <TeamConferenceEditor Conferences="EditModel.Conferences"
+                                      SportLeagueLevel="EditModel.SportLeagueLevel" />
             </Content>
         </DivRowCol12>
     </Content>
