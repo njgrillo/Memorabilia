@@ -1,32 +1,32 @@
 ﻿@inherits AutographItem<AuthenticationEditModel>
 
-<EditPage ContinueNavigationPath="@AuthenticationsViewModel.ContinueNavigationPath"
-          EditMode="AuthenticationsViewModel.EditModeType"
-          ExitNavigationPath="@AuthenticationsViewModel.ExitNavigationPath"
-          ImageFileName="@AuthenticationsViewModel.ImageFileName"
-          ItemName="@AuthenticationsViewModel.PageTitle"
-          Model="AuthenticationsViewModel"
+<EditPage ContinueNavigationPath="@EditModel.ContinueNavigationPath"
+          EditMode="EditModel.EditModeType"
+          ExitNavigationPath="@EditModel.ExitNavigationPath"
+          ImageFileName="@EditModel.ImageFileName"
+          ItemName="@EditModel.PageTitle"
+          Model="EditModel"
           OnLoad="OnLoad"
           OnSave="OnSave"
-          PageFooterButtonText="@AuthenticationsViewModel.ExitButtonText"
-          PageFooterNavigationPath="@AuthenticationsViewModel.BackNavigationPath"
-          PageTitle="@AuthenticationsViewModel.PageTitle"
+          PageFooterButtonText="@EditModel.ExitButtonText"
+          PageFooterNavigationPath="@EditModel.BackNavigationPath"
+          PageTitle="@EditModel.PageTitle"
           TItem="AuthenticationsEditModel"
           UseMultipleButtons="true"
-          ValidationResult="@ViewModel.ValidationResult">
+          ValidationResult="@Model.ValidationResult">
     <TimelineContent>
-        <AutographTimeline AutographId="AuthenticationsViewModel.AutographId" 
-                           AutographStep="AuthenticationsViewModel.AutographStep"  
-                           DisplaySpot="AuthenticationsViewModel.CanHaveSpot" 
-                           EditMode="AuthenticationsViewModel.EditModeType"
-                           MemorabiliaId="AuthenticationsViewModel.MemorabiliaId"/>
+        <AutographTimeline AutographId="EditModel.AutographId" 
+                           AutographStep="EditModel.AutographStep"  
+                           DisplaySpot="EditModel.CanHaveSpot" 
+                           EditMode="EditModel.EditModeType"
+                           MemorabiliaId="EditModel.MemorabiliaId"/>
     </TimelineContent>
     <ImagePreview>
-        <Condition Evaluation="AuthenticationsViewModel.HasMemorabiliaImages">
+        <Condition Evaluation="EditModel.HasMemorabiliaImages">
             <Match>
-                <ImagePanel ImageNames="@AuthenticationsViewModel.MemorabiliaImageNames"
+                <ImagePanel ImageNames="@EditModel.MemorabiliaImageNames"
                             PanelText="Memorabilia Images"
-                            UserId="AuthenticationsViewModel.UserId" />
+                            UserId="EditModel.UserId" />
             </Match>
         </Condition>
     </ImagePreview>
@@ -34,28 +34,28 @@
         <DivRowCol4>
             <Content>
                 <AuthenticationCompanyDropDown Disabled="@(!_canEditAuthenticationCompany)"
-                                               SelectedValue="ViewModel.AuthenticationCompanyId"
-                                               SelectionChanged="(p) => ViewModel.AuthenticationCompanyId = p" />
+                                               SelectedValue="Model.AuthenticationCompanyId"
+                                               SelectionChanged="(p) => Model.AuthenticationCompanyId = p" />
             </Content>
         </DivRowCol4>
         <DivRowCol4>
             <Content>
                 <TextField Label="Verification"
-                           SelectedText="@ViewModel.Verification"
-                           SelectedTextChanged="@((p) => ViewModel.Verification = p)" />
+                           SelectedText="@Model.Verification"
+                           SelectedTextChanged="@((p) => Model.Verification = p)" />
             </Content>
         </DivRowCol4>
         <DivRowCol2>
             <Content>
-                <MudSwitch Checked="@ViewModel.HasHologram"
-                           CheckedChanged="(p) => ViewModel.HasHologram = p"
+                <MudSwitch Checked="@Model.HasHologram"
+                           CheckedChanged="(p) => Model.HasHologram = p"
                            Color="MudBlazor.Color.Success"
                            Label="Has Hologram?"
                            T="bool" />
             </Content>
             <ContentColumn2>
-                <MudSwitch Checked="@ViewModel.HasCertificationCard"
-                           CheckedChanged="(p) => ViewModel.HasCertificationCard = p"
+                <MudSwitch Checked="@Model.HasCertificationCard"
+                           CheckedChanged="(p) => Model.HasCertificationCard = p"
                            Color="MudBlazor.Color.Success"
                            Label="Has Cert Card?"
                            T="bool" />
@@ -63,15 +63,15 @@
         </DivRowCol2>
         <DivRowCol2>
             <Content>
-                <MudSwitch Checked="@ViewModel.HasLetter"
-                           CheckedChanged="(p) => ViewModel.HasLetter = p"
+                <MudSwitch Checked="@Model.HasLetter"
+                           CheckedChanged="(p) => Model.HasLetter = p"
                            Color="MudBlazor.Color.Success"
                            Label="Has LOA?"
                            T="bool" />
             </Content>
             <ContentColumn2>
-                <MudSwitch Checked="@ViewModel.Witnessed"
-                           CheckedChanged="(p) => ViewModel.Witnessed = p"
+                <MudSwitch Checked="@Model.Witnessed"
+                           CheckedChanged="(p) => Model.Witnessed = p"
                            Color="MudBlazor.Color.Success"
                            Label="Was Witnessed?"
                            T="bool" />
@@ -96,7 +96,7 @@
                 <MudTable Bordered="false"
                           Dense="false" 
                           Hover="true"
-                          Items="@AuthenticationsViewModel.Authentications.Where(authentication => !authentication.IsDeleted)"    
+                          Items="@EditModel.Authentications.Where(authentication => !authentication.IsDeleted)"    
                           Striped="true">
                     <ToolBarContent>
                         <MudText Typo="Typo.h6">Authentications</MudText>

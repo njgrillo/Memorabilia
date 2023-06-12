@@ -1,32 +1,32 @@
 ﻿@inherits AutographItem<InscriptionEditModel>
 
-<EditPage ContinueNavigationPath="@_InscriptionsModel.ContinueNavigationPath"
-          EditMode="_InscriptionsModel.EditModeType"
-          ExitNavigationPath="@_InscriptionsModel.ExitNavigationPath"
-          ImageFileName="@_InscriptionsModel.ImageFileName"
-          ItemName="@_InscriptionsModel.PageTitle"
-          Model="_InscriptionsModel"
+<EditPage ContinueNavigationPath="@EditModel.ContinueNavigationPath"
+          EditMode="EditModel.EditModeType"
+          ExitNavigationPath="@EditModel.ExitNavigationPath"
+          ImageFileName="@EditModel.ImageFileName"
+          ItemName="@EditModel.PageTitle"
+          Model="EditModel"
           OnLoad="OnLoad"
           OnSave="OnSave"
-          PageFooterButtonText="@_InscriptionsModel.ExitButtonText"
-          PageFooterNavigationPath="@_InscriptionsModel.BackNavigationPath"
-          PageTitle="@_InscriptionsModel.PageTitle"
+          PageFooterButtonText="@EditModel.ExitButtonText"
+          PageFooterNavigationPath="@EditModel.BackNavigationPath"
+          PageTitle="@EditModel.PageTitle"
           TItem="InscriptionsEditModel"
           UseMultipleButtons="true"
-          ValidationResult="@ViewModel.ValidationResult">
+          ValidationResult="@Model.ValidationResult">
     <TimelineContent>
-        <AutographTimeline AutographId="_InscriptionsModel.AutographId" 
-                           AutographStep="_InscriptionsModel.AutographStep"  
-                           DisplaySpot="_InscriptionsModel.CanHaveSpot" 
-                           EditMode="_InscriptionsModel.EditModeType"
-                           MemorabiliaId="_InscriptionsModel.MemorabiliaId" />
+        <AutographTimeline AutographId="EditModel.AutographId" 
+                           AutographStep="EditModel.AutographStep"  
+                           DisplaySpot="EditModel.CanHaveSpot" 
+                           EditMode="EditModel.EditModeType"
+                           MemorabiliaId="EditModel.MemorabiliaId" />
     </TimelineContent>
     <ImagePreview>
-        <PrettyBlazor.Condition Evaluation="_InscriptionsModel.HasMemorabiliaImages">
+        <PrettyBlazor.Condition Evaluation="EditModel.HasMemorabiliaImages">
             <Match>
-                <ImagePanel ImageNames="@_InscriptionsModel.MemorabiliaImageNames"
+                <ImagePanel ImageNames="@EditModel.MemorabiliaImageNames"
                             PanelText="Memorabilia Images"
-                            UserId="_InscriptionsModel.UserId" />
+                            UserId="EditModel.UserId" />
             </Match>
         </PrettyBlazor.Condition>
     </ImagePreview>
@@ -36,15 +36,15 @@
                 <DivRowCol6>
                     <Content>
                         <InscriptionTypeDropDown Disabled="@(!_canEditInscriptionType)"
-                                                 SelectedValue="ViewModel.InscriptionTypeId"
-                                                 SelectionChanged="(p) => ViewModel.InscriptionTypeId = p" />
+                                                 SelectedValue="Model.InscriptionTypeId"
+                                                 SelectionChanged="(p) => Model.InscriptionTypeId = p" />
                     </Content>
                 </DivRowCol6>
                 <DivRowCol6>
                     <Content>
                         <TextField Label="Inscription"
-                                   SelectedText="@ViewModel.InscriptionText"
-                                   SelectedTextChanged="@((p) => ViewModel.InscriptionText = p)" />
+                                   SelectedText="@Model.InscriptionText"
+                                   SelectedTextChanged="@((p) => Model.InscriptionText = p)" />
                     </Content>
                 </DivRowCol6>
                 <br/>
@@ -71,7 +71,7 @@
                         <MudTable Bordered="false"
                                   Dense="false"
                                   Hover="true"
-                                  Items="@_InscriptionsModel.Inscriptions.Where(inscription => !inscription.IsDeleted)"
+                                  Items="@EditModel.Inscriptions.Where(inscription => !inscription.IsDeleted)"
                                   Striped="true">
                             <ToolBarContent>
                                 <MudText Typo="Typo.h6">Inscriptions</MudText>
@@ -106,7 +106,7 @@
                 <DivRowCol12>
                     <Content>
                         <SuggestedInscriptions InscriptionSelected="OnSuggestedInscriptionSelected"
-                                               PersonId="_InscriptionsModel.PersonId" />
+                                               PersonId="EditModel.PersonId" />
                     </Content>
                 </DivRowCol12>
             </div>

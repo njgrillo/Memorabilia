@@ -1,8 +1,7 @@
-﻿using Memorabilia.Domain.Entities;
+﻿namespace Memorabilia.Blazor.Pages.Autograph.Images;
 
-namespace Memorabilia.Blazor.Pages.Autograph.Images;
-
-public partial class AutographImageEditor : AutographItem<AutographImagesEditModel>
+public partial class AutographImageEditor 
+    : AutographItem<AutographImagesEditModel>
 {
     [Inject]
     public ISnackbar Snackbar { get; set; }
@@ -18,38 +17,45 @@ public partial class AutographImageEditor : AutographItem<AutographImagesEditMod
     protected async Task OnImport()
     {
         var memorabliaImagesViewModel 
-            = new MemorabiliaImagesModel(await QueryRouter.Send(new GetMemorabiliaImages(ViewModel.MemorabiliaId)));
+            = new MemorabiliaImagesModel(await QueryRouter.Send(new GetMemorabiliaImages(Model.MemorabiliaId)));
 
-        var images = memorabliaImagesViewModel.Images
-                                              .Select(image => new Entity.AutographImage(ViewModel.AutographId,
-                                                                                                  image.FileName,
-                                                                                                  image.ImageTypeId,
-                                                                                                  image.UploadDate))
-                                              .ToList();
+        List<Entity.AutographImage> images 
+            = memorabliaImagesViewModel.Images
+                                       .Select(image => new Entity.AutographImage(Model.AutographId,
+                                                                                  image.FileName,
+                                                                                  image.ImageTypeId,
+                                                                                  image.UploadDate))
+                                       .ToList();
 
-        ViewModel = new AutographImagesEditModel(images, ViewModel.ItemType, ViewModel.MemorabiliaId, AutographId);
+        Model = new AutographImagesEditModel(images, 
+                                             Model.ItemType,
+                                             Model.MemorabiliaId, 
+                                             AutographId);
     }
 
     protected async Task OnLoad()
     {
         var autograph = new AutographModel(await QueryRouter.Send(new GetAutograph(AutographId)));
 
-        ViewModel = new AutographImagesEditModel(autograph.Images, autograph.ItemType, autograph.MemorabiliaId, autograph.Id);
+        Model = new AutographImagesEditModel(autograph.Images, 
+                                             autograph.ItemType, 
+                                             autograph.MemorabiliaId, 
+                                             autograph.Id);
     }
 
     protected async Task OnSave()
     {
-        ViewModel.AutographId = AutographId;
-        ViewModel.Images = EditImages.Images;
+        Model.AutographId = AutographId;
+        Model.Images = EditImages.Images;
 
-        await CommandRouter.Send(new SaveAutographImage.Command(ViewModel));
+        await CommandRouter.Send(new SaveAutographImage.Command(Model));
     }
 
     protected async Task SaveAndAddAutograph()
     {
         await OnSave();
 
-        NavigationManager.NavigateTo(ViewModel.ContinueNavigationPath);
+        NavigationManager.NavigateTo(Model.ContinueNavigationPath);
         Snackbar.Add("Images were saved successfully!", Severity.Success);
     }
 

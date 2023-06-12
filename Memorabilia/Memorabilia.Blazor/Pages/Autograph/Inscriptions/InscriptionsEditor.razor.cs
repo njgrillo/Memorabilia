@@ -1,6 +1,7 @@
 ﻿namespace Memorabilia.Blazor.Pages.Autograph.Inscriptions;
 
-public partial class InscriptionsEditor : AutographItem<InscriptionEditModel>
+public partial class InscriptionsEditor 
+    : AutographItem<InscriptionEditModel>
 {
     [Inject]
     public InscriptionValidator Validator { get; set; }
@@ -8,45 +9,50 @@ public partial class InscriptionsEditor : AutographItem<InscriptionEditModel>
     [Parameter]
     public string UploadPath { get; set; }
 
-    private bool _canAddInscription = true;
-    private bool _canEditInscriptionType = true;
-    private bool _canUpdateInscription;
-    private InscriptionsEditModel _InscriptionsModel = new ();
+    protected InscriptionsEditModel EditModel = new();
+
+    private bool _canAddInscription 
+        = true;
+
+    private bool _canEditInscriptionType 
+        = true;
+
+    private bool _canUpdateInscription;    
 
     protected async Task OnLoad()
     {
         var autograph = new AutographModel(await QueryRouter.Send(new GetAutograph(AutographId)));
 
-        _InscriptionsModel = new InscriptionsEditModel(autograph.Inscriptions, 
-                                                       autograph.ItemTypeId, 
-                                                       autograph.UserId,
-                                                       autograph.MemorabiliaId,
-                                                       autograph.Id,
-                                                       autograph.MemorabiliaImageNames,
-                                                       autograph.PersonId);
+        EditModel = new InscriptionsEditModel(autograph.Inscriptions, 
+                                              autograph.ItemTypeId, 
+                                              autograph.UserId,
+                                              autograph.MemorabiliaId,
+                                              autograph.Id,
+                                              autograph.MemorabiliaImageNames,
+                                              autograph.PersonId);
     }
 
     protected async Task OnSave()
     {
-        await CommandRouter.Send(new SaveInscriptions.Command(_InscriptionsModel));
+        await CommandRouter.Send(new SaveInscriptions.Command(EditModel));
     }
 
     private void AddInscription()
     {
-        ViewModel.ValidationResult = Validator.Validate(ViewModel);
+        Model.ValidationResult = Validator.Validate(Model);
 
-        if (!ViewModel.ValidationResult.IsValid)
+        if (!Model.ValidationResult.IsValid)
             return;
 
-        _InscriptionsModel.Inscriptions.Add(ViewModel);
+        EditModel.Inscriptions.Add(Model);
 
-        ViewModel = new InscriptionEditModel();
+        Model = new();
     }
 
     private void Edit(InscriptionEditModel inscription)
     {
-        ViewModel.InscriptionTypeId = inscription.InscriptionTypeId;
-        ViewModel.InscriptionText = inscription.InscriptionText;
+        Model.InscriptionTypeId = inscription.InscriptionTypeId;
+        Model.InscriptionText = inscription.InscriptionText;
 
         _canAddInscription = false;
         _canEditInscriptionType = false;
@@ -55,23 +61,24 @@ public partial class InscriptionsEditor : AutographItem<InscriptionEditModel>
 
     private void OnSuggestedInscriptionSelected(SuggestedInscriptionModel inscription)
     {
-        ViewModel.InscriptionTypeId = inscription.InscriptionType.Id;
-        ViewModel.InscriptionText = inscription.Text;
+        Model.InscriptionTypeId = inscription.InscriptionType.Id;
+        Model.InscriptionText = inscription.Text;
     }
 
     private void UpdateInscription()
     {
-        ViewModel.ValidationResult = Validator.Validate(ViewModel);
+        Model.ValidationResult = Validator.Validate(Model);
 
-        if (!ViewModel.ValidationResult.IsValid)
+        if (!Model.ValidationResult.IsValid)
             return;
 
-        var inscription = _InscriptionsModel.Inscriptions
-                                                .Single(inscription => inscription.InscriptionTypeId == ViewModel.InscriptionTypeId);
+        InscriptionEditModel inscription 
+            = EditModel.Inscriptions
+                       .Single(inscription => inscription.InscriptionTypeId == Model.InscriptionTypeId);
 
-        inscription.InscriptionText = ViewModel.InscriptionText;
+        inscription.InscriptionText = Model.InscriptionText;
 
-        ViewModel = new InscriptionEditModel();        
+        Model = new();        
 
         _canAddInscription = true;
         _canEditInscriptionType = true;

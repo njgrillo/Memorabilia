@@ -1,43 +1,43 @@
 ﻿@inherits AutographItem<AutographEditModel>
 
-<EditPage ContinueNavigationPath="@ViewModel.ContinueNavigationPath"
-          EditMode="ViewModel.EditModeType"
-          ExitNavigationPath="@ViewModel.ExitNavigationPath"
-          ImageFileName="@ViewModel.ImageFileName"
-          ItemName="@ViewModel.ItemTypeName"
-          Model="ViewModel"
+<EditPage ContinueNavigationPath="@Model.ContinueNavigationPath"
+          EditMode="Model.EditModeType"
+          ExitNavigationPath="@Model.ExitNavigationPath"
+          ImageFileName="@Model.ImageFileName"
+          ItemName="@Model.ItemTypeName"
+          Model="Model"
           OnLoad="OnLoad"
           OnSave="OnSave"
-          PageFooterButtonText="@ViewModel.ExitButtonText"
-          PageFooterNavigationPath="@ViewModel.BackNavigationPath"
-          PageTitle="@ViewModel.PageTitle"
+          PageFooterButtonText="@Model.ExitButtonText"
+          PageFooterNavigationPath="@Model.BackNavigationPath"
+          PageTitle="@Model.PageTitle"
           PerformValidation="true"
           TItem="AutographEditModel"
           UseMultipleButtons="true"
-          ValidationResult="@ViewModel.ValidationResult">
+          ValidationResult="@Model.ValidationResult">
     <TimelineContent>
-        <AutographTimeline AutographId="ViewModel.Id" 
-                           AutographStep="ViewModel.AutographStep"  
-                           DisplaySpot="ViewModel.CanHaveSpot" 
-                           EditMode="ViewModel.EditModeType"
-                           MemorabiliaId="ViewModel.MemorabiliaId" />
+        <AutographTimeline AutographId="Model.Id" 
+                           AutographStep="Model.AutographStep"  
+                           DisplaySpot="Model.CanHaveSpot" 
+                           EditMode="Model.EditModeType"
+                           MemorabiliaId="Model.MemorabiliaId" />
     </TimelineContent>
     <ImagePreview>
-        <Condition Evaluation="ViewModel.HasMemorabiliaImages">
+        <Condition Evaluation="Model.HasMemorabiliaImages">
             <Match>
-                <ImagePanel ImageNames="@ViewModel.MemorabiliaImageNames"
+                <ImagePanel ImageNames="@Model.MemorabiliaImageNames"
                             PanelText="Memorabilia Images"
-                            UserId="ViewModel.UserId" />
+                            UserId="Model.UserId" />
             </Match>
         </Condition>        
     </ImagePreview>
     <Content>        
         <DivRowCol6>
             <Content>
-                <PrettyBlazor.Condition Evaluation="ViewModel.CanImportPerson">
+                <PrettyBlazor.Condition Evaluation="Model.CanImportPerson">
                     <Match>
                         <MudTooltip Text="Import from memorabilia item">
-                            <MudImage @onclick="@(_ => ViewModel.Person = new PersonEditModel(ViewModel.MemorabiliaPerson))"
+                            <MudImage @onclick="@(_ => Model.Person = new PersonEditModel(Model.MemorabiliaPerson))"
                                       Class="rounded-lg can-click"
                                       Elevation="5"
                                       Height="20"
@@ -47,47 +47,47 @@
                         </MudTooltip>
                     </Match>
                 </PrettyBlazor.Condition>                
-                <PersonSelector SelectedPerson="ViewModel.Person"
-                                SelectedPersonChanged="(p) => ViewModel.Person = p" />  
+                <PersonSelector SelectedPerson="Model.Person"
+                                SelectedPersonChanged="(p) => Model.Person = p" />  
             </Content>
         </DivRowCol6>
         <DivRowCol3>
             <Content>
-                <WritingInstrumentDropDown SelectedValue="ViewModel.WritingInstrumentId"
-                                           SelectionChanged="(p) => ViewModel.WritingInstrumentId = p" />
+                <WritingInstrumentDropDown SelectedValue="Model.WritingInstrumentId"
+                                           SelectionChanged="(p) => Model.WritingInstrumentId = p" />
             </Content>
             <ContentColumn2>
                 <ColorDropDown DisplayAutographColorsOnly="true"
-                               SelectedValue="ViewModel.ColorId"
-                               SelectionChanged="(p) => ViewModel.ColorId = p" />
+                               SelectedValue="Model.ColorId"
+                               SelectionChanged="(p) => Model.ColorId = p" />
             </ContentColumn2>
             <ContentColumn3>
-                <ConditionDropDown SelectedValue="ViewModel.ConditionId"
-                                   SelectionChanged="(p) => ViewModel.ConditionId = p" />
+                <ConditionDropDown SelectedValue="Model.ConditionId"
+                                   SelectionChanged="(p) => Model.ConditionId = p" />
             </ContentColumn3>
             <ContentColumn4>
                 <NullableIntField Label="Grade"
-                                  Value="ViewModel.Grade"
-                                  ValueChanged="@((p) => ViewModel.Grade = p)" />
+                                  Value="Model.Grade"
+                                  ValueChanged="@((p) => Model.Grade = p)" />
             </ContentColumn4>
         </DivRowCol3>
         <DivRowCol6>
             <Content>
                 <TextField Label="Notes"
                            Lines="10"
-                           SelectedText="@ViewModel.Note"
-                           SelectedTextChanged="@((p) => ViewModel.Note = p)" />
+                           SelectedText="@Model.Note"
+                           SelectedTextChanged="@((p) => Model.Note = p)" />
             </Content>
         </DivRowCol6>
-        <Condition Evaluation="ViewModel.DisplayAcquisitionDetails">
+        <Condition Evaluation="Model.DisplayAcquisitionDetails">
             <Match>
                 <DivRowCol3 HideColumn2="@(!_displayAcquisitionDetails)"
-                            HideColumn3="@(!_displayAcquisitionDetails || !ViewModel.CanHaveCost)"
-                            HideColumn4="@(!_displayAcquisitionDetails || !ViewModel.CanHavePlaceOfPurchase)">
+                            HideColumn3="@(!_displayAcquisitionDetails || !Model.CanHaveCost)"
+                            HideColumn4="@(!_displayAcquisitionDetails || !Model.CanHavePlaceOfPurchase)">
                     <Content>
                         <div style="display:flex">
                             <AcquisitionTypeDropDown IsAutograph="true"
-                                                     SelectedValue="ViewModel.AcquisitionTypeId"
+                                                     SelectedValue="Model.AcquisitionTypeId"
                                                      SelectionChanged="OnAcquisitionTypeChange" />
                             <MudTooltip Text="Import from memorabilia item">
                                 <MudImage @onclick="OnImportAcquisition"
@@ -101,30 +101,30 @@
                         </div>                        
                     </Content>
                     <ContentColumn2>
-                        <MudDatePicker @bind-Date="ViewModel.AcquiredDate"
+                        <MudDatePicker @bind-Date="Model.AcquiredDate"
                                        Label="Acquired Date"
                                        Variant="Variant.Outlined" />
                     </ContentColumn2>
                     <ContentColumn3>
                         <NullableDecimalField Label="Cost ($)"
-                                              Value="ViewModel.Cost"
-                                              ValueChanged="@((p) => ViewModel.Cost = p)" />
+                                              Value="Model.Cost"
+                                              ValueChanged="@((p) => Model.Cost = p)" />
                     </ContentColumn3>
                     <ContentColumn4>
-                        <PurchaseTypeDropDown SelectedValue="ViewModel.PurchaseTypeId"
-                                              SelectionChanged="(p) => ViewModel.PurchaseTypeId = p" />
+                        <PurchaseTypeDropDown SelectedValue="Model.PurchaseTypeId"
+                                              SelectionChanged="(p) => Model.PurchaseTypeId = p" />
                     </ContentColumn4>
                 </DivRowCol3>
-                <Condition Evaluation="ViewModel.DisplayThroughTheMailDetails">
+                <Condition Evaluation="Model.DisplayThroughTheMailDetails">
                     <Match>
                         <DivRowCol3>
                             <Content>
-                                <MudDatePicker @bind-Date="ViewModel.SentDate"
+                                <MudDatePicker @bind-Date="Model.SentDate"
                                                Label="Sent Date"
                                                Variant="Variant.Outlined" />
                             </Content>
                             <ContentColumn2>
-                                <MudDatePicker @bind-Date="ViewModel.ReceivedDate"
+                                <MudDatePicker @bind-Date="Model.ReceivedDate"
                                                Label="Received Date"
                                                Variant="Variant.Outlined" />
                             </ContentColumn2>
@@ -135,8 +135,8 @@
                     <Content>
                         <div style="display:flex">
                             <NullableDecimalField Label="Estimated Value ($)"
-                                                  Value="ViewModel.EstimatedValue"
-                                                  ValueChanged="@((p) => ViewModel.EstimatedValue = p)" />
+                                                  Value="Model.EstimatedValue"
+                                                  ValueChanged="@((p) => Model.EstimatedValue = p)" />
                             <MudTooltip Text="Import from estimated value from item">
                                 <MudImage @onclick="OnImportEstimatedValue"
                                           Class="rounded-lg can-click"
@@ -153,8 +153,8 @@
         </Condition>
         <DivRowCol3>
             <Content>
-                <MudSwitch Checked="@ViewModel.FullName"
-                           CheckedChanged="(p) => ViewModel.FullName = p"
+                <MudSwitch Checked="@Model.FullName"
+                           CheckedChanged="(p) => Model.FullName = p"
                            Color="MudBlazor.Color.Success"
                            Label="Is Full Name?"
                            T="bool" />
@@ -162,35 +162,35 @@
         </DivRowCol3>       
         <DivRowCol3>
             <Content>
-                <MudSwitch Checked="@ViewModel.IsPersonalized"
-                           CheckedChanged="(p) => ViewModel.IsPersonalized = p"
+                <MudSwitch Checked="@Model.IsPersonalized"
+                           CheckedChanged="(p) => Model.IsPersonalized = p"
                            Color="MudBlazor.Color.Success"
                            Label="Is Personalized?"
                            T="bool" />
             </Content>
         </DivRowCol3>
-        <Condition Evaluation="ViewModel.IsPersonalized">
+        <Condition Evaluation="Model.IsPersonalized">
             <Match>
                 <DivRowCol3>
                     <Content>
                         <TextField HelperText="Example: To Nick"
                                    Label="Personalization Text"
-                                   SelectedText="@ViewModel.PersonalizationText"
-                                   SelectedTextChanged="@((p) => ViewModel.PersonalizationText = p)" />
+                                   SelectedText="@Model.PersonalizationText"
+                                   SelectedTextChanged="@((p) => Model.PersonalizationText = p)" />
                     </Content>
                 </DivRowCol3>
             </Match>
         </Condition>        
         <DivRowCol3>
             <Content>
-                <MudSwitch Checked="@ViewModel.IsNumbered"
-                           CheckedChanged="(p) => ViewModel.IsNumbered = p"
+                <MudSwitch Checked="@Model.IsNumbered"
+                           CheckedChanged="(p) => Model.IsNumbered = p"
                            Color="MudBlazor.Color.Success"
                            Label="Is Numbered?"
                            T="bool" />
             </Content>
         </DivRowCol3>
-        <Condition Evaluation="ViewModel.IsNumbered">
+        <Condition Evaluation="Model.IsNumbered">
             <Match>
                 <DivRowCol3>
                     <Content>
@@ -198,14 +198,14 @@
                             <div style="padding-left:15px; width:45%; flex:auto;">
                                 <NumericField Label="Left Serial #"
                                               TType="int?"
-                                              Value="ViewModel.Numerator"
-                                              ValueChanged="@((p) => ViewModel.Numerator = p)" />
+                                              Value="Model.Numerator"
+                                              ValueChanged="@((p) => Model.Numerator = p)" />
                             </div>
                             <div style="padding-right:15px; padding-left:5px; width:45%; flex:auto;">
                                 <NumericField Label="Right Serial #"
                                               TType="int?"
-                                              Value="ViewModel.Denominator"
-                                              ValueChanged="@((p) => ViewModel.Denominator = p)" />
+                                              Value="Model.Denominator"
+                                              ValueChanged="@((p) => Model.Denominator = p)" />
                             </div>
                         </div>
                     </Content>

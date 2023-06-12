@@ -1,40 +1,40 @@
 ﻿@inherits AutographItem<SpotEditModel>
 
-<EditPage ContinueNavigationPath="@ViewModel.ContinueNavigationPath"
-          EditMode="ViewModel.EditModeType"
-          ExitNavigationPath="@ViewModel.ExitNavigationPath"
-          ImageFileName="@ViewModel.ImageFileName"
-          ItemName="@ViewModel.ItemTypeName"
-          Model="ViewModel"
+<EditPage ContinueNavigationPath="@Model.ContinueNavigationPath"
+          EditMode="Model.EditModeType"
+          ExitNavigationPath="@Model.ExitNavigationPath"
+          ImageFileName="@Model.ImageFileName"
+          ItemName="@Model.ItemTypeName"
+          Model="Model"
           OnLoad="OnLoad"
           OnSave="OnSave"
-          PageFooterButtonText="@ViewModel.ExitButtonText"
-          PageFooterNavigationPath="@ViewModel.BackNavigationPath"
-          PageTitle="@ViewModel.PageTitle"
+          PageFooterButtonText="@Model.ExitButtonText"
+          PageFooterNavigationPath="@Model.BackNavigationPath"
+          PageTitle="@Model.PageTitle"
           TItem="SpotEditModel"
           UseMultipleButtons="true">
     <TimelineContent>
-        <AutographTimeline AutographId="ViewModel.AutographId" 
-                           AutographStep="ViewModel.AutographStep"  
-                           DisplaySpot="ViewModel.CanHaveSpot" 
-                           EditMode="ViewModel.EditModeType"
-                           MemorabiliaId="ViewModel.MemorabiliaId" />
+        <AutographTimeline AutographId="Model.AutographId" 
+                           AutographStep="Model.AutographStep"  
+                           DisplaySpot="Model.CanHaveSpot" 
+                           EditMode="Model.EditModeType"
+                           MemorabiliaId="Model.MemorabiliaId" />
     </TimelineContent>
     <ImagePreview>
-        <PrettyBlazor.Condition Evaluation="ViewModel.HasMemorabiliaImages">
+        <PrettyBlazor.Condition Evaluation="Model.HasMemorabiliaImages">
             <Match>
-                <ImagePanel ImageNames="@ViewModel.MemorabiliaImageNames"
+                <ImagePanel ImageNames="@Model.MemorabiliaImageNames"
                             PanelText="Memorabilia Images"
-                            UserId="ViewModel.UserId" />
+                            UserId="Model.UserId" />
             </Match>
         </PrettyBlazor.Condition>
     </ImagePreview>
     <Content>
         <DivRowCol3>
             <Content>
-                <ItemTypeSpotDropDown ItemType="@ViewModel.ItemType"
-                                      SelectedValue="ViewModel.SpotId"
-                                      SelectionChanged="(p) => ViewModel.SpotId = p" />
+                <ItemTypeSpotDropDown ItemType="@Model.ItemType"
+                                      SelectedValue="Model.SpotId"
+                                      SelectionChanged="(p) => Model.SpotId = p" />
             </Content>
         </DivRowCol3>
     </Content>

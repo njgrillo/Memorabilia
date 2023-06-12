@@ -58,6 +58,9 @@ public static class DomainExtensions
         => personSports.Select(sport => Constant.Sport.Find(sport.SportId))
                        .ToArray();
 
+    public static SpotEditModel ToEditModel(this Entity.Autograph autograph)
+        => new(new SpotModel(autograph));
+
     public static CommissionerEditModel ToEditModel(this Entity.Commissioner commissioner)
         => new(new CommissionerModel(commissioner));
 

@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Blazor.Pages.Autograph;
 
-public partial class AutographTimeline : ComponentBase
+public partial class AutographTimeline
 {
     [Inject]
     public NavigationManager NavigationManager { get; set; }
@@ -80,7 +80,9 @@ public partial class AutographTimeline : ComponentBase
 
     protected override void OnInitialized()
     {
-        _mudAlertClass = AutographId > 0 ? "can-click" : string.Empty;
+        _mudAlertClass = AutographId > 0 
+            ? "can-click" 
+            : string.Empty;
 
         AutographAuthenticationEditAlertTitle = AutographStep.Authentication.Name;
         AutographEditAlertTitle = AutographStep.Autograph.Name;

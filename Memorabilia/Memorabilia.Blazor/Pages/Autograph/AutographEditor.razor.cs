@@ -12,79 +12,81 @@ public partial class AutographEditor
     [Parameter]
     public string UploadPath { get; set; }
 
-    private bool _displayAcquisitionDetails = true;
+    private bool _displayAcquisitionDetails
+        = true;
 
     protected async Task OnLoad()
     {
-        var viewModel = new MemorabiliaModel(await QueryRouter.Send(new GetMemorabiliaItem(MemorabiliaId)));
+        var model = new MemorabiliaModel(await QueryRouter.Send(new GetMemorabiliaItem(MemorabiliaId)));
 
-        if (!viewModel.Autographs.Any() || AutographId <= 0)
+        if (!model.Autographs.Any() || AutographId <= 0)
         {
-            ViewModel = new AutographEditModel(viewModel);
+            Model = new AutographEditModel(model);
             return;
         }
 
-        GetViewModel(viewModel);
+        GetModel(model);
     }
 
     protected async Task OnSave()
     {
-        var command = new SaveAutograph.Command(ViewModel);
+        var command = new SaveAutograph.Command(Model);
 
-        ViewModel.ValidationResult = Validator.Validate(command);
+        Model.ValidationResult = Validator.Validate(command);
 
-        if (!ViewModel.ValidationResult.IsValid)
+        if (!Model.ValidationResult.IsValid)
             return;
 
         await CommandRouter.Send(command);
 
-        ViewModel.ContinueNavigationPath = $"Autographs/Inscriptions/{EditModeType.Update.Name}/{command.Id}";
+        Model.ContinueNavigationPath = $"Autographs/Inscriptions/{EditModeType.Update.Name}/{command.Id}";
     }
 
-    private void GetViewModel(MemorabiliaModel viewModel)
+    private void GetModel(MemorabiliaModel model)
     {
-        var autograph = viewModel.Autographs.SingleOrDefault(autograph => autograph.Id == AutographId);
+        AutographModel autograph 
+            = model.Autographs.SingleOrDefault(autograph => autograph.Id == AutographId);
 
         if (autograph == null)
         {
-            ViewModel = new AutographEditModel(viewModel);
+            Model = new AutographEditModel(model);
             return;
         }
 
-        ViewModel = new AutographEditModel(autograph);
+        Model = new AutographEditModel(autograph);
 
-        _displayAcquisitionDetails = ViewModel.AcquisitionTypeId > 0;
+        _displayAcquisitionDetails = Model.AcquisitionTypeId > 0;
     }
 
     private void OnAcquisitionTypeChange(int acquisitionTypeId)
     {
-        ViewModel.AcquisitionTypeId = acquisitionTypeId;
+        Model.AcquisitionTypeId = acquisitionTypeId;
 
         var acquisitionType = AcquisitionType.Find(acquisitionTypeId);
 
         if (!acquisitionType.CanHaveCost())
-            ViewModel.Cost = null;
+            Model.Cost = null;
 
         if (!acquisitionType.CanHavePurchaseType())
-            ViewModel.PurchaseTypeId = 0;
+            Model.PurchaseTypeId = 0;
 
         if (!acquisitionType.CanHaveSendAndReceiveDates())
         {
-            ViewModel.ReceivedDate = null;
-            ViewModel.SentDate = null;
+            Model.ReceivedDate = null;
+            Model.SentDate = null;
         }
     }
 
     private void OnImportAcquisition()
     {
-        ViewModel.AcquisitionTypeId = ViewModel.MemorabiliaAcquisitionTypeId;
-        ViewModel.AcquiredDate = ViewModel.MemorabiliaAcquiredDate;
-        ViewModel.Cost = ViewModel.MemorabiliaCost;
-        ViewModel.PurchaseTypeId = ViewModel.MemorabiliaPurchaseTypeId ?? 0;
+        Model.AcquisitionTypeId = Model.MemorabiliaAcquisitionTypeId;
+        Model.AcquiredDate = Model.MemorabiliaAcquiredDate;
+        Model.Cost = Model.MemorabiliaCost;
+        Model.PurchaseTypeId = Model.MemorabiliaPurchaseTypeId ?? 0;
     }
 
     private void OnImportEstimatedValue()
     {
-        ViewModel.EstimatedValue = ViewModel.MemorabiliaEstimatedValue;
+        Model.EstimatedValue = Model.MemorabiliaEstimatedValue;
     }
 }

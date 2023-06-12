@@ -11,7 +11,8 @@ public partial class SelectAutographDialog
     [Parameter]
     public int MemorabiliaId { get; set; }
 
-    protected SelectMemorabiliaItemModel Model = new();
+    protected SelectMemorabiliaItemModel Model 
+        = new();
 
     private bool _loaded;
     private int _memorabiliaId;   

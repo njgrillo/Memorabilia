@@ -2,25 +2,25 @@
 
 <Page OnLoad="OnLoad">
     <Content>
-        <PageHeader PageTitle="@ViewModel.PageTitle" />
-        <AutographTimeline AutographId="ViewModel.AutographId" 
-                           AutographStep="ViewModel.AutographStep"  
-                           DisplaySpot="ViewModel.CanHaveSpot" 
-                           EditMode="ViewModel.EditModeType"
-                           MemorabiliaId="ViewModel.MemorabiliaId" />
+        <PageHeader PageTitle="@Model.PageTitle" />
+        <AutographTimeline AutographId="Model.AutographId" 
+                           AutographStep="Model.AutographStep"  
+                           DisplaySpot="Model.CanHaveSpot" 
+                           EditMode="Model.EditModeType"
+                           MemorabiliaId="Model.MemorabiliaId" />
         <EditImages @ref="EditImages"
                     CanImportImages="true"
-                    ContinueNavigationPath="@ViewModel.ContinueNavigationPath"
-                    ExitNavigationPath="@ViewModel.ExitNavigationPath"
-                    Images="@ViewModel.Images"
+                    ContinueNavigationPath="@Model.ContinueNavigationPath"
+                    ExitNavigationPath="@Model.ExitNavigationPath"
+                    Images="@Model.Images"
                     ImportButtonText="Import from Memorabilia"
                     MaximumAllowedFiles="10"
                     MaximumFileSize="10240000"
-                    Model="ViewModel"
+                    Model="Model"
                     OnImport="OnImport"
                     OnLoad="OnLoad"
                     OnSave="OnSave"
-                    PageTitle="@ViewModel.PageTitle"
+                    PageTitle="@Model.PageTitle"
                     ReplaceImages="false"
                     SaveButtonText="Save & Add Another Autograph"
                     TItem="AutographImagesEditModel"
@@ -33,6 +33,6 @@
                             Text="Save & Add Item" />
             </AdditionalButtons>
         </EditImages>
-        <PageFooter NavigationPath="@ViewModel.BackNavigationPath" />
+        <PageFooter NavigationPath="@Model.BackNavigationPath" />
     </Content>
 </Page>
