@@ -9,6 +9,6 @@ public partial class FranchiseHallOfFameTypeEditor : EditDomainItem<FranchiseHal
 
     public async Task OnSave()
     {
-        await OnSave(new SaveFranchiseHallOfFameType(ViewModel));
+        await OnSave(new SaveFranchiseHallOfFameType(Model));
     }
 }

@@ -3,7 +3,7 @@
 public partial class ViewMagazineTypes 
     : ViewDomainItem<MagazineTypesModel>, IDeleteDomainItem, IViewDomainItem
 {
-    public async Task OnDelete(DomainEditModel viewModel)
+    public async Task OnDelete(DomainEditModel editModel)
     {
         await OnDelete(new SaveMagazineType(viewModel));
     }

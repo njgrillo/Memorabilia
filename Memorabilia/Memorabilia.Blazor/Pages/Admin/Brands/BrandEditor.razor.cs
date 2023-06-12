@@ -9,6 +9,6 @@ public partial class BrandEditor : EditDomainItem<Brand>, IEditDomainItem
 
     public async Task OnSave()
     {
-        await OnSave(new SaveBrand(ViewModel));
+        await OnSave(new SaveBrand(Model));
     }
 }

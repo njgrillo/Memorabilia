@@ -9,6 +9,6 @@ public partial class AwardTypeEditor : EditDomainItem<AwardType>, IEditDomainIte
 
     public async Task OnSave()
     {
-        await OnSave(new SaveAwardType(ViewModel));
+        await OnSave(new SaveAwardType(Model));
     }
 }

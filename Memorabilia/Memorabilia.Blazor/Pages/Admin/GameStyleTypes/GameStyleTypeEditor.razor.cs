@@ -9,6 +9,6 @@ public partial class GameStyleTypeEditor : EditDomainItem<GameStyleType>, IEditD
 
     public async Task OnSave()
     {
-        await OnSave(new SaveGameStyleType(ViewModel));
+        await OnSave(new SaveGameStyleType(Model));
     }
 }

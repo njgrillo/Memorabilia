@@ -3,7 +3,7 @@
 public partial class ViewPhotoTypes 
     : ViewDomainItem<PhotoTypesModel>, IDeleteDomainItem, IViewDomainItem
 {
-    public async Task OnDelete(DomainEditModel viewModel)
+    public async Task OnDelete(DomainEditModel editModel)
     {
         await OnDelete(new SavePhotoType(viewModel));
     }

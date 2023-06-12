@@ -2,7 +2,7 @@
 
 public abstract class ViewDomainItem<T> : CommandQuery where T : Model
 {
-    protected T ViewModel = (T)Activator.CreateInstance(typeof(T));
+    protected T Model = (T)Activator.CreateInstance(typeof(T));
 
     protected async Task OnDelete(ICommand command)
     {
@@ -11,6 +11,6 @@ public abstract class ViewDomainItem<T> : CommandQuery where T : Model
 
     protected async Task OnLoad(IQuery<T> request)
     {
-        ViewModel = await QueryRouter.Send(request);
+        Model = await QueryRouter.Send(request);
     }
 }

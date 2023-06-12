@@ -3,13 +3,13 @@
 public partial class ViewFootballTypes 
     : ViewDomainItem<FootballTypesModel>, IDeleteDomainItem, IViewDomainItem
 {
-    public async Task OnDelete(DomainEditModel viewModel)
+    public async Task OnDelete(DomainEditModel editModel)
     {
-        await CommandRouter.Send(new SaveFootballType(viewModel));
+        await CommandRouter.Send(new SaveFootballType(editModel));
     }
 
     public async Task OnLoad()
     {
-        ViewModel = new FootballTypesModel(await QueryRouter.Send(new GetFootballTypes()));
+        Model = new FootballTypesModel(await QueryRouter.Send(new GetFootballTypes()));
     }
 }

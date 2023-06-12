@@ -3,7 +3,7 @@
 public partial class ViewJerseyTypes 
     : ViewDomainItem<JerseyTypesModel>, IDeleteDomainItem, IViewDomainItem
 {
-    public async Task OnDelete(DomainEditModel viewModel)
+    public async Task OnDelete(DomainEditModel editModel)
     {
         await CommandRouter.Send(new SaveJerseyType(viewModel));
     }

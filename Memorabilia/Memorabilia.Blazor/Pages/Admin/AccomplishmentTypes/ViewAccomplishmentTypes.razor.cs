@@ -3,13 +3,13 @@
 public partial class ViewAccomplishmentTypes 
     : ViewDomainItem<AccomplishmentTypesModel>, IDeleteDomainItem, IViewDomainItem
 {
-    public async Task OnDelete(DomainEditModel viewModel)
+    public async Task OnDelete(DomainEditModel editModel)
     {
-        await OnDelete(new SaveAccomplishmentType(viewModel));
+        await OnDelete(new SaveAccomplishmentType(editModel));
     }
 
     public async Task OnLoad()
     {
-        ViewModel = new AccomplishmentTypesModel(await QueryRouter.Send(new GetAccomplishmentTypes()));
+        Model = new AccomplishmentTypesModel(await QueryRouter.Send(new GetAccomplishmentTypes()));
     }
 }

@@ -3,7 +3,7 @@
 public partial class ViewGloveTypes 
     : ViewDomainItem<GloveTypesModel>, IDeleteDomainItem, IViewDomainItem
 {
-    public async Task OnDelete(DomainEditModel viewModel)
+    public async Task OnDelete(DomainEditModel editModel)
     {
         await CommandRouter.Send(new SaveGloveType(viewModel));
     }

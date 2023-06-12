@@ -5,7 +5,7 @@ public partial class ConferenceEditor
 {
     protected async Task HandleValidSubmit()
     {
-        await HandleValidSubmit(new SaveConference(ViewModel));
+        await HandleValidSubmit(new SaveConference(EditModel));
     }
 
     protected async Task OnLoad()
@@ -13,6 +13,6 @@ public partial class ConferenceEditor
         if (Id == 0)
             return;
 
-        ViewModel = new ConferenceEditModel(new ConferenceModel(await QueryRouter.Send(new GetConference(Id))));
+        EditModel = new ConferenceEditModel(new ConferenceModel(await QueryRouter.Send(new GetConference(Id))));
     }
 }

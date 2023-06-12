@@ -5,7 +5,7 @@ public partial class CommissionerEditor
 {
     protected async Task HandleValidSubmit()
     {
-        await HandleValidSubmit(new SaveCommissioner(ViewModel));
+        await HandleValidSubmit(new SaveCommissioner(EditModel));
     }
 
     protected async Task OnLoad()
@@ -13,6 +13,6 @@ public partial class CommissionerEditor
         if (Id == 0)
             return;        
 
-        ViewModel = new CommissionerEditModel(new CommissionerModel(await QueryRouter.Send(new GetCommissioner(Id))));
+        EditModel = new CommissionerEditModel(new CommissionerModel(await QueryRouter.Send(new GetCommissioner(Id))));
     }
 }

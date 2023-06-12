@@ -9,6 +9,6 @@ public partial class ColorEditor : EditDomainItem<Constant.Color>, IEditDomainIt
 
     public async Task OnSave()
     {
-        await OnSave(new SaveColor(ViewModel));
+        await OnSave(new SaveColor(Model));
     }
 }

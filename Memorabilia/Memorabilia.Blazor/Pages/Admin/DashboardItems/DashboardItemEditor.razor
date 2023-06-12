@@ -1,31 +1,31 @@
 ﻿@inherits EditItem<DashboardItemEditModel, DashboardItemModel>
 
-<EditPage ContinueNavigationPath="@ViewModel.RoutePrefix"
-          EditMode="ViewModel.EditModeType" 
-          ExitNavigationPath="@ViewModel.RoutePrefix"
-          ImageFileName="@ViewModel.ImageFileName"
-          ItemName="@ViewModel.ItemTitle"
-          Model="ViewModel"
+<EditPage ContinueNavigationPath="@EditModel.RoutePrefix"
+          EditMode="EditModel.EditModeType" 
+          ExitNavigationPath="@EditModel.RoutePrefix"
+          ImageFileName="@EditModel.ImageFileName"
+          ItemName="@EditModel.ItemTitle"
+          Model="EditModel"
           OnLoad="OnLoad"
           OnSave="HandleValidSubmit"
-          PageFooterButtonText="@ViewModel.ExitButtonText"
-          PageFooterNavigationPath="@ViewModel.ExitNavigationPath"
-          PageTitle="@ViewModel.PageTitle"
+          PageFooterButtonText="@EditModel.ExitButtonText"
+          PageFooterNavigationPath="@EditModel.ExitNavigationPath"
+          PageTitle="@EditModel.PageTitle"
           TItem="DashboardItemEditModel">
     <Content>
         <DivRowCol3>
             <Content>
                 <TextField Label="Name"
-                           SelectedText="@ViewModel.Name"
-                           SelectedTextChanged="@((p) => ViewModel.Name = p)" />
+                           SelectedText="@EditModel.Name"
+                           SelectedTextChanged="@((p) => EditModel.Name = p)" />
             </Content>
         </DivRowCol3>
         <DivRowCol3>
             <Content>
                 <TextField Label="Description"
                            Lines="10"
-                           SelectedText="@ViewModel.Description"
-                           SelectedTextChanged="@((p) => ViewModel.Description = p)" />
+                           SelectedText="@EditModel.Description"
+                           SelectedTextChanged="@((p) => EditModel.Description = p)" />
             </Content>
         </DivRowCol3>
     </Content>

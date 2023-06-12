@@ -3,13 +3,13 @@
 public partial class ViewColleges 
     : ViewDomainItem<CollegesModel>, IDeleteDomainItem, IViewDomainItem
 {
-    public async Task OnDelete(DomainEditModel viewModel)
+    public async Task OnDelete(DomainEditModel editModel)
     {
-        await CommandRouter.Send(new SaveCollege(viewModel));
+        await CommandRouter.Send(new SaveCollege(editModel));
     }
 
     public async Task OnLoad()
     {
-        ViewModel = new CollegesModel(await QueryRouter.Send(new GetColleges()));
+        Model = new CollegesModel(await QueryRouter.Send(new GetColleges()));
     }
 }

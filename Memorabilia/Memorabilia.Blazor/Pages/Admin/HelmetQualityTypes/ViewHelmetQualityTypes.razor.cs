@@ -3,7 +3,7 @@
 public partial class ViewHelmetQualityTypes 
     : ViewDomainItem<HelmetQualityTypesModel>, IDeleteDomainItem, IViewDomainItem
 {
-    public async Task OnDelete(DomainEditModel viewModel)
+    public async Task OnDelete(DomainEditModel editModel)
     {
         await CommandRouter.Send(new SaveHelmetQualityType(viewModel));
     }

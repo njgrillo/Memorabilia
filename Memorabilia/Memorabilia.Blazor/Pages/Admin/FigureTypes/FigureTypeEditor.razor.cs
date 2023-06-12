@@ -9,6 +9,6 @@ public partial class FigureTypeEditor  : EditDomainItem<FigureType>, IEditDomain
 
     public async Task OnSave()
     {
-        await OnSave(new SaveFigureType(ViewModel));
+        await OnSave(new SaveFigureType(Model));
     }
 }

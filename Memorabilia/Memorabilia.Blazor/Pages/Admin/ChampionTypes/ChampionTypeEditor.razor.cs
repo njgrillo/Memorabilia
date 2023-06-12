@@ -9,6 +9,6 @@ public partial class ChampionTypeEditor : EditDomainItem<ChampionType>, IEditDom
 
     public async Task OnSave()
     {
-        await OnSave(new SaveChampionType(ViewModel));
+        await OnSave(new SaveChampionType(Model));
     }
 }

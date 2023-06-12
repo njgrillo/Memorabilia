@@ -9,6 +9,6 @@ public partial class BatTypeEditor : EditDomainItem<BatType>, IEditDomainItem
 
     public async Task OnSave()
     {
-        await OnSave(new SaveBatType(ViewModel));
+        await OnSave(new SaveBatType(Model));
     }
 }

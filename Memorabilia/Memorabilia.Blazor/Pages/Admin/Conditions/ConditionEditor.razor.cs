@@ -9,6 +9,6 @@ public partial class ConditionEditor : EditDomainItem<Constant.Condition>, IEdit
 
     public async Task OnSave()
     {
-        await OnSave(new SaveCondition(ViewModel));
+        await OnSave(new SaveCondition(Model));
     }
 }

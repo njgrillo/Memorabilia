@@ -3,7 +3,7 @@
 public partial class ViewSizes 
     : ViewDomainItem<SizesModel>, IDeleteDomainItem, IViewDomainItem
 {
-    public async Task OnDelete(DomainEditModel viewModel)
+    public async Task OnDelete(DomainEditModel editModel)
     {
         await OnDelete(new SaveSize(viewModel));
     }

@@ -2,11 +2,12 @@
 
 public partial class FranchiseEditor : EditItem<FranchiseEditModel, FranchiseModel>
 {
-    private bool DisplaySportLeagueLevel => Id == 0;
+    private bool DisplaySportLeagueLevel
+        => Id == 0;
 
     protected async Task HandleValidSubmit()
     {
-        await HandleValidSubmit(new SaveFranchise(ViewModel));
+        await HandleValidSubmit(new SaveFranchise(EditModel));
     }
 
     protected async Task OnLoad()
@@ -14,6 +15,6 @@ public partial class FranchiseEditor : EditItem<FranchiseEditModel, FranchiseMod
         if (Id == 0)
             return;
 
-        ViewModel = new FranchiseEditModel(new FranchiseModel(await QueryRouter.Send(new GetFranchise(Id))));
+        EditModel = new FranchiseEditModel(new FranchiseModel(await QueryRouter.Send(new GetFranchise(Id))));
     }
 }

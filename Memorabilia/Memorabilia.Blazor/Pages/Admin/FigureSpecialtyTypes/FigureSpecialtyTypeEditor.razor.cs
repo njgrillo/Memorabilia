@@ -1,6 +1,7 @@
 ﻿namespace Memorabilia.Blazor.Pages.Admin.FigureSpecialtyTypes;
 
-public partial class FigureSpecialtyTypeEditor : EditDomainItem<FigureSpecialtyType>, IEditDomainItem
+public partial class FigureSpecialtyTypeEditor 
+    : EditDomainItem<FigureSpecialtyType>, IEditDomainItem
 {
     public async Task OnLoad()
     {
@@ -9,6 +10,6 @@ public partial class FigureSpecialtyTypeEditor : EditDomainItem<FigureSpecialtyT
 
     public async Task OnSave()
     {
-        await OnSave(new SaveFigureSpecialtyType(ViewModel));
+        await OnSave(new SaveFigureSpecialtyType(Model));
     }
 }

@@ -1,14 +1,15 @@
 ﻿namespace Memorabilia.Blazor.Pages.Admin.ChampionTypes;
 
-public partial class ViewChampionTypes : ViewDomainItem<ChampionTypesModel>, IDeleteDomainItem, IViewDomainItem
+public partial class ViewChampionTypes 
+    : ViewDomainItem<ChampionTypesModel>, IDeleteDomainItem, IViewDomainItem
 {
-    public async Task OnDelete(DomainEditModel viewModel)
+    public async Task OnDelete(DomainEditModel editModel)
     {
-        await CommandRouter.Send(new SaveChampionType(viewModel));
+        await CommandRouter.Send(new SaveChampionType(editModel));
     }
 
     public async Task OnLoad()
     {
-        ViewModel = new ChampionTypesModel(await QueryRouter.Send(new GetChampionTypes()));
+        Model = new ChampionTypesModel(await QueryRouter.Send(new GetChampionTypes()));
     }
 }

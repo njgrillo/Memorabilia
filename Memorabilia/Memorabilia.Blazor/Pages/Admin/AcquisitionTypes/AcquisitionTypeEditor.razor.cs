@@ -9,6 +9,6 @@ public partial class AcquisitionTypeEditor : EditDomainItem<AcquisitionType>, IE
 
     public async Task OnSave()
     {
-        await OnSave(new SaveAcquisitionType(ViewModel));
+        await OnSave(new SaveAcquisitionType(Model));
     }
 }

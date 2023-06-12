@@ -4,7 +4,7 @@ public partial class DivisionEditor : EditItem<DivisionEditModel, DivisionModel>
 {
     protected async Task HandleValidSubmit()
     {
-        await HandleValidSubmit(new SaveDivision(ViewModel));
+        await HandleValidSubmit(new SaveDivision(EditModel));
     }
 
     protected async Task OnLoad()
@@ -12,6 +12,6 @@ public partial class DivisionEditor : EditItem<DivisionEditModel, DivisionModel>
         if (Id == 0)
             return;
 
-        ViewModel = new DivisionEditModel(new DivisionModel(await QueryRouter.Send(new GetDivision(Id))));
+        EditModel = new DivisionEditModel(new DivisionModel(await QueryRouter.Send(new GetDivision(Id))));
     }
 }

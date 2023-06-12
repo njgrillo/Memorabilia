@@ -1,43 +1,43 @@
 ﻿@inherits EditItem<FranchiseEditModel, FranchiseModel>
 
-<EditPage ContinueNavigationPath="@ViewModel.RoutePrefix"
-          EditMode="ViewModel.EditModeType" 
-          ExitNavigationPath="@ViewModel.RoutePrefix"
-          ImageFileName="@ViewModel.ImageFileName" 
-          ItemName="@ViewModel.ItemTitle"
-          Model="ViewModel"
+<EditPage ContinueNavigationPath="@EditModel.RoutePrefix"
+          EditMode="EditModel.EditModeType" 
+          ExitNavigationPath="@EditModel.RoutePrefix"
+          ImageFileName="@EditModel.ImageFileName" 
+          ItemName="@EditModel.ItemTitle"
+          Model="EditModel"
           OnLoad="OnLoad"
           OnSave="HandleValidSubmit"
-          PageFooterButtonText="@ViewModel.ExitButtonText"
-          PageFooterNavigationPath="@ViewModel.ExitNavigationPath"
-          PageTitle="@ViewModel.PageTitle"
+          PageFooterButtonText="@EditModel.ExitButtonText"
+          PageFooterNavigationPath="@EditModel.ExitNavigationPath"
+          PageTitle="@EditModel.PageTitle"
           TItem="FranchiseEditModel">
     <Content>
         <DivRowCol3 Hidden="@(!DisplaySportLeagueLevel)">
             <Content>
-                <SportLeagueLevelDropDown SelectedValue="ViewModel.SportLeagueLevelId"
-                                          SelectionChanged="(p) => ViewModel.SportLeagueLevelId = p" />
+                <SportLeagueLevelDropDown SelectedValue="EditModel.SportLeagueLevelId"
+                                          SelectionChanged="(p) => EditModel.SportLeagueLevelId = p" />
             </Content>
         </DivRowCol3> 
         <DivRowCol3>
             <Content>
                 <TextField Label="Name"
-                           SelectedText="@ViewModel.Name"
-                           SelectedTextChanged="@((p) => ViewModel.Name = p)" />
+                           SelectedText="@EditModel.Name"
+                           SelectedTextChanged="@((p) => EditModel.Name = p)" />
             </Content>
         </DivRowCol3>
         <DivRowCol3>
             <Content>
                 <TextField Label="Location"
-                           SelectedText="@ViewModel.Location"
-                           SelectedTextChanged="@((p) => ViewModel.Location = p)" />
+                           SelectedText="@EditModel.Location"
+                           SelectedTextChanged="@((p) => EditModel.Location = p)" />
             </Content>
         </DivRowCol3>
         <DivRowCol3>
             <Content>
                 <IntField Label="Founded Year"
-                          Value="ViewModel.FoundYear"
-                          ValueChanged="@((p) => ViewModel.FoundYear = p)" />
+                          Value="EditModel.FoundYear"
+                          ValueChanged="@((p) => EditModel.FoundYear = p)" />
             </Content>
         </DivRowCol3>
     </Content>

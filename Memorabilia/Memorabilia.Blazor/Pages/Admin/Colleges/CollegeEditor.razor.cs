@@ -9,6 +9,6 @@ public partial class CollegeEditor : EditDomainItem<College>, IEditDomainItem
 
     public async Task OnSave()
     {
-        await OnSave(new SaveCollege(ViewModel));
+        await OnSave(new SaveCollege(Model));
     }
 }

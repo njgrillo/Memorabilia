@@ -9,6 +9,6 @@ public partial class CerealTypeEditor : EditDomainItem<CerealType>, IEditDomainI
 
     public async Task OnSave()
     {
-        await OnSave(new SaveCerealType(ViewModel));
+        await OnSave(new SaveCerealType(Model));
     }
 }

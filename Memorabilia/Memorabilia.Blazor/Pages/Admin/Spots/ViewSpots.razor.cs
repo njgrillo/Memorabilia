@@ -3,7 +3,7 @@
 public partial class ViewSpots 
     : ViewDomainItem<SpotsModel>, IDeleteDomainItem, IViewDomainItem
 {
-    public async Task OnDelete(DomainEditModel viewModel)
+    public async Task OnDelete(DomainEditModel editModel)
     {
         await OnDelete(new Application.Features.Admin.Spots.SaveSpot(viewModel));
     }

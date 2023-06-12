@@ -3,7 +3,7 @@
 public partial class ViewLevelTypes 
     : ViewDomainItem<LevelTypesModel>, IDeleteDomainItem, IViewDomainItem
 {
-    public async Task OnDelete(DomainEditModel viewModel)
+    public async Task OnDelete(DomainEditModel editModel)
     {
         await OnDelete(new SaveLevelType(viewModel));
     }

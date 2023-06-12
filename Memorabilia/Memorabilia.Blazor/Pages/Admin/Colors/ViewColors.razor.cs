@@ -3,13 +3,13 @@
 public partial class ViewColors 
     : ViewDomainItem<ColorsModel>, IDeleteDomainItem, IViewDomainItem
 {
-    public async Task OnDelete(DomainEditModel viewModel)
+    public async Task OnDelete(DomainEditModel editModel)
     {
-        await CommandRouter.Send(new SaveColor(viewModel));
+        await CommandRouter.Send(new SaveColor(editModel));
     }
 
     public async Task OnLoad()
     {
-        ViewModel = new ColorsModel(await QueryRouter.Send(new GetColors()));
+        Model = new ColorsModel(await QueryRouter.Send(new GetColors()));
     }
 }

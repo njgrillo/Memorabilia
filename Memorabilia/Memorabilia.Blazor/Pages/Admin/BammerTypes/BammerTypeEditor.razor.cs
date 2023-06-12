@@ -9,6 +9,6 @@ public partial class BammerTypeEditor : EditDomainItem<BammerType>, IEditDomainI
 
     public async Task OnSave()
     {
-        await OnSave(new SaveBammerType(ViewModel));
+        await OnSave(new SaveBammerType(Model));
     }
 }

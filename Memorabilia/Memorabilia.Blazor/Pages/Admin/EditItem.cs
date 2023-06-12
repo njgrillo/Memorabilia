@@ -11,7 +11,7 @@ public abstract class EditItem<TEditModel, TModel> : ComponentBase
     [Parameter]
     public int Id { get; set; }
 
-    protected TEditModel ViewModel 
+    protected TEditModel EditModel 
         = (TEditModel)Activator.CreateInstance(typeof(TEditModel));
 
     protected async Task<TModel> Get(IQuery<TModel> request)

@@ -3,13 +3,13 @@
 public partial class ViewGameStyleTypes 
     : ViewDomainItem<GameStyleTypesModel>, IDeleteDomainItem, IViewDomainItem
 {
-    public async Task OnDelete(DomainEditModel viewModel)
+    public async Task OnDelete(DomainEditModel editModel)
     {
-        await CommandRouter.Send(new SaveGameStyleType(viewModel));
+        await CommandRouter.Send(new SaveGameStyleType(editModel));
     }
 
     public async Task OnLoad()
     {
-        ViewModel = new GameStyleTypesModel(await QueryRouter.Send(new GetGameStyleTypes()));
+        Model = new GameStyleTypesModel(await QueryRouter.Send(new GetGameStyleTypes()));
     }
 }

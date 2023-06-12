@@ -3,13 +3,13 @@
 public partial class ViewFranchiseHallOfFameTypes 
     : ViewDomainItem<FranchiseHallOfFameTypesModel>, IDeleteDomainItem, IViewDomainItem
 {
-    public async Task OnDelete(DomainEditModel viewModel)
+    public async Task OnDelete(DomainEditModel editModel)
     {
-        await CommandRouter.Send(new SaveFranchiseHallOfFameType(viewModel));
+        await CommandRouter.Send(new SaveFranchiseHallOfFameType(editModel));
     }
 
     public async Task OnLoad()
     {
-        ViewModel = new FranchiseHallOfFameTypesModel(await QueryRouter.Send(new GetFranchiseHallOfFameTypes()));
+        Model = new FranchiseHallOfFameTypesModel(await QueryRouter.Send(new GetFranchiseHallOfFameTypes()));
     }
 }

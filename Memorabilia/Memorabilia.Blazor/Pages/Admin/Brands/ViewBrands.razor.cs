@@ -3,13 +3,13 @@
 public partial class ViewBrands 
     : ViewDomainItem<BrandsModel>, IDeleteDomainItem, IViewDomainItem
 {
-    public async Task OnDelete(DomainEditModel viewModel)
+    public async Task OnDelete(DomainEditModel editModel)
     {
-        await CommandRouter.Send(new SaveBrand(viewModel));
+        await CommandRouter.Send(new SaveBrand(editModel));
     }
 
     public async Task OnLoad()
     {
-        ViewModel = new BrandsModel(await QueryRouter.Send(new GetBrands()));
+        Model = new BrandsModel(await QueryRouter.Send(new GetBrands()));
     }
 }

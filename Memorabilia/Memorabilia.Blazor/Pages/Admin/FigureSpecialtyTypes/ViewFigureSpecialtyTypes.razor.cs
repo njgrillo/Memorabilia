@@ -3,13 +3,13 @@
 public partial class ViewFigureSpecialtyTypes 
     : ViewDomainItem<FigureSpecialtyTypesModel>, IDeleteDomainItem, IViewDomainItem
 {
-    public async Task OnDelete(DomainEditModel viewModel)
+    public async Task OnDelete(DomainEditModel editModel)
     {
-        await CommandRouter.Send(new SaveFigureSpecialtyType(viewModel));
+        await CommandRouter.Send(new SaveFigureSpecialtyType(editModel));
     }
 
     public async Task OnLoad()
     {
-        ViewModel = new FigureSpecialtyTypesModel(await QueryRouter.Send(new GetFigureSpecialtyTypes()));
+        Model = new FigureSpecialtyTypesModel(await QueryRouter.Send(new GetFigureSpecialtyTypes()));
     }
 }

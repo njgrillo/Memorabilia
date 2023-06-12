@@ -9,6 +9,6 @@ public partial class BaseballTypeEditor : EditDomainItem<BaseballType>, IEditDom
 
     public async Task OnSave()
     {
-        await OnSave(new SaveBaseballType(ViewModel));
+        await OnSave(new SaveBaseballType(Model));
     }
 }

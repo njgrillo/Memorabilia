@@ -7,7 +7,7 @@ public partial class DashboardItemEditor
 {
     protected async Task HandleValidSubmit()
     {
-        await HandleValidSubmit(new SaveDashboardItem(ViewModel));
+        await HandleValidSubmit(new SaveDashboardItem(EditModel));
     }
 
     protected async Task OnLoad()
@@ -15,6 +15,6 @@ public partial class DashboardItemEditor
         if (Id == 0)
             return;
 
-        ViewModel = new DashboardItemEditModel(new DashboardItemModel(await QueryRouter.Send(new GetDashboardItem(Id))));
+        EditModel = new DashboardItemEditModel(new DashboardItemModel(await QueryRouter.Send(new GetDashboardItem(Id))));
     }
 }

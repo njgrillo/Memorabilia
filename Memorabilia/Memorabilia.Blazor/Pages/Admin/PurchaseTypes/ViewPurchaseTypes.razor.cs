@@ -3,7 +3,7 @@
     public partial class ViewPurchaseTypes 
         : ViewDomainItem<PurchaseTypesModel>, IDeleteDomainItem, IViewDomainItem
     {
-        public async Task OnDelete(DomainEditModel viewModel)
+        public async Task OnDelete(DomainEditModel editModel)
         {
             await OnDelete(new SavePurchaseType(viewModel));
         }
