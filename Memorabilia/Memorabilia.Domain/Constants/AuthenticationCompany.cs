@@ -48,7 +48,10 @@ public sealed class AuthenticationCompany : DomainItemConstant
         PSA
     };
 
-    private AuthenticationCompany(int id, string name, string abbreviation = null, string websitePath = null) 
+    private AuthenticationCompany(int id, 
+                                  string name, 
+                                  string abbreviation = null, 
+                                  string websitePath = null) 
         : base(id, name, abbreviation) 
     {
         WebsitePath = websitePath;

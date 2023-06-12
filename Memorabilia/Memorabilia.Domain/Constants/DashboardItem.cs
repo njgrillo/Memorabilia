@@ -86,7 +86,5 @@ public sealed class DashboardItem : DomainItemConstant
         => All.SingleOrDefault(dashboardItem => dashboardItem.Id == id);
 
     public override string ToString()
-    {
-        return Name.Replace(" ", "");
-    }
+        => Name.Replace(" ", "");
 }

@@ -35,7 +35,7 @@ public partial class Memorabilia
     {
         if (baseballTypeId.HasValue)
         {
-            if (Brand.BrandId != Constants.Brand.Rawlings.Id)
+            if (Brand.BrandId != Constant.Brand.Rawlings.Id)
                 return;
 
             if (Baseball == null)

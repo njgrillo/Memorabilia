@@ -136,12 +136,18 @@ public sealed class AdminDomainItem
         WritingInstruments
     };
 
-    private AdminDomainItem(string title, string description, string imageFileName, string item = null)
+    private AdminDomainItem(string title, 
+                            string description, 
+                            string imageFileName, 
+                            string item = null)
     {
         Title = title;
         Description = description;
         ImageFileName = imageFileName;
-        Item = !item.IsNullOrEmpty() ? item : Title.TrimEnd('s');
+
+        Item = !item.IsNullOrEmpty() 
+            ? item 
+            : Title.TrimEnd('s');
     }
 
     public string Description { get; }
@@ -150,7 +156,8 @@ public sealed class AdminDomainItem
 
     public string Item { get; }
 
-    public string Page => Title.Replace(" ", "");
+    public string Page 
+        => Title.Replace(" ", "");
 
     public string Title { get; }
 }
