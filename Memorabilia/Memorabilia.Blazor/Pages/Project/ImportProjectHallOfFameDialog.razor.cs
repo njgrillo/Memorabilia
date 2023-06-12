@@ -33,7 +33,8 @@ public partial class ImportProjectHallOfFameDialog
             ? "Deselect All"
             : "Select All";
 
-    private List<Entity.Person> SelectedPeople = new();
+    private List<Entity.Person> SelectedPeople 
+        = new();
 
     public void Cancel()
     {

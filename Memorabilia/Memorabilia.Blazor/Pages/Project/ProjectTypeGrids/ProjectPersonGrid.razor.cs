@@ -9,7 +9,8 @@ public partial class ProjectPersonGrid
     public ImageService ImageService { get; set; }
 
     [Parameter]
-    public List<ProjectPersonEditModel> Items { get; set; } = new();
+    public List<ProjectPersonEditModel> Items { get; set; } 
+        = new();
 
     [Parameter]
     public int? ItemTypeId { get; set; }
@@ -17,18 +18,18 @@ public partial class ProjectPersonGrid
     private ProjectPersonEditModel _elementBeforeEdit;
     private string _search;
 
-    private bool FilterFunc1(ProjectPersonEditModel projectPersonViewModel)
-        => FilterFunc(projectPersonViewModel, _search);
+    private bool FilterFunc1(ProjectPersonEditModel editModel)
+        => FilterFunc(editModel, _search);
 
-    private async Task AddAutographLink(ProjectPersonEditModel projectPerson)
+    private async Task AddAutographLink(ProjectPersonEditModel editModel)
     {
         var parameters = new Dictionary<string, object>
         {
-            ["UserId"] = projectPerson.UserId,
-            ["PersonId"] = projectPerson.Person.Id
+            ["UserId"] = editModel.UserId,
+            ["PersonId"] = editModel.Person.Id
         };
 
-        SetProjectDetailsParameters(projectPerson, parameters);
+        SetProjectDetailsParameters(editModel, parameters);
 
         if (!parameters.ContainsKey("ItemTypeId") && ItemTypeId.HasValue)
             parameters.Add("ItemTypeId", ItemTypeId.Value);
@@ -55,8 +56,8 @@ public partial class ProjectPersonGrid
 
         _ = int.TryParse(results["AutographId"], out int autographId);
 
-        projectPerson.AutographId = autographId;
-        projectPerson.AutographFileName = results["AutographFileName"];
+        editModel.AutographId = autographId;
+        editModel.AutographFileName = results["AutographFileName"];
     }
 
     private void BackupItem(object element)
@@ -70,16 +71,14 @@ public partial class ProjectPersonGrid
         };
     }
 
-    private static bool FilterFunc(ProjectPersonEditModel projectPersonViewModel, string search)
-    {
-        return search.IsNullOrEmpty() ||
-               (search.Equals("deceased", StringComparison.OrdinalIgnoreCase) && projectPersonViewModel.Deceased) ||
-               (search.Equals("upgrade", StringComparison.OrdinalIgnoreCase) && projectPersonViewModel.Upgrade) ||
-               projectPersonViewModel.PriorityTypeName.Contains(search, StringComparison.OrdinalIgnoreCase) ||
-               projectPersonViewModel.ProjectStatusTypeName.Contains(search, StringComparison.OrdinalIgnoreCase) ||
-               projectPersonViewModel.Person.Name.Contains(search, StringComparison.OrdinalIgnoreCase) ||
-               (!projectPersonViewModel.Person.Nickname.IsNullOrEmpty() && projectPersonViewModel.Person.Nickname.Contains(search, StringComparison.OrdinalIgnoreCase));
-    }    
+    private static bool FilterFunc(ProjectPersonEditModel editModel, string search)
+        => search.IsNullOrEmpty() ||
+           (search.Equals("deceased", StringComparison.OrdinalIgnoreCase) && editModel.Deceased) ||
+           (search.Equals("upgrade", StringComparison.OrdinalIgnoreCase) && editModel.Upgrade) ||
+           editModel.PriorityTypeName.Contains(search, StringComparison.OrdinalIgnoreCase) ||
+           editModel.ProjectStatusTypeName.Contains(search, StringComparison.OrdinalIgnoreCase) ||
+           editModel.Person.Name.Contains(search, StringComparison.OrdinalIgnoreCase) ||
+           (!editModel.Person.Nickname.IsNullOrEmpty() && editModel.Person.Nickname.Contains(search, StringComparison.OrdinalIgnoreCase));
 
     private void MoveDown(int rank)
     {
@@ -164,70 +163,70 @@ public partial class ProjectPersonGrid
         ((ProjectPersonEditModel)element).ProjectStatusTypeId = _elementBeforeEdit.ProjectStatusTypeId;
     }
 
-    protected static void SetProjectDetailsParameters(ProjectPersonEditModel projectPerson, 
-        Dictionary<string, object> parameters)
+    protected static void SetProjectDetailsParameters(ProjectPersonEditModel editModel, 
+                                                      Dictionary<string, object> parameters)
     {
-        var projectType = ProjectType.Find(projectPerson.Project.ProjectTypeId);
+        var projectType = ProjectType.Find(editModel.Project.ProjectTypeId);
 
         switch (projectType.ToString())
         {
             case "BaseballType":
-                parameters.Add("BaseballTypeId", projectPerson.Project.Baseball.BaseballTypeId);
+                parameters.Add("BaseballTypeId", editModel.Project.Baseball.BaseballTypeId);
 
-                if (projectPerson.Project.Baseball.TeamId.HasValue)
-                    parameters.Add("BaseballTypeTeamId", projectPerson.Project.Baseball.TeamId);
+                if (editModel.Project.Baseball.TeamId.HasValue)
+                    parameters.Add("BaseballTypeTeamId", editModel.Project.Baseball.TeamId);
 
-                if (projectPerson.Project.Baseball.Year.HasValue)
-                    parameters.Add("BaseballTypeYear", projectPerson.Project.Baseball.Year);
+                if (editModel.Project.Baseball.Year.HasValue)
+                    parameters.Add("BaseballTypeYear", editModel.Project.Baseball.Year);
 
                 break;
             case "Card":
-                parameters.Add("CardBrandId", projectPerson.Project.Card.BrandId);
+                parameters.Add("CardBrandId", editModel.Project.Card.BrandId);
 
-                if (projectPerson.Project.Card.TeamId.HasValue)
-                    parameters.Add("CardTeamId", projectPerson.Project.Card.TeamId);
+                if (editModel.Project.Card.TeamId.HasValue)
+                    parameters.Add("CardTeamId", editModel.Project.Card.TeamId);
 
-                if (projectPerson.Project.Card.Year.HasValue)
-                    parameters.Add("CardYear", projectPerson.Project.Card.Year);
+                if (editModel.Project.Card.Year.HasValue)
+                    parameters.Add("CardYear", editModel.Project.Card.Year);
 
                 break;
             case "HallofFame":
-                parameters.Add("HallOfFameSportLeagueLevelId", projectPerson.Project.HallOfFame.SportLeagueLevelId);
+                parameters.Add("HallOfFameSportLeagueLevelId", editModel.Project.HallOfFame.SportLeagueLevelId);
 
-                if (projectPerson.Project.HallOfFame.ItemTypeId.HasValue)
-                    parameters.Add("HallOfFameItemTypeId", projectPerson.Project.HallOfFame.ItemTypeId);
+                if (editModel.Project.HallOfFame.ItemTypeId.HasValue)
+                    parameters.Add("HallOfFameItemTypeId", editModel.Project.HallOfFame.ItemTypeId);
 
-                if (projectPerson.Project.HallOfFame.Year.HasValue)
-                    parameters.Add("HallOfFameYear", projectPerson.Project.HallOfFame.Year);
+                if (editModel.Project.HallOfFame.Year.HasValue)
+                    parameters.Add("HallOfFameYear", editModel.Project.HallOfFame.Year);
 
                 break;
             case "HelmetType":
-                parameters.Add("HelmetTypeId", projectPerson.Project.Helmet.HelmetTypeId);
+                parameters.Add("HelmetTypeId", editModel.Project.Helmet.HelmetTypeId);
 
-                if (projectPerson.Project.Helmet.SizeId.HasValue)
-                    parameters.Add("HelmetTypeSizeId", projectPerson.Project.Helmet.SizeId);
+                if (editModel.Project.Helmet.SizeId.HasValue)
+                    parameters.Add("HelmetTypeSizeId", editModel.Project.Helmet.SizeId);
 
                 break;
             case "ItemType":
-                parameters.Add("ItemTypeId", projectPerson.Project.Item.ItemTypeId);
-                parameters.Add("MultiSignedItem", projectPerson.Project.Item.MultiSignedItem);
+                parameters.Add("ItemTypeId", editModel.Project.Item.ItemTypeId);
+                parameters.Add("MultiSignedItem", editModel.Project.Item.MultiSignedItem);
 
                 break;
             case "Team":
-                parameters.Add("TeamId", projectPerson.Project.Team.TeamId);
+                parameters.Add("TeamId", editModel.Project.Team.TeamId);
 
-                if (projectPerson.Project.Team.Year.HasValue)
-                    parameters.Add("TeamYear", projectPerson.Project.Team.Year);
+                if (editModel.Project.Team.Year.HasValue)
+                    parameters.Add("TeamYear", editModel.Project.Team.Year);
 
                 break;
             case "WorldSeries":
-                parameters.Add("WorldSeriesTeamId", projectPerson.Project.WorldSeries.TeamId);
+                parameters.Add("WorldSeriesTeamId", editModel.Project.WorldSeries.TeamId);
 
-                if (projectPerson.Project.WorldSeries.ItemTypeId.HasValue)
-                    parameters.Add("WorldSeriesItemTypeId", projectPerson.Project.WorldSeries.ItemTypeId);
+                if (editModel.Project.WorldSeries.ItemTypeId.HasValue)
+                    parameters.Add("WorldSeriesItemTypeId", editModel.Project.WorldSeries.ItemTypeId);
 
-                if (projectPerson.Project.WorldSeries.Year.HasValue)
-                    parameters.Add("WorldSeriesYear", projectPerson.Project.WorldSeries.Year);
+                if (editModel.Project.WorldSeries.Year.HasValue)
+                    parameters.Add("WorldSeriesYear", editModel.Project.WorldSeries.Year);
 
                 break;
             default:

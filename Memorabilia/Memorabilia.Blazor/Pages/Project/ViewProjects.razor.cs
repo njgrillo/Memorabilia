@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Blazor.Pages.Project;
 
-public partial class ViewProjects : ComponentBase
+public partial class ViewProjects
 {
     [Inject]
     public CommandRouter CommandRouter { get; set; }
@@ -37,13 +37,14 @@ public partial class ViewProjects : ComponentBase
 
     protected async Task Delete(int id)
     {
-        var deletedItem = Model.Projects.Single(project => project.Id == id);
-        var viewModel = new ProjectEditModel(deletedItem)
+        ProjectModel deletedItem = Model.Projects.Single(project => project.Id == id);
+
+        var editModel = new ProjectEditModel(deletedItem)
         {
             IsDeleted = true
         };
 
-        await CommandRouter.Send(new SaveProject.Command(viewModel));
+        await CommandRouter.Send(new SaveProject.Command(editModel));
 
         Model.Projects.Remove(deletedItem);
 

@@ -9,7 +9,8 @@ public partial class ProjectMemorabiliaTeamGrid
     public ImageService ImageService { get; set; }
 
     [Parameter]
-    public List<ProjectMemorabiliaTeamEditModel> Items { get; set; } = new();
+    public List<ProjectMemorabiliaTeamEditModel> Items { get; set; } 
+        = new();
 
     [Parameter]
     public int? ItemTypeId { get; set; }
@@ -17,18 +18,18 @@ public partial class ProjectMemorabiliaTeamGrid
     private ProjectMemorabiliaTeamEditModel _elementBeforeEdit;
     private string _search;
 
-    private bool FilterFunc1(ProjectMemorabiliaTeamEditModel projectMemorabiliaTeamViewModel)
-        => FilterFunc(projectMemorabiliaTeamViewModel, _search);
+    private bool FilterFunc1(ProjectMemorabiliaTeamEditModel editModel)
+        => FilterFunc(editModel, _search);
 
-    private async Task AddMemorabiliaLink(ProjectMemorabiliaTeamEditModel projectMemorabiliaTeam)
+    private async Task AddMemorabiliaLink(ProjectMemorabiliaTeamEditModel editModel)
     {
         var parameters = new Dictionary<string, object>
         {
-            ["UserId"] = projectMemorabiliaTeam.UserId,
-            ["TeamId"] = projectMemorabiliaTeam.Team.Id
+            ["UserId"] = editModel.UserId,
+            ["TeamId"] = editModel.Team.Id
         };
 
-        SetProjectDetailsParameters(projectMemorabiliaTeam, parameters);
+        SetProjectDetailsParameters(editModel, parameters);
 
         if (ItemTypeId.HasValue)
             parameters.Add("ItemTypeId", ItemTypeId.Value);
@@ -55,8 +56,8 @@ public partial class ProjectMemorabiliaTeamGrid
 
         _ = int.TryParse(results["MemorabiliaId"], out int memorabiliaId);
 
-        projectMemorabiliaTeam.MemorabiliaId = memorabiliaId;
-        projectMemorabiliaTeam.MemorabiliaFileName = results["MemorabiliaFileName"];
+        editModel.MemorabiliaId = memorabiliaId;
+        editModel.MemorabiliaFileName = results["MemorabiliaFileName"];
     }
 
     private void BackupItem(object element)
@@ -70,14 +71,12 @@ public partial class ProjectMemorabiliaTeamGrid
         };
     }
 
-    private static bool FilterFunc(ProjectMemorabiliaTeamEditModel projectMemorabiliaTeamViewModel, string search)
-    {
-        return search.IsNullOrEmpty() ||
-               (search.Equals("upgrade", StringComparison.OrdinalIgnoreCase) && projectMemorabiliaTeamViewModel.Upgrade) ||
-               projectMemorabiliaTeamViewModel.PriorityTypeName.Contains(search, StringComparison.OrdinalIgnoreCase) ||
-               projectMemorabiliaTeamViewModel.ProjectStatusTypeName.Contains(search, StringComparison.OrdinalIgnoreCase) ||
-               projectMemorabiliaTeamViewModel.Team.Name.Contains(search, StringComparison.OrdinalIgnoreCase);
-    }
+    private static bool FilterFunc(ProjectMemorabiliaTeamEditModel editModel, string search)
+        => search.IsNullOrEmpty() ||
+           (search.Equals("upgrade", StringComparison.OrdinalIgnoreCase) && editModel.Upgrade) ||
+           editModel.PriorityTypeName.Contains(search, StringComparison.OrdinalIgnoreCase) ||
+           editModel.ProjectStatusTypeName.Contains(search, StringComparison.OrdinalIgnoreCase) ||
+           editModel.Team.Name.Contains(search, StringComparison.OrdinalIgnoreCase);
 
     private void MoveDown(int rank)
     {

@@ -8,7 +8,8 @@ public partial class HelmetTypeDetails
     [Parameter]
     public ProjectEditModel Model { get; set; }
 
-    protected static int ItemTypeId => ItemType.Helmet.Id;
+    protected static int ItemTypeId 
+        => ItemType.Helmet.Id;
 
     private bool _displayCompleted = true;
 

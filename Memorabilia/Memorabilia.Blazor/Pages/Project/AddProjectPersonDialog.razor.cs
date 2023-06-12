@@ -36,7 +36,7 @@ public partial class AddProjectPersonDialog
         if (ProjectId == 0)
             return;
 
-        Project = new ProjectEditModel(new ProjectModel(await QueryRouter.Send(new GetProjectQuery(ProjectId))));
+        Project = (await QueryRouter.Send(new GetProjectQuery(ProjectId))).ToEditModel();
     }
 
     protected void Add()

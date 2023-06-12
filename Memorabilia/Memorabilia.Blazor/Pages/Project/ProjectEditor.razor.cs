@@ -23,13 +23,15 @@ public partial class ProjectEditor
     [Parameter]
     public int UserId { get; set; }
 
-    protected ProjectEditModel Model = new();
+    protected ProjectEditModel Model 
+        = new();
 
     protected Type ProjectTypeComponent;
 
     protected ValidationResult ValidationResult { get; set; }
 
-    protected Alert[] ValidationResultAlerts => ValidationResult != null
+    protected Alert[] ValidationResultAlerts 
+        => ValidationResult != null
         ? ValidationResult.Errors.Select(error => new Alert(error.ErrorMessage, Severity.Error)).ToArray()
         : Array.Empty<Alert>();    
 
@@ -169,9 +171,9 @@ public partial class ProjectEditor
         if (!Model.MemorabiliaTeams.Any())
             return;
 
-        var viewModel = new ProjectEditModel(new ProjectModel(await QueryRouter.Send(new GetProjectQuery(Id))));
+        ProjectEditModel editModel = (await QueryRouter.Send(new GetProjectQuery(Id))).ToEditModel();
 
-        Model.MemorabiliaTeams = viewModel.MemorabiliaTeams;
+        Model.MemorabiliaTeams = editModel.MemorabiliaTeams;
     }
 
     protected async Task GetProjectPersonUpdatedIds()
@@ -179,9 +181,9 @@ public partial class ProjectEditor
         if (!Model.People.Any())
             return;
 
-        var viewModel = new ProjectEditModel(new ProjectModel(await QueryRouter.Send(new GetProjectQuery(Id))));
+        ProjectEditModel editModel = (await QueryRouter.Send(new GetProjectQuery(Id))).ToEditModel();
 
-        Model.People = viewModel.People;
+        Model.People = editModel.People;
     }
 
     protected void SetProjectDetailsParameters()

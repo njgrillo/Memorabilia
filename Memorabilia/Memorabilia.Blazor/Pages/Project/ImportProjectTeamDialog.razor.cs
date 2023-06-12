@@ -24,7 +24,8 @@ public partial class ImportProjectTeamDialog
             ? "Deselect All"
             : "Select All";
 
-    private List<Entity.Team> SelectedTeams = new();
+    private List<Entity.Team> SelectedTeams 
+        = new();
 
     protected override async Task OnInitializedAsync()
     {

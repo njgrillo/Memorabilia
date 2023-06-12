@@ -8,7 +8,8 @@ public partial class TeamDetails
     [Parameter]
     public ProjectEditModel Model { get; set; }
 
-    private bool _displayCompleted = true;
+    private bool _displayCompleted 
+        = true;
 
     protected async Task AddProjectMemorabiliaTeam()
     {

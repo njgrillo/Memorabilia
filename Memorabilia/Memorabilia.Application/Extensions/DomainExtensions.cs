@@ -115,6 +115,9 @@ public static class DomainExtensions
     public static PositionEditModel ToEditModel(this Entity.Position position)
         => new(new PositionModel(position));
 
+    public static ProjectEditModel ToEditModel(this Entity.Project project)
+        => new(new ProjectModel(project));
+
     public static ProjectPersonEditModel ToEditModel(this Entity.ProjectPerson projectPerson)
         => new(new ProjectPersonModel(projectPerson));
 

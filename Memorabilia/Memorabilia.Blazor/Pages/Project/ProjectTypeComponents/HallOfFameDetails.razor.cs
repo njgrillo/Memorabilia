@@ -67,18 +67,18 @@ public partial class HallofFameDetails
         if (!persons.Any())
             return;
 
-        var projectPersons = persons.Select(person => new PersonModel(person))
-                                    .Select(personModel => new PersonEditModel(personModel))
-                                    .Select(savePersonModel => new ProjectPersonModel(new Entity.ProjectPerson
-                                    {
-                                        ItemTypeId = Model.HallOfFame.ItemTypeId ?? Model.ItemTypeId,
-                                        Person = persons.Single(person => person.Id == savePersonModel.Id),
-                                        PersonId = savePersonModel.Id,
-                                        Project = new Entity.Project(Model.Name, Model.StartDate, Model.EndDate, Model.UserId, Model.ProjectType.Id),
-                                        ProjectId = Model.Id
-                                    }))
-                                    .Select(projectPerson => new ProjectPersonEditModel(projectPerson))
-                                    .ToArray();
+        ProjectPersonEditModel[] projectPersons = persons.Select(person => new PersonModel(person))
+                                                         .Select(personModel => new PersonEditModel(personModel))
+                                                         .Select(savePersonModel => new ProjectPersonModel(new Entity.ProjectPerson
+                                                         {
+                                                            ItemTypeId = Model.HallOfFame.ItemTypeId ?? Model.ItemTypeId,
+                                                            Person = persons.Single(person => person.Id == savePersonModel.Id),
+                                                            PersonId = savePersonModel.Id,
+                                                            Project = new Entity.Project(Model.Name, Model.StartDate, Model.EndDate, Model.UserId, Model.ProjectType.Id),
+                                                            ProjectId = Model.Id
+                                                         }))
+                                                         .Select(projectPerson => new ProjectPersonEditModel(projectPerson))
+                                                         .ToArray();
 
         Model.People.AddRange(projectPersons);
     }

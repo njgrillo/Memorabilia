@@ -42,7 +42,8 @@ public partial class ImportProjectPersonDialog
             ? "Deselect All"
             : "Select All";
     
-    private List<Entity.Person> SelectedPeople = new(); 
+    private List<Entity.Person> SelectedPeople 
+        = new(); 
 
     public void Cancel()
     {

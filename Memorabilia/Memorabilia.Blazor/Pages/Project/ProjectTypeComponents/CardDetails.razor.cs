@@ -8,7 +8,8 @@ public partial class CardDetails
     [Parameter]
     public ProjectEditModel Model { get; set; }
 
-    protected static int ItemTypeId => ItemType.TradingCard.Id;
+    protected static int ItemTypeId 
+        => ItemType.TradingCard.Id;
 
     private bool _displayCompleted;
 
