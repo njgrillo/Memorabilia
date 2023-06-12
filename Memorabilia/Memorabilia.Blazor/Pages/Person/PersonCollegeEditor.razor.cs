@@ -40,7 +40,8 @@ public partial class PersonCollegeEditor
 
     private void Update()
     {
-        PersonCollegeEditModel college = Colleges.Single(college => college.College.Id == Model.College.Id);
+        PersonCollegeEditModel college 
+            = Colleges.Single(college => college.College.Id == Model.College.Id);
 
         college.College = Model.College;
         college.BeginYear = Model.BeginYear;

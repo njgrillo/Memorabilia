@@ -55,7 +55,7 @@ public partial class PersonTeamSelector
 
     private void Update()
     {
-        var team = Model.Id > 0
+        PersonTeamEditModel team = Model.Id > 0
             ? Teams.Single(team => team.Id == Model.Id)
             : Teams.Single(team => team.TeamId == Model.TeamId && 
                            team.TeamRoleType.Id == Model.TeamRoleType.Id);

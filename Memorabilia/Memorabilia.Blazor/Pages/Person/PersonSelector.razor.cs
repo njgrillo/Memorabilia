@@ -37,10 +37,15 @@ public partial class PersonSelector
     }
 
     private bool _displayPeople;
-    private bool _filterPeople = true;
+
+    private bool _filterPeople 
+        = true;
+
     private bool _hasPeople;
+
     private string _itemTypeNameLabel 
         => $"Associate {ItemType.Name} with a Person";
+
     private string _itemTypeNameFilterLabel
         => $"Filter by {Sport?.Name}";
 

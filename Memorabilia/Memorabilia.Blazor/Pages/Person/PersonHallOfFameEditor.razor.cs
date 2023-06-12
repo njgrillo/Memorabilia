@@ -7,7 +7,8 @@ public partial class PersonHallOfFameEditor
         = new();
 
     [Parameter]
-    public SportLeagueLevel[] SportLeagueLevels { get; set; } = SportLeagueLevel.All;
+    public SportLeagueLevel[] SportLeagueLevels { get; set; } 
+        = SportLeagueLevel.All;
 
     protected PersonHallOfFameEditModel Model
         = new();
@@ -66,7 +67,7 @@ public partial class PersonHallOfFameEditor
         _canEditSportLeagueLevel = true;
         _canUpdateHallOfFame = false;
 
-        if (SportLeagueLevels.Count() == 1)
+        if (SportLeagueLevels.Length == 1)
             Model.SportLeagueLevelId = SportLeagueLevels.First().Id;
     }
 }

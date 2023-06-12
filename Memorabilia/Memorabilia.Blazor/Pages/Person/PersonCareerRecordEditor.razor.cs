@@ -42,7 +42,8 @@ public partial class PersonCareerRecordEditor
 
     private void Update()
     {
-        PersonCareerRecordEditModel record = CareerRecords.Single(record => record.RecordType.Id == Model.RecordType.Id);
+        PersonCareerRecordEditModel record 
+            = CareerRecords.Single(record => record.RecordType.Id == Model.RecordType.Id);
 
         record.Record = Model.Record;
 

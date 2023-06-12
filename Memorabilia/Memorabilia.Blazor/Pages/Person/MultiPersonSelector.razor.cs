@@ -26,12 +26,15 @@ public partial class MultiPersonSelector
     public Sport Sport { get; set; }
 
     private bool _displayPeople;
+
     private bool _filterPeople 
         = true;
 
     private bool _hasPeople;
+
     private string _itemTypeNameLabel 
         => $"Associate {ItemType.Name} with People";
+
     private string _itemTypeNameFilterLabel 
         => $"Filter by {Sport?.Name}";
 
@@ -53,7 +56,8 @@ public partial class MultiPersonSelector
 
     private void Add()
     {
-        PersonEditModel person = SelectedPeople.SingleOrDefault(person => person.Id == SelectedPerson.Id);
+        PersonEditModel person 
+            = SelectedPeople.SingleOrDefault(person => person.Id == SelectedPerson.Id);
 
         if (person != null)
             person.IsDeleted = false;

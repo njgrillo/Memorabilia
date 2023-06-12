@@ -3,8 +3,8 @@
 public partial class PersonAwardEditor
 {
     [Parameter]
-    public List<PersonAwardEditModel> Awards { get; set; } = 
-        new();
+    public List<PersonAwardEditModel> Awards { get; set; }
+        = new();
 
     [Parameter]
     public Sport[] Sports { get; set; }

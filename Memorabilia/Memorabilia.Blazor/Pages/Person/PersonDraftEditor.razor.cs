@@ -61,7 +61,8 @@ public partial class PersonDraftEditor
 
     private void Update()
     {
-        PersonDraftEditModel draft = Drafts.Single(draft => draft.Franchise.Id == Model.Franchise.Id);
+        PersonDraftEditModel draft 
+            = Drafts.Single(draft => draft.Franchise.Id == Model.Franchise.Id);
 
         draft.Franchise = Model.Franchise;
         draft.Year = Model.Year;
