@@ -13,6 +13,6 @@ public partial class SportEditor
         if (Id == 0)
             return;
 
-        EditModel = new SportEditModel(new SportModel(await QueryRouter.Send(new GetSport(Id))));
+        EditModel = (await QueryRouter.Send(new GetSport(Id))).ToEditModel();
     }
 }

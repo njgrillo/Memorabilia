@@ -18,7 +18,7 @@ public partial class PewterEditor
         if (Id == 0)
             return;
 
-        EditModel = new PewterEditModel(new PewterModel(await QueryRouter.Send(new GetPewter(Id))));
+        EditModel = (await QueryRouter.Send(new GetPewter(Id))).ToEditModel();
 
         _hasImage = !EditModel.FileName.IsNullOrEmpty();
     }

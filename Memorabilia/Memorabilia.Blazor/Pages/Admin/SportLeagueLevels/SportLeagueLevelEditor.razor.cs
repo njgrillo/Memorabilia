@@ -13,6 +13,6 @@ public partial class SportLeagueLevelEditor
         if (Id == 0)
             return;
 
-        EditModel = new SportLeagueLevelEditModel(new SportLeagueLevelModel(await QueryRouter.Send(new GetSportLeagueLevel(Id))));
+        EditModel = (await QueryRouter.Send(new GetSportLeagueLevel(Id))).ToEditModel();
     }
 }

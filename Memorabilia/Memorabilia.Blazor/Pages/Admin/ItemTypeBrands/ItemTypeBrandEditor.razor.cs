@@ -15,6 +15,6 @@ public partial class ItemTypeBrandEditor
         if (DisplayItemType)
             return;
 
-        EditModel = new ItemTypeBrandEditModel(new ItemTypeBrandModel(await QueryRouter.Send(new GetItemTypeBrand(Id))));
+        EditModel = (await QueryRouter.Send(new GetItemTypeBrand(Id))).ToEditModel();
     }
 }

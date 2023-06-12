@@ -16,6 +16,6 @@ public partial class TeamEditor : EditItem<TeamEditModel, TeamModel>
         if (Id == 0)
             return;
 
-        EditModel = new TeamEditModel(new TeamModel(await QueryRouter.Send(new GetTeam(Id))));
+        EditModel = (await QueryRouter.Send(new GetTeam(Id))).ToEditModel();
     }
 }

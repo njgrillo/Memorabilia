@@ -19,7 +19,7 @@ public record GetDashboard(int UserId)
             IEnumerable<Constant.DashboardItem> dashboardItems 
                 = user.DashboardItems.Select(userDashboard => Constant.DashboardItem.Find(userDashboard.DashboardItemId));
          
-            return new DashboardModel(dashboardItems.Select(x => new DashboardItemModel { DashboardItem = x })
+            return new DashboardModel(dashboardItems.Select(x => new Dashboard.DashboardItemModel { DashboardItem = x })
                                                     .OrderBy(dashboardItem => dashboardItem.DashboardItem.Name));
         }
     }

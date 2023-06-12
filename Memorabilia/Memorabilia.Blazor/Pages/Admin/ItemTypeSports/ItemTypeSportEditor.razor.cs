@@ -15,6 +15,6 @@ public partial class ItemTypeSportEditor
         if (DisplayItemType)
             return;
 
-        EditModel = new ItemTypeSportEditModel(new ItemTypeSportModel(await QueryRouter.Send(new GetItemTypeSport(Id))));
+        EditModel = (await QueryRouter.Send(new GetItemTypeSport(Id))).ToEditModel();
     }
 }

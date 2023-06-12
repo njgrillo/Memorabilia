@@ -13,6 +13,6 @@ public partial class ConferenceEditor
         if (Id == 0)
             return;
 
-        EditModel = new ConferenceEditModel(new ConferenceModel(await QueryRouter.Send(new GetConference(Id))));
+        EditModel = (await QueryRouter.Send(new GetConference(Id))).ToEditModel();
     }
 }

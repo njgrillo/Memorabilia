@@ -16,6 +16,6 @@ public partial class FranchiseEditor
         if (Id == 0)
             return;
 
-        EditModel = new FranchiseEditModel(new FranchiseModel(await QueryRouter.Send(new GetFranchise(Id))));
+        EditModel = (await QueryRouter.Send(new GetFranchise(Id))).ToEditModel();
     }
 }

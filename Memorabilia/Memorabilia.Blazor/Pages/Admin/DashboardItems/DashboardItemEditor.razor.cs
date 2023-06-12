@@ -15,6 +15,6 @@ public partial class DashboardItemEditor
         if (Id == 0)
             return;
 
-        EditModel = new DashboardItemEditModel(new DashboardItemModel(await QueryRouter.Send(new GetDashboardItem(Id))));
+        EditModel = (await QueryRouter.Send(new GetDashboardItem(Id))).ToEditModel();
     }
 }

@@ -20,7 +20,7 @@ public partial class PersonImageEditor
     {
         Entity.Person person = await QueryRouter.Send(new GetPerson(PersonId));
 
-        EditModel = new PersonImageEditModel(new PersonImageModel(person));
+        EditModel = person.ToImageEditModel();
 
         _hasImage = !EditModel.PersonImageFileName.IsNullOrEmpty();
     }

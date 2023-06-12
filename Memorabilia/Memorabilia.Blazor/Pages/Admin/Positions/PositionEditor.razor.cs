@@ -13,6 +13,6 @@ public partial class PositionEditor
         if (Id == 0)
             return;
 
-        EditModel = new PositionEditModel(new PositionModel(await QueryRouter.Send(new GetPosition(Id))));
+        EditModel = (await QueryRouter.Send(new GetPosition(Id))).ToEditModel();
     }
 }

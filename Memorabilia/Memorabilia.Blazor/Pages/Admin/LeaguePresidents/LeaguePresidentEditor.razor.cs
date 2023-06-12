@@ -13,6 +13,6 @@ public partial class LeaguePresidentEditor
         if (Id == 0)
             return;
 
-        EditModel = new LeaguePresidentEditModel(new LeaguePresidentModel(await QueryRouter.Send(new GetLeaguePresident(Id))));
+        EditModel = (await QueryRouter.Send(new GetLeaguePresident(Id))).ToEditModel();
     }
 }

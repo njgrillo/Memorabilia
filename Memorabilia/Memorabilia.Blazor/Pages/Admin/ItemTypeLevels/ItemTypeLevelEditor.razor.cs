@@ -15,6 +15,6 @@ public partial class ItemTypeLevelEditor
         if (DisplayItemType)
             return;
 
-        EditModel = new ItemTypeLevelEditModel(new ItemTypeLevelModel(await QueryRouter.Send(new GetItemTypeLevel(Id))));
+        EditModel = (await QueryRouter.Send(new GetItemTypeLevel(Id))).ToEditModel();
     }
 }

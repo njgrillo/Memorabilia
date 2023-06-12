@@ -14,9 +14,7 @@ public partial class LeagueTeamEditor
 
         Entity.TeamLeague[] leagues = await QueryRouter.Send(new GetTeamLeagues(TeamId));
 
-        EditModel.Leagues 
-            = leagues.Select(teamLeague => new TeamLeagueEditModel(new TeamLeagueModel(teamLeague)))
-                     .ToList();
+        EditModel.Leagues = leagues.ToEditModelList();
 
         EditModel.SportLeagueLevel = SportLeagueLevel.Find(SportLeagueLevelId);
     }    

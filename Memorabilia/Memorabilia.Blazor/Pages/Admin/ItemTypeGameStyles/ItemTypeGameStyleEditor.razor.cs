@@ -15,6 +15,6 @@ public partial class ItemTypeGameStyleEditor
         if (DisplayItemType)
             return;
 
-        EditModel = new ItemTypeGameStyleEditModel(new ItemTypeGameStyleModel(await QueryRouter.Send(new GetItemTypeGameStyle(Id))));
+        EditModel = (await QueryRouter.Send(new GetItemTypeGameStyle(Id))).ToEditModel();
     }
 }

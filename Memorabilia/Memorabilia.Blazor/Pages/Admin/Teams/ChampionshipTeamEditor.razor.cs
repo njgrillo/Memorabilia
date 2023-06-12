@@ -14,9 +14,7 @@ public partial class ChampionshipTeamEditor
 
         Entity.Champion[] champions = await QueryRouter.Send(new GetTeamChampionships(TeamId));
 
-        EditModel.Championships 
-            = champions.Select(teamChampionship => new TeamChampionshipEditModel(new TeamChampionshipModel(teamChampionship)))
-                       .ToList();
+        EditModel.Championships = champions.ToEditModelList();
 
         EditModel.SportLeagueLevel = SportLeagueLevel.Find(SportLeagueLevelId);
     }    

@@ -13,6 +13,6 @@ public partial class LeagueEditor
         if (Id == 0)
             return;
 
-        EditModel = new LeagueEditModel(new LeagueModel(await QueryRouter.Send(new GetLeague(Id))));
+        EditModel = (await QueryRouter.Send(new GetLeague(Id))).ToEditModel();
     }
 }

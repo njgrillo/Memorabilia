@@ -13,6 +13,6 @@ public partial class DivisionEditor
         if (Id == 0)
             return;
 
-        EditModel = new DivisionEditModel(new DivisionModel(await QueryRouter.Send(new GetDivision(Id))));
+        EditModel = (await QueryRouter.Send(new GetDivision(Id))).ToEditModel();
     }
 }

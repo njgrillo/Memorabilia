@@ -15,9 +15,7 @@ public partial class ConferenceTeamEditor
         Entity.TeamConference[] teamConferences 
             = await QueryRouter.Send(new GetTeamConferences(TeamId));
 
-        EditModel.Conferences 
-            = teamConferences.Select(teamConference => new TeamConferenceEditModel(new TeamConferenceModel(teamConference)))
-                             .ToList();
+        EditModel.Conferences = teamConferences.ToEditModelList();
 
         EditModel.SportLeagueLevel = SportLeagueLevel.Find(SportLeagueLevelId);           
     }    

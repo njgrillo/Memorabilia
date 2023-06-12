@@ -15,6 +15,6 @@ public partial class ItemTypeSizeEditor
         if (DisplayItemType)
             return;
 
-        EditModel = new ItemTypeSizeEditModel(new ItemTypeSizeModel(await QueryRouter.Send(new GetItemTypeSize(Id))));
+        EditModel = (await QueryRouter.Send(new GetItemTypeSize(Id))).ToEditModel();
     }
 }

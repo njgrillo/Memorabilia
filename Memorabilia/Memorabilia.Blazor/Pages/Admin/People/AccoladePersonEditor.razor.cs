@@ -28,7 +28,7 @@ public partial class AccoladePersonEditor
     protected async Task OnLoad()
     {
         PersonAccoladeModel model 
-            = new PersonAccoladeModel(await QueryRouter.Send(new GetPerson(PersonId)));
+            = new(await QueryRouter.Send(new GetPerson(PersonId)));
 
         EditModel = new PersonAccoladeEditModel(PersonId, model);
 

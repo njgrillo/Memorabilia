@@ -15,6 +15,6 @@ public partial class ItemTypeSpotEditor
         if (DisplayItemType)
             return;
 
-        EditModel = new ItemTypeSpotEditModel(new ItemTypeSpotModel(await QueryRouter.Send(new GetItemTypeSpot(Id))));
+        EditModel = (await QueryRouter.Send(new GetItemTypeSpot(Id))).ToEditModel();
     }
 }

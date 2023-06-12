@@ -29,7 +29,7 @@ public partial class TeamPersonEditor
     {
         Entity.Person person = await QueryRouter.Send(new GetPerson(PersonId));
 
-        EditModel = new PersonTeamsEditModel(new PersonTeamsModel(person));
+        EditModel = person.ToTeamEditModel();
 
         PerformValidation = true;
     }    

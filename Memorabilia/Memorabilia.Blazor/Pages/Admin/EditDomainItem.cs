@@ -22,7 +22,10 @@ public abstract class EditDomainItem<T>
 
     protected override void OnInitialized()
     {
-        EditModel = new DomainEditModel(Id, DomainTypeName, ImageFileName, NavigationPath);
+        EditModel = new DomainEditModel(Id, 
+                                        DomainTypeName, 
+                                        ImageFileName, 
+                                        NavigationPath);
     }
 
     protected async Task OnLoad(IRequest<Entity.DomainEntity> request)

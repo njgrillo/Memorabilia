@@ -1,4 +1,6 @@
-﻿namespace Memorabilia.Application.Features.Memorabilia;
+﻿using DashboardItemModel = Memorabilia.Application.Features.Dashboard.DashboardItemModel;
+
+namespace Memorabilia.Application.Features.Memorabilia;
 
 public class DashboardModel : Model
 {

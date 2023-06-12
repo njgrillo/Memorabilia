@@ -13,6 +13,6 @@ public partial class CommissionerEditor
         if (Id == 0)
             return;        
 
-        EditModel = new CommissionerEditModel(new CommissionerModel(await QueryRouter.Send(new GetCommissioner(Id))));
+        EditModel = (await QueryRouter.Send(new GetCommissioner(Id))).ToEditModel();
     }
 }

@@ -4,6 +4,7 @@ global using Framework.Library.Extension;
 global using Framework.Library.Handler;
 global using Framework.Library.Web;
 global using MediatR;
+global using Memorabilia.Application.Extensions;
 global using Memorabilia.Application.Features;
 global using Memorabilia.Application.Features.Admin;
 global using Memorabilia.Application.Features.Admin.AccomplishmentTypes;
