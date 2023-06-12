@@ -242,9 +242,9 @@ public class Autograph : Framework.Library.Domain.Entity.DomainEntity
 
     private void SetThroughTheMail(DateTime? sentDate, DateTime? receivedDate)
     {
-        var acquisitionType = Constants.AcquisitionType.Find(Acquisition?.AcquisitionTypeId ?? 0);
+        var acquisitionType = Constant.AcquisitionType.Find(Acquisition?.AcquisitionTypeId ?? 0);
 
-        if (acquisitionType != Constants.AcquisitionType.ThroughTheMail)
+        if (acquisitionType != Constant.AcquisitionType.ThroughTheMail)
         {
             if (ThroughTheMail != null)
                 ThroughTheMail = null;

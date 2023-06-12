@@ -1,14 +1,12 @@
-﻿using Memorabilia.Domain.Entities;
-
-namespace Memorabilia.Domain.Extensions;
+﻿namespace Memorabilia.Domain.Extensions;
 
 public static class PersonExtensions
 {
-    public static Champion[] Championships(this List<PersonTeam> teams, 
-        Constants.Sport sport = null,
-        Constants.Occupation occupation = null)
+    public static Entity.Champion[] Championships(this List<Entity.PersonTeam> teams, 
+                                                  Constant.Sport sport = null,
+                                                  Constant.Occupation occupation = null)
     {
-        PersonTeam[] teamsFiltered = teams.Filter(sport, occupation);
+        Entity.PersonTeam[] teamsFiltered = teams.Filter(sport, occupation);
 
         return teamsFiltered.SelectMany(team => team.Team.Championships)
                             .Where(championship => teamsFiltered.Any(team => team.TeamId == championship.TeamId && team.BeginYear <= championship.Year && (!team.EndYear.HasValue || team.EndYear >= championship.Year)))
@@ -16,138 +14,139 @@ public static class PersonExtensions
                             .ToArray();
     }
 
-    public static bool HasChampionships(this List<PersonTeam> teams, 
-        Constants.Sport sport = null,
-        Constants.Occupation occupation = null)
-    {
-        return Championships(teams, sport, occupation).Any();
-    }
+    public static bool HasChampionships(this List<Entity.PersonTeam> teams, 
+                                        Constant.Sport sport = null,
+                                        Constant.Occupation occupation = null)
+        => Championships(teams, sport, occupation).Any();
 
-    public static bool HasService(this SportService service)
-    {
-        return service != null
-            && (service.FreeAgentSigningDate.HasValue
-                || service.DebutDate.HasValue
-                || service.LastAppearanceDate.HasValue);
-    }
+    public static bool HasService(this Entity.SportService service)
+        => service != null&& 
+           (service.FreeAgentSigningDate.HasValue || 
+            service.DebutDate.HasValue || 
+            service.LastAppearanceDate.HasValue);
 
-    public static PersonTeam[] Filter(this List<PersonTeam> teams, 
-        Constants.Sport sport = null,
-        Constants.Occupation occupation = null)
+    public static Entity.PersonTeam[] Filter(this List<Entity.PersonTeam> teams, 
+                                             Constant.Sport sport = null,
+                                             Constant.Occupation occupation = null)
     {
-        Constants.TeamRoleType[] validTeamRoleTypes = occupation != null
-            ? Constants.TeamRoleType.ValidTypes(occupation)
-            : Array.Empty<Constants.TeamRoleType>();
+        Constant.TeamRoleType[] validTeamRoleTypes = occupation != null
+            ? Constant.TeamRoleType.ValidTypes(occupation)
+            : Array.Empty<Constant.TeamRoleType>();
 
-        return teams.Where(team => (sport == null || sport.Id == team.Team.Franchise.SportLeagueLevel.SportId)
-                                && (occupation == null || validTeamRoleTypes.Contains(Constants.TeamRoleType.Find(team.TeamRoleTypeId))))
+        return teams.Where(team => (sport == null || sport.Id == team.Team.Franchise.SportLeagueLevel.SportId) && 
+                                   (occupation == null || validTeamRoleTypes.Contains(Constant.TeamRoleType.Find(team.TeamRoleTypeId))))
                     .ToArray();
     }
 
-    public static PersonAccomplishment[] Filter(this List<PersonAccomplishment> accomplishments, 
-        Constants.Sport sport = null,
-        Constants.Occupation occupation = null)
+    public static Entity.PersonAccomplishment[] Filter(this List<Entity.PersonAccomplishment> accomplishments, 
+                                                       Constant.Sport sport = null,
+                                                       Constant.Occupation occupation = null)
     {
-        if (occupation != null && occupation != Constants.Occupation.Athlete)
-            return Array.Empty<PersonAccomplishment>();
+        if (occupation != null && occupation != Constant.Occupation.Athlete)
+            return Array.Empty<Entity.PersonAccomplishment>();
 
-        Constants.AccomplishmentType[] validTypes = sport != null
-            ? Constants.AccomplishmentType.GetAll(sport)
-            : Array.Empty<Constants.AccomplishmentType>();
+        Constant.AccomplishmentType[] validTypes = sport != null
+            ? Constant.AccomplishmentType.GetAll(sport)
+            : Array.Empty<Constant.AccomplishmentType>();
 
-        return accomplishments.Where(accomplishment => sport == null || validTypes.Contains(Constants.AccomplishmentType.Find(accomplishment.AccomplishmentTypeId)))
+        return accomplishments.Where(accomplishment => sport == null || 
+                                     validTypes.Contains(Constant.AccomplishmentType.Find(accomplishment.AccomplishmentTypeId)))
                               .ToArray();
     }
 
-    public static AllStar[] Filter(this List<AllStar> allStars, 
-        Constants.Sport sport = null,
-        Constants.Occupation occupation = null)
+    public static Entity.AllStar[] Filter(this List<Entity.AllStar> allStars, 
+                                          Constant.Sport sport = null,
+                                          Constant.Occupation occupation = null)
     {
-        if (occupation != null && occupation != Constants.Occupation.Athlete)
-            return Array.Empty<AllStar>();
+        if (occupation != null && 
+            occupation != Constant.Occupation.Athlete)
+            return Array.Empty<Entity.AllStar>();
 
-        return allStars.Where(allStar => sport == null || sport.Id == allStar.SportId)
+        return allStars.Where(allStar => sport == null || 
+                              sport.Id == allStar.SportId)
                        .ToArray();
     }
 
-    public static Draft[] Filter(this List<Draft> drafts, 
-        Constants.Sport sport = null)
-    {
-        return drafts.Where(draft => sport == null || draft.Franchise.SportLeagueLevel.SportId == sport.Id)
-                     .ToArray();
-    }
+    public static Entity.Draft[] Filter(this List<Entity.Draft> drafts, 
+                                        Constant.Sport sport = null)
+        => drafts.Where(draft => sport == null || 
+                        draft.Franchise.SportLeagueLevel.SportId == sport.Id)
+                 .ToArray();
 
-    public static PersonAward[] Filter(this List<PersonAward> awards, 
-        Constants.Sport sport = null,
-        Constants.Occupation occupation = null)
+    public static Entity.PersonAward[] Filter(this List<Entity.PersonAward> awards, 
+                                              Constant.Sport sport = null,
+                                              Constant.Occupation occupation = null)
     {
-        Constants.AwardType[] validTypes = Array.Empty<Constants.AwardType>();
+        Constant.AwardType[] validTypes = Array.Empty<Constant.AwardType>();
 
         if (sport != null && occupation != null)
-            validTypes = Constants.AwardType.GetAll(sport, occupation);
+            validTypes = Constant.AwardType.GetAll(sport, occupation);
 
-        return awards.Where(award => sport == null || validTypes.Contains(Constants.AwardType.Find(award.AwardTypeId)))
+        return awards.Where(award => sport == null || 
+                            validTypes.Contains(Constant.AwardType.Find(award.AwardTypeId)))
                      .ToArray();
     }
 
-    public static HallOfFame[] Filter(this List<HallOfFame> hallOfFames, 
-        Constants.Sport sport = null)
+    public static Entity.HallOfFame[] Filter(this List<Entity.HallOfFame> hallOfFames, 
+                                             Constant.Sport sport = null)
+        => hallOfFames.Where(hof => sport == null || 
+                             sport.Id == Constant.SportLeagueLevel.Find(hof.SportLeagueLevelId).Sport.Id)
+                      .ToArray();
+
+    public static Entity.FranchiseHallOfFame[] Filter(this List<Entity.FranchiseHallOfFame> hallOfFames, 
+                                                      Constant.Sport sport = null)
+        => hallOfFames.Where(hof => sport == null || 
+                             sport.Id == hof.Franchise.SportLeagueLevel.SportId)
+                      .ToArray();
+
+    public static Entity.Leader[] Filter(this List<Entity.Leader> leaders, 
+                                         Constant.Sport sport = null,
+                                         Constant.Occupation occupation = null)
     {
-        return hallOfFames.Where(hof => sport == null || sport.Id == Constants.SportLeagueLevel.Find(hof.SportLeagueLevelId).Sport.Id)
-                          .ToArray();
-    }
+        if (occupation != null && 
+            occupation != Constant.Occupation.Athlete)
+            return Array.Empty<Entity.Leader>();   
 
-    public static FranchiseHallOfFame[] Filter(this List<FranchiseHallOfFame> hallOfFames, 
-        Constants.Sport sport = null)
-    {
-        return hallOfFames.Where(hof => sport == null || sport.Id == hof.Franchise.SportLeagueLevel.SportId)
-                          .ToArray();
-    }
+        Constant.LeaderType[] validTypes = sport != null
+            ? Constant.LeaderType.GetAll(sport)
+            : Array.Empty<Constant.LeaderType>();
 
-    public static Leader[] Filter(this List<Leader> leaders, 
-        Constants.Sport sport = null,
-        Constants.Occupation occupation = null)
-    {
-        if (occupation != null && occupation != Constants.Occupation.Athlete)
-            return Array.Empty<Leader>();   
-
-        Constants.LeaderType[] validTypes = sport != null
-            ? Constants.LeaderType.GetAll(sport)
-            : Array.Empty<Constants.LeaderType>();
-
-        return leaders.Where(leader => sport == null || validTypes.Contains(Constants.LeaderType.Find(leader.LeaderTypeId)))
+        return leaders.Where(leader => sport == null || 
+                             validTypes.Contains(Constant.LeaderType.Find(leader.LeaderTypeId)))
                       .ToArray();
     }
 
-    public static PersonPosition[] Filter(this List<PersonPosition> positions, 
-        Constants.Sport sport = null)
+    public static Entity.PersonPosition[] Filter(this List<Entity.PersonPosition> positions, 
+                                                 Constant.Sport sport = null)
+        => positions.Where(position => sport == null || 
+                           position.Position.SportId == sport.Id)
+                    .ToArray();
+
+    public static Entity.CareerRecord[] Filter(this List<Entity.CareerRecord> careerRecords, 
+                                               Constant.Sport sport = null,
+                                               Constant.Occupation occupation = null)
     {
-        return positions.Where(position => sport == null || position.Position.SportId == sport.Id)
-                        .ToArray();
-    }
+        //TODO: Filter by occupation
 
-    public static CareerRecord[] Filter(this List<CareerRecord> careerRecords, 
-        Constants.Sport sport = null,
-        Constants.Occupation occupation = null)
-    {
-        //Filter by occupation
+        Constant.RecordType[] validTypes = sport != null
+            ? Constant.RecordType.GetAll(sport)
+            : Array.Empty<Constant.RecordType>();
 
-        Constants.RecordType[] validTypes = sport != null
-            ? Constants.RecordType.GetAll(sport)
-            : Array.Empty<Constants.RecordType>();
-
-        return careerRecords.Where(record => sport == null || validTypes.Contains(Constants.RecordType.Find(record.RecordTypeId)))
+        return careerRecords.Where(record => sport == null || 
+                                   validTypes.Contains(Constant.RecordType.Find(record.RecordTypeId)))
                             .ToArray();
     }
 
-    public static SingleSeasonRecord[] Filter(this List<SingleSeasonRecord> singleSeasonRecords, 
-        Constants.Sport sport = null)
+    public static Entity.SingleSeasonRecord[] Filter(this List<Entity.SingleSeasonRecord> singleSeasonRecords, 
+                                                     Constant.Sport sport = null)
     {
-        Constants.RecordType[] validTypes = sport != null
-            ? Constants.RecordType.GetAll(sport)
-            : Array.Empty<Constants.RecordType>();
+        Constant.RecordType[] validTypes 
+            = sport != null
+                ? Constant.RecordType.GetAll(sport)
+                : Array.Empty<Constant.RecordType>();
 
-        return singleSeasonRecords.Where(record => sport == null || validTypes.Contains(Constants.RecordType.Find(record.RecordTypeId)))
+        return singleSeasonRecords.Where(record => sport == null || 
+                                         validTypes.Contains(Constant.RecordType.Find(record.RecordTypeId)))
                                   .ToArray();
     }
 }
