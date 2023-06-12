@@ -7,9 +7,9 @@ public partial class SizePieChart : DashboardChartItem
 
     protected override async Task OnInitializedAsync()
     {
-        var viewModel = await Mediator.Send(new GetSizeData(UserId));
+        DashboardChartModel model = await Mediator.Send(new GetSizeData(UserId));
 
-        Data = viewModel.Data;
-        Labels = viewModel.Labels;
+        Data = model.Data;
+        Labels = model.Labels;
     }
 }

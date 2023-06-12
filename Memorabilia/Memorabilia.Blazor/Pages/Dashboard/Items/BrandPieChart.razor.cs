@@ -7,9 +7,9 @@ public partial class BrandPieChart : DashboardChartItem
 
     protected override async Task OnInitializedAsync()
     {
-        var viewModel = await Mediator.Send(new GetBrandData(UserId));
+        DashboardChartModel model = await Mediator.Send(new GetBrandData(UserId));
 
-        Data = viewModel.Data;
-        Labels = viewModel.Labels;
+        Data = model.Data;
+        Labels = model.Labels;
     }
 }

@@ -7,9 +7,9 @@ public partial class SportLeagueLevelDonutChart : DashboardChartItem
 
     protected override async Task OnInitializedAsync()
     {
-        var viewModel = await Mediator.Send(new GetSportLeagueLevelData(UserId));
+        DashboardChartModel model = await Mediator.Send(new GetSportLeagueLevelData(UserId));
 
-        Data = viewModel.Data;
-        Labels = viewModel.Labels;
+        Data = model.Data;
+        Labels = model.Labels;
     }
 }

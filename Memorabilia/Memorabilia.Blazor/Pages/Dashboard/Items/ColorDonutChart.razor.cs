@@ -7,9 +7,9 @@ public partial class ColorDonutChart : DashboardChartItem
 
     protected override async Task OnInitializedAsync()
     {
-        var viewModel = await Mediator.Send(new GetColorData(UserId));
+        DashboardChartModel model = await Mediator.Send(new GetColorData(UserId));
 
-        Data = viewModel.Data;
-        Labels = viewModel.Labels;
+        Data = model.Data;
+        Labels = model.Labels;
     }
 }

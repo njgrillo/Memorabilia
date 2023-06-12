@@ -7,9 +7,9 @@ public partial class EstimatedValueDonutChart : DashboardChartItem
 
     protected override async Task OnInitializedAsync()
     {
-        var viewModel = await Mediator.Send(new GetEstimatedValueData(UserId));
+        DashboardChartModel model = await Mediator.Send(new GetEstimatedValueData(UserId));
 
-        Data = viewModel.Data;
-        Labels = viewModel.Labels;
+        Data = model.Data;
+        Labels = model.Labels;
     }
 }

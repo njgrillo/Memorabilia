@@ -8,24 +8,21 @@ public partial class ViewDashboard
     [Parameter]
     public int UserId { get; set; }
 
-    private DashboardModel _viewModel = new();
+    protected DashboardModel Model 
+        = new();
 
     protected async Task OnLoad()
     {
-        _viewModel = await QueryRouter.Send(new GetDashboard(UserId));
+        Model = await QueryRouter.Send(new GetDashboard(UserId));
     }
 
     private static Type GetComponent(DashboardItem dashboardItem)
-    {
-        return Type.GetType($"Memorabilia.Blazor.Pages.Dashboard.Items.{dashboardItem}");
-    }
+        => Type.GetType($"Memorabilia.Blazor.Pages.Dashboard.Items.{dashboardItem}");
 
     private Dictionary<string, object> GetParameters(DashboardItem dashboardItem)
-    {
-        return new Dictionary<string, object>
-        {
-            { "DashboardItem", dashboardItem },
-            { "UserId", UserId }
-        };
-    }
+        => new Dictionary<string, object>
+            {
+                { "DashboardItem", dashboardItem },
+                { "UserId", UserId }
+            };
 }

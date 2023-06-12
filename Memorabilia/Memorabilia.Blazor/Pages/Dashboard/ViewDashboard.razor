@@ -1,9 +1,9 @@
 ﻿<Page OnLoad="OnLoad">
     <Content>
-        <PageHeader PageTitle="@_viewModel.PageTitle" />
+        <PageHeader PageTitle="@Model.PageTitle" />
         <div class="row">
             <Iterations Context="userDashboardItem" 
-                        Items="_viewModel.UserDashboardItems">
+                        Items="Model.UserDashboardItems">
                 <div class="col-4">
                     <DynamicComponent Parameters="@(GetParameters(userDashboardItem.DashboardItem))"
                                       Type="@(GetComponent(userDashboardItem.DashboardItem))" />

@@ -7,9 +7,9 @@ public partial class MemorabiliaPurchaseTypePieChart : DashboardChartItem
 
     protected override async Task OnInitializedAsync()
     {
-        var viewModel = await Mediator.Send(new GetMemorabiliaPurchaseTypeData(UserId));
+        DashboardChartModel model = await Mediator.Send(new GetMemorabiliaPurchaseTypeData(UserId));
 
-        Data = viewModel.Data;
-        Labels = viewModel.Labels;
+        Data = model.Data;
+        Labels = model.Labels;
     }
 }
