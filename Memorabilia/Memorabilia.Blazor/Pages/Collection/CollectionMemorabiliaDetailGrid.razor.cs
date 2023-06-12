@@ -27,21 +27,27 @@ public partial class CollectionMemorabiliaDetailGrid
     public EventCallback<List<MemorabiliaModel>> MemorabiliaSelected { get; set; }
 
     [Parameter]
-    public List<MemorabiliaModel> SelectedMemorabilia { get; set; } = new();
+    public List<MemorabiliaModel> SelectedMemorabilia { get; set; } 
+        = new();
 
     [Parameter]
     public int UserId { get; set; }
 
-    protected MemorabiliasModel Model = new();
+    protected MemorabiliasModel Model 
+        = new();
 
     protected string SelectAllButtonText
         => Model.MemorabiliaItems.Count == SelectedMemorabilia.Count
            ? "Deselect All"
            : "Select All";
 
-    private MemorabiliaSearchCriteria _filter = new();
+    private MemorabiliaSearchCriteria _filter 
+        = new();
+
     private bool _resetPaging;
-    private MudTable<MemorabiliaModel> _table = new();
+
+    private MudTable<MemorabiliaModel> _table
+        = new();
 
     protected override async Task OnParametersSetAsync()
     {
@@ -94,7 +100,8 @@ public partial class CollectionMemorabiliaDetailGrid
 
     protected async Task OnRemoveSelected()
     {
-        int[] deletedIds = SelectedMemorabilia.Select(item => item.Id).ToArray();
+        int[] deletedIds = SelectedMemorabilia.Select(item => item.Id)
+                                              .ToArray();
 
         if (!deletedIds.Any())
             return;
@@ -113,7 +120,10 @@ public partial class CollectionMemorabiliaDetailGrid
 
     protected async Task RemoveMemorabiliaItem(params int[] ids)
     {
-        MemorabiliaModel[] itemsToDelete = Model.MemorabiliaItems.Where(item => ids.Contains(item.Id)).ToArray();
+        MemorabiliaModel[] itemsToDelete 
+            = Model.MemorabiliaItems
+                   .Where(item => ids.Contains(item.Id))
+                   .ToArray();
 
         await CommandRouter.Send(new RemoveCollectionMemorabilia(CollectionId, ids));
 
@@ -138,9 +148,11 @@ public partial class CollectionMemorabiliaDetailGrid
 
     private void ToggleChildContent(int memorabiliaItemId)
     {
-        MemorabiliaModel memorabiliaItem = Model.MemorabiliaItems.Single(item => item.Id == memorabiliaItemId);
+        MemorabiliaModel memorabiliaItem 
+            = Model.MemorabiliaItems.Single(item => item.Id == memorabiliaItemId);
 
         memorabiliaItem.DisplayAutographDetails = !memorabiliaItem.DisplayAutographDetails;
+
         memorabiliaItem.ToggleIcon = memorabiliaItem.DisplayAutographDetails
             ? Icons.Material.Filled.ExpandLess
             : Icons.Material.Filled.ExpandMore;

@@ -17,7 +17,8 @@ public partial class ViewCollections
     [Parameter]
     public int UserId { get; set; }
 
-    protected CollectionsModel Model = new();
+    protected CollectionsModel Model 
+        = new();
 
     protected async Task OnLoad()
     {
@@ -39,13 +40,15 @@ public partial class ViewCollections
 
     protected async Task Delete(int id)
     {
-        var deletedItem = Model.Collections.Single(collection => collection.Id == id);
-        var viewModel = new CollectionEditModel(deletedItem)
+        CollectionModel deletedItem 
+            = Model.Collections.Single(collection => collection.Id == id);
+
+        var model = new CollectionEditModel(deletedItem)
         {
             IsDeleted = true
         };
 
-        await CommandRouter.Send(new SaveCollection.Command(viewModel));
+        await CommandRouter.Send(new SaveCollection.Command(model));
 
         Model.Collections.Remove(deletedItem);
 

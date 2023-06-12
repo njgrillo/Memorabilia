@@ -28,9 +28,11 @@ public partial class CollectionEditor
 
     protected bool IsDetailView = true;
 
-    protected CollectionEditModel Model = new();
+    protected CollectionEditModel Model 
+        = new();
 
-    protected List<MemorabiliaModel> SelectedMemorabilia = new();
+    protected List<MemorabiliaModel> SelectedMemorabilia 
+        = new();
 
     protected ValidationResult ValidationResult { get; set; }
 
@@ -39,7 +41,8 @@ public partial class CollectionEditor
         ? ValidationResult.Errors.Select(error => new Alert(error.ErrorMessage, Severity.Error)).ToArray()
         : Array.Empty<Alert>();     
 
-    private MemorabiliaSearchCriteria _filter = new();
+    private MemorabiliaSearchCriteria _filter 
+        = new();
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
@@ -91,7 +94,7 @@ public partial class CollectionEditor
 
         var items = (List<MemorabiliaModel>)result.Data;
 
-        var collectionMemorabilias
+        List<CollectionMemorabiliaEditModel> collectionMemorabilias
             = items.Select(item => new CollectionMemorabiliaEditModel
             {
                 CollectionId = Model.Id,
