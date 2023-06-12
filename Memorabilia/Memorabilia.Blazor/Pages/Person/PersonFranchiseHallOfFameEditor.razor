@@ -1,0 +1,61 @@
+﻿<DivRowCol3>
+    <Content>
+        <FranchiseHallOfFameAutoComplete Disabled="@(!_canEditFranchise)"
+                                         SelectedValue="Model.FranchiseHallOfFameType"
+                                         SelectionChanged="(p) => Model.FranchiseHallOfFameType = p"
+                                         Sports="Sports" />
+    </Content>
+    <ContentColumn2>
+        <NullableIntField Label="Induction Year"
+                          Value="Model.Year"
+                          ValueChanged="@((p) => Model.Year = p)" />
+    </ContentColumn2>
+</DivRowCol3>
+<DivLeftAlign>
+    <Content>
+        <DivHidden Hidden="@(!_canAdd)">
+            <Content>
+                <AddButton OnClick="Add" />
+            </Content>
+        </DivHidden>
+        <DivHidden Hidden="@(!_canUpdate)">
+            <Content>
+                <UpdateButton OnClick="Update" />
+            </Content>
+        </DivHidden>
+    </Content>
+</DivLeftAlign>
+<DivRowCol6>
+    <Content>
+         <MudTable Bordered="false"
+                   Dense="false" 
+                   Hover="true"
+                   Items="@FranchiseHallOfFames.Where(hof => !hof.IsDeleted).ToList()"    
+                   Striped="true">
+            <HeaderContent>
+                <MudTh>Franchise</MudTh>
+                <MudTh>HOF</MudTh>
+                <MudTh>Year</MudTh>
+                <MudTh></MudTh>
+            </HeaderContent>
+            <RowTemplate>
+                <MudTd DataLabel="Franchise">@context.FranchiseName</MudTd>
+                <MudTd DataLabel="HOF">@context.FranchiseHallOfFameTypeName</MudTd>
+                <MudTd DataLabel="Year">@context.Year</MudTd>
+                <MudTd DataLabel="">
+                    <MudTooltip Text="Edit">
+                        <MudFab Color="MudBlazor.Color.Primary"                                
+                                Icon="@Icons.Material.Outlined.ModeEditOutline"
+                                OnClick="@(_ => Edit(context))" />
+                    </MudTooltip> 
+                    <MudTooltip Text="Delete">
+                        <MudFab Color="MudBlazor.Color.Secondary"
+                                Icon="@Icons.Material.Outlined.DeleteOutline"
+                                OnClick="@(_ => context.IsDeleted = true)" />
+                    </MudTooltip>  
+                </MudTd>
+            </RowTemplate>
+        </MudTable>
+    </Content>
+</DivRowCol6>
+

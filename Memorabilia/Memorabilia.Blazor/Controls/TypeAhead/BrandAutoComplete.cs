@@ -3,7 +3,8 @@
 public class BrandAutoComplete : DomainEntityAutoComplete<Brand>
 {
     [Parameter]
-    public Brand[] Brands { get; set; } = Array.Empty<Brand>();
+    public Brand[] Brands { get; set; }
+        = Array.Empty<Brand>();
 
     private bool _loaded;
 
@@ -27,7 +28,8 @@ public class BrandAutoComplete : DomainEntityAutoComplete<Brand>
 
     private void LoadItems()
     {
-        Items = Brands != null && Brands.Any()
+        Items = Brands != null && 
+                Brands.Any()
             ? Brands
             : Brand.All;
     }

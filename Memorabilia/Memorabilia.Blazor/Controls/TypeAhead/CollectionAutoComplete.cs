@@ -5,7 +5,8 @@ public class CollectionAutoComplete : Autocomplete<Entity.Collection>
     [Parameter]
     public int UserId { get; set; }
 
-    protected Entity.Collection[] Items { get; set; } = Array.Empty<Entity.Collection>();
+    protected Entity.Collection[] Items { get; set; } 
+        = Array.Empty<Entity.Collection>();
 
     protected override async Task OnInitializedAsync()
     {
@@ -14,20 +15,13 @@ public class CollectionAutoComplete : Autocomplete<Entity.Collection>
     }
 
     protected override string GetItemSelectedText(Entity.Collection item)
-    {
-        return item.Name;
-    }
+        => item.Name;
 
     protected override string GetItemText(Entity.Collection item)
-    {
-        return item.Name;
-    }
+        => item.Name;
 
     public override async Task<IEnumerable<Entity.Collection>> Search(string searchText)
-    {
-        if (searchText.IsNullOrEmpty())
-            return Array.Empty<Entity.Collection>();
-
-        return await Task.FromResult(Items.Where(item => item.Name.Contains(searchText, StringComparison.OrdinalIgnoreCase)));
-    }
+        => !searchText.IsNullOrEmpty()
+        ? await Task.FromResult(Items.Where(item => item.Name.Contains(searchText, StringComparison.OrdinalIgnoreCase)))
+        : Array.Empty<Entity.Collection>();  
 }

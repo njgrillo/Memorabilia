@@ -1,0 +1,94 @@
+﻿@typeparam TItem
+
+<DivRowCol3 HideColumn1="@(!DisplayItemTypeBrand)"
+            HideColumn2="@(!DisplayItemTypeSize)"
+            HideColumn3="@(!DisplayItemTypeLevel)">
+    <Content>
+        <ItemTypeBrandDropDown ItemType="ViewModel.ItemType"
+                               SelectedValue="ViewModel.BrandId"
+                               SelectionChanged="(p) => ViewModel.BrandId = p" />        
+    </Content>
+    <ContentColumn2>
+        <ItemTypeSizeDropDown ItemType="ViewModel.ItemType"
+                              SelectedValue="@ViewModel.SizeId"
+                              SelectionChanged="(p) => ViewModel.SizeId = p" />
+    </ContentColumn2>
+    <ContentColumn3>
+        <ItemTypeLevelDropDown ItemType="ViewModel.ItemType"
+                               SelectedValue="ViewModel.LevelTypeId"
+                               SelectionChanged="(p) => ViewModel.LevelTypeId = p" />
+    </ContentColumn3>
+    <ContentColumn4>
+        <Condition Evaluation="DisplaySingleSportSelector">
+            <Match>
+                <SportDropDown ItemType="@ViewModel.ItemType" 
+                               SelectedValue="@ViewModel.SportId"
+                               SelectionChanged="(p) => ViewModel.SportId = p" />
+            </Match>
+        </Condition>
+        <Condition Evaluation="DisplayMultiSportSelector">
+            <Match>
+                <SportDropDown MultiSelect="true"
+                               SelectedItems="ViewModel.SportIds"
+                               SelectedItemsChanged="(p) => ViewModel.SportIds = p.ToList()" />
+            </Match>
+        </Condition>
+    </ContentColumn4>
+</DivRowCol3>
+<DivRowCol3 Hidden="@(!DisplayItemTypeGameStyle)" 
+            HideColumn1="@(!ViewModel.DisplayGameStyleType)"
+            HideColumn2="@(!ViewModel.DisplayGameDate)">
+    <Content>
+        <ItemTypeGameStyleDropDown ItemType="ViewModel.ItemType"
+                                   Label="@GameStyleTypeDisplayText"
+                                   SelectedValue="ViewModel.GameStyleTypeId"
+                                   SelectionChanged="(p) => ViewModel.GameStyleTypeId = p" />
+    </Content>
+    <ContentColumn2>
+        <MudDatePicker @bind-Date="ViewModel.GameDate"
+                       DateFormat="MM/dd/yyyy"
+                       Editable="true"
+                       Label="@GameDateDisplayText"
+                       Mask="@(new DateMask("MM/dd/yyyy"))"
+                       Variant="Variant.Outlined" />
+    </ContentColumn2>
+</DivRowCol3>
+@AdditionalContent
+<Condition Evaluation="DisplaySinglePersonSelector">
+    <Match>
+        <PersonSelector CanFilterBySport="CanFilterPersonBySport"
+                        CanToggle="CanTogglePersonSelector"
+                        ItemType="ViewModel.ItemType"
+                        SelectedPerson="ViewModel.Person"
+                        SelectedPersonChanged="(p) => ViewModel.Person = p"
+                        Sport="ViewModel.Sport" />
+    </Match>
+</Condition>
+<Condition Evaluation="DisplayMultiPersonSelector">
+    <Match>
+        <MultiPersonSelector CanToggle="true"
+                             ItemType="ViewModel.ItemType"
+                             SelectedPeople="ViewModel.People"
+                             SelectedPeopleChanged="@((people) => ViewModel.People = people)" />
+    </Match>
+</Condition>
+<Condition Evaluation="DisplaySingleTeamSelector">
+    <Match>
+        <DivRowCol6>
+            <Content>
+                <TeamAutoComplete SelectedValue="ViewModel.Team"
+                                  SelectionChanged="(p) => ViewModel.Team = p"
+                                  Sport="ViewModel.Sport" 
+                                  SportLeagueLevel="ViewModel.SportLeagueLevel" />
+            </Content>
+        </DivRowCol6>
+    </Match>
+</Condition>
+<Condition Evaluation="DisplayMultiTeamSelector">
+    <Match>
+        <MultiTeamSelector CanToggle="CanToggleMultiTeamSelector"
+                           ItemType="ViewModel.ItemType"
+                           SelectedTeams="ViewModel.Teams"
+                           SelectedTeamsChanged="@((teams) => ViewModel.Teams = teams)" />
+    </Match>
+</Condition>

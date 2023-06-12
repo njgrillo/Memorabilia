@@ -1,0 +1,76 @@
+﻿<DivRowCol3>
+    <Content>
+        <TextField HelperText="Ex. 1999 or 1999-2002 or 2003, 2005-2008" 
+                   Label="Years"
+                   SelectedText="@_years"
+                   SelectedTextChanged="@((p) => _years = p)" />
+    </Content>
+    <ContentColumn2>
+        <Condition Evaluation="@DisplaySportLeagueLevels">
+            <Match>
+                <SportLeagueLevelDropDown SelectedValue="Model.SportLeagueLevelId"
+                                          SelectionChanged="(p) => Model.SportLeagueLevelId = p" />
+            </Match>
+        </Condition>
+    </ContentColumn2>
+    <ContentColumn3>
+        <Condition Evaluation="@DisplaySports">
+            <Match>
+                <SportAutoComplete SelectedValue="Model.Sport"
+                                   SelectionChanged="(p) => Model.Sport = p" />
+            </Match>
+        </Condition>
+    </ContentColumn3>
+</DivRowCol3>
+<DivLeftAlign>
+    <Content>
+        <AddButton OnClick="Add" />
+    </Content>
+</DivLeftAlign>
+<DivRowCol6>
+    <Content>
+         <MudTable Bordered="false"
+                   Dense="false" 
+                   Hover="true"
+                   Items="@AllStars.Where(allStar => !allStar.IsDeleted).ToList()"
+                   Striped="true">
+            <HeaderContent>
+                <MudTh>Year</MudTh>
+                <Condition Evaluation="@DisplaySportLeagueLevels">
+                    <Match>
+                        <MudTh>Sport League Level</MudTh>
+                    </Match>
+                </Condition>
+                <Condition Evaluation="@DisplaySports">
+                    <Match>
+                        <MudTh>Sport</MudTh>
+                    </Match>
+                </Condition>
+                <MudTh></MudTh>
+            </HeaderContent>
+            <RowTemplate>
+                <MudTd DataLabel="Year">@context.Year</MudTd>
+                <Condition Evaluation="@DisplaySportLeagueLevels">
+                    <Match>
+                        <MudTd DataLabel="Sport League Level">@context.SportLeagueLevelName</MudTd>
+                    </Match>
+                </Condition>
+                <Condition Evaluation="@DisplaySports">
+                    <Match>
+                        <MudTd DataLabel="Sport">@context.SportName</MudTd>
+                    </Match>
+                </Condition>
+                <MudTd DataLabel="">
+                    <MudTooltip Text="Delete">
+                        <MudFab Color="MudBlazor.Color.Secondary"
+                                Icon="@Icons.Material.Outlined.DeleteOutline"
+                                OnClick="@(_ => context.IsDeleted = true)" />
+                    </MudTooltip>  
+                </MudTd>
+            </RowTemplate>
+            <PagerContent>
+                <MudTablePager />
+            </PagerContent>
+        </MudTable>
+    </Content>
+</DivRowCol6>

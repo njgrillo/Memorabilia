@@ -1,6 +1,4 @@
-﻿
-
-namespace Memorabilia.Blazor.Controls;
+﻿namespace Memorabilia.Blazor.Controls;
 
 public partial class GridEditButton : ComponentBase
 {

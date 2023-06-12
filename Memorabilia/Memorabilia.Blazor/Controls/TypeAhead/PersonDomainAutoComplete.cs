@@ -37,7 +37,8 @@ public class PersonDomainAutoComplete
     private async Task LoadItems()
     {
         Entity.Person[] people 
-            = await QueryRouter.Send(new GetPeople(SportId: Sport?.Id ?? null, SportLeagueLevelId: SportLeagueLevelId > 0 ? SportLeagueLevelId : null));
+            = await QueryRouter.Send(new GetPeople(SportId: Sport?.Id ?? null, 
+                                                   SportLeagueLevelId: SportLeagueLevelId.ToNullableInt()));
 
         Items = people.Select(person => new PersonModel(person));
     }

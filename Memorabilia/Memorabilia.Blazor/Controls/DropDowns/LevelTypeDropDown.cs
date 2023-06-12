@@ -3,11 +3,9 @@
 public class LevelTypeDropDown : DropDown<LevelType, int>
 {
     protected override string GetMultiSelectionText(List<string> selectedValues)
-    {
-        return !selectedValues.Any() || selectedValues.Count > 4
+        => !selectedValues.Any() || selectedValues.Count > 4
             ? $"{selectedValues.Count} level types selected"
             : string.Join(", ", selectedValues.Select(item => LevelType.Find(item.ToInt32())?.Name));
-    }
 
     protected override void OnInitialized()
     {

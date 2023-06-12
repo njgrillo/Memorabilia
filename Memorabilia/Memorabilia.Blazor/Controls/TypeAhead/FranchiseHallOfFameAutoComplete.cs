@@ -1,9 +1,11 @@
 ﻿namespace Memorabilia.Blazor.Controls.TypeAhead;
 
-public class FranchiseHallOfFameAutoComplete : DomainEntityAutoComplete<FranchiseHallOfFameType>
+public class FranchiseHallOfFameAutoComplete 
+    : DomainEntityAutoComplete<FranchiseHallOfFameType>
 {
     [Parameter]
-    public Sport[] Sports { get; set; } = Array.Empty<Sport>();
+    public Sport[] Sports { get; set; } 
+        = Array.Empty<Sport>();
 
     private bool _loaded;
 
@@ -28,7 +30,8 @@ public class FranchiseHallOfFameAutoComplete : DomainEntityAutoComplete<Franchis
 
     private void LoadItems()
     {
-        Items = Sports != null && Sports.Any() 
+        Items = Sports != null && 
+                Sports.Any() 
             ? FranchiseHallOfFameType.GetAll(Sports) 
             : FranchiseHallOfFameType.All;
     }

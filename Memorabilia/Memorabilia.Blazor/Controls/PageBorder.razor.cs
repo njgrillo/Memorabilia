@@ -1,8 +1,6 @@
-﻿
+﻿namespace Memorabilia.Blazor.Controls;
 
-namespace Memorabilia.Blazor.Controls;
-
-public partial class PageBorder : ComponentBase
+public partial class PageBorder
 {
     [Parameter]
     public RenderFragment Content { get; set; }

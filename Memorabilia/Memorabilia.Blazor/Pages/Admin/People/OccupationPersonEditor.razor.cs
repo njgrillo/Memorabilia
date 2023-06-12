@@ -26,15 +26,15 @@ public partial class OccupationPersonEditor
     protected void OnRecentOccupationChange(RecentPersonOccupationsModel recentOccupation)
     {
         ViewModel.Occupations = recentOccupation.Occupations
-                                                .Select(occupation => new PersonOccupationEditModel(new Domain.Entities.PersonOccupation(occupation.Id, occupation.OccupationTypeId, ViewModel.PersonId)))
+                                                .Select(occupation => new PersonOccupationEditModel(new Entity.PersonOccupation(occupation.Id, occupation.OccupationTypeId, ViewModel.PersonId)))
                                                 .ToList();
 
         ViewModel.Positions = recentOccupation.Positions
-                                              .Select(position => new PersonPositionEditModel(new Domain.Entities.PersonPosition(ViewModel.PersonId, position.Id, position.PositionType)))
+                                              .Select(position => new PersonPositionEditModel(new Entity.PersonPosition(ViewModel.PersonId, position.Id, position.PositionType)))
                                               .ToList();
 
         ViewModel.Sports = recentOccupation.Sports
-                                           .Select(sport => new PersonSportEditModel(new Domain.Entities.PersonSport(ViewModel.PersonId, sport.Id, sport.IsPrimary)))
+                                           .Select(sport => new PersonSportEditModel(new Entity.PersonSport(ViewModel.PersonId, sport.Id, sport.IsPrimary)))
                                            .ToList();
     }
 }

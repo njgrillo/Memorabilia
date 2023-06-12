@@ -1,11 +1,9 @@
-﻿using Memorabilia.Domain.Entities;
-
-namespace Memorabilia.Blazor.Pages.Tools.Profile.Sports;
+﻿namespace Memorabilia.Blazor.Pages.Tools.Profile.Sports;
 
 public partial class BaseballServiceProfile
 {
     [Parameter]
-    public Person Person { get; set; }
+    public Entity.Person Person { get; set; }
 
     private string Text;
 

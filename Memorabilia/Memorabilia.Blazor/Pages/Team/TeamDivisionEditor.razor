@@ -1,0 +1,67 @@
+﻿<DivRowCol3>
+    <Content>
+        <DivisionAutoComplete Disabled="@(!_canEditDivision)"
+                              SelectedValue="Model.Division"
+                              SelectionChanged="(p) => Model.Division = p"
+                              SportLeagueLevel="@SportLeagueLevel" />
+    </Content>
+</DivRowCol3>
+<DivRowCol3>
+    <Content>
+        <NullableIntField Label="Begin Year"
+                          Value="Model.BeginYear"
+                          ValueChanged="@((p) => Model.BeginYear = p)" />
+    </Content>
+    <ContentColumn2>
+        <NullableIntField Label="End Year"
+                          Value="Model.EndYear"
+                          ValueChanged="@((p) => Model.EndYear = p)" />
+    </ContentColumn2>
+</DivRowCol3>
+<DivLeftAlign>
+    <Content>
+        <DivHidden Hidden="@(!_canAdd)">
+            <Content>
+                <AddButton OnClick="Add" />
+            </Content>
+        </DivHidden>
+        <DivHidden Hidden="@(!_canUpdate)">
+            <Content>
+                <UpdateButton OnClick="Update" />
+            </Content>
+        </DivHidden>
+    </Content>
+</DivLeftAlign>
+<DivRowCol6>
+    <Content>
+        <MudTable Bordered="false"
+                  Dense="false" 
+                  Hover="true"
+                  Items="@Divisions.Where(division => !division.IsDeleted).OrderBy(division => division.BeginYear).ToList()"    
+                  Striped="true">
+            <HeaderContent>
+                <MudTh>Division</MudTh>
+                <MudTh>Begin Year</MudTh>
+                <MudTh>End Year</MudTh>
+                <MudTh></MudTh>
+            </HeaderContent>
+            <RowTemplate>
+                <MudTd DataLabel="Division">@context.DivisionName</MudTd>
+                <MudTd DataLabel="Begin Year">@context.BeginYear</MudTd>
+                <MudTd DataLabel="End Year">@context.EndYear</MudTd>
+                <MudTd DataLabel="">
+                    <MudTooltip Text="Edit">
+                        <MudFab Color="MudBlazor.Color.Primary"
+                                Icon="@Icons.Material.Outlined.ModeEditOutline"
+                                OnClick="@(_ => Edit(context))" />
+                    </MudTooltip>
+                    <MudTooltip Text="Delete">
+                        <MudFab Color="MudBlazor.Color.Secondary"
+                                Icon="@Icons.Material.Outlined.DeleteOutline"
+                                OnClick="@(_ => context.IsDeleted = true)" />
+                    </MudTooltip>  
+                </MudTd>
+            </RowTemplate>
+        </MudTable>
+    </Content>
+</DivRowCol6>

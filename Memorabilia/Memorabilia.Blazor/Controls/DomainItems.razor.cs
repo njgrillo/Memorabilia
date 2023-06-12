@@ -1,8 +1,6 @@
-﻿
+﻿namespace Memorabilia.Blazor.Controls;
 
-namespace Memorabilia.Blazor.Controls;
-
-public partial class DomainItems : ComponentBase
+public partial class DomainItems
 {
     [Parameter]
     public DomainsModel Items

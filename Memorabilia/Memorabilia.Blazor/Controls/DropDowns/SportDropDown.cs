@@ -9,11 +9,9 @@ public class SportDropDown : DropDown<Sport, int>
     private bool _loaded;
 
     protected override string GetMultiSelectionText(List<string> selectedValues)
-    {
-        return !selectedValues.Any() || selectedValues.Count > 4 
+        => !selectedValues.Any() || selectedValues.Count > 4
             ? $"{selectedValues.Count} sports selected"
             : string.Join(", ", selectedValues.Select(item => Sport.Find(item.ToInt32())?.Name));
-    }
 
     protected override void OnInitialized()
     {
@@ -32,7 +30,9 @@ public class SportDropDown : DropDown<Sport, int>
         if (_loaded && _itemType == ItemType)
             return;
 
-        Items = ItemType != null ? Sport.GetAll(ItemType) : Sport.All;
+        Items = ItemType != null 
+            ? Sport.GetAll(ItemType) 
+            : Sport.All;
 
         _itemType = ItemType;
         _loaded = true;

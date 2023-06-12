@@ -1,0 +1,53 @@
+﻿<Condition Evaluation="CanToggle">
+    <Match>
+        <DivRowCol3>
+            <Content>
+                <MudSwitch Checked="@_hasTeams"
+                           CheckedChanged="TeamCheckboxClicked"
+                           Color="MudBlazor.Color.Success"
+                           Label="@_itemTypeNameLabel"
+                           T="bool" />
+            </Content>
+        </DivRowCol3>
+    </Match>    
+</Condition> 
+<DivRowCol6 Hidden="@(!_displayTeams)"
+            LeftPadding="10">
+    <Content>
+        <TeamAutoComplete ResetValueOnEmptyText="false" 
+                          SelectedValue="SelectedTeam"
+                          SelectionChanged="(p) => SelectedTeam = p"
+                          SportLeagueLevel="SportLeagueLevel" />
+    </Content>
+</DivRowCol6>
+<DivRowCol6 Hidden="@(!_displayTeams)"
+            LeftPadding="10">
+    <Content>
+        <DivLeftAlign>
+            <Content>
+                <AddButton OnClick="Add"
+                           Text="Add Team" />
+            </Content>
+        </DivLeftAlign> 
+        <MudTable Bordered="false"
+                  Dense="false" 
+                  Hover="true"
+                  Items="@SelectedTeams.Where(team => !team.IsDeleted).ToList()"    
+                  Striped="true">
+            <HeaderContent>
+                <MudTh>Team</MudTh>
+                <MudTh></MudTh>
+            </HeaderContent>
+            <RowTemplate>
+                <MudTd DataLabel="Team">@context.DisplayName</MudTd>
+                <MudTd DataLabel="">
+                    <MudTooltip Text="Delete">
+                        <MudFab Color="MudBlazor.Color.Secondary"
+                                Icon="@Icons.Material.Outlined.DeleteOutline"
+                                OnClick="@(_ => context.IsDeleted = true)" />
+                    </MudTooltip>  
+                </MudTd>
+            </RowTemplate>
+        </MudTable>
+    </Content>
+</DivRowCol6>

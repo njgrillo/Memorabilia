@@ -6,7 +6,8 @@ public partial class NumericField<TType> : Field
     public bool Disabled { get; set; }
 
     [Parameter]
-    public bool HideSpinButtons { get; set; } = true;
+    public bool HideSpinButtons { get; set; } 
+        = true;
 
     [Parameter]
     public TType Maximum { get; set; }

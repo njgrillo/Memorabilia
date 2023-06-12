@@ -1,9 +1,10 @@
 ﻿namespace Memorabilia.Blazor.Controls.TypeAhead;
 
-public class SizeAutoComplete : DomainEntityAutoComplete<Domain.Constants.Size>
+public class SizeAutoComplete : DomainEntityAutoComplete<Constant.Size>
 {
     [Parameter]
-    public Domain.Constants.Size[] Sizes { get; set; } = Array.Empty<Domain.Constants.Size>();
+    public Constant.Size[] Sizes { get; set; } 
+        = Array.Empty<Constant.Size>();
 
     private bool _loaded;
 
@@ -27,8 +28,9 @@ public class SizeAutoComplete : DomainEntityAutoComplete<Domain.Constants.Size>
 
     private void LoadItems()
     {
-        Items = Sizes != null && Sizes.Any()
+        Items = Sizes != null && 
+                Sizes.Any()
             ? Sizes
-            : Domain.Constants.Size.All;
+            : Constant.Size.All;
     }
 }

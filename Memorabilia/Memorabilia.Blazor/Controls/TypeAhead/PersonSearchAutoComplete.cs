@@ -1,9 +1,11 @@
 ﻿namespace Memorabilia.Blazor.Controls.TypeAhead;
 
-public class PersonSearchAutoComplete : Autocomplete<Domain.Entities.Person>, INotifyPropertyChanged
+public class PersonSearchAutoComplete 
+    : Autocomplete<Entity.Person>, INotifyPropertyChanged
 {
     [Parameter]
-    public bool IsCulturalSearch { get; set; } = true;
+    public bool IsCulturalSearch { get; set; } 
+        = true;
 
     [Parameter]
     public Sport Sport { get; set; }
@@ -12,7 +14,8 @@ public class PersonSearchAutoComplete : Autocomplete<Domain.Entities.Person>, IN
     public event PropertyChangedEventHandler PropertyChanged;
 #pragma warning restore CS0067
 
-    protected IEnumerable<Domain.Entities.Person> Items { get; set; } = Enumerable.Empty<Domain.Entities.Person>();
+    protected IEnumerable<Entity.Person> Items { get; set; } 
+        = Enumerable.Empty<Entity.Person>();
 
     public PersonSearchAutoComplete()
     {
@@ -27,24 +30,22 @@ public class PersonSearchAutoComplete : Autocomplete<Domain.Entities.Person>, IN
         await LoadItems();
     }
 
-    protected override string GetItemSelectedText(Domain.Entities.Person item)
-    {
-        return item.Name;
-    }
+    protected override string GetItemSelectedText(Entity.Person item)
+        => item.Name;
 
-    protected override string GetItemText(Domain.Entities.Person item)
-    {
-        return item.Name;
-    }
+    protected override string GetItemText(Entity.Person item)
+        => item.Name;
 
-    private async Task<IEnumerable<Domain.Entities.Person>> CulturalSearch(string searchText)
+    private async Task<IEnumerable<Entity.Person>> CulturalSearch(string searchText)
     {
-        var nonCulturalResults = Items.Where(item => CultureInfo.CurrentCulture.CompareInfo.IndexOf(item.Name,
-                                                                                                    searchText,
-                                                                                                    CompareOptions.IgnoreNonSpace) > -1);
+        IEnumerable<Entity.Person> nonCulturalResults 
+            = Items.Where(item => CultureInfo.CurrentCulture.CompareInfo.IndexOf(item.Name,
+                                                                                 searchText,
+                                                                                 CompareOptions.IgnoreNonSpace) > -1);
 
-        var culturalResults = Items.Where(item => item.Name.Contains(searchText, StringComparison.OrdinalIgnoreCase)
-                                               || item.LegalName.Contains(searchText, StringComparison.OrdinalIgnoreCase));
+        IEnumerable<Entity.Person> culturalResults 
+            = Items.Where(item => item.Name.Contains(searchText, StringComparison.OrdinalIgnoreCase) || 
+                                  item.LegalName.Contains(searchText, StringComparison.OrdinalIgnoreCase));
 
         return await Task.FromResult(nonCulturalResults.Union(culturalResults)
                                                        .DistinctBy(item => item.Name));
@@ -63,16 +64,15 @@ public class PersonSearchAutoComplete : Autocomplete<Domain.Entities.Person>, IN
         }
     }
 
-    public override async Task<IEnumerable<Domain.Entities.Person>> Search(string searchText)
+    public override async Task<IEnumerable<Entity.Person>> Search(string searchText)
     {
         if (searchText.IsNullOrEmpty())
-            return Array.Empty<Domain.Entities.Person>();
+            return Array.Empty<Entity.Person>();
 
-        if (IsCulturalSearch)
-            return await CulturalSearch(searchText);
-        else
-            return await Task.FromResult(Items.Where(item => item.Name.Contains(searchText, StringComparison.OrdinalIgnoreCase) 
-                                                          || item.LegalName.Contains(searchText, StringComparison.OrdinalIgnoreCase))
-                                              .DistinctBy(item => item.Name));
+        return IsCulturalSearch 
+            ? await CulturalSearch(searchText)
+            : await Task.FromResult(Items.Where(item => item.Name.Contains(searchText, StringComparison.OrdinalIgnoreCase) || 
+                                                        item.LegalName.Contains(searchText, StringComparison.OrdinalIgnoreCase))
+                                         .DistinctBy(item => item.Name));
     }
 }

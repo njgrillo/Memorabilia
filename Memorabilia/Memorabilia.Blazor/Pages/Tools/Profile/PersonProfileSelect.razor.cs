@@ -1,6 +1,4 @@
-﻿using Memorabilia.Domain.Entities;
-
-namespace Memorabilia.Blazor.Pages.Tools.Profile;
+﻿namespace Memorabilia.Blazor.Pages.Tools.Profile;
 
 public partial class PersonProfileSelect
 {
@@ -10,9 +8,9 @@ public partial class PersonProfileSelect
     [Inject]
     public IProfileService ProfileService { get; set; }
 
-    public Person ViewModel { get; set; }
+    public Entity.Person ViewModel { get; set; }
 
-    private void SelectedPersonChanged(Person person)
+    private void SelectedPersonChanged(Entity.Person person)
     {
         NavigationManager.NavigateTo($"Tools/PersonProfile/{person.Id}");
     }

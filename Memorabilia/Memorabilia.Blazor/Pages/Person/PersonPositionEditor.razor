@@ -1,0 +1,46 @@
+﻿<DivRowCol6>
+    <Content>
+        <PositionAutoComplete SelectedValue="Model.Position"
+                              SelectionChanged="(p) => Model.Position = p"
+                              Sports="Sports" />
+    </Content>
+    <ContentColumn2>
+        <MudSwitch Checked="@(Model.PositionType == PositionType.Primary)"
+                   CheckedChanged="OnPositionTypeChange"
+                   Color="MudBlazor.Color.Success"
+                   Label="Is Primary?"
+                   T="bool" />
+    </ContentColumn2>
+</DivRowCol6>
+<DivLeftAlign>
+    <Content>
+        <AddButton OnClick="Add" />
+    </Content>
+</DivLeftAlign>
+<DivRowCol12>
+    <Content>
+        <MudTable Bordered="false"
+                  Dense="false"
+                  Hover="true"
+                  Items="@Positions.Where(position => !position.IsDeleted).OrderBy(position => position.PositionName).ToList()"
+                  Striped="true">
+            <HeaderContent>
+                <MudTh>Position</MudTh>
+                <MudTh>Type</MudTh>
+                <MudTh></MudTh>
+            </HeaderContent>
+            <RowTemplate>
+                <MudTd DataLabel="Position">@context.PositionName</MudTd>
+                <MudTd DataLabel="Type">@context.PositionTypeName</MudTd>
+                <MudTd DataLabel="">
+                    <MudTooltip Text="Delete">
+                        <MudFab Color="MudBlazor.Color.Secondary"
+                                Icon="@Icons.Material.Outlined.DeleteOutline"
+                                OnClick="@(_ => Delete(context))" />
+                    </MudTooltip>
+                </MudTd>
+            </RowTemplate>
+        </MudTable>
+    </Content>
+</DivRowCol12>
+

@@ -1,9 +1,11 @@
 ﻿namespace Memorabilia.Blazor.Controls.TypeAhead;
 
-public class AccomplishmentTypeAutoComplete : DomainEntityAutoComplete<AccomplishmentType>
+public class AccomplishmentTypeAutoComplete 
+    : DomainEntityAutoComplete<AccomplishmentType>
 {
     [Parameter]
-    public Sport[] Sports { get; set; } = Array.Empty<Sport>();
+    public Sport[] Sports { get; set; } 
+        = Array.Empty<Sport>();
 
     private bool _loaded;
 
@@ -28,7 +30,8 @@ public class AccomplishmentTypeAutoComplete : DomainEntityAutoComplete<Accomplis
 
     private void LoadItems()
     {
-        Items = Sports != null && Sports.Any() 
+        Items = Sports != null && 
+                Sports.Any() 
             ? AccomplishmentType.GetAll(Sports) 
             : AccomplishmentType.All;
     }

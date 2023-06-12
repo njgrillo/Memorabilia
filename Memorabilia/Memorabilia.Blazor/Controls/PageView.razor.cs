@@ -1,8 +1,6 @@
-﻿
+﻿namespace Memorabilia.Blazor.Controls;
 
-namespace Memorabilia.Blazor.Controls;
-
-public partial class PageView : ComponentBase
+public partial class PageView
 {
     [Inject]
     public NavigationManager NavigationManager { get; set; }
@@ -17,16 +15,19 @@ public partial class PageView : ComponentBase
     public RenderFragment Content { get; set; }
 
     [Parameter]
-    public bool DisplayAddButton { get; set; } = true;
+    public bool DisplayAddButton { get; set; } 
+        = true;
 
     [Parameter]
-    public bool DisplayPageHeader { get; set; } = true;
+    public bool DisplayPageHeader { get; set; } 
+        = true;
 
     [Parameter]
     public string NavigationPath { get; set; }
 
     [Parameter]
-    public string NavigationPathText { get; set; } = "Back";
+    public string NavigationPathText { get; set; } 
+        = "Back";
 
     [Parameter]
     public EventCallback OnLoad { get; set; }

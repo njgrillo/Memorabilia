@@ -1,0 +1,46 @@
+﻿<DivRowCol6>
+    <Content>
+        <AwardTypeAutoComplete ResetValueOnEmptyText="false"
+                               SelectedValue="Model.AwardType"
+                               SelectionChanged="(p) => Model.AwardType = p"
+                               Sports="Sports" />
+    </Content>
+    <ContentColumn2>
+        <TextField HelperText="Ex. 1999 or 1999-2002 or 2003, 2005-2008"
+                   Label="Years"
+                   SelectedText="@_years"
+                   SelectedTextChanged="@((p) => _years = p)"/>
+    </ContentColumn2>
+</DivRowCol6>
+<DivLeftAlign>
+    <Content>
+        <AddButton OnClick="Add" />
+    </Content>
+</DivLeftAlign>
+<DivRowCol6>
+    <Content>
+         <MudTable Bordered="false"
+                   Dense="false" 
+                   Hover="true"
+                   Items="@Awards.Where(award => !award.IsDeleted).ToList()"    
+                   Striped="true">
+            <HeaderContent>
+                <MudTh>Award</MudTh>
+                <MudTh>Year</MudTh>
+                <MudTh></MudTh>
+            </HeaderContent>
+            <RowTemplate>
+                <MudTd DataLabel="Award">@context.AwardTypeName</MudTd>
+                <MudTd DataLabel="Year">@context.Year</MudTd>
+                <MudTd DataLabel=""> 
+                    <MudTooltip Text="Delete">
+                        <MudFab Color="MudBlazor.Color.Secondary"
+                                Icon="@Icons.Material.Outlined.DeleteOutline"
+                                OnClick="@(_ => context.IsDeleted = true)" />
+                    </MudTooltip>  
+                </MudTd>
+            </RowTemplate>
+        </MudTable>
+    </Content>
+</DivRowCol6>
+

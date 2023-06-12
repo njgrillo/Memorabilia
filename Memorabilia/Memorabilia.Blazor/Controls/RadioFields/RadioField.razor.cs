@@ -14,25 +14,25 @@ public partial class RadioField<TItemType>
     [Parameter]
     public EventCallback<TItemType> SelectionChanged { get; set; }
 
-    protected string[] CheckboxNames => Options.Select(option => option.ToString()).ToArray();
+    protected string[] CheckboxNames 
+        => Options.Select(option => option.ToString())
+                  .ToArray();
 
     public virtual async Task CheckChanged(string itemName, ChangeEventArgs args)
     {
         var isChecked = (bool)args.Value;
-        var item = Options.FirstOrDefault(option => option.ToString() == itemName);
+        TItemType item = Options.FirstOrDefault(option => option.ToString() == itemName);
 
-        SelectedOption = isChecked ? item : EmptyValue;
+        SelectedOption = isChecked 
+            ? item 
+            : EmptyValue;
 
         await SelectionChanged.InvokeAsync(SelectedOption);
     }
 
     public virtual string SelectedOptionCheckedValue(TItemType item)
-    {
-        return item?.ToString();
-    }
+        => item?.ToString();
 
     public virtual string SelectedOptionValue(TItemType item)
-    {
-        return item?.ToString();
-    }
+        => item?.ToString();
 }

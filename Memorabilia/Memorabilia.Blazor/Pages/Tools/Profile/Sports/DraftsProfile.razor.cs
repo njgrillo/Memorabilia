@@ -2,7 +2,7 @@
 
 public partial class DraftsProfile : SportProfile
 {
-    private Domain.Entities.Draft[] Drafts;
+    private Entity.Draft[] Drafts;
 
     protected override void OnParametersSet()
     {

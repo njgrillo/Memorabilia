@@ -1,6 +1,4 @@
-﻿
-
-namespace Memorabilia.Blazor.Controls.Divs;
+﻿namespace Memorabilia.Blazor.Controls.Divs;
 
 public partial class DivRowCol12 : ComponentBase
 {

@@ -62,19 +62,19 @@ public partial class TeamDetails
         if (result.Canceled)
             return;
 
-        var persons = (Domain.Entities.Person[])result.Data;
+        var persons = (Entity.Person[])result.Data;
 
         if (!persons.Any())
             return;
 
         var projectPersons = persons.Select(person => new PersonModel(person))
                                     .Select(personModel => new PersonEditModel(personModel))
-                                    .Select(savePersonModel => new ProjectPersonModel(new Domain.Entities.ProjectPerson
+                                    .Select(savePersonModel => new ProjectPersonModel(new Entity.ProjectPerson
                                     {
                                         ItemTypeId = Model.ItemTypeId,
                                         Person = persons.Single(person => person.Id == savePersonModel.Id),
                                         PersonId = savePersonModel.Id,
-                                        Project = new Domain.Entities.Project(Model.Name, Model.StartDate, Model.EndDate, Model.UserId, Model.ProjectType.Id),
+                                        Project = new Entity.Project(Model.Name, Model.StartDate, Model.EndDate, Model.UserId, Model.ProjectType.Id),
                                         ProjectId = Model.Id
                                     }))
                                     .Select(projectPerson => new ProjectPersonEditModel(projectPerson))

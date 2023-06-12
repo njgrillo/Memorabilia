@@ -9,11 +9,9 @@ public partial class TeamDropDown : DropDown<TeamModel, int>
     public SportLeagueLevel SportLeagueLevel { get; set; }
 
     protected override string GetItemDisplayText(TeamModel item)
-    {
-        return Franchise?.Id > 0
-            ? item.NameWithYear 
+        => Franchise?.Id > 0
+            ? item.NameWithYear
             : item.Name;
-    }
 
     protected override async Task OnInitializedAsync()
     {

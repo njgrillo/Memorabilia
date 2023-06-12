@@ -1,10 +1,10 @@
 ﻿namespace Memorabilia.Blazor.Controls.DropDowns;
 
-public class SizeDropDown : DropDown<Domain.Constants.Size, int>
+public class SizeDropDown : DropDown<Constant.Size, int>
 {
     protected override void OnInitialized()
     {
-        Items = Domain.Constants.Size.All;
+        Items = Constant.Size.All;
         Label = "Size";
     }
 }

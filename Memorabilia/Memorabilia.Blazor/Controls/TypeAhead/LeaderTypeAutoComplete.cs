@@ -1,9 +1,11 @@
 ﻿namespace Memorabilia.Blazor.Controls.TypeAhead;
 
-public class LeaderTypeAutoComplete : DomainEntityAutoComplete<LeaderType>
+public class LeaderTypeAutoComplete 
+    : DomainEntityAutoComplete<LeaderType>
 {
     [Parameter]
-    public Sport[] Sports { get; set; } = Array.Empty<Sport>();
+    public Sport[] Sports { get; set; } 
+        = Array.Empty<Sport>();
 
     private bool _loaded;
 
@@ -28,7 +30,8 @@ public class LeaderTypeAutoComplete : DomainEntityAutoComplete<LeaderType>
 
     private void LoadItems()
     {
-        Items = Sports != null && Sports.Any() 
+        Items = Sports != null && 
+                Sports.Any() 
             ? LeaderType.GetAll(Sports) 
             : LeaderType.All;
     }

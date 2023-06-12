@@ -1,6 +1,4 @@
-﻿
-
-namespace Memorabilia.Blazor.Controls.Fields;
+﻿namespace Memorabilia.Blazor.Controls.Fields;
 
 public abstract class Field : ComponentBase
 {
@@ -8,5 +6,6 @@ public abstract class Field : ComponentBase
     public string Label { get; set; }
 
     [Parameter]
-    public Variant Variant { get; set; } = Variant.Outlined;
+    public Variant Variant { get; set; }
+        = Variant.Outlined;
 }

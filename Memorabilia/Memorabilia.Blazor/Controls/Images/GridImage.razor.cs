@@ -24,7 +24,9 @@ public partial class GridImage
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
-        if (!ImageData.IsNullOrEmpty() || ImageFileName.IsNullOrEmpty() || UserId == 0)
+        if (!ImageData.IsNullOrEmpty() || 
+            ImageFileName.IsNullOrEmpty() || 
+            UserId == 0)
             return;
 
         ImageData = ImageService.GetUserImageData(ImageFileName, UserId);

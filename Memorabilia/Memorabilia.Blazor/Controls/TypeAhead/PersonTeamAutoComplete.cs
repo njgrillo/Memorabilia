@@ -13,7 +13,8 @@ public class PersonTeamAutoComplete
     public int PersonId { get; set; }
 
     [Parameter]
-    public int[] SportIds { get; set; } = Array.Empty<int>();
+    public int[] SportIds { get; set; } 
+        = Array.Empty<int>();
 
 #pragma warning disable CS0067
     public event PropertyChangedEventHandler PropertyChanged;
@@ -49,13 +50,13 @@ public class PersonTeamAutoComplete
         {
             if (!EndYear.HasValue)
             {
-                Items = Items.Where(team => BeginYear >= team.BeginYear
-                                                        && !team.EndYear.HasValue);
+                Items = Items.Where(team => BeginYear >= team.BeginYear && 
+                                            !team.EndYear.HasValue);
                 return;
             }
 
-            Items = Items.Where(team => (!BeginYear.HasValue || BeginYear == 0 || BeginYear >= team.BeginYear)
-                                     && (!team.EndYear.HasValue || EndYear <= team.EndYear));
+            Items = Items.Where(team => (!BeginYear.HasValue || BeginYear == 0 || BeginYear >= team.BeginYear) && 
+                                        (!team.EndYear.HasValue || EndYear <= team.EndYear));
         }
     }
 

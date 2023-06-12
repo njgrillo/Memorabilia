@@ -1,10 +1,10 @@
 ﻿namespace Memorabilia.Blazor.Controls.DropDowns;
 
-public class OrientationDropDown : DropDown<Domain.Constants.Orientation, int>
+public class OrientationDropDown : DropDown<Constant.Orientation, int>
 {
     protected override void OnInitialized()
     {
-        Items = Domain.Constants.Orientation.All;
+        Items = Constant.Orientation.All;
         Label = "Orientation";
     }
 }

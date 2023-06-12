@@ -1,8 +1,6 @@
-﻿
+﻿namespace Memorabilia.Blazor.Controls;
 
-namespace Memorabilia.Blazor.Controls;
-
-public partial class PageHeader : ComponentBase
+public partial class PageHeader
 {
     [Parameter]
     public string PageTitle { get; set; }

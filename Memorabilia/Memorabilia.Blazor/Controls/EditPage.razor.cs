@@ -30,7 +30,8 @@ public partial class EditPage<TItem> : INotifyPropertyChanged
     public bool DisplayFooter { get; set; } = true;
 
     [Parameter]
-    public bool DisplaySaveContinueButton { get; set; } = true;
+    public bool DisplaySaveContinueButton { get; set; } 
+        = true;
 
     [Parameter]
     public EditModeType EditMode { get; set; }
@@ -57,7 +58,8 @@ public partial class EditPage<TItem> : INotifyPropertyChanged
     public EventCallback<TItem> OnSave { get; set; }
 
     [Parameter]
-    public string PageFooterButtonText { get; set; } = "Back";
+    public string PageFooterButtonText { get; set; } 
+        = "Back";
 
     [Parameter]
     public string PageFooterNavigationPath { get; set; }
@@ -79,7 +81,9 @@ public partial class EditPage<TItem> : INotifyPropertyChanged
 
     public Alert[] ValidationResultAlerts 
         => ValidationResult != null
-            ? ValidationResult.Errors.Select(error => new Alert(error.ErrorMessage, Severity.Error)).ToArray()
+            ? ValidationResult.Errors
+                              .Select(error => new Alert(error.ErrorMessage, Severity.Error))
+                              .ToArray()
             : Array.Empty<Alert>();
 
     private bool _continue;
@@ -115,8 +119,8 @@ public partial class EditPage<TItem> : INotifyPropertyChanged
         if (!PerformValidation)
             return;
 
-        if (e.PropertyName == nameof(ContinueNavigationPath) 
-            || (e.PropertyName == nameof(ContinueNavigation) && ContinueNavigation))
+        if (e.PropertyName == nameof(ContinueNavigationPath) || 
+            (e.PropertyName == nameof(ContinueNavigation) && ContinueNavigation))
         {
             if (ValidationResult?.IsValid ?? false)
                 NavigateAway();

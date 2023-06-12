@@ -27,7 +27,8 @@ public partial class EditImages<TItem>
     public string ImageRootPath { get; set; }
 
     [Parameter]
-    public List<ImageEditModel> Images { get; set; } = new();
+    public List<ImageEditModel> Images { get; set; }
+        = new();
 
     [Parameter]
     public string ImportButtonText { get; set; }    
@@ -57,7 +58,8 @@ public partial class EditImages<TItem>
     public bool ReplaceImages { get; set; } = true;
 
     [Parameter]
-    public string SaveButtonText { get; set; } = "Save & Continue";
+    public string SaveButtonText { get; set; } 
+        = "Save & Continue";
 
     [Parameter]
     public string UploadPath { get; set; }
@@ -72,9 +74,9 @@ public partial class EditImages<TItem>
 
     protected void Cancel()
     {
-        foreach (var image in Images.Where(image => image.IsNew))
+        foreach (ImageEditModel image in Images.Where(image => image.IsNew))
         {
-            var filePath = Path.Combine(ImageRootPath, image.FileName);
+            string filePath = Path.Combine(ImageRootPath, image.FileName);
 
             if (File.Exists(filePath))
                 File.Delete(filePath);
@@ -107,12 +109,12 @@ public partial class EditImages<TItem>
 
     protected void PrimarySet(string fileName)
     {
-        var image = Images.FirstOrDefault(i => i.FileName == fileName);
+        ImageEditModel image = Images.FirstOrDefault(i => i.FileName == fileName);
 
         if (image == null)
             return;
 
-        foreach (var memorabiliaImage in Images)
+        foreach (ImageEditModel memorabiliaImage in Images)
         {
             if (memorabiliaImage.FileName == image.FileName)
                 memorabiliaImage.ImageTypeId = ImageType.Primary.Id;
@@ -124,7 +126,7 @@ public partial class EditImages<TItem>
 
     protected void Remove(string fileName)
     {
-        var image = Images.FirstOrDefault(i => i.FileName == fileName);
+        ImageEditModel image = Images.FirstOrDefault(i => i.FileName == fileName);
 
         if (image == null)
             return;
@@ -134,7 +136,7 @@ public partial class EditImages<TItem>
         if (!image.IsPrimary)
             return;
 
-        var primaryImage = Images.FirstOrDefault();
+        ImageEditModel primaryImage = Images.FirstOrDefault();
 
         if (primaryImage == null)
             return;
@@ -145,22 +147,25 @@ public partial class EditImages<TItem>
     protected async Task Save()
     {
         var images = new List<ImageEditModel>();
-        var imageType = !Images.Any() ? ImageType.Primary : ImageType.Secondary;
+
+        ImageType imageType = !Images.Any() 
+            ? ImageType.Primary 
+            : ImageType.Secondary;
 
         if (!Directory.Exists(UploadPath))
             Directory.CreateDirectory(UploadPath);
 
-        foreach (var file in _files)
+        foreach (IBrowserFile file in _files)
         {
             try
             {   
-                var fileName = Path.GetRandomFileName();
-                var path = Path.Combine(UploadPath, fileName);
+                string fileName = Path.GetRandomFileName();
+                string path = Path.Combine(UploadPath, fileName);
 
                 await using FileStream fs = new(path, FileMode.Create);
                 await file.OpenReadStream(MaximumFileSize).CopyToAsync(fs);
 
-                images.Add(new ImageEditModel(new ImageModel(new Domain.Entities.Image(fileName, imageType.Id))));
+                images.Add(new ImageEditModel(new ImageModel(new Entity.Image(fileName, imageType.Id))));
 
                 imageType = ImageType.Secondary;
             }

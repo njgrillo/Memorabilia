@@ -1,11 +1,10 @@
-﻿using Memorabilia.Domain.Constants;
-
-namespace Memorabilia.Blazor.Controls.TypeAhead;
+﻿namespace Memorabilia.Blazor.Controls.TypeAhead;
 
 public class CollegeAutoComplete : DomainEntityAutoComplete<College>
 {
     [Parameter]
-    public College[] Colleges { get; set; } = Array.Empty<College>();
+    public College[] Colleges { get; set; } 
+        = Array.Empty<College>();
 
     protected override void OnInitialized()
     {
@@ -16,11 +15,8 @@ public class CollegeAutoComplete : DomainEntityAutoComplete<College>
     }
 
     public override async Task<IEnumerable<College>> Search(string searchText)
-    {
-        if (searchText.IsNullOrEmpty())
-            return Array.Empty<College>();
-
-        return await Task.FromResult(Items.Where(item => item.Name.Contains(searchText, StringComparison.OrdinalIgnoreCase)
-                                                      || (!item.Abbreviation.IsNullOrEmpty() && item.Abbreviation.Contains(searchText, StringComparison.OrdinalIgnoreCase))));
-    }
+        => !searchText.IsNullOrEmpty()
+            ? await Task.FromResult(Items.Where(item => item.Name.Contains(searchText, StringComparison.OrdinalIgnoreCase) || 
+                                                        (!item.Abbreviation.IsNullOrEmpty() && item.Abbreviation.Contains(searchText, StringComparison.OrdinalIgnoreCase))))
+            : Array.Empty<College>();
 }

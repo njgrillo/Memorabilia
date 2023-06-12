@@ -17,14 +17,14 @@ public partial class HelmetTypeSelector
     [Parameter]
     public int? SizeId { get; set; }
 
-    protected Domain.Constants.Size Size { get; set; }
+    protected Constant.Size Size { get; set; }
 
     protected override void OnInitialized()
     {
         if (!SizeId.HasValue)
             return;
 
-        Size = Domain.Constants.Size.Find(SizeId.Value);
+        Size = Constant.Size.Find(SizeId.Value);
     }
 
     protected async Task HelmetFinishChanged(int helmetFinishId)
@@ -41,7 +41,7 @@ public partial class HelmetTypeSelector
         await OnParameterChanged();
     }
 
-    protected async Task SizeChanged(Domain.Constants.Size size)
+    protected async Task SizeChanged(Constant.Size size)
     {
         Size = size;
 

@@ -1,6 +1,4 @@
-﻿using Framework.Library.Domain.Entity;
-
-namespace Memorabilia.Blazor.Pages.Admin;
+﻿namespace Memorabilia.Blazor.Pages.Admin;
 
 public abstract class EditDomainItem<T> 
     : CommandQuery where T : DomainItemConstant

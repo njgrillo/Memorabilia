@@ -3,11 +3,9 @@
 public class WritingInstrumentDropDown : DropDown<WritingInstrument, int>
 {
     protected override string GetMultiSelectionText(List<string> selectedValues)
-    {
-        return !selectedValues.Any() || selectedValues.Count > 2
-            ? $"{selectedValues.Count} writing instruments selected"
-            : string.Join(", ", selectedValues.Select(item => WritingInstrument.Find(item.ToInt32())?.Name));
-    }
+    => !selectedValues.Any() || selectedValues.Count > 2 
+        ? $"{selectedValues.Count} writing instruments selected" 
+        : string.Join(", ", selectedValues.Select(item => WritingInstrument.Find(item.ToInt32())?.Name));
 
     protected override void OnInitialized()
     {

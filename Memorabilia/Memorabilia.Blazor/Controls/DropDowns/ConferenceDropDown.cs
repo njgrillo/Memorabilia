@@ -1,6 +1,4 @@
-﻿
-
-namespace Memorabilia.Blazor.Controls.DropDowns;
+﻿namespace Memorabilia.Blazor.Controls.DropDowns;
 
 public class ConferenceDropDown : DropDown<Conference, int>
 {
@@ -9,7 +7,10 @@ public class ConferenceDropDown : DropDown<Conference, int>
 
     protected override void OnInitialized()
     {
-        Items = SportLeagueLevel != null ? Conference.GetAll(SportLeagueLevel) : Conference.All;
+        Items = SportLeagueLevel != null 
+            ? Conference.GetAll(SportLeagueLevel) 
+            : Conference.All;
+
         Label = "Conference";
     }
 }

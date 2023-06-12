@@ -2,7 +2,8 @@
 
 public partial class ContextLoader : CommandQuery
 {
-    private bool _displaySpinner = true;
+    private bool _displaySpinner 
+        = true;
 
     protected override async Task OnInitializedAsync()
     {

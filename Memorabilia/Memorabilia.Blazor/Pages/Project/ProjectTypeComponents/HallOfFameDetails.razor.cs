@@ -69,7 +69,7 @@ public partial class HallofFameDetails
 
         var projectPersons = persons.Select(person => new PersonModel(person))
                                     .Select(personModel => new PersonEditModel(personModel))
-                                    .Select(savePersonModel => new ProjectPersonModel(new Domain.Entities.ProjectPerson
+                                    .Select(savePersonModel => new ProjectPersonModel(new Entity.ProjectPerson
                                     {
                                         ItemTypeId = Model.HallOfFame.ItemTypeId ?? Model.ItemTypeId,
                                         Person = persons.Single(person => person.Id == savePersonModel.Id),

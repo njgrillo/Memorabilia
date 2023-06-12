@@ -1,26 +1,27 @@
-﻿
-namespace Memorabilia.Blazor.Controls;
+﻿namespace Memorabilia.Blazor.Controls;
 
-public partial class EditDomainItem : ComponentBase
+public partial class EditDomainItem
 {
     [Parameter]
     public DomainEditModel Item
     {
         get
         {
-            return _viewModel;
+            return Model;
         }
         set
         {
-            _viewModel = value;
+            Model = value;
         }
     }
 
     [Parameter]
-    public int MaxAbbreviationLength { get; set; } = 10;
+    public int MaxAbbreviationLength { get; set; } 
+        = 10;
 
     [Parameter]
-    public int MaxNameLength { get; set; } = 100;
+    public int MaxNameLength { get; set; } 
+        = 100;
 
     [Parameter]
     public EventCallback OnLoad { get; set; }
@@ -28,11 +29,11 @@ public partial class EditDomainItem : ComponentBase
     [Parameter]
     public EventCallback<DomainEditModel> OnSave { get; set; }
 
-    private DomainEditModel _viewModel;
+    protected DomainEditModel Model;
 
     protected async Task Load()
     {
-        if (_viewModel.Id == 0)
+        if (Model.Id == 0)
             return;
 
         await OnLoad.InvokeAsync();
@@ -40,6 +41,6 @@ public partial class EditDomainItem : ComponentBase
 
     protected async Task Save()
     {
-        await OnSave.InvokeAsync(_viewModel);
+        await OnSave.InvokeAsync(Model);
     }
 }

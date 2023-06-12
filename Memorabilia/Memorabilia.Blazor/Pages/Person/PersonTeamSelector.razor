@@ -1,0 +1,82 @@
+﻿<div class="row">
+    <div class="col-lg-2">
+       <NullableIntField Label="Begin Year"
+                         Value="Model.BeginYear"
+                         ValueChanged="@((p) => Model.BeginYear = p)" />
+    </div>     
+    <div class="col-lg-2">
+       <NullableIntField Label="End Year"
+                         Value="Model.EndYear"
+                         ValueChanged="@((p) => Model.EndYear = p)" />
+    </div> 
+    <div class="col-lg-2">
+        <TeamRoleTypeAutoComplete SelectedValue="Model.TeamRoleType"
+                                  SelectionChanged="(p) => Model.TeamRoleType = p"
+                                  SportLeagueLevel="Model.SportLeagueLevel" />
+    </div> 
+</div> 
+<DivRowCol6>
+    <Content>
+        <PersonTeamAutoComplete BeginYear="Model.BeginYear"
+                                Disabled="@(!_canEditTeam)"
+                                EndYear="Model.EndYear"
+                                PersonId="@PersonId"
+                                ResetValueOnEmptyText="true"
+                                SelectedValue="Team"
+                                SelectionChanged="(p) => Team = p"
+                                SportIds="@SportIds" />
+    </Content>
+</DivRowCol6>
+<DivLeftAlign>
+    <Content>
+        <DivHidden Hidden="@(!_canAdd)">
+            <Content>
+                <AddButton OnClick="Add" />
+            </Content>
+        </DivHidden>
+        <DivHidden Hidden="@(!_canUpdate)">
+            <Content>
+                <UpdateButton OnClick="Update" />
+            </Content>
+        </DivHidden>
+    </Content>
+</DivLeftAlign>
+<DivRowCol12>
+    <Content>
+        <MudTable Bordered="false"
+                  Dense="false" 
+                  Hover="true"
+                  Items="@Teams.Where(team => !team.IsDeleted).ToList()"    
+                  Striped="true">
+            <HeaderContent>
+                <MudTh>Franchise</MudTh>
+                <MudTh>Location</MudTh>
+                <MudTh>Team</MudTh>
+                <MudTh>Begin Year</MudTh>
+                <MudTh>End Year</MudTh>
+                <MudTh>Role</MudTh>
+                <MudTh></MudTh>
+            </HeaderContent>
+            <RowTemplate>
+                <MudTd DataLabel="Franchise">@context.FranchiseName</MudTd>
+                <MudTd DataLabel="Location">@context.TeamLocation</MudTd>
+                <MudTd DataLabel="Team">@context.TeamName</MudTd>
+                <MudTd DataLabel="Begin Year">@context.BeginYear</MudTd>
+                <MudTd DataLabel="End Year">@context.EndYear</MudTd>
+                <MudTd DataLabel="Role">@context.TeamRoleTypeName</MudTd>
+                <MudTd DataLabel="">
+                    <MudTooltip Text="Edit">
+                        <MudFab Color="MudBlazor.Color.Primary"                                
+                                Icon="@Icons.Material.Outlined.ModeEditOutline"
+                                OnClick="@(_ => Edit(context))" />
+                    </MudTooltip> 
+                    <MudTooltip Text="Delete">
+                        <MudFab Color="MudBlazor.Color.Secondary"
+                                Icon="@Icons.Material.Outlined.DeleteOutline"
+                                OnClick="@(_ => context.IsDeleted = true)" />
+                    </MudTooltip>  
+                </MudTd>
+            </RowTemplate>
+        </MudTable>
+    </Content>
+</DivRowCol12>

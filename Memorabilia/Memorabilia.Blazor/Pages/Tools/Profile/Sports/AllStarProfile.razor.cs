@@ -11,10 +11,10 @@ public partial class AllStarProfile : SportProfile
 
     protected override void OnParametersSet()
     {
-        if (OccupationType != Domain.Constants.Occupation.Athlete)
+        if (OccupationType != Constant.Occupation.Athlete)
             return;
 
-        Domain.Entities.PersonTeam[] teams 
+        Entity.PersonTeam[] teams 
             = Person.Teams
                     .Where(team => Sport == null || Sport.Id == team.Team.Franchise.SportLeagueLevel.SportId)
                     .ToArray();

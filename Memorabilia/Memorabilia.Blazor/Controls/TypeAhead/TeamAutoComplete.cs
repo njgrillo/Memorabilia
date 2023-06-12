@@ -1,6 +1,7 @@
 ﻿namespace Memorabilia.Blazor.Controls.TypeAhead;
 
-public class TeamAutoComplete : NamedEntityAutoComplete<TeamEditModel>, INotifyPropertyChanged
+public class TeamAutoComplete 
+    : NamedEntityAutoComplete<TeamEditModel>, INotifyPropertyChanged
 {
     [Parameter]
     public Sport Sport { get; set; }
@@ -27,18 +28,16 @@ public class TeamAutoComplete : NamedEntityAutoComplete<TeamEditModel>, INotifyP
     }
 
     protected override string GetItemSelectedText(TeamEditModel item)
-    {
-        return item.DisplayName;
-    }
+        => item.DisplayName;
 
     protected override string GetItemText(TeamEditModel item)
-    {
-        return item.DisplayName;
-    }
+        => item.DisplayName;
 
     private async Task LoadItems()
     {
-        Entity.Team[] teams = await QueryRouter.Send(new GetTeams(SportLeagueLevelId: SportLeagueLevel?.Id, SportId: Sport?.Id));
+        Entity.Team[] teams 
+            = await QueryRouter.Send(new GetTeams(SportLeagueLevelId: SportLeagueLevel?.Id, 
+                                                  SportId: Sport?.Id));
 
         Items = teams.Select(team => new TeamEditModel(new TeamModel(team)));
     }

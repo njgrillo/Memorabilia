@@ -21,7 +21,7 @@ public partial class ViewCollections
 
     protected async Task OnLoad()
     {
-        Domain.Entities.Collection[] collections = await QueryRouter.Send(new GetCollections(UserId));
+        Entity.Collection[] collections = await QueryRouter.Send(new GetCollections(UserId));
 
         Model = new CollectionsModel(collections);
     }

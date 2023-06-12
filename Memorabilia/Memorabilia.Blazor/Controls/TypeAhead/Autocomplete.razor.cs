@@ -4,10 +4,12 @@ public abstract partial class Autocomplete<TItem>
     : CommandQuery where TItem : class, IWithName
 {
     [Parameter]
-    public Color AdornmentColor { get; set; } = Color.Primary;
+    public Color AdornmentColor { get; set; } 
+        = Color.Primary;
 
     [Parameter]
-    public string AdornmentIcon { get; set; } = Icons.Material.Filled.Search;
+    public string AdornmentIcon { get; set; } 
+        = Icons.Material.Filled.Search;
 
     [Parameter]
     public bool Disabled { get; set; } 
@@ -19,7 +21,8 @@ public abstract partial class Autocomplete<TItem>
     public string Placeholder { get; set; }
 
     [Parameter]
-    public bool ResetValueOnEmptyText { get; set; } = false;
+    public bool ResetValueOnEmptyText { get; set; } 
+        = false;
 
     [Parameter]
     public TItem SelectedValue { get; set; }
@@ -28,7 +31,8 @@ public abstract partial class Autocomplete<TItem>
     public EventCallback<TItem> SelectionChanged { get; set; }
 
     [Parameter]
-    public Variant Variant { get; set; } = Variant.Outlined;
+    public Variant Variant { get; set; } 
+        = Variant.Outlined;
 
     protected abstract string GetItemSelectedText(TItem item);
 
@@ -37,7 +41,5 @@ public abstract partial class Autocomplete<TItem>
     public abstract Task<IEnumerable<TItem>> Search(string searchText);
 
     public virtual string GetDisplayText(TItem item)
-    {
-        return item?.Name;
-    }
+        => item?.Name;
 }

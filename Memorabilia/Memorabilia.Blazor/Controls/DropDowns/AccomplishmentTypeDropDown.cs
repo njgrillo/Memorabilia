@@ -1,6 +1,4 @@
-﻿
-
-namespace Memorabilia.Blazor.Controls.DropDowns;
+﻿namespace Memorabilia.Blazor.Controls.DropDowns;
 
 public class AccomplishmentTypeDropDown : DropDown<AccomplishmentType, int>
 {

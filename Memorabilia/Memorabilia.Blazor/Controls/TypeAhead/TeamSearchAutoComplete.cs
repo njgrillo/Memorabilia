@@ -27,14 +27,10 @@ public class TeamSearchAutoComplete
     }
 
     protected override string GetItemSelectedText(Entity.Team item)
-    {
-        return item.DisplayName;
-    }
+        => item.DisplayName;
 
     protected override string GetItemText(Entity.Team item)
-    {
-        return item.DisplayName;
-    }
+        => item.DisplayName;
 
     private async Task LoadItems()
     {
@@ -50,13 +46,10 @@ public class TeamSearchAutoComplete
     }
 
     public override async Task<IEnumerable<Entity.Team>> Search(string searchText)
-    {
-        if (searchText.IsNullOrEmpty()) 
-            return Array.Empty<Entity.Team>();
-
-        return await Task.FromResult(Items.Where(item => item.Name.Contains(searchText, StringComparison.OrdinalIgnoreCase)
-                                                      || item.Location.Contains(searchText, StringComparison.OrdinalIgnoreCase)
-                                                      || item.DisplayName.Contains(searchText, StringComparison.OrdinalIgnoreCase))
-                                          .DistinctBy(item => item.Id));
-    }
+        => !searchText.IsNullOrEmpty()
+            ? await Task.FromResult(Items.Where(item => item.Name.Contains(searchText, StringComparison.OrdinalIgnoreCase) || 
+                                                item.Location.Contains(searchText, StringComparison.OrdinalIgnoreCase) || 
+                                                item.DisplayName.Contains(searchText, StringComparison.OrdinalIgnoreCase))
+                                         .DistinctBy(item => item.Id))
+            : Array.Empty<Entity.Team>();
 }

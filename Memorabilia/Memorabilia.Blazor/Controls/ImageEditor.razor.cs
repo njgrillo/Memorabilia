@@ -28,7 +28,7 @@ public partial class ImageEditor
 
     protected async Task Remove(string imageFileName)
     {
-        var imageFilePath = Path.Combine(ImageRootPath, imageFileName);
+        string imageFilePath = Path.Combine(ImageRootPath, imageFileName);
 
         if (File.Exists(imageFilePath))
             File.Delete(imageFilePath);

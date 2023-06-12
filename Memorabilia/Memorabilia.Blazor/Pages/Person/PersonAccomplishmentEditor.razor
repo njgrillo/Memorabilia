@@ -1,0 +1,59 @@
+﻿<div class="row">
+    <div class="col-6">
+        <AccomplishmentTypeAutoComplete SelectedValue="Model.AccomplishmentType"
+                                        SelectionChanged="(p) => Model.AccomplishmentType = p"
+                                        Sports="Sports" />
+    </div>
+    <div class="col-3" hidden="@(!IsYearAccomplishment)">
+        <TextField HelperText="Ex. 1999 or 1999-2002 or 2003, 2005-2008"
+                   Label="Years"
+                   SelectedText="@_years"
+                   SelectedTextChanged="@((p) => _years = p)" />
+    </div>
+    <div class="col-2" hidden="@(!IsDateAccomplishment)">
+        <MudDatePicker @bind-Date="Model.Date"
+                       DateFormat="MM/dd/yyyy"
+                       Editable="true"
+                       Label="Date"
+                       Mask="@(new DateMask("MM/dd/yyyy"))"
+                       Variant="Variant.Outlined" />
+    </div>
+</div>
+<br />
+<DivLeftAlign>
+    <Content>
+        <AddButton OnClick="Add" />
+    </Content>
+</DivLeftAlign>
+<DivRowCol6>
+    <Content>
+         <MudTable Bordered="false"
+                   Dense="false" 
+                   Hover="true"
+                   Items="@Items"
+                   RowsPerPage="10"
+                   Striped="true">
+            <HeaderContent>
+                <MudTh>Accomplishment</MudTh>
+                <MudTh>Date</MudTh>
+                <MudTh>Year</MudTh>
+                <MudTh></MudTh>
+            </HeaderContent>
+            <RowTemplate>
+                <MudTd DataLabel="Accomplishment">@context.AccomplishmentTypeName</MudTd>
+                <MudTd DataLabel="Date">@context.FormattedDate</MudTd>
+                <MudTd DataLabel="Year">@context.Year</MudTd>
+                <MudTd DataLabel="">
+                    <MudTooltip Text="Delete">
+                        <MudFab Color="MudBlazor.Color.Secondary"
+                                Icon="@Icons.Material.Outlined.DeleteOutline"
+                                OnClick="@(_ => context.IsDeleted = true)" />
+                    </MudTooltip>  
+                </MudTd>
+            </RowTemplate>
+            <PagerContent>
+                <MudTablePager />
+            </PagerContent>
+        </MudTable>
+    </Content>
+</DivRowCol6>

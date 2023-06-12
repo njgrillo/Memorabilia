@@ -1,6 +1,4 @@
-﻿
-
-namespace Memorabilia.Blazor.Controls.Fields;
+﻿namespace Memorabilia.Blazor.Controls.Fields;
 
 public partial class TextField : Field 
 {
@@ -8,13 +6,16 @@ public partial class TextField : Field
     public string HelperText { get; set; }
 
     [Parameter]
-    public InputType InputType { get; set; } = InputType.Text;
+    public InputType InputType { get; set; } 
+        = InputType.Text;
 
     [Parameter]
-    public int Lines { get; set; } = 1;
+    public int Lines { get; set; } 
+        = 1;
 
     [Parameter]
-    public int MaxLength { get; set; } = int.MaxValue;
+    public int MaxLength { get; set; } 
+        = int.MaxValue;
 
     [Parameter]
     public EventCallback<FocusEventArgs> OnBlur { get; set; }

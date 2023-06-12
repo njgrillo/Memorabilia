@@ -1,8 +1,7 @@
-﻿
+﻿namespace Memorabilia.Blazor.Controls.DropDowns;
 
-namespace Memorabilia.Blazor.Controls.DropDowns;
-
-public class FigureSpecialtyTypeDropDown : DropDown<FigureSpecialtyType, int>, INotifyPropertyChanged
+public class FigureSpecialtyTypeDropDown 
+    : DropDown<FigureSpecialtyType, int>, INotifyPropertyChanged
 {
     [Parameter]
     public FigureType FigureType { get; set; }
@@ -33,6 +32,8 @@ public class FigureSpecialtyTypeDropDown : DropDown<FigureSpecialtyType, int>, I
 
     private void LoadItems()
     {
-        Items = FigureType != null ? FigureSpecialtyType.GetAll(FigureType) : FigureSpecialtyType.All;
+        Items = FigureType != null 
+            ? FigureSpecialtyType.GetAll(FigureType) 
+            : FigureSpecialtyType.All;
     }
 }

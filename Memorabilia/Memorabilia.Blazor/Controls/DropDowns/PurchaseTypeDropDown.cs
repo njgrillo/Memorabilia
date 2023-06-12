@@ -3,11 +3,9 @@
 public class PurchaseTypeDropDown : DropDown<PurchaseType, int>
 {
     protected override string GetMultiSelectionText(List<string> selectedValues)
-    {
-        return !selectedValues.Any() || selectedValues.Count > 4
-            ? $"{selectedValues.Count} purchase types selected"
-            : string.Join(", ", selectedValues.Select(item => PurchaseType.Find(item.ToInt32())?.Name));
-    }
+    => !selectedValues.Any() || selectedValues.Count > 4 
+        ? $"{selectedValues.Count} purchase types selected" 
+        : string.Join(", ", selectedValues.Select(item => PurchaseType.Find(item.ToInt32())?.Name));
 
     protected override void OnInitialized()
     {

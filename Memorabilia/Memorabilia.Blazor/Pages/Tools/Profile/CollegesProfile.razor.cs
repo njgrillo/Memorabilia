@@ -2,7 +2,7 @@
 
 public partial class CollegesProfile : PersonProfile
 {
-    private Domain.Entities.PersonCollege[] Colleges;
+    private Entity.PersonCollege[] Colleges;
 
     protected override void OnParametersSet()
     {

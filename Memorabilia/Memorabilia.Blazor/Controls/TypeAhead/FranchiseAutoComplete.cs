@@ -3,7 +3,8 @@
 public class FranchiseAutoComplete : DomainEntityAutoComplete<Franchise>
 {
     [Parameter]
-    public Sport[] Sports { get; set; } = Array.Empty<Sport>();
+    public Sport[] Sports { get; set; } 
+        = Array.Empty<Sport>();
 
     private bool _loaded;
 
@@ -27,7 +28,8 @@ public class FranchiseAutoComplete : DomainEntityAutoComplete<Franchise>
 
     private void LoadItems()
     {
-        Items = Sports != null && Sports.Any()
+        Items = Sports != null && 
+                Sports.Any()
             ? Franchise.GetAll(Sports)
             : Franchise.All;
     }

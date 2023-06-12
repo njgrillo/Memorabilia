@@ -14,7 +14,7 @@
         <MudTh>End Year</MudTh>
     </HeaderContent>
     <RowTemplate>
-        <MudTd DataLabel="Name">@(Domain.Constants.College.Find(context.CollegeId)?.Name ?? string.Empty)</MudTd>
+        <MudTd DataLabel="Name">@(Constant.College.Find(context.CollegeId)?.Name ?? string.Empty)</MudTd>
         <MudTd DataLabel="Begin Year">@(context.BeginYear.HasValue ? context.BeginYear.Value : string.Empty)</MudTd>
             <MudTd DataLabel="End Year">@(context.EndYear.HasValue ? context.EndYear.Value : string.Empty)</MudTd>
     </RowTemplate>

@@ -1,8 +1,7 @@
-﻿
+﻿namespace Memorabilia.Blazor.Controls.DropDowns;
 
-namespace Memorabilia.Blazor.Controls.DropDowns;
-
-public class TeamRoleTypeDropDown : DropDown<TeamRoleType, int>, INotifyPropertyChanged
+public class TeamRoleTypeDropDown 
+    : DropDown<TeamRoleType, int>, INotifyPropertyChanged
 {
     [Parameter]
     public int SportLeagueLevelId { get; set; }
@@ -32,6 +31,8 @@ public class TeamRoleTypeDropDown : DropDown<TeamRoleType, int>, INotifyProperty
 
     private void LoadItems()
     {
-        Items = SportLeagueLevelId > 0 ? TeamRoleType.Get(SportLeagueLevel.Find(SportLeagueLevelId)) : TeamRoleType.All;
+        Items = SportLeagueLevelId > 0 
+            ? TeamRoleType.Get(SportLeagueLevel.Find(SportLeagueLevelId)) 
+            : TeamRoleType.All;
     }
 }

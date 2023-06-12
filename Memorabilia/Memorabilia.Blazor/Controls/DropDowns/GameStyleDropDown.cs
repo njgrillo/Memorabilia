@@ -1,6 +1,7 @@
 ﻿namespace Memorabilia.Blazor.Controls.DropDowns;
 
-public abstract class GameStyleDropDown<T> : DropDown<T, int>, INotifyPropertyChanged where T : DomainItemConstant
+public abstract class GameStyleDropDown<T> 
+    : DropDown<T, int>, INotifyPropertyChanged where T : DomainItemConstant
 {
     [Parameter]
     public GameStyleType GameStyleType { get; set; }

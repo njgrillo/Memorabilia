@@ -3,14 +3,10 @@
 public class FranchiseHallOfFameDropDown : DropDown<FranchiseHallOfFameType, int>
 {
     protected override string GetItemDisplayText(FranchiseHallOfFameType item)
-    {
-        return item.ToString();
-    }
+        => item.ToString();
 
     protected override int GetItemDisplayValue(FranchiseHallOfFameType item)
-    {
-        return item.Franchise.Id;
-    }
+        => item.Franchise.Id;
 
     protected override void OnInitialized()
     {

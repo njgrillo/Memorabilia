@@ -2,7 +2,7 @@
 
 public partial class FranchiseRetiredNumbersProfile : SportProfile
 {
-    private Domain.Entities.RetiredNumber[] FranchiseRetiredNumbers;
+    private Entity.RetiredNumber[] FranchiseRetiredNumbers;
 
     protected override void OnParametersSet()
     {

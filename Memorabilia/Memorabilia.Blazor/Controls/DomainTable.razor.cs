@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Blazor.Controls;
 
-public partial class DomainTable : ComponentBase
+public partial class DomainTable
 {
     [Inject]
     public IDialogService DialogService { get; set; }
@@ -26,15 +26,19 @@ public partial class DomainTable : ComponentBase
     [Parameter]
     public string RoutePrefix { get; set; }
 
-    private string AddRoute => $"{RoutePrefix}/{EditModeType.Update.Name}/0";
+    private string AddRoute 
+        => $"{RoutePrefix}/{EditModeType.Update.Name}/0";
 
-    private string AddText => $"{EditModeType.Add.Name} {DomainItemName}";
+    private string AddText 
+        => $"{EditModeType.Add.Name} {DomainItemName}";
 
-    private string DeleteText => $"Delete {DomainItemName}";
+    private string DeleteText 
+        => $"Delete {DomainItemName}";
 
     private string _search;
 
-    private bool FilterFunc1(DomainModel domainViewModel) => FilterFunc(domainViewModel, _search);
+    private bool FilterFunc1(DomainModel domainViewModel) 
+        => FilterFunc(domainViewModel, _search);
 
     protected async Task ShowDeleteConfirm(int id)
     {
@@ -49,7 +53,7 @@ public partial class DomainTable : ComponentBase
 
     private async Task Delete(int id)
     {
-        var deletedItem = DomainEntities.Single(domainEntity => domainEntity.Id == id);
+        DomainModel deletedItem = DomainEntities.Single(domainEntity => domainEntity.Id == id);
         var viewModel = new DomainEditModel(deletedItem)
         {
             IsDeleted = true
@@ -63,10 +67,8 @@ public partial class DomainTable : ComponentBase
     }
 
     private static bool FilterFunc(DomainModel domainViewModel, string search)
-    {
-        return search.IsNullOrEmpty() ||
-               domainViewModel.Name.Contains(search, StringComparison.OrdinalIgnoreCase) ||
-               (!domainViewModel.Abbreviation.IsNullOrEmpty() &&
-                domainViewModel.Abbreviation.Contains(search, StringComparison.OrdinalIgnoreCase));
-    }
+        => search.IsNullOrEmpty() ||
+           domainViewModel.Name.Contains(search, StringComparison.OrdinalIgnoreCase) ||
+           (!domainViewModel.Abbreviation.IsNullOrEmpty() &&
+            domainViewModel.Abbreviation.Contains(search, StringComparison.OrdinalIgnoreCase));
 }

@@ -1,0 +1,38 @@
+﻿<DivRowCol3>
+    <Content>
+        <TextField Label="Nickname"
+                   MaxLength="100"
+                   SelectedText="@Model.Nickname"
+                   SelectedTextChanged="@((p) => Model.Nickname = p)" />
+    </Content>
+</DivRowCol3>
+<DivLeftAlign>
+    <Content>
+        <AddButton OnClick="Add" />
+    </Content>
+</DivLeftAlign>
+<DivRowCol6>
+    <Content>
+         <MudTable Bordered="false"
+                   Dense="false" 
+                   Hover="true"
+                   Items="@Nicknames.Where(nickname => !nickname.IsDeleted).ToList()"    
+                   Striped="true">
+            <HeaderContent>
+                <MudTh>Nickname</MudTh>
+                <MudTh></MudTh>
+            </HeaderContent>
+            <RowTemplate>
+                <MudTd DataLabel="Nickname">@context.Nickname</MudTd>
+                <MudTd DataLabel="">
+                    <MudTooltip Text="Delete">
+                        <MudFab Color="MudBlazor.Color.Secondary"
+                                Icon="@Icons.Material.Outlined.DeleteOutline"
+                                OnClick="@(_ => Nicknames.Remove(context))" />
+                    </MudTooltip>  
+                </MudTd>
+            </RowTemplate>
+        </MudTable>
+    </Content>
+</DivRowCol6>
+

@@ -1,0 +1,83 @@
+﻿<Condition Evaluation="CanToggle">
+    <Match>
+        <DivRowCol3>
+            <Content>
+                <MudSwitch Checked="@_hasPeople"
+                           CheckedChanged="PersonCheckboxClicked"
+                           Color="MudBlazor.Color.Success"
+                           Label="@_itemTypeNameLabel"
+                           T="bool" />
+            </Content>
+        </DivRowCol3>
+    </Match>
+</Condition>
+<Condition Evaluation="CanFilterBySport">
+    <Match>
+        <DivRowCol6 Hidden="@(!_displayPeople)"
+                    LeftPadding="10">
+            <Content>
+                <Condition Evaluation="@(CanFilterBySport && Sport != null)">
+                    <Match>
+                        <DivRowCol3 LeftPadding="10">
+                            <Content>
+                                <MudSwitch Checked="@_filterPeople"
+                                           CheckedChanged="PersonFilterCheckboxClicked"
+                                           Color="MudBlazor.Color.Success"
+                                           Label="@_itemTypeNameFilterLabel"
+                                           T="bool" />
+                            </Content>
+                        </DivRowCol3>
+                    </Match>
+                </Condition>  
+            </Content>
+        </DivRowCol6>
+    </Match>
+</Condition>
+<DivRowCol6 Hidden="@(!_displayPeople)"
+            LeftPadding="10">
+    <Content>
+        <PersonAutoComplete IsCulturalSearch="true" 
+                            SelectedValue="SelectedPerson"
+                            SelectionChanged="(p) => SelectedPerson = p"
+                            Sport="Sport" />
+    </Content>
+</DivRowCol6>
+<DivRowCol6 Hidden="@(!_displayPeople)"
+            LeftPadding="10">
+    <Content>
+        <DivLeftAlign>
+            <Content>
+                <AddButton OnClick="Add"
+                           Text="Add Person" />
+            </Content>
+        </DivLeftAlign>
+        <MudTable Bordered="false"
+                  Dense="false" 
+                  Hover="true"
+                  Items="@SelectedPeople.Where(person => !person.IsDeleted).ToList()"    
+                  Striped="true">
+            <HeaderContent>
+                <MudTh>Person</MudTh>
+                <MudTh></MudTh>
+                <MudTh></MudTh>
+            </HeaderContent>
+            <RowTemplate>
+                <MudTd DataLabel="Person">@context.DisplayName</MudTd>
+                <MudTd DataLabel="">
+                    <MudTooltip Text="View Profile">
+                        <MudFab Color="MudBlazor.Color.Secondary"
+                                Icon="@Icons.Material.Filled.Person"
+                                OnClick="@(_ => ShowPersonProfile(context.Id))" />
+                    </MudTooltip>
+                </MudTd>
+                <MudTd DataLabel="">
+                    <MudTooltip Text="Delete">
+                        <MudFab Color="MudBlazor.Color.Secondary"
+                                Icon="@Icons.Material.Outlined.DeleteOutline"
+                                OnClick="@(_ => context.IsDeleted = true)" />
+                    </MudTooltip>  
+                </MudTd>
+            </RowTemplate>
+        </MudTable>
+    </Content>
+</DivRowCol6>

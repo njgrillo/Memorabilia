@@ -1,17 +1,18 @@
-﻿
+﻿namespace Memorabilia.Blazor.Controls.DropDowns;
 
-namespace Memorabilia.Blazor.Controls.DropDowns;
-
-public partial class DropDown<TItem, TType> : CommandQuery where TItem : class, IWithName, IWithValue<TType> 
+public partial class DropDown<TItem, TType> 
+    : CommandQuery where TItem : class, IWithName, IWithValue<TType> 
 {
     [Parameter]
     public RenderFragment ChildContent { get; set; }
 
     [Parameter]
-    public bool Disabled { get; set; } = false;
+    public bool Disabled { get; set; } 
+        = false;
 
     [Parameter]
-    public bool DisplaySelect { get; set; } = true;
+    public bool DisplaySelect { get; set; } 
+        = true;
 
     [Parameter]
     public string Label { get; set; }
@@ -20,10 +21,12 @@ public partial class DropDown<TItem, TType> : CommandQuery where TItem : class, 
     public bool MultiSelect { get; set; }
 
     [Parameter]
-    public bool SelectAll { get; set; } = true;
+    public bool SelectAll { get; set; } 
+        = true;
 
     [Parameter]
-    public IEnumerable<TType> SelectedItems { get; set; } = Enumerable.Empty<TType>();
+    public IEnumerable<TType> SelectedItems { get; set; } 
+        = Enumerable.Empty<TType>();
 
     [Parameter]
     public EventCallback<IEnumerable<TType>> SelectedItemsChanged { get; set; }
@@ -35,7 +38,8 @@ public partial class DropDown<TItem, TType> : CommandQuery where TItem : class, 
     public EventCallback<TType> SelectionChanged { get; set; }
 
     [Parameter]
-    public string SelectItemText { get; set; } = "--Select--";
+    public string SelectItemText { get; set; }
+        = "--Select--";
 
     [Parameter]
     public TType SelectItemValue { get; set; }
@@ -44,22 +48,18 @@ public partial class DropDown<TItem, TType> : CommandQuery where TItem : class, 
     public TType Value { get; set; }    
 
     [Parameter]
-    public Variant Variant { get; set; } = Variant.Outlined;
+    public Variant Variant { get; set; } 
+        = Variant.Outlined;
 
-    public IEnumerable<TItem> Items { get; set; } = Enumerable.Empty<TItem>();
+    public IEnumerable<TItem> Items { get; set; } 
+        = Enumerable.Empty<TItem>();
 
     protected virtual string GetItemDisplayText(TItem item)
-    {
-        return item.Name;
-    }
+        => item.Name;
 
     protected virtual TType GetItemDisplayValue(TItem item)
-    {
-        return item.Value;
-    }
+        => item.Value;
 
     protected virtual string GetMultiSelectionText(List<string> selectedValues)
-    {
-        return $"{selectedValues.Count} items have been selected";
-    }
+        => $"{selectedValues.Count} items have been selected";
 }

@@ -1,29 +1,29 @@
-﻿<EditPage ContinueNavigationPath="@_viewModel.NavigationPath"
-          EditMode="_viewModel.EditModeType"
-          ExitNavigationPath="@_viewModel.NavigationPath"
-          ImageFileName="@_viewModel.ImageFileName"
-          ItemName="@_viewModel.DomainTypeName"
-          Model="_viewModel"
+﻿<EditPage ContinueNavigationPath="@Model.NavigationPath"
+          EditMode="Model.EditModeType"
+          ExitNavigationPath="@Model.NavigationPath"
+          ImageFileName="@Model.ImageFileName"
+          ItemName="@Model.DomainTypeName"
+          Model="Model"
           OnLoad="Load"
           OnSave="Save"
-          PageFooterNavigationPath="@_viewModel.PageFooterNavigationPath"
-          PageTitle="@_viewModel.PageTitle"
+          PageFooterNavigationPath="@Model.PageFooterNavigationPath"
+          PageTitle="@Model.PageTitle"
           TItem="DomainEditModel">
     <Content>
         <DivRowCol3>
             <Content>
                 <TextField Label="Name"
                            MaxLength="@MaxNameLength"
-                           SelectedText="@_viewModel.Name"
-                           SelectedTextChanged="@((p) => _viewModel.Name = p)" />
+                           SelectedText="@Model.Name"
+                           SelectedTextChanged="@((p) => Model.Name = p)" />
             </Content>
         </DivRowCol3>
         <DivRowCol3>
             <Content>
                 <TextField Label="Abbreviation"
                            MaxLength="@MaxAbbreviationLength"
-                           SelectedText="@_viewModel.Abbreviation"
-                           SelectedTextChanged="@((p) => _viewModel.Abbreviation = p)" />
+                           SelectedText="@Model.Abbreviation"
+                           SelectedTextChanged="@((p) => Model.Abbreviation = p)" />
             </Content>
         </DivRowCol3>
     </Content>

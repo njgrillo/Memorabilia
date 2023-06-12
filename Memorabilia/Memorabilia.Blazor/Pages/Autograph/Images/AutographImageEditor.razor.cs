@@ -21,7 +21,7 @@ public partial class AutographImageEditor : AutographItem<AutographImagesEditMod
             = new MemorabiliaImagesModel(await QueryRouter.Send(new GetMemorabiliaImages(ViewModel.MemorabiliaId)));
 
         var images = memorabliaImagesViewModel.Images
-                                              .Select(image => new Domain.Entities.AutographImage(ViewModel.AutographId,
+                                              .Select(image => new Entity.AutographImage(ViewModel.AutographId,
                                                                                                   image.FileName,
                                                                                                   image.ImageTypeId,
                                                                                                   image.UploadDate))

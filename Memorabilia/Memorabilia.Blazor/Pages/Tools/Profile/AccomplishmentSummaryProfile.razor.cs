@@ -43,7 +43,7 @@ public partial class AccomplishmentSummaryProfile : PersonProfile
         DistinctAccomplishments = Accomplishments.DistinctBy(accomplishment => accomplishment.AccomplishmentTypeId)
                                                  .ToArray();
 
-        Domain.Entities.PersonTeam[] teams
+        Entity.PersonTeam[] teams
             = Person.Teams
                     .Filter(Sport, OccupationType)
                     .Where(team => Sport == null || Sport.Id == team.Team.Franchise.SportLeagueLevel.SportId)
