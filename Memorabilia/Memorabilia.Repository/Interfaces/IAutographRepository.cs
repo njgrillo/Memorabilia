@@ -1,14 +1,12 @@
-﻿using Memorabilia.Domain.Entities;
+﻿namespace Memorabilia.Repository.Interfaces;
 
-namespace Memorabilia.Repository.Interfaces;
-
-public interface IAutographRepository : IDomainRepository<Autograph>
+public interface IAutographRepository : IDomainRepository<Entity.Autograph>
 {
     int[] GetAcquisitionTypeIds(int userId);
 
-    Task<IEnumerable<Autograph>> GetAll(int? memorabiliaId = null, int? userId = null);
+    Task<Entity.Autograph[]> GetAll(int? memorabiliaId = null, int? userId = null);
 
-    Task<Autograph[]> GetAll(Dictionary<string, object> parameters);
+    Task<Entity.Autograph[]> GetAll(Dictionary<string, object> parameters);
 
     int[] GetColorIds(int userId);
 

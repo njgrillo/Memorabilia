@@ -12,7 +12,6 @@ public record GetHelmetTypes() : IQuery<Entity.HelmetType[]>
         }
 
         protected override async Task<Entity.HelmetType[]> Handle(GetHelmetTypes query)
-            => (await _helmetTypeRepository.GetAll())
-                    .ToArray();
+            => await _helmetTypeRepository.GetAll();
     }
 }

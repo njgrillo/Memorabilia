@@ -12,7 +12,6 @@ public record GetPrivacyTypes() : IQuery<Entity.PrivacyType[]>
         }
 
         protected override async Task<Entity.PrivacyType[]> Handle(GetPrivacyTypes query)
-            => (await _privacyTypeRepository.GetAll())
-                    .ToArray();
+            => await _privacyTypeRepository.GetAll();
     }
 }

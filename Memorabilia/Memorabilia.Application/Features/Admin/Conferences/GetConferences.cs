@@ -12,7 +12,6 @@ public record GetConferences() : IQuery<Entity.Conference[]>
         }
 
         protected override async Task<Entity.Conference[]> Handle(GetConferences query)
-            => (await _conferenceRepository.GetAll())
-                            .ToArray();
+            => await _conferenceRepository.GetAll();
     }
 }

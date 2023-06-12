@@ -12,7 +12,6 @@ public record GetSizes() : IQuery<Entity.Size[]>
         }
 
         protected override async Task<Entity.Size[]> Handle(GetSizes query)
-            => (await _sizeRepository.GetAll())
-                    .ToArray();
+            => await _sizeRepository.GetAll();
     }
 }

@@ -1,5 +1,4 @@
-﻿using Memorabilia.Domain.Entities;
+﻿namespace Memorabilia.Repository.Interfaces;
 
-namespace Memorabilia.Repository.Interfaces;
-
-public interface IItemTypeSizeRepository : IItemTypeEntityRepository<ItemTypeSize> { }
+public interface IItemTypeSizeRepository 
+    : IItemTypeEntityRepository<Entity.ItemTypeSize> { }

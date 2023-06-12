@@ -12,7 +12,6 @@ public record GetOccupations() : IQuery<Entity.Occupation[]>
         }
 
         protected override async Task<Entity.Occupation[]> Handle(GetOccupations query)
-            => (await _occupationRepository.GetAll())
-                    .ToArray();
+            => await _occupationRepository.GetAll();
     }
 }

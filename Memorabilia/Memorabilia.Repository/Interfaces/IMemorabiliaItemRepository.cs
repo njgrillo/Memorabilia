@@ -1,24 +1,23 @@
 ﻿namespace Memorabilia.Repository.Interfaces;
 
-public interface IMemorabiliaItemRepository : IDomainRepository<Domain.Entities.Memorabilia>
+public interface IMemorabiliaItemRepository 
+    : IDomainRepository<Entity.Memorabilia>
 {
     int[] GetAcquisitionTypeIds(int userId);
 
-    Task<IEnumerable<Domain.Entities.Memorabilia>> GetAll(int userId);
+    Task<Entity.Memorabilia[]> GetAll(int userId);
 
-    Task<PagedResult<Domain.Entities.Memorabilia>> GetAll(
-        int userId,
-        PageInfo pageInfo,
-        MemorabiliaSearchCriteria memorabiliaSearchCriteria = null);
+    Task<PagedResult<Entity.Memorabilia>> GetAll(int userId,
+                                                 PageInfo pageInfo,
+                                                 MemorabiliaSearchCriteria memorabiliaSearchCriteria = null);
 
-    Task<Domain.Entities.Memorabilia[]> GetAll(Dictionary<string, object> parameters);
+    Task<Entity.Memorabilia[]> GetAll(Dictionary<string, object> parameters);
 
-    Task<PagedResult<Domain.Entities.Memorabilia>> GetAllByCollection(
-        int collectionId,
-        PageInfo pageInfo,
-        MemorabiliaSearchCriteria memorabiliaSearchCriteria = null);
+    Task<PagedResult<Entity.Memorabilia>> GetAllByCollection(int collectionId,
+                                                             PageInfo pageInfo,
+                                                             MemorabiliaSearchCriteria memorabiliaSearchCriteria = null);
 
-    Task<IEnumerable<Domain.Entities.Memorabilia>> GetAllUnsigned(int userId);
+    Task<Entity.Memorabilia[]> GetAllUnsigned(int userId);
 
     int[] GetBrandIds(int userId);
 

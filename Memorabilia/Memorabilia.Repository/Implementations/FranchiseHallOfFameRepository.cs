@@ -1,19 +1,18 @@
-﻿using Memorabilia.Domain.Entities;
+﻿namespace Memorabilia.Repository.Implementations;
 
-namespace Memorabilia.Repository.Implementations;
-
-public class FranchiseHallOfFameRepository : DomainRepository<FranchiseHallOfFame>, IFranchiseHallOfFameRepository
+public class FranchiseHallOfFameRepository 
+    : DomainRepository<Entity.FranchiseHallOfFame>, IFranchiseHallOfFameRepository
 {
-    public FranchiseHallOfFameRepository(DomainContext context, IMemoryCache memoryCache) : base(context, memoryCache) { }
+    public FranchiseHallOfFameRepository(DomainContext context, IMemoryCache memoryCache) 
+        : base(context, memoryCache) { }
 
-    private IQueryable<FranchiseHallOfFame> FranchiseHallOfFames => Items.Include(franchiseHallOfFame => franchiseHallOfFame.Franchise)
-                                                                         .Include(franchiseHallOfFame => franchiseHallOfFame.Person);
+    private IQueryable<Entity.FranchiseHallOfFame> FranchiseHallOfFames 
+        => Items.Include(franchiseHallOfFame => franchiseHallOfFame.Franchise)
+                .Include(franchiseHallOfFame => franchiseHallOfFame.Person);
 
-    public async Task<IEnumerable<FranchiseHallOfFame>> GetAll(int franchiseId)
-    {
-        return (await FranchiseHallOfFames.Where(franchiseHallOfFame => franchiseHallOfFame.FranchiseId == franchiseId)
-                                          .AsNoTracking()
-                                          .ToListAsync())
-                      .OrderByDescending(franchiseHallOfFame => franchiseHallOfFame.Person.DisplayName);
-    }
+    public async Task<IEnumerable<Entity.FranchiseHallOfFame>> GetAll(int franchiseId)
+        => (await FranchiseHallOfFames.Where(franchiseHallOfFame => franchiseHallOfFame.FranchiseId == franchiseId)
+                                      .AsNoTracking()
+                                      .ToListAsync())
+                  .OrderByDescending(franchiseHallOfFame => franchiseHallOfFame.Person.DisplayName);
 }

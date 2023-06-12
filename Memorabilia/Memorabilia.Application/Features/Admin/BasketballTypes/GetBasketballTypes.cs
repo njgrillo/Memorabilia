@@ -12,6 +12,6 @@ public record GetBasketballTypes() : IQuery<Entity.BasketballType[]>
         }
 
         protected override async Task<Entity.BasketballType[]> Handle(GetBasketballTypes query)
-            => (await _basketballTypeRepository.GetAll()).ToArray();
+            => await _basketballTypeRepository.GetAll();
     }
 }

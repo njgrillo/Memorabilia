@@ -12,7 +12,6 @@ public record GetItemTypeLevels(int? ItemTypeId = null) : IQuery<Entity.ItemType
         }
 
         protected override async Task<Entity.ItemTypeLevel[]> Handle(GetItemTypeLevels query)
-            => (await _itemTypeLevelRepository.GetAll(query.ItemTypeId))
-                    .ToArray();
+            => await _itemTypeLevelRepository.GetAll(query.ItemTypeId);
     }
 }

@@ -12,7 +12,6 @@ public record GetRecordTypes() : IQuery<Entity.RecordType[]>
         }
 
         protected override async Task<Entity.RecordType[]> Handle(GetRecordTypes query)
-            => (await _recordTypeRepository.GetAll())
-                    .ToArray();
+            => await _recordTypeRepository.GetAll();
     }
 }

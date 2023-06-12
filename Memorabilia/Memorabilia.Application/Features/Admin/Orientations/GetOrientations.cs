@@ -12,7 +12,6 @@ public record GetOrientations() : IQuery<Entity.Orientation[]>
         }
 
         protected override async Task<Entity.Orientation[]> Handle(GetOrientations query)
-            => (await _orientationRepository.GetAll())
-                    .ToArray();
+            => await _orientationRepository.GetAll();
     }
 }

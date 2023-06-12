@@ -1,8 +1,6 @@
-﻿using Memorabilia.Domain.Entities;
-
-namespace Memorabilia.Repository.Interfaces;
+﻿namespace Memorabilia.Repository.Interfaces;
 
 public interface ICareerRecordRepository
 {
-    Task<IEnumerable<CareerRecord>> GetAll(int sportId);
+    Task<IEnumerable<Entity.CareerRecord>> GetAll(int sportId);
 }

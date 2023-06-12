@@ -12,7 +12,6 @@ public record GetItemTypeSizes(int? ItemTypeId = null) : IQuery<Entity.ItemTypeS
         }
 
         protected override async Task<Entity.ItemTypeSize[]> Handle(GetItemTypeSizes query)
-            => (await _itemTypeSizeRepository.GetAll(query.ItemTypeId))
-                    .ToArray();
+            => await _itemTypeSizeRepository.GetAll(query.ItemTypeId);
     }
 }

@@ -12,7 +12,6 @@ public record GetCerealTypes() : IQuery<Entity.CerealType[]>
         }
 
         protected override async Task<Entity.CerealType[]> Handle(GetCerealTypes query)
-            => (await _CerealTypeRepository.GetAll())
-                    .ToArray();
+            => await _CerealTypeRepository.GetAll();
     }
 }

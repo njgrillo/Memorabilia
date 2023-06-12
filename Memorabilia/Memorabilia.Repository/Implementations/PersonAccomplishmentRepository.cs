@@ -1,24 +1,27 @@
-﻿using Memorabilia.Domain.Entities;
+﻿namespace Memorabilia.Repository.Implementations;
 
-namespace Memorabilia.Repository.Implementations;
-
-public class PersonAccomplishmentRepository : DomainRepository<PersonAccomplishment>, IPersonAccomplishmentRepository
+public class PersonAccomplishmentRepository 
+    : DomainRepository<Entity.PersonAccomplishment>, IPersonAccomplishmentRepository
 {
-    public PersonAccomplishmentRepository(DomainContext context, IMemoryCache memoryCache) : base(context, memoryCache) { }
+    public PersonAccomplishmentRepository(DomainContext context, IMemoryCache memoryCache) 
+        : base(context, memoryCache) { }
 
-    private IQueryable<PersonAccomplishment> PersonAccomplishment => Items.Include(personAccomplishment => personAccomplishment.Person);
+    private IQueryable<Entity.PersonAccomplishment> PersonAccomplishment 
+        => Items.Include(personAccomplishment => personAccomplishment.Person);
 
-    public async Task<IEnumerable<PersonAccomplishment>> GetAll(int accomplishmentTypeId)
+    public async Task<IEnumerable<Entity.PersonAccomplishment>> GetAll(int accomplishmentTypeId)
     {
-        var accomplishments = await PersonAccomplishment.Where(personAccomplishment => personAccomplishment.AccomplishmentTypeId == accomplishmentTypeId)
-                                                        .AsNoTracking()
-                                                        .ToListAsync();
+        Entity.PersonAccomplishment[] accomplishments 
+            = await PersonAccomplishment.Where(personAccomplishment => personAccomplishment.AccomplishmentTypeId == accomplishmentTypeId)
+                                        .AsNoTracking()
+                                        .ToArrayAsync();
 
-        var sortByDate = accomplishments.Any(personAccomplishment => personAccomplishment.Date.HasValue);
+        bool sortByDate = accomplishments.Any(personAccomplishment => personAccomplishment.Date.HasValue);
 
-        return sortByDate ? accomplishments.OrderByDescending(personAccomplishment => personAccomplishment.Date)
-                                           .ThenBy(personAccomplishment => personAccomplishment.Person.DisplayName)
-                          : accomplishments.OrderByDescending(personAccomplishment => personAccomplishment.Year)
-                                           .ThenBy(personAccomplishment => personAccomplishment.Person.DisplayName);
+        return sortByDate 
+            ? accomplishments.OrderByDescending(personAccomplishment => personAccomplishment.Date)
+                            .ThenBy(personAccomplishment => personAccomplishment.Person.DisplayName)
+            : accomplishments.OrderByDescending(personAccomplishment => personAccomplishment.Year)
+                            .ThenBy(personAccomplishment => personAccomplishment.Person.DisplayName);
     }
 }

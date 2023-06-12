@@ -12,7 +12,6 @@ public record GetItemTypes() : IQuery<Entity.ItemType[]>
         }
 
         protected override async Task<Entity.ItemType[]> Handle(GetItemTypes query)
-            => (await _itemTypeRepository.GetAll())
-                    .ToArray();
+            => await _itemTypeRepository.GetAll();
     }
 }

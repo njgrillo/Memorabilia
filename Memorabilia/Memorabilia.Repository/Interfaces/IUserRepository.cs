@@ -1,8 +1,6 @@
-﻿using Memorabilia.Domain.Entities;
+﻿namespace Memorabilia.Repository.Interfaces;
 
-namespace Memorabilia.Repository.Interfaces;
-
-public interface IUserRepository : IDomainRepository<User>
+public interface IUserRepository : IDomainRepository<Entity.User>
 {
-    Task<User> Get(string username, string password);
+    Task<Entity.User> Get(string username, string password);
 }

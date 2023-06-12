@@ -1,8 +1,6 @@
-﻿using Memorabilia.Domain.Entities;
+﻿namespace Memorabilia.Repository.Interfaces;
 
-namespace Memorabilia.Repository.Interfaces;
-
-public interface IProjectRepository : IDomainRepository<Project>
+public interface IProjectRepository : IDomainRepository<Entity.Project>
 {
-    Task<IEnumerable<Project>> GetAll(int userId);
+    Task<Entity.Project[]> GetAll(int userId);
 }

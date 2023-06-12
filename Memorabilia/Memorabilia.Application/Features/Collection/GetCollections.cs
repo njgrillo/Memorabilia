@@ -13,7 +13,7 @@ public record GetCollections(int UserId) : IQuery<Entity.Collection[]>
 
         protected override async Task<Entity.Collection[]> Handle(GetCollections query)
             => (await _collectionRepository.GetAll(query.UserId))
-                       .OrderBy(collection => collection.Name)
-                       .ToArray();
+                   .OrderBy(collection => collection.Name)
+                   .ToArray();
     }
 }

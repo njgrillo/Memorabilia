@@ -12,7 +12,6 @@ public record GetSpots() : IQuery<Entity.Spot[]>
         }
 
         protected override async Task<Entity.Spot[]> Handle(GetSpots query)
-            => (await _spotRepository.GetAll())
-                    .ToArray();
+            => await _spotRepository.GetAll();
     }
 }

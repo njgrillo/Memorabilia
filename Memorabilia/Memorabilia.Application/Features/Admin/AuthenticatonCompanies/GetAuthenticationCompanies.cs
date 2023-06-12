@@ -12,6 +12,6 @@ public record GetAuthenticationCompanies() : IQuery<Entity.AuthenticationCompany
         }
 
         protected override async Task<Entity.AuthenticationCompany[]> Handle(GetAuthenticationCompanies query)
-            => (await _authenticationCompanyRepository.GetAll()).ToArray();
+            => await _authenticationCompanyRepository.GetAll();
     }
 }

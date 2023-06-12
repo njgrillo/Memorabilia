@@ -12,7 +12,6 @@ public record GetItemTypeSpots(int? ItemTypeId = null) : IQuery<Entity.ItemTypeS
         }
 
         protected override async Task<Entity.ItemTypeSpot[]> Handle(GetItemTypeSpots query)
-            => (await _itemTypeSpotRepository.GetAll(query.ItemTypeId))
-                    .ToArray();
+            => await _itemTypeSpotRepository.GetAll(query.ItemTypeId);
     }
 }

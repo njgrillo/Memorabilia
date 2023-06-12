@@ -11,7 +11,8 @@ public class MemorabiliaRepository<T>
         Context = context;
     }
 
-    protected IQueryable<T> Items => Context.Set<T>();
+    protected IQueryable<T> Items 
+        => Context.Set<T>();
 
     public virtual async Task Add(T item, CancellationToken cancellationToken = default)
     {
@@ -33,19 +34,13 @@ public class MemorabiliaRepository<T>
     }
 
     public virtual async Task<T> Get(int id)
-    {
-        return await Items.SingleOrDefaultAsync(item => item.Id == id);
-    }
+        => await Items.SingleOrDefaultAsync(item => item.Id == id);
 
-    public async Task<IEnumerable<T>> GetAll()
-    {
-        return await Items.ToListAsync();
-    }
+    public async Task<T[]> GetAll()
+        => await Items.ToArrayAsync();
 
     public IDbContextTransaction GetTransaction()
-    {
-        return GetTransaction(Context);
-    }
+        => GetTransaction(Context);
 
     public void RollbackTransaction()
     {

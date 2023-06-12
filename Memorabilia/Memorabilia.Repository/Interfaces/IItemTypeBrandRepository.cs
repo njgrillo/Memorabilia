@@ -1,5 +1,4 @@
-﻿using Memorabilia.Domain.Entities;
+﻿namespace Memorabilia.Repository.Interfaces;
 
-namespace Memorabilia.Repository.Interfaces;
-
-public interface IItemTypeBrandRepository : IItemTypeEntityRepository<ItemTypeBrand> { }
+public interface IItemTypeBrandRepository 
+    : IItemTypeEntityRepository<Entity.ItemTypeBrand> { }

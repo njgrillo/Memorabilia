@@ -14,7 +14,6 @@ public record GetLeaguePresidents(int? SportLeagueLevelId = null,
         }
 
         protected override async Task<Entity.LeaguePresident[]> Handle(GetLeaguePresidents query)
-            => (await _leaguePresidentRepository.GetAll(query.SportLeagueLevelId, query.LeagueId))
-                    .ToArray();
+            => await _leaguePresidentRepository.GetAll(query.SportLeagueLevelId, query.LeagueId);
     }
 }

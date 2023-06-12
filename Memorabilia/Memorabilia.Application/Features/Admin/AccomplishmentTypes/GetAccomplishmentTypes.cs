@@ -12,7 +12,6 @@ public record GetAccomplishmentTypes() : IQuery<Entity.AccomplishmentType[]>
         }
 
         protected override async Task<Entity.AccomplishmentType[]> Handle(GetAccomplishmentTypes query)
-            => (await _accomplishmentTypeRepository.GetAll())
-                    .ToArray();
+            => await _accomplishmentTypeRepository.GetAll();
     }
 }

@@ -12,6 +12,6 @@ public record GetBammerTypes() : IQuery<Entity.BammerType[]>
         }
 
         protected override async Task<Entity.BammerType[]> Handle(GetBammerTypes query)
-            => (await _bammerTypeRepository.GetAll()).ToArray();
+            => await _bammerTypeRepository.GetAll();
     }
 }

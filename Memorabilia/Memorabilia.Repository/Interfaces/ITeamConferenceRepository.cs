@@ -1,8 +1,6 @@
-﻿using Memorabilia.Domain.Entities;
+﻿namespace Memorabilia.Repository.Interfaces; 
 
-namespace Memorabilia.Repository.Interfaces; 
-
-public interface ITeamConferenceRepository : IDomainRepository<TeamConference>
+public interface ITeamConferenceRepository : IDomainRepository<Entity.TeamConference>
 {
-    Task<IEnumerable<TeamConference>> GetAll(int? teamId = null);
+    Task<Entity.TeamConference[]> GetAll(int? teamId = null);
 }

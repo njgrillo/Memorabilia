@@ -12,7 +12,6 @@ public record GetPriorityTypes() : IQuery<Entity.PriorityType[]>
         }
 
         protected override async Task<Entity.PriorityType[]> Handle(GetPriorityTypes query)
-            => (await _priorityTypeRepository.GetAll())
-                    .ToArray();
+            => await _priorityTypeRepository.GetAll();
     }
 }

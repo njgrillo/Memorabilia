@@ -1,16 +1,16 @@
-﻿using Memorabilia.Domain.Entities;
+﻿namespace Memorabilia.Repository.Implementations;
 
-namespace Memorabilia.Repository.Implementations;
-
-public class PersonTeamRepository : DomainRepository<PersonTeam>, IPersonTeamRepository
+public class PersonTeamRepository 
+    : DomainRepository<Entity.PersonTeam>, IPersonTeamRepository
 {
-    public PersonTeamRepository(DomainContext context, IMemoryCache memoryCache) : base(context, memoryCache) { }
+    public PersonTeamRepository(DomainContext context, IMemoryCache memoryCache) 
+        : base(context, memoryCache) { }
 
-    private IQueryable<PersonTeam> PersonTeams => Items.Include(personTeam => personTeam.Person)
-                                                       .Include(personTeam => personTeam.Team);
+    private IQueryable<Entity.PersonTeam> PersonTeams 
+        => Items.Include(personTeam => personTeam.Person)
+                .Include(personTeam => personTeam.Team);
 
-    public async Task<IEnumerable<PersonTeam>> GetAll(int franchiseId)
-    {
-        return await PersonTeams.Where(personTeam => personTeam.Team.FranchiseId == franchiseId).ToListAsync();
-    }
+    public async Task<IEnumerable<Entity.PersonTeam>> GetAll(int franchiseId)
+        => await PersonTeams.Where(personTeam => personTeam.Team.FranchiseId == franchiseId)
+                            .ToListAsync();
 }

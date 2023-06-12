@@ -12,7 +12,6 @@ public record GetItemTypeGameStyles(int? ItemTypeId = null) : IQuery<Entity.Item
         }
 
         protected override async Task<Entity.ItemTypeGameStyleType[]> Handle(GetItemTypeGameStyles query)
-            => (await _itemTypeGameStyleRepository.GetAll(query.ItemTypeId))
-                    .ToArray();
+            => await _itemTypeGameStyleRepository.GetAll(query.ItemTypeId);
     }
 }

@@ -12,7 +12,6 @@ public record GetFigureSpecialtyTypes() : IQuery<Entity.FigureSpecialtyType[]>
         }
 
         protected override async Task<Entity.FigureSpecialtyType[]> Handle(GetFigureSpecialtyTypes query)
-            => (await _figureSpecialtyTypeRepository.GetAll())
-                    .ToArray();
+            => await _figureSpecialtyTypeRepository.GetAll();
     }
 }

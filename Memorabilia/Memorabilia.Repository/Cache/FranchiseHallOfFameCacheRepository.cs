@@ -1,23 +1,23 @@
-﻿using Memorabilia.Domain.Entities;
+﻿namespace Memorabilia.Repository.Cache;
 
-namespace Memorabilia.Repository.Cache;
-
-public class FranchiseHallOfFameCacheRepository : DomainCacheRepository<FranchiseHallOfFame>, IFranchiseHallOfFameRepository
+public class FranchiseHallOfFameCacheRepository 
+    : DomainCacheRepository<Entity.FranchiseHallOfFame>, IFranchiseHallOfFameRepository
 {
     private readonly FranchiseHallOfFameRepository _franchiseHallOfFameRepository;
 
-    public FranchiseHallOfFameCacheRepository(DomainContext context, FranchiseHallOfFameRepository franchiseHallOfFameRepository, IMemoryCache memoryCache)
+    public FranchiseHallOfFameCacheRepository(DomainContext context, 
+                                              FranchiseHallOfFameRepository franchiseHallOfFameRepository, 
+                                              IMemoryCache memoryCache)
         : base(context, memoryCache)
     {
         _franchiseHallOfFameRepository = franchiseHallOfFameRepository;
     }
 
-    public Task<IEnumerable<FranchiseHallOfFame>> GetAll(int franchiseId)
-    {
-        return GetAll($"FranchiseHallOfFame_GetAll_{franchiseId}", entry =>
-        {
-            entry.SetAbsoluteExpiration(TimeSpan.FromDays(1));
-            return _franchiseHallOfFameRepository.GetAll(franchiseId);
-        });
-    }
+    public Task<IEnumerable<Entity.FranchiseHallOfFame>> GetAll(int franchiseId)
+        => GetAll($"FranchiseHallOfFame_GetAll_{franchiseId}", 
+                  entry => 
+                  { 
+                      entry.SetAbsoluteExpiration(TimeSpan.FromDays(1)); 
+                      return _franchiseHallOfFameRepository.GetAll(franchiseId); 
+                  });
 }

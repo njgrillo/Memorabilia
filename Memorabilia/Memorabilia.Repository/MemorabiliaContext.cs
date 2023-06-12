@@ -1,14 +1,13 @@
-﻿using Memorabilia.Domain.Entities;
-
-namespace Memorabilia.Repository;
+﻿namespace Memorabilia.Repository;
 
 public class MemorabiliaContext : DbContext, IMemorabiliaContext
 {
-    public DbSet<Domain.Entities.CollectionMemorabilia> CollectionMemorabilia { get; set; }
+    public DbSet<Entity.CollectionMemorabilia> CollectionMemorabilia { get; set; }
 
-    public DbSet<Domain.Entities.Memorabilia> Memorabilia { get; set; }
+    public DbSet<Entity.Memorabilia> Memorabilia { get; set; }
 
-    public MemorabiliaContext(DbContextOptions<MemorabiliaContext> options) : base(options) { }        
+    public MemorabiliaContext(DbContextOptions<MemorabiliaContext> options) 
+        : base(options) { }        
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
@@ -17,52 +16,62 @@ public class MemorabiliaContext : DbContext, IMemorabiliaContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.Entity<Acquisition>().Property(x => x.Cost).HasPrecision(12, 2);          
-        modelBuilder.Entity<Autograph>().Property(x => x.EstimatedValue).HasPrecision(12, 2);
-        modelBuilder.Entity<AutographAuthentication>();
-        modelBuilder.Entity<AutographImage>();
-        modelBuilder.Entity<AutographSpot>();
-        modelBuilder.Entity<AutographThroughTheMail>();
-        modelBuilder.Entity<Collection>();
-        modelBuilder.Entity<CollectionMemorabilia>();
-        modelBuilder.Entity<Inscription>();
-        modelBuilder.Entity<Domain.Entities.Memorabilia>().Property(x => x.EstimatedValue).HasPrecision(12, 2);
-        modelBuilder.Entity<MemorabiliaAcquisition>();
-        modelBuilder.Entity<MemorabiliaBammer>();
-        modelBuilder.Entity<MemorabiliaBaseball>();
-        modelBuilder.Entity<MemorabiliaBasketball>();
-        modelBuilder.Entity<MemorabiliaBat>();
-        modelBuilder.Entity<MemorabiliaBobblehead>();
-        modelBuilder.Entity<MemorabiliaBook>();
-        modelBuilder.Entity<MemorabiliaBrand>();
-        modelBuilder.Entity<MemorabiliaCard>();
-        modelBuilder.Entity<MemorabiliaCereal>();
-        modelBuilder.Entity<MemorabiliaCommissioner>();
-        modelBuilder.Entity<MemorabiliaFigure>();
-        modelBuilder.Entity<MemorabiliaFootball>();
-        modelBuilder.Entity<MemorabiliaGame>();
-        modelBuilder.Entity<MemorabiliaGlove>();
-        modelBuilder.Entity<MemorabiliaHelmet>();
-        modelBuilder.Entity<MemorabiliaImage>();
-        modelBuilder.Entity<MemorabiliaJersey>();
-        modelBuilder.Entity<MemorabiliaJerseyNumber>();
-        modelBuilder.Entity<MemorabiliaLevelType>();
-        modelBuilder.Entity<MemorabiliaMagazine>();
-        modelBuilder.Entity<MemorabiliaPerson>();
-        modelBuilder.Entity<MemorabiliaPicture>();
-        modelBuilder.Entity<MemorabiliaSize>();
-        modelBuilder.Entity<MemorabiliaSport>();
-        modelBuilder.Entity<MemorabiliaTeam>();
-        modelBuilder.Entity<Personalization>();          
-        modelBuilder.Entity<Project>();          
-        modelBuilder.Entity<ProjectBaseball>();          
-        modelBuilder.Entity<ProjectCard>();          
-        modelBuilder.Entity<ProjectHallOfFame>();          
-        modelBuilder.Entity<ProjectHelmet>();          
-        modelBuilder.Entity<ProjectItem>();          
-        modelBuilder.Entity<ProjectMemorabiliaTeam>();         
-        modelBuilder.Entity<ProjectPerson>();         
-        modelBuilder.Entity<ProjectTeam>();         
-        modelBuilder.Entity<ProjectWorldSeries>();         
+        modelBuilder.Entity<Entity.Acquisition>()
+                    .Property(x => x.Cost)
+                    .HasPrecision(12, 2);     
+        
+        modelBuilder.Entity<Entity.Autograph>()
+                    .Property(x => x.EstimatedValue)
+                    .HasPrecision(12, 2);
+
+        modelBuilder.Entity<Entity.AutographAuthentication>();
+        modelBuilder.Entity<Entity.AutographImage>();
+        modelBuilder.Entity<Entity.AutographSpot>();
+        modelBuilder.Entity<Entity.AutographThroughTheMail>();
+        modelBuilder.Entity<Entity.Collection>();
+        modelBuilder.Entity<Entity.CollectionMemorabilia>();
+        modelBuilder.Entity<Entity.Inscription>();
+
+        modelBuilder.Entity<Entity.Memorabilia>()
+                    .Property(x => x.EstimatedValue)
+                    .HasPrecision(12, 2);
+
+        modelBuilder.Entity<Entity.MemorabiliaAcquisition>();
+        modelBuilder.Entity<Entity.MemorabiliaBammer>();
+        modelBuilder.Entity<Entity.MemorabiliaBaseball>();
+        modelBuilder.Entity<Entity.MemorabiliaBasketball>();
+        modelBuilder.Entity<Entity.MemorabiliaBat>();
+        modelBuilder.Entity<Entity.MemorabiliaBobblehead>();
+        modelBuilder.Entity<Entity.MemorabiliaBook>();
+        modelBuilder.Entity<Entity.MemorabiliaBrand>();
+        modelBuilder.Entity<Entity.MemorabiliaCard>();
+        modelBuilder.Entity<Entity.MemorabiliaCereal>();
+        modelBuilder.Entity<Entity.MemorabiliaCommissioner>();
+        modelBuilder.Entity<Entity.MemorabiliaFigure>();
+        modelBuilder.Entity<Entity.MemorabiliaFootball>();
+        modelBuilder.Entity<Entity.MemorabiliaGame>();
+        modelBuilder.Entity<Entity.MemorabiliaGlove>();
+        modelBuilder.Entity<Entity.MemorabiliaHelmet>();
+        modelBuilder.Entity<Entity.MemorabiliaImage>();
+        modelBuilder.Entity<Entity.MemorabiliaJersey>();
+        modelBuilder.Entity<Entity.MemorabiliaJerseyNumber>();
+        modelBuilder.Entity<Entity.MemorabiliaLevelType>();
+        modelBuilder.Entity<Entity.MemorabiliaMagazine>();
+        modelBuilder.Entity<Entity.MemorabiliaPerson>();
+        modelBuilder.Entity<Entity.MemorabiliaPicture>();
+        modelBuilder.Entity<Entity.MemorabiliaSize>();
+        modelBuilder.Entity<Entity.MemorabiliaSport>();
+        modelBuilder.Entity<Entity.MemorabiliaTeam>();
+        modelBuilder.Entity<Entity.Personalization>();          
+        modelBuilder.Entity<Entity.Project>();          
+        modelBuilder.Entity<Entity.ProjectBaseball>();          
+        modelBuilder.Entity<Entity.ProjectCard>();          
+        modelBuilder.Entity<Entity.ProjectHallOfFame>();          
+        modelBuilder.Entity<Entity.ProjectHelmet>();          
+        modelBuilder.Entity<Entity.ProjectItem>();          
+        modelBuilder.Entity<Entity.ProjectMemorabiliaTeam>();         
+        modelBuilder.Entity<Entity.ProjectPerson>();         
+        modelBuilder.Entity<Entity.ProjectTeam>();         
+        modelBuilder.Entity<Entity.ProjectWorldSeries>();         
     }
 }

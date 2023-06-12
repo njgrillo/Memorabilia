@@ -1,80 +1,77 @@
-﻿using Memorabilia.Domain.Entities;
+﻿namespace Memorabilia.Repository.Implementations;
 
-namespace Memorabilia.Repository.Implementations;
-
-public class MemorabiliaItemRepository : MemorabiliaRepository<Domain.Entities.Memorabilia>, IMemorabiliaItemRepository
+public class MemorabiliaItemRepository 
+    : MemorabiliaRepository<Entity.Memorabilia>, IMemorabiliaItemRepository
 {
-    public MemorabiliaItemRepository(MemorabiliaContext context, IMemoryCache memoryCache) : base(context, memoryCache) { }
+    public MemorabiliaItemRepository(MemorabiliaContext context, IMemoryCache memoryCache) 
+        : base(context, memoryCache) { }
 
-    private IQueryable<Domain.Entities.Memorabilia> Memorabilia => Items.Include(memorabilia => memorabilia.Autographs)
-                                                                        .Include("Autographs.Acquisition")
-                                                                        .Include("Autographs.Authentications")
-                                                                        .Include("Autographs.Images")
-                                                                        .Include("Autographs.Inscriptions")
-                                                                        .Include("Autographs.Person")
-                                                                        .Include("Autographs.Spot")
-                                                                        .Include(memorabilia => memorabilia.Bammer)
-                                                                        .Include(memorabilia => memorabilia.Baseball)
-                                                                        .Include(memorabilia => memorabilia.Basketball)
-                                                                        .Include(memorabilia => memorabilia.Bat)
-                                                                        .Include(memorabilia => memorabilia.Bobblehead)
-                                                                        .Include(memorabilia => memorabilia.Book)
-                                                                        .Include(memorabilia => memorabilia.Brand)
-                                                                        .Include(memorabilia => memorabilia.Card)
-                                                                        .Include(memorabilia => memorabilia.Cereal)
-                                                                        .Include(memorabilia => memorabilia.CollectionMemorabilias)
-                                                                        .Include(memorabilia => memorabilia.Commissioner)
-                                                                        .Include(memorabilia => memorabilia.Figure)
-                                                                        .Include(memorabilia => memorabilia.FirstDayCover)
-                                                                        .Include(memorabilia => memorabilia.Football)
-                                                                        .Include(memorabilia => memorabilia.Game)
-                                                                        .Include(memorabilia => memorabilia.Glove)
-                                                                        .Include(memorabilia => memorabilia.Helmet)
-                                                                        .Include(memorabilia => memorabilia.Images)
-                                                                        .Include(memorabilia => memorabilia.Jersey)
-                                                                        .Include(memorabilia => memorabilia.JerseyNumber)
-                                                                        .Include(memorabilia => memorabilia.LevelType)
-                                                                        .Include(memorabilia => memorabilia.Magazine)
-                                                                        .Include(memorabilia => memorabilia.MemorabiliaAcquisition)
-                                                                        .Include(memorabilia => memorabilia.MemorabiliaAcquisition.Acquisition)
-                                                                        .Include(memorabilia => memorabilia.People)
-                                                                        .Include(memorabilia => memorabilia.Picture)
-                                                                        .Include(memorabilia => memorabilia.Size)
-                                                                        .Include(memorabilia => memorabilia.Sports)
-                                                                        .Include(memorabilia => memorabilia.Teams)
-                                                                        .Include(memorabilia => memorabilia.User);
+    private IQueryable<Entity.Memorabilia> Memorabilia 
+        => Items.Include(memorabilia => memorabilia.Autographs)
+                .Include("Autographs.Acquisition")
+                .Include("Autographs.Authentications")
+                .Include("Autographs.Images")
+                .Include("Autographs.Inscriptions")
+                .Include("Autographs.Person")
+                .Include("Autographs.Spot")
+                .Include(memorabilia => memorabilia.Bammer)
+                .Include(memorabilia => memorabilia.Baseball)
+                .Include(memorabilia => memorabilia.Basketball)
+                .Include(memorabilia => memorabilia.Bat)
+                .Include(memorabilia => memorabilia.Bobblehead)
+                .Include(memorabilia => memorabilia.Book)
+                .Include(memorabilia => memorabilia.Brand)
+                .Include(memorabilia => memorabilia.Card)
+                .Include(memorabilia => memorabilia.Cereal)
+                .Include(memorabilia => memorabilia.CollectionMemorabilias)
+                .Include(memorabilia => memorabilia.Commissioner)
+                .Include(memorabilia => memorabilia.Figure)
+                .Include(memorabilia => memorabilia.FirstDayCover)
+                .Include(memorabilia => memorabilia.Football)
+                .Include(memorabilia => memorabilia.Game)
+                .Include(memorabilia => memorabilia.Glove)
+                .Include(memorabilia => memorabilia.Helmet)
+                .Include(memorabilia => memorabilia.Images)
+                .Include(memorabilia => memorabilia.Jersey)
+                .Include(memorabilia => memorabilia.JerseyNumber)
+                .Include(memorabilia => memorabilia.LevelType)
+                .Include(memorabilia => memorabilia.Magazine)
+                .Include(memorabilia => memorabilia.MemorabiliaAcquisition)
+                .Include(memorabilia => memorabilia.MemorabiliaAcquisition.Acquisition)
+                .Include(memorabilia => memorabilia.People)
+                .Include(memorabilia => memorabilia.Picture)
+                .Include(memorabilia => memorabilia.Size)
+                .Include(memorabilia => memorabilia.Sports)
+                .Include(memorabilia => memorabilia.Teams)
+                .Include(memorabilia => memorabilia.User);
 
-    public override async Task Add(Domain.Entities.Memorabilia item, CancellationToken cancellationToken = default)
+    public override async Task Add(Entity.Memorabilia item, 
+                                   CancellationToken cancellationToken = default)
     {
         await base.Add(item, cancellationToken);
     }
 
-    public override async Task<Domain.Entities.Memorabilia> Get(int id)
-    {
-        return await Memorabilia.SingleOrDefaultAsync(memorabilia => memorabilia.Id == id);
-    }
+    public override async Task<Entity.Memorabilia> Get(int id)
+        => await Memorabilia.SingleOrDefaultAsync(memorabilia => memorabilia.Id == id);
 
     public int[] GetAcquisitionTypeIds(int userId)
-    {
-        return Items.Where(memorabilia => memorabilia.UserId == userId && memorabilia.MemorabiliaAcquisition.Acquisition != null)
-                    .Select(memorabilia => memorabilia.MemorabiliaAcquisition.Acquisition.AcquisitionTypeId)
-                    .ToArray();
-    }
+        => Items.Where(memorabilia => memorabilia.UserId == userId && memorabilia.MemorabiliaAcquisition.Acquisition != null)
+                .Select(memorabilia => memorabilia.MemorabiliaAcquisition.Acquisition.AcquisitionTypeId)
+                .ToArray();
 
-    public async Task<IEnumerable<Domain.Entities.Memorabilia>> GetAll(int userId)
+    public async Task<Entity.Memorabilia[]> GetAll(int userId)
     {
         var query =
             from memorabilia in Context.Memorabilia
             where memorabilia.UserId == userId
-            select new Domain.Entities.Memorabilia(memorabilia);
+            select new Entity.Memorabilia(memorabilia);
 
-        return await query.ToListAsync();
+        return await query.ToArrayAsync();
     }
 
-    public async Task<PagedResult<Domain.Entities.Memorabilia>> GetAll(
-        int userId,
-        PageInfo pageInfo,
-        MemorabiliaSearchCriteria memorabiliaSearchCriteria = null)
+    public async Task<PagedResult<Entity.Memorabilia>> GetAll(int userId,
+                                                              PageInfo pageInfo,
+                                                              MemorabiliaSearchCriteria memorabiliaSearchCriteria = null)
     {
         var query =
             from memorabilia in Context.Memorabilia
@@ -85,7 +82,7 @@ public class MemorabiliaItemRepository : MemorabiliaRepository<Domain.Entities.M
               && (!memorabiliaSearchCriteria.AutographSearchCriteria.AcquiredDateBegin.HasValue || memorabilia.Autographs.Any(autograph => autograph.Acquisition.AcquiredDate >= memorabiliaSearchCriteria.AutographSearchCriteria.AcquiredDateBegin.Value))
               && (!memorabiliaSearchCriteria.AutographSearchCriteria.AcquiredDateEnd.HasValue || memorabilia.Autographs.Any(autograph => autograph.Acquisition.AcquiredDate <= memorabiliaSearchCriteria.AutographSearchCriteria.AcquiredDateEnd.Value))
               && (!memorabiliaSearchCriteria.AutographSearchCriteria.AcquisitionTypeIds.Any() || memorabilia.Autographs.Any(autograph => memorabiliaSearchCriteria.AutographSearchCriteria.AcquisitionTypeIds.Contains(autograph.Acquisition.AcquisitionTypeId)))
-              && (memorabiliaSearchCriteria.AutographSearchCriteria.AuthenticationFilter == Domain.Constants.AuthenticationFilter.None || (memorabiliaSearchCriteria.AutographSearchCriteria.AuthenticationFilter == Domain.Constants.AuthenticationFilter.NotAuthenticated && memorabilia.Autographs.Any(autograph => !autograph.Authentications.Any())) || (memorabiliaSearchCriteria.AutographSearchCriteria.AuthenticationFilter == Domain.Constants.AuthenticationFilter.Authenticated && memorabilia.Autographs.Any(autograph => autograph.Authentications.Any())))
+              && (memorabiliaSearchCriteria.AutographSearchCriteria.AuthenticationFilter == Constant.AuthenticationFilter.None || (memorabiliaSearchCriteria.AutographSearchCriteria.AuthenticationFilter == Constant.AuthenticationFilter.NotAuthenticated && memorabilia.Autographs.Any(autograph => !autograph.Authentications.Any())) || (memorabiliaSearchCriteria.AutographSearchCriteria.AuthenticationFilter == Constant.AuthenticationFilter.Authenticated && memorabilia.Autographs.Any(autograph => autograph.Authentications.Any())))
               && (!memorabiliaSearchCriteria.AutographSearchCriteria.ColorIds.Any() || memorabilia.Autographs.Any(autograph => memorabiliaSearchCriteria.AutographSearchCriteria.ColorIds.Contains(autograph.ColorId)))
               && (!memorabiliaSearchCriteria.AutographSearchCriteria.ConditionIds.Any() || memorabilia.Autographs.Any(autograph => memorabiliaSearchCriteria.AutographSearchCriteria.ConditionIds.Contains(autograph.ConditionId)))
               && (!memorabiliaSearchCriteria.AutographSearchCriteria.CostLow.HasValue || memorabilia.Autographs.Any(autograph => autograph.Acquisition.Cost >= memorabiliaSearchCriteria.AutographSearchCriteria.CostLow.Value))
@@ -94,10 +91,10 @@ public class MemorabiliaItemRepository : MemorabiliaRepository<Domain.Entities.M
               && (!memorabiliaSearchCriteria.AutographSearchCriteria.EstimatedValueHigh.HasValue || memorabilia.Autographs.Any(autograph => autograph.EstimatedValue <= memorabiliaSearchCriteria.AutographSearchCriteria.EstimatedValueHigh.Value))
               && (!memorabiliaSearchCriteria.AutographSearchCriteria.FranchiseIds.Any() || memorabilia.Autographs.Any(autograph => autograph.Person.Teams.Select(team => team.Team.FranchiseId).Any(franchiseId => memorabiliaSearchCriteria.AutographSearchCriteria.FranchiseIds.Contains(franchiseId))))
               && (!memorabiliaSearchCriteria.AutographSearchCriteria.Grade.HasValue || memorabilia.Autographs.Any(autograph => autograph.Grade == memorabiliaSearchCriteria.AutographSearchCriteria.Grade.Value))
-              && (memorabiliaSearchCriteria.AutographSearchCriteria.ImageFilter == Domain.Constants.ImageFilter.None || (memorabiliaSearchCriteria.AutographSearchCriteria.ImageFilter == Domain.Constants.ImageFilter.NoImages && memorabilia.Autographs.Any(autograph => !autograph.Images.Any())) || (memorabiliaSearchCriteria.AutographSearchCriteria.ImageFilter == Domain.Constants.ImageFilter.Images && memorabilia.Autographs.Any(autograph => autograph.Images.Any())))
-              && (memorabiliaSearchCriteria.AutographSearchCriteria.InscriptionFilter == Domain.Constants.InscriptionFilter.None || (memorabiliaSearchCriteria.AutographSearchCriteria.InscriptionFilter == Domain.Constants.InscriptionFilter.NoInscription && memorabilia.Autographs.Any(autograph => !autograph.Inscriptions.Any())) || (memorabiliaSearchCriteria.AutographSearchCriteria.InscriptionFilter == Domain.Constants.InscriptionFilter.Inscription && memorabilia.Autographs.Any(autograph => autograph.Inscriptions.Any())))
+              && (memorabiliaSearchCriteria.AutographSearchCriteria.ImageFilter == Constant.ImageFilter.None || (memorabiliaSearchCriteria.AutographSearchCriteria.ImageFilter == Constant.ImageFilter.NoImages && memorabilia.Autographs.Any(autograph => !autograph.Images.Any())) || (memorabiliaSearchCriteria.AutographSearchCriteria.ImageFilter == Constant.ImageFilter.Images && memorabilia.Autographs.Any(autograph => autograph.Images.Any())))
+              && (memorabiliaSearchCriteria.AutographSearchCriteria.InscriptionFilter == Constant.InscriptionFilter.None || (memorabiliaSearchCriteria.AutographSearchCriteria.InscriptionFilter == Constant.InscriptionFilter.NoInscription && memorabilia.Autographs.Any(autograph => !autograph.Inscriptions.Any())) || (memorabiliaSearchCriteria.AutographSearchCriteria.InscriptionFilter == Constant.InscriptionFilter.Inscription && memorabilia.Autographs.Any(autograph => autograph.Inscriptions.Any())))
               && (!memorabiliaSearchCriteria.AutographSearchCriteria.People.Any() || memorabilia.Autographs.Any(autograph => memorabiliaSearchCriteria.AutographSearchCriteria.PersonIds.Contains(autograph.PersonId)))
-              && (memorabiliaSearchCriteria.AutographSearchCriteria.PersonalizationFilter == Domain.Constants.PersonalizationFilter.None || (memorabiliaSearchCriteria.AutographSearchCriteria.PersonalizationFilter == Domain.Constants.PersonalizationFilter.NotPersonalized && memorabilia.Autographs.Any(autograph => autograph.Personalization == null)) || (memorabiliaSearchCriteria.AutographSearchCriteria.PersonalizationFilter == Domain.Constants.PersonalizationFilter.Personalized && memorabilia.Autographs.Any(autograph => autograph.Personalization != null)))
+              && (memorabiliaSearchCriteria.AutographSearchCriteria.PersonalizationFilter == Constant.PersonalizationFilter.None || (memorabiliaSearchCriteria.AutographSearchCriteria.PersonalizationFilter == Constant.PersonalizationFilter.NotPersonalized && memorabilia.Autographs.Any(autograph => autograph.Personalization == null)) || (memorabiliaSearchCriteria.AutographSearchCriteria.PersonalizationFilter == Constant.PersonalizationFilter.Personalized && memorabilia.Autographs.Any(autograph => autograph.Personalization != null)))
               && (!memorabiliaSearchCriteria.AutographSearchCriteria.SportIds.Any() || memorabilia.Autographs.Any(autograph => autograph.Person.Sports.Select(sport => sport.SportId).Any(sportId => memorabiliaSearchCriteria.AutographSearchCriteria.SportIds.Contains(sportId))))
               && (!memorabiliaSearchCriteria.AutographSearchCriteria.SportLeagueLevelIds.Any() || memorabilia.Autographs.Any(autograph => autograph.Person.Teams.Select(team => team.Team.Franchise.SportLeagueLevel.Id).Any(sportLeagueLevelId => memorabiliaSearchCriteria.AutographSearchCriteria.SportLeagueLevelIds.Contains(sportLeagueLevelId))))
               && (!memorabiliaSearchCriteria.AutographSearchCriteria.SpotIds.Any() || memorabilia.Autographs.Any(autograph => memorabiliaSearchCriteria.AutographSearchCriteria.SpotIds.Contains(autograph.Spot.SpotId)))
@@ -111,7 +108,7 @@ public class MemorabiliaItemRepository : MemorabiliaRepository<Domain.Entities.M
               && (!memorabiliaSearchCriteria.EstimatedValueHigh.HasValue || memorabilia.EstimatedValue <= memorabiliaSearchCriteria.EstimatedValueHigh.Value)
               && (!memorabiliaSearchCriteria.FranchiseIds.Any() || memorabilia.Teams.Select(team => team.Team.Franchise.Id).Any(franchiseId => memorabiliaSearchCriteria.FranchiseIds.Contains(franchiseId)))
               && (!memorabiliaSearchCriteria.GameStyleTypeIds.Any() || (memorabilia.Game != null && memorabiliaSearchCriteria.GameStyleTypeIds.Contains(memorabilia.Game.GameStyleTypeId)))
-              && (memorabiliaSearchCriteria.ImageFilter == Domain.Constants.ImageFilter.None || (memorabiliaSearchCriteria.ImageFilter == Domain.Constants.ImageFilter.NoImages && !memorabilia.Images.Any()) || (memorabiliaSearchCriteria.ImageFilter == Domain.Constants.ImageFilter.Images && memorabilia.Images.Any()))
+              && (memorabiliaSearchCriteria.ImageFilter == Constant.ImageFilter.None || (memorabiliaSearchCriteria.ImageFilter == Constant.ImageFilter.NoImages && !memorabilia.Images.Any()) || (memorabiliaSearchCriteria.ImageFilter == Constant.ImageFilter.Images && memorabilia.Images.Any()))
               && (!memorabiliaSearchCriteria.ItemTypeIds.Any() || memorabiliaSearchCriteria.ItemTypeIds.Contains(memorabilia.ItemTypeId))
               && (!memorabiliaSearchCriteria.LevelTypeIds.Any() || (memorabilia.LevelType != null && memorabiliaSearchCriteria.LevelTypeIds.Contains(memorabilia.LevelType.LevelTypeId)))
               && (!memorabiliaSearchCriteria.People.Any() || memorabilia.People.Any(person => memorabiliaSearchCriteria.PersonIds.Contains(person.PersonId)))
@@ -122,12 +119,12 @@ public class MemorabiliaItemRepository : MemorabiliaRepository<Domain.Entities.M
               && (!memorabiliaSearchCriteria.SportLeagueLevelIds.Any() || memorabilia.Teams.Any(team => memorabiliaSearchCriteria.SportLeagueLevelIds.Contains(team.Team.Franchise.SportLeagueLevel.Id)))
               && (!memorabiliaSearchCriteria.Teams.Any() || memorabilia.Teams.Any(team => memorabiliaSearchCriteria.TeamIds.Contains(team.TeamId)))
             orderby memorabilia.CreateDate
-            select new Domain.Entities.Memorabilia(memorabilia);
+            select new Entity.Memorabilia(memorabilia);
 
         return await query.ToPagedResult(pageInfo);
     }    
 
-    public async Task<Domain.Entities.Memorabilia[]> GetAll(Dictionary<string, object> parameters)
+    public async Task<Entity.Memorabilia[]> GetAll(Dictionary<string, object> parameters)
     {
         _ = parameters.TryGetValue("HelmetTypeId", out object helmetTypeId);
         _ = parameters.TryGetValue("HelmetSizeId", out object helmetSizeId);
@@ -146,10 +143,9 @@ public class MemorabiliaItemRepository : MemorabiliaRepository<Domain.Entities.M
                           .ToArrayAsync();
     }
 
-    public async Task<PagedResult<Domain.Entities.Memorabilia>> GetAllByCollection(
-        int collectionId,
-        PageInfo pageInfo,
-        MemorabiliaSearchCriteria memorabiliaSearchCriteria = null)
+    public async Task<PagedResult<Entity.Memorabilia>> GetAllByCollection(int collectionId,
+                                                                          PageInfo pageInfo,
+                                                                          MemorabiliaSearchCriteria memorabiliaSearchCriteria = null)
     {
         var query =
             from memorabilia in Context.Memorabilia
@@ -161,7 +157,7 @@ public class MemorabiliaItemRepository : MemorabiliaRepository<Domain.Entities.M
               && (!memorabiliaSearchCriteria.AutographSearchCriteria.AcquiredDateBegin.HasValue || memorabilia.Autographs.Any(autograph => autograph.Acquisition.AcquiredDate >= memorabiliaSearchCriteria.AutographSearchCriteria.AcquiredDateBegin.Value))
               && (!memorabiliaSearchCriteria.AutographSearchCriteria.AcquiredDateEnd.HasValue || memorabilia.Autographs.Any(autograph => autograph.Acquisition.AcquiredDate <= memorabiliaSearchCriteria.AutographSearchCriteria.AcquiredDateEnd.Value))
               && (!memorabiliaSearchCriteria.AutographSearchCriteria.AcquisitionTypeIds.Any() || memorabilia.Autographs.Any(autograph => memorabiliaSearchCriteria.AutographSearchCriteria.AcquisitionTypeIds.Contains(autograph.Acquisition.AcquisitionTypeId)))
-              && (memorabiliaSearchCriteria.AutographSearchCriteria.AuthenticationFilter == Domain.Constants.AuthenticationFilter.None || (memorabiliaSearchCriteria.AutographSearchCriteria.AuthenticationFilter == Domain.Constants.AuthenticationFilter.NotAuthenticated && memorabilia.Autographs.Any(autograph => !autograph.Authentications.Any())) || (memorabiliaSearchCriteria.AutographSearchCriteria.AuthenticationFilter == Domain.Constants.AuthenticationFilter.Authenticated && memorabilia.Autographs.Any(autograph => autograph.Authentications.Any())))
+              && (memorabiliaSearchCriteria.AutographSearchCriteria.AuthenticationFilter == Constant.AuthenticationFilter.None || (memorabiliaSearchCriteria.AutographSearchCriteria.AuthenticationFilter == Constant.AuthenticationFilter.NotAuthenticated && memorabilia.Autographs.Any(autograph => !autograph.Authentications.Any())) || (memorabiliaSearchCriteria.AutographSearchCriteria.AuthenticationFilter == Constant.AuthenticationFilter.Authenticated && memorabilia.Autographs.Any(autograph => autograph.Authentications.Any())))
               && (!memorabiliaSearchCriteria.AutographSearchCriteria.ColorIds.Any() || memorabilia.Autographs.Any(autograph => memorabiliaSearchCriteria.AutographSearchCriteria.ColorIds.Contains(autograph.ColorId)))
               && (!memorabiliaSearchCriteria.AutographSearchCriteria.ConditionIds.Any() || memorabilia.Autographs.Any(autograph => memorabiliaSearchCriteria.AutographSearchCriteria.ConditionIds.Contains(autograph.ConditionId)))
               && (!memorabiliaSearchCriteria.AutographSearchCriteria.CostLow.HasValue || memorabilia.Autographs.Any(autograph => autograph.Acquisition.Cost >= memorabiliaSearchCriteria.AutographSearchCriteria.CostLow.Value))
@@ -170,10 +166,10 @@ public class MemorabiliaItemRepository : MemorabiliaRepository<Domain.Entities.M
               && (!memorabiliaSearchCriteria.AutographSearchCriteria.EstimatedValueHigh.HasValue || memorabilia.Autographs.Any(autograph => autograph.EstimatedValue <= memorabiliaSearchCriteria.AutographSearchCriteria.EstimatedValueHigh.Value))
               && (!memorabiliaSearchCriteria.AutographSearchCriteria.FranchiseIds.Any() || memorabilia.Autographs.Any(autograph => autograph.Person.Teams.Select(team => team.Team.FranchiseId).Any(franchiseId => memorabiliaSearchCriteria.AutographSearchCriteria.FranchiseIds.Contains(franchiseId))))
               && (!memorabiliaSearchCriteria.AutographSearchCriteria.Grade.HasValue || memorabilia.Autographs.Any(autograph => autograph.Grade == memorabiliaSearchCriteria.AutographSearchCriteria.Grade.Value))
-              && (memorabiliaSearchCriteria.AutographSearchCriteria.ImageFilter == Domain.Constants.ImageFilter.None || (memorabiliaSearchCriteria.AutographSearchCriteria.ImageFilter == Domain.Constants.ImageFilter.NoImages && memorabilia.Autographs.Any(autograph => !autograph.Images.Any())) || (memorabiliaSearchCriteria.AutographSearchCriteria.ImageFilter == Domain.Constants.ImageFilter.Images && memorabilia.Autographs.Any(autograph => autograph.Images.Any())))
-              && (memorabiliaSearchCriteria.AutographSearchCriteria.InscriptionFilter == Domain.Constants.InscriptionFilter.None || (memorabiliaSearchCriteria.AutographSearchCriteria.InscriptionFilter == Domain.Constants.InscriptionFilter.NoInscription && memorabilia.Autographs.Any(autograph => !autograph.Inscriptions.Any())) || (memorabiliaSearchCriteria.AutographSearchCriteria.InscriptionFilter == Domain.Constants.InscriptionFilter.Inscription && memorabilia.Autographs.Any(autograph => autograph.Inscriptions.Any())))
+              && (memorabiliaSearchCriteria.AutographSearchCriteria.ImageFilter == Constant.ImageFilter.None || (memorabiliaSearchCriteria.AutographSearchCriteria.ImageFilter == Constant.ImageFilter.NoImages && memorabilia.Autographs.Any(autograph => !autograph.Images.Any())) || (memorabiliaSearchCriteria.AutographSearchCriteria.ImageFilter == Constant.ImageFilter.Images && memorabilia.Autographs.Any(autograph => autograph.Images.Any())))
+              && (memorabiliaSearchCriteria.AutographSearchCriteria.InscriptionFilter == Constant.InscriptionFilter.None || (memorabiliaSearchCriteria.AutographSearchCriteria.InscriptionFilter == Constant.InscriptionFilter.NoInscription && memorabilia.Autographs.Any(autograph => !autograph.Inscriptions.Any())) || (memorabiliaSearchCriteria.AutographSearchCriteria.InscriptionFilter == Constant.InscriptionFilter.Inscription && memorabilia.Autographs.Any(autograph => autograph.Inscriptions.Any())))
               && (!memorabiliaSearchCriteria.AutographSearchCriteria.People.Any() || memorabilia.Autographs.Any(autograph => memorabiliaSearchCriteria.AutographSearchCriteria.PersonIds.Contains(autograph.PersonId)))
-              && (memorabiliaSearchCriteria.AutographSearchCriteria.PersonalizationFilter == Domain.Constants.PersonalizationFilter.None || (memorabiliaSearchCriteria.AutographSearchCriteria.PersonalizationFilter == Domain.Constants.PersonalizationFilter.NotPersonalized && memorabilia.Autographs.Any(autograph => autograph.Personalization == null)) || (memorabiliaSearchCriteria.AutographSearchCriteria.PersonalizationFilter == Domain.Constants.PersonalizationFilter.Personalized && memorabilia.Autographs.Any(autograph => autograph.Personalization != null)))
+              && (memorabiliaSearchCriteria.AutographSearchCriteria.PersonalizationFilter == Constant.PersonalizationFilter.None || (memorabiliaSearchCriteria.AutographSearchCriteria.PersonalizationFilter == Constant.PersonalizationFilter.NotPersonalized && memorabilia.Autographs.Any(autograph => autograph.Personalization == null)) || (memorabiliaSearchCriteria.AutographSearchCriteria.PersonalizationFilter == Constant.PersonalizationFilter.Personalized && memorabilia.Autographs.Any(autograph => autograph.Personalization != null)))
               && (!memorabiliaSearchCriteria.AutographSearchCriteria.SportIds.Any() || memorabilia.Autographs.Any(autograph => autograph.Person.Sports.Select(sport => sport.SportId).Any(sportId => memorabiliaSearchCriteria.AutographSearchCriteria.SportIds.Contains(sportId))))
               && (!memorabiliaSearchCriteria.AutographSearchCriteria.SportLeagueLevelIds.Any() || memorabilia.Autographs.Any(autograph => autograph.Person.Teams.Select(team => team.Team.Franchise.SportLeagueLevel.Id).Any(sportLeagueLevelId => memorabiliaSearchCriteria.AutographSearchCriteria.SportLeagueLevelIds.Contains(sportLeagueLevelId))))
               && (!memorabiliaSearchCriteria.AutographSearchCriteria.SpotIds.Any() || memorabilia.Autographs.Any(autograph => memorabiliaSearchCriteria.AutographSearchCriteria.SpotIds.Contains(autograph.Spot.SpotId)))
@@ -187,7 +183,7 @@ public class MemorabiliaItemRepository : MemorabiliaRepository<Domain.Entities.M
               && (!memorabiliaSearchCriteria.EstimatedValueHigh.HasValue || memorabilia.EstimatedValue <= memorabiliaSearchCriteria.EstimatedValueHigh.Value)
               && (!memorabiliaSearchCriteria.FranchiseIds.Any() || memorabilia.Teams.Select(team => team.Team.Franchise.Id).Any(franchiseId => memorabiliaSearchCriteria.FranchiseIds.Contains(franchiseId)))
               && (!memorabiliaSearchCriteria.GameStyleTypeIds.Any() || (memorabilia.Game != null && memorabiliaSearchCriteria.GameStyleTypeIds.Contains(memorabilia.Game.GameStyleTypeId)))
-              && (memorabiliaSearchCriteria.ImageFilter == Domain.Constants.ImageFilter.None || (memorabiliaSearchCriteria.ImageFilter == Domain.Constants.ImageFilter.NoImages && !memorabilia.Images.Any()) || (memorabiliaSearchCriteria.ImageFilter == Domain.Constants.ImageFilter.Images && memorabilia.Images.Any()))
+              && (memorabiliaSearchCriteria.ImageFilter == Constant.ImageFilter.None || (memorabiliaSearchCriteria.ImageFilter == Constant.ImageFilter.NoImages && !memorabilia.Images.Any()) || (memorabiliaSearchCriteria.ImageFilter == Constant.ImageFilter.Images && memorabilia.Images.Any()))
               && (!memorabiliaSearchCriteria.ItemTypeIds.Any() || memorabiliaSearchCriteria.ItemTypeIds.Contains(memorabilia.ItemTypeId))
               && (!memorabiliaSearchCriteria.LevelTypeIds.Any() || (memorabilia.LevelType != null && memorabiliaSearchCriteria.LevelTypeIds.Contains(memorabilia.LevelType.LevelTypeId)))
               && (!memorabiliaSearchCriteria.People.Any() || memorabilia.People.Any(person => memorabiliaSearchCriteria.PersonIds.Contains(person.PersonId)))
@@ -198,81 +194,60 @@ public class MemorabiliaItemRepository : MemorabiliaRepository<Domain.Entities.M
               && (!memorabiliaSearchCriteria.SportLeagueLevelIds.Any() || memorabilia.Teams.Any(team => memorabiliaSearchCriteria.SportLeagueLevelIds.Contains(team.Team.Franchise.SportLeagueLevel.Id)))
               && (!memorabiliaSearchCriteria.Teams.Any() || memorabilia.Teams.Any(team => memorabiliaSearchCriteria.TeamIds.Contains(team.TeamId)))
             orderby memorabilia.CreateDate
-            select new Domain.Entities.Memorabilia(memorabilia);
+            select new Entity.Memorabilia(memorabilia);
 
         return await query.ToPagedResult(pageInfo);
     }
 
-    public async Task<IEnumerable<Domain.Entities.Memorabilia>> GetAllUnsigned(int userId)
-    {
-        return await Memorabilia.Where(memorabilia => memorabilia.UserId == userId && !memorabilia.Autographs.Any()).ToListAsync();
-    }
+    public async Task<Entity.Memorabilia[]> GetAllUnsigned(int userId)
+        => await Memorabilia.Where(memorabilia => memorabilia.UserId == userId && !memorabilia.Autographs.Any())
+                            .ToArrayAsync();
 
     public int[] GetBrandIds(int userId)
-    {
-        return Items.Where(memorabilia => memorabilia.UserId == userId && memorabilia.Brand != null)
-                    .Select(memorabilia => memorabilia.Brand.BrandId)
-                    .ToArray();
-    }
+        => Items.Where(memorabilia => memorabilia.UserId == userId && memorabilia.Brand != null)
+                .Select(memorabilia => memorabilia.Brand.BrandId)
+                .ToArray();
 
     public int[] GetConditionIds(int userId)
-    {
-        return Items.Where(memorabilia => memorabilia.UserId == userId && memorabilia.ConditionId.HasValue)
-                    .Select(memorabilia => memorabilia.ConditionId.Value)
-                    .ToArray();
-    }
+        => Items.Where(memorabilia => memorabilia.UserId == userId && memorabilia.ConditionId.HasValue)
+                .Select(memorabilia => memorabilia.ConditionId.Value)
+                .ToArray();
 
     public decimal GetCostTotal(int userId)
-    {
-        return Items.Where(memorabilia => memorabilia.UserId == userId && memorabilia.MemorabiliaAcquisition.Acquisition != null)
-                    .Sum(memorabilia => memorabilia.MemorabiliaAcquisition.Acquisition.Cost ?? 0);
-    }
+        => Items.Where(memorabilia => memorabilia.UserId == userId && memorabilia.MemorabiliaAcquisition.Acquisition != null)
+                .Sum(memorabilia => memorabilia.MemorabiliaAcquisition.Acquisition.Cost ?? 0);
 
     public decimal GetEstimatedValueTotal(int userId)
-    {
-        return Items.Where(memorabilia => memorabilia.UserId == userId)
-                    .Sum(memorabilia => memorabilia.EstimatedValue ?? 0);
-    }
+        => Items.Where(memorabilia => memorabilia.UserId == userId)
+                .Sum(memorabilia => memorabilia.EstimatedValue ?? 0);
 
     public int[] GetFranchiseIds(int userId)
-    {
-        return Items.Where(memorabilia => memorabilia.UserId == userId && memorabilia.Teams.Any())
-                    .SelectMany(memorabilia => memorabilia.Teams.Select(team => team.Team.Franchise.Id))
-                    .ToArray();
-    }
+        => Items.Where(memorabilia => memorabilia.UserId == userId && memorabilia.Teams.Any())
+                .SelectMany(memorabilia => memorabilia.Teams.Select(team => team.Team.Franchise.Id))
+                .ToArray();
 
     public int[] GetPurchaseTypeIds(int userId)
-    {
-        return Items.Where(memorabilia => memorabilia.UserId == userId && memorabilia.MemorabiliaAcquisition.Acquisition != null && memorabilia.MemorabiliaAcquisition.Acquisition.PurchaseTypeId.HasValue)
-                    .Select(memorabilia => memorabilia.MemorabiliaAcquisition.Acquisition.PurchaseTypeId.Value)
-                    .ToArray();
-    }
+        => Items.Where(memorabilia => memorabilia.UserId == userId && memorabilia.MemorabiliaAcquisition.Acquisition != null && memorabilia.MemorabiliaAcquisition.Acquisition.PurchaseTypeId.HasValue)
+                .Select(memorabilia => memorabilia.MemorabiliaAcquisition.Acquisition.PurchaseTypeId.Value)
+                .ToArray();
 
     public int[] GetItemTypeIds(int userId)
-    {
-        return Items.Where(memorabilia => memorabilia.UserId == userId)
-                    .Select(memorabilia => memorabilia.ItemTypeId)
-                    .ToArray();
-    }
+        => Items.Where(memorabilia => memorabilia.UserId == userId)
+                .Select(memorabilia => memorabilia.ItemTypeId)
+                .ToArray();
 
     public int[] GetSizeIds(int userId)
-    {
-        return Items.Where(memorabilia => memorabilia.UserId == userId && memorabilia.Size != null)
-                    .Select(memorabilia => memorabilia.Size.SizeId)
-                    .ToArray();
-    }
+        => Items.Where(memorabilia => memorabilia.UserId == userId && memorabilia.Size != null)
+                .Select(memorabilia => memorabilia.Size.SizeId)
+                .ToArray();
 
     public int[] GetSportIds(int userId)
-    {
-        return Items.Where(memorabilia => memorabilia.UserId == userId && memorabilia.Sports.Any())
-                    .SelectMany(memorabilia => memorabilia.Sports.Select(sport => sport.SportId))
-                    .ToArray();
-    }
+        => Items.Where(memorabilia => memorabilia.UserId == userId && memorabilia.Sports.Any())
+                .SelectMany(memorabilia => memorabilia.Sports.Select(sport => sport.SportId))
+                .ToArray();
 
     public int[] GetSportLeagueLevelIds(int userId)
-    {
-        return Items.Where(memorabilia => memorabilia.UserId == userId && memorabilia.Teams.Any())
-                    .SelectMany(memorabilia => memorabilia.Teams.Select(team => team.Team.Franchise.SportLeagueLevel.Id))
-                    .ToArray();
-    }
+        => Items.Where(memorabilia => memorabilia.UserId == userId && memorabilia.Teams.Any())
+                .SelectMany(memorabilia => memorabilia.Teams.Select(team => team.Team.Franchise.SportLeagueLevel.Id))
+                .ToArray();
 }

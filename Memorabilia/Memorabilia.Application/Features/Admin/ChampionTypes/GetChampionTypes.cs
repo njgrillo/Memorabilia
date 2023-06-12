@@ -12,7 +12,6 @@ public record GetChampionTypes() : IQuery<Entity.ChampionType[]>
         }
 
         protected override async Task<Entity.ChampionType[]> Handle(GetChampionTypes query)
-            => (await _championTypeRepository.GetAll())
-                    .ToArray();
+            => await _championTypeRepository.GetAll();
     }
 }

@@ -12,7 +12,6 @@ public record GetDashboardItems() : IQuery<Entity.DashboardItem[]>
         }
 
         protected override async Task<Entity.DashboardItem[]> Handle(GetDashboardItems query)
-            => (await _dashboardItemRepository.GetAll())
-                    .ToArray();
+            => await _dashboardItemRepository.GetAll();
     }
 }

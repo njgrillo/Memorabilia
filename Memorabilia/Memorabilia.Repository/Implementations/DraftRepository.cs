@@ -1,18 +1,17 @@
-﻿using Memorabilia.Domain.Entities;
+﻿namespace Memorabilia.Repository.Implementations;
 
-namespace Memorabilia.Repository.Implementations;
-
-public class DraftRepository : DomainRepository<Draft>, IDraftRepository
+public class DraftRepository 
+    : DomainRepository<Entity.Draft>, IDraftRepository
 {
-    public DraftRepository(DomainContext context, IMemoryCache memoryCache) : base(context, memoryCache) { }
+    public DraftRepository(DomainContext context, IMemoryCache memoryCache) 
+        : base(context, memoryCache) { }
 
-    private IQueryable<Draft> Drafts => Items.Include(draft => draft.Franchise)
-                                             .Include(draft => draft.Person);
+    private IQueryable<Entity.Draft> Drafts 
+        => Items.Include(draft => draft.Franchise)
+                .Include(draft => draft.Person);
 
-    public async Task<IEnumerable<Draft>> GetAll(int franchiseId)
-    {
-        return await Drafts.Where(draft => draft.FranchiseId == franchiseId)
-                           .AsNoTracking()
-                           .ToListAsync();
-    }
+    public async Task<IEnumerable<Entity.Draft>> GetAll(int franchiseId)
+        => await Drafts.Where(draft => draft.FranchiseId == franchiseId)
+                       .AsNoTracking()
+                       .ToListAsync();
 }

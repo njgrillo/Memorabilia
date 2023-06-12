@@ -17,6 +17,9 @@ global using System.Linq;
 global using System.Linq.Expressions;
 global using System.Threading;
 global using System.Threading.Tasks;
+global using Constant = Memorabilia.Domain.Constants;
+global using Enum = Memorabilia.Domain.Enums;
+global using Entity = Memorabilia.Domain.Entities;
 
 
 

@@ -12,7 +12,6 @@ public record GetColors() : IQuery<Entity.Color[]>
         }
 
         protected override async Task<Entity.Color[]> Handle(GetColors query)
-            => (await _colorRepository.GetAll())
-                    .ToArray();
+            => await _colorRepository.GetAll();
     }
 }

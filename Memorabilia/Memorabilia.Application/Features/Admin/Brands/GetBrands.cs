@@ -12,7 +12,6 @@ public record GetBrands() : IQuery<Entity.Brand[]>
         }
 
         protected override async Task<Entity.Brand[]> Handle(GetBrands query)
-            => (await _brandRepository.GetAll())
-                    .ToArray();
+            => await _brandRepository.GetAll();
     }
 }

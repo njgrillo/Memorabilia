@@ -12,7 +12,6 @@ public record GetPurchaseTypes() : IQuery<Entity.PurchaseType[]>
         }
 
         protected override async Task<Entity.PurchaseType[]> Handle(GetPurchaseTypes query)
-            => (await _purchaseTypeRepository.GetAll())
-                    .ToArray();
+            => await _purchaseTypeRepository.GetAll();
     }
 }

@@ -1,8 +1,7 @@
-﻿using Memorabilia.Domain.Entities;
+﻿namespace Memorabilia.Repository.Interfaces;
 
-namespace Memorabilia.Repository.Interfaces;
-
-public interface ITeamDivisionRepository : IDomainRepository<TeamDivision>
+public interface ITeamDivisionRepository 
+    : IDomainRepository<Entity.TeamDivision>
 {
-    Task<IEnumerable<TeamDivision>> GetAll(int? teamId = null);
+    Task<Entity.TeamDivision[]> GetAll(int? teamId = null);
 }

@@ -1,8 +1,6 @@
-﻿using Memorabilia.Domain.Entities;
-
-namespace Memorabilia.Repository.Interfaces;
+﻿namespace Memorabilia.Repository.Interfaces;
 
 public interface ILeaderRepository
 {
-    Task<IEnumerable<Leader>> GetAll(int leaderTypeId);
+    Task<IEnumerable<Entity.Leader>> GetAll(int leaderTypeId);
 }

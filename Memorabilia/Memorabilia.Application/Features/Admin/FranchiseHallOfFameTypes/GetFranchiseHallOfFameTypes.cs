@@ -12,7 +12,6 @@ public record GetFranchiseHallOfFameTypes() : IQuery<Entity.FranchiseHallOfFameT
         }
 
         protected override async Task<Entity.FranchiseHallOfFameType[]> Handle(GetFranchiseHallOfFameTypes query)
-            => (await _franchiseHallOfFameTypeRepository.GetAll())
-                    .ToArray();
+            => await _franchiseHallOfFameTypeRepository.GetAll();
     }
 }

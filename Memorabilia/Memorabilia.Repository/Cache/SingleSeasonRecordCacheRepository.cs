@@ -1,23 +1,23 @@
-﻿using Memorabilia.Domain.Entities;
+﻿namespace Memorabilia.Repository.Cache;
 
-namespace Memorabilia.Repository.Cache;
-
-public class SingleSeasonRecordCacheRepository : DomainCacheRepository<SingleSeasonRecord>, ISingleSeasonRecordRepository
+public class SingleSeasonRecordCacheRepository 
+    : DomainCacheRepository<Entity.SingleSeasonRecord>, ISingleSeasonRecordRepository
 {
     private readonly SingleSeasonRecordRepository _singleSeasonRecordRepository;
 
-    public SingleSeasonRecordCacheRepository(DomainContext context, SingleSeasonRecordRepository singleSeasonRecordRepository, IMemoryCache memoryCache)
+    public SingleSeasonRecordCacheRepository(DomainContext context, 
+                                             SingleSeasonRecordRepository singleSeasonRecordRepository, 
+                                             IMemoryCache memoryCache)
         : base(context, memoryCache)
     {
         _singleSeasonRecordRepository = singleSeasonRecordRepository;
     }
 
-    public Task<IEnumerable<SingleSeasonRecord>> GetAll(int sportId)
-    {
-        return GetAll($"SingleSeasonRecord_GetAll_{sportId}", entry =>
-        {
-            entry.SetAbsoluteExpiration(TimeSpan.FromDays(1));
-            return _singleSeasonRecordRepository.GetAll(sportId);
-        });
-    }
+    public Task<IEnumerable<Entity.SingleSeasonRecord>> GetAll(int sportId) 
+        => GetAll($"SingleSeasonRecord_GetAll_{sportId}", 
+                  entry => 
+                  { 
+                      entry.SetAbsoluteExpiration(TimeSpan.FromDays(1)); 
+                      return _singleSeasonRecordRepository.GetAll(sportId); 
+                  });
 }

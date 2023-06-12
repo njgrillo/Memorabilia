@@ -12,7 +12,6 @@ public record GetProjectStatusTypes() : IQuery<Entity.ProjectStatusType[]>
         }
 
         protected override async Task<Entity.ProjectStatusType[]> Handle(GetProjectStatusTypes query)
-            => (await _projectStatusTypeRepository.GetAll())
-                    .ToArray();
+            => await _projectStatusTypeRepository.GetAll();
     }
 }

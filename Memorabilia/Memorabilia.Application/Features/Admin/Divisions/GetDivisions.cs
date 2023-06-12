@@ -12,7 +12,6 @@ public record GetDivisions() : IQuery<Entity.Division[]>
         }
 
         protected override async Task<Entity.Division[]> Handle(GetDivisions query)
-            => (await _divisionRepository.GetAll())
-                    .ToArray();
+            => await _divisionRepository.GetAll();
     }
 }

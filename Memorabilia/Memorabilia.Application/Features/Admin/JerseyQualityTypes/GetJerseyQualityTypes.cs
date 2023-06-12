@@ -12,7 +12,6 @@ public record GetJerseyQualityTypes() : IQuery<Entity.JerseyQualityType[]>
         }
 
         protected override async Task<Entity.JerseyQualityType[]> Handle(GetJerseyQualityTypes query)
-            => (await _jerseyQualityTypeRepository.GetAll())
-                    .ToArray();
+            => await _jerseyQualityTypeRepository.GetAll();
     }
 }

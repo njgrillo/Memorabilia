@@ -12,7 +12,6 @@ public record GetInscriptionTypes() : IQuery<Entity.InscriptionType[]>
         }
 
         protected override async Task<Entity.InscriptionType[]> Handle(GetInscriptionTypes query)
-            => (await _inscriptionTypeRepository.GetAll())
-                    .ToArray();
+            => await _inscriptionTypeRepository.GetAll();
     }
 }

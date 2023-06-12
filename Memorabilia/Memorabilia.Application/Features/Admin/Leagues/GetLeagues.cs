@@ -12,7 +12,6 @@ public record GetLeagues() : IQuery<Entity.League[]>
         }
 
         protected override async Task<Entity.League[]> Handle(GetLeagues query)
-            => (await _leagueRepository.GetAll())
-                    .ToArray();
+            => await _leagueRepository.GetAll();
     }
 }

@@ -1,6 +1,7 @@
 ﻿namespace Memorabilia.Application.Features.Memorabilia.Image;
 
-public record GetMemorabiliaImages(int MemorabiliaId) : IQuery<Entity.MemorabiliaImage[]>
+public record GetMemorabiliaImages(int MemorabiliaId) 
+    : IQuery<Entity.MemorabiliaImage[]>
 {
     public class Handler : QueryHandler<GetMemorabiliaImages, Entity.MemorabiliaImage[]>
     {
@@ -12,7 +13,6 @@ public record GetMemorabiliaImages(int MemorabiliaId) : IQuery<Entity.Memorabili
         }
 
         protected override async Task<Entity.MemorabiliaImage[]> Handle(GetMemorabiliaImages query)
-            => (await _memorabiliaImageRepository.GetAll(query.MemorabiliaId))
-                    .ToArray();
+            => await _memorabiliaImageRepository.GetAll(query.MemorabiliaId);
     }
 }

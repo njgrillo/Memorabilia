@@ -1,8 +1,7 @@
-﻿using Memorabilia.Domain.Entities;
+﻿namespace Memorabilia.Repository.Interfaces;
 
-namespace Memorabilia.Repository.Interfaces;
-
-public interface IMemorabiliaImageRepository : IDomainRepository<MemorabiliaImage>
+public interface IMemorabiliaImageRepository 
+    : IDomainRepository<Entity.MemorabiliaImage>
 {
-    Task<List<MemorabiliaImage>> GetAll(int memorabiliaId);
+    Task<Entity.MemorabiliaImage[]> GetAll(int memorabiliaId);
 }

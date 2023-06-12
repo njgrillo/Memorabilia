@@ -12,7 +12,6 @@ public record GetItemTypeSports(int? ItemTypeId = null) : IQuery<Entity.ItemType
         }
 
         protected override async Task<Entity.ItemTypeSport[]> Handle(GetItemTypeSports query)
-            => (await _itemTypeSportRepository.GetAll(query.ItemTypeId))
-                    .ToArray();
+            => await _itemTypeSportRepository.GetAll(query.ItemTypeId);
     }
 }

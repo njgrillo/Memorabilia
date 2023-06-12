@@ -1,6 +1,7 @@
 ﻿namespace Memorabilia.Repository.Interfaces;
 
-public interface IDomainRepository<T> : ITransaction where T : DomainEntity
+public interface IDomainRepository<T> 
+    : ITransaction where T : DomainEntity
 {
     Task Add(T item, CancellationToken cancellationToken = default);
 
@@ -8,7 +9,7 @@ public interface IDomainRepository<T> : ITransaction where T : DomainEntity
 
     Task<T> Get(int id);
 
-    Task<IEnumerable<T>> GetAll();
+    Task<T[]> GetAll();
 
     Task Update(T item, CancellationToken cancellationToken = default);
 }

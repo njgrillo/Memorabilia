@@ -12,7 +12,6 @@ public record GetLevelTypes() : IQuery<Entity.LevelType[]>
         }
 
         protected override async Task<Entity.LevelType[]> Handle(GetLevelTypes query)
-            => (await _levelTypeRepository.GetAll())
-                    .ToArray();
+            => await _levelTypeRepository.GetAll();
     }
 }

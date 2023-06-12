@@ -12,7 +12,6 @@ public record GetAutographImages(int AutographId) : IQuery<Entity.AutographImage
         }
 
         protected override async Task<Entity.AutographImage[]> Handle(GetAutographImages query)
-            => (await _autographImageRepository.GetAll(query.AutographId))
-                    .ToArray();
+            => await _autographImageRepository.GetAll(query.AutographId);
     }
 }

@@ -12,7 +12,6 @@ public record GetPhotoTypes() : IQuery<Entity.PhotoType[]>
         }
 
         protected override async Task<Entity.PhotoType[]> Handle(GetPhotoTypes query)
-            => (await _photoTypeRepository.GetAll())
-                    .ToArray();
+            => await _photoTypeRepository.GetAll();
     }
 }

@@ -1,22 +1,20 @@
-﻿using Memorabilia.Domain.Entities;
+﻿namespace Memorabilia.Repository.Implementations;
 
-namespace Memorabilia.Repository.Implementations;
-
-public class TeamLeagueRepository : DomainRepository<TeamLeague>, ITeamLeagueRepository
+public class TeamLeagueRepository 
+    : DomainRepository<Entity.TeamLeague>, ITeamLeagueRepository
 {
-    public TeamLeagueRepository(DomainContext context, IMemoryCache memoryCache) : base(context, memoryCache) { }
+    public TeamLeagueRepository(DomainContext context, IMemoryCache memoryCache) 
+        : base(context, memoryCache) { }
 
-    private IQueryable<TeamLeague> TeamLeague => Items.Include(teamLeague => teamLeague.Team);
+    private IQueryable<Entity.TeamLeague> TeamLeague 
+        => Items.Include(teamLeague => teamLeague.Team);
 
-    public override async Task<TeamLeague> Get(int id)
-    {
-        return await TeamLeague.SingleOrDefaultAsync(teamLeague => teamLeague.Id == id);
-    }
+    public override async Task<Entity.TeamLeague> Get(int id)
+        => await TeamLeague.SingleOrDefaultAsync(teamLeague => teamLeague.Id == id);
 
-    public async Task<IEnumerable<TeamLeague>> GetAll(int? teamId = null)
-    {
-        return teamId.HasValue
-            ? await TeamLeague.Where(teamLeague => teamLeague.TeamId == teamId).ToListAsync()
-            : await TeamLeague.ToListAsync();
-    }
+    public async Task<Entity.TeamLeague[]> GetAll(int? teamId = null)
+        => teamId.HasValue
+            ? await TeamLeague.Where(teamLeague => teamLeague.TeamId == teamId)
+                              .ToArrayAsync()
+            : await TeamLeague.ToArrayAsync();
 }

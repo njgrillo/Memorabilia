@@ -12,6 +12,6 @@ public record GetAcquisitionTypes() : IQuery<Entity.AcquisitionType[]>
         }
 
         protected override async Task<Entity.AcquisitionType[]> Handle(GetAcquisitionTypes query)
-            => (await _acquisitionTypeRepository.GetAll()).ToArray();
+            => await _acquisitionTypeRepository.GetAll();
     }
 }

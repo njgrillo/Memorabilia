@@ -12,7 +12,6 @@ public record GetHelmetFinishes() : IQuery<Entity.HelmetFinish[]>
         }
 
         protected override async Task<Entity.HelmetFinish[]> Handle(GetHelmetFinishes query)
-            => (await _helmetFinishRepository.GetAll())
-                    .ToArray();
+            => await _helmetFinishRepository.GetAll();
     }
 }

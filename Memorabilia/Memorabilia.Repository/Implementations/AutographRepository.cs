@@ -1,37 +1,39 @@
-﻿using Memorabilia.Domain.Entities;
+﻿namespace Memorabilia.Repository.Implementations;
 
-namespace Memorabilia.Repository.Implementations;
-
-public class AutographRepository : MemorabiliaRepository<Autograph>, IAutographRepository
+public class AutographRepository 
+    : MemorabiliaRepository<Entity.Autograph>, IAutographRepository
 {
-    public AutographRepository(MemorabiliaContext context, IMemoryCache memoryCache) : base(context, memoryCache) { }
+    public AutographRepository(MemorabiliaContext context, IMemoryCache memoryCache) 
+        : base(context, memoryCache) { }
 
-    private IQueryable<Autograph> Autograph => Items.Include(autograph => autograph.Acquisition)
-                                                    .Include(autograph => autograph.Authentications)
-                                                    .Include(autograph => autograph.Images)
-                                                    .Include(autograph => autograph.Inscriptions)
-                                                    .Include(autograph => autograph.Memorabilia)
-                                                    .Include(autograph => autograph.Person)
-                                                    .Include(autograph => autograph.Personalization)
-                                                    .Include(autograph => autograph.Spot);
+    private IQueryable<Entity.Autograph> Autograph 
+        => Items.Include(autograph => autograph.Acquisition)
+                .Include(autograph => autograph.Authentications)
+                .Include(autograph => autograph.Images)
+                .Include(autograph => autograph.Inscriptions)
+                .Include(autograph => autograph.Memorabilia)
+                .Include(autograph => autograph.Person)
+                .Include(autograph => autograph.Personalization)
+                .Include(autograph => autograph.Spot);
 
-    public override async Task<Autograph> Get(int id)
-    {
-        return await Autograph.SingleOrDefaultAsync(autograph => autograph.Id == id);
-    }
+    public override async Task<Entity.Autograph> Get(int id)
+        => await Autograph.SingleOrDefaultAsync(autograph => autograph.Id == id);
 
-    public async Task<IEnumerable<Autograph>> GetAll(int? memorabiliaId = null, int? userId = null)
+    public async Task<Entity.Autograph[]> GetAll(int? memorabiliaId = null, 
+                                                            int? userId = null)
     {
         if (memorabiliaId.HasValue)
-            return await Autograph.Where(autograph => autograph.MemorabiliaId == memorabiliaId).ToListAsync();
+            return await Autograph.Where(autograph => autograph.MemorabiliaId == memorabiliaId)
+                                  .ToArrayAsync();
 
         if (userId.HasValue)
-            return await Autograph.Where(autograph => autograph.Memorabilia.UserId == userId).ToListAsync();
+            return await Autograph.Where(autograph => autograph.Memorabilia.UserId == userId)
+                                  .ToArrayAsync();
 
-        return await Autograph.ToListAsync();
+        return await Autograph.ToArrayAsync();
     }
 
-    public async Task<Autograph[]> GetAll(Dictionary<string, object> parameters)
+    public async Task<Entity.Autograph[]> GetAll(Dictionary<string, object> parameters)
     {
         _ = parameters.TryGetValue("UserId", out object userId);
         _ = parameters.TryGetValue("PersonId", out object personId);
@@ -74,49 +76,35 @@ public class AutographRepository : MemorabiliaRepository<Autograph>, IAutographR
     }
 
     public int[] GetAcquisitionTypeIds(int userId)
-    {
-        return Items.Where(autograph => autograph.Memorabilia.UserId == userId && autograph.Acquisition != null)
-                    .Select(autograph => autograph.Acquisition.AcquisitionTypeId)
-                    .ToArray();
-    }
+        => Items.Where(autograph => autograph.Memorabilia.UserId == userId && autograph.Acquisition != null)
+                .Select(autograph => autograph.Acquisition.AcquisitionTypeId)
+                .ToArray();
 
     public int[] GetColorIds(int userId)
-    {
-        return Items.Where(autograph => autograph.Memorabilia.UserId == userId)
-                    .Select(autograph => autograph.ColorId)
-                    .ToArray();
-    }
+        => Items.Where(autograph => autograph.Memorabilia.UserId == userId)
+                .Select(autograph => autograph.ColorId)
+                .ToArray();
 
     public int[] GetConditionIds(int userId)
-    {
-        return Items.Where(autograph => autograph.Memorabilia.UserId == userId)
-                    .Select(autograph => autograph.ConditionId)
-                    .ToArray();
-    }
+        => Items.Where(autograph => autograph.Memorabilia.UserId == userId)
+                .Select(autograph => autograph.ConditionId)
+                .ToArray();
 
     public decimal GetCostTotal(int userId)
-    {
-        return Items.Where(autograph => autograph.Memorabilia.UserId == userId && autograph.Acquisition != null)
-                    .Sum(autograph => autograph.Acquisition.Cost ?? 0);
-    }
+        => Items.Where(autograph => autograph.Memorabilia.UserId == userId && autograph.Acquisition != null)
+                .Sum(autograph => autograph.Acquisition.Cost ?? 0);
 
     public decimal GetEstimatedValueTotal(int userId)
-    {
-        return Items.Where(autograph => autograph.Memorabilia.UserId == userId)
-                    .Sum(autograph => autograph.EstimatedValue ?? 0);
-    }
+        => Items.Where(autograph => autograph.Memorabilia.UserId == userId)
+                .Sum(autograph => autograph.EstimatedValue ?? 0);
 
     public int[] GetSpotIds(int userId)
-    {
-        return Items.Where(autograph => autograph.Memorabilia.UserId == userId && autograph.Spot != null)
-                    .Select(autograph => autograph.Spot.SpotId)
-                    .ToArray();
-    }
+        => Items.Where(autograph => autograph.Memorabilia.UserId == userId && autograph.Spot != null)
+                .Select(autograph => autograph.Spot.SpotId)
+                .ToArray();
 
     public int[] GetWritingInstrumentIds(int userId)
-    {
-        return Items.Where(autograph => autograph.Memorabilia.UserId == userId)
-                    .Select(autograph => autograph.WritingInstrumentId)
-                    .ToArray();
-    }
+        => Items.Where(autograph => autograph.Memorabilia.UserId == userId)
+                .Select(autograph => autograph.WritingInstrumentId)
+                .ToArray();
 }

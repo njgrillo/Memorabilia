@@ -1,8 +1,7 @@
-﻿using DomainEntity = Framework.Library.Domain.Entity.DomainEntity;
+﻿namespace Memorabilia.Repository.Interfaces;
 
-namespace Memorabilia.Repository.Interfaces;
-
-public interface IItemTypeEntityRepository<T> : IDomainRepository<T> where T : DomainEntity
+public interface IItemTypeEntityRepository<T> 
+    : IDomainRepository<T> where T : Framework.Library.Domain.Entity.DomainEntity
 {
-    Task<IEnumerable<T>> GetAll(int? itemTypeId = null);
+    Task<T[]> GetAll(int? itemTypeId = null);
 }

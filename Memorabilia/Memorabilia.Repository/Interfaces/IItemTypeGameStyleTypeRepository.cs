@@ -1,5 +1,4 @@
-﻿using Memorabilia.Domain.Entities;
+﻿namespace Memorabilia.Repository.Interfaces;
 
-namespace Memorabilia.Repository.Interfaces;
-
-public interface IItemTypeGameStyleTypeRepository : IItemTypeEntityRepository<ItemTypeGameStyleType> { }
+public interface IItemTypeGameStyleTypeRepository 
+    : IItemTypeEntityRepository<Entity.ItemTypeGameStyleType> { }

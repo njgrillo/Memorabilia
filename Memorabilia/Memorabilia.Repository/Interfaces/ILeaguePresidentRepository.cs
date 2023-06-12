@@ -1,8 +1,8 @@
-﻿using Memorabilia.Domain.Entities;
+﻿namespace Memorabilia.Repository.Interfaces;
 
-namespace Memorabilia.Repository.Interfaces;
-
-public interface ILeaguePresidentRepository : IDomainRepository<LeaguePresident>
+public interface ILeaguePresidentRepository 
+    : IDomainRepository<Entity.LeaguePresident>
 {
-    Task<IEnumerable<LeaguePresident>> GetAll(int? sportLeagueLevelId = null, int? leagueId = null);
+    Task<Entity.LeaguePresident[]> GetAll(int? sportLeagueLevelId = null, 
+                                          int? leagueId = null);
 }

@@ -12,7 +12,6 @@ public record GetGloveTypes() : IQuery<Entity.GloveType[]>
         }
 
         protected override async Task<Entity.GloveType[]> Handle(GetGloveTypes query)
-            => (await _gloveTypeRepository.GetAll())
-                    .ToArray();
+            => await _gloveTypeRepository.GetAll();
     }
 }

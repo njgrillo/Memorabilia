@@ -12,7 +12,6 @@ public record GetPositions() : IQuery<Entity.Position[]>
         }
 
         protected override async Task<Entity.Position[]> Handle(GetPositions query)
-            => (await _positionRepository.GetAll())
-                    .ToArray();
+            => await _positionRepository.GetAll();
     }
 }

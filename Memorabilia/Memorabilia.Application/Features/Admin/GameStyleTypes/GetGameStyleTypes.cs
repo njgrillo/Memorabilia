@@ -12,7 +12,6 @@ public record GetGameStyleTypes() : IQuery<Entity.GameStyleType[]>
         }
 
         protected override async Task<Entity.GameStyleType[]> Handle(GetGameStyleTypes query)
-            => (await _gameStyleTypeRepository.GetAll())
-                    .ToArray();
+            => await _gameStyleTypeRepository.GetAll();
     }
 }

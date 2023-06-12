@@ -1,22 +1,20 @@
-﻿using Memorabilia.Domain.Entities;
+﻿namespace Memorabilia.Repository.Implementations;
 
-namespace Memorabilia.Repository.Implementations;
-
-public class TeamDivisionRepository : DomainRepository<TeamDivision>, ITeamDivisionRepository
+public class TeamDivisionRepository 
+    : DomainRepository<Entity.TeamDivision>, ITeamDivisionRepository
 {
-    public TeamDivisionRepository(DomainContext context, IMemoryCache memoryCache) : base(context, memoryCache) { }
+    public TeamDivisionRepository(DomainContext context, IMemoryCache memoryCache) 
+        : base(context, memoryCache) { }
 
-    private IQueryable<TeamDivision> TeamDivision => Items.Include(teamDivision => teamDivision.Team);
+    private IQueryable<Entity.TeamDivision> TeamDivision 
+        => Items.Include(teamDivision => teamDivision.Team);
 
-    public override async Task<TeamDivision> Get(int id)
-    {
-        return await TeamDivision.SingleOrDefaultAsync(teamDivision => teamDivision.Id == id);
-    }
+    public override async Task<Entity.TeamDivision> Get(int id)
+        => await TeamDivision.SingleOrDefaultAsync(teamDivision => teamDivision.Id == id);
 
-    public async Task<IEnumerable<TeamDivision>> GetAll(int? teamId = null)
-    {
-        return teamId.HasValue
-            ? await TeamDivision.Where(teamDivision => teamDivision.TeamId == teamId).ToListAsync()
-            : await TeamDivision.ToListAsync();
-    }
+    public async Task<Entity.TeamDivision[]> GetAll(int? teamId = null)
+        => teamId.HasValue
+            ? await TeamDivision.Where(teamDivision => teamDivision.TeamId == teamId)
+                                .ToArrayAsync()
+            : await TeamDivision.ToArrayAsync();
 }

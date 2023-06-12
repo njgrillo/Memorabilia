@@ -12,7 +12,6 @@ public record GetBatTypes() : IQuery<Entity.BatType[]>
         }
 
         protected override async Task<Entity.BatType[]> Handle(GetBatTypes query)
-            => (await _batTypeRepository.GetAll())
-                    .ToArray();
+            => await _batTypeRepository.GetAll();
     }
 }

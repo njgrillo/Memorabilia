@@ -12,7 +12,6 @@ public record GetInternationalHallOfFameTypes() : IQuery<Entity.InternationalHal
         }
 
         protected override async Task<Entity.InternationalHallOfFameType[]> Handle(GetInternationalHallOfFameTypes query)
-            => (await _internationalHallOfFameTypeRepository.GetAll())
-                    .ToArray();
+            => await _internationalHallOfFameTypeRepository.GetAll();
     }
 }

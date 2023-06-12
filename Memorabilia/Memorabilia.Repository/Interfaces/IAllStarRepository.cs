@@ -1,8 +1,6 @@
-﻿using Memorabilia.Domain.Entities;
-
-namespace Memorabilia.Repository.Interfaces;
+﻿namespace Memorabilia.Repository.Interfaces;
 
 public interface IAllStarRepository
 {
-    Task<IEnumerable<AllStar>> GetAll(int year, Domain.Constants.Sport sport = null);
+    Task<IEnumerable<Entity.AllStar>> GetAll(int year, Constant.Sport sport = null);
 }

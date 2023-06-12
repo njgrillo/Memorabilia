@@ -12,7 +12,6 @@ public record GetLeaderTypes() : IQuery<Entity.LeaderType[]>
         }
 
         protected override async Task<Entity.LeaderType[]> Handle(GetLeaderTypes query)
-            => (await _leaderTypeRepository.GetAll())
-                    .ToArray();
+            => await _leaderTypeRepository.GetAll();
     }
 }

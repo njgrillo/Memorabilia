@@ -12,7 +12,6 @@ public record GetColleges() : IQuery<Entity.College[]>
         }
 
         protected override async Task<Entity.College[]> Handle(GetColleges query)
-            => (await _collegeRepository.GetAll())
-                    .ToArray();
+            => await _collegeRepository.GetAll();
     }
 }

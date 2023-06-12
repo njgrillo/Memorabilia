@@ -21,9 +21,9 @@ public record GetImageMaintenance(string MemorabiliaImageRootPath,
 
         protected override async Task<ImageMaintenanceModel> Handle(GetImageMaintenance query)
         {
-            IEnumerable<Entity.AutographImage> autographImages = await _autographImageRepository.GetAll();
-            IEnumerable<Entity.MemorabiliaImage> memorabiliaImages = await _memorabiliaImageRepository.GetAll();
-            IEnumerable<Entity.Person> people = await _personRepository.GetAll();   
+            Entity.AutographImage[] autographImages = await _autographImageRepository.GetAll();
+            Entity.MemorabiliaImage[] memorabiliaImages = await _memorabiliaImageRepository.GetAll();
+            Entity.Person[] people = await _personRepository.GetAll();   
 
             return new ImageMaintenanceModel(query.MemorabiliaImageRootPath, 
                                              query.PersonImageRootPath, 

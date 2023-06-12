@@ -1,5 +1,4 @@
-﻿using Memorabilia.Domain.Entities;
+﻿namespace Memorabilia.Repository.Interfaces;
 
-namespace Memorabilia.Repository.Interfaces;
-
-public interface IItemTypeSpotRepository : IItemTypeEntityRepository<ItemTypeSpot> { }
+public interface IItemTypeSpotRepository 
+    : IItemTypeEntityRepository<Entity.ItemTypeSpot> { }

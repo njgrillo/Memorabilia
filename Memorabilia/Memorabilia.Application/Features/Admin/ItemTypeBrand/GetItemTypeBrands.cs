@@ -12,7 +12,6 @@ public record GetItemTypeBrands(int? ItemTypeId = null) : IQuery<Entity.ItemType
         }
 
         protected override async Task<Entity.ItemTypeBrand[]> Handle(GetItemTypeBrands query)
-            => (await _itemTypeBrandRepository.GetAll(query.ItemTypeId))
-                    .ToArray();
+            => await _itemTypeBrandRepository.GetAll(query.ItemTypeId);
     }
 }

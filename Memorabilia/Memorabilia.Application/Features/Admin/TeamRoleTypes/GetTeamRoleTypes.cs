@@ -12,7 +12,6 @@ public record GetTeamRoleTypes() : IQuery<Entity.TeamRoleType[]>
         }
 
         protected override async Task<Entity.TeamRoleType[]> Handle(GetTeamRoleTypes query)
-            => (await _TeamRoleTypeRepository.GetAll())
-                    .ToArray();
+            => await _TeamRoleTypeRepository.GetAll();
     }
 }

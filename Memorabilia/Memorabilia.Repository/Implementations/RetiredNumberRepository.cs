@@ -1,19 +1,18 @@
-﻿using Memorabilia.Domain.Entities;
+﻿namespace Memorabilia.Repository.Implementations;
 
-namespace Memorabilia.Repository.Implementations;
-
-public class RetiredNumberRepository : DomainRepository<RetiredNumber>, IRetiredNumberRepository
+public class RetiredNumberRepository 
+    : DomainRepository<Entity.RetiredNumber>, IRetiredNumberRepository
 {
-    public RetiredNumberRepository(DomainContext context, IMemoryCache memoryCache) : base(context, memoryCache) { }
+    public RetiredNumberRepository(DomainContext context, IMemoryCache memoryCache) 
+        : base(context, memoryCache) { }
 
-    private IQueryable<RetiredNumber> RetiredNumbers => Items.Include(retiredNumber => retiredNumber.Franchise)
-                                                             .Include(retiredNumber => retiredNumber.Person);
+    private IQueryable<Entity.RetiredNumber> RetiredNumbers 
+        => Items.Include(retiredNumber => retiredNumber.Franchise)
+                .Include(retiredNumber => retiredNumber.Person);
 
-    public async Task<IEnumerable<RetiredNumber>> GetAll(int franchiseId)
-    {
-        return (await RetiredNumbers.Where(retiredNumber => retiredNumber.FranchiseId == franchiseId)
-                                    .AsNoTracking()
-                                    .ToListAsync())
-                  .OrderBy(retiredNumber => retiredNumber.Person.DisplayName);
-    }
+    public async Task<IEnumerable<Entity.RetiredNumber>> GetAll(int franchiseId)
+        => (await RetiredNumbers.Where(retiredNumber => retiredNumber.FranchiseId == franchiseId)
+                                .AsNoTracking()
+                                .ToListAsync())
+                    .OrderBy(retiredNumber => retiredNumber.Person.DisplayName);
 }

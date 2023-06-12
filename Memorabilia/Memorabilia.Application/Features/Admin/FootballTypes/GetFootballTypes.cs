@@ -12,7 +12,6 @@ public record GetFootballTypes() : IQuery<Entity.FootballType[]>
         }
 
         protected override async Task<Entity.FootballType[]> Handle(GetFootballTypes query)
-            => (await _footballTypeRepository.GetAll())
-                    .ToArray();
+            => await _footballTypeRepository.GetAll();
     }
 }

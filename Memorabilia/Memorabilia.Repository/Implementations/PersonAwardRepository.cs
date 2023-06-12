@@ -1,17 +1,16 @@
-﻿using Memorabilia.Domain.Entities;
+﻿namespace Memorabilia.Repository.Implementations;
 
-namespace Memorabilia.Repository.Implementations;
-
-public class PersonAwardRepository : DomainRepository<PersonAward>, IPersonAwardRepository
+public class PersonAwardRepository 
+    : DomainRepository<Entity.PersonAward>, IPersonAwardRepository
 {
-    public PersonAwardRepository(DomainContext context, IMemoryCache memoryCache) : base(context, memoryCache) { }
+    public PersonAwardRepository(DomainContext context, IMemoryCache memoryCache) 
+        : base(context, memoryCache) { }
 
-    private IQueryable<PersonAward> PersonAward => Items.Include(personAward => personAward.Person);
+    private IQueryable<Entity.PersonAward> PersonAward 
+        => Items.Include(personAward => personAward.Person);
 
-    public async Task<IEnumerable<PersonAward>> GetAll(int awardTypeId)
-    {
-        return await PersonAward.Where(personAward => personAward.AwardTypeId == awardTypeId)
-                                .AsNoTracking()
-                                .ToListAsync();
-    }
+    public async Task<IEnumerable<Entity.PersonAward>> GetAll(int awardTypeId)
+        => await PersonAward.Where(personAward => personAward.AwardTypeId == awardTypeId)
+                            .AsNoTracking()
+                            .ToListAsync();
 }

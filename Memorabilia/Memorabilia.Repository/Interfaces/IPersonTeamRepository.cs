@@ -1,8 +1,6 @@
-﻿using Memorabilia.Domain.Entities;
-
-namespace Memorabilia.Repository.Interfaces;
+﻿namespace Memorabilia.Repository.Interfaces;
 
 public interface IPersonTeamRepository
 {
-    Task<IEnumerable<PersonTeam>> GetAll(int franchiseId);
+    Task<IEnumerable<Entity.PersonTeam>> GetAll(int franchiseId);
 }

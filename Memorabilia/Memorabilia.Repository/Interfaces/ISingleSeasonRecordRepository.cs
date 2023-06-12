@@ -1,8 +1,6 @@
-﻿using Memorabilia.Domain.Entities;
-
-namespace Memorabilia.Repository.Interfaces;
+﻿namespace Memorabilia.Repository.Interfaces;
 
 public interface ISingleSeasonRecordRepository
 {
-    Task<IEnumerable<SingleSeasonRecord>> GetAll(int sportId);
+    Task<IEnumerable<Entity.SingleSeasonRecord>> GetAll(int sportId);
 }

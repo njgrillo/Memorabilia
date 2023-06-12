@@ -12,7 +12,6 @@ public record GetMagazineTypes() : IQuery<Entity.MagazineType[]>
         }
 
         protected override async Task<Entity.MagazineType[]> Handle(GetMagazineTypes query)
-            => (await _magazineTypeRepository.GetAll())
-                    .ToArray();
+            => await _magazineTypeRepository.GetAll();
     }
 }

@@ -15,9 +15,8 @@ public record GetTeams(int? FranchiseId = null,
         }
 
         protected override async Task<Entity.Team[]> Handle(GetTeams query)
-            => (await _teamRepository.GetAll(query.FranchiseId,
-                                             query.SportLeagueLevelId,
-                                             query.SportId))
-                    .ToArray();
+            => await _teamRepository.GetAll(query.FranchiseId,
+                                            query.SportLeagueLevelId,
+                                            query.SportId);
     }
 }

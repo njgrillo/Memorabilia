@@ -12,7 +12,6 @@ public record GetFranchises() : IQuery<Entity.Franchise[]>
         }
 
         protected override async Task<Entity.Franchise[]> Handle(GetFranchises query)
-            => (await _franchiseRepository.GetAll())
-                    .ToArray();
+            => await _franchiseRepository.GetAll();
     }
 }

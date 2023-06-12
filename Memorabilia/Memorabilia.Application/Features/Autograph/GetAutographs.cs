@@ -14,7 +14,6 @@ public record GetAutographs(int? MemorabiliaId = null,
         }
 
         protected override async Task<Entity.Autograph[]> Handle(GetAutographs query)
-            => (await _autographRepository.GetAll(query.MemorabiliaId))
-                       .ToArray();
+            => await _autographRepository.GetAll(query.MemorabiliaId);
     }
 }

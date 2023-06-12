@@ -12,7 +12,6 @@ public record GetImageTypes() : IQuery<Entity.ImageType[]>
         }
 
         protected override async Task<Entity.ImageType[]> Handle(GetImageTypes query)
-            => (await _imageTypeRepository.GetAll())
-                    .ToArray();
+            => await _imageTypeRepository.GetAll();
     }
 }

@@ -12,7 +12,6 @@ public record GetWritingInstruments() : IQuery<Entity.WritingInstrument[]>
         }
 
         protected override async Task<Entity.WritingInstrument[]> Handle(GetWritingInstruments query)
-            => (await _writingInstrumentRepository.GetAll())
-                    .ToArray();
+            => await _writingInstrumentRepository.GetAll();
     }
 }

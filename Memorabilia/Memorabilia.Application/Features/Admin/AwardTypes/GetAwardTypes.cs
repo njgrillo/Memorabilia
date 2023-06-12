@@ -12,6 +12,6 @@ public record GetAwardTypes() : IQuery<Entity.AwardType[]>
         }
 
         protected override async Task<Entity.AwardType[]> Handle(GetAwardTypes query)
-            => (await _awardTypeRepository.GetAll()).ToArray();
+            => await _awardTypeRepository.GetAll();
     }
 }

@@ -12,7 +12,6 @@ public record GetConditions() : IQuery<Entity.Condition[]>
         }
 
         protected override async Task<Entity.Condition[]> Handle(GetConditions query)
-            => (await _conditionRepository.GetAll())
-                    .ToArray();
+            => await _conditionRepository.GetAll();
     }
 }
