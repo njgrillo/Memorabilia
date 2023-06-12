@@ -2,5 +2,6 @@
 
 public partial class Settings
 {
-    protected UserSettingsModel Model = new();
+    protected UserSettingsModel Model 
+        = new();
 }

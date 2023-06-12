@@ -3,7 +3,8 @@
 public partial class ViewInternationalHallOfFamers 
     : ViewSportTools<InternationalHallOfFameModel>
 {
-    private InternationalHallOfFamesModel Model = new();
+    private InternationalHallOfFamesModel Model 
+        = new();
 
     private async Task OnInputChange(int internationalHallOfFameTypeId)
     {

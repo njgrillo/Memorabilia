@@ -1,6 +1,6 @@
 ﻿@inherits PersonProfile
 
-@if (_viewModel != null)
+@if (Model != null)
 {
     <MudTabs ApplyEffectsToContainer="true"
              Centered="false"
@@ -8,7 +8,7 @@
              PanelClass="pa-6"
              Rounded="true">
         <Iterations Context="occupation"
-                    Items="_viewModel.Occupations">
+                    Items="Model.Occupations">
             <MudTabPanel BadgeColor="MudBlazor.Color.Success"
                          Text="@occupation.OccupationName">
                 <DivRowCol12>

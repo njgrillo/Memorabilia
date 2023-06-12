@@ -5,8 +5,11 @@ public partial class RolesProfile : PersonProfile
     [Inject]
     public IProfileService ProfileService { get; set; }
 
-    protected Dictionary<string, object> Parameters { get; set; } = new();
-    protected ProfileType[] ProfileTypes = Array.Empty<ProfileType>();
+    protected Dictionary<string, object> Parameters { get; set; } 
+        = new();
+
+    protected ProfileType[] ProfileTypes 
+        = Array.Empty<ProfileType>();
 
     protected override void OnParametersSet()
     {
@@ -14,6 +17,7 @@ public partial class RolesProfile : PersonProfile
             return;
 
         ProfileTypes = ProfileService.GetProfileTypes(Person, Occupation);
+
         Parameters = new Dictionary<string, object>
         {
             { "Occupation", Occupation },
@@ -22,7 +26,5 @@ public partial class RolesProfile : PersonProfile
     }
 
     private Type GetComponent(string profileTypeName)
-    {
-        return Type.GetType($"Memorabilia.Blazor.Pages.Tools.Profile.{profileTypeName}{Occupation.OccupationName}Profile"); 
-    }
+        => Type.GetType($"Memorabilia.Blazor.Pages.Tools.Profile.{profileTypeName}{Occupation.OccupationName}Profile");
 }

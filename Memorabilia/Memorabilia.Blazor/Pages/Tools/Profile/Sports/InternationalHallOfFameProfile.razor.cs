@@ -1,10 +1,8 @@
-﻿using Memorabilia.Domain.Entities;
-
-namespace Memorabilia.Blazor.Pages.Tools.Profile.Sports;
+﻿namespace Memorabilia.Blazor.Pages.Tools.Profile.Sports;
 
 public partial class InternationalHallOfFameProfile : SportProfile
 {
-    private InternationalHallOfFame[] InternationalHallOfFames;
+    private Entity.InternationalHallOfFame[] InternationalHallOfFames;
 
     protected override void OnParametersSet()
     {

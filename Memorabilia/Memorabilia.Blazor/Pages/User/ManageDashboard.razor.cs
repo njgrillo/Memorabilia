@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Blazor.Pages.User;
 
-public partial class ManageDashboard : ComponentBase
+public partial class ManageDashboard
 {
     [Inject]
     public CommandRouter CommandRouter { get; set; }
@@ -18,19 +18,19 @@ public partial class ManageDashboard : ComponentBase
     public int UserId { get; set; }
 
     private string SelectAllButtonText
-        => _viewModel != null && _viewModel.AllItemsSelected
+        => Model != null && Model.AllItemsSelected
             ? "Deselect All" 
             : "Select All";
 
-    private UserDashboardEditModel _viewModel 
+    protected UserDashboardEditModel Model 
         = new();
 
     protected async Task HandleValidSubmit()
     {
-        await CommandRouter.Send(new SaveUserDashboard.Command(_viewModel));
+        await CommandRouter.Send(new SaveUserDashboard.Command(Model));
 
-        NavigationManager.NavigateTo(_viewModel.ContinueNavigationPath);
-        Snackbar.Add($"{_viewModel.PageTitle} was saved successfully!", Severity.Success);
+        NavigationManager.NavigateTo(Model.ContinueNavigationPath);
+        Snackbar.Add($"{Model.PageTitle} was saved successfully!", Severity.Success);
     }
 
     protected async Task OnLoad()
@@ -40,7 +40,7 @@ public partial class ManageDashboard : ComponentBase
 
         Entity.User user = await QueryRouter.Send(new GetUserById(UserId));
 
-        _viewModel 
+        Model 
             = new UserDashboardEditModel(new UserDashboardsModel(user.Id,
                                                                  user.DashboardItems
                                                                      .OrderBy(dashboardItem => DashboardItem.Find(dashboardItem.DashboardItemId).Name)));
@@ -48,9 +48,9 @@ public partial class ManageDashboard : ComponentBase
 
     protected void OnSelectAll()
     {
-        bool selectAll = !_viewModel.AllItemsSelected;
+        bool selectAll = !Model.AllItemsSelected;
 
-        foreach (UserDashboardModel dashboardItem in _viewModel.UserDashboardItems)
+        foreach (UserDashboardModel dashboardItem in Model.UserDashboardItems)
         {
             dashboardItem.IsSelected = selectAll;
         }

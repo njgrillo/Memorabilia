@@ -3,7 +3,8 @@
 public partial class ViewCollegesTool 
     : ViewSportTools<PersonCollegeModel>
 {
-    protected PersonCollegesModel Model = new();
+    protected PersonCollegesModel Model
+        = new();
 
     protected async Task Browse()
     {

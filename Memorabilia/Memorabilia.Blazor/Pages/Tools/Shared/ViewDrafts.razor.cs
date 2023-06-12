@@ -3,7 +3,8 @@
 public partial class ViewDrafts 
     : ViewSportTools<DraftModel>
 {
-    protected DraftsModel Model = new();
+    protected DraftsModel Model 
+        = new();
 
     private async Task OnInputChange(Franchise franchise)
     {

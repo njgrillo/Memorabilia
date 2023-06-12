@@ -3,7 +3,8 @@
 public partial class ViewRetiredNumbers 
     : ViewSportTools<RetiredNumberModel>
 {
-    private RetiredNumbersModel Model = new();
+    private RetiredNumbersModel Model 
+        = new();
 
     private async Task OnInputChange(Franchise franchise)
     {

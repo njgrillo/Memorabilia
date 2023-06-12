@@ -14,16 +14,15 @@ public abstract class ViewSportTools<T>
 
     protected string Search;
 
-    protected bool FilterFunc1(T model) => FilterFunc(model, Search);
+    protected bool FilterFunc1(T model) 
+        => FilterFunc(model, Search);
 
     protected virtual bool FilterFunc(T model, string search)
-    {
-        return search.IsNullOrEmpty() ||
-               model.Name.Contains(search, StringComparison.OrdinalIgnoreCase) ||
-               CultureInfo.CurrentCulture.CompareInfo.IndexOf(model.Name,
-                                                              search,
-                                                              CompareOptions.IgnoreNonSpace) > -1;
-    }
+        => search.IsNullOrEmpty() ||
+           model.Name.Contains(search, StringComparison.OrdinalIgnoreCase) ||
+           CultureInfo.CurrentCulture.CompareInfo.IndexOf(model.Name,
+                                                          search,
+                                                          CompareOptions.IgnoreNonSpace) > -1;
 
     protected async Task ShowPersonProfileDialog(int personId)
     {

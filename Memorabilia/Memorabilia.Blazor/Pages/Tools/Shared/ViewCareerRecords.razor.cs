@@ -3,7 +3,8 @@
 public partial class ViewCareerRecords 
     : ViewSportTools<CareerRecordModel>
 {
-    protected CareerRecordsModel Model = new();
+    protected CareerRecordsModel Model 
+        = new();
 
     protected override async Task OnInitializedAsync()
     {

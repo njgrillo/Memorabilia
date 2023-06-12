@@ -9,9 +9,9 @@ public partial class TeamChampionshipEditor
     [Parameter]
     public SportLeagueLevel SportLeagueLevel { get; set; }
 
-    private TeamChampionshipEditModel Model
-        
+    private TeamChampionshipEditModel Model        
         = new();
+
     private string _years;
 
     private void Add()

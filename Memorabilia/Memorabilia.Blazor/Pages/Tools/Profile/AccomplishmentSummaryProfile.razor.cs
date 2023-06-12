@@ -5,9 +5,11 @@ public partial class AccomplishmentSummaryProfile : PersonProfile
     [Parameter]
     public Sport Sport { get; set; }
 
-    private AccomplishmentProfileModel[] Accomplishments = Array.Empty<AccomplishmentProfileModel>();
+    private AccomplishmentProfileModel[] Accomplishments 
+        = Array.Empty<AccomplishmentProfileModel>();
 
-    private AllStarProfileModel[] AllStars = Array.Empty<AllStarProfileModel>();
+    private AllStarProfileModel[] AllStars 
+        = Array.Empty<AllStarProfileModel>();
 
     private string AllStarSummaryDisplayText 
         => Sport.HasAllStarGames(Sport)
@@ -16,22 +18,28 @@ public partial class AccomplishmentSummaryProfile : PersonProfile
             ? $"{AllStars?.Length ?? 0}x Pro Bowler"
             : string.Empty;
 
-    private AwardProfileModel[] Awards = Array.Empty<AwardProfileModel>();
+    private AwardProfileModel[] Awards 
+        = Array.Empty<AwardProfileModel>();
 
-    private ChampionshipProfileModel[] Championships = Array.Empty<ChampionshipProfileModel>();
+    private ChampionshipProfileModel[] Championships 
+        = Array.Empty<ChampionshipProfileModel>();
 
     private string ChampionshipSummaryDisplayText
         => Championships?.Length > 0
         ? $"{(Championships.Length > 1 ? Championships.Length : Championships.First().Year)}x {ChampionType.Find(Sport)?.ToString()} Champion"
         : string.Empty;
 
-    private AccomplishmentProfileModel[] DistinctAccomplishments = Array.Empty<AccomplishmentProfileModel>();
+    private AccomplishmentProfileModel[] DistinctAccomplishments
+        = Array.Empty<AccomplishmentProfileModel>();
 
-    private AwardProfileModel[] DistinctAwards = Array.Empty<AwardProfileModel>();
+    private AwardProfileModel[] DistinctAwards 
+        = Array.Empty<AwardProfileModel>();
 
-    private LeaderProfileModel[] DistinctLeaders = Array.Empty<LeaderProfileModel>();
+    private LeaderProfileModel[] DistinctLeaders 
+        = Array.Empty<LeaderProfileModel>();
 
-    private LeaderProfileModel[] Leaders = Array.Empty<LeaderProfileModel>();
+    private LeaderProfileModel[] Leaders 
+        = Array.Empty<LeaderProfileModel>();
 
     protected override void OnInitialized()
     {

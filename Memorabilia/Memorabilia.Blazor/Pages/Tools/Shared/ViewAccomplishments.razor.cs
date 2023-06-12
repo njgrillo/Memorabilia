@@ -3,7 +3,8 @@
 public partial class ViewAccomplishments 
     : ViewSportTools<AccomplishmentModel>
 {
-    protected AccomplishmentsModel Model = new();
+    protected AccomplishmentsModel Model 
+        = new();
 
     protected async Task Browse()
     {

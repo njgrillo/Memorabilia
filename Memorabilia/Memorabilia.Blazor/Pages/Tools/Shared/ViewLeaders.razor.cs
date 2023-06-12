@@ -3,7 +3,8 @@
 public partial class ViewLeaders 
     : ViewSportTools<LeaderModel>
 {
-    protected LeadersModel Model = new();
+    protected LeadersModel Model 
+        = new();
 
     protected async Task Browse()
     {

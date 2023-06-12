@@ -1,45 +1,45 @@
 ﻿<Page>
     <Content>
-        <PageHeader PageTitle="@_viewModel.PageTitle" />
+        <PageHeader PageTitle="@Model.PageTitle" />
         <div class="row">
-            <EditForm Model="_viewModel" OnValidSubmit="HandleValidSubmit">
+            <EditForm Model="Model" OnValidSubmit="HandleValidSubmit">
                 <DataAnnotationsValidator />
                 <div class="form-group">
                     <TextField Label="Username"
-                               SelectedText="@_viewModel.Username"
-                               SelectedTextChanged="@((p) => _viewModel.Username = p)" />
+                               SelectedText="@Model.Username"
+                               SelectedTextChanged="@((p) => Model.Username = p)" />
                 </div>
                 <div class="form-group">
                     <TextField InputType="InputType.Password" 
                                Label="Password"
-                               SelectedText="@_viewModel.Password"
-                               SelectedTextChanged="@((p) => _viewModel.Password = p)" />
+                               SelectedText="@Model.Password"
+                               SelectedTextChanged="@((p) => Model.Password = p)" />
                 </div>
                 <div class="form-group">
                     <TextField InputType="InputType.Password" 
                                Label="Confirm Password"
-                               SelectedText="@_viewModel.ConfirmPassword"
-                               SelectedTextChanged="@((p) => _viewModel.ConfirmPassword = p)" />
+                               SelectedText="@Model.ConfirmPassword"
+                               SelectedTextChanged="@((p) => Model.ConfirmPassword = p)" />
                 </div>
                 <div class="form-group">
-                    <MudTextField @bind-Value="_viewModel.FirstName"
+                    <MudTextField @bind-Value="Model.FirstName"
                                   Label="First Name"
                                   Variant="Variant.Outlined" />
                 </div>
                 <div class="form-group">
                     <TextField Label="Last Name"
-                               SelectedText="@_viewModel.LastName"
-                               SelectedTextChanged="@((p) => _viewModel.LastName = p)" />
+                               SelectedText="@Model.LastName"
+                               SelectedTextChanged="@((p) => Model.LastName = p)" />
                 </div>
                 <div class="form-group">
                     <TextField Label="Email Address"
-                               SelectedText="@_viewModel.EmailAddress"
-                               SelectedTextChanged="@((p) => _viewModel.EmailAddress = p)" />
+                               SelectedText="@Model.EmailAddress"
+                               SelectedTextChanged="@((p) => Model.EmailAddress = p)" />
                 </div>
                 <div class="form-group">
                     <TextField Label="Phone"
-                               SelectedText="@_viewModel.Phone"
-                               SelectedTextChanged="@((p) => _viewModel.Phone = p)" />
+                               SelectedText="@Model.Phone"
+                               SelectedTextChanged="@((p) => Model.Phone = p)" />
                 </div>
                 <div class="text-right">
                     <SaveButton Text="Save" />

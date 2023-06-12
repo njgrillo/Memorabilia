@@ -5,7 +5,9 @@ public partial class AwardsProfile : PersonProfile
     [Parameter]
     public Sport Sport { get; set; }
 
-    private AwardProfileModel[] Awards = Array.Empty<AwardProfileModel>();
+    private AwardProfileModel[] Awards 
+        = Array.Empty<AwardProfileModel>();
+
     private string _search;
 
     protected override void OnParametersSet()
@@ -18,13 +20,13 @@ public partial class AwardsProfile : PersonProfile
                        .ToArray();
     }
 
-    private bool FilterFunc1(AwardProfileModel viewModel)
-        => FilterFunc(viewModel, _search);
+    private bool FilterFunc1(AwardProfileModel model)
+        => FilterFunc(model, _search);
 
-    private static bool FilterFunc(AwardProfileModel viewModel, string search)
+    private static bool FilterFunc(AwardProfileModel model, string search)
     {
         return search.IsNullOrEmpty() ||
-               viewModel.AwardTypeName.Contains(search, StringComparison.OrdinalIgnoreCase) ||
-               viewModel.AwardTypeAbbreviatedName.Contains(search, StringComparison.OrdinalIgnoreCase);
+               model.AwardTypeName.Contains(search, StringComparison.OrdinalIgnoreCase) ||
+               model.AwardTypeAbbreviatedName.Contains(search, StringComparison.OrdinalIgnoreCase);
     }
 }

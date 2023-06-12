@@ -2,7 +2,8 @@
 
 public partial class TeamsProfile : SportProfile
 {
-    private TeamProfileModel[] Teams = Array.Empty<TeamProfileModel>(); 
+    private TeamProfileModel[] Teams 
+        = Array.Empty<TeamProfileModel>(); 
 
     protected override void OnParametersSet()
     {

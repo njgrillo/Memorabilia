@@ -2,7 +2,9 @@
 
 public partial class LeadersProfile : SportProfile
 {
-    private LeaderProfileModel[] Leaders = Array.Empty<LeaderProfileModel>();
+    private LeaderProfileModel[] Leaders
+        = Array.Empty<LeaderProfileModel>();
+
     private string _search;
 
     protected override void OnParametersSet()
@@ -15,13 +17,13 @@ public partial class LeadersProfile : SportProfile
                         .ToArray();
     }
 
-    private bool FilterFunc1(LeaderProfileModel viewModel)
-        => FilterFunc(viewModel, _search);
+    private bool FilterFunc1(LeaderProfileModel model)
+        => FilterFunc(model, _search);
 
-    private static bool FilterFunc(LeaderProfileModel viewModel, string search)
+    private static bool FilterFunc(LeaderProfileModel model, string search)
     {
         return search.IsNullOrEmpty() ||
-               viewModel.LeaderTypeName.Contains(search, StringComparison.OrdinalIgnoreCase) ||
-               viewModel.LeaderTypeAbbreviatedName.Contains(search, StringComparison.OrdinalIgnoreCase);
+               model.LeaderTypeName.Contains(search, StringComparison.OrdinalIgnoreCase) ||
+               model.LeaderTypeAbbreviatedName.Contains(search, StringComparison.OrdinalIgnoreCase);
     }
 }

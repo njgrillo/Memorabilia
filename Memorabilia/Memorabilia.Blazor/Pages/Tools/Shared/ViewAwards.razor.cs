@@ -3,7 +3,8 @@
 public partial class ViewAwards 
     : ViewSportTools<AwardModel>
 {
-    protected AwardsModel Model = new();
+    protected AwardsModel Model 
+        = new();
 
     protected async Task Browse()
     {

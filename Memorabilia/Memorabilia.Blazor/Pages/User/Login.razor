@@ -1,4 +1,4 @@
-﻿<PageHeader PageTitle="@_viewModel.PageTitle" />
+﻿<PageHeader PageTitle="@Model.PageTitle" />
 
 <div style="border: 1px solid black; margin-top: 5%; margin-bottom: 5%; margin-left: 25%; margin-right: 25%;">
     <div class="row" style="margin-top: 1%; margin-bottom: 1%; margin-left: 1%; margin-right: 1%;">
@@ -14,19 +14,19 @@
     <div class="row" style="margin-top: 5%; margin-bottom: 5%; margin-left: 5%; margin-right: 5%;">
         <div class="col-md-4" />
         <span class="col-md-4" style="text-align: center">
-            <EditForm Model="_viewModel" OnValidSubmit="HandleValidSubmit">
+            <EditForm Model="Model" OnValidSubmit="HandleValidSubmit">
                 <DataAnnotationsValidator />
                 <ValidationSummary />
                 <div style="text-align: left">
                     <TextField Label="Username"
-                               SelectedText="@_viewModel.Username"
-                               SelectedTextChanged="@((p) => _viewModel.Username = p)"/>
+                               SelectedText="@Model.Username"
+                               SelectedTextChanged="@((p) => Model.Username = p)"/>
                 </div>
                 <div style="text-align: left">
                     <TextField InputType="InputType.Password" 
                                Label="Password"
-                               SelectedText="@_viewModel.Password"
-                               SelectedTextChanged="@((p) => _viewModel.Password = p)" />
+                               SelectedText="@Model.Password"
+                               SelectedTextChanged="@((p) => Model.Password = p)" />
                 </div>
                 <br />
                 <div class="text-center">

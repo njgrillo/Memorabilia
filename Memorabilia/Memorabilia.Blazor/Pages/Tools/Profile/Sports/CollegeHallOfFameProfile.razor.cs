@@ -1,10 +1,9 @@
-﻿using Memorabilia.Domain.Entities;
-
-namespace Memorabilia.Blazor.Pages.Tools.Profile.Sports;
+﻿namespace Memorabilia.Blazor.Pages.Tools.Profile.Sports;
 
 public partial class CollegeHallOfFameProfile : SportProfile
 {
-    private CollegeHallOfFame[] CollegeHallOfFames;
+    private Entity.CollegeHallOfFame[] CollegeHallOfFames
+        = Array.Empty<Entity.CollegeHallOfFame>();
 
     protected override void OnParametersSet()
     {

@@ -1,8 +1,6 @@
-﻿ 
+﻿namespace Memorabilia.Blazor.Pages.User;
 
-namespace Memorabilia.Blazor.Pages.User;
-
-public partial class Logout : ComponentBase
+public partial class Logout
 {   
     [Inject]
     public NavigationManager NavigationManager { get; set; }

@@ -6,7 +6,8 @@ public partial class ViewChampions
     [Parameter]
     public ChampionType ChampionType { get; set; }
 
-    protected ChampionsModel Model = new();
+    protected ChampionsModel Model
+        = new();
 
     protected override async Task OnInitializedAsync()
     {

@@ -1,13 +1,13 @@
 ﻿<Page OnLoad="OnLoad">
     <Content>
-        <PageHeader PageTitle="@_viewModel.PageTitle" />
-        <EditForm Model="_viewModel" OnValidSubmit="HandleValidSubmit">
+        <PageHeader PageTitle="@Model.PageTitle" />
+        <EditForm Model="Model" OnValidSubmit="HandleValidSubmit">
             <DivPad2>
                 <Content>
                     <MudTable Bordered="false"
                               Dense="false"
                               Hover="true"
-                              Items="@_viewModel.UserDashboardItems"
+                              Items="@Model.UserDashboardItems"
                               Striped="true">
                         <ToolBarContent>
                             <MudText Typo="Typo.h6">Dashboard Items</MudText>
@@ -37,7 +37,7 @@
                     <DivPad2>
                         <Content>
                             <SaveButton Text="Save & Exit" />
-                            <CancelButton OnClick="@(_ => NavigationManager.NavigateTo(_viewModel.ExitNavigationPath))" />
+                            <CancelButton OnClick="@(_ => NavigationManager.NavigateTo(Model.ExitNavigationPath))" />
                         </Content>
                     </DivPad2>
                 </Content>

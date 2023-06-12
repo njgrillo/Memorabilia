@@ -12,7 +12,8 @@ public partial class ViewHallOfFamers
     [Parameter]
     public SportLeagueLevel SportLeagueLevel { get; set; }
 
-    protected HallOfFamesModel Model = new();
+    protected HallOfFamesModel Model 
+        = new();
 
     protected override async Task OnInitializedAsync()
     {

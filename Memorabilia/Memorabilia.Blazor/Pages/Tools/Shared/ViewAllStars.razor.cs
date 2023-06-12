@@ -12,7 +12,8 @@ public partial class ViewAllStars
             _ => 1950
         };
 
-    protected AllStarsModel Model = new();
+    protected AllStarsModel Model 
+        = new();
 
     private string _secondarySearch;
 

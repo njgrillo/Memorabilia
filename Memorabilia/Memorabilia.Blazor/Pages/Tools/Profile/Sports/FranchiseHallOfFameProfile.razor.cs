@@ -1,10 +1,9 @@
-﻿using Memorabilia.Domain.Entities;
-
-namespace Memorabilia.Blazor.Pages.Tools.Profile.Sports;
+﻿namespace Memorabilia.Blazor.Pages.Tools.Profile.Sports;
 
 public partial class FranchiseHallOfFameProfile : SportProfile
 {
-    private FranchiseHallOfFameProfileModel[] FranchiseHallOfFames = Array.Empty<FranchiseHallOfFameProfileModel>();
+    private FranchiseHallOfFameProfileModel[] FranchiseHallOfFames 
+        = Array.Empty<FranchiseHallOfFameProfileModel>();
 
     protected override void OnParametersSet()
     {

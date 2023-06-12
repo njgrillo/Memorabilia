@@ -2,7 +2,8 @@
 
 public partial class AllStarProfile : SportProfile
 {
-    private AllStarProfileModel[] AllStars = Array.Empty<AllStarProfileModel>();
+    private AllStarProfileModel[] AllStars 
+        = Array.Empty<AllStarProfileModel>();
 
     private string HeaderText
         => Sport == Sport.Football

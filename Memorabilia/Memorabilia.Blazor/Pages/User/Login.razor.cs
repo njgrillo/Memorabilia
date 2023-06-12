@@ -8,20 +8,20 @@ public partial class Login
     [Parameter]
     public EventCallback<int> UserValidated { get; set; }
 
-    private readonly LoginUserModel _viewModel = new();
+    protected readonly LoginUserModel Model = new();
 
     protected async Task HandleValidSubmit()
     {
-        var viewModel = new UserModel(await QueryRouter.Send(new GetUser(_viewModel.Username, _viewModel.Password)));
+        var model = new UserModel(await QueryRouter.Send(new GetUser(Model.Username, Model.Password)));
 
-        if (!viewModel.IsValid || viewModel.Id == 0)
+        if (!model.IsValid || model.Id == 0)
         {
             //TODO: Didn't find user
 
             return;
         }
 
-        await UserValidated.InvokeAsync(viewModel.Id);      
+        await UserValidated.InvokeAsync(model.Id);      
     }
 
     protected void OnLoad()

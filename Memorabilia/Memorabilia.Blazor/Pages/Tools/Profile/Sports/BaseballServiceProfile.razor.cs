@@ -12,13 +12,13 @@ public partial class BaseballServiceProfile
         var text = string.Empty;
 
         if (Person.Service.FreeAgentSigningDate.HasValue)
-            text = $"Free Agent Signing {Person.Service.FreeAgentSigningDate.Value.ToString("MM/dd/yyyy")}";
+            text = $"Free Agent Signing {Person.Service.FreeAgentSigningDate.Value:MM/dd/yyyy}";
 
         if (Person.Service.DebutDate.HasValue)
-            text += $"{(!text.IsNullOrEmpty() ? " | " : string.Empty)} Debut  {Person.Service.DebutDate.Value.ToString("MM/dd/yyyy")}";
+            text += $"{(!text.IsNullOrEmpty() ? " | " : string.Empty)} Debut  {Person.Service.DebutDate.Value:MM/dd/yyyy}";
 
         if (Person.Service.LastAppearanceDate.HasValue)
-            text += $"{(!text.IsNullOrEmpty() ? " | " : string.Empty)} Last Appearance  {Person.Service.LastAppearanceDate.Value.ToString("MM/dd/yyyy")}";
+            text += $"{(!text.IsNullOrEmpty() ? " | " : string.Empty)} Last Appearance  {Person.Service.LastAppearanceDate.Value:MM/dd/yyyy}";
 
         Text = text;
     }
