@@ -1,7 +1,4 @@
-﻿using Memorabilia.Domain.Constants;
-using Memorabilia.Domain.Entities;
-
-namespace Memorabilia.Domain.SearchModels;
+﻿namespace Memorabilia.Domain.SearchModels;
 
 public class SearchCriteria
 {
@@ -9,9 +6,11 @@ public class SearchCriteria
 
     public DateTime? AcquiredDateEnd { get; set; }
 
-    public IEnumerable<int> AcquisitionTypeIds { get; set; } = Enumerable.Empty<int>();
+    public IEnumerable<int> AcquisitionTypeIds { get; set; } 
+        = Enumerable.Empty<int>();
 
-    public IEnumerable<int> ConditionIds { get; set; } = Enumerable.Empty<int>();
+    public IEnumerable<int> ConditionIds { get; set; } 
+        = Enumerable.Empty<int>();
 
     public decimal? CostHigh { get; set; }
 
@@ -21,21 +20,34 @@ public class SearchCriteria
 
     public decimal? EstimatedValueLow { get; set; }
 
-    public IEnumerable<int> FranchiseIds { get; set; } = Enumerable.Empty<int>();
+    public IEnumerable<int> FranchiseIds { get; set; } 
+        = Enumerable.Empty<int>();
 
-    public ImageFilter ImageFilter { get; set; } = ImageFilter.None;
+    public Constant.ImageFilter ImageFilter { get; set; } 
+        = Constant.ImageFilter.None;
 
-    public List<Person> People { get; set; } = new();
+    public List<Entity.Person> People { get; set; } 
+        = new();
 
-    public int[] PersonIds => People.Select(person => person.Id).Distinct().ToArray();
+    public int[] PersonIds 
+        => People.Select(person => person.Id)
+                 .Distinct()
+                 .ToArray();
 
-    public IEnumerable<int> PurchaseTypeIds { get; set; } = Enumerable.Empty<int>();
+    public IEnumerable<int> PurchaseTypeIds { get; set; } 
+        = Enumerable.Empty<int>();
 
-    public IEnumerable<int> SportIds { get; set; } = Enumerable.Empty<int>();
+    public IEnumerable<int> SportIds { get; set; } 
+        = Enumerable.Empty<int>();
 
-    public IEnumerable<int> SportLeagueLevelIds { get; set; } = Enumerable.Empty<int>();
+    public IEnumerable<int> SportLeagueLevelIds { get; set; } 
+        = Enumerable.Empty<int>();
 
-    public int[] TeamIds => Teams.Select(team => team.Id).Distinct().ToArray();
+    public int[] TeamIds
+        => Teams.Select(team => team.Id)
+                .Distinct()
+                .ToArray();
 
-    public List<Team> Teams { get; set; } = new();
+    public List<Entity.Team> Teams { get; set; } 
+        = new();
 }
