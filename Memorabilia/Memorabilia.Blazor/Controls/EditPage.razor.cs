@@ -3,6 +3,9 @@
 public partial class EditPage<TItem> : INotifyPropertyChanged
 {
     [Inject]
+    public IDialogService DialogService { get; set; }
+
+    [Inject]
     public IJSRuntime JSRuntime { get; set; }
 
     [Inject]

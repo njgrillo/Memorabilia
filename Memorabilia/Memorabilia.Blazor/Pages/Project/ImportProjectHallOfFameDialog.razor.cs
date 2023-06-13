@@ -23,8 +23,8 @@ public partial class ImportProjectHallOfFameDialog
     protected Entity.Person[] People { get; set; } 
         = Array.Empty<Entity.Person>();     
 
-    private bool FilterFunc1(Entity.Person person)
-        => FilterFunc(person, _search);
+    private bool Filter(Entity.Person person)
+        => PersonFilterService.Filter(person, _search);
 
     private string _search;
 
@@ -40,30 +40,6 @@ public partial class ImportProjectHallOfFameDialog
     {
         MudDialog.Cancel();
     }
-
-    protected static bool FilterFunc(Entity.Person person, string search)
-        => search.IsNullOrEmpty() ||
-           person.DisplayName.Contains(search, StringComparison.OrdinalIgnoreCase) ||
-           person.ProfileName.Contains(search, StringComparison.OrdinalIgnoreCase) ||
-           person.FirstName.Contains(search, StringComparison.OrdinalIgnoreCase) ||
-           person.LastName.Contains(search, StringComparison.OrdinalIgnoreCase) ||
-           person.LegalName.Contains(search, StringComparison.OrdinalIgnoreCase) ||
-           person.Nicknames.Any(nickname => nickname.Nickname.Contains(search, StringComparison.OrdinalIgnoreCase)) ||
-           CultureInfo.CurrentCulture.CompareInfo.IndexOf(person.LegalName,
-                                                          search,
-                                                          CompareOptions.IgnoreNonSpace) > -1 ||
-           CultureInfo.CurrentCulture.CompareInfo.IndexOf(person.DisplayName,
-                                                          search,
-                                                          CompareOptions.IgnoreNonSpace) > -1 ||
-           CultureInfo.CurrentCulture.CompareInfo.IndexOf(person.ProfileName,
-                                                          search,
-                                                          CompareOptions.IgnoreNonSpace) > -1 ||
-           CultureInfo.CurrentCulture.CompareInfo.IndexOf(person.FirstName,
-                                                          search,
-                                                          CompareOptions.IgnoreNonSpace) > -1 ||
-           CultureInfo.CurrentCulture.CompareInfo.IndexOf(person.LastName,
-                                                          search,
-                                                          CompareOptions.IgnoreNonSpace) > -1;
 
     public void Import()
     {

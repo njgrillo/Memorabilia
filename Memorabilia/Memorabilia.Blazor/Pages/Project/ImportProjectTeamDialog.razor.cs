@@ -11,8 +11,8 @@ public partial class ImportProjectTeamDialog
     [CascadingParameter]
     public MudDialogInstance MudDialog { get; set; }
 
-    private bool FilterFunc1(Entity.Team team)
-        => FilterFunc(team, _search);
+    private bool Filter(Entity.Team team)
+        => TeamFilterService.Filter(team, _search);
 
     protected Entity.Team[] Teams { get; set; } 
         = Array.Empty<Entity.Team>();
@@ -36,15 +36,6 @@ public partial class ImportProjectTeamDialog
     {
         MudDialog.Cancel();
     }
-
-    protected static bool FilterFunc(Entity.Team team, string search)
-        => search.IsNullOrEmpty() ||
-           team.DisplayName.Contains(search, StringComparison.OrdinalIgnoreCase) ||
-           team.Location.Contains(search, StringComparison.OrdinalIgnoreCase) ||
-           team.Name.Contains(search, StringComparison.OrdinalIgnoreCase) ||
-           team.Nickname.Contains(search, StringComparison.OrdinalIgnoreCase) ||
-           team.Franchise.Name.Contains(search, StringComparison.OrdinalIgnoreCase) ||
-           team.Abbreviation.Contains(search, StringComparison.OrdinalIgnoreCase);
 
     public void Import()
     {
