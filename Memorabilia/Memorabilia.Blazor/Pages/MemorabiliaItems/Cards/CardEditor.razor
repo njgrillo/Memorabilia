@@ -1,6 +1,6 @@
 ﻿@inherits MemorabiliaItem<CardEditModel>
 
-<EditMemorabiliaPage Item="ViewModel"
+<EditMemorabiliaPage Item="EditModel"
                      OnLoad="OnLoad"
                      OnSave="OnSave" 
                      TItem="CardEditModel">
@@ -9,29 +9,29 @@
                                DisplayMultiPersonSelector="true"
                                DisplayMultiSportSelector="true"
                                DisplayMultiTeamSelector="true"
-                               TItem="CardEditModel"
-                               ViewModel="ViewModel">
+                               Model="EditModel"
+                               TItem="CardEditModel">
             <AdditionalContent>
                 <DivRowCol3>
                     <Content>
-                        <OrientationDropDown SelectedValue="ViewModel.OrientationId"
-                                             SelectionChanged="(p) => ViewModel.OrientationId = p" />
+                        <OrientationDropDown SelectedValue="EditModel.OrientationId"
+                                             SelectionChanged="(p) => EditModel.OrientationId = p" />
                     </Content>
                     <ContentColumn2>
                         <NullableIntField Label="Year"
-                                          Value="ViewModel.Year"
-                                          ValueChanged="@((p) => ViewModel.Year = p)" />
+                                          Value="EditModel.Year"
+                                          ValueChanged="@((p) => EditModel.Year = p)" />
                     </ContentColumn2>
                     <ContentColumn3>
-                        <MudSwitch Checked="@ViewModel.Licensed"
-                                   CheckedChanged="(p) => ViewModel.Licensed = p"
+                        <MudSwitch Checked="@EditModel.Licensed"
+                                   CheckedChanged="(p) => EditModel.Licensed = p"
                                    Color="MudBlazor.Color.Success"
                                    Label="Licensed?"
                                    T="bool" />
                     </ContentColumn3>
                     <ContentColumn4>
-                        <MudSwitch Checked="@ViewModel.Custom"
-                                   CheckedChanged="(p) => ViewModel.Custom = p"
+                        <MudSwitch Checked="@EditModel.Custom"
+                                   CheckedChanged="(p) => EditModel.Custom = p"
                                    Color="MudBlazor.Color.Success"
                                    Label="Custom?"
                                    T="bool" />

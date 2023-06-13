@@ -1,6 +1,6 @@
 ﻿@inherits MemorabiliaItem<BobbleheadEditModel>
 
-<EditMemorabiliaPage Item="ViewModel"
+<EditMemorabiliaPage Item="EditModel"
                      OnLoad="OnLoad"
                      OnSave="OnSave" 
                      TItem="BobbleheadEditModel">
@@ -10,19 +10,19 @@
                                DisplaySinglePersonSelector="true"
                                DisplaySingleSportSelector="true"
                                DisplaySingleTeamSelector="true"
-                               TItem="BobbleheadEditModel"
-                               ViewModel="ViewModel">
+                               Model="EditModel"
+                               TItem="BobbleheadEditModel">
             <AdditionalContent>
                 <DivRowCol3>
                     <Content>
                         <NullableIntField Label="Year"
                                           Maximum="int.MaxValue"
-                                          Value="ViewModel.Year"
-                                          ValueChanged="@((p) => ViewModel.Year = p)" />
+                                          Value="EditModel.Year"
+                                          ValueChanged="@((p) => EditModel.Year = p)" />
                     </Content>
                     <ContentColumn2>
-                        <MudSwitch Checked="@ViewModel.HasBox"
-                                   CheckedChanged="(p) => ViewModel.HasBox = p"
+                        <MudSwitch Checked="@EditModel.HasBox"
+                                   CheckedChanged="(p) => EditModel.HasBox = p"
                                    Color="MudBlazor.Color.Success"
                                    Label="Has Box?"
                                    T="bool" />

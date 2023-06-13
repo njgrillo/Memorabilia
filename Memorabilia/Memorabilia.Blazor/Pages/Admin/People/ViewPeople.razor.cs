@@ -3,6 +3,9 @@
 public partial class ViewPeople 
     : ViewItem<PeopleModel, PersonModel>
 {
+    [Inject]
+    public ImageService ImageService { get; set; }
+
     protected async Task OnLoad()
     {
         Model = new PeopleModel(await QueryRouter.Send(new GetPeople()));

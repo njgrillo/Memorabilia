@@ -10,22 +10,22 @@ public class FootballEditModel : MemorabiliaItemEditModel
         SizeId = Constant.Size.Full.Id;
     }
 
-    public FootballEditModel(FootballModel viewModel)
+    public FootballEditModel(FootballModel model)
     {            
-        BrandId = viewModel.Brand.BrandId;
-        CommissionerId = viewModel.Commissioner?.CommissionerId ?? 0;
-        FootballTypeId = viewModel.Football?.FootballTypeId ?? 0;
-        GameDate = viewModel.Game?.GameDate;
-        GameStyleTypeId = viewModel.Game?.GameStyleTypeId ?? 0;
-        LevelTypeId = viewModel.Level.LevelTypeId;
-        MemorabiliaId = viewModel.MemorabiliaId;
-        SizeId = viewModel.Size.SizeId;
+        BrandId = model.Brand.BrandId;
+        CommissionerId = model.Commissioner?.CommissionerId ?? 0;
+        FootballTypeId = model.Football?.FootballTypeId ?? 0;
+        GameDate = model.Game?.GameDate;
+        GameStyleTypeId = model.Game?.GameStyleTypeId ?? 0;
+        LevelTypeId = model.Level.LevelTypeId;
+        MemorabiliaId = model.MemorabiliaId;
+        SizeId = model.Size.SizeId;
 
-        if (viewModel.People.Any())
-            Person = viewModel.People.First().Person.ToEditModel();
+        if (model.People.Any())
+            Person = model.People.First().Person.ToEditModel();
 
-        if (viewModel.Teams.Any())
-            Team = viewModel.Teams.First().Team.ToEditModel();
+        if (model.Teams.Any())
+            Team = model.Teams.First().Team.ToEditModel();
     }
 
     public int CommissionerId { get; set; }

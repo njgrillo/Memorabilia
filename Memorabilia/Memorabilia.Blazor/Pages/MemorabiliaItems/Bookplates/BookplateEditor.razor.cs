@@ -5,11 +5,11 @@ public partial class BookplateEditor
 {
     protected async Task OnLoad()
     {
-        ViewModel = new BookplateEditModel(new BookplateModel(await QueryRouter.Send(new GetMemorabiliaItem(MemorabiliaId))));
+        EditModel = new(new BookplateModel(await QueryRouter.Send(new GetMemorabiliaItem(MemorabiliaId))));
     }
 
     protected async Task OnSave()
     {
-        await CommandRouter.Send(new SaveBookplate.Command(ViewModel));
+        await CommandRouter.Send(new SaveBookplate.Command(EditModel));
     }
 }

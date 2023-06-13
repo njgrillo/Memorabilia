@@ -20,14 +20,15 @@ public partial class MemorabiliaEditor
     [Parameter]
     public int UserId { get; set; }
 
-    private MemorabiliaEditModel _viewModel = new ();        
+    protected MemorabiliaEditModel Model 
+        = new ();        
 
     protected async Task OnLoad()
     {
         if (Id == 0)
             return;
 
-        _viewModel = new MemorabiliaEditModel(new MemorabiliaModel(await QueryRouter.Send(new GetMemorabiliaItem(Id))));
+        Model = (await QueryRouter.Send(new GetMemorabiliaItem(Id))).ToEditModel();
     }
 
     protected async Task OnSave()
@@ -35,30 +36,30 @@ public partial class MemorabiliaEditor
         if (UserId == 0)
             NavigationManager.NavigateTo("Login");
 
-        _viewModel.UserId = UserId;
+        Model.UserId = UserId;
 
-        var command = new SaveMemorabiliaItem.Command(_viewModel);
+        var command = new SaveMemorabiliaItem.Command(Model);
 
-        _viewModel.ValidationResult = Validator.Validate(command);
+        Model.ValidationResult = Validator.Validate(command);
 
-        if (!_viewModel.ValidationResult.IsValid)
+        if (!Model.ValidationResult.IsValid)
             return;
 
         await CommandRouter.Send(command);
 
-        _viewModel.ContinueNavigationPath = $"Memorabilia/{_viewModel.ItemTypeName.Replace(" ", "")}/Edit/{command.Id}";
+        Model.ContinueNavigationPath = $"Memorabilia/{Model.ItemTypeName.Replace(" ", "")}/Edit/{command.Id}";
     }
 
     private void OnAcquisitionTypeChange(int acquisitionTypeId)
     {
-        _viewModel.AcquisitionTypeId = acquisitionTypeId;
+        Model.AcquisitionTypeId = acquisitionTypeId;
 
         var acquisitionType = AcquisitionType.Find(acquisitionTypeId);
 
         if (!acquisitionType.CanHaveCost())
-            _viewModel.Cost = null;
+            Model.Cost = null;
 
         if (!acquisitionType.CanHavePurchaseType())
-            _viewModel.PurchaseTypeId = 0;
+            Model.PurchaseTypeId = 0;
     }
 }

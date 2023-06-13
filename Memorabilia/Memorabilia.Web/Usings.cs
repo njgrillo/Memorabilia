@@ -64,6 +64,8 @@ global using Memorabilia.Blazor;
 global using Memorabilia.Blazor.Controls.Dialogs;
 global using Memorabilia.Blazor.Controls.Errors;
 global using Memorabilia.Blazor.Pages;
+global using Memorabilia.Blazor.Services;
+global using Memorabilia.Blazor.Services.Interfaces;
 global using Memorabilia.Domain.Constants;
 global using Memorabilia.Repository;
 global using Memorabilia.Repository.Cache;

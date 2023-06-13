@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Application.Features.Admin.People;
 
-public class RecentPersonPositionModel : RecentPersonViewModel
+public class RecentPersonPositionModel : RecentPersonModel
 {
     public Enum.PositionType PositionType { get; private set; }
 

@@ -1,6 +1,6 @@
 ﻿@inherits MemorabiliaItem<IndexCardEditModel>
 
-<EditMemorabiliaPage Item="ViewModel"
+<EditMemorabiliaPage Item="EditModel"
                      OnLoad="OnLoad"
                      OnSave="OnSave" 
                      TItem="IndexCardEditModel">
@@ -8,7 +8,7 @@
         <MemorabiliaItemEditor DisplayItemTypeBrand="false"
                                DisplayItemTypeGameStyle="false"
                                DisplayItemTypeLevel="false"
-                               TItem="IndexCardEditModel"
-                               ViewModel="ViewModel" />
+                               Model="EditModel"
+                               TItem="IndexCardEditModel" />
     </Content>
 </EditMemorabiliaPage>

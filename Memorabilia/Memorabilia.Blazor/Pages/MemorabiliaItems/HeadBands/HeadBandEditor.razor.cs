@@ -1,31 +1,32 @@
 ﻿namespace Memorabilia.Blazor.Pages.MemorabiliaItems.HeadBands;
 
-public partial class HeadBandEditor : MemorabiliaItem<HeadBandEditModel>
+public partial class HeadBandEditor 
+    : MemorabiliaItem<HeadBandEditModel>
 {
     [Inject]
     public HeadBandValidator Validator { get; set; }
 
     protected async Task OnLoad()
     {
-        var viewModel = await QueryRouter.Send(new GetMemorabiliaItem(MemorabiliaId));
+        Entity.Memorabilia memorabilia = await QueryRouter.Send(new GetMemorabiliaItem(MemorabiliaId));
 
-        if (viewModel.Brand == null)
+        if (memorabilia.Brand == null)
             return;
 
-        ViewModel = new HeadBandEditModel(new HeadBandModel(viewModel));
+        EditModel = new(new HeadBandModel(memorabilia));
     }
 
     protected async Task OnSave()
     {
-        var command = new SaveHeadBand.Command(ViewModel);
+        var command = new SaveHeadBand.Command(EditModel);
 
-        ViewModel.ValidationResult = Validator.Validate(command);
+        EditModel.ValidationResult = Validator.Validate(command);
 
-        if (!ViewModel.ValidationResult.IsValid)
+        if (!EditModel.ValidationResult.IsValid)
             return;
 
         await CommandRouter.Send(command);
 
-        ViewModel.SavedSuccessfully = true;
+        EditModel.SavedSuccessfully = true;
     }
 }

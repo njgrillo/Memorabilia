@@ -1,31 +1,32 @@
 ﻿namespace Memorabilia.Blazor.Pages.MemorabiliaItems.Bammers;
 
-public partial class BammerEditor : MemorabiliaItem<BammerEditModel>
+public partial class BammerEditor 
+    : MemorabiliaItem<BammerEditModel>
 {
     [Inject]
     public BammerValidator Validator { get; set; }
 
     protected async Task OnLoad()
     {
-        var viewModel = await QueryRouter.Send(new GetMemorabiliaItem(MemorabiliaId));
+        Entity.Memorabilia memorabilia = await QueryRouter.Send(new GetMemorabiliaItem(MemorabiliaId));
 
-        if (viewModel.Brand == null)
+        if (memorabilia.Brand == null)
             return;
 
-        ViewModel = new BammerEditModel(new BammerModel(viewModel));
+        EditModel = new(new BammerModel(memorabilia));
     }
 
     protected async Task OnSave()
     {
-        var command = new SaveBammer.Command(ViewModel);
+        var command = new SaveBammer.Command(EditModel);
 
-        ViewModel.ValidationResult = Validator.Validate(command);
+        EditModel.ValidationResult = Validator.Validate(command);
 
-        if (!ViewModel.ValidationResult.IsValid)
+        if (!EditModel.ValidationResult.IsValid)
             return;
 
         await CommandRouter.Send(command);
 
-        ViewModel.SavedSuccessfully = true;
+        EditModel.SavedSuccessfully = true;
     }
 }

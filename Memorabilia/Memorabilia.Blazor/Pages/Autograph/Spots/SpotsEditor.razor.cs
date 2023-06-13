@@ -3,9 +3,6 @@
 public partial class SpotsEditor 
     : AutographItem<SpotEditModel>
 {
-    [Parameter]
-    public string UploadPath { get; set; }
-
     protected async Task OnLoad()
     {
         Model = (await QueryRouter.Send(new Application.Features.Autograph.Spot.GetSpot(AutographId))).ToEditModel();

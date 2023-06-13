@@ -1,6 +1,6 @@
 ﻿@inherits MemorabiliaItem<HatEditModel>
 
-<EditMemorabiliaPage Item="ViewModel"
+<EditMemorabiliaPage Item="EditModel"
                      OnLoad="OnLoad"
                      OnSave="OnSave" 
                      TItem="HatEditModel">
@@ -8,7 +8,7 @@
         <MemorabiliaItemEditor DisplayMultiPersonSelector="true"
                                DisplayMultiTeamSelector="true"
                                DisplaySingleSportSelector="true"
-                               TItem="HatEditModel"
-                               ViewModel="ViewModel" />
+                               Model="EditModel"
+                               TItem="HatEditModel" />
     </Content>
 </EditMemorabiliaPage>

@@ -26,7 +26,7 @@ public partial class PersonSelector
     [Parameter]
     public Sport Sport { get; set; }
 
-    public PersonEditModel ViewModel
+    public PersonEditModel Model
     {
         get => SelectedPerson;
         set
@@ -66,7 +66,7 @@ public partial class PersonSelector
         _displayPeople = CanToggle && isChecked;
 
         if (!_displayPeople)
-            ViewModel = null;
+            Model = null;
 
         _hasPeople = isChecked;
     }

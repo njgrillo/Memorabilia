@@ -4,14 +4,14 @@ public class SpotEditModel : EditModel
 {
     public SpotEditModel() { }
 
-    public SpotEditModel(SpotModel viewModel)
+    public SpotEditModel(SpotModel model)
     {
-        AutographId = viewModel.AutographId;
-        ItemType = Constant.ItemType.Find(viewModel.ItemTypeId);
-        MemorabiliaId = viewModel.MemorabiliaId;
-        MemorabiliaImageNames = viewModel.MemorabiliaImageNames;
-        SpotId = viewModel.SpotId;
-        UserId = viewModel.UserId;
+        AutographId = model.AutographId;
+        ItemType = Constant.ItemType.Find(model.ItemTypeId);
+        MemorabiliaId = model.MemorabiliaId;
+        MemorabiliaImageNames = model.MemorabiliaImageNames;
+        SpotId = model.SpotId;
+        UserId = model.UserId;
     }
 
     public int AutographId { get; set; }

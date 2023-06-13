@@ -1,27 +1,26 @@
 ﻿<Page OnLoad="OnLoad">
     <Content>
-        <PageHeader PageTitle="@ViewModel.PageTitle" />
-        <MemorabiliaItemTimeline EditMode="ViewModel.EditModeType" 
-                                 ItemTypeName="@ViewModel.ItemTypeName"
-                                 MemorabiliaId="ViewModel.MemorabiliaId"
-                                 MemorabiliaItemStep="ViewModel.MemorabiliaItemStep" />
+        <PageHeader PageTitle="@EditModel.PageTitle" />
+        <MemorabiliaItemTimeline EditMode="EditModel.EditModeType" 
+                                 ItemTypeName="@EditModel.ItemTypeName"
+                                 MemorabiliaId="EditModel.MemorabiliaId"
+                                 MemorabiliaItemStep="EditModel.MemorabiliaItemStep" />
         <EditImages @ref="EditImages"              
-                    ContinueNavigationPath="@ViewModel.ContinueNavigationPath"
-                    ExitNavigationPath="@ViewModel.ExitNavigationPath"
-                    Images="@ViewModel.Images"
+                    ContinueNavigationPath="@EditModel.ContinueNavigationPath"
+                    ExitNavigationPath="@EditModel.ExitNavigationPath"
+                    Images="@EditModel.Images"
                     MaximumAllowedFiles="10"
                     MaximumFileSize="10240000"
-                    Model="ViewModel"
+                    Model="EditModel"
                     OnLoad="OnLoad"
                     OnSave="OnSave"
-                    PageTitle="@ViewModel.PageTitle"
+                    PageTitle="@EditModel.PageTitle"
                     ReplaceImages="false"
                     SaveButtonText="Save & Continue"
                     TItem="MemorabiliaImagesEditModel"
-                    UploadPath="@UploadPath"
                     UserId="@UserId">
             <AdditionalButtons>
-                <Condition Evaluation="@ViewModel.HasAutographs">
+                <Condition Evaluation="@EditModel.HasAutographs">
                     <Match>
                         <SaveButton OnClick="SaveAndEditAutograph"
                                     Text="Save & Edit Autograph" />
@@ -33,7 +32,7 @@
                             Text="Save & Add Item" />
             </AdditionalButtons>
         </EditImages>
-        <PageFooter NavigationPath="@ViewModel.BackNavigationPath" />
+        <PageFooter NavigationPath="@EditModel.BackNavigationPath" />
     </Content>
 </Page>
                       

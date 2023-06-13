@@ -1,31 +1,32 @@
 ﻿namespace Memorabilia.Blazor.Pages.MemorabiliaItems.Helmets;
 
-public partial class HelmetEditor : MemorabiliaItem<HelmetEditModel>
+public partial class HelmetEditor 
+    : MemorabiliaItem<HelmetEditModel>
 {
     [Inject]
     public HelmetValidator Validator { get; set; }
 
     protected async Task OnLoad()
     {
-        var viewModel = await QueryRouter.Send(new GetMemorabiliaItem(MemorabiliaId));
+        Entity.Memorabilia memorabilia = await QueryRouter.Send(new GetMemorabiliaItem(MemorabiliaId));
 
-        if (viewModel.Brand == null)
+        if (memorabilia.Brand == null)
             return;
 
-        ViewModel = new HelmetEditModel(new HelmetModel(viewModel));
+        EditModel = new(new HelmetModel(memorabilia));
     }
 
     protected async Task OnSave()
     {
-        var command = new SaveHelmet.Command(ViewModel);
+        var command = new SaveHelmet.Command(EditModel);
 
-        ViewModel.ValidationResult = Validator.Validate(command);
+        EditModel.ValidationResult = Validator.Validate(command);
 
-        if (!ViewModel.ValidationResult.IsValid)
+        if (!EditModel.ValidationResult.IsValid)
             return;
 
         await CommandRouter.Send(command);
 
-        ViewModel.SavedSuccessfully = true;
+        EditModel.SavedSuccessfully = true;
     }
 }

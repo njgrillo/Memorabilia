@@ -1,6 +1,6 @@
 ﻿@inherits MemorabiliaItem<BatEditModel>
 
-<EditMemorabiliaPage Item="ViewModel"
+<EditMemorabiliaPage Item="EditModel"
                      OnLoad="OnLoad"
                      OnSave="OnSave" 
                      TItem="BatEditModel">
@@ -8,25 +8,25 @@
         <MemorabiliaItemEditor DisplayItemTypeLevel="false" 
                                DisplaySinglePersonSelector="true"
                                DisplaySingleTeamSelector="true"
-                               TItem="BatEditModel"
-                               ViewModel="ViewModel">
+                               Model="EditModel"
+                               TItem="BatEditModel">
             <AdditionalContent>
                 <DivRowCol3>
                     <Content>
-                        <BatTypeDropDown GameStyleType="ViewModel.GameStyleType"
-                                         SelectedValue="ViewModel.BatTypeId"
-                                         SelectionChanged="(p) => ViewModel.BatTypeId = p" />
+                        <BatTypeDropDown GameStyleType="EditModel.GameStyleType"
+                                         SelectedValue="EditModel.BatTypeId"
+                                         SelectionChanged="(p) => EditModel.BatTypeId = p" />
                     </Content>
                     <ContentColumn2>
-                        <ColorDropDown ItemType="ViewModel.ItemType"
-                                       SelectedValue="ViewModel.ColorId"
-                                       SelectionChanged="(p) => ViewModel.ColorId = p" />
+                        <ColorDropDown ItemType="EditModel.ItemType"
+                                       SelectedValue="EditModel.ColorId"
+                                       SelectionChanged="(p) => EditModel.ColorId = p" />
                     </ContentColumn2>
                     <ContentColumn3>
                         <NullableIntField Label="Length"
                                           Maximum="int.MaxValue"
-                                          Value="ViewModel.Length"
-                                          ValueChanged="@((p) => ViewModel.Length = p)" />
+                                          Value="EditModel.Length"
+                                          ValueChanged="@((p) => EditModel.Length = p)" />
                     </ContentColumn3>
                 </DivRowCol3>
             </AdditionalContent>

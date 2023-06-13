@@ -1,26 +1,27 @@
 ﻿namespace Memorabilia.Blazor.Pages.MemorabiliaItems.Books;
 
-public partial class BookEditor : MemorabiliaItem<BookEditModel>
+public partial class BookEditor 
+    : MemorabiliaItem<BookEditModel>
 {
     [Inject]
     public BookValidator Validator { get; set; }
 
     protected async Task OnLoad()
     {
-        ViewModel = new BookEditModel(new BookModel(await QueryRouter.Send(new GetMemorabiliaItem(MemorabiliaId))));
+        EditModel = new(new BookModel(await QueryRouter.Send(new GetMemorabiliaItem(MemorabiliaId))));
     }
 
     protected async Task OnSave()
     {
-        var command = new SaveBook.Command(ViewModel);
+        var command = new SaveBook.Command(EditModel);
 
-        ViewModel.ValidationResult = Validator.Validate(command);
+        EditModel.ValidationResult = Validator.Validate(command);
 
-        if (!ViewModel.ValidationResult.IsValid)
+        if (!EditModel.ValidationResult.IsValid)
             return;
 
         await CommandRouter.Send(command);
 
-        ViewModel.SavedSuccessfully = true;
+        EditModel.SavedSuccessfully = true;
     }
 }

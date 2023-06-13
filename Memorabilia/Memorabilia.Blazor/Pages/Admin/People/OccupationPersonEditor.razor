@@ -36,7 +36,7 @@
                             </Content>
                         </DivRowCol12>
                     </MudTabPanel>
-                    <PrettyBlazor.Condition Evaluation="@EditModel.HasAthleteOccupation">
+                    <Condition Evaluation="@EditModel.HasAthleteOccupation">
                         <Match>
                             <MudTabPanel BadgeColor="MudBlazor.Color.Success"
                                          BadgeData="EditModel.Sports.Count(sport => !sport.IsDeleted)"
@@ -49,8 +49,8 @@
                                 </DivRowCol12>
                             </MudTabPanel>
                         </Match>
-                    </PrettyBlazor.Condition>
-                    <PrettyBlazor.Condition Evaluation="@EditModel.HasPositionSport">
+                    </Condition>
+                    <Condition Evaluation="@EditModel.HasPositionSport">
                         <Match>
                             <MudTabPanel BadgeColor="MudBlazor.Color.Success"
                                          BadgeData="EditModel.Positions.Count(position => !position.IsDeleted)"
@@ -63,7 +63,7 @@
                                 </DivRowCol12>
                             </MudTabPanel>
                         </Match>                        
-                    </PrettyBlazor.Condition>                    
+                    </Condition>                    
                 </MudTabs>
             </div>
             <div style="width:48%">

@@ -100,6 +100,9 @@ public static class DomainExtensions
     public static LeagueEditModel ToEditModel(this Entity.League league)
         => new(new LeagueModel(league));
 
+    public static MemorabiliaEditModel ToEditModel(this Entity.Memorabilia memorabilia)
+        => new(new MemorabiliaModel(memorabilia));
+
     public static PersonEditModel ToEditModel(this Entity.Person person)
         => new(new PersonModel(person));
 

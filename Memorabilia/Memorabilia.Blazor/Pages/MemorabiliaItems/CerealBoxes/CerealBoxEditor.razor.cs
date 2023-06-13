@@ -1,31 +1,32 @@
 ﻿namespace Memorabilia.Blazor.Pages.MemorabiliaItems.CerealBoxes;
 
-public partial class CerealBoxEditor : MemorabiliaItem<CerealBoxEditModel>
+public partial class CerealBoxEditor 
+    : MemorabiliaItem<CerealBoxEditModel>
 {
     [Inject]
     public CerealBoxValidator Validator { get; set; }
 
     protected async Task OnLoad()
     {
-        var viewModel = await QueryRouter.Send(new GetMemorabiliaItem(MemorabiliaId));
+        Entity.Memorabilia memorabilia = await QueryRouter.Send(new GetMemorabiliaItem(MemorabiliaId));
 
-        if (viewModel.Brand == null)
+        if (memorabilia.Brand == null)
             return;
 
-        ViewModel = new CerealBoxEditModel(new CerealBoxModel(viewModel));
+        EditModel = new CerealBoxEditModel(new CerealBoxModel(memorabilia));
     }
 
     protected async Task OnSave()
     {
-        var command = new SaveCerealBox.Command(ViewModel);
+        var command = new SaveCerealBox.Command(EditModel);
 
-        ViewModel.ValidationResult = Validator.Validate(command);
+        EditModel.ValidationResult = Validator.Validate(command);
 
-        if (!ViewModel.ValidationResult.IsValid)
+        if (!EditModel.ValidationResult.IsValid)
             return;
 
         await CommandRouter.Send(command);
 
-        ViewModel.SavedSuccessfully = true; 
+        EditModel.SavedSuccessfully = true; 
     }
 }

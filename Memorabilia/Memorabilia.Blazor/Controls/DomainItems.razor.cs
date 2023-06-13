@@ -7,11 +7,11 @@ public partial class DomainItems
     {
         get
         {
-            return ViewModel;
+            return Model;
         }
         set
         {
-            ViewModel = value;
+            Model = value;
         }
     }
 
@@ -21,11 +21,11 @@ public partial class DomainItems
     [Parameter]
     public EventCallback OnLoad { get; set; }
 
-    protected DomainsModel ViewModel;
+    protected DomainsModel Model;
 
-    protected async Task Delete(DomainEditModel viewModel)
+    protected async Task Delete(DomainEditModel editModel)
     {
-        await OnDelete.InvokeAsync(viewModel);
+        await OnDelete.InvokeAsync(editModel);
     }
 
     protected async Task Load()

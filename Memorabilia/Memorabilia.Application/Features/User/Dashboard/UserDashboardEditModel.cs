@@ -4,10 +4,10 @@ public class UserDashboardEditModel : EditModel
 {
     public UserDashboardEditModel() { }
 
-    public UserDashboardEditModel(UserDashboardsModel userDashboardsViewModel)
+    public UserDashboardEditModel(UserDashboardsModel model)
     {
-        UserDashboardItems = userDashboardsViewModel.UserDashboards;
-        UserId = userDashboardsViewModel.UserId;
+        UserDashboardItems = model.UserDashboards;
+        UserId = model.UserId;
     }
 
     public bool AllItemsSelected

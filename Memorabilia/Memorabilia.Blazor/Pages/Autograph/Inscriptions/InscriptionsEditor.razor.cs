@@ -6,10 +6,8 @@ public partial class InscriptionsEditor
     [Inject]
     public InscriptionValidator Validator { get; set; }
 
-    [Parameter]
-    public string UploadPath { get; set; }
-
-    protected InscriptionsEditModel EditModel = new();
+    protected InscriptionsEditModel EditModel 
+        = new();
 
     private bool _canAddInscription 
         = true;

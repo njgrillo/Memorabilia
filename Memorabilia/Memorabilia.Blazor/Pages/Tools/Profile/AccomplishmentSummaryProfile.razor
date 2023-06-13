@@ -1,40 +1,40 @@
 ﻿@inherits PersonProfile
 
 <MudChipSet>
-    <PrettyBlazor.Condition Evaluation="Accomplishments.Any()">
+    <Condition Evaluation="Accomplishments.Any()">
         <Match>
             <Iterations Items="@DistinctAccomplishments">
                 <MudChip Color="MudBlazor.Color.Info"
                          Text="Accomplishment">@(GetAccomplishmentDisplayText(context))</MudChip>
                 </Iterations>
             </Match>
-        </PrettyBlazor.Condition>
-    <PrettyBlazor.Condition Evaluation="AllStars.Any()">
+        </Condition>
+    <Condition Evaluation="AllStars.Any()">
         <Match>
             <MudChip Color="MudBlazor.Color.Success"
                      Text="AllStar">@AllStarSummaryDisplayText</MudChip>
         </Match>
-    </PrettyBlazor.Condition>
-    <PrettyBlazor.Condition Evaluation="Awards.Any()">
+    </Condition>
+    <Condition Evaluation="Awards.Any()">
         <Match>
             <Iterations Items="@DistinctAwards">
                 <MudChip Color="MudBlazor.Color.Warning"
                          Text="Award">@(GetAwardDisplayText(context))</MudChip>
             </Iterations>
         </Match>
-    </PrettyBlazor.Condition>
-    <PrettyBlazor.Condition Evaluation="Championships.Any()">
+    </Condition>
+    <Condition Evaluation="Championships.Any()">
         <Match>
             <MudChip Color="MudBlazor.Color.Primary"
                      Text="Championship">@ChampionshipSummaryDisplayText</MudChip>
         </Match>
-    </PrettyBlazor.Condition>
-    <PrettyBlazor.Condition Evaluation="Leaders.Any()">
+    </Condition>
+    <Condition Evaluation="Leaders.Any()">
         <Match>
             <Iterations Items="@DistinctLeaders">
                 <MudChip Color="MudBlazor.Color.Secondary"
                          Text="Leader">@(GetLeaderDisplayText(context))</MudChip>
             </Iterations>
         </Match>
-    </PrettyBlazor.Condition>
+    </Condition>
 </MudChipSet>

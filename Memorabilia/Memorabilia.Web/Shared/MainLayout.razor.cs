@@ -9,7 +9,10 @@ public partial class MainLayout : LayoutComponentBase
     public NavigationManager NavigationManager { get; set; }
 
     private Exception _currentException;
-    private bool _drawerOpen = true;
+
+    private bool _drawerOpen 
+        = true;
+
     private CustomErrorBoundary _errorBoundary;
     private bool _userLoggedIn;
 

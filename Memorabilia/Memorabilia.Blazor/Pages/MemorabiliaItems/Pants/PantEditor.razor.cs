@@ -1,31 +1,32 @@
 ﻿namespace Memorabilia.Blazor.Pages.MemorabiliaItems.Pants;
 
-public partial class PantEditor : MemorabiliaItem<PantEditModel>
+public partial class PantEditor 
+    : MemorabiliaItem<PantEditModel>
 {
     [Inject]
     public PantValidator Validator { get; set; }
 
     protected async Task OnLoad()
     {
-        var viewModel = await QueryRouter.Send(new GetMemorabiliaItem(MemorabiliaId));
+        Entity.Memorabilia memorabilia = await QueryRouter.Send(new GetMemorabiliaItem(MemorabiliaId));
 
-        if (viewModel.Brand == null)
+        if (memorabilia.Brand == null)
             return;
 
-        ViewModel = new PantEditModel(new PantModel(viewModel));
+        EditModel = new(new PantModel(memorabilia));
     }
 
     protected async Task OnSave()
     {
-        var command = new SavePant.Command(ViewModel);
+        var command = new SavePant.Command(EditModel);
 
-        ViewModel.ValidationResult = Validator.Validate(command);
+        EditModel.ValidationResult = Validator.Validate(command);
 
-        if (!ViewModel.ValidationResult.IsValid)
+        if (!EditModel.ValidationResult.IsValid)
             return;
 
         await CommandRouter.Send(command);
 
-        ViewModel.SavedSuccessfully = true;
+        EditModel.SavedSuccessfully = true;
     }
 }

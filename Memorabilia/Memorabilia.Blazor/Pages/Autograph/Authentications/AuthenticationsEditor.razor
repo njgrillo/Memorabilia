@@ -112,14 +112,14 @@
                     </HeaderContent>
                     <RowTemplate Context="authentication">
                         <MudTd DataLabel="Authentication Company">
-                            <PrettyBlazor.Condition Evaluation="authentication.CanNavigateToWebsite">
+                            <Condition Evaluation="authentication.CanNavigateToWebsite">
                                 <Match>
                                     <MudLink Href="@(authentication.VerificationWebsiteLink)" Target="_blank">@authentication.VerificationWebsiteLinkText</MudLink>
                                 </Match>
                                 <NotMatch>
                                     @authentication.AuthenticationCompanyName
                                 </NotMatch>
-                            </PrettyBlazor.Condition>                            
+                            </Condition>                            
                          </MudTd>
                         <MudTd DataLabel="Has Certification Card">@(authentication.HasCertificationCard ? "Yes" : "No")</MudTd>
                         <MudTd DataLabel="Has Hologram">@(authentication.HasHologram ? "Yes" : "No")</MudTd>

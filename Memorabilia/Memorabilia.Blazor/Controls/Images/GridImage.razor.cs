@@ -29,7 +29,7 @@ public partial class GridImage
             UserId == 0)
             return;
 
-        ImageData = ImageService.GetUserImageData(ImageFileName, UserId);
+        ImageData = ImageService.GetUserImageData(ImageFileName);
 
         await ImageLoaded.InvokeAsync();
     }

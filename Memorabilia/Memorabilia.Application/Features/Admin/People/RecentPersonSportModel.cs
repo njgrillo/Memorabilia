@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Application.Features.Admin.People;
 
-public class RecentPersonSportModel : RecentPersonViewModel
+public class RecentPersonSportModel : RecentPersonModel
 {
     public bool IsPrimary { get; set; }
 

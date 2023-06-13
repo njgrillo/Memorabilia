@@ -1,6 +1,6 @@
 ﻿@inherits MemorabiliaItem<BookEditModel>
 
-<EditMemorabiliaPage Item="ViewModel"
+<EditMemorabiliaPage Item="EditModel"
                      OnLoad="OnLoad"
                      OnSave="OnSave" 
                      TItem="BookEditModel">
@@ -12,31 +12,31 @@
                                DisplayMultiPersonSelector="true"
                                DisplayMultiSportSelector="true"
                                DisplayMultiTeamSelector="true"
-                               TItem="BookEditModel"
-                               ViewModel="ViewModel">
+                               Model="EditModel"
+                               TItem="BookEditModel">
             <AdditionalContent>
                 <DivRowCol3>
                     <Content>
                         <TextField Label="Title"
                                    MaxLength="200"
-                                   SelectedText="@ViewModel.Title"
-                                   SelectedTextChanged="@((p) => ViewModel.Title = p)" />
+                                   SelectedText="@EditModel.Title"
+                                   SelectedTextChanged="@((p) => EditModel.Title = p)" />
                     </Content>
                     <ContentColumn2>
                         <TextField Label="Edition"
                                    MaxLength="5"
-                                   SelectedText="@ViewModel.Edition"
-                                   SelectedTextChanged="@((p) => ViewModel.Edition = p)" />
+                                   SelectedText="@EditModel.Edition"
+                                   SelectedTextChanged="@((p) => EditModel.Edition = p)" />
                     </ContentColumn2>
                     <ContentColumn3>
                         <TextField Label="Publisher"
                                    MaxLength="200"
-                                   SelectedText="@ViewModel.Publisher"
-                                   SelectedTextChanged="@((p) => ViewModel.Publisher = p)" />
+                                   SelectedText="@EditModel.Publisher"
+                                   SelectedTextChanged="@((p) => EditModel.Publisher = p)" />
                     </ContentColumn3>
                     <ContentColumn4>
-                        <MudSwitch Checked="@ViewModel.HardCover"
-                                   CheckedChanged="(p) => ViewModel.HardCover = p"
+                        <MudSwitch Checked="@EditModel.HardCover"
+                                   CheckedChanged="(p) => EditModel.HardCover = p"
                                    Color="MudBlazor.Color.Success"
                                    Label="Is Hard Cover?"
                                    T="bool" />

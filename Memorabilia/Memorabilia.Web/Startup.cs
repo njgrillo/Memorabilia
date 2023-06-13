@@ -1,3 +1,5 @@
+using Memorabilia.Blazor.Configuration;
+
 namespace Memorabilia.Web;
 
 public class Startup
@@ -15,7 +17,12 @@ public class Startup
     {
         services.AddDataProtection()
                 .SetApplicationName("Memorabilia")
-                .SetDefaultKeyLifetime(TimeSpan.FromDays(180));            
+                .SetDefaultKeyLifetime(TimeSpan.FromDays(180));
+
+        var imagePath = new ImagePath();
+        Configuration.GetSection("ImagePaths").Bind(imagePath);
+
+        services.AddSingleton<IImagePath>(imagePath); 
 
         services.AddRazorPages();
         services.AddServerSideBlazor();

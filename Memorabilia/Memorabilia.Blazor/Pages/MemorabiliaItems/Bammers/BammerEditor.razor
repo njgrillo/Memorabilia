@@ -1,6 +1,6 @@
 ﻿@inherits MemorabiliaItem<BammerEditModel>
 
-<EditMemorabiliaPage Item="ViewModel"
+<EditMemorabiliaPage Item="EditModel"
                      OnLoad="OnLoad"
                      OnSave="OnSave" 
                      TItem="BammerEditModel">
@@ -12,29 +12,29 @@
                                DisplayMultiPersonSelector="true"
                                DisplayMultiTeamSelector="true"
                                DisplaySingleSportSelector="true"
-                               TItem="BammerEditModel"
-                               ViewModel="ViewModel">
+                               Model="EditModel"
+                               TItem="BammerEditModel">
             <AdditionalContent>
-                <PrettyBlazor.Condition Evaluation="ViewModel.CanHaveBammerType">
+                <Condition Evaluation="EditModel.CanHaveBammerType">
                     <Match>
                         <DivRowCol3>
                             <Content>
-                                <BammerTypeDropDown SelectedValue="ViewModel.BammerTypeId"
-                                                    SelectionChanged="(p) => ViewModel.BammerTypeId = p" />
+                                <BammerTypeDropDown SelectedValue="EditModel.BammerTypeId"
+                                                    SelectionChanged="(p) => EditModel.BammerTypeId = p" />
                             </Content>
                         </DivRowCol3>
                     </Match>
-                </PrettyBlazor.Condition>                
+                </Condition>                
                 <DivRowCol3>
                     <Content>
                         <NullableIntField Label="Year"
                                           Maximum="int.MaxValue"
-                                          Value="ViewModel.Year"
-                                          ValueChanged="@((p) => ViewModel.Year = p)" />
+                                          Value="EditModel.Year"
+                                          ValueChanged="@((p) => EditModel.Year = p)" />
                     </Content>
                     <ContentColumn2>
-                        <MudSwitch Checked="@ViewModel.InPackage"
-                                   CheckedChanged="(p) => ViewModel.InPackage = p"
+                        <MudSwitch Checked="@EditModel.InPackage"
+                                   CheckedChanged="(p) => EditModel.InPackage = p"
                                    Color="MudBlazor.Color.Success"
                                    Label="Is In Package?"
                                    T="bool" />

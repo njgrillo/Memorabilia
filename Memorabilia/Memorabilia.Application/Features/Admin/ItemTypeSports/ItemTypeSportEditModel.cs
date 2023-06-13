@@ -4,11 +4,11 @@ public class ItemTypeSportEditModel : EditModel
 {
     public ItemTypeSportEditModel() { }
 
-    public ItemTypeSportEditModel(ItemTypeSportModel viewModel)
+    public ItemTypeSportEditModel(ItemTypeSportModel model)
     {
-        Id = viewModel.Id;
-        ItemType = Constant.ItemType.Find(viewModel.ItemTypeId);
-        SportId = viewModel.SportId;
+        Id = model.Id;
+        ItemType = Constant.ItemType.Find(model.ItemTypeId);
+        SportId = model.SportId;
     }
 
     public override string ExitNavigationPath 

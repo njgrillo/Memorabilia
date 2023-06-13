@@ -1,6 +1,6 @@
 ﻿@inherits MemorabiliaItem<HelmetEditModel>
 
-<EditMemorabiliaPage Item="ViewModel"
+<EditMemorabiliaPage Item="EditModel"
                      OnLoad="OnLoad"
                      OnSave="OnSave" 
                      TItem="HelmetEditModel">
@@ -8,34 +8,34 @@
         <MemorabiliaItemEditor DisplayMultiPersonSelector="true"
                                DisplayMultiSportSelector="true"
                                DisplayMultiTeamSelector="true"
-                               TItem="HelmetEditModel"
-                               ViewModel="ViewModel">
+                               Model="EditModel"
+                               TItem="HelmetEditModel">
             <AdditionalContent>
-                <DivRowCol3 HideColumn2="@(!ViewModel.DisplayHelmetQualityType)"
-                            HideColumn3="@(!ViewModel.DisplayHelmetFinish)">
+                <DivRowCol3 HideColumn2="@(!EditModel.DisplayHelmetQualityType)"
+                            HideColumn3="@(!EditModel.DisplayHelmetFinish)">
                     <Content>
-                        <HelmetTypeDropDown GameStyleType="ViewModel.GameStyleType"
-                                            SelectedValue="ViewModel.HelmetTypeId"
-                                            SelectionChanged="(p) => ViewModel.HelmetTypeId = p" />
+                        <HelmetTypeDropDown GameStyleType="EditModel.GameStyleType"
+                                            SelectedValue="EditModel.HelmetTypeId"
+                                            SelectionChanged="(p) => EditModel.HelmetTypeId = p" />
                     </Content>
                     <ContentColumn2>
                         <DivHidden>
                             <Content>
-                                <HelmetQualityTypeDropDown Disabled="!ViewModel.CanEditHelmetQualityType"
-                                                           SelectedValue="ViewModel.HelmetQualityTypeId"
-                                                           SelectionChanged="(p) => ViewModel.HelmetQualityTypeId = p" />
+                                <HelmetQualityTypeDropDown Disabled="!EditModel.CanEditHelmetQualityType"
+                                                           SelectedValue="EditModel.HelmetQualityTypeId"
+                                                           SelectionChanged="(p) => EditModel.HelmetQualityTypeId = p" />
                             </Content>
                         </DivHidden>
                     </ContentColumn2>
                     <ContentColumn3>
-                        <HelmetFinishDropDown SelectedValue="ViewModel.HelmetFinishId"
-                                              SelectionChanged="(p) => ViewModel.HelmetFinishId = p" />
+                        <HelmetFinishDropDown SelectedValue="EditModel.HelmetFinishId"
+                                              SelectionChanged="(p) => EditModel.HelmetFinishId = p" />
                     </ContentColumn3>
                 </DivRowCol3>
                 <DivRowCol3>
                     <Content>
-                        <MudSwitch Checked="@ViewModel.Throwback"
-                                   CheckedChanged="(p) => ViewModel.Throwback = p"
+                        <MudSwitch Checked="@EditModel.Throwback"
+                                   CheckedChanged="(p) => EditModel.Throwback = p"
                                    Color="MudBlazor.Color.Success"
                                    Label="Is a Throwback?"
                                    T="bool" />

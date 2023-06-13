@@ -1,6 +1,6 @@
 ﻿@inherits MemorabiliaItem<CompactDiscEditModel>
 
-<EditMemorabiliaPage Item="ViewModel"
+<EditMemorabiliaPage Item="EditModel"
                      OnLoad="OnLoad"
                      OnSave="OnSave" 
                      PerformValidation="false"
@@ -11,7 +11,7 @@
                                DisplayItemTypeLevel="false"
                                DisplayItemTypeSize="false"
                                DisplayMultiPersonSelector="true"
-                               TItem="CompactDiscEditModel"
-                               ViewModel="ViewModel" />
+                               Model="EditModel"
+                               TItem="CompactDiscEditModel" />
     </Content>
 </EditMemorabiliaPage>

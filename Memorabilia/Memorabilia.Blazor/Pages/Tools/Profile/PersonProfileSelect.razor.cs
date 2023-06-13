@@ -8,7 +8,7 @@ public partial class PersonProfileSelect
     [Inject]
     public IProfileService ProfileService { get; set; }
 
-    public Entity.Person ViewModel { get; set; }
+    public Entity.Person Model { get; set; }
 
     private void SelectedPersonChanged(Entity.Person person)
     {

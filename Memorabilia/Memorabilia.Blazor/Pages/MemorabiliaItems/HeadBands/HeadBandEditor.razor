@@ -1,6 +1,6 @@
 ﻿@inherits MemorabiliaItem<HeadBandEditModel>
 
-<EditMemorabiliaPage Item="ViewModel"
+<EditMemorabiliaPage Item="EditModel"
                      OnLoad="OnLoad"
                      OnSave="OnSave" 
                      TItem="HeadBandEditModel">
@@ -9,7 +9,7 @@
                                DisplaySinglePersonSelector="true"
                                DisplaySingleSportSelector="true"
                                DisplaySingleTeamSelector="true"
-                               TItem="HeadBandEditModel"
-                               ViewModel="ViewModel" />
+                               Model="EditModel"
+                               TItem="HeadBandEditModel" />
     </Content>
 </EditMemorabiliaPage>

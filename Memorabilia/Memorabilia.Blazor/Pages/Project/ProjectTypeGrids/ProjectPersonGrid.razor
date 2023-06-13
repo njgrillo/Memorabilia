@@ -93,7 +93,7 @@
                               Elevation="5"
                               Height="75"
                               ObjectFit="@ObjectFit.Cover"
-                              Src="@(ImageService.GetUserImageData(projectPerson.AutographFileName, projectPerson.UserId))"
+                              Src="@(ImageService.GetUserImageData(projectPerson.AutographFileName))"
                               Width="75" />                      
                 </Match>
             </Condition>            
@@ -185,7 +185,7 @@
                               Elevation="5"
                               Height="75"
                               ObjectFit="@ObjectFit.Cover"
-                              Src="@(ImageService.GetUserImageData(context.AutographFileName, context.UserId))"
+                              Src="@(ImageService.GetUserImageData(context.AutographFileName))"
                               Width="75" />                      
                 </Match>
             </Condition>            

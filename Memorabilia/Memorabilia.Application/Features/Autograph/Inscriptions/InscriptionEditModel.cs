@@ -4,12 +4,12 @@ public class InscriptionEditModel : EditModel
 {
     public InscriptionEditModel() { }
 
-    public InscriptionEditModel(InscriptionModel viewModel)
+    public InscriptionEditModel(InscriptionModel model)
     {
-        AutographId = viewModel.AutographId;
-        Id = viewModel.Id;
-        InscriptionText = viewModel.InscriptionText;
-        InscriptionTypeId = viewModel.InscriptionTypeId;
+        AutographId = model.AutographId;
+        Id = model.Id;
+        InscriptionText = model.InscriptionText;
+        InscriptionTypeId = model.InscriptionTypeId;
     }
 
     public int AutographId { get; set; }   

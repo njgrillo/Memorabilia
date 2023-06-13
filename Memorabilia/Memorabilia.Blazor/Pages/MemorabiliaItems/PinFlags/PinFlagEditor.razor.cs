@@ -1,26 +1,27 @@
 ﻿namespace Memorabilia.Blazor.Pages.MemorabiliaItems.PinFlags;
 
-public partial class PinFlagEditor : MemorabiliaItem<PinFlagEditModel>
+public partial class PinFlagEditor 
+    : MemorabiliaItem<PinFlagEditModel>
 {
     [Inject]
     public PinFlagValidator Validator { get; set; }
 
     protected async Task OnLoad()
     {
-        ViewModel = new PinFlagEditModel(new PinFlagModel(await QueryRouter.Send(new GetMemorabiliaItem(MemorabiliaId))));
+        EditModel = new(new PinFlagModel(await QueryRouter.Send(new GetMemorabiliaItem(MemorabiliaId))));
     }
 
     protected async Task OnSave()
     {
-        var command = new SavePinFlag.Command(ViewModel);
+        var command = new SavePinFlag.Command(EditModel);
 
-        ViewModel.ValidationResult = Validator.Validate(command);
+        EditModel.ValidationResult = Validator.Validate(command);
 
-        if (!ViewModel.ValidationResult.IsValid)
+        if (!EditModel.ValidationResult.IsValid)
             return;
 
         await CommandRouter.Send(command);
 
-        ViewModel.SavedSuccessfully = true;
+        EditModel.SavedSuccessfully = true;
     }
 }

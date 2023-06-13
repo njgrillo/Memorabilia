@@ -4,10 +4,10 @@ public partial class PersonImageEditor
     : EditPersonItem<PersonImageEditModel, PersonImageModel>
 {
     [Inject]
-    public ILogger<PersonImageEditor> Logger { get; set; }
+    public ImageService ImageService { get; set; }
 
-    [Parameter]
-    public string PersonImageRootPath { get; set; }
+    [Inject]
+    public ILogger<PersonImageEditor> Logger { get; set; }
 
     private bool _hasImage;
 
@@ -27,26 +27,16 @@ public partial class PersonImageEditor
 
     private async Task LoadFile(InputFileChangeEventArgs e)
     {
-        IBrowserFile file = e.File;
-
         try
         {
-            if (!Directory.Exists(PersonImageRootPath))
-                Directory.CreateDirectory(PersonImageRootPath);
-
-            string fileName = Path.GetRandomFileName();
-            string path = Path.Combine(PersonImageRootPath, fileName);
-
-            await using FileStream fs = new(path, FileMode.Create);
-            await file.OpenReadStream(5120000).CopyToAsync(fs);
-
-            EditModel.PersonImageFileName = fileName;
-            _hasImage = true;
+            EditModel.PersonImageFileName = await ImageService.LoadFile(e.File, Enum.ImageRootType.People);
         }
         catch (Exception ex)
         {
-            Logger.LogError("File: {Filename} Error: {Error}", file.Name, ex.Message);
+            Logger.LogError("File: {Filename} Error: {Error}", e.File.Name, ex.Message);
         }
+
+        _hasImage = true;
     }
 
     protected void OnSaveReturnClick()

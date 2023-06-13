@@ -1,6 +1,6 @@
 ﻿@inherits MemorabiliaItem<WristBandEditModel>
 
-<EditMemorabiliaPage Item="ViewModel"
+<EditMemorabiliaPage Item="EditModel"
                      OnLoad="OnLoad"
                      OnSave="OnSave" 
                      TItem="WristBandEditModel">
@@ -8,7 +8,7 @@
         <MemorabiliaItemEditor DisplayItemTypeSize="false"
                                DisplaySinglePersonSelector="true"
                                DisplaySingleSportSelector="true"
-                               TItem="WristBandEditModel"
-                               ViewModel="ViewModel" />
+                               Model="EditModel"
+                               TItem="WristBandEditModel" />
     </Content>
 </EditMemorabiliaPage>

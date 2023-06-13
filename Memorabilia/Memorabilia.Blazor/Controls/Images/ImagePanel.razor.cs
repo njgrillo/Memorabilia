@@ -2,6 +2,9 @@
 
 public partial class ImagePanel
 {
+    [Inject]
+    public ImageService ImageService { get; set; }
+
     [Parameter]
     public string[] ImageNames { get; set; }
 

@@ -1,6 +1,6 @@
 ﻿@inherits MemorabiliaItem<FirstDayCoverEditModel>
 
-<EditMemorabiliaPage Item="ViewModel"
+<EditMemorabiliaPage Item="EditModel"
                      OnLoad="OnLoad"
                      OnSave="OnSave" 
                      TItem="FirstDayCoverEditModel">
@@ -11,12 +11,12 @@
                                DisplayMultiPersonSelector="true"
                                DisplayMultiSportSelector="true"
                                DisplayMultiTeamSelector="true"
-                               TItem="FirstDayCoverEditModel"
-                               ViewModel="ViewModel">
+                               Model="EditModel"
+                               TItem="FirstDayCoverEditModel">
             <AdditionalContent>
                 <DivRowCol3>
                     <Content>
-                        <MudDatePicker @bind-Date="ViewModel.Date"
+                        <MudDatePicker @bind-Date="EditModel.Date"
                                        DateFormat="MM/dd/yyyy"
                                        Editable="true"
                                        Label="Date"

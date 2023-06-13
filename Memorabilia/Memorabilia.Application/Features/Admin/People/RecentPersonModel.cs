@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Application.Features.Admin.People;
 
-public abstract class RecentPersonViewModel
+public abstract class RecentPersonModel
 {
     public virtual string DisplayText { get; set; }
 

@@ -3,6 +3,9 @@
 public partial class MemorabiliaItemGalleryCard
 {
     [Inject]
+    public ImageService ImageService { get; set; }
+
+    [Inject]
     public NavigationManager NavigationManager { get; set; }
 
     [Parameter]
@@ -13,9 +16,6 @@ public partial class MemorabiliaItemGalleryCard
 
     [Parameter]
     public MemorabiliaGalleryItemModel MemorabiliaItem { get; set; }
-
-    [Parameter]
-    public string PersonImageRootPath { get; set; }
 
     [Parameter]
     public string PrimaryImageFileName { get; set; }

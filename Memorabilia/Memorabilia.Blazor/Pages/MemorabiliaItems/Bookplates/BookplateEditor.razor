@@ -1,6 +1,6 @@
 ﻿@inherits MemorabiliaItem<BookplateEditModel>
 
-<EditMemorabiliaPage Item="ViewModel"
+<EditMemorabiliaPage Item="EditModel"
                      OnLoad="OnLoad"
                      OnSave="OnSave" 
                      PerformValidation="false"
@@ -12,7 +12,7 @@
                                DisplayItemTypeLevel="false"
                                DisplayItemTypeSize="false"
                                DisplaySinglePersonSelector="true"
-                               TItem="BookplateEditModel"
-                               ViewModel="ViewModel" />
+                               Model="EditModel"
+                               TItem="BookplateEditModel" />
     </Content>
 </EditMemorabiliaPage>

@@ -4,48 +4,48 @@
             HideColumn2="@(!DisplayItemTypeSize)"
             HideColumn3="@(!DisplayItemTypeLevel)">
     <Content>
-        <ItemTypeBrandDropDown ItemType="ViewModel.ItemType"
-                               SelectedValue="ViewModel.BrandId"
-                               SelectionChanged="(p) => ViewModel.BrandId = p" />        
+        <ItemTypeBrandDropDown ItemType="Model.ItemType"
+                               SelectedValue="Model.BrandId"
+                               SelectionChanged="(p) => Model.BrandId = p" />        
     </Content>
     <ContentColumn2>
-        <ItemTypeSizeDropDown ItemType="ViewModel.ItemType"
-                              SelectedValue="@ViewModel.SizeId"
-                              SelectionChanged="(p) => ViewModel.SizeId = p" />
+        <ItemTypeSizeDropDown ItemType="Model.ItemType"
+                              SelectedValue="@Model.SizeId"
+                              SelectionChanged="(p) => Model.SizeId = p" />
     </ContentColumn2>
     <ContentColumn3>
-        <ItemTypeLevelDropDown ItemType="ViewModel.ItemType"
-                               SelectedValue="ViewModel.LevelTypeId"
-                               SelectionChanged="(p) => ViewModel.LevelTypeId = p" />
+        <ItemTypeLevelDropDown ItemType="Model.ItemType"
+                               SelectedValue="Model.LevelTypeId"
+                               SelectionChanged="(p) => Model.LevelTypeId = p" />
     </ContentColumn3>
     <ContentColumn4>
         <Condition Evaluation="DisplaySingleSportSelector">
             <Match>
-                <SportDropDown ItemType="@ViewModel.ItemType" 
-                               SelectedValue="@ViewModel.SportId"
-                               SelectionChanged="(p) => ViewModel.SportId = p" />
+                <SportDropDown ItemType="@Model.ItemType" 
+                               SelectedValue="@Model.SportId"
+                               SelectionChanged="(p) => Model.SportId = p" />
             </Match>
         </Condition>
         <Condition Evaluation="DisplayMultiSportSelector">
             <Match>
                 <SportDropDown MultiSelect="true"
-                               SelectedItems="ViewModel.SportIds"
-                               SelectedItemsChanged="(p) => ViewModel.SportIds = p.ToList()" />
+                               SelectedItems="Model.SportIds"
+                               SelectedItemsChanged="(p) => Model.SportIds = p.ToList()" />
             </Match>
         </Condition>
     </ContentColumn4>
 </DivRowCol3>
 <DivRowCol3 Hidden="@(!DisplayItemTypeGameStyle)" 
-            HideColumn1="@(!ViewModel.DisplayGameStyleType)"
-            HideColumn2="@(!ViewModel.DisplayGameDate)">
+            HideColumn1="@(!Model.DisplayGameStyleType)"
+            HideColumn2="@(!Model.DisplayGameDate)">
     <Content>
-        <ItemTypeGameStyleDropDown ItemType="ViewModel.ItemType"
+        <ItemTypeGameStyleDropDown ItemType="Model.ItemType"
                                    Label="@GameStyleTypeDisplayText"
-                                   SelectedValue="ViewModel.GameStyleTypeId"
-                                   SelectionChanged="(p) => ViewModel.GameStyleTypeId = p" />
+                                   SelectedValue="Model.GameStyleTypeId"
+                                   SelectionChanged="(p) => Model.GameStyleTypeId = p" />
     </Content>
     <ContentColumn2>
-        <MudDatePicker @bind-Date="ViewModel.GameDate"
+        <MudDatePicker @bind-Date="Model.GameDate"
                        DateFormat="MM/dd/yyyy"
                        Editable="true"
                        Label="@GameDateDisplayText"
@@ -58,28 +58,28 @@
     <Match>
         <PersonSelector CanFilterBySport="CanFilterPersonBySport"
                         CanToggle="CanTogglePersonSelector"
-                        ItemType="ViewModel.ItemType"
-                        SelectedPerson="ViewModel.Person"
-                        SelectedPersonChanged="(p) => ViewModel.Person = p"
-                        Sport="ViewModel.Sport" />
+                        ItemType="Model.ItemType"
+                        SelectedPerson="Model.Person"
+                        SelectedPersonChanged="(p) => Model.Person = p"
+                        Sport="Model.Sport" />
     </Match>
 </Condition>
 <Condition Evaluation="DisplayMultiPersonSelector">
     <Match>
         <MultiPersonSelector CanToggle="true"
-                             ItemType="ViewModel.ItemType"
-                             SelectedPeople="ViewModel.People"
-                             SelectedPeopleChanged="@((people) => ViewModel.People = people)" />
+                             ItemType="Model.ItemType"
+                             SelectedPeople="Model.People"
+                             SelectedPeopleChanged="@((people) => Model.People = people)" />
     </Match>
 </Condition>
 <Condition Evaluation="DisplaySingleTeamSelector">
     <Match>
         <DivRowCol6>
             <Content>
-                <TeamAutoComplete SelectedValue="ViewModel.Team"
-                                  SelectionChanged="(p) => ViewModel.Team = p"
-                                  Sport="ViewModel.Sport" 
-                                  SportLeagueLevel="ViewModel.SportLeagueLevel" />
+                <TeamAutoComplete SelectedValue="Model.Team"
+                                  SelectionChanged="(p) => Model.Team = p"
+                                  Sport="Model.Sport" 
+                                  SportLeagueLevel="Model.SportLeagueLevel" />
             </Content>
         </DivRowCol6>
     </Match>
@@ -87,8 +87,8 @@
 <Condition Evaluation="DisplayMultiTeamSelector">
     <Match>
         <MultiTeamSelector CanToggle="CanToggleMultiTeamSelector"
-                           ItemType="ViewModel.ItemType"
-                           SelectedTeams="ViewModel.Teams"
-                           SelectedTeamsChanged="@((teams) => ViewModel.Teams = teams)" />
+                           ItemType="Model.ItemType"
+                           SelectedTeams="Model.Teams"
+                           SelectedTeamsChanged="@((teams) => Model.Teams = teams)" />
     </Match>
 </Condition>

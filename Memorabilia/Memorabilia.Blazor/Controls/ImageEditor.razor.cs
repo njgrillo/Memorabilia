@@ -2,6 +2,9 @@
 
 public partial class ImageEditor
 {
+    [Inject]
+    public ImageService ImageService { get; set; }
+
     [Parameter]
     public bool CanRemove { get; set; }
 
@@ -12,7 +15,7 @@ public partial class ImageEditor
     public string ImageFileName { get; set; }
 
     [Parameter]
-    public string ImageRootPath { get; set; }
+    public Enum.ImageRootType ImageRootType { get; set; }
 
     [Parameter]
     public ImageType ImageType { get; set; }
@@ -28,10 +31,7 @@ public partial class ImageEditor
 
     protected async Task Remove(string imageFileName)
     {
-        string imageFilePath = Path.Combine(ImageRootPath, imageFileName);
-
-        if (File.Exists(imageFilePath))
-            File.Delete(imageFilePath);
+        ImageService.DeleteImage(ImageRootType, imageFileName);
 
         await OnRemove.InvokeAsync(imageFileName);
     }

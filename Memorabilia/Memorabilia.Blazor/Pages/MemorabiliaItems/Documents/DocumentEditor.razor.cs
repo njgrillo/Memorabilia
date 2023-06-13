@@ -1,31 +1,32 @@
 ﻿namespace Memorabilia.Blazor.Pages.MemorabiliaItems.Documents;
 
-public partial class DocumentEditor : MemorabiliaItem<DocumentEditModel>
+public partial class DocumentEditor 
+    : MemorabiliaItem<DocumentEditModel>
 {
     [Inject]
     public DocumentValidator Validator { get; set; }
 
     protected async Task OnLoad()
     {
-        var viewModel = await QueryRouter.Send(new GetMemorabiliaItem(MemorabiliaId));
+        Entity.Memorabilia memorabilia = await QueryRouter.Send(new GetMemorabiliaItem(MemorabiliaId));
 
-        if (viewModel.Size == null)
+        if (memorabilia.Size == null)
             return;
 
-        ViewModel = new DocumentEditModel(new DocumentModel(viewModel));
+        EditModel = new(new DocumentModel(memorabilia));
     }
 
     protected async Task OnSave()
     {
-        var command = new SaveDocument.Command(ViewModel);
+        var command = new SaveDocument.Command(EditModel);
 
-        ViewModel.ValidationResult = Validator.Validate(command);
+        EditModel.ValidationResult = Validator.Validate(command);
 
-        if (!ViewModel.ValidationResult.IsValid)
+        if (!EditModel.ValidationResult.IsValid)
             return;
 
         await CommandRouter.Send(command);
 
-        ViewModel.SavedSuccessfully = true;
+        EditModel.SavedSuccessfully = true;
     }
 }

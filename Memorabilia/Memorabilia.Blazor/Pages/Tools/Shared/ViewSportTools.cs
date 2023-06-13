@@ -7,6 +7,9 @@ public abstract class ViewSportTools<T>
     public IDialogService DialogService { get; set; }
 
     [Inject]
+    public ImageService ImageService { get; set; }
+
+    [Inject]
     public QueryRouter QueryRouter { get; set; }
 
     [Parameter]

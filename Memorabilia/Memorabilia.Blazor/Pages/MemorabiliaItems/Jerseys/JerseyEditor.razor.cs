@@ -1,31 +1,32 @@
 ﻿namespace Memorabilia.Blazor.Pages.MemorabiliaItems.Jerseys;
 
-public partial class JerseyEditor : MemorabiliaItem<JerseyEditModel>
+public partial class JerseyEditor 
+    : MemorabiliaItem<JerseyEditModel>
 {
     [Inject]
     public JerseyValidator Validator { get; set; }
 
     protected async Task OnLoad()
     {
-        var viewModel = await QueryRouter.Send(new GetMemorabiliaItem(MemorabiliaId));
+        Entity.Memorabilia memorabilia = await QueryRouter.Send(new GetMemorabiliaItem(MemorabiliaId));
 
-        if (viewModel.Brand == null)
+        if (memorabilia.Brand == null)
             return;
 
-        ViewModel = new JerseyEditModel(new JerseyModel(viewModel));
+        EditModel = new(new JerseyModel(memorabilia));
     }
 
     protected async Task OnSave()
     {
-        var command = new SaveJersey.Command(ViewModel);
+        var command = new SaveJersey.Command(EditModel);
 
-        ViewModel.ValidationResult = Validator.Validate(command);
+        EditModel.ValidationResult = Validator.Validate(command);
 
-        if (!ViewModel.ValidationResult.IsValid)
+        if (!EditModel.ValidationResult.IsValid)
             return;
 
         await CommandRouter.Send(command);
 
-        ViewModel.SavedSuccessfully = true;
+        EditModel.SavedSuccessfully = true;
     }
 }

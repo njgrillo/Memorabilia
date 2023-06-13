@@ -1,31 +1,32 @@
 ﻿namespace Memorabilia.Blazor.Pages.MemorabiliaItems.Pylons;
 
-public partial class PylonEditor : MemorabiliaItem<PylonEditModel>
+public partial class PylonEditor 
+    : MemorabiliaItem<PylonEditModel>
 {
     [Inject]
     public PylonValidator Validator { get; set; }
 
     protected async Task OnLoad()
     {
-        var viewModel = await QueryRouter.Send(new GetMemorabiliaItem(MemorabiliaId));
+        Entity.Memorabilia memorabilia = await QueryRouter.Send(new GetMemorabiliaItem(MemorabiliaId));
 
-        if (viewModel.Size == null)
+        if (memorabilia.Size == null)
             return;
 
-        ViewModel = new PylonEditModel(new PylonModel(viewModel));
+        EditModel = new(new PylonModel(memorabilia));
     }
 
     protected async Task OnSave()
     {
-        var command = new SavePylon.Command(ViewModel);
+        var command = new SavePylon.Command(EditModel);
 
-        ViewModel.ValidationResult = Validator.Validate(command);
+        EditModel.ValidationResult = Validator.Validate(command);
 
-        if (!ViewModel.ValidationResult.IsValid)
+        if (!EditModel.ValidationResult.IsValid)
             return;
 
         await CommandRouter.Send(command);
 
-        ViewModel.SavedSuccessfully = true;
+        EditModel.SavedSuccessfully = true;
     }
 }

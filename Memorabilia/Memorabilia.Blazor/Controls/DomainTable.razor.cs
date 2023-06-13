@@ -37,8 +37,8 @@ public partial class DomainTable
 
     private string _search;
 
-    private bool FilterFunc1(DomainModel domainViewModel) 
-        => FilterFunc(domainViewModel, _search);
+    private bool FilterFunc1(DomainModel model) 
+        => FilterFunc(model, _search);
 
     protected async Task ShowDeleteConfirm(int id)
     {
@@ -54,21 +54,22 @@ public partial class DomainTable
     private async Task Delete(int id)
     {
         DomainModel deletedItem = DomainEntities.Single(domainEntity => domainEntity.Id == id);
-        var viewModel = new DomainEditModel(deletedItem)
+
+        var editModel = new DomainEditModel(deletedItem)
         {
             IsDeleted = true
         };
 
         DomainEntities.Remove(deletedItem);
 
-        await OnDelete.InvokeAsync(viewModel);
+        await OnDelete.InvokeAsync(editModel);
 
         Snackbar.Add($"{DomainItemName} was deleted successfully!", Severity.Success);
     }
 
-    private static bool FilterFunc(DomainModel domainViewModel, string search)
+    private static bool FilterFunc(DomainModel model, string search)
         => search.IsNullOrEmpty() ||
-           domainViewModel.Name.Contains(search, StringComparison.OrdinalIgnoreCase) ||
-           (!domainViewModel.Abbreviation.IsNullOrEmpty() &&
-            domainViewModel.Abbreviation.Contains(search, StringComparison.OrdinalIgnoreCase));
+           model.Name.Contains(search, StringComparison.OrdinalIgnoreCase) ||
+           (!model.Abbreviation.IsNullOrEmpty() &&
+            model.Abbreviation.Contains(search, StringComparison.OrdinalIgnoreCase));
 }

@@ -1,6 +1,6 @@
 ﻿@inherits MemorabiliaItem<TrunkEditModel>
 
-<EditMemorabiliaPage Item="ViewModel"
+<EditMemorabiliaPage Item="EditModel"
                      OnLoad="OnLoad"
                      OnSave="OnSave" 
                      TItem="TrunkEditModel">
@@ -9,7 +9,7 @@
                                DisplaySingleSportSelector="true"
                                GameDateDisplayText="Match Date"
                                GameStyleTypeDisplayText="Match Style"
-                               TItem="TrunkEditModel"
-                               ViewModel="ViewModel" />
+                               Model="EditModel"
+                               TItem="TrunkEditModel" />
     </Content>
 </EditMemorabiliaPage>

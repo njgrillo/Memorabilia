@@ -34,7 +34,7 @@
     <Content>        
         <DivRowCol6>
             <Content>
-                <PrettyBlazor.Condition Evaluation="Model.CanImportPerson">
+                <Condition Evaluation="Model.CanImportPerson">
                     <Match>
                         <MudTooltip Text="Import from memorabilia item">
                             <MudImage @onclick="@(_ => Model.Person = new PersonEditModel(Model.MemorabiliaPerson))"
@@ -46,7 +46,7 @@
                                       Width="20" />
                         </MudTooltip>
                     </Match>
-                </PrettyBlazor.Condition>                
+                </Condition>                
                 <PersonSelector SelectedPerson="Model.Person"
                                 SelectedPersonChanged="(p) => Model.Person = p" />  
             </Content>

@@ -3,6 +3,9 @@
 public abstract class WebPage : ComponentBase
 {
     [Inject]
+    public IApplicationStateService ApplicationStateService { get; set; }
+
+    [Inject]
     public IConfiguration Configuration { get; set; }    
 
     [Inject]
@@ -11,13 +14,7 @@ public abstract class WebPage : ComponentBase
     [Inject]
     public NavigationManager NavigationManager { get; set; }
 
-    protected string UploadPath { get; set; }
-
     public int UserId { get; set; }
-
-    protected string MemorabiliaImageRootPath => Configuration["MemorabiliaImageRootPath"];
-
-    protected string PersonImageRootPath => Configuration["PersonImageRootPath"];
 
     protected async Task DeleteUserId()
     {
@@ -42,7 +39,8 @@ public abstract class WebPage : ComponentBase
 
             await LocalStorage.SetAsync("UserId", UserId);
 
-            UploadPath = Path.Combine(MemorabiliaImageRootPath, UserId.ToString());            
+            if (ApplicationStateService.CurrentUser == null)
+                await ApplicationStateService.Load(UserId);
         }
     }    
 }

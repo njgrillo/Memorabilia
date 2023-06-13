@@ -19,9 +19,14 @@ public partial class MemorabiliaGalleryGrid
 
     protected MemorabiliaGalleryItemsModel Model;
     
-    private MemorabiliaSearchCriteria _filter = new();
-    private List<MemorabiliaGalleryItemModel> _items = new();
-    private readonly int _pageSize = 12;
+    private MemorabiliaSearchCriteria _filter 
+        = new();
+
+    private List<MemorabiliaGalleryItemModel> _items 
+        = new();
+
+    private readonly int _pageSize 
+        = 12;
 
     protected override async Task OnParametersSetAsync()
     {
@@ -34,19 +39,13 @@ public partial class MemorabiliaGalleryGrid
     }
 
     protected string GetDescription(MemorabiliaGalleryItemModel item)
-    {
-        return GalleryService.GetDescription(item.Memorabilia);
-    }
+        => GalleryService.GetDescription(item.Memorabilia);
 
     protected string GetSubtitle(MemorabiliaGalleryItemModel item)
-    {
-        return GalleryService.GetSubtitle(item.Memorabilia);
-    }
+        => GalleryService.GetSubtitle(item.Memorabilia);
 
     protected string GetTitle(MemorabiliaGalleryItemModel item)
-    {
-        return GalleryService.GetTitle(item.Memorabilia);
-    }
+        => GalleryService.GetTitle(item.Memorabilia);
 
     private async void LoadMore()
     {

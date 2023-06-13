@@ -1,6 +1,6 @@
 ﻿@inherits MemorabiliaItem<JerseyNumberEditModel>
 
-<EditMemorabiliaPage Item="ViewModel"
+<EditMemorabiliaPage Item="EditModel"
                      OnLoad="OnLoad"
                      OnSave="OnSave" 
                      TItem="JerseyNumberEditModel">
@@ -12,15 +12,15 @@
                                DisplaySinglePersonSelector="true"
                                DisplaySingleSportSelector="true"
                                DisplaySingleTeamSelector="true"
-                               TItem="JerseyNumberEditModel"
-                               ViewModel="ViewModel">
+                               Model="EditModel"
+                               TItem="JerseyNumberEditModel">
             <AdditionalContent>
                 <DivRowCol3>
                     <Content>
                         <NullableIntField Label="Number"
                                           Maximum="99"
-                                          Value="ViewModel.Number"
-                                          ValueChanged="@((p) => ViewModel.Number = p)" />
+                                          Value="EditModel.Number"
+                                          ValueChanged="@((p) => EditModel.Number = p)" />
                     </Content>
                 </DivRowCol3>
             </AdditionalContent>

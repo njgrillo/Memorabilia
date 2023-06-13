@@ -1,6 +1,6 @@
 ﻿@inherits MemorabiliaItem<MagazineEditModel>
 
-<EditMemorabiliaPage Item="ViewModel"
+<EditMemorabiliaPage Item="EditModel"
                      OnLoad="OnLoad"
                      OnSave="OnSave" 
                      TItem="MagazineEditModel">
@@ -10,16 +10,16 @@
                                DisplayMultiPersonSelector="true"
                                DisplayMultiSportSelector="true"
                                DisplayMultiTeamSelector="true"
-                               TItem="MagazineEditModel"
-                               ViewModel="ViewModel">
+                               Model="EditModel"
+                               TItem="MagazineEditModel">
             <AdditionalContent>
                 <DivRowCol3>
                     <Content>
-                        <OrientationDropDown SelectedValue="ViewModel.OrientationId"
-                                             SelectionChanged="(p) => ViewModel.OrientationId = p" />
+                        <OrientationDropDown SelectedValue="EditModel.OrientationId"
+                                             SelectionChanged="(p) => EditModel.OrientationId = p" />
                     </Content>
                     <ContentColumn2>
-                        <MudDatePicker @bind-Date="ViewModel.Date"
+                        <MudDatePicker @bind-Date="EditModel.Date"
                                        DateFormat="MM/dd/yyyy"
                                        Editable="true"
                                        Label="Date"
@@ -29,8 +29,8 @@
                 </DivRowCol3>
                 <DivRowCol3>
                     <Content>
-                        <MudSwitch Checked="@ViewModel.Matted"
-                                   CheckedChanged="(p) => ViewModel.Matted = p"
+                        <MudSwitch Checked="@EditModel.Matted"
+                                   CheckedChanged="(p) => EditModel.Matted = p"
                                    Color="MudBlazor.Color.Success"
                                    Label="Is Matted?"
                                    T="bool" />

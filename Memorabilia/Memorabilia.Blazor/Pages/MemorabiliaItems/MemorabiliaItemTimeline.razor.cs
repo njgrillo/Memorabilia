@@ -55,7 +55,9 @@ public partial class MemorabiliaItemTimeline : ComponentBase
 
     protected override void OnInitialized()
     {
-        _mudAlertClass = MemorabiliaId > 0 ? "can-click" : string.Empty;
+        _mudAlertClass = MemorabiliaId > 0 
+            ? "can-click" 
+            : string.Empty;
 
         MemorabiliaEditDetailAlertTitle = MemorabiliaItemStep.Detail.Name;
         MemorabiliaEditImageAlertTitle = MemorabiliaItemStep.Image.Name;

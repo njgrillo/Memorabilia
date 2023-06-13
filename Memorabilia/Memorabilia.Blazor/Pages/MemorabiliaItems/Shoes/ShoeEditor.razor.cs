@@ -1,31 +1,32 @@
 ﻿namespace Memorabilia.Blazor.Pages.MemorabiliaItems.Shoes;
 
-public partial class ShoeEditor : MemorabiliaItem<ShoeEditModel>
+public partial class ShoeEditor 
+    : MemorabiliaItem<ShoeEditModel>
 {
     [Inject]
     public ShoeValidator Validator { get; set; }
 
     protected async Task OnLoad()
     {
-        var viewModel = await QueryRouter.Send(new GetMemorabiliaItem(MemorabiliaId));
+        Entity.Memorabilia memorabilia = await QueryRouter.Send(new GetMemorabiliaItem(MemorabiliaId));
 
-        if (viewModel.Brand == null)
+        if (memorabilia.Brand == null)
             return;
 
-        ViewModel = new ShoeEditModel(new ShoeModel(viewModel));
+        EditModel = new(new ShoeModel(memorabilia));
     }
 
     protected async Task OnSave()
     {
-        var command = new SaveShoe.Command(ViewModel);
+        var command = new SaveShoe.Command(EditModel);
 
-        ViewModel.ValidationResult = Validator.Validate(command);
+        EditModel.ValidationResult = Validator.Validate(command);
 
-        if (!ViewModel.ValidationResult.IsValid)
+        if (!EditModel.ValidationResult.IsValid)
             return;
 
         await CommandRouter.Send(command);
 
-        ViewModel.SavedSuccessfully = true;
+        EditModel.SavedSuccessfully = true;
     }
 }

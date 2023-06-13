@@ -1,6 +1,6 @@
 ﻿@inherits MemorabiliaItem<PaintingEditModel>
 
-<EditMemorabiliaPage Item="ViewModel"
+<EditMemorabiliaPage Item="EditModel"
                      OnLoad="OnLoad"
                      OnSave="OnSave" 
                      TItem="PaintingEditModel">
@@ -11,19 +11,19 @@
                                DisplayMultiPersonSelector="true"
                                DisplayMultiSportSelector="true"
                                DisplayMultiTeamSelector="true"
-                               TItem="PaintingEditModel"
-                               ViewModel="ViewModel">
+                               Model="EditModel"
+                               TItem="PaintingEditModel">
             <AdditionalContent>
                 <DivRowCol3>
                     <Content>
-                        <OrientationDropDown SelectedValue="ViewModel.OrientationId"
-                                             SelectionChanged="(p) => ViewModel.OrientationId = p" />
+                        <OrientationDropDown SelectedValue="EditModel.OrientationId"
+                                             SelectionChanged="(p) => EditModel.OrientationId = p" />
                     </Content>
                 </DivRowCol3>
                 <DivRowCol3>
                     <Content>
-                        <MudSwitch Checked="@ViewModel.Matted"
-                                   CheckedChanged="(p) => ViewModel.Matted = p"
+                        <MudSwitch Checked="@EditModel.Matted"
+                                   CheckedChanged="(p) => EditModel.Matted = p"
                                    Color="MudBlazor.Color.Success"
                                    Label="Is Matted?"
                                    T="bool" />

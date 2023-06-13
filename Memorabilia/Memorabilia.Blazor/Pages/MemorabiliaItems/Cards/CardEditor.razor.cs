@@ -1,31 +1,32 @@
 ﻿namespace Memorabilia.Blazor.Pages.MemorabiliaItems.Cards;
 
-public partial class CardEditor : MemorabiliaItem<CardEditModel>
+public partial class CardEditor 
+    : MemorabiliaItem<CardEditModel>
 {
     [Inject]
     public CardValidator Validator { get; set; }
 
     protected async Task OnLoad()
     {
-        var viewModel = await QueryRouter.Send(new GetMemorabiliaItem(MemorabiliaId));
+        Entity.Memorabilia memorabilia = await QueryRouter.Send(new GetMemorabiliaItem(MemorabiliaId));
 
-        if (viewModel.Brand == null)
+        if (memorabilia.Brand == null)
             return;
 
-        ViewModel = new CardEditModel(new CardModel(viewModel));
+        EditModel = new CardEditModel(new CardModel(memorabilia));
     }
 
     protected async Task OnSave()
     {
-        var command = new SaveCard.Command(ViewModel);
+        var command = new SaveCard.Command(EditModel);
 
-        ViewModel.ValidationResult = Validator.Validate(command);
+        EditModel.ValidationResult = Validator.Validate(command);
 
-        if (!ViewModel.ValidationResult.IsValid)
+        if (!EditModel.ValidationResult.IsValid)
             return;
 
         await CommandRouter.Send(command);
 
-        ViewModel.SavedSuccessfully = true;
+        EditModel.SavedSuccessfully = true;
     }
 }

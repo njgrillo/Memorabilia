@@ -1,10 +1,10 @@
 ﻿@inherits WebPage
 
-<PrettyBlazor.Condition Evaluation="@(!PageLoaded)">
+<Condition Evaluation="@(!PageLoaded)">
     <Match>
         <Spinner />
     </Match>
     <NotMatch>
         @Content
     </NotMatch>
-</PrettyBlazor.Condition>
+</Condition>

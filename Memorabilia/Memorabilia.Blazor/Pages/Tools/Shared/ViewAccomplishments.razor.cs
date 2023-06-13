@@ -37,15 +37,15 @@ public partial class ViewAccomplishments
         await Load(accomplishmentType);
     }
 
-    protected override bool FilterFunc(AccomplishmentModel viewModel, string search)
+    protected override bool FilterFunc(AccomplishmentModel model, string search)
     {
         bool canSearchByYear = int.TryParse(search, out int year);
 
         return search.IsNullOrEmpty() ||
-               (canSearchByYear && viewModel.Year.HasValue && viewModel.Year.Value == year)||
-               viewModel.Name.Contains(search, StringComparison.OrdinalIgnoreCase) ||
-               viewModel.AccomplishmentTypeName.Contains(search) ||
-               CultureInfo.CurrentCulture.CompareInfo.IndexOf(viewModel.Name,
+               (canSearchByYear && model.Year.HasValue && model.Year.Value == year)||
+               model.Name.Contains(search, StringComparison.OrdinalIgnoreCase) ||
+               model.AccomplishmentTypeName.Contains(search) ||
+               CultureInfo.CurrentCulture.CompareInfo.IndexOf(model.Name,
                                                               search,
                                                               CompareOptions.IgnoreNonSpace) > -1;
     }

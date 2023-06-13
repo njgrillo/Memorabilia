@@ -21,31 +21,31 @@ public partial class MemorabiliaImageEditor
     public int MemorabiliaId { get; set; }
 
     [Parameter]
-    public string UploadPath { get; set; }
-
-    [Parameter]
     public int UserId { get; set; }
     
     private EditImages<MemorabiliaImagesEditModel> EditImages;
-    private MemorabiliaImagesEditModel ViewModel = new ();
+
+    private MemorabiliaImagesEditModel EditModel 
+        = new ();
 
     protected async Task OnLoad()
     {
-        ViewModel = new MemorabiliaImagesEditModel(new MemorabiliaModel(await QueryRouter.Send(new GetMemorabiliaItem(MemorabiliaId))));
+        EditModel 
+            = new MemorabiliaImagesEditModel(new MemorabiliaModel(await QueryRouter.Send(new GetMemorabiliaItem(MemorabiliaId))));
     }
 
     protected async Task OnSave()
     {
-        ViewModel.Images = EditImages.Images;            
+        EditModel.Images = EditImages.Images;            
 
-        await CommandRouter.Send(new SaveMemorabiliaImage.Command(ViewModel));
+        await CommandRouter.Send(new SaveMemorabiliaImage.Command(EditModel));
     }
 
     protected async Task SaveAndAddAutograph()
     {
         await OnSave();
 
-        NavigationManager.NavigateTo(ViewModel.ContinueNavigationPath);
+        NavigationManager.NavigateTo(EditModel.ContinueNavigationPath);
         Snackbar.Add("Images were saved successfully!", Severity.Success);
     }
 
@@ -63,15 +63,15 @@ public partial class MemorabiliaImageEditor
 
         Snackbar.Add("Images were saved successfully!", Severity.Success);
 
-        if (!ViewModel.HasMultipleAutographs)
+        if (!EditModel.HasMultipleAutographs)
         {
-            NavigationManager.NavigateTo(ViewModel.AutographNavigationPath);
+            NavigationManager.NavigateTo(EditModel.AutographNavigationPath);
         }
         else
         {
             var parameters = new DialogParameters
             {
-                ["MemorabiliaId"] = ViewModel.MemorabiliaId
+                ["MemorabiliaId"] = EditModel.MemorabiliaId
             };
 
             var options = new DialogOptions() 
@@ -92,7 +92,7 @@ public partial class MemorabiliaImageEditor
             if (autographId == 0)
                 return;
 
-            var url = $"Autographs/{EditModeType.Update.Name}/{ViewModel.MemorabiliaId}/{autographId}";
+            string url = $"Autographs/{EditModeType.Update.Name}/{EditModel.MemorabiliaId}/{autographId}";
 
             NavigationManager.NavigateTo(url);
         }   

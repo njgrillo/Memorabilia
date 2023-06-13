@@ -4,13 +4,13 @@ public partial class AutographEditor
     : AutographItem<AutographEditModel>
 {
     [Inject]
+    public ImageService ImageService { get; set; }
+
+    [Inject]
     public AutographValidator Validator { get; set; }
 
     [Parameter]
     public int MemorabiliaId { get; set; }
-
-    [Parameter]
-    public string UploadPath { get; set; }
 
     private bool _displayAcquisitionDetails
         = true;

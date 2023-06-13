@@ -1,13 +1,13 @@
 ﻿@inherits MemorabiliaItem<HockeyStickEditModel>
 
-<EditMemorabiliaPage Item="ViewModel"
+<EditMemorabiliaPage Item="EditModel"
                      OnLoad="OnLoad"
                      OnSave="OnSave" 
                      TItem="HockeyStickEditModel">
     <Content>
         <MemorabiliaItemEditor DisplaySinglePersonSelector="true"
                                DisplaySingleTeamSelector="true"
-                               TItem="HockeyStickEditModel"
-                               ViewModel="ViewModel" />
+                               Model="EditModel"
+                               TItem="HockeyStickEditModel" />
     </Content>
 </EditMemorabiliaPage>

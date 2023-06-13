@@ -6,10 +6,8 @@ public partial class AuthenticationsEditor
     [Inject]
     public AuthenticationValidator Validator { get; set; }
 
-    [Parameter]
-    public string UploadPath { get; set; }
-
-    protected AuthenticationsEditModel EditModel = new();
+    protected AuthenticationsEditModel EditModel 
+        = new();
 
     private bool _canAddAuthentication 
         = true;

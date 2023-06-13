@@ -1,31 +1,32 @@
 ﻿namespace Memorabilia.Blazor.Pages.MemorabiliaItems.HockeySticks;
 
-public partial class HockeyStickEditor : MemorabiliaItem<HockeyStickEditModel>
+public partial class HockeyStickEditor 
+    : MemorabiliaItem<HockeyStickEditModel>
 {
     [Inject]
     public HockeyStickValidator Validator { get; set; }
 
     protected async Task OnLoad()
     {
-        var viewModel = await QueryRouter.Send(new GetMemorabiliaItem(MemorabiliaId));
+        Entity.Memorabilia memorabilia = await QueryRouter.Send(new GetMemorabiliaItem(MemorabiliaId));
 
-        if (viewModel.Brand == null)
+        if (memorabilia.Brand == null)
             return;
 
-        ViewModel = new HockeyStickEditModel(new HockeyStickModel(viewModel));
+        EditModel = new(new HockeyStickModel(memorabilia));
     }
 
     protected async Task OnSave()
     {
-        var command = new SaveHockeyStick.Command(ViewModel);
+        var command = new SaveHockeyStick.Command(EditModel);
 
-        ViewModel.ValidationResult = Validator.Validate(command);
+        EditModel.ValidationResult = Validator.Validate(command);
 
-        if (!ViewModel.ValidationResult.IsValid)
+        if (!EditModel.ValidationResult.IsValid)
             return;
 
         await CommandRouter.Send(command);
 
-        ViewModel.SavedSuccessfully = true;
+        EditModel.SavedSuccessfully = true;
     }
 }

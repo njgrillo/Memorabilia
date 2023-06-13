@@ -1,6 +1,6 @@
 ﻿@inherits MemorabiliaItem<GloveEditModel>
 
-<EditMemorabiliaPage Item="ViewModel"
+<EditMemorabiliaPage Item="EditModel"
                      OnLoad="OnLoad"
                      OnSave="OnSave" 
                      TItem="GloveEditModel">
@@ -8,14 +8,14 @@
         <MemorabiliaItemEditor DisplayMultiPersonSelector="true"
                                DisplayMultiTeamSelector="true"
                                DisplaySingleSportSelector="true"
-                               TItem="GloveEditModel"
-                               ViewModel="ViewModel">
+                               Model="EditModel"
+                               TItem="GloveEditModel">
             <AdditionalContent>
                 <DivRowCol3>
                     <Content>
-                        <GloveTypeDropDown SelectedValue="ViewModel.GloveTypeId"
-                                           SelectionChanged="(p) => ViewModel.GloveTypeId = p"
-                                           Sport="@ViewModel.Sport" />
+                        <GloveTypeDropDown SelectedValue="EditModel.GloveTypeId"
+                                           SelectionChanged="(p) => EditModel.GloveTypeId = p"
+                                           Sport="@EditModel.Sport" />
                     </Content>
                 </DivRowCol3>
             </AdditionalContent>

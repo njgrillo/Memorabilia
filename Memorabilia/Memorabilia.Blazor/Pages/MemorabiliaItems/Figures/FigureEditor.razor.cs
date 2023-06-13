@@ -1,31 +1,32 @@
 ﻿namespace Memorabilia.Blazor.Pages.MemorabiliaItems.Figures;
 
-public partial class FigureEditor : MemorabiliaItem<FigureEditModel>
+public partial class FigureEditor 
+    : MemorabiliaItem<FigureEditModel>
 {
     [Inject]
     public FigureValidator Validator { get; set; }
 
     protected async Task OnLoad()
     {
-        var viewModel = await QueryRouter.Send(new GetMemorabiliaItem(MemorabiliaId));
+        Entity.Memorabilia memorabilia = await QueryRouter.Send(new GetMemorabiliaItem(MemorabiliaId));
 
-        if (viewModel.Brand == null)
+        if (memorabilia.Brand == null)
             return;
 
-        ViewModel = new FigureEditModel(new FigureModel(viewModel));
+        EditModel = new(new FigureModel(memorabilia));
     }
 
     protected async Task OnSave()
     {
-        var command = new SaveFigure.Command(ViewModel);
+        var command = new SaveFigure.Command(EditModel);
 
-        ViewModel.ValidationResult = Validator.Validate(command);
+        EditModel.ValidationResult = Validator.Validate(command);
 
-        if (!ViewModel.ValidationResult.IsValid)
+        if (!EditModel.ValidationResult.IsValid)
             return;
 
         await CommandRouter.Send(command);
 
-        ViewModel.SavedSuccessfully = true;
+        EditModel.SavedSuccessfully = true;
     }
 }

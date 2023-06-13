@@ -22,13 +22,13 @@
                            MemorabiliaId="EditModel.MemorabiliaId" />
     </TimelineContent>
     <ImagePreview>
-        <PrettyBlazor.Condition Evaluation="EditModel.HasMemorabiliaImages">
+        <Condition Evaluation="EditModel.HasMemorabiliaImages">
             <Match>
                 <ImagePanel ImageNames="@EditModel.MemorabiliaImageNames"
                             PanelText="Memorabilia Images"
                             UserId="EditModel.UserId" />
             </Match>
-        </PrettyBlazor.Condition>
+        </Condition>
     </ImagePreview>
     <Content>
         <div class="d-flex justify-content-between" style="width:100%">

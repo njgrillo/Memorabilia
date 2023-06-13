@@ -3,6 +3,9 @@
 public partial class PersonProfileMain
 {
     [Inject]
+    public ImageService ImageService { get; set; }
+
+    [Inject]
     public IMediator Mediator { get; set; }
 
     [Parameter]

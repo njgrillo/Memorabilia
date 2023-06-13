@@ -4,13 +4,13 @@ public class SportLeagueLevelEditModel : EditModel
 {
     public SportLeagueLevelEditModel() { }
 
-    public SportLeagueLevelEditModel(SportLeagueLevelModel viewModel)
+    public SportLeagueLevelEditModel(SportLeagueLevelModel model)
     {
-        Abbreviation = viewModel.Abbreviation;
-        Id = viewModel.Id;
-        LevelTypeId = viewModel.LevelTypeId;
-        Name = viewModel.Name;            
-        SportId = viewModel.SportId;
+        Abbreviation = model.Abbreviation;
+        Id = model.Id;
+        LevelTypeId = model.LevelTypeId;
+        Name = model.Name;            
+        SportId = model.SportId;
     }
 
     [StringLength(10, ErrorMessage = "Abbreviation is too long.")]

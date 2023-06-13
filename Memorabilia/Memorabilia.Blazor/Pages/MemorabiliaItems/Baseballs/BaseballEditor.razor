@@ -1,57 +1,57 @@
 ﻿@inherits MemorabiliaItem<BaseballEditModel>
 
-<EditMemorabiliaPage Item="ViewModel"
+<EditMemorabiliaPage Item="EditModel"
                      OnLoad="OnLoad"
                      OnSave="OnSave"
                      TItem="BaseballEditModel">
     <Content>
         <MemorabiliaItemEditor DisplaySinglePersonSelector="true"
                                DisplayMultiTeamSelector="true"
-                               TItem="BaseballEditModel"
-                               ViewModel="ViewModel">
+                               Model="EditModel"
+                               TItem="BaseballEditModel">
             <AdditionalContent>
-                <DivRowCol3 HideColumn1="@(!ViewModel.DisplayBaseballType)"
-                            HideColumn2="@(!ViewModel.DisplayCommissioner && !ViewModel.DisplayLeaguePresident)">
+                <DivRowCol3 HideColumn1="@(!EditModel.DisplayBaseballType)"
+                            HideColumn2="@(!EditModel.DisplayCommissioner && !EditModel.DisplayLeaguePresident)">
                     <Content>
-                        <BaseballTypeDropDown GameStyleType="ViewModel.GameStyleType"
-                                              SelectedValue="ViewModel.BaseballTypeId"
-                                              SelectionChanged="(p) => ViewModel.BaseballTypeId = p" />
+                        <BaseballTypeDropDown GameStyleType="EditModel.GameStyleType"
+                                              SelectedValue="EditModel.BaseballTypeId"
+                                              SelectionChanged="(p) => EditModel.BaseballTypeId = p" />
                     </Content>
                     <ContentColumn2>
-                        <PrettyBlazor.Condition Evaluation="ViewModel.DisplayCommissioner">
+                        <Condition Evaluation="EditModel.DisplayCommissioner">
                             <Match>
-                                <CommissionerDropDown SelectedValue="@ViewModel.CommissionerId"
-                                                      SelectionChanged="(p) => ViewModel.CommissionerId = p"
+                                <CommissionerDropDown SelectedValue="@EditModel.CommissionerId"
+                                                      SelectionChanged="(p) => EditModel.CommissionerId = p"
                                                       SportLeagueLevel="SportLeagueLevel.MajorLeagueBaseball" />
                             </Match>
-                        </PrettyBlazor.Condition>
-                        <PrettyBlazor.Condition Evaluation="ViewModel.DisplayLeaguePresident">
+                        </Condition>
+                        <Condition Evaluation="EditModel.DisplayLeaguePresident">
                             <Match>
-                                <LeaguePresidentDropDown League="@ViewModel.League"
-                                                         SelectedValue="@ViewModel.LeaguePresidentId"
-                                                         SelectionChanged="(p) => ViewModel.LeaguePresidentId = p"
+                                <LeaguePresidentDropDown League="@EditModel.League"
+                                                         SelectedValue="@EditModel.LeaguePresidentId"
+                                                         SelectionChanged="(p) => EditModel.LeaguePresidentId = p"
                                                          SportLeagueLevel="SportLeagueLevel.MajorLeagueBaseball" />
                             </Match>
-                        </PrettyBlazor.Condition>
+                        </Condition>
                     </ContentColumn2>
                     <ContentColumn3>
-                        <PrettyBlazor.Condition Evaluation="ViewModel.DisplayBaseballTypeYear">
+                        <Condition Evaluation="EditModel.DisplayBaseballTypeYear">
                             <Match>
                                 <NullableIntField Label="Year"
                                                   Maximum="int.MaxValue"
-                                                  Value="ViewModel.BaseballTypeYear"
-                                                  ValueChanged="@((p) => ViewModel.BaseballTypeYear = p)" />
+                                                  Value="EditModel.BaseballTypeYear"
+                                                  ValueChanged="@((p) => EditModel.BaseballTypeYear = p)" />
                             </Match>
-                        </PrettyBlazor.Condition>
-                        <PrettyBlazor.Condition Evaluation="ViewModel.DisplayBaseballTypeAnniversary">
+                        </Condition>
+                        <Condition Evaluation="EditModel.DisplayBaseballTypeAnniversary">
                             <Match>
                                 <TextField HelperText="Example: 25th"
                                            Label="Anniversary"
                                            MaxLength="5"
-                                           SelectedText="@ViewModel.BaseballTypeAnniversary"
-                                           SelectedTextChanged="@((p) => ViewModel.BaseballTypeAnniversary = p)" />
+                                           SelectedText="@EditModel.BaseballTypeAnniversary"
+                                           SelectedTextChanged="@((p) => EditModel.BaseballTypeAnniversary = p)" />
                             </Match>
-                        </PrettyBlazor.Condition>
+                        </Condition>
                     </ContentColumn3>
                 </DivRowCol3>
             </AdditionalContent>

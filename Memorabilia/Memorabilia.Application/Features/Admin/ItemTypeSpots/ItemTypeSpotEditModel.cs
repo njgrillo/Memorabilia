@@ -4,11 +4,11 @@ public class ItemTypeSpotEditModel : EditModel
 {
     public ItemTypeSpotEditModel() { }
 
-    public ItemTypeSpotEditModel(ItemTypeSpotModel viewModel)
+    public ItemTypeSpotEditModel(ItemTypeSpotModel model)
     {
-        Id = viewModel.Id;
-        ItemType = Constant.ItemType.Find(viewModel.ItemTypeId);
-        Spot = Constant.Spot.Find(viewModel.SpotId);
+        Id = model.Id;
+        ItemType = Constant.ItemType.Find(model.ItemTypeId);
+        Spot = Constant.Spot.Find(model.SpotId);
     }
 
     public override string ExitNavigationPath 

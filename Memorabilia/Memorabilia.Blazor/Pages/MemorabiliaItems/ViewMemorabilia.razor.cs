@@ -8,11 +8,14 @@ public partial class ViewMemorabilia
     [Parameter]
     public int UserId { get; set; }
 
-    protected bool IsDetailView = true;
+    protected bool IsDetailView 
+        = true;
 
-    protected MemorabiliasModel Model = new();
+    protected MemorabiliasModel Model
+        = new();
 
-    private MemorabiliaSearchCriteria _filter = new();
+    private MemorabiliaSearchCriteria _filter 
+        = new();
 
     protected void OnFilter(MemorabiliaSearchCriteria filter)
     {

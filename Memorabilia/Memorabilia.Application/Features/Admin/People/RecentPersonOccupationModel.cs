@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Application.Features.Admin.People;
 
-public class RecentPersonOccupationModel : RecentPersonViewModel
+public class RecentPersonOccupationModel : RecentPersonModel
 {
     public int OccupationTypeId { get; private set; }
 

@@ -1,24 +1,24 @@
 ﻿@inherits MemorabiliaItem<FootballEditModel>
 
-<EditMemorabiliaPage Item="ViewModel"
+<EditMemorabiliaPage Item="EditModel"
                      OnLoad="OnLoad"
                      OnSave="OnSave" 
                      TItem="FootballEditModel">
     <Content>
         <MemorabiliaItemEditor DisplaySinglePersonSelector="true"
                                DisplaySingleTeamSelector="true"
-                               TItem="FootballEditModel"
-                               ViewModel="ViewModel">
+                               Model="EditModel"
+                               TItem="FootballEditModel">
             <AdditionalContent>
                 <DivRowCol3>
                     <Content>
-                        <FootballTypeDropDown GameStyleType="ViewModel.GameStyleType"
-                                              SelectedValue="ViewModel.FootballTypeId"
-                                              SelectionChanged="(p) => ViewModel.FootballTypeId = p" />
+                        <FootballTypeDropDown GameStyleType="EditModel.GameStyleType"
+                                              SelectedValue="EditModel.FootballTypeId"
+                                              SelectionChanged="(p) => EditModel.FootballTypeId = p" />
                     </Content>
                     <ContentColumn2>
-                        <CommissionerDropDown SelectedValue="@ViewModel.CommissionerId"
-                                              SelectionChanged="(p) => ViewModel.CommissionerId = p"
+                        <CommissionerDropDown SelectedValue="@EditModel.CommissionerId"
+                                              SelectionChanged="(p) => EditModel.CommissionerId = p"
                                               SportLeagueLevel="@SportLeagueLevel.NationalFootballLeague" />
                     </ContentColumn2>
                 </DivRowCol3>

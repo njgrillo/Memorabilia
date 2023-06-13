@@ -1,6 +1,6 @@
 ﻿@inherits MemorabiliaItem<PlayingCardEditModel>
 
-<EditMemorabiliaPage Item="ViewModel"
+<EditMemorabiliaPage Item="EditModel"
                      OnLoad="OnLoad"
                      OnSave="OnSave" 
                      TItem="PlayingCardEditModel">
@@ -11,7 +11,7 @@
                                DisplaySinglePersonSelector="true"
                                DisplaySingleSportSelector="true"
                                DisplaySingleTeamSelector="true"
-                               TItem="PlayingCardEditModel"
-                               ViewModel="ViewModel" />
+                               Model="EditModel"
+                               TItem="PlayingCardEditModel" />
     </Content>
 </EditMemorabiliaPage>

@@ -5,22 +5,22 @@ public class PersonEditModel
 {
     public PersonEditModel() { }
 
-    public PersonEditModel(PersonModel viewModel)
+    public PersonEditModel(PersonModel model)
     {
-        BirthDate = viewModel.BirthDate;
-        DeathDate = viewModel.DeathDate;
-        DisplayName = viewModel.DisplayName;
-        FirstName = viewModel.FirstName;            
-        Id = viewModel.Id;
-        LastName = viewModel.LastName;
-        LegalName = viewModel.LegalName;
-        MiddleName = viewModel.MiddleName;
-        Nickname = viewModel.Nickname;
-        Nicknames = viewModel.Nicknames.ToEditModelList();
-        PersonImageFileName = viewModel.ImageFileName;
-        ProfileName = viewModel.ProfileName;
-        Suffix = viewModel.Suffix;          
-        Teams = viewModel.Teams.ToEditModelList();
+        BirthDate = model.BirthDate;
+        DeathDate = model.DeathDate;
+        DisplayName = model.DisplayName;
+        FirstName = model.FirstName;            
+        Id = model.Id;
+        LastName = model.LastName;
+        LegalName = model.LegalName;
+        MiddleName = model.MiddleName;
+        Nickname = model.Nickname;
+        Nicknames = model.Nicknames.ToEditModelList();
+        PersonImageFileName = model.ImageFileName;
+        ProfileName = model.ProfileName;
+        Suffix = model.Suffix;          
+        Teams = model.Teams.ToEditModelList();
     }
 
     public override string BackNavigationPath 

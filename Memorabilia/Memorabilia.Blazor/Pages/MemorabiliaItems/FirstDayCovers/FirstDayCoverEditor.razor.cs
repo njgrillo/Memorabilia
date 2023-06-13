@@ -7,25 +7,25 @@ public partial class FirstDayCoverEditor : MemorabiliaItem<FirstDayCoverEditMode
 
     protected async Task OnLoad()
     {
-        var viewModel = await QueryRouter.Send(new GetMemorabiliaItem(MemorabiliaId));
+        Entity.Memorabilia memorabilia = await QueryRouter.Send(new GetMemorabiliaItem(MemorabiliaId));
 
-        if (viewModel.Size == null)
+        if (memorabilia.Size == null)
             return;
 
-        ViewModel = new FirstDayCoverEditModel(new FirstDayCoverModel(viewModel));
+        EditModel = new(new FirstDayCoverModel(memorabilia));
     }
 
     protected async Task OnSave()
     {
-        var command = new SaveFirstDayCover.Command(ViewModel);
+        var command = new SaveFirstDayCover.Command(EditModel);
 
-        ViewModel.ValidationResult = Validator.Validate(command);
+        EditModel.ValidationResult = Validator.Validate(command);
 
-        if (!ViewModel.ValidationResult.IsValid)
+        if (!EditModel.ValidationResult.IsValid)
             return;
 
         await CommandRouter.Send(command);
 
-        ViewModel.SavedSuccessfully = true;
+        EditModel.SavedSuccessfully = true;
     }
 }

@@ -1,6 +1,6 @@
 ﻿@inherits MemorabiliaItem<TicketEditModel>
 
-<EditMemorabiliaPage Item="ViewModel"
+<EditMemorabiliaPage Item="EditModel"
                      OnLoad="OnLoad"
                      OnSave="OnSave" 
                      TItem="TicketEditModel">
@@ -12,7 +12,7 @@
                                DisplaySingleSportSelector="true"
                                DisplayMultiTeamSelector="true"
                                GameDateDisplayText="Event Date"
-                               TItem="TicketEditModel"
-                               ViewModel="ViewModel" />
+                               Model="EditModel"
+                               TItem="TicketEditModel" />
     </Content>
 </EditMemorabiliaPage>

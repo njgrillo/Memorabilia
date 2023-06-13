@@ -4,6 +4,9 @@ public partial class PewterEditor
     : EditItem<PewterEditModel, PewterModel>
 {
     [Inject]
+    public ImageService ImageService { get; set; }
+
+    [Inject]
     public ILogger<PewterEditor> Logger { get; set; }
 
     private bool _hasImage;
@@ -25,26 +28,16 @@ public partial class PewterEditor
 
     private async Task LoadFile(InputFileChangeEventArgs e)
     {
-        IBrowserFile file = e.File;
-
         try
         {
-            if (!Directory.Exists(ImagePath.PewterImageRootPath))
-                Directory.CreateDirectory(ImagePath.PewterImageRootPath);
-
-            string fileName = Path.GetRandomFileName();
-            string path = Path.Combine(ImagePath.PewterImageRootPath, fileName);
-
-            await using FileStream fs = new(path, FileMode.Create);
-            await file.OpenReadStream(5120000).CopyToAsync(fs);
-
-            EditModel.FileName = fileName;
-            _hasImage = true;
+            EditModel.FileName = await ImageService.LoadFile(e.File, Enum.ImageRootType.Pewter);            
         }
         catch (Exception ex)
         {
-            Logger.LogError("File: {Filename} Error: {Error}", file.Name, ex.Message);
+            Logger.LogError("File: {Filename} Error: {Error}", e.File.Name, ex.Message);
         }
+
+        _hasImage = true;
     }
 
     private void Remove()

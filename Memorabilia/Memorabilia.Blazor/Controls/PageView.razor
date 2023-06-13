@@ -1,12 +1,12 @@
 ﻿<Page OnLoad="Load">
     <Content>
-        <PrettyBlazor.Condition Evaluation="@DisplayPageHeader">
+        <Condition Evaluation="@DisplayPageHeader">
             <Match>
                 <PageHeader PageTitle="@PageTitle" />
             </Match>
-        </PrettyBlazor.Condition>
+        </Condition>
         @Content
-        <PrettyBlazor.Condition Evaluation="@DisplayAddButton">
+        <Condition Evaluation="@DisplayAddButton">
             <Match>
                 <DivRowCol12Center>
                     <Content>
@@ -18,7 +18,7 @@
                     </Content>
                 </DivRowCol12Center>
             </Match>
-        </PrettyBlazor.Condition>
+        </Condition>
         <PageFooter NavigationPath="@NavigationPath"
                     NavigationPathText="@NavigationPathText" />
     </Content>

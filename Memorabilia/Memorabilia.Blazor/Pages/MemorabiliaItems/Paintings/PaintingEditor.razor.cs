@@ -7,25 +7,25 @@ public partial class PaintingEditor : MemorabiliaItem<PaintingEditModel>
 
     protected async Task OnLoad()
     {
-        var viewModel = await QueryRouter.Send(new GetMemorabiliaItem(MemorabiliaId));
+        Entity.Memorabilia memorabilia = await QueryRouter.Send(new GetMemorabiliaItem(MemorabiliaId));
 
-        if (viewModel.Brand == null)
+        if (memorabilia.Brand == null)
             return;
 
-        ViewModel = new PaintingEditModel(new PaintingModel(viewModel));
+        EditModel = new(new PaintingModel(memorabilia));
     }
 
     protected async Task OnSave()
     {
-        var command = new SavePainting.Command(ViewModel);
+        var command = new SavePainting.Command(EditModel);
 
-        ViewModel.ValidationResult = Validator.Validate(command);
+        EditModel.ValidationResult = Validator.Validate(command);
 
-        if (!ViewModel.ValidationResult.IsValid)
+        if (!EditModel.ValidationResult.IsValid)
             return;
 
         await CommandRouter.Send(command);
 
-        ViewModel.SavedSuccessfully = true;
+        EditModel.SavedSuccessfully = true;
     }
 }

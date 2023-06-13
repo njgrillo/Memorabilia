@@ -4,11 +4,11 @@ public class ItemTypeSizeEditModel : EditModel
 {
     public ItemTypeSizeEditModel() { }
 
-    public ItemTypeSizeEditModel(ItemTypeSizeModel viewModel)
+    public ItemTypeSizeEditModel(ItemTypeSizeModel model)
     {
-        Id = viewModel.Id;
-        ItemType = Constant.ItemType.Find(viewModel.ItemTypeId);
-        Size = Constant.Size.Find(viewModel.SizeId);
+        Id = model.Id;
+        ItemType = Constant.ItemType.Find(model.ItemTypeId);
+        Size = Constant.Size.Find(model.SizeId);
     }
 
     public override string ExitNavigationPath 

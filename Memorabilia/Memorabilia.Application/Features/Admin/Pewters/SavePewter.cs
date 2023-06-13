@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Application.Features.Admin.Pewters;
 
-public record SavePewter(PewterEditModel ViewModel) : ICommand
+public record SavePewter(PewterEditModel EditModel) : ICommand
 {
     public class Handler : CommandHandler<SavePewter>
     {
@@ -15,33 +15,33 @@ public record SavePewter(PewterEditModel ViewModel) : ICommand
         {
             Entity.Pewter pewter;
 
-            if (request.ViewModel.IsNew)
+            if (request.EditModel.IsNew)
             {
-                pewter = new Entity.Pewter(request.ViewModel.Franchise.Id,
-                                           request.ViewModel.TeamId,
-                                           request.ViewModel.SizeId,
-                                           !request.ViewModel.FileName.IsNullOrEmpty() ? Constant.ImageType.Primary.Id : null,
-                                           request.ViewModel.FileName);
+                pewter = new Entity.Pewter(request.EditModel.Franchise.Id,
+                                           request.EditModel.TeamId,
+                                           request.EditModel.SizeId,
+                                           !request.EditModel.FileName.IsNullOrEmpty() ? Constant.ImageType.Primary.Id : null,
+                                           request.EditModel.FileName);
 
                 await _pewterRepository.Add(pewter);
 
                 return;
             }
 
-            pewter = await _pewterRepository.Get(request.ViewModel.Id);
+            pewter = await _pewterRepository.Get(request.EditModel.Id);
 
-            if (request.ViewModel.IsDeleted)
+            if (request.EditModel.IsDeleted)
             {
                 await _pewterRepository.Delete(pewter);
 
                 return;
             }
 
-            pewter.Set(request.ViewModel.Franchise.Id,
-                       request.ViewModel.TeamId,
-                       request.ViewModel.SizeId,
-                       !request.ViewModel.FileName.IsNullOrEmpty() ? Constant.ImageType.Primary.Id : null,
-                       request.ViewModel.FileName);
+            pewter.Set(request.EditModel.Franchise.Id,
+                       request.EditModel.TeamId,
+                       request.EditModel.SizeId,
+                       !request.EditModel.FileName.IsNullOrEmpty() ? Constant.ImageType.Primary.Id : null,
+                       request.EditModel.FileName);
 
             await _pewterRepository.Update(pewter);
         }

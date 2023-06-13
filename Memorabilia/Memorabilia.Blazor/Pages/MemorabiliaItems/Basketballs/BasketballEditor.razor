@@ -1,6 +1,6 @@
 ﻿@inherits MemorabiliaItem<BasketballEditModel>
 
-<EditMemorabiliaPage Item="ViewModel"
+<EditMemorabiliaPage Item="EditModel"
                      OnLoad="OnLoad"
                      OnSave="OnSave" 
                      TItem="BasketballEditModel">
@@ -8,18 +8,18 @@
         <MemorabiliaItemEditor DisplayItemTypeGameStyle="true" 
                                DisplaySinglePersonSelector="true"
                                DisplaySingleTeamSelector="true"
-                               TItem="BasketballEditModel"
-                               ViewModel="ViewModel">
+                               Model="EditModel"
+                               TItem="BasketballEditModel">
             <AdditionalContent>
                 <DivRowCol3>
                     <Content>
-                        <BasketballTypeDropDown GameStyleType="@ViewModel.GameStyleType"
-                                                SelectedValue="@ViewModel.BasketballTypeId"
-                                                SelectionChanged="(p) => ViewModel.BasketballTypeId = p" />
+                        <BasketballTypeDropDown GameStyleType="@EditModel.GameStyleType"
+                                                SelectedValue="@EditModel.BasketballTypeId"
+                                                SelectionChanged="(p) => EditModel.BasketballTypeId = p" />
                     </Content>
                     <ContentColumn2>
-                        <CommissionerDropDown SelectedValue="@ViewModel.CommissionerId"
-                                              SelectionChanged="(p) => ViewModel.CommissionerId = p"
+                        <CommissionerDropDown SelectedValue="@EditModel.CommissionerId"
+                                              SelectionChanged="(p) => EditModel.CommissionerId = p"
                                               SportLeagueLevel="@SportLeagueLevel.NationalBasketballAssociation" />
                     </ContentColumn2>
                 </DivRowCol3>

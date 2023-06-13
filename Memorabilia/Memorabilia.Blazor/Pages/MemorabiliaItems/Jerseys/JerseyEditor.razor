@@ -1,6 +1,6 @@
 ﻿@inherits MemorabiliaItem<JerseyEditModel>
 
-<EditMemorabiliaPage Item="ViewModel"
+<EditMemorabiliaPage Item="EditModel"
                      OnLoad="OnLoad"
                      OnSave="OnSave" 
                      TItem="JerseyEditModel">
@@ -8,22 +8,22 @@
         <MemorabiliaItemEditor DisplayMultiPersonSelector="true"
                                DisplayMultiTeamSelector="true"
                                DisplaySingleSportSelector="true"
-                               TItem="JerseyEditModel"
-                               ViewModel="ViewModel">
+                               Model="EditModel"
+                               TItem="JerseyEditModel">
             <AdditionalContent>
                 <DivRowCol3>
                     <Content>
-                        <JerseyQualityTypeDropDown SelectedValue="ViewModel.JerseyQualityTypeId"
-                                                   SelectionChanged="(p) => ViewModel.JerseyQualityTypeId = p" />
+                        <JerseyQualityTypeDropDown SelectedValue="EditModel.JerseyQualityTypeId"
+                                                   SelectionChanged="(p) => EditModel.JerseyQualityTypeId = p" />
                     </Content>
                     <ContentColumn2>
-                        <JerseyTypeDropDown GameStyleType="ViewModel.GameStyleType"
-                                            SelectedValue="ViewModel.JerseyTypeId"
-                                            SelectionChanged="(p) => ViewModel.JerseyTypeId = p" />
+                        <JerseyTypeDropDown GameStyleType="EditModel.GameStyleType"
+                                            SelectedValue="EditModel.JerseyTypeId"
+                                            SelectionChanged="(p) => EditModel.JerseyTypeId = p" />
                     </ContentColumn2>
                     <ContentColumn3>
-                        <JerseyStyleTypeDropDown SelectedValue="ViewModel.JerseyStyleTypeId"
-                                                 SelectionChanged="(p) => ViewModel.JerseyStyleTypeId = p" />
+                        <JerseyStyleTypeDropDown SelectedValue="EditModel.JerseyStyleTypeId"
+                                                 SelectionChanged="(p) => EditModel.JerseyStyleTypeId = p" />
                     </ContentColumn3>
                 </DivRowCol3>
             </AdditionalContent>

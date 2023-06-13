@@ -1,6 +1,6 @@
 ﻿@inherits MemorabiliaItem<GuitarEditModel>
 
-<EditMemorabiliaPage Item="ViewModel"
+<EditMemorabiliaPage Item="EditModel"
                      OnLoad="OnLoad"
                      OnSave="OnSave" 
                      TItem="GuitarEditModel">
@@ -8,7 +8,7 @@
         <MemorabiliaItemEditor DisplayItemTypeGameStyle="false"
                                DisplayItemTypeLevel="false"
                                DisplayMultiPersonSelector="true"
-                               TItem="GuitarEditModel"
-                               ViewModel="ViewModel" />
+                               Model="EditModel"
+                               TItem="GuitarEditModel" />
     </Content>
 </EditMemorabiliaPage>

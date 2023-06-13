@@ -7,25 +7,22 @@ public partial class AutographImageEditor
     public ISnackbar Snackbar { get; set; }
 
     [Parameter]
-    public string UploadPath { get; set; }
-
-    [Parameter]
     public int UserId { get; set; }
 
     private EditImages<AutographImagesEditModel> EditImages;
 
     protected async Task OnImport()
     {
-        var memorabliaImagesViewModel 
+        var model 
             = new MemorabiliaImagesModel(await QueryRouter.Send(new GetMemorabiliaImages(Model.MemorabiliaId)));
 
         List<Entity.AutographImage> images 
-            = memorabliaImagesViewModel.Images
-                                       .Select(image => new Entity.AutographImage(Model.AutographId,
-                                                                                  image.FileName,
-                                                                                  image.ImageTypeId,
-                                                                                  image.UploadDate))
-                                       .ToList();
+            = model.Images
+                   .Select(image => new Entity.AutographImage(Model.AutographId,
+                                                              image.FileName,
+                                                              image.ImageTypeId,
+                                                              image.UploadDate))
+                   .ToList();
 
         Model = new AutographImagesEditModel(images, 
                                              Model.ItemType,

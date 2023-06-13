@@ -33,24 +33,31 @@ public partial class MemorabiliaDetailGrid
     public EventCallback<List<MemorabiliaModel>> MemorabiliaSelected { get; set; }
 
     [Parameter]
-    public List<MemorabiliaModel> SelectedMemorabilia { get; set; } = new();
+    public List<MemorabiliaModel> SelectedMemorabilia { get; set; } 
+        = new();
 
     [Parameter]
-    public bool ShowActions { get; set; } = true;
+    public bool ShowActions { get; set; } 
+        = true;
 
     [Parameter]
     public int UserId { get; set; }
 
-    protected MemorabiliasModel Model = new();
+    protected MemorabiliasModel Model 
+        = new();
 
     protected string SelectAllButtonText
         => Model.MemorabiliaItems.Count == SelectedMemorabilia.Count
            ? "Deselect All"
            : "Select All";        
 
-    private MemorabiliaSearchCriteria _filter = new();
+    private MemorabiliaSearchCriteria _filter
+        = new();
+
     private bool _resetPaging;
-    private MudTable<MemorabiliaModel> _table = new();
+
+    private MudTable<MemorabiliaModel> _table 
+        = new();
 
     protected override async Task OnParametersSetAsync()
     {
@@ -71,12 +78,12 @@ public partial class MemorabiliaDetailGrid
                                            .SelectMany(item => item.Autographs)
                                            .Single(autograph => autograph.Id == id);
 
-        var viewModel = new AutographEditModel(itemToDelete)
+        var editModel = new AutographEditModel(itemToDelete)
         {
             IsDeleted = true
         };
 
-        await CommandRouter.Send(new SaveAutograph.Command(viewModel));
+        await CommandRouter.Send(new SaveAutograph.Command(editModel));
 
         MemorabiliaModel memorabiliaItem 
             = Model.MemorabiliaItems.First(item => item.Id == itemToDelete.MemorabiliaId);
@@ -89,12 +96,13 @@ public partial class MemorabiliaDetailGrid
     protected async Task DeleteMemorabiliaItem(int id)
     {
         MemorabiliaModel itemToDelete = Model.MemorabiliaItems.Single(item => item.Id == id);
-        var viewModel = new MemorabiliaEditModel(itemToDelete)
+
+        var editModel = new MemorabiliaEditModel(itemToDelete)
         {
             IsDeleted = true
         };
 
-        await CommandRouter.Send(new SaveMemorabiliaItem.Command(viewModel));
+        await CommandRouter.Send(new SaveMemorabiliaItem.Command(editModel));
 
         Model.MemorabiliaItems.Remove(itemToDelete);
 

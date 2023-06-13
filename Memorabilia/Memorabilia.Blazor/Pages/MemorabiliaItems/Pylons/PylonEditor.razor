@@ -1,13 +1,13 @@
 ﻿@inherits MemorabiliaItem<PylonEditModel>
 
-<EditMemorabiliaPage Item="ViewModel"
+<EditMemorabiliaPage Item="EditModel"
                      OnLoad="OnLoad"
                      OnSave="OnSave" 
                      TItem="PylonEditModel">
     <Content>
         <MemorabiliaItemEditor DisplayItemTypeBrand="false"
                                DisplaySingleTeamSelector="true"
-                               TItem="PylonEditModel"
-                               ViewModel="ViewModel" />
+                               Model="EditModel"
+                               TItem="PylonEditModel" />
     </Content>
 </EditMemorabiliaPage>

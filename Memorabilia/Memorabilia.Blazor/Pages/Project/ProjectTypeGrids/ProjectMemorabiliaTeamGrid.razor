@@ -92,7 +92,7 @@
                               Elevation="5"
                               Height="75"
                               ObjectFit="@ObjectFit.Cover"
-                              Src="@(ImageService.GetUserImageData(projectMemorabiliaTeam.MemorabiliaFileName, projectMemorabiliaTeam.UserId))"
+                              Src="@(ImageService.GetUserImageData(projectMemorabiliaTeam.MemorabiliaFileName))"
                               Width="75" />
                 </Match>
             </Condition>
@@ -175,7 +175,7 @@
                               Elevation="5"
                               Height="75"
                               ObjectFit="@ObjectFit.Cover"                              
-                              Src="@(ImageService.GetUserImageData(context.MemorabiliaFileName, context.UserId))"
+                              Src="@(ImageService.GetUserImageData(context.MemorabiliaFileName))"
                               Width="75" />                      
                 </Match>
             </Condition>            

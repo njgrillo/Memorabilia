@@ -9,28 +9,28 @@ public class GloveEditModel : MemorabiliaItemEditModel
         SizeId = Constant.Size.Standard.Id;
     }
 
-    public GloveEditModel(GloveModel viewModel)
+    public GloveEditModel(GloveModel model)
     {
-        BrandId = viewModel.Brand.BrandId;
-        GameDate = viewModel.Game?.GameDate;
-        GameStyleTypeId = viewModel.Game?.GameStyleTypeId ?? 0;
-        GloveTypeId = viewModel.Glove?.GloveTypeId ?? 0;
-        LevelTypeId = viewModel.Level.LevelTypeId;
-        MemorabiliaId = viewModel.MemorabiliaId;
+        BrandId = model.Brand.BrandId;
+        GameDate = model.Game?.GameDate;
+        GameStyleTypeId = model.Game?.GameStyleTypeId ?? 0;
+        GloveTypeId = model.Glove?.GloveTypeId ?? 0;
+        LevelTypeId = model.Level.LevelTypeId;
+        MemorabiliaId = model.MemorabiliaId;
 
-        People = viewModel.People
-                          .Select(person => person.Person.ToEditModel())
-                          .ToList();
+        People = model.People
+                      .Select(person => person.Person.ToEditModel())
+                      .ToList();
 
-        SizeId = viewModel.Size.SizeId;
+        SizeId = model.Size.SizeId;
 
-        SportId = viewModel.Sports
-                           .Select(x => x.SportId)
-                           .FirstOrDefault();
+        SportId = model.Sports
+                       .Select(x => x.SportId)
+                       .FirstOrDefault();
 
-        Teams = viewModel.Teams
-                         .Select(team => team.Team.ToEditModel())
-                         .ToList();
+        Teams = model.Teams
+                     .Select(team => team.Team.ToEditModel())
+                     .ToList();
     }
 
     public override bool DisplayGameDate

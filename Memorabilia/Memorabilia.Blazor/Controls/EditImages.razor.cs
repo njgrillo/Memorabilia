@@ -3,6 +3,9 @@
 public partial class EditImages<TItem> 
 {
     [Inject]
+    public ImageService ImageService { get; set; }
+
+    [Inject]
     public ILogger<EditImages<TItem>> Logger { get; set; }
 
     [Inject]
@@ -22,9 +25,6 @@ public partial class EditImages<TItem>
 
     [Parameter]
     public string ExitNavigationPath { get; set; }
-
-    [Parameter]
-    public string ImageRootPath { get; set; }
 
     [Parameter]
     public List<ImageEditModel> Images { get; set; }
@@ -55,14 +55,12 @@ public partial class EditImages<TItem>
     public string PageTitle { get; set; }
 
     [Parameter]
-    public bool ReplaceImages { get; set; } = true;
+    public bool ReplaceImages { get; set; } 
+        = true;
 
     [Parameter]
     public string SaveButtonText { get; set; } 
         = "Save & Continue";
-
-    [Parameter]
-    public string UploadPath { get; set; }
 
     [Parameter]
     public int UserId { get; set; }
@@ -76,10 +74,7 @@ public partial class EditImages<TItem>
     {
         foreach (ImageEditModel image in Images.Where(image => image.IsNew))
         {
-            string filePath = Path.Combine(ImageRootPath, image.FileName);
-
-            if (File.Exists(filePath))
-                File.Delete(filePath);
+            ImageService.DeleteImage(Enum.ImageRootType.User, image.FileName);
         }
 
         Images = new List<ImageEditModel>();
@@ -152,18 +147,11 @@ public partial class EditImages<TItem>
             ? ImageType.Primary 
             : ImageType.Secondary;
 
-        if (!Directory.Exists(UploadPath))
-            Directory.CreateDirectory(UploadPath);
-
         foreach (IBrowserFile file in _files)
         {
             try
-            {   
-                string fileName = Path.GetRandomFileName();
-                string path = Path.Combine(UploadPath, fileName);
-
-                await using FileStream fs = new(path, FileMode.Create);
-                await file.OpenReadStream(MaximumFileSize).CopyToAsync(fs);
+            {
+                string fileName = await ImageService.LoadFile(file, Enum.ImageRootType.User);
 
                 images.Add(new ImageEditModel(new ImageModel(new Entity.Image(fileName, imageType.Id))));
 

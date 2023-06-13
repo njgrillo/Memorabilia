@@ -61,5 +61,5 @@ public partial class MemorabiliaItemEditor<TItem> where TItem
         = "Game Style";
 
     [Parameter]
-    public TItem ViewModel { get; set; }
+    public TItem Model { get; set; }
 }
