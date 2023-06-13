@@ -23,9 +23,6 @@ public partial class MemorabiliaItemGallerySubCard
     [Parameter]
     public string TooltipText { get; set; }
 
-    [Parameter]
-    public int UserId { get; set; }
-
     protected void OnEditClick()
     {
         NavigationManager.NavigateTo(EditNavigationPath);

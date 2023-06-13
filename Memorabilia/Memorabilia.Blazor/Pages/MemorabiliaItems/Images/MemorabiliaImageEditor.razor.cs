@@ -19,9 +19,6 @@ public partial class MemorabiliaImageEditor
 
     [Parameter]
     public int MemorabiliaId { get; set; }
-
-    [Parameter]
-    public int UserId { get; set; }
     
     private EditImages<MemorabiliaImagesEditModel> EditImages;
 

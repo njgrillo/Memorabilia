@@ -30,9 +30,6 @@ public partial class CollectionMemorabiliaDetailGrid
     public List<MemorabiliaModel> SelectedMemorabilia { get; set; } 
         = new();
 
-    [Parameter]
-    public int UserId { get; set; }
-
     protected MemorabiliasModel Model 
         = new();
 

@@ -3,6 +3,9 @@
 public partial class ManageDashboard
 {
     [Inject]
+    public IApplicationStateService ApplicationStateService { get; set; }
+
+    [Inject]
     public CommandRouter CommandRouter { get; set; }
 
     [Inject]
@@ -13,9 +16,6 @@ public partial class ManageDashboard
 
     [Inject]
     public ISnackbar Snackbar { get; set; }
-
-    [Parameter]
-    public int UserId { get; set; }
 
     private string SelectAllButtonText
         => Model != null && Model.AllItemsSelected
@@ -33,17 +33,11 @@ public partial class ManageDashboard
         Snackbar.Add($"{Model.PageTitle} was saved successfully!", Severity.Success);
     }
 
-    protected async Task OnLoad()
+    protected void OnLoad()
     {
-        if (UserId == 0)
-            NavigationManager.NavigateTo("Login");
-
-        Entity.User user = await QueryRouter.Send(new GetUserById(UserId));
-
         Model 
-            = new UserDashboardEditModel(new UserDashboardsModel(user.Id,
-                                                                 user.DashboardItems
-                                                                     .OrderBy(dashboardItem => DashboardItem.Find(dashboardItem.DashboardItemId).Name)));
+            = new UserDashboardEditModel(new UserDashboardsModel(ApplicationStateService.CurrentUser.Id,
+                                                                 ApplicationStateService.CurrentUser.DashboardItems.OrderBy(dashboardItem => DashboardItem.Find(dashboardItem.DashboardItemId).Name)));
     }
 
     protected void OnSelectAll()

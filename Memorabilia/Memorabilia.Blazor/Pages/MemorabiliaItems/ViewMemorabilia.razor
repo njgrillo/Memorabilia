@@ -14,12 +14,10 @@
             <Content>
                 <Condition Evaluation="IsDetailView">
                     <Match>
-                        <MemorabiliaDetailGrid Filter="_filter"
-                                               UserId="UserId" />
+                        <MemorabiliaDetailGrid Filter="_filter" />
                     </Match>
                     <NotMatch>
-                        <MemorabiliaGalleryGrid Filter="_filter"
-                                                UserId="@UserId" />
+                        <MemorabiliaGalleryGrid Filter="_filter" />
                     </NotMatch>
                 </Condition>                
             </Content>

@@ -13,14 +13,14 @@ public partial class ViewDashboard
 
     protected async Task OnLoad()
     {
-        Model = await QueryRouter.Send(new GetDashboard(UserId));
+        Model = await QueryRouter.Send(new GetDashboard());
     }
 
     private static Type GetComponent(DashboardItem dashboardItem)
         => Type.GetType($"Memorabilia.Blazor.Pages.Dashboard.Items.{dashboardItem}");
 
     private Dictionary<string, object> GetParameters(DashboardItem dashboardItem)
-        => new Dictionary<string, object>
+        => new()
             {
                 { "DashboardItem", dashboardItem },
                 { "UserId", UserId }

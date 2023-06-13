@@ -24,9 +24,12 @@
     <ImagePreview>
         <Condition Evaluation="EditModel.HasMemorabiliaImages">
             <Match>
-                <ImagePanel ImageNames="@EditModel.MemorabiliaImageNames"
-                            PanelText="Memorabilia Images"
-                            UserId="EditModel.UserId" />
+                <DivRowCol12Center>
+                    <Content>
+                        <ViewMemorabiliaImagesButton MemorabiliaId="EditModel.MemorabiliaId"
+                                                     UserId="EditModel.UserId" />
+                    </Content>                    
+                </DivRowCol12Center>
             </Match>
         </Condition>
     </ImagePreview>

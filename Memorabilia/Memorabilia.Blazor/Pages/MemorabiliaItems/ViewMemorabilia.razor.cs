@@ -5,9 +5,6 @@ public partial class ViewMemorabilia
     [Inject]
     public NavigationManager NavigationManager { get; set; }
 
-    [Parameter]
-    public int UserId { get; set; }
-
     protected bool IsDetailView 
         = true;
 

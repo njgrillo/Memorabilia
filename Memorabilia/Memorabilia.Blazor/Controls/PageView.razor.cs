@@ -35,9 +35,6 @@ public partial class PageView
     [Parameter]
     public string PageTitle { get; set; }
 
-    [Parameter]
-    public int UserId { get; set; }
-
     public async Task Load()
     {
         await OnLoad.InvokeAsync();

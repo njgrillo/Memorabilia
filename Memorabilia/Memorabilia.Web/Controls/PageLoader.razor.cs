@@ -2,6 +2,9 @@
 
 public partial class PageLoader : WebPage
 {
+    [Inject]
+    public IApplicationStateService ApplicationStateService { get; set; }
+
     [Parameter]
     public RenderFragment Content { get; set; }
 
@@ -21,6 +24,9 @@ public partial class PageLoader : WebPage
             NavigationManager.NavigateTo("Login");
 
         UserId = userId.Value;
+
+        if (ApplicationStateService.CurrentUser == null)
+            await ApplicationStateService.Load(UserId);
 
         await OnLoad.InvokeAsync();
 

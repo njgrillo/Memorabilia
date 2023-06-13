@@ -2,15 +2,12 @@
 
 public class CollectionAutoComplete : Autocomplete<Entity.Collection>
 {
-    [Parameter]
-    public int UserId { get; set; }
-
     protected Entity.Collection[] Items { get; set; } 
         = Array.Empty<Entity.Collection>();
 
     protected override async Task OnInitializedAsync()
     {
-        Items = await QueryRouter.Send(new GetCollections(UserId));
+        Items = await QueryRouter.Send(new GetCollections());
         Label = "Collections";
     }
 

@@ -6,9 +6,6 @@ public partial class AutographImageEditor
     [Inject]
     public ISnackbar Snackbar { get; set; }
 
-    [Parameter]
-    public int UserId { get; set; }
-
     private EditImages<AutographImagesEditModel> EditImages;
 
     protected async Task OnImport()

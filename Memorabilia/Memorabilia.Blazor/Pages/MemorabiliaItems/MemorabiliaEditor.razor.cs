@@ -3,6 +3,9 @@
 public partial class MemorabiliaEditor
 {
     [Inject]
+    public IApplicationStateService ApplicationStateService { get; set; }
+
+    [Inject]
     public CommandRouter CommandRouter { get; set; }
 
     [Inject]
@@ -17,9 +20,6 @@ public partial class MemorabiliaEditor
     [Parameter]
     public int Id { get; set; }
 
-    [Parameter]
-    public int UserId { get; set; }
-
     protected MemorabiliaEditModel Model 
         = new ();        
 
@@ -33,10 +33,7 @@ public partial class MemorabiliaEditor
 
     protected async Task OnSave()
     {    
-        if (UserId == 0)
-            NavigationManager.NavigateTo("Login");
-
-        Model.UserId = UserId;
+        Model.UserId = ApplicationStateService.CurrentUser.Id;
 
         var command = new SaveMemorabiliaItem.Command(Model);
 

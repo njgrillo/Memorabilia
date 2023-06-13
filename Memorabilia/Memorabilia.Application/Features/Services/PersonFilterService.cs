@@ -1,4 +1,4 @@
-﻿namespace Memorabilia.Blazor.Services;
+﻿namespace Memorabilia.Application.Features.Services;
 
 public class PersonFilterService
 {

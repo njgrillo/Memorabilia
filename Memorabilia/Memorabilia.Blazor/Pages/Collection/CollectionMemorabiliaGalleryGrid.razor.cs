@@ -14,9 +14,6 @@ public partial class CollectionMemorabiliaGalleryGrid
     [Parameter]
     public MemorabiliaSearchCriteria Filter { get; set; }
 
-    [Parameter]
-    public int UserId { get; set; }
-
     protected bool DisplayLoadMoreButton
         => Model?.PageInfo?.TotalItems > _pageSize;
 

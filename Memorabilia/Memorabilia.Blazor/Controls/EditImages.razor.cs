@@ -63,9 +63,6 @@ public partial class EditImages<TItem>
         = "Save & Continue";
 
     [Parameter]
-    public int UserId { get; set; }
-
-    [Parameter]
     public EventCallback<List<ImageEditModel>> ValueChanged { get; set; }
 
     private IReadOnlyList<IBrowserFile> _files;

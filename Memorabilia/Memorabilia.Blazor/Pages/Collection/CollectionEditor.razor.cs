@@ -3,6 +3,9 @@
 public partial class CollectionEditor
 {
     [Inject]
+    public IApplicationStateService ApplicationStateService { get; set; }
+
+    [Inject]
     public CommandRouter CommandRouter { get; set; }
 
     [Inject]
@@ -26,7 +29,8 @@ public partial class CollectionEditor
     [Parameter]
     public int UserId { get; set; }
 
-    protected bool IsDetailView = true;
+    protected bool IsDetailView 
+        = true;
 
     protected CollectionEditModel Model 
         = new();
@@ -63,7 +67,7 @@ public partial class CollectionEditor
         {
             Model = new CollectionEditModel
             {
-                UserId = UserId
+                UserId = ApplicationStateService.CurrentUser.Id
             };
 
             return;

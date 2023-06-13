@@ -3,6 +3,9 @@
 public partial class ProjectEditor
 {
     [Inject]
+    public IApplicationStateService ApplicationStateService { get; set; }
+
+    [Inject]
     public CommandRouter CommandRouter { get; set; }
 
     [Inject]
@@ -19,9 +22,6 @@ public partial class ProjectEditor
 
     [Parameter]
     public int Id { get; set; }
-
-    [Parameter]
-    public int UserId { get; set; }
 
     protected ProjectEditModel Model 
         = new();
@@ -55,7 +55,7 @@ public partial class ProjectEditor
         {
             Model = new ProjectEditModel
             {
-                UserId = UserId
+                UserId = ApplicationStateService.CurrentUser.Id
             };
 
             return;

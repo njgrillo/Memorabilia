@@ -40,9 +40,6 @@ public partial class MemorabiliaDetailGrid
     public bool ShowActions { get; set; } 
         = true;
 
-    [Parameter]
-    public int UserId { get; set; }
-
     protected MemorabiliasModel Model 
         = new();
 
@@ -61,7 +58,7 @@ public partial class MemorabiliaDetailGrid
 
     protected override async Task OnParametersSetAsync()
     {
-        if (UserId == 0 || _filter == Filter)
+        if (_filter == Filter)
             return;
 
         _resetPaging = true;
@@ -135,8 +132,8 @@ public partial class MemorabiliaDetailGrid
         var pageInfo = new PageInfo(_resetPaging ? 1 : state.Page + 1, state.PageSize);
 
         Model = Filter != null
-            ? await QueryRouter.Send(new GetMemorabiliaItemsPaged(UserId, pageInfo, Filter))
-            : await QueryRouter.Send(new GetMemorabiliaItemsPaged(UserId, pageInfo));
+            ? await QueryRouter.Send(new GetMemorabiliaItemsPaged(pageInfo, Filter))
+            : await QueryRouter.Send(new GetMemorabiliaItemsPaged(pageInfo));
 
         return new TableData<MemorabiliaModel>()
         {

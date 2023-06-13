@@ -14,15 +14,13 @@ public partial class ViewCollections
     [Inject]
     public ISnackbar Snackbar { get; set; }
 
-    [Parameter]
-    public int UserId { get; set; }
-
     protected CollectionsModel Model 
         = new();
 
     protected async Task OnLoad()
     {
-        Entity.Collection[] collections = await QueryRouter.Send(new GetCollections(UserId));
+        Entity.Collection[] collections 
+            = await QueryRouter.Send(new GetCollections());
 
         Model = new CollectionsModel(collections);
     }

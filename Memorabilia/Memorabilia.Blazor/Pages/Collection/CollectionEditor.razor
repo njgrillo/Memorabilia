@@ -49,13 +49,11 @@
                 <Match>
                     <CollectionMemorabiliaDetailGrid CollectionId="Model.Id"
                                                      Filter="_filter"
-                                                     MemorabiliaSelected="@((p) => SelectedMemorabilia = p)"
-                                                     UserId="UserId" />
+                                                     MemorabiliaSelected="@((p) => SelectedMemorabilia = p)" />
                 </Match>
                 <NotMatch>
                     <CollectionMemorabiliaGalleryGrid CollectionId="Model.Id"
-                                                      Filter="_filter"
-                                                      UserId="@UserId" />
+                                                      Filter="_filter" />
                 </NotMatch>
             </Condition>
         </div>

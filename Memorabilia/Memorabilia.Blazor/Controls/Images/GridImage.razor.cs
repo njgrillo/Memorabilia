@@ -17,16 +17,12 @@ public partial class GridImage
     [Parameter]
     public string NavigationPath { get; set; }
 
-    [Parameter]
-    public int UserId { get; set; }
-
     protected string ImageData { get; set; }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
         if (!ImageData.IsNullOrEmpty() || 
-            ImageFileName.IsNullOrEmpty() || 
-            UserId == 0)
+            ImageFileName.IsNullOrEmpty())
             return;
 
         ImageData = ImageService.GetUserImageData(ImageFileName);

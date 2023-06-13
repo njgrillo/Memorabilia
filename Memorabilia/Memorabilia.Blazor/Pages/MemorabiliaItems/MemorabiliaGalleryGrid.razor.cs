@@ -11,9 +11,6 @@ public partial class MemorabiliaGalleryGrid
     [Parameter]
     public MemorabiliaSearchCriteria Filter { get; set; }
 
-    [Parameter]
-    public int UserId { get; set; }
-
     protected bool DisplayLoadMoreButton 
         => Model?.PageInfo?.TotalItems > _pageSize;
 
@@ -57,8 +54,8 @@ public partial class MemorabiliaGalleryGrid
         var pageInfo = new PageInfo(pageNumber, _pageSize);
 
         Model = _filter != null
-            ? await QueryRouter.Send(new GetMemorabiliaGalleryItems(UserId, pageInfo, _filter))
-            : await QueryRouter.Send(new GetMemorabiliaGalleryItems(UserId, pageInfo));
+            ? await QueryRouter.Send(new GetMemorabiliaGalleryItems(pageInfo, _filter))
+            : await QueryRouter.Send(new GetMemorabiliaGalleryItems(pageInfo));
 
         if (resetItems)
             _items = new();

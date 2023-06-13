@@ -1,4 +1,4 @@
-﻿namespace Memorabilia.Blazor.Services.Interfaces;
+﻿namespace Memorabilia.Application.Features.Services.Interfaces;
 
 public interface IApplicationStateService
 {

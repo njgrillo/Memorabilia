@@ -14,14 +14,12 @@ public partial class ViewProjects
     [Inject]
     public ISnackbar Snackbar { get; set; }
 
-    [Parameter]
-    public int UserId { get; set; }
-
-    protected ProjectsModel Model = new();
+    protected ProjectsModel Model 
+        = new();
 
     protected async Task OnLoad()
     {
-        Model = new ProjectsModel(await QueryRouter.Send(new GetProjects(UserId)));
+        Model = new ProjectsModel(await QueryRouter.Send(new GetProjects()));
     }
 
     protected async Task ShowDeleteConfirm(int id)
