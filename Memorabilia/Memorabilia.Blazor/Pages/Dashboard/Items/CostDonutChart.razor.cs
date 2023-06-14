@@ -7,7 +7,7 @@ public partial class CostDonutChart : DashboardChartItem
 
     protected override async Task OnInitializedAsync()
     {
-        DashboardChartModel model = await Mediator.Send(new GetCostData(UserId));
+        DashboardChartModel model = await Mediator.Send(new GetCostData());
 
         Data = model.Data;
         Labels = model.Labels;

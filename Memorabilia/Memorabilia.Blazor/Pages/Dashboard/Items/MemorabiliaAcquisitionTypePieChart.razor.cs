@@ -7,7 +7,7 @@ public partial class MemorabiliaAcquisitionTypePieChart : DashboardChartItem
 
     protected override async Task OnInitializedAsync()
     {
-        DashboardChartModel model = await Mediator.Send(new GetMemorabiliaAcquisitionData(UserId));
+        DashboardChartModel model = await Mediator.Send(new GetMemorabiliaAcquisitionData());
 
         Data = model.Data;
         Labels = model.Labels;

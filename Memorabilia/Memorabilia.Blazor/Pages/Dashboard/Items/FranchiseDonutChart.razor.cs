@@ -7,7 +7,7 @@ public partial class FranchiseDonutChart : DashboardChartItem
 
     protected override async Task OnInitializedAsync()
     {
-        DashboardChartModel model = await Mediator.Send(new GetFranchiseData(UserId));
+        DashboardChartModel model = await Mediator.Send(new GetFranchiseData());
 
         Data = model.Data;
         Labels = model.Labels;

@@ -1,19 +1,22 @@
 ﻿namespace Memorabilia.Application.Features.Dashboard;
 
-public record GetSportLeagueLevelData(int UserId) : IQuery<DashboardChartModel>
+public record GetSportLeagueLevelData() : IQuery<DashboardChartModel>
 {
     public class Handler : QueryHandler<GetSportLeagueLevelData, DashboardChartModel>
     {
+        private readonly IApplicationStateService _applicationStateService;
         private readonly IMemorabiliaItemRepository _repository;
 
-        public Handler(IMemorabiliaItemRepository repository)
+        public Handler(IMemorabiliaItemRepository repository, 
+                       IApplicationStateService applicationStateService)
         {
             _repository = repository;
+            _applicationStateService = applicationStateService;
         }
 
         protected override async Task<DashboardChartModel> Handle(GetSportLeagueLevelData query)
         {
-            int[] sportLeagueLevelIds = _repository.GetSportLeagueLevelIds(query.UserId);
+            int[] sportLeagueLevelIds = _repository.GetSportLeagueLevelIds(_applicationStateService.CurrentUser.Id);
             string[] sportLeagueLevelNames = sportLeagueLevelIds.Select(sportLeagueLevelId => Constant.SportLeagueLevel.Find(sportLeagueLevelId).Name)
                                                                 .Distinct()
                                                                 .ToArray();
@@ -24,7 +27,7 @@ public record GetSportLeagueLevelData(int UserId) : IQuery<DashboardChartModel>
             foreach (string sportLeagueLevelName in sportLeagueLevelNames)
             {
                 var sportLeagueLevel = Constant.SportLeagueLevel.Find(sportLeagueLevelName);
-                var count = sportLeagueLevelIds.Count(sportLeagueLevelId => sportLeagueLevelId == sportLeagueLevel.Id);
+                int count = sportLeagueLevelIds.Count(sportLeagueLevelId => sportLeagueLevelId == sportLeagueLevel.Id);
 
                 counts.Add(count);
                 labels.Add($"{sportLeagueLevelName} ({count})");

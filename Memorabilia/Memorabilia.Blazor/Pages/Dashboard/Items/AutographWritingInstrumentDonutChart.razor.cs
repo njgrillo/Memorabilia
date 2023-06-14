@@ -7,7 +7,7 @@ public partial class AutographWritingInstrumentDonutChart : DashboardChartItem
 
     protected override async Task OnInitializedAsync()
     {
-        DashboardChartModel model = await Mediator.Send(new GetWritingInstrumentData(UserId));
+        DashboardChartModel model = await Mediator.Send(new GetWritingInstrumentData());
 
         Data = model.Data;
         Labels = model.Labels;

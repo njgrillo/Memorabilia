@@ -7,7 +7,7 @@ public partial class EstimatedValuePieChart : DashboardChartItem
 
     protected override async Task OnInitializedAsync()
     {
-        DashboardChartModel model = await Mediator.Send(new GetEstimatedValueData(UserId));
+        DashboardChartModel model = await Mediator.Send(new GetEstimatedValueData());
 
         Data = model.Data;
         Labels = model.Labels;

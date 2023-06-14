@@ -1,19 +1,22 @@
 ﻿namespace Memorabilia.Application.Features.Dashboard;
 
-public record GetAutographAcquisitionData(int UserId) : IQuery<DashboardChartModel>
+public record GetAutographAcquisitionData() : IQuery<DashboardChartModel>
 {
     public class Handler : QueryHandler<GetAutographAcquisitionData, DashboardChartModel>
     {
+        private readonly IApplicationStateService _applicationStateService;
         private readonly IAutographRepository _repository;
 
-        public Handler(IAutographRepository repository)
+        public Handler(IAutographRepository repository, 
+                       IApplicationStateService applicationStateService)
         {
             _repository = repository;
+            _applicationStateService = applicationStateService;
         }
 
         protected override async Task<DashboardChartModel> Handle(GetAutographAcquisitionData query)
         {
-            int[] acquisitionTypeIds = _repository.GetAcquisitionTypeIds(query.UserId);
+            int[] acquisitionTypeIds = _repository.GetAcquisitionTypeIds(_applicationStateService.CurrentUser.Id);
             string[] acquisitionTypeNames = acquisitionTypeIds.Select(acquisitionTypeId => Constant.AcquisitionType.Find(acquisitionTypeId).Name)
                                                               .Distinct()
                                                               .ToArray();

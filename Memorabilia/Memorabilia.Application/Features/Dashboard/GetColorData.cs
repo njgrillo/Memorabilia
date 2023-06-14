@@ -1,19 +1,22 @@
 ﻿namespace Memorabilia.Application.Features.Dashboard;
 
-public record GetColorData(int UserId) : IQuery<DashboardChartModel>
+public record GetColorData() : IQuery<DashboardChartModel>
 {
     public class Handler : QueryHandler<GetColorData, DashboardChartModel>
     {
+        private readonly IApplicationStateService _applicationStateService;
         private readonly IAutographRepository _repository;
 
-        public Handler(IAutographRepository repository)
+        public Handler(IAutographRepository repository, 
+                       IApplicationStateService applicationStateService)
         {
             _repository = repository;
+            _applicationStateService = applicationStateService;
         }
 
         protected override async Task<DashboardChartModel> Handle(GetColorData query)
         {
-            int[] colorIds = _repository.GetColorIds(query.UserId);
+            int[] colorIds = _repository.GetColorIds(_applicationStateService.CurrentUser.Id);
             string[] colorNames = colorIds.Select(colorId => Constant.Color.Find(colorId).Name)
                                           .Distinct()
                                           .ToArray();
@@ -23,8 +26,8 @@ public record GetColorData(int UserId) : IQuery<DashboardChartModel>
 
             foreach (string colorName in colorNames)
             {
-                var color = Constant.Color.Find(colorName);
-                var count = colorIds.Count(colorId => colorId == color.Id);
+                Constant.Color color = Constant.Color.Find(colorName);
+                int count = colorIds.Count(colorId => colorId == color.Id);
 
                 counts.Add(count);
                 labels.Add($"{colorName} ({count})");

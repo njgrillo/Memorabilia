@@ -1,19 +1,22 @@
 ﻿namespace Memorabilia.Application.Features.Dashboard;
 
-public record GetBrandData(int UserId) : IQuery<DashboardChartModel>
+public record GetBrandData() : IQuery<DashboardChartModel>
 {
     public class Handler : QueryHandler<GetBrandData, DashboardChartModel>
     {
+        private readonly IApplicationStateService _applicationStateService;
         private readonly IMemorabiliaItemRepository _repository;
 
-        public Handler(IMemorabiliaItemRepository repository)
+        public Handler(IMemorabiliaItemRepository repository, 
+                       IApplicationStateService applicationStateService)
         {
             _repository = repository;
+            _applicationStateService = applicationStateService;
         }
 
         protected override async Task<DashboardChartModel> Handle(GetBrandData query)
         {
-            int[] brandIds = _repository.GetBrandIds(query.UserId);
+            int[] brandIds = _repository.GetBrandIds(_applicationStateService.CurrentUser.Id);
             string[] brandNames = brandIds.Select(brandId => Constant.Brand.Find(brandId).Name)
                                          .Distinct()
                                          .ToArray();

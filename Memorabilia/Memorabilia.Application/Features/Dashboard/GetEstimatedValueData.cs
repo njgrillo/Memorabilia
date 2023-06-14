@@ -1,24 +1,30 @@
 ﻿namespace Memorabilia.Application.Features.Dashboard;
 
-public record GetEstimatedValueData(int UserId) 
+public record GetEstimatedValueData() 
     : IQuery<DashboardChartModel>
 {
     public class Handler : QueryHandler<GetEstimatedValueData, DashboardChartModel>
     {
+        private readonly IApplicationStateService _applicationStateService;
         private readonly IAutographRepository _autographRepository;
         private readonly IMemorabiliaItemRepository _memorabiliaItemRepository;
 
         public Handler(IMemorabiliaItemRepository memorabiliaItemRepository, 
-            IAutographRepository autographRepository)
+                       IAutographRepository autographRepository,
+                       IApplicationStateService applicationStateService)
         {
             _autographRepository = autographRepository;
             _memorabiliaItemRepository = memorabiliaItemRepository;
+            _applicationStateService = applicationStateService;
         }
 
         protected override async Task<DashboardChartModel> Handle(GetEstimatedValueData query)
         {
-            decimal autographsEstimatedValueTotal = _autographRepository.GetEstimatedValueTotal(query.UserId);
-            decimal memorabiliaEstimatedValueTotal = _memorabiliaItemRepository.GetEstimatedValueTotal(query.UserId);
+            decimal autographsEstimatedValueTotal 
+                = _autographRepository.GetEstimatedValueTotal(_applicationStateService.CurrentUser.Id);
+
+            decimal memorabiliaEstimatedValueTotal 
+                = _memorabiliaItemRepository.GetEstimatedValueTotal(_applicationStateService.CurrentUser.Id);
 
             var labels = new List<string>() 
             { 

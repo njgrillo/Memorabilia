@@ -7,7 +7,7 @@ public partial class MemorabiliaConditionPieChart : DashboardChartItem
 
     protected override async Task OnInitializedAsync()
     {
-        DashboardChartModel model = await Mediator.Send(new GetMemorabiliaConditionData(UserId));
+        DashboardChartModel model = await Mediator.Send(new GetMemorabiliaConditionData());
 
         Data = model.Data;
         Labels = model.Labels;

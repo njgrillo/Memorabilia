@@ -7,7 +7,7 @@ public partial class ColorPieChart : DashboardChartItem
 
     protected override async Task OnInitializedAsync()
     {
-        DashboardChartModel model = await Mediator.Send(new GetColorData(UserId));
+        DashboardChartModel model = await Mediator.Send(new GetColorData());
 
         Data = model.Data;
         Labels = model.Labels;

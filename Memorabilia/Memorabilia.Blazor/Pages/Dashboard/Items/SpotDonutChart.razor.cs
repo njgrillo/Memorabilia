@@ -7,7 +7,7 @@ public partial class SpotDonutChart : DashboardChartItem
 
     protected override async Task OnInitializedAsync()
     {
-        DashboardChartModel model = await Mediator.Send(new GetSpotData(UserId));
+        DashboardChartModel model = await Mediator.Send(new GetSpotData());
 
         Data = model.Data;
         Labels = model.Labels;

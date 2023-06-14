@@ -8,7 +8,7 @@ public partial class AutographAcquisitionTypePieChart
 
     protected override async Task OnInitializedAsync()
     {
-        DashboardChartModel model = await Mediator.Send(new GetAutographAcquisitionData(UserId));
+        DashboardChartModel model = await Mediator.Send(new GetAutographAcquisitionData());
 
         Data = model.Data;
         Labels = model.Labels;

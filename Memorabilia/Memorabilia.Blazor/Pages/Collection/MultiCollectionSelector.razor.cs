@@ -6,9 +6,6 @@ public partial class MultiCollectionSelector
     public List<Entity.Collection> SelectedCollections { get; set; } 
         = new();
 
-    [Parameter]
-    public int UserId { get; set; }
-
     protected Entity.Collection SelectedCollection { get; set; }
 
     protected void Add()

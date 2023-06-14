@@ -7,7 +7,7 @@ public partial class SizeDonutChart : DashboardChartItem
 
     protected override async Task OnInitializedAsync()
     {
-        DashboardChartModel model = await Mediator.Send(new GetSizeData(UserId));
+        DashboardChartModel model = await Mediator.Send(new GetSizeData());
 
         Data = model.Data;
         Labels = model.Labels;
