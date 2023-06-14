@@ -46,10 +46,7 @@ public partial class MemorabiliaDetailGrid
     protected string SelectAllButtonText
         => Model.MemorabiliaItems.Count == SelectedMemorabilia.Count
            ? "Deselect All"
-           : "Select All";        
-
-    private MemorabiliaSearchCriteria _filter
-        = new();
+           : "Select All";      
 
     private bool _resetPaging;
 
@@ -58,11 +55,7 @@ public partial class MemorabiliaDetailGrid
 
     protected override async Task OnParametersSetAsync()
     {
-        if (_filter == Filter)
-            return;
-
         _resetPaging = true;
-        _filter = Filter;
 
         await _table.ReloadServerData();
         

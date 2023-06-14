@@ -19,9 +19,6 @@ public partial class CollectionMemorabiliaGalleryGrid
 
     protected MemorabiliaGalleryItemsModel Model;
 
-    private MemorabiliaSearchCriteria _filter 
-        = new();
-
     private List<MemorabiliaGalleryItemModel> _items 
         = new();
 
@@ -30,11 +27,6 @@ public partial class CollectionMemorabiliaGalleryGrid
 
     protected override async Task OnParametersSetAsync()
     {
-        if (_filter == Filter)
-            return;
-
-        _filter = Filter;
-
         await LoadItems(1, true);
     }
 
@@ -56,8 +48,8 @@ public partial class CollectionMemorabiliaGalleryGrid
     {
         var pageInfo = new PageInfo(pageNumber, _pageSize);
 
-        Model = _filter != null
-            ? await QueryRouter.Send(new GetCollectionMemorabiliaGalleryItems(CollectionId, pageInfo, _filter))
+        Model = Filter != null
+            ? await QueryRouter.Send(new GetCollectionMemorabiliaGalleryItems(CollectionId, pageInfo, Filter))
             : await QueryRouter.Send(new GetCollectionMemorabiliaGalleryItems(CollectionId, pageInfo));
 
         if (resetItems)
