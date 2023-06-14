@@ -1,8 +1,8 @@
 ﻿namespace Memorabilia.Application.Features.Admin.HelmetQualityTypes;
 
-public record GetHelmetQualityType(int Id) : IQuery<Entity.HelmetQualityType>
+public record GetHelmetQualityType(int Id) : IQuery<Entity.DomainEntity>
 {
-    public class Handler : QueryHandler<GetHelmetQualityType, Entity.HelmetQualityType>
+    public class Handler : QueryHandler<GetHelmetQualityType, Entity.DomainEntity>
     {
         private readonly IDomainRepository<Entity.HelmetQualityType> _helmetQualityTypeRepository;
 
@@ -11,7 +11,7 @@ public record GetHelmetQualityType(int Id) : IQuery<Entity.HelmetQualityType>
             _helmetQualityTypeRepository = helmetQualityTypeRepository;
         }
 
-        protected override async Task<Entity.HelmetQualityType> Handle(GetHelmetQualityType query)
+        protected override async Task<Entity.DomainEntity> Handle(GetHelmetQualityType query)
             => await _helmetQualityTypeRepository.Get(query.Id);
     }
 }

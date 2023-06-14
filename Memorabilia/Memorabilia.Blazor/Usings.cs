@@ -207,6 +207,7 @@ global using Memorabilia.Application.Validators.Memorabilia.Ticket;
 global using Memorabilia.Application.Validators.Memorabilia.Trunk;
 global using Memorabilia.Application.Validators.Memorabilia.WristBand;
 global using Memorabilia.Application.Validators.Project;
+global using Memorabilia.Application.Validators.User;
 global using Memorabilia.Blazor.Configuration;
 global using Memorabilia.Blazor.Controls;
 global using Memorabilia.Blazor.Controls.Buttons;

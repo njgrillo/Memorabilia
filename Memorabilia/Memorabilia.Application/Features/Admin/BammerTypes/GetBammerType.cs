@@ -1,8 +1,8 @@
 ﻿namespace Memorabilia.Application.Features.Admin.BammerTypes;
 
-public record GetBammerType(int Id) : IQuery<Entity.BammerType>
+public record GetBammerType(int Id) : IQuery<Entity.DomainEntity>
 {
-    public class Handler : QueryHandler<GetBammerType, Entity.BammerType>
+    public class Handler : QueryHandler<GetBammerType, Entity.DomainEntity>
     {
         private readonly IDomainRepository<Entity.BammerType> _bammerTypeRepository;
 
@@ -11,7 +11,7 @@ public record GetBammerType(int Id) : IQuery<Entity.BammerType>
             _bammerTypeRepository = bammerTypeRepository;
         }
 
-        protected override async Task<Entity.BammerType> Handle(GetBammerType query)
+        protected override async Task<Entity.DomainEntity> Handle(GetBammerType query)
             => await _bammerTypeRepository.Get(query.Id);
     }
 }

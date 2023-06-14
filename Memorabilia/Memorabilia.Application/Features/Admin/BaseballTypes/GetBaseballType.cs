@@ -1,8 +1,8 @@
 ﻿namespace Memorabilia.Application.Features.Admin.BaseballTypes;
 
-public record GetBaseballType(int Id) : IQuery<Entity.BaseballType>
+public record GetBaseballType(int Id) : IQuery<Entity.DomainEntity>
 {
-    public class Handler : QueryHandler<GetBaseballType, Entity.BaseballType>
+    public class Handler : QueryHandler<GetBaseballType, Entity.DomainEntity>
     {
         private readonly IDomainRepository<Entity.BaseballType> _baseballTypeRepository;
 
@@ -11,7 +11,7 @@ public record GetBaseballType(int Id) : IQuery<Entity.BaseballType>
             _baseballTypeRepository = baseballTypeRepository;
         }
 
-        protected override async Task<Entity.BaseballType> Handle(GetBaseballType query)
+        protected override async Task<Entity.DomainEntity> Handle(GetBaseballType query)
             => await _baseballTypeRepository.Get(query.Id);
     }
 }

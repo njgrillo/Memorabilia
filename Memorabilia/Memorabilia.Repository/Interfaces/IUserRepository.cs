@@ -2,5 +2,5 @@
 
 public interface IUserRepository : IDomainRepository<Entity.User>
 {
-    Task<Entity.User> Get(string username, string password);
+    Task<Entity.User> Get(string emailAddress);
 }

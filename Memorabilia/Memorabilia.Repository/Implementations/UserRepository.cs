@@ -12,6 +12,6 @@ public class UserRepository
     public override async Task<Entity.User> Get(int id)
         => await User.SingleOrDefaultAsync(user => user.Id == id);
 
-    public async Task<Entity.User> Get(string username, string password)
-        => await User.SingleOrDefaultAsync(user => user.Username == username && user.Password == password);
+    public async Task<Entity.User> Get(string emailAddress)
+        => await User.SingleOrDefaultAsync(user => user.EmailAddress == emailAddress);
 }

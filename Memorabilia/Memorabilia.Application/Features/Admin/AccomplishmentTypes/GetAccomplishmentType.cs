@@ -1,8 +1,8 @@
 ﻿namespace Memorabilia.Application.Features.Admin.AccomplishmentTypes;
 
-public record GetAccomplishmentType(int Id) : IQuery<Entity.AccomplishmentType>
+public record GetAccomplishmentType(int Id) : IQuery<Entity.DomainEntity>
 {
-    public class Handler : QueryHandler<GetAccomplishmentType, Entity.AccomplishmentType>
+    public class Handler : QueryHandler<GetAccomplishmentType, Entity.DomainEntity>
     {
         private readonly IDomainRepository<Entity.AccomplishmentType> _accomplishmentTypeRepository;
 
@@ -11,7 +11,7 @@ public record GetAccomplishmentType(int Id) : IQuery<Entity.AccomplishmentType>
             _accomplishmentTypeRepository = accomplishmentTypeRepository;
         }
 
-        protected override async Task<Entity.AccomplishmentType> Handle(GetAccomplishmentType query)
+        protected override async Task<Entity.DomainEntity> Handle(GetAccomplishmentType query)
             => await _accomplishmentTypeRepository.Get(query.Id);
     }
 }

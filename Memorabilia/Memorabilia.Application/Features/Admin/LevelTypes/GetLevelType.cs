@@ -1,8 +1,8 @@
 ﻿namespace Memorabilia.Application.Features.Admin.LevelTypes;
 
-public record GetLevelType(int Id) : IQuery<Entity.LevelType>
+public record GetLevelType(int Id) : IQuery<Entity.DomainEntity>
 {
-    public class Handler : QueryHandler<GetLevelType, Entity.LevelType>
+    public class Handler : QueryHandler<GetLevelType, Entity.DomainEntity>
     {
         private readonly IDomainRepository<Entity.LevelType> _levelTypeRepository;
 
@@ -11,7 +11,7 @@ public record GetLevelType(int Id) : IQuery<Entity.LevelType>
             _levelTypeRepository = levelTypeRepository;
         }
 
-        protected override async Task<Entity.LevelType> Handle(GetLevelType query)
+        protected override async Task<Entity.DomainEntity> Handle(GetLevelType query)
             => await _levelTypeRepository.Get(query.Id);
     }
 }

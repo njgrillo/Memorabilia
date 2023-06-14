@@ -1,8 +1,8 @@
 ﻿namespace Memorabilia.Application.Features.Admin.HelmetFinishes;
 
-public record GetHelmetFinish(int Id) : IQuery<Entity.HelmetFinish>
+public record GetHelmetFinish(int Id) : IQuery<Entity.DomainEntity>
 {
-    public class Handler : QueryHandler<GetHelmetFinish, Entity.HelmetFinish>
+    public class Handler : QueryHandler<GetHelmetFinish, Entity.DomainEntity>
     {
         private readonly IDomainRepository<Entity.HelmetFinish> _helmetFinishRepository;
 
@@ -11,7 +11,7 @@ public record GetHelmetFinish(int Id) : IQuery<Entity.HelmetFinish>
             _helmetFinishRepository = helmetFinishRepository;
         }
 
-        protected override async Task<Entity.HelmetFinish> Handle(GetHelmetFinish query)
+        protected override async Task<Entity.DomainEntity> Handle(GetHelmetFinish query)
             => await _helmetFinishRepository.Get(query.Id);
     }
 }

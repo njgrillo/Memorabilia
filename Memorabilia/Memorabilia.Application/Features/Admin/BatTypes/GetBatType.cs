@@ -1,8 +1,8 @@
 ﻿namespace Memorabilia.Application.Features.Admin.BatTypes;
 
-public record GetBatType(int Id) : IQuery<Entity.BatType>
+public record GetBatType(int Id) : IQuery<Entity.DomainEntity>
 {
-    public class Handler : QueryHandler<GetBatType, Entity.BatType>
+    public class Handler : QueryHandler<GetBatType, Entity.DomainEntity>
     {
         private readonly IDomainRepository<Entity.BatType> _batTypeRepository;
 
@@ -11,7 +11,7 @@ public record GetBatType(int Id) : IQuery<Entity.BatType>
             _batTypeRepository = batTypeRepository;
         }
 
-        protected override async Task<Entity.BatType> Handle(GetBatType query)
+        protected override async Task<Entity.DomainEntity> Handle(GetBatType query)
             => await _batTypeRepository.Get(query.Id);
     }
 }

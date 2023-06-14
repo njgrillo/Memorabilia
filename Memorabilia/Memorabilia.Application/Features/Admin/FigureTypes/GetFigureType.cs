@@ -1,8 +1,8 @@
 ﻿namespace Memorabilia.Application.Features.Admin.FigureTypes;
 
-public record GetFigureType(int Id) : IQuery<Entity.FigureType>
+public record GetFigureType(int Id) : IQuery<Entity.DomainEntity>
 {
-    public class Handler : QueryHandler<GetFigureType, Entity.FigureType>
+    public class Handler : QueryHandler<GetFigureType, Entity.DomainEntity>
     {
         private readonly IDomainRepository<Entity.FigureType> _figureTypeRepository;
 
@@ -11,7 +11,7 @@ public record GetFigureType(int Id) : IQuery<Entity.FigureType>
             _figureTypeRepository = figureTypeRepository;
         }
 
-        protected override async Task<Entity.FigureType> Handle(GetFigureType query)
+        protected override async Task<Entity.DomainEntity> Handle(GetFigureType query)
             => await _figureTypeRepository.Get(query.Id);
     }
 }

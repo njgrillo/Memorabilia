@@ -1,8 +1,8 @@
 ﻿namespace Memorabilia.Application.Features.Admin.WritingInstruments;
 
-public record GetWritingInstrument(int Id) : IQuery<Entity.WritingInstrument>
+public record GetWritingInstrument(int Id) : IQuery<Entity.DomainEntity>
 {
-    public class Handler : QueryHandler<GetWritingInstrument, Entity.WritingInstrument>
+    public class Handler : QueryHandler<GetWritingInstrument, Entity.DomainEntity>
     {
         private readonly IDomainRepository<Entity.WritingInstrument> _writingInstrumentRepository;
 
@@ -11,7 +11,7 @@ public record GetWritingInstrument(int Id) : IQuery<Entity.WritingInstrument>
             _writingInstrumentRepository = writingInstrumentRepository;
         }
 
-        protected override async Task<Entity.WritingInstrument> Handle(GetWritingInstrument query)
+        protected override async Task<Entity.DomainEntity> Handle(GetWritingInstrument query)
             => await _writingInstrumentRepository.Get(query.Id);
     }
 }

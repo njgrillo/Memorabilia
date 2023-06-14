@@ -1,8 +1,8 @@
 ﻿namespace Memorabilia.Application.Features.Admin.MagazineTypes;
 
-public record GetMagazineType(int Id) : IQuery<Entity.MagazineType>
+public record GetMagazineType(int Id) : IQuery<Entity.DomainEntity>
 {
-    public class Handler : QueryHandler<GetMagazineType, Entity.MagazineType>
+    public class Handler : QueryHandler<GetMagazineType, Entity.DomainEntity>
     {
         private readonly IDomainRepository<Entity.MagazineType> _magazineTypeRepository;
 
@@ -11,7 +11,7 @@ public record GetMagazineType(int Id) : IQuery<Entity.MagazineType>
             _magazineTypeRepository = magazineTypeRepository;
         }
 
-        protected override async Task<Entity.MagazineType> Handle(GetMagazineType query)
+        protected override async Task<Entity.DomainEntity> Handle(GetMagazineType query)
             => await _magazineTypeRepository.Get(query.Id);
     }
 }

@@ -1,4 +1,4 @@
-using Memorabilia.Blazor.Configuration;
+using System.Net.Http;
 
 namespace Memorabilia.Web;
 
@@ -17,13 +17,33 @@ public class Startup
     {
         services.AddDataProtection()
                 .SetApplicationName("Memorabilia")
-                .SetDefaultKeyLifetime(TimeSpan.FromDays(180));
+                .SetDefaultKeyLifetime(TimeSpan.FromDays(180));        
 
         var imagePath = new ImagePath();
         Configuration.GetSection("ImagePaths").Bind(imagePath);
 
-        services.AddSingleton<IImagePath>(imagePath); 
+        services.AddSingleton<IImagePath>(imagePath);
 
+        var googleConfiguration = new GoogleConfiguration();
+        Configuration.GetSection("Google").Bind(googleConfiguration);
+
+        services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+                .AddCookie();
+
+        services.AddAuthentication()
+                .AddGoogle(options =>
+                    {
+                        options.ClientId = googleConfiguration.ClientId;
+                        options.ClientSecret = googleConfiguration.ClientSecret;
+                        options.ClaimActions.MapJsonKey("urn:google:profile", "link");
+                        options.ClaimActions.MapJsonKey("urn:google:image", "picture");
+                    }
+                );
+
+        services.AddHttpContextAccessor();
+        services.AddScoped<HttpContextAccessor>();
+        services.AddHttpClient();
+        services.AddScoped<HttpClient>();
         services.AddRazorPages();
         services.AddServerSideBlazor();
         services.AddDbContext<MemorabiliaContext>(options => options.UseSqlServer("name=ConnectionStrings:Memorabilia"), ServiceLifetime.Transient);
@@ -42,8 +62,6 @@ public class Startup
             {
                 opt.DisableImplicitFromServicesParameters = true;
             });
-
-        services.AddCourier(typeof(UserLoggedInNotification).Assembly);
 
         services.AddMudServices(config =>
         {
@@ -73,8 +91,11 @@ public class Startup
         }
 
         app.UseHttpsRedirection();
-        app.UseStaticFiles(); 
+        app.UseStaticFiles();
+        app.UseCookiePolicy();
         app.UseRouting();
+        app.UseAuthentication();
+        app.UseAuthorization();
 
         app.UseEndpoints(endpoints =>
         {

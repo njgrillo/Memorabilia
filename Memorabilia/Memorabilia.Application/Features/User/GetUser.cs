@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Application.Features.User;
 
-public record GetUser(string Username, string Password) : IQuery<Entity.User>
+public record GetUser(string EmailAddress) : IQuery<Entity.User>
 {
     public class Handler : QueryHandler<GetUser, Entity.User>
     {
@@ -12,6 +12,6 @@ public record GetUser(string Username, string Password) : IQuery<Entity.User>
         }
 
         protected override async Task<Entity.User> Handle(GetUser query)
-            => await _userRepository.Get(query.Username, query.Password);
+            => await _userRepository.Get(query.EmailAddress);
     }
 }

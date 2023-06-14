@@ -1,8 +1,8 @@
 ﻿namespace Memorabilia.Application.Features.Admin.RecordTypes;
 
-public record GetRecordType(int Id) : IQuery<Entity.RecordType>
+public record GetRecordType(int Id) : IQuery<Entity.DomainEntity>
 {
-    public class Handler : QueryHandler<GetRecordType, Entity.RecordType>
+    public class Handler : QueryHandler<GetRecordType, Entity.DomainEntity>
     {
         private readonly IDomainRepository<Entity.RecordType> _recordTypeRepository;
 
@@ -11,7 +11,7 @@ public record GetRecordType(int Id) : IQuery<Entity.RecordType>
             _recordTypeRepository = recordTypeRepository;
         }
 
-        protected override async Task<Entity.RecordType> Handle(GetRecordType query)
+        protected override async Task<Entity.DomainEntity> Handle(GetRecordType query)
             => await _recordTypeRepository.Get(query.Id);
     }
 }

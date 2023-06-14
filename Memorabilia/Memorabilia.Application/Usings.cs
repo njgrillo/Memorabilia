@@ -96,6 +96,7 @@ global using Memorabilia.Application.Features.Services.Tools.Profile.Rules;
 global using Memorabilia.Application.Features.Tools.Profile.Common;
 global using Memorabilia.Application.Features.User;
 global using Memorabilia.Application.Features.User.Dashboard;
+global using Memorabilia.Application.Features.User.Register;
 global using Memorabilia.Domain;
 global using Memorabilia.Domain.Extensions;
 global using Memorabilia.Domain.SearchModels.Memorabilia;

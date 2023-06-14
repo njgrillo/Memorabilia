@@ -1,8 +1,8 @@
 ﻿namespace Memorabilia.Application.Features.Admin.JerseyStyleTypes;
 
-public record GetJerseyStyleType(int Id) : IQuery<Entity.JerseyStyleType>
+public record GetJerseyStyleType(int Id) : IQuery<Entity.DomainEntity>
 {
-    public class Handler : QueryHandler<GetJerseyStyleType, Entity.JerseyStyleType>
+    public class Handler : QueryHandler<GetJerseyStyleType, Entity.DomainEntity>
     {
         private readonly IDomainRepository<Entity.JerseyStyleType> _jerseyStyleTypeRepository;
 
@@ -11,7 +11,7 @@ public record GetJerseyStyleType(int Id) : IQuery<Entity.JerseyStyleType>
             _jerseyStyleTypeRepository = jerseyStyleTypeRepository;
         }
 
-        protected override async Task<Entity.JerseyStyleType> Handle(GetJerseyStyleType query)
+        protected override async Task<Entity.DomainEntity> Handle(GetJerseyStyleType query)
             => await _jerseyStyleTypeRepository.Get(query.Id);
     }
 }

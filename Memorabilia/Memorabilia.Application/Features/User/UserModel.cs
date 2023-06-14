@@ -29,15 +29,6 @@ public class UserModel
     public string LastName 
         => _user.LastName;
 
-    public string Password 
-        => _user.Password;
-
-    public string Phone 
-        => _user.Phone;
-
     public DateTime? UpdateDate 
         => _user.UpdateDate;
-
-    public string Username 
-        => _user.Username;
 }

@@ -1,8 +1,8 @@
 ﻿namespace Memorabilia.Application.Features.Admin.PurchaseTypes;
 
-public record GetPurchaseType(int Id) : IQuery<Entity.PurchaseType>
+public record GetPurchaseType(int Id) : IQuery<Entity.DomainEntity>
 {
-    public class Handler : QueryHandler<GetPurchaseType, Entity.PurchaseType>
+    public class Handler : QueryHandler<GetPurchaseType, Entity.DomainEntity>
     {
         private readonly IDomainRepository<Entity.PurchaseType> _purchaseTypeRepository;
 
@@ -11,7 +11,7 @@ public record GetPurchaseType(int Id) : IQuery<Entity.PurchaseType>
             _purchaseTypeRepository = purchaseTypeRepository;
         }
 
-        protected override async Task<Entity.PurchaseType> Handle(GetPurchaseType query)
+        protected override async Task<Entity.DomainEntity> Handle(GetPurchaseType query)
             => await _purchaseTypeRepository.Get(query.Id);
     }
 }

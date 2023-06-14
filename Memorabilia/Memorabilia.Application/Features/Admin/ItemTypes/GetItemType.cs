@@ -1,8 +1,8 @@
 ﻿namespace Memorabilia.Application.Features.Admin.ItemTypes;
 
-public record GetItemType(int Id) : IQuery<Entity.ItemType>
+public record GetItemType(int Id) : IQuery<Entity.DomainEntity>
 {
-    public class Handler : QueryHandler<GetItemType, Entity.ItemType>
+    public class Handler : QueryHandler<GetItemType, Entity.DomainEntity>
     {
         private readonly IDomainRepository<Entity.ItemType> _itemTypeRepository;
 
@@ -11,7 +11,7 @@ public record GetItemType(int Id) : IQuery<Entity.ItemType>
             _itemTypeRepository = itemTypeRepository;
         }
 
-        protected override async Task<Entity.ItemType> Handle(GetItemType query)
+        protected override async Task<Entity.DomainEntity> Handle(GetItemType query)
             => await _itemTypeRepository.Get(query.Id);
     }
 }

@@ -1,8 +1,8 @@
 ﻿namespace Memorabilia.Application.Features.Admin.InscriptionTypes;
 
-public record GetInscriptionType(int Id) : IQuery<Entity.InscriptionType>
+public record GetInscriptionType(int Id) : IQuery<Entity.DomainEntity>
 {
-    public class Handler : QueryHandler<GetInscriptionType, Entity.InscriptionType>
+    public class Handler : QueryHandler<GetInscriptionType, Entity.DomainEntity>
     {
         private readonly IDomainRepository<Entity.InscriptionType> _inscriptionTypeRepository;
 
@@ -11,7 +11,7 @@ public record GetInscriptionType(int Id) : IQuery<Entity.InscriptionType>
             _inscriptionTypeRepository = inscriptionTypeRepository;
         }
 
-        protected override async Task<Entity.InscriptionType> Handle(GetInscriptionType query)
+        protected override async Task<Entity.DomainEntity> Handle(GetInscriptionType query)
             => await _inscriptionTypeRepository.Get(query.Id);
     }
 }

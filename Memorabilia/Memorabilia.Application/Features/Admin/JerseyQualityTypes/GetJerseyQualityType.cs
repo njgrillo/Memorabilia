@@ -1,8 +1,8 @@
 ﻿namespace Memorabilia.Application.Features.Admin.JerseyQualityTypes;
 
-public record GetJerseyQualityType(int Id) : IQuery<Entity.JerseyQualityType>
+public record GetJerseyQualityType(int Id) : IQuery<Entity.DomainEntity>
 {
-    public class Handler : QueryHandler<GetJerseyQualityType, Entity.JerseyQualityType>
+    public class Handler : QueryHandler<GetJerseyQualityType, Entity.DomainEntity>
     {
         private readonly IDomainRepository<Entity.JerseyQualityType> _jerseyQualityTypeRepository;
 
@@ -11,7 +11,7 @@ public record GetJerseyQualityType(int Id) : IQuery<Entity.JerseyQualityType>
             _jerseyQualityTypeRepository = jerseyQualityTypeRepository;
         }
 
-        protected override async Task<Entity.JerseyQualityType> Handle(GetJerseyQualityType query)
+        protected override async Task<Entity.DomainEntity> Handle(GetJerseyQualityType query)
             => await _jerseyQualityTypeRepository.Get(query.Id);
     }
 }

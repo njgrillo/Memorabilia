@@ -13,33 +13,20 @@
                                    Edge="Edge.Start"
                                    Icon="@Icons.Material.Filled.Menu"
                                    OnClick="@((e) => DrawerToggle())" />
-                </MudTooltip>
+                </MudTooltip> 
             </Left>
             <Right>
-                <Condition Evaluation="_userLoggedIn">
-                    <Match>
+                <AuthorizeView>
+                    <Authorized>
                         <MudTooltip Text="User Settings">
                             <MudIconButton Color="MudBlazor.Color.Inherit"
                                            Edge="Edge.Start"
                                            Icon="@Icons.Material.Filled.Settings"
                                            OnClick="@((e) => UserSettings())" />
                         </MudTooltip>
-                        <MudTooltip Text="Logout">
-                            <MudIconButton Color="MudBlazor.Color.Inherit"
-                                           Edge="Edge.Start"
-                                           Icon="@Icons.Material.Filled.Logout"
-                                           OnClick="@((e) => Logout())" />
-                        </MudTooltip>
-                    </Match>
-                    <NotMatch>
-                        <MudTooltip Text="Login">
-                            <MudIconButton Color="MudBlazor.Color.Inherit"
-                                           Edge="Edge.Start"
-                                           Icon="@Icons.Material.Filled.Login"
-                                           OnClick="@((e) => Login())" />
-                        </MudTooltip>
-                    </NotMatch>
-                </Condition>
+                    </Authorized>
+                </AuthorizeView>
+                <LoginControl />
             </Right>
         </LeftRightSection>   
     </MudAppBar>

@@ -1,8 +1,8 @@
 ﻿namespace Memorabilia.Application.Features.Admin.PriorityTypes;
 
-public record GetPriorityType(int Id) : IQuery<Entity.PriorityType>
+public record GetPriorityType(int Id) : IQuery<Entity.DomainEntity>
 {
-    public class Handler : QueryHandler<GetPriorityType, Entity.PriorityType>
+    public class Handler : QueryHandler<GetPriorityType, Entity.DomainEntity>
     {
         private readonly IDomainRepository<Entity.PriorityType> _priorityTypeRepository;
 
@@ -11,7 +11,7 @@ public record GetPriorityType(int Id) : IQuery<Entity.PriorityType>
             _priorityTypeRepository = priorityTypeRepository;
         }
 
-        protected override async Task<Entity.PriorityType> Handle(GetPriorityType query)
+        protected override async Task<Entity.DomainEntity> Handle(GetPriorityType query)
             => await _priorityTypeRepository.Get(query.Id);
     }
 }

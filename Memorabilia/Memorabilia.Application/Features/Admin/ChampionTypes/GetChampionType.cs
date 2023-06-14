@@ -1,8 +1,8 @@
 ﻿namespace Memorabilia.Application.Features.Admin.ChampionTypes;
 
-public record GetChampionType(int Id) : IQuery<Entity.ChampionType>
+public record GetChampionType(int Id) : IQuery<Entity.DomainEntity>
 {
-    public class Handler : QueryHandler<GetChampionType, Entity.ChampionType>
+    public class Handler : QueryHandler<GetChampionType, Entity.DomainEntity>
     {
         private readonly IDomainRepository<Entity.ChampionType> _championTypeRepository;
 
@@ -11,7 +11,7 @@ public record GetChampionType(int Id) : IQuery<Entity.ChampionType>
             _championTypeRepository = championTypeRepository;
         }
 
-        protected override async Task<Entity.ChampionType> Handle(GetChampionType query)
+        protected override async Task<Entity.DomainEntity> Handle(GetChampionType query)
             => await _championTypeRepository.Get(query.Id);
     }
 }

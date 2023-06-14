@@ -1,8 +1,8 @@
 ﻿namespace Memorabilia.Application.Features.Admin.FranchiseHallOfFameTypes;
 
-public record GetFranchiseHallOfFameType(int Id) : IQuery<Entity.FranchiseHallOfFameType>
+public record GetFranchiseHallOfFameType(int Id) : IQuery<Entity.DomainEntity>
 {
-    public class Handler : QueryHandler<GetFranchiseHallOfFameType, Entity.FranchiseHallOfFameType>
+    public class Handler : QueryHandler<GetFranchiseHallOfFameType, Entity.DomainEntity>
     {
         private readonly IDomainRepository<Entity.FranchiseHallOfFameType> _franchiseHallOfFameTypeRepository;
 
@@ -11,7 +11,7 @@ public record GetFranchiseHallOfFameType(int Id) : IQuery<Entity.FranchiseHallOf
             _franchiseHallOfFameTypeRepository = franchiseHallOfFameTypeRepository;
         }
 
-        protected override async Task<Entity.FranchiseHallOfFameType> Handle(GetFranchiseHallOfFameType query)
+        protected override async Task<Entity.DomainEntity> Handle(GetFranchiseHallOfFameType query)
             => await _franchiseHallOfFameTypeRepository.Get(query.Id);
     }
 }

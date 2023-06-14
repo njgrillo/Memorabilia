@@ -1,8 +1,8 @@
 ﻿namespace Memorabilia.Application.Features.Admin.Occupations;
 
-public record GetOccupation(int Id) : IQuery<Entity.Occupation>
+public record GetOccupation(int Id) : IQuery<Entity.DomainEntity>
 {
-    public class Handler : QueryHandler<GetOccupation, Entity.Occupation>
+    public class Handler : QueryHandler<GetOccupation, Entity.DomainEntity>
     {
         private readonly IDomainRepository<Entity.Occupation> _occupationRepository;
 
@@ -11,7 +11,7 @@ public record GetOccupation(int Id) : IQuery<Entity.Occupation>
             _occupationRepository = occupationRepository;
         }
 
-        protected override async Task<Entity.Occupation> Handle(GetOccupation query)
+        protected override async Task<Entity.DomainEntity> Handle(GetOccupation query)
             => await _occupationRepository.Get(query.Id);
     }
 }

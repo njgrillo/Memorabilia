@@ -2,17 +2,21 @@
     <MudNavMenu>
         <MudText Typo="Typo.h6" Class="px-4">Graphinallday</MudText>
         <MudDivider Class="my-2" />
-        <MudNavLink Href="">Home</MudNavLink>
-        <MudNavGroup Title="Admin">
-            <MudNavLink Href="/Admin/EditDomainItems">Domain Items</MudNavLink>
-        </MudNavGroup>
-        <MudNavGroup Title="My Memorabilia">
-            <MudNavLink Href="/Memorabilia/Dashboard">Dashboard</MudNavLink>
-            <MudNavLink Href="/Memorabilia/Edit">Add Memorabilia</MudNavLink>
-            <MudNavLink Href="/Memorabilia/View">View Memorabilia</MudNavLink>
-            <MudNavLink Href="/Collections">Collections</MudNavLink>
-            <MudNavLink Href="/Projects">Projects</MudNavLink>
-        </MudNavGroup>
+        <MudNavLink Href="/Home">Home</MudNavLink>
+        <AuthorizeView>
+            <Authorized>                
+                <MudNavGroup Title="Admin">
+                    <MudNavLink Href="/Admin/EditDomainItems">Domain Items</MudNavLink>
+                </MudNavGroup>
+                <MudNavGroup Title="My Memorabilia">
+                    <MudNavLink Href="/Memorabilia/Dashboard">Dashboard</MudNavLink>
+                    <MudNavLink Href="/Memorabilia/Edit">Add Memorabilia</MudNavLink>
+                    <MudNavLink Href="/Memorabilia/View">View Memorabilia</MudNavLink>
+                    <MudNavLink Href="/Collections">Collections</MudNavLink>
+                    <MudNavLink Href="/Projects">Projects</MudNavLink>
+                </MudNavGroup>                
+            </Authorized>
+        </AuthorizeView>
         <MudNavGroup Title="Tools">
             <MudNavLink Href="/Tools/PersonProfileSelect">Person Profile</MudNavLink>
             <MudNavLink Href="/Tools/TTMManager">TTM Manager</MudNavLink>

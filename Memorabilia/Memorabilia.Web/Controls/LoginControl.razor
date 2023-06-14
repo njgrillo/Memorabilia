@@ -1,0 +1,27 @@
+﻿<Condition Evaluation="!_user.Identity.Name.IsNullOrEmpty()">
+    <Match>
+        <MudImage Class="rounded-lg"
+                  Elevation="0"
+                  Height="25"
+                  ObjectFit="@ObjectFit.Cover"
+                  Src="@Avatar"
+                  Width="25" />
+        <b>@GivenName @Surname</b>
+        <MudTooltip Text="Logout">
+            <MudLink Href="/Logout">
+                <MudIconButton Color="MudBlazor.Color.Default"
+                               Edge="Edge.Start"
+                               Icon="@Icons.Material.Filled.Logout" />
+            </MudLink>
+        </MudTooltip>
+    </Match>
+    <NotMatch>
+        <MudTooltip Text="Login">
+            <MudLink Href="/Login">
+                <MudIconButton Color="MudBlazor.Color.Default"
+                               Edge="Edge.Start"
+                               Icon="@Icons.Material.Filled.Login" />
+            </MudLink>
+        </MudTooltip>
+    </NotMatch>
+</Condition>

@@ -15,4 +15,9 @@ public class ApplicationStateService : IApplicationStateService
     {
         CurrentUser = await _queryRouter.Send(new GetUserById(userId));
     }
+
+    public void Set(Entity.User user)
+    {
+        CurrentUser = user;
+    }
 }

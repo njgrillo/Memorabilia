@@ -4,16 +4,13 @@ public class User : Framework.Library.Domain.Entity.DomainEntity
 {
     public User() { }
 
-    public User(string username, string password, string emailAddress, string firstName, string lastName, string phone)
+    public User(string emailAddress, string firstName, string lastName)
     {
-        Username = username;
-        Password = password;
         EmailAddress = emailAddress;
         FirstName = firstName;
         LastName = lastName;
-        Phone = phone;
         CreateDate = DateTime.UtcNow;
-        UserRoleId = Constants.Role.User.Id;
+        UserRoleId = Constant.Role.User.Id;
     }
 
     public DateTime CreateDate { get; private set; }
@@ -24,15 +21,9 @@ public class User : Framework.Library.Domain.Entity.DomainEntity
 
     public string FirstName { get; private set; }
 
-    public string LastName { get; private set; }
-
-    public string Password { get; private set; }
-
-    public string Phone { get; private set; }    
+    public string LastName { get; private set; }   
 
     public DateTime? UpdateDate { get; private set; }
-
-    public string Username { get; private set; }
 
     public int UserRoleId { get; private set; }
 
@@ -45,15 +36,5 @@ public class User : Framework.Library.Domain.Entity.DomainEntity
         DashboardItems.AddRange(dashboardItemsIds.Where(dashboardItemsId => !DashboardItems.Select(dashboardItemId => dashboardItemId.DashboardItemId)
                                                                                            .Contains(dashboardItemsId))
                                                  .Select(dashboardItemsId => new UserDashboard(Id, dashboardItemsId)));
-    }
-
-    public void SetUser(string password, string emailAddress, string firstName, string lastName, string phone)
-    {
-        Password = password;
-        EmailAddress = emailAddress;
-        FirstName = firstName;
-        LastName = lastName;
-        Phone = phone;
-        UpdateDate = DateTime.UtcNow;
     }
 }

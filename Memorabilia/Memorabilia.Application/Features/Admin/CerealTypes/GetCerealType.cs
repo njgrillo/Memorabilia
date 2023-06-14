@@ -1,8 +1,8 @@
 ﻿namespace Memorabilia.Application.Features.Admin.CerealTypes;
 
-public record GetCerealType(int Id) : IQuery<Entity.CerealType>
+public record GetCerealType(int Id) : IQuery<Entity.DomainEntity>
 {
-    public class Handler : QueryHandler<GetCerealType, Entity.CerealType>
+    public class Handler : QueryHandler<GetCerealType, Entity.DomainEntity>
     {
         private readonly IDomainRepository<Entity.CerealType> _CerealTypeRepository;
 
@@ -11,7 +11,7 @@ public record GetCerealType(int Id) : IQuery<Entity.CerealType>
             _CerealTypeRepository = CerealTypeRepository;
         }
 
-        protected override async Task<Entity.CerealType> Handle(GetCerealType query)
+        protected override async Task<Entity.DomainEntity> Handle(GetCerealType query)
             => await _CerealTypeRepository.Get(query.Id);
     }
 }

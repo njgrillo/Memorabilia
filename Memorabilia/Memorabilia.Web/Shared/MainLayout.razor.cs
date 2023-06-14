@@ -3,7 +3,7 @@
 public partial class MainLayout : LayoutComponentBase
 {
     [Inject]
-    public ICourier Courier { get; set; }
+    public IApplicationStateService ApplicationStateService { get; set; }
 
     [Inject]
     public NavigationManager NavigationManager { get; set; }
@@ -14,12 +14,6 @@ public partial class MainLayout : LayoutComponentBase
         = true;
 
     private CustomErrorBoundary _errorBoundary;
-    private bool _userLoggedIn;
-
-    protected override void OnInitialized()
-    {
-        Courier.Subscribe<UserLoggedInNotification>(OnUserLoginAsync);
-    }
 
     protected override void OnParametersSet()
     {
@@ -31,16 +25,6 @@ public partial class MainLayout : LayoutComponentBase
         _drawerOpen = !_drawerOpen;
     }
 
-    public void Login()
-    {
-        NavigationManager.NavigateTo("Login");
-    }
-
-    public void Logout()
-    {
-        NavigationManager.NavigateTo("Logout");
-    }
-
     public void OnAlertClose()
     {
         _currentException = null;
@@ -50,14 +34,11 @@ public partial class MainLayout : LayoutComponentBase
     {
         _currentException = error;
 
-        NavigationManager.NavigateTo("Home");
-    }
+        string url = ApplicationStateService.CurrentUser == null
+            ? "/"
+            : "Home";
 
-    public async void OnUserLoginAsync(UserLoggedInNotification notification)
-    {
-        _userLoggedIn = true;
-
-        await InvokeAsync(StateHasChanged);        
+        NavigationManager.NavigateTo(url);
     }
 
     public void UserSettings()

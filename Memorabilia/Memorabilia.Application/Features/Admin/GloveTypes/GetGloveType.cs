@@ -1,8 +1,8 @@
 ﻿namespace Memorabilia.Application.Features.Admin.GloveTypes;
 
-public record GetGloveType(int Id) : IQuery<Entity.GloveType>
+public record GetGloveType(int Id) : IQuery<Entity.DomainEntity>
 {
-    public class Handler : QueryHandler<GetGloveType, Entity.GloveType>
+    public class Handler : QueryHandler<GetGloveType, Entity.DomainEntity>
     {
         private readonly IDomainRepository<Entity.GloveType> _gloveTypeRepository;
 
@@ -11,7 +11,7 @@ public record GetGloveType(int Id) : IQuery<Entity.GloveType>
             _gloveTypeRepository = gloveTypeRepository;
         }
 
-        protected override async Task<Entity.GloveType> Handle(GetGloveType query)
+        protected override async Task<Entity.DomainEntity> Handle(GetGloveType query)
             => await _gloveTypeRepository.Get(query.Id);
     }
 }
