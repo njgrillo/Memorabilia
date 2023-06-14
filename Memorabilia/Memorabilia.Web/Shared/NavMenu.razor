@@ -4,10 +4,14 @@
         <MudDivider Class="my-2" />
         <MudNavLink Href="/Home">Home</MudNavLink>
         <AuthorizeView>
-            <Authorized>                
-                <MudNavGroup Title="Admin">
-                    <MudNavLink Href="/Admin/EditDomainItems">Domain Items</MudNavLink>
-                </MudNavGroup>
+            <Authorized>   
+                <Condition Evaluation="ApplicationStateService.CurrentUser.IsAdmin()">
+                    <Match>
+                        <MudNavGroup Title="Admin">
+                            <MudNavLink Href="/Admin/EditDomainItems">Domain Items</MudNavLink>
+                        </MudNavGroup>
+                    </Match>
+                </Condition>
                 <MudNavGroup Title="My Memorabilia">
                     <MudNavLink Href="/Memorabilia/Dashboard">Dashboard</MudNavLink>
                     <MudNavLink Href="/Memorabilia/Edit">Add Memorabilia</MudNavLink>
