@@ -187,8 +187,7 @@ public partial class MemorabiliaDetailGrid
     {
         var parameters = new DialogParameters
         {
-            ["AutographId"] = autographModel.Id,
-            ["UserId"] = autographModel.UserId
+            ["AutographId"] = autographModel.Id
         };
 
         var options = new DialogOptions()
@@ -206,8 +205,7 @@ public partial class MemorabiliaDetailGrid
     {
         var parameters = new DialogParameters
         {
-            ["MemorabiliaId"] = memorabiliaItemModel.Id,
-            ["UserId"] = memorabiliaItemModel.UserId
+            ["MemorabiliaId"] = memorabiliaItemModel.Id
         };
 
         var options = new DialogOptions()

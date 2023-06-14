@@ -25,7 +25,6 @@ public partial class ProjectMemorabiliaTeamGrid
     {
         var parameters = new Dictionary<string, object>
         {
-            ["UserId"] = editModel.UserId,
             ["TeamId"] = editModel.Team.Id
         };
 
@@ -225,8 +224,7 @@ public partial class ProjectMemorabiliaTeamGrid
     {
         var parameters = new DialogParameters
         {
-            ["MemorabiliaId"] = projectMemorabiliaTeam.MemorabiliaId,
-            ["UserId"] = projectMemorabiliaTeam.UserId
+            ["MemorabiliaId"] = projectMemorabiliaTeam.MemorabiliaId
         };
 
         var options = new DialogOptions()

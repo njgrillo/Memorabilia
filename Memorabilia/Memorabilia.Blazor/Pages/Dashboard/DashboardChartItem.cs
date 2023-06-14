@@ -10,7 +10,4 @@ public class DashboardChartItem : ComponentBase
 
     [Parameter]
     public string[] Labels { get; set; }
-
-    [Parameter]
-    public int UserId { get; set; }
 }

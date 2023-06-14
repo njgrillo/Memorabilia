@@ -20,11 +20,6 @@ public partial class SelectProjectMemorabiliaDialog
     protected MemorabiliaModel[] Model 
         = Array.Empty<MemorabiliaModel>();
 
-    protected int UserId
-        => Parameters.ContainsKey("UserId")
-        ? (int)Parameters["UserId"]
-        : 0;
-
     protected override async Task OnInitializedAsync()
     {
         if (!Parameters.Any())

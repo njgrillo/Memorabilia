@@ -14,11 +14,6 @@ public partial class SelectProjectAutographDialog
     [Parameter]
     public Dictionary<string, object> Parameters { get; set; }
 
-    protected int UserId
-        => Parameters.ContainsKey("UserId")
-        ? (int)Parameters["UserId"]
-        : 0;
-
     protected AutographModel[] Model 
         = Array.Empty<AutographModel>();
 

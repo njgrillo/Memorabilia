@@ -19,8 +19,7 @@ public partial class CardDetails
         {
             ["ItemTypeId"] = ItemType.TradingCard.Id,
             ["MaxRank"] = Model.People.Any() ? Model.People.Max(person => person.Rank) + 1 : 1,
-            ["ProjectId"] = Model.Id,
-            ["UserId"] = Model.UserId
+            ["ProjectId"] = Model.Id
         };
 
         var options = new DialogOptions()

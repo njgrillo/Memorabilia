@@ -5,14 +5,17 @@ public record GetProjectMemorabiliaTeamLinks(Dictionary<string, object> Paramete
 {
     public class Handler : QueryHandler<GetProjectMemorabiliaTeamLinks, Entity.Memorabilia[]>
     {
+        private readonly IApplicationStateService _applicationStateService;
         private readonly IMemorabiliaItemRepository _memorabiliaRepository;
 
-        public Handler(IMemorabiliaItemRepository memorabiliaRepository)
+        public Handler(IMemorabiliaItemRepository memorabiliaRepository, 
+                       IApplicationStateService applicationStateService)
         {
-                _memorabiliaRepository = memorabiliaRepository;
+            _memorabiliaRepository = memorabiliaRepository;
+            _applicationStateService = applicationStateService;
         }
 
         protected override async Task<Entity.Memorabilia[]> Handle(GetProjectMemorabiliaTeamLinks query)
-            => await _memorabiliaRepository.GetAll(query.Parameters);
+            => await _memorabiliaRepository.GetAll(query.Parameters, _applicationStateService.CurrentUser.Id);
     }
 }

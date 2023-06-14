@@ -14,9 +14,6 @@ public partial class MemorabiliaImageCarouselViewerDialog
     [Parameter]
     public int MemorabiliaId { get; set; }
 
-    [Parameter]
-    public int UserId { get; set; }
-
     protected Entity.MemorabiliaImage[] Images { get; set; }
         = Array.Empty<Entity.MemorabiliaImage>();
 

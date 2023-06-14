@@ -20,7 +20,7 @@ public class AutographRepository
         => await Autograph.SingleOrDefaultAsync(autograph => autograph.Id == id);
 
     public async Task<Entity.Autograph[]> GetAll(int? memorabiliaId = null, 
-                                                            int? userId = null)
+                                                 int? userId = null)
     {
         if (memorabiliaId.HasValue)
             return await Autograph.Where(autograph => autograph.MemorabiliaId == memorabiliaId)
@@ -33,9 +33,8 @@ public class AutographRepository
         return await Autograph.ToArrayAsync();
     }
 
-    public async Task<Entity.Autograph[]> GetAll(Dictionary<string, object> parameters)
+    public async Task<Entity.Autograph[]> GetAll(Dictionary<string, object> parameters, int userId)
     {
-        _ = parameters.TryGetValue("UserId", out object userId);
         _ = parameters.TryGetValue("PersonId", out object personId);
         _ = parameters.TryGetValue("ItemTypeId", out object itemTypeId);
         _ = parameters.TryGetValue("BaseballTypeId", out object baseballTypeId);
@@ -54,7 +53,7 @@ public class AutographRepository
         _ = parameters.TryGetValue("WorldSeriesItemTypeId", out object worldSeriesItemTypeId);
         _ = parameters.TryGetValue("WorldSeriesYear", out object worldSeriesYear);
 
-        return await Autograph.Where(autograph => (userId == null || autograph.Memorabilia.UserId == (int)userId)
+        return await Autograph.Where(autograph => (autograph.Memorabilia.UserId == userId)
                                                && (personId == null || autograph.PersonId == (int)personId)
                                                && (itemTypeId == null || autograph.Memorabilia.ItemTypeId == (int)itemTypeId)
                                                && (baseballTypeId == null || (autograph.Memorabilia.Baseball != null && autograph.Memorabilia.Baseball.BaseballTypeId == (int)baseballTypeId))

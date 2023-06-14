@@ -1,7 +1,6 @@
 ﻿namespace Memorabilia.Application.Features.Autograph;
 
-public record GetAutographs(int? MemorabiliaId = null, 
-                            int? UserId = null)
+public record GetAutographs(int? MemorabiliaId = null)
     : IQuery<Entity.Autograph[]>
 {
     public class Handler : QueryHandler<GetAutographs, Entity.Autograph[]>

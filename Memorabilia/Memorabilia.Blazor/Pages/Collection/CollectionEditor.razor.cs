@@ -26,9 +26,6 @@ public partial class CollectionEditor
     [Parameter]
     public int Id { get; set; }
 
-    [Parameter]
-    public int UserId { get; set; }
-
     protected bool IsDetailView 
         = true;
 
@@ -80,7 +77,7 @@ public partial class CollectionEditor
     {
         var parameters = new DialogParameters
         {
-            ["UserId"] = Model.UserId
+            ["UserId"] = ApplicationStateService.CurrentUser.Id
         };
 
         var options = new DialogOptions()

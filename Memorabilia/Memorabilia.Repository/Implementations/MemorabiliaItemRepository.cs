@@ -124,17 +124,16 @@ public class MemorabiliaItemRepository
         return await query.ToPagedResult(pageInfo);
     }    
 
-    public async Task<Entity.Memorabilia[]> GetAll(Dictionary<string, object> parameters)
+    public async Task<Entity.Memorabilia[]> GetAll(Dictionary<string, object> parameters, int userId)
     {
         _ = parameters.TryGetValue("HelmetTypeId", out object helmetTypeId);
         _ = parameters.TryGetValue("HelmetSizeId", out object helmetSizeId);
         _ = parameters.TryGetValue("HelmetFinishId", out object helmetFinishId);
         _ = parameters.TryGetValue("ItemTypeId", out object itemTypeId);
         _ = parameters.TryGetValue("TeamId", out object teamId);
-        _ = parameters.TryGetValue("TeamYear", out object teamYear);
-        _ = parameters.TryGetValue("UserId", out object userId);        
+        _ = parameters.TryGetValue("TeamYear", out object teamYear);      
 
-        return await Items.Where(memorabilia => (userId == null || memorabilia.UserId == (int)userId)
+        return await Items.Where(memorabilia => (memorabilia.UserId == userId)
                                                  && (teamId == null || memorabilia.Teams.Any(team => team.TeamId == (int)teamId))
                                                  && (helmetTypeId == null || (memorabilia.Helmet != null && memorabilia.Helmet.HelmetTypeId == (int)helmetTypeId))
                                                  && (helmetFinishId == null || (memorabilia.Helmet != null && memorabilia.Helmet.HelmetFinishId == (int)helmetFinishId))

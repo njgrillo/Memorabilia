@@ -8,15 +8,11 @@ public partial class ViewMemorabiliaImagesButton
     [Parameter]
     public int MemorabiliaId { get; set; }
 
-    [Parameter]
-    public int UserId { get; set; }
-
     public async Task ViewImages()
     {
         var parameters = new DialogParameters
         {
-            ["MemorabiliaId"] = MemorabiliaId,
-            ["UserId"] = UserId
+            ["MemorabiliaId"] = MemorabiliaId
         };
 
         var options = new DialogOptions()

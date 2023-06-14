@@ -3,6 +3,9 @@
 public partial class AddProjectPersonDialog
 {
     [Inject]
+    public IApplicationStateService ApplicationStateService { get; set; }
+
+    [Inject]
     public IDialogService DialogService { get; set; }
 
     [Inject]
@@ -22,9 +25,6 @@ public partial class AddProjectPersonDialog
 
     [Parameter]
     public int ProjectId { get; set; }
-
-    [Parameter]
-    public int UserId { get; set; }
 
     protected ProjectEditModel Project;
 
@@ -46,7 +46,7 @@ public partial class AddProjectPersonDialog
 
         ProjectPerson.ItemTypeId = ItemTypeId;
         ProjectPerson.Id = ProjectId;
-        ProjectPerson.UserId = UserId;
+        ProjectPerson.UserId = ApplicationStateService.CurrentUser.Id;
 
         MudDialog.Close(DialogResult.Ok(ProjectPerson));
     }
@@ -55,7 +55,6 @@ public partial class AddProjectPersonDialog
     {
         var parameters = new Dictionary<string, object>
         {
-            ["UserId"] = UserId,
             ["ItemTypeId"] = ItemTypeId,
             ["PersonId"] = projectPerson.Person.Id
         };

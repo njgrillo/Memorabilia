@@ -25,7 +25,6 @@ public partial class ProjectPersonGrid
     {
         var parameters = new Dictionary<string, object>
         {
-            ["UserId"] = editModel.UserId,
             ["PersonId"] = editModel.Person.Id
         };
 
@@ -269,8 +268,7 @@ public partial class ProjectPersonGrid
     {
         var parameters = new DialogParameters
         {
-            ["AutographId"] = projectPerson.AutographId,
-            ["UserId"] = projectPerson.UserId
+            ["AutographId"] = projectPerson.AutographId
         };
 
         var options = new DialogOptions()

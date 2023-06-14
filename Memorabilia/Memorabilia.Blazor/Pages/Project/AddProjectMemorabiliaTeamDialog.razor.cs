@@ -3,6 +3,9 @@
 public partial class AddProjectMemorabiliaTeamDialog
 {
     [Inject]
+    public IApplicationStateService ApplicationStateService { get; set; }
+
+    [Inject]
     public IDialogService DialogService { get; set; }
 
     [Inject]
@@ -22,9 +25,6 @@ public partial class AddProjectMemorabiliaTeamDialog
 
     [Parameter]
     public int ProjectId { get; set; }
-
-    [Parameter]
-    public int UserId { get; set; }
 
     protected ProjectEditModel Project;
 
@@ -46,7 +46,7 @@ public partial class AddProjectMemorabiliaTeamDialog
 
         ProjectMemorabiliaTeam.ItemTypeId = ItemTypeId;
         ProjectMemorabiliaTeam.Id = ProjectId;
-        ProjectMemorabiliaTeam.UserId = UserId;
+        ProjectMemorabiliaTeam.UserId = ApplicationStateService.CurrentUser.Id;
 
         MudDialog.Close(DialogResult.Ok(ProjectMemorabiliaTeam));
     }
@@ -55,7 +55,6 @@ public partial class AddProjectMemorabiliaTeamDialog
     {
         var parameters = new Dictionary<string, object>
         {
-            ["UserId"] = UserId,
             ["ItemTypeId"] = ItemTypeId,
             ["TeamId"] = projectMemorabiliaTeam.Team.Id
         };

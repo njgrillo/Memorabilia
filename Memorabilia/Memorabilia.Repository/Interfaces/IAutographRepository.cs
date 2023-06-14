@@ -6,7 +6,7 @@ public interface IAutographRepository : IDomainRepository<Entity.Autograph>
 
     Task<Entity.Autograph[]> GetAll(int? memorabiliaId = null, int? userId = null);
 
-    Task<Entity.Autograph[]> GetAll(Dictionary<string, object> parameters);
+    Task<Entity.Autograph[]> GetAll(Dictionary<string, object> parameters, int userId);
 
     int[] GetColorIds(int userId);
 

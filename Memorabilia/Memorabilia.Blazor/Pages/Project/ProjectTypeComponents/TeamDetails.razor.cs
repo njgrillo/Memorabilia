@@ -17,8 +17,7 @@ public partial class TeamDetails
         {
             ["ItemTypeId"] = Model.ItemTypeId,
             ["MaxRank"] = Model.MemorabiliaTeams.Any() ? Model.MemorabiliaTeams.Max(item => item.Rank) + 1 : 1,
-            ["ProjectId"] = Model.Id,
-            ["UserId"] = Model.UserId
+            ["ProjectId"] = Model.Id
         };
 
         var options = new DialogOptions()

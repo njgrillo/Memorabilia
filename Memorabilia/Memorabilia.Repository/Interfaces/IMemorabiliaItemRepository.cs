@@ -11,7 +11,7 @@ public interface IMemorabiliaItemRepository
                                                  PageInfo pageInfo,
                                                  MemorabiliaSearchCriteria memorabiliaSearchCriteria = null);
 
-    Task<Entity.Memorabilia[]> GetAll(Dictionary<string, object> parameters);
+    Task<Entity.Memorabilia[]> GetAll(Dictionary<string, object> parameters, int userId);
 
     Task<PagedResult<Entity.Memorabilia>> GetAllByCollection(int collectionId,
                                                              PageInfo pageInfo,

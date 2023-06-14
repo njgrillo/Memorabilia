@@ -5,9 +5,6 @@ public partial class ViewDashboard
     [Inject]
     public QueryRouter QueryRouter { get; set; }
 
-    [Parameter]
-    public int UserId { get; set; }
-
     protected DashboardModel Model 
         = new();
 
@@ -22,7 +19,6 @@ public partial class ViewDashboard
     private Dictionary<string, object> GetParameters(DashboardItem dashboardItem)
         => new()
             {
-                { "DashboardItem", dashboardItem },
-                { "UserId", UserId }
+                { "DashboardItem", dashboardItem }
             };
 }

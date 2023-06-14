@@ -8,9 +8,6 @@ public partial class AddCollectionMemorabiliaDialog
     [CascadingParameter]
     public MudDialogInstance MudDialog { get; set; }
 
-    [Parameter]
-    public int UserId { get; set; }
-
     protected List<MemorabiliaModel> SelectedMemorabilia 
         = new();
 

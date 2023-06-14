@@ -14,9 +14,6 @@ public partial class AutographImageCarouselViewerDialog
     [Parameter]
     public int AutographId { get; set; }
 
-    [Parameter]
-    public int UserId { get; set; }
-
     protected Entity.AutographImage[] Images { get; set; }
         = Array.Empty<Entity.AutographImage>();
 
