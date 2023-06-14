@@ -15,6 +15,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Memorabilia.Blazor", "Memor
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Framework.Library", "..\..\Framework\Framework.Library\Framework.Library.csproj", "{7FF1A471-A623-4764-9CC1-CC6B9CB95B2A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Memorabilia.MinimalAPI", "Memorabilia.MinimalAPI\Memorabilia.MinimalAPI.csproj", "{120AA331-8EBC-4E46-8FBD-17B26C4CEE03}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,6 +47,10 @@ Global
 		{7FF1A471-A623-4764-9CC1-CC6B9CB95B2A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7FF1A471-A623-4764-9CC1-CC6B9CB95B2A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7FF1A471-A623-4764-9CC1-CC6B9CB95B2A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{120AA331-8EBC-4E46-8FBD-17B26C4CEE03}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{120AA331-8EBC-4E46-8FBD-17B26C4CEE03}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{120AA331-8EBC-4E46-8FBD-17B26C4CEE03}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{120AA331-8EBC-4E46-8FBD-17B26C4CEE03}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

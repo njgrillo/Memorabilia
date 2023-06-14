@@ -1,12 +1,5 @@
 ﻿<Condition Evaluation="!_user.Identity.Name.IsNullOrEmpty()">
     <Match>
-        <MudImage Class="rounded-lg"
-                  Elevation="0"
-                  Height="25"
-                  ObjectFit="@ObjectFit.Cover"
-                  Src="@Avatar"
-                  Width="25" />
-        <b>@GivenName @Surname</b>
         <MudTooltip Text="Logout">
             <MudLink Href="/Logout">
                 <MudIconButton Color="MudBlazor.Color.Default"
@@ -14,6 +7,13 @@
                                Icon="@Icons.Material.Filled.Logout" />
             </MudLink>
         </MudTooltip>
+        <MudImage Class="rounded-lg"
+                  Elevation="0"
+                  Height="25"
+                  ObjectFit="@ObjectFit.Cover"
+                  Src="@Avatar"
+                  Width="25" />
+        <b>@GivenName @Surname</b>        
     </Match>
     <NotMatch>
         <MudTooltip Text="Login">
