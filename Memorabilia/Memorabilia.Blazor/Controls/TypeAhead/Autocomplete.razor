@@ -2,22 +2,30 @@
 
 @typeparam TItem
 
-<MudAutocomplete AdornmentColor="@AdornmentColor"
-                 AdornmentIcon="@AdornmentIcon"
-                 Disabled="@Disabled"
-                 Label="@Label"
-                 Placeholder="@Placeholder"
-                 ResetValueOnEmptyText="@ResetValueOnEmptyText"
-                 SearchFunc="@Search"
-                 T="TItem"
-                 Text="@GetDisplayText(SelectedValue)"
-                 Value="SelectedValue"
-                 ValueChanged="SelectionChanged"
-                 Variant="@Variant">
-    <ItemSelectedTemplate Context="item">
-        @GetItemSelectedText(item)
-    </ItemSelectedTemplate>
-    <ItemTemplate Context="item">
-        @GetItemText(item)
-    </ItemTemplate>
-</MudAutocomplete>
+<Condition Evaluation="DisplaySkeleton">
+    <Match>
+        <MudSkeleton Height="50px"
+                     SkeletonType="SkeletonType.Rectangle" />
+    </Match>
+    <NotMatch>
+        <MudAutocomplete AdornmentColor="@AdornmentColor"
+                         AdornmentIcon="@AdornmentIcon"
+                         Disabled="@Disabled"
+                         Label="@Label"
+                         Placeholder="@Placeholder"
+                         ResetValueOnEmptyText="@ResetValueOnEmptyText"
+                         SearchFunc="@Search"
+                         T="TItem"
+                         Text="@GetDisplayText(SelectedValue)"
+                         Value="SelectedValue"
+                         ValueChanged="SelectionChanged"
+                         Variant="@Variant">
+            <ItemSelectedTemplate Context="item">
+                @GetItemSelectedText(item)
+            </ItemSelectedTemplate>
+            <ItemTemplate Context="item">
+                @GetItemText(item)
+            </ItemTemplate>
+        </MudAutocomplete>
+    </NotMatch>
+</Condition>

@@ -1,7 +1,7 @@
 ﻿namespace Memorabilia.MinimalAPI.Handlers.Admin.AcquisitionTypes;
 
 public class GetAll
-    : Handler.RequestHandler<AcquisitionTypesRequest>, IRequestHandler<AcquisitionTypesRequest, IResult>
+    : RequestHandler<AcquisitionTypesRequest>, IRequestHandler<AcquisitionTypesRequest, IResult>
 {
     public GetAll(QueryRouter queryRouter) : base(queryRouter) { }
 

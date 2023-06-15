@@ -15,6 +15,9 @@ public partial class DropDown<TItem, TType>
         = true;
 
     [Parameter]
+    public bool DisplaySkeleton { get; set; }
+
+    [Parameter]
     public string Label { get; set; }
 
     [Parameter]

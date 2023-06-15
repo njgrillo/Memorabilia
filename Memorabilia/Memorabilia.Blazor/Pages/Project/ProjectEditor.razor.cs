@@ -23,6 +23,8 @@ public partial class ProjectEditor
     [Parameter]
     public int Id { get; set; }
 
+    protected bool Loaded;
+
     protected ProjectEditModel Model 
         = new();
 
@@ -66,6 +68,8 @@ public partial class ProjectEditor
         ProjectTypeComponent = Type.GetType($"Memorabilia.Blazor.Pages.Project.ProjectTypeComponents.{Model.ProjectType}Selector");
         
         SetProjectDetailsParameters();
+
+        Loaded = true;
     }
 
     protected void OnProjectTypeSelected(ProjectType projectType)

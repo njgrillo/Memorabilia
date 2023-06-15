@@ -13,31 +13,42 @@
     </DivRowCol3>
     <DivRowCol3>
         <Content>
-            <TextField Label="Name"
+            <TextField DisplaySkeleton="@(!Loaded)" 
+                       Label="Name"
                        MaxLength="1000"
                        SelectedText="@Model.Name"
                        SelectedTextChanged="@((p) => Model.Name = p)" />
         </Content>
         <ContentColumn2>
-            <MudDatePicker @bind-Date="Model.StartDate"
-                           DateFormat="MM/dd/yyyy"
-                           Editable="true"
-                           Label="Start Date"
-                           Mask="@(new DateMask("MM/dd/yyyy"))"
-                           Variant="Variant.Outlined" />
+            <SkeletonLoader IsLoading="@(!Loaded)">
+                <MudDatePicker @bind-Date="Model.StartDate"
+                               DateFormat="MM/dd/yyyy"
+                               Editable="true"
+                               Label="Start Date"
+                               Mask="@(new DateMask("MM/dd/yyyy"))"
+                               Variant="Variant.Outlined" />
+            </SkeletonLoader>            
         </ContentColumn2>
         <ContentColumn3>
-            <MudDatePicker @bind-Date="Model.EndDate"
-                           DateFormat="MM/dd/yyyy"
-                           Editable="true"
-                           Label="End Date"
-                           Mask="@(new DateMask("MM/dd/yyyy"))"
-                           Variant="Variant.Outlined" />
+            <SkeletonLoader IsLoading="@(!Loaded)">
+                <MudDatePicker @bind-Date="Model.EndDate"
+                               DateFormat="MM/dd/yyyy"
+                               Editable="true"
+                               Label="End Date"
+                               Mask="@(new DateMask("MM/dd/yyyy"))"
+                               Variant="Variant.Outlined" />
+            </SkeletonLoader>            
         </ContentColumn3>
     </DivRowCol3>
-    <ProjectSelector Disabled="@(Model.Id > 0)" 
-                     OnProjectTypeSelected="OnProjectTypeSelected"
-                     SelectedProjectType="Model.ProjectType" />
+    <DivRowCol3>
+        <Content>
+            <SkeletonLoader IsLoading="@(!Loaded)">
+                <ProjectSelector Disabled="@(Model.Id > 0)"
+                                 OnProjectTypeSelected="OnProjectTypeSelected"
+                                 SelectedProjectType="Model.ProjectType" />
+            </SkeletonLoader>
+        </Content>
+    </DivRowCol3>      
     <br /> 
     <Condition Evaluation="@(Model.ProjectType != null && ProjectTypeComponent != null)">
         <Match>

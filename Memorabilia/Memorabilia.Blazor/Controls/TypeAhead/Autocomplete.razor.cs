@@ -12,7 +12,10 @@ public abstract partial class Autocomplete<TItem>
         = Icons.Material.Filled.Search;
 
     [Parameter]
-    public bool Disabled { get; set; } 
+    public bool Disabled { get; set; }
+
+    [Parameter]
+    public bool DisplaySkeleton { get; set; }
 
     [Parameter]
     public string Label { get; set; }    

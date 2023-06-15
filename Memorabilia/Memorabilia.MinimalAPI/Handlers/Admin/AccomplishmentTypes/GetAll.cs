@@ -7,10 +7,6 @@ public class GetAll
 
     public override async Task<IResult> Handle(AccomplishmentTypesRequest request, 
                                                CancellationToken cancellationToken)
-    {
-        var response 
-            = new Response<Entity.DomainEntity[]>(await QueryRouter.Send(new GetAccomplishmentTypes()));
-
-        return Results.Ok(response);
-    }
+        => Results.Ok(new Response<Entity.DomainEntity[]>(
+            await QueryRouter.Send(new GetAccomplishmentTypes())));
 }

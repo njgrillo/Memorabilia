@@ -3,40 +3,48 @@
 @typeparam TItem
 @typeparam TType
 
-<Condition Evaluation="@MultiSelect">
+<Condition Evaluation="DisplaySkeleton">
     <Match>
-        <MudSelect @bind-Value="SelectedValue"
-                   Disabled="@Disabled"
-                   Label="@Label"
-                   MultiSelection="true" 
-                   MultiSelectionTextFunc="@(new Func<List<string>, string>(GetMultiSelectionText))"   
-                   SelectAll="SelectAll"
-                   SelectedValues="SelectedItems"
-                   SelectedValuesChanged="SelectedItemsChanged"
-                   T="TType"
-                   Variant="Variant.Outlined">
-            <Iterations Items="Items" Context="item">
-                <MudSelectItem Value="@(GetItemDisplayValue(item))">@GetItemDisplayText(item)</MudSelectItem>
-            </Iterations>
-        </MudSelect> 
+        <MudSkeleton Height="50px"
+                     SkeletonType="SkeletonType.Rectangle" />
     </Match>
     <NotMatch>
-        <MudSelect Disabled="@Disabled"
-                   Label="@Label"
-                   T="TType"
-                   Value="@SelectedValue"
-                   ValueChanged="@((p) => SelectionChanged.InvokeAsync(p))"
-                   Variant="@Variant">
-            <Condition Evaluation="@DisplaySelect">
-                <Match>
-                    <MudSelectItem Value="@SelectItemValue">@SelectItemText</MudSelectItem>
-                </Match>
-            </Condition>
-            <Iterations Items="Items" Context="item">
-                <MudSelectItem Value="@(GetItemDisplayValue(item))">@GetItemDisplayText(item)</MudSelectItem>
-            </Iterations>
-        </MudSelect>
+        <Condition Evaluation="@MultiSelect">
+            <Match>
+                <MudSelect @bind-Value="SelectedValue"
+                           Disabled="@Disabled"
+                           Label="@Label"
+                           MultiSelection="true"
+                           MultiSelectionTextFunc="@(new Func<List<string>, string>(GetMultiSelectionText))"
+                           SelectAll="SelectAll"
+                           SelectedValues="SelectedItems"
+                           SelectedValuesChanged="SelectedItemsChanged"
+                           T="TType"
+                           Variant="Variant.Outlined">
+                    <Iterations Context="item" 
+                                Items="Items">
+                        <MudSelectItem Value="@(GetItemDisplayValue(item))">@GetItemDisplayText(item)</MudSelectItem>
+                    </Iterations>
+                </MudSelect>
+            </Match>
+            <NotMatch>
+                <MudSelect Disabled="@Disabled"
+                           Label="@Label"
+                           T="TType"
+                           Value="@SelectedValue"
+                           ValueChanged="@((p) => SelectionChanged.InvokeAsync(p))"
+                           Variant="@Variant">
+                    <Condition Evaluation="@DisplaySelect">
+                        <Match>
+                            <MudSelectItem Value="@SelectItemValue">@SelectItemText</MudSelectItem>
+                        </Match>
+                    </Condition>
+                    <Iterations Context="item"
+                                Items="Items">
+                        <MudSelectItem Value="@(GetItemDisplayValue(item))">@GetItemDisplayText(item)</MudSelectItem>
+                    </Iterations>
+                </MudSelect>
+            </NotMatch>
+        </Condition>
     </NotMatch>
 </Condition>
-
-

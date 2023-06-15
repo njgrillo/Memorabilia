@@ -3,6 +3,9 @@
 public abstract class Field : ComponentBase
 {
     [Parameter]
+    public bool DisplaySkeleton { get; set; }
+
+    [Parameter]
     public string Label { get; set; }
 
     [Parameter]
