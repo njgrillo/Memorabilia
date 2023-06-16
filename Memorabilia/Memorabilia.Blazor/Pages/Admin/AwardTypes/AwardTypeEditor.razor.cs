@@ -1,9 +1,9 @@
 ﻿namespace Memorabilia.Blazor.Pages.Admin.AwardTypes;
 
 public partial class AwardTypeEditor 
-    : EditDomainItem<AwardType>, IEditDomainItem
+    : EditDomainItem<AwardType>
 {
-    public async Task OnLoad()
+    protected override async Task OnInitializedAsync()
     {
         await OnLoad(new GetAwardType(Id));
     }

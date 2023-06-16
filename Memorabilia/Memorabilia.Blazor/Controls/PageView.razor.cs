@@ -30,13 +30,5 @@ public partial class PageView
         = "Back";
 
     [Parameter]
-    public EventCallback OnLoad { get; set; }
-
-    [Parameter]
     public string PageTitle { get; set; }
-
-    public async Task Load()
-    {
-        await OnLoad.InvokeAsync();
-    }
 }

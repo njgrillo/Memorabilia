@@ -1,14 +1,14 @@
 ﻿namespace Memorabilia.Blazor.Pages.Admin.AccomplishmentTypes;
 
 public partial class ViewAccomplishmentTypes 
-    : ViewDomainItem<AccomplishmentTypesModel>, IDeleteDomainItem, IViewDomainItem
+    : ViewDomainItem<AccomplishmentTypesModel>
 {
     public async Task OnDelete(DomainEditModel editModel)
     {
         await OnDelete(new SaveAccomplishmentType(editModel));
     }
 
-    public async Task OnLoad()
+    protected override async Task OnInitializedAsync()
     {
         Model = new AccomplishmentTypesModel(await QueryRouter.Send(new GetAccomplishmentTypes()));
     }

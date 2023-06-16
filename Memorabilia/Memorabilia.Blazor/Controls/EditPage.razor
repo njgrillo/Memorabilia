@@ -1,46 +1,42 @@
 ﻿@typeparam TItem
 
-<Page OnLoad="Load">
-    <Content>
-        <PageHeader PageTitle="@PageTitle" />
-        @TimelineContent
-        @ImagePreview
-        <PageBorder>
-            <Condition Evaluation="@(ValidationResultAlerts.Any())">
-                <Match>
-                    <AlertPanel Alerts="ValidationResultAlerts" />
-                </Match>
-            </Condition>
-            <PageImage ImageFileName="@ImageFileName" />
-            <EditForm Model="Model"
-                      OnValidSubmit="HandleValidSubmit">
-                <DataAnnotationsValidator />
-                <ValidationSummary />
-                @ChildContent
-                <Condition Evaluation="@UseMultipleButtons">
-                    <Match>
-                        <DivLeftAlign>
-                            @AdditionalButtons
-                            <Div Hidden="@(!DisplaySaveContinueButton)">
-                                <SaveButton OnClick="@(()=> _continue = true)"
-                                            Text="Save & Continue" />
-                                <SaveButton Text="Save & Exit" />
-                                <CancelButton OnClick="@(_ => NavigationManager.NavigateTo(ExitNavigationPath))" />
-                            </Div>
-                        </DivLeftAlign>
-                        <br />
-                    </Match>
-                    <NotMatch>
-                        <SaveButton Text="Save" />
-                    </NotMatch>
-                </Condition>
-            </EditForm>
-        </PageBorder>
-        <Condition Evaluation="@DisplayFooter">
+<PageHeader PageTitle="@PageTitle" />
+@TimelineContent
+@ImagePreview
+<PageBorder>
+    <Condition Evaluation="@(ValidationResultAlerts.Any())">
+        <Match>
+            <AlertPanel Alerts="ValidationResultAlerts" />
+        </Match>
+    </Condition>
+    <PageImage ImageFileName="@ImageFileName" />
+    <EditForm Model="Model"
+              OnValidSubmit="HandleValidSubmit">
+        <DataAnnotationsValidator />
+        <ValidationSummary />
+        @ChildContent
+        <Condition Evaluation="@UseMultipleButtons">
             <Match>
-                <PageFooter NavigationPath="@PageFooterNavigationPath"
-                            NavigationPathText="@PageFooterButtonText" />
+                <DivLeftAlign>
+                    @AdditionalButtons
+                    <Div Hidden="@(!DisplaySaveContinueButton)">
+                        <SaveButton OnClick="@(()=> _continue = true)"
+                                    Text="Save & Continue" />
+                        <SaveButton Text="Save & Exit" />
+                        <CancelButton OnClick="@(_ => NavigationManager.NavigateTo(ExitNavigationPath))" />
+                    </Div>
+                </DivLeftAlign>
+                <br />
             </Match>
+            <NotMatch>
+                <SaveButton Text="Save" />
+            </NotMatch>
         </Condition>
-    </Content>
-</Page>
+    </EditForm>
+</PageBorder>
+<Condition Evaluation="@DisplayFooter">
+    <Match>
+        <PageFooter NavigationPath="@PageFooterNavigationPath"
+                    NavigationPathText="@PageFooterButtonText" />
+    </Match>
+</Condition>

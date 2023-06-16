@@ -3,7 +3,7 @@
 public partial class ViewSportLeagueLevels 
     : ViewItem<SportLeagueLevelsModel, SportLeagueLevelModel>
 {
-    protected async Task OnLoad()
+    protected override async Task OnInitializedAsync()
     {
         Model = new SportLeagueLevelsModel(await QueryRouter.Send(new GetSportLeagueLevels()));
     }

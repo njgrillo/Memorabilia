@@ -3,7 +3,7 @@
 public partial class ViewItemTypeGameStyles 
     : ViewItem<ItemTypeGameStylesModel, ItemTypeGameStyleModel>
 {
-    protected async Task OnLoad()
+    protected override async Task OnInitializedAsync()
     {
         Model = new ItemTypeGameStylesModel(await QueryRouter.Send(new GetItemTypeGameStyles()));
     }

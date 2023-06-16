@@ -33,7 +33,7 @@ public partial class ManageDashboard
         Snackbar.Add($"{Model.PageTitle} was saved successfully!", Severity.Success);
     }
 
-    protected void OnLoad()
+    protected override void OnInitialized()
     {
         Model 
             = new UserDashboardEditModel(new UserDashboardsModel(ApplicationStateService.CurrentUser.Id,

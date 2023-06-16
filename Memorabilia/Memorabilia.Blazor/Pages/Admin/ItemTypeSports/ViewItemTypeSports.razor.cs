@@ -3,7 +3,7 @@
 public partial class ViewItemTypeSports 
     : ViewItem<ItemTypeSportsModel, ItemTypeSportModel>
 {
-    protected async Task OnLoad()
+    protected override async Task OnInitializedAsync()
     {
         Model = new ItemTypeSportsModel(await QueryRouter.Send(new GetItemTypeSports()));
     }

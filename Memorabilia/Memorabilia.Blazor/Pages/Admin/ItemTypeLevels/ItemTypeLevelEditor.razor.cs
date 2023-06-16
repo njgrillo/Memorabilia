@@ -8,7 +8,7 @@ public partial class ItemTypeLevelEditor
         await HandleValidSubmit(new SaveItemTypeLevel(EditModel));
     }
 
-    protected async Task OnLoad()
+    protected override async Task OnInitializedAsync()
     {
         Initialize();
 

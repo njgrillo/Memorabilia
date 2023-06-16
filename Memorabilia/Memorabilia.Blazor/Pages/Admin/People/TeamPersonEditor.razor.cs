@@ -25,7 +25,7 @@ public partial class TeamPersonEditor
         PerformValidation = false;
     }
 
-    protected async Task OnLoad()
+    protected override async Task OnInitializedAsync()
     {
         Entity.Person person = await QueryRouter.Send(new GetPerson(PersonId));
 

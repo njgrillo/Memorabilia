@@ -3,7 +3,7 @@
 public partial class ViewItemTypeSpots 
     : ViewItem<ItemTypeSpotsModel, ItemTypeSpotModel>
 {
-    protected async Task OnLoad()
+    protected override async Task OnInitializedAsync()
     {
         Model = new ItemTypeSpotsModel(await QueryRouter.Send(new GetItemTypeSpots()));
     }

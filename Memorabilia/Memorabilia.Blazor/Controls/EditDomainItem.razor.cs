@@ -24,20 +24,9 @@ public partial class EditDomainItem
         = 100;
 
     [Parameter]
-    public EventCallback OnLoad { get; set; }
-
-    [Parameter]
     public EventCallback<DomainEditModel> OnSave { get; set; }
 
     protected DomainEditModel Model;
-
-    protected async Task Load()
-    {
-        if (Model.Id == 0)
-            return;
-
-        await OnLoad.InvokeAsync();
-    }
 
     protected async Task Save()
     {

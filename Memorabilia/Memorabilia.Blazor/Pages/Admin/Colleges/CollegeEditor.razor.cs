@@ -1,9 +1,9 @@
 ﻿namespace Memorabilia.Blazor.Pages.Admin.Colleges;
 
 public partial class CollegeEditor 
-    : EditDomainItem<College>, IEditDomainItem
+    : EditDomainItem<College>
 {
-    public async Task OnLoad()
+    protected override async Task OnInitializedAsync()
     {
         await OnLoad(new GetCollege(Id));
     }

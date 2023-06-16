@@ -3,7 +3,7 @@
 public partial class ViewItemTypeBrands 
     : ViewItem<ItemTypeBrandsModel, ItemTypeBrandModel>
 {
-    protected async Task OnLoad()
+    protected override async Task OnInitializedAsync()
     {
         Model = new ItemTypeBrandsModel(await QueryRouter.Send(new GetItemTypeBrands()));
     }

@@ -1,9 +1,9 @@
 ﻿namespace Memorabilia.Blazor.Pages.Admin.CerealTypes;
 
 public partial class CerealTypeEditor 
-    : EditDomainItem<CerealType>, IEditDomainItem
+    : EditDomainItem<CerealType>
 {
-    public async Task OnLoad()
+    protected override async Task OnInitializedAsync()
     {
         await OnLoad(new GetCerealType(Id));
     }

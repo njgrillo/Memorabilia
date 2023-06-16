@@ -1,9 +1,9 @@
 ﻿namespace Memorabilia.Blazor.Pages.Admin.ItemTypes;
 
 public partial class ItemTypeEditor 
-    : EditDomainItem<ItemType>, IEditDomainItem
+    : EditDomainItem<ItemType>
 {
-    public async Task OnLoad()
+    protected override async Task OnInitializedAsync()
     {
         await OnLoad(new GetItemType(Id));
     }

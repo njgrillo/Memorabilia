@@ -1,9 +1,9 @@
 ﻿namespace Memorabilia.Blazor.Pages.Admin.RecordTypes;
 
 public partial class RecordTypeEditor 
-    : EditDomainItem<RecordType>, IEditDomainItem
+    : EditDomainItem<RecordType>
 {
-    public async Task OnLoad()
+    protected override async Task OnInitializedAsync()
     {
         await OnLoad(new GetRecordType(Id));
     }

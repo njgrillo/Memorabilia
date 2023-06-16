@@ -1,14 +1,14 @@
 ﻿namespace Memorabilia.Blazor.Pages.Admin.RecordTypes;
 
 public partial class ViewRecordTypes 
-    : ViewDomainItem<RecordTypesModel>, IDeleteDomainItem, IViewDomainItem
+    : ViewDomainItem<RecordTypesModel>
 {
     public async Task OnDelete(DomainEditModel editModel)
     {
         await OnDelete(new SaveRecordType(editModel));
     }
 
-    public async Task OnLoad()
+    protected override async Task OnInitializedAsync()
     {
         Model = new RecordTypesModel(await QueryRouter.Send(new GetRecordTypes()));
     }

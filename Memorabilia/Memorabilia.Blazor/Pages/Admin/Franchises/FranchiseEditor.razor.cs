@@ -11,7 +11,7 @@ public partial class FranchiseEditor
         await HandleValidSubmit(new SaveFranchise(EditModel));
     }
 
-    protected async Task OnLoad()
+    protected override async Task OnInitializedAsync()
     {
         if (Id == 0)
             return;

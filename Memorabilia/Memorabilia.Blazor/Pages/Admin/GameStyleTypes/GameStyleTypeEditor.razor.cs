@@ -1,9 +1,9 @@
 ﻿namespace Memorabilia.Blazor.Pages.Admin.GameStyleTypes;
 
 public partial class GameStyleTypeEditor 
-    : EditDomainItem<GameStyleType>, IEditDomainItem
+    : EditDomainItem<GameStyleType>
 {
-    public async Task OnLoad()
+    protected override async Task OnInitializedAsync()
     {
         await OnLoad(new GetGameStyleType(Id));
     }

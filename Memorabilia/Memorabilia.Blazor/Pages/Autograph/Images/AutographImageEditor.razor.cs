@@ -8,6 +8,16 @@ public partial class AutographImageEditor
 
     private EditImages<AutographImagesEditModel> EditImages;
 
+    protected override async Task OnInitializedAsync()
+    {
+        var autograph = new AutographModel(await QueryRouter.Send(new GetAutograph(AutographId)));
+
+        Model = new AutographImagesEditModel(autograph.Images,
+                                             autograph.ItemType,
+                                             autograph.MemorabiliaId,
+                                             autograph.Id);
+    }
+
     protected async Task OnImport()
     {
         var model 
@@ -25,17 +35,7 @@ public partial class AutographImageEditor
                                              Model.ItemType,
                                              Model.MemorabiliaId, 
                                              AutographId);
-    }
-
-    protected async Task OnLoad()
-    {
-        var autograph = new AutographModel(await QueryRouter.Send(new GetAutograph(AutographId)));
-
-        Model = new AutographImagesEditModel(autograph.Images, 
-                                             autograph.ItemType, 
-                                             autograph.MemorabiliaId, 
-                                             autograph.Id);
-    }
+    }    
 
     protected async Task OnSave()
     {

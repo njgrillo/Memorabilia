@@ -1,9 +1,9 @@
 ﻿namespace Memorabilia.Blazor.Pages.Admin.Conditions;
 
 public partial class ConditionEditor 
-    : EditDomainItem<Condition>, IEditDomainItem
+    : EditDomainItem<Condition>
 {
-    public async Task OnLoad()
+    protected override async Task OnInitializedAsync()
     {
         await OnLoad(new GetCondition(Id));
     }

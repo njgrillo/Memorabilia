@@ -1,9 +1,9 @@
 ﻿namespace Memorabilia.Blazor.Pages.Admin.HelmetTypes;
 
 public partial class HelmetTypeEditor 
-    : EditDomainItem<HelmetType>, IEditDomainItem
+    : EditDomainItem<HelmetType>
 {
-    public async Task OnLoad()
+    protected override async Task OnInitializedAsync()
     {
         await OnLoad(new GetHelmetType(Id));
     }

@@ -1,14 +1,14 @@
 ﻿namespace Memorabilia.Blazor.Pages.Admin.BammerTypes;
 
 public partial class ViewBammerTypes 
-    : ViewDomainItem<BammerTypesModel>, IDeleteDomainItem, IViewDomainItem
+    : ViewDomainItem<BammerTypesModel>
 {
     public async Task OnDelete(DomainEditModel editModel)
     {
         await OnDelete(new SaveBammerType(editModel));
     }
 
-    public async Task OnLoad()
+    protected override async Task OnInitializedAsync()
     {
         Model = new BammerTypesModel(await QueryRouter.Send(new GetBammerTypes()));
     }

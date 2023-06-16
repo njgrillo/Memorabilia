@@ -3,7 +3,7 @@
 public partial class ViewCommissioners 
     : ViewItem<CommissionersModel, CommissionerModel>
 {
-    protected async Task OnLoad()
+    protected override async Task OnInitializedAsync()
     {
         Model = new CommissionersModel(await QueryRouter.Send(new GetCommissioners()));
     }

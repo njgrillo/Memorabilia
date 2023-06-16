@@ -1,23 +1,19 @@
-﻿<Page OnLoad="Load">
-    <Content>
-        <Condition Evaluation="@DisplayPageHeader">
-            <Match>
-                <PageHeader PageTitle="@PageTitle" />
-            </Match>
-        </Condition>
-        @ChildContent
-        <Condition Evaluation="@DisplayAddButton">
-            <Match>
-                <DivRowCol12Center>
-                    <MudTooltip Text="@AddTitle">
-                        <MudFab Color="MudBlazor.Color.Primary"
-                                Icon="@Icons.Material.Outlined.AddCircleOutline"
-                                OnClick="@(_ => NavigationManager.NavigateTo(@AddRoute))" />
-                    </MudTooltip>
-                </DivRowCol12Center>
-            </Match>
-        </Condition>
-        <PageFooter NavigationPath="@NavigationPath"
-                    NavigationPathText="@NavigationPathText" />
-    </Content>
-</Page>
+﻿<Condition Evaluation="@DisplayPageHeader">
+    <Match>
+        <PageHeader PageTitle="@PageTitle" />
+    </Match>
+</Condition>
+@ChildContent
+<Condition Evaluation="@DisplayAddButton">
+    <Match>
+        <DivRowCol12Center>
+            <MudTooltip Text="@AddTitle">
+                <MudFab Color="MudBlazor.Color.Primary"
+                        Icon="@Icons.Material.Outlined.AddCircleOutline"
+                        OnClick="@(_ => NavigationManager.NavigateTo(@AddRoute))" />
+            </MudTooltip>
+        </DivRowCol12Center>
+    </Match>
+</Condition>
+<PageFooter NavigationPath="@NavigationPath"
+            NavigationPathText="@NavigationPathText" />

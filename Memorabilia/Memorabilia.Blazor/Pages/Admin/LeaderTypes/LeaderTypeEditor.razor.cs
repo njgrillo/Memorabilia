@@ -1,9 +1,9 @@
 ﻿namespace Memorabilia.Blazor.Pages.Admin.LeaderTypes;
 
 public partial class LeaderTypeEditor 
-    : EditDomainItem<LeaderType>, IEditDomainItem
+    : EditDomainItem<LeaderType>
 {
-    public async Task OnLoad()
+    protected override async Task OnInitializedAsync()
     {
         await OnLoad(new GetLeaderType(Id));
     }

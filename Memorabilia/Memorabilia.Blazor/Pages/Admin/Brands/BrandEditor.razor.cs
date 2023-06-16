@@ -1,9 +1,9 @@
 ﻿namespace Memorabilia.Blazor.Pages.Admin.Brands;
 
 public partial class BrandEditor 
-    : EditDomainItem<Brand>, IEditDomainItem
+    : EditDomainItem<Brand>
 {
-    public async Task OnLoad()
+    protected override async Task OnInitializedAsync()
     {
         await OnLoad(new GetBrand(Id));
     }

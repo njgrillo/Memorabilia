@@ -1,9 +1,9 @@
 ﻿namespace Memorabilia.Blazor.Pages.Admin.ProjectStatusTypes;
 
 public partial class ProjectStatusTypeEditor 
-    : EditDomainItem<ProjectStatusType>, IEditDomainItem
+    : EditDomainItem<ProjectStatusType>
 {
-    public async Task OnLoad()
+    protected override async Task OnInitializedAsync()
     {
         await OnLoad(new GetProjectStatusType(Id));
     }

@@ -10,7 +10,7 @@ public partial class DashboardItemEditor
         await HandleValidSubmit(new SaveDashboardItem(EditModel));
     }
 
-    protected async Task OnLoad()
+    protected override async Task OnInitializedAsync()
     {
         if (Id == 0)
             return;

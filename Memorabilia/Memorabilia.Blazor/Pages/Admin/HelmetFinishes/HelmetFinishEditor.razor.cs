@@ -1,9 +1,9 @@
 ﻿namespace Memorabilia.Blazor.Pages.Admin.HelmetFinishes;
 
 public partial class HelmetFinishEditor 
-    : EditDomainItem<HelmetFinish>, IEditDomainItem
+    : EditDomainItem<HelmetFinish>
 {
-    public async Task OnLoad()
+    protected override async Task OnInitializedAsync()
     {
         await OnLoad(new GetHelmetFinish(Id));
     }

@@ -1,9 +1,9 @@
 ﻿namespace Memorabilia.Blazor.Pages.Admin.BammerTypes;
 
 public partial class BammerTypeEditor 
-    : EditDomainItem<BammerType>, IEditDomainItem
+    : EditDomainItem<BammerType>
 {
-    public async Task OnLoad()
+    protected override async Task OnInitializedAsync()
     {
         await OnLoad(new GetBammerType(Id));
     }

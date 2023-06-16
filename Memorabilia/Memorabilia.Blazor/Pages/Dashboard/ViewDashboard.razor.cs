@@ -8,7 +8,7 @@ public partial class ViewDashboard
     protected DashboardModel Model 
         = new();
 
-    protected async Task OnLoad()
+    protected override async Task OnInitializedAsync()
     {
         Model = await QueryRouter.Send(new GetDashboard());
     }

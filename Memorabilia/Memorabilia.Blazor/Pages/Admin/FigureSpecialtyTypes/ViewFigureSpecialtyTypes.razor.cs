@@ -1,14 +1,14 @@
 ﻿namespace Memorabilia.Blazor.Pages.Admin.FigureSpecialtyTypes;
 
 public partial class ViewFigureSpecialtyTypes 
-    : ViewDomainItem<FigureSpecialtyTypesModel>, IDeleteDomainItem, IViewDomainItem
+    : ViewDomainItem<FigureSpecialtyTypesModel>
 {
     public async Task OnDelete(DomainEditModel editModel)
     {
         await CommandRouter.Send(new SaveFigureSpecialtyType(editModel));
     }
 
-    public async Task OnLoad()
+    protected override async Task OnInitializedAsync()
     {
         Model = new FigureSpecialtyTypesModel(await QueryRouter.Send(new GetFigureSpecialtyTypes()));
     }

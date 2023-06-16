@@ -1,14 +1,14 @@
 ﻿namespace Memorabilia.Blazor.Pages.Admin.HelmetTypes;
 
 public partial class ViewHelmetTypes 
-    : ViewDomainItem<HelmetTypesModel>, IDeleteDomainItem, IViewDomainItem
+    : ViewDomainItem<HelmetTypesModel>
 {
     public async Task OnDelete(DomainEditModel editModel)
     {
         await CommandRouter.Send(new SaveHelmetType(editModel));
     }
 
-    public async Task OnLoad()
+    protected override async Task OnInitializedAsync()
     {
         Model = new HelmetTypesModel(await QueryRouter.Send(new GetHelmetTypes()));
     }

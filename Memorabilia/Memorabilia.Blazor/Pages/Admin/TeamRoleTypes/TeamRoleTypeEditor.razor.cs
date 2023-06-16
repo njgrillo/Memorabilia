@@ -1,9 +1,9 @@
 ﻿namespace Memorabilia.Blazor.Pages.Admin.TeamRoleTypes;
 
 public partial class TeamRoleTypeEditor 
-    : EditDomainItem<TeamRoleType>, IEditDomainItem
+    : EditDomainItem<TeamRoleType>
 {
-    public async Task OnLoad()
+    protected override async Task OnInitializedAsync()
     {
         await OnLoad(new GetTeamRoleType(Id));
     }

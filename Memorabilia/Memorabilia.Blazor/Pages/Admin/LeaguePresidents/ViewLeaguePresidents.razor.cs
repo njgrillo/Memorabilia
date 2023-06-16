@@ -3,7 +3,7 @@
 public partial class ViewLeaguePresidents 
     : ViewItem<LeaguePresidentsModel, LeaguePresidentModel>
 {
-    protected async Task OnLoad()
+    protected override async Task OnInitializedAsync()
     {
         Model = new LeaguePresidentsModel(await QueryRouter.Send(new GetLeaguePresidents()));
     }

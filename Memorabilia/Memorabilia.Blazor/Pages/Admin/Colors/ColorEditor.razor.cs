@@ -1,9 +1,9 @@
 ﻿namespace Memorabilia.Blazor.Pages.Admin.Colors;
 
 public partial class ColorEditor 
-    : EditDomainItem<Constant.Color>, IEditDomainItem
+    : EditDomainItem<Constant.Color>
 {
-    public async Task OnLoad()
+    protected override async Task OnInitializedAsync()
     {
         await OnLoad(new GetColor(Id));
     }

@@ -6,7 +6,7 @@ public partial class ViewPeople
     [Inject]
     public ImageService ImageService { get; set; }
 
-    protected async Task OnLoad()
+    protected override async Task OnInitializedAsync()
     {
         Model = new PeopleModel(await QueryRouter.Send(new GetPeople()));
     }

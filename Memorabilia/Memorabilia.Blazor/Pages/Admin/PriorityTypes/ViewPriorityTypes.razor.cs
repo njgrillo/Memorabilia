@@ -1,14 +1,14 @@
 ﻿namespace Memorabilia.Blazor.Pages.Admin.PriorityTypes
 {
     public partial class ViewPriorityTypes 
-        : ViewDomainItem<PriorityTypesModel>, IDeleteDomainItem, IViewDomainItem
+        : ViewDomainItem<PriorityTypesModel>
     {
         public async Task OnDelete(DomainEditModel editModel)
         {
             await OnDelete(new SavePriorityType(editModel));
         }
 
-        public async Task OnLoad()
+        protected override async Task OnInitializedAsync()
         {
             Model = new PriorityTypesModel(await QueryRouter.Send(new GetPriorityTypes()));
         }

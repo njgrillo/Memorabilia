@@ -8,7 +8,7 @@ public partial class ItemTypeSportEditor
         await HandleValidSubmit(new SaveItemTypeSport(EditModel));
     }
 
-    protected async Task OnLoad()
+    protected override async Task OnInitializedAsync()
     {
         Initialize();
 

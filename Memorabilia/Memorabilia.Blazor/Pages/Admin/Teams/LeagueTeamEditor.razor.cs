@@ -8,7 +8,7 @@ public partial class LeagueTeamEditor
         await HandleValidSubmit(new SaveTeamLeague.Command(TeamId, EditModel.Leagues));
     }
 
-    protected async Task OnLoad()
+    protected override async Task OnInitializedAsync()
     {
         Initialize();
 

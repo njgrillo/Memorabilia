@@ -1,9 +1,9 @@
 ﻿namespace Memorabilia.Blazor.Pages.Admin.InternationalHallOfFameTypes;
 
 public partial class InternationalHallOfFameTypeEditor 
-    : EditDomainItem<InternationalHallOfFameType>, IEditDomainItem
+    : EditDomainItem<InternationalHallOfFameType>
 {
-    public async Task OnLoad()
+    protected override async Task OnInitializedAsync()
     {
         await OnLoad(new GetInternationalHallOfFameType(Id));
     }

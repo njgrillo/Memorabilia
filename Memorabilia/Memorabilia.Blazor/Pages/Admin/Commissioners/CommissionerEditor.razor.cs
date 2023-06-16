@@ -8,7 +8,7 @@ public partial class CommissionerEditor
         await HandleValidSubmit(new SaveCommissioner(EditModel));
     }
 
-    protected async Task OnLoad()
+    protected override async Task OnInitializedAsync()
     {
         if (Id == 0)
             return;        

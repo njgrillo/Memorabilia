@@ -1,9 +1,9 @@
 ﻿namespace Memorabilia.Blazor.Pages.Admin.PurchaseTypes;
 
 public partial class PurchaseTypeEditor 
-    : EditDomainItem<PurchaseType>, IEditDomainItem
+    : EditDomainItem<PurchaseType>
 {
-    public async Task OnLoad()
+    protected override async Task OnInitializedAsync()
     {
         await OnLoad(new GetPurchaseType(Id));
     }

@@ -3,7 +3,7 @@
 public partial class ViewFranchises 
     : ViewItem<FranchisesModel, FranchiseModel>
 {
-    protected async Task OnLoad()
+    protected override async Task OnInitializedAsync()
     {
         Model = new FranchisesModel(await QueryRouter.Send(new GetFranchises()));
     }

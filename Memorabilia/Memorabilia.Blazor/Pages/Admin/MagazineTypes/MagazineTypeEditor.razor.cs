@@ -1,9 +1,9 @@
 ﻿namespace Memorabilia.Blazor.Pages.Admin.MagazineTypes;
 
 public partial class MagazineTypeEditor 
-    : EditDomainItem<MagazineType>, IEditDomainItem
+    : EditDomainItem<MagazineType>
 {
-    public async Task OnLoad()
+    protected override async Task OnInitializedAsync()
     {
         await OnLoad(new GetMagazineType(Id));
     }

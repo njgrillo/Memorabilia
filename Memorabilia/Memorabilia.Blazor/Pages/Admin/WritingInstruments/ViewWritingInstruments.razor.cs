@@ -1,14 +1,14 @@
 ﻿namespace Memorabilia.Blazor.Pages.Admin.WritingInstruments;
 
 public partial class ViewWritingInstruments 
-    : ViewDomainItem<WritingInstrumentsModel>, IDeleteDomainItem, IViewDomainItem
+    : ViewDomainItem<WritingInstrumentsModel>
 {
     public async Task OnDelete(DomainEditModel editModel)
     {
         await OnDelete(new SaveWritingInstrument(editModel));
     }
 
-    public async Task OnLoad()
+    protected override async Task OnInitializedAsync()
     {
         Model = new WritingInstrumentsModel(await QueryRouter.Send(new GetWritingInstruments()));
     }

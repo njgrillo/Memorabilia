@@ -1,9 +1,9 @@
 ﻿namespace Memorabilia.Blazor.Pages.Admin.BatTypes;
 
 public partial class BatTypeEditor 
-    : EditDomainItem<BatType>, IEditDomainItem
+    : EditDomainItem<BatType>
 {
-    public async Task OnLoad()
+    protected override async Task OnInitializedAsync()
     {
         await OnLoad(new GetBatType(Id));
     }

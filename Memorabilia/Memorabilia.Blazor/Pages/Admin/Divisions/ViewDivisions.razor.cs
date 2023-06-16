@@ -3,7 +3,7 @@
 public partial class ViewDivisions 
     : ViewItem<DivisionsModel, DivisionModel>
 {
-    protected async Task OnLoad()
+    protected override async Task OnInitializedAsync()
     {
         Model = new DivisionsModel(await QueryRouter.Send(new GetDivisions()));
     }

@@ -1,9 +1,5 @@
-﻿<Page OnLoad="Load">
-    <Content>
-        <DomainTable DomainEntities="@Model.DomainEntities"
-                     DomainItemName="@Model.ItemTitle"
-                     DomainItemTitle="@Model.PageTitle"
-                     OnDelete="Delete"
-                     RoutePrefix="@Model.RoutePrefix" />
-    </Content>
-</Page>
+﻿<DomainTable DomainEntities="@Model.DomainEntities"
+             DomainItemName="@Model.ItemTitle"
+             DomainItemTitle="@Model.PageTitle"
+             OnDelete="Delete"
+             RoutePrefix="@Model.RoutePrefix" />

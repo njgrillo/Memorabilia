@@ -1,8 +1,9 @@
 ﻿namespace Memorabilia.Blazor.Pages.Admin.AuthenticationCompanies;
 
-public partial class AuthenticationCompanyEditor : EditDomainItem<AuthenticationCompany>, IEditDomainItem
+public partial class AuthenticationCompanyEditor 
+    : EditDomainItem<AuthenticationCompany>
 {
-    public async Task OnLoad()
+    protected override async Task OnInitializedAsync()
     {
         await OnLoad(new GetAuthenticationCompany(Id));
     }

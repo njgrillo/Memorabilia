@@ -11,7 +11,7 @@ public partial class TeamEditor : EditItem<TeamEditModel, TeamModel>
         EditModel.Id = command.Id;
     }
 
-    protected async Task OnLoad()
+    protected override async Task OnInitializedAsync()
     {
         if (Id == 0)
             return;

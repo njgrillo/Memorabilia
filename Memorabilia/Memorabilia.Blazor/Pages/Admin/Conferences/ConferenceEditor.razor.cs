@@ -8,7 +8,7 @@ public partial class ConferenceEditor
         await HandleValidSubmit(new SaveConference(EditModel));
     }
 
-    protected async Task OnLoad()
+    protected override async Task OnInitializedAsync()
     {
         if (Id == 0)
             return;

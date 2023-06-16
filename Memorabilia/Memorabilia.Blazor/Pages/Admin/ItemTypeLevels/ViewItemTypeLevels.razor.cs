@@ -3,7 +3,7 @@
 public partial class ViewItemTypeLevels 
     : ViewItem<ItemTypeLevelsModel, ItemTypeLevelModel>
 {
-    protected async Task OnLoad()
+    protected override async Task OnInitializedAsync()
     {
         Model = new ItemTypeLevelsModel(await QueryRouter.Send(new GetItemTypeLevels()));
     }

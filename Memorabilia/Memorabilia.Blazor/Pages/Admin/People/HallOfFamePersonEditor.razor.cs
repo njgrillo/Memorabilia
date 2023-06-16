@@ -25,7 +25,7 @@ public partial class HallOfFamePersonEditor
         PerformValidation = false;
     }
 
-    protected async Task OnLoad()
+    protected override async Task OnInitializedAsync()
     {
         var model = new PersonHallOfFameModel(await QueryRouter.Send(new GetPerson(PersonId)));
 

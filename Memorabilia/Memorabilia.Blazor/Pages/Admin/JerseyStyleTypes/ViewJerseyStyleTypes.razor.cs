@@ -1,14 +1,14 @@
 ﻿namespace Memorabilia.Blazor.Pages.Admin.JerseyStyleTypes;
 
 public partial class ViewJerseyStyleTypes 
-    : ViewDomainItem<JerseyStyleTypesModel>, IDeleteDomainItem, IViewDomainItem
+    : ViewDomainItem<JerseyStyleTypesModel>
 {
     public async Task OnDelete(DomainEditModel editModel)
     {
         await CommandRouter.Send(new SaveJerseyStyleType(editModel));
     }
 
-    public async Task OnLoad()
+    protected override async Task OnInitializedAsync()
     {
         Model = new JerseyStyleTypesModel(await QueryRouter.Send(new GetJerseyStyleTypes()));
     }

@@ -1,9 +1,9 @@
 ﻿namespace Memorabilia.Blazor.Pages.Admin.InscriptionTypes;
 
 public partial class InscriptionTypeEditor 
-    : EditDomainItem<InscriptionType>, IEditDomainItem
+    : EditDomainItem<InscriptionType>
 {
-    public async Task OnLoad()
+    protected override async Task OnInitializedAsync()
     {
         await OnLoad(new GetInscriptionType(Id));
     }

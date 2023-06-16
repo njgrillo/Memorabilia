@@ -16,7 +16,7 @@ public partial class PersonImageEditor
         await HandleValidSubmit(new SavePersonImage(EditModel.PersonId, EditModel.PersonImageFileName));
     }
 
-    protected async Task OnLoad()
+    protected override async Task OnInitializedAsync()
     {
         Entity.Person person = await QueryRouter.Send(new GetPerson(PersonId));
 

@@ -1,9 +1,9 @@
 ﻿namespace Memorabilia.Blazor.Pages.Admin.Sizes;
 
 public partial class SizeEditor 
-    : EditDomainItem<Constant.Size>, IEditDomainItem
+    : EditDomainItem<Constant.Size>
 {
-    public async Task OnLoad()
+    protected override async Task OnInitializedAsync()
     {
         await OnLoad(new GetSize(Id));
     }

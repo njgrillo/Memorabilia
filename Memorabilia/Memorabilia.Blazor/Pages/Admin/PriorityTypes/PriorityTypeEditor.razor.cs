@@ -1,9 +1,9 @@
 ﻿namespace Memorabilia.Blazor.Pages.Admin.PriorityTypes;
 
 public partial class PriorityTypeEditor 
-    : EditDomainItem<PriorityType>, IEditDomainItem
+    : EditDomainItem<PriorityType>
 {
-    public async Task OnLoad()
+    protected override async Task OnInitializedAsync()
     {
         await OnLoad(new GetPriorityType(Id));
     }

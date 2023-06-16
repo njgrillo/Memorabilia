@@ -1,9 +1,9 @@
 ﻿namespace Memorabilia.Blazor.Pages.Admin.AcquisitionTypes;
 
 public partial class AcquisitionTypeEditor 
-    : EditDomainItem<AcquisitionType>, IEditDomainItem
+    : EditDomainItem<AcquisitionType>
 {
-    public async Task OnLoad()
+    protected override async Task OnInitializedAsync()
     {
         await OnLoad(new GetAcquisitionType(Id));
     }

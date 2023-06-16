@@ -3,7 +3,7 @@
 public partial class ViewPositions 
     : ViewItem<PositionsModel, PositionModel>
 {
-    protected async Task OnLoad()
+    protected override async Task OnInitializedAsync()
     {
         Model = new PositionsModel(await QueryRouter.Send(new GetPositions()));
     }

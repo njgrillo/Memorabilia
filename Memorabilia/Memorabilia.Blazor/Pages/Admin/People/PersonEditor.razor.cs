@@ -26,7 +26,7 @@ public partial class PersonEditor
         PerformValidation = false;
     }
 
-    protected async Task OnLoad()
+    protected override async Task OnInitializedAsync()
     {
         if (Id == 0)
             return;

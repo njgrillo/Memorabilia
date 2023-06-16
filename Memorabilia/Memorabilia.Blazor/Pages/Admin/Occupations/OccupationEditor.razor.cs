@@ -1,9 +1,9 @@
 ﻿namespace Memorabilia.Blazor.Pages.Admin.Occupations;
 
 public partial class OccupationEditor 
-    : EditDomainItem<Occupation>, IEditDomainItem
+    : EditDomainItem<Occupation>
 {
-    public async Task OnLoad()
+    protected override async Task OnInitializedAsync()
     {
         await OnLoad(new GetOccupation(Id));
     }

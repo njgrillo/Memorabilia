@@ -8,7 +8,7 @@ public partial class ItemTypeSizeEditor
         await HandleValidSubmit(new SaveItemTypeSize(EditModel));
     }
 
-    protected async Task OnLoad()
+    protected override async Task OnInitializedAsync()
     {
         Initialize();
 

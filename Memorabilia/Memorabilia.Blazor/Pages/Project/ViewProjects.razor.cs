@@ -17,7 +17,7 @@ public partial class ViewProjects
     protected ProjectsModel Model 
         = new();
 
-    protected async Task OnLoad()
+    protected override async Task OnInitializedAsync()
     {
         Model = new ProjectsModel(await QueryRouter.Send(new GetProjects()));
     }

@@ -1,9 +1,9 @@
 ﻿namespace Memorabilia.Blazor.Pages.Admin.WritingInstruments;
 
 public partial class WritingInstrumentEditor 
-    : EditDomainItem<WritingInstrument>, IEditDomainItem
+    : EditDomainItem<WritingInstrument>
 {
-    public async Task OnLoad()
+    protected override async Task OnInitializedAsync()
     {
         await OnLoad(new GetWritingInstrument(Id));
     }

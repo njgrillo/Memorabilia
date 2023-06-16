@@ -1,9 +1,9 @@
 ﻿namespace Memorabilia.Blazor.Pages.Admin.JerseyStyleTypes;
 
 public partial class JerseyStyleTypeEditor 
-    : EditDomainItem<JerseyStyleType>, IEditDomainItem
+    : EditDomainItem<JerseyStyleType>
 {
-    public async Task OnLoad()
+    protected override async Task OnInitializedAsync()
     {
         await OnLoad(new GetJerseyStyleType(Id));
     }

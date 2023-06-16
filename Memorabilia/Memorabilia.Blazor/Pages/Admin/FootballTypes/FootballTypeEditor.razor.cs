@@ -1,9 +1,9 @@
 ﻿namespace Memorabilia.Blazor.Pages.Admin.FootballTypes;
 
 public partial class FootballTypeEditor 
-    : EditDomainItem<FootballType>, IEditDomainItem
+    : EditDomainItem<FootballType>
 {
-    public async Task OnLoad()
+    protected override async Task OnInitializedAsync()
     {
         await OnLoad(new GetFootballType(Id));
     }

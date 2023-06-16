@@ -5,7 +5,7 @@ namespace Memorabilia.Blazor.Pages.Admin.DashboardItems;
 public partial class ViewDashboardItems 
     : ViewItem<DashboardItemsModel, DashboardItemModel>
 {
-    protected async Task OnLoad()
+    protected override async Task OnInitializedAsync()
     {
         Model = new DashboardItemsModel(await QueryRouter.Send(new GetDashboardItems()));
     }

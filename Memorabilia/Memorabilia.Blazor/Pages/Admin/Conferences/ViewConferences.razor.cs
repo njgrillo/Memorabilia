@@ -3,7 +3,7 @@
 public partial class ViewConferences 
     : ViewItem<ConferencesModel, ConferenceModel>
 {
-    protected async Task OnLoad()
+    protected override async Task OnInitializedAsync()
     {
         Model = new ConferencesModel(await QueryRouter.Send(new GetConferences()));
     }

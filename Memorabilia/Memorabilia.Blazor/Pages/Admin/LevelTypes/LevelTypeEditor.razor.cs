@@ -1,9 +1,9 @@
 ﻿namespace Memorabilia.Blazor.Pages.Admin.LevelTypes;
 
 public partial class LevelTypeEditor 
-    : EditDomainItem<LevelType>, IEditDomainItem
+    : EditDomainItem<LevelType>
 {
-    public async Task OnLoad()
+    protected override async Task OnInitializedAsync()
     {
         await OnLoad(new GetLevelType(Id));
     }

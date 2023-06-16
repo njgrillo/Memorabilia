@@ -3,7 +3,7 @@
 public partial class ViewTeams 
     : ViewItem<TeamsModel, TeamModel>
 {
-    protected async Task OnLoad()
+    protected override async Task OnInitializedAsync()
     {
         Model = new TeamsModel(await QueryRouter.Send(new GetTeams()));
     }

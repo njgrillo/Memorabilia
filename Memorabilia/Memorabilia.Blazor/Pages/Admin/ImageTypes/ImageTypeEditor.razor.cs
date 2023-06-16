@@ -1,9 +1,9 @@
 ﻿namespace Memorabilia.Blazor.Pages.Admin.ImageTypes;
 
 public partial class ImageTypeEditor 
-    : EditDomainItem<ImageType>, IEditDomainItem
+    : EditDomainItem<ImageType>
 {
-    public async Task OnLoad()
+    protected override async Task OnInitializedAsync()
     {
         await OnLoad(new GetImageType(Id));
     }

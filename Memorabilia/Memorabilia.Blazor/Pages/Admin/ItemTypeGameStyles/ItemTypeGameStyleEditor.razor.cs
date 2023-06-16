@@ -8,7 +8,7 @@ public partial class ItemTypeGameStyleEditor
         await HandleValidSubmit(new SaveItemTypeGameStyle(EditModel));
     }
 
-    protected async Task OnLoad()
+    protected override async Task OnInitializedAsync()
     {
         Initialize();
 

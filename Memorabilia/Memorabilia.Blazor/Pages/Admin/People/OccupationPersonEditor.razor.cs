@@ -11,7 +11,7 @@ public partial class OccupationPersonEditor
         await HandleValidSubmit(new SavePersonOccupation.Command(PersonId, EditModel));
     }
 
-    protected async Task OnLoad()
+    protected override async Task OnInitializedAsync()
     {
         Entity.Person[] recentPeople = await QueryRouter.Send(new GetRecentPersonOccupations());
 

@@ -4,14 +4,14 @@
           ImageFileName="@Model.ImageFileName"
           ItemName="@Model.DomainTypeName"
           Model="Model"
-          OnLoad="Load"
           OnSave="Save"
           PageFooterNavigationPath="@Model.PageFooterNavigationPath"
           PageTitle="@Model.PageTitle"
           TItem="DomainEditModel">
     <Div Class="row">
         <Div Class="col-3">
-            <TextField Label="Name"
+            <TextField DisplaySkeleton="@(Model == null)" 
+                       Label="Name"
                        MaxLength="@MaxNameLength"
                        SelectedText="@Model.Name"
                        SelectedTextChanged="@((p) => Model.Name = p)" />
@@ -19,7 +19,8 @@
     </Div>
     <Div Class="row">
         <Div Class="col-3">
-            <TextField Label="Abbreviation"
+            <TextField DisplaySkeleton="@(Model == null)" 
+                       Label="Abbreviation"
                        MaxLength="@MaxAbbreviationLength"
                        SelectedText="@Model.Abbreviation"
                        SelectedTextChanged="@((p) => Model.Abbreviation = p)" />

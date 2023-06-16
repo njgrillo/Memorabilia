@@ -8,7 +8,7 @@ public partial class ItemTypeBrandEditor
         await HandleValidSubmit(new SaveItemTypeBrand(EditModel));
     }
 
-    protected async Task OnLoad()
+    protected override async Task OnInitializedAsync()
     {
         Initialize();
 

@@ -16,7 +16,7 @@ public partial class PewterEditor
         await HandleValidSubmit(new SavePewter(EditModel));
     }
 
-    protected async Task OnLoad()
+    protected override async Task OnInitializedAsync()
     {
         if (Id == 0)
             return;

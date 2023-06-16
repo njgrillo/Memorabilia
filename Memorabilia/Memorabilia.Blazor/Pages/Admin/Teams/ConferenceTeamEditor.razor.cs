@@ -8,7 +8,7 @@ public partial class ConferenceTeamEditor
         await HandleValidSubmit(new SaveTeamConference.Command(TeamId, EditModel.Conferences));
     }
 
-    protected async Task OnLoad()
+    protected override async Task OnInitializedAsync()
     {
         Initialize();
 

@@ -3,7 +3,7 @@
 public partial class ViewItemTypeSizes 
     : ViewItem<ItemTypeSizesModel, ItemTypeSizeModel>
 {
-    protected async Task OnLoad()
+    protected override async Task OnInitializedAsync()
     {
         Model = new ItemTypeSizesModel(await QueryRouter.Send(new GetItemTypeSizes()));
     }

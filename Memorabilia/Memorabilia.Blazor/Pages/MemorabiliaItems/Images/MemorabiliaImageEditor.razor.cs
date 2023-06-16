@@ -25,7 +25,7 @@ public partial class MemorabiliaImageEditor
     private MemorabiliaImagesEditModel EditModel 
         = new ();
 
-    protected async Task OnLoad()
+    protected override async Task OnInitializedAsync()
     {
         EditModel 
             = new MemorabiliaImagesEditModel(new MemorabiliaModel(await QueryRouter.Send(new GetMemorabiliaItem(MemorabiliaId))));

@@ -6,7 +6,7 @@ public partial class ViewPewters
     [Inject]
     public ImageService ImageService { get; set; }
 
-    protected async Task OnLoad()
+    protected override async Task OnInitializedAsync()
     {
         Model = new PewtersModel(await QueryRouter.Send(new GetPewters()));
     }

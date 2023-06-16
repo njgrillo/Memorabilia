@@ -25,7 +25,7 @@ public partial class AccoladePersonEditor
         PerformValidation = false;
     }
 
-    protected async Task OnLoad()
+    protected override async Task OnInitializedAsync()
     {
         PersonAccoladeModel model 
             = new(await QueryRouter.Send(new GetPerson(PersonId)));

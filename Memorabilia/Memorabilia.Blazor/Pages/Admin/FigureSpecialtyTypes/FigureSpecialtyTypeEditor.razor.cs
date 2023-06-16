@@ -1,9 +1,9 @@
 ﻿namespace Memorabilia.Blazor.Pages.Admin.FigureSpecialtyTypes;
 
 public partial class FigureSpecialtyTypeEditor 
-    : EditDomainItem<FigureSpecialtyType>, IEditDomainItem
+    : EditDomainItem<FigureSpecialtyType>
 {
-    public async Task OnLoad()
+    protected override async Task OnInitializedAsync()
     {
         await OnLoad(new GetFigureSpecialtyType(Id));
     }

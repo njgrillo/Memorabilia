@@ -55,9 +55,6 @@ public partial class EditPage<TItem> : INotifyPropertyChanged
     public TItem Model { get; set; }    
 
     [Parameter]
-    public EventCallback OnLoad { get; set; }
-
-    [Parameter]
     public EventCallback<TItem> OnSave { get; set; }
 
     [Parameter]
@@ -110,11 +107,6 @@ public partial class EditPage<TItem> : INotifyPropertyChanged
 
         if (!PerformValidation)
             NavigateAway();
-    }
-
-    protected async Task Load()
-    {
-        await OnLoad.InvokeAsync();
     }
 
     private void EditPage_PropertyChanged(object sender, PropertyChangedEventArgs e)

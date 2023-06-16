@@ -1,9 +1,9 @@
 ﻿namespace Memorabilia.Blazor.Pages.Admin.PrivacyTypes;
 
 public partial class PrivacyTypeEditor 
-    : EditDomainItem<PrivacyType>, IEditDomainItem
+    : EditDomainItem<PrivacyType>
 {
-    public async Task OnLoad()
+    protected override async Task OnInitializedAsync()
     {
         await OnLoad(new GetPrivacyType(Id));
     }

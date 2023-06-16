@@ -1,29 +1,25 @@
-﻿<Page>
-   <Content>
-        <MemorabiliaFilter OnFilter="OnFilter" />
-        <DivPad2>
-            <MudSwitch Checked="@IsDetailView"
-                       CheckedChanged="(p) => IsDetailView = p"
-                       Color="MudBlazor.Color.Success"
-                       Label="Detail View"
-                       T="bool" />
-        </DivPad2>
-        <DivPad2>
-            <Condition Evaluation="IsDetailView">
-                <Match>
-                    <MemorabiliaDetailGrid Filter="_filter" />
-                </Match>
-                <NotMatch>
-                    <MemorabiliaGalleryGrid Filter="_filter" />
-                </NotMatch>
-            </Condition>
-        </DivPad2> 
-        <DivRowCol12Center>
-            <MudTooltip Text="@Model.AddText">
-                <MudFab Color="MudBlazor.Color.Primary"
-                        Icon="@Icons.Material.Outlined.AddCircleOutline"
-                        OnClick="@(_ => NavigationManager.NavigateTo(@Model.AddRoute))" />
-            </MudTooltip>
-        </DivRowCol12Center>
-    </Content>
-</Page>
+﻿<MemorabiliaFilter OnFilter="OnFilter" />
+<DivPad2>
+    <MudSwitch Checked="@IsDetailView"
+               CheckedChanged="(p) => IsDetailView = p"
+               Color="MudBlazor.Color.Success"
+               Label="Detail View"
+               T="bool" />
+</DivPad2>
+<DivPad2>
+    <Condition Evaluation="IsDetailView">
+        <Match>
+            <MemorabiliaDetailGrid Filter="_filter" />
+        </Match>
+        <NotMatch>
+            <MemorabiliaGalleryGrid Filter="_filter" />
+        </NotMatch>
+    </Condition>
+</DivPad2>
+<DivRowCol12Center>
+    <MudTooltip Text="@Model.AddText">
+        <MudFab Color="MudBlazor.Color.Primary"
+                Icon="@Icons.Material.Outlined.AddCircleOutline"
+                OnClick="@(_ => NavigationManager.NavigateTo(@Model.AddRoute))" />
+    </MudTooltip>
+</DivRowCol12Center>

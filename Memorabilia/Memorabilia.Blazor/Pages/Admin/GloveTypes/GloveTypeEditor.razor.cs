@@ -1,9 +1,9 @@
 ﻿namespace Memorabilia.Blazor.Pages.Admin.GloveTypes;
 
 public partial class GloveTypeEditor 
-    : EditDomainItem<GloveType>, IEditDomainItem
+    : EditDomainItem<GloveType>
 {
-    public async Task OnLoad()
+    protected override async Task OnInitializedAsync()
     {
         await OnLoad(new GetGloveType(Id));
     }

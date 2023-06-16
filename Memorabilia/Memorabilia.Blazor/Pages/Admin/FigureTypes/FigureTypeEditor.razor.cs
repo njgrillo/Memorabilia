@@ -1,9 +1,9 @@
 ﻿namespace Memorabilia.Blazor.Pages.Admin.FigureTypes;
 
 public partial class FigureTypeEditor  
-    : EditDomainItem<FigureType>, IEditDomainItem
+    : EditDomainItem<FigureType>
 {
-    public async Task OnLoad()
+    protected override async Task OnInitializedAsync()
     {
         await OnLoad(new GetFigureType(Id));
     }

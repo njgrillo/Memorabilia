@@ -1,9 +1,9 @@
 ﻿namespace Memorabilia.Blazor.Pages.Admin.AccomplishmentTypes;
 
 public partial class AccomplishmentTypeEditor 
-    : EditDomainItem<AccomplishmentType>, IEditDomainItem
+    : EditDomainItem<AccomplishmentType>
 {
-    public async Task OnLoad()
+    protected override async Task OnInitializedAsync()
     {
         await OnLoad(new GetAccomplishmentType(Id));
     }

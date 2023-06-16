@@ -18,18 +18,10 @@ public partial class DomainItems
     [Parameter]
     public EventCallback<DomainEditModel> OnDelete { get; set; }
 
-    [Parameter]
-    public EventCallback OnLoad { get; set; }
-
     protected DomainsModel Model;
 
     protected async Task Delete(DomainEditModel editModel)
     {
         await OnDelete.InvokeAsync(editModel);
-    }
-
-    protected async Task Load()
-    {
-        await OnLoad.InvokeAsync();
     }
 }

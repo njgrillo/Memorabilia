@@ -8,7 +8,7 @@ public partial class ItemTypeSpotEditor
         await HandleValidSubmit(new SaveItemTypeSpot(EditModel));
     }
 
-    protected async Task OnLoad()
+    protected override async Task OnInitializedAsync()
     {
         Initialize();
 

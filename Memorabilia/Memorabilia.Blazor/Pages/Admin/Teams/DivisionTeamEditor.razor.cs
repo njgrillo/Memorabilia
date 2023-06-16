@@ -8,7 +8,7 @@ public partial class DivisionTeamEditor
         await HandleValidSubmit(new SaveTeamDivision.Command(TeamId, EditModel.Divisions));
     }
 
-    protected async Task OnLoad()
+    protected override async Task OnInitializedAsync()
     {
         Initialize();
 

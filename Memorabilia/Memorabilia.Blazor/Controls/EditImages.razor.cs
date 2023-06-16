@@ -46,9 +46,6 @@ public partial class EditImages<TItem>
     public EventCallback OnImport { get; set; }
 
     [Parameter]
-    public EventCallback OnLoad { get; set; }
-
-    [Parameter]
     public EventCallback OnSave { get; set; }
 
     [Parameter]

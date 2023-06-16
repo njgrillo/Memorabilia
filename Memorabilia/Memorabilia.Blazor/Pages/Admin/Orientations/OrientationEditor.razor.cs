@@ -1,9 +1,9 @@
 ﻿namespace Memorabilia.Blazor.Pages.Admin.Orientations;
 
 public partial class OrientationEditor 
-    : EditDomainItem<Constant.Orientation>, IEditDomainItem
+    : EditDomainItem<Constant.Orientation>
 {
-    public async Task OnLoad()
+    protected override async Task OnInitializedAsync()
     {
         await OnLoad(new GetOrientation(Id));
     }

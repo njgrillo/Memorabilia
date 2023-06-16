@@ -1,9 +1,9 @@
 ﻿namespace Memorabilia.Blazor.Pages.Admin.JerseyQualityTypes;
 
 public partial class JerseyQualityTypeEditor 
-    : EditDomainItem<JerseyQualityType>, IEditDomainItem
+    : EditDomainItem<JerseyQualityType>
 {
-    public async Task OnLoad()
+    protected override async Task OnInitializedAsync()
     {
         await OnLoad(new GetJerseyQualityType(Id));
     }
