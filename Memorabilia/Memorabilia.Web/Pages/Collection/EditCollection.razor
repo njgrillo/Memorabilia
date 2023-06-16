@@ -1,10 +1,4 @@
 ﻿@page "/Collections/Edit"
 @page "/Collections/Edit/{id:int}"
 
-@inherits WebPage
-
-<PageLoader>
-    <Content>
-        <CollectionEditor Id="@Id" />
-    </Content>
-</PageLoader>
+<CollectionEditor Id="@Id" />

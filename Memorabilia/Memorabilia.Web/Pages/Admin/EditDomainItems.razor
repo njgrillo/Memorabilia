@@ -2,8 +2,4 @@
 
 @inherits WebPage
 
-<PageLoader>
-    <Content>
-        <DomainItemNavigator OnNavigate="@((page) => NavigationManager.NavigateTo(page))" />
-    </Content>
-</PageLoader>
+<DomainItemNavigator OnNavigate="@((page) => NavigationManager.NavigateTo(page))" />
