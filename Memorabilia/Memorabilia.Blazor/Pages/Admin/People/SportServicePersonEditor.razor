@@ -20,8 +20,8 @@
                         PersonId="EditModel.PersonId"
                         PersonStep="EditModel.PersonStep" />
     </TimelineContent>
-    <Content>  
-        <div style="margin-bottom:1%;">
+    <ChildContent>  
+        <Div Style="margin-bottom:1%;">
             <MudTabs ApplyEffectsToContainer="true"
                      Centered="true"
                      Elevation="2"
@@ -31,50 +31,46 @@
                              BadgeData="EditModel.Colleges.Count(college => !college.IsDeleted)"
                              Text="Colleges">
                     <DivRowCol12>
-                        <Content>
-                            <PersonCollegeEditor Colleges="EditModel.Colleges" />
-                        </Content>
+                        <PersonCollegeEditor Colleges="EditModel.Colleges" />
                     </DivRowCol12>
                 </MudTabPanel>
                 <MudTabPanel BadgeColor="MudBlazor.Color.Success"
                              BadgeData="EditModel.Drafts.Count(draft => !draft.IsDeleted)"
                              Text="Drafts">
                     <DivRowCol12>
-                        <Content>
-                            <PersonDraftEditor Drafts="EditModel.Drafts"
-                                               SportIds="EditModel.SportIds" />
-                        </Content>
+                        <PersonDraftEditor Drafts="EditModel.Drafts"
+                                           SportIds="EditModel.SportIds" />
                     </DivRowCol12>
                 </MudTabPanel>
                 <MudTabPanel Text="Service">
-                    <DivRowCol3>
-                        <Content>
+                    <Div Class="row">
+                        <Div Class="col-3">
                             <MudDatePicker @bind-Date="EditModel.DebutDate"
                                            DateFormat="MM/dd/yyyy"
                                            Editable="true"
                                            Label="Debut Date"
                                            Mask="@(new DateMask("MM/dd/yyyy"))"
                                            Variant="Variant.Outlined" />
-                        </Content>
-                        <ContentColumn2>
+                        </Div>
+                        <Div Class="col-3">
                             <MudDatePicker @bind-Date="EditModel.LastAppearanceDate"
                                            DateFormat="MM/dd/yyyy"
                                            Editable="true"
                                            Label="Last Appearance Date"
                                            Mask="@(new DateMask("MM/dd/yyyy"))"
                                            Variant="Variant.Outlined" />
-                        </ContentColumn2>
-                        <ContentColumn3>
+                        </Div>
+                        <Div Class="col-3">
                             <MudDatePicker @bind-Date="EditModel.FreeAgentSigningDate"
                                            DateFormat="MM/dd/yyyy"
                                            Editable="true"
                                            Label="Free Agent Signing Date"
                                            Mask="@(new DateMask("MM/dd/yyyy"))"
                                            Variant="Variant.Outlined" />
-                        </ContentColumn3>
-                    </DivRowCol3>
+                        </Div>
+                    </Div>
                 </MudTabPanel>
             </MudTabs>
-        </div>              
-    </Content>
+        </Div>              
+    </ChildContent>
 </EditPage>

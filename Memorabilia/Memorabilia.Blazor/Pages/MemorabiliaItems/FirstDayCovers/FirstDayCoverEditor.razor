@@ -14,16 +14,16 @@
                                Model="EditModel"
                                TItem="FirstDayCoverEditModel">
             <AdditionalContent>
-                <DivRowCol3>
-                    <Content>
+                <Div Class="row">
+                    <Div Class="col-3">
                         <MudDatePicker @bind-Date="EditModel.Date"
                                        DateFormat="MM/dd/yyyy"
                                        Editable="true"
                                        Label="Date"
                                        Mask="@(new DateMask("MM/dd/yyyy"))"
                                        Variant="Variant.Outlined" />
-                    </Content>
-                </DivRowCol3>
+                    </Div>
+                </Div>
             </AdditionalContent>
         </MemorabiliaItemEditor>   
     </Content>

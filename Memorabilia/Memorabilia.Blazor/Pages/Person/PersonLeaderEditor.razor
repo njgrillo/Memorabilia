@@ -1,24 +1,23 @@
-﻿<DivRowCol6>
-    <Content>
+﻿<Div Class="row">
+    <Div Class="col-6">
         <LeaderTypeAutoComplete ResetValueOnEmptyText="false"
                                 SelectedValue="Model.LeaderType"
                                 SelectionChanged="(p) => Model.LeaderType = p"
                                 Sports="Sports" />
-    </Content>
-    <ContentColumn2>
+    </Div>
+    <Div Class="col-6">
         <TextField HelperText="Ex. 1999 or 1999-2002 or 2003, 2005-2008"
                    Label="Years"
                    SelectedText="@_years"
                    SelectedTextChanged="@((p) => _years = p)"/>
-    </ContentColumn2>
-</DivRowCol6>
+    </Div>
+</Div>
 <DivLeftAlign>
-    <Content>
-        <AddButton OnClick="Add" />
-    </Content>
+    <AddButton OnClick="Add" />
 </DivLeftAlign>
-<DivRowCol6>
-    <Content>
+<br />
+<Div Class="row">
+    <Div Class="col-6">
          <MudTable Bordered="false"
                    Dense="false" 
                    Hover="true"
@@ -41,6 +40,6 @@
                 </MudTd>
             </RowTemplate>
         </MudTable>
-    </Content>
-</DivRowCol6>
+    </Div>
+</Div>
 

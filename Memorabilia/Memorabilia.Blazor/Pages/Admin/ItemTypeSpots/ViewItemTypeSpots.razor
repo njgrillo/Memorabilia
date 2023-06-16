@@ -6,10 +6,8 @@
           NavigationPath="@Model.ExitNavigationPath"
           OnLoad="OnLoad"
           PageTitle="@Model.PageTitle">
-    <Content>
-        <DivPad2>
-            <Content>
-                <MudTable Bordered="false"
+    <DivPad2>
+            <MudTable Bordered="false"
                           Dense="false" 
                           Filter="new Func<ItemTypeSpotModel,bool>(FilterFunc1)"
                           Hover="true"
@@ -46,7 +44,5 @@
                         <MudTablePager />
                     </PagerContent>
                 </MudTable>
-            </Content>
         </DivPad2>
-    </Content>
 </PageView>

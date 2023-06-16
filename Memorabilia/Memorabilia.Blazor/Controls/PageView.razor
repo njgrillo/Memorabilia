@@ -5,17 +5,15 @@
                 <PageHeader PageTitle="@PageTitle" />
             </Match>
         </Condition>
-        @Content
+        @ChildContent
         <Condition Evaluation="@DisplayAddButton">
             <Match>
                 <DivRowCol12Center>
-                    <Content>
-                        <MudTooltip Text="@AddTitle">
-                            <MudFab Color="MudBlazor.Color.Primary"
-                                    Icon="@Icons.Material.Outlined.AddCircleOutline"
-                                    OnClick="@(_ => NavigationManager.NavigateTo(@AddRoute))" />
-                        </MudTooltip>
-                    </Content>
+                    <MudTooltip Text="@AddTitle">
+                        <MudFab Color="MudBlazor.Color.Primary"
+                                Icon="@Icons.Material.Outlined.AddCircleOutline"
+                                OnClick="@(_ => NavigationManager.NavigateTo(@AddRoute))" />
+                    </MudTooltip>
                 </DivRowCol12Center>
             </Match>
         </Condition>

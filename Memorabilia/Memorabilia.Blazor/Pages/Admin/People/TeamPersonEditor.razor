@@ -20,14 +20,12 @@
                         PersonId="EditModel.PersonId"
                         PersonStep="EditModel.PersonStep" />
     </TimelineContent>
-    <Content>
+    <ChildContent>
         <DivRowCol12>
-            <Content>
-                <PersonTeamSelector PersonId="PersonId" 
-                                    SportIds="EditModel.SportIds.ToArray()"
-                                    Teams="EditModel.Teams" />
-            </Content>
+            <PersonTeamSelector PersonId="PersonId"
+                                SportIds="EditModel.SportIds.ToArray()"
+                                Teams="EditModel.Teams" />
         </DivRowCol12>
         <br />
-    </Content>    
+    </ChildContent>    
 </EditPage>

@@ -1,17 +1,15 @@
 ﻿<MudDialog Style="max-height:85vh;">
     <DialogContent>
-        <div style="text-align:right;">
+        <Div Style="text-align:right;">
             <MudIconButton Icon="@Icons.Material.Filled.Close"
                            OnClick="Cancel" />
-        </div>
+        </Div>
         <DivPad2>
-            <Content>
-                <MemorabiliaFilter OnFilter="OnFilter" />
-                <MemorabiliaDetailGrid CanSelect="true"
-                                       Filter="_filter"
-                                       MemorabiliaSelected="@((p) => SelectedMemorabilia = p)"
-                                       ShowActions="false" />
-            </Content>            
+            <MemorabiliaFilter OnFilter="OnFilter" />
+            <MemorabiliaDetailGrid CanSelect="true"
+                                   Filter="_filter"
+                                   MemorabiliaSelected="@((p) => SelectedMemorabilia = p)"
+                                   ShowActions="false" />
         </DivPad2>
     </DialogContent>
     <DialogActions>        

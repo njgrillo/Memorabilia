@@ -3,7 +3,7 @@
 public partial class UserDashboardItem
 {
     [Parameter]
-    public RenderFragment Content { get; set; }
+    public RenderFragment ChildContent { get; set; }
 
     [Parameter]
     public string Description { get; set; }

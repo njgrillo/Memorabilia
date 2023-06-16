@@ -17,29 +17,29 @@
             <AdditionalContent>
                 <Condition Evaluation="EditModel.CanHaveBammerType">
                     <Match>
-                        <DivRowCol3>
-                            <Content>
+                        <Div Class="row">
+                            <Div Class="col-3">
                                 <BammerTypeDropDown SelectedValue="EditModel.BammerTypeId"
                                                     SelectionChanged="(p) => EditModel.BammerTypeId = p" />
-                            </Content>
-                        </DivRowCol3>
+                            </Div>
+                        </Div>
                     </Match>
                 </Condition>                
-                <DivRowCol3>
-                    <Content>
+                <Div Class="row">
+                    <Div Class="col-3">
                         <NullableIntField Label="Year"
                                           Maximum="int.MaxValue"
                                           Value="EditModel.Year"
                                           ValueChanged="@((p) => EditModel.Year = p)" />
-                    </Content>
-                    <ContentColumn2>
+                    </Div>
+                    <Div Class="col-3">
                         <MudSwitch Checked="@EditModel.InPackage"
                                    CheckedChanged="(p) => EditModel.InPackage = p"
                                    Color="MudBlazor.Color.Success"
                                    Label="Is In Package?"
                                    T="bool" />
-                    </ContentColumn2>
-                </DivRowCol3>
+                    </Div>
+                </Div>
             </AdditionalContent>
         </MemorabiliaItemEditor>  
     </Content>

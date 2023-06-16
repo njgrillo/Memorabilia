@@ -1,44 +1,42 @@
 ﻿<MudDialog Style="max-height:85vh;">
     <DialogContent>
-        <div class="row">
-            <div class="col-12">
-                <MudTable Bordered="false"
-                          Dense="false"
-                          Filter="new Func<Entity.Team, bool>(Filter)"
-                          Hover="true"
-                          Items="@Teams"
-                          Striped="true">
-                    <ToolBarContent>
-                        <MudText Typo="Typo.h6">Teams</MudText>
-                        <MudSpacer />
-                        <MudTextField @bind-Value="_search"
-                                      Adornment="Adornment.Start"
-                                      AdornmentIcon="@Icons.Material.Filled.Search"
-                                      Class="mt-0"
-                                      IconSize="MudBlazor.Size.Medium"
-                                      Placeholder="Search" />
-                    </ToolBarContent>
-                    <HeaderContent>
-                        <MudTh>
-                            <CustomButton ButtonType="ButtonType.Button"
-                                          OnClick="OnSelectAll"
-                                          Text="@SelectAllButtonText" />
-                        </MudTh>
-                        <MudTh>Display Name</MudTh>
-                    </HeaderContent>
-                    <RowTemplate>
-                        <MudTd DataLabel="">
-                            <BooleanCheckBox Checked="@(SelectedTeams.Contains(context))"
-                                             CheckedChanged="(p) => TeamSelected(context)" />
-                        </MudTd>
-                        <MudTd DataLabel="Display Name">@context.DisplayName</MudTd>
-                    </RowTemplate>
-                    <PagerContent>
-                        <MudTablePager />
-                    </PagerContent>
-                </MudTable>
-            </div>
-        </div>
+        <DivRowCol12>
+            <MudTable Bordered="false"
+                      Dense="false"
+                      Filter="new Func<Entity.Team, bool>(Filter)"
+                      Hover="true"
+                      Items="@Teams"
+                      Striped="true">
+                <ToolBarContent>
+                    <MudText Typo="Typo.h6">Teams</MudText>
+                    <MudSpacer />
+                    <MudTextField @bind-Value="_search"
+                                  Adornment="Adornment.Start"
+                                  AdornmentIcon="@Icons.Material.Filled.Search"
+                                  Class="mt-0"
+                                  IconSize="MudBlazor.Size.Medium"
+                                  Placeholder="Search" />
+                </ToolBarContent>
+                <HeaderContent>
+                    <MudTh>
+                        <CustomButton ButtonType="ButtonType.Button"
+                                      OnClick="OnSelectAll"
+                                      Text="@SelectAllButtonText" />
+                    </MudTh>
+                    <MudTh>Display Name</MudTh>
+                </HeaderContent>
+                <RowTemplate>
+                    <MudTd DataLabel="">
+                        <BooleanCheckBox Checked="@(SelectedTeams.Contains(context))"
+                                         CheckedChanged="(p) => TeamSelected(context)" />
+                    </MudTd>
+                    <MudTd DataLabel="Display Name">@context.DisplayName</MudTd>
+                </RowTemplate>
+                <PagerContent>
+                    <MudTablePager />
+                </PagerContent>
+            </MudTable>
+        </DivRowCol12>
     </DialogContent>
     <DialogActions>
         <CancelButton OnClick="Cancel" />

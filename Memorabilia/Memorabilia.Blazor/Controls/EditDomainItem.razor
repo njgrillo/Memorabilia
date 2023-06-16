@@ -9,24 +9,22 @@
           PageFooterNavigationPath="@Model.PageFooterNavigationPath"
           PageTitle="@Model.PageTitle"
           TItem="DomainEditModel">
-    <Content>
-        <DivRowCol3>
-            <Content>
-                <TextField Label="Name"
-                           MaxLength="@MaxNameLength"
-                           SelectedText="@Model.Name"
-                           SelectedTextChanged="@((p) => Model.Name = p)" />
-            </Content>
-        </DivRowCol3>
-        <DivRowCol3>
-            <Content>
-                <TextField Label="Abbreviation"
-                           MaxLength="@MaxAbbreviationLength"
-                           SelectedText="@Model.Abbreviation"
-                           SelectedTextChanged="@((p) => Model.Abbreviation = p)" />
-            </Content>
-        </DivRowCol3>
-    </Content>
+    <Div Class="row">
+        <Div Class="col-3">
+            <TextField Label="Name"
+                       MaxLength="@MaxNameLength"
+                       SelectedText="@Model.Name"
+                       SelectedTextChanged="@((p) => Model.Name = p)" />
+        </Div>
+    </Div>
+    <Div Class="row">
+        <Div Class="col-3">
+            <TextField Label="Abbreviation"
+                       MaxLength="@MaxAbbreviationLength"
+                       SelectedText="@Model.Abbreviation"
+                       SelectedTextChanged="@((p) => Model.Abbreviation = p)" />
+        </Div>
+    </Div>
 </EditPage>
 
 

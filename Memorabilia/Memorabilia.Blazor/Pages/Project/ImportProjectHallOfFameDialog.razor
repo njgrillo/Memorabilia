@@ -1,11 +1,11 @@
 ﻿<MudDialog Style="max-height:85vh;">
     <DialogContent>
-        <div class="row">
-            <div class="col-6">
+        <Div Class="row">
+            <Div Class="col-6">
                 <SportLeagueLevelDropDown SelectedValue="SportLeagueLevelId"
                                           SelectionChanged="(p) => SportLeagueLevelId = p" />
-            </div>
-            <div class="col-6">
+            </Div>
+            <Div Class="col-6">
                 <Condition Evaluation="Year.HasValue">
                     <Match>
                         <NullableIntField Label="Year"
@@ -14,17 +14,17 @@
                                           ValueChanged="@((p) => Year = p)" />
                     </Match>
                 </Condition>                
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-3">
+            </Div>
+        </Div>
+        <Div Class="row">
+            <Div Class="col-3">
                 <CustomButton OnClick="Search"
                               Text="Search" />
-            </div>
-        </div>
+            </Div>
+        </Div>
         <br />
-        <div class="row">
-            <div class="col-12">
+        <Div Class="row">
+            <Div Class="col-12">
                 <MudTable Bordered="false"
                           Dense="false"
                           Filter="new Func<Entity.Person,bool>(Filter)"
@@ -85,8 +85,8 @@
                         <MudTablePager />
                     </PagerContent>
                 </MudTable>
-            </div>
-        </div>
+            </Div>
+        </Div>
     </DialogContent>
     <DialogActions>
         <CancelButton OnClick="Cancel" />

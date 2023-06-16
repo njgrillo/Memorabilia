@@ -1,59 +1,52 @@
-﻿<DivRowCol6>
-    <Content>
+﻿<Div Class="row">
+    <Div Class="col-6">
         <OccupationAutoComplete Disabled="@(!_canEditOccupation)"
                                 SelectedValue="Model.Occupation"
                                 SelectionChanged="(p) => Model.Occupation = p" />
-    </Content>
-    <ContentColumn2>
+    </Div>
+    <Div Class="col-6">
         <MudSwitch Checked="@(Model.OccupationType == OccupationType.Primary)"
                    CheckedChanged="OnOccupationTypeChange"
                    Color="MudBlazor.Color.Success"
                    Label="Is Primary?"
                    T="bool" />
-    </ContentColumn2>
-</DivRowCol6>
+    </Div>
+</Div>
 <DivLeftAlign>
-    <Content>
-        <DivHidden Hidden="@(!_canAdd)">
-            <Content>
-                <AddButton OnClick="Add" />
-            </Content>
-        </DivHidden>
-        <DivHidden Hidden="@(!_canUpdate)">
-            <Content>
-                <UpdateButton OnClick="Update" />
-            </Content>
-        </DivHidden>
-    </Content>    
+    <Div Hidden="@(!_canAdd)">
+        <AddButton OnClick="Add" />
+    </Div>
+    <Div Hidden="@(!_canUpdate)">
+        <UpdateButton OnClick="Update" />
+    </Div>
 </DivLeftAlign>
+<br />
 <DivRowCol12>
-    <Content>
-        <MudTable Bordered="false"
-                  Dense="false" 
-                  Hover="true"
-                  Items="@Occupations.Where(occupation => !occupation.IsDeleted).OrderBy(x => x.OccupationName).ToList()"    
-                  Striped="true">
-            <HeaderContent>
-                <MudTh>Occupation</MudTh>
-                <MudTh>Occupation Type</MudTh>
-                <MudTh></MudTh>
-            </HeaderContent>
-            <RowTemplate>
-                <MudTd DataLabel="Occupation">@context.OccupationName</MudTd>
-                <MudTd DataLabel="Occupation Type">@context.OccupationTypeName</MudTd>
-                <MudTd DataLabel="">
-                    <MudTooltip Text="Edit">
-                        <MudFab Color="MudBlazor.Color.Primary"                                
-                                Icon="@Icons.Material.Outlined.ModeEditOutline"
-                                OnClick="@(_ => Edit(context))" />
-                    </MudTooltip> 
-                    <MudTooltip Text="Delete">
-                        <MudFab Color="MudBlazor.Color.Secondary"
-                                Icon="@Icons.Material.Outlined.DeleteOutline"
-                                OnClick="@(_ => Delete(context))" />
-                    </MudTooltip>  
-                </MudTd>
-            </RowTemplate>
-        </MudTable>
-    </Content>
+    <MudTable Bordered="false"
+              Dense="false"
+              Hover="true"
+              Items="@Occupations.Where(occupation => !occupation.IsDeleted).OrderBy(x => x.OccupationName).ToList()"
+              Striped="true">
+        <HeaderContent>
+            <MudTh>Occupation</MudTh>
+            <MudTh>Occupation Type</MudTh>
+            <MudTh></MudTh>
+        </HeaderContent>
+        <RowTemplate>
+            <MudTd DataLabel="Occupation">@context.OccupationName</MudTd>
+            <MudTd DataLabel="Occupation Type">@context.OccupationTypeName</MudTd>
+            <MudTd DataLabel="">
+                <MudTooltip Text="Edit">
+                    <MudFab Color="MudBlazor.Color.Primary"
+                            Icon="@Icons.Material.Outlined.ModeEditOutline"
+                            OnClick="@(_ => Edit(context))" />
+                </MudTooltip>
+                <MudTooltip Text="Delete">
+                    <MudFab Color="MudBlazor.Color.Secondary"
+                            Icon="@Icons.Material.Outlined.DeleteOutline"
+                            OnClick="@(_ => Delete(context))" />
+                </MudTooltip>
+            </MudTd>
+        </RowTemplate>
+    </MudTable>
 </DivRowCol12>

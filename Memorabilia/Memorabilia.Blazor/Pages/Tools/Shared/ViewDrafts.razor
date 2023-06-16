@@ -1,72 +1,71 @@
 ﻿@inherits ViewSportTools<DraftModel>
 
 <DivPad2>
-    <Content>
-        <div class="row">
-            <div class="col-3">
-                <FranchiseAutoComplete SelectedValue="Model.Franchise"
-                                       SelectionChanged="(p) => OnInputChange(p)"
-                                       Sports="@(new [] { Sport })" />
-            </div>
-        </div>
-        <br />
-        <div class="row" hidden="@(Model.Franchise == null)">
-            <div class="col-12">
-                <MudTable Bordered="false"
-                          Dense="false"
-                          Filter="new Func<DraftModel,bool>(FilterFunc1)"
-                          Hover="true"
-                          Items="@Model.Drafts.ToList()"
-                          Striped="true">
-                    <ToolBarContent>
-                        <MudText Typo="Typo.h6">@Model.ResultsTitle</MudText>
-                        <MudSpacer />
-                        <MudTextField @bind-Value="Search"
-                                      Adornment="Adornment.Start"
-                                      AdornmentIcon="@Icons.Material.Filled.Search"
-                                      Class="mt-0"
-                                      IconSize="MudBlazor.Size.Medium"
-                                      Placeholder="Search" />
-                    </ToolBarContent>
-                    <HeaderContent>
-                        <MudTh></MudTh>
-                        <MudTh>
-                            <MudTableSortLabel SortBy="new Func<DraftModel, object>(x => x.PersonName)">Person</MudTableSortLabel>
-                        </MudTh>
-                        <MudTh>
-                            <MudTableSortLabel SortBy="new Func<DraftModel, object>(x => x.FranchiseName)">Franchise</MudTableSortLabel>
-                        </MudTh>
-                        <MudTh>Year</MudTh>
-                        <MudTh>Round</MudTh>
-                        <MudTh>Pick</MudTh>
-                        <MudTh>Overall</MudTh>
-                    </HeaderContent>
-                    <RowTemplate>
-                        <MudTd DataLabel="">
-                            <MudTooltip>
-                                <MudImage @onclick="@(_ => ShowPersonProfileDialog(context.PersonId))"
-                                          Class="rounded-lg can-click"
-                                          Elevation="5"
-                                          Height="200"
-                                          ObjectFit="@ObjectFit.Cover"
-                                          Src="@(ImageService.GetPersonImageData(context.PersonImageFileName))"
-                                          Width="200" />
-                            </MudTooltip>
-                        </MudTd>
-                        <MudTd DataLabel="Person">
-                            <MudLink Href="@context.ProfileLink">@context.PersonName</MudLink>
-                        </MudTd>
-                        <MudTd DataLabel="Franchise">@context.FranchiseName</MudTd>
-                        <MudTd DataLabel="Year">@context.Year</MudTd>
-                        <MudTd DataLabel="Round">@context.Round</MudTd>
-                        <MudTd DataLabel="Pick">@context.Pick</MudTd>
-                        <MudTd DataLabel="Overall">@context.Overall</MudTd>
-                    </RowTemplate>
-                    <PagerContent>
-                        <MudTablePager />
-                    </PagerContent>
-                </MudTable>
-            </div>
-        </div>
-    </Content>
+    <Div Class="row">
+        <Div Class="col-3">
+            <FranchiseAutoComplete SelectedValue="Model.Franchise"
+                                   SelectionChanged="(p) => OnInputChange(p)"
+                                   Sports="@(new [] { Sport })" />
+        </Div>
+    </Div>
+    <br />
+    <Div Class="row" 
+         Hidden="@(Model.Franchise == null)">
+        <Div Class="col-12">
+            <MudTable Bordered="false"
+                      Dense="false"
+                      Filter="new Func<DraftModel,bool>(FilterFunc1)"
+                      Hover="true"
+                      Items="@Model.Drafts.ToList()"
+                      Striped="true">
+                <ToolBarContent>
+                    <MudText Typo="Typo.h6">@Model.ResultsTitle</MudText>
+                    <MudSpacer />
+                    <MudTextField @bind-Value="Search"
+                                  Adornment="Adornment.Start"
+                                  AdornmentIcon="@Icons.Material.Filled.Search"
+                                  Class="mt-0"
+                                  IconSize="MudBlazor.Size.Medium"
+                                  Placeholder="Search" />
+                </ToolBarContent>
+                <HeaderContent>
+                    <MudTh></MudTh>
+                    <MudTh>
+                        <MudTableSortLabel SortBy="new Func<DraftModel, object>(x => x.PersonName)">Person</MudTableSortLabel>
+                    </MudTh>
+                    <MudTh>
+                        <MudTableSortLabel SortBy="new Func<DraftModel, object>(x => x.FranchiseName)">Franchise</MudTableSortLabel>
+                    </MudTh>
+                    <MudTh>Year</MudTh>
+                    <MudTh>Round</MudTh>
+                    <MudTh>Pick</MudTh>
+                    <MudTh>Overall</MudTh>
+                </HeaderContent>
+                <RowTemplate>
+                    <MudTd DataLabel="">
+                        <MudTooltip>
+                            <MudImage @onclick="@(_ => ShowPersonProfileDialog(context.PersonId))"
+                                      Class="rounded-lg can-click"
+                                      Elevation="5"
+                                      Height="200"
+                                      ObjectFit="@ObjectFit.Cover"
+                                      Src="@(ImageService.GetPersonImageData(context.PersonImageFileName))"
+                                      Width="200" />
+                        </MudTooltip>
+                    </MudTd>
+                    <MudTd DataLabel="Person">
+                        <MudLink Href="@context.ProfileLink">@context.PersonName</MudLink>
+                    </MudTd>
+                    <MudTd DataLabel="Franchise">@context.FranchiseName</MudTd>
+                    <MudTd DataLabel="Year">@context.Year</MudTd>
+                    <MudTd DataLabel="Round">@context.Round</MudTd>
+                    <MudTd DataLabel="Pick">@context.Pick</MudTd>
+                    <MudTd DataLabel="Overall">@context.Overall</MudTd>
+                </RowTemplate>
+                <PagerContent>
+                    <MudTablePager />
+                </PagerContent>
+            </MudTable>
+        </Div>
+    </Div>
 </DivPad2>

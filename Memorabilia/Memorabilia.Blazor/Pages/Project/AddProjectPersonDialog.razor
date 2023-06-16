@@ -1,15 +1,14 @@
 ﻿<MudDialog Style="max-height:85vh;">
     <DialogContent>
         <DivPad2>
-            <Content>
-                <div class="row">
-                    <div class="col-6">
+            <Div Class="row">
+                    <Div Class="col-6">
                         <PersonSelector SelectedPerson="ProjectPerson.Person"
                                         SelectedPersonChanged="(p) => ProjectPerson.Person = p" />
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-3">
+                    </Div>
+                </Div>
+                <Div Class="row">
+                    <Div Class="col-3">
                         <MudStack Row="true"
                                   Spacing="0">
                             <NullableIntField Label="Rank"
@@ -25,27 +24,27 @@
                                           Width="20" />
                             </MudTooltip>
                         </MudStack>                        
-                    </div>
-                    <div class="col-3">
+                    </Div>
+                    <Div Class="col-3">
                         <PriorityTypeDropDown SelectedValue="ProjectPerson.PriorityTypeId"
                                               SelectionChanged="(p) => ProjectPerson.PriorityTypeId = p" />
-                    </div>
-                    <div class="col-3">
+                    </Div>
+                    <Div Class="col-3">
                         <ProjectStatusTypeDropDown SelectedValue="ProjectPerson.ProjectStatusTypeId"
                                                    SelectionChanged="(p) => ProjectPerson.ProjectStatusTypeId = p" />
-                    </div>
-                    <div class="col-3">
+                    </Div>
+                    <Div Class="col-3">
                         <MudSwitch Checked="@ProjectPerson.Upgrade"
                                    CheckedChanged="(p) => ProjectPerson.Upgrade = p"
                                    Color="MudBlazor.Color.Success"
                                    Label="Is Upgrade?"
                                    T="bool" />
-                    </div>
-                </div>
+                    </Div>
+                </Div>
                 <Condition Evaluation="@(ProjectId > 0 && ProjectPerson.Person != null && ProjectPerson.Person.Id > 0)">
                     <Match>
-                        <div class="row">
-                            <div class="col-3">
+                        <Div Class="row">
+                            <Div Class="col-3">
                                 <Condition Evaluation="@(ProjectPerson.AutographId > 0)">
                                     <Match>
                                         <MudTooltip Text="Remove link to Autograph">
@@ -62,8 +61,8 @@
                                         </MudTooltip>
                                     </NotMatch>
                                 </Condition>
-                            </div>
-                            <div class="col-3">
+                            </Div>
+                            <Div Class="col-3">
                                 <Condition Evaluation="@(ProjectPerson.AutographId > 0)">
                                     <Match>
                                         <MudImage Class="rounded-lg can-click"
@@ -74,11 +73,10 @@
                                                   Width="100" />
                                     </Match>
                                 </Condition>
-                            </div>
-                        </div>
+                            </Div>
+                        </Div>
                     </Match>
-                </Condition>
-            </Content>                     
+                </Condition>                   
         </DivPad2>
     </DialogContent>
     <DialogActions>        

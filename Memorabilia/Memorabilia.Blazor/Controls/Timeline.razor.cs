@@ -3,7 +3,7 @@
 public partial class Timeline
 {
     [Parameter]
-    public RenderFragment Content { get; set; }
+    public RenderFragment ChildContent { get; set; }
 
     [Parameter]
     public TimelineOrientation Orientation { get; set; } 

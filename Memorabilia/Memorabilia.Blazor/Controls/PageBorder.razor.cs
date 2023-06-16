@@ -3,5 +3,5 @@
 public partial class PageBorder
 {
     [Parameter]
-    public RenderFragment Content { get; set; }
+    public RenderFragment ChildContent { get; set; }
 }

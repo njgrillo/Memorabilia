@@ -20,8 +20,8 @@
                         PersonId="EditModel.PersonId"
                         PersonStep="EditModel.PersonStep" />
     </TimelineContent>
-    <Content>
-        <div style="margin-bottom:1%;">
+    <ChildContent>
+        <Div Style="margin-bottom:1%;">
             <MudTabs ApplyEffectsToContainer="true"
                      Centered="true"
                      Elevation="2"
@@ -31,41 +31,33 @@
                              BadgeData="EditModel.HallOfFames.Count(hof => !hof.IsDeleted)"
                              Text="Sports">
                     <DivRowCol12>
-                        <Content>
-                            <PersonHallOfFameEditor HallOfFames="EditModel.HallOfFames"
-                                                    SportLeagueLevels="EditModel.SportLeagueLevels" />
-                        </Content>
+                        <PersonHallOfFameEditor HallOfFames="EditModel.HallOfFames"
+                                                SportLeagueLevels="EditModel.SportLeagueLevels" />
                     </DivRowCol12>
                 </MudTabPanel>
                 <MudTabPanel BadgeColor="MudBlazor.Color.Success"
                              BadgeData="EditModel.FranchiseHallOfFames.Count(hof => !hof.IsDeleted)"
                              Text="Franchises">
                     <DivRowCol12>
-                        <Content>
-                            <PersonFranchiseHallOfFameEditor FranchiseHallOfFames="EditModel.FranchiseHallOfFames"
-                                                             Sports="EditModel.Sports" />
-                        </Content>
+                        <PersonFranchiseHallOfFameEditor FranchiseHallOfFames="EditModel.FranchiseHallOfFames"
+                                                         Sports="EditModel.Sports" />
                     </DivRowCol12>
                 </MudTabPanel>
                 <MudTabPanel BadgeColor="MudBlazor.Color.Success"
                              BadgeData="EditModel.CollegeHallOfFames.Count(hof => !hof.IsDeleted)"
                              Text="College">
                     <DivRowCol12>
-                        <Content>
-                            <PersonCollegeHallOfFameEditor CollegeHallOfFames="EditModel.CollegeHallOfFames" />
-                        </Content>
+                        <PersonCollegeHallOfFameEditor CollegeHallOfFames="EditModel.CollegeHallOfFames" />
                     </DivRowCol12>
                 </MudTabPanel>
                 <MudTabPanel BadgeColor="MudBlazor.Color.Success"
                              BadgeData="EditModel.InternationalHallOfFames.Count(hof => !hof.IsDeleted)"
                              Text="International">
                     <DivRowCol12>
-                        <Content>
-                            <PersonInternationalHallOfFameEditor InternationalHallOfFames="EditModel.InternationalHallOfFames" />
-                        </Content>
+                        <PersonInternationalHallOfFameEditor InternationalHallOfFames="EditModel.InternationalHallOfFames" />
                     </DivRowCol12>
                 </MudTabPanel>
             </MudTabs>
-        </div>
-    </Content>
+        </Div>
+    </ChildContent>
 </EditPage>

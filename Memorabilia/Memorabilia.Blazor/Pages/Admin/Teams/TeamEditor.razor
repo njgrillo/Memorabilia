@@ -20,57 +20,58 @@
                       TeamId="EditModel.Id"
                       TeamStep="EditModel.TeamStep" />
     </TimelineContent>
-    <Content>
-        <DivRowCol3 Hidden="@(!EditModel.DisplayFranchise)">
-            <Content>
+    <ChildContent>
+        <Div Class="row" 
+             Hidden="@(!EditModel.DisplayFranchise)">
+            <Div Class="col-3">
                 <SportLeagueLevelDropDown SelectedValue="EditModel.SportLeagueLevelId"
                                           SelectionChanged="(p) => EditModel.SportLeagueLevelId = p" />
-            </Content>
-        </DivRowCol3>
-        <DivRowCol3>
-            <Content>
+            </Div>
+        </Div>
+        <Div Class="row">
+            <Div Class="col-3">
                 <FranchiseAutoComplete SelectedValue="EditModel.Franchise"
                                        SelectionChanged="(p) => EditModel.Franchise = p"
                                        Sports="EditModel.Sports" />
-            </Content>
-        </DivRowCol3>
-        <DivRowCol3>
-            <Content>
+            </Div>
+        </Div>
+        <Div Class="row">
+            <Div Class="col-3">
                 <TextField Label="Name"
                            SelectedText="@EditModel.Name"
                            SelectedTextChanged="@((p) => EditModel.Name = p)" />
-            </Content>
-        </DivRowCol3>
-        <DivRowCol3>
-            <Content>
+            </Div>
+        </Div>
+        <Div Class="row">
+            <Div Class="col-3">
                 <TextField Label="Location"
                            SelectedText="@EditModel.Location"
                            SelectedTextChanged="@((p) => EditModel.Location = p)" />
-            </Content>
-        </DivRowCol3>
-        <DivRowCol3>
-            <Content>
+            </Div>
+        </Div>
+        <Div Class="row">
+            <Div Class="col-3">
                 <TextField Label="Nickname"
                            SelectedText="@EditModel.Nickname"
                            SelectedTextChanged="@((p) => EditModel.Nickname = p)" />
-            </Content>
-            <ContentColumn2>
+            </Div>
+            <Div Class="col-3">
                 <TextField Label="Abbreviation"
                            SelectedText="@EditModel.Abbreviation"
                            SelectedTextChanged="@((p) => EditModel.Abbreviation = p)" />
-            </ContentColumn2>
-        </DivRowCol3>
-         <DivRowCol3>
-            <Content>
+            </Div>
+        </Div>
+        <Div Class="row">
+            <Div Class="col-3">
                 <NullableIntField Label="Begin Year"
                                   Value="EditModel.BeginYear"
                                   ValueChanged="@((p) => EditModel.BeginYear = p)" />
-            </Content>
-            <ContentColumn2>
+            </Div>
+            <Div Class="col-3">
                 <NullableIntField Label="End Year"
                                   Value="EditModel.EndYear"
                                   ValueChanged="@((p) => EditModel.EndYear = p)" />
-            </ContentColumn2>
-        </DivRowCol3>
-    </Content>
+            </Div>
+        </Div>
+    </ChildContent>
 </EditPage>

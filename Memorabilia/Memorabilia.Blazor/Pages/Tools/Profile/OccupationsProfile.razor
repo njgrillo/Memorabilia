@@ -1,23 +1,22 @@
 ﻿@inherits PersonProfile
 
-@if (Model != null)
-{
-    <MudTabs ApplyEffectsToContainer="true"
-             Centered="false"
-             Elevation="2"
-             PanelClass="pa-6"
-             Rounded="true">
-        <Iterations Context="occupation"
-                    Items="Model.Occupations">
-            <MudTabPanel BadgeColor="MudBlazor.Color.Success"
-                         Text="@occupation.OccupationName">
-                <DivRowCol12>
-                    <Content>
-                        <RolesProfile Occupation="occupation" 
+<Condition Evaluation="@(Model != null)">
+    <Match>
+        <MudTabs ApplyEffectsToContainer="true"
+                 Centered="false"
+                 Elevation="2"
+                 PanelClass="pa-6"
+                 Rounded="true">
+            <Iterations Context="occupation"
+                        Items="Model.Occupations">
+                <MudTabPanel BadgeColor="MudBlazor.Color.Success"
+                             Text="@occupation.OccupationName">
+                    <DivRowCol12>
+                        <RolesProfile Occupation="occupation"
                                       Person="Person" />
-                    </Content>
-                </DivRowCol12>
-            </MudTabPanel>
-        </Iterations>
-    </MudTabs>
-}
+                    </DivRowCol12>
+                </MudTabPanel>
+            </Iterations>
+        </MudTabs>
+    </Match>
+</Condition>

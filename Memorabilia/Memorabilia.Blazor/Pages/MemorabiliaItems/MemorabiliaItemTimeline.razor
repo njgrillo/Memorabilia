@@ -1,35 +1,31 @@
 ﻿<DivRowCol12Center>
-    <Content>
-        <Timeline>
-            <Content>
-                <MudTimelineItem Color="@MemorabiliaEditItemColor" 
-                                 Variant="Variant.Filled">
-                    <ItemContent>
-                        <MudAlert style="@(GetMudAlertStyle(MemorabiliaItemStep.Item))"
-                                  Class="@_mudAlertClass" 
-                                  OnClick="@(_ => Navigate())"
-                                  Severity="@MemorabiliaEditItemAlertSeverity">@MemorabiliaEditItemAlertTitle</MudAlert>
-                    </ItemContent>
-                </MudTimelineItem>
-                <MudTimelineItem Color="@MemorabiliaEditDetailColor"                             
-                                 Variant="Variant.Filled">
-                    <ItemContent>
-                        <MudAlert style="@(GetMudAlertStyle(MemorabiliaItemStep.Detail))"
-                                  Class="@_mudAlertClass" 
-                                  OnClick="@(_ => Navigate(ItemTypeName))"
-                                  Severity="@MemorabiliaEditDetailAlertSeverity">@MemorabiliaEditDetailAlertTitle</MudAlert>
-                    </ItemContent>
-                </MudTimelineItem>
-                <MudTimelineItem Color="@MemorabiliaEditImageColor" 
-                                 Variant="Variant.Filled">
-                    <ItemContent>
-                        <MudAlert style="@(GetMudAlertStyle(MemorabiliaItemStep.Image))"
-                                  Class="@_mudAlertClass" 
-                                  OnClick="@(_ => Navigate("Image"))"
-                                  Severity="@MemorabiliaEditImageAlertSeverity">@MemorabiliaEditImageAlertTitle</MudAlert>
-                    </ItemContent>
-                </MudTimelineItem>
-            </Content>
-        </Timeline>
-    </Content>
+    <Timeline>
+        <MudTimelineItem Color="@MemorabiliaEditItemColor"
+                         Variant="Variant.Filled">
+            <ItemContent>
+                <MudAlert Style="@(GetMudAlertStyle(MemorabiliaItemStep.Item))"
+                          Class="@_mudAlertClass"
+                          OnClick="@(_ => Navigate())"
+                          Severity="@MemorabiliaEditItemAlertSeverity">@MemorabiliaEditItemAlertTitle</MudAlert>
+            </ItemContent>
+        </MudTimelineItem>
+        <MudTimelineItem Color="@MemorabiliaEditDetailColor"
+                         Variant="Variant.Filled">
+            <ItemContent>
+                <MudAlert Style="@(GetMudAlertStyle(MemorabiliaItemStep.Detail))"
+                          Class="@_mudAlertClass"
+                          OnClick="@(_ => Navigate(ItemTypeName))"
+                          Severity="@MemorabiliaEditDetailAlertSeverity">@MemorabiliaEditDetailAlertTitle</MudAlert>
+            </ItemContent>
+        </MudTimelineItem>
+        <MudTimelineItem Color="@MemorabiliaEditImageColor"
+                         Variant="Variant.Filled">
+            <ItemContent>
+                <MudAlert Style="@(GetMudAlertStyle(MemorabiliaItemStep.Image))"
+                          Class="@_mudAlertClass"
+                          OnClick="@(_ => Navigate("Image"))"
+                          Severity="@MemorabiliaEditImageAlertSeverity">@MemorabiliaEditImageAlertTitle</MudAlert>
+            </ItemContent>
+        </MudTimelineItem>
+    </Timeline>
 </DivRowCol12Center>

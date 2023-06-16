@@ -1,34 +1,35 @@
 ﻿<Condition Evaluation="CanToggle">
     <Match>
-        <DivRowCol3>
-            <Content>
+        <Div Class="row">
+            <Div Class="col-3">
                 <MudSwitch Checked="@_hasTeams"
                            CheckedChanged="TeamCheckboxClicked"
                            Color="MudBlazor.Color.Success"
                            Label="@_itemTypeNameLabel"
                            T="bool" />
-            </Content>
-        </DivRowCol3>
+            </Div>
+        </Div>
     </Match>    
 </Condition> 
-<DivRowCol6 Hidden="@(!_displayTeams)"
-            LeftPadding="10">
-    <Content>
+<Div Class="row" 
+     Hidden="@(!_displayTeams)"
+     Style="margin-top:1%;margin-bottom:1%;padding-left:10px;">
+    <Div Class="col-6">
         <TeamAutoComplete ResetValueOnEmptyText="false" 
                           SelectedValue="SelectedTeam"
                           SelectionChanged="(p) => SelectedTeam = p"
                           SportLeagueLevel="SportLeagueLevel" />
-    </Content>
-</DivRowCol6>
-<DivRowCol6 Hidden="@(!_displayTeams)"
-            LeftPadding="10">
-    <Content>
+    </Div>
+</Div>
+<Div Class="row" 
+     Hidden="@(!_displayTeams)"
+     Style="margin-top:1%;margin-bottom:1%;padding-left:10px;">
+    <Div Class="col-6">
         <DivLeftAlign>
-            <Content>
-                <AddButton OnClick="Add"
-                           Text="Add Team" />
-            </Content>
+            <AddButton OnClick="Add"
+                       Text="Add Team" />
         </DivLeftAlign> 
+        <br />
         <MudTable Bordered="false"
                   Dense="false" 
                   Hover="true"
@@ -49,5 +50,5 @@
                 </MudTd>
             </RowTemplate>
         </MudTable>
-    </Content>
-</DivRowCol6>
+    </Div>
+</Div>

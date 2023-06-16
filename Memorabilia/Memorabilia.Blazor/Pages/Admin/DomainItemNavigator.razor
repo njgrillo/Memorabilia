@@ -1,39 +1,35 @@
-﻿<div class="row">
-    <div class="col-md-4">
+﻿<Div Class="row">
+    <Div Class="col-4">
         <DivPad5>
-            <Content>
-                <span hidden="@(!_displayItemTypeNotFound)"
-                      style="background-color:red;">
-                    Item Type Not Found
-                </span>
-            </Content>
+            <span hidden="@(!_displayItemTypeNotFound)"
+                  style="background-color:red;">
+                Item Type Not Found
+            </span>
         </DivPad5>
-    </div>
-</div>
-<div class="row" @onkeydown="@Enter">
-    <div class="col-md-4">
+    </Div>
+</Div>
+<Div Class="row" @onkeydown="@Enter">
+    <Div Class="col-4">
         <DivPad5>
-            <Content> 
-                <div style="display:flex">
-                    <TextField Label="Quick Jump"
-                               SelectedText="@DomainItemQuickJump"
-                               SelectedTextChanged="@((p) => DomainItemQuickJump = p)" />
-                    <CustomButton ButtonType="MudBlazor.ButtonType.Button"
-                                  OnClick="QuickJump"
-                                  Size="MudBlazor.Size.Small"
-                                  Text="Go" />
-                </div>                             
-            </Content>                    
+            <Div Style="display:flex">
+                <TextField Label="Quick Jump"
+                           SelectedText="@DomainItemQuickJump"
+                           SelectedTextChanged="@((p) => DomainItemQuickJump = p)" />
+                <CustomButton ButtonType="MudBlazor.ButtonType.Button"
+                              OnClick="QuickJump"
+                              Size="MudBlazor.Size.Small"
+                              Text="Go" />
+            </Div>
         </DivPad5>                
-    </div>
-</div>
-<div class="row">
+    </Div>
+</Div>
+<Div Class="row">
     <Iterations Items="Model.Items" Context="item">
-        <div class="col-md-4">
+        <Div Class="col-4">
             <DomainItemCard Description="@item.Description"
                             ImageFileName="@item.ImageFileName"
                             Page="@item.Page"
                             Title="@item.Title" />
-        </div>  
+        </Div>  
     </Iterations>
-</div>
+</Div>

@@ -6,47 +6,43 @@
           NavigationPath="@Model.ExitNavigationPath"
           OnLoad="OnLoad"
           PageTitle="@Model.PageTitle">
-    <Content>
-        <DivPad2>
-            <Content>
-                <MudTable Bordered="false"
-                          Dense="false" 
-                          Filter="new Func<ItemTypeLevelModel,bool>(FilterFunc1)"
-                          Hover="true"
-                          Items="@Model.ItemTypeLevels"    
-                          Striped="true">
-                    <ToolBarContent>
-                        <MudText Typo="Typo.h6">@Model.PageTitle</MudText>
-                        <MudSpacer />
-                        <MudTextField @bind-Value="Search"
-                                      Adornment="Adornment.Start"
-                                      AdornmentIcon="@Icons.Material.Filled.Search"
-                                      Class="mt-0"
-                                      IconSize="MudBlazor.Size.Medium"
-                                      Placeholder="Search" />
-                    </ToolBarContent>
-                    <HeaderContent>
-                        <MudTh>Item Type</MudTh>
-                        <MudTh>Level</MudTh>
-                        <MudTh></MudTh>
-                    </HeaderContent>
-                    <RowTemplate>
-                        <MudTd DataLabel="Item Type">@context.ItemTypeName</MudTd>
-                        <MudTd DataLabel="Level">@context.LevelTypeName</MudTd>
-                        <MudTd DataLabel="">
-                            <GridEditButton NavigationPath="@($"{Model.RoutePrefix}/{EditModeType.Update.Name}/{context.Id}")" />
-                            <MudTooltip Text="Delete">
-                                <MudFab Color="MudBlazor.Color.Secondary"
-                                        Icon="@Icons.Material.Outlined.DeleteOutline"
-                                        OnClick="@(_ => ShowDeleteConfirm(@context.Id, context.DeleteText))" />
-                            </MudTooltip>
-                        </MudTd>
-                    </RowTemplate>
-                    <PagerContent>
-                        <MudTablePager />
-                    </PagerContent>
-                </MudTable>
-            </Content>
-        </DivPad2> 
-    </Content>
+    <DivPad2>
+        <MudTable Bordered="false"
+                  Dense="false"
+                  Filter="new Func<ItemTypeLevelModel,bool>(FilterFunc1)"
+                  Hover="true"
+                  Items="@Model.ItemTypeLevels"
+                  Striped="true">
+            <ToolBarContent>
+                <MudText Typo="Typo.h6">@Model.PageTitle</MudText>
+                <MudSpacer />
+                <MudTextField @bind-Value="Search"
+                              Adornment="Adornment.Start"
+                              AdornmentIcon="@Icons.Material.Filled.Search"
+                              Class="mt-0"
+                              IconSize="MudBlazor.Size.Medium"
+                              Placeholder="Search" />
+            </ToolBarContent>
+            <HeaderContent>
+                <MudTh>Item Type</MudTh>
+                <MudTh>Level</MudTh>
+                <MudTh></MudTh>
+            </HeaderContent>
+            <RowTemplate>
+                <MudTd DataLabel="Item Type">@context.ItemTypeName</MudTd>
+                <MudTd DataLabel="Level">@context.LevelTypeName</MudTd>
+                <MudTd DataLabel="">
+                    <GridEditButton NavigationPath="@($"{Model.RoutePrefix}/{EditModeType.Update.Name}/{context.Id}")" />
+                    <MudTooltip Text="Delete">
+                        <MudFab Color="MudBlazor.Color.Secondary"
+                                Icon="@Icons.Material.Outlined.DeleteOutline"
+                                OnClick="@(_ => ShowDeleteConfirm(@context.Id, context.DeleteText))" />
+                    </MudTooltip>
+                </MudTd>
+            </RowTemplate>
+            <PagerContent>
+                <MudTablePager />
+            </PagerContent>
+        </MudTable>
+    </DivPad2>
 </PageView>

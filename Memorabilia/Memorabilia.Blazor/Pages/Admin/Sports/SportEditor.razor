@@ -12,20 +12,18 @@
           PageFooterNavigationPath="@EditModel.ExitNavigationPath"
           PageTitle="@EditModel.PageTitle"
           TItem="SportEditModel">
-    <Content>
-         <DivRowCol3>
-            <Content>
-                <TextField Label="Name"
-                           SelectedText="@EditModel.Name"
-                           SelectedTextChanged="@((p) => EditModel.Name = p)" />
-            </Content>            
-        </DivRowCol3>
-        <DivRowCol3>
-            <Content>
-                <TextField Label="Alternate Name"
-                           SelectedText="@EditModel.AlternateName"
-                           SelectedTextChanged="@((p) => EditModel.AlternateName = p)" />
-            </Content>            
-        </DivRowCol3>
-    </Content>
+    <Div Class="row">
+        <Div Class="col-3">
+            <TextField Label="Name"
+                       SelectedText="@EditModel.Name"
+                       SelectedTextChanged="@((p) => EditModel.Name = p)" />
+        </Div>
+    </Div>
+    <Div Class="row">
+        <Div Class="col-3">
+            <TextField Label="Alternate Name"
+                       SelectedText="@EditModel.AlternateName"
+                       SelectedTextChanged="@((p) => EditModel.AlternateName = p)" />
+        </Div>
+    </Div>
 </EditPage>

@@ -1,32 +1,33 @@
-﻿<div class="row">
-    <div class="col-6">
+﻿<Div Class="row">
+    <Div Class="col-6">
         <AccomplishmentTypeAutoComplete SelectedValue="Model.AccomplishmentType"
                                         SelectionChanged="(p) => Model.AccomplishmentType = p"
                                         Sports="Sports" />
-    </div>
-    <div class="col-3" hidden="@(!IsYearAccomplishment)">
+    </Div>
+    <Div Class="col-3" 
+         Hidden="@(!IsYearAccomplishment)">
         <TextField HelperText="Ex. 1999 or 1999-2002 or 2003, 2005-2008"
                    Label="Years"
                    SelectedText="@_years"
                    SelectedTextChanged="@((p) => _years = p)" />
-    </div>
-    <div class="col-2" hidden="@(!IsDateAccomplishment)">
+    </Div>
+    <Div Class="col-2" 
+         Hidden="@(!IsDateAccomplishment)">
         <MudDatePicker @bind-Date="Model.Date"
                        DateFormat="MM/dd/yyyy"
                        Editable="true"
                        Label="Date"
                        Mask="@(new DateMask("MM/dd/yyyy"))"
                        Variant="Variant.Outlined" />
-    </div>
-</div>
+    </Div>
+</Div>
 <br />
 <DivLeftAlign>
-    <Content>
-        <AddButton OnClick="Add" />
-    </Content>
+    <AddButton OnClick="Add" />
 </DivLeftAlign>
-<DivRowCol6>
-    <Content>
+<br />
+<Div Class="row">
+    <Div Class="col-6">
          <MudTable Bordered="false"
                    Dense="false" 
                    Hover="true"
@@ -55,5 +56,5 @@
                 <MudTablePager />
             </PagerContent>
         </MudTable>
-    </Content>
-</DivRowCol6>
+    </Div>
+</Div>

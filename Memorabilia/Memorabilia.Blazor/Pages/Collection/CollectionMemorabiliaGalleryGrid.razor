@@ -1,6 +1,6 @@
-﻿<div class="row">
+﻿<Div Class="row">
     <Iterations Items="_items" Context="item">
-        <div class="col-md-4">
+        <Div Class="col-4">
             <MemorabiliaItemGalleryCard Description="@GetDescription(item)"
                                         EditNavigationPath="@item.EditNavigationPath"
                                         MemorabiliaItem="@item"
@@ -9,19 +9,15 @@
                                         Subtitle="@GetSubtitle(item)"
                                         Title="@GetTitle(item)"
                                         TooltipText="@item.TooltipText" />
-        </div>
+        </Div>
     </Iterations>
-</div>
-<DivHidden Hidden="@(!DisplayLoadMoreButton)">
-    <Content>
-        <DivRowCol12Center>
-            <Content>
-                <CustomButton ButtonType="MudBlazor.ButtonType.Button"
-                              OnClick="LoadMore"
-                              Size="MudBlazor.Size.Small"
-                              Text="Load More" />
-            </Content>
-        </DivRowCol12Center>
-    </Content>
-</DivHidden>
+</Div>
+<Div Hidden="@(!DisplayLoadMoreButton)">
+    <DivRowCol12Center>
+        <CustomButton ButtonType="MudBlazor.ButtonType.Button"
+                      OnClick="LoadMore"
+                      Size="MudBlazor.Size.Small"
+                      Text="Load More" />
+    </DivRowCol12Center>
+</Div>
 

@@ -26,16 +26,14 @@
         <Condition Evaluation="Model.HasMemorabiliaImages">
             <Match>
                 <DivRowCol12Center>
-                    <Content>
-                        <ViewMemorabiliaImagesButton MemorabiliaId="Model.MemorabiliaId" />
-                    </Content>
+                    <ViewMemorabiliaImagesButton MemorabiliaId="Model.MemorabiliaId" />
                 </DivRowCol12Center>
             </Match>
         </Condition>        
     </ImagePreview>
-    <Content>        
-        <DivRowCol6>
-            <Content>
+    <ChildContent>        
+        <Div Class="row">
+            <Div Class="col-6">
                 <Condition Evaluation="Model.CanImportPerson">
                     <Match>
                         <MudTooltip Text="Import from memorabilia item">
@@ -51,43 +49,41 @@
                 </Condition>                
                 <PersonSelector SelectedPerson="Model.Person"
                                 SelectedPersonChanged="(p) => Model.Person = p" />  
-            </Content>
-        </DivRowCol6>
-        <DivRowCol3>
-            <Content>
+            </Div>
+        </Div>
+        <Div Class="row">
+            <Div Class="col-3">
                 <WritingInstrumentDropDown SelectedValue="Model.WritingInstrumentId"
                                            SelectionChanged="(p) => Model.WritingInstrumentId = p" />
-            </Content>
-            <ContentColumn2>
+            </Div>
+            <Div Class="col-3">
                 <ColorDropDown DisplayAutographColorsOnly="true"
                                SelectedValue="Model.ColorId"
                                SelectionChanged="(p) => Model.ColorId = p" />
-            </ContentColumn2>
-            <ContentColumn3>
+            </Div>
+            <Div Class="col-3">
                 <ConditionDropDown SelectedValue="Model.ConditionId"
                                    SelectionChanged="(p) => Model.ConditionId = p" />
-            </ContentColumn3>
-            <ContentColumn4>
+            </Div>
+            <Div Class="col-3">
                 <NullableIntField Label="Grade"
                                   Value="Model.Grade"
                                   ValueChanged="@((p) => Model.Grade = p)" />
-            </ContentColumn4>
-        </DivRowCol3>
-        <DivRowCol6>
-            <Content>
+            </Div>
+        </Div>
+        <Div Class="row">
+            <Div Class="col-6">
                 <TextField Label="Notes"
                            Lines="10"
                            SelectedText="@Model.Note"
                            SelectedTextChanged="@((p) => Model.Note = p)" />
-            </Content>
-        </DivRowCol6>
+            </Div>
+        </Div>
         <Condition Evaluation="Model.DisplayAcquisitionDetails">
             <Match>
-                <DivRowCol3 HideColumn2="@(!_displayAcquisitionDetails)"
-                            HideColumn3="@(!_displayAcquisitionDetails || !Model.CanHaveCost)"
-                            HideColumn4="@(!_displayAcquisitionDetails || !Model.CanHavePlaceOfPurchase)">
-                    <Content>
-                        <div style="display:flex">
+                <Div Class="row">
+                    <Div Class="col-3">
+                        <Div Style="display:flex">
                             <AcquisitionTypeDropDown IsAutograph="true"
                                                      SelectedValue="Model.AcquisitionTypeId"
                                                      SelectionChanged="OnAcquisitionTypeChange" />
@@ -100,42 +96,45 @@
                                           Src="@(ImageService.GetDomainImageData(ImageFileName.Import))"
                                           Width="20" />
                             </MudTooltip>                            
-                        </div>                        
-                    </Content>
-                    <ContentColumn2>
+                        </Div>                        
+                    </Div>
+                    <Div Class="col-3"
+                         Hidden="@(!_displayAcquisitionDetails)">
                         <MudDatePicker @bind-Date="Model.AcquiredDate"
                                        Label="Acquired Date"
                                        Variant="Variant.Outlined" />
-                    </ContentColumn2>
-                    <ContentColumn3>
+                    </Div>
+                    <Div Class="col-3"
+                         Hidden="@(!_displayAcquisitionDetails || !Model.CanHaveCost)">
                         <NullableDecimalField Label="Cost ($)"
                                               Value="Model.Cost"
                                               ValueChanged="@((p) => Model.Cost = p)" />
-                    </ContentColumn3>
-                    <ContentColumn4>
+                    </Div>
+                    <Div Class="col-3"
+                         Hidden="@(!_displayAcquisitionDetails || !Model.CanHavePlaceOfPurchase)">
                         <PurchaseTypeDropDown SelectedValue="Model.PurchaseTypeId"
                                               SelectionChanged="(p) => Model.PurchaseTypeId = p" />
-                    </ContentColumn4>
-                </DivRowCol3>
+                    </Div>
+                </Div>
                 <Condition Evaluation="Model.DisplayThroughTheMailDetails">
                     <Match>
-                        <DivRowCol3>
-                            <Content>
+                        <Div Class="row">
+                            <Div Class="col-3">
                                 <MudDatePicker @bind-Date="Model.SentDate"
                                                Label="Sent Date"
                                                Variant="Variant.Outlined" />
-                            </Content>
-                            <ContentColumn2>
+                            </Div>
+                            <Div Class="col-3">
                                 <MudDatePicker @bind-Date="Model.ReceivedDate"
                                                Label="Received Date"
                                                Variant="Variant.Outlined" />
-                            </ContentColumn2>
-                        </DivRowCol3>
+                            </Div>
+                        </Div>
                     </Match>
                 </Condition>  
-                <DivRowCol3>
-                    <Content>
-                        <div style="display:flex">
+                <Div Class="row">
+                    <Div Class="col-3">
+                        <Div Style="display:flex">
                             <NullableDecimalField Label="Estimated Value ($)"
                                                   Value="Model.EstimatedValue"
                                                   ValueChanged="@((p) => Model.EstimatedValue = p)" />
@@ -148,71 +147,71 @@
                                           Src="@(ImageService.GetDomainImageData(ImageFileName.Import))"
                                           Width="20" />
                             </MudTooltip>
-                        </div>
-                    </Content>
-                </DivRowCol3>
+                        </Div>
+                    </Div>
+                </Div>
             </Match>
         </Condition>
-        <DivRowCol3>
-            <Content>
+        <Div Class="row">
+            <Div Class="col-3">
                 <MudSwitch Checked="@Model.FullName"
                            CheckedChanged="(p) => Model.FullName = p"
                            Color="MudBlazor.Color.Success"
                            Label="Is Full Name?"
                            T="bool" />
-            </Content>
-        </DivRowCol3>       
-        <DivRowCol3>
-            <Content>
+            </Div>
+        </Div>       
+        <Div Class="row">
+            <Div Class="col-3">
                 <MudSwitch Checked="@Model.IsPersonalized"
                            CheckedChanged="(p) => Model.IsPersonalized = p"
                            Color="MudBlazor.Color.Success"
                            Label="Is Personalized?"
                            T="bool" />
-            </Content>
-        </DivRowCol3>
+            </Div>
+        </Div>
         <Condition Evaluation="Model.IsPersonalized">
             <Match>
-                <DivRowCol3>
-                    <Content>
+                <Div Class="row">
+                    <Div Class="col-3">
                         <TextField HelperText="Example: To Nick"
                                    Label="Personalization Text"
                                    SelectedText="@Model.PersonalizationText"
                                    SelectedTextChanged="@((p) => Model.PersonalizationText = p)" />
-                    </Content>
-                </DivRowCol3>
+                    </Div>
+                </Div>
             </Match>
         </Condition>        
-        <DivRowCol3>
-            <Content>
+        <Div Class="row">
+            <Div Class="col-3">
                 <MudSwitch Checked="@Model.IsNumbered"
                            CheckedChanged="(p) => Model.IsNumbered = p"
                            Color="MudBlazor.Color.Success"
                            Label="Is Numbered?"
                            T="bool" />
-            </Content>
-        </DivRowCol3>
+            </Div>
+        </Div>
         <Condition Evaluation="Model.IsNumbered">
             <Match>
-                <DivRowCol3>
-                    <Content>
-                        <div class="row">
-                            <div style="padding-left:15px; width:45%; flex:auto;">
+                <Div Class="row">
+                    <Div Class="col-3">
+                        <Div Class="row">
+                            <Div Style="padding-left:15px; width:45%; flex:auto;">
                                 <NumericField Label="Left Serial #"
                                               TType="int?"
                                               Value="Model.Numerator"
                                               ValueChanged="@((p) => Model.Numerator = p)" />
-                            </div>
-                            <div style="padding-right:15px; padding-left:5px; width:45%; flex:auto;">
+                            </Div>
+                            <Div Style="padding-right:15px; padding-left:5px; width:45%; flex:auto;">
                                 <NumericField Label="Right Serial #"
                                               TType="int?"
                                               Value="Model.Denominator"
                                               ValueChanged="@((p) => Model.Denominator = p)" />
-                            </div>
-                        </div>
-                    </Content>
-                </DivRowCol3>
+                            </Div>
+                        </Div>
+                    </Div>
+                </Div>
             </Match>
         </Condition>        
-    </Content>
+    </ChildContent>
 </EditPage>

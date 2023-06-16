@@ -20,99 +20,97 @@
                         PersonId="EditModel.Id"
                         PersonStep="EditModel.PersonStep" />
     </TimelineContent>
-    <Content>   
-        <div style="margin-bottom:1%;">
+    <ChildContent>   
+        <Div Style="margin-bottom:1%;">
             <MudTabs ApplyEffectsToContainer="true"
                      Centered="true"
                      Elevation="2"
                      PanelClass="pa-6"
                      Rounded="true">
                 <MudTabPanel Text="Details">
-                    <DivRowCol3>
-                        <Content>
+                    <Div Class="row">
+                        <Div Class="col-3">
                             <TextField Label="First Name"
                                        MaxLength="50"
                                        OnBlur="OnNameFieldBlur"
                                        SelectedText="@EditModel.FirstName"
                                        SelectedTextChanged="@((p) => EditModel.FirstName = p)" />
-                        </Content>
-                        <ContentColumn2>
+                        </Div>
+                        <Div Class="col-3">
                             <TextField Label="Middle Name"
                                        MaxLength="50"
                                        SelectedText="@EditModel.MiddleName"
                                        SelectedTextChanged="@((p) => EditModel.MiddleName = p)" />
-                        </ContentColumn2>
-                        <ContentColumn3>
+                        </Div>
+                        <Div Class="col-3">
                             <TextField Label="Last Name"
                                        MaxLength="50"
                                        OnBlur="OnNameFieldBlur"
                                        SelectedText="@EditModel.LastName"
                                        SelectedTextChanged="@((p) => EditModel.LastName = p)" />
-                        </ContentColumn3>
-                        <ContentColumn4>
+                        </Div>
+                        <Div Class="col-3">
                             <TextField Label="Suffix"
                                        MaxLength="25"
                                        OnBlur="OnNameFieldBlur"
                                        SelectedText="@EditModel.Suffix"
                                        SelectedTextChanged="@((p) => EditModel.Suffix = p)" />
-                        </ContentColumn4>
-                    </DivRowCol3>
-                    <DivRowCol3>
-                        <Content>
+                        </Div>
+                    </Div>
+                    <Div Class="row">
+                        <Div Class="col-3">
                             <TextField Label="Calling Name"
                                        MaxLength="50"
                                        OnBlur="OnNameFieldBlur"
                                        SelectedText="@EditModel.Nickname"
                                        SelectedTextChanged="@((p) => EditModel.Nickname = p)" />
-                        </Content>
-                        <ContentColumn2>
+                        </Div>
+                        <Div Class="col-3">
                             <TextField Label="Legal Name"
                                        MaxLength="225"
                                        SelectedText="@EditModel.LegalName"
                                        SelectedTextChanged="@((p) => EditModel.LegalName = p)" />
-                        </ContentColumn2>
-                        <ContentColumn3>
+                        </Div>
+                        <Div Class="col-3">
                             <TextField Label="Display Name"
                                        MaxLength="225"
                                        SelectedText="@EditModel.DisplayName"
                                        SelectedTextChanged="@((p) => EditModel.DisplayName = p)" />
-                        </ContentColumn3>
-                        <ContentColumn4>
+                        </Div>
+                        <Div Class="col-3">
                             <TextField Label="Profile Name"
                                        MaxLength="225"
                                        SelectedText="@EditModel.ProfileName"
                                        SelectedTextChanged="@((p) => EditModel.ProfileName = p)" />
-                        </ContentColumn4>
-                    </DivRowCol3>
-                    <DivRowCol3>
-                        <Content>
+                        </Div>
+                    </Div>
+                    <Div Class="row">
+                        <Div Class="col-3">
                             <MudDatePicker @bind-Date="EditModel.BirthDate"
                                            DateFormat="MM/dd/yyyy"
                                            Editable="true"
                                            Label="Birth Date"
                                            Mask="@(new DateMask("MM/dd/yyyy"))"
                                            Variant="Variant.Outlined" />
-                        </Content>
-                        <ContentColumn2>
+                        </Div>
+                        <Div Class="col-3">
                             <MudDatePicker @bind-Date="EditModel.DeathDate"
                                            DateFormat="MM/dd/yyyy"
                                            Editable="true"
                                            Label="Death Date"
                                            Mask="@(new DateMask("MM/dd/yyyy"))"
                                            Variant="Variant.Outlined" />
-                        </ContentColumn2>
-                    </DivRowCol3>
+                        </Div>
+                    </Div>
                 </MudTabPanel>
                 <MudTabPanel BadgeColor="MudBlazor.Color.Success"
                              BadgeData="EditModel.Nicknames.Count(nickname => !nickname.IsDeleted)"
                              Text="Nicknames">
                     <DivRowCol12>
-                        <Content>
-                            <PersonNicknameEditor Nicknames="EditModel.Nicknames" />
-                        </Content>
+                        <PersonNicknameEditor Nicknames="EditModel.Nicknames" />
                     </DivRowCol12>
                 </MudTabPanel>
             </MudTabs>
-        </div>        
-    </Content>
+        </Div>        
+    </ChildContent>
 </EditPage>

@@ -24,20 +24,18 @@
         <Condition Evaluation="Model.HasMemorabiliaImages">
             <Match>
                 <DivRowCol12Center>
-                    <Content>
-                        <ViewMemorabiliaImagesButton MemorabiliaId="Model.MemorabiliaId" />
-                    </Content>
+                    <ViewMemorabiliaImagesButton MemorabiliaId="Model.MemorabiliaId" />
                 </DivRowCol12Center>
             </Match>
         </Condition>
     </ImagePreview>
-    <Content>
-        <DivRowCol3>
-            <Content>
+    <ChildContent>
+        <Div Class="row">
+            <Div Class="col-3">
                 <ItemTypeSpotDropDown ItemType="@Model.ItemType"
                                       SelectedValue="Model.SpotId"
                                       SelectionChanged="(p) => Model.SpotId = p" />
-            </Content>
-        </DivRowCol3>
-    </Content>
+            </Div>
+        </Div>
+    </ChildContent>
 </EditPage>

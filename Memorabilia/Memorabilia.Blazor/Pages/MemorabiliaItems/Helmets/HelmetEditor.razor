@@ -11,36 +11,35 @@
                                Model="EditModel"
                                TItem="HelmetEditModel">
             <AdditionalContent>
-                <DivRowCol3 HideColumn2="@(!EditModel.DisplayHelmetQualityType)"
-                            HideColumn3="@(!EditModel.DisplayHelmetFinish)">
-                    <Content>
+                <Div Class="row">
+                    <Div Class="col-3">
                         <HelmetTypeDropDown GameStyleType="EditModel.GameStyleType"
                                             SelectedValue="EditModel.HelmetTypeId"
                                             SelectionChanged="(p) => EditModel.HelmetTypeId = p" />
-                    </Content>
-                    <ContentColumn2>
-                        <DivHidden>
-                            <Content>
-                                <HelmetQualityTypeDropDown Disabled="!EditModel.CanEditHelmetQualityType"
-                                                           SelectedValue="EditModel.HelmetQualityTypeId"
-                                                           SelectionChanged="(p) => EditModel.HelmetQualityTypeId = p" />
-                            </Content>
-                        </DivHidden>
-                    </ContentColumn2>
-                    <ContentColumn3>
+                    </Div>
+                    <Div Class="col-3"
+                         Hidden="@(!EditModel.DisplayHelmetQualityType)">
+                        <Div Hidden="@(!EditModel.DisplayHelmetQualityType)">
+                            <HelmetQualityTypeDropDown Disabled="!EditModel.CanEditHelmetQualityType"
+                                                       SelectedValue="EditModel.HelmetQualityTypeId"
+                                                       SelectionChanged="(p) => EditModel.HelmetQualityTypeId = p" />
+                        </Div>
+                    </Div>
+                    <Div Class="col-3"
+                         Hidden="@(!EditModel.DisplayHelmetFinish)">
                         <HelmetFinishDropDown SelectedValue="EditModel.HelmetFinishId"
                                               SelectionChanged="(p) => EditModel.HelmetFinishId = p" />
-                    </ContentColumn3>
-                </DivRowCol3>
-                <DivRowCol3>
-                    <Content>
+                    </Div>
+                </Div>
+                <Div Class="row">
+                    <Div Class="col-3">
                         <MudSwitch Checked="@EditModel.Throwback"
                                    CheckedChanged="(p) => EditModel.Throwback = p"
                                    Color="MudBlazor.Color.Success"
                                    Label="Is a Throwback?"
                                    T="bool" />
-                    </Content>
-                </DivRowCol3>
+                    </Div>
+                </Div>
             </AdditionalContent>
         </MemorabiliaItemEditor>
     </Content>

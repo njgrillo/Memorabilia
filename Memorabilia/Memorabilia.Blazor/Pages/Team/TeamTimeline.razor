@@ -1,50 +1,48 @@
 ﻿<Timeline>
-    <Content>
-        <MudTimelineItem Color="@TeamEditColor" 
-                         Variant="Variant.Filled">
-            <ItemContent>
-                <MudAlert style="@(GetMudAlertStyle(TeamStep.Team))"
-                          Class="@_mudAlertClass" 
-                          OnClick="@(_ => Navigate())"
-                          Severity="@TeamEditAlertSeverity">@TeamEditAlertTitle</MudAlert>
-            </ItemContent>
-        </MudTimelineItem>      
-        <MudTimelineItem Color="@TeamDivisionEditColor" 
-                         Variant="Variant.Filled">
-            <ItemContent>
-                <MudAlert style="@(GetMudAlertStyle(TeamStep.Division))"
-                          Class="@_mudAlertClass" 
-                          OnClick="@(_ => Navigate("Division"))"
-                          Severity="@TeamDivisionEditAlertSeverity">@TeamDivisionEditAlertTitle</MudAlert>
-            </ItemContent>
-        </MudTimelineItem>
-        <MudTimelineItem hidden="@(!DisplayConference)" 
-                         Color="@TeamConferenceEditColor" 
-                         Variant="Variant.Filled">
-            <ItemContent>
-                <MudAlert style="@(GetMudAlertStyle(TeamStep.Conference))"
-                          Class="@_mudAlertClass" 
-                          OnClick="@(_ => Navigate("Conference"))"
-                          Severity="@TeamConferenceEditAlertSeverity">@TeamConferenceEditAlertTitle</MudAlert>
-            </ItemContent>
-        </MudTimelineItem>
-        <MudTimelineItem Color="@TeamLeagueEditColor" 
-                         Variant="Variant.Filled">
-            <ItemContent>
-                <MudAlert style="@(GetMudAlertStyle(TeamStep.League))"
-                          Class="@_mudAlertClass" 
-                          OnClick="@(_ => Navigate("League"))"
-                          Severity="@TeamLeagueEditAlertSeverity">@TeamLeagueEditAlertTitle</MudAlert>
-            </ItemContent>
-        </MudTimelineItem>
-        <MudTimelineItem Color="@TeamChampionshipEditColor" 
-                         Variant="Variant.Filled">
-            <ItemContent>
-                <MudAlert style="@(GetMudAlertStyle(TeamStep.Championship))"
-                          Class="@_mudAlertClass" 
-                          OnClick="@(_ => Navigate("Championship"))"
-                          Severity="@TeamChampionshipEditAlertSeverity">@TeamChampionshipEditAlertTitle</MudAlert>
-            </ItemContent>
-        </MudTimelineItem>
-    </Content>
+    <MudTimelineItem Color="@TeamEditColor"
+                     Variant="Variant.Filled">
+        <ItemContent>
+            <MudAlert style="@(GetMudAlertStyle(TeamStep.Team))"
+                      Class="@_mudAlertClass"
+                      OnClick="@(_ => Navigate())"
+                      Severity="@TeamEditAlertSeverity">@TeamEditAlertTitle</MudAlert>
+        </ItemContent>
+    </MudTimelineItem>
+    <MudTimelineItem Color="@TeamDivisionEditColor"
+                     Variant="Variant.Filled">
+        <ItemContent>
+            <MudAlert style="@(GetMudAlertStyle(TeamStep.Division))"
+                      Class="@_mudAlertClass"
+                      OnClick="@(_ => Navigate("Division"))"
+                      Severity="@TeamDivisionEditAlertSeverity">@TeamDivisionEditAlertTitle</MudAlert>
+        </ItemContent>
+    </MudTimelineItem>
+    <MudTimelineItem hidden="@(!DisplayConference)"
+                     Color="@TeamConferenceEditColor"
+                     Variant="Variant.Filled">
+        <ItemContent>
+            <MudAlert style="@(GetMudAlertStyle(TeamStep.Conference))"
+                      Class="@_mudAlertClass"
+                      OnClick="@(_ => Navigate("Conference"))"
+                      Severity="@TeamConferenceEditAlertSeverity">@TeamConferenceEditAlertTitle</MudAlert>
+        </ItemContent>
+    </MudTimelineItem>
+    <MudTimelineItem Color="@TeamLeagueEditColor"
+                     Variant="Variant.Filled">
+        <ItemContent>
+            <MudAlert style="@(GetMudAlertStyle(TeamStep.League))"
+                      Class="@_mudAlertClass"
+                      OnClick="@(_ => Navigate("League"))"
+                      Severity="@TeamLeagueEditAlertSeverity">@TeamLeagueEditAlertTitle</MudAlert>
+        </ItemContent>
+    </MudTimelineItem>
+    <MudTimelineItem Color="@TeamChampionshipEditColor"
+                     Variant="Variant.Filled">
+        <ItemContent>
+            <MudAlert style="@(GetMudAlertStyle(TeamStep.Championship))"
+                      Class="@_mudAlertClass"
+                      OnClick="@(_ => Navigate("Championship"))"
+                      Severity="@TeamChampionshipEditAlertSeverity">@TeamChampionshipEditAlertTitle</MudAlert>
+        </ItemContent>
+    </MudTimelineItem>
 </Timeline>

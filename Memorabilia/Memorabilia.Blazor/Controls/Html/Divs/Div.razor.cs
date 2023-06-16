@@ -1,4 +1,4 @@
-﻿namespace Memorabilia.Blazor.Controls.Divs;
+﻿namespace Memorabilia.Blazor.Controls.Html.Divs;
 
 public partial class Div
 {
@@ -7,9 +7,6 @@ public partial class Div
 
     [Parameter]
     public RenderFragment ChildContent { get; set; }
-
-    [Parameter]
-    public RenderFragment Content { get; set; }
 
     [Parameter]
     public bool Hidden { get; set; }

@@ -11,21 +11,21 @@
                                Model="EditModel"
                                TItem="JerseyEditModel">
             <AdditionalContent>
-                <DivRowCol3>
-                    <Content>
+                <Div Class="row">
+                    <Div Class="col-3">
                         <JerseyQualityTypeDropDown SelectedValue="EditModel.JerseyQualityTypeId"
                                                    SelectionChanged="(p) => EditModel.JerseyQualityTypeId = p" />
-                    </Content>
-                    <ContentColumn2>
+                    </Div>
+                    <Div Class="col-3">
                         <JerseyTypeDropDown GameStyleType="EditModel.GameStyleType"
                                             SelectedValue="EditModel.JerseyTypeId"
                                             SelectionChanged="(p) => EditModel.JerseyTypeId = p" />
-                    </ContentColumn2>
-                    <ContentColumn3>
+                    </Div>
+                    <Div Class="col-3">
                         <JerseyStyleTypeDropDown SelectedValue="EditModel.JerseyStyleTypeId"
                                                  SelectionChanged="(p) => EditModel.JerseyStyleTypeId = p" />
-                    </ContentColumn3>
-                </DivRowCol3>
+                    </Div>
+                </Div>
             </AdditionalContent>
         </MemorabiliaItemEditor>
     </Content>

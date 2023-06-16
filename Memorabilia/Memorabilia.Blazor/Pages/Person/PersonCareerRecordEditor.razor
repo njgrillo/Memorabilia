@@ -1,33 +1,28 @@
-﻿<DivRowCol6>
-    <Content>
+﻿<Div Class="row">
+    <Div Class="col-6">
         <RecordTypeAutoComplete Disabled="@(!_canEditRecordType)" 
                                 ResetValueOnEmptyText="false"
                                 SelectedValue="Model.RecordType"
                                 SelectionChanged="(p) => Model.RecordType = p"
                                 Sports="Sports" />
-    </Content>
-    <ContentColumn2>
+    </Div>
+    <Div Class="col-6">
         <TextField Label="Record"
                    SelectedText="@Model.Record"
                    SelectedTextChanged="@((p) => Model.Record = p)" />
-    </ContentColumn2>
-</DivRowCol6>
+    </Div>
+</Div>
 <DivLeftAlign>
-    <Content>
-        <DivHidden Hidden="@(!_canAdd)">
-            <Content>
-                <AddButton OnClick="Add" />
-            </Content>
-        </DivHidden>
-        <DivHidden Hidden="@(!_canUpdate)">
-            <Content>
-                <UpdateButton OnClick="Update" />
-            </Content>
-        </DivHidden>
-    </Content>
+    <Div Hidden="@(!_canAdd)">
+        <AddButton OnClick="Add" />
+    </Div>
+    <Div Hidden="@(!_canUpdate)">
+        <UpdateButton OnClick="Update" />
+    </Div>
 </DivLeftAlign>
-<DivRowCol6>
-    <Content>
+<br />
+<Div Class="row">
+    <Div Class="col-6">
          <MudTable Bordered="false"
                    Dense="false" 
                    Hover="true"
@@ -55,6 +50,6 @@
                 </MudTd>
             </RowTemplate>
         </MudTable>
-    </Content>
-</DivRowCol6>
+    </Div>
+</Div>
 

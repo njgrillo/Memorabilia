@@ -13,21 +13,21 @@
                                Model="EditModel"
                                TItem="BobbleheadEditModel">
             <AdditionalContent>
-                <DivRowCol3>
-                    <Content>
+                <Div Class="row">
+                    <Div Class="col-3">
                         <NullableIntField Label="Year"
                                           Maximum="int.MaxValue"
                                           Value="EditModel.Year"
                                           ValueChanged="@((p) => EditModel.Year = p)" />
-                    </Content>
-                    <ContentColumn2>
+                    </Div>
+                    <Div Class="col-3">
                         <MudSwitch Checked="@EditModel.HasBox"
                                    CheckedChanged="(p) => EditModel.HasBox = p"
                                    Color="MudBlazor.Color.Success"
                                    Label="Has Box?"
                                    T="bool" />
-                    </ContentColumn2>
-                </DivRowCol3>
+                    </Div>
+                </Div>
             </AdditionalContent>
         </MemorabiliaItemEditor>
     </Content>

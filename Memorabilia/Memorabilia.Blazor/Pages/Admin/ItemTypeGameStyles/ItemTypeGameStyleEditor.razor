@@ -12,18 +12,17 @@
           PageFooterNavigationPath="@EditModel.ExitNavigationPath"
           PageTitle="@EditModel.PageTitle"
           TItem="ItemTypeGameStyleEditModel">
-    <Content>
-        <DivRowCol3 Hidden="@(!DisplayItemType)">
-            <Content>
-                <ItemTypeAutoComplete SelectedValue="EditModel.ItemType"
-                                      SelectionChanged="(p) => EditModel.ItemType = p" />
-            </Content>
-        </DivRowCol3>
-        <DivRowCol3>
-            <Content>
-                <GameStyleTypeDropDown SelectedValue="EditModel.GameStyleTypeId"
-                                       SelectionChanged="(p) => EditModel.GameStyleTypeId = p" />
-            </Content>
-        </DivRowCol3>
-    </Content>
+    <Div Class="row" 
+         Hidden="@(!DisplayItemType)">
+        <Div Class="col-3">
+            <ItemTypeAutoComplete SelectedValue="EditModel.ItemType"
+                                  SelectionChanged="(p) => EditModel.ItemType = p" />
+        </Div>
+    </Div>
+    <Div Class="row">
+        <Div Class="col-3">
+            <GameStyleTypeDropDown SelectedValue="EditModel.GameStyleTypeId"
+                                   SelectionChanged="(p) => EditModel.GameStyleTypeId = p" />
+        </Div>
+    </Div>
 </EditPage>

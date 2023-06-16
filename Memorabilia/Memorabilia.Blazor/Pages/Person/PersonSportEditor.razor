@@ -1,44 +1,41 @@
-﻿<DivRowCol6>
-    <Content>
+﻿<Div Class="row">
+    <Div Class="col-6">
         <SportAutoComplete SelectedValue="Model.Sport"
                            SelectionChanged="(p) => Model.Sport = p" />
-    </Content>    
-    <ContentColumn2>
+    </Div>    
+    <Div Class="col-6">
         <MudSwitch Checked="Model.IsPrimary"
                    CheckedChanged="(p) => Model.IsPrimary = p"
                    Color="MudBlazor.Color.Success"
                    Label="Is Primary?"
                    T="bool" />
-    </ContentColumn2>
-</DivRowCol6>
+    </Div>
+</Div>
 <DivLeftAlign>
-    <Content>
-        <AddButton OnClick="Add" />
-    </Content>    
+    <AddButton OnClick="Add" />
 </DivLeftAlign>
+<br />
 <DivRowCol12>
-    <Content>
-        <MudTable Bordered="false"
-                  Dense="false" 
-                  Hover="true"
-                  Items="@Sports.Where(sport => !sport.IsDeleted).OrderBy(sport => sport.SportName).ToList()"    
-                  Striped="true">
-            <HeaderContent>
-                <MudTh>Sport</MudTh>
-                <MudTh>Type</MudTh>
-                <MudTh></MudTh>
-            </HeaderContent>
-            <RowTemplate>
-                <MudTd DataLabel="Sport">@context.SportName</MudTd>
-                <MudTd DataLabel="Type">@context.TypeName</MudTd>
-                <MudTd DataLabel="">
-                    <MudTooltip Text="Delete">
-                        <MudFab Color="MudBlazor.Color.Secondary"
-                                Icon="@Icons.Material.Outlined.DeleteOutline"
-                                OnClick="@(_ => Delete(context))" />
-                    </MudTooltip>  
-                </MudTd>
-            </RowTemplate>
-        </MudTable>
-    </Content>
+    <MudTable Bordered="false"
+              Dense="false"
+              Hover="true"
+              Items="@Sports.Where(sport => !sport.IsDeleted).OrderBy(sport => sport.SportName).ToList()"
+              Striped="true">
+        <HeaderContent>
+            <MudTh>Sport</MudTh>
+            <MudTh>Type</MudTh>
+            <MudTh></MudTh>
+        </HeaderContent>
+        <RowTemplate>
+            <MudTd DataLabel="Sport">@context.SportName</MudTd>
+            <MudTd DataLabel="Type">@context.TypeName</MudTd>
+            <MudTd DataLabel="">
+                <MudTooltip Text="Delete">
+                    <MudFab Color="MudBlazor.Color.Secondary"
+                            Icon="@Icons.Material.Outlined.DeleteOutline"
+                            OnClick="@(_ => Delete(context))" />
+                </MudTooltip>
+            </MudTd>
+        </RowTemplate>
+    </MudTable>
 </DivRowCol12>

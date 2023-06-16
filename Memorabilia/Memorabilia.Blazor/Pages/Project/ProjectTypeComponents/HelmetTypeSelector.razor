@@ -1,25 +1,25 @@
-﻿<DivRowCol3>
-    <Content>
+﻿<Div Class="row">
+    <Div Class="col-3">
         <h3>
             Helmet Type
         </h3>
-    </Content>
-</DivRowCol3>
-<DivRowCol3>
-    <Content>
+    </Div>
+</Div>
+<Div Class="row">
+    <Div Class="col-3">
         <HelmetTypeDropDown Disabled="Disabled" 
                             SelectedValue="HelmetTypeId"
                             SelectionChanged="(p) => HelmetTypeChanged(p)" />
-    </Content>
-    <ContentColumn2>
+    </Div>
+    <Div Class="col-3">
         <HelmetFinishDropDown Disabled="Disabled"
                               SelectedValue="HelmetFinishId"
                               SelectionChanged="(p) => HelmetFinishId = p" />
-    </ContentColumn2>
-    <ContentColumn3>
+    </Div>
+    <Div Class="col-3">
         <SizeAutoComplete Disabled="Disabled" 
                           SelectedValue="Size"
                           SelectionChanged="(p) => SizeChanged(p)"
                           Sizes="new Constant.Size[] { Constant.Size.Mini, Constant.Size.Full }" />
-    </ContentColumn3>
-</DivRowCol3>
+    </Div>
+</Div>

@@ -1,58 +1,54 @@
 ﻿@inherits ViewSportTools<CareerRecordModel>
 
 <DivPad2>
-    <Content>
-        <div class="row">
-            <div class="col-12">
-                <MudTable Bordered="false"
-                          Dense="false"
-                          Filter="new Func<CareerRecordModel,bool>(FilterFunc1)"
-                          Hover="true"
-                          Items="@Model.CareerRecords.ToList()"
-                          Striped="true">
-                    <ToolBarContent>
-                        <MudText Typo="Typo.h6">Career Records</MudText>
-                        <MudSpacer />
-                        <MudTextField @bind-Value="Search"
-                                      Adornment="Adornment.Start"
-                                      AdornmentIcon="@Icons.Material.Filled.Search"
-                                      Class="mt-0"
-                                      IconSize="MudBlazor.Size.Medium"
-                                      Placeholder="Search" />
-                    </ToolBarContent>
-                    <HeaderContent>
-                        <MudTh>
-                            <MudTableSortLabel SortBy="new Func<CareerRecordModel, object>(x => x.CareerRecordTypeName)">Record Type</MudTableSortLabel>
-                        </MudTh>
-                        <MudTh>Record</MudTh>                        
-                        <MudTh>
-                            <MudTableSortLabel SortBy="new Func<CareerRecordModel, object>(x => x.PersonName)">Person</MudTableSortLabel>
-                        </MudTh>
-                        <MudTh></MudTh>
-                    </HeaderContent>
-                    <RowTemplate>
-                        <MudTd DataLabel="RecordType">@context.CareerRecordTypeName</MudTd>
-                        <MudTd DataLabel="Record">@context.Record</MudTd>                        
-                        <MudTd DataLabel="Person">
-                            <MudLink Href="@context.ProfileLink">@context.PersonName</MudLink>
-                        </MudTd>    
-                        <MudTd DataLabel="">
-                            <MudTooltip>
-                                <MudImage @onclick="@(_ => ShowPersonProfileDialog(context.PersonId))"
-                                          Class="rounded-lg can-click"
-                                          Elevation="5"
-                                          Height="200"
-                                          ObjectFit="@ObjectFit.Cover"
-                                          Src="@(ImageService.GetPersonImageData(context.PersonImageFileName))"
-                                          Width="200" />
-                            </MudTooltip>
-                        </MudTd>
-                    </RowTemplate>
-                    <PagerContent>
-                        <MudTablePager />
-                    </PagerContent>
-                </MudTable>
-            </div>
-        </div>
-    </Content>
+    <DivRowCol12>
+        <MudTable Bordered="false"
+                  Dense="false"
+                  Filter="new Func<CareerRecordModel,bool>(FilterFunc1)"
+                  Hover="true"
+                  Items="@Model.CareerRecords.ToList()"
+                  Striped="true">
+            <ToolBarContent>
+                <MudText Typo="Typo.h6">Career Records</MudText>
+                <MudSpacer />
+                <MudTextField @bind-Value="Search"
+                              Adornment="Adornment.Start"
+                              AdornmentIcon="@Icons.Material.Filled.Search"
+                              Class="mt-0"
+                              IconSize="MudBlazor.Size.Medium"
+                              Placeholder="Search" />
+            </ToolBarContent>
+            <HeaderContent>
+                <MudTh>
+                    <MudTableSortLabel SortBy="new Func<CareerRecordModel, object>(x => x.CareerRecordTypeName)">Record Type</MudTableSortLabel>
+                </MudTh>
+                <MudTh>Record</MudTh>
+                <MudTh>
+                    <MudTableSortLabel SortBy="new Func<CareerRecordModel, object>(x => x.PersonName)">Person</MudTableSortLabel>
+                </MudTh>
+                <MudTh></MudTh>
+            </HeaderContent>
+            <RowTemplate>
+                <MudTd DataLabel="RecordType">@context.CareerRecordTypeName</MudTd>
+                <MudTd DataLabel="Record">@context.Record</MudTd>
+                <MudTd DataLabel="Person">
+                    <MudLink Href="@context.ProfileLink">@context.PersonName</MudLink>
+                </MudTd>
+                <MudTd DataLabel="">
+                    <MudTooltip>
+                        <MudImage @onclick="@(_ => ShowPersonProfileDialog(context.PersonId))"
+                                  Class="rounded-lg can-click"
+                                  Elevation="5"
+                                  Height="200"
+                                  ObjectFit="@ObjectFit.Cover"
+                                  Src="@(ImageService.GetPersonImageData(context.PersonImageFileName))"
+                                  Width="200" />
+                    </MudTooltip>
+                </MudTd>
+            </RowTemplate>
+            <PagerContent>
+                <MudTablePager />
+            </PagerContent>
+        </MudTable>
+    </DivRowCol12>
 </DivPad2>

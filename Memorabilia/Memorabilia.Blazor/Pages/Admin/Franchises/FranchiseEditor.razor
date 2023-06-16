@@ -12,33 +12,32 @@
           PageFooterNavigationPath="@EditModel.ExitNavigationPath"
           PageTitle="@EditModel.PageTitle"
           TItem="FranchiseEditModel">
-    <Content>
-        <DivRowCol3 Hidden="@(!DisplaySportLeagueLevel)">
-            <Content>
-                <SportLeagueLevelDropDown SelectedValue="EditModel.SportLeagueLevelId"
-                                          SelectionChanged="(p) => EditModel.SportLeagueLevelId = p" />
-            </Content>
-        </DivRowCol3> 
-        <DivRowCol3>
-            <Content>
-                <TextField Label="Name"
-                           SelectedText="@EditModel.Name"
-                           SelectedTextChanged="@((p) => EditModel.Name = p)" />
-            </Content>
-        </DivRowCol3>
-        <DivRowCol3>
-            <Content>
-                <TextField Label="Location"
-                           SelectedText="@EditModel.Location"
-                           SelectedTextChanged="@((p) => EditModel.Location = p)" />
-            </Content>
-        </DivRowCol3>
-        <DivRowCol3>
-            <Content>
-                <IntField Label="Founded Year"
-                          Value="EditModel.FoundYear"
-                          ValueChanged="@((p) => EditModel.FoundYear = p)" />
-            </Content>
-        </DivRowCol3>
-    </Content>
+    <Div Class="row" 
+         Hidden="@(!DisplaySportLeagueLevel)">
+        <Div Class="col-3">
+            <SportLeagueLevelDropDown SelectedValue="EditModel.SportLeagueLevelId"
+                                      SelectionChanged="(p) => EditModel.SportLeagueLevelId = p" />
+        </Div>
+    </Div>
+    <Div Class="row">
+        <Div Class="col-3">
+            <TextField Label="Name"
+                       SelectedText="@EditModel.Name"
+                       SelectedTextChanged="@((p) => EditModel.Name = p)" />
+        </Div>
+    </Div>
+    <Div Class="row">
+        <Div Class="col-3">
+            <TextField Label="Location"
+                       SelectedText="@EditModel.Location"
+                       SelectedTextChanged="@((p) => EditModel.Location = p)" />
+        </Div>
+    </Div>
+    <Div Class="row">
+        <Div Class="col-3">
+            <IntField Label="Founded Year"
+                      Value="EditModel.FoundYear"
+                      ValueChanged="@((p) => EditModel.FoundYear = p)" />
+        </Div>
+    </Div>
 </EditPage>

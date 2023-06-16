@@ -1,22 +1,22 @@
-﻿<DivRowCol3>
-    <Content>
+﻿<Div Class="row">
+    <Div Class="col-3">
         <h3>
             Item Type
         </h3>
-    </Content>
-</DivRowCol3>
-<DivRowCol3>
-    <Content>
+    </Div>
+</Div>
+<Div Class="row">
+    <Div Class="col-3">
         <ItemTypeAutoComplete Disabled="Disabled" 
                               SelectedValue="SelectedItemType"
                               SelectionChanged="(p) => ItemTypeChanged(p)" />
-    </Content>
-    <ContentColumn2>
+    </Div>
+    <Div Class="col-3">
         <MudSwitch Checked="@MultiSignedItem"
                    CheckedChanged="(p) => MultiSignedItemChanged(p)"
                    Color="MudBlazor.Color.Success"
                    Disabled="Disabled" 
                    Label="Multi Signed?"
                    T="bool" />
-    </ContentColumn2>
-</DivRowCol3>
+    </Div>
+</Div>

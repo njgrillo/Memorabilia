@@ -12,32 +12,30 @@
           PageFooterNavigationPath="@EditModel.ExitNavigationPath"
           PageTitle="@EditModel.PageTitle"
           TItem="DivisionEditModel">
-    <Content>
-        <DivRowCol3>
-            <Content>
-                <ConferenceDropDown SelectedValue="EditModel.ConferenceId"
-                                    SelectionChanged="(p) => EditModel.ConferenceId = p" /> 
-            </Content>
-        </DivRowCol3>
-        <DivRowCol3>
-            <Content>
-                <LeagueDropDown SelectedValue="EditModel.LeagueId"
-                                SelectionChanged="(p) => EditModel.LeagueId = p" />  
-            </Content>
-        </DivRowCol3>
-        <DivRowCol3>
-            <Content>
-                <TextField Label="Name"
-                           SelectedText="@EditModel.Name"
-                           SelectedTextChanged="@((p) => EditModel.Name = p)" />
-            </Content>
-        </DivRowCol3>
-        <DivRowCol3>
-            <Content>
-                <TextField Label="Abbreviation"
-                           SelectedText="@EditModel.Abbreviation"
-                           SelectedTextChanged="@((p) => EditModel.Abbreviation = p)" />
-            </Content>
-        </DivRowCol3>
-    </Content>
+    <Div Class="row">
+        <Div Class="col-3">
+            <ConferenceDropDown SelectedValue="EditModel.ConferenceId"
+                                SelectionChanged="(p) => EditModel.ConferenceId = p" />
+        </Div>
+    </Div>
+    <Div Class="row">
+        <Div Class="col-3">
+            <LeagueDropDown SelectedValue="EditModel.LeagueId"
+                            SelectionChanged="(p) => EditModel.LeagueId = p" />
+        </Div>
+    </Div>
+    <Div Class="row">
+        <Div Class="col-3">
+            <TextField Label="Name"
+                       SelectedText="@EditModel.Name"
+                       SelectedTextChanged="@((p) => EditModel.Name = p)" />
+        </Div>
+    </Div>
+    <Div Class="row">
+        <Div Class="col-3">
+            <TextField Label="Abbreviation"
+                       SelectedText="@EditModel.Abbreviation"
+                       SelectedTextChanged="@((p) => EditModel.Abbreviation = p)" />
+        </Div>
+    </Div>
 </EditPage>

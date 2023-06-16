@@ -1,49 +1,44 @@
-﻿<DivRowCol3>
-    <Content>
+﻿<Div Class="row">
+    <Div Class="col-3">
         <FranchiseAutoComplete Disabled="@(!_canEditFranchise)"
                                SelectedValue="Model.Franchise"
                                SelectionChanged="(p) => Model.Franchise = p"
                                Sports="Model.Sports" />
-    </Content>
-</DivRowCol3>
-<DivRowCol3>
-    <Content>
+    </Div>
+</Div>
+<Div Class="row">
+    <Div Class="col-3">
         <NullableIntField Label="Year"
                           Value="Model.Year"
                           ValueChanged="@((p) => Model.Year = p)" />
-    </Content>
-    <ContentColumn2>
+    </Div>
+    <Div Class="col-3">
         <NullableIntField Label="Round"
                           Value="Model.Round"
                           ValueChanged="@((p) => Model.Round = p)" />
-    </ContentColumn2>
-    <ContentColumn3>
+    </Div>
+    <Div Class="col-3">
         <NullableIntField Label="Pick"
                           Value="Model.Pick"
                           ValueChanged="OnPickChange" />
-    </ContentColumn3>
-    <ContentColumn4>
+    </Div>
+    <Div Class="col-3">
         <NullableIntField Label="Overall"
                           Value="Model.Overall"
                           ValueChanged="@((p) => Model.Overall = p)" />
-    </ContentColumn4>
-</DivRowCol3>
+    </Div>
+</Div>
 <DivLeftAlign>
-    <Content>
-        <DivHidden Hidden="@(!_canAdd)">
-            <Content>
-                <AddButton OnClick="Add" />
-            </Content>
-        </DivHidden>
-        <DivHidden Hidden="@(!_canUpdate)">
-            <Content>
-                <UpdateButton OnClick="Update" />
-            </Content>
-        </DivHidden>
-    </Content>
+    <Div Hidden="@(!_canAdd)">
+        <AddButton OnClick="Add" />
+    </Div>
+    <Div Hidden="@(!_canUpdate)">
+        <UpdateButton OnClick="Update" />
+    </Div>
 </DivLeftAlign>
-<DivRowCol6>
-    <Content>
+<br />
+<Div Class="row">
+    <Div Class="col-6">
          <MudTable Bordered="false"
                    Dense="false" 
                    Hover="true"
@@ -77,7 +72,7 @@
                 </MudTd>
             </RowTemplate>
         </MudTable>
-    </Content>
-</DivRowCol6>
+    </Div>
+</Div>
 
 

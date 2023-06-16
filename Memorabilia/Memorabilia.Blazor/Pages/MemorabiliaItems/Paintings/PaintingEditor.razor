@@ -14,21 +14,21 @@
                                Model="EditModel"
                                TItem="PaintingEditModel">
             <AdditionalContent>
-                <DivRowCol3>
-                    <Content>
+                <Div Class="row">
+                    <Div Class="col-3">
                         <OrientationDropDown SelectedValue="EditModel.OrientationId"
                                              SelectionChanged="(p) => EditModel.OrientationId = p" />
-                    </Content>
-                </DivRowCol3>
-                <DivRowCol3>
-                    <Content>
+                    </Div>
+                </Div>
+                <Div Class="row">
+                    <Div Class="col-3">
                         <MudSwitch Checked="@EditModel.Matted"
                                    CheckedChanged="(p) => EditModel.Matted = p"
                                    Color="MudBlazor.Color.Success"
                                    Label="Is Matted?"
                                    T="bool" />
-                    </Content>
-                </DivRowCol3>
+                    </Div>
+                </Div>
             </AdditionalContent>
         </MemorabiliaItemEditor>
     </Content>

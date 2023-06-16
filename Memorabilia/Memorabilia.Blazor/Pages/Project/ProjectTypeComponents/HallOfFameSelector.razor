@@ -1,25 +1,25 @@
-﻿<DivRowCol3>
-    <Content>
+﻿<Div Class="row">
+    <Div Class="col-3">
         <h3>
             Hall of Fame
         </h3>
-    </Content>
-</DivRowCol3>
-<DivRowCol3>
-    <Content>
+    </Div>
+</Div>
+<Div Class="row">
+    <Div Class="col-3">
         <SportLeagueLevelDropDown Disabled="Disabled" 
                                   SelectedValue="SportLeagueLevelId"
                                   SelectionChanged="(p) => SportLeagueLevelChanged(p)" />
-    </Content>
-    <ContentColumn2>
+    </Div>
+    <Div Class="col-3">
         <NullableIntField Disabled="Disabled" 
                           Label="Year"
                           Value="Year"
                           ValueChanged="@((p) => YearChanged(p))" />
-    </ContentColumn2>
-    <ContentColumn3>
+    </Div>
+    <Div Class="col-3">
         <ItemTypeAutoComplete Disabled="Disabled" 
                               SelectedValue="ItemType"
                               SelectionChanged="(p) => ItemTypeChanged(p)" />
-    </ContentColumn3>
-</DivRowCol3>
+    </Div>
+</Div>

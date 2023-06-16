@@ -1,60 +1,58 @@
 ﻿<MudDialog Style="max-height:85vh;overflow-y:auto;">
     <DialogContent>
         <DivPad2>
-            <Content>
-                <MudTable Bordered="false"
-                          Dense="false"
-                          Hover="true"
-                          Items="@Model"
-                          Striped="true">
-                    <ToolBarContent>
-                        <MudText Typo="Typo.h6">Memorabilia</MudText>
-                        <MudSpacer />
-                    </ToolBarContent>
-                    <HeaderContent>
-                        <MudTh></MudTh>
-                        <MudTh>Item</MudTh>
-                        <MudTh>Condition</MudTh>
-                        <MudTh>Value</MudTh>
-                        <MudTh>Acquisition Type</MudTh>
-                        <MudTh>Acquisition Date</MudTh>
-                        <MudTh>Cost</MudTh>
-                        <MudTh>Purchase Place</MudTh>
-                        <MudTh></MudTh>
-                    </HeaderContent>
-                    <RowTemplate Context="memorabilia">
-                        <MudTd DataLabel="">
-                            <MudTooltip Text="@memorabilia.ImageDisplayCount">
-                                <MudImage @onclick="@(_ => NavigationManager.NavigateTo($"Memorabilia/Image/Edit/{@memorabilia.Id}"))"
-                                          Class="rounded-lg can-click"
-                                          Elevation="5"
-                                          Height="200"
-                                          ObjectFit="@ObjectFit.Cover"
-                                          Src="@(ImageService.GetUserImageData(memorabilia.ImageFileName))"
-                                          Width="200" />
-                            </MudTooltip>
-                        </MudTd>
-                        <MudTd DataLabel="Item">@memorabilia.ItemTypeName</MudTd>
-                        <MudTd DataLabel="Condition">@memorabilia.ConditionName</MudTd>
-                        <MudTd DataLabel="Value">@memorabilia.EstimatedValue?.ToString("c")</MudTd>
-                        <MudTd DataLabel="Acquisition Type">@memorabilia.AcquisitionTypeName</MudTd>
-                        <MudTd DataLabel="Acquisition Date">@memorabilia.Acquisition.AcquiredDate?.ToString("MM-dd-yyyy")</MudTd>
-                        <MudTd DataLabel="Cost">@memorabilia.Acquisition.Cost?.ToString("c")</MudTd>
-                        <MudTd DataLabel="Purchase Place">@memorabilia.PurchaseTypeName</MudTd>
-                        <MudTd>
-                            <MudTooltip Text="Select">
-                                <MudFab Color="MudBlazor.Color.Primary"
-                                        Icon="@Icons.Material.Outlined.Edit"
-                                        OnClick="@(_ => Select(@memorabilia))"
-                                        Size="@MudBlazor.Size.Small" />
-                            </MudTooltip>
-                        </MudTd>
-                    </RowTemplate>
-                    <PagerContent>
-                        <MudTablePager />
-                    </PagerContent>
-                </MudTable>
-            </Content>
+            <MudTable Bordered="false"
+                      Dense="false"
+                      Hover="true"
+                      Items="@Model"
+                      Striped="true">
+                <ToolBarContent>
+                    <MudText Typo="Typo.h6">Memorabilia</MudText>
+                    <MudSpacer />
+                </ToolBarContent>
+                <HeaderContent>
+                    <MudTh></MudTh>
+                    <MudTh>Item</MudTh>
+                    <MudTh>Condition</MudTh>
+                    <MudTh>Value</MudTh>
+                    <MudTh>Acquisition Type</MudTh>
+                    <MudTh>Acquisition Date</MudTh>
+                    <MudTh>Cost</MudTh>
+                    <MudTh>Purchase Place</MudTh>
+                    <MudTh></MudTh>
+                </HeaderContent>
+                <RowTemplate Context="memorabilia">
+                    <MudTd DataLabel="">
+                        <MudTooltip Text="@memorabilia.ImageDisplayCount">
+                            <MudImage @onclick="@(_ => NavigationManager.NavigateTo($"Memorabilia/Image/Edit/{@memorabilia.Id}"))"
+                                      Class="rounded-lg can-click"
+                                      Elevation="5"
+                                      Height="200"
+                                      ObjectFit="@ObjectFit.Cover"
+                                      Src="@(ImageService.GetUserImageData(memorabilia.ImageFileName))"
+                                      Width="200" />
+                        </MudTooltip>
+                    </MudTd>
+                    <MudTd DataLabel="Item">@memorabilia.ItemTypeName</MudTd>
+                    <MudTd DataLabel="Condition">@memorabilia.ConditionName</MudTd>
+                    <MudTd DataLabel="Value">@memorabilia.EstimatedValue?.ToString("c")</MudTd>
+                    <MudTd DataLabel="Acquisition Type">@memorabilia.AcquisitionTypeName</MudTd>
+                    <MudTd DataLabel="Acquisition Date">@memorabilia.Acquisition.AcquiredDate?.ToString("MM-dd-yyyy")</MudTd>
+                    <MudTd DataLabel="Cost">@memorabilia.Acquisition.Cost?.ToString("c")</MudTd>
+                    <MudTd DataLabel="Purchase Place">@memorabilia.PurchaseTypeName</MudTd>
+                    <MudTd>
+                        <MudTooltip Text="Select">
+                            <MudFab Color="MudBlazor.Color.Primary"
+                                    Icon="@Icons.Material.Outlined.Edit"
+                                    OnClick="@(_ => Select(@memorabilia))"
+                                    Size="@MudBlazor.Size.Small" />
+                        </MudTooltip>
+                    </MudTd>
+                </RowTemplate>
+                <PagerContent>
+                    <MudTablePager />
+                </PagerContent>
+            </MudTable>
         </DivPad2>
     </DialogContent>
     <DialogActions>

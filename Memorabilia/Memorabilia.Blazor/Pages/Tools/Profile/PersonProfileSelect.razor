@@ -1,16 +1,14 @@
 ﻿<Page>
     <Content>
         <DivPad2>
-            <Content>
-                <DivRowCol6>
-                    <Content>
-                        <PersonSearchAutoComplete IsCulturalSearch="true"
-                                                  SelectedValue="Model"
-                                                  SelectionChanged="(p) => SelectedPersonChanged(p)" />
-                        <br />
-                    </Content>
-                </DivRowCol6>
-            </Content>
+            <Div Class="row">
+                <Div Class="col-6">
+                    <PersonSearchAutoComplete IsCulturalSearch="true"
+                                              SelectedValue="Model"
+                                              SelectionChanged="(p) => SelectedPersonChanged(p)" />
+                    <br />
+                </Div>
+            </Div>
         </DivPad2>
     </Content>
 </Page>

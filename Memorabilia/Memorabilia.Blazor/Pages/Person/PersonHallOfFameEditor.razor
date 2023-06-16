@@ -1,42 +1,37 @@
-﻿<div class="row">
-    <div class="col-3">
+﻿<Div Class="row">
+    <Div Class="col-3">
         <SportLeagueLevelDropDown Disabled="@(!_canEditSportLeagueLevel)" 
                                   SelectedValue="Model.SportLeagueLevelId"
                                   SelectionChanged="(p) => Model.SportLeagueLevelId = p" />
-    </div> 
-    <div class="col-3">
+    </Div> 
+    <Div Class="col-3">
         <BallotNumberDropDown SelectedValue="Model.BallotNumber"
                               SelectionChanged="(p) => Model.BallotNumber = p" />
-    </div>   
-    <div class="col-3">
+    </Div>   
+    <Div Class="col-3">
         <NullableIntField Label="Induction Year"
                           Value="Model.InductionYear"
                           ValueChanged="@((p) => Model.InductionYear = p)" />
-    </div>
-    <div class="col-3">
+    </Div>
+    <Div Class="col-3">
         <NullableDecimalField Label="Vote Percentage"
                               Maximum="100"
                               Value="Model.VotePercentage"
                               ValueChanged="@((p) => Model.VotePercentage = p)" />
-    </div>
-</div>
+    </Div>
+</Div>
 <br />
 <DivLeftAlign>
-    <Content>
-        <DivHidden Hidden="@(!_canAddHallOfFame)">
-            <Content>
-                <AddButton OnClick="Add" />
-            </Content>
-        </DivHidden>
-        <DivHidden Hidden="@(!_canUpdateHallOfFame)">
-            <Content>
-                <UpdateButton OnClick="Update" />
-            </Content>
-        </DivHidden>
-    </Content>
+    <Div Hidden="@(!_canAddHallOfFame)">
+        <AddButton OnClick="Add" />
+    </Div>
+    <Div Hidden="@(!_canUpdateHallOfFame)">
+        <UpdateButton OnClick="Update" />
+    </Div>
 </DivLeftAlign>
-<DivRowCol6>
-    <Content>
+<br />
+<Div Class="row">
+    <Div Class="col-6">
          <MudTable Bordered="false"
                    Dense="false" 
                    Hover="true"
@@ -68,6 +63,6 @@
                 </MudTd>
             </RowTemplate>
         </MudTable>
-    </Content>
-</DivRowCol6>
+    </Div>
+</Div>
 

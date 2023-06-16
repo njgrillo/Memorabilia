@@ -19,39 +19,37 @@
                         PersonId="EditModel.PersonId"
                         PersonStep="EditModel.PersonStep" />
     </TimelineContent>
-    <Content>
+    <ChildContent>
         <DivRowCol12>
-            <Content>
-                <DivRowCol3>
-                    <Content>
-                        <InputFile id="fileInput" 
-                                   accept="image/*" 
-                                   hidden
-                                   OnChange="@LoadFile"   />
-                        <MudFab Color="MudBlazor.Color.Secondary"
-                                HtmlTag="label"
-                                Icon="@Icons.Material.Filled.Image"
-                                Label="Load picture"
-                                for="fileInput" />  
-                    </Content>
-                </DivRowCol3>
-                <DivRowCol3>
-                    <Content>
-                        <Condition Evaluation="_hasImage">
-                            <Match>
-                                <ImageEditor CanRemove="true"
-                                             HasPrimary="false"
-                                             ImageFileName="@EditModel.PersonImageFileName"
-                                             ImageRootType="ImageRootType.People"
-                                             ImageType="ImageType.Primary"
-                                             OnRemove="Remove" /> 
-                            </Match>
-                        </Condition>
-                    </Content>
-                </DivRowCol3>
-            </Content>
+            <Div Class="row">
+                <Div Class="col-3">
+                    <InputFile id="fileInput"
+                               accept="image/*"
+                               hidden
+                               OnChange="@LoadFile" />
+                    <MudFab Color="MudBlazor.Color.Secondary"
+                            HtmlTag="label"
+                            Icon="@Icons.Material.Filled.Image"
+                            Label="Load picture"
+                            for="fileInput" />
+                </Div>
+            </Div>
+            <Div Class="row">
+                <Div Class="col-3">
+                    <Condition Evaluation="_hasImage">
+                        <Match>
+                            <ImageEditor CanRemove="true"
+                                         HasPrimary="false"
+                                         ImageFileName="@EditModel.PersonImageFileName"
+                                         ImageRootType="ImageRootType.People"
+                                         ImageType="ImageType.Primary"
+                                         OnRemove="Remove" />
+                        </Match>
+                    </Condition>
+                </Div>
+            </Div>
         </DivRowCol12>
-    </Content>
+    </ChildContent>
     <AdditionalButtons>
         <SaveButton OnClick="OnSaveReturnClick"
                     Text="Save & Return to People" />

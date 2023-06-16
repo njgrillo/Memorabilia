@@ -15,33 +15,33 @@
                                Model="EditModel"
                                TItem="BookEditModel">
             <AdditionalContent>
-                <DivRowCol3>
-                    <Content>
+                <Div Class="row">
+                    <Div Class="col-3">
                         <TextField Label="Title"
                                    MaxLength="200"
                                    SelectedText="@EditModel.Title"
                                    SelectedTextChanged="@((p) => EditModel.Title = p)" />
-                    </Content>
-                    <ContentColumn2>
+                    </Div>
+                    <Div Class="col-3">
                         <TextField Label="Edition"
                                    MaxLength="5"
                                    SelectedText="@EditModel.Edition"
                                    SelectedTextChanged="@((p) => EditModel.Edition = p)" />
-                    </ContentColumn2>
-                    <ContentColumn3>
+                    </Div>
+                    <Div Class="col-3">
                         <TextField Label="Publisher"
                                    MaxLength="200"
                                    SelectedText="@EditModel.Publisher"
                                    SelectedTextChanged="@((p) => EditModel.Publisher = p)" />
-                    </ContentColumn3>
-                    <ContentColumn4>
+                    </Div>
+                    <Div Class="col-3">
                         <MudSwitch Checked="@EditModel.HardCover"
                                    CheckedChanged="(p) => EditModel.HardCover = p"
                                    Color="MudBlazor.Color.Success"
                                    Label="Is Hard Cover?"
                                    T="bool" />
-                    </ContentColumn4>
-                </DivRowCol3>
+                    </Div>
+                </Div>
             </AdditionalContent>
         </MemorabiliaItemEditor>
     </Content>

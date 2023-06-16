@@ -6,57 +6,53 @@
           NavigationPath="@Model.ExitNavigationPath"
           OnLoad="OnLoad"
           PageTitle="@Model.PageTitle">
-    <Content>
-        <DivPad2>
-            <Content>
-                <MudTable Bordered="false"
-                          Dense="false" 
-                          Filter="new Func<TeamModel,bool>(FilterFunc1)"
-                          Hover="true"
-                          Items="@Model.Teams"    
-                          Striped="true">
-                    <ToolBarContent>
-                        <MudText Typo="Typo.h6">@Model.PageTitle</MudText>
-                        <MudSpacer />
-                        <MudTextField @bind-Value="Search"
-                                      Adornment="Adornment.Start"
-                                      AdornmentIcon="@Icons.Material.Filled.Search"
-                                      Class="mt-0"
-                                      IconSize="MudBlazor.Size.Medium"
-                                      Placeholder="Search" />
-                    </ToolBarContent>
-                    <HeaderContent>
-                        <MudTh>Franchise</MudTh>
-                        <MudTh>Name</MudTh>
-                        <MudTh>Location</MudTh>
-                        <MudTh>Nickname</MudTh>
-                        <MudTh>Abbreviation</MudTh>
-                        <MudTh>Begin Year</MudTh>
-                        <MudTh>End Year</MudTh>
-                        <MudTh></MudTh>
-                    </HeaderContent>
-                    <RowTemplate>
-                        <MudTd DataLabel="Franchise">@context.FranchiseName</MudTd>
-                        <MudTd DataLabel="Name">@context.Name</MudTd>
-                        <MudTd DataLabel="Location">@context.Location</MudTd>
-                        <MudTd DataLabel="Nickname">@context.Nickname</MudTd>
-                        <MudTd DataLabel="Abbreviation">@context.Abbreviation</MudTd>
-                        <MudTd DataLabel="Begin Year">@context.BeginYear</MudTd>
-                        <MudTd DataLabel="End Year">@context.EndYear</MudTd>
-                        <MudTd DataLabel="">
-                            <GridEditButton NavigationPath="@($"{Model.RoutePrefix}/{EditModeType.Update.Name}/{context.Id}")" />    
-                            <MudTooltip Text="Delete">
-                                <MudFab Color="MudBlazor.Color.Secondary"
-                                        Icon="@Icons.Material.Outlined.DeleteOutline"
-                                        OnClick="@(_ => ShowDeleteConfirm(context.Id, "Delete Team"))" />
-                            </MudTooltip>
-                        </MudTd>
-                    </RowTemplate>
-                    <PagerContent>
-                        <MudTablePager />
-                    </PagerContent>
-                </MudTable>
-            </Content>
-        </DivPad2>
-    </Content>
+    <DivPad2>
+        <MudTable Bordered="false"
+                  Dense="false"
+                  Filter="new Func<TeamModel,bool>(FilterFunc1)"
+                  Hover="true"
+                  Items="@Model.Teams"
+                  Striped="true">
+            <ToolBarContent>
+                <MudText Typo="Typo.h6">@Model.PageTitle</MudText>
+                <MudSpacer />
+                <MudTextField @bind-Value="Search"
+                              Adornment="Adornment.Start"
+                              AdornmentIcon="@Icons.Material.Filled.Search"
+                              Class="mt-0"
+                              IconSize="MudBlazor.Size.Medium"
+                              Placeholder="Search" />
+            </ToolBarContent>
+            <HeaderContent>
+                <MudTh>Franchise</MudTh>
+                <MudTh>Name</MudTh>
+                <MudTh>Location</MudTh>
+                <MudTh>Nickname</MudTh>
+                <MudTh>Abbreviation</MudTh>
+                <MudTh>Begin Year</MudTh>
+                <MudTh>End Year</MudTh>
+                <MudTh></MudTh>
+            </HeaderContent>
+            <RowTemplate>
+                <MudTd DataLabel="Franchise">@context.FranchiseName</MudTd>
+                <MudTd DataLabel="Name">@context.Name</MudTd>
+                <MudTd DataLabel="Location">@context.Location</MudTd>
+                <MudTd DataLabel="Nickname">@context.Nickname</MudTd>
+                <MudTd DataLabel="Abbreviation">@context.Abbreviation</MudTd>
+                <MudTd DataLabel="Begin Year">@context.BeginYear</MudTd>
+                <MudTd DataLabel="End Year">@context.EndYear</MudTd>
+                <MudTd DataLabel="">
+                    <GridEditButton NavigationPath="@($"{Model.RoutePrefix}/{EditModeType.Update.Name}/{context.Id}")" />
+                    <MudTooltip Text="Delete">
+                        <MudFab Color="MudBlazor.Color.Secondary"
+                                Icon="@Icons.Material.Outlined.DeleteOutline"
+                                OnClick="@(_ => ShowDeleteConfirm(context.Id, "Delete Team"))" />
+                    </MudTooltip>
+                </MudTd>
+            </RowTemplate>
+            <PagerContent>
+                <MudTablePager />
+            </PagerContent>
+        </MudTable>
+    </DivPad2>
 </PageView>

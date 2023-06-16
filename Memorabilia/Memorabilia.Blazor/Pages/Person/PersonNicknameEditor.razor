@@ -1,18 +1,17 @@
-﻿<DivRowCol3>
-    <Content>
+﻿<Div Class="row">
+    <Div Class="col-3">
         <TextField Label="Nickname"
                    MaxLength="100"
                    SelectedText="@Model.Nickname"
                    SelectedTextChanged="@((p) => Model.Nickname = p)" />
-    </Content>
-</DivRowCol3>
+    </Div>
+</Div>
 <DivLeftAlign>
-    <Content>
-        <AddButton OnClick="Add" />
-    </Content>
+    <AddButton OnClick="Add" />
 </DivLeftAlign>
-<DivRowCol6>
-    <Content>
+<br />
+<Div Class="row">
+    <Div Class="col-6">
          <MudTable Bordered="false"
                    Dense="false" 
                    Hover="true"
@@ -33,6 +32,6 @@
                 </MudTd>
             </RowTemplate>
         </MudTable>
-    </Content>
-</DivRowCol6>
+    </Div>
+</Div>
 

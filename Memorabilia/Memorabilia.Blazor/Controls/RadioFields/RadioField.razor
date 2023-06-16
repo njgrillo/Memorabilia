@@ -1,16 +1,16 @@
 ﻿@typeparam TItemType
 
-<div class="d-flex ms-1 flex-row">
+<Div Class="d-flex ms-1 flex-row">
     <Iterations Items="CheckboxNames" Context="option">
-        <div class="form-check me-4">
-            <input class="form-check-input"
-                   type="checkbox"
+        <Div Class="form-check me-4">
+            <input @onchange="(e) => CheckChanged(option, e)" 
                    checked="@(option == SelectedOptionCheckedValue(SelectedOption))"
-                   value="@(option == SelectedOptionValue(SelectedOption))"
-                   @onchange="(e) => CheckChanged(option, e)" />
+                   class="form-check-input"
+                   type="checkbox"                   
+                   value="@(option == SelectedOptionValue(SelectedOption))" />
             <label class="form-check-label">
                 @option
             </label>
-        </div>
+        </Div>
     </Iterations>
-</div>
+</Div>

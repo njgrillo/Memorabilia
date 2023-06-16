@@ -1,34 +1,33 @@
-﻿<DivRowCol3>
-    <Content>
+﻿<Div Class="row">
+    <Div Class="col-3">
         <TextField HelperText="Ex. 1999 or 1999-2002 or 2003, 2005-2008" 
                    Label="Years"
                    SelectedText="@_years"
                    SelectedTextChanged="@((p) => _years = p)" />
-    </Content>
-    <ContentColumn2>
+    </Div>
+    <Div Class="col-3">
         <Condition Evaluation="@DisplaySportLeagueLevels">
             <Match>
                 <SportLeagueLevelDropDown SelectedValue="Model.SportLeagueLevelId"
                                           SelectionChanged="(p) => Model.SportLeagueLevelId = p" />
             </Match>
         </Condition>
-    </ContentColumn2>
-    <ContentColumn3>
+    </Div>
+    <Div Class="col-3">
         <Condition Evaluation="@DisplaySports">
             <Match>
                 <SportAutoComplete SelectedValue="Model.Sport"
                                    SelectionChanged="(p) => Model.Sport = p" />
             </Match>
         </Condition>
-    </ContentColumn3>
-</DivRowCol3>
+    </Div>
+</Div>
 <DivLeftAlign>
-    <Content>
-        <AddButton OnClick="Add" />
-    </Content>
+    <AddButton OnClick="Add" />
 </DivLeftAlign>
-<DivRowCol6>
-    <Content>
+<br />
+<Div Class="row">
+    <Div Class="col-6">
          <MudTable Bordered="false"
                    Dense="false" 
                    Hover="true"
@@ -72,5 +71,5 @@
                 <MudTablePager />
             </PagerContent>
         </MudTable>
-    </Content>
-</DivRowCol6>
+    </Div>
+</Div>

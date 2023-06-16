@@ -1,24 +1,25 @@
 ﻿@typeparam TItem
 
-<DivRowCol3 HideColumn1="@(!DisplayItemTypeBrand)"
-            HideColumn2="@(!DisplayItemTypeSize)"
-            HideColumn3="@(!DisplayItemTypeLevel)">
-    <Content>
+<Div Class="row">
+    <Div Class="col-3"
+         Hidden="@(!DisplayItemTypeBrand)">
         <ItemTypeBrandDropDown ItemType="Model.ItemType"
                                SelectedValue="Model.BrandId"
                                SelectionChanged="(p) => Model.BrandId = p" />        
-    </Content>
-    <ContentColumn2>
+    </Div>
+    <Div Class="col-3"
+         Hidden="@(!DisplayItemTypeSize)">
         <ItemTypeSizeDropDown ItemType="Model.ItemType"
                               SelectedValue="@Model.SizeId"
                               SelectionChanged="(p) => Model.SizeId = p" />
-    </ContentColumn2>
-    <ContentColumn3>
+    </Div>
+    <Div Class="col-3"
+         Hidden="@(!DisplayItemTypeLevel)">
         <ItemTypeLevelDropDown ItemType="Model.ItemType"
                                SelectedValue="Model.LevelTypeId"
                                SelectionChanged="(p) => Model.LevelTypeId = p" />
-    </ContentColumn3>
-    <ContentColumn4>
+    </Div>
+    <Div Class="col-3">
         <Condition Evaluation="DisplaySingleSportSelector">
             <Match>
                 <SportDropDown ItemType="@Model.ItemType" 
@@ -33,26 +34,27 @@
                                SelectedItemsChanged="(p) => Model.SportIds = p.ToList()" />
             </Match>
         </Condition>
-    </ContentColumn4>
-</DivRowCol3>
-<DivRowCol3 Hidden="@(!DisplayItemTypeGameStyle)" 
-            HideColumn1="@(!Model.DisplayGameStyleType)"
-            HideColumn2="@(!Model.DisplayGameDate)">
-    <Content>
+    </Div>
+</Div>
+<Div Class="row" 
+     Hidden="@(!DisplayItemTypeGameStyle)">
+    <Div Class="col-3"
+         Hidden="@(!Model.DisplayGameStyleType)">
         <ItemTypeGameStyleDropDown ItemType="Model.ItemType"
                                    Label="@GameStyleTypeDisplayText"
                                    SelectedValue="Model.GameStyleTypeId"
                                    SelectionChanged="(p) => Model.GameStyleTypeId = p" />
-    </Content>
-    <ContentColumn2>
+    </Div>
+    <Div Class="col-3"
+         Hidden="@(!Model.DisplayGameDate)">
         <MudDatePicker @bind-Date="Model.GameDate"
                        DateFormat="MM/dd/yyyy"
                        Editable="true"
                        Label="@GameDateDisplayText"
                        Mask="@(new DateMask("MM/dd/yyyy"))"
                        Variant="Variant.Outlined" />
-    </ContentColumn2>
-</DivRowCol3>
+    </Div>
+</Div>
 @AdditionalContent
 <Condition Evaluation="DisplaySinglePersonSelector">
     <Match>
@@ -74,14 +76,14 @@
 </Condition>
 <Condition Evaluation="DisplaySingleTeamSelector">
     <Match>
-        <DivRowCol6>
-            <Content>
+        <Div Class="row">
+            <Div Class="col-6">
                 <TeamAutoComplete SelectedValue="Model.Team"
                                   SelectionChanged="(p) => Model.Team = p"
                                   Sport="Model.Sport" 
                                   SportLeagueLevel="Model.SportLeagueLevel" />
-            </Content>
-        </DivRowCol6>
+            </Div>
+        </Div>
     </Match>
 </Condition>
 <Condition Evaluation="DisplayMultiTeamSelector">

@@ -1,4 +1,4 @@
-﻿namespace Memorabilia.Blazor.Controls.Divs;
+﻿namespace Memorabilia.Blazor.Controls.Html.Divs;
 
 public partial class LeftRightSection
 {

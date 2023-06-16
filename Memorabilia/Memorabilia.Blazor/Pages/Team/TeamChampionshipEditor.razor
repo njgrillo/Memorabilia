@@ -1,25 +1,24 @@
-﻿<DivRowCol3>
-    <Content>
+﻿<Div Class="row">
+    <Div Class="col-3">
         <ChampionshipTypeDropDown SelectedValue="Model.ChampionshipTypeId"
                                   SelectionChanged="(p) => Model.ChampionshipTypeId = p"
                                   SportLeagueLevel="SportLeagueLevel" />  
-    </Content>
-</DivRowCol3>
-<DivRowCol3>
-    <Content>
+    </Div>
+</Div>
+<Div Class="row">
+    <Div Class="col-3">
         <TextField HelperText="Ex. 1999 or 1999-2002 or 2003, 2005-2008"
                    Label="Years"
                    SelectedText="@_years"
                    SelectedTextChanged="@((p) => _years = p)"/>
-    </Content>
-</DivRowCol3>
+    </Div>
+</Div>
 <DivLeftAlign>
-    <Content>
-        <AddButton OnClick="Add" />
-    </Content>
+    <AddButton OnClick="Add" />
 </DivLeftAlign>
-<DivRowCol3>
-    <Content>
+<br />
+<Div Class="row">
+    <Div Class="col-3">
         <MudTable Bordered="false"
                   Dense="false" 
                   Hover="true"
@@ -42,5 +41,5 @@
                 </MudTd>
             </RowTemplate>
         </MudTable>
-    </Content>
-</DivRowCol3>
+    </Div>
+</Div>

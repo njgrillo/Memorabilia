@@ -10,14 +10,15 @@
                                Model="EditModel"
                                TItem="BaseballEditModel">
             <AdditionalContent>
-                <DivRowCol3 HideColumn1="@(!EditModel.DisplayBaseballType)"
-                            HideColumn2="@(!EditModel.DisplayCommissioner && !EditModel.DisplayLeaguePresident)">
-                    <Content>
+                <Div Class="row">
+                    <Div Class="col-3"
+                         Hidden="@(!EditModel.DisplayBaseballType)">
                         <BaseballTypeDropDown GameStyleType="EditModel.GameStyleType"
                                               SelectedValue="EditModel.BaseballTypeId"
                                               SelectionChanged="(p) => EditModel.BaseballTypeId = p" />
-                    </Content>
-                    <ContentColumn2>
+                    </Div>
+                    <Div Class="col-3"
+                         Hidden="@(!EditModel.DisplayCommissioner && !EditModel.DisplayLeaguePresident)">
                         <Condition Evaluation="EditModel.DisplayCommissioner">
                             <Match>
                                 <CommissionerDropDown SelectedValue="@EditModel.CommissionerId"
@@ -33,8 +34,8 @@
                                                          SportLeagueLevel="SportLeagueLevel.MajorLeagueBaseball" />
                             </Match>
                         </Condition>
-                    </ContentColumn2>
-                    <ContentColumn3>
+                    </Div>
+                    <Div Class="col-3">
                         <Condition Evaluation="EditModel.DisplayBaseballTypeYear">
                             <Match>
                                 <NullableIntField Label="Year"
@@ -52,8 +53,8 @@
                                            SelectedTextChanged="@((p) => EditModel.BaseballTypeAnniversary = p)" />
                             </Match>
                         </Condition>
-                    </ContentColumn3>
-                </DivRowCol3>
+                    </Div>
+                </Div>
             </AdditionalContent>
         </MemorabiliaItemEditor>
     </Content>

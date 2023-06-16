@@ -2,9 +2,7 @@
 
 <UserDashboardItem Description="@DashboardItem.Description"
                    Title="@DashboardItem.Name">
-    <Content>
-        <DonutChart Data="@Data"
-                    Labels="@Labels"
-                    Summary="@Data.Sum().ToString()" />
-    </Content>
+    <DonutChart Data="@Data"
+                Labels="@Labels"
+                Summary="@Data.Sum().ToString()" />
 </UserDashboardItem>

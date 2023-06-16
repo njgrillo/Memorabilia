@@ -1,18 +1,16 @@
 ﻿<DivPad5>
-    <Content>
-        <MudCard>
-            <MudCardMedia Height="300" 
-                          Image="@(ImageService.GetDomainImageData(ImageFileName))" />
-            <MudCardContent>
-                <MudText Typo="Typo.h5">@Title</MudText>
-                <MudText Typo="Typo.body2">@Description</MudText>
-            </MudCardContent>
-            <MudCardActions>
-                <CustomButton Color="MudBlazor.Color.Primary"
-                              OnClick="OnClick"
-                              Text="View"
-                              Variant="Variant.Text" />
-            </MudCardActions>
-        </MudCard>
-    </Content>
+    <MudCard>
+        <MudCardMedia Height="300"
+                      Image="@(ImageService.GetDomainImageData(ImageFileName))" />
+        <MudCardContent>
+            <MudText Typo="Typo.h5">@Title</MudText>
+            <MudText Typo="Typo.body2">@Description</MudText>
+        </MudCardContent>
+        <MudCardActions>
+            <CustomButton Color="MudBlazor.Color.Primary"
+                          OnClick="OnClick"
+                          Text="View"
+                          Variant="Variant.Text" />
+        </MudCardActions>
+    </MudCard>
 </DivPad5>

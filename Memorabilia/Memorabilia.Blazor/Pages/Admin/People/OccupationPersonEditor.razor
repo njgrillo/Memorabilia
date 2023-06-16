@@ -18,9 +18,10 @@
                         PersonId="EditModel.PersonId"
                         PersonStep="EditModel.PersonStep" />
     </TimelineContent>
-    <Content>
-        <div class="d-flex justify-content-between" style="width:100%">
-            <div style="width:48%">
+    <ChildContent>
+        <Div Class="d-flex justify-content-between" 
+             Style="width:100%">
+            <Div Style="width:48%">
                 <MudTabs ApplyEffectsToContainer="true"
                          Centered="true"
                          Elevation="2"
@@ -30,10 +31,8 @@
                                  BadgeData="EditModel.Occupations.Count(occupation => !occupation.IsDeleted)"
                                  Text="Occupations">
                         <DivRowCol12>
-                            <Content>
-                                <PersonOccupationSelector Occupations="EditModel.Occupations"
-                                                          OnOccupationChange="@(() => StateHasChanged())" />
-                            </Content>
+                            <PersonOccupationSelector Occupations="EditModel.Occupations"
+                                                      OnOccupationChange="@(() => StateHasChanged())" />
                         </DivRowCol12>
                     </MudTabPanel>
                     <Condition Evaluation="@EditModel.HasAthleteOccupation">
@@ -42,10 +41,8 @@
                                          BadgeData="EditModel.Sports.Count(sport => !sport.IsDeleted)"
                                          Text="Sports">
                                 <DivRowCol12>
-                                    <Content>
-                                        <PersonSportEditor OnSportChange="@(() => StateHasChanged())"
-                                                           Sports="EditModel.Sports" />
-                                    </Content>
+                                    <PersonSportEditor OnSportChange="@(() => StateHasChanged())"
+                                                       Sports="EditModel.Sports" />
                                 </DivRowCol12>
                             </MudTabPanel>
                         </Match>
@@ -56,20 +53,18 @@
                                          BadgeData="EditModel.Positions.Count(position => !position.IsDeleted)"
                                          Text="Positions">
                                 <DivRowCol12>
-                                    <Content>
-                                        <PersonPositionEditor Positions="EditModel.Positions"
-                                                              Sports="@(EditModel.Sports.Select(sport => sport.Sport).ToArray())" />
-                                    </Content>
+                                    <PersonPositionEditor Positions="EditModel.Positions"
+                                                          Sports="@(EditModel.Sports.Select(sport => sport.Sport).ToArray())" />
                                 </DivRowCol12>
                             </MudTabPanel>
                         </Match>                        
                     </Condition>                    
                 </MudTabs>
-            </div>
-            <div style="width:48%">
+            </Div>
+            <Div Style="width:48%">
                 <PersonRecentOccupationSelector OnRecentOccupationChange="OnRecentOccupationChange"
                                                 RecentOccupations="RecentPersonOccupations" />
-            </div>        
-        </div>
-    </Content>
+            </Div>        
+        </Div>
+    </ChildContent>
 </EditPage>

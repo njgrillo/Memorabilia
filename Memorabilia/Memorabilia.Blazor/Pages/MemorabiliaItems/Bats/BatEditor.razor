@@ -11,24 +11,24 @@
                                Model="EditModel"
                                TItem="BatEditModel">
             <AdditionalContent>
-                <DivRowCol3>
-                    <Content>
+                <Div Class="row">
+                    <Div Class="col-3">
                         <BatTypeDropDown GameStyleType="EditModel.GameStyleType"
                                          SelectedValue="EditModel.BatTypeId"
                                          SelectionChanged="(p) => EditModel.BatTypeId = p" />
-                    </Content>
-                    <ContentColumn2>
+                    </Div>
+                    <Div Class="col-3">
                         <ColorDropDown ItemType="EditModel.ItemType"
                                        SelectedValue="EditModel.ColorId"
                                        SelectionChanged="(p) => EditModel.ColorId = p" />
-                    </ContentColumn2>
-                    <ContentColumn3>
+                    </Div>
+                    <Div Class="col-3">
                         <NullableIntField Label="Length"
                                           Maximum="int.MaxValue"
                                           Value="EditModel.Length"
                                           ValueChanged="@((p) => EditModel.Length = p)" />
-                    </ContentColumn3>
-                </DivRowCol3>
+                    </Div>
+                </Div>
             </AdditionalContent>
         </MemorabiliaItemEditor>
     </Content>

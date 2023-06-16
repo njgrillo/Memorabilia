@@ -20,8 +20,8 @@
                         PersonId="EditModel.PersonId"
                         PersonStep="EditModel.PersonStep" />
     </TimelineContent>
-    <Content>      
-        <div style="margin-bottom:1%;">
+    <ChildContent>      
+        <Div Style="margin-bottom:1%;">
             <MudTabs ApplyEffectsToContainer="true"
                      Centered="true"
                      Elevation="2"
@@ -31,10 +31,8 @@
                              BadgeData="EditModel.Accomplishments.Count(accomplishment => !accomplishment.IsDeleted)"                             
                              Text="Accomplishments">
                     <DivRowCol12>
-                        <Content>
-                            <PersonAccomplishmentEditor Accomplishments="EditModel.Accomplishments"
-                                                        Sports="EditModel.Sports" />
-                        </Content>
+                        <PersonAccomplishmentEditor Accomplishments="EditModel.Accomplishments"
+                                                    Sports="EditModel.Sports" />
                     </DivRowCol12>                    
                 </MudTabPanel>
                 <Condition Evaluation="EditModel.DisplayAllStars">
@@ -43,10 +41,8 @@
                                      BadgeData="EditModel.AllStars.Count"
                                      Text="@EditModel.AllStarGameLabel">
                             <DivRowCol12>
-                                <Content>
-                                    <PersonAllStarEditor AllStars="EditModel.AllStars"
-                                                         Sports="EditModel.Sports" />
-                                </Content>
+                                <PersonAllStarEditor AllStars="EditModel.AllStars"
+                                                     Sports="EditModel.Sports" />
                             </DivRowCol12>
                         </MudTabPanel>
                     </Match>
@@ -55,57 +51,45 @@
                              BadgeData="EditModel.Awards.Count(award => !award.IsDeleted)"
                              Text="Awards">
                     <DivRowCol12>
-                        <Content>
-                            <PersonAwardEditor Awards="EditModel.Awards"
-                                               Sports="EditModel.Sports" />
-                        </Content>
+                        <PersonAwardEditor Awards="EditModel.Awards"
+                                           Sports="EditModel.Sports" />
                     </DivRowCol12>
                 </MudTabPanel>
                 <MudTabPanel BadgeColor="MudBlazor.Color.Success"
                              BadgeData="EditModel.Leaders.Count(leader => !leader.IsDeleted)"
                              Text="Leaders">
                     <DivRowCol12>
-                        <Content>
-                            <PersonLeaderEditor Leaders="EditModel.Leaders"
-                                                Sports="EditModel.Sports" />
-                        </Content>
+                        <PersonLeaderEditor Leaders="EditModel.Leaders"
+                                            Sports="EditModel.Sports" />
                     </DivRowCol12>
                 </MudTabPanel>
                 <MudTabPanel Text="Records">
                     <DivRowCol12>
-                        <Content>
-                            <MudText Typo="Typo.h3">Career Records</MudText>
-                            <PersonCareerRecordEditor CareerRecords="EditModel.CareerRecords"
-                                                      Sports="EditModel.Sports" />
-                        </Content>
+                        <MudText Typo="Typo.h3">Career Records</MudText>
+                        <PersonCareerRecordEditor CareerRecords="EditModel.CareerRecords"
+                                                  Sports="EditModel.Sports" />
                     </DivRowCol12>
                     <br/>
                     <DivRowCol12>
-                        <Content>
-                            <MudText Typo="Typo.h3">Single Season Records</MudText>
-                            <PersonSingleSeasonRecordEditor SingleSeasonRecords="EditModel.SingleSeasonRecords"
-                                                            Sports="EditModel.Sports" />
-                        </Content>
+                        <MudText Typo="Typo.h3">Single Season Records</MudText>
+                        <PersonSingleSeasonRecordEditor SingleSeasonRecords="EditModel.SingleSeasonRecords"
+                                                        Sports="EditModel.Sports" />
                     </DivRowCol12>
                 </MudTabPanel>
                 <MudTabPanel Text="Retired Numbers">
                     <DivRowCol12>
-                        <Content>
-                            <MudText Typo="Typo.h3">College Retired Numbers</MudText>
-                            <PersonCollegeRetiredNumberEditor CollegeRetiredNumbers="EditModel.CollegeRetiredNumbers"
-                                                              Colleges="EditModel.Colleges" />
-                        </Content>
+                        <MudText Typo="Typo.h3">College Retired Numbers</MudText>
+                        <PersonCollegeRetiredNumberEditor CollegeRetiredNumbers="EditModel.CollegeRetiredNumbers"
+                                                          Colleges="EditModel.Colleges" />
                     </DivRowCol12>
                     <br />
                     <DivRowCol12>
-                        <Content>
-                            <MudText Typo="Typo.h3">Franchise Retired Numbers</MudText>
-                            <PersonRetiredNumberEditor RetiredNumbers="EditModel.RetiredNumbers"
-                                                       Sports="EditModel.Sports" />
-                        </Content>
+                        <MudText Typo="Typo.h3">Franchise Retired Numbers</MudText>
+                        <PersonRetiredNumberEditor RetiredNumbers="EditModel.RetiredNumbers"
+                                                   Sports="EditModel.Sports" />
                     </DivRowCol12>
                 </MudTabPanel>
             </MudTabs>
-        </div>          
-    </Content>
+        </Div>          
+    </ChildContent>
 </EditPage>

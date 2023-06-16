@@ -1,20 +1,20 @@
-﻿<DivRowCol3>
-    <Content>
+﻿<Div Class="row">
+    <Div Class="col-3">
         <h3>
             Team
         </h3>
-    </Content>
-</DivRowCol3>
-<DivRowCol3>
-    <Content>
+    </Div>
+</Div>
+<Div Class="row">
+    <Div Class="col-3">
         <TeamAutoComplete Disabled="Disabled" 
                           SelectedValue="SelectedTeam"
                           SelectionChanged="(p) => TeamChanged(p)" />
-    </Content>
-    <ContentColumn2>
+    </Div>
+    <Div Class="col-3">
         <NullableIntField Disabled="Disabled" 
                           Label="Year"
                           Value="Year"
                           ValueChanged="@((p) => YearChanged(p))" />
-    </ContentColumn2>
-</DivRowCol3>
+    </Div>
+</Div>

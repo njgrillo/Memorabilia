@@ -1,74 +1,73 @@
 ﻿@inherits ViewSportTools<PersonCollegeModel>
 
 <DivPad2>
-    <Content>
-        <div class="row">
-            <div class="col-6">                
-                <MudStack Row="true">
-                    <CollegeAutoComplete ResetValueOnEmptyText="false"
-                                         SelectedValue="Model.College"
-                                         SelectionChanged="(college) => OnInputChange(college)" />
-                    <CustomButton ButtonType="MudBlazor.ButtonType.Button"
-                                  OnClick="Browse"
-                                  Size="MudBlazor.Size.Small"
-                                  Text="View All" />
-                </MudStack>
-            </div>
-        </div>
-        <br />
-        <div class="row" hidden="@(Model.College?.Id == null)">
-            <div class="col-12">
-                <MudTable Bordered="false"
-                          Dense="false"
-                          Filter="new Func<PersonCollegeModel,bool>(FilterFunc1)"
-                          Hover="true"
-                          Items="@Model.Colleges.ToList()"
-                          Striped="true">
-                    <ToolBarContent>
-                        <MudText Typo="Typo.h6">@Model.ResultsTitle</MudText>
-                        <MudSpacer />
-                        <MudTextField @bind-Value="Search"
-                                      Adornment="Adornment.Start"
-                                      AdornmentIcon="@Icons.Material.Filled.Search"
-                                      Class="mt-0"
-                                      IconSize="MudBlazor.Size.Medium"
-                                      Placeholder="Search" />
-                    </ToolBarContent>
-                    <HeaderContent>
-                        <MudTh></MudTh>
-                        <MudTh>
-                            <MudTableSortLabel SortBy="new Func<PersonCollegeModel, object>(x => x.PersonName)">Person</MudTableSortLabel>
-                        </MudTh>
-                        <MudTh>
-                            <MudTableSortLabel SortBy="new Func<PersonCollegeModel, object>(x => x.CollegeName)">College</MudTableSortLabel>
-                        </MudTh>
-                        <MudTh>Begin Year</MudTh>
-                        <MudTh>End Year</MudTh>
-                    </HeaderContent>
-                    <RowTemplate>
-                        <MudTd DataLabel="">
-                            <MudTooltip>
-                                <MudImage @onclick="@(_ => ShowPersonProfileDialog(context.PersonId))"
-                                          Class="rounded-lg can-click"
-                                          Elevation="5"
-                                          Height="200"
-                                          ObjectFit="@ObjectFit.Cover"
-                                          Src="@(ImageService.GetPersonImageData(context.PersonImageFileName))"
-                                          Width="200" />
-                            </MudTooltip>
-                        </MudTd>
-                        <MudTd DataLabel="Person">
-                            <MudLink Href="@context.ProfileLink">@context.PersonName</MudLink>
-                        </MudTd>
-                        <MudTd DataLabel="College">@context.CollegeName</MudTd>
-                        <MudTd DataLabel="Begin Year">@context.BeginYear</MudTd>
-                        <MudTd DataLabel="End Year">@context.EndYear</MudTd>
-                    </RowTemplate>
-                    <PagerContent>
-                        <MudTablePager />
-                    </PagerContent>
-                </MudTable>
-            </div>
-        </div>
-    </Content>
+    <Div Class="row">
+        <Div Class="col-6">
+            <MudStack Row="true">
+                <CollegeAutoComplete ResetValueOnEmptyText="false"
+                                     SelectedValue="Model.College"
+                                     SelectionChanged="(college) => OnInputChange(college)" />
+                <CustomButton ButtonType="MudBlazor.ButtonType.Button"
+                              OnClick="Browse"
+                              Size="MudBlazor.Size.Small"
+                              Text="View All" />
+            </MudStack>
+        </Div>
+    </Div>
+    <br />
+    <Div Class="row" 
+         Hidden="@(Model.College?.Id == null)">
+        <Div Class="col-12">
+            <MudTable Bordered="false"
+                      Dense="false"
+                      Filter="new Func<PersonCollegeModel,bool>(FilterFunc1)"
+                      Hover="true"
+                      Items="@Model.Colleges.ToList()"
+                      Striped="true">
+                <ToolBarContent>
+                    <MudText Typo="Typo.h6">@Model.ResultsTitle</MudText>
+                    <MudSpacer />
+                    <MudTextField @bind-Value="Search"
+                                  Adornment="Adornment.Start"
+                                  AdornmentIcon="@Icons.Material.Filled.Search"
+                                  Class="mt-0"
+                                  IconSize="MudBlazor.Size.Medium"
+                                  Placeholder="Search" />
+                </ToolBarContent>
+                <HeaderContent>
+                    <MudTh></MudTh>
+                    <MudTh>
+                        <MudTableSortLabel SortBy="new Func<PersonCollegeModel, object>(x => x.PersonName)">Person</MudTableSortLabel>
+                    </MudTh>
+                    <MudTh>
+                        <MudTableSortLabel SortBy="new Func<PersonCollegeModel, object>(x => x.CollegeName)">College</MudTableSortLabel>
+                    </MudTh>
+                    <MudTh>Begin Year</MudTh>
+                    <MudTh>End Year</MudTh>
+                </HeaderContent>
+                <RowTemplate>
+                    <MudTd DataLabel="">
+                        <MudTooltip>
+                            <MudImage @onclick="@(_ => ShowPersonProfileDialog(context.PersonId))"
+                                      Class="rounded-lg can-click"
+                                      Elevation="5"
+                                      Height="200"
+                                      ObjectFit="@ObjectFit.Cover"
+                                      Src="@(ImageService.GetPersonImageData(context.PersonImageFileName))"
+                                      Width="200" />
+                        </MudTooltip>
+                    </MudTd>
+                    <MudTd DataLabel="Person">
+                        <MudLink Href="@context.ProfileLink">@context.PersonName</MudLink>
+                    </MudTd>
+                    <MudTd DataLabel="College">@context.CollegeName</MudTd>
+                    <MudTd DataLabel="Begin Year">@context.BeginYear</MudTd>
+                    <MudTd DataLabel="End Year">@context.EndYear</MudTd>
+                </RowTemplate>
+                <PagerContent>
+                    <MudTablePager />
+                </PagerContent>
+            </MudTable>
+        </Div>
+    </Div>
 </DivPad2>

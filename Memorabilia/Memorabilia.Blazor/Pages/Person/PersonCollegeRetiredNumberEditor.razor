@@ -1,32 +1,27 @@
-﻿<DivRowCol3>
-    <Content>
+﻿<Div Class="row">
+    <Div Class="col-3">
         <CollegeAutoComplete Colleges="Colleges" 
                              Disabled="@(!_canEditCollege)"
                              SelectedValue="Model.College"
                              SelectionChanged="(p) => Model.College = p" />
-    </Content>
-    <ContentColumn2>
+    </Div>
+    <Div Class="col-3">
         <NullableIntField Label="Number"
                           Value="Model.PlayerNumber"
                           ValueChanged="@((p) => Model.PlayerNumber = p)" />
-    </ContentColumn2>
-</DivRowCol3>
+    </Div>
+</Div>
 <DivLeftAlign>
-    <Content>
-        <DivHidden Hidden="@(!_canAdd)">
-            <Content>
-                <AddButton OnClick="Add" />
-            </Content>
-        </DivHidden>
-        <DivHidden Hidden="@(!_canUpdate)">
-            <Content>
-                <UpdateButton OnClick="Update" />
-            </Content>
-        </DivHidden>
-    </Content>
+    <Div Hidden="@(!_canAdd)">
+        <AddButton OnClick="Add" />
+    </Div>
+    <Div Hidden="@(!_canUpdate)">
+        <UpdateButton OnClick="Update" />
+    </Div>
 </DivLeftAlign>
-<DivRowCol6>
-    <Content>
+<br />
+<Div Class="row">
+    <Div Class="col-6">
         <MudTable Bordered="false"
                   Dense="false"
                   Hover="true"
@@ -54,6 +49,6 @@
                 </MudTd>
             </RowTemplate>
         </MudTable>
-    </Content>
-</DivRowCol6>
+    </Div>
+</Div>
 

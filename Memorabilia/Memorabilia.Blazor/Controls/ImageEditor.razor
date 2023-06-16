@@ -5,20 +5,16 @@
         <MudText Typo="Typo.h5">@ImageType.Name</MudText>
     </MudCardContent>
     <MudCardActions>
-        <DivHidden Hidden="@(!HasPrimary || IsPrimary)">
-            <Content>
-                <CustomButton ButtonType="ButtonType.Button" 
-                              OnClick="@(_ => SetPrimary(ImageFileName))"
-                              Text="Make Primary"
-                              Variant="Variant.Text" />
-            </Content>
-        </DivHidden>
-        <DivHidden Hidden="@(!CanRemove)">
-            <Content>
-                <CustomButton OnClick="@(_ => Remove(ImageFileName))"
-                              Text="Remove"
-                              Variant="Variant.Text" />
-            </Content>
-        </DivHidden>
+        <Div Hidden="@(!HasPrimary || IsPrimary)">
+            <CustomButton ButtonType="ButtonType.Button"
+                          OnClick="@(_ => SetPrimary(ImageFileName))"
+                          Text="Make Primary"
+                          Variant="Variant.Text" />
+        </Div>
+        <Div Hidden="@(!CanRemove)">
+            <CustomButton OnClick="@(_ => Remove(ImageFileName))"
+                          Text="Remove"
+                          Variant="Variant.Text" />
+        </Div>
     </MudCardActions>
 </MudCard>

@@ -1,39 +1,34 @@
-﻿<DivRowCol3>
-    <Content>
+﻿<Div Class="row">
+    <Div Class="col-3">
         <DivisionAutoComplete Disabled="@(!_canEditDivision)"
                               SelectedValue="Model.Division"
                               SelectionChanged="(p) => Model.Division = p"
                               SportLeagueLevel="@SportLeagueLevel" />
-    </Content>
-</DivRowCol3>
-<DivRowCol3>
-    <Content>
+    </Div>
+</Div>
+<Div Class="row">
+    <Div Class="col-3">
         <NullableIntField Label="Begin Year"
                           Value="Model.BeginYear"
                           ValueChanged="@((p) => Model.BeginYear = p)" />
-    </Content>
-    <ContentColumn2>
+    </Div>
+    <Div Class="col-3">
         <NullableIntField Label="End Year"
                           Value="Model.EndYear"
                           ValueChanged="@((p) => Model.EndYear = p)" />
-    </ContentColumn2>
-</DivRowCol3>
+    </Div>
+</Div>
 <DivLeftAlign>
-    <Content>
-        <DivHidden Hidden="@(!_canAdd)">
-            <Content>
-                <AddButton OnClick="Add" />
-            </Content>
-        </DivHidden>
-        <DivHidden Hidden="@(!_canUpdate)">
-            <Content>
-                <UpdateButton OnClick="Update" />
-            </Content>
-        </DivHidden>
-    </Content>
+    <Div Hidden="@(!_canAdd)">
+        <AddButton OnClick="Add" />
+    </Div>
+    <Div Hidden="@(!_canUpdate)">
+        <UpdateButton OnClick="Update" />
+    </Div>
 </DivLeftAlign>
-<DivRowCol6>
-    <Content>
+<br />
+<Div Class="row">
+    <Div Class="col-6">
         <MudTable Bordered="false"
                   Dense="false" 
                   Hover="true"
@@ -63,5 +58,5 @@
                 </MudTd>
             </RowTemplate>
         </MudTable>
-    </Content>
-</DivRowCol6>
+    </Div>
+</Div>

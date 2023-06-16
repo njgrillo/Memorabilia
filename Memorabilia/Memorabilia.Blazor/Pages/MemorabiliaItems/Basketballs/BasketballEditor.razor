@@ -11,18 +11,18 @@
                                Model="EditModel"
                                TItem="BasketballEditModel">
             <AdditionalContent>
-                <DivRowCol3>
-                    <Content>
+                <Div Class="row">
+                    <Div Class="col-3">
                         <BasketballTypeDropDown GameStyleType="@EditModel.GameStyleType"
                                                 SelectedValue="@EditModel.BasketballTypeId"
                                                 SelectionChanged="(p) => EditModel.BasketballTypeId = p" />
-                    </Content>
-                    <ContentColumn2>
+                    </Div>
+                    <Div Class="col-3">
                         <CommissionerDropDown SelectedValue="@EditModel.CommissionerId"
                                               SelectionChanged="(p) => EditModel.CommissionerId = p"
                                               SportLeagueLevel="@SportLeagueLevel.NationalBasketballAssociation" />
-                    </ContentColumn2>
-                </DivRowCol3>
+                    </Div>
+                </Div>
             </AdditionalContent>
         </MemorabiliaItemEditor>
     </Content>

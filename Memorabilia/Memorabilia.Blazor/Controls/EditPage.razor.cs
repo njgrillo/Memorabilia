@@ -21,7 +21,7 @@ public partial class EditPage<TItem> : INotifyPropertyChanged
     public string BackNavigationPath { get; set; }
 
     [Parameter]
-    public RenderFragment Content { get; set; }
+    public RenderFragment ChildContent { get; set; }
 
     [Parameter]
     public bool ContinueNavigation { get; set; }
