@@ -6,7 +6,7 @@ public partial class FootballEditor
     [Inject]
     public FootballValidator Validator { get; set; }
 
-    protected async Task OnLoad()
+    protected override async Task OnInitializedAsync()
     {
         Entity.Memorabilia memorabilia = await QueryRouter.Send(new GetMemorabiliaItem(MemorabiliaId));
 

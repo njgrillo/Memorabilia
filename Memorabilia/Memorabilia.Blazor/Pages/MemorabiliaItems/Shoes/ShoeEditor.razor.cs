@@ -6,7 +6,7 @@ public partial class ShoeEditor
     [Inject]
     public ShoeValidator Validator { get; set; }
 
-    protected async Task OnLoad()
+    protected override async Task OnInitializedAsync()
     {
         Entity.Memorabilia memorabilia = await QueryRouter.Send(new GetMemorabiliaItem(MemorabiliaId));
 

@@ -6,7 +6,7 @@ public partial class BookEditor
     [Inject]
     public BookValidator Validator { get; set; }
 
-    protected async Task OnLoad()
+    protected override async Task OnInitializedAsync()
     {
         EditModel = new(new BookModel(await QueryRouter.Send(new GetMemorabiliaItem(MemorabiliaId))));
     }

@@ -5,7 +5,7 @@ public partial class PaintingEditor : MemorabiliaItem<PaintingEditModel>
     [Inject]
     public PaintingValidator Validator { get; set; }
 
-    protected async Task OnLoad()
+    protected override async Task OnInitializedAsync()
     {
         Entity.Memorabilia memorabilia = await QueryRouter.Send(new GetMemorabiliaItem(MemorabiliaId));
 

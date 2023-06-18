@@ -6,7 +6,7 @@ public partial class JerseyNumberEditor
     [Inject]
     public JerseyNumberValidator Validator { get; set; }
 
-    protected async Task OnLoad()
+    protected override async Task OnInitializedAsync()
     {
         EditModel = new(new JerseyNumberModel(await QueryRouter.Send(new GetMemorabiliaItem(MemorabiliaId))));
     }

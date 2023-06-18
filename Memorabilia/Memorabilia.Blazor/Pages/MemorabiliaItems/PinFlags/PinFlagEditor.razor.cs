@@ -6,7 +6,7 @@ public partial class PinFlagEditor
     [Inject]
     public PinFlagValidator Validator { get; set; }
 
-    protected async Task OnLoad()
+    protected override async Task OnInitializedAsync()
     {
         EditModel = new(new PinFlagModel(await QueryRouter.Send(new GetMemorabiliaItem(MemorabiliaId))));
     }

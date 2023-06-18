@@ -3,7 +3,7 @@
 public partial class BookplateEditor 
     : MemorabiliaItem<BookplateEditModel>
 {
-    protected async Task OnLoad()
+    protected override async Task OnInitializedAsync()
     {
         EditModel = new(new BookplateModel(await QueryRouter.Send(new GetMemorabiliaItem(MemorabiliaId))));
     }
