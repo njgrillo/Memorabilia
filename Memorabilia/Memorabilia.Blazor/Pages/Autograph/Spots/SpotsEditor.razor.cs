@@ -3,7 +3,7 @@
 public partial class SpotsEditor 
     : AutographItem<SpotEditModel>
 {
-    protected async Task OnLoad()
+    protected override async Task OnInitializedAsync()
     {
         Model = (await QueryRouter.Send(new Application.Features.Autograph.Spot.GetSpot(AutographId))).ToEditModel();
     }

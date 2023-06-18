@@ -23,7 +23,7 @@ public partial class MemorabiliaEditor
     protected MemorabiliaEditModel Model 
         = new ();        
 
-    protected async Task OnLoad()
+    protected override async Task OnInitializedAsync()
     {
         if (Id == 0)
             return;

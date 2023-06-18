@@ -17,7 +17,7 @@ public partial class InscriptionsEditor
 
     private bool _canUpdateInscription;    
 
-    protected async Task OnLoad()
+    protected override async Task OnInitializedAsync()
     {
         var autograph = new AutographModel(await QueryRouter.Send(new GetAutograph(AutographId)));
 

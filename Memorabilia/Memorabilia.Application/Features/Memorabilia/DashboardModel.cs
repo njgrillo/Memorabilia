@@ -15,4 +15,5 @@ public class DashboardModel : Model
         => "Dashboard";
 
     public IEnumerable<DashboardItemModel> UserDashboardItems { get; set; }
+        = Enumerable.Empty<DashboardItemModel>();
 }

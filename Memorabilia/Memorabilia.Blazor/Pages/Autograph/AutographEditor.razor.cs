@@ -15,7 +15,7 @@ public partial class AutographEditor
     private bool _displayAcquisitionDetails
         = true;
 
-    protected async Task OnLoad()
+    protected override async Task OnInitializedAsync()
     {
         var model = new MemorabiliaModel(await QueryRouter.Send(new GetMemorabiliaItem(MemorabiliaId)));
 
