@@ -1,41 +1,40 @@
-﻿<Div Class="row">
-    <Div Class="col-2">
-       <NullableIntField Label="Begin Year"
-                         Value="Model.BeginYear"
-                         ValueChanged="@((p) => Model.BeginYear = p)" />
-    </Div>     
-    <Div Class="col-2">
-       <NullableIntField Label="End Year"
+﻿<DivRowFormGroup>
+    <MudStack Class="col-6"
+              Row="true"
+              Style="margin-bottom:1%;">
+        <NullableIntField Label="Begin Year"
+                          Value="Model.BeginYear"
+                          ValueChanged="@((p) => Model.BeginYear = p)" />
+        <NullableIntField Label="End Year"
                          Value="Model.EndYear"
                          ValueChanged="@((p) => Model.EndYear = p)" />
-    </Div> 
-    <Div Class="col-2">
         <TeamRoleTypeAutoComplete SelectedValue="Model.TeamRoleType"
                                   SelectionChanged="(p) => Model.TeamRoleType = p"
                                   SportLeagueLevel="Model.SportLeagueLevel" />
-    </Div> 
-</Div> 
-<Div Class="row">
-    <Div Class="col-6">
+    </MudStack>
+</DivRowFormGroup>
+<DivRowFormGroup>
+    <MudStack Class="col-6"
+              Row="true"
+              Style="margin-bottom:1%;">
         <PersonTeamAutoComplete BeginYear="Model.BeginYear"
-                                Disabled="@(!_canEditTeam)"
+                                Disabled="@(EditMode == EditModeType.Update)"
                                 EndYear="Model.EndYear"
                                 PersonId="@PersonId"
                                 ResetValueOnEmptyText="true"
                                 SelectedValue="Team"
                                 SelectionChanged="(p) => Team = p"
                                 SportIds="@SportIds" />
-    </Div>
-</Div>
-<DivLeftAlign>
-    <Div Hidden="@(!_canAdd)">
-        <AddButton OnClick="Add" />
-    </Div>
-    <Div Hidden="@(!_canUpdate)">
-        <UpdateButton OnClick="Update" />
-    </Div>
-</DivLeftAlign>
-<br />
+        <Condition Evaluation="@(EditMode == EditModeType.Update)">
+            <Match>
+                <UpdateMudFab OnUpdate="Update" />
+            </Match>
+            <NotMatch>
+                <AddMudFab OnAdd="Add" />
+            </NotMatch>
+        </Condition>
+    </MudStack>
+</DivRowFormGroup>
 <DivRowCol12>
     <MudTable Bordered="false"
               Dense="false"

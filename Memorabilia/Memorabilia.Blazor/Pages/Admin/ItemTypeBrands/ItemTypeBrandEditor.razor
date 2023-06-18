@@ -1,4 +1,4 @@
-﻿@inherits EditItemTypeItem<ItemTypeBrandEditModel, ItemTypeBrandModel>
+﻿@inherits EditItem<ItemTypeBrandEditModel, ItemTypeBrandModel>
 
 <EditPage ContinueNavigationPath="@EditModel.RoutePrefix"
           EditMode="EditModel.EditModeType" 
@@ -11,17 +11,17 @@
           PageFooterNavigationPath="@EditModel.ExitNavigationPath"
           PageTitle="@EditModel.PageTitle"
           TItem="ItemTypeBrandEditModel">
-    <Div Class="row" 
-         Hidden="@(!DisplayItemType)">
+    <DivRowFormGroup>
         <Div Class="col-3">
-            <ItemTypeAutoComplete SelectedValue="EditModel.ItemType"
+            <ItemTypeAutoComplete Disabled="@(EditModel.Id > 0)"
+                                  SelectedValue="EditModel.ItemType"
                                   SelectionChanged="(p) => EditModel.ItemType = p" />
         </Div>
-    </Div>
-    <Div Class="row">
+    </DivRowFormGroup>
+    <DivRowFormGroup>
         <Div Class="col-3">
             <BrandAutoComplete SelectedValue="EditModel.Brand"
                                SelectionChanged="(p) => EditModel.Brand = p" />
         </Div>
-    </Div>
+    </DivRowFormGroup>
 </EditPage>

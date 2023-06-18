@@ -1,31 +1,26 @@
-﻿<Div Class="row">
-    <Div Class="col-3">
-        <TextField HelperText="Ex. 1999 or 1999-2002 or 2003, 2005-2008" 
+﻿<DivRowFormGroup>
+    <MudStack Class="col-6"
+              Row="true"
+              Style="margin-bottom:1%;">
+        <TextField HelperText="Ex. 1999 or 1999-2002 or 2003, 2005-2008"
                    Label="Years"
                    SelectedText="@_years"
                    SelectedTextChanged="@((p) => _years = p)" />
-    </Div>
-    <Div Class="col-3">
         <Condition Evaluation="@DisplaySportLeagueLevels">
             <Match>
                 <SportLeagueLevelDropDown SelectedValue="Model.SportLeagueLevelId"
                                           SelectionChanged="(p) => Model.SportLeagueLevelId = p" />
             </Match>
         </Condition>
-    </Div>
-    <Div Class="col-3">
         <Condition Evaluation="@DisplaySports">
             <Match>
                 <SportAutoComplete SelectedValue="Model.Sport"
                                    SelectionChanged="(p) => Model.Sport = p" />
             </Match>
         </Condition>
-    </Div>
-</Div>
-<DivLeftAlign>
-    <AddButton OnClick="Add" />
-</DivLeftAlign>
-<br />
+        <AddMudFab OnAdd="Add" />
+    </MudStack>
+</DivRowFormGroup>
 <Div Class="row">
     <Div Class="col-6">
          <MudTable Bordered="false"

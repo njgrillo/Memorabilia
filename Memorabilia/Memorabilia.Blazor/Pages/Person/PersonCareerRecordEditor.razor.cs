@@ -12,13 +12,8 @@ public partial class PersonCareerRecordEditor
     protected PersonCareerRecordEditModel Model
         = new();
 
-    private bool _canAdd 
-        = true;
-
-    private bool _canEditRecordType 
-        = true;
-
-    private bool _canUpdate;    
+    protected EditModeType EditMode
+        = EditModeType.Add;
 
     private void Add()
     {
@@ -35,9 +30,7 @@ public partial class PersonCareerRecordEditor
         Model.RecordType = record.RecordType;
         Model.Record = record.Record;
 
-        _canAdd = false;
-        _canEditRecordType = false;
-        _canUpdate = true;
+        EditMode = EditModeType.Update;
     }
 
     private void Update()
@@ -49,8 +42,6 @@ public partial class PersonCareerRecordEditor
 
         Model = new PersonCareerRecordEditModel();
 
-        _canAdd = true;
-        _canEditRecordType = true;
-        _canUpdate = false;
+        EditMode = EditModeType.Add;
     }
 }

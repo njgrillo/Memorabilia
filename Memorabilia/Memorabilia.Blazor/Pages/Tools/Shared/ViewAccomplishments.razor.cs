@@ -27,7 +27,7 @@ public partial class ViewAccomplishments
         if (result.Canceled)
             return;
 
-        _ = int.TryParse(result.Data.ToString(), out int id);
+        _ = result.Data.ToString().TryParse(out int id);
 
         if (id == 0)
             return;
@@ -39,7 +39,7 @@ public partial class ViewAccomplishments
 
     protected override bool FilterFunc(AccomplishmentModel model, string search)
     {
-        bool canSearchByYear = int.TryParse(search, out int year);
+        bool canSearchByYear = search.TryParse(out int year);
 
         return search.IsNullOrEmpty() ||
                (canSearchByYear && model.Year.HasValue && model.Year.Value == year)||

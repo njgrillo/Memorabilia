@@ -53,7 +53,7 @@ public partial class ProjectMemorabiliaTeamGrid
 
         var results = (Dictionary<string, string>)result.Data;
 
-        _ = int.TryParse(results["MemorabiliaId"], out int memorabiliaId);
+        _ = results["MemorabiliaId"].TryParse(out int memorabiliaId);
 
         editModel.MemorabiliaId = memorabiliaId;
         editModel.MemorabiliaFileName = results["MemorabiliaFileName"];

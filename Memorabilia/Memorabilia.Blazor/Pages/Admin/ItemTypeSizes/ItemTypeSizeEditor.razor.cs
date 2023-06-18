@@ -1,7 +1,7 @@
 ﻿namespace Memorabilia.Blazor.Pages.Admin.ItemTypeSizes;
 
 public partial class ItemTypeSizeEditor 
-    : EditItemTypeItem<ItemTypeSizeEditModel, ItemTypeSizeModel>
+    : EditItem<ItemTypeSizeEditModel, ItemTypeSizeModel>
 {
     protected async Task HandleValidSubmit()
     {
@@ -10,11 +10,6 @@ public partial class ItemTypeSizeEditor
 
     protected override async Task OnInitializedAsync()
     {
-        Initialize();
-
-        if (DisplayItemType)
-            return;
-
         EditModel = (await QueryRouter.Send(new GetItemTypeSize(Id))).ToEditModel();
     }
 }

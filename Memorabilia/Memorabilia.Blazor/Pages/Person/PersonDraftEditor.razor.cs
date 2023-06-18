@@ -13,13 +13,8 @@ public partial class PersonDraftEditor
     protected PersonDraftEditModel Model 
         = new();
 
-    private bool _canAdd 
-        = true;
-
-    private bool _canEditFranchise 
-        = true;
-
-    private bool _canUpdate;    
+    protected EditModeType EditMode
+        = EditModeType.Add;
 
     protected override void OnInitialized()
     {
@@ -44,9 +39,7 @@ public partial class PersonDraftEditor
         Model.Pick = draft.Pick;
         Model.Overall = draft.Overall;
 
-        _canAdd = false;
-        _canEditFranchise = false;
-        _canUpdate = true;
+        EditMode = EditModeType.Update;
     }
 
     private void OnPickChange(int? value)
@@ -72,8 +65,6 @@ public partial class PersonDraftEditor
 
         Model = new(SportIds.ToArray());
 
-        _canAdd = true;
-        _canEditFranchise = true;
-        _canUpdate = false;
+        EditMode = EditModeType.Add;
     }
 }

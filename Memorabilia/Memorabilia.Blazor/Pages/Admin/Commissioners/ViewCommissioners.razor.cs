@@ -26,7 +26,7 @@ public partial class ViewCommissioners
 
     protected override bool FilterFunc(CommissionerModel model, string search)
     {
-        var isYear = int.TryParse(search, out var year);
+        bool isYear = search.TryParse(out int year);
 
         return search.IsNullOrEmpty() ||
                model.SportLeagueLevelName.Contains(search, StringComparison.OrdinalIgnoreCase) ||

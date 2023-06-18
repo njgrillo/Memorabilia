@@ -84,7 +84,7 @@ public partial class MemorabiliaImageEditor
             if (result.Canceled)
                 return;
 
-            _ = int.TryParse(result.Data.ToString(), out int autographId);
+            _ = result.Data.ToString().TryParse(out int autographId);
 
             if (autographId == 0)
                 return;

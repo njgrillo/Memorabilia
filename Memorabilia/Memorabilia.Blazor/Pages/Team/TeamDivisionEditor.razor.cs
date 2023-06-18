@@ -12,13 +12,8 @@ public partial class TeamDivisionEditor
     private TeamDivisionEditModel Model
         = new();
 
-    private bool _canAdd 
-        = true;
-
-    private bool _canEditDivision 
-        = true;
-
-    private bool _canUpdate;    
+    protected EditModeType EditMode
+        = EditModeType.Add;
 
     private void Add()
     {
@@ -33,9 +28,7 @@ public partial class TeamDivisionEditor
         Model.BeginYear = division.BeginYear;
         Model.EndYear = division.EndYear;
 
-        _canAdd = false;
-        _canEditDivision = false;
-        _canUpdate = true;
+        EditMode = EditModeType.Update;
     }
 
     private void Update()
@@ -49,8 +42,6 @@ public partial class TeamDivisionEditor
 
         Model = new ();
 
-        _canAdd = false;
-        _canEditDivision = false;
-        _canUpdate = true;
+        EditMode = EditModeType.Add;
     }
 }

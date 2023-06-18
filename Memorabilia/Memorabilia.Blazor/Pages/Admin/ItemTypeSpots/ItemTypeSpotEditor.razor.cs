@@ -1,7 +1,7 @@
 ﻿namespace Memorabilia.Blazor.Pages.Admin.ItemTypeSpots;
 
 public partial class ItemTypeSpotEditor 
-    : EditItemTypeItem<ItemTypeSpotEditModel, ItemTypeSpotModel>
+    : EditItem<ItemTypeSpotEditModel, ItemTypeSpotModel>
 {
     protected async Task HandleValidSubmit()
     {
@@ -10,11 +10,6 @@ public partial class ItemTypeSpotEditor
 
     protected override async Task OnInitializedAsync()
     {
-        Initialize();
-
-        if (DisplayItemType)
-            return;
-
         EditModel = (await QueryRouter.Send(new GetItemTypeSpot(Id))).ToEditModel();
     }
 }

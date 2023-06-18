@@ -1,37 +1,29 @@
-﻿<Div Class="row">
-    <Div Class="col-3">
-        <ConferenceDropDown Disabled="@(!_canEditConference)" 
+﻿<DivRowFormGroup>
+    <MudStack Class="col-12"
+              Row="true"
+              Style="margin-bottom:1%;">
+        <ConferenceDropDown Disabled="@(EditMode == EditModeType.Update)"
                             SelectedValue="Model.ConferenceId"
                             SelectionChanged="(p) => Model.ConferenceId = p"
-                            SportLeagueLevel="@SportLeagueLevel" />  
-    </Div>
-</Div>
-<Div Class="row">
-    <Div Class="col-3">
+                            SportLeagueLevel="@SportLeagueLevel" />
         <NullableIntField Label="Begin Year"
                           Value="Model.BeginYear"
                           ValueChanged="@((p) => Model.BeginYear = p)" />
-    </Div>
-    <Div Class="col-3">
         <NullableIntField Label="End Year"
                           Value="Model.EndYear"
                           ValueChanged="@((p) => Model.EndYear = p)" />
-    </Div>
-</Div>
+        <Condition Evaluation="@(EditMode == EditModeType.Update)">
+            <Match>
+                <UpdateMudFab OnUpdate="Update" />
+            </Match>
+            <NotMatch>
+                <AddMudFab OnAdd="Add" />
+            </NotMatch>
+        </Condition>
+    </MudStack>
+</DivRowFormGroup>
 <Div Class="row">
-    <Div Class="col-3" />
-</Div>
-<DivLeftAlign>
-    <Div Hidden="@(!_canAdd)">
-        <AddButton OnClick="Add" />
-    </Div>
-    <Div Hidden="@(!_canUpdate)">
-        <UpdateButton OnClick="Update" />
-    </Div>
-</DivLeftAlign>
-<br />
-<Div Class="row">
-    <Div Class="col-6">
+    <Div Class="col-12">
         <MudTable Bordered="false"
                   Dense="false" 
                   Hover="true"

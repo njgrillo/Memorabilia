@@ -9,13 +9,8 @@ public partial class PersonInternationalHallOfFameEditor
     protected PersonInternationalHallOfFameEditModel Model
         = new();
 
-    private bool _canAdd 
-        = true;
-
-    private bool _canEditInternationalHallOfFameType 
-        = true;
-
-    private bool _canUpdate;    
+    protected EditModeType EditMode
+        = EditModeType.Add;
 
     private void Add()
     {
@@ -32,9 +27,7 @@ public partial class PersonInternationalHallOfFameEditor
         Model.InternationalHallOfFameTypeId = hallOfFame.InternationalHallOfFameTypeId;
         Model.Year = hallOfFame.Year;
 
-        _canAdd = false;
-        _canEditInternationalHallOfFameType = false;
-        _canUpdate = true;
+        EditMode = EditModeType.Update;
     }
 
     private void Update()
@@ -47,8 +40,6 @@ public partial class PersonInternationalHallOfFameEditor
 
         Model = new();
 
-        _canAdd = true;
-        _canEditInternationalHallOfFameType = true;
-        _canUpdate = false;
+        EditMode = EditModeType.Add;
     }
 }

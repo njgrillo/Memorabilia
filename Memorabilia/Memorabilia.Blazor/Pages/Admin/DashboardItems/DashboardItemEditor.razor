@@ -11,19 +11,19 @@
           PageFooterNavigationPath="@EditModel.ExitNavigationPath"
           PageTitle="@EditModel.PageTitle"
           TItem="DashboardItemEditModel">
-    <Div Class="row">
+    <DivRowFormGroup>
         <Div Class="col-3">
             <TextField Label="Name"
                        SelectedText="@EditModel.Name"
                        SelectedTextChanged="@((p) => EditModel.Name = p)" />
         </Div>
-    </Div>
-    <Div Class="row">
+    </DivRowFormGroup>
+    <DivRowFormGroup>
         <Div Class="col-3">
             <TextField Label="Description"
                        Lines="10"
                        SelectedText="@EditModel.Description"
                        SelectedTextChanged="@((p) => EditModel.Description = p)" />
         </Div>
-    </Div>
+    </DivRowFormGroup>
 </EditPage>

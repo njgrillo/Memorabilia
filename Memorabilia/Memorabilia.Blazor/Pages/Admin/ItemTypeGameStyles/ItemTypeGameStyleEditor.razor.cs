@@ -1,7 +1,7 @@
 ﻿namespace Memorabilia.Blazor.Pages.Admin.ItemTypeGameStyles;
 
 public partial class ItemTypeGameStyleEditor 
-    : EditItemTypeItem<ItemTypeGameStyleEditModel, ItemTypeGameStyleModel>
+    : EditItem<ItemTypeGameStyleEditModel, ItemTypeGameStyleModel>
 {
     protected async Task HandleValidSubmit()
     {
@@ -10,11 +10,6 @@ public partial class ItemTypeGameStyleEditor
 
     protected override async Task OnInitializedAsync()
     {
-        Initialize();
-
-        if (DisplayItemType)
-            return;
-
         EditModel = (await QueryRouter.Send(new GetItemTypeGameStyle(Id))).ToEditModel();
     }
 }

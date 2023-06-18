@@ -1,4 +1,4 @@
-﻿@inherits EditItemTypeItem<ItemTypeSportEditModel, ItemTypeSportModel>
+﻿@inherits EditItem<ItemTypeSportEditModel, ItemTypeSportModel>
 
 <EditPage ContinueNavigationPath="@EditModel.RoutePrefix"
           EditMode="EditModel.EditModeType" 
@@ -11,17 +11,17 @@
           PageFooterNavigationPath="@EditModel.ExitNavigationPath"
           PageTitle="@EditModel.PageTitle"
           TItem="ItemTypeSportEditModel">
-    <Div Class="row" 
-         Hidden="@(!DisplayItemType)">
+    <DivRowFormGroup>
         <Div Class="col-3">
-            <ItemTypeAutoComplete SelectedValue="EditModel.ItemType"
+            <ItemTypeAutoComplete Disabled="@(EditModel.Id > 0)" 
+                                  SelectedValue="EditModel.ItemType"
                                   SelectionChanged="(p) => EditModel.ItemType = p" />
         </Div>
-    </Div>
-    <Div Class="row">
+    </DivRowFormGroup>
+    <DivRowFormGroup>
         <Div Class="col-3">
             <SportDropDown SelectedValue="EditModel.SportId"
                            SelectionChanged="(p) => EditModel.SportId = p" />
         </Div>
-    </Div>
+    </DivRowFormGroup>
 </EditPage>

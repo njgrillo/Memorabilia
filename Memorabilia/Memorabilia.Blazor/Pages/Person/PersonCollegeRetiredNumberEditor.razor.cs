@@ -12,13 +12,8 @@ public partial class PersonCollegeRetiredNumberEditor
     protected PersonCollegeRetiredNumberEditModel Model
         = new();
 
-    private bool _canAdd 
-        = true;
-
-    private bool _canEditCollege 
-        = true;
-
-    private bool _canUpdate;    
+    protected EditModeType EditMode
+        = EditModeType.Add;
 
     private void Add()
     {
@@ -35,9 +30,7 @@ public partial class PersonCollegeRetiredNumberEditor
         Model.College = CollegeRetiredNumber.College;
         Model.PlayerNumber = CollegeRetiredNumber.PlayerNumber;
 
-        _canAdd = false;
-        _canEditCollege = false;
-        _canUpdate = true;
+        EditMode = EditModeType.Update;
     }
 
     private void Update()
@@ -50,8 +43,6 @@ public partial class PersonCollegeRetiredNumberEditor
 
         Model = new();
 
-        _canAdd = true;
-        _canEditCollege = true;
-        _canUpdate = false;
+        EditMode = EditModeType.Add;
     }
 }

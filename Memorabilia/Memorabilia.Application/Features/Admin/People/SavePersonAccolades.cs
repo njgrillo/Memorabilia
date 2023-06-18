@@ -150,28 +150,28 @@ public class SavePersonAccolades
                          .ToArray();
 
         public int[] DeletedAccomplishmentIds
-            => _editModel.Accomplishments.ActiveIds();
+            => _editModel.Accomplishments.DeletedIds();
 
         public int[] DeletedAllStars
-            => _editModel.AllStars.ActiveIds();
+            => _editModel.AllStars.DeletedIds();
 
         public int[] DeletedAwardIds 
-            => _editModel.Awards.ActiveIds();
+            => _editModel.Awards.DeletedIds();
 
         public int[] DeletedCareerRecordIds 
-            => _editModel.CareerRecords.ActiveIds();
+            => _editModel.CareerRecords.DeletedIds();
 
         public int[] DeletedCollegeRetiredNumberIds
-            => _editModel.CollegeRetiredNumbers.ActiveIds();
+            => _editModel.CollegeRetiredNumbers.DeletedIds();
 
         public int[] DeletedLeaderIds 
-            => _editModel.Leaders.ActiveIds();
+            => _editModel.Leaders.DeletedIds();
 
         public int[] DeletedRetiredNumberIds 
-            => _editModel.RetiredNumbers.ActiveIds();
+            => _editModel.RetiredNumbers.DeletedIds();
 
         public int[] DeletedSingleSeasonRecordIds 
-            => _editModel.SingleSeasonRecords.ActiveIds();
+            => _editModel.SingleSeasonRecords.DeletedIds();
 
         public PersonLeaderEditModel[] Leaders 
             => _editModel.Leaders

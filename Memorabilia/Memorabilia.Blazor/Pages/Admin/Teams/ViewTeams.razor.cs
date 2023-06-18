@@ -26,7 +26,7 @@ public partial class ViewTeams
 
     protected override bool FilterFunc(TeamModel model, string search)
     {
-        var isYear = int.TryParse(search, out var year);
+        bool isYear = search.TryParse(out int year);
 
         return search.IsNullOrEmpty() ||
                model.FranchiseName.Contains(search, StringComparison.OrdinalIgnoreCase) ||

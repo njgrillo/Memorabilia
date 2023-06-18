@@ -17,19 +17,30 @@
         @ChildContent
         <Condition Evaluation="@UseMultipleButtons">
             <Match>
-                <DivLeftAlign>
-                    @AdditionalButtons
-                    <Div Hidden="@(!DisplaySaveContinueButton)">
-                        <SaveButton OnClick="@(()=> _continue = true)"
-                                    Text="Save & Continue" />
-                        <SaveButton Text="Save & Exit" />
-                        <CancelButton OnClick="@(_ => NavigationManager.NavigateTo(ExitNavigationPath))" />
-                    </Div>
-                </DivLeftAlign>
-                <br />
+                <LeftRightSection>
+                    <Right>
+                        <MudStack Row="true"
+                                  Style="margin-top:1%;margin-bottom:1%;">
+                            <CancelButton OnClick="@(_ => NavigationManager.NavigateTo(ExitNavigationPath))" />
+                            @AdditionalButtons
+                            <Div Hidden="@(!DisplaySaveContinueButton)">
+                                <SaveButton OnClick="@(()=> _continue = true)"
+                                            Text="Save & Continue" />
+                                <SaveButton Text="Save & Exit" />
+
+                            </Div>
+                        </MudStack>
+                    </Right>
+                </LeftRightSection>
             </Match>
             <NotMatch>
-                <SaveButton Text="Save" />
+                <Div Style="margin-top:1%;margin-bottom:1%;">
+                    <LeftRightSection>
+                        <Right>
+                            <SaveButton Text="Save" />
+                        </Right>
+                    </LeftRightSection>
+                </Div>
             </NotMatch>
         </Condition>
     </EditForm>
@@ -40,3 +51,4 @@
                     NavigationPathText="@PageFooterButtonText" />
     </Match>
 </Condition>
+

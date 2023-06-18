@@ -12,13 +12,8 @@ public partial class PersonFranchiseHallOfFameEditor
     protected PersonFranchiseHallOfFameEditModel Model
         = new();
 
-    private bool _canAdd 
-        = true;
-
-    private bool _canEditFranchise 
-        = true;
-
-    private bool _canUpdate;    
+    protected EditModeType EditMode
+        = EditModeType.Add;
 
     private void Add()
     {
@@ -35,9 +30,7 @@ public partial class PersonFranchiseHallOfFameEditor
         Model.FranchiseHallOfFameType = hallOfFame.FranchiseHallOfFameType;
         Model.Year = hallOfFame.Year;
 
-        _canAdd = false;
-        _canEditFranchise = false;
-        _canUpdate = true;
+        EditMode = EditModeType.Update;
     }
 
     private void Update()
@@ -50,8 +43,6 @@ public partial class PersonFranchiseHallOfFameEditor
 
         Model = new();
 
-        _canAdd = true;
-        _canEditFranchise = true;
-        _canUpdate = false;
+        EditMode = EditModeType.Add;
     }
 }

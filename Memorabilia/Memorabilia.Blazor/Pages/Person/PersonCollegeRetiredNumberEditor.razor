@@ -1,27 +1,26 @@
-﻿<Div Class="row">
-    <Div Class="col-3">
-        <CollegeAutoComplete Colleges="Colleges" 
-                             Disabled="@(!_canEditCollege)"
+﻿<DivRowFormGroup>
+    <MudStack Class="col-12"
+              Row="true"
+              Style="margin-bottom:1%;">
+        <CollegeAutoComplete Colleges="Colleges"
+                             Disabled="@(EditMode == EditModeType.Update)"
                              SelectedValue="Model.College"
                              SelectionChanged="(p) => Model.College = p" />
-    </Div>
-    <Div Class="col-3">
         <NullableIntField Label="Number"
                           Value="Model.PlayerNumber"
                           ValueChanged="@((p) => Model.PlayerNumber = p)" />
-    </Div>
-</Div>
-<DivLeftAlign>
-    <Div Hidden="@(!_canAdd)">
-        <AddButton OnClick="Add" />
-    </Div>
-    <Div Hidden="@(!_canUpdate)">
-        <UpdateButton OnClick="Update" />
-    </Div>
-</DivLeftAlign>
-<br />
+        <Condition Evaluation="@(EditMode == EditModeType.Update)">
+            <Match>
+                <UpdateMudFab OnUpdate="Update" />
+            </Match>
+            <NotMatch>
+                <AddMudFab OnAdd="Add" />
+            </NotMatch>
+        </Condition>
+    </MudStack>
+</DivRowFormGroup>
 <Div Class="row">
-    <Div Class="col-6">
+    <Div Class="col-12">
         <MudTable Bordered="false"
                   Dense="false"
                   Hover="true"

@@ -1,37 +1,31 @@
-﻿<Div Class="row">
-    <Div Class="col-3">
-        <SportLeagueLevelDropDown Disabled="@(!_canEditSportLeagueLevel)" 
+﻿<DivRowFormGroup>
+    <MudStack Class="col-12"
+              Row="true"
+              Style="margin-bottom:1%;">
+        <SportLeagueLevelDropDown Disabled="@(EditMode == EditModeType.Update)"
                                   SelectedValue="Model.SportLeagueLevelId"
                                   SelectionChanged="(p) => Model.SportLeagueLevelId = p" />
-    </Div> 
-    <Div Class="col-3">
         <BallotNumberDropDown SelectedValue="Model.BallotNumber"
                               SelectionChanged="(p) => Model.BallotNumber = p" />
-    </Div>   
-    <Div Class="col-3">
         <NullableIntField Label="Induction Year"
                           Value="Model.InductionYear"
                           ValueChanged="@((p) => Model.InductionYear = p)" />
-    </Div>
-    <Div Class="col-3">
         <NullableDecimalField Label="Vote Percentage"
                               Maximum="100"
                               Value="Model.VotePercentage"
                               ValueChanged="@((p) => Model.VotePercentage = p)" />
-    </Div>
-</Div>
-<br />
-<DivLeftAlign>
-    <Div Hidden="@(!_canAddHallOfFame)">
-        <AddButton OnClick="Add" />
-    </Div>
-    <Div Hidden="@(!_canUpdateHallOfFame)">
-        <UpdateButton OnClick="Update" />
-    </Div>
-</DivLeftAlign>
-<br />
+        <Condition Evaluation="@(EditMode == EditModeType.Update)">
+            <Match>
+                <UpdateMudFab OnUpdate="Update" />
+            </Match>
+            <NotMatch>
+                <AddMudFab OnAdd="Add" />
+            </NotMatch>
+        </Condition>
+    </MudStack>
+</DivRowFormGroup>
 <Div Class="row">
-    <Div Class="col-6">
+    <Div Class="col-12">
          <MudTable Bordered="false"
                    Dense="false" 
                    Hover="true"

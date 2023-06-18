@@ -8,10 +8,11 @@
         </DivPad5>
     </Div>
 </Div>
-<Div Class="row" @onkeydown="@Enter">
+<Div Class="row" 
+     KeyDown="Enter">
     <Div Class="col-4">
         <DivPad5>
-            <Div Style="display:flex">
+            <MudStack Row="true">
                 <TextField Label="Quick Jump"
                            SelectedText="@DomainItemQuickJump"
                            SelectedTextChanged="@((p) => DomainItemQuickJump = p)" />
@@ -19,7 +20,16 @@
                               OnClick="QuickJump"
                               Size="MudBlazor.Size.Small"
                               Text="Go" />
-            </Div>
+            </MudStack>
+            @*<Div Style="display:flex">
+                <TextField Label="Quick Jump"
+                           SelectedText="@DomainItemQuickJump"
+                           SelectedTextChanged="@((p) => DomainItemQuickJump = p)" />
+                <CustomButton ButtonType="MudBlazor.ButtonType.Button"
+                              OnClick="QuickJump"
+                              Size="MudBlazor.Size.Small"
+                              Text="Go" />
+            </Div>*@
         </DivPad5>                
     </Div>
 </Div>

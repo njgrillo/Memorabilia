@@ -1,7 +1,7 @@
 ﻿namespace Memorabilia.Blazor.Pages.Admin.ItemTypeLevels;
 
 public partial class ItemTypeLevelEditor 
-    : EditItemTypeItem<ItemTypeLevelEditModel, ItemTypeLevelModel>
+    : EditItem<ItemTypeLevelEditModel, ItemTypeLevelModel>
 {
     protected async Task HandleValidSubmit()
     {
@@ -10,11 +10,6 @@ public partial class ItemTypeLevelEditor
 
     protected override async Task OnInitializedAsync()
     {
-        Initialize();
-
-        if (DisplayItemType)
-            return;
-
         EditModel = (await QueryRouter.Send(new GetItemTypeLevel(Id))).ToEditModel();
     }
 }

@@ -27,7 +27,7 @@ public partial class ViewCollegesTool
         if (result.Canceled)
             return;
 
-        _ = int.TryParse(result.Data.ToString(), out int id);
+        _ = result.Data.ToString().TryParse(out int id);
 
         if (id == 0)
             return;

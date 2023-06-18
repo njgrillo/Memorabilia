@@ -12,13 +12,8 @@ public partial class TeamConferenceEditor
     protected TeamConferenceEditModel Model
         = new();
 
-    private bool _canAdd 
-        = true;
-
-    private bool _canEditConference 
-        = true;
-
-    private bool _canUpdate;    
+    protected EditModeType EditMode
+        = EditModeType.Add;
 
     private void Add()
     {
@@ -33,9 +28,7 @@ public partial class TeamConferenceEditor
         Model.BeginYear = conference.BeginYear;
         Model.EndYear = conference.EndYear;
 
-        _canAdd = false;
-        _canEditConference = false;
-        _canUpdate = true;
+        EditMode = EditModeType.Update;
     }
 
     private void Update()
@@ -49,8 +42,6 @@ public partial class TeamConferenceEditor
 
         Model = new();
 
-        _canAdd = false;
-        _canEditConference = false;
-        _canUpdate = true;
+        EditMode = EditModeType.Add;
     }
 }

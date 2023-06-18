@@ -1,25 +1,24 @@
-﻿<Div Class="row">
-    <Div Class="col-3">
-        <InternationalHallOfFameTypeDropDown Disabled="@(!_canEditInternationalHallOfFameType)"
-                                             Label="Type" 
+﻿<DivRowFormGroup>
+    <MudStack Class="col-6"
+              Row="true"
+              Style="margin-bottom:1%;">
+        <InternationalHallOfFameTypeDropDown Disabled="@(EditMode == EditModeType.Update)"
+                                             Label="Type"
                                              SelectedValue="Model.InternationalHallOfFameTypeId"
                                              SelectionChanged="(p) => Model.InternationalHallOfFameTypeId = p" />
-    </Div>
-    <Div Class="col-3">
         <NullableIntField Label="Induction Year"
                           Value="Model.Year"
                           ValueChanged="@((p) => Model.Year = p)" />
-    </Div>
-</Div>
-<DivLeftAlign>
-    <Div Hidden="@(!_canAdd)">
-        <AddButton OnClick="Add" />
-    </Div>
-    <Div Hidden="@(!_canUpdate)">
-        <UpdateButton OnClick="Update" />
-    </Div>
-</DivLeftAlign>
-<br />
+        <Condition Evaluation="@(EditMode == EditModeType.Update)">
+            <Match>
+                <UpdateMudFab OnUpdate="Update" />
+            </Match>
+            <NotMatch>
+                <AddMudFab OnAdd="Add" />
+            </NotMatch>
+        </Condition>
+    </MudStack>
+</DivRowFormGroup>
 <Div Class="row">
     <Div Class="col-6">
          <MudTable Bordered="false"

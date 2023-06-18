@@ -30,7 +30,8 @@ public partial class EditPage<TItem> : INotifyPropertyChanged
     public string ContinueNavigationPath { get; set; }
 
     [Parameter]
-    public bool DisplayFooter { get; set; } = true;
+    public bool DisplayFooter { get; set; } 
+        = true;
 
     [Parameter]
     public bool DisplaySaveContinueButton { get; set; } 

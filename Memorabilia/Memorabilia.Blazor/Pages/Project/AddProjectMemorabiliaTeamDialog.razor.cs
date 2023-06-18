@@ -81,7 +81,7 @@ public partial class AddProjectMemorabiliaTeamDialog
 
         var results = (Dictionary<string, string>)result.Data;
 
-        _ = int.TryParse(results["MemorabiliaId"], out int memorabiliaId);
+        _ = results["MemorabiliaId"].TryParse(out int memorabiliaId);
 
         projectMemorabiliaTeam.MemorabiliaId = memorabiliaId;
         projectMemorabiliaTeam.MemorabiliaFileName = results["MemorabiliaFileName"];

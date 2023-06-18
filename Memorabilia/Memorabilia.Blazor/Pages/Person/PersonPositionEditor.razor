@@ -1,21 +1,18 @@
-﻿<Div Class="row">
-    <Div Class="col-6">
+﻿<DivRowFormGroup>
+    <MudStack Class="col-10"
+              Row="true"
+              Style="margin-bottom:1%;">
         <PositionAutoComplete SelectedValue="Model.Position"
                               SelectionChanged="(p) => Model.Position = p"
                               Sports="Sports" />
-    </Div>
-    <Div Class="col-6">
         <MudSwitch Checked="@(Model.PositionType == PositionType.Primary)"
                    CheckedChanged="OnPositionTypeChange"
                    Color="MudBlazor.Color.Success"
                    Label="Is Primary?"
                    T="bool" />
-    </Div>
-</Div>
-<DivLeftAlign>
-    <AddButton OnClick="Add" />
-</DivLeftAlign>
-<br />
+        <AddMudFab OnAdd="Add" />
+    </MudStack>
+</DivRowFormGroup>
 <DivRowCol12>
     <MudTable Bordered="false"
               Dense="false"

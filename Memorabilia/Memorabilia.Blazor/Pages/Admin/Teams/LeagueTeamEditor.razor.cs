@@ -10,12 +10,11 @@ public partial class LeagueTeamEditor
 
     protected override async Task OnInitializedAsync()
     {
-        Initialize();
-
         Entity.TeamLeague[] leagues = await QueryRouter.Send(new GetTeamLeagues(TeamId));
 
-        EditModel.Leagues = leagues.ToEditModelList();
-
-        EditModel.SportLeagueLevel = SportLeagueLevel.Find(SportLeagueLevelId);
+        EditModel = new(TeamId, leagues.ToEditModelList())
+        {
+            SportLeagueLevel = SportLeagueLevel.Find(SportLeagueLevelId)
+        };
     }    
 }

@@ -1,28 +1,27 @@
-﻿<Div Class="row">
-    <Div Class="col-6">
-        <RecordTypeAutoComplete Disabled="@(!_canEditRecordType)" 
+﻿<DivRowFormGroup>
+    <MudStack Class="col-12"
+              Row="true"
+              Style="margin-bottom:1%;">
+        <RecordTypeAutoComplete Disabled="@(EditMode == EditModeType.Update)"
                                 ResetValueOnEmptyText="false"
                                 SelectedValue="Model.RecordType"
                                 SelectionChanged="(p) => Model.RecordType = p"
                                 Sports="Sports" />
-    </Div>
-    <Div Class="col-6">
         <TextField Label="Record"
                    SelectedText="@Model.Record"
                    SelectedTextChanged="@((p) => Model.Record = p)" />
-    </Div>
-</Div>
-<DivLeftAlign>
-    <Div Hidden="@(!_canAdd)">
-        <AddButton OnClick="Add" />
-    </Div>
-    <Div Hidden="@(!_canUpdate)">
-        <UpdateButton OnClick="Update" />
-    </Div>
-</DivLeftAlign>
-<br />
+        <Condition Evaluation="@(EditMode == EditModeType.Update)">
+            <Match>
+                <UpdateMudFab OnUpdate="Update" />
+            </Match>
+            <NotMatch>
+                <AddMudFab OnAdd="Add" />
+            </NotMatch>
+        </Condition>
+    </MudStack>
+</DivRowFormGroup>
 <Div Class="row">
-    <Div Class="col-6">
+    <Div Class="col-12">
          <MudTable Bordered="false"
                    Dense="false" 
                    Hover="true"

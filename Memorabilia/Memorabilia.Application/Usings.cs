@@ -7,6 +7,7 @@ global using Framework.Library.Handler;
 global using Framework.Library.Web;
 global using MediatR;
 global using Memorabilia.Application.Extensions;
+global using Memorabilia.Application.Features;
 global using Memorabilia.Application.Features.Admin.Commissioners;
 global using Memorabilia.Application.Features.Admin.Conferences;
 global using Memorabilia.Application.Features.Admin.DashboardItems;

@@ -12,13 +12,8 @@ public partial class PersonOccupationSelector
     protected PersonOccupationEditModel Model 
         = new();
 
-    private bool _canAdd 
-        = true;
-
-    private bool _canEditOccupation 
-        = true;
-
-    private bool _canUpdate;    
+    protected EditModeType EditMode
+        = EditModeType.Add;
 
     protected override void OnParametersSet()
     {
@@ -55,9 +50,7 @@ public partial class PersonOccupationSelector
         Model.Occupation = occupation.Occupation;
         Model.OccupationType = occupation.OccupationType;
 
-        _canAdd = false;
-        _canEditOccupation = false;
-        _canUpdate = true;
+        EditMode = EditModeType.Update;
 
         await OnOccupationChange.InvokeAsync();
     }
@@ -79,9 +72,7 @@ public partial class PersonOccupationSelector
 
         Model = new();
 
-        _canAdd = true;
-        _canEditOccupation = true;
-        _canUpdate = false;
+        EditMode = EditModeType.Add;
 
         await OnOccupationChange.InvokeAsync();
     }

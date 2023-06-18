@@ -1,15 +1,12 @@
-﻿<Div Class="row">
-    <Div Class="col-3">
-        <TextField Label="Nickname"
-                   MaxLength="100"
-                   SelectedText="@Model.Nickname"
-                   SelectedTextChanged="@((p) => Model.Nickname = p)" />
-    </Div>
-</Div>
-<DivLeftAlign>
-    <AddButton OnClick="Add" />
-</DivLeftAlign>
-<br />
+﻿<MudStack Class="col-4" 
+          Row="true"
+          Style="margin-left:-1%;margin-bottom:1%;">
+    <TextField Label="Nickname"
+               MaxLength="100"
+               SelectedText="@Model.Nickname"
+               SelectedTextChanged="@((p) => Model.Nickname = p)" />
+    <AddMudFab OnAdd="Add" />
+</MudStack>
 <Div Class="row">
     <Div Class="col-6">
          <MudTable Bordered="false"

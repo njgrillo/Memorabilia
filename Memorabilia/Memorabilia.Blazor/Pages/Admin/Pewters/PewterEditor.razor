@@ -11,28 +11,28 @@
           PageFooterNavigationPath="@EditModel.ExitNavigationPath"
           PageTitle="@EditModel.PageTitle"
           TItem="PewterEditModel">
-    <Div Class="row">
+    <DivRowFormGroup>
         <Div Class="col-3">
             <FranchiseAutoComplete SelectedValue="EditModel.Franchise"
                                    SelectionChanged="(p) => EditModel.Franchise = p"
                                    Sports="@(new [] { Sport.Football })" />
         </Div>
-    </Div>
-    <Div Class="row">
+    </DivRowFormGroup>
+    <DivRowFormGroup>
         <Div Class="col-3">
             <TeamDropDown Franchise="@EditModel.Franchise"
                           SelectedValue="@EditModel.TeamId"
                           SelectionChanged="(p) => EditModel.TeamId = p"
                           SportLeagueLevel="@SportLeagueLevel.NationalFootballLeague" />
         </Div>
-    </Div>
-    <Div Class="row">
+    </DivRowFormGroup>
+    <DivRowFormGroup>
         <Div Class="col-3">
             <ItemTypeSizeDropDown ItemType="@ItemType.Helmet"
                                   SelectedValue="@EditModel.SizeId"
                                   SelectionChanged="(p) => EditModel.SizeId = p" />
         </Div>
-    </Div>
+    </DivRowFormGroup>
     <Div Class="row">
         <Div Class="col-3">
             <InputFile id="fileInput"
@@ -46,6 +46,7 @@
                     for="fileInput" />
         </Div>
     </Div>
+    <br />
     <Div Class="row">
         <Div Class="col-3">
             <Condition Evaluation="_hasImage">

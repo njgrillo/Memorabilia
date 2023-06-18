@@ -9,8 +9,8 @@ public class DivisionAutoComplete : DomainEntityAutoComplete<Division>
 
     protected override void OnInitialized()
     {
-        Label = "Brand";
-        Placeholder = "Search by Brand...";
+        Label = "Division";
+        Placeholder = "Search by Division...";
 
         LoadItems();
     }

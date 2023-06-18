@@ -13,13 +13,8 @@ public partial class PersonHallOfFameEditor
     protected PersonHallOfFameEditModel Model
         = new();
 
-    private bool _canAddHallOfFame 
-        = true;
-
-    private bool _canEditSportLeagueLevel 
-        = true;
-
-    private bool _canUpdateHallOfFame;    
+    protected EditModeType EditMode
+        = EditModeType.Add;
 
     protected override void OnInitialized()
     {
@@ -47,9 +42,7 @@ public partial class PersonHallOfFameEditor
         Model.SportLeagueLevelId = hallOfFame.SportLeagueLevelId;
         Model.VotePercentage = hallOfFame.VotePercentage;
 
-        _canAddHallOfFame = false;
-        _canEditSportLeagueLevel = false;
-        _canUpdateHallOfFame = true;
+        EditMode = EditModeType.Update;
     }
 
     private void Update()
@@ -63,9 +56,7 @@ public partial class PersonHallOfFameEditor
 
         Model = new();
 
-        _canAddHallOfFame = true;
-        _canEditSportLeagueLevel = true;
-        _canUpdateHallOfFame = false;
+        EditMode = EditModeType.Add;
 
         if (SportLeagueLevels.Length == 1)
             Model.SportLeagueLevelId = SportLeagueLevels.First().Id;

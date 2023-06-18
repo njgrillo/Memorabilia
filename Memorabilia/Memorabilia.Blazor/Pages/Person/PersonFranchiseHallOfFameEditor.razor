@@ -1,25 +1,24 @@
-﻿<Div Class="row">
-    <Div Class="col-3">
-        <FranchiseHallOfFameAutoComplete Disabled="@(!_canEditFranchise)"
+﻿<DivRowFormGroup>
+    <MudStack Class="col-6"
+              Row="true"
+              Style="margin-bottom:1%;">
+        <FranchiseHallOfFameAutoComplete Disabled="@(EditMode == EditModeType.Update)"
                                          SelectedValue="Model.FranchiseHallOfFameType"
                                          SelectionChanged="(p) => Model.FranchiseHallOfFameType = p"
                                          Sports="Sports" />
-    </Div>
-    <Div Class="col-3">
         <NullableIntField Label="Induction Year"
                           Value="Model.Year"
                           ValueChanged="@((p) => Model.Year = p)" />
-    </Div>
-</Div>
-<DivLeftAlign>
-    <Div Hidden="@(!_canAdd)">
-        <AddButton OnClick="Add" />
-    </Div>
-    <Div Hidden="@(!_canUpdate)">
-        <UpdateButton OnClick="Update" />
-    </Div>
-</DivLeftAlign>
-<br />
+        <Condition Evaluation="@(EditMode == EditModeType.Update)">
+            <Match>
+                <UpdateMudFab OnUpdate="Update" />
+            </Match>
+            <NotMatch>
+                <AddMudFab OnAdd="Add" />
+            </NotMatch>
+        </Condition>
+    </MudStack>
+</DivRowFormGroup>
 <Div Class="row">
     <Div Class="col-6">
          <MudTable Bordered="false"

@@ -11,25 +11,25 @@
           PageFooterNavigationPath="@EditModel.ExitNavigationPath"
           PageTitle="@EditModel.PageTitle"
           TItem="PositionEditModel">
-    <Div Class="row">
+    <DivRowFormGroup>
         <Div Class="col-3">
             <SportDropDown Disabled="@(!EditModel.IsNew)"
                            SelectedValue="EditModel.SportId"
                            SelectionChanged="(p) => EditModel.SportId = p" />
         </Div>
-    </Div>
-    <Div Class="row">
+    </DivRowFormGroup>
+    <DivRowFormGroup>
         <Div Class="col-3">
             <TextField Label="Name"
                        SelectedText="@EditModel.Name"
                        SelectedTextChanged="@((p) => EditModel.Name = p)" />
         </Div>
-    </Div>
-    <Div Class="row">
+    </DivRowFormGroup>
+    <DivRowFormGroup>
         <Div Class="col-3">
             <TextField Label="Abbreviation"
                        SelectedText="@EditModel.Abbreviation"
                        SelectedTextChanged="@((p) => EditModel.Abbreviation = p)" />
         </Div>
-    </Div>
+    </DivRowFormGroup>
 </EditPage>

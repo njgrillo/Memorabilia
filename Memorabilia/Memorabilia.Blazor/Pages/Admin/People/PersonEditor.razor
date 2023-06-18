@@ -27,7 +27,7 @@
                      PanelClass="pa-6"
                      Rounded="true">
                 <MudTabPanel Text="Details">
-                    <Div Class="row">
+                    <DivRowFormGroup>
                         <Div Class="col-3">
                             <TextField Label="First Name"
                                        MaxLength="50"
@@ -55,8 +55,8 @@
                                        SelectedText="@EditModel.Suffix"
                                        SelectedTextChanged="@((p) => EditModel.Suffix = p)" />
                         </Div>
-                    </Div>
-                    <Div Class="row">
+                    </DivRowFormGroup>
+                    <DivRowFormGroup>
                         <Div Class="col-3">
                             <TextField Label="Calling Name"
                                        MaxLength="50"
@@ -82,7 +82,7 @@
                                        SelectedText="@EditModel.ProfileName"
                                        SelectedTextChanged="@((p) => EditModel.ProfileName = p)" />
                         </Div>
-                    </Div>
+                    </DivRowFormGroup>
                     <Div Class="row">
                         <Div Class="col-3">
                             <MudDatePicker @bind-Date="EditModel.BirthDate"

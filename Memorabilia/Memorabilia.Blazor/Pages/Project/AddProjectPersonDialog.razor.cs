@@ -81,7 +81,7 @@ public partial class AddProjectPersonDialog
 
         var results = (Dictionary<string, string>)result.Data;
 
-        _ = int.TryParse(results["AutographId"], out int autographId);
+        _ = results["AutographId"].TryParse(out int autographId);
 
         projectPerson.AutographId = autographId;
         projectPerson.AutographFileName = results["AutographFileName"];

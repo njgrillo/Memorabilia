@@ -1,23 +1,20 @@
-﻿<Div Class="row">
-    <Div Class="col-6">
+﻿<DivRowFormGroup>
+    <MudStack Class="col-12"
+              Row="true"
+              Style="margin-bottom:1%;">
         <AwardTypeAutoComplete ResetValueOnEmptyText="false"
                                SelectedValue="Model.AwardType"
                                SelectionChanged="(p) => Model.AwardType = p"
                                Sports="Sports" />
-    </Div>
-    <Div Class="col-6">
         <TextField HelperText="Ex. 1999 or 1999-2002 or 2003, 2005-2008"
                    Label="Years"
                    SelectedText="@_years"
-                   SelectedTextChanged="@((p) => _years = p)"/>
-    </Div>
-</Div>
-<DivLeftAlign>
-    <AddButton OnClick="Add" />
-</DivLeftAlign>
-<br />
+                   SelectedTextChanged="@((p) => _years = p)" />
+        <AddButton OnClick="Add" />
+    </MudStack>
+</DivRowFormGroup>
 <Div Class="row">
-    <Div Class="col-6">
+    <Div Class="col-12">
          <MudTable Bordered="false"
                    Dense="false" 
                    Hover="true"

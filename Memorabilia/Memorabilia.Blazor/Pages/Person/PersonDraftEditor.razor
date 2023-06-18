@@ -1,42 +1,37 @@
-﻿<Div Class="row">
-    <Div Class="col-3">
-        <FranchiseAutoComplete Disabled="@(!_canEditFranchise)"
+﻿<DivRowFormGroup>
+    <Div Class="col-6">
+        <FranchiseAutoComplete Disabled="@(EditMode == EditModeType.Update)"
                                SelectedValue="Model.Franchise"
                                SelectionChanged="(p) => Model.Franchise = p"
                                Sports="Model.Sports" />
     </Div>
-</Div>
-<Div Class="row">
-    <Div Class="col-3">
+</DivRowFormGroup>
+<DivRowFormGroup>
+    <MudStack Class="col-6"
+              Row="true"
+              Style="margin-bottom:1%;">        
         <NullableIntField Label="Year"
                           Value="Model.Year"
                           ValueChanged="@((p) => Model.Year = p)" />
-    </Div>
-    <Div Class="col-3">
         <NullableIntField Label="Round"
                           Value="Model.Round"
                           ValueChanged="@((p) => Model.Round = p)" />
-    </Div>
-    <Div Class="col-3">
         <NullableIntField Label="Pick"
                           Value="Model.Pick"
                           ValueChanged="OnPickChange" />
-    </Div>
-    <Div Class="col-3">
         <NullableIntField Label="Overall"
                           Value="Model.Overall"
                           ValueChanged="@((p) => Model.Overall = p)" />
-    </Div>
-</Div>
-<DivLeftAlign>
-    <Div Hidden="@(!_canAdd)">
-        <AddButton OnClick="Add" />
-    </Div>
-    <Div Hidden="@(!_canUpdate)">
-        <UpdateButton OnClick="Update" />
-    </Div>
-</DivLeftAlign>
-<br />
+        <Condition Evaluation="@(EditMode == EditModeType.Update)">
+            <Match>
+                <UpdateMudFab OnUpdate="Update" />
+            </Match>
+            <NotMatch>
+                <AddMudFab OnAdd="Add" />
+            </NotMatch>
+        </Condition>
+    </MudStack>
+</DivRowFormGroup>
 <Div Class="row">
     <Div Class="col-6">
          <MudTable Bordered="false"

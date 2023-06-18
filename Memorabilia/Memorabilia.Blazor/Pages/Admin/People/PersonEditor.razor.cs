@@ -6,7 +6,7 @@ public partial class PersonEditor
     [Inject]
     public PersonValidator Validator { get; set; }
 
-    private bool PerformValidation;
+    protected bool PerformValidation;
 
     protected async Task HandleValidSubmit()
     {

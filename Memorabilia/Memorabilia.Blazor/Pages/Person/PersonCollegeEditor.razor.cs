@@ -9,13 +9,8 @@ public partial class PersonCollegeEditor
     protected PersonCollegeEditModel Model
         = new();
 
-    private bool _canAdd 
-        = true;
-
-    private bool _canEditCollege 
-        = true;
-
-    private bool _canUpdate;    
+    protected EditModeType EditMode
+        = EditModeType.Add;
 
     private void Add()
     {
@@ -33,9 +28,7 @@ public partial class PersonCollegeEditor
         Model.BeginYear = college.BeginYear;
         Model.EndYear = college.EndYear;
 
-        _canAdd = false;
-        _canEditCollege = false;
-        _canUpdate = true;
+        EditMode = EditModeType.Update;
     }
 
     private void Update()
@@ -49,8 +42,6 @@ public partial class PersonCollegeEditor
 
         Model = new();
 
-        _canAdd = false;
-        _canEditCollege = false;
-        _canUpdate = true;
+        EditMode = EditModeType.Add;
     }
 }

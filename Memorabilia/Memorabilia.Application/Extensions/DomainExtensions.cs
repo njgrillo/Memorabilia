@@ -4,55 +4,15 @@ namespace Memorabilia.Application.Extensions;
 
 public static class DomainExtensions
 {
-    public static int[] ActiveIds(this List<PersonAccomplishmentEditModel> accomplishments)
-        => accomplishments.Where(accomplishment => !accomplishment.IsDeleted)
-                          .Select(accomplishment => accomplishment.Id)
-                          .ToArray();
+    public static int[] ActiveIds<T>(this List<T> items) where T : EditModel
+       => items.Where(item => !item.IsDeleted)
+               .Select(item => item.Id)
+               .ToArray() ?? Array.Empty<int>();
 
-    public static int[] ActiveIds(this List<PersonAllStarEditModel> allStars)
-        => allStars.Where(allStar => !allStar.IsDeleted)
-                   .Select(allStar => allStar.Id)
-                   .ToArray();
-
-    public static int[] ActiveIds(this List<PersonAwardEditModel> awards)
-        => awards.Where(award => !award.IsDeleted)
-                 .Select(award => award.Id)
-                 .ToArray();
-
-    public static int[] ActiveIds(this List<PersonCareerRecordEditModel> careerRecords)
-        => careerRecords.Where(careerRecord => !careerRecord.IsDeleted)
-                        .Select(careerRecord => careerRecord.Id)
-                        .ToArray();
-
-    public static int[] ActiveIds(this List<PersonCollegeRetiredNumberEditModel> collegeRetiredNumbers)
-        => collegeRetiredNumbers.Where(collegeRetiredNumber => !collegeRetiredNumber.IsDeleted)
-                                .Select(collegeRetiredNumber => collegeRetiredNumber.Id)
-                                .ToArray();
-
-    public static int[] ActiveIds(this List<PersonLeaderEditModel> leaders)
-       => leaders.Where(leader => !leader.IsDeleted)
-                 .Select(leader => leader.Id)
-                 .ToArray();
-
-    public static int[] ActiveIds(this List<PersonEditModel> people)
-        => people.Where(person => !person.IsDeleted)
-                 .Select(person => person.Id)
-                 .ToArray();
-
-    public static int[] ActiveIds(this List<PersonRetiredNumberEditModel> retiredNumbers)
-        => retiredNumbers.Where(retiredNumber => !retiredNumber.IsDeleted)
-                         .Select(retiredNumber => retiredNumber.Id)
-                         .ToArray();
-
-    public static int[] ActiveIds(this List<PersonSingleSeasonRecordEditModel> singleSeasonRecords)
-        => singleSeasonRecords.Where(singleSeasonRecord => !singleSeasonRecord.IsDeleted)
-                              .Select(singleSeasonRecord => singleSeasonRecord.Id)
-                              .ToArray();
-
-    public static int[] ActiveIds(this List<TeamEditModel> teams)
-        => teams.Where(team => !team.IsDeleted)
-                .Select(team => team.Id)
-                .ToArray();
+    public static int[] DeletedIds<T>(this List<T> items) where T : EditModel
+        => items.Where(item => item.IsDeleted)
+                .Select(item => item.Id)
+                .ToArray() ?? Array.Empty<int>(); 
 
     public static Constant.Sport[] ToConstantArray(this List<Entity.PersonSport> personSports)
         => personSports.Select(sport => Constant.Sport.Find(sport.SportId))

@@ -8,7 +8,7 @@
           PageFooterNavigationPath="@Model.PageFooterNavigationPath"
           PageTitle="@Model.PageTitle"
           TItem="DomainEditModel">
-    <Div Class="row">
+    <DivRowFormGroup>
         <Div Class="col-3">
             <TextField DisplaySkeleton="@(Model == null)" 
                        Label="Name"
@@ -16,8 +16,8 @@
                        SelectedText="@Model.Name"
                        SelectedTextChanged="@((p) => Model.Name = p)" />
         </Div>
-    </Div>
-    <Div Class="row">
+    </DivRowFormGroup>
+    <DivRowFormGroup>
         <Div Class="col-3">
             <TextField DisplaySkeleton="@(Model == null)" 
                        Label="Abbreviation"
@@ -25,7 +25,7 @@
                        SelectedText="@Model.Abbreviation"
                        SelectedTextChanged="@((p) => Model.Abbreviation = p)" />
         </Div>
-    </Div>
+    </DivRowFormGroup>
 </EditPage>
 
 

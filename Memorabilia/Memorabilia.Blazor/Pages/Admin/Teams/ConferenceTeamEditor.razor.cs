@@ -10,13 +10,12 @@ public partial class ConferenceTeamEditor
 
     protected override async Task OnInitializedAsync()
     {
-        Initialize();
-
         Entity.TeamConference[] teamConferences 
             = await QueryRouter.Send(new GetTeamConferences(TeamId));
 
-        EditModel.Conferences = teamConferences.ToEditModelList();
-
-        EditModel.SportLeagueLevel = SportLeagueLevel.Find(SportLeagueLevelId);           
+        EditModel = new(TeamId, teamConferences.ToEditModelList())
+        {
+            SportLeagueLevel = SportLeagueLevel.Find(SportLeagueLevelId)
+        };
     }    
 }

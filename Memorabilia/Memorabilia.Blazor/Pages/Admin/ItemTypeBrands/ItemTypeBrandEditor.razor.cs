@@ -1,7 +1,7 @@
 ﻿namespace Memorabilia.Blazor.Pages.Admin.ItemTypeBrands;
 
 public partial class ItemTypeBrandEditor 
-    : EditItemTypeItem<ItemTypeBrandEditModel, ItemTypeBrandModel>
+    : EditItem<ItemTypeBrandEditModel, ItemTypeBrandModel>
 {
     protected async Task HandleValidSubmit()
     {
@@ -10,11 +10,6 @@ public partial class ItemTypeBrandEditor
 
     protected override async Task OnInitializedAsync()
     {
-        Initialize();
-
-        if (DisplayItemType)
-            return;
-
         EditModel = (await QueryRouter.Send(new GetItemTypeBrand(Id))).ToEditModel();
     }
 }

@@ -16,39 +16,32 @@
         <TeamTimeline DisplayConference="EditModel.CanHaveConference" 
                       EditMode="EditModel.EditModeType"
                       SportLeagueLevel="EditModel.SportLeagueLevel"
-                      TeamId="EditModel.Id"
+                      TeamId="Id"
                       TeamStep="EditModel.TeamStep" />
     </TimelineContent>
     <ChildContent>
-        <Div Class="row" 
-             Hidden="@(!EditModel.DisplayFranchise)">
+        <DivRowFormGroup Hidden="@(!EditModel.DisplayFranchise)">
             <Div Class="col-3">
                 <SportLeagueLevelDropDown SelectedValue="EditModel.SportLeagueLevelId"
                                           SelectionChanged="(p) => EditModel.SportLeagueLevelId = p" />
             </Div>
-        </Div>
-        <Div Class="row">
             <Div Class="col-3">
                 <FranchiseAutoComplete SelectedValue="EditModel.Franchise"
                                        SelectionChanged="(p) => EditModel.Franchise = p"
                                        Sports="EditModel.Sports" />
             </Div>
-        </Div>
-        <Div Class="row">
             <Div Class="col-3">
                 <TextField Label="Name"
                            SelectedText="@EditModel.Name"
                            SelectedTextChanged="@((p) => EditModel.Name = p)" />
             </Div>
-        </Div>
-        <Div Class="row">
             <Div Class="col-3">
                 <TextField Label="Location"
                            SelectedText="@EditModel.Location"
                            SelectedTextChanged="@((p) => EditModel.Location = p)" />
             </Div>
-        </Div>
-        <Div Class="row">
+        </DivRowFormGroup>
+        <DivRowFormGroup>
             <Div Class="col-3">
                 <TextField Label="Nickname"
                            SelectedText="@EditModel.Nickname"
@@ -59,8 +52,6 @@
                            SelectedText="@EditModel.Abbreviation"
                            SelectedTextChanged="@((p) => EditModel.Abbreviation = p)" />
             </Div>
-        </Div>
-        <Div Class="row">
             <Div Class="col-3">
                 <NullableIntField Label="Begin Year"
                                   Value="EditModel.BeginYear"
@@ -71,6 +62,6 @@
                                   Value="EditModel.EndYear"
                                   ValueChanged="@((p) => EditModel.EndYear = p)" />
             </Div>
-        </Div>
+        </DivRowFormGroup>
     </ChildContent>
 </EditPage>

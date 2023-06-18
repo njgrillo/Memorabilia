@@ -11,40 +11,40 @@
           PageFooterNavigationPath="@EditModel.ExitNavigationPath"
           PageTitle="@EditModel.PageTitle"
           TItem="LeaguePresidentEditModel">
-    <Div Class="row">
+    <DivRowFormGroup>
         <Div Class="col-3">
             <SportLeagueLevelDropDown Disabled="@(!EditModel.IsNew)"
                                       SelectedValue="EditModel.SportLeagueLevelId"
                                       SelectionChanged="(p) => EditModel.SportLeagueLevelId = p" />
         </Div>
-    </Div>
-    <Div Class="row">
+    </DivRowFormGroup>
+    <DivRowFormGroup>
         <Div Class="col-3">
             <LeagueDropDown Disabled="@(!EditModel.IsNew)"
                             SelectedValue="EditModel.LeagueId"
                             SelectionChanged="(p) => EditModel.LeagueId = p"
                             SportLeagueLevel="@SportLeagueLevel.MajorLeagueBaseball" />
         </Div>
-    </Div>
-    <Div Class="row">
+    </DivRowFormGroup>
+    <DivRowFormGroup>
         <Div Class="col-3">
             <PersonDomainAutoComplete Disabled="@(!EditModel.IsNew)"
                                       SelectedValue="EditModel.Person"
                                       SelectionChanged="(p) => EditModel.Person = p" />
         </Div>
-    </Div>
-    <Div Class="row">
+    </DivRowFormGroup>
+    <DivRowFormGroup>
         <Div Class="col-3">
             <NullableIntField Label="Begin Year"
                               Value="EditModel.BeginYear"
                               ValueChanged="@((p) => EditModel.BeginYear = p)" />
         </Div>
-    </Div>
-    <Div Class="row">
+    </DivRowFormGroup>
+    <DivRowFormGroup>
         <Div Class="col-3">
             <NullableIntField Label="End Year"
                               Value="EditModel.EndYear"
                               ValueChanged="@((p) => EditModel.EndYear = p)" />
         </Div>
-    </Div>
+    </DivRowFormGroup>
 </EditPage>

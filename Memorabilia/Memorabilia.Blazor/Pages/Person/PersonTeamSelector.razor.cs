@@ -19,13 +19,8 @@ public partial class PersonTeamSelector
     protected PersonTeamEditModel Model
         = new();
 
-    private bool _canAdd 
-        = true;
-
-    private bool _canEditTeam 
-        = true;
-
-    private bool _canUpdate;    
+    protected EditModeType EditMode
+        = EditModeType.Add;
 
     private void Add()
     {
@@ -48,9 +43,7 @@ public partial class PersonTeamSelector
         Team = team;
         Model = team;
 
-        _canAdd = false;
-        _canEditTeam = false;
-        _canUpdate = true;
+        EditMode = EditModeType.Update;
     }
 
     private void Update()
@@ -67,8 +60,6 @@ public partial class PersonTeamSelector
         Team = new();
         Model = new();
 
-        _canAdd = true;
-        _canEditTeam = true;
-        _canUpdate = false;
+        EditMode = EditModeType.Add;
     }
 }

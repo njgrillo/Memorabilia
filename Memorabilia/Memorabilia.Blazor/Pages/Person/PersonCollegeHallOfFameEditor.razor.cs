@@ -12,13 +12,8 @@ public partial class PersonCollegeHallOfFameEditor
     protected PersonCollegeHallOfFameEditModel Model
         = new();
 
-    private bool _canAdd 
-        = true;
-
-    private bool _canEditCollege 
-        = true;
-
-    private bool _canUpdate;    
+    protected EditModeType EditMode
+        = EditModeType.Add;
 
     private void Add()
     {
@@ -36,9 +31,7 @@ public partial class PersonCollegeHallOfFameEditor
         Model.Sport = hallOfFame.Sport;
         Model.Year = hallOfFame.Year;
 
-        _canAdd = false;
-        _canEditCollege = false;
-        _canUpdate = true;
+        EditMode = EditModeType.Update;
     }
 
     private void Update()
@@ -53,8 +46,6 @@ public partial class PersonCollegeHallOfFameEditor
 
         Model = new();
 
-        _canAdd = true;
-        _canEditCollege = true;
-        _canUpdate = false;
+        EditMode = EditModeType.Add;
     }
 }

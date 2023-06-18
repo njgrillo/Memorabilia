@@ -12,13 +12,8 @@ public partial class TeamLeagueEditor
     protected TeamLeagueEditModel Model
         = new();
 
-    private bool _canAdd 
-        = true;
-
-    private bool _canEditLeague 
-        = true;
-
-    private bool _canUpdate;    
+    protected EditModeType EditMode
+        = EditModeType.Add;
 
     private void Add()
     {
@@ -33,9 +28,7 @@ public partial class TeamLeagueEditor
         Model.BeginYear = league.BeginYear;
         Model.EndYear = league.EndYear;
 
-        _canAdd = false;
-        _canEditLeague = false;
-        _canUpdate = true;
+        EditMode = EditModeType.Update;
     }
 
     private void Update()
@@ -49,8 +42,6 @@ public partial class TeamLeagueEditor
 
         Model = new();
 
-        _canAdd = false;
-        _canEditLeague = false;
-        _canUpdate = true;
+        EditMode = EditModeType.Add;
     }
 }

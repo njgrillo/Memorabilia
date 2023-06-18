@@ -26,7 +26,7 @@ public partial class ViewFranchises
 
     protected override bool FilterFunc(FranchiseModel model, string search)
     {
-        var isYear = int.TryParse(search, out var year);
+        bool isYear = search.TryParse(out int year);
 
         return search.IsNullOrEmpty() ||
                model.SportLeagueLevelName.Contains(search, StringComparison.OrdinalIgnoreCase) ||
