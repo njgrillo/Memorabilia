@@ -11,7 +11,7 @@
                                Model="EditModel"
                                TItem="CardEditModel">
             <AdditionalContent>
-                <Div Class="row">
+                <DivRowFormGroup>
                     <Div Class="col-3">
                         <OrientationDropDown SelectedValue="EditModel.OrientationId"
                                              SelectionChanged="(p) => EditModel.OrientationId = p" />
@@ -35,7 +35,7 @@
                                    Label="Custom?"
                                    T="bool" />
                     </Div>
-                </Div>
+                </DivRowFormGroup>
             </AdditionalContent>
         </MemorabiliaItemEditor>
     </Content>

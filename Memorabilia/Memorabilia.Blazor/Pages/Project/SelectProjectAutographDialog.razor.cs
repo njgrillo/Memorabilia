@@ -6,6 +6,9 @@ public partial class SelectProjectAutographDialog
     public ImageService ImageService { get; set; }
 
     [Inject]
+    public ProjectAutographPersonLinkService ProjectAutographPersonLinkService { get; set; }
+
+    [Inject]
     public QueryRouter QueryRouter { get; set; }
 
     [CascadingParameter]
@@ -14,8 +17,14 @@ public partial class SelectProjectAutographDialog
     [Parameter]
     public Dictionary<string, object> Parameters { get; set; }
 
+    [Parameter]
+    public int ProjectTypeId { get; set; }
+
     protected AutographModel[] Model 
         = Array.Empty<AutographModel>();
+
+    protected ProjectType ProjectType
+        => ProjectType.Find(ProjectTypeId);
 
     protected override async Task OnInitializedAsync()
     {
@@ -23,7 +32,7 @@ public partial class SelectProjectAutographDialog
             return;
 
         Entity.Autograph[] autographs 
-            = await QueryRouter.Send(new GetProjectPersonAutographLinks(Parameters));
+            = await ProjectAutographPersonLinkService.GetAutographs(ProjectType, Parameters);
 
         Model = autographs.Any()
                 ? autographs.Select(autograph => new AutographModel(autograph))

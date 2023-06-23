@@ -11,40 +11,41 @@
             </h3>
         </Div>
     </Div>
-    <Div Class="row">
+    <DivRowFormGroup>
         <Div Class="col-3">
-            <TextField Label="Name"
+            <TextField DisplaySkeleton="@(!Loaded)"
+                       Label="Name"
                        MaxLength="250"
                        SelectedText="@Model.Name"
                        SelectedTextChanged="@((p) => Model.Name = p)" />
         </Div>
         <Div Class="col-6">
-            <MudStack Row="true">
-                <TextField Label="Description"
-                           MaxLength="1000"
-                           SelectedText="@Model.Description"
-                           SelectedTextChanged="@((p) => Model.Description = p)" />
-                <AddButton OnClick="AddMemorabilia"
-                           Text="Add Memorabilia" />
-            </MudStack>
+            <TextField DisplaySkeleton="@(!Loaded)"
+                       Label="Description"
+                       MaxLength="1000"
+                       SelectedText="@Model.Description"
+                       SelectedTextChanged="@((p) => Model.Description = p)" />
         </Div>
-    </Div>
+    </DivRowFormGroup>
 </Div>
 <Condition Evaluation="Model.Items.Any()">
     <Match>
         <Div Class="row">
             <MemorabiliaFilter OnFilter="OnFilter" />
         </Div>
-        <Div Class="row">
-            <Div Class="col-3" 
-                 Style="margin-left:2%;">
-                <MudSwitch Checked="@IsDetailView"
-                           CheckedChanged="(p) => IsDetailView = p"
-                           Color="MudBlazor.Color.Success"
-                           Label="Detail View"
-                           T="bool" />
-            </Div>
-        </Div>
+        <DivRowFormGroup>
+            <Div Style="margin-left:2%;">
+                <MudStack Row="true">
+                    <MudSwitch Checked="@IsDetailView"
+                               CheckedChanged="(p) => IsDetailView = p"
+                               Color="MudBlazor.Color.Success"
+                               Label="Detail View"
+                               T="bool" />
+                    <AddButton OnClick="AddMemorabilia"
+                               Text="Add Memorabilia" />
+                </MudStack>
+            </Div>           
+        </DivRowFormGroup>
         <Div Class="row" 
              Style="margin-left:1%;margin-right:1%;">
             <Condition Evaluation="IsDetailView">
@@ -62,7 +63,3 @@
         <br />
     </Match>
 </Condition>
-<Div Style="margin-right:1%;margin-bottom:1%;text-align:right;">
-    <SaveButton OnClick="OnSave"
-                Text="Save" />
-</Div>

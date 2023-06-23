@@ -16,7 +16,7 @@ public static class DomainExtensions
 
     public static Constant.Sport[] ToConstantArray(this List<Entity.PersonSport> personSports)
         => personSports.Select(sport => Constant.Sport.Find(sport.SportId))
-                       .ToArray();
+                       .ToArray();    
 
     public static SpotEditModel ToEditModel(this Entity.Autograph autograph)
         => new(new SpotModel(autograph));
@@ -184,6 +184,16 @@ public static class DomainExtensions
     public static List<TeamLeagueEditModel> ToEditModelList(this Entity.TeamLeague[] leagues)
         => leagues.Select(league => new TeamLeagueEditModel(new TeamLeagueModel(league)))
                   .ToList();
+
+    public static string ToEditModeTypeName(this int id)
+        => id > 0
+            ? Constant.EditModeType.Update.Name
+            : Constant.EditModeType.Add.Name;
+
+    public static string ToEditModeTypeName(this Constant.EditModeType editModeType)
+        => editModeType == Constant.EditModeType.Update
+            ? Constant.EditModeType.Update.Name
+            : Constant.EditModeType.Add.Name;
 
     public static PersonImageEditModel ToImageEditModel(this Entity.Person person)
         => new(new PersonImageModel(person));

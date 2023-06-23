@@ -1,40 +1,47 @@
 ﻿@inherits AutographItem<SpotEditModel>
 
-<EditPage ContinueNavigationPath="@Model.ContinueNavigationPath"
-          EditMode="Model.EditModeType"
-          ExitNavigationPath="@Model.ExitNavigationPath"
-          ImageFileName="@Model.ImageFileName"
-          ItemName="@Model.ItemTypeName"
-          Model="Model"
-          OnSave="OnSave"
-          PageFooterButtonText="@Model.ExitButtonText"
-          PageFooterNavigationPath="@Model.BackNavigationPath"
-          PageTitle="@Model.PageTitle"
-          TItem="SpotEditModel"
-          UseMultipleButtons="true">
-    <TimelineContent>
-        <AutographTimeline AutographId="Model.AutographId" 
-                           AutographStep="Model.AutographStep"  
-                           DisplaySpot="Model.CanHaveSpot" 
-                           EditMode="Model.EditModeType"
-                           MemorabiliaId="Model.MemorabiliaId" />
-    </TimelineContent>
-    <ImagePreview>
-        <Condition Evaluation="Model.HasMemorabiliaImages">
-            <Match>
-                <DivRowCol12Center>
-                    <ViewMemorabiliaImagesButton MemorabiliaId="Model.MemorabiliaId" />
-                </DivRowCol12Center>
-            </Match>
-        </Condition>
-    </ImagePreview>
-    <ChildContent>
-        <Div Class="row">
-            <Div Class="col-3">
-                <ItemTypeSpotDropDown ItemType="@Model.ItemType"
-                                      SelectedValue="Model.SpotId"
-                                      SelectionChanged="(p) => Model.SpotId = p" />
-            </Div>
-        </Div>
-    </ChildContent>
-</EditPage>
+<PageLoader IsLoading="@(!IsLoaded)">
+    <EditPage ContinueNavigationPath="@Model.ContinueNavigationPath"
+              EditMode="Model.EditModeType"
+              ExitNavigationPath="@Model.ExitNavigationPath"
+              ImageFileName="@Model.ImageFileName"
+              ItemName="@Model.ItemTypeName"
+              Model="Model"
+              OnSave="OnSave"
+              PageFooterButtonText="@Model.ExitButtonText"
+              PageFooterNavigationPath="@Model.BackNavigationPath"
+              PageTitle="@Model.PageTitle"
+              TItem="SpotEditModel"
+              UseMultipleButtons="true">
+        <TimelineContent>
+            <AutographTimeline AutographId="Model.AutographId"
+                               AutographStep="Model.AutographStep"
+                               DisplaySpot="Model.CanHaveSpot"
+                               EditMode="Model.EditModeType"
+                               MemorabiliaId="Model.MemorabiliaId" />
+        </TimelineContent>
+        <ImagePreview>
+            <Condition Evaluation="Model.HasMemorabiliaImages">
+                <Match>
+                    <DivRowCol12Center>
+                        <ViewMemorabiliaImagesButton MemorabiliaId="Model.MemorabiliaId" />
+                    </DivRowCol12Center>
+                </Match>
+            </Condition>
+        </ImagePreview>
+        <ChildContent>
+            <DivRowFormGroup>
+                <Div Class="col-3">
+                    <Condition Evaluation="@(Model.ItemType != null)">
+                        <Match>
+                            <ItemTypeSpotDropDown ItemType="@Model.ItemType"
+                                                  SelectedValue="Model.SpotId"
+                                                  SelectionChanged="(p) => Model.SpotId = p" />
+                        </Match>
+                    </Condition>
+                </Div>
+            </DivRowFormGroup>
+        </ChildContent>
+    </EditPage>
+</PageLoader>
+

@@ -6,6 +6,10 @@ public abstract class AutographItem<T>
     [Parameter]
     public int AutographId { get; set; }
 
+    protected EditModeType EditMode { get; set; }
+
+    protected bool IsLoaded { get; set; }
+
     public T Model 
         = (T)Activator.CreateInstance(typeof(T));
 }

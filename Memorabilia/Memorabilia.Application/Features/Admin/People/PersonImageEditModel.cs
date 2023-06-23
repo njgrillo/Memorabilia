@@ -28,7 +28,7 @@ public class PersonImageEditModel : EditModel
         => "Image";    
 
     public override string PageTitle 
-        => $"{(EditModeType == Constant.EditModeType.Update ? Constant.EditModeType.Update.Name : Constant.EditModeType.Add.Name)} Image";
+        => $"{EditModeType.ToEditModeTypeName()} Image";
 
     public int PersonId { get; set; }
 

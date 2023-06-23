@@ -9,6 +9,9 @@ public partial class SelectProjectMemorabiliaDialog
     public NavigationManager NavigationManager { get; set; }
 
     [Inject]
+    public ProjectMemorabiliaTeamLinkService ProjectMemorabiliaTeamLinkService { get; set; }
+
+    [Inject]
     public QueryRouter QueryRouter { get; set; }
 
     [CascadingParameter]
@@ -17,15 +20,22 @@ public partial class SelectProjectMemorabiliaDialog
     [Parameter]
     public Dictionary<string, object> Parameters { get; set; }
 
+    [Parameter]
+    public int ProjectTypeId { get; set; }
+
     protected MemorabiliaModel[] Model 
         = Array.Empty<MemorabiliaModel>();
+
+    protected ProjectType ProjectType
+        => ProjectType.Find(ProjectTypeId);
 
     protected override async Task OnInitializedAsync()
     {
         if (!Parameters.Any())
             return;
 
-        Entity.Memorabilia[] memorabilia = await QueryRouter.Send(new GetProjectMemorabiliaTeamLinks(Parameters));
+        Entity.Memorabilia[] memorabilia
+            = await ProjectMemorabiliaTeamLinkService.GetMemorabilia(ProjectType, Parameters);
 
         Model = memorabilia.Any()
             ? memorabilia.Select(item => new MemorabiliaModel(item))

@@ -18,7 +18,7 @@
                                  MemorabiliaItemStep="Model.MemorabiliaItemStep" />
     </TimelineContent>
     <ChildContent>
-        <Div Class="row">
+        <DivRowFormGroup>
             <Div Class="col-3">
                 <ItemTypeAutoComplete Disabled="@(!Model.CanEditItemType)" 
                                       SelectedValue="Model.ItemType"
@@ -38,8 +38,8 @@
                 <PrivacyTypeDropDown SelectedValue="Model.PrivacyTypeId"
                                      SelectionChanged="(p) => Model.PrivacyTypeId = p" />
             </Div>
-        </Div>
-        <Div Class="row">
+        </DivRowFormGroup>
+        <DivRowFormGroup>
             <Div Class="col-3">
                 <AcquisitionTypeDropDown IsAutograph="false"
                                          SelectedValue="Model.AcquisitionTypeId"
@@ -65,8 +65,8 @@
                 <PurchaseTypeDropDown SelectedValue="Model.PurchaseTypeId"
                                       SelectionChanged="(p) => Model.PurchaseTypeId = p" />
             </Div>
-        </Div>
-        <Div Class="row">
+        </DivRowFormGroup>
+        <DivRowFormGroup>
             <Div Class="col-6">
                 <TextField Label="Notes"
                            Lines="10"
@@ -76,8 +76,8 @@
             <Div Class="col-6">
                 <MultiCollectionSelector SelectedCollections="Model.Collections" />
             </Div>
-        </Div>
-        <Div Class="row">
+        </DivRowFormGroup>
+        <DivRowFormGroup>
             <Div Class="col-6">
                 <MudStack Row="true">
                     <MudSwitch Checked="@Model.IsNumbered"
@@ -102,9 +102,8 @@
                                T="bool" />
                 </MudStack>
             </Div>
-        </Div>
-        <Div Class="row" 
-             Hidden="@(!Model.IsNumbered)">
+        </DivRowFormGroup>
+        <DivRowFormGroup Hidden="@(!Model.IsNumbered)">
             <Div Class="col-3">
                 <Div Class="row">
                     <Div Style="padding-left:15px; width:45%; flex:auto;">
@@ -121,6 +120,6 @@
                     </Div>
                 </Div>
             </Div>
-        </Div>        
+        </DivRowFormGroup>        
     </ChildContent>
 </EditPage>

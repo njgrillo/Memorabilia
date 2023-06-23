@@ -102,6 +102,7 @@ global using System.Collections.Generic;
 global using System.Diagnostics;
 global using System.IO;
 global using System.Linq;
+global using System.Net.Http;
 global using System.Security.Claims;
 global using System.Threading.Tasks;
 global using Constant = Memorabilia.Domain.Constants;

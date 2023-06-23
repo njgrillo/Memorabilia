@@ -9,7 +9,12 @@ public partial class ProjectSelector
     public EventCallback<ProjectType> OnProjectTypeSelected { get; set; }
 
     [Parameter]
-    public ProjectType SelectedProjectType { get; set; }    
+    public ProjectType SelectedProjectType { get; set; }  
+    
+    protected string SelectedProjectTypeDescription
+        => SelectedProjectType != null
+        ? SelectedProjectType.Description
+        : string.Empty;
 
     protected async Task ProjectTypeSelected(ProjectType projectType)
     {

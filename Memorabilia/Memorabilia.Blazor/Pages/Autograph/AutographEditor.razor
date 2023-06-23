@@ -1,144 +1,43 @@
 ﻿@inherits AutographItem<AutographEditModel>
 
-<EditPage ContinueNavigationPath="@Model.ContinueNavigationPath"
-          EditMode="Model.EditModeType"
-          ExitNavigationPath="@Model.ExitNavigationPath"
-          ImageFileName="@Model.ImageFileName"
-          ItemName="@Model.ItemTypeName"
-          Model="Model"
-          OnSave="OnSave"
-          PageFooterButtonText="@Model.ExitButtonText"
-          PageFooterNavigationPath="@Model.BackNavigationPath"
-          PageTitle="@Model.PageTitle"
-          PerformValidation="true"
-          TItem="AutographEditModel"
-          UseMultipleButtons="true"
-          ValidationResult="@Model.ValidationResult">
-    <TimelineContent>
-        <AutographTimeline AutographId="Model.Id" 
-                           AutographStep="Model.AutographStep"  
-                           DisplaySpot="Model.CanHaveSpot" 
-                           EditMode="Model.EditModeType"
-                           MemorabiliaId="Model.MemorabiliaId" />
-    </TimelineContent>
-    <ImagePreview>
-        <Condition Evaluation="Model.HasMemorabiliaImages">
-            <Match>
-                <DivRowCol12Center>
-                    <ViewMemorabiliaImagesButton MemorabiliaId="Model.MemorabiliaId" />
-                </DivRowCol12Center>
-            </Match>
-        </Condition>        
-    </ImagePreview>
-    <ChildContent>        
-        <Div Class="row">
-            <Div Class="col-6">
-                <Condition Evaluation="Model.CanImportPerson">
-                    <Match>
-                        <MudTooltip Text="Import from memorabilia item">
-                            <MudImage @onclick="@(_ => Model.Person = new PersonEditModel(Model.MemorabiliaPerson))"
-                                      Class="rounded-lg can-click"
-                                      Elevation="5"
-                                      Height="20"
-                                      ObjectFit="@ObjectFit.Cover"
-                                      Src="@(ImageService.GetDomainImageData(ImageFileName.Import))"
-                                      Width="20" />
-                        </MudTooltip>
-                    </Match>
-                </Condition>                
-                <PersonSelector SelectedPerson="Model.Person"
-                                SelectedPersonChanged="(p) => Model.Person = p" />  
-            </Div>
-        </Div>
-        <Div Class="row">
-            <Div Class="col-3">
-                <WritingInstrumentDropDown SelectedValue="Model.WritingInstrumentId"
-                                           SelectionChanged="(p) => Model.WritingInstrumentId = p" />
-            </Div>
-            <Div Class="col-3">
-                <ColorDropDown DisplayAutographColorsOnly="true"
-                               SelectedValue="Model.ColorId"
-                               SelectionChanged="(p) => Model.ColorId = p" />
-            </Div>
-            <Div Class="col-3">
-                <ConditionDropDown SelectedValue="Model.ConditionId"
-                                   SelectionChanged="(p) => Model.ConditionId = p" />
-            </Div>
-            <Div Class="col-3">
-                <NullableIntField Label="Grade"
-                                  Value="Model.Grade"
-                                  ValueChanged="@((p) => Model.Grade = p)" />
-            </Div>
-        </Div>
-        <Div Class="row">
-            <Div Class="col-6">
-                <TextField Label="Notes"
-                           Lines="10"
-                           SelectedText="@Model.Note"
-                           SelectedTextChanged="@((p) => Model.Note = p)" />
-            </Div>
-        </Div>
-        <Condition Evaluation="Model.DisplayAcquisitionDetails">
-            <Match>
-                <Div Class="row">
-                    <Div Class="col-3">
-                        <Div Style="display:flex">
-                            <AcquisitionTypeDropDown IsAutograph="true"
-                                                     SelectedValue="Model.AcquisitionTypeId"
-                                                     SelectionChanged="OnAcquisitionTypeChange" />
+<PageLoader IsLoading="@(!IsLoaded)">
+    <EditPage ContinueNavigationPath="@Model.ContinueNavigationPath"
+              EditMode="Model.EditModeType"
+              ExitNavigationPath="@Model.ExitNavigationPath"
+              ImageFileName="@Model.ImageFileName"
+              ItemName="@Model.ItemTypeName"
+              Model="Model"
+              OnSave="OnSave"
+              PageFooterButtonText="@Model.ExitButtonText"
+              PageFooterNavigationPath="@Model.BackNavigationPath"
+              PageTitle="@Model.PageTitle"
+              PerformValidation="true"
+              TItem="AutographEditModel"
+              UseMultipleButtons="true"
+              ValidationResult="@Model.ValidationResult">
+        <TimelineContent>
+            <AutographTimeline AutographId="Model.Id"
+                               AutographStep="Model.AutographStep"
+                               DisplaySpot="Model.CanHaveSpot"
+                               EditMode="Model.EditModeType"
+                               MemorabiliaId="Model.MemorabiliaId" />
+        </TimelineContent>
+        <ImagePreview>
+            <Condition Evaluation="Model.HasMemorabiliaImages">
+                <Match>
+                    <DivRowCol12Center>
+                        <ViewMemorabiliaImagesButton MemorabiliaId="Model.MemorabiliaId" />
+                    </DivRowCol12Center>
+                </Match>
+            </Condition>
+        </ImagePreview>
+        <ChildContent>
+            <DivRowFormGroup>
+                <Div Class="col-6">
+                    <Condition Evaluation="Model.CanImportPerson">
+                        <Match>
                             <MudTooltip Text="Import from memorabilia item">
-                                <MudImage @onclick="OnImportAcquisition"
-                                          Class="rounded-lg can-click"
-                                          Elevation="5"
-                                          Height="20"
-                                          ObjectFit="@ObjectFit.Cover"
-                                          Src="@(ImageService.GetDomainImageData(ImageFileName.Import))"
-                                          Width="20" />
-                            </MudTooltip>                            
-                        </Div>                        
-                    </Div>
-                    <Div Class="col-3"
-                         Hidden="@(!_displayAcquisitionDetails)">
-                        <MudDatePicker @bind-Date="Model.AcquiredDate"
-                                       Label="Acquired Date"
-                                       Variant="Variant.Outlined" />
-                    </Div>
-                    <Div Class="col-3"
-                         Hidden="@(!_displayAcquisitionDetails || !Model.CanHaveCost)">
-                        <NullableDecimalField Label="Cost ($)"
-                                              Value="Model.Cost"
-                                              ValueChanged="@((p) => Model.Cost = p)" />
-                    </Div>
-                    <Div Class="col-3"
-                         Hidden="@(!_displayAcquisitionDetails || !Model.CanHavePlaceOfPurchase)">
-                        <PurchaseTypeDropDown SelectedValue="Model.PurchaseTypeId"
-                                              SelectionChanged="(p) => Model.PurchaseTypeId = p" />
-                    </Div>
-                </Div>
-                <Condition Evaluation="Model.DisplayThroughTheMailDetails">
-                    <Match>
-                        <Div Class="row">
-                            <Div Class="col-3">
-                                <MudDatePicker @bind-Date="Model.SentDate"
-                                               Label="Sent Date"
-                                               Variant="Variant.Outlined" />
-                            </Div>
-                            <Div Class="col-3">
-                                <MudDatePicker @bind-Date="Model.ReceivedDate"
-                                               Label="Received Date"
-                                               Variant="Variant.Outlined" />
-                            </Div>
-                        </Div>
-                    </Match>
-                </Condition>  
-                <Div Class="row">
-                    <Div Class="col-3">
-                        <Div Style="display:flex">
-                            <NullableDecimalField Label="Estimated Value ($)"
-                                                  Value="Model.EstimatedValue"
-                                                  ValueChanged="@((p) => Model.EstimatedValue = p)" />
-                            <MudTooltip Text="Import from estimated value from item">
-                                <MudImage @onclick="OnImportEstimatedValue"
+                                <MudImage @onclick="@(_ => Model.Person = new PersonEditModel(Model.MemorabiliaPerson))"
                                           Class="rounded-lg can-click"
                                           Elevation="5"
                                           Height="20"
@@ -146,71 +45,174 @@
                                           Src="@(ImageService.GetDomainImageData(ImageFileName.Import))"
                                           Width="20" />
                             </MudTooltip>
-                        </Div>
-                    </Div>
+                        </Match>
+                    </Condition>
+                    <PersonSelector SelectedPerson="Model.Person"
+                                    SelectedPersonChanged="(p) => Model.Person = p" />
                 </Div>
-            </Match>
-        </Condition>
-        <Div Class="row">
-            <Div Class="col-3">
-                <MudSwitch Checked="@Model.FullName"
-                           CheckedChanged="(p) => Model.FullName = p"
-                           Color="MudBlazor.Color.Success"
-                           Label="Is Full Name?"
-                           T="bool" />
-            </Div>
-        </Div>       
-        <Div Class="row">
-            <Div Class="col-3">
-                <MudSwitch Checked="@Model.IsPersonalized"
-                           CheckedChanged="(p) => Model.IsPersonalized = p"
-                           Color="MudBlazor.Color.Success"
-                           Label="Is Personalized?"
-                           T="bool" />
-            </Div>
-        </Div>
-        <Condition Evaluation="Model.IsPersonalized">
-            <Match>
-                <Div Class="row">
-                    <Div Class="col-3">
-                        <TextField HelperText="Example: To Nick"
-                                   Label="Personalization Text"
-                                   SelectedText="@Model.PersonalizationText"
-                                   SelectedTextChanged="@((p) => Model.PersonalizationText = p)" />
-                    </Div>
+            </DivRowFormGroup>
+            <DivRowFormGroup>
+                <Div Class="col-3">
+                    <WritingInstrumentDropDown SelectedValue="Model.WritingInstrumentId"
+                                               SelectionChanged="(p) => Model.WritingInstrumentId = p" />
                 </Div>
-            </Match>
-        </Condition>        
-        <Div Class="row">
-            <Div Class="col-3">
-                <MudSwitch Checked="@Model.IsNumbered"
-                           CheckedChanged="(p) => Model.IsNumbered = p"
-                           Color="MudBlazor.Color.Success"
-                           Label="Is Numbered?"
-                           T="bool" />
-            </Div>
-        </Div>
-        <Condition Evaluation="Model.IsNumbered">
-            <Match>
-                <Div Class="row">
-                    <Div Class="col-3">
-                        <Div Class="row">
-                            <Div Style="padding-left:15px; width:45%; flex:auto;">
-                                <NumericField Label="Left Serial #"
-                                              TType="int?"
-                                              Value="Model.Numerator"
-                                              ValueChanged="@((p) => Model.Numerator = p)" />
-                            </Div>
-                            <Div Style="padding-right:15px; padding-left:5px; width:45%; flex:auto;">
-                                <NumericField Label="Right Serial #"
-                                              TType="int?"
-                                              Value="Model.Denominator"
-                                              ValueChanged="@((p) => Model.Denominator = p)" />
+                <Div Class="col-3">
+                    <ColorDropDown DisplayAutographColorsOnly="true"
+                                   SelectedValue="Model.ColorId"
+                                   SelectionChanged="(p) => Model.ColorId = p" />
+                </Div>
+                <Div Class="col-3">
+                    <ConditionDropDown SelectedValue="Model.ConditionId"
+                                       SelectionChanged="(p) => Model.ConditionId = p" />
+                </Div>
+                <Div Class="col-3">
+                    <NullableIntField Label="Grade"
+                                      Value="Model.Grade"
+                                      ValueChanged="@((p) => Model.Grade = p)" />
+                </Div>
+            </DivRowFormGroup>
+            <DivRowFormGroup>
+                <Div Class="col-6">
+                    <TextField Label="Notes"
+                               Lines="10"
+                               SelectedText="@Model.Note"
+                               SelectedTextChanged="@((p) => Model.Note = p)" />
+                </Div>
+            </DivRowFormGroup>
+            <Condition Evaluation="Model.DisplayAcquisitionDetails">
+                <Match>
+                    <DivRowFormGroup>
+                        <Div Class="col-3">
+                            <Div Style="display:flex">
+                                <AcquisitionTypeDropDown IsAutograph="true"
+                                                         SelectedValue="Model.AcquisitionTypeId"
+                                                         SelectionChanged="OnAcquisitionTypeChange" />
+                                <MudTooltip Text="Import from memorabilia item">
+                                    <MudImage @onclick="OnImportAcquisition"
+                                              Class="rounded-lg can-click"
+                                              Elevation="5"
+                                              Height="20"
+                                              ObjectFit="@ObjectFit.Cover"
+                                              Src="@(ImageService.GetDomainImageData(ImageFileName.Import))"
+                                              Width="20" />
+                                </MudTooltip>
                             </Div>
                         </Div>
-                    </Div>
+                        <Div Class="col-3"
+                             Hidden="@(!_displayAcquisitionDetails)">
+                            <MudDatePicker @bind-Date="Model.AcquiredDate"
+                                           Label="Acquired Date"
+                                           Variant="Variant.Outlined" />
+                        </Div>
+                        <Div Class="col-3"
+                             Hidden="@(!_displayAcquisitionDetails || !Model.CanHaveCost)">
+                            <NullableDecimalField Label="Cost ($)"
+                                                  Value="Model.Cost"
+                                                  ValueChanged="@((p) => Model.Cost = p)" />
+                        </Div>
+                        <Div Class="col-3"
+                             Hidden="@(!_displayAcquisitionDetails || !Model.CanHavePlaceOfPurchase)">
+                            <PurchaseTypeDropDown SelectedValue="Model.PurchaseTypeId"
+                                                  SelectionChanged="(p) => Model.PurchaseTypeId = p" />
+                        </Div>
+                    </DivRowFormGroup>
+                    <Condition Evaluation="Model.DisplayThroughTheMailDetails">
+                        <Match>
+                            <DivRowFormGroup>
+                                <Div Class="col-3">
+                                    <MudDatePicker @bind-Date="Model.SentDate"
+                                                   Label="Sent Date"
+                                                   Variant="Variant.Outlined" />
+                                </Div>
+                                <Div Class="col-3">
+                                    <MudDatePicker @bind-Date="Model.ReceivedDate"
+                                                   Label="Received Date"
+                                                   Variant="Variant.Outlined" />
+                                </Div>
+                            </DivRowFormGroup>
+                        </Match>
+                    </Condition>
+                    <DivRowFormGroup>
+                        <Div Class="col-3">
+                            <Div Style="display:flex">
+                                <NullableDecimalField Label="Estimated Value ($)"
+                                                      Value="Model.EstimatedValue"
+                                                      ValueChanged="@((p) => Model.EstimatedValue = p)" />
+                                <MudTooltip Text="Import from estimated value from item">
+                                    <MudImage @onclick="OnImportEstimatedValue"
+                                              Class="rounded-lg can-click"
+                                              Elevation="5"
+                                              Height="20"
+                                              ObjectFit="@ObjectFit.Cover"
+                                              Src="@(ImageService.GetDomainImageData(ImageFileName.Import))"
+                                              Width="20" />
+                                </MudTooltip>
+                            </Div>
+                        </Div>
+                    </DivRowFormGroup>
+                </Match>
+            </Condition>
+            <DivRowFormGroup>
+                <Div Class="col-3">
+                    <MudSwitch Checked="@Model.FullName"
+                               CheckedChanged="(p) => Model.FullName = p"
+                               Color="MudBlazor.Color.Success"
+                               Label="Is Full Name?"
+                               T="bool" />
                 </Div>
-            </Match>
-        </Condition>        
-    </ChildContent>
-</EditPage>
+            </DivRowFormGroup>
+            <DivRowFormGroup>
+                <Div Class="col-3">
+                    <MudSwitch Checked="@Model.IsPersonalized"
+                               CheckedChanged="(p) => Model.IsPersonalized = p"
+                               Color="MudBlazor.Color.Success"
+                               Label="Is Personalized?"
+                               T="bool" />
+                </Div>
+            </DivRowFormGroup>
+            <Condition Evaluation="Model.IsPersonalized">
+                <Match>
+                    <DivRowFormGroup>
+                        <Div Class="col-3">
+                            <TextField HelperText="Example: To Nick"
+                                       Label="Personalization Text"
+                                       SelectedText="@Model.PersonalizationText"
+                                       SelectedTextChanged="@((p) => Model.PersonalizationText = p)" />
+                        </Div>
+                    </DivRowFormGroup>
+                </Match>
+            </Condition>
+            <DivRowFormGroup>
+                <Div Class="col-3">
+                    <MudSwitch Checked="@Model.IsNumbered"
+                               CheckedChanged="(p) => Model.IsNumbered = p"
+                               Color="MudBlazor.Color.Success"
+                               Label="Is Numbered?"
+                               T="bool" />
+                </Div>
+            </DivRowFormGroup>
+            <Condition Evaluation="Model.IsNumbered">
+                <Match>
+                    <Div Class="row">
+                        <Div Class="col-3">
+                            <Div Class="row">
+                                <Div Style="padding-left:15px; width:45%; flex:auto;">
+                                    <NumericField Label="Left Serial #"
+                                                  TType="int?"
+                                                  Value="Model.Numerator"
+                                                  ValueChanged="@((p) => Model.Numerator = p)" />
+                                </Div>
+                                <Div Style="padding-right:15px; padding-left:5px; width:45%; flex:auto;">
+                                    <NumericField Label="Right Serial #"
+                                                  TType="int?"
+                                                  Value="Model.Denominator"
+                                                  ValueChanged="@((p) => Model.Denominator = p)" />
+                                </Div>
+                            </Div>
+                        </Div>
+                    </Div>
+                </Match>
+            </Condition>
+        </ChildContent>
+    </EditPage>
+</PageLoader>

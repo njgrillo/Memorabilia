@@ -10,14 +10,9 @@
                    Color="MudBlazor.Color.Success"
                    Label="Is Primary?"
                    T="bool" />
-        <Condition Evaluation="@(EditMode == EditModeType.Update)">
-            <Match>
-                <UpdateMudFab OnUpdate="Update" />
-            </Match>
-            <NotMatch>
-                <AddMudFab OnAdd="Add" />
-            </NotMatch>
-        </Condition>
+        <AddUpdateMudFab EditMode="EditMode"
+                         OnAdd="Add"
+                         OnUpdate="Update" />
     </MudStack>
 </DivRowFormGroup>
 <DivRowCol12>

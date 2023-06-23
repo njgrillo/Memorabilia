@@ -50,7 +50,7 @@ public class PersonSportServiceEditModel : EditModel
         => "Sport Service";
 
     public override string PageTitle 
-        => $"{(EditModeType == Constant.EditModeType.Update ? Constant.EditModeType.Update.Name : Constant.EditModeType.Add.Name)} {ItemTitle}";
+        => $"{EditModeType.ToEditModeTypeName()} {ItemTitle}";
 
     public int PersonId { get; set; }
 

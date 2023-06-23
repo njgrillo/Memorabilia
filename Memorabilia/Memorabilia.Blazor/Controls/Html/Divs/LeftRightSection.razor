@@ -1,9 +1,11 @@
 ﻿<Div Class="d-flex justify-content-between"
-     Style="width:100%">
-    <Div>
+     Style="@($"width:100%;{Style}")">
+    <Div Class="@LeftClass" 
+         Style="@LeftStyle">
         @Left
     </Div>
-    <Div>
+    <Div Class="@RightClass" 
+         Style="@RightStyle">
         @Right
     </Div>
 </Div>

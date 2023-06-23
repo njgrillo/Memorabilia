@@ -12,7 +12,7 @@ public class EditModel : Model
 
     public int Id { get; set; }
 
-    public bool IsDeleted { get; set; }
+    public bool IsDeleted { get; set; }    
 
     public bool IsModified 
         => Id > 0 && 

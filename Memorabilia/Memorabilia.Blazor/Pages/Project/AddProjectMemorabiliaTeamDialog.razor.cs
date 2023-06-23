@@ -56,6 +56,7 @@ public partial class AddProjectMemorabiliaTeamDialog
         var parameters = new Dictionary<string, object>
         {
             ["ItemTypeId"] = ItemTypeId,
+            ["ProjectTypeId"] = projectMemorabiliaTeam.Project.ProjectTypeId,
             ["TeamId"] = projectMemorabiliaTeam.Team.Id
         };
 
@@ -109,8 +110,6 @@ public partial class AddProjectMemorabiliaTeamDialog
 
                 break;
             case "Team":
-                parameters.Add("TeamId", Project.Team.TeamId);
-
                 if (Project.Team.Year.HasValue)
                     parameters.Add("TeamYear", Project.Team.Year);
 

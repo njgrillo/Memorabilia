@@ -18,6 +18,9 @@ public abstract partial class Autocomplete<TItem>
     public bool DisplaySkeleton { get; set; }
 
     [Parameter]
+    public string HelperText { get; set; }
+
+    [Parameter]
     public string Label { get; set; }    
 
     [Parameter]

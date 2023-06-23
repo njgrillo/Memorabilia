@@ -1,103 +1,96 @@
 ﻿@inherits AutographItem<InscriptionEditModel>
 
-<EditPage ContinueNavigationPath="@EditModel.ContinueNavigationPath"
-          EditMode="EditModel.EditModeType"
-          ExitNavigationPath="@EditModel.ExitNavigationPath"
-          ImageFileName="@EditModel.ImageFileName"
-          ItemName="@EditModel.PageTitle"
-          Model="EditModel"
-          OnSave="OnSave"
-          PageFooterButtonText="@EditModel.ExitButtonText"
-          PageFooterNavigationPath="@EditModel.BackNavigationPath"
-          PageTitle="@EditModel.PageTitle"
-          TItem="InscriptionsEditModel"
-          UseMultipleButtons="true"
-          ValidationResult="@Model.ValidationResult">
-    <TimelineContent>
-        <AutographTimeline AutographId="EditModel.AutographId" 
-                           AutographStep="EditModel.AutographStep"  
-                           DisplaySpot="EditModel.CanHaveSpot" 
-                           EditMode="EditModel.EditModeType"
-                           MemorabiliaId="EditModel.MemorabiliaId" />
-    </TimelineContent>
-    <ImagePreview>
-        <Condition Evaluation="EditModel.HasMemorabiliaImages">
-            <Match>
-                <DivRowCol12Center>
-                    <ViewMemorabiliaImagesButton MemorabiliaId="EditModel.MemorabiliaId" />
-                </DivRowCol12Center>
-            </Match>
-        </Condition>
-    </ImagePreview>
-    <ChildContent>
-        <Div Class="d-flex justify-content-between" 
-             Style="width:100%">
-            <Div Style="width:48%">
-                <Div Class="row">
-                    <Div Class="col-6">
-                        <InscriptionTypeDropDown Disabled="@(!_canEditInscriptionType)"
-                                                 SelectedValue="Model.InscriptionTypeId"
-                                                 SelectionChanged="(p) => Model.InscriptionTypeId = p" />
-                    </Div>
+<PageLoader IsLoading="@(!IsLoaded)">
+    <EditPage ContinueNavigationPath="@EditModel.ContinueNavigationPath"
+              EditMode="EditModel.EditModeType"
+              ExitNavigationPath="@EditModel.ExitNavigationPath"
+              ImageFileName="@EditModel.ImageFileName"
+              ItemName="@EditModel.PageTitle"
+              Model="EditModel"
+              OnSave="OnSave"
+              PageFooterButtonText="@EditModel.ExitButtonText"
+              PageFooterNavigationPath="@EditModel.BackNavigationPath"
+              PageTitle="@EditModel.PageTitle"
+              TItem="InscriptionsEditModel"
+              UseMultipleButtons="true"
+              ValidationResult="@Model.ValidationResult">
+        <TimelineContent>
+            <AutographTimeline AutographId="EditModel.AutographId"
+                               AutographStep="EditModel.AutographStep"
+                               DisplaySpot="EditModel.CanHaveSpot"
+                               EditMode="EditModel.EditModeType"
+                               MemorabiliaId="EditModel.MemorabiliaId" />
+        </TimelineContent>
+        <ImagePreview>
+            <Condition Evaluation="EditModel.HasMemorabiliaImages">
+                <Match>
+                    <DivRowCol12Center>
+                        <ViewMemorabiliaImagesButton MemorabiliaId="EditModel.MemorabiliaId" />
+                    </DivRowCol12Center>
+                </Match>
+            </Condition>
+        </ImagePreview>
+        <ChildContent>
+            <Div Class="d-flex justify-content-between"
+                 Style="width:100%">
+                <Div Style="width:48%">
+                    <DivRowFormGroup Style="margin-top:1%;margin-bottom:1%;">
+                        <MudStack Class="col-12"
+                                  Row="true"
+                                  Style="margin-bottom:1%;">
+                            <InscriptionTypeDropDown Disabled="@(EditMode == EditModeType.Update)"
+                                                     SelectedValue="Model.InscriptionTypeId"
+                                                     SelectionChanged="(p) => Model.InscriptionTypeId = p" />
+                            <TextField Label="Inscription"
+                                       SelectedText="@Model.InscriptionText"
+                                       SelectedTextChanged="@((p) => Model.InscriptionText = p)" />
+                            <AddUpdateMudFab EditMode="EditMode"
+                                             OnAdd="Add"
+                                             OnUpdate="Update" />
+                        </MudStack>
+                    </DivRowFormGroup>
+                    <DivRowCol12>
+                        <MudTable Bordered="false"
+                                  Dense="false"
+                                  Hover="true"
+                                  Items="@EditModel.Inscriptions.Where(inscription => !inscription.IsDeleted)"
+                                  Striped="true">
+                            <ToolBarContent>
+                                <MudText Typo="Typo.h6">Inscriptions</MudText>
+                            </ToolBarContent>
+                            <HeaderContent>
+                                <MudTh>Inscription Type</MudTh>
+                                <MudTh>Inscription Text</MudTh>
+                                <MudTh></MudTh>
+                            </HeaderContent>
+                            <RowTemplate Context="inscription">
+                                <MudTd DataLabel="Inscription Type">@inscription.InscriptionTypeName</MudTd>
+                                <MudTd DataLabel="Inscription Text">@inscription.InscriptionText</MudTd>
+                                <MudTd DataLabel="">
+                                    <MudTooltip Text="Edit">
+                                        <MudFab Color="MudBlazor.Color.Primary"
+                                                Icon="@Icons.Material.Outlined.ModeEditOutline"
+                                                OnClick="@(_ => Edit(inscription))" />
+                                    </MudTooltip>
+                                    <MudTooltip Text="Delete">
+                                        <MudFab Color="MudBlazor.Color.Secondary"
+                                                Icon="@Icons.Material.Outlined.DeleteOutline"
+                                                OnClick="@(_ => inscription.IsDeleted = true)" />
+                                    </MudTooltip>
+                                </MudTd>
+                            </RowTemplate>
+                        </MudTable>
+                    </DivRowCol12>
+                    <br />
                 </Div>
-                <Div Class="row">
-                    <Div Class="col-6">
-                        <TextField Label="Inscription"
-                                   SelectedText="@Model.InscriptionText"
-                                   SelectedTextChanged="@((p) => Model.InscriptionText = p)" />
-                    </Div>
+                <Div Style="width:48%">
+                    <DivRowCol12>
+                        <SuggestedInscriptions InscriptionSelected="OnSuggestedInscriptionSelected"
+                                               PersonId="EditModel.PersonId" />
+                    </DivRowCol12>
                 </Div>
-                <br/>
-                <DivRowCol12>
-                    <DivLeftAlign>
-                        <Div Hidden="@(!_canAddInscription)">
-                            <AddButton OnClick="AddInscription" />
-                        </Div>
-                        <Div Hidden="@(!_canUpdateInscription)">
-                            <UpdateButton OnClick="UpdateInscription" />
-                        </Div>
-                    </DivLeftAlign>
-                </DivRowCol12>
-                <DivRowCol12>
-                    <MudTable Bordered="false"
-                              Dense="false"
-                              Hover="true"
-                              Items="@EditModel.Inscriptions.Where(inscription => !inscription.IsDeleted)"
-                              Striped="true">
-                        <ToolBarContent>
-                            <MudText Typo="Typo.h6">Inscriptions</MudText>
-                        </ToolBarContent>
-                        <HeaderContent>
-                            <MudTh>Inscription Type</MudTh>
-                            <MudTh>Inscription Text</MudTh>
-                            <MudTh></MudTh>
-                        </HeaderContent>
-                        <RowTemplate Context="inscription">
-                            <MudTd DataLabel="Inscription Type">@inscription.InscriptionTypeName</MudTd>
-                            <MudTd DataLabel="Inscription Text">@inscription.InscriptionText</MudTd>
-                            <MudTd DataLabel="">
-                                <MudTooltip Text="Edit">
-                                    <MudFab Color="MudBlazor.Color.Primary"
-                                            Icon="@Icons.Material.Outlined.ModeEditOutline"
-                                            OnClick="@(_ => Edit(inscription))" />
-                                </MudTooltip>
-                                <MudTooltip Text="Delete">
-                                    <MudFab Color="MudBlazor.Color.Secondary"
-                                            Icon="@Icons.Material.Outlined.DeleteOutline"
-                                            OnClick="@(_ => inscription.IsDeleted = true)" />
-                                </MudTooltip>
-                            </MudTd>
-                        </RowTemplate>
-                    </MudTable>
-                </DivRowCol12>
-                <br />
             </Div>
-            <Div Style="width:48%">
-                <DivRowCol12>
-                    <SuggestedInscriptions InscriptionSelected="OnSuggestedInscriptionSelected"
-                                           PersonId="EditModel.PersonId" />
-                </DivRowCol12>
-            </Div>
-        </Div>      
-    </ChildContent>
-</EditPage>
+        </ChildContent>
+    </EditPage>
+</PageLoader>
+

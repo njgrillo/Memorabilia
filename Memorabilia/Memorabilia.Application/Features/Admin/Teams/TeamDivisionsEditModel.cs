@@ -59,7 +59,7 @@ public class TeamDivisionsEditModel : EditModel
         => Constant.AdminDomainItem.Divisions.ImageFileName;
 
     public override string PageTitle 
-        => $"{(EditModeType == Constant.EditModeType.Update ? Constant.EditModeType.Update.Name : Constant.EditModeType.Add.Name)} {Constant.AdminDomainItem.Divisions.Title}";
+        => $"{EditModeType.ToEditModeTypeName()} {Constant.AdminDomainItem.Divisions.Title}";
 
     public Constant.SportLeagueLevel SportLeagueLevel { get; set; }
 

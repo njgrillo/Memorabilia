@@ -1,31 +1,34 @@
 ﻿@inherits AutographItem<AutographImagesEditModel>
 
-<PageHeader PageTitle="@Model.PageTitle" />
-<AutographTimeline AutographId="Model.AutographId"
-                   AutographStep="Model.AutographStep"
-                   DisplaySpot="Model.CanHaveSpot"
-                   EditMode="Model.EditModeType"
-                   MemorabiliaId="Model.MemorabiliaId" />
-<EditImages @ref="EditImages"
-            CanImportImages="true"
-            ContinueNavigationPath="@Model.ContinueNavigationPath"
-            ExitNavigationPath="@Model.ExitNavigationPath"
-            Images="@Model.Images"
-            ImportButtonText="Import from Memorabilia"
-            MaximumAllowedFiles="10"
-            MaximumFileSize="10240000"
-            Model="Model"
-            OnImport="OnImport"
-            OnSave="OnSave"
-            PageTitle="@Model.PageTitle"
-            ReplaceImages="false"
-            SaveButtonText="Save & Add Another Autograph"
-            TItem="AutographImagesEditModel">
-    <AdditionalButtons>
-        <SaveButton OnClick="SaveAndAddAutograph"
-                    Text="Save & Add Autograph" />
-        <SaveButton OnClick="SaveAndAddItem"
-                    Text="Save & Add Item" />
-    </AdditionalButtons>
-</EditImages>
-<PageFooter NavigationPath="@Model.BackNavigationPath" />
+<PageLoader IsLoading="@(!IsLoaded)">
+    <PageHeader PageTitle="@Model.PageTitle" />
+    <AutographTimeline AutographId="Model.AutographId"
+                       AutographStep="Model.AutographStep"
+                       DisplaySpot="Model.CanHaveSpot"
+                       EditMode="Model.EditModeType"
+                       MemorabiliaId="Model.MemorabiliaId" />
+    <EditImages @ref="EditImages"
+                CanImportImages="true"
+                ContinueNavigationPath="@Model.ContinueNavigationPath"
+                ExitNavigationPath="@Model.ExitNavigationPath"
+                Images="@Model.Images"
+                ImportButtonText="Import from Memorabilia"
+                MaximumAllowedFiles="10"
+                MaximumFileSize="10240000"
+                Model="Model"
+                OnImport="OnImport"
+                OnSave="OnSave"
+                PageTitle="@Model.PageTitle"
+                ReplaceImages="false"
+                SaveButtonText="Save & Add Another Autograph"
+                TItem="AutographImagesEditModel">
+        <AdditionalButtons>
+            <SaveButton OnClick="SaveAndAddAutograph"
+                        Text="Save & Add Autograph" />
+            <SaveButton OnClick="SaveAndAddItem"
+                        Text="Save & Add Item" />
+        </AdditionalButtons>
+    </EditImages>
+    <PageFooter NavigationPath="@Model.BackNavigationPath" />
+</PageLoader>
+

@@ -1,6 +1,6 @@
 ﻿@typeparam TItem
 
-<Div Class="row">
+<DivRowFormGroup>
     <Div Class="col-3"
          Hidden="@(!DisplayItemTypeBrand)">
         <ItemTypeBrandDropDown ItemType="Model.ItemType"
@@ -35,9 +35,8 @@
             </Match>
         </Condition>
     </Div>
-</Div>
-<Div Class="row" 
-     Hidden="@(!DisplayItemTypeGameStyle)">
+</DivRowFormGroup>
+<DivRowFormGroup Hidden="@(!DisplayItemTypeGameStyle)">
     <Div Class="col-3"
          Hidden="@(!Model.DisplayGameStyleType)">
         <ItemTypeGameStyleDropDown ItemType="Model.ItemType"
@@ -54,7 +53,7 @@
                        Mask="@(new DateMask("MM/dd/yyyy"))"
                        Variant="Variant.Outlined" />
     </Div>
-</Div>
+</DivRowFormGroup>
 @AdditionalContent
 <Condition Evaluation="DisplaySinglePersonSelector">
     <Match>

@@ -14,6 +14,10 @@ public class SpotModel
     public int AutographId 
         => _autograph.Id;
 
+    public Constant.ItemType ItemType
+        => Constant.ItemType.Find(ItemTypeId);
+                    
+
     public int ItemTypeId 
         => _autograph.Memorabilia.ItemTypeId;
 

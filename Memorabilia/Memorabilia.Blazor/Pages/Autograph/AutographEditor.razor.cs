@@ -22,10 +22,13 @@ public partial class AutographEditor
         if (!model.Autographs.Any() || AutographId <= 0)
         {
             Model = new AutographEditModel(model);
+            IsLoaded = true;
             return;
         }
 
         GetModel(model);
+
+        IsLoaded = true;
     }
 
     protected async Task OnSave()

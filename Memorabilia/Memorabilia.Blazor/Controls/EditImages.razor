@@ -1,6 +1,6 @@
 ﻿@typeparam TItem
 
-<Div style="border: 1px solid black; margin-top: 2%; margin-bottom: 2%; margin-left: 2%; margin-right: 2%;">
+<Div Style="border: 1px solid black; margin-top: 2%; margin-bottom: 2%; margin-left: 2%; margin-right: 2%;">
     <EditForm Model="Model">
         <DivPad2>
             <DivRowCol12Center>
@@ -65,10 +65,17 @@
             </Div>
             <br />
             <DivLeftAlign>
-                @AdditionalButtons
-                <SaveButton OnClick="SaveAndExit"
-                            Text="Save & Exit" />
-                <CancelButton OnClick="Cancel" />
+                <LeftRightSection>
+                    <Right>
+                        <MudStack Row="true"
+                                  Style="margin-top:1%;margin-bottom:1%;">
+                            <CancelButton OnClick="Cancel" />
+                            @AdditionalButtons
+                            <SaveButton OnClick="SaveAndExit"
+                                        Text="Save & Exit" />                            
+                        </MudStack>
+                    </Right>
+                </LeftRightSection>                
             </DivLeftAlign>
             <br />
         </DivPad2>           

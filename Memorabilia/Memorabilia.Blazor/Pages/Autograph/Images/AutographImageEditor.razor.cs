@@ -16,6 +16,8 @@ public partial class AutographImageEditor
                                              autograph.ItemType,
                                              autograph.MemorabiliaId,
                                              autograph.Id);
+
+        IsLoaded = true;
     }
 
     protected async Task OnImport()

@@ -47,5 +47,5 @@ public class DomainEditModel : EditModel
         => NavigationPath;
 
     public override string PageTitle 
-        => $"{(EditModeType == Constant.EditModeType.Update ? Constant.EditModeType.Update.Name : Constant.EditModeType.Add.Name)} {DomainTypeName}";
+        => $"{EditModeType.ToEditModeTypeName()} {DomainTypeName}";
 }

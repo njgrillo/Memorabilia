@@ -10,7 +10,7 @@
                                Model="EditModel"
                                TItem="JerseyEditModel">
             <AdditionalContent>
-                <Div Class="row">
+                <DivRowFormGroup>
                     <Div Class="col-3">
                         <JerseyQualityTypeDropDown SelectedValue="EditModel.JerseyQualityTypeId"
                                                    SelectionChanged="(p) => EditModel.JerseyQualityTypeId = p" />
@@ -24,7 +24,7 @@
                         <JerseyStyleTypeDropDown SelectedValue="EditModel.JerseyStyleTypeId"
                                                  SelectionChanged="(p) => EditModel.JerseyStyleTypeId = p" />
                     </Div>
-                </Div>
+                </DivRowFormGroup>
             </AdditionalContent>
         </MemorabiliaItemEditor>
     </Content>

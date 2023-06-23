@@ -38,7 +38,7 @@ public class PersonTeamsEditModel : EditModel
         => Constant.AdminDomainItem.Teams.Title;
 
     public override string PageTitle 
-        => $"{(EditModeType == Constant.EditModeType.Update ? Constant.EditModeType.Update.Name : Constant.EditModeType.Add.Name)} {ItemTitle}";
+        => $"{EditModeType.ToEditModeTypeName()} {ItemTitle}";
 
     public int PersonId { get; set; }
 

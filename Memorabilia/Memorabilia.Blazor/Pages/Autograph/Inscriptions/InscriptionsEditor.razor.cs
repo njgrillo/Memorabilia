@@ -7,15 +7,7 @@ public partial class InscriptionsEditor
     public InscriptionValidator Validator { get; set; }
 
     protected InscriptionsEditModel EditModel 
-        = new();
-
-    private bool _canAddInscription 
-        = true;
-
-    private bool _canEditInscriptionType 
-        = true;
-
-    private bool _canUpdateInscription;    
+        = new();   
 
     protected override async Task OnInitializedAsync()
     {
@@ -28,6 +20,8 @@ public partial class InscriptionsEditor
                                               autograph.Id,
                                               autograph.MemorabiliaImageNames,
                                               autograph.PersonId);
+
+        IsLoaded = true;
     }
 
     protected async Task OnSave()
@@ -35,7 +29,7 @@ public partial class InscriptionsEditor
         await CommandRouter.Send(new SaveInscriptions.Command(EditModel));
     }
 
-    private void AddInscription()
+    private void Add()
     {
         Model.ValidationResult = Validator.Validate(Model);
 
@@ -52,9 +46,7 @@ public partial class InscriptionsEditor
         Model.InscriptionTypeId = inscription.InscriptionTypeId;
         Model.InscriptionText = inscription.InscriptionText;
 
-        _canAddInscription = false;
-        _canEditInscriptionType = false;
-        _canUpdateInscription = true;
+        EditMode = EditModeType.Update;
     }
 
     private void OnSuggestedInscriptionSelected(SuggestedInscriptionModel inscription)
@@ -63,7 +55,7 @@ public partial class InscriptionsEditor
         Model.InscriptionText = inscription.Text;
     }
 
-    private void UpdateInscription()
+    private void Update()
     {
         Model.ValidationResult = Validator.Validate(Model);
 
@@ -76,10 +68,8 @@ public partial class InscriptionsEditor
 
         inscription.InscriptionText = Model.InscriptionText;
 
-        Model = new();        
+        Model = new();
 
-        _canAddInscription = true;
-        _canEditInscriptionType = true;
-        _canUpdateInscription = false;
+        EditMode = EditModeType.Add;
     }
 }

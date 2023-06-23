@@ -116,7 +116,7 @@ public class PersonAccoladeEditModel : EditModel
         = new();
 
     public override string PageTitle 
-        => $"{(EditModeType == Constant.EditModeType.Update ? Constant.EditModeType.Update.Name : Constant.EditModeType.Add.Name)} Accolades";
+        => $"{EditModeType.ToEditModeTypeName()} Accolades";
 
     public int PersonId { get; set; }
 

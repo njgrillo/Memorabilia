@@ -12,7 +12,7 @@
                                Model="EditModel"
                                TItem="FigureEditModel" >
             <AdditionalContent>
-                <Div Class="row">
+                <DivRowFormGroup>
                     <Div Class="col-3">
                         <NullableIntField Label="Year"
                                           Maximum="int.MaxValue"
@@ -28,7 +28,7 @@
                                                      SelectedValue="EditModel.FigureSpecialtyTypeId"
                                                      SelectionChanged="(p) => EditModel.FigureSpecialtyTypeId = p" />
                     </Div>
-                </Div>
+                </DivRowFormGroup>
             </AdditionalContent>
         </MemorabiliaItemEditor>   
     </Content>

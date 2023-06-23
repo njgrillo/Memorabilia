@@ -44,7 +44,7 @@ public class AutographEditModel : EditModel
 
         MemorabiliaImageNames = model.Images
                                      .Select(image => image.FileName)
-                                     .ToArray();
+                                     .ToArray() ?? Array.Empty<string>();
 
         MemorabiliaPurchaseTypeId = model.Acquisition.PurchaseTypeId;
         ItemType = Constant.ItemType.Find(model.ItemTypeId);
@@ -177,6 +177,7 @@ public class AutographEditModel : EditModel
     public int MemorabiliaId { get; set; }
 
     public string[] MemorabiliaImageNames { get; }
+        = Array.Empty<string>();
 
     public PersonModel MemorabiliaPerson { get; set; }
 
@@ -187,7 +188,7 @@ public class AutographEditModel : EditModel
     public int? Numerator { get; set; }
 
     public override string PageTitle 
-        => $"{(Id > 0 ? Constant.EditModeType.Update.Name : Constant.EditModeType.Add.Name)} Autograph";
+        => $"{Id.ToEditModeTypeName()} Autograph";
 
     public PersonEditModel Person { get; set; } 
         = new();

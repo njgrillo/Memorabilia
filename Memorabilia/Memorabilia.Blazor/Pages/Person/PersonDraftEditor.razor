@@ -22,14 +22,9 @@
         <NullableIntField Label="Overall"
                           Value="Model.Overall"
                           ValueChanged="@((p) => Model.Overall = p)" />
-        <Condition Evaluation="@(EditMode == EditModeType.Update)">
-            <Match>
-                <UpdateMudFab OnUpdate="Update" />
-            </Match>
-            <NotMatch>
-                <AddMudFab OnAdd="Add" />
-            </NotMatch>
-        </Condition>
+        <AddUpdateMudFab EditMode="EditMode"
+                         OnAdd="Add"
+                         OnUpdate="Update" />
     </MudStack>
 </DivRowFormGroup>
 <Div Class="row">

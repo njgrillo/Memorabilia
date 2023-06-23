@@ -7,15 +7,7 @@ public partial class AuthenticationsEditor
     public AuthenticationValidator Validator { get; set; }
 
     protected AuthenticationsEditModel EditModel 
-        = new();
-
-    private bool _canAddAuthentication 
-        = true;
-
-    private bool _canEditAuthenticationCompany 
-        = true;
-
-    private bool _canUpdateAuthentication;     
+        = new();  
 
     protected override async Task OnInitializedAsync()
     {
@@ -27,6 +19,8 @@ public partial class AuthenticationsEditor
                                                  autograph.MemorabiliaId,
                                                  autograph.Id,
                                                  autograph.MemorabiliaImageNames);
+
+        IsLoaded = true;
     }
 
     protected async Task OnSave()
@@ -36,14 +30,14 @@ public partial class AuthenticationsEditor
         await CommandRouter.Send(new SaveAuthentications.Command(EditModel));
     }
 
-    private void AddAuthentication()
+    private void Add()
     {
         Model.ValidationResult = Validator.Validate(Model);
 
         if (!Model.ValidationResult.IsValid)
             return;
 
-        EditModel.Authentications.Add(Model);
+        EditModel.Authentications.Add(Model);        
 
         Model = new();
     }
@@ -56,12 +50,10 @@ public partial class AuthenticationsEditor
         Model.Verification = authentication.Verification;
         Model.Witnessed = authentication.Witnessed;
 
-        _canAddAuthentication = false;
-        _canEditAuthenticationCompany = false;
-        _canUpdateAuthentication = true;
+        EditMode = EditModeType.Update;
     }
 
-    private void UpdateAuthentication()
+    private void Update()
     {
         Model.ValidationResult = Validator.Validate(Model);
 
@@ -79,8 +71,6 @@ public partial class AuthenticationsEditor
 
         Model = new();
 
-        _canAddAuthentication = true;
-        _canEditAuthenticationCompany = true;
-        _canUpdateAuthentication = false;
+        EditMode = EditModeType.Add;
     }
 }

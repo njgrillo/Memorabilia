@@ -16,15 +16,15 @@
             <AdditionalContent>
                 <Condition Evaluation="EditModel.CanHaveBammerType">
                     <Match>
-                        <Div Class="row">
+                        <DivRowFormGroup>
                             <Div Class="col-3">
                                 <BammerTypeDropDown SelectedValue="EditModel.BammerTypeId"
                                                     SelectionChanged="(p) => EditModel.BammerTypeId = p" />
                             </Div>
-                        </Div>
+                        </DivRowFormGroup>
                     </Match>
                 </Condition>                
-                <Div Class="row">
+                <DivRowFormGroup>
                     <Div Class="col-3">
                         <NullableIntField Label="Year"
                                           Maximum="int.MaxValue"
@@ -38,7 +38,7 @@
                                    Label="Is In Package?"
                                    T="bool" />
                     </Div>
-                </Div>
+                </DivRowFormGroup>
             </AdditionalContent>
         </MemorabiliaItemEditor>  
     </Content>

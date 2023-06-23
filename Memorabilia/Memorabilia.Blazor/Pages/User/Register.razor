@@ -8,7 +8,7 @@
         </Match>
     </Condition>
     <p>Enter a valid Google email address.  You will use this email address to sign in.</p>
-    <Div Class="row">
+    <DivRowFormGroup>
         <Div Class="col-3">
             <TextField Label="Email Address"
                        MaxLength="100"
@@ -27,12 +27,12 @@
                        SelectedText="@EditModel.LastName"
                        SelectedTextChanged="@((p) => EditModel.LastName = p)" />
         </Div>
-    </Div>
+    </DivRowFormGroup>
     <br />
-    <Div Class="row">
+    <DivRowFormGroup>
         <Div Class="col-3">
             <SaveButton OnClick="Save"
                         Text="Save" />
         </Div>        
-    </Div>
+    </DivRowFormGroup>
 </Div>

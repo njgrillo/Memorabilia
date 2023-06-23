@@ -11,7 +11,8 @@ public partial class HelmetTypeDetails
     protected static int ItemTypeId 
         => ItemType.Helmet.Id;
 
-    private bool _displayCompleted = true;
+    private bool _displayCompleted 
+        = true;
 
     protected async Task AddProjectMemorabiliaTeam()
     {
@@ -65,7 +66,7 @@ public partial class HelmetTypeDetails
 
         var projectTeams = teams.Select(team => new ProjectMemorabiliaTeamModel(new Entity.ProjectMemorabiliaTeam
                                                 {
-                                                    ItemTypeId = Constant.ItemType.Helmet.Id,
+                                                    ItemTypeId = ItemType.Helmet.Id,
                                                     Project = new Entity.Project(Model.Name, Model.StartDate, Model.EndDate, Model.UserId, Model.ProjectType.Id),
                                                     ProjectId = Model.Id,
                                                     Team = team,

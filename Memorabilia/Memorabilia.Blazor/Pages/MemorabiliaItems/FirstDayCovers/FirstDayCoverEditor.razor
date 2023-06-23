@@ -13,7 +13,7 @@
                                Model="EditModel"
                                TItem="FirstDayCoverEditModel">
             <AdditionalContent>
-                <Div Class="row">
+                <DivRowFormGroup>
                     <Div Class="col-3">
                         <MudDatePicker @bind-Date="EditModel.Date"
                                        DateFormat="MM/dd/yyyy"
@@ -22,7 +22,7 @@
                                        Mask="@(new DateMask("MM/dd/yyyy"))"
                                        Variant="Variant.Outlined" />
                     </Div>
-                </Div>
+                </DivRowFormGroup>
             </AdditionalContent>
         </MemorabiliaItemEditor>   
     </Content>

@@ -6,6 +6,8 @@ public partial class SpotsEditor
     protected override async Task OnInitializedAsync()
     {
         Model = (await QueryRouter.Send(new Application.Features.Autograph.Spot.GetSpot(AutographId))).ToEditModel();
+
+        IsLoaded = true;
     }
 
     protected async Task OnSave()

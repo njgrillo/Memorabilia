@@ -12,7 +12,7 @@
                                Model="EditModel"
                                TItem="MagazineEditModel">
             <AdditionalContent>
-                <Div Class="row">
+                <DivRowFormGroup>
                     <Div Class="col-3">
                         <OrientationDropDown SelectedValue="EditModel.OrientationId"
                                              SelectionChanged="(p) => EditModel.OrientationId = p" />
@@ -25,8 +25,8 @@
                                        Mask="@(new DateMask("MM/dd/yyyy"))"
                                        Variant="Variant.Outlined" />
                     </Div>
-                </Div>
-                <Div Class="row">
+                </DivRowFormGroup>
+                <DivRowFormGroup>
                     <Div Class="col-3">
                         <MudSwitch Checked="@EditModel.Matted"
                                    CheckedChanged="(p) => EditModel.Matted = p"
@@ -34,7 +34,7 @@
                                    Label="Is Matted?"
                                    T="bool" />
                     </Div>
-                </Div>
+                </DivRowFormGroup>
             </AdditionalContent>
         </MemorabiliaItemEditor>
     </Content>

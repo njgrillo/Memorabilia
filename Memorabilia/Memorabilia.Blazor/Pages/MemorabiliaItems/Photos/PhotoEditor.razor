@@ -12,7 +12,7 @@
                                Model="EditModel"
                                TItem="PhotoEditModel">
             <AdditionalContent>
-                <Div Class="row">
+                <DivRowFormGroup>
                     <Div Class="col-3">
                         <PhotoTypeDropDown SelectedValue="EditModel.PhotoTypeId"
                                            SelectionChanged="(p) => EditModel.PhotoTypeId = p" />
@@ -21,8 +21,8 @@
                         <OrientationDropDown SelectedValue="EditModel.OrientationId"
                                              SelectionChanged="(p) => EditModel.OrientationId = p" />
                     </Div>
-                </Div>
-                <Div Class="row">
+                </DivRowFormGroup>
+                <DivRowFormGroup>
                     <Div Class="col-3">
                         <MudSwitch Checked="@EditModel.Matted"
                                    CheckedChanged="(p) => EditModel.Matted = p"
@@ -30,7 +30,7 @@
                                    Label="Is Matted?"
                                    T="bool" />
                     </Div>
-                </Div>
+                </DivRowFormGroup>
             </AdditionalContent>
         </MemorabiliaItemEditor>
     </Content>

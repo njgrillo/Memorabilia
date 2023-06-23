@@ -1,9 +1,5 @@
 ﻿<ProjectTypeAutoComplete Disabled="Disabled"
+                         HelperText="@SelectedProjectTypeDescription"
                          ResetValueOnEmptyText="false"
                          SelectedValue="SelectedProjectType"
                          SelectionChanged="(p) => ProjectTypeSelected(p)" />
-<Condition Evaluation="@(SelectedProjectType != null)">
-    <Match> 
-        @SelectedProjectType.Description
-    </Match>
-</Condition>

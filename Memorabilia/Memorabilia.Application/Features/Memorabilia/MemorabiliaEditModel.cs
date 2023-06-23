@@ -103,7 +103,7 @@ public class MemorabiliaEditModel : EditModel
     public int? Numerator { get; set; }
 
     public override string PageTitle 
-        => $"{(Id > 0 ? Constant.EditModeType.Update.Name : Constant.EditModeType.Add.Name)} {(ItemType?.Id > 0 ? ItemTypeName : "Memorabilia")}";
+        => $"{Id.ToEditModeTypeName()} {(ItemType?.Id > 0 ? ItemTypeName : "Memorabilia")}";
 
     public int PrivacyTypeId { get; set; } 
         = Constant.PrivacyType.Public.Id;

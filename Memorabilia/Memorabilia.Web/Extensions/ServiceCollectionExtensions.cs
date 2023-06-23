@@ -1,4 +1,6 @@
-﻿namespace Memorabilia.Web.Extensions;
+﻿using Memorabilia.Application.Features.Services.Projects;
+
+namespace Memorabilia.Web.Extensions;
 
 public static class ServiceCollectionExtensions
 {
@@ -55,6 +57,8 @@ public static class ServiceCollectionExtensions
         services.AddSingleton<IApplicationStateService, ApplicationStateService>();        
         services.AddSingleton<ImageService>();
         services.AddSingleton<PersonFilterService>();
+        services.AddSingleton<ProjectAutographPersonLinkService>();
+        services.AddSingleton<ProjectMemorabiliaTeamLinkService>();
         services.AddSingleton<SuggestedInscriptionService>();
         services.AddSingleton<TeamFilterService>();
     }

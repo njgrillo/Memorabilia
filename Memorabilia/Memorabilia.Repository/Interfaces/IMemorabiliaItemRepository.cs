@@ -11,11 +11,21 @@ public interface IMemorabiliaItemRepository
                                                  PageInfo pageInfo,
                                                  MemorabiliaSearchCriteria memorabiliaSearchCriteria = null);
 
-    Task<Entity.Memorabilia[]> GetAll(Dictionary<string, object> parameters, int userId);
-
     Task<PagedResult<Entity.Memorabilia>> GetAllByCollection(int collectionId,
                                                              PageInfo pageInfo,
                                                              MemorabiliaSearchCriteria memorabiliaSearchCriteria = null);
+
+    Task<Entity.Memorabilia[]> GetAllForHelmetProject(int itemTypeId,
+                                                      int? teamId,
+                                                      int? typeId,
+                                                      int? sizeId,
+                                                      int? finishId,
+                                                      int userId);
+
+    Task<Entity.Memorabilia[]> GetAllForTeamProject(int itemTypeId,
+                                                    int? teamId,
+                                                    int? teamYear,
+                                                    int userId);
 
     Task<Entity.Memorabilia[]> GetAllUnsigned(int userId);
 

@@ -124,24 +124,6 @@ public class MemorabiliaItemRepository
         return await query.ToPagedResult(pageInfo);
     }    
 
-    public async Task<Entity.Memorabilia[]> GetAll(Dictionary<string, object> parameters, int userId)
-    {
-        _ = parameters.TryGetValue("HelmetTypeId", out object helmetTypeId);
-        _ = parameters.TryGetValue("HelmetSizeId", out object helmetSizeId);
-        _ = parameters.TryGetValue("HelmetFinishId", out object helmetFinishId);
-        _ = parameters.TryGetValue("ItemTypeId", out object itemTypeId);
-        _ = parameters.TryGetValue("TeamId", out object teamId);
-        _ = parameters.TryGetValue("TeamYear", out object teamYear);      
-
-        return await Items.Where(memorabilia => (memorabilia.UserId == userId)
-                                                 && (teamId == null || memorabilia.Teams.Any(team => team.TeamId == (int)teamId))
-                                                 && (helmetTypeId == null || (memorabilia.Helmet != null && memorabilia.Helmet.HelmetTypeId == (int)helmetTypeId))
-                                                 && (helmetFinishId == null || (memorabilia.Helmet != null && memorabilia.Helmet.HelmetFinishId == (int)helmetFinishId))
-                                                 && (helmetSizeId == null || (memorabilia.Size != null && memorabilia.Size.SizeId == (int)helmetSizeId))
-                                                )
-                          .ToArrayAsync();
-    }
-
     public async Task<PagedResult<Entity.Memorabilia>> GetAllByCollection(int collectionId,
                                                                           PageInfo pageInfo,
                                                                           MemorabiliaSearchCriteria memorabiliaSearchCriteria = null)
@@ -197,6 +179,31 @@ public class MemorabiliaItemRepository
 
         return await query.ToPagedResult(pageInfo);
     }
+
+    public async Task<Entity.Memorabilia[]> GetAllForHelmetProject(int itemTypeId,
+                                                                   int? teamId,
+                                                                   int? typeId, 
+                                                                   int? sizeId, 
+                                                                   int? finishId, 
+                                                                   int userId)
+        => await Items.Where(memorabilia => (memorabilia.UserId == userId)
+                                         && memorabilia.ItemTypeId == itemTypeId
+                                         && (teamId == null || memorabilia.Teams.Any(team => team.TeamId == (int)teamId))
+                                         && (typeId == null || (memorabilia.Helmet != null && memorabilia.Helmet.HelmetTypeId == typeId.Value))
+                                         && (finishId == null || (memorabilia.Helmet != null && memorabilia.Helmet.HelmetFinishId == finishId.Value))
+                                         && (sizeId == null || (memorabilia.Size != null && memorabilia.Size.SizeId == sizeId.Value))
+                            )
+                      .ToArrayAsync();
+
+    public async Task<Entity.Memorabilia[]> GetAllForTeamProject(int itemTypeId,
+                                                                 int? teamId, 
+                                                                 int? teamYear,
+                                                                 int userId)
+        => await Items.Where(memorabilia => (memorabilia.UserId == userId)
+                                         && memorabilia.ItemTypeId == itemTypeId
+                                         && (teamId == null || memorabilia.Teams.Any(team => team.TeamId == (int)teamId))
+                            )
+                      .ToArrayAsync();
 
     public async Task<Entity.Memorabilia[]> GetAllUnsigned(int userId)
         => await Memorabilia.Where(memorabilia => memorabilia.UserId == userId && !memorabilia.Autographs.Any())

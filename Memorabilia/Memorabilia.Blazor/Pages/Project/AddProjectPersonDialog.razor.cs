@@ -56,7 +56,8 @@ public partial class AddProjectPersonDialog
         var parameters = new Dictionary<string, object>
         {
             ["ItemTypeId"] = ItemTypeId,
-            ["PersonId"] = projectPerson.Person.Id
+            ["PersonId"] = projectPerson.Person.Id,
+            ["ProjectTypeId"] = Project.ProjectType.Id
         };
 
         SetProjectDetailsParameters(parameters);

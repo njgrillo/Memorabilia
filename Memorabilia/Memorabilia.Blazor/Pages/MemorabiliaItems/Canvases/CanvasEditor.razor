@@ -12,13 +12,13 @@
                                Model="EditModel"
                                TItem="CanvasEditModel">
             <AdditionalContent>
-                <Div Class="row">
+                <DivRowFormGroup>
                     <Div Class="col-3">
                         <OrientationDropDown SelectedValue="EditModel.OrientationId"
                                              SelectionChanged="(p) => EditModel.OrientationId = p" />
                     </Div>                    
-                </Div>
-                <Div Class="row">
+                </DivRowFormGroup>
+                <DivRowFormGroup>
                     <Div Class="col-3">
                         <MudSwitch Checked="@EditModel.Matted"
                                    CheckedChanged="(p) => EditModel.Matted = p"
@@ -33,7 +33,7 @@
                                    Label="Stretched?"
                                    T="bool" />
                     </Div>
-                </Div>
+                </DivRowFormGroup>
             </AdditionalContent>
         </MemorabiliaItemEditor>
     </Content>

@@ -36,7 +36,7 @@ public class TeamChampionshipsEditModel : EditModel
         => Constant.ImageFileName.ChampionshipTypes;
 
     public override string PageTitle 
-        => $"{(EditModeType == Constant.EditModeType.Update ? Constant.EditModeType.Update.Name : Constant.EditModeType.Add.Name)} Championships";
+        => $"{EditModeType.ToEditModeTypeName()} Championships";
 
     public Constant.SportLeagueLevel SportLeagueLevel { get; set; }
 

@@ -9,7 +9,7 @@
                                Model="EditModel"
                                TItem="BaseballEditModel">
             <AdditionalContent>
-                <Div Class="row">
+                <DivRowFormGroup>
                     <Div Class="col-3"
                          Hidden="@(!EditModel.DisplayBaseballType)">
                         <BaseballTypeDropDown GameStyleType="EditModel.GameStyleType"
@@ -53,7 +53,7 @@
                             </Match>
                         </Condition>
                     </Div>
-                </Div>
+                </DivRowFormGroup>
             </AdditionalContent>
         </MemorabiliaItemEditor>
     </Content>

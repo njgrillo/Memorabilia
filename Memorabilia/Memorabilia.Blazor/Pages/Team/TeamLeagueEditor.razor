@@ -12,14 +12,9 @@
         <NullableIntField Label="End Year"
                           Value="Model.EndYear"
                           ValueChanged="@((p) => Model.EndYear = p)" />
-        <Condition Evaluation="@(EditMode == EditModeType.Update)">
-            <Match>
-                <UpdateMudFab OnUpdate="Update" />
-            </Match>
-            <NotMatch>
-                <AddMudFab OnAdd="Add" />
-            </NotMatch>
-        </Condition>
+        <AddUpdateMudFab EditMode="EditMode"
+                         OnAdd="Add"
+                         OnUpdate="Update" />
     </MudStack>
 </DivRowFormGroup>
 <Div Class="row">

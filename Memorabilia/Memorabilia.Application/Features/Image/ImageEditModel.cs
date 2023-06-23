@@ -33,5 +33,5 @@ public class ImageEditModel : EditModel
     public DateTime UploadDate { get; set; }
 
     public override string PageTitle 
-        => $"{(Id > 0 ? Constant.EditModeType.Update.Name : Constant.EditModeType.Add.Name)} Image";
+        => $"{Id.ToEditModeTypeName()} Image";
 }

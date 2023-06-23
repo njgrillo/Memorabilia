@@ -16,7 +16,7 @@ public class ItemEditModel : EditModel
         => Constant.MemorabiliaItemStep.Detail;
 
     public override string PageTitle
-        => $"{(EditModeType == Constant.EditModeType.Update ? Constant.EditModeType.Update.Name : Constant.EditModeType.Add.Name)} {ItemType?.Name} Details";
+        => $"{EditModeType.ToEditModeTypeName()} {ItemType?.Name} Details";
 
     public bool SavedSuccessfully { get; set; }
 }

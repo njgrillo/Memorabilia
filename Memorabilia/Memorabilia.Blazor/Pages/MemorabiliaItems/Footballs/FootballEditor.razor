@@ -9,7 +9,7 @@
                                Model="EditModel"
                                TItem="FootballEditModel">
             <AdditionalContent>
-                <Div Class="row">
+                <DivRowFormGroup>
                     <Div Class="col-3">
                         <FootballTypeDropDown GameStyleType="EditModel.GameStyleType"
                                               SelectedValue="EditModel.FootballTypeId"
@@ -20,7 +20,7 @@
                                               SelectionChanged="(p) => EditModel.CommissionerId = p"
                                               SportLeagueLevel="@SportLeagueLevel.NationalFootballLeague" />
                     </Div>
-                </Div>
+                </DivRowFormGroup>
             </AdditionalContent>
         </MemorabiliaItemEditor>
     </Content>

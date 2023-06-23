@@ -1,21 +1,16 @@
-﻿<Div Class="row">
-    <Div Class="col-3">
+﻿<Div Class="row"
+     Style="margin-left:1%">
+    <MudStack Row="true">
         <MudSwitch Checked="@_displayCompleted"
                    CheckedChanged="(p) => _displayCompleted = p"
                    Color="MudBlazor.Color.Success"
                    Label="Display Completed?"
                    T="bool" />
-    </Div>
-    <Div Class="col-6" />
-    <Div Class="col-3" 
-         Style="text-align:right;">
-        <MudStack Row="true">
-            <CustomButton OnClick="OnImport"
-                          Text="Import" />
-            <AddButton OnClick="AddProjectMemorabiliaTeam"
-                       Text="Add Project Memorabilia Team" />
-        </MudStack>        
-    </Div>
+        <CustomButton OnClick="OnImport"
+                      Text="Import" />
+        <AddButton OnClick="AddProjectMemorabiliaTeam"
+                   Text="Add Project Memorabilia Team" />
+    </MudStack>
 </Div>
 <Div Style="margin-right:1%;">
     <ProjectMemorabiliaTeamGrid Items="Model.MemorabiliaTeams.Where(item => _displayCompleted || item.ProjectStatusTypeId != ProjectStatusType.Completed.Id).ToList()"

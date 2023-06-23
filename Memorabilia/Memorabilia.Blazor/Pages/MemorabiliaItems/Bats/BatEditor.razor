@@ -10,7 +10,7 @@
                                Model="EditModel"
                                TItem="BatEditModel">
             <AdditionalContent>
-                <Div Class="row">
+                <DivRowFormGroup>
                     <Div Class="col-3">
                         <BatTypeDropDown GameStyleType="EditModel.GameStyleType"
                                          SelectedValue="EditModel.BatTypeId"
@@ -27,7 +27,7 @@
                                           Value="EditModel.Length"
                                           ValueChanged="@((p) => EditModel.Length = p)" />
                     </Div>
-                </Div>
+                </DivRowFormGroup>
             </AdditionalContent>
         </MemorabiliaItemEditor>
     </Content>

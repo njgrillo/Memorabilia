@@ -40,6 +40,6 @@ public class SaveMemorabiliaImage
         public string PrimaryImageFileName 
             => _editModel.Images
                          .SingleOrDefault(image => image.ImageTypeId == Constant.ImageType.Primary.Id)?
-                         .FileName;
+                         .FileName ?? string.Empty;
     }
 }

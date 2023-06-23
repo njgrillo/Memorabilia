@@ -133,7 +133,7 @@ public class AutographModel : Model
         => _autograph.Memorabilia
                      .Images
                      .Select(image => image.FileName)
-                     .ToArray();
+                     .ToArray() ?? Array.Empty<string>();
 
     public string Note 
         => _autograph.Note;

@@ -14,14 +14,14 @@
                                Model="EditModel"
                                TItem="JerseyNumberEditModel">
             <AdditionalContent>
-                <Div Class="row">
+                <DivRowFormGroup>
                     <Div Class="col-3">
                         <NullableIntField Label="Number"
                                           Maximum="99"
                                           Value="EditModel.Number"
                                           ValueChanged="@((p) => EditModel.Number = p)" />
                     </Div>
-                </Div>
+                </DivRowFormGroup>
             </AdditionalContent>
         </MemorabiliaItemEditor>
     </Content>

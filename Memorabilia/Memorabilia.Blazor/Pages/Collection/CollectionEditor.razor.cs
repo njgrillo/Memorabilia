@@ -29,6 +29,8 @@ public partial class CollectionEditor
     protected bool IsDetailView 
         = true;
 
+    protected bool Loaded;
+
     protected CollectionEditModel Model 
         = new();
 
@@ -67,19 +69,18 @@ public partial class CollectionEditor
                 UserId = ApplicationStateService.CurrentUser.Id
             };
 
+            Loaded = true;
+
             return;
         }
 
         await Load();
+
+        Loaded = true;
     }
 
     protected async Task AddMemorabilia()
     {
-        var parameters = new DialogParameters
-        {
-            ["UserId"] = ApplicationStateService.CurrentUser.Id
-        };
-
         var options = new DialogOptions()
         {
             MaxWidth = MaxWidth.ExtraLarge,
@@ -87,7 +88,9 @@ public partial class CollectionEditor
             DisableBackdropClick = true
         };
 
-        var dialog = DialogService.Show<AddCollectionMemorabiliaDialog>(string.Empty, parameters, options);
+        var dialog = DialogService.Show<AddCollectionMemorabiliaDialog>(string.Empty, 
+                                                                        new DialogParameters(), 
+                                                                        options);
         var result = await dialog.Result;
 
         if (result.Canceled)
@@ -108,6 +111,13 @@ public partial class CollectionEditor
         await Load();
     }
 
+    private async Task Load()
+    {
+        Entity.Collection collection = await QueryRouter.Send(new GetCollection(Id));
+
+        Model = new CollectionEditModel(collection);
+    }
+
     protected async Task OnSave()
     {
         var command = new SaveCollection.Command(Model);
@@ -124,12 +134,5 @@ public partial class CollectionEditor
         Id = command.Id;
 
         await Load();
-    }
-
-    private async Task Load()
-    {
-        Entity.Collection collection = await QueryRouter.Send(new GetCollection(Id));
-
-        Model = new CollectionEditModel(collection);
-    }
+    }    
 }
