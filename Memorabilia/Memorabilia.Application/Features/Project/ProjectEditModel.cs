@@ -108,8 +108,6 @@ public class ProjectEditModel : EditModel
     public Entity.ProjectTeam Team { get; set; } 
         = new();
 
-    [Required]
-    [Range(1, int.MaxValue, ErrorMessage = "User Id is required.")]
     public int UserId { get; set; }
 
     public Entity.ProjectWorldSeries WorldSeries { get; set; } 

@@ -32,5 +32,7 @@ public partial class SportServicePersonEditor
         EditModel = new PersonSportServiceEditModel(PersonId, new PersonSportServiceModel(person));
 
         PerformValidation = true;
+
+        IsLoaded = true;
     }    
 }

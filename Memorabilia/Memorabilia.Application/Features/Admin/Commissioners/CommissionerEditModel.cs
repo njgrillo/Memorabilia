@@ -26,7 +26,6 @@ public class CommissionerEditModel : EditModel
     public override string ItemTitle 
         => Constant.AdminDomainItem.Commissioners.Item;    
 
-    [Required]
     public PersonModel Person { get; set; }
 
     public override string RoutePrefix 
@@ -34,6 +33,5 @@ public class CommissionerEditModel : EditModel
 
     public Entity.Sport Sport { get; set; }
 
-    [Required]
     public int SportLeagueLevelId { get; set; }
 }

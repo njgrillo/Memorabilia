@@ -29,11 +29,16 @@ public partial class PersonEditor
     protected override async Task OnInitializedAsync()
     {
         if (Id == 0)
+        {
+            IsLoaded = true;
             return;
+        }
 
         Entity.Person person = await QueryRouter.Send(new GetPerson(Id));
 
         EditModel = new PersonEditModel(new PersonModel(person));
+
+        IsLoaded = true;
     }
 
     public void OnNameFieldBlur()

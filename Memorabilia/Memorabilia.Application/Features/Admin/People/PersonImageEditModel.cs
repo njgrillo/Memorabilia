@@ -25,7 +25,10 @@ public class PersonImageEditModel : EditModel
         => Constant.ImageFileName.Images;       
 
     public override string ItemTitle 
-        => "Image";    
+        => "Image";
+
+    public string MenuItemPath
+        => "People";
 
     public override string PageTitle 
         => $"{EditModeType.ToEditModeTypeName()} Image";

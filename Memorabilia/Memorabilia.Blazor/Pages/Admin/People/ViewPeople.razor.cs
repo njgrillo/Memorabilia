@@ -29,4 +29,22 @@ public partial class ViewPeople
 
     protected override bool FilterFunc(PersonModel model, string search)
         => PersonFilterService.Filter(model, search);
+
+    private async Task ShowPersonProfile(int personId)
+    {
+        var parameters = new DialogParameters
+        {
+            ["PersonId"] = personId
+        };
+
+        var options = new DialogOptions()
+        {
+            MaxWidth = MaxWidth.ExtraLarge,
+            FullWidth = true,
+            DisableBackdropClick = true
+        };
+
+        var dialog = DialogService.Show<PersonProfileDialog>(string.Empty, parameters, options);
+        var result = await dialog.Result;
+    }
 }

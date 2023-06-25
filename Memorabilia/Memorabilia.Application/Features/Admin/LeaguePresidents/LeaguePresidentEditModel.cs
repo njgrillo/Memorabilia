@@ -27,10 +27,8 @@ public class LeaguePresidentEditModel : EditModel
     public override string ItemTitle 
         => Constant.AdminDomainItem.LeaguePresidents.Item;
 
-    [Required]
     public int LeagueId { get; set; }
 
-    [Required]
     public PersonModel Person { get; set; }
 
     public override string RoutePrefix 
@@ -39,6 +37,5 @@ public class LeaguePresidentEditModel : EditModel
     public Constant.SportLeagueLevel SportLeagueLevel 
         => Constant.SportLeagueLevel.Find(SportLeagueLevelId);
 
-    [Required]
     public int SportLeagueLevelId { get; set; }
 }

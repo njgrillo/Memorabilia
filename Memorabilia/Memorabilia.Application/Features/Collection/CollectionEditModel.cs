@@ -44,7 +44,5 @@ public class CollectionEditModel : EditModel
     public override string RoutePrefix 
         => "Collections";
 
-    [Required]
-    [Range(1, int.MaxValue, ErrorMessage = "User Id is required.")]
     public int UserId { get; set; }
 }

@@ -38,7 +38,7 @@
             <RowTemplate>
                 <MudTd DataLabel="">
                     <MudTooltip>
-                        <MudImage @onclick="@(_ => NavigationManager.NavigateTo($"People/Image/{EditModeType.Update.Name}/{context.Id}"))"
+                        <MudImage @onclick="@(_ => ShowPersonProfile(context.Id))"
                                   Class="rounded-lg can-click"
                                   Elevation="5"
                                   Height="200"

@@ -46,6 +46,9 @@ public class PersonHallOfFamesEditModel : EditModel
     public override string ItemTitle 
         => "Hall of Fames";
 
+    public string MenuItemPath
+        => "People";
+
     public override string PageTitle 
         => $"{EditModeType.ToEditModeTypeName()} Hall of Fames";
 

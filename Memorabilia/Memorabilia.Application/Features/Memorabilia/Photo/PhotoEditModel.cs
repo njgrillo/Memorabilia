@@ -41,8 +41,6 @@ public class PhotoEditModel : MemorabiliaItemEditModel
     public int OrientationId { get; set; }
         = Constant.Orientation.Portrait.Id;
 
-    [Required]
-    [Range(1, int.MaxValue, ErrorMessage = "Type is required.")]
     public int PhotoTypeId { get; set; } 
         = Constant.PhotoType.Glossy.Id;
 }

@@ -30,6 +30,9 @@ public abstract class EditDomainItem<T>
 
     protected async Task OnLoad(IRequest<Entity.DomainEntity> request)
     {
+        if (Id == 0)
+            return;
+
         EditModel = new DomainEditModel(new DomainModel(await QueryRouter.Send(request)),
                                         DomainTypeName,
                                         ImageFileName,

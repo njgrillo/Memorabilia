@@ -32,5 +32,7 @@ public partial class HallOfFamePersonEditor
         EditModel = new PersonHallOfFamesEditModel(PersonId, model);
 
         PerformValidation = true;
+
+        IsLoaded = true;
     }    
 }

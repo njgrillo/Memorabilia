@@ -2,8 +2,7 @@
     <MudStack Class="col-10"
               Row="true"
               Style="margin-bottom:1%;">
-        <OccupationAutoComplete Disabled="@(EditMode == EditModeType.Add)"
-                                SelectedValue="Model.Occupation"
+        <OccupationAutoComplete SelectedValue="Model.Occupation"
                                 SelectionChanged="(p) => Model.Occupation = p" />
         <MudSwitch Checked="@(Model.OccupationType == OccupationType.Primary)"
                    CheckedChanged="OnOccupationTypeChange"

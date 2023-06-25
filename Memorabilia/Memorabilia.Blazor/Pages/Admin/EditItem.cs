@@ -11,6 +11,8 @@ public abstract class EditItem<TEditModel, TModel> : ComponentBase
     [Parameter]
     public int Id { get; set; }
 
+    protected bool IsLoaded { get; set; }
+
     protected TEditModel EditModel 
         = (TEditModel)Activator.CreateInstance(typeof(TEditModel));
 

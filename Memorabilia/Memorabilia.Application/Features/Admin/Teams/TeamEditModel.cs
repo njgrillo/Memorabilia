@@ -18,7 +18,6 @@ public class TeamEditModel : EditModel, IWithName, IWithValue<int>
         SportLeagueLevelId = model.SportLeagueLevel.Id;
     }
 
-    [StringLength(10, ErrorMessage = "Abbreviation is too long.")]
     public string Abbreviation { get; set; }
 
     public override string BackNavigationPath 
@@ -47,17 +46,10 @@ public class TeamEditModel : EditModel, IWithName, IWithValue<int>
     public override string ItemTitle 
         => Constant.AdminDomainItem.Teams.Item;
 
-    [Required]
-    [StringLength(100, ErrorMessage = "Name is too long.")]
-    [MinLength(1, ErrorMessage = "Name is too short.")]
     public string Location { get; set; }
 
-    [Required]
-    [StringLength(100, ErrorMessage = "Name is too long.")]
-    [MinLength(1, ErrorMessage = "Name is too short.")]
     public override string Name { get; set; }
 
-    [StringLength(10, ErrorMessage = "Nickname is too long.")]
     public string Nickname { get; set; }
 
     public Constant.SportLeagueLevel SportLeagueLevel 

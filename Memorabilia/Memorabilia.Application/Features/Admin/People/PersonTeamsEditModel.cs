@@ -37,6 +37,9 @@ public class PersonTeamsEditModel : EditModel
     public override string ItemTitle 
         => Constant.AdminDomainItem.Teams.Title;
 
+    public string MenuItemPath
+        => "People";
+
     public override string PageTitle 
         => $"{EditModeType.ToEditModeTypeName()} {ItemTitle}";
 

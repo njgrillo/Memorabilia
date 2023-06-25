@@ -22,8 +22,6 @@ public class ItemTypeLevelEditModel : EditModel
 
     public Constant.ItemType ItemType { get; set; }
 
-    [Required]
-    [Range(1, int.MaxValue, ErrorMessage = "Level Type is required.")]
     public int LevelTypeId { get; set; }
 
     public override string RoutePrefix 

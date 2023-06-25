@@ -49,7 +49,6 @@ public class ProjectPersonEditModel : EditModel
 
     public int MemorabiliaId { get; set; }
 
-    [Required]
     public PersonEditModel Person { get; set; } 
         = new();              
 

@@ -11,7 +11,6 @@ public class SportEditModel : EditModel
         Name = model.Name;
     }
 
-    [StringLength(50, ErrorMessage = "Alternate Name is too long.")]
     public string AlternateName { get; set; }
 
     public override string ExitNavigationPath 
@@ -23,9 +22,6 @@ public class SportEditModel : EditModel
     public override string ItemTitle 
         => Constant.AdminDomainItem.Sports.Item;
 
-    [Required]
-    [StringLength(50, ErrorMessage = "Name is too long.")]
-    [MinLength(1, ErrorMessage = "Name is too short.")]
     public override string Name { get; set; }
 
     public override string RoutePrefix 

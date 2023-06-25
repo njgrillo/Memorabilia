@@ -1,94 +1,99 @@
 ﻿@inherits EditPersonItem<PersonAccoladeEditModel, PersonAccoladeModel>
 
-<EditPage ContinueNavigationPath="@EditModel.ContinueNavigationPath"
-          EditMode="EditModel.EditModeType"
-          ExitNavigationPath="@EditModel.ExitNavigationPath"
-          ImageFileName="@EditModel.ImageFileName"
-          ItemName="@EditModel.ItemTitle"
-          Model="EditModel"
-          OnSave="HandleValidSubmit"
-          PageFooterButtonText="@EditModel.ExitButtonText"
-          PageFooterNavigationPath="@EditModel.BackNavigationPath"
-          PageTitle="@EditModel.PageTitle"
-          PerformValidation="PerformValidation"
-          TItem="PersonAccoladeEditModel"
-          UseMultipleButtons="true"
-          ValidationResult="@EditModel.ValidationResult">
-    <TimelineContent>
-        <PersonTimeline EditMode="EditModel.EditModeType"
-                        PersonId="EditModel.PersonId"
-                        PersonStep="EditModel.PersonStep" />
-    </TimelineContent>
-    <ChildContent>      
-        <Div Style="margin-bottom:1%;">
-            <MudTabs ApplyEffectsToContainer="true"
-                     Centered="true"
-                     Elevation="2"
-                     PanelClass="pa-6"
-                     Rounded="true">
-                <MudTabPanel BadgeColor="MudBlazor.Color.Success"
-                             BadgeData="EditModel.Accomplishments.Count(accomplishment => !accomplishment.IsDeleted)"                             
-                             Text="Accomplishments">
-                    <DivRowCol12>
-                        <PersonAccomplishmentEditor Accomplishments="EditModel.Accomplishments"
-                                                    Sports="EditModel.Sports" />
-                    </DivRowCol12>                    
-                </MudTabPanel>
-                <Condition Evaluation="EditModel.DisplayAllStars">
-                    <Match>
-                        <MudTabPanel BadgeColor="MudBlazor.Color.Success"
-                                     BadgeData="EditModel.AllStars.Count"
-                                     Text="@EditModel.AllStarGameLabel">
-                            <DivRowCol12>
-                                <PersonAllStarEditor AllStars="EditModel.AllStars"
-                                                     Sports="EditModel.Sports" />
-                            </DivRowCol12>
-                        </MudTabPanel>
-                    </Match>
-                </Condition>                
-                <MudTabPanel BadgeColor="MudBlazor.Color.Success"
-                             BadgeData="EditModel.Awards.Count(award => !award.IsDeleted)"
-                             Text="Awards">
-                    <DivRowCol12>
-                        <PersonAwardEditor Awards="EditModel.Awards"
-                                           Sports="EditModel.Sports" />
-                    </DivRowCol12>
-                </MudTabPanel>
-                <MudTabPanel BadgeColor="MudBlazor.Color.Success"
-                             BadgeData="EditModel.Leaders.Count(leader => !leader.IsDeleted)"
-                             Text="Leaders">
-                    <DivRowCol12>
-                        <PersonLeaderEditor Leaders="EditModel.Leaders"
-                                            Sports="EditModel.Sports" />
-                    </DivRowCol12>
-                </MudTabPanel>
-                <MudTabPanel Text="Records">
-                    <DivRowCol12>
-                        <MudText Typo="Typo.h3">Career Records</MudText>
-                        <PersonCareerRecordEditor CareerRecords="EditModel.CareerRecords"
-                                                  Sports="EditModel.Sports" />
-                    </DivRowCol12>
-                    <br/>
-                    <DivRowCol12>
-                        <MudText Typo="Typo.h3">Single Season Records</MudText>
-                        <PersonSingleSeasonRecordEditor SingleSeasonRecords="EditModel.SingleSeasonRecords"
+<PageLoader IsLoading="@(!IsLoaded)">
+    <EditPage ContinueNavigationPath="@EditModel.ContinueNavigationPath"
+              DisplayBackToMenuItemLink="true"
+              EditMode="EditModel.EditModeType"
+              ExitNavigationPath="@EditModel.ExitNavigationPath"
+              ImageFileName="@EditModel.ImageFileName"
+              ItemName="@EditModel.ItemTitle"
+              MenuItemLinkText="Back to View People"
+              MenuItemPath="@EditModel.MenuItemPath"
+              Model="EditModel"
+              OnSave="HandleValidSubmit"
+              PageFooterButtonText="@EditModel.ExitButtonText"
+              PageFooterNavigationPath="@EditModel.BackNavigationPath"
+              PageTitle="@EditModel.PageTitle"
+              PerformValidation="PerformValidation"
+              TItem="PersonAccoladeEditModel"
+              UseMultipleButtons="true"
+              ValidationResult="@EditModel.ValidationResult">
+        <TimelineContent>
+            <PersonTimeline EditMode="EditModel.EditModeType"
+                            PersonId="EditModel.PersonId"
+                            PersonStep="EditModel.PersonStep" />
+        </TimelineContent>
+        <ChildContent>
+            <Div Style="margin-bottom:1%;">
+                <MudTabs ApplyEffectsToContainer="true"
+                         Centered="true"
+                         Elevation="2"
+                         PanelClass="pa-6"
+                         Rounded="true">
+                    <MudTabPanel BadgeColor="MudBlazor.Color.Success"
+                                 BadgeData="EditModel.Accomplishments.Count(accomplishment => !accomplishment.IsDeleted)"
+                                 Text="Accomplishments">
+                        <DivRowCol12>
+                            <PersonAccomplishmentEditor Accomplishments="EditModel.Accomplishments"
                                                         Sports="EditModel.Sports" />
-                    </DivRowCol12>
-                </MudTabPanel>
-                <MudTabPanel Text="Retired Numbers">
-                    <DivRowCol12>
-                        <MudText Typo="Typo.h3">College Retired Numbers</MudText>
-                        <PersonCollegeRetiredNumberEditor CollegeRetiredNumbers="EditModel.CollegeRetiredNumbers"
-                                                          Colleges="EditModel.Colleges" />
-                    </DivRowCol12>
-                    <br />
-                    <DivRowCol12>
-                        <MudText Typo="Typo.h3">Franchise Retired Numbers</MudText>
-                        <PersonRetiredNumberEditor RetiredNumbers="EditModel.RetiredNumbers"
-                                                   Sports="EditModel.Sports" />
-                    </DivRowCol12>
-                </MudTabPanel>
-            </MudTabs>
-        </Div>          
-    </ChildContent>
-</EditPage>
+                        </DivRowCol12>
+                    </MudTabPanel>
+                    <Condition Evaluation="EditModel.DisplayAllStars">
+                        <Match>
+                            <MudTabPanel BadgeColor="MudBlazor.Color.Success"
+                                         BadgeData="EditModel.AllStars.Count"
+                                         Text="@EditModel.AllStarGameLabel">
+                                <DivRowCol12>
+                                    <PersonAllStarEditor AllStars="EditModel.AllStars"
+                                                         Sports="EditModel.Sports" />
+                                </DivRowCol12>
+                            </MudTabPanel>
+                        </Match>
+                    </Condition>
+                    <MudTabPanel BadgeColor="MudBlazor.Color.Success"
+                                 BadgeData="EditModel.Awards.Count(award => !award.IsDeleted)"
+                                 Text="Awards">
+                        <DivRowCol12>
+                            <PersonAwardEditor Awards="EditModel.Awards"
+                                               Sports="EditModel.Sports" />
+                        </DivRowCol12>
+                    </MudTabPanel>
+                    <MudTabPanel BadgeColor="MudBlazor.Color.Success"
+                                 BadgeData="EditModel.Leaders.Count(leader => !leader.IsDeleted)"
+                                 Text="Leaders">
+                        <DivRowCol12>
+                            <PersonLeaderEditor Leaders="EditModel.Leaders"
+                                                Sports="EditModel.Sports" />
+                        </DivRowCol12>
+                    </MudTabPanel>
+                    <MudTabPanel Text="Records">
+                        <DivRowCol12>
+                            <MudText Typo="Typo.h3">Career Records</MudText>
+                            <PersonCareerRecordEditor CareerRecords="EditModel.CareerRecords"
+                                                      Sports="EditModel.Sports" />
+                        </DivRowCol12>
+                        <br />
+                        <DivRowCol12>
+                            <MudText Typo="Typo.h3">Single Season Records</MudText>
+                            <PersonSingleSeasonRecordEditor SingleSeasonRecords="EditModel.SingleSeasonRecords"
+                                                            Sports="EditModel.Sports" />
+                        </DivRowCol12>
+                    </MudTabPanel>
+                    <MudTabPanel Text="Retired Numbers">
+                        <DivRowCol12>
+                            <MudText Typo="Typo.h3">College Retired Numbers</MudText>
+                            <PersonCollegeRetiredNumberEditor CollegeRetiredNumbers="EditModel.CollegeRetiredNumbers"
+                                                              Colleges="EditModel.Colleges" />
+                        </DivRowCol12>
+                        <br />
+                        <DivRowCol12>
+                            <MudText Typo="Typo.h3">Franchise Retired Numbers</MudText>
+                            <PersonRetiredNumberEditor RetiredNumbers="EditModel.RetiredNumbers"
+                                                       Sports="EditModel.Sports" />
+                        </DivRowCol12>
+                    </MudTabPanel>
+                </MudTabs>
+            </Div>
+        </ChildContent>
+    </EditPage>
+</PageLoader>

@@ -47,7 +47,6 @@ public class MemorabiliaImagesEditModel : EditModel
 
     public string ItemTypeName { get; }
 
-    [Required]
     public int MemorabiliaId { get; set; }
 
     public Constant.MemorabiliaItemStep MemorabiliaItemStep

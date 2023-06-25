@@ -19,7 +19,5 @@ public class PersonCollegeRetiredNumberEditModel : EditModel
 
     public int PersonId { get; set; }
 
-    [Required]
-    [Range(0, 99, ErrorMessage = "Number is required and must be 0 or greater.")]
     public int? PlayerNumber { get; set; }
 }

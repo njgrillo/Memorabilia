@@ -11,8 +11,7 @@ public class ManOfTheYearRule : AwardRule, IAwardRule
     {
         _awardType = awardType;
 
-        return awardType == Constant.AwardType.ManOfTheYear ||
-               awardType == Constant.AwardType.WalterPaytonNFLManOfTheYear;
+        return awardType == Constant.AwardType.WalterPaytonNFLManOfTheYear;
     }
 
     public string[] GenerateInscriptions(Entity.PersonAward[] awards)

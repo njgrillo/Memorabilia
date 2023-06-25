@@ -87,6 +87,7 @@ public sealed class AccomplishmentType : DomainItemConstant
     public static readonly AccomplishmentType FirstTeamAllWesternConference = new (130, "First-team All-Western Conference");
     public static readonly AccomplishmentType FirstTeamLittleAllAmerican = new (70, "First-team Little All-American");
     public static readonly AccomplishmentType FirstTeamParadeAllAmerican = new (143, "First-team Parade All-American");
+    public static readonly AccomplishmentType FiveHundredHomeRuns = new(194, "500 Home Runs");
     public static readonly AccomplishmentType FortyFortyClub = new(18, "40-40 Club");
     public static readonly AccomplishmentType FourHomeRunsInAGame = new(12, "4 Home Runs in a Game", "4 HRs");
     public static readonly AccomplishmentType HelmsAllAmerican = new (135, "Helms All-American");
@@ -163,6 +164,8 @@ public sealed class AccomplishmentType : DomainItemConstant
     public static readonly AccomplishmentType ThirdTeamAllPro = new (93, "Third-team All-Pro");
     public static readonly AccomplishmentType ThirdTeamLittleAllAmerican = new(115, "Third-team Little All-American");
     public static readonly AccomplishmentType ThirtyThirtyClub = new(3, "30-30 Club");
+    public static readonly AccomplishmentType ThreeThousandHits = new(193, "3000 Hits");
+    public static readonly AccomplishmentType ThreeThousandStrikeouts = new(195, "3000 Strikeouts");
     public static readonly AccomplishmentType ToppsAllStarRookieTeam = new (67, "Topps All-Star Rookie Team");
     public static readonly AccomplishmentType TwoBasesLoadedTriplesInAGame = new(24, "2 Bases Loaded Triples in a Game");
     public static readonly AccomplishmentType TwoGrandSlamsInOneInning = new(16, "2 Grand Slams in One Inning");    
@@ -189,6 +192,7 @@ public sealed class AccomplishmentType : DomainItemConstant
         AmericanLeaguePitchingTripleCrown,
         AmericanLeagueTripleCrown,
         CombinedNoHitter,
+        FiveHundredHomeRuns,
         FortyFortyClub,
         FourHomeRunsInAGame,
         HitForTheCycle,
@@ -200,6 +204,8 @@ public sealed class AccomplishmentType : DomainItemConstant
         NoHitter,
         PerfectGame,
         ThirtyThirtyClub,
+        ThreeThousandHits,
+        ThreeThousandStrikeouts,
         ToppsAllStarRookieTeam,
         TwoBasesLoadedTriplesInAGame,
         TwoGrandSlamsInOneInning,

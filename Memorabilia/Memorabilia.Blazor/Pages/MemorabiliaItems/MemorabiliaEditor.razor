@@ -1,125 +1,128 @@
-﻿<EditPage ContinueNavigationPath="@Model.ContinueNavigationPath"
-          DisplayFooter="false"
-          EditMode="Model.EditModeType"
-          ExitNavigationPath="@Model.ExitNavigationPath"
-          ImageFileName="@Model.ImageFileName"
-          ItemName="@Model.ItemTypeName"
-          Model="Model"
-          OnSave="OnSave"
-          PageTitle="@Model.PageTitle"
-          PerformValidation="true"
-          TItem="MemorabiliaEditModel"
-          UseMultipleButtons="true"
-          ValidationResult="@Model.ValidationResult">
-    <TimelineContent>
-        <MemorabiliaItemTimeline EditMode="Model.EditModeType"
-                                 ItemTypeName="@Model.ItemTypeName"
-                                 MemorabiliaId="Model.Id"
-                                 MemorabiliaItemStep="Model.MemorabiliaItemStep" />
-    </TimelineContent>
-    <ChildContent>
-        <DivRowFormGroup>
-            <Div Class="col-3">
-                <ItemTypeAutoComplete Disabled="@(!Model.CanEditItemType)" 
-                                      SelectedValue="Model.ItemType"
-                                      SelectionChanged="(p) => Model.ItemType = p" />
-            </Div>
-            <Div Class="col-3">
-                <ConditionDropDown SelectedValue="Model.ConditionId"
-                                   SelectionChanged="(p) => Model.ConditionId = p" />
-            </Div>
-            <Div Class="col-3">
-                <NumericField Label="Estimated Value ($)"
-                              TType="decimal?"
-                              Value="Model.EstimatedValue"
-                              ValueChanged="@((p) => Model.EstimatedValue = p)" />
-            </Div>
-            <Div Class="col-3">
-                <PrivacyTypeDropDown SelectedValue="Model.PrivacyTypeId"
-                                     SelectionChanged="(p) => Model.PrivacyTypeId = p" />
-            </Div>
-        </DivRowFormGroup>
-        <DivRowFormGroup>
-            <Div Class="col-3">
-                <AcquisitionTypeDropDown IsAutograph="false"
-                                         SelectedValue="Model.AcquisitionTypeId"
-                                         SelectionChanged="OnAcquisitionTypeChange" />
-            </Div>
-            <Div Class="col-3">
-                <MudDatePicker @bind-Date="Model.AcquiredDate"
-                               DateFormat="MM/dd/yyyy"
-                               Editable="true"
-                               Label="Acquired Date"
-                               Mask="@(new DateMask("MM/dd/yyyy"))"
-                               Variant="Variant.Outlined" />
-            </Div>
-            <Div Class="col-3"
-                 Hidden="@(!Model.CanHaveCost)">
-                <NumericField Label="Cost ($)" 
-                              TType="decimal?"
-                              Value="Model.Cost"
-                              ValueChanged="@((p) => Model.Cost = p)" />
-            </Div>
-            <Div Class="col-3"
-                 Hidden="@(!Model.CanHaveCost)">
-                <PurchaseTypeDropDown SelectedValue="Model.PurchaseTypeId"
-                                      SelectionChanged="(p) => Model.PurchaseTypeId = p" />
-            </Div>
-        </DivRowFormGroup>
-        <DivRowFormGroup>
-            <Div Class="col-6">
-                <TextField Label="Notes"
-                           Lines="10"
-                           SelectedText="@Model.Note"
-                           SelectedTextChanged="@((p) => Model.Note = p)" />
-            </Div>
-            <Div Class="col-6">
-                <MultiCollectionSelector SelectedCollections="Model.Collections" />
-            </Div>
-        </DivRowFormGroup>
-        <DivRowFormGroup>
-            <Div Class="col-6">
-                <MudStack Row="true">
-                    <MudSwitch Checked="@Model.IsNumbered"
-                               CheckedChanged="(p) => Model.IsNumbered = p"
-                               Color="MudBlazor.Color.Success"
-                               Label="Is Numbered?"
-                               T="bool" />
-                    <MudSwitch Checked="@Model.Framed"
-                               CheckedChanged="(p) => Model.Framed = p"
-                               Color="MudBlazor.Color.Success"
-                               Label="Is Framed?"
-                               T="bool" />
-                    <MudSwitch Checked="@Model.AcquiredWithAutograph"
-                               CheckedChanged="(p) => Model.AcquiredWithAutograph = p"
-                               Color="MudBlazor.Color.Success"
-                               Label="Acquired with Autograph(s)?"
-                               T="bool" />                    
-                    <MudSwitch Checked="@Model.ForTrade"
-                               CheckedChanged="(p) => Model.ForTrade = p"
-                               Color="MudBlazor.Color.Success"
-                               Label="Available For Trade?"
-                               T="bool" />
-                </MudStack>
-            </Div>
-        </DivRowFormGroup>
-        <DivRowFormGroup Hidden="@(!Model.IsNumbered)">
-            <Div Class="col-3">
-                <Div Class="row">
-                    <Div Style="padding-left:15px; width:45%; flex:auto;">
-                        <NumericField Label="Left Serial #"
-                                      TType="int?"
-                                      Value="Model.Numerator"
-                                      ValueChanged="@((p) => Model.Numerator = p)" />
-                    </Div>
-                    <Div Style="padding-right:15px; padding-left:5px; width:45%; flex:auto;">
-                        <NumericField Label="Right Serial #"
-                                      TType="int?"
-                                      Value="Model.Denominator"
-                                      ValueChanged="@((p) => Model.Denominator = p)" />
+﻿<PageLoader IsLoading="@(IsLoaded)">
+    <EditPage ContinueNavigationPath="@Model.ContinueNavigationPath"
+              DisplayFooter="false"
+              EditMode="Model.EditModeType"
+              ExitNavigationPath="@Model.ExitNavigationPath"
+              ImageFileName="@Model.ImageFileName"
+              ItemName="@Model.ItemTypeName"
+              Model="Model"
+              OnSave="OnSave"
+              PageTitle="@Model.PageTitle"
+              PerformValidation="true"
+              TItem="MemorabiliaEditModel"
+              UseMultipleButtons="true"
+              ValidationResult="@Model.ValidationResult">
+        <TimelineContent>
+            <MemorabiliaItemTimeline EditMode="Model.EditModeType"
+                                     ItemTypeName="@Model.ItemTypeName"
+                                     MemorabiliaId="Model.Id"
+                                     MemorabiliaItemStep="Model.MemorabiliaItemStep" />
+        </TimelineContent>
+        <ChildContent>
+            <DivRowFormGroup>
+                <Div Class="col-3">
+                    <ItemTypeAutoComplete Disabled="@(!Model.CanEditItemType)"
+                                          SelectedValue="Model.ItemType"
+                                          SelectionChanged="(p) => Model.ItemType = p" />
+                </Div>
+                <Div Class="col-3">
+                    <ConditionDropDown SelectedValue="Model.ConditionId"
+                                       SelectionChanged="(p) => Model.ConditionId = p" />
+                </Div>
+                <Div Class="col-3">
+                    <NumericField Label="Estimated Value ($)"
+                                  TType="decimal?"
+                                  Value="Model.EstimatedValue"
+                                  ValueChanged="@((p) => Model.EstimatedValue = p)" />
+                </Div>
+                <Div Class="col-3">
+                    <PrivacyTypeDropDown SelectedValue="Model.PrivacyTypeId"
+                                         SelectionChanged="(p) => Model.PrivacyTypeId = p" />
+                </Div>
+            </DivRowFormGroup>
+            <DivRowFormGroup>
+                <Div Class="col-3">
+                    <AcquisitionTypeDropDown IsAutograph="false"
+                                             SelectedValue="Model.AcquisitionTypeId"
+                                             SelectionChanged="OnAcquisitionTypeChange" />
+                </Div>
+                <Div Class="col-3">
+                    <MudDatePicker @bind-Date="Model.AcquiredDate"
+                                   DateFormat="MM/dd/yyyy"
+                                   Editable="true"
+                                   Label="Acquired Date"
+                                   Mask="@(new DateMask("MM/dd/yyyy"))"
+                                   Variant="Variant.Outlined" />
+                </Div>
+                <Div Class="col-3"
+                     Hidden="@(!Model.CanHaveCost)">
+                    <NumericField Label="Cost ($)"
+                                  TType="decimal?"
+                                  Value="Model.Cost"
+                                  ValueChanged="@((p) => Model.Cost = p)" />
+                </Div>
+                <Div Class="col-3"
+                     Hidden="@(!Model.CanHaveCost)">
+                    <PurchaseTypeDropDown SelectedValue="Model.PurchaseTypeId"
+                                          SelectionChanged="(p) => Model.PurchaseTypeId = p" />
+                </Div>
+            </DivRowFormGroup>
+            <DivRowFormGroup>
+                <Div Class="col-6">
+                    <TextField Label="Notes"
+                               Lines="10"
+                               SelectedText="@Model.Note"
+                               SelectedTextChanged="@((p) => Model.Note = p)" />
+                </Div>
+                <Div Class="col-6">
+                    <MultiCollectionSelector SelectedCollections="Model.Collections" />
+                </Div>
+            </DivRowFormGroup>
+            <DivRowFormGroup>
+                <Div Class="col-6">
+                    <MudStack Row="true">
+                        <MudSwitch Checked="@Model.IsNumbered"
+                                   CheckedChanged="(p) => Model.IsNumbered = p"
+                                   Color="MudBlazor.Color.Success"
+                                   Label="Is Numbered?"
+                                   T="bool" />
+                        <MudSwitch Checked="@Model.Framed"
+                                   CheckedChanged="(p) => Model.Framed = p"
+                                   Color="MudBlazor.Color.Success"
+                                   Label="Is Framed?"
+                                   T="bool" />
+                        <MudSwitch Checked="@Model.AcquiredWithAutograph"
+                                   CheckedChanged="(p) => Model.AcquiredWithAutograph = p"
+                                   Color="MudBlazor.Color.Success"
+                                   Label="Acquired with Autograph(s)?"
+                                   T="bool" />
+                        <MudSwitch Checked="@Model.ForTrade"
+                                   CheckedChanged="(p) => Model.ForTrade = p"
+                                   Color="MudBlazor.Color.Success"
+                                   Label="Available For Trade?"
+                                   T="bool" />
+                    </MudStack>
+                </Div>
+            </DivRowFormGroup>
+            <DivRowFormGroup Hidden="@(!Model.IsNumbered)">
+                <Div Class="col-3">
+                    <Div Class="row">
+                        <Div Style="padding-left:15px; width:45%; flex:auto;">
+                            <NumericField Label="Left Serial #"
+                                          TType="int?"
+                                          Value="Model.Numerator"
+                                          ValueChanged="@((p) => Model.Numerator = p)" />
+                        </Div>
+                        <Div Style="padding-right:15px; padding-left:5px; width:45%; flex:auto;">
+                            <NumericField Label="Right Serial #"
+                                          TType="int?"
+                                          Value="Model.Denominator"
+                                          ValueChanged="@((p) => Model.Denominator = p)" />
+                        </Div>
                     </Div>
                 </Div>
-            </Div>
-        </DivRowFormGroup>        
-    </ChildContent>
-</EditPage>
+            </DivRowFormGroup>
+        </ChildContent>
+    </EditPage>
+</PageLoader>
+

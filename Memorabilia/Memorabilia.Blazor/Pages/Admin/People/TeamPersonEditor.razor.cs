@@ -32,5 +32,7 @@ public partial class TeamPersonEditor
         EditModel = person.ToTeamEditModel();
 
         PerformValidation = true;
+
+        IsLoaded = true;
     }    
 }

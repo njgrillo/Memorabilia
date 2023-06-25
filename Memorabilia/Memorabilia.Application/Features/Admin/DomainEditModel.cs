@@ -36,9 +36,6 @@ public class DomainEditModel : EditModel
 
     public string ImageFileName { get; set; }        
 
-    [Required]
-    [StringLength(100, ErrorMessage = "Name is too long.")]
-    [MinLength(1, ErrorMessage = "Name is too short.")]
     public override string Name { get; set; }
 
     public string NavigationPath { get; set; }

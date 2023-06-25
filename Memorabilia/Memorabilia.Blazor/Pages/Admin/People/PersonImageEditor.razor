@@ -1,58 +1,65 @@
 ﻿@inherits EditPersonItem<PersonImageEditModel, PersonImageModel>
 
-<EditPage ContinueNavigationPath="@EditModel.ContinueNavigationPath"
-          DisplaySaveContinueButton="false"
-          EditMode="EditModel.EditModeType"
-          ExitNavigationPath="@EditModel.ExitNavigationPath"
-          ImageFileName="@EditModel.ImageFileName" 
-          ItemName="@EditModel.ItemTitle"
-          Model="EditModel"
-          OnSave="HandleValidSubmit"
-          PageFooterButtonText="@EditModel.ExitButtonText"
-          PageFooterNavigationPath="@EditModel.BackNavigationPath"
-          PageTitle="@EditModel.PageTitle"
-          TItem="PersonImageEditModel"
-          UseMultipleButtons="true">
-    <TimelineContent>
-        <PersonTimeline EditMode="EditModel.EditModeType"
-                        PersonId="EditModel.PersonId"
-                        PersonStep="EditModel.PersonStep" />
-    </TimelineContent>
-    <ChildContent>
-        <DivRowCol12>
-            <Div Class="row">
-                <Div Class="col-3">
-                    <InputFile id="fileInput"
-                               accept="image/*"
-                               hidden
-                               OnChange="@LoadFile" />
-                    <MudFab Color="MudBlazor.Color.Secondary"
-                            HtmlTag="label"
-                            Icon="@Icons.Material.Filled.Image"
-                            Label="Load picture"
-                            for="fileInput" />
+<PageLoader IsLoading="@(!IsLoaded)">
+    <EditPage ContinueNavigationPath="@EditModel.ContinueNavigationPath"
+              DisplayBackToMenuItemLink="true"
+              DisplaySaveContinueButton="false"
+              EditMode="EditModel.EditModeType"
+              ExitNavigationPath="@EditModel.ExitNavigationPath"
+              ImageFileName="@EditModel.ImageFileName"
+              ItemName="@EditModel.ItemTitle"
+              MenuItemLinkText="Back to View People"
+              MenuItemPath="@EditModel.MenuItemPath"
+              Model="EditModel"
+              OnSave="HandleValidSubmit"
+              PageFooterButtonText="@EditModel.ExitButtonText"
+              PageFooterNavigationPath="@EditModel.BackNavigationPath"
+              PageTitle="@EditModel.PageTitle"
+              TItem="PersonImageEditModel"
+              UseMultipleButtons="true">
+        <TimelineContent>
+            <PersonTimeline EditMode="EditModel.EditModeType"
+                            PersonId="EditModel.PersonId"
+                            PersonStep="EditModel.PersonStep" />
+        </TimelineContent>
+        <ChildContent>
+            <DivRowCol12>
+                <Div Class="row">
+                    <Div Class="col-3">
+                        <InputFile id="fileInput"
+                                   accept="image/*"
+                                   hidden
+                                   OnChange="@LoadFile" />
+                        <MudFab Color="MudBlazor.Color.Secondary"
+                                HtmlTag="label"
+                                Icon="@Icons.Material.Filled.Image"
+                                Label="Load picture"
+                                for="fileInput" />
+                    </Div>
                 </Div>
-            </Div>
-            <br />
-            <Div Class="row">
-                <Div Class="col-3">
-                    <Condition Evaluation="_hasImage">
-                        <Match>
-                            <ImageEditor CanRemove="true"
-                                         HasPrimary="false"
-                                         ImageFileName="@EditModel.PersonImageFileName"
-                                         ImageRootType="ImageRootType.People"
-                                         ImageType="ImageType.Primary"
-                                         OnRemove="Remove" />
-                        </Match>
-                    </Condition>
+                <br />
+                <Div Class="row">
+                    <Div Class="col-3">
+                        <Condition Evaluation="_hasImage">
+                            <Match>
+                                <ImageEditor CanRemove="true"
+                                             HasPrimary="false"
+                                             ImageFileName="@EditModel.PersonImageFileName"
+                                             ImageRootType="ImageRootType.People"
+                                             ImageType="ImageType.Primary"
+                                             OnRemove="Remove" />
+                            </Match>
+                        </Condition>
+                    </Div>
                 </Div>
-            </Div>
-            <br />
-        </DivRowCol12>
-    </ChildContent>
-    <AdditionalButtons>
-        <SaveButton OnClick="OnSaveReturnClick"
-                    Text="Save & Return to People" />
-    </AdditionalButtons>
-</EditPage>
+                <br />
+            </DivRowCol12>
+        </ChildContent>
+        <AdditionalButtons>
+            <SaveButton OnClick="OnSaveReturnClick"
+                        Text="Save & Return to People" />
+        </AdditionalButtons>
+    </EditPage>
+</PageLoader>
+
+

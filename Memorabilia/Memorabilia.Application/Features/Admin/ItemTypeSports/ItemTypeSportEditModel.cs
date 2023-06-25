@@ -25,7 +25,5 @@ public class ItemTypeSportEditModel : EditModel
     public override string RoutePrefix 
         => Constant.AdminDomainItem.ItemTypeSports.Page;
 
-    [Required]
-    [Range(1, int.MaxValue, ErrorMessage = "Sport is required.")]
     public int SportId { get; set; }
 }

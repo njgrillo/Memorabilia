@@ -23,13 +23,11 @@ public class ImageEditModel : EditModel
     public Constant.ImageType ImageType 
         => Constant.ImageType.Find(ImageTypeId);
 
-    [Required]
     public int ImageTypeId { get; set; }
 
     public bool IsPrimary 
         => ImageTypeId == Constant.ImageType.Primary.Id;
 
-    [Required]
     public DateTime UploadDate { get; set; }
 
     public override string PageTitle 

@@ -49,6 +49,9 @@ public class PersonSportServiceEditModel : EditModel
     public override string ItemTitle 
         => "Sport Service";
 
+    public string MenuItemPath
+        => "People";
+
     public override string PageTitle 
         => $"{EditModeType.ToEditModeTypeName()} {ItemTitle}";
 

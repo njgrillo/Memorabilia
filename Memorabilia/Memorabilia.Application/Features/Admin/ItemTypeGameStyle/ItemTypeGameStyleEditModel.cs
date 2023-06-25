@@ -14,8 +14,6 @@ public class ItemTypeGameStyleEditModel : EditModel
     public override string ExitNavigationPath 
         => Constant.AdminDomainItem.ItemTypeGameStyles.Page;
 
-    [Required]
-    [Range(1, int.MaxValue, ErrorMessage = "Game Style Type is required.")]
     public int GameStyleTypeId { get; set; }
 
     public string ImageFileName 

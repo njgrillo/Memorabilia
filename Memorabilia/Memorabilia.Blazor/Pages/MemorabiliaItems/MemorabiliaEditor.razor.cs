@@ -20,15 +20,22 @@ public partial class MemorabiliaEditor
     [Parameter]
     public int Id { get; set; }
 
+    protected bool IsLoaded { get; set; }
+
     protected MemorabiliaEditModel Model 
         = new ();        
 
     protected override async Task OnInitializedAsync()
     {
         if (Id == 0)
+        {
+            IsLoaded = true;
             return;
+        }
 
         Model = (await QueryRouter.Send(new GetMemorabiliaItem(Id))).ToEditModel();
+
+        IsLoaded = true;
     }
 
     protected async Task OnSave()

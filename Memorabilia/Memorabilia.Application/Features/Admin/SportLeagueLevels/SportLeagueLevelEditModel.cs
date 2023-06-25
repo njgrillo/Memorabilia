@@ -13,7 +13,6 @@ public class SportLeagueLevelEditModel : EditModel
         SportId = model.SportId;
     }
 
-    [StringLength(10, ErrorMessage = "Abbreviation is too long.")]
     public string Abbreviation { get; set; }
 
     public override string ExitNavigationPath 
@@ -25,19 +24,12 @@ public class SportLeagueLevelEditModel : EditModel
     public override string ItemTitle 
         => Constant.AdminDomainItem.SportLeagueLevels.Item;
 
-    [Required]
-    [Range(1, int.MaxValue, ErrorMessage = "Level Type is required.")]
     public int LevelTypeId { get; set; }
 
-    [Required]
-    [StringLength(100, ErrorMessage = "Name is too long.")]
-    [MinLength(1, ErrorMessage = "Name is too short.")]
     public override string Name { get; set; }
 
     public override string RoutePrefix 
         => Constant.AdminDomainItem.SportLeagueLevels.Page;
 
-    [Required]
-    [Range(1, int.MaxValue, ErrorMessage = "Sport is required.")]
     public int SportId { get; set; }
 }

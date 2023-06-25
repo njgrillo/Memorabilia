@@ -9,7 +9,6 @@ public class ItemEditModel : EditModel
 
     public virtual Constant.ItemType ItemType { get; set; }
 
-    [Required]
     public int MemorabiliaId { get; set; }
 
     public Constant.MemorabiliaItemStep MemorabiliaItemStep 

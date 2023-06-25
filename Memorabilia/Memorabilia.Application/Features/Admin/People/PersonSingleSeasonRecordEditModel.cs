@@ -22,7 +22,5 @@ public class PersonSingleSeasonRecordEditModel : EditModel
     public string RecordTypeName 
         => RecordType?.Name;
 
-    [Required]
-    [Range(1800, 3000, ErrorMessage = "Year is required and must be 1800 or greater.")]
     public int? Year { get; set; }
 }

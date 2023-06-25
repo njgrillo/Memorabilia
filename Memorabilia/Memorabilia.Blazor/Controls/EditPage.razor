@@ -4,6 +4,15 @@
 @TimelineContent
 @ImagePreview
 <PageBorder>
+    <Condition Evaluation="DisplayBackToMenuItemLink">
+        <Match>
+            <LeftRightSection>
+                <Right>
+                    <MudLink Href="@MenuItemPath">@MenuItemLinkText</MudLink>
+                </Right>
+            </LeftRightSection>
+        </Match>
+    </Condition>
     <Condition Evaluation="@(ValidationResultAlerts.Any())">
         <Match>
             <AlertPanel Alerts="ValidationResultAlerts" />
@@ -24,10 +33,9 @@
                             <CancelButton OnClick="@(_ => NavigationManager.NavigateTo(ExitNavigationPath))" />
                             @AdditionalButtons
                             <Div Hidden="@(!DisplaySaveContinueButton)">
-                                <SaveButton OnClick="@(()=> _continue = true)"
-                                            Text="Save & Continue" />
                                 <SaveButton Text="Save & Exit" />
-
+                                <SaveButton OnClick="@(()=> _continue = true)"
+                                            Text="Save & Continue" />  
                             </Div>
                         </MudStack>
                     </Right>

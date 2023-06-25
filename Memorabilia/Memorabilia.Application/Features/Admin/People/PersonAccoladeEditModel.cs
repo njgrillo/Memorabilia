@@ -115,6 +115,9 @@ public class PersonAccoladeEditModel : EditModel
     public List<PersonLeaderEditModel> Leaders { get; set; } 
         = new();
 
+    public string MenuItemPath
+        => "People";
+
     public override string PageTitle 
         => $"{EditModeType.ToEditModeTypeName()} Accolades";
 

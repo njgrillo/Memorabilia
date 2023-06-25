@@ -34,7 +34,10 @@ public class PersonOccupationsEditModel : EditModel
         => Constant.AdminDomainItem.Occupations.ImageFileName;
 
     public override string ItemTitle 
-        => Constant.AdminDomainItem.Occupations.Title; 
+        => Constant.AdminDomainItem.Occupations.Title;
+
+    public string MenuItemPath
+        => "People";
 
     public List<PersonOccupationEditModel> Occupations { get; set; } 
         = new();

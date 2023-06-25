@@ -21,6 +21,8 @@ public partial class OccupationPersonEditor
         Entity.Person person = await QueryRouter.Send(new GetPerson(PersonId));
 
         EditModel = new PersonOccupationsEditModel(PersonId, new PersonOccupationModel(person));
+
+        IsLoaded = true;
     }    
 
     protected void OnRecentOccupationChange(RecentPersonOccupationsModel recentOccupation)

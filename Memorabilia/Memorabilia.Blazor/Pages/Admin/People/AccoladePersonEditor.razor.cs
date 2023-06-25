@@ -33,5 +33,7 @@ public partial class AccoladePersonEditor
         EditModel = new PersonAccoladeEditModel(PersonId, model);
 
         PerformValidation = true;
+
+        IsLoaded = true;
     }    
 }

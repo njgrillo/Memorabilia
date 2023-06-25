@@ -13,7 +13,6 @@ public class DivisionEditModel : EditModel
         Name = model.Name;
     }
 
-    [StringLength(10, ErrorMessage = "Abbreviation is too long.")]
     public string Abbreviation { get; set; }
 
     public int ConferenceId { get; set; }
@@ -29,9 +28,6 @@ public class DivisionEditModel : EditModel
 
     public int LeagueId { get; set; }
 
-    [Required]
-    [StringLength(100, ErrorMessage = "Name is too long.")]
-    [MinLength(1, ErrorMessage = "Name is too short.")]
     public override string Name { get; set; }
 
     public override string RoutePrefix 

@@ -23,6 +23,8 @@ public partial class PersonImageEditor
         EditModel = person.ToImageEditModel();
 
         _hasImage = !EditModel.PersonImageFileName.IsNullOrEmpty();
+
+        IsLoaded = true;
     }
 
     private async Task LoadFile(InputFileChangeEventArgs e)

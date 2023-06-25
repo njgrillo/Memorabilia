@@ -30,6 +30,9 @@ public partial class EditPage<TItem> : INotifyPropertyChanged
     public string ContinueNavigationPath { get; set; }
 
     [Parameter]
+    public bool DisplayBackToMenuItemLink { get; set; }
+
+    [Parameter]
     public bool DisplayFooter { get; set; } 
         = true;
 
@@ -51,6 +54,12 @@ public partial class EditPage<TItem> : INotifyPropertyChanged
 
     [Parameter]
     public string ItemName { get; set; }
+
+    [Parameter]
+    public string MenuItemLinkText { get; set; }
+
+    [Parameter]
+    public string MenuItemPath { get; set; }
 
     [Parameter]
     public TItem Model { get; set; }    

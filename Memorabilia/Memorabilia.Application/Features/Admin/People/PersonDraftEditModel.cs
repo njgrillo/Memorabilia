@@ -32,14 +32,10 @@ public class PersonDraftEditModel : EditModel
 
     public int? Pick { get; set; }
 
-    [Required]
-    [Range(1, 50, ErrorMessage = "Round is required and must be 1 or greater.")]
     public int? Round { get; set; }
 
     public Constant.Sport[] Sports { get; set; } 
         = Array.Empty<Constant.Sport>();
 
-    [Required]
-    [Range(1965, 3000, ErrorMessage = "Year is required and must be 1965 or later.")]
     public int? Year { get; set; }
 }

@@ -17,7 +17,6 @@ public class AutographImagesEditModel : EditModel
         AutographId = autographId;
     }
 
-    [Required]
     public int AutographId { get; set; }
 
     public Constant.AutographStep AutographStep 

@@ -1,75 +1,81 @@
 ﻿@inherits EditPersonItem<PersonSportServiceEditModel, PersonSportServiceModel>
 
-<EditPage ContinueNavigationPath="@EditModel.ContinueNavigationPath"
-          EditMode="EditModel.EditModeType"
-          ExitNavigationPath="@EditModel.ExitNavigationPath"
-          ImageFileName="@EditModel.ImageFileName"
-          ItemName="@EditModel.ItemTitle"
-          Model="EditModel"
-          OnSave="HandleValidSubmit"
-          PageFooterButtonText="@EditModel.ExitButtonText"
-          PageFooterNavigationPath="@EditModel.BackNavigationPath"
-          PageTitle="@EditModel.PageTitle"
-          PerformValidation="PerformValidation"
-          TItem="PersonSportServiceEditModel"
-          UseMultipleButtons="true"
-          ValidationResult="@EditModel.ValidationResult">
-    <TimelineContent>
-        <PersonTimeline EditMode="EditModel.EditModeType"
-                        PersonId="EditModel.PersonId"
-                        PersonStep="EditModel.PersonStep" />
-    </TimelineContent>
-    <ChildContent>  
-        <Div Style="margin-bottom:1%;">
-            <MudTabs ApplyEffectsToContainer="true"
-                     Centered="true"
-                     Elevation="2"
-                     PanelClass="pa-6"
-                     Rounded="true">
-                <MudTabPanel BadgeColor="MudBlazor.Color.Success" 
-                             BadgeData="EditModel.Colleges.Count(college => !college.IsDeleted)"
-                             Text="Colleges">
-                    <DivRowCol12>
-                        <PersonCollegeEditor Colleges="EditModel.Colleges" />
-                    </DivRowCol12>
-                </MudTabPanel>
-                <MudTabPanel BadgeColor="MudBlazor.Color.Success"
-                             BadgeData="EditModel.Drafts.Count(draft => !draft.IsDeleted)"
-                             Text="Drafts">
-                    <DivRowCol12>
-                        <PersonDraftEditor Drafts="EditModel.Drafts"
-                                           SportIds="EditModel.SportIds" />
-                    </DivRowCol12>
-                </MudTabPanel>
-                <MudTabPanel Text="Service">
-                    <Div Class="row">
-                        <Div Class="col-3">
-                            <MudDatePicker @bind-Date="EditModel.DebutDate"
-                                           DateFormat="MM/dd/yyyy"
-                                           Editable="true"
-                                           Label="Debut Date"
-                                           Mask="@(new DateMask("MM/dd/yyyy"))"
-                                           Variant="Variant.Outlined" />
+<PageLoader IsLoading="@(!IsLoaded)">
+    <EditPage ContinueNavigationPath="@EditModel.ContinueNavigationPath"
+              DisplayBackToMenuItemLink="true"
+              EditMode="EditModel.EditModeType"
+              ExitNavigationPath="@EditModel.ExitNavigationPath"
+              ImageFileName="@EditModel.ImageFileName"
+              ItemName="@EditModel.ItemTitle"
+              MenuItemLinkText="Back to View People"
+              MenuItemPath="@EditModel.MenuItemPath"
+              Model="EditModel"
+              OnSave="HandleValidSubmit"
+              PageFooterButtonText="@EditModel.ExitButtonText"
+              PageFooterNavigationPath="@EditModel.BackNavigationPath"
+              PageTitle="@EditModel.PageTitle"
+              PerformValidation="PerformValidation"
+              TItem="PersonSportServiceEditModel"
+              UseMultipleButtons="true"
+              ValidationResult="@EditModel.ValidationResult">
+        <TimelineContent>
+            <PersonTimeline EditMode="EditModel.EditModeType"
+                            PersonId="EditModel.PersonId"
+                            PersonStep="EditModel.PersonStep" />
+        </TimelineContent>
+        <ChildContent>
+            <Div Style="margin-bottom:1%;">
+                <MudTabs ApplyEffectsToContainer="true"
+                         Centered="true"
+                         Elevation="2"
+                         PanelClass="pa-6"
+                         Rounded="true">
+                    <MudTabPanel BadgeColor="MudBlazor.Color.Success"
+                                 BadgeData="EditModel.Colleges.Count(college => !college.IsDeleted)"
+                                 Text="Colleges">
+                        <DivRowCol12>
+                            <PersonCollegeEditor Colleges="EditModel.Colleges" />
+                        </DivRowCol12>
+                    </MudTabPanel>
+                    <MudTabPanel BadgeColor="MudBlazor.Color.Success"
+                                 BadgeData="EditModel.Drafts.Count(draft => !draft.IsDeleted)"
+                                 Text="Drafts">
+                        <DivRowCol12>
+                            <PersonDraftEditor Drafts="EditModel.Drafts"
+                                               SportIds="EditModel.SportIds" />
+                        </DivRowCol12>
+                    </MudTabPanel>
+                    <MudTabPanel Text="Service">
+                        <Div Class="row">
+                            <Div Class="col-3">
+                                <MudDatePicker @bind-Date="EditModel.DebutDate"
+                                               DateFormat="MM/dd/yyyy"
+                                               Editable="true"
+                                               Label="Debut Date"
+                                               Mask="@(new DateMask("MM/dd/yyyy"))"
+                                               Variant="Variant.Outlined" />
+                            </Div>
+                            <Div Class="col-3">
+                                <MudDatePicker @bind-Date="EditModel.LastAppearanceDate"
+                                               DateFormat="MM/dd/yyyy"
+                                               Editable="true"
+                                               Label="Last Appearance Date"
+                                               Mask="@(new DateMask("MM/dd/yyyy"))"
+                                               Variant="Variant.Outlined" />
+                            </Div>
+                            <Div Class="col-3">
+                                <MudDatePicker @bind-Date="EditModel.FreeAgentSigningDate"
+                                               DateFormat="MM/dd/yyyy"
+                                               Editable="true"
+                                               Label="Free Agent Signing Date"
+                                               Mask="@(new DateMask("MM/dd/yyyy"))"
+                                               Variant="Variant.Outlined" />
+                            </Div>
                         </Div>
-                        <Div Class="col-3">
-                            <MudDatePicker @bind-Date="EditModel.LastAppearanceDate"
-                                           DateFormat="MM/dd/yyyy"
-                                           Editable="true"
-                                           Label="Last Appearance Date"
-                                           Mask="@(new DateMask("MM/dd/yyyy"))"
-                                           Variant="Variant.Outlined" />
-                        </Div>
-                        <Div Class="col-3">
-                            <MudDatePicker @bind-Date="EditModel.FreeAgentSigningDate"
-                                           DateFormat="MM/dd/yyyy"
-                                           Editable="true"
-                                           Label="Free Agent Signing Date"
-                                           Mask="@(new DateMask("MM/dd/yyyy"))"
-                                           Variant="Variant.Outlined" />
-                        </Div>
-                    </Div>
-                </MudTabPanel>
-            </MudTabs>
-        </Div>              
-    </ChildContent>
-</EditPage>
+                    </MudTabPanel>
+                </MudTabs>
+            </Div>
+        </ChildContent>
+    </EditPage>
+</PageLoader>
+

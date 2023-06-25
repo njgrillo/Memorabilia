@@ -33,17 +33,11 @@ public class PersonEditModel
 
     public DateTime? DeathDate { get; set; }
 
-    [Required]
-    [StringLength(225, ErrorMessage = "Display Name is too long.")]
-    [MinLength(1, ErrorMessage = "First Name is too short.")]
     public string DisplayName { get; set; }
 
     public override string ExitNavigationPath 
         => "Admin/EditDomainItems";
 
-    [Required]
-    [StringLength(50, ErrorMessage = "First Name is too long.")]
-    [MinLength(1, ErrorMessage = "First Name is too short.")]
     public string FirstName { get; set; }
 
     public string ImageFileName 
@@ -52,23 +46,18 @@ public class PersonEditModel
     public override string ItemTitle 
         => Constant.AdminDomainItem.People.Item;
 
-    [Required]
-    [StringLength(50, ErrorMessage = "Last Name is too long.")]
-    [MinLength(1, ErrorMessage = "Last Name is too short.")]
     public string LastName { get; set; }
 
-    [Required]
-    [StringLength(225, ErrorMessage = "Legal Name is too long.")]
-    [MinLength(1, ErrorMessage = "Legal Name is too short.")]
     public string LegalName { get; set; }
 
-    [StringLength(50, ErrorMessage = "Middle Name is too long.")]
+    public string MenuItemPath
+        => "People";
+
     public string MiddleName { get; set; }
 
     public override string Name 
         => ProfileName;
 
-    [StringLength(50, ErrorMessage = "Nickname is too long.")]
     public string Nickname { get; set; }
 
     public List<PersonNicknameEditModel> Nicknames { get; set; } 
@@ -84,7 +73,6 @@ public class PersonEditModel
     public override string RoutePrefix 
         => Constant.AdminDomainItem.People.Page;
 
-    [StringLength(25, ErrorMessage = "Suffix is too long.")]
     public string Suffix { get; set; }
 
     public List<PersonTeamEditModel> Teams { get; set; } 
