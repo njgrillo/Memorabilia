@@ -9,12 +9,13 @@ public partial class PersonImageEditor
     [Inject]
     public ILogger<PersonImageEditor> Logger { get; set; }
 
-    private bool _hasImage;
+    [Inject]
+    public NavigationManager NavigationManager { get; set; }
 
-    protected async Task HandleValidSubmit()
-    {
-        await HandleValidSubmit(new SavePersonImage(EditModel.PersonId, EditModel.PersonImageFileName));
-    }
+    [Inject]
+    public ISnackbar Snackbar { get; set; }
+
+    private bool _hasImage;    
 
     protected override async Task OnInitializedAsync()
     {
@@ -25,6 +26,19 @@ public partial class PersonImageEditor
         _hasImage = !EditModel.PersonImageFileName.IsNullOrEmpty();
 
         IsLoaded = true;
+    }
+
+    protected async Task Save()
+    {
+        EditModeType editModeType = EditModel.Id > 0
+            ? EditModeType.Update
+            : EditModeType.Add;
+
+        await HandleValidSubmit(new SavePersonImage(EditModel.PersonId, EditModel.PersonImageFileName));
+
+        NavigationManager.NavigateTo(EditModel.SaveReturnNavigationPath);
+
+        Snackbar.Add($"{EditModel.ItemTitle} {(EditModel.ItemTitle.EndsWith("s") ? "were " : "was ")} {editModeType.ToEditModeTypeNamePastTense()} successfully!", Severity.Success);
     }
 
     private async Task LoadFile(InputFileChangeEventArgs e)
@@ -39,11 +53,6 @@ public partial class PersonImageEditor
         }
 
         _hasImage = true;
-    }
-
-    protected void OnSaveReturnClick()
-    {
-        EditModel.ExitNavigationPath = EditModel.SaveReturnNavigationPath;
     }
 
     private void Remove()

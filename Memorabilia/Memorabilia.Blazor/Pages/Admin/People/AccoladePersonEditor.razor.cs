@@ -4,26 +4,7 @@ public partial class AccoladePersonEditor
     : EditPersonItem<PersonAccoladeEditModel, PersonAccoladeModel>
 {
     [Inject]
-    public AccoladeValidator Validator { get; set; }
-
-    private bool PerformValidation;
-
-    protected async Task HandleValidSubmit()
-    {
-        var command = new SavePersonAccolades.Command(PersonId, EditModel);        
-
-        EditModel.ValidationResult = Validator.Validate(command);
-
-        if (!EditModel.ValidationResult.IsValid)
-        {
-            PerformValidation = true;
-            return;
-        }
-
-        await HandleValidSubmit(command);
-
-        PerformValidation = false;
-    }
+    public AccoladeValidator Validator { get; set; }    
 
     protected override async Task OnInitializedAsync()
     {
@@ -32,8 +13,18 @@ public partial class AccoladePersonEditor
 
         EditModel = new PersonAccoladeEditModel(PersonId, model);
 
-        PerformValidation = true;
-
         IsLoaded = true;
-    }    
+    }
+
+    protected async Task Save()
+    {
+        var command = new SavePersonAccolades.Command(PersonId, EditModel);
+
+        EditModel.ValidationResult = Validator.Validate(command);
+
+        if (!EditModel.ValidationResult.IsValid)
+            return;
+
+        await HandleValidSubmit(command);
+    }
 }

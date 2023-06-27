@@ -1,23 +1,13 @@
 ﻿@inherits EditPersonItem<PersonAccoladeEditModel, PersonAccoladeModel>
 
 <PageLoader IsLoading="@(!IsLoaded)">
-    <EditPage ContinueNavigationPath="@EditModel.ContinueNavigationPath"
-              DisplayBackToMenuItemLink="true"
-              EditMode="EditModel.EditModeType"
-              ExitNavigationPath="@EditModel.ExitNavigationPath"
-              ImageFileName="@EditModel.ImageFileName"
-              ItemName="@EditModel.ItemTitle"
-              MenuItemLinkText="Back to View People"
-              MenuItemPath="@EditModel.MenuItemPath"
-              Model="EditModel"
-              OnSave="HandleValidSubmit"
-              PageFooterButtonText="@EditModel.ExitButtonText"
-              PageFooterNavigationPath="@EditModel.BackNavigationPath"
-              PageTitle="@EditModel.PageTitle"
-              PerformValidation="PerformValidation"
-              TItem="PersonAccoladeEditModel"
-              UseMultipleButtons="true"
-              ValidationResult="@EditModel.ValidationResult">
+    <PageEditor DisplayBackToMenuItemLink="true"
+                EditModel="EditModel"
+                MenuItemLinkText="Back to View People"
+                MenuItemPath="@EditModel.MenuItemPath"             
+                OnSave="Save"
+                PageImageFileName="@EditModel.ImageFileName"
+                TItem="PersonAccoladeEditModel">
         <TimelineContent>
             <PersonTimeline EditMode="EditModel.EditModeType"
                             PersonId="EditModel.PersonId"
@@ -95,5 +85,5 @@
                 </MudTabs>
             </Div>
         </ChildContent>
-    </EditPage>
+    </PageEditor>
 </PageLoader>

@@ -195,6 +195,11 @@ public static class DomainExtensions
             ? Constant.EditModeType.Update.Name
             : Constant.EditModeType.Add.Name;
 
+    public static string ToEditModeTypeNamePastTense(this Constant.EditModeType editModeType)
+        => editModeType == Constant.EditModeType.Update
+            ? "updated"
+            : "added";
+
     public static PersonImageEditModel ToImageEditModel(this Entity.Person person)
         => new(new PersonImageModel(person));
 

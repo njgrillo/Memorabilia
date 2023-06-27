@@ -1,22 +1,13 @@
 ﻿@inherits EditPersonItem<PersonImageEditModel, PersonImageModel>
 
 <PageLoader IsLoading="@(!IsLoaded)">
-    <EditPage ContinueNavigationPath="@EditModel.ContinueNavigationPath"
-              DisplayBackToMenuItemLink="true"
-              DisplaySaveContinueButton="false"
-              EditMode="EditModel.EditModeType"
-              ExitNavigationPath="@EditModel.ExitNavigationPath"
-              ImageFileName="@EditModel.ImageFileName"
-              ItemName="@EditModel.ItemTitle"
-              MenuItemLinkText="Back to View People"
-              MenuItemPath="@EditModel.MenuItemPath"
-              Model="EditModel"
-              OnSave="HandleValidSubmit"
-              PageFooterButtonText="@EditModel.ExitButtonText"
-              PageFooterNavigationPath="@EditModel.BackNavigationPath"
-              PageTitle="@EditModel.PageTitle"
-              TItem="PersonImageEditModel"
-              UseMultipleButtons="true">
+    <PageEditor DisplayBackToMenuItemLink="true"
+                DisplaySaveContinueButton="false"
+                EditModel="EditModel"              
+                MenuItemLinkText="Back to View People"
+                MenuItemPath="@EditModel.MenuItemPath"        
+                PageImageFileName="@EditModel.ImageFileName"
+                TItem="PersonImageEditModel">
         <TimelineContent>
             <PersonTimeline EditMode="EditModel.EditModeType"
                             PersonId="EditModel.PersonId"
@@ -51,10 +42,10 @@
             </DivRowCol12Center>
         </ChildContent>
         <AdditionalButtons>
-            <SaveButton OnClick="OnSaveReturnClick"
+            <SaveButton OnClick="Save"
                         Text="Save & Return to People" />
         </AdditionalButtons>
-    </EditPage>
+    </PageEditor>
 </PageLoader>
 
 

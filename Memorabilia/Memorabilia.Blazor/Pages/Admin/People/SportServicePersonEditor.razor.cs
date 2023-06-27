@@ -4,26 +4,7 @@ public partial class SportServicePersonEditor
     : EditPersonItem<PersonSportServiceEditModel, PersonSportServiceModel>
 {
     [Inject]
-    public SportServiceValidator Validator { get; set; }
-
-    private bool PerformValidation;
-
-    protected async Task HandleValidSubmit()
-    {
-        var command = new SavePersonSportService.Command(PersonId, EditModel);
-
-        EditModel.ValidationResult = Validator.Validate(command);
-
-        if (!EditModel.ValidationResult.IsValid)
-        {
-            PerformValidation = true;
-            return;
-        }      
-
-        await HandleValidSubmit(command);
-
-        PerformValidation = false;
-    }
+    public SportServiceValidator Validator { get; set; } 
 
     protected override async Task OnInitializedAsync()
     {
@@ -31,8 +12,18 @@ public partial class SportServicePersonEditor
 
         EditModel = new PersonSportServiceEditModel(PersonId, new PersonSportServiceModel(person));
 
-        PerformValidation = true;
-
         IsLoaded = true;
-    }    
+    }
+
+    protected async Task Save()
+    {
+        var command = new SavePersonSportService.Command(PersonId, EditModel);
+
+        EditModel.ValidationResult = Validator.Validate(command);
+
+        if (!EditModel.ValidationResult.IsValid)
+            return;
+
+        await HandleValidSubmit(command);
+    }
 }

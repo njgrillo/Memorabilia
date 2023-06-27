@@ -4,26 +4,7 @@ public partial class HallOfFamePersonEditor
     : EditPersonItem<PersonHallOfFamesEditModel, PersonHallOfFameModel>
 {
     [Inject]
-    public HallOfFameValidator Validator { get; set; }
-
-    private bool PerformValidation;
-
-    protected async Task HandleValidSubmit()
-    {
-        var command = new SavePersonHallOfFame.Command(PersonId, EditModel);
-
-        EditModel.ValidationResult = Validator.Validate(command);
-
-        if (!EditModel.ValidationResult.IsValid)
-        {
-            PerformValidation = true;
-            return;
-        }
-
-        await HandleValidSubmit(new SavePersonHallOfFame.Command(PersonId, EditModel));
-
-        PerformValidation = false;
-    }
+    public HallOfFameValidator Validator { get; set; }    
 
     protected override async Task OnInitializedAsync()
     {
@@ -31,8 +12,18 @@ public partial class HallOfFamePersonEditor
 
         EditModel = new PersonHallOfFamesEditModel(PersonId, model);
 
-        PerformValidation = true;
-
         IsLoaded = true;
-    }    
+    }
+
+    protected async Task Save()
+    {
+        var command = new SavePersonHallOfFame.Command(PersonId, EditModel);
+
+        EditModel.ValidationResult = Validator.Validate(command);
+
+        if (!EditModel.ValidationResult.IsValid)
+            return;
+
+        await HandleValidSubmit(new SavePersonHallOfFame.Command(PersonId, EditModel));
+    }
 }

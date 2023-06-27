@@ -4,12 +4,7 @@ public partial class OccupationPersonEditor
     : EditPersonItem<PersonOccupationsEditModel, PersonOccupationModel>
 {
     protected RecentPersonOccupationsModel[] RecentPersonOccupations { get; private set; }
-        = Array.Empty<RecentPersonOccupationsModel>();
-
-    protected async Task HandleValidSubmit()
-    {
-        await HandleValidSubmit(new SavePersonOccupation.Command(PersonId, EditModel));
-    }
+        = Array.Empty<RecentPersonOccupationsModel>();    
 
     protected override async Task OnInitializedAsync()
     {
@@ -38,5 +33,10 @@ public partial class OccupationPersonEditor
         EditModel.Sports = recentOccupation.Sports
                                            .Select(sport => new PersonSportEditModel(new Entity.PersonSport(EditModel.PersonId, sport.Id, sport.IsPrimary)))
                                            .ToList();
+    }
+
+    protected async Task Save()
+    {
+        await HandleValidSubmit(new SavePersonOccupation.Command(PersonId, EditModel));
     }
 }

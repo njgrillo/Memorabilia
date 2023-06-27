@@ -32,23 +32,13 @@ public partial class PageEditor<TItem> where TItem : EditModel
     public TItem EditModel { get; set; }
 
     [Parameter]
-    public string ItemName { get; set; }
-
-    [Parameter]
     public string MenuItemLinkText { get; set; }
 
     [Parameter]
     public string MenuItemPath { get; set; }
 
     [Parameter]
-    public EventCallback<TItem> OnSave { get; set; }
-
-    [Parameter]
-    public string PageFooterButtonText { get; set; }
-        = "Back";
-
-    [Parameter]
-    public string PageFooterNavigationPath { get; set; }
+    public EventCallback OnSave { get; set; }
 
     [Parameter]
     public string PageImageFileName { get; set; }
@@ -58,6 +48,7 @@ public partial class PageEditor<TItem> where TItem : EditModel
 
     [Parameter]
     public bool UseMultipleButtons { get; set; }
+        = true;
 
     public Alert[] ValidationResultAlerts
         => EditModel.ValidationResult != null
@@ -74,15 +65,24 @@ public partial class PageEditor<TItem> where TItem : EditModel
         }
     }
 
-    protected async Task Save(bool remainOnPage)
+    protected async Task Save(bool exit)
     {
-        await OnSave.InvokeAsync(EditModel);
+        EditModeType editModeType = EditModel.Id > 0
+            ? EditModeType.Update
+            : EditModeType.Add;
 
-        if (!remainOnPage)
+        await OnSave.InvokeAsync();        
+
+        if (!EditModel.ValidationResult.IsValid)
         {
-            NavigationManager.NavigateTo(remainOnPage ? EditModel.ContinueNavigationPath : EditModel.ExitNavigationPath);
-        }        
-        
-        Snackbar.Add($"{ItemName} {(ItemName.EndsWith("s") ? "were " : "was ")} {(EditModel.EditModeType == EditModeType.Add ? "added" : "updated")} successfully!", Severity.Success);
+            Snackbar.Add($"{EditModel.ItemTitle} {(EditModel.ItemTitle.EndsWith("s") ? "were not " : "was not")} {editModeType.ToEditModeTypeNamePastTense()}", Severity.Error);
+            return;
+        }            
+
+        NavigationManager.NavigateTo(!exit 
+            ? EditModel.ContinueNavigationPath 
+            : EditModel.ExitNavigationPath);
+
+        Snackbar.Add($"{EditModel.ItemTitle} {(EditModel.ItemTitle.EndsWith("s") ? "were " : "was ")} {editModeType.ToEditModeTypeNamePastTense()} successfully!", Severity.Success);
     }
 }

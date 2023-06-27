@@ -4,26 +4,7 @@ public partial class TeamPersonEditor
     : EditPersonItem<PersonTeamsEditModel, PersonTeamModel>
 {
     [Inject]
-    public TeamValidator Validator { get; set; }
-
-    private bool PerformValidation;
-
-    protected async Task HandleValidSubmit()
-    {
-        var command = new SavePersonTeam.Command(PersonId, EditModel.Teams);
-
-        EditModel.ValidationResult = Validator.Validate(command);        
-
-        if (!EditModel.ValidationResult.IsValid)
-        {
-            PerformValidation = true;
-            return;
-        }
-
-        await HandleValidSubmit(command);
-
-        PerformValidation = false;
-    }
+    public TeamValidator Validator { get; set; }    
 
     protected override async Task OnInitializedAsync()
     {
@@ -31,8 +12,18 @@ public partial class TeamPersonEditor
 
         EditModel = person.ToTeamEditModel();
 
-        PerformValidation = true;
-
         IsLoaded = true;
-    }    
+    }
+
+    protected async Task Save()
+    {
+        var command = new SavePersonTeam.Command(PersonId, EditModel.Teams);
+
+        EditModel.ValidationResult = Validator.Validate(command);
+
+        if (!EditModel.ValidationResult.IsValid)
+            return;
+
+        await HandleValidSubmit(command);
+    }
 }
