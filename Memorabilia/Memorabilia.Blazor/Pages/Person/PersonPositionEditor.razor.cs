@@ -15,7 +15,7 @@ public partial class PersonPositionEditor
 
     protected override void OnParametersSet()
     {
-        if (Positions.Any())
+        if (Positions.Any(position => !position.IsDeleted))
             Model.PositionType = Enum.PositionType.Secondary;
     }
 

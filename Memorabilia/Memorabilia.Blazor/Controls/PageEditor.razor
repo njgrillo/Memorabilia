@@ -1,0 +1,57 @@
+﻿@typeparam TItem 
+
+<PageHeader PageTitle="@EditModel.PageTitle" />
+@TimelineContent
+<PageBorder>
+    <Condition Evaluation="DisplayBackToMenuItemLink">
+        <Match>
+            <LeftRightSection>
+                <Right>
+                    <MudLink Href="@MenuItemPath">@MenuItemLinkText</MudLink>
+                </Right>
+            </LeftRightSection>
+        </Match>
+    </Condition>
+    <Condition Evaluation="@(ValidationResultAlerts.Any())">
+        <Match>
+            <AlertPanel Alerts="ValidationResultAlerts" />
+        </Match>
+    </Condition>
+    <PageImage ImageFileName="@PageImageFileName" />
+    @ChildContent
+    <Condition Evaluation="@UseMultipleButtons">
+        <Match>
+            <LeftRightSection>
+                <Right>
+                    <MudStack Row="true"
+                              Style="margin-top:1%;margin-bottom:1%;">
+                        <CancelButton OnClick="@(_ => NavigationManager.NavigateTo(EditModel.ExitNavigationPath))" />
+                        @AdditionalButtons
+                        <Div Hidden="@(!DisplaySaveContinueButton)">
+                            <SaveButton OnClick="@(_ => Save(true))"
+                                        Text="Save & Exit" />
+                            <SaveButton OnClick="@(_ => Save(false))"
+                                        Text="Save & Continue" />
+                        </Div>
+                    </MudStack>
+                </Right>
+            </LeftRightSection>
+        </Match>
+        <NotMatch>
+            <Div Style="margin-top:1%;margin-bottom:1%;">
+                <LeftRightSection>
+                    <Right>
+                        <SaveButton Text="Save" />
+                    </Right>
+                </LeftRightSection>
+            </Div>
+        </NotMatch>
+    </Condition>
+</PageBorder>
+<Condition Evaluation="@DisplayFooter">
+    <Match>
+        <PageFooter NavigationPath="@PageFooterNavigationPath"
+                    NavigationPathText="@PageFooterButtonText" />
+    </Match>
+</Condition>
+

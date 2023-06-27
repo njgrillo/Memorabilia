@@ -23,37 +23,32 @@
                             PersonStep="EditModel.PersonStep" />
         </TimelineContent>
         <ChildContent>
-            <DivRowCol12>
-                <Div Class="row">
-                    <Div Class="col-3">
-                        <InputFile id="fileInput"
-                                   accept="image/*"
-                                   hidden
-                                   OnChange="@LoadFile" />
-                        <MudFab Color="MudBlazor.Color.Secondary"
-                                HtmlTag="label"
-                                Icon="@Icons.Material.Filled.Image"
-                                Label="Load picture"
-                                for="fileInput" />
-                    </Div>
-                </Div>
-                <br />
-                <Div Class="row">
-                    <Div Class="col-3">
-                        <Condition Evaluation="_hasImage">
-                            <Match>
-                                <ImageEditor CanRemove="true"
-                                             HasPrimary="false"
-                                             ImageFileName="@EditModel.PersonImageFileName"
-                                             ImageRootType="ImageRootType.People"
-                                             ImageType="ImageType.Primary"
-                                             OnRemove="Remove" />
-                            </Match>
-                        </Condition>
-                    </Div>
-                </Div>
-                <br />
-            </DivRowCol12>
+            <DivRowCol12Center>
+                <InputFile id="fileInput"
+                           accept="image/*"
+                           hidden
+                           OnChange="@LoadFile" />
+                <MudFab Color="MudBlazor.Color.Secondary"
+                        HtmlTag="label"
+                        Icon="@Icons.Material.Filled.Image"
+                        Label="Load picture"
+                        for="fileInput" />                
+            </DivRowCol12Center>
+            <br />
+            <DivRowCol12Center>
+                <Condition Evaluation="_hasImage">
+                    <Match>
+                        <Div Class="col-3">
+                            <ImageEditor CanRemove="true"
+                                         HasPrimary="false"
+                                         ImageFileName="@EditModel.PersonImageFileName"
+                                         ImageRootType="ImageRootType.People"
+                                         ImageType="ImageType.Primary"
+                                         OnRemove="Remove" />
+                        </Div>                        
+                    </Match>
+                </Condition>
+            </DivRowCol12Center>
         </ChildContent>
         <AdditionalButtons>
             <SaveButton OnClick="OnSaveReturnClick"
