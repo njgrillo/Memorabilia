@@ -9,9 +9,6 @@ public partial class MemorabiliaEditor
     public CommandRouter CommandRouter { get; set; }
 
     [Inject]
-    public NavigationManager NavigationManager { get; set; }
-
-    [Inject]
     public QueryRouter QueryRouter { get; set; }
 
     [Inject]
@@ -20,10 +17,10 @@ public partial class MemorabiliaEditor
     [Parameter]
     public int Id { get; set; }
 
-    protected bool IsLoaded { get; set; }
+    protected MemorabiliaEditModel EditModel
+        = new();
 
-    protected MemorabiliaEditModel Model 
-        = new ();        
+    protected bool IsLoaded { get; set; }      
 
     protected override async Task OnInitializedAsync()
     {
@@ -33,37 +30,37 @@ public partial class MemorabiliaEditor
             return;
         }
 
-        Model = (await QueryRouter.Send(new GetMemorabiliaItem(Id))).ToEditModel();
+        EditModel = (await QueryRouter.Send(new GetMemorabiliaItem(Id))).ToEditModel();
 
         IsLoaded = true;
     }
 
-    protected async Task OnSave()
-    {    
-        Model.UserId = ApplicationStateService.CurrentUser.Id;
+    protected async Task Save()
+    {
+        EditModel.UserId = ApplicationStateService.CurrentUser.Id;
 
-        var command = new SaveMemorabiliaItem.Command(Model);
+        var command = new SaveMemorabiliaItem.Command(EditModel);
 
-        Model.ValidationResult = Validator.Validate(command);
+        EditModel.ValidationResult = Validator.Validate(command);
 
-        if (!Model.ValidationResult.IsValid)
+        if (!EditModel.ValidationResult.IsValid)
             return;
 
         await CommandRouter.Send(command);
 
-        Model.ContinueNavigationPath = $"Memorabilia/{Model.ItemTypeName.Replace(" ", "")}/Edit/{command.Id}";
+        EditModel.ContinueNavigationPath = $"Memorabilia/{EditModel.ItemTypeName.Replace(" ", "")}/Edit/{command.Id}";
     }
 
     private void OnAcquisitionTypeChange(int acquisitionTypeId)
     {
-        Model.AcquisitionTypeId = acquisitionTypeId;
+        EditModel.AcquisitionTypeId = acquisitionTypeId;
 
         var acquisitionType = AcquisitionType.Find(acquisitionTypeId);
 
         if (!acquisitionType.CanHaveCost())
-            Model.Cost = null;
+            EditModel.Cost = null;
 
         if (!acquisitionType.CanHavePurchaseType())
-            Model.PurchaseTypeId = 0;
+            EditModel.PurchaseTypeId = 0;
     }
 }

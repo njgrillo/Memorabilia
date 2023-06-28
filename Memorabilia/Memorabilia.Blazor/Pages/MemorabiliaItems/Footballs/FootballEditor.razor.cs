@@ -26,7 +26,5 @@ public partial class FootballEditor
             return;
 
         await CommandRouter.Send(command);
-
-        EditModel.SavedSuccessfully = true; await CommandRouter.Send(new SaveFootball.Command(EditModel));
     }
 }

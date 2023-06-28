@@ -1,16 +1,10 @@
 ﻿@inherits EditItem<DivisionEditModel, DivisionModel>
 
-<EditPage ContinueNavigationPath="@EditModel.RoutePrefix"
-          EditMode="EditModel.EditModeType" 
-          ExitNavigationPath="@EditModel.RoutePrefix"
-          ImageFileName="@EditModel.ImageFileName"
-          ItemName="@EditModel.ItemTitle"
-          Model="EditModel"
-          OnSave="HandleValidSubmit"
-          PageFooterButtonText="@EditModel.ExitButtonText"
-          PageFooterNavigationPath="@EditModel.ExitNavigationPath"
-          PageTitle="@EditModel.PageTitle"
-          TItem="DivisionEditModel">
+<PageEditor DisplaySaveContinueButton="false"
+            PageImageFileName="@EditModel.ImageFileName"
+            EditModel="EditModel"
+            OnSave="Save"
+            TItem="DivisionEditModel">
     <DivRowFormGroup>
         <Div Class="col-3">
             <ConferenceDropDown SelectedValue="EditModel.ConferenceId"
@@ -37,4 +31,4 @@
                        SelectedTextChanged="@((p) => EditModel.Abbreviation = p)" />
         </Div>
     </DivRowFormGroup>
-</EditPage>
+</PageEditor>

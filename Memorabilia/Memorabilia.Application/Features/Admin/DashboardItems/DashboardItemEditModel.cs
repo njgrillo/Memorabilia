@@ -11,6 +11,9 @@ public class DashboardItemEditModel : EditModel
         Name = model.Name;
     }
 
+    public override string ContinueNavigationPath
+        => RoutePrefix;
+
     public string Description { get; set; }
 
     public override string ExitNavigationPath 

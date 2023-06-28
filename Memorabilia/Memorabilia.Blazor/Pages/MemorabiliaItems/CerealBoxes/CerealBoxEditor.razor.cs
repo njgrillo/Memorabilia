@@ -25,8 +25,6 @@ public partial class CerealBoxEditor
         if (!EditModel.ValidationResult.IsValid)
             return;
 
-        await CommandRouter.Send(command);
-
-        EditModel.SavedSuccessfully = true; 
+        await CommandRouter.Send(command); 
     }
 }

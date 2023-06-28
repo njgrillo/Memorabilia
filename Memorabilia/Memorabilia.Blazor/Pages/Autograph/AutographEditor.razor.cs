@@ -31,7 +31,7 @@ public partial class AutographEditor
         IsLoaded = true;
     }
 
-    protected async Task OnSave()
+    protected async Task Save()
     {
         var command = new SaveAutograph.Command(Model);
 
@@ -42,7 +42,7 @@ public partial class AutographEditor
 
         await CommandRouter.Send(command);
 
-        Model.ContinueNavigationPath = $"Autographs/Inscriptions/{EditModeType.Update.Name}/{command.Id}";
+        Model.Id = command.Id;
     }
 
     private void GetModel(MemorabiliaModel model)

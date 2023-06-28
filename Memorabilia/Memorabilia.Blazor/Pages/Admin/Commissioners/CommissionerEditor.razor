@@ -1,16 +1,10 @@
 ﻿@inherits EditItem<CommissionerEditModel, CommissionerModel>
 
-<EditPage ContinueNavigationPath="@EditModel.RoutePrefix"
-          EditMode="EditModel.EditModeType" 
-          ExitNavigationPath="@EditModel.RoutePrefix"
-          ImageFileName="@EditModel.ImageFileName"
-          ItemName="@EditModel.ItemTitle"
-          Model="EditModel"    
-          OnSave="HandleValidSubmit"
-          PageFooterButtonText="@EditModel.ExitButtonText"
-          PageFooterNavigationPath="@EditModel.ExitNavigationPath"
-          PageTitle="@EditModel.PageTitle"
-          TItem="CommissionerEditModel">
+<PageEditor DisplaySaveContinueButton="false"
+            EditModel="EditModel"    
+            OnSave="Save"
+            PageImageFileName="@EditModel.ImageFileName"
+            TItem="CommissionerEditModel">
     <DivRowFormGroup>
         <Div Class="col-3">
             <SportLeagueLevelDropDown Disabled="@(!EditModel.IsNew)"
@@ -40,4 +34,4 @@
                               ValueChanged="@((p) => EditModel.EndYear = p)" />
         </Div>
     </DivRowFormGroup>
-</EditPage>
+</PageEditor>

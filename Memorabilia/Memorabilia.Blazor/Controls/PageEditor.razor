@@ -2,6 +2,7 @@
 
 <PageHeader PageTitle="@EditModel.PageTitle" />
 @TimelineContent
+@ImagePreview
 <PageBorder>
     <Condition Evaluation="DisplayBackToMenuItemLink">
         <Match>
@@ -27,9 +28,11 @@
                               Style="margin-top:1%;margin-bottom:1%;">
                         <CancelButton OnClick="@(_ => NavigationManager.NavigateTo(EditModel.ExitNavigationPath))" />
                         @AdditionalButtons
-                        <Div Hidden="@(!DisplaySaveContinueButton)">
+                        <Div Hidden="@(!DisplaySaveExitButton)">
                             <SaveButton OnClick="@(_ => Save(true))"
                                         Text="Save & Exit" />
+                        </Div>
+                        <Div Hidden="@(!DisplaySaveContinueButton)">
                             <SaveButton OnClick="@(_ => Save(false))"
                                         Text="Save & Continue" />
                         </Div>

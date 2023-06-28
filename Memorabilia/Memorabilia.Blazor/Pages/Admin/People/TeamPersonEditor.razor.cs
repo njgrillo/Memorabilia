@@ -24,6 +24,6 @@ public partial class TeamPersonEditor
         if (!EditModel.ValidationResult.IsValid)
             return;
 
-        await HandleValidSubmit(command);
+        await Save(command);
     }
 }

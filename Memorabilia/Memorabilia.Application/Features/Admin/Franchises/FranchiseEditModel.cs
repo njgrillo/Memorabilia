@@ -13,6 +13,9 @@ public class FranchiseEditModel : EditModel
         SportLeagueLevelId = model.SportLeagueLevelId;
     }
 
+    public override string ContinueNavigationPath
+        => RoutePrefix;
+
     public override string ExitNavigationPath 
         => Constant.AdminDomainItem.Franchises.Page;
 

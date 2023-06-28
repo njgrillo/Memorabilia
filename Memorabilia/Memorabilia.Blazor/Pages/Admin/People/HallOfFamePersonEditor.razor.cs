@@ -24,6 +24,6 @@ public partial class HallOfFamePersonEditor
         if (!EditModel.ValidationResult.IsValid)
             return;
 
-        await HandleValidSubmit(new SavePersonHallOfFame.Command(PersonId, EditModel));
+        await Save(new SavePersonHallOfFame.Command(PersonId, EditModel));
     }
 }

@@ -32,6 +32,9 @@ public class TeamChampionshipsEditModel : EditModel
         ? Constant.EditModeType.Update 
         : Constant.EditModeType.Add;
 
+    public override string ExitNavigationPath
+        => Constant.AdminDomainItem.Teams.Page;
+
     public string ImageFileName 
         => Constant.ImageFileName.ChampionshipTypes;
 

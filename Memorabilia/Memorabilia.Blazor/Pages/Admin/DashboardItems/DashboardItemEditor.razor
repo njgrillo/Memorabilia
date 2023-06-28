@@ -1,16 +1,10 @@
 ﻿@inherits EditItem<DashboardItemEditModel, DashboardItemModel>
 
-<EditPage ContinueNavigationPath="@EditModel.RoutePrefix"
-          EditMode="EditModel.EditModeType" 
-          ExitNavigationPath="@EditModel.RoutePrefix"
-          ImageFileName="@EditModel.ImageFileName"
-          ItemName="@EditModel.ItemTitle"
-          Model="EditModel"
-          OnSave="HandleValidSubmit"
-          PageFooterButtonText="@EditModel.ExitButtonText"
-          PageFooterNavigationPath="@EditModel.ExitNavigationPath"
-          PageTitle="@EditModel.PageTitle"
-          TItem="DashboardItemEditModel">
+<PageEditor DisplaySaveContinueButton="false"
+            EditModel="EditModel"
+            OnSave="Save"
+            PageImageFileName="@EditModel.ImageFileName"
+            TItem="DashboardItemEditModel">
     <DivRowFormGroup>
         <Div Class="col-3">
             <TextField Label="Name"
@@ -26,4 +20,4 @@
                        SelectedTextChanged="@((p) => EditModel.Description = p)" />
         </Div>
     </DivRowFormGroup>
-</EditPage>
+</PageEditor>

@@ -17,5 +17,6 @@ public class ItemEditModel : EditModel
     public override string PageTitle
         => $"{EditModeType.ToEditModeTypeName()} {ItemType?.Name} Details";
 
-    public bool SavedSuccessfully { get; set; }
+    public bool SavedSuccessfully 
+        => ValidationResult.IsValid;
 }

@@ -11,6 +11,9 @@ public class ItemTypeLevelEditModel : EditModel
         LevelTypeId = model.LevelTypeId;
     }
 
+    public override string ContinueNavigationPath
+        => RoutePrefix;
+
     public override string ExitNavigationPath 
         => Constant.AdminDomainItem.ItemTypeLevels.Page;
 

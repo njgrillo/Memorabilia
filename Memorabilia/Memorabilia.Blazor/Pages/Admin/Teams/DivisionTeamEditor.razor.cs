@@ -3,11 +3,6 @@
 public partial class DivisionTeamEditor 
     : EditTeamItem<TeamDivisionsEditModel, TeamDivisionModel>
 {
-    protected async Task HandleValidSubmit()
-    {
-        await HandleValidSubmit(new SaveTeamDivision.Command(TeamId, EditModel.Divisions));
-    }
-
     protected override async Task OnInitializedAsync()
     {
         Entity.TeamDivision[] divisions = await QueryRouter.Send(new GetTeamDivisions(TeamId));
@@ -16,5 +11,10 @@ public partial class DivisionTeamEditor
         {
             SportLeagueLevel = SportLeagueLevel.Find(SportLeagueLevelId)
         };
-    }    
+    }
+
+    protected async Task Save()
+    {
+        await Save(new SaveTeamDivision.Command(TeamId, EditModel.Divisions));
+    }
 }

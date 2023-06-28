@@ -25,7 +25,5 @@ public partial class FirstDayCoverEditor : MemorabiliaItem<FirstDayCoverEditMode
             return;
 
         await CommandRouter.Send(command);
-
-        EditModel.SavedSuccessfully = true;
     }
 }

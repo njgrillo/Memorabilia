@@ -12,9 +12,6 @@ public partial class ManageDashboard
     public NavigationManager NavigationManager { get; set; }
 
     [Inject]
-    public QueryRouter QueryRouter { get; set; }
-
-    [Inject]
     public ISnackbar Snackbar { get; set; }
 
     private string SelectAllButtonText
@@ -23,15 +20,7 @@ public partial class ManageDashboard
             : "Select All";
 
     protected UserDashboardEditModel Model 
-        = new();
-
-    protected async Task HandleValidSubmit()
-    {
-        await CommandRouter.Send(new SaveUserDashboard.Command(Model));
-
-        NavigationManager.NavigateTo(Model.ContinueNavigationPath);
-        Snackbar.Add($"{Model.PageTitle} was saved successfully!", Severity.Success);
-    }
+        = new();    
 
     protected override void OnInitialized()
     {
@@ -48,5 +37,13 @@ public partial class ManageDashboard
         {
             dashboardItem.IsSelected = selectAll;
         }
+    }
+
+    protected async Task Save()
+    {
+        await CommandRouter.Send(new SaveUserDashboard.Command(Model));
+
+        NavigationManager.NavigateTo(Model.ContinueNavigationPath);
+        Snackbar.Add($"{Model.PageTitle} was saved successfully!", Severity.Success);
     }
 }

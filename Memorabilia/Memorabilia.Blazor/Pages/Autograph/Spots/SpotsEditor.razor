@@ -1,18 +1,10 @@
 ﻿@inherits AutographItem<SpotEditModel>
 
 <PageLoader IsLoading="@(!IsLoaded)">
-    <EditPage ContinueNavigationPath="@Model.ContinueNavigationPath"
-              EditMode="Model.EditModeType"
-              ExitNavigationPath="@Model.ExitNavigationPath"
-              ImageFileName="@Model.ImageFileName"
-              ItemName="@Model.ItemTypeName"
-              Model="Model"
-              OnSave="OnSave"
-              PageFooterButtonText="@Model.ExitButtonText"
-              PageFooterNavigationPath="@Model.BackNavigationPath"
-              PageTitle="@Model.PageTitle"
-              TItem="SpotEditModel"
-              UseMultipleButtons="true">
+    <PageEditor EditModel="Model"
+                OnSave="Save"
+                PageImageFileName="@Model.ImageFileName"
+                TItem="SpotEditModel">
         <TimelineContent>
             <AutographTimeline AutographId="Model.AutographId"
                                AutographStep="Model.AutographStep"
@@ -42,6 +34,6 @@
                 </Div>
             </DivRowFormGroup>
         </ChildContent>
-    </EditPage>
+    </PageEditor>
 </PageLoader>
 

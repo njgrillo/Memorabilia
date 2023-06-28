@@ -13,6 +13,9 @@ public class PewterEditModel : EditModel
         TeamId = model.TeamId;
     }
 
+    public override string ContinueNavigationPath
+        => RoutePrefix;
+
     public override string ExitNavigationPath 
         => Constant.AdminDomainItem.Pewters.Page;
 

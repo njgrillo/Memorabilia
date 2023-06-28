@@ -2,28 +2,17 @@
 
 @inherits MemorabiliaItem<TItem>
 
-<EditPage ContinueNavigation="@Item.SavedSuccessfully" 
-          ContinueNavigationPath="@Item.ContinueNavigationPath"
-          EditMode="Item.EditModeType"
-          ExitNavigationPath="@Item.ExitNavigationPath"
-          ImageFileName="@Item.ImageFileName"
-          ItemName="@Item.ItemType.Name"
-          Model="Item"
-          OnSave="Save"
-          PageFooterButtonText="@Item.ExitButtonText"
-          PageFooterNavigationPath="@Item.BackNavigationPath"
-          PageTitle="@Item.PageTitle"
-          PerformValidation="PerformValidation"
-          TItem="TItem"
-          UseMultipleButtons="true"
-          ValidationResult="@Item.ValidationResult">
+<PageEditor EditModel="EditModel"
+            OnSave="Save"
+            PageImageFileName="@EditModel.ImageFileName"
+            TItem="TItem">
     <TimelineContent>
-        <MemorabiliaItemTimeline EditMode="Item.EditModeType"
-                                 ItemTypeName="@Item.ItemType.Name"
-                                 MemorabiliaId="Item.MemorabiliaId"
-                                 MemorabiliaItemStep="Item.MemorabiliaItemStep" />
+        <MemorabiliaItemTimeline EditMode="EditModel.EditModeType"
+                                 ItemTypeName="@EditModel.ItemType.Name"
+                                 MemorabiliaId="EditModel.MemorabiliaId"
+                                 MemorabiliaItemStep="EditModel.MemorabiliaItemStep" />
     </TimelineContent>
     <ChildContent>
         @Content
     </ChildContent>
-</EditPage>
+</PageEditor>

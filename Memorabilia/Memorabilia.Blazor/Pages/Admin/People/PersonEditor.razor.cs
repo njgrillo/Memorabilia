@@ -44,7 +44,7 @@ public partial class PersonEditor
         if (!EditModel.ValidationResult.IsValid)
             return;
 
-        await HandleValidSubmit(command);
+        await Save(command);
 
         EditModel.Id = command.Id;
     }

@@ -1,16 +1,10 @@
 ﻿@inherits EditItem<LeaguePresidentEditModel, LeaguePresidentModel>
 
-<EditPage ContinueNavigationPath="@EditModel.RoutePrefix"
-          EditMode="EditModel.EditModeType" 
-          ExitNavigationPath="@EditModel.RoutePrefix"
-          ImageFileName="@EditModel.ImageFileName"
-          ItemName="@EditModel.ItemTitle"
-          Model="EditModel"   
-          OnSave="HandleValidSubmit"
-          PageFooterButtonText="@EditModel.ExitButtonText"
-          PageFooterNavigationPath="@EditModel.ExitNavigationPath"
-          PageTitle="@EditModel.PageTitle"
-          TItem="LeaguePresidentEditModel">
+<PageEditor DisplaySaveContinueButton="false"
+            PageImageFileName="@EditModel.ImageFileName"
+            EditModel="EditModel"
+            OnSave="Save"
+            TItem="LeaguePresidentEditModel">
     <DivRowFormGroup>
         <Div Class="col-3">
             <SportLeagueLevelDropDown Disabled="@(!EditModel.IsNew)"
@@ -47,4 +41,4 @@
                               ValueChanged="@((p) => EditModel.EndYear = p)" />
         </Div>
     </DivRowFormGroup>
-</EditPage>
+</PageEditor>

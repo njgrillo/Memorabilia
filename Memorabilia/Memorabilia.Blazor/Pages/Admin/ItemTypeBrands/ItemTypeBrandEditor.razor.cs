@@ -3,13 +3,13 @@
 public partial class ItemTypeBrandEditor 
     : EditItem<ItemTypeBrandEditModel, ItemTypeBrandModel>
 {
-    protected async Task HandleValidSubmit()
-    {
-        await HandleValidSubmit(new SaveItemTypeBrand(EditModel));
-    }
-
     protected override async Task OnInitializedAsync()
     {
         EditModel = (await QueryRouter.Send(new GetItemTypeBrand(Id))).ToEditModel();
+    }
+
+    protected async Task Save()
+    {
+        await Save(new SaveItemTypeBrand(EditModel));
     }
 }

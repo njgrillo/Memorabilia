@@ -2,12 +2,7 @@
 
 public partial class ConferenceTeamEditor 
     : EditTeamItem<TeamConferencesEditModel, TeamConferenceModel>
-{
-    protected async Task HandleValidSubmit()
-    {
-        await HandleValidSubmit(new SaveTeamConference.Command(TeamId, EditModel.Conferences));
-    }
-
+{  
     protected override async Task OnInitializedAsync()
     {
         Entity.TeamConference[] teamConferences 
@@ -17,5 +12,10 @@ public partial class ConferenceTeamEditor
         {
             SportLeagueLevel = SportLeagueLevel.Find(SportLeagueLevelId)
         };
-    }    
+    }
+
+    protected async Task Save()
+    {
+        await Save(new SaveTeamConference.Command(TeamId, EditModel.Conferences));
+    }
 }

@@ -1,83 +1,81 @@
 ﻿@typeparam TItem
 
 <Div Style="border: 1px solid black; margin-top: 2%; margin-bottom: 2%; margin-left: 2%; margin-right: 2%;">
-    <EditForm Model="Model">
-        <DivPad2>
-            <DivRowCol12Center>
-                <MudImage Class="rounded-lg"
-                          Elevation="5"
-                          Height="150"
-                          ObjectFit="@ObjectFit.Cover"
-                          Src="@(ImageService.GetDomainImageData(Constant.ImageFileName.Images))"
-                          Width="150" />
-            </DivRowCol12Center>
-            <Div Class="row">
-                <Div>
-                    <InputFile id="fileInput"
-                               @bind-Value="@Images"
-                               accept="image/*" hidden multiple
-                               OnChange="@LoadFiles" />
-                    <MudFab Color="MudBlazor.Color.Secondary"
-                            HtmlTag="label"
-                            Icon="@Icons.Material.Filled.Image"
-                            Label="Load pictures"
-                            for="fileInput" />
-                </Div>
-                <Div Style="padding-left:15px;">
-                    <Condition Evaluation="CanImportImages">
-                        <Match>
-                            <MudFab Color="MudBlazor.Color.Secondary"
-                                    Icon="@Icons.Material.Filled.Image"
-                                    Label="@ImportButtonText"
-                                    OnClick="Import" />
-                        </Match>
-                    </Condition>
-                </Div>
+    <DivPad2>
+        <DivRowCol12Center>
+            <MudImage Class="rounded-lg"
+                      Elevation="5"
+                      Height="150"
+                      ObjectFit="@ObjectFit.Cover"
+                      Src="@(ImageService.GetDomainImageData(Constant.ImageFileName.Images))"
+                      Width="150" />
+        </DivRowCol12Center>
+        <Div Class="row">
+            <Div>
+                <InputFile id="fileInput"
+                           @bind-Value="@Images"
+                           accept="image/*" hidden multiple
+                           OnChange="@LoadFiles" />
+                <MudFab Color="MudBlazor.Color.Secondary"
+                        HtmlTag="label"
+                        Icon="@Icons.Material.Filled.Image"
+                        Label="Load pictures"
+                        for="fileInput" />
             </Div>
-            <Div Class="row">
-                <Condition Evaluation="_files != null">
+            <Div Style="padding-left:15px;">
+                <Condition Evaluation="CanImportImages">
                     <Match>
-                        <MudText Typo="@Typo.h6">@_files?.Count() File@(_files?.Count() == 1 ? "" : "s"):</MudText>
-                        <MudList>
-                            <Iterations Items="_files" Context="file">
-                                <MudListItem Icon="@Icons.Material.Filled.AttachFile" @key="@file">
-                                    @file.Name <code>@file.Size bytes</code>
-                                </MudListItem>
-                            </Iterations>
-                        </MudList>
+                        <MudFab Color="MudBlazor.Color.Secondary"
+                                Icon="@Icons.Material.Filled.Image"
+                                Label="@ImportButtonText"
+                                OnClick="Import" />
                     </Match>
                 </Condition>
             </Div>
-            <br />
-            <Div Class="row">
-                <Iterations Items="Images" Context="image">
-                    <Div Class="col-3">
-                        <ImageEditor CanRemove="true"
-                                     HasPrimary="true"
-                                     ImageFileName="@image.FileName"
-                                     ImageRootType="ImageRootType.User"
-                                     ImageType="image.ImageType"
-                                     IsPrimary="image.IsPrimary"
-                                     OnPrimarySet="PrimarySet"
-                                     OnRemove="Remove" />
-                    </Div>
-                </Iterations>
-            </Div>
-            <br />
-            <DivLeftAlign>
-                <LeftRightSection>
-                    <Right>
-                        <MudStack Row="true"
-                                  Style="margin-top:1%;margin-bottom:1%;">
-                            <CancelButton OnClick="Cancel" />
-                            @AdditionalButtons
-                            <SaveButton OnClick="SaveAndExit"
-                                        Text="Save & Exit" />                            
-                        </MudStack>
-                    </Right>
-                </LeftRightSection>                
-            </DivLeftAlign>
-            <br />
-        </DivPad2>           
-    </EditForm>         
+        </Div>
+        <Div Class="row">
+            <Condition Evaluation="_files != null">
+                <Match>
+                    <MudText Typo="@Typo.h6">@_files?.Count() File@(_files?.Count() == 1 ? "" : "s"):</MudText>
+                    <MudList>
+                        <Iterations Items="_files" Context="file">
+                            <MudListItem Icon="@Icons.Material.Filled.AttachFile" @key="@file">
+                                @file.Name <code>@file.Size bytes</code>
+                            </MudListItem>
+                        </Iterations>
+                    </MudList>
+                </Match>
+            </Condition>
+        </Div>
+        <br />
+        <Div Class="row">
+            <Iterations Items="Images" Context="image">
+                <Div Class="col-3">
+                    <ImageEditor CanRemove="true"
+                                 HasPrimary="true"
+                                 ImageFileName="@image.FileName"
+                                 ImageRootType="ImageRootType.User"
+                                 ImageType="image.ImageType"
+                                 IsPrimary="image.IsPrimary"
+                                 OnPrimarySet="PrimarySet"
+                                 OnRemove="Remove" />
+                </Div>
+            </Iterations>
+        </Div>
+        <br />
+        <DivLeftAlign>
+            <LeftRightSection>
+                <Right>
+                    <MudStack Row="true"
+                              Style="margin-top:1%;margin-bottom:1%;">
+                        <CancelButton OnClick="Cancel" />
+                        @AdditionalButtons
+                        <SaveButton OnClick="SaveAndExit"
+                                    Text="Save & Exit" />
+                    </MudStack>
+                </Right>
+            </LeftRightSection>
+        </DivLeftAlign>
+        <br />
+    </DivPad2>
 </Div>

@@ -4,12 +4,7 @@ public partial class FranchiseEditor
     : EditItem<FranchiseEditModel, FranchiseModel>
 {
     private bool DisplaySportLeagueLevel
-        => Id == 0;
-
-    protected async Task HandleValidSubmit()
-    {
-        await HandleValidSubmit(new SaveFranchise(EditModel));
-    }
+        => Id == 0;    
 
     protected override async Task OnInitializedAsync()
     {
@@ -17,5 +12,10 @@ public partial class FranchiseEditor
             return;
 
         EditModel = (await QueryRouter.Send(new GetFranchise(Id))).ToEditModel();
+    }
+
+    protected async Task Save()
+    {
+        await Save(new SaveFranchise(EditModel));
     }
 }

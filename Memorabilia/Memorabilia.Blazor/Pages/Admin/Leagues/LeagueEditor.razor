@@ -1,16 +1,10 @@
 ﻿@inherits EditItem<LeagueEditModel, LeagueModel>
 
-<EditPage ContinueNavigationPath="@EditModel.RoutePrefix"
-          EditMode="EditModel.EditModeType" 
-          ExitNavigationPath="@EditModel.RoutePrefix"
-          ImageFileName="@EditModel.ImageFileName"
-          ItemName="@EditModel.ItemTitle"
-          Model="EditModel"
-          OnSave="HandleValidSubmit"
-          PageFooterButtonText="@EditModel.ExitButtonText"
-          PageFooterNavigationPath="@EditModel.ExitNavigationPath"
-          PageTitle="@EditModel.PageTitle"
-          TItem="LeagueEditModel">
+<PageEditor DisplaySaveContinueButton="false"
+            PageImageFileName="@EditModel.ImageFileName"
+            EditModel="EditModel"
+            OnSave="Save"
+            TItem="LeagueEditModel">
     <DivRowFormGroup>
         <Div Class="col-3">
             <SportLeagueLevelDropDown Disabled="@(!EditModel.IsNew)"
@@ -32,4 +26,4 @@
                        SelectedTextChanged="@((p) => EditModel.Abbreviation = p)" />
         </Div>
     </DivRowFormGroup>
-</EditPage>
+</PageEditor>

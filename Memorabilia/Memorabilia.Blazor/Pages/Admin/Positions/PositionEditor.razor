@@ -1,16 +1,10 @@
 ﻿@inherits EditItem<PositionEditModel, PositionModel>
 
-<EditPage ContinueNavigationPath="@EditModel.RoutePrefix"
-          EditMode="EditModel.EditModeType"
-          ExitNavigationPath="@EditModel.RoutePrefix"
-          ImageFileName="@EditModel.ImageFileName"
-          ItemName="@EditModel.ItemTitle"
-          Model="EditModel"
-          OnSave="HandleValidSubmit"
-          PageFooterButtonText="@EditModel.ExitButtonText"
-          PageFooterNavigationPath="@EditModel.ExitNavigationPath"
-          PageTitle="@EditModel.PageTitle"
-          TItem="PositionEditModel">
+<PageEditor DisplaySaveContinueButton="false"
+            PageImageFileName="@EditModel.ImageFileName"
+            EditModel="EditModel"
+            OnSave="Save"
+            TItem="PositionEditModel">
     <DivRowFormGroup>
         <Div Class="col-3">
             <SportDropDown Disabled="@(!EditModel.IsNew)"
@@ -32,4 +26,4 @@
                        SelectedTextChanged="@((p) => EditModel.Abbreviation = p)" />
         </Div>
     </DivRowFormGroup>
-</EditPage>
+</PageEditor>

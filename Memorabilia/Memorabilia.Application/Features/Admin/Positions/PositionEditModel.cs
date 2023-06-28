@@ -14,6 +14,9 @@ public class PositionEditModel : EditModel
 
     public string Abbreviation { get; set; }
 
+    public override string ContinueNavigationPath
+        => RoutePrefix;
+
     public override string ExitNavigationPath 
         => Constant.AdminDomainItem.Positions.Page;
 

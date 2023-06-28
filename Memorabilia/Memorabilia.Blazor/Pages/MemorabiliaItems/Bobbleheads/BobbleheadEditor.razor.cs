@@ -26,7 +26,5 @@ public partial class BobbleheadEditor
             return;
 
         await CommandRouter.Send(command);
-
-        EditModel.SavedSuccessfully = true;
     }
 }

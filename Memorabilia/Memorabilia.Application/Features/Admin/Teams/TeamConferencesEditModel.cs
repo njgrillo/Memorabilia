@@ -34,6 +34,9 @@ public class TeamConferencesEditModel : EditModel
         ? Constant.EditModeType.Update 
         : Constant.EditModeType.Add;
 
+    public override string ExitNavigationPath
+        => Constant.AdminDomainItem.Teams.Page;
+
     public string ImageFileName 
         => Constant.AdminDomainItem.Conferences.ImageFileName;
 

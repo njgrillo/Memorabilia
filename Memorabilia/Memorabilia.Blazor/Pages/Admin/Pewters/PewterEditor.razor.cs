@@ -9,12 +9,7 @@ public partial class PewterEditor
     [Inject]
     public ILogger<PewterEditor> Logger { get; set; }
 
-    private bool _hasImage;
-
-    protected async Task HandleValidSubmit()
-    {
-        await HandleValidSubmit(new SavePewter(EditModel));
-    }
+    private bool _hasImage;    
 
     protected override async Task OnInitializedAsync()
     {
@@ -24,6 +19,11 @@ public partial class PewterEditor
         EditModel = (await QueryRouter.Send(new GetPewter(Id))).ToEditModel();
 
         _hasImage = !EditModel.FileName.IsNullOrEmpty();
+    }
+
+    protected async Task Save()
+    {
+        await Save(new SavePewter(EditModel));
     }
 
     private async Task LoadFile(InputFileChangeEventArgs e)

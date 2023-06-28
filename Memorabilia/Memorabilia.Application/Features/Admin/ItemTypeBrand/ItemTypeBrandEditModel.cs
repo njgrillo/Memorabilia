@@ -13,6 +13,9 @@ public class ItemTypeBrandEditModel : EditModel
 
     public Constant.Brand Brand { get; set; }
 
+    public override string ContinueNavigationPath
+        => RoutePrefix;
+
     public override string ExitNavigationPath 
         => Constant.AdminDomainItem.ItemTypeBrands.Page;
 

@@ -1,39 +1,37 @@
 ﻿<PageHeader PageTitle="@Model.PageTitle" />
-<EditForm Model="Model" 
-          OnValidSubmit="HandleValidSubmit">
+<DivPad2>
+    <MudTable Bordered="false"
+              Dense="false"
+              Hover="true"
+              Items="@Model.UserDashboardItems"
+              Striped="true">
+        <ToolBarContent>
+            <MudText Typo="Typo.h6">Dashboard Items</MudText>
+        </ToolBarContent>
+        <HeaderContent>
+            <MudTh>
+                <CustomButton ButtonType="ButtonType.Button"
+                              OnClick="OnSelectAll"
+                              Text="@SelectAllButtonText" />
+            </MudTh>
+            <MudTh>Name</MudTh>
+            <MudTh>Description</MudTh>
+        </HeaderContent>
+        <RowTemplate Context="userDashboardItem">
+            <MudTd DataLabel="">
+                <BooleanCheckBox Checked="@userDashboardItem.IsSelected"
+                                 CheckedChanged="(p) => userDashboardItem.IsSelected = p" />
+            </MudTd>
+            <MudTd DataLabel="Name">@userDashboardItem.Name</MudTd>
+            <MudTd DataLabel="Description">@userDashboardItem.Description</MudTd>
+        </RowTemplate>
+    </MudTable>
+</DivPad2>
+<DivLeftAlign>
     <DivPad2>
-        <MudTable Bordered="false"
-                  Dense="false"
-                  Hover="true"
-                  Items="@Model.UserDashboardItems"
-                  Striped="true">
-            <ToolBarContent>
-                <MudText Typo="Typo.h6">Dashboard Items</MudText>
-            </ToolBarContent>
-            <HeaderContent>
-                <MudTh>
-                    <CustomButton ButtonType="ButtonType.Button"
-                                  OnClick="OnSelectAll"
-                                  Text="@SelectAllButtonText" />
-                </MudTh>
-                <MudTh>Name</MudTh>
-                <MudTh>Description</MudTh>
-            </HeaderContent>
-            <RowTemplate Context="userDashboardItem">
-                <MudTd DataLabel="">
-                    <BooleanCheckBox Checked="@userDashboardItem.IsSelected"
-                                     CheckedChanged="(p) => userDashboardItem.IsSelected = p" />
-                </MudTd>
-                <MudTd DataLabel="Name">@userDashboardItem.Name</MudTd>
-                <MudTd DataLabel="Description">@userDashboardItem.Description</MudTd>
-            </RowTemplate>
-        </MudTable>
+        <SaveButton OnClick="Save"
+                    Text="Save & Exit" />
+        <CancelButton OnClick="@(_ => NavigationManager.NavigateTo(Model.ExitNavigationPath))" />
     </DivPad2>
-    <DivLeftAlign>
-        <DivPad2>
-            <SaveButton Text="Save & Exit" />
-            <CancelButton OnClick="@(_ => NavigationManager.NavigateTo(Model.ExitNavigationPath))" />
-        </DivPad2>
-    </DivLeftAlign>
-    <br />
-</EditForm>
+</DivLeftAlign>
+<br />

@@ -24,6 +24,6 @@ public partial class SportServicePersonEditor
         if (!EditModel.ValidationResult.IsValid)
             return;
 
-        await HandleValidSubmit(command);
+        await Save(command);
     }
 }

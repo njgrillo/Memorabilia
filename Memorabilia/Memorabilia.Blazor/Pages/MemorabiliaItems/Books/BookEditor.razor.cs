@@ -21,7 +21,5 @@ public partial class BookEditor
             return;
 
         await CommandRouter.Send(command);
-
-        EditModel.SavedSuccessfully = true;
     }
 }

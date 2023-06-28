@@ -15,6 +15,9 @@ public class CommissionerEditModel : EditModel
 
     public int? BeginYear { get; set; }
 
+    public override string ContinueNavigationPath
+        => RoutePrefix;
+
     public int? EndYear { get; set; }
 
     public override string ExitNavigationPath 

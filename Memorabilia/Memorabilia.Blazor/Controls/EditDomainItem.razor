@@ -1,31 +1,26 @@
-﻿<EditPage ContinueNavigationPath="@Model.NavigationPath"
-          EditMode="Model.EditModeType"
-          ExitNavigationPath="@Model.NavigationPath"
-          ImageFileName="@Model.ImageFileName"
-          ItemName="@Model.DomainTypeName"
-          Model="Model"
-          OnSave="Save"
-          PageFooterNavigationPath="@Model.PageFooterNavigationPath"
-          PageTitle="@Model.PageTitle"
-          TItem="DomainEditModel">
+﻿<PageEditor DisplaySaveContinueButton="false" 
+            EditModel="EditModel"
+            OnSave="Save"
+            PageImageFileName="@EditModel.ImageFileName"
+            TItem="DomainEditModel">
     <DivRowFormGroup>
         <Div Class="col-3">
-            <TextField DisplaySkeleton="@(Model == null)" 
+            <TextField DisplaySkeleton="@(EditModel == null)"
                        Label="Name"
                        MaxLength="@MaxNameLength"
-                       SelectedText="@Model.Name"
-                       SelectedTextChanged="@((p) => Model.Name = p)" />
+                       SelectedText="@EditModel.Name"
+                       SelectedTextChanged="@((p) => EditModel.Name = p)" />
         </Div>
     </DivRowFormGroup>
     <DivRowFormGroup>
         <Div Class="col-3">
-            <TextField DisplaySkeleton="@(Model == null)" 
+            <TextField DisplaySkeleton="@(EditModel == null)"
                        Label="Abbreviation"
                        MaxLength="@MaxAbbreviationLength"
-                       SelectedText="@Model.Abbreviation"
-                       SelectedTextChanged="@((p) => Model.Abbreviation = p)" />
+                       SelectedText="@EditModel.Abbreviation"
+                       SelectedTextChanged="@((p) => EditModel.Abbreviation = p)" />
         </Div>
     </DivRowFormGroup>
-</EditPage>
+</PageEditor>
 
 

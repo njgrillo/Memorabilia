@@ -11,6 +11,9 @@ public class ItemTypeSizeEditModel : EditModel
         Size = Constant.Size.Find(model.SizeId);
     }
 
+    public override string ContinueNavigationPath
+        => RoutePrefix;
+
     public override string ExitNavigationPath 
         => Constant.AdminDomainItem.ItemTypeSizes.Page;
 

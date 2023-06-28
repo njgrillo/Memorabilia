@@ -1,16 +1,10 @@
 ﻿@inherits EditItem<ItemTypeBrandEditModel, ItemTypeBrandModel>
 
-<EditPage ContinueNavigationPath="@EditModel.RoutePrefix"
-          EditMode="EditModel.EditModeType" 
-          ExitNavigationPath="@EditModel.RoutePrefix"
-          ImageFileName="@EditModel.ImageFileName" 
-          ItemName="@EditModel.ItemTitle"
-          Model="EditModel"
-          OnSave="HandleValidSubmit"
-          PageFooterButtonText="@EditModel.ExitButtonText"
-          PageFooterNavigationPath="@EditModel.ExitNavigationPath"
-          PageTitle="@EditModel.PageTitle"
-          TItem="ItemTypeBrandEditModel">
+<PageEditor DisplaySaveContinueButton="false"
+            PageImageFileName="@EditModel.ImageFileName"
+            EditModel="EditModel"
+            OnSave="Save"
+            TItem="ItemTypeBrandEditModel">
     <DivRowFormGroup>
         <Div Class="col-3">
             <ItemTypeAutoComplete Disabled="@(EditModel.Id > 0)"
@@ -24,4 +18,4 @@
                                SelectionChanged="(p) => EditModel.Brand = p" />
         </Div>
     </DivRowFormGroup>
-</EditPage>
+</PageEditor>

@@ -3,16 +3,16 @@
 public partial class PositionEditor 
     : EditItem<PositionEditModel, PositionModel>
 {
-    protected async Task HandleValidSubmit()
-    {
-        await HandleValidSubmit(new SavePosition(EditModel));
-    }
-
     protected override async Task OnInitializedAsync()
     {
         if (Id == 0)
             return;
 
         EditModel = (await QueryRouter.Send(new GetPosition(Id))).ToEditModel();
+    }
+
+    protected async Task Save()
+    {
+        await Save(new SavePosition(EditModel));
     }
 }

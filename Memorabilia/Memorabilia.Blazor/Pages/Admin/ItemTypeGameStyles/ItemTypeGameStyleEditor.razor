@@ -1,16 +1,10 @@
 ﻿@inherits EditItem<ItemTypeGameStyleEditModel, ItemTypeGameStyleModel>
 
-<EditPage ContinueNavigationPath="@EditModel.RoutePrefix"
-          EditMode="EditModel.EditModeType" 
-          ExitNavigationPath="@EditModel.RoutePrefix" 
-          ImageFileName="@EditModel.ImageFileName"
-          ItemName="@EditModel.ItemTitle"
-          Model="EditModel"
-          OnSave="HandleValidSubmit"
-          PageFooterButtonText="@EditModel.ExitButtonText"
-          PageFooterNavigationPath="@EditModel.ExitNavigationPath"
-          PageTitle="@EditModel.PageTitle"
-          TItem="ItemTypeGameStyleEditModel">
+<PageEditor DisplaySaveContinueButton="false"
+            PageImageFileName="@EditModel.ImageFileName"
+            EditModel="EditModel"
+            OnSave="Save"
+            TItem="ItemTypeGameStyleEditModel">
     <DivRowFormGroup>
         <Div Class="col-3">
             <ItemTypeAutoComplete Disabled="@(EditModel.Id > 0)"
@@ -24,4 +18,4 @@
                                    SelectionChanged="(p) => EditModel.GameStyleTypeId = p" />
         </Div>
     </DivRowFormGroup>
-</EditPage>
+</PageEditor>

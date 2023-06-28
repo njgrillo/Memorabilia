@@ -17,6 +17,9 @@ public class DivisionEditModel : EditModel
 
     public int ConferenceId { get; set; }
 
+    public override string ContinueNavigationPath
+        => RoutePrefix;
+
     public override string ExitNavigationPath 
         => Constant.AdminDomainItem.Divisions.Page;
 

@@ -11,6 +11,9 @@ public class ItemTypeSpotEditModel : EditModel
         Spot = Constant.Spot.Find(model.SpotId);
     }
 
+    public override string ContinueNavigationPath
+        => RoutePrefix;
+
     public override string ExitNavigationPath 
         => Constant.AdminDomainItem.ItemTypeSpots.Page;
 

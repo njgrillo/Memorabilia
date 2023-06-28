@@ -11,6 +11,9 @@ public class ItemTypeSportEditModel : EditModel
         SportId = model.SportId;
     }
 
+    public override string ContinueNavigationPath
+        => RoutePrefix;
+
     public override string ExitNavigationPath 
         => Constant.AdminDomainItem.ItemTypeSports.Page;
 

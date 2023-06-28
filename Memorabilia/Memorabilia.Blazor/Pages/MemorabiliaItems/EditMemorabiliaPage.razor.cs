@@ -6,14 +6,10 @@ public partial class EditMemorabiliaPage<TItem> where TItem : MemorabiliaItemEdi
     public RenderFragment Content { get; set; }
 
     [Parameter]
-    public TItem Item { get; set; }
+    public new TItem EditModel { get; set; }
 
     [Parameter]
     public EventCallback<TItem> OnSave { get; set; }
-
-    [Parameter]
-    public bool PerformValidation { get; set; } 
-        = true;
 
     protected async Task Save()
     {

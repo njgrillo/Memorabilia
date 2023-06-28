@@ -23,7 +23,7 @@ public partial class AuthenticationsEditor
         IsLoaded = true;
     }
 
-    protected async Task OnSave()
+    protected async Task Save()
     {
         EditModel.AutographId = AutographId;
 

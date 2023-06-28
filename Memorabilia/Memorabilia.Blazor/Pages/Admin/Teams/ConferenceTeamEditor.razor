@@ -1,17 +1,9 @@
 ﻿@inherits EditTeamItem<TeamConferencesEditModel, TeamConferenceModel>
 
-<EditPage ContinueNavigationPath="@EditModel.ContinueNavigationPath"
-          EditMode="EditModel.EditModeType"
-          ExitNavigationPath="@EditModel.ExitNavigationPath"
-          ImageFileName="@EditModel.ImageFileName"
-          ItemName="@EditModel.PageTitle"
-          Model="EditModel"
-          OnSave="HandleValidSubmit"
-          PageFooterButtonText="@EditModel.ExitButtonText"
-          PageFooterNavigationPath="@EditModel.BackNavigationPath"
-          PageTitle="@EditModel.PageTitle"
-          TItem="TeamConferencesEditModel"
-          UseMultipleButtons="true">
+<PageEditor EditModel="EditModel"
+            OnSave="Save"
+            PageImageFileName="@EditModel.ImageFileName"
+            TItem="TeamConferencesEditModel">
     <TimelineContent>
         <TeamTimeline DisplayConference="EditModel.CanHaveConference" 
                       EditMode="EditModel.EditModeType"
@@ -26,4 +18,4 @@
         </DivRowCol12>
         <br />
     </ChildContent>
-</EditPage>
+</PageEditor>

@@ -26,7 +26,5 @@ public partial class DocumentEditor
             return;
 
         await CommandRouter.Send(command);
-
-        EditModel.SavedSuccessfully = true;
     }
 }

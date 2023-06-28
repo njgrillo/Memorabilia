@@ -3,17 +3,7 @@
 public partial class EditDomainItem
 {
     [Parameter]
-    public DomainEditModel Item
-    {
-        get
-        {
-            return Model;
-        }
-        set
-        {
-            Model = value;
-        }
-    }
+    public DomainEditModel EditModel { get; set; }
 
     [Parameter]
     public int MaxAbbreviationLength { get; set; } 
@@ -26,10 +16,8 @@ public partial class EditDomainItem
     [Parameter]
     public EventCallback<DomainEditModel> OnSave { get; set; }
 
-    protected DomainEditModel Model;
-
     protected async Task Save()
     {
-        await OnSave.InvokeAsync(Model);
+        await OnSave.InvokeAsync(EditModel);
     }
 }

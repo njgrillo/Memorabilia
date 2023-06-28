@@ -25,6 +25,6 @@ public partial class AccoladePersonEditor
         if (!EditModel.ValidationResult.IsValid)
             return;
 
-        await HandleValidSubmit(command);
+        await Save(command);
     }
 }

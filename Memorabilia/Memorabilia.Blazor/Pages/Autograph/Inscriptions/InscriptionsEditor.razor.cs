@@ -24,7 +24,7 @@ public partial class InscriptionsEditor
         IsLoaded = true;
     }
 
-    protected async Task OnSave()
+    protected async Task Save()
     {
         await CommandRouter.Send(new SaveInscriptions.Command(EditModel));
     }

@@ -4,7 +4,10 @@ public class DomainEditModel : EditModel
 {
     public DomainEditModel() { }
 
-    public DomainEditModel(int id, string domainTypeName, string imageFileName, string navigationPath)
+    public DomainEditModel(int id, 
+                           string domainTypeName, 
+                           string imageFileName, 
+                           string navigationPath)
     {
         Id = id;
         DomainTypeName = domainTypeName;
@@ -19,7 +22,10 @@ public class DomainEditModel : EditModel
         Name = model.Name;
     }
 
-    public DomainEditModel(DomainModel model, string domainTypeName, string imageFileName, string navigationPath)
+    public DomainEditModel(DomainModel model, 
+                           string domainTypeName, 
+                           string imageFileName, 
+                           string navigationPath)
     {
         Abbreviation = model.Abbreviation;
         Id = model.Id;
@@ -32,9 +38,18 @@ public class DomainEditModel : EditModel
 
     public string Abbreviation { get; set; }
 
-    public string DomainTypeName { get; set; }        
+    public string DomainTypeName { get; set; }
 
-    public string ImageFileName { get; set; }        
+    public override string ExitNavigationPath 
+    { 
+        get => NavigationPath; 
+        set => NavigationPath = value; 
+    }
+
+    public string ImageFileName { get; set; }
+
+    public override string ItemTitle 
+        => DomainTypeName;
 
     public override string Name { get; set; }
 

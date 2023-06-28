@@ -25,7 +25,5 @@ public partial class PaintingEditor : MemorabiliaItem<PaintingEditModel>
             return;
 
         await CommandRouter.Send(command);
-
-        EditModel.SavedSuccessfully = true;
     }
 }

@@ -11,6 +11,9 @@ public class ItemTypeGameStyleEditModel : EditModel
         GameStyleTypeId = model.GameStyleTypeId;
     }
 
+    public override string ContinueNavigationPath
+        => RoutePrefix;
+
     public override string ExitNavigationPath 
         => Constant.AdminDomainItem.ItemTypeGameStyles.Page;
 

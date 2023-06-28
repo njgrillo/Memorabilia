@@ -37,6 +37,6 @@ public partial class OccupationPersonEditor
 
     protected async Task Save()
     {
-        await HandleValidSubmit(new SavePersonOccupation.Command(PersonId, EditModel));
+        await Save(new SavePersonOccupation.Command(PersonId, EditModel));
     }
 }

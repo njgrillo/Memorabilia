@@ -19,7 +19,7 @@ public abstract class EditItem<TEditModel, TModel> : ComponentBase
     protected async Task<TModel> Get(IQuery<TModel> request)
         => await QueryRouter.Send(request);
 
-    protected async Task HandleValidSubmit(ICommand command)
+    protected async Task Save(ICommand command)
     {
         await CommandRouter.Send(command);
     }

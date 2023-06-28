@@ -1,16 +1,10 @@
 ﻿@inherits EditItem<PewterEditModel, PewterModel>
 
-<EditPage ContinueNavigationPath="@EditModel.RoutePrefix"
-          EditMode="EditModel.EditModeType" 
-          ExitNavigationPath="@EditModel.RoutePrefix"
-          ImageFileName="@EditModel.ImageFileName"
-          ItemName="@EditModel.ItemTitle"
-          Model="EditModel"
-          OnSave="HandleValidSubmit"
-          PageFooterButtonText="@EditModel.ExitButtonText"
-          PageFooterNavigationPath="@EditModel.ExitNavigationPath"
-          PageTitle="@EditModel.PageTitle"
-          TItem="PewterEditModel">
+<PageEditor DisplaySaveContinueButton="false"
+            PageImageFileName="@EditModel.ImageFileName"
+            EditModel="EditModel"
+            OnSave="Save"
+            TItem="PewterEditModel">
     <DivRowFormGroup>
         <Div Class="col-3">
             <FranchiseAutoComplete SelectedValue="EditModel.Franchise"
@@ -61,4 +55,4 @@
             </Condition>
         </Div>
     </Div>
-</EditPage>
+</PageEditor>

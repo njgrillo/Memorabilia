@@ -1,19 +1,10 @@
 ﻿@inherits AutographItem<AuthenticationEditModel>
 
 <PageLoader IsLoading="@(!IsLoaded)">
-    <EditPage ContinueNavigationPath="@EditModel.ContinueNavigationPath"
-              EditMode="EditModel.EditModeType"
-              ExitNavigationPath="@EditModel.ExitNavigationPath"
-              ImageFileName="@EditModel.ImageFileName"
-              ItemName="@EditModel.PageTitle"
-              Model="EditModel"
-              OnSave="OnSave"
-              PageFooterButtonText="@EditModel.ExitButtonText"
-              PageFooterNavigationPath="@EditModel.BackNavigationPath"
-              PageTitle="@EditModel.PageTitle"
-              TItem="AuthenticationsEditModel"
-              UseMultipleButtons="true"
-              ValidationResult="@Model.ValidationResult">
+    <PageEditor EditModel="EditModel"
+                OnSave="Save"
+                PageImageFileName="@EditModel.ImageFileName"
+                TItem="AuthenticationsEditModel">
         <TimelineContent>
             <AutographTimeline AutographId="EditModel.AutographId"
                                AutographStep="EditModel.AutographStep"
@@ -125,6 +116,6 @@
                 </DivRowCol12>
                 <br />
             </ChildContent>
-    </EditPage>
+    </PageEditor>
 </PageLoader>
 

@@ -88,6 +88,9 @@ public class AutographEditModel : EditModel
     public int ConditionId { get; set; } 
         = Constant.Condition.Pristine.Id;
 
+    public override string ContinueNavigationPath 
+        => $"Autographs/Inscriptions/{Constant.EditModeType.Update.Name}/{Id}";
+
     public decimal? Cost { get; set; }
 
     public DateTime CreateDate { get; set; }

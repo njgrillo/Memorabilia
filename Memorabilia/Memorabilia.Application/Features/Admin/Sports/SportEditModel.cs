@@ -13,6 +13,9 @@ public class SportEditModel : EditModel
 
     public string AlternateName { get; set; }
 
+    public override string ContinueNavigationPath
+        => RoutePrefix;
+
     public override string ExitNavigationPath 
         => Constant.AdminDomainItem.Sports.Page;
 

@@ -34,7 +34,7 @@ public partial class PersonImageEditor
             ? EditModeType.Update
             : EditModeType.Add;
 
-        await HandleValidSubmit(new SavePersonImage(EditModel.PersonId, EditModel.PersonImageFileName));
+        await Save(new SavePersonImage(EditModel.PersonId, EditModel.PersonImageFileName));
 
         NavigationManager.NavigateTo(EditModel.SaveReturnNavigationPath);
 

@@ -3,16 +3,16 @@
 public partial class SportLeagueLevelEditor 
     : EditItem<SportLeagueLevelEditModel, SportLeagueLevelModel>
 {
-    protected async Task HandleValidSubmit()
-    {
-        await HandleValidSubmit(new SaveSportLeagueLevel(EditModel));
-    }
-
     protected override async Task OnInitializedAsync()
     {
         if (Id == 0)
             return;
 
         EditModel = (await QueryRouter.Send(new GetSportLeagueLevel(Id))).ToEditModel();
+    }
+
+    protected async Task Save()
+    {
+        await Save(new SaveSportLeagueLevel(EditModel));
     }
 }

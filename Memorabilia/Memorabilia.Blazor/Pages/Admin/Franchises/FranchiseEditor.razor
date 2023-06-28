@@ -1,16 +1,10 @@
 ﻿@inherits EditItem<FranchiseEditModel, FranchiseModel>
 
-<EditPage ContinueNavigationPath="@EditModel.RoutePrefix"
-          EditMode="EditModel.EditModeType" 
-          ExitNavigationPath="@EditModel.RoutePrefix"
-          ImageFileName="@EditModel.ImageFileName" 
-          ItemName="@EditModel.ItemTitle"
-          Model="EditModel"
-          OnSave="HandleValidSubmit"
-          PageFooterButtonText="@EditModel.ExitButtonText"
-          PageFooterNavigationPath="@EditModel.ExitNavigationPath"
-          PageTitle="@EditModel.PageTitle"
-          TItem="FranchiseEditModel">
+<PageEditor DisplaySaveContinueButton="false"
+            PageImageFileName="@EditModel.ImageFileName"
+            EditModel="EditModel"
+            OnSave="Save"
+            TItem="FranchiseEditModel">
     <DivRowFormGroup Hidden="@(!DisplaySportLeagueLevel)">
         <Div Class="col-3">
             <SportLeagueLevelDropDown SelectedValue="EditModel.SportLeagueLevelId"
@@ -38,4 +32,4 @@
                       ValueChanged="@((p) => EditModel.FoundYear = p)" />
         </Div>
     </DivRowFormGroup>
-</EditPage>
+</PageEditor>

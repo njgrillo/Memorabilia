@@ -10,7 +10,7 @@ public partial class SpotsEditor
         IsLoaded = true;
     }
 
-    protected async Task OnSave()
+    protected async Task Save()
     {
         if (Model.SpotId == 0)
             return;

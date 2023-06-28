@@ -3,13 +3,13 @@
 public partial class ItemTypeGameStyleEditor 
     : EditItem<ItemTypeGameStyleEditModel, ItemTypeGameStyleModel>
 {
-    protected async Task HandleValidSubmit()
-    {
-        await HandleValidSubmit(new SaveItemTypeGameStyle(EditModel));
-    }
-
     protected override async Task OnInitializedAsync()
     {
         EditModel = (await QueryRouter.Send(new GetItemTypeGameStyle(Id))).ToEditModel();
+    }
+
+    protected async Task Save()
+    {
+        await Save(new SaveItemTypeGameStyle(EditModel));
     }
 }

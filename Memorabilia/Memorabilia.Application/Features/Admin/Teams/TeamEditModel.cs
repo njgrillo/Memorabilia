@@ -38,6 +38,9 @@ public class TeamEditModel : EditModel, IWithName, IWithValue<int>
 
     public int? EndYear { get; set; }
 
+    public override string ExitNavigationPath
+        => Constant.AdminDomainItem.Teams.Page;
+
     public Constant.Franchise Franchise { get; set; }
 
     public string ImageFileName 

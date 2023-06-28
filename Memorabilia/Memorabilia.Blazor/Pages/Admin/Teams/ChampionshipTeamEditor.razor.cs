@@ -2,12 +2,7 @@
 
 public partial class ChampionshipTeamEditor 
     : EditTeamItem<TeamChampionshipsEditModel, TeamChampionshipModel>
-{
-    protected async Task HandleValidSubmit()
-    {
-        await HandleValidSubmit(new SaveTeamChampionship.Command(TeamId, EditModel.Championships));
-    }
-
+{   
     protected override async Task OnInitializedAsync()
     {
         Entity.Champion[] champions = await QueryRouter.Send(new GetTeamChampionships(TeamId));
@@ -16,5 +11,10 @@ public partial class ChampionshipTeamEditor
         {
             SportLeagueLevel = SportLeagueLevel.Find(SportLeagueLevelId)
         };
-    }    
+    }
+
+    protected async Task Save()
+    {
+        await Save(new SaveTeamChampionship.Command(TeamId, EditModel.Championships));
+    }
 }

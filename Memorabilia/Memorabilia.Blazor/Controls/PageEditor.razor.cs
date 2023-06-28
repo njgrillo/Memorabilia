@@ -29,7 +29,14 @@ public partial class PageEditor<TItem> where TItem : EditModel
         = true;
 
     [Parameter]
+    public bool DisplaySaveExitButton { get; set; }
+        = true;
+
+    [Parameter]
     public TItem EditModel { get; set; }
+
+    [Parameter]
+    public RenderFragment ImagePreview { get; set; }
 
     [Parameter]
     public string MenuItemLinkText { get; set; }
