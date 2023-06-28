@@ -221,11 +221,10 @@ public sealed class AwardType : DomainItemConstant
     public static readonly AwardType UPINFCDefensivePlayerOfTheYear = new(111, "UPI NFC Defensive Player of the Year");
     public static readonly AwardType UPINFCOffensivePlayerOfTheYear = new(102, "UPI NFC Offensive Player of the Year");
     public static readonly AwardType UPINFCRookieOfTheYear = new(169, "UPI NFC Rookie of the Year", "UPI NFC ROY");
-    public static readonly AwardType UPIPlayerOfTheYear = new(94, "UPI Player of the Year");
+    public static readonly AwardType UPIPlayerOfTheYearBasketball = new(246, "UPI Player of the Year (Basketball)");
+    public static readonly AwardType UPIPlayerOfTheYearFootball = new(94, "UPI Player of the Year (Football)");
     public static readonly AwardType USABasketballMaleAthleteOfTheYear = new(219, "USA Basketball Male Athlete of the Year");
     public static readonly AwardType USBWACollegePlayerOfTheYear = new (204, "USBWA College Player of the Year");
-    public static readonly AwardType USFLMostValuablePlayer = new (121, "USFL Most Valuable Player", "USFL MVP");
-    public static readonly AwardType USFLRookieOfTheYear = new(122, "USFL Rookie of the Year", "USFL ROY");
     public static readonly AwardType WACOffensivePlayerOfTheYear = new (107, "WAC Offensive Player of the Year");
     public static readonly AwardType WalterCampAlumniOfTheYear = new (97, "Walter Camp Alumni of the Year");
     public static readonly AwardType WalterCampAward = new(72, "Walter Camp Award");
@@ -434,11 +433,10 @@ public sealed class AwardType : DomainItemConstant
         UPINFCDefensivePlayerOfTheYear,
         UPINFCOffensivePlayerOfTheYear,
         UPINFCRookieOfTheYear,
-        UPIPlayerOfTheYear,
+        UPIPlayerOfTheYearBasketball,
+        UPIPlayerOfTheYearFootball,
         USABasketballMaleAthleteOfTheYear,
         USBWACollegePlayerOfTheYear,
-        USFLMostValuablePlayer,
-        USFLRookieOfTheYear,
         WACOffensivePlayerOfTheYear,
         WalterCampAlumniOfTheYear,
         WalterCampAward,
@@ -647,7 +645,7 @@ public sealed class AwardType : DomainItemConstant
         SWCPlayerOfTheYear,
         TwymanStokesTeammateOfTheYear,
         UPICollegePlayerOfTheYear,
-        UPIPlayerOfTheYear,
+        UPIPlayerOfTheYearBasketball,
         USABasketballMaleAthleteOfTheYear,
         USBWACollegePlayerOfTheYear,
         WCACCoachOfTheYear,
@@ -729,7 +727,7 @@ public sealed class AwardType : DomainItemConstant
         SWCPlayerOfTheYear,
         TwymanStokesTeammateOfTheYear,
         UPICollegePlayerOfTheYear,
-        UPIPlayerOfTheYear,
+        UPIPlayerOfTheYearBasketball,
         USABasketballMaleAthleteOfTheYear,
         USBWACollegePlayerOfTheYear,
         WCACPlayerOfTheYear,
@@ -860,9 +858,7 @@ public sealed class AwardType : DomainItemConstant
         UPINFCDefensivePlayerOfTheYear,
         UPINFCOffensivePlayerOfTheYear,
         UPINFCRookieOfTheYear,
-        UPIPlayerOfTheYear,
-        USFLMostValuablePlayer,
-        USFLRookieOfTheYear,
+        UPIPlayerOfTheYearFootball,
         WACOffensivePlayerOfTheYear,
         WalterCampAlumniOfTheYear,
         WalterCampAward,
@@ -972,9 +968,7 @@ public sealed class AwardType : DomainItemConstant
         UPINFCDefensivePlayerOfTheYear,
         UPINFCOffensivePlayerOfTheYear,
         UPINFCRookieOfTheYear,
-        UPIPlayerOfTheYear,
-        USFLMostValuablePlayer,
-        USFLRookieOfTheYear,
+        UPIPlayerOfTheYearFootball,
         WACOffensivePlayerOfTheYear,
         WalterCampAlumniOfTheYear,
         WalterCampAward,
@@ -1044,8 +1038,7 @@ public sealed class AwardType : DomainItemConstant
         NBLRookieOfTheYear,
         OffensiveRookieOfTheYear,
         RookieOfTheYear,
-        UPINFCRookieOfTheYear,
-        USFLRookieOfTheYear
+        UPINFCRookieOfTheYear
     };
 
     private AwardType(int id, string name, string abbreviation = null) 
