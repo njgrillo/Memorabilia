@@ -25,7 +25,8 @@ public partial class ProjectPersonGrid
     {
         var parameters = new Dictionary<string, object>
         {
-            ["PersonId"] = editModel.Person.Id
+            ["PersonId"] = editModel.Person.Id,
+            ["ProjectTypeId"] = editModel.Project.ProjectTypeId
         };
 
         SetProjectDetailsParameters(editModel, parameters);

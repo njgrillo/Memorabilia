@@ -15,24 +15,20 @@ public partial class SelectProjectAutographDialog
     public MudDialogInstance MudDialog { get; set; }
 
     [Parameter]
-    public Dictionary<string, object> Parameters { get; set; }
-
-    [Parameter]
-    public int ProjectTypeId { get; set; }
+    public Dictionary<string, object> Parameters { get; set; }    
 
     protected AutographModel[] Model 
         = Array.Empty<AutographModel>();
-
-    protected ProjectType ProjectType
-        => ProjectType.Find(ProjectTypeId);
 
     protected override async Task OnInitializedAsync()
     {
         if (!Parameters.Any())
             return;
 
+        _ = int.TryParse(Parameters["ProjectTypeId"].ToString(), out int projectTypeId);
+
         Entity.Autograph[] autographs 
-            = await ProjectAutographPersonLinkService.GetAutographs(ProjectType, Parameters);
+            = await ProjectAutographPersonLinkService.GetAutographs(ProjectType.Find(projectTypeId), Parameters);
 
         Model = autographs.Any()
                 ? autographs.Select(autograph => new AutographModel(autograph))

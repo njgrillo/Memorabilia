@@ -40,6 +40,9 @@ public class SpotEditModel : EditModel
     public virtual string ImageFileName 
         => Constant.AdminDomainItem.Spots.ImageFileName;
 
+    public override string ItemTitle
+        => "Spot";
+
     public Constant.ItemType ItemType { get; set; }
 
     public string ItemTypeName 

@@ -88,6 +88,9 @@ public class MemorabiliaEditModel : EditModel
         }
     }
 
+    public override string ItemTitle
+        => ItemTypeName;
+
     public Constant.ItemType ItemType { get; set; }
 
     public string ItemTypeName 

@@ -12,6 +12,8 @@ public sealed class AwardType : DomainItemConstant
     public static readonly AwardType ACCAthleteOfTheYear = new(228, "ACC Athlete of the Year");
     public static readonly AwardType ACCBaseballPlayerOfTheYear = new(43, "ACC Baseball Player of the Year");
     public static readonly AwardType ACCDefensivePlayerOfTheYear = new (86, "ACC Defensive Player of the Year");
+    public static readonly AwardType ACCDefensiveRookieOfTheYear = new (248, "ACC Defensive Rookie of the Year", "ACC ROY");
+    public static readonly AwardType ACCOffensivePlayerOfTheYear = new(247, "ACC Offensive Player of the Year");
     public static readonly AwardType ACCOffensiveRookieOfTheYear = new (171, "ACC Offensive Rookie of the Year", "ACC ROY");
     public static readonly AwardType ACCPlayerOfTheYearBasketball = new (114, "ACC Player of the Year (Basketball)");
     public static readonly AwardType ACCPlayerOfTheYearFootball = new (244, "ACC Player of the Year (Football)");
@@ -63,6 +65,7 @@ public sealed class AwardType : DomainItemConstant
     public static readonly AwardType BigTwelveOffensiveNewcomerOfTheYear = new (173, "Big Twelve Offensive Newcomer of the Year");
     public static readonly AwardType BiletnikoffAward = new (113, "Biletnikoff Award");
     public static readonly AwardType BillWillisTrophy = new (149, "Bill Willis Trophy");
+    public static readonly AwardType BrianPiccoloAward = new (249, "Brian Piccolo Award");
     public static readonly AwardType BronkoNagurskiTrophy = new (76, "Bronko Nagurski Trophy");
     public static readonly AwardType BuckBuchananAward = new (240, "Buck Buchanan Award");
     public static readonly AwardType ButkusAward = new (159, "Butkus Award");
@@ -250,6 +253,8 @@ public sealed class AwardType : DomainItemConstant
         ACCAthleteOfTheYear,
         ACCBaseballPlayerOfTheYear,
         ACCDefensivePlayerOfTheYear,
+        ACCDefensiveRookieOfTheYear,
+        ACCOffensivePlayerOfTheYear,
         ACCOffensiveRookieOfTheYear,
         ACCPlayerOfTheYearBasketball,
         ACCPlayerOfTheYearFootball,
@@ -296,6 +301,7 @@ public sealed class AwardType : DomainItemConstant
         BigTwelveOffensiveNewcomerOfTheYear,
         BiletnikoffAward,
         BillWillisTrophy,
+        BrianPiccoloAward,
         BronkoNagurskiTrophy,
         BuckBuchananAward,
         ButkusAward,
@@ -757,6 +763,8 @@ public sealed class AwardType : DomainItemConstant
     {
         AAFCMostValuablePlayer,
         ACCDefensivePlayerOfTheYear,
+        ACCDefensiveRookieOfTheYear,
+        ACCOffensivePlayerOfTheYear,
         ACCOffensiveRookieOfTheYear,
         ACCPlayerOfTheYearFootball,
         ACCRookieOfTheYearFootball,
@@ -784,6 +792,7 @@ public sealed class AwardType : DomainItemConstant
         BigTwelveOffensiveNewcomerOfTheYear,
         BiletnikoffAward,
         BillWillisTrophy,
+        BrianPiccoloAward,
         BronkoNagurskiTrophy,
         BuckBuchananAward,
         ButkusAward,
@@ -877,6 +886,8 @@ public sealed class AwardType : DomainItemConstant
     {
         AAFCMostValuablePlayer,
         ACCDefensivePlayerOfTheYear,
+        ACCDefensiveRookieOfTheYear,
+        ACCOffensivePlayerOfTheYear,
         ACCOffensiveRookieOfTheYear,
         ACCPlayerOfTheYearFootball,
         ACCRookieOfTheYearFootball,
@@ -906,6 +917,7 @@ public sealed class AwardType : DomainItemConstant
         BigTwelveOffensiveNewcomerOfTheYear,
         BiletnikoffAward,
         BillWillisTrophy,
+        BrianPiccoloAward,
         BronkoNagurskiTrophy,
         BuckBuchananAward,
         ButkusAward,

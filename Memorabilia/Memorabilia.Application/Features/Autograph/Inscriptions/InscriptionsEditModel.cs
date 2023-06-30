@@ -54,6 +54,9 @@ public class InscriptionsEditModel : EditModel
     public List<InscriptionEditModel> Inscriptions { get; set; } 
         = new();
 
+    public override string ItemTitle
+        => "Inscription";
+
     public Constant.ItemType ItemType { get; set; }
 
     public int MemorabiliaId { get; }

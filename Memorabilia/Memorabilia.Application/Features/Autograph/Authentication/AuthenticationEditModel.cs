@@ -34,7 +34,7 @@ public class AuthenticationEditModel : EditModel
 
     public bool HasHologram { get; set; }
 
-    public bool HasLetter { get; set; }
+    public bool HasLetter { get; set; }    
 
     public string Verification { get; set; }
 

@@ -40,6 +40,9 @@ public abstract class MemorabiliaItemEditModel : ItemEditModel
         }
     }
 
+    public override string ItemTitle
+        => ItemType?.Name;
+
     public int LevelTypeId { get; set; }
 
     public List<PersonEditModel> People { get; set; } 

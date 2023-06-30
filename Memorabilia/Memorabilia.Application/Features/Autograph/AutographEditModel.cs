@@ -162,6 +162,9 @@ public class AutographEditModel : EditModel
         }
     }
 
+    public override string ItemTitle 
+        => "Autograph";
+
     public Constant.ItemType ItemType { get; set; }
 
     public string ItemTypeName 

@@ -53,6 +53,9 @@ public class AuthenticationsEditModel : EditModel
     public string ImageFileName 
         => Constant.AdminDomainItem.AuthenticationCompanies.ImageFileName;
 
+    public override string ItemTitle
+        => "Authentication";
+
     public Constant.ItemType ItemType { get; }
 
     public int MemorabiliaId { get; }
