@@ -35,7 +35,6 @@ public sealed class AwardType : DomainItemConstant
     public static readonly AwardType AmericanLeagueRelieverOfTheYear = new(32, "American League Reliever of the Year", "AL Reliever of the Year");        
     public static readonly AwardType AmericanLeagueRolaidsReliefManAward = new(36, "American League Rolaids Relief Man Award", "AL Rolaids Relief Man Award");        
     public static readonly AwardType AmericanLeagueRookieOfTheYear = new(13, "American League Rookie of the Year", "AL ROY");        
-    public static readonly AwardType AmosAlonzoStaggAward = new (164, "Amos Alonzo Stagg Award");        
     public static readonly AwardType ArtRooneyAward = new (165, "Art Rooney Award");        
     public static readonly AwardType AssociatedPressAthleteOfTheYear = new(19, "Associated Press Athlete of the Year", "AP Athlete of the Year");        
     public static readonly AwardType AssociatedPressCoachOfTheYear = new(90, "Associated Press Coach of the Year", "AP Coach of the Year");        
@@ -47,9 +46,8 @@ public sealed class AwardType : DomainItemConstant
     public static readonly AwardType BartStarrAward = new(87, "Bart Starr Award");
     public static readonly AwardType BaseballAmericaCollegePlayerOfTheYear = new(52, "Baseball America College Player of the Year");
     public static readonly AwardType BertBellAward = new (83, "Bert Bell Award");
-    public static readonly AwardType BestCoachManagerESPYAward = new (98, "Best Coach/Manager ESPY Award");
-    public static readonly AwardType BestLinemanAward = new (155, "Best Lineman Award");
-    public static readonly AwardType BigEastDefensivePlayerOfTheYear = new (144, "Big East Defensive Player of the Year");
+    public static readonly AwardType BigEastDefensivePlayerOfTheYearBasketball = new (144, "Big East Defensive Player of the Year (Basketball)");
+    public static readonly AwardType BigEastDefensivePlayerOfTheYearFootball = new (250, "Big East Defensive Player of the Year (Football)");
     public static readonly AwardType BigEastPlayerOfTheYear = new (225, "Big East Player of the Year");
     public static readonly AwardType BigEastRookieOfTheYear = new (237, "Big East Rookie of the Year", "Big East ROY");
     public static readonly AwardType BigEastTournamentMostValuablePlayer = new (234, "Big East Tournament Most Valuable Player");
@@ -274,7 +272,6 @@ public sealed class AwardType : DomainItemConstant
         AmericanLeagueRelieverOfTheYear,
         AmericanLeagueRolaidsReliefManAward,
         AmericanLeagueRookieOfTheYear,
-        AmosAlonzoStaggAward,
         ArtRooneyAward,
         AssociatedPressAthleteOfTheYear,
         AssociatedPressCollegePlayerOfTheYear,
@@ -284,8 +281,8 @@ public sealed class AwardType : DomainItemConstant
         BartStarrAward,
         BaseballAmericaCollegePlayerOfTheYear,
         BertBellAward,
-        BestLinemanAward,
-        BigEastDefensivePlayerOfTheYear,
+        BigEastDefensivePlayerOfTheYearBasketball,
+        BigEastDefensivePlayerOfTheYearFootball,
         BigEastPlayerOfTheYear,
         BigEastRookieOfTheYear,
         BigEastTournamentMostValuablePlayer,
@@ -597,7 +594,7 @@ public sealed class AwardType : DomainItemConstant
         ACCAthleteOfTheYear,
         ACCPlayerOfTheYearBasketball,
         ACCRookieOfTheYearBasketball,
-        BigEastDefensivePlayerOfTheYear,
+        BigEastDefensivePlayerOfTheYearBasketball,
         BigEastPlayerOfTheYear,
         BigEastRookieOfTheYear,
         BigEastTournamentMostValuablePlayer,
@@ -680,7 +677,7 @@ public sealed class AwardType : DomainItemConstant
         AssociatedPressCollegePlayerOfTheYear,
         AssociatedPressMaleAthleteOfTheYear,
         AssociatedPressPlayerOfTheYear,
-        BigEastDefensivePlayerOfTheYear,
+        BigEastDefensivePlayerOfTheYearBasketball,
         BigEastPlayerOfTheYear,
         BigEastRookieOfTheYear,
         BigEastTournamentMostValuablePlayer,
@@ -774,13 +771,10 @@ public sealed class AwardType : DomainItemConstant
         AFLPlayerOfTheYear,
         AFLRookieOfTheYear,
         AlumniOffensiveLinemanOfTheYear,
-        AmosAlonzoStaggAward,
         ArtRooneyAward,        
         BartStarrAward,
         BertBellAward,
-        BestCoachManagerESPYAward,
-        BestLinemanAward,
-        BigEastDefensivePlayerOfTheYear,
+        BigEastDefensivePlayerOfTheYearFootball,
         BigEightOffensivePlayerOfTheYear,
         BigTenDefensivePlayerOfTheYear,
         BigTenFreshmanOfTheYear,
@@ -896,7 +890,6 @@ public sealed class AwardType : DomainItemConstant
         AFLPlayerOfTheYear,
         AFLRookieOfTheYear,
         AlumniOffensiveLinemanOfTheYear,
-        AmosAlonzoStaggAward,
         ArtRooneyAward,
         AssociatedPressAthleteOfTheYear,
         AssociatedPressCollegePlayerOfTheYear,
@@ -904,8 +897,7 @@ public sealed class AwardType : DomainItemConstant
         AssociatedPressPlayerOfTheYear,
         BartStarrAward,
         BertBellAward,
-        BestLinemanAward,
-        BigEastDefensivePlayerOfTheYear,
+        BigEastDefensivePlayerOfTheYearFootball,
         BigEightOffensivePlayerOfTheYear,
         BigTenDefensivePlayerOfTheYear,
         BigTenFreshmanOfTheYear,
@@ -992,7 +984,6 @@ public sealed class AwardType : DomainItemConstant
         AFLCoachOfTheYear,
         AssociatedPressCoachOfTheYear,
         AssociatedPressCollegeCoachOfTheYear,
-        BestCoachManagerESPYAward,
         CoachOfTheYear,
         MaxwellClubNFLCoachOfTheYear,
         MEACCoachOfTheYear,

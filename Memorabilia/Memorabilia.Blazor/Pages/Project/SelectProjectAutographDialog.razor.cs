@@ -25,7 +25,10 @@ public partial class SelectProjectAutographDialog
         if (!Parameters.Any())
             return;
 
-        _ = int.TryParse(Parameters["ProjectTypeId"].ToString(), out int projectTypeId);
+        bool hasProjectType = Parameters["ProjectTypeId"].ToString().TryParse(out int projectTypeId);
+
+        if (!hasProjectType)
+            throw new NotImplementedException();
 
         Entity.Autograph[] autographs 
             = await ProjectAutographPersonLinkService.GetAutographs(ProjectType.Find(projectTypeId), Parameters);
