@@ -234,6 +234,24 @@ public partial class ProjectPersonGrid
         }
     }
 
+    private async Task ShowPersonProfile(int personId)
+    {
+        var parameters = new DialogParameters
+        {
+            ["PersonId"] = personId
+        };
+
+        var options = new DialogOptions()
+        {
+            MaxWidth = MaxWidth.ExtraLarge,
+            FullWidth = true,
+            DisableBackdropClick = true
+        };
+
+        var dialog = DialogService.Show<PersonProfileDialog>(string.Empty, parameters, options);
+        var result = await dialog.Result;
+    }
+
     private void UpdateRanks(object element)
     {
         var item = ((ProjectPersonEditModel)element);

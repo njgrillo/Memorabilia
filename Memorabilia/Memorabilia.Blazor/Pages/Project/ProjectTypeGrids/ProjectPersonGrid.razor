@@ -75,7 +75,8 @@
         <MudTd DataLabel="Rank">@projectPerson.Rank</MudTd>
         <MudTd DataLabel="Priority">@projectPerson.PriorityTypeName</MudTd>
         <MudTd DataLabel="">
-            <MudImage Class="rounded-lg"
+            <MudImage @onclick="@(_ => ShowPersonProfile(projectPerson.Person.Id))"
+                      Class="rounded-lg"
                       Elevation="5"
                       Height="200"
                       ObjectFit="@ObjectFit.Cover"

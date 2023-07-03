@@ -45,7 +45,7 @@
             <br />
             <Condition Evaluation="@(ProjectId > 0 && ProjectMemorabiliaTeam.Team != null && ProjectMemorabiliaTeam.Team.Id > 0)">
                 <Match>
-                    <Div Class="row">
+                    <Div Class="row" Style="margin-top:1%;">
                         <Div Class="col-3">
                             <Condition Evaluation="@(ProjectMemorabiliaTeam.MemorabiliaId > 0)">
                                 <Match>
@@ -83,6 +83,7 @@
     </DialogContent>
     <DialogActions>        
         <CancelButton OnClick="Cancel" />
-        <AddButton OnClick="Add" />
+        <AddButton OnClick="Add"
+                   Text="Add" />
     </DialogActions>
 </MudDialog>

@@ -51,9 +51,7 @@ public sealed class AwardType : DomainItemConstant
     public static readonly AwardType BigEastPlayerOfTheYear = new (225, "Big East Player of the Year");
     public static readonly AwardType BigEastRookieOfTheYear = new (237, "Big East Rookie of the Year", "Big East ROY");
     public static readonly AwardType BigEastTournamentMostValuablePlayer = new (234, "Big East Tournament Most Valuable Player");
-    public static readonly AwardType BigEightOffensivePlayerOfTheYear = new (145, "Big Eight Offensive Player of the Year");
-    public static readonly AwardType BigTenDefensivePlayerOfTheYear = new (168, "Big Ten Defensive Player of the Year");
-    public static readonly AwardType BigTenFreshmanOfTheYear = new (142, "Big Ten Freshman of the Year");
+    public static readonly AwardType BigEightOffensivePlayerOfTheYear = new (145, "Big Eight Offensive Player of the Year"); 
     public static readonly AwardType BigTenMedalOfHonor = new (182, "Big Ten Medal of Honor");
     public static readonly AwardType BigTenMostValuablePlayer = new (95, "Big Ten Most Valuable Player", "Big Ten MVP");
     public static readonly AwardType BigTenOffensiveLinemanOfTheYear = new (112, "Big Ten Offensive Lineman of the Year");
@@ -136,6 +134,7 @@ public sealed class AwardType : DomainItemConstant
     public static readonly AwardType MostValuablePlayer = new(16, "Most Valuable Player", "MVP");
     public static readonly AwardType MrBasketballUSA = new(201, "Mr. Basketball USA");
     public static readonly AwardType NABCCoachOfTheYear = new(185, "NABC Coach of the Year");
+    public static readonly AwardType NagurskiWoodsonDefensivePlayerOfTheYear = new(168, "Nagurski-Woodson Defensive Player of the Year");
     public static readonly AwardType NationalCollegePlayerOfTheYear = new (211, "National College Player of the Year");
     public static readonly AwardType NationalHighSchoolPlayerOfTheYear = new (226, "National High School Player of the Year");
     public static readonly AwardType NationalLeagueChampionshipSeriesMostValuablePlayer = new(22, "National League Championship Series Most Valuable Player", "NLCS MVP");
@@ -209,6 +208,7 @@ public sealed class AwardType : DomainItemConstant
     public static readonly AwardType SWACCoachOfTheYear = new (147, "SWAC Coach of the Year");
     public static readonly AwardType SWCOffensivePlayerOfTheYear = new (103, "SWC Offensive Player of the Year");
     public static readonly AwardType SWCPlayerOfTheYear = new (151, "SWC Player of the Year");
+    public static readonly AwardType ThompsonRandleElFreshmanOfTheYear = new(142, "Thompson–Randle El Freshman of the Year");
     public static readonly AwardType TipONeillAward = new(39, "Tip O'Neill Award");
     public static readonly AwardType TonyConigliaroAward = new(50, "Tony Conigliaro Award");
     public static readonly AwardType TwymanStokesTeammateOfTheYear = new(242, "Twyman–Stokes Teammate of the Year");
@@ -287,8 +287,6 @@ public sealed class AwardType : DomainItemConstant
         BigEastRookieOfTheYear,
         BigEastTournamentMostValuablePlayer,
         BigEightOffensivePlayerOfTheYear,
-        BigTenDefensivePlayerOfTheYear,
-        BigTenFreshmanOfTheYear,
         BigTenMedalOfHonor,
         BigTenMostValuablePlayer,
         BigTenOffensiveLinemanOfTheYear,
@@ -364,6 +362,7 @@ public sealed class AwardType : DomainItemConstant
         MorrisTrophy,
         MostValuablePlayer,
         MrBasketballUSA,
+        NagurskiWoodsonDefensivePlayerOfTheYear,
         NationalCollegePlayerOfTheYear,
         NationalHighSchoolPlayerOfTheYear,
         NationalLeagueChampionshipSeriesMostValuablePlayer,
@@ -427,6 +426,7 @@ public sealed class AwardType : DomainItemConstant
         SuperBowlMostValuablePlayer,
         SWCOffensivePlayerOfTheYear,
         SWCPlayerOfTheYear,
+        ThompsonRandleElFreshmanOfTheYear,
         TipONeillAward,
         TonyConigliaroAward,
         TwymanStokesTeammateOfTheYear,
@@ -776,8 +776,6 @@ public sealed class AwardType : DomainItemConstant
         BertBellAward,
         BigEastDefensivePlayerOfTheYearFootball,
         BigEightOffensivePlayerOfTheYear,
-        BigTenDefensivePlayerOfTheYear,
-        BigTenFreshmanOfTheYear,
         BigTenMostValuablePlayer,
         BigTenOffensiveLinemanOfTheYear,
         BigTenOffensivePlayerOfTheYear,
@@ -825,6 +823,7 @@ public sealed class AwardType : DomainItemConstant
         MEACCoachOfTheYear,
         MorrisTrophy,
         MostValuablePlayer,
+        NagurskiWoodsonDefensivePlayerOfTheYear,
         NCAAInspirationAward,
         NFCPlayerOfTheYear,
         NFLAlumniSpecialTeamsPlayerOfTheYear,
@@ -852,6 +851,7 @@ public sealed class AwardType : DomainItemConstant
         SWACCoachOfTheYear,
         SWCOffensivePlayerOfTheYear,
         SWCPlayerOfTheYear,
+        ThompsonRandleElFreshmanOfTheYear,
         UPIAFCCoachOfTheYear,
         UPIAFCOffensivePlayerOfTheYear,
         UPIAFLCoachOfTheYear,
@@ -899,8 +899,6 @@ public sealed class AwardType : DomainItemConstant
         BertBellAward,
         BigEastDefensivePlayerOfTheYearFootball,
         BigEightOffensivePlayerOfTheYear,
-        BigTenDefensivePlayerOfTheYear,
-        BigTenFreshmanOfTheYear,
         BigTenMostValuablePlayer,
         BigTenOffensiveLinemanOfTheYear,
         BigTenOffensivePlayerOfTheYear,
@@ -944,6 +942,7 @@ public sealed class AwardType : DomainItemConstant
         MaxwellAward,
         MorrisTrophy,
         MostValuablePlayer,
+        NagurskiWoodsonDefensivePlayerOfTheYear,
         NCAAInspirationAward,
         NFCPlayerOfTheYear,
         NFLAlumniSpecialTeamsPlayerOfTheYear,
@@ -967,6 +966,7 @@ public sealed class AwardType : DomainItemConstant
         SuperBowlMostValuablePlayer,
         SWCOffensivePlayerOfTheYear,
         SWCPlayerOfTheYear,
+        ThompsonRandleElFreshmanOfTheYear,
         UPIAFCOffensivePlayerOfTheYear,
         UPILinemanOfTheYear,
         UPINFCDefensivePlayerOfTheYear,

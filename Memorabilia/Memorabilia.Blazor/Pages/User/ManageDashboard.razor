@@ -27,11 +27,12 @@
         </RowTemplate>
     </MudTable>
 </DivPad2>
-<DivLeftAlign>
-    <DivPad2>
-        <SaveButton OnClick="Save"
-                    Text="Save & Exit" />
-        <CancelButton OnClick="@(_ => NavigationManager.NavigateTo(Model.ExitNavigationPath))" />
-    </DivPad2>
-</DivLeftAlign>
-<br />
+<DivPad2>
+    <LeftRightSection>
+        <Right>
+            <CancelButton OnClick="@(_ => NavigationManager.NavigateTo(Model.ExitNavigationPath))" />
+            <SaveButton OnClick="Save"
+                        Text="Save & Exit" />
+        </Right>
+    </LeftRightSection>   
+</DivPad2>

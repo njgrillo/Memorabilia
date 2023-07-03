@@ -10,29 +10,25 @@
                       Src="@(ImageService.GetDomainImageData(Constant.ImageFileName.Images))"
                       Width="150" />
         </DivRowCol12Center>
-        <Div Class="row">
-            <Div>
-                <InputFile id="fileInput"
-                           @bind-Value="@Images"
-                           accept="image/*" hidden multiple
-                           OnChange="@LoadFiles" />
-                <MudFab Color="MudBlazor.Color.Secondary"
-                        HtmlTag="label"
-                        Icon="@Icons.Material.Filled.Image"
-                        Label="Load pictures"
-                        for="fileInput" />
-            </Div>
-            <Div Style="padding-left:15px;">
-                <Condition Evaluation="CanImportImages">
-                    <Match>
-                        <MudFab Color="MudBlazor.Color.Secondary"
-                                Icon="@Icons.Material.Filled.Image"
-                                Label="@ImportButtonText"
-                                OnClick="Import" />
-                    </Match>
-                </Condition>
-            </Div>
-        </Div>
+        <DivRowCol12Center>
+            <InputFile id="fileInput"
+                       @bind-Value="@Images"
+                       accept="image/*" hidden multiple
+                       OnChange="@LoadFiles" />
+            <MudFab Color="MudBlazor.Color.Secondary"
+                    HtmlTag="label"
+                    Icon="@Icons.Material.Filled.Image"
+                    Label="Load pictures"
+                    for="fileInput" />
+            <Condition Evaluation="CanImportImages">
+                <Match>
+                    <MudFab Color="MudBlazor.Color.Secondary"
+                            Icon="@Icons.Material.Filled.Image"
+                            Label="@ImportButtonText"
+                            OnClick="Import" />
+                </Match>
+            </Condition>
+        </DivRowCol12Center>
         <Div Class="row">
             <Condition Evaluation="_files != null">
                 <Match>

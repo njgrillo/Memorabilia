@@ -43,7 +43,7 @@
                 </Div>
                 <Condition Evaluation="@(ProjectId > 0 && ProjectPerson.Person != null && ProjectPerson.Person.Id > 0)">
                     <Match>
-                        <Div Class="row">
+                        <Div Class="row" Style="margin-top:1%;">
                             <Div Class="col-3">
                                 <Condition Evaluation="@(ProjectPerson.AutographId > 0)">
                                     <Match>
@@ -81,6 +81,7 @@
     </DialogContent>
     <DialogActions>        
         <CancelButton OnClick="Cancel" />
-        <AddButton OnClick="Add" />
+        <AddButton OnClick="Add"
+                   Text="Add" />
     </DialogActions>
 </MudDialog>
