@@ -52,11 +52,7 @@ public sealed class AwardType : DomainItemConstant
     public static readonly AwardType BigEastRookieOfTheYear = new (237, "Big East Rookie of the Year", "Big East ROY");
     public static readonly AwardType BigEastTournamentMostValuablePlayer = new (234, "Big East Tournament Most Valuable Player");
     public static readonly AwardType BigEightOffensivePlayerOfTheYear = new (145, "Big Eight Offensive Player of the Year"); 
-    public static readonly AwardType BigTenMedalOfHonor = new (182, "Big Ten Medal of Honor");
-    public static readonly AwardType BigTenMostValuablePlayer = new (95, "Big Ten Most Valuable Player", "Big Ten MVP");
-    public static readonly AwardType BigTenOffensiveLinemanOfTheYear = new (112, "Big Ten Offensive Lineman of the Year");
-    public static readonly AwardType BigTenOffensivePlayerOfTheYear = new (140, "Big Ten Offensive Player of the Year");
-    public static readonly AwardType BigTenPlayerOfTheYear = new (108, "Big Ten Player of the Year");
+    public static readonly AwardType BigTenMedalOfHonor = new (182, "Big Ten Medal of Honor");     
     public static readonly AwardType BigTwelveOffensiveFreshmanOfTheYear = new (172, "Big Twelve Offensive Freshman of the Year");
     public static readonly AwardType BigTwelveOffensiveNewcomerOfTheYear = new (173, "Big Twelve Offensive Newcomer of the Year");
     public static readonly AwardType BiletnikoffAward = new (113, "Biletnikoff Award");
@@ -66,8 +62,7 @@ public sealed class AwardType : DomainItemConstant
     public static readonly AwardType BuckBuchananAward = new (240, "Buck Buchanan Award");
     public static readonly AwardType ButkusAward = new (159, "Butkus Award");
     public static readonly AwardType CAAPlayerOfTheYear = new (230, "CAA Player of the Year");
-    public static readonly AwardType CAARookieOfTheYear = new (231, "CAA Rookie of the Year", "CAA ROY");
-    public static readonly AwardType CampbellTrophy = new (129, "Campbell Trophy");
+    public static readonly AwardType CAARookieOfTheYear = new (231, "CAA Rookie of the Year", "CAA ROY");    
     public static readonly AwardType ChicHarleyAward = new (154, "Chic Harley Award");
     public static readonly AwardType ChicagoTribuneSilverFootball = new (110, "Chicago Tribune Silver Football");
     public static readonly AwardType ChuckBednarikAward = new (166, "Chuck Bednarik Award");
@@ -80,7 +75,6 @@ public sealed class AwardType : DomainItemConstant
     public static readonly AwardType CottonBowlMostValuablePlayer = new(61, "Cotton Bowl Most Valuable Player", "Cotton Bowl MVP");
     public static readonly AwardType CyYoungAward = new(55, "Cy Young Award", "CY");
     public static readonly AwardType DaveyOBrienAward = new(62, "Davey O'Brien Award");
-    public static readonly AwardType DaveyOBrienMemorialTrophy = new(152, "Davey O'Brien Memorial Trophy");
     public static readonly AwardType DefensivePlayerOfTheYear = new(78, "NFL Defensive Player of the Year", "DPOY");
     public static readonly AwardType DefensiveRookieOfTheYear = new(77, "NFL Defensive Rookie of the Year", "ROY");
     public static readonly AwardType DeliveryManOfTheYear = new(41, "Delivery Man of the Year");
@@ -97,6 +91,7 @@ public sealed class AwardType : DomainItemConstant
     public static readonly AwardType GoldenSpikes = new(5, "Golden Spikes");
     public static readonly AwardType GoldenToeAward = new(75, "NFL Golden Toe Award");
     public static readonly AwardType GoldGlove = new(6, "Gold Glove", "GG");
+    public static readonly AwardType GrahamGeorgeOffensivePlayerOfTheYear = new(140, "Graham-George Offensive Player of the Year");
     public static readonly AwardType GreatestPlayerOfTheFirstHalfCentury = new (177, "Greatest Player of the First Half-Century");
     public static readonly AwardType GrieseBreesQuarterbackoftheYear = new (170, "Griese-Brees Quarterback of the Year");
     public static readonly AwardType HaggertyAward = new (190, "Haggerty Award");
@@ -113,7 +108,7 @@ public sealed class AwardType : DomainItemConstant
     public static readonly AwardType JackTatumTrophy = new (167, "Jack Tatum Trophy");
     public static readonly AwardType JacobsBlockingTrophy = new (106, "Jacobs Blocking Trophy");
     public static readonly AwardType JeffNicklinMemorialTrophy = new (117, "Jeff Nicklin Memorial Trophy");
-    public static readonly AwardType JimParkerAward = new (139, "Jim Parker Award");
+    public static readonly AwardType JimParkerTrophy = new (139, "Jim Parker Trophy");
     public static readonly AwardType JimThorpeAward = new (146, "Jim Thorpe Award");
     public static readonly AwardType JohnnyUnitasGoldenArmAward = new (128, "Johnny Unitas Golden Arm Award");
     public static readonly AwardType JohnRWoodenAward = new (233, "John R. Wooden Award");
@@ -188,6 +183,7 @@ public sealed class AwardType : DomainItemConstant
     public static readonly AwardType ProBowlMostValuablePlayer = new(10, "NFL Pro Bowl Most Valuable Player", "Pro Bowl MVP");
     public static readonly AwardType ProFootballWeeklyCoachOfTheYear = new(143, "Pro Football Weekly Coach of the Year");
     public static readonly AwardType RelieverOfTheYear = new(42, "Reliever of the Year");
+    public static readonly AwardType RimingtonPaceOffensiveLinemanOfTheYear = new(112, "Rimington–Pace Offensive Lineman of the Year");
     public static readonly AwardType RobertoClementeAward = new(23, "Roberto Clemente Award");
     public static readonly AwardType RobertVGeaseyTrophy = new(236, "Robert V. Geasey Trophy");
     public static readonly AwardType RookieOfTheYear = new (89, "Rookie of the Year", "ROY");
@@ -233,7 +229,8 @@ public sealed class AwardType : DomainItemConstant
     public static readonly AwardType WalterPaytonNFLManOfTheYear = new(81, "Walter Payton NFL Man of the Year", "Walter Payton MOY");
     public static readonly AwardType WCACCoachOfTheYear = new(241, "WCAC Coach of the Year");
     public static readonly AwardType WCACPlayerOfTheYear = new(232, "WCAC Player of the Year");
-    public static readonly AwardType WCCPlayerOfTheYear = new(195, "WCC Player of the Year");    
+    public static readonly AwardType WCCPlayerOfTheYear = new(195, "WCC Player of the Year");
+    public static readonly AwardType WilliamVCampbellTrophy = new(129, "William V. Campbell Trophy");
     public static readonly AwardType WillieMacAward = new(54, "Willie Mac Award");
     public static readonly AwardType WilsonDefensivePlayerOfTheYearAward = new(20, "Wilson Defensive Player of the Year Award");
     public static readonly AwardType WorldBaseballClassicMostValuablePlayer = new (31, "World Baseball Classic Most Valuable Player", "WBC MVP");
@@ -288,10 +285,6 @@ public sealed class AwardType : DomainItemConstant
         BigEastTournamentMostValuablePlayer,
         BigEightOffensivePlayerOfTheYear,
         BigTenMedalOfHonor,
-        BigTenMostValuablePlayer,
-        BigTenOffensiveLinemanOfTheYear,
-        BigTenOffensivePlayerOfTheYear,
-        BigTenPlayerOfTheYear,
         BigTwelveOffensiveFreshmanOfTheYear,
         BigTwelveOffensiveNewcomerOfTheYear,
         BiletnikoffAward,
@@ -302,7 +295,6 @@ public sealed class AwardType : DomainItemConstant
         ButkusAward,
         CAAPlayerOfTheYear,
         CAARookieOfTheYear,
-        CampbellTrophy,
         ChicHarleyAward,
         ChicagoTribuneSilverFootball,
         ChuckBednarikAward,
@@ -314,7 +306,6 @@ public sealed class AwardType : DomainItemConstant
         CottonBowlMostValuablePlayer,
         CyYoungAward,
         DaveyOBrienAward,
-        DaveyOBrienMemorialTrophy,
         DefensivePlayerOfTheYear,
         DefensiveRookieOfTheYear,
         DeliveryManOfTheYear,
@@ -329,6 +320,7 @@ public sealed class AwardType : DomainItemConstant
         GoldenSpikes,
         GoldenToeAward,
         GoldGlove,
+        GrahamGeorgeOffensivePlayerOfTheYear,
         GreatestPlayerOfTheFirstHalfCentury,
         GrieseBreesQuarterbackoftheYear,
         HaggertyAward,
@@ -345,7 +337,7 @@ public sealed class AwardType : DomainItemConstant
         JackTatumTrophy,
         JacobsBlockingTrophy,
         JeffNicklinMemorialTrophy,
-        JimParkerAward,
+        JimParkerTrophy,
         JimThorpeAward,
         JohnnyUnitasGoldenArmAward,
         JohnRWoodenAward,
@@ -408,6 +400,7 @@ public sealed class AwardType : DomainItemConstant
         ProBowlMostValuablePlayer,
         ProFootballWeeklyCoachOfTheYear,
         RelieverOfTheYear,
+        RimingtonPaceOffensiveLinemanOfTheYear,
         RobertoClementeAward,
         RobertVGeaseyTrophy,
         RookieOfTheYear,
@@ -446,6 +439,7 @@ public sealed class AwardType : DomainItemConstant
         WalterPaytonNFLManOfTheYear,
         WCACPlayerOfTheYear,
         WCCPlayerOfTheYear,
+        WilliamVCampbellTrophy,
         WillieMacAward,
         WilsonDefensivePlayerOfTheYearAward,
         WorldBaseballClassicMostValuablePlayer,
@@ -776,10 +770,6 @@ public sealed class AwardType : DomainItemConstant
         BertBellAward,
         BigEastDefensivePlayerOfTheYearFootball,
         BigEightOffensivePlayerOfTheYear,
-        BigTenMostValuablePlayer,
-        BigTenOffensiveLinemanOfTheYear,
-        BigTenOffensivePlayerOfTheYear,
-        BigTenPlayerOfTheYear,
         BigTwelveOffensiveFreshmanOfTheYear,
         BigTwelveOffensiveNewcomerOfTheYear,
         BiletnikoffAward,
@@ -788,7 +778,6 @@ public sealed class AwardType : DomainItemConstant
         BronkoNagurskiTrophy,
         BuckBuchananAward,
         ButkusAward,
-        CampbellTrophy,
         ChicHarleyAward,
         ChicagoTribuneSilverFootball,
         ChuckBednarikAward,
@@ -796,7 +785,6 @@ public sealed class AwardType : DomainItemConstant
         ComebackPlayerOfTheYear,
         CottonBowlMostValuablePlayer,
         DaveyOBrienAward,
-        DaveyOBrienMemorialTrophy,
         DefensivePlayerOfTheYear,
         DefensiveRookieOfTheYear,
         DoakWalkerAward,
@@ -804,13 +792,14 @@ public sealed class AwardType : DomainItemConstant
         ExecutiveOfTheYear,
         GeorgeHalasAward,
         GoldenToeAward,
+        GrahamGeorgeOffensivePlayerOfTheYear,
         GrieseBreesQuarterbackoftheYear,
         HeismanTrophy,
         JackLambertTrophy,
         JackTatumTrophy,
         JacobsBlockingTrophy,
         JeffNicklinMemorialTrophy,
-        JimParkerAward,
+        JimParkerTrophy,
         JimThorpeAward,
         JohnnyUnitasGoldenArmAward,
         LamarHuntAward,
@@ -851,6 +840,7 @@ public sealed class AwardType : DomainItemConstant
         SWACCoachOfTheYear,
         SWCOffensivePlayerOfTheYear,
         SWCPlayerOfTheYear,
+        RimingtonPaceOffensiveLinemanOfTheYear,
         ThompsonRandleElFreshmanOfTheYear,
         UPIAFCCoachOfTheYear,
         UPIAFCOffensivePlayerOfTheYear,
@@ -866,7 +856,8 @@ public sealed class AwardType : DomainItemConstant
         WalterCampAlumniOfTheYear,
         WalterCampAward,
         WalterCampCoachOfTheYear,
-        WalterPaytonNFLManOfTheYear
+        WalterPaytonNFLManOfTheYear,
+        WilliamVCampbellTrophy
     };
 
     public static readonly AwardType[] FootballAdministrator =
@@ -899,10 +890,6 @@ public sealed class AwardType : DomainItemConstant
         BertBellAward,
         BigEastDefensivePlayerOfTheYearFootball,
         BigEightOffensivePlayerOfTheYear,
-        BigTenMostValuablePlayer,
-        BigTenOffensiveLinemanOfTheYear,
-        BigTenOffensivePlayerOfTheYear,
-        BigTenPlayerOfTheYear,
         BigTwelveOffensiveFreshmanOfTheYear,
         BigTwelveOffensiveNewcomerOfTheYear,
         BiletnikoffAward,
@@ -911,27 +898,26 @@ public sealed class AwardType : DomainItemConstant
         BronkoNagurskiTrophy,
         BuckBuchananAward,
         ButkusAward,
-        CampbellTrophy,
         ChicHarleyAward,
         ChicagoTribuneSilverFootball,
         ChuckBednarikAward,
         ComebackPlayerOfTheYear,
         CottonBowlMostValuablePlayer,
         DaveyOBrienAward,
-        DaveyOBrienMemorialTrophy,
         DefensivePlayerOfTheYear,
         DefensiveRookieOfTheYear,
         DoakWalkerAward,
         EddieRobinsonAward,
         GeorgeHalasAward,
         GoldenToeAward,
+        GrahamGeorgeOffensivePlayerOfTheYear,
         GrieseBreesQuarterbackoftheYear,
         HeismanTrophy,
         JackLambertTrophy,
         JackTatumTrophy,
         JacobsBlockingTrophy,
         JeffNicklinMemorialTrophy,
-        JimParkerAward,
+        JimParkerTrophy,
         JimThorpeAward,
         JohnnyUnitasGoldenArmAward,
         LamarHuntAward,
@@ -956,6 +942,7 @@ public sealed class AwardType : DomainItemConstant
         Pac10PlayerOfTheYear,
         PeachBowlOffensiveMostValuablePlayer,
         ProBowlMostValuablePlayer,
+        RimingtonPaceOffensiveLinemanOfTheYear,
         RookieOfTheYear,
         SammyBaughTrophy,
         SECMostValuablePlayer,
@@ -976,7 +963,8 @@ public sealed class AwardType : DomainItemConstant
         WACOffensivePlayerOfTheYear,
         WalterCampAlumniOfTheYear,
         WalterCampAward,
-        WalterPaytonNFLManOfTheYear
+        WalterPaytonNFLManOfTheYear,
+        WilliamVCampbellTrophy
     };
 
     public static readonly AwardType[] FootballCoach =
