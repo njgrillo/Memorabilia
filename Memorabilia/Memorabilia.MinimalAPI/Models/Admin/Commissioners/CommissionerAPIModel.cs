@@ -1,10 +1,10 @@
 ﻿namespace Memorabilia.MinimalAPI.Models.Admin.Commissioners;
 
-public class CommissionerAPIModel
+public class CommissionerApiModel
 {
 	private readonly Entity.Commissioner _commissioner;
 
-	public CommissionerAPIModel(Entity.Commissioner commissioner)
+	public CommissionerApiModel(Entity.Commissioner commissioner)
 	{
 		_commissioner = commissioner;
 	}

@@ -1,10 +1,10 @@
 ﻿namespace Memorabilia.MinimalAPI.Models.Admin.LeaguePresidents;
 
-public class LeaguePresidentAPIModel
+public class LeaguePresidentApiModel
 {
 	private readonly Entity.LeaguePresident _leaguePresident;
 
-	public LeaguePresidentAPIModel(Entity.LeaguePresident leaguePresident)
+	public LeaguePresidentApiModel(Entity.LeaguePresident leaguePresident)
 	{
 		_leaguePresident = leaguePresident;
 	}

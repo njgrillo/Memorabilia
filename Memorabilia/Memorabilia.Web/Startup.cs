@@ -52,7 +52,9 @@ public class Startup
         services.RegisterValidators();
         services.RegisterFactories();
         services.RegisterServices();
-        services.RegisterCachedRepositories();       
+        services.RegisterCachedRepositories();
+
+        services.AddSingleton<ImageService>();
 
         services
             .AddServerSideBlazor()

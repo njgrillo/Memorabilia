@@ -7,5 +7,11 @@ public class Get
 
     public override async Task<IResult> Handle(PersonRequest request,
                                                CancellationToken cancellationToken)
-        => Results.Ok(new Response<Entity.Person>(await QueryRouter.Send(new GetPerson(request.Id))));
+    {
+        Entity.Person person = await QueryRouter.Send(new GetPerson(request.Id));
+
+        return person != null
+            ? Results.Ok(new Response<PersonApiModel>(person.ToModel()))
+            : Results.NotFound(new Response<PersonApiModel>(new PersonApiModel()));
+    }
 }

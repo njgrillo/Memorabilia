@@ -2,15 +2,18 @@
 
 public static class DomainModelExtensions
 {
-    public static CommissionerAPIModel ToModel(this Entity.Commissioner commissioner)
+    public static CommissionerApiModel ToModel(this Entity.Commissioner commissioner)
         => new(commissioner);
 
-    public static CommissionerAPIModel[] ToModelArray(this Entity.Commissioner[] commissioners)
+    public static CommissionerApiModel[] ToModelArray(this Entity.Commissioner[] commissioners)
         => commissioners.Select(commissioner => commissioner.ToModel()).ToArray();
 
-    public static LeaguePresidentAPIModel ToModel(this Entity.LeaguePresident leaguePresident)
+    public static LeaguePresidentApiModel ToModel(this Entity.LeaguePresident leaguePresident)
         => new(leaguePresident);
 
-    public static LeaguePresidentAPIModel[] ToModelArray(this Entity.LeaguePresident[] leaguePresidents)
+    public static LeaguePresidentApiModel[] ToModelArray(this Entity.LeaguePresident[] leaguePresidents)
         => leaguePresidents.Select(leaguePresident => leaguePresident.ToModel()).ToArray();
+
+    public static PersonApiModel ToModel(this Entity.Person person)
+       => new(person);
 }

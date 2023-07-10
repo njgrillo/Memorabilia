@@ -81,7 +81,6 @@ public sealed class AwardType : DomainItemConstant
     public static readonly AwardType DickHowserTrophy = new(29, "Dick Howser Trophy");
     public static readonly AwardType DoakWalkerAward = new(160, "Doak Walker Award");
     public static readonly AwardType EBAMostValuablePlayer = new (200, "EBA Most Valuable Player", "EBA MVP");
-    public static readonly AwardType EddieRobinsonAward = new(148, "Eddie Robinson Award");
     public static readonly AwardType EdgarMartinezAward = new(35, "Edgar Martinez Award");
     public static readonly AwardType ExecutiveOfTheYear = new (118, "Executive of the Year");
     public static readonly AwardType FieldingBibleAward = new(21, "Fielding Bible Award");
@@ -107,7 +106,6 @@ public sealed class AwardType : DomainItemConstant
     public static readonly AwardType JackLambertTrophy = new (88, "Jack Lambert Trophy");
     public static readonly AwardType JackTatumTrophy = new (167, "Jack Tatum Trophy");
     public static readonly AwardType JacobsBlockingTrophy = new (106, "Jacobs Blocking Trophy");
-    public static readonly AwardType JeffNicklinMemorialTrophy = new (117, "Jeff Nicklin Memorial Trophy");
     public static readonly AwardType JimParkerTrophy = new (139, "Jim Parker Trophy");
     public static readonly AwardType JimThorpeAward = new (146, "Jim Thorpe Award");
     public static readonly AwardType JohnnyUnitasGoldenArmAward = new (128, "Johnny Unitas Golden Arm Award");
@@ -312,7 +310,6 @@ public sealed class AwardType : DomainItemConstant
         DickHowserTrophy,
         DoakWalkerAward,
         EBAMostValuablePlayer,
-        EddieRobinsonAward,
         EdgarMartinezAward,
         FieldingBibleAward,
         FinalsMostValuablePlayer,
@@ -336,7 +333,6 @@ public sealed class AwardType : DomainItemConstant
         JackLambertTrophy,
         JackTatumTrophy,
         JacobsBlockingTrophy,
-        JeffNicklinMemorialTrophy,
         JimParkerTrophy,
         JimThorpeAward,
         JohnnyUnitasGoldenArmAward,
@@ -788,7 +784,6 @@ public sealed class AwardType : DomainItemConstant
         DefensivePlayerOfTheYear,
         DefensiveRookieOfTheYear,
         DoakWalkerAward,
-        EddieRobinsonAward,
         ExecutiveOfTheYear,
         GeorgeHalasAward,
         GoldenToeAward,
@@ -798,7 +793,6 @@ public sealed class AwardType : DomainItemConstant
         JackLambertTrophy,
         JackTatumTrophy,
         JacobsBlockingTrophy,
-        JeffNicklinMemorialTrophy,
         JimParkerTrophy,
         JimThorpeAward,
         JohnnyUnitasGoldenArmAward,
@@ -907,7 +901,6 @@ public sealed class AwardType : DomainItemConstant
         DefensivePlayerOfTheYear,
         DefensiveRookieOfTheYear,
         DoakWalkerAward,
-        EddieRobinsonAward,
         GeorgeHalasAward,
         GoldenToeAward,
         GrahamGeorgeOffensivePlayerOfTheYear,
@@ -916,7 +909,6 @@ public sealed class AwardType : DomainItemConstant
         JackLambertTrophy,
         JackTatumTrophy,
         JacobsBlockingTrophy,
-        JeffNicklinMemorialTrophy,
         JimParkerTrophy,
         JimThorpeAward,
         JohnnyUnitasGoldenArmAward,

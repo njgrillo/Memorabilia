@@ -7,6 +7,6 @@ public class Get
 
     public override async Task<IResult> Handle(LeaguePresidentRequest request,
                                                CancellationToken cancellationToken)
-        => Results.Ok(new Response<LeaguePresidentAPIModel>(
+        => Results.Ok(new Response<LeaguePresidentApiModel>(
             (await QueryRouter.Send(new GetLeaguePresident(request.Id))).ToModel()));
 }

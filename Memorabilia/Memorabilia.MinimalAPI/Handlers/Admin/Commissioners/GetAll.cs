@@ -7,6 +7,6 @@ public class GetAll
 
     public override async Task<IResult> Handle(CommissionersRequest request,
                                                CancellationToken cancellationToken)
-        => Results.Ok(new Response<CommissionerAPIModel[]>(
+        => Results.Ok(new Response<CommissionerApiModel[]>(
             (await QueryRouter.Send(new GetCommissioners())).ToModelArray()));
 }
