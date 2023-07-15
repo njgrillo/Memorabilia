@@ -21,6 +21,11 @@ public class PersonCacheRepository
         await _personRepository.Add(person, cancellationToken);
     }
 
+    public async Task<Entity.Person> Get(string displayName = null, 
+                                         string profileName = null, 
+                                         string legalName = null)
+        => await _personRepository.Get(displayName, profileName, legalName);
+
     public Task<IEnumerable<Entity.Person>> GetAll(int? sportId = null, 
                                                    int? sportLeagueLevelId = null)
         => sportId == null && 

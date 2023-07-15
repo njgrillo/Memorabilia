@@ -1,3 +1,6 @@
+using Autofac.Core;
+using Memorabilia.Blazor.Services;
+
 namespace Memorabilia.MinimalAPI;
 
 public class Program
@@ -26,6 +29,12 @@ public class Program
         builder.Host.ConfigureContainer<ContainerBuilder>(builder => builder.RegisterModule(new ApplicationModule()));
 
         builder.Services.RegisterCachedRepositories();
+
+        var imagePath = new ImagePath();
+        builder.Configuration.GetSection("ImagePaths").Bind(imagePath);
+
+        builder.Services.AddSingleton<IImagePath>(imagePath);
+        builder.Services.AddSingleton<ImageService>();
 
         var app = builder.Build();
 

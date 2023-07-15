@@ -84,6 +84,8 @@ public class PersonApiModel
                   .Select(x => new PersonHallOfFameApiModel(x))
                   .ToArray() ?? Array.Empty<PersonHallOfFameApiModel>();
 
+    public string ImageData { get; set; }
+
     public PersonInternationalHallOfFameApiModel[] InternationalHallOfFames
         => _person.InternationalHallOfFames
                   .Select(x => new PersonInternationalHallOfFameApiModel(x))

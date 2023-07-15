@@ -68,6 +68,8 @@ global using Memorabilia.Application.Features.Admin.TeamRoleTypes;
 global using Memorabilia.Application.Features.Admin.Teams;
 global using Memorabilia.Application.Features.Admin.WritingInstruments;
 global using Memorabilia.Application.Features.User;
+global using Memorabilia.Blazor.Configuration;
+global using Memorabilia.Blazor.Services;
 global using Memorabilia.MinimalAPI.Extensions;
 global using Memorabilia.MinimalAPI.Interfaces;
 global using Memorabilia.MinimalAPI.Models;

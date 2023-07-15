@@ -22,6 +22,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\..\Framework\Framework.Library\Framework.Library.csproj" />
     <ProjectReference Include="..\Memorabilia.Application\Memorabilia.Application.csproj" />
+    <ProjectReference Include="..\Memorabilia.Blazor\Memorabilia.Blazor.csproj" />
     <ProjectReference Include="..\Memorabilia.Domain\Memorabilia.Domain.csproj" />
     <ProjectReference Include="..\Memorabilia.Repository\Memorabilia.Repository.csproj" />
   </ItemGroup>
