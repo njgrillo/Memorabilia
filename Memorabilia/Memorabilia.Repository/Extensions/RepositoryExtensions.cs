@@ -32,7 +32,7 @@ public static class RepositoryExtensions
         services.AddTransient<IPersonAccomplishmentRepository, PersonAccomplishmentCacheRepository>();
 
         services.AddTransient<PersonAwardRepository>();
-        services.AddTransient<IPersonAwardRepository, PersonAwardCacheRepository>();
+        //services.AddTransient<IPersonAwardRepository, PersonAwardCacheRepository>();
 
         services.AddTransient<PersonCollegeRepository>();
         services.AddTransient<IPersonCollegeRepository, PersonCollegeCacheRepository>();

@@ -45,21 +45,21 @@ public class ImageService
                .ToImageData();
 
     public string GetPersonImageData(string imageFileName)
-        => imageFileName == ImageFileName.ImageNotAvailable
+        => imageFileName.IsNullOrEmpty() || imageFileName == ImageFileName.ImageNotAvailable
             ? GetDomainImageData(imageFileName)
             : Path.Combine(Path.Combine(_imagePathConfiguration.PersonImageRootPath),
                            imageFileName.IsNullOrEmpty() ? ImageFileName.ImageNotAvailable : imageFileName)
                   .ToImageData();
 
     public string GetPewterImageData(string imageFileName)
-        => imageFileName == ImageFileName.ImageNotAvailable
+        => imageFileName.IsNullOrEmpty() || imageFileName == ImageFileName.ImageNotAvailable
             ? GetDomainImageData(imageFileName)
             : Path.Combine(Path.Combine(_imagePathConfiguration.PewterImageRootPath),
                            imageFileName.IsNullOrEmpty() ? ImageFileName.ImageNotAvailable : imageFileName)
                   .ToImageData();
 
     public string GetUserImageData(string imageFileName)
-        => imageFileName == ImageFileName.ImageNotAvailable
+        => imageFileName.IsNullOrEmpty() || imageFileName == ImageFileName.ImageNotAvailable
             ? GetDomainImageData(imageFileName)
             : Path.Combine(Path.Combine(_imagePathConfiguration.MemorabiliaImageRootPath, UserId),
                            imageFileName.IsNullOrEmpty() ? ImageFileName.ImageNotAvailable : imageFileName)

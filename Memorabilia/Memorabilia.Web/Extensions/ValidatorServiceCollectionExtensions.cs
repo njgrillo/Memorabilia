@@ -1,6 +1,4 @@
-﻿using Memorabilia.Application.Validators.User;
-
-namespace Memorabilia.Web.Extensions;
+﻿namespace Memorabilia.Web.Extensions;
 
 public static class ValidatorServiceCollectionExtensions
 {
@@ -9,6 +7,7 @@ public static class ValidatorServiceCollectionExtensions
         services.AddSingleton<AccoladeValidator>();
         services.AddSingleton<AuthenticationValidator>();
         services.AddSingleton<AutographValidator>();
+        services.AddSingleton<AwardManagementValidator>();
         services.AddSingleton<BammerValidator>();
         services.AddSingleton<BaseballValidator>();
         services.AddSingleton<BasketballValidator>();

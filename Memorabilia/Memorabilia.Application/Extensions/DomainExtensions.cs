@@ -21,6 +21,9 @@ public static class DomainExtensions
     public static SpotEditModel ToEditModel(this Entity.Autograph autograph)
         => new(new SpotModel(autograph));
 
+    public static AwardManagementEditModel ToEditModel(this Entity.AwardDetail awardDetail)
+        => new(new AwardManagementModel(awardDetail));
+
     public static CommissionerEditModel ToEditModel(this Entity.Commissioner commissioner)
         => new(new CommissionerModel(commissioner));
 

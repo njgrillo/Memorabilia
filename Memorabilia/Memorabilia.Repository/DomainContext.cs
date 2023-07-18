@@ -2,9 +2,17 @@
 
 public class DomainContext : DbContext, IDomainContext
 {
+    public DbSet<Entity.AwardDetail> AwardDetail { get; set; }
+
+    public DbSet<Entity.AwardExclusionYear> AwardExclusionYear { get; set; }
+
+    public DbSet<Entity.AwardType> AwardType { get; set; }
+
     public DbSet<Entity.College> College { get; set; }
 
     public DbSet<Entity.Person> Person { get; set; }
+
+    public DbSet<Entity.PersonAward> PersonAward { get; set; }
 
     public DbSet<Entity.PersonTeam> PersonTeam { get; set; }
 
@@ -23,6 +31,8 @@ public class DomainContext : DbContext, IDomainContext
         modelBuilder.Entity<Entity.AccomplishmentType>();
         modelBuilder.Entity<Entity.AcquisitionType>();
         modelBuilder.Entity<Entity.AuthenticationCompany>();           
+        modelBuilder.Entity<Entity.AwardDetail>();
+        modelBuilder.Entity<Entity.AwardExclusionYear>();
         modelBuilder.Entity<Entity.AwardType>();
         modelBuilder.Entity<Entity.BammerType>();
         modelBuilder.Entity<Entity.BaseballType>();

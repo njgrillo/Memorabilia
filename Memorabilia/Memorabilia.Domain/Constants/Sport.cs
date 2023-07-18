@@ -11,6 +11,7 @@ public sealed class Sport : DomainItemConstant
     public static readonly Sport MixedMartialArts = new(12, "Mixed Martial Arts");
     public static readonly Sport Soccer= new(5, "Soccer", "Futbol");
     public static readonly Sport Tennis= new(7, "Tennis");
+    public static readonly Sport TrackAndField= new(13, "Track & Field");
 
     public static readonly Sport[] All =
     {
@@ -22,7 +23,8 @@ public sealed class Sport : DomainItemConstant
         Hockey,
         MixedMartialArts,
         Soccer,
-        Tennis
+        Tennis,
+        TrackAndField
     };
 
     public static readonly Sport[] AllStarGameSports =
@@ -72,7 +74,8 @@ public sealed class Sport : DomainItemConstant
         Boxing,
         Football,
         Golf,
-        Soccer
+        Soccer,
+        TrackAndField
     };
 
     public static readonly Sport[] TrunkSports =

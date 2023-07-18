@@ -11,7 +11,7 @@ public class AllStarMostValuablePlayerRule : AwardRule, IAwardRule
     {
         _awardType = awardType;
 
-        return awardType == Constant.AwardType.AllStarGameMostValuablePlayer ||
+        return awardType == Constant.AwardType.MLBAllStarGameMostValuablePlayer ||
                awardType == Constant.AwardType.NBAAllStarGameMVP;
     }
 

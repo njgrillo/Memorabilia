@@ -17,6 +17,7 @@ global using Memorabilia.Application.Features.Services.Autographs.Inscriptions.A
 global using Memorabilia.Application.Features.Services.Interfaces;
 global using Memorabilia.Application.Features.User;
 global using Memorabilia.Application.Validators.Admin;
+global using Memorabilia.Application.Validators.Admin.Management.Awards;
 global using Memorabilia.Application.Validators.Admin.People;
 global using Memorabilia.Application.Validators.Autograph;
 global using Memorabilia.Application.Validators.Collection;
@@ -64,6 +65,7 @@ global using Memorabilia.Application.Validators.Memorabilia.Ticket;
 global using Memorabilia.Application.Validators.Memorabilia.Trunk;
 global using Memorabilia.Application.Validators.Memorabilia.WristBand;
 global using Memorabilia.Application.Validators.Project;
+global using Memorabilia.Application.Validators.User;
 global using Memorabilia.Blazor;
 global using Memorabilia.Blazor.Configuration;
 global using Memorabilia.Blazor.Controls.Dialogs;
