@@ -1,0 +1,47 @@
+﻿<DivRowFormGroup>
+    <MudStack Class="col-10"
+              Row="true"
+              Style="margin-bottom:1%;">
+        <TextField HelperText="Ex. 1999 or 1999-2002 or 2003, 2005-2008"
+                   Label="Exclusion Years"
+                   SelectedText="@_years"
+                   SelectedTextChanged="@((p) => _years = p)" />
+        <TextField Label="Reason"
+                   SelectedText="@EditModel.Reason"
+                   SelectedTextChanged="@((p) => EditModel.Reason = p)" />
+        <AddUpdateMudFab EditMode="EditMode"
+                         OnAdd="Add"
+                         OnUpdate="Update" />
+    </MudStack>
+</DivRowFormGroup>
+<Div Class="row">
+    <Div Class="col-6">
+        <MudTable Bordered="false"
+                  Dense="false"
+                  Hover="true"
+                  Items="@ExclusionYears.Where(exclusionYear => !exclusionYear.IsDeleted).ToList()"
+                  Striped="true">
+            <HeaderContent>
+                <MudTh>Year</MudTh>
+                <MudTh>Reason</MudTh>
+                <MudTh></MudTh>
+            </HeaderContent>
+            <RowTemplate>
+                <MudTd DataLabel="Year">@context.Year</MudTd>
+                <MudTd DataLabel="Reason">@context.Reason</MudTd>
+                <MudTd DataLabel="">
+                    <MudTooltip Text="Edit">
+                        <MudFab Color="MudBlazor.Color.Primary"
+                                Icon="@Icons.Material.Outlined.ModeEditOutline"
+                                OnClick="@(_ => Edit(context))" />
+                    </MudTooltip>
+                    <MudTooltip Text="Delete">
+                        <MudFab Color="MudBlazor.Color.Secondary"
+                                Icon="@Icons.Material.Outlined.DeleteOutline"
+                                OnClick="@(_ => context.IsDeleted = true)" />
+                    </MudTooltip>
+                </MudTd>
+            </RowTemplate>
+        </MudTable>
+    </Div>
+</Div>

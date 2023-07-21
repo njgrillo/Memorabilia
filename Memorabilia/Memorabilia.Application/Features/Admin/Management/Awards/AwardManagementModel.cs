@@ -17,7 +17,7 @@ public class AwardManagementModel
         AwardDetailId= awardDetail.Id;
     }
 
-    public int AwardDetailId { get; set; }
+    public int AwardDetailId { get; set; }    
 
     public Constant.AwardType AwardType
         => Constant.AwardType.Find(AwardTypeId);
@@ -29,7 +29,11 @@ public class AwardManagementModel
         => _awardDetail.BeginYear;
 
     public int? EndYear
-        => _awardDetail.EndYear;    
+        => _awardDetail.EndYear;
+
+    public Entity.AwardExclusionYear[] ExclusionYears
+        => _awardDetail.ExclusionYears
+                       .ToArray();
 
     public bool HasMissingYears
         => MissingYears.Any();

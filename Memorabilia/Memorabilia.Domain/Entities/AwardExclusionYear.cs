@@ -4,14 +4,14 @@ public class AwardExclusionYear : Framework.Library.Domain.Entity.DomainEntity
 {
     public AwardExclusionYear() { }
 
-    public AwardExclusionYear(int awardTypeId, int year, string reason)
+    public AwardExclusionYear(int awardDetailId, int year, string reason)
     {
-        AwardTypeId = awardTypeId;
+        AwardDetailId = awardDetailId;
         Reason = reason;
         Year = year;
     }
 
-    public int AwardTypeId { get; private set; }
+    public int AwardDetailId { get; private set; }
 
     public string Reason { get; private set; }
 

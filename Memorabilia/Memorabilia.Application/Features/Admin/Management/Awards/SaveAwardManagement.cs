@@ -1,8 +1,8 @@
 ﻿namespace Memorabilia.Application.Features.Admin.Management.Awards;
 
-public record SaveAwardManagement(AwardManagementEditModel AwardManagement) : ICommand
+public class SaveAwardManagement
 {
-    public class Handler : CommandHandler<SaveAwardManagement>
+    public class Handler : CommandHandler<Command>
     {
         private readonly IAwardDetailRepository _awardDetailRepository;
 
@@ -11,38 +11,68 @@ public record SaveAwardManagement(AwardManagementEditModel AwardManagement) : IC
             _awardDetailRepository = awardDetailRepository;
         }
 
-        protected override async Task Handle(SaveAwardManagement request)
+        protected override async Task Handle(Command command)
         {
             Entity.AwardDetail awardDetail;
 
-            if (request.AwardManagement.IsNew)
+            if (command.AwardManagement.IsNew)
             {
-                awardDetail = new Entity.AwardDetail(request.AwardManagement.AwardType.Id,
-                                                     request.AwardManagement.BeginYear ?? 0,
-                                                     request.AwardManagement.EndYear,
-                                                     request.AwardManagement.NumberOfWinners,
-                                                     request.AwardManagement.MonthAwarded);
+                awardDetail = new Entity.AwardDetail(command.AwardManagement.AwardType.Id,
+                                                     command.AwardManagement.BeginYear ?? 0,
+                                                     command.AwardManagement.EndYear,
+                                                     command.AwardManagement.NumberOfWinners,
+                                                     command.AwardManagement.MonthAwarded);
+
+                foreach (AwardExclusionYearEditModel exclusionYear in command.AwardManagement.ExclusionYears.Where(item => !item.IsDeleted))
+                {
+                    awardDetail.SetExclusionYear(exclusionYear.Year, exclusionYear.Reason);
+                }
 
                 await _awardDetailRepository.Add(awardDetail);
 
                 return;
             }
 
-            awardDetail = await _awardDetailRepository.Get(request.AwardManagement.AwardType.Id);
+            awardDetail = await _awardDetailRepository.Get(command.AwardManagement.AwardType.Id);
 
-            if (request.AwardManagement.IsDeleted)
+            if (command.AwardManagement.IsDeleted)
             {
                 await _awardDetailRepository.Delete(awardDetail);
-
                 return;
             }
 
-            awardDetail.Set(request.AwardManagement.BeginYear ?? 0,
-                            request.AwardManagement.EndYear,
-                            request.AwardManagement.NumberOfWinners,
-                            request.AwardManagement.MonthAwarded);
+            awardDetail.Set(command.AwardManagement.BeginYear ?? 0,
+                            command.AwardManagement.EndYear,
+                            command.AwardManagement.NumberOfWinners,
+                            command.AwardManagement.MonthAwarded);
+
+            awardDetail.RemoveExclusionYears(command.DeletedExclusionYearsIds);
+
+            foreach (AwardExclusionYearEditModel exclusionYear in command.AwardManagement.ExclusionYears.Where(item => !item.IsDeleted))
+            {
+                awardDetail.SetExclusionYear(exclusionYear.Year, exclusionYear.Reason);
+            }
 
             await _awardDetailRepository.Update(awardDetail);
         }
+    }
+
+    public class Command : DomainCommand, ICommand
+    {
+        private readonly AwardManagementEditModel _editModel;
+
+        public Command(AwardManagementEditModel editModel)
+        {
+            _editModel = editModel;
+        }
+
+        public AwardManagementEditModel AwardManagement
+            => _editModel;
+
+        public int[] DeletedExclusionYearsIds
+            => _editModel.ExclusionYears
+                         .Where(exclusionYear => exclusionYear.IsDeleted)
+                         .Select(exclusionYear => exclusionYear.Id)
+                         .ToArray();
     }
 }

@@ -2,7 +2,8 @@
     <MudStack Class="col-12"
               Row="true"
               Style="margin-bottom:1%;">
-        <AwardTypeAutoComplete ResetValueOnEmptyText="false"
+        <AwardTypeAutoComplete IncludeMultiSport="true" 
+                               ResetValueOnEmptyText="false"
                                SelectedValue="Model.AwardType"
                                SelectionChanged="(p) => Model.AwardType = p"
                                Sports="Sports" />

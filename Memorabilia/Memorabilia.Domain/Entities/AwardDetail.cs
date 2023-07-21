@@ -35,6 +35,29 @@ public class AwardDetail : Framework.Library.Domain.Entity.DomainEntity
 
     public int? NumberOfWinners { get; private set; }
 
+    public void RemoveExclusionYears(int[] ids)
+    {
+        if (!ids.Any())
+            return;
+
+        AwardExclusionYear[] deletedExclusionYears
+            = ExclusionYears.Where(exclusionYear => ids.Contains(exclusionYear.Id))
+                            .ToArray();
+
+        foreach (AwardExclusionYear exclusionYear in deletedExclusionYears)
+        {
+            ExclusionYears.Remove(exclusionYear);
+        }
+    }
+
+    public void SetExclusionYear(int year, string reason)
+    {
+        var exclusionYear = new AwardExclusionYear(Id, year, reason);
+
+        if (!ExclusionYears.Contains(exclusionYear))
+            ExclusionYears.Add(exclusionYear);
+    }
+
     public void Set(int beginYear, int? endYear, int? numberOfWinners, int? monthAwarded)
     {
         BeginYear = beginYear;

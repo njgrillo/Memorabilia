@@ -11,8 +11,8 @@ public class PlayerOfTheYearRule : AwardRule, IAwardRule
     {
         _awardType = awardType;
 
-        return awardType == Constant.AwardType.DefensivePlayerOfTheYear ||
-               awardType == Constant.AwardType.OffensivePlayerOfTheYear;
+        return awardType == Constant.AwardType.AssociatedPressNFLDefensivePlayerOfTheYear ||
+               awardType == Constant.AwardType.AssociatedPressNFLOffensivePlayerOfTheYear;
     }
 
     public string[] GenerateInscriptions(Entity.PersonAward[] awards)

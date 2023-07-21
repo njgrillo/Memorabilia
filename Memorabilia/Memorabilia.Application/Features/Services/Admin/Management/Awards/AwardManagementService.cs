@@ -1,4 +1,6 @@
-﻿namespace Memorabilia.Application.Features.Services.Admin.Management.Awards;
+﻿using System.Linq;
+
+namespace Memorabilia.Application.Features.Services.Admin.Management.Awards;
 
 public class AwardManagementService
 {
@@ -32,11 +34,16 @@ public class AwardManagementService
                     : DateTime.UtcNow.Year) 
                 : DateTime.UtcNow.Year);
 
-        for (int i = awardDetail.BeginYear; i <= endYear; i++)
+        int[] exclusionYears = awardDetail.ExclusionYears
+                                          .Select(exclusionYear => exclusionYear.Year)
+                                          .ToArray()
+                               ?? Array.Empty<int>();
+
+        for (int year = awardDetail.BeginYear; year <= endYear; year++)
         {
-            if (!personAwardYears.Contains(i)) 
+            if (!personAwardYears.Contains(year) && !exclusionYears.Contains(year)) 
             {
-                _missingYears.Add(i);
+                _missingYears.Add(year);
             }
         }
     }      

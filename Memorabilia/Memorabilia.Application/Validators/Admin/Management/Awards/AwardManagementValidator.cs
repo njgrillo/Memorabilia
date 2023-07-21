@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Application.Validators.Admin.Management.Awards;
 
-public class AwardManagementValidator : AbstractValidator<SaveAwardManagement>
+public class AwardManagementValidator : AbstractValidator<SaveAwardManagement.Command>
 {
     public AwardManagementValidator()
     {
@@ -36,5 +36,8 @@ public class AwardManagementValidator : AbstractValidator<SaveAwardManagement>
            .When(x => x.AwardManagement.MonthAwarded.HasValue)
            .WithName("MonthAwarded")
            .WithMessage("Month Awarded must be less than 13.");
+
+        RuleForEach(x => x.AwardManagement.ExclusionYears)
+            .SetValidator(new AwardExclusionYearValidator());
     }
 }

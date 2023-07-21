@@ -61,7 +61,7 @@ public partial class AwardManagementEditor
 
     protected async Task OnSave()
     {
-        var command = new SaveAwardManagement(EditModel);
+        var command = new SaveAwardManagement.Command(EditModel);
 
         EditModel.ValidationResult = Validator.Validate(command);
 

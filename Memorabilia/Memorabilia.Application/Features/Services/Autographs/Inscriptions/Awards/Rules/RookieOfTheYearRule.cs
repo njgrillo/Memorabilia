@@ -14,7 +14,7 @@ public class RookieOfTheYearRule : AwardRule, IAwardRule
         return awardType == Constant.AwardType.AmericanLeagueRookieOfTheYear ||
                awardType == Constant.AwardType.NBARookieOfTheYear ||
                awardType == Constant.AwardType.NationalLeagueRookieOfTheYear ||
-               awardType == Constant.AwardType.RookieOfTheYear;
+               awardType == Constant.AwardType.SportingNewsNFLRookieOfTheYear;
     }
 
     public string[] GenerateInscriptions(Entity.PersonAward[] awards)

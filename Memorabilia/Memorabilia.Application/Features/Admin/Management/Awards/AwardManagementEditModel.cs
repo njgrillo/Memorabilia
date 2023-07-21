@@ -12,7 +12,11 @@ public class AwardManagementEditModel : EditModel
         Id = model.AwardDetailId;
         MonthAwarded = model.MonthAwarded;
         NumberOfWinners = model.NumberOfWinners;
-    }
+
+        ExclusionYears = model.ExclusionYears
+                              .Select(exclusion => new AwardExclusionYearEditModel(exclusion))
+                              .ToList(); 
+    }    
 
     public Constant.AwardType AwardType { get; set; }
 
@@ -20,6 +24,9 @@ public class AwardManagementEditModel : EditModel
         = 1950;
 
     public int? EndYear { get; set; }
+
+    public List<AwardExclusionYearEditModel> ExclusionYears { get; set; }
+        = new();
 
     public int? MonthAwarded { get; set; }
 

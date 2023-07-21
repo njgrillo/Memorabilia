@@ -3,7 +3,8 @@
 <DivPad2>
     <DivRowCol12>
         <MudStack Row="true">
-            <AwardTypeAutoComplete ResetValueOnEmptyText="false"
+            <AwardTypeAutoComplete IsMultiSport="@(Sport == null)" 
+                                   ResetValueOnEmptyText="false"
                                    SelectedValue="Model.AwardType"
                                    SelectionChanged="(awardType) => OnInputChange(awardType)"
                                    Sports="@(new [] { Sport })" />

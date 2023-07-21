@@ -10,8 +10,8 @@ public partial class ViewAwards
     {
         var parameters = new DialogParameters
         {
-            ["DomainItems"] = AwardType.GetAll(Sport),
-            ["Title"] = $"{Sport.Name} Awards"
+            ["DomainItems"] = Sport == null ? AwardType.MultiSport : AwardType.GetAll(false, Sport),
+            ["Title"] = $"{Sport?.Name ?? "Multi Sport"} Awards"
         };
 
         var options = new DialogOptions()
