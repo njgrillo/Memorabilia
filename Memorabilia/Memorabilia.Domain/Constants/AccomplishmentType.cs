@@ -149,7 +149,7 @@ public sealed class AccomplishmentType : DomainItemConstant
     public static readonly AccomplishmentType SecondTeamAllAFL = new(38, "Second-team All-AFL");
     public static readonly AccomplishmentType SecondTeamAllAmericanBasketball = new(35, "Second-team All-American (Basketball)");    
     public static readonly AccomplishmentType SecondTeamAllAmericanFootball = new(179, "Second-team All-American (Football)");    
-    public static readonly AccomplishmentType SecondTeamAllBigEast = new(163, "Second-team All-Big East");    
+    public static readonly AccomplishmentType SecondTeamAllBigEastBasketball = new(163, "Second-team All-Big East (Basketball)");    
     public static readonly AccomplishmentType SecondTeamAllBigNineFootball = new(88, "Second-team All-Big Nine (Football)");    
     public static readonly AccomplishmentType SecondTeamAllBigTenFootball = new(43, "Second-team All-Big Ten (Football)");    
     public static readonly AccomplishmentType SecondTeamAllPro = new(26, "Second-team All-Pro");
@@ -269,7 +269,7 @@ public sealed class AccomplishmentType : DomainItemConstant
         NBAThreePointContestChampion,
         NBLAllTimeTeam,
         SecondTeamAllAmericanBasketball,
-        SecondTeamAllBigEast,
+        SecondTeamAllBigEastBasketball,
         SecondTeamParadeAllAmerican,
         ThirdTeamAllAmericanBasketball
     };
@@ -482,7 +482,7 @@ public sealed class AccomplishmentType : DomainItemConstant
         SecondTeamAllAFL,
         SecondTeamAllAmericanBasketball,
         SecondTeamAllAmericanFootball,
-        SecondTeamAllBigEast,
+        SecondTeamAllBigEastBasketball,
         SecondTeamAllBigNineFootball,
         SecondTeamAllBigTenFootball,
         SecondTeamAllPro,

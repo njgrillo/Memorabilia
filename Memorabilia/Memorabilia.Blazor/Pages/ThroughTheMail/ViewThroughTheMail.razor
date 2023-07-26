@@ -1,0 +1,47 @@
+﻿<PageView AddRoute="/ThroughTheMail/Edit/0"
+          AddTitle="Add Through the Mail"
+          DisplayPageHeader="false"
+          NavigationPath="/ThroughTheMail"
+          PageTitle="Through the Mail">
+    <DivPad2>
+        <MudTable Bordered="false"
+                  Dense="false"
+                  Hover="true"
+                  Items="@Items"
+                  Striped="true">
+            <ToolBarContent>
+                <MudText Typo="Typo.h6">Through the Mail</MudText>
+            </ToolBarContent>
+            <HeaderContent>
+                <MudTh>Person</MudTh>
+                <MudTh>Sent Date</MudTh>
+                <MudTh>Received Date</MudTh>
+                <MudTh></MudTh>
+            </HeaderContent>
+            <RowTemplate>
+                <MudTd DataLabel="">
+                    <MudImage @onclick="@(_ => ShowPersonProfile(context.Person.Id))"
+                              Class="rounded-lg"
+                              Elevation="5"
+                              Height="200"
+                              ObjectFit="@ObjectFit.Cover"
+                              Src="@(ImageService.GetPersonImageData(context.Person.ImageFileName))"
+                              Width="200" />
+                </MudTd>
+                <MudTd DataLabel="SentDate">@context.SentDate.Value.ToString("MM-dd-yyyy")</MudTd>
+                <MudTd DataLabel="ReceivedDate">@(context.ReceivedDate.HasValue ? context.ReceivedDate.Value.ToString("MM-dd-yyyy") : string.Empty)</MudTd>
+                <MudTd DataLabel="">
+                    <GridEditButton NavigationPath="@($"ThroughTheMail/Edit/{context.Id}")" />
+                    <MudTooltip Text="Delete">
+                        <MudFab Color="MudBlazor.Color.Secondary"
+                                Icon="@Icons.Material.Outlined.DeleteOutline"
+                                OnClick="@(_ => ShowDeleteConfirm(@context.Id))" />
+                    </MudTooltip>
+                </MudTd>
+            </RowTemplate>
+            <PagerContent>
+                <MudTablePager />
+            </PagerContent>
+        </MudTable>
+    </DivPad2>
+</PageView>

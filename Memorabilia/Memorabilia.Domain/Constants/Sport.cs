@@ -2,27 +2,45 @@
 
 public sealed class Sport : DomainItemConstant
 {
+    public static readonly Sport AutoRacing = new(17, "Auto Racing");
     public static readonly Sport Baseball = new(1, "Baseball");
     public static readonly Sport Basketball = new(2, "Basketball");
     public static readonly Sport Boxing = new(11, "Boxing");
+    public static readonly Sport Cycling = new(16, "Cycling");
+    public static readonly Sport Diving = new(18, "Diving");
+    public static readonly Sport FigureSkating = new (19, "Figure Skating");
     public static readonly Sport Football = new(3, "Football");
     public static readonly Sport Golf = new(6, "Golf");
+    public static readonly Sport Gymnastics = new(20, "Gymnastics");
     public static readonly Sport Hockey = new(4, "Hockey");
+    public static readonly Sport HorseRacing = new(15, "Horse Racing");
     public static readonly Sport MixedMartialArts = new(12, "Mixed Martial Arts");
+    public static readonly Sport Skiing = new(22, "Skiing");
     public static readonly Sport Soccer= new(5, "Soccer", "Futbol");
+    public static readonly Sport SpeedSkating = new (21, "Speed Skating");
+    public static readonly Sport Swimming = new(14, "Swimming");
     public static readonly Sport Tennis= new(7, "Tennis");
     public static readonly Sport TrackAndField= new(13, "Track & Field");
 
     public static readonly Sport[] All =
     {
+        AutoRacing,
         Baseball,
         Basketball,
         Boxing,
+        Cycling,
+        Diving,
+        FigureSkating,
         Football,
         Golf,
+        Gymnastics,
         Hockey,
+        HorseRacing,
         MixedMartialArts,
+        Skiing,
         Soccer,
+        SpeedSkating,
+        Swimming,
         Tennis,
         TrackAndField
     };
@@ -50,7 +68,7 @@ public sealed class Sport : DomainItemConstant
         Baseball,
         Basketball,
         Football,
-        Hockey        
+        Hockey    
     };
 
     public static readonly Sport[] PositionSports =
@@ -72,6 +90,7 @@ public sealed class Sport : DomainItemConstant
         Baseball,
         Basketball,
         Boxing,
+        Cycling,
         Football,
         Golf,
         Soccer,
@@ -81,7 +100,8 @@ public sealed class Sport : DomainItemConstant
     public static readonly Sport[] TrunkSports =
     {
         Boxing,
-        MixedMartialArts
+        MixedMartialArts,
+        Swimming
     };
 
     public static readonly Sport[] WristBandSports =

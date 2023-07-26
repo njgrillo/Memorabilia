@@ -12,5 +12,7 @@ public abstract class PersonSportToolModel : SportToolModel, IWithName
     public abstract string PersonName { get; }
 
     public override string ProfileLink 
-        => $"/Tools/{Sport.Name}Profile/{PersonId}";    
+        => Sport != null
+            ? $"/Tools/{Sport.Name}Profile/{PersonId}"
+            : string.Empty;    
 }

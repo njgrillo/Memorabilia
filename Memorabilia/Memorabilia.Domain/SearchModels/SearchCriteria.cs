@@ -9,6 +9,9 @@ public class SearchCriteria
     public IEnumerable<int> AcquisitionTypeIds { get; set; } 
         = Enumerable.Empty<int>();
 
+    public Constant.AutographFilter AutographFilter { get; set; }
+        = Constant.AutographFilter.None;
+
     public IEnumerable<int> ConditionIds { get; set; } 
         = Enumerable.Empty<int>();
 
