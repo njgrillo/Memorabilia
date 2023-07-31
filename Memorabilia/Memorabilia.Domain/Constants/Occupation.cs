@@ -13,6 +13,7 @@ public sealed class Occupation : DomainItemConstant
     public static readonly Occupation Comedian = new(6, "Comedian");
     public static readonly Occupation Commissioner = new(8, "Commissioner");        
     public static readonly Occupation Executive = new(15, "Executive");        
+    public static readonly Occupation FamousRelative = new(22, "Famous Relative");        
     public static readonly Occupation GeneralManager = new(14, "General Manager");        
     public static readonly Occupation LeaguePresident = new(12, "League President");       
     public static readonly Occupation Manager = new(7, "Manager");       
@@ -35,6 +36,7 @@ public sealed class Occupation : DomainItemConstant
         Comedian,
         Commissioner,
         Executive,
+        FamousRelative,
         GeneralManager,
         LeaguePresident,
         Manager,
@@ -57,6 +59,7 @@ public sealed class Occupation : DomainItemConstant
         Coach,
         Commissioner,
         Executive,
+        FamousRelative,
         GeneralManager,
         Owner
     };

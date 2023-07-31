@@ -8,9 +8,6 @@ public partial class ViewAwardManagement
     private AwardManagementModel[] _completedAwards 
         = Array.Empty<AwardManagementModel>();
 
-    private AwardManagementModel[] _missingPersonAwards
-        = Array.Empty<AwardManagementModel>();
-
     private AwardManagementModel[] _missingYearsAwards
         = Array.Empty<AwardManagementModel>();
 
@@ -25,9 +22,6 @@ public partial class ViewAwardManagement
 
         _completedAwards = awardManagements.Where(awardManagement => awardManagement.IsConfigured && !awardManagement.HasMissingYears)
                                            .ToArray();
-
-        _missingPersonAwards = awardManagements.Where(awardManagement => awardManagement.IsConfigured && awardManagement.HasMissingYears)
-                                               .ToArray();
 
         _missingYearsAwards = awardManagements.Where(awardManagement => awardManagement.IsConfigured && awardManagement.HasMissingYears)
                                               .ToArray();

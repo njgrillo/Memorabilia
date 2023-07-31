@@ -1,6 +1,4 @@
-﻿using System.Linq;
-
-namespace Memorabilia.Application.Features.Services.Admin.Management.Awards;
+﻿namespace Memorabilia.Application.Features.Services.Admin.Management.Awards;
 
 public class AwardManagementService
 {

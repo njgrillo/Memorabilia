@@ -79,9 +79,9 @@ public sealed class AwardType : DomainItemConstant
     public static readonly AwardType ButkusAwardCollege = new (159, "Butkus Award (College)");
     public static readonly AwardType ButkusAwardProfessional = new (286, "Butkus Award (NFL)");
     public static readonly AwardType ButkusFitzgeraldLinebackerOfTheYear = new (265, "Butkus-Fitzgerald Linebacker of the Year");
-    public static readonly AwardType CAAPlayerOfTheYear = new (230, "CAA Player of the Year");    
-    public static readonly AwardType CBAMostValuablePlayer = new (319, "CBA Most Valuable Player", "CBA MVP");    
-    public static readonly AwardType CBAPlayerOfTheYear = new (320, "CBA Player of the Year", "CBA POY");    
+    public static readonly AwardType CAAPlayerOfTheYear = new (230, "CAA Player of the Year (Basketball)");    
+    public static readonly AwardType CBAMostValuablePlayer = new (319, "CBA Most Valuable Player (Basketball)", "CBA MVP");    
+    public static readonly AwardType CBAPlayerOfTheYear = new (320, "CBA Player of the Year (Basketball)", "CBA POY");    
     public static readonly AwardType ChicHarleyAward = new (154, "Chic Harley Award");
     public static readonly AwardType ChicagoTribuneSilverFootball = new (110, "Chicago Tribune Silver Football");
     public static readonly AwardType ChuckBednarikAward = new (166, "Chuck Bednarik Award");
@@ -93,7 +93,7 @@ public sealed class AwardType : DomainItemConstant
     public static readonly AwardType DeliveryManOfTheYear = new(41, "Delivery Man of the Year");
     public static readonly AwardType DickHowserTrophy = new(29, "Dick Howser Trophy");
     public static readonly AwardType DoakWalkerAward = new(160, "Doak Walker Award");
-    public static readonly AwardType EBAMostValuablePlayer = new(200, "EBA Most Valuable Player", "EBA MVP");
+    public static readonly AwardType EBAMostValuablePlayer = new(200, "EBA Most Valuable Player (Basketball)", "EBA MVP");
     public static readonly AwardType EddlemanFieldsPunterOfTheYear = new (268, "Eddleman-Fields Punter of the Year");
     public static readonly AwardType EdgarMartinezAward = new(35, "Edgar Martinez Award");    
     public static readonly AwardType FieldingBibleAward = new(21, "Fielding Bible Award");
@@ -233,7 +233,10 @@ public sealed class AwardType : DomainItemConstant
     public static readonly AwardType UPIAFCOffensivePlayerOfTheYear = new (100, "UPI AFC Offensive Player of the Year");
     public static readonly AwardType UPIAFCRookieOfTheYear = new(306, "UPI AFC Rookie of the Year", "UPI AFC ROY");
     public static readonly AwardType UPIAFLCoachOfTheYear = new (156, "UPI AFL Coach of the Year");
+    public static readonly AwardType UPIAFLPlayerOfTheYear = new(321, "UPI AFL Player of the Year");
     public static readonly AwardType UPIAFLRookieOfTheYear = new(309, "UPI AFL Rookie of the Year");
+    public static readonly AwardType UPICollegePlayerOfTheYearBasketball = new(246, "UPI College Player of the Year (Basketball)");
+    public static readonly AwardType UPICollegePlayerOfTheYearFootball = new(94, "UPI College Player of the Year (Football)");
     public static readonly AwardType UPIComebackPlayerOfTheYearFootball = new (289, "UPI Comeback Player of the Year (Football)");
     public static readonly AwardType UPILinemanOfTheYear = new(80, "UPI Lineman of the Year");
     public static readonly AwardType UPINFCCoachOfTheYear = new(161, "UPI NFC Coach of the Year");
@@ -243,9 +246,7 @@ public sealed class AwardType : DomainItemConstant
     public static readonly AwardType UPINFCRookieOfTheYear = new(169, "UPI NFC Rookie of the Year", "UPI NFC ROY");
     public static readonly AwardType UPINFLCoachOfTheYear = new(91, "UPI NFL Coach of the Year");
     public static readonly AwardType UPINFLMostValuablePlayer = new(304, "UPI NFL Most Valuable Player");
-    public static readonly AwardType UPINFLRookieOfTheYear = new(308, "UPI NFL Rookie of the Year");
-    public static readonly AwardType UPIPlayerOfTheYearBasketball = new(246, "UPI Player of the Year (Basketball)");
-    public static readonly AwardType UPIPlayerOfTheYearFootball = new(94, "UPI Player of the Year (Football)");
+    public static readonly AwardType UPINFLRookieOfTheYear = new(308, "UPI NFL Rookie of the Year");     
     public static readonly AwardType USABasketballMaleAthleteOfTheYear = new(219, "USA Basketball Male Athlete of the Year");
     public static readonly AwardType USBWACollegePlayerOfTheYear = new (204, "USBWA College Player of the Year");
     public static readonly AwardType VernSmithLeadershipAward = new (299, "Vern Smith Leadership Award");
@@ -478,7 +479,10 @@ public sealed class AwardType : DomainItemConstant
         UPIAFCDefensivePlayerOfTheYear,
         UPIAFCOffensivePlayerOfTheYear,
         UPIAFCRookieOfTheYear,
+        UPIAFLPlayerOfTheYear,
         UPIAFLRookieOfTheYear,
+        UPICollegePlayerOfTheYearBasketball,
+        UPICollegePlayerOfTheYearFootball,
         UPIComebackPlayerOfTheYearFootball,
         UPILinemanOfTheYear,
         UPINFCDefensivePlayerOfTheYear,
@@ -487,8 +491,6 @@ public sealed class AwardType : DomainItemConstant
         UPINFCRookieOfTheYear,
         UPINFLMostValuablePlayer,
         UPINFLRookieOfTheYear,
-        UPIPlayerOfTheYearBasketball,
-        UPIPlayerOfTheYearFootball,
         USABasketballMaleAthleteOfTheYear,
         USBWACollegePlayerOfTheYear,
         VernSmithLeadershipAward,
@@ -691,7 +693,7 @@ public sealed class AwardType : DomainItemConstant
         SportingNewsCollegeBasketballPlayerOfTheYear,
         SWCPlayerOfTheYearBasketball,
         TwymanStokesTeammateOfTheYear,
-        UPIPlayerOfTheYearBasketball,
+        UPICollegePlayerOfTheYearBasketball,
         USABasketballMaleAthleteOfTheYear,
         USBWACollegePlayerOfTheYear,
         WCCCoachOfTheYear,
@@ -763,7 +765,7 @@ public sealed class AwardType : DomainItemConstant
         SportsIllustratedSportspersonOfTheYear,
         SWCPlayerOfTheYearBasketball,
         TwymanStokesTeammateOfTheYear,
-        UPIPlayerOfTheYearBasketball,
+        UPICollegePlayerOfTheYearBasketball,
         USABasketballMaleAthleteOfTheYear,
         USBWACollegePlayerOfTheYear,
         WCCPlayerOfTheYear,
@@ -909,7 +911,9 @@ public sealed class AwardType : DomainItemConstant
         UPIAFCOffensivePlayerOfTheYear,
         UPIAFCRookieOfTheYear,
         UPIAFLCoachOfTheYear,
+        UPIAFLPlayerOfTheYear,
         UPIAFLRookieOfTheYear,
+        UPICollegePlayerOfTheYearFootball,
         UPIComebackPlayerOfTheYearFootball,
         UPILinemanOfTheYear,
         UPINFCCoachOfTheYear,
@@ -920,7 +924,6 @@ public sealed class AwardType : DomainItemConstant
         UPINFLCoachOfTheYear,
         UPINFLMostValuablePlayer,
         UPINFLRookieOfTheYear,
-        UPIPlayerOfTheYearFootball,
         VernSmithLeadershipAward,
         VladeAward,
         WACOffensivePlayerOfTheYear,
@@ -1054,7 +1057,9 @@ public sealed class AwardType : DomainItemConstant
         UPIAFCDefensivePlayerOfTheYear,
         UPIAFCOffensivePlayerOfTheYear,
         UPIAFCRookieOfTheYear,
+        UPIAFLPlayerOfTheYear,
         UPIAFLRookieOfTheYear,
+        UPICollegePlayerOfTheYearFootball,
         UPIComebackPlayerOfTheYearFootball,
         UPILinemanOfTheYear,
         UPINFCDefensivePlayerOfTheYear,
@@ -1063,7 +1068,6 @@ public sealed class AwardType : DomainItemConstant
         UPINFCRookieOfTheYear,
         UPINFLMostValuablePlayer,
         UPINFLRookieOfTheYear,
-        UPIPlayerOfTheYearFootball,
         VernSmithLeadershipAward,
         VladeAward,
         WACOffensivePlayerOfTheYear,

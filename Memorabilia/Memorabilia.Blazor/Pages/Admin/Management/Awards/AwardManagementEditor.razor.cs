@@ -42,21 +42,7 @@ public partial class AwardManagementEditor
 
     protected override async Task OnInitializedAsync()
     {
-        if (AwardTypeId == 0)
-            return;
-
-        Entity.AwardDetail awardDetail = await QueryRouter.Send(new GetAwardManagement(AwardTypeId));
-
-        if (awardDetail == null) 
-        {
-            EditModel.AwardType = AwardType.Find(AwardTypeId);
-            _loaded = true;
-            return;
-        }
-
-        EditModel = awardDetail.ToEditModel();
-
-        _loaded = true;
+        await Load();
     }
 
     protected async Task OnSave()
@@ -71,5 +57,26 @@ public partial class AwardManagementEditor
         await CommandRouter.Send(command);
 
         Snackbar.Add("Award Detail was saved successfully!", Severity.Success);
+
+        await Load();
+    }
+
+    private async Task Load()
+    {
+        if (AwardTypeId == 0)
+            return;
+
+        Entity.AwardDetail awardDetail = await QueryRouter.Send(new GetAwardManagement(AwardTypeId));
+
+        if (awardDetail == null)
+        {
+            EditModel.AwardType = AwardType.Find(AwardTypeId);
+            _loaded = true;
+            return;
+        }
+
+        EditModel = awardDetail.ToEditModel();
+
+        _loaded = true;
     }
 }

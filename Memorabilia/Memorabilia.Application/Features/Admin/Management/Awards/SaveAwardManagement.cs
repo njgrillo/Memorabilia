@@ -25,7 +25,7 @@ public class SaveAwardManagement
 
                 foreach (AwardExclusionYearEditModel exclusionYear in command.AwardManagement.ExclusionYears.Where(item => !item.IsDeleted))
                 {
-                    awardDetail.SetExclusionYear(exclusionYear.Year, exclusionYear.Reason);
+                    awardDetail.SetExclusionYear(exclusionYear.Id, exclusionYear.Year, exclusionYear.Reason);
                 }
 
                 await _awardDetailRepository.Add(awardDetail);
@@ -50,7 +50,7 @@ public class SaveAwardManagement
 
             foreach (AwardExclusionYearEditModel exclusionYear in command.AwardManagement.ExclusionYears.Where(item => !item.IsDeleted))
             {
-                awardDetail.SetExclusionYear(exclusionYear.Year, exclusionYear.Reason);
+                awardDetail.SetExclusionYear(exclusionYear.Id, exclusionYear.Year, exclusionYear.Reason);
             }
 
             await _awardDetailRepository.Update(awardDetail);

@@ -50,12 +50,24 @@ public class AwardDetail : Framework.Library.Domain.Entity.DomainEntity
         }
     }
 
-    public void SetExclusionYear(int year, string reason)
+    public void SetExclusionYear(int awardExclusionYearId, int year, string reason)
     {
-        var exclusionYear = new AwardExclusionYear(Id, year, reason);
+        AwardExclusionYear exclusionYear;
 
-        if (!ExclusionYears.Contains(exclusionYear))
-            ExclusionYears.Add(exclusionYear);
+        if (awardExclusionYearId == 0)
+        {
+            exclusionYear = new AwardExclusionYear(Id, year, reason);
+
+            if (!ExclusionYears.Contains(exclusionYear))
+                ExclusionYears.Add(exclusionYear);
+
+            return;
+        }
+
+        exclusionYear = ExclusionYears.SingleOrDefault(x => x.Id == awardExclusionYearId);
+
+        if (exclusionYear != null)
+            exclusionYear.Set(year, reason);
     }
 
     public void Set(int beginYear, int? endYear, int? numberOfWinners, int? monthAwarded)
