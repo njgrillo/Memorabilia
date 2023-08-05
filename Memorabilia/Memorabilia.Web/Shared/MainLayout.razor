@@ -14,6 +14,12 @@
                                    Icon="@Icons.Material.Filled.Menu"
                                    OnClick="@((e) => DrawerToggle())" />
                 </MudTooltip> 
+                <MudTooltip Text="@_themeText">
+                    <MudIconButton Color="MudBlazor.Color.Inherit"
+                                   Edge="Edge.Start"
+                                   Icon="@Icons.Material.Filled.DarkMode"
+                                   OnClick="@((e) => ToggleTheme())" />
+                </MudTooltip>
             </Left>
             <Right>
                 <AuthorizeView>
@@ -33,7 +39,7 @@
     <MudDrawer @bind-Open="@_drawerOpen">
         <NavMenu />
     </MudDrawer>
-    <MudMainContent>
+    <MudMainContent Style="@_theme">
         <CustomErrorBoundary @ref="_errorBoundary"
                              ErrorHasOccurred="OnError">
             <Condition Evaluation="@(_currentException != null)">

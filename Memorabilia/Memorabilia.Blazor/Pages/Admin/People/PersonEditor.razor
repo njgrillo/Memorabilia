@@ -15,11 +15,7 @@
         </TimelineContent>
         <ChildContent>
             <Div Style="margin-bottom:1%;">
-                <MudTabs ApplyEffectsToContainer="true"
-                         Centered="true"
-                         Elevation="2"
-                         PanelClass="pa-6"
-                         Rounded="true">
+                <TabControl>
                     <MudTabPanel Text="Details">
                         <DivRowFormGroup>
                             <Div Class="col-3">
@@ -103,7 +99,7 @@
                             <PersonNicknameEditor Nicknames="EditModel.Nicknames" />
                         </DivRowCol12>
                     </MudTabPanel>
-                </MudTabs>
+                </TabControl>
             </Div>
         </ChildContent>
     </PageEditor>

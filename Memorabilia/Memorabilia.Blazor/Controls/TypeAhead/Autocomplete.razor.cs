@@ -3,6 +3,9 @@
 public abstract partial class Autocomplete<TItem> 
     : CommandQuery where TItem : class, IWithName
 {
+    [Inject]
+    public IApplicationStateService ApplicationStateService { get; set; }
+
     [Parameter]
     public Color AdornmentColor { get; set; } 
         = Color.Primary;
@@ -48,4 +51,21 @@ public abstract partial class Autocomplete<TItem>
 
     public virtual string GetDisplayText(TItem item)
         => item?.Name;
+
+    protected string Theme { get; set; }
+
+    protected override void OnInitialized()
+    {
+        AdornmentColor = ApplicationStateService.IsDarkMode
+            ? Color.Dark
+            : Color.Default;
+
+        Theme = ApplicationStateService.IsDarkMode
+            ? "color:white;"
+            : string.Empty;
+
+        Variant = ApplicationStateService.IsDarkMode
+            ? Variant.Filled
+            : Variant.Outlined;
+    }
 }

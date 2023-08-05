@@ -4,11 +4,9 @@
               Style="margin-bottom:1%;">
         <OccupationAutoComplete SelectedValue="Model.Occupation"
                                 SelectionChanged="(p) => Model.Occupation = p" />
-        <MudSwitch Checked="@(Model.OccupationType == OccupationType.Primary)"
-                   CheckedChanged="OnOccupationTypeChange"
-                   Color="MudBlazor.Color.Success"
-                   Label="Is Primary?"
-                   T="bool" />
+        <Switch Checked="@(Model.OccupationType == OccupationType.Primary)"
+                CheckedChanged="OnOccupationTypeChange"
+                Label="Is Primary?" />
         <AddUpdateMudFab EditMode="EditMode"
                          OnAdd="Add"
                          OnUpdate="Update" />

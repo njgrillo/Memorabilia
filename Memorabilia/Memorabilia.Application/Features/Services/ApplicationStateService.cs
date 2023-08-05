@@ -6,6 +6,8 @@ public class ApplicationStateService : IApplicationStateService
 
     public Entity.User CurrentUser { get; set; }
 
+    public bool IsDarkMode { get; set; }
+
     public ApplicationStateService(QueryRouter queryRouter)
     {
         _queryRouter = queryRouter;

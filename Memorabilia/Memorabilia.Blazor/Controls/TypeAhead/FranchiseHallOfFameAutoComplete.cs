@@ -11,6 +11,7 @@ public class FranchiseHallOfFameAutoComplete
 
     protected override void OnInitialized()
     {
+        AdornmentIcon = string.Empty;
         Label = "Franchise Hall of Fame";
         Placeholder = "Search by franchise...";
         ResetValueOnEmptyText = true;

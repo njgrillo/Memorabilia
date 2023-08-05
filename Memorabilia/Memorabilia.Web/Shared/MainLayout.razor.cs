@@ -15,10 +15,15 @@ public partial class MainLayout : LayoutComponentBase
 
     private CustomErrorBoundary _errorBoundary;
 
+    private string _theme;
+
+    private string _themeText
+        = "Turn on dark mode";
+
     protected override void OnParametersSet()
     {
         _errorBoundary?.Recover();
-    }
+    }    
 
     public void DrawerToggle()
     {
@@ -39,6 +44,19 @@ public partial class MainLayout : LayoutComponentBase
             : "Home";
 
         NavigationManager.NavigateTo(url);
+    }
+
+    public void ToggleTheme()
+    {
+        ApplicationStateService.IsDarkMode = !ApplicationStateService.IsDarkMode;    
+
+        _theme = ApplicationStateService.IsDarkMode
+            ? "background-color:dimgray;"
+            : string.Empty;
+
+        _themeText = ApplicationStateService.IsDarkMode
+            ? "Turn off dark mode"
+            : "Turn on dark mode";
     }
 
     public void UserSettings()

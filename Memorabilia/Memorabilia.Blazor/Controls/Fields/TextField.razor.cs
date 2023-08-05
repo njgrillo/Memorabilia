@@ -27,5 +27,5 @@ public partial class TextField : Field
     public string SelectedText { get; set; }
 
     [Parameter]
-    public EventCallback<string> SelectedTextChanged { get; set; }
+    public EventCallback<string> SelectedTextChanged { get; set; }        
 }

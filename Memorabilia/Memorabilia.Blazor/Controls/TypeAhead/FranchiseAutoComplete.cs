@@ -10,6 +10,7 @@ public class FranchiseAutoComplete : DomainEntityAutoComplete<Franchise>
 
     protected override void OnInitialized()
     {
+        AdornmentIcon = string.Empty;
         Label = "Franchise";
         Placeholder = "Search by franchise...";
 

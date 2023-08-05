@@ -9,6 +9,7 @@ public class TeamRoleTypeAutoComplete : DomainEntityAutoComplete<TeamRoleType>
 
     protected override void OnInitialized()
     {
+        AdornmentIcon = string.Empty;
         Label = "Role";
         Placeholder = "Search by role...";
 

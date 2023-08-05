@@ -10,6 +10,7 @@ public class PositionAutoComplete : DomainEntityAutoComplete<Constant.Position>
 
     protected override void OnInitialized()
     {
+        AdornmentIcon = string.Empty;
         Label = "Position";
         Placeholder = "Search by position...";
 

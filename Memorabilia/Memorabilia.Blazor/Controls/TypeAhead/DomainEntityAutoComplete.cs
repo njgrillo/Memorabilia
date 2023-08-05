@@ -18,7 +18,9 @@ public class DomainEntityAutoComplete<T>
     public override async Task<IEnumerable<T>> Search(string searchText)
     {
         if (searchText.IsNullOrEmpty())
-            return Array.Empty<T>();
+            return AdornmentIcon.IsNullOrEmpty()
+                ? Items  
+                : Array.Empty<T>();
 
         return IsCulturalSearch
             ? await CulturalSearch(searchText)

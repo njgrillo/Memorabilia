@@ -15,11 +15,7 @@
         </TimelineContent>
         <ChildContent>
             <Div Style="margin-bottom:1%;">
-                <MudTabs ApplyEffectsToContainer="true"
-                         Centered="true"
-                         Elevation="2"
-                         PanelClass="pa-6"
-                         Rounded="true">
+                <TabControl>
                     <MudTabPanel BadgeColor="MudBlazor.Color.Success"
                                  BadgeData="EditModel.Colleges.Count(college => !college.IsDeleted)"
                                  Text="Colleges">
@@ -63,7 +59,7 @@
                             </Div>
                         </Div>
                     </MudTabPanel>
-                </MudTabs>
+                </TabControl>
             </Div>
         </ChildContent>
     </PageEditor>

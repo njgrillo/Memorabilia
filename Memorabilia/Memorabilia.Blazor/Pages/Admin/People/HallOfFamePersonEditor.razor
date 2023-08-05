@@ -15,11 +15,7 @@
         </TimelineContent>
         <ChildContent>
             <Div Style="margin-bottom:1%;">
-                <MudTabs ApplyEffectsToContainer="true"
-                         Centered="true"
-                         Elevation="2"
-                         PanelClass="pa-6"
-                         Rounded="true">
+                <TabControl>
                     <MudTabPanel BadgeColor="MudBlazor.Color.Success"
                                  BadgeData="EditModel.HallOfFames.Count(hof => !hof.IsDeleted)"
                                  Text="Sports">
@@ -50,7 +46,7 @@
                             <PersonInternationalHallOfFameEditor InternationalHallOfFames="EditModel.InternationalHallOfFames" />
                         </DivRowCol12>
                     </MudTabPanel>
-                </MudTabs>
+                </TabControl>
             </Div>
         </ChildContent>
     </PageEditor>

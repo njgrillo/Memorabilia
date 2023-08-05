@@ -10,6 +10,7 @@ public class SpotAutoComplete : DomainEntityAutoComplete<Spot>
 
     protected override void OnInitialized()
     {
+        AdornmentIcon = string.Empty;
         Label = "Spot";
         Placeholder = "Search by Spot...";
 

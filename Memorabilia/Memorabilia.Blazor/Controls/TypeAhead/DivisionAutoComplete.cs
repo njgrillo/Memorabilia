@@ -9,6 +9,7 @@ public class DivisionAutoComplete : DomainEntityAutoComplete<Division>
 
     protected override void OnInitialized()
     {
+        AdornmentIcon = string.Empty;
         Label = "Division";
         Placeholder = "Search by Division...";
 

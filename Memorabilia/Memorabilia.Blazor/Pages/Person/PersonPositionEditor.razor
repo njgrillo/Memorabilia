@@ -5,11 +5,9 @@
         <PositionAutoComplete SelectedValue="Model.Position"
                               SelectionChanged="(p) => Model.Position = p"
                               Sports="Sports" />
-        <MudSwitch Checked="@(Model.PositionType == PositionType.Primary)"
-                   CheckedChanged="OnPositionTypeChange"
-                   Color="MudBlazor.Color.Success"
-                   Label="Is Primary?"
-                   T="bool" />
+        <Switch Checked="@(Model.PositionType == PositionType.Primary)"
+                CheckedChanged="OnPositionTypeChange"
+                Label="Is Primary?" />
         <AddMudFab OnAdd="Add" />
     </MudStack>
 </DivRowFormGroup>

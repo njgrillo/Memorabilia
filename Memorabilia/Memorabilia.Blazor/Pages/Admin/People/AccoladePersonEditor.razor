@@ -15,11 +15,7 @@
         </TimelineContent>
         <ChildContent>
             <Div Style="margin-bottom:1%;">
-                <MudTabs ApplyEffectsToContainer="true"
-                         Centered="true"
-                         Elevation="2"
-                         PanelClass="pa-6"
-                         Rounded="true">
+                <TabControl>
                     <MudTabPanel BadgeColor="MudBlazor.Color.Success"
                                  BadgeData="EditModel.Accomplishments.Count(accomplishment => !accomplishment.IsDeleted)"
                                  Text="Accomplishments">
@@ -58,31 +54,31 @@
                     </MudTabPanel>
                     <MudTabPanel Text="Records">
                         <DivRowCol12>
-                            <MudText Typo="Typo.h3">Career Records</MudText>
+                            <Text Content="Career Records" />
                             <PersonCareerRecordEditor CareerRecords="EditModel.CareerRecords"
                                                       Sports="EditModel.Sports" />
                         </DivRowCol12>
                         <br />
                         <DivRowCol12>
-                            <MudText Typo="Typo.h3">Single Season Records</MudText>
+                            <Text Content="Single Season Records" />
                             <PersonSingleSeasonRecordEditor SingleSeasonRecords="EditModel.SingleSeasonRecords"
                                                             Sports="EditModel.Sports" />
                         </DivRowCol12>
                     </MudTabPanel>
                     <MudTabPanel Text="Retired Numbers">
                         <DivRowCol12>
-                            <MudText Typo="Typo.h3">College Retired Numbers</MudText>
+                            <Text Content="College Retired Numbers" />
                             <PersonCollegeRetiredNumberEditor CollegeRetiredNumbers="EditModel.CollegeRetiredNumbers"
                                                               Colleges="EditModel.Colleges" />
                         </DivRowCol12>
                         <br />
                         <DivRowCol12>
-                            <MudText Typo="Typo.h3">Franchise Retired Numbers</MudText>
+                            <Text Content="Franchise Retired Numbers" />
                             <PersonRetiredNumberEditor RetiredNumbers="EditModel.RetiredNumbers"
                                                        Sports="EditModel.Sports" />
                         </DivRowCol12>
                     </MudTabPanel>
-                </MudTabs>
+                </TabControl>
             </Div>
         </ChildContent>
     </PageEditor>

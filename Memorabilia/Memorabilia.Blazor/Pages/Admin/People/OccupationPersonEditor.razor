@@ -17,11 +17,7 @@
             <Div Class="d-flex justify-content-between"
                  Style="width:100%">
                 <Div Style="width:48%">
-                    <MudTabs ApplyEffectsToContainer="true"
-                             Centered="true"
-                             Elevation="2"
-                             PanelClass="pa-6"
-                             Rounded="true">
+                    <TabControl>
                         <MudTabPanel BadgeColor="MudBlazor.Color.Success"
                                      BadgeData="EditModel.Occupations.Count(occupation => !occupation.IsDeleted)"
                                      Text="Occupations">
@@ -54,7 +50,7 @@
                                 </MudTabPanel>
                             </Match>
                         </Condition>
-                    </MudTabs>
+                    </TabControl>
                 </Div>
                 <Div Style="width:48%;margin-bottom:1%;">
                     <PersonRecentOccupationSelector OnRecentOccupationChange="OnRecentOccupationChange"

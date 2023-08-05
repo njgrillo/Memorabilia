@@ -4,11 +4,9 @@
               Style="margin-bottom:1%;">
         <SportAutoComplete SelectedValue="Model.Sport"
                            SelectionChanged="(p) => Model.Sport = p" />
-        <MudSwitch Checked="Model.IsPrimary"
-                   CheckedChanged="(p) => Model.IsPrimary = p"
-                   Color="MudBlazor.Color.Success"
-                   Label="Is Primary?"
-                   T="bool" />
+        <Switch Checked="Model.IsPrimary"
+                CheckedChanged="(p) => Model.IsPrimary = p"
+                Label="Is Primary?" />
         <AddMudFab OnAdd="Add" />
     </MudStack>
 </DivRowFormGroup>
