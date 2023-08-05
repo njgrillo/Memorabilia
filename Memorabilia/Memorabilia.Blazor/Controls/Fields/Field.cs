@@ -1,10 +1,7 @@
 ﻿namespace Memorabilia.Blazor.Controls.Fields;
 
-public abstract class Field : ComponentBase
+public abstract class Field : ThemedControl
 {
-    [Inject]
-    public IApplicationStateService ApplicationStateService { get; set; }
-
     [Parameter]
     public bool DisplaySkeleton { get; set; }
 
@@ -19,6 +16,18 @@ public abstract class Field : ComponentBase
 
     protected override void OnInitialized()
     {
+        SetTheme();
+
+        base.OnInitialized();
+    }
+
+    public override void OnThemeChanged()
+    {
+        SetTheme();
+    }
+
+    private void SetTheme()
+    {
         Theme = ApplicationStateService.IsDarkMode
             ? "color:white;"
             : string.Empty;
@@ -26,5 +35,7 @@ public abstract class Field : ComponentBase
         Variant = ApplicationStateService.IsDarkMode
             ? Variant.Filled
             : Variant.Outlined;
+
+        StateHasChanged();
     }
 }

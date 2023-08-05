@@ -6,6 +6,9 @@ public partial class MainLayout : LayoutComponentBase
     public IApplicationStateService ApplicationStateService { get; set; }
 
     [Inject]
+    public IMediator Mediator { get; set; }
+
+    [Inject]
     public NavigationManager NavigationManager { get; set; }
 
     private Exception _currentException;
@@ -46,7 +49,7 @@ public partial class MainLayout : LayoutComponentBase
         NavigationManager.NavigateTo(url);
     }
 
-    public void ToggleTheme()
+    public async Task ToggleTheme()
     {
         ApplicationStateService.IsDarkMode = !ApplicationStateService.IsDarkMode;    
 
@@ -57,6 +60,8 @@ public partial class MainLayout : LayoutComponentBase
         _themeText = ApplicationStateService.IsDarkMode
             ? "Turn off dark mode"
             : "Turn on dark mode";
+
+        await Mediator.Publish(new ThemeChangedNotification());
     }
 
     public void UserSettings()

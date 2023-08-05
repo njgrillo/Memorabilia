@@ -6,6 +6,9 @@ public abstract partial class Autocomplete<TItem>
     [Inject]
     public IApplicationStateService ApplicationStateService { get; set; }
 
+    [Inject]
+    public ICourier Courier { get; set; }
+
     [Parameter]
     public Color AdornmentColor { get; set; } 
         = Color.Primary;
@@ -56,6 +59,18 @@ public abstract partial class Autocomplete<TItem>
 
     protected override void OnInitialized()
     {
+        SetTheme();
+
+        Courier.Subscribe<ThemeChangedNotification>(OnThemeChanged);
+    }
+
+    private void OnThemeChanged(ThemeChangedNotification notification)
+    {
+        SetTheme();
+    }
+
+    private void SetTheme()
+    {
         AdornmentColor = ApplicationStateService.IsDarkMode
             ? Color.Dark
             : Color.Default;
@@ -67,5 +82,7 @@ public abstract partial class Autocomplete<TItem>
         Variant = ApplicationStateService.IsDarkMode
             ? Variant.Filled
             : Variant.Outlined;
+
+        StateHasChanged();
     }
 }

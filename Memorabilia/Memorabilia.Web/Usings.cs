@@ -16,6 +16,7 @@ global using Memorabilia.Application.Features.Services.Autographs.Inscriptions.A
 global using Memorabilia.Application.Features.Services.Autographs.Inscriptions.Awards;
 global using Memorabilia.Application.Features.Services.Interfaces;
 global using Memorabilia.Application.Features.User;
+global using Memorabilia.Application.Notifications.Theme;
 global using Memorabilia.Application.Validators.Admin;
 global using Memorabilia.Application.Validators.Admin.Management.Awards;
 global using Memorabilia.Application.Validators.Admin.People;

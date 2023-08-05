@@ -54,6 +54,8 @@ public class Startup
         services.RegisterServices();
         services.RegisterCachedRepositories();
 
+        services.AddCourier(typeof(GetCommissioner).Assembly);
+
         services.AddSingleton<ImageService>();
 
         services

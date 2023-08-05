@@ -1,10 +1,7 @@
 ﻿namespace Memorabilia.Blazor.Controls.Tabs;
 
-public partial class TabControl
+public partial class TabControl : ThemedControl
 {
-    [Inject]
-    public IApplicationStateService ApplicationStateService { get; set; }
-
     [Parameter]
     public RenderFragment ChildContent { get; set; }
 
@@ -12,8 +9,22 @@ public partial class TabControl
 
     protected override void OnInitialized()
     {
+        SetTheme();
+
+        base.OnInitialized();
+    }
+    
+    public override void OnThemeChanged()
+    {
+        SetTheme();
+    }
+
+    private void SetTheme()
+    {
         _color = ApplicationStateService.IsDarkMode
             ? Color.Dark
             : Color.Default;
+
+        StateHasChanged();
     }
 }

@@ -17,6 +17,7 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="MediatR" Version="11.0.0" />
+    <PackageReference Include="MediatR.Courier" Version="5.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.Components" Version="7.0.5" />
     <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="7.0.5" />
     <PackageReference Include="MudBlazor" Version="6.2.3" />
