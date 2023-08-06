@@ -43,26 +43,18 @@
                 <MudStack Class="col-12"
                           Row="true"
                           Style="margin-bottom:1%;">
-                    <MudSwitch Checked="@Model.HasHologram"
-                               CheckedChanged="(p) => Model.HasHologram = p"
-                               Color="MudBlazor.Color.Success"
-                               Label="Has Hologram?"
-                               T="bool" />
-                    <MudSwitch Checked="@Model.HasCertificationCard"
-                               CheckedChanged="(p) => Model.HasCertificationCard = p"
-                               Color="MudBlazor.Color.Success"
-                               Label="Has Cert Card?"
-                               T="bool" />
-                    <MudSwitch Checked="@Model.HasLetter"
-                               CheckedChanged="(p) => Model.HasLetter = p"
-                               Color="MudBlazor.Color.Success"
-                               Label="Has LOA?"
-                               T="bool" />
-                    <MudSwitch Checked="@Model.Witnessed"
-                               CheckedChanged="(p) => Model.Witnessed = p"
-                               Color="MudBlazor.Color.Success"
-                               Label="Was Witnessed?"
-                               T="bool" />
+                    <Switch Checked="@Model.HasHologram"
+                            CheckedChanged="(p) => Model.HasHologram = p"
+                            Label="Has Hologram?" />
+                    <Switch Checked="@Model.HasCertificationCard"
+                            CheckedChanged="(p) => Model.HasCertificationCard = p"
+                            Label="Has Cert Card?" />
+                    <Switch Checked="@Model.HasLetter"
+                            CheckedChanged="(p) => Model.HasLetter = p"
+                            Label="Has LOA?" />
+                    <Switch Checked="@Model.Witnessed"
+                            CheckedChanged="(p) => Model.Witnessed = p"
+                            Label="Was Witnessed?" />
                 </MudStack>
             </DivRowFormGroup>
             <DivRowCol12>

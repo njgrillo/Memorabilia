@@ -16,7 +16,6 @@ global using Memorabilia.Application.Features.Services.Autographs.Inscriptions.A
 global using Memorabilia.Application.Features.Services.Autographs.Inscriptions.Awards;
 global using Memorabilia.Application.Features.Services.Interfaces;
 global using Memorabilia.Application.Features.User;
-global using Memorabilia.Application.Notifications.Theme;
 global using Memorabilia.Application.Validators.Admin;
 global using Memorabilia.Application.Validators.Admin.Management.Awards;
 global using Memorabilia.Application.Validators.Admin.People;
@@ -69,6 +68,7 @@ global using Memorabilia.Application.Validators.Project;
 global using Memorabilia.Application.Validators.User;
 global using Memorabilia.Blazor;
 global using Memorabilia.Blazor.Configuration;
+global using Memorabilia.Blazor.Controls;
 global using Memorabilia.Blazor.Controls.Dialogs;
 global using Memorabilia.Blazor.Controls.Errors;
 global using Memorabilia.Blazor.Pages;

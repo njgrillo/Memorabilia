@@ -22,18 +22,14 @@
                                           ValueChanged="@((p) => EditModel.Year = p)" />
                     </Div>
                     <Div Class="col-3">
-                        <MudSwitch Checked="@EditModel.Licensed"
-                                   CheckedChanged="(p) => EditModel.Licensed = p"
-                                   Color="MudBlazor.Color.Success"
-                                   Label="Licensed?"
-                                   T="bool" />
+                        <Switch Checked="@EditModel.Licensed"
+                                CheckedChanged="(p) => EditModel.Licensed = p"
+                                Label="Licensed?" />
                     </Div>
                     <Div Class="col-3">
-                        <MudSwitch Checked="@EditModel.Custom"
-                                   CheckedChanged="(p) => EditModel.Custom = p"
-                                   Color="MudBlazor.Color.Success"
-                                   Label="Custom?"
-                                   T="bool" />
+                        <Switch Checked="@EditModel.Custom"
+                                CheckedChanged="(p) => EditModel.Custom = p"
+                                Label="Custom?" />
                     </Div>
                 </DivRowFormGroup>
             </AdditionalContent>

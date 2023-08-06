@@ -35,11 +35,9 @@
                                                SelectionChanged="(p) => ProjectMemorabiliaTeam.ProjectStatusTypeId = p" />
                 </Div>
                 <Div Class="col-3">
-                    <MudSwitch Checked="@ProjectMemorabiliaTeam.Upgrade"
-                               CheckedChanged="(p) => ProjectMemorabiliaTeam.Upgrade = p"
-                               Color="MudBlazor.Color.Success"
-                               Label="Is Upgrade?"
-                               T="bool" />
+                    <Switch Checked="@ProjectMemorabiliaTeam.Upgrade"
+                            CheckedChanged="(p) => ProjectMemorabiliaTeam.Upgrade = p"
+                            Label="Is Upgrade?" />
                 </Div>
             </Div>
             <br />

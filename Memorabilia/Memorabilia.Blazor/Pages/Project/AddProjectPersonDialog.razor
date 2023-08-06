@@ -34,11 +34,9 @@
                                                    SelectionChanged="(p) => ProjectPerson.ProjectStatusTypeId = p" />
                     </Div>
                     <Div Class="col-3">
-                        <MudSwitch Checked="@ProjectPerson.Upgrade"
-                                   CheckedChanged="(p) => ProjectPerson.Upgrade = p"
-                                   Color="MudBlazor.Color.Success"
-                                   Label="Is Upgrade?"
-                                   T="bool" />
+                        <Switch Checked="@ProjectPerson.Upgrade"
+                                CheckedChanged="(p) => ProjectPerson.Upgrade = p"
+                                Label="Is Upgrade?" />
                     </Div>
                 </Div>
                 <Condition Evaluation="@(ProjectId > 0 && ProjectPerson.Person != null && ProjectPerson.Person.Id > 0)">

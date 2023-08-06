@@ -28,11 +28,9 @@
                 </DivRowFormGroup>
                 <DivRowFormGroup>
                     <Div Class="col-3">
-                        <MudSwitch Checked="@EditModel.Matted"
-                                   CheckedChanged="(p) => EditModel.Matted = p"
-                                   Color="MudBlazor.Color.Success"
-                                   Label="Is Matted?"
-                                   T="bool" />
+                        <Switch Checked="@EditModel.Matted"
+                                CheckedChanged="(p) => EditModel.Matted = p"
+                                Label="Is Matted?" />
                     </Div>
                 </DivRowFormGroup>
             </AdditionalContent>

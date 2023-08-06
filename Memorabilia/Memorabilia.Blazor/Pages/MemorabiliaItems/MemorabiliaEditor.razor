@@ -73,26 +73,18 @@
             <DivRowFormGroup>
                 <Div Class="col-6">
                     <MudStack Row="true">
-                        <MudSwitch Checked="@EditModel.IsNumbered"
-                                   CheckedChanged="(p) => EditModel.IsNumbered = p"
-                                   Color="MudBlazor.Color.Success"
-                                   Label="Is Numbered?"
-                                   T="bool" />
-                        <MudSwitch Checked="@EditModel.Framed"
-                                   CheckedChanged="(p) => EditModel.Framed = p"
-                                   Color="MudBlazor.Color.Success"
-                                   Label="Is Framed?"
-                                   T="bool" />
-                        <MudSwitch Checked="@EditModel.AcquiredWithAutograph"
-                                   CheckedChanged="(p) => EditModel.AcquiredWithAutograph = p"
-                                   Color="MudBlazor.Color.Success"
-                                   Label="Acquired with Autograph(s)?"
-                                   T="bool" />
-                        <MudSwitch Checked="@EditModel.ForTrade"
-                                   CheckedChanged="(p) => EditModel.ForTrade = p"
-                                   Color="MudBlazor.Color.Success"
-                                   Label="Available For Trade?"
-                                   T="bool" />
+                        <Switch Checked="@EditModel.IsNumbered"
+                                CheckedChanged="(p) => EditModel.IsNumbered = p"
+                                Label="Is Numbered?" />
+                        <Switch Checked="@EditModel.Framed"
+                                CheckedChanged="(p) => EditModel.Framed = p"
+                                Label="Is Framed?" />
+                        <Switch Checked="@EditModel.AcquiredWithAutograph"
+                                CheckedChanged="(p) => EditModel.AcquiredWithAutograph = p"
+                                Label="Acquired with Autograph(s)?" />
+                        <Switch Checked="@EditModel.ForTrade"
+                                CheckedChanged="(p) => EditModel.ForTrade = p"
+                                Label="Available For Trade?" />
                     </MudStack>
                 </Div>
             </DivRowFormGroup>

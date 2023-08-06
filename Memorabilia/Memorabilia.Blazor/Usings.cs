@@ -163,7 +163,6 @@ global using Memorabilia.Application.Features.User.Dashboard;
 global using Memorabilia.Application.Features.User.Login;
 global using Memorabilia.Application.Features.User.Register;
 global using Memorabilia.Application.Features.User.Settings;
-global using Memorabilia.Application.Notifications.Theme;
 global using Memorabilia.Application.Validators.Admin;
 global using Memorabilia.Application.Validators.Admin.Management.Awards;
 global using Memorabilia.Application.Validators.Admin.People;

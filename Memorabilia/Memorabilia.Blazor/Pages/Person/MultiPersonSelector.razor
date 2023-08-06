@@ -2,11 +2,9 @@
     <Match>
         <Div Class="row">
             <Div Class="col-3">
-                <MudSwitch Checked="@_hasPeople"
-                           CheckedChanged="PersonCheckboxClicked"
-                           Color="MudBlazor.Color.Success"
-                           Label="@_itemTypeNameLabel"
-                           T="bool" />
+                <Switch Checked="@_hasPeople"
+                        CheckedChanged="PersonCheckboxClicked"
+                        Label="@_itemTypeNameLabel" />
             </Div>
         </Div>
     </Match>
@@ -22,11 +20,9 @@
                         <Div Class="row" 
                              Style="margin-top:1%;margin-bottom:1%;padding-left:10px;">
                             <Div Class="col-3">
-                                <MudSwitch Checked="@_filterPeople"
-                                           CheckedChanged="PersonFilterCheckboxClicked"
-                                           Color="MudBlazor.Color.Success"
-                                           Label="@_itemTypeNameFilterLabel"
-                                           T="bool" />
+                                <Switch Checked="@_filterPeople"
+                                        CheckedChanged="PersonFilterCheckboxClicked"
+                                        Label="@_itemTypeNameFilterLabel" />
                             </Div>
                         </Div>
                     </Match>

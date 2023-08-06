@@ -12,11 +12,9 @@
                               SelectionChanged="(p) => ItemTypeChanged(p)" />
     </Div>
     <Div Class="col-3">
-        <MudSwitch Checked="@MultiSignedItem"
-                   CheckedChanged="(p) => MultiSignedItemChanged(p)"
-                   Color="MudBlazor.Color.Success"
-                   Disabled="Disabled" 
-                   Label="Multi Signed?"
-                   T="bool" />
+        <Switch Checked="@MultiSignedItem"
+                CheckedChanged="(p) => MultiSignedItemChanged(p)"
+                Disabled="Disabled" 
+                Label="Multi Signed?" />
     </Div>
 </Div>

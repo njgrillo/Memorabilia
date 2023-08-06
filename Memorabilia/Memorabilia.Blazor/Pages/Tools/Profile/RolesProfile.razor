@@ -2,11 +2,7 @@
 
 <Condition Evaluation="@(ProfileTypes.Any())">
     <Match>
-        <MudTabs ApplyEffectsToContainer="true"
-                 Centered="false"
-                 Elevation="2"
-                 PanelClass="pa-6"
-                 Rounded="true">
+        <TabControl Centered="false">
             <Iterations Context="profileType"
                         Items="ProfileTypes">
                 <MudTabPanel BadgeColor="MudBlazor.Color.Success"
@@ -19,6 +15,6 @@
                     </DivRowCol12>
                 </MudTabPanel>
             </Iterations>
-        </MudTabs>
+        </TabControl>
     </Match>
 </Condition>

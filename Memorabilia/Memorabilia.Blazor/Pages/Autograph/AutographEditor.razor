@@ -144,20 +144,16 @@
             </Condition>
             <DivRowFormGroup>
                 <Div Class="col-3">
-                    <MudSwitch Checked="@Model.FullName"
-                               CheckedChanged="(p) => Model.FullName = p"
-                               Color="MudBlazor.Color.Success"
-                               Label="Is Full Name?"
-                               T="bool" />
+                    <Switch Checked="@Model.FullName"
+                            CheckedChanged="(p) => Model.FullName = p"
+                            Label="Is Full Name?" />
                 </Div>
             </DivRowFormGroup>
             <DivRowFormGroup>
                 <Div Class="col-3">
-                    <MudSwitch Checked="@Model.IsPersonalized"
-                               CheckedChanged="(p) => Model.IsPersonalized = p"
-                               Color="MudBlazor.Color.Success"
-                               Label="Is Personalized?"
-                               T="bool" />
+                    <Switch Checked="@Model.IsPersonalized"
+                            CheckedChanged="(p) => Model.IsPersonalized = p"
+                            Label="Is Personalized?" />
                 </Div>
             </DivRowFormGroup>
             <Condition Evaluation="Model.IsPersonalized">
@@ -174,11 +170,9 @@
             </Condition>
             <DivRowFormGroup>
                 <Div Class="col-3">
-                    <MudSwitch Checked="@Model.IsNumbered"
-                               CheckedChanged="(p) => Model.IsNumbered = p"
-                               Color="MudBlazor.Color.Success"
-                               Label="Is Numbered?"
-                               T="bool" />
+                    <Switch Checked="@Model.IsNumbered"
+                            CheckedChanged="(p) => Model.IsNumbered = p"
+                            Label="Is Numbered?" />
                 </Div>
             </DivRowFormGroup>
             <Condition Evaluation="Model.IsNumbered">

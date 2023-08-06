@@ -20,11 +20,9 @@
                                           ValueChanged="@((p) => EditModel.Year = p)" />
                     </Div>
                     <Div Class="col-3">
-                        <MudSwitch Checked="@EditModel.HasBox"
-                                   CheckedChanged="(p) => EditModel.HasBox = p"
-                                   Color="MudBlazor.Color.Success"
-                                   Label="Has Box?"
-                                   T="bool" />
+                        <Switch Checked="@EditModel.HasBox"
+                                CheckedChanged="(p) => EditModel.HasBox = p"
+                                Label="Has Box?" />
                     </Div>
                 </DivRowFormGroup>
             </AdditionalContent>

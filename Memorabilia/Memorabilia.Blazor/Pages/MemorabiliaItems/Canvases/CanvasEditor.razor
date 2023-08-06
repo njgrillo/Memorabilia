@@ -20,18 +20,14 @@
                 </DivRowFormGroup>
                 <DivRowFormGroup>
                     <Div Class="col-3">
-                        <MudSwitch Checked="@EditModel.Matted"
-                                   CheckedChanged="(p) => EditModel.Matted = p"
-                                   Color="MudBlazor.Color.Success"
-                                   Label="Matted?"
-                                   T="bool" />
+                        <Switch Checked="@EditModel.Matted"
+                                CheckedChanged="(p) => EditModel.Matted = p"
+                                Label="Matted?" />
                     </Div>
                     <Div Class="col-3">
-                        <MudSwitch Checked="@EditModel.Stretched"
-                                   CheckedChanged="(p) => EditModel.Stretched = p"
-                                   Color="MudBlazor.Color.Success"
-                                   Label="Stretched?"
-                                   T="bool" />
+                        <Switch Checked="@EditModel.Stretched"
+                                CheckedChanged="(p) => EditModel.Stretched = p"
+                                Label="Stretched?" />
                     </Div>
                 </DivRowFormGroup>
             </AdditionalContent>

@@ -1,6 +1,6 @@
 ﻿@inherits LayoutComponentBase
 
-<MudThemeProvider />
+<MudThemeProvider IsDarkMode="ApplicationStateService.IsDarkMode" />
 <MudDialogProvider />
 <MudSnackbarProvider />
 
@@ -39,7 +39,7 @@
     <MudDrawer @bind-Open="@_drawerOpen">
         <NavMenu />
     </MudDrawer>
-    <MudMainContent Style="@_theme">
+    <MudMainContent>
         <CustomErrorBoundary @ref="_errorBoundary"
                              ErrorHasOccurred="OnError">
             <Condition Evaluation="@(_currentException != null)">

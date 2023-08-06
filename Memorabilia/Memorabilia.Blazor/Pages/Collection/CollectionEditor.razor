@@ -36,11 +36,9 @@
         <DivRowFormGroup>
             <Div Style="margin-left:2%;">
                 <MudStack Row="true">
-                    <MudSwitch Checked="@IsDetailView"
-                               CheckedChanged="(p) => IsDetailView = p"
-                               Color="MudBlazor.Color.Success"
-                               Label="Detail View"
-                               T="bool" />
+                    <Switch Checked="@IsDetailView"
+                            CheckedChanged="(p) => IsDetailView = p"
+                            Label="Detail View" />
                     <AddButton OnClick="AddMemorabilia"
                                Text="Add Memorabilia" />
                 </MudStack>

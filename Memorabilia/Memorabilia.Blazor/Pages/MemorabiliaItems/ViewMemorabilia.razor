@@ -1,10 +1,8 @@
 ﻿<MemorabiliaFilter OnFilter="OnFilter" />
 <DivPad2>
-    <MudSwitch Checked="@IsDetailView"
-               CheckedChanged="(p) => IsDetailView = p"
-               Color="MudBlazor.Color.Success"
-               Label="Detail View"
-               T="bool" />
+    <Switch Checked="@IsDetailView"
+            CheckedChanged="(p) => IsDetailView = p"
+            Label="Detail View" />
 </DivPad2>
 <DivPad2>
     <Condition Evaluation="IsDetailView">

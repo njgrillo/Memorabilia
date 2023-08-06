@@ -3,12 +3,6 @@
 public abstract partial class Autocomplete<TItem> 
     : CommandQuery where TItem : class, IWithName
 {
-    [Inject]
-    public IApplicationStateService ApplicationStateService { get; set; }
-
-    [Inject]
-    public ICourier Courier { get; set; }
-
     [Parameter]
     public Color AdornmentColor { get; set; } 
         = Color.Primary;
@@ -16,6 +10,9 @@ public abstract partial class Autocomplete<TItem>
     [Parameter]
     public string AdornmentIcon { get; set; } 
         = Icons.Material.Filled.Search;
+
+    [Parameter]
+    public string Class { get; set; }
 
     [Parameter]
     public bool Disabled { get; set; }
@@ -54,35 +51,4 @@ public abstract partial class Autocomplete<TItem>
 
     public virtual string GetDisplayText(TItem item)
         => item?.Name;
-
-    protected string Theme { get; set; }
-
-    protected override void OnInitialized()
-    {
-        SetTheme();
-
-        Courier.Subscribe<ThemeChangedNotification>(OnThemeChanged);
-    }
-
-    private void OnThemeChanged(ThemeChangedNotification notification)
-    {
-        SetTheme();
-    }
-
-    private void SetTheme()
-    {
-        AdornmentColor = ApplicationStateService.IsDarkMode
-            ? Color.Dark
-            : Color.Default;
-
-        Theme = ApplicationStateService.IsDarkMode
-            ? "color:white;"
-            : string.Empty;
-
-        Variant = ApplicationStateService.IsDarkMode
-            ? Variant.Filled
-            : Variant.Outlined;
-
-        StateHasChanged();
-    }
 }

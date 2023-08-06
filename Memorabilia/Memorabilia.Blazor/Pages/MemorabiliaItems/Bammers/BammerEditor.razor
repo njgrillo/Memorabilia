@@ -32,11 +32,9 @@
                                           ValueChanged="@((p) => EditModel.Year = p)" />
                     </Div>
                     <Div Class="col-3">
-                        <MudSwitch Checked="@EditModel.InPackage"
-                                   CheckedChanged="(p) => EditModel.InPackage = p"
-                                   Color="MudBlazor.Color.Success"
-                                   Label="Is In Package?"
-                                   T="bool" />
+                        <Switch Checked="@EditModel.InPackage"
+                                CheckedChanged="(p) => EditModel.InPackage = p"
+                                Label="Is In Package?" />
                     </Div>
                 </DivRowFormGroup>
             </AdditionalContent>

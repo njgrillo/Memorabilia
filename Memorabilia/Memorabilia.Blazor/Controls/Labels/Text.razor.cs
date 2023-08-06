@@ -1,30 +1,17 @@
 ﻿namespace Memorabilia.Blazor.Controls.Labels;
 
-public partial class Text : ThemedControl
+public partial class Text
 {
     [Parameter]
-    public string Content { get; set; }
+    public RenderFragment ChildContent { get; set; }
 
-    private string _style;
+    [Parameter]
+    public string Class { get; set; }
 
-    protected override void OnInitialized()
-    {
-        SetTheme();
+    [Parameter]
+    public string Style { get; set; }
 
-        base.OnInitialized();
-    }
-
-    public override void OnThemeChanged()
-    {
-        SetTheme();
-    }
-
-    private void SetTheme()
-    {
-        _style = ApplicationStateService.IsDarkMode
-            ? "color:white;"
-            : string.Empty;
-
-        StateHasChanged();
-    }
+    [Parameter]
+    public Typo Typography { get; set; }
+        = Typo.h3;
 }

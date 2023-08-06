@@ -12,6 +12,9 @@ public partial class Switch
     public EventCallback<bool> CheckedChanged { get; set; }
 
     [Parameter]
+    public bool Disabled { get; set; }
+
+    [Parameter]
     public string Label { get; set; }
 
     private string _style;
@@ -20,6 +23,6 @@ public partial class Switch
     {
         _style = ApplicationStateService.IsDarkMode
             ? "color:white;"
-            : string.Empty;
+            : "color:black";
     }
 }

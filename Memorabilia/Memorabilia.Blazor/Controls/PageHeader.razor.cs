@@ -1,30 +1,10 @@
 ﻿namespace Memorabilia.Blazor.Controls;
 
-public partial class PageHeader : ThemedControl
+public partial class PageHeader
 {
     [Parameter]
     public string PageTitle { get; set; }
 
-    private string _style;
-
-    protected override void OnInitialized()
-    {
-        SetTheme();
-
-        base.OnInitialized();
-    }
-
-    public override void OnThemeChanged()
-    {
-        SetTheme();
-    }
-
-    private void SetTheme()
-    {
-        _style = ApplicationStateService.IsDarkMode
-            ? "color:white;"
-            : string.Empty;
-
-        StateHasChanged();
-    }
+    [Parameter]
+    public string Style { get; set; }
 }
