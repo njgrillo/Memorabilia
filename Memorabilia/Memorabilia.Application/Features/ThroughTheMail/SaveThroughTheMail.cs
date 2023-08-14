@@ -21,6 +21,7 @@ public class SaveThroughTheMail
                                                            command.AddressId,
                                                            command.SentDate,
                                                            command.ReceivedDate,
+                                                           command.Notes,
                                                            command.UserId);
 
                 SetMemorabilia(throughTheMail, command);
@@ -43,7 +44,8 @@ public class SaveThroughTheMail
 
             throughTheMail.Set(command.AddressId,
                                command.SentDate,
-                               command.ReceivedDate);
+                               command.ReceivedDate,
+                               command.Notes);
 
             DeleteMemorabilia(throughTheMail, command);
             SetMemorabilia(throughTheMail, command);
@@ -66,7 +68,9 @@ public class SaveThroughTheMail
                 throughTheMail.SetMemorabilia(throughTheMailMemorabilia.Id,
                                               throughTheMailMemorabilia.ThroughTheMailId,
                                               throughTheMailMemorabilia.MemorabiliaId,
-                                              throughTheMailMemorabilia.Cost);
+                                              throughTheMailMemorabilia.AutographId,
+                                              throughTheMailMemorabilia.Cost,
+                                              throughTheMailMemorabilia.IsExtraReceived);
             }
         }
     }
@@ -105,8 +109,11 @@ public class SaveThroughTheMail
             => _editModel.Memorabilia
                          .ToArray();
 
+        public string Notes
+            => _editModel.Notes;
+
         public int PersonId
-            => _editModel.PersonId;
+            => _editModel.Person.Id;
 
         public DateTime? ReceivedDate
             => _editModel.ReceivedDate;

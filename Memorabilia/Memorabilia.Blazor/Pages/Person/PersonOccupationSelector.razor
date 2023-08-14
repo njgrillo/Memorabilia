@@ -16,7 +16,7 @@
     <MudTable Bordered="false"
               Dense="false"
               Hover="true"
-              Items="@Occupations.Where(occupation => !occupation.IsDeleted).OrderBy(x => x.OccupationName).ToList()"
+              Items="@Occupations.Where(occupation => !occupation.IsDeleted).OrderBy(x => x.OccupationType.Id).ThenBy(x => x.OccupationName).ToList()"
               Striped="true">
         <HeaderContent>
             <MudTh>Occupation</MudTh>

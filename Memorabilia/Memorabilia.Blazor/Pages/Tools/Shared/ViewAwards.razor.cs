@@ -37,22 +37,31 @@ public partial class ViewAwards
         await Load(awardType);
     }
 
+    private async Task GetAwardDetails(AwardType awardType)
+    {
+        Model = new(await QueryRouter.Send(new GetAwards(awardType, Sport)), Sport)
+        {
+            AwardType = awardType
+        };
+
+        Entity.AwardDetail awardDetail = await QueryRouter.Send(new GetAwardManagement(awardType.Id));
+
+        if (awardDetail?.ExclusionYears.Any() ?? false)
+        {
+            Model.AwardExclusionYears = awardDetail.ExclusionYears.ToArray();
+        }
+    }
+
     private async Task Load(AwardType awardType)
     {
         if (awardType == null)
-            return;
+            return;        
 
-        Model = new(await QueryRouter.Send(new GetAwards(awardType, Sport)), Sport) 
-                {
-                    AwardType = awardType
-                }; 
+        await GetAwardDetails(awardType);
     }
 
     private async Task OnInputChange(AwardType awardType)
     {
-        Model = new(await QueryRouter.Send(new GetAwards(awardType, Sport)), Sport)
-                {
-                    AwardType = awardType
-                };
-    }
+        await GetAwardDetails(awardType);
+    }    
 }

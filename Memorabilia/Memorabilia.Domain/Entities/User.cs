@@ -4,7 +4,9 @@ public class User : Framework.Library.Domain.Entity.DomainEntity
 {
     public User() { }
 
-    public User(string emailAddress, string firstName, string lastName)
+    public User(string emailAddress, 
+        string firstName, 
+        string lastName)
     {
         EmailAddress = emailAddress;
         FirstName = firstName;
@@ -27,6 +29,8 @@ public class User : Framework.Library.Domain.Entity.DomainEntity
 
     public int UserRoleId { get; private set; }
 
+    public virtual UserSettings UserSettings { get; private set; }
+
     public void SetDashboardItems(params int[] dashboardItemsIds)
     {
         if (dashboardItemsIds == null || !dashboardItemsIds.Any())
@@ -36,5 +40,17 @@ public class User : Framework.Library.Domain.Entity.DomainEntity
         DashboardItems.AddRange(dashboardItemsIds.Where(dashboardItemsId => !DashboardItems.Select(dashboardItemId => dashboardItemId.DashboardItemId)
                                                                                            .Contains(dashboardItemsId))
                                                  .Select(dashboardItemsId => new UserDashboard(Id, dashboardItemsId)));
+    }
+
+    public void SetUserSettings(bool useDarkTheme)
+    {
+        if (UserSettings == null)
+        { 
+            UserSettings = new UserSettings(Id, useDarkTheme);
+
+            return;
+        }
+
+        UserSettings.Set(useDarkTheme);
     }
 }

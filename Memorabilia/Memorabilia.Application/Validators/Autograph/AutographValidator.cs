@@ -78,42 +78,6 @@ public class AutographValidator : AbstractValidator<SaveAutograph.Command>
             .WithName("Personalization Text")
             .WithMessage("Personalization Text must be 200 characters or less.");
 
-        RuleFor(x => x.ReceivedDate)
-            .GreaterThanOrEqualTo(DateTime.MinValue)
-            .When(x => x.ReceivedDate.HasValue)
-            .WithName("Received Date")
-            .WithMessage($"Received Date cannot be before {DateTime.MinValue}.");
-
-        RuleFor(x => x.ReceivedDate)
-            .LessThanOrEqualTo(DateTime.UtcNow)
-            .When(x => x.ReceivedDate.HasValue)
-            .WithName("Received Date")
-            .WithMessage("Received Date cannot be in the future.");
-
-        RuleFor(x => x.ReceivedDate)
-            .GreaterThanOrEqualTo(x => x.SentDate)
-            .When(x => x.SentDate.HasValue)
-            .WithName("Received Date")
-            .WithMessage("Received Date cannot be before Sent Date.");
-
-        RuleFor(x => x.SentDate)
-            .GreaterThanOrEqualTo(DateTime.MinValue)
-            .When(x => x.SentDate.HasValue)
-            .WithName("Sent Date")
-            .WithMessage($"Sent Date cannot be before {DateTime.MinValue}.");
-
-        RuleFor(x => x.SentDate)
-            .LessThanOrEqualTo(DateTime.UtcNow)
-            .When(x => x.SentDate.HasValue)
-            .WithName("Sent Date")
-            .WithMessage("Sent Date cannot be in the future.");
-
-        RuleFor(x => x.SentDate)
-            .LessThanOrEqualTo(x => x.ReceivedDate)
-            .When(x => x.ReceivedDate.HasValue)
-            .WithName("Sent Date")
-            .WithMessage("Sent Date cannot be after Received Date.");
-
         RuleFor(x => x.WritingInstrumentId)
             .GreaterThan(0)
             .WithName("Writing Instrument")

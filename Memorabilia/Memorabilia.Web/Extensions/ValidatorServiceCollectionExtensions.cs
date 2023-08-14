@@ -55,6 +55,7 @@ public static class ValidatorServiceCollectionExtensions
         services.AddSingleton<TeamValidator>();
         services.AddSingleton<TennisballValidator>();
         services.AddSingleton<TennisRacketValidator>();
+        services.AddSingleton<ThroughTheMailValidator>();
         services.AddSingleton<TicketValidator>();
         services.AddSingleton<TrunkValidator>();
         services.AddSingleton<UserValidator>();

@@ -9,4 +9,7 @@ public class UserSettingsModel : Model
 
     public string DashboardImageFileName 
         => Constant.ImageFileName.Dashboard;
+
+    public string UserSettingsImageFileName
+        => Constant.ImageFileName.UserSettings;
 }

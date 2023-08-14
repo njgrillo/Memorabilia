@@ -23,7 +23,8 @@ public class MemorabiliaEditModel : EditModel
         Note = model.Note;
         Numerator = model.Numerator;
         PrivacyTypeId = model.PrivacyTypeId;            
-        PurchaseTypeId = model.PurchaseTypeId ?? 0;            
+        PurchaseTypeId = model.PurchaseTypeId ?? 0;
+        ThroughTheMailIds = model.ThroughTheMailIds;
         UserId = model.UserId;
     }
 
@@ -112,6 +113,9 @@ public class MemorabiliaEditModel : EditModel
         = Constant.PrivacyType.Public.Id;
 
     public int PurchaseTypeId { get; set; }
+
+    public int[] ThroughTheMailIds { get; private set; }
+        = Array.Empty<int>();
 
     public int UserId { get; set; }
 }

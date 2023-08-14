@@ -1,4 +1,6 @@
-﻿namespace Memorabilia.Application.Features.Tools.Shared.Awards;
+﻿using System.Collections;
+
+namespace Memorabilia.Application.Features.Tools.Shared.Awards;
 
 public class AwardsModel
 {
@@ -12,6 +14,9 @@ public class AwardsModel
     }
 
     public Constant.AwardType AwardType { get; set; }
+
+    public Entity.AwardExclusionYear[] AwardExclusionYears { get; set; }
+        = Array.Empty<Entity.AwardExclusionYear>();
 
     public string AwardTypeName 
         => AwardType?.Name;

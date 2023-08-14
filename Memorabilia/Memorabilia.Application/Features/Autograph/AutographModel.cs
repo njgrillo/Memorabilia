@@ -174,14 +174,11 @@ public class AutographModel : Model
     public string PurchaseTypeName 
         => Constant.PurchaseType.Find(PurchaseTypeId ?? 0)?.Name;
 
-    public DateTime? ReceivedDate 
-        => _autograph.ThroughTheMail?.ReceivedDate;
-
-    public DateTime? SentDate 
-        => _autograph.ThroughTheMail?.SentDate;
-
     public int? SpotId 
         => _autograph?.Spot?.SpotId;
+
+    public int? ThroughTheMailId
+        => _autograph.ThroughTheMailMemorabilia?.ThroughTheMailId;
 
     public string UserFirstName 
         => _autograph.Memorabilia.User.FirstName;

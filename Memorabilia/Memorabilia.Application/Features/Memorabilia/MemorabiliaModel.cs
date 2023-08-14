@@ -165,6 +165,11 @@ public class MemorabiliaModel
     public IEnumerable<Entity.MemorabiliaTeam> Teams 
         => _memorabilia.Teams;
 
+    public int[] ThroughTheMailIds
+        => _memorabilia.ThroughTheMailMemorabilias
+                       .Select(item => item.ThroughTheMailId)
+                       .ToArray();
+
     public string ToggleIcon { get; set; } 
         = MudBlazor.Icons.Material.Filled.ExpandMore;
 

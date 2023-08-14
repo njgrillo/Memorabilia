@@ -305,6 +305,9 @@ public static class ImageFileName
     public static string Trunks 
         => "trunks.jpg";
 
+    public static string UserSettings
+        => "usersettings.jpg";
+
     public static string WristBand 
         => "wristband.jpg";
 

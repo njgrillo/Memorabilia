@@ -67,7 +67,18 @@
                                SelectedTextChanged="@((p) => EditModel.Note = p)" />
                 </Div>
                 <Div Class="col-6">
-                    <MultiCollectionSelector SelectedCollections="EditModel.Collections" />
+                    <MudExpansionPanels>
+                        <MudExpansionPanel Text="Collections">
+                            <MultiCollectionSelector SelectedCollections="EditModel.Collections" />
+                        </MudExpansionPanel>
+                        <Condition Evaluation="EditModel.ThroughTheMailIds.Any()">
+                            <Match>
+                                <MudExpansionPanel Text="Through The Mail">
+                                    <MemorabiliaThroughTheMailGrid ThroughTheMailIds="EditModel.ThroughTheMailIds" />
+                                </MudExpansionPanel>
+                            </Match>
+                        </Condition>                        
+                    </MudExpansionPanels>                    
                 </Div>
             </DivRowFormGroup>
             <DivRowFormGroup>

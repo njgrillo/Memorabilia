@@ -1,0 +1,24 @@
+﻿<MudTable Bordered="false"
+          Dense="false"
+          Hover="true"
+          Items="@Items"
+          Striped="true">
+    <ToolBarContent>
+        <MudText Typo="Typo.h6">Through the Mail</MudText>
+    </ToolBarContent>
+    <HeaderContent>
+        <MudTh>Sent Date</MudTh>
+        <MudTh>Received Date</MudTh>
+        <MudTh>Donation/Fee</MudTh>
+    </HeaderContent>
+    <RowTemplate>
+        <MudTd DataLabel="SentDate">@(context.SentDate.HasValue ? context.SentDate.Value.ToString("MM-dd-yyyy") : string.Empty)</MudTd>
+        <MudTd DataLabel="ReceivedDate">@(context.ReceivedDate.HasValue ? context.ReceivedDate.Value.ToString("MM-dd-yyyy") : string.Empty)</MudTd>
+        <MudTd DataLabel="Donation/Fee">@(ThroughTheMailMemorabilia.Cost?.ToString("c") ?? "")</MudTd>
+    </RowTemplate>
+    <PagerContent>
+        <MudTablePager />
+    </PagerContent>
+</MudTable>
+
+

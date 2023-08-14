@@ -3,5 +3,5 @@
 public interface IThroughTheMailRepository 
     : IDomainRepository<Entity.ThroughTheMail>
 {
-    Task<Entity.ThroughTheMail[]> GetAll(int userId);
+    Task<Entity.ThroughTheMail[]> GetAll(int userId, int[] throughTheMailIds = null);
 }

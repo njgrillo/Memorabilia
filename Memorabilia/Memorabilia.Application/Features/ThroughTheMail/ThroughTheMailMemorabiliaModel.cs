@@ -11,6 +11,9 @@ public class ThroughTheMailMemorabiliaModel
         _throughTheMailMemorabilia = throughTheMailMemorabilia;
     }
 
+    public Entity.Autograph Autograph
+        => _throughTheMailMemorabilia.Autograph;
+
     public decimal? Cost
         => _throughTheMailMemorabilia.Cost;
 

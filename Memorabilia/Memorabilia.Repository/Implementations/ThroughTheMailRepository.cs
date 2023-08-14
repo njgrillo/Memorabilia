@@ -13,7 +13,8 @@ public class ThroughTheMailRepository
     public override async Task<Entity.ThroughTheMail> Get(int id)
         => await Items.SingleOrDefaultAsync(throughTheMail => throughTheMail.Id == id);
 
-    public async Task<Entity.ThroughTheMail[]> GetAll(int userId)
-        => await ThroughTheMail.Where(throughTheMail => throughTheMail.UserId == userId)
+    public async Task<Entity.ThroughTheMail[]> GetAll(int userId, int[] throughTheMailIds = null)
+        => await ThroughTheMail.Where(throughTheMail => throughTheMail.UserId == userId 
+                                                     && (throughTheMailIds == null || throughTheMailIds.Contains(throughTheMail.Id)))
                                .ToArrayAsync();
 }

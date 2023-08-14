@@ -72,12 +72,6 @@ public partial class AutographEditor
 
         if (!acquisitionType.CanHavePurchaseType())
             Model.PurchaseTypeId = 0;
-
-        if (!acquisitionType.CanHaveSendAndReceiveDates())
-        {
-            Model.ReceivedDate = null;
-            Model.SentDate = null;
-        }
     }
 
     private void OnImportAcquisition()

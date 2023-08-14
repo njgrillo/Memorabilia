@@ -27,7 +27,6 @@ public class MemorabiliaContext : DbContext, IMemorabiliaContext
         modelBuilder.Entity<Entity.AutographAuthentication>();
         modelBuilder.Entity<Entity.AutographImage>();
         modelBuilder.Entity<Entity.AutographSpot>();
-        modelBuilder.Entity<Entity.AutographThroughTheMail>();
         modelBuilder.Entity<Entity.Collection>();
         modelBuilder.Entity<Entity.CollectionMemorabilia>();
         modelBuilder.Entity<Entity.Inscription>();

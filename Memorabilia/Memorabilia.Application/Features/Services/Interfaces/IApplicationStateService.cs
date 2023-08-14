@@ -4,7 +4,7 @@ public interface IApplicationStateService
 {
     Entity.User CurrentUser { get; set; }
 
-    bool IsDarkMode { get; set; }
+    bool IsDarkTheme { get; set; }
 
     Task Load(int userId);
 

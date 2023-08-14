@@ -21,7 +21,7 @@ public partial class Switch
 
     protected override void OnInitialized()
     {
-        _style = ApplicationStateService.IsDarkMode
+        _style = ApplicationStateService.IsDarkTheme
             ? "color:white;"
             : "color:black";
     }

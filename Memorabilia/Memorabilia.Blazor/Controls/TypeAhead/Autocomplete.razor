@@ -28,6 +28,12 @@
             <ItemTemplate Context="item">
                 @GetItemText(item)
             </ItemTemplate>
+            <MoreItemsTemplate>
+                <MudText Align="Align.Center" 
+                         Class="px-4 py-1">
+                    @MoreItemsText
+                </MudText>
+            </MoreItemsTemplate>
         </MudAutocomplete>
     </NotMatch>
 </Condition>

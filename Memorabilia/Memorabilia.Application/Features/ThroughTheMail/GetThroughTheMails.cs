@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Application.Features.ThroughTheMail;
 
-public record GetThroughTheMails() : IQuery<Entity.ThroughTheMail[]>
+public record GetThroughTheMails(int[] ThroughTheMailIds = null) : IQuery<Entity.ThroughTheMail[]>
 {
     public class Handler : QueryHandler<GetThroughTheMails, Entity.ThroughTheMail[]>
     {
@@ -15,7 +15,7 @@ public record GetThroughTheMails() : IQuery<Entity.ThroughTheMail[]>
         }
 
         protected override async Task<Entity.ThroughTheMail[]> Handle(GetThroughTheMails query)
-            => (await _throughTheMailRepository.GetAll(_applicationStateService.CurrentUser.Id))
+            => (await _throughTheMailRepository.GetAll(_applicationStateService.CurrentUser.Id, query.ThroughTheMailIds))
                    .OrderBy(throughTheMail => throughTheMail.SentDate)
                    .ToArray();
     }

@@ -13,6 +13,8 @@ public interface IAutographRepository : IDomainRepository<Entity.Autograph>
                                                  int? year,
                                                  int userId);
 
+    Task<Entity.Autograph[]> GetAllByPerson(int personId, int userId);
+
     Task<Entity.Autograph[]> GetAllCards(int itemTypeId,
                                          int personId,
                                          int brandId,

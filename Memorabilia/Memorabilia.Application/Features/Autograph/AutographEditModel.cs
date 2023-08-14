@@ -27,8 +27,7 @@ public class AutographEditModel : EditModel
         Person = model.Person.ToEditModel();
         PersonalizationText = model.Personalization?.Text;
         PurchaseTypeId = model.Acquisition?.PurchaseTypeId ?? 0;
-        ReceivedDate = model.ReceivedDate;
-        SentDate = model.SentDate;
+        ThroughTheMailId = model.ThroughTheMailId ?? 0;
         UserId = model.UserId;
         WritingInstrumentId = model.WritingInstrumentId;
     }
@@ -99,9 +98,6 @@ public class AutographEditModel : EditModel
 
     public bool DisplayAcquisitionDetails 
         => !AcquiredWithAutograph;
-
-    public bool DisplayThroughTheMailDetails 
-        => AcquisitionType == Constant.AcquisitionType.ThroughTheMail;
 
     public decimal? EstimatedValue { get; set; }
 
@@ -203,9 +199,7 @@ public class AutographEditModel : EditModel
 
     public int PurchaseTypeId { get; set; }
 
-    public DateTime? ReceivedDate { get; set; }
-
-    public DateTime? SentDate { get; set; }
+    public int ThroughTheMailId { get; private set; }
 
     public string UserFirstName { get; set; }
 

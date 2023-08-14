@@ -68,6 +68,18 @@
                                SelectedText="@Model.Note"
                                SelectedTextChanged="@((p) => Model.Note = p)" />
                 </Div>
+                <Condition Evaluation="@(Model.Id > 0 && Model.ThroughTheMailId > 0)">
+                    <Match>
+                        <Div Class="col-6">
+                            <MudExpansionPanels>
+                                <MudExpansionPanel Text="Through The Mail">
+                                    <AutographThroughTheMailGrid AutographId="Model.Id" 
+                                                                 ThroughTheMailId="Model.ThroughTheMailId" />
+                                </MudExpansionPanel>
+                            </MudExpansionPanels>
+                        </Div>
+                    </Match>
+                </Condition>                
             </DivRowFormGroup>
             <Condition Evaluation="Model.DisplayAcquisitionDetails">
                 <Match>
@@ -106,22 +118,6 @@
                                                   SelectionChanged="(p) => Model.PurchaseTypeId = p" />
                         </Div>
                     </DivRowFormGroup>
-                    <Condition Evaluation="Model.DisplayThroughTheMailDetails">
-                        <Match>
-                            <DivRowFormGroup>
-                                <Div Class="col-3">
-                                    <MudDatePicker @bind-Date="Model.SentDate"
-                                                   Label="Sent Date"
-                                                   Variant="Variant.Outlined" />
-                                </Div>
-                                <Div Class="col-3">
-                                    <MudDatePicker @bind-Date="Model.ReceivedDate"
-                                                   Label="Received Date"
-                                                   Variant="Variant.Outlined" />
-                                </Div>
-                            </DivRowFormGroup>
-                        </Match>
-                    </Condition>
                     <DivRowFormGroup>
                         <Div Class="col-3">
                             <Div Style="display:flex">

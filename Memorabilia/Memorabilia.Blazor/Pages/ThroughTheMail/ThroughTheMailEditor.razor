@@ -1,0 +1,78 @@
+﻿<div style="margin-top:1%;margin-left:1%;margin-right:1%">
+    <Condition Evaluation="@(ValidationResultAlerts.Any())">
+        <Match>
+            <AlertPanel Alerts="ValidationResultAlerts" />
+        </Match>
+    </Condition>
+    <Div Class="row">
+        <Div Class="col-3">
+            <h3>
+                Through the Mail Details
+            </h3>
+        </Div>
+    </Div>
+    <DivRowFormGroup>
+        <Div Class="col-6">
+            <PersonSelector SelectedPerson="EditModel.Person"
+                            SelectedPersonChanged="(p) => EditModel.Person = p" />
+        </Div>
+    </DivRowFormGroup>
+    <DivRowFormGroup>  
+        <Div Class="col-3">
+            <SkeletonLoader IsLoading="@(!Loaded)">
+                <MudDatePicker @bind-Date="EditModel.SentDate"
+                               DateFormat="MM/dd/yyyy"
+                               Editable="true"
+                               Label="Sent Date"
+                               Mask="@(new DateMask("MM/dd/yyyy"))"
+                               Variant="Variant.Outlined" />
+            </SkeletonLoader>            
+        </Div>
+        <Div Class="col-3">
+            <SkeletonLoader IsLoading="@(!Loaded)">
+                <MudDatePicker @bind-Date="EditModel.ReceivedDate"
+                               DateFormat="MM/dd/yyyy"
+                               Editable="true"
+                               Label="Received Date"
+                               Mask="@(new DateMask("MM/dd/yyyy"))"
+                               Variant="Variant.Outlined" />
+            </SkeletonLoader>            
+        </Div>
+    </DivRowFormGroup>  
+    <DivRowFormGroup>
+        <Div Class="col-6">
+            <TextField Label="Notes"
+                       Lines="10"
+                       SelectedText="@EditModel.Notes"
+                       SelectedTextChanged="@((p) => EditModel.Notes = p)" />
+        </Div>
+    </DivRowFormGroup>
+    <Div Style="margin-top:5%;">
+        <Div Class="row">
+            <Div Class="col-6">
+                <LeftRightSection>
+                    <Right>
+                        <MudStack Row="true"
+                                  Style="margin-bottom:1%;">
+                            <AddButton OnClick="AddMemorabilia"
+                                       Text="Add Memorabilia" />
+                            <AddButton OnClick="AddAutograph"
+                                       Text="Add Autograph" />
+                        </MudStack>
+                    </Right>
+                </LeftRightSection>
+
+                <ThroughTheMailMemorabiliaGrid Items="EditModel.Memorabilia" />
+            </Div>
+        </Div>        
+    </Div>
+    <br />
+    <Div Style="margin-bottom:1%;margin-right:1%;text-align:right;">
+        <SaveButton OnClick="@(_ => OnSave(false))"
+                    Text="Save" />
+        <SaveButton OnClick="@(_ => OnSave(true))"
+                    Text="Save & Exit" />
+    </Div>
+</div>
+
+

@@ -1,0 +1,95 @@
+﻿<MudTable Bordered="false"
+          CanCancelEdit="true"
+          CommitEditTooltip="Save"
+          Dense="false"
+          Hover="true"
+          Items="@Items.Where(item => !item.IsDeleted)"
+          RowEditCancel="ResetItemToOriginalValues"
+          RowEditCommit="UpdateCost"
+          RowEditPreview="BackupItem"
+          Striped="true">
+    <ToolBarContent>
+        <MudText Typo="Typo.h6">Items</MudText>
+    </ToolBarContent>
+    <HeaderContent>
+        <MudTh></MudTh>
+        <MudTh>Item</MudTh>
+        <MudTh>Fee/Donation</MudTh>      
+        <MudTh></MudTh>
+        <MudTh></MudTh>
+        <MudTh></MudTh>
+    </HeaderContent>
+    <RowTemplate>
+        <MudTd DataLabel="">
+            <MudImage @onclick="@(_ => Navigate(context.NavigationPath))"
+                      Class="rounded-lg can-click"
+                      Elevation="5"
+                      Height="200"
+                      ObjectFit="@ObjectFit.Cover"
+                      Src="@(ImageService.GetUserImageData(context.PrimaryImageFileName))"
+                      Width="200" />
+        </MudTd>
+        <MudTd DataLabel="Item">@context.ItemTypeName</MudTd>
+        <MudTd DataLabel="Fee/Donation">@(context.Cost?.ToString("c") ?? string.Empty)</MudTd>
+        <MudTd DataLabel="">
+            @(context.ReceivedDate.HasValue && context.IsExtraReceived ? "This was an extra received." : "")
+        </MudTd>               
+        <MudTd DataLabel="">
+            <Condition Evaluation="@(!context.AutographId.HasValue)">
+                <Match>
+                    <MudTooltip Text="Link to Autograph">
+                        <MudFab Color="MudBlazor.Color.Secondary"
+                                Icon="@Icons.Material.Outlined.AddLink"
+                                OnClick="@(_ => AddAutographLink(context))"
+                                Size="@MudBlazor.Size.Small" />
+                    </MudTooltip>
+                </Match>
+            </Condition>
+        </MudTd>
+        <MudTd DataLabel="">
+            <MudTooltip Text="Delete">
+                <MudFab Color="MudBlazor.Color.Secondary"
+                    Icon="@Icons.Material.Outlined.DeleteOutline"
+                    OnClick="@(_ => context.IsDeleted = true)" />
+            </MudTooltip>
+        </MudTd>
+    </RowTemplate>
+    <RowEditingTemplate>
+        <MudTd DataLabel="">
+            <MudImage Class="rounded-lg can-click"
+                      Elevation="5"
+                      Height="200"
+                      ObjectFit="@ObjectFit.Cover"
+                      Src="@(ImageService.GetUserImageData(context.PrimaryImageFileName))"
+                      Width="200" />
+        </MudTd>
+        <MudTd DataLabel="Item">@context.ItemTypeName</MudTd>
+        <MudTd DataLabel="Fee/Donation">
+            <NullableDecimalField Value="@context.Cost"
+                                  ValueChanged="@((p) => context.Cost = p)" />
+        </MudTd>
+        <MudTd DataLabel="">
+            @(context.ReceivedDate.HasValue && context.IsExtraReceived ? "This was an extra received." : "")
+        </MudTd>
+        <MudTd DataLabel="">
+            <Condition Evaluation="@(!context.AutographId.HasValue)">
+                <Match>
+                    <MudTooltip Text="Link to Autograph">
+                        <MudFab Color="MudBlazor.Color.Secondary"
+                                Icon="@Icons.Material.Outlined.AddLink"
+                                Size="@MudBlazor.Size.Small" />
+                    </MudTooltip>
+                </Match>
+            </Condition>
+        </MudTd>
+        <MudTd DataLabel="">
+            <MudTooltip Text="Delete">
+                <MudFab Color="MudBlazor.Color.Secondary"
+                        Icon="@Icons.Material.Outlined.DeleteOutline" />
+            </MudTooltip>
+        </MudTd>
+    </RowEditingTemplate>
+    <PagerContent>
+        <MudTablePager />
+    </PagerContent>
+</MudTable>

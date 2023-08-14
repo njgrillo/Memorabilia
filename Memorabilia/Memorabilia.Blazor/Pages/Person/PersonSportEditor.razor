@@ -14,7 +14,7 @@
     <MudTable Bordered="false"
               Dense="false"
               Hover="true"
-              Items="@Sports.Where(sport => !sport.IsDeleted).OrderBy(sport => sport.SportName).ToList()"
+              Items="@Sports.Where(sport => !sport.IsDeleted).OrderBy(sport => sport.IsPrimary).ThenBy(sport => sport.SportName).ToList()"
               Striped="true">
         <HeaderContent>
             <MudTh>Sport</MudTh>

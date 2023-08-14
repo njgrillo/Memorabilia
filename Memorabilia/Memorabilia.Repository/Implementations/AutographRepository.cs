@@ -14,7 +14,8 @@ public class AutographRepository
                 .Include(autograph => autograph.Memorabilia)
                 .Include(autograph => autograph.Person)
                 .Include(autograph => autograph.Personalization)
-                .Include(autograph => autograph.Spot);
+                .Include(autograph => autograph.Spot)
+                .Include(autograph => autograph.ThroughTheMailMemorabilia);
 
     public override async Task<Entity.Autograph> Get(int id)
         => await Autograph.SingleOrDefaultAsync(autograph => autograph.Id == id);
@@ -47,6 +48,11 @@ public class AutographRepository
                                            && (teamId == null || autograph.Memorabilia.Teams.Any(team => team.TeamId == teamId.Value))
                                            && (year == null || (autograph.Memorabilia.Baseball != null && autograph.Memorabilia.Baseball.Year == year.Value))
                                 )
+                          .ToArrayAsync();
+
+    public async Task<Entity.Autograph[]> GetAllByPerson(int personId, int userId)
+        => await Autograph.Where(autograph => autograph.Person.Id == personId &&
+                                              autograph.Memorabilia.UserId == userId)
                           .ToArrayAsync();
 
     public async Task<Entity.Autograph[]> GetAllCards(int itemTypeId,

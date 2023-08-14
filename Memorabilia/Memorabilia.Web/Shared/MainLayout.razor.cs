@@ -6,6 +6,9 @@ public partial class MainLayout : LayoutComponentBase
     public IApplicationStateService ApplicationStateService { get; set; }
 
     [Inject]
+    public ICourier Courier { get; set; }
+
+    [Inject]
     public NavigationManager NavigationManager { get; set; }
 
     private Exception _currentException;
@@ -17,6 +20,11 @@ public partial class MainLayout : LayoutComponentBase
 
     private string _themeText
         = "Turn on dark mode";
+
+    protected override void OnInitialized()
+    {
+        Courier.Subscribe<ThemeChangedNotification>(OnThemeChanged);
+    }
 
     protected override void OnParametersSet()
     {
@@ -44,17 +52,29 @@ public partial class MainLayout : LayoutComponentBase
         NavigationManager.NavigateTo(url);
     }
 
+    public async Task OnThemeChanged(ThemeChangedNotification notification)
+    {
+        SetThemeText();
+
+        await InvokeAsync(StateHasChanged);
+    }
+
     public void ToggleTheme()
     {
-        ApplicationStateService.IsDarkMode = !ApplicationStateService.IsDarkMode;    
+        ApplicationStateService.IsDarkTheme = !ApplicationStateService.IsDarkTheme;
 
-        _themeText = ApplicationStateService.IsDarkMode
-            ? "Turn off dark mode"
-            : "Turn on dark mode";
+        SetThemeText();
     }
 
     public void UserSettings()
     {
         NavigationManager.NavigateTo("Settings");
+    }
+
+    private void SetThemeText()
+    {
+        _themeText = ApplicationStateService.IsDarkTheme
+            ? "Turn off dark mode"
+            : "Turn on dark mode";
     }
 }

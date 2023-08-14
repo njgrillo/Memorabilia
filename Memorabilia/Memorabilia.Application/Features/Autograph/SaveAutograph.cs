@@ -32,8 +32,6 @@ public class SaveAutograph
                                                  command.PersonalizationText,
                                                  command.PersonId,
                                                  command.PurchaseTypeId,
-                                                 command.ReceivedDate,
-                                                 command.SentDate,
                                                  command.WritingInstrumentId);
 
                 await _autographRepository.Add(autograph);
@@ -66,8 +64,6 @@ public class SaveAutograph
                           command.PersonalizationText,
                           command.PersonId,
                           command.PurchaseTypeId,
-                          command.ReceivedDate,
-                          command.SentDate,
                           command.WritingInstrumentId);
 
             await _autographRepository.Update(autograph);
@@ -145,12 +141,6 @@ public class SaveAutograph
 
         public int? PurchaseTypeId 
             => _editModel.PurchaseTypeId.ToNullableInt();
-
-        public DateTime? ReceivedDate 
-            => _editModel.ReceivedDate;
-
-        public DateTime? SentDate 
-            => _editModel.SentDate;
 
         public int WritingInstrumentId 
             => _editModel.WritingInstrumentId;

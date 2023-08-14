@@ -8,7 +8,8 @@ public class ThroughTheMailEditModel : EditModel
 	{
 		AddressId = throughTheMail.AddressId;
 		Id = throughTheMail.Id;
-		PersonId = throughTheMail.PersonId;
+        Notes = throughTheMail.Notes;
+        Person = new PersonEditModel(new PersonModel(throughTheMail.Person));
 		ReceivedDate = throughTheMail.ReceivedDate;
 		SentDate = throughTheMail.SentDate;
 		UserId = throughTheMail.UserId;
@@ -17,7 +18,7 @@ public class ThroughTheMailEditModel : EditModel
 			return;
 
 		Memorabilia = throughTheMail.Memorabilia
-								    .Select(memorabilia => new ThroughTheMailMemorabiliaEditModel(memorabilia))
+								    .Select(memorabilia => new ThroughTheMailMemorabiliaEditModel(memorabilia, throughTheMail))
 									.ToList();
 	}
 
@@ -25,17 +26,18 @@ public class ThroughTheMailEditModel : EditModel
     {
         //AddressId = model.Address?.Id;
         Id = model.Id;
-        //PersonId = model.Person?.Id;
+        Notes = model.Notes;
+        Person = new PersonEditModel(new PersonModel(model.Person));
         ReceivedDate = model.ReceivedDate;
         SentDate = model.SentDate;
         UserId = model.UserId;
 
-        //if (!model.Memorabilia.Any())
-        //    return;
+        if (!model.Memorabilia.Any())
+            return;
 
-        //Memorabilia = model.Memorabilia
-        //                   .Select(memorabilia => new ThroughTheMailMemorabiliaEditModel(memorabilia))
-        //                   .ToList();
+        Memorabilia = model.Memorabilia
+                           .Select(memorabilia => new ThroughTheMailMemorabiliaEditModel(memorabilia, model))
+                           .ToList();
     }
 
     public int? AddressId { get; set; }
@@ -43,9 +45,12 @@ public class ThroughTheMailEditModel : EditModel
 	public List<ThroughTheMailMemorabiliaEditModel> Memorabilia { get; set; }
 		= new();
 
-	public int PersonId { get; set; }
+    public string Notes { get; set; }
 
-	public DateTime? ReceivedDate { get; set; }
+    public PersonEditModel Person { get; set; }
+        = new();
+
+    public DateTime? ReceivedDate { get; set; }
 
 	public DateTime? SentDate { get; set; }
 

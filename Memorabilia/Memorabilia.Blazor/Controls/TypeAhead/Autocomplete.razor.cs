@@ -24,7 +24,11 @@ public abstract partial class Autocomplete<TItem>
     public string HelperText { get; set; }
 
     [Parameter]
-    public string Label { get; set; }    
+    public string Label { get; set; }
+
+    [Parameter]
+    public string MoreItemsText { get; set; }
+        = "Only the first 10 items are shown. Type more to narrow down items.";
 
     [Parameter]
     public string Placeholder { get; set; }

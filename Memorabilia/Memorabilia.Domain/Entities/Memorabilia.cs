@@ -2,9 +2,11 @@
 
 public partial class Memorabilia : Framework.Library.Domain.Entity.DomainEntity
 {  
-    public virtual Acquisition Acquisition => MemorabiliaAcquisition.Acquisition;
+    public virtual Acquisition Acquisition 
+        => MemorabiliaAcquisition.Acquisition;
 
-    public virtual List<Autograph> Autographs { get; private set; } = new ();
+    public virtual List<Autograph> Autographs { get; private set; } 
+        = new ();
 
     public virtual MemorabiliaBammer Bammer { get; private set; }
 
@@ -24,11 +26,13 @@ public partial class Memorabilia : Framework.Library.Domain.Entity.DomainEntity
 
     public virtual MemorabiliaCereal Cereal { get; private set; }
 
-    public virtual List<CollectionMemorabilia> CollectionMemorabilias { get; private set; } = new();
+    public virtual List<CollectionMemorabilia> CollectionMemorabilias { get; private set; } 
+        = new();
 
     public virtual MemorabiliaCommissioner Commissioner { get; private set; }
 
-    public Constants.Condition Condition => Constants.Condition.Find(ConditionId ?? 0);
+    public Constants.Condition Condition 
+        => Constants.Condition.Find(ConditionId ?? 0);
 
     public int? ConditionId { get; private set; }
 
@@ -54,9 +58,11 @@ public partial class Memorabilia : Framework.Library.Domain.Entity.DomainEntity
 
     public virtual MemorabiliaHelmet Helmet { get; private set; }
 
-    public virtual List<MemorabiliaImage> Images { get; private set; } = new ();
+    public virtual List<MemorabiliaImage> Images { get; private set; } 
+        = new ();
 
-    public Constants.ItemType ItemType => Constants.ItemType.Find(ItemTypeId);
+    public Constants.ItemType ItemType 
+        => Constants.ItemType.Find(ItemTypeId);
 
     public int ItemTypeId { get; private set; }
 
@@ -76,7 +82,8 @@ public partial class Memorabilia : Framework.Library.Domain.Entity.DomainEntity
 
     public int? Numerator { get; private set; }
 
-    public virtual List<MemorabiliaPerson> People { get; private set; } = new ();
+    public virtual List<MemorabiliaPerson> People { get; private set; } 
+        = new ();
 
     public virtual MemorabiliaPicture Picture { get; private set; }
 
@@ -84,9 +91,14 @@ public partial class Memorabilia : Framework.Library.Domain.Entity.DomainEntity
 
     public virtual MemorabiliaSize Size { get; private set; }
 
-    public virtual List<MemorabiliaSport> Sports { get; private set; } = new ();
+    public virtual List<MemorabiliaSport> Sports { get; private set; } 
+        = new ();
 
-    public virtual List<MemorabiliaTeam> Teams { get; private set; } = new ();
+    public virtual List<MemorabiliaTeam> Teams { get; private set; } 
+        = new ();
+
+    public virtual List<ThroughTheMailMemorabilia> ThroughTheMailMemorabilias { get; private set; } 
+        = new ();
 
     public virtual User User { get; set; }
 

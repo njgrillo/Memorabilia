@@ -8,29 +8,33 @@ public class ThroughTheMail : Framework.Library.Domain.Entity.DomainEntity
         int? addressId,
         DateTime? sentDate,
         DateTime? receivedDate,
+        string notes,
         int userId)
     {
         PersonId = personId;
         AddressId = addressId;
         SentDate = sentDate;
         ReceivedDate = receivedDate;
+        Notes = notes;
         UserId = userId;
     }
 
-    public int? AddressId { get; set; }
+    public int? AddressId { get; private set; }
 
     public virtual List<ThroughTheMailMemorabilia> Memorabilia { get; set; }
         = new();
 
+    public string Notes { get; private set; }
+
     public virtual Person Person{ get; set; }
 
-    public int PersonId { get; set; }
+    public int PersonId { get; private set; }
 
-    public DateTime? ReceivedDate { get; set; }
+    public DateTime? ReceivedDate { get; private set; }
 
-    public DateTime? SentDate { get; set; }
+    public DateTime? SentDate { get; private set; }
 
-    public int UserId { get; set; } 
+    public int UserId { get; private set; } 
 
     public void RemoveMemorabilia(int[] memorabiliaIds)
     {
@@ -42,17 +46,21 @@ public class ThroughTheMail : Framework.Library.Domain.Entity.DomainEntity
 
     public void Set(int? addressId,
         DateTime? sentDate,
-        DateTime? receivedDate)
+        DateTime? receivedDate,
+        string notes)
     {
         AddressId = addressId;
         SentDate = sentDate;
         ReceivedDate = receivedDate;
+        Notes = notes;
     }
 
     public void SetMemorabilia(int id, 
         int throughTheMailId,
         int memorabiliaId,
-        decimal? cost)
+        int? autographId,
+        decimal? cost,
+        bool isExtraReceived)
     {
         ThroughTheMailMemorabilia throughTheMailMemorabilia = id > 0
             ? Memorabilia.SingleOrDefault(throughTheMailMemorabilia => throughTheMailMemorabilia.Id == id)
@@ -62,11 +70,13 @@ public class ThroughTheMail : Framework.Library.Domain.Entity.DomainEntity
         {
             Memorabilia.Add(new ThroughTheMailMemorabilia(Id,
                             memorabiliaId,
-                            cost));
+                            autographId,
+                            cost,
+                            isExtraReceived));
 
             return;
         }
 
-        throughTheMailMemorabilia.Set(cost);
+        throughTheMailMemorabilia.Set(autographId, cost, isExtraReceived);
     }
 }

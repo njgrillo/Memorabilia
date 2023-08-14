@@ -6,23 +6,35 @@ public class ThroughTheMailMemorabilia : Framework.Library.Domain.Entity.DomainE
 
     public ThroughTheMailMemorabilia(int throughTheMailId,
         int memorabiliaId,
-        decimal? cost)
+        int? autographId,
+        decimal? cost,
+        bool isExtraReceieved)
     {
         ThroughTheMailId = throughTheMailId;
         MemorabiliaId = memorabiliaId;
+        AutographId = autographId;
         Cost = cost;   
+        IsExtraReceived = isExtraReceieved;
     }
 
-    public decimal? Cost { get; set; }
+    public int? AutographId { get; private set; }
+
+    public virtual Autograph Autograph { get; set; }
+
+    public decimal? Cost { get; private set; }
+
+    public bool IsExtraReceived { get; private set; }
 
     public virtual Memorabilia Memorabilia { get; set; }
 
-    public int MemorabiliaId { get; set; }    
+    public int MemorabiliaId { get; private set; }    
 
-    public int ThroughTheMailId { get; set; }
+    public int ThroughTheMailId { get; private set; }
 
-    public void Set(decimal? cost)
+    public void Set(int? autographId, decimal? cost, bool isExtraReceived)
     {
+        AutographId = autographId;
         Cost = cost;
+        IsExtraReceived = isExtraReceived;
     }
 }

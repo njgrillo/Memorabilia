@@ -19,8 +19,6 @@ public class Autograph : Framework.Library.Domain.Entity.DomainEntity
                      string personalizationText,
                      int personId,
                      int? purchaseTypeId,
-                     DateTime? receivedDate,
-                     DateTime? sentDate,
                      int writingInstrumentId)
     {
         ColorId = colorId;
@@ -41,8 +39,6 @@ public class Autograph : Framework.Library.Domain.Entity.DomainEntity
         
         if (!personalizationText.IsNullOrEmpty())
             Personalization = new Personalization(Id, personalizationText);
-
-        SetThroughTheMail(sentDate, receivedDate);
     }
 
     public virtual Acquisition Acquisition { get; private set; }
@@ -87,7 +83,7 @@ public class Autograph : Framework.Library.Domain.Entity.DomainEntity
 
     public virtual AutographSpot Spot { get; private set; } 
 
-    public virtual AutographThroughTheMail ThroughTheMail { get; private set; }
+    public virtual ThroughTheMailMemorabilia ThroughTheMailMemorabilia { get; private set; }
 
     public int WritingInstrumentId { get; private set; }
 
@@ -121,8 +117,6 @@ public class Autograph : Framework.Library.Domain.Entity.DomainEntity
                     string personalizationText,
                     int personId,
                     int? purchaseTypeId,
-                    DateTime? receivedDate,
-                    DateTime? sentDate,
                     int writingInstrumentId)
     {
         ColorId = colorId;
@@ -139,7 +133,6 @@ public class Autograph : Framework.Library.Domain.Entity.DomainEntity
 
         SetAcquisition(acquisitionTypeId, acquiredDate, cost, purchaseTypeId);
         SetPersonalization(personalizationText);
-        SetThroughTheMail(sentDate, receivedDate);
     }
 
     public void SetAuthentication(int id, 
@@ -238,20 +231,5 @@ public class Autograph : Framework.Library.Domain.Entity.DomainEntity
         }
         else
             Personalization = null;
-    }
-
-    private void SetThroughTheMail(DateTime? sentDate, DateTime? receivedDate)
-    {
-        var acquisitionType = Constant.AcquisitionType.Find(Acquisition?.AcquisitionTypeId ?? 0);
-
-        if (acquisitionType != Constant.AcquisitionType.ThroughTheMail)
-        {
-            if (ThroughTheMail != null)
-                ThroughTheMail = null;
-
-            return;
-        }
-
-        ThroughTheMail = new AutographThroughTheMail(Id, sentDate, receivedDate);
     }
 }

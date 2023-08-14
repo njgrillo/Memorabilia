@@ -43,6 +43,7 @@ public class MemorabiliaItemRepository
                 .Include(memorabilia => memorabilia.Size)
                 .Include(memorabilia => memorabilia.Sports)
                 .Include(memorabilia => memorabilia.Teams)
+                .Include(memorabilia => memorabilia.ThroughTheMailMemorabilias)
                 .Include(memorabilia => memorabilia.User);
 
     public override async Task Add(Entity.Memorabilia item, 

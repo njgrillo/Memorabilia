@@ -1,0 +1,53 @@
+﻿<MudDialog Style="max-height:85vh;">
+    <DialogContent>
+        <DivPad2>
+            <Div Class="row">
+                <Div Class="col-3">
+                    <NullableDecimalField Label="Fee/Donation ($)"
+                                          Value="ThroughTheMailMemorabilia.Cost"
+                                          ValueChanged="@((p) => ThroughTheMailMemorabilia.Cost = p)" />
+                </Div>
+                <Div Class="col-3">
+                    <Switch Checked="ThroughTheMailMemorabilia.IsExtraReceived"
+                            CheckedChanged="(p) => ThroughTheMailMemorabilia.IsExtraReceived = p"
+                            Label="Was Extra Received?" />
+                </Div>
+                <Div Class="col-3">
+                    <Condition Evaluation="@(ThroughTheMailMemorabilia.AutographId > 0)">
+                        <Match>
+                            <MudTooltip Text="Remove link to Autograph">
+                                <MudFab Color="MudBlazor.Color.Secondary"
+                                        Icon="@Icons.Material.Outlined.LinkOff"
+                                        OnClick="@(_ => ThroughTheMailMemorabilia.AutographId = 0)" />
+                            </MudTooltip>
+                        </Match>
+                        <NotMatch>
+                            <MudTooltip Text="Link to Autograph">
+                                <MudFab Color="MudBlazor.Color.Secondary"
+                                        Icon="@Icons.Material.Outlined.AddLink"
+                                        OnClick="@(_ => AddAutographLink())" />
+                            </MudTooltip>
+                        </NotMatch>
+                    </Condition>
+                </Div>
+                <Condition Evaluation="@(ThroughTheMailMemorabilia.AutographId > 0)">
+                    <Match>
+                        <Div Class="col-3">
+                            <MudImage Class="rounded-lg can-click"
+                                      Elevation="5"
+                                      Height="100"
+                                      ObjectFit="@ObjectFit.Cover"
+                                      Src="@(ImageService.GetUserImageData(ThroughTheMailMemorabilia.AutographImageFileName))"
+                                      Width="100" />
+                        </Div>
+                    </Match>
+                </Condition>
+            </Div>            
+        </DivPad2>
+    </DialogContent>
+    <DialogActions>
+        <CancelButton OnClick="Cancel" />
+        <AddButton OnClick="Add"
+                   Text="Add" />
+    </DialogActions>
+</MudDialog>

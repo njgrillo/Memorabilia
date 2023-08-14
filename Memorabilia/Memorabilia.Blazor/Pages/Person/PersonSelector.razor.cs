@@ -51,10 +51,10 @@ public partial class PersonSelector
 
     private Sport _sportFilter;
 
-    protected override void OnInitialized()
+    protected override void OnParametersSet()
     {
         _hasPeople = SelectedPerson?.Id > 0;
-        _displayPeople = !CanToggle || _hasPeople;        
+        _displayPeople = !CanToggle || _hasPeople;
         _sportFilter = Sport;
 
         if (!_filterPeople)
