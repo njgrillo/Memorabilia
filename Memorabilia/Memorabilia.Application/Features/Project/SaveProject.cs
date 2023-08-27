@@ -148,6 +148,7 @@ public class SaveProject
                                           projectMemorabiliaTeam.ItemTypeId,
                                           projectMemorabiliaTeam.Upgrade,
                                           projectMemorabiliaTeam.Rank,
+                                          projectMemorabiliaTeam.EstimatedCost,
                                           projectMemorabiliaTeam.PriorityTypeId,
                                           projectMemorabiliaTeam.ProjectStatusTypeId > 0 ? projectMemorabiliaTeam.ProjectStatusTypeId : null,
                                           projectMemorabiliaTeam.MemorabiliaId > 0 ? projectMemorabiliaTeam.MemorabiliaId : null);
@@ -165,6 +166,7 @@ public class SaveProject
                                   projectPerson.Rank,
                                   projectPerson.PriorityTypeId,
                                   projectPerson.ProjectStatusTypeId > 0 ? projectPerson.ProjectStatusTypeId : null,
+                                  projectPerson.EstimatedCost,
                                   projectPerson.MemorabiliaId > 0 ? projectPerson.MemorabiliaId : null,
                                   projectPerson.AutographId > 0 ? projectPerson.AutographId : null);
             }

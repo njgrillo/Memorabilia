@@ -132,6 +132,7 @@ public class Project : Framework.Library.Domain.Entity.DomainEntity
         int? itemTypeId,
         bool upgrade,
         int? rank,
+        decimal? estimatedCost,
         int? priorityTypeId,
         int? projectStatusTypeId,
         int? memorabiliaId)
@@ -147,6 +148,7 @@ public class Project : Framework.Library.Domain.Entity.DomainEntity
                 itemTypeId,
                 upgrade,
                 rank,
+                estimatedCost,
                 priorityTypeId,
                 projectStatusTypeId,
                 memorabiliaId));
@@ -160,6 +162,7 @@ public class Project : Framework.Library.Domain.Entity.DomainEntity
             rank,
             priorityTypeId,
             projectStatusTypeId,
+            estimatedCost,
             memorabiliaId);
     }
 
@@ -170,6 +173,7 @@ public class Project : Framework.Library.Domain.Entity.DomainEntity
         int? rank, 
         int? priorityTypeId,
         int? projectStatusTypeId,
+        decimal? estimatedCost,
         int? memorabiliaId, 
         int? autographId)
     {
@@ -186,6 +190,7 @@ public class Project : Framework.Library.Domain.Entity.DomainEntity
                 rank, 
                 priorityTypeId,
                 projectStatusTypeId,
+                estimatedCost,
                 memorabiliaId,
                 autographId));
 
@@ -198,6 +203,7 @@ public class Project : Framework.Library.Domain.Entity.DomainEntity
             rank, 
             priorityTypeId,
             projectStatusTypeId,
+            estimatedCost,
             memorabiliaId,
             autographId);
     }

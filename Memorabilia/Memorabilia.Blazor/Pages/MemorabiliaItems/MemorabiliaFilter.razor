@@ -138,20 +138,8 @@
                                                SelectedItemsChanged="(p) => Model.GameStyleTypeIds = p" />
                     </Div>
                 </Div>
-            </Div>
+            </Div>            
             <Div Class="row">
-                <Div Class="col-4">
-                    <Div Class="form-group">
-                        <SearchPersonSelector SelectedPeople="Model.People"
-                                              SelectedPeopleChanged="@((people) => Model.People = people)" />
-                    </Div>
-                </Div>
-                <Div Class="col-4">
-                    <Div Class="form-group">
-                        <SearchTeamSelector SelectedTeams="Model.Teams"
-                                            SelectedTeamsChanged="(teams) => Model.Teams = teams" />
-                    </Div>
-                </Div>
                 <Div Class="col-2">
                     <Div Class="form-group">
                         <RadioField EmptyValue="ImageFilter.None"
@@ -168,6 +156,29 @@
                                     SelectionChanged="(p) => Model.AutographFilter = p"
                                     SelectedOption="Model.AutographFilter"
                                     TItemType="AutographFilter" />
+                    </Div>
+                </Div>
+                <Div Class="col-2">
+                    <Div Class="form-group">
+                        <RadioField EmptyValue="TradeFilter.None"
+                                    Options="TradeFilter.FilterItems"
+                                    SelectionChanged="(p) => Model.TradeFilter = p"
+                                    SelectedOption="Model.TradeFilter"
+                                    TItemType="TradeFilter" />
+                    </Div>
+                </Div>
+            </Div>
+            <Div Class="row">
+                <Div Class="col-4">
+                    <Div Class="form-group">
+                        <SearchPersonSelector SelectedPeople="Model.People"
+                                              SelectedPeopleChanged="@((people) => Model.People = people)" />
+                    </Div>
+                </Div>
+                <Div Class="col-4">
+                    <Div Class="form-group">
+                        <SearchTeamSelector SelectedTeams="Model.Teams"
+                                            SelectedTeamsChanged="(teams) => Model.Teams = teams" />
                     </Div>
                 </Div>
             </Div>

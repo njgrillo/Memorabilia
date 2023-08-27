@@ -12,7 +12,8 @@ public class ThroughTheMailEditModel : EditModel
         Person = new PersonEditModel(new PersonModel(throughTheMail.Person));
 		ReceivedDate = throughTheMail.ReceivedDate;
 		SentDate = throughTheMail.SentDate;
-		UserId = throughTheMail.UserId;
+        ThroughTheMailFailureType = Constant.ThroughTheMailFailureType.Find(throughTheMail.ThroughTheMailFailureTypeId ?? 0);
+        UserId = throughTheMail.UserId;
 
 		if (!throughTheMail.Memorabilia.Any())
 			return;
@@ -30,6 +31,7 @@ public class ThroughTheMailEditModel : EditModel
         Person = new PersonEditModel(new PersonModel(model.Person));
         ReceivedDate = model.ReceivedDate;
         SentDate = model.SentDate;
+        ThroughTheMailFailureType = Constant.ThroughTheMailFailureType.Find(model.ThroughTheMailFailureTypeId ?? 0);
         UserId = model.UserId;
 
         if (!model.Memorabilia.Any())
@@ -53,6 +55,11 @@ public class ThroughTheMailEditModel : EditModel
     public DateTime? ReceivedDate { get; set; }
 
 	public DateTime? SentDate { get; set; }
+
+    public Constant.ThroughTheMailFailureType ThroughTheMailFailureType { get; set; }
+
+    public int? ThroughTheMailFailureTypeId 
+        => ThroughTheMailFailureType?.Id;
 
 	public int UserId { get; set; }
 }

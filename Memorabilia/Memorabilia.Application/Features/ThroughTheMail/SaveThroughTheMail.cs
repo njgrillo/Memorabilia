@@ -22,6 +22,7 @@ public class SaveThroughTheMail
                                                            command.SentDate,
                                                            command.ReceivedDate,
                                                            command.Notes,
+                                                           command.ThroughTheMailFailureTypeId,
                                                            command.UserId);
 
                 SetMemorabilia(throughTheMail, command);
@@ -44,8 +45,9 @@ public class SaveThroughTheMail
 
             throughTheMail.Set(command.AddressId,
                                command.SentDate,
-                               command.ReceivedDate,
-                               command.Notes);
+                               command.ReceivedDate,                               
+                               command.Notes,
+                               command.ThroughTheMailFailureTypeId);
 
             DeleteMemorabilia(throughTheMail, command);
             SetMemorabilia(throughTheMail, command);
@@ -120,6 +122,9 @@ public class SaveThroughTheMail
 
         public DateTime? SentDate
             => _editModel.SentDate;
+
+        public int? ThroughTheMailFailureTypeId
+            => _editModel.ThroughTheMailFailureTypeId;
 
         public int UserId
             => _editModel.UserId;

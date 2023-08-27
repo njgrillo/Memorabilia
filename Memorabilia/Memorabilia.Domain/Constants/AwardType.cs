@@ -12,19 +12,27 @@ public sealed class AwardType : DomainItemConstant
     public static readonly AwardType ACCBaseballPlayerOfTheYear = new(43, "ACC Baseball Player of the Year");
     public static readonly AwardType ACCDefensivePlayerOfTheYear = new (86, "ACC Defensive Player of the Year");
     public static readonly AwardType ACCDefensiveRookieOfTheYear = new (248, "ACC Defensive Rookie of the Year", "ACC ROY");
+    public static readonly AwardType ACCFreshmanOfTheYearBaseball = new (364, "ACC Freshman of the Year (Baseball)");
     public static readonly AwardType ACCMaleAthleteOfTheYearBaseball = new(271, "ACC Male Athlete of the Year (Baseball)");
     public static readonly AwardType ACCMaleAthleteOfTheYearBasketball = new(228, "ACC Male Athlete of the Year (Basketball)");
     public static readonly AwardType ACCMaleAthleteOfTheYearFootball = new(270, "ACC Male Athlete of the Year (Football)");
     public static readonly AwardType ACCOffensivePlayerOfTheYear = new(247, "ACC Offensive Player of the Year");
     public static readonly AwardType ACCOffensiveRookieOfTheYear = new (171, "ACC Offensive Rookie of the Year", "ACC ROY");
+    public static readonly AwardType ACCPitcherOfTheYear = new (363, "ACC Pitcher of the Year");
     public static readonly AwardType ACCPlayerOfTheYearBasketball = new (114, "ACC Player of the Year (Basketball)");
     public static readonly AwardType ACCPlayerOfTheYearFootball = new (244, "ACC Player of the Year (Football)");
     public static readonly AwardType ACCRookieOfTheYearBasketball = new (115, "ACC Rookie of the Year (Basketball)", "ACC ROY");
     public static readonly AwardType ACCRookieOfTheYearFootball = new (245, "ACC Rookie of the Year (Football)", "ACC ROY");
     public static readonly AwardType AdolphRuppTrophy = new (293, "Adolph Rupp Trophy");
-    public static readonly AwardType AFLChampionshipMostValuablePlayer = new (101, "AFL Championship Most Valuable Player", "AFL Championship MVP");
-    public static readonly AwardType AFLMostValuablePlayer = new (82, "AFL Most Valuable Player", "AFL MVP");
-    public static readonly AwardType AFLRookieOfTheYear = new(135, "AFL Rookie of the Year", "AFL ROY");    
+    public static readonly AwardType AFLBreakoutPlayerOfTheYearBaseball = new (365, "AFL Breakout Player of the Year (Baseball)");
+    public static readonly AwardType AFLChampionshipMostValuablePlayerFootball = new (101, "AFL Championship Most Valuable Player (Football)", "AFL Championship MVP");
+    public static readonly AwardType AFLDefensivePlayerOfTheYearBaseball = new (366, "AFL Defensive Player of the Year (Baseball)");
+    public static readonly AwardType AFLHitterOfTheYearBaseball = new (367, "AFL Hitter of the Year (Baseball)");
+    public static readonly AwardType AFLMostValuablePlayerBaseball = new (368, "AFL Most Valuable Player (Baseball)");
+    public static readonly AwardType AFLMostValuablePlayerFootball = new (82, "AFL Most Valuable Player (Football)", "AFL MVP");
+    public static readonly AwardType AFLPitcherOfTheYearBaseball = new (369, "AFL Pitcher of the Year (Baseball)");
+    public static readonly AwardType AFLRelieverOfTheYearBaseball = new (370, "AFL Reliever of the Year (Baseball)");
+    public static readonly AwardType AFLRookieOfTheYearFootball = new(135, "AFL Rookie of the Year (Football)", "AFL ROY");    
     public static readonly AwardType AmecheDayneRunningBackOfTheYear = new (261, "Ameche-Dayne Running Back of the Year");
     public static readonly AwardType AmericanLeagueChampionshipSeriesMostValuablePlayer = new(17, "American League Championship Series Most Valuable Player", "ALCS MVP");
     public static readonly AwardType AmericanLeagueComebackPlayerOfTheYear = new(24, "American League Comeback Player of the Year", "AL Comeback Player of the Year");
@@ -36,13 +44,16 @@ public sealed class AwardType : DomainItemConstant
     public static readonly AwardType AmericanLeagueRolaidsReliefManAward = new(36, "American League Rolaids Relief Man Award", "AL Rolaids Relief Man Award");        
     public static readonly AwardType AmericanLeagueRookieOfTheYear = new(13, "American League Rookie of the Year", "AL ROY");        
     public static readonly AwardType ArchieGriffinAward = new (251, "Archie Griffin Award");        
-    public static readonly AwardType ArtRooneyAward = new (165, "Art Rooney Award");    
+    public static readonly AwardType ArtRooneyAward = new (165, "Art Rooney Award");     
+    public static readonly AwardType AssociatedPressAmericanLeagueManagerOfTheYear = new(372, "Associated Press American League Manager of the Year");  
     public static readonly AwardType AssociatedPressCoachOfTheYear = new(90, "Associated Press Coach of the Year", "AP Coach of the Year");  
     public static readonly AwardType AssociatedPressCollegeBasketballPlayerOfTheYear = new(277, "Associated Press College Basketball Player of the Year", "AP College Basketball Player of the Year");
     public static readonly AwardType AssociatedPressCollegeCoachOfTheYear = new(183, "Associated Press College Coach of the Year", "AP College Coach of the Year");
     public static readonly AwardType AssociatedPressCollegeFootballPlayerOfTheYear = new(276, "Associated Press College Football Player of the Year", "AP College Football Player of the Year");
     public static readonly AwardType AssociatedPressFemaleAthleteOfTheYear = new(273, "Associated Press Female Athlete of the Year", "AP Female Athlete of the Year");        
-    public static readonly AwardType AssociatedPressMaleAthleteOfTheYear = new(85, "Associated Press Male Athlete of the Year");    
+    public static readonly AwardType AssociatedPressMaleAthleteOfTheYear = new(85, "Associated Press Male Athlete of the Year");
+    public static readonly AwardType AssociatedPressManagerOfTheYear = new(374, "Associated Press Manager of the Year");
+    public static readonly AwardType AssociatedPressNationalLeagueManagerOfTheYear = new(373, "Associated Press National League Manager of the Year");
     public static readonly AwardType AssociatedPressNFLCoachOfTheYear = new(66, "Associated Press NFL Coach of the Year", "AP NFL Coach of the Year");
     public static readonly AwardType AssociatedPressNFLComebackPlayerOfTheYear = new(69, "Associated Press NFL Comeback Player of the Year", "AP NFL Comeback POY");
     public static readonly AwardType AssociatedPressNFLDefensivePlayerOfTheYear = new(78, "Associated Press NFL Defensive Player of the Year", "AP NFL DPOY");
@@ -50,16 +61,21 @@ public sealed class AwardType : DomainItemConstant
     public static readonly AwardType AssociatedPressNFLMostValuablePlayer = new(16, "Associated Press NFL Most Valuable Player", "AP NFL MVP");
     public static readonly AwardType AssociatedPressNFLOffensivePlayerOfTheYear = new(67, "Associated Press NFL Offensive Player of the Year", "AP NFL OPOY");
     public static readonly AwardType AssociatedPressNFLOffensiveRookieOfTheYear = new(68, "Associated Press NFL Offensive Rookie of the Year", "AP NFL OROY");
+    public static readonly AwardType AssociatedPressPlayerOfTheYearBaseball = new(375, "Associated Press Player of the Year (Baseball)");
     public static readonly AwardType BabeRuthAward = new(38, "Babe Ruth Award");
     public static readonly AwardType BakkenAndersenKickerOfTheYear = new (267, "Bakken-Andersen Kicker of the Year");
     public static readonly AwardType BartStarrAward = new(87, "Bart Starr Award");
     public static readonly AwardType BaseballAmericaCollegePlayerOfTheYear = new(52, "Baseball America College Player of the Year");
     public static readonly AwardType BaseballAmericaMajorLeaguePlayerOfTheYear = new(329, "Baseball America Major League Player of the Year");
+    public static readonly AwardType BaseballAmericaMinorLeaguePlayerOfTheYear = new(376, "Baseball America Minor League Player of the Year");
+    public static readonly AwardType BaseballDigestPitcherOfTheYear = new(378, "Baseball Digest Pitcher of the Year");
+    public static readonly AwardType BaseballDigestPlayerOfTheYear = new(377, "Baseball Digest Player of the Year");    
     public static readonly AwardType BertBellAward = new (83, "Bert Bell Award");
     public static readonly AwardType BigEastDefensivePlayerOfTheYearBasketball = new (144, "Big East Defensive Player of the Year (Basketball)");
     public static readonly AwardType BigEastDefensivePlayerOfTheYearFootball = new (250, "Big East Defensive Player of the Year (Football)");
     public static readonly AwardType BigEastFreshmanOfTheYearBasketball = new(237, "Big East Freshman of the Year (Basketball)");
     public static readonly AwardType BigEastOffensivePlayerOfTheYearFootball = new(327, "Big East Offensive Player of the Year (Football)");
+    public static readonly AwardType BigEastPlayerOfTheYearBaseball = new (390, "Big East Player of the Year (Baseball)");    
     public static readonly AwardType BigEastPlayerOfTheYearBasketball = new (225, "Big East Player of the Year (Basketball)");    
     public static readonly AwardType BigEastRookieOfTheYearFootball = new (326, "Big East Rookie of the Year (Football)");    
     public static readonly AwardType BigEastTournamentMostValuablePlayer = new (234, "Big East Tournament Most Valuable Player");
@@ -77,6 +93,8 @@ public sealed class AwardType : DomainItemConstant
     public static readonly AwardType BiletnikoffAward = new (113, "Biletnikoff Award");
     public static readonly AwardType BillWillisTrophy = new (149, "Bill Willis Trophy");
     public static readonly AwardType BobCousyAward = new (344, "Bob Cousy Award");
+    public static readonly AwardType BobFellerActOfValorAward = new (379, "Bob Feller Act of Valor Award");
+    public static readonly AwardType BranchRickeyAward = new (380, "Branch Rickey Award");
     public static readonly AwardType BrianPiccoloAward = new (249, "Brian Piccolo Award");
     public static readonly AwardType BronkoNagurskiTrophy = new (76, "Bronko Nagurski Trophy");
     public static readonly AwardType BrooksWallaceAward = new (335, "Brooks Wallace Award");
@@ -113,6 +131,7 @@ public sealed class AwardType : DomainItemConstant
     public static readonly AwardType FordFrickAward = new(49, "Ford C. Frick Award");
     public static readonly AwardType FordKinnickLeadershipAward = new (324, "Ford-Kinnick Leadership Award");
     public static readonly AwardType FreshmanOfTheYearFootball = new(257, "Freshman of the Year (Football)");
+    public static readonly AwardType FuturesGameMostValuablePlayer = new(387, "Futures Game Most Valuable Player");
     public static readonly AwardType GeorgeHalasAward = new(96, "George Halas Award");
     public static readonly AwardType GeorgeMungerAward = new(342, "George Munger Award");
     public static readonly AwardType GoldenSpikes = new(5, "Golden Spikes");
@@ -125,16 +144,21 @@ public sealed class AwardType : DomainItemConstant
     public static readonly AwardType HeismanTrophy = new (70, "Heisman Trophy");
     public static readonly AwardType HelmsFoundationCollegeBasketballPlayerOfTheYear = new (207, "Helms Foundation Basketball College Player of the Year");
     public static readonly AwardType HenryIbaAward = new (184, "Henry Iba Award");
+    public static readonly AwardType HutchAward = new (381, "Hutch Award");
     public static readonly AwardType IBMAward = new (220, "IBM Award");
     public static readonly AwardType JackLambertTrophy = new (88, "Jack Lambert Trophy");
+    public static readonly AwardType JackLangAward = new (382, "Jack Lang Award");
     public static readonly AwardType JackTatumTrophy = new (167, "Jack Tatum Trophy");
     public static readonly AwardType JacobsBlockingTrophy = new (106, "Jacobs Blocking Trophy");
     public static readonly AwardType JerryWestAward = new (345, "Jerry West Award");
     public static readonly AwardType JimBrownAward = new (252, "Jim Brown Award");
     public static readonly AwardType JimParkerTrophy = new (139, "Jim Parker Trophy");
     public static readonly AwardType JimThorpeAward = new (146, "Jim Thorpe Award");
+    public static readonly AwardType JoeBaumanHomeRunAward = new (383, "Joe Bauman Home Run Award");
+    public static readonly AwardType JoeCroninAward = new (384, "Joe Cronin Award");
+    public static readonly AwardType JoeDiMaggioToastOfTheTownAward = new (385, "Joe DiMaggio Toast of the Town Award");
     public static readonly AwardType JoeFCarrTrophy = new (260, "Joe F. Carr Trophy");
-    public static readonly AwardType JohnMackeyAward = new (340, "John Mackey Award");    
+    public static readonly AwardType JohnMackeyAward = new (340, "John Mackey Award");       
     public static readonly AwardType JohnnyUnitasGoldenArmAward = new (128, "Johnny Unitas Golden Arm Award");
     public static readonly AwardType JohnOlerudAward = new(337, "John Olerud Award");
     public static readonly AwardType JohnRWoodenAward = new (233, "John R. Wooden Award");
@@ -145,10 +169,12 @@ public sealed class AwardType : DomainItemConstant
     public static readonly AwardType KarlMaloneAward = new (347, "Karl Malone Award");
     public static readonly AwardType KellenMooreAward = new (254, "Kellen Moore Award");
     public static readonly AwardType KwalickClarkTightEndOfTheYear = new (263, "Kwalick-Clark Tight End of the Year");
-    public static readonly AwardType LamarHuntAward = new (104, "Lamar Hunt Award");
+    public static readonly AwardType LamarHuntAward = new (104, "Lamar Hunt Award");    
     public static readonly AwardType LombardiAward = new (141, "Lombardi Award");
+    public static readonly AwardType LouBrockAward = new (388, "Lou Brock Award");
     public static readonly AwardType LouGehrigAward = new (362, "Lou Gehrig Award");
     public static readonly AwardType LouGrozaAward = new (354, "Lou Groza Award");
+    public static readonly AwardType LuisAparicioAward = new (389, "Luis Aparicio Award");
     public static readonly AwardType LuteOlsonAward = new (348, "Lute Olson Award");
     public static readonly AwardType MACCoachOfTheYearFootball = new (300, "MAC Coach of the Year (Football)");
     public static readonly AwardType MACDefensivePlayerOfTheYear = new (123, "MAC Defensive Player of the Year (Football)");
@@ -197,10 +223,10 @@ public sealed class AwardType : DomainItemConstant
     public static readonly AwardType NBASportsmanshipAward = new (221, "NBA Sportsmanship Award");
     public static readonly AwardType NBAWesternConferenceFinalsMostValuablePlayer = new(334, "NBA Westerm Conference Finals Most Valuable Player");
     public static readonly AwardType NCAATournamentMostOutstandingPlayer = new(193, "NCAA Tournament Most Outstanding Player");    
-    public static readonly AwardType NEANFLRookieOfTheYear = new (307, "NEA NFL Rookie of the Year");    
+    public static readonly AwardType NEANFLRookieOfTheYear = new (307, "NEA NFL Rookie of the Year");
+    public static readonly AwardType NECPlayerOfTheYear = new(360, "NEC Player of the Year (Basketball)");
     public static readonly AwardType NFLPAAlanPageCommunityAward = new(158, "NFLPA Alan Page Community Award");
-    public static readonly AwardType NITMostValuablePlayer = new (196, "NIT Most Valuable Player", "NIT MVP");       
-    public static readonly AwardType NortheastConferencePlayerOfTheYear = new (360, "Northeast Conference Player of the Year (Basketball)");       
+    public static readonly AwardType NITMostValuablePlayer = new (196, "NIT Most Valuable Player", "NIT MVP");  
     public static readonly AwardType OscarRobertsonTrophy = new (224, "Oscar Robertson Trophy");   
     public static readonly AwardType OutlandTrophy = new (79, "Outland Trophy");
     public static readonly AwardType OzzieNewsomeAward = new(255, "Ozzie Newsome Award");   
@@ -308,19 +334,27 @@ public sealed class AwardType : DomainItemConstant
         ACCBaseballPlayerOfTheYear,
         ACCDefensivePlayerOfTheYear,
         ACCDefensiveRookieOfTheYear,
+        ACCFreshmanOfTheYearBaseball,
         ACCMaleAthleteOfTheYearBaseball,
         ACCMaleAthleteOfTheYearBasketball,
         ACCMaleAthleteOfTheYearFootball,
         ACCOffensivePlayerOfTheYear,
         ACCOffensiveRookieOfTheYear,
+        ACCPitcherOfTheYear,
         ACCPlayerOfTheYearBasketball,
         ACCPlayerOfTheYearFootball,
         ACCRookieOfTheYearBasketball,
         ACCRookieOfTheYearFootball,
         AdolphRuppTrophy,
-        AFLChampionshipMostValuablePlayer,
-        AFLMostValuablePlayer,
-        AFLRookieOfTheYear,        
+        AFLBreakoutPlayerOfTheYearBaseball,
+        AFLChampionshipMostValuablePlayerFootball,
+        AFLDefensivePlayerOfTheYearBaseball,
+        AFLHitterOfTheYearBaseball,
+        AFLMostValuablePlayerBaseball,
+        AFLMostValuablePlayerFootball,
+        AFLPitcherOfTheYearBaseball,
+        AFLRelieverOfTheYearBaseball,
+        AFLRookieOfTheYearFootball,        
         AmecheDayneRunningBackOfTheYear,
         AmericanLeagueChampionshipSeriesMostValuablePlayer,
         AmericanLeagueComebackPlayerOfTheYear,
@@ -342,16 +376,21 @@ public sealed class AwardType : DomainItemConstant
         AssociatedPressNFLMostValuablePlayer,
         AssociatedPressNFLOffensivePlayerOfTheYear,
         AssociatedPressNFLOffensiveRookieOfTheYear,
+        AssociatedPressPlayerOfTheYearBaseball,
         BabeRuthAward,
         BakkenAndersenKickerOfTheYear,
         BartStarrAward,
         BaseballAmericaCollegePlayerOfTheYear,
         BaseballAmericaMajorLeaguePlayerOfTheYear,
+        BaseballAmericaMinorLeaguePlayerOfTheYear,
+        BaseballDigestPitcherOfTheYear,
+        BaseballDigestPlayerOfTheYear,
         BertBellAward,
         BigEastDefensivePlayerOfTheYearBasketball,
         BigEastDefensivePlayerOfTheYearFootball,
         BigEastFreshmanOfTheYearBasketball,
         BigEastOffensivePlayerOfTheYearFootball,
+        BigEastPlayerOfTheYearBaseball,
         BigEastPlayerOfTheYearBasketball,
         BigEastRookieOfTheYearFootball,
         BigEastTournamentMostValuablePlayer,
@@ -369,6 +408,8 @@ public sealed class AwardType : DomainItemConstant
         BiletnikoffAward,
         BillWillisTrophy,
         BobCousyAward,
+        BobFellerActOfValorAward,
+        BranchRickeyAward,
         BrianPiccoloAward,
         BronkoNagurskiTrophy,
         BrooksWallaceAward,
@@ -402,6 +443,7 @@ public sealed class AwardType : DomainItemConstant
         FinalsMostValuablePlayer,
         FordKinnickLeadershipAward,
         FreshmanOfTheYearFootball,
+        FuturesGameMostValuablePlayer,
         GeorgeHalasAward,
         GoldenSpikes,
         GoldGlove,
@@ -413,14 +455,19 @@ public sealed class AwardType : DomainItemConstant
         HeismanTrophy,
         HelmsFoundationCollegeBasketballPlayerOfTheYear,
         HenryIbaAward,
+        HutchAward,
         IBMAward,
         JackLambertTrophy,
+        JackLangAward,
         JackTatumTrophy,
         JacobsBlockingTrophy,
         JerryWestAward,
         JimBrownAward,
         JimParkerTrophy,
         JimThorpeAward,
+        JoeBaumanHomeRunAward,
+        JoeCroninAward,
+        JoeDiMaggioToastOfTheTownAward,
         JoeFCarrTrophy,
         JohnMackeyAward,
         JohnnyUnitasGoldenArmAward,
@@ -435,8 +482,10 @@ public sealed class AwardType : DomainItemConstant
         KwalickClarkTightEndOfTheYear,
         LamarHuntAward,
         LombardiAward,
+        LouBrockAward,
         LouGehrigAward,
         LouGrozaAward,
+        LuisAparicioAward,
         LuteOlsonAward,
         MACDefensivePlayerOfTheYear,
         MACFreshmanPlayerOfTheYearFootball,
@@ -479,9 +528,9 @@ public sealed class AwardType : DomainItemConstant
         NBAWesternConferenceFinalsMostValuablePlayer,
         NCAATournamentMostOutstandingPlayer,
         NEANFLRookieOfTheYear,
+        NECPlayerOfTheYear,
         NFLPAAlanPageCommunityAward,
         NITMostValuablePlayer,
-        NortheastConferencePlayerOfTheYear,
         OscarRobertsonTrophy,
         OutlandTrophy,
         OzzieNewsomeAward,
@@ -577,7 +626,15 @@ public sealed class AwardType : DomainItemConstant
     public static readonly AwardType[] Baseball =
     {
         ACCBaseballPlayerOfTheYear,
+        ACCFreshmanOfTheYearBaseball,
         ACCMaleAthleteOfTheYearBaseball,
+        ACCPitcherOfTheYear,
+        AFLBreakoutPlayerOfTheYearBaseball,
+        AFLDefensivePlayerOfTheYearBaseball,
+        AFLHitterOfTheYearBaseball,
+        AFLMostValuablePlayerBaseball,
+        AFLPitcherOfTheYearBaseball,
+        AFLRelieverOfTheYearBaseball,
         AmericanLeagueChampionshipSeriesMostValuablePlayer,
         AmericanLeagueComebackPlayerOfTheYear,
         AmericanLeagueCyYoung,
@@ -587,9 +644,19 @@ public sealed class AwardType : DomainItemConstant
         AmericanLeagueRelieverOfTheYear,
         AmericanLeagueRolaidsReliefManAward,
         AmericanLeagueRookieOfTheYear,
+        AssociatedPressAmericanLeagueManagerOfTheYear,
+        AssociatedPressManagerOfTheYear,
+        AssociatedPressNationalLeagueManagerOfTheYear,
+        AssociatedPressPlayerOfTheYearBaseball,
         BabeRuthAward,
         BaseballAmericaCollegePlayerOfTheYear,
         BaseballAmericaMajorLeaguePlayerOfTheYear,
+        BaseballAmericaMinorLeaguePlayerOfTheYear,
+        BaseballDigestPitcherOfTheYear,
+        BaseballDigestPlayerOfTheYear,
+        BigEastPlayerOfTheYearBaseball,
+        BobFellerActOfValorAward,
+        BranchRickeyAward,
         BrooksWallaceAward,
         BusterPoseyAward,
         CollegeWorldSeriesMostOutstandingPlayer,
@@ -600,11 +667,19 @@ public sealed class AwardType : DomainItemConstant
         EdgarMartinezAward,
         FieldingBibleAward,
         FordFrickAward,
+        FuturesGameMostValuablePlayer,
         GoldenSpikes,
         GoldGlove,
         HeartAndHustleAward,
+        HutchAward,
+        JackLangAward,
+        JoeBaumanHomeRunAward,
+        JoeCroninAward,
+        JoeDiMaggioToastOfTheTownAward,
         JohnOlerudAward,
+        LouBrockAward,
         LouGehrigAward,
+        LuisAparicioAward,
         MajorLeagueBaseballRookieOfTheYear,
         MarvinMillerManOfTheYear,
         MLBAllStarGameMostValuablePlayer,
@@ -640,7 +715,15 @@ public sealed class AwardType : DomainItemConstant
     public static readonly AwardType[] BaseballAthlete =
     {
         ACCBaseballPlayerOfTheYear,
-        ACCMaleAthleteOfTheYearBaseball,        
+        ACCFreshmanOfTheYearBaseball,
+        ACCMaleAthleteOfTheYearBaseball,
+        ACCPitcherOfTheYear,
+        AFLBreakoutPlayerOfTheYearBaseball,
+        AFLDefensivePlayerOfTheYearBaseball,
+        AFLHitterOfTheYearBaseball,
+        AFLMostValuablePlayerBaseball,
+        AFLPitcherOfTheYearBaseball,
+        AFLRelieverOfTheYearBaseball,
         AmericanLeagueChampionshipSeriesMostValuablePlayer,
         AmericanLeagueComebackPlayerOfTheYear,
         AmericanLeagueCyYoung,
@@ -650,9 +733,16 @@ public sealed class AwardType : DomainItemConstant
         AmericanLeagueRolaidsReliefManAward,
         AmericanLeagueRookieOfTheYear,
         AssociatedPressMaleAthleteOfTheYear,
+        AssociatedPressPlayerOfTheYearBaseball,
         BabeRuthAward,
         BaseballAmericaCollegePlayerOfTheYear,
         BaseballAmericaMajorLeaguePlayerOfTheYear,
+        BaseballAmericaMinorLeaguePlayerOfTheYear,
+        BaseballDigestPitcherOfTheYear,
+        BaseballDigestPlayerOfTheYear,
+        BigEastPlayerOfTheYearBaseball,
+        BobFellerActOfValorAward,
+        BranchRickeyAward,
         BrooksWallaceAward,
         BusterPoseyAward,
         CollegeWorldSeriesMostOutstandingPlayer,
@@ -662,11 +752,19 @@ public sealed class AwardType : DomainItemConstant
         DickHowserTrophy,
         EdgarMartinezAward,
         FieldingBibleAward,
+        FuturesGameMostValuablePlayer,
         GoldenSpikes,
         GoldGlove,
         HeartAndHustleAward,
+        HutchAward,
+        JackLangAward,
+        JoeBaumanHomeRunAward,
+        JoeCroninAward,
+        JoeDiMaggioToastOfTheTownAward,
         JohnOlerudAward,
+        LouBrockAward,
         LouGehrigAward,
+        LuisAparicioAward,
         MajorLeagueBaseballRookieOfTheYear,
         MLBAllStarGameMostValuablePlayer,
         NationalLeagueChampionshipSeriesMostValuablePlayer,
@@ -698,12 +796,18 @@ public sealed class AwardType : DomainItemConstant
     public static readonly AwardType[] BaseballBroadcaster =
     {
         CommissionersHistoricAchievementAward,
-        FordFrickAward
+        FordFrickAward,
+        JackLangAward
     };
 
     public static readonly AwardType[] BaseballManager =
     {
         AmericanLeagueManagerOfTheYear,
+        AssociatedPressAmericanLeagueManagerOfTheYear,
+        AssociatedPressManagerOfTheYear,
+        AssociatedPressNationalLeagueManagerOfTheYear,
+        BranchRickeyAward,
+        JackLangAward,
         NationalLeagueManagerOfTheYear
     };
 
@@ -768,8 +872,8 @@ public sealed class AwardType : DomainItemConstant
         NBASportsmanshipAward,
         NBAWesternConferenceFinalsMostValuablePlayer,
         NCAATournamentMostOutstandingPlayer,
+        NECPlayerOfTheYear,
         NITMostValuablePlayer,
-        NortheastConferencePlayerOfTheYear,
         OscarRobertsonTrophy,
         Pac12PlayerOfTheYearBasketball,
         PeteNewellBigManAward,
@@ -848,8 +952,8 @@ public sealed class AwardType : DomainItemConstant
         NBASportsmanshipAward,
         NBAWesternConferenceFinalsMostValuablePlayer,
         NCAATournamentMostOutstandingPlayer,
+        NECPlayerOfTheYear,
         NITMostValuablePlayer,
-        NortheastConferencePlayerOfTheYear,
         OscarRobertsonTrophy,
         Pac12PlayerOfTheYearBasketball,
         PeteNewellBigManAward,
@@ -893,9 +997,9 @@ public sealed class AwardType : DomainItemConstant
         ACCOffensiveRookieOfTheYear,
         ACCPlayerOfTheYearFootball,
         ACCRookieOfTheYearFootball,
-        AFLChampionshipMostValuablePlayer,
-        AFLMostValuablePlayer,
-        AFLRookieOfTheYear,
+        AFLChampionshipMostValuablePlayerFootball,
+        AFLMostValuablePlayerFootball,
+        AFLRookieOfTheYearFootball,
         AmecheDayneRunningBackOfTheYear,
         ArchieGriffinAward,
         ArtRooneyAward,
@@ -1059,9 +1163,9 @@ public sealed class AwardType : DomainItemConstant
         ACCOffensiveRookieOfTheYear,
         ACCPlayerOfTheYearFootball,
         ACCRookieOfTheYearFootball,
-        AFLChampionshipMostValuablePlayer,
-        AFLMostValuablePlayer,
-        AFLRookieOfTheYear,
+        AFLChampionshipMostValuablePlayerFootball,
+        AFLMostValuablePlayerFootball,
+        AFLRookieOfTheYearFootball,
         AmecheDayneRunningBackOfTheYear,
         ArchieGriffinAward,
         ArtRooneyAward,
@@ -1237,7 +1341,7 @@ public sealed class AwardType : DomainItemConstant
         ACCOffensiveRookieOfTheYear,
         ACCRookieOfTheYearBasketball,
         ACCRookieOfTheYearFootball,
-        AFLRookieOfTheYear,
+        AFLRookieOfTheYearFootball,
         AmericanLeagueRookieOfTheYear,
         AssociatedPressNFLDefensiveRookieOfTheYear,
         AssociatedPressNFLOffensiveRookieOfTheYear,

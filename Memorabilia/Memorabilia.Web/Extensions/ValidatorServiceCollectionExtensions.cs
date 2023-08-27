@@ -4,7 +4,9 @@ public static class ValidatorServiceCollectionExtensions
 {
     public static void RegisterValidators(this IServiceCollection services)
     {
+        services.AddSingleton<AccomplishmentManagementValidator>();
         services.AddSingleton<AccoladeValidator>();
+        services.AddSingleton<AllStarManagementValidator>();
         services.AddSingleton<AuthenticationValidator>();
         services.AddSingleton<AutographValidator>();
         services.AddSingleton<AwardManagementValidator>();

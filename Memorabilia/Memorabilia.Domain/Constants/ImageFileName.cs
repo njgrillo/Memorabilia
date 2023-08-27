@@ -8,6 +8,9 @@ public static class ImageFileName
     public static string AcquisitionTypes 
         => "acquisitiontypes.jpg";
 
+    public static string AllStars
+        => "allstars.jpg";
+
     public static string Athletes 
         => "athletes.jpg";
 
@@ -295,6 +298,9 @@ public static class ImageFileName
 
     public static string TennisRacket 
         => "tennisracket.jpg";
+
+    public static string ThroughTheMailFailureTypes
+        => "throughthemailfailuretypes.jpg";
 
     public static string Ticket 
         => "ticket.jpg";

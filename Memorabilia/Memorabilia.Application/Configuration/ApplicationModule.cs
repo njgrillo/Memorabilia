@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Application.Configuration;
 
-public class ApplicationModule : Module
+public class ApplicationModule : Autofac.Module
 {
     protected override void Load(ContainerBuilder builder)
     {   

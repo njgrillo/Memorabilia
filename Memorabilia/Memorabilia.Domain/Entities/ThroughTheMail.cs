@@ -9,6 +9,7 @@ public class ThroughTheMail : Framework.Library.Domain.Entity.DomainEntity
         DateTime? sentDate,
         DateTime? receivedDate,
         string notes,
+        int? throughTheMailFailureTypeId,
         int userId)
     {
         PersonId = personId;
@@ -16,6 +17,7 @@ public class ThroughTheMail : Framework.Library.Domain.Entity.DomainEntity
         SentDate = sentDate;
         ReceivedDate = receivedDate;
         Notes = notes;
+        ThroughTheMailFailureTypeId = throughTheMailFailureTypeId;
         UserId = userId;
     }
 
@@ -34,6 +36,8 @@ public class ThroughTheMail : Framework.Library.Domain.Entity.DomainEntity
 
     public DateTime? SentDate { get; private set; }
 
+    public int? ThroughTheMailFailureTypeId { get; private set; }
+
     public int UserId { get; private set; } 
 
     public void RemoveMemorabilia(int[] memorabiliaIds)
@@ -47,12 +51,14 @@ public class ThroughTheMail : Framework.Library.Domain.Entity.DomainEntity
     public void Set(int? addressId,
         DateTime? sentDate,
         DateTime? receivedDate,
-        string notes)
+        string notes,
+        int? throughTheMailFailureTypeId)
     {
         AddressId = addressId;
         SentDate = sentDate;
         ReceivedDate = receivedDate;
         Notes = notes;
+        ThroughTheMailFailureTypeId = throughTheMailFailureTypeId;
     }
 
     public void SetMemorabilia(int id, 

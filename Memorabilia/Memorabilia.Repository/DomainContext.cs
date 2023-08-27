@@ -28,8 +28,10 @@ public class DomainContext : DbContext, IDomainContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        modelBuilder.Entity<Entity.AccomplishmentDetail>();
         modelBuilder.Entity<Entity.AccomplishmentType>();
         modelBuilder.Entity<Entity.AcquisitionType>();
+        modelBuilder.Entity<Entity.AllStarDetail>();
         modelBuilder.Entity<Entity.AuthenticationCompany>();           
         modelBuilder.Entity<Entity.AwardDetail>();
         modelBuilder.Entity<Entity.AwardExclusionYear>();
@@ -47,7 +49,7 @@ public class DomainContext : DbContext, IDomainContext
         modelBuilder.Entity<Entity.Condition>();
         modelBuilder.Entity<Entity.Conference>();
         modelBuilder.Entity<Entity.DashboardItem>();
-        modelBuilder.Entity<Entity.Division>();
+        modelBuilder.Entity<Entity.Division>();        
         modelBuilder.Entity<Entity.FigureSpecialtyType>();
         modelBuilder.Entity<Entity.FigureType>();
         modelBuilder.Entity<Entity.FootballType>();
@@ -109,6 +111,7 @@ public class DomainContext : DbContext, IDomainContext
         modelBuilder.Entity<Entity.TeamDivision>();
         modelBuilder.Entity<Entity.TeamLeague>();
         modelBuilder.Entity<Entity.TeamRoleType>();
+        modelBuilder.Entity<Entity.ThroughTheMailFailureType>();
         modelBuilder.Entity<Entity.User>();
         modelBuilder.Entity<Entity.UserDashboard>();
         modelBuilder.Entity<Entity.WritingInstrument>();

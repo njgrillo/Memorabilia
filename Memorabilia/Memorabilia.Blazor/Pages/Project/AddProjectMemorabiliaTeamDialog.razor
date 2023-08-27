@@ -6,6 +6,11 @@
                     <TeamSearchAutoComplete SelectedValue="ProjectMemorabiliaTeam.Team"
                                             SelectionChanged="(p) => ProjectMemorabiliaTeam.Team = p" />
                 </Div>
+                <Div Class="col-3">
+                    <NullableDecimalField Label="Estimated Cost"
+                                          Value="ProjectMemorabiliaTeam.EstimatedCost"
+                                          ValueChanged="@((p) => ProjectMemorabiliaTeam.EstimatedCost = p)" />
+                </Div>
             </Div>
             <br />
             <Div Class="row">

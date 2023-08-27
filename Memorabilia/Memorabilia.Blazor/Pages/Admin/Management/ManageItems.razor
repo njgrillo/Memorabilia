@@ -3,6 +3,46 @@
     <Div Class="col-4">
         <MudCard>
             <MudCardMedia Height="300"
+                          Image="@(ImageService.GetDomainImageData(ImageFileName.AccomplishmentTypes))" />
+            <MudCardContent>
+                <Text Typography="Typo.h5">
+                    Manage Accomplishments
+                </Text>
+                <Text Typography="Typo.body2">
+                    Allows you to manage accomplishments
+                </Text>
+            </MudCardContent>
+            <MudCardActions>
+                <CustomButton Color="MudBlazor.Color.Primary"
+                              OnClick="@(_ => NavigationManager.NavigateTo("/Admin/Management/Accomplishments/AccomplishmentManagement"))"
+                              Text="View"
+                              Variant="Variant.Text" />
+            </MudCardActions>
+        </MudCard>
+    </Div>
+    <Div Class="col-4">
+        <MudCard>
+            <MudCardMedia Height="300"
+                          Image="@(ImageService.GetDomainImageData(ImageFileName.AllStars))" />
+            <MudCardContent>
+                <Text Typography="Typo.h5">
+                    Manage All Stars
+                </Text>
+                <Text Typography="Typo.body2">
+                    Allows you to manage all stars
+                </Text>
+            </MudCardContent>
+            <MudCardActions>
+                <CustomButton Color="MudBlazor.Color.Primary"
+                              OnClick="@(_ => NavigationManager.NavigateTo("/Admin/Management/AllStars/AllStarManagement"))" 
+                              Text="View"
+                              Variant="Variant.Text" />
+            </MudCardActions>
+        </MudCard>
+    </Div>
+    <Div Class="col-4">
+        <MudCard>
+            <MudCardMedia Height="300"
                           Image="@(ImageService.GetDomainImageData(ImageFileName.AwardTypes))" />
             <MudCardContent>
                 <Text Typography="Typo.h5">
@@ -14,7 +54,7 @@
             </MudCardContent>
             <MudCardActions>
                 <CustomButton Color="MudBlazor.Color.Primary"
-                              OnClick="@(_ => NavigationManager.NavigateTo("/Admin/Management/Awards/AwardManagement"))" 
+                              OnClick="@(_ => NavigationManager.NavigateTo("/Admin/Management/Awards/AwardManagement"))"
                               Text="View"
                               Variant="Variant.Text" />
             </MudCardActions>

@@ -38,6 +38,8 @@ public class Startup
                     }
                 );
 
+        //services.ConfigureHangfire(Configuration);
+
         services.AddHttpContextAccessor();
         services.AddScoped<HttpContextAccessor>();
         services.AddHttpClient();

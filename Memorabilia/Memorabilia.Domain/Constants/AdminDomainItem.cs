@@ -66,6 +66,7 @@ public sealed class AdminDomainItem
     public static readonly AdminDomainItem Spots = new("Spots", "Defines variations of autograph spots", Constant.ImageFileName.Spots);
     public static readonly AdminDomainItem TeamRoleTypes = new("Team Role Types", "Defines the variations of roles in a team", Constant.ImageFileName.TeamRoleTypes);
     public static readonly AdminDomainItem Teams = new("Teams", "Defines teams", Constant.ImageFileName.Teams);
+    public static readonly AdminDomainItem ThroughTheMailFailureTypes = new("Through The Mail Failure Types", "Defines types of failure when sending items through the mail", Constant.ImageFileName.ThroughTheMailFailureTypes);
     public static readonly AdminDomainItem WritingInstruments = new("Writing Instruments", "Defines variations of writing instruments", Constant.ImageFileName.WritingInstruments);
 
     public static readonly AdminDomainItem[] All =
@@ -133,6 +134,7 @@ public sealed class AdminDomainItem
         Spots,
         TeamRoleTypes,
         Teams,
+        ThroughTheMailFailureTypes,
         WritingInstruments
     };
 

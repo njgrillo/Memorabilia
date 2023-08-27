@@ -15,6 +15,11 @@
                       Placeholder="Search" />
     </ToolBarContent>
     <HeaderContent>
+        <Condition Evaluation="@HasCompletedItems">
+            <Match>
+                <MudTh></MudTh>
+            </Match>
+        </Condition>        
         <MudTh></MudTh>
         <MudTh>Person</MudTh>
         <MudTh>Sent Date</MudTh>
@@ -31,6 +36,14 @@
         <MudTh></MudTh>
     </HeaderContent>
     <RowTemplate>
+        <Condition Evaluation="@HasCompletedItems">
+            <Match>
+                <MudTd DataLabel="">
+                    <MudIconButton @onclick="@(_ => ToggleChildContent(@context.Id))"
+                                   Icon="@context.ToggleIcon"></MudIconButton>
+                </MudTd>                
+            </Match>
+        </Condition>
         <MudTd DataLabel="">
             <MudImage @onclick="@(_ => ShowPersonProfile(context.Person.Id))"
                       Class="rounded-lg"
@@ -61,6 +74,58 @@
             </MudTooltip>
         </MudTd>
     </RowTemplate>
+    <ChildRowContent>
+        <Condition Evaluation="@context.DisplayMemorabiliaDetails">
+            <Match>
+                <tr />
+                <tr style="background-color:#6D7B8D;color:honeydew;border-style:dashed;border-width:2px;border-color:#ECF3F4;">
+                    <td align="center" colspan="17">
+                         Summary: Items Sent - <strong> @context.ItemsSentCount </strong>, Items Received - <strong> @(context.Memorabilia?.Count() ?? 0) </strong>, Total Cost - <strong> @(context.TotalCost?.ToString("c") ?? "$0.00") </strong>
+                    </td>
+                </tr>
+                <tr />
+                <tr style="margin-top: 1%; margin-bottom: 1%; margin-left: 1%; margin-right: 1%;">
+                    <td colspan="17">
+                        <MudTable Bordered="false"
+                                  Dense="false"
+                                  Hover="true"
+                                  Items="@(GetThroughTheMailMemorabiliaModels(context.Id))"
+                                  Striped="true">
+                            <ToolBarContent>
+                                <MudText Typo="Typo.h6">Memorabilia</MudText>
+                                <MudSpacer />
+                            </ToolBarContent>
+                            <HeaderContent>
+                                <MudTh></MudTh>
+                                <MudTh>Item</MudTh>
+                                <MudTh>Fee/Donation</MudTh>
+                                <MudTh></MudTh>
+                            </HeaderContent>
+                            <RowTemplate Context="memorabilia">
+                                    <MudTd DataLabel="">
+                                        <MudImage @onclick="@(_ => Navigate(memorabilia.NavigationPath))"
+                                                  Class="rounded-lg can-click"
+                                                  Elevation="5"
+                                                  Height="200"
+                                                  ObjectFit="@ObjectFit.Cover"
+                                                  Src="@(ImageService.GetUserImageData(memorabilia.PrimaryImageFileName))"
+                                                  Width="200" />
+                                    </MudTd>
+                                    <MudTd DataLabel="Item">@memorabilia.Memorabilia.ItemType.Name</MudTd>
+                                    <MudTd DataLabel="Fee/Donation">@(memorabilia.Cost?.ToString("c") ?? string.Empty)</MudTd>
+                                    <MudTd DataLabel="">
+                                        @(context.ReceivedDate.HasValue && memorabilia.IsExtraReceived ? "This was an extra received." : "")
+                                </MudTd>
+                            </RowTemplate>
+                            <PagerContent>
+                                <MudTablePager />
+                            </PagerContent>
+                        </MudTable>
+                    </td>
+                </tr>
+            </Match>
+        </Condition>
+    </ChildRowContent>
     <PagerContent>
         <MudTablePager />
     </PagerContent>

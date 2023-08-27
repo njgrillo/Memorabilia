@@ -16,7 +16,13 @@ public static class DomainExtensions
 
     public static Constant.Sport[] ToConstantArray(this List<Entity.PersonSport> personSports)
         => personSports.Select(sport => Constant.Sport.Find(sport.SportId))
-                       .ToArray();    
+                       .ToArray();
+
+    public static AccomplishmentManagementEditModel ToEditModel(this Entity.AccomplishmentDetail accomplishmentDetail)
+        => new(new AccomplishmentManagementModel(accomplishmentDetail));
+
+    public static AllStarManagementEditModel ToEditModel(this Entity.AllStarDetail allStarDetail)
+        => new(new AllStarManagementModel(allStarDetail));
 
     public static SpotEditModel ToEditModel(this Entity.Autograph autograph)
         => new(new SpotModel(autograph));

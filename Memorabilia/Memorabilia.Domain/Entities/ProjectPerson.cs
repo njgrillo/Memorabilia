@@ -11,6 +11,7 @@ public class ProjectPerson : Framework.Library.Domain.Entity.DomainEntity
                          int? rank, 
                          int? priorityTypeId,
                          int? projectStatusTypeId,
+                         decimal? estimatedCost,
                          int? memorabiliaId,
                          int? autographId)
     {
@@ -21,6 +22,7 @@ public class ProjectPerson : Framework.Library.Domain.Entity.DomainEntity
         Rank = rank;
         PriorityTypeId = priorityTypeId;
         ProjectStatusTypeId = projectStatusTypeId;
+        EstimatedCost = estimatedCost;
         MemorabiliaId = memorabiliaId;
         AutographId = autographId;
     }
@@ -28,6 +30,8 @@ public class ProjectPerson : Framework.Library.Domain.Entity.DomainEntity
     public virtual Autograph Autograph { get; set; }
 
     public int? AutographId { get; set; }
+
+    public decimal? EstimatedCost { get; set; }
 
     public int? ItemTypeId { get; set; }
 
@@ -55,6 +59,7 @@ public class ProjectPerson : Framework.Library.Domain.Entity.DomainEntity
         int? rank, 
         int? priorityTypeId,
         int? projectStatusTypeId,
+        decimal? estimatedCost,
         int? memorabliaId,
         int? autographId)
     {
@@ -64,6 +69,7 @@ public class ProjectPerson : Framework.Library.Domain.Entity.DomainEntity
         Rank = rank;
         PriorityTypeId = priorityTypeId;
         ProjectStatusTypeId = projectStatusTypeId;
+        EstimatedCost = estimatedCost;
         MemorabiliaId = memorabliaId;
         AutographId = autographId;
     }

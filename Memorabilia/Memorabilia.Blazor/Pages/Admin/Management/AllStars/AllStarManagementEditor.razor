@@ -1,0 +1,53 @@
+﻿<Div Style="margin-top:1%;margin-bottom:1%;margin-left:1%;margin-right:1%;">
+    <Condition Evaluation="@(ValidationResultAlerts.Any())">
+        <Match>
+            <AlertPanel Alerts="ValidationResultAlerts" />
+        </Match>
+    </Condition>
+    <Div Class="row">
+        <Div Class="col-12">
+            <h3>
+                All Star Management
+            </h3>
+        </Div>
+    </Div>
+    <DivRowFormGroup>
+        <Div Class="col-3">
+            <SkeletonLoader IsLoading="@(!_loaded)">
+                <SportLeagueLevelDropDown SelectedValue="EditModel.SportLeagueLevelId"
+                                          SelectionChanged="(p) => EditModel.SportLeagueLevelId = p" />
+            </SkeletonLoader>
+        </Div>
+        <Div Class="col-3">
+            <NullableIntField DisplaySkeleton="@(!_loaded)"
+                              Label="Year"
+                              Value="EditModel.Year"
+                              ValueChanged="@((p) => EditModel.Year = p)" />
+        </Div>
+        <Div Class="col-3">
+            <NullableIntField DisplaySkeleton="@(!_loaded)"
+                              Label="Number of Participants"
+                              Value="EditModel.NumberOfAllStars"
+                              ValueChanged="@((p) => EditModel.NumberOfAllStars = p)" />
+        </Div>
+        <Div Class="col-3">
+            <MonthDropDown SelectedValue="EditModel.MonthPlayed"
+                           SelectionChanged="@((p) => EditModel.MonthPlayed = p)" />
+        </Div>
+    </DivRowFormGroup>
+    <br />
+    <LeftRightSection>
+        <Right>
+            <MudStack Row="true"
+                      Style="margin-top:1%;margin-bottom:1%;">
+                <Div>
+                    <SaveButton OnClick="OnSave"
+                                Text="Save" />
+                </Div>
+            </MudStack>
+        </Right>
+    </LeftRightSection>
+    <PageFooter NavigationPath="/Admin/Management/AllStars/AllStarManagement"
+                NavigationPathText="Back" />
+</Div>
+

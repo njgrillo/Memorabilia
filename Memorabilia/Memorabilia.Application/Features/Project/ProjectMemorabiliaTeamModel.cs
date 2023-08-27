@@ -11,6 +11,9 @@ public class ProjectMemorabiliaTeamModel
         _projectMemorabiliaTeam = projectMemorabiliaTeam;
     }    
 
+    public decimal? EstimatedCost
+        => _projectMemorabiliaTeam.EstimatedCost;
+
     public int Id 
         => _projectMemorabiliaTeam.Id;
 

@@ -46,7 +46,12 @@
             <MudTableSortLabel SortBy="new Func<ProjectPersonEditModel, object>(x=>x.Upgrade)">
                 Upgrade
             </MudTableSortLabel>
-        </MudTh>        
+        </MudTh>    
+        <MudTh>
+            <MudTableSortLabel SortBy="new Func<ProjectPersonEditModel, object>(x=>x.EstimatedCost)">
+                Estimated Cost
+            </MudTableSortLabel>
+        </MudTh>
         <MudTh>
             <MudTableSortLabel SortBy="new Func<ProjectPersonEditModel, object>(x=>x.ProjectStatusTypeName)">
                 Status
@@ -86,6 +91,7 @@
         <MudTd DataLabel="Person">@projectPerson.Person.DisplayName</MudTd>
         <MudTd DataLabel="Deceased">@(projectPerson.Deceased ? "Yes" : "No")</MudTd>        
         <MudTd DataLabel="Upgrade">@(projectPerson.Upgrade ? "Yes" : "No")</MudTd>        
+        <MudTd DataLabel="EstimatedCost">@(projectPerson.EstimatedCost?.ToString("c") ?? string.Empty)</MudTd>
         <MudTd DataLabel="Status">@projectPerson.ProjectStatusTypeName</MudTd>
         <MudTd DataLabel="">
             <Condition Evaluation="@(projectPerson.AutographId > 0)">
@@ -174,7 +180,10 @@
             <BooleanCheckBox Checked="@context.Upgrade"
                              CheckedChanged="(p) => context.Upgrade = p"
                              Label="Is Upgrade" />
-        </MudTd>        
+        </MudTd>   
+        <MudTd DataLabel="EstimatedCost">
+            <MudNumericField @bind-Value="@context.EstimatedCost" />
+        </MudTd>
         <MudTd DataLabel="Status">
             <ProjectStatusTypeDropDown SelectedValue="@context.ProjectStatusTypeId"
                                        SelectionChanged="(p) => context.ProjectStatusTypeId = p" />

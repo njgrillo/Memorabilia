@@ -9,6 +9,7 @@ public class ProjectMemorabiliaTeam : Framework.Library.Domain.Entity.DomainEnti
                                   int? itemTypeId,
                                   bool upgrade,
                                   int? rank,
+                                  decimal? estimatedCost,
                                   int? priorityTypeId,
                                   int? projectStatusTypeId,
                                   int? memorabiliaId)
@@ -18,10 +19,13 @@ public class ProjectMemorabiliaTeam : Framework.Library.Domain.Entity.DomainEnti
         ItemTypeId = itemTypeId;
         Upgrade = upgrade;
         Rank = rank;
+        EstimatedCost = estimatedCost;
         PriorityTypeId = priorityTypeId;
         ProjectStatusTypeId = projectStatusTypeId;
         MemorabiliaId = memorabiliaId;
     }
+
+    public decimal? EstimatedCost { get; set; }
 
     public int? ItemTypeId { get; set; }
 
@@ -51,12 +55,14 @@ public class ProjectMemorabiliaTeam : Framework.Library.Domain.Entity.DomainEnti
                     int? rank,
                     int? priorityTypeId,
                     int? projectStatusTypeId,
+                    decimal? estimatedCost,
                     int? memorabliaId)
     {
         TeamId = teamId;
         ItemTypeId = itemTypeId;
         Upgrade = upgrade;
         Rank = rank;
+        EstimatedCost = estimatedCost;
         PriorityTypeId = priorityTypeId;
         ProjectStatusTypeId = projectStatusTypeId;
         MemorabiliaId = memorabliaId;

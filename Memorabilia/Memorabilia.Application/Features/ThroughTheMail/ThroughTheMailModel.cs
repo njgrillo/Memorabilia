@@ -11,8 +11,13 @@ public class ThroughTheMailModel
         _throughTheMail = throughTheMail;
     }
 
+    public bool DisplayMemorabiliaDetails { get; set; }
+
     public int Id 
         => _throughTheMail.Id;
+
+    public int ItemsSentCount
+        => Memorabilia?.Count(memorabilia => !memorabilia.IsExtraReceived) ?? 0;
 
     public string ItemSuccessCount
         => $"{Memorabilia.Length}/{Memorabilia.Count(item => !item.IsExtraReceived)}";
@@ -43,6 +48,15 @@ public class ThroughTheMailModel
                     : string.Empty))
            : string.Empty)
         : "Pending";
+
+    public int? ThroughTheMailFailureTypeId
+        => _throughTheMail.ThroughTheMailFailureTypeId;
+
+    public string ToggleIcon { get; set; }
+        = MudBlazor.Icons.Material.Filled.ExpandMore;
+
+    public decimal? TotalCost
+        => Memorabilia?.Sum(memorabilia => memorabilia.Cost) ?? 0;
 
     public int UserId
         => _throughTheMail.UserId;

@@ -21,6 +21,9 @@ public class ProjectPersonModel
                         .FirstOrDefault(image => image.ImageTypeId == Constant.ImageType.Primary.Id)?.FileName ?? string.Empty
         : string.Empty;
 
+    public decimal? EstimatedCost
+        => _projectPerson.EstimatedCost;
+
     public int Id 
         => _projectPerson.Id;
 

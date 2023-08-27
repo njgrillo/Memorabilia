@@ -4,14 +4,14 @@ public record GetTeamRoleTypes() : IQuery<Entity.TeamRoleType[]>
 {
     public class Handler : QueryHandler<GetTeamRoleTypes, Entity.TeamRoleType[]>
     {
-        private readonly IDomainRepository<Entity.TeamRoleType> _TeamRoleTypeRepository;
+        private readonly IDomainRepository<Entity.TeamRoleType> _repository;
 
-        public Handler(IDomainRepository<Entity.TeamRoleType> TeamRoleTypeRepository)
+        public Handler(IDomainRepository<Entity.TeamRoleType> repository)
         {
-            _TeamRoleTypeRepository = TeamRoleTypeRepository;
+            _repository = repository;
         }
 
         protected override async Task<Entity.TeamRoleType[]> Handle(GetTeamRoleTypes query)
-            => await _TeamRoleTypeRepository.GetAll();
+            => await _repository.GetAll();
     }
 }

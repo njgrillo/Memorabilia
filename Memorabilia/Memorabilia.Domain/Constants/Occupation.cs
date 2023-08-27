@@ -5,6 +5,7 @@ public sealed class Occupation : DomainItemConstant
     public static readonly Occupation Actor = new(2, "Actor");
     public static readonly Occupation Actress = new(3, "Actress");
     public static readonly Occupation Administrator = new(20, "Administrator");
+    public static readonly Occupation Announcer = new(24, "Announcer");
     public static readonly Occupation Astronaut = new(19, "Astronaut");
     public static readonly Occupation Athlete = new(1, "Athlete");
     public static readonly Occupation Broadcaster = new(5, "Broadcaster");
@@ -15,12 +16,16 @@ public sealed class Occupation : DomainItemConstant
     public static readonly Occupation Executive = new(15, "Executive");        
     public static readonly Occupation FamousRelative = new(22, "Famous Relative");        
     public static readonly Occupation GeneralManager = new(14, "General Manager");        
+    public static readonly Occupation Historian = new(27, "Historian");        
     public static readonly Occupation LeaguePresident = new(12, "League President");       
     public static readonly Occupation Manager = new(7, "Manager");       
     public static readonly Occupation Musician = new(18, "Musician");
     public static readonly Occupation Owner = new(13, "Owner");
     public static readonly Occupation Politician = new(16, "Politician");
     public static readonly Occupation President = new(17, "President");  
+    public static readonly Occupation SportsWriter = new(23, "Sports Writer");  
+    public static readonly Occupation Statistician = new(25, "Statistician");  
+    public static readonly Occupation Trainer = new(26, "Trainer");  
     public static readonly Occupation Umpire = new(21, "Umpire");  
 
     public static readonly Occupation[] All =
@@ -28,6 +33,7 @@ public sealed class Occupation : DomainItemConstant
         Actor,
         Actress,
         Administrator,
+        Announcer,
         Astronaut,
         Athlete,
         Broadcaster,
@@ -38,12 +44,16 @@ public sealed class Occupation : DomainItemConstant
         Executive,
         FamousRelative,
         GeneralManager,
+        Historian,
         LeaguePresident,
         Manager,
         Musician,
         Owner,
         Politician,
         President,
+        SportsWriter,
+        Statistician,
+        Trainer,
         Umpire
     };
 
@@ -54,6 +64,7 @@ public sealed class Occupation : DomainItemConstant
     public static readonly Occupation[] SportOccupations =
     {
         Administrator,
+        Announcer,
         Athlete,
         Broadcaster,
         Coach,
@@ -61,7 +72,11 @@ public sealed class Occupation : DomainItemConstant
         Executive,
         FamousRelative,
         GeneralManager,
-        Owner
+        Historian,
+        Owner,
+        SportsWriter,
+        Statistician,
+        Trainer
     };
 
     private Occupation(int id, string name, string abbreviation = null)

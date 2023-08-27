@@ -12,6 +12,9 @@ public partial class ThroughTheMailGrid
     public ImageService ImageService { get; set; }
 
     [Inject]
+    public NavigationManager NavigationManager { get; set; }
+
+    [Inject]
     public PersonFilterService PersonFilterService { get; set; }
 
     [Inject]
@@ -22,7 +25,9 @@ public partial class ThroughTheMailGrid
         = new();
 
     public bool HasCompletedItems
-        => Items.Any(item => item.ReceivedDate.HasValue);
+        => Items.Any(item => item.ReceivedDate.HasValue);   
+
+
 
     protected string Search { get; set; }
 
@@ -53,6 +58,17 @@ public partial class ThroughTheMailGrid
                PersonFilterService.Filter(model.Person, Search);
     }
 
+    protected ThroughTheMailMemorabiliaModel[] GetThroughTheMailMemorabiliaModels(int throughTheMailId)
+        => Items.Single(item => item.Id == throughTheMailId)
+                .Memorabilia
+                .Select(memorabilia => new ThroughTheMailMemorabiliaModel(memorabilia))
+                .ToArray();
+
+    protected void Navigate(string path)
+    {
+        NavigationManager.NavigateTo(path);
+    }
+
     protected async Task ShowDeleteConfirm(int id)
     {
         var dialog = DialogService.Show<DeleteDialog>("Delete TTM");
@@ -80,5 +96,15 @@ public partial class ThroughTheMailGrid
 
         var dialog = DialogService.Show<PersonProfileDialog>(string.Empty, parameters, options);
         var result = await dialog.Result;
+    }
+
+    private void ToggleChildContent(int throughTheMailId)
+    {
+        ThroughTheMailModel throughTheMail = Items.Single(item => item.Id == throughTheMailId);
+
+        throughTheMail.DisplayMemorabiliaDetails = !throughTheMail.DisplayMemorabiliaDetails;
+        throughTheMail.ToggleIcon = throughTheMail.DisplayMemorabiliaDetails
+            ? Icons.Material.Filled.ExpandLess
+            : Icons.Material.Filled.ExpandMore;
     }
 }

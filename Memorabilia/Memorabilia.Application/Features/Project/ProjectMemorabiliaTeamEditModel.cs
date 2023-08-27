@@ -10,6 +10,7 @@ public class ProjectMemorabiliaTeamEditModel : EditModel
         ItemTypeId = model.ItemTypeId ?? 0;
         Rank = model.Rank;
         Upgrade = model.Upgrade;
+        EstimatedCost = model.EstimatedCost;
         PriorityTypeId = model.PriorityTypeId ?? 0;
         ProjectStatusTypeId = model.ProjectStatusTypeId ?? 0;
         Team = model.Team;
@@ -33,6 +34,8 @@ public class ProjectMemorabiliaTeamEditModel : EditModel
 
     public string DownIcon 
         => MudBlazor.Icons.Material.Filled.ArrowDownward;
+
+    public decimal? EstimatedCost { get; set; }
 
     public int ItemTypeId { get; set; }
 

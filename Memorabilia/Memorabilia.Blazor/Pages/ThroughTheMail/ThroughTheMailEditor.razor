@@ -38,6 +38,16 @@
                                Variant="Variant.Outlined" />
             </SkeletonLoader>            
         </Div>
+        <Condition Evaluation="@(EditModel.ReceivedDate.HasValue)">
+            <Match>
+                <Div Class="col-3">
+                    <SkeletonLoader IsLoading="@(!Loaded)">
+                        <ThroughTheMailFailureTypeAutoComplete SelectedValue="EditModel.ThroughTheMailFailureType"
+                                                               SelectionChanged="(p) => EditModel.ThroughTheMailFailureType = p" />
+                    </SkeletonLoader>                    
+                </Div>
+            </Match>
+        </Condition>        
     </DivRowFormGroup>  
     <DivRowFormGroup>
         <Div Class="col-6">

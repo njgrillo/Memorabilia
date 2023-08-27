@@ -53,4 +53,7 @@ public class SearchCriteria
 
     public List<Entity.Team> Teams { get; set; } 
         = new();
+
+    public Constant.TradeFilter TradeFilter { get; set; }
+        = Constant.TradeFilter.None;
 }

@@ -41,7 +41,12 @@
             <MudTableSortLabel SortBy="new Func<ProjectMemorabiliaTeamEditModel, object>(x=>x.Upgrade)">
                 Upgrade
             </MudTableSortLabel>
-        </MudTh>        
+        </MudTh> 
+        <MudTh>
+            <MudTableSortLabel SortBy="new Func<ProjectMemorabiliaTeamEditModel, object>(x=>x.EstimatedCost)">
+                Estimated Cost
+            </MudTableSortLabel>
+        </MudTh>
         <MudTh>
             <MudTableSortLabel SortBy="new Func<ProjectMemorabiliaTeamEditModel, object>(x=>x.ProjectStatusTypeName)">
                 Status
@@ -84,6 +89,7 @@
         <MudTd DataLabel="Priority">@projectMemorabiliaTeam.PriorityTypeName</MudTd>
         <MudTd DataLabel="Team">@projectMemorabiliaTeam.Team.DisplayName</MudTd>
         <MudTd DataLabel="Upgrade">@(projectMemorabiliaTeam.Upgrade ? "Yes" : "No")</MudTd>
+        <MudTd DataLabel="EstimatedCost">@(projectMemorabiliaTeam.EstimatedCost?.ToString("c") ?? string.Empty)</MudTd>
         <MudTd DataLabel="Status">@projectMemorabiliaTeam.ProjectStatusTypeName</MudTd>
         <MudTd DataLabel="">
             <Condition Evaluation="@(projectMemorabiliaTeam.MemorabiliaId > 0)">
@@ -163,7 +169,10 @@
             <BooleanCheckBox Checked="@context.Upgrade"
                              CheckedChanged="(p) => context.Upgrade = p"
                              Label="Is Upgrade" />
-        </MudTd>        
+        </MudTd>   
+        <MudTd DataLabel="EstimatedCost">
+            <MudNumericField @bind-Value="@context.EstimatedCost" />
+        </MudTd>
         <MudTd DataLabel="Status">
             <ProjectStatusTypeDropDown SelectedValue="@context.ProjectStatusTypeId"
                                        SelectionChanged="(p) => context.ProjectStatusTypeId = p" />
