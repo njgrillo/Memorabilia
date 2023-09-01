@@ -1,0 +1,58 @@
+﻿<MudTable Bordered="false"
+          CanCancelEdit="true"
+          CommitEditTooltip="Save"
+          Dense="false"
+          Hover="true"
+          Items="@PartialTrades.Where(trade => !trade.IsDeleted).ToList()"
+          RowEditCancel="ResetItemToOriginalValues"
+          RowEditCommit="UpdatePartialTrade"
+          RowEditPreview="BackupItem"
+          Striped="true">
+    <HeaderContent>
+        <MudTh></MudTh>
+        <MudTh>Item</MudTh>
+        <MudTh>Type</MudTh>
+        <MudTh>Amount</MudTh>
+        <MudTh>Amount Type</MudTh>
+        <MudTh></MudTh>
+    </HeaderContent>
+    <RowTemplate>
+        <MudTd DataLabel="">
+            <GridImage ImageLoaded="OnImageLoaded"
+                       ImageFileName="@(context.Memorabilia.Images.FirstOrDefault(image => image.ImageTypeId == Constant.ImageType.Primary.Id)?.FileName ?? string.Empty)"
+                       NavigationPath="@($"Memorabilia/Image/Edit/{@context.Memorabilia.Id}")" />
+        </MudTd>
+        <MudTd DataLabel="Item">@context.Memorabilia.ItemType.Name</MudTd>
+        <MudTd DataLabel="Type">@context.TransactionTradeTypeName</MudTd>
+        <MudTd DataLabel="Amount">@(context.CashIncludedAmount?.ToString("c") ?? string.Empty)</MudTd>
+        <MudTd DataLabel="AmountType">@context.CashIncludedTypeName</MudTd>
+        <MudTd DataLabel="">
+            <MudTooltip Text="Delete">
+                <MudFab Color="MudBlazor.Color.Secondary"
+                        Icon="@Icons.Material.Outlined.DeleteOutline"
+                        OnClick="@(_ => context.IsDeleted = true)" />
+            </MudTooltip>
+        </MudTd>
+    </RowTemplate>
+    <RowEditingTemplate>
+        <MudTd DataLabel="">
+            <GridImage ImageLoaded="OnImageLoaded"
+                       ImageFileName="@(context.Memorabilia.Images.FirstOrDefault(image => image.ImageTypeId == Constant.ImageType.Primary.Id)?.FileName ?? string.Empty)"
+                       NavigationPath="@($"Memorabilia/Image/Edit/{@context.Memorabilia.Id}")" />
+        </MudTd>
+        <MudTd DataLabel="Item">@context.Memorabilia.ItemType.Name</MudTd>
+        <MudTd DataLabel="Type">
+            <TransactionTradeTypeDropDown SelectedValue="context.TransactionTradeTypeId"
+                                          SelectionChanged="(p) => context.TransactionTradeTypeId = p" />
+        </MudTd>
+        <MudTd DataLabel="Amount">
+            <NullableDecimalField Label="Amount ($)"
+                                  Value="context.CashIncludedAmount"
+                                  ValueChanged="@((p) => context.CashIncludedAmount = p)" />
+        </MudTd>
+        <MudTd DataLabel="AmountType">
+            <TransactionTradeTypeDropDown SelectedValue="context.CashIncludedTypeId"
+                                          SelectionChanged="(p) => context.CashIncludedTypeId = p" />
+        </MudTd>
+    </RowEditingTemplate>
+</MudTable>

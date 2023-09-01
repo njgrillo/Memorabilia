@@ -25,16 +25,14 @@ public partial class ProjectEditor
 
     protected bool Loaded;
 
-    protected ProjectEditModel Model 
+    protected ProjectEditModel EditModel 
         = new();
 
     protected Type ProjectTypeComponent;
 
-    protected ValidationResult ValidationResult { get; set; }
-
     protected Alert[] ValidationResultAlerts 
-        => ValidationResult != null
-        ? ValidationResult.Errors.Select(error => new Alert(error.ErrorMessage, Severity.Error)).ToArray()
+        => EditModel.ValidationResult.Errors?.Any() ?? false
+        ? EditModel.ValidationResult.Errors.Select(error => new Alert(error.ErrorMessage, Severity.Error)).ToArray()
         : Array.Empty<Alert>();    
 
     protected Dictionary<string, object> ProjectTypeParameters { get; set; } 
@@ -42,10 +40,10 @@ public partial class ProjectEditor
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
-        if (ValidationResult != null && !ValidationResult.IsValid)
-        {
-            await JSRuntime.ScrollToAlert();
-        }
+        if (EditModel.ValidationResult.IsValid)
+            return;
+
+        await JSRuntime.ScrollToAlert();
     }
 
     protected override async Task OnInitializedAsync()
@@ -55,7 +53,7 @@ public partial class ProjectEditor
 
         if (Id == 0)
         {
-            Model = new ProjectEditModel
+            EditModel = new ProjectEditModel
             {
                 UserId = ApplicationStateService.CurrentUser.Id
             };
@@ -63,9 +61,9 @@ public partial class ProjectEditor
             return;
         }
 
-        Model = new ProjectEditModel(new ProjectModel(await QueryRouter.Send(new GetProjectQuery(Id))));
+        EditModel = new ProjectEditModel(new ProjectModel(await QueryRouter.Send(new GetProjectQuery(Id))));
 
-        ProjectTypeComponent = Type.GetType($"Memorabilia.Blazor.Pages.Project.ProjectTypeComponents.{Model.ProjectType}Selector");
+        ProjectTypeComponent = Type.GetType($"Memorabilia.Blazor.Pages.Project.ProjectTypeComponents.{EditModel.ProjectType}Selector");
         
         SetProjectDetailsParameters();
 
@@ -74,78 +72,78 @@ public partial class ProjectEditor
 
     protected void OnProjectTypeSelected(ProjectType projectType)
     {
-        Model.ProjectType = projectType;
+        EditModel.ProjectType = projectType;
 
-        ProjectTypeComponent = Type.GetType($"Memorabilia.Blazor.Pages.Project.ProjectTypeComponents.{Model.ProjectType}Selector");
+        ProjectTypeComponent = Type.GetType($"Memorabilia.Blazor.Pages.Project.ProjectTypeComponents.{EditModel.ProjectType}Selector");
      }
 
     protected void OnProjectDetailsSet(Dictionary<string, object> parameters)
     {
         var projectTypeParameters = new Dictionary<string, object>();
 
-        switch (Model.ProjectType.ToString())
+        switch (EditModel.ProjectType.ToString())
         {
             case "BaseballType":
-                Model.Baseball.BaseballTypeId = (int)parameters["BaseballTypeId"];
+                EditModel.Baseball.BaseballTypeId = (int)parameters["BaseballTypeId"];
 
                 if (parameters.ContainsKey("TeamId"))
-                    Model.Baseball.TeamId = (int?)parameters["TeamId"];
+                    EditModel.Baseball.TeamId = (int?)parameters["TeamId"];
 
                 if (parameters.ContainsKey("Year"))
-                    Model.Baseball.Year = (int?)parameters["Year"];
+                    EditModel.Baseball.Year = (int?)parameters["Year"];
 
                 break;
             case "Card":
-                Model.Card.BrandId = (int)parameters["BrandId"];
+                EditModel.Card.BrandId = (int)parameters["BrandId"];
 
                 if (parameters.ContainsKey("TeamId"))
-                    Model.Card.TeamId = (int?)parameters["TeamId"];
+                    EditModel.Card.TeamId = (int?)parameters["TeamId"];
 
                 if (parameters.ContainsKey("Year"))
-                    Model.Card.Year = (int?)parameters["Year"];
+                    EditModel.Card.Year = (int?)parameters["Year"];
 
                 break;
             case "HallofFame":
-                Model.HallOfFame.SportLeagueLevelId = (int)parameters["SportLeagueLevelId"];
+                EditModel.HallOfFame.SportLeagueLevelId = (int)parameters["SportLeagueLevelId"];
 
                 if (parameters.ContainsKey("Year"))
-                    Model.HallOfFame.Year = (int?)parameters["Year"];
+                    EditModel.HallOfFame.Year = (int?)parameters["Year"];
 
                 if (parameters.ContainsKey("ItemTypeId"))
-                    Model.HallOfFame.ItemTypeId = (int?)parameters["ItemTypeId"];
+                    EditModel.HallOfFame.ItemTypeId = (int?)parameters["ItemTypeId"];
 
                 break;
             case "HelmetType":
-                Model.Helmet.HelmetTypeId = (int)parameters["HelmetTypeId"];
+                EditModel.Helmet.HelmetTypeId = (int)parameters["HelmetTypeId"];
 
                 if (parameters.ContainsKey("HelmetFinishId"))
-                    Model.Helmet.HelmetFinishId = (int?)parameters["HelmetFinishId"];
+                    EditModel.Helmet.HelmetFinishId = (int?)parameters["HelmetFinishId"];
 
                 if (parameters.ContainsKey("SizeId"))
-                    Model.Helmet.SizeId = (int?)parameters["SizeId"];
+                    EditModel.Helmet.SizeId = (int?)parameters["SizeId"];
 
                 break;
             case "ItemType":
-                Model.Item.ItemTypeId = (int)parameters["ItemTypeId"];
+                EditModel.Item.ItemTypeId = (int)parameters["ItemTypeId"];
 
                 if (parameters.ContainsKey("MultiSignedItem"))
-                    Model.Item.MultiSignedItem = (bool)parameters["MultiSignedItem"];
+                    EditModel.Item.MultiSignedItem = (bool)parameters["MultiSignedItem"];
 
                 break;
             case "Team":
-                Model.Team.TeamId = (int)parameters["TeamId"];
+                EditModel.Team.TeamId = (int)parameters["TeamId"];
 
                 if (parameters.ContainsKey("Year"))
-                    Model.Team.Year = (int?)parameters["Year"];
+                    EditModel.Team.Year = (int?)parameters["Year"];
                 break;
             case "WorldSeries":
-                Model.WorldSeries.TeamId = (int)parameters["TeamId"];
+                EditModel.WorldSeries.TeamId = (int)parameters["TeamId"];
 
                 if (parameters.ContainsKey("Year"))
-                    Model.WorldSeries.Year = (int?)parameters["Year"];
+                    EditModel.WorldSeries.Year = (int?)parameters["Year"];
 
                 if (parameters.ContainsKey("ItemTypeId"))
-                    Model.WorldSeries.ItemTypeId = (int?)parameters["ItemTypeId"];
+                    EditModel.WorldSeries.ItemTypeId = (int?)parameters["ItemTypeId"];
 
                 break;
             default:
@@ -155,11 +153,11 @@ public partial class ProjectEditor
 
     protected async Task OnSave()
     {
-        var command = new SaveProject.Command(Model);
+        var command = new SaveProject.Command(EditModel);
 
-        Model.ValidationResult = Validator.Validate(command);
+        EditModel.ValidationResult = Validator.Validate(command);
 
-        if (!Model.ValidationResult.IsValid)
+        if (!EditModel.ValidationResult.IsValid)
             return;
 
         await CommandRouter.Send(command);
@@ -172,90 +170,90 @@ public partial class ProjectEditor
 
     protected async Task GetProjectMemorabiliaTeamUpdatedIds()
     {
-        if (!Model.MemorabiliaTeams.Any())
+        if (!EditModel.MemorabiliaTeams.Any())
             return;
 
         ProjectEditModel editModel = (await QueryRouter.Send(new GetProjectQuery(Id))).ToEditModel();
 
-        Model.MemorabiliaTeams = editModel.MemorabiliaTeams;
+        EditModel.MemorabiliaTeams = editModel.MemorabiliaTeams;
     }
 
     protected async Task GetProjectPersonUpdatedIds()
     {
-        if (!Model.People.Any())
+        if (!EditModel.People.Any())
             return;
 
         ProjectEditModel editModel = (await QueryRouter.Send(new GetProjectQuery(Id))).ToEditModel();
 
-        Model.People = editModel.People;
+        EditModel.People = editModel.People;
     }
 
     protected void SetProjectDetailsParameters()
     {
-        ProjectTypeParameters.Add("Disabled", Model.Id > 0);
+        ProjectTypeParameters.Add("Disabled", EditModel.Id > 0);
 
-        switch (Model.ProjectType.ToString())
+        switch (EditModel.ProjectType.ToString())
         {
             case "BaseballType":
-                ProjectTypeParameters.Add("BaseballTypeId", Model.Baseball.BaseballTypeId);
+                ProjectTypeParameters.Add("BaseballTypeId", EditModel.Baseball.BaseballTypeId);
 
-                if (Model.Baseball.TeamId.HasValue)
-                    ProjectTypeParameters.Add("TeamId", Model.Baseball.TeamId);
+                if (EditModel.Baseball.TeamId.HasValue)
+                    ProjectTypeParameters.Add("TeamId", EditModel.Baseball.TeamId);
 
-                if (Model.Baseball.Year.HasValue)
-                    ProjectTypeParameters.Add("Year", Model.Baseball.Year);
+                if (EditModel.Baseball.Year.HasValue)
+                    ProjectTypeParameters.Add("Year", EditModel.Baseball.Year);
 
                 break;
             case "Card":
-                ProjectTypeParameters.Add("BrandId", Model.Card.BrandId);
+                ProjectTypeParameters.Add("BrandId", EditModel.Card.BrandId);
 
-                if (Model.Card.TeamId.HasValue)
-                    ProjectTypeParameters.Add("TeamId", Model.Card.TeamId);
+                if (EditModel.Card.TeamId.HasValue)
+                    ProjectTypeParameters.Add("TeamId", EditModel.Card.TeamId);
 
-                if (Model.Card.Year.HasValue)
-                    ProjectTypeParameters.Add("Year", Model.Card.Year);
+                if (EditModel.Card.Year.HasValue)
+                    ProjectTypeParameters.Add("Year", EditModel.Card.Year);
 
                 break;
             case "HallofFame":
-                ProjectTypeParameters.Add("SportLeagueLevelId", Model.HallOfFame.SportLeagueLevelId);
+                ProjectTypeParameters.Add("SportLeagueLevelId", EditModel.HallOfFame.SportLeagueLevelId);
 
-                if (Model.HallOfFame.ItemTypeId.HasValue)
-                    ProjectTypeParameters.Add("ItemTypeId", Model.HallOfFame.ItemTypeId);
+                if (EditModel.HallOfFame.ItemTypeId.HasValue)
+                    ProjectTypeParameters.Add("ItemTypeId", EditModel.HallOfFame.ItemTypeId);
 
-                if (Model.HallOfFame.Year.HasValue)
-                    ProjectTypeParameters.Add("Year", Model.HallOfFame.Year);
+                if (EditModel.HallOfFame.Year.HasValue)
+                    ProjectTypeParameters.Add("Year", EditModel.HallOfFame.Year);
 
                 break;
             case "HelmetType":
-                ProjectTypeParameters.Add("HelmetTypeId", Model.Helmet.HelmetTypeId);
+                ProjectTypeParameters.Add("HelmetTypeId", EditModel.Helmet.HelmetTypeId);
 
-                if (Model.Helmet.HelmetFinishId.HasValue)
-                    ProjectTypeParameters.Add("HelmetFinishId", Model.Helmet.HelmetFinishId);
+                if (EditModel.Helmet.HelmetFinishId.HasValue)
+                    ProjectTypeParameters.Add("HelmetFinishId", EditModel.Helmet.HelmetFinishId);
 
-                if (Model.Helmet.SizeId.HasValue)
-                    ProjectTypeParameters.Add("SizeId", Model.Helmet.SizeId);
+                if (EditModel.Helmet.SizeId.HasValue)
+                    ProjectTypeParameters.Add("SizeId", EditModel.Helmet.SizeId);
 
                 break;
             case "ItemType":
-                ProjectTypeParameters.Add("ItemTypeId", Model.Item.ItemTypeId);
-                ProjectTypeParameters.Add("MultiSignedItem", Model.Item.MultiSignedItem);
+                ProjectTypeParameters.Add("ItemTypeId", EditModel.Item.ItemTypeId);
+                ProjectTypeParameters.Add("MultiSignedItem", EditModel.Item.MultiSignedItem);
 
                 break;
             case "Team":
-                ProjectTypeParameters.Add("TeamId", Model.Team.TeamId);
+                ProjectTypeParameters.Add("TeamId", EditModel.Team.TeamId);
 
-                if (Model.Team.Year.HasValue)
-                    ProjectTypeParameters.Add("Year", Model.Team.Year);
+                if (EditModel.Team.Year.HasValue)
+                    ProjectTypeParameters.Add("Year", EditModel.Team.Year);
 
                 break;
             case "WorldSeries":
-                ProjectTypeParameters.Add("TeamId", Model.WorldSeries.TeamId);
+                ProjectTypeParameters.Add("TeamId", EditModel.WorldSeries.TeamId);
 
-                if (Model.WorldSeries.ItemTypeId.HasValue)
-                    ProjectTypeParameters.Add("ItemTypeId", Model.WorldSeries.ItemTypeId);
+                if (EditModel.WorldSeries.ItemTypeId.HasValue)
+                    ProjectTypeParameters.Add("ItemTypeId", EditModel.WorldSeries.ItemTypeId);
 
-                if (Model.WorldSeries.Year.HasValue)
-                    ProjectTypeParameters.Add("Year", Model.WorldSeries.Year);
+                if (EditModel.WorldSeries.Year.HasValue)
+                    ProjectTypeParameters.Add("Year", EditModel.WorldSeries.Year);
 
                 break;
             default:

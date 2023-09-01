@@ -308,6 +308,9 @@ public static class ImageFileName
     public static string TradingCard 
         => "tradingcard.jpg";
 
+    public static string TransactionTypes
+        => "transactiontypes.jpg";
+
     public static string Trunks 
         => "trunks.jpg";
 

@@ -219,22 +219,4 @@ public partial class ProjectMemorabiliaTeamGrid
 
         StateHasChanged();
     }
-
-    private async Task ViewImages(ProjectMemorabiliaTeamEditModel projectMemorabiliaTeam)
-    {
-        var parameters = new DialogParameters
-        {
-            ["MemorabiliaId"] = projectMemorabiliaTeam.MemorabiliaId
-        };
-
-        var options = new DialogOptions()
-        {
-            MaxWidth = MaxWidth.Small,
-            DisableBackdropClick = true
-        };
-
-        var dialog = DialogService.Show<MemorabiliaImageCarouselViewerDialog>(string.Empty, parameters, options);
-        
-        await dialog.Result;
-    }
 }

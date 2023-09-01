@@ -1,4 +1,5 @@
-﻿<MudTable Bordered="false"
+﻿@using Memorabilia.Blazor.Pages.Autograph
+<MudTable Bordered="false"
           CanCancelEdit="true"
           CommitEditTooltip="Save"
           Dense="false"
@@ -126,12 +127,8 @@
         <MudTd DataLabel="">
             <Condition Evaluation="@(projectMemorabiliaTeam.MemorabiliaId > 0)">
                 <Match>
-                    <MudTooltip Text="View Images">
-                        <MudFab Color="MudBlazor.Color.Secondary"
-                                Icon="@Icons.Material.Outlined.Image"
-                                OnClick="@(_ => ViewImages(projectMemorabiliaTeam))"
-                                Size="@MudBlazor.Size.Small" />
-                    </MudTooltip>
+                    <ViewMemorabiliaImagesFab MemorabiliaId="projectMemorabiliaTeam.MemorabiliaId"
+                                              Size="MudBlazor.Size.Small" />
                 </Match>
             </Condition>
         </MudTd>
@@ -212,12 +209,8 @@
         <MudTd DataLabel="">
             <Condition Evaluation="@(context.MemorabiliaId > 0)">
                 <Match>
-                    <MudTooltip Text="View All Images">
-                        <MudFab Color="MudBlazor.Color.Secondary"
-                                Icon="@Icons.Material.Outlined.Image"
-                                OnClick="@(_ => ViewImages(context))"
-                                Size="@MudBlazor.Size.Small" />
-                    </MudTooltip>
+                    <ViewMemorabiliaImagesFab MemorabiliaId="context.MemorabiliaId"
+                                              Size="MudBlazor.Size.Small" />
                 </Match>
             </Condition>
         </MudTd>

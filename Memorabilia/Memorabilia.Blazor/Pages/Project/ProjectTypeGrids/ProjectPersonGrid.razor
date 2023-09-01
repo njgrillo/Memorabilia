@@ -128,12 +128,8 @@
         <MudTd DataLabel="">
             <Condition Evaluation="@(projectPerson.AutographId > 0)">
                 <Match>
-                    <MudTooltip Text="View All Images">
-                        <MudFab Color="MudBlazor.Color.Secondary"
-                                Icon="@Icons.Material.Outlined.Image"
-                                OnClick="@(_ => ViewImages(projectPerson))"
-                                Size="@MudBlazor.Size.Small" />
-                    </MudTooltip>
+                    <ViewAutographImagesFab AutographId="projectPerson.AutographId"
+                                            Size="MudBlazor.Size.Small" />
                 </Match>
             </Condition>
         </MudTd>
@@ -221,14 +217,10 @@
             </Condition>            
         </MudTd>
         <MudTd DataLabel="">
-                <Condition Evaluation="@(context.AutographId > 0)">
+            <Condition Evaluation="@(context.AutographId > 0)">
                 <Match>
-                    <MudTooltip Text="View All Images">
-                        <MudFab Color="MudBlazor.Color.Secondary"
-                                Icon="@Icons.Material.Outlined.Image"
-                                OnClick="@(_ => ViewImages(context))"
-                                Size="@MudBlazor.Size.Small" />
-                    </MudTooltip>
+                    <ViewAutographImagesFab AutographId="context.AutographId"
+                                            Size="MudBlazor.Size.Small" />
                 </Match>
             </Condition>
         </MudTd>

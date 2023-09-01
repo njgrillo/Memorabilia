@@ -22,8 +22,12 @@ a, .btn-link {
     outline: 1px solid #26b050;
 }
 
+.cant-click {
+    cursor: default!important;
+}
+
 .can-click{
-    cursor:pointer;
+    cursor: pointer;
 }
 
 .invalid {

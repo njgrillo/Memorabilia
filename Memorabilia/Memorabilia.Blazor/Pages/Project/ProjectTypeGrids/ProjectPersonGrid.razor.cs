@@ -282,22 +282,4 @@ public partial class ProjectPersonGrid
 
         StateHasChanged();
     }
-
-    private async Task ViewImages(ProjectPersonEditModel projectPerson)
-    {
-        var parameters = new DialogParameters
-        {
-            ["AutographId"] = projectPerson.AutographId
-        };
-
-        var options = new DialogOptions()
-        {
-            MaxWidth = MaxWidth.Small,
-            DisableBackdropClick = true
-        };
-
-        var dialog = DialogService.Show<AutographImageCarouselViewerDialog>(string.Empty, parameters, options);
-
-        await dialog.Result;
-    }
 }

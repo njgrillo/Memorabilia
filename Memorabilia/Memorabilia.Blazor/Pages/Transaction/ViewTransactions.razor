@@ -1,0 +1,72 @@
+﻿<PageView AddRoute="/Transactions/Edit/0"
+          AddTitle="Add Transaction"
+          DisplayPageHeader="false"
+          NavigationPath="/Transactions"
+          PageTitle="Transactions">
+    <DivPad2>
+        <TabControl>
+            <MudTabPanel BadgeColor="MudBlazor.Color.Success"
+                         BadgeData="_purchaseCount" 
+                         Text="Purchases">
+                <Condition Evaluation="_displayPurchaseFilter">
+                    <Match>
+                        <DivRowCol12>
+                            <MemorabiliaFilter DisplayAcquisitionType="false"
+                                               OnFilter="OnFilter" />
+                        </DivRowCol12>
+                    </Match>
+                </Condition>
+                <DivRowCol12>
+                    <PurchaseGrid Filter="_filter" />
+                </DivRowCol12>
+            </MudTabPanel>
+            <MudTabPanel BadgeColor="MudBlazor.Color.Success"
+                         BadgeData="_soldCount" 
+                         Text="Sales">
+                <Condition Evaluation="_displaySoldFilter">
+                    <Match>
+                        <DivRowCol12>
+                            <MemorabiliaFilter OnFilter="OnFilter" />
+                        </DivRowCol12>
+                    </Match>
+                </Condition>                
+                <DivRowCol12>
+                    <SalesGrid Filter="_filter"
+                               TransactionDeleted="OnSalesTransactionDeleted" />
+                </DivRowCol12>
+            </MudTabPanel>
+            <MudTabPanel BadgeColor="MudBlazor.Color.Success"
+                         BadgeData="_tradedCount" 
+                         Text="Trades">
+                <Condition Evaluation="_displayTradeFilter">
+                    <Match>
+                        <DivRowCol12>
+                            <MemorabiliaFilter DisplayAcquisitionType="false"
+                                               OnFilter="OnFilter" />
+                        </DivRowCol12>
+                    </Match>
+                </Condition>                
+                <DivRowCol12>
+                    <TradeGrid Filter="_filter"
+                               TransactionDeleted="OnTradeTransactionDeleted" />
+                </DivRowCol12>
+            </MudTabPanel>
+            <MudTabPanel BadgeColor="MudBlazor.Color.Success"
+                         BadgeData="_partialTradeCount"
+                         Text="Partial Trades">
+                <Condition Evaluation="_displayPartialTradeFilter">
+                    <Match>
+                        <DivRowCol12>
+                            <MemorabiliaFilter DisplayAcquisitionType="false"
+                                               OnFilter="OnFilter" />
+                        </DivRowCol12>
+                    </Match>
+                </Condition>
+                <DivRowCol12>
+                    <PartialTradeGrid Filter="_filter"
+                                      TransactionDeleted="OnPartialTradeTransactionDeleted" />
+                </DivRowCol12>
+            </MudTabPanel>
+        </TabControl>
+    </DivPad2>
+</PageView>

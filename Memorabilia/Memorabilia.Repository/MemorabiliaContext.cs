@@ -6,6 +6,12 @@ public class MemorabiliaContext : DbContext, IMemorabiliaContext
 
     public DbSet<Entity.Memorabilia> Memorabilia { get; set; }
 
+    public DbSet<Entity.MemorabiliaTransaction> MemorabiliaTransaction { get; set; }
+
+    public DbSet<Entity.MemorabiliaTransactionSale> MemorabiliaTransactionSale { get; set; }
+
+    public DbSet<Entity.MemorabiliaTransactionTrade> MemorabiliaTransactionTrade { get; set; }
+
     public MemorabiliaContext(DbContextOptions<MemorabiliaContext> options) 
         : base(options) { }        
 
@@ -61,6 +67,9 @@ public class MemorabiliaContext : DbContext, IMemorabiliaContext
         modelBuilder.Entity<Entity.MemorabiliaSize>();
         modelBuilder.Entity<Entity.MemorabiliaSport>();
         modelBuilder.Entity<Entity.MemorabiliaTeam>();
+        modelBuilder.Entity<Entity.MemorabiliaTransaction>();
+        modelBuilder.Entity<Entity.MemorabiliaTransactionSale>();
+        modelBuilder.Entity<Entity.MemorabiliaTransactionTrade>();
         modelBuilder.Entity<Entity.Personalization>();          
         modelBuilder.Entity<Entity.Project>();          
         modelBuilder.Entity<Entity.ProjectBaseball>();          
@@ -73,6 +82,6 @@ public class MemorabiliaContext : DbContext, IMemorabiliaContext
         modelBuilder.Entity<Entity.ProjectTeam>();         
         modelBuilder.Entity<Entity.ProjectWorldSeries>();         
         modelBuilder.Entity<Entity.ThroughTheMail>();         
-        modelBuilder.Entity<Entity.ThroughTheMailMemorabilia>();         
+        modelBuilder.Entity<Entity.ThroughTheMailMemorabilia>();  
     }
 }

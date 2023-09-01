@@ -40,6 +40,7 @@ public static class ValidatorServiceCollectionExtensions
         services.AddSingleton<LithographValidator>();
         services.AddSingleton<MagazineValidator>();
         services.AddSingleton<MemorabiliaItemValidator>();
+        services.AddSingleton<MemorabiliaTransactionValidator>();
         services.AddSingleton<PaintingValidator>();
         services.AddSingleton<PantValidator>();
         services.AddSingleton<PersonValidator>();

@@ -29,11 +29,13 @@ public class Project : Framework.Library.Domain.Entity.DomainEntity
 
     public virtual ProjectItem Item { get; set; }
 
-    public virtual List<ProjectMemorabiliaTeam> MemorabiliaTeams { get; set; } = new();
+    public virtual List<ProjectMemorabiliaTeam> MemorabiliaTeams { get; set; }
+        = new();
 
     public string Name { get; set; }
 
-    public virtual List<ProjectPerson> People { get; set; } = new();
+    public virtual List<ProjectPerson> People { get; set; } 
+        = new();
 
     public int ProjectTypeId { get; set; }
 

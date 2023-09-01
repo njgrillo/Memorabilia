@@ -31,28 +31,26 @@ public partial class CollectionEditor
 
     protected bool Loaded;
 
-    protected CollectionEditModel Model 
+    protected CollectionEditModel EditModel 
         = new();
 
     protected List<MemorabiliaModel> SelectedMemorabilia 
         = new();
 
-    protected ValidationResult ValidationResult { get; set; }
-
     protected Alert[] ValidationResultAlerts 
-        => ValidationResult != null
-        ? ValidationResult.Errors.Select(error => new Alert(error.ErrorMessage, Severity.Error)).ToArray()
-        : Array.Empty<Alert>();     
+        => EditModel.ValidationResult.Errors?.Any() ?? false
+            ? EditModel.ValidationResult.Errors.Select(error => new Alert(error.ErrorMessage, Severity.Error)).ToArray()
+            : Array.Empty<Alert>();     
 
     private MemorabiliaSearchCriteria _filter 
         = new();
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
-        if (ValidationResult != null && !ValidationResult.IsValid)
-        {
-            await JSRuntime.ScrollToAlert();
-        }
+        if (EditModel.ValidationResult.IsValid)
+            return;
+
+        await JSRuntime.ScrollToAlert();
     }
 
     protected void OnFilter(MemorabiliaSearchCriteria filter)
@@ -64,7 +62,7 @@ public partial class CollectionEditor
     {
         if (Id == 0)
         {
-            Model = new CollectionEditModel
+            EditModel = new CollectionEditModel
             {
                 UserId = ApplicationStateService.CurrentUser.Id
             };
@@ -101,11 +99,11 @@ public partial class CollectionEditor
         List<CollectionMemorabiliaEditModel> collectionMemorabilias
             = items.Select(item => new CollectionMemorabiliaEditModel
             {
-                CollectionId = Model.Id,
+                CollectionId = EditModel.Id,
                 MemorabiliaId = item.Id
             }).ToList();
 
-        Model.Items.AddRange(collectionMemorabilias);
+        EditModel.Items.AddRange(collectionMemorabilias);
 
         await OnSave();
         await Load();
@@ -115,16 +113,16 @@ public partial class CollectionEditor
     {
         Entity.Collection collection = await QueryRouter.Send(new GetCollection(Id));
 
-        Model = new CollectionEditModel(collection);
+        EditModel = new CollectionEditModel(collection);
     }
 
     protected async Task OnSave()
     {
-        var command = new SaveCollection.Command(Model);
+        var command = new SaveCollection.Command(EditModel);
 
-        Model.ValidationResult = Validator.Validate(command);
+        EditModel.ValidationResult = Validator.Validate(command);
 
-        if (!Model.ValidationResult.IsValid)
+        if (!EditModel.ValidationResult.IsValid)
             return;
 
         await CommandRouter.Send(command);

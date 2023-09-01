@@ -8,5 +8,6 @@ public class MemorabiliaImageRepository
 
     public async Task<Entity.MemorabiliaImage[]> GetAll(int memorabiliaId)
         => await Items.Where(memorabiliaImage => memorabiliaImage.MemorabiliaId == memorabiliaId)
+                      .OrderBy(memorabiliaImage => memorabiliaImage.ImageTypeId)
                       .ToArrayAsync();
 }

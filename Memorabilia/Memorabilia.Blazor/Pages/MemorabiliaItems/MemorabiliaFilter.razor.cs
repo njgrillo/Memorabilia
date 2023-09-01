@@ -3,10 +3,37 @@
 public partial class MemorabiliaFilter
 {
     [Parameter]
+    public bool DisplayAcquisitionType { get; set; }
+        = true;
+
+    [Parameter]
+    public int[] InitialAcquistionTypeIds { get; set; }
+        = Array.Empty<int>();
+
+    [Parameter]
     public EventCallback<MemorabiliaSearchCriteria> OnFilter { get; set; }
+
+    protected bool HasInitialFilters
+        => InitialAcquistionTypeIds.Length > 0;
 
     protected MemorabiliaSearchCriteria Model { get; set; } 
         = new();
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (!firstRender || !HasInitialFilters)
+            return;
+
+        await FilterItems();
+    }
+
+    protected override void OnParametersSet()
+    {
+        if (InitialAcquistionTypeIds.Any())
+        {
+            Model.AcquisitionTypeIds = InitialAcquistionTypeIds;
+        }            
+    }
 
     protected async Task FilterItems()
     {

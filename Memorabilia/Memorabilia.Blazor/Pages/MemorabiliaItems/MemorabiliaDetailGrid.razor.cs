@@ -46,7 +46,10 @@ public partial class MemorabiliaDetailGrid
     protected string SelectAllButtonText
         => Model.MemorabiliaItems.Count == SelectedMemorabilia.Count
            ? "Deselect All"
-           : "Select All";      
+           : "Select All";
+
+    private MemorabiliaSearchCriteria _filter
+        = new();
 
     private bool _resetPaging;
 
@@ -55,7 +58,11 @@ public partial class MemorabiliaDetailGrid
 
     protected override async Task OnParametersSetAsync()
     {
+        if (_filter == Filter)
+            return;
+
         _resetPaging = true;
+        _filter = Filter;
 
         await _table.ReloadServerData();
         
@@ -174,41 +181,5 @@ public partial class MemorabiliaDetailGrid
         memorabiliaItem.ToggleIcon = memorabiliaItem.DisplayAutographDetails
             ? Icons.Material.Filled.ExpandLess
             : Icons.Material.Filled.ExpandMore;
-    }
-
-    private async Task ViewAutographImages(AutographModel autographModel)
-    {
-        var parameters = new DialogParameters
-        {
-            ["AutographId"] = autographModel.Id
-        };
-
-        var options = new DialogOptions()
-        {
-            MaxWidth = MaxWidth.Small,
-            DisableBackdropClick = true
-        };
-
-        var dialog = DialogService.Show<AutographImageCarouselViewerDialog>(string.Empty, parameters, options);
-
-        await dialog.Result;
-    }
-
-    private async Task ViewMemorabiliaImages(MemorabiliaModel memorabiliaItemModel)
-    {
-        var parameters = new DialogParameters
-        {
-            ["MemorabiliaId"] = memorabiliaItemModel.Id
-        };
-
-        var options = new DialogOptions()
-        {
-            MaxWidth = MaxWidth.Small,
-            DisableBackdropClick = true
-        };
-
-        var dialog = DialogService.Show<MemorabiliaImageCarouselViewerDialog>(string.Empty, parameters, options);
-
-        await dialog.Result;
     }
 }

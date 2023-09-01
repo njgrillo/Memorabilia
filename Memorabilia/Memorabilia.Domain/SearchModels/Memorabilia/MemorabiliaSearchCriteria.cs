@@ -11,6 +11,10 @@ public class MemorabiliaSearchCriteria : SearchCriteria
     public IEnumerable<int> GameStyleTypeIds { get; set; } 
         = Enumerable.Empty<int>();
 
+    public bool IncludeSold { get; set; }
+
+    public bool IncludeTraded { get; set; }
+
     public IEnumerable<int> ItemTypeIds { get; set; } 
         = Enumerable.Empty<int>();
 

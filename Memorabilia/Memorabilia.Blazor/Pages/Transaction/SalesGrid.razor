@@ -1,0 +1,86 @@
+﻿<MudTable @ref="_table"
+          Bordered="false"
+          Dense="false"
+          Hover="true"
+          Items="@Model.Items"
+          ServerData="@(new Func<TableState, Task<TableData<MemorabiliaTransactionModel>>>(OnRead))"
+          Striped="true">
+    <ToolBarContent>
+        <MudText Typo="Typo.h6">Sales</MudText>
+    </ToolBarContent>
+    <HeaderContent>
+        <MudTh></MudTh>
+        <MudTh>Date</MudTh>
+        <MudTh>Total Items Sold</MudTh>
+        <MudTh>Total Sold Amount</MudTh>
+        <MudTh></MudTh>
+    </HeaderContent>
+    <RowTemplate>
+        <MudTd>
+            <MudIconButton @onclick="@(_ => ToggleChildContent(@context.MemorabiliaTransactionId))"
+                           Icon="@context.ToggleIcon"></MudIconButton>
+        </MudTd>
+        <MudTd DataLabel="Date">@(context.TransactionDate?.ToString("MM-dd-yyyy") ?? string.Empty)</MudTd>
+        <MudTd DataLabel="TotalItemsSold">@context.Sales.Length.ToString()</MudTd>
+        <MudTd DataLabel="TotalSoldAmount">@context.Sales.Sum(sale => (sale.SaleAmount ?? 0)).ToString("c")</MudTd>
+        <MudTd DataLabel="">
+            <GridEditButton NavigationPath="@($"Transactions/Edit/{context.MemorabiliaTransactionId}")" />
+            <MudTooltip Text="Delete">
+                <MudFab Color="MudBlazor.Color.Secondary"
+                        Icon="@Icons.Material.Outlined.DeleteOutline"
+                        OnClick="@(_ => ShowDeleteTransactionConfirm(context.MemorabiliaTransactionId))" />
+            </MudTooltip>
+        </MudTd>
+    </RowTemplate>
+    <ChildRowContent>
+        <Condition Evaluation="@context.DisplayDetails">
+            <Match>
+                <tr />
+                <tr style="margin-top: 1%; margin-bottom: 1%; margin-left: 1%; margin-right: 1%;">
+                    <td colspan="17">
+                        <MudTable Bordered="false"
+                                  Dense="false"
+                                  Hover="true"
+                                  Items="@context.Sales"
+                                  Striped="true">
+                            <ToolBarContent>
+                                <MudText Typo="Typo.h6">Items</MudText>
+                                <MudSpacer />
+                            </ToolBarContent>
+                            <HeaderContent>
+                                <MudTh></MudTh>
+                                <MudTh>Item</MudTh>
+                                <MudTh>Sale Amount</MudTh>
+                                <MudTh></MudTh>
+                            </HeaderContent>
+                            <RowTemplate Context="sale">
+                                <MudTd DataLabel="">
+                                    <GridImage ImageLoaded="OnImageLoaded"
+                                               ImageFileName="@(sale.Memorabilia.Images.FirstOrDefault(image => image.ImageTypeId == Constant.ImageType.Primary.Id)?.FileName ?? string.Empty)"
+                                               NavigationPath="@($"Memorabilia/Image/Edit/{@sale.Memorabilia.Id}")" />
+                                </MudTd>
+                                <MudTd DataLabel="Item">@sale.Memorabilia.ItemType.Name</MudTd>
+                                <MudTd DataLabel="SaleAmount">@(sale.SaleAmount?.ToString("c") ?? string.Empty)</MudTd>
+                                <MudTd DataLabel="">
+                                    <ViewMemorabiliaImagesFab MemorabiliaId="sale.MemorabiliaId"
+                                                              Size="MudBlazor.Size.Large" />                                    
+                                    <MudTooltip Text="Delete">
+                                        <MudFab Color="MudBlazor.Color.Secondary"
+                                                Icon="@Icons.Material.Outlined.DeleteOutline"
+                                                OnClick="@(_ => ShowDeleteTransactionSaleConfirm(sale.MemorabiliaTransactionId, sale.Id))" />
+                                    </MudTooltip>
+                                </MudTd>
+                            </RowTemplate>
+                            <PagerContent>
+                                <MudTablePager />
+                            </PagerContent>
+                        </MudTable>
+                    </td>
+                </tr>
+            </Match>
+        </Condition>
+    </ChildRowContent>
+    <PagerContent>
+        <MudTablePager />
+    </PagerContent>
+</MudTable>

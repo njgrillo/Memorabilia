@@ -1,0 +1,113 @@
+﻿<MudTable @ref="_table"
+          Bordered="false"
+          Dense="false"
+          Hover="true"
+          Items="@Model.Items"
+          ServerData="@(new Func<TableState, Task<TableData<MemorabiliaTransactionModel>>>(OnRead))"
+          Striped="true">
+    <ToolBarContent>
+        <MudText Typo="Typo.h6">Partial Trades</MudText>
+    </ToolBarContent>
+    <HeaderContent>
+        <MudTh></MudTh>
+        <MudTh>Date</MudTh>
+        <MudTh>Total Items Received</MudTh>
+        <MudTh>Total Items Sent</MudTh>
+        <MudTh>Total Amount Received</MudTh>
+        <MudTh>Total Amount Sent</MudTh>
+        <MudTh></MudTh>
+    </HeaderContent>
+    <RowTemplate>
+        <MudTd>
+            <MudIconButton @onclick="@(_ => ToggleChildContent(@context.MemorabiliaTransactionId))"
+                           Icon="@context.ToggleIcon"></MudIconButton>
+        </MudTd>
+        <MudTd DataLabel="Date">@(context.TransactionDate?.ToString("MM-dd-yyyy") ?? string.Empty)</MudTd>
+        <MudTd DataLabel="TotalItemsReceived">@(context.TotalItemsReceivedCount > 0 ? context.TotalItemsReceivedCount.ToString() : string.Empty)</MudTd>
+        <MudTd DataLabel="TotalItemsSent">@(context.TotalItemsSentCount > 0 ? context.TotalItemsSentCount.ToString() : string.Empty)</MudTd>
+        <MudTd DataLabel="TotalAmountReceived">@(context.TotalAmountReceived > 0 ? context.TotalAmountReceived.ToString("c") : string.Empty)</MudTd>
+        <MudTd DataLabel="TotalAmountSent">@(context.TotalAmountSent > 0 ? context.TotalAmountSent.ToString("c") : string.Empty)</MudTd>
+        <MudTd DataLabel="">
+            <GridEditButton NavigationPath="@($"Transactions/Edit/{context.MemorabiliaTransactionId}")" />
+            <MudTooltip Text="Delete">
+                <MudFab Color="MudBlazor.Color.Secondary"
+                    Icon="@Icons.Material.Outlined.DeleteOutline"
+                    OnClick="@(_ => ShowDeleteTransactionConfirm(context.MemorabiliaTransactionId))" />
+            </MudTooltip>
+        </MudTd>
+    </RowTemplate>
+    <ChildRowContent>
+        <Condition Evaluation="@context.DisplayDetails">
+            <Match>
+                <tr />
+                <tr style="margin-top: 1%; margin-bottom: 1%; margin-left: 1%; margin-right: 1%;">
+                    <td colspan="17">
+                        <MudTable Bordered="false"
+                                    Dense="false"
+                                    Hover="true"
+                                    Items="@context.Trades"
+                                    Striped="true">
+                            <ToolBarContent>
+                                <MudText Typo="Typo.h6">Items</MudText>
+                                <MudSpacer />
+                            </ToolBarContent>
+                            <HeaderContent>
+                                <MudTh></MudTh>
+                                <MudTh>Item</MudTh>
+                                <MudTh>Trade Type</MudTh>
+                                <MudTh>Amount</MudTh>
+                                <MudTh>Amount Type</MudTh>
+                                <MudTh></MudTh>
+                            </HeaderContent>
+                            <RowTemplate Context="trade">
+                                <MudTd DataLabel="">
+                                    <GridImage ImageLoaded="OnImageLoaded"
+                                               ImageFileName="@(trade.Memorabilia.Images.FirstOrDefault(image => image.ImageTypeId == Constant.ImageType.Primary.Id)?.FileName ?? string.Empty)"
+                                               NavigationPath="@($"Memorabilia/Image/Edit/{@trade.Memorabilia.Id}")" />
+                                </MudTd>
+                                <MudTd DataLabel="Item">@trade.Memorabilia.ItemType.Name</MudTd>
+                                <MudTd DataLabel="Trade Type">
+                                    <MudTooltip Text="@trade.TransactionTradeTypeName">
+                                        <MudFab Class="cant-click" 
+                                                Color="MudBlazor.Color.Info"
+                                                Icon="@trade.TransactionTradeTypeIcon"
+                                                Size="@MudBlazor.Size.Small" />
+                                    </MudTooltip>                                        
+                                </MudTd>
+                                <MudTd DataLabel="Amount">@(trade.CashIncludedAmount?.ToString("c") ?? string.Empty)</MudTd>
+                                <MudTd DataLabel="AmountType">
+                                    <Condition Evaluation="(trade.CashIncludedTypeId > 0)">
+                                        <Match>
+                                            <MudTooltip Text="@trade.CashIncludedTypeName">
+                                                <MudFab Class="cant-click"
+                                                        Color="MudBlazor.Color.Info"
+                                                        Icon="@trade.CashIncludedTypeIcon"
+                                                        Size="@MudBlazor.Size.Small" />
+                                            </MudTooltip>
+                                        </Match>                                        
+                                    </Condition>                                    
+                                </MudTd>
+                                <MudTd DataLabel="">
+                                    <ViewMemorabiliaImagesFab MemorabiliaId="trade.MemorabiliaId"
+                                                              Size="MudBlazor.Size.Small" />
+                                    <MudTooltip Text="Delete">
+                                        <MudFab Color="MudBlazor.Color.Secondary"
+                                                Icon="@Icons.Material.Outlined.DeleteOutline"
+                                                OnClick="@(_ => ShowDeleteTransactionTradeConfirm(trade.MemorabiliaTransactionId, trade.Id))"
+                                                Size="@MudBlazor.Size.Small" />
+                                    </MudTooltip>
+                                </MudTd>
+                            </RowTemplate>
+                            <PagerContent>
+                                <MudTablePager />
+                            </PagerContent>
+                        </MudTable>
+                    </td>
+                </tr>
+            </Match>
+        </Condition>
+    </ChildRowContent>
+    <PagerContent>
+        <MudTablePager />
+    </PagerContent>
+</MudTable>

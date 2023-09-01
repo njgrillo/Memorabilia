@@ -16,12 +16,12 @@
             <TextField DisplaySkeleton="@(!Loaded)" 
                        Label="Name"
                        MaxLength="1000"
-                       SelectedText="@Model.Name"
-                       SelectedTextChanged="@((p) => Model.Name = p)" />
+                       SelectedText="@EditModel.Name"
+                       SelectedTextChanged="@((p) => EditModel.Name = p)" />
         </Div>
         <Div Class="col-3">
             <SkeletonLoader IsLoading="@(!Loaded)">
-                <MudDatePicker @bind-Date="Model.StartDate"
+                <MudDatePicker @bind-Date="EditModel.StartDate"
                                DateFormat="MM/dd/yyyy"
                                Editable="true"
                                Label="Start Date"
@@ -31,7 +31,7 @@
         </Div>
         <Div Class="col-3">
             <SkeletonLoader IsLoading="@(!Loaded)">
-                <MudDatePicker @bind-Date="Model.EndDate"
+                <MudDatePicker @bind-Date="EditModel.EndDate"
                                DateFormat="MM/dd/yyyy"
                                Editable="true"
                                Label="End Date"
@@ -41,164 +41,164 @@
         </Div>
         <Div Class="col-3">
             <SkeletonLoader IsLoading="@(!Loaded)">
-                <ProjectSelector Disabled="@(Model.Id > 0)"
+                <ProjectSelector Disabled="@(EditModel.Id > 0)"
                                  OnProjectTypeSelected="OnProjectTypeSelected"
-                                 SelectedProjectType="Model.ProjectType" />
+                                 SelectedProjectType="EditModel.ProjectType" />
             </SkeletonLoader>
         </Div>
     </DivRowFormGroup> 
-    <Condition Evaluation="@(Model.ProjectType != null && ProjectTypeComponent != null)">
+    <Condition Evaluation="@(EditModel.ProjectType != null && ProjectTypeComponent != null)">
         <Match>
             <DynamicComponent Parameters="@ProjectTypeParameters"
                               Type="@ProjectTypeComponent" />
         </Match>
     </Condition>
     <br />      
-    <Condition Evaluation="@(Model.Id > 0)">
+    <Condition Evaluation="@(EditModel.Id > 0)">
         <Match>
             <Div Class="row"
                  Style="margin-left:1%;margin-right:1%">
                 <MudProgressLinear Class="my-7"
                                    Color="MudBlazor.Color.Success"
                                    Size="MudBlazor.Size.Large"
-                                   Value="Model.StatusPercentage">
+                                   Value="EditModel.StatusPercentage">
                     <MudText Color="MudBlazor.Color.Dark"
                              Typo="Typo.subtitle1">
-                        <b>@(Model.StatusPercentage)%</b>
+                        <b>@(EditModel.StatusPercentage)%</b>
                     </MudText>
                 </MudProgressLinear>
             </Div>
         </Match>
     </Condition>
-    <Condition Evaluation="@(Model.ProjectType.IsPersonProject())"> 
+    <Condition Evaluation="@(EditModel.ProjectType.IsPersonProject())">
         <Match>
-            <Condition Evaluation="Model.People.Any()">
+            <Condition Evaluation="EditModel.People.Any()">
                 <Match>
                     <Div Class="row" 
                          Style="margin-left:1%;margin-right:1%">
                         <Div Class="col-2">
-                            <ProjectPriority MustHaveCount="Model.People.Count(person => person.PriorityTypeId == Constant.PriorityType.MustHave.Id)"
-                                             NiceToHaveCount="Model.People.Count(person => person.PriorityTypeId == Constant.PriorityType.NiceToHave.Id)"
-                                             NoWayCount="Model.People.Count(person => person.PriorityTypeId == Constant.PriorityType.NoWay.Id)"
-                                             TakeItOrLeaveItCount="Model.People.Count(person => person.PriorityTypeId == Constant.PriorityType.TakeItOrLeaveIt.Id)" />
+                            <ProjectPriority MustHaveCount="EditModel.People.Count(person => person.PriorityTypeId == Constant.PriorityType.MustHave.Id)"
+                                             NiceToHaveCount="EditModel.People.Count(person => person.PriorityTypeId == Constant.PriorityType.NiceToHave.Id)"
+                                             NoWayCount="EditModel.People.Count(person => person.PriorityTypeId == Constant.PriorityType.NoWay.Id)"
+                                             TakeItOrLeaveItCount="EditModel.People.Count(person => person.PriorityTypeId == Constant.PriorityType.TakeItOrLeaveIt.Id)" />
                         </Div>
                         <Div Class="col-2">
-                            <ProjectStatus CompletedCount="Model.People.Count(person => person.ProjectStatusTypeId == Constant.ProjectStatusType.Completed.Id)"
-                                           InProgressCount="Model.People.Count(person => person.ProjectStatusTypeId == Constant.ProjectStatusType.InProgress.Id)"
-                                           NotStartedCount="Model.People.Count(person => person.ProjectStatusTypeId == 0 || person.ProjectStatusTypeId == Constant.ProjectStatusType.NotStarted.Id)" />
+                            <ProjectStatus CompletedCount="EditModel.People.Count(person => person.ProjectStatusTypeId == Constant.ProjectStatusType.Completed.Id)"
+                                           InProgressCount="EditModel.People.Count(person => person.ProjectStatusTypeId == Constant.ProjectStatusType.InProgress.Id)"
+                                           NotStartedCount="EditModel.People.Count(person => person.ProjectStatusTypeId == 0 || person.ProjectStatusTypeId == Constant.ProjectStatusType.NotStarted.Id)" />
                         </Div>
                         <Div Class="col-2">
                             <MudStack>
-                                <MudChip Color="MudBlazor.Color.Success">@($"Linked to Autograph - {Model.People.Count(person => person.AutographId > 0)}")</MudChip>
-                                <MudChip Color="MudBlazor.Color.Info">@($"Not Linked to Autograph - {Model.People.Count(person => person.AutographId == 0)}")</MudChip>
+                                <MudChip Color="MudBlazor.Color.Success">@($"Linked to Autograph - {EditModel.People.Count(person => person.AutographId > 0)}")</MudChip>
+                                    <MudChip Color="MudBlazor.Color.Info">@($"Not Linked to Autograph - {EditModel.People.Count(person => person.AutographId == 0)}")</MudChip>
                             </MudStack>
                         </Div>
                         <Div Class="col-2">
                             <MudStack>
-                                <MudChip Color="MudBlazor.Color.Success">@($"Upgrade - {Model.People.Count(person => person.Upgrade)}")</MudChip>
-                                <MudChip Color="MudBlazor.Color.Info">@($"Not Upgrade - {Model.People.Count(person => !person.Upgrade)}")</MudChip>
+                                <MudChip Color="MudBlazor.Color.Success">@($"Upgrade - {EditModel.People.Count(person => person.Upgrade)}")</MudChip>
+                                <MudChip Color="MudBlazor.Color.Info">@($"Not Upgrade - {EditModel.People.Count(person => !person.Upgrade)}")</MudChip>
                             </MudStack>
                         </Div>
                         <Div Class="col-2">
                             <MudStack>
-                                <MudChip Color="MudBlazor.Color.Success">@($"Living - {Model.People.Count(person => !person.Deceased)}")</MudChip>
-                                <MudChip Color="MudBlazor.Color.Info">@($"Deceased - {Model.People.Count(person => person.Deceased)}")</MudChip>
+                                <MudChip Color="MudBlazor.Color.Success">@($"Living - {EditModel.People.Count(person => !person.Deceased)}")</MudChip>
+                                <MudChip Color="MudBlazor.Color.Info">@($"Deceased - {EditModel.People.Count(person => person.Deceased)}")</MudChip>
                             </MudStack>
                         </Div>
                         <Div Class="col-2">
                             <MudStack>
-                                <MudChip Color="MudBlazor.Color.Success">@($"Total Estimated Cost - {Model.People.Sum(person => (person.EstimatedCost ?? 0)).ToString("c") ?? string.Empty}")</MudChip>
+                                <MudChip Color="MudBlazor.Color.Success">@($"Total Estimated Cost - {EditModel.People.Sum(person => (person.EstimatedCost ?? 0)).ToString("c") ?? string.Empty}")</MudChip>
                             </MudStack>
                         </Div>
                     </Div>
                     <br />
                 </Match>
             </Condition>            
-            <Condition Evaluation="@(Model.ProjectType == ProjectType.BaseballType)"> 
+            <Condition Evaluation="@(EditModel.ProjectType == ProjectType.BaseballType)">
                 <Match>
-                    <BaseballTypeDetails Model="Model" />
+                    <BaseballTypeDetails Model="EditModel" />
                     <br />
                 </Match>
             </Condition>
-            <Condition Evaluation="@(Model.ProjectType == ProjectType.Card)">
+            <Condition Evaluation="@(EditModel.ProjectType == ProjectType.Card)">
                 <Match>
-                    <CardDetails Model="Model" />
+                    <CardDetails Model="EditModel" />
                     <br />
                 </Match>
             </Condition>
-            <Condition Evaluation="@(Model.ProjectType == ProjectType.HallOfFame)">
+            <Condition Evaluation="@(EditModel.ProjectType == ProjectType.HallOfFame)">
                 <Match>
-                    <HallofFameDetails Model="Model" />
+                    <HallofFameDetails Model="EditModel" />
                     <br />
                 </Match>
             </Condition>
-            <Condition Evaluation="@(Model.ProjectType == ProjectType.ItemType)">
+            <Condition Evaluation="@(EditModel.ProjectType == ProjectType.ItemType)">
                 <Match>
-                    <ItemTypeDetails Model="Model" />
+                    <ItemTypeDetails Model="EditModel" />
                     <br />
                 </Match>
             </Condition>
-            <Condition Evaluation="@(Model.ProjectType == ProjectType.Team)">
+            <Condition Evaluation="@(EditModel.ProjectType == ProjectType.Team)">
                 <Match>
-                    <TeamDetails Model="Model" />
+                        <TeamDetails Model="EditModel" />
                     <br />
                 </Match>
             </Condition>  
-            <Condition Evaluation="@(Model.ProjectType == ProjectType.WorldSeries)">
+            <Condition Evaluation="@(EditModel.ProjectType == ProjectType.WorldSeries)">
                 <Match>
-                    <WorldSeriesDetails Model="Model" />
+                    <WorldSeriesDetails Model="EditModel" />
                     <br />
                 </Match>
             </Condition>
         </Match>
     </Condition>
-    <Condition Evaluation="@(Model.ProjectType.IsTeamProject())">
+    <Condition Evaluation="@(EditModel.ProjectType.IsTeamProject())">
         <Match>
-            <Condition Evaluation="Model.MemorabiliaTeams.Any()">
+            <Condition Evaluation="EditModel.MemorabiliaTeams.Any()">
                 <Match>
                     <Div Class="row" 
                          Style="margin-left:1%;margin-right:1%">
                         <Div Class="col-2">
-                            <ProjectPriority MustHaveCount="Model.MemorabiliaTeams.Count(memorabiliaTeam => memorabiliaTeam.PriorityTypeId == Constant.PriorityType.MustHave.Id)"
-                                             NiceToHaveCount="Model.MemorabiliaTeams.Count(memorabiliaTeam => memorabiliaTeam.PriorityTypeId == Constant.PriorityType.NiceToHave.Id)"
-                                             NoWayCount="Model.MemorabiliaTeams.Count(memorabiliaTeam => memorabiliaTeam.PriorityTypeId == Constant.PriorityType.NoWay.Id)"
-                                             TakeItOrLeaveItCount="Model.MemorabiliaTeams.Count(memorabiliaTeam => memorabiliaTeam.PriorityTypeId == Constant.PriorityType.TakeItOrLeaveIt.Id)" />
+                            <ProjectPriority MustHaveCount="EditModel.MemorabiliaTeams.Count(memorabiliaTeam => memorabiliaTeam.PriorityTypeId == Constant.PriorityType.MustHave.Id)"
+                                             NiceToHaveCount="EditModel.MemorabiliaTeams.Count(memorabiliaTeam => memorabiliaTeam.PriorityTypeId == Constant.PriorityType.NiceToHave.Id)"
+                                             NoWayCount="EditModel.MemorabiliaTeams.Count(memorabiliaTeam => memorabiliaTeam.PriorityTypeId == Constant.PriorityType.NoWay.Id)"
+                                             TakeItOrLeaveItCount="EditModel.MemorabiliaTeams.Count(memorabiliaTeam => memorabiliaTeam.PriorityTypeId == Constant.PriorityType.TakeItOrLeaveIt.Id)" />
                         </Div>
                         <Div Class="col-2">
-                            <ProjectStatus CompletedCount="Model.MemorabiliaTeams.Count(memorabiliaTeam => memorabiliaTeam.ProjectStatusTypeId == Constant.ProjectStatusType.Completed.Id)"
-                                           InProgressCount="Model.MemorabiliaTeams.Count(memorabiliaTeam => memorabiliaTeam.ProjectStatusTypeId == Constant.ProjectStatusType.InProgress.Id)"
-                                           NotStartedCount="Model.MemorabiliaTeams.Count(memorabiliaTeam => memorabiliaTeam.ProjectStatusTypeId == 0 || memorabiliaTeam.ProjectStatusTypeId == Constant.ProjectStatusType.NotStarted.Id)" />
+                            <ProjectStatus CompletedCount="EditModel.MemorabiliaTeams.Count(memorabiliaTeam => memorabiliaTeam.ProjectStatusTypeId == Constant.ProjectStatusType.Completed.Id)"
+                                           InProgressCount="EditModel.MemorabiliaTeams.Count(memorabiliaTeam => memorabiliaTeam.ProjectStatusTypeId == Constant.ProjectStatusType.InProgress.Id)"
+                                           NotStartedCount="EditModel.MemorabiliaTeams.Count(memorabiliaTeam => memorabiliaTeam.ProjectStatusTypeId == 0 || memorabiliaTeam.ProjectStatusTypeId == Constant.ProjectStatusType.NotStarted.Id)" />
                         </Div>
                         <Div Class="col-2">
                             <MudStack>
-                                 <MudChip Color="MudBlazor.Color.Success">@($"Linked to Memorabilia - {Model.MemorabiliaTeams.Count(memorabiliaTeam => memorabiliaTeam.MemorabiliaId > 0)}")</MudChip>
-                                 <MudChip Color="MudBlazor.Color.Info">@($"Not Linked to Memorabilia - {Model.MemorabiliaTeams.Count(memorabiliaTeam => memorabiliaTeam.MemorabiliaId == 0)}")</MudChip>
+                                 <MudChip Color="MudBlazor.Color.Success">@($"Linked to Memorabilia - {EditModel.MemorabiliaTeams.Count(memorabiliaTeam => memorabiliaTeam.MemorabiliaId > 0)}")</MudChip>
+                                 <MudChip Color="MudBlazor.Color.Info">@($"Not Linked to Memorabilia - {EditModel.MemorabiliaTeams.Count(memorabiliaTeam => memorabiliaTeam.MemorabiliaId == 0)}")</MudChip>
                             </MudStack>
                         </Div>
                         <Div Class="col-2">
                             <MudStack>
-                                 <MudChip Color="MudBlazor.Color.Success">@($"Upgrade - {Model.MemorabiliaTeams.Count(memorabiliaTeam => memorabiliaTeam.Upgrade)}")</MudChip>
-                                 <MudChip Color="MudBlazor.Color.Info">@($"Not Upgrade - {Model.MemorabiliaTeams.Count(memorabiliaTeam => !memorabiliaTeam.Upgrade)}")</MudChip>
+                                 <MudChip Color="MudBlazor.Color.Success">@($"Upgrade - {EditModel.MemorabiliaTeams.Count(memorabiliaTeam => memorabiliaTeam.Upgrade)}")</MudChip>
+                                 <MudChip Color="MudBlazor.Color.Info">@($"Not Upgrade - {EditModel.MemorabiliaTeams.Count(memorabiliaTeam => !memorabiliaTeam.Upgrade)}")</MudChip>
                             </MudStack>
                         </Div>
                         <Div Class="col-2">
                             <MudStack>
-                                 <MudChip Color="MudBlazor.Color.Success">@($"Total Estimated Cost - {Model.MemorabiliaTeams.Sum(memorabiliaTeam => (memorabiliaTeam.EstimatedCost ?? 0)).ToString("c") ?? string.Empty}")</MudChip>
+                                 <MudChip Color="MudBlazor.Color.Success">@($"Total Estimated Cost - {EditModel.MemorabiliaTeams.Sum(memorabiliaTeam => (memorabiliaTeam.EstimatedCost ?? 0)).ToString("c") ?? string.Empty}")</MudChip>
                             </MudStack>
                         </Div>
                     </Div>
                     <br />
                 </Match>
             </Condition>            
-            <Condition Evaluation="@(Model.ProjectType == ProjectType.HelmetType)">
+                <Condition Evaluation="@(EditModel.ProjectType == ProjectType.HelmetType)">
                 <Match>
-                    <HelmetTypeDetails Model="Model" />
+                    <HelmetTypeDetails Model="EditModel" />
                     <br />
                 </Match>
             </Condition>                          
         </Match>
     </Condition>    
-    <Condition Evaluation="@(Model.ProjectType != null)">
+        <Condition Evaluation="@(EditModel.ProjectType != null)">
         <Match>
             <Div Style="margin-bottom:1%;margin-right:1%;text-align:right;">
                 <SaveButton OnClick="OnSave"

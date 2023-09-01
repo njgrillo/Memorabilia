@@ -27,6 +27,10 @@ public interface IMemorabiliaItemRepository
                                                     int? teamYear,
                                                     int userId);
 
+    Task<PagedResult<Entity.Memorabilia>> GetAllPurchased(int userId, 
+                                                          PageInfo pageInfo,
+                                                          MemorabiliaSearchCriteria memorabiliaSearchCriteria = null);
+
     Task<Entity.Memorabilia[]> GetAllUnsigned(int userId);
 
     int[] GetBrandIds(int userId);

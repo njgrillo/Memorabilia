@@ -120,7 +120,10 @@ public class MemorabiliaModel
         => _memorabilia.LastModifiedDate;
 
     public int? LevelTypeId 
-        => _memorabilia?.LevelType?.Id;    
+        => _memorabilia.LevelType?.Id;
+
+    public Entity.Memorabilia Memorabilia
+        => _memorabilia;
 
     public string Note 
         => _memorabilia.Note;

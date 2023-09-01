@@ -1,6 +1,4 @@
-﻿using Memorabilia.Domain.Entities;
-
-namespace Memorabilia.Blazor.Pages.ThroughTheMail;
+﻿namespace Memorabilia.Blazor.Pages.ThroughTheMail;
 
 public partial class ThroughTheMailEditor
 {
@@ -36,19 +34,17 @@ public partial class ThroughTheMailEditor
 
     protected bool Loaded;    
 
-    protected ValidationResult ValidationResult { get; set; }
-
     protected Alert[] ValidationResultAlerts
-        => ValidationResult != null
-        ? ValidationResult.Errors.Select(error => new Alert(error.ErrorMessage, Severity.Error)).ToArray()
-        : Array.Empty<Alert>();
+        => EditModel.ValidationResult.Errors?.Any() ?? false
+            ? EditModel.ValidationResult.Errors.Select(error => new Alert(error.ErrorMessage, Severity.Error)).ToArray()
+            : Array.Empty<Alert>();
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
-        if (ValidationResult != null && !ValidationResult.IsValid)
-        {
-            await JSRuntime.ScrollToAlert();
-        }
+        if (EditModel.ValidationResult.IsValid)
+            return;
+
+        await JSRuntime.ScrollToAlert();
     }
 
     protected override async Task OnInitializedAsync()

@@ -7,6 +7,7 @@ public class AutographImageRepository
         : base(context, memoryCache) { }
 
     public async Task<Entity.AutographImage[]> GetAll(int autographId)
-        => await Items.Where(image => image.AutographId == autographId)
+        => await Items.Where(autographImage => autographImage.AutographId == autographId)
+                      .OrderBy(autographImage => autographImage.ImageTypeId)
                       .ToArrayAsync();
 }

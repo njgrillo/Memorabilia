@@ -59,12 +59,7 @@
         <MudTd DataLabel="Cost">@context.Acquisition.Cost?.ToString("c")</MudTd>
         <MudTd DataLabel="Purchase Place">@context.PurchaseTypeName</MudTd>
         <MudTd DataLabel="">
-            <MudTooltip Text="View Images">
-                <MudFab Color="MudBlazor.Color.Secondary"
-                        Icon="@Icons.Material.Outlined.Image"
-                        OnClick="@(_ => ViewMemorabiliaImages(context))"
-                        Size="@MudBlazor.Size.Small" />
-            </MudTooltip>
+            <ViewMemorabiliaImagesFab MemorabiliaId="context.Id" />
             <MudTooltip Text="Remove From Collection">
                 <MudFab Color="MudBlazor.Color.Secondary"
                         Icon="@Icons.Material.Outlined.DeleteOutline"
@@ -116,7 +111,7 @@
                                                   Elevation="5"
                                                   Height="200"
                                                   ObjectFit="@ObjectFit.Cover"
-                                                  Src="@(ImageService.GetUserImageData(autograph.AutographImageName))"
+                                                  Src="@(ImageService.GetPersonImageData(autograph.PersonImageName))"
                                                   Width="200" />
                                     </MudTooltip>
                                 </MudTd>
@@ -146,12 +141,7 @@
                                     </MudTooltip>
                                 </MudTd>
                                 <MudTd DataLabel="">
-                                    <MudTooltip Text="View Images">
-                                        <MudFab Color="MudBlazor.Color.Secondary"
-                                                Icon="@Icons.Material.Outlined.Image"
-                                                OnClick="@(_ => ViewAutographImages(autograph))"
-                                                Size="@MudBlazor.Size.Small" />
-                                    </MudTooltip>
+                                    <ViewAutographImagesFab AutographId="autograph.Id" />
                                 </MudTd>
                             </RowTemplate>
                             <PagerContent>

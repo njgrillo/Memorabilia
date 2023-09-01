@@ -30,7 +30,7 @@ public class AutographModel : Model
         => _autograph.Authentications;
 
     public string AuthenticationText 
-        => Authentications.Count().ToString();
+        => Authentications.Count.ToString();
 
     public string AuthenticationTooltip 
         => $"{Authentications.Count} Authentication(s)";
@@ -38,7 +38,7 @@ public class AutographModel : Model
     public string AutographImageName 
         => !PrimaryImageName.IsNullOrEmpty() 
            ? PrimaryImageName 
-           : Constant.ImageFileName.ImageNotAvailable;
+           : Constant.ImageFileName.ImageNotAvailable;    
 
     public int ColorId 
         => _autograph.ColorId;
@@ -97,7 +97,7 @@ public class AutographModel : Model
 
             return $"{Images.Count} Images";
         }
-    }
+    }  
 
     public List<Entity.AutographImage> Images 
         => _autograph.Images;        
@@ -135,6 +135,11 @@ public class AutographModel : Model
                      .Select(image => image.FileName)
                      .ToArray() ?? Array.Empty<string>();
 
+    public string MemorabiliaPrimaryImageName
+        => _autograph.Memorabilia.Images.Any()
+            ? _autograph.Memorabilia.Images.SingleOrDefault(image => image.ImageTypeId == Constant.ImageType.Primary.Id)?.FileName ?? Constant.ImageFileName.ImageNotAvailable
+            : Constant.ImageFileName.ImageNotAvailable;
+
     public string Note 
         => _autograph.Note;
 
@@ -160,13 +165,18 @@ public class AutographModel : Model
     public int PersonId
         => _autograph.PersonId;
 
+    public string PersonImageName
+        => !_autograph.Person.ImageFileName.IsNullOrEmpty()
+            ? Person.ImageFileName
+            : Constant.ImageFileName.ImageNotAvailable;
+
     public string PersonName 
         => _autograph.Person?.DisplayName;
 
     public string PrimaryImageName 
         => Images.Any()
-        ? Images.SingleOrDefault(image => image.ImageTypeId == Constant.ImageType.Primary.Id)?.FileName ?? Constant.ImageFileName.ImageNotAvailable
-        : Constant.ImageFileName.ImageNotAvailable;        
+            ? Images.SingleOrDefault(image => image.ImageTypeId == Constant.ImageType.Primary.Id)?.FileName ?? Constant.ImageFileName.ImageNotAvailable
+            : Constant.ImageFileName.ImageNotAvailable;        
 
     public int? PurchaseTypeId 
         => _autograph?.Acquisition?.PurchaseTypeId;

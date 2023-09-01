@@ -5,7 +5,7 @@ public class MemorabiliasModel : Model
     public MemorabiliasModel() { }
 
     public MemorabiliasModel(IEnumerable<Entity.Memorabilia> memorabiliaItems, 
-                                 PageInfoResult pageInfo = null)
+                             PageInfoResult pageInfo = null)
     {
         MemorabiliaItems = memorabiliaItems.Select(memorabiliaItem => new MemorabiliaModel(memorabiliaItem))
                                            .ToList();

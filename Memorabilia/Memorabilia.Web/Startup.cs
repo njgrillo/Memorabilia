@@ -57,8 +57,8 @@ public class Startup
         services.RegisterCachedRepositories();
 
         services.AddCourier(typeof(GetCommissioner).Assembly);
-
-        services.AddSingleton<ImageService>();
+        
+        services.AddSingleton<ImageService>();             
 
         services
             .AddServerSideBlazor()
@@ -77,7 +77,7 @@ public class Startup
             config.SnackbarConfiguration.HideTransitionDuration = 500;
             config.SnackbarConfiguration.ShowTransitionDuration = 500;
             config.SnackbarConfiguration.SnackbarVariant = Variant.Filled;
-        });            
+        });
     }
 
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

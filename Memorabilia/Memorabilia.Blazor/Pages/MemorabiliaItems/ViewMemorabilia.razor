@@ -1,8 +1,15 @@
 ﻿<MemorabiliaFilter OnFilter="OnFilter" />
 <DivPad2>
-    <Switch Checked="@IsDetailView"
-            CheckedChanged="(p) => IsDetailView = p"
-            Label="Detail View" />
+    <LeftRightSection>
+        <Left>
+            <Switch Checked="@IsDetailView"
+                    CheckedChanged="(p) => IsDetailView = p"
+                    Label="Detail View" />
+        </Left>
+        <Right>
+            <AddButton OnClick="AddMemorabilia" />
+        </Right>
+    </LeftRightSection>    
 </DivPad2>
 <DivPad2>
     <Condition Evaluation="IsDetailView">

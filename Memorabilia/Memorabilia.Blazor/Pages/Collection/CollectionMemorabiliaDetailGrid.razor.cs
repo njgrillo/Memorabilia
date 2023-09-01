@@ -1,7 +1,7 @@
 ﻿namespace Memorabilia.Blazor.Pages.Collection;
 
 public partial class CollectionMemorabiliaDetailGrid
-{
+{ 
     [Inject]
     public CommandRouter CommandRouter { get; set; }
 
@@ -153,41 +153,5 @@ public partial class CollectionMemorabiliaDetailGrid
         memorabiliaItem.ToggleIcon = memorabiliaItem.DisplayAutographDetails
             ? Icons.Material.Filled.ExpandLess
             : Icons.Material.Filled.ExpandMore;
-    }
-
-    private async Task ViewAutographImages(AutographModel autographModel)
-    {
-        var parameters = new DialogParameters
-        {
-            ["AutographId"] = autographModel.Id
-        };
-
-        var options = new DialogOptions()
-        {
-            MaxWidth = MaxWidth.Small,
-            DisableBackdropClick = true
-        };
-
-        var dialog = DialogService.Show<AutographImageCarouselViewerDialog>(string.Empty, parameters, options);
-
-        await dialog.Result;
-    }
-
-    private async Task ViewMemorabiliaImages(MemorabiliaModel memorabiliaItemModel)
-    {
-        var parameters = new DialogParameters
-        {
-            ["MemorabiliaId"] = memorabiliaItemModel.Id
-        };
-
-        var options = new DialogOptions()
-        {
-            MaxWidth = MaxWidth.Small,
-            DisableBackdropClick = true
-        };
-
-        var dialog = DialogService.Show<MemorabiliaImageCarouselViewerDialog>(string.Empty, parameters, options);
-
-        await dialog.Result;
     }
 }

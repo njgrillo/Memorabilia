@@ -112,6 +112,8 @@ public class DomainContext : DbContext, IDomainContext
         modelBuilder.Entity<Entity.TeamLeague>();
         modelBuilder.Entity<Entity.TeamRoleType>();
         modelBuilder.Entity<Entity.ThroughTheMailFailureType>();
+        modelBuilder.Entity<Entity.TransactionTradeType>();
+        modelBuilder.Entity<Entity.TransactionType>();
         modelBuilder.Entity<Entity.User>();
         modelBuilder.Entity<Entity.UserDashboard>();
         modelBuilder.Entity<Entity.WritingInstrument>();

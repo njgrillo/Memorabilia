@@ -1,0 +1,45 @@
+﻿<MudTable Bordered="false"
+          CanCancelEdit="true"
+          CommitEditTooltip="Save"
+          Dense="false"
+          Hover="true"
+          Items="@Trades.Where(trade => !trade.IsDeleted).ToList()"
+          RowEditCancel="ResetItemToOriginalValues"
+          RowEditCommit="UpdateTrade"
+          RowEditPreview="BackupItem"
+          Striped="true">
+    <HeaderContent>
+        <MudTh></MudTh>
+        <MudTh>Item</MudTh>
+        <MudTh>Type</MudTh>
+        <MudTh></MudTh>
+    </HeaderContent>
+    <RowTemplate>
+        <MudTd DataLabel="">
+            <GridImage ImageLoaded="OnImageLoaded"
+                       ImageFileName="@(context.Memorabilia.Images.FirstOrDefault(image => image.ImageTypeId == Constant.ImageType.Primary.Id)?.FileName ?? string.Empty)"
+                       NavigationPath="@($"Memorabilia/Image/Edit/{@context.Memorabilia.Id}")" />
+        </MudTd>
+        <MudTd DataLabel="Item">@context.Memorabilia.ItemType.Name</MudTd>
+        <MudTd DataLabel="Type">@context.TransactionTradeTypeName</MudTd>
+            <MudTd DataLabel="">
+                <MudTooltip Text="Delete">
+                    <MudFab Color="MudBlazor.Color.Secondary"
+                            Icon="@Icons.Material.Outlined.DeleteOutline"
+                            OnClick="@(_ => context.IsDeleted = true)" />
+                </MudTooltip>
+            </MudTd>
+        </RowTemplate>
+        <RowEditingTemplate>
+            <MudTd DataLabel="">
+                <GridImage ImageLoaded="OnImageLoaded"
+                           ImageFileName="@(context.Memorabilia.Images.FirstOrDefault(image => image.ImageTypeId == Constant.ImageType.Primary.Id)?.FileName ?? string.Empty)"
+                           NavigationPath="@($"Memorabilia/Image/Edit/{@context.Memorabilia.Id}")" />
+            </MudTd>
+            <MudTd DataLabel="Item">@context.Memorabilia.ItemType.Name</MudTd>
+            <MudTd DataLabel="Type">
+                <TransactionTradeTypeDropDown SelectedValue="context.TransactionTradeTypeId"
+                                              SelectionChanged="(p) => context.TransactionTradeTypeId = p" />
+            </MudTd>
+        </RowEditingTemplate>
+    </MudTable>

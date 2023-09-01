@@ -10,7 +10,7 @@
                                  Style="height:600px;width:600px;"
                                  TData="object">
                         <Iterations Context="image"
-                                    Items="Images.OrderBy(item => item.ImageTypeId == Constant.ImageType.Primary.Id)">
+                                    Items="Images">
                             <MudCarouselItem Color="@MudBlazor.Color.Primary"
                                              Transition="Transition.Slide">
                                 <MudImage Class="rounded-lg"
@@ -24,6 +24,14 @@
                     </MudCarousel>
                 </Div>                
             </Match>
+            <NotMatch>
+                <MudImage Class="rounded-lg"
+                          Elevation="5"
+                          Height="600"
+                          ObjectFit="@ObjectFit.Fill"
+                          Src="@(ImageService.GetDomainImageData(ImageFileName.ImageNotAvailable))"
+                          Width="600" />
+            </NotMatch>
         </Condition>
     </DialogContent>
     <DialogActions>

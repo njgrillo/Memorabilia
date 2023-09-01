@@ -14,6 +14,11 @@ public partial class ViewMemorabilia
     private MemorabiliaSearchCriteria _filter 
         = new();
 
+    protected void AddMemorabilia()
+    {
+        NavigationManager.NavigateTo("Memorabilia/Edit");
+    }
+
     protected void OnFilter(MemorabiliaSearchCriteria filter)
     {
         _filter = filter;

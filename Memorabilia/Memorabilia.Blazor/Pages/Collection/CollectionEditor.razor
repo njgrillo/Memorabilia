@@ -16,19 +16,19 @@
             <TextField DisplaySkeleton="@(!Loaded)"
                        Label="Name"
                        MaxLength="250"
-                       SelectedText="@Model.Name"
-                       SelectedTextChanged="@((p) => Model.Name = p)" />
+                       SelectedText="@EditModel.Name"
+                       SelectedTextChanged="@((p) => EditModel.Name = p)" />
         </Div>
         <Div Class="col-6">
             <TextField DisplaySkeleton="@(!Loaded)"
                        Label="Description"
                        MaxLength="1000"
-                       SelectedText="@Model.Description"
-                       SelectedTextChanged="@((p) => Model.Description = p)" />
+                       SelectedText="@EditModel.Description"
+                       SelectedTextChanged="@((p) => EditModel.Description = p)" />
         </Div>
     </DivRowFormGroup>
 </Div>
-<Condition Evaluation="Model.Items.Any()">
+<Condition Evaluation="EditModel.Items.Any()">
     <Match>
         <Div Class="row">
             <MemorabiliaFilter OnFilter="OnFilter" />
@@ -50,12 +50,12 @@
      Style="margin-left:1%;margin-right:1%;">
     <Condition Evaluation="IsDetailView">
         <Match>
-            <CollectionMemorabiliaDetailGrid CollectionId="Model.Id"
+            <CollectionMemorabiliaDetailGrid CollectionId="EditModel.Id"
                                              Filter="_filter"
                                              MemorabiliaSelected="@((p) => SelectedMemorabilia = p)" />
         </Match>
         <NotMatch>
-            <CollectionMemorabiliaGalleryGrid CollectionId="Model.Id"
+            <CollectionMemorabiliaGalleryGrid CollectionId="EditModel.Id"
                                               Filter="_filter" />
         </NotMatch>
     </Condition>

@@ -59,12 +59,8 @@
         <Condition Evaluation="ShowActions">
             <Match>
                 <MudTd DataLabel="">
-                    <MudTooltip Text="View Images">
-                        <MudFab Color="MudBlazor.Color.Secondary"
-                                Icon="@Icons.Material.Outlined.Image"
-                                OnClick="@(_ => ViewMemorabiliaImages(context))"
-                                Size="@MudBlazor.Size.Small" />
-                    </MudTooltip>
+                    <ViewMemorabiliaImagesFab MemorabiliaId="context.Id"
+                                              Size="MudBlazor.Size.Small" />
                     <MudTooltip Text="Add Autograph">
                         <MudFab Color="MudBlazor.Color.Primary"
                                 Icon="@Icons.Material.Outlined.AddCircleOutline"
@@ -141,7 +137,7 @@
                                                   Elevation="5" 
                                                   Height="200"
                                                   ObjectFit="@ObjectFit.Cover"
-                                                  Src="@(ImageService.GetUserImageData(autograph.AutographImageName))"
+                                                  Src="@(ImageService.GetPersonImageData(autograph.PersonImageName))"
                                                   Width="200" />
                                     </MudTooltip> 
                                 </MudTd>
@@ -175,12 +171,8 @@
                                 <Condition Evaluation="ShowActions">
                                     <Match>
                                         <MudTd DataLabel="">
-                                            <MudTooltip Text="View Images">
-                                                <MudFab Color="MudBlazor.Color.Secondary"
-                                                        Icon="@Icons.Material.Outlined.Image"
-                                                        OnClick="@(_ => ViewAutographImages(autograph))"
-                                                        Size="@MudBlazor.Size.Small" />
-                                            </MudTooltip>
+                                            <ViewAutographImagesFab AutographId="autograph.Id"
+                                                                    Size="MudBlazor.Size.Small" />
                                             <MudTooltip Text="Edit">
                                                 <MudFab Color="MudBlazor.Color.Primary"
                                                         Icon="@Icons.Material.Outlined.ModeEditOutline"

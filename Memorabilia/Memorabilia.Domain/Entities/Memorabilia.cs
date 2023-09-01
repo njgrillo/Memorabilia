@@ -61,8 +61,8 @@ public partial class Memorabilia : Framework.Library.Domain.Entity.DomainEntity
     public virtual List<MemorabiliaImage> Images { get; private set; } 
         = new ();
 
-    public Constants.ItemType ItemType 
-        => Constants.ItemType.Find(ItemTypeId);
+    public Constant.ItemType ItemType 
+        => Constant.ItemType.Find(ItemTypeId);
 
     public int ItemTypeId { get; private set; }
 
@@ -89,6 +89,8 @@ public partial class Memorabilia : Framework.Library.Domain.Entity.DomainEntity
 
     public int PrivacyTypeId { get; private set; }
 
+    public virtual MemorabiliaTransactionSale Sale { get; private set; }
+
     public virtual MemorabiliaSize Size { get; private set; }
 
     public virtual List<MemorabiliaSport> Sports { get; private set; } 
@@ -99,6 +101,8 @@ public partial class Memorabilia : Framework.Library.Domain.Entity.DomainEntity
 
     public virtual List<ThroughTheMailMemorabilia> ThroughTheMailMemorabilias { get; private set; } 
         = new ();
+
+    public virtual MemorabiliaTransactionTrade Trade { get; private set; }
 
     public virtual User User { get; set; }
 
