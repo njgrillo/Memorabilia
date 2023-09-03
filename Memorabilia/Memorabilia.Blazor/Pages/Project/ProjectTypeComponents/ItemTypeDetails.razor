@@ -9,6 +9,7 @@
     </MudStack>
 </Div>
 <Div Style="margin-right:1%;">
-    <ProjectPersonGrid Items="Model.People.Where(person => _displayCompleted || person.ProjectStatusTypeId != ProjectStatusType.Completed.Id).ToList()"
+    <ProjectPersonGrid AllItems="Model.People" 
+                       Items="Model.People.Where(person => _displayCompleted || person.ProjectStatusTypeId != ProjectStatusType.Completed.Id).ToList()"
                        ItemTypeId="@Model.ItemTypeId" />
 </Div>

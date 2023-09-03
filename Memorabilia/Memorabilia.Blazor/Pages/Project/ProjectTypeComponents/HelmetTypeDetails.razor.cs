@@ -5,6 +5,9 @@ public partial class HelmetTypeDetails
     [Inject]
     public IDialogService DialogService { get; set; }
 
+    [Inject]
+    public IMediator Mediator { get; set; }
+
     [Parameter]
     public ProjectEditModel Model { get; set; }
 
@@ -42,6 +45,10 @@ public partial class HelmetTypeDetails
         //TODO: Add - Don't Link - Then link from grid
 
         Model.MemorabiliaTeams.Add(projectMemorabiliaTeam);
+
+        await Mediator.Publish(new ProjectMemorabiliaTeamAddedNotification(Model.Id, 
+                                                                           projectMemorabiliaTeam.Team.Id, 
+                                                                           projectMemorabiliaTeam.Rank));
     }
 
     protected async Task OnImport()

@@ -13,4 +13,7 @@ public partial class ProjectPriority
 
     [Parameter]
     public int TakeItOrLeaveItCount { get; set; }
+
+    [Parameter]
+    public int WatchingCount { get; set; }
 }

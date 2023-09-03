@@ -3,10 +3,17 @@
 public partial class ProjectPersonGrid
 {
     [Inject]
+    public ICourier Courier { get; set; }
+
+    [Inject]
     public IDialogService DialogService { get; set; }
 
     [Inject]
     public ImageService ImageService { get; set; }
+
+    [Parameter]
+    public List<ProjectPersonEditModel> AllItems { get; set; }
+        = new();
 
     [Parameter]
     public List<ProjectPersonEditModel> Items { get; set; } 
@@ -17,6 +24,33 @@ public partial class ProjectPersonGrid
 
     private ProjectPersonEditModel _elementBeforeEdit;
     private string _search;
+
+    protected override void OnInitialized()
+    {
+        Courier.Subscribe<ProjectPersonAddedNotification>(OnProjectPersonAdded);
+    }
+
+    public void OnProjectPersonAdded(ProjectPersonAddedNotification notification)
+    {
+        IEnumerable<ProjectPersonEditModel> itemsToUpdate 
+            = AllItems.Where(item => item.Person.Id != notification.PersonId);
+
+        if (!notification.Rank.HasValue || 
+            notification.Rank.Value == 0 || 
+            notification.Rank < itemsToUpdate.Where(item => item.Rank.HasValue).Min(item => item.Rank) ||
+            notification.Rank > itemsToUpdate.Where(item => item.Rank.HasValue).Max(item => item.Rank))
+            return;
+
+        foreach (ProjectPersonEditModel projectPersonEditModel in itemsToUpdate)
+        {
+            if (!projectPersonEditModel.Rank.HasValue || projectPersonEditModel.Rank < notification.Rank)
+                continue;
+
+            projectPersonEditModel.Rank += 1;
+        }
+
+        StateHasChanged();
+    }
 
     private bool FilterFunc1(ProjectPersonEditModel editModel)
         => FilterFunc(editModel, _search);
@@ -257,25 +291,19 @@ public partial class ProjectPersonGrid
         var item = ((ProjectPersonEditModel)element);
 
         if (_elementBeforeEdit.Rank == item.Rank)
-            return;
+            return;  
 
         if (item.Rank < _elementBeforeEdit.Rank)
         {
-            foreach (var person in Items.Where(x => x.Rank < _elementBeforeEdit.Rank && x.Rank >= item.Rank))
+            foreach (ProjectPersonEditModel person in AllItems.Where(x => x.Id != item.Id && x.Rank < _elementBeforeEdit.Rank && x.Rank >= item.Rank))
             {
-                if (person.Id == item.Id)
-                    continue;
-
                 person.Rank += 1;
             }
         }
         else
         {
-            foreach (var person in Items.Where(x => x.Rank > _elementBeforeEdit.Rank && x.Rank <= item.Rank))
+            foreach (ProjectPersonEditModel person in AllItems.Where(x => x.Id != item.Id && x.Rank > _elementBeforeEdit.Rank && x.Rank <= item.Rank))
             {
-                if (person.Id == item.Id)
-                    continue;
-
                 person.Rank -= 1;
             }
         }

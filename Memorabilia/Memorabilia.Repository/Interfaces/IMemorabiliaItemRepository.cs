@@ -7,6 +7,8 @@ public interface IMemorabiliaItemRepository
 
     Task<Entity.Memorabilia[]> GetAll(int userId);
 
+    Task<Entity.Memorabilia[]> GetAll(int[] ids);
+
     Task<PagedResult<Entity.Memorabilia>> GetAll(int userId,
                                                  PageInfo pageInfo,
                                                  MemorabiliaSearchCriteria memorabiliaSearchCriteria = null);
@@ -26,6 +28,10 @@ public interface IMemorabiliaItemRepository
                                                     int? teamId,
                                                     int? teamYear,
                                                     int userId);
+
+    Task<PagedResult<Entity.Memorabilia>> GetAllForTrade(int userId,
+                                                         PageInfo pageInfo,
+                                                         MemorabiliaSearchCriteria memorabiliaSearchCriteria = null);
 
     Task<PagedResult<Entity.Memorabilia>> GetAllPurchased(int userId, 
                                                           PageInfo pageInfo,
@@ -52,4 +58,6 @@ public interface IMemorabiliaItemRepository
     int[] GetSportIds(int userId);
 
     int[] GetSportLeagueLevelIds(int userId);
+
+    Task<bool> HasItemsForTrade(int userId);
 }

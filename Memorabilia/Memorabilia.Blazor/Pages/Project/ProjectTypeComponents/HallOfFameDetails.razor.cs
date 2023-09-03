@@ -5,6 +5,9 @@ public partial class HallofFameDetails
     [Inject]
     public IDialogService DialogService { get; set; }
 
+    [Inject]
+    public IMediator Mediator { get; set; }
+
     [Parameter]
     public ProjectEditModel Model { get; set; }
 
@@ -38,6 +41,8 @@ public partial class HallofFameDetails
         //TODO: Add - Don't Link - Then link from grid - See HelmetTypeDetails
 
         Model.People.Add(projectPerson);
+
+        await Mediator.Publish(new ProjectPersonAddedNotification(Model.Id, projectPerson.Person.Id, projectPerson.Rank));
     }
 
     protected async Task OnImport()

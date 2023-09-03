@@ -118,6 +118,11 @@ public partial class Memorabilia
 
         SetCollections(collections);
     }    
+
+    public void SetForTrade(bool forTrade)
+    {
+        ForTrade = forTrade;
+    }
         
     public void SetImages(IEnumerable<string> fileNames, string primaryImageFileName)
     {

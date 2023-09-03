@@ -5,6 +5,9 @@ public partial class BaseballTypeDetails
     [Inject]
     public IDialogService DialogService { get; set; }
 
+    [Inject]
+    public IMediator Mediator { get; set; }
+
     [Parameter]
     public ProjectEditModel Model { get; set; }
 
@@ -49,6 +52,8 @@ public partial class BaseballTypeDetails
         //projectPerson.ProjectType = Model.ProjectType.Id;
 
         Model.People.Add(projectPerson);
+
+        await Mediator.Publish(new ProjectPersonAddedNotification(Model.Id, projectPerson.Person.Id, projectPerson.Rank));
     }
 
     protected async Task OnImport()

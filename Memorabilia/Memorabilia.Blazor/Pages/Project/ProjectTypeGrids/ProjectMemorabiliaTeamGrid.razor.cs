@@ -3,10 +3,17 @@
 public partial class ProjectMemorabiliaTeamGrid
 {
     [Inject]
+    public ICourier Courier { get; set; }
+
+    [Inject]
     public IDialogService DialogService { get; set; }
 
     [Inject]
     public ImageService ImageService { get; set; }
+
+    [Parameter]
+    public List<ProjectMemorabiliaTeamEditModel> AllItems { get; set; }
+        = new();
 
     [Parameter]
     public List<ProjectMemorabiliaTeamEditModel> Items { get; set; } 
@@ -17,6 +24,33 @@ public partial class ProjectMemorabiliaTeamGrid
 
     private ProjectMemorabiliaTeamEditModel _elementBeforeEdit;
     private string _search;
+
+    protected override void OnInitialized()
+    {
+        Courier.Subscribe<ProjectMemorabiliaTeamAddedNotification>(OnProjectMemorabiliaTeamAdded);
+    }
+
+    public void OnProjectMemorabiliaTeamAdded(ProjectMemorabiliaTeamAddedNotification notification)
+    {
+        IEnumerable<ProjectMemorabiliaTeamEditModel> itemsToUpdate
+            = AllItems.Where(item => item.Team.Id != notification.TeamId);
+
+        if (!notification.Rank.HasValue ||
+            notification.Rank.Value == 0 ||
+            notification.Rank < itemsToUpdate.Where(item => item.Rank.HasValue).Min(item => item.Rank) ||
+            notification.Rank > itemsToUpdate.Where(item => item.Rank.HasValue).Max(item => item.Rank))
+            return;
+
+        foreach (ProjectMemorabiliaTeamEditModel projectMemorabiliaTeamEditModel in itemsToUpdate)
+        {
+            if (!projectMemorabiliaTeamEditModel.Rank.HasValue || projectMemorabiliaTeamEditModel.Rank < notification.Rank)
+                continue;
+
+            projectMemorabiliaTeamEditModel.Rank += 1;
+        }
+
+        StateHasChanged();
+    }
 
     private bool FilterFunc1(ProjectMemorabiliaTeamEditModel editModel)
         => FilterFunc(editModel, _search);
@@ -198,22 +232,16 @@ public partial class ProjectMemorabiliaTeamGrid
 
         if (item.Rank < _elementBeforeEdit.Rank)
         {
-            foreach (var person in Items.Where(x => x.Rank < _elementBeforeEdit.Rank && x.Rank >= item.Rank))
+            foreach (ProjectMemorabiliaTeamEditModel team in AllItems.Where(x => x.Id != item.Id && x.Rank < _elementBeforeEdit.Rank && x.Rank >= item.Rank))
             {
-                if (person.Id == item.Id)
-                    continue;
-
-                person.Rank += 1;
+                team.Rank += 1;
             }
         }
         else
         {
-            foreach (var person in Items.Where(x => x.Rank > _elementBeforeEdit.Rank && x.Rank <= item.Rank))
+            foreach (ProjectMemorabiliaTeamEditModel team in AllItems.Where(x => x.Id != item.Id && x.Rank > _elementBeforeEdit.Rank && x.Rank <= item.Rank))
             {
-                if (person.Id == item.Id)
-                    continue;
-
-                person.Rank -= 1;
+                team.Rank -= 1;
             }
         }
 

@@ -44,11 +44,17 @@ public sealed class ProjectType : DomainItemConstant
         Description = description;
     }
 
-    public static ProjectType Find(int id)
-        => All.SingleOrDefault(projectType => projectType.Id == id);
-
     public string Description { get; set; }
 
     public override string ToString()
         => Name.Replace(" ", "");
+
+    public static ProjectType Find(int id)
+        => All.SingleOrDefault(projectType => projectType.Id == id);    
+
+    public static bool IsPersonProject(ProjectType projectType)
+        => PersonProject.Contains(projectType);
+
+    public static bool IsTeamProject(ProjectType projectType)
+        => TeamProject.Contains(projectType);
 }

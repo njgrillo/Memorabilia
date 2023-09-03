@@ -38,10 +38,12 @@ public class ProjectEditModel : EditModel
         = new();
 
     public double CompletedMemorabiliaTeamCount
-        => MemorabiliaTeams.Count(item => item.ProjectStatusTypeId == Constant.ProjectStatusType.Completed.Id);
+        => MemorabiliaTeams.Where(person => person.PriorityTypeId != Constant.PriorityType.Watching.Id)
+                           .Count(item => item.ProjectStatusTypeId == Constant.ProjectStatusType.Completed.Id);
 
     public double CompletedPersonCount
-        => People.Count(person => person.ProjectStatusTypeId == Constant.ProjectStatusType.Completed.Id);
+        => People.Where(person => person.PriorityTypeId != Constant.PriorityType.Watching.Id)
+                 .Count(person => person.ProjectStatusTypeId == Constant.ProjectStatusType.Completed.Id);
 
     public DateTime? EndDate { get; set; }
 
@@ -91,12 +93,12 @@ public class ProjectEditModel : EditModel
             if (Id == 0)
                 return 0;
 
-            if (ProjectType == Constant.ProjectType.BaseballType)
+            if (Constant.ProjectType.IsPersonProject(ProjectType))
                 return People.Count > 0
                     ? (int)((double)(CompletedPersonCount / People.Count) * 100)
                     : 0;
 
-            if (ProjectType == Constant.ProjectType.HelmetType)
+            if (Constant.ProjectType.IsTeamProject(ProjectType))
                 return MemorabiliaTeams.Count > 0
                     ? (int)((double)(CompletedMemorabiliaTeamCount / MemorabiliaTeams.Count) * 100)
                     : 0;

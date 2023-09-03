@@ -11,7 +11,8 @@
     </MudStack>
 </Div>
 <Div Style="margin-right:1%;">
-    <ProjectMemorabiliaTeamGrid Items="Model.MemorabiliaTeams.Where(item => _displayCompleted || item.ProjectStatusTypeId != ProjectStatusType.Completed.Id).ToList()"
+    <ProjectMemorabiliaTeamGrid AllItems="Model.MemorabiliaTeams" 
+                                Items="Model.MemorabiliaTeams.Where(item => _displayCompleted || item.ProjectStatusTypeId != ProjectStatusType.Completed.Id).ToList()"
                                 ItemTypeId="@ItemTypeId" />
 </Div>
 

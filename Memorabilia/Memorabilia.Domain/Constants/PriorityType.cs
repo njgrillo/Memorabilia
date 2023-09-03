@@ -6,13 +6,15 @@ public sealed class PriorityType : DomainItemConstant
     public static readonly PriorityType NiceToHave = new(2, "Nice to Have");
     public static readonly PriorityType NoWay = new(4, "No Way");
     public static readonly PriorityType TakeItOrLeaveIt = new(3, "Take it or Leave it");
+    public static readonly PriorityType Watching = new(1004, "Watching");
 
     public static readonly PriorityType[] All =
     {
         MustHave,
         NiceToHave,
         NoWay,
-        TakeItOrLeaveIt
+        TakeItOrLeaveIt,
+        Watching
     };
 
     private PriorityType(int id, string name, string abbreviation = null) 
