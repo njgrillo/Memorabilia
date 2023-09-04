@@ -1,5 +1,6 @@
 ﻿namespace Memorabilia.Application.Features.Admin.Spots;
 
+[AuthorizeByRole(Enum.PermissionType.Admin)]
 public record SaveSpot(DomainEditModel Spot) : ICommand
 {
     public class Handler : CommandHandler<SaveSpot>

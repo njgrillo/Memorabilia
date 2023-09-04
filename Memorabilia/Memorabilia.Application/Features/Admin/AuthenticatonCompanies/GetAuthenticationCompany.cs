@@ -1,5 +1,6 @@
 ﻿namespace Memorabilia.Application.Features.Admin.AuthenticationCompanies;
 
+[AuthorizeByRole(Enum.PermissionType.Admin)]
 public record GetAuthenticationCompany(int Id) : IQuery<Entity.DomainEntity>
 {
     public class Handler : QueryHandler<GetAuthenticationCompany, Entity.DomainEntity>

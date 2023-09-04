@@ -1,5 +1,6 @@
 ﻿namespace Memorabilia.Application.Features.Admin.Positions;
 
+[AuthorizeByRole(Enum.PermissionType.Admin)]
 public record SavePosition(PositionEditModel Position) : ICommand
 {
     public class Handler : CommandHandler<SavePosition>

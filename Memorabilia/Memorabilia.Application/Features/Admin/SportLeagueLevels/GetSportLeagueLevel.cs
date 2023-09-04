@@ -1,5 +1,6 @@
 ﻿namespace Memorabilia.Application.Features.Admin.SportLeagueLevels;
 
+[AuthorizeByRole(Enum.PermissionType.Admin)]
 public record GetSportLeagueLevel(int Id) : IQuery<Entity.SportLeagueLevel>
 {
     public class Handler : QueryHandler<GetSportLeagueLevel, Entity.SportLeagueLevel>

@@ -1,5 +1,6 @@
 ﻿namespace Memorabilia.Application.Features.Admin.MagazineTypes;
 
+[AuthorizeByRole(Enum.PermissionType.Admin)]
 public record GetMagazineType(int Id) : IQuery<Entity.DomainEntity>
 {
     public class Handler : QueryHandler<GetMagazineType, Entity.DomainEntity>

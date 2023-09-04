@@ -1,5 +1,6 @@
 ﻿namespace Memorabilia.Application.Features.Admin.GloveTypes;
 
+[AuthorizeByRole(Enum.PermissionType.Admin)]
 public record GetGloveTypes() : IQuery<Entity.GloveType[]>
 {
     public class Handler : QueryHandler<GetGloveTypes, Entity.GloveType[]>

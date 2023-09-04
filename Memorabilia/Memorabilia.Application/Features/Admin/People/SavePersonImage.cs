@@ -1,5 +1,6 @@
 ﻿namespace Memorabilia.Application.Features.Admin.People;
 
+[AuthorizeByRole(Enum.PermissionType.Admin)]
 public record SavePersonImage(int PersonId, string ImageFileName) : ICommand
 {
     public class Handler : CommandHandler<SavePersonImage>

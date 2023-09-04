@@ -1,5 +1,6 @@
 ﻿namespace Memorabilia.Application.Features.Admin.LeaguePresidents;
 
+[AuthorizeByRole(Enum.PermissionType.Admin)]
 public record GetLeaguePresidents(int? SportLeagueLevelId = null, 
                                   int? LeagueId = null) 
     : IQuery<Entity.LeaguePresident[]>

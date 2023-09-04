@@ -1,5 +1,6 @@
 ﻿namespace Memorabilia.Application.Features.Admin.AcquisitionTypes;
 
+[AuthorizeByRole(Enum.PermissionType.Admin)]
 public record SaveAcquisitionType(DomainEditModel AcquisitionType) : ICommand
 {
     public class Handler : CommandHandler<SaveAcquisitionType>

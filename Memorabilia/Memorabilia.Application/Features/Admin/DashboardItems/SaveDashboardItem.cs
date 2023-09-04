@@ -1,5 +1,6 @@
 ﻿namespace Memorabilia.Application.Features.Admin.DashboardItems;
 
+[AuthorizeByRole(Enum.PermissionType.Admin)]
 public record SaveDashboardItem(DashboardItemEditModel DashboardItem) : ICommand
 {
     public class Handler : CommandHandler<SaveDashboardItem>

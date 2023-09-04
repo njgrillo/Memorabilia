@@ -1,5 +1,6 @@
 ﻿namespace Memorabilia.Application.Features.Admin.AuthenticationCompanies;
 
+[AuthorizeByRole(Enum.PermissionType.Admin)]
 public record SaveAuthenticationCompany(DomainEditModel AuthenticationCompany) : ICommand
 {
     public class Handler : CommandHandler<SaveAuthenticationCompany>

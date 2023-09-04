@@ -1,5 +1,6 @@
 ﻿namespace Memorabilia.Application.Features.Admin.Colleges;
 
+[AuthorizeByRole(Enum.PermissionType.Admin)]
 public record GetCollege(int Id) : IQuery<Entity.DomainEntity>
 {
     public class Handler : QueryHandler<GetCollege, Entity.DomainEntity>

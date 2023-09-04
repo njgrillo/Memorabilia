@@ -1,5 +1,6 @@
 ﻿namespace Memorabilia.Application.Features.Admin.ImageTypes;
 
+[AuthorizeByRole(Enum.PermissionType.Admin)]
 public record GetImageTypes() : IQuery<Entity.ImageType[]>
 {
     public class Handler : QueryHandler<GetImageTypes, Entity.ImageType[]>

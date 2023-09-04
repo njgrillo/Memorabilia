@@ -1,5 +1,6 @@
 ﻿namespace Memorabilia.Application.Features.Admin.GameStyleTypes;
 
+[AuthorizeByRole(Enum.PermissionType.Admin)]
 public record SaveGameStyleType(DomainEditModel GameStyleType) : ICommand
 {
     public class Handler : CommandHandler<SaveGameStyleType>

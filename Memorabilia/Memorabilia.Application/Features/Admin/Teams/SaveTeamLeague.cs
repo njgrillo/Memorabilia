@@ -1,5 +1,6 @@
 ﻿namespace Memorabilia.Application.Features.Admin.Teams;
 
+[AuthorizeByRole(Enum.PermissionType.Admin)]
 public class SaveTeamLeague
 {
     public class Handler : CommandHandler<Command>

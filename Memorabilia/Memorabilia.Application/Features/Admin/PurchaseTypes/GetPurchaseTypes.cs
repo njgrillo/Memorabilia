@@ -1,5 +1,6 @@
 ﻿namespace Memorabilia.Application.Features.Admin.PurchaseTypes;
 
+[AuthorizeByRole(Enum.PermissionType.Admin)]
 public record GetPurchaseTypes() : IQuery<Entity.PurchaseType[]>
 {
     public class Handler : QueryHandler<GetPurchaseTypes, Entity.PurchaseType[]>

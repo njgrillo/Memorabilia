@@ -1,5 +1,6 @@
 ﻿namespace Memorabilia.Application.Features.Admin.PrivacyTypes;
 
+[AuthorizeByRole(Enum.PermissionType.Admin)]
 public record SavePrivacyType(DomainEditModel PrivacyType) : ICommand
 {
     public class Handler : CommandHandler<SavePrivacyType>

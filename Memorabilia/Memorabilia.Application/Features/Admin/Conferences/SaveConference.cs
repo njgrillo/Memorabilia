@@ -1,5 +1,6 @@
 ﻿namespace Memorabilia.Application.Features.Admin.Conferences;
 
+[AuthorizeByRole(Enum.PermissionType.Admin)]
 public record SaveConference(ConferenceEditModel Conference) : ICommand
 {
     public class Handler : CommandHandler<SaveConference>

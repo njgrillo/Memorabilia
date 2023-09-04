@@ -1,5 +1,6 @@
 ﻿namespace Memorabilia.Application.Features.Admin.FranchiseHallOfFameTypes;
 
+[AuthorizeByRole(Enum.PermissionType.Admin)]
 public record GetFranchiseHallOfFameType(int Id) : IQuery<Entity.DomainEntity>
 {
     public class Handler : QueryHandler<GetFranchiseHallOfFameType, Entity.DomainEntity>

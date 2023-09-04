@@ -1,5 +1,6 @@
 ﻿namespace Memorabilia.Application.Features.Admin.BasketballTypes;
 
+[AuthorizeByRole(Enum.PermissionType.Admin)]
 public record SaveBasketballType(DomainEditModel BasketballType) : ICommand
 {
     public class Handler : CommandHandler<SaveBasketballType>

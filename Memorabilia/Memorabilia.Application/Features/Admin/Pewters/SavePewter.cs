@@ -1,5 +1,6 @@
 ﻿namespace Memorabilia.Application.Features.Admin.Pewters;
 
+[AuthorizeByRole(Enum.PermissionType.Admin)]
 public record SavePewter(PewterEditModel EditModel) : ICommand
 {
     public class Handler : CommandHandler<SavePewter>

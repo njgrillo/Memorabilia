@@ -1,5 +1,6 @@
 ﻿namespace Memorabilia.Application.Features.Admin.TeamRoleTypes;
 
+[AuthorizeByRole(Enum.PermissionType.Admin)]
 public record SaveTeamRoleType(DomainEditModel TeamRoleType) : ICommand
 {
     public class Handler : CommandHandler<SaveTeamRoleType>

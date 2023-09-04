@@ -1,5 +1,6 @@
 ﻿namespace Memorabilia.Application.Features.Admin.Teams;
 
+[AuthorizeByRole(Enum.PermissionType.Admin)]
 public class SaveTeamConference
 {
     public class Handler : CommandHandler<Command>

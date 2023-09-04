@@ -1,5 +1,6 @@
 ﻿namespace Memorabilia.Application.Features.Admin.Management.Awards;
 
+[AuthorizeByRole(Enum.PermissionType.Admin)]
 public record GetAwardManagement(int AwardTypeId) : IQuery<Entity.AwardDetail>
 {
     public class Handler : QueryHandler<GetAwardManagement, Entity.AwardDetail>

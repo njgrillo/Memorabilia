@@ -1,5 +1,6 @@
 ﻿namespace Memorabilia.Application.Features.Admin.Divisions;
 
+[AuthorizeByRole(Enum.PermissionType.Admin)]
 public record SaveDivision(DivisionEditModel Division) : ICommand
 {
     public class Handler : CommandHandler<SaveDivision>

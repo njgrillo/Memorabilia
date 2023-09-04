@@ -1,5 +1,6 @@
 ﻿namespace Memorabilia.Application.Features.Admin.InternationalHallOfFameTypes;
 
+[AuthorizeByRole(Enum.PermissionType.Admin)]
 public record SaveInternationalHallOfFameType(DomainEditModel InternationalHallOfFameType) : ICommand
 {
     public class Handler : CommandHandler<SaveInternationalHallOfFameType>

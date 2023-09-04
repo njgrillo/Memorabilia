@@ -1,5 +1,6 @@
 ﻿namespace Memorabilia.Application.Features.Admin.FranchiseHallOfFameTypes;
 
+[AuthorizeByRole(Enum.PermissionType.Admin)]
 public record SaveFranchiseHallOfFameType(DomainEditModel FranchiseHallOfFameType) : ICommand
 {
     public class Handler : CommandHandler<SaveFranchiseHallOfFameType>

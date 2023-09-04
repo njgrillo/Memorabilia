@@ -1,5 +1,6 @@
 ﻿namespace Memorabilia.Application.Features.Admin.Orientations;
 
+[AuthorizeByRole(Enum.PermissionType.Admin)]
 public record SaveOrientation(DomainEditModel Orientation) : ICommand
 {
     public class Handler : CommandHandler<SaveOrientation>

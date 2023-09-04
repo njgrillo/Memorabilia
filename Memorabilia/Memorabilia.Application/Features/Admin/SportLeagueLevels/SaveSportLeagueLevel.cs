@@ -1,5 +1,6 @@
 ﻿namespace Memorabilia.Application.Features.Admin.SportLeagueLevels;
 
+[AuthorizeByRole(Enum.PermissionType.Admin)]
 public record SaveSportLeagueLevel(SportLeagueLevelEditModel SportLeagueLevel) : ICommand
 {
     public class Handler : CommandHandler<SaveSportLeagueLevel>

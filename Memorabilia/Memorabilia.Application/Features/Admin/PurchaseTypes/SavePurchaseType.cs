@@ -1,5 +1,6 @@
 ﻿namespace Memorabilia.Application.Features.Admin.PurchaseTypes;
 
+[AuthorizeByRole(Enum.PermissionType.Admin)]
 public record SavePurchaseType(DomainEditModel PurchaseType) : ICommand
 {
     public class Handler : CommandHandler<SavePurchaseType>

@@ -1,43 +1,44 @@
 ﻿namespace Memorabilia.Application.Features.Admin.ProjectTypes;
 
+[AuthorizeByRole(Enum.PermissionType.Admin)]
 public record SaveProjectType(DomainEditModel ProjectType) : ICommand
 {
     public class Handler : CommandHandler<SaveProjectType>
-{
-    private readonly IDomainRepository<Entity.ProjectType> _projectTypeRepository;
-
-    public Handler(IDomainRepository<Entity.ProjectType> projectTypeRepository)
     {
-        _projectTypeRepository = projectTypeRepository;
-    }
+        private readonly IDomainRepository<Entity.ProjectType> _projectTypeRepository;
 
-    protected override async Task Handle(SaveProjectType request)
-    {
-        Entity.ProjectType projectType;
-
-        if (request.ProjectType.IsNew)
+        public Handler(IDomainRepository<Entity.ProjectType> projectTypeRepository)
         {
-            projectType = new Entity.ProjectType(request.ProjectType.Name, 
-                                                 request.ProjectType.Abbreviation);
-
-            await _projectTypeRepository.Add(projectType);
-
-            return;
+            _projectTypeRepository = projectTypeRepository;
         }
 
-        projectType = await _projectTypeRepository.Get(request.ProjectType.Id);
-
-        if (request.ProjectType.IsDeleted)
+        protected override async Task Handle(SaveProjectType request)
         {
-            await _projectTypeRepository.Delete(projectType);
+            Entity.ProjectType projectType;
 
-            return;
+            if (request.ProjectType.IsNew)
+            {
+                projectType = new Entity.ProjectType(request.ProjectType.Name, 
+                                                     request.ProjectType.Abbreviation);
+
+                await _projectTypeRepository.Add(projectType);
+
+                return;
+            }
+
+            projectType = await _projectTypeRepository.Get(request.ProjectType.Id);
+
+            if (request.ProjectType.IsDeleted)
+            {
+                await _projectTypeRepository.Delete(projectType);
+
+                return;
+            }
+
+            projectType.Set(request.ProjectType.Name, 
+                            request.ProjectType.Abbreviation);
+
+            await _projectTypeRepository.Update(projectType);
         }
-
-        projectType.Set(request.ProjectType.Name, 
-                        request.ProjectType.Abbreviation);
-
-        await _projectTypeRepository.Update(projectType);
     }
-}
 }

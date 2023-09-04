@@ -1,5 +1,6 @@
 ﻿namespace Memorabilia.Application.Features.Admin.Colleges;
 
+[AuthorizeByRole(Enum.PermissionType.Admin)]
 public record SaveCollege(DomainEditModel College) : ICommand
 {
     public class Handler : CommandHandler<SaveCollege>

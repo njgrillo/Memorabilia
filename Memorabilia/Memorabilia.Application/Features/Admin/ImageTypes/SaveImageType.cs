@@ -1,5 +1,6 @@
 ﻿namespace Memorabilia.Application.Features.Admin.ImageTypes;
 
+[AuthorizeByRole(Enum.PermissionType.Admin)]
 public record SaveImageType(DomainEditModel ImageType) : ICommand
 {
     public class Handler : CommandHandler<SaveImageType>

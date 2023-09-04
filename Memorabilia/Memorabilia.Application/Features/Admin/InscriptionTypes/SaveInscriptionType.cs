@@ -1,5 +1,6 @@
 ﻿namespace Memorabilia.Application.Features.Admin.InscriptionTypes;
 
+[AuthorizeByRole(Enum.PermissionType.Admin)]
 public record SaveInscriptionType(DomainEditModel InscriptionType) : ICommand
 {
     public class Handler : CommandHandler<SaveInscriptionType>

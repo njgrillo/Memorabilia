@@ -1,5 +1,6 @@
 ﻿namespace Memorabilia.Application.Features.Admin.Conditions;
 
+[AuthorizeByRole(Enum.PermissionType.Admin)]
 public record SaveCondition(DomainEditModel Condition) : ICommand
 {
     public class Handler : CommandHandler<SaveCondition>

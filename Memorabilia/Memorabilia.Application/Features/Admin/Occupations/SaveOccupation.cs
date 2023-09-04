@@ -1,5 +1,6 @@
 ﻿namespace Memorabilia.Application.Features.Admin.Occupations;
 
+[AuthorizeByRole(Enum.PermissionType.Admin)]
 public record SaveOccupation(DomainEditModel Occupation) : ICommand
 {
     public class Handler : CommandHandler<SaveOccupation>

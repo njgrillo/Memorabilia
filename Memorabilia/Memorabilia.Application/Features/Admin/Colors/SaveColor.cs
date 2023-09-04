@@ -1,5 +1,6 @@
 ﻿namespace Memorabilia.Application.Features.Admin.Colors;
 
+[AuthorizeByRole(Enum.PermissionType.Admin)]
 public record SaveColor(DomainEditModel Color) : ICommand
 {
     public class Handler : CommandHandler<SaveColor>

@@ -1,5 +1,6 @@
 ﻿namespace Memorabilia.Application.Features.Admin.AwardTypes;
 
+[AuthorizeByRole(Enum.PermissionType.Admin)]
 public record SaveAwardType(DomainEditModel AwardType) : ICommand
 {
     public class Handler : CommandHandler<SaveAwardType>

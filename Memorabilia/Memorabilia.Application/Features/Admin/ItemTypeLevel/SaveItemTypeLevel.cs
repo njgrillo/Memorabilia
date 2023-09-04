@@ -1,5 +1,6 @@
 ﻿namespace Memorabilia.Application.Features.Admin.ItemTypeLevel;
 
+[AuthorizeByRole(Enum.PermissionType.Admin)]
 public record SaveItemTypeLevel(ItemTypeLevelEditModel ItemTypeLevel) : ICommand
 {
     public class Handler : CommandHandler<SaveItemTypeLevel>

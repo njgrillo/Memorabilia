@@ -1,5 +1,6 @@
 ﻿namespace Memorabilia.Application.Features.Admin.PrivacyTypes;
 
+[AuthorizeByRole(Enum.PermissionType.Admin)]
 public record GetPrivacyTypes() : IQuery<Entity.PrivacyType[]>
 {
     public class Handler : QueryHandler<GetPrivacyTypes, Entity.PrivacyType[]>

@@ -1,5 +1,6 @@
 ﻿namespace Memorabilia.Application.Features.Admin.Commissioners;
 
+[AuthorizeByRole(Enum.PermissionType.Admin)]
 public record SaveCommissioner(CommissionerEditModel Commissioner) : ICommand
 {
     public class Handler : CommandHandler<SaveCommissioner>

@@ -1,5 +1,6 @@
 ﻿namespace Memorabilia.Application.Features.Admin.WritingInstruments;
 
+[AuthorizeByRole(Enum.PermissionType.Admin)]
 public record GetWritingInstrument(int Id) : IQuery<Entity.DomainEntity>
 {
     public class Handler : QueryHandler<GetWritingInstrument, Entity.DomainEntity>

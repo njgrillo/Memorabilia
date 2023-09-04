@@ -1,5 +1,6 @@
 ﻿namespace Memorabilia.Application.Features.Admin.BatTypes;
 
+[AuthorizeByRole(Enum.PermissionType.Admin)]
 public record SaveBatType(DomainEditModel BatType) : ICommand
 {
     public class Handler : CommandHandler<SaveBatType>

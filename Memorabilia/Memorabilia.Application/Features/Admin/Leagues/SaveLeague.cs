@@ -1,5 +1,6 @@
 ﻿namespace Memorabilia.Application.Features.Admin.Leagues;
 
+[AuthorizeByRole(Enum.PermissionType.Admin)]
 public record SaveLeague(LeagueEditModel League) : ICommand
 {
     public class Handler : CommandHandler<SaveLeague>

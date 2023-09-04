@@ -1,5 +1,6 @@
 ﻿namespace Memorabilia.Application.Features.Admin.ThroughTheMailFailureTypes;
 
+[AuthorizeByRole(Enum.PermissionType.Admin)]
 public record GetThroughTheMailFailureTypes() : IQuery<Entity.ThroughTheMailFailureType[]>
 {
     public class Handler : QueryHandler<GetThroughTheMailFailureTypes, Entity.ThroughTheMailFailureType[]>

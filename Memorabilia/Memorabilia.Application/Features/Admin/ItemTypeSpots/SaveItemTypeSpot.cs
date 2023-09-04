@@ -1,5 +1,6 @@
 ﻿namespace Memorabilia.Application.Features.Admin.ItemTypeSpots;
 
+[AuthorizeByRole(Enum.PermissionType.Admin)]
 public record SaveItemTypeSpot(ItemTypeSpotEditModel ItemTypeSpot) : ICommand
 {
     public class Handler : CommandHandler<SaveItemTypeSpot>

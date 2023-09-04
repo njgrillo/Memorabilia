@@ -1,5 +1,6 @@
 ﻿namespace Memorabilia.Application.Features.Admin.JerseyQualityTypes;
 
+[AuthorizeByRole(Enum.PermissionType.Admin)]
 public record SaveJerseyQualityType(DomainEditModel JerseyQualityType) : ICommand
 {
     public class Handler : CommandHandler<SaveJerseyQualityType>

@@ -1,5 +1,6 @@
 ﻿namespace Memorabilia.Application.Features.Admin.Commissioners;
 
+[AuthorizeByRole(Enum.PermissionType.Admin)]
 public record GetCommissioners(int? SportLeagueLevelId = null) 
     : IQuery<Entity.Commissioner[]>
 {

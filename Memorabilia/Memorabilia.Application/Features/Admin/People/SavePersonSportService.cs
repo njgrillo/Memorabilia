@@ -1,5 +1,6 @@
 ﻿namespace Memorabilia.Application.Features.Admin.People;
 
+[AuthorizeByRole(Enum.PermissionType.Admin)]
 public class SavePersonSportService
 {
     public class Handler : CommandHandler<Command>

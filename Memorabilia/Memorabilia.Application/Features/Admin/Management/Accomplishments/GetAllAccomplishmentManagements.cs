@@ -1,5 +1,6 @@
 ﻿namespace Memorabilia.Application.Features.Admin.Management.Accomplishments;
 
+[AuthorizeByRole(Enum.PermissionType.Admin)]
 public record GetAllAccomplishmentManagements() : IQuery<AccomplishmentManagementModel[]>
 {
     public class Handler : QueryHandler<GetAllAccomplishmentManagements, AccomplishmentManagementModel[]>

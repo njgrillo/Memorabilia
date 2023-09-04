@@ -1,5 +1,6 @@
 ﻿namespace Memorabilia.Application.Features.Admin.Sizes;
 
+[AuthorizeByRole(Enum.PermissionType.Admin)]
 public record SaveSize(DomainEditModel Size) : ICommand
 {
     public class Handler : CommandHandler<SaveSize>

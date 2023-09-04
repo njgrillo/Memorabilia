@@ -1,5 +1,6 @@
 ﻿namespace Memorabilia.Application.Features.Admin.ItemTypeBrand;
 
+[AuthorizeByRole(Enum.PermissionType.Admin)]
 public record SaveItemTypeBrand(ItemTypeBrandEditModel ItemTypeBrand) : ICommand
 {
     public class Handler : CommandHandler<SaveItemTypeBrand>

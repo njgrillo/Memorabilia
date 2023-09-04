@@ -1,5 +1,6 @@
 ﻿namespace Memorabilia.Application.Features.Admin.JerseyStyleTypes;
 
+[AuthorizeByRole(Enum.PermissionType.Admin)]
 public record SaveJerseyStyleType(DomainEditModel JerseyStyleType) : ICommand
 {
     public class Handler : CommandHandler<SaveJerseyStyleType>

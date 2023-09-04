@@ -6,6 +6,7 @@ global using Hangfire;
 global using MediatR;
 global using MediatR.Courier;
 global using MediatR.Courier.DependencyInjection;
+global using Memorabilia.Application.Behaviors;
 global using Memorabilia.Application.Configuration;
 global using Memorabilia.Application.Extensions;
 global using Memorabilia.Application.Features.Admin;

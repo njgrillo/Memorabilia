@@ -1,5 +1,6 @@
 ﻿namespace Memorabilia.Application.Features.Admin.HelmetFinishes;
 
+[AuthorizeByRole(Enum.PermissionType.Admin)]
 public record GetHelmetFinishes() : IQuery<Entity.HelmetFinish[]>
 {
     public class Handler : QueryHandler<GetHelmetFinishes, Entity.HelmetFinish[]>

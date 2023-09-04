@@ -40,6 +40,7 @@ public class Startup
 
         //services.ConfigureHangfire(Configuration);
 
+        services.AddAuthenticationCore();
         services.AddHttpContextAccessor();
         services.AddScoped<HttpContextAccessor>();
         services.AddHttpClient();
@@ -56,6 +57,8 @@ public class Startup
         services.RegisterFactories();
         services.RegisterServices();
         services.RegisterCachedRepositories();
+
+        services.AddTransient(typeof(IPipelineBehavior<,>), typeof(AuthorizationBehavior<,>));
 
         var developerSettings = new DeveloperSettings();
         Configuration.GetSection("DeveloperSettings").Bind(developerSettings);

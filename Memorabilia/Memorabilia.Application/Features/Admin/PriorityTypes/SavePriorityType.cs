@@ -1,5 +1,6 @@
 ﻿namespace Memorabilia.Application.Features.Admin.PriorityTypes;
 
+[AuthorizeByRole(Enum.PermissionType.Admin)]
 public record SavePriorityType(DomainEditModel PriorityType) : ICommand
 {
     public class Handler : CommandHandler<SavePriorityType>

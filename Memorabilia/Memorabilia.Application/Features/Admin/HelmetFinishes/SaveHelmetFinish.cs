@@ -1,5 +1,6 @@
 ﻿namespace Memorabilia.Application.Features.Admin.HelmetFinishes;
 
+[AuthorizeByRole(Enum.PermissionType.Admin)]
 public record SaveHelmetFinish(DomainEditModel HelmetFinish) : ICommand
 {
     public class Handler : CommandHandler<SaveHelmetFinish>

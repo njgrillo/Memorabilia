@@ -1,5 +1,6 @@
 ﻿namespace Memorabilia.Application.Features.Admin.ItemTypeSports;
 
+[AuthorizeByRole(Enum.PermissionType.Admin)]
 public record GetItemTypeSports(int? ItemTypeId = null) : IQuery<Entity.ItemTypeSport[]>
 {
     public class Handler : QueryHandler<GetItemTypeSports, Entity.ItemTypeSport[]>

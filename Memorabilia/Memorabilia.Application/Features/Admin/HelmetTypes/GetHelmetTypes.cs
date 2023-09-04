@@ -1,5 +1,6 @@
 ﻿namespace Memorabilia.Application.Features.Admin.HelmetTypes;
 
+[AuthorizeByRole(Enum.PermissionType.Admin)]
 public record GetHelmetTypes() : IQuery<Entity.HelmetType[]>
 {
     public class Handler : QueryHandler<GetHelmetTypes, Entity.HelmetType[]>

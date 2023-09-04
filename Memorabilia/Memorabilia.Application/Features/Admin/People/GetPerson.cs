@@ -1,5 +1,6 @@
 ﻿namespace Memorabilia.Application.Features.Admin.People;
 
+[AuthorizeByRole(Enum.PermissionType.Admin)]
 public record GetPerson(int Id) 
     : IQuery<Entity.Person>
 {

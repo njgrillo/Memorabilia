@@ -1,5 +1,6 @@
 ﻿namespace Memorabilia.Application.Features.Admin.AccomplishmentTypes;
 
+[AuthorizeByRole(Enum.PermissionType.Admin)]
 public record GetAccomplishmentType(int Id) : IQuery<Entity.DomainEntity>
 {
     public class Handler : QueryHandler<GetAccomplishmentType, Entity.DomainEntity>

@@ -1,5 +1,6 @@
 ﻿namespace Memorabilia.Application.Features.Admin.FigureSpecialtyTypes;
 
+[AuthorizeByRole(Enum.PermissionType.Admin)]
 public record GetFigureSpecialtyType(int Id) : IQuery<Entity.DomainEntity>
 {
     public class Handler : QueryHandler<GetFigureSpecialtyType, Entity.DomainEntity>

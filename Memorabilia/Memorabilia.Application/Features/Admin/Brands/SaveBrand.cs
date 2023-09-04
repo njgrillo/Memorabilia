@@ -1,5 +1,6 @@
 ﻿namespace Memorabilia.Application.Features.Admin.Brands;
 
+[AuthorizeByRole(Enum.PermissionType.Admin)]
 public record SaveBrand(DomainEditModel Brand) : ICommand
 {
     public class Handler : CommandHandler<SaveBrand>
