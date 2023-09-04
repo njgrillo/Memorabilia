@@ -14,12 +14,12 @@ public class PersonSportServiceApiModel
         _sportService = sportService;
     }
 
-    public string? DebutDate
+    public string DebutDate
         => _sportService.DebutDate?.ToShortDateString();
 
-    public string? FreeAgentSigningDate
+    public string FreeAgentSigningDate
         => _sportService.FreeAgentSigningDate?.ToShortDateString();
 
-    public string? LastAppearanceDate
+    public string LastAppearanceDate
         => _sportService.LastAppearanceDate?.ToShortDateString();
 }

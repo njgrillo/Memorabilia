@@ -3,6 +3,9 @@
 public partial class PersonProfileSelect
 {
     [Inject]
+    public IDataProtectorService DataProtectorService { get; set; }
+
+    [Inject]
     public NavigationManager NavigationManager { get; set; }
 
     [Inject]
@@ -12,6 +15,6 @@ public partial class PersonProfileSelect
 
     private void SelectedPersonChanged(Entity.Person person)
     {
-        NavigationManager.NavigateTo($"Tools/PersonProfile/{person.Id}");
+        NavigationManager.NavigateTo($"Tools/PersonProfile/{DataProtectorService.EncryptId(person.Id)}");
     }
 }

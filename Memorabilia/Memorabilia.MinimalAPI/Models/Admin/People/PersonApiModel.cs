@@ -29,7 +29,7 @@ public class PersonApiModel
                   .Select(x => new PersonAwardApiModel(x))
                   .ToArray() ?? Array.Empty<PersonAwardApiModel>();
 
-    public string? BirthDate
+    public string BirthDate
 		=> _person.BirthDate?.ToShortDateString();
 
 	public string CallingName
@@ -55,7 +55,7 @@ public class PersonApiModel
                   .Select(x => new PersonCollegeApiModel(x))
                   .ToArray() ?? Array.Empty<PersonCollegeApiModel>();
 
-    public string? DeathDate
+    public string DeathDate
         => _person.DeathDate?.ToShortDateString();
 
     public string DisplayName 

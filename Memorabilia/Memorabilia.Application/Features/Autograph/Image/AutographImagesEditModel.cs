@@ -22,19 +22,13 @@ public class AutographImagesEditModel : EditModel
     public Constant.AutographStep AutographStep 
         => Constant.AutographStep.Image;
 
-    public override string BackNavigationPath 
-        => CanHaveSpot 
-        ? $"Autographs/{Constant.AdminDomainItem.Spots.Item}/{Constant.EditModeType.Update.Name}/{AutographId}" 
-        : $"Autographs/Authentications/{Constant.EditModeType.Update.Name}/{AutographId}";
-
     public bool CanHaveSpot 
         => ItemType?.CanHaveSpot() ?? false;
 
-    public override string ContinueNavigationPath 
-        => $"Autographs/{Constant.EditModeType.Update.Name}/{MemorabiliaId}/-1";
-
     public override Constant.EditModeType EditModeType 
-        => Images.Any() ? Constant.EditModeType.Update : Constant.EditModeType.Add;
+        => Images.Any() 
+            ? Constant.EditModeType.Update 
+            : Constant.EditModeType.Add;
 
     public override string ExitNavigationPath 
         => "Memorabilia/View";

@@ -6,6 +6,9 @@ public partial class MemorabiliaImageEditor
     public CommandRouter CommandRouter { get; set; }
 
     [Inject]
+    public IDataProtectorService DataProtectorService { get; set; }
+
+    [Inject]
     public IDialogService DialogService { get; set; }
 
     [Inject]
@@ -18,17 +21,27 @@ public partial class MemorabiliaImageEditor
     public ISnackbar Snackbar { get; set; }
 
     [Parameter]
-    public int MemorabiliaId { get; set; }
-    
+    public string EncryptMemorabiliaId { get; set; }
+
+    protected int MemorabiliaId;
+
     private EditImages<MemorabiliaImagesEditModel> EditImages;
 
     private MemorabiliaImagesEditModel EditModel 
-        = new ();
+        = new ();    
 
     protected override async Task OnInitializedAsync()
     {
+        MemorabiliaId = DataProtectorService.DecryptId(EncryptMemorabiliaId);
+
         EditModel 
             = new MemorabiliaImagesEditModel(new MemorabiliaModel(await QueryRouter.Send(new GetMemorabiliaItem(MemorabiliaId))));
+
+        EditModel.BackNavigationPath
+            = $"Memorabilia/{EditModel.ItemTypeName}/{EditModeType.Update.Name}/{DataProtectorService.EncryptId(MemorabiliaId)}";
+
+        EditModel.ContinueNavigationPath
+            = $"Autographs/{EditModeType.Update.Name}/{DataProtectorService.EncryptId(MemorabiliaId)}/{DataProtectorService.EncryptId(-1)}";
     }
 
     protected async Task OnSave()
@@ -62,7 +75,7 @@ public partial class MemorabiliaImageEditor
 
         if (!EditModel.HasMultipleAutographs)
         {
-            NavigationManager.NavigateTo(EditModel.AutographNavigationPath);
+            NavigationManager.NavigateTo($"Autographs/{EditModeType.Update.Name}/{DataProtectorService.EncryptId(MemorabiliaId)}/{(DataProtectorService.EncryptId(EditModel.AutographId.HasValue ? EditModel.AutographId.Value : -1))}");
         }
         else
         {

@@ -4,25 +4,45 @@ public partial class AutographEditor
     : AutographItem<AutographEditModel>
 {
     [Inject]
+    public IDataProtectorService DataProtectorService { get; set; }
+
+    [Inject]
     public ImageService ImageService { get; set; }
 
     [Inject]
     public AutographValidator Validator { get; set; }
 
     [Parameter]
-    public int MemorabiliaId { get; set; }
+    public string EncryptAutographId { get; set; }
+
+    [Parameter]
+    public string EncryptMemorabiliaId { get; set; }
+
+    protected int MemorabiliaId;
 
     private bool _displayAcquisitionDetails
         = true;
 
     protected override async Task OnInitializedAsync()
     {
+        MemorabiliaId = DataProtectorService.DecryptId(EncryptMemorabiliaId);
+
+        AutographId = EncryptAutographId.IsNullOrEmpty()
+            ? 0
+            : DataProtectorService.DecryptId(EncryptAutographId);
+
         var model = new MemorabiliaModel(await QueryRouter.Send(new GetMemorabiliaItem(MemorabiliaId)));
 
         if (!model.Autographs.Any() || AutographId <= 0)
         {
-            Model = new AutographEditModel(model);
+            Model = new AutographEditModel(model)
+            {
+                BackNavigationPath
+                    = $"Memorabilia/Image/{EditModeType.Update.Name}/{DataProtectorService.EncryptId(MemorabiliaId)}"
+            };
+
             IsLoaded = true;
+
             return;
         }
 
@@ -43,6 +63,9 @@ public partial class AutographEditor
         await CommandRouter.Send(command);
 
         Model.Id = command.Id;
+
+        Model.ContinueNavigationPath 
+            = $"Autographs/Inscriptions/Edit/{DataProtectorService.EncryptId(Model.Id)}";
     }
 
     private void GetModel(MemorabiliaModel model)
@@ -52,11 +75,20 @@ public partial class AutographEditor
 
         if (autograph == null)
         {
-            Model = new AutographEditModel(model);
+            Model = new AutographEditModel(model)
+            {
+                BackNavigationPath
+                    = $"Memorabilia/Image/{EditModeType.Update.Name}/{DataProtectorService.EncryptId(MemorabiliaId)}"
+            };
+
             return;
         }
 
-        Model = new AutographEditModel(autograph);
+        Model = new AutographEditModel(autograph)
+        {
+            BackNavigationPath
+                = $"Memorabilia/Image/{EditModeType.Update.Name}/{DataProtectorService.EncryptId(MemorabiliaId)}"
+        };
 
         _displayAcquisitionDetails = Model.AcquisitionTypeId > 0;
     }

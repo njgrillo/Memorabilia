@@ -9,6 +9,9 @@ public partial class ThroughTheMailEditor
     public CommandRouter CommandRouter { get; set; }
 
     [Inject]
+    public IDataProtectorService DataProtectorService { get; set; }
+
+    [Inject]
     public IDialogService DialogService { get; set; }
 
     [Inject]
@@ -27,10 +30,12 @@ public partial class ThroughTheMailEditor
     public ThroughTheMailValidator Validator { get; set; }
 
     [Parameter]
-    public int Id { get; set; }
+    public string EncryptId { get; set; }
 
     protected ThroughTheMailEditModel EditModel
         = new();
+
+    protected int Id;
 
     protected bool Loaded;    
 
@@ -49,6 +54,8 @@ public partial class ThroughTheMailEditor
 
     protected override async Task OnInitializedAsync()
     {
+        Id = DataProtectorService.DecryptId(EncryptId);
+
         if (Id == 0)
         {
             EditModel = new ThroughTheMailEditModel

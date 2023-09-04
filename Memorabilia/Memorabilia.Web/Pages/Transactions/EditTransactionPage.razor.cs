@@ -3,5 +3,5 @@
 public partial class EditTransactionPage
 {
     [Parameter]
-    public int Id { get; set; }
+    public string Id { get; set; }
 }

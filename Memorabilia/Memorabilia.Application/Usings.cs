@@ -118,6 +118,7 @@ global using Memorabilia.Domain;
 global using Memorabilia.Domain.Extensions;
 global using Memorabilia.Domain.SearchModels.Memorabilia;
 global using Memorabilia.Repository.Interfaces;
+global using Microsoft.AspNetCore.DataProtection;
 global using Microsoft.Extensions.DependencyInjection;
 global using Microsoft.Extensions.Hosting;
 global using Microsoft.Extensions.Options;

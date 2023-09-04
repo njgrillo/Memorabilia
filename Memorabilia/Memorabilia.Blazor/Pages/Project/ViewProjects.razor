@@ -23,7 +23,7 @@
                 <MudTd DataLabel="Start Date">@context.FormattedStartDate</MudTd>
                 <MudTd DataLabel="End Date">@context.FormattedEndDate</MudTd>
                 <MudTd DataLabel="">
-                    <GridEditButton NavigationPath="@($"{Model.RoutePrefix}/Edit/{context.Id}")" />
+                    <GridEditButton NavigationPath="@($"{Model.RoutePrefix}/Edit/{DataProtectorService.EncryptId(context.Id)}")" />
                     <MudTooltip Text="Delete">
                         <MudFab Color="MudBlazor.Color.Secondary"
                                 Icon="@Icons.Material.Outlined.DeleteOutline"

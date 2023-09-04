@@ -3,6 +3,9 @@
 public partial class MemorabiliaItemTimeline : ComponentBase
 {
     [Inject]
+    public IDataProtectorService DataProtectorService { get; set; }
+
+    [Inject]
     public NavigationManager NavigationManager { get; set; }
 
     [Parameter]
@@ -82,8 +85,8 @@ public partial class MemorabiliaItemTimeline : ComponentBase
 
     private string GetMudAlertStyle(MemorabiliaItemStep memorabiliaItemStep)
         => MemorabiliaItemStep == memorabiliaItemStep 
-        ? "border: 1px solid black;" 
-        : string.Empty;
+            ? "border: 1px solid black;" 
+            : string.Empty;
 
     private void Navigate(string item = null)
     {
@@ -92,10 +95,10 @@ public partial class MemorabiliaItemTimeline : ComponentBase
 
         if (item.IsNullOrEmpty())
         {
-            NavigationManager.NavigateTo($"Memorabilia/{EditModeType.Update.Name}/{MemorabiliaId}");
+            NavigationManager.NavigateTo($"Memorabilia/{EditModeType.Update.Name}/{DataProtectorService.EncryptId(MemorabiliaId)}");
             return;
         }
 
-        NavigationManager.NavigateTo($"Memorabilia/{item}/{EditModeType.Update.Name}/{MemorabiliaId}");
+        NavigationManager.NavigateTo($"Memorabilia/{item}/{EditModeType.Update.Name}/{DataProtectorService.EncryptId(MemorabiliaId)}");
     }
 }

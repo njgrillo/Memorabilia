@@ -23,11 +23,6 @@ public class ThroughTheMailMemorabiliaModel
     public Entity.Memorabilia Memorabilia
         => _throughTheMailMemorabilia.Memorabilia;
 
-    public string NavigationPath
-        => Autograph?.Id > 0
-                ? $"Memorabilia/Image/Edit/{Autograph.Id}"
-                : $"Memorabilia/Image/Edit/{Memorabilia.Id}";
-
     public string PrimaryImageFileName
         => Autograph?.Images?.FirstOrDefault(image => image.ImageTypeId == Constant.ImageType.Primary.Id)?.FileName
         ?? Memorabilia?.Images?.FirstOrDefault(image => image.ImageTypeId == Constant.ImageType.Primary.Id)?.FileName;

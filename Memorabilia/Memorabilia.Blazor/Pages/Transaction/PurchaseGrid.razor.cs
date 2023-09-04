@@ -1,7 +1,10 @@
 ﻿namespace Memorabilia.Blazor.Pages.Transaction;
 
 public partial class PurchaseGrid
-{  
+{
+    [Inject]
+    public IDataProtectorService DataProtectorService { get; set; }
+
     [Inject]
     public ImageService ImageService { get; set; }
 

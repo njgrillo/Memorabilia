@@ -21,7 +21,9 @@
     </HeaderContent>
     <RowTemplate>
         <MudTd DataLabel="">
-            <MudImage @onclick="@(_ => Navigate(context.NavigationPath))"
+            <MudImage @onclick="@(_ => Navigate(context.AutographId.HasValue
+			                                        ? $"Memorabilia/Image/Edit/{DataProtectorService.EncryptId(context.AutographId.Value)}"
+			                                        : $"Memorabilia/Image/Edit/{DataProtectorService.EncryptId(context.MemorabiliaId)}"))"
                       Class="rounded-lg can-click"
                       Elevation="5"
                       Height="200"
@@ -40,8 +42,7 @@
                     <MudTooltip Text="Link to Autograph">
                         <MudFab Color="MudBlazor.Color.Secondary"
                                 Icon="@Icons.Material.Outlined.AddLink"
-                                OnClick="@(_ => AddAutographLink(context))"
-                                Size="@MudBlazor.Size.Small" />
+                                OnClick="@(_ => AddAutographLink(context))" />
                     </MudTooltip>
                 </Match>
             </Condition>
@@ -49,8 +50,8 @@
         <MudTd DataLabel="">
             <MudTooltip Text="Delete">
                 <MudFab Color="MudBlazor.Color.Secondary"
-                    Icon="@Icons.Material.Outlined.DeleteOutline"
-                    OnClick="@(_ => context.IsDeleted = true)" />
+                        Icon="@Icons.Material.Outlined.DeleteOutline"
+                        OnClick="@(_ => context.IsDeleted = true)" />
             </MudTooltip>
         </MudTd>
     </RowTemplate>
@@ -76,8 +77,7 @@
                 <Match>
                     <MudTooltip Text="Link to Autograph">
                         <MudFab Color="MudBlazor.Color.Secondary"
-                                Icon="@Icons.Material.Outlined.AddLink"
-                                Size="@MudBlazor.Size.Small" />
+                                Icon="@Icons.Material.Outlined.AddLink" />
                     </MudTooltip>
                 </Match>
             </Condition>

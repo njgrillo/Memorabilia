@@ -8,6 +8,8 @@ public partial class BookEditor
 
     protected override async Task OnInitializedAsync()
     {
+        MemorabiliaId = DataProtectorService.DecryptId(EncryptMemorabiliaId);
+
         EditModel = new(new BookModel(await QueryRouter.Send(new GetMemorabiliaItem(MemorabiliaId))));
     }
 
@@ -21,5 +23,7 @@ public partial class BookEditor
             return;
 
         await CommandRouter.Send(command);
+
+        EditModel.ContinueNavigationPath = $"Memorabilia/Image/{EditModeType.Update.Name}/{DataProtectorService.EncryptId(MemorabiliaId)}";
     }
 }

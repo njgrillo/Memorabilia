@@ -6,6 +6,9 @@ public partial class ThroughTheMailGrid
     public CommandRouter CommandRouter { get; set; }
 
     [Inject]
+    public IDataProtectorService DataProtectorService { get; set; }
+
+    [Inject]
     public IDialogService DialogService { get; set; }
 
     [Inject]

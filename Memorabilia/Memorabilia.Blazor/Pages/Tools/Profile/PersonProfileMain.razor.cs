@@ -3,20 +3,27 @@
 public partial class PersonProfileMain
 {
     [Inject]
+    public IDataProtectorService DataProtectorService { get; set; }
+
+    [Inject]
     public ImageService ImageService { get; set; }
 
     [Inject]
     public IMediator Mediator { get; set; }
 
     [Parameter]
-    public int PersonId { get; set; }
+    public string EncryptedPersonId { get; set; }
 
     protected PersonProfileModel Model;
+
+    protected int PersonId;
 
     private Entity.Person _person;    
 
     protected override async Task OnParametersSetAsync()
     {
+        PersonId = DataProtectorService.DecryptId(EncryptedPersonId);
+
         if (PersonId == 0)
             return;
 

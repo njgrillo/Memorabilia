@@ -3,6 +3,12 @@
 public abstract class MemorabiliaItem<T> 
     : CommandQuery where T : ItemEditModel
 {
+    [Inject]
+    public IDataProtectorService DataProtectorService { get; set; }
+
+    [Parameter]
+    public string EncryptMemorabiliaId { get; set; }
+
     [Parameter]
     public int MemorabiliaId { get; set; }
 

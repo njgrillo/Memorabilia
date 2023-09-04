@@ -56,11 +56,6 @@ public class ThroughTheMailMemorabiliaEditModel : EditModel
 
 	public string MemorabiliaImageFileName { get; set; }
 
-	public string NavigationPath
-		=> AutographId.HasValue
-			? $"Memorabilia/Image/Edit/{AutographId}"
-			: $"Memorabilia/Image/Edit/{MemorabiliaId}";
-
 	public int PersonId { get; set; }
 
     public string PrimaryImageFileName

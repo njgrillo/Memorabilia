@@ -9,7 +9,7 @@ public class PersonAccomplishmentApiModel
         _personAccomplishment = personAccomplishment;
     }
 
-    public string? Date
+    public string Date
         => _personAccomplishment.Date?.ToShortDateString();
             
     public string Name

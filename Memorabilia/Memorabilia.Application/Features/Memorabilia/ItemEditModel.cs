@@ -1,10 +1,7 @@
 ﻿namespace Memorabilia.Application.Features.Memorabilia;
 
 public class ItemEditModel : EditModel
-{   
-    public override string ContinueNavigationPath 
-        => $"Memorabilia/Image/{Constant.EditModeType.Update.Name}/{MemorabiliaId}";       
-
+{
     public virtual string ImageFileName { get; set; }
 
     public virtual Constant.ItemType ItemType { get; set; }

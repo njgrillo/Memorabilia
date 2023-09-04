@@ -48,7 +48,7 @@
             <MudTooltip Text="@context.ImageDisplayCount">
                 <GridImage ImageLoaded="OnImageLoaded"
                            ImageFileName="@context.ImageFileName"
-                           NavigationPath="@($"Memorabilia/Image/Edit/{@context.Id}")" />
+                           NavigationPath="@($"Memorabilia/Image/Edit/{DataProtectorService.EncryptId(context.Id)}")" />
             </MudTooltip>
         </MudTd>
         <MudTd DataLabel="Item">@context.ItemTypeName</MudTd>

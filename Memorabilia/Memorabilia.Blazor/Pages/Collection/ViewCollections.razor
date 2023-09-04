@@ -21,7 +21,7 @@
                 <MudTd DataLabel="Name">@context.Name</MudTd>
                 <MudTd DataLabel="Description">@context.Description</MudTd>
                 <MudTd DataLabel="">
-                    <GridEditButton NavigationPath="@($"{Model.RoutePrefix}/Edit/{context.Id}")" />
+                    <GridEditButton NavigationPath="@($"{Model.RoutePrefix}/Edit/{DataProtectorService.EncryptId(context.Id)}")" />
                     <MudTooltip Text="Delete">
                         <MudFab Color="MudBlazor.Color.Secondary"
                                 Icon="@Icons.Material.Outlined.DeleteOutline"

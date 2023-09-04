@@ -9,21 +9,30 @@ public partial class MemorabiliaEditor
     public CommandRouter CommandRouter { get; set; }
 
     [Inject]
+    public IDataProtectorService DataProtectorService { get; set; }
+
+    [Inject]
     public QueryRouter QueryRouter { get; set; }
 
     [Inject]
     public MemorabiliaItemValidator Validator { get; set; }        
 
     [Parameter]
-    public int Id { get; set; }
+    public string EncryptId { get; set; }
 
     protected MemorabiliaEditModel EditModel
         = new();
+
+    protected int Id { get; set; }
 
     protected bool IsLoaded { get; set; }      
 
     protected override async Task OnInitializedAsync()
     {
+        Id = EncryptId.IsNullOrEmpty()
+            ? 0
+            : DataProtectorService.DecryptId(EncryptId);
+
         if (Id == 0)
         {
             IsLoaded = true;
@@ -48,7 +57,7 @@ public partial class MemorabiliaEditor
 
         await CommandRouter.Send(command);
 
-        EditModel.ContinueNavigationPath = $"Memorabilia/{EditModel.ItemTypeName.Replace(" ", "")}/Edit/{command.Id}";
+        EditModel.ContinueNavigationPath = $"Memorabilia/{EditModel.ItemTypeName.Replace(" ", "")}/Edit/{DataProtectorService.EncryptId(command.Id)}";
     }
 
     private void OnAcquisitionTypeChange(int acquisitionTypeId)

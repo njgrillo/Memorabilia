@@ -66,11 +66,11 @@
             </NotMatch>
         </Condition>
         <MudTd DataLabel="">
-            <GridEditButton NavigationPath="@($"ThroughTheMail/Edit/{context.Id}")" />
+            <GridEditButton NavigationPath="@($"ThroughTheMail/Edit/{DataProtectorService.EncryptId(context.Id)}")" />
             <MudTooltip Text="Delete">
                 <MudFab Color="MudBlazor.Color.Secondary"
-                    Icon="@Icons.Material.Outlined.DeleteOutline"
-                    OnClick="@(_ => ShowDeleteConfirm(@context.Id))" />
+                        Icon="@Icons.Material.Outlined.DeleteOutline"
+                        OnClick="@(_ => ShowDeleteConfirm(@context.Id))" />
             </MudTooltip>
         </MudTd>
     </RowTemplate>
@@ -103,7 +103,9 @@
                             </HeaderContent>
                             <RowTemplate Context="memorabilia">
                                     <MudTd DataLabel="">
-                                        <MudImage @onclick="@(_ => Navigate(memorabilia.NavigationPath))"
+                                        <MudImage @onclick="@(_ => Navigate(memorabilia.Autograph?.Id > 0
+                                                                                ? $"Memorabilia/Image/Edit/{DataProtectorService.EncryptId(memorabilia.Autograph.Id)}"
+                                                                                : $"Memorabilia/Image/Edit/{DataProtectorService.EncryptId(memorabilia.Memorabilia.Id)}"))"
                                                   Class="rounded-lg can-click"
                                                   Elevation="5"
                                                   Height="200"

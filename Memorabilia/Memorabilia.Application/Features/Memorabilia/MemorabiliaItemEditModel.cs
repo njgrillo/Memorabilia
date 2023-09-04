@@ -2,9 +2,6 @@
 
 public abstract class MemorabiliaItemEditModel : ItemEditModel
 {
-    public override string BackNavigationPath 
-        => $"Memorabilia/{Constant.EditModeType.Update.Name}/{MemorabiliaId}";
-
     public int BrandId { get; set; }
 
     public virtual bool DisplayGameDate 

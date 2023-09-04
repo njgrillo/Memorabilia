@@ -2,6 +2,9 @@
 
 public partial class SalesEditGrid
 {
+    [Inject]
+    public IDataProtectorService DataProtectorService { get; set; }
+
     [Parameter]
     public List<MemorabiliaTransactionSaleEditModel> Sales { get; set; }
         = new();

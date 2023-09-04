@@ -28,10 +28,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Pages\Tools\ThroughTheMail\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <None Include="Pages\Admin\BasketballTypes\BasketballTypeEditor.razor" />
     <None Include="Pages\Admin\BasketballTypes\ViewBasketballTypes.razor" />
     <None Include="Pages\Admin\BatTypes\BatTypeEditor.razor" />

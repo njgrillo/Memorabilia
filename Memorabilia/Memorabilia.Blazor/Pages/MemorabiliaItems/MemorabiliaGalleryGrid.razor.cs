@@ -3,6 +3,9 @@
 public partial class MemorabiliaGalleryGrid
 {
     [Inject]
+    public IDataProtectorService DataProtectorService { get; set; }
+
+    [Inject]
     public IGalleryService GalleryService { get; set; }
 
     [Inject]
@@ -35,6 +38,12 @@ public partial class MemorabiliaGalleryGrid
 
     protected string GetTitle(MemorabiliaGalleryItemModel item)
         => GalleryService.GetTitle(item.Memorabilia);
+
+    private string GetEditNavigationPath(int id)
+        => $"/Memorabilia/{EditModeType.Update.Name}/{DataProtectorService.EncryptId(id)}";
+
+    private string GetPrimaryImageNavigationPath(int id)
+        => $"/Memorabilia/Image/{EditModeType.Update.Name}/{DataProtectorService.EncryptId(id)}";
 
     private async void LoadMore()
     {

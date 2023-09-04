@@ -1,7 +1,5 @@
-﻿@page "/Autographs/Edit/{memorabiliaId:int}"
-@page "/Autographs/Edit/{memorabiliaId:int}/{autographId:int}"
+﻿@page "/Autographs/Edit/{memorabiliaId}"
+@page "/Autographs/Edit/{memorabiliaId}/{autographId}"
 
-@inherits AutographItem
-
-<AutographEditor AutographId="@AutographId"
-                 MemorabiliaId="@MemorabiliaId" />
+<AutographEditor EncryptAutographId="@AutographId"
+                 EncryptMemorabiliaId="@MemorabiliaId" />

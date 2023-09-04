@@ -4,18 +4,31 @@ public partial class AutographImageEditor
     : AutographItem<AutographImagesEditModel>
 {
     [Inject]
+    public IDataProtectorService DataProtectorService { get; set; }
+
+    [Inject]
     public ISnackbar Snackbar { get; set; }
+
+    [Parameter]
+    public string EncryptAutographId { get; set; }
 
     private EditImages<AutographImagesEditModel> EditImages;
 
     protected override async Task OnInitializedAsync()
     {
+        AutographId = DataProtectorService.DecryptId(EncryptAutographId);
+
         var autograph = new AutographModel(await QueryRouter.Send(new GetAutograph(AutographId)));
 
         Model = new AutographImagesEditModel(autograph.Images,
                                              autograph.ItemType,
                                              autograph.MemorabiliaId,
                                              autograph.Id);
+
+        Model.BackNavigationPath =
+            Model.CanHaveSpot
+                ? $"Autographs/{AdminDomainItem.Spots.Item}/{EditModeType.Update.Name}/{DataProtectorService.EncryptId(AutographId)}"
+                : $"Autographs/Authentications/{EditModeType.Update.Name}/{DataProtectorService.EncryptId(AutographId)}";
 
         IsLoaded = true;
     }
@@ -50,6 +63,9 @@ public partial class AutographImageEditor
     protected async Task SaveAndAddAutograph()
     {
         await OnSave();
+
+        Model.ContinueNavigationPath 
+            = $"Autographs/{EditModeType.Update.Name}/{DataProtectorService.EncryptId(Model.MemorabiliaId)}/{DataProtectorService.EncryptId(-1)}";
 
         NavigationManager.NavigateTo(Model.ContinueNavigationPath);
         Snackbar.Add("Images were saved successfully!", Severity.Success);

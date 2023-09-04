@@ -2,6 +2,9 @@
 
 public partial class TradesEditGrid
 {
+    [Inject]
+    public IDataProtectorService DataProtectorService { get; set; }
+
     [Parameter]
     public List<MemorabiliaTransactionTradeEditModel> Trades { get; set; }
         = new();

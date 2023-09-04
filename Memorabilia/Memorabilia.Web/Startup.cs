@@ -51,10 +51,23 @@ public class Startup
         services.AddTransient<CommandRouter>();
         services.AddTransient<QueryRouter>();
         services.AddMediatR(typeof(GetCommissioner).Assembly);
+        services.AddDataProtection();
         services.RegisterValidators();
         services.RegisterFactories();
         services.RegisterServices();
         services.RegisterCachedRepositories();
+
+        var developerSettings = new DeveloperSettings();
+        Configuration.GetSection("DeveloperSettings").Bind(developerSettings);
+
+        if (!developerSettings.EncryptIds)
+        {
+            services.AddScoped<IDataProtectorService, DataProtectorDebugService>();
+        }
+        else
+        {
+            services.AddScoped<IDataProtectorService, DataProtectorService>();
+        }
 
         services.AddCourier(typeof(GetCommissioner).Assembly);
         

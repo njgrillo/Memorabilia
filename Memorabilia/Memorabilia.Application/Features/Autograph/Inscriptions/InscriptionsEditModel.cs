@@ -28,14 +28,8 @@ public class InscriptionsEditModel : EditModel
     public Constant.AutographStep AutographStep 
         => Constant.AutographStep.Inscription;
 
-    public override string BackNavigationPath 
-        => $"Autographs/{Constant.EditModeType.Update.Name}/{MemorabiliaId}/{AutographId}";
-
     public bool CanHaveSpot 
         => ItemType?.CanHaveSpot() ?? false;
-
-    public override string ContinueNavigationPath
-        => $"Autographs/Authentications/{Constant.EditModeType.Update.Name}/{AutographId}";
 
     public override Constant.EditModeType EditModeType 
         => Inscriptions.Any() 

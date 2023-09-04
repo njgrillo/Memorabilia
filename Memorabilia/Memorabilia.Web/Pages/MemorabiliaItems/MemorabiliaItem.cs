@@ -3,5 +3,5 @@
 public class MemorabiliaItem : WebPage
 {
     [Parameter]
-    public int MemorabiliaId { get; set; }
+    public string MemorabiliaId { get; set; }
 }

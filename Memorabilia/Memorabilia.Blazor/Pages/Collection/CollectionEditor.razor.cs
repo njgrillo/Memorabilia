@@ -9,6 +9,9 @@ public partial class CollectionEditor
     public CommandRouter CommandRouter { get; set; }
 
     [Inject]
+    public IDataProtectorService DataProtectorService { get; set; }
+
+    [Inject]
     public IDialogService DialogService { get; set; }
 
     [Inject]
@@ -24,7 +27,9 @@ public partial class CollectionEditor
     public CollectionValidator Validator { get; set; }
 
     [Parameter]
-    public int Id { get; set; }
+    public string EncryptId { get; set; }
+
+    protected int Id;
 
     protected bool IsDetailView 
         = true;
@@ -60,6 +65,8 @@ public partial class CollectionEditor
 
     protected override async Task OnInitializedAsync()
     {
+        Id = DataProtectorService.DecryptId(EncryptId);
+
         if (Id == 0)
         {
             EditModel = new CollectionEditModel

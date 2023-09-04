@@ -19,14 +19,8 @@ public class SpotEditModel : EditModel
     public Constant.AutographStep AutographStep 
         => Constant.AutographStep.Spot;
 
-    public override string BackNavigationPath
-        => $"Autographs/Authentications/{Constant.EditModeType.Update.Name}/{AutographId}";
-
     public bool CanHaveSpot 
         => ItemType?.CanHaveSpot() ?? false;
-
-    public override string ContinueNavigationPath 
-        => $"Autographs/Image/{Constant.EditModeType.Update.Name}/{AutographId}";
 
     public override Constant.EditModeType EditModeType 
         => SpotId > 0 ? Constant.EditModeType.Update : Constant.EditModeType.Add;

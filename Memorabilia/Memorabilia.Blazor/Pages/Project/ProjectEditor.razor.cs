@@ -9,6 +9,9 @@ public partial class ProjectEditor
     public CommandRouter CommandRouter { get; set; }
 
     [Inject]
+    public IDataProtectorService DataProtectorService { get; set; }
+
+    [Inject]
     public IJSRuntime JSRuntime { get; set; }
 
     [Inject]
@@ -21,12 +24,14 @@ public partial class ProjectEditor
     public ProjectValidator Validator { get; set; }
 
     [Parameter]
-    public int Id { get; set; }
+    public string EncryptId { get; set; }
 
     protected bool Loaded;
 
     protected ProjectEditModel EditModel 
         = new();
+
+    protected int Id;
 
     protected Type ProjectTypeComponent;
 
@@ -50,6 +55,8 @@ public partial class ProjectEditor
     {
         ProjectTypeParameters.Add("ProjectDetailsSet",
             EventCallback.Factory.Create<Dictionary<string, object>>(this, OnProjectDetailsSet));
+
+        Id = DataProtectorService.DecryptId(EncryptId);
 
         if (Id == 0)
         {

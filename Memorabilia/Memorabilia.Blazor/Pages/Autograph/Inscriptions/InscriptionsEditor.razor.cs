@@ -4,22 +4,34 @@ public partial class InscriptionsEditor
     : AutographItem<InscriptionEditModel>
 {
     [Inject]
+    public IDataProtectorService DataProtectorService { get; set; }
+
+    [Inject]
     public InscriptionValidator Validator { get; set; }
+
+    [Parameter]
+    public string EncryptAutographId { get; set; }
 
     protected InscriptionsEditModel EditModel 
         = new();   
 
     protected override async Task OnInitializedAsync()
     {
+        AutographId = DataProtectorService.DecryptId(EncryptAutographId);   
+
         var autograph = new AutographModel(await QueryRouter.Send(new GetAutograph(AutographId)));
 
-        EditModel = new InscriptionsEditModel(autograph.Inscriptions, 
-                                              autograph.ItemTypeId, 
+        EditModel = new InscriptionsEditModel(autograph.Inscriptions,
+                                              autograph.ItemTypeId,
                                               autograph.UserId,
                                               autograph.MemorabiliaId,
                                               autograph.Id,
                                               autograph.MemorabiliaImageNames,
-                                              autograph.PersonId);
+                                              autograph.PersonId)
+        {
+            BackNavigationPath
+                = $"Autographs/{EditModeType.Update.Name}/{autograph.MemorabiliaId}/{DataProtectorService.EncryptId(AutographId)}"
+        };
 
         IsLoaded = true;
     }
@@ -27,6 +39,9 @@ public partial class InscriptionsEditor
     protected async Task Save()
     {
         await CommandRouter.Send(new SaveInscriptions.Command(EditModel));
+
+        EditModel.ContinueNavigationPath
+            = $"Autographs/Authentications/Edit/{DataProtectorService.EncryptId(EditModel.AutographId)}";
     }
 
     private void Add()

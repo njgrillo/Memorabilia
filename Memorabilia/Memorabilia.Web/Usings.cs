@@ -16,6 +16,7 @@ global using Memorabilia.Application.Features.Services.Autographs.Inscriptions.A
 global using Memorabilia.Application.Features.Services.Autographs.Inscriptions.Awards;
 global using Memorabilia.Application.Features.Services.Hangfire;
 global using Memorabilia.Application.Features.Services.Interfaces;
+global using Memorabilia.Application.Features.Services.Security;
 global using Memorabilia.Application.Features.User;
 global using Memorabilia.Application.Hangfire;
 global using Memorabilia.Application.Hangfire.Attributes;

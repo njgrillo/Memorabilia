@@ -8,6 +8,8 @@ public partial class JerseyNumberEditor
 
     protected override async Task OnInitializedAsync()
     {
+        MemorabiliaId = DataProtectorService.DecryptId(EncryptMemorabiliaId);
+
         EditModel = new(new JerseyNumberModel(await QueryRouter.Send(new GetMemorabiliaItem(MemorabiliaId))));
     }
 
@@ -21,5 +23,7 @@ public partial class JerseyNumberEditor
             return;
 
         await CommandRouter.Send(command);
+
+        EditModel.ContinueNavigationPath = $"Memorabilia/Image/{EditModeType.Update.Name}/{DataProtectorService.EncryptId(MemorabiliaId)}";
     }
 }

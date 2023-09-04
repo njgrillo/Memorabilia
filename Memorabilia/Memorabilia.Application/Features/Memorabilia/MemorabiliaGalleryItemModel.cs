@@ -18,9 +18,6 @@ public class MemorabiliaGalleryItemModel
     public string Description 
         => $"Estimated Value: {_memorabilia.EstimatedValue + _memorabilia.Autographs.Sum(autograph => autograph.EstimatedValue)}";
 
-    public string EditNavigationPath 
-        => $"/Memorabilia/{Constant.EditModeType.Update.Name}/{_memorabilia.Id}";
-
     public int Id => _memorabilia.Id;
 
     public string ImageFileName
@@ -39,10 +36,7 @@ public class MemorabiliaGalleryItemModel
     }
 
     public Entity.Memorabilia Memorabilia 
-        => _memorabilia;
-
-    public string PrimaryImageNavigationPath 
-        => $"/Memorabilia/Image/{Constant.EditModeType.Update.Name}/{Id}";    
+        => _memorabilia;   
 
     public string Subtitle 
         => string.Empty;

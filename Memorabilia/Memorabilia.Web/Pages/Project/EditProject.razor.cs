@@ -3,5 +3,5 @@
 public partial class EditProject
 {  
     [Parameter]
-    public int Id { get; set; }
+    public string Id { get; set; }
 }

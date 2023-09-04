@@ -3,6 +3,9 @@
 public partial class SelectThroughTheMailMemorabiliaDialog
 {
     [Inject]
+    public IDataProtectorService DataProtectorService { get; set; }
+
+    [Inject]
     public ImageService ImageService { get; set; }
 
     [Inject]

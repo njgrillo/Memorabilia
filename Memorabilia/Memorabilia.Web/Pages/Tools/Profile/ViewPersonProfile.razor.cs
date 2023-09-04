@@ -3,5 +3,5 @@
 public partial class ViewPersonProfile
 {
     [Parameter]
-    public int PersonId { get; set; }
+    public string PersonId { get; set; }
 }

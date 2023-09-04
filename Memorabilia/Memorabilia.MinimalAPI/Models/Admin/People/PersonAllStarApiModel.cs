@@ -12,7 +12,7 @@ public class PersonAllStarApiModel
     public string Sport
         => Constant.Sport.Find(_allStar.SportId).Name;
 
-    public string? SportLeageLevel
+    public string SportLeageLevel
         => _allStar.SportLeagueLevelId.HasValue
         ? Constant.SportLeagueLevel.Find(_allStar.SportLeagueLevelId.Value).Name
         : null;

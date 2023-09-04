@@ -4,21 +4,33 @@ public partial class AuthenticationsEditor
     : AutographItem<AuthenticationEditModel>
 {
     [Inject]
+    public IDataProtectorService DataProtectorService { get; set; }
+
+    [Inject]
     public AuthenticationValidator Validator { get; set; }
+
+    [Parameter]
+    public string EncryptAutographId { get; set; }
 
     protected AuthenticationsEditModel EditModel 
         = new();  
 
     protected override async Task OnInitializedAsync()
     {
+        AutographId = DataProtectorService.DecryptId(EncryptAutographId);
+
         var autograph = new AutographModel(await QueryRouter.Send(new GetAutograph(AutographId)));
 
-        EditModel = new AuthenticationsEditModel(autograph.Authentications, 
-                                                 autograph.ItemType, 
+        EditModel = new AuthenticationsEditModel(autograph.Authentications,
+                                                 autograph.ItemType,
                                                  autograph.UserId,
                                                  autograph.MemorabiliaId,
                                                  autograph.Id,
-                                                 autograph.MemorabiliaImageNames);
+                                                 autograph.MemorabiliaImageNames)
+        {
+            BackNavigationPath
+                = $"Autographs/Inscriptions/{EditModeType.Update.Name}/{DataProtectorService.EncryptId(AutographId)}"
+        };
 
         IsLoaded = true;
     }
@@ -28,6 +40,10 @@ public partial class AuthenticationsEditor
         EditModel.AutographId = AutographId;
 
         await CommandRouter.Send(new SaveAuthentications.Command(EditModel));
+
+        EditModel.ContinueNavigationPath = EditModel.CanHaveSpot
+            ? $"Autographs/{AdminDomainItem.Spots.Item}/{EditModeType.Update.Name}/{DataProtectorService.EncryptId(AutographId)}"
+            : $"Autographs/Image/{EditModeType.Update.Name}/{DataProtectorService.EncryptId(AutographId)}";
     }
 
     private void Add()

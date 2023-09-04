@@ -3,6 +3,9 @@
 public partial class ThroughTheMailMemorabiliaGrid
 {
     [Inject]
+    public IDataProtectorService DataProtectorService { get; set; }
+
+    [Inject]
     public IDialogService DialogService { get; set; }
 
     [Inject]

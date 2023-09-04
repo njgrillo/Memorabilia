@@ -3,6 +3,9 @@
 public partial class AutographTimeline
 {
     [Inject]
+    public IDataProtectorService DataProtectorService { get; set; }
+
+    [Inject]
     public NavigationManager NavigationManager { get; set; }
 
     [Parameter]
@@ -140,8 +143,8 @@ public partial class AutographTimeline
 
     private string GetMudAlertStyle(AutographStep autographStep)
         => AutographStep == autographStep 
-        ? "border: 1px solid black;" 
-        : string.Empty;
+            ? "border: 1px solid black;" 
+            : string.Empty;
 
     private void Navigate(string item = null)
     {
@@ -149,8 +152,8 @@ public partial class AutographTimeline
             return;
 
         string url = !item.IsNullOrEmpty()
-            ? $"Autographs/{item}/{EditModeType.Update.Name}/{AutographId}"
-            : $"Autographs/{EditModeType.Update.Name}/{MemorabiliaId}/{AutographId}";
+            ? $"Autographs/{item}/{EditModeType.Update.Name}/{DataProtectorService.EncryptId(AutographId)}"
+            : $"Autographs/{EditModeType.Update.Name}/{DataProtectorService.EncryptId(MemorabiliaId)}/{DataProtectorService.EncryptId(AutographId)}";
 
         NavigationManager.NavigateTo(url);
     }

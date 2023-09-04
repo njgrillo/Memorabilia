@@ -67,9 +67,6 @@ public class AutographEditModel : EditModel
     public Constant.AutographStep AutographStep 
         => Constant.AutographStep.Autograph;
 
-    public override string BackNavigationPath 
-        => $"Memorabilia/Image/{Constant.EditModeType.Update.Name}/{MemorabiliaId}";
-
     public bool CanHaveCost 
         => AcquisitionType?.CanHaveCost() ?? false;
 
@@ -86,9 +83,6 @@ public class AutographEditModel : EditModel
 
     public int ConditionId { get; set; } 
         = Constant.Condition.Pristine.Id;
-
-    public override string ContinueNavigationPath 
-        => $"Autographs/Inscriptions/{Constant.EditModeType.Update.Name}/{Id}";
 
     public decimal? Cost { get; set; }
 

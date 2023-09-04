@@ -5,11 +5,15 @@ public partial class BookplateEditor
 {
     protected override async Task OnInitializedAsync()
     {
+        MemorabiliaId = DataProtectorService.DecryptId(EncryptMemorabiliaId);
+
         EditModel = new(new BookplateModel(await QueryRouter.Send(new GetMemorabiliaItem(MemorabiliaId))));
     }
 
     protected async Task OnSave()
     {
         await CommandRouter.Send(new SaveBookplate.Command(EditModel));
+
+        EditModel.ContinueNavigationPath = $"Memorabilia/Image/{EditModeType.Update.Name}/{DataProtectorService.EncryptId(MemorabiliaId)}";
     }
 }

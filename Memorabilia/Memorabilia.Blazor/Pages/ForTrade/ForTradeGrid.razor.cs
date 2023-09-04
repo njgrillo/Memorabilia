@@ -9,6 +9,9 @@ public partial class ForTradeGrid
     public ICourier Courier { get; set; }
 
     [Inject]
+    public IDataProtectorService DataProtectorService { get; set; }
+
+    [Inject]
     public IDialogService DialogService { get; set; }
 
     [Inject]
