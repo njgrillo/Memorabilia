@@ -164,6 +164,15 @@
                 </Div>
                 <Div Class="col-2">
                     <Div Class="form-group">
+                        <RadioField EmptyValue="SaleFilter.None"
+                                    Options="SaleFilter.FilterItems"
+                                    SelectionChanged="(p) => Model.SaleFilter = p"
+                                    SelectedOption="Model.SaleFilter"
+                                    TItemType="SaleFilter" />
+                    </Div>
+                </Div>
+                <Div Class="col-2">
+                    <Div Class="form-group">
                         <RadioField EmptyValue="TradeFilter.None"
                                     Options="TradeFilter.FilterItems"
                                     SelectionChanged="(p) => Model.TradeFilter = p"
@@ -178,7 +187,7 @@
                                 Label="Include Sold Items" />
                         <Switch Checked="@Model.IncludeTraded"
                                 CheckedChanged="(p) => Model.IncludeTraded = p"
-                                Label="Include Traded Away Items" />
+                                Label="Include Traded Items" />
                     </MudStack>
                 </Div>
             </Div>

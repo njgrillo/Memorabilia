@@ -6,6 +6,8 @@ public class MemorabiliaContext : DbContext, IMemorabiliaContext
 
     public DbSet<Entity.Memorabilia> Memorabilia { get; set; }
 
+    public DbSet<Entity.MemorabiliaForSale> MemorabiliaForSale { get; set; }
+
     public DbSet<Entity.MemorabiliaTransaction> MemorabiliaTransaction { get; set; }
 
     public DbSet<Entity.MemorabiliaTransactionSale> MemorabiliaTransactionSale { get; set; }
@@ -54,6 +56,7 @@ public class MemorabiliaContext : DbContext, IMemorabiliaContext
         modelBuilder.Entity<Entity.MemorabiliaCommissioner>();
         modelBuilder.Entity<Entity.MemorabiliaFigure>();
         modelBuilder.Entity<Entity.MemorabiliaFootball>();
+        modelBuilder.Entity<Entity.MemorabiliaForSale>();
         modelBuilder.Entity<Entity.MemorabiliaGame>();
         modelBuilder.Entity<Entity.MemorabiliaGlove>();
         modelBuilder.Entity<Entity.MemorabiliaHelmet>();

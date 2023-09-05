@@ -117,7 +117,7 @@ public partial class ForTradeGrid
                    .Where(item => ids.Contains(item.Id))
                    .ToArray();
 
-        await CommandRouter.Send(new SaveForTradeMemorabilia.Command(removedMemorabiliaIs: ids));
+        await CommandRouter.Send(new SaveForTradeMemorabilia.Command(removedMemorabiliaIds: ids));
 
         await _table.ReloadServerData();
 
@@ -132,7 +132,7 @@ public partial class ForTradeGrid
             = SelectedMemorabilia.Select(item => item.Memorabilia.Id)
                                  .ToArray();
 
-        await CommandRouter.Send(new SaveForTradeMemorabilia.Command(removedMemorabiliaIs: ids));
+        await CommandRouter.Send(new SaveForTradeMemorabilia.Command(removedMemorabiliaIds: ids));
 
         await _table.ReloadServerData();
 

@@ -46,6 +46,8 @@ public partial class Memorabilia : Framework.Library.Domain.Entity.DomainEntity
 
     public virtual MemorabiliaFootball Football { get; private set; }
 
+    public virtual MemorabiliaForSale ForSale { get; private set; }
+
     public bool ForTrade { get; private set; }
 
     public bool Framed { get; private set; }

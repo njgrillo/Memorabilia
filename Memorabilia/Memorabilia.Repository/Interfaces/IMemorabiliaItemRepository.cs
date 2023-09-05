@@ -59,5 +59,7 @@ public interface IMemorabiliaItemRepository
 
     int[] GetSportLeagueLevelIds(int userId);
 
+    Task<bool> HasItemsForSale(int userId);
+
     Task<bool> HasItemsForTrade(int userId);
 }

@@ -45,10 +45,10 @@ public class SaveForTradeMemorabilia
     public class Command : DomainCommand, ICommand
     {
         public Command(int[] addedMemorabiliaIds = null, 
-            int[] removedMemorabiliaIs = null)
+            int[] removedMemorabiliaIds = null)
         {
             AddedMemorabiliaIds = addedMemorabiliaIds ?? Array.Empty<int>();
-            RemovedMemorabiliaIds = removedMemorabiliaIs ?? Array.Empty<int>();
+            RemovedMemorabiliaIds = removedMemorabiliaIds ?? Array.Empty<int>();
         }
 
         public int[] AddedMemorabiliaIds { get; set; }

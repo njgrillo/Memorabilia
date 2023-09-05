@@ -3,8 +3,8 @@
 public class AutographFilter : Filter<AutographFilter>
 {
     public static readonly AutographFilter None = new("None");
-    public static readonly AutographFilter WithAutographs = new("With Autograph(s)");
-    public static readonly AutographFilter WithoutAutographs = new("Without Autograph(s)");
+    public static readonly AutographFilter WithAutographs = new("w/ Auto(s)");
+    public static readonly AutographFilter WithoutAutographs = new("w/o Auto(s)");
 
     private AutographFilter(string name)
         : base(name) { }

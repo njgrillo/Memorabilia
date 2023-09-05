@@ -119,6 +119,17 @@ public partial class Memorabilia
         SetCollections(collections);
     }    
 
+    public void SetForSale(decimal? buyNowPrice, bool allowBestOffer, decimal? minimumOfferPrice)
+    {
+        if (ForSale == null)
+        {
+            ForSale = new MemorabiliaForSale(Id, buyNowPrice, allowBestOffer, minimumOfferPrice);
+            return;
+        }
+
+        ForSale.Set(buyNowPrice, allowBestOffer, minimumOfferPrice);
+    }
+
     public void SetForTrade(bool forTrade)
     {
         ForTrade = forTrade;
@@ -188,7 +199,7 @@ public partial class Memorabilia
     {
         if (gameStyleTypeId.HasValue)
         {
-            if (ItemType.Id == Constants.ItemType.Jersey.Id && Jersey.JerseyQualityTypeId != Constants.JerseyQualityType.Authentic.Id)
+            if (ItemType.Id == Constant.ItemType.Jersey.Id && Jersey.JerseyQualityTypeId != Constants.JerseyQualityType.Authentic.Id)
                 return;
 
             if (Game == null)

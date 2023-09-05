@@ -3,7 +3,7 @@
 public sealed class TradeFilter : Filter<TradeFilter>
 {
     public static readonly TradeFilter None = new("None");
-    public static readonly TradeFilter ForTrade = new("Available For Trade");
+    public static readonly TradeFilter ForTrade = new("For Trade");
     public static readonly TradeFilter NotForTrade = new("Not For Trade");
 
     private TradeFilter(string name)

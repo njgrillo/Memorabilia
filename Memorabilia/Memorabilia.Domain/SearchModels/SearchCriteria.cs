@@ -40,6 +40,9 @@ public class SearchCriteria
     public IEnumerable<int> PurchaseTypeIds { get; set; } 
         = Enumerable.Empty<int>();
 
+    public Constant.SaleFilter SaleFilter { get; set; }
+        = Constant.SaleFilter.None;
+
     public IEnumerable<int> SportIds { get; set; } 
         = Enumerable.Empty<int>();
 
