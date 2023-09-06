@@ -76,11 +76,12 @@
             </MudTd>
             <MudTd DataLabel="AllowBestOffer">
                 <Switch Checked="@context.AllowBestOffer"
-                        CheckedChanged="(p) => context.AllowBestOffer = p"
+                        CheckedChanged="(p) => OnAllowBestOfferChanged(context, p)"
                         Label="Allow Best Offer?" />
             </MudTd>
             <MudTd DataLabel="MinimumOfferPrice">
-                <NullableDecimalField Value="@context.MinimumOfferPrice"
+                <NullableDecimalField Disabled="@(!context.CanEditMinimumOfferPrice)" 
+                                      Value="@context.MinimumOfferPrice"
                                       ValueChanged="@((p) => context.MinimumOfferPrice = p)" />
             </MudTd>
             <MudTd DataLabel="">

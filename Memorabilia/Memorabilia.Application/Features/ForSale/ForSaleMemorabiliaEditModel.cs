@@ -21,6 +21,9 @@ public class ForSaleMemorabiliaEditModel : EditModel
 
     public decimal? BuyNowPrice { get; set; }
 
+    public bool CanEditMinimumOfferPrice
+        => AllowBestOffer;
+
     public bool IsSelected { get; set; }
 
     public string ItemTypeName { get; set; }

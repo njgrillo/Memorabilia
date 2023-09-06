@@ -68,6 +68,16 @@ public partial class ForSaleGrid
         _resetPaging = false;
     }    
 
+    protected static void OnAllowBestOfferChanged(ForSaleMemorabiliaEditModel forSaleMemorabiliaEditModel, bool allowBestOffer)
+    {
+        forSaleMemorabiliaEditModel.AllowBestOffer = allowBestOffer;
+
+        if (allowBestOffer)
+            return;
+
+        forSaleMemorabiliaEditModel.MinimumOfferPrice = null;
+    }
+
     protected void OnImageLoaded()
     {
         StateHasChanged();
