@@ -1,4 +1,6 @@
-﻿namespace Memorabilia.Web.Extensions;
+﻿using Memorabilia.Application.Validators.ProposeTrade;
+
+namespace Memorabilia.Web.Extensions;
 
 public static class ValidatorServiceCollectionExtensions
 {
@@ -49,6 +51,7 @@ public static class ValidatorServiceCollectionExtensions
         services.AddSingleton<PlayingCardValidator>();
         services.AddSingleton<PosterValidator>();
         services.AddSingleton<ProjectValidator>();
+        services.AddSingleton<ProposeTradeValidator>();
         services.AddSingleton<PuckValidator>();
         services.AddSingleton<PylonValidator>();
         services.AddSingleton<ShirtValidator>();

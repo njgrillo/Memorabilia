@@ -12,6 +12,9 @@ public class SearchCriteria
     public Constant.AutographFilter AutographFilter { get; set; }
         = Constant.AutographFilter.None;
 
+    public string AutographFilterName
+        => AutographFilter.Name;
+
     public IEnumerable<int> ConditionIds { get; set; } 
         = Enumerable.Empty<int>();
 
@@ -29,6 +32,9 @@ public class SearchCriteria
     public Constant.ImageFilter ImageFilter { get; set; } 
         = Constant.ImageFilter.None;
 
+    public string ImageFilterName 
+        => ImageFilter.Name;
+
     public List<Entity.Person> People { get; set; } 
         = new();
 
@@ -38,10 +44,7 @@ public class SearchCriteria
                  .ToArray();
 
     public IEnumerable<int> PurchaseTypeIds { get; set; } 
-        = Enumerable.Empty<int>();
-
-    public Constant.SaleFilter SaleFilter { get; set; }
-        = Constant.SaleFilter.None;
+        = Enumerable.Empty<int>();    
 
     public IEnumerable<int> SportIds { get; set; } 
         = Enumerable.Empty<int>();
@@ -55,8 +58,5 @@ public class SearchCriteria
                 .ToArray();
 
     public List<Entity.Team> Teams { get; set; } 
-        = new();
-
-    public Constant.TradeFilter TradeFilter { get; set; }
-        = Constant.TradeFilter.None;
+        = new();    
 }

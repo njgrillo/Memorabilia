@@ -31,7 +31,7 @@ public class AutographImagesEditModel : EditModel
             : Constant.EditModeType.Add;
 
     public override string ExitNavigationPath 
-        => "Memorabilia/View";
+        => "MyStuff/Memorabilia/View";
 
     public List<ImageEditModel> Images { get; set; } 
         = new();

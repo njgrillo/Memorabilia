@@ -1,0 +1,61 @@
+﻿<Div Style="margin-top:1%;margin-bottom:1%;margin-left:1%;margin-right:1%;">
+    <Condition Evaluation="@(ValidationResultAlerts.Any())">
+        <Match>
+            <AlertPanel Alerts="ValidationResultAlerts" />
+        </Match>
+    </Condition>
+    <Div Class="row">
+        <Div Class="col-3">
+            <h3>
+                @*Replace with username*@
+                Propose Trade to @(EditModel.SenderUser?.FirstName + " " + EditModel.SenderUser?.LastName)
+            </h3>
+        </Div>
+    </Div>
+    <br />
+    <LeftRightSection>
+        <Left>
+            <NullableDecimalField Label="Amount to Receive ($)"
+                                  Value="EditModel.AmountToReceive"
+                                  ValueChanged="@((p) => EditModel.AmountToReceive = p)" />
+        </Left>
+        <Right>
+            <AddButton OnClick="AddReceiveMemorabilia"
+                       Text="Add Memorabilia to Receive" />
+        </Right>
+    </LeftRightSection>
+    <br />
+    <Div Class="row">
+        <Div Class="col-12">
+            <ProposeTradeReceiveMemorabiliaGrid Items="EditModel.ReceiveItems" />
+        </Div>        
+    </Div>
+    <br />
+    <br />
+    <br />    
+    <LeftRightSection>
+        <Left>
+            <NullableDecimalField Label="Amount to Send ($)"
+                                  Value="EditModel.AmountToSend"
+                                  ValueChanged="@((p) => EditModel.AmountToSend = p)" />
+        </Left>
+        <Right>
+            <AddButton OnClick="AddSendMemorabilia"
+                       Text="Add Memorabilia to Send" />
+        </Right>
+    </LeftRightSection>
+    <br />
+    <Div Class="row">
+        <Div Class="col-12">
+            <ProposeTradeSendMemorabiliaGrid Items="EditModel.SendItems" />
+        </Div>
+    </Div>
+    <br />
+    <LeftRightSection>
+        <Right>
+            <CustomButton OnClick="OnSend"
+                          Text="Send" />
+        </Right>
+    </LeftRightSection>
+</Div>
+

@@ -42,7 +42,7 @@ public class CollectionEditModel : EditModel
         => "Collection";
 
     public override string RoutePrefix 
-        => "Collections";
+        => "MyStuff/Collections";
 
     public int UserId { get; set; }
 }

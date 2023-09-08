@@ -29,5 +29,5 @@ public class CollectionsModel : Model
         = new();
 
     public override string RoutePrefix 
-        => "Collections";
+        => "MyStuff/Collections";
 }

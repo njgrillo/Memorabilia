@@ -59,7 +59,7 @@ public class MemorabiliaEditModel : EditModel
     public decimal? EstimatedValue { get; set; }
 
     public override string ExitNavigationPath 
-        => "Memorabilia/View";
+        => "MyStuff/Memorabilia/View";
 
     public bool ForTrade { get; set; }
 

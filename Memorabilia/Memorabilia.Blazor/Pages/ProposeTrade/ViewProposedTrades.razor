@@ -1,0 +1,25 @@
+﻿<PageView DisplayAddButton="false"
+          DisplayPageFooter="false"
+          DisplayPageHeader="false"          
+          NavigationPath="@Model.ExitNavigationPath"
+          PageTitle="Proposed Trades">
+    <DivPad2>
+        <TabControl>
+            <MudTabPanel BadgeColor="MudBlazor.Color.Success"
+                         BadgeData="Model.OpenTradesCount"
+                         Text="Open">
+                <DivRowCol12>
+                    <ProposedTradeGrid Items="Model.OpenTrades" />
+                </DivRowCol12>
+            </MudTabPanel>
+            <MudTabPanel BadgeColor="MudBlazor.Color.Success"
+                         BadgeData="Model.CompletedTradesCount"
+                         Text="Completed">
+                <DivRowCol12>
+                    <ProposedTradeGrid Items="Model.CompletedTrades" />
+                </DivRowCol12>
+            </MudTabPanel>
+        </TabControl>
+    </DivPad2>
+</PageView>
+

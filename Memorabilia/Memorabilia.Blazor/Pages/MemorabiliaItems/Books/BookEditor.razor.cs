@@ -11,6 +11,7 @@ public partial class BookEditor
         MemorabiliaId = DataProtectorService.DecryptId(EncryptMemorabiliaId);
 
         EditModel = new(new BookModel(await QueryRouter.Send(new GetMemorabiliaItem(MemorabiliaId))));
+        EditModel.MemorabiliaId = MemorabiliaId;
     }
 
     protected async Task OnSave()

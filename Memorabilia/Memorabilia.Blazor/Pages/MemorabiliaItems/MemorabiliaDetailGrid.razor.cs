@@ -27,10 +27,11 @@ public partial class MemorabiliaDetailGrid
     public bool CanSelect { get; set; }
 
     [Parameter]
-    public List<MemorabiliaModel> DisplayItems { get; set; } 
+    public List<MemorabiliaModel> DisplayItems { get; set; }
 
     [Parameter]
     public MemorabiliaSearchCriteria Filter { get; set; }
+        = new();
 
     [Parameter]
     public EventCallback<List<MemorabiliaModel>> MemorabiliaSelected { get; set; }
@@ -134,9 +135,7 @@ public partial class MemorabiliaDetailGrid
     {
         var pageInfo = new PageInfo(_resetPaging ? 1 : state.Page + 1, state.PageSize);
 
-        Model = Filter != null
-            ? await QueryRouter.Send(new GetMemorabiliaItemsPaged(pageInfo, Filter))
-            : await QueryRouter.Send(new GetMemorabiliaItemsPaged(pageInfo));
+        Model = await QueryRouter.Send(new GetMemorabiliaItemsPaged(pageInfo, Filter));
 
         return new TableData<MemorabiliaModel>()
         {

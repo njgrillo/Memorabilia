@@ -16,7 +16,7 @@ public abstract class MemorabiliaItemEditModel : ItemEditModel
         : Constant.EditModeType.Add;
 
     public override string ExitNavigationPath 
-        => "Memorabilia/View";
+        => "MyStuff/Memorabilia/View";
 
     public DateTime? GameDate { get; set; }
 

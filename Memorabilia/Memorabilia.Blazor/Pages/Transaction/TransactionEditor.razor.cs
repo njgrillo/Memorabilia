@@ -186,7 +186,7 @@ public partial class TransactionEditor
     {
         await Save();
 
-        NavigationManager.NavigateTo("Transactions");
+        NavigationManager.NavigateTo("MyStuff/Transactions");
     }
 
     private async Task Save()

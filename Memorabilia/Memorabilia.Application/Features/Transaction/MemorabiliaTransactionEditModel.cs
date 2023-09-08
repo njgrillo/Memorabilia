@@ -33,7 +33,7 @@ public class MemorabiliaTransactionEditModel : EditModel
         => "Transaction";
 
     public override string RoutePrefix
-        => "Transactions";
+        => "MyStuff/Transactions";
 
     public List<MemorabiliaTransactionSaleEditModel> Sales { get; set; }
         = new();

@@ -9,6 +9,10 @@ public partial class GridImage
     public NavigationManager NavigationManager { get; set; }
 
     [Parameter]
+    public bool AllowNavigation { get; set; }
+        = true;
+
+    [Parameter]
     public string ImageFileName { get; set; }
 
     [Parameter]
@@ -17,7 +21,19 @@ public partial class GridImage
     [Parameter]
     public string NavigationPath { get; set; }
 
+    [Parameter]
+    public int? UserId { get; set; }
+
     protected string ImageData { get; set; }
+
+    private string _imageClass = "rounded-lg ";
+
+    protected override void OnInitialized()
+    {
+        _imageClass += AllowNavigation
+            ? "can-click"
+            : "cant-click";
+    }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
@@ -25,8 +41,16 @@ public partial class GridImage
             ImageFileName.IsNullOrEmpty())
             return;
 
-        ImageData = ImageService.GetUserImageData(ImageFileName);
+        ImageData = ImageService.GetUserImageData(ImageFileName, UserId);
 
         await ImageLoaded.InvokeAsync();
+    }
+
+    protected void OnImageClick()
+    {
+        if (!AllowNavigation)
+            return;
+
+        NavigationManager.NavigateTo(NavigationPath);
     }
 }

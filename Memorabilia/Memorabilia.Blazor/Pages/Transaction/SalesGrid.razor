@@ -24,7 +24,7 @@
         <MudTd DataLabel="TotalItemsSold">@context.Sales.Length.ToString()</MudTd>
         <MudTd DataLabel="TotalSoldAmount">@context.Sales.Sum(sale => (sale.SaleAmount ?? 0)).ToString("c")</MudTd>
         <MudTd DataLabel="">
-            <GridEditButton NavigationPath="@($"Transactions/Edit/{DataProtectorService.EncryptId(context.MemorabiliaTransactionId)}")" />
+            <GridEditButton NavigationPath="@($"MyStuff/Transactions/Edit/{DataProtectorService.EncryptId(context.MemorabiliaTransactionId)}")" />
             <MudTooltip Text="Delete">
                 <MudFab Color="MudBlazor.Color.Secondary"
                         Icon="@Icons.Material.Outlined.DeleteOutline"

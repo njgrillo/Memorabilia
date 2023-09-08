@@ -24,7 +24,7 @@
         <MudTd DataLabel="TotalItemsReceived">@(context.TotalItemsReceivedCount > 0 ? context.TotalItemsReceivedCount.ToString() : string.Empty)</MudTd>
         <MudTd DataLabel="TotalItemsSent">@(context.TotalItemsSentCount > 0 ? context.TotalItemsSentCount.ToString() : string.Empty)</MudTd>
         <MudTd DataLabel="">
-            <GridEditButton NavigationPath="@($"Transactions/Edit/{DataProtectorService.EncryptId(context.MemorabiliaTransactionId)}")" />
+            <GridEditButton NavigationPath="@($"MyStuff/Transactions/Edit/{DataProtectorService.EncryptId(context.MemorabiliaTransactionId)}")" />
             <MudTooltip Text="Delete">
                 <MudFab Color="MudBlazor.Color.Secondary"
                         Icon="@Icons.Material.Outlined.DeleteOutline"

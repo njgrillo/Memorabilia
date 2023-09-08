@@ -30,7 +30,7 @@ public partial class MemorabiliaItemGalleryCard
     public string Title { get; set; }
 
     [Parameter]
-    public string TooltipText { get; set; }
+    public string TooltipText { get; set; }    
 
     protected void OnEditClick()
     {

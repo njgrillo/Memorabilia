@@ -37,7 +37,7 @@ public class InscriptionsEditModel : EditModel
         : Constant.EditModeType.Add;
 
     public override string ExitNavigationPath 
-        => "Memorabilia/View";
+        => "MyStuff/Memorabilia/View";
 
     public bool HasMemorabiliaImages 
         => MemorabiliaImageNames.Any();

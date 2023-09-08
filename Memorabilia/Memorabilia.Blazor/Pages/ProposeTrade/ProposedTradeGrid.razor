@@ -1,0 +1,116 @@
+﻿<MudTable Bordered="false"
+          Dense="false"
+          Hover="true"
+          Items="@Items"
+          Striped="true">
+    <ToolBarContent>
+        <MudText Typo="Typo.h6">Proposed Trades</MudText>
+    </ToolBarContent>
+    <HeaderContent>
+        <MudTh></MudTh>
+        <MudTh>Trade Partner</MudTh>
+        <MudTh>Proposed Date</MudTh>
+        <MudTh>Expires Date</MudTh>
+        <MudTh>Amount to Receive</MudTh>
+        <MudTh>Amount to Send</MudTh>
+        <MudTh>Status</MudTh>
+        <MudTh></MudTh>
+    </HeaderContent>
+    <RowTemplate>
+        <MudTd>
+            <MudIconButton @onclick="@(_ => ToggleChildContent(context.Id))"
+                           Icon="@context.ToggleIcon"></MudIconButton>
+        </MudTd>
+        <MudTd DataLabel="TradePartnerName">@context.TradePartnerName</MudTd>
+        <MudTd DataLabel="ProposedDate">@context.ProposedDate.ToString("MM-dd-yyyy")</MudTd>
+        <MudTd DataLabel="ExpiresDate">@context.ExpirationDate.ToString("MM-dd-yyyy")</MudTd>
+        <MudTd DataLabel="AmountToReceive">@(context.AmountToReceive?.ToString("c") ?? string.Empty)</MudTd>
+        <MudTd DataLabel="AmountToSend">@(context.AmountToSend?.ToString("c") ?? string.Empty)</MudTd>
+        <MudTd DataLabel="Status">@context.ProposeTradeStatusTypeName</MudTd>
+        <Condition Evaluation="@context.ShowActions">
+            <Match>
+                <MudTd>
+                    <MudTooltip Text="Accept">
+                        <MudFab Color="MudBlazor.Color.Secondary"
+                                Icon="@Icons.Material.Outlined.Handshake"
+                                OnClick="@(_ => Accept(context.Id))" />
+                    </MudTooltip>
+                    <MudTooltip Text="Counter">
+                        <MudFab Color="MudBlazor.Color.Secondary"
+                                Icon="@Icons.Material.Outlined.SwapHoriz"
+                                OnClick="@(_ => Counter(context.Id))" />
+                    </MudTooltip>
+                    <MudTooltip Text="Reject">
+                        <MudFab Color="MudBlazor.Color.Secondary"
+                                Icon="@Icons.Material.Outlined.DoNotTouch"
+                                OnClick="@(_ => Reject(context.Id))" />
+                    </MudTooltip>
+                </MudTd>
+            </Match>
+        </Condition>
+    </RowTemplate>
+    <ChildRowContent>
+        <Condition Evaluation="@context.DisplayTradeDetails">
+            <Match>
+                <tr />
+                <tr style="background-color:#6D7B8D;color:honeydew;border-style:dashed;border-width:2px;border-color:#ECF3F4;">
+                    <td align="center" colspan="17">
+                        Summary: Items Receiving - <strong> @context.ReceivingItemsCount </strong>, Items Sending - <strong> @context.SendingItemsCount </strong>
+                    </td>
+                </tr>
+                <tr />
+                <tr style="margin-top: 1%; margin-bottom: 1%; margin-left: 1%; margin-right: 1%;">
+                    <td colspan="17">
+                        <MudTable Bordered="false"
+                                  Dense="false"
+                                  Hover="true"
+                                  Items="@context.Memorabilia"
+                                  Striped="true">
+                            <ToolBarContent>
+                                <MudText Typo="Typo.h6">Items</MudText>
+                                <MudSpacer />
+                            </ToolBarContent>
+                            <HeaderContent>
+                                <MudTh></MudTh>
+                                <MudTh>Item</MudTh>
+                                <MudTh>Condition</MudTh>
+                                <MudTh>Type</MudTh>
+                                <MudTh></MudTh>
+                            </HeaderContent>
+                            <RowTemplate Context="item">
+                                <MudTd DataLabel="">
+                                    <MudImage Class="rounded-lg cant-click"
+                                              Elevation="5"
+                                              Height="200"
+                                              ObjectFit="@ObjectFit.Cover"
+                                              Src="@(ImageService.GetUserImageData(item.Memorabilia.Images.FirstOrDefault(image => image.ImageTypeId == Constant.ImageType.Primary.Id).FileName, item.Memorabilia.UserId))"
+                                              Width="200" />
+                                </MudTd>
+                                <MudTd DataLabel="Item">@item.Memorabilia.ItemType.Name</MudTd>
+                                <MudTd DataLabel="Condition">@item.Memorabilia.Condition.Name</MudTd>
+                                <MudTd DataLabel="Type">
+                                    <MudTooltip Text="@(Constant.ProposeTradeMemorabiliaType.Find(item.ProposeTradeMemorabiliaTypeId).Name)">
+                                        <MudFab Class="cant-click"
+                                                Color="MudBlazor.Color.Info"
+                                                Icon="@(GetTypeIcon(item.ProposeTradeMemorabiliaTypeId))"
+                                                Size="@MudBlazor.Size.Small" />
+                                    </MudTooltip>
+                                </MudTd>
+                                <MudTd DataLabel="">
+                                    <ViewMemorabiliaImagesFab MemorabiliaId="item.Memorabilia.Id"
+                                                              UserId="item.Memorabilia.UserId" />
+                                </MudTd>
+                            </RowTemplate>
+                            <PagerContent>
+                                <MudTablePager />
+                            </PagerContent>
+                        </MudTable>
+                    </td>
+                </tr>
+            </Match>
+        </Condition>
+    </ChildRowContent>
+    <PagerContent>
+        <MudTablePager />
+    </PagerContent>
+</MudTable>

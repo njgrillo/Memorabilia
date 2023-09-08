@@ -1,0 +1,35 @@
+﻿<DivPad5>
+    <MudTooltip Text="@TooltipText">
+        <MudCard Elevation="20">
+            <MudCardContent>
+                <MudText Typo="Typo.h5">@Title</MudText>
+            </MudCardContent>
+            <MudCardContent>
+                <MudCard Elevation="10">
+                    <MudCardMedia Class="rounded-lg cant-click"
+                                  Height="300"
+                                  Image="@(ImageService.GetUserImageData(PrimaryImageFileName, UserId))" />
+                </MudCard>
+                <br />
+                <MudText Typo="Typo.body2">@Subtitle</MudText>
+                <MudText Typo="Typo.body2">@Description</MudText>
+            </MudCardContent>
+            <MudCardContent>
+                <Div Class="row">
+                    <Iterations Items="MemorabiliaItem.Autographs" Context="autograph">
+                        <Div Class="col-4">
+                            <SiteMemorabiliaItemGallerySubCard ImageFileName="@autograph.ImageFileName"
+                                                               Title="@autograph.PersonName"
+                                                               TooltipText="@autograph.PersonName" />
+                        </Div>
+                    </Iterations>
+                </Div>
+            </MudCardContent>
+            <MudCardActions>
+                @*<CustomButton Color="MudBlazor.Color.Primary"
+                              Text="Edit Memorabilia"
+                              Variant="Variant.Text" />*@
+            </MudCardActions>
+        </MudCard>
+    </MudTooltip>
+</DivPad5>

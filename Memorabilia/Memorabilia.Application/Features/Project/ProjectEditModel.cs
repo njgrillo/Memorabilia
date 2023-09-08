@@ -48,7 +48,7 @@ public class ProjectEditModel : EditModel
     public DateTime? EndDate { get; set; }
 
     public override string ExitNavigationPath 
-        => "Projects";
+        => "MyStuff/Projects";
 
     public Entity.ProjectHallOfFame HallOfFame { get; set; } 
         = new();
@@ -82,7 +82,7 @@ public class ProjectEditModel : EditModel
     public Constant.ProjectType ProjectType { get; set; }
 
     public override string RoutePrefix 
-        => "Projects";
+        => "MyStuff/Projects";
 
     public DateTime? StartDate { get; set; }
 

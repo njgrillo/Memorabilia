@@ -1,0 +1,20 @@
+﻿<SiteMemorabiliaFilter OnFilter="OnFilter" />
+<DivPad2>
+    <LeftRightSection>
+        <Left>
+            <Switch Checked="@IsDetailView"
+                    CheckedChanged="(p) => IsDetailView = p"
+                    Label="Detail View" />
+        </Left>
+    </LeftRightSection>
+</DivPad2>
+<DivPad2>
+    <Condition Evaluation="IsDetailView">
+        <Match>
+            <SiteMemorabiliaDetailGrid Filter="_filter" />
+        </Match>
+        <NotMatch>
+            <SiteMemorabiliaGalleryGrid Filter="_filter" />
+        </NotMatch>
+    </Condition>
+</DivPad2>

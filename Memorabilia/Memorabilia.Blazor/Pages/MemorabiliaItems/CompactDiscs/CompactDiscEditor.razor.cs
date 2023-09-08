@@ -9,6 +9,7 @@ public partial class CompactDiscEditor : MemorabiliaItem<CompactDiscEditModel>
         Entity.Memorabilia memorabilia = await QueryRouter.Send(new GetMemorabiliaItem(MemorabiliaId));
 
         EditModel = new(new CompactDiscModel(memorabilia));
+        EditModel.MemorabiliaId = MemorabiliaId;
     }
 
     protected async Task OnSave()

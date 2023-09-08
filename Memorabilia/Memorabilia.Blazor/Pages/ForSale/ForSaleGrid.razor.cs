@@ -57,7 +57,7 @@ public partial class ForSaleGrid
 
     protected override async Task OnParametersSetAsync()
     {
-        if (_filter == Filter)
+        if (_filter.Equals(Filter))
             return;
 
         _resetPaging = true;

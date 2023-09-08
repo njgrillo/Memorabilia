@@ -29,5 +29,5 @@ public class ProjectsModel : Model
         = new();
 
     public override string RoutePrefix 
-        => "Projects";
+        => "MyStuff/Projects";
 }

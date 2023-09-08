@@ -8,7 +8,7 @@
             Graphinallday
         </MudText>
         <MudDivider Class="my-2" />
-        <MudNavLink Href="/Home">
+        <MudNavLink Href="@NavigationPath.Home">
             Home
         </MudNavLink>
         <AuthorizeView>
@@ -16,27 +16,39 @@
                 <Condition Evaluation="ApplicationStateService.CurrentUser.IsAdmin()">
                     <Match>
                         <MudNavGroup Title="Admin">
-                            <MudNavLink Href="/Admin/EditDomainItems">Domain Items</MudNavLink>
-                            <MudNavLink Href="/Admin/Management/ManageItemsPage">Manage Items</MudNavLink>
-                            <MudNavLink Href="/Admin/Sample">Samples</MudNavLink>
+                            <MudNavLink Href="@NavigationPath.EditDomainItems">Domain Items</MudNavLink>
+                            <MudNavLink Href="@NavigationPath.ManageItemsPage">Manage Items</MudNavLink>
+                            <MudNavLink Href="@NavigationPath.Sample">Samples</MudNavLink>
                         </MudNavGroup>
                     </Match>
                 </Condition>
+                <MudNavLink Href="@NavigationPath.ViewSiteMemorabilia">Memorabilia</MudNavLink>
                 <MudNavGroup Title="My Stuff">                    
-                    <MudNavLink Href="/Collections">Collections</MudNavLink>
-                    <MudNavLink Href="/Memorabilia/Dashboard">Dashboard</MudNavLink>
-                    <MudNavLink Href="/Memorabilia/ForSale">For Sale</MudNavLink>
-                    <MudNavLink Href="/Memorabilia/ForTrade">For Trade</MudNavLink>
-                    <MudNavLink Href="/Memorabilia/View">Memorabilia</MudNavLink>
-                    <MudNavLink Href="/Projects">Projects</MudNavLink>
-                    <MudNavLink Href="/ThroughTheMail">Through the Mail</MudNavLink>
-                    <MudNavLink Href="/Transactions">Transactions</MudNavLink>
+                    <MudNavLink Icon="@Icons.Material.TwoTone.Collections" 
+                                Href="@NavigationPath.Collections">Collections</MudNavLink>
+                    <MudNavLink Icon="@Icons.Material.TwoTone.Dashboard" 
+                                Href="@NavigationPath.Dashboard">Dashboard</MudNavLink>
+                    <MudNavLink Icon="@Icons.Material.TwoTone.Sell" 
+                                Href="@NavigationPath.ForSale">For Sale</MudNavLink>
+                    <MudNavLink Icon="@Icons.Material.TwoTone.SwapHoriz" 
+                                Href="@NavigationPath.ForTrade">For Trade</MudNavLink>
+                    <MudNavLink Href="@NavigationPath.ViewMemorabilia">Memorabilia</MudNavLink>
+                    <MudNavLink Icon="@Icons.Material.TwoTone.Task" 
+                                Href="@NavigationPath.Projects">Projects</MudNavLink>
+                    <MudNavLink Icon="@Icons.Material.TwoTone.SwapHoriz"
+                                Href="@NavigationPath.ProposedTrades">Proposed Trades</MudNavLink>
+                    <MudNavLink Icon="@Icons.Material.TwoTone.MarkunreadMailbox" 
+                                Href="@NavigationPath.ThroughTheMail">Through the Mail</MudNavLink>
+                    <MudNavLink Icon="@Icons.Material.TwoTone.AttachMoney" 
+                                Href="@NavigationPath.Transactions">Transactions</MudNavLink>
                 </MudNavGroup>                
             </Authorized>
         </AuthorizeView>
         <MudNavGroup Title="Tools">
-            <MudNavLink Href="/Tools/PersonProfileSelect">Person Profile</MudNavLink>
-            <MudNavGroup Title="Baseball">
+            <MudNavLink Icon="@Icons.Material.TwoTone.PersonSearch"
+                        Href="@NavigationPath.PersonProfile">Person Profile</MudNavLink>
+            <MudNavGroup Icon="@Icons.Material.TwoTone.SportsBaseball" 
+                         Title="Baseball">
                 <MudNavLink Href="/Tools/Baseball/Accomplishments">Accomplishments</MudNavLink>
                 <MudNavLink Href="/Tools/Baseball/AllStars">All Stars</MudNavLink>
                 <MudNavLink Href="/Tools/Baseball/Awards">Awards</MudNavLink>
@@ -52,7 +64,8 @@
                 <MudNavLink Href="/Tools/Baseball/SingleSeasonRecords">Single Season Records</MudNavLink>
                 <MudNavLink Href="/Tools/Baseball/WorldSeries">World Series</MudNavLink>
             </MudNavGroup>
-            <MudNavGroup Title="Basketball">
+            <MudNavGroup Icon="@Icons.Material.TwoTone.SportsBasketball"
+                         Title="Basketball">
                 <MudNavLink Href="/Tools/Basketball/Accomplishments">Accomplishments</MudNavLink>
                 <MudNavLink Href="/Tools/Basketball/AllStars">All Stars</MudNavLink>
                 <MudNavLink Href="/Tools/Basketball/Awards">Awards</MudNavLink>
@@ -68,7 +81,8 @@
                 <MudNavLink Href="/Tools/Basketball/RetiredNumbers">Retired Numbers</MudNavLink>
                 <MudNavLink Href="/Tools/Basketball/SingleSeasonRecords">Single Season Records</MudNavLink>
             </MudNavGroup>
-            <MudNavGroup Title="Football">
+            <MudNavGroup Icon="@Icons.Material.TwoTone.SportsFootball"
+                         Title="Football">
                 <MudNavLink Href="/Tools/Football/Accomplishments">Accomplishments</MudNavLink>
                 <MudNavLink Href="/Tools/Football/Awards">Awards</MudNavLink>
                 <MudNavLink Href="/Tools/Football/CareerRecords">Career Records</MudNavLink>
@@ -84,7 +98,8 @@
                 <MudNavLink Href="/Tools/Football/SingleSeasonRecords">Single Season Records</MudNavLink>
                 <MudNavLink Href="/Tools/Football/SuperBowls">Super Bowls</MudNavLink>
             </MudNavGroup>
-            <MudNavGroup Title="Hockey">
+            <MudNavGroup Icon="@Icons.Material.TwoTone.SportsHockey" 
+                         Title="Hockey">
                 <MudNavLink Href="/Tools/Hockey/Accomplishments">Accomplishments</MudNavLink>
                 <MudNavLink Href="/Tools/Hockey/AllStars">All Stars</MudNavLink>
                 <MudNavLink Href="/Tools/Hockey/Awards">Awards</MudNavLink>

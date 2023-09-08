@@ -23,17 +23,11 @@ public class MemorabiliaImagesEditModel : EditModel
 
     public int? AutographId { get; private set; }
 
-    //public override string BackNavigationPath 
-    //    => $"Memorabilia/{ItemTypeName}/{Constant.EditModeType.Update.Name}/{MemorabiliaId}";
-
-    //public override string ContinueNavigationPath 
-    //    => $"Autographs/{Constant.EditModeType.Update.Name}/{MemorabiliaId}/-1";
-
     public override Constant.EditModeType EditModeType 
         => Images.Any() ? Constant.EditModeType.Update : Constant.EditModeType.Add;
 
     public override string ExitNavigationPath
-        => "Memorabilia/View";
+        => "MyStuff/Memorabilia/View";
 
     public bool HasAutographs { get; private set; }
 

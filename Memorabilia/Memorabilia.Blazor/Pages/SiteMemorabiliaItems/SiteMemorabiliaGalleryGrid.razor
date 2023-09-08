@@ -1,0 +1,21 @@
+﻿<Div Class="row">
+    <Iterations Items="_items" Context="item">
+        <Div Class="col-4">
+            <SiteMemorabiliaItemGalleryCard Description="@GetDescription(item)"
+                                            MemorabiliaItem="@item"
+                                            PrimaryImageFileName="@item.ImageFileName"
+                                            Subtitle="@GetSubtitle(item)"
+                                            Title="@GetTitle(item)"
+                                            TooltipText="@item.TooltipText"
+                                            UserId="@item.Memorabilia.UserId" />
+        </Div>
+    </Iterations>
+</Div>
+<Div Hidden="@(!DisplayLoadMoreButton)">
+    <DivRowCol12Center>
+        <CustomButton ButtonType="MudBlazor.ButtonType.Button"
+                      OnClick="LoadMore"
+                      Size="MudBlazor.Size.Small"
+                      Text="Load More" />
+    </DivRowCol12Center>
+</Div>

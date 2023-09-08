@@ -15,5 +15,10 @@
         </DivRowCol12Center>
     </Match>
 </Condition>
-<PageFooter NavigationPath="@NavigationPath"
-            NavigationPathText="@NavigationPathText" />
+<Condition Evaluation="@DisplayPageFooter">
+    <Match>
+        <PageFooter NavigationPath="@NavigationPath"
+                    NavigationPathText="@NavigationPathText" />
+    </Match>
+</Condition>
+

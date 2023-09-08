@@ -98,7 +98,7 @@ public class DomainContext : DbContext, IDomainContext
         modelBuilder.Entity<Entity.PriorityType>();
         modelBuilder.Entity<Entity.PrivacyType>();            
         modelBuilder.Entity<Entity.ProjectStatusType>();            
-        modelBuilder.Entity<Entity.ProjectType>();            
+        modelBuilder.Entity<Entity.ProjectType>(); 
         modelBuilder.Entity<Entity.PurchaseType>();
         modelBuilder.Entity<Entity.RecordType>();
         modelBuilder.Entity<Entity.Size>();

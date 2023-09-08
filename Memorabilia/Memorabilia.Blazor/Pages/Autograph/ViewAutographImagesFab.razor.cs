@@ -11,12 +11,18 @@ public partial class ViewAutographImagesFab
     [Parameter]
     public MudBlazor.Size Size { get; set; }
 
+    [Parameter]
+    public int? UserId { get; set; }
+
     public async Task ViewImages()
     {
         var parameters = new DialogParameters
         {
             ["AutographId"] = AutographId
         };
+
+        if (UserId.HasValue)
+            parameters.Add("UserId", UserId.Value);
 
         var options = new DialogOptions()
         {

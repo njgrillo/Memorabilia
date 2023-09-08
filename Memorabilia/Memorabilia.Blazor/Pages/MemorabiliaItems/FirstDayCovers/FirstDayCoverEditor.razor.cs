@@ -8,6 +8,7 @@ public partial class FirstDayCoverEditor : MemorabiliaItem<FirstDayCoverEditMode
     protected override async Task OnInitializedAsync()
     {
         MemorabiliaId = DataProtectorService.DecryptId(EncryptMemorabiliaId);
+        EditModel.MemorabiliaId = MemorabiliaId;
 
         Entity.Memorabilia memorabilia = await QueryRouter.Send(new GetMemorabiliaItem(MemorabiliaId));
 

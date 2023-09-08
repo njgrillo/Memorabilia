@@ -1,7 +1,7 @@
 ﻿<Condition Evaluation="@(!ImageData.IsNullOrEmpty())">
     <Match>
-        <MudImage @onclick="@(_ => NavigationManager.NavigateTo(NavigationPath))"
-                  Class="rounded-lg can-click"
+        <MudImage @onclick="OnImageClick"
+                  Class="@_imageClass"
                   Elevation="5"
                   Height="200"
                   ObjectFit="@ObjectFit.Cover"

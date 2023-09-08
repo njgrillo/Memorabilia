@@ -15,7 +15,7 @@ public partial class SearchPersonSelector
 
     private void Add()
     {
-        if (SelectedPerson.Id == 0)
+        if ((SelectedPerson?.Id ?? 0) == 0)
             return;
 
         Entity.Person person 

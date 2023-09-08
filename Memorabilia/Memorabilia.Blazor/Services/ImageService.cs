@@ -58,10 +58,10 @@ public class ImageService
                            imageFileName.IsNullOrEmpty() ? ImageFileName.ImageNotAvailable : imageFileName)
                   .ToImageData();
 
-    public string GetUserImageData(string imageFileName)
+    public string GetUserImageData(string imageFileName, int? userId = null)
         => imageFileName.IsNullOrEmpty() || imageFileName == ImageFileName.ImageNotAvailable
             ? GetDomainImageData(imageFileName)
-            : Path.Combine(Path.Combine(_imagePathConfiguration.MemorabiliaImageRootPath, UserId),
+            : Path.Combine(Path.Combine(_imagePathConfiguration.MemorabiliaImageRootPath, !userId.HasValue ? UserId : userId.Value.ToString()),
                            imageFileName.IsNullOrEmpty() ? ImageFileName.ImageNotAvailable : imageFileName)
                   .ToImageData();  
 

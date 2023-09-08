@@ -8,6 +8,7 @@ public partial class BookplateEditor
         MemorabiliaId = DataProtectorService.DecryptId(EncryptMemorabiliaId);
 
         EditModel = new(new BookplateModel(await QueryRouter.Send(new GetMemorabiliaItem(MemorabiliaId))));
+        EditModel.MemorabiliaId = MemorabiliaId;
     }
 
     protected async Task OnSave()

@@ -83,7 +83,9 @@ public class MemorabiliaContext : DbContext, IMemorabiliaContext
         modelBuilder.Entity<Entity.ProjectMemorabiliaTeam>();         
         modelBuilder.Entity<Entity.ProjectPerson>();         
         modelBuilder.Entity<Entity.ProjectTeam>();         
-        modelBuilder.Entity<Entity.ProjectWorldSeries>();         
+        modelBuilder.Entity<Entity.ProjectWorldSeries>();
+        modelBuilder.Entity<Entity.ProposeTrade>();
+        modelBuilder.Entity<Entity.ProposeTradeMemorabilia>();
         modelBuilder.Entity<Entity.ThroughTheMail>();         
         modelBuilder.Entity<Entity.ThroughTheMailMemorabilia>();  
     }

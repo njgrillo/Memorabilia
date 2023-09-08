@@ -1,0 +1,15 @@
+﻿<MudTooltip Text="@TooltipText">
+    <MudCard>
+        <MudCardMedia Class="rounded-sm cant-click"
+                      Height="100"
+                      Image="@(ImageService.GetPersonImageData(ImageFileName))" />
+        <MudCardContent>
+            <MudText Typo="Typo.body2">@Title</MudText>
+        </MudCardContent>
+        <MudCardActions>
+            @*<CustomButton OnClick="OnEditClick"
+                          Text="Edit Autograph"
+                          Variant="Variant.Text" />*@
+        </MudCardActions>
+    </MudCard>
+</MudTooltip>

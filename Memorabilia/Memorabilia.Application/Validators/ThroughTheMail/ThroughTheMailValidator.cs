@@ -8,8 +8,5 @@ public class ThroughTheMailValidator : AbstractValidator<SaveThroughTheMail.Comm
             .GreaterThan(0)
             .WithName("PersonId")
             .WithMessage("Person is required.");
-
-        //RuleForEach(x => x.Thr)
-        //    .SetValidator(new ProjectPersonValidator());
     }
 }

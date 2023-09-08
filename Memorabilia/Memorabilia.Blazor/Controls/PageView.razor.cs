@@ -19,6 +19,10 @@ public partial class PageView
         = true;
 
     [Parameter]
+    public bool DisplayPageFooter { get; set; }
+        = true;
+
+    [Parameter]
     public bool DisplayPageHeader { get; set; } 
         = true;
 
