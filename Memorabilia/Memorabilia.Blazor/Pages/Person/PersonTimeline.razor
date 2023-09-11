@@ -13,7 +13,7 @@
         <ItemContent>
             <MudAlert style="@(GetMudAlertStyle(PersonStep.Occupation))"
                       Class="@_mudAlertClass"
-                      OnClick="@(_ => Navigate("Occupation"))"
+                      OnClick="@(_ => Navigate(NavigationPath.Occupation))"
                       Severity="@PersonOccupationEditAlertSeverity">@PersonOccupationEditAlertTitle</MudAlert>
         </ItemContent>
     </MudTimelineItem>
@@ -22,7 +22,7 @@
         <ItemContent>
             <MudAlert style="@(GetMudAlertStyle(PersonStep.SportService))"
                       Class="@_mudAlertClass"
-                      OnClick="@(_ => Navigate("SportService"))"
+                      OnClick="@(_ => Navigate(NavigationPath.SportService))"
                       Severity="@PersonSportServiceEditAlertSeverity">@PersonSportServiceEditAlertTitle</MudAlert>
         </ItemContent>
     </MudTimelineItem>
@@ -31,7 +31,7 @@
         <ItemContent>
             <MudAlert style="@(GetMudAlertStyle(PersonStep.Team))"
                       Class="@_mudAlertClass"
-                      OnClick="@(_ => Navigate("Team"))"
+                      OnClick="@(_ => Navigate(NavigationPath.Team))"
                       Severity="@PersonTeamEditAlertSeverity">@PersonTeamEditAlertTitle</MudAlert>
         </ItemContent>
     </MudTimelineItem>
@@ -40,7 +40,7 @@
         <ItemContent>
             <MudAlert style="@(GetMudAlertStyle(PersonStep.Accolade))"
                       Class="@_mudAlertClass"
-                      OnClick="@(_ => Navigate("Accolade"))"
+                      OnClick="@(_ => Navigate(NavigationPath.Accolade))"
                       Severity="@PersonAccoladeEditAlertSeverity">@PersonAccoladeEditAlertTitle</MudAlert>
         </ItemContent>
     </MudTimelineItem>
@@ -49,7 +49,7 @@
         <ItemContent>
             <MudAlert style="@(GetMudAlertStyle(PersonStep.HallOfFame))"
                       Class="@_mudAlertClass"
-                      OnClick="@(_ => Navigate("HallOfFame"))"
+                      OnClick="@(_ => Navigate(NavigationPath.HallOfFame))"
                       Severity="@PersonHallOfFameEditAlertSeverity">@PersonHallOfFameEditAlertTitle</MudAlert>
         </ItemContent>
     </MudTimelineItem>
@@ -58,7 +58,7 @@
         <ItemContent>
             <MudAlert style="@(GetMudAlertStyle(PersonStep.Image))"
                       Class="@_mudAlertClass"
-                      OnClick="@(_ => Navigate("Image"))"
+                      OnClick="@(_ => Navigate(NavigationPath.Image))"
                       Severity="@PersonImageEditAlertSeverity">@PersonImageEditAlertTitle</MudAlert>
         </ItemContent>
     </MudTimelineItem>

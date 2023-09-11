@@ -29,7 +29,5 @@ public partial class PosterEditor
             return;
 
         await CommandRouter.Send(command);
-
-        EditModel.ContinueNavigationPath = $"Memorabilia/Image/{EditModeType.Update.Name}/{DataProtectorService.EncryptId(MemorabiliaId)}";
     }
 }

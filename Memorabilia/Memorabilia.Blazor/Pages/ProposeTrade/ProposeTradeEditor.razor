@@ -5,29 +5,34 @@
         </Match>
     </Condition>
     <Div Class="row">
-        <Div Class="col-3">
+        <Div Class="col-12">
             <h3>
-                @*Replace with username*@
-                Propose Trade to @(EditModel.SenderUser?.FirstName + " " + EditModel.SenderUser?.LastName)
+                @(EditModel.Title)
             </h3>
         </Div>
     </Div>
     <br />
     <LeftRightSection>
         <Left>
-            <NullableDecimalField Label="Amount to Receive ($)"
+            <NullableDecimalField Disabled="IsReadOnly" 
+                                  Label="Amount to Receive ($)"
                                   Value="EditModel.AmountToReceive"
                                   ValueChanged="@((p) => EditModel.AmountToReceive = p)" />
         </Left>
         <Right>
-            <AddButton OnClick="AddReceiveMemorabilia"
-                       Text="Add Memorabilia to Receive" />
+            <Condition Evaluation="@(!IsReadOnly)">
+                <Match>
+                    <AddButton OnClick="AddReceiveMemorabilia"
+                               Text="Add Memorabilia to Receive" />
+                </Match>
+            </Condition>            
         </Right>
     </LeftRightSection>
     <br />
     <Div Class="row">
         <Div Class="col-12">
-            <ProposeTradeReceiveMemorabiliaGrid Items="EditModel.ReceiveItems" />
+            <TradePartnerMemorabiliaGrid Items="EditModel.ReceiveItems"
+                                         ReadOnly="IsReadOnly" />
         </Div>        
     </Div>
     <br />
@@ -35,26 +40,54 @@
     <br />    
     <LeftRightSection>
         <Left>
-            <NullableDecimalField Label="Amount to Send ($)"
+            <NullableDecimalField Disabled="IsReadOnly" 
+                                  Label="Amount to Send ($)"
                                   Value="EditModel.AmountToSend"
                                   ValueChanged="@((p) => EditModel.AmountToSend = p)" />
         </Left>
         <Right>
-            <AddButton OnClick="AddSendMemorabilia"
-                       Text="Add Memorabilia to Send" />
+            <Condition Evaluation="@(!IsReadOnly)">
+                <Match>
+                    <AddButton OnClick="AddSendMemorabilia"
+                               Text="Add Memorabilia to Send" />
+                </Match>
+            </Condition>            
         </Right>
     </LeftRightSection>
     <br />
     <Div Class="row">
         <Div Class="col-12">
-            <ProposeTradeSendMemorabiliaGrid Items="EditModel.SendItems" />
+            <UserMemorabiliaGrid Items="EditModel.SendItems"
+                                 ReadOnly="IsReadOnly" />
         </Div>
     </Div>
     <br />
     <LeftRightSection>
         <Right>
-            <CustomButton OnClick="OnSend"
-                          Text="Send" />
+            <MudStack Row="true">
+                <Condition Evaluation="IsReadOnly">
+                    <Match>
+                        <CustomButton OnClick="OnCancel"
+                                      Text="Cancel" />
+                    </Match>
+                    <NotMatch>
+                        <Condition Evaluation="IsReviewMode">
+                            <Match>
+                                <CustomButton OnClick="OnReject"
+                                              Text="Reject" />
+                                <CustomButton OnClick="OnCounter"
+                                              Text="Counter" />
+                                <CustomButton OnClick="OnAccept"
+                                              Text="Accept" />
+                            </Match>
+                            <NotMatch>
+                                <CustomButton OnClick="OnSend"
+                                              Text="Send" />
+                            </NotMatch>
+                        </Condition>
+                    </NotMatch>
+                </Condition>                
+            </MudStack>            
         </Right>
     </LeftRightSection>
 </Div>

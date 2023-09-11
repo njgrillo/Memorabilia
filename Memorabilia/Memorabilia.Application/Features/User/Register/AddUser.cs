@@ -24,9 +24,18 @@ public record AddUser(UserEditModel User)
                 return;
             }
 
+            user = await _userRepository.GetByUsername(command.User.Username);
+
+            if (user != null)
+            {
+                command.UserAlreadyExists = true;
+                return;
+            }
+
             user = new Entity.User(command.User.EmailAddress, 
                                    command.User.FirstName, 
-                                   command.User.LastName);
+                                   command.User.LastName,
+                                   command.User.Username);
 
             await _userRepository.Add(user);
         }

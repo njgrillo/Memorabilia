@@ -6,7 +6,13 @@ public partial class EditMemorabiliaPage<TItem> where TItem : MemorabiliaItemEdi
     public RenderFragment Content { get; set; }
 
     [Parameter]
+    public string ContinueNavigationPath { get; set; }
+
+    [Parameter]
     public new TItem EditModel { get; set; }
+
+    [Parameter]
+    public string ExitNavigationPath { get; set; }
 
     [Parameter]
     public EventCallback<TItem> OnSave { get; set; }

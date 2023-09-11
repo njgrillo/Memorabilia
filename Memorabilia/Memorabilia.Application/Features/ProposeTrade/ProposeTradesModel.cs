@@ -1,6 +1,4 @@
-﻿using System.Diagnostics;
-
-namespace Memorabilia.Application.Features.ProposeTrade;
+﻿namespace Memorabilia.Application.Features.ProposeTrade;
 
 public class ProposeTradesModel : Model
 {
@@ -16,6 +14,8 @@ public class ProposeTradesModel : Model
 
     public ProposeTradeModel[] CompletedTrades
         => ProposedTrades.Where(trade => trade.ProposeTradeStatusTypeId == Constant.ProposeTradeStatusType.Accepted.Id
+                                      || trade.ProposeTradeStatusTypeId == Constant.ProposeTradeStatusType.Canceled.Id
+                                      || trade.ProposeTradeStatusTypeId == Constant.ProposeTradeStatusType.Countered.Id
                                       || trade.ProposeTradeStatusTypeId == Constant.ProposeTradeStatusType.Expired.Id
                                       || trade.ProposeTradeStatusTypeId == Constant.ProposeTradeStatusType.Rejected.Id)
                          .ToArray();
@@ -27,8 +27,7 @@ public class ProposeTradesModel : Model
         => "ProposeTrade";
 
     public ProposeTradeModel[] OpenTrades
-        => ProposedTrades.Where(trade => trade.ProposeTradeStatusTypeId == Constant.ProposeTradeStatusType.Countered.Id
-                                      || trade.ProposeTradeStatusTypeId == Constant.ProposeTradeStatusType.Pending.Id)
+        => ProposedTrades.Where(trade => trade.ProposeTradeStatusTypeId == Constant.ProposeTradeStatusType.Pending.Id)
                          .ToArray();
 
     public int OpenTradesCount

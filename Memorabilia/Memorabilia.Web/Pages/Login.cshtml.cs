@@ -1,7 +1,7 @@
 namespace Memorabilia.Web.Pages;
 
 public class LoginModel : PageModel
-{
+{   
     public IActionResult OnGetAsync(string returnUrl = null)
     {
         string provider = "Google";

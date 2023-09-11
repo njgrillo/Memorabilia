@@ -11,7 +11,9 @@
 <DivPad2>
     <Condition Evaluation="IsDetailView">
         <Match>
-            <SiteMemorabiliaDetailGrid Filter="_filter" />
+            <SiteMemorabiliaDetailGrid Filter="_filter"
+                                       GridLoaded="@(() => ReloadGrid = false)"
+                                       ReloadGrid="ReloadGrid" />
         </Match>
         <NotMatch>
             <SiteMemorabiliaGalleryGrid Filter="_filter" />

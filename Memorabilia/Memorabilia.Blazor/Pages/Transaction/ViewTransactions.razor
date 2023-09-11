@@ -1,7 +1,7 @@
-﻿<PageView AddRoute="/Transactions/Edit/0"
+﻿<PageView AddRoute="@($"{NavigationPath.Transactions}/{Constant.EditModeType.Update.Name}/0")"
           AddTitle="Add Transaction"
           DisplayPageHeader="false"
-          NavigationPath="/Transactions"
+          NavigationPath="@NavigationPath.Transactions"
           PageTitle="Transactions">
     <DivPad2>
         <TabControl>

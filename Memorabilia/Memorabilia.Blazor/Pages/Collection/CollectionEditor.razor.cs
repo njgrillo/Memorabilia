@@ -113,7 +113,6 @@ public partial class CollectionEditor
         EditModel.Items.AddRange(collectionMemorabilias);
 
         await OnSave();
-        await Load();
     }
 
     private async Task Load()

@@ -1,6 +1,8 @@
 ﻿@inherits MemorabiliaItem<FirstDayCoverEditModel>
 
-<EditMemorabiliaPage EditModel="EditModel"
+<EditMemorabiliaPage ContinueNavigationPath="@($"{NavigationPath.MemorabiliaImage}/{EditModeType.Update.Name}/{DataProtectorService.EncryptId(MemorabiliaId)}")" 
+                     EditModel="EditModel"
+                     ExitNavigationPath="@NavigationPath.Memorabilia"
                      OnSave="OnSave" 
                      TItem="FirstDayCoverEditModel">
     <Content>

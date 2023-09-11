@@ -4,12 +4,16 @@ public class ProposeTradeMemorabiliaEditModel : EditModel
 {
     private readonly Entity.Memorabilia _memorabilia;
 
-    public ProposeTradeMemorabiliaEditModel(Entity.Memorabilia memorabilia,
-        Constant.ProposeTradeMemorabiliaType proposeTradeMemorabiliaType)
+    public ProposeTradeMemorabiliaEditModel(Entity.Memorabilia memorabilia)
     {
         _memorabilia = memorabilia;
 
-        ProposeTradeMemorabiliaTypeId = proposeTradeMemorabiliaType.Id;
+        UserId = memorabilia.UserId;
+
+        ProposeTradeMemorabiliaTypeId
+            = _memorabilia.User.Id == UserId
+            ? Constant.ProposeTradeMemorabiliaType.Send.Id
+            : Constant.ProposeTradeMemorabiliaType.Receive.Id;
     }
 
     public ProposeTradeMemorabiliaEditModel(Entity.ProposeTradeMemorabilia proposeTradeMemorabilia)
@@ -18,8 +22,12 @@ public class ProposeTradeMemorabiliaEditModel : EditModel
 
         Id = proposeTradeMemorabilia.Id;
         ProposeTradeId = proposeTradeMemorabilia.ProposeTradeId;
-        ProposeTradeMemorabiliaTypeId = proposeTradeMemorabilia.ProposeTradeMemorabiliaTypeId;
+        UserId = proposeTradeMemorabilia.UserId;
 
+        ProposeTradeMemorabiliaTypeId 
+            = _memorabilia.User.Id == UserId 
+            ? Constant.ProposeTradeMemorabiliaType.Send.Id
+            : Constant.ProposeTradeMemorabiliaType.Receive.Id;    
     }
 
     public List<AutographModel> Autographs
@@ -28,7 +36,7 @@ public class ProposeTradeMemorabiliaEditModel : EditModel
                        .ToList();
 
     public int AutographsCount
-        => _memorabilia.Autographs.Count();
+        => _memorabilia.Autographs.Count;
 
     public decimal? BuyNowPrice
         => _memorabilia.ForSale?.BuyNowPrice;
@@ -69,6 +77,5 @@ public class ProposeTradeMemorabiliaEditModel : EditModel
     public string ToggleIcon { get; set; }
         = MudBlazor.Icons.Material.Filled.ExpandMore;
 
-    public int UserId
-        => _memorabilia.UserId;
+    public int UserId { get; set; }
 }

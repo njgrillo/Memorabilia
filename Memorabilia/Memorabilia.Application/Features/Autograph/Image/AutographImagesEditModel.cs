@@ -30,18 +30,10 @@ public class AutographImagesEditModel : EditModel
             ? Constant.EditModeType.Update 
             : Constant.EditModeType.Add;
 
-    public override string ExitNavigationPath 
-        => "MyStuff/Memorabilia/View";
-
     public List<ImageEditModel> Images { get; set; } 
         = new();
 
     public Constant.ItemType ItemType { get; }
 
     public int MemorabiliaId { get; }
-
-    public override string PageTitle 
-        => $"{(EditModeType == Constant.EditModeType.Add 
-                ? Constant.EditModeType.Add.Name 
-                : Constant.EditModeType.Update.Name)} Image(s)";
 }

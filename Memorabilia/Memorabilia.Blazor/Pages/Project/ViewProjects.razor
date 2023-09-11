@@ -1,8 +1,8 @@
-﻿<PageView AddRoute="@Model.AddRoute"
-          AddTitle="@Model.AddTitle"
+﻿<PageView AddRoute="@($"{NavigationPath.Projects}/{Constant.EditModeType.Update.Name}/0")"
+          AddTitle="Add Project"
           DisplayPageHeader="false"
-          NavigationPath="@Model.ExitNavigationPath"
-          PageTitle="@Model.PageTitle">
+          NavigationPath="@NavigationPath.Home"
+          PageTitle="Projects">
     <DivPad2>
         <MudTable Bordered="false"
                   Dense="false"
@@ -10,7 +10,7 @@
                   Items="@Model.Projects"
                   Striped="true">
             <ToolBarContent>
-                <MudText Typo="Typo.h6">@Model.PageTitle</MudText>
+                <MudText Typo="Typo.h6">Projects</MudText>
             </ToolBarContent>
             <HeaderContent>
                 <MudTh>Name</MudTh>
@@ -23,7 +23,7 @@
                 <MudTd DataLabel="Start Date">@context.FormattedStartDate</MudTd>
                 <MudTd DataLabel="End Date">@context.FormattedEndDate</MudTd>
                 <MudTd DataLabel="">
-                    <GridEditButton NavigationPath="@($"{Model.RoutePrefix}/Edit/{DataProtectorService.EncryptId(context.Id)}")" />
+                    <GridEditButton NavigationPath="@($"{NavigationPath.Projects}/{Constant.EditModeType.Update.Name}/{DataProtectorService.EncryptId(context.Id)}")" />
                     <MudTooltip Text="Delete">
                         <MudFab Color="MudBlazor.Color.Secondary"
                                 Icon="@Icons.Material.Outlined.DeleteOutline"

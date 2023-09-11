@@ -9,14 +9,13 @@ public partial class SpotsEditor
     [Parameter]
     public string EncryptAutographId { get; set; }
 
+    private string _continueNavigationPath;
+
     protected override async Task OnInitializedAsync()
     {
         AutographId = DataProtectorService.DecryptId(EncryptAutographId);
 
         Model = (await QueryRouter.Send(new Application.Features.Autograph.Spot.GetSpot(AutographId))).ToEditModel();
-
-        Model.BackNavigationPath
-            = $"Autographs/Authentications/{EditModeType.Update.Name}/{DataProtectorService.EncryptId(AutographId)}";
 
         IsLoaded = true;
     }
@@ -28,7 +27,7 @@ public partial class SpotsEditor
 
         await CommandRouter.Send(new Application.Features.Autograph.Spot.SaveSpot.Command(Model));
 
-        Model.ContinueNavigationPath
-            = $"Autographs/Image/{EditModeType.Update.Name}/{DataProtectorService.EncryptId(Model.AutographId)}";
+        _continueNavigationPath
+            = $"{NavigationPath.AutographImage}/{EditModeType.Update.Name}/{DataProtectorService.EncryptId(Model.AutographId)}";
     }
 }

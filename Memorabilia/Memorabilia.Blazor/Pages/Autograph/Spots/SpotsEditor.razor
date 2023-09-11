@@ -1,7 +1,9 @@
 ﻿@inherits AutographItem<SpotEditModel>
 
 <PageLoader IsLoading="@(!IsLoaded)">
-    <PageEditor EditModel="Model"
+    <PageEditor ContinueNavigationPath="@_continueNavigationPath" 
+                EditModel="Model"
+                ExitNavigationPath="@NavigationPath.Memorabilia"
                 OnSave="Save"
                 PageImageFileName="@Model.ImageFileName"
                 TItem="SpotEditModel">

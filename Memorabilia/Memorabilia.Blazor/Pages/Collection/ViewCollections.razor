@@ -1,8 +1,8 @@
-﻿<PageView AddRoute="@Model.AddRoute"
-          AddTitle="@Model.AddTitle"
+﻿<PageView AddRoute="@($"{NavigationPath.Collections}/{Constant.EditModeType.Update.Name}/{DataProtectorService.EncryptId(0)}")"
+          AddTitle="@($"{Constant.EditModeType.Add.Name} Collection")"
           DisplayPageHeader="false"
-          NavigationPath="@Model.ExitNavigationPath"
-          PageTitle="@Model.PageTitle">
+          NavigationPath="@NavigationPath.Home"
+          PageTitle="Collections">
     <DivPad2>
         <MudTable Bordered="false"
                   Dense="false"
@@ -10,7 +10,7 @@
                   Items="@Model.Collections"
                   Striped="true">
             <ToolBarContent>
-                <MudText Typo="Typo.h6">@Model.PageTitle</MudText>
+                <MudText Typo="Typo.h6">Collections</MudText>
             </ToolBarContent>
             <HeaderContent>
                 <MudTh>Name</MudTh>
@@ -21,7 +21,7 @@
                 <MudTd DataLabel="Name">@context.Name</MudTd>
                 <MudTd DataLabel="Description">@context.Description</MudTd>
                 <MudTd DataLabel="">
-                    <GridEditButton NavigationPath="@($"{Model.RoutePrefix}/Edit/{DataProtectorService.EncryptId(context.Id)}")" />
+                    <GridEditButton NavigationPath="@($"{NavigationPath.Collections}/{Constant.EditModeType.Update.Name}/{DataProtectorService.EncryptId(context.Id)}")" />
                     <MudTooltip Text="Delete">
                         <MudFab Color="MudBlazor.Color.Secondary"
                                 Icon="@Icons.Material.Outlined.DeleteOutline"

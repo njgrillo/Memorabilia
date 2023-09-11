@@ -28,7 +28,7 @@
             <MudTooltip Text="@context.ImageDisplayCount">
                 <GridImage ImageLoaded="OnImageLoaded"
                            ImageFileName="@context.ImageFileName"
-                           NavigationPath="@($"Memorabilia/Image/Edit/{DataProtectorService.EncryptId(context.Id)}")" />
+                           NavigationPath="@($"{NavigationPath.MemorabiliaImage}/{Constant.EditModeType.Update.Name}/{DataProtectorService.EncryptId(context.Id)}")" />
             </MudTooltip>
         </MudTd>
         <MudTd DataLabel="Item">@context.ItemTypeName</MudTd>
@@ -79,7 +79,7 @@
                             </HeaderContent>
                             <RowTemplate Context="autograph">
                                 <MudTd DataLabel="Name">
-                                    <MudImage @onclick="@(_ => NavigationManager.NavigateTo($"Autographs/Image/Edit/{DataProtectorService.EncryptId(autograph.Id)}"))"
+                                    <MudImage @onclick="@(_ => NavigationManager.NavigateTo($"{NavigationPath.AutographImage}/{Constant.EditModeType.Update.Name}/{DataProtectorService.EncryptId(autograph.Id)}"))"
                                               Class="rounded-lg can-click"
                                               Elevation="5"
                                               Height="200"
@@ -99,7 +99,7 @@
                                        Style="text-align:center">
                                     <MudTooltip Text="@autograph.AuthenticationTooltip">
                                         <MudChip Color="MudBlazor.Color.Info"
-                                                 OnClick="@(_ => NavigationManager.NavigateTo($"Autographs/Authentications/Edit/{DataProtectorService.EncryptId(autograph.Id)}"))"
+                                                 OnClick="@(_ => NavigationManager.NavigateTo($"{NavigationPath.Authentications}/{Constant.EditModeType.Update.Name}/{DataProtectorService.EncryptId(autograph.Id)}"))"
                                                  Size="@MudBlazor.Size.Small"
                                                  Text="@autograph.AuthenticationText" />
                                     </MudTooltip>
@@ -108,7 +108,7 @@
                                        Style="text-align:center">
                                     <MudTooltip Text="@autograph.InscriptionTooltip">
                                         <MudChip Color="MudBlazor.Color.Info"
-                                                 OnClick="@(_ => NavigationManager.NavigateTo($"Autographs/Inscriptions/Edit/{DataProtectorService.EncryptId(autograph.Id)}"))"
+                                                 OnClick="@(_ => NavigationManager.NavigateTo($"{NavigationPath.Inscriptions}/{Constant.EditModeType.Update.Name}/{DataProtectorService.EncryptId(autograph.Id)}"))"
                                                  Size="@MudBlazor.Size.Small"
                                                  Text="@autograph.InscriptionText" />
                                     </MudTooltip>

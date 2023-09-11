@@ -7,14 +7,14 @@ public partial class BookplateEditor
     {
         MemorabiliaId = DataProtectorService.DecryptId(EncryptMemorabiliaId);
 
-        EditModel = new(new BookplateModel(await QueryRouter.Send(new GetMemorabiliaItem(MemorabiliaId))));
-        EditModel.MemorabiliaId = MemorabiliaId;
+        EditModel = new(new BookplateModel(await QueryRouter.Send(new GetMemorabiliaItem(MemorabiliaId))))
+        {
+            MemorabiliaId = MemorabiliaId
+        };
     }
 
     protected async Task OnSave()
     {
         await CommandRouter.Send(new SaveBookplate.Command(EditModel));
-
-        EditModel.ContinueNavigationPath = $"Memorabilia/Image/{EditModeType.Update.Name}/{DataProtectorService.EncryptId(MemorabiliaId)}";
     }
 }

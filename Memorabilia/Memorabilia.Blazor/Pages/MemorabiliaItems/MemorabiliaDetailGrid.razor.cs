@@ -34,7 +34,13 @@ public partial class MemorabiliaDetailGrid
         = new();
 
     [Parameter]
+    public EventCallback GridLoaded { get; set; }    
+
+    [Parameter]
     public EventCallback<List<MemorabiliaModel>> MemorabiliaSelected { get; set; }
+
+    [Parameter]
+    public bool ReloadGrid { get; set; }
 
     [Parameter]
     public List<MemorabiliaModel> SelectedMemorabilia { get; set; } 
@@ -62,7 +68,7 @@ public partial class MemorabiliaDetailGrid
 
     protected override async Task OnParametersSetAsync()
     {
-        if (_filter == Filter)
+        if (Model.MemorabiliaItems.Any() && !ReloadGrid)
             return;
 
         _resetPaging = true;
@@ -136,6 +142,8 @@ public partial class MemorabiliaDetailGrid
         var pageInfo = new PageInfo(_resetPaging ? 1 : state.Page + 1, state.PageSize);
 
         Model = await QueryRouter.Send(new GetMemorabiliaItemsPaged(pageInfo, Filter));
+
+        await GridLoaded.InvokeAsync();
 
         return new TableData<MemorabiliaModel>()
         {

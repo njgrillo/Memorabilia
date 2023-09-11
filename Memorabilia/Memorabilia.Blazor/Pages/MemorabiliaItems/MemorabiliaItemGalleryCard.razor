@@ -19,9 +19,9 @@
                 <Div Class="row">
                     <Iterations Items="MemorabiliaItem.Autographs" Context="autograph">
                         <Div Class="col-4">
-                            <MemorabiliaItemGallerySubCard EditNavigationPath="@autograph.EditNavigationPath"
+                            <MemorabiliaItemGallerySubCard EditNavigationPath="@($"{NavigationPath.Autographs}/{Constant.EditModeType.Update.Name}/{autograph.MemorabiliaId}/{autograph.AutographId}")"
                                                            ImageFileName="@autograph.ImageFileName"
-                                                           ImageNavigationPath="@autograph.ImageNavigationPath"
+                                                           ImageNavigationPath="@GetImageNavigationPath(autograph)"
                                                            Title="@autograph.PersonName"
                                                            TooltipText="@autograph.PersonName" />
                         </Div>

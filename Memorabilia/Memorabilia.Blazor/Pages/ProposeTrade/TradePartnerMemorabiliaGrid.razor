@@ -35,11 +35,15 @@
             <ViewMemorabiliaImagesFab MemorabiliaId="context.MemorabiliaId"
                                       Size="@MudBlazor.Size.Large"
                                       UserId="context.UserId" />
-            <MudTooltip Text="Remove">
-                <MudFab Color="MudBlazor.Color.Secondary"
-                        Icon="@Icons.Material.Outlined.DeleteOutline"
-                        OnClick="@(_ => context.IsDeleted = true)" />
-            </MudTooltip>
+            <Condition Evaluation="@(!ReadOnly)">
+                <Match>
+                    <MudTooltip Text="Remove">
+                        <MudFab Color="MudBlazor.Color.Secondary"
+                                Icon="@Icons.Material.Outlined.DeleteOutline"
+                                OnClick="@(_ => context.IsDeleted = true)" />
+                    </MudTooltip>
+                </Match>
+            </Condition>            
         </MudTd>
     </RowTemplate>
     <ChildRowContent>
@@ -112,7 +116,7 @@
                                 </MudTd>
                                 <MudTd>
                                     <ViewAutographImagesFab AutographId="autograph.Id"
-                                                            UserId="autograph.UserId"/>
+                                                            UserId="autograph.UserId" />
                                 </MudTd>
                             </RowTemplate>
                             <PagerContent>

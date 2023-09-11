@@ -1,17 +1,17 @@
-﻿<PageHeader PageTitle="@EditModel.PageTitle" />
+﻿<PageHeader PageTitle="@GetPageTitle()" />
 <MemorabiliaItemTimeline EditMode="EditModel.EditModeType"
                          ItemTypeName="@EditModel.ItemTypeName"
                          MemorabiliaId="EditModel.MemorabiliaId"
                          MemorabiliaItemStep="EditModel.MemorabiliaItemStep" />
 <EditImages @ref="EditImages"
-            ContinueNavigationPath="@EditModel.ContinueNavigationPath"
-            ExitNavigationPath="@EditModel.ExitNavigationPath"
+            ContinueNavigationPath="@_continueNavigationPath"
+            ExitNavigationPath="@($"{NavigationPath.Memorabilia}/View")"
             Images="@EditModel.Images"
             MaximumAllowedFiles="10"
             MaximumFileSize="10240000"
             Model="EditModel"
             OnSave="OnSave"
-            PageTitle="@EditModel.PageTitle"
+            PageTitle="@GetPageTitle()"
             ReplaceImages="false"
             SaveButtonText="Save & Continue"
             TItem="MemorabiliaImagesEditModel">
@@ -28,5 +28,5 @@
                     Text="Save & Add Item" />
     </AdditionalButtons>
 </EditImages>
-<PageFooter NavigationPath="@EditModel.BackNavigationPath" />
+<PageFooter NavigationPath="@_backNavigationPath" />
                       

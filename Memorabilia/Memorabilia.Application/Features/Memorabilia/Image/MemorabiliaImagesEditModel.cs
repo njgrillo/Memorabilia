@@ -26,9 +26,6 @@ public class MemorabiliaImagesEditModel : EditModel
     public override Constant.EditModeType EditModeType 
         => Images.Any() ? Constant.EditModeType.Update : Constant.EditModeType.Add;
 
-    public override string ExitNavigationPath
-        => "MyStuff/Memorabilia/View";
-
     public bool HasAutographs { get; private set; }
 
     public bool HasMultipleAutographs { get; private set; }
@@ -42,7 +39,4 @@ public class MemorabiliaImagesEditModel : EditModel
 
     public Constant.MemorabiliaItemStep MemorabiliaItemStep
         => Constant.MemorabiliaItemStep.Image;
-
-    public override string PageTitle 
-        => $"{(EditModeType == Constant.EditModeType.Add ? Constant.EditModeType.Add.Name : Constant.EditModeType.Update.Name)} Memorabilia Image(s)";
 }

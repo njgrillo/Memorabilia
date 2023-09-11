@@ -27,27 +27,40 @@
         <MudTd DataLabel="AmountToReceive">@(context.AmountToReceive?.ToString("c") ?? string.Empty)</MudTd>
         <MudTd DataLabel="AmountToSend">@(context.AmountToSend?.ToString("c") ?? string.Empty)</MudTd>
         <MudTd DataLabel="Status">@context.ProposeTradeStatusTypeName</MudTd>
-        <Condition Evaluation="@context.ShowActions">
+        <Condition Evaluation="@context.CantAcceptCounterReject">
             <Match>
                 <MudTd>
-                    <MudTooltip Text="Accept">
+                    <MudTooltip Text="Cancel">
                         <MudFab Color="MudBlazor.Color.Secondary"
-                                Icon="@Icons.Material.Outlined.Handshake"
-                                OnClick="@(_ => Accept(context.Id))" />
+                                Icon="@Icons.Material.Outlined.Cancel"
+                                OnClick="@(_ => Cancel(context))" />
                     </MudTooltip>
-                    <MudTooltip Text="Counter">
-                        <MudFab Color="MudBlazor.Color.Secondary"
-                                Icon="@Icons.Material.Outlined.SwapHoriz"
-                                OnClick="@(_ => Counter(context.Id))" />
-                    </MudTooltip>
-                    <MudTooltip Text="Reject">
-                        <MudFab Color="MudBlazor.Color.Secondary"
-                                Icon="@Icons.Material.Outlined.DoNotTouch"
-                                OnClick="@(_ => Reject(context.Id))" />
-                    </MudTooltip>
-                </MudTd>
+                </MudTd>                
             </Match>
-        </Condition>
+            <NotMatch>
+                <Condition Evaluation="@context.ShowActions">
+                    <Match>
+                        <MudTd>
+                            <MudTooltip Text="Accept">
+                                <MudFab Color="MudBlazor.Color.Secondary"
+                                        Icon="@Icons.Material.Outlined.Handshake"
+                                        OnClick="@(_ => Accept(context))" />
+                            </MudTooltip>
+                            <MudTooltip Text="Counter">
+                                <MudFab Color="MudBlazor.Color.Secondary"
+                                        Icon="@Icons.Material.Outlined.SwapHoriz"
+                                        OnClick="@(_ => Counter(context.Id))" />
+                            </MudTooltip>
+                            <MudTooltip Text="Reject">
+                                <MudFab Color="MudBlazor.Color.Secondary"
+                                        Icon="@Icons.Material.Outlined.DoNotTouch"
+                                        OnClick="@(_ => Reject(context))" />
+                            </MudTooltip>
+                        </MudTd>
+                    </Match>
+                </Condition>
+            </NotMatch>
+        </Condition>        
     </RowTemplate>
     <ChildRowContent>
         <Condition Evaluation="@context.DisplayTradeDetails">
@@ -89,10 +102,10 @@
                                 <MudTd DataLabel="Item">@item.Memorabilia.ItemType.Name</MudTd>
                                 <MudTd DataLabel="Condition">@item.Memorabilia.Condition.Name</MudTd>
                                 <MudTd DataLabel="Type">
-                                    <MudTooltip Text="@(Constant.ProposeTradeMemorabiliaType.Find(item.ProposeTradeMemorabiliaTypeId).Name)">
+                                        <MudTooltip Text="@GetProposeTradeMemorabiliaTypeName(item)">
                                         <MudFab Class="cant-click"
                                                 Color="MudBlazor.Color.Info"
-                                                Icon="@(GetTypeIcon(item.ProposeTradeMemorabiliaTypeId))"
+                                                Icon="@(GetTypeIcon(item))"
                                                 Size="@MudBlazor.Size.Small" />
                                     </MudTooltip>
                                 </MudTd>

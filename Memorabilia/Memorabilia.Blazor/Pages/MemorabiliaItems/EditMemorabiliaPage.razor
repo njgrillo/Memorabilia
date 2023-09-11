@@ -2,7 +2,9 @@
 
 @inherits MemorabiliaItem<TItem>
 
-<PageEditor EditModel="EditModel"
+<PageEditor ContinueNavigationPath="@ContinueNavigationPath" 
+            EditModel="EditModel"
+            ExitNavigationPath="@ExitNavigationPath"
             OnSave="Save"
             PageImageFileName="@EditModel.ImageFileName"
             TItem="TItem">

@@ -152,8 +152,8 @@ public partial class AutographTimeline
             return;
 
         string url = !item.IsNullOrEmpty()
-            ? $"Autographs/{item}/{EditModeType.Update.Name}/{DataProtectorService.EncryptId(AutographId)}"
-            : $"Autographs/{EditModeType.Update.Name}/{DataProtectorService.EncryptId(MemorabiliaId)}/{DataProtectorService.EncryptId(AutographId)}";
+            ? $"{NavigationPath.Autographs}/{item}/{EditModeType.Update.Name}/{DataProtectorService.EncryptId(AutographId)}"
+            : $"{NavigationPath.Autographs}/{EditModeType.Update.Name}/{DataProtectorService.EncryptId(MemorabiliaId)}/{DataProtectorService.EncryptId(AutographId)}";
 
         NavigationManager.NavigateTo(url);
     }

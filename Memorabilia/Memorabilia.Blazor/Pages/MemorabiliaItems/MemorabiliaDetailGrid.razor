@@ -46,7 +46,7 @@
             <MudTooltip Text="@context.ImageDisplayCount">
                 <GridImage ImageLoaded="OnImageLoaded" 
                            ImageFileName="@context.ImageFileName"
-                           NavigationPath="@($"Memorabilia/Image/Edit/{DataProtectorService.EncryptId(context.Id)}")" />
+                           NavigationPath="@($"{NavigationPath.MemorabiliaImage}/{Constant.EditModeType.Update.Name}/{DataProtectorService.EncryptId(context.Id)}")" />
             </MudTooltip> 
         </MudTd>
         <MudTd DataLabel="Item">@context.ItemTypeName</MudTd>
@@ -64,19 +64,19 @@
                     <MudTooltip Text="Add Autograph">
                         <MudFab Color="MudBlazor.Color.Primary"
                                 Icon="@Icons.Material.Outlined.AddCircleOutline"
-                                OnClick="@(_ => NavigationManager.NavigateTo($"Autographs/Edit/{DataProtectorService.EncryptId(context.Id)}/0"))"
+                                OnClick="@(_ => NavigationManager.NavigateTo($"{NavigationPath.Autographs}/{Constant.EditModeType.Update.Name}/{DataProtectorService.EncryptId(context.Id)}/0"))"
                                 Size="@MudBlazor.Size.Small" />
                     </MudTooltip>
                     <MudTooltip Text="Details">
                         <MudFab Color="MudBlazor.Color.Info"
                                 Icon="@Icons.Material.Outlined.Info"
-                                OnClick="@(_ => NavigationManager.NavigateTo($"Memorabilia/{context.ItemTypeName.Replace(" ", "")}/Edit/{DataProtectorService.EncryptId(context.Id)}"))"
+                                OnClick="@(_ => NavigationManager.NavigateTo($"{NavigationPath.Memorabilia}/{context.ItemTypeName.Replace(" ", "")}/Edit/{DataProtectorService.EncryptId(context.Id)}"))"
                                 Size="@MudBlazor.Size.Small" />
                     </MudTooltip>
                     <MudTooltip Text="Edit">
                         <MudFab Color="MudBlazor.Color.Primary"
                                 Icon="@Icons.Material.Outlined.ModeEditOutline"
-                                OnClick="@(_ => NavigationManager.NavigateTo($"Memorabilia/Edit/{DataProtectorService.EncryptId(context.Id)}"))"
+                                OnClick="@(_ => NavigationManager.NavigateTo($"{NavigationPath.Memorabilia}/{Constant.EditModeType.Update.Name}/{DataProtectorService.EncryptId(context.Id)}"))"
                                 Size="@MudBlazor.Size.Small" />
                     </MudTooltip>
                     <MudTooltip Text="Delete">
@@ -132,7 +132,7 @@
                             <RowTemplate Context="autograph">
                                 <MudTd DataLabel="Name">
                                     <MudTooltip Text="@autograph.ImageDisplayCount">
-                                        <MudImage @onclick="@(_ => NavigationManager.NavigateTo($"Autographs/Image/Edit/{DataProtectorService.EncryptId(autograph.Id)}"))" 
+                                        <MudImage @onclick="@(_ => NavigationManager.NavigateTo($"{NavigationPath.AutographImage}/{Constant.EditModeType.Update.Name}/{DataProtectorService.EncryptId(autograph.Id)}"))"
                                                   Class="rounded-lg can-click" 
                                                   Elevation="5" 
                                                   Height="200"
@@ -154,7 +154,7 @@
                                        Style="text-align:center">
                                     <MudTooltip Text="@autograph.AuthenticationTooltip">
                                         <MudChip Color="MudBlazor.Color.Info" 
-                                                 OnClick="@(_ => NavigationManager.NavigateTo($"Autographs/Authentications/Edit/{DataProtectorService.EncryptId(autograph.Id)}"))"
+                                                 OnClick="@(_ => NavigationManager.NavigateTo($"{NavigationPath.Authentications}/{Constant.EditModeType.Update.Name}/{DataProtectorService.EncryptId(autograph.Id)}"))"
                                                  Size="@MudBlazor.Size.Small"
                                                  Text="@autograph.AuthenticationText" />
                                     </MudTooltip> 
@@ -163,7 +163,7 @@
                                        Style="text-align:center">
                                     <MudTooltip Text="@autograph.InscriptionTooltip">
                                         <MudChip Color="MudBlazor.Color.Info"
-                                                 OnClick="@(_ => NavigationManager.NavigateTo($"Autographs/Inscriptions/Edit/{DataProtectorService.EncryptId(autograph.Id)}"))"
+                                                 OnClick="@(_ => NavigationManager.NavigateTo($"{NavigationPath.Inscriptions}/{Constant.EditModeType.Update.Name}/{DataProtectorService.EncryptId(autograph.Id)}"))"
                                                  Size="@MudBlazor.Size.Small"
                                                  Text="@autograph.InscriptionText" />
                                     </MudTooltip> 
@@ -176,7 +176,7 @@
                                             <MudTooltip Text="Edit">
                                                 <MudFab Color="MudBlazor.Color.Primary"
                                                         Icon="@Icons.Material.Outlined.ModeEditOutline"
-                                                        OnClick="@(_ => NavigationManager.NavigateTo($"Autographs/Edit/{DataProtectorService.EncryptId(autograph.MemorabiliaId)}/{DataProtectorService.EncryptId(autograph.Id)}"))"
+                                                        OnClick="@(_ => NavigationManager.NavigateTo($"{NavigationPath.Autographs}/{Constant.EditModeType.Update.Name}/{DataProtectorService.EncryptId(autograph.MemorabiliaId)}/{DataProtectorService.EncryptId(autograph.Id)}"))"
                                                         Size="@MudBlazor.Size.Small" />
                                             </MudTooltip>
                                             <MudTooltip Text="Delete">

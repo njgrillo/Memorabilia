@@ -20,9 +20,6 @@ public class PersonTeamsEditModel : EditModel
                      .ToList();       
     }
 
-    public override string BackNavigationPath 
-        => $"{Constant.AdminDomainItem.People.Title}/SportService/{Constant.EditModeType.Update.Name}/{PersonId}";
-
     public override string ContinueNavigationPath 
         => $"{Constant.AdminDomainItem.People.Title}/Accolade/{Constant.EditModeType.Update.Name}/{PersonId}";
 

@@ -1,7 +1,7 @@
-﻿<PageView AddRoute="/ThroughTheMail/Edit/0"
+﻿<PageView AddRoute="@($"{NavigationPath.ThroughTheMail}/{Constant.EditModeType.Update.Name}/0")"
           AddTitle="Add Through the Mail"
           DisplayPageHeader="false"
-          NavigationPath="/ThroughTheMail"
+          NavigationPath="@NavigationPath.ThroughTheMail"
           PageTitle="Through the Mail">
     <DivPad2>
         <TabControl>

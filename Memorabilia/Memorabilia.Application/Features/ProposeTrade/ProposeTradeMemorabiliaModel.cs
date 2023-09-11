@@ -23,6 +23,9 @@ public class ProposeTradeMemorabiliaModel
 	public int ProposeTradeId
 		=> _proposeTradeMemorabilia.ProposeTradeId;
 
-	public int ProposeTradeMemorabiliaTypeId
-		=> _proposeTradeMemorabilia.ProposeTradeMemorabiliaTypeId;
+	public Entity.User User
+		=> _proposeTradeMemorabilia.User;
+
+	public int UserId
+		=> _proposeTradeMemorabilia.User?.Id ?? 0;
 }

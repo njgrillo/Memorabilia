@@ -6,11 +6,11 @@ public class ProposeTradeMemorabilia : Framework.Library.Domain.Entity.DomainEnt
 
     public ProposeTradeMemorabilia(int memorabiliaId,
                                    int proposeTradeId,
-                                   int proposeTradeMemorabiliaTypeId)
+                                   int userId)
     {
         MemorabiliaId = memorabiliaId;
         ProposeTradeId = proposeTradeId;
-        ProposeTradeMemorabiliaTypeId = proposeTradeMemorabiliaTypeId;
+        UserId = userId;
     }
 
     public virtual Memorabilia Memorabilia { get; private set; }
@@ -19,5 +19,7 @@ public class ProposeTradeMemorabilia : Framework.Library.Domain.Entity.DomainEnt
 
     public int ProposeTradeId { get; private set; }
 
-    public int ProposeTradeMemorabiliaTypeId { get; private set; }
+    public virtual User User { get; private set; }
+
+    public int UserId { get; private set; }
 }

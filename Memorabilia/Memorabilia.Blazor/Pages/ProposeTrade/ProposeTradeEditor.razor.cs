@@ -15,6 +15,9 @@ public partial class ProposeTradeEditor
     public IDialogService DialogService { get; set; }
 
     [Inject]
+    public EmailService EmailService { get; set; }
+
+    [Inject]
     public IMediator Mediator { get; set; }
 
     [Inject]
@@ -29,10 +32,23 @@ public partial class ProposeTradeEditor
     [Parameter]
     public string EncryptMemorabiliaId { get; set; }
 
+    [Parameter]
+    public string EncryptProposeTradeId { get; set; }    
+
     protected ProposeTradeEditModel EditModel
         = new();
 
-    protected int MemorabiliaId;
+    protected bool IsReadOnly
+        => IsReviewMode &&
+           EditModel.ProposeTradeStatusTypeId == ProposeTradeStatusType.Pending.Id &&
+           ApplicationStateService.CurrentUser.Id == (EditModel.ProposeTradeCreateUser?.Id ?? 0);
+
+    protected bool IsReviewMode
+        => !EncryptProposeTradeId.IsNullOrEmpty();
+
+    protected int? MemorabiliaId;
+
+    protected int? ProposeTradeId;
 
     protected Alert[] ValidationResultAlerts
         => EditModel.ValidationResult.Errors?.Any() ?? false
@@ -41,22 +57,26 @@ public partial class ProposeTradeEditor
 
     protected override async Task OnInitializedAsync()
     {
-        MemorabiliaId = DataProtectorService.DecryptId(EncryptMemorabiliaId);        
-
-        Entity.Memorabilia receiveMemorabilia
-            = await Mediator.Send(new GetProposeTradeMemorabiliaItem(MemorabiliaId));
-
-        EditModel.ReceiveItems.Add(new ProposeTradeMemorabiliaEditModel(receiveMemorabilia,
-                                                                        ProposeTradeMemorabiliaType.Receive));
-
-        EditModel.ReceiverUser ??= ApplicationStateService.CurrentUser;
-
-        if (EditModel.SenderUser == null)
+        if (!IsReviewMode)
         {
-            Entity.User senderUser
-                        = await Mediator.Send(new GetUserById(receiveMemorabilia.UserId));
+            MemorabiliaId = DataProtectorService.DecryptId(EncryptMemorabiliaId);
 
-            EditModel.SenderUser = senderUser;
+            Entity.Memorabilia receiveMemorabilia
+                = await Mediator.Send(new GetProposeTradeMemorabiliaItem(MemorabiliaId.Value));
+
+            Entity.User senderUser
+                = await Mediator.Send(new GetUserById(receiveMemorabilia.UserId));
+
+            EditModel = new(ApplicationStateService.CurrentUser, senderUser, receiveMemorabilia);
+        }
+        else
+        {
+            ProposeTradeId = DataProtectorService.DecryptId(EncryptProposeTradeId);
+
+            Entity.ProposeTrade proposeTrade
+                = await Mediator.Send(new GetPropopseTrade(ProposeTradeId.Value));
+
+            EditModel = new(ApplicationStateService.CurrentUser.Id, proposeTrade);
         }        
     }
 
@@ -71,7 +91,7 @@ public partial class ProposeTradeEditor
 
         var parameters = new DialogParameters
         {
-            ["UserId"] = EditModel.SenderUser.Id
+            ["UserId"] = EditModel.TradePartnerUserId
         };
 
         var dialog = DialogService.Show<AddProposeTradeReceiveMemorabiliaDialog>(string.Empty,
@@ -86,8 +106,7 @@ public partial class ProposeTradeEditor
         var items = (List<SiteMemorabiliaModel>)result.Data;
 
         List<ProposeTradeMemorabiliaEditModel> memorabilias
-            = items.Select(item => new ProposeTradeMemorabiliaEditModel(item.Memorabilia,
-                                                                        ProposeTradeMemorabiliaType.Receive))
+            = items.Select(item => new ProposeTradeMemorabiliaEditModel(item.Memorabilia))
                    .ToList();
 
         EditModel.ReceiveItems.AddRange(memorabilias);
@@ -113,12 +132,37 @@ public partial class ProposeTradeEditor
         var items = (List<MemorabiliaModel>)result.Data;
 
         List<ProposeTradeMemorabiliaEditModel> memorabilias
-            = items.Select(item => new ProposeTradeMemorabiliaEditModel(item.Memorabilia,
-                                                                        ProposeTradeMemorabiliaType.Send))
+            = items.Select(item => new ProposeTradeMemorabiliaEditModel(item.Memorabilia))
                    .ToList();
 
         EditModel.SendItems.AddRange(memorabilias);
 
+    }    
+
+    protected async Task OnAccept()
+    {
+        await UpdateTradeStatus(ProposeTradeStatusType.Accepted);
+    }
+
+    protected async Task OnCancel()
+    {
+        await UpdateTradeStatus(ProposeTradeStatusType.Canceled);
+    }
+
+    protected async Task OnCounter()
+    {
+        await CommandRouter.Send(new UpdateProposeTradeStatus(EditModel.Id,
+                                                              ProposeTradeStatusType.Countered));
+
+        EditModel.Id = 0;
+        EditModel.SwitchCreatorAndPartner(ApplicationStateService.CurrentUser.Id);
+
+        await OnSend();
+    }
+
+    protected async Task OnReject()
+    {
+        await UpdateTradeStatus(ProposeTradeStatusType.Rejected);
     }
 
     protected async Task OnSend()
@@ -135,5 +179,43 @@ public partial class ProposeTradeEditor
         Snackbar.Add("Trade proposal sent!", Severity.Success);
 
         NavigationManager.NavigateTo(NavigationPath.ProposedTrades);
+
+        string body
+            = EmailBody.ProposeTradeSent
+                       .Replace("[[userName]]", EditModel.UserName);
+
+        EmailService.SendEmailMessage(EditModel.TradePartnerName,
+                                      EditModel.TradePartnerEmail,
+                                      EmailSubject.ProposeTradeSent,
+                                      body);
+    }
+
+    private async Task UpdateTradeStatus(ProposeTradeStatusType proposeTradeStatusType)
+    {
+        await CommandRouter.Send(new UpdateProposeTradeStatus(EditModel.Id,
+                                                              proposeTradeStatusType));
+
+        string subject
+            = EmailSubject.ProposeTrade
+                          .Replace("[[proposeTradeStatusType]]", proposeTradeStatusType.Name);
+
+        string body
+            = EmailBody.ProposeTrade
+                       .Replace("[[tradePartnerName]]", EditModel.TradePartnerName)
+                       .Replace("[[proposeTradeStatusType]]", proposeTradeStatusType.Name);
+
+        EmailService.SendEmailMessage(EditModel.TradePartnerName,
+                                      EditModel.TradePartnerEmail,
+                                      subject,
+                                      body);
+
+        Snackbar.Add($"Trade proposal has been {proposeTradeStatusType.Name}!", Severity.Success);
+
+        string navigationPath
+            = proposeTradeStatusType == ProposeTradeStatusType.Accepted
+                ? NavigationPath.Home
+                : NavigationPath.ProposedTrades;
+
+        NavigationManager.NavigateTo(navigationPath);
     }
 }

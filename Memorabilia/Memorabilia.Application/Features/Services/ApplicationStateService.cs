@@ -20,6 +20,12 @@ public class ApplicationStateService : IApplicationStateService
         IsDarkTheme = CurrentUser.UserSettings?.UseDarkTheme ?? false;
     }
 
+    public void Logout()
+    {
+        CurrentUser = null;
+        IsDarkTheme = false;
+    }
+
     public void Set(Entity.User user)
     {
         CurrentUser = user;

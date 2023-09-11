@@ -49,6 +49,6 @@ public partial class ViewProjects
 
         Model.Projects.Remove(deletedItem);
 
-        Snackbar.Add($"{Model.ItemTitle} was deleted successfully!", Severity.Success);
+        Snackbar.Add($"Project was deleted successfully!", Severity.Success);
     }
 }

@@ -23,7 +23,5 @@ public partial class PinFlagEditor
             return;
 
         await CommandRouter.Send(command);
-
-        EditModel.ContinueNavigationPath = $"Memorabilia/Image/{EditModeType.Update.Name}/{DataProtectorService.EncryptId(MemorabiliaId)}";
     }
 }

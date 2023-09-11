@@ -5,12 +5,14 @@ public class User : Framework.Library.Domain.Entity.DomainEntity
     public User() { }
 
     public User(string emailAddress, 
-        string firstName, 
-        string lastName)
+                string firstName, 
+                string lastName,
+                string username)
     {
         EmailAddress = emailAddress;
         FirstName = firstName;
         LastName = lastName;
+        Username = username;
         CreateDate = DateTime.UtcNow;
         UserRoleId = Constant.Role.User.Id;
     }
@@ -26,6 +28,8 @@ public class User : Framework.Library.Domain.Entity.DomainEntity
     public string LastName { get; private set; }   
 
     public DateTime? UpdateDate { get; private set; }
+
+    public string Username { get; private set; }
 
     public int UserRoleId { get; private set; }
 

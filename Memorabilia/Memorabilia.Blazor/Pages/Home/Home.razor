@@ -1,0 +1,23 @@
+﻿<DivPad2>
+    <LeftRightSection>
+        <Left>
+
+        </Left>
+        <Right>
+            <MudStack>
+                <Condition Evaluation="@Model.AcceptedProposedTrades.Any()">
+                    <Match>
+                        <AcceptedProposedTrades Items="Model.AcceptedProposedTrades" />
+                    </Match>
+                </Condition>
+                <Condition Evaluation="@Model.ProposedTrades.Any()">
+                    <Match>
+                        <OpenProposedTrades Items="Model.ProposedTrades" />
+                    </Match>
+                </Condition>                
+            </MudStack>
+        </Right>
+    </LeftRightSection>
+</DivPad2>
+
+

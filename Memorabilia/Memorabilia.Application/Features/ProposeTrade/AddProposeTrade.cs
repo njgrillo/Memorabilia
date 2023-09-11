@@ -6,25 +6,25 @@ public class AddProposeTrade
     {
         private readonly IProposeTradeRepository _proposeTradeRepository;
 
-        public Handler(IProposeTradeRepository collectionRepository)
+        public Handler(IProposeTradeRepository proposeTradeRepository)
         {
-            _proposeTradeRepository = collectionRepository;
+            _proposeTradeRepository = proposeTradeRepository;
         }
 
         protected override async Task Handle(Command command)
         {
             Entity.ProposeTrade proposeTrade
-                    = new(command.AmountToReceive,
-                          command.AmountToSend,
+                    = new(command.AmountTradeCreatorToReceive,
+                          command.AmountTradeCreatorToSend,
                           command.ExpirationDate,
                           command.ProposedDate,
                           command.ProposeTradeStatusTypeId,
-                          command.ReceiverUserId,
-                          command.SenderUserId);
+                          command.TradeCreatorUserId,
+                          command.TradePartnerUserId);
 
             foreach (ProposeTradeMemorabiliaEditModel item in command.MemorabiliaItems)
             {
-                proposeTrade.AddMemorabilia(item.MemorabiliaId, item.ProposeTradeMemorabiliaTypeId);
+                proposeTrade.AddMemorabilia(item.MemorabiliaId, item.UserId);
             }
 
             await _proposeTradeRepository.Add(proposeTrade);
@@ -40,11 +40,15 @@ public class AddProposeTrade
             _editModel = editModel;
         }
 
-        public decimal? AmountToReceive 
-            => _editModel.AmountToReceive;
+        public decimal? AmountTradeCreatorToReceive
+            => _editModel.UserId == _editModel.ProposeTradeCreateUser.Id
+                ? _editModel.AmountToReceive
+                : _editModel.AmountToSend;
 
-        public decimal? AmountToSend
-            => _editModel.AmountToSend;
+        public decimal? AmountTradeCreatorToSend
+            => _editModel.UserId == _editModel.ProposeTradeCreateUser.Id
+                ? _editModel.AmountToSend
+                : _editModel.AmountToReceive;
 
         public DateTime ExpirationDate
             => DateTime.UtcNow.AddDays(3); //TODO:Look into datetime offset && Dropdown option
@@ -64,13 +68,13 @@ public class AddProposeTrade
         public int ReceiveItemsCount
             => _editModel.ReceiveItemsCount;
 
-        public int ReceiverUserId
-            => _editModel.ReceiverUser.Id;
-
-        public int SenderUserId
-            => _editModel.SenderUser.Id;
-
         public int SendItemsCount
             => _editModel.SendItemsCount;
+
+        public int TradeCreatorUserId
+            => _editModel.ProposeTradeCreateUser.Id;
+
+        public int TradePartnerUserId
+            => _editModel.ProposeTradePartnerUser.Id;
     }
 }

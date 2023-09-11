@@ -27,6 +27,12 @@ public partial class SiteMemorabiliaDetailGrid
     public EventCallback<List<SiteMemorabiliaModel>> MemorabiliaSelected { get; set; }
 
     [Parameter]
+    public EventCallback GridLoaded { get; set; }
+
+    [Parameter]
+    public bool ReloadGrid { get; set; }
+
+    [Parameter]
     public List<SiteMemorabiliaModel> SelectedMemorabilia { get; set; }
         = new();
 
@@ -55,7 +61,7 @@ public partial class SiteMemorabiliaDetailGrid
 
     protected override async Task OnParametersSetAsync()
     {
-        if (_filter == Filter)
+        if (Model.MemorabiliaItems.Any() && !ReloadGrid)
             return;
 
         _resetPaging = true;
@@ -99,7 +105,7 @@ public partial class SiteMemorabiliaDetailGrid
 
     protected void OnProposeTrade(int memorabiliaId)
     {
-        NavigationManager.NavigateTo($"Memorabilia/ProposeTrade/{DataProtectorService.EncryptId(memorabiliaId)}");
+        NavigationManager.NavigateTo($"{NavigationPath.ProposeTrade}/{DataProtectorService.EncryptId(memorabiliaId)}");
     }
 
     protected async Task<TableData<SiteMemorabiliaModel>> OnRead(TableState state)
@@ -109,6 +115,8 @@ public partial class SiteMemorabiliaDetailGrid
         Model = UserId.HasValue
             ? await QueryRouter.Send(new GetUserSiteMemorabiliaItems(UserId.Value, pageInfo, Filter))
             : await QueryRouter.Send(new GetSiteMemorabiliaItems(pageInfo, Filter));
+
+        await GridLoaded.InvokeAsync();
 
         return new TableData<SiteMemorabiliaModel>()
         {

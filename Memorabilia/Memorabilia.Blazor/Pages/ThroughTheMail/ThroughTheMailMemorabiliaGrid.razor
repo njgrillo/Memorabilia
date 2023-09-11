@@ -22,8 +22,8 @@
     <RowTemplate>
         <MudTd DataLabel="">
             <MudImage @onclick="@(_ => Navigate(context.AutographId.HasValue
-			                                        ? $"Memorabilia/Image/Edit/{DataProtectorService.EncryptId(context.AutographId.Value)}"
-			                                        : $"Memorabilia/Image/Edit/{DataProtectorService.EncryptId(context.MemorabiliaId)}"))"
+			                                        ? $"{NavigationPath.MemorabiliaImage}/{Constant.EditModeType.Update.Name}/{DataProtectorService.EncryptId(context.AutographId.Value)}"
+			                                        : $"{NavigationPath.MemorabiliaImage}/{Constant.EditModeType.Update.Name}/{DataProtectorService.EncryptId(context.MemorabiliaId)}"))"
                       Class="rounded-lg can-click"
                       Elevation="5"
                       Height="200"

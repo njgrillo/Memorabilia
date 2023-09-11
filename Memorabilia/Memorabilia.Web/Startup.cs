@@ -38,7 +38,7 @@ public class Startup
                     }
                 );
 
-        //services.ConfigureHangfire(Configuration);
+        services.ConfigureHangfire(Configuration);
 
         services.AddAuthenticationCore();
         services.AddHttpContextAccessor();
@@ -71,6 +71,13 @@ public class Startup
         {
             services.AddScoped<IDataProtectorService, DataProtectorService>();
         }
+
+        var emailSettings = new EmailSettings();
+        Configuration.GetSection("EmailSettings").Bind(emailSettings);
+
+        services.AddSingleton<IEmailSettings>(emailSettings);
+
+        services.AddSingleton<EmailService>();
 
         services.AddCourier(typeof(GetCommissioner).Assembly);
         

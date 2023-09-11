@@ -8,5 +8,7 @@ public interface IApplicationStateService
 
     Task Load(int userId);
 
+    void Logout();
+
     void Set(Entity.User user);
 }

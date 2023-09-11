@@ -3,7 +3,7 @@
 public static class HangfireServiceCollectionExtensions
 {
     public static void ConfigureHangfire(this IServiceCollection services,
-        IConfiguration configuration)
+                                         IConfiguration configuration)
     {
         string connecitonString = configuration.GetConnectionString("Memorabilia");
 
@@ -29,7 +29,7 @@ public static class HangfireServiceCollectionExtensions
     }
 
     private static IServiceCollection AddJobs(this IServiceCollection services,
-        IConfiguration config)
+                                              IConfiguration config)
     {
         IConfigurationSection jobConfig = config.GetSection("HangfireJobOptions");
 
@@ -45,15 +45,17 @@ public static class HangfireServiceCollectionExtensions
 
             var parameterTypes = new Type[]
             {
-                typeof(IServiceCollection),
-                typeof(IConfigurationSection)
+                    typeof(IServiceCollection),
+                    typeof(IConfigurationSection)
             };
 
-            MethodInfo addJobServiceMethodInfo = typeof(HangfireJobAttribute).GetMethod(nameof(AddJobService),
-                                                                                        BindingFlags.Static | BindingFlags.NonPublic,
-                                                                                        parameterTypes)!;
+            MethodInfo addJobServiceMethodInfo
+                = typeof(HangfireServiceCollectionExtensions).GetMethod(nameof(AddJobService),
+                                                                        BindingFlags.Static | BindingFlags.NonPublic,
+                                                                        parameterTypes)!;
 
-            MethodInfo addJobServiceGenericMethodInfo = addJobServiceMethodInfo.MakeGenericMethod(jobType, jobOptionType);
+            MethodInfo addJobServiceGenericMethodInfo
+                = addJobServiceMethodInfo.MakeGenericMethod(jobType, jobOptionType);
 
             addJobServiceGenericMethodInfo.Invoke(obj: null, parameters: new object[] { services, jobConfig });
         }
@@ -62,7 +64,7 @@ public static class HangfireServiceCollectionExtensions
     }
 
     private static void AddJobService<TJob, TJobOption>(IServiceCollection services,
-        IConfigurationSection jobOptionSection)
+                                                        IConfigurationSection jobOptionSection)
         where TJob : HangfireJob<TJobOption>
         where TJobOption : HangfireJobOption<TJobOption>
     {

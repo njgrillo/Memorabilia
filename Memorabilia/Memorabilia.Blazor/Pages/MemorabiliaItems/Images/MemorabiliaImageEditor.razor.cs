@@ -28,7 +28,10 @@ public partial class MemorabiliaImageEditor
     private EditImages<MemorabiliaImagesEditModel> EditImages;
 
     private MemorabiliaImagesEditModel EditModel 
-        = new ();    
+        = new ();
+
+    private string _backNavigationPath;
+    private string _continueNavigationPath;
 
     protected override async Task OnInitializedAsync()
     {
@@ -37,11 +40,11 @@ public partial class MemorabiliaImageEditor
         EditModel 
             = new MemorabiliaImagesEditModel(new MemorabiliaModel(await QueryRouter.Send(new GetMemorabiliaItem(MemorabiliaId))));
 
-        EditModel.BackNavigationPath
-            = $"Memorabilia/{EditModel.ItemTypeName}/{EditModeType.Update.Name}/{DataProtectorService.EncryptId(MemorabiliaId)}";
+        _backNavigationPath
+            = $"{NavigationPath.Memorabilia}/{EditModel.ItemTypeName}/{EditModeType.Update.Name}/{DataProtectorService.EncryptId(MemorabiliaId)}";
 
-        EditModel.ContinueNavigationPath
-            = $"Autographs/{EditModeType.Update.Name}/{DataProtectorService.EncryptId(MemorabiliaId)}/{DataProtectorService.EncryptId(-1)}";
+        _continueNavigationPath
+            = $"{NavigationPath.Autographs}/{EditModeType.Update.Name}/{DataProtectorService.EncryptId(MemorabiliaId)}/{DataProtectorService.EncryptId(-1)}";
     }
 
     protected async Task OnSave()
@@ -55,7 +58,8 @@ public partial class MemorabiliaImageEditor
     {
         await OnSave();
 
-        NavigationManager.NavigateTo(EditModel.ContinueNavigationPath);
+        NavigationManager.NavigateTo(_continueNavigationPath);
+
         Snackbar.Add("Images were saved successfully!", Severity.Success);
     }
 
@@ -63,7 +67,8 @@ public partial class MemorabiliaImageEditor
     {
         await OnSave();
 
-        NavigationManager.NavigateTo("/Memorabilia/Edit");
+        NavigationManager.NavigateTo($"/{NavigationPath.Memorabilia}/{EditModeType.Update.Name}");
+
         Snackbar.Add("Images were saved successfully!", Severity.Success);
     }
 
@@ -75,7 +80,7 @@ public partial class MemorabiliaImageEditor
 
         if (!EditModel.HasMultipleAutographs)
         {
-            NavigationManager.NavigateTo($"Autographs/{EditModeType.Update.Name}/{DataProtectorService.EncryptId(MemorabiliaId)}/{(DataProtectorService.EncryptId(EditModel.AutographId.HasValue ? EditModel.AutographId.Value : -1))}");
+            NavigationManager.NavigateTo($"{NavigationPath.Autographs}/{EditModeType.Update.Name}/{DataProtectorService.EncryptId(MemorabiliaId)}/{(DataProtectorService.EncryptId(EditModel.AutographId.HasValue ? EditModel.AutographId.Value : -1))}");
         }
         else
         {
@@ -102,9 +107,12 @@ public partial class MemorabiliaImageEditor
             if (autographId == 0)
                 return;
 
-            string url = $"Autographs/{EditModeType.Update.Name}/{EditModel.MemorabiliaId}/{autographId}";
+            string url = $"{NavigationPath.Autographs}/{EditModeType.Update.Name}/{EditModel.MemorabiliaId}/{autographId}";
 
             NavigationManager.NavigateTo(url);
         }   
     }
+
+    private string GetPageTitle()
+        => $"{(EditModel.EditModeType == Constant.EditModeType.Add ? Constant.EditModeType.Add.Name : Constant.EditModeType.Update.Name)} Memorabilia Image(s)";
 }

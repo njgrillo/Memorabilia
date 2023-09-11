@@ -1,7 +1,13 @@
-﻿namespace Memorabilia.Blazor.Pages.MemorabiliaItems;
+﻿using Memorabilia.Application.Features.Autograph.Gallery;
+using Memorabilia.Domain.Entities;
+
+namespace Memorabilia.Blazor.Pages.MemorabiliaItems;
 
 public partial class MemorabiliaItemGalleryCard
 {
+    [Inject]
+    public IDataProtectorService DataProtectorService { get; set; }
+
     [Inject]
     public ImageService ImageService { get; set; }
 
@@ -40,5 +46,12 @@ public partial class MemorabiliaItemGalleryCard
     protected void OnPrimaryImageClick()
     {
         NavigationManager.NavigateTo(PrimaryImageNavigationPath);
+    }
+
+    private string GetImageNavigationPath(AutographGalleryModel model)
+    {
+        return model.Person.Sports.Any()
+                ? $"/Tools/{model.Person.Sports.First().Sport.Name}Profile/{DataProtectorService.EncryptId(model.Person.Id)}"
+                : NavigationPath.PersonProfile;
     }
 }

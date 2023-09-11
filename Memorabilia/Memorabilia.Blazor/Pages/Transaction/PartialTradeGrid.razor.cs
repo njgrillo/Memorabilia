@@ -84,11 +84,13 @@ public partial class PartialTradeGrid
 
     protected async Task DeleteTrade(int memorabiliaTransactionId, int memorabiliaTransactionTradeId)
     {
-        MemorabiliaTransactionModel transaction = Model.Items.Single(item => item.MemorabiliaTransactionId == memorabiliaTransactionId);
+        MemorabiliaTransactionModel transaction 
+            = Model.Items.Single(item => item.MemorabiliaTransactionId == memorabiliaTransactionId);
 
         var editModel = new MemorabiliaTransactionEditModel(transaction);
 
-        MemorabiliaTransactionTradeEditModel deletedTrade = editModel.Trades.SingleOrDefault(trade => trade.Id == memorabiliaTransactionTradeId);
+        MemorabiliaTransactionTradeEditModel deletedTrade 
+            = editModel.Trades.SingleOrDefault(trade => trade.Id == memorabiliaTransactionTradeId);
 
         if (deletedTrade != null)
         {

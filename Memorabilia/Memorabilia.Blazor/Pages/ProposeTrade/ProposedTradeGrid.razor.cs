@@ -3,10 +3,16 @@
 public partial class ProposedTradeGrid
 {
     [Inject]
+    public IApplicationStateService ApplicationStateService { get; set; }
+
+    [Inject]
     public CommandRouter CommandRouter { get; set; }
 
     [Inject]
     public IDataProtectorService DataProtectorService { get; set; }
+
+    [Inject]
+    public EmailService EmailService { get; set; }
 
     [Inject]
     public ImageService ImageService { get; set; }
@@ -21,26 +27,41 @@ public partial class ProposedTradeGrid
     public ISnackbar Snackbar { get; set; }
 
     [Parameter]
-    public ProposeTradeModel[] Items { get; set; }
+    public ProposeTradeModel[] Items { get; set; }    
 
-    private async Task Accept(int proposeTradeId)
+    private async Task Accept(ProposeTradeModel proposeTradeModel)
     {
-        await UpdateStatus(proposeTradeId, ProposeTradeStatusType.Accepted);
+        await UpdateStatus(proposeTradeModel, ProposeTradeStatusType.Accepted);
+    }
+
+    private async Task Cancel(ProposeTradeModel proposeTradeModel)
+    {
+        await UpdateStatus(proposeTradeModel, ProposeTradeStatusType.Canceled);
     }
 
     private void Counter(int proposeTradeId)
     {
-        NavigationManager.NavigateTo($"/Memorabilia/ProposeTrade/Counter/{DataProtectorService.EncryptId(proposeTradeId)}");
+        NavigationManager.NavigateTo($"{NavigationPath.ProposeTrade}/Review/{DataProtectorService.EncryptId(proposeTradeId)}");
     }
 
-    private static string GetTypeIcon(int proposeTradeMemorabiliaTypeId)
-        => proposeTradeMemorabiliaTypeId == ProposeTradeMemorabiliaType.Receive.Id
+    private int GetProposeTradeMemorabiliaTypeId(Entity.ProposeTradeMemorabilia proposeTradeMemorabilia)
+        => ApplicationStateService.CurrentUser.Id == proposeTradeMemorabilia.UserId
+            ? ProposeTradeMemorabiliaType.Send.Id
+            : ProposeTradeMemorabiliaType.Receive.Id;
+
+    private string GetProposeTradeMemorabiliaTypeName(Entity.ProposeTradeMemorabilia proposeTradeMemorabilia)
+        => ApplicationStateService.CurrentUser.Id == proposeTradeMemorabilia.UserId
+            ? ProposeTradeMemorabiliaType.Send.Name
+            : ProposeTradeMemorabiliaType.Receive.Name;
+
+    private string GetTypeIcon(Entity.ProposeTradeMemorabilia proposeTradeMemorabilia)
+        => GetProposeTradeMemorabiliaTypeId(proposeTradeMemorabilia) == ProposeTradeMemorabiliaType.Receive.Id
             ? Icons.Material.Filled.ArrowBack
             : Icons.Material.Filled.ArrowForward;
 
-    private async Task Reject(int proposeTradeId)
+    private async Task Reject(ProposeTradeModel proposeTradeModel)
     {
-        await UpdateStatus(proposeTradeId, ProposeTradeStatusType.Rejected);
+        await UpdateStatus(proposeTradeModel, ProposeTradeStatusType.Rejected);
     }
 
     private void ToggleChildContent(int proposeTradeId)
@@ -55,12 +76,27 @@ public partial class ProposedTradeGrid
             : Icons.Material.Filled.ExpandMore;
     }
 
-    private async Task UpdateStatus(int proposeTradeId, ProposeTradeStatusType status)
+    private async Task UpdateStatus(ProposeTradeModel proposeTradeModel, 
+                                    ProposeTradeStatusType proposeTradeStatusType)
     {
-        await CommandRouter.Send(new UpdateProposeTradeStatus(proposeTradeId, status));
+        await CommandRouter.Send(new UpdateProposeTradeStatus(proposeTradeModel.Id, proposeTradeStatusType));
 
         await Mediator.Publish(new ProposeTradeStatusChangedNotification());
 
-        Snackbar.Add($"Trade has been {status.Name}!", Severity.Success);
+        Snackbar.Add($"Trade has been {proposeTradeStatusType.Name}!", Severity.Success);
+
+        string subject 
+            = EmailSubject.ProposeTrade
+                          .Replace("[[proposeTradeStatusType]]", proposeTradeStatusType.Name);
+
+        string body
+            = EmailBody.ProposeTrade
+                       .Replace("[[tradePartnerName]]", proposeTradeModel.TradePartnerName)
+                       .Replace("[[proposeTradeStatusType]]", proposeTradeStatusType.Name);
+
+        EmailService.SendEmailMessage(proposeTradeModel.TradePartnerName,
+                                      proposeTradeModel.TradePartnerEmail, 
+                                      subject,
+                                      EmailBody.ProposeTrade);
     }
 }

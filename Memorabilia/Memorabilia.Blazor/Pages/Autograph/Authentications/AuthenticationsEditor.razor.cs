@@ -13,7 +13,9 @@ public partial class AuthenticationsEditor
     public string EncryptAutographId { get; set; }
 
     protected AuthenticationsEditModel EditModel 
-        = new();  
+        = new();
+
+    private string _continueNavigationPath;
 
     protected override async Task OnInitializedAsync()
     {
@@ -26,11 +28,7 @@ public partial class AuthenticationsEditor
                                                  autograph.UserId,
                                                  autograph.MemorabiliaId,
                                                  autograph.Id,
-                                                 autograph.MemorabiliaImageNames)
-        {
-            BackNavigationPath
-                = $"Autographs/Inscriptions/{EditModeType.Update.Name}/{DataProtectorService.EncryptId(AutographId)}"
-        };
+                                                 autograph.MemorabiliaImageNames);
 
         IsLoaded = true;
     }
@@ -41,9 +39,9 @@ public partial class AuthenticationsEditor
 
         await CommandRouter.Send(new SaveAuthentications.Command(EditModel));
 
-        EditModel.ContinueNavigationPath = EditModel.CanHaveSpot
-            ? $"Autographs/{AdminDomainItem.Spots.Item}/{EditModeType.Update.Name}/{DataProtectorService.EncryptId(AutographId)}"
-            : $"Autographs/Image/{EditModeType.Update.Name}/{DataProtectorService.EncryptId(AutographId)}";
+        _continueNavigationPath = EditModel.CanHaveSpot
+            ? $"{NavigationPath.Autographs}/{AdminDomainItem.Spots.Item}/{EditModeType.Update.Name}/{DataProtectorService.EncryptId(AutographId)}"
+            : $"{NavigationPath.AutographImage}/{EditModeType.Update.Name}/{DataProtectorService.EncryptId(AutographId)}";
     }
 
     private void Add()

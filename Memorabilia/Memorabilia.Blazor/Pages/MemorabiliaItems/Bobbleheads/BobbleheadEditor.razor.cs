@@ -29,7 +29,5 @@ public partial class BobbleheadEditor
             return;
 
         await CommandRouter.Send(command);
-
-        EditModel.ContinueNavigationPath = $"Memorabilia/Image/{EditModeType.Update.Name}/{DataProtectorService.EncryptId(MemorabiliaId)}";
     }
 }

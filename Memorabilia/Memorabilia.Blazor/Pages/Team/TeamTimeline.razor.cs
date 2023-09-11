@@ -143,10 +143,10 @@ public partial class TeamTimeline
 
         if (item.IsNullOrEmpty())
         {
-            NavigationManager.NavigateTo($"Teams/{EditModeType.Update.Name}/{TeamId}");
+            NavigationManager.NavigateTo($"{NavigationPath.Teams}/{EditModeType.Update.Name}/{TeamId}");
             return;
         }
 
-        NavigationManager.NavigateTo($"Team/{item}/{EditModeType.Update.Name}/{TeamId}/{SportLeagueLevel.Id}");
+        NavigationManager.NavigateTo($"{NavigationPath.Team}/{item}/{EditModeType.Update.Name}/{TeamId}/{SportLeagueLevel.Id}");
     }
 }

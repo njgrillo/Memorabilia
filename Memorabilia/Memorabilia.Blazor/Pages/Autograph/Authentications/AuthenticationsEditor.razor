@@ -1,7 +1,9 @@
 ﻿@inherits AutographItem<AuthenticationEditModel>
 
 <PageLoader IsLoading="@(!IsLoaded)">
-    <PageEditor EditModel="EditModel"
+    <PageEditor ContinueNavigationPath="@_continueNavigationPath"
+                EditModel="EditModel"
+                ExitNavigationPath="@NavigationPath.Memorabilia"
                 OnSave="Save"
                 PageImageFileName="@EditModel.ImageFileName"
                 TItem="AuthenticationsEditModel">

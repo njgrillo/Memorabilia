@@ -36,5 +36,16 @@ public class UserValidator : AbstractValidator<UserEditModel>
             .NotNull()
             .WithName("Last Name")
             .WithMessage("Last Name is required.");
+
+        RuleFor(x => x.Username)
+            .MaximumLength(50)
+            .WithName("Username")
+            .WithMessage("Username must be 50 characters or less.");
+
+        RuleFor(x => x.Username)
+            .NotEmpty()
+            .NotNull()
+            .WithName("Username")
+            .WithMessage("Username is required.");
     }
 }

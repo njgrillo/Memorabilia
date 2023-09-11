@@ -14,6 +14,9 @@ public partial class AutographImageEditor
 
     private EditImages<AutographImagesEditModel> EditImages;
 
+    private string _backNavigationPath;
+    private string _continueNavigationPath;
+
     protected override async Task OnInitializedAsync()
     {
         AutographId = DataProtectorService.DecryptId(EncryptAutographId);
@@ -25,13 +28,18 @@ public partial class AutographImageEditor
                                              autograph.MemorabiliaId,
                                              autograph.Id);
 
-        Model.BackNavigationPath =
+        _backNavigationPath =
             Model.CanHaveSpot
-                ? $"Autographs/{AdminDomainItem.Spots.Item}/{EditModeType.Update.Name}/{DataProtectorService.EncryptId(AutographId)}"
-                : $"Autographs/Authentications/{EditModeType.Update.Name}/{DataProtectorService.EncryptId(AutographId)}";
+                ? $"{NavigationPath.Autographs}/{AdminDomainItem.Spots.Item}/{EditModeType.Update.Name}/{DataProtectorService.EncryptId(AutographId)}"
+                : $"{NavigationPath.Authentications}/{EditModeType.Update.Name}/{DataProtectorService.EncryptId(AutographId)}";
 
         IsLoaded = true;
     }
+
+    protected string GetPageTitle()
+        => $"{(Model.EditModeType == EditModeType.Add
+                ? EditModeType.Add.Name
+                : EditModeType.Update.Name)} Image(s)";
 
     protected async Task OnImport()
     {
@@ -64,10 +72,11 @@ public partial class AutographImageEditor
     {
         await OnSave();
 
-        Model.ContinueNavigationPath 
-            = $"Autographs/{EditModeType.Update.Name}/{DataProtectorService.EncryptId(Model.MemorabiliaId)}/{DataProtectorService.EncryptId(-1)}";
+        _continueNavigationPath
+            = $"{NavigationPath.Autographs}/{EditModeType.Update.Name}/{DataProtectorService.EncryptId(Model.MemorabiliaId)}/{DataProtectorService.EncryptId(-1)}";
 
-        NavigationManager.NavigateTo(Model.ContinueNavigationPath);
+        NavigationManager.NavigateTo(_continueNavigationPath);
+
         Snackbar.Add("Images were saved successfully!", Severity.Success);
     }
 
@@ -75,7 +84,7 @@ public partial class AutographImageEditor
     {
         await OnSave();
 
-        NavigationManager.NavigateTo("/Memorabilia/Edit");
+        NavigationManager.NavigateTo($"/{NavigationPath.Memorabilia}/{EditModeType.Update.Name}");
         Snackbar.Add("Images were saved successfully!", Severity.Success);
     }
 }

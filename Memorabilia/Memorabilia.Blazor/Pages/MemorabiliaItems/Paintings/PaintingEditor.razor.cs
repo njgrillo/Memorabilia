@@ -28,7 +28,5 @@ public partial class PaintingEditor : MemorabiliaItem<PaintingEditModel>
             return;
 
         await CommandRouter.Send(command);
-
-        EditModel.ContinueNavigationPath = $"Memorabilia/Image/{EditModeType.Update.Name}/{DataProtectorService.EncryptId(MemorabiliaId)}";
     }
 }

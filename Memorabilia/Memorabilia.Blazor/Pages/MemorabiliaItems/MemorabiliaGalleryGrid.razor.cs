@@ -40,10 +40,10 @@ public partial class MemorabiliaGalleryGrid
         => GalleryService.GetTitle(item.Memorabilia);
 
     private string GetEditNavigationPath(int id)
-        => $"/Memorabilia/{EditModeType.Update.Name}/{DataProtectorService.EncryptId(id)}";
+        => $"{NavigationPath.Memorabilia}/{EditModeType.Update.Name}/{DataProtectorService.EncryptId(id)}";
 
     private string GetPrimaryImageNavigationPath(int id)
-        => $"/Memorabilia/Image/{EditModeType.Update.Name}/{DataProtectorService.EncryptId(id)}";
+        => $"{NavigationPath.MemorabiliaImage}/{EditModeType.Update.Name}/{DataProtectorService.EncryptId(id)}";
 
     private async void LoadMore()
     {

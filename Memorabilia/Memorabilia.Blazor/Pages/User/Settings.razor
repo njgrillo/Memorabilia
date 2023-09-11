@@ -4,12 +4,12 @@
          Style="margin-top:1%;margin-bottom:1%;">
         <Div Class="col-4">
             <DomainItemCard ImageFileName="@Model.DashboardImageFileName"
-                            Page="User/ManageDashboard"
+                            Page="@NavigationPath.ManageDashboard"
                             Title="Manage Dashboard" />
         </Div>
         <Div Class="col-4">
             <DomainItemCard ImageFileName="@Model.UserSettingsImageFileName"
-                            Page="User/UserSettings"
+                            Page="@NavigationPath.UserSettings"
                             Title="Manage User Settings" />
         </Div>
     </Div>

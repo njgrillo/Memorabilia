@@ -25,7 +25,9 @@ public partial class MemorabiliaEditor
 
     protected int Id { get; set; }
 
-    protected bool IsLoaded { get; set; }      
+    protected bool IsLoaded { get; set; }
+
+    private string _continueNavigationPath;
 
     protected override async Task OnInitializedAsync()
     {
@@ -57,7 +59,8 @@ public partial class MemorabiliaEditor
 
         await CommandRouter.Send(command);
 
-        EditModel.ContinueNavigationPath = $"Memorabilia/{EditModel.ItemTypeName.Replace(" ", "")}/Edit/{DataProtectorService.EncryptId(command.Id)}";
+        _continueNavigationPath 
+            = $"{NavigationPath.Memorabilia}/{EditModel.ItemTypeName.Replace(" ", "")}/{EditModeType.Update.Name}/{DataProtectorService.EncryptId(command.Id)}";
     }
 
     private void OnAcquisitionTypeChange(int acquisitionTypeId)

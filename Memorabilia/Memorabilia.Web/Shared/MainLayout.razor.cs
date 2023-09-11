@@ -45,9 +45,10 @@ public partial class MainLayout : LayoutComponentBase
     {
         _currentException = error;
 
-        string url = ApplicationStateService.CurrentUser == null
-            ? "/"
-            : "Home";
+        string url 
+            = ApplicationStateService.CurrentUser == null
+                ? "/"
+                : NavigationPath.Home;
 
         NavigationManager.NavigateTo(url);
     }

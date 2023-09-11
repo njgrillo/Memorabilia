@@ -18,6 +18,9 @@ public partial class PageEditor<TItem> where TItem : EditModel
     public RenderFragment ChildContent { get; set; }
 
     [Parameter]
+    public string ContinueNavigationPath { get; set; }
+
+    [Parameter]
     public bool DisplayBackToMenuItemLink { get; set; }
 
     [Parameter]
@@ -34,6 +37,9 @@ public partial class PageEditor<TItem> where TItem : EditModel
 
     [Parameter]
     public TItem EditModel { get; set; }
+
+    [Parameter]
+    public string ExitNavigationPath { get; set; }
 
     [Parameter]
     public RenderFragment ImagePreview { get; set; }
@@ -84,11 +90,11 @@ public partial class PageEditor<TItem> where TItem : EditModel
         {
             Snackbar.Add($"{EditModel.ItemTitle} {(EditModel.ItemTitle.EndsWith("s") ? "were not " : "was not")} {editModeType.ToEditModeTypeNamePastTense()}", Severity.Error);
             return;
-        }            
+        }
 
-        NavigationManager.NavigateTo(!exit 
-            ? EditModel.ContinueNavigationPath 
-            : EditModel.ExitNavigationPath);
+        NavigationManager.NavigateTo(!exit
+            ? ContinueNavigationPath
+            : ExitNavigationPath);
 
         Snackbar.Add($"{EditModel.ItemTitle} {(EditModel.ItemTitle.EndsWith("s") ? "were " : "was ")} {editModeType.ToEditModeTypeNamePastTense()} successfully!", Severity.Success);
     }

@@ -13,7 +13,9 @@ public partial class InscriptionsEditor
     public string EncryptAutographId { get; set; }
 
     protected InscriptionsEditModel EditModel 
-        = new();   
+        = new();
+
+    private string _continueNavigationPath;
 
     protected override async Task OnInitializedAsync()
     {
@@ -27,11 +29,7 @@ public partial class InscriptionsEditor
                                               autograph.MemorabiliaId,
                                               autograph.Id,
                                               autograph.MemorabiliaImageNames,
-                                              autograph.PersonId)
-        {
-            BackNavigationPath
-                = $"Autographs/{EditModeType.Update.Name}/{autograph.MemorabiliaId}/{DataProtectorService.EncryptId(AutographId)}"
-        };
+                                              autograph.PersonId);
 
         IsLoaded = true;
     }
@@ -40,8 +38,8 @@ public partial class InscriptionsEditor
     {
         await CommandRouter.Send(new SaveInscriptions.Command(EditModel));
 
-        EditModel.ContinueNavigationPath
-            = $"Autographs/Authentications/Edit/{DataProtectorService.EncryptId(EditModel.AutographId)}";
+        _continueNavigationPath
+            = $"{NavigationPath.Authentications}/{EditModeType.Update.Name}/{DataProtectorService.EncryptId(EditModel.AutographId)}";
     }
 
     private void Add()

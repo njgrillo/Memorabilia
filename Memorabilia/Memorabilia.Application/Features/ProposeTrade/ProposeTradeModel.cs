@@ -13,11 +13,26 @@ public class ProposeTradeModel
         UserId = userId;
     }
 
-    public decimal? AmountToReceive 
-        => _proposeTrade.AmountToReceive;
+    public decimal? AmountTradeCreatorToReceive 
+        => _proposeTrade.AmountTradeCreatorToReceive;
+
+    public decimal? AmountTradeCreatorToSend
+        => _proposeTrade.AmountTradeCreatorToSend;
+
+    public decimal? AmountToReceive
+        => UserId == _proposeTrade.TradeCreatorUserId
+            ? AmountTradeCreatorToReceive
+            : AmountTradeCreatorToSend;
 
     public decimal? AmountToSend
-        => _proposeTrade.AmountToSend;
+        => UserId == _proposeTrade.TradeCreatorUserId 
+            ? AmountTradeCreatorToSend
+            : AmountTradeCreatorToReceive;
+
+    public bool CantAcceptCounterReject
+        => _proposeTrade.Id > 0  &&
+           _proposeTrade.ProposeTradeStatusTypeId == Constant.ProposeTradeStatusType.Pending.Id &&
+           UserId == _proposeTrade.TradeCreatorUserId;
 
     public bool DisplayTradeDetails { get; set; }
 
@@ -25,7 +40,10 @@ public class ProposeTradeModel
         => _proposeTrade.ExpirationDate;
 
     public int Id
-        => _proposeTrade.Id;
+        => _proposeTrade.Id;    
+
+    public bool IsTradeCreator
+        => (_proposeTrade.TradeCreatorUser?.Id ?? 0) == UserId;
 
     public Entity.ProposeTradeMemorabilia[] Memorabilia
         => _proposeTrade.Memorabilia
@@ -34,7 +52,7 @@ public class ProposeTradeModel
     public DateTime ProposedDate 
         => _proposeTrade.ProposedDate;
 
-    public Constant.ProposeTradeStatusType ProposeTradeStatusType
+    public Constant.ProposeTradeStatusType ProposeTradeStatusType 
         => Constant.ProposeTradeStatusType.Find(ProposeTradeStatusTypeId);
 
     public int ProposeTradeStatusTypeId
@@ -43,39 +61,53 @@ public class ProposeTradeModel
     public string ProposeTradeStatusTypeName
         => ProposeTradeStatusType?.Name;
 
-    public int ReceivingItemsCount
+    public Entity.ProposeTradeMemorabilia[] ReceivingItems
         => _proposeTrade.Memorabilia
-                        .Where(item => item.ProposeTradeMemorabiliaTypeId == Constant.ProposeTradeMemorabiliaType.Receive.Id)
-                        .Count();
+                        .Where(item => item.Memorabilia.User.Id != UserId)
+                        .ToArray();
 
-    public Entity.User ReceiverUser
-        => _proposeTrade.ReceiverUser;
+    public int ReceivingItemsCount
+        => ReceivingItems.Length;
 
-    public int ReceiverUserId
-        => _proposeTrade.ReceiverUserId;
+    public Entity.User TradeCreator
+        => _proposeTrade.TradeCreatorUser;
 
-    public Entity.User SenderUser
-        => _proposeTrade.SenderUser;
+    public Entity.User TradePartner
+        => _proposeTrade.TradePartnerUser;
 
-    public int SenderUserId
-        => _proposeTrade.SenderUserId;
+    public Entity.ProposeTradeMemorabilia[] SendingItems
+        => _proposeTrade.Memorabilia
+                        .Where(item => item.Memorabilia.User.Id == UserId)
+                        .ToArray(); 
 
     public int SendingItemsCount
-        => _proposeTrade.Memorabilia
-                        .Where(item => item.ProposeTradeMemorabiliaTypeId == Constant.ProposeTradeMemorabiliaType.Send.Id)
-                        .Count();
+        => SendingItems.Length;
 
     public bool ShowActions
-        => ProposeTradeStatusTypeId == Constant.ProposeTradeStatusType.Pending.Id
-        || ProposeTradeStatusTypeId == Constant.ProposeTradeStatusType.Countered.Id;
+        => ProposeTradeStatusTypeId == Constant.ProposeTradeStatusType.Pending.Id;
 
     public string ToggleIcon { get; set; }
         = MudBlazor.Icons.Material.Filled.ExpandMore;
 
+    public string TradePartnerEmail
+        => (TradeCreator?.Id ?? 0) == UserId
+            ? TradePartner?.EmailAddress
+            : TradeCreator?.EmailAddress; 
+
     public string TradePartnerName
-        => ReceiverUserId == UserId
-            ? $"{SenderUser.FirstName} {SenderUser.LastName}" //TODO: Replace w/Username
-            : $"{ReceiverUser.FirstName} {ReceiverUser.LastName}"; //TODO: Replace w/Username
+        => (TradeCreator?.Id ?? 0) == UserId
+            ? TradePartner?.Username
+            : TradeCreator?.Username; 
+
+    public string UserEmail
+        => (TradeCreator?.Id ?? 0) == UserId
+            ? TradeCreator?.EmailAddress
+            : TradePartner?.EmailAddress;
+
+    public string UserName
+        => (TradeCreator?.Id ?? 0) == UserId
+            ? TradeCreator?.Username
+            : TradePartner?.Username;
 
     public int UserId { get; private set; }
 }

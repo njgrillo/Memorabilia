@@ -1,5 +1,5 @@
 ﻿<Div Style="margin-top:1%;margin-left:1%;margin-right:1%">
-    <PageHeader PageTitle="@EditModel.PageTitle" />
+    <PageHeader PageTitle="Register" />
     <br />
     <Condition Evaluation="@(ValidationResultAlerts.Any())">
         <Match>
@@ -26,6 +26,12 @@
                        MaxLength="50"
                        SelectedText="@EditModel.LastName"
                        SelectedTextChanged="@((p) => EditModel.LastName = p)" />
+        </Div>
+        <Div Class="col-3">
+            <TextField Label="Username"
+                       MaxLength="50"
+                       SelectedText="@EditModel.Username"
+                       SelectedTextChanged="@((p) => EditModel.Username = p)" />
         </Div>
     </DivRowFormGroup>
     <br />

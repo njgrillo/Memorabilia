@@ -4,26 +4,26 @@ public class ProposeTrade : Framework.Library.Domain.Entity.DomainEntity
 {
     public ProposeTrade() { }
 
-    public ProposeTrade(decimal? amountToReceive, 
-                        decimal? amountToSend, 
+    public ProposeTrade(decimal? amountTradeCreatorToReceive, 
+                        decimal? amountTradeCreatorToSend, 
                         DateTime expirationDate, 
                         DateTime proposedDate, 
                         int proposeTradeStatusTypeId,
-                        int receiverUserId,
-                        int senderUserId)
+                        int tradeCreatorUserId,
+                        int tradePartnerUserId)
     {
-        AmountToReceive = amountToReceive;
-        AmountToSend = amountToSend;
+        AmountTradeCreatorToReceive = amountTradeCreatorToReceive;
+        AmountTradeCreatorToSend = amountTradeCreatorToSend;
         ExpirationDate = expirationDate;
         ProposedDate = proposedDate;
         ProposeTradeStatusTypeId = proposeTradeStatusTypeId;
-        ReceiverUserId = receiverUserId;
-        SenderUserId = senderUserId;
+        TradeCreatorUserId = tradeCreatorUserId;
+        TradePartnerUserId = tradePartnerUserId;
     }
 
-    public decimal? AmountToReceive { get; set; }
+    public decimal? AmountTradeCreatorToReceive { get; set; }
 
-    public decimal? AmountToSend { get; set; }
+    public decimal? AmountTradeCreatorToSend { get; set; }
 
     public DateTime ExpirationDate { get; set; }
 
@@ -34,31 +34,23 @@ public class ProposeTrade : Framework.Library.Domain.Entity.DomainEntity
 
     public int ProposeTradeStatusTypeId { get; set; }
 
-    public virtual User ReceiverUser { get; private set; }
+    public virtual User TradeCreatorUser { get; private set; }
 
-    public int ReceiverUserId { get; private set; }
+    public int TradeCreatorUserId { get; private set; }
 
-    public virtual User SenderUser { get; private set; }
+    public virtual User TradePartnerUser { get; private set; }
 
-    public int SenderUserId { get; private set; }
+    public int TradePartnerUserId { get; private set; }
 
-    public void AddMemorabilia(int memorabiliaId, int proposeTradeMemorabiliaTypeId)
+    public void AddMemorabilia(int memorabiliaId, int userId)
     {
-        Memorabilia.Add(new ProposeTradeMemorabilia(memorabiliaId, Id, proposeTradeMemorabiliaTypeId));
+        Memorabilia.Add(new ProposeTradeMemorabilia(memorabiliaId, Id, userId));
     }
 
-    public void Set(decimal? amountToReceive,
-                    decimal? amountToSend,
-                    DateTime expirationDate,
-                    DateTime proposedDate,
-                    int proposeTradeStatusTypeId)
+    public void RemoveMemorabilia(params int[] proposeTradeMemorabiliaIds)
     {
-        AmountToReceive = amountToReceive;
-        AmountToSend = amountToSend;
-        ExpirationDate = expirationDate;
-        ProposedDate = proposedDate;
-        ProposeTradeStatusTypeId = proposeTradeStatusTypeId;
-    }    
+        Memorabilia.RemoveAll(item => proposeTradeMemorabiliaIds.Contains(item.Id));
+    }   
 
     public void SetStatus(Constant.ProposeTradeStatusType proposeTradeStatusType)
     {

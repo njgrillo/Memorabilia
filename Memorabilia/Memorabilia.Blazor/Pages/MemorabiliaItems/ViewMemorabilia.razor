@@ -14,7 +14,9 @@
 <DivPad2>
     <Condition Evaluation="IsDetailView">
         <Match>
-            <MemorabiliaDetailGrid Filter="_filter" />
+            <MemorabiliaDetailGrid Filter="_filter"
+                                   GridLoaded="@(() => ReloadGrid = false)"
+                                   ReloadGrid="ReloadGrid" />
         </Match>
         <NotMatch>
             <MemorabiliaGalleryGrid Filter="_filter" />
@@ -22,9 +24,9 @@
     </Condition>
 </DivPad2>
 <DivRowCol12Center>
-    <MudTooltip Text="@Model.AddText">
+    <MudTooltip Text="Add Memorabilia">
         <MudFab Color="MudBlazor.Color.Primary"
                 Icon="@Icons.Material.Outlined.AddCircleOutline"
-                OnClick="@(_ => NavigationManager.NavigateTo(@Model.AddRoute))" />
+                OnClick="@(_ => NavigationManager.NavigateTo($"{NavigationPath.Memorabilia}/{Constant.EditModeType.Update.Name}"))" />
     </MudTooltip>
 </DivRowCol12Center>

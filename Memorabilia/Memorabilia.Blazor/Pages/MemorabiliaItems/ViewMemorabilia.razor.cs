@@ -11,16 +11,19 @@ public partial class ViewMemorabilia
     protected MemorabiliasModel Model
         = new();
 
+    protected bool ReloadGrid { get; set; }
+
     private MemorabiliaSearchCriteria _filter 
         = new();
 
     protected void AddMemorabilia()
     {
-        NavigationManager.NavigateTo("Memorabilia/Edit");
+        NavigationManager.NavigateTo($"{NavigationPath.Memorabilia}/{EditModeType.Update.Name}");
     }
 
     protected void OnFilter(MemorabiliaSearchCriteria filter)
     {
         _filter = filter;
+        ReloadGrid = true;
     }
 }

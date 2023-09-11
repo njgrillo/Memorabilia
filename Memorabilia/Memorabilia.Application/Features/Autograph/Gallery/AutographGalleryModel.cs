@@ -9,18 +9,19 @@ public class AutographGalleryModel
         _autograph = autograph;
     }
 
-    public string EditNavigationPath 
-        => $"/Autographs/{Constant.EditModeType.Update.Name}/{_autograph.MemorabiliaId}/{_autograph.Id}";
+    public int AutographId
+        => _autograph.Id;
 
     public string ImageFileName =>
         !_autograph.Person.ImageFileName.IsNullOrEmpty()
             ? _autograph.Person.ImageFileName
             : Constant.ImageFileName.ImageNotAvailable;
 
-    public string ImageNavigationPath
-        => _autograph.Person.Sports.Any()
-            ? $"/Tools/{_autograph.Person.Sports.First().Sport.Name}Profile/{_autograph.Person.Id}"
-            : "/Tools/PersonProfile";
+    public int MemorabiliaId
+        => _autograph.MemorabiliaId;
+
+    public Entity.Person Person
+        => _autograph.Person;
 
     public string PersonName 
         => _autograph.Person.ProfileName;

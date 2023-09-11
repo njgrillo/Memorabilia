@@ -82,6 +82,7 @@ global using Memorabilia.Blazor.Configuration;
 global using Memorabilia.Blazor.Controls;
 global using Memorabilia.Blazor.Controls.Dialogs;
 global using Memorabilia.Blazor.Controls.Errors;
+global using Memorabilia.Blazor.Models.Constants;
 global using Memorabilia.Blazor.Pages;
 global using Memorabilia.Blazor.Services;
 global using Memorabilia.Domain.Constants;

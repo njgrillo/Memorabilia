@@ -2,10 +2,10 @@
     <Iterations Items="_items" Context="item">
         <Div Class="col-4">
             <MemorabiliaItemGalleryCard Description="@GetDescription(item)"
-                                        EditNavigationPath="@GetEditNavigationPath(item.Id)"
+                                        EditNavigationPath="@($"{NavigationPath.Memorabilia}/{EditModeType.Update.Name}/{DataProtectorService.EncryptId(item.Id)}")"
                                         MemorabiliaItem="@item"
                                         PrimaryImageFileName="@item.ImageFileName"
-                                        PrimaryImageNavigationPath="@GetPrimaryImageNavigationPath(item.Id)"
+                                        PrimaryImageNavigationPath="@($"{NavigationPath.MemorabiliaImage}/{EditModeType.Update.Name}/{DataProtectorService.EncryptId(item.Id)}")"
                                         Subtitle="@GetSubtitle(item)"
                                         Title="@GetTitle(item)"
                                         TooltipText="@item.TooltipText" />

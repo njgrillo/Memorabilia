@@ -13,15 +13,6 @@ public class MemorabiliasModel : Model
         PageInfo = pageInfo;
     }
 
-    public string AddRoute 
-        => $"Memorabilia/{Constant.EditModeType.Update.Name}";
-
-    public string AddText 
-        => $"{Constant.EditModeType.Add.Name} Memorabilia";
-
     public List<MemorabiliaModel> MemorabiliaItems { get; set; } 
-        = new();
-
-    public override string PageTitle 
-        => "Memorabilia";       
+        = new();      
 }

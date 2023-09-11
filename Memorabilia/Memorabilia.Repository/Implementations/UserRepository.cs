@@ -15,4 +15,7 @@ public class UserRepository
 
     public async Task<Entity.User> Get(string emailAddress)
         => await User.SingleOrDefaultAsync(user => user.EmailAddress == emailAddress);
+
+    public async Task<Entity.User> GetByUsername(string username)
+        => await User.SingleOrDefaultAsync(user => user.Username == username);
 }

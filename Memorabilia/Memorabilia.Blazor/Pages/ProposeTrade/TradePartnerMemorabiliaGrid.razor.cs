@@ -1,9 +1,12 @@
 ﻿namespace Memorabilia.Blazor.Pages.ProposeTrade;
 
-public partial class ProposeTradeSendMemorabiliaGrid
+public partial class TradePartnerMemorabiliaGrid
 {
     [Inject]
     public ImageService ImageService { get; set; }
+
+    [Parameter]
+    public bool ReadOnly { get; set; }
 
     [Parameter]
     public List<ProposeTradeMemorabiliaEditModel> Items { get; set; }

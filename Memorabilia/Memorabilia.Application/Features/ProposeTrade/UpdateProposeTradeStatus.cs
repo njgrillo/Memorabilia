@@ -7,9 +7,9 @@ public record UpdateProposeTradeStatus(int ProposeTradeId, Constant.ProposeTrade
     {
         private readonly IProposeTradeRepository _proposeTradeRepository;
 
-        public Handler(IProposeTradeRepository collectionRepository)
+        public Handler(IProposeTradeRepository proposeTradeRepository)
         {
-            _proposeTradeRepository = collectionRepository;
+            _proposeTradeRepository = proposeTradeRepository;
         }
 
         protected override async Task Handle(UpdateProposeTradeStatus command)

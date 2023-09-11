@@ -15,6 +15,6 @@ public partial class PersonProfileSelect
 
     private void SelectedPersonChanged(Entity.Person person)
     {
-        NavigationManager.NavigateTo($"Tools/PersonProfile/{DataProtectorService.EncryptId(person.Id)}");
+        NavigationManager.NavigateTo($"{NavigationPath.PersonProfile}/{DataProtectorService.EncryptId(person.Id)}");
     }
 }

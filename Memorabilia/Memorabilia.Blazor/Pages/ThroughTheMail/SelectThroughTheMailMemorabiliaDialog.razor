@@ -24,7 +24,7 @@
                 <RowTemplate Context="memorabilia">
                     <MudTd DataLabel="">
                         <MudTooltip Text="@memorabilia.ImageDisplayCount">
-                            <MudImage @onclick="@(_ => NavigationManager.NavigateTo($"Memorabilia/Image/Edit/{DataProtectorService.EncryptId(memorabilia.Id)}"))"
+                            <MudImage @onclick="@(_ => NavigationManager.NavigateTo($"{NavigationPath.MemorabiliaImage}/{Constant.EditModeType.Update.Name}/{DataProtectorService.EncryptId(memorabilia.Id)}"))"
                                       Class="rounded-lg can-click"
                                       Elevation="5"
                                       Height="200"

@@ -1,4 +1,4 @@
-﻿<PageHeader PageTitle="@Model.PageTitle" />
+﻿<PageHeader PageTitle="Manage Dashboard" />
 <DivPad2>
     <MudTable Bordered="false"
               Dense="false"
@@ -30,7 +30,7 @@
 <DivPad2>
     <LeftRightSection>
         <Right>
-            <CancelButton OnClick="@(_ => NavigationManager.NavigateTo(Model.ExitNavigationPath))" />
+            <CancelButton OnClick="@(_ => NavigationManager.NavigateTo(NavigationPath.Settings))" />
             <SaveButton OnClick="Save"
                         Text="Save & Exit" />
         </Right>

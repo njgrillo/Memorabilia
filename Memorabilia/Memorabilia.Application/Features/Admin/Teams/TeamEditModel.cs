@@ -20,9 +20,6 @@ public class TeamEditModel : EditModel, IWithName, IWithValue<int>
 
     public string Abbreviation { get; set; }
 
-    public override string BackNavigationPath 
-        => Constant.AdminDomainItem.Teams.Page;
-
     public int? BeginYear { get; set; }
 
     public bool CanHaveConference 

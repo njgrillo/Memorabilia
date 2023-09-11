@@ -8,8 +8,11 @@ public partial class ViewSiteMemorabilia
     private MemorabiliaSearchCriteria _filter
         = new();
 
+    protected bool ReloadGrid { get; set; }
+
     protected void OnFilter(MemorabiliaSearchCriteria filter)
     {
         _filter = filter;
+        ReloadGrid = true;
     }
 }

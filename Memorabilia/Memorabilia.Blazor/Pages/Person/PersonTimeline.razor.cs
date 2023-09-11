@@ -193,10 +193,10 @@ public partial class PersonTimeline
 
         if (item.IsNullOrEmpty())
         {
-            NavigationManager.NavigateTo($"People/{EditModeType.Update.Name}/{PersonId}");
+            NavigationManager.NavigateTo($"{NavigationPath.People}/{EditModeType.Update.Name}/{PersonId}");
             return;
         }
 
-        NavigationManager.NavigateTo($"People/{item}/{EditModeType.Update.Name}/{PersonId}");
+        NavigationManager.NavigateTo($"{NavigationPath.People}/{item}/{EditModeType.Update.Name}/{PersonId}");
     }
 }

@@ -1,7 +1,7 @@
 ﻿@inherits AutographItem<AutographImagesEditModel>
 
 <PageLoader IsLoading="@(!IsLoaded)">
-    <PageHeader PageTitle="@Model.PageTitle" />
+    <PageHeader PageTitle="@GetPageTitle()" />
     <AutographTimeline AutographId="Model.AutographId"
                        AutographStep="Model.AutographStep"
                        DisplaySpot="Model.CanHaveSpot"
@@ -9,8 +9,8 @@
                        MemorabiliaId="Model.MemorabiliaId" />
     <EditImages @ref="EditImages"
                 CanImportImages="true"
-                ContinueNavigationPath="@Model.ContinueNavigationPath"
-                ExitNavigationPath="@Model.ExitNavigationPath"
+                ContinueNavigationPath="@_continueNavigationPath"
+                ExitNavigationPath="@($"{NavigationPath.Memorabilia}/View")"
                 Images="@Model.Images"
                 ImportButtonText="Import from Memorabilia"
                 MaximumAllowedFiles="10"
@@ -18,7 +18,7 @@
                 Model="Model"
                 OnImport="OnImport"
                 OnSave="OnSave"
-                PageTitle="@Model.PageTitle"
+                PageTitle="@GetPageTitle()"
                 ReplaceImages="false"
                 SaveButtonText="Save & Add Another Autograph"
                 TItem="AutographImagesEditModel">
@@ -29,6 +29,6 @@
                         Text="Save & Add Item" />
         </AdditionalButtons>
     </EditImages>
-    <PageFooter NavigationPath="@Model.BackNavigationPath" />
+    <PageFooter NavigationPath="@_backNavigationPath" />
 </PageLoader>
 

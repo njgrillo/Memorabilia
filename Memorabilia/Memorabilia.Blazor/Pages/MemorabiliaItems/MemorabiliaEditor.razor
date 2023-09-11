@@ -1,6 +1,8 @@
 ﻿<PageLoader IsLoading="@(!IsLoaded)">
-    <PageEditor DisplayFooter="false"              
+    <PageEditor ContinueNavigationPath="@_continueNavigationPath"
+                DisplayFooter="false"              
                 EditModel="EditModel"
+                ExitNavigationPath="@NavigationPath.Memorabilia"
                 OnSave="Save"
                 PageImageFileName="@EditModel.ImageFileName"
                 TItem="MemorabiliaEditModel">

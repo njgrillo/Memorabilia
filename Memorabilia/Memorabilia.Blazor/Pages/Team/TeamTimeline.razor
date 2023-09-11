@@ -13,7 +13,7 @@
         <ItemContent>
             <MudAlert style="@(GetMudAlertStyle(TeamStep.Division))"
                       Class="@_mudAlertClass"
-                      OnClick="@(_ => Navigate("Division"))"
+                      OnClick="@(_ => Navigate(NavigationPath.Division))"
                       Severity="@TeamDivisionEditAlertSeverity">@TeamDivisionEditAlertTitle</MudAlert>
         </ItemContent>
     </MudTimelineItem>
@@ -23,7 +23,7 @@
         <ItemContent>
             <MudAlert style="@(GetMudAlertStyle(TeamStep.Conference))"
                       Class="@_mudAlertClass"
-                      OnClick="@(_ => Navigate("Conference"))"
+                      OnClick="@(_ => Navigate(NavigationPath.Conference))"
                       Severity="@TeamConferenceEditAlertSeverity">@TeamConferenceEditAlertTitle</MudAlert>
         </ItemContent>
     </MudTimelineItem>
@@ -32,7 +32,7 @@
         <ItemContent>
             <MudAlert style="@(GetMudAlertStyle(TeamStep.League))"
                       Class="@_mudAlertClass"
-                      OnClick="@(_ => Navigate("League"))"
+                      OnClick="@(_ => Navigate(NavigationPath.League))"
                       Severity="@TeamLeagueEditAlertSeverity">@TeamLeagueEditAlertTitle</MudAlert>
         </ItemContent>
     </MudTimelineItem>
@@ -41,7 +41,7 @@
         <ItemContent>
             <MudAlert style="@(GetMudAlertStyle(TeamStep.Championship))"
                       Class="@_mudAlertClass"
-                      OnClick="@(_ => Navigate("Championship"))"
+                      OnClick="@(_ => Navigate(NavigationPath.Championship))"
                       Severity="@TeamChampionshipEditAlertSeverity">@TeamChampionshipEditAlertTitle</MudAlert>
         </ItemContent>
     </MudTimelineItem>

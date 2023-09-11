@@ -18,8 +18,7 @@ public class SiteMemorabiliaModel
         => Constant.AcquisitionType.Find(_memorabilia.MemorabiliaAcquisition.Acquisition.AcquisitionTypeId).Name;
 
     public bool AllowBestOffer
-        => true;
-        //=> _memorabilia.ForSale?.AllowBestOffer ?? false;
+        => _memorabilia.ForSale?.AllowBestOffer ?? false;
 
     public List<AutographModel> Autographs
         => _memorabilia.Autographs
@@ -36,8 +35,7 @@ public class SiteMemorabiliaModel
         => _memorabilia.Brand?.BrandId;
 
     public decimal? BuyNowPrice
-        => (decimal?)22.22;
-        //=> _memorabilia.ForSale?.BuyNowPrice;
+        => _memorabilia.ForSale?.BuyNowPrice;
 
     public List<Entity.Collection> Collections
         => _memorabilia.CollectionMemorabilias?
@@ -78,8 +76,7 @@ public class SiteMemorabiliaModel
                                                 .ToString("c");
 
     public bool ForTrade
-        => true;
-        //=> _memorabilia.ForTrade;
+        => _memorabilia.ForTrade;
 
     public bool Framed
         => _memorabilia.Framed;
@@ -120,8 +117,7 @@ public class SiteMemorabiliaModel
         => _memorabilia.Images;
 
     public bool IsForSale
-        => true;
-        //=> (_memorabilia.ForSale?.BuyNowPrice.HasValue ?? false) || (_memorabilia.ForSale?.AllowBestOffer ?? false);
+        => (_memorabilia.ForSale?.BuyNowPrice.HasValue ?? false) || (_memorabilia.ForSale?.AllowBestOffer ?? false);
 
     public int ItemTypeId
         => _memorabilia.ItemTypeId;

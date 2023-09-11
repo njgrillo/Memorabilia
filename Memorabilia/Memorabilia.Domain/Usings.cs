@@ -5,6 +5,7 @@ global using Memorabilia.Domain.SearchModels.Autographs;
 global using System;
 global using System.Collections.Generic;
 global using System.ComponentModel;
+global using System.Diagnostics.CodeAnalysis;
 global using System.Linq;
 global using Constant = Memorabilia.Domain.Constants;
 global using Entity = Memorabilia.Domain.Entities;

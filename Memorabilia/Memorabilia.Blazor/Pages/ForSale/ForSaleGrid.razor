@@ -43,7 +43,7 @@
         <MudTd DataLabel="">
             <GridImage ImageLoaded="OnImageLoaded"
                        ImageFileName="@context.MemorabiliaPrimaryImage"
-                       NavigationPath="@($"Memorabilia/Image/Edit/{DataProtectorService.EncryptId(context.MemorabiliaId)}")" />
+                       NavigationPath="@($"{NavigationPath.MemorabiliaImage}/{Constant.EditModeType.Update.Name}/{DataProtectorService.EncryptId(context.MemorabiliaId)}")" />
         </MudTd>
         <MudTd DataLabel="Item">@context.ItemTypeName</MudTd>
         <MudTd DataLabel="BuyNowPrice">@(context.BuyNowPrice?.ToString("c") ?? string.Empty)</MudTd>
@@ -67,7 +67,7 @@
             <MudTd DataLabel="">
                 <GridImage ImageLoaded="OnImageLoaded"
                            ImageFileName="@context.MemorabiliaPrimaryImage"
-                           NavigationPath="@($"Memorabilia/Image/Edit/{DataProtectorService.EncryptId(context.Memorabilia.Id)}")" />
+                       NavigationPath="@($"{NavigationPath.MemorabiliaImage}/{Constant.EditModeType.Update.Name}/{DataProtectorService.EncryptId(context.Memorabilia.Id)}")" />
             </MudTd>
             <MudTd DataLabel="Item">@context.ItemTypeName</MudTd>
             <MudTd DataLabel="BuyNowPrice">

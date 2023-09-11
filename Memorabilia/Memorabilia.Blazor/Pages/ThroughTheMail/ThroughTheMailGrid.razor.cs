@@ -28,9 +28,7 @@ public partial class ThroughTheMailGrid
         = new();
 
     public bool HasCompletedItems
-        => Items.Any(item => item.ReceivedDate.HasValue);   
-
-
+        => Items.Any(item => item.ReceivedDate.HasValue);  
 
     protected string Search { get; set; }
 

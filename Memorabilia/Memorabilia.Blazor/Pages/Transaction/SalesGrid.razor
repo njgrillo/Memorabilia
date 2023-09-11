@@ -24,7 +24,7 @@
         <MudTd DataLabel="TotalItemsSold">@context.Sales.Length.ToString()</MudTd>
         <MudTd DataLabel="TotalSoldAmount">@context.Sales.Sum(sale => (sale.SaleAmount ?? 0)).ToString("c")</MudTd>
         <MudTd DataLabel="">
-            <GridEditButton NavigationPath="@($"MyStuff/Transactions/Edit/{DataProtectorService.EncryptId(context.MemorabiliaTransactionId)}")" />
+                <GridEditButton NavigationPath="@($"{NavigationPath.Transactions}/{Constant.EditModeType.Update.Name}/{DataProtectorService.EncryptId(context.MemorabiliaTransactionId)}")" />
             <MudTooltip Text="Delete">
                 <MudFab Color="MudBlazor.Color.Secondary"
                         Icon="@Icons.Material.Outlined.DeleteOutline"
@@ -57,7 +57,7 @@
                                 <MudTd DataLabel="">
                                     <GridImage ImageLoaded="OnImageLoaded"
                                                ImageFileName="@(sale.Memorabilia.Images.FirstOrDefault(image => image.ImageTypeId == Constant.ImageType.Primary.Id)?.FileName ?? string.Empty)"
-                                               NavigationPath="@($"Memorabilia/Image/Edit/{DataProtectorService.EncryptId(sale.Memorabilia.Id)}")" />
+                                               NavigationPath="@($"{NavigationPath.MemorabiliaImage}/{Constant.EditModeType.Update.Name}/{DataProtectorService.EncryptId(sale.Memorabilia.Id)}")" />
                                 </MudTd>
                                 <MudTd DataLabel="Item">@sale.Memorabilia.ItemType.Name</MudTd>
                                 <MudTd DataLabel="SaleAmount">@(sale.SaleAmount?.ToString("c") ?? string.Empty)</MudTd>

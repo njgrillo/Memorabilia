@@ -147,7 +147,7 @@ public partial class ThroughTheMailEditor
 
         if (exit)
         {
-            NavigationManager.NavigateTo("MyStuff/ThroughTheMail");
+            NavigationManager.NavigateTo(NavigationPath.ThroughTheMail);
             return;
         }
 

@@ -15,7 +15,5 @@ public partial class CompactDiscEditor : MemorabiliaItem<CompactDiscEditModel>
     protected async Task OnSave()
     {
         await CommandRouter.Send(new SaveCompactDisc.Command(EditModel));
-
-        EditModel.ContinueNavigationPath = $"Memorabilia/Image/{EditModeType.Update.Name}/{DataProtectorService.EncryptId(MemorabiliaId)}";
     }
 }

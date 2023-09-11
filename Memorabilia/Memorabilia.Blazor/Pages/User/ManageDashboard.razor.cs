@@ -43,7 +43,7 @@ public partial class ManageDashboard
     {
         await CommandRouter.Send(new SaveUserDashboard.Command(Model));
 
-        NavigationManager.NavigateTo(Model.ContinueNavigationPath);
-        Snackbar.Add($"{Model.PageTitle} was saved successfully!", Severity.Success);
+        NavigationManager.NavigateTo(NavigationPath.Settings);
+        Snackbar.Add("Manage Dashboard was saved successfully!", Severity.Success);
     }
 }

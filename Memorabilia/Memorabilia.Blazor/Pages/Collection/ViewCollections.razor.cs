@@ -53,6 +53,6 @@ public partial class ViewCollections
 
         Model.Collections.Remove(deletedItem);
 
-        Snackbar.Add($"{Model.ItemTitle} was deleted successfully!", Severity.Success);
+        Snackbar.Add("Collection was deleted successfully!", Severity.Success);
     }
 }

@@ -10,6 +10,5 @@ public class UserEditModel : EditModel
 
     public string LastName { get; set; }
 
-    public override string PageTitle 
-        => "Register";
+    public string Username { get; set; }
 }

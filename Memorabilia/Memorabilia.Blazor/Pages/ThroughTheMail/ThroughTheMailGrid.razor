@@ -66,7 +66,7 @@
             </NotMatch>
         </Condition>
         <MudTd DataLabel="">
-            <GridEditButton NavigationPath="@($"MyStuff/ThroughTheMail/Edit/{DataProtectorService.EncryptId(context.Id)}")" />
+            <GridEditButton NavigationPath="@($"{NavigationPath.ThroughTheMail}/{Constant.EditModeType.Update.Name}/{DataProtectorService.EncryptId(context.Id)}")" />
             <MudTooltip Text="Delete">
                 <MudFab Color="MudBlazor.Color.Secondary"
                         Icon="@Icons.Material.Outlined.DeleteOutline"
@@ -104,8 +104,8 @@
                             <RowTemplate Context="memorabilia">
                                     <MudTd DataLabel="">
                                         <MudImage @onclick="@(_ => Navigate(memorabilia.Autograph?.Id > 0
-                                                                                ? $"Memorabilia/Image/Edit/{DataProtectorService.EncryptId(memorabilia.Autograph.Id)}"
-                                                                                : $"Memorabilia/Image/Edit/{DataProtectorService.EncryptId(memorabilia.Memorabilia.Id)}"))"
+                                                                                ? $"{NavigationPath.MemorabiliaImage}/{Constant.EditModeType.Update.Name}/{DataProtectorService.EncryptId(memorabilia.Autograph.Id)}"
+                                                                                : $"{NavigationPath.MemorabiliaImage}/{Constant.EditModeType.Update.Name}/{DataProtectorService.EncryptId(memorabilia.Memorabilia.Id)}"))"
                                                   Class="rounded-lg can-click"
                                                   Elevation="5"
                                                   Height="200"

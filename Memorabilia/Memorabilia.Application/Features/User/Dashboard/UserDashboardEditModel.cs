@@ -11,25 +11,7 @@ public class UserDashboardEditModel : EditModel
     }
 
     public bool AllItemsSelected
-        => UserDashboardItems.Count(item => item.IsSelected) == UserDashboardItems.Count;
-
-    public override string BackNavigationPath 
-        => "Settings";    
-
-    public override string ContinueNavigationPath 
-        => "Settings";
-
-    public override string ExitNavigationPath 
-        => "Settings";
-
-    public override string ItemTitle 
-        => "Manage Dashboard";
-
-    public override string PageTitle 
-        => "Manage Dashboard";
-
-    public override string RoutePrefix 
-        => "ManageDashboard";
+        => UserDashboardItems.Count(item => item.IsSelected) == UserDashboardItems.Count; 
 
     public List<UserDashboardModel> UserDashboardItems { get; set; } 
         = new();

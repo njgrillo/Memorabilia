@@ -95,10 +95,10 @@ public partial class MemorabiliaItemTimeline : ComponentBase
 
         if (item.IsNullOrEmpty())
         {
-            NavigationManager.NavigateTo($"Memorabilia/{EditModeType.Update.Name}/{DataProtectorService.EncryptId(MemorabiliaId)}");
+            NavigationManager.NavigateTo($"{NavigationPath.Memorabilia}/{EditModeType.Update.Name}/{DataProtectorService.EncryptId(MemorabiliaId)}");
             return;
         }
 
-        NavigationManager.NavigateTo($"Memorabilia/{item}/{EditModeType.Update.Name}/{DataProtectorService.EncryptId(MemorabiliaId)}");
+        NavigationManager.NavigateTo($"{NavigationPath.Memorabilia}/{item}/{EditModeType.Update.Name}/{DataProtectorService.EncryptId(MemorabiliaId)}");
     }
 }
