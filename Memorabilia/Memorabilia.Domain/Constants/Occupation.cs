@@ -21,8 +21,10 @@ public sealed class Occupation : DomainItemConstant
     public static readonly Occupation Manager = new(7, "Manager");       
     public static readonly Occupation Musician = new(18, "Musician");
     public static readonly Occupation Owner = new(13, "Owner");
+    public static readonly Occupation Podcaster = new(29, "Podcaster");
     public static readonly Occupation Politician = new(16, "Politician");
     public static readonly Occupation President = new(17, "President");  
+    public static readonly Occupation Singer = new(28, "Singer");  
     public static readonly Occupation SportsWriter = new(23, "Sports Writer");  
     public static readonly Occupation Statistician = new(25, "Statistician");  
     public static readonly Occupation Trainer = new(26, "Trainer");  
@@ -49,8 +51,10 @@ public sealed class Occupation : DomainItemConstant
         Manager,
         Musician,
         Owner,
+        Podcaster,
         Politician,
         President,
+        Singer,
         SportsWriter,
         Statistician,
         Trainer,
