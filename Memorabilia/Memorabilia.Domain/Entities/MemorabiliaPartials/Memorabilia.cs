@@ -24,6 +24,7 @@ public partial class Memorabilia
         Denominator = memorabilia.Denominator;
         Figure = memorabilia.Figure;
         Football = memorabilia.Football;
+        ForSale = memorabilia.ForSale;
         ForTrade = memorabilia.ForTrade;
         Framed = memorabilia.Framed;
         EstimatedValue = memorabilia.EstimatedValue;

@@ -1,9 +1,11 @@
 ﻿@inherits EditPersonItem<PersonImageEditModel, PersonImageModel>
 
 <PageLoader IsLoading="@(!IsLoaded)">
-    <PageEditor DisplayBackToMenuItemLink="true"
+    <PageEditor ContinueNavigationPath="@EditModel.ContinueNavigationPath" 
+                DisplayBackToMenuItemLink="true"
                 DisplaySaveContinueButton="false"
-                EditModel="EditModel"              
+                EditModel="EditModel"   
+                ExitNavigationPath="@EditModel.ExitNavigationPath"
                 MenuItemLinkText="Back to People"
                 MenuItemPath="@EditModel.MenuItemPath"        
                 PageImageFileName="@EditModel.ImageFileName"

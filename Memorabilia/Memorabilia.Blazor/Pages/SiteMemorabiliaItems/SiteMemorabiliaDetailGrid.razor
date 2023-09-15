@@ -78,7 +78,7 @@
                             <MudTooltip Text="Make Offer">
                                 <MudFab Color="MudBlazor.Color.Primary"
                                         Icon="@Icons.Material.Outlined.LocalOffer"
-                                        OnClick="OnMakeOffer" />
+                                        OnClick="@(_ => OnMakeOffer(context.Memorabilia.Id))" />
                             </MudTooltip>
                         </Match>
                     </Condition>

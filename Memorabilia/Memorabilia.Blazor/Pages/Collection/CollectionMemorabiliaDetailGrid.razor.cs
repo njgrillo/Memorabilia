@@ -30,6 +30,9 @@ public partial class CollectionMemorabiliaDetailGrid
     public EventCallback<List<MemorabiliaModel>> MemorabiliaSelected { get; set; }
 
     [Parameter]
+    public bool ReloadGrid { get; set; }
+
+    [Parameter]
     public List<MemorabiliaModel> SelectedMemorabilia { get; set; } 
         = new();
 
@@ -51,15 +54,17 @@ public partial class CollectionMemorabiliaDetailGrid
 
     protected override async Task OnParametersSetAsync()
     {
+        if (ReloadGrid) 
+        {
+            await Load();
+            ReloadGrid = false;
+            return;
+        }
+
         if (CollectionId == 0 || _filter == Filter)
             return;
 
-        _resetPaging = true;
-        _filter = Filter;
-
-        await _table.ReloadServerData();
-
-        _resetPaging = false;
+        await Load();
     }    
 
     protected void OnImageLoaded()
@@ -144,6 +149,16 @@ public partial class CollectionMemorabiliaDetailGrid
             return;
 
         await RemoveMemorabiliaItem(ids);
+    }
+
+    private async Task Load()
+    {
+        _resetPaging = true;
+        _filter = Filter;
+
+        await _table.ReloadServerData();
+
+        _resetPaging = false;
     }
 
     private void ToggleChildContent(int memorabiliaItemId)

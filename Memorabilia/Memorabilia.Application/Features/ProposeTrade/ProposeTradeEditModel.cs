@@ -1,6 +1,4 @@
-﻿using Memorabilia.Domain.Entities;
-
-namespace Memorabilia.Application.Features.ProposeTrade;
+﻿namespace Memorabilia.Application.Features.ProposeTrade;
 
 public class ProposeTradeEditModel : EditModel
 {

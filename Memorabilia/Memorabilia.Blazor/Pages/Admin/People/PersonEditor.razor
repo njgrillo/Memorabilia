@@ -1,8 +1,10 @@
 ﻿@inherits EditItem<PersonEditModel, PersonModel>
 
 <PageLoader IsLoading="@(!IsLoaded)">
-    <PageEditor DisplayBackToMenuItemLink="true"
-                EditModel="EditModel"                
+    <PageEditor ContinueNavigationPath="@EditModel.ContinueNavigationPath" 
+                DisplayBackToMenuItemLink="true"
+                EditModel="EditModel" 
+                ExitNavigationPath="@EditModel.ExitNavigationPath"
                 MenuItemLinkText="Back to People"
                 MenuItemPath="@EditModel.MenuItemPath"                
                 OnSave="Save"

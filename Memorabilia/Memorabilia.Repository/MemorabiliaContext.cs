@@ -34,7 +34,7 @@ public class MemorabiliaContext : DbContext, IMemorabiliaContext
 
         modelBuilder.Entity<Entity.AutographAuthentication>();
         modelBuilder.Entity<Entity.AutographImage>();
-        modelBuilder.Entity<Entity.AutographSpot>();
+        modelBuilder.Entity<Entity.AutographSpot>();       
         modelBuilder.Entity<Entity.Collection>();
         modelBuilder.Entity<Entity.CollectionMemorabilia>();
         modelBuilder.Entity<Entity.Inscription>();
@@ -73,6 +73,7 @@ public class MemorabiliaContext : DbContext, IMemorabiliaContext
         modelBuilder.Entity<Entity.MemorabiliaTransaction>();
         modelBuilder.Entity<Entity.MemorabiliaTransactionSale>();
         modelBuilder.Entity<Entity.MemorabiliaTransactionTrade>();
+        modelBuilder.Entity<Entity.Offer>();
         modelBuilder.Entity<Entity.Personalization>();          
         modelBuilder.Entity<Entity.Project>();          
         modelBuilder.Entity<Entity.ProjectBaseball>();          

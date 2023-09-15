@@ -52,7 +52,8 @@
         <Match>
             <CollectionMemorabiliaDetailGrid CollectionId="EditModel.Id"
                                              Filter="_filter"
-                                             MemorabiliaSelected="@((p) => SelectedMemorabilia = p)" />
+                                             MemorabiliaSelected="@((p) => SelectedMemorabilia = p)"
+                                             ReloadGrid="ReloadMemorabiliaGrid" />
         </Match>
         <NotMatch>
             <CollectionMemorabiliaGalleryGrid CollectionId="EditModel.Id"

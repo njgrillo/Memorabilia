@@ -1,0 +1,60 @@
+﻿<Div Style="margin-top:1%;margin-bottom:1%;margin-left:1%;margin-right:1%;">
+    <Condition Evaluation="@(ValidationResultAlerts.Any())">
+        <Match>
+            <AlertPanel Alerts="ValidationResultAlerts" />
+        </Match>
+    </Condition>
+    <Div Class="row">
+        <Div Class="col-12">
+            <h3>
+                Offer
+            </h3>
+        </Div>
+    </Div>
+    <br />
+    <Div Class="row">
+        <Div Class="col-12">
+            <OfferMemorabiliaGrid Item="EditModel.Memorabilia" />
+        </Div>
+    </Div>
+    <br />
+    <Div Class="row">
+        <Div Class="col-3">
+            <NullableDecimalField Disabled="IsReadOnly"
+                                  Label="Amount to Offer ($)"
+                                  Value="EditModel.Amount"
+                                  ValueChanged="@((p) => EditModel.Amount = p)" />
+        </Div>
+    </Div>
+    <br />
+    <br />
+    <LeftRightSection>
+        <Right>
+            <MudStack Row="true">
+                <Condition Evaluation="IsReadOnly">
+                    <Match>
+                        <CustomButton OnClick="OnCancel"
+                                      Text="Cancel" />
+                    </Match>
+                    <NotMatch>
+                        <Condition Evaluation="IsReviewMode">
+                            <Match>
+                                <CustomButton OnClick="OnReject"
+                                              Text="Reject" />
+                                <CustomButton OnClick="OnCounter"
+                                              Text="Counter" />
+                                <CustomButton OnClick="OnAccept"
+                                              Text="Accept" />
+                            </Match>
+                            <NotMatch>
+                                <CustomButton OnClick="OnSend"
+                                              Text="Send" />
+                            </NotMatch>
+                        </Condition>
+                    </NotMatch>
+                </Condition>
+            </MudStack>
+        </Right>
+    </LeftRightSection>
+</Div>
+

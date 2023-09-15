@@ -1,0 +1,24 @@
+﻿<PageView DisplayAddButton="false"
+          DisplayPageFooter="false"
+          DisplayPageHeader="false"          
+          NavigationPath="@NavigationPath.EditDomainItems"
+          PageTitle="Offers">
+    <DivPad2>
+        <TabControl>
+            <MudTabPanel BadgeColor="MudBlazor.Color.Success"
+                         BadgeData="Model.OpenOffersCount"
+                         Text="Open">
+                <DivRowCol12>
+                    <OfferGrid Items="Model.OpenOffers" />
+                </DivRowCol12>
+            </MudTabPanel>
+            <MudTabPanel BadgeColor="MudBlazor.Color.Success"
+                         BadgeData="Model.CompletedOffersCount"
+                         Text="Completed">
+                <DivRowCol12>
+                    <OfferGrid Items="Model.CompletedOffers" />
+                </DivRowCol12>
+            </MudTabPanel>
+        </TabControl>
+    </DivPad2>
+</PageView>

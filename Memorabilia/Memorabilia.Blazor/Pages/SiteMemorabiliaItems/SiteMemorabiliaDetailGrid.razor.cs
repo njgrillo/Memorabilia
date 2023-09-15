@@ -98,9 +98,9 @@ public partial class SiteMemorabiliaDetailGrid
         await MemorabiliaSelected.InvokeAsync(SelectedMemorabilia);
     }
 
-    protected void OnMakeOffer()
+    protected void OnMakeOffer(int memorabiliaId)
     {
-
+        NavigationManager.NavigateTo($"{NavigationPath.Offer}/{DataProtectorService.EncryptId(memorabiliaId)}");
     }
 
     protected void OnProposeTrade(int memorabiliaId)

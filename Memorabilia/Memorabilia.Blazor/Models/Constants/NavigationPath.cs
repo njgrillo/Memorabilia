@@ -12,7 +12,7 @@ public static class NavigationPath
         => @"/Autographs/Image";
 
     public static string Autographs
-        => @"/Autographs";
+        => @"/Autographs";    
 
     public static string Championship
         => @"/Championship";
@@ -67,6 +67,12 @@ public static class NavigationPath
 
     public static string Occupation
         => @"/Occupation";
+
+    public static string Offer
+        => @"/MyStuff/Offer";
+
+    public static string Offers
+        => @"/MyStuff/Offers";
 
     public static string People
         => @"/People";

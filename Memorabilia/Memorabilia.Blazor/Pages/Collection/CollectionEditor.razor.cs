@@ -29,6 +29,9 @@ public partial class CollectionEditor
     [Parameter]
     public string EncryptId { get; set; }
 
+    protected CollectionEditModel EditModel
+        = new();
+
     protected int Id;
 
     protected bool IsDetailView 
@@ -36,8 +39,7 @@ public partial class CollectionEditor
 
     protected bool Loaded;
 
-    protected CollectionEditModel EditModel 
-        = new();
+    protected bool ReloadMemorabiliaGrid;
 
     protected List<MemorabiliaModel> SelectedMemorabilia 
         = new();
@@ -113,6 +115,8 @@ public partial class CollectionEditor
         EditModel.Items.AddRange(collectionMemorabilias);
 
         await OnSave();
+
+        ReloadMemorabiliaGrid = true;
     }
 
     private async Task Load()

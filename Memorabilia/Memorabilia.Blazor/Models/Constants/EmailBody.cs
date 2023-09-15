@@ -2,6 +2,12 @@
 
 public static class EmailBody
 {
+    public static string Offer
+        => "The offer with [[partnerName]] has been [[offerStatusType]]!";
+
+    public static string OfferSent
+        => "An offer has been sent to you by [[userName]]!";
+
     public static string ProposeTrade
         => "The trade with [[tradePartnerName]] has been [[proposeTradeStatusType]]!";
 
