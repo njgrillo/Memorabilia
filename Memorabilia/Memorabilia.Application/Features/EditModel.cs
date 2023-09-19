@@ -11,11 +11,9 @@ public class EditModel : Model
 
     public bool IsDeleted { get; set; }    
 
-    public bool IsModified 
-        => Id > 0 && 
-           !IsDeleted;
+    public virtual bool IsModified { get; set; }
 
-    public bool IsNew 
+    public virtual bool IsNew 
         => Id == 0;
 
     public override string PageTitle 
@@ -24,5 +22,10 @@ public class EditModel : Model
             : Constant.EditModeType.Add.Name)} {ItemTitle}";
 
     public FluentValidation.Results.ValidationResult ValidationResult { get; set; } 
-        = new(); 
+        = new();
+
+    public void MarkAsModified()
+    {
+        IsModified = true;
+    }
 }

@@ -1,0 +1,23 @@
+﻿<MudExpansionPanel IsExpanded="true"
+                   Text="@($"New Reply - {DateTime.Now.ToString("dddd, MMMM dd, yyyy hh:mm:ss tt")}")">
+    <LeftRightSection LeftStyle="width:20%;"
+                      RightStyle="width:80%;">
+        <Left>
+            <Text Typography="Typo.h6">@(ApplicationStateService.CurrentUser.Username)</Text>
+        </Left>
+        <Right>
+            <MudStack Row="true">
+                <TextField Label="Message"
+                           Lines="10"
+                           SelectedText="@ForumEntry.Message"
+                           SelectedTextChanged="@((p) => ForumEntry.Message = p)" />
+                <MudTooltip Text="Attachments">
+                    <MudFab Color="MudBlazor.Color.Primary"
+                            Icon="@Icons.Material.Outlined.AttachFile"
+                            OnClick="AddImages"
+                            Size="@MudBlazor.Size.Small" />
+                </MudTooltip>
+            </MudStack>            
+        </Right>
+    </LeftRightSection>
+</MudExpansionPanel>

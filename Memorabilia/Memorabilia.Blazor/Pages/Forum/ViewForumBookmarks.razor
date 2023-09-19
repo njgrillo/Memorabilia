@@ -1,0 +1,57 @@
+﻿<DivPad2>
+    <MudTable Bordered="false"
+              Dense="false"
+              Filter="new Func<ForumTopicModel,bool>(FilterFunc)"
+              Hover="true"
+              Items="@Model.ForumTopics"
+              Striped="true">
+        <ToolBarContent>
+            <MudText Typo="Typo.h6">Forum Bookmarks</MudText>
+            <MudSpacer />
+            <MudTextField @bind-Value="_search"
+                          Adornment="Adornment.Start"
+                          AdornmentIcon="@Icons.Material.Filled.Search"
+                          Class="mt-0"
+                          IconSize="MudBlazor.Size.Medium"
+                          Placeholder="Search" />
+        </ToolBarContent>
+        <HeaderContent>
+            <MudTh>Category</MudTh>
+            <MudTh>Sport</MudTh>
+            <MudTh>Subject</MudTh>
+            <MudTh>Created By</MudTh>
+            <MudTh>Created Date</MudTh>
+            <MudTh>Last Reply By</MudTh>
+            <MudTh>Last Reply By Date</MudTh>
+            <MudTh>Replies</MudTh>
+            <MudTh></MudTh>
+        </HeaderContent>
+        <RowTemplate>
+            <MudTd DataLabel="Category">@context.ForumCategoryName</MudTd>
+            <MudTd DataLabel="Sport">@context.SportName</MudTd>
+            <MudTd DataLabel="Subject">@context.Subject</MudTd>
+            <MudTd DataLabel="CreatedBy">@context.CreatedByUsername</MudTd>
+            <MudTd DataLabel="CreatedDate">@context.CreatedDate.ToString("dddd, MMMM dd, yyyy hh:mm:ss tt")</MudTd>
+            <MudTd DataLabel="LastReplyBy">@context.LastReplyByUsername</MudTd>
+            <MudTd DataLabel="LastReplyByDate">@(context.LastReplyByDate.HasValue ? context.LastReplyByDate.Value.ToString("dddd, MMMM dd, yyyy hh:mm:ss tt") : string.Empty)</MudTd>
+            <MudTd DataLabel="Replies">@(context.EntryCount - 1)</MudTd>
+            <MudTd DataLabel="">
+                <MudTooltip Text="View">
+                    <MudFab Color="MudBlazor.Color.Primary"
+                            Icon="@Icons.Material.Outlined.Edit"
+                            OnClick="@(_ => NavigationManager.NavigateTo($"{NavigationPath.ForumTopic}/{DataProtectorService.EncryptId(context.Id)}"))"
+                            Size="@MudBlazor.Size.Small" />
+                </MudTooltip>
+                <MudTooltip Text="Remove">
+                    <MudFab Color="MudBlazor.Color.Secondary"
+                            Icon="@Icons.Material.Outlined.DeleteOutline"
+                            OnClick="@(_ => ShowRemoveBookmarkConfirm(context.Id))"
+                            Size="@MudBlazor.Size.Small" />
+                </MudTooltip>
+            </MudTd>
+        </RowTemplate>
+        <PagerContent>
+            <MudTablePager />
+        </PagerContent>
+    </MudTable>
+</DivPad2>

@@ -38,6 +38,18 @@ public static class NavigationPath
     public static string ForTrade
         => @"/MyStuff/ForTrade";
 
+    public static string ForumBookmarks
+        => @"/MyStuff/ForumBookmarks";
+
+    public static string ForumCreateTopic
+        => @"/Forums/ForumTopic/Create";
+
+    public static string Forums
+        => @"/Forums";
+
+    public static string ForumTopic
+        => @"/Forums/ForumTopic";
+
     public static string HallOfFame
         => @"/HallOfFame";
 

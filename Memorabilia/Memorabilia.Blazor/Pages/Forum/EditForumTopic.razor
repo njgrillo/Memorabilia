@@ -1,0 +1,46 @@
+﻿<Div Style="margin-top:1%;margin-bottom:1%;margin-left:1%;margin-right:1%;">
+    <Condition Evaluation="@(ValidationResultAlerts.Any())">
+        <Match>
+            <AlertPanel Alerts="ValidationResultAlerts" />
+        </Match>
+    </Condition>
+    <MudStack Row="true">
+        <MudTooltip Text="@_bookmarkText">
+            <MudFab Color="MudBlazor.Color.Primary"
+                    Icon="@Icons.Material.Outlined.Favorite"
+                    OnClick="UpdateBookmark"
+                    Size="@MudBlazor.Size.Small" />
+        </MudTooltip>
+        <Text>@(EditModel.ForumCategoryTitle)</Text>
+    </MudStack> 
+    <br />
+    <Div Class="row">
+        <Div Class="col-12">
+            <Condition Evaluation="CanEditSubject">
+                <Match>
+                    <TextField Label="Subject"
+                               SelectedText="@EditModel.Subject"
+                               SelectedTextChanged="@((p) => EditModel.Subject = p)" />
+                </Match>
+                <NotMatch>
+                    <Text Typography="Typo.h6">Subject - @(EditModel.Subject)</Text>
+                </NotMatch>
+            </Condition>            
+        </Div>
+    </Div>
+    <br />
+    <Iterations Context="forumEntry" 
+                Items="EditModel.Entries.OrderByDescending(entry => entry.Rank).ThenByDescending(entry => entry.ModifiedDate).ThenByDescending(entry => entry.CreatedDate)">
+        <EditForumEntry ForumEntry="forumEntry"
+                        RankUpdated="OnRankUpdated" />
+    </Iterations>
+    <br />
+    <AddForumEntry ForumEntry="EditModel.Entry" />
+    <br />
+    <LeftRightSection>
+        <Right>
+            <SaveButton OnClick="AddReply"
+                        Text="Reply" />
+        </Right>
+    </LeftRightSection>
+</Div>

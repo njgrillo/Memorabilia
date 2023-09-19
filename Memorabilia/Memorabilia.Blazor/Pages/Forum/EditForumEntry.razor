@@ -1,0 +1,61 @@
+﻿<MudExpansionPanel IsExpanded="true"
+                   Text="@(ForumEntry.ModifiedDate?.ToString("dddd, MMMM dd, yyyy hh:mm:ss tt") ?? ForumEntry.CreatedDate.ToString("dddd, MMMM dd, yyyy hh:mm:ss tt"))">
+    <LeftRightSection LeftStyle="width:20%;"
+                      RightStyle="width:80%;">
+        <Left>
+            <Text Typography="Typo.h6">@(ForumEntry.CreatedByUser.Username)</Text>
+        </Left>
+        <Right>
+            <MudStack Row="true">    
+                <Condition Evaluation="@(!CanEdit)">
+                    <Match>
+                        <MudTooltip Text="@_upvoteButtonText">
+                            <MudFab Color="MudBlazor.Color.Primary"
+                                    Icon="@Icons.Material.Outlined.ArrowUpward"
+                                    OnClick="UpdateRank"
+                                    Size="@MudBlazor.Size.Small" />
+                        </MudTooltip> 
+                    </Match>
+                </Condition>                  
+                <Text Typography="Typo.h6">
+                    @ForumEntry.Rank.ToString()
+                </Text>
+                <TextField Disabled="@(!EditMode)" 
+                           Label="Message"
+                           Lines="10"
+                           SelectedText="@ForumEntry.Message"
+                           SelectedTextChanged="@((p) => ForumEntry.Message = p)" />
+                <Condition Evaluation="CanEdit">
+                    <Match>
+                        <Condition Evaluation="@(!EditMode)">
+                            <Match>
+                                <MudTooltip Text="Edit">
+                                    <MudFab Color="MudBlazor.Color.Primary"
+                                            Icon="@Icons.Material.Outlined.ModeEditOutline"
+                                            OnClick="Edit"
+                                            Size="@MudBlazor.Size.Small" />
+                                </MudTooltip>
+                            </Match>
+                        </Condition>                        
+                        <Condition Evaluation="@EditMode">
+                            <Match>
+                                <MudTooltip Text="Confirm">
+                                    <MudFab Color="MudBlazor.Color.Primary"
+                                            Icon="@Icons.Material.Outlined.Check"
+                                            OnClick="Confirm"
+                                            Size="@MudBlazor.Size.Small" />
+                                </MudTooltip>
+                            </Match>
+                        </Condition>                        
+                        <MudTooltip Text="Attachments">
+                            <MudFab Color="MudBlazor.Color.Primary"
+                                    Icon="@Icons.Material.Outlined.AttachFile"
+                                    OnClick="EditImages"
+                                    Size="@MudBlazor.Size.Small" />
+                        </MudTooltip>
+                    </Match>
+                </Condition>
+            </MudStack>            
+        </Right>
+    </LeftRightSection>
+</MudExpansionPanel>

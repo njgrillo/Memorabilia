@@ -1,7 +1,10 @@
 ﻿namespace Memorabilia.Blazor.Controls.Fields;
 
 public partial class TextField : Field 
-{   
+{
+    [Parameter]
+    public bool Disabled { get; set; }
+
     [Parameter]
     public string HelperText { get; set; }
 

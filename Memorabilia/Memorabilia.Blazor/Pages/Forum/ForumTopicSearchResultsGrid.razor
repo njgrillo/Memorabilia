@@ -1,0 +1,34 @@
+﻿<MudTable @ref="_table"
+          Bordered="false"
+          Dense="false"
+          Hover="true"
+          Items="@Model.ForumTopics"
+          ServerData="@(new Func<TableState, Task<TableData<ForumTopicModel>>>(OnRead))"
+          Striped="true">
+    <HeaderContent>
+        <MudTh>Category</MudTh>
+        <MudTh>Sport</MudTh>
+        <MudTh>Subject</MudTh>
+        <MudTh>Created By</MudTh>
+        <MudTh>Created Date</MudTh>
+        <MudTh></MudTh>
+    </HeaderContent>
+    <RowTemplate>
+        <MudTd DataLabel="Category">@context.ForumCategoryName</MudTd>
+        <MudTd DataLabel="Sport">@context.SportName</MudTd>
+        <MudTd DataLabel="Subject">@context.Subject</MudTd>
+        <MudTd DataLabel="CreatedBy">@context.CreatedByUsername</MudTd>
+        <MudTd DataLabel="CreatedDate">@context.CreatedDate.ToString("dddd, MMMM dd, yyyy hh:mm:ss tt")</MudTd>
+        <MudTd DataLabel="">
+            <MudTooltip Text="View">
+                <MudFab Color="MudBlazor.Color.Primary"
+                    Icon="@Icons.Material.Outlined.Edit"
+                    OnClick="@(_ => NavigationManager.NavigateTo($"{NavigationPath.ForumTopic}/{DataProtectorService.EncryptId(context.Id)}"))"
+                    Size="@MudBlazor.Size.Small" />
+            </MudTooltip>
+        </MudTd>
+    </RowTemplate>
+    <PagerContent>
+        <MudTablePager />
+    </PagerContent>
+</MudTable>

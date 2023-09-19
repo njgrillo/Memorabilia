@@ -4,6 +4,13 @@ public class User : Framework.Library.Domain.Entity.DomainEntity
 {
     public User() { }
 
+    public User(int id,
+                string username)
+    {
+        Id = id;
+        Username = username;    
+    }
+
     public User(string emailAddress, 
                 string firstName, 
                 string lastName,
@@ -16,6 +23,8 @@ public class User : Framework.Library.Domain.Entity.DomainEntity
         CreateDate = DateTime.UtcNow;
         UserRoleId = Constant.Role.User.Id;
     }
+
+    public virtual List<ForumTopicUserBookmark> BookmarkedForumTopics { get; private set; }
 
     public DateTime CreateDate { get; private set; }
 

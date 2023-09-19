@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Application.Features.Offer;
 
-public record GetOffers : IQuery<Entity.Offer[]>
+public record GetOffers() : IQuery<Entity.Offer[]>
 {
     public class Handler : QueryHandler<GetOffers, Entity.Offer[]>
     {

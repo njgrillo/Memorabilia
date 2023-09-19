@@ -1,0 +1,38 @@
+﻿<MudExpansionPanel IsExpanded="true"
+                   Text="Trending Topics">
+    <Condition Evaluation="@Model.TrendingTopics.Any()">
+        <Match>
+            <Iterations Context="forumTopic"
+                        Items="Model.TrendingTopics">
+                <Div Class="row">
+                    <Div Class="col-4">
+                        <Text Typography="Typo.h6">
+                            @forumTopic.ForumCategoryName @(forumTopic.Sport != null ? $" - {forumTopic.SportName}" : string.Empty)
+                        </Text>
+                    </Div>
+                    <Div Class="col-6">
+                        <Text Typography="Typo.h6">
+                            @forumTopic.Subject
+                        </Text>
+                        @*<MudNavLink Href="@($"{NavigationPath.ForumTopic}/{DataProtectorService.EncryptId(forumTopic.Id)}")">@forumTopic.Subject</MudNavLink>*@
+                    </Div>    
+                    <Div Class="col-2">
+                        <MudTooltip Text="View">
+                            <MudFab Color="MudBlazor.Color.Primary"
+                                    Icon="@Icons.Material.Outlined.Edit"
+                                    OnClick="@(_ => NavigationManager.NavigateTo($"{NavigationPath.ForumTopic}/{DataProtectorService.EncryptId(forumTopic.Id)}"))"
+                                    Size="@MudBlazor.Size.Small" />
+                        </MudTooltip>
+                    </Div>
+                </Div>
+            </Iterations>
+        </Match>
+        <NotMatch>
+            <Text Typography="Typo.h6">
+                <Div Class="row">
+                    Nothing is trending right now.
+                </Div>
+            </Text>
+        </NotMatch>
+    </Condition>
+</MudExpansionPanel>

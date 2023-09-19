@@ -10,6 +10,14 @@ public class DomainContext : DbContext, IDomainContext
 
     public DbSet<Entity.College> College { get; set; }
 
+    public DbSet<Entity.ForumCategory> ForumCategory { get; set; }
+
+    public DbSet<Entity.ForumEntry> ForumEntry { get; set; }
+
+    public DbSet<Entity.ForumTopic> ForumTopic { get; set; }
+
+    public DbSet<Entity.ForumTopicUserBookmark> ForumTopicUserBookmark { get; set; }
+
     public DbSet<Entity.Person> Person { get; set; }
 
     public DbSet<Entity.PersonAward> PersonAward { get; set; }
@@ -17,6 +25,8 @@ public class DomainContext : DbContext, IDomainContext
     public DbSet<Entity.PersonTeam> PersonTeam { get; set; }
 
     public DbSet<Entity.Team> Team { get; set; }
+
+    public DbSet<Entity.User> User { get; set; }
 
     public DomainContext(DbContextOptions<DomainContext> options) 
         : base(options) { }
@@ -53,6 +63,10 @@ public class DomainContext : DbContext, IDomainContext
         modelBuilder.Entity<Entity.FigureSpecialtyType>();
         modelBuilder.Entity<Entity.FigureType>();
         modelBuilder.Entity<Entity.FootballType>();
+        modelBuilder.Entity<Entity.ForumCategory>();
+        modelBuilder.Entity<Entity.ForumEntry>();
+        modelBuilder.Entity<Entity.ForumEntryUserRank>();
+        modelBuilder.Entity<Entity.ForumTopic>();
         modelBuilder.Entity<Entity.Franchise>();
         modelBuilder.Entity<Entity.FranchiseHallOfFameType>();
         modelBuilder.Entity<Entity.GameStyleType>();

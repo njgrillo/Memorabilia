@@ -7,7 +7,8 @@ public class UserRepository
         : base(context, memoryCache) { }
 
     private IQueryable<Entity.User> User 
-        => Items.Include(user => user.DashboardItems)
+        => Items.Include(user => user.BookmarkedForumTopics)
+                .Include(user => user.DashboardItems)
                 .Include(user => user.UserSettings);
 
     public override async Task<Entity.User> Get(int id)

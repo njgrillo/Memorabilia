@@ -101,9 +101,6 @@ public class SaveThroughTheMail
         public bool IsDeleted
             => _editModel.IsDeleted;
 
-        public bool IsModified
-            => _editModel.IsModified;
-
         public bool IsNew
             => _editModel.IsNew;
 

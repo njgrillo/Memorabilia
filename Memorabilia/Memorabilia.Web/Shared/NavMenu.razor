@@ -8,22 +8,27 @@
             Graphinallday
         </MudText>
         <MudDivider Class="my-2" />
-        <MudNavLink Href="@NavigationPath.Home">
+        <MudNavLink Href="@NavigationPath.Home"
+                    Icon="@Icons.Material.TwoTone.Home">
             Home
         </MudNavLink>
         <AuthorizeView>
             <Authorized>   
                 <Condition Evaluation="ApplicationStateService.CurrentUser.IsAdmin()">
                     <Match>
-                        <MudNavGroup Title="Admin">
+                        <MudNavGroup Icon="@Icons.Material.TwoTone.AdminPanelSettings"
+                                     Title="Admin">
                             <MudNavLink Href="@NavigationPath.EditDomainItems">Domain Items</MudNavLink>
                             <MudNavLink Href="@NavigationPath.ManageItemsPage">Manage Items</MudNavLink>
                             <MudNavLink Href="@NavigationPath.Sample">Samples</MudNavLink>
                         </MudNavGroup>
                     </Match>
                 </Condition>
+                <MudNavLink Href="@NavigationPath.Forums"
+                            Icon="@Icons.Material.TwoTone.Forum">Forums</MudNavLink>
                 <MudNavLink Href="@NavigationPath.ViewSiteMemorabilia">Memorabilia</MudNavLink>
-                <MudNavGroup Title="My Stuff">                       
+                <MudNavGroup Icon="@Icons.Material.TwoTone.Person"
+                             Title="My Stuff">                       
                     <MudNavLink Icon="@Icons.Material.TwoTone.Collections" 
                                 Href="@NavigationPath.Collections">Collections</MudNavLink>
                     <MudNavLink Icon="@Icons.Material.TwoTone.Dashboard" 
@@ -32,6 +37,8 @@
                                 Href="@NavigationPath.ForSale">For Sale</MudNavLink>
                     <MudNavLink Icon="@Icons.Material.TwoTone.SwapHoriz" 
                                 Href="@NavigationPath.ForTrade">For Trade</MudNavLink>
+                    <MudNavLink Icon="@Icons.Material.TwoTone.Favorite"
+                                Href="@NavigationPath.ForumBookmarks">Forum Bookmarks</MudNavLink>
                     <MudNavLink Href="@NavigationPath.ViewMemorabilia">Memorabilia</MudNavLink>
                     <MudNavLink Icon="@Icons.Material.TwoTone.AttachMoney"
                                 Href="@NavigationPath.Offers">Offers</MudNavLink>
