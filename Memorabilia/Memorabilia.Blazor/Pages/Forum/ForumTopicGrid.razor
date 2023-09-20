@@ -6,20 +6,24 @@
           ServerData="@(new Func<TableState, Task<TableData<ForumTopicModel>>>(OnRead))"
           Striped="true">
     <HeaderContent>
+        <MudTh>Category</MudTh>
+        <MudTh>Sport</MudTh>
         <MudTh>Subject</MudTh>
         <MudTh>Created By</MudTh>
         <MudTh>Created Date</MudTh>
         <MudTh>Last Reply By</MudTh>
-        <MudTh>Last Reply By Date</MudTh>
+        <MudTh>Last Reply Date</MudTh>
         <MudTh>Replies</MudTh>
         <MudTh></MudTh>
     </HeaderContent>
     <RowTemplate>
+        <MudTd DataLabel="Category">@context.ForumCategoryName</MudTd>
+        <MudTd DataLabel="Sport">@context.SportName</MudTd>
         <MudTd DataLabel="Subject">@context.Subject</MudTd>
         <MudTd DataLabel="CreatedBy">@context.CreatedByUsername</MudTd>
-        <MudTd DataLabel="CreatedDate">@context.CreatedDate.ToString("dddd, MMMM dd, yyyy hh:mm:ss tt")</MudTd>
+        <MudTd DataLabel="CreatedDate">@context.CreatedDate.ToString("MM-dd-yyyy hh:mm:ss tt")</MudTd>
         <MudTd DataLabel="LastReplyBy">@context.LastReplyByUsername</MudTd>
-        <MudTd DataLabel="LastReplyByDate">@(context.LastReplyByDate.HasValue ? context.LastReplyByDate.Value.ToString("dddd, MMMM dd, yyyy hh:mm:ss tt") : string.Empty)</MudTd>
+        <MudTd DataLabel="LastReplyDate">@(context.LastReplyByDate.HasValue ? context.LastReplyByDate.Value.ToString("MM-dd-yyyy hh:mm:ss tt") : string.Empty)</MudTd>
         <MudTd DataLabel="Replies">@(context.EntryCount - 1)</MudTd>
         <MudTd DataLabel="">
             <MudTooltip Text="View">

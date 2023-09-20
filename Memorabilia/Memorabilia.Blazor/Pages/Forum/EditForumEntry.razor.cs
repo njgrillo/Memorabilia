@@ -18,6 +18,9 @@ public partial class EditForumEntry
     public ILogger<EditForumEntry> Logger { get; set; }
 
     [Inject]
+    public QueryRouter QueryRouter { get; set; }
+
+    [Inject]
     public ISnackbar Snackbar { get; set; }
 
     [Parameter]
@@ -67,36 +70,28 @@ public partial class EditForumEntry
         if (result.Canceled)
             return;
 
-        var files = (IReadOnlyList<IBrowserFile>)result.Data;
+        var files = (List<ImageEditModel>)result.Data;
 
         List<ForumEntryImageEditModel> images = new();
 
-        foreach (IBrowserFile file in files)
+        foreach (ImageEditModel image in files)
         {
-            try
-            {
-                string fileName = await ImageService.LoadFile(file, Enum.ImageRootType.User);
+            string imageData = ImageService.GetUserImageData(image.FileName);
 
-                string imageData = ImageService.GetUserImageData(fileName);
+            byte[] bytes = Encoding.ASCII.GetBytes(imageData);
 
-                byte[] bytes = Encoding.ASCII.GetBytes(imageData);
+            ImageService.DeleteImage(Enum.ImageRootType.User, image.FileName);
 
-                ImageService.DeleteImage(Enum.ImageRootType.User, fileName);
-
-                images.Add(new ForumEntryImageEditModel(ForumEntry.Id, bytes));
-            }
-            catch (Exception ex)
-            {
-                //TODO: Error when one more than image
-                Logger.LogError("File: {Filename} Error: {Error}", file.Name, ex.Message);
-            }
+            images.Add(new ForumEntryImageEditModel(ForumEntry.Id, bytes));
         }
 
         var command = new AddForumEntryImages(ForumEntry.Id, images.ToArray());
 
         await CommandRouter.Send(command);
 
-        ForumEntry.Images.AddRange(images);
+        Entity.ForumEntry forumEntry = await QueryRouter.Send(new GetForumEntry(ForumEntry.Id));
+
+        ForumEntry = new(forumEntry);
 
         CanAttach = ForumEntry.Images.Count < 3;
 

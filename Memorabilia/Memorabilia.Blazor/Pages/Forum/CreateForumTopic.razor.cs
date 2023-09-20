@@ -9,6 +9,12 @@ public partial class CreateForumTopic
     public CommandRouter CommandRouter { get; set; }
 
     [Inject]
+    public IDataProtectorService DataProtectorService { get; set; }
+
+    [Inject]
+    public NavigationManager NavigationManager { get; set; }
+
+    [Inject]
     public ISnackbar Snackbar { get; set; }
 
     [Inject]
@@ -37,6 +43,8 @@ public partial class CreateForumTopic
             return;
 
         await CommandRouter.Send(command);
+
+        NavigationManager.NavigateTo($"{NavigationPath.ForumTopic}/{DataProtectorService.EncryptId(command.Id)}");
 
         Snackbar.Add("Forum Topic Created Successfully!", Severity.Success);
     }

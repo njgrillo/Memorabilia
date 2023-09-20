@@ -27,6 +27,8 @@ public class SaveForumTopic
 
                 await _forumTopicRepository.Add(forumTopic);
 
+                command.Id = forumTopic.Id;
+
                 return;
             }
 
@@ -47,6 +49,8 @@ public class SaveForumTopic
         public Command(ForumTopicEditModel forumTopicEditModel)
         {
             _forumTopicEditModel = forumTopicEditModel;
+
+            Id = _forumTopicEditModel.Id;
         }
 
         public ForumEntryEditModel AddedEntry
@@ -64,8 +68,7 @@ public class SaveForumTopic
         public int ForumEntryId
             => _forumTopicEditModel.Entry.Id;
 
-        public int Id
-            => _forumTopicEditModel.Id;
+        public int Id { get; set; }            
 
         public bool IsModified
             => _forumTopicEditModel.IsModified;

@@ -22,7 +22,7 @@ public partial class ForumEntryImageDialog
 
     protected void Add()
     {
-        MudDialog.Close(DialogResult.Ok(_files));
+        MudDialog.Close(DialogResult.Ok(Images));
     }
 
     protected void Cancel()

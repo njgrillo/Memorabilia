@@ -33,16 +33,18 @@
                 </Condition>
             </Div>
             <Div Style="margin-top:1%;">
-                <Iterations Context="image" 
-                            Items="Images">
-                    <Div Class="col-3">
-                        <ImageEditor CanRemove="true"
-                                     HasPrimary="false"
-                                     ImageFileName="@image.FileName"
-                                     ImageRootType="ImageRootType.User"
-                                     OnRemove="Remove" />
-                    </Div>
-                </Iterations>
+                <MudStack Row="true">
+                    <Iterations Context="image"
+                                Items="Images">
+                        <Div Class="col-3">
+                            <ImageEditor CanRemove="true"
+                                         HasPrimary="false"
+                                         ImageFileName="@image.FileName"
+                                         ImageRootType="ImageRootType.User"
+                                         OnRemove="Remove" />
+                        </Div>
+                    </Iterations>
+                </MudStack>                
             </Div>
         </DivPad2>
     </DialogContent>

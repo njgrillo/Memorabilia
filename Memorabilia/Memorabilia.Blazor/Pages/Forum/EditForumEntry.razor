@@ -7,24 +7,30 @@
         </Left>
         <Right>
             <MudStack Row="true">    
-                <Condition Evaluation="@(!CanEdit)">
-                    <Match>
-                        <MudTooltip Text="@_upvoteButtonText">
-                            <MudFab Color="MudBlazor.Color.Primary"
-                                    Icon="@Icons.Material.Outlined.ArrowUpward"
-                                    OnClick="UpdateRank"
-                                    Size="@MudBlazor.Size.Small" />
-                        </MudTooltip> 
-                    </Match>
-                </Condition>                  
-                <Text Typography="Typo.h6">
-                    @ForumEntry.Rank.ToString()
-                </Text>
-                <TextField Disabled="@(!EditMode)" 
-                           Label="Message"
-                           Lines="10"
-                           SelectedText="@ForumEntry.Message"
-                           SelectedTextChanged="@((p) => ForumEntry.Message = p)" />
+                <Div Class="col-auto p-1">
+                    <Condition Evaluation="@(!CanEdit)">
+                        <Match>
+                            <MudTooltip Text="@_upvoteButtonText">
+                                <MudFab Color="MudBlazor.Color.Primary"
+                                        Icon="@Icons.Material.Outlined.ArrowUpward"
+                                        OnClick="UpdateRank"
+                                        Size="@MudBlazor.Size.Small" />
+                            </MudTooltip> 
+                        </Match>
+                    </Condition> 
+                </Div>           
+                <Div Class="col-auto p-1">
+                    <Text Typography="Typo.h6">
+                        @ForumEntry.Rank.ToString()
+                    </Text>
+                </Div>
+                <Div Class="col-8">
+                    <TextField Disabled="@(!EditMode)" 
+                               Label="Message"
+                               Lines="10"
+                               SelectedText="@ForumEntry.Message"
+                               SelectedTextChanged="@((p) => ForumEntry.Message = p)" />
+                </Div>                
                 <Condition Evaluation="@(ForumEntry.Images.Any())">
                     <Match>
                         <ForumEntryImages ImageDeleted="OnImageDeleted" 
