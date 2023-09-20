@@ -25,6 +25,9 @@ public class ForumEntry : Framework.Library.Domain.Entity.DomainEntity
 
     public int ForumTopicId { get; private set; }
 
+    public virtual List<ForumEntryImage> Images { get; private set; }
+        = new();
+
     public string Message { get; private set; }
 
     public DateTime? ModifiedDate { get; private set; }
@@ -33,6 +36,11 @@ public class ForumEntry : Framework.Library.Domain.Entity.DomainEntity
 
     public virtual List<ForumEntryUserRank> RankedUsers { get; private set; }
         = new();
+
+    public void AddImage(byte[] image)
+    {
+        Images.Add(new ForumEntryImage(Id, image));
+    }
 
     public void DecreaseRank(int userId)
     {
@@ -46,6 +54,11 @@ public class ForumEntry : Framework.Library.Domain.Entity.DomainEntity
         Rank++;
 
         RankedUsers.Add(new ForumEntryUserRank(Id, userId));
+    }
+
+    public void RemoveImage(int forumEntryImageId)
+    {
+        Images.RemoveAll(forumEntryImage => forumEntryImage.Id == forumEntryImageId);
     }
 
     public void Set(DateTime modifiedDate,

@@ -65,6 +65,7 @@ public class DomainContext : DbContext, IDomainContext
         modelBuilder.Entity<Entity.FootballType>();
         modelBuilder.Entity<Entity.ForumCategory>();
         modelBuilder.Entity<Entity.ForumEntry>();
+        modelBuilder.Entity<Entity.ForumEntryImage>();
         modelBuilder.Entity<Entity.ForumEntryUserRank>();
         modelBuilder.Entity<Entity.ForumTopic>();
         modelBuilder.Entity<Entity.Franchise>();

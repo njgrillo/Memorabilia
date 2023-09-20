@@ -13,17 +13,17 @@
                                    Edge="Edge.Start"
                                    Icon="@Icons.Material.Filled.Menu"
                                    OnClick="@((e) => DrawerToggle())" />
-                </MudTooltip> 
-                <MudTooltip Text="@_themeText">
-                    <MudIconButton Color="MudBlazor.Color.Inherit"
-                                   Edge="Edge.Start"
-                                   Icon="@Icons.Material.Filled.DarkMode"
-                                   OnClick="@((e) => ToggleTheme())" />
-                </MudTooltip>
+                </MudTooltip>                 
             </Left>
             <Right>
                 <AuthorizeView>
                     <Authorized>
+                        <MudTooltip Text="@_themeText">
+                            <MudIconButton Color="MudBlazor.Color.Inherit"
+                                           Edge="Edge.Start"
+                                           Icon="@Icons.Material.Filled.DarkMode"
+                                           OnClick="@((e) => ToggleTheme())" />
+                        </MudTooltip>
                         <MudTooltip Text="User Settings">
                             <MudIconButton Color="MudBlazor.Color.Inherit"
                                            Edge="Edge.Start"

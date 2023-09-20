@@ -2,7 +2,7 @@
     <MudCardMedia Height="300"         
                   Image="@(ImageService.GetImageData(ImageRootType, ImageFileName))" />
     <MudCardContent>
-        <MudText Typo="Typo.h5">@ImageType.Name</MudText>
+        <MudText Typo="Typo.h5">@(ImageType?.Name ?? string.Empty)</MudText>
     </MudCardContent>
     <MudCardActions>
         <Div Hidden="@(!HasPrimary || IsPrimary)">

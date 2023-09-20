@@ -25,6 +25,12 @@
                            Lines="10"
                            SelectedText="@ForumEntry.Message"
                            SelectedTextChanged="@((p) => ForumEntry.Message = p)" />
+                <Condition Evaluation="@(ForumEntry.Images.Any())">
+                    <Match>
+                        <ForumEntryImages ImageDeleted="OnImageDeleted" 
+                                          Images="ForumEntry.Images" />
+                    </Match>
+                </Condition>
                 <Condition Evaluation="CanEdit">
                     <Match>
                         <Condition Evaluation="@(!EditMode)">
@@ -46,13 +52,17 @@
                                             Size="@MudBlazor.Size.Small" />
                                 </MudTooltip>
                             </Match>
+                        </Condition>       
+                        <Condition Evaluation="CanAttach">
+                            <Match>
+                                <MudTooltip Text="Attachments">
+                                    <MudFab Color="MudBlazor.Color.Primary"
+                                            Icon="@Icons.Material.Outlined.AttachFile"
+                                            OnClick="AddImages"
+                                            Size="@MudBlazor.Size.Small" />
+                                </MudTooltip>
+                            </Match>
                         </Condition>                        
-                        <MudTooltip Text="Attachments">
-                            <MudFab Color="MudBlazor.Color.Primary"
-                                    Icon="@Icons.Material.Outlined.AttachFile"
-                                    OnClick="EditImages"
-                                    Size="@MudBlazor.Size.Small" />
-                        </MudTooltip>
                     </Match>
                 </Condition>
             </MudStack>            

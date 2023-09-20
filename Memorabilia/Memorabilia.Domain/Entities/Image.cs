@@ -4,6 +4,11 @@ public class Image : Framework.Library.Domain.Entity.DomainEntity
 {
     public Image() { }
 
+    public Image(string fileName)
+    {
+        FileName = fileName;
+    }
+
     public Image(string fileName, int imageTypeId, DateTime? uploadDate = null)
     {
         FileName = fileName;

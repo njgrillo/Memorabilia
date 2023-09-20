@@ -9,6 +9,15 @@ public partial class EditForumEntry
     public CommandRouter CommandRouter { get; set; }
 
     [Inject]
+    public IDialogService DialogService { get; set; }
+
+    [Inject]
+    public ImageService ImageService { get; set; }
+
+    [Inject]
+    public ILogger<EditForumEntry> Logger { get; set; }
+
+    [Inject]
     public ISnackbar Snackbar { get; set; }
 
     [Parameter]
@@ -16,6 +25,8 @@ public partial class EditForumEntry
 
     [Parameter]
     public EventCallback RankUpdated { get; set; }
+
+    protected bool CanAttach { get; set; }
 
     protected bool CanEdit { get; set; }
 
@@ -25,12 +36,71 @@ public partial class EditForumEntry
 
     protected override void OnParametersSet()
     {
+        CanAttach = ForumEntry.Images.Count < 3;
         CanEdit = ForumEntry.CreatedByUserId == ApplicationStateService.CurrentUser.Id;
 
         _upvoteButtonText
             = ForumEntry.RankedUsers.Any(rankedUser => rankedUser.UserId == ApplicationStateService.CurrentUser.Id)
                 ? "Remove Upvote"
                 : "Upvote";
+    }
+
+    protected async Task AddImages()
+    {
+        var parameters = new DialogParameters
+        {
+            ["MaximumImagesAllowed"] = 3 - ForumEntry.Images.Count
+        };
+
+        var options = new DialogOptions()
+        {
+            MaxWidth = MaxWidth.ExtraLarge,
+            FullWidth = true,
+            DisableBackdropClick = true
+        };
+
+        var dialog = DialogService.Show<ForumEntryImageDialog>(string.Empty,
+                                                               new DialogParameters(),
+                                                               options);
+        var result = await dialog.Result;
+
+        if (result.Canceled)
+            return;
+
+        var files = (IReadOnlyList<IBrowserFile>)result.Data;
+
+        List<ForumEntryImageEditModel> images = new();
+
+        foreach (IBrowserFile file in files)
+        {
+            try
+            {
+                string fileName = await ImageService.LoadFile(file, Enum.ImageRootType.User);
+
+                string imageData = ImageService.GetUserImageData(fileName);
+
+                byte[] bytes = Encoding.ASCII.GetBytes(imageData);
+
+                ImageService.DeleteImage(Enum.ImageRootType.User, fileName);
+
+                images.Add(new ForumEntryImageEditModel(ForumEntry.Id, bytes));
+            }
+            catch (Exception ex)
+            {
+                //TODO: Error when one more than image
+                Logger.LogError("File: {Filename} Error: {Error}", file.Name, ex.Message);
+            }
+        }
+
+        var command = new AddForumEntryImages(ForumEntry.Id, images.ToArray());
+
+        await CommandRouter.Send(command);
+
+        ForumEntry.Images.AddRange(images);
+
+        CanAttach = ForumEntry.Images.Count < 3;
+
+        Snackbar.Add("Forum Entry Image(s) saved successfully!", Severity.Success);
     }
 
     protected async Task Confirm()
@@ -50,12 +120,12 @@ public partial class EditForumEntry
     protected void Edit()
     {
         EditMode = true;
-    }
-
-    protected void EditImages()
-    {
-
     }    
+
+    protected void OnImageDeleted()
+    {
+        CanAttach = ForumEntry.Images.Count < 3;
+    }
 
     protected async Task UpdateRank()
     {
@@ -67,7 +137,7 @@ public partial class EditForumEntry
                                                           isUpvote));
 
         if (isUpvote)
-            ForumEntry.RankedUsers.Add(new Entity.ForumEntryUserRank(ForumEntry.Id, ApplicationStateService.CurrentUser.Id));
+            ForumEntry.RankedUsers.Add(new ForumEntryUserRankEditModel(ForumEntry.Id, ApplicationStateService.CurrentUser.Id));
         else
             ForumEntry.RankedUsers.RemoveAll(rankedUser => rankedUser.UserId == ApplicationStateService.CurrentUser.Id);
 

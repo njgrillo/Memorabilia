@@ -16,12 +16,19 @@ public class ForumEntryEditModel : EditModel
 		CreatedByUserId = forumEntry.CreatedByUserId;
 		CreatedDate = forumEntry.CreatedDate;
 		ForumTopicId = forumEntry.ForumTopicId;
-		Id = forumEntry.Id;
-		Message = forumEntry.Message;
+		Id = forumEntry.Id;        
+        Message = forumEntry.Message;
 		ModifiedDate = forumEntry.ModifiedDate;
-		Rank = forumEntry.Rank;
-		RankedUsers = forumEntry.RankedUsers;		
-	}
+		Rank = forumEntry.Rank;		
+
+        Images = forumEntry.Images
+						   .Select(image => new ForumEntryImageEditModel(image))
+						   .ToList();
+
+        RankedUsers = forumEntry.RankedUsers
+								.Select(rankedUser => new ForumEntryUserRankEditModel(rankedUser))
+                                .ToList();
+    }
 
 	public Entity.User CreatedByUser { get; private set; }
 
@@ -31,12 +38,15 @@ public class ForumEntryEditModel : EditModel
 
 	public int ForumTopicId { get; set; }
 
+	public List<ForumEntryImageEditModel> Images { get; set; }
+		= new();
+
     public string Message { get; set; }
 
 	public DateTime? ModifiedDate { get; set; }
 
 	public int Rank { get; set; }
 
-	public List<Entity.ForumEntryUserRank> RankedUsers { get; set; }
+	public List<ForumEntryUserRankEditModel> RankedUsers { get; set; }
 		= new();
 }

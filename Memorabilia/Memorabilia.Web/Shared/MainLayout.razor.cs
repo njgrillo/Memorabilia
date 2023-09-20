@@ -24,6 +24,11 @@ public partial class MainLayout : LayoutComponentBase
     protected override void OnInitialized()
     {
         Courier.Subscribe<ThemeChangedNotification>(OnThemeChanged);
+
+        _themeText =
+            ApplicationStateService.IsDarkTheme
+                ? "Turn off dark mode"
+                : "Turn on dark mode";
     }
 
     protected override void OnParametersSet()

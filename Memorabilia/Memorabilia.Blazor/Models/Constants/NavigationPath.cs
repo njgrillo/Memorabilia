@@ -23,6 +23,9 @@ public static class NavigationPath
     public static string Conference
         => @"/Conference";
 
+    public static string Consignments
+        => @"/Consignments";
+
     public static string Dashboard
         => @"/MyStuff/Dashboard";
 
@@ -31,6 +34,9 @@ public static class NavigationPath
 
     public static string EditDomainItems
         => @"/Admin/EditDomainItems";
+
+    public static string Feedback
+        => @"/MyStuff/Feedback";
 
     public static string ForSale
         => @"/MyStuff/ForSale";
@@ -52,6 +58,9 @@ public static class NavigationPath
 
     public static string HallOfFame
         => @"/HallOfFame";
+
+    public static string Help
+        => @"/Help";
 
     public static string Home
         => @"/Home";
@@ -77,6 +86,12 @@ public static class NavigationPath
     public static string MemorabiliaImage
         => @"MyStuff/Memorabilia/Image";
 
+    public static string Messages
+        => @"MyStuff/Messages";
+
+    public static string MyPrivateSignings
+        => @"/MyStuff/PrivateSignings/View";
+
     public static string Occupation
         => @"/Occupation";
 
@@ -95,6 +110,9 @@ public static class NavigationPath
     public static string PersonProfileSelect
         => @"/Tools/PersonProfileSelect";
 
+    public static string PrivateSignings
+        => @"/PrivateSignings";
+
     public static string Projects
         => @"/MyStuff/Projects";
 
@@ -107,8 +125,17 @@ public static class NavigationPath
     public static string Sample
         => @"/Admin/Sample";
 
+    public static string SavedSearches
+        => @"/MyStuff/SavedSearches";
+
     public static string Settings
         => @"/Settings";
+
+    public static string SignatureIdentification
+       => @"/SignatureIdentification";
+
+    public static string SignatureReview
+       => @"/SignatureReview";
 
     public static string SportService
         => @"/SportService";

@@ -265,6 +265,7 @@ global using System.Collections.Generic;
 global using System.ComponentModel;
 global using System.Data;
 global using System.Globalization;
+global using System.Text;
 
 global using Color = MudBlazor.Color;
 global using Constant = Memorabilia.Domain.Constants;
