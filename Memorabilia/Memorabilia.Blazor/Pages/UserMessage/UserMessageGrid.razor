@@ -1,0 +1,32 @@
+﻿<MudTable @ref="_table"
+          Bordered="false"
+          Dense="false"
+          Hover="true"
+          Items="@Model.Messages"
+          ServerData="@(new Func<TableState, Task<TableData<UserMessageModel>>>(OnRead))"
+          Striped="true">
+    <HeaderContent>
+        <MudTh></MudTh>
+        <MudTh>From</MudTh>
+        <MudTh>Subject</MudTh>
+        <MudTh>Created Date</MudTh>
+        <MudTh></MudTh>        
+    </HeaderContent>
+    <RowTemplate>
+        <MudTh></MudTh>
+        <MudTd DataLabel="From">@context.MessagePartnerUsername</MudTd>
+        <MudTd DataLabel="Subject">@context.Subject</MudTd>
+        <MudTd DataLabel="CreatedDate">@context.CreatedDate.ToString("MM-dd-yyyy")</MudTd>
+        <MudTd DataLabel="">
+            <MudTooltip Text="View">
+                <MudFab Color="MudBlazor.Color.Primary"
+                        Icon="@Icons.Material.Outlined.Edit"
+                        OnClick="@(_ => ViewMessage(context))"
+                        Size="@MudBlazor.Size.Small" />
+            </MudTooltip>
+        </MudTd>
+    </RowTemplate>
+    <PagerContent>
+        <MudTablePager />
+    </PagerContent>
+</MudTable>

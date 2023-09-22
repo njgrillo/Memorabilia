@@ -1,0 +1,26 @@
+﻿<DivPad2>
+    @*To*@
+    <Div Class="row">
+        <Div Class="col-6">
+            <UsernameAutoComplete SelectedValue="EditModel.ReceiverUser"
+                                  SelectionChanged="(p) => EditModel.ReceiverUser = p" />
+        </Div>
+    </Div>
+    <Div Class="row">
+        <Div Class="col-12">
+            <TextField Label="Subject"
+                       SelectedText="@EditModel.Subject"
+                       SelectedTextChanged="@((p) => EditModel.Subject = p)" />
+        </Div>
+    </Div>
+    @*Attachments*@
+    <Div Class="row">
+        <Div Class="col-12">
+            <TextField Label="Message"
+                       Lines="10"
+                       SelectedText="@EditModel.Message"
+                       SelectedTextChanged="@((p) => EditModel.Message = p)" />
+        </Div>
+    </Div>
+    @*Send Button*@
+</DivPad2>

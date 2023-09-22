@@ -28,6 +28,12 @@ public class DomainContext : DbContext, IDomainContext
 
     public DbSet<Entity.User> User { get; set; }
 
+    public DbSet<Entity.UserMessage> UserMessage { get; set; }
+
+    public DbSet<Entity.UserMessageReply> UserMessageReply { get; set; }
+
+    public DbSet<Entity.UserMessageReplyImage> UserMessageReplyImage { get; set; }
+
     public DomainContext(DbContextOptions<DomainContext> options) 
         : base(options) { }
 
@@ -131,6 +137,9 @@ public class DomainContext : DbContext, IDomainContext
         modelBuilder.Entity<Entity.TransactionType>();
         modelBuilder.Entity<Entity.User>();
         modelBuilder.Entity<Entity.UserDashboard>();
+        modelBuilder.Entity<Entity.UserMessage>();
+        modelBuilder.Entity<Entity.UserMessageReply>();
+        modelBuilder.Entity<Entity.UserMessageReplyImage>();
         modelBuilder.Entity<Entity.WritingInstrument>();
     }
 }

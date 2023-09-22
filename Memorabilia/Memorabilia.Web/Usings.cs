@@ -78,6 +78,7 @@ global using Memorabilia.Application.Validators.ProposeTrade;
 global using Memorabilia.Application.Validators.ThroughTheMail;
 global using Memorabilia.Application.Validators.Transactions;
 global using Memorabilia.Application.Validators.User;
+global using Memorabilia.Application.Validators.UserMessage;
 global using Memorabilia.Blazor;
 global using Memorabilia.Blazor.Configuration;
 global using Memorabilia.Blazor.Controls;

@@ -66,6 +66,7 @@ public static class ValidatorServiceCollectionExtensions
         services.AddSingleton<ThroughTheMailValidator>();
         services.AddSingleton<TicketValidator>();
         services.AddSingleton<TrunkValidator>();
+        services.AddSingleton<UserMessageValidator>();
         services.AddSingleton<UserValidator>();
         services.AddSingleton<WristBandValidator>();
     }

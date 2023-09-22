@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Application.Features.User;
 
-public class UserModel
+public class UserModel : Model
 {
     private readonly Entity.User _user;
 
@@ -31,4 +31,7 @@ public class UserModel
 
     public DateTime? UpdateDate 
         => _user.UpdateDate;
+
+    public string Username
+        => _user.Username;
 }

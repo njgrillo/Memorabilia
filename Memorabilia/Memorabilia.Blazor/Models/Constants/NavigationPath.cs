@@ -20,6 +20,9 @@ public static class NavigationPath
     public static string Collections
         => @"/MyStuff/Collections";
 
+    public static string ComposeMessage
+        => @"MyStuff/Messages/Compose";
+
     public static string Conference
         => @"/Conference";
 

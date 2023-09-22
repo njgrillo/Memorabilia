@@ -115,6 +115,7 @@ global using Memorabilia.Application.Features.Transaction;
 global using Memorabilia.Application.Features.User;
 global using Memorabilia.Application.Features.User.Dashboard;
 global using Memorabilia.Application.Features.User.Register;
+global using Memorabilia.Application.Features.UserMessage;
 global using Memorabilia.Application.Hangfire;
 global using Memorabilia.Application.Hangfire.Attributes;
 global using Memorabilia.Application.Validators.Admin.Management.Accomplishments;
