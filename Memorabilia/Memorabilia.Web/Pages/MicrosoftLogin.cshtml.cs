@@ -1,14 +1,14 @@
 namespace Memorabilia.Web.Pages;
 
-public class LoginModel : PageModel
-{   
+public class MicrosoftLoginModel : PageModel
+{
     public IActionResult OnGetAsync(string returnUrl = null)
     {
-        string provider = "Google";
+        string provider = "Microsoft";
 
         var authenticationProperties = new AuthenticationProperties
         {
-            RedirectUri = Url.Page("./Login",
+            RedirectUri = Url.Page("./MicrosoftLogin",
                                    pageHandler: "Callback",
                                    values: new { returnUrl })
         };
@@ -18,18 +18,18 @@ public class LoginModel : PageModel
 
     public async Task<IActionResult> OnGetCallbackAsync()
     {
-        ClaimsIdentity googleUser = User.Identities.FirstOrDefault();
+        ClaimsIdentity microsoftUser = User.Identities.FirstOrDefault();
 
-        if (googleUser.IsAuthenticated)
+        if (microsoftUser.IsAuthenticated)
         {
             var authProperties = new AuthenticationProperties
             {
                 IsPersistent = true,
-                RedirectUri = this.Request.Host.Value
+                RedirectUri = Request.Host.Value
             };
 
             await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme,
-                                          new ClaimsPrincipal(googleUser),
+                                          new ClaimsPrincipal(microsoftUser),
                                           authProperties);
         }
 

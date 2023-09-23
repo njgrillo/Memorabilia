@@ -37,6 +37,11 @@ public record AddUser(UserEditModel User)
                                    command.User.LastName,
                                    command.User.Username);
 
+            user.SetUserSettings(useDarkTheme: false,
+                                 command.User.GoogleEmailAddress,
+                                 command.User.MicrosoftEmailAddress,
+                                 command.User.XHandle);
+
             await _userRepository.Add(user);
         }
     }

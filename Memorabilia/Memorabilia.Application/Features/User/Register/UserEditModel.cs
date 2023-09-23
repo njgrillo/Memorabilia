@@ -8,7 +8,13 @@ public class UserEditModel : EditModel
 
     public string FirstName { get; set; }
 
+    public string GoogleEmailAddress { get; set; }
+
     public string LastName { get; set; }
 
+    public string MicrosoftEmailAddress { get; set; }
+
     public string Username { get; set; }
+
+    public string XHandle { get; set; }
 }

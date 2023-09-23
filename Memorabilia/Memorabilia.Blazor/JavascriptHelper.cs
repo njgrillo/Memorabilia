@@ -6,4 +6,9 @@ public static class JavascriptHelper
     {
         await jsRuntime.InvokeVoidAsync("scrollToTop");
     }
+
+    public static async Task SetWindowLocation(this IJSRuntime jsRuntime, string url)
+    {
+        await jsRuntime.InvokeVoidAsync("setWindowLocation", url);
+    }
 }

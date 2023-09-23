@@ -6,7 +6,13 @@ public partial class LoginControl
     public IApplicationStateService ApplicationStateService { get; set; }
 
     [Inject]
+    public IDialogService DialogService { get; set; }
+
+    [Inject]
     public IHttpContextAccessor HttpContextAccessor { get; set; }
+
+    [Inject]
+    public NavigationManager NavigationManager { get; set; }
 
     protected string Avatar;
 
@@ -25,5 +31,27 @@ public partial class LoginControl
                 : string.Empty;
 
         Username = ApplicationStateService.CurrentUser?.Username ?? string.Empty;
+    }
+
+    protected async Task OnLoginClick()
+    {
+        var options = new DialogOptions()
+        {
+            MaxWidth = MaxWidth.Large,
+            FullWidth = true,
+            DisableBackdropClick = true
+        };
+
+        var dialog = DialogService.Show<LoginSelectorDialog>("Select Login Provider", new DialogParameters(), options);
+        var result = await dialog.Result;
+
+        if (result.Canceled)
+            return;
+
+        var provider = (LoginProvider)result.Data;
+
+        string url = $"/{provider.Name}login";
+
+        NavigationManager.NavigateTo(url, true);
     }
 }

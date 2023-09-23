@@ -22,22 +22,7 @@ public class Startup
 
         services.AddSingleton<IImagePath>(imagePath);
 
-        var googleConfiguration = new GoogleConfiguration();
-        Configuration.GetSection("Google").Bind(googleConfiguration);
-
-        services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
-                .AddCookie();
-
-        services.AddAuthentication()
-                .AddGoogle(options =>
-                    {
-                        options.ClientId = googleConfiguration.ClientId;
-                        options.ClientSecret = googleConfiguration.ClientSecret;
-                        options.ClaimActions.MapJsonKey("urn:google:profile", "link");
-                        options.ClaimActions.MapJsonKey("urn:google:image", "picture");
-                    }
-                );
-
+        services.AddCustomAuthentication(Configuration);
         services.ConfigureHangfire(Configuration);
 
         services.AddAuthenticationCore();
@@ -72,12 +57,15 @@ public class Startup
             services.AddScoped<IDataProtectorService, DataProtectorService>();
         }
 
+        services.AddScoped<ILoginProviderRuleFactory, LoginProviderRuleFactory>();
+
         var emailSettings = new EmailSettings();
         Configuration.GetSection("EmailSettings").Bind(emailSettings);
 
         services.AddSingleton<IEmailSettings>(emailSettings);
 
         services.AddSingleton<EmailService>();
+        services.AddSingleton<LoginProviderService>();
 
         services.AddCourier(typeof(GetCommissioner).Assembly);
         

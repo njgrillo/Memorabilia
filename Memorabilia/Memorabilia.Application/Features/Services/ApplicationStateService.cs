@@ -8,6 +8,8 @@ public class ApplicationStateService : IApplicationStateService
 
     public bool IsDarkTheme { get; set; }
 
+    public Constant.LoginProvider Provider { get; set; }
+
     public ApplicationStateService(QueryRouter queryRouter)
     {
         _queryRouter = queryRouter;

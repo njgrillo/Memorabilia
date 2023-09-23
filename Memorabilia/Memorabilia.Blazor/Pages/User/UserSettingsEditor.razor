@@ -13,6 +13,29 @@
                     Label="Use Dark Theme?" />
         </Div>
     </DivRowFormGroup>
+    <DivRowFormGroup>
+        <Div Class="col-3">
+            <TextField HelperText="Used for Google Authentication" 
+                       Label="Google Email Address"
+                       MaxLength="100"
+                       SelectedText="@EditModel.GoogleEmailAddress"
+                       SelectedTextChanged="@((p) => EditModel.GoogleEmailAddress = p)" />
+        </Div>
+        <Div Class="col-3">
+            <TextField HelperText="Used for Microsoft Authentication"
+                       Label="Microsoft Email Address"
+                       MaxLength="100"
+                       SelectedText="@EditModel.MicrosoftEmailAddress"
+                       SelectedTextChanged="@((p) => EditModel.MicrosoftEmailAddress = p)" />
+        </Div>
+        <Div Class="col-3">
+            <TextField HelperText="Used for X Authentication"
+                       Label="X Handle"
+                       MaxLength="50"
+                       SelectedText="@EditModel.XHandle"
+                       SelectedTextChanged="@((p) => EditModel.XHandle = p)" />
+        </Div>
+    </DivRowFormGroup>
     <Div Style="margin-bottom:1%;margin-right:1%;text-align:right;">
         <SaveButton OnClick="OnSave"
                     Text="Save" />
