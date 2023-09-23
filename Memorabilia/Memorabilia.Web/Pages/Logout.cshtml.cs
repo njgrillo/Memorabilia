@@ -11,16 +11,9 @@ public class LogoutModel : PageModel
 
     public async Task<IActionResult> OnGetAsync()
     {
-        try
-        {
-            await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+        await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
 
-            _applicationStateService.Logout();
-        }
-        catch (Exception ex)
-        {
-            string error = ex.Message;
-        }
+        _applicationStateService.Logout();
 
         return LocalRedirect("/");
     }

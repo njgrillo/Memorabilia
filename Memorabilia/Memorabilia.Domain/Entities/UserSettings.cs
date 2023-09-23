@@ -4,18 +4,37 @@ public class UserSettings : Framework.Library.Domain.Entity.DomainEntity
 {
     public UserSettings() { }
 
-    public UserSettings(int userId, bool useDarkTheme)
+    public UserSettings(int userId, 
+                        bool useDarkTheme,
+                        string googleEmailAddress,
+                        string microsoftEmailAddress,
+                        string xHandle)
     {
+        GoogleEmailAddress = googleEmailAddress;
+        MicrosoftEmailAddress = microsoftEmailAddress;
         UseDarkTheme = useDarkTheme;
         UserId = userId;
+        XHandle = xHandle;
     }
+
+    public string GoogleEmailAddress { get; private set; }
+
+    public string MicrosoftEmailAddress { get; private set; }
 
     public bool UseDarkTheme { get; private set; }
 
     public int UserId { get; private set; }
 
-    public void Set(bool useDarkTheme)
+    public string XHandle { get; private set; }
+
+    public void Set(bool useDarkTheme,
+                    string googleEmailAddress,
+                    string microsoftEmailAddress,
+                    string xHandle)
     {
+        GoogleEmailAddress = googleEmailAddress;
+        MicrosoftEmailAddress = microsoftEmailAddress;
         UseDarkTheme = useDarkTheme;
+        XHandle = xHandle;
     }
 }

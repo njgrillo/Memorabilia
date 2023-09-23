@@ -131,6 +131,9 @@ public static class ImageFileName
     public static string Golfball 
         => "golfball.jpg";
 
+    public static string Google
+        => "google.jpg";
+
     public static string Guitar 
         => "guitar.jpg";
 
@@ -211,6 +214,12 @@ public static class ImageFileName
 
     public static string MagazineTypes 
         => "magazinetypes.jpg";
+
+    public static string Meta
+        => "meta.jpg";
+
+    public static string Microsoft
+        => "microsoft.jpg";
 
     public static string Occupations 
         => "occupations.jpg";
@@ -322,4 +331,7 @@ public static class ImageFileName
 
     public static string WritingInstruments 
         => "writinginstruments.jpg";
+
+    public static string X
+        => "x.jpg";
 }

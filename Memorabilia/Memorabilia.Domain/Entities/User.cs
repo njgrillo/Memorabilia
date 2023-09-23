@@ -55,15 +55,25 @@ public class User : Framework.Library.Domain.Entity.DomainEntity
                                                  .Select(dashboardItemsId => new UserDashboard(Id, dashboardItemsId)));
     }
 
-    public void SetUserSettings(bool useDarkTheme)
+    public void SetUserSettings(bool useDarkTheme,
+                                string googleEmailAddress,
+                                string microsoftEmailAddress,
+                                string xHandle)
     {
         if (UserSettings == null)
         { 
-            UserSettings = new UserSettings(Id, useDarkTheme);
+            UserSettings = new UserSettings(Id, 
+                                            useDarkTheme,
+                                            googleEmailAddress,
+                                            microsoftEmailAddress,
+                                            xHandle);
 
             return;
         }
 
-        UserSettings.Set(useDarkTheme);
+        UserSettings.Set(useDarkTheme,
+                         googleEmailAddress,
+                         microsoftEmailAddress,
+                         xHandle);
     }
 }

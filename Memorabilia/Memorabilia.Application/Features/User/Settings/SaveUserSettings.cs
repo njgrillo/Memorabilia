@@ -18,7 +18,10 @@ public class SaveUserSettings
         {
             Entity.User user = await _userRepository.Get(_applicationStateService.CurrentUser.Id);
 
-            user.SetUserSettings(command.UseDarkTheme);
+            user.SetUserSettings(command.UseDarkTheme,
+                                 command.GoogleEmailAddress,
+                                 command.MicrosoftEmailAddress,
+                                 command.XHandle);
 
             await _userRepository.Update(user);
         }
@@ -33,7 +36,16 @@ public class SaveUserSettings
             _editModel = editModel;
         }
 
+        public string GoogleEmailAddress
+            => _editModel.GoogleEmailAddress;
+
+        public string MicrosoftEmailAddress
+            => _editModel.MicrosoftEmailAddress;
+
         public bool UseDarkTheme
             => _editModel.UseDarkTheme;
+
+        public string XHandle
+            => _editModel.XHandle;
     }
 }

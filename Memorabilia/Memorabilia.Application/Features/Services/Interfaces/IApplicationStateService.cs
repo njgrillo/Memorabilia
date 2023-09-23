@@ -10,5 +10,7 @@ public interface IApplicationStateService
 
     void Logout();
 
+    Constant.LoginProvider Provider { get; set; }
+
     void Set(Entity.User user);
 }

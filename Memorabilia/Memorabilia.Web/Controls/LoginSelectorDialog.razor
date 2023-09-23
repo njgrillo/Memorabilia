@@ -1,0 +1,56 @@
+﻿<MudDialog Style="max-height:85vh;overflow-y:auto;">
+    <DialogContent>
+        <DivPad2>
+            <Div Class="row" Style="text-align:center">                
+                <Div Class="col-4">
+                    <MudTooltip Text="Google">
+                        <MudImage @onclick="@(_ => Select(LoginProvider.Google))"
+                                  Class="rounded-lg can-click"
+                                  Elevation="5"
+                                  Height="150"
+                                  ObjectFit="@ObjectFit.Cover"
+                                  Src="@(ImageService.GetDomainImageData(ImageFileName.Google))"
+                                  Width="150" />
+                    </MudTooltip>
+                </Div>
+                @*TODO:Can only get this working when I am a business*@
+                @*<Div Class="col-4">
+                    <MudTooltip Text="Meta">
+                        <MudImage @onclick="@(_ => Select(LoginProvider.Meta))"
+                                  Class="rounded-lg can-click"
+                                  Elevation="5"
+                                  Height="150"
+                                  ObjectFit="@ObjectFit.Cover"
+                                  Src="@(ImageService.GetDomainImageData(ImageFileName.Meta))"
+                                  Width="150" />
+                    </MudTooltip>
+                </Div>*@
+                <Div Class="col-4">
+                    <MudTooltip Text="Microsoft">
+                        <MudImage @onclick="@(_ => Select(LoginProvider.Microsoft))"
+                                  Class="rounded-lg can-click"
+                                  Elevation="5"
+                                  Height="150"
+                                  ObjectFit="@ObjectFit.Cover"
+                                  Src="@(ImageService.GetDomainImageData(ImageFileName.Microsoft))"
+                                  Width="150" />
+                    </MudTooltip>
+                </Div>
+                <Div Class="col-4">
+                    <MudTooltip Text="X">
+                        <MudImage @onclick="@(_ => Select(LoginProvider.X))"
+                                  Class="rounded-lg can-click"
+                                  Elevation="5"
+                                  Height="150"
+                                  ObjectFit="@ObjectFit.Cover"
+                                  Src="@(ImageService.GetDomainImageData(ImageFileName.X))"
+                                  Width="150" />
+                    </MudTooltip>
+                </Div>
+            </Div>
+        </DivPad2>
+    </DialogContent>
+    <DialogActions>
+        <CancelButton OnClick="Cancel" />
+    </DialogActions>
+</MudDialog>

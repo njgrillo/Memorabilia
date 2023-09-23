@@ -9,29 +9,37 @@ public partial class Default
     public AuthenticationStateProvider AuthenticationStateProvider { get; set; }
 
     [Inject]
-    public NavigationManager NavigationManager { get; set; }
+    public LoginProviderService LoginProviderService { get; set; }
 
     [Inject]
-    public QueryRouter QueryRouter { get; set; }
+    public NavigationManager NavigationManager { get; set; }
 
     protected override async Task OnInitializedAsync()
-    {
+    {    
         if (ApplicationStateService.CurrentUser != null)
             return;
 
-        AuthenticationState state = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+        AuthenticationState state 
+            = await AuthenticationStateProvider.GetAuthenticationStateAsync();
 
-        string emailAddress = state.User
-                                   .Claims
-                                   .SingleOrDefault(claim => claim.Type == "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress")?.Value 
-                                   ?? string.Empty;
+        bool isAuthenticated = state.User.Identities.FirstOrDefault()?.IsAuthenticated ?? false;
 
-        if (emailAddress.IsNullOrEmpty()) 
+        if (!isAuthenticated)
             return;
 
-        Entity.User user = await QueryRouter.Send(new GetUser(emailAddress));
+        string providerName = state.User.Identity.AuthenticationType;
 
-        if (user == null) 
+        var provider = LoginProvider.Find(providerName);
+
+        if (provider == null)
+            return;
+
+        ApplicationStateService.Provider = provider; 
+
+        Entity.User user
+            = await LoginProviderService.GetUser(state, ApplicationStateService.Provider);
+
+        if (user == null)
             return;
 
         ApplicationStateService.Set(user);
@@ -40,7 +48,10 @@ public partial class Default
     protected override void OnAfterRender(bool firstRender)
     {
         if (ApplicationStateService.CurrentUser == null)
+        {
+            NavigationManager.NavigateTo("/logout", true);
             return;
+        }
 
         NavigationManager.NavigateTo("Home");
     }

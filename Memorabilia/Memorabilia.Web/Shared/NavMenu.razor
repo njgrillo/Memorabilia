@@ -7,13 +7,13 @@
                  Typo="Typo.h6">
             Graphinallday
         </MudText>
-        <MudDivider Class="my-2" />
-        <MudNavLink Href="@NavigationPath.Home"
-                    Icon="@Icons.Material.TwoTone.Home">
-            Home
-        </MudNavLink>
+        <MudDivider Class="my-2" />       
         <AuthorizeView>
-            <Authorized>   
+            <Authorized>
+                <MudNavLink Href="@NavigationPath.Home"
+                            Icon="@Icons.Material.TwoTone.Home">
+                    Home
+                </MudNavLink>
                 <Condition Evaluation="ApplicationStateService.CurrentUser.IsAdmin()">
                     <Match>
                         <MudNavGroup Icon="@Icons.Material.TwoTone.AdminPanelSettings"
