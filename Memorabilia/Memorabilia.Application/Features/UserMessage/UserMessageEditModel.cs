@@ -4,31 +4,32 @@ public class UserMessageEditModel : EditModel
 {
 	public UserMessageEditModel() { }
 
+    public UserMessageEditModel(string subject)
+    {
+        Subject = subject;
+    }
+
 	public UserMessageEditModel(Entity.UserMessage userMessage)
 	{
-        CreatedByUserId = userMessage.CreatedByUserId;
-        CreatedDate = userMessage.CreatedDate;
         Id = userMessage.Id;
-        ReceiverUserId = userMessage.ReceiverUserId;
-        SenderUserId = userMessage.SenderUserId;
         Subject = userMessage.Subject;
+        UserMessageStatusId = userMessage.UserMessageStatusId;
 	}
 
-    public int CreatedByUserId { get; set; }
+    public UserMessageEditModel(Entity.UserMessage userMessage, Entity.User sender, Entity.User receiver)
+    {
+        Id = userMessage.Id;
+        Subject = userMessage.Subject;
+        UserMessageStatusId = userMessage.UserMessageStatusId;
 
-    public DateTime CreatedDate { get; set; }
-
-    public string Message { get; set; }
-
-    public UserModel ReceiverUser { get; set; }
-        = new();
-
-    public int ReceiverUserId { get; set; }
-
-    public UserModel SenderUser { get; set; }
-        = new();
-
-    public int SenderUserId { get; set; }
+        UserMessageReply.ReceiverUser = new UserModel(sender);
+        UserMessageReply.SenderUser = new UserModel(receiver);
+    }
 
     public string Subject { get; set; }
+
+    public UserMessageReplyEditModel UserMessageReply { get; set; }
+        = new();
+
+    public int UserMessageStatusId { get; set; }
 }

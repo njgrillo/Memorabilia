@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Blazor.Pages.UserMessage;
 
-public partial class ComposeUserMessage
+public partial class ReplyUserMessage
 {
     [Inject]
     public IApplicationStateService ApplicationStateService { get; set; }
@@ -21,16 +21,16 @@ public partial class ComposeUserMessage
     public NavigationManager NavigationManager { get; set; }
 
     [Inject]
-    public QueryRouter QueryRouter { get; set; }    
+    public QueryRouter QueryRouter { get; set; }
 
     [Inject]
     public ISnackbar Snackbar { get; set; }
 
     [Inject]
-    public UserMessageValidator Validator { get; set; }
+    public UserMessageReplyValidator Validator { get; set; }
 
     [Parameter]
-    public string EncryptUserMessageId { get; set; }
+    public string EncryptUserMessageReplyId { get; set; }
 
     protected bool CanAttach { get; set; }
         = true;
@@ -38,7 +38,9 @@ public partial class ComposeUserMessage
     protected UserMessageEditModel EditModel { get; set; }
         = new();
 
-    protected int UserMessageId { get; set; }
+    protected int UserMessageReplyId { get; set; }
+
+    protected UserMessageReplyModel UserMessageReplyModel { get; set; }
 
     protected Alert[] ValidationResultAlerts
         => EditModel.ValidationResult.Errors?.Any() ?? false
@@ -47,15 +49,18 @@ public partial class ComposeUserMessage
 
     protected override async Task OnInitializedAsync()
     {
-        if (EncryptUserMessageId.IsNullOrEmpty())
-            return;
+        UserMessageReplyId = DataProtectorService.DecryptId(EncryptUserMessageReplyId);
 
-        UserMessageId = DataProtectorService.DecryptId(EncryptUserMessageId);
+        Entity.UserMessageReply userMessageReply
+            = await QueryRouter.Send(new GetUserMessageReply(UserMessageReplyId));
 
-        Entity.UserMessage userMessage 
-            = await QueryRouter.Send(new GetUserMessage(UserMessageId));
+        UserMessageReplyModel
+            = new UserMessageReplyModel(userMessageReply);
 
-        EditModel = new(userMessage);
+        Entity.UserMessage userMessage
+            = await QueryRouter.Send(new GetUserMessage(userMessageReply.UserMessageId));        
+
+        EditModel = new(userMessage, ApplicationStateService.CurrentUser, UserMessageReplyModel.SenderUser);
 
         CanAttach = EditModel.UserMessageReply.Images.Count < 3;
     }
@@ -88,7 +93,7 @@ public partial class ComposeUserMessage
 
         foreach (ImageEditModel image in files)
         {
-            images.Add(new UserMessageReplyImageEditModel(image.FileName)); 
+            images.Add(new UserMessageReplyImageEditModel(image.FileName));
         }
 
         EditModel.UserMessageReply.Images = images;
@@ -103,7 +108,7 @@ public partial class ComposeUserMessage
 
     protected async Task Send()
     {
-        var command = new AddUserMessage.Command(EditModel);
+        var command = new AddUserMessageReply.Command(EditModel.UserMessageReply);
 
         EditModel.ValidationResult = Validator.Validate(command);
 
@@ -115,5 +120,5 @@ public partial class ComposeUserMessage
         Snackbar.Add("Message sent successfully!", Severity.Success);
 
         NavigationManager.NavigateTo(NavigationPath.Messages);
-    }
+    }    
 }

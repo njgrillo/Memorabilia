@@ -9,28 +9,43 @@ public class UserMessageModel
 	public UserMessageModel(Entity.UserMessage userMessage)
 	{
         _userMessage = userMessage;
+
+        Replies = _userMessage.Replies
+                              .Select(reply => new UserMessageReplyModel(reply))
+                              .ToArray();
     }
 
-	public int CreatedByUserId
-		=> _userMessage.CreatedByUserId;
-
 	public DateTime CreatedDate
-		=> _userMessage.CreatedDate;
+		=> _userMessage.Replies
+                       .FirstOrDefault()?
+                       .CreatedDate ?? DateTime.UtcNow;
+
+    public bool DisplayReplies { get; set; }
 
 	public int Id
 		=> _userMessage.Id;
 
-	public string MessagePartnerUsername
-		=> CreatedByUserId == SenderUserId
-			? _userMessage.SenderUser.Username
-			: _userMessage.ReceiverUser.Username;
+    public string ReceiverUsername
+        => _userMessage.Replies
+                       .FirstOrDefault()?
+                       .ReceiverUser?
+                       .Username;
 
-	public int ReceiverUserId
-		=> _userMessage.ReceiverUserId;
+    public UserMessageReplyModel[] Replies { get; set; }
+        = Array.Empty<UserMessageReplyModel>();
 
-	public int SenderUserId
-		=> _userMessage.SenderUserId;
+    public string SenderUsername
+        => _userMessage.Replies
+                       .FirstOrDefault()?
+                       .SenderUser?
+					   .Username;
 
-	public string Subject
+    public string Subject
 		=> _userMessage.Subject;
+
+    public string ToggleIcon { get; set; }
+        = MudBlazor.Icons.Material.Filled.ExpandMore;
+
+    public int UserMessageStatusId
+        => _userMessage.UserMessageStatusId;
 }

@@ -31,7 +31,7 @@ public class AddUserMessageReply
 
             foreach (UserMessageReplyImageEditModel image in command.Images)
             {
-                userMessageReply.AddImage(image.ImageData);
+                userMessageReply.AddImage(image.ImageFileName);
             }
 
             await _userMessageRepository.Update(userMessage);

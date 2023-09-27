@@ -1,28 +1,60 @@
 ﻿<DivPad2>
-    <LeftRightSection LeftStyle="width:40%;"
-                      RightStyle="width:10%;">
-        <Left>
-            <MudStack Row="true">
-                <MudTextField @bind-Value="_searchText"
-                              Adornment="Adornment.Start"
-                              AdornmentIcon="@Icons.Material.Filled.Search"
-                              Class="mt-0"
-                              IconSize="MudBlazor.Size.Medium"
-                              Placeholder="Search" />
-                <CustomButton ButtonType="MudBlazor.ButtonType.Button"
-                              OnClick="Search"
-                              Size="MudBlazor.Size.Small"
-                              Text="Search" />
-            </MudStack>
-        </Left>
-        <Right>
-            <CustomButton ButtonType="MudBlazor.ButtonType.Button"
-                          OnClick="Compose"
-                          Size="MudBlazor.Size.Small"
-                          Text="Compose" />
-        </Right>
-    </LeftRightSection>
-    <Div Style="margin-top:1%">
-        <UserMessageGrid SearchText="@SearchText" />
-    </Div>    
+    <TabControl>
+        <MudTabPanel Text="Inbox">
+            <LeftRightSection LeftStyle="width:40%;"
+                              RightStyle="width:10%;">
+                <Left>
+                    <MudStack Row="true">
+                        <MudTextField @bind-Value="_inboxSearchText"
+                                      Adornment="Adornment.Start"
+                                      AdornmentIcon="@Icons.Material.Filled.Search"
+                                      Class="mt-0"
+                                      IconSize="MudBlazor.Size.Medium"
+                                      Placeholder="Search" />
+                        <CustomButton ButtonType="MudBlazor.ButtonType.Button"
+                                      OnClick="SearchInbox"
+                                      Size="MudBlazor.Size.Small"
+                                      Text="Search" />
+                    </MudStack>
+                </Left>
+                <Right>
+                    <CustomButton ButtonType="MudBlazor.ButtonType.Button"
+                                  OnClick="Compose"
+                                  Size="MudBlazor.Size.Small"
+                                  Text="Compose" />
+                </Right>
+            </LeftRightSection>
+            <Div Style="margin-top:1%">
+                <UserMessageInboxGrid SearchText="@InboxSearchText" />
+            </Div>
+        </MudTabPanel>
+        <MudTabPanel Text="Sent">
+            <LeftRightSection LeftStyle="width:40%;"
+                              RightStyle="width:10%;">
+                <Left>
+                    <MudStack Row="true">
+                        <MudTextField @bind-Value="_sentSearchText"
+                                      Adornment="Adornment.Start"
+                                      AdornmentIcon="@Icons.Material.Filled.Search"
+                                      Class="mt-0"
+                                      IconSize="MudBlazor.Size.Medium"
+                                      Placeholder="Search" />
+                        <CustomButton ButtonType="MudBlazor.ButtonType.Button"
+                                      OnClick="SearchSent"
+                                      Size="MudBlazor.Size.Small"
+                                      Text="Search" />
+                    </MudStack>
+                </Left>
+                <Right>
+                    <CustomButton ButtonType="MudBlazor.ButtonType.Button"
+                                  OnClick="Compose"
+                                  Size="MudBlazor.Size.Small"
+                                  Text="Compose" />
+                </Right>
+            </LeftRightSection>
+            <Div Style="margin-top:1%">
+                <UserMessageSentGrid SearchText="@SentSearchText" />
+            </Div>
+        </MudTabPanel>
+    </TabControl>       
 </DivPad2>

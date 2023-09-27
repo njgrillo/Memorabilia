@@ -16,18 +16,23 @@ public class AddUserMessage
 
         protected override async Task Handle(Command command)
         {
-            Entity.UserMessage userMessage = new(_applicationStateService.CurrentUser.Id,
-                                                 command.CreatedDate,
-                                                 command.ReceiverUserId,
-                                                 command.SenderUserId,
-                                                 command.Subject);
+            Entity.UserMessage userMessage = new(command.Subject,
+                                                 Constant.UserMessageStatus.New.Id);
 
             userMessage.AddReply(_applicationStateService.CurrentUser.Id, 
                                  command.CreatedDate, 
                                  command.Message,
                                  command.ReceiverUserId,
-                                 command.SenderUserId,
+                                 _applicationStateService.CurrentUser.Id,
                                  Constant.UserMessageStatus.New.Id);
+
+            Entity.UserMessageReply userMessageReply
+                = userMessage.Replies.Last();
+
+            foreach (string imageFileName in command.ImageFileNames)
+            {
+                userMessageReply.AddImage(imageFileName);
+            }
 
             await _userMessageRepository.Add(userMessage);
 
@@ -51,14 +56,17 @@ public class AddUserMessage
 
         public int Id { get; set; }
 
+        public string[] ImageFileNames
+            => _userMessageEditModel.UserMessageReply
+                                    .Images
+                                    .Select(image => image.ImageFileName)
+                                    .ToArray();
+
         public string Message
-            => _userMessageEditModel.Message;
+            => _userMessageEditModel.UserMessageReply.Message;
 
         public int ReceiverUserId
-            => _userMessageEditModel.ReceiverUserId;
-
-        public int SenderUserId
-            => _userMessageEditModel.SenderUserId;
+            => _userMessageEditModel.UserMessageReply.ReceiverUser.Id;
 
         public string Subject
             => _userMessageEditModel.Subject;

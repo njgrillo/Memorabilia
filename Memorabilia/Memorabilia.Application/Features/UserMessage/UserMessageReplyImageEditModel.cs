@@ -4,14 +4,28 @@ public class UserMessageReplyImageEditModel : EditModel
 {
 	public UserMessageReplyImageEditModel() { }
 
+    public UserMessageReplyImageEditModel(string imageFileName)
+    {
+        ImageFileName = imageFileName;
+    }
+
+    public UserMessageReplyImageEditModel(int id, 
+										  string imageFileName,
+										  int userMessageReplyId)
+	{
+		Id = id;
+		ImageFileName = imageFileName;
+		UserMessageReplyId = userMessageReplyId;
+	}
+
 	public UserMessageReplyImageEditModel(Entity.UserMessageReplyImage userMessageReplyImage)
 	{
 		Id = userMessageReplyImage.Id;
-		ImageData = userMessageReplyImage.ImageData;
+        ImageFileName = userMessageReplyImage.FileName;
         UserMessageReplyId = userMessageReplyImage.UserMessageReplyId;
     }
 
-	public byte[] ImageData { get; set; }
+	public string ImageFileName { get; set; }
 
 	public int UserMessageReplyId { get; set; }
 }

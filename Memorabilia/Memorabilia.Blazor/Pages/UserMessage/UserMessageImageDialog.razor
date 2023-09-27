@@ -1,0 +1,55 @@
+﻿<MudDialog Style="max-height:85vh;">
+    <DialogContent>
+        <Div Style="text-align:right;">
+            <MudIconButton Icon="@Icons.Material.Filled.Close"
+                           OnClick="Cancel" />
+        </Div>
+        <DivPad2>
+            <DivRowCol12Center>
+                <InputFile id="fileInput"
+                           @bind-Value="@Images"
+                           accept="image/*" hidden multiple
+                           OnChange="@LoadFiles" />
+                <MudFab Color="MudBlazor.Color.Secondary"
+                        HtmlTag="label"
+                        Icon="@Icons.Material.Filled.Image"
+                        Label="Load pictures"
+                        for="fileInput" />
+            </DivRowCol12Center>
+            <Div Style="margin-top:1%;">
+                <Condition Evaluation="_files != null">
+                    <Match>
+                        <MudText Typo="@Typo.h6">@_files?.Count() File@(_files?.Count() == 1 ? "" : "s"):</MudText>
+                        <MudList>
+                            <Iterations Context="file"
+                                        Items="_files">
+                                <MudListItem @key="@file"
+                                             Icon="@Icons.Material.Filled.AttachFile">
+                                    @file.Name <code>@file.Size bytes</code>
+                                </MudListItem>
+                            </Iterations>
+                        </MudList>
+                    </Match>
+                </Condition>
+            </Div>
+            <Div Style="margin-top:1%;">
+                <MudStack Row="true">
+                    <Iterations Context="image"
+                                Items="Images">
+                        <Div Class="col-3">
+                            <ImageEditor CanRemove="true"
+                                         HasPrimary="false"
+                                         ImageFileName="@image.FileName"
+                                         ImageRootType="ImageRootType.User"
+                                         OnRemove="Remove" />
+                        </Div>
+                    </Iterations>
+                </MudStack>
+            </Div>
+        </DivPad2>
+    </DialogContent>
+    <DialogActions>
+        <CancelButton OnClick="Cancel" />
+        <AddButton OnClick="Add" />
+    </DialogActions>
+</MudDialog>

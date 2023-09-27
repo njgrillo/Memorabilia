@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Blazor.Pages.UserMessage;
 
-public partial class UserMessageGrid
+public partial class UserMessageSentGrid
 {
     [Inject]
     public IDataProtectorService DataProtectorService { get; set; }
@@ -31,9 +31,7 @@ public partial class UserMessageGrid
         if (!_isInitialLoad)
             return;
 
-        await _table.ReloadServerData();
-
-        _isInitialLoad = false;
+        await _table.ReloadServerData();        
     }
 
     protected override async Task OnParametersSetAsync()
@@ -56,8 +54,10 @@ public partial class UserMessageGrid
             : new PageInfo(_resetPaging ? 1 : state.Page + 1, state.PageSize);
 
         Model = _isInitialLoad
-            ? await QueryRouter.Send(new GetUserMessages(pageInfo))
-            : await QueryRouter.Send(new SearchUserMessages(pageInfo, SearchText));
+            ? await QueryRouter.Send(new GetUserMessagesSent(pageInfo))
+            : await QueryRouter.Send(new SearchUserMessagesSent(pageInfo, SearchText));
+
+        _isInitialLoad = false;
 
         return new TableData<UserMessageModel>()
         {

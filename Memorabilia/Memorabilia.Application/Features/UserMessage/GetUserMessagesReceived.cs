@@ -1,9 +1,9 @@
 ﻿namespace Memorabilia.Application.Features.UserMessage;
 
-public record GetUserMessages(PageInfo PageInfo, int? UserMessageStatusId = null)
+public record GetUserMessagesReceived(PageInfo PageInfo, int? UserMessageStatusId = null)
     : IQuery<UserMessagesModel>
 {
-    public class Handler : QueryHandler<GetUserMessages, UserMessagesModel>
+    public class Handler : QueryHandler<GetUserMessagesReceived, UserMessagesModel>
     {
         private readonly IApplicationStateService _applicationStateService;
         private readonly IUserMessageRepository _userMessageRepository;
@@ -15,12 +15,12 @@ public record GetUserMessages(PageInfo PageInfo, int? UserMessageStatusId = null
             _userMessageRepository = userMessageRepository;
         }
 
-        protected override async Task<UserMessagesModel> Handle(GetUserMessages query)
+        protected override async Task<UserMessagesModel> Handle(GetUserMessagesReceived query)
         {
             PagedResult<Entity.UserMessage> result
-                = await _userMessageRepository.GetAll(query.PageInfo, 
-                                                      _applicationStateService.CurrentUser.Id, 
-                                                      query.UserMessageStatusId);
+                = await _userMessageRepository.GetAllReceived(query.PageInfo,
+                                                              _applicationStateService.CurrentUser.Id,
+                                                              query.UserMessageStatusId);
 
             return new UserMessagesModel(result.Data, result.PageInfo);
         }

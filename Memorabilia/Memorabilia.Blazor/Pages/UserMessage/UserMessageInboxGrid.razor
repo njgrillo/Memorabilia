@@ -1,0 +1,56 @@
+﻿<MudTable @ref="_table"
+          Bordered="false"
+          Dense="false"
+          Hover="true"
+          Items="@Model.Messages"
+          ServerData="@(new Func<TableState, Task<TableData<UserMessageModel>>>(OnRead))"
+          Striped="true">
+    <HeaderContent>
+        <MudTh>
+            <CustomButton ButtonType="ButtonType.Button"
+                          OnClick="OnSelectAll"
+                          Text="@SelectAllButtonText" />
+        </MudTh>
+        <MudTh></MudTh>
+        <MudTh>From</MudTh>
+        <MudTh>Subject</MudTh>
+        <MudTh>Received Date</MudTh>
+        <MudTh></MudTh>
+    </HeaderContent>
+    <RowTemplate>
+        <MudTd DataLabel="">
+            <BooleanCheckBox Checked="@(SelectedUserMessages.Contains(context))"
+                             CheckedChanged="(p) => OnUserMessageSelected(context)" />
+        </MudTd>
+        <MudTd>
+            <MudIconButton @onclick="@(_ => ToggleChildContent(context.Id))"
+                           Icon="@context.ToggleIcon"></MudIconButton>
+        </MudTd>
+        <MudTd DataLabel="From">@context.SenderUsername</MudTd>
+        <MudTd DataLabel="Subject">@context.Subject</MudTd>
+        <MudTd DataLabel="ReceivedDate">@context.CreatedDate.ToString("MM-dd-yyyy hh:mm:ss tt")</MudTd>
+        <MudTd DataLabel="">
+            <MudTooltip Text="Delete">
+                <MudFab Color="MudBlazor.Color.Secondary"
+                        Icon="@Icons.Material.Outlined.DeleteOutline"
+                        OnClick="@(_ => ShowDeleteConfirm(context.Id))"
+                        Size="@MudBlazor.Size.Small" />
+            </MudTooltip>
+        </MudTd>
+    </RowTemplate>
+    <ChildRowContent>
+        <Condition Evaluation="@context.DisplayReplies">
+            <Match>
+                <DivPad5>
+                    <UserMessageRepliesControl UserMessage="context" />
+                    @*<td colspan="17">
+                        <UserMessageReplyGrid UserMessage="context" />
+                    </td> *@                   
+                </DivPad5>
+            </Match>
+        </Condition>        
+    </ChildRowContent>
+    <PagerContent>
+        <MudTablePager />
+    </PagerContent>
+</MudTable>

@@ -1,4 +1,6 @@
-﻿namespace Memorabilia.Web.Services.Login.Rules;
+﻿using System.Runtime.InteropServices;
+
+namespace Memorabilia.Web.Services.Login.Rules;
 
 public class MetaLoginProviderRule : ILoginProviderRule
 {
@@ -20,6 +22,8 @@ public class MetaLoginProviderRule : ILoginProviderRule
                    .SingleOrDefault(claim => claim.Type == "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name")
                    ?.Value
                 ?? string.Empty;
+
+        await Task.CompletedTask;
 
         if (metaHandle.IsNullOrEmpty())
             return null;

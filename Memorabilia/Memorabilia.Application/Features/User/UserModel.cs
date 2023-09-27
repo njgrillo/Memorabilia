@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Application.Features.User;
 
-public class UserModel : Model
+public class UserModel : Model, IWithName
 {
     private readonly Entity.User _user;
 
@@ -28,6 +28,9 @@ public class UserModel : Model
 
     public string LastName 
         => _user.LastName;
+
+    public override string Name
+        => _user?.Username;
 
     public DateTime? UpdateDate 
         => _user.UpdateDate;

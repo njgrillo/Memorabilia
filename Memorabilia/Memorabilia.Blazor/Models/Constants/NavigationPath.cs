@@ -125,6 +125,9 @@ public static class NavigationPath
     public static string ProposedTrades
         => @"/MyStuff/ProposedTrades";
 
+    public static string ReplyMessage
+        => @"MyStuff/Messages/Reply";
+
     public static string Sample
         => @"/Admin/Sample";
 

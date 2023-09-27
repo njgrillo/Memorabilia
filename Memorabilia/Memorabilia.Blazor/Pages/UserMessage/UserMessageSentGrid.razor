@@ -7,16 +7,16 @@
           Striped="true">
     <HeaderContent>
         <MudTh></MudTh>
-        <MudTh>From</MudTh>
+        <MudTh>To</MudTh>
         <MudTh>Subject</MudTh>
-        <MudTh>Created Date</MudTh>
+        <MudTh>Sent Date</MudTh>
         <MudTh></MudTh>        
     </HeaderContent>
     <RowTemplate>
         <MudTh></MudTh>
-        <MudTd DataLabel="From">@context.MessagePartnerUsername</MudTd>
+        <MudTd DataLabel="To">@context.ReceiverUsername</MudTd>
         <MudTd DataLabel="Subject">@context.Subject</MudTd>
-        <MudTd DataLabel="CreatedDate">@context.CreatedDate.ToString("MM-dd-yyyy")</MudTd>
+        <MudTd DataLabel="SentDate">@context.CreatedDate.ToString("MM-dd-yyyy hh:mm:ss tt")</MudTd>
         <MudTd DataLabel="">
             <MudTooltip Text="View">
                 <MudFab Color="MudBlazor.Color.Primary"

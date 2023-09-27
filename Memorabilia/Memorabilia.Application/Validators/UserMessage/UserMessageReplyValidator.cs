@@ -1,8 +1,8 @@
 ﻿namespace Memorabilia.Application.Validators.UserMessage;
 
-public class UserMessageValidator : AbstractValidator<AddUserMessage.Command>
+public class UserMessageReplyValidator : AbstractValidator<AddUserMessageReply.Command>
 {
-	public UserMessageValidator()
+	public UserMessageReplyValidator()
 	{
         RuleFor(x => x.Message)
             .MaximumLength(8000)
@@ -20,15 +20,9 @@ public class UserMessageValidator : AbstractValidator<AddUserMessage.Command>
             .WithName("ReceiverUser")
             .WithMessage("Receiver User is required.");
 
-        RuleFor(x => x.Subject)
-            .MaximumLength(300)
-            .WithName("Subject")
-            .WithMessage("Subject must be 300 characters or less.");
-
-        RuleFor(x => x.Subject)
-            .NotEmpty()
-            .NotNull()
-            .WithName("Subject")
-            .WithMessage("Subject is required.");
+        RuleFor(x => x.SenderUserId)
+            .GreaterThan(0)
+            .WithName("SenderUser")
+            .WithMessage("Sender User is required.");
     }
 }

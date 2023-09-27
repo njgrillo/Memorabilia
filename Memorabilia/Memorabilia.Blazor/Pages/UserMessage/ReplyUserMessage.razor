@@ -6,13 +6,15 @@
     </Condition>
     <DivRowFormGroup>
         <Div Class="col-6">
-            <UsernameAutoComplete SelectedValue="EditModel.UserMessageReply.ReceiverUser"
+            <UsernameAutoComplete Disabled="true" 
+                                  SelectedValue="EditModel.UserMessageReply.ReceiverUser"
                                   SelectionChanged="(p) => EditModel.UserMessageReply.ReceiverUser = p" />
         </Div>
     </DivRowFormGroup>
     <DivRowFormGroup>
         <Div Class="col-12">
-            <TextField Label="Subject"
+            <TextField Disabled="true" 
+                       Label="Subject"
                        SelectedText="@EditModel.Subject"
                        SelectedTextChanged="@((p) => EditModel.Subject = p)" />
         </Div>
@@ -44,6 +46,29 @@
         </Div>
     </DivRowFormGroup>
     <br />
+    <Condition Evaluation="@(UserMessageReplyModel != null)">
+        <Match>
+            <MudExpansionPanel IsExpanded="false"
+                               Text="Reply to Message">
+                <DivRowFormGroup>
+                    <Div Class="col-12">
+                        <MudStack Row="true">
+                            <TextField Disabled="true"
+                                       Label="Message"
+                                       Lines="10"
+                                       SelectedText="@UserMessageReplyModel.Message" />
+                            <Condition Evaluation="@(UserMessageReplyModel.Images.Any())">
+                                <Match>
+                                    <UserMessageImages Images="UserMessageReplyModel.Images.Select(image => new UserMessageReplyImageEditModel(image.ImageFileName)).ToList()" />
+                                </Match>
+                            </Condition>
+                        </MudStack>
+                    </Div>
+                </DivRowFormGroup>
+                <br />
+            </MudExpansionPanel>
+        </Match>
+    </Condition>    
     <Div Style="margin-right:1%;margin-bottom:1%;text-align:right;">
         <SaveButton OnClick="Send"
                     Text="Send" />

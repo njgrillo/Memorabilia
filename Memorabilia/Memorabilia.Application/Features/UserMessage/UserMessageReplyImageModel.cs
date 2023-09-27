@@ -14,8 +14,8 @@ public class UserMessageReplyImageModel
     public int Id
         => _userMessageReplyImage.Id;
 
-    public byte[] ImageData
-        => _userMessageReplyImage.ImageData;
+    public string ImageFileName
+        => _userMessageReplyImage.FileName;
 
     public int UserMessageReplyId
         => _userMessageReplyImage.UserMessageReplyId;

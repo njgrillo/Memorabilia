@@ -6,68 +6,154 @@ public class UserMessageRepository
     public UserMessageRepository(DomainContext context, IMemoryCache memoryCache)
         : base(context, memoryCache) { }
 
-    public async Task<PagedResult<Entity.UserMessage>> GetAll(PageInfo pageInfo, int userId, int? userMessageStatusId = null)
+    public async Task<PagedResult<Entity.UserMessage>> GetAllReceived(PageInfo pageInfo, int userId, int? userMessageStatusId = null)
     {
         var query =
             from userMessage in Context.UserMessage
             join userMessageReply in Context.UserMessageReply on userMessage.Id equals userMessageReply.UserMessageId
-            join user in Context.User on userMessage.CreatedByUserId equals user.Id
-            where userMessage.CreatedByUserId == userId
+            where userMessageReply.ReceiverUserId == userId
                && (userMessageStatusId == null || userMessageReply.UserMessageStatusId == userMessageStatusId)
-            orderby userMessage.CreatedDate descending
+            orderby userMessageReply.CreatedDate descending
             group new { }
             by new
             {
                 userMessage.Id,
                 userMessage.Subject,
-                userMessage.SenderUserId,
-                userMessage.ReceiverUserId,
-                userMessage.CreatedDate,
-                userMessage.CreatedByUserId,
+                userMessage.UserMessageStatusId
             } into groupedList
             select new Entity.UserMessage
             (
-                groupedList.Key.CreatedByUserId,
-                groupedList.Key.CreatedDate,
                 groupedList.Key.Id,
-                groupedList.Key.ReceiverUserId,
-                groupedList.Key.SenderUserId,
-                groupedList.Key.Subject
+                groupedList.Key.Subject,
+                groupedList.Key.UserMessageStatusId
             );
 
-        return await query.ToPagedResult(pageInfo);
+        PagedResult<Entity.UserMessage> result
+            = await query.ToPagedResult(pageInfo);
+
+        int[] userMessageIds
+            = result.Data
+                    .Select(userMessage => userMessage.Id)
+                    .OrderByDescending(id => id)
+                    .ToArray();
+
+        return new PagedResult<Entity.UserMessage>
+        {
+            Data = Items.Where(userMessage => userMessageIds.Contains(userMessage.Id)).ToArray(),
+            PageInfo = result.PageInfo
+        };
     }
 
-    public async Task<PagedResult<Entity.UserMessage>> Search(PageInfo pageInfo, string searchText, int userId)
+    public async Task<PagedResult<Entity.UserMessage>> GetAllSent(PageInfo pageInfo, int userId, int? userMessageStatusId = null)
     {
         var query =
             from userMessage in Context.UserMessage
             join userMessageReply in Context.UserMessageReply on userMessage.Id equals userMessageReply.UserMessageId
-            join user in Context.User on userMessage.CreatedByUserId equals user.Id
-            where userMessage.CreatedByUserId == userId
-               && (userMessage.Subject.Contains(searchText)
-                   || userMessageReply.Message.Contains(searchText))
-            orderby userMessage.CreatedDate descending
+            where userMessageReply.CreatedByUserId == userId
+               && (userMessageStatusId == null || userMessageReply.UserMessageStatusId == userMessageStatusId)
+            orderby userMessageReply.CreatedDate descending
             group new { }
             by new
             {
                 userMessage.Id,
                 userMessage.Subject,
-                userMessage.SenderUserId,
-                userMessage.ReceiverUserId,
-                userMessage.CreatedDate,
-                userMessage.CreatedByUserId,
+                userMessage.UserMessageStatusId
             } into groupedList
             select new Entity.UserMessage
             (
-                groupedList.Key.CreatedByUserId,
-                groupedList.Key.CreatedDate,
                 groupedList.Key.Id,
-                groupedList.Key.ReceiverUserId,
-                groupedList.Key.SenderUserId,
-                groupedList.Key.Subject
+                groupedList.Key.Subject,
+                groupedList.Key.UserMessageStatusId
             );
 
-        return await query.ToPagedResult(pageInfo);
+        PagedResult<Entity.UserMessage> result 
+            = await query.ToPagedResult(pageInfo);
+
+        int[] userMessageIds 
+            = result.Data
+                    .Select(userMessage => userMessage.Id)
+                    .OrderByDescending(id => id)
+                    .ToArray();
+
+        return new PagedResult<Entity.UserMessage> { Data = Items.Where(userMessage => userMessageIds.Contains(userMessage.Id)).ToArray(),
+                                                     PageInfo = result.PageInfo };
+    }
+
+    public async Task<PagedResult<Entity.UserMessage>> SearchReceived(PageInfo pageInfo, string searchText, int userId)
+    {
+        var query =
+            from userMessage in Context.UserMessage
+            join userMessageReply in Context.UserMessageReply on userMessage.Id equals userMessageReply.UserMessageId
+            where userMessageReply.ReceiverUserId == userId
+               && (userMessage.Subject.Contains(searchText)
+                   || userMessageReply.Message.Contains(searchText))
+            orderby userMessageReply.CreatedDate descending
+            group new { }
+            by new
+            {
+                userMessage.Id,
+                userMessage.Subject,
+                userMessage.UserMessageStatusId
+            } into groupedList
+            select new Entity.UserMessage
+            (
+                groupedList.Key.Id,
+                groupedList.Key.Subject,
+                groupedList.Key.UserMessageStatusId
+            );
+
+        PagedResult<Entity.UserMessage> result
+            = await query.ToPagedResult(pageInfo);
+
+        int[] userMessageIds
+            = result.Data
+                    .Select(userMessage => userMessage.Id)
+                    .OrderByDescending(id => id)
+                    .ToArray();
+
+        return new PagedResult<Entity.UserMessage>
+        {
+            Data = Items.Where(userMessage => userMessageIds.Contains(userMessage.Id)).ToArray(),
+            PageInfo = result.PageInfo
+        };
+    }
+
+    public async Task<PagedResult<Entity.UserMessage>> SearchSent(PageInfo pageInfo, string searchText, int userId)
+    {
+        var query =
+            from userMessage in Context.UserMessage
+            join userMessageReply in Context.UserMessageReply on userMessage.Id equals userMessageReply.UserMessageId
+            where userMessageReply.CreatedByUserId == userId
+               && (userMessage.Subject.Contains(searchText)
+                   || userMessageReply.Message.Contains(searchText))
+            orderby userMessageReply.CreatedDate descending
+            group new { }
+            by new
+            {
+                userMessage.Id,
+                userMessage.Subject,
+                userMessage.UserMessageStatusId
+            } into groupedList
+            select new Entity.UserMessage
+            (
+                groupedList.Key.Id,
+                groupedList.Key.Subject,
+                groupedList.Key.UserMessageStatusId
+            );
+
+        PagedResult<Entity.UserMessage> result
+            = await query.ToPagedResult(pageInfo);
+
+        int[] userMessageIds
+            = result.Data
+                    .Select(userMessage => userMessage.Id)
+                    .OrderByDescending(id => id)
+                    .ToArray();
+
+        return new PagedResult<Entity.UserMessage>
+        {
+            Data = Items.Where(userMessage => userMessageIds.Contains(userMessage.Id)).ToArray(),
+            PageInfo = result.PageInfo
+        };
     }
 }

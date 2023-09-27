@@ -4,52 +4,28 @@ public class UserMessage : Framework.Library.Domain.Entity.DomainEntity
 {
     public UserMessage() { }
 
-    public UserMessage(int createdByUserId,
-                       DateTime createdDate,
-                       int id,
-                       int receiverUserId,
-                       int senderUserId,
-                       string subject)
+    public UserMessage(int id,
+                       string subject,
+                       int userMessageStatusId)
     {
-        CreatedByUserId = createdByUserId;
-        CreatedDate = createdDate;
         Id = id;
-        ReceiverUserId = receiverUserId;
-        SenderUserId = senderUserId;
         Subject = subject;
+        UserMessageStatusId = userMessageStatusId;
     }
 
-    public UserMessage(int createdByUserId, 
-                       DateTime createdDate,
-                       int receiverUserId,
-                       int senderUserId,
-                       string subject)
+    public UserMessage(string subject,
+                       int userMessageStatusId)
     {
-        CreatedByUserId = createdByUserId;
-        CreatedDate = createdDate;
-        ReceiverUserId = receiverUserId;
-        SenderUserId = senderUserId;
         Subject = subject;
+        UserMessageStatusId = userMessageStatusId;
     }
-
-    public virtual User CreatedByUser { get; private set; }
-
-    public int CreatedByUserId { get; private set; }
-
-    public DateTime CreatedDate { get; private set; }    
-
-    public virtual User ReceiverUser { get; private set; }
-
-    public int ReceiverUserId { get; private set; }
 
     public virtual List<UserMessageReply> Replies { get; private set; }
         = new();
 
-    public virtual User SenderUser { get; private set; }
-
-    public int SenderUserId { get; private set; }
-
     public string Subject { get; private set; } 
+
+    public int UserMessageStatusId { get; private set; }
 
     public void AddReply(int createdByUserId,
                          DateTime createdDate,
@@ -65,5 +41,10 @@ public class UserMessage : Framework.Library.Domain.Entity.DomainEntity
                                          senderUserId,
                                          Id,
                                          userMessageStatusId));
+    }
+
+    public void SetStatus(int userMessageStatusId)
+    {
+        UserMessageStatusId = userMessageStatusId;  
     }
 }

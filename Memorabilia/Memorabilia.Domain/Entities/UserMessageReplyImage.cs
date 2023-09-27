@@ -4,14 +4,14 @@ public class UserMessageReplyImage : Framework.Library.Domain.Entity.DomainEntit
 {
     public UserMessageReplyImage() { }
 
-    public UserMessageReplyImage(byte[] imageData,
+    public UserMessageReplyImage(string imageFileName,
                                  int userMessageReplyId)
     {
-        ImageData = imageData;
+        FileName = imageFileName;
         UserMessageReplyId = userMessageReplyId;
     }
 
-    public byte[] ImageData { get; private set; }
+    public string FileName { get; private set; }
 
     public virtual UserMessageReply UserMessageReply { get; private set; }
 

@@ -1,0 +1,32 @@
+﻿<DivPad2>
+    <Condition Evaluation="true">
+        <Match>
+            <LeftRightSection LeftStyle="width:90%;"
+                              RightStyle="width:10%;">
+                <Left>
+                    <Div Class="row">
+                        <Div Class="col-6">
+                            <b>From: @(UserMessageReply.SenderUserName)</b>
+                        </Div>
+                    </Div>
+                </Left>
+                <Right>
+                    <MudTooltip Text="Reply">
+                        <MudFab Color="MudBlazor.Color.Secondary"
+                                Icon="@Icons.Material.Outlined.Reply"
+                                OnClick="@(_ => Reply(UserMessageReply))"
+                                Size="@MudBlazor.Size.Small" />
+                    </MudTooltip>
+                </Right>
+            </LeftRightSection>
+        </Match>
+    </Condition>    
+    <Div Class="row">
+        @UserMessageReply.Message
+    </Div>
+    <Condition Evaluation="@(UserMessageReply.Images.Any())">
+        <Match>
+
+        </Match>
+    </Condition>
+</DivPad2>

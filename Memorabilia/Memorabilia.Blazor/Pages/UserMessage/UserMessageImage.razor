@@ -1,0 +1,17 @@
+﻿<Div Style="margin-top:1%;margin-left:1%;margin-right:1%;">
+    <MudStack Row="true">
+        <MudImage @onclick="OnImageClick"
+                  Class="@ImageClass"
+                  Elevation="5"
+                  Height="70"
+                  ObjectFit="@ObjectFit.Cover"
+                  Src="@(ImageService.GetUserImageData(Image.ImageFileName, ApplicationStateService.CurrentUser.Id))"
+                  Width="70" />
+        <MudTooltip Text="Remove Image">
+            <MudFab Color="MudBlazor.Color.Secondary"
+                    Icon="@Icons.Material.Outlined.Delete"
+                    OnClick="RemoveImage"
+                    Size="MudBlazor.Size.Small" />
+        </MudTooltip>
+    </MudStack>
+</Div>

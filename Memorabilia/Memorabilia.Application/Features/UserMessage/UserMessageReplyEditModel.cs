@@ -24,7 +24,13 @@ public class UserMessageReplyEditModel : EditModel
 
 	public string Message { get; set; }
 
-	public int ReceiverUserId { get; set; }
+    public UserModel ReceiverUser { get; set; }
+       = new();
+
+    public int ReceiverUserId { get; set; }
+
+    public UserModel SenderUser { get; set; }
+       = new();
 
     public int SenderUserId { get; set; }
 

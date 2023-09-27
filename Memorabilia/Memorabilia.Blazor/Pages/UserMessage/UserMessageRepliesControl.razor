@@ -1,0 +1,10 @@
+﻿@foreach (UserMessageReplyModel userReply in UserMessage.Replies)
+{
+    <MudExpansionPanel IsExpanded="@(_index == 0)"
+                       Text="@userReply.CreatedDate.ToString("MM-dd-yyyy h:mm:ss tt")">
+        <UserMessageReplyControl ShowReply="@(_index == 0)"
+                             UserMessageReply="userReply" />
+    </MudExpansionPanel>
+
+    _index++;
+}

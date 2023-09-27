@@ -2,17 +2,28 @@
 
 public partial class ViewUserMessages
 {
-    protected string SearchText { get; set; }
+    [Inject]
+    public NavigationManager NavigationManager { get; set; }
 
-    private string _searchText;
+    protected string InboxSearchText { get; set; }
+
+    protected string SentSearchText { get; set; }
+
+    private string _inboxSearchText;
+    private string _sentSearchText;
 
     protected void Compose()
     {
-
+        NavigationManager.NavigateTo(NavigationPath.ComposeMessage);
     }
 
-    protected void Search()
+    protected void SearchInbox()
     {
-        SearchText = _searchText;
+        InboxSearchText = _inboxSearchText;
+    }
+
+    protected void SearchSent()
+    {
+        SentSearchText = _sentSearchText;
     }
 }

@@ -46,9 +46,9 @@ public class UserMessageReply : Framework.Library.Domain.Entity.DomainEntity
 
     public int UserMessageStatusId { get; private set; }
 
-    public void AddImage(byte[] imageData)
+    public void AddImage(string imageFilename)
     {
-        Images.Add(new UserMessageReplyImage(imageData, Id));
+        Images.Add(new UserMessageReplyImage(imageFilename, Id));
     }
 
     public void SetStatus(int userMessageStatusId)
