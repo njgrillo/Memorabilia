@@ -131,6 +131,8 @@ public class DomainContext : DbContext, IDomainContext
         modelBuilder.Entity<Entity.TransactionType>();
         modelBuilder.Entity<Entity.User>();
         modelBuilder.Entity<Entity.UserDashboard>();
+        modelBuilder.Entity<Entity.UserPaymentOption>();
+        modelBuilder.Entity<Entity.UserSocialMedia>();
         modelBuilder.Entity<Entity.WritingInstrument>();
     }
 }
