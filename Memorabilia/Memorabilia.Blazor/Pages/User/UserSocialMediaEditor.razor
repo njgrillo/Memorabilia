@@ -1,0 +1,44 @@
+﻿<MudStack Class="col-12"
+          Row="true"
+          Style="margin-bottom:1%;">
+    <SocialMediaTypeAutoComplete Disabled="@(EditMode == EditModeType.Update)"
+                                 SelectedValue="EditModel.SocialMediaType"
+                                 SelectionChanged="(p) => EditModel.SocialMediaType = p" />
+    <TextField Label="Handle"
+               MaxLength="100"
+               SelectedText="@EditModel.Handle"
+               SelectedTextChanged="@((p) => EditModel.Handle = p)" />
+    <AddUpdateMudFab EditMode="EditMode"
+                     OnAdd="Add"
+                     OnUpdate="Update" />
+</MudStack>
+<Div Style="margin-left:1%;">
+    <MudTable Bordered="false"
+              Dense="false"
+              Hover="true"
+              Items="@SocialMedias.Where(socialMedia => !socialMedia.IsDeleted).OrderBy(socialMedia => socialMedia.SocialMediaTypeName).ToList()"
+              Striped="true">
+        <HeaderContent>
+            <MudTh>Type</MudTh>
+            <MudTh>Handle</MudTh>
+            <MudTh></MudTh>
+        </HeaderContent>
+        <RowTemplate>
+            <MudTd DataLabel="Type">@context.SocialMediaTypeName</MudTd>
+            <MudTd DataLabel="Handle">@context.Handle</MudTd>
+            <MudTd DataLabel="">
+                <MudTooltip Text="Edit">
+                    <MudFab Color="MudBlazor.Color.Primary"
+                            Icon="@Icons.Material.Outlined.ModeEditOutline"
+                            OnClick="@(_ => Edit(context))" />
+                </MudTooltip>
+                <MudTooltip Text="Delete">
+                    <MudFab Color="MudBlazor.Color.Secondary"
+                            Icon="@Icons.Material.Outlined.DeleteOutline"
+                            OnClick="@(_ => context.IsDeleted = true)" />
+                </MudTooltip>
+            </MudTd>
+        </RowTemplate>
+    </MudTable>
+</Div>
+

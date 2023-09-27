@@ -140,6 +140,8 @@ public class DomainContext : DbContext, IDomainContext
         modelBuilder.Entity<Entity.UserMessage>();
         modelBuilder.Entity<Entity.UserMessageReply>();
         modelBuilder.Entity<Entity.UserMessageReplyImage>();
+        modelBuilder.Entity<Entity.UserPaymentOption>();
+        modelBuilder.Entity<Entity.UserSocialMedia>();
         modelBuilder.Entity<Entity.WritingInstrument>();
     }
 }

@@ -12,14 +12,17 @@ public partial class UserSettingsEditor
     public IMediator Mediator { get; set; }
 
     [Inject]
+    public QueryRouter QueryRouter { get; set; }
+
+    [Inject]
     public ISnackbar Snackbar { get; set; }
 
     protected UserSettingsEditModel EditModel
         = new();
 
-    protected override void OnInitialized()
+    protected override async Task OnInitializedAsync()
     {
-        EditModel = new UserSettingsEditModel(ApplicationStateService.CurrentUser);
+        await Load();
     }
 
     protected async Task OnSave()
@@ -31,5 +34,15 @@ public partial class UserSettingsEditor
         Snackbar.Add("User Settings were saved successfully!", Severity.Success);
 
         await Mediator.Publish(new ThemeChangedNotification());
+
+        await Load();
+    }
+
+    private async Task Load()
+    {
+        Entity.User user
+            = await QueryRouter.Send(new GetUserById(ApplicationStateService.CurrentUser.Id));
+
+        EditModel = new UserSettingsEditModel(user);
     }
 }

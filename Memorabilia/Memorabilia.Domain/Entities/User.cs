@@ -36,6 +36,10 @@ public class User : Framework.Library.Domain.Entity.DomainEntity
 
     public string LastName { get; private set; }   
 
+    public virtual List<UserPaymentOption> PaymentOptions { get; private set; }
+
+    public virtual List<UserSocialMedia> SocialMedias { get; private set; }
+
     public DateTime? UpdateDate { get; private set; }
 
     public string Username { get; private set; }
@@ -49,10 +53,69 @@ public class User : Framework.Library.Domain.Entity.DomainEntity
         if (dashboardItemsIds == null || !dashboardItemsIds.Any())
             DashboardItems = new List<UserDashboard>();
 
-        DashboardItems.RemoveAll(dashboardItemsId => !dashboardItemsIds.Contains(dashboardItemsId.DashboardItemId));
+        DashboardItems.RemoveAll(dashboardItem => !dashboardItemsIds.Contains(dashboardItem.DashboardItemId));
         DashboardItems.AddRange(dashboardItemsIds.Where(dashboardItemsId => !DashboardItems.Select(dashboardItemId => dashboardItemId.DashboardItemId)
                                                                                            .Contains(dashboardItemsId))
                                                  .Select(dashboardItemsId => new UserDashboard(Id, dashboardItemsId)));
+    }
+
+    public void SetPaymentOption(int userPaymentOptionId,
+                                 int paymentOptionId, 
+                                 string paymentHandle,
+                                 PaymentOptionType paymentOptionType)
+    {
+        if (PaymentOptions == null)
+        {
+            PaymentOptions = new List<UserPaymentOption>
+            {
+                new UserPaymentOption(Id, paymentOptionId, paymentHandle, paymentOptionType)
+            };
+
+            return;
+        }
+
+        UserPaymentOption paymentOption 
+            = userPaymentOptionId > 0 
+                ? PaymentOptions.Single(paymentOption => paymentOption.Id == userPaymentOptionId)
+                : null;
+
+        if (paymentOption == null)
+        {
+            PaymentOptions.Add(new UserPaymentOption(Id, paymentOptionId, paymentHandle, paymentOptionType));
+
+            return;
+        }
+
+        paymentOption.Set(paymentHandle, paymentOptionType);
+    }
+
+    public void SetSocialMedias(int userSociaMediaId,
+                                int socialMediaTypeId,
+                                string handle)
+    {
+        if (SocialMedias == null)
+        {
+            SocialMedias = new List<UserSocialMedia>
+            {
+                new UserSocialMedia(Id, socialMediaTypeId, handle)
+            };
+
+            return;
+        }
+
+        UserSocialMedia userSocialMedia
+            = userSociaMediaId > 0
+                ? SocialMedias.Single(socialMediaType => socialMediaType.Id == userSociaMediaId)
+                : null;
+
+        if (userSocialMedia == null)
+        {
+            SocialMedias.Add(new UserSocialMedia(Id, socialMediaTypeId, handle));
+
+            return;
+        }
+
+        userSocialMedia.Set(handle);
     }
 
     public void SetUserSettings(bool useDarkTheme,
