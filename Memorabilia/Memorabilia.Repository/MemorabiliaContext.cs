@@ -16,6 +16,8 @@ public class MemorabiliaContext : DbContext, IMemorabiliaContext
 
     public DbSet<Entity.SignatureIdentification> SignatureIdentification { get; set; }
 
+    public DbSet<Entity.SignatureReview> SignatureReview { get; set; }
+
     public MemorabiliaContext(DbContextOptions<MemorabiliaContext> options) 
         : base(options) { }        
 
@@ -92,6 +94,9 @@ public class MemorabiliaContext : DbContext, IMemorabiliaContext
         modelBuilder.Entity<Entity.SignatureIdentification>();
         modelBuilder.Entity<Entity.SignatureIdentificationImage>();
         modelBuilder.Entity<Entity.SignatureIdentificationPerson>();
+        modelBuilder.Entity<Entity.SignatureReview>();
+        modelBuilder.Entity<Entity.SignatureReviewImage>();
+        modelBuilder.Entity<Entity.SignatureReviewUserResult>();
         modelBuilder.Entity<Entity.ThroughTheMail>();         
         modelBuilder.Entity<Entity.ThroughTheMailMemorabilia>();  
     }

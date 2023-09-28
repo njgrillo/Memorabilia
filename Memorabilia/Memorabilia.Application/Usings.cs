@@ -109,6 +109,7 @@ global using Memorabilia.Application.Features.Services.Projects;
 global using Memorabilia.Application.Features.Services.Tools.Profile;
 global using Memorabilia.Application.Features.Services.Tools.Profile.Rules;
 global using Memorabilia.Application.Features.SignatureIdentification;
+global using Memorabilia.Application.Features.SignatureReview;
 global using Memorabilia.Application.Features.SiteMemorabilia;
 global using Memorabilia.Application.Features.ThroughTheMail;
 global using Memorabilia.Application.Features.Tools.Profile.Common;

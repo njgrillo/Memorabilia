@@ -78,6 +78,7 @@ global using Memorabilia.Application.Validators.Offer;
 global using Memorabilia.Application.Validators.Project;
 global using Memorabilia.Application.Validators.ProposeTrade;
 global using Memorabilia.Application.Validators.SignatureIdentification;
+global using Memorabilia.Application.Validators.SignatureReview;
 global using Memorabilia.Application.Validators.ThroughTheMail;
 global using Memorabilia.Application.Validators.Transactions;
 global using Memorabilia.Application.Validators.User;

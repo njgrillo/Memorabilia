@@ -1,10 +1,10 @@
-﻿namespace Memorabilia.Application.Validators.SignatureIdentification;
+﻿namespace Memorabilia.Application.Validators.SignatureReview;
 
-public class SignatureIdentificationImageValidator 
-    : AbstractValidator<SignatureIdentificationImageEditModel>
+public class SignatureReviewImageValidator 
+    : AbstractValidator<SignatureReviewImageEditModel>
 {
-	public SignatureIdentificationImageValidator()
-	{
+    public SignatureReviewImageValidator()
+    {
         RuleFor(x => x.FileName)
             .NotEmpty()
             .NotNull()

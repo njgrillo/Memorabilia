@@ -1,0 +1,60 @@
+﻿<DivPad2>
+    <Condition Evaluation="@(ValidationResultAlerts.Any())">
+        <Match>
+            <AlertPanel Alerts="ValidationResultAlerts" />
+        </Match>
+    </Condition>
+    <DivRowFormGroup>
+        <InputFile id="fileInput"
+                   @bind-Value="@Images"
+                   accept="image/*" hidden multiple
+                   OnChange="@LoadFiles" />
+        <MudFab Color="MudBlazor.Color.Secondary"
+                HtmlTag="label"
+                Icon="@Icons.Material.Filled.Image"
+                Label="Load Images"
+                for="fileInput" />
+    </DivRowFormGroup>
+    <DivRowFormGroup>
+        <Condition Evaluation="_files != null">
+            <Match>
+                <Div Class="col-3">
+                    <MudText Typo="@Typo.h6">@_files?.Count() File@(_files?.Count() == 1 ? "" : "s"):</MudText>
+                    <MudList>
+                        <Iterations Items="_files" Context="file">
+                            <MudListItem Icon="@Icons.Material.Filled.AttachFile" @key="@file">
+                                @file.Name <code>@file.Size bytes</code>
+                            </MudListItem>
+                        </Iterations>
+                    </MudList>
+                </Div>
+                <Iterations Items="EditModel.Images" Context="image">
+                    <Div Class="col-3">
+                        <MudImage Class="rounded-lg"
+                                  Elevation="5"
+                                  Height="150"
+                                  ObjectFit="@ObjectFit.Cover"
+                                  Src="@(ImageService.GetUserImageData(image.FileName, ApplicationStateService.CurrentUser.Id))"
+                                  Width="150" />
+                    </Div>
+                </Iterations>
+            </Match>
+        </Condition>
+    </DivRowFormGroup>
+    <DivRowFormGroup>
+        <Div Class="col-6">
+            <PersonSelector SelectedPerson="EditModel.Person"
+                            SelectedPersonChanged="(p) => EditModel.Person = p" />
+        </Div>
+    </DivRowFormGroup>
+    <DivRowFormGroup>
+        <TextField Label="Notes"
+                   Lines="10"
+                   SelectedText="@EditModel.Note"
+                   SelectedTextChanged="@((p) => EditModel.Note = p)" />
+    </DivRowFormGroup>
+    <Div Style="text-align:right;">
+        <SaveButton OnClick="OnSave"
+                    Text="Save" />
+    </Div>
+</DivPad2>
