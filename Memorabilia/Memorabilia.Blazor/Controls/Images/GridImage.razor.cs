@@ -10,7 +10,7 @@ public partial class GridImage
 
     [Parameter]
     public bool AllowNavigation { get; set; }
-        = true;
+        = true;    
 
     [Parameter]
     public string ImageFileName { get; set; }

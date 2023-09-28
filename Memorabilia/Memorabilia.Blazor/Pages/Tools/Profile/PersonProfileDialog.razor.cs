@@ -2,6 +2,9 @@
 
 public partial class PersonProfileDialog
 {
+    [Inject]
+    public IDataProtectorService DataProtectorService { get; set; }
+
     [CascadingParameter]
     public MudDialogInstance MudDialog { get; set; }
 

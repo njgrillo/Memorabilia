@@ -31,4 +31,7 @@ public class UserModel
 
     public DateTime? UpdateDate 
         => _user.UpdateDate;
+
+    public string Username
+        => _user.Username;
 }

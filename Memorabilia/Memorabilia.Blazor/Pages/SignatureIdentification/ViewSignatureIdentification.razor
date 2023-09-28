@@ -1,0 +1,45 @@
+﻿<DivPad2>
+    <Condition Evaluation="@(ValidationResultAlerts.Any())">
+        <Match>
+            <AlertPanel Alerts="ValidationResultAlerts" />
+        </Match>
+    </Condition>
+    <DivRowFormGroup>
+        <Iterations Context="image" 
+                    Items="Model.Images">
+            <Div Class="col-4">
+                <MudImage Class="rounded-lg"
+                          Elevation="5"
+                          Height="150"
+                          ObjectFit="@ObjectFit.Cover"
+                          Src="@(ImageService.GetUserImageData(image.FileName, image.UserId))"
+                          Width="150" />
+            </Div>
+        </Iterations>
+    </DivRowFormGroup>
+    <Condition Evaluation="@(Model.ConsensusPersonId > 0)">
+        <Match>
+            <br />
+            <Text Typography="Typo.h4">
+                Consensus Person: <b>@Model.ConsensusPerson.DisplayName</b>
+            </Text>
+            <br />
+        </Match>
+    </Condition>
+    <DivRowFormGroup>
+        <Div Class="col-6">
+            <PersonSelector SelectedPerson="EditModel.Person"
+                            SelectedPersonChanged="(p) => EditModel.Person = p" />
+        </Div>
+    </DivRowFormGroup>
+    <DivRowFormGroup>
+        <TextField Label="Notes"
+                   Lines="10"
+                   SelectedText="@EditModel.Note"
+                   SelectedTextChanged="@((p) => EditModel.Note = p)" />
+    </DivRowFormGroup>
+    <Div Style="text-align:right;">
+        <SaveButton OnClick="OnSave"
+                    Text="Save" />
+    </Div>
+</DivPad2>
