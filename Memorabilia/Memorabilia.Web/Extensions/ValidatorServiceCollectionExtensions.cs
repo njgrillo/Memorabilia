@@ -58,6 +58,8 @@ public static class ValidatorServiceCollectionExtensions
         services.AddSingleton<ShoeValidator>();
         services.AddSingleton<SignatureIdentificationPersonValidator>();
         services.AddSingleton<SignatureIdentificationValidator>();
+        services.AddSingleton<SignatureReviewValidator>();
+        services.AddSingleton<SignatureReviewUserResultValidator>();
         services.AddSingleton<SoccerballValidator>();
         services.AddSingleton<SportServiceValidator>();
         services.AddSingleton<TeamValidator>();

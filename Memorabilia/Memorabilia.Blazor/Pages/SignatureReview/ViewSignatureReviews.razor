@@ -1,0 +1,109 @@
+﻿<PageView AddRoute="@NavigationPath.SignatureReviewAdd"
+          AddTitle="@($"{Constant.EditModeType.Add.Name} Signature Review")"
+          DisplayPageHeader="false"
+          NavigationPath="@NavigationPath.Home"
+          PageTitle="Signature Reviews">
+    <DivPad2>
+        <LeftRightSection Style="margin-bottom:1%;">
+            <Right>
+                <CustomButton OnClick="Random"
+                              Text="Review Random Signature" />
+            </Right>
+        </LeftRightSection>
+        <MudTable @ref="_table"
+                  Bordered="false"
+                  Dense="false"
+                  Hover="true"
+                  Items="@Model.SignatureReviews"
+                  ServerData="@(new Func<TableState, Task<TableData<SignatureReviewModel>>>(OnRead))"
+                  Striped="true">
+            <ToolBarContent>
+                <MudText Typo="Typo.h6">Signature Reviews</MudText>
+            </ToolBarContent>
+            <HeaderContent>
+                <MudTh></MudTh>
+                <MudTh></MudTh>
+                <MudTh>Person</MudTh>
+                <MudTh>Consensus Opinion</MudTh>
+                <MudTh>Note</MudTh>
+                <MudTh>Created By</MudTh>
+                <MudTh>Created On</MudTh>
+                <MudTh></MudTh>
+            </HeaderContent>
+            <RowTemplate>
+                <MudTd>
+                    <MudIconButton @onclick="@(_ => ToggleChildContent(context.Id))"
+                                   Icon="@context.ToggleIcon"></MudIconButton>
+                </MudTd>
+                <MudTh>
+                    <MudImage @onclick="@(_ => OnImageClick(context))"
+                              Class="rounded-lg can-click"
+                              Elevation="5"
+                              Height="200"
+                              ObjectFit="@ObjectFit.Cover"
+                              Src="@(ImageService.GetUserImageData(context.Images.First().FileName, context.CreatedUser.Id))"
+                              Width="200" />
+                </MudTh>
+                <MudTd DataLabel="Person">@context.Person.DisplayName</MudTd>
+                <MudTd DataLabel="ConsensusOpinion">@(context.ConsensusResult?.Name ?? "No results yet")</MudTd>
+                <MudTd DataLabel="Note">@context.Note</MudTd>
+                <MudTd DataLabel="CreatedBy">@context.CreatedUser.Username</MudTd>
+                <MudTd DataLabel="CreatedOn">@(context.CreatedDate.ToString("MM-dd-yyyy hh:mm:ss tt"))</MudTd>
+                    <MudTd DataLabel="">
+                        <MudTooltip Text="Review">
+                            <MudFab Color="MudBlazor.Color.Primary"
+                                    Icon="@Icons.Material.Outlined.RateReview"
+                                    OnClick="@(_ => NavigationManager.NavigateTo($"{NavigationPath.SignatureReview}/{DataProtectorService.EncryptId(context.Id)}"))"
+                                    Size="@MudBlazor.Size.Large" />
+                        </MudTooltip>
+                    </MudTd>
+                </RowTemplate>
+                <ChildRowContent>
+                    <Condition Evaluation="@context.DisplayDetails">
+                        <Match>
+                            <tr />
+                            <tr style="background-color:#6D7B8D;color:honeydew;border-style:dashed;border-width:2px;border-color:#ECF3F4;">
+                                <td align="center" colspan="17">
+                                    Summary: Total Opinions - <strong> @context.UserResults.Length </strong>
+                                </td>
+                            </tr>
+                            <tr />
+                            <tr style="margin-top: 1%; margin-bottom: 1%; margin-left: 1%; margin-right: 1%;">
+                                <td colspan="17">
+                                    <MudTable Bordered="false"
+                                          Dense="false"
+                                          Hover="true"
+                                          Items="@context.UserResults"
+                                          Striped="true">
+                                        <ToolBarContent>
+                                            <MudText Typo="Typo.h6">Opinions</MudText>
+                                            <MudSpacer />
+                                        </ToolBarContent>
+                                        <HeaderContent>
+                                            <MudTh>Result</MudTh>
+                                            <MudTh>Note</MudTh>
+                                            <MudTh>Created By</MudTh>
+                                            <MudTh>Created On</MudTh>
+                                        </HeaderContent>
+                                        <RowTemplate Context="userResult">
+                                            <MudTd DataLabel="Result">@userResult.SignatureReviewResultTypeName</MudTd>
+                                            <MudTd DataLabel="Note">@userResult.Note</MudTd>
+                                            <MudTd DataLabel="CreatedBy">@userResult.CreatedUser.Username</MudTd>
+                                            <MudTd DataLabel="CreatedOn">@(userResult.CreatedDate.ToString("MM-dd-yyyy hh:mm:ss tt"))</MudTd>
+                                        </RowTemplate>
+                                        <PagerContent>
+                                            <MudTablePager />
+                                        </PagerContent>
+                                    </MudTable>
+                                </td>
+                            </tr>
+                        </Match>
+                    </Condition>
+                </ChildRowContent>
+                <PagerContent>
+                    <MudTablePager />
+                </PagerContent>
+            </MudTable>
+        </DivPad2>
+    </PageView>
+

@@ -1,6 +1,7 @@
 ﻿namespace Memorabilia.Application.Validators.SignatureIdentification;
 
-public class SignatureIdentificationPersonValidator : AbstractValidator<SaveSignatureIdentificationPerson.Command>
+public class SignatureIdentificationPersonValidator 
+    : AbstractValidator<SaveSignatureIdentificationPerson.Command>
 {
 	public SignatureIdentificationPersonValidator()
 	{

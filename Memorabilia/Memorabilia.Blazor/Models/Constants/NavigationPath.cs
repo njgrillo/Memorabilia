@@ -144,7 +144,10 @@ public static class NavigationPath
        => @"/SignatureIdentifications/Add";
 
     public static string SignatureReview
-       => @"/SignatureReview";
+       => @"/SignatureReviews/View";
+
+    public static string SignatureReviewAdd
+      => @"/SignatureReviews/Add";
 
     public static string SportService
         => @"/SportService";

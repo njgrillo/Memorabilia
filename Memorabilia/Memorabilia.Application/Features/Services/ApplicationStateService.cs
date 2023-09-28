@@ -7,6 +7,7 @@ public class ApplicationStateService : IApplicationStateService
     public Entity.User CurrentUser { get; set; }
 
     public bool IsDarkTheme { get; set; }
+        = true;
 
     public Constant.LoginProvider Provider { get; set; }
 
