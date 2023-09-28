@@ -138,7 +138,10 @@ public static class NavigationPath
         => @"/Settings";
 
     public static string SignatureIdentification
-       => @"/SignatureIdentification";
+       => @"/SignatureIdentifications/View";
+
+    public static string SignatureIdentificationAdd
+       => @"/SignatureIdentifications/Add";
 
     public static string SignatureReview
        => @"/SignatureReview";

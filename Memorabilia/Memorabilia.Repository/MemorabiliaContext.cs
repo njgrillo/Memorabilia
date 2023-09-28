@@ -14,6 +14,8 @@ public class MemorabiliaContext : DbContext, IMemorabiliaContext
 
     public DbSet<Entity.MemorabiliaTransactionTrade> MemorabiliaTransactionTrade { get; set; }
 
+    public DbSet<Entity.SignatureIdentification> SignatureIdentification { get; set; }
+
     public MemorabiliaContext(DbContextOptions<MemorabiliaContext> options) 
         : base(options) { }        
 
@@ -87,6 +89,9 @@ public class MemorabiliaContext : DbContext, IMemorabiliaContext
         modelBuilder.Entity<Entity.ProjectWorldSeries>();
         modelBuilder.Entity<Entity.ProposeTrade>();
         modelBuilder.Entity<Entity.ProposeTradeMemorabilia>();
+        modelBuilder.Entity<Entity.SignatureIdentification>();
+        modelBuilder.Entity<Entity.SignatureIdentificationImage>();
+        modelBuilder.Entity<Entity.SignatureIdentificationPerson>();
         modelBuilder.Entity<Entity.ThroughTheMail>();         
         modelBuilder.Entity<Entity.ThroughTheMailMemorabilia>();  
     }

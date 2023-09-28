@@ -1,6 +1,4 @@
-﻿using Memorabilia.Application.Validators.Forum;
-
-namespace Memorabilia.Web.Extensions;
+﻿namespace Memorabilia.Web.Extensions;
 
 public static class ValidatorServiceCollectionExtensions
 {
@@ -58,6 +56,8 @@ public static class ValidatorServiceCollectionExtensions
         services.AddSingleton<PylonValidator>();
         services.AddSingleton<ShirtValidator>();
         services.AddSingleton<ShoeValidator>();
+        services.AddSingleton<SignatureIdentificationPersonValidator>();
+        services.AddSingleton<SignatureIdentificationValidator>();
         services.AddSingleton<SoccerballValidator>();
         services.AddSingleton<SportServiceValidator>();
         services.AddSingleton<TeamValidator>();
