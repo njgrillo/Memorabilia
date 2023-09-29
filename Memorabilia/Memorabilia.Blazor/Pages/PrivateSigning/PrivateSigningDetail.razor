@@ -1,0 +1,40 @@
+﻿<DivRowFormGroup>
+    <Div Class="col-6">
+        <Text Typography="Typo.h2">
+            Promoter: <b>@(PrivateSigning.CreatedUser.Username)</b>
+        </Text>
+    </Div>
+</DivRowFormGroup>
+<DivRowFormGroup>
+    <Div Class="col-6">
+        <Text Typography="Typo.h4">
+            Signing Date: <b>@(PrivateSigning.SigningDate.ToString("MM-dd-yyyy"))</b>
+        </Text>
+    </Div>   
+    <Div Class="col-6">
+        <Text Typography="Typo.h4">
+            Submission Deadline Date: <b>@(PrivateSigning.SubmissionDeadlineDate.ToString("MM-dd-yyyy"))</b>
+        </Text>
+    </Div>
+</DivRowFormGroup>
+<Condition Evaluation="@(!PrivateSigning.Note.IsNullOrEmpty())">
+    <Match>
+        <DivRowFormGroup>
+            <Div Class="col-12">
+                <Text Typography="Typo.h6">
+                    Promoter's Note: @(PrivateSigning.Note)
+                </Text>
+            </Div>
+        </DivRowFormGroup>
+    </Match>
+</Condition>
+<Condition Evaluation="@(PrivateSigning.AuthenticationCompanies.Length > 0)">
+    <Match>
+        <Iterations Context="privateSigningAuthenticationCompany"
+                    Items="PrivateSigning.AuthenticationCompanies">
+            <DivRowFormGroup>
+                <PrivateSigningAuthenticationDetail PrivateSigningAuthenticationCompany="privateSigningAuthenticationCompany" />
+            </DivRowFormGroup>
+        </Iterations>        
+    </Match>
+</Condition>

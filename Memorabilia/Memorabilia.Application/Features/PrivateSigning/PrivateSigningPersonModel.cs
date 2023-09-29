@@ -1,0 +1,36 @@
+﻿namespace Memorabilia.Application.Features.PrivateSigning;
+
+public class PrivateSigningPersonModel
+{
+    private readonly Entity.PrivateSigningPerson _privateSigningPerson;
+
+    public PrivateSigningPersonModel() { }
+
+    public PrivateSigningPersonModel(Entity.PrivateSigningPerson privateSigningPerson)
+    {
+        _privateSigningPerson = privateSigningPerson;
+    }
+
+    public bool AllowInscriptions
+        => _privateSigningPerson.AllowInscriptions;
+
+    public PrivateSigningPersonExcludeItemTypeModel[] ExcludedItems
+        => _privateSigningPerson.ExcludedItems
+                                .Select(item => new PrivateSigningPersonExcludeItemTypeModel(item))
+                                .ToArray();
+
+    public int Id
+        => _privateSigningPerson.Id;
+
+    public decimal? InscriptionCost
+        => _privateSigningPerson.InscriptionCost;
+
+    public string Note
+        => _privateSigningPerson.Note;
+
+    public PersonModel Person
+        => new(_privateSigningPerson.Person);
+
+    public int PrivateSigningId
+        => _privateSigningPerson.PrivateSigningId;
+}

@@ -49,4 +49,8 @@
     <ProjectReference Include="..\Memorabilia.Repository\Memorabilia.Repository.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Pages\PrivateSigning\" />
+  </ItemGroup>
+
 </Project>

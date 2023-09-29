@@ -1,0 +1,8 @@
+﻿<Iterations Context="personDetail"
+            Items="PrivateSigningPersonDetails">
+    <Condition Evaluation="@(personDetail.PrivateSigningItemTypeGroupId.HasValue)">
+        <Match>
+            <PrivateSigningItemGroup PrivateSigningItemTypeGroup="personDetail.PrivateSigningItemTypeGroup" />
+        </Match>
+    </Condition>    
+</Iterations>

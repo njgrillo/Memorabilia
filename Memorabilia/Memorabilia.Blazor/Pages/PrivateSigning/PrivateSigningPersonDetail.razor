@@ -1,0 +1,33 @@
+﻿<DivRowFormGroup>
+    <LeftRightSection LeftStyle="width:35%;"
+                      RightStyle="width:65%;">
+        <Left>
+            <MudStack>
+                <MudImage Class="rounded-lg can-click"
+                          Elevation="5"
+                          Height="200"
+                          ObjectFit="@ObjectFit.Cover"
+                          Src="@(ImageService.GetPersonImageData(PrivateSigningPerson.Person.ImageFileName))"
+                          Width="200" />
+                <Text Typography="Typo.h6">
+                    <b>@(PrivateSigningPerson.Person.ProfileName)</b>
+                </Text>
+                @*TODO: Add accolades or awards if applicable*@
+            </MudStack>
+        </Left>
+        <Right>
+            <Condition Evaluation="@(PrivateSigningPerson.ExcludedItems.Length > 0)">
+                <Match>
+                    <Div Class="row">
+                        <Text Typography="Typo.h6">
+                            Person will not sign the following items:
+                        </Text>
+                    </Div>
+                    <Div Class="row">
+                        <PrivateSigningPersonExcludedItems ExcludedItems="PrivateSigningPerson.ExcludedItems" />
+                    </Div>                    
+                </Match>
+            </Condition>
+        </Right>
+    </LeftRightSection>
+</DivRowFormGroup>

@@ -1,0 +1,105 @@
+﻿<DivPad2>
+    <MudTable @ref="_table"
+              Bordered="false"
+              Dense="false"
+              Hover="true"
+              Items="@Model.PrivateSignings"
+              ServerData="@(new Func<TableState, Task<TableData<PrivateSigningModel>>>(OnRead))"
+              Striped="true">
+        <ToolBarContent>
+            <MudText Typo="Typo.h6">Private Sigings</MudText>
+        </ToolBarContent>
+        <HeaderContent>
+            <MudTh></MudTh>
+            <MudTh>Person</MudTh>
+            <MudTh>Submission Deadline Date</MudTh>
+            <MudTh>Signing Date</MudTh>
+            <MudTh>Note</MudTh>
+            <MudTh>Created By</MudTh>
+            <MudTh>Created On</MudTh>
+            <MudTh></MudTh>
+        </HeaderContent>
+        <RowTemplate>
+            <MudTd>
+                <Condition Evaluation="@(context.People.Length > 1)">
+                    <Match>
+                        <MudIconButton @onclick="@(_ => ToggleChildContent(context.Id))"
+                                       Icon="@context.ToggleIcon"></MudIconButton>
+                    </Match>
+                    <NotMatch>
+                        <MudImage Class="rounded-lg cant-click"
+                                  Elevation="5"
+                                  Height="200"
+                                  ObjectFit="@ObjectFit.Cover"
+                                  Src="@(ImageService.GetPersonImageData(context.People.First().Person.ImageFileName))"
+                                  Width="200" />
+                    </NotMatch>
+                </Condition>                
+            </MudTd>
+            <MudTd DataLabel="Person">@(context.People.Length > 1 ? "Multiple People" : context.People.First().Person.DisplayName)</MudTd>
+            <MudTd DataLabel="SubmissionDeadlineDate">@(context.SubmissionDeadlineDate.ToString("MM-dd-yyyy"))</MudTd>
+            <MudTd DataLabel="SigningDate">@(context.SigningDate.ToString("MM-dd-yyyy"))</MudTd>
+            <MudTd DataLabel="Note">@context.Note</MudTd>
+            <MudTd DataLabel="CreatedBy">@context.CreatedUser.Username</MudTd>
+            <MudTd DataLabel="CreatedOn">@(context.CreatedDate.ToString("MM-dd-yyyy hh:mm:ss tt"))</MudTd>
+            <MudTd DataLabel="">
+                <MudTooltip Text="View">
+                    <MudFab Color="MudBlazor.Color.Primary"
+                        Icon="@Icons.Material.Outlined.Preview"
+                        OnClick="@(_ => NavigationManager.NavigateTo($"{NavigationPath.PrivateSignings}/{DataProtectorService.EncryptId(context.Id)}"))"
+                        Size="@MudBlazor.Size.Small" />
+                </MudTooltip>
+            </MudTd>
+        </RowTemplate>
+        <ChildRowContent>
+            <Condition Evaluation="@context.DisplayDetails">
+                <Match>
+                    <tr />
+                    <tr style="background-color:#6D7B8D;color:honeydew;border-style:dashed;border-width:2px;border-color:#ECF3F4;">
+                        <td align="center" colspan="17">
+                            Summary: Total Signers - <strong> @context.People.Length </strong>
+                        </td>
+                    </tr>
+                    <tr />
+                    <tr style="margin-top: 1%; margin-bottom: 1%; margin-left: 1%; margin-right: 1%;">
+                        <td colspan="17">
+                            <MudTable Bordered="false"
+                                      Dense="false"
+                                      Hover="true"
+                                      Items="@context.People"
+                                      Striped="true">
+                                <ToolBarContent>
+                                    <MudText Typo="Typo.h6">People</MudText>
+                                    <MudSpacer />
+                                </ToolBarContent>
+                                <HeaderContent>
+                                    <MudTh></MudTh>
+                                    <MudTh>Person</MudTh>
+                                    <MudTh>Note</MudTh>
+                                </HeaderContent>
+                                <RowTemplate Context="privateSigningPerson">
+                                    <MudTd>
+                                        <MudImage Class="rounded-lg cant-click"
+                                                  Elevation="5"
+                                                  Height="200"
+                                                  ObjectFit="@ObjectFit.Cover"
+                                                  Src="@(ImageService.GetPersonImageData(privateSigningPerson.Person.ImageFileName))"
+                                                  Width="200" />
+                                    </MudTd>
+                                    <MudTd DataLabel="Note">@privateSigningPerson.Note</MudTd>
+                                </RowTemplate>
+                                <PagerContent>
+                                    <MudTablePager />
+                                </PagerContent>
+                            </MudTable>
+                        </td>
+                    </tr>
+                </Match>
+            </Condition>
+        </ChildRowContent>
+        <PagerContent>
+            <MudTablePager />
+        </PagerContent>
+    </MudTable>
+</DivPad2>
+

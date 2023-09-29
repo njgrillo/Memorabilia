@@ -14,6 +14,8 @@ public class MemorabiliaContext : DbContext, IMemorabiliaContext
 
     public DbSet<Entity.MemorabiliaTransactionTrade> MemorabiliaTransactionTrade { get; set; }
 
+    public DbSet<Entity.PrivateSigning> PrivateSigning { get; set; }
+
     public DbSet<Entity.SignatureIdentification> SignatureIdentification { get; set; }
 
     public DbSet<Entity.SignatureReview> SignatureReview { get; set; }
@@ -79,7 +81,15 @@ public class MemorabiliaContext : DbContext, IMemorabiliaContext
         modelBuilder.Entity<Entity.MemorabiliaTransactionTrade>();
         modelBuilder.Entity<Entity.Offer>();
         modelBuilder.Entity<Entity.Personalization>();          
-        modelBuilder.Entity<Entity.Project>();          
+        modelBuilder.Entity<Entity.PrivateSigning>();          
+        modelBuilder.Entity<Entity.PrivateSigningAuthenticationCompany>();          
+        modelBuilder.Entity<Entity.PrivateSigningCustomItemGroup>();          
+        modelBuilder.Entity<Entity.PrivateSigningCustomItemTypeGroup>();          
+        modelBuilder.Entity<Entity.PrivateSigningCustomItemTypeGroupDetail>();  
+        modelBuilder.Entity<Entity.PrivateSigningItemTypeGroup>();                
+        modelBuilder.Entity<Entity.PrivateSigningPerson>();          
+        modelBuilder.Entity<Entity.PrivateSigningPersonDetail>();          
+        modelBuilder.Entity<Entity.PrivateSigningPersonExcludeItemType>();          
         modelBuilder.Entity<Entity.ProjectBaseball>();          
         modelBuilder.Entity<Entity.ProjectCard>();          
         modelBuilder.Entity<Entity.ProjectHallOfFame>();          
