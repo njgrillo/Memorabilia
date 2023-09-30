@@ -146,6 +146,18 @@ public static class NavigationPath
     public static string SportService
         => @"/SportService";
 
+    public static string StripeCancel
+        => @"/Stripe/Cancel";
+
+    public static string StripeConfirm
+        => @"/Stripe/Confirm";
+
+    public static string StripeOrderCancel
+        => @"/Stripe/Order/Cancel";
+
+    public static string StripeOrderConfirm
+        => @"/Stripe/Order/Confirm";
+
     public static string Team
         => @"/Team";
 

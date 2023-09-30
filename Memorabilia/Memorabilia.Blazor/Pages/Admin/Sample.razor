@@ -1,0 +1,23 @@
+﻿<DivPad2>
+    <MudExpansionPanel IsExpanded="true"
+                       Text="Paypal">
+        <Div Class="row">
+            <Div Class="col-3">
+                <CustomButton Color="@MudBlazor.Color.Error"
+                              OnClick="CreatePaypalOrder"
+                              Text="Create Paypal Order" />
+            </Div>
+        </Div>
+    </MudExpansionPanel>    
+    <br />
+    <MudExpansionPanel IsExpanded="true"
+                       Text="Stripe">
+        <Div Class="row">
+            <Div Class="col-3">
+                <CustomButton Color="@MudBlazor.Color.Error"
+                              OnClick="CreateStripeOrder"
+                              Text="Create Stripe Order" />
+            </Div>
+        </Div>
+    </MudExpansionPanel>    
+</DivPad2>

@@ -121,6 +121,7 @@ public class DomainContext : DbContext, IDomainContext
         modelBuilder.Entity<Entity.SportLeagueLevel>();
         modelBuilder.Entity<Entity.SportService>();
         modelBuilder.Entity<Entity.Spot>();
+        modelBuilder.Entity<Entity.StripePaymentTransaction>();
         modelBuilder.Entity<Entity.Team>();
         modelBuilder.Entity<Entity.TeamConference>();
         modelBuilder.Entity<Entity.TeamDivision>();
