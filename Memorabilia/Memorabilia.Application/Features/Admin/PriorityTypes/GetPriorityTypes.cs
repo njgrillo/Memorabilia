@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Application.Features.Admin.PriorityTypes;
 
-[AuthorizeByRole(Enum.PermissionType.Admin)]
+[AuthorizeByRole(Enum.Role.Admin)]
 public record GetPriorityTypes() : IQuery<Entity.PriorityType[]>
 {
     public class Handler : QueryHandler<GetPriorityTypes, Entity.PriorityType[]>

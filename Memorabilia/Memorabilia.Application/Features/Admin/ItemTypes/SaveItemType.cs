@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Application.Features.Admin.ItemTypes;
 
-[AuthorizeByRole(Enum.PermissionType.Admin)]
+[AuthorizeByRole(Enum.Role.Admin)]
 public record SaveItemType(DomainEditModel ItemType) : ICommand
 {
     public class Handler : CommandHandler<SaveItemType>

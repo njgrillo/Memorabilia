@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Application.Features.Admin.Management.Accomplishments;
 
-[AuthorizeByRole(Enum.PermissionType.Admin)]
+[AuthorizeByRole(Enum.Role.Admin)]
 public class SaveAccomplishmentManagement
 {
     public class Handler : CommandHandler<Command>

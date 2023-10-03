@@ -44,15 +44,12 @@ public class StripeService
                 Quantity = item.Quantity
             }).ToList();
 
-        string orderId = Guid.NewGuid().ToString();
-        string encryptedOrderId = _dataProtectorService.Encrypt(orderId);
-
         var options = new SessionCreateOptions
         {
-            CancelUrl = $"{payment.CancelUrl}?OrderId={encryptedOrderId}",
+            CancelUrl = payment.CancelUrl,
             LineItems = lineItems,
             Mode = payment.Mode,
-            SuccessUrl = $"{payment.SuccessUrl}?OrderId={encryptedOrderId}",            
+            SuccessUrl = payment.SuccessUrl,            
         };
 
         var service = new SessionService();
@@ -60,7 +57,7 @@ public class StripeService
         Session session 
             = await service.CreateAsync(options, GetRequestOptions(), cancellationToken);
 
-        await SaveTransaction(orderId, payment.PurchaseUserId);
+        await SaveTransaction(payment.OrderId, payment.PurchaseUserId);
 
         return session;
     }

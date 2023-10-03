@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Application.Features.Admin.Leagues;
 
-[AuthorizeByRole(Enum.PermissionType.Admin)]
+[AuthorizeByRole(Enum.Role.Admin)]
 public record GetLeague(int Id) : IQuery<Entity.League>
 {
     public class Handler : QueryHandler<GetLeague, Entity.League>

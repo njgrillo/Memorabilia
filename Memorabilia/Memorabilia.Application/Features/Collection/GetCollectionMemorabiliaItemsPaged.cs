@@ -1,5 +1,6 @@
 ﻿namespace Memorabilia.Application.Features.Collection;
 
+[AuthorizeByPermission(Enum.Permission.Collection)]
 public record GetCollectionMemorabiliaItemsPaged(int CollectionId, 
                                                  PageInfo PageInfo, 
                                                  MemorabiliaSearchCriteria MemorabiliaSearchCriteria = null)

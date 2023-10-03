@@ -1,5 +1,6 @@
 ﻿namespace Memorabilia.Application.Features.Collection;
 
+[AuthorizeByPermission(Enum.Permission.Collection)]
 public record GetCollections() : IQuery<Entity.Collection[]>
 {
     public class Handler : QueryHandler<GetCollections, Entity.Collection[]>

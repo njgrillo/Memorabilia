@@ -23,25 +23,27 @@
                             <MudNavLink Href="@NavigationPath.Sample">Samples</MudNavLink>
                         </MudNavGroup>
                     </Match>
-                </Condition>        
-                <MudNavLink Href="@NavigationPath.Consignments"
-                            Icon="@Icons.Material.TwoTone.AttachMoney">Consignments</MudNavLink>
-                <MudNavLink Href="@NavigationPath.Forums"
-                            Icon="@Icons.Material.TwoTone.Forum">Forums</MudNavLink>
-                <MudNavLink Href="@NavigationPath.Help"
-                            Icon="@Icons.Material.TwoTone.HelpCenter">Help</MudNavLink>
-                <MudNavLink Href="@NavigationPath.ViewSiteMemorabilia"
-                            Icon="@Icons.Material.TwoTone.Image">Memorabilia</MudNavLink>
+                </Condition>  
+                <Condition Evaluation="ApplicationStateService.CurrentUser.HasPermission(Constant.Permission.Consignment)">
+                    <Match>
+                        <MudNavLink Href="@NavigationPath.Consignments"
+                                    Icon="@Icons.Material.TwoTone.AttachMoney">Consignments</MudNavLink>
+                    </Match>
+                </Condition>                  
                 <MudNavGroup Icon="@Icons.Material.TwoTone.Person"
-                             Title="My Stuff">                       
-                    <MudNavLink Icon="@Icons.Material.TwoTone.Collections" 
-                                Href="@NavigationPath.Collections">Collections</MudNavLink>
+                             Title="My Stuff">           
+                    <Condition Evaluation="ApplicationStateService.CurrentUser.HasPermission(Constant.Permission.Collection)">
+                        <Match>
+                            <MudNavLink Icon="@Icons.Material.TwoTone.Collections"
+                                        Href="@NavigationPath.Collections">Collections</MudNavLink>
+                        </Match>
+                    </Condition>                         
                     <MudNavLink Icon="@Icons.Material.TwoTone.Dashboard" 
                                 Href="@NavigationPath.Dashboard">Dashboard</MudNavLink>
                     <MudNavLink Href="@NavigationPath.Forums"
                                 Icon="@Icons.Material.TwoTone.Feedback">Feedback</MudNavLink>
-                    <MudNavLink Icon="@Icons.Material.TwoTone.Sell" 
-                                Href="@NavigationPath.ForSale">For Sale</MudNavLink>
+                    <MudNavLink Icon="@Icons.Material.TwoTone.Sell"
+                                Href="@NavigationPath.ForSale">For Sale</MudNavLink>                    
                     <MudNavLink Icon="@Icons.Material.TwoTone.SwapHoriz" 
                                 Href="@NavigationPath.ForTrade">For Trade</MudNavLink>
                     <MudNavLink Icon="@Icons.Material.TwoTone.Favorite"
@@ -66,15 +68,21 @@
                                 Href="@NavigationPath.ThroughTheMail">Through the Mail</MudNavLink>
                     <MudNavLink Icon="@Icons.Material.TwoTone.AttachMoney" 
                                 Href="@NavigationPath.Transactions">Transactions</MudNavLink>
-                </MudNavGroup>     
-                <MudNavLink Href="@NavigationPath.PrivateSignings"
-                            Icon="@Icons.Material.TwoTone.Event">Private Signings</MudNavLink>
-                <MudNavLink Href="@NavigationPath.SignatureReview"
-                            Icon="@Icons.Material.TwoTone.RateReview">Signature Authentication</MudNavLink>
-                <MudNavLink Href="@NavigationPath.SignatureIdentification"
-                            Icon="@Icons.Material.TwoTone.PersonSearch">Signature Identification</MudNavLink>
+                </MudNavGroup>                  
             </Authorized>
         </AuthorizeView>
+        <MudNavLink Href="@NavigationPath.Forums"
+                    Icon="@Icons.Material.TwoTone.Forum">Forums</MudNavLink>
+        <MudNavLink Href="@NavigationPath.Help"
+                    Icon="@Icons.Material.TwoTone.HelpCenter">Help</MudNavLink>
+        <MudNavLink Href="@NavigationPath.ViewSiteMemorabilia"
+                    Icon="@Icons.Material.TwoTone.Image">Memorabilia</MudNavLink>
+        <MudNavLink Href="@NavigationPath.PrivateSignings"
+                    Icon="@Icons.Material.TwoTone.Event">Private Signings</MudNavLink>
+        <MudNavLink Href="@NavigationPath.SignatureReview"
+                    Icon="@Icons.Material.TwoTone.RateReview">Signature Authentication</MudNavLink>
+        <MudNavLink Href="@NavigationPath.SignatureIdentification"
+                    Icon="@Icons.Material.TwoTone.PersonSearch">Signature Identification</MudNavLink>
         <MudNavGroup Icon="@Icons.Material.TwoTone.Carpenter" 
                      Title="Tools">
             <MudNavLink Icon="@Icons.Material.TwoTone.PersonSearch"

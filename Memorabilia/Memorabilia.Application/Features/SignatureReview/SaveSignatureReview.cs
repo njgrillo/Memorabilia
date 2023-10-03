@@ -1,5 +1,6 @@
 ﻿namespace Memorabilia.Application.Features.SignatureReview;
 
+[AuthorizeByPermission(Enum.Permission.SignatureAuthentication)]
 public class SaveSignatureReview
 {
     public class Handler : CommandHandler<Command>

@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Application.Features.Admin.Conditions;
 
-[AuthorizeByRole(Enum.PermissionType.Admin)]
+[AuthorizeByRole(Enum.Role.Admin)]
 public record GetConditions() : IQuery<Entity.Condition[]>
 {
     public class Handler : QueryHandler<GetConditions, Entity.Condition[]>

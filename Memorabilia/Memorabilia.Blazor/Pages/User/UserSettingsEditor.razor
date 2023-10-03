@@ -43,6 +43,25 @@
         </DivRowFormGroup>
     </MudExpansionPanel>
     <MudExpansionPanel IsExpanded="true"
+                       Text="Membership Settings">
+        <DivRowFormGroup>
+            <Div Style="margin-left:1%;">
+                <MudStack Row="true">
+                    <Text Typography="Typo.h6">
+                        Subscription: <b>@(ApplicationStateService.SubscriberLevel)</b>
+                    </Text>
+                    <Condition Evaluation="@_showUpgradeMembership">
+                        <Match>
+                            <CustomButton Color="MudBlazor.Color.Inherit"
+                                          OnClick="@UpgradeMembership"
+                                          Text="Upgrade" />
+                        </Match>
+                    </Condition>
+                </MudStack>
+            </Div>                       
+        </DivRowFormGroup>
+    </MudExpansionPanel>
+    <MudExpansionPanel IsExpanded="true"
                        Text="Payment Settings">
         <DivRowFormGroup>
             <UserPaymentOptionEditor PaymentOptions="EditModel.PaymentOptions" />

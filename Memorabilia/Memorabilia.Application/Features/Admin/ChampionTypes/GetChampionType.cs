@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Application.Features.Admin.ChampionTypes;
 
-[AuthorizeByRole(Enum.PermissionType.Admin)]
+[AuthorizeByRole(Enum.Role.Admin)]
 public record GetChampionType(int Id) : IQuery<Entity.DomainEntity>
 {
     public class Handler : QueryHandler<GetChampionType, Entity.DomainEntity>

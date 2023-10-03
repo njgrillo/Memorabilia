@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Application.Features.Admin.Spots;
 
-[AuthorizeByRole(Enum.PermissionType.Admin)]
+[AuthorizeByRole(Enum.Role.Admin)]
 public record GetSpot(int Id) : IQuery<Entity.DomainEntity>
 {
     public class Handler : QueryHandler<GetSpot, Entity.DomainEntity>

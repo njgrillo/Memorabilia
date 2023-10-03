@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Application.Features.Admin.JerseyQualityTypes;
 
-[AuthorizeByRole(Enum.PermissionType.Admin)]
+[AuthorizeByRole(Enum.Role.Admin)]
 public record GetJerseyQualityType(int Id) : IQuery<Entity.DomainEntity>
 {
     public class Handler : QueryHandler<GetJerseyQualityType, Entity.DomainEntity>

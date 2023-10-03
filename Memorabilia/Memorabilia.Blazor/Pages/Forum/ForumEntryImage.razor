@@ -7,12 +7,16 @@
                   ObjectFit="@ObjectFit.Cover"
                   Src="@Image.ImageData"
                   Width="70" />
-        <MudTooltip Text="Delete Image">
-            <MudFab Color="MudBlazor.Color.Secondary"
-                    Icon="@Icons.Material.Outlined.Delete"
-                    OnClick="ShowDeleteConfirm"
-                    Size="MudBlazor.Size.Small" />
-        </MudTooltip>
+        <Condition Evaluation="CanDelete">
+            <Match>
+                <MudTooltip Text="Delete Image">
+                    <MudFab Color="MudBlazor.Color.Secondary"
+                            Icon="@Icons.Material.Outlined.Delete"
+                            OnClick="ShowDeleteConfirm"
+                            Size="MudBlazor.Size.Small" />
+                </MudTooltip>
+            </Match>
+        </Condition>        
     </MudStack>    
 </Div>
 

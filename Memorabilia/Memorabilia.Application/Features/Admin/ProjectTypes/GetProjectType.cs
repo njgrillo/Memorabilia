@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Application.Features.Admin.ProjectTypes;
 
-[AuthorizeByRole(Enum.PermissionType.Admin)]
+[AuthorizeByRole(Enum.Role.Admin)]
 public record GetProjectType(int Id) : IQuery<Entity.DomainEntity>
 {
     public class Handler : QueryHandler<GetProjectType, Entity.DomainEntity>

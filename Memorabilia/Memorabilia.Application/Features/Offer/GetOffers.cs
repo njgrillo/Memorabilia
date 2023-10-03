@@ -1,5 +1,6 @@
 ﻿namespace Memorabilia.Application.Features.Offer;
 
+[AuthorizeByPermission(Enum.Permission.BuySellTrade)]
 public record GetOffers() : IQuery<Entity.Offer[]>
 {
     public class Handler : QueryHandler<GetOffers, Entity.Offer[]>

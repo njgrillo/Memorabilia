@@ -122,6 +122,9 @@ public static class NavigationPath
     public static string ProposedTrades
         => @"/MyStuff/ProposedTrades";
 
+    public static string Registered
+        => @"/Registered";
+
     public static string Sample
         => @"/Admin/Sample";
 
@@ -149,14 +152,26 @@ public static class NavigationPath
     public static string StripeCancel
         => @"/Stripe/Cancel";
 
+    public static string StripeCancelMembership
+        => @"/Stripe/Cancel/Membership";
+
     public static string StripeConfirm
         => @"/Stripe/Confirm";
+
+    public static string StripeConfirmMembership
+        => @"/Stripe/Confirm/Membership";
 
     public static string StripeOrderCancel
         => @"/Stripe/Order/Cancel";
 
     public static string StripeOrderConfirm
         => @"/Stripe/Order/Confirm";
+
+    public static string Subscription
+        => @"/Subscription";
+
+    public static string SubscriptionUpgrade
+        => @"/Subscription/Upgrade";
 
     public static string Team
         => @"/Team";

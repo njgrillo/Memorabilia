@@ -1,5 +1,6 @@
 ﻿namespace Memorabilia.Application.Features.ForSale;
 
+[AuthorizeByPermission(Enum.Permission.BuySellTrade)]
 public class SaveForSaleMemorabilia
 {
     public class Handler : CommandHandler<Command>

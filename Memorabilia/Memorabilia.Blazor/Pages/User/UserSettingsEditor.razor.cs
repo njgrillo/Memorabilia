@@ -12,6 +12,9 @@ public partial class UserSettingsEditor
     public IMediator Mediator { get; set; }
 
     [Inject]
+    public NavigationManager NavigationManager { get; set; }
+
+    [Inject]
     public QueryRouter QueryRouter { get; set; }
 
     [Inject]
@@ -20,8 +23,14 @@ public partial class UserSettingsEditor
     protected UserSettingsEditModel EditModel
         = new();
 
+    private bool _showUpgradeMembership;
+
     protected override async Task OnInitializedAsync()
     {
+        _showUpgradeMembership
+            = ApplicationStateService.CurrentUser != null
+              && ApplicationStateService.CurrentUser.IsUpgradeEligible();
+
         await Load();
     }
 
@@ -44,5 +53,10 @@ public partial class UserSettingsEditor
             = await QueryRouter.Send(new GetUserById(ApplicationStateService.CurrentUser.Id));
 
         EditModel = new UserSettingsEditModel(user);
+    }
+
+    private void UpgradeMembership()
+    {
+        NavigationManager.NavigateTo(NavigationPath.SubscriptionUpgrade);
     }
 }

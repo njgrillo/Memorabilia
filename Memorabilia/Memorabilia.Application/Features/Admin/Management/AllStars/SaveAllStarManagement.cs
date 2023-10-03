@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Application.Features.Admin.Management.AllStars;
 
-[AuthorizeByRole(Enum.PermissionType.Admin)]
+[AuthorizeByRole(Enum.Role.Admin)]
 public class SaveAllStarManagement
 {
     public class Handler : CommandHandler<Command>

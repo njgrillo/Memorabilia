@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Application.Features.Admin.InternationalHallOfFameTypes;
 
-[AuthorizeByRole(Enum.PermissionType.Admin)]
+[AuthorizeByRole(Enum.Role.Admin)]
 public record GetInternationalHallOfFameTypes() : IQuery<Entity.InternationalHallOfFameType[]>
 {
     public class Handler : QueryHandler<GetInternationalHallOfFameTypes, Entity.InternationalHallOfFameType[]>

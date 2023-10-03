@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Application.Features.Admin.InscriptionTypes;
 
-[AuthorizeByRole(Enum.PermissionType.Admin)]
+[AuthorizeByRole(Enum.Role.Admin)]
 public record GetInscriptionType(int Id) : IQuery<Entity.DomainEntity>
 {
     public class Handler : QueryHandler<GetInscriptionType, Entity.DomainEntity>

@@ -3,6 +3,9 @@
 public partial class ViewForums
 {
     [Inject]
+    public IApplicationStateService ApplicationStateService { get; set; }
+
+    [Inject]
     public IDialogService DialogService { get; set; }
 
     [Inject]
@@ -14,7 +17,14 @@ public partial class ViewForums
 
     protected string SearchText { get; set; }
 
+    private bool _canCreatePost;
+
     private string _searchText;
+
+    protected override void OnInitialized()
+    {
+        _canCreatePost = ApplicationStateService.CurrentUser != null;
+    }
 
     protected async Task Browse()
     {

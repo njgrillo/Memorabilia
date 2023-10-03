@@ -1,5 +1,6 @@
 ﻿namespace Memorabilia.Application.Features.SignatureIdentification;
 
+[AuthorizeByPermission(Enum.Permission.SignatureIdentification)]
 public class SaveSignatureIdentificationPerson
 {
     public class Handler : CommandHandler<Command>

@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Application.Features.Admin.LevelTypes;
 
-[AuthorizeByRole(Enum.PermissionType.Admin)]
+[AuthorizeByRole(Enum.Role.Admin)]
 public record SaveLevelType(DomainEditModel LevelType) : ICommand
 {
     public class Handler : CommandHandler<SaveLevelType>

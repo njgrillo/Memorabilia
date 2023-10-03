@@ -31,6 +31,7 @@ public partial class EditForumTopic
     protected int ForumTopicId { get; set; }
 
     private string _bookmarkText;
+    private bool _canReply;
 
     protected Alert[] ValidationResultAlerts
         => EditModel.ValidationResult.Errors?.Any() ?? false
@@ -41,11 +42,16 @@ public partial class EditForumTopic
     {
         ForumTopicId = DataProtectorService.DecryptId(EncryptForumTopicId);
 
+        _canReply = ApplicationStateService.CurrentUser != null;
+
         await Load();
     }
 
     protected async Task AddReply()
     {
+        if (!_canReply)
+            return;
+
         var command = new SaveForumTopic.Command(EditModel);
 
         EditModel.ValidationResult = Validator.Validate(command);
@@ -67,6 +73,9 @@ public partial class EditForumTopic
 
     protected async Task UpdateBookmark()
     {
+        if (!_canReply)
+            return;
+
         bool shouldBookmark
             = !EditModel.Bookmarks.Any(bookmark => bookmark.UserId == ApplicationStateService.CurrentUser.Id);
 
@@ -92,6 +101,9 @@ public partial class EditForumTopic
             = await QueryRouter.Send(new GetForumTopic(ForumTopicId));
 
         EditModel = new(forumTopic);
+
+        if (!_canReply)
+            return;
 
         CanEditSubject
             = EditModel.CreatedByUser.Id == ApplicationStateService.CurrentUser.Id;

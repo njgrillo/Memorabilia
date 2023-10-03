@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Application.Features.Admin.DashboardItems;
 
-[AuthorizeByRole(Enum.PermissionType.Admin)]
+[AuthorizeByRole(Enum.Role.Admin)]
 public record GetDashboardItem(int Id) : IQuery<Entity.DashboardItem>
 {
     public class Handler : QueryHandler<GetDashboardItem, Entity.DashboardItem>

@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Application.Features.Admin.GloveTypes;
 
-[AuthorizeByRole(Enum.PermissionType.Admin)]
+[AuthorizeByRole(Enum.Role.Admin)]
 public record SaveGloveType(DomainEditModel GloveType) : ICommand
 {
     public class Handler : CommandHandler<SaveGloveType>

@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Application.Features.Admin.AccomplishmentTypes;
 
-[AuthorizeByRole(Enum.PermissionType.Admin)]
+[AuthorizeByRole(Enum.Role.Admin)]
 public record SaveAccomplishmentType(DomainEditModel AccomplishmentType) : ICommand
 {
     public class Handler : CommandHandler<SaveAccomplishmentType>

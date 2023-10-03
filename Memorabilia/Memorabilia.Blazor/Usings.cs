@@ -272,6 +272,7 @@ global using Microsoft.Extensions.Logging;
 global using Microsoft.JSInterop;
 global using MimeKit;
 global using MudBlazor;
+global using Stripe.Checkout;
 global using System.Collections.Generic;
 global using System.ComponentModel;
 global using System.Data;

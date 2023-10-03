@@ -5,12 +5,16 @@
         </Match>
     </Condition>
     <MudStack Row="true">
-        <MudTooltip Text="@_bookmarkText">
-            <MudFab Color="MudBlazor.Color.Primary"
-                    Icon="@Icons.Material.Outlined.Favorite"
-                    OnClick="UpdateBookmark"
-                    Size="@MudBlazor.Size.Small" />
-        </MudTooltip>
+        <Condition Evaluation="@_canReply">
+            <Match>
+                <MudTooltip Text="@_bookmarkText">
+                    <MudFab Color="MudBlazor.Color.Primary"
+                            Icon="@Icons.Material.Outlined.Favorite"
+                            OnClick="UpdateBookmark"
+                            Size="@MudBlazor.Size.Small" />
+                </MudTooltip>
+            </Match>
+        </Condition>        
         <Text>@(EditModel.ForumCategoryTitle)</Text>
     </MudStack> 
     <br />
@@ -33,14 +37,18 @@
                 Items="EditModel.Entries.OrderByDescending(entry => entry.Rank).ThenByDescending(entry => entry.ModifiedDate).ThenByDescending(entry => entry.CreatedDate)">
         <EditForumEntry ForumEntry="forumEntry"
                         RankUpdated="OnRankUpdated" />
-    </Iterations>
-    <br />
-    <AddForumEntry ForumEntry="EditModel.Entry" />
-    <br />
-    <LeftRightSection>
-        <Right>
-            <SaveButton OnClick="AddReply"
-                        Text="Reply" />
-        </Right>
-    </LeftRightSection>
+    </Iterations>    
+    <Condition Evaluation="@_canReply">
+        <Match>
+            <br />
+            <AddForumEntry ForumEntry="EditModel.Entry" />
+            <br />
+            <LeftRightSection>
+                <Right>
+                    <SaveButton OnClick="AddReply"
+                            Text="Reply" />
+                </Right>
+            </LeftRightSection>
+        </Match>
+    </Condition>    
 </Div>

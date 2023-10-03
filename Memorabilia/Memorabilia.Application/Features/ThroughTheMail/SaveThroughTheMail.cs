@@ -1,5 +1,6 @@
 ﻿namespace Memorabilia.Application.Features.ThroughTheMail;
 
+[AuthorizeByPermission(Enum.Permission.ThroughTheMail)]
 public class SaveThroughTheMail
 {
     public class Handler : CommandHandler<Command>

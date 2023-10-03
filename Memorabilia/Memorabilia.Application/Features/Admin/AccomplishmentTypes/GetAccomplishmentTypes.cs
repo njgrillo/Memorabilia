@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Application.Features.Admin.AccomplishmentTypes;
 
-[AuthorizeByRole(Enum.PermissionType.Admin)]
+[AuthorizeByRole(Enum.Role.Admin)]
 public record GetAccomplishmentTypes() : IQuery<Entity.AccomplishmentType[]>
 {
     public class Handler : QueryHandler<GetAccomplishmentTypes, Entity.AccomplishmentType[]>

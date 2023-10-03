@@ -5,12 +5,14 @@ public class PaymentModel
 	public PaymentModel() { }
 
 	public PaymentModel(int purchaseUserId,
+						string orderId,
 						List<LineItemModel> lineItems,
 						string successUrl,
 						string cancelUrl,
 						string mode = null)
 	{
 		PurchaseUserId = purchaseUserId;
+		OrderId = orderId;
 		LineItems = lineItems;
 		SuccessUrl = successUrl;
 		CancelUrl = cancelUrl;
@@ -26,6 +28,8 @@ public class PaymentModel
 
 	public string Mode { get; set; }
 		= "payment";
+
+	public string OrderId { get; set; }
 
 	public int PurchaseUserId { get; set; }
 

@@ -8,7 +8,7 @@
         <Right>
             <MudStack Row="true">    
                 <Div Class="col-auto p-1">
-                    <Condition Evaluation="@(!CanEdit)">
+                    <Condition Evaluation="@(_canInteract && !CanEdit)">
                         <Match>
                             <MudTooltip Text="@_upvoteButtonText">
                                 <MudFab Color="MudBlazor.Color.Primary"
@@ -33,7 +33,8 @@
                 </Div>                
                 <Condition Evaluation="@(ForumEntry.Images.Any())">
                     <Match>
-                        <ForumEntryImages ImageDeleted="OnImageDeleted" 
+                        <ForumEntryImages CanDelete="CanEdit"
+                                          ImageDeleted="OnImageDeleted" 
                                           Images="ForumEntry.Images" />
                     </Match>
                 </Condition>

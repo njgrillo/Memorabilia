@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Application.Features.Admin.ItemTypeSizes;
 
-[AuthorizeByRole(Enum.PermissionType.Admin)]
+[AuthorizeByRole(Enum.Role.Admin)]
 public record GetItemTypeSizes(int? ItemTypeId = null) : IQuery<Entity.ItemTypeSize[]>
 {
     public class Handler : QueryHandler<GetItemTypeSizes, Entity.ItemTypeSize[]>

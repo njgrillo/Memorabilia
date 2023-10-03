@@ -1,5 +1,6 @@
 ﻿namespace Memorabilia.Application.Features.ProposeTrade;
 
+[AuthorizeByPermission(Enum.Permission.BuySellTrade)]
 public class AddProposeTrade
 {
     public class Handler : CommandHandler<Command>

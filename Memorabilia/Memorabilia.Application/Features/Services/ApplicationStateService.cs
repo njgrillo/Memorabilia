@@ -11,6 +11,19 @@ public class ApplicationStateService : IApplicationStateService
 
     public Constant.LoginProvider Provider { get; set; }
 
+    public string SubscriberLevel
+    {
+        get
+        {
+            if (CurrentUser == null)
+                return Constant.Role.NonSubscriber.Name;
+
+            Entity.UserRole role = CurrentUser.Roles.FirstOrDefault();
+
+            return Constant.Role.Find(role.RoleId)?.Name;
+        }
+    }
+
     public ApplicationStateService(QueryRouter queryRouter)
     {
         _queryRouter = queryRouter;

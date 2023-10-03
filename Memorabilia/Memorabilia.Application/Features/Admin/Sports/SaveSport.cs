@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Application.Features.Admin.Sports;
 
-[AuthorizeByRole(Enum.PermissionType.Admin)]
+[AuthorizeByRole(Enum.Role.Admin)]
 public record SaveSport(SportEditModel Sport) : ICommand
 {
     public class Handler : CommandHandler<SaveSport>

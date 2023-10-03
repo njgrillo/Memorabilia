@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Application.Features.Admin.RecordTypes;
 
-[AuthorizeByRole(Enum.PermissionType.Admin)]
+[AuthorizeByRole(Enum.Role.Admin)]
 public record GetRecordTypes() : IQuery<Entity.RecordType[]>
 {
     public class Handler : QueryHandler<GetRecordTypes, Entity.RecordType[]>

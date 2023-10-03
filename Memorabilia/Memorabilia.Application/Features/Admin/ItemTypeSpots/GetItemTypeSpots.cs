@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Application.Features.Admin.ItemTypeSpots;
 
-[AuthorizeByRole(Enum.PermissionType.Admin)]
+[AuthorizeByRole(Enum.Role.Admin)]
 public record GetItemTypeSpots(int? ItemTypeId = null) : IQuery<Entity.ItemTypeSpot[]>
 {
     public class Handler : QueryHandler<GetItemTypeSpots, Entity.ItemTypeSpot[]>

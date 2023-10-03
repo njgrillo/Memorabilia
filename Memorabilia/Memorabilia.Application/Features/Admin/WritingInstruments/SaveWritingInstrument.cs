@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Application.Features.Admin.WritingInstruments;
 
-[AuthorizeByRole(Enum.PermissionType.Admin)]
+[AuthorizeByRole(Enum.Role.Admin)]
 public record SaveWritingInstrument(DomainEditModel WritingInstrument) : ICommand
 {
     public class Handler : CommandHandler<SaveWritingInstrument>

@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Application.Features.Admin.Teams;
 
-[AuthorizeByRole(Enum.PermissionType.Admin)]
+[AuthorizeByRole(Enum.Role.Admin)]
 public record GetTeams(int? FranchiseId = null, 
                        int? SportLeagueLevelId = null, 
                        int? SportId = null) 

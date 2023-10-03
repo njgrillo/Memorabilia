@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Application.Features.Admin.Conferences;
 
-[AuthorizeByRole(Enum.PermissionType.Admin)]
+[AuthorizeByRole(Enum.Role.Admin)]
 public record GetConference(int Id) : IQuery<Entity.Conference>
 {
     public class Handler : QueryHandler<GetConference, Entity.Conference>

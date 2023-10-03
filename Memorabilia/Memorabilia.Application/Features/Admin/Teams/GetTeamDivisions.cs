@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Application.Features.Admin.Teams;
 
-[AuthorizeByRole(Enum.PermissionType.Admin)]
+[AuthorizeByRole(Enum.Role.Admin)]
 public record GetTeamDivisions(int TeamId) : IQuery<Entity.TeamDivision[]>
 {
     public class Handler : QueryHandler<GetTeamDivisions, Entity.TeamDivision[]>

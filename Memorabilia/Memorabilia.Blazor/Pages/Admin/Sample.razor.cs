@@ -6,6 +6,9 @@ public partial class Sample
     public IApplicationStateService ApplicationStateService { get; set; }
 
     [Inject]
+    public IDataProtectorService DataProtectorService { get; set; }
+
+    [Inject]
     public NavigationManager NavigationManager { get; set; }
 
     [Inject]
@@ -62,16 +65,21 @@ public partial class Sample
         lineItem.SetProduct(product);        
         lineItems.Add(lineItem);
 
-        string successUrl = $"{SiteSettings.Url}{NavigationPath.StripeConfirm}";
-        string cancelUrl = $"{SiteSettings.Url}{NavigationPath.StripeCancel}";
+        string orderId = Guid.NewGuid().ToString();
+        string encryptedOrderId = DataProtectorService.Encrypt(orderId);
+
+        string successUrl = $"{SiteSettings.Url}{NavigationPath.StripeConfirm}?orderId={encryptedOrderId}";
+        string cancelUrl = $"{SiteSettings.Url}{NavigationPath.StripeCancel}?orderId={encryptedOrderId}";
 
         var paymentModel 
             = new PaymentModel(ApplicationStateService.CurrentUser.Id, 
+                               orderId,
                                lineItems, 
                                successUrl, 
                                cancelUrl);
 
-        var session = await StripeService.CreatePaymentAsync(paymentModel);
+        Session session 
+            = await StripeService.CreatePaymentAsync(paymentModel);
 
         NavigationManager.NavigateTo(session.Url);
     }

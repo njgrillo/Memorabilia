@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Application.Features.Admin.TransactionTypes;
 
-[AuthorizeByRole(Enum.PermissionType.Admin)]
+[AuthorizeByRole(Enum.Role.Admin)]
 public record GetTransactionType(int Id) : IQuery<Entity.DomainEntity>
 {
     public class Handler : QueryHandler<GetTransactionType, Entity.DomainEntity>

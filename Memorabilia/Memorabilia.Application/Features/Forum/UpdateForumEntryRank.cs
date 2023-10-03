@@ -1,5 +1,6 @@
 ﻿namespace Memorabilia.Application.Features.Forum;
 
+[AuthorizeByPermission(Enum.Permission.Forum)]
 public record UpdateForumEntryRank(int ForumEntryId, int UserId, bool IncreaseRank)
     : ICommand
 {

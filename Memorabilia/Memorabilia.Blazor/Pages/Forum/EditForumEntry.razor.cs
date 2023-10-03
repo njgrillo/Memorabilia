@@ -35,12 +35,22 @@ public partial class EditForumEntry
 
     protected bool EditMode { get; set; }
 
+    private bool _canInteract;
     private string _upvoteButtonText;
 
     protected override void OnParametersSet()
     {
-        CanAttach = ForumEntry.Images.Count < 3;
-        CanEdit = ForumEntry.CreatedByUserId == ApplicationStateService.CurrentUser.Id;
+        CanAttach = ApplicationStateService.CurrentUser != null &&
+                    ForumEntry.CreatedByUserId == ApplicationStateService.CurrentUser.Id &&
+                    ForumEntry.Images.Count < 3;
+
+        _canInteract = ApplicationStateService.CurrentUser != null;
+
+        CanEdit = ApplicationStateService.CurrentUser != null &&
+                  ForumEntry.CreatedByUserId == ApplicationStateService.CurrentUser.Id;
+
+        if (!_canInteract)
+            return;
 
         _upvoteButtonText
             = ForumEntry.RankedUsers.Any(rankedUser => rankedUser.UserId == ApplicationStateService.CurrentUser.Id)
@@ -93,7 +103,9 @@ public partial class EditForumEntry
 
         ForumEntry = new(forumEntry);
 
-        CanAttach = ForumEntry.Images.Count < 3;
+        CanAttach = ApplicationStateService.CurrentUser != null &&
+                    ForumEntry.CreatedByUserId == ApplicationStateService.CurrentUser.Id &&
+                    ForumEntry.Images.Count < 3;
 
         Snackbar.Add("Forum Entry Image(s) saved successfully!", Severity.Success);
     }

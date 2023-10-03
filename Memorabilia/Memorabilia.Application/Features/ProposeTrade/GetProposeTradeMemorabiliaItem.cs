@@ -1,5 +1,6 @@
 ﻿namespace Memorabilia.Application.Features.ProposeTrade;
 
+[AuthorizeByPermission(Enum.Permission.BuySellTrade)]
 public record GetProposeTradeMemorabiliaItem(int MemorabiliaId)
     : IQuery<Entity.Memorabilia>
 {

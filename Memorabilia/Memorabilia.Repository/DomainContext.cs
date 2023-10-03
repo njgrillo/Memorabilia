@@ -116,6 +116,8 @@ public class DomainContext : DbContext, IDomainContext
         modelBuilder.Entity<Entity.ProjectType>(); 
         modelBuilder.Entity<Entity.PurchaseType>();
         modelBuilder.Entity<Entity.RecordType>();
+        modelBuilder.Entity<Entity.Role>();
+        modelBuilder.Entity<Entity.RolePermission>();
         modelBuilder.Entity<Entity.Size>();
         modelBuilder.Entity<Entity.Sport>();
         modelBuilder.Entity<Entity.SportLeagueLevel>();
@@ -133,6 +135,7 @@ public class DomainContext : DbContext, IDomainContext
         modelBuilder.Entity<Entity.User>();
         modelBuilder.Entity<Entity.UserDashboard>();
         modelBuilder.Entity<Entity.UserPaymentOption>();
+        modelBuilder.Entity<Entity.UserRole>();
         modelBuilder.Entity<Entity.UserSocialMedia>();
         modelBuilder.Entity<Entity.WritingInstrument>();
     }

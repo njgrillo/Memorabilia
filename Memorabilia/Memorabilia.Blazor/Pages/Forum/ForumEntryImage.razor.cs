@@ -12,6 +12,9 @@ public partial class ForumEntryImage
     public ISnackbar Snackbar { get; set; }
 
     [Parameter]
+    public bool CanDelete { get; set; }
+
+    [Parameter]
     public ForumEntryImageEditModel Image { get; set; }
 
     [Parameter]

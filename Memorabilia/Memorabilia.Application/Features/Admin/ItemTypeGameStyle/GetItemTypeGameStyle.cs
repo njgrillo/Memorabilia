@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Application.Features.Admin.ItemTypeGameStyle;
 
-[AuthorizeByRole(Enum.PermissionType.Admin)]
+[AuthorizeByRole(Enum.Role.Admin)]
 public record GetItemTypeGameStyle(int Id) : IQuery<Entity.ItemTypeGameStyleType>
 {
     public class Handler : QueryHandler<GetItemTypeGameStyle, Entity.ItemTypeGameStyleType>

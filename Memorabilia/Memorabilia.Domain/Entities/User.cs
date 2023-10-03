@@ -21,7 +21,9 @@ public class User : Framework.Library.Domain.Entity.DomainEntity
         LastName = lastName;
         Username = username;
         CreateDate = DateTime.UtcNow;
-        UserRoleId = Constant.Role.User.Id;
+
+        Roles = new();
+        Roles.Add(new UserRole(Constant.Role.NonSubscriber.Id, Id));
     }
 
     public virtual List<ForumTopicUserBookmark> BookmarkedForumTopics { get; private set; }
@@ -38,15 +40,15 @@ public class User : Framework.Library.Domain.Entity.DomainEntity
 
     public virtual List<UserPaymentOption> PaymentOptions { get; private set; }
 
+    public virtual List<UserRole> Roles { get; private set; }
+
     public virtual List<UserSocialMedia> SocialMedias { get; private set; }
 
     public DateTime? UpdateDate { get; private set; }
 
-    public string Username { get; private set; }
+    public string Username { get; private set; }    
 
-    public int UserRoleId { get; private set; }
-
-    public virtual UserSettings UserSettings { get; private set; }
+    public virtual UserSettings UserSettings { get; private set; }    
 
     public void SetDashboardItems(params int[] dashboardItemsIds)
     {
@@ -87,6 +89,21 @@ public class User : Framework.Library.Domain.Entity.DomainEntity
         }
 
         paymentOption.Set(paymentHandle, paymentOptionType);
+    }
+
+    public void SetUserRole(int roleId)
+    {
+        if (Roles == null)
+        {
+            Roles = new()
+            {
+                new UserRole(roleId, Id)
+            };
+
+            return;
+        }
+
+        Roles.First().SetRole(roleId);
     }
 
     public void SetSocialMedias(int userSociaMediaId,

@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Application.Features.Admin.AcquisitionTypes;
 
-[AuthorizeByRole(Enum.PermissionType.Admin)]
+[AuthorizeByRole(Enum.Role.Admin)]
 public record GetAcquisitionType(int Id) : IQuery<Entity.DomainEntity>
 {
     public class Handler : QueryHandler<GetAcquisitionType, Entity.DomainEntity>

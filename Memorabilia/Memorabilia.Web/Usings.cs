@@ -20,6 +20,7 @@ global using Memorabilia.Application.Features.Services.Interfaces;
 global using Memorabilia.Application.Features.Services.Security;
 global using Memorabilia.Application.Features.User;
 global using Memorabilia.Application.Features.User.Login;
+global using Memorabilia.Application.Features.User.Register;
 global using Memorabilia.Application.Hangfire;
 global using Memorabilia.Application.Hangfire.Attributes;
 global using Memorabilia.Application.Models.Payments.Stripe;

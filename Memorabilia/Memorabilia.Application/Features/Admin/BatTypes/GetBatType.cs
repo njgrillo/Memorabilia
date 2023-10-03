@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Application.Features.Admin.BatTypes;
 
-[AuthorizeByRole(Enum.PermissionType.Admin)]
+[AuthorizeByRole(Enum.Role.Admin)]
 public record GetBatType(int Id) : IQuery<Entity.DomainEntity>
 {
     public class Handler : QueryHandler<GetBatType, Entity.DomainEntity>

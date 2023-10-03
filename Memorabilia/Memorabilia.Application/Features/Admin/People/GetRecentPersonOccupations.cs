@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Application.Features.Admin.People;
 
-[AuthorizeByRole(Enum.PermissionType.Admin)]
+[AuthorizeByRole(Enum.Role.Admin)]
 public record GetRecentPersonOccupations() : IQuery<Entity.Person[]>
 {
     public class Handler : QueryHandler<GetRecentPersonOccupations, Entity.Person[]>

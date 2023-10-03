@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Application.Features.Admin.WritingInstruments;
 
-[AuthorizeByRole(Enum.PermissionType.Admin)]
+[AuthorizeByRole(Enum.Role.Admin)]
 public record GetWritingInstruments() : IQuery<Entity.WritingInstrument[]>
 {
     public class Handler : QueryHandler<GetWritingInstruments, Entity.WritingInstrument[]>

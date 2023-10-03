@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Application.Features.Admin.MagazineTypes;
 
-[AuthorizeByRole(Enum.PermissionType.Admin)]
+[AuthorizeByRole(Enum.Role.Admin)]
 public record SaveMagazineType(DomainEditModel MagazineType) : ICommand
 {
     public class Handler : CommandHandler<SaveMagazineType>
