@@ -1,17 +1,15 @@
-﻿<DivPad2>
+﻿@inherits ReroutePage
+
+<DivPad2>
     <LeftRightSection LeftStyle="width:60%;margin-right:2%;" 
                       RightStyle="width:38%;">
         <Left>  
-            <Condition Evaluation="@_canCreatePost">
-                <Match>
-                    <Div Style="margin-bottom:1%">
-                        <CustomButton ButtonType="MudBlazor.ButtonType.Button"
-                                      OnClick="CreatePost"
-                                      Size="MudBlazor.Size.Small"
-                                      Text="Create Post" />
-                    </Div>
-                </Match>
-            </Condition>            
+            <Div Style="margin-bottom:1%">
+                <CustomButton ButtonType="MudBlazor.ButtonType.Button"
+                              OnClick="CreatePost"
+                              Size="MudBlazor.Size.Small"
+                              Text="Create Post" />
+            </Div>
             <MudExpansionPanel IsExpanded="true"
                                Text="Browse">
                 <Div Style="margin-bottom:1%">

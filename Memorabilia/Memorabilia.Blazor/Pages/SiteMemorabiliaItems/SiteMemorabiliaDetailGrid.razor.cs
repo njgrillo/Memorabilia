@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Blazor.Pages.SiteMemorabiliaItems;
 
-public partial class SiteMemorabiliaDetailGrid
+public partial class SiteMemorabiliaDetailGrid : ReroutePage
 {
     [Inject]
     public IDataProtectorService DataProtectorService { get; set; }
@@ -51,6 +51,8 @@ public partial class SiteMemorabiliaDetailGrid
            ? "Deselect All"
            : "Select All";
 
+    private bool _canInteract;
+
     private MemorabiliaSearchCriteria _filter
         = new();
 
@@ -58,6 +60,13 @@ public partial class SiteMemorabiliaDetailGrid
 
     private MudTable<SiteMemorabiliaModel> _table
         = new();
+
+    protected override void OnInitialized()
+    {
+        _canInteract
+            = ApplicationStateService.CurrentUser != null &&
+              ApplicationStateService.CurrentUser.HasPermission(Permission.Memorabilia);
+    }
 
     protected override async Task OnParametersSetAsync()
     {
@@ -72,9 +81,15 @@ public partial class SiteMemorabiliaDetailGrid
         _resetPaging = false;
     }
 
-    protected void OnBuyNow()
+    protected async Task OnBuyNow()
     {
+        if (!_canInteract)
+        {
+            await ShowMembershipDialog();
+            return;
+        }
 
+        //TODO: Finish implentation
     }
 
     protected void OnImageLoaded()
@@ -98,13 +113,25 @@ public partial class SiteMemorabiliaDetailGrid
         await MemorabiliaSelected.InvokeAsync(SelectedMemorabilia);
     }
 
-    protected void OnMakeOffer(int memorabiliaId)
+    protected async Task OnMakeOffer(int memorabiliaId)
     {
+        if (!_canInteract)
+        {
+            await ShowMembershipDialog();
+            return;
+        }
+
         NavigationManager.NavigateTo($"{NavigationPath.Offer}/{DataProtectorService.EncryptId(memorabiliaId)}");
     }
 
-    protected void OnProposeTrade(int memorabiliaId)
+    protected async Task OnProposeTrade(int memorabiliaId)
     {
+        if (!_canInteract)
+        {
+            await ShowMembershipDialog();
+            return;
+        }
+
         NavigationManager.NavigateTo($"{NavigationPath.ProposeTrade}/{DataProtectorService.EncryptId(memorabiliaId)}");
     }
 

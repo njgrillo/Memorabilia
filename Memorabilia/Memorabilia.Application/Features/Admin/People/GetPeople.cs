@@ -1,6 +1,5 @@
 ﻿namespace Memorabilia.Application.Features.Admin.People;
 
-[AuthorizeByRole(Enum.Role.Admin)]
 public record GetPeople(int? SportId = null, 
                         int? SportLeagueLevelId = null) 
     : IQuery<Entity.Person[]>

@@ -1,12 +1,9 @@
 ﻿namespace Memorabilia.Blazor.Pages.SignatureReview;
 
-public partial class ViewSignatureReviews
+public partial class ViewSignatureReviews : ReroutePage
 {
     [Inject]
     public IDataProtectorService DataProtectorService { get; set; }
-
-    [Inject]
-    public IDialogService DialogService { get; set; }
 
     [Inject]
     public ImageService ImageService { get; set; }
@@ -20,6 +17,7 @@ public partial class ViewSignatureReviews
     protected SignatureReviewsModel Model
         = new();
 
+    private bool _canInteract;
     private bool _resetPaging;
 
     private MudTable<SignatureReviewModel> _table
@@ -27,6 +25,10 @@ public partial class ViewSignatureReviews
 
     protected override async Task OnInitializedAsync()
     {
+        _canInteract 
+            = ApplicationStateService.CurrentUser != null &&
+              ApplicationStateService.CurrentUser.HasPermission(Permission.EditSignatureAuthentication);
+
         _resetPaging = true;
 
         await _table.ReloadServerData();
@@ -67,6 +69,12 @@ public partial class ViewSignatureReviews
 
     protected async Task Random()
     {
+        if (!_canInteract)
+        {
+            await ShowMembershipDialog();
+            return;
+        }
+
         Entity.SignatureReview signatureReview
             = await QueryRouter.Send(new GetRandomSignatureReview());
 
@@ -82,5 +90,16 @@ public partial class ViewSignatureReviews
         signatureReview.ToggleIcon = signatureReview.DisplayDetails
             ? Icons.Material.Filled.ExpandLess
             : Icons.Material.Filled.ExpandMore;
+    }
+
+    private async Task View(int signatureReviewId)
+    {
+        if (!_canInteract)
+        {
+            await ShowMembershipDialog();
+            return;
+        }
+
+        NavigationManager.NavigateTo($"{NavigationPath.SignatureReview}/{DataProtectorService.EncryptId(signatureReviewId)}");
     }
 }

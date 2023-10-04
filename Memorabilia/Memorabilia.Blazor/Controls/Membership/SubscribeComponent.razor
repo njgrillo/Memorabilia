@@ -1,28 +1,18 @@
 ﻿<DivPad2>
     <Div Class="row">
-        <Condition Evaluation="@(!IsUpgrade)">
-            <Match>
-                <Div Style="@($"width:{_featureWidth}%;")">
-                    <SubscriberLevel Features="Feature.Free"
-                                     OnSelect="OnFreeSelect"
-                                     Title="Free" />
-
-                </Div>
-            </Match>
-        </Condition>        
-        <Div Style="@($"width:{_featureWidth}%;")">
+        <Div Style="width:32%;">
             <SubscriberLevel Features="Feature.Tier1"
                              OnSelect="OnTier1Select"
                              SubscriptionPrice="@_tier1Price"
                              Title="Tier 1: Casual Collector" />
         </Div>
-        <Div Style="@($"width:{_featureWidth}%;")">
+        <Div Style="width:32%;">
             <SubscriberLevel Features="Feature.Tier2"
                              OnSelect="OnTier2Select"
                              SubscriptionPrice="@_tier2Price"
                              Title="Tier 2: Hardcore Collector" />
         </Div>
-        <Div Style="@($"width:{_featureWidth}%;")">
+        <Div Style="width:32%;">
             <SubscriberLevel Features="Feature.All"
                              OnSelect="OnPromoterSelect"
                              SubscriptionPrice="@_promoterPrice"
@@ -30,3 +20,4 @@
         </Div>
     </Div>
 </DivPad2>
+

@@ -8,7 +8,6 @@ public static class ServiceCollectionExtensions
     {
         _configuration = configuration;
 
-        
         AddDataProtection(services);
         AddEmail(services);
         AddImages(services);

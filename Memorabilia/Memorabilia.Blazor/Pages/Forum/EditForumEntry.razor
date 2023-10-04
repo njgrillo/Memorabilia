@@ -1,4 +1,6 @@
-﻿<MudExpansionPanel IsExpanded="true"
+﻿@inherits ReroutePage
+
+<MudExpansionPanel IsExpanded="true"
                    Text="@(ForumEntry.ModifiedDate?.ToString("dddd, MMMM dd, yyyy hh:mm:ss tt") ?? ForumEntry.CreatedDate.ToString("dddd, MMMM dd, yyyy hh:mm:ss tt"))">
     <LeftRightSection LeftStyle="width:20%;"
                       RightStyle="width:80%;">
@@ -8,7 +10,7 @@
         <Right>
             <MudStack Row="true">    
                 <Div Class="col-auto p-1">
-                    <Condition Evaluation="@(_canInteract && !CanEdit)">
+                    <Condition Evaluation="@(!CanEdit)">
                         <Match>
                             <MudTooltip Text="@_upvoteButtonText">
                                 <MudFab Color="MudBlazor.Color.Primary"

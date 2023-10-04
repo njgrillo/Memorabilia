@@ -1,0 +1,25 @@
+﻿<MudDialog Style="max-height:85vh;overflow-y:auto;">
+    <DialogContent>
+        <Condition Evaluation="@_loggedIn">
+            <Match>
+                <SubscribeComponent />
+            </Match>
+            <NotMatch>
+                <Div Style="display:flex;align-items:center;">
+                    <Div Class="row">
+                        <Div Class="col-12"
+                             Style="text-align:center;">
+                            <MudStack Row="true">
+                                <CustomButton OnClick="Register"
+                                              Text="Register" />
+                            </MudStack>
+                        </Div>
+                    </Div>
+                </Div>
+            </NotMatch>
+        </Condition>        
+    </DialogContent>
+    <DialogActions>
+        <CancelButton OnClick="Cancel" />
+    </DialogActions>
+</MudDialog>

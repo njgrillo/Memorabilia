@@ -1,20 +1,18 @@
-﻿<Div Style="margin-top:1%;margin-bottom:1%;margin-left:1%;margin-right:1%;">
+﻿@inherits ReroutePage
+
+<Div Style="margin-top:1%;margin-bottom:1%;margin-left:1%;margin-right:1%;">
     <Condition Evaluation="@(ValidationResultAlerts.Any())">
         <Match>
             <AlertPanel Alerts="ValidationResultAlerts" />
         </Match>
     </Condition>
     <MudStack Row="true">
-        <Condition Evaluation="@_canReply">
-            <Match>
-                <MudTooltip Text="@_bookmarkText">
-                    <MudFab Color="MudBlazor.Color.Primary"
-                            Icon="@Icons.Material.Outlined.Favorite"
-                            OnClick="UpdateBookmark"
-                            Size="@MudBlazor.Size.Small" />
-                </MudTooltip>
-            </Match>
-        </Condition>        
+        <MudTooltip Text="@_bookmarkText">
+            <MudFab Color="MudBlazor.Color.Primary"
+                    Icon="@Icons.Material.Outlined.Favorite"
+                    OnClick="UpdateBookmark"
+                    Size="@MudBlazor.Size.Small" />
+        </MudTooltip>
         <Text>@(EditModel.ForumCategoryTitle)</Text>
     </MudStack> 
     <br />
@@ -38,17 +36,13 @@
         <EditForumEntry ForumEntry="forumEntry"
                         RankUpdated="OnRankUpdated" />
     </Iterations>    
-    <Condition Evaluation="@_canReply">
-        <Match>
-            <br />
-            <AddForumEntry ForumEntry="EditModel.Entry" />
-            <br />
-            <LeftRightSection>
-                <Right>
-                    <SaveButton OnClick="AddReply"
-                            Text="Reply" />
-                </Right>
-            </LeftRightSection>
-        </Match>
-    </Condition>    
+    <br />
+    <AddForumEntry ForumEntry="EditModel.Entry" />
+    <br />
+    <LeftRightSection>
+        <Right>
+            <SaveButton OnClick="AddReply"
+                        Text="Reply" />
+        </Right>
+    </LeftRightSection>
 </Div>

@@ -2,6 +2,9 @@
 
 public partial class SubscriberLevel
 {
+    [Inject]
+    public ImageService ImageService { get; set; }
+
     [Parameter]
     public Feature[] Features { get; set; }
 

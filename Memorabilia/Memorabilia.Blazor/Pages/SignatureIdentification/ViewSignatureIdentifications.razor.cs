@@ -1,12 +1,9 @@
 ﻿namespace Memorabilia.Blazor.Pages.SignatureIdentification;
 
-public partial class ViewSignatureIdentifications
+public partial class ViewSignatureIdentifications : ReroutePage
 {
     [Inject]
     public IDataProtectorService DataProtectorService { get; set; }
-
-    [Inject]
-    public IDialogService DialogService { get; set; }
 
     [Inject]
     public ImageService ImageService { get; set; }
@@ -20,6 +17,7 @@ public partial class ViewSignatureIdentifications
     protected SignatureIdentificationsModel Model
         = new();
 
+    private bool _canInteract;
     private bool _resetPaging;
 
     private MudTable<SignatureIdentificationModel> _table
@@ -27,6 +25,10 @@ public partial class ViewSignatureIdentifications
 
     protected override async Task OnInitializedAsync()
     {
+        _canInteract
+            = ApplicationStateService.CurrentUser != null &&
+              ApplicationStateService.CurrentUser.HasPermission(Permission.EditSignatureIdentification);
+
         _resetPaging = true;
 
         await _table.ReloadServerData();
@@ -67,6 +69,12 @@ public partial class ViewSignatureIdentifications
 
     protected async Task Random()
     {
+        if (!_canInteract)
+        {
+            await ShowMembershipDialog();
+            return;
+        }
+
         Entity.SignatureIdentification signatureIdentification 
             = await QueryRouter.Send(new GetRandomSignatureIdentfication());
 
@@ -82,5 +90,16 @@ public partial class ViewSignatureIdentifications
         signatureIdentification.ToggleIcon = signatureIdentification.DisplayDetails
             ? Icons.Material.Filled.ExpandLess
             : Icons.Material.Filled.ExpandMore;
+    }
+
+    private async Task View(int signatureIdentificationId)
+    {
+        if (!_canInteract)
+        {
+            await ShowMembershipDialog();
+            return;
+        }
+
+        NavigationManager.NavigateTo($"{NavigationPath.SignatureIdentification}/{DataProtectorService.EncryptId(signatureIdentificationId)}");
     }
 }

@@ -20,7 +20,7 @@ public record GetSiteMemorabiliaItems(PageInfo PageInfo,
         {
             int? userId = query.MemorabiliaSearchCriteria.IncludeMyMemorablia
                 ? null
-                : _applicationStateService.CurrentUser.Id;
+                : _applicationStateService.CurrentUser?.Id ?? 0;
 
             PagedResult<Entity.Memorabilia> result
                 = await _memorabiliaRepository.GetAll(query.PageInfo,

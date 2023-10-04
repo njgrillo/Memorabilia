@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Application.Features.Forum;
 
-[AuthorizeByPermission(Enum.Permission.Forum)]
+[AuthorizeByPermission(Enum.Permission.EditForum)]
 public class SaveForumTopic
 {
     public class Handler : CommandHandler<Command>
