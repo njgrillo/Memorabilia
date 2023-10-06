@@ -1,0 +1,84 @@
+﻿<DivRowFormGroup>
+    <MudStack Class="col-12" 
+              Row="true"
+              Style="margin-bottom:1%;">
+        <PersonAutoComplete Disabled="@(EditMode == EditModeType.Update)"
+                            IsCulturalSearch="true"
+                            SelectedValue="EditModel.Person"
+                            SelectionChanged="(p) => EditModel.Person = p" />
+        <Condition Evaluation="@(EditModel.Person.Id > 0)">
+            <Match>
+                <MudTooltip Text="View Profile">
+                    <MudIconButton Icon="@Icons.Material.Filled.Person"
+                                   OnClick="ShowPersonProfile" />
+                </MudTooltip>
+            </Match>
+        </Condition>
+        <Switch Checked="@EditModel.AllowInscriptions"
+                CheckedChanged="(p) => OnAllowInscriptionsChange(p)"
+                Label="Inscriptions Allowed?" />
+        <Condition Evaluation="@EditModel.AllowInscriptions">
+            <Match>
+                <NullableDecimalField Label="Inscription Cost"
+                                      Value="EditModel.InscriptionCost"
+                                      ValueChanged="@((p) => EditModel.InscriptionCost = p)" />
+            </Match>
+        </Condition> 
+        <AddUpdateMudFab EditMode="EditMode"
+                         OnAdd="Add"
+                         OnUpdate="Update" />
+    </MudStack>
+</DivRowFormGroup>
+<DivRowFormGroup>
+    <MudStack Class="col-12"
+              Row="true"
+              Style="margin-bottom:1%;">
+        <TextField Label="Note"
+                   Lines="10"
+                   SelectedText="@EditModel.Note"
+                   SelectedTextChanged="@((p) => EditModel.Note = p)" />        
+    </MudStack>
+</DivRowFormGroup>
+<MudTable Bordered="false"
+          Dense="false"
+          Hover="true"
+          Items="@People.Where(person => !person.IsDeleted).ToList()"
+          Striped="true">
+    <ToolBarContent>
+        <MudText Typo="Typo.h6">People</MudText>
+    </ToolBarContent>
+    <HeaderContent>
+        <MudTh></MudTh>
+        <MudTh>Name</MudTh>
+        <MudTh>Inscriptions Allowed</MudTh>
+        <MudTh>Inscription Cost</MudTh>
+        <MudTh>Note</MudTh>
+        <MudTh></MudTh>
+    </HeaderContent>
+    <RowTemplate>
+        <MudTd DataLabel="">
+            <GridImage AllowNavigation="false" 
+                       ImageLoaded="OnImageLoaded"
+                       ImageFileName="@context.Person.PersonImageFileName" />
+        </MudTd>
+        <MudTd DataLabel="Name">@context.Person.ProfileName</MudTd>
+        <MudTd DataLabel="InscriptionsAllowed">@(context.AllowInscriptions ? "Yes" : "No")</MudTd>
+        <MudTd DataLabel="InscriptionCost">@(context.AllowInscriptions ? context.InscriptionCost?.ToString("c") : "N/A")</MudTd>
+        <MudTd DataLabel="Note">@context.Note</MudTd>
+        <MudTd DataLabel="">
+            <MudTooltip Text="Edit">
+                <MudFab Color="MudBlazor.Color.Primary"                                
+                        Icon="@Icons.Material.Outlined.ModeEditOutline"
+                        OnClick="@(_ => Edit(context))" />
+            </MudTooltip> 
+            <MudTooltip Text="Delete">
+                <MudFab Color="MudBlazor.Color.Secondary"
+                        Icon="@Icons.Material.Outlined.DeleteOutline"
+                        OnClick="@(_ => context.IsDeleted = true)" />
+            </MudTooltip> 
+        </MudTd>
+    </RowTemplate>
+    <PagerContent>
+        <MudTablePager />
+    </PagerContent>
+</MudTable>

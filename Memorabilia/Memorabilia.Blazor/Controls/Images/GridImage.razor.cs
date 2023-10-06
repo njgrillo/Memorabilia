@@ -19,6 +19,9 @@ public partial class GridImage
     public EventCallback ImageLoaded { get; set; }
 
     [Parameter]
+    public bool IsPersonImage { get; set; }
+
+    [Parameter]
     public string NavigationPath { get; set; }
 
     [Parameter]
@@ -41,7 +44,9 @@ public partial class GridImage
             ImageFileName.IsNullOrEmpty())
             return;
 
-        ImageData = ImageService.GetUserImageData(ImageFileName, UserId);
+        ImageData = IsPersonImage
+            ? ImageService.GetPersonImageData(ImageFileName)    
+            : ImageService.GetUserImageData(ImageFileName, UserId);
 
         await ImageLoaded.InvokeAsync();
     }

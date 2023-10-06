@@ -11,9 +11,17 @@ public class PrivateSigningAuthenticationCompanyEditModel : EditModel
 		PrivateSigningId = privateSigningAuthenticationCompany.Id;
 	}
 
+	public Constant.AuthenticationCompany AuthenticationCompany
+		=> Constant.AuthenticationCompany.Find(AuthenticationCompanyId);
+
 	public int AuthenticationCompanyId { get; set; }
 
-	public decimal Cost { get; set; }
+	public string AuthenticationCompanyName
+		=> AuthenticationCompany != null
+		? $"{AuthenticationCompany.Name} {(!AuthenticationCompany.Abbreviation.IsNullOrEmpty() ? $"({AuthenticationCompany.Abbreviation})" : string.Empty)}"
+		: string.Empty;
+
+    public decimal? Cost { get; set; }
 
 	public int PrivateSigningId { get; set; }
 }

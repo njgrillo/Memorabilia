@@ -1,0 +1,49 @@
+﻿<DivRowFormGroup>
+    <MudStack Class="col-12" 
+              Row="true"
+              Style="margin-bottom:1%;">
+        <AuthenticationCompanyDropDown Disabled="@(EditMode == EditModeType.Update)"
+                                       SelectedValue="EditModel.AuthenticationCompanyId"
+                                       SelectionChanged="(p) => EditModel.AuthenticationCompanyId = p" />
+        <NullableDecimalField Label="Cost"
+                              Value="EditModel.Cost"
+                              ValueChanged="@((p) => EditModel.Cost = p)" />
+        <AddUpdateMudFab EditMode="EditMode"
+                         OnAdd="Add"
+                         OnUpdate="Update" />
+    </MudStack>
+</DivRowFormGroup>
+<MudTable Bordered="false"
+          Dense="false"
+          Hover="true"
+          Items="@AuthenticationCompanies.Where(company => !company.IsDeleted).ToList()"
+          Striped="true">
+    <ToolBarContent>
+        <MudText Typo="Typo.h6">Authentication Providers</MudText>
+    </ToolBarContent>
+    <HeaderContent>
+        <MudTh>Company</MudTh>
+        <MudTh>Cost</MudTh>
+        <MudTh></MudTh>
+        <MudTh></MudTh>
+    </HeaderContent>
+    <RowTemplate>
+        <MudTd DataLabel="Company">@context.AuthenticationCompanyName</MudTd>
+        <MudTd DataLabel="Cost">@(context.Cost?.ToString("c") ?? string.Empty)</MudTd>
+        <MudTd DataLabel="">
+            <MudTooltip Text="Edit">
+                <MudFab Color="MudBlazor.Color.Primary"                                
+                        Icon="@Icons.Material.Outlined.ModeEditOutline"
+                        OnClick="@(_ => Edit(context))" />
+            </MudTooltip> 
+            <MudTooltip Text="Delete">
+                <MudFab Color="MudBlazor.Color.Secondary"
+                        Icon="@Icons.Material.Outlined.DeleteOutline"
+                        OnClick="@(_ => context.IsDeleted = true)" />
+            </MudTooltip>  
+        </MudTd>
+    </RowTemplate>
+    <PagerContent>
+        <MudTablePager />
+    </PagerContent>
+</MudTable>

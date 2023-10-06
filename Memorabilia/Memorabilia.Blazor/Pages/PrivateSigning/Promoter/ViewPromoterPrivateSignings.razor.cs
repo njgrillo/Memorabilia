@@ -1,7 +1,10 @@
-﻿namespace Memorabilia.Blazor.Pages.PrivateSigning;
+﻿namespace Memorabilia.Blazor.Pages.PrivateSigning.Promoter;
 
-public partial class ViewPrivateSignings
+public partial class ViewPromoterPrivateSignings
 {
+    [Inject]
+    public IApplicationStateService ApplicationStateService { get; set; }
+
     [Inject]
     public IDataProtectorService DataProtectorService { get; set; }
 
@@ -14,12 +17,12 @@ public partial class ViewPrivateSignings
     [Inject]
     public QueryRouter QueryRouter { get; set; }
 
-    protected PrivateSigningsModel Model
+    protected PromoterPrivateSigningsModel Model { get; set; }
         = new();
 
     private bool _resetPaging;
 
-    private MudTable<PrivateSigningModel> _table
+    private MudTable<PromoterPrivateSigningModel> _table
        = new();
 
     protected override async Task OnInitializedAsync()
@@ -31,13 +34,18 @@ public partial class ViewPrivateSignings
         _resetPaging = false;
     }
 
-    protected async Task<TableData<PrivateSigningModel>> OnRead(TableState state)
+    protected void AddPrivateSigning()
+    {
+        NavigationManager.NavigateTo(NavigationPath.MyPrivateSigningsEdit);
+    }
+
+    protected async Task<TableData<PromoterPrivateSigningModel>> OnRead(TableState state)
     {
         var pageInfo = new PageInfo(_resetPaging ? 1 : state.Page + 1, state.PageSize);
 
-        Model = await QueryRouter.Send(new GetPrivateSignings(pageInfo));
+        Model = await QueryRouter.Send(new GetPromoterPrivateSignings(pageInfo));
 
-        return new TableData<PrivateSigningModel>()
+        return new TableData<PromoterPrivateSigningModel>()
         {
             Items = Model.PrivateSignings,
             TotalItems = Model.PageInfo.TotalItems
@@ -46,7 +54,7 @@ public partial class ViewPrivateSignings
 
     private void ToggleChildContent(int privateSigningId)
     {
-        PrivateSigningModel privateSigning
+        PromoterPrivateSigningModel privateSigning
             = Model.PrivateSignings.Single(item => item.Id == privateSigningId);
 
         privateSigning.DisplayDetails = !privateSigning.DisplayDetails;

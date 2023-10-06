@@ -10,6 +10,7 @@ public class PrivateSigningPersonEditModel : EditModel
 		Id = privateSigningPerson.Id;
 		InscriptionCost = privateSigningPerson.InscriptionCost;
 		Note = privateSigningPerson.Note;
+		Person = new(new PersonModel(privateSigningPerson.Person));
 		PersonId = privateSigningPerson.PersonId;
 		PrivateSigningId = privateSigningPerson.PrivateSigningId;
 	}
@@ -20,7 +21,10 @@ public class PrivateSigningPersonEditModel : EditModel
 
 	public string Note { get; set; }
 
-	public int PersonId { get; set; }
+	public PersonEditModel Person { get; set; }
+		= new();
+
+    public int PersonId { get; set; }
 
 	public int PrivateSigningId { get; set; }
 }

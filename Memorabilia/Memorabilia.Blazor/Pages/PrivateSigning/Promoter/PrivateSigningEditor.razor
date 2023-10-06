@@ -1,0 +1,39 @@
+﻿<DivPad2>
+    <MudExpansionPanel IsExpanded="true"
+                       Text="General Details">
+        <DivRowFormGroup>
+            <Div Class="col-3">
+                <MudDatePicker @bind-Date="EditModel.SubmissionDeadlineDate"
+                               DateFormat="MM/dd/yyyy"
+                               Editable="true"
+                               Label="Send in Submission Deadline"
+                               Mask="@(new DateMask("MM/dd/yyyy"))"
+                               Variant="Variant.Outlined" />
+            </Div>
+            <Div Class="col-3">
+                <MudDatePicker @bind-Date="EditModel.SigningDate"
+                               DateFormat="MM/dd/yyyy"
+                               Editable="true"
+                               Label="Signing Date"
+                               Mask="@(new DateMask("MM/dd/yyyy"))"
+                               Variant="Variant.Outlined" />
+            </Div>
+        </DivRowFormGroup>     
+        <DivRowFormGroup>
+            <Div Class="col-12">
+                <TextField Label="Note"
+                           Lines="10"
+                           SelectedText="@EditModel.Note"
+                           SelectedTextChanged="@((p) => EditModel.Note = p)" />
+            </Div>
+        </DivRowFormGroup>
+    </MudExpansionPanel>
+    <MudExpansionPanel IsExpanded="true"
+                       Text="People">
+        <PrivateSigningPeopleEditor People="EditModel.People" />
+    </MudExpansionPanel>
+    <MudExpansionPanel IsExpanded="true"
+                       Text="Authentication Providers">
+        <PrivateSigningAuthenticationEditor AuthenticationCompanies="EditModel.AuthenticationCompanies" />
+    </MudExpansionPanel>
+</DivPad2>

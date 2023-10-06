@@ -2,5 +2,5 @@
 
 public interface IPrivateSigningRepository : IDomainRepository<Entity.PrivateSigning>
 {
-    Task<PagedResult<Entity.PrivateSigning>> GetAll(PageInfo pageInfo);
+    Task<PagedResult<Entity.PrivateSigning>> GetAll(PageInfo pageInfo, int? userId = null);
 }
