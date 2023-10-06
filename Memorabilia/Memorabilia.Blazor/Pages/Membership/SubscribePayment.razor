@@ -1,0 +1,28 @@
+﻿<DivPad2>
+    <MudExpansionPanel IsExpanded="true"
+                       Text="Membership Options">
+        <Div Class="row">
+            <Div Class="col-6">
+                <Div Class="form-group">
+                    <Switch Checked="@IsAutoRenew"
+                            CheckedChanged="(p) => IsAutoRenew = p"
+                            Label="Enroll in auto-renew?" />
+                </Div>
+            </Div>
+        </Div>        
+    </MudExpansionPanel>
+    <Div Style="margin-top:1%;margin-bottom:1%;">
+        <LeftRightSection>
+            <Right>
+                <MudStack Row="true">
+                    <CustomButton Color="@MudBlazor.Color.Success"
+                                  OnClick="PaypalCheckout"
+                                  Text="Paypal Checkout" />
+                    <CustomButton Color="@MudBlazor.Color.Success"
+                                  OnClick="StripeCheckout"
+                                  Text="Stripe Checkout" />
+                </MudStack>                
+            </Right>
+        </LeftRightSection>
+    </Div>
+</DivPad2>

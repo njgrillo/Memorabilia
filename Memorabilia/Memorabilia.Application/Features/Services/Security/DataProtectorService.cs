@@ -8,16 +8,20 @@ public class DataProtectorService : IDataProtectorService
 	public DataProtectorService(IDataProtectionProvider dataProtectionProvider)
 	{
         _dataProtectionProvider = dataProtectionProvider;
-	}
-
-	public string EncryptId(int id)
-	{
-		_dataProtector = _dataProtectionProvider.CreateProtector("GraphinAllDay");
-
-		return _dataProtector.Protect(id.ToString());
+        _dataProtector = _dataProtectionProvider.CreateProtector("GraphinAllDay");
     }
 
-	public int DecryptId(string value)
+	public string Encrypt(string key)
+        => _dataProtector.Protect(key);
+
+
+    public string EncryptId(int id)
+	    => _dataProtector.Protect(id.ToString());
+
+    public string Decrypt(string key)
+        => _dataProtector.Unprotect(key);
+
+    public int DecryptId(string value)
 	{
         _ = int.TryParse(_dataProtector.Unprotect(value), out int result);
 

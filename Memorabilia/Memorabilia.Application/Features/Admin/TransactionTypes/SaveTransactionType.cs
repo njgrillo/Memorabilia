@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Application.Features.Admin.TransactionTypes;
 
-[AuthorizeByRole(Enum.PermissionType.Admin)]
+[AuthorizeByRole(Enum.Role.Admin)]
 public record SaveTransactionType(DomainEditModel TransactionType) : ICommand
 {
     public class Handler : CommandHandler<SaveTransactionType>

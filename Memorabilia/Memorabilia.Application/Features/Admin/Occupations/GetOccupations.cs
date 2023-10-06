@@ -1,6 +1,5 @@
 ﻿namespace Memorabilia.Application.Features.Admin.Occupations;
 
-[AuthorizeByRole(Enum.PermissionType.Admin)]
 public record GetOccupations() : IQuery<Entity.Occupation[]>
 {
     public class Handler : QueryHandler<GetOccupations, Entity.Occupation[]>

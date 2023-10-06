@@ -43,6 +43,55 @@
         </DivRowFormGroup>
     </MudExpansionPanel>
     <MudExpansionPanel IsExpanded="true"
+                       Text="Membership Settings">
+        <DivRowFormGroup>
+            <Div Style="margin-left:1%;margin-bottom:1%">
+                <MudStack Row="true">
+                    <Text Typography="Typo.h6">
+                        Subscription: <b>@(ApplicationStateService.SubscriberLevel)</b>
+                    </Text>
+                    <Condition Evaluation="@(ApplicationStateService.CurrentUser.SubscriptionExpirationDate.HasValue)">
+                        <Match>
+                            <Text Typography="Typo.h6">
+                                Expires: <b>@(ApplicationStateService.CurrentUser.SubscriptionExpirationDate.Value.ToString("MM-dd-yyyy"))</b>
+                            </Text>
+                        </Match>
+                    </Condition>  
+                    <Text Typography="Typo.h6">
+                        Status: <b>@ApplicationStateService.CurrentUser.MembershipStatus()</b>
+                    </Text>
+                </MudStack>
+            </Div>                       
+        </DivRowFormGroup>
+        <DivRowFormGroup>
+            <Div Style="margin-left:1%;">
+                <MudStack Row="true">
+                    <Condition Evaluation="@_showUpgradeMembership">
+                        <Match>
+                            <CustomButton Color="MudBlazor.Color.Success"
+                                          OnClick="@UpgradeMembership"
+                                          Text="Upgrade" />
+                        </Match>
+                    </Condition>
+                    <Condition Evaluation="@_showCancelMembership">
+                        <Match>
+                            <CustomButton Color="MudBlazor.Color.Error"
+                                          OnClick="@CancelMembership"
+                                          Text="Cancel Membership" />
+                        </Match>
+                    </Condition>
+                    <Condition Evaluation="@(ApplicationStateService.CurrentUser.IsActiveMember())">
+                        <Match>
+                            <MudLink Href="@StripeSettings.CustomerSelfManageUrl" Target="_blank">
+                                Update Payment Details
+                            </MudLink>
+                        </Match>
+                    </Condition>
+                </MudStack>
+            </Div>
+        </DivRowFormGroup>
+    </MudExpansionPanel>
+    <MudExpansionPanel IsExpanded="true"
                        Text="Payment Settings">
         <DivRowFormGroup>
             <UserPaymentOptionEditor PaymentOptions="EditModel.PaymentOptions" />

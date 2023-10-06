@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Application.Features.Admin.ItemTypeSizes;
 
-[AuthorizeByRole(Enum.PermissionType.Admin)]
+[AuthorizeByRole(Enum.Role.Admin)]
 public record SaveItemTypeSize(ItemTypeSizeEditModel ItemTypeSize) : ICommand
 {
     public class Handler : CommandHandler<SaveItemTypeSize>

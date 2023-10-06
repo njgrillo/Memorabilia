@@ -1,5 +1,6 @@
 ﻿namespace Memorabilia.Application.Features.ProposeTrade;
 
+[AuthorizeByPermission(Enum.Permission.BuySellTrade)]
 public record UpdateProposeTradeStatus(int ProposeTradeId, Constant.ProposeTradeStatusType Status)
      : ICommand
 {

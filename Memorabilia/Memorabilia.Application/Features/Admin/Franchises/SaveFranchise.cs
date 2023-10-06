@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Application.Features.Admin.Franchises;
 
-[AuthorizeByRole(Enum.PermissionType.Admin)]
+[AuthorizeByRole(Enum.Role.Admin)]
 public record SaveFranchise(FranchiseEditModel Franchise) : ICommand
 {
     public class Handler : CommandHandler<SaveFranchise>

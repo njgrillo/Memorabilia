@@ -1,5 +1,6 @@
 ﻿namespace Memorabilia.Application.Features.Forum;
 
+[AuthorizeByPermission(Enum.Permission.EditForum)]
 public record AddForumEntryImages(int ForumEntryId,
                                   ForumEntryImageEditModel[] ForumEntryImages)
     : ICommand

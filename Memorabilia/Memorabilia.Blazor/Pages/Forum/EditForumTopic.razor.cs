@@ -1,10 +1,7 @@
 ﻿namespace Memorabilia.Blazor.Pages.Forum;
 
-public partial class EditForumTopic
+public partial class EditForumTopic : ReroutePage
 {
-    [Inject]
-    public IApplicationStateService ApplicationStateService { get; set; }
-
     [Inject]
     public CommandRouter CommandRouter { get; set; }
 
@@ -31,6 +28,7 @@ public partial class EditForumTopic
     protected int ForumTopicId { get; set; }
 
     private string _bookmarkText;
+    private bool _canInteract;
 
     protected Alert[] ValidationResultAlerts
         => EditModel.ValidationResult.Errors?.Any() ?? false
@@ -39,6 +37,10 @@ public partial class EditForumTopic
 
     protected override async Task OnInitializedAsync()
     {
+        _canInteract
+            = ApplicationStateService.CurrentUser != null &&
+              ApplicationStateService.CurrentUser.HasPermission(Permission.EditForum);
+
         ForumTopicId = DataProtectorService.DecryptId(EncryptForumTopicId);
 
         await Load();
@@ -46,6 +48,12 @@ public partial class EditForumTopic
 
     protected async Task AddReply()
     {
+        if (!_canInteract)
+        {
+            await ShowMembershipDialog();
+            return;
+        }
+
         var command = new SaveForumTopic.Command(EditModel);
 
         EditModel.ValidationResult = Validator.Validate(command);
@@ -67,6 +75,12 @@ public partial class EditForumTopic
 
     protected async Task UpdateBookmark()
     {
+        if (!_canInteract)
+        {
+            await ShowMembershipDialog();
+            return;
+        }
+
         bool shouldBookmark
             = !EditModel.Bookmarks.Any(bookmark => bookmark.UserId == ApplicationStateService.CurrentUser.Id);
 
@@ -92,6 +106,9 @@ public partial class EditForumTopic
             = await QueryRouter.Send(new GetForumTopic(ForumTopicId));
 
         EditModel = new(forumTopic);
+
+        if (!_canInteract)
+            return;
 
         CanEditSubject
             = EditModel.CreatedByUser.Id == ApplicationStateService.CurrentUser.Id;

@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Application.Features.Admin.Management.Awards;
 
-[AuthorizeByRole(Enum.PermissionType.Admin)]
+[AuthorizeByRole(Enum.Role.Admin)]
 public class SaveAwardManagement
 {
     public class Handler : CommandHandler<Command>

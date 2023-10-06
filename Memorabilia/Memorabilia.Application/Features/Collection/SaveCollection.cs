@@ -1,5 +1,6 @@
 ﻿namespace Memorabilia.Application.Features.Collection;
 
+[AuthorizeByPermission(Enum.Permission.Collection)]
 public class SaveCollection
 {
     public class Handler : CommandHandler<Command>

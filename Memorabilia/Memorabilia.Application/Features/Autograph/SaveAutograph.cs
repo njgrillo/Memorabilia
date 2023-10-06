@@ -1,5 +1,6 @@
 ﻿namespace Memorabilia.Application.Features.Autograph;
 
+[AuthorizeByPermission(Enum.Permission.Memorabilia)]
 public class SaveAutograph
 {
     public class Handler : CommandHandler<Command>

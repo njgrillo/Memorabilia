@@ -23,12 +23,22 @@
             </Left>
             <Right>
                 <AuthorizeView>
-                    <Authorized>                        
+                    <Authorized>   
+                        <Condition Evaluation="@_showUpgradeMembership">
+                            <Match>
+                                <MudTooltip Text="Upgrade Membership">
+                                    <MudIconButton Color="MudBlazor.Color.Inherit"
+                                                   Edge="Edge.Start"
+                                                   Icon="@Icons.Material.Filled.Upgrade"
+                                                   OnClick="@UpgradeMembership" />
+                                </MudTooltip>
+                            </Match>
+                        </Condition>                        
                         <MudTooltip Text="User Settings">
                             <MudIconButton Color="MudBlazor.Color.Inherit"
                                            Edge="Edge.Start"
                                            Icon="@Icons.Material.Filled.Settings"
-                                           OnClick="@((e) => UserSettings())" />
+                                           OnClick="@UserSettings" />
                         </MudTooltip>
                     </Authorized>
                 </AuthorizeView>

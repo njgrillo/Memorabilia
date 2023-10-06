@@ -1,6 +1,5 @@
 ﻿namespace Memorabilia.Application.Features.Admin.Sizes;
 
-[AuthorizeByRole(Enum.PermissionType.Admin)]
 public record GetSize(int Id) : IQuery<Entity.DomainEntity>
 {
     public class Handler : QueryHandler<GetSize, Entity.DomainEntity>

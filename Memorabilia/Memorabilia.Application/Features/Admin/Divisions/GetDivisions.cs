@@ -1,6 +1,5 @@
 ﻿namespace Memorabilia.Application.Features.Admin.Divisions;
 
-[AuthorizeByRole(Enum.PermissionType.Admin)]
 public record GetDivisions() : IQuery<Entity.Division[]>
 {
     public class Handler : QueryHandler<GetDivisions, Entity.Division[]>

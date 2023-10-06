@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Application.Features.Admin.ProjectTypes;
 
-[AuthorizeByRole(Enum.PermissionType.Admin)]
+[AuthorizeByRole(Enum.Role.Admin)]
 public record SaveProjectType(DomainEditModel ProjectType) : ICommand
 {
     public class Handler : CommandHandler<SaveProjectType>

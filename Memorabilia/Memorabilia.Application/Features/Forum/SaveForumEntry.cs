@@ -1,5 +1,6 @@
 ﻿namespace Memorabilia.Application.Features.Forum;
 
+[AuthorizeByPermission(Enum.Permission.EditForum)]
 public record SaveForumEntry(int ForumEntryId, string Message)
     : ICommand
 {

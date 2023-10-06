@@ -1,6 +1,5 @@
 ﻿namespace Memorabilia.Application.Features.Admin.CerealTypes;
 
-[AuthorizeByRole(Enum.PermissionType.Admin)]
 public record GetCerealTypes() : IQuery<Entity.CerealType[]>
 {
     public class Handler : QueryHandler<GetCerealTypes, Entity.CerealType[]>

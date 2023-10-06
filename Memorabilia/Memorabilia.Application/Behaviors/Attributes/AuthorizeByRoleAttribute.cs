@@ -2,8 +2,8 @@
 
 public class AuthorizeByRoleAttribute : AuthorizeAttribute
 {
-	public AuthorizeByRoleAttribute(params Enum.PermissionType[] permissionTypes)
+	public AuthorizeByRoleAttribute(params Enum.Role[] roles)
 	{
-		Roles = string.Join(",", permissionTypes);	
+		Roles = string.Join(",", roles);	
 	}
 }

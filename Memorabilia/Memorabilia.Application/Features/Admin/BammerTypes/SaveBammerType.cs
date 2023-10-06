@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Application.Features.Admin.BammerTypes;
 
-[AuthorizeByRole(Enum.PermissionType.Admin)]
+[AuthorizeByRole(Enum.Role.Admin)]
 public record SaveBammerType(DomainEditModel BammerType) : ICommand
 {
     public class Handler : CommandHandler<SaveBammerType>

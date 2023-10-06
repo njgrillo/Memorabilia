@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Application.Features.Admin.Management.AllStars;
 
-[AuthorizeByRole(Enum.PermissionType.Admin)]
+[AuthorizeByRole(Enum.Role.Admin)]
 public record GetAllAllStarManagements() : IQuery<AllStarManagementModel[]>
 {
     public class Handler : QueryHandler<GetAllAllStarManagements, AllStarManagementModel[]>

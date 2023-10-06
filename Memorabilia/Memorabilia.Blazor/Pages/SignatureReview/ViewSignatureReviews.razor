@@ -1,6 +1,10 @@
-﻿<PageView AddRoute="@NavigationPath.SignatureReviewAdd"
+﻿@inherits ReroutePage
+
+<PageView AddRoute="@NavigationPath.SignatureReviewAdd"
           AddTitle="@($"{Constant.EditModeType.Add.Name} Signature Review")"
+          DisplayAddButton="_canInteract"
           DisplayPageHeader="false"
+          DisplayPageFooter="_canInteract"
           NavigationPath="@NavigationPath.Home"
           PageTitle="Signature Reviews">
     <DivPad2>
@@ -53,7 +57,7 @@
                         <MudTooltip Text="Review">
                             <MudFab Color="MudBlazor.Color.Primary"
                                     Icon="@Icons.Material.Outlined.RateReview"
-                                    OnClick="@(_ => NavigationManager.NavigateTo($"{NavigationPath.SignatureReview}/{DataProtectorService.EncryptId(context.Id)}"))"
+                                    OnClick="@(_ => View(context.Id))"
                                     Size="@MudBlazor.Size.Large" />
                         </MudTooltip>
                     </MudTd>

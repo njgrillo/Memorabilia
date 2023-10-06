@@ -13,4 +13,6 @@ public interface IApplicationStateService
     Constant.LoginProvider Provider { get; set; }
 
     void Set(Entity.User user);
+
+    string SubscriberLevel { get; }
 }

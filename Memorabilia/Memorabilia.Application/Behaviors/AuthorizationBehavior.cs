@@ -21,15 +21,47 @@ public class AuthorizationBehavior<TRequest, TResponse>
     }
 
     private void CheckSecurity(TRequest request)
-    {
+    {   
         AuthorizeAttribute[] authorizeAttributes 
             = request.GetType()
                      .GetCustomAttributes<AuthorizeAttribute>()
                      .ToArray();
 
         if (!authorizeAttributes.Any())
-            return;        
+            return;
 
+        CheckUserMembership();
+        CheckPermissions(authorizeAttributes);
+        CheckRoles(authorizeAttributes);       
+    }    
+
+    private void CheckPermissions(AuthorizeAttribute[] authorizeAttributes)
+    {
+        AuthorizeAttribute[] authorizeAttributesWithPermissions
+            = authorizeAttributes.Where(authorizeAttribute => !authorizeAttribute.Policy.IsNullOrEmpty())
+                                 .ToArray();
+
+        if (!authorizeAttributesWithPermissions.Any())
+            return;
+
+        foreach (string[] requiredPermissions in authorizeAttributesWithPermissions.Select(authorizeAttribute => authorizeAttribute.Policy.Split(',')))
+        {
+            Constant.Permission[] permissions
+                = requiredPermissions.Select(Constant.Permission.FindByName)
+                                     .ToArray();
+
+            foreach (Constant.Permission permission in permissions)
+            {
+                if (_applicationStateService.CurrentUser.HasPermission(permission))
+                    return;
+            }
+
+            throw new UnauthorizedAccessException();
+        }
+    }
+
+    private void CheckRoles(AuthorizeAttribute[] authorizeAttributes)
+    {
         AuthorizeAttribute[] authorizeAttributesWithRoles
             = authorizeAttributes.Where(authorizeAttribute => !authorizeAttribute.Roles.IsNullOrEmpty())
                                  .ToArray();
@@ -37,13 +69,27 @@ public class AuthorizationBehavior<TRequest, TResponse>
         if (!authorizeAttributesWithRoles.Any())
             return;
 
-        foreach (string[] requiredPermissions in authorizeAttributesWithRoles.Select(authorizeAttribute => authorizeAttribute.Roles.Split(',')))
+        foreach (string[] requiredRoles in authorizeAttributesWithRoles.Select(authorizeAttribute => authorizeAttribute.Roles.Split(',')))
         {
-            if (!requiredPermissions.Any(permission => permission.Equals("admin", StringComparison.OrdinalIgnoreCase)))
-                continue;
+            Constant.Role[] roles
+                = requiredRoles.Select(Constant.Role.FindByName)
+                               .ToArray();
 
-            if (!_applicationStateService.CurrentUser.IsAdmin())
-                throw new UnauthorizedAccessException();
-        }        
+            foreach (Constant.Role role in roles)
+            {
+                if (_applicationStateService.CurrentUser.HasRole(role))
+                    return;
+            }
+
+            throw new UnauthorizedAccessException();
+        }
+    }
+
+    private void CheckUserMembership()
+    {
+        if (_applicationStateService.CurrentUser == null || !_applicationStateService.CurrentUser.IsMembershipExpired())
+            return;
+
+        throw new UnauthorizedAccessException();
     }
 }

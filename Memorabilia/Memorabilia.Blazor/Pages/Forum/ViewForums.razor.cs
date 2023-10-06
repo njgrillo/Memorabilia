@@ -1,10 +1,7 @@
 ﻿namespace Memorabilia.Blazor.Pages.Forum;
 
-public partial class ViewForums
+public partial class ViewForums : ReroutePage
 {
-    [Inject]
-    public IDialogService DialogService { get; set; }
-
     [Inject]
     public NavigationManager NavigationManager { get; set; }    
 
@@ -14,7 +11,16 @@ public partial class ViewForums
 
     protected string SearchText { get; set; }
 
+    private bool _canInteract;
+
     private string _searchText;
+
+    protected override void OnInitialized()
+    {
+        _canInteract
+            = ApplicationStateService.CurrentUser != null &&
+              ApplicationStateService.CurrentUser.HasPermission(Permission.EditForum);
+    }
 
     protected async Task Browse()
     {
@@ -39,8 +45,14 @@ public partial class ViewForums
         SelectedCategory = ForumCategory.Find(id);
     }
 
-    protected void CreatePost()
+    protected async Task CreatePost()
     {
+        if (!_canInteract)
+        {
+            await ShowMembershipDialog();
+            return;
+        }
+
         NavigationManager.NavigateTo(NavigationPath.ForumCreateTopic);
     }
 

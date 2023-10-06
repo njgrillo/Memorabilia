@@ -4,6 +4,10 @@ public interface IUserRepository : IDomainRepository<Entity.User>
 {
     Task<Entity.User> Get(string emailAddress);
 
+    Task<Entity.User[]> GetAllByActiveSubscriptions();
+
+    Task<Entity.User[]> GetAllBySubscriptionExpired();
+
     Task<Entity.User> GetByGoogleEmailAddress(string emailAddress);
 
     Task<Entity.User> GetByMicrosoftEmailAddress(string emailAddress);

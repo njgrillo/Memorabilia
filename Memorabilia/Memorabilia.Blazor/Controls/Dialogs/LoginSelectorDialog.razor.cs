@@ -1,4 +1,4 @@
-﻿namespace Memorabilia.Web.Controls;
+﻿namespace Memorabilia.Blazor.Controls.Dialogs;
 
 public partial class LoginSelectorDialog
 {

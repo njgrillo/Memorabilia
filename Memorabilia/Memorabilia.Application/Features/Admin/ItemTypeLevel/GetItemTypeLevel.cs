@@ -1,6 +1,5 @@
 ﻿namespace Memorabilia.Application.Features.Admin.ItemTypeLevel;
 
-[AuthorizeByRole(Enum.PermissionType.Admin)]
 public record GetItemTypeLevel(int Id) : IQuery<Entity.ItemTypeLevel>
 {
     public class Handler : QueryHandler<GetItemTypeLevel, Entity.ItemTypeLevel>

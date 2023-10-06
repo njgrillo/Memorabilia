@@ -6,7 +6,13 @@ public partial class Register
     public CommandRouter CommandRouter { get; set; }
 
     [Inject]
+    public IDataProtectorService DataProtectorService { get; set; }
+
+    [Inject]
     public IJSRuntime JSRuntime { get; set; }
+
+    [Inject]
+    public NavigationManager NavigationManager { get; set; }
 
     [Inject]
     public ISnackbar Snackbar { get; set; }
@@ -57,6 +63,8 @@ public partial class Register
         if (command.UserAlreadyExists)
             return;
 
-        await OnSaved.InvokeAsync();          
+        await OnSaved.InvokeAsync();
+
+        NavigationManager.NavigateTo($"{NavigationPath.Subscription}/{DataProtectorService.EncryptId(command.User.Id)}");
     }
 }

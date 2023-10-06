@@ -1,5 +1,6 @@
 ﻿namespace Memorabilia.Application.Features.Forum;
 
+[AuthorizeByPermission(Enum.Permission.EditForumBookmark)]
 public record UpdateForumTopicBookmark(int ForumTopicId, int UserId)
     : ICommand
 {
