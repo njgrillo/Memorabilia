@@ -5,4 +5,6 @@ public interface IStripeSettings
     string ApiKey { get; set; }
 
     string ApiSecret { get; set; }
+
+    string CustomerSelfManageUrl { get; set; }
 }

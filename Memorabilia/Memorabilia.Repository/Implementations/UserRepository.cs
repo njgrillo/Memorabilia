@@ -17,6 +17,10 @@ public class UserRepository
     public async Task<Entity.User> Get(string emailAddress)
         => await User.SingleOrDefaultAsync(user => user.EmailAddress == emailAddress);
 
+    public async Task<Entity.User[]> GetAllBySubscriptionExpired()
+        => await Items.Where(user => user.SubscriptionExpirationDate.HasValue && user.SubscriptionExpirationDate < DateTime.UtcNow)
+                      .ToArrayAsync();
+
     public async Task<Entity.User> GetByGoogleEmailAddress(string emailAddress)
         => await User.SingleOrDefaultAsync(user => user.UserSettings != null 
                                                 && user.UserSettings.GoogleEmailAddress == emailAddress);

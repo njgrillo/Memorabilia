@@ -1,28 +1,48 @@
-﻿using Memorabilia.Application.Core.Payments.Stripe;
+﻿using Stripe;
 
 namespace Memorabilia.Application.Services.Payments.Stripe;
 
 public class StripeService
 {
     private readonly CommandRouter _commandRouter;
-    private readonly IDataProtectorService _dataProtectorService;
+    private readonly QueryRouter _queryRouter;
     private readonly IStripeSettings _stripeSettings;
 
     public StripeService(CommandRouter commandRouter,
-                         IDataProtectorService dataProtectorService,
+                         QueryRouter queryRouter,        
                          IStripeSettings stripeSettings)
     {
         _commandRouter = commandRouter;
-        _dataProtectorService = dataProtectorService;
+        _queryRouter = queryRouter;
         _stripeSettings = stripeSettings; 
+    }
+
+    public async Task<DateTime?> CancelSubscriptionAsync(string subscriptionId,
+                                                         CancellationToken cancellationToken = default)
+    {        
+        var service = new SubscriptionService();
+        var options = new SubscriptionUpdateOptions { CancelAtPeriodEnd = true };
+        var requestOptions = GetRequestOptions();
+
+        await service.UpdateAsync(subscriptionId, options, requestOptions, cancellationToken);
+
+        Subscription subscription
+            = await service.GetAsync(subscriptionId, requestOptions: requestOptions, cancellationToken: cancellationToken);
+
+        return subscription.CancelAt;        
     }
 
     public async Task<Session> CreatePaymentAsync(PaymentModel payment, 
                                                   CancellationToken cancellationToken = default)
     {
+        Customer customer 
+            = await CreateOrGetCustomerAsync(payment.Customer, cancellationToken);
+
+        await SaveStripeSettings(customer, payment.Customer);
+
         List<SessionLineItemOptions> lineItems
             = payment.LineItems.Select(item => new SessionLineItemOptions
-            {
+            {                
                 PriceData = new SessionLineItemPriceDataOptions
                 {
                     Currency = item.Currency,
@@ -47,6 +67,7 @@ public class StripeService
         var options = new SessionCreateOptions
         {
             CancelUrl = payment.CancelUrl,
+            Customer = customer.Id,
             LineItems = lineItems,
             Mode = payment.Mode,
             SuccessUrl = payment.SuccessUrl,            
@@ -56,17 +77,72 @@ public class StripeService
 
         Session session 
             = await service.CreateAsync(options, GetRequestOptions(), cancellationToken);
-
+        
         await SaveTransaction(payment.OrderId, payment.PurchaseUserId);
 
         return session;
     }
+
+    public async Task<Subscription> GetSubscriptionAsync(string customerId,
+                                                         CancellationToken cancellationToken = default)
+    {
+        var service = new SubscriptionService();
+
+        var listOptions = new SubscriptionListOptions
+        {
+            Customer = customerId
+        };
+
+        StripeList<Subscription> subscriptions
+            = await service.ListAsync(listOptions, GetRequestOptions(), cancellationToken);
+
+        return subscriptions.FirstOrDefault();
+    }
+
+    private async Task<Customer> CreateOrGetCustomerAsync(CustomerModel customerModel,
+                                                          CancellationToken cancellationToken = default)
+    {  
+        var service = new CustomerService();
+
+        var listOptions = new CustomerListOptions
+        {
+            Email = customerModel.Email
+        };
+
+        StripeList<Customer> result =
+            await service.ListAsync(listOptions, GetRequestOptions(), cancellationToken);
+
+        if (result.Data.Any())
+            return result.Data.FirstOrDefault();
+
+        var options = new CustomerCreateOptions
+        {
+            Email = customerModel.Email,
+            Name = customerModel.Name
+        };
+
+        Customer customer 
+            = await service.CreateAsync(options, GetRequestOptions(), cancellationToken);
+
+        return customer;
+    }    
 
     private RequestOptions GetRequestOptions()
         => new()
         {
             ApiKey = _stripeSettings.ApiSecret
         };
+
+    private async Task SaveStripeSettings(Customer customer, 
+                                          CustomerModel customerModel)
+    {
+        if (customer.Id.Equals(customerModel.Id, StringComparison.OrdinalIgnoreCase))
+            return;
+
+        Entity.User user = await _queryRouter.Send(new GetUser(customerModel.Email));
+
+        await _commandRouter.Send(new SaveUserStripeCustomerId(user.Id, customer.Id));
+    }    
 
     private async Task SaveTransaction(string orderId, int purchaseUserId)
     {

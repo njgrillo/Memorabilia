@@ -1,6 +1,5 @@
 ﻿namespace Memorabilia.Application.Features.Admin.Brands;
 
-[AuthorizeByRole(Enum.Role.Admin)]
 public record GetBrands() : IQuery<Entity.Brand[]>
 {
     public class Handler : QueryHandler<GetBrands, Entity.Brand[]>

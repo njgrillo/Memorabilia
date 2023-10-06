@@ -37,37 +37,85 @@
                             <MudNavLink Icon="@Icons.Material.TwoTone.Collections"
                                         Href="@NavigationPath.Collections">Collections</MudNavLink>
                         </Match>
-                    </Condition>                         
-                    <MudNavLink Icon="@Icons.Material.TwoTone.Dashboard" 
-                                Href="@NavigationPath.Dashboard">Dashboard</MudNavLink>
-                    <MudNavLink Href="@NavigationPath.Forums"
+                    </Condition> 
+                    <Condition Evaluation="ApplicationStateService.CurrentUser.HasPermission(Constant.Permission.Memorabilia)">
+                        <Match>
+                            <MudNavLink Icon="@Icons.Material.TwoTone.Dashboard"
+                                        Href="@NavigationPath.Dashboard">Dashboard</MudNavLink>
+                        </Match>
+                    </Condition>                    
+                    <MudNavLink Href="@NavigationPath.Feedback"
                                 Icon="@Icons.Material.TwoTone.Feedback">Feedback</MudNavLink>
-                    <MudNavLink Icon="@Icons.Material.TwoTone.Sell"
-                                Href="@NavigationPath.ForSale">For Sale</MudNavLink>                    
-                    <MudNavLink Icon="@Icons.Material.TwoTone.SwapHoriz" 
-                                Href="@NavigationPath.ForTrade">For Trade</MudNavLink>
-                    <MudNavLink Icon="@Icons.Material.TwoTone.Favorite"
-                                Href="@NavigationPath.ForumBookmarks">Forum Bookmarks</MudNavLink>
-                    <MudNavLink Href="@NavigationPath.ViewMemorabilia"
-                                Icon="@Icons.Material.TwoTone.Image">Memorabilia</MudNavLink>
-                    <MudNavLink Icon="@Icons.Material.TwoTone.Email"
-                                Href="@NavigationPath.Messages">Messages</MudNavLink>
-                    <MudNavLink Icon="@Icons.Material.TwoTone.AttachMoney"
-                                Href="@NavigationPath.Offers">Offers</MudNavLink>
-                    <MudNavLink Href="@NavigationPath.MyPrivateSignings"
-                                Icon="@Icons.Material.TwoTone.Event">Private Signings</MudNavLink>
-                    <MudNavLink Icon="@Icons.Material.TwoTone.Task" 
-                                Href="@NavigationPath.Projects">Projects</MudNavLink>
-                    <MudNavLink Icon="@Icons.Material.TwoTone.SwapHoriz"
-                                Href="@NavigationPath.ProposedTrades">Proposed Trades</MudNavLink>
-                    <MudNavLink Icon="@Icons.Material.TwoTone.SavedSearch"
-                                Href="@NavigationPath.SavedSearches">Saved Searches</MudNavLink>
+                    <Condition Evaluation="ApplicationStateService.CurrentUser.HasPermission(Constant.Permission.BuySellTrade)">
+                        <Match>
+                            <MudNavLink Icon="@Icons.Material.TwoTone.Sell"
+                                        Href="@NavigationPath.ForSale">For Sale</MudNavLink>
+                            <MudNavLink Icon="@Icons.Material.TwoTone.SwapHoriz"
+                                        Href="@NavigationPath.ForTrade">For Trade</MudNavLink>
+                        </Match>
+                    </Condition>                        
+                    <Condition Evaluation="ApplicationStateService.CurrentUser.HasPermission(Constant.Permission.EditForumBookmark)">
+                        <Match>
+                            <MudNavLink Icon="@Icons.Material.TwoTone.Favorite"
+                                        Href="@NavigationPath.ForumBookmarks">Forum Bookmarks</MudNavLink>
+                        </Match>
+                    </Condition>  
+                    <Condition Evaluation="ApplicationStateService.CurrentUser.HasPermission(Constant.Permission.Memorabilia)">
+                        <Match>
+                            <MudNavLink Href="@NavigationPath.ViewMemorabilia"
+                                        Icon="@Icons.Material.TwoTone.Image">Memorabilia</MudNavLink>
+                        </Match>
+                    </Condition>                    
+                    <Condition Evaluation="ApplicationStateService.CurrentUser.HasPermission(Constant.Permission.Message)">
+                        <Match>
+                            <MudNavLink Icon="@Icons.Material.TwoTone.Email"
+                                        Href="@NavigationPath.Messages">Messages</MudNavLink>
+                        </Match>
+                    </Condition>
+                    <Condition Evaluation="ApplicationStateService.CurrentUser.HasPermission(Constant.Permission.BuySellTrade)">
+                        <Match>
+                            <MudNavLink Icon="@Icons.Material.TwoTone.AttachMoney"
+                                        Href="@NavigationPath.Offers">Offers</MudNavLink>
+                        </Match>
+                    </Condition>
+                    <Condition Evaluation="ApplicationStateService.CurrentUser.HasPermission(Constant.Permission.PrivateSigning)">
+                        <Match>
+                             <MudNavLink Href="@NavigationPath.MyPrivateSignings"
+                                         Icon="@Icons.Material.TwoTone.Event">Private Signings</MudNavLink>
+                        </Match>                       
+                    </Condition>
+                    <Condition Evaluation="ApplicationStateService.CurrentUser.HasPermission(Constant.Permission.Project)">
+                        <Match>
+                            <MudNavLink Icon="@Icons.Material.TwoTone.Task"
+                                        Href="@NavigationPath.Projects">Projects</MudNavLink>
+                        </Match>
+                    </Condition>
+                    <Condition Evaluation="ApplicationStateService.CurrentUser.HasPermission(Constant.Permission.BuySellTrade)">
+                        <Match>
+                            <MudNavLink Icon="@Icons.Material.TwoTone.SwapHoriz"
+                                        Href="@NavigationPath.ProposedTrades">Proposed Trades</MudNavLink>
+                        </Match>
+                    </Condition>
+                    <Condition Evaluation="ApplicationStateService.CurrentUser.HasPermission(Constant.Permission.Search)">
+                        <Match>
+                            <MudNavLink Icon="@Icons.Material.TwoTone.SavedSearch"
+                                        Href="@NavigationPath.SavedSearches">Saved Searches</MudNavLink>
+                        </Match>
+                    </Condition>                    
                     <MudNavLink Icon="@Icons.Material.TwoTone.Settings"
                                 Href="@NavigationPath.UserSettings">Settings</MudNavLink>
-                    <MudNavLink Icon="@Icons.Material.TwoTone.MarkunreadMailbox" 
-                                Href="@NavigationPath.ThroughTheMail">Through the Mail</MudNavLink>
-                    <MudNavLink Icon="@Icons.Material.TwoTone.AttachMoney" 
-                                Href="@NavigationPath.Transactions">Transactions</MudNavLink>
+                    <Condition Evaluation="ApplicationStateService.CurrentUser.HasPermission(Constant.Permission.ThroughTheMail)">
+                        <Match>
+                            <MudNavLink Icon="@Icons.Material.TwoTone.MarkunreadMailbox"
+                                        Href="@NavigationPath.ThroughTheMail">Through the Mail</MudNavLink>
+                        </Match>
+                    </Condition>
+                    <Condition Evaluation="ApplicationStateService.CurrentUser.HasPermission(Constant.Permission.BuySellTrade)">
+                        <Match>
+                            <MudNavLink Icon="@Icons.Material.TwoTone.AttachMoney"
+                                        Href="@NavigationPath.Transactions">Transactions</MudNavLink>
+                        </Match>
+                    </Condition>                    
                 </MudNavGroup>                  
             </Authorized>
         </AuthorizeView>

@@ -1,6 +1,5 @@
 ﻿namespace Memorabilia.Application.Features.Admin.JerseyTypes;
 
-[AuthorizeByRole(Enum.Role.Admin)]
 public record GetJerseyTypes() : IQuery<Entity.JerseyType[]>
 {
     public class Handler : QueryHandler<GetJerseyTypes, Entity.JerseyType[]>

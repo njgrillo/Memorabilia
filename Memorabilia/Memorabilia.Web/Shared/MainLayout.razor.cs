@@ -9,7 +9,13 @@ public partial class MainLayout : LayoutComponentBase
     public ICourier Courier { get; set; }
 
     [Inject]
+    public IMediator Mediator { get; set; }
+
+    [Inject]
     public NavigationManager NavigationManager { get; set; }
+
+    [Inject]
+    public QueryRouter QueryRouter { get; set; }
 
     private Exception _currentException;
 
@@ -26,6 +32,7 @@ public partial class MainLayout : LayoutComponentBase
     protected override void OnInitialized()
     {
         Courier.Subscribe<ThemeChangedNotification>(OnThemeChanged);
+        Courier.Subscribe<UserSubscriptionChangedNotification>(OnSubscriptionChanged);
 
         _showUpgradeMembership
             = ApplicationStateService.CurrentUser != null
@@ -62,6 +69,16 @@ public partial class MainLayout : LayoutComponentBase
                 : NavigationPath.Home;
 
         NavigationManager.NavigateTo(url);
+    }
+
+    public void OnSubscriptionChanged(UserSubscriptionChangedNotification notification)
+    {
+        //TODO: Figure out how to reload everything needed to reload
+        //InvokeAsync(StateHasChanged);
+
+        //_showUpgradeMembership
+        //    = ApplicationStateService.CurrentUser != null
+        //      && ApplicationStateService.CurrentUser.IsUpgradeEligible();
     }
 
     public async Task OnThemeChanged(ThemeChangedNotification notification)

@@ -1,6 +1,5 @@
 ﻿namespace Memorabilia.Application.Features.Admin.LeaderTypes;
 
-[AuthorizeByRole(Enum.Role.Admin)]
 public record GetLeaderTypes() : IQuery<Entity.LeaderType[]>
 {
     public class Handler : QueryHandler<GetLeaderTypes, Entity.LeaderType[]>

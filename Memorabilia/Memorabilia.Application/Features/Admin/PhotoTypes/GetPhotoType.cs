@@ -1,6 +1,5 @@
 ﻿namespace Memorabilia.Application.Features.Admin.PhotoTypes;
 
-[AuthorizeByRole(Enum.Role.Admin)]
 public record GetPhotoType(int Id) : IQuery<Entity.DomainEntity>
 {
     public class Handler : QueryHandler<GetPhotoType, Entity.DomainEntity>

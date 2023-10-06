@@ -1,4 +1,4 @@
-﻿namespace Memorabilia.Web.Pages.User;
+﻿namespace Memorabilia.Web.Pages.Membership;
 
 public partial class SubscriptionPage
 {

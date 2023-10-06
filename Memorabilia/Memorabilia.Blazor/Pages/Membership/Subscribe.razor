@@ -3,28 +3,28 @@
         <Condition Evaluation="@(!IsUpgrade)">
             <Match>
                 <Div Style="@($"width:{_featureWidth}%;")">
-                    <SubscriberLevel Features="Feature.Free"
-                                     OnSelect="OnFreeSelect"
+                    <SubscriberLevel OnSelect="OnFreeSelect"
+                                     Role="@Memorabilia.Domain.Enums.Role.NonSubscriber"
                                      Title="Free" />
 
                 </Div>
             </Match>
         </Condition>        
         <Div Style="@($"width:{_featureWidth}%;")">
-            <SubscriberLevel Features="Feature.Tier1"
-                             OnSelect="OnTier1Select"
+            <SubscriberLevel OnSelect="OnTier1Select"
+                             Role="@Memorabilia.Domain.Enums.Role.SubscriberTier1"
                              SubscriptionPrice="@_tier1Price"
                              Title="Tier 1: Casual Collector" />
         </Div>
         <Div Style="@($"width:{_featureWidth}%;")">
-            <SubscriberLevel Features="Feature.Tier2"
-                             OnSelect="OnTier2Select"
+            <SubscriberLevel OnSelect="OnTier2Select"
+                             Role="@Memorabilia.Domain.Enums.Role.SubscriberTier2"
                              SubscriptionPrice="@_tier2Price"
                              Title="Tier 2: Hardcore Collector" />
         </Div>
         <Div Style="@($"width:{_featureWidth}%;")">
-            <SubscriberLevel Features="Feature.All"
-                             OnSelect="OnPromoterSelect"
+            <SubscriberLevel OnSelect="OnPromoterSelect"
+                             Role="@Memorabilia.Domain.Enums.Role.Promoter"
                              SubscriptionPrice="@_promoterPrice"
                              Title="Tier 3: Promoter" />
         </Div>

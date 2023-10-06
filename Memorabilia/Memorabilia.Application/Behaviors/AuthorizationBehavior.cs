@@ -21,18 +21,19 @@ public class AuthorizationBehavior<TRequest, TResponse>
     }
 
     private void CheckSecurity(TRequest request)
-    {
+    {   
         AuthorizeAttribute[] authorizeAttributes 
             = request.GetType()
                      .GetCustomAttributes<AuthorizeAttribute>()
                      .ToArray();
 
         if (!authorizeAttributes.Any())
-            return;        
+            return;
 
+        CheckUserMembership();
         CheckPermissions(authorizeAttributes);
         CheckRoles(authorizeAttributes);       
-    }
+    }    
 
     private void CheckPermissions(AuthorizeAttribute[] authorizeAttributes)
     {
@@ -82,5 +83,13 @@ public class AuthorizationBehavior<TRequest, TResponse>
 
             throw new UnauthorizedAccessException();
         }
+    }
+
+    private void CheckUserMembership()
+    {
+        if (_applicationStateService.CurrentUser == null || !_applicationStateService.CurrentUser.IsMembershipExpired())
+            return;
+
+        throw new UnauthorizedAccessException();
     }
 }

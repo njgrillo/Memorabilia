@@ -21,6 +21,8 @@ public class MetaLoginProviderRule : ILoginProviderRule
                    ?.Value
                 ?? string.Empty;
 
+        await Task.CompletedTask;
+
         if (metaHandle.IsNullOrEmpty())
             return null;
 

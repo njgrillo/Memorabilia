@@ -22,8 +22,10 @@ public class User : Framework.Library.Domain.Entity.DomainEntity
         Username = username;
         CreateDate = DateTime.UtcNow;
 
-        Roles = new();
-        Roles.Add(new UserRole(Constant.Role.NonSubscriber.Id, Id));
+        Roles = new()
+        {
+            new UserRole(Constant.Role.NonSubscriber.Id, Id)
+        };
     }
 
     public virtual List<ForumTopicUserBookmark> BookmarkedForumTopics { get; private set; }
@@ -43,6 +45,14 @@ public class User : Framework.Library.Domain.Entity.DomainEntity
     public virtual List<UserRole> Roles { get; private set; }
 
     public virtual List<UserSocialMedia> SocialMedias { get; private set; }
+
+    public string StripeCustomerId { get; private set; }
+
+    public string StripeSubscriptionId { get; private set; }
+
+    public bool SubscriptionCanceled { get; private set; }
+
+    public DateTime? SubscriptionExpirationDate { get; private set; }
 
     public DateTime? UpdateDate { get; private set; }
 
@@ -91,6 +101,26 @@ public class User : Framework.Library.Domain.Entity.DomainEntity
         paymentOption.Set(paymentHandle, paymentOptionType);
     }
 
+    public void SetStripeOptions(string customerId)
+    {
+        StripeCustomerId = customerId;
+    }    
+
+    public void SetStripeSubscriptionId(string subscriptionId)
+    {
+        StripeSubscriptionId = subscriptionId;
+    }
+
+    public void SetSubscriptionExpirationDate(DateTime? expirationDate)
+    {
+        SubscriptionExpirationDate = expirationDate;
+    }
+
+    public void SetSubscriptionStatus(bool isCanceled)
+    {
+        SubscriptionCanceled = isCanceled;
+    }
+
     public void SetUserRole(int roleId)
     {
         if (Roles == null)
@@ -98,7 +128,7 @@ public class User : Framework.Library.Domain.Entity.DomainEntity
             Roles = new()
             {
                 new UserRole(roleId, Id)
-            };
+            };            
 
             return;
         }

@@ -3,10 +3,22 @@
 public partial class ConfirmMembershipStripeOrder
 {
     [Inject]
+    public IApplicationStateService ApplicationStateService { get; set; }
+
+    [Inject]
     public CommandRouter CommandRouter { get; set; }
 
     [Inject]
     public IDataProtectorService DataProtectorService { get; set; }
+
+    [Inject]
+    public IMediator Mediator { get; set; }
+
+    [Inject]
+    public QueryRouter QueryRouter { get; set; }
+
+    [Inject]
+    public StripeService StripeService { get; set; }
 
     [Parameter]
     public string EncryptOrderId { get; set; }
@@ -39,8 +51,22 @@ public partial class ConfirmMembershipStripeOrder
         };
 
         EditModel.Id = UserId;
-        EditModel.UserRole = userRole;
+        EditModel.UserRole = userRole;        
+
+        var subscription =
+            await StripeService.GetSubscriptionAsync(ApplicationStateService.CurrentUser.StripeCustomerId);
+
+        if (subscription != null)
+        {
+            EditModel.ActivateSubscription(subscriptionId: subscription.Id);
+        }
+        else
+        {
+            EditModel.ActivateSubscription(expirationDate: DateTime.UtcNow.AddMonths(1));
+        }
 
         await CommandRouter.Send(new SaveUser(EditModel));
+
+        await Mediator.Publish(new UserSubscriptionChangedNotification());
     }
 }

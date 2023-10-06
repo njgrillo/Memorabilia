@@ -1,6 +1,5 @@
 ﻿namespace Memorabilia.Application.Features.Admin.Orientations;
 
-[AuthorizeByRole(Enum.Role.Admin)]
 public record GetOrientation(int Id) : IQuery<Entity.DomainEntity>
 {
     public class Handler : QueryHandler<GetOrientation, Entity.DomainEntity>

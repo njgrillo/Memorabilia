@@ -40,10 +40,18 @@
         <br />
         <DivPad5>
             <DivRowFormGroup>
-                <CustomButton ButtonType="ButtonType.Button"
-                              OnClick="Select"
-                              Text="Select" />
+                <Condition Evaluation="@(_canSelect)">
+                    <Match>
+                        <CustomButton ButtonType="ButtonType.Button"
+                                      OnClick="Select"
+                                      Text="Select" />
+                    </Match>
+                    <NotMatch>
+                        <b>Your current subscription.</b>
+                        <br />
+                    </NotMatch>
+                </Condition>
             </DivRowFormGroup>
-        </DivPad5>
+        </DivPad5>              
     </DivPad5>      
 </Div>

@@ -1,6 +1,5 @@
 ﻿namespace Memorabilia.Application.Features.Admin.ItemTypes;
 
-[AuthorizeByRole(Enum.Role.Admin)]
 public record GetItemTypes() : IQuery<Entity.ItemType[]>
 {
     public class Handler : QueryHandler<GetItemTypes, Entity.ItemType[]>

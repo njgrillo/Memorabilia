@@ -1,6 +1,5 @@
 ﻿namespace Memorabilia.Application.Features.Admin.Franchises;
 
-[AuthorizeByRole(Enum.Role.Admin)]
 public record GetFranchise(int Id) : IQuery<Entity.Franchise>
 {
     public class Handler : QueryHandler<GetFranchise, Entity.Franchise>

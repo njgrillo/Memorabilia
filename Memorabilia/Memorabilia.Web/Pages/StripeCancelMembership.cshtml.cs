@@ -7,6 +7,6 @@ public class StripeCancelMembershipModel : PageModel
         string orderId = Request.Query["OrderId"];
         string userId = Request.Query["UserId"];
 
-        Response.Redirect($"{NavigationPath.StripeOrderCancel}/{orderId}/{userId}");
+        Response.Redirect($"{NavigationPath.StripeCancelMembership}/{orderId}/{userId}");
     }
 }

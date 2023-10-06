@@ -1,20 +1,20 @@
 ﻿<DivPad2>
     <Div Class="row">
         <Div Style="width:32%;">
-            <SubscriberLevel Features="Feature.Tier1"
-                             OnSelect="OnTier1Select"
+            <SubscriberLevel OnSelect="OnTier1Select"
+                             Role="Memorabilia.Domain.Enums.Role.SubscriberTier1"
                              SubscriptionPrice="@_tier1Price"
                              Title="Tier 1: Casual Collector" />
         </Div>
         <Div Style="width:32%;">
-            <SubscriberLevel Features="Feature.Tier2"
-                             OnSelect="OnTier2Select"
+            <SubscriberLevel OnSelect="OnTier2Select"
+                             Role="Memorabilia.Domain.Enums.Role.SubscriberTier2"
                              SubscriptionPrice="@_tier2Price"
                              Title="Tier 2: Hardcore Collector" />
         </Div>
         <Div Style="width:32%;">
-            <SubscriberLevel Features="Feature.All"
-                             OnSelect="OnPromoterSelect"
+            <SubscriberLevel OnSelect="OnPromoterSelect"
+                             Role="Memorabilia.Domain.Enums.Role.Promoter"
                              SubscriptionPrice="@_promoterPrice"
                              Title="Tier 3: Promoter" />
         </Div>

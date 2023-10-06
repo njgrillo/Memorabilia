@@ -1,6 +1,5 @@
 ﻿namespace Memorabilia.Application.Features.Admin.Positions;
 
-[AuthorizeByRole(Enum.Role.Admin)]
 public record GetPositions() : IQuery<Entity.Position[]>
 {
     public class Handler : QueryHandler<GetPositions, Entity.Position[]>

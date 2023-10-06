@@ -1,6 +1,5 @@
 ﻿namespace Memorabilia.Application.Features.Admin.ItemTypeBrand;
 
-[AuthorizeByRole(Enum.Role.Admin)]
 public record GetItemTypeBrands(int? ItemTypeId = null) : IQuery<Entity.ItemTypeBrand[]>
 {
     public class Handler : QueryHandler<GetItemTypeBrands, Entity.ItemTypeBrand[]>

@@ -29,6 +29,13 @@ public sealed class Role : DomainItemConstant
         TestUser
     };
 
+    public static readonly Role[] MembershipRoles =
+    {
+        Promoter,
+        SubscriberTier1,
+        SubscriberTier2,
+    };
+
     private Role(int id, string name) 
         : base(id, name) { }
 
@@ -37,4 +44,7 @@ public sealed class Role : DomainItemConstant
 
     public static Role FindByName(string name)
         => All.SingleOrDefault(role => role.Name.Equals(name, StringComparison.OrdinalIgnoreCase));
+
+    public static bool IsMembershipRole(int roleId)
+        => MembershipRoles.Any(role => role.Id == roleId);
 }

@@ -170,6 +170,9 @@ public static class NavigationPath
     public static string Subscription
         => @"/Subscription";
 
+    public static string SubscriptionPayment
+        => @"/Subscription/Payment";
+
     public static string SubscriptionUpgrade
         => @"/Subscription/Upgrade";
 

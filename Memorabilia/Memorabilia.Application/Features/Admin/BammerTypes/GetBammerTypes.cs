@@ -1,6 +1,5 @@
 ﻿namespace Memorabilia.Application.Features.Admin.BammerTypes;
 
-[AuthorizeByRole(Enum.Role.Admin)]
 public record GetBammerTypes() : IQuery<Entity.BammerType[]>
 {
     public class Handler : QueryHandler<GetBammerTypes, Entity.BammerType[]>

@@ -2,7 +2,7 @@
 
 public enum Role
 {
-    Admin = 0,
+    Admin = 1,
     Complimentary,
     NonSubscriber,
     Promoter,

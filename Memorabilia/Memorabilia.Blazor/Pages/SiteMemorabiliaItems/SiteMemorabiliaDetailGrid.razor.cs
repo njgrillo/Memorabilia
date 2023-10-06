@@ -6,9 +6,6 @@ public partial class SiteMemorabiliaDetailGrid : ReroutePage
     public IDataProtectorService DataProtectorService { get; set; }
 
     [Inject]
-    public IDialogService DialogService { get; set; }
-
-    [Inject]
     public ImageService ImageService { get; set; }
 
     [Inject]

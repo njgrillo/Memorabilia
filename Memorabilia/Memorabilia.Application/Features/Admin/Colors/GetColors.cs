@@ -1,6 +1,5 @@
 ﻿namespace Memorabilia.Application.Features.Admin.Colors;
 
-[AuthorizeByRole(Enum.Role.Admin)]
 public record GetColors() : IQuery<Entity.Color[]>
 {
     public class Handler : QueryHandler<GetColors, Entity.Color[]>

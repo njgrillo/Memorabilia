@@ -16,7 +16,10 @@ public record SaveUser(UserEditModel User)
         {
             Entity.User user = await _userRepository.Get(command.User.Id);
 
-            user.SetUserRole(command.User.UserRole.RoleId);           
+            user.SetStripeSubscriptionId(command.User.StripeSubscriptionId);
+            user.SetSubscriptionExpirationDate(command.User.SubscriptionExpirationDate);
+            user.SetSubscriptionStatus(command.User.SubscriptionCanceled);
+            user.SetUserRole(command.User.UserRole.RoleId);   
 
             await _userRepository.Update(user);
         }
