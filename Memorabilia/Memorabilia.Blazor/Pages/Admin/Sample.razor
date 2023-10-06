@@ -20,4 +20,22 @@
             </Div>
         </Div>
     </MudExpansionPanel>    
+    <br />
+    <MudExpansionPanel IsExpanded="true"
+                       Text="DateTimeOffset Tests">
+        <MudDatePicker @bind-Date="SampleDate"
+                       DateFormat="MM/dd/yyyy"
+                       Editable="true"
+                       Label="Sample Date"
+                       Mask="@(new DateMask("MM/dd/yyyy"))"
+                       Variant="Variant.Outlined" />
+        <br />
+        <Div Class="row">
+            <Div Class="col-3">
+                <CustomButton Color="@MudBlazor.Color.Error"
+                              OnClick="DateTest"
+                              Text="Test" />
+            </Div>
+        </Div>
+    </MudExpansionPanel>
 </DivPad2>

@@ -18,9 +18,11 @@ public partial class Sample
     public ISiteSettings SiteSettings { get; set; }
 
     [Inject]
-    public StripeService StripeService { get; set; }
+    public StripeService StripeService { get; set; }    
 
     protected string PaypalRedirectUrl { get; set; }
+
+    protected DateTime? SampleDate { get; set; }
 
     protected async Task CreatePaypalOrder()
     {
@@ -82,5 +84,15 @@ public partial class Sample
             = await StripeService.CreatePaymentAsync(paymentModel);
 
         NavigationManager.NavigateTo(session.Url);
+    }
+
+    protected void DateTest()
+    {
+        if (!SampleDate.HasValue)
+            return;
+
+        DateTimeOffset dateTimeOffset = new(SampleDate.Value);
+
+        var utcDateTime = DateTime.UtcNow;
     }
 }
