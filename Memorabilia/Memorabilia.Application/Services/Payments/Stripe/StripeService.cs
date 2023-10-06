@@ -83,8 +83,20 @@ public class StripeService
         return session;
     }
 
-    public async Task<Subscription> GetSubscriptionAsync(string customerId,
+    public async Task<Subscription> GetSubscriptionAsync(string subscriptionId,
                                                          CancellationToken cancellationToken = default)
+    {
+        var service = new SubscriptionService();
+        var requestOptions = GetRequestOptions();
+
+        Subscription subscription
+            = await service.GetAsync(subscriptionId, requestOptions: requestOptions, cancellationToken: cancellationToken);
+
+        return subscription;
+    }
+
+    public async Task<Subscription> GetSubscriptionByCustomerAsync(string customerId,
+                                                                   CancellationToken cancellationToken = default)
     {
         var service = new SubscriptionService();
 

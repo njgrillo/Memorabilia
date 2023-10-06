@@ -15,6 +15,7 @@ public class CheckSubscriptionsJob
 
     public override async Task Process()
     {
+        await _mediator.Send(new CheckActiveSubscriptions());
         await _mediator.Send(new ProcessExpiredSubscriptions());
     }
 

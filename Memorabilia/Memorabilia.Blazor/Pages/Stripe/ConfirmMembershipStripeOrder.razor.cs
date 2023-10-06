@@ -54,7 +54,7 @@ public partial class ConfirmMembershipStripeOrder
         EditModel.UserRole = userRole;        
 
         var subscription =
-            await StripeService.GetSubscriptionAsync(ApplicationStateService.CurrentUser.StripeCustomerId);
+            await StripeService.GetSubscriptionByCustomerAsync(ApplicationStateService.CurrentUser.StripeCustomerId);
 
         if (subscription != null)
         {
