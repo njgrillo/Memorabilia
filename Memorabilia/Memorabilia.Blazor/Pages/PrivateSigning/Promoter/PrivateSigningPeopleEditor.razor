@@ -2,10 +2,10 @@
     <MudStack Class="col-12" 
               Row="true"
               Style="margin-bottom:1%;">
-        <PersonAutoComplete Disabled="@(EditMode == EditModeType.Update)"
-                            IsCulturalSearch="true"
-                            SelectedValue="EditModel.Person"
-                            SelectionChanged="(p) => EditModel.Person = p" />
+        <PersonDomainAutoComplete Disabled="@(EditMode == EditModeType.Update)"
+                                  IsCulturalSearch="true"
+                                  SelectedValue="EditModel.Person"
+                                  SelectionChanged="(p) => EditModel.Person = p" />
         <Condition Evaluation="@(EditModel.Person.Id > 0)">
             <Match>
                 <MudTooltip Text="View Profile">
@@ -30,6 +30,25 @@
     </MudStack>
 </DivRowFormGroup>
 <DivRowFormGroup>
+    <MudStack Class="col-12" 
+              Row="true"
+              Style="margin-bottom:1%;">
+        <Switch Checked="LimitSpots"
+                CheckedChanged="(p) => OnLimitSpotsChange(p)"
+                Label="Limit Spots?" />
+        <Condition Evaluation="LimitSpots">
+            <Match>
+                <NullableIntField Label="Spots Available"
+                                  Value="EditModel.SpotsAvailable"
+                                  ValueChanged="@((p) => EditModel.SpotsAvailable = p)" />
+                <NullableIntField Label="Spots Taken"
+                                  Value="EditModel.SpotsConfirmed"
+                                  ValueChanged="@((p) => EditModel.SpotsConfirmed = p)" />
+            </Match>
+        </Condition>
+    </MudStack>    
+</DivRowFormGroup>
+<DivRowFormGroup>
     <MudStack Class="col-12"
               Row="true"
               Style="margin-bottom:1%;">
@@ -52,6 +71,8 @@
         <MudTh>Name</MudTh>
         <MudTh>Inscriptions Allowed</MudTh>
         <MudTh>Inscription Cost</MudTh>
+        <MudTh>Spots Available</MudTh>
+        <MudTh>Spots Taken</MudTh>
         <MudTh>Note</MudTh>
         <MudTh></MudTh>
     </HeaderContent>
@@ -59,11 +80,14 @@
         <MudTd DataLabel="">
             <GridImage AllowNavigation="false" 
                        ImageLoaded="OnImageLoaded"
-                       ImageFileName="@context.Person.PersonImageFileName" />
+                       ImageFileName="@context.Person.ImageFileName"
+                       IsPersonImage="true" />
         </MudTd>
         <MudTd DataLabel="Name">@context.Person.ProfileName</MudTd>
         <MudTd DataLabel="InscriptionsAllowed">@(context.AllowInscriptions ? "Yes" : "No")</MudTd>
         <MudTd DataLabel="InscriptionCost">@(context.AllowInscriptions ? context.InscriptionCost?.ToString("c") : "N/A")</MudTd>
+        <MudTd DataLabel="SpotsAvailable">@(context.SpotsAvailable.HasValue ? context.SpotsAvailable.Value : "N/A")</MudTd>
+        <MudTd DataLabel="SpotsConfirmed">@(context.SpotsConfirmed.HasValue ? context.SpotsConfirmed.Value : "N/A")</MudTd>
         <MudTd DataLabel="Note">@context.Note</MudTd>
         <MudTd DataLabel="">
             <MudTooltip Text="Edit">

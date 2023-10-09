@@ -90,6 +90,7 @@ public class MemorabiliaContext : DbContext, IMemorabiliaContext
         modelBuilder.Entity<Entity.PrivateSigningPerson>();          
         modelBuilder.Entity<Entity.PrivateSigningPersonDetail>();          
         modelBuilder.Entity<Entity.PrivateSigningPersonExcludeItemType>();          
+        modelBuilder.Entity<Entity.PrivateSigningPromoterProvidedItem>();          
         modelBuilder.Entity<Entity.ProjectBaseball>();          
         modelBuilder.Entity<Entity.ProjectCard>();          
         modelBuilder.Entity<Entity.ProjectHallOfFame>();          
@@ -99,6 +100,7 @@ public class MemorabiliaContext : DbContext, IMemorabiliaContext
         modelBuilder.Entity<Entity.ProjectPerson>();         
         modelBuilder.Entity<Entity.ProjectTeam>();         
         modelBuilder.Entity<Entity.ProjectWorldSeries>();
+        modelBuilder.Entity<Entity.PromoterProvidedItem>();
         modelBuilder.Entity<Entity.ProposeTrade>();
         modelBuilder.Entity<Entity.ProposeTradeMemorabilia>();
         modelBuilder.Entity<Entity.SignatureIdentification>();

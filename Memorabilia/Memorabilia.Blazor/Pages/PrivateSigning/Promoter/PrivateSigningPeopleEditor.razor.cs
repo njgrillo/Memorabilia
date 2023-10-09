@@ -15,6 +15,8 @@ public partial class PrivateSigningPeopleEditor
     protected PrivateSigningPersonEditModel EditModel { get; set; }
         = new();
 
+    protected bool LimitSpots { get; set; }
+
     protected void Add()
     {
         if (EditModel.Person == null || EditModel.Person.Id == 0)
@@ -48,6 +50,17 @@ public partial class PrivateSigningPeopleEditor
     protected void OnImageLoaded()
     {
         StateHasChanged();
+    }
+
+    protected void OnLimitSpotsChange(bool limitSpots)
+    {
+        LimitSpots = limitSpots;
+
+        if (LimitSpots)
+            return;
+
+        EditModel.SpotsAvailable = null;
+        EditModel.SpotsConfirmed = null;
     }
 
     protected async Task ShowPersonProfile()

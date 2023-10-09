@@ -1,0 +1,60 @@
+﻿<DivRowFormGroup>
+    <MudStack Class="col-12"
+              Row="true"
+              Style="margin-bottom:1%;">
+        <PersonDomainAutoComplete Disabled="@(EditMode == EditModeType.Update)"
+                                  IsCulturalSearch="true"
+                                  People="AvailablePeople"
+                                  SelectedValue="EditModel.Person"
+                                  SelectionChanged="(p) => EditModel.Person = p"
+                                  UseProvidedPeople="true" />
+        <ItemTypeAutoComplete SelectedValue="EditModel.ItemType"
+                              SelectionChanged="(p) => EditModel.ItemType = p" />
+        <AddMudFab OnAdd="Add" />
+    </MudStack>
+</DivRowFormGroup>
+<DivRowFormGroup>
+    <MudStack Class="col-12"
+              Row="true"
+              Style="margin-bottom:1%;">
+        <TextField Label="Note"
+                   Lines="10"
+                   SelectedText="@EditModel.Note"
+                   SelectedTextChanged="@((p) => EditModel.Note = p)" />
+    </MudStack>
+</DivRowFormGroup>
+<MudTable Bordered="false"
+          Dense="false"
+          Hover="true"
+          Items="@Items"
+          Striped="true">
+    <ToolBarContent>
+        <MudText Typo="Typo.h6">Excluded Items</MudText>
+    </ToolBarContent>
+    <HeaderContent>
+        <MudTh></MudTh>
+        <MudTh>Name</MudTh>
+        <MudTh>Item</MudTh>
+        <MudTh></MudTh>
+    </HeaderContent>
+    <RowTemplate>
+        <MudTd DataLabel="">
+            <GridImage AllowNavigation="false"
+                       ImageLoaded="OnImageLoaded"
+                       ImageFileName="@context.Person.ImageFileName"
+                       IsPersonImage="true" />
+        </MudTd>
+        <MudTd DataLabel="Name">@context.Person.ProfileName</MudTd>
+        <MudTd DataLabel="Item">@context.ItemType?.Name</MudTd>
+        <MudTd DataLabel="">
+            <MudTooltip Text="Delete">
+                <MudFab Color="MudBlazor.Color.Secondary"
+                    Icon="@Icons.Material.Outlined.DeleteOutline"
+                    OnClick="@(_ => context.IsDeleted = true)" />
+            </MudTooltip>
+        </MudTd>
+    </RowTemplate>
+    <PagerContent>
+        <MudTablePager />
+    </PagerContent>
+</MudTable>

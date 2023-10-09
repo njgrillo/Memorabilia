@@ -7,10 +7,13 @@ public class PrivateSigningCustomItemTypeGroupDetailEditModel : EditModel
 	public PrivateSigningCustomItemTypeGroupDetailEditModel(Entity.PrivateSigningCustomItemTypeGroupDetail privateSigningCustomItemTypeGroupDetail)
 	{
 		Cost = privateSigningCustomItemTypeGroupDetail.Cost;
-		PrivateSigningCustomItemTypeGroupId = privateSigningCustomItemTypeGroupDetail.PrivateSigningCustomItemTypeGroupId;
+		PrivateSigningCustomItemGroup = privateSigningCustomItemTypeGroupDetail.PrivateSigningCustomItemGroup;
+        PrivateSigningCustomItemTypeGroupId = privateSigningCustomItemTypeGroupDetail.PrivateSigningCustomItemTypeGroupId;
     }
 
 	public decimal Cost { get; set; }
+
+	public Entity.PrivateSigningCustomItemGroup PrivateSigningCustomItemGroup { get; set; }
 
 	public int PrivateSigningCustomItemTypeGroupId { get; set; }
 }

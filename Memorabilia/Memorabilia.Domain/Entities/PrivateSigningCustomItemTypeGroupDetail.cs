@@ -13,7 +13,7 @@ public class PrivateSigningCustomItemTypeGroupDetail : Framework.Library.Domain.
 
     public decimal Cost { get; private set; }
 
-    public virtual PrivateSigningCustomItemTypeGroup PrivateSigningCustomItemTypeGroup { get; private set; }
+    public virtual PrivateSigningCustomItemGroup PrivateSigningCustomItemGroup { get; private set; }
 
     public int PrivateSigningCustomItemTypeGroupId { get; private set; }
 }

@@ -1,0 +1,53 @@
+﻿<DivRowFormGroup>
+    <MudStack Class="col-12"
+              Row="true"
+              Style="margin-bottom:1%;">
+        <ItemTypeAutoComplete Disabled="@(EditMode == EditModeType.Update)"
+                              SelectedValue="EditModel.ItemType"
+                              SelectionChanged="(p) => EditModel.ItemType = p" />
+        <NullableDecimalField Label="Cost"
+                              Value="EditModel.Cost"
+                              ValueChanged="@((p) => EditModel.Cost = p)" />
+        <NullableDecimalField Label="Shipping Cost"
+                              Value="EditModel.ShippingCost"
+                              ValueChanged="@((p) => EditModel.ShippingCost = p)" />
+        <AddUpdateMudFab EditMode="EditMode"
+                         OnAdd="Add"
+                         OnUpdate="Update" />
+    </MudStack>
+</DivRowFormGroup>
+<MudTable Bordered="false"
+          Dense="false"
+          Hover="true"
+          Items="@ProvidedItems.Where(item => !item.IsDeleted).ToList()"
+          Striped="true">
+    <ToolBarContent>
+        <MudText Typo="Typo.h6">Provided Items</MudText>
+    </ToolBarContent>
+    <HeaderContent>
+        <MudTh>Item</MudTh>
+        <MudTh>Cost</MudTh>
+        <MudTh>Shipping Cost</MudTh>
+        <MudTh></MudTh>
+    </HeaderContent>
+    <RowTemplate>
+        <MudTd DataLabel="Item">@context.ItemType?.Name</MudTd>
+        <MudTd DataLabel="Cost">@(context.Cost.HasValue ? context.Cost?.ToString("c") : string.Empty)</MudTd>
+        <MudTd DataLabel="Shipping Cost">@(context.ShippingCost.HasValue ? context.ShippingCost?.ToString("c") : "Free")</MudTd>
+        <MudTd DataLabel="">
+            <MudTooltip Text="Edit">
+                <MudFab Color="MudBlazor.Color.Primary"
+                    Icon="@Icons.Material.Outlined.ModeEditOutline"
+                    OnClick="@(_ => Edit(context))" />
+            </MudTooltip>
+            <MudTooltip Text="Delete">
+                <MudFab Color="MudBlazor.Color.Secondary"
+                    Icon="@Icons.Material.Outlined.DeleteOutline"
+                    OnClick="@(_ => context.IsDeleted = true)" />
+            </MudTooltip>
+        </MudTd>
+    </RowTemplate>
+    <PagerContent>
+        <MudTablePager />
+    </PagerContent>
+</MudTable>

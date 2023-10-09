@@ -33,4 +33,16 @@ public class PrivateSigningPersonModel
 
     public int PrivateSigningId
         => _privateSigningPerson.PrivateSigningId;
+
+    public string PromoterImageFileName
+        => _privateSigningPerson.PromoterImageFileName;
+
+    public int? SpotsAvailable
+        => _privateSigningPerson.SpotsAvailable;
+
+    public int? SpotsConfirmed
+        => _privateSigningPerson.SpotsConfirmed;
+
+    public int? SpotsReserved
+        => _privateSigningPerson.SpotsReserved;
 }

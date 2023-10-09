@@ -1,0 +1,78 @@
+﻿<LeftRightSection Style="margin-bottom:1%;">
+    <Right>
+        <CustomButton OnClick="AddCustomGroup"
+                      Text="Add Custom Group" />
+    </Right>
+</LeftRightSection>
+<DivRowFormGroup>
+    <MudStack Class="col-12"
+              Row="true"
+              Style="margin-bottom:1%;">
+        <PersonDomainAutoComplete Disabled="@(EditMode == EditModeType.Update)"
+                                  IsCulturalSearch="true"
+                                  SelectedValue="EditModel.Person"
+                                  SelectionChanged="(p) => EditModel.Person = p" />
+        <PrivateSigningCustomItemGroupAutoComplete SelectedValue="EditModel.PrivateSigningCustomItemTypeGroupDetail.PrivateSigningCustomItemGroup"
+                                                   SelectionChanged="(p) => EditModel.PrivateSigningCustomItemTypeGroupDetail.PrivateSigningCustomItemGroup = p" />
+        <NullableDecimalField Label="Cost"
+                              Value="EditModel.Cost"
+                              ValueChanged="@((p) => EditModel.Cost = p)" />
+        <AddUpdateMudFab EditMode="EditMode"
+                         OnAdd="Add"
+                         OnUpdate="Update" />
+    </MudStack>
+</DivRowFormGroup>
+<DivRowFormGroup>
+    <MudStack Class="col-12"
+              Row="true"
+              Style="margin-bottom:1%;">
+        <TextField Label="Note"
+                   Lines="10"
+                   SelectedText="@EditModel.Note"
+                   SelectedTextChanged="@((p) => EditModel.Note = p)" />
+    </MudStack>
+</DivRowFormGroup>
+<MudTable Bordered="false"
+          Dense="false"
+          Hover="true"
+          Items="@People.SelectMany(person => person.Pricing).Where(price => !price.IsDeleted).OrderBy(price => price.Person.DisplayName).ThenBy(price => price.PrivateSigningItemGroup.Name).ToList()"
+          Striped="true">
+    <ToolBarContent>
+        <MudText Typo="Typo.h6">Custom Pricing</MudText>
+    </ToolBarContent>
+    <HeaderContent>
+        <MudTh></MudTh>
+        <MudTh>Name</MudTh>
+        <MudTh>Item Group</MudTh>
+        <MudTh>Cost</MudTh>
+        <MudTh>Note</MudTh>
+        <MudTh></MudTh>
+    </HeaderContent>
+    <RowTemplate>
+        <MudTd DataLabel="">
+            <GridImage AllowNavigation="false"
+                       ImageLoaded="OnImageLoaded"
+                       ImageFileName="@context.Person.ImageFileName"
+                       IsPersonImage="true" />
+        </MudTd>
+        <MudTd DataLabel="Name">@context.Person.ProfileName</MudTd>
+        <MudTd DataLabel="ItemGroup">@context.PrivateSigningCustomItemTypeGroupDetail.Name</MudTd>
+        <MudTd DataLabel="Cost">@context.Cost.Value.ToString("c")</MudTd>
+        <MudTd DataLabel="Note">@context.Note</MudTd>
+        <MudTd DataLabel="">
+            <MudTooltip Text="Edit">
+                <MudFab Color="MudBlazor.Color.Primary"
+                        Icon="@Icons.Material.Outlined.ModeEditOutline"
+                        OnClick="@(_ => Edit(context))" />
+            </MudTooltip>
+            <MudTooltip Text="Delete">
+                <MudFab Color="MudBlazor.Color.Secondary"
+                        Icon="@Icons.Material.Outlined.DeleteOutline"
+                        OnClick="@(_ => context.IsDeleted = true)" />
+            </MudTooltip>
+        </MudTd>
+    </RowTemplate>
+    <PagerContent>
+        <MudTablePager />
+    </PagerContent>
+</MudTable>

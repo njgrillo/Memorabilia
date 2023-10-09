@@ -1,4 +1,9 @@
 ﻿<DivPad2>
+    <Condition Evaluation="@(ValidationResultAlerts.Any())">
+        <Match>
+            <AlertPanel Alerts="ValidationResultAlerts" />
+        </Match>
+    </Condition>
     <MudExpansionPanel IsExpanded="true"
                        Text="General Details">
         <DivRowFormGroup>
@@ -18,6 +23,11 @@
                                Mask="@(new DateMask("MM/dd/yyyy"))"
                                Variant="Variant.Outlined" />
             </Div>
+            <Div Class="col-3">
+                <Switch Checked="@EditModel.SelfAddressedStampedEnvelopeAccepted"
+                        CheckedChanged="(p) => EditModel.SelfAddressedStampedEnvelopeAccepted = p"
+                        Label="Accept SASE?" />
+            </Div>
         </DivRowFormGroup>     
         <DivRowFormGroup>
             <Div Class="col-12">
@@ -33,7 +43,29 @@
         <PrivateSigningPeopleEditor People="EditModel.People" />
     </MudExpansionPanel>
     <MudExpansionPanel IsExpanded="true"
+                       Text="Pricing">
+        <PrivateSigningPersonPriceEditor People="EditModel.People" />
+    </MudExpansionPanel>
+    <MudExpansionPanel IsExpanded="true"
+                       Text="Custom Pricing">
+        <PrivateSigningPersonCustomPriceEditor People="EditModel.People" />
+    </MudExpansionPanel>
+    <MudExpansionPanel IsExpanded="true"
+                       Text="Promoter Provided Items">
+        <PrivateSigningPromoterProvidedItemEditor ProvidedItems="EditModel.ProvidedItems" />
+    </MudExpansionPanel>
+    <MudExpansionPanel IsExpanded="true"
+                       Text="Excluded Items">
+        <PrivateSigningPeopleExcludedItemTypeEditor People="EditModel.People" />
+    </MudExpansionPanel>
+    <MudExpansionPanel IsExpanded="true"
                        Text="Authentication Providers">
         <PrivateSigningAuthenticationEditor AuthenticationCompanies="EditModel.AuthenticationCompanies" />
     </MudExpansionPanel>
+    <LeftRightSection Style="margin-top:1%;">
+        <Right>
+            <SaveButton OnClick="OnSave"
+                        Text="Save" />
+        </Right>
+    </LeftRightSection>
 </DivPad2>

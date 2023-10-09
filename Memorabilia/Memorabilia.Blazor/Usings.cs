@@ -239,6 +239,7 @@ global using Memorabilia.Application.Validators.Memorabilia.Ticket;
 global using Memorabilia.Application.Validators.Memorabilia.Trunk;
 global using Memorabilia.Application.Validators.Memorabilia.WristBand;
 global using Memorabilia.Application.Validators.Offer;
+global using Memorabilia.Application.Validators.PrivateSigning;
 global using Memorabilia.Application.Validators.Project;
 global using Memorabilia.Application.Validators.ProposeTrade;
 global using Memorabilia.Application.Validators.SignatureIdentification;

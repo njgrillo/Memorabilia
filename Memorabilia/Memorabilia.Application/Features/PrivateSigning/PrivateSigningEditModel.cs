@@ -1,4 +1,6 @@
-﻿namespace Memorabilia.Application.Features.PrivateSigning;
+﻿using System.Linq;
+
+namespace Memorabilia.Application.Features.PrivateSigning;
 
 public class PrivateSigningEditModel : EditModel
 {
@@ -15,7 +17,8 @@ public class PrivateSigningEditModel : EditModel
         CreatedByUserId = privateSigning.CreatedUserId;
         CreatedDate = privateSigning.CreatedDate;
         Id = privateSigning.Id;
-        Note = privateSigning.Note;        
+        Note = privateSigning.Note;   
+        SelfAddressedStampedEnvelopeAccepted = privateSigning.SelfAddressedStampedEnvelopeAccepted;
         SigningDate = privateSigning.SigningDate;
         SubmissionDeadlineDate = privateSigning.SubmissionDeadlineDate;
 
@@ -26,6 +29,10 @@ public class PrivateSigningEditModel : EditModel
         People = privateSigning.People
                                .Select(person => new PrivateSigningPersonEditModel(person))
                                .ToList();
+
+        ProvidedItems = privateSigning.PromoterProvidedItems
+                                      .Select(item => new PromoterProvidedItemEditModel(item.PromoterProvidedItem))
+                                      .ToList();
     }
 
     public List<PrivateSigningAuthenticationCompanyEditModel> AuthenticationCompanies { get; set; }
@@ -41,6 +48,11 @@ public class PrivateSigningEditModel : EditModel
 
     public List<PrivateSigningPersonEditModel> People { get; set; }
         = new();
+
+    public List<PromoterProvidedItemEditModel> ProvidedItems { get; set; }
+        = new();
+
+    public bool SelfAddressedStampedEnvelopeAccepted { get; set; }
 
     public DateTime? SigningDate { get; set; }
 

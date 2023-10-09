@@ -54,7 +54,7 @@ public class PersonModel
         => _person.MiddleName;
 
     public override string Name 
-        => DisplayName;
+        => ProfileName;
 
     public string Nickname 
         => _person.Nickname;

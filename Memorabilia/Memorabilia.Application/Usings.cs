@@ -87,6 +87,8 @@ global using Memorabilia.Application.Features.Memorabilia.Ticket;
 global using Memorabilia.Application.Features.Memorabilia.Trunks;
 global using Memorabilia.Application.Features.Memorabilia.WristBand;
 global using Memorabilia.Application.Features.Offer;
+global using Memorabilia.Application.Features.PrivateSigning;
+global using Memorabilia.Application.Features.PrivateSigning.Promoter;
 global using Memorabilia.Application.Features.Project;
 global using Memorabilia.Application.Features.ProposeTrade;
 global using Memorabilia.Application.Features.Services;
