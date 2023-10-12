@@ -9,18 +9,16 @@ public class PrivateSigningPersonValidator : AbstractValidator<PrivateSigningPer
             .WithName("Note")
             .WithMessage("Note must be 3000 characters or less.");
 
-        RuleFor(x => x.PersonId)
-            .GreaterThan(0)
-            .WithName("PersonId")
-            .WithMessage("Person Id is required.");
+        RuleFor(x => x.SpotsAvailable)
+           .GreaterThanOrEqualTo(x => x.SpotsConfirmed.Value)
+           .When(x => x.SpotsConfirmed.HasValue)
+           .WithName("Spots Available")
+           .WithMessage("Spots Available must be greater than or equal to Spots Confirmed.");
 
-        RuleFor(x => x.PrivateSigningId)
-            .GreaterThan(0)
-            .WithName("PrivateSigningId")
-            .WithMessage("Private Signing Id is required.");
-
-        //Spots Available
-        //Spots Confirmed
-        //Spots Reserved
+        RuleFor(x => x.SpotsAvailable)
+           .GreaterThanOrEqualTo(x => x.SpotsReserved.Value)
+           .When(x => x.SpotsReserved.HasValue)
+           .WithName("Spots Available")
+           .WithMessage("Spots Available must be greater than or equal to Spots Reserved.");
     }
 }

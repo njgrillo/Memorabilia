@@ -18,4 +18,9 @@ public class PrivateSigningPromoterProvidedItem : Framework.Library.Domain.Entit
     public virtual PromoterProvidedItem PromoterProvidedItem { get; private set; }
 
     public int PromoterProvidedItemId { get; private set; }
+
+    public void SetPromoterProvidedItem(PromoterProvidedItem promoterProvidedItem)
+    {
+        PromoterProvidedItem = promoterProvidedItem;
+    }
 }

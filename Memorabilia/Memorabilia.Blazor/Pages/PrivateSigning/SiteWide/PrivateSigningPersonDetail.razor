@@ -3,12 +3,10 @@
                       RightStyle="width:65%;">
         <Left>
             <MudStack>
-                <MudImage Class="rounded-lg can-click"
-                          Elevation="5"
-                          Height="200"
-                          ObjectFit="@ObjectFit.Cover"
-                          Src="@(ImageService.GetPersonImageData(PrivateSigningPerson.Person.ImageFileName))"
-                          Width="200" />
+                <GridImage AllowNavigation="false"
+                           ImageLoaded="OnImageLoaded"
+                           ImageFileName="@PrivateSigningPerson.Person.ImageFileName"
+                           IsPersonImage="true" />
                 <Text Typography="Typo.h6">
                     <b>@(PrivateSigningPerson.Person.ProfileName)</b>
                 </Text>

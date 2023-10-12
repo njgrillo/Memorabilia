@@ -2,12 +2,9 @@
     <MudStack Class="col-12"
               Row="true"
               Style="margin-bottom:1%;">
-        <PersonDomainAutoComplete Disabled="@(EditMode == EditModeType.Update)"
-                                  IsCulturalSearch="true"
-                                  People="AvailablePeople"
-                                  SelectedValue="EditModel.Person"
-                                  SelectionChanged="(p) => EditModel.Person = p"
-                                  UseProvidedPeople="true" />
+        <PrivateSigningPersonDropDown AvailablePeople="People.Select(person => person.Person).ToArray()"
+                                      SelectedValue="SelectedPersonId"
+                                      SelectionChanged="(p) => SelectedPersonId = p" />
         <ItemTypeAutoComplete SelectedValue="EditModel.ItemType"
                               SelectionChanged="(p) => EditModel.ItemType = p" />
         <AddMudFab OnAdd="Add" />

@@ -10,9 +10,12 @@ public class PrivateSigningCustomItemGroupEditModel : EditModel
 		CreatedDate = privateSigningCustomItemGroup.CreatedDate;
 		Id = privateSigningCustomItemGroup.Id;
 		Name = privateSigningCustomItemGroup.Name;
-	}
+    }
 
 	public int CreatedByUserId { get; set; }
 
 	public DateTime CreatedDate { get; set; }
+
+	public List<PrivateSigningCustomItemTypeGroupEditModel> Items { get; set; }
+		= new();
 }

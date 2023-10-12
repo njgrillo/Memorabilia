@@ -29,7 +29,7 @@
                     <Condition Evaluation="Model.CanImportPerson">
                         <Match>
                             <MudTooltip Text="Import from memorabilia item">
-                                <MudImage @onclick="@(_ => Model.Person = new PersonEditModel(Model.MemorabiliaPerson))"
+                                <MudImage @onclick="@(_ => Model.Person = Model.MemorabiliaPerson)"
                                           Class="rounded-lg can-click"
                                           Elevation="5"
                                           Height="20"
@@ -39,8 +39,9 @@
                             </MudTooltip>
                         </Match>
                     </Condition>
-                    <PersonSelector SelectedPerson="Model.Person"
-                                    SelectedPersonChanged="(p) => Model.Person = p" />
+                    <PersonDomainAutoComplete IsCulturalSearch="true"
+                                              SelectedValue="Model.Person"
+                                              SelectionChanged="(p) => Model.Person = p" />
                 </Div>
             </DivRowFormGroup>
             <DivRowFormGroup>

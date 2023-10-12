@@ -27,12 +27,10 @@
                                        Icon="@context.ToggleIcon"></MudIconButton>
                     </Match>
                     <NotMatch>
-                        <MudImage Class="rounded-lg cant-click"
-                                  Elevation="5"
-                                  Height="200"
-                                  ObjectFit="@ObjectFit.Cover"
-                                  Src="@(ImageService.GetPersonImageData(context.People.First().Person.ImageFileName))"
-                                  Width="200" />
+                        <GridImage AllowNavigation="false"
+                                   ImageLoaded="OnImageLoaded"
+                                   ImageFileName="@context.People.First().Person.ImageFileName"
+                                   IsPersonImage="true" />
                     </NotMatch>
                 </Condition>                
             </MudTd>
@@ -79,12 +77,10 @@
                                 </HeaderContent>
                                 <RowTemplate Context="privateSigningPerson">
                                     <MudTd>
-                                        <MudImage Class="rounded-lg cant-click"
-                                                  Elevation="5"
-                                                  Height="200"
-                                                  ObjectFit="@ObjectFit.Cover"
-                                                  Src="@(ImageService.GetPersonImageData(privateSigningPerson.Person.ImageFileName))"
-                                                  Width="200" />
+                                        <GridImage AllowNavigation="false"
+                                                   ImageLoaded="OnImageLoaded"
+                                                   ImageFileName="@privateSigningPerson.Person.ImageFileName"
+                                                   IsPersonImage="true" />
                                     </MudTd>
                                     <MudTd DataLabel="Note">@privateSigningPerson.Note</MudTd>
                                 </RowTemplate>

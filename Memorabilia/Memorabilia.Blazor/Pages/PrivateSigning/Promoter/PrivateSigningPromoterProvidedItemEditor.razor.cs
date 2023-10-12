@@ -2,6 +2,9 @@
 
 public partial class PrivateSigningPromoterProvidedItemEditor
 {
+    [Inject]
+    public IApplicationStateService ApplicationStateService { get; set; }
+
     [Parameter]
     public List<PromoterProvidedItemEditModel> ProvidedItems { get; set; }
         = new();
@@ -16,6 +19,8 @@ public partial class PrivateSigningPromoterProvidedItemEditor
     {
         if (EditModel.ItemType == null)
             return;
+
+        EditModel.PromoterId = ApplicationStateService.CurrentUser.Id;
 
         ProvidedItems.Add(EditModel);
 

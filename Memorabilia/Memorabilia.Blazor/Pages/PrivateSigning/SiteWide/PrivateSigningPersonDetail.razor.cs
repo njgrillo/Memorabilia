@@ -8,4 +8,9 @@ public partial class PrivateSigningPersonDetail
     [Parameter]
     public PrivateSigningPersonModel PrivateSigningPerson { get; set; }
         = new();
+
+    protected void OnImageLoaded()
+    {
+        StateHasChanged();
+    }
 }

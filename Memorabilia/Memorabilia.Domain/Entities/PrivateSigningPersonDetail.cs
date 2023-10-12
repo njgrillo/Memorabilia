@@ -33,4 +33,22 @@ public class PrivateSigningPersonDetail : Framework.Library.Domain.Entity.Domain
     {
         Note = note;    
     }
+
+    public void SetCustomItemTypeGroupDetail(decimal cost,
+                                             int privateSigningCustomItemTypeGroupId,
+                                             decimal? shippingCost)
+    {
+        PrivateSigningCustomItemTypeGroupDetail = new(cost,
+                                                      privateSigningCustomItemTypeGroupId,
+                                                      shippingCost);
+    }
+
+    public void SetItemTypeGroup(decimal cost,
+                                 int privateSigningItemGroupId,
+                                 decimal? shippingCost)
+    {
+        PrivateSigningItemTypeGroup = new(cost, 
+                                          privateSigningItemGroupId, 
+                                          shippingCost);
+    }
 }

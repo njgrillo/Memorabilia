@@ -57,6 +57,12 @@ public partial class ImportProjectPersonTeamDialog
         MudDialog.Close(DialogResult.Ok(SelectedPeople.ToArray()));
     }
 
+    protected void OnImageLoaded()
+    {
+        StateHasChanged();
+    }
+
+
     protected void OnSelectAll()
     {
         SelectedPeople = People.Length == SelectedPeople.Count

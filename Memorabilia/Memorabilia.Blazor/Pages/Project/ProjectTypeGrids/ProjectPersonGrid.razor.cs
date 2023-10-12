@@ -30,6 +30,11 @@ public partial class ProjectPersonGrid
         Courier.Subscribe<ProjectPersonAddedNotification>(OnProjectPersonAdded);
     }
 
+    protected void OnImageLoaded()
+    {
+        StateHasChanged();
+    }
+
     public void OnProjectPersonAdded(ProjectPersonAddedNotification notification)
     {
         IEnumerable<ProjectPersonEditModel> itemsToUpdate 

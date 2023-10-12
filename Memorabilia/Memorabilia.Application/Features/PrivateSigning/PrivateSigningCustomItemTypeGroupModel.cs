@@ -11,6 +11,11 @@ public class PrivateSigningCustomItemTypeGroupModel
         _privateSigningCustomItemTypeGroup = privateSigningCustomItemTypeGroup;
     }
 
+    public PrivateSigningCustomItemGroupModel CustomItemTypeGroup
+        => _privateSigningCustomItemTypeGroup != null
+            ? new PrivateSigningCustomItemGroupModel(_privateSigningCustomItemTypeGroup.PrivateSigningCustomItemGroup)
+            : new();
+
     public int Id
         => _privateSigningCustomItemTypeGroup.Id;
 

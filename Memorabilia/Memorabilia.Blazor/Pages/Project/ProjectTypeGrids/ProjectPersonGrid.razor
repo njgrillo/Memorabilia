@@ -163,12 +163,10 @@
                                   SelectionChanged="(p) => context.PriorityTypeId = p" />
         </MudTd>
         <MudTd DataLabel="">
-            <MudImage Class="rounded-lg"
-                      Elevation="5"
-                      Height="200"
-                      ObjectFit="@ObjectFit.Cover"
-                      Src="@(ImageService.GetPersonImageData(context.Person.PersonImageFileName))"
-                      Width="200" />
+            <GridImage AllowNavigation="false"
+                       ImageLoaded="OnImageLoaded"
+                       ImageFileName="@context.Person.PersonImageFileName"
+                       IsPersonImage="true" />
         </MudTd>
         <MudTd DataLabel="Person">@context.Person.DisplayName</MudTd> 
         <MudTd DataLabel="Deceased">@(context.Deceased ? "Yes" : "No")</MudTd>

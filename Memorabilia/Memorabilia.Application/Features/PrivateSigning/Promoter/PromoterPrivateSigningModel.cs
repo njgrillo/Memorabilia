@@ -36,6 +36,9 @@ public class PromoterPrivateSigningModel
                            .Select(person => new PrivateSigningPersonModel(person))?
                            .ToArray() ?? Array.Empty<PrivateSigningPersonModel>();
 
+    public string PromoterImageFileName
+        => _privateSigning.PromoterImageFileName;
+
     public bool SelfAddressedStampedEnvelopeAccepted
         => _privateSigning.SelfAddressedStampedEnvelopeAccepted;
 

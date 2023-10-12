@@ -4,13 +4,7 @@ public partial class PrivateSigningPeopleExcludedItemTypeEditor
 {
     [Parameter]
     public List<PrivateSigningPersonEditModel> People { get; set; }
-        = new();
-
-    protected PersonModel[] AvailablePeople
-        => People.Any()
-            ? People.Select(person => person.Person)
-                    .ToArray()
-            : Array.Empty<PersonModel>();
+        = new();    
 
     protected EditModeType EditMode
         = EditModeType.Add;
@@ -26,6 +20,8 @@ public partial class PrivateSigningPeopleExcludedItemTypeEditor
                      .ThenBy(item => item.ItemType?.Name)
                      .ToList()
             : new();
+
+    protected int SelectedPersonId { get; set; }
 
     protected void Add()
     {

@@ -1,52 +1,93 @@
 ﻿<DivRowFormGroup>
-    <MudStack Class="col-12" 
-              Row="true"
-              Style="margin-bottom:1%;">
-        <PersonDomainAutoComplete Disabled="@(EditMode == EditModeType.Update)"
-                                  IsCulturalSearch="true"
-                                  SelectedValue="EditModel.Person"
-                                  SelectionChanged="(p) => EditModel.Person = p" />
-        <Condition Evaluation="@(EditModel.Person.Id > 0)">
-            <Match>
-                <MudTooltip Text="View Profile">
-                    <MudIconButton Icon="@Icons.Material.Filled.Person"
-                                   OnClick="ShowPersonProfile" />
-                </MudTooltip>
-            </Match>
-        </Condition>
+    <Div Class="col-4">
+        <MudStack Row="true">
+            <PersonDomainAutoComplete Disabled="@(EditMode == EditModeType.Update)"
+                                      IsCulturalSearch="true"
+                                      SelectedValue="EditModel.Person"
+                                      SelectionChanged="(p) => EditModel.Person = p" />
+            <Condition Evaluation="@(EditModel.Person.Id > 0)">
+                <Match>
+                    <MudTooltip Text="View Profile">
+                        <MudIconButton Icon="@Icons.Material.Filled.Person"
+                                       OnClick="ShowPersonProfile" />
+                    </MudTooltip>
+                </Match>
+            </Condition>
+        </MudStack>        
+    </Div>
+    <Div Class="col-3">
+        <MudStack Row="true">
+            <Condition Evaluation="EditModel.PromoterImageFileName.IsNullOrEmpty()">
+                <Match>
+                    <InputFile @bind-Value="@PromoterPrivateSigningPersonImage"
+                               id="fileInputPromoterPersonImage"
+                               accept="image/*" hidden
+                               OnChange="@LoadFile" />
+                    <MudFab for="fileInputPromoterPersonImage"
+                            Color="MudBlazor.Color.Secondary"
+                            HtmlTag="label"
+                            Icon="@Icons.Material.Filled.Image"
+                            Label="Load promotional image" />
+                </Match>
+            </Condition>
+            <Condition Evaluation="@(!EditModel.PromoterImageFileName.IsNullOrEmpty())">
+                <Match>
+                    <MudImage Class="rounded-lg cant-click"
+                              Elevation="5"
+                              Height="70"
+                              ObjectFit="@ObjectFit.Cover"
+                              Src="@(ImageService.GetUserImageData(EditModel.PromoterImageFileName, ApplicationStateService.CurrentUser.Id))"
+                              Width="70" />
+                    <MudTooltip Text="Remove Image">
+                        <MudFab Color="MudBlazor.Color.Secondary"
+                                Icon="@Icons.Material.Outlined.Delete"
+                                OnClick="RemovePromoterPersonImage"
+                                Size="MudBlazor.Size.Small" />
+                    </MudTooltip>
+                </Match>
+            </Condition>
+            <AddUpdateMudFab EditMode="EditMode"
+                             OnAdd="Add"
+                             OnUpdate="Update" />
+        </MudStack>        
+    </Div>   
+</DivRowFormGroup>
+<DivRowFormGroup>
+    <Div Class="col-3">
         <Switch Checked="@EditModel.AllowInscriptions"
                 CheckedChanged="(p) => OnAllowInscriptionsChange(p)"
                 Label="Inscriptions Allowed?" />
-        <Condition Evaluation="@EditModel.AllowInscriptions">
-            <Match>
+    </Div>
+    <Condition Evaluation="@EditModel.AllowInscriptions">
+        <Match>
+            <Div Class="col-3">
                 <NullableDecimalField Label="Inscription Cost"
                                       Value="EditModel.InscriptionCost"
                                       ValueChanged="@((p) => EditModel.InscriptionCost = p)" />
-            </Match>
-        </Condition> 
-        <AddUpdateMudFab EditMode="EditMode"
-                         OnAdd="Add"
-                         OnUpdate="Update" />
-    </MudStack>
+            </Div>            
+        </Match>
+    </Condition>
 </DivRowFormGroup>
 <DivRowFormGroup>
-    <MudStack Class="col-12" 
-              Row="true"
-              Style="margin-bottom:1%;">
+    <Div Class="col-3">
         <Switch Checked="LimitSpots"
                 CheckedChanged="(p) => OnLimitSpotsChange(p)"
                 Label="Limit Spots?" />
-        <Condition Evaluation="LimitSpots">
-            <Match>
+    </Div>
+    <Condition Evaluation="LimitSpots">
+        <Match>
+            <Div Class="col-3">
                 <NullableIntField Label="Spots Available"
                                   Value="EditModel.SpotsAvailable"
                                   ValueChanged="@((p) => EditModel.SpotsAvailable = p)" />
+            </Div>            
+            <Div Class="col-3">
                 <NullableIntField Label="Spots Taken"
                                   Value="EditModel.SpotsConfirmed"
                                   ValueChanged="@((p) => EditModel.SpotsConfirmed = p)" />
-            </Match>
-        </Condition>
-    </MudStack>    
+            </Div>            
+        </Match>
+    </Condition>
 </DivRowFormGroup>
 <DivRowFormGroup>
     <MudStack Class="col-12"
@@ -67,6 +108,7 @@
         <MudText Typo="Typo.h6">People</MudText>
     </ToolBarContent>
     <HeaderContent>
+        <MudTh>Promotional Person Image</MudTh>
         <MudTh></MudTh>
         <MudTh>Name</MudTh>
         <MudTh>Inscriptions Allowed</MudTh>
@@ -77,6 +119,15 @@
         <MudTh></MudTh>
     </HeaderContent>
     <RowTemplate>
+        <MudTd DataLabel="">
+            <Condition Evaluation="@(!context.PromoterImageFileName.IsNullOrEmpty())">
+                <Match>
+                    <GridImage AllowNavigation="false"
+                               ImageLoaded="OnImageLoaded"
+                               ImageFileName="@context.PromoterImageFileName" />
+                </Match>
+            </Condition>            
+        </MudTd>
         <MudTd DataLabel="">
             <GridImage AllowNavigation="false" 
                        ImageLoaded="OnImageLoaded"

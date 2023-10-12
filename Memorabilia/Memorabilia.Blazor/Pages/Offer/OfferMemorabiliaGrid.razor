@@ -77,12 +77,10 @@
                             </HeaderContent>
                             <RowTemplate Context="autograph">
                                 <MudTd DataLabel="">
-                                    <MudImage Class="rounded-lg"
-                                              Elevation="5"
-                                              Height="200"
-                                              ObjectFit="@ObjectFit.Cover"
-                                              Src="@(ImageService.GetPersonImageData(autograph.PersonImageName))"
-                                              Width="200" />
+                                    <GridImage AllowNavigation="false"
+                                               ImageLoaded="OnImageLoaded"
+                                               ImageFileName="@autograph.PersonImageName"
+                                               IsPersonImage="true" />
                                 </MudTd>
                                 <MudTd DataLabel="Person">@autograph.PersonName</MudTd>
                                 <MudTd DataLabel="Condition">@autograph.ConditionName</MudTd>

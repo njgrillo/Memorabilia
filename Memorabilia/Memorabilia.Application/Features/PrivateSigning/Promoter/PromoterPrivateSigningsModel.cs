@@ -12,7 +12,7 @@ public class PromoterPrivateSigningsModel : Model
     }
 
     public PromoterPrivateSigningsModel(Entity.PrivateSigning[] privateSignings,
-                                  PageInfoResult pageInfo)
+                                        PageInfoResult pageInfo)
     {
         PrivateSignings
             = privateSignings.Select(privateSigning => new PromoterPrivateSigningModel(privateSigning))

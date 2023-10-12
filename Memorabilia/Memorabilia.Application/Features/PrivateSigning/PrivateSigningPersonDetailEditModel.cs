@@ -1,6 +1,4 @@
-﻿using Memorabilia.Domain.Entities;
-
-namespace Memorabilia.Application.Features.PrivateSigning;
+﻿namespace Memorabilia.Application.Features.PrivateSigning;
 
 public class PrivateSigningPersonDetailEditModel : EditModel
 {
@@ -8,7 +6,8 @@ public class PrivateSigningPersonDetailEditModel : EditModel
 
 	public PrivateSigningPersonDetailEditModel(Entity.PrivateSigningPersonDetail privateSigningPersonDetail)
 	{
-		Id = privateSigningPersonDetail.Id;
+		Cost = privateSigningPersonDetail.PrivateSigningItemTypeGroup.Cost;
+        Id = privateSigningPersonDetail.Id;
 		Note = privateSigningPersonDetail.Note;
 		Person = new(privateSigningPersonDetail.PrivateSigningPerson.Person);
         PrivateSigningCustomItemTypeGroupDetail = new(privateSigningPersonDetail.PrivateSigningCustomItemTypeGroupDetail);
@@ -16,6 +15,7 @@ public class PrivateSigningPersonDetailEditModel : EditModel
 		PrivateSigningItemGroup = Constant.PrivateSigningItemGroup.Find(privateSigningPersonDetail.PrivateSigningItemTypeGroupId ?? 0);
 		PrivateSigningItemTypeGroupId = privateSigningPersonDetail.PrivateSigningItemTypeGroupId;
 		PrivateSigningPersonId = privateSigningPersonDetail.PrivateSigningPersonId;
+		ShippingCost = privateSigningPersonDetail.PrivateSigningItemTypeGroup.ShippingCost;
     }
 
 	public decimal? Cost { get; set; }
@@ -35,4 +35,6 @@ public class PrivateSigningPersonDetailEditModel : EditModel
 		= new();
 
     public int PrivateSigningPersonId { get; set; }
+
+    public decimal? ShippingCost { get; set; }
 }

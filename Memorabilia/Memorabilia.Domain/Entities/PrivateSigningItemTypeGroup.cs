@@ -5,13 +5,24 @@ public class PrivateSigningItemTypeGroup : Framework.Library.Domain.Entity.Domai
     public PrivateSigningItemTypeGroup() { }
 
     public PrivateSigningItemTypeGroup(decimal cost,
-                                       int privateSigningItemGroupId)
+                                       int privateSigningItemGroupId,
+                                       decimal? shippingCost)
     {
         Cost = cost;
         PrivateSigningItemGroupId = privateSigningItemGroupId;
+        ShippingCost = shippingCost;
     }
 
     public decimal Cost { get; private set; }
 
     public int PrivateSigningItemGroupId { get; private set; }
+
+    public decimal? ShippingCost { get; private set; }
+
+    public void Set(decimal cost,
+                    decimal? shippingCost)
+    {
+        Cost = cost;
+        ShippingCost = shippingCost;
+    }
 }

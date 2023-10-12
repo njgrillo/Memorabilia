@@ -3,11 +3,23 @@
 public partial class PrivateSigningPeopleEditor
 {
     [Inject]
+    public IApplicationStateService ApplicationStateService { get; set; }
+
+    [Inject]
     public IDialogService DialogService { get; set; }
+
+    [Inject]
+    public ImageService ImageService { get; set; }
+
+    [Inject]
+    public ILogger<PrivateSigningPeopleEditor> Logger { get; set; }
 
     [Parameter]
     public List<PrivateSigningPersonEditModel> People { get; set; }
         = new();
+
+    [Parameter]
+    public EventCallback<PrivateSigningPersonEditModel[]> PeopleModified { get; set; }
 
     protected EditModeType EditMode
         = EditModeType.Add;
@@ -17,7 +29,10 @@ public partial class PrivateSigningPeopleEditor
 
     protected bool LimitSpots { get; set; }
 
-    protected void Add()
+    public ImageEditModel PromoterPrivateSigningPersonImage { get; set; }
+        = new();
+
+    protected async Task Add()
     {
         if (EditModel.Person == null || EditModel.Person.Id == 0)
             return;
@@ -25,6 +40,8 @@ public partial class PrivateSigningPeopleEditor
         People.Add(EditModel);
 
         EditModel = new();
+
+        await PeopleModified.InvokeAsync(People.ToArray());
     }
 
     protected void Edit(PrivateSigningPersonEditModel editModel)
@@ -35,6 +52,22 @@ public partial class PrivateSigningPeopleEditor
         EditModel.Note = editModel.Note;
 
         EditMode = EditModeType.Update;
+    }
+
+    protected async Task LoadFile(InputFileChangeEventArgs e)
+    {
+        try
+        {
+            EditModel.PromoterImageFileName
+                = await ImageService.LoadFile(e.File, Enum.ImageRootType.User);
+
+            PromoterPrivateSigningPersonImage
+                = new ImageEditModel(new ImageModel(new Entity.Image(EditModel.PromoterImageFileName)));
+        }
+        catch (Exception ex)
+        {
+            Logger.LogError("File: {Filename} Error: {Error}", e.File.Name, ex.Message);
+        }
     }
 
     protected void OnAllowInscriptionsChange(bool allowInscriptions)
@@ -61,6 +94,11 @@ public partial class PrivateSigningPeopleEditor
 
         EditModel.SpotsAvailable = null;
         EditModel.SpotsConfirmed = null;
+    }
+
+    protected void RemovePromoterPersonImage()
+    {
+        EditModel.PromoterImageFileName = null;
     }
 
     protected async Task ShowPersonProfile()

@@ -17,6 +17,8 @@
         </ToolBarContent>
         <HeaderContent>
             <MudTh></MudTh>
+            <MudTh>Promotional Image</MudTh>
+            <MudTh></MudTh>
             <MudTh>Person</MudTh>
             <MudTh>Submission Deadline Date</MudTh>
             <MudTh>Signing Date</MudTh>
@@ -32,16 +34,25 @@
                         <MudIconButton @onclick="@(_ => ToggleChildContent(context.Id))"
                                        Icon="@context.ToggleIcon"></MudIconButton>
                     </Match>
-                    <NotMatch>
-                        <Condition Evaluation="context.People.Any()">
-                            <Match>
-                                <GridImage AllowNavigation="false"
-                                           ImageLoaded="OnImageLoaded"
-                                           ImageFileName="@context.People.First().Person.ImageFileName"
-                                           IsPersonImage="true" />
-                            </Match>
-                        </Condition>                        
-                    </NotMatch>
+                </Condition>
+            </MudTd>
+            <MudTd>
+                <Condition Evaluation="@(!context.PromoterImageFileName.IsNullOrEmpty())">
+                    <Match>
+                        <GridImage AllowNavigation="false"
+                                   ImageLoaded="OnImageLoaded"
+                                   ImageFileName="@context.PromoterImageFileName" />
+                    </Match>
+                </Condition>                
+            </MudTd>
+            <MudTd>
+                <Condition Evaluation="@(context.People.Length == 1)">
+                    <Match>
+                        <GridImage AllowNavigation="false"
+                                   ImageLoaded="OnImageLoaded"
+                                   ImageFileName="@context.People.First().Person.ImageFileName"
+                                   IsPersonImage="true" />
+                    </Match>
                 </Condition>
             </MudTd>
             <MudTd DataLabel="Person">@(context.People.Any() ? (context.People.Length > 1 ? "Multiple People" : context.People.First().Person.DisplayName) : string.Empty)</MudTd>
@@ -60,7 +71,7 @@
             </MudTd>
         </RowTemplate>
         <ChildRowContent>
-            <Condition Evaluation="@context.DisplayDetails">
+            <Condition Evaluation="@(context.People.Any() && context.People.Length > 1 && context.DisplayDetails)">
                 <Match>
                     <tr />
                     <tr style="background-color:#6D7B8D;color:honeydew;border-style:dashed;border-width:2px;border-color:#ECF3F4;">
@@ -87,12 +98,10 @@
                                 </HeaderContent>
                                 <RowTemplate Context="privateSigningPerson">
                                     <MudTd>
-                                        <MudImage Class="rounded-lg cant-click"
-                                                Elevation="5"
-                                                Height="200"
-                                                ObjectFit="@ObjectFit.Cover"
-                                                Src="@(ImageService.GetPersonImageData(privateSigningPerson.Person.ImageFileName))"
-                                                Width="200" />
+                                        <GridImage AllowNavigation="false"
+                                                   ImageLoaded="OnImageLoaded"
+                                                   ImageFileName="@privateSigningPerson.Person.ImageFileName"
+                                                   IsPersonImage="true" />
                                     </MudTd>
                                     <MudTd DataLabel="Note">@privateSigningPerson.Note</MudTd>
                                 </RowTemplate>

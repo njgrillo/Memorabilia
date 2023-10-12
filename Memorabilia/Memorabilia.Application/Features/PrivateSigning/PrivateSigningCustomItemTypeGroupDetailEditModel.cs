@@ -9,6 +9,7 @@ public class PrivateSigningCustomItemTypeGroupDetailEditModel : EditModel
 		Cost = privateSigningCustomItemTypeGroupDetail.Cost;
 		PrivateSigningCustomItemGroup = privateSigningCustomItemTypeGroupDetail.PrivateSigningCustomItemGroup;
         PrivateSigningCustomItemTypeGroupId = privateSigningCustomItemTypeGroupDetail.PrivateSigningCustomItemTypeGroupId;
+		ShippingCost = privateSigningCustomItemTypeGroupDetail.ShippingCost;
     }
 
 	public decimal Cost { get; set; }
@@ -16,4 +17,6 @@ public class PrivateSigningCustomItemTypeGroupDetailEditModel : EditModel
 	public Entity.PrivateSigningCustomItemGroup PrivateSigningCustomItemGroup { get; set; }
 
 	public int PrivateSigningCustomItemTypeGroupId { get; set; }
+
+	public decimal? ShippingCost { get; set; }
 }

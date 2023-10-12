@@ -79,12 +79,10 @@
                                          CheckedChanged="(p) => PersonSelected(context)" />
                     </MudTd>
                     <MudTd DataLabel="">
-                        <MudImage Class="rounded-lg"
-                                  Elevation="5"
-                                  Height="200"
-                                  ObjectFit="@ObjectFit.Cover"
-                                  Src="@(ImageService.GetPersonImageData(context.ImageFileName))"
-                                  Width="200" />
+                        <GridImage AllowNavigation="false"
+                                   ImageLoaded="OnImageLoaded"
+                                   ImageFileName="@context.ImageFileName"
+                                   IsPersonImage="true" />
                     </MudTd>
                     <MudTd DataLabel="Display Name">@context.DisplayName</MudTd>
                     <MudTd DataLabel="First Name">@context.FirstName</MudTd>

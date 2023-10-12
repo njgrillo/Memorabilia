@@ -1,4 +1,6 @@
-﻿namespace Memorabilia.Domain.Entities;
+﻿using Memorabilia.Domain.Constants;
+
+namespace Memorabilia.Domain.Entities;
 
 public class PrivateSigningPerson : Framework.Library.Domain.Entity.DomainEntity
 {
@@ -66,5 +68,91 @@ public class PrivateSigningPerson : Framework.Library.Domain.Entity.DomainEntity
         SpotsAvailable = spotsAvailable;
         SpotsConfirmed = spotsConfirmed;
         SpotsReserved = spotsReserved;
+    }
+
+    public void SetCustomPrice(decimal cost,
+                               string note,
+                               int privateSigningCustomItemTypeGroupDetailId,
+                               int privateSigningPersonDetailId,
+                               int privateSigningPersonId,
+                               decimal? shippingCost)
+    {
+        Pricing ??= new();
+
+        PrivateSigningPersonDetail privateSigningPersonDetail
+            = Pricing.SingleOrDefault(personDetail => personDetail.Id == privateSigningPersonDetailId);
+
+        if (privateSigningPersonDetail == null)
+        {
+            privateSigningPersonDetail = new(note,
+                                             privateSigningCustomItemTypeGroupDetailId,
+                                             null,
+                                             privateSigningPersonId);
+
+            //privateSigningPersonDetail.SetItemTypeGroup(cost,
+            //                                            privateSigningCustomItemTypeGroupDetailId,
+            //                                            shippingCost);
+
+            Pricing.Add(privateSigningPersonDetail);
+
+            return;
+        }
+
+        privateSigningPersonDetail.PrivateSigningItemTypeGroup.Set(cost,
+                                                                   shippingCost);
+    }
+
+    public void SetExcludedItem(int privateSigningPersonExcludeItemTypeId,
+                                int itemTypeId,
+                                string note,
+                                int privateSigningPersonId)
+    {
+        ExcludedItems ??= new();
+
+        PrivateSigningPersonExcludeItemType privateSigningPersonExcludeItemType
+            = ExcludedItems.SingleOrDefault(item => item.Id == privateSigningPersonExcludeItemTypeId);
+
+        if (privateSigningPersonExcludeItemType == null)
+        {
+            ExcludedItems.Add(new PrivateSigningPersonExcludeItemType(itemTypeId,
+                                                                      note,
+                                                                      privateSigningPersonId));
+
+            return;
+        }
+
+        privateSigningPersonExcludeItemType.Set(note);
+    }
+
+    public void SetPrice(decimal cost,
+                         string note,
+                         int privateSigningItemGroupId,
+                         int privateSigningPersonDetailId,
+                         int privateSigningPersonId,
+                         decimal? shippingCost)
+    {
+        Pricing ??= new();
+
+        PrivateSigningPersonDetail privateSigningPersonDetail
+            = Pricing.SingleOrDefault(personDetail => personDetail.Id == privateSigningPersonDetailId);
+
+        if (privateSigningPersonDetail == null)
+        {
+            privateSigningPersonDetail = new(note,
+                                             null,
+                                             null,
+                                             privateSigningPersonId);
+
+            privateSigningPersonDetail.SetItemTypeGroup(cost,
+                                                        privateSigningItemGroupId,
+                                                        shippingCost);
+
+            Pricing.Add(privateSigningPersonDetail);
+
+            return;
+        }
+
+        privateSigningPersonDetail.PrivateSigningItemTypeGroup.Set(cost,
+                                                                   shippingCost);
     }
 }

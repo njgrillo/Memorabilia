@@ -6,9 +6,17 @@ public class PrivateSigningCustomItemGroupModel
 
     public PrivateSigningCustomItemGroupModel() { }
 
+    public PrivateSigningCustomItemGroupModel(string name, List<PrivateSigningCustomItemTypeGroupModel> items) 
+    {
+        Items = items;
+        Name = name;
+    }
+
     public PrivateSigningCustomItemGroupModel(Entity.PrivateSigningCustomItemGroup privateSigningCustomItemGroup)
     {
         _privateSigningCustomItemGroup = privateSigningCustomItemGroup;
+
+        Name = _privateSigningCustomItemGroup.Name;
     }
 
     public UserModel CreatedByUser
@@ -20,6 +28,8 @@ public class PrivateSigningCustomItemGroupModel
     public int Id
         => _privateSigningCustomItemGroup.Id;
 
-    public string Name
-        => _privateSigningCustomItemGroup.Name;
+    public List<PrivateSigningCustomItemTypeGroupModel> Items { get; set; }
+        = new();
+
+    public string Name { get; set; }
 }

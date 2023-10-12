@@ -92,12 +92,10 @@
                                     </HeaderContent>
                                     <RowTemplate Context="person">
                                         <MudTd DataLabel="">
-                                            <MudImage Class="rounded-lg cant-click"
-                                                      Elevation="5"
-                                                      Height="200"
-                                                      ObjectFit="@ObjectFit.Cover"
-                                                      Src="@(ImageService.GetPersonImageData(person.Person.ImageFileName))"
-                                                      Width="200" />
+                                            <GridImage AllowNavigation="false"
+                                                       ImageLoaded="OnImageLoaded"
+                                                       ImageFileName="@person.Person.ImageFileName"
+                                                       IsPersonImage="true" />
                                         </MudTd>
                                         <MudTd DataLabel="Person">@person.Person.DisplayName</MudTd>
                                         <MudTd DataLabel="Note">@person.Note</MudTd>

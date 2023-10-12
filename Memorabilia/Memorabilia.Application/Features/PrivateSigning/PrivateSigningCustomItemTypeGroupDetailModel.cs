@@ -19,4 +19,7 @@ public class PrivateSigningCustomItemTypeGroupDetailModel
 
     public int PrivateSigningCustomItemTypeGroupId
         => _privateSigningCustomItemTypeGroupDetail.PrivateSigningCustomItemTypeGroupId;
+
+    public decimal? ShippingCost
+        => _privateSigningCustomItemTypeGroupDetail.ShippingCost;
 }

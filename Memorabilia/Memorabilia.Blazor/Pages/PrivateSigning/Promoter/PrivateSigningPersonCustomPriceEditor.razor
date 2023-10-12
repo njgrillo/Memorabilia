@@ -17,6 +17,9 @@
         <NullableDecimalField Label="Cost"
                               Value="EditModel.Cost"
                               ValueChanged="@((p) => EditModel.Cost = p)" />
+        <NullableDecimalField Label="Shipping Cost"
+                              Value="EditModel.ShippingCost"
+                              ValueChanged="@((p) => EditModel.ShippingCost = p)" />
         <AddUpdateMudFab EditMode="EditMode"
                          OnAdd="Add"
                          OnUpdate="Update" />
@@ -45,6 +48,7 @@
         <MudTh>Name</MudTh>
         <MudTh>Item Group</MudTh>
         <MudTh>Cost</MudTh>
+        <MudTh>Shipping Cost</MudTh>
         <MudTh>Note</MudTh>
         <MudTh></MudTh>
     </HeaderContent>
@@ -58,6 +62,7 @@
         <MudTd DataLabel="Name">@context.Person.ProfileName</MudTd>
         <MudTd DataLabel="ItemGroup">@context.PrivateSigningCustomItemTypeGroupDetail.Name</MudTd>
         <MudTd DataLabel="Cost">@context.Cost.Value.ToString("c")</MudTd>
+        <MudTd DataLabel="ShippingCost">@(context.ShippingCost?.ToString("c") ?? string.Empty)</MudTd>
         <MudTd DataLabel="Note">@context.Note</MudTd>
         <MudTd DataLabel="">
             <MudTooltip Text="Edit">

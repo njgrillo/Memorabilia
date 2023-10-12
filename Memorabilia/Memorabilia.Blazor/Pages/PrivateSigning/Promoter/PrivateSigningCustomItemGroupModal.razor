@@ -1,19 +1,43 @@
 ﻿<MudDialog Style="max-height:85vh;">
     <DialogContent>
         <DivRowFormGroup>
-
-        </DivRowFormGroup>
-        <DivRowFormGroup>
             <MudStack Class="col-12"
                       Row="true"
                       Style="margin-bottom:1%;">
-                
+                <TextField Label="Name"
+                           SelectedText="@EditModel.Name"
+                           SelectedTextChanged="@((p) => EditModel.Name = p)" />
+
                 <AddUpdateMudFab EditMode="EditMode"
                                  OnAdd="Add"
                                  OnUpdate="Update" />
             </MudStack>
         </DivRowFormGroup>
-        
+        <MudTable Bordered="false"
+                  Dense="false"
+                  Hover="true"
+                  Items="@CustomItemGroups"
+                  Striped="true">
+            <ToolBarContent>
+                <MudText Typo="Typo.h6">Custom Item Groups</MudText>
+            </ToolBarContent>
+            <HeaderContent>
+                <MudTh>Name</MudTh>
+                <MudTh>Items</MudTh>
+            </HeaderContent>
+            <RowTemplate>
+                <MudTd DataLabel="Name">@context.Name</MudTd>
+                <MudTd DataLabel="Items">
+                    <Iterations Context="item" 
+                                Items="@context.Items">
+                        @(item.ItemType.Name)<br />                        
+                    </Iterations>
+                </MudTd>
+            </RowTemplate>
+            <PagerContent>
+                <MudTablePager />
+            </PagerContent>
+        </MudTable>
     </DialogContent>
     <DialogActions>
         <CancelButton OnClick="Cancel" />

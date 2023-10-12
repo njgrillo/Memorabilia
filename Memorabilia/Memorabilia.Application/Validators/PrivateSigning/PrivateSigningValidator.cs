@@ -14,6 +14,11 @@ public class PrivateSigningValidator : AbstractValidator<SavePrivateSigning.Comm
             .WithName("Note")
             .WithMessage("Note must be 3000 characters or less.");
 
+        RuleFor(x => x.PromoterImageFileName)
+           .MaximumLength(100)
+           .WithName("PromoterImageFileName")
+           .WithMessage("Promoter Image File Name must be 100 characters or less.");
+
         RuleFor(x => x.SigningDate)
             .NotNull()
             .WithName("SigningDate")

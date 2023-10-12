@@ -107,12 +107,10 @@
                             <RowTemplate Context="autograph">
                                 <MudTd DataLabel="Name">
                                     <MudTooltip Text="@autograph.ImageDisplayCount">
-                                        <MudImage Class="rounded-lg can-click"
-                                                  Elevation="5"
-                                                  Height="200"
-                                                  ObjectFit="@ObjectFit.Cover"
-                                                  Src="@(ImageService.GetPersonImageData(autograph.PersonImageName))"
-                                                  Width="200" />
+                                        <GridImage AllowNavigation="false"
+                                                   ImageLoaded="OnImageLoaded"
+                                                   ImageFileName="@autograph.PersonImageName"
+                                                   IsPersonImage="true" />
                                     </MudTooltip>
                                 </MudTd>
                                 <MudTd DataLabel="Abbreviation">@autograph.PersonName</MudTd>

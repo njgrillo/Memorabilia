@@ -11,7 +11,7 @@
                 <MudDatePicker @bind-Date="EditModel.SubmissionDeadlineDate"
                                DateFormat="MM/dd/yyyy"
                                Editable="true"
-                               Label="Send in Submission Deadline"
+                               Label="Submission Deadline Date"
                                Mask="@(new DateMask("MM/dd/yyyy"))"
                                Variant="Variant.Outlined" />
             </Div>
@@ -24,11 +24,44 @@
                                Variant="Variant.Outlined" />
             </Div>
             <Div Class="col-3">
+                <Condition Evaluation="EditModel.PromoterImageFileName.IsNullOrEmpty()">
+                    <Match>
+                        <InputFile @bind-Value="@PromoterPrivateSigningImage"
+                                   id="fileInputPromoterImage"
+                                   accept="image/*" hidden
+                                   OnChange="@LoadFile" />
+                        <MudFab for="fileInputPromoterImage"
+                                Color="MudBlazor.Color.Secondary"
+                                HtmlTag="label"
+                                Icon="@Icons.Material.Filled.Image"
+                                Label="Load promotional image" />
+                    </Match>
+                </Condition>
+                <Condition Evaluation="@(!EditModel.PromoterImageFileName.IsNullOrEmpty())">
+                    <Match>
+                        <MudImage Class="rounded-lg cant-click"
+                                  Elevation="5"
+                                  Height="70"
+                                  ObjectFit="@ObjectFit.Cover"
+                                  Src="@(ImageService.GetUserImageData(EditModel.PromoterImageFileName, ApplicationStateService.CurrentUser.Id))"
+                                  Width="70" />
+                        <MudTooltip Text="Remove Image">
+                            <MudFab Color="MudBlazor.Color.Secondary"
+                                    Icon="@Icons.Material.Outlined.Delete"
+                                    OnClick="RemovePromoterImage"
+                                    Size="MudBlazor.Size.Small" />
+                        </MudTooltip>
+                    </Match>
+                </Condition>
+            </Div>
+        </DivRowFormGroup>
+        <DivRowFormGroup>
+            <Div Class="col-3">
                 <Switch Checked="@EditModel.SelfAddressedStampedEnvelopeAccepted"
                         CheckedChanged="(p) => EditModel.SelfAddressedStampedEnvelopeAccepted = p"
                         Label="Accept SASE?" />
             </Div>
-        </DivRowFormGroup>     
+        </DivRowFormGroup>
         <DivRowFormGroup>
             <Div Class="col-12">
                 <TextField Label="Note"
@@ -40,7 +73,8 @@
     </MudExpansionPanel>
     <MudExpansionPanel IsExpanded="true"
                        Text="People">
-        <PrivateSigningPeopleEditor People="EditModel.People" />
+        <PrivateSigningPeopleEditor People="EditModel.People"
+                                    PeopleModified="OnPeopleModified" />
     </MudExpansionPanel>
     <MudExpansionPanel IsExpanded="true"
                        Text="Pricing">

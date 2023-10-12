@@ -1,17 +1,19 @@
 ﻿<DivRowFormGroup>
-    <MudStack Class="col-12" 
-              Row="true"
-              Style="margin-bottom:1%;">
+    <Div Class="col-6">
         <AuthenticationCompanyDropDown Disabled="@(EditMode == EditModeType.Update)"
                                        SelectedValue="EditModel.AuthenticationCompanyId"
                                        SelectionChanged="(p) => EditModel.AuthenticationCompanyId = p" />
+    </Div>
+    <Div Class="col-3">
         <NullableDecimalField Label="Cost"
                               Value="EditModel.Cost"
                               ValueChanged="@((p) => EditModel.Cost = p)" />
+    </Div>
+    <Div Class="col-3">
         <AddUpdateMudFab EditMode="EditMode"
                          OnAdd="Add"
                          OnUpdate="Update" />
-    </MudStack>
+    </Div>
 </DivRowFormGroup>
 <MudTable Bordered="false"
           Dense="false"

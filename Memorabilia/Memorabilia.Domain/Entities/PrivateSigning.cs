@@ -1,6 +1,4 @@
-﻿using Memorabilia.Domain.Constants;
-
-namespace Memorabilia.Domain.Entities;
+﻿namespace Memorabilia.Domain.Entities;
 
 public class PrivateSigning : Framework.Library.Domain.Entity.DomainEntity
 {
@@ -11,11 +9,13 @@ public class PrivateSigning : Framework.Library.Domain.Entity.DomainEntity
                           string note,
                           bool selfAddressedStampedEnvelopeAccepted,
                           DateTime signingDate,
-                          DateTime submissionDeadlineDate)
+                          DateTime submissionDeadlineDate,
+                          string promoterImageFileName)
     {
         CreatedDate = createdDate;
         CreatedUserId = createdUserId;
         Note = note;
+        PromoterImageFileName = promoterImageFileName;
         SelfAddressedStampedEnvelopeAccepted = selfAddressedStampedEnvelopeAccepted;
         SigningDate = signingDate;
         SubmissionDeadlineDate = submissionDeadlineDate;
@@ -27,8 +27,10 @@ public class PrivateSigning : Framework.Library.Domain.Entity.DomainEntity
         CreatedDate = privateSigning.CreatedDate;
         CreatedUser = privateSigning.CreatedUser;
         CreatedUserId = privateSigning.CreatedUserId;
+        Id = privateSigning.Id;
         Note = privateSigning.Note;
         People = privateSigning.People;
+        PromoterImageFileName = privateSigning.PromoterImageFileName;
         SelfAddressedStampedEnvelopeAccepted = privateSigning.SelfAddressedStampedEnvelopeAccepted;
         SigningDate = privateSigning.SigningDate;
         SubmissionDeadlineDate = privateSigning.SubmissionDeadlineDate;
@@ -46,6 +48,8 @@ public class PrivateSigning : Framework.Library.Domain.Entity.DomainEntity
 
     public virtual List<PrivateSigningPerson> People { get; private set; }
 
+    public string PromoterImageFileName { get; private set; }
+
     public virtual List<PrivateSigningPromoterProvidedItem> PromoterProvidedItems { get; private set; }
 
     public bool SelfAddressedStampedEnvelopeAccepted { get; private set; }
@@ -57,9 +61,11 @@ public class PrivateSigning : Framework.Library.Domain.Entity.DomainEntity
     public void Set(string note,
                     bool selfAddressedStampedEnvelopeAccepted,    
                     DateTime signingDate,
-                    DateTime submissionDeadlineDate)
+                    DateTime submissionDeadlineDate,
+                    string promoterImageFileName)
     {
         Note = note;
+        PromoterImageFileName = promoterImageFileName;
         SelfAddressedStampedEnvelopeAccepted = selfAddressedStampedEnvelopeAccepted;
         SigningDate = signingDate;
         SubmissionDeadlineDate = submissionDeadlineDate;
@@ -69,13 +75,13 @@ public class PrivateSigning : Framework.Library.Domain.Entity.DomainEntity
                                          int authenticationCompanyId,
                                          decimal cost)
     {
+        AuthenticationCompanies ??= new();
+
         PrivateSigningAuthenticationCompany authenticationCompany
             = AuthenticationCompanies.SingleOrDefault(company => company.Id == privateSigningAuthenticationCompanyId);
 
         if (authenticationCompany == null)
         {
-            AuthenticationCompanies ??= new();
-
             AuthenticationCompanies.Add(new PrivateSigningAuthenticationCompany(authenticationCompanyId,
                                                                                 cost,
                                                                                 Id));                                        
@@ -95,13 +101,13 @@ public class PrivateSigning : Framework.Library.Domain.Entity.DomainEntity
                           int? spotsAvailable,
                           int? spotsConfirmed)
     {
+        People ??= new();
+
         PrivateSigningPerson privateSigningPerson
             = People.SingleOrDefault(person => person.Id == privateSigningPersonId);
 
         if (privateSigningPerson == null)
-        {
-            People ??= new();
-
+        {      
             People.Add(new PrivateSigningPerson(allowInscriptions,
                                                 inscriptionCost,
                                                 note,
@@ -120,5 +126,37 @@ public class PrivateSigning : Framework.Library.Domain.Entity.DomainEntity
                                  promoterImageFileName,
                                  spotsAvailable,
                                  spotsConfirmed);
+    }
+
+    public void SetProvidedItem(int privateSigningPromoterProvidedItemId,
+                                decimal cost,
+                                int itemTypeId,
+                                int promoterId,
+                                decimal? shippingCost)
+    {
+        PromoterProvidedItems ??= new();
+
+        PrivateSigningPromoterProvidedItem privateSigningPromoterProvidedItem
+            = PromoterProvidedItems.SingleOrDefault(item => item.Id == privateSigningPromoterProvidedItemId);
+
+        if (privateSigningPromoterProvidedItem == null)
+        {
+            PromoterProvidedItem providedItem = new(cost,
+                                                    itemTypeId,
+                                                    promoterId,
+                                                    shippingCost);
+
+            PrivateSigningPromoterProvidedItem promoterProvidedItem = new(Id, providedItem.Id);
+
+            promoterProvidedItem.SetPromoterProvidedItem(providedItem);
+
+            PromoterProvidedItems.Add(promoterProvidedItem);
+
+            return;
+        }
+
+        privateSigningPromoterProvidedItem.PromoterProvidedItem.Set(cost, 
+                                                                    itemTypeId, 
+                                                                    shippingCost);
     }
 }

@@ -6,12 +6,15 @@ public class PrivateSigningCustomItemTypeGroupEditModel : EditModel
 
 	public PrivateSigningCustomItemTypeGroupEditModel(Entity.PrivateSigningCustomItemTypeGroup privateSigningCustomItemTypeGroup)
 	{
-		Id = privateSigningCustomItemTypeGroup.Id;
+		CustomItemTypeGroup = new(privateSigningCustomItemTypeGroup.PrivateSigningCustomItemGroup);
+        Id = privateSigningCustomItemTypeGroup.Id;
 		ItemTypeId = privateSigningCustomItemTypeGroup.ItemTypeId;
 		PrivateSigningCustomItemGroupId = privateSigningCustomItemTypeGroup.PrivateSigningCustomItemGroupId;
     }
 
-	public int ItemTypeId { get; set; }
+    public PrivateSigningCustomItemGroupModel CustomItemTypeGroup { get; set; }
+
+    public int ItemTypeId { get; set; }
 
 	public int PrivateSigningCustomItemGroupId { get; set; }
 }

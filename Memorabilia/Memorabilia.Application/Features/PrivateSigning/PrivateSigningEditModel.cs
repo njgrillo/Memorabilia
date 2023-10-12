@@ -1,6 +1,4 @@
-﻿using System.Linq;
-
-namespace Memorabilia.Application.Features.PrivateSigning;
+﻿namespace Memorabilia.Application.Features.PrivateSigning;
 
 public class PrivateSigningEditModel : EditModel
 {
@@ -17,7 +15,8 @@ public class PrivateSigningEditModel : EditModel
         CreatedByUserId = privateSigning.CreatedUserId;
         CreatedDate = privateSigning.CreatedDate;
         Id = privateSigning.Id;
-        Note = privateSigning.Note;   
+        Note = privateSigning.Note; 
+        PromoterImageFileName = privateSigning.PromoterImageFileName;
         SelfAddressedStampedEnvelopeAccepted = privateSigning.SelfAddressedStampedEnvelopeAccepted;
         SigningDate = privateSigning.SigningDate;
         SubmissionDeadlineDate = privateSigning.SubmissionDeadlineDate;
@@ -42,12 +41,14 @@ public class PrivateSigningEditModel : EditModel
 
     public int CreatedByUserId { get; set; }
 
-    public DateTime CreatedDate { get; set; }
+    public DateTime CreatedDate { get; set; }    
 
 	public string Note { get; set; }
 
     public List<PrivateSigningPersonEditModel> People { get; set; }
         = new();
+
+    public string PromoterImageFileName { get; set; }
 
     public List<PromoterProvidedItemEditModel> ProvidedItems { get; set; }
         = new();
