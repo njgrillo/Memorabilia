@@ -6,7 +6,7 @@ public partial class ViewPrivateSigning
     public IDataProtectorService DataProtectorService { get; set; }
 
     [Inject]
-    public QueryRouter QueryRouter { get; set; }
+    public IMediator Mediator { get; set; }
 
     [Parameter]
     public string EncryptPrivateSigningId { get; set; }
@@ -20,6 +20,6 @@ public partial class ViewPrivateSigning
     {
         PrivateSigningId = DataProtectorService.DecryptId(EncryptPrivateSigningId);
 
-        Model = new(await QueryRouter.Send(new GetPrivateSigning(PrivateSigningId)));
+        Model = new(await Mediator.Send(new GetPrivateSigning(PrivateSigningId)));
     }
 }

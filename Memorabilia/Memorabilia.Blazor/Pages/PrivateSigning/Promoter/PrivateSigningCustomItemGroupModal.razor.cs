@@ -3,7 +3,7 @@
 public partial class PrivateSigningCustomItemGroupModal
 {
     [Inject]
-    public QueryRouter QueryRouter { get; set; }
+    public IMediator Mediator { get; set; }
 
     [CascadingParameter]
     public MudDialogInstance MudDialog { get; set; }        
@@ -20,7 +20,7 @@ public partial class PrivateSigningCustomItemGroupModal
     protected override async Task OnInitializedAsync()
     {
         Entity.PrivateSigningCustomItemTypeGroup[] customItemTypeGroups
-            = await QueryRouter.Send(new GetPrivateSigningCustomItemTypeGroups());
+            = await Mediator.Send(new GetPrivateSigningCustomItemTypeGroups());
 
         foreach (string name in customItemTypeGroups.Select(group => group.PrivateSigningCustomItemGroup.Name).Distinct())
         {

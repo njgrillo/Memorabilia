@@ -1,13 +1,14 @@
 ﻿namespace Memorabilia.Blazor.Controls.TypeAhead;
 
-public class PrivateSigningCustomItemGroupAutoComplete : Autocomplete<Entity.PrivateSigningCustomItemGroup>
+public class PrivateSigningCustomItemGroupAutoComplete 
+    : Autocomplete<Entity.PrivateSigningCustomItemGroup>
 {
     protected Entity.PrivateSigningCustomItemGroup[] Items { get; set; }
         = Array.Empty<Entity.PrivateSigningCustomItemGroup>();
 
     protected override async Task OnInitializedAsync()
     {
-        Items = await QueryRouter.Send(new GetPrivateSigningCustomItemGroups());
+        Items = await Mediator.Send(new GetPrivateSigningCustomItemGroups());
         Label = "Custom Item Groups";
     }
 

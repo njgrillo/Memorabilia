@@ -6,9 +6,6 @@ public partial class PrivateSigningEditor
     public IApplicationStateService ApplicationStateService { get; set; }
 
     [Inject]
-    public CommandRouter CommandRouter { get; set; }
-
-    [Inject]
     public IDataProtectorService DataProtectorService { get; set; }
 
     [Inject]
@@ -21,7 +18,7 @@ public partial class PrivateSigningEditor
     public ILogger<PrivateSigningEditor> Logger { get; set; }
 
     [Inject]
-    public QueryRouter QueryRouter { get; set; }
+    public IMediator Mediator { get; set; }
 
     [Inject]
     public ISnackbar Snackbar { get; set; }
@@ -64,7 +61,7 @@ public partial class PrivateSigningEditor
         PrivateSigningId = DataProtectorService.DecryptId(EncryptPrivateSigningId);
 
         Entity.PrivateSigning privateSigning 
-            = await QueryRouter.Send(new GetPrivateSigning(PrivateSigningId));
+            = await Mediator.Send(new GetPrivateSigning(PrivateSigningId));
 
         EditModel = new(privateSigning);
     }
@@ -99,7 +96,7 @@ public partial class PrivateSigningEditor
         if (!EditModel.ValidationResult.IsValid)
             return;
 
-        await CommandRouter.Send(command);
+        await Mediator.Send(command);
 
         Snackbar.Add("Private Signing was saved successfully!", Severity.Success);
     }

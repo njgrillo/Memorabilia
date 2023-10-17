@@ -9,10 +9,10 @@ public partial class ViewPrivateSignings
     public ImageService ImageService { get; set; }
 
     [Inject]
-    public NavigationManager NavigationManager { get; set; }
+    public IMediator Mediator { get; set; }
 
     [Inject]
-    public QueryRouter QueryRouter { get; set; }
+    public NavigationManager NavigationManager { get; set; }
 
     protected PrivateSigningsModel Model
         = new();
@@ -40,7 +40,7 @@ public partial class ViewPrivateSignings
     {
         var pageInfo = new PageInfo(_resetPaging ? 1 : state.Page + 1, state.PageSize);
 
-        Model = await QueryRouter.Send(new GetPrivateSignings(pageInfo));
+        Model = await Mediator.Send(new GetPrivateSignings(pageInfo));
 
         return new TableData<PrivateSigningModel>()
         {
