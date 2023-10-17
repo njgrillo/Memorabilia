@@ -1,8 +1,8 @@
 ﻿global using Autofac;
 global using Framework.Library.Domain.Entity;
 global using Framework.Library.Domain.Paging;
-global using Framework.Library.Extension;
 global using Framework.Library.Handler;
+global using Memorabilia.Domain.Extensions;
 global using Memorabilia.Domain.SearchModels.Memorabilia;
 global using Memorabilia.Repository.Cache;
 global using Memorabilia.Repository.Extensions;
