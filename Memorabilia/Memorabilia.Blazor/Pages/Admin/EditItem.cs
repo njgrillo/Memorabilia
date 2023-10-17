@@ -3,10 +3,7 @@
 public abstract class EditItem<TEditModel, TModel> : ComponentBase
 {
     [Inject]
-    public CommandRouter CommandRouter { get; set; }
-
-    [Inject]
-    public QueryRouter QueryRouter { get; set; }
+    public IMediator Mediator { get; set; }
 
     [Parameter]
     public int Id { get; set; }
@@ -17,11 +14,11 @@ public abstract class EditItem<TEditModel, TModel> : ComponentBase
         = (TEditModel)Activator.CreateInstance(typeof(TEditModel));
 
     protected async Task<TModel> Get(IQuery<TModel> request)
-        => await QueryRouter.Send(request);
+        => await Mediator.Send(request);
 
     protected async Task Save(ICommand command)
     {
-        await CommandRouter.Send(command);
+        await Mediator.Send(command);
     }
 
     protected virtual void Initialize() { }

@@ -3,9 +3,6 @@
 public partial class MemorabiliaDetailGrid
 {
     [Inject]
-    public CommandRouter CommandRouter { get; set; }
-
-    [Inject]
     public IDataProtectorService DataProtectorService { get; set; }
 
     [Inject]
@@ -15,10 +12,10 @@ public partial class MemorabiliaDetailGrid
     public ImageService ImageService { get; set; }
 
     [Inject]
-    public NavigationManager NavigationManager { get; set; }
+    public IMediator Mediator { get; set; }
 
     [Inject]
-    public QueryRouter QueryRouter { get; set; }
+    public NavigationManager NavigationManager { get; set; }
 
     [Inject]
     public ISnackbar Snackbar { get; set; }
@@ -90,7 +87,7 @@ public partial class MemorabiliaDetailGrid
             IsDeleted = true
         };
 
-        await CommandRouter.Send(new SaveAutograph.Command(editModel));
+        await Mediator.Send(new SaveAutograph.Command(editModel));
 
         MemorabiliaModel memorabiliaItem 
             = Model.MemorabiliaItems.First(item => item.Id == itemToDelete.MemorabiliaId);
@@ -109,7 +106,7 @@ public partial class MemorabiliaDetailGrid
             IsDeleted = true
         };
 
-        await CommandRouter.Send(new SaveMemorabiliaItem.Command(editModel));
+        await Mediator.Send(new SaveMemorabiliaItem.Command(editModel));
 
         Model.MemorabiliaItems.Remove(itemToDelete);
 
@@ -141,7 +138,7 @@ public partial class MemorabiliaDetailGrid
     {
         var pageInfo = new PageInfo(_resetPaging ? 1 : state.Page + 1, state.PageSize);
 
-        Model = await QueryRouter.Send(new GetMemorabiliaItemsPaged(pageInfo, Filter));
+        Model = await Mediator.Send(new GetMemorabiliaItemsPaged(pageInfo, Filter));
 
         await GridLoaded.InvokeAsync();
 

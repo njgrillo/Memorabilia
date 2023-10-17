@@ -6,9 +6,6 @@ public partial class ProposedTradeGrid
     public IApplicationStateService ApplicationStateService { get; set; }
 
     [Inject]
-    public CommandRouter CommandRouter { get; set; }
-
-    [Inject]
     public IDataProtectorService DataProtectorService { get; set; }
 
     [Inject]
@@ -79,7 +76,7 @@ public partial class ProposedTradeGrid
     private async Task UpdateStatus(ProposeTradeModel proposeTradeModel, 
                                     ProposeTradeStatusType proposeTradeStatusType)
     {
-        await CommandRouter.Send(new UpdateProposeTradeStatus(proposeTradeModel.Id, proposeTradeStatusType));
+        await Mediator.Send(new UpdateProposeTradeStatus(proposeTradeModel.Id, proposeTradeStatusType));
 
         await Mediator.Publish(new ProposeTradeStatusChangedNotification());
 

@@ -17,9 +17,7 @@ public class Program
 
         builder.Services.AddDbContext<MemorabiliaContext>(options => options.UseSqlServer("name=ConnectionStrings:Memorabilia"), ServiceLifetime.Transient);
         builder.Services.AddDbContext<DomainContext>(options => options.UseSqlServer("name=ConnectionStrings:Memorabilia"), ServiceLifetime.Transient);
-        builder.Services.AddTransient<CommandRouter>();
-        builder.Services.AddTransient<QueryRouter>();
-
+        
         var assemblies = new[] { typeof(GetUser).Assembly, typeof(Program).Assembly };
 
         builder.Services.AddMediatR(x => x.AsScoped(), assemblies);

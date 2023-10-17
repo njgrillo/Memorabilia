@@ -3,9 +3,9 @@
 public class Get
     : RequestHandler<FigureSpecialtyTypeRequest>, IRequestHandler<FigureSpecialtyTypeRequest, IResult>
 {
-    public Get(QueryRouter queryRouter) : base(queryRouter) { }
+    public Get(IMediator mediator) : base(mediator) { }
 
     public override async Task<IResult> Handle(FigureSpecialtyTypeRequest request,
                                                CancellationToken cancellationToken)
-        => Results.Ok(new Response<Entity.DomainEntity>(await QueryRouter.Send(new GetFigureSpecialtyType(request.Id))));
+        => Results.Ok(new Response<Entity.DomainEntity>(await Mediator.Send(new GetFigureSpecialtyType(request.Id))));
 }

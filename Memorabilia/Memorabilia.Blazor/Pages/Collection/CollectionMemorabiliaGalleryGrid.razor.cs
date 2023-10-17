@@ -9,7 +9,7 @@ public partial class CollectionMemorabiliaGalleryGrid
     public IGalleryService GalleryService { get; set; }
 
     [Inject]
-    public QueryRouter QueryRouter { get; set; }
+    public IMediator Mediator { get; set; }
 
     [Parameter]
     public int CollectionId { get; set; }
@@ -52,8 +52,8 @@ public partial class CollectionMemorabiliaGalleryGrid
         var pageInfo = new PageInfo(pageNumber, _pageSize);
 
         Model = Filter != null
-            ? await QueryRouter.Send(new GetCollectionMemorabiliaGalleryItems(CollectionId, pageInfo, Filter))
-            : await QueryRouter.Send(new GetCollectionMemorabiliaGalleryItems(CollectionId, pageInfo));
+            ? await Mediator.Send(new GetCollectionMemorabiliaGalleryItems(CollectionId, pageInfo, Filter))
+            : await Mediator.Send(new GetCollectionMemorabiliaGalleryItems(CollectionId, pageInfo));
 
         if (resetItems)
             _items = new();

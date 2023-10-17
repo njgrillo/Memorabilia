@@ -34,8 +34,6 @@ public class Startup
         services.AddServerSideBlazor();
         services.AddDbContext<MemorabiliaContext>(options => options.UseSqlServer("name=ConnectionStrings:Memorabilia"), ServiceLifetime.Transient);
         services.AddDbContext<DomainContext>(options => options.UseSqlServer("name=ConnectionStrings:Memorabilia"), ServiceLifetime.Transient);
-        services.AddTransient<CommandRouter>();
-        services.AddTransient<QueryRouter>();
         services.AddMediatR(typeof(GetCommissioner).Assembly);
         services.AddDataProtection();
         services.RegisterValidators();

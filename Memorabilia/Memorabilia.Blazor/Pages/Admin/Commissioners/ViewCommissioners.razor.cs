@@ -5,7 +5,7 @@ public partial class ViewCommissioners
 {
     protected override async Task OnInitializedAsync()
     {
-        Model = new CommissionersModel(await QueryRouter.Send(new GetCommissioners()));
+        Model = new CommissionersModel(await Mediator.Send(new GetCommissioners()));
     }
 
     protected override async Task Delete(int id)
@@ -17,7 +17,7 @@ public partial class ViewCommissioners
             IsDeleted = true
         };
 
-        await CommandRouter.Send(new SaveCommissioner(editModel));
+        await Mediator.Send(new SaveCommissioner(editModel));
 
         Model.Commissioners.Remove(deletedItem);
 

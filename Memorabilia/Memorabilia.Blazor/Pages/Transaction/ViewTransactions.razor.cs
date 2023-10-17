@@ -3,7 +3,7 @@
 public partial class ViewTransactions
 {
     [Inject]
-    public QueryRouter QueryRouter { get; set; }
+    public IMediator Mediator { get; set; }
 
     private bool _displayPartialTradeFilter;
     private bool _displayPurchaseFilter;
@@ -25,22 +25,23 @@ public partial class ViewTransactions
 
     protected override async Task OnInitializedAsync()
     {
-        MemorabiliaTransactionsModel partialTradedItems = await QueryRouter.Send(new GetPartialTradedMemorabiliaTransactionPaged(new PageInfo(1, 1)));
+        MemorabiliaTransactionsModel partialTradedItems 
+            = await Mediator.Send(new GetPartialTradedMemorabiliaTransactionPaged(new PageInfo(1, 1)));
 
         _displayPartialTradeFilter = partialTradedItems.Items.Any();
         _partialTradeCount = partialTradedItems.PageInfo.TotalItems;
 
-        PurchaseMemorabiliasModel purchasedItems = await QueryRouter.Send(new GetPurchaseMemorabiliaItemsPaged(new PageInfo(1, 1)));
+        PurchaseMemorabiliasModel purchasedItems = await Mediator.Send(new GetPurchaseMemorabiliaItemsPaged(new PageInfo(1, 1)));
 
         _displayPurchaseFilter = purchasedItems.MemorabiliaItems.Any();
         _purchaseCount = purchasedItems.PageInfo.TotalItems;
 
-        MemorabiliaTransactionsModel soldItems = await QueryRouter.Send(new GetSoldMemorabiliaTransactionPaged(new PageInfo(1, 1)));
+        MemorabiliaTransactionsModel soldItems = await Mediator.Send(new GetSoldMemorabiliaTransactionPaged(new PageInfo(1, 1)));
 
         _displaySoldFilter = soldItems.Items.Any();
         _soldCount = soldItems.PageInfo.TotalItems;
 
-        MemorabiliaTransactionsModel tradedItems = await QueryRouter.Send(new GetTradedMemorabiliaTransactionPaged(new PageInfo(1, 1)));
+        MemorabiliaTransactionsModel tradedItems = await Mediator.Send(new GetTradedMemorabiliaTransactionPaged(new PageInfo(1, 1)));
 
         _displayTradeFilter = tradedItems.Items.Any();
         _tradedCount = tradedItems.PageInfo.TotalItems;

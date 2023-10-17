@@ -3,9 +3,6 @@
 public partial class CollectionMemorabiliaDetailGrid
 { 
     [Inject]
-    public CommandRouter CommandRouter { get; set; }
-
-    [Inject]
     public IDataProtectorService DataProtectorService { get; set; }
 
     [Inject]
@@ -15,7 +12,7 @@ public partial class CollectionMemorabiliaDetailGrid
     public ImageService ImageService { get; set; }
 
     [Inject]
-    public QueryRouter QueryRouter { get; set; }
+    public IMediator Mediator { get; set; }
 
     [Inject]
     public ISnackbar Snackbar { get; set; }
@@ -93,8 +90,8 @@ public partial class CollectionMemorabiliaDetailGrid
         var pageInfo = new PageInfo(_resetPaging ? 1 : state.Page + 1, state.PageSize);
 
         Model = Filter != null
-            ? await QueryRouter.Send(new GetCollectionMemorabiliaItemsPaged(CollectionId, pageInfo, Filter))
-            : await QueryRouter.Send(new GetCollectionMemorabiliaItemsPaged(CollectionId, pageInfo));
+            ? await Mediator.Send(new GetCollectionMemorabiliaItemsPaged(CollectionId, pageInfo, Filter))
+            : await Mediator.Send(new GetCollectionMemorabiliaItemsPaged(CollectionId, pageInfo));
 
         return new TableData<MemorabiliaModel>()
         {
@@ -130,7 +127,7 @@ public partial class CollectionMemorabiliaDetailGrid
                    .Where(item => ids.Contains(item.Id))
                    .ToArray();
 
-        await CommandRouter.Send(new RemoveCollectionMemorabilia(CollectionId, ids));
+        await Mediator.Send(new RemoveCollectionMemorabilia(CollectionId, ids));
 
         foreach (MemorabiliaModel item in itemsToDelete)
         {

@@ -10,6 +10,6 @@ public partial class ViewSizes
 
     protected override async Task OnInitializedAsync()
     {
-        Model = new SizesModel(await QueryRouter.Send(new GetSizes()));
+        Model = new SizesModel(await Mediator.Send(new GetSizes()));
     }
 }

@@ -7,7 +7,7 @@ public partial class ViewDashboardItems
 {
     protected override async Task OnInitializedAsync()
     {
-        Model = new DashboardItemsModel(await QueryRouter.Send(new GetDashboardItems()));
+        Model = new DashboardItemsModel(await Mediator.Send(new GetDashboardItems()));
     }
 
     protected override async Task Delete(int id)
@@ -20,7 +20,7 @@ public partial class ViewDashboardItems
             IsDeleted = true
         };
 
-        await CommandRouter.Send(new SaveDashboardItem(editModel));
+        await Mediator.Send(new SaveDashboardItem(editModel));
 
         Model.DashboardItems.Remove(deletedItem);
 

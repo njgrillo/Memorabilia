@@ -3,6 +3,7 @@
 public partial class DropDown<TItem, TType> 
     : CommandQuery where TItem : class, IWithName, IWithValue<TType> 
 {
+
     [Parameter]
     public RenderFragment ChildContent { get; set; }
 

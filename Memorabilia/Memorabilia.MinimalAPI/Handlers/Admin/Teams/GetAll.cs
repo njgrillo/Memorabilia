@@ -3,13 +3,13 @@
 public class GetAll
     : RequestHandler<TeamsRequest>, IRequestHandler<TeamsRequest, IResult>
 {
-    public GetAll(QueryRouter queryRouter) : base(queryRouter) { }
+    public GetAll(IMediator mediator) : base(mediator) {}
 
     public override async Task<IResult> Handle(TeamsRequest request,
                                                CancellationToken cancellationToken)
     {
         var response
-            = new Response<Entity.Team[]>(await QueryRouter.Send(new GetTeams()));
+            = new Response<Entity.Team[]>(await Mediator.Send(new GetTeams()));
 
         return Results.Ok(response);
     }

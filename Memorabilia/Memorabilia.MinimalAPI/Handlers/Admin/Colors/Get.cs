@@ -3,9 +3,9 @@
 public class Get
     : RequestHandler<ColorRequest>, IRequestHandler<ColorRequest, IResult>
 {
-    public Get(QueryRouter queryRouter) : base(queryRouter) { }
+    public Get(IMediator mediator) : base(mediator) { }
 
     public override async Task<IResult> Handle(ColorRequest request,
                                                CancellationToken cancellationToken)
-        => Results.Ok(new Response<Entity.DomainEntity>(await QueryRouter.Send(new GetColor(request.Id))));
+        => Results.Ok(new Response<Entity.DomainEntity>(await Mediator.Send(new GetColor(request.Id))));
 }

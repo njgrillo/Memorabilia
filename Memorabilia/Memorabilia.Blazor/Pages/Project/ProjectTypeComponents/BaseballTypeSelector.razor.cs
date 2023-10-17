@@ -3,7 +3,7 @@
 public partial class BaseballTypeSelector
 {
     [Inject]
-    public QueryRouter QueryRouter { get; set; }
+    public IMediator Mediator { get; set; }
 
     [Parameter]
     public int BaseballTypeId { get; set; }
@@ -41,7 +41,7 @@ public partial class BaseballTypeSelector
         if (!TeamId.HasValue)
             return;
 
-        var team = new TeamModel(await QueryRouter.Send(new GetTeam(TeamId.Value)));
+        var team = new TeamModel(await Mediator.Send(new GetTeam(TeamId.Value)));
 
         Team = new TeamEditModel(team);
     }

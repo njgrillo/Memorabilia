@@ -3,9 +3,6 @@
 public partial class ThroughTheMailGrid
 {
     [Inject]
-    public CommandRouter CommandRouter { get; set; }
-
-    [Inject]
     public IDataProtectorService DataProtectorService { get; set; }
 
     [Inject]
@@ -13,6 +10,9 @@ public partial class ThroughTheMailGrid
 
     [Inject]
     public ImageService ImageService { get; set; }
+
+    [Inject]
+    public IMediator Mediator { get; set; }
 
     [Inject]
     public NavigationManager NavigationManager { get; set; }
@@ -42,7 +42,7 @@ public partial class ThroughTheMailGrid
             IsDeleted = true
         };
 
-        await CommandRouter.Send(new SaveThroughTheMail.Command(model));
+        await Mediator.Send(new SaveThroughTheMail.Command(model));
 
         Items.Remove(deletedItem);
 

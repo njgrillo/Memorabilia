@@ -6,7 +6,7 @@ public class ItemTypeGameStyleDropDown
     protected override async Task OnInitializedAsync()
     {
         Entity.ItemTypeGameStyleType[] itemTypeGameStyleTypes 
-            = await QueryRouter.Send(new GetItemTypeGameStyles(ItemType.Id));
+            = await Mediator.Send(new GetItemTypeGameStyles(ItemType.Id));
 
         Items
             = itemTypeGameStyleTypes.Select(itemTypeGameStyleType => new ItemTypeGameStyleModel(itemTypeGameStyleType));

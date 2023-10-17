@@ -3,7 +3,7 @@
 public partial class WorldSeriesSelector
 {
     [Inject]
-    public QueryRouter QueryRouter { get; set; }
+    public IMediator Mediator { get; set; }
 
     [Parameter]
     public bool Disabled { get; set; }
@@ -29,7 +29,7 @@ public partial class WorldSeriesSelector
         if (TeamId == 0)
             return;
 
-        var team = new TeamModel(await QueryRouter.Send(new GetTeam(TeamId)));
+        var team = new TeamModel(await Mediator.Send(new GetTeam(TeamId)));
 
         Team = new TeamEditModel(team);
 

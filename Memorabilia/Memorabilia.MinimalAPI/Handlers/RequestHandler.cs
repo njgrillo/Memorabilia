@@ -2,11 +2,11 @@
 
 public abstract class RequestHandler<T>
 {
-    protected QueryRouter QueryRouter { get; }
+    protected IMediator Mediator { get; }
 
-    public RequestHandler(QueryRouter queryRouter)
+    public RequestHandler(IMediator mediator)
     {
-        QueryRouter = queryRouter;
+        Mediator = mediator;
     }
 
     public abstract Task<IResult> Handle(T request, CancellationToken cancellationToken);

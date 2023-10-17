@@ -3,13 +3,10 @@
 public partial class AllStarManagementEditor
 {
     [Inject]
-    public CommandRouter CommandRouter { get; set; }
-
-    [Inject]
     public IJSRuntime JSRuntime { get; set; }
 
     [Inject]
-    public QueryRouter QueryRouter { get; set; }
+    public IMediator Mediator { get; set; }
 
     [Inject]
     public ISnackbar Snackbar { get; set; }
@@ -54,7 +51,7 @@ public partial class AllStarManagementEditor
         if (!EditModel.ValidationResult.IsValid)
             return;
 
-        await CommandRouter.Send(command);
+        await Mediator.Send(command);
 
         Snackbar.Add("All Star Detail was saved successfully!", Severity.Success);
 
@@ -66,7 +63,8 @@ public partial class AllStarManagementEditor
         if (AllStarDetailId == 0)
             return;
 
-        Entity.AllStarDetail allStarDetail = await QueryRouter.Send(new GetAllStarManagement(AllStarDetailId));
+        Entity.AllStarDetail allStarDetail 
+            = await Mediator.Send(new GetAllStarManagement(AllStarDetailId));
 
         if (allStarDetail == null)
         {

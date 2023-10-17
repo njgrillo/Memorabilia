@@ -3,16 +3,13 @@
 public partial class SalesGrid
 {
     [Inject]
-    public CommandRouter CommandRouter { get; set; }
-
-    [Inject]
     public IDataProtectorService DataProtectorService { get; set; }
 
     [Inject]
     public IDialogService DialogService { get; set; }
 
     [Inject]
-    public QueryRouter QueryRouter { get; set; }
+    public IMediator Mediator { get; set; }
 
     [Inject]
     public ISnackbar Snackbar { get; set; }
@@ -50,8 +47,8 @@ public partial class SalesGrid
         var pageInfo = new PageInfo(_resetPaging ? 1 : state.Page + 1, state.PageSize);
 
         Model = Filter != null
-            ? await QueryRouter.Send(new GetSoldMemorabiliaTransactionPaged(pageInfo, Filter))
-            : await QueryRouter.Send(new GetSoldMemorabiliaTransactionPaged(pageInfo));
+            ? await Mediator.Send(new GetSoldMemorabiliaTransactionPaged(pageInfo, Filter))
+            : await Mediator.Send(new GetSoldMemorabiliaTransactionPaged(pageInfo));
 
         return new TableData<MemorabiliaTransactionModel>()
         {
@@ -94,7 +91,7 @@ public partial class SalesGrid
         {
             deletedSale.IsDeleted = true;
 
-            await CommandRouter.Send(new SaveMemorabiliaTransaction.Command(editModel));
+            await Mediator.Send(new SaveMemorabiliaTransaction.Command(editModel));
 
             transaction.DisplayDetails = editModel.Sales.Any(sale => !sale.IsDeleted);
         }
@@ -113,7 +110,7 @@ public partial class SalesGrid
             IsDeleted = true
         };
 
-        await CommandRouter.Send(new SaveMemorabiliaTransaction.Command(editModel));
+        await Mediator.Send(new SaveMemorabiliaTransaction.Command(editModel));
 
         Model.Items.Remove(itemToDelete);
 

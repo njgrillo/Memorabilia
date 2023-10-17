@@ -10,6 +10,6 @@ public partial class ViewAwardTypes
 
     protected override async Task OnInitializedAsync()
     {
-        Model = new AwardTypesModel(await QueryRouter.Send(new GetAwardTypes()));
+        Model = new AwardTypesModel(await Mediator.Send(new GetAwardTypes()));
     }
 }

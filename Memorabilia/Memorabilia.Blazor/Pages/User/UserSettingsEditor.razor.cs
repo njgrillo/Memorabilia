@@ -6,16 +6,10 @@ public partial class UserSettingsEditor
     public IApplicationStateService ApplicationStateService { get; set; }
 
     [Inject]
-    public CommandRouter CommandRouter { get; set; }
-
-    [Inject]
     public IMediator Mediator { get; set; }
 
     [Inject]
     public NavigationManager NavigationManager { get; set; }
-
-    [Inject]
-    public QueryRouter QueryRouter { get; set; }
 
     [Inject]
     public ISnackbar Snackbar { get; set; }
@@ -48,7 +42,7 @@ public partial class UserSettingsEditor
 
     protected async Task OnSave()
     {
-        await CommandRouter.Send(new SaveUserSettings.Command(EditModel));
+        await Mediator.Send(new SaveUserSettings.Command(EditModel));
 
         ApplicationStateService.IsDarkTheme = EditModel.UseDarkTheme;
 
@@ -69,7 +63,7 @@ public partial class UserSettingsEditor
 
         userEditModel.CancelSubscription(expirationDate);
 
-        await CommandRouter.Send(new SaveUser(userEditModel));       
+        await Mediator.Send(new SaveUser(userEditModel));       
 
         Snackbar.Add($"Membership has been canceled successfully!  You will have until {expirationDate.Value:MM-dd-yyyy} to continue using membership features.", Severity.Success);
                 
@@ -80,7 +74,7 @@ public partial class UserSettingsEditor
     private async Task Load()
     {
         Entity.User user
-            = await QueryRouter.Send(new GetUserById(ApplicationStateService.CurrentUser.Id));
+            = await Mediator.Send(new GetUserById(ApplicationStateService.CurrentUser.Id));
 
         EditModel = new UserSettingsEditModel(user);
     }

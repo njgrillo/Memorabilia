@@ -5,11 +5,11 @@ public partial class ViewColleges
 {
     public async Task OnDelete(DomainEditModel editModel)
     {
-        await CommandRouter.Send(new SaveCollege(editModel));
+        await Mediator.Send(new SaveCollege(editModel));
     }
 
     protected override async Task OnInitializedAsync()
     {
-        Model = new CollegesModel(await QueryRouter.Send(new GetColleges()));
+        Model = new CollegesModel(await Mediator.Send(new GetColleges()));
     }
 }

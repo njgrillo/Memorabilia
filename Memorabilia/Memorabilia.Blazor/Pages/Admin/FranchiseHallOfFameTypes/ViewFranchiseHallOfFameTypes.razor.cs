@@ -5,11 +5,11 @@ public partial class ViewFranchiseHallOfFameTypes
 {
     public async Task OnDelete(DomainEditModel editModel)
     {
-        await CommandRouter.Send(new SaveFranchiseHallOfFameType(editModel));
+        await Mediator.Send(new SaveFranchiseHallOfFameType(editModel));
     }
 
     protected override async Task OnInitializedAsync()
     {
-        Model = new FranchiseHallOfFameTypesModel(await QueryRouter.Send(new GetFranchiseHallOfFameTypes()));
+        Model = new FranchiseHallOfFameTypesModel(await Mediator.Send(new GetFranchiseHallOfFameTypes()));
     }
 }

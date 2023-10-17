@@ -5,11 +5,11 @@ public partial class ViewFigureSpecialtyTypes
 {
     public async Task OnDelete(DomainEditModel editModel)
     {
-        await CommandRouter.Send(new SaveFigureSpecialtyType(editModel));
+        await Mediator.Send(new SaveFigureSpecialtyType(editModel));
     }
 
     protected override async Task OnInitializedAsync()
     {
-        Model = new FigureSpecialtyTypesModel(await QueryRouter.Send(new GetFigureSpecialtyTypes()));
+        Model = new FigureSpecialtyTypesModel(await Mediator.Send(new GetFigureSpecialtyTypes()));
     }
 }

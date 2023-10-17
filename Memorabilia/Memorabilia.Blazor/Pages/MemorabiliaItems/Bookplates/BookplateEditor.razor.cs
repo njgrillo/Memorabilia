@@ -7,7 +7,7 @@ public partial class BookplateEditor
     {
         MemorabiliaId = DataProtectorService.DecryptId(EncryptMemorabiliaId);
 
-        EditModel = new(new BookplateModel(await QueryRouter.Send(new GetMemorabiliaItem(MemorabiliaId))))
+        EditModel = new(new BookplateModel(await Mediator.Send(new GetMemorabiliaItem(MemorabiliaId))))
         {
             MemorabiliaId = MemorabiliaId
         };
@@ -15,6 +15,6 @@ public partial class BookplateEditor
 
     protected async Task OnSave()
     {
-        await CommandRouter.Send(new SaveBookplate.Command(EditModel));
+        await Mediator.Send(new SaveBookplate.Command(EditModel));
     }
 }

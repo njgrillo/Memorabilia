@@ -3,13 +3,10 @@
 public partial class AccomplishmentManagementEditor
 {
     [Inject]
-    public CommandRouter CommandRouter { get; set; }
-
-    [Inject]
     public IJSRuntime JSRuntime { get; set; }
 
     [Inject]
-    public QueryRouter QueryRouter { get; set; }
+    public IMediator Mediator { get; set; }
 
     [Inject]
     public ISnackbar Snackbar { get; set; }
@@ -54,7 +51,7 @@ public partial class AccomplishmentManagementEditor
         if (!EditModel.ValidationResult.IsValid)
             return;
 
-        await CommandRouter.Send(command);
+        await Mediator.Send(command);
 
         Snackbar.Add("Accomplishment Detail was saved successfully!", Severity.Success);
 
@@ -66,7 +63,7 @@ public partial class AccomplishmentManagementEditor
         if (AccomplishmentTypeId == 0)
             return;
 
-        Entity.AccomplishmentDetail accomplishmentDetail = await QueryRouter.Send(new GetAccomplishmentManagement(AccomplishmentTypeId));
+        Entity.AccomplishmentDetail accomplishmentDetail = await Mediator.Send(new GetAccomplishmentManagement(AccomplishmentTypeId));
 
         if (accomplishmentDetail == null)
         {

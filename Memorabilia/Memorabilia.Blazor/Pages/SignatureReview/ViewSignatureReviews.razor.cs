@@ -9,10 +9,10 @@ public partial class ViewSignatureReviews : ReroutePage
     public ImageService ImageService { get; set; }
 
     [Inject]
-    public NavigationManager NavigationManager { get; set; }
+    public IMediator Mediator { get; set; }
 
     [Inject]
-    public QueryRouter QueryRouter { get; set; }
+    public NavigationManager NavigationManager { get; set; }
 
     protected SignatureReviewsModel Model
         = new();
@@ -58,7 +58,7 @@ public partial class ViewSignatureReviews : ReroutePage
     {
         var pageInfo = new PageInfo(_resetPaging ? 1 : state.Page + 1, state.PageSize);
 
-        Model = await QueryRouter.Send(new GetSignatureReviews(pageInfo));
+        Model = await Mediator.Send(new GetSignatureReviews(pageInfo));
 
         return new TableData<SignatureReviewModel>()
         {
@@ -76,7 +76,7 @@ public partial class ViewSignatureReviews : ReroutePage
         }
 
         Entity.SignatureReview signatureReview
-            = await QueryRouter.Send(new GetRandomSignatureReview());
+            = await Mediator.Send(new GetRandomSignatureReview());
 
         NavigationManager.NavigateTo($"{NavigationPath.SignatureReview}/{DataProtectorService.EncryptId(signatureReview.Id)}");
     }

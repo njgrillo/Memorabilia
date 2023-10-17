@@ -3,13 +3,10 @@
 public partial class EditForumTopic : ReroutePage
 {
     [Inject]
-    public CommandRouter CommandRouter { get; set; }
-
-    [Inject]
     public IDataProtectorService DataProtectorService { get; set; }
 
     [Inject]
-    public QueryRouter QueryRouter { get; set; }    
+    public IMediator Mediator { get; set; }
 
     [Inject]
     public ISnackbar Snackbar { get; set; }
@@ -61,7 +58,7 @@ public partial class EditForumTopic : ReroutePage
         if (!EditModel.ValidationResult.IsValid)
             return;
 
-        await CommandRouter.Send(command);
+        await Mediator.Send(command);
 
         Snackbar.Add("Forum Entry saved successfully!", Severity.Success);
 
@@ -84,7 +81,7 @@ public partial class EditForumTopic : ReroutePage
         bool shouldBookmark
             = !EditModel.Bookmarks.Any(bookmark => bookmark.UserId == ApplicationStateService.CurrentUser.Id);
 
-        await CommandRouter.Send(new UpdateForumTopicBookmark(EditModel.Id,
+        await Mediator.Send(new UpdateForumTopicBookmark(EditModel.Id,
                                                               ApplicationStateService.CurrentUser.Id));
 
         if (shouldBookmark)
@@ -103,7 +100,7 @@ public partial class EditForumTopic : ReroutePage
     private async Task Load()
     {
         Entity.ForumTopic forumTopic
-            = await QueryRouter.Send(new GetForumTopic(ForumTopicId));
+            = await Mediator.Send(new GetForumTopic(ForumTopicId));
 
         EditModel = new(forumTopic);
 

@@ -6,16 +6,13 @@ public partial class ProjectEditor
     public IApplicationStateService ApplicationStateService { get; set; }
 
     [Inject]
-    public CommandRouter CommandRouter { get; set; }
-
-    [Inject]
     public IDataProtectorService DataProtectorService { get; set; }
 
     [Inject]
     public IJSRuntime JSRuntime { get; set; }
 
     [Inject]
-    public QueryRouter QueryRouter { get; set; }
+    public IMediator Mediator { get; set; }
 
     [Inject]
     public ISnackbar Snackbar { get; set; }
@@ -68,7 +65,7 @@ public partial class ProjectEditor
             return;
         }
 
-        EditModel = new ProjectEditModel(new ProjectModel(await QueryRouter.Send(new GetProjectQuery(Id))));
+        EditModel = new ProjectEditModel(new ProjectModel(await Mediator.Send(new GetProjectQuery(Id))));
 
         ProjectTypeComponent = Type.GetType($"Memorabilia.Blazor.Pages.Project.ProjectTypeComponents.{EditModel.ProjectType}Selector");
         
@@ -167,7 +164,7 @@ public partial class ProjectEditor
         if (!EditModel.ValidationResult.IsValid)
             return;
 
-        await CommandRouter.Send(command);
+        await Mediator.Send(command);
 
         Snackbar.Add("Project was saved successfully!", Severity.Success);
 
@@ -180,7 +177,7 @@ public partial class ProjectEditor
         if (!EditModel.MemorabiliaTeams.Any())
             return;
 
-        ProjectEditModel editModel = (await QueryRouter.Send(new GetProjectQuery(Id))).ToEditModel();
+        ProjectEditModel editModel = (await Mediator.Send(new GetProjectQuery(Id))).ToEditModel();
 
         EditModel.MemorabiliaTeams = editModel.MemorabiliaTeams;
     }
@@ -190,7 +187,7 @@ public partial class ProjectEditor
         if (!EditModel.People.Any())
             return;
 
-        ProjectEditModel editModel = (await QueryRouter.Send(new GetProjectQuery(Id))).ToEditModel();
+        ProjectEditModel editModel = (await Mediator.Send(new GetProjectQuery(Id))).ToEditModel();
 
         EditModel.People = editModel.People;
     }

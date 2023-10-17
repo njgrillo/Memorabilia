@@ -5,11 +5,11 @@ public partial class ViewHelmetQualityTypes
 {
     public async Task OnDelete(DomainEditModel editModel)
     {
-        await CommandRouter.Send(new SaveHelmetQualityType(editModel));
+        await Mediator.Send(new SaveHelmetQualityType(editModel));
     }
 
     protected override async Task OnInitializedAsync()
     {
-        Model = new HelmetQualityTypesModel(await QueryRouter.Send(new GetHelmetQualityTypes()));
+        Model = new HelmetQualityTypesModel(await Mediator.Send(new GetHelmetQualityTypes()));
     }
 }

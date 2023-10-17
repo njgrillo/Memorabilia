@@ -3,13 +3,10 @@
 public partial class CancelStripeOrder
 {
     [Inject]
-    public CommandRouter CommandRouter { get; set; }
-
-    [Inject]
     public IDataProtectorService DataProtectorService { get; set; }
 
     [Inject]
-    public QueryRouter QueryRouter { get; set; }
+    public IMediator Mediator { get; set; }
 
     [Parameter]
     public string EncryptOrderId { get; set; }
@@ -24,13 +21,13 @@ public partial class CancelStripeOrder
         OrderId = DataProtectorService.Decrypt(EncryptOrderId);
 
         Entity.StripePaymentTransaction transaction
-            = await QueryRouter.Send(new GetStripePaymentTransaction(OrderId));
+            = await Mediator.Send(new GetStripePaymentTransaction(OrderId));
 
         EditModel = new(transaction)
         {
             StripePaymentStatusType = StripePaymentStatusType.Canceled
         };
 
-        await CommandRouter.Send(new SaveStripePaymentTransaction.Command(EditModel));
+        await Mediator.Send(new SaveStripePaymentTransaction.Command(EditModel));
     }
 }

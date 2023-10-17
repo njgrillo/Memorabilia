@@ -11,7 +11,7 @@ public partial class PuckEditor
         MemorabiliaId = DataProtectorService.DecryptId(EncryptMemorabiliaId);
         EditModel.MemorabiliaId = MemorabiliaId;
 
-        Entity.Memorabilia memorabilia = await QueryRouter.Send(new GetMemorabiliaItem(MemorabiliaId));
+        Entity.Memorabilia memorabilia = await Mediator.Send(new GetMemorabiliaItem(MemorabiliaId));
 
         if (memorabilia.Brand == null)
             return;
@@ -28,6 +28,6 @@ public partial class PuckEditor
         if (!EditModel.ValidationResult.IsValid)
             return;
 
-        await CommandRouter.Send(command);
+        await Mediator.Send(command);
     }
 }

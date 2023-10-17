@@ -6,7 +6,7 @@ public partial class AutographImageCarouselViewerDialog
     public ImageService ImageService { get; set; }
 
     [Inject]
-    public QueryRouter QueryRouter { get; set; }
+    public IMediator Mediator { get; set; }
 
     [CascadingParameter]
     public MudDialogInstance MudDialog { get; set; }
@@ -25,7 +25,7 @@ public partial class AutographImageCarouselViewerDialog
         if (AutographId == 0)
             return;
 
-        Images = await QueryRouter.Send(new GetAutographImages(AutographId));
+        Images = await Mediator.Send(new GetAutographImages(AutographId));
     }
 
     public void Close()

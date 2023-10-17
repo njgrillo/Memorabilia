@@ -42,7 +42,7 @@ public partial class ViewCollegesTool
         if (college == null)
             return;
 
-        Model = new(await QueryRouter.Send(new GetPersonColleges(college, Sport)), Sport)
+        Model = new(await Mediator.Send(new GetPersonColleges(college, Sport)), Sport)
                 {
                     College = college
                 };
@@ -50,7 +50,7 @@ public partial class ViewCollegesTool
 
     private async Task OnInputChange(College college)
     {
-        Model = new(await QueryRouter.Send(new GetPersonColleges(college, Sport)), Sport)
+        Model = new(await Mediator.Send(new GetPersonColleges(college, Sport)), Sport)
                 {
                     College = college
                 };

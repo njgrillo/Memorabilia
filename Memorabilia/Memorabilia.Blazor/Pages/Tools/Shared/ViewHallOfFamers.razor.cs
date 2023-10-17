@@ -17,12 +17,12 @@ public partial class ViewHallOfFamers
 
     protected override async Task OnInitializedAsync()
     {
-        Model = new(await QueryRouter.Send(new GetHallOfFames(SportLeagueLevel)), Sport);
+        Model = new(await Mediator.Send(new GetHallOfFames(SportLeagueLevel)), Sport);
     }
 
     private async Task OnInputChange(int inductionYear)
     {
-        Model = new(await QueryRouter.Send(new GetHallOfFames(SportLeagueLevel, inductionYear)), Sport)
+        Model = new(await Mediator.Send(new GetHallOfFames(SportLeagueLevel, inductionYear)), Sport)
                 {
                     InductionYear = inductionYear
                 };

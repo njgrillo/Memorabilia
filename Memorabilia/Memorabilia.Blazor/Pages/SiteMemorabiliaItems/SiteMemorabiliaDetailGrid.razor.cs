@@ -9,10 +9,10 @@ public partial class SiteMemorabiliaDetailGrid : ReroutePage
     public ImageService ImageService { get; set; }
 
     [Inject]
-    public NavigationManager NavigationManager { get; set; }
+    public IMediator Mediator { get; set; }
 
     [Inject]
-    public QueryRouter QueryRouter { get; set; }
+    public NavigationManager NavigationManager { get; set; }
 
     [Parameter]
     public bool CanSelect { get; set; }
@@ -137,8 +137,8 @@ public partial class SiteMemorabiliaDetailGrid : ReroutePage
         var pageInfo = new PageInfo(_resetPaging ? 1 : state.Page + 1, state.PageSize);
 
         Model = UserId.HasValue
-            ? await QueryRouter.Send(new GetUserSiteMemorabiliaItems(UserId.Value, pageInfo, Filter))
-            : await QueryRouter.Send(new GetSiteMemorabiliaItems(pageInfo, Filter));
+            ? await Mediator.Send(new GetUserSiteMemorabiliaItems(UserId.Value, pageInfo, Filter))
+            : await Mediator.Send(new GetSiteMemorabiliaItems(pageInfo, Filter));
 
         await GridLoaded.InvokeAsync();
 

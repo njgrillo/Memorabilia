@@ -9,10 +9,10 @@ public partial class ViewSignatureIdentifications : ReroutePage
     public ImageService ImageService { get; set; }
 
     [Inject]
-    public NavigationManager NavigationManager { get; set; }    
+    public IMediator Mediator { get; set; }
 
     [Inject]
-    public QueryRouter QueryRouter { get; set; }
+    public NavigationManager NavigationManager { get; set; }  
 
     protected SignatureIdentificationsModel Model
         = new();
@@ -58,7 +58,7 @@ public partial class ViewSignatureIdentifications : ReroutePage
     {
         var pageInfo = new PageInfo(_resetPaging ? 1 : state.Page + 1, state.PageSize);
 
-        Model = await QueryRouter.Send(new GetSignatureIdentifications(pageInfo));
+        Model = await Mediator.Send(new GetSignatureIdentifications(pageInfo));
 
         return new TableData<SignatureIdentificationModel>()
         {
@@ -76,7 +76,7 @@ public partial class ViewSignatureIdentifications : ReroutePage
         }
 
         Entity.SignatureIdentification signatureIdentification 
-            = await QueryRouter.Send(new GetRandomSignatureIdentfication());
+            = await Mediator.Send(new GetRandomSignatureIdentfication());
 
         NavigationManager.NavigateTo($"{NavigationPath.SignatureIdentification}/{DataProtectorService.EncryptId(signatureIdentification.Id)}");
     }

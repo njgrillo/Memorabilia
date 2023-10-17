@@ -10,7 +10,7 @@ public abstract class ViewSportTools<T>
     public ImageService ImageService { get; set; }
 
     [Inject]
-    public QueryRouter QueryRouter { get; set; }
+    public IMediator Mediator { get; set; }
 
     [Parameter]
     public Sport Sport { get; set; }

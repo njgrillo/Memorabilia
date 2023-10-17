@@ -6,10 +6,10 @@ public partial class ForumTopicGrid
     public IDataProtectorService DataProtectorService { get; set; }
 
     [Inject]
-    public NavigationManager NavigationManager { get; set; }
+    public IMediator Mediator { get; set; }
 
     [Inject]
-    public QueryRouter QueryRouter { get; set; }
+    public NavigationManager NavigationManager { get; set; }
 
     [Parameter]
     public ForumCategory ForumCategory { get; set; }
@@ -47,7 +47,7 @@ public partial class ForumTopicGrid
     {
         var pageInfo = new PageInfo(_resetPaging ? 1 : state.Page + 1, state.PageSize);
 
-        Model = await QueryRouter.Send(new GetForumTopics(pageInfo, _forumCategoryId, _sportId));
+        Model = await Mediator.Send(new GetForumTopics(pageInfo, _forumCategoryId, _sportId));
 
         return new TableData<ForumTopicModel>()
         {

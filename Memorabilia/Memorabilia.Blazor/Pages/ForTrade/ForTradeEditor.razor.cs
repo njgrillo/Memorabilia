@@ -3,12 +3,6 @@
 public partial class ForTradeEditor
 {
     [Inject]
-    public IApplicationStateService ApplicationStateService { get; set; }
-
-    [Inject]
-    public CommandRouter CommandRouter { get; set; }
-
-    [Inject]
     public ICourier Courier { get; set; }
 
     [Inject]
@@ -16,9 +10,6 @@ public partial class ForTradeEditor
 
     [Inject]
     public IMediator Mediator { get; set; }
-
-    [Inject]
-    public QueryRouter QueryRouter { get; set; }
 
     [Inject]
     public ISnackbar Snackbar { get; set; }
@@ -33,7 +24,7 @@ public partial class ForTradeEditor
 
     protected override async Task OnInitializedAsync()
     {
-        _hasItemsForTrade = await QueryRouter.Send(new HasItemsForTrade());
+        _hasItemsForTrade = await Mediator.Send(new HasItemsForTrade());
 
         Courier.Subscribe<ForTradeMemorabiliaRemovedNotification>(OnMemorabiliaRemoved);
     }
@@ -67,7 +58,7 @@ public partial class ForTradeEditor
                    .Distinct()
                    .ToArray();
 
-        await CommandRouter.Send(new SaveForTradeMemorabilia.Command(addedMemorabiliaIds: memorabiliaIds));
+        await Mediator.Send(new SaveForTradeMemorabilia.Command(addedMemorabiliaIds: memorabiliaIds));
 
         Snackbar.Add("Items For Trade were saved successfully!", Severity.Success);
 
@@ -78,6 +69,6 @@ public partial class ForTradeEditor
 
     protected async Task OnMemorabiliaRemoved(ForTradeMemorabiliaRemovedNotification notification)
     {
-        _hasItemsForTrade = await QueryRouter.Send(new HasItemsForTrade());
+        _hasItemsForTrade = await Mediator.Send(new HasItemsForTrade());
     }
 }

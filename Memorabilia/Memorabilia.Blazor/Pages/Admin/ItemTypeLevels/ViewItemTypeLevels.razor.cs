@@ -5,7 +5,7 @@ public partial class ViewItemTypeLevels
 {
     protected override async Task OnInitializedAsync()
     {
-        Model = new ItemTypeLevelsModel(await QueryRouter.Send(new GetItemTypeLevels()));
+        Model = new ItemTypeLevelsModel(await Mediator.Send(new GetItemTypeLevels()));
     }
 
     protected override async Task Delete(int id)
@@ -18,7 +18,7 @@ public partial class ViewItemTypeLevels
             IsDeleted = true
         };
 
-        await CommandRouter.Send(new SaveItemTypeLevel(editModel));
+        await Mediator.Send(new SaveItemTypeLevel(editModel));
 
         Model.ItemTypeLevels.Remove(deletedItem);
 

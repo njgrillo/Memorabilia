@@ -10,6 +10,6 @@ public partial class ViewSpots
 
     protected override async Task OnInitializedAsync()
     {
-        Model = new SpotsModel(await QueryRouter.Send(new GetSpots()));
+        Model = new SpotsModel(await Mediator.Send(new GetSpots()));
     }
 }

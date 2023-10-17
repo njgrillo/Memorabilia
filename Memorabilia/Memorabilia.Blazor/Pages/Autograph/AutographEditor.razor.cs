@@ -33,7 +33,7 @@ public partial class AutographEditor
             ? 0
             : DataProtectorService.DecryptId(EncryptAutographId);
 
-        MemorabiliaModel model = new(await QueryRouter.Send(new GetMemorabiliaItem(MemorabiliaId)));
+        MemorabiliaModel model = new(await Mediator.Send(new GetMemorabiliaItem(MemorabiliaId)));
 
         if (!model.Autographs.Any() || AutographId <= 0)
         {
@@ -58,7 +58,7 @@ public partial class AutographEditor
         if (!Model.ValidationResult.IsValid)
             return;
 
-        await CommandRouter.Send(command);
+        await Mediator.Send(command);
 
         Model.Id = command.Id;
 

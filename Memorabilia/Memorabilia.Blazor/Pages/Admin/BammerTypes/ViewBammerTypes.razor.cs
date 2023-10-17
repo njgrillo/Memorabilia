@@ -10,6 +10,6 @@ public partial class ViewBammerTypes
 
     protected override async Task OnInitializedAsync()
     {
-        Model = new BammerTypesModel(await QueryRouter.Send(new GetBammerTypes()));
+        Model = new BammerTypesModel(await Mediator.Send(new GetBammerTypes()));
     }
 }

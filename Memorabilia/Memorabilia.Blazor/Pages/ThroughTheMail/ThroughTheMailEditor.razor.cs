@@ -6,9 +6,6 @@ public partial class ThroughTheMailEditor
     public IApplicationStateService ApplicationStateService { get; set; }
 
     [Inject]
-    public CommandRouter CommandRouter { get; set; }
-
-    [Inject]
     public IDataProtectorService DataProtectorService { get; set; }
 
     [Inject]
@@ -18,10 +15,10 @@ public partial class ThroughTheMailEditor
     public IJSRuntime JSRuntime { get; set; }
 
     [Inject]
-    public NavigationManager NavigationManager { get; set; }
+    public IMediator Mediator { get; set; }
 
     [Inject]
-    public QueryRouter QueryRouter { get; set; }
+    public NavigationManager NavigationManager { get; set; }
 
     [Inject]
     public ISnackbar Snackbar { get; set; }
@@ -68,7 +65,7 @@ public partial class ThroughTheMailEditor
             return;
         }
 
-        EditModel = new ThroughTheMailEditModel(new ThroughTheMailModel(await QueryRouter.Send(new GetThroughTheMail(Id))));
+        EditModel = new ThroughTheMailEditModel(new ThroughTheMailModel(await Mediator.Send(new GetThroughTheMail(Id))));
 
         Loaded = true;
     }
@@ -141,7 +138,7 @@ public partial class ThroughTheMailEditor
         if (!EditModel.ValidationResult.IsValid)
             return;
 
-        await CommandRouter.Send(command);
+        await Mediator.Send(command);
 
         Snackbar.Add("Through the Mail was saved successfully!", Severity.Success);
 

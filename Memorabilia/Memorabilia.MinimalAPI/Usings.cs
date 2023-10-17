@@ -1,6 +1,5 @@
 ﻿global using Autofac;
 global using Autofac.Extensions.DependencyInjection;
-global using Framework.Library.Web;
 global using MediatR;
 global using Memorabilia.Application.Configuration;
 global using Memorabilia.Application.Features.Admin.AccomplishmentTypes;

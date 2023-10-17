@@ -1,7 +1,6 @@
 ﻿global using Autofac;
 global using Autofac.Extensions.DependencyInjection;
 global using Framework.Library.Extension;
-global using Framework.Library.Web;
 global using Hangfire;
 global using MediatR;
 global using MediatR.Courier;

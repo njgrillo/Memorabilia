@@ -5,11 +5,11 @@ public partial class ViewColors
 {
     public async Task OnDelete(DomainEditModel editModel)
     {
-        await CommandRouter.Send(new SaveColor(editModel));
+        await Mediator.Send(new SaveColor(editModel));
     }
 
     protected override async Task OnInitializedAsync()
     {
-        Model = new ColorsModel(await QueryRouter.Send(new GetColors()));
+        Model = new ColorsModel(await Mediator.Send(new GetColors()));
     }
 }

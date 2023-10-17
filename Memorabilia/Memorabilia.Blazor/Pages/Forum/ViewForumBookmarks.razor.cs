@@ -6,19 +6,16 @@ public partial class ViewForumBookmarks
     public IApplicationStateService ApplicationStateService { get; set; }
 
     [Inject]
-    public CommandRouter CommandRouter { get; set; }
-
-    [Inject]
     public IDataProtectorService DataProtectorService { get; set; }
 
     [Inject]
     public IDialogService DialogService { get; set; }
 
     [Inject]
-    public NavigationManager NavigationManager { get; set; }
+    public IMediator Mediator { get; set; }
 
     [Inject]
-    public QueryRouter QueryRouter { get; set; }
+    public NavigationManager NavigationManager { get; set; }
 
     [Inject]
     public ISnackbar Snackbar { get; set; }
@@ -31,14 +28,14 @@ public partial class ViewForumBookmarks
     protected override async Task OnInitializedAsync()
     {
         Entity.ForumTopic[] forumTopics
-            = await QueryRouter.Send(new GetBookmarkedForumTopics(ApplicationStateService.CurrentUser.Id));
+            = await Mediator.Send(new GetBookmarkedForumTopics(ApplicationStateService.CurrentUser.Id));
 
         Model = new(forumTopics);
     }
 
     protected async Task Remove(int forumTopicId)
     {
-        await CommandRouter.Send(new UpdateForumTopicBookmark(forumTopicId,
+        await Mediator.Send(new UpdateForumTopicBookmark(forumTopicId,
                                                               ApplicationStateService.CurrentUser.Id));
 
         Model.ForumTopics.RemoveAll(forumTopic => forumTopic.Id == forumTopicId);

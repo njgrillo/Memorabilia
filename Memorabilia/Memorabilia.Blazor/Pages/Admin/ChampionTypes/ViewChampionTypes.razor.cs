@@ -5,11 +5,11 @@ public partial class ViewChampionTypes
 {
     public async Task OnDelete(DomainEditModel editModel)
     {
-        await CommandRouter.Send(new SaveChampionType(editModel));
+        await Mediator.Send(new SaveChampionType(editModel));
     }
 
     protected override async Task OnInitializedAsync()
     {
-        Model = new ChampionTypesModel(await QueryRouter.Send(new GetChampionTypes()));
+        Model = new ChampionTypesModel(await Mediator.Send(new GetChampionTypes()));
     }
 }

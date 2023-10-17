@@ -55,7 +55,7 @@ public partial class ViewAccomplishments
         if (accomplishmentType == null)
             return;  
 
-        Model = new(await QueryRouter.Send(new GetAccomplishments(accomplishmentType, Sport)), Sport)
+        Model = new(await Mediator.Send(new GetAccomplishments(accomplishmentType, Sport)), Sport)
                 {
                     AccomplishmentType = accomplishmentType
                 };
@@ -64,13 +64,13 @@ public partial class ViewAccomplishments
             return;
 
         AccomplishmentsModel perfectGames 
-            = new(await QueryRouter.Send(new GetAccomplishments(AccomplishmentType.PerfectGame, Sport)), Sport)
+            = new(await Mediator.Send(new GetAccomplishments(AccomplishmentType.PerfectGame, Sport)), Sport)
               {
                   AccomplishmentType = AccomplishmentType.PerfectGame
               };
 
         AccomplishmentsModel combinedNoHitters
-            = new(await QueryRouter.Send(new GetAccomplishments(AccomplishmentType.CombinedNoHitter, Sport)), Sport)
+            = new(await Mediator.Send(new GetAccomplishments(AccomplishmentType.CombinedNoHitter, Sport)), Sport)
             {
                 AccomplishmentType = AccomplishmentType.CombinedNoHitter
             };

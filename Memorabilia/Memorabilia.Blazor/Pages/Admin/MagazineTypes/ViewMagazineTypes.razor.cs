@@ -10,6 +10,6 @@ public partial class ViewMagazineTypes
 
     protected override async Task OnInitializedAsync()
     {
-        Model = new MagazineTypesModel(await QueryRouter.Send(new GetMagazineTypes()));
+        Model = new MagazineTypesModel(await Mediator.Send(new GetMagazineTypes()));
     }
 }

@@ -5,7 +5,7 @@ public partial class ViewPositions
 {
     protected override async Task OnInitializedAsync()
     {
-        Model = new PositionsModel(await QueryRouter.Send(new GetPositions()));
+        Model = new PositionsModel(await Mediator.Send(new GetPositions()));
     }
 
     protected override async Task Delete(int id)
@@ -17,7 +17,7 @@ public partial class ViewPositions
             IsDeleted = true
         };
 
-        await CommandRouter.Send(new SavePosition(editModel));
+        await Mediator.Send(new SavePosition(editModel));
 
         Model.Positions.Remove(deletedItem);
 

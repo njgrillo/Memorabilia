@@ -3,9 +3,9 @@
 public class Get
     : RequestHandler<LeagueRequest>, IRequestHandler<LeagueRequest, IResult>
 {
-    public Get(QueryRouter queryRouter) : base(queryRouter) { }
+    public Get(IMediator mediator) : base(mediator) {}
 
     public override async Task<IResult> Handle(LeagueRequest request,
                                                CancellationToken cancellationToken)
-        => Results.Ok(new Response<Entity.League>(await QueryRouter.Send(new GetLeague(request.Id))));
+        => Results.Ok(new Response<Entity.League>(await Mediator.Send(new GetLeague(request.Id))));
 }

@@ -25,7 +25,7 @@ public class PersonAutoComplete
 
     private async Task LoadItems()
     {
-        Entity.Person[] people = await QueryRouter.Send(new GetPeople(SportId: Sport?.Id ?? null));
+        Entity.Person[] people = await Mediator.Send(new GetPeople(SportId: Sport?.Id ?? null));
 
         Items = people.Select(person => new PersonEditModel(new PersonModel(person)));
     }

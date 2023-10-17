@@ -36,7 +36,7 @@ public class PersonTeamAutoComplete
 
     private async Task LoadItems()
     {
-        var model = new TeamsModel(await QueryRouter.Send(new GetTeams()));
+        var model = new TeamsModel(await Mediator.Send(new GetTeams()));
 
         Items = model.Teams
                      .Select(team => new PersonTeamEditModel(PersonId, team));

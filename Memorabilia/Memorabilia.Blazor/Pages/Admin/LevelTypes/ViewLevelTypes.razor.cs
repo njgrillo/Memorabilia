@@ -10,6 +10,6 @@ public partial class ViewLevelTypes
 
     protected override async Task OnInitializedAsync()
     {
-        Model = new LevelTypesModel(await QueryRouter.Send(new GetLevelTypes()));
+        Model = new LevelTypesModel(await Mediator.Send(new GetLevelTypes()));
     }
 }

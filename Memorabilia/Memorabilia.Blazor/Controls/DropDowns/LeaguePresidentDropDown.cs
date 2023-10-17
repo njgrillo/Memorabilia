@@ -39,7 +39,7 @@ public class LeaguePresidentDropDown
     private async Task LoadItems()
     {
         Entity.LeaguePresident[] presidents 
-            = await QueryRouter.Send(new GetLeaguePresidents(SportLeagueLevel?.Id, League?.Id));
+            = await Mediator.Send(new GetLeaguePresidents(SportLeagueLevel?.Id, League?.Id));
 
         Items = presidents.Select(president => new LeaguePresidentModel(president));
     }

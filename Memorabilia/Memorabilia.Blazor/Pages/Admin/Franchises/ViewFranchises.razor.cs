@@ -5,7 +5,7 @@ public partial class ViewFranchises
 {
     protected override async Task OnInitializedAsync()
     {
-        Model = new FranchisesModel(await QueryRouter.Send(new GetFranchises()));
+        Model = new FranchisesModel(await Mediator.Send(new GetFranchises()));
     }
 
     protected override async Task Delete(int id)
@@ -17,7 +17,7 @@ public partial class ViewFranchises
             IsDeleted = true
         };
 
-        await CommandRouter.Send(new SaveFranchise(editModel));
+        await Mediator.Send(new SaveFranchise(editModel));
 
         Model.Franchises.Remove(deletedItem);
 

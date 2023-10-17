@@ -10,6 +10,6 @@ public partial class ViewAccomplishmentTypes
 
     protected override async Task OnInitializedAsync()
     {
-        Model = new AccomplishmentTypesModel(await QueryRouter.Send(new GetAccomplishmentTypes()));
+        Model = new AccomplishmentTypesModel(await Mediator.Send(new GetAccomplishmentTypes()));
     }
 }

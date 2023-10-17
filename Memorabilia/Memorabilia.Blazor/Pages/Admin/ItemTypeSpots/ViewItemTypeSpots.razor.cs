@@ -5,7 +5,7 @@ public partial class ViewItemTypeSpots
 {
     protected override async Task OnInitializedAsync()
     {
-        Model = new ItemTypeSpotsModel(await QueryRouter.Send(new GetItemTypeSpots()));
+        Model = new ItemTypeSpotsModel(await Mediator.Send(new GetItemTypeSpots()));
     }
 
     protected override async Task Delete(int id)
@@ -18,7 +18,7 @@ public partial class ViewItemTypeSpots
             IsDeleted = true
         };
 
-        await CommandRouter.Send(new SaveItemTypeSpot(editModel));
+        await Mediator.Send(new SaveItemTypeSpot(editModel));
 
         Model.ItemTypeSpots.Remove(deletedItem);
 

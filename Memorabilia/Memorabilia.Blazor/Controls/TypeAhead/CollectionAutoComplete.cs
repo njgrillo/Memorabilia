@@ -7,7 +7,7 @@ public class CollectionAutoComplete : Autocomplete<Entity.Collection>
 
     protected override async Task OnInitializedAsync()
     {
-        Items = await QueryRouter.Send(new GetCollections());
+        Items = await Mediator.Send(new GetCollections());
         Label = "Collections";
     }
 

@@ -5,10 +5,10 @@ public partial class ViewBatTypes
 {
     public async Task OnDelete(DomainEditModel editModel)
     {
-        await CommandRouter.Send(new SaveBatType(editModel));
+        await Mediator.Send(new SaveBatType(editModel));
     }
     protected override async Task OnInitializedAsync()
     {
-        Model = new BatTypesModel(await QueryRouter.Send(new GetBatTypes()));
+        Model = new BatTypesModel(await Mediator.Send(new GetBatTypes()));
     }
 }

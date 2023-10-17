@@ -5,7 +5,7 @@ public partial class ViewDivisions
 {
     protected override async Task OnInitializedAsync()
     {
-        Model = new DivisionsModel(await QueryRouter.Send(new GetDivisions()));
+        Model = new DivisionsModel(await Mediator.Send(new GetDivisions()));
     }
 
     protected override async Task Delete(int id)
@@ -17,7 +17,7 @@ public partial class ViewDivisions
             IsDeleted = true
         };
 
-        await CommandRouter.Send(new SaveDivision(editModel));
+        await Mediator.Send(new SaveDivision(editModel));
 
         Model.Divisions.Remove(deletedItem);
 

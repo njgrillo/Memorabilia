@@ -3,10 +3,10 @@
 public class GetAll
     : RequestHandler<CommissionersRequest>, IRequestHandler<CommissionersRequest, IResult>
 {
-    public GetAll(QueryRouter queryRouter) : base(queryRouter) { }
+    public GetAll(IMediator mediator) : base(mediator) { }
 
     public override async Task<IResult> Handle(CommissionersRequest request,
                                                CancellationToken cancellationToken)
         => Results.Ok(new Response<CommissionerApiModel[]>(
-            (await QueryRouter.Send(new GetCommissioners())).ToModelArray()));
+            (await Mediator.Send(new GetCommissioners())).ToModelArray()));
 }

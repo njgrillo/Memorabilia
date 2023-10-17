@@ -10,6 +10,6 @@ public partial class ViewPrivacyTypes
 
     protected override async Task OnInitializedAsync()
     {
-        Model = new PrivacyTypesModel(await QueryRouter.Send(new GetPrivacyTypes()));
+        Model = new PrivacyTypesModel(await Mediator.Send(new GetPrivacyTypes()));
     }
 }

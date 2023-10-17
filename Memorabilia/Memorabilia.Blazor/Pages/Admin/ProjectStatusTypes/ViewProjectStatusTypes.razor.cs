@@ -10,6 +10,6 @@ public partial class ViewProjectStatusTypes
 
     protected override async Task OnInitializedAsync()
     {
-        Model = new ProjectStatusTypesModel(await QueryRouter.Send(new GetProjectStatusTypes()));
+        Model = new ProjectStatusTypesModel(await Mediator.Send(new GetProjectStatusTypes()));
     }
 }

@@ -7,9 +7,9 @@ public class CommissionerDropDown : DropDown<CommissionerModel, int>
 
     protected override async Task OnInitializedAsync()
     {
-        Items = new CommissionersModel(await QueryRouter.Send(new GetCommissioners(SportLeagueLevel?.Id)))
-                                                        .Commissioners
-                                                        .ToArray();
+        Items = new CommissionersModel(await Mediator.Send(new GetCommissioners(SportLeagueLevel?.Id)))
+                                                     .Commissioners
+                                                     .ToArray();
         Label = "Commissioner";
     }
 

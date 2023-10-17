@@ -9,7 +9,7 @@ public partial class ViewProposedTrades
     public ICourier Courier { get; set; }
 
     [Inject]
-    public QueryRouter QueryRouter { get; set; }
+    public IMediator Mediator { get; set; }
 
     protected ProposeTradesModel Model { get; set; }
         = new();
@@ -24,7 +24,7 @@ public partial class ViewProposedTrades
     private async Task Load()
     {
         Entity.ProposeTrade[] proposeTrades
-            = await QueryRouter.Send(new GetProposedTrades());
+            = await Mediator.Send(new GetProposedTrades());
 
         Model = new(proposeTrades, ApplicationStateService.CurrentUser.Id);
     }

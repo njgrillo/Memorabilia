@@ -2,7 +2,7 @@
 
 public partial class ViewLeaderTypes 
     : ViewDomainItem<LeaderTypesModel>
-{   
+{
     public async Task OnDelete(DomainEditModel editModel)
     {
         await OnDelete(new SaveLeaderType(editModel));
@@ -10,6 +10,6 @@ public partial class ViewLeaderTypes
 
     protected override async Task OnInitializedAsync()
     {
-        Model = new LeaderTypesModel(await QueryRouter.Send(new GetLeaderTypes()));
+        Model = new LeaderTypesModel(await Mediator.Send(new GetLeaderTypes()));
     }
 }

@@ -10,6 +10,6 @@ public partial class ViewRecordTypes
 
     protected override async Task OnInitializedAsync()
     {
-        Model = new RecordTypesModel(await QueryRouter.Send(new GetRecordTypes()));
+        Model = new RecordTypesModel(await Mediator.Send(new GetRecordTypes()));
     }
 }

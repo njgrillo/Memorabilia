@@ -10,7 +10,7 @@ public partial class BookEditor
     {
         MemorabiliaId = DataProtectorService.DecryptId(EncryptMemorabiliaId);
 
-        EditModel = new(new BookModel(await QueryRouter.Send(new GetMemorabiliaItem(MemorabiliaId))))
+        EditModel = new(new BookModel(await Mediator.Send(new GetMemorabiliaItem(MemorabiliaId))))
         {
             MemorabiliaId = MemorabiliaId
         };
@@ -25,6 +25,6 @@ public partial class BookEditor
         if (!EditModel.ValidationResult.IsValid)
             return;
 
-        await CommandRouter.Send(command);
+        await Mediator.Send(command);
     }
 }

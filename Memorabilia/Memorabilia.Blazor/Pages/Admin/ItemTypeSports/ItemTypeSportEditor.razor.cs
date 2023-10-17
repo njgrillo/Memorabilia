@@ -5,7 +5,7 @@ public partial class ItemTypeSportEditor
 {   
     protected override async Task OnInitializedAsync()
     {
-        EditModel = (await QueryRouter.Send(new GetItemTypeSport(Id))).ToEditModel();
+        EditModel = (await Mediator.Send(new GetItemTypeSport(Id))).ToEditModel();
     }
 
     protected async Task Save()

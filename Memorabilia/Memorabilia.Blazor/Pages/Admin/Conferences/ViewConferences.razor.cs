@@ -5,7 +5,7 @@ public partial class ViewConferences
 {
     protected override async Task OnInitializedAsync()
     {
-        Model = new ConferencesModel(await QueryRouter.Send(new GetConferences()));
+        Model = new ConferencesModel(await Mediator.Send(new GetConferences()));
     }
 
     protected override async Task Delete(int id)
@@ -17,7 +17,7 @@ public partial class ViewConferences
             IsDeleted = true
         };
 
-        await CommandRouter.Send(new SaveConference(editModel));
+        await Mediator.Send(new SaveConference(editModel));
 
         Model.Conferences.Remove(deletedItem);
 
