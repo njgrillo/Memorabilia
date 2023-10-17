@@ -6,7 +6,7 @@ public partial class ConferenceTeamEditor
     protected override async Task OnInitializedAsync()
     {
         Entity.TeamConference[] teamConferences 
-            = await QueryRouter.Send(new GetTeamConferences(TeamId));
+            = await Mediator.Send(new GetTeamConferences(TeamId));
 
         EditModel = new(TeamId, teamConferences.ToEditModelList())
         {

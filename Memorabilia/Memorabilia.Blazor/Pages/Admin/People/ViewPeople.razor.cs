@@ -8,7 +8,7 @@ public partial class ViewPeople
 
     protected override async Task OnInitializedAsync()
     {
-        Model = new PeopleModel(await QueryRouter.Send(new GetPeople()));
+        Model = new PeopleModel(await Mediator.Send(new GetPeople()));
     }
 
     protected override async Task Delete(int id)
@@ -20,7 +20,7 @@ public partial class ViewPeople
             IsDeleted = true
         };
 
-        await CommandRouter.Send(new SavePerson.Command(editModel));
+        await Mediator.Send(new SavePerson.Command(editModel));
 
         Model.People.Remove(deletedItem);
 

@@ -6,19 +6,16 @@ public partial class ViewSignatureIdentification
     public IApplicationStateService ApplicationStateService { get; set; }
 
     [Inject]
-    public CommandRouter CommandRouter { get; set; }
-
-    [Inject]
     public IDataProtectorService DataProtectorService { get; set; }
 
     [Inject]
     public ImageService ImageService { get; set; }
 
     [Inject]
-    public NavigationManager NavigationManager { get; set; }
+    public IMediator Mediator { get; set; }
 
     [Inject]
-    public QueryRouter QueryRouter { get; set; }
+    public NavigationManager NavigationManager { get; set; }
 
     [Inject]
     public ISnackbar Snackbar { get; set; }
@@ -46,7 +43,7 @@ public partial class ViewSignatureIdentification
     {
         SignatureIdentificationId = DataProtectorService.DecryptId(EncryptSignatureIdentificationId);
 
-        Model = new(await QueryRouter.Send(new GetSignatureIdentification(SignatureIdentificationId)));
+        Model = new(await Mediator.Send(new GetSignatureIdentification(SignatureIdentificationId)));
 
         SignatureIdentificationPersonModel person
             = Model.People.FirstOrDefault(person => person.CreatedUserId == ApplicationStateService.CurrentUser.Id);
@@ -68,7 +65,7 @@ public partial class ViewSignatureIdentification
         if (!EditModel.ValidationResult.IsValid)
             return;
 
-        await CommandRouter.Send(command);
+        await Mediator.Send(command);
 
         Snackbar.Add("Signature Identification Person was added successfully!", Severity.Success);
 

@@ -3,9 +3,9 @@
 public class Get
     : RequestHandler<HelmetTypeRequest>, IRequestHandler<HelmetTypeRequest, IResult>
 {
-    public Get(QueryRouter queryRouter) : base(queryRouter) { }
+    public Get(IMediator mediator) : base(mediator) {}
 
     public override async Task<IResult> Handle(HelmetTypeRequest request,
                                                CancellationToken cancellationToken)
-        => Results.Ok(new Response<Entity.DomainEntity>(await QueryRouter.Send(new GetHelmetType(request.Id))));
+        => Results.Ok(new Response<Entity.DomainEntity>(await Mediator.Send(new GetHelmetType(request.Id))));
 }

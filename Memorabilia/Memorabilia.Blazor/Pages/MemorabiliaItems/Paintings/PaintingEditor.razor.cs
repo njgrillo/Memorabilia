@@ -10,7 +10,7 @@ public partial class PaintingEditor : MemorabiliaItem<PaintingEditModel>
         MemorabiliaId = DataProtectorService.DecryptId(EncryptMemorabiliaId);
         EditModel.MemorabiliaId = MemorabiliaId;
 
-        Entity.Memorabilia memorabilia = await QueryRouter.Send(new GetMemorabiliaItem(MemorabiliaId));
+        Entity.Memorabilia memorabilia = await Mediator.Send(new GetMemorabiliaItem(MemorabiliaId));
 
         if (memorabilia.Brand == null)
             return;
@@ -27,6 +27,6 @@ public partial class PaintingEditor : MemorabiliaItem<PaintingEditModel>
         if (!EditModel.ValidationResult.IsValid)
             return;
 
-        await CommandRouter.Send(command);
+        await Mediator.Send(command);
     }
 }

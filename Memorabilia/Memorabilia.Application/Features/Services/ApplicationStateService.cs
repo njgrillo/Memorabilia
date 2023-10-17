@@ -2,7 +2,7 @@
 
 public class ApplicationStateService : IApplicationStateService
 {
-    private readonly QueryRouter _queryRouter;
+    private readonly IMediator _mediator;
 
     public Entity.User CurrentUser { get; set; }
 
@@ -24,14 +24,14 @@ public class ApplicationStateService : IApplicationStateService
         }
     }
 
-    public ApplicationStateService(QueryRouter queryRouter)
+    public ApplicationStateService(IMediator mediator)
     {
-        _queryRouter = queryRouter;
+        _mediator = mediator;
     }
 
     public async Task Load(int userId)
     {
-        CurrentUser = await _queryRouter.Send(new GetUserById(userId));
+        CurrentUser = await _mediator.Send(new GetUserById(userId));
 
         IsDarkTheme = CurrentUser.UserSettings?.UseDarkTheme ?? false;
     }

@@ -12,7 +12,7 @@ public partial class AddProjectMemorabiliaTeamDialog
     public ImageService ImageService { get; set; }
 
     [Inject]
-    public QueryRouter QueryRouter { get; set; }
+    public IMediator Mediator { get; set; }
 
     [CascadingParameter]
     public MudDialogInstance MudDialog { get; set; }
@@ -36,7 +36,7 @@ public partial class AddProjectMemorabiliaTeamDialog
         if (ProjectId == 0)
             return;
 
-        Project = new ProjectEditModel(new ProjectModel(await QueryRouter.Send(new GetProjectQuery(ProjectId))));
+        Project = new ProjectEditModel(new ProjectModel(await Mediator.Send(new GetProjectQuery(ProjectId))));
     }
 
     protected void Add()

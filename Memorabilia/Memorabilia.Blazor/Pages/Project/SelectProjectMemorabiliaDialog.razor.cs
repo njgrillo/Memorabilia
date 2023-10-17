@@ -14,9 +14,6 @@ public partial class SelectProjectMemorabiliaDialog
     [Inject]
     public ProjectMemorabiliaTeamLinkService ProjectMemorabiliaTeamLinkService { get; set; }
 
-    [Inject]
-    public QueryRouter QueryRouter { get; set; }
-
     [CascadingParameter]
     public MudDialogInstance MudDialog { get; set; }
 

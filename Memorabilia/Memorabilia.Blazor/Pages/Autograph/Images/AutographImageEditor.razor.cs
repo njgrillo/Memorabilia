@@ -21,7 +21,7 @@ public partial class AutographImageEditor
     {
         AutographId = DataProtectorService.DecryptId(EncryptAutographId);
 
-        var autograph = new AutographModel(await QueryRouter.Send(new GetAutograph(AutographId)));
+        var autograph = new AutographModel(await Mediator.Send(new GetAutograph(AutographId)));
 
         Model = new AutographImagesEditModel(autograph.Images,
                                              autograph.ItemType,
@@ -44,7 +44,7 @@ public partial class AutographImageEditor
     protected async Task OnImport()
     {
         var model 
-            = new MemorabiliaImagesModel(await QueryRouter.Send(new GetMemorabiliaImages(Model.MemorabiliaId)));
+            = new MemorabiliaImagesModel(await Mediator.Send(new GetMemorabiliaImages(Model.MemorabiliaId)));
 
         List<Entity.AutographImage> images 
             = model.Images
@@ -65,7 +65,7 @@ public partial class AutographImageEditor
         Model.AutographId = AutographId;
         Model.Images = EditImages.Images;
 
-        await CommandRouter.Send(new SaveAutographImage.Command(Model));
+        await Mediator.Send(new SaveAutographImage.Command(Model));
     }
 
     protected async Task SaveAndAddAutograph()

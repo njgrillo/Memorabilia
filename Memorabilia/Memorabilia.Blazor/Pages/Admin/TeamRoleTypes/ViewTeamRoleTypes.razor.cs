@@ -10,6 +10,6 @@ public partial class ViewTeamRoleTypes
 
     protected override async Task OnInitializedAsync()
     {
-        Model = new TeamRoleTypesModel(await QueryRouter.Send(new GetTeamRoleTypes()));
+        Model = new TeamRoleTypesModel(await Mediator.Send(new GetTeamRoleTypes()));
     }
 }

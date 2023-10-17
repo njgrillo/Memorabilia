@@ -14,7 +14,7 @@ public partial class PersonEditor
             return;
         }
 
-        Entity.Person person = await QueryRouter.Send(new GetPerson(Id));
+        Entity.Person person = await Mediator.Send(new GetPerson(Id));
 
         EditModel = new PersonEditModel(new PersonModel(person));
 

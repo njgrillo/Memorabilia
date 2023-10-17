@@ -3,9 +3,6 @@
 public partial class ForSaleGrid
 {
     [Inject]
-    public CommandRouter CommandRouter { get; set; }
-
-    [Inject]
     public ICourier Courier { get; set; }
 
     [Inject]
@@ -19,9 +16,6 @@ public partial class ForSaleGrid
 
     [Inject]
     public IMediator Mediator { get; set; }
-
-    [Inject]
-    public QueryRouter QueryRouter { get; set; }
 
     [Inject]
     public ISnackbar Snackbar { get; set; }
@@ -105,8 +99,8 @@ public partial class ForSaleGrid
         var pageInfo = new PageInfo(_resetPaging ? 1 : state.Page + 1, state.PageSize);
 
         ForSaleModel model = Filter != null
-            ? await QueryRouter.Send(new GetForSaleMemorabiliaItemsPaged(pageInfo, Filter))
-            : await QueryRouter.Send(new GetForSaleMemorabiliaItemsPaged(pageInfo));
+            ? await Mediator.Send(new GetForSaleMemorabiliaItemsPaged(pageInfo, Filter))
+            : await Mediator.Send(new GetForSaleMemorabiliaItemsPaged(pageInfo));
 
         Model = new(model);
 
@@ -119,7 +113,7 @@ public partial class ForSaleGrid
 
     protected async Task OnSave()
     {
-        await CommandRouter.Send(new SaveForSaleMemorabilia.Command(Model));
+        await Mediator.Send(new SaveForSaleMemorabilia.Command(Model));
 
         await _table.ReloadServerData();
 
@@ -137,7 +131,7 @@ public partial class ForSaleGrid
 
     protected async Task RemoveMemorabiliaItem(params int[] ids)
     {
-        await CommandRouter.Send(new SaveForSaleMemorabilia.Command(removedIds: ids));
+        await Mediator.Send(new SaveForSaleMemorabilia.Command(removedIds: ids));
 
         await _table.ReloadServerData();
 
@@ -152,7 +146,7 @@ public partial class ForSaleGrid
             = SelectedMemorabilia.Select(item => item.Id)
                                  .ToArray();
 
-        await CommandRouter.Send(new SaveForSaleMemorabilia.Command(removedIds: ids));
+        await Mediator.Send(new SaveForSaleMemorabilia.Command(removedIds: ids));
 
         await _table.ReloadServerData();
 

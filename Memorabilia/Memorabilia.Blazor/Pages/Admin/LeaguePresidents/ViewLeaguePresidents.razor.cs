@@ -5,7 +5,7 @@ public partial class ViewLeaguePresidents
 {
     protected override async Task OnInitializedAsync()
     {
-        Model = new LeaguePresidentsModel(await QueryRouter.Send(new GetLeaguePresidents()));
+        Model = new LeaguePresidentsModel(await Mediator.Send(new GetLeaguePresidents()));
     }
 
     protected override async Task Delete(int id)
@@ -18,7 +18,7 @@ public partial class ViewLeaguePresidents
             IsDeleted = true
         };
 
-        await CommandRouter.Send(new SaveLeaguePresident(editModel));
+        await Mediator.Send(new SaveLeaguePresident(editModel));
 
         Model.Presidents.Remove(deletedItem);
 

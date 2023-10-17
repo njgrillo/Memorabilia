@@ -11,7 +11,7 @@ public partial class FranchiseEditor
         if (Id == 0)
             return;
 
-        EditModel = (await QueryRouter.Send(new GetFranchise(Id))).ToEditModel();
+        EditModel = (await Mediator.Send(new GetFranchise(Id))).ToEditModel();
     }
 
     protected async Task Save()

@@ -5,11 +5,11 @@ public partial class ViewConditions
 {
     public async Task OnDelete(DomainEditModel editModel)
     {
-        await CommandRouter.Send(new SaveCondition(editModel));
+        await Mediator.Send(new SaveCondition(editModel));
     }
 
     protected override async Task OnInitializedAsync()
     {
-        Model = new ConditionsModel(await QueryRouter.Send(new GetConditions()));
+        Model = new ConditionsModel(await Mediator.Send(new GetConditions()));
     }
 }

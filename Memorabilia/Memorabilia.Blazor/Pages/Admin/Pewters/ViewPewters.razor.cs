@@ -8,7 +8,7 @@ public partial class ViewPewters
 
     protected override async Task OnInitializedAsync()
     {
-        Model = new PewtersModel(await QueryRouter.Send(new GetPewters()));
+        Model = new PewtersModel(await Mediator.Send(new GetPewters()));
     }
 
     protected override async Task Delete(int id)
@@ -20,7 +20,7 @@ public partial class ViewPewters
             IsDeleted = true
         };
 
-        await CommandRouter.Send(new SavePewter(editModel));
+        await Mediator.Send(new SavePewter(editModel));
 
         Model.Pewters.Remove(deletedItem);
 

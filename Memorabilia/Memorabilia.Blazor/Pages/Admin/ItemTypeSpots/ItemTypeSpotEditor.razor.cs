@@ -5,7 +5,7 @@ public partial class ItemTypeSpotEditor
 {
     protected override async Task OnInitializedAsync()
     {
-        EditModel = (await QueryRouter.Send(new GetItemTypeSpot(Id))).ToEditModel();
+        EditModel = (await Mediator.Send(new GetItemTypeSpot(Id))).ToEditModel();
     }
 
     protected async Task Save()

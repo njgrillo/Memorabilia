@@ -3,16 +3,13 @@
 public partial class TradeGrid
 {
     [Inject]
-    public CommandRouter CommandRouter { get; set; }
-
-    [Inject]
     public IDataProtectorService DataProtectorService { get; set; }
 
     [Inject]
     public IDialogService DialogService { get; set; }
 
     [Inject]
-    public QueryRouter QueryRouter { get; set; }
+    public IMediator Mediator { get; set; }
 
     [Inject]
     public ISnackbar Snackbar { get; set; }
@@ -50,8 +47,8 @@ public partial class TradeGrid
         var pageInfo = new PageInfo(_resetPaging ? 1 : state.Page + 1, state.PageSize);
 
         Model = Filter != null
-            ? await QueryRouter.Send(new GetTradedMemorabiliaTransactionPaged(pageInfo, Filter))
-            : await QueryRouter.Send(new GetTradedMemorabiliaTransactionPaged(pageInfo));
+            ? await Mediator.Send(new GetTradedMemorabiliaTransactionPaged(pageInfo, Filter))
+            : await Mediator.Send(new GetTradedMemorabiliaTransactionPaged(pageInfo));
 
         return new TableData<MemorabiliaTransactionModel>()
         {
@@ -94,7 +91,7 @@ public partial class TradeGrid
         {
             deletedTrade.IsDeleted = true;
 
-            await CommandRouter.Send(new SaveMemorabiliaTransaction.Command(editModel));
+            await Mediator.Send(new SaveMemorabiliaTransaction.Command(editModel));
 
             transaction.DisplayDetails = editModel.Trades.Any(trade => !trade.IsDeleted);
         }
@@ -111,7 +108,7 @@ public partial class TradeGrid
             IsDeleted = true
         };
 
-        await CommandRouter.Send(new SaveMemorabiliaTransaction.Command(editModel));
+        await Mediator.Send(new SaveMemorabiliaTransaction.Command(editModel));
 
         Model.Items.Remove(itemToDelete);
 

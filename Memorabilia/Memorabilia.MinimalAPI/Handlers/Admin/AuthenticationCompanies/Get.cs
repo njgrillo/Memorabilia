@@ -3,9 +3,9 @@
 public class Get
     : RequestHandler<AuthenticationCompanyRequest>, IRequestHandler<AuthenticationCompanyRequest, IResult>
 {
-    public Get(QueryRouter queryRouter) : base(queryRouter) { }
+    public Get(IMediator mediator) : base(mediator) { }
 
     public override async Task<IResult> Handle(AuthenticationCompanyRequest request,
                                                CancellationToken cancellationToken)
-        => Results.Ok(new Response<Entity.DomainEntity>(await QueryRouter.Send(new GetAuthenticationCompany(request.Id))));
+        => Results.Ok(new Response<Entity.DomainEntity>(await Mediator.Send(new GetAuthenticationCompany(request.Id))));
 }

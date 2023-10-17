@@ -8,7 +8,7 @@ public partial class HallOfFamePersonEditor
 
     protected override async Task OnInitializedAsync()
     {
-        var model = new PersonHallOfFameModel(await QueryRouter.Send(new GetPerson(PersonId)));
+        var model = new PersonHallOfFameModel(await Mediator.Send(new GetPerson(PersonId)));
 
         EditModel = new PersonHallOfFamesEditModel(PersonId, model);
 

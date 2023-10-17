@@ -3,13 +3,13 @@
 public class GetAll
     : RequestHandler<ItemTypeLevelsRequest>, IRequestHandler<ItemTypeLevelsRequest, IResult>
 {
-    public GetAll(QueryRouter queryRouter) : base(queryRouter) { }
+    public GetAll(IMediator mediator) : base(mediator) {}
 
     public override async Task<IResult> Handle(ItemTypeLevelsRequest request,
                                                CancellationToken cancellationToken)
     {
         var response
-            = new Response<Entity.ItemTypeLevel[]>(await QueryRouter.Send(new GetItemTypeLevels()));
+            = new Response<Entity.ItemTypeLevel[]>(await Mediator.Send(new GetItemTypeLevels()));
 
         return Results.Ok(response);
     }

@@ -6,9 +6,6 @@ public partial class AddSignatureReview
     public IApplicationStateService ApplicationStateService { get; set; }
 
     [Inject]
-    public CommandRouter CommandRouter { get; set; }
-
-    [Inject]
     public ImageService ImageService { get; set; }
 
     [Inject]
@@ -16,6 +13,9 @@ public partial class AddSignatureReview
 
     [Inject]
     public ILogger<AddSignatureReview> Logger { get; set; }
+
+    [Inject]
+    public IMediator Mediator { get; set; }
 
     [Inject]
     public NavigationManager NavigationManager { get; set; }
@@ -82,7 +82,7 @@ public partial class AddSignatureReview
         if (!EditModel.ValidationResult.IsValid)
             return;
 
-        await CommandRouter.Send(command);
+        await Mediator.Send(command);
 
         Snackbar.Add("Signature Review was added successfully!", Severity.Success);
 

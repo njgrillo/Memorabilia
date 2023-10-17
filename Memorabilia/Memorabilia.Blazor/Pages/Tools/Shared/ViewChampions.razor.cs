@@ -11,6 +11,6 @@ public partial class ViewChampions
 
     protected override async Task OnInitializedAsync()
     {
-        Model = new(await QueryRouter.Send(new GetChampions(ChampionType.Id, Sport)), Sport);
+        Model = new(await Mediator.Send(new GetChampions(ChampionType.Id, Sport)), Sport);
     }
 }

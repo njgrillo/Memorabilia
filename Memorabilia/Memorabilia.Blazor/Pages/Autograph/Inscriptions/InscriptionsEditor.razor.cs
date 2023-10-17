@@ -21,7 +21,7 @@ public partial class InscriptionsEditor
     {
         AutographId = DataProtectorService.DecryptId(EncryptAutographId);   
 
-        var autograph = new AutographModel(await QueryRouter.Send(new GetAutograph(AutographId)));
+        var autograph = new AutographModel(await Mediator.Send(new GetAutograph(AutographId)));
 
         EditModel = new InscriptionsEditModel(autograph.Inscriptions,
                                               autograph.ItemTypeId,
@@ -36,7 +36,7 @@ public partial class InscriptionsEditor
 
     protected async Task Save()
     {
-        await CommandRouter.Send(new SaveInscriptions.Command(EditModel));
+        await Mediator.Send(new SaveInscriptions.Command(EditModel));
 
         _continueNavigationPath
             = $"{NavigationPath.Authentications}/{EditModeType.Update.Name}/{DataProtectorService.EncryptId(EditModel.AutographId)}";

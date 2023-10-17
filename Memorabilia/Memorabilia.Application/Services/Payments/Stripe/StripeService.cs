@@ -1,19 +1,14 @@
-﻿using Stripe;
-
-namespace Memorabilia.Application.Services.Payments.Stripe;
+﻿namespace Memorabilia.Application.Services.Payments.Stripe;
 
 public class StripeService
 {
-    private readonly CommandRouter _commandRouter;
-    private readonly QueryRouter _queryRouter;
+    private readonly IMediator _mediator;
     private readonly IStripeSettings _stripeSettings;
 
-    public StripeService(CommandRouter commandRouter,
-                         QueryRouter queryRouter,        
+    public StripeService(IMediator mediator,        
                          IStripeSettings stripeSettings)
     {
-        _commandRouter = commandRouter;
-        _queryRouter = queryRouter;
+        _mediator = mediator;
         _stripeSettings = stripeSettings; 
     }
 
@@ -151,9 +146,9 @@ public class StripeService
         if (customer.Id.Equals(customerModel.Id, StringComparison.OrdinalIgnoreCase))
             return;
 
-        Entity.User user = await _queryRouter.Send(new GetUser(customerModel.Email));
+        Entity.User user = await _mediator.Send(new GetUser(customerModel.Email));
 
-        await _commandRouter.Send(new SaveUserStripeCustomerId(user.Id, customer.Id));
+        await _mediator.Send(new SaveUserStripeCustomerId(user.Id, customer.Id));
     }    
 
     private async Task SaveTransaction(string orderId, int purchaseUserId)
@@ -161,6 +156,6 @@ public class StripeService
         StripePaymentTransactionEditModel stripePaymentTransaction
             = new(orderId, purchaseUserId, Constant.StripePaymentStatusType.Pending.Id);
 
-        await _commandRouter.Send(new SaveStripePaymentTransaction.Command(stripePaymentTransaction));
+        await _mediator.Send(new SaveStripePaymentTransaction.Command(stripePaymentTransaction));
     }
 }

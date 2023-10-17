@@ -10,7 +10,7 @@ public partial class PinFlagEditor
     {
         MemorabiliaId = DataProtectorService.DecryptId(EncryptMemorabiliaId);
 
-        EditModel = new(new PinFlagModel(await QueryRouter.Send(new GetMemorabiliaItem(MemorabiliaId))));
+        EditModel = new(new PinFlagModel(await Mediator.Send(new GetMemorabiliaItem(MemorabiliaId))));
     }
 
     protected async Task OnSave()
@@ -22,6 +22,6 @@ public partial class PinFlagEditor
         if (!EditModel.ValidationResult.IsValid)
             return;
 
-        await CommandRouter.Send(command);
+        await Mediator.Send(command);
     }
 }

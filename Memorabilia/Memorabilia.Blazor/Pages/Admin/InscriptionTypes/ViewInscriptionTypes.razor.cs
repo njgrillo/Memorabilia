@@ -5,11 +5,11 @@ public partial class ViewInscriptionTypes
 {
     public async Task OnDelete(DomainEditModel editModel)
     {
-        await CommandRouter.Send(new SaveInscriptionType(editModel));
+        await Mediator.Send(new SaveInscriptionType(editModel));
     }
 
     protected override async Task OnInitializedAsync()
     {
-        Model = new InscriptionTypesModel(await QueryRouter.Send(new GetInscriptionTypes()));
+        Model = new InscriptionTypesModel(await Mediator.Send(new GetInscriptionTypes()));
     }
 }

@@ -3,13 +3,13 @@
 public class GetAll
     : RequestHandler<GameStyleTypesRequest>, IRequestHandler<GameStyleTypesRequest, IResult>
 {
-    public GetAll(QueryRouter queryRouter) : base(queryRouter) { }
+    public GetAll(IMediator mediator) : base(mediator) {}
 
     public override async Task<IResult> Handle(GameStyleTypesRequest request,
                                                CancellationToken cancellationToken)
     {
         var response
-            = new Response<Entity.DomainEntity[]>(await QueryRouter.Send(new GetGameStyleTypes()));
+            = new Response<Entity.DomainEntity[]>(await Mediator.Send(new GetGameStyleTypes()));
 
         return Results.Ok(response);
     }

@@ -8,6 +8,6 @@ public partial class ViewSingleSeasonRecords
 
     protected override async Task OnInitializedAsync()
     {
-        Model = new(await QueryRouter.Send(new GetSingleSeasonRecords(Sport)), Sport);
+        Model = new(await Mediator.Send(new GetSingleSeasonRecords(Sport)), Sport);
     }
 }

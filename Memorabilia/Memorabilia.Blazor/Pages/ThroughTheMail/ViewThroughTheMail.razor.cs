@@ -3,7 +3,7 @@
 public partial class ViewThroughTheMail
 {
     [Inject]
-    public QueryRouter QueryRouter { get; set; }
+    public IMediator Mediator { get; set; }
 
     protected List<ThroughTheMailModel> Items { get; set; }
         = new();
@@ -16,7 +16,8 @@ public partial class ViewThroughTheMail
 
     protected override async Task OnInitializedAsync()
     {
-        Entity.ThroughTheMail[] throughTheMails = await QueryRouter.Send(new GetThroughTheMails());
+        Entity.ThroughTheMail[] throughTheMails 
+            = await Mediator.Send(new GetThroughTheMails());
 
         Items = throughTheMails.Select(throughTheMail => new ThroughTheMailModel(throughTheMail))
                                .ToList();

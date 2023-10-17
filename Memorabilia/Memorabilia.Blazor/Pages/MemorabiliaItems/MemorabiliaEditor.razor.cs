@@ -6,13 +6,10 @@ public partial class MemorabiliaEditor
     public IApplicationStateService ApplicationStateService { get; set; }
 
     [Inject]
-    public CommandRouter CommandRouter { get; set; }
-
-    [Inject]
     public IDataProtectorService DataProtectorService { get; set; }
 
     [Inject]
-    public QueryRouter QueryRouter { get; set; }
+    public IMediator Mediator { get; set; }
 
     [Inject]
     public MemorabiliaItemValidator Validator { get; set; }        
@@ -41,7 +38,7 @@ public partial class MemorabiliaEditor
             return;
         }
 
-        EditModel = (await QueryRouter.Send(new GetMemorabiliaItem(Id))).ToEditModel();
+        EditModel = (await Mediator.Send(new GetMemorabiliaItem(Id))).ToEditModel();
 
         IsLoaded = true;
     }
@@ -57,7 +54,7 @@ public partial class MemorabiliaEditor
         if (!EditModel.ValidationResult.IsValid)
             return;
 
-        await CommandRouter.Send(command);
+        await Mediator.Send(command);
 
         _continueNavigationPath 
             = $"{NavigationPath.Memorabilia}/{EditModel.ItemTypeName.Replace(" ", "")}/{EditModeType.Update.Name}/{DataProtectorService.EncryptId(command.Id)}";

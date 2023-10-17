@@ -6,7 +6,7 @@ public partial class ImportProjectHallOfFameDialog
     public ImageService ImageService { get; set; }
 
     [Inject]
-    public QueryRouter QueryRouter { get; set; }
+    public IMediator Mediator { get; set; }
 
     [CascadingParameter]
     public MudDialogInstance MudDialog { get; set; }
@@ -71,7 +71,7 @@ public partial class ImportProjectHallOfFameDialog
 
     protected async Task Search()
     {
-        People = (await QueryRouter.Send(new GetImportProjectHallOfFamePersons(SportLeagueLevelId, Year)))
+        People = (await Mediator.Send(new GetImportProjectHallOfFamePersons(SportLeagueLevelId, Year)))
                      .DistinctBy(person => person.Id)
                      .ToArray();
     }

@@ -34,7 +34,7 @@ public class TeamSearchAutoComplete
 
     private async Task LoadItems()
     {
-        Items = await QueryRouter.Send(new GetTeams(SportId: Sport?.Id ?? null));
+        Items = await Mediator.Send(new GetTeams(SportId: Sport?.Id ?? null));
     }
 
     private async void TeamSearchAutoComplete_PropertyChanged(object sender, PropertyChangedEventArgs e)

@@ -5,7 +5,7 @@ public partial class ViewSports
 {
     protected override async Task OnInitializedAsync()
     {
-        Model = new SportsModel(await QueryRouter.Send(new GetSports()));
+        Model = new SportsModel(await Mediator.Send(new GetSports()));
     }
 
     protected override async Task Delete(int id)
@@ -17,7 +17,7 @@ public partial class ViewSports
             IsDeleted = true
         };
 
-        await CommandRouter.Send(new SaveSport(editModel));
+        await Mediator.Send(new SaveSport(editModel));
 
         Model.Sports.Remove(deletedItem);
 

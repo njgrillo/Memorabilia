@@ -3,13 +3,13 @@
 public class GetAll
     : RequestHandler<PrivacyTypesRequest>, IRequestHandler<PrivacyTypesRequest, IResult>
 {
-    public GetAll(QueryRouter queryRouter) : base(queryRouter) { }
+    public GetAll(IMediator mediator) : base(mediator) {}
 
     public override async Task<IResult> Handle(PrivacyTypesRequest request,
                                                CancellationToken cancellationToken)
     {
         var response
-            = new Response<Entity.DomainEntity[]>(await QueryRouter.Send(new GetPrivacyTypes()));
+            = new Response<Entity.DomainEntity[]>(await Mediator.Send(new GetPrivacyTypes()));
 
         return Results.Ok(response);
     }

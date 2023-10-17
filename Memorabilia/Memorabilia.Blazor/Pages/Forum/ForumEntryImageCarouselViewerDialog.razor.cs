@@ -6,7 +6,7 @@ public partial class ForumEntryImageCarouselViewerDialog
     public ImageService ImageService { get; set; }
 
     [Inject]
-    public QueryRouter QueryRouter { get; set; }
+    public IMediator Mediator { get; set; }
 
     [CascadingParameter]
     public MudDialogInstance MudDialog { get; set; }
@@ -26,7 +26,7 @@ public partial class ForumEntryImageCarouselViewerDialog
             return;
 
         Entity.ForumEntry forumEntry 
-            = await QueryRouter.Send(new GetForumEntry(ForumEntryId));
+            = await Mediator.Send(new GetForumEntry(ForumEntryId));
 
         Images = forumEntry.Images
                            .Select(image => new ForumEntryImageModel(image))

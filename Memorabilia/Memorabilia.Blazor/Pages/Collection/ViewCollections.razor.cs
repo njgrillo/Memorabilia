@@ -3,16 +3,13 @@
 public partial class ViewCollections
 {
     [Inject]
-    public CommandRouter CommandRouter { get; set; }
-
-    [Inject]
     public IDataProtectorService DataProtectorService { get; set; }
 
     [Inject]
     public IDialogService DialogService { get; set; }
 
     [Inject]
-    public QueryRouter QueryRouter { get; set; }
+    public IMediator Mediator { get; set; }
 
     [Inject]
     public ISnackbar Snackbar { get; set; }
@@ -23,7 +20,7 @@ public partial class ViewCollections
     protected override async Task OnInitializedAsync()
     {
         Entity.Collection[] collections 
-            = await QueryRouter.Send(new GetCollections());
+            = await Mediator.Send(new GetCollections());
 
         Model = new CollectionsModel(collections);
     }
@@ -49,7 +46,7 @@ public partial class ViewCollections
             IsDeleted = true
         };
 
-        await CommandRouter.Send(new SaveCollection.Command(model));
+        await Mediator.Send(new SaveCollection.Command(model));
 
         Model.Collections.Remove(deletedItem);
 

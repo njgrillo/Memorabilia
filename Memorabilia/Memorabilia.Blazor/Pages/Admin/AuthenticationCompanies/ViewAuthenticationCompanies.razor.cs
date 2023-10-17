@@ -10,6 +10,6 @@ public partial class ViewAuthenticationCompanies
 
     protected override async Task OnInitializedAsync()
     {
-        Model = new AuthenticationCompaniesModel(await QueryRouter.Send(new GetAuthenticationCompanies()));
+        Model = new AuthenticationCompaniesModel(await Mediator.Send(new GetAuthenticationCompanies()));
     }
 }

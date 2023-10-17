@@ -5,7 +5,7 @@ public partial class ViewSportLeagueLevels
 {
     protected override async Task OnInitializedAsync()
     {
-        Model = new SportLeagueLevelsModel(await QueryRouter.Send(new GetSportLeagueLevels()));
+        Model = new SportLeagueLevelsModel(await Mediator.Send(new GetSportLeagueLevels()));
     }
 
     protected override async Task Delete(int id)
@@ -18,7 +18,7 @@ public partial class ViewSportLeagueLevels
             IsDeleted = true
         };
 
-        await CommandRouter.Send(new SaveSportLeagueLevel(editModel));
+        await Mediator.Send(new SaveSportLeagueLevel(editModel));
 
         Model.SportLeagueLevels.Remove(deletedItem);
 

@@ -6,9 +6,6 @@ public partial class ForSaleEditor
     public IApplicationStateService ApplicationStateService { get; set; }
 
     [Inject]
-    public CommandRouter CommandRouter { get; set; }
-
-    [Inject]
     public ICourier Courier { get; set; }
 
     [Inject]
@@ -16,9 +13,6 @@ public partial class ForSaleEditor
 
     [Inject]
     public IMediator Mediator { get; set; }
-
-    [Inject]
-    public QueryRouter QueryRouter { get; set; }
 
     [Inject]
     public ISnackbar Snackbar { get; set; }
@@ -33,7 +27,7 @@ public partial class ForSaleEditor
 
     protected override async Task OnInitializedAsync()
     {
-        _hasItemsForSale = await QueryRouter.Send(new HasItemsForSale());
+        _hasItemsForSale = await Mediator.Send(new HasItemsForSale());
 
         Courier.Subscribe<ForSaleMemorabiliaRemovedNotification>(OnMemorabiliaRemoved);
     }
@@ -75,7 +69,7 @@ public partial class ForSaleEditor
             Items = forSaleMemorabilias
         };
 
-        await CommandRouter.Send(new SaveForSaleMemorabilia.Command(editModel));
+        await Mediator.Send(new SaveForSaleMemorabilia.Command(editModel));
 
         Snackbar.Add("Items For Sale were added successfully!", Severity.Success);
 
@@ -86,6 +80,6 @@ public partial class ForSaleEditor
 
     protected async Task OnMemorabiliaRemoved(ForSaleMemorabiliaRemovedNotification notification)
     {
-        _hasItemsForSale = await QueryRouter.Send(new HasItemsForSale());
+        _hasItemsForSale = await Mediator.Send(new HasItemsForSale());
     }
 }

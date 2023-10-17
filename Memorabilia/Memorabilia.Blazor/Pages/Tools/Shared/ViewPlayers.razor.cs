@@ -8,7 +8,7 @@ public partial class ViewPlayers
 
     private async Task OnInputChange(Franchise franchise)
     {
-        Model = new(await QueryRouter.Send(new GetPlayers(franchise, Sport)), Sport)
+        Model = new(await Mediator.Send(new GetPlayers(franchise, Sport)), Sport)
                 {
                     Franchise = franchise
                 };

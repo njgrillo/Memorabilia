@@ -3,9 +3,9 @@
 public class Get
     : RequestHandler<ItemTypeSpotRequest>, IRequestHandler<ItemTypeSpotRequest, IResult>
 {
-    public Get(QueryRouter queryRouter) : base(queryRouter) { }
+    public Get(IMediator mediator) : base(mediator) {}
 
     public override async Task<IResult> Handle(ItemTypeSpotRequest request,
                                                CancellationToken cancellationToken)
-        => Results.Ok(new Response<Entity.ItemTypeSpot>(await QueryRouter.Send(new GetItemTypeSpot(request.Id))));
+        => Results.Ok(new Response<Entity.ItemTypeSpot>(await Mediator.Send(new GetItemTypeSpot(request.Id))));
 }

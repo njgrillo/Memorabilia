@@ -3,19 +3,16 @@
 public partial class MemorabiliaImageEditor
 {
     [Inject]
-    public CommandRouter CommandRouter { get; set; }
-
-    [Inject]
     public IDataProtectorService DataProtectorService { get; set; }
 
     [Inject]
     public IDialogService DialogService { get; set; }
 
     [Inject]
-    public NavigationManager NavigationManager { get; set; }
+    public IMediator Mediator { get; set; }
 
     [Inject]
-    public QueryRouter QueryRouter { get; set; }
+    public NavigationManager NavigationManager { get; set; }
 
     [Inject]
     public ISnackbar Snackbar { get; set; }
@@ -38,7 +35,7 @@ public partial class MemorabiliaImageEditor
         MemorabiliaId = DataProtectorService.DecryptId(EncryptMemorabiliaId);
 
         EditModel 
-            = new MemorabiliaImagesEditModel(new MemorabiliaModel(await QueryRouter.Send(new GetMemorabiliaItem(MemorabiliaId))));
+            = new MemorabiliaImagesEditModel(new MemorabiliaModel(await Mediator.Send(new GetMemorabiliaItem(MemorabiliaId))));
 
         _backNavigationPath
             = $"{NavigationPath.Memorabilia}/{EditModel.ItemTypeName}/{EditModeType.Update.Name}/{DataProtectorService.EncryptId(MemorabiliaId)}";
@@ -51,7 +48,7 @@ public partial class MemorabiliaImageEditor
     {
         EditModel.Images = EditImages.Images;            
 
-        await CommandRouter.Send(new SaveMemorabiliaImage.Command(EditModel));
+        await Mediator.Send(new SaveMemorabiliaImage.Command(EditModel));
     }
 
     protected async Task SaveAndAddAutograph()

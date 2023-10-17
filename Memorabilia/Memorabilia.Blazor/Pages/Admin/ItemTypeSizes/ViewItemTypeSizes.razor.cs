@@ -5,7 +5,7 @@ public partial class ViewItemTypeSizes
 {
     protected override async Task OnInitializedAsync()
     {
-        Model = new ItemTypeSizesModel(await QueryRouter.Send(new GetItemTypeSizes()));
+        Model = new ItemTypeSizesModel(await Mediator.Send(new GetItemTypeSizes()));
     }
 
     protected override async Task Delete(int id)
@@ -18,7 +18,7 @@ public partial class ViewItemTypeSizes
             IsDeleted = true
         };
 
-        await CommandRouter.Send(new SaveItemTypeSize(editModel));
+        await Mediator.Send(new SaveItemTypeSize(editModel));
 
         Model.ItemTypeSizes.Remove(deletedItem);
 

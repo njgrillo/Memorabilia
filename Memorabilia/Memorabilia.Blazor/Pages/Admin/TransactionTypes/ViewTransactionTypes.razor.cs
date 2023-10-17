@@ -10,6 +10,6 @@ public partial class ViewTransactionTypes
 
     protected override async Task OnInitializedAsync()
     {
-        Model = new TransactionTypesModel(await QueryRouter.Send(new GetTransactionTypes()));
+        Model = new TransactionTypesModel(await Mediator.Send(new GetTransactionTypes()));
     }
 }

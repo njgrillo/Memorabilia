@@ -8,12 +8,12 @@ public partial class OccupationPersonEditor
 
     protected override async Task OnInitializedAsync()
     {
-        Entity.Person[] recentPeople = await QueryRouter.Send(new GetRecentPersonOccupations());
+        Entity.Person[] recentPeople = await Mediator.Send(new GetRecentPersonOccupations());
 
         RecentPersonOccupations = recentPeople.Select(recentPerson => new RecentPersonOccupationsModel(recentPerson))
                                               .ToArray();
 
-        Entity.Person person = await QueryRouter.Send(new GetPerson(PersonId));
+        Entity.Person person = await Mediator.Send(new GetPerson(PersonId));
 
         EditModel = new PersonOccupationsEditModel(PersonId, new PersonOccupationModel(person));
 

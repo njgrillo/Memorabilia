@@ -53,7 +53,7 @@ public class PersonSearchAutoComplete
 
     private async Task LoadItems()
     {
-        Items = await QueryRouter.Send(new GetPeople(SportId: Sport?.Id ?? null));
+        Items = await Mediator.Send(new GetPeople(SportId: Sport?.Id ?? null));
     }
 
     private async void PersonAutoComplete_PropertyChanged(object sender, PropertyChangedEventArgs e)

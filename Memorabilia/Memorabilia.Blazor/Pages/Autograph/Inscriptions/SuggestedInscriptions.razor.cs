@@ -3,7 +3,7 @@
 public partial class SuggestedInscriptions
 {
     [Inject]
-    public QueryRouter QueryRouter { get; set; }
+    public IMediator Mediator { get; set; }
 
     [Inject]
     public SuggestedInscriptionService SuggestedInscriptionService { get; set; }
@@ -29,7 +29,8 @@ public partial class SuggestedInscriptions
         if (PersonId == 0 || (_loaded && _personId == PersonId))
             return;
 
-        Entity.Person person = await QueryRouter.Send(new GetPerson(PersonId));
+        Entity.Person person 
+            = await Mediator.Send(new GetPerson(PersonId));
 
         Model.Items = SuggestedInscriptionService.GenerateInscriptions(person).ToList();
 

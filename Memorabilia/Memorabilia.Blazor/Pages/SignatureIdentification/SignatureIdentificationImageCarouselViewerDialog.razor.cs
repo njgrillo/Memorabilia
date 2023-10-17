@@ -6,7 +6,7 @@ public partial class SignatureIdentificationImageCarouselViewerDialog
     public ImageService ImageService { get; set; }
 
     [Inject]
-    public QueryRouter QueryRouter { get; set; }
+    public IMediator Mediator { get; set; }
 
     [CascadingParameter]
     public MudDialogInstance MudDialog { get; set; }
@@ -23,7 +23,7 @@ public partial class SignatureIdentificationImageCarouselViewerDialog
             return;
 
         Entity.SignatureIdentification signatureIdentification
-            = await QueryRouter.Send(new GetSignatureIdentification(SignatureIdentificationId));
+            = await Mediator.Send(new GetSignatureIdentification(SignatureIdentificationId));
 
         Images = signatureIdentification.Images
                                         .Select(image => new SignatureIdentificationImageModel(image))

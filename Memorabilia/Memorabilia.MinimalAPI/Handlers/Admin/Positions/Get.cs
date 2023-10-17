@@ -3,9 +3,9 @@
 public class Get
     : RequestHandler<PositionRequest>, IRequestHandler<PositionRequest, IResult>
 {
-    public Get(QueryRouter queryRouter) : base(queryRouter) { }
+    public Get(IMediator mediator) : base(mediator) {}
 
     public override async Task<IResult> Handle(PositionRequest request,
                                                CancellationToken cancellationToken)
-        => Results.Ok(new Response<Entity.Position>(await QueryRouter.Send(new GetPosition(request.Id))));
+        => Results.Ok(new Response<Entity.Position>(await Mediator.Send(new GetPosition(request.Id))));
 }

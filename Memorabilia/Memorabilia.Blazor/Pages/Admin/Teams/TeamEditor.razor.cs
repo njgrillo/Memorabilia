@@ -7,14 +7,14 @@ public partial class TeamEditor : EditItem<TeamEditModel, TeamModel>
         if (Id == 0)
             return;
 
-        EditModel = (await QueryRouter.Send(new GetTeam(Id))).ToEditModel();
+        EditModel = (await Mediator.Send(new GetTeam(Id))).ToEditModel();
     }
 
     protected async Task Save()
     {
         var command = new SaveTeam.Command(EditModel);
 
-        await CommandRouter.Send(command);
+        await Mediator.Send(command);
 
         EditModel.Id = command.Id;
     }

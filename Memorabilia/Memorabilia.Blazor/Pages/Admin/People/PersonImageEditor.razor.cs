@@ -19,7 +19,7 @@ public partial class PersonImageEditor
 
     protected override async Task OnInitializedAsync()
     {
-        Entity.Person person = await QueryRouter.Send(new GetPerson(PersonId));
+        Entity.Person person = await Mediator.Send(new GetPerson(PersonId));
 
         EditModel = person.ToImageEditModel();
 

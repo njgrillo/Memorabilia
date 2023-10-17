@@ -3,9 +3,9 @@
 public class Get
     : RequestHandler<FranchiseRequest>, IRequestHandler<FranchiseRequest, IResult>
 {
-    public Get(QueryRouter queryRouter) : base(queryRouter) { }
+    public Get(IMediator mediator) : base(mediator) { }
 
     public override async Task<IResult> Handle(FranchiseRequest request,
                                                CancellationToken cancellationToken)
-        => Results.Ok(new Response<Entity.Franchise>(await QueryRouter.Send(new GetFranchise(request.Id))));
+        => Results.Ok(new Response<Entity.Franchise>(await Mediator.Send(new GetFranchise(request.Id))));
 }

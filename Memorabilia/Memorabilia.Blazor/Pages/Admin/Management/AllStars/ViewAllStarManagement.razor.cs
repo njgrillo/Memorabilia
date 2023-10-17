@@ -3,7 +3,7 @@
 public partial class ViewAllStarManagement
 {
     [Inject]
-    public QueryRouter QueryRouter { get; set; }
+    public IMediator Mediator { get; set; }
 
     private AllStarManagementModel[] _completedAllStars
         = Array.Empty<AllStarManagementModel>();
@@ -16,10 +16,11 @@ public partial class ViewAllStarManagement
 
     protected override async Task OnInitializedAsync()
     {
-        AllStarManagementModel[] allStarManagements = (await QueryRouter.Send(new GetAllAllStarManagements()))
-            .OrderBy(allStarManagement => allStarManagement.SportLeagueLevel.Name)
-            .ThenByDescending(allStarManagement => allStarManagement.Year)
-            .ToArray();
+        AllStarManagementModel[] allStarManagements 
+            = (await Mediator.Send(new GetAllAllStarManagements()))
+                .OrderBy(allStarManagement => allStarManagement.SportLeagueLevel.Name)
+                .ThenByDescending(allStarManagement => allStarManagement.Year)
+                .ToArray();
 
         _completedAllStars = allStarManagements.Where(allStarManagement => allStarManagement.IsConfigured && !allStarManagement.NumberOfAllStarsDoesntMatch)
                                                .ToArray();

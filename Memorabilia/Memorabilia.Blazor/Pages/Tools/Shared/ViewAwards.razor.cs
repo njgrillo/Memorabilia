@@ -39,12 +39,12 @@ public partial class ViewAwards
 
     private async Task GetAwardDetails(AwardType awardType)
     {
-        Model = new(await QueryRouter.Send(new GetAwards(awardType, Sport)), Sport)
+        Model = new(await Mediator.Send(new GetAwards(awardType, Sport)), Sport)
         {
             AwardType = awardType
         };
 
-        Entity.AwardDetail awardDetail = await QueryRouter.Send(new GetAwardManagement(awardType.Id));
+        Entity.AwardDetail awardDetail = await Mediator.Send(new GetAwardManagement(awardType.Id));
 
         if (awardDetail?.ExclusionYears.Any() ?? false)
         {

@@ -6,7 +6,7 @@ public partial class MemorabiliaImageCarouselViewerDialog
     public ImageService ImageService { get; set; }
 
     [Inject]
-    public QueryRouter QueryRouter { get; set; }
+    public IMediator Mediator { get; set; }
 
     [CascadingParameter]
     public MudDialogInstance MudDialog { get; set; }
@@ -25,7 +25,7 @@ public partial class MemorabiliaImageCarouselViewerDialog
         if (MemorabiliaId == 0)
             return;
 
-        Images = await QueryRouter.Send(new GetMemorabiliaImages(MemorabiliaId));
+        Images = await Mediator.Send(new GetMemorabiliaImages(MemorabiliaId));
     }
 
     public void Close()

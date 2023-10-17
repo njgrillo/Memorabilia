@@ -6,7 +6,7 @@ public partial class CompactDiscEditor : MemorabiliaItem<CompactDiscEditModel>
     {
         MemorabiliaId = DataProtectorService.DecryptId(EncryptMemorabiliaId);
 
-        Entity.Memorabilia memorabilia = await QueryRouter.Send(new GetMemorabiliaItem(MemorabiliaId));
+        Entity.Memorabilia memorabilia = await Mediator.Send(new GetMemorabiliaItem(MemorabiliaId));
 
         EditModel = new(new CompactDiscModel(memorabilia));
         EditModel.MemorabiliaId = MemorabiliaId;
@@ -14,6 +14,6 @@ public partial class CompactDiscEditor : MemorabiliaItem<CompactDiscEditModel>
 
     protected async Task OnSave()
     {
-        await CommandRouter.Send(new SaveCompactDisc.Command(EditModel));
+        await Mediator.Send(new SaveCompactDisc.Command(EditModel));
     }
 }

@@ -3,13 +3,13 @@
 public class GetAll
     : RequestHandler<BrandsRequest>, IRequestHandler<BrandsRequest, IResult>
 {
-    public GetAll(QueryRouter queryRouter) : base(queryRouter) { }
+    public GetAll(IMediator mediator) : base(mediator) { }
 
     public override async Task<IResult> Handle(BrandsRequest request,
                                                CancellationToken cancellationToken)
     {
         var response
-            = new Response<Entity.DomainEntity[]>(await QueryRouter.Send(new GetBrands()));
+            = new Response<Entity.DomainEntity[]>(await Mediator.Send(new GetBrands()));
 
         return Results.Ok(response);
     }

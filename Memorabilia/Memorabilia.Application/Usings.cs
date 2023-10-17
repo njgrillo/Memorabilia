@@ -4,7 +4,6 @@ global using Framework.Library.Domain.Command;
 global using Framework.Library.Domain.Paging;
 global using Framework.Library.Extension;
 global using Framework.Library.Handler;
-global using Framework.Library.Web;
 global using Hangfire;
 global using MediatR;
 global using Memorabilia.Application.Behaviors.Attributes;

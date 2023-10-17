@@ -8,7 +8,7 @@ public partial class ViewInternationalHallOfFamers
 
     private async Task OnInputChange(int internationalHallOfFameTypeId)
     {
-        Model = new(await QueryRouter.Send(new GetInternationalHallOfFames(internationalHallOfFameTypeId, Sport)), Sport)
+        Model = new(await Mediator.Send(new GetInternationalHallOfFames(internationalHallOfFameTypeId, Sport)), Sport)
                 {
                     InternationalHallOfFameTypeId = internationalHallOfFameTypeId
                 };

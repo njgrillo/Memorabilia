@@ -6,7 +6,7 @@ public partial class ManageDashboard
     public IApplicationStateService ApplicationStateService { get; set; }
 
     [Inject]
-    public CommandRouter CommandRouter { get; set; }
+    public IMediator Mediator { get; set; }
 
     [Inject]
     public NavigationManager NavigationManager { get; set; }
@@ -41,7 +41,7 @@ public partial class ManageDashboard
 
     protected async Task Save()
     {
-        await CommandRouter.Send(new SaveUserDashboard.Command(Model));
+        await Mediator.Send(new SaveUserDashboard.Command(Model));
 
         NavigationManager.NavigateTo(NavigationPath.Settings);
         Snackbar.Add("Manage Dashboard was saved successfully!", Severity.Success);

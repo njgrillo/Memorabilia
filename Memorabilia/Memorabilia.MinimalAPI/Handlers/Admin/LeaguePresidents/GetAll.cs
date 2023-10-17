@@ -3,10 +3,10 @@
 public class GetAll
     : RequestHandler<LeaguePresidentsRequest>, IRequestHandler<LeaguePresidentsRequest, IResult>
 {
-    public GetAll(QueryRouter queryRouter) : base(queryRouter) { }
+    public GetAll(IMediator mediator) : base(mediator) {}
 
     public override async Task<IResult> Handle(LeaguePresidentsRequest request,
                                                CancellationToken cancellationToken)
         => Results.Ok(new Response<LeaguePresidentApiModel[]>(
-                (await QueryRouter.Send(new GetLeaguePresidents())).ToModelArray()));
+                (await Mediator.Send(new GetLeaguePresidents())).ToModelArray()));
 }

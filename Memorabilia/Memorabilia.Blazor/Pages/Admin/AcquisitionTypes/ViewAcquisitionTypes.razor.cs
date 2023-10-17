@@ -10,6 +10,6 @@ public partial class ViewAcquisitionTypes
 
     protected override async Task OnInitializedAsync()
     {
-        Model = new AcquisitionTypesModel(await QueryRouter.Send(new GetAcquisitionTypes()));
+        Model = new AcquisitionTypesModel(await Mediator.Send(new GetAcquisitionTypes()));
     }
 }

@@ -3,13 +3,13 @@
 public class GetAll
     : RequestHandler<ItemTypeSpotsRequest>, IRequestHandler<ItemTypeSpotsRequest, IResult>
 {
-    public GetAll(QueryRouter queryRouter) : base(queryRouter) { }
+    public GetAll(IMediator mediator) : base(mediator) {}
 
     public override async Task<IResult> Handle(ItemTypeSpotsRequest request,
                                                CancellationToken cancellationToken)
     {
         var response
-            = new Response<Entity.ItemTypeSpot[]>(await QueryRouter.Send(new GetItemTypeSpots()));
+            = new Response<Entity.ItemTypeSpot[]>(await Mediator.Send(new GetItemTypeSpots()));
 
         return Results.Ok(response);
     }

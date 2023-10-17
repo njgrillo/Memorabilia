@@ -21,7 +21,7 @@ public partial class AuthenticationsEditor
     {
         AutographId = DataProtectorService.DecryptId(EncryptAutographId);
 
-        var autograph = new AutographModel(await QueryRouter.Send(new GetAutograph(AutographId)));
+        var autograph = new AutographModel(await Mediator.Send(new GetAutograph(AutographId)));
 
         EditModel = new AuthenticationsEditModel(autograph.Authentications,
                                                  autograph.ItemType,
@@ -37,7 +37,7 @@ public partial class AuthenticationsEditor
     {
         EditModel.AutographId = AutographId;
 
-        await CommandRouter.Send(new SaveAuthentications.Command(EditModel));
+        await Mediator.Send(new SaveAuthentications.Command(EditModel));
 
         _continueNavigationPath = EditModel.CanHaveSpot
             ? $"{NavigationPath.Autographs}/{AdminDomainItem.Spots.Item}/{EditModeType.Update.Name}/{DataProtectorService.EncryptId(AutographId)}"

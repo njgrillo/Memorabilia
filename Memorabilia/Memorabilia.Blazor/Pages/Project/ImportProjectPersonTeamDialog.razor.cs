@@ -6,7 +6,7 @@ public partial class ImportProjectPersonTeamDialog
     public ImageService ImageService { get; set; }
 
     [Inject]
-    public QueryRouter QueryRouter { get; set; }
+    public IMediator Mediator { get; set; }
 
     [CascadingParameter]
     public MudDialogInstance MudDialog { get; set; }
@@ -44,7 +44,7 @@ public partial class ImportProjectPersonTeamDialog
         if (TeamId == 0)
             return;
 
-        Team = await QueryRouter.Send(new GetTeam(TeamId));
+        Team = await Mediator.Send(new GetTeam(TeamId));
     }
 
     public void Cancel()
@@ -83,7 +83,7 @@ public partial class ImportProjectPersonTeamDialog
 
     protected async Task Search()
     {
-        People = (await QueryRouter.Send(new GetImportProjectTeamPersons(Team.Id, Year ?? 0)))
+        People = (await Mediator.Send(new GetImportProjectTeamPersons(Team.Id, Year ?? 0)))
                      .DistinctBy(person => person.Id)
                      .ToArray();
     }

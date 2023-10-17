@@ -9,10 +9,10 @@ public partial class SelectThroughTheMailMemorabiliaDialog
     public ImageService ImageService { get; set; }
 
     [Inject]
-    public NavigationManager NavigationManager { get; set; }
+    public IMediator Mediator { get; set; }
 
     [Inject]
-    public QueryRouter QueryRouter { get; set; }
+    public NavigationManager NavigationManager { get; set; }
 
     [CascadingParameter]
     public MudDialogInstance MudDialog { get; set; }
@@ -23,7 +23,7 @@ public partial class SelectThroughTheMailMemorabiliaDialog
     protected override async Task OnInitializedAsync()
     {
         Entity.Memorabilia[] memorabilia
-            = await QueryRouter.Send(new GetUnsignedMemorabiliaItems());
+            = await Mediator.Send(new GetUnsignedMemorabiliaItems());
 
         Items = memorabilia.Any()
             ? memorabilia.Select(item => new MemorabiliaModel(item))

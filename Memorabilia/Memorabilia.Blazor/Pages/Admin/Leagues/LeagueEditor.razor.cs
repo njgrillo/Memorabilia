@@ -8,7 +8,7 @@ public partial class LeagueEditor
         if (Id == 0)
             return;
 
-        EditModel = (await QueryRouter.Send(new GetLeague(Id))).ToEditModel();
+        EditModel = (await Mediator.Send(new GetLeague(Id))).ToEditModel();
     }
 
     protected async Task Save()

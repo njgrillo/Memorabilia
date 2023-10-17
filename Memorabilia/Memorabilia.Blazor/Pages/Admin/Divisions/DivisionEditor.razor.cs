@@ -8,7 +8,7 @@ public partial class DivisionEditor
         if (Id == 0)
             return;
 
-        EditModel = (await QueryRouter.Send(new GetDivision(Id))).ToEditModel();
+        EditModel = (await Mediator.Send(new GetDivision(Id))).ToEditModel();
     }
 
     protected async Task Save()

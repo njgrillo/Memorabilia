@@ -3,16 +3,10 @@
 public partial class EditForumEntry : ReroutePage
 {
     [Inject]
-    public CommandRouter CommandRouter { get; set; }
-
-    [Inject]
     public ImageService ImageService { get; set; }
 
     [Inject]
-    public ILogger<EditForumEntry> Logger { get; set; }
-
-    [Inject]
-    public QueryRouter QueryRouter { get; set; }
+    public IMediator Mediator { get; set; }
 
     [Inject]
     public ISnackbar Snackbar { get; set; }
@@ -99,9 +93,9 @@ public partial class EditForumEntry : ReroutePage
 
         var command = new AddForumEntryImages(ForumEntry.Id, images.ToArray());
 
-        await CommandRouter.Send(command);
+        await Mediator.Send(command);
 
-        Entity.ForumEntry forumEntry = await QueryRouter.Send(new GetForumEntry(ForumEntry.Id));
+        Entity.ForumEntry forumEntry = await Mediator.Send(new GetForumEntry(ForumEntry.Id));
 
         ForumEntry = new(forumEntry);
 
@@ -119,7 +113,7 @@ public partial class EditForumEntry : ReroutePage
 
         var command = new SaveForumEntry(ForumEntry.Id, ForumEntry.Message);
 
-        await CommandRouter.Send(command);
+        await Mediator.Send(command);
 
         Snackbar.Add("Forum Entry saved successfully!", Severity.Success);
 
@@ -147,7 +141,7 @@ public partial class EditForumEntry : ReroutePage
         bool isUpvote
             = !ForumEntry.RankedUsers.Any(rankedUser => rankedUser.UserId == ApplicationStateService.CurrentUser.Id);
 
-        await CommandRouter.Send(new UpdateForumEntryRank(ForumEntry.Id, 
+        await Mediator.Send(new UpdateForumEntryRank(ForumEntry.Id, 
                                                           ApplicationStateService.CurrentUser.Id, 
                                                           isUpvote));
 

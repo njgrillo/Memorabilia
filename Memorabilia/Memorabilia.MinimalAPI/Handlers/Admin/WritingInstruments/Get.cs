@@ -3,9 +3,9 @@
 public class Get
     : RequestHandler<WritingInstrumentRequest>, IRequestHandler<WritingInstrumentRequest, IResult>
 {
-    public Get(QueryRouter queryRouter) : base(queryRouter) { }
+    public Get(IMediator mediator) : base(mediator) {}
 
     public override async Task<IResult> Handle(WritingInstrumentRequest request,
                                                CancellationToken cancellationToken)
-        => Results.Ok(new Response<Entity.DomainEntity>(await QueryRouter.Send(new GetWritingInstrument(request.Id))));
+        => Results.Ok(new Response<Entity.DomainEntity>(await Mediator.Send(new GetWritingInstrument(request.Id))));
 }

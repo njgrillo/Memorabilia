@@ -3,10 +3,10 @@
 public partial class ForumEntryImage
 {
     [Inject]
-    public CommandRouter CommandRouter { get; set; }
+    public IDialogService DialogService { get; set; }
 
     [Inject]
-    public IDialogService DialogService { get; set; }
+    public IMediator Mediator { get; set; }
 
     [Inject]
     public ISnackbar Snackbar { get; set; }
@@ -52,7 +52,7 @@ public partial class ForumEntryImage
 
     private async Task Delete()
     {
-        await CommandRouter.Send(new DeleteForumEntryImage(Image.Id));
+        await Mediator.Send(new DeleteForumEntryImage(Image.Id));
 
         await ImageDeleted.InvokeAsync(Image.Id);
 

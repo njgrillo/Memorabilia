@@ -8,7 +8,7 @@ public partial class ConferenceEditor
         if (Id == 0)
             return;
 
-        EditModel = (await QueryRouter.Send(new GetConference(Id))).ToEditModel();
+        EditModel = (await Mediator.Send(new GetConference(Id))).ToEditModel();
     }
 
     protected async Task Save()
