@@ -3,8 +3,8 @@
               Row="true"
               Style="margin-bottom:1%;">
         <PrivateSigningPersonDropDown AvailablePeople="People.Select(person => person.Person).ToArray()"
-                                      SelectedValue="SelectedPersonId"
-                                      SelectionChanged="(p) => SelectedPersonId = p" />
+                                      SelectedValue="EditModel.Person.Id"
+                                      SelectionChanged="(p) => EditModel.Person.Id = p" />
         <ItemTypeAutoComplete SelectedValue="EditModel.ItemType"
                               SelectionChanged="(p) => EditModel.ItemType = p" />
         <AddMudFab OnAdd="Add" />
@@ -38,10 +38,10 @@
         <MudTd DataLabel="">
             <GridImage AllowNavigation="false"
                        ImageLoaded="OnImageLoaded"
-                       ImageFileName="@context.Person.ImageFileName"
+                       ImageFileName="@GetPerson(context.Person.Id).ImageFileName"
                        IsPersonImage="true" />
         </MudTd>
-        <MudTd DataLabel="Name">@context.Person.ProfileName</MudTd>
+        <MudTd DataLabel="Name">@GetPerson(context.Person.Id).ProfileName</MudTd>
         <MudTd DataLabel="Item">@context.ItemType?.Name</MudTd>
         <MudTd DataLabel="">
             <MudTooltip Text="Delete">

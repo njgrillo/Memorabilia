@@ -35,9 +35,6 @@ public partial class PrivateSigningEditor
     protected PrivateSigningEditModel EditModel { get; set; }
         = new();
 
-    protected List<PersonModel> ExcludeItemAvailablePeople { get; set; }
-        = new();
-
     protected int PrivateSigningId { get; set; }
 
     public ImageEditModel PromoterPrivateSigningImage { get; set; }
@@ -88,9 +85,9 @@ public partial class PrivateSigningEditor
         }
     }
 
-    protected void OnPeopleModified(PrivateSigningPersonEditModel[] people)
+    protected void OnPeopleModified()
     {
-        ExcludeItemAvailablePeople = people.Select(person => person.Person).ToList();
+        StateHasChanged();
     }
 
     protected async Task OnSave()

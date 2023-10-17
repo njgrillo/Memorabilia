@@ -2,10 +2,10 @@
     <MudStack Class="col-12"
               Row="true"
               Style="margin-bottom:1%;">
-        <PersonDomainAutoComplete Disabled="@(EditMode == EditModeType.Update)"
-                                  IsCulturalSearch="true"
-                                  SelectedValue="EditModel.Person"
-                                  SelectionChanged="(p) => EditModel.Person = p" />
+        <PrivateSigningPersonDropDown AvailablePeople="People.Select(person => person.Person).ToArray()"
+                                      Disabled="@(EditMode == EditModeType.Update)"
+                                      SelectedValue="EditModel.Person.Id"
+                                      SelectionChanged="(p) => EditModel.Person.Id = p" />
         <PrivateSigningItemGroupAutoComplete SelectedValue="EditModel.PrivateSigningItemGroup"
                                              SelectionChanged="(p) => EditModel.PrivateSigningItemGroup = p" />
         <NullableDecimalField Label="Cost"
@@ -50,10 +50,10 @@
         <MudTd DataLabel="">
             <GridImage AllowNavigation="false"
                        ImageLoaded="OnImageLoaded"
-                       ImageFileName="@context.Person.ImageFileName"
+                       ImageFileName="@GetPerson(context.Person.Id).ImageFileName"
                        IsPersonImage="true" />
         </MudTd>
-        <MudTd DataLabel="Name">@context.Person.ProfileName</MudTd>
+        <MudTd DataLabel="Name">@GetPerson(context.Person.Id).ProfileName</MudTd>
         <MudTd DataLabel="ItemGroup">@context.PrivateSigningItemGroup.Name</MudTd>
         <MudTd DataLabel="Cost">@context.Cost.Value.ToString("c")</MudTd>
         <MudTd DataLabel="ShippingCost">@(context.ShippingCost?.ToString("c") ?? string.Empty)</MudTd>

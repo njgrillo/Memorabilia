@@ -21,8 +21,6 @@ public partial class PrivateSigningPeopleExcludedItemTypeEditor
                      .ToList()
             : new();
 
-    protected int SelectedPersonId { get; set; }
-
     protected void Add()
     {
         if (EditModel.Person == null || EditModel.Person.Id == 0)
@@ -35,6 +33,9 @@ public partial class PrivateSigningPeopleExcludedItemTypeEditor
 
         EditModel = new();
     }
+
+    protected PersonModel GetPerson(int personId)
+       => People.Single(privateSigningPerson => privateSigningPerson.Person.Id == personId).Person;
 
     protected void OnImageLoaded()
     {

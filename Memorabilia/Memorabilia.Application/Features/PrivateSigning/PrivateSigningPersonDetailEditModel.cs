@@ -32,7 +32,7 @@ public class PrivateSigningPersonDetailEditModel : EditModel
     public int? PrivateSigningItemTypeGroupId { get; set; }
 
 	public PersonModel Person { get; set; }
-		= new();
+		= new();	
 
     public int PrivateSigningPersonId { get; set; }
 

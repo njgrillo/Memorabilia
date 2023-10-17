@@ -19,7 +19,7 @@ public partial class PrivateSigningPeopleEditor
         = new();
 
     [Parameter]
-    public EventCallback<PrivateSigningPersonEditModel[]> PeopleModified { get; set; }
+    public EventCallback PeopleModified { get; set; }
 
     protected EditModeType EditMode
         = EditModeType.Add;
@@ -41,7 +41,7 @@ public partial class PrivateSigningPeopleEditor
 
         EditModel = new();
 
-        await PeopleModified.InvokeAsync(People.ToArray());
+        await PeopleModified.InvokeAsync();
     }
 
     protected void Edit(PrivateSigningPersonEditModel editModel)

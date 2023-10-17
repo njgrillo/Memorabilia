@@ -13,6 +13,8 @@ public class PersonModel
     public PersonModel(Entity.Person person)
     {
         _person = person;
+
+        Id = _person.Id; 
     }
 
     public DateTime? BirthDate 
@@ -33,8 +35,7 @@ public class PersonModel
     public string FormattedDeathDate
         => _person.DeathDate?.ToString("MM-dd-yyyy") ?? string.Empty;
 
-    public int Id 
-        => _person.Id;
+    public int Id { get; set; }
 
     public string ImageFileName 
         => _person.ImageFileName.IsNullOrEmpty()

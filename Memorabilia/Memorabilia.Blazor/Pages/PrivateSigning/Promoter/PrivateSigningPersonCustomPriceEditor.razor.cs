@@ -56,6 +56,9 @@ public partial class PrivateSigningPersonCustomPriceEditor
         EditMode = EditModeType.Update;
     }
 
+    protected PersonModel GetPerson(int personId)
+       => People.Single(privateSigningPerson => privateSigningPerson.Person.Id == personId).Person;
+
     protected void OnImageLoaded()
     {
         StateHasChanged();
