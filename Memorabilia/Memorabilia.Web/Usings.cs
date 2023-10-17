@@ -1,6 +1,5 @@
 ﻿global using Autofac;
 global using Autofac.Extensions.DependencyInjection;
-global using Framework.Library.Extension;
 global using Hangfire;
 global using MediatR;
 global using MediatR.Courier;
@@ -96,6 +95,7 @@ global using Memorabilia.Blazor.Models.Constants;
 global using Memorabilia.Blazor.Pages;
 global using Memorabilia.Blazor.Services;
 global using Memorabilia.Domain.Constants;
+global using Memorabilia.Domain.Extensions;
 global using Memorabilia.Repository;
 global using Memorabilia.Repository.Cache;
 global using Memorabilia.Repository.Configuration;

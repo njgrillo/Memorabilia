@@ -1,6 +1,5 @@
 ﻿global using FluentValidation.Results;
 global using Framework.Library.Domain.Paging;
-global using Framework.Library.Extension;
 global using Framework.Library.Handler;
 global using MailKit.Net.Smtp;
 global using MediatR;
