@@ -1,4 +1,6 @@
-﻿<Div Style="margin-top:1%;margin-bottom:1%;margin-left:1%;margin-right:1%;">
+﻿@inherits ReroutePage
+
+<Div Style="margin-top:1%;margin-bottom:1%;margin-left:1%;margin-right:1%;">
     <Condition Evaluation="@(ValidationResultAlerts.Any())">
         <Match>
             <AlertPanel Alerts="ValidationResultAlerts" />
@@ -33,7 +35,7 @@
                 Items="EditModel.Entries.OrderByDescending(entry => entry.Rank).ThenByDescending(entry => entry.ModifiedDate).ThenByDescending(entry => entry.CreatedDate)">
         <EditForumEntry ForumEntry="forumEntry"
                         RankUpdated="OnRankUpdated" />
-    </Iterations>
+    </Iterations>    
     <br />
     <AddForumEntry ForumEntry="EditModel.Entry" />
     <br />

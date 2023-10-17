@@ -3,9 +3,6 @@
 public partial class ForTradeGrid
 {
     [Inject]
-    public CommandRouter CommandRouter { get; set; }
-
-    [Inject]
     public ICourier Courier { get; set; }
 
     [Inject]
@@ -19,9 +16,6 @@ public partial class ForTradeGrid
 
     [Inject]
     public IMediator Mediator { get; set; }
-
-    [Inject]
-    public QueryRouter QueryRouter { get; set; }
 
     [Inject]
     public ISnackbar Snackbar { get; set; }
@@ -93,8 +87,8 @@ public partial class ForTradeGrid
         var pageInfo = new PageInfo(_resetPaging ? 1 : state.Page + 1, state.PageSize);
 
         Model = Filter != null
-            ? await QueryRouter.Send(new GetForTradeMemorabiliaItemsPaged(pageInfo, Filter))
-            : await QueryRouter.Send(new GetForTradeMemorabiliaItemsPaged(pageInfo));
+            ? await Mediator.Send(new GetForTradeMemorabiliaItemsPaged(pageInfo, Filter))
+            : await Mediator.Send(new GetForTradeMemorabiliaItemsPaged(pageInfo));
 
         return new TableData<MemorabiliaModel>()
         {
@@ -117,7 +111,7 @@ public partial class ForTradeGrid
                    .Where(item => ids.Contains(item.Id))
                    .ToArray();
 
-        await CommandRouter.Send(new SaveForTradeMemorabilia.Command(removedMemorabiliaIds: ids));
+        await Mediator.Send(new SaveForTradeMemorabilia.Command(removedMemorabiliaIds: ids));
 
         await _table.ReloadServerData();
 
@@ -132,7 +126,7 @@ public partial class ForTradeGrid
             = SelectedMemorabilia.Select(item => item.Memorabilia.Id)
                                  .ToArray();
 
-        await CommandRouter.Send(new SaveForTradeMemorabilia.Command(removedMemorabiliaIds: ids));
+        await Mediator.Send(new SaveForTradeMemorabilia.Command(removedMemorabiliaIds: ids));
 
         await _table.ReloadServerData();
 

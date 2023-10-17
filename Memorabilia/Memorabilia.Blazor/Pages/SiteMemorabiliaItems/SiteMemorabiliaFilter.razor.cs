@@ -2,6 +2,9 @@
 
 public partial class SiteMemorabiliaFilter
 {
+    [Inject]
+    public IApplicationStateService ApplicationStateService { get; set; }
+
     [Parameter]
     public EventCallback<MemorabiliaSearchCriteria> OnFilter { get; set; }
 

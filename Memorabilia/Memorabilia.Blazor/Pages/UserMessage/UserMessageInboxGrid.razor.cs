@@ -3,19 +3,16 @@
 public partial class UserMessageInboxGrid
 {
     [Inject]
-    public CommandRouter CommandRouter { get; set; }
-
-    [Inject]
     public IDataProtectorService DataProtectorService { get; set; }
 
     [Inject]
     public IDialogService DialogService { get; set; }
 
     [Inject]
-    public NavigationManager NavigationManager { get; set; }
+    public IMediator Mediator { get; set; }
 
     [Inject]
-    public QueryRouter QueryRouter { get; set; }
+    public NavigationManager NavigationManager { get; set; }
 
     [Inject]
     public ISnackbar Snackbar { get; set; }
@@ -75,8 +72,8 @@ public partial class UserMessageInboxGrid
             : new PageInfo(_resetPaging ? 1 : state.Page + 1, state.PageSize);
 
         Model = _isInitialLoad
-            ? await QueryRouter.Send(new GetUserMessagesReceived(pageInfo))
-            : await QueryRouter.Send(new SearchUserMessagesReceived(pageInfo, SearchText));
+            ? await Mediator.Send(new GetUserMessagesReceived(pageInfo))
+            : await Mediator.Send(new SearchUserMessagesReceived(pageInfo, SearchText));
 
         _isInitialLoad = false;
 
@@ -117,7 +114,7 @@ public partial class UserMessageInboxGrid
         UserMessageModel itemToDelete 
             = Model.Messages.Single(message => message.Id == id);
         
-        await CommandRouter.Send(new UpdateUserMessageStatus(id, UserMessageStatus.Deleted.Id));
+        await Mediator.Send(new UpdateUserMessageStatus(id, UserMessageStatus.Deleted.Id));
 
         Model.Messages.Remove(itemToDelete);
 

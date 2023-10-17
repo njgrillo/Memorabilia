@@ -8,6 +8,6 @@ public partial class ViewCareerRecords
 
     protected override async Task OnInitializedAsync()
     {
-        Model = new(await QueryRouter.Send(new GetCareerRecords(Sport)), Sport);
+        Model = new(await Mediator.Send(new GetCareerRecords(Sport)), Sport);
     }
 }

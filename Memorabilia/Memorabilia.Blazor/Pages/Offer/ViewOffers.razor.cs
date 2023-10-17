@@ -9,7 +9,7 @@ public partial class ViewOffers
     public ICourier Courier { get; set; }
 
     [Inject]
-    public QueryRouter QueryRouter { get; set; }
+    public IMediator Mediator { get; set; }
 
     protected OffersModel Model { get; set; }
         = new();
@@ -24,7 +24,7 @@ public partial class ViewOffers
     private async Task Load()
     {
         Entity.Offer[] offers
-            = await QueryRouter.Send(new GetOffers());
+            = await Mediator.Send(new GetOffers());
 
         Model = new(offers, ApplicationStateService.CurrentUser.Id);
     }

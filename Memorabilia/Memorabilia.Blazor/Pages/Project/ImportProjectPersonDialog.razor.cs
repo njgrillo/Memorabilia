@@ -6,7 +6,7 @@ public partial class ImportProjectPersonDialog
     public ImageService ImageService { get; set; }
 
     [Inject]
-    public QueryRouter QueryRouter { get; set; }
+    public IMediator Mediator { get; set; }
 
     [CascadingParameter]
     public MudDialogInstance MudDialog { get; set; }
@@ -95,7 +95,7 @@ public partial class ImportProjectPersonDialog
         if (EndYear.HasValue)
             parameters.Add("EndYear", EndYear.Value);
 
-        People = (await QueryRouter.Send(new GetImportProjectPersons(parameters))).DistinctBy(person => person.Id)
-                                                                                  .ToArray();
+        People = (await Mediator.Send(new GetImportProjectPersons(parameters))).DistinctBy(person => person.Id)
+                                                                               .ToArray();
     }
 }

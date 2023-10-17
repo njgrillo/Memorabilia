@@ -3,10 +3,10 @@
 public partial class SelectThroughTheMailAutographDialog
 {
     [Inject]
-    public ImageService ImageService { get; set; }    
+    public ImageService ImageService { get; set; }
 
     [Inject]
-    public QueryRouter QueryRouter { get; set; }
+    public IMediator Mediator { get; set; }
 
     [CascadingParameter]
     public MudDialogInstance MudDialog { get; set; }
@@ -23,7 +23,7 @@ public partial class SelectThroughTheMailAutographDialog
             return;
 
         Entity.Autograph[] autographs
-            = await QueryRouter.Send(new GetAutographsByPerson(PersonId));
+            = await Mediator.Send(new GetAutographsByPerson(PersonId));
 
         Model = autographs.Any()
                 ? autographs.Select(autograph => new AutographModel(autograph))

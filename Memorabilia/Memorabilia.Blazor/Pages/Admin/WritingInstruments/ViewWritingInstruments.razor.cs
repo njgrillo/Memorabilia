@@ -10,6 +10,6 @@ public partial class ViewWritingInstruments
 
     protected override async Task OnInitializedAsync()
     {
-        Model = new WritingInstrumentsModel(await QueryRouter.Send(new GetWritingInstruments()));
+        Model = new WritingInstrumentsModel(await Mediator.Send(new GetWritingInstruments()));
     }
 }

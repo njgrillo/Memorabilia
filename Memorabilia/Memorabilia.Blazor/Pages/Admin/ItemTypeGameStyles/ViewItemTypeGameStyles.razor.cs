@@ -5,7 +5,7 @@ public partial class ViewItemTypeGameStyles
 {
     protected override async Task OnInitializedAsync()
     {
-        Model = new ItemTypeGameStylesModel(await QueryRouter.Send(new GetItemTypeGameStyles()));
+        Model = new ItemTypeGameStylesModel(await Mediator.Send(new GetItemTypeGameStyles()));
     }
 
     protected override async Task Delete(int id)
@@ -18,7 +18,7 @@ public partial class ViewItemTypeGameStyles
             IsDeleted = true
         };
 
-        await CommandRouter.Send(new SaveItemTypeGameStyle(editModel));
+        await Mediator.Send(new SaveItemTypeGameStyle(editModel));
 
         Model.ItemTypeGameStyles.Remove(deletedItem);
 

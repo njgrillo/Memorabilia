@@ -22,12 +22,12 @@ public abstract class ViewItem<TModel, TItemModel> : CommandQuery
 
     protected async Task OnLoad(IQuery<TModel> request)
     {
-        Model = await QueryRouter.Send(request);
+        Model = await Mediator.Send(request);
     }
 
     protected async Task Save(ICommand command)
     {
-        await CommandRouter.Send(command);
+        await Mediator.Send(command);
     }
 
     protected virtual async Task ShowDeleteConfirm(int id, string text)

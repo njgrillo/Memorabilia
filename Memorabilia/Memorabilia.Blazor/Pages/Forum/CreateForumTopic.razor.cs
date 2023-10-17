@@ -6,10 +6,10 @@ public partial class CreateForumTopic
     public IApplicationStateService ApplicationStateService { get; set; }
 
     [Inject]
-    public CommandRouter CommandRouter { get; set; }
+    public IDataProtectorService DataProtectorService { get; set; }
 
     [Inject]
-    public IDataProtectorService DataProtectorService { get; set; }
+    public IMediator Mediator { get; set; }
 
     [Inject]
     public NavigationManager NavigationManager { get; set; }
@@ -42,7 +42,7 @@ public partial class CreateForumTopic
         if (!EditModel.ValidationResult.IsValid)
             return;
 
-        await CommandRouter.Send(command);
+        await Mediator.Send(command);
 
         NavigationManager.NavigateTo($"{NavigationPath.ForumTopic}/{DataProtectorService.EncryptId(command.Id)}");
 

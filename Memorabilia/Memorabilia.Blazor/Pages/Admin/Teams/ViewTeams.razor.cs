@@ -5,7 +5,7 @@ public partial class ViewTeams
 {
     protected override async Task OnInitializedAsync()
     {
-        Model = new TeamsModel(await QueryRouter.Send(new GetTeams()));
+        Model = new TeamsModel(await Mediator.Send(new GetTeams()));
     }
 
     protected override async Task Delete(int id)
@@ -17,7 +17,7 @@ public partial class ViewTeams
             IsDeleted = true
         };
 
-        await CommandRouter.Send(new SaveTeam.Command(editModel));
+        await Mediator.Send(new SaveTeam.Command(editModel));
 
         Model.Teams.Remove(deletedItem);
 

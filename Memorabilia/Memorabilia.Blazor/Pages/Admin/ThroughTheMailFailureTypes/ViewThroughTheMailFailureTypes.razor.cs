@@ -10,6 +10,6 @@ public partial class ViewThroughTheMailFailureTypes
 
     protected override async Task OnInitializedAsync()
     {
-        Model = new ThroughTheMailFailureTypesModel(await QueryRouter.Send(new GetThroughTheMailFailureTypes()));
+        Model = new ThroughTheMailFailureTypesModel(await Mediator.Send(new GetThroughTheMailFailureTypes()));
     }
 }

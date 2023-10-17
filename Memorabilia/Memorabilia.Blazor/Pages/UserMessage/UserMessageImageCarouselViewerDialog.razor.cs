@@ -6,7 +6,7 @@ public partial class UserMessageImageCarouselViewerDialog
     public ImageService ImageService { get; set; }
 
     [Inject]
-    public QueryRouter QueryRouter { get; set; }
+    public IMediator Mediator { get; set; }
 
     [CascadingParameter]
     public MudDialogInstance MudDialog { get; set; }
@@ -22,7 +22,7 @@ public partial class UserMessageImageCarouselViewerDialog
     protected override async Task OnInitializedAsync()
     {
         Entity.UserMessageReply userMessageReply
-            = await QueryRouter.Send(new GetUserMessageReply(UserMessageReplyId));
+            = await Mediator.Send(new GetUserMessageReply(UserMessageReplyId));
 
         Images = userMessageReply.Images
                                  .Select(image => new UserMessageReplyImageModel(image))

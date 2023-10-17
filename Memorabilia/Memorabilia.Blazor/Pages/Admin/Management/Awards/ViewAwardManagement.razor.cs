@@ -1,9 +1,9 @@
 ﻿namespace Memorabilia.Blazor.Pages.Admin.Management.Awards;
 
 public partial class ViewAwardManagement
-{    
+{
     [Inject]
-    public QueryRouter QueryRouter { get; set; }
+    public IMediator Mediator { get; set; }
 
     private AwardManagementModel[] _completedAwards 
         = Array.Empty<AwardManagementModel>();
@@ -16,9 +16,10 @@ public partial class ViewAwardManagement
 
     protected override async Task OnInitializedAsync()
     {
-        AwardManagementModel[] awardManagements = (await QueryRouter.Send(new GetAllAwardManagements()))
-            .OrderBy(awardManagement => awardManagement.AwardType.Name)
-            .ToArray();
+        AwardManagementModel[] awardManagements 
+            = (await Mediator.Send(new GetAllAwardManagements()))
+                .OrderBy(awardManagement => awardManagement.AwardType.Name)
+                .ToArray();
 
         _completedAwards = awardManagements.Where(awardManagement => awardManagement.IsConfigured && !awardManagement.HasMissingYears)
                                            .ToArray();

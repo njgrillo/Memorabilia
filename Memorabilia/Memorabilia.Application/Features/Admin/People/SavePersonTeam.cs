@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Application.Features.Admin.People;
 
-[AuthorizeByRole(Enum.PermissionType.Admin)]
+[AuthorizeByRole(Enum.Role.Admin)]
 public class SavePersonTeam
 {
     public class Handler : CommandHandler<Command>

@@ -9,7 +9,7 @@ public partial class AccoladePersonEditor
     protected override async Task OnInitializedAsync()
     {
         PersonAccoladeModel model 
-            = new(await QueryRouter.Send(new GetPerson(PersonId)));
+            = new(await Mediator.Send(new GetPerson(PersonId)));
 
         EditModel = new PersonAccoladeEditModel(PersonId, model);
 

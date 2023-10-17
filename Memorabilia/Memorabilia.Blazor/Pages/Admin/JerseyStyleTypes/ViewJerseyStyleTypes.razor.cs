@@ -5,11 +5,11 @@ public partial class ViewJerseyStyleTypes
 {
     public async Task OnDelete(DomainEditModel editModel)
     {
-        await CommandRouter.Send(new SaveJerseyStyleType(editModel));
+        await Mediator.Send(new SaveJerseyStyleType(editModel));
     }
 
     protected override async Task OnInitializedAsync()
     {
-        Model = new JerseyStyleTypesModel(await QueryRouter.Send(new GetJerseyStyleTypes()));
+        Model = new JerseyStyleTypesModel(await Mediator.Send(new GetJerseyStyleTypes()));
     }
 }

@@ -10,6 +10,6 @@ public partial class ViewCerealTypes
 
     protected override async Task OnInitializedAsync()
     {
-        Model = new CerealTypesModel(await QueryRouter.Send(new GetCerealTypes()));
+        Model = new CerealTypesModel(await Mediator.Send(new GetCerealTypes()));
     }
 }

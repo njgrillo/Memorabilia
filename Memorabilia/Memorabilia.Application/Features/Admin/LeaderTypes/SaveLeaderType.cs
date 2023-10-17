@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Application.Features.Admin.LeaderTypes;
 
-[AuthorizeByRole(Enum.PermissionType.Admin)]
+[AuthorizeByRole(Enum.Role.Admin)]
 public record SaveLeaderType(DomainEditModel LeaderType) : ICommand
 {
     public class Handler : CommandHandler<SaveLeaderType>

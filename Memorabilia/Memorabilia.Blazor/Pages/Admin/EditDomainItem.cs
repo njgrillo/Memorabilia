@@ -33,7 +33,7 @@ public abstract class EditDomainItem<T>
         if (Id == 0)
             return;
 
-        EditModel = new DomainEditModel(new DomainModel(await QueryRouter.Send(request)),
+        EditModel = new DomainEditModel(new DomainModel(await Mediator.Send(request)),
                                         DomainTypeName,
                                         ImageFileName,
                                         NavigationPath);
@@ -41,7 +41,7 @@ public abstract class EditDomainItem<T>
 
     protected async Task OnLoad(IRequest<DomainModel> request)
     {
-        EditModel = new DomainEditModel(await QueryRouter.Send(request),
+        EditModel = new DomainEditModel(await Mediator.Send(request),
                                         DomainTypeName,
                                         ImageFileName,
                                         NavigationPath);
@@ -49,6 +49,6 @@ public abstract class EditDomainItem<T>
 
     protected async Task OnSave(ICommand command)
     {
-        await CommandRouter.Send(command);
+        await Mediator.Send(command);
     }
 }

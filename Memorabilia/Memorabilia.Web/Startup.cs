@@ -1,3 +1,6 @@
+using Memorabilia.Application.Models.Payments.Stripe;
+using Memorabilia.Application.Models.Site;
+
 namespace Memorabilia.Web;
 
 public class Startup
@@ -9,20 +12,17 @@ public class Startup
 
     public IConfiguration Configuration { get; }
 
-    // This method gets called by the runtime. Use this method to add services to the container.
-    // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
     public void ConfigureServices(IServiceCollection services)
     {
         services.AddDataProtection()
                 .SetApplicationName("Memorabilia")
-                .SetDefaultKeyLifetime(TimeSpan.FromDays(180));        
+                .SetDefaultKeyLifetime(TimeSpan.FromDays(180));                
 
-        var imagePath = new ImagePath();
-        Configuration.GetSection("ImagePaths").Bind(imagePath);
+        services.AddCourier(typeof(GetCommissioner).Assembly);
 
-        services.AddSingleton<IImagePath>(imagePath);
-
+        services.AddShared(Configuration);
         services.AddCustomAuthentication(Configuration);
+        services.AddPayments(Configuration);
         services.ConfigureHangfire(Configuration);
 
         services.AddAuthenticationCore();
@@ -34,42 +34,14 @@ public class Startup
         services.AddServerSideBlazor();
         services.AddDbContext<MemorabiliaContext>(options => options.UseSqlServer("name=ConnectionStrings:Memorabilia"), ServiceLifetime.Transient);
         services.AddDbContext<DomainContext>(options => options.UseSqlServer("name=ConnectionStrings:Memorabilia"), ServiceLifetime.Transient);
-        services.AddTransient<CommandRouter>();
-        services.AddTransient<QueryRouter>();
         services.AddMediatR(typeof(GetCommissioner).Assembly);
         services.AddDataProtection();
         services.RegisterValidators();
         services.RegisterFactories();
         services.RegisterServices();
         services.RegisterCachedRepositories();
-
-        services.AddTransient(typeof(IPipelineBehavior<,>), typeof(AuthorizationBehavior<,>));
-
-        var developerSettings = new DeveloperSettings();
-        Configuration.GetSection("DeveloperSettings").Bind(developerSettings);
-
-        if (!developerSettings.EncryptIds)
-        {
-            services.AddScoped<IDataProtectorService, DataProtectorDebugService>();
-        }
-        else
-        {
-            services.AddScoped<IDataProtectorService, DataProtectorService>();
-        }
-
-        services.AddScoped<ILoginProviderRuleFactory, LoginProviderRuleFactory>();
-
-        var emailSettings = new EmailSettings();
-        Configuration.GetSection("EmailSettings").Bind(emailSettings);
-
-        services.AddSingleton<IEmailSettings>(emailSettings);
-
-        services.AddSingleton<EmailService>();
-        services.AddSingleton<LoginProviderService>();
-
-        services.AddCourier(typeof(GetCommissioner).Assembly);
-        
-        services.AddSingleton<ImageService>();             
+        services.AddPipelines();
+        services.AddServices(Configuration); 
 
         services
             .AddServerSideBlazor()
@@ -91,7 +63,6 @@ public class Startup
         });
     }
 
-    // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
     {
         if (env.IsDevelopment())

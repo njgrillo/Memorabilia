@@ -12,7 +12,7 @@ public class UsernameAutoComplete : NamedEntityAutoComplete<UserModel>
 
     private async Task LoadItems()
     {
-        Entity.User[] users = await QueryRouter.Send(new GetUsers());
+        Entity.User[] users = await Mediator.Send(new GetUsers());
 
         Items = users.Select(user => new UserModel(user));
     }

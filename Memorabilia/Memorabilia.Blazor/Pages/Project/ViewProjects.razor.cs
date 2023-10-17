@@ -3,16 +3,13 @@
 public partial class ViewProjects
 {
     [Inject]
-    public CommandRouter CommandRouter { get; set; }
-
-    [Inject]
     public IDataProtectorService DataProtectorService { get; set; }
 
     [Inject]
     public IDialogService DialogService { get; set; }
 
     [Inject]
-    public QueryRouter QueryRouter { get; set; }
+    public IMediator Mediator { get; set; }
 
     [Inject]
     public ISnackbar Snackbar { get; set; }
@@ -22,7 +19,7 @@ public partial class ViewProjects
 
     protected override async Task OnInitializedAsync()
     {
-        Model = new ProjectsModel(await QueryRouter.Send(new GetProjects()));
+        Model = new ProjectsModel(await Mediator.Send(new GetProjects()));
     }
 
     protected async Task ShowDeleteConfirm(int id)
@@ -45,7 +42,7 @@ public partial class ViewProjects
             IsDeleted = true
         };
 
-        await CommandRouter.Send(new SaveProject.Command(editModel));
+        await Mediator.Send(new SaveProject.Command(editModel));
 
         Model.Projects.Remove(deletedItem);
 

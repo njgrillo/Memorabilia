@@ -3,13 +3,10 @@
 public partial class AwardManagementEditor
 {
     [Inject]
-    public CommandRouter CommandRouter { get; set; }
-
-    [Inject]
     public IJSRuntime JSRuntime { get; set; }
 
     [Inject]
-    public QueryRouter QueryRouter { get; set; }
+    public IMediator Mediator { get; set; }
 
     [Inject]
     public ISnackbar Snackbar { get; set; }
@@ -54,7 +51,7 @@ public partial class AwardManagementEditor
         if (!EditModel.ValidationResult.IsValid)
             return;
 
-        await CommandRouter.Send(command);
+        await Mediator.Send(command);
 
         Snackbar.Add("Award Detail was saved successfully!", Severity.Success);
 
@@ -66,7 +63,7 @@ public partial class AwardManagementEditor
         if (AwardTypeId == 0)
             return;
 
-        Entity.AwardDetail awardDetail = await QueryRouter.Send(new GetAwardManagement(AwardTypeId));
+        Entity.AwardDetail awardDetail = await Mediator.Send(new GetAwardManagement(AwardTypeId));
 
         if (awardDetail == null)
         {

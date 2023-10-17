@@ -8,7 +8,7 @@ public partial class PositionEditor
         if (Id == 0)
             return;
 
-        EditModel = (await QueryRouter.Send(new GetPosition(Id))).ToEditModel();
+        EditModel = (await Mediator.Send(new GetPosition(Id))).ToEditModel();
     }
 
     protected async Task Save()

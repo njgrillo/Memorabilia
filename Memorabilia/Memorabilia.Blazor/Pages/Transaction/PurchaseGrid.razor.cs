@@ -9,10 +9,10 @@ public partial class PurchaseGrid
     public ImageService ImageService { get; set; }
 
     [Inject]
-    public NavigationManager NavigationManager { get; set; }
+    public IMediator Mediator { get; set; }
 
     [Inject]
-    public QueryRouter QueryRouter { get; set; }
+    public NavigationManager NavigationManager { get; set; }
 
     [Parameter]
     public List<PurchaseMemorabiliaModel> DisplayItems { get; set; }
@@ -47,8 +47,8 @@ public partial class PurchaseGrid
         var pageInfo = new PageInfo(_resetPaging ? 1 : state.Page + 1, state.PageSize);
 
         Model = Filter != null
-            ? await QueryRouter.Send(new GetPurchaseMemorabiliaItemsPaged(pageInfo, Filter))
-            : await QueryRouter.Send(new GetPurchaseMemorabiliaItemsPaged(pageInfo));
+            ? await Mediator.Send(new GetPurchaseMemorabiliaItemsPaged(pageInfo, Filter))
+            : await Mediator.Send(new GetPurchaseMemorabiliaItemsPaged(pageInfo));
 
         return new TableData<PurchaseMemorabiliaModel>()
         {

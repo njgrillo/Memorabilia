@@ -6,10 +6,10 @@ public partial class UserMessageSentGrid
     public IDataProtectorService DataProtectorService { get; set; }
 
     [Inject]
-    public NavigationManager NavigationManager { get; set; }
+    public IMediator Mediator { get; set; }
 
     [Inject]
-    public QueryRouter QueryRouter { get; set; }
+    public NavigationManager NavigationManager { get; set; }
 
     [Parameter]
     public string SearchText { get; set; }
@@ -54,8 +54,8 @@ public partial class UserMessageSentGrid
             : new PageInfo(_resetPaging ? 1 : state.Page + 1, state.PageSize);
 
         Model = _isInitialLoad
-            ? await QueryRouter.Send(new GetUserMessagesSent(pageInfo))
-            : await QueryRouter.Send(new SearchUserMessagesSent(pageInfo, SearchText));
+            ? await Mediator.Send(new GetUserMessagesSent(pageInfo))
+            : await Mediator.Send(new SearchUserMessagesSent(pageInfo, SearchText));
 
         _isInitialLoad = false;
 

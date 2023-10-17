@@ -9,13 +9,18 @@ public partial class Default
     public AuthenticationStateProvider AuthenticationStateProvider { get; set; }
 
     [Inject]
+    public ICourier Courier { get; set; }
+
+    [Inject]
     public LoginProviderService LoginProviderService { get; set; }
 
     [Inject]
     public NavigationManager NavigationManager { get; set; }
 
     protected override async Task OnInitializedAsync()
-    {    
+    {
+        Courier.Subscribe<UserSubscriptionChangedNotification>(OnSubscriptionChanged);
+
         if (ApplicationStateService.CurrentUser != null)
             return;
 
@@ -54,5 +59,24 @@ public partial class Default
         }
 
         NavigationManager.NavigateTo("Home");
+    }
+
+    public async Task OnSubscriptionChanged(UserSubscriptionChangedNotification notification)
+    {
+        AuthenticationState state
+            = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+
+        bool isAuthenticated = state.User.Identities.FirstOrDefault()?.IsAuthenticated ?? false;
+
+        if (!isAuthenticated)
+            return;
+
+        Entity.User user
+            = await LoginProviderService.GetUser(state, ApplicationStateService.Provider);
+
+        if (user == null)
+            return;
+
+        ApplicationStateService.Set(user);
     }
 }

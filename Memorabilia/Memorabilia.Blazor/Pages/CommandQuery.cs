@@ -3,8 +3,5 @@
 public abstract class CommandQuery : NavigationItem
 {
     [Inject]
-    public CommandRouter CommandRouter { get; set; }
-
-    [Inject]
-    public QueryRouter QueryRouter { get; set; }
+    public IMediator Mediator { get; set; }
 }

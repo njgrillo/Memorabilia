@@ -2,8 +2,8 @@
 
 public partial class ForumEntryImages
 {
-    [Inject]
-    public QueryRouter QueryRouter { get; set; }
+    [Parameter]
+    public bool CanDelete { get; set; }
 
     [Parameter]
     public EventCallback ImageDeleted { get; set; }

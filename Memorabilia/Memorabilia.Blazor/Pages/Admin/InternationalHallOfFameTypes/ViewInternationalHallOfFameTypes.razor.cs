@@ -5,11 +5,11 @@ public partial class ViewInternationalHallOfFameTypes
 {
     public async Task OnDelete(DomainEditModel editModel)
     {
-        await CommandRouter.Send(new SaveInternationalHallOfFameType(editModel));
+        await Mediator.Send(new SaveInternationalHallOfFameType(editModel));
     }
 
     protected override async Task OnInitializedAsync()
     {
-        Model = new InternationalHallOfFameTypesModel(await QueryRouter.Send(new GetInternationalHallOfFameTypes()));
+        Model = new InternationalHallOfFameTypesModel(await Mediator.Send(new GetInternationalHallOfFameTypes()));
     }
 }

@@ -3,7 +3,7 @@
 public class Get
     //: RequestHandler<AwardRequest>, IRequestHandler<AwardRequest, IResult>
 {
-    //public Get(QueryRouter queryRouter) : base(queryRouter) { }
+    //public Get(IMediator mediator) : base(mediator) {}
 
     //public override async Task<IResult> Handle(AwardRequest request,
     //                                           CancellationToken cancellationToken)

@@ -6,7 +6,7 @@ public partial class SelectAutographDialog
     public ImageService ImageService { get; set; }
 
     [Inject]
-    public QueryRouter QueryRouter { get; set; }
+    public IMediator Mediator { get; set; }
 
     [CascadingParameter] 
     public MudDialogInstance MudDialog { get; set; }
@@ -30,7 +30,7 @@ public partial class SelectAutographDialog
         if (MemorabiliaId == 0 || (_loaded && MemorabiliaId == _memorabiliaId))
             return;
 
-        Model = new SelectMemorabiliaItemModel(await QueryRouter.Send(new GetSelectMemorabiliaItem(MemorabiliaId)));
+        Model = new SelectMemorabiliaItemModel(await Mediator.Send(new GetSelectMemorabiliaItem(MemorabiliaId)));
 
         _loaded = true;
         _memorabiliaId = MemorabiliaId;

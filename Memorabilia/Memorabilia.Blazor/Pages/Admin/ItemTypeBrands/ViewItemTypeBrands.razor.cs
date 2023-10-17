@@ -5,7 +5,7 @@ public partial class ViewItemTypeBrands
 {
     protected override async Task OnInitializedAsync()
     {
-        Model = new ItemTypeBrandsModel(await QueryRouter.Send(new GetItemTypeBrands()));
+        Model = new ItemTypeBrandsModel(await Mediator.Send(new GetItemTypeBrands()));
     }
 
     protected override async Task Delete(int id)

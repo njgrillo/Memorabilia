@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Application.Features.Admin.HelmetTypes;
 
-[AuthorizeByRole(Enum.PermissionType.Admin)]
+[AuthorizeByRole(Enum.Role.Admin)]
 public record SaveHelmetType(DomainEditModel HelmetType) : ICommand
 {
     public class Handler : CommandHandler<SaveHelmetType>

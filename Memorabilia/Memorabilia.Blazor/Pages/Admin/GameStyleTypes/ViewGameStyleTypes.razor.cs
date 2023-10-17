@@ -5,11 +5,11 @@ public partial class ViewGameStyleTypes
 {
     public async Task OnDelete(DomainEditModel editModel)
     {
-        await CommandRouter.Send(new SaveGameStyleType(editModel));
+        await Mediator.Send(new SaveGameStyleType(editModel));
     }
 
     protected override async Task OnInitializedAsync()
     {
-        Model = new GameStyleTypesModel(await QueryRouter.Send(new GetGameStyleTypes()));
+        Model = new GameStyleTypesModel(await Mediator.Send(new GetGameStyleTypes()));
     }
 }

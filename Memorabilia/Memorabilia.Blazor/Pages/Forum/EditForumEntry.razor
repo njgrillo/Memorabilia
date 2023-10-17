@@ -1,4 +1,6 @@
-﻿<MudExpansionPanel IsExpanded="true"
+﻿@inherits ReroutePage
+
+<MudExpansionPanel IsExpanded="true"
                    Text="@(ForumEntry.ModifiedDate?.ToString("dddd, MMMM dd, yyyy hh:mm:ss tt") ?? ForumEntry.CreatedDate.ToString("dddd, MMMM dd, yyyy hh:mm:ss tt"))">
     <LeftRightSection LeftStyle="width:20%;"
                       RightStyle="width:80%;">
@@ -33,7 +35,8 @@
                 </Div>                
                 <Condition Evaluation="@(ForumEntry.Images.Any())">
                     <Match>
-                        <ForumEntryImages ImageDeleted="OnImageDeleted" 
+                        <ForumEntryImages CanDelete="CanEdit"
+                                          ImageDeleted="OnImageDeleted" 
                                           Images="ForumEntry.Images" />
                     </Match>
                 </Condition>

@@ -6,9 +6,6 @@ public partial class ProposeTradeEditor
     public IApplicationStateService ApplicationStateService { get; set; }
 
     [Inject]
-    public CommandRouter CommandRouter { get; set; }
-
-    [Inject]
     public IDataProtectorService DataProtectorService { get; set; }
 
     [Inject]
@@ -151,7 +148,7 @@ public partial class ProposeTradeEditor
 
     protected async Task OnCounter()
     {
-        await CommandRouter.Send(new UpdateProposeTradeStatus(EditModel.Id,
+        await Mediator.Send(new UpdateProposeTradeStatus(EditModel.Id,
                                                               ProposeTradeStatusType.Countered));
 
         EditModel.Id = 0;
@@ -174,7 +171,7 @@ public partial class ProposeTradeEditor
         if (!EditModel.ValidationResult.IsValid)
             return;
 
-        await CommandRouter.Send(command);
+        await Mediator.Send(command);
 
         Snackbar.Add("Trade proposal sent!", Severity.Success);
 
@@ -192,7 +189,7 @@ public partial class ProposeTradeEditor
 
     private async Task UpdateTradeStatus(ProposeTradeStatusType proposeTradeStatusType)
     {
-        await CommandRouter.Send(new UpdateProposeTradeStatus(EditModel.Id,
+        await Mediator.Send(new UpdateProposeTradeStatus(EditModel.Id,
                                                               proposeTradeStatusType));
 
         string subject

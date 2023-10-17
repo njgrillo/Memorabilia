@@ -1,5 +1,6 @@
 ﻿namespace Memorabilia.Application.Features.Collection;
 
+[AuthorizeByPermission(Enum.Permission.Collection)]
 public record GetCollectionMemorabiliaGalleryItems(int CollectionId, 
                                                    PageInfo PageInfo, 
                                                    MemorabiliaSearchCriteria Filter = null)

@@ -3,13 +3,13 @@
 public class GetAll
     : RequestHandler<HelmetFinishesRequest>, IRequestHandler<HelmetFinishesRequest, IResult>
 {
-    public GetAll(QueryRouter queryRouter) : base(queryRouter) { }
+    public GetAll(IMediator mediator) : base(mediator) {}
 
     public override async Task<IResult> Handle(HelmetFinishesRequest request,
                                                CancellationToken cancellationToken)
     {
         var response
-            = new Response<Entity.DomainEntity[]>(await QueryRouter.Send(new GetHelmetFinishes()));
+            = new Response<Entity.DomainEntity[]>(await Mediator.Send(new GetHelmetFinishes()));
 
         return Results.Ok(response);
     }

@@ -134,6 +134,9 @@ public static class ImageFileName
     public static string Google
         => "google.jpg";
 
+    public static string GreenCheckmark
+        => "greencheckmark.jpg";
+
     public static string Guitar 
         => "guitar.jpg";
 
@@ -172,6 +175,9 @@ public static class ImageFileName
 
     public static string IndexCard 
         => "indexcard.jpg";
+
+    public static string Information
+        => "information.jpg";
 
     public static string InscriptionTypes 
         => "inscriptiontypes.jpg";
@@ -274,6 +280,9 @@ public static class ImageFileName
 
     public static string RecordTypes 
         => "recordtypes.jpg";
+
+    public static string RedX
+        => "redx.jpg";
 
     public static string Shirt 
         => "shirt.jpg";

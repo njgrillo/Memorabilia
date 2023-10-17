@@ -5,7 +5,7 @@ public partial class ItemTypeGameStyleEditor
 {
     protected override async Task OnInitializedAsync()
     {
-        EditModel = (await QueryRouter.Send(new GetItemTypeGameStyle(Id))).ToEditModel();
+        EditModel = (await Mediator.Send(new GetItemTypeGameStyle(Id))).ToEditModel();
     }
 
     protected async Task Save()

@@ -1,4 +1,4 @@
-﻿namespace Memorabilia.Web.Controls;
+﻿namespace Memorabilia.Blazor.Controls.Login;
 
 public partial class LoginRegisterControl
 {

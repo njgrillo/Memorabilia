@@ -3,9 +3,9 @@
 public class Get
     : RequestHandler<InternationalHallOfFameTypeRequest>, IRequestHandler<InternationalHallOfFameTypeRequest, IResult>
 {
-    public Get(QueryRouter queryRouter) : base(queryRouter) { }
+    public Get(IMediator mediator) : base(mediator) {}
 
     public override async Task<IResult> Handle(InternationalHallOfFameTypeRequest request,
                                                CancellationToken cancellationToken)
-        => Results.Ok(new Response<Entity.DomainEntity>(await QueryRouter.Send(new GetInternationalHallOfFameType(request.Id))));
+        => Results.Ok(new Response<Entity.DomainEntity>(await Mediator.Send(new GetInternationalHallOfFameType(request.Id))));
 }

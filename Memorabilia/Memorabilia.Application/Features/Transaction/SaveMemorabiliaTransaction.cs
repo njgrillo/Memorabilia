@@ -1,5 +1,6 @@
 ﻿namespace Memorabilia.Application.Features.Transaction;
 
+[AuthorizeByPermission(Enum.Permission.Memorabilia)]
 public class SaveMemorabiliaTransaction
 {
     public class Handler : CommandHandler<Command>

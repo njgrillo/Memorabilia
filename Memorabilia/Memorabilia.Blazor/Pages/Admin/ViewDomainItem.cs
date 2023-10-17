@@ -8,11 +8,11 @@ public abstract class ViewDomainItem<T>
 
     protected async Task OnDelete(ICommand command)
     {
-        await CommandRouter.Send(command);
+        await Mediator.Send(command);
     }
 
     protected async Task OnLoad(IQuery<T> request)
     {
-        Model = await QueryRouter.Send(request);
+        Model = await Mediator.Send(request);
     }
 }

@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Application.Features.Admin.ChampionTypes;
 
-[AuthorizeByRole(Enum.PermissionType.Admin)]
+[AuthorizeByRole(Enum.Role.Admin)]
 public record SaveChampionType(DomainEditModel ChampionType) : ICommand
 {
     public class Handler : CommandHandler<SaveChampionType>

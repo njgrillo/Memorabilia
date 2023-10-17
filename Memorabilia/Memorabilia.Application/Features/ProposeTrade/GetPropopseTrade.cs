@@ -1,5 +1,6 @@
 ﻿namespace Memorabilia.Application.Features.ProposeTrade;
 
+[AuthorizeByPermission(Enum.Permission.BuySellTrade)]
 public record GetPropopseTrade(int Id) : IQuery<Entity.ProposeTrade>
 {
     public class Handler : QueryHandler<GetPropopseTrade, Entity.ProposeTrade>

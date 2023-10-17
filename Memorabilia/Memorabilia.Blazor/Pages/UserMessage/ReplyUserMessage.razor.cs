@@ -6,9 +6,6 @@ public partial class ReplyUserMessage
     public IApplicationStateService ApplicationStateService { get; set; }
 
     [Inject]
-    public CommandRouter CommandRouter { get; set; }
-
-    [Inject]
     public IDataProtectorService DataProtectorService { get; set; }
 
     [Inject]
@@ -18,10 +15,10 @@ public partial class ReplyUserMessage
     public ImageService ImageService { get; set; }
 
     [Inject]
-    public NavigationManager NavigationManager { get; set; }
+    public IMediator Mediator { get; set; }
 
     [Inject]
-    public QueryRouter QueryRouter { get; set; }
+    public NavigationManager NavigationManager { get; set; }
 
     [Inject]
     public ISnackbar Snackbar { get; set; }
@@ -52,13 +49,13 @@ public partial class ReplyUserMessage
         UserMessageReplyId = DataProtectorService.DecryptId(EncryptUserMessageReplyId);
 
         Entity.UserMessageReply userMessageReply
-            = await QueryRouter.Send(new GetUserMessageReply(UserMessageReplyId));
+            = await Mediator.Send(new GetUserMessageReply(UserMessageReplyId));
 
         UserMessageReplyModel
             = new UserMessageReplyModel(userMessageReply);
 
         Entity.UserMessage userMessage
-            = await QueryRouter.Send(new GetUserMessage(userMessageReply.UserMessageId));        
+            = await Mediator.Send(new GetUserMessage(userMessageReply.UserMessageId));        
 
         EditModel = new(userMessage, ApplicationStateService.CurrentUser, UserMessageReplyModel.SenderUser);
 
@@ -115,7 +112,7 @@ public partial class ReplyUserMessage
         if (!EditModel.ValidationResult.IsValid)
             return;
 
-        await CommandRouter.Send(command);
+        await Mediator.Send(command);
 
         Snackbar.Add("Message sent successfully!", Severity.Success);
 

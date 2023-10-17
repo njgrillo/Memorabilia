@@ -36,8 +36,8 @@ public class TeamAutoComplete
     private async Task LoadItems()
     {
         Entity.Team[] teams 
-            = await QueryRouter.Send(new GetTeams(SportLeagueLevelId: SportLeagueLevel?.Id, 
-                                                  SportId: Sport?.Id));
+            = await Mediator.Send(new GetTeams(SportLeagueLevelId: SportLeagueLevel?.Id, 
+                                               SportId: Sport?.Id));
 
         Items = teams.Select(team => new TeamEditModel(new TeamModel(team)));
     }

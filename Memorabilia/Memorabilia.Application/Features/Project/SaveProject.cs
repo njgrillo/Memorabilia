@@ -1,5 +1,6 @@
 ﻿namespace Memorabilia.Application.Features.Project;
 
+[AuthorizeByPermission(Enum.Permission.Project)]
 public class SaveProject
 {
     public class Handler : CommandHandler<Command>

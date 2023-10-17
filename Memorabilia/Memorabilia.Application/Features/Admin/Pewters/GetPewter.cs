@@ -1,6 +1,5 @@
 ﻿namespace Memorabilia.Application.Features.Admin.Pewters;
 
-[AuthorizeByRole(Enum.PermissionType.Admin)]
 public record GetPewter(int Id) : IQuery<Entity.Pewter>
 {
     public class Handler : QueryHandler<GetPewter, Entity.Pewter>

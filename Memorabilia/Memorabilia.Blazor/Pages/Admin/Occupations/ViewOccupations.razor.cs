@@ -10,6 +10,6 @@ public partial class ViewOccupations
 
     protected override async Task OnInitializedAsync()
     {
-        Model = new OccupationsModel(await QueryRouter.Send(new GetOccupations()));
+        Model = new OccupationsModel(await Mediator.Send(new GetOccupations()));
     }
 }

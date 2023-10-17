@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Application.Features.Admin.FootballTypes;
 
-[AuthorizeByRole(Enum.PermissionType.Admin)]
+[AuthorizeByRole(Enum.Role.Admin)]
 public record SaveFootballType(DomainEditModel FootballType) : ICommand
 {
     public class Handler : CommandHandler<SaveFootballType>

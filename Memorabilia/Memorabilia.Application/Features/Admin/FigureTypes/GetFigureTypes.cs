@@ -1,6 +1,5 @@
 ﻿namespace Memorabilia.Application.Features.Admin.FigureTypes;
 
-[AuthorizeByRole(Enum.PermissionType.Admin)]
 public record GetFigureTypes() : IQuery<Entity.FigureType[]>
 {
     public class Handler : QueryHandler<GetFigureTypes, Entity.FigureType[]>

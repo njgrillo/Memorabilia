@@ -1,6 +1,5 @@
 ﻿namespace Memorabilia.Application.Features.Admin.ProjectStatusTypes;
 
-[AuthorizeByRole(Enum.PermissionType.Admin)]
 public record GetProjectStatusType(int Id) : IQuery<Entity.DomainEntity>
 {
     public class Handler : QueryHandler<GetProjectStatusType, Entity.DomainEntity>

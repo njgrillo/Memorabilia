@@ -1,25 +1,23 @@
 ﻿namespace Memorabilia.Blazor.Pages.SignatureIdentification;
 
-public partial class ViewSignatureIdentifications
+public partial class ViewSignatureIdentifications : ReroutePage
 {
     [Inject]
     public IDataProtectorService DataProtectorService { get; set; }
 
     [Inject]
-    public IDialogService DialogService { get; set; }
-
-    [Inject]
     public ImageService ImageService { get; set; }
 
     [Inject]
-    public NavigationManager NavigationManager { get; set; }    
+    public IMediator Mediator { get; set; }
 
     [Inject]
-    public QueryRouter QueryRouter { get; set; }
+    public NavigationManager NavigationManager { get; set; }  
 
     protected SignatureIdentificationsModel Model
         = new();
 
+    private bool _canInteract;
     private bool _resetPaging;
 
     private MudTable<SignatureIdentificationModel> _table
@@ -27,6 +25,10 @@ public partial class ViewSignatureIdentifications
 
     protected override async Task OnInitializedAsync()
     {
+        _canInteract
+            = ApplicationStateService.CurrentUser != null &&
+              ApplicationStateService.CurrentUser.HasPermission(Permission.EditSignatureIdentification);
+
         _resetPaging = true;
 
         await _table.ReloadServerData();
@@ -56,7 +58,7 @@ public partial class ViewSignatureIdentifications
     {
         var pageInfo = new PageInfo(_resetPaging ? 1 : state.Page + 1, state.PageSize);
 
-        Model = await QueryRouter.Send(new GetSignatureIdentifications(pageInfo));
+        Model = await Mediator.Send(new GetSignatureIdentifications(pageInfo));
 
         return new TableData<SignatureIdentificationModel>()
         {
@@ -67,8 +69,14 @@ public partial class ViewSignatureIdentifications
 
     protected async Task Random()
     {
+        if (!_canInteract)
+        {
+            await ShowMembershipDialog();
+            return;
+        }
+
         Entity.SignatureIdentification signatureIdentification 
-            = await QueryRouter.Send(new GetRandomSignatureIdentfication());
+            = await Mediator.Send(new GetRandomSignatureIdentfication());
 
         NavigationManager.NavigateTo($"{NavigationPath.SignatureIdentification}/{DataProtectorService.EncryptId(signatureIdentification.Id)}");
     }
@@ -82,5 +90,16 @@ public partial class ViewSignatureIdentifications
         signatureIdentification.ToggleIcon = signatureIdentification.DisplayDetails
             ? Icons.Material.Filled.ExpandLess
             : Icons.Material.Filled.ExpandMore;
+    }
+
+    private async Task View(int signatureIdentificationId)
+    {
+        if (!_canInteract)
+        {
+            await ShowMembershipDialog();
+            return;
+        }
+
+        NavigationManager.NavigateTo($"{NavigationPath.SignatureIdentification}/{DataProtectorService.EncryptId(signatureIdentificationId)}");
     }
 }

@@ -10,7 +10,7 @@
 
         protected override async Task OnInitializedAsync()
         {
-            Model = new PurchaseTypesModel(await QueryRouter.Send(new GetPurchaseTypes()));
+            Model = new PurchaseTypesModel(await Mediator.Send(new GetPurchaseTypes()));
         }
     }
 }

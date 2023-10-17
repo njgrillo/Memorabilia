@@ -1,6 +1,5 @@
 ﻿namespace Memorabilia.Application.Features.Admin.LeaguePresidents;
 
-[AuthorizeByRole(Enum.PermissionType.Admin)]
 public record GetLeaguePresident(int Id) : IQuery<Entity.LeaguePresident>
 {
     public class Handler : QueryHandler<GetLeaguePresident, Entity.LeaguePresident>

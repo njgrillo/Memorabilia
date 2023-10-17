@@ -7,7 +7,7 @@ public partial class ContextLoader : CommandQuery
 
     protected override async Task OnInitializedAsync()
     {
-        await CommandRouter.Send(new InitializeContext());
+        await Mediator.Send(new InitializeContext());
 
         _displaySpinner = false;
     }

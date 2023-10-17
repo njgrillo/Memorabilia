@@ -9,7 +9,7 @@ public partial class MemorabiliaThroughTheMailGrid
     public ImageService ImageService { get; set; }
 
     [Inject]
-    public QueryRouter QueryRouter { get; set; }
+    public IMediator Mediator { get; set; }
 
     [Parameter]
     public int[] ThroughTheMailIds { get; set; }
@@ -23,7 +23,8 @@ public partial class MemorabiliaThroughTheMailGrid
         if (!ThroughTheMailIds.Any())
             return;
 
-        Entity.ThroughTheMail[] throughTheMails = await QueryRouter.Send(new GetThroughTheMails(ThroughTheMailIds));
+        Entity.ThroughTheMail[] throughTheMails 
+            = await Mediator.Send(new GetThroughTheMails(ThroughTheMailIds));
 
         Items = throughTheMails.Select(item => new ThroughTheMailModel(item))
                                .ToArray();

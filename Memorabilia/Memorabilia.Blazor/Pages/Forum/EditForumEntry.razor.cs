@@ -1,24 +1,12 @@
 ﻿namespace Memorabilia.Blazor.Pages.Forum;
 
-public partial class EditForumEntry
+public partial class EditForumEntry : ReroutePage
 {
-    [Inject]
-    public IApplicationStateService ApplicationStateService { get; set; }
-
-    [Inject]
-    public CommandRouter CommandRouter { get; set; }
-
-    [Inject]
-    public IDialogService DialogService { get; set; }
-
     [Inject]
     public ImageService ImageService { get; set; }
 
     [Inject]
-    public ILogger<EditForumEntry> Logger { get; set; }
-
-    [Inject]
-    public QueryRouter QueryRouter { get; set; }
+    public IMediator Mediator { get; set; }
 
     [Inject]
     public ISnackbar Snackbar { get; set; }
@@ -35,12 +23,24 @@ public partial class EditForumEntry
 
     protected bool EditMode { get; set; }
 
+    private bool _canInteract;
     private string _upvoteButtonText;
 
     protected override void OnParametersSet()
     {
-        CanAttach = ForumEntry.Images.Count < 3;
-        CanEdit = ForumEntry.CreatedByUserId == ApplicationStateService.CurrentUser.Id;
+        _canInteract
+           = ApplicationStateService.CurrentUser != null &&
+             ApplicationStateService.CurrentUser.HasPermission(Permission.EditForum);
+
+        CanAttach = ApplicationStateService.CurrentUser != null &&
+                    ForumEntry.CreatedByUserId == ApplicationStateService.CurrentUser.Id &&
+                    ForumEntry.Images.Count < 3;       
+
+        CanEdit = ApplicationStateService.CurrentUser != null &&
+                  ForumEntry.CreatedByUserId == ApplicationStateService.CurrentUser.Id;
+
+        if (!_canInteract)
+            return;
 
         _upvoteButtonText
             = ForumEntry.RankedUsers.Any(rankedUser => rankedUser.UserId == ApplicationStateService.CurrentUser.Id)
@@ -50,6 +50,12 @@ public partial class EditForumEntry
 
     protected async Task AddImages()
     {
+        if (!_canInteract)
+        {
+            await ShowMembershipDialog();
+            return;
+        }
+
         var parameters = new DialogParameters
         {
             ["MaximumImagesAllowed"] = 3 - ForumEntry.Images.Count
@@ -87,13 +93,15 @@ public partial class EditForumEntry
 
         var command = new AddForumEntryImages(ForumEntry.Id, images.ToArray());
 
-        await CommandRouter.Send(command);
+        await Mediator.Send(command);
 
-        Entity.ForumEntry forumEntry = await QueryRouter.Send(new GetForumEntry(ForumEntry.Id));
+        Entity.ForumEntry forumEntry = await Mediator.Send(new GetForumEntry(ForumEntry.Id));
 
         ForumEntry = new(forumEntry);
 
-        CanAttach = ForumEntry.Images.Count < 3;
+        CanAttach = ApplicationStateService.CurrentUser != null &&
+                    ForumEntry.CreatedByUserId == ApplicationStateService.CurrentUser.Id &&
+                    ForumEntry.Images.Count < 3;
 
         Snackbar.Add("Forum Entry Image(s) saved successfully!", Severity.Success);
     }
@@ -105,7 +113,7 @@ public partial class EditForumEntry
 
         var command = new SaveForumEntry(ForumEntry.Id, ForumEntry.Message);
 
-        await CommandRouter.Send(command);
+        await Mediator.Send(command);
 
         Snackbar.Add("Forum Entry saved successfully!", Severity.Success);
 
@@ -124,10 +132,16 @@ public partial class EditForumEntry
 
     protected async Task UpdateRank()
     {
+        if (!_canInteract)
+        {
+            await ShowMembershipDialog();
+            return;
+        }
+
         bool isUpvote
             = !ForumEntry.RankedUsers.Any(rankedUser => rankedUser.UserId == ApplicationStateService.CurrentUser.Id);
 
-        await CommandRouter.Send(new UpdateForumEntryRank(ForumEntry.Id, 
+        await Mediator.Send(new UpdateForumEntryRank(ForumEntry.Id, 
                                                           ApplicationStateService.CurrentUser.Id, 
                                                           isUpvote));
 

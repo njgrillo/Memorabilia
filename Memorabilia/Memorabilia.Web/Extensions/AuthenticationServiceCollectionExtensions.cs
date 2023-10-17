@@ -46,5 +46,8 @@ public static class AuthenticationServiceCollectionExtensions
                 {
                     options.ExpireTimeSpan= TimeSpan.FromDays(cookieConfiguration.CookieRetentionDays);
                 });
+
+        services.AddScoped<ILoginProviderRuleFactory, LoginProviderRuleFactory>();
+        services.AddSingleton<LoginProviderService>();
     }
 }

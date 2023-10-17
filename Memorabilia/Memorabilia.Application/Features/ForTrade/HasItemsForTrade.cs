@@ -1,5 +1,6 @@
 ﻿namespace Memorabilia.Application.Features.ForTrade;
 
+[AuthorizeByPermission(Enum.Permission.BuySellTrade)]
 public record HasItemsForTrade() : IQuery<bool>
 {
     public class Handler : QueryHandler<HasItemsForTrade, bool>

@@ -1,5 +1,6 @@
 ﻿namespace Memorabilia.Application.Features.Collection;
 
+[AuthorizeByPermission(Enum.Permission.Collection)]
 public record RemoveCollectionMemorabilia(int CollectionId, 
                                           params int[] DeletedMemorabiliaIds)
     : ICommand

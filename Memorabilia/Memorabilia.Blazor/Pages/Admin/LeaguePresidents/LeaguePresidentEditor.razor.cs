@@ -8,7 +8,7 @@ public partial class LeaguePresidentEditor
         if (Id == 0)
             return;
 
-        EditModel = (await QueryRouter.Send(new GetLeaguePresident(Id))).ToEditModel();
+        EditModel = (await Mediator.Send(new GetLeaguePresident(Id))).ToEditModel();
     }
 
     protected async Task Save()

@@ -5,7 +5,8 @@ public partial class LeagueTeamEditor
 {
     protected override async Task OnInitializedAsync()
     {
-        Entity.TeamLeague[] leagues = await QueryRouter.Send(new GetTeamLeagues(TeamId));
+        Entity.TeamLeague[] leagues 
+            = await Mediator.Send(new GetTeamLeagues(TeamId));
 
         EditModel = new(TeamId, leagues.ToEditModelList())
         {

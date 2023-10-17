@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Application.Features.Admin.CerealTypes;
 
-[AuthorizeByRole(Enum.PermissionType.Admin)]
+[AuthorizeByRole(Enum.Role.Admin)]
 public record SaveCerealType(DomainEditModel CerealType) : ICommand
 {
     public class Handler : CommandHandler<SaveCerealType>

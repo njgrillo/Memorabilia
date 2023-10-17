@@ -6,9 +6,6 @@ public partial class CollectionEditor
     public IApplicationStateService ApplicationStateService { get; set; }
 
     [Inject]
-    public CommandRouter CommandRouter { get; set; }
-
-    [Inject]
     public IDataProtectorService DataProtectorService { get; set; }
 
     [Inject]
@@ -18,7 +15,7 @@ public partial class CollectionEditor
     public IJSRuntime JSRuntime { get; set; }
 
     [Inject]
-    public QueryRouter QueryRouter { get; set; }
+    public IMediator Mediator { get; set; }
 
     [Inject]
     public ISnackbar Snackbar { get; set; }
@@ -121,7 +118,7 @@ public partial class CollectionEditor
 
     private async Task Load()
     {
-        Entity.Collection collection = await QueryRouter.Send(new GetCollection(Id));
+        Entity.Collection collection = await Mediator.Send(new GetCollection(Id));
 
         EditModel = new CollectionEditModel(collection);
     }
@@ -135,7 +132,7 @@ public partial class CollectionEditor
         if (!EditModel.ValidationResult.IsValid)
             return;
 
-        await CommandRouter.Send(command);
+        await Mediator.Send(command);
 
         Snackbar.Add("Collection was saved successfully!", Severity.Success);
 

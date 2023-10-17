@@ -8,7 +8,7 @@ public partial class SportEditor
         if (Id == 0)
             return;
 
-        EditModel = (await QueryRouter.Send(new GetSport(Id))).ToEditModel();
+        EditModel = (await Mediator.Send(new GetSport(Id))).ToEditModel();
     }
 
     protected async Task Save()

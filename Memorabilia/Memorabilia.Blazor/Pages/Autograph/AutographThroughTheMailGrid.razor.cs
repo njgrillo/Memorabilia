@@ -3,7 +3,7 @@
 public partial class AutographThroughTheMailGrid
 {
     [Inject]
-    public QueryRouter QueryRouter { get; set; }
+    public IMediator Mediator { get; set; }
 
     [Parameter]
     public int AutographId { get; set; }
@@ -25,7 +25,8 @@ public partial class AutographThroughTheMailGrid
         if (ThroughTheMailId == 0)
             return;
 
-        Entity.ThroughTheMail throughTheMail = await QueryRouter.Send(new GetThroughTheMail(ThroughTheMailId));
+        Entity.ThroughTheMail throughTheMail 
+            = await Mediator.Send(new GetThroughTheMail(ThroughTheMailId));
 
         ThroughTheMail = new(throughTheMail);
         ThroughTheMailMemorabilia = new(ThroughTheMail.Memorabilia.FirstOrDefault(item => item.AutographId == AutographId));

@@ -6,9 +6,6 @@ public partial class OfferGrid
     public IApplicationStateService ApplicationStateService { get; set; }
 
     [Inject]
-    public CommandRouter CommandRouter { get; set; }
-
-    [Inject]
     public IDataProtectorService DataProtectorService { get; set; }
 
     [Inject]
@@ -69,7 +66,7 @@ public partial class OfferGrid
             OfferStatusTypeId = offerStatusType.Id
         };
 
-        await CommandRouter.Send(new SaveOffer.Command(editModel));
+        await Mediator.Send(new SaveOffer.Command(editModel));
 
         await Mediator.Publish(new OfferStatusChangedNotification());
 

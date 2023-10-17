@@ -1,5 +1,6 @@
 ﻿namespace Memorabilia.Application.Features.Forum;
 
+[AuthorizeByPermission(Enum.Permission.EditForumBookmark)]
 public record GetBookmarkedForumTopics(int UserId)
      : IQuery<Entity.ForumTopic[]>
 {

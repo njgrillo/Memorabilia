@@ -2,7 +2,7 @@
 
 public class ApplicationStateService : IApplicationStateService
 {
-    private readonly QueryRouter _queryRouter;
+    private readonly IMediator _mediator;
 
     public Entity.User CurrentUser { get; set; }
 
@@ -11,14 +11,27 @@ public class ApplicationStateService : IApplicationStateService
 
     public Constant.LoginProvider Provider { get; set; }
 
-    public ApplicationStateService(QueryRouter queryRouter)
+    public string SubscriberLevel
     {
-        _queryRouter = queryRouter;
+        get
+        {
+            if (CurrentUser == null)
+                return Constant.Role.NonSubscriber.Name;
+
+            Entity.UserRole role = CurrentUser.Roles.FirstOrDefault();
+
+            return Constant.Role.Find(role.RoleId)?.Name;
+        }
+    }
+
+    public ApplicationStateService(IMediator mediator)
+    {
+        _mediator = mediator;
     }
 
     public async Task Load(int userId)
     {
-        CurrentUser = await _queryRouter.Send(new GetUserById(userId));
+        CurrentUser = await _mediator.Send(new GetUserById(userId));
 
         IsDarkTheme = CurrentUser.UserSettings?.UseDarkTheme ?? false;
     }

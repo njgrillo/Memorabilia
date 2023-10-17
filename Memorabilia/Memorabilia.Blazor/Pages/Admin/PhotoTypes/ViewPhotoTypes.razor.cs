@@ -10,6 +10,6 @@ public partial class ViewPhotoTypes
 
     protected override async Task OnInitializedAsync()
     {
-        Model = new PhotoTypesModel(await QueryRouter.Send(new GetPhotoTypes()));
+        Model = new PhotoTypesModel(await Mediator.Send(new GetPhotoTypes()));
     }
 }

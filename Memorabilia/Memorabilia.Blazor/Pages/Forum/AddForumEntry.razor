@@ -1,9 +1,11 @@
-﻿<MudExpansionPanel IsExpanded="true"
+﻿@inherits ReroutePage
+
+<MudExpansionPanel IsExpanded="true"
                    Text="@($"New Reply - {DateTime.Now.ToString("dddd, MMMM dd, yyyy hh:mm:ss tt")}")">
     <LeftRightSection LeftStyle="width:20%;"
                       RightStyle="width:80%;">
         <Left>
-            <Text Typography="Typo.h6">@(ApplicationStateService.CurrentUser.Username)</Text>
+            <Text Typography="Typo.h6">@(ApplicationStateService.CurrentUser?.Username)</Text>
         </Left>
         <Right>
             <MudStack Row="true">

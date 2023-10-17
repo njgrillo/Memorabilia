@@ -15,7 +15,7 @@ public partial class SpotsEditor
     {
         AutographId = DataProtectorService.DecryptId(EncryptAutographId);
 
-        Model = (await QueryRouter.Send(new Application.Features.Autograph.Spot.GetSpot(AutographId))).ToEditModel();
+        Model = (await Mediator.Send(new Application.Features.Autograph.Spot.GetSpot(AutographId))).ToEditModel();
 
         IsLoaded = true;
     }
@@ -25,7 +25,7 @@ public partial class SpotsEditor
         if (Model.SpotId == 0)
             return;
 
-        await CommandRouter.Send(new Application.Features.Autograph.Spot.SaveSpot.Command(Model));
+        await Mediator.Send(new Application.Features.Autograph.Spot.SaveSpot.Command(Model));
 
         _continueNavigationPath
             = $"{NavigationPath.AutographImage}/{EditModeType.Update.Name}/{DataProtectorService.EncryptId(Model.AutographId)}";

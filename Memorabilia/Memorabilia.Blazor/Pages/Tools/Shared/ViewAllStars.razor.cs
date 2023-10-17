@@ -29,7 +29,7 @@ public partial class ViewAllStars
 
     private async Task OnInputChange(int year)
     {
-        Model = new AllStarsModel(await QueryRouter.Send(new GetAllStars(year, Sport)), Sport, year);
+        Model = new AllStarsModel(await Mediator.Send(new GetAllStars(year, Sport)), Sport, year);
 
         if (Model.IsDoubleHeaderAllStarGame)
         {

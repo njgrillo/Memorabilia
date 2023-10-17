@@ -1,5 +1,6 @@
 ﻿namespace Memorabilia.Application.Features.ForSale;
 
+[AuthorizeByPermission(Enum.Permission.BuySellTrade)]
 public record GetForSaleMemorabiliaItemsPaged(PageInfo PageInfo,
                                               MemorabiliaSearchCriteria MemorabiliaSearchCriteria = null)
     : IQuery<ForSaleModel>

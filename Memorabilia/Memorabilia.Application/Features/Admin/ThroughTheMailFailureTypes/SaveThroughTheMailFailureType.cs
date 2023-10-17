@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Application.Features.Admin.ThroughTheMailFailureTypes;
 
-[AuthorizeByRole(Enum.PermissionType.Admin)]
+[AuthorizeByRole(Enum.Role.Admin)]
 public record SaveThroughTheMailFailureType(DomainEditModel ThroughTheMailFailureType) : ICommand
 {
     public class Handler : CommandHandler<SaveThroughTheMailFailureType>

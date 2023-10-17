@@ -42,7 +42,7 @@ public partial class ViewLeaders
         if (leaderType == null)
             return;
 
-        Model = new(await QueryRouter.Send(new GetLeaders(leaderType, Sport)), Sport)
+        Model = new(await Mediator.Send(new GetLeaders(leaderType, Sport)), Sport)
                 {
                     LeaderType = leaderType
                 };
@@ -50,7 +50,7 @@ public partial class ViewLeaders
 
     private async Task OnInputChange(LeaderType leaderType)
     {
-        Model = new(await QueryRouter.Send(new GetLeaders(leaderType, Sport)), Sport)
+        Model = new(await Mediator.Send(new GetLeaders(leaderType, Sport)), Sport)
                 {
                     LeaderType = leaderType
                 };

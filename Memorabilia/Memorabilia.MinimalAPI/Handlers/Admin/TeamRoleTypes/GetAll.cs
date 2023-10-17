@@ -3,13 +3,13 @@
 public class GetAll
     : RequestHandler<TeamRoleTypesRequest>, IRequestHandler<TeamRoleTypesRequest, IResult>
 {
-    public GetAll(QueryRouter queryRouter) : base(queryRouter) { }
+    public GetAll(IMediator mediator) : base(mediator) {}
 
     public override async Task<IResult> Handle(TeamRoleTypesRequest request,
                                                CancellationToken cancellationToken)
     {
         var response
-            = new Response<Entity.DomainEntity[]>(await QueryRouter.Send(new GetTeamRoleTypes()));
+            = new Response<Entity.DomainEntity[]>(await Mediator.Send(new GetTeamRoleTypes()));
 
         return Results.Ok(response);
     }

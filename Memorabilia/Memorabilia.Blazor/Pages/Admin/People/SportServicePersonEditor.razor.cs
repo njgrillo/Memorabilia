@@ -8,7 +8,7 @@ public partial class SportServicePersonEditor
 
     protected override async Task OnInitializedAsync()
     {
-        Entity.Person person = await QueryRouter.Send(new GetPerson(PersonId));
+        Entity.Person person = await Mediator.Send(new GetPerson(PersonId));
 
         EditModel = new PersonSportServiceEditModel(PersonId, new PersonSportServiceModel(person));
 

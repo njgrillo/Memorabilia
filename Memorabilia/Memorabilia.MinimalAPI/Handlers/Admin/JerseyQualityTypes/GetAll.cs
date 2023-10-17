@@ -3,13 +3,13 @@
 public class GetAll
     : RequestHandler<JerseyQualityTypesRequest>, IRequestHandler<JerseyQualityTypesRequest, IResult>
 {
-    public GetAll(QueryRouter queryRouter) : base(queryRouter) { }
+    public GetAll(IMediator mediator) : base(mediator) {}
 
     public override async Task<IResult> Handle(JerseyQualityTypesRequest request,
                                                CancellationToken cancellationToken)
     {
         var response
-            = new Response<Entity.DomainEntity[]>(await QueryRouter.Send(new GetJerseyQualityTypes()));
+            = new Response<Entity.DomainEntity[]>(await Mediator.Send(new GetJerseyQualityTypes()));
 
         return Results.Ok(response);
     }

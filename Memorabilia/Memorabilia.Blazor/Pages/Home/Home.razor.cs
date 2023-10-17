@@ -3,13 +3,13 @@
 public partial class Home
 {
     [Inject]
-    public QueryRouter QueryRouter { get; set; }
+    public IMediator Mediator { get; set; }
 
     protected HomeModel Model { get; set; }
         = new();
 
     protected override async Task OnInitializedAsync()
     {
-        Model = await QueryRouter.Send(new GetHome());
+        Model = await Mediator.Send(new GetHome());
     }
 }

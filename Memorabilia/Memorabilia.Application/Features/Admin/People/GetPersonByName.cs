@@ -1,6 +1,5 @@
 ﻿namespace Memorabilia.Application.Features.Admin.People;
 
-[AuthorizeByRole(Enum.PermissionType.Admin)]
 public record GetPersonByName(string DisplayName = null, 
                               string ProfileName = null,
                               string LegalName = null)

@@ -1,6 +1,7 @@
 ﻿namespace Memorabilia.Application.Features.User;
 
-public record GetUserById(int UserId) : IQuery<Entity.User>
+public record GetUserById(int UserId) 
+    : IQuery<Entity.User>
 {
     public class Handler : QueryHandler<GetUserById, Entity.User>
     {

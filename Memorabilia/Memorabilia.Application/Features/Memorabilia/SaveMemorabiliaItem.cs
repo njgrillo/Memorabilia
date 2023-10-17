@@ -1,5 +1,6 @@
 ﻿namespace Memorabilia.Application.Features.Memorabilia;
 
+[AuthorizeByPermission(Enum.Permission.Memorabilia)]
 public class SaveMemorabiliaItem
 {
     public class Handler : CommandHandler<Command>

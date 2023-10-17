@@ -3,10 +3,16 @@
 public partial class Register
 {
     [Inject]
-    public CommandRouter CommandRouter { get; set; }
+    public IDataProtectorService DataProtectorService { get; set; }
 
     [Inject]
     public IJSRuntime JSRuntime { get; set; }
+
+    [Inject]
+    public IMediator Mediator { get; set; }
+
+    [Inject]
+    public NavigationManager NavigationManager { get; set; }
 
     [Inject]
     public ISnackbar Snackbar { get; set; }
@@ -46,7 +52,7 @@ public partial class Register
 
         var command = new AddUser(EditModel);
 
-        await CommandRouter.Send(command);
+        await Mediator.Send(command);
 
         string message = !command.UserAlreadyExists
             ? "You have registered successfully!"
@@ -57,6 +63,8 @@ public partial class Register
         if (command.UserAlreadyExists)
             return;
 
-        await OnSaved.InvokeAsync();          
+        await OnSaved.InvokeAsync();
+
+        NavigationManager.NavigateTo($"{NavigationPath.Subscription}/{DataProtectorService.EncryptId(command.User.Id)}");
     }
 }

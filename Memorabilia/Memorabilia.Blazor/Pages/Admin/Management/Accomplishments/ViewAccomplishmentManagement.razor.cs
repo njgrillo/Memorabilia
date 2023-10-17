@@ -3,7 +3,7 @@
 public partial class ViewAccomplishmentManagement
 {
     [Inject]
-    public QueryRouter QueryRouter { get; set; }
+    public IMediator Mediator { get; set; }
 
     private AccomplishmentManagementModel[] _completedAccomplishments
         = Array.Empty<AccomplishmentManagementModel>();
@@ -19,9 +19,10 @@ public partial class ViewAccomplishmentManagement
 
     protected override async Task OnInitializedAsync()
     {
-        AccomplishmentManagementModel[] accomplishmentManagements = (await QueryRouter.Send(new GetAllAccomplishmentManagements()))
-            .OrderBy(accomplishmentManagement => accomplishmentManagement.AccomplishmentType.Name)
-            .ToArray();
+        AccomplishmentManagementModel[] accomplishmentManagements 
+            = (await Mediator.Send(new GetAllAccomplishmentManagements()))
+                .OrderBy(accomplishmentManagement => accomplishmentManagement.AccomplishmentType.Name)
+                .ToArray();
 
         _completedAccomplishments 
             = accomplishmentManagements.Where(accomplishmentManagement => accomplishmentManagement.IsConfigured && 

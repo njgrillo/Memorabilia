@@ -1,5 +1,6 @@
 ﻿namespace Memorabilia.Application.Features.Autograph.Spot;
 
+[AuthorizeByPermission(Enum.Permission.Memorabilia)]
 public class SaveSpot
 {
     public class Handler : CommandHandler<Command>

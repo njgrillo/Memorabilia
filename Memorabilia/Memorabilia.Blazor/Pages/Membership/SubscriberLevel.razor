@@ -1,0 +1,57 @@
+﻿<Div Style="border: 1px solid black;border-radius:25px; margin-top:1%;margin-bottom:1%;margin-left:1%;margin-right:1%;">
+    <DivPad5>
+        <Div Class="row" Style="text-align:center;margin-bottom:2%;">
+            <b>@Title</b>@_price
+            <br />
+        </Div>
+        <Iterations Context="feature"
+                    Items="Constant.Feature.All">
+            <MudStack Row="true">
+                <Condition Evaluation="@Features.Contains(feature)">
+                    <Match>
+                        <MudImage Class="rounded-lg"
+                                  Elevation="5"
+                                  Height="15"
+                                  ObjectFit="@ObjectFit.Cover"
+                                  Src="@(ImageService.GetDomainImageData(Constant.ImageFileName.GreenCheckmark))"
+                                  Width="15" />
+                    </Match>
+                    <NotMatch>
+                        <MudImage Class="rounded-lg"
+                                  Elevation="5"
+                                  Height="15"
+                                  ObjectFit="@ObjectFit.Cover"
+                                  Src="@(ImageService.GetDomainImageData(Constant.ImageFileName.RedX))"
+                                  Width="15" />
+                    </NotMatch>
+                </Condition>
+                @feature.Name
+                <MudTooltip Text="View Description">
+                    <MudImage @onclick="@(() => ShowDescription(feature))"
+                              Class="rounded-lg can-click"
+                              Elevation="5"
+                              Height="15"
+                              ObjectFit="@ObjectFit.Cover"
+                              Src="@(ImageService.GetDomainImageData(Constant.ImageFileName.Information))"
+                              Width="15" />
+                </MudTooltip>
+            </MudStack>
+        </Iterations>
+        <br />
+        <DivPad5>
+            <DivRowFormGroup>
+                <Condition Evaluation="@(_canSelect)">
+                    <Match>
+                        <CustomButton ButtonType="ButtonType.Button"
+                                      OnClick="Select"
+                                      Text="Select" />
+                    </Match>
+                    <NotMatch>
+                        <b>Your current subscription.</b>
+                        <br />
+                    </NotMatch>
+                </Condition>
+            </DivRowFormGroup>
+        </DivPad5>              
+    </DivPad5>      
+</Div>

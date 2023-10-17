@@ -6,19 +6,16 @@ public partial class ViewSignatureReview
     public IApplicationStateService ApplicationStateService { get; set; }
 
     [Inject]
-    public CommandRouter CommandRouter { get; set; }
-
-    [Inject]
     public IDataProtectorService DataProtectorService { get; set; }
 
     [Inject]
     public ImageService ImageService { get; set; }
 
     [Inject]
-    public NavigationManager NavigationManager { get; set; }
+    public IMediator Mediator { get; set; }
 
     [Inject]
-    public QueryRouter QueryRouter { get; set; }
+    public NavigationManager NavigationManager { get; set; }
 
     [Inject]
     public ISnackbar Snackbar { get; set; }
@@ -46,7 +43,7 @@ public partial class ViewSignatureReview
     {
         SignatureReviewId = DataProtectorService.DecryptId(EncryptSignatureReviewId);
 
-        Model = new(await QueryRouter.Send(new GetSignatureReview(SignatureReviewId)));
+        Model = new(await Mediator.Send(new GetSignatureReview(SignatureReviewId)));
 
         SignatureReviewUserResultModel userResult
             = Model.UserResults.FirstOrDefault(result => result.CreatedUserId == ApplicationStateService.CurrentUser.Id);
@@ -69,7 +66,7 @@ public partial class ViewSignatureReview
         if (!EditModel.ValidationResult.IsValid)
             return;
 
-        await CommandRouter.Send(command);
+        await Mediator.Send(command);
 
         Snackbar.Add("Signature Review Result was added successfully!", Severity.Success);
 

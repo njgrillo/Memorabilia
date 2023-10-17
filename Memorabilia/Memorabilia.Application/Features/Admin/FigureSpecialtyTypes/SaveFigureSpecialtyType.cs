@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Application.Features.Admin.FigureSpecialtyTypes;
 
-[AuthorizeByRole(Enum.PermissionType.Admin)]
+[AuthorizeByRole(Enum.Role.Admin)]
 public record SaveFigureSpecialtyType(DomainEditModel FigureSpecialtyType) : ICommand
 {
     public class Handler : CommandHandler<SaveFigureSpecialtyType>

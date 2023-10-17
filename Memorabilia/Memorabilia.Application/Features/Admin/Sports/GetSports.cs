@@ -1,6 +1,5 @@
 ﻿namespace Memorabilia.Application.Features.Admin.Sports;
 
-[AuthorizeByRole(Enum.PermissionType.Admin)]
 public record GetSports() : IQuery<Entity.Sport[]>
 {
     public class Handler : QueryHandler<GetSports, Entity.Sport[]>

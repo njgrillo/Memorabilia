@@ -3,7 +3,7 @@
 public partial class CardSelector
 {
     [Inject]
-    public QueryRouter QueryRouter { get; set; }
+    public IMediator Mediator { get; set; }
 
     [Parameter]
     public int BrandId { get; set; }
@@ -30,7 +30,7 @@ public partial class CardSelector
 
         if (TeamId.HasValue)
         {
-            var team = new TeamModel(await QueryRouter.Send(new GetTeam(TeamId.Value)));
+            var team = new TeamModel(await Mediator.Send(new GetTeam(TeamId.Value)));
 
             Team = new TeamEditModel(team);
         }        

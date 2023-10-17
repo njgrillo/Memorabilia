@@ -6,10 +6,10 @@ public partial class ForumTopicSearchResultsGrid
     public IDataProtectorService DataProtectorService { get; set; }
 
     [Inject]
-    public NavigationManager NavigationManager { get; set; }
+    public IMediator Mediator { get; set; }
 
     [Inject]
-    public QueryRouter QueryRouter { get; set; }
+    public NavigationManager NavigationManager { get; set; }
 
     [Parameter]
     public string SearchText { get; set; }
@@ -40,7 +40,7 @@ public partial class ForumTopicSearchResultsGrid
     {
         var pageInfo = new PageInfo(_resetPaging ? 1 : state.Page + 1, state.PageSize);
 
-        Model = await QueryRouter.Send(new SearchForumTopics(pageInfo, SearchText));
+        Model = await Mediator.Send(new SearchForumTopics(pageInfo, SearchText));
 
         return new TableData<ForumTopicModel>()
         {

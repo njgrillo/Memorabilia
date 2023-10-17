@@ -1,5 +1,6 @@
 ﻿namespace Memorabilia.Application.Features.Offer;
 
+[AuthorizeByPermission(Enum.Permission.BuySellTrade)]
 public record GetOfferMemorabilia(int MemorabiliaId)
     : IQuery<Entity.Memorabilia>
 {

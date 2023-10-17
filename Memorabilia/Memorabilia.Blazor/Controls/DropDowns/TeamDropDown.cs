@@ -16,7 +16,7 @@ public partial class TeamDropDown : DropDown<TeamModel, int>
     protected override async Task OnInitializedAsync()
     {
         Entity.Team[] teams 
-            = await QueryRouter.Send(new GetTeams(FranchiseId: Franchise?.Id, SportLeagueLevelId: SportLeagueLevel?.Id));
+            = await Mediator.Send(new GetTeams(FranchiseId: Franchise?.Id, SportLeagueLevelId: SportLeagueLevel?.Id));
 
         Items = teams.Select(team => new TeamModel(team));
         Label = "Team";

@@ -5,7 +5,7 @@ public partial class ItemTypeSizeEditor
 {
     protected override async Task OnInitializedAsync()
     {
-        EditModel = (await QueryRouter.Send(new GetItemTypeSize(Id))).ToEditModel();
+        EditModel = (await Mediator.Send(new GetItemTypeSize(Id))).ToEditModel();
     }
 
     protected async Task Save()

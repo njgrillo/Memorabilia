@@ -1,5 +1,6 @@
 ﻿namespace Memorabilia.Application.Features.Memorabilia.Bammer;
 
+[AuthorizeByPermission(Enum.Permission.Memorabilia)]
 public class SaveBammer
 {
     public class Handler : CommandHandler<Command>

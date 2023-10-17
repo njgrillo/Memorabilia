@@ -7,7 +7,7 @@ public class Get
 {
     private readonly ImageService _imageService;
 
-    public Get(QueryRouter queryRouter, ImageService imageService) : base(queryRouter) 
+    public Get(IMediator mediator, ImageService imageService) : base(mediator) 
     { 
         _imageService = imageService;
     }
@@ -15,7 +15,7 @@ public class Get
     public override async Task<IResult> Handle(PersonRequest request,
                                                CancellationToken cancellationToken)
     {
-        Entity.Person person = await QueryRouter.Send(new GetPerson(request.Id));
+        Entity.Person person = await Mediator.Send(new GetPerson(request.Id));
 
         if (person == null)
             return Results.NotFound(new Response<PersonApiModel>(new PersonApiModel()));

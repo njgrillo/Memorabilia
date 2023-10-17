@@ -3,10 +3,7 @@
 public partial class ImportProjectTeamDialog
 {
     [Inject]
-    public IDialogService DialogService { get; set; }
-
-    [Inject]
-    public QueryRouter QueryRouter { get; set; }
+    public IMediator Mediator { get; set; }
 
     [CascadingParameter]
     public MudDialogInstance MudDialog { get; set; }
@@ -29,7 +26,7 @@ public partial class ImportProjectTeamDialog
 
     protected override async Task OnInitializedAsync()
     {
-        Teams = await QueryRouter.Send(new GetProjectTeams(SportId: Sport.Football.Id));
+        Teams = await Mediator.Send(new GetProjectTeams(SportId: Sport.Football.Id));
     }
 
     public void Cancel()

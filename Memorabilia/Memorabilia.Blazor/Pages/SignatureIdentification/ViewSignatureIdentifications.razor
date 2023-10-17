@@ -1,6 +1,10 @@
-﻿<PageView AddRoute="@NavigationPath.SignatureIdentificationAdd"
+﻿@inherits ReroutePage
+
+<PageView AddRoute="@NavigationPath.SignatureIdentificationAdd"
           AddTitle="@($"{Constant.EditModeType.Add.Name} Signature Identification")"
+          DisplayAddButton="_canInteract"
           DisplayPageHeader="false"
+          DisplayPageFooter="_canInteract"
           NavigationPath="@NavigationPath.Home"
           PageTitle="Signature Identifications">
     <DivPad2>
@@ -53,7 +57,7 @@
                     <MudTooltip Text="Identify">
                         <MudFab Color="MudBlazor.Color.Primary"
                                 Icon="@Icons.Material.Outlined.PersonSearch"
-                                OnClick="@(_ => NavigationManager.NavigateTo($"{NavigationPath.SignatureIdentification}/{DataProtectorService.EncryptId(context.Id)}"))"
+                                OnClick="@(_ => View(context.Id))"
                                 Size="@MudBlazor.Size.Large" />
                     </MudTooltip>
                 </MudTd>

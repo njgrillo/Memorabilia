@@ -3,7 +3,7 @@
 public partial class UserMessageImages
 {
     [Inject]
-    public QueryRouter QueryRouter { get; set; }
+    public IMediator Mediator { get; set; }
 
     [Parameter]
     public EventCallback ImageRemoved { get; set; }

@@ -1,18 +1,12 @@
 ﻿namespace Memorabilia.Blazor.Pages.Forum;
 
-public partial class EditForumTopic
+public partial class EditForumTopic : ReroutePage
 {
-    [Inject]
-    public IApplicationStateService ApplicationStateService { get; set; }
-
-    [Inject]
-    public CommandRouter CommandRouter { get; set; }
-
     [Inject]
     public IDataProtectorService DataProtectorService { get; set; }
 
     [Inject]
-    public QueryRouter QueryRouter { get; set; }    
+    public IMediator Mediator { get; set; }
 
     [Inject]
     public ISnackbar Snackbar { get; set; }
@@ -31,6 +25,7 @@ public partial class EditForumTopic
     protected int ForumTopicId { get; set; }
 
     private string _bookmarkText;
+    private bool _canInteract;
 
     protected Alert[] ValidationResultAlerts
         => EditModel.ValidationResult.Errors?.Any() ?? false
@@ -39,6 +34,10 @@ public partial class EditForumTopic
 
     protected override async Task OnInitializedAsync()
     {
+        _canInteract
+            = ApplicationStateService.CurrentUser != null &&
+              ApplicationStateService.CurrentUser.HasPermission(Permission.EditForum);
+
         ForumTopicId = DataProtectorService.DecryptId(EncryptForumTopicId);
 
         await Load();
@@ -46,6 +45,12 @@ public partial class EditForumTopic
 
     protected async Task AddReply()
     {
+        if (!_canInteract)
+        {
+            await ShowMembershipDialog();
+            return;
+        }
+
         var command = new SaveForumTopic.Command(EditModel);
 
         EditModel.ValidationResult = Validator.Validate(command);
@@ -53,7 +58,7 @@ public partial class EditForumTopic
         if (!EditModel.ValidationResult.IsValid)
             return;
 
-        await CommandRouter.Send(command);
+        await Mediator.Send(command);
 
         Snackbar.Add("Forum Entry saved successfully!", Severity.Success);
 
@@ -67,10 +72,16 @@ public partial class EditForumTopic
 
     protected async Task UpdateBookmark()
     {
+        if (!_canInteract)
+        {
+            await ShowMembershipDialog();
+            return;
+        }
+
         bool shouldBookmark
             = !EditModel.Bookmarks.Any(bookmark => bookmark.UserId == ApplicationStateService.CurrentUser.Id);
 
-        await CommandRouter.Send(new UpdateForumTopicBookmark(EditModel.Id,
+        await Mediator.Send(new UpdateForumTopicBookmark(EditModel.Id,
                                                               ApplicationStateService.CurrentUser.Id));
 
         if (shouldBookmark)
@@ -89,9 +100,12 @@ public partial class EditForumTopic
     private async Task Load()
     {
         Entity.ForumTopic forumTopic
-            = await QueryRouter.Send(new GetForumTopic(ForumTopicId));
+            = await Mediator.Send(new GetForumTopic(ForumTopicId));
 
         EditModel = new(forumTopic);
+
+        if (!_canInteract)
+            return;
 
         CanEditSubject
             = EditModel.CreatedByUser.Id == ApplicationStateService.CurrentUser.Id;

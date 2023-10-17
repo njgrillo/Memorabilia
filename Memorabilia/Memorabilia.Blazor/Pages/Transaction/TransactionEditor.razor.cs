@@ -6,9 +6,6 @@ public partial class TransactionEditor
     public IApplicationStateService ApplicationStateService { get; set; }
 
     [Inject]
-    public CommandRouter CommandRouter { get; set; }
-
-    [Inject]
     public IDataProtectorService DataProtectorService { get; set; }
 
     [Inject]
@@ -18,10 +15,10 @@ public partial class TransactionEditor
     public IJSRuntime JSRuntime { get; set; }
 
     [Inject]
-    public NavigationManager NavigationManager { get; set; }
+    public IMediator Mediator { get; set; }
 
     [Inject]
-    public QueryRouter QueryRouter { get; set; }
+    public NavigationManager NavigationManager { get; set; }
 
     [Inject]
     public ISnackbar Snackbar { get; set; }
@@ -173,7 +170,7 @@ public partial class TransactionEditor
 
     private async Task Load()
     {
-        EditModel = await QueryRouter.Send(new GetMemorabiliaTransaction(Id));
+        EditModel = await Mediator.Send(new GetMemorabiliaTransaction(Id));
     }
 
     protected async Task OnSave()
@@ -198,7 +195,7 @@ public partial class TransactionEditor
         if (!EditModel.ValidationResult.IsValid)
             return;
 
-        await CommandRouter.Send(command);
+        await Mediator.Send(command);
 
         Snackbar.Add("Transaction was saved successfully!", Severity.Success);
 

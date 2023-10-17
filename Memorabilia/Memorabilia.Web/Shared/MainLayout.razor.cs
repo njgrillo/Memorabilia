@@ -18,12 +18,18 @@ public partial class MainLayout : LayoutComponentBase
 
     private CustomErrorBoundary _errorBoundary;
 
+    private bool _showUpgradeMembership;
+
     private string _themeText
         = "Turn on dark mode";
 
     protected override void OnInitialized()
     {
         Courier.Subscribe<ThemeChangedNotification>(OnThemeChanged);
+
+        _showUpgradeMembership
+            = ApplicationStateService.CurrentUser != null
+              && ApplicationStateService.CurrentUser.IsUpgradeEligible();
 
         _themeText =
             ApplicationStateService.IsDarkTheme
@@ -72,9 +78,14 @@ public partial class MainLayout : LayoutComponentBase
         SetThemeText();
     }
 
+    public void UpgradeMembership()
+    {
+        NavigationManager.NavigateTo(NavigationPath.SubscriptionUpgrade);
+    }
+
     public void UserSettings()
     {
-        NavigationManager.NavigateTo("Settings");
+        NavigationManager.NavigateTo(NavigationPath.Settings);
     }
 
     private void SetThemeText()

@@ -1,6 +1,5 @@
 ﻿namespace Memorabilia.Application.Features.Admin.BasketballTypes;
 
-[AuthorizeByRole(Enum.PermissionType.Admin)]
 public record GetBasketballTypes() : IQuery<Entity.BasketballType[]>
 {
     public class Handler : QueryHandler<GetBasketballTypes, Entity.BasketballType[]>

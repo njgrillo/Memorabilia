@@ -7,14 +7,11 @@ public record GetUserSiteMemorabiliaItems(int UserId,
 {
     public class Handler : QueryHandler<GetUserSiteMemorabiliaItems, SiteMemorabiliasModel>
     {
-        private readonly IApplicationStateService _applicationStateService;
         private readonly ISiteMemorabiliaRepository _memorabiliaRepository;
 
-        public Handler(ISiteMemorabiliaRepository memorabiliaRepository,
-                       IApplicationStateService applicationStateService)
+        public Handler(ISiteMemorabiliaRepository memorabiliaRepository)
         {
             _memorabiliaRepository = memorabiliaRepository;
-            _applicationStateService = applicationStateService;
         }
 
         protected override async Task<SiteMemorabiliasModel> Handle(GetUserSiteMemorabiliaItems query)

@@ -5,11 +5,11 @@ public partial class ViewBasketballTypes
 {
     public async Task OnDelete(DomainEditModel editModel)
     {
-        await CommandRouter.Send(new SaveBasketballType(editModel));
+        await Mediator.Send(new SaveBasketballType(editModel));
     }
 
     protected override async Task OnInitializedAsync()
     {
-        Model = new BasketballTypesModel(await QueryRouter.Send(new GetBasketballTypes()));
+        Model = new BasketballTypesModel(await Mediator.Send(new GetBasketballTypes()));
     }
 }

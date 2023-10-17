@@ -3,14 +3,14 @@
 public partial class ViewDashboard
 {
     [Inject]
-    public QueryRouter QueryRouter { get; set; }
+    public IMediator Mediator { get; set; }
 
     protected DashboardModel Model 
         = new();
 
     protected override async Task OnInitializedAsync()
     {
-        Model = await QueryRouter.Send(new GetDashboard());
+        Model = await Mediator.Send(new GetDashboard());
     }
 
     private static Type GetComponent(DashboardItem dashboardItem)

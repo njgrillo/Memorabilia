@@ -3,13 +3,13 @@
 public class GetAll
     : RequestHandler<SportLeagueLevelsRequest>, IRequestHandler<SportLeagueLevelsRequest, IResult>
 {
-    public GetAll(QueryRouter queryRouter) : base(queryRouter) { }
+    public GetAll(IMediator mediator) : base(mediator) {}
 
     public override async Task<IResult> Handle(SportLeagueLevelsRequest request,
                                                CancellationToken cancellationToken)
     {
         var response
-            = new Response<Entity.SportLeagueLevel[]>(await QueryRouter.Send(new GetSportLeagueLevels()));
+            = new Response<Entity.SportLeagueLevel[]>(await Mediator.Send(new GetSportLeagueLevels()));
 
         return Results.Ok(response);
     }

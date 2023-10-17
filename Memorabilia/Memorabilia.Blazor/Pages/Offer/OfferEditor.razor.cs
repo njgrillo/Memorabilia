@@ -6,9 +6,6 @@ public partial class OfferEditor
     public IApplicationStateService ApplicationStateService { get; set; }
 
     [Inject]
-    public CommandRouter CommandRouter { get; set; }
-
-    [Inject]
     public IDataProtectorService DataProtectorService { get; set; }
 
     [Inject]
@@ -106,7 +103,7 @@ public partial class OfferEditor
         if (!EditModel.ValidationResult.IsValid)
             return;
 
-        await CommandRouter.Send(command);
+        await Mediator.Send(command);
 
         Snackbar.Add("Offer sent!", Severity.Success);
 
@@ -126,7 +123,7 @@ public partial class OfferEditor
     {
         EditModel.OfferStatusTypeId = offerStatusType.Id;
 
-        await CommandRouter.Send(new SaveOffer.Command(EditModel));
+        await Mediator.Send(new SaveOffer.Command(EditModel));
 
         string subject
             = EmailSubject.Offer
