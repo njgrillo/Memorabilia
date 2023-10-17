@@ -1,6 +1,4 @@
-﻿using Framework.Library.Extension;
-
-namespace Memorabilia.MinimalAPI.Handlers.Admin.People;
+﻿namespace Memorabilia.MinimalAPI.Handlers.Admin.People;
 
 public class Get
     : RequestHandler<PersonRequest>, IRequestHandler<PersonRequest, IResult>

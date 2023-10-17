@@ -1,11 +1,15 @@
 ﻿global using Memorabilia.Domain.Enums;
 global using Memorabilia.Domain.Extensions;
-global using Framework.Library.Extension;
+global using Framework.Library.Domain.Paging;
 global using Memorabilia.Domain.SearchModels.Autographs;
 global using System;
 global using System.Collections.Generic;
 global using System.ComponentModel;
 global using System.Diagnostics.CodeAnalysis;
+global using System.IO;
 global using System.Linq;
+global using System.Linq.Expressions;
+global using System.Text;
+global using System.Threading.Tasks;
 global using Constant = Memorabilia.Domain.Constants;
 global using Entity = Memorabilia.Domain.Entities;

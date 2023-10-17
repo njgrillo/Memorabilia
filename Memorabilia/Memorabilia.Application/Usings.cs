@@ -2,7 +2,6 @@
 global using FluentValidation;
 global using Framework.Library.Domain.Command;
 global using Framework.Library.Domain.Paging;
-global using Framework.Library.Extension;
 global using Framework.Library.Handler;
 global using Hangfire;
 global using MediatR;
