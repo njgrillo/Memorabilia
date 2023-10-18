@@ -1,10 +1,10 @@
 ﻿namespace Memorabilia.Domain;
 
-public abstract class DomainIdEntity
+public abstract class Entity
 {
-    public DomainIdEntity() { }
+    public Entity() { }
 
-    public DomainIdEntity(int id) 
+    public Entity(int id) 
     { 
         Id = id;
     } 

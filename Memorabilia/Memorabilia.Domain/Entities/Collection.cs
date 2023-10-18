@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Domain.Entities;
 
-public class Collection : DomainIdEntity, IWithName
+public class Collection : Entity, IWithName
 {
     public Collection() { }
 

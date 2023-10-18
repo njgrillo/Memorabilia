@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Domain.Entities;
 
-public class ForumCategory : DomainIdEntity
+public class ForumCategory : Entity
 {
     public ForumCategory() { }
 

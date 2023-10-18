@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Domain.Entities;
 
-public class Champion : DomainIdEntity
+public class Champion : Entity
 {
     public Champion() { }
 

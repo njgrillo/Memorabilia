@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Domain.Entities;
 
-public class CollegeRetiredNumber : DomainIdEntity
+public class CollegeRetiredNumber : Entity
 {
     public CollegeRetiredNumber() { }
 

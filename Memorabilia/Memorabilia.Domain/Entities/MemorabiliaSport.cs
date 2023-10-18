@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Domain.Entities;
 
-public class MemorabiliaSport : DomainIdEntity
+public class MemorabiliaSport : Entity
 {
     public MemorabiliaSport() { }
 

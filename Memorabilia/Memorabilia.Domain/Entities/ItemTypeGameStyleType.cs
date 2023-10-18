@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Domain.Entities;
 
-public class ItemTypeGameStyleType : DomainIdEntity
+public class ItemTypeGameStyleType : Entity
 {
     public ItemTypeGameStyleType() { }
 

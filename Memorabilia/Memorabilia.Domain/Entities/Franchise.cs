@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Domain.Entities;
 
-public class Franchise : DomainIdEntity
+public class Franchise : Entity
 {
     public Franchise() { }
 

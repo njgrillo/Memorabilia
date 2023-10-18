@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Domain.Entities;
 
-public partial class Memorabilia : DomainIdEntity
+public partial class Memorabilia : Entity
 {  
     public virtual Acquisition Acquisition 
         => MemorabiliaAcquisition.Acquisition;

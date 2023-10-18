@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Domain.Entities;
 
-public class TeamConference : DomainIdEntity
+public class TeamConference : Entity
 {
     public TeamConference() { }
 

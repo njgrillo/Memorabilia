@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Domain.Entities;
 
-public class MemorabiliaCereal : DomainIdEntity
+public class MemorabiliaCereal : Entity
 {
     public MemorabiliaCereal() { }
 

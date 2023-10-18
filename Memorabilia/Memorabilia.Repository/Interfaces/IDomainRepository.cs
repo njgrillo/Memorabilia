@@ -1,7 +1,7 @@
 ﻿namespace Memorabilia.Repository.Interfaces;
 
 public interface IDomainRepository<T> 
-    : ITransaction where T : DomainIdEntity
+    : ITransaction where T : Domain.Entity
 {
     Task Add(T item, CancellationToken cancellationToken = default);
 

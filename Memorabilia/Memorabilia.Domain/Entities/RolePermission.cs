@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Domain.Entities;
 
-public class RolePermission : DomainIdEntity
+public class RolePermission : Entity
 {
     public RolePermission() { }
 

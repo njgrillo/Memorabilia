@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Domain.Entities;
 
-public class AwardExclusionYear : DomainIdEntity
+public class AwardExclusionYear : Entity
 {
     public AwardExclusionYear() { }
 

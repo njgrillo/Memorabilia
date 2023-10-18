@@ -2,7 +2,7 @@
 
 namespace Memorabilia.Domain.Entities;
 
-public class Team : DomainIdEntity, IWithName
+public class Team : Entity, IWithName
 {
     public Team() { }
 

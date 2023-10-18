@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Domain.Entities;
 
-public class AutographAuthentication : DomainIdEntity
+public class AutographAuthentication : Entity
 {
     public AutographAuthentication() { }
 

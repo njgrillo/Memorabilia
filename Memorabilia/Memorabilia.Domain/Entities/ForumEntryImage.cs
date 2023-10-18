@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Domain.Entities;
 
-public class ForumEntryImage : DomainIdEntity
+public class ForumEntryImage : Entity
 {
     public ForumEntryImage() { }
 

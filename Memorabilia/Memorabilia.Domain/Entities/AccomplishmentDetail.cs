@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Domain.Entities;
 
-public class AccomplishmentDetail : DomainIdEntity
+public class AccomplishmentDetail : Entity
 {
     public AccomplishmentDetail() { }
 

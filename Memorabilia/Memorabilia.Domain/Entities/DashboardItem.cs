@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Domain.Entities;
 
-public class DashboardItem : DomainIdEntity
+public class DashboardItem : Entity
 {
     public DashboardItem() { }
 

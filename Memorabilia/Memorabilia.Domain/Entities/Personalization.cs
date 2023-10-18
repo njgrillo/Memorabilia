@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Domain.Entities;
 
-public class Personalization : DomainIdEntity
+public class Personalization : Entity
 {
     public Personalization() { }
 

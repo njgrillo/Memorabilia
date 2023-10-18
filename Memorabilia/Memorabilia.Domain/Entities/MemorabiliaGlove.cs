@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Domain.Entities;
 
-public class MemorabiliaGlove : DomainIdEntity
+public class MemorabiliaGlove : Entity
 {
     public MemorabiliaGlove() { }
 

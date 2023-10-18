@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Domain.Entities;
 
-public class MemorabiliaFirstDayCover : DomainIdEntity
+public class MemorabiliaFirstDayCover : Entity
 {
     public MemorabiliaFirstDayCover() { }
 

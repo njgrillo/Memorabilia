@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Domain.Entities;
 
-public class ProjectPerson : DomainIdEntity
+public class ProjectPerson : Entity
 {
     public ProjectPerson() { }
 

@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Domain.Entities;
 
-public class SignatureIdentificationPerson : DomainIdEntity
+public class SignatureIdentificationPerson : Entity
 {
     public SignatureIdentificationPerson() { }
 

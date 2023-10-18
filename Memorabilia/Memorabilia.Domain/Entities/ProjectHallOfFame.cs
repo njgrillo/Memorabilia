@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Domain.Entities;
 
-public class ProjectHallOfFame : DomainIdEntity
+public class ProjectHallOfFame : Entity
 {
     public ProjectHallOfFame() { }
 

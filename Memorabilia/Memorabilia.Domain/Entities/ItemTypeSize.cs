@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Domain.Entities;
 
-public class ItemTypeSize : DomainIdEntity
+public class ItemTypeSize : Entity
 {
     public ItemTypeSize() { }
 

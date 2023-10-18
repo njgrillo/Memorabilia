@@ -1,7 +1,7 @@
 ﻿namespace Memorabilia.Repository;
 
 public abstract class BaseRepository<T> 
-    : IBaseRepository where T : DomainIdEntity
+    : IBaseRepository where T : Domain.Entity
 {
     private readonly IMemoryCache _memoryCache;
 

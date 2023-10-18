@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Domain.Entities;
 
-public class Acquisition : DomainIdEntity
+public class Acquisition : Entity
 {
     public Acquisition() { }
 

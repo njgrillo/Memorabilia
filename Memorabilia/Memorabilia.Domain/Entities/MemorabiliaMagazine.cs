@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Domain.Entities;
 
-public class MemorabiliaMagazine : DomainIdEntity
+public class MemorabiliaMagazine : Entity
 {
     public MemorabiliaMagazine() { }
 

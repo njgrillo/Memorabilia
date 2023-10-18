@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Domain.Entities;
 
-public class ProjectWorldSeries : DomainIdEntity
+public class ProjectWorldSeries : Entity
 {
     public ProjectWorldSeries() { }
 

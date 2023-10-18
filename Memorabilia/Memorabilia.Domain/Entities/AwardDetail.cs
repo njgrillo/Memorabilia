@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Domain.Entities;
 
-public class AwardDetail : DomainIdEntity
+public class AwardDetail : Entity
 {
     public AwardDetail() { }
 

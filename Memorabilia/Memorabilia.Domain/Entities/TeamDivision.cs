@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Domain.Entities;
 
-public class TeamDivision : DomainIdEntity
+public class TeamDivision : Entity
 {
     public TeamDivision() { }
 

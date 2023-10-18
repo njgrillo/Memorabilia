@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Domain.Entities;
 
-public class SingleSeasonRecord : DomainIdEntity
+public class SingleSeasonRecord : Entity
 {
     public SingleSeasonRecord() { }
 

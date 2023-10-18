@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Domain.Entities;
 
-public class SignatureReview : DomainIdEntity
+public class SignatureReview : Entity
 {
     public SignatureReview() { }
 

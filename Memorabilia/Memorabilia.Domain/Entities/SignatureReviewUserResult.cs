@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Domain.Entities;
 
-public class SignatureReviewUserResult : DomainIdEntity
+public class SignatureReviewUserResult : Entity
 {
     public SignatureReviewUserResult() { }
 

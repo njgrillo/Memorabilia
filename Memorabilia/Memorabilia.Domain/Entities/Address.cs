@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Domain.Entities;
 
-public class Address : DomainIdEntity
+public class Address : Entity
 {
 	public Address() { }
 }

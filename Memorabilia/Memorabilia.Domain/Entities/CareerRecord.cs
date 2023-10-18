@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Domain.Entities;
 
-public class CareerRecord : DomainIdEntity
+public class CareerRecord : Entity
 {
     public CareerRecord() { }
 

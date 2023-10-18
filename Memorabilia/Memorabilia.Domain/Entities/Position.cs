@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Domain.Entities;
 
-public class Position : DomainIdEntity
+public class Position : Entity
 {
     public Position() { }
 

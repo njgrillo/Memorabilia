@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Domain.Entities;
 
-public class MemorabiliaBrand : DomainIdEntity
+public class MemorabiliaBrand : Entity
 {
     public MemorabiliaBrand() { }
 

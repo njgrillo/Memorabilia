@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Domain.Entities;
 
-public class MemorabiliaBobblehead : DomainIdEntity
+public class MemorabiliaBobblehead : Entity
 {
     public MemorabiliaBobblehead() { }
 

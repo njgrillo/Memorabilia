@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Domain.Entities;
 
-public class AllStarDetail : DomainIdEntity
+public class AllStarDetail : Entity
 {
     public AllStarDetail() { }
 

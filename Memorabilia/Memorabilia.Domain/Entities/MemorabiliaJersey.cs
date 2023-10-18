@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Domain.Entities;
 
-public class MemorabiliaJersey : DomainIdEntity
+public class MemorabiliaJersey : Entity
 {
     public MemorabiliaJersey() { }
 
