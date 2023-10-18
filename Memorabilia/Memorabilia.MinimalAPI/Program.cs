@@ -1,6 +1,3 @@
-using Autofac.Core;
-using Memorabilia.Blazor.Services;
-
 namespace Memorabilia.MinimalAPI;
 
 public class Program
@@ -20,7 +17,7 @@ public class Program
         
         var assemblies = new[] { typeof(GetUser).Assembly, typeof(Program).Assembly };
 
-        builder.Services.AddMediatR(x => x.AsScoped(), assemblies);
+        builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(GetCommissioner).Assembly));
 
         builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory());
         builder.Host.ConfigureContainer<ContainerBuilder>(builder => builder.RegisterModule(new RepositoryModule()));
