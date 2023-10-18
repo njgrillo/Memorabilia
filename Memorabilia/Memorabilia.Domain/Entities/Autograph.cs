@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Domain.Entities;
 
-public class Autograph : Framework.Library.Domain.Entity.DomainEntity
+public class Autograph : Entity
 {
     public Autograph() { }
 

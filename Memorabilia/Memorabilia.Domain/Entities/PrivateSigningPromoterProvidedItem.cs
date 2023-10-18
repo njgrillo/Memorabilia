@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Domain.Entities;
 
-public class PrivateSigningPromoterProvidedItem : Framework.Library.Domain.Entity.DomainEntity
+public class PrivateSigningPromoterProvidedItem : Entity
 {
     public PrivateSigningPromoterProvidedItem() { }
 

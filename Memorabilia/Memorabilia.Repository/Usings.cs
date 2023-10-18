@@ -1,8 +1,8 @@
 ﻿global using Autofac;
-global using Framework.Library.Domain.Entity;
-global using Framework.Library.Domain.Paging;
-global using Framework.Library.Handler;
+global using Memorabilia.Domain;
+global using Memorabilia.Domain.Entities;
 global using Memorabilia.Domain.Extensions;
+global using Memorabilia.Domain.Paging;
 global using Memorabilia.Domain.SearchModels.Memorabilia;
 global using Memorabilia.Repository.Cache;
 global using Memorabilia.Repository.Extensions;
@@ -16,11 +16,9 @@ global using System;
 global using System.Collections.Generic;
 global using System.Data;
 global using System.Linq;
-global using System.Linq.Expressions;
 global using System.Threading;
 global using System.Threading.Tasks;
 global using Constant = Memorabilia.Domain.Constants;
-global using Enum = Memorabilia.Domain.Enums;
 global using Entity = Memorabilia.Domain.Entities;
 
 

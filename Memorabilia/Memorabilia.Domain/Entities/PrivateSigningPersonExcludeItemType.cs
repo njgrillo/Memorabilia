@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Domain.Entities;
 
-public class PrivateSigningPersonExcludeItemType : Framework.Library.Domain.Entity.DomainEntity
+public class PrivateSigningPersonExcludeItemType : Entity
 {
     public PrivateSigningPersonExcludeItemType() { }
 

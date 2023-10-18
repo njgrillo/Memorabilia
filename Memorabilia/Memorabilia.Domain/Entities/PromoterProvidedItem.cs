@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Domain.Entities;
 
-public class PromoterProvidedItem : Framework.Library.Domain.Entity.DomainEntity
+public class PromoterProvidedItem : Entity
 {
     public PromoterProvidedItem() { }
 

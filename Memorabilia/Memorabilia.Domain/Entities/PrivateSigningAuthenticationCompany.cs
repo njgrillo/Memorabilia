@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Domain.Entities;
 
-public class PrivateSigningAuthenticationCompany : Framework.Library.Domain.Entity.DomainEntity
+public class PrivateSigningAuthenticationCompany : Entity
 {
     public PrivateSigningAuthenticationCompany() { }
 

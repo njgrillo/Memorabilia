@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Domain.Entities;
 
-public class PrivateSigningItemTypeGroup : Framework.Library.Domain.Entity.DomainEntity
+public class PrivateSigningItemTypeGroup : Entity
 {
     public PrivateSigningItemTypeGroup() { }
 

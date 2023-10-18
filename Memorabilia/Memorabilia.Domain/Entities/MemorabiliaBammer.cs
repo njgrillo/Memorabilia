@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Domain.Entities;
 
-public class MemorabiliaBammer : Framework.Library.Domain.Entity.DomainEntity
+public class MemorabiliaBammer : Entity
 {
     public MemorabiliaBammer() { }
 

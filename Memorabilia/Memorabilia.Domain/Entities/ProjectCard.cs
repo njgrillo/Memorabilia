@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Domain.Entities;
 
-public class ProjectCard : Framework.Library.Domain.Entity.DomainEntity
+public class ProjectCard : Entity
 {
     public ProjectCard() { }
 

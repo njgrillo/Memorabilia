@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Domain.Entities;
 
-public class Image : Framework.Library.Domain.Entity.DomainEntity
+public class Image : Entity
 {
     public Image() { }
 

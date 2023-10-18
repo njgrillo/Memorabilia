@@ -35,7 +35,7 @@ public class SearchCriteria
     public string ImageFilterName 
         => ImageFilter.Name;
 
-    public List<Entity.Person> People { get; set; } 
+    public List<Entities.Person> People { get; set; } 
         = new();
 
     public int[] PersonIds 
@@ -57,6 +57,6 @@ public class SearchCriteria
                 .Distinct()
                 .ToArray();
 
-    public List<Entity.Team> Teams { get; set; } 
+    public List<Entities.Team> Teams { get; set; } 
         = new();    
 }

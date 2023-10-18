@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Domain.Entities;
 
-public class UserRole : Framework.Library.Domain.Entity.DomainEntity
+public class UserRole : Entity
 {
     public UserRole() { }
 

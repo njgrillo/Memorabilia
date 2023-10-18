@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Domain.Entities;
 
-public class MemorabiliaCommissioner : Framework.Library.Domain.Entity.DomainEntity
+public class MemorabiliaCommissioner : Entity
 {
     public MemorabiliaCommissioner() { }
 
