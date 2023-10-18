@@ -1,16 +1,16 @@
 ﻿namespace Memorabilia.Repository.Implementations;
 
 public class MemorabiliaForSaleRepository
-    : MemorabiliaRepository<Entity.MemorabiliaForSale>, IMemorabiliaForSaleRepository
+    : MemorabiliaRepository<MemorabiliaForSale>, IMemorabiliaForSaleRepository
 {
     public MemorabiliaForSaleRepository(MemorabiliaContext context, IMemoryCache memoryCache)
         : base(context, memoryCache) { }
 
-    public async Task<Entity.MemorabiliaForSale[]> GetAll(int[] ids)
+    public async Task<MemorabiliaForSale[]> GetAll(int[] ids)
         => await Items.Where(item => ids.Contains(item.Id))
                       .ToArrayAsync();
 
-    public async Task<PagedResult<Entity.MemorabiliaForSale>> GetAllForSale(int userId,
+    public async Task<PagedResult<MemorabiliaForSale>> GetAllForSale(int userId,
                                                                             PageInfo pageInfo,
                                                                             MemorabiliaSearchCriteria memorabiliaSearchCriteria = null)
     {
@@ -69,7 +69,7 @@ public class MemorabiliaForSaleRepository
               && (!memorabiliaSearchCriteria.Teams.Any() || memorabilia.Teams.Any(team => memorabiliaSearchCriteria.TeamIds.Contains(team.TeamId)))
               && (memorabiliaSearchCriteria.TradeFilter == Constant.TradeFilter.None || (memorabiliaSearchCriteria.TradeFilter == Constant.TradeFilter.ForTrade && memorabilia.ForTrade) || (memorabiliaSearchCriteria.TradeFilter == Constant.TradeFilter.NotForTrade && !memorabilia.ForTrade))
             orderby memorabilia.CreateDate
-            select new Entity.MemorabiliaForSale(memorabilia);
+            select new MemorabiliaForSale(memorabilia);
 
         return await query.ToPagedResult(pageInfo);
     }

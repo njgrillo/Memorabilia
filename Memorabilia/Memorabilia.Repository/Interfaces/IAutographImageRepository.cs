@@ -1,7 +1,7 @@
 ﻿namespace Memorabilia.Repository.Interfaces;
 
 public interface IAutographImageRepository 
-    : IDomainRepository<Entity.AutographImage>
+    : IDomainRepository<AutographImage>
 {
-    Task<Entity.AutographImage[]> GetAll(int autographId);
+    Task<AutographImage[]> GetAll(int autographId);
 }

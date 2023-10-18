@@ -1,17 +1,17 @@
 ﻿namespace Memorabilia.Repository.Interfaces;
 
 public interface IMemorabiliaTransactionRepository 
-    : IDomainRepository<Entity.MemorabiliaTransaction>
+    : IDomainRepository<MemorabiliaTransaction>
 {
-    Task<PagedResult<Entity.MemorabiliaTransaction>> GetAllPartialTrades(PageInfo pageInfo,
+    Task<PagedResult<MemorabiliaTransaction>> GetAllPartialTrades(PageInfo pageInfo,
                                                                          int userId,
                                                                          MemorabiliaSearchCriteria memorabiliaSearchCriteria = null);
 
-    Task<PagedResult<Entity.MemorabiliaTransaction>> GetAllSales(PageInfo pageInfo, 
+    Task<PagedResult<MemorabiliaTransaction>> GetAllSales(PageInfo pageInfo, 
                                                                  int userId,
                                                                  MemorabiliaSearchCriteria memorabiliaSearchCriteria = null);
 
-    Task<PagedResult<Entity.MemorabiliaTransaction>> GetAllTrades(PageInfo pageInfo,
+    Task<PagedResult<MemorabiliaTransaction>> GetAllTrades(PageInfo pageInfo,
                                                                   int userId,
                                                                   MemorabiliaSearchCriteria memorabiliaSearchCriteria = null);
 }

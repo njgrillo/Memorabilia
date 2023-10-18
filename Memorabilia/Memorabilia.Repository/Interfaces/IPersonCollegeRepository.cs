@@ -2,6 +2,6 @@
 
 public interface IPersonCollegeRepository
 {
-    Task<IEnumerable<Entity.PersonCollege>> GetAll(int? collegeId = null, 
+    Task<IEnumerable<PersonCollege>> GetAll(int? collegeId = null, 
                                                    int? sportLeagueLevelId = null);
 }

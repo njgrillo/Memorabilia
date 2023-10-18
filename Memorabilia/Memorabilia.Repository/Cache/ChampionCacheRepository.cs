@@ -1,7 +1,7 @@
 ﻿namespace Memorabilia.Repository.Cache;
 
 public class ChampionCacheRepository 
-    : DomainCacheRepository<Entity.Champion>, IChampionRepository
+    : DomainCacheRepository<Champion>, IChampionRepository
 {
     private readonly ChampionRepository _championRepository;
 
@@ -13,7 +13,7 @@ public class ChampionCacheRepository
         _championRepository = championRepository;
     }
 
-    public Task<IEnumerable<Entity.Champion>> GetAll(int championTypeId)
+    public Task<IEnumerable<Champion>> GetAll(int championTypeId)
         => GetAll($"Champion_GetAll_{championTypeId}", 
                   entry => 
                   { 

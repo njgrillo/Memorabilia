@@ -1,12 +1,12 @@
 ﻿namespace Memorabilia.Repository.Implementations;
 
 public class AutographRepository 
-    : MemorabiliaRepository<Entity.Autograph>, IAutographRepository
+    : MemorabiliaRepository<Autograph>, IAutographRepository
 {
     public AutographRepository(MemorabiliaContext context, IMemoryCache memoryCache) 
         : base(context, memoryCache) { }
 
-    private IQueryable<Entity.Autograph> Autograph 
+    private IQueryable<Autograph> Autograph 
         => Items.Include(autograph => autograph.Acquisition)
                 .Include(autograph => autograph.Authentications)
                 .Include(autograph => autograph.Images)
@@ -17,10 +17,10 @@ public class AutographRepository
                 .Include(autograph => autograph.Spot)
                 .Include(autograph => autograph.ThroughTheMailMemorabilia);
 
-    public override async Task<Entity.Autograph> Get(int id)
+    public override async Task<Autograph> Get(int id)
         => await Autograph.SingleOrDefaultAsync(autograph => autograph.Id == id);
 
-    public async Task<Entity.Autograph[]> GetAll(int? memorabiliaId = null, 
+    public async Task<Autograph[]> GetAll(int? memorabiliaId = null, 
                                                  int? userId = null)
     {
         if (memorabiliaId.HasValue)
@@ -34,7 +34,7 @@ public class AutographRepository
         return await Autograph.ToArrayAsync();
     }
 
-    public async Task<Entity.Autograph[]> GetAllBaseballTypes(int itemTypeId, 
+    public async Task<Autograph[]> GetAllBaseballTypes(int itemTypeId, 
                                                               int personId, 
                                                               int baseballTypeId,
                                                               int? teamId,
@@ -50,12 +50,12 @@ public class AutographRepository
                                 )
                           .ToArrayAsync();
 
-    public async Task<Entity.Autograph[]> GetAllByPerson(int personId, int userId)
+    public async Task<Autograph[]> GetAllByPerson(int personId, int userId)
         => await Autograph.Where(autograph => autograph.Person.Id == personId &&
                                               autograph.Memorabilia.UserId == userId)
                           .ToArrayAsync();
 
-    public async Task<Entity.Autograph[]> GetAllCards(int itemTypeId,
+    public async Task<Autograph[]> GetAllCards(int itemTypeId,
                                                       int personId,
                                                       int brandId,
                                                       int? teamId,
@@ -72,7 +72,7 @@ public class AutographRepository
                                 )
                           .ToArrayAsync();
 
-    public async Task<Entity.Autograph[]> GetAllHallOfFamers(int itemTypeId,
+    public async Task<Autograph[]> GetAllHallOfFamers(int itemTypeId,
                                                              int personId,
                                                              int sportLeagueLevelId,
                                                              int? year,
@@ -86,7 +86,7 @@ public class AutographRepository
                                 )
                           .ToArrayAsync();
 
-    public async Task<Entity.Autograph[]> GetAllItemTypes(int itemTypeId,
+    public async Task<Autograph[]> GetAllItemTypes(int itemTypeId,
                                                           int personId,
                                                           bool? multiSignedItem,
                                                           int userId)
@@ -97,7 +97,7 @@ public class AutographRepository
                                 )
                           .ToArrayAsync();
 
-    public async Task<Entity.Autograph[]> GetAllTeams(int itemTypeId,
+    public async Task<Autograph[]> GetAllTeams(int itemTypeId,
                                                       int personId,
                                                       int teamId,
                                                       int? year,
@@ -110,7 +110,7 @@ public class AutographRepository
                                 )
                           .ToArrayAsync();
 
-    public async Task<Entity.Autograph[]> GetAllWorldSeries(int itemTypeId,
+    public async Task<Autograph[]> GetAllWorldSeries(int itemTypeId,
                                                             int personId,
                                                             int teamId,
                                                             int? year,

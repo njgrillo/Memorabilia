@@ -1,7 +1,7 @@
 ﻿namespace Memorabilia.Repository.Interfaces;
 
 public interface IMemorabiliaImageRepository 
-    : IDomainRepository<Entity.MemorabiliaImage>
+    : IDomainRepository<MemorabiliaImage>
 {
-    Task<Entity.MemorabiliaImage[]> GetAll(int memorabiliaId);
+    Task<MemorabiliaImage[]> GetAll(int memorabiliaId);
 }

@@ -1,18 +1,18 @@
 ﻿namespace Memorabilia.Repository.Implementations;
 
 public class MemorabiliaTransactionRepository 
-    : MemorabiliaRepository<Entity.MemorabiliaTransaction>, IMemorabiliaTransactionRepository
+    : MemorabiliaRepository<MemorabiliaTransaction>, IMemorabiliaTransactionRepository
 {
     public MemorabiliaTransactionRepository(MemorabiliaContext context, IMemoryCache memoryCache)
         : base(context, memoryCache) { }
 
-    private IQueryable<Entity.MemorabiliaTransaction> SaleTransactions
+    private IQueryable<MemorabiliaTransaction> SaleTransactions
         => Items.Include(transaction => transaction.Sales);
 
-    private IQueryable<Entity.MemorabiliaTransaction> TradeTransactions
+    private IQueryable<MemorabiliaTransaction> TradeTransactions
         => Items.Include(transaction => transaction.Trades);
 
-    public async Task<PagedResult<Entity.MemorabiliaTransaction>> GetAllPartialTrades(PageInfo pageInfo,
+    public async Task<PagedResult<MemorabiliaTransaction>> GetAllPartialTrades(PageInfo pageInfo,
                                                                                       int userId,
                                                                                       MemorabiliaSearchCriteria memorabiliaSearchCriteria = null)
     {
@@ -76,14 +76,14 @@ public class MemorabiliaTransactionRepository
                 memorabiliaTransaction.TransactionDate,
                 memorabiliaTransaction.UserId
             } into groupedList
-            select new Entity.MemorabiliaTransaction(
+            select new MemorabiliaTransaction(
                 groupedList.Key.Id,
                 groupedList.Key.TransactionTypeId,
                 groupedList.Key.TransactionDate,
                 groupedList.Key.UserId
                 );
 
-        PagedResult<Entity.MemorabiliaTransaction> result 
+        PagedResult<MemorabiliaTransaction> result 
             = await query.ToPagedResult(pageInfo);
 
         int[] memorabiliaTransactionIds = result.Data
@@ -93,13 +93,13 @@ public class MemorabiliaTransactionRepository
         if (!memorabiliaTransactionIds.Any())
             return result;
 
-        Entity.MemorabiliaTransaction[] memorabiliaTransactions 
+        MemorabiliaTransaction[] memorabiliaTransactions 
             = await TradeTransactions.Where(memorabiliaTransaction => memorabiliaTransactionIds.Contains(memorabiliaTransaction.Id))
                                      .ToArrayAsync();
 
-        foreach (Entity.MemorabiliaTransaction item in result.Data)
+        foreach (MemorabiliaTransaction item in result.Data)
         {
-            Entity.MemorabiliaTransaction memorabiliaTransaction
+            MemorabiliaTransaction memorabiliaTransaction
                 = memorabiliaTransactions.SingleOrDefault(memorabiliaTransaction => memorabiliaTransaction.Id == item.Id);
 
             if (memorabiliaTransaction == null)
@@ -111,7 +111,7 @@ public class MemorabiliaTransactionRepository
         return result;
     }
 
-    public async Task<PagedResult<Entity.MemorabiliaTransaction>> GetAllSales(PageInfo pageInfo,
+    public async Task<PagedResult<MemorabiliaTransaction>> GetAllSales(PageInfo pageInfo,
                                                                               int userId,
                                                                               MemorabiliaSearchCriteria memorabiliaSearchCriteria = null)
     {
@@ -175,14 +175,14 @@ public class MemorabiliaTransactionRepository
                 memorabiliaTransaction.TransactionDate,
                 memorabiliaTransaction.UserId
             } into groupedList
-            select new Entity.MemorabiliaTransaction(
+            select new MemorabiliaTransaction(
                 groupedList.Key.Id,
                 groupedList.Key.TransactionTypeId,
                 groupedList.Key.TransactionDate,
                 groupedList.Key.UserId
                 );
 
-        PagedResult<Entity.MemorabiliaTransaction> result
+        PagedResult<MemorabiliaTransaction> result
             = await query.ToPagedResult(pageInfo);
 
         int[] memorabiliaTransactionIds = result.Data
@@ -192,13 +192,13 @@ public class MemorabiliaTransactionRepository
         if (!memorabiliaTransactionIds.Any())
             return result;
 
-        Entity.MemorabiliaTransaction[] memorabiliaTransactions
+        MemorabiliaTransaction[] memorabiliaTransactions
             = await SaleTransactions.Where(memorabiliaTransaction => memorabiliaTransactionIds.Contains(memorabiliaTransaction.Id))
                                     .ToArrayAsync();
 
-        foreach (Entity.MemorabiliaTransaction item in result.Data)
+        foreach (MemorabiliaTransaction item in result.Data)
         {
-            Entity.MemorabiliaTransaction memorabiliaTransaction
+            MemorabiliaTransaction memorabiliaTransaction
                 = memorabiliaTransactions.SingleOrDefault(memorabiliaTransaction => memorabiliaTransaction.Id == item.Id);
 
             if (memorabiliaTransaction == null)
@@ -210,7 +210,7 @@ public class MemorabiliaTransactionRepository
         return result;
     }    
 
-    public async Task<PagedResult<Entity.MemorabiliaTransaction>> GetAllTrades(PageInfo pageInfo,
+    public async Task<PagedResult<MemorabiliaTransaction>> GetAllTrades(PageInfo pageInfo,
                                                                                int userId,
                                                                                MemorabiliaSearchCriteria memorabiliaSearchCriteria = null)
     {
@@ -274,14 +274,14 @@ public class MemorabiliaTransactionRepository
                 memorabiliaTransaction.TransactionDate,
                 memorabiliaTransaction.UserId
             } into groupedList
-            select new Entity.MemorabiliaTransaction(
+            select new MemorabiliaTransaction(
                 groupedList.Key.Id,
                 groupedList.Key.TransactionTypeId,
                 groupedList.Key.TransactionDate,
                 groupedList.Key.UserId
                 );
 
-        PagedResult<Entity.MemorabiliaTransaction> result
+        PagedResult<MemorabiliaTransaction> result
             = await query.ToPagedResult(pageInfo);
 
         int[] memorabiliaTransactionIds = result.Data
@@ -291,13 +291,13 @@ public class MemorabiliaTransactionRepository
         if (!memorabiliaTransactionIds.Any())
             return result;
 
-        Entity.MemorabiliaTransaction[] memorabiliaTransactions
+        MemorabiliaTransaction[] memorabiliaTransactions
             = await TradeTransactions.Where(memorabiliaTransaction => memorabiliaTransactionIds.Contains(memorabiliaTransaction.Id))
                                      .ToArrayAsync();
 
-        foreach (Entity.MemorabiliaTransaction item in result.Data)
+        foreach (MemorabiliaTransaction item in result.Data)
         {
-            Entity.MemorabiliaTransaction memorabiliaTransaction
+            MemorabiliaTransaction memorabiliaTransaction
                 = memorabiliaTransactions.SingleOrDefault(memorabiliaTransaction => memorabiliaTransaction.Id == item.Id);
 
             if (memorabiliaTransaction == null)

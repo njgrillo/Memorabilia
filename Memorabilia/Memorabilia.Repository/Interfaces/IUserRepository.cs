@@ -1,18 +1,18 @@
 ﻿namespace Memorabilia.Repository.Interfaces;
 
-public interface IUserRepository : IDomainRepository<Entity.User>
+public interface IUserRepository : IDomainRepository<User>
 {
-    Task<Entity.User> Get(string emailAddress);
+    Task<User> Get(string emailAddress);
 
-    Task<Entity.User[]> GetAllByActiveSubscriptions();
+    Task<User[]> GetAllByActiveSubscriptions();
 
-    Task<Entity.User[]> GetAllBySubscriptionExpired();
+    Task<User[]> GetAllBySubscriptionExpired();
 
-    Task<Entity.User> GetByGoogleEmailAddress(string emailAddress);
+    Task<User> GetByGoogleEmailAddress(string emailAddress);
 
-    Task<Entity.User> GetByMicrosoftEmailAddress(string emailAddress);
+    Task<User> GetByMicrosoftEmailAddress(string emailAddress);
 
-    Task<Entity.User> GetByUsername(string username);
+    Task<User> GetByUsername(string username);
 
-    Task<Entity.User> GetByXHandle(string handle);
+    Task<User> GetByXHandle(string handle);
 }

@@ -13,7 +13,7 @@ public class ContextLoader : IContextLoader
 
     public Task Load()
     {
-        _domainContext.Set<Entity.AccomplishmentType>()
+        _domainContext.Set<AccomplishmentType>()
                       .Where(t => 1 == 0)
                       .Load();
 

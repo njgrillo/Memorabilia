@@ -1,7 +1,7 @@
 ﻿namespace Memorabilia.Repository.Cache;
 
 public class PersonCacheRepository 
-    : DomainCacheRepository<Entity.Person>, IPersonRepository
+    : DomainCacheRepository<Person>, IPersonRepository
 {
     private readonly PersonRepository _personRepository;
 
@@ -13,7 +13,7 @@ public class PersonCacheRepository
         _personRepository = personRepository;
     }
 
-    public override async Task Add(Entity.Person person, 
+    public override async Task Add(Person person, 
                                    CancellationToken cancellationToken = default)
     {
         RemoveFromCache($"Person_GetAll");
@@ -21,12 +21,12 @@ public class PersonCacheRepository
         await _personRepository.Add(person, cancellationToken);
     }
 
-    public async Task<Entity.Person> Get(string displayName = null, 
+    public async Task<Person> Get(string displayName = null, 
                                          string profileName = null, 
                                          string legalName = null)
         => await _personRepository.Get(displayName, profileName, legalName);
 
-    public Task<IEnumerable<Entity.Person>> GetAll(int? sportId = null, 
+    public Task<IEnumerable<Person>> GetAll(int? sportId = null, 
                                                    int? sportLeagueLevelId = null)
         => sportId == null && 
            sportLeagueLevelId == null
@@ -38,15 +38,15 @@ public class PersonCacheRepository
                          })
                 : _personRepository.GetAll(sportId, sportLeagueLevelId);
 
-    public Task<Entity.Person[]> GetAll(Dictionary<string, object> parameters)
+    public Task<Person[]> GetAll(Dictionary<string, object> parameters)
         => _personRepository.GetAll(parameters);
 
-    public Task<Entity.Person[]> GetAll(int teamId, int year)
+    public Task<Person[]> GetAll(int teamId, int year)
         => _personRepository.GetAll(teamId, year);
 
-    public Task<Entity.Person[]> GetAllHallOfFamers(int sportLeagueLevelId, int? year)
+    public Task<Person[]> GetAllHallOfFamers(int sportLeagueLevelId, int? year)
         => _personRepository.GetAllHallOfFamers(sportLeagueLevelId, year);
 
-    public Task<Entity.Person[]> GetMostRecent()
+    public Task<Person[]> GetMostRecent()
         => _personRepository.GetMostRecent();
 }

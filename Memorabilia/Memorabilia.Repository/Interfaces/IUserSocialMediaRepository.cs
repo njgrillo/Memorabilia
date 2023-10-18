@@ -1,5 +1,5 @@
 ﻿namespace Memorabilia.Repository.Interfaces;
 
-public interface IUserSocialMediaRepository : IDomainRepository<Entity.UserSocialMedia>
+public interface IUserSocialMediaRepository : IDomainRepository<UserSocialMedia>
 {
 }

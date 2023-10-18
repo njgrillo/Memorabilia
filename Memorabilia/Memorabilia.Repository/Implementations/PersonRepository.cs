@@ -1,12 +1,12 @@
 ﻿namespace Memorabilia.Repository.Implementations;
 
 public class PersonRepository 
-    : DomainRepository<Entity.Person>, IPersonRepository
+    : DomainRepository<Person>, IPersonRepository
 {
     public PersonRepository(DomainContext context, IMemoryCache memoryCache) 
         : base(context, memoryCache) { }
 
-    private IQueryable<Entity.Person> Person 
+    private IQueryable<Person> Person 
         => Items.Include(person => person.Accomplishments)
                 .Include(person => person.AllStars)
                 .Include(person => person.Awards)
@@ -27,10 +27,10 @@ public class PersonRepository
                 .Include("Sports.Sport")
                 .Include("Teams.Team");
 
-    public override async Task<Entity.Person> Get(int id)
+    public override async Task<Person> Get(int id)
         => await Person.SingleOrDefaultAsync(person => person.Id == id);
 
-    public async Task<Entity.Person> Get(string displayName = null, 
+    public async Task<Person> Get(string displayName = null, 
                                          string profileName = null, 
                                          string legalName = null)
     {
@@ -39,18 +39,18 @@ public class PersonRepository
             where (displayName == null || people.DisplayName == displayName)
                && (profileName == null || people.ProfileName == profileName)
                && (legalName == null || people.LegalName == legalName)
-            select new Entity.Person(people);
+            select new Person(people);
 
         return await query.FirstOrDefaultAsync();
     }
 
-    public async Task<IEnumerable<Entity.Person>> GetAll(int? sportId = null, 
+    public async Task<IEnumerable<Person>> GetAll(int? sportId = null, 
                                                          int? sportLeagueLevelId = null)
         => await Items.Where(person => (!sportId.HasValue || person.Sports.Any(sport => sport.SportId == sportId.Value))
                                         && (!sportLeagueLevelId.HasValue || person.Teams.Any(team => team.Team.Franchise.SportLeagueLevel.Id == sportLeagueLevelId.Value)))
                       .ToListAsync();
 
-    public async Task<Entity.Person[]> GetAll(Dictionary<string, object> parameters)
+    public async Task<Person[]> GetAll(Dictionary<string, object> parameters)
     {
         _ = parameters.TryGetValue("IsAllStar", out object isAllStar);
         _ = parameters.TryGetValue("IsWorldSeries", out object isWorldSeries);
@@ -59,7 +59,7 @@ public class PersonRepository
         _ = parameters.TryGetValue("EndYear", out object endYear);
         _ = parameters.TryGetValue("SportId", out object sportId);
 
-        IQueryable<Entity.Person> query;
+        IQueryable<Person> query;
 
         if (isAllStar != null && (bool)isAllStar)
         {
@@ -106,13 +106,13 @@ public class PersonRepository
             return await query.ToArrayAsync();
         }
 
-        return Array.Empty<Entity.Person>();
+        return Array.Empty<Person>();
     }
 
-    public async Task<Entity.Person[]> GetAll(int teamId, int year)
+    public async Task<Person[]> GetAll(int teamId, int year)
     {
 
-        IQueryable<Entity.Person> query = from person in Context.Person
+        IQueryable<Person> query = from person in Context.Person
                                    where person.Teams.Any(team => team.TeamId == teamId
                                                                && team.BeginYear <= year
                                                                && (team.EndYear == null || team.EndYear >= year))
@@ -122,10 +122,10 @@ public class PersonRepository
         return await query.ToArrayAsync();
     }
 
-    public async Task<Entity.Person[]> GetAllHallOfFamers(int sportLeagueLevelId, int? year)
+    public async Task<Person[]> GetAllHallOfFamers(int sportLeagueLevelId, int? year)
     {
 
-        IQueryable<Entity.Person> query = from person in Context.Person
+        IQueryable<Person> query = from person in Context.Person
                                    where person.HallOfFames.Any(hof => hof.SportLeagueLevelId == sportLeagueLevelId
                                                                 && (year == null || hof.InductionYear == year))
                                    orderby person.DisplayName
@@ -134,14 +134,14 @@ public class PersonRepository
         return await query.ToArrayAsync();
     }
 
-    public async Task<Entity.Person[]> GetMostRecent()
+    public async Task<Person[]> GetMostRecent()
     {
         var query =
             from person in Context.Person
             where
                 person.Occupations.Any() || person.Positions.Any() || person.Sports.Any()
             orderby person.Id descending
-            select new Entity.Person(person);
+            select new Person(person);
 
         return await query.Take(5)
                           .ToArrayAsync();

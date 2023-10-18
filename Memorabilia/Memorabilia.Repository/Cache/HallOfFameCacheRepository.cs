@@ -1,7 +1,7 @@
 ﻿namespace Memorabilia.Repository.Cache;
 
 public class HallOfFameCacheRepository 
-    : DomainCacheRepository<Entity.HallOfFame>, IHallOfFameRepository
+    : DomainCacheRepository<HallOfFame>, IHallOfFameRepository
 {
     private readonly HallOfFameRepository _hallOfFameRepository;
 
@@ -13,7 +13,7 @@ public class HallOfFameCacheRepository
         _hallOfFameRepository = hallOfFameRepository;
     }
 
-    public Task<IEnumerable<Entity.HallOfFame>> GetAll(int? sportLeagueLevelId = null, 
+    public Task<IEnumerable<HallOfFame>> GetAll(int? sportLeagueLevelId = null, 
                                                        int? inductionYear = null)
         => GetAll($"HallOfFame_GetAll_{sportLeagueLevelId}_{inductionYear}", 
                   entry =>

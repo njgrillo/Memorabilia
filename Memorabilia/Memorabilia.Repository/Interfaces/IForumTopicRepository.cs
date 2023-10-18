@@ -1,13 +1,13 @@
 ﻿namespace Memorabilia.Repository.Interfaces;
 
 public interface IForumTopicRepository
-    : IDomainRepository<Entity.ForumTopic>
+    : IDomainRepository<ForumTopic>
 {
-    Task<PagedResult<Entity.ForumTopic>> GetAll(PageInfo pageInfo, int forumCategoryId, int? sportId);
+    Task<PagedResult<ForumTopic>> GetAll(PageInfo pageInfo, int forumCategoryId, int? sportId);
 
-    Task<Entity.ForumTopic[]> GetAllBookmarked(int userId);
+    Task<ForumTopic[]> GetAllBookmarked(int userId);
 
-    Task<Entity.ForumTopic[]> GetAllTrending();
+    Task<ForumTopic[]> GetAllTrending();
 
-    Task<PagedResult<Entity.ForumTopic>> Search(PageInfo pageInfo, string searchText);
+    Task<PagedResult<ForumTopic>> Search(PageInfo pageInfo, string searchText);
 }

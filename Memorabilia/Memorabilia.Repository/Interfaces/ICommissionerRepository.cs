@@ -1,7 +1,7 @@
 ﻿namespace Memorabilia.Repository.Interfaces;
 
 public interface ICommissionerRepository 
-    : IDomainRepository<Entity.Commissioner>
+    : IDomainRepository<Commissioner>
 {
-    Task<Entity.Commissioner[]> GetAll(int? sportLeagueLevelId = null);
+    Task<Commissioner[]> GetAll(int? sportLeagueLevelId = null);
 }

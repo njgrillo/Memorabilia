@@ -1,17 +1,17 @@
 ﻿namespace Memorabilia.Repository.Implementations;
 
 public class PersonAccomplishmentRepository 
-    : DomainRepository<Entity.PersonAccomplishment>, IPersonAccomplishmentRepository
+    : DomainRepository<PersonAccomplishment>, IPersonAccomplishmentRepository
 {
     public PersonAccomplishmentRepository(DomainContext context, IMemoryCache memoryCache) 
         : base(context, memoryCache) { }
 
-    private IQueryable<Entity.PersonAccomplishment> PersonAccomplishment 
+    private IQueryable<PersonAccomplishment> PersonAccomplishment 
         => Items.Include(personAccomplishment => personAccomplishment.Person);
 
-    public async Task<IEnumerable<Entity.PersonAccomplishment>> GetAll(int accomplishmentTypeId)
+    public async Task<IEnumerable<PersonAccomplishment>> GetAll(int accomplishmentTypeId)
     {
-        Entity.PersonAccomplishment[] accomplishments 
+        PersonAccomplishment[] accomplishments 
             = await PersonAccomplishment.Where(personAccomplishment => personAccomplishment.AccomplishmentTypeId == accomplishmentTypeId)
                                         .AsNoTracking()
                                         .ToArrayAsync();

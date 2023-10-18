@@ -1,5 +1,5 @@
 ﻿namespace Memorabilia.Repository.Interfaces;
 
-public interface IUserPaymentOptionRepository : IDomainRepository<Entity.UserPaymentOption>
+public interface IUserPaymentOptionRepository : IDomainRepository<UserPaymentOption>
 {
 }

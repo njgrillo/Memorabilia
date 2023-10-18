@@ -1,15 +1,15 @@
 ﻿namespace Memorabilia.Repository.Implementations;
 
 public class CareerRecordRepository 
-    : DomainRepository<Entity.CareerRecord>, ICareerRecordRepository
+    : DomainRepository<CareerRecord>, ICareerRecordRepository
 {
     public CareerRecordRepository(DomainContext context, IMemoryCache memoryCache) 
         : base(context, memoryCache) { }
 
-    private IQueryable<Entity.CareerRecord> CareerRecords 
+    private IQueryable<CareerRecord> CareerRecords 
         => Items.Include(record => record.Person);
 
-    public async Task<IEnumerable<Entity.CareerRecord>> GetAll(int sportId)
+    public async Task<IEnumerable<CareerRecord>> GetAll(int sportId)
         => await CareerRecords.Where(record => record.Person.Sports.Select(sport => sport.SportId).Contains(sportId))
                               .AsNoTracking()
                               .ToListAsync();
