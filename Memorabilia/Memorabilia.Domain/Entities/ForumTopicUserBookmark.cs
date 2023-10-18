@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Domain.Entities;
 
-public class ForumTopicUserBookmark : Framework.Library.Domain.Entity.DomainEntity
+public class ForumTopicUserBookmark : Entity
 {
     public ForumTopicUserBookmark() { }
 

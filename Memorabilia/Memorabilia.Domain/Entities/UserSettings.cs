@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Domain.Entities;
 
-public class UserSettings : Framework.Library.Domain.Entity.DomainEntity
+public class UserSettings : Entity
 {
     public UserSettings() { }
 

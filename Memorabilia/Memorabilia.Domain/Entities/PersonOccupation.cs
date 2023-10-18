@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Domain.Entities;
 
-public class PersonOccupation : Framework.Library.Domain.Entity.DomainEntity
+public class PersonOccupation : Entity
 {
     public PersonOccupation() { }
 

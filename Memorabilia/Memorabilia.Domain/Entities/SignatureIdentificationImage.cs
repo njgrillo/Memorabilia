@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Domain.Entities;
 
-public class SignatureIdentificationImage : Framework.Library.Domain.Entity.DomainEntity
+public class SignatureIdentificationImage : Entity
 {
     public SignatureIdentificationImage() { }
 

@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Domain.Entities;
 
-public class ItemTypeSpot : Framework.Library.Domain.Entity.DomainEntity
+public class ItemTypeSpot : Entity
 {
     public ItemTypeSpot() { }
 

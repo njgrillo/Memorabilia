@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Domain.Entities;
 
-public class BaseballBattingStatistics : Framework.Library.Domain.Entity.DomainEntity
+public class BaseballBattingStatistics : Entity
 {
     public BaseballBattingStatistics() { }
 

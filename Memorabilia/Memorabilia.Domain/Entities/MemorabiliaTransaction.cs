@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Domain.Entities;
 
-public class MemorabiliaTransaction : Framework.Library.Domain.Entity.DomainEntity
+public class MemorabiliaTransaction : Entity
 {
     public MemorabiliaTransaction() { }
 

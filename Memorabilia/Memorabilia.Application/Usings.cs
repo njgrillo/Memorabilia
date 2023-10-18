@@ -1,11 +1,10 @@
 ﻿global using Autofac;
 global using FluentValidation;
-global using Framework.Library.Domain.Command;
-global using Framework.Library.Domain.Paging;
-global using Framework.Library.Handler;
+global using FluentValidation.Results;
 global using Hangfire;
 global using MediatR;
 global using Memorabilia.Application.Behaviors.Attributes;
+global using Memorabilia.Application.Core.Handler;
 global using Memorabilia.Application.Core.Payments.Stripe;
 global using Memorabilia.Application.Extensions;
 global using Memorabilia.Application.Features;
@@ -125,7 +124,9 @@ global using Memorabilia.Application.Validators.Admin.Management.Accomplishments
 global using Memorabilia.Application.Validators.Offer;
 global using Memorabilia.Application.Validators.Transactions;
 global using Memorabilia.Domain;
+global using Memorabilia.Domain.Command;
 global using Memorabilia.Domain.Extensions;
+global using Memorabilia.Domain.Paging;
 global using Memorabilia.Domain.SearchModels.Memorabilia;
 global using Memorabilia.Repository.Interfaces;
 global using Microsoft.AspNetCore.Authorization;

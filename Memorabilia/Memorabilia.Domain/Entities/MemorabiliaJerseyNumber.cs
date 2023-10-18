@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Domain.Entities;
 
-public class MemorabiliaJerseyNumber : Framework.Library.Domain.Entity.DomainEntity
+public class MemorabiliaJerseyNumber : Entity
 {
     public MemorabiliaJerseyNumber() { }
 

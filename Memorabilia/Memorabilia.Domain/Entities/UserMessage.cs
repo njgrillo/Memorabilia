@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Domain.Entities;
 
-public class UserMessage : Framework.Library.Domain.Entity.DomainEntity
+public class UserMessage : Entity
 {
     public UserMessage() { }
 

@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Domain.Entities;
 
-public class StripePaymentTransaction : Framework.Library.Domain.Entity.DomainEntity
+public class StripePaymentTransaction : Entity
 {
     public StripePaymentTransaction() { }
 

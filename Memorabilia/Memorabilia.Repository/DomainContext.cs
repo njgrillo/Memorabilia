@@ -2,31 +2,31 @@
 
 public class DomainContext : DbContext, IDomainContext
 {
-    public DbSet<Entity.AwardDetail> AwardDetail { get; set; }
+    public DbSet<AwardDetail> AwardDetail { get; set; }
 
-    public DbSet<Entity.AwardExclusionYear> AwardExclusionYear { get; set; }
+    public DbSet<AwardExclusionYear> AwardExclusionYear { get; set; }
 
-    public DbSet<Entity.AwardType> AwardType { get; set; }
+    public DbSet<AwardType> AwardType { get; set; }
 
-    public DbSet<Entity.College> College { get; set; }
+    public DbSet<College> College { get; set; }
 
-    public DbSet<Entity.ForumCategory> ForumCategory { get; set; }
+    public DbSet<ForumCategory> ForumCategory { get; set; }
 
-    public DbSet<Entity.ForumEntry> ForumEntry { get; set; }
+    public DbSet<ForumEntry> ForumEntry { get; set; }
 
-    public DbSet<Entity.ForumTopic> ForumTopic { get; set; }
+    public DbSet<ForumTopic> ForumTopic { get; set; }
 
-    public DbSet<Entity.ForumTopicUserBookmark> ForumTopicUserBookmark { get; set; }
+    public DbSet<ForumTopicUserBookmark> ForumTopicUserBookmark { get; set; }
 
-    public DbSet<Entity.Person> Person { get; set; }
+    public DbSet<Person> Person { get; set; }
 
-    public DbSet<Entity.PersonAward> PersonAward { get; set; }
+    public DbSet<PersonAward> PersonAward { get; set; }
 
-    public DbSet<Entity.PersonTeam> PersonTeam { get; set; }
+    public DbSet<PersonTeam> PersonTeam { get; set; }
 
-    public DbSet<Entity.Team> Team { get; set; }
+    public DbSet<Team> Team { get; set; }
 
-    public DbSet<Entity.User> User { get; set; }
+    public DbSet<User> User { get; set; }
 
     public DbSet<Entity.UserMessage> UserMessage { get; set; }
 
@@ -44,109 +44,109 @@ public class DomainContext : DbContext, IDomainContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.Entity<Entity.AccomplishmentDetail>();
-        modelBuilder.Entity<Entity.AccomplishmentType>();
-        modelBuilder.Entity<Entity.AcquisitionType>();
-        modelBuilder.Entity<Entity.AllStarDetail>();
-        modelBuilder.Entity<Entity.AuthenticationCompany>();           
-        modelBuilder.Entity<Entity.AwardDetail>();
-        modelBuilder.Entity<Entity.AwardExclusionYear>();
-        modelBuilder.Entity<Entity.AwardType>();
-        modelBuilder.Entity<Entity.BammerType>();
-        modelBuilder.Entity<Entity.BaseballType>();
-        modelBuilder.Entity<Entity.BasketballType>();
-        modelBuilder.Entity<Entity.BatType>();
-        modelBuilder.Entity<Entity.Brand>();
-        modelBuilder.Entity<Entity.CerealType>();
-        modelBuilder.Entity<Entity.ChampionType>();
-        modelBuilder.Entity<Entity.College>();
-        modelBuilder.Entity<Entity.Color>();
-        modelBuilder.Entity<Entity.Commissioner>();
-        modelBuilder.Entity<Entity.Condition>();
-        modelBuilder.Entity<Entity.Conference>();
-        modelBuilder.Entity<Entity.DashboardItem>();
-        modelBuilder.Entity<Entity.Division>();        
-        modelBuilder.Entity<Entity.FigureSpecialtyType>();
-        modelBuilder.Entity<Entity.FigureType>();
-        modelBuilder.Entity<Entity.FootballType>();
-        modelBuilder.Entity<Entity.ForumCategory>();
-        modelBuilder.Entity<Entity.ForumEntry>();
-        modelBuilder.Entity<Entity.ForumEntryImage>();
-        modelBuilder.Entity<Entity.ForumEntryUserRank>();
-        modelBuilder.Entity<Entity.ForumTopic>();
-        modelBuilder.Entity<Entity.Franchise>();
-        modelBuilder.Entity<Entity.FranchiseHallOfFameType>();
-        modelBuilder.Entity<Entity.GameStyleType>();
-        modelBuilder.Entity<Entity.GloveType>();
+        modelBuilder.Entity<AccomplishmentDetail>();
+        modelBuilder.Entity<AccomplishmentType>();
+        modelBuilder.Entity<AcquisitionType>();
+        modelBuilder.Entity<AllStarDetail>();
+        modelBuilder.Entity<AuthenticationCompany>();           
+        modelBuilder.Entity<AwardDetail>();
+        modelBuilder.Entity<AwardExclusionYear>();
+        modelBuilder.Entity<AwardType>();
+        modelBuilder.Entity<BammerType>();
+        modelBuilder.Entity<BaseballType>();
+        modelBuilder.Entity<BasketballType>();
+        modelBuilder.Entity<BatType>();
+        modelBuilder.Entity<Brand>();
+        modelBuilder.Entity<CerealType>();
+        modelBuilder.Entity<ChampionType>();
+        modelBuilder.Entity<College>();
+        modelBuilder.Entity<Color>();
+        modelBuilder.Entity<Commissioner>();
+        modelBuilder.Entity<Condition>();
+        modelBuilder.Entity<Conference>();
+        modelBuilder.Entity<DashboardItem>();
+        modelBuilder.Entity<Division>();        
+        modelBuilder.Entity<FigureSpecialtyType>();
+        modelBuilder.Entity<FigureType>();
+        modelBuilder.Entity<FootballType>();
+        modelBuilder.Entity<ForumCategory>();
+        modelBuilder.Entity<ForumEntry>();
+        modelBuilder.Entity<ForumEntryImage>();
+        modelBuilder.Entity<ForumEntryUserRank>();
+        modelBuilder.Entity<ForumTopic>();
+        modelBuilder.Entity<Franchise>();
+        modelBuilder.Entity<FranchiseHallOfFameType>();
+        modelBuilder.Entity<GameStyleType>();
+        modelBuilder.Entity<GloveType>();
 
-        modelBuilder.Entity<Entity.HallOfFame>()
+        modelBuilder.Entity<HallOfFame>()
                     .Property(x => x.VotePercentage)
                     .HasPrecision(5, 2);
 
-        modelBuilder.Entity<Entity.HelmetFinish>();
-        modelBuilder.Entity<Entity.HelmetQualityType>();
-        modelBuilder.Entity<Entity.HelmetType>();
-        modelBuilder.Entity<Entity.ImageType>();
-        modelBuilder.Entity<Entity.InscriptionType>();
-        modelBuilder.Entity<Entity.InternationalHallOfFame>();
-        modelBuilder.Entity<Entity.InternationalHallOfFameType>();
-        modelBuilder.Entity<Entity.ItemType>();
-        modelBuilder.Entity<Entity.ItemTypeGameStyleType>();
-        modelBuilder.Entity<Entity.ItemTypeBrand>();
-        modelBuilder.Entity<Entity.ItemTypeLevel>();
-        modelBuilder.Entity<Entity.ItemTypeSize>();
-        modelBuilder.Entity<Entity.ItemTypeSport>();
-        modelBuilder.Entity<Entity.ItemTypeSpot>();
-        modelBuilder.Entity<Entity.JerseyQualityType>();
-        modelBuilder.Entity<Entity.JerseyStyleType>();
-        modelBuilder.Entity<Entity.JerseyType>();
-        modelBuilder.Entity<Entity.LeaderType>();
-        modelBuilder.Entity<Entity.League>();
-        modelBuilder.Entity<Entity.LeaguePresident>();
-        modelBuilder.Entity<Entity.LevelType>();
-        modelBuilder.Entity<Entity.MagazineType>();
-        modelBuilder.Entity<Entity.Occupation>();
-        modelBuilder.Entity<Entity.Orientation>();
-        modelBuilder.Entity<Entity.Person>();
-        modelBuilder.Entity<Entity.PersonAward>();
-        modelBuilder.Entity<Entity.PersonNickname>();
-        modelBuilder.Entity<Entity.PersonOccupation>();
-        modelBuilder.Entity<Entity.PersonSport>();
-        modelBuilder.Entity<Entity.PersonTeam>();
-        modelBuilder.Entity<Entity.Pewter>();
-        modelBuilder.Entity<Entity.PhotoType>();        
-        modelBuilder.Entity<Entity.Position>();        
-        modelBuilder.Entity<Entity.PriorityType>();
-        modelBuilder.Entity<Entity.PrivacyType>();            
-        modelBuilder.Entity<Entity.ProjectStatusType>();            
-        modelBuilder.Entity<Entity.ProjectType>(); 
-        modelBuilder.Entity<Entity.PurchaseType>();
-        modelBuilder.Entity<Entity.RecordType>();
-        modelBuilder.Entity<Entity.Role>();
-        modelBuilder.Entity<Entity.RolePermission>();
-        modelBuilder.Entity<Entity.Size>();
-        modelBuilder.Entity<Entity.Sport>();
-        modelBuilder.Entity<Entity.SportLeagueLevel>();
-        modelBuilder.Entity<Entity.SportService>();
-        modelBuilder.Entity<Entity.Spot>();
-        modelBuilder.Entity<Entity.StripePaymentTransaction>();
-        modelBuilder.Entity<Entity.Team>();
-        modelBuilder.Entity<Entity.TeamConference>();
-        modelBuilder.Entity<Entity.TeamDivision>();
-        modelBuilder.Entity<Entity.TeamLeague>();
-        modelBuilder.Entity<Entity.TeamRoleType>();
-        modelBuilder.Entity<Entity.ThroughTheMailFailureType>();
-        modelBuilder.Entity<Entity.TransactionTradeType>();
-        modelBuilder.Entity<Entity.TransactionType>();
-        modelBuilder.Entity<Entity.User>();
-        modelBuilder.Entity<Entity.UserDashboard>();
-        modelBuilder.Entity<Entity.UserMessage>();
-        modelBuilder.Entity<Entity.UserMessageReply>();
-        modelBuilder.Entity<Entity.UserMessageReplyImage>();
-        modelBuilder.Entity<Entity.UserPaymentOption>();
-        modelBuilder.Entity<Entity.UserRole>();
-        modelBuilder.Entity<Entity.UserSocialMedia>();
-        modelBuilder.Entity<Entity.WritingInstrument>();
+        modelBuilder.Entity<HelmetFinish>();
+        modelBuilder.Entity<HelmetQualityType>();
+        modelBuilder.Entity<HelmetType>();
+        modelBuilder.Entity<ImageType>();
+        modelBuilder.Entity<InscriptionType>();
+        modelBuilder.Entity<InternationalHallOfFame>();
+        modelBuilder.Entity<InternationalHallOfFameType>();
+        modelBuilder.Entity<ItemType>();
+        modelBuilder.Entity<ItemTypeGameStyleType>();
+        modelBuilder.Entity<ItemTypeBrand>();
+        modelBuilder.Entity<ItemTypeLevel>();
+        modelBuilder.Entity<ItemTypeSize>();
+        modelBuilder.Entity<ItemTypeSport>();
+        modelBuilder.Entity<ItemTypeSpot>();
+        modelBuilder.Entity<JerseyQualityType>();
+        modelBuilder.Entity<JerseyStyleType>();
+        modelBuilder.Entity<JerseyType>();
+        modelBuilder.Entity<LeaderType>();
+        modelBuilder.Entity<League>();
+        modelBuilder.Entity<LeaguePresident>();
+        modelBuilder.Entity<LevelType>();
+        modelBuilder.Entity<MagazineType>();
+        modelBuilder.Entity<Occupation>();
+        modelBuilder.Entity<Orientation>();
+        modelBuilder.Entity<Person>();
+        modelBuilder.Entity<PersonAward>();
+        modelBuilder.Entity<PersonNickname>();
+        modelBuilder.Entity<PersonOccupation>();
+        modelBuilder.Entity<PersonSport>();
+        modelBuilder.Entity<PersonTeam>();
+        modelBuilder.Entity<Pewter>();
+        modelBuilder.Entity<PhotoType>();        
+        modelBuilder.Entity<Position>();        
+        modelBuilder.Entity<PriorityType>();
+        modelBuilder.Entity<PrivacyType>();            
+        modelBuilder.Entity<ProjectStatusType>();            
+        modelBuilder.Entity<ProjectType>(); 
+        modelBuilder.Entity<PurchaseType>();
+        modelBuilder.Entity<RecordType>();
+        modelBuilder.Entity<Role>();
+        modelBuilder.Entity<RolePermission>();
+        modelBuilder.Entity<Size>();
+        modelBuilder.Entity<Sport>();
+        modelBuilder.Entity<SportLeagueLevel>();
+        modelBuilder.Entity<SportService>();
+        modelBuilder.Entity<Spot>();
+        modelBuilder.Entity<StripePaymentTransaction>();
+        modelBuilder.Entity<Team>();
+        modelBuilder.Entity<TeamConference>();
+        modelBuilder.Entity<TeamDivision>();
+        modelBuilder.Entity<TeamLeague>();
+        modelBuilder.Entity<TeamRoleType>();
+        modelBuilder.Entity<ThroughTheMailFailureType>();
+        modelBuilder.Entity<TransactionTradeType>();
+        modelBuilder.Entity<TransactionType>();
+        modelBuilder.Entity<User>();
+        modelBuilder.Entity<UserDashboard>();
+        modelBuilder.Entity<UserMessage>();
+        modelBuilder.Entity<UserMessageReply>();
+        modelBuilder.Entity<UserMessageReplyImage>();
+        modelBuilder.Entity<UserPaymentOption>();
+        modelBuilder.Entity<UserRole>();
+        modelBuilder.Entity<UserSocialMedia>();
+        modelBuilder.Entity<WritingInstrument>();
     }
 }
 

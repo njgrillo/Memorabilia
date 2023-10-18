@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Domain.Entities;
 
-public class ProposeTradeMemorabilia : Framework.Library.Domain.Entity.DomainEntity
+public class ProposeTradeMemorabilia : Entity
 {
     public ProposeTradeMemorabilia() { }
 

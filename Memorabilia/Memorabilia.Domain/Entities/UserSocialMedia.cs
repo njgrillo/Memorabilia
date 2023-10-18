@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Domain.Entities;
 
-public class UserSocialMedia : Framework.Library.Domain.Entity.DomainEntity
+public class UserSocialMedia : Entity
 {
     public UserSocialMedia() { }
 

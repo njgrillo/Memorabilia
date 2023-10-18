@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Domain.Entities;
 
-public class UserMessageReply : Framework.Library.Domain.Entity.DomainEntity
+public class UserMessageReply : Entity
 {
     public UserMessageReply() { }
 

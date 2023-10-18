@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Domain.Entities;
 
-public class LeaguePresident : Framework.Library.Domain.Entity.DomainEntity
+public class LeaguePresident : Entity
 {
     public LeaguePresident() { }
 
