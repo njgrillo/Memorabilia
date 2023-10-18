@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Repository.Interfaces;
 
-public interface IProjectRepository : IDomainRepository<Entity.Project>
+public interface IProjectRepository : IDomainRepository<Project>
 {
-    Task<Entity.Project[]> GetAll(int userId);
+    Task<Project[]> GetAll(int userId);
 }

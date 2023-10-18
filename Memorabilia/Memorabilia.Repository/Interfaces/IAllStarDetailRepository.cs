@@ -1,7 +1,7 @@
 ﻿namespace Memorabilia.Repository.Interfaces;
 
 public interface IAllStarDetailRepository
-    : IDomainRepository<Entity.AllStarDetail>
+    : IDomainRepository<AllStarDetail>
 {
-    Task<Entity.AllStarDetail[]> GetAll(int sportLeagueLevelId);
+    Task<AllStarDetail[]> GetAll(int sportLeagueLevelId);
 }

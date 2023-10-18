@@ -1,7 +1,7 @@
 ﻿namespace Memorabilia.Repository.Cache;
 
 public class AllStarCacheRepository 
-    : DomainCacheRepository<Entity.AllStar>, IAllStarRepository
+    : DomainCacheRepository<AllStar>, IAllStarRepository
 {
     private readonly AllStarRepository _allStarRepository;
 
@@ -13,7 +13,7 @@ public class AllStarCacheRepository
         _allStarRepository = allStarRepository;
     }
 
-    public Task<IEnumerable<Entity.AllStar>> GetAll(int year, Constant.Sport sport = null)
+    public Task<IEnumerable<AllStar>> GetAll(int year, Constant.Sport sport = null)
         => GetAll($"AllStar_GetAll_{year}_{sport?.Id ?? 0}",
                   entry =>
                   {

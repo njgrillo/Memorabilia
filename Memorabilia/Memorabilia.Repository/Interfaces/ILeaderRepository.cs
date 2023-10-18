@@ -2,5 +2,5 @@
 
 public interface ILeaderRepository
 {
-    Task<IEnumerable<Entity.Leader>> GetAll(int leaderTypeId);
+    Task<IEnumerable<Leader>> GetAll(int leaderTypeId);
 }

@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Repository.Interfaces;
 
-public interface IHallOfFameRepository : IDomainRepository<Entity.HallOfFame>
+public interface IHallOfFameRepository : IDomainRepository<HallOfFame>
 {
-    Task<IEnumerable<Entity.HallOfFame>> GetAll(int? sportLeagueLevelId = null, int? inductionYear = null);
+    Task<IEnumerable<HallOfFame>> GetAll(int? sportLeagueLevelId = null, int? inductionYear = null);
 }

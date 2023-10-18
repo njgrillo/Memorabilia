@@ -1,21 +1,21 @@
 ﻿namespace Memorabilia.Repository.Implementations;
 
 public class TeamRepository 
-    : DomainRepository<Entity.Team>, ITeamRepository
+    : DomainRepository<Team>, ITeamRepository
 {
     public TeamRepository(DomainContext context, IMemoryCache memoryCache) 
         : base(context, memoryCache) { }
 
-    private IQueryable<Entity.Team> Team 
+    private IQueryable<Team> Team 
         => Items.Include(team => team.Conferences)
                 .Include(team => team.Divisions)
                 .Include(team => team.Franchise)
                 .Include(team => team.Leagues);
 
-    public override async Task<Entity.Team> Get(int id)
+    public override async Task<Team> Get(int id)
         => await Team.SingleOrDefaultAsync(team => team.Id == id);
 
-    public async Task<Entity.Team[]> GetAll(int? franchiseId = null, 
+    public async Task<Team[]> GetAll(int? franchiseId = null, 
                                             int? sportLeagueLevelId = null, 
                                             int? sportId = null)
         => (await Team.Where(team => (!franchiseId.HasValue || team.FranchiseId == franchiseId)
@@ -25,7 +25,7 @@ public class TeamRepository
                 .OrderBy(team => team.Name)
                 .ToArray();
 
-    public async Task<Entity.Team[]> GetAllCurrentTeams(int? sportId = null)
+    public async Task<Team[]> GetAllCurrentTeams(int? sportId = null)
         => await Team.Where(team => (!sportId.HasValue || team.Franchise.SportLeagueLevel.SportId == sportId)
                                      && team.EndYear == null)
                      .OrderBy(team => team.Franchise.Location)

@@ -1,7 +1,7 @@
 ﻿namespace Memorabilia.Repository.Interfaces;
 
 public interface IAccomplishmentDetailRepository
-    : IDomainRepository<Entity.AccomplishmentDetail>
+    : IDomainRepository<AccomplishmentDetail>
 {
-    Task<Entity.AccomplishmentDetail[]> GetAll(int accomplishmentTypeId);
+    Task<AccomplishmentDetail[]> GetAll(int accomplishmentTypeId);
 }

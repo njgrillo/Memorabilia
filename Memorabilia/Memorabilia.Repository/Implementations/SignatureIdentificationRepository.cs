@@ -1,22 +1,22 @@
 ﻿namespace Memorabilia.Repository.Implementations;
 
 public class SignatureIdentificationRepository
-     : MemorabiliaRepository<Entity.SignatureIdentification>, ISignatureIdentificationRepository
+     : MemorabiliaRepository<SignatureIdentification>, ISignatureIdentificationRepository
 {
     public SignatureIdentificationRepository(MemorabiliaContext context, IMemoryCache memoryCache)
         : base(context, memoryCache) { }
 
-    public async Task<PagedResult<Entity.SignatureIdentification>> GetAll(PageInfo pageInfo)
+    public async Task<PagedResult<SignatureIdentification>> GetAll(PageInfo pageInfo)
     {
         var query =
             from signatureIdentification in Context.SignatureIdentification
             orderby signatureIdentification.CreatedDate descending
-            select new Entity.SignatureIdentification(signatureIdentification);
+            select new SignatureIdentification(signatureIdentification);
 
         return await query.ToPagedResult(pageInfo);
     }
 
-    public async Task<Entity.SignatureIdentification> GetRandom()
+    public async Task<SignatureIdentification> GetRandom()
     {
         int[] ids = Items.Select(signatureIdentification => signatureIdentification.Id)
                          .Distinct()

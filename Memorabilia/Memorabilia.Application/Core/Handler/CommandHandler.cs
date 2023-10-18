@@ -1,12 +1,12 @@
 ﻿namespace Memorabilia.Application.Core.Handler;
 
 public abstract class CommandHandler<TCommand> 
-    : AsyncRequestHandler<TCommand> where TCommand : ICommand
+    : IRequestHandler<TCommand> where TCommand : ICommand
 {
     protected abstract Task Handle(TCommand command);
 
-    protected override sealed async Task Handle(TCommand command, CancellationToken cancellation)
+    async Task IRequestHandler<TCommand>.Handle(TCommand request, CancellationToken cancellationToken)
     {
-        await Handle(command);
+        await Handle(request);
     }
 }

@@ -1,8 +1,8 @@
 ﻿namespace Memorabilia.Repository.Interfaces;
 
 public interface ILeaguePresidentRepository 
-    : IDomainRepository<Entity.LeaguePresident>
+    : IDomainRepository<LeaguePresident>
 {
-    Task<Entity.LeaguePresident[]> GetAll(int? sportLeagueLevelId = null, 
+    Task<LeaguePresident[]> GetAll(int? sportLeagueLevelId = null, 
                                           int? leagueId = null);
 }

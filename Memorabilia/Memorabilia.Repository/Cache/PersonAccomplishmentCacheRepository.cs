@@ -1,7 +1,7 @@
 ﻿namespace Memorabilia.Repository.Cache;
 
 public class PersonAccomplishmentCacheRepository 
-    : DomainCacheRepository<Entity.PersonAccomplishment>, IPersonAccomplishmentRepository
+    : DomainCacheRepository<PersonAccomplishment>, IPersonAccomplishmentRepository
 {
     private readonly PersonAccomplishmentRepository _personAccomplishmentRepository;
 
@@ -13,7 +13,7 @@ public class PersonAccomplishmentCacheRepository
         _personAccomplishmentRepository = personAccomplishmentRepository;
     }
 
-    public override async Task Add(Entity.PersonAccomplishment item, 
+    public override async Task Add(PersonAccomplishment item, 
                                    CancellationToken cancellationToken = default)
     {
         RemoveFromCache($"PersonAccomplishment_GetAll_{item.AccomplishmentTypeId}");
@@ -21,7 +21,7 @@ public class PersonAccomplishmentCacheRepository
         await _personAccomplishmentRepository.Add(item, cancellationToken);
     }
 
-    public Task<IEnumerable<Entity.PersonAccomplishment>> GetAll(int accomplishmentTypeId)
+    public Task<IEnumerable<PersonAccomplishment>> GetAll(int accomplishmentTypeId)
         => GetAll($"PersonAccomplishment_GetAll_{accomplishmentTypeId}",
                   entry =>
                   {

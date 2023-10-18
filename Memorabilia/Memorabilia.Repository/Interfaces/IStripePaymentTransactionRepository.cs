@@ -1,7 +1,7 @@
 ﻿namespace Memorabilia.Repository.Interfaces;
 
 public interface IStripePaymentTransactionRepository 
-    : IDomainRepository<Entity.StripePaymentTransaction>
+    : IDomainRepository<StripePaymentTransaction>
 {
-    Task<Entity.StripePaymentTransaction> Get(string orderId);
+    Task<StripePaymentTransaction> Get(string orderId);
 }

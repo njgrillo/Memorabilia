@@ -2,5 +2,5 @@
 
 public interface IRetiredNumberRepository
 {
-    Task<IEnumerable<Entity.RetiredNumber>> GetAll(int franchiseId);
+    Task<IEnumerable<RetiredNumber>> GetAll(int franchiseId);
 }

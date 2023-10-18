@@ -1,12 +1,12 @@
 ﻿namespace Memorabilia.Repository.Implementations;
 
 public class ItemTypeSportRepository 
-    : DomainRepository<Entity.ItemTypeSport>, IItemTypeSportRepository
+    : DomainRepository<ItemTypeSport>, IItemTypeSportRepository
 {
     public ItemTypeSportRepository(DomainContext context, IMemoryCache memoryCache) 
         : base(context, memoryCache) { }
 
-    public async Task<Entity.ItemTypeSport[]> GetAll(int? itemTypeId = null)
+    public async Task<ItemTypeSport[]> GetAll(int? itemTypeId = null)
         => !itemTypeId.HasValue
             ? (await Items.ToArrayAsync())
                 .OrderBy(itemTypeSport => itemTypeSport.ItemTypeName)

@@ -2,5 +2,5 @@
 
 public interface IFranchiseHallOfFameRepository
 {
-    Task<IEnumerable<Entity.FranchiseHallOfFame>> GetAll(int franchiseId);
+    Task<IEnumerable<FranchiseHallOfFame>> GetAll(int franchiseId);
 }
