@@ -1,6 +1,3 @@
-using Memorabilia.Application.Models.Payments.Stripe;
-using Memorabilia.Application.Models.Site;
-
 namespace Memorabilia.Web;
 
 public class Startup
