@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Domain.Entities;
 
-public class MemorabiliaBasketball : Framework.Library.Domain.Entity.DomainEntity
+public class MemorabiliaBasketball : DomainIdEntity
 {
     public MemorabiliaBasketball() { }
 

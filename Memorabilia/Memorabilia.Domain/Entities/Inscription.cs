@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Domain.Entities;
 
-public class Inscription : Framework.Library.Domain.Entity.DomainEntity
+public class Inscription : DomainIdEntity
 {
     public Inscription() { }
 

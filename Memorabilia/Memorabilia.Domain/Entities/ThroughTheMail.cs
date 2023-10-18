@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Domain.Entities;
 
-public class ThroughTheMail : Framework.Library.Domain.Entity.DomainEntity
+public class ThroughTheMail : DomainIdEntity
 {
     public ThroughTheMail() { }
 

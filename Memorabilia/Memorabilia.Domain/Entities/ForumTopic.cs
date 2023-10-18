@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Domain.Entities;
 
-public class ForumTopic : Framework.Library.Domain.Entity.DomainEntity
+public class ForumTopic : DomainIdEntity
 {
     public ForumTopic() { }
 

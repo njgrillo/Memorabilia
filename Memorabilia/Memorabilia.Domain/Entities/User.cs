@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Domain.Entities;
 
-public class User : Framework.Library.Domain.Entity.DomainEntity
+public class User : DomainIdEntity
 {
     public User() { }
 

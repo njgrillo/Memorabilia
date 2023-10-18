@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Domain.Entities;
 
-public class SignatureReviewImage : Framework.Library.Domain.Entity.DomainEntity
+public class SignatureReviewImage : DomainIdEntity
 {
     public SignatureReviewImage() { }
 

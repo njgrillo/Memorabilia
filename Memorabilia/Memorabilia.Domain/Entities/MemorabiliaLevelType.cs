@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Domain.Entities;
 
-public class MemorabiliaLevelType : Framework.Library.Domain.Entity.DomainEntity
+public class MemorabiliaLevelType : DomainIdEntity
 {
     public MemorabiliaLevelType() { }
 

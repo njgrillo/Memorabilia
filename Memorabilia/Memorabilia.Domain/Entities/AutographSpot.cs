@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Domain.Entities;
 
-public class AutographSpot : Framework.Library.Domain.Entity.DomainEntity
+public class AutographSpot : DomainIdEntity
 {
     public AutographSpot() { }
 

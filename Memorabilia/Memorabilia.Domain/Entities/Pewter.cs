@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Domain.Entities;
 
-public class Pewter : Framework.Library.Domain.Entity.DomainEntity
+public class Pewter : DomainIdEntity
 {
     public Pewter() { }
 

@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Domain.Entities;
 
-public class Offer : Framework.Library.Domain.Entity.DomainEntity
+public class Offer : DomainIdEntity
 {
     public Offer() { }
 

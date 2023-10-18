@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Domain.Entities;
 
-public class ForumEntryUserRank : Framework.Library.Domain.Entity.DomainEntity
+public class ForumEntryUserRank : DomainIdEntity
 {
     public ForumEntryUserRank() { }
 

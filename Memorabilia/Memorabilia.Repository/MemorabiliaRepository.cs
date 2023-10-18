@@ -1,7 +1,7 @@
 ﻿namespace Memorabilia.Repository;
 
 public class MemorabiliaRepository<T> 
-    : BaseRepository<T>, IDomainRepository<T> where T : DomainEntity
+    : BaseRepository<T>, IDomainRepository<T> where T : DomainIdEntity
 {
     protected readonly MemorabiliaContext Context;
 

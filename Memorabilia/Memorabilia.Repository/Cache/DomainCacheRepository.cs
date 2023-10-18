@@ -1,7 +1,7 @@
 ﻿namespace Memorabilia.Repository.Cache;
 
 public abstract class DomainCacheRepository<T> 
-    : DomainRepository<T> where T : DomainEntity
+    : DomainRepository<T> where T : DomainIdEntity
 {
     protected readonly IMemoryCache MemoryCache;
 

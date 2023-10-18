@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Domain.Entities;
 
-public class UserPaymentOption : Framework.Library.Domain.Entity.DomainEntity
+public class UserPaymentOption : DomainIdEntity
 {
     public UserPaymentOption() { }
 

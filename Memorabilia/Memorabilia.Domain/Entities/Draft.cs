@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Domain.Entities;
 
-public class Draft : Framework.Library.Domain.Entity.DomainEntity
+public class Draft : DomainIdEntity
 {
     public Draft() { }
 
