@@ -1,7 +1,7 @@
 ﻿namespace Memorabilia.Repository.Interfaces;
 
 public interface IThroughTheMailRepository 
-    : IDomainRepository<Entity.ThroughTheMail>
+    : IDomainRepository<ThroughTheMail>
 {
-    Task<Entity.ThroughTheMail[]> GetAll(int userId, int[] throughTheMailIds = null);
+    Task<ThroughTheMail[]> GetAll(int userId, int[] throughTheMailIds = null);
 }

@@ -1,13 +1,13 @@
 ﻿namespace Memorabilia.Repository.Interfaces;
 
 public interface IOfferRepository
-    : IDomainRepository<Entity.Offer>
+    : IDomainRepository<Offer>
 {
-    Task<Entity.Offer[]> GetAll(int userId);
+    Task<Offer[]> GetAll(int userId);
 
-    Task<Entity.Offer[]> GetAllAccepted(int userId);
+    Task<Offer[]> GetAllAccepted(int userId);
 
-    Task<Entity.Offer[]> GetAllExpired();
+    Task<Offer[]> GetAllExpired();
 
-    Task<Entity.Offer[]> GetAllOpen(int? userId = null);
+    Task<Offer[]> GetAllOpen(int? userId = null);
 }

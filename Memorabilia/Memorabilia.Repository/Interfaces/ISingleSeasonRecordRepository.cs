@@ -2,5 +2,5 @@
 
 public interface ISingleSeasonRecordRepository
 {
-    Task<IEnumerable<Entity.SingleSeasonRecord>> GetAll(int sportId);
+    Task<IEnumerable<SingleSeasonRecord>> GetAll(int sportId);
 }

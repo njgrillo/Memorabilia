@@ -1,7 +1,7 @@
 ﻿namespace Memorabilia.Repository.Interfaces;
 
 public interface IMemorabiliaTransactionSaleRepository
-    : IDomainRepository<Entity.MemorabiliaTransactionSale>
+    : IDomainRepository<MemorabiliaTransactionSale>
 {
-    Task<Entity.MemorabiliaTransactionSale[]> GetAll(int memorabiliaTransactionId);
+    Task<MemorabiliaTransactionSale[]> GetAll(int memorabiliaTransactionId);
 }

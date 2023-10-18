@@ -1,7 +1,7 @@
 ﻿namespace Memorabilia.Repository.Cache;
 
 public class LeaderCacheRepository 
-    : DomainCacheRepository<Entity.Leader>, ILeaderRepository
+    : DomainCacheRepository<Leader>, ILeaderRepository
 {
     private readonly LeaderRepository _leaderRepository;
 
@@ -13,7 +13,7 @@ public class LeaderCacheRepository
         _leaderRepository = leaderRepository;
     }
 
-    public Task<IEnumerable<Entity.Leader>> GetAll(int leaderTypeId)
+    public Task<IEnumerable<Leader>> GetAll(int leaderTypeId)
         => GetAll($"Leader_GetAll_{leaderTypeId}",
                   entry =>
                   {

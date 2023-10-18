@@ -2,5 +2,5 @@
 
 public interface IDraftRepository
 {
-    Task<IEnumerable<Entity.Draft>> GetAll(int franchiseId);
+    Task<IEnumerable<Draft>> GetAll(int franchiseId);
 }

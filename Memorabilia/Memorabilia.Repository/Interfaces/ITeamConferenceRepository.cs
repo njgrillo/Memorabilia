@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Repository.Interfaces; 
 
-public interface ITeamConferenceRepository : IDomainRepository<Entity.TeamConference>
+public interface ITeamConferenceRepository : IDomainRepository<TeamConference>
 {
-    Task<Entity.TeamConference[]> GetAll(int? teamId = null);
+    Task<TeamConference[]> GetAll(int? teamId = null);
 }

@@ -1,6 +1,3 @@
-using Memorabilia.Application.Models.Payments.Stripe;
-using Memorabilia.Application.Models.Site;
-
 namespace Memorabilia.Web;
 
 public class Startup
@@ -34,7 +31,7 @@ public class Startup
         services.AddServerSideBlazor();
         services.AddDbContext<MemorabiliaContext>(options => options.UseSqlServer("name=ConnectionStrings:Memorabilia"), ServiceLifetime.Transient);
         services.AddDbContext<DomainContext>(options => options.UseSqlServer("name=ConnectionStrings:Memorabilia"), ServiceLifetime.Transient);
-        services.AddMediatR(typeof(GetCommissioner).Assembly);
+        services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(GetCommissioner).Assembly));
         services.AddDataProtection();
         services.RegisterValidators();
         services.RegisterFactories();

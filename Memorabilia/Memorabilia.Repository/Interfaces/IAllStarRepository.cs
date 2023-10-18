@@ -2,7 +2,7 @@
 
 public interface IAllStarRepository
 {
-    Task<Entity.AllStar[]> GetAll();
+    Task<AllStar[]> GetAll();
 
-    Task<IEnumerable<Entity.AllStar>> GetAll(int year, Constant.Sport sport = null);
+    Task<IEnumerable<AllStar>> GetAll(int year, Constant.Sport sport = null);
 }

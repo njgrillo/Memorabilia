@@ -1,7 +1,7 @@
 ﻿namespace Memorabilia.Repository.Cache;
 
 public class DraftCacheRepository 
-    : DomainCacheRepository<Entity.Draft>, IDraftRepository
+    : DomainCacheRepository<Draft>, IDraftRepository
 {
     private readonly DraftRepository _draftRepository;
 
@@ -13,7 +13,7 @@ public class DraftCacheRepository
         _draftRepository = draftRepository;
     }
 
-    public Task<IEnumerable<Entity.Draft>> GetAll(int franchiseId)
+    public Task<IEnumerable<Draft>> GetAll(int franchiseId)
         => GetAll($"Draft_GetAll_{franchiseId}", 
                   entry => 
                   { 

@@ -1,15 +1,15 @@
 ﻿namespace Memorabilia.Repository.Implementations;
 
 public class PersonAwardRepository 
-    : DomainRepository<Entity.PersonAward>, IPersonAwardRepository
+    : DomainRepository<PersonAward>, IPersonAwardRepository
 {
     public PersonAwardRepository(DomainContext context, IMemoryCache memoryCache) 
         : base(context, memoryCache) { }
 
-    private IQueryable<Entity.PersonAward> PersonAward 
+    private IQueryable<PersonAward> PersonAward 
         => Items.Include(personAward => personAward.Person);
 
-    public async Task<IEnumerable<Entity.PersonAward>> GetAll(int awardTypeId)
+    public async Task<IEnumerable<PersonAward>> GetAll(int awardTypeId)
         => await PersonAward.Where(personAward => personAward.AwardTypeId == awardTypeId)
                             .AsNoTracking()
                             .ToListAsync();

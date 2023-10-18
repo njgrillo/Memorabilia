@@ -1,7 +1,7 @@
 ﻿namespace Memorabilia.Repository.Cache;
 
 public class RetiredNumberCacheRepository 
-    : DomainCacheRepository<Entity.RetiredNumber>, IRetiredNumberRepository
+    : DomainCacheRepository<RetiredNumber>, IRetiredNumberRepository
 {
     private readonly RetiredNumberRepository _retiredNumberRepository;
 
@@ -13,7 +13,7 @@ public class RetiredNumberCacheRepository
         _retiredNumberRepository = retiredNumberRepository;
     }
 
-    public Task<IEnumerable<Entity.RetiredNumber>> GetAll(int franchiseId) 
+    public Task<IEnumerable<RetiredNumber>> GetAll(int franchiseId) 
         => GetAll($"RetiredNumber_GetAll_{franchiseId}", 
                   entry => 
                   { 

@@ -1,8 +1,8 @@
 ﻿namespace Memorabilia.Repository.Interfaces;
 
-public interface ISignatureIdentificationRepository : IDomainRepository<Entity.SignatureIdentification>
+public interface ISignatureIdentificationRepository : IDomainRepository<SignatureIdentification>
 {
-    Task<PagedResult<Entity.SignatureIdentification>> GetAll(PageInfo pageInfo);
+    Task<PagedResult<SignatureIdentification>> GetAll(PageInfo pageInfo);
 
-    Task<Entity.SignatureIdentification> GetRandom();
+    Task<SignatureIdentification> GetRandom();
 }

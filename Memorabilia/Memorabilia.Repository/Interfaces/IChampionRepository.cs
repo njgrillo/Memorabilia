@@ -2,5 +2,5 @@
 
 public interface IChampionRepository
 {
-    Task<IEnumerable<Entity.Champion>> GetAll(int championTypeId);
+    Task<IEnumerable<Champion>> GetAll(int championTypeId);
 }

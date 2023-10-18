@@ -1,7 +1,7 @@
 ﻿namespace Memorabilia.Repository.Interfaces;
 
 public interface ICollectionRepository 
-    : IDomainRepository<Entity.Collection>
+    : IDomainRepository<Collection>
 {
-    Task<Entity.Collection[]> GetAll(int userId);
+    Task<Collection[]> GetAll(int userId);
 }

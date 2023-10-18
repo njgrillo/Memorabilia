@@ -2,5 +2,5 @@
 
 public interface ICareerRecordRepository
 {
-    Task<IEnumerable<Entity.CareerRecord>> GetAll(int sportId);
+    Task<IEnumerable<CareerRecord>> GetAll(int sportId);
 }

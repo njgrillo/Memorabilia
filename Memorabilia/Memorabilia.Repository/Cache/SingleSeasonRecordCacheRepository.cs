@@ -1,7 +1,7 @@
 ﻿namespace Memorabilia.Repository.Cache;
 
 public class SingleSeasonRecordCacheRepository 
-    : DomainCacheRepository<Entity.SingleSeasonRecord>, ISingleSeasonRecordRepository
+    : DomainCacheRepository<SingleSeasonRecord>, ISingleSeasonRecordRepository
 {
     private readonly SingleSeasonRecordRepository _singleSeasonRecordRepository;
 
@@ -13,7 +13,7 @@ public class SingleSeasonRecordCacheRepository
         _singleSeasonRecordRepository = singleSeasonRecordRepository;
     }
 
-    public Task<IEnumerable<Entity.SingleSeasonRecord>> GetAll(int sportId) 
+    public Task<IEnumerable<SingleSeasonRecord>> GetAll(int sportId) 
         => GetAll($"SingleSeasonRecord_GetAll_{sportId}", 
                   entry => 
                   { 

@@ -1,7 +1,7 @@
 ﻿namespace Memorabilia.Repository.Cache;
 
 public class PersonCollegeCacheRepository 
-    : DomainCacheRepository<Entity.PersonCollege>, IPersonCollegeRepository
+    : DomainCacheRepository<PersonCollege>, IPersonCollegeRepository
 {
     private readonly PersonCollegeRepository _personCollegeRepository;
 
@@ -13,7 +13,7 @@ public class PersonCollegeCacheRepository
         _personCollegeRepository = personCollegeRepository;
     }
 
-    public Task<IEnumerable<Entity.PersonCollege>> GetAll(int? collegeId = null, 
+    public Task<IEnumerable<PersonCollege>> GetAll(int? collegeId = null, 
                                                           int? sportLeagueLevelId = null)
         => GetAll($"PersonCollege_GetAll_{collegeId}_{sportLeagueLevelId}", 
                   entry =>

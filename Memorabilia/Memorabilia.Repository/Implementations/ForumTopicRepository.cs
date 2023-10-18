@@ -1,12 +1,12 @@
 ﻿namespace Memorabilia.Repository.Implementations;
 
 public class ForumTopicRepository
-    : DomainRepository<Entity.ForumTopic>, IForumTopicRepository
+    : DomainRepository<ForumTopic>, IForumTopicRepository
 {
     public ForumTopicRepository(DomainContext context, IMemoryCache memoryCache)
         : base(context, memoryCache) { }
 
-    public async Task<PagedResult<Entity.ForumTopic>> GetAll(PageInfo pageInfo, int forumCategoryId, int? sportId)
+    public async Task<PagedResult<ForumTopic>> GetAll(PageInfo pageInfo, int forumCategoryId, int? sportId)
     {
         var query =
             from forumTopic in Context.ForumTopic
@@ -18,7 +18,7 @@ public class ForumTopicRepository
         return await query.ToPagedResult(pageInfo);
     }
 
-    public async Task<Entity.ForumTopic[]> GetAllBookmarked(int userId)
+    public async Task<ForumTopic[]> GetAllBookmarked(int userId)
     {
         var query =
             from forumTopic in Context.ForumTopic
@@ -30,7 +30,7 @@ public class ForumTopicRepository
         return await query.ToArrayAsync();
     }
 
-    public async Task<Entity.ForumTopic[]> GetAllTrending()
+    public async Task<ForumTopic[]> GetAllTrending()
     {
         DateTime previousUtcDate = DateTime.UtcNow.AddDays(-1);
 
@@ -62,7 +62,7 @@ public class ForumTopicRepository
                           .ToArrayAsync();
     }
 
-    public async Task<PagedResult<Entity.ForumTopic>> Search(PageInfo pageInfo, string searchText)
+    public async Task<PagedResult<ForumTopic>> Search(PageInfo pageInfo, string searchText)
     {
         var query =
             from forumTopic in Context.ForumTopic
@@ -86,7 +86,7 @@ public class ForumTopicRepository
                 forumTopic.ModifiedDate,
                 user.Username
             } into groupedList
-            select new Entity.ForumTopic
+            select new ForumTopic
             (
                 groupedList.Key.CreatedDate,
                 groupedList.Key.CreatedByUserId,

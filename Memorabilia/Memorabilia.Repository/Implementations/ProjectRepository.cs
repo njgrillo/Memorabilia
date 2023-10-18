@@ -1,12 +1,12 @@
 ﻿namespace Memorabilia.Repository.Implementations;
 
 public class ProjectRepository 
-    : MemorabiliaRepository<Entity.Project>, IProjectRepository
+    : MemorabiliaRepository<Project>, IProjectRepository
 {
     public ProjectRepository(MemorabiliaContext context, IMemoryCache memoryCache) 
         : base(context, memoryCache) { }
 
-    private IQueryable<Entity.Project> Project 
+    private IQueryable<Project> Project 
         => Items.Include(project => project.Baseball)
                 .Include(project => project.Card)
                 .Include(project => project.HallOfFame)
@@ -17,10 +17,10 @@ public class ProjectRepository
                 .Include(project => project.Team)
                 .Include(project => project.WorldSeries);
 
-    public override async Task<Entity.Project> Get(int id)
+    public override async Task<Project> Get(int id)
         => await Project.SingleOrDefaultAsync(project => project.Id == id);
 
-    public async Task<Entity.Project[]> GetAll(int userId)
+    public async Task<Project[]> GetAll(int userId)
         => await Project.Where(project => project.UserId == userId)
                         .ToArrayAsync();
 }

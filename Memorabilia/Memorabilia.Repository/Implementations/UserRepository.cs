@@ -1,44 +1,44 @@
 ﻿namespace Memorabilia.Repository.Implementations;
 
 public class UserRepository 
-    : DomainRepository<Entity.User>, IUserRepository
+    : DomainRepository<User>, IUserRepository
 {
     public UserRepository(DomainContext context, IMemoryCache memoryCache) 
         : base(context, memoryCache) { }
 
-    private IQueryable<Entity.User> User 
+    private IQueryable<User> User 
         => Items.Include(user => user.BookmarkedForumTopics)
                 .Include(user => user.DashboardItems)
                 .Include(user => user.UserSettings);
 
-    public override async Task<Entity.User> Get(int id)
+    public override async Task<User> Get(int id)
         => await User.SingleOrDefaultAsync(user => user.Id == id);
 
-    public async Task<Entity.User> Get(string emailAddress)
+    public async Task<User> Get(string emailAddress)
         => await User.SingleOrDefaultAsync(user => user.EmailAddress == emailAddress);
 
-    public async Task<Entity.User[]> GetAllByActiveSubscriptions()
+    public async Task<User[]> GetAllByActiveSubscriptions()
         => await Items.Where(user => !user.SubscriptionExpirationDate.HasValue 
                                   && user.StripeSubscriptionId != null)
                       .ToArrayAsync();
 
-    public async Task<Entity.User[]> GetAllBySubscriptionExpired()
+    public async Task<User[]> GetAllBySubscriptionExpired()
         => await Items.Where(user => user.SubscriptionExpirationDate.HasValue 
                                   && user.SubscriptionExpirationDate < DateTime.UtcNow)
                       .ToArrayAsync();
 
-    public async Task<Entity.User> GetByGoogleEmailAddress(string emailAddress)
+    public async Task<User> GetByGoogleEmailAddress(string emailAddress)
         => await User.SingleOrDefaultAsync(user => user.UserSettings != null 
                                                 && user.UserSettings.GoogleEmailAddress == emailAddress);
 
-    public async Task<Entity.User> GetByMicrosoftEmailAddress(string emailAddress)
+    public async Task<User> GetByMicrosoftEmailAddress(string emailAddress)
         => await User.SingleOrDefaultAsync(user => user.UserSettings != null
                                                 && user.UserSettings.MicrosoftEmailAddress == emailAddress);
 
-    public async Task<Entity.User> GetByUsername(string username)
+    public async Task<User> GetByUsername(string username)
         => await User.SingleOrDefaultAsync(user => user.Username == username);
 
-    public async Task<Entity.User> GetByXHandle(string handle)
+    public async Task<User> GetByXHandle(string handle)
         => await User.SingleOrDefaultAsync(user => user.UserSettings != null
                                                 && user.UserSettings.XHandle == handle);
 }

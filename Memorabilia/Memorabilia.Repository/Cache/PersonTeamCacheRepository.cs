@@ -1,7 +1,7 @@
 ﻿namespace Memorabilia.Repository.Cache;
 
 public class PersonTeamCacheRepository 
-    : DomainCacheRepository<Entity.PersonTeam>, IPersonTeamRepository
+    : DomainCacheRepository<PersonTeam>, IPersonTeamRepository
 {
     private readonly PersonTeamRepository _personTeamRepository;
 
@@ -13,7 +13,7 @@ public class PersonTeamCacheRepository
         _personTeamRepository = personTeamRepository;
     }
 
-    public Task<IEnumerable<Entity.PersonTeam>> GetAll(int franchiseId)
+    public Task<IEnumerable<PersonTeam>> GetAll(int franchiseId)
         => GetAll($"PersonTeam_GetAll_{franchiseId}", 
                   entry =>
                   {

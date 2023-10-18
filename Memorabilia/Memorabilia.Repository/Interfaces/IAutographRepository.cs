@@ -1,45 +1,45 @@
 ﻿namespace Memorabilia.Repository.Interfaces;
 
-public interface IAutographRepository : IDomainRepository<Entity.Autograph>
+public interface IAutographRepository : IDomainRepository<Autograph>
 {
     int[] GetAcquisitionTypeIds(int userId);
 
-    Task<Entity.Autograph[]> GetAll(int? memorabiliaId = null, int? userId = null);
+    Task<Autograph[]> GetAll(int? memorabiliaId = null, int? userId = null);
 
-    Task<Entity.Autograph[]> GetAllBaseballTypes(int itemTypeId,
+    Task<Autograph[]> GetAllBaseballTypes(int itemTypeId,
                                                  int personId,
                                                  int baseballTypeId,
                                                  int? teamId,
                                                  int? year,
                                                  int userId);
 
-    Task<Entity.Autograph[]> GetAllByPerson(int personId, int userId);
+    Task<Autograph[]> GetAllByPerson(int personId, int userId);
 
-    Task<Entity.Autograph[]> GetAllCards(int itemTypeId,
+    Task<Autograph[]> GetAllCards(int itemTypeId,
                                          int personId,
                                          int brandId,
                                          int? teamId,
                                          int? year,
                                          int userId);
 
-    Task<Entity.Autograph[]> GetAllHallOfFamers(int itemTypeId,
+    Task<Autograph[]> GetAllHallOfFamers(int itemTypeId,
                                                 int personId,
                                                 int sportLeagueLevelId,
                                                 int? year,
                                                 int userId);
 
-    Task<Entity.Autograph[]> GetAllItemTypes(int itemTypeId,
+    Task<Autograph[]> GetAllItemTypes(int itemTypeId,
                                              int personId,
                                              bool? multiSignedItem,
                                              int userId);
 
-    Task<Entity.Autograph[]> GetAllTeams(int itemTypeId,
+    Task<Autograph[]> GetAllTeams(int itemTypeId,
                                          int personId,
                                          int teamId,
                                          int? year,
                                          int userId);
 
-    Task<Entity.Autograph[]> GetAllWorldSeries(int itemTypeId,
+    Task<Autograph[]> GetAllWorldSeries(int itemTypeId,
                                                int personId,
                                                int teamId,
                                                int? year,

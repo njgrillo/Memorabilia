@@ -1,8 +1,8 @@
 ﻿namespace Memorabilia.Repository.Interfaces;
 
-public interface ISignatureReviewRepository : IDomainRepository<Entity.SignatureReview>
+public interface ISignatureReviewRepository : IDomainRepository<SignatureReview>
 {
-    Task<PagedResult<Entity.SignatureReview>> GetAll(PageInfo pageInfo);
+    Task<PagedResult<SignatureReview>> GetAll(PageInfo pageInfo);
 
-    Task<Entity.SignatureReview> GetRandom();
+    Task<SignatureReview> GetRandom();
 }
