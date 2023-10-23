@@ -9,6 +9,9 @@ public partial class Sample
     public IDataProtectorService DataProtectorService { get; set; }
 
     [Inject]
+    public IJSRuntime JSRuntime { get; set; }
+
+    [Inject]
     public NavigationManager NavigationManager { get; set; }
 
     [Inject]
@@ -23,6 +26,29 @@ public partial class Sample
     protected string PaypalRedirectUrl { get; set; }
 
     protected DateTime? SampleDate { get; set; }
+
+    protected string Address { get; set; }
+
+    protected string AddressLine1 { get; set; }
+
+    protected string AddressLine2 { get; set; }    
+
+    protected string City { get; set; }
+
+    protected string CountryRegion { get; set; }
+
+    protected string PostalCode { get; set; }
+
+    protected string StateProvidence { get; set; }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (!firstRender)
+            return;
+
+        await JSRuntime.InitializeMultiLineAddressAutocomplete();
+        await JSRuntime.InitializeSingleLineAddressAutocomplete();
+    }
 
     protected async Task CreatePaypalOrder()
     {

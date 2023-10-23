@@ -38,4 +38,72 @@
             </Div>
         </Div>
     </MudExpansionPanel>
+    <br />
+    <MudExpansionPanel IsExpanded="true"
+                       Text="Address Single Line">
+        <DivRowFormGroup>
+            <Div Class="col-6">
+                <TextField Id="address"
+                           Label="Address"
+                           MaxLength="250"
+                           SelectedText="@Address"
+                           SelectedTextChanged="@((p) => Address = p)" />
+            </Div>
+        </DivRowFormGroup>
+    </MudExpansionPanel>
+    <MudExpansionPanel IsExpanded="true"
+                       Text="Address Multi Line">
+        <DivRowFormGroup>
+            <Div Class="col-6">
+                <TextField Id="address1"
+                           Label="Address"
+                           MaxLength="250"
+                           SelectedText="@AddressLine1"
+                           SelectedTextChanged="@((p) => AddressLine1 = p)" />
+            </Div>
+        </DivRowFormGroup>
+        <DivRowFormGroup>
+            <Div Class="col-6">
+                <TextField Id="address2" 
+                           Label="Apartment, unit, suite, or floor #"
+                           MaxLength="250"
+                           SelectedText="@AddressLine2"
+                           SelectedTextChanged="@((p) => AddressLine2 = p)" />
+            </Div>
+        </DivRowFormGroup>
+        <DivRowFormGroup>
+            <Div Class="col-6">
+                <TextField Id="locality"
+                           Label="City"
+                           MaxLength="100"
+                           SelectedText="@City"
+                           SelectedTextChanged="@((p) => City = p)" />
+            </Div>
+        </DivRowFormGroup>
+        <DivRowFormGroup>
+            <Div Class="col-3">
+                <TextField Id="state"
+                           Label="State/Province"
+                           MaxLength="100"
+                           SelectedText="@StateProvidence"
+                           SelectedTextChanged="@((p) => StateProvidence = p)" />
+            </Div>
+            <Div Class="col-3">
+                <TextField Id="postcode"
+                           Label="Postal Code"
+                           MaxLength="12"
+                           SelectedText="@PostalCode"
+                           SelectedTextChanged="@((p) => PostalCode = p)" />
+            </Div>
+        </DivRowFormGroup>
+        <DivRowFormGroup>
+            <Div Class="col-6">
+                <TextField Id="country"
+                           Label="Country/Region"
+                           MaxLength="150"
+                           SelectedText="@CountryRegion"
+                           SelectedTextChanged="@((p) => CountryRegion = p)" />
+            </Div>
+        </DivRowFormGroup>
+    </MudExpansionPanel>
 </DivPad2>
