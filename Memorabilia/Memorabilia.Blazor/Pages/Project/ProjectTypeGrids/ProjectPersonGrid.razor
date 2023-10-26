@@ -110,7 +110,7 @@
                 <Match>
                     <MudTooltip Text="Remove link to Autograph">
                         <MudFab Color="MudBlazor.Color.Secondary"
-                                Icon="@Icons.Material.Outlined.LinkOff"
+                                StartIcon="@Icons.Material.Outlined.LinkOff"
                                 OnClick="@(_ => projectPerson.AutographId = 0)"
                                 Size="@MudBlazor.Size.Small" />
                     </MudTooltip>                   
@@ -118,7 +118,7 @@
                 <NotMatch>
                     <MudTooltip Text="Link to Autograph">
                         <MudFab Color="MudBlazor.Color.Secondary"
-                                Icon="@Icons.Material.Outlined.AddLink"
+                                StartIcon="@Icons.Material.Outlined.AddLink"
                                 OnClick="@(_ => AddAutographLink(projectPerson))"
                                 Size="@MudBlazor.Size.Small" />
                     </MudTooltip>                   
@@ -136,7 +136,7 @@
         <MudTd DataLabel="">
             <MudTooltip Text="Delete">
                 <MudFab Color="MudBlazor.Color.Secondary"
-                        Icon="@Icons.Material.Outlined.DeleteOutline"
+                        StartIcon="@Icons.Material.Outlined.DeleteOutline"
                         OnClick="@(_ => Remove(projectPerson.Id, projectPerson.Person.Id, projectPerson.ItemTypeId))"
                         Size="@MudBlazor.Size.Small" />
             </MudTooltip>
@@ -201,7 +201,7 @@
                 <Match>
                     <MudTooltip Text="Remove link to Autograph">
                         <MudFab Color="MudBlazor.Color.Secondary"
-                                Icon="@Icons.Material.Outlined.LinkOff"
+                                StartIcon="@Icons.Material.Outlined.LinkOff"
                                 OnClick="@(_ => context.AutographId = 0)"
                                 Size="@MudBlazor.Size.Small" />
                     </MudTooltip>                    
@@ -209,7 +209,7 @@
                 <NotMatch>
                     <MudTooltip Text="Link to Autograph">
                         <MudFab Color="MudBlazor.Color.Secondary"
-                                Icon="@Icons.Material.Outlined.AddLink"
+                                StartIcon="@Icons.Material.Outlined.AddLink"
                                 OnClick="@(_ => AddAutographLink(context))"
                                 Size="@MudBlazor.Size.Small" />
                     </MudTooltip>                   
@@ -227,7 +227,7 @@
         <MudTd DataLabel="">
             <MudTooltip Text="Delete">
                 <MudFab Color="MudBlazor.Color.Secondary"
-                        Icon="@Icons.Material.Outlined.DeleteOutline"
+                        StartIcon="@Icons.Material.Outlined.DeleteOutline"
                         OnClick="@(_ => Remove(context.Id, context.Person.Id, context.ItemTypeId))"
                         Size="@MudBlazor.Size.Small" />
             </MudTooltip>

@@ -38,13 +38,13 @@
             <MudTd DataLabel="">
                 <MudTooltip Text="View">
                     <MudFab Color="MudBlazor.Color.Primary"
-                            Icon="@Icons.Material.Outlined.Edit"
+                            StartIcon="@Icons.Material.Outlined.Edit"
                             OnClick="@(_ => NavigationManager.NavigateTo($"{NavigationPath.ForumTopic}/{DataProtectorService.EncryptId(context.Id)}"))"
                             Size="@MudBlazor.Size.Small" />
                 </MudTooltip>
                 <MudTooltip Text="Remove">
                     <MudFab Color="MudBlazor.Color.Secondary"
-                            Icon="@Icons.Material.Outlined.DeleteOutline"
+                            StartIcon="@Icons.Material.Outlined.DeleteOutline"
                             OnClick="@(_ => ShowRemoveBookmarkConfirm(context.Id))"
                             Size="@MudBlazor.Size.Small" />
                 </MudTooltip>

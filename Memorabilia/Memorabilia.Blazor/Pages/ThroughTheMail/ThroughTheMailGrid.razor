@@ -73,7 +73,7 @@
             <GridEditButton NavigationPath="@($"{NavigationPath.ThroughTheMail}/{Constant.EditModeType.Update.Name}/{DataProtectorService.EncryptId(context.Id)}")" />
             <MudTooltip Text="Delete">
                 <MudFab Color="MudBlazor.Color.Secondary"
-                        Icon="@Icons.Material.Outlined.DeleteOutline"
+                            StartIcon="@Icons.Material.Outlined.DeleteOutline"
                         OnClick="@(_ => ShowDeleteConfirm(@context.Id))" />
             </MudTooltip>
         </MudTd>

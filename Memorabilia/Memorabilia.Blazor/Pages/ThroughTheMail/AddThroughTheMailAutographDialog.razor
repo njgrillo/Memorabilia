@@ -17,14 +17,14 @@
                         <Match>
                             <MudTooltip Text="Remove link to Autograph">
                                 <MudFab Color="MudBlazor.Color.Secondary"
-                                        Icon="@Icons.Material.Outlined.LinkOff"
+                                        StartIcon="@Icons.Material.Outlined.LinkOff"
                                         OnClick="@(_ => ThroughTheMailMemorabilia.AutographId = 0)" />
                             </MudTooltip>
                         </Match>
                         <NotMatch>
                             <MudTooltip Text="Link to Autograph">
                                 <MudFab Color="MudBlazor.Color.Secondary"
-                                        Icon="@Icons.Material.Outlined.AddLink"
+                                        StartIcon="@Icons.Material.Outlined.AddLink"
                                         OnClick="@(_ => AddAutographLink())" />
                             </MudTooltip>
                         </NotMatch>

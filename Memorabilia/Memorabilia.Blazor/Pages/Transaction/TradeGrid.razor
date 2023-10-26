@@ -27,7 +27,7 @@
             <GridEditButton NavigationPath="@($"{NavigationPath.Transactions}/{Constant.EditModeType.Update.Name}/{DataProtectorService.EncryptId(context.MemorabiliaTransactionId)}")" />
             <MudTooltip Text="Delete">
                 <MudFab Color="MudBlazor.Color.Secondary"
-                        Icon="@Icons.Material.Outlined.DeleteOutline"
+                        StartIcon="@Icons.Material.Outlined.DeleteOutline"
                         OnClick="@(_ => ShowDeleteTransactionConfirm(context.MemorabiliaTransactionId))" />
             </MudTooltip>
         </MudTd>
@@ -64,7 +64,7 @@
                                     <MudTooltip Text="@trade.TransactionTradeTypeName">
                                         <MudFab Class="cant-click"
                                                 Color="MudBlazor.Color.Info"
-                                                Icon="@trade.TransactionTradeTypeIcon"
+                                                StartIcon="@trade.TransactionTradeTypeIcon"
                                                 Size="@MudBlazor.Size.Small" />
                                     </MudTooltip>                                    
                                 </MudTd>
@@ -73,7 +73,7 @@
                                                               Size="MudBlazor.Size.Small" />
                                     <MudTooltip Text="Delete">
                                         <MudFab Color="MudBlazor.Color.Secondary"
-                                                Icon="@Icons.Material.Outlined.DeleteOutline"
+                                                StartIcon="@Icons.Material.Outlined.DeleteOutline"
                                                 OnClick="@(_ => ShowDeleteTransactionTradeConfirm(trade.MemorabiliaTransactionId, trade.Id))"
                                                 Size="@MudBlazor.Size.Small" />
                                     </MudTooltip>
