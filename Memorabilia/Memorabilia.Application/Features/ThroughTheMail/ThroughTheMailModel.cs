@@ -35,6 +35,9 @@ public class ThroughTheMailModel
     public DateTime? ReceivedDate
         => _throughTheMail.ReceivedDate;
 
+    public string SelfAddressedStampedEnvelopeTrackingNumber
+        => _throughTheMail.SelfAddressedStampedEnvelopeTrackingNumber;
+
     public DateTime? SentDate 
         => _throughTheMail.SentDate;
 
@@ -51,6 +54,9 @@ public class ThroughTheMailModel
 
     public int? ThroughTheMailFailureTypeId
         => _throughTheMail.ThroughTheMailFailureTypeId;
+
+    public string TrackingNumber
+        => _throughTheMail.TrackingNumber;
 
     public string ToggleIcon { get; set; }
         = MudBlazor.Icons.Material.Filled.ExpandMore;

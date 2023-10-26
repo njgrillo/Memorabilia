@@ -24,6 +24,8 @@
         <MudTh>Person</MudTh>
         <MudTh>Sent Date</MudTh>
         <MudTh>Received Date</MudTh>
+        <MudTh>Tracking Number</MudTh>
+        <MudTh>SASE Tracking Number</MudTh>
         <MudTh>Status</MudTh>
         <Condition Evaluation="@HasCompletedItems">
             <Match>
@@ -56,6 +58,8 @@
         <MudTd DataLabel="Person">@context.Person.DisplayName</MudTd>
         <MudTd DataLabel="SentDate">@(context.SentDate.HasValue ? context.SentDate.Value.ToString("MM-dd-yyyy") : string.Empty)</MudTd>
         <MudTd DataLabel="ReceivedDate">@(context.ReceivedDate.HasValue ? context.ReceivedDate.Value.ToString("MM-dd-yyyy") : string.Empty)</MudTd>
+        <MudTd DataLabel="TrackingNumber">@context.TrackingNumber</MudTd>
+        <MudTd DataLabel="SASETrackingNumber">@context.SelfAddressedStampedEnvelopeTrackingNumber</MudTd>
         <MudTd DataLabel="Status">@context.Status</MudTd>
         <Condition Evaluation="@HasCompletedItems">
             <Match>

@@ -9,15 +9,19 @@ public class ThroughTheMail : Entity
         DateTime? sentDate,
         DateTime? receivedDate,
         string notes,
+        string selfAddressedStampedEnvelopeTrackingNumber,
         int? throughTheMailFailureTypeId,
+        string trackingNumber,
         int userId)
-    {
-        PersonId = personId;
+    {        
         AddressId = addressId;
-        SentDate = sentDate;
-        ReceivedDate = receivedDate;
         Notes = notes;
+        PersonId = personId;
+        ReceivedDate = receivedDate;
+        SelfAddressedStampedEnvelopeTrackingNumber = selfAddressedStampedEnvelopeTrackingNumber;
+        SentDate = sentDate;
         ThroughTheMailFailureTypeId = throughTheMailFailureTypeId;
+        TrackingNumber = trackingNumber;
         UserId = userId;
     }
 
@@ -34,9 +38,13 @@ public class ThroughTheMail : Entity
 
     public DateTime? ReceivedDate { get; private set; }
 
+    public string SelfAddressedStampedEnvelopeTrackingNumber { get; private set; }
+
     public DateTime? SentDate { get; private set; }
 
     public int? ThroughTheMailFailureTypeId { get; private set; }
+
+    public string TrackingNumber { get; private set; }
 
     public int UserId { get; private set; } 
 
@@ -51,14 +59,18 @@ public class ThroughTheMail : Entity
     public void Set(int? addressId,
         DateTime? sentDate,
         DateTime? receivedDate,
+        string trackingNumber,
+        string selfAddressedStampedEnvelopeTrackingNumber,
         string notes,
         int? throughTheMailFailureTypeId)
     {
         AddressId = addressId;
-        SentDate = sentDate;
-        ReceivedDate = receivedDate;
         Notes = notes;
+        ReceivedDate = receivedDate;
+        SelfAddressedStampedEnvelopeTrackingNumber = selfAddressedStampedEnvelopeTrackingNumber;
+        SentDate = sentDate;
         ThroughTheMailFailureTypeId = throughTheMailFailureTypeId;
+        TrackingNumber = trackingNumber;
     }
 
     public void SetMemorabilia(int id, 
