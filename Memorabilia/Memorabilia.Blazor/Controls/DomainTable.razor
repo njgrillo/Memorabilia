@@ -26,12 +26,12 @@
             <MudTd DataLabel="">
                 <MudTooltip Text="Edit">
                     <MudFab Color="MudBlazor.Color.Primary"
-                            Icon="@Icons.Material.Outlined.ModeEditOutline"
+                            StartIcon="@Icons.Material.Outlined.ModeEditOutline"
                             OnClick="@(_ => NavigationManager.NavigateTo($"{RoutePrefix}/{EditModeType.Update.Name}/{context.Id}"))" />
                 </MudTooltip>
                 <MudTooltip Text="Delete">
                     <MudFab Color="MudBlazor.Color.Secondary"
-                            Icon="@Icons.Material.Outlined.DeleteOutline"
+                            StartIcon="@Icons.Material.Outlined.DeleteOutline"
                             OnClick="@(_ => ShowDeleteConfirm(context.Id))" />
                 </MudTooltip>
             </MudTd>
@@ -44,7 +44,7 @@
 <DivRowCol12Center>
     <MudTooltip Text="@AddText">
         <MudFab Color="MudBlazor.Color.Primary"
-                Icon="@Icons.Material.Outlined.AddCircleOutline"
+                StartIcon="@Icons.Material.Outlined.AddCircleOutline"
                 OnClick="@(_ => NavigationManager.NavigateTo(@AddRoute))" />
     </MudTooltip>
 </DivRowCol12Center>

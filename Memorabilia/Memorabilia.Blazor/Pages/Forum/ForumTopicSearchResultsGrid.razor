@@ -22,9 +22,9 @@
         <MudTd DataLabel="">
             <MudTooltip Text="View">
                 <MudFab Color="MudBlazor.Color.Primary"
-                    Icon="@Icons.Material.Outlined.Edit"
-                    OnClick="@(_ => NavigationManager.NavigateTo($"{NavigationPath.ForumTopic}/{DataProtectorService.EncryptId(context.Id)}"))"
-                    Size="@MudBlazor.Size.Small" />
+                        StartIcon="@Icons.Material.Outlined.Edit"
+                        OnClick="@(_ => NavigationManager.NavigateTo($"{NavigationPath.ForumTopic}/{DataProtectorService.EncryptId(context.Id)}"))"
+                        Size="@MudBlazor.Size.Small" />
             </MudTooltip>
         </MudTd>
     </RowTemplate>

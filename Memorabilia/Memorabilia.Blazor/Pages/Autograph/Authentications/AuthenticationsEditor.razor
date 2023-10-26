@@ -95,14 +95,14 @@
                             <MudTd DataLabel="Witnessed">@(authentication.Witnessed ? "Yes" : "No")</MudTd>
                             <MudTd DataLabel="">
                                 <MudTooltip Text="Edit">
-                                    <MudFab Color="MudBlazor.Color.Primary"
-                                        Icon="@Icons.Material.Outlined.ModeEditOutline"
-                                        OnClick="@(_ => Edit(authentication))" />
+                                    <MudFab Color="MudBlazor.Color.Primary"                                        
+                                            OnClick="@(_ => Edit(authentication))"
+                                            StartIcon="@Icons.Material.Outlined.ModeEditOutline" />
                                 </MudTooltip>
                                 <MudTooltip Text="Delete">
-                                    <MudFab Color="MudBlazor.Color.Secondary"
-                                        Icon="@Icons.Material.Outlined.DeleteOutline"
-                                        OnClick="@(_ => authentication.IsDeleted = true)" />
+                                    <MudFab Color="MudBlazor.Color.Secondary"                                            
+                                            OnClick="@(_ => authentication.IsDeleted = true)"
+                                            StartIcon="@Icons.Material.Outlined.DeleteOutline" />
                                 </MudTooltip>
                             </MudTd>
                         </RowTemplate>

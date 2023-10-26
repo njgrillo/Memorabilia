@@ -23,7 +23,9 @@ public class SaveThroughTheMail
                                                            command.SentDate,
                                                            command.ReceivedDate,
                                                            command.Notes,
+                                                           command.SelfAddressedStampedEnvelopeTrackingNumber,
                                                            command.ThroughTheMailFailureTypeId,
+                                                           command.TrackingNumber,
                                                            command.UserId);
 
                 SetMemorabilia(throughTheMail, command);
@@ -46,7 +48,9 @@ public class SaveThroughTheMail
 
             throughTheMail.Set(command.AddressId,
                                command.SentDate,
-                               command.ReceivedDate,                               
+                               command.ReceivedDate,  
+                               command.TrackingNumber,
+                               command.SelfAddressedStampedEnvelopeTrackingNumber,
                                command.Notes,
                                command.ThroughTheMailFailureTypeId);
 
@@ -118,11 +122,17 @@ public class SaveThroughTheMail
         public DateTime? ReceivedDate
             => _editModel.ReceivedDate;
 
+        public string SelfAddressedStampedEnvelopeTrackingNumber
+            => _editModel.SelfAddressedStampedEnvelopeTrackingNumber;
+
         public DateTime? SentDate
             => _editModel.SentDate;
 
         public int? ThroughTheMailFailureTypeId
             => _editModel.ThroughTheMailFailureTypeId;
+
+        public string TrackingNumber
+            => _editModel.TrackingNumber;
 
         public int UserId
             => _editModel.UserId;
