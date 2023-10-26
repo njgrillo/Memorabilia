@@ -17,13 +17,13 @@
                        OnChange="@LoadFiles" />
             <MudFab Color="MudBlazor.Color.Secondary"
                     HtmlTag="label"
-                    Icon="@Icons.Material.Filled.Image"
+                    StartIcon="@Icons.Material.Filled.Image"
                     Label="Load pictures"
                     for="fileInput" />
             <Condition Evaluation="CanImportImages">
                 <Match>
                     <MudFab Color="MudBlazor.Color.Secondary"
-                            Icon="@Icons.Material.Filled.Image"
+                            StartIcon="@Icons.Material.Filled.Image"
                             Label="@ImportButtonText"
                             OnClick="Import" />
                 </Match>

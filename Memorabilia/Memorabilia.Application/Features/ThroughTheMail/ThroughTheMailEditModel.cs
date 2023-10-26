@@ -11,8 +11,10 @@ public class ThroughTheMailEditModel : EditModel
         Notes = throughTheMail.Notes;
         Person = new PersonEditModel(new PersonModel(throughTheMail.Person));
 		ReceivedDate = throughTheMail.ReceivedDate;
+        SelfAddressedStampedEnvelopeTrackingNumber = throughTheMail.SelfAddressedStampedEnvelopeTrackingNumber;
 		SentDate = throughTheMail.SentDate;
         ThroughTheMailFailureType = Constant.ThroughTheMailFailureType.Find(throughTheMail.ThroughTheMailFailureTypeId ?? 0);
+        TrackingNumber = throughTheMail.TrackingNumber;
         UserId = throughTheMail.UserId;
 
 		if (!throughTheMail.Memorabilia.Any())
@@ -30,8 +32,10 @@ public class ThroughTheMailEditModel : EditModel
         Notes = model.Notes;
         Person = new PersonEditModel(new PersonModel(model.Person));
         ReceivedDate = model.ReceivedDate;
-        SentDate = model.SentDate;
+        SelfAddressedStampedEnvelopeTrackingNumber = model.SelfAddressedStampedEnvelopeTrackingNumber;
+        SentDate = model.SentDate;        
         ThroughTheMailFailureType = Constant.ThroughTheMailFailureType.Find(model.ThroughTheMailFailureTypeId ?? 0);
+        TrackingNumber = model.TrackingNumber;
         UserId = model.UserId;
 
         if (!model.Memorabilia.Any())
@@ -54,12 +58,16 @@ public class ThroughTheMailEditModel : EditModel
 
     public DateTime? ReceivedDate { get; set; }
 
-	public DateTime? SentDate { get; set; }
+    public string SelfAddressedStampedEnvelopeTrackingNumber { get; set; }
+
+    public DateTime? SentDate { get; set; }
 
     public Constant.ThroughTheMailFailureType ThroughTheMailFailureType { get; set; }
 
     public int? ThroughTheMailFailureTypeId 
         => ThroughTheMailFailureType?.Id;
 
-	public int UserId { get; set; }
+    public string TrackingNumber { get; set; }
+
+    public int UserId { get; set; }
 }

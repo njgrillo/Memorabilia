@@ -41,7 +41,7 @@
                 <Match>
                     <MudTooltip Text="Link to Autograph">
                         <MudFab Color="MudBlazor.Color.Secondary"
-                                Icon="@Icons.Material.Outlined.AddLink"
+                                StartIcon="@Icons.Material.Outlined.AddLink"
                                 OnClick="@(_ => AddAutographLink(context))" />
                     </MudTooltip>
                 </Match>
@@ -50,7 +50,7 @@
         <MudTd DataLabel="">
             <MudTooltip Text="Delete">
                 <MudFab Color="MudBlazor.Color.Secondary"
-                        Icon="@Icons.Material.Outlined.DeleteOutline"
+                        StartIcon="@Icons.Material.Outlined.DeleteOutline"
                         OnClick="@(_ => context.IsDeleted = true)" />
             </MudTooltip>
         </MudTd>
@@ -77,7 +77,7 @@
                 <Match>
                     <MudTooltip Text="Link to Autograph">
                         <MudFab Color="MudBlazor.Color.Secondary"
-                                Icon="@Icons.Material.Outlined.AddLink" />
+                                StartIcon="@Icons.Material.Outlined.AddLink" />
                     </MudTooltip>
                 </Match>
             </Condition>
@@ -85,7 +85,7 @@
         <MudTd DataLabel="">
             <MudTooltip Text="Delete">
                 <MudFab Color="MudBlazor.Color.Secondary"
-                        Icon="@Icons.Material.Outlined.DeleteOutline" />
+                        StartIcon="@Icons.Material.Outlined.DeleteOutline" />
             </MudTooltip>
         </MudTd>
     </RowEditingTemplate>

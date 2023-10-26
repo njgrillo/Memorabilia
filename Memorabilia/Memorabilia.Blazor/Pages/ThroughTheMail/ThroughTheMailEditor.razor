@@ -50,6 +50,18 @@
         </Condition>        
     </DivRowFormGroup>  
     <DivRowFormGroup>
+        <Div Class="col-3">
+            <TextField Label="Tracking Number"
+                       SelectedText="@EditModel.TrackingNumber"
+                       SelectedTextChanged="@((p) => EditModel.TrackingNumber = p)" />
+        </Div>
+        <Div Class="col-3">
+            <TextField Label="SASE Tracking Number"
+                       SelectedText="@EditModel.SelfAddressedStampedEnvelopeTrackingNumber"
+                       SelectedTextChanged="@((p) => EditModel.SelfAddressedStampedEnvelopeTrackingNumber = p)" />
+        </Div>
+    </DivRowFormGroup>
+    <DivRowFormGroup>
         <Div Class="col-6">
             <TextField Label="Notes"
                        Lines="10"
