@@ -20,6 +20,7 @@ public partial class DeleteGridButton
 
     [Parameter]
     public MudBlazor.Size Size { get; set; }
+        = MudBlazor.Size.Medium;
 
     [Parameter]
     public string StartIcon { get; set; }

@@ -42,12 +42,8 @@
             <ExpansionPanel Text="Search">
                 <Div Style="margin-bottom:1%">
                     <MudStack Row="true">
-                        <MudTextField @bind-Value="_searchText"
-                                      Adornment="Adornment.Start"
-                                      AdornmentIcon="@Icons.Material.Filled.Search"
-                                      Class="mt-0"
-                                      IconSize="MudBlazor.Size.Medium"
-                                      Placeholder="Search" />
+                        <ToolbarSearchField SearchText="@_search"
+                                            SearchTextChanged="@((p) => _search = p)" />
                         <CustomButton ButtonType="MudBlazor.ButtonType.Button"
                                       OnClick="Search"
                                       Size="MudBlazor.Size.Small"

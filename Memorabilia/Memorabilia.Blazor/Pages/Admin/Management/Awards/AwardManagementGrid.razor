@@ -7,12 +7,8 @@
     <ToolBarContent>
         <ToolbarTitle Text="Awards" />
         <MudSpacer />
-        <MudTextField @bind-Value="_search"
-                      Adornment="Adornment.Start"
-                      AdornmentIcon="@Icons.Material.Filled.Search"
-                      Class="mt-0"
-                      IconSize="MudBlazor.Size.Medium"
-                      Placeholder="Search" />
+        <ToolbarSearchField SearchText="@_search"
+                            SearchTextChanged="@((p) => _search = p)" />
     </ToolBarContent>
     <HeaderContent>
         <MudTh>Name</MudTh>
@@ -31,11 +27,7 @@
         <MudTd DataLabel="NumberOfWinners">@(context.NumberOfWinners > 0 ? context.NumberOfWinners.ToString() : string.Empty)</MudTd>    
         <MudTd DataLabel="MonthAwarded">@(context.MonthAwarded.HasValue ? context.MonthAwarded.ToMonth() : string.Empty)</MudTd>
         <MudTd DataLabel="">
-            <MudTooltip Text="Edit">
-                <MudFab Color="MudBlazor.Color.Primary"
-                        StartIcon="@Icons.Material.Outlined.ModeEditOutline"
-                        OnClick="@(_ => NavigationManager.NavigateTo($"/Admin/Management/Awards/AwardManagementEditor/{context.AwardType.Id}"))" />
-            </MudTooltip>
+            <EditGridButton OnEdit="@(_ => NavigationManager.NavigateTo($"/Admin/Management/Awards/AwardManagementEditor/{context.AwardType.Id}"))" />
         </MudTd>
     </RowTemplate>
     <PagerContent>

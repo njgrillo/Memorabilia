@@ -94,11 +94,7 @@
                             <MudTd DataLabel="Verification">@authentication.Verification</MudTd>
                             <MudTd DataLabel="Witnessed">@(authentication.Witnessed ? "Yes" : "No")</MudTd>
                             <MudTd DataLabel="">
-                                <MudTooltip Text="Edit">
-                                    <MudFab Color="MudBlazor.Color.Primary"                                        
-                                            OnClick="@(_ => Edit(authentication))"
-                                            StartIcon="@Icons.Material.Outlined.ModeEditOutline" />
-                                </MudTooltip>
+                                <EditGridButton OnEdit="@(_ => Edit(authentication))" />
                                 <DeleteGridButton OnDelete="@(_ => authentication.IsDeleted = true)" />
                             </MudTd>
                         </RowTemplate>

@@ -73,18 +73,12 @@
                                 OnClick="@(_ => NavigationManager.NavigateTo($"{NavigationPath.Memorabilia}/{context.ItemTypeName.Replace(" ", "")}/Edit/{DataProtectorService.EncryptId(context.Id)}"))"
                                 Size="@MudBlazor.Size.Small" />
                     </MudTooltip>
-                    <MudTooltip Text="Edit">
-                        <MudFab Color="MudBlazor.Color.Primary"
-                                StartIcon="@Icons.Material.Outlined.ModeEditOutline"
-                                OnClick="@(_ => NavigationManager.NavigateTo($"{NavigationPath.Memorabilia}/{Constant.EditModeType.Update.Name}/{DataProtectorService.EncryptId(context.Id)}"))"
-                                Size="@MudBlazor.Size.Small" />
-                    </MudTooltip>
-                    <MudTooltip Text="Delete">
-                        <MudFab Color="MudBlazor.Color.Secondary"
-                                StartIcon="@Icons.Material.Outlined.DeleteOutline"
-                                OnClick="@(_ => ShowDeleteMemorabiliaConfirm(context.Id))"
-                                Size="@MudBlazor.Size.Small" />
-                    </MudTooltip>
+                    <EditGridButton OnEdit="@(_ => NavigationManager.NavigateTo($"{NavigationPath.Memorabilia}/{Constant.EditModeType.Update.Name}/{DataProtectorService.EncryptId(context.Id)}"))"
+                                    Size="MudBlazor.Size.Small" />
+                    <DeleteGridButton ConfirmMessage="Delete Memorabilia"
+                                      OnDelete="@(_ => DeleteMemorabiliaItem(context.Id))"
+                                      ShowConfirm="true"
+                                      Size="MudBlazor.Size.Small" />
                 </MudTd>                
             </Match>
         </Condition>                      
@@ -173,18 +167,12 @@
                                         <MudTd DataLabel="">
                                             <ViewAutographImagesFab AutographId="autograph.Id"
                                                                     Size="MudBlazor.Size.Small" />
-                                            <MudTooltip Text="Edit">
-                                                <MudFab Color="MudBlazor.Color.Primary"
-                                                        StartIcon="@Icons.Material.Outlined.ModeEditOutline"
-                                                        OnClick="@(_ => NavigationManager.NavigateTo($"{NavigationPath.Autographs}/{Constant.EditModeType.Update.Name}/{DataProtectorService.EncryptId(autograph.MemorabiliaId)}/{DataProtectorService.EncryptId(autograph.Id)}"))"
-                                                        Size="@MudBlazor.Size.Small" />
-                                            </MudTooltip>
-                                            <MudTooltip Text="Delete">
-                                                <MudFab Color="MudBlazor.Color.Secondary"
-                                                        StartIcon="@Icons.Material.Outlined.DeleteOutline"
-                                                        OnClick="@(_ => ShowDeleteAutographConfirm(autograph.Id))"
-                                                        Size="@MudBlazor.Size.Small" />
-                                            </MudTooltip>
+                                            <EditGridButton OnEdit="@(_ => NavigationManager.NavigateTo($"{NavigationPath.Autographs}/{Constant.EditModeType.Update.Name}/{DataProtectorService.EncryptId(autograph.MemorabiliaId)}/{DataProtectorService.EncryptId(autograph.Id)}"))"
+                                                            Size="MudBlazor.Size.Small" />
+                                            <DeleteGridButton ConfirmMessage="Delete Autograph"
+                                                              OnDelete="@(_ => DeleteAutograph(context.Id))"
+                                                              ShowConfirm="true"
+                                                              Size="MudBlazor.Size.Small" />
                                         </MudTd>
                                     </Match>
                                 </Condition>                                

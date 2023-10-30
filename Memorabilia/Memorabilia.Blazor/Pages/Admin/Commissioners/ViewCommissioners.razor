@@ -15,12 +15,8 @@
             <ToolBarContent>
                 <ToolbarTitle Text="@Model.PageTitle" />
                 <MudSpacer />
-                <MudTextField @bind-Value="Search"
-                              Adornment="Adornment.Start"
-                              AdornmentIcon="@Icons.Material.Filled.Search"
-                              Class="mt-0"
-                              IconSize="MudBlazor.Size.Medium"
-                              Placeholder="Search" />
+                <ToolbarSearchField SearchText="@Search"
+                                    SearchTextChanged="@((p) => Search = p)" />
             </ToolBarContent>
             <HeaderContent>
                 <MudTh>Sport League</MudTh>

@@ -1,13 +1,29 @@
 ﻿<Condition Evaluation="Visible">
     <Match>
-        <MudButton ButtonType="ButtonType"
-                   Color="Color"
-                   OnClick="OnClick"
-                   Size="Size"
-                   StartIcon="@StartIcon"
-                   Variant="Variant">
-            @Text
-        </MudButton>
+        <Condition Evaluation="@(!TooltipText.IsNullOrEmpty())">
+            <Match>
+                <MudTooltip Text="@TooltipText">
+                    <MudButton ButtonType="ButtonType"
+                               Color="Color"
+                               OnClick="OnClick"
+                               Size="Size"
+                               StartIcon="@StartIcon"
+                               Variant="Variant">
+                        @Text
+                    </MudButton>
+                </MudTooltip>
+            </Match>
+            <NotMatch>
+                <MudButton ButtonType="ButtonType"
+                           Color="Color"
+                           OnClick="OnClick"
+                           Size="Size"
+                           StartIcon="@StartIcon"
+                           Variant="Variant">
+                    @Text
+                </MudButton>
+            </NotMatch>
+        </Condition>        
     </Match>
 </Condition>
 

@@ -8,12 +8,8 @@
         <ToolBarContent>
             <ToolbarTitle Text="@DomainItemTitle" />
             <MudSpacer />
-            <MudTextField @bind-Value="_search"
-                          Adornment="Adornment.Start"
-                          AdornmentIcon="@Icons.Material.Filled.Search"
-                          Class="mt-0"
-                          IconSize="MudBlazor.Size.Medium"
-                          Placeholder="Search" />
+            <ToolbarSearchField SearchText="@_search"
+                                SearchTextChanged="@((p) => _search = p)" />
         </ToolBarContent>
         <HeaderContent>
             <MudTh>Name</MudTh>
@@ -24,11 +20,7 @@
             <MudTd DataLabel="Name">@context.Name</MudTd>
             <MudTd DataLabel="Abbreviation">@context.Abbreviation</MudTd>
             <MudTd DataLabel="">
-                <MudTooltip Text="Edit">
-                    <MudFab Color="MudBlazor.Color.Primary"
-                            StartIcon="@Icons.Material.Outlined.ModeEditOutline"
-                            OnClick="@(_ => NavigationManager.NavigateTo($"{RoutePrefix}/{EditModeType.Update.Name}/{context.Id}"))" />
-                </MudTooltip>
+                <EditGridButton OnEdit="@(_ => NavigationManager.NavigateTo($"{RoutePrefix}/{EditModeType.Update.Name}/{context.Id}"))" />
                 <DeleteGridButton ConfirmMessage="@DeleteText" 
                                   OnDelete="@(_ => Delete(context.Id))"
                                   ShowConfirm="true" />
@@ -40,10 +32,7 @@
     </MudTable>
 </DivPad2>
 <DivRowCol12Center>
-    <MudTooltip Text="@AddText">
-        <MudFab Color="MudBlazor.Color.Primary"
-                StartIcon="@Icons.Material.Outlined.AddCircleOutline"
-                OnClick="@(_ => NavigationManager.NavigateTo(@AddRoute))" />
-    </MudTooltip>
+    <AddMudFab OnAdd="@(_ => NavigationManager.NavigateTo(AddRoute))" 
+               TooltipText="@AddText" />
 </DivRowCol12Center>
 <PageFooter NavigationPath="Admin/EditDomainItems" />

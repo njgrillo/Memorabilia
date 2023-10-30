@@ -39,18 +39,11 @@
                                           Images="ForumEntry.Images" />
                     </Match>
                 </Condition>
+                <EditGridButton OnEdit="Edit"
+                                Size="@MudBlazor.Size.Small"
+                                Visible="@(CanEdit && !EditMode)" />
                 <Condition Evaluation="CanEdit">
-                    <Match>
-                        <Condition Evaluation="@(!EditMode)">
-                            <Match>
-                                <MudTooltip Text="Edit">
-                                    <MudFab Color="MudBlazor.Color.Primary"
-                                            StartIcon="@Icons.Material.Outlined.ModeEditOutline"
-                                            OnClick="Edit"
-                                            Size="@MudBlazor.Size.Small" />
-                                </MudTooltip>
-                            </Match>
-                        </Condition>                        
+                    <Match>                        
                         <Condition Evaluation="@EditMode">
                             <Match>
                                 <MudTooltip Text="Confirm">

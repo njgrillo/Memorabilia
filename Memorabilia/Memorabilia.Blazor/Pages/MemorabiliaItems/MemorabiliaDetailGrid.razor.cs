@@ -6,9 +6,6 @@ public partial class MemorabiliaDetailGrid
     public IDataProtectorService DataProtectorService { get; set; }
 
     [Inject]
-    public IDialogService DialogService { get; set; }
-
-    [Inject]
     public ImageService ImageService { get; set; }
 
     [Inject]
@@ -156,28 +153,6 @@ public partial class MemorabiliaDetailGrid
             : Model.MemorabiliaItems.ToList();
 
         await MemorabiliaSelected.InvokeAsync(SelectedMemorabilia);
-    }
-
-    protected async Task ShowDeleteAutographConfirm(int id)
-    {
-        var dialog = DialogService.Show<DeleteDialog>("Delete Autograph");
-        var result = await dialog.Result;
-
-        if (result.Canceled)
-            return;
-
-        await DeleteAutograph(id);
-    }
-
-    protected async Task ShowDeleteMemorabiliaConfirm(int id)
-    {
-        var dialog = DialogService.Show<DeleteDialog>("Delete Memorabilia");
-        var result = await dialog.Result;
-
-        if (result.Canceled)
-            return;
-
-        await DeleteMemorabiliaItem(id);
     }
 
     private void ToggleChildContent(int memorabiliaItemId)

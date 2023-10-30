@@ -54,12 +54,8 @@
                 <ToolBarContent>
                     <ToolbarTitle Text="@Model.MainGridTitle" />
                     <MudSpacer />
-                    <MudTextField @bind-Value="Search"
-                                  Adornment="Adornment.Start"
-                                  AdornmentIcon="@Icons.Material.Filled.Search"
-                                  Class="mt-0"
-                                  IconSize="MudBlazor.Size.Medium"
-                                  Placeholder="Search" />
+                    <ToolbarSearchField SearchText="@Search"
+                                        SearchTextChanged="@((p) => Search = p)" />
                 </ToolBarContent>
                 <HeaderContent>
                     <MudTh></MudTh>
@@ -112,12 +108,8 @@
                         <ToolBarContent>
                             <ToolbarTitle Text="@Model.SecondaryGridTitle" />
                             <MudSpacer />
-                            <MudTextField @bind-Value="_secondarySearch"
-                                          Adornment="Adornment.Start"
-                                          AdornmentIcon="@Icons.Material.Filled.Search"
-                                          Class="mt-0"
-                                          IconSize="MudBlazor.Size.Medium"
-                                          Placeholder="Search" />
+                            <ToolbarSearchField SearchText="@_secondarySearch"
+                                                SearchTextChanged="@((p) => _secondarySearch = p)" />
                         </ToolBarContent>
                         <HeaderContent>
                             <MudTh></MudTh>
@@ -162,12 +154,8 @@
                         <ToolBarContent>
                             <ToolbarTitle Text="@Model.SecondaryGridTitle" />
                             <MudSpacer />
-                            <MudTextField @bind-Value="_secondarySearch"
-                                          Adornment="Adornment.Start"
-                                          AdornmentIcon="@Icons.Material.Filled.Search"
-                                          Class="mt-0"
-                                          IconSize="MudBlazor.Size.Medium"
-                                          Placeholder="Search" />
+                            <ToolbarSearchField SearchText="@_secondarySearch"
+                                                SearchTextChanged="@((p) => _secondarySearch = p)" />
                         </ToolBarContent>
                         <HeaderContent>
                             <MudTh></MudTh>

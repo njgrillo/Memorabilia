@@ -30,11 +30,7 @@
                 <MudTd DataLabel="Type">@context.InternationalHallOfFameTypeName</MudTd>
                 <MudTd DataLabel="Induction Year">@context.Year</MudTd>
                 <MudTd DataLabel="">
-                    <MudTooltip Text="Edit">
-                        <MudFab Color="MudBlazor.Color.Primary"                                
-                                StartIcon="@Icons.Material.Outlined.ModeEditOutline"
-                                OnClick="@(_ => Edit(context))" />
-                    </MudTooltip> 
+                    <EditGridButton OnEdit="@(_ => Edit(context))" />
                     <DeleteGridButton OnDelete="@(_ => context.IsDeleted = true)" />
                 </MudTd>
             </RowTemplate>

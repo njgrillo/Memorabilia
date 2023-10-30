@@ -1,24 +1,25 @@
-﻿namespace Memorabilia.Blazor.Controls.Fabs;
+﻿namespace Memorabilia.Blazor.Controls.Grids.Buttons;
 
-public partial class AddMudFab
+public partial class EditGridButton
 {
     [Parameter]
     public Color Color { get; set; }
         = Color.Primary;
 
     [Parameter]
-    public EventCallback OnAdd { get; set; }
+    public EventCallback OnEdit { get; set; }
 
     [Parameter]
     public MudBlazor.Size Size { get; set; }
+        = MudBlazor.Size.Medium;
 
     [Parameter]
     public string StartIcon { get; set; }
-        = Icons.Material.Outlined.AddCircleOutline;
+        = Icons.Material.Outlined.ModeEditOutline;
 
     [Parameter]
     public string TooltipText { get; set; }
-        = "Add";
+        = "Edit";
 
     [Parameter]
     public bool Visible { get; set; }
@@ -26,6 +27,6 @@ public partial class AddMudFab
 
     public async Task ButtonClicked()
     {
-        await OnAdd.InvokeAsync();
+        await OnEdit.InvokeAsync();
     }
 }

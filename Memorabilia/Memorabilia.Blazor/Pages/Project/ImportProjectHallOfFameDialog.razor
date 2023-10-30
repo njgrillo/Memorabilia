@@ -34,12 +34,8 @@
                     <ToolBarContent>
                         <ToolbarTitle Text="People" />
                         <MudSpacer />
-                        <MudTextField @bind-Value="_search"
-                                      Adornment="Adornment.Start"
-                                      AdornmentIcon="@Icons.Material.Filled.Search"
-                                      Class="mt-0"
-                                      IconSize="MudBlazor.Size.Medium"
-                                      Placeholder="Search" />
+                        <ToolbarSearchField SearchText="@_search"
+                                            SearchTextChanged="@((p) => _search = p)" />
                     </ToolBarContent>
                     <HeaderContent>
                         <MudTh>

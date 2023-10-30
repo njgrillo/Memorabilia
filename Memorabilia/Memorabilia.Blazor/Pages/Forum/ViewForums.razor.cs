@@ -13,7 +13,7 @@ public partial class ViewForums : ReroutePage
 
     private bool _canInteract;
 
-    private string _searchText;
+    private string _search;
 
     protected override void OnInitialized()
     {
@@ -68,6 +68,6 @@ public partial class ViewForums : ReroutePage
 
     private void Search()
     {
-        SearchText = _searchText;
+        SearchText = _search;
     }
 }
