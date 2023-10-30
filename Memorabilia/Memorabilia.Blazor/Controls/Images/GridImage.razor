@@ -1,15 +1,34 @@
-﻿<Condition Evaluation="@(!ImageData.IsNullOrEmpty())">
-    <Match>
-        <MudImage @onclick="OnImageClick"
-                  Class="@_imageClass"
-                  Elevation="5"
-                  Height="200"
-                  ObjectFit="@ObjectFit.Cover"
-                  Src="@ImageData"
-                  Width="200" />
+﻿<Condition Evaluation="Visible">
+    <Match>   
+        <Condition Evaluation="@(!ImageData.IsNullOrEmpty())">
+            <Match>
+                <Condition Evaluation="@(!TooltipText.IsNullOrEmpty())">
+                    <Match>
+                        <MudTooltip Text="@TooltipText">
+                            <MudImage @onclick="OnImageClick"
+                                      Class="@Class"
+                                      Elevation="Elevation"
+                                      Height="Height"
+                                      ObjectFit="ObjectFit"
+                                      Src="@ImageData"
+                                      Width="Width" />
+                        </MudTooltip>
+                    </Match>
+                    <NotMatch>
+                        <MudImage @onclick="OnImageClick"
+                                  Class="@Class"
+                                  Elevation="Elevation"
+                                  Height="Height"
+                                  ObjectFit="ObjectFit"
+                                  Src="@ImageData"
+                                  Width="Width" />
+                    </NotMatch>
+                </Condition>                
+            </Match>
+            <NotMatch>
+                <MudProgressCircular Color="MudBlazor.Color.Info"
+                                     Indeterminate="true" />
+            </NotMatch>
+        </Condition>
     </Match>
-    <NotMatch>
-        <MudProgressCircular Color="MudBlazor.Color.Info" 
-                             Indeterminate="true" />
-    </NotMatch>
 </Condition>

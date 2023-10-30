@@ -15,18 +15,13 @@
                                MemorabiliaId="EditModel.MemorabiliaId" />
         </TimelineContent>
         <ImagePreview>
-            <Condition Evaluation="EditModel.HasMemorabiliaImages">
-                <Match>
-                    <DivRowCol12Center>
-                        <ViewMemorabiliaImagesButton MemorabiliaId="EditModel.MemorabiliaId" />
-                    </DivRowCol12Center>
-                </Match>
-            </Condition>
+            <DivRowCol12Center Visible="EditModel.HasMemorabiliaImages">
+                <ViewMemorabiliaImagesButton MemorabiliaId="EditModel.MemorabiliaId" />
+            </DivRowCol12Center>
         </ImagePreview>
         <ChildContent>
             <DivRowFormGroup Style="margin-top:1%;margin-bottom:1%;">
-                <MudStack Class="col-12"
-                          Row="true"
+                <RowStack Class="col-12"
                           Style="margin-bottom:1%;">
                     <AuthenticationCompanyDropDown Disabled="@(EditMode == EditModeType.Update)"
                                                    SelectedValue="Model.AuthenticationCompanyId"
@@ -37,13 +32,10 @@
                     <AddUpdateMudFab EditMode="EditMode"
                                      OnAdd="Add"
                                      OnUpdate="Update" />
-                </MudStack>
-                <Div Class="col-4">
-                </Div>
+                </RowStack>
             </DivRowFormGroup>
             <DivRowFormGroup Style="margin-top:1%;margin-bottom:1%;">
-                <MudStack Class="col-12"
-                          Row="true"
+                <RowStack Class="col-12"
                           Style="margin-bottom:1%;">
                     <Switch Checked="@Model.HasHologram"
                             CheckedChanged="(p) => Model.HasHologram = p"
@@ -57,7 +49,7 @@
                     <Switch Checked="@Model.Witnessed"
                             CheckedChanged="(p) => Model.Witnessed = p"
                             Label="Was Witnessed?" />
-                </MudStack>
+                </RowStack>
             </DivRowFormGroup>
             <DivRowCol12>
                 <MudTable Bordered="false"
@@ -81,7 +73,8 @@
                         <MudTd DataLabel="Authentication Company">
                             <Condition Evaluation="authentication.CanNavigateToWebsite">
                                 <Match>
-                                    <MudLink Href="@(authentication.VerificationWebsiteLink)" Target="_blank">@authentication.VerificationWebsiteLinkText</MudLink>
+                                    <MudLink Href="@authentication.VerificationWebsiteLink" 
+                                             Target="_blank">@authentication.VerificationWebsiteLinkText</MudLink>
                                 </Match>
                                 <NotMatch>
                                     @authentication.AuthenticationCompanyName
@@ -104,4 +97,3 @@
             </ChildContent>
     </PageEditor>
 </PageLoader>
-

@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Blazor.Controls.Images;
 
-public partial class GridImage
+public partial class Image
 {
     [Inject]
     public ImageService ImageService { get; set; }
@@ -31,9 +31,6 @@ public partial class GridImage
     public string ImageFileName { get; set; }
 
     [Parameter]
-    public EventCallback ImageLoaded { get; set; }
-
-    [Parameter]
     public string NavigationPath { get; set; }
 
     [Parameter]
@@ -55,7 +52,7 @@ public partial class GridImage
 
     [Parameter]
     public int? Width { get; set; }
-        = 200;    
+        = 200;
 
     protected override void OnInitialized()
     {
@@ -64,15 +61,13 @@ public partial class GridImage
             : "cant-click";
     }
 
-    protected override async Task OnAfterRenderAsync(bool firstRender)
+    protected override void OnAfterRender(bool firstRender)
     {
-        if (!ImageData.IsNullOrEmpty() || 
+        if (!ImageData.IsNullOrEmpty() ||
             ImageFileName.IsNullOrEmpty())
             return;
 
         ImageData = ImageService.GetUserImageData(ImageFileName, UserId);
-
-        await ImageLoaded.InvokeAsync();
     }
 
     protected async Task OnImageClick()
@@ -86,6 +81,6 @@ public partial class GridImage
             return;
         }
 
-        NavigationManager.NavigateTo(NavigationPath);         
+        NavigationManager.NavigateTo(NavigationPath);
     }
 }

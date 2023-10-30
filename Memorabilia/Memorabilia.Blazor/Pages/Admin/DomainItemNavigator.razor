@@ -1,10 +1,11 @@
-﻿<Div Class="row">
+﻿<Div Class="row"
+     Visible="_displayItemTypeNotFound">
     <Div Class="col-4">
         <DivPad5>
-            <span hidden="@(!_displayItemTypeNotFound)"
-                  style="background-color:red;">
+            <Text Style="background-color:red;"
+                  Typography="Typo.body1">
                 Item Type Not Found
-            </span>
+            </Text>
         </DivPad5>
     </Div>
 </Div>
@@ -12,7 +13,7 @@
      KeyDown="Enter">
     <Div Class="col-4">
         <DivPad5>
-            <MudStack Row="true">
+            <RowStack>
                 <TextField Label="Quick Jump"
                            SelectedText="@DomainItemQuickJump"
                            SelectedTextChanged="@((p) => DomainItemQuickJump = p)" />
@@ -20,7 +21,7 @@
                               OnClick="QuickJump"
                               Size="MudBlazor.Size.Small"
                               Text="Go" />
-            </MudStack>
+            </RowStack>
         </DivPad5>                
     </Div>
 </Div>

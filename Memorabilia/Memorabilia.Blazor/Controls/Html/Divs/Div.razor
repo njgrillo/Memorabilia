@@ -1,6 +1,10 @@
-﻿<div @onkeydown="@OnKeyDown"
-     class="@Class"
-     hidden="@Hidden"
-     style="@Style">
-    @ChildContent
-</div>
+﻿<Condition Evaluation="Visible">
+    <Match>
+        <div @onkeydown="@OnKeyDown"
+             class="@Class"
+             hidden="@Hidden"
+             style="@Style">
+            @ChildContent
+        </div>
+    </Match>
+</Condition>

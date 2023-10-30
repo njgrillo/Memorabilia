@@ -1,14 +1,8 @@
 ﻿<Div Style="margin-top:1%;margin-bottom:1%;margin-left:1%;margin-right:1%;">
-    <Condition Evaluation="@(ValidationResultAlerts.Any())">
-        <Match>
-            <AlertPanel Alerts="ValidationResultAlerts" />
-        </Match>
-    </Condition>
+    <AlertPanel Alerts="ValidationResultAlerts" />
     <Div Class="row">
         <Div Class="col-12">
-            <h3>
-                @(EditModel?.AwardType?.Name)
-            </h3>
+            <Header Text="@EditModel?.AwardType?.Name" />
         </Div>
     </Div>
     <DivRowFormGroup>
@@ -40,13 +34,12 @@
     <br />
     <LeftRightSection>
         <Right>
-            <MudStack Row="true"
-                      Style="margin-top:1%;margin-bottom:1%;">
+            <RowStack Style="margin-top:1%;margin-bottom:1%;">
                 <Div>
                     <SaveButton OnClick="OnSave"
                                 Text="Save" />
                 </Div>
-            </MudStack>
+            </RowStack>
         </Right>
     </LeftRightSection>
     <PageFooter NavigationPath="/Admin/Management/Awards/AwardManagement"

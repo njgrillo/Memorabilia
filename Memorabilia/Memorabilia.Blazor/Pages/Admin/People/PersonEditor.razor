@@ -18,7 +18,7 @@
         <ChildContent>
             <Div Style="margin-bottom:1%;">
                 <TabControl>
-                    <MudTabPanel Text="Details">
+                    <TabPanel Text="Details">
                         <DivRowFormGroup>
                             <Div Class="col-3">
                                 <TextField Label="First Name"
@@ -85,8 +85,6 @@
                                                Variant="Variant.Outlined" />
                             </Div>
                             <Div Class="col-3">
-                                @*<DatePicker @bind-Date="EditModel.DeathDate"
-                                            Label="Death Date" />*@
                                 <MudDatePicker @bind-Date="EditModel.DeathDate"
                                                DateFormat="MM/dd/yyyy"
                                                Editable="true"
@@ -95,14 +93,15 @@
                                                Variant="Variant.Outlined" />
                             </Div>
                         </Div>
-                    </MudTabPanel>
-                    <MudTabPanel BadgeColor="MudBlazor.Color.Success"
-                                 BadgeData="EditModel.Nicknames.Count(nickname => !nickname.IsDeleted)"
-                                 Text="Nicknames">
+                    </TabPanel>
+                    <TabPanel BadgeColor="MudBlazor.Color.Success"
+                              BadgeData="EditModel.Nicknames.Count(nickname => !nickname.IsDeleted)"
+                              DisplayBadge="true"
+                              Text="Nicknames">
                         <DivRowCol12>
                             <PersonNicknameEditor Nicknames="EditModel.Nicknames" />
                         </DivRowCol12>
-                    </MudTabPanel>
+                    </TabPanel>
                 </TabControl>
             </Div>
         </ChildContent>

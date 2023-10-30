@@ -1,0 +1,20 @@
+﻿<Condition Evaluation="Visible">
+    <Match>
+        <Condition Evaluation="@(!TooltipText.IsNullOrEmpty())">
+            <Match>
+                <MudTooltip Text="@TooltipText">
+                    <MudFab Color="Color"                            
+                            OnClick="FabClicked"
+                            Size="Size"
+                            StartIcon="@StartIcon" />
+                </MudTooltip>
+            </Match>
+            <NotMatch>
+                <MudFab Color="Color"                        
+                        OnClick="FabClicked"
+                        Size="Size"
+                        StartIcon="@StartIcon" />
+            </NotMatch>
+        </Condition>
+    </Match>
+</Condition>

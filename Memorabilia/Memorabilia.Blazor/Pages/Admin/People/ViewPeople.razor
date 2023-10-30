@@ -33,15 +33,10 @@
             </HeaderContent>
             <RowTemplate>
                 <MudTd DataLabel="">
-                    <MudTooltip>
-                        <MudImage @onclick="@(_ => ShowPersonProfile(context.Id))"
-                                  Class="rounded-lg can-click"
-                                  Elevation="5"
-                                  Height="200"
-                                  ObjectFit="@ObjectFit.Cover"
-                                  Src="@(ImageService.GetPersonImageData(context.ImageFileName))"
-                                  Width="200" />
-                    </MudTooltip>
+                    <GridImage AllowNavigation="true"
+                               ImageData="@(ImageService.GetPersonImageData(context.ImageFileName))"
+                               ImageLoaded="@(_ => StateHasChanged())"
+                               OnClick="@(_ => ShowPersonProfile(context.Id))" />
                 </MudTd>
                 <MudTd DataLabel="Display Name">@context.DisplayName</MudTd>
                 <MudTd DataLabel="First Name">@context.FirstName</MudTd>

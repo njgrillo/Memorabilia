@@ -20,11 +20,8 @@
         <MudTd DataLabel="Type">@inscription.InscriptionTypeName</MudTd>
         <MudTd DataLabel="Text">@inscription.Text</MudTd>
         <MudTd DataLabel="">
-            <MudTooltip Text="Add">
-                <MudFab Color="MudBlazor.Color.Primary"
-                        StartIcon="@Icons.Material.Outlined.AddCircleOutline"
-                        OnClick="@(_ => Add(inscription))" />
-            </MudTooltip>
+            <AddFab OnAdd="@(_ => Add(inscription))" 
+                    TooltipText="Add" />
         </MudTd>
     </RowTemplate>
     <PagerContent>

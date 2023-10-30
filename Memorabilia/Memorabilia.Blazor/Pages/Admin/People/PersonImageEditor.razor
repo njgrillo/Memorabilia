@@ -28,19 +28,15 @@
                         for="fileInput" />                
             </DivRowCol12Center>
             <br />
-            <DivRowCol12Center>
-                <Condition Evaluation="_hasImage">
-                    <Match>
-                        <Div Class="col-3">
-                            <ImageEditor CanRemove="true"
-                                         HasPrimary="false"
-                                         ImageFileName="@EditModel.PersonImageFileName"
-                                         ImageRootType="ImageRootType.People"
-                                         ImageType="ImageType.Primary"
-                                         OnRemove="Remove" />
-                        </Div>                        
-                    </Match>
-                </Condition>
+            <DivRowCol12Center Visible="_hasImage">
+                <Div Class="col-3">
+                    <ImageEditor CanRemove="true"
+                                 HasPrimary="false"
+                                 ImageFileName="@EditModel.PersonImageFileName"
+                                 ImageRootType="ImageRootType.People"
+                                 ImageType="ImageType.Primary"
+                                 OnRemove="Remove" />
+                </Div>
             </DivRowCol12Center>
         </ChildContent>
         <AdditionalButtons>

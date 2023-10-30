@@ -15,21 +15,16 @@
                                MemorabiliaId="EditModel.MemorabiliaId" />
         </TimelineContent>
         <ImagePreview>
-            <Condition Evaluation="EditModel.HasMemorabiliaImages">
-                <Match>
-                    <DivRowCol12Center>
-                        <ViewMemorabiliaImagesButton MemorabiliaId="EditModel.MemorabiliaId" />
-                    </DivRowCol12Center>
-                </Match>
-            </Condition>
+            <DivRowCol12Center Visible="EditModel.HasMemorabiliaImages">
+                <ViewMemorabiliaImagesButton MemorabiliaId="EditModel.MemorabiliaId" />
+            </DivRowCol12Center>
         </ImagePreview>
         <ChildContent>
             <Div Class="d-flex justify-content-between"
                  Style="width:100%;margin-bottom:1%;">
                 <Div Style="width:48%">
                     <DivRowFormGroup Style="margin-top:1%;margin-bottom:1%;">
-                        <MudStack Class="col-12"
-                                  Row="true"
+                        <RowStack Class="col-12"
                                   Style="margin-bottom:1%;">
                             <InscriptionTypeDropDown Disabled="@(EditMode == EditModeType.Update)"
                                                      SelectedValue="Model.InscriptionTypeId"
@@ -40,7 +35,7 @@
                             <AddUpdateMudFab EditMode="EditMode"
                                              OnAdd="Add"
                                              OnUpdate="Update" />
-                        </MudStack>
+                        </RowStack>
                     </DivRowFormGroup>
                     <DivRowCol12>
                         <MudTable Bordered="false"

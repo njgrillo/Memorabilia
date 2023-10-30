@@ -20,38 +20,35 @@
                  Style="width:100%">
                 <Div Style="width:48%">
                     <TabControl>
-                        <MudTabPanel BadgeColor="MudBlazor.Color.Success"
-                                     BadgeData="EditModel.Occupations.Count(occupation => !occupation.IsDeleted)"
-                                     Text="Occupations">
+                        <TabPanel BadgeColor="MudBlazor.Color.Success"
+                                  BadgeData="EditModel.Occupations.Count(occupation => !occupation.IsDeleted)"
+                                  DisplayBadge="true"
+                                  Text="Occupations">
                             <DivRowCol12>
                                 <PersonOccupationSelector Occupations="EditModel.Occupations"
                                                           OnOccupationChange="@(() => StateHasChanged())" />
                             </DivRowCol12>
-                        </MudTabPanel>
-                        <Condition Evaluation="@EditModel.HasAthleteOccupation">
-                            <Match>
-                                <MudTabPanel BadgeColor="MudBlazor.Color.Success"
-                                             BadgeData="EditModel.Sports.Count(sport => !sport.IsDeleted)"
-                                             Text="Sports">
-                                    <DivRowCol12>
-                                        <PersonSportEditor OnSportChange="@(() => StateHasChanged())"
-                                                           Sports="EditModel.Sports" />
-                                    </DivRowCol12>
-                                </MudTabPanel>
-                            </Match>
-                        </Condition>
-                        <Condition Evaluation="@EditModel.HasPositionSport">
-                            <Match>
-                                <MudTabPanel BadgeColor="MudBlazor.Color.Success"
-                                             BadgeData="EditModel.Positions.Count(position => !position.IsDeleted)"
-                                             Text="Positions">
-                                    <DivRowCol12>
-                                        <PersonPositionEditor Positions="EditModel.Positions"
-                                                              Sports="@(EditModel.Sports.Select(sport => sport.Sport).ToArray())" />
-                                    </DivRowCol12>
-                                </MudTabPanel>
-                            </Match>
-                        </Condition>
+                        </TabPanel>
+                        <TabPanel BadgeColor="MudBlazor.Color.Success"
+                                  BadgeData="EditModel.Sports.Count(sport => !sport.IsDeleted)"
+                                  DisplayBadge="true"
+                                  Text="Sports"
+                                  Visible="EditModel.HasAthleteOccupation">
+                            <DivRowCol12>
+                                <PersonSportEditor OnSportChange="@(() => StateHasChanged())"
+                                                   Sports="EditModel.Sports" />
+                            </DivRowCol12>
+                        </TabPanel>
+                        <TabPanel BadgeColor="MudBlazor.Color.Success"
+                                  BadgeData="EditModel.Positions.Count(position => !position.IsDeleted)"
+                                  DisplayBadge="true"
+                                  Text="Positions"
+                                  Visible="EditModel.HasPositionSport">
+                            <DivRowCol12>
+                                <PersonPositionEditor Positions="EditModel.Positions"
+                                                      Sports="@(EditModel.Sports.Select(sport => sport.Sport).ToArray())" />
+                            </DivRowCol12>
+                        </TabPanel>
                     </TabControl>
                 </Div>
                 <Div Style="width:48%;margin-bottom:1%;">
