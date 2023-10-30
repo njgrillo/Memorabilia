@@ -1,7 +1,6 @@
 ﻿@inherits ReroutePage
 
-<MudExpansionPanel IsExpanded="true"
-                   Text="@(ForumEntry.ModifiedDate?.ToString("dddd, MMMM dd, yyyy hh:mm:ss tt") ?? ForumEntry.CreatedDate.ToString("dddd, MMMM dd, yyyy hh:mm:ss tt"))">
+<ExpansionPanel Text="@(ForumEntry.ModifiedDate?.ToString("dddd, MMMM dd, yyyy hh:mm:ss tt") ?? ForumEntry.CreatedDate.ToString("dddd, MMMM dd, yyyy hh:mm:ss tt"))">
     <LeftRightSection LeftStyle="width:20%;"
                       RightStyle="width:80%;">
         <Left>
@@ -77,4 +76,4 @@
             </MudStack>            
         </Right>
     </LeftRightSection>
-</MudExpansionPanel>
+</ExpansionPanel>

@@ -1,7 +1,6 @@
 ﻿@inherits ReroutePage
 
-<MudExpansionPanel IsExpanded="true"
-                   Text="@($"New Reply - {DateTime.Now.ToString("dddd, MMMM dd, yyyy hh:mm:ss tt")}")">
+<ExpansionPanel Text="@($"New Reply - {DateTime.Now.ToString("dddd, MMMM dd, yyyy hh:mm:ss tt")}")">
     <LeftRightSection LeftStyle="width:20%;"
                       RightStyle="width:80%;">
         <Left>
@@ -22,4 +21,4 @@
             </MudStack>            
         </Right>
     </LeftRightSection>
-</MudExpansionPanel>
+</ExpansionPanel>

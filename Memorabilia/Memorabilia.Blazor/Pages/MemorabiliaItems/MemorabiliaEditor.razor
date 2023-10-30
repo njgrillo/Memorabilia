@@ -70,14 +70,16 @@
                 </Div>
                 <Div Class="col-6">
                     <MudExpansionPanels>
-                        <MudExpansionPanel Text="Collections">
+                        <ExpansionPanel Expanded="false" 
+                                        Text="Collections">
                             <MultiCollectionSelector SelectedCollections="EditModel.Collections" />
-                        </MudExpansionPanel>
+                        </ExpansionPanel>
                         <Condition Evaluation="EditModel.ThroughTheMailIds.Any()">
                             <Match>
-                                <MudExpansionPanel Text="Through The Mail">
+                                <ExpansionPanel Expanded="false" 
+                                                Text="Through The Mail">
                                     <MemorabiliaThroughTheMailGrid ThroughTheMailIds="EditModel.ThroughTheMailIds" />
-                                </MudExpansionPanel>
+                                </ExpansionPanel>
                             </Match>
                         </Condition>                        
                     </MudExpansionPanels>                    

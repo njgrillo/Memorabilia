@@ -1,6 +1,5 @@
 ﻿<DivPad2>
-    <MudExpansionPanel IsExpanded="true"
-                       Text="Paypal">
+    <ExpansionPanel Text="Paypal">
         <Div Class="row">
             <Div Class="col-3">
                 <CustomButton Color="@MudBlazor.Color.Error"
@@ -8,10 +7,9 @@
                               Text="Create Paypal Order" />
             </Div>
         </Div>
-    </MudExpansionPanel>    
+    </ExpansionPanel>    
     <br />
-    <MudExpansionPanel IsExpanded="true"
-                       Text="Stripe">
+    <ExpansionPanel Text="Stripe">
         <Div Class="row">
             <Div Class="col-3">
                 <CustomButton Color="@MudBlazor.Color.Error"
@@ -19,10 +17,9 @@
                               Text="Create Stripe Order" />
             </Div>
         </Div>
-    </MudExpansionPanel>    
+    </ExpansionPanel>    
     <br />
-    <MudExpansionPanel IsExpanded="true"
-                       Text="DateTimeOffset Tests">
+    <ExpansionPanel Text="DateTimeOffset Tests">
         <MudDatePicker @bind-Date="SampleDate"
                        DateFormat="MM/dd/yyyy"
                        Editable="true"
@@ -37,5 +34,5 @@
                               Text="Test" />
             </Div>
         </Div>
-    </MudExpansionPanel>
+    </ExpansionPanel>
 </DivPad2>

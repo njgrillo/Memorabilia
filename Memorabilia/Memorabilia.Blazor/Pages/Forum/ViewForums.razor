@@ -10,8 +10,7 @@
                               Size="MudBlazor.Size.Small"
                               Text="Create Post" />
             </Div>
-            <MudExpansionPanel IsExpanded="true"
-                               Text="Browse">
+            <ExpansionPanel Text="Browse">
                 <Div Style="margin-bottom:1%">
                     <MudStack Row="true">
                         <ForumCategoryAutoComplete ResetValueOnEmptyText="false"
@@ -39,9 +38,8 @@
                         </Match>
                     </Condition>
                 </Div>
-            </MudExpansionPanel> 
-            <MudExpansionPanel IsExpanded="true"
-                               Text="Search">
+            </ExpansionPanel> 
+            <ExpansionPanel Text="Search">
                 <Div Style="margin-bottom:1%">
                     <MudStack Row="true">
                         <MudTextField @bind-Value="_searchText"
@@ -63,7 +61,7 @@
                         </Div>
                     </Match>
                 </Condition>
-            </MudExpansionPanel>
+            </ExpansionPanel>
         </Left>
         <Right>
            <TrendingForumTopics />

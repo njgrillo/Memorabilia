@@ -1,5 +1,4 @@
-﻿<MudExpansionPanel IsExpanded="true"
-                   Text="Trending Topics">
+﻿<ExpansionPanel Text="Trending Topics">
     <Condition Evaluation="@Model.TrendingTopics.Any()">
         <Match>
             <Iterations Context="forumTopic"
@@ -34,4 +33,4 @@
             </Text>
         </NotMatch>
     </Condition>
-</MudExpansionPanel>
+</ExpansionPanel>

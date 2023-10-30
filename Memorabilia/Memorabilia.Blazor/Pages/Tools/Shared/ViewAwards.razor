@@ -17,8 +17,8 @@
     <Condition Evaluation="@(Model.AwardExclusionYears.Any())">
         <Match>
             <br />
-            <MudExpansionPanel IsExpanded="false"
-                               Text="Years without award">
+            <ExpansionPanel Expanded="false"
+                            Text="Years without award">
                 <MudTable Bordered="false"
                           Dense="false"
                           Hover="true"
@@ -43,7 +43,7 @@
                         <MudTablePager />
                     </PagerContent>
                 </MudTable>
-            </MudExpansionPanel>
+            </ExpansionPanel>
         </Match>
     </Condition>
     <br />
