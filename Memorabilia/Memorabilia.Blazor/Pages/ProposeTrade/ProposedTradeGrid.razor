@@ -27,39 +27,26 @@
         <MudTd DataLabel="AmountToReceive">@(context.AmountToReceive?.ToString("c") ?? string.Empty)</MudTd>
         <MudTd DataLabel="AmountToSend">@(context.AmountToSend?.ToString("c") ?? string.Empty)</MudTd>
         <MudTd DataLabel="Status">@context.ProposeTradeStatusTypeName</MudTd>
-        <Condition Evaluation="@context.CantAcceptCounterReject">
-            <Match>
-                <MudTd>
-                    <Fab Color="MudBlazor.Color.Secondary"                             
-                         OnClick="@(_ => Cancel(context))"
-                         StartIcon="@Icons.Material.Outlined.Cancel"
-                         TooltipText="Cancel" />
-                </MudTd>                
-            </Match>
-            <NotMatch>
-                <Condition Evaluation="@context.ShowActions">
-                    <Match>
-                        <MudTd>
-                            <MudTooltip Text="Accept">
-                                <MudFab Color="MudBlazor.Color.Secondary"
-                                        StartIcon="@Icons.Material.Outlined.Handshake"
-                                        OnClick="@(_ => Accept(context))" />
-                            </MudTooltip>
-                            <MudTooltip Text="Counter">
-                                <MudFab Color="MudBlazor.Color.Secondary"
-                                        StartIcon="@Icons.Material.Outlined.SwapHoriz"
-                                        OnClick="@(_ => Counter(context.Id))" />
-                            </MudTooltip>
-                            <MudTooltip Text="Reject">
-                                <MudFab Color="MudBlazor.Color.Secondary"
-                                        StartIcon="@Icons.Material.Outlined.DoNotTouch"
-                                        OnClick="@(_ => Reject(context))" />
-                            </MudTooltip>
-                        </MudTd>
-                    </Match>
-                </Condition>
-            </NotMatch>
-        </Condition>        
+        <TableData Visible="@context.CantAcceptCounterReject">
+            <Fab Color="MudBlazor.Color.Secondary"
+                 OnClick="@(_ => Cancel(context))"
+                 StartIcon="@Icons.Material.Outlined.Cancel"
+                 TooltipText="Cancel" />
+        </TableData>
+        <TableData Visible="@(!context.CantAcceptCounterReject && context.ShowActions)">
+            <Fab Color="MudBlazor.Color.Secondary"
+                 OnClick="@(_ => Accept(context))"
+                 StartIcon="@Icons.Material.Outlined.Handshake"
+                 TooltipText="Accept" />
+            <Fab Color="MudBlazor.Color.Secondary"
+                 OnClick="@(_ => Counter(context.Id))"
+                 StartIcon="@Icons.Material.Outlined.SwapHoriz"
+                 TooltipText="Counter" />
+            <Fab Color="MudBlazor.Color.Secondary"
+                 OnClick="@(_ => Reject(context))"
+                 StartIcon="@Icons.Material.Outlined.DoNotTouch"
+                 TooltipText="Reject" />
+        </TableData>
     </RowTemplate>
     <ChildRowContent>
         <Condition Evaluation="@context.DisplayTradeDetails">
@@ -91,12 +78,8 @@
                             </HeaderContent>
                             <RowTemplate Context="item">
                                 <MudTd DataLabel="">
-                                    <MudImage Class="rounded-lg cant-click"
-                                              Elevation="5"
-                                              Height="200"
-                                              ObjectFit="@ObjectFit.Cover"
-                                              Src="@(ImageService.GetUserImageData(item.Memorabilia.Images.FirstOrDefault(image => image.ImageTypeId == Constant.ImageType.Primary.Id).FileName, item.Memorabilia.UserId))"
-                                              Width="200" />
+                                    <GridImage ImageData="@(ImageService.GetUserImageData(item.Memorabilia.Images.FirstOrDefault(image => image.ImageTypeId == Constant.ImageType.Primary.Id).FileName, item.Memorabilia.UserId))"
+                                               ImageLoaded="@(_ => StateHasChanged())" />
                                 </MudTd>
                                 <MudTd DataLabel="Item">@item.Memorabilia.ItemType.Name</MudTd>
                                 <MudTd DataLabel="Condition">@item.Memorabilia.Condition.Name</MudTd>
