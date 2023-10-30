@@ -11,4 +11,8 @@ public partial class ExpansionPanel
 
     [Parameter]
     public string Text { get; set; }
+
+    [Parameter]
+    public bool Visible { get; set; }
+        = true;
 }

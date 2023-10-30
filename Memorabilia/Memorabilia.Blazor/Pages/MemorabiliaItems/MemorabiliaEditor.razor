@@ -69,7 +69,7 @@
                                SelectedTextChanged="@((p) => EditModel.Note = p)" />
                 </Div>
                 <Div Class="col-6">
-                    <MudExpansionPanels>
+                    <ExpansionPanels>
                         <ExpansionPanel Expanded="false" 
                                         Text="Collections">
                             <MultiCollectionSelector SelectedCollections="EditModel.Collections" />
@@ -82,7 +82,7 @@
                                 </ExpansionPanel>
                             </Match>
                         </Condition>                        
-                    </MudExpansionPanels>                    
+                    </ExpansionPanels>                    
                 </Div>
             </DivRowFormGroup>
             <DivRowFormGroup>

@@ -73,13 +73,13 @@
                 <Condition Evaluation="@(Model.Id > 0 && Model.ThroughTheMailId > 0)">
                     <Match>
                         <Div Class="col-6">
-                            <MudExpansionPanels>
+                            <ExpansionPanels>
                                 <ExpansionPanel Expanded="false" 
                                                 Text="Through The Mail">
                                     <AutographThroughTheMailGrid AutographId="Model.Id" 
                                                                  ThroughTheMailId="Model.ThroughTheMailId" />
                                 </ExpansionPanel>
-                            </MudExpansionPanels>
+                            </ExpansionPanels>
                         </Div>
                     </Match>
                 </Condition>                

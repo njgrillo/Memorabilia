@@ -1,4 +1,9 @@
-﻿<MudExpansionPanel IsExpanded="Expanded"
-                   Text="@Text">
-    @ChildContent
-</MudExpansionPanel>
+﻿<Condition Evaluation="Visible">
+    <Match>
+        <MudExpansionPanel IsExpanded="Expanded"
+                           Text="@Text">
+            @ChildContent
+        </MudExpansionPanel>
+    </Match>
+</Condition>
+
