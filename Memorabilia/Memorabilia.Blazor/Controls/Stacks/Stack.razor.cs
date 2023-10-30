@@ -12,6 +12,10 @@ public partial class Stack
     public bool IsRow { get; set; }
 
     [Parameter]
+    public int Spacing { get; set; }
+        = 3;
+
+    [Parameter]
     public string Style { get; set; }
 
     [Parameter]

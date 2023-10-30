@@ -19,15 +19,12 @@
                                           Value="BeginYear"
                                           ValueChanged="@((p) => BeginYear = p)" />
                     </Div>
-                    <Div Class="col-3">
-                        <Condition Evaluation="CanImportByYearRange">
-                            <Match>
-                                <NullableIntField Label="End Year"
-                                                  Maximum="MaxYear"
-                                                  Value="EndYear"
-                                                  ValueChanged="@((p) => EndYear = p)" />
-                            </Match>
-                        </Condition>
+                    <Div Class="col-3" 
+                         Visible="CanImportByYearRange">
+                        <NullableIntField Label="End Year"
+                                          Maximum="MaxYear"
+                                          Value="EndYear"
+                                          ValueChanged="@((p) => EndYear = p)" />
                     </Div>
                 </Div>
             </NotMatch>
@@ -75,12 +72,8 @@
                                          CheckedChanged="(p) => PersonSelected(context)" />
                     </MudTd>
                     <MudTd DataLabel="">
-                        <MudImage Class="rounded-lg"
-                                  Elevation="5"
-                                  Height="200"
-                                  ObjectFit="@ObjectFit.Cover"
-                                  Src="@(ImageService.GetPersonImageData(context.ImageFileName))"
-                                  Width="200" />
+                        <GridImage ImageData="@(ImageService.GetPersonImageData(context.ImageFileName))"
+                                   ImageLoaded="@(_ => StateHasChanged())" />
                     </MudTd>
                     <MudTd DataLabel="Display Name">@context.DisplayName</MudTd>
                     <MudTd DataLabel="First Name">@context.FirstName</MudTd>

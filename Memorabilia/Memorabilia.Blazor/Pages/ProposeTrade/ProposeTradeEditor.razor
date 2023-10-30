@@ -1,14 +1,10 @@
 ﻿<Div Style="margin-top:1%;margin-bottom:1%;margin-left:1%;margin-right:1%;">
-    <Condition Evaluation="@(ValidationResultAlerts.Any())">
-        <Match>
-            <AlertPanel Alerts="ValidationResultAlerts" />
-        </Match>
-    </Condition>
+    <AlertPanel Alerts="ValidationResultAlerts" />
     <Div Class="row">
         <Div Class="col-12">
-            <h3>
-                @(EditModel.Title)
-            </h3>
+            <Text Typography="Typo.h3">
+                @EditModel.Title
+            </Text>
         </Div>
     </Div>
     <br />
@@ -20,12 +16,9 @@
                                   ValueChanged="@((p) => EditModel.AmountToReceive = p)" />
         </Left>
         <Right>
-            <Condition Evaluation="@(!IsReadOnly)">
-                <Match>
-                    <AddButton OnClick="AddReceiveMemorabilia"
-                               Text="Add Memorabilia to Receive" />
-                </Match>
-            </Condition>            
+            <AddButton OnClick="AddReceiveMemorabilia"
+                       Text="Add Memorabilia to Receive"
+                       Visible="@(!IsReadOnly)" />
         </Right>
     </LeftRightSection>
     <br />
@@ -46,12 +39,9 @@
                                   ValueChanged="@((p) => EditModel.AmountToSend = p)" />
         </Left>
         <Right>
-            <Condition Evaluation="@(!IsReadOnly)">
-                <Match>
-                    <AddButton OnClick="AddSendMemorabilia"
-                               Text="Add Memorabilia to Send" />
-                </Match>
-            </Condition>            
+            <AddButton OnClick="AddSendMemorabilia"
+                       Text="Add Memorabilia to Send"
+                       Visible="@(!IsReadOnly)" />
         </Right>
     </LeftRightSection>
     <br />
@@ -64,7 +54,7 @@
     <br />
     <LeftRightSection>
         <Right>
-            <MudStack Row="true">
+            <RowStack>
                 <Condition Evaluation="IsReadOnly">
                     <Match>
                         <CustomButton OnClick="OnCancel"
@@ -87,7 +77,7 @@
                         </Condition>
                     </NotMatch>
                 </Condition>                
-            </MudStack>            
+            </RowStack>            
         </Right>
     </LeftRightSection>
 </Div>

@@ -17,8 +17,8 @@
     </HeaderContent>
     <RowTemplate>
         <MudTd>
-            <MudIconButton @onclick="@(_ => ToggleChildContent(context.MemorabiliaId))"
-                           Icon="@context.ToggleIcon"></MudIconButton>
+            <MudIconButton Icon="@context.ToggleIcon"
+                           OnClick="@(_ => ToggleChildContent(context.MemorabiliaId))" />
         </MudTd>
         <MudTd DataLabel="">
             <GridImage AllowNavigation="false"

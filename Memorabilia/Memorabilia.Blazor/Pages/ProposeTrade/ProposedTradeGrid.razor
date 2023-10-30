@@ -18,8 +18,8 @@
     </HeaderContent>
     <RowTemplate>
         <MudTd>
-            <MudIconButton @onclick="@(_ => ToggleChildContent(context.Id))"
-                           Icon="@context.ToggleIcon"></MudIconButton>
+            <MudIconButton Icon="@context.ToggleIcon"
+                           OnClick="@(_ => ToggleChildContent(context.Id))" />
         </MudTd>
         <MudTd DataLabel="TradePartnerName">@context.TradePartnerName</MudTd>
         <MudTd DataLabel="ProposedDate">@context.ProposedDate.ToString("MM-dd-yyyy")</MudTd>
@@ -30,11 +30,10 @@
         <Condition Evaluation="@context.CantAcceptCounterReject">
             <Match>
                 <MudTd>
-                    <MudTooltip Text="Cancel">
-                        <MudFab Color="MudBlazor.Color.Secondary"
-                                StartIcon="@Icons.Material.Outlined.Cancel"
-                                OnClick="@(_ => Cancel(context))" />
-                    </MudTooltip>
+                    <Fab Color="MudBlazor.Color.Secondary"                             
+                         OnClick="@(_ => Cancel(context))"
+                         StartIcon="@Icons.Material.Outlined.Cancel"
+                         TooltipText="Cancel" />
                 </MudTd>                
             </Match>
             <NotMatch>
@@ -102,11 +101,11 @@
                                 <MudTd DataLabel="Item">@item.Memorabilia.ItemType.Name</MudTd>
                                 <MudTd DataLabel="Condition">@item.Memorabilia.Condition.Name</MudTd>
                                 <MudTd DataLabel="Type">
-                                        <MudTooltip Text="@GetProposeTradeMemorabiliaTypeName(item)">
+                                    <MudTooltip Text="@GetProposeTradeMemorabiliaTypeName(item)">
                                         <MudFab Class="cant-click"
-                                                Color="MudBlazor.Color.Info"
-                                                Icon="@(GetTypeIcon(item))"
-                                                Size="@MudBlazor.Size.Small" />
+                                                Color="MudBlazor.Color.Info"                                                
+                                                Size="@MudBlazor.Size.Small"
+                                                StartIcon="@(GetTypeIcon(item))" />
                                     </MudTooltip>
                                 </MudTd>
                                 <MudTd DataLabel="">
