@@ -1,6 +1,6 @@
 ﻿namespace Memorabilia.Blazor.Pages.Project.ProjectTypeComponents;
 
-public partial class HallofFameDetails
+public partial class HallOfFameDetails
 {
     [Inject]
     public IDialogService DialogService { get; set; }
