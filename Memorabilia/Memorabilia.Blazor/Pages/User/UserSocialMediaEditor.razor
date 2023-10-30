@@ -1,5 +1,4 @@
-﻿<MudStack Class="col-12"
-          Row="true"
+﻿<RowStack Class="col-12"
           Style="margin-bottom:1%;">
     <SocialMediaTypeAutoComplete Disabled="@(EditMode == EditModeType.Update)"
                                  SelectedValue="EditModel.SocialMediaType"
@@ -11,7 +10,7 @@
     <AddUpdateMudFab EditMode="EditMode"
                      OnAdd="Add"
                      OnUpdate="Update" />
-</MudStack>
+</RowStack>
 <Div Style="margin-left:1%;">
     <MudTable Bordered="false"
               Dense="false"
