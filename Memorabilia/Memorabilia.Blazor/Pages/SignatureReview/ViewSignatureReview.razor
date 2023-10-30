@@ -1,19 +1,12 @@
 ﻿<DivPad2>
-    <Condition Evaluation="@(ValidationResultAlerts.Any())">
-        <Match>
-            <AlertPanel Alerts="ValidationResultAlerts" />
-        </Match>
-    </Condition>
+    <AlertPanel Alerts="ValidationResultAlerts" />
     <DivRowFormGroup>
         <Iterations Context="image"
                     Items="Model.Images">
             <Div Class="col-4">
-                <MudImage Class="rounded-lg"
-                          Elevation="5"
-                          Height="150"
-                          ObjectFit="@ObjectFit.Cover"
-                          Src="@(ImageService.GetUserImageData(image.FileName, image.UserId))"
-                          Width="150" />
+                <Image Height="150"
+                       ImageData="@(ImageService.GetUserImageData(image.FileName, image.UserId))"
+                       Width="150" />
             </Div>
         </Iterations>
     </DivRowFormGroup>
@@ -22,15 +15,11 @@
             Person: <b>@(Model.Person?.DisplayName ?? string.Empty)</b>
         </Text>
     </DivRowFormGroup>
-    <Condition Evaluation="@(Model.ConsensusSignatureReviewResultTypeId > 0)">
-        <Match>
-            <DivRowFormGroup>
-                <Text Typography="Typo.h4">
-                    Consensus Opinion: <b>@Model.ConsensusResult.Name</b>
-                </Text>
-            </DivRowFormGroup>
-        </Match>
-    </Condition>
+    <DivRowFormGroup Visible="@(Model.ConsensusSignatureReviewResultTypeId > 0)">
+        <Text Typography="Typo.h4">
+            Consensus Opinion: <b>@Model.ConsensusResult.Name</b>
+        </Text>
+    </DivRowFormGroup>
     <DivRowFormGroup>
         <SignatureReviewResultTypeDropDown SelectedValue="EditModel.SignatureReviewResultTypeId"
                                            SelectionChanged="(p) => EditModel.SignatureReviewResultTypeId = p" />
