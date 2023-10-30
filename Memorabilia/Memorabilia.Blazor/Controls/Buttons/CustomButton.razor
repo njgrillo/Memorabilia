@@ -1,8 +1,14 @@
-﻿<MudButton ButtonType="ButtonType"
-           Color="Color"
-           OnClick="OnClick"
-           Size="Size"
-           StartIcon="@StartIcon"
-           Variant="Variant">
-    @Text
-</MudButton>
+﻿<Condition Evaluation="Visible">
+    <Match>
+        <MudButton ButtonType="ButtonType"
+                   Color="Color"
+                   OnClick="OnClick"
+                   Size="Size"
+                   StartIcon="@StartIcon"
+                   Variant="Variant">
+            @Text
+        </MudButton>
+    </Match>
+</Condition>
+
+

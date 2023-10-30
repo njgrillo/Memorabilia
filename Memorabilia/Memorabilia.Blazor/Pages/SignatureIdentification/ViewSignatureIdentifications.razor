@@ -22,7 +22,7 @@
                   ServerData="@(new Func<TableState, Task<TableData<SignatureIdentificationModel>>>(OnRead))"
                   Striped="true">
             <ToolBarContent>
-                <MudText Typo="Typo.h6">Signature Identifications</MudText>
+                <ToolbarTitle Text="Signature Identifications" />
             </ToolBarContent>
             <HeaderContent>
                 <MudTh></MudTh>
@@ -80,7 +80,7 @@
                                           Items="@context.People"
                                           Striped="true">
                                     <ToolBarContent>
-                                        <MudText Typo="Typo.h6">Opinions</MudText>
+                                        <ToolbarTitle Text="Opinions" /> 
                                         <MudSpacer />
                                     </ToolBarContent>
                                     <HeaderContent>

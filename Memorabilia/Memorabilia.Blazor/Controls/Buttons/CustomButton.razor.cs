@@ -28,4 +28,8 @@ public partial class CustomButton
     [Parameter]
     public Variant Variant { get; set; } 
         = Variant.Filled;
+
+    [Parameter]
+    public bool Visible { get; set; }
+        = true;
 }

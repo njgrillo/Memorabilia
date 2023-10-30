@@ -23,7 +23,7 @@
                       Items="@Model.PersonAccomplishments"
                       Striped="true">
                 <ToolBarContent>
-                    <MudText Typo="Typo.h6">@Model.AccomplishmentTypeName</MudText>
+                    <ToolbarTitle Text="@Model.AccomplishmentTypeName" />
                     <MudSpacer />
                     <MudTextField @bind-Value="Search"
                                   Adornment="Adornment.Start"

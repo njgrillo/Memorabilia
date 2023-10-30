@@ -52,7 +52,7 @@
                       Items="@Model.AllStars.ToList()"
                       Striped="true">
                 <ToolBarContent>
-                    <MudText Typo="Typo.h6">@Model.MainGridTitle</MudText>
+                    <ToolbarTitle Text="@Model.MainGridTitle" />
                     <MudSpacer />
                     <MudTextField @bind-Value="Search"
                                   Adornment="Adornment.Start"
@@ -110,7 +110,7 @@
                               Items="@Model.SecondaryAllStars.ToList()"
                               Striped="true">
                         <ToolBarContent>
-                            <MudText Typo="Typo.h6">@Model.SecondaryGridTitle</MudText>
+                            <ToolbarTitle Text="@Model.SecondaryGridTitle" />
                             <MudSpacer />
                             <MudTextField @bind-Value="_secondarySearch"
                                           Adornment="Adornment.Start"
@@ -160,7 +160,7 @@
                               Items="@Model.SecondaryAllStars.ToList()"
                               Striped="true">
                         <ToolBarContent>
-                            <MudText Typo="Typo.h6">@Model.SecondaryGridTitle</MudText>
+                            <ToolbarTitle Text="@Model.SecondaryGridTitle" />
                             <MudSpacer />
                             <MudTextField @bind-Value="_secondarySearch"
                                           Adornment="Adornment.Start"

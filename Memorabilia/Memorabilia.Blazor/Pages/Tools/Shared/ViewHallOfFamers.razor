@@ -17,7 +17,7 @@
                   Items="@Model.HallOfFames.ToList()"
                   Striped="true">
             <ToolBarContent>
-                <MudText Typo="Typo.h6">@Model.ResultsTitle</MudText>
+                <ToolbarTitle Text="@Model.ResultsTitle" />
                 <MudSpacer />
                 <MudTextField @bind-Value="Search"
                               Adornment="Adornment.Start"

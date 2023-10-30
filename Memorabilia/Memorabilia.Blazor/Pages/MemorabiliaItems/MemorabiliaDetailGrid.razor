@@ -6,7 +6,7 @@
           ServerData="@(new Func<TableState, Task<TableData<MemorabiliaModel>>>(OnRead))"
           Striped="true">
     <ToolBarContent>
-        <MudText Typo="Typo.h6">My Memorabilia</MudText>
+        <ToolbarTitle Text="My Memorabilia" />
     </ToolBarContent>
     <HeaderContent>
         <Condition Evaluation="CanSelect">
@@ -107,7 +107,7 @@
                                   Items="@context.Autographs"    
                                   Striped="true">
                             <ToolBarContent>
-                                <MudText Typo="Typo.h6">Autographs</MudText>
+                                <ToolbarTitle Text="Autographs" />
                                 <MudSpacer />
                             </ToolBarContent>
                             <HeaderContent>

@@ -25,7 +25,7 @@
                           Items="@Model.AwardExclusionYears.OrderBy(exclusion => exclusion.Year)"
                           Striped="true">
                     <ToolBarContent>
-                        <MudText Typo="Typo.h6">No award given these years</MudText>
+                        <ToolbarTitle Text="No award given these years" />
                     </ToolBarContent>
                     <HeaderContent>
                         <MudTh>
@@ -57,7 +57,7 @@
                       Items="@Model.PersonAwards.ToList()"
                       Striped="true">
                 <ToolBarContent>
-                    <MudText Typo="Typo.h6">@Model.AwardTypeName</MudText>
+                    <ToolbarTitle Text="@Model.AwardTypeName" />
                     <MudSpacer />
                     <MudTextField @bind-Value="Search"
                                   Adornment="Adornment.Start"

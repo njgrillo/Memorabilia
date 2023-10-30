@@ -6,7 +6,7 @@
               Items="@DomainEntities.OrderBy(item => item.Name)"
               Striped="true">
         <ToolBarContent>
-            <MudText Typo="Typo.h6">@DomainItemTitle</MudText>
+            <ToolbarTitle Text="@DomainItemTitle" />
             <MudSpacer />
             <MudTextField @bind-Value="_search"
                           Adornment="Adornment.Start"

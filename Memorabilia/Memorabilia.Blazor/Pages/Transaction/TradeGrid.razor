@@ -6,7 +6,7 @@
           ServerData="@(new Func<TableState, Task<TableData<MemorabiliaTransactionModel>>>(OnRead))"
           Striped="true">
     <ToolBarContent>
-        <MudText Typo="Typo.h6">Trades</MudText>
+        <ToolbarTitle Text="Trades" />
     </ToolBarContent>
     <HeaderContent>
         <MudTh></MudTh>
@@ -44,7 +44,7 @@
                                   Items="@context.Trades"
                                   Striped="true">
                             <ToolBarContent>
-                                <MudText Typo="Typo.h6">Items</MudText>
+                                <ToolbarTitle Text="Items" />
                                 <MudSpacer />
                             </ToolBarContent>
                             <HeaderContent>
