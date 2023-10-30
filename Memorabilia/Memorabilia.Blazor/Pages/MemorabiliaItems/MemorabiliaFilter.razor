@@ -25,15 +25,12 @@
                     </Div>
                 </Div>
                 <Div Class="col-2">
-                    <Condition Evaluation="@DisplayAcquisitionType">
-                        <Match>
-                            <Div Class="form-group">
-                                <AcquisitionTypeDropDown MultiSelect="true"
-                                                         SelectedItems="Model.AcquisitionTypeIds"
-                                                         SelectedItemsChanged="(p) => Model.AcquisitionTypeIds = p" />
-                            </Div>
-                        </Match>
-                    </Condition>                    
+                    <Div Class="form-group"
+                         Visible="@DisplayAcquisitionType">
+                        <AcquisitionTypeDropDown MultiSelect="true"
+                                                 SelectedItems="Model.AcquisitionTypeIds"
+                                                 SelectedItemsChanged="(p) => Model.AcquisitionTypeIds = p" />
+                    </Div>
                 </Div>
                 <Div Class="col-2">
                     <Div Class="form-group">
@@ -182,14 +179,14 @@
                     </Div>
                 </Div>
                 <Div Class="col-2">
-                    <MudStack Row="true">
+                    <RowStack>
                         <Switch Checked="@Model.IncludeSold"
                                 CheckedChanged="(p) => Model.IncludeSold = p"
                                 Label="Include Sold Items" />
                         <Switch Checked="@Model.IncludeTraded"
                                 CheckedChanged="(p) => Model.IncludeTraded = p"
                                 Label="Include Traded Items" />
-                    </MudStack>
+                    </RowStack>
                 </Div>
             </Div>
             <Div Class="row">

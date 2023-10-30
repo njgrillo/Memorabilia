@@ -1,5 +1,6 @@
 ﻿<Div Class="row">
-    <Iterations Items="_items" Context="item">
+    <Iterations Context="item"
+                Items="_items">
         <Div Class="col-4">
             <MemorabiliaItemGalleryCard Description="@GetDescription(item)"
                                         EditNavigationPath="@($"{NavigationPath.Memorabilia}/{EditModeType.Update.Name}/{DataProtectorService.EncryptId(item.Id)}")"
@@ -12,7 +13,7 @@
         </Div>
     </Iterations>
 </Div>
-<Div Hidden="@(!DisplayLoadMoreButton)">
+<Div Visible="DisplayLoadMoreButton">
     <DivRowCol12Center>
         <CustomButton ButtonType="MudBlazor.ButtonType.Button"
                       OnClick="LoadMore"

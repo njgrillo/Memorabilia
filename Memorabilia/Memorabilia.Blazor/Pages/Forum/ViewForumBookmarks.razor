@@ -32,18 +32,16 @@
             <MudTd DataLabel="LastReplyByDate">@(context.LastReplyByDate.HasValue ? context.LastReplyByDate.Value.ToString("dddd, MMMM dd, yyyy hh:mm:ss tt") : string.Empty)</MudTd>
             <MudTd DataLabel="Replies">@(context.EntryCount - 1)</MudTd>
             <MudTd DataLabel="">
-                <MudTooltip Text="View">
-                    <MudFab Color="MudBlazor.Color.Primary"
-                            StartIcon="@Icons.Material.Outlined.Edit"
-                            OnClick="@(_ => NavigationManager.NavigateTo($"{NavigationPath.ForumTopic}/{DataProtectorService.EncryptId(context.Id)}"))"
-                            Size="@MudBlazor.Size.Small" />
-                </MudTooltip>
-                <MudTooltip Text="Remove">
-                    <MudFab Color="MudBlazor.Color.Secondary"
-                            StartIcon="@Icons.Material.Outlined.DeleteOutline"
-                            OnClick="@(_ => ShowRemoveBookmarkConfirm(context.Id))"
-                            Size="@MudBlazor.Size.Small" />
-                </MudTooltip>
+                <Fab Color="MudBlazor.Color.Primary"
+                     OnClick="@(_ => NavigationManager.NavigateTo($"{NavigationPath.ForumTopic}/{DataProtectorService.EncryptId(context.Id)}"))"
+                     Size="@MudBlazor.Size.Small"
+                     StartIcon="@Icons.Material.Outlined.Edit"
+                     TooltipText="View" />
+                <Fab Color="MudBlazor.Color.Secondary"
+                     OnClick="@(_ => ShowRemoveBookmarkConfirm(context.Id))"
+                     Size="@MudBlazor.Size.Small"
+                     StartIcon="@Icons.Material.Outlined.DeleteOutline"
+                     TooltipText="Remove" />
             </MudTd>
         </RowTemplate>
         <PagerContent>

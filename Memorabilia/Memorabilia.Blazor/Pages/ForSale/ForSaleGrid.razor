@@ -15,18 +15,15 @@
     </ToolBarContent>
     <HeaderContent>
         <MudTh>
-            <MudStack Row="true">
+            <RowStack>
                 <CustomButton ButtonType="ButtonType.Button"
                               OnClick="OnSelectAll"
                               Text="@SelectAllButtonText" />
-                <Condition Evaluation="SelectedMemorabilia.Any()">
-                    <Match>
-                        <CustomButton ButtonType="ButtonType.Button"
-                                      OnClick="RemoveSelected"
-                                      Text="Remove Selected" />
-                    </Match>
-                </Condition>
-            </MudStack>
+                <CustomButton ButtonType="ButtonType.Button"
+                              OnClick="RemoveSelected"
+                              Text="Remove Selected"
+                              Visible="SelectedMemorabilia.Any()" />
+            </RowStack>
         </MudTh>
         <MudTh></MudTh>
         <MudTh>Item</MudTh>
@@ -41,7 +38,7 @@
                              CheckedChanged="(p) => OnMemorabiliaSelected(context)" />
         </MudTd>
         <MudTd DataLabel="">
-            <GridImage ImageLoaded="OnImageLoaded"
+            <GridImage ImageLoaded="@(_ => StateHasChanged())"
                        ImageFileName="@context.MemorabiliaPrimaryImage"
                        NavigationPath="@($"{NavigationPath.MemorabiliaImage}/{Constant.EditModeType.Update.Name}/{DataProtectorService.EncryptId(context.MemorabiliaId)}")" />
         </MudTd>
@@ -51,12 +48,11 @@
         <MudTd DataLabel="MinimumOfferPrice">@(context.MinimumOfferPrice?.ToString("c") ?? string.Empty)</MudTd>
         <MudTd DataLabel="">
             <ViewMemorabiliaImagesFab MemorabiliaId="context.Memorabilia.Id" />
-            <MudTooltip Text="Remove From Sell List">
-                <MudFab Color="MudBlazor.Color.Secondary"
-                        Icon="@Icons.Material.Outlined.DeleteOutline"
-                        OnClick="@(_ => ShowRemoveSaleMemorabiliaConfirm(context.Id))"
-                        Size="@MudBlazor.Size.Small" />
-            </MudTooltip>
+            <Fab Color="MudBlazor.Color.Secondary"
+                 OnClick="@(_ => ShowRemoveSaleMemorabiliaConfirm(context.Id))"
+                 Size="@MudBlazor.Size.Small"
+                 StartIcon="@Icons.Material.Outlined.DeleteOutline"
+                 TooltipText="Remove From Sell List" />
         </MudTd>
     </RowTemplate>
     <RowEditingTemplate>
@@ -65,9 +61,9 @@
                                  CheckedChanged="(p) => OnMemorabiliaSelected(context)" />
             </MudTd>
             <MudTd DataLabel="">
-                <GridImage ImageLoaded="OnImageLoaded"
+                <GridImage ImageLoaded="@(_ => StateHasChanged())"
                            ImageFileName="@context.MemorabiliaPrimaryImage"
-                       NavigationPath="@($"{NavigationPath.MemorabiliaImage}/{Constant.EditModeType.Update.Name}/{DataProtectorService.EncryptId(context.Memorabilia.Id)}")" />
+                           NavigationPath="@($"{NavigationPath.MemorabiliaImage}/{Constant.EditModeType.Update.Name}/{DataProtectorService.EncryptId(context.Memorabilia.Id)}")" />
             </MudTd>
             <MudTd DataLabel="Item">@context.ItemTypeName</MudTd>
             <MudTd DataLabel="BuyNowPrice">
@@ -86,23 +82,19 @@
             </MudTd>
             <MudTd DataLabel="">
                 <ViewMemorabiliaImagesFab MemorabiliaId="context.MemorabiliaId" />
-                <MudTooltip Text="Remove From Sell List">
-                    <MudFab Color="MudBlazor.Color.Secondary"
-                            Icon="@Icons.Material.Outlined.DeleteOutline"
-                            OnClick="@(_ => ShowRemoveSaleMemorabiliaConfirm(context.Id))"
-                            Size="@MudBlazor.Size.Small" />
-                </MudTooltip>
+                <Fab Color="MudBlazor.Color.Secondary"
+                     OnClick="@(_ => ShowRemoveSaleMemorabiliaConfirm(context.Id))"
+                     Size="@MudBlazor.Size.Small"
+                     StartIcon="@Icons.Material.Outlined.DeleteOutline"
+                     TooltipText="Remove From Sell List" />
             </MudTd>
     </RowEditingTemplate>
     <PagerContent>
         <MudTablePager />
     </PagerContent>
 </MudTable>
-<Condition Evaluation="@(Model.Items.Any())">
-    <Match>
-        <Div Style="margin-bottom:1%;margin-right:1%;text-align:right;">
-            <SaveButton OnClick="OnSave"
-                        Text="Save" />
-        </Div>
-    </Match>
-</Condition>
+<Div Style="margin-bottom:1%;margin-right:1%;text-align:right;"
+     Visible="@(Model.Items.Any())">
+    <SaveButton OnClick="OnSave"
+                Text="Save" />
+</Div>

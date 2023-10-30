@@ -9,15 +9,11 @@
         <ToolbarTitle Text="My Memorabilia" />
     </ToolBarContent>
     <HeaderContent>
-        <Condition Evaluation="CanSelect">
-            <Match>
-                <MudTh>
-                    <CustomButton ButtonType="ButtonType.Button"
-                                  OnClick="OnSelectAll"
-                                  Text="@SelectAllButtonText" />
-                </MudTh>
-            </Match>
-        </Condition>
+        <TableHeader Visible="CanSelect">
+            <CustomButton ButtonType="ButtonType.Button"
+                          OnClick="OnSelectAll"
+                          Text="@SelectAllButtonText" />
+        </TableHeader>
         <MudTh></MudTh>
         <MudTh></MudTh>
         <MudTh>Item</MudTh>
@@ -30,24 +26,20 @@
         <MudTh></MudTh>
     </HeaderContent>
     <RowTemplate>
-        <Condition Evaluation="CanSelect">
-            <Match>
-                <MudTd DataLabel="">
-                    <BooleanCheckBox Checked="@(SelectedMemorabilia.Contains(context))"
-                                     CheckedChanged="(p) => OnMemorabiliaSelected(context)" />
-                </MudTd>
-            </Match>
-        </Condition>
+        <TableData DataLabel=""
+                   Visible="CanSelect">
+            <BooleanCheckBox Checked="@(SelectedMemorabilia.Contains(context))"
+                             CheckedChanged="(p) => OnMemorabiliaSelected(context)" />
+        </TableData>
         <MudTd>
-            <MudIconButton @onclick="@(_ => ToggleChildContent(context.Id))"
-                           Icon="@context.ToggleIcon"></MudIconButton>
+            <MudIconButton Icon="@context.ToggleIcon"
+                           OnClick="@(_ => ToggleChildContent(context.Id))" />
         </MudTd>
         <MudTd DataLabel="">
-            <MudTooltip Text="@context.ImageDisplayCount">
-                <GridImage ImageLoaded="OnImageLoaded" 
-                           ImageFileName="@context.ImageFileName"
-                           NavigationPath="@($"{NavigationPath.MemorabiliaImage}/{Constant.EditModeType.Update.Name}/{DataProtectorService.EncryptId(context.Id)}")" />
-            </MudTooltip> 
+            <GridImage ImageLoaded="@(_ => StateHasChanged())"
+                       ImageFileName="@context.ImageFileName"
+                       NavigationPath="@($"{NavigationPath.MemorabiliaImage}/{Constant.EditModeType.Update.Name}/{DataProtectorService.EncryptId(context.Id)}")"
+                       TooltipText="@context.ImageDisplayCount" />
         </MudTd>
         <MudTd DataLabel="Item">@context.ItemTypeName</MudTd>
         <MudTd DataLabel="Condition">@context.ConditionName</MudTd>
@@ -56,32 +48,27 @@
         <MudTd DataLabel="Acquisition Date">@context.Acquisition.AcquiredDate?.ToString("MM-dd-yyyy")</MudTd>
         <MudTd DataLabel="Cost">@context.Acquisition.Cost?.ToString("c")</MudTd>
         <MudTd DataLabel="Purchase Place">@context.PurchaseTypeName</MudTd>
-        <Condition Evaluation="ShowActions">
-            <Match>
-                <MudTd DataLabel="">
-                    <ViewMemorabiliaImagesFab MemorabiliaId="context.Id"
-                                              Size="MudBlazor.Size.Small" />
-                    <MudTooltip Text="Add Autograph">
-                        <MudFab Color="MudBlazor.Color.Primary"
-                                StartIcon="@Icons.Material.Outlined.AddCircleOutline"
-                                OnClick="@(_ => NavigationManager.NavigateTo($"{NavigationPath.Autographs}/{Constant.EditModeType.Update.Name}/{DataProtectorService.EncryptId(context.Id)}/0"))"
-                                Size="@MudBlazor.Size.Small" />
-                    </MudTooltip>
-                    <MudTooltip Text="Details">
-                        <MudFab Color="MudBlazor.Color.Info"
-                                StartIcon="@Icons.Material.Outlined.Info"
-                                OnClick="@(_ => NavigationManager.NavigateTo($"{NavigationPath.Memorabilia}/{context.ItemTypeName.Replace(" ", "")}/Edit/{DataProtectorService.EncryptId(context.Id)}"))"
-                                Size="@MudBlazor.Size.Small" />
-                    </MudTooltip>
-                    <EditGridButton OnEdit="@(_ => NavigationManager.NavigateTo($"{NavigationPath.Memorabilia}/{Constant.EditModeType.Update.Name}/{DataProtectorService.EncryptId(context.Id)}"))"
-                                    Size="MudBlazor.Size.Small" />
-                    <DeleteGridButton ConfirmMessage="Delete Memorabilia"
-                                      OnDelete="@(_ => DeleteMemorabiliaItem(context.Id))"
-                                      ShowConfirm="true"
+        <TableData DataLabel=""
+                   Visible="ShowActions">
+            <ViewMemorabiliaImagesFab MemorabiliaId="context.Id"
                                       Size="MudBlazor.Size.Small" />
-                </MudTd>                
-            </Match>
-        </Condition>                      
+            <Fab Color="MudBlazor.Color.Primary"
+                 OnClick="@(_ => NavigationManager.NavigateTo($"{NavigationPath.Autographs}/{Constant.EditModeType.Update.Name}/{DataProtectorService.EncryptId(context.Id)}/0"))"
+                 Size="@MudBlazor.Size.Small"
+                 StartIcon="@Icons.Material.Outlined.AddCircleOutline"
+                 TooltipText="Add Autograph" />
+            <Fab Color="MudBlazor.Color.Info"
+                 OnClick="@(_ => NavigationManager.NavigateTo($"{NavigationPath.Memorabilia}/{context.ItemTypeName.Replace(" ", "")}/Edit/{DataProtectorService.EncryptId(context.Id)}"))"
+                 Size="@MudBlazor.Size.Small"
+                 StartIcon="@Icons.Material.Outlined.Info"
+                 TooltipText="Details" />
+            <EditGridButton OnEdit="@(_ => NavigationManager.NavigateTo($"{NavigationPath.Memorabilia}/{Constant.EditModeType.Update.Name}/{DataProtectorService.EncryptId(context.Id)}"))"
+                            Size="MudBlazor.Size.Small" />
+            <DeleteGridButton ConfirmMessage="Delete Memorabilia"
+                              OnDelete="@(_ => DeleteMemorabiliaItem(context.Id))"
+                              ShowConfirm="true"
+                              Size="MudBlazor.Size.Small" />
+        </TableData>
     </RowTemplate>
     <ChildRowContent>
         <Condition Evaluation="@context.DisplayAutographDetails">
@@ -117,23 +104,14 @@
                                 <MudTh>Color</MudTh>
                                 <MudTh>Authentications</MudTh>
                                 <MudTh>Inscriptions</MudTh>
-                                <Condition Evaluation="ShowActions">
-                                    <Match>
-                                        <MudTh></MudTh>
-                                    </Match>
-                                </Condition>                                
+                                <TableHeader Visible="ShowActions"></TableHeader>
                             </HeaderContent>
                             <RowTemplate Context="autograph">
                                 <MudTd DataLabel="Name">
-                                    <MudTooltip Text="@autograph.ImageDisplayCount">
-                                        <MudImage @onclick="@(_ => NavigationManager.NavigateTo($"{NavigationPath.AutographImage}/{Constant.EditModeType.Update.Name}/{DataProtectorService.EncryptId(autograph.Id)}"))"
-                                                  Class="rounded-lg can-click" 
-                                                  Elevation="5" 
-                                                  Height="200"
-                                                  ObjectFit="@ObjectFit.Cover"
-                                                  Src="@(ImageService.GetPersonImageData(autograph.PersonImageName))"
-                                                  Width="200" />
-                                    </MudTooltip> 
+                                    <GridImage AllowNavigation="true"                                               
+                                               ImageData="@(ImageService.GetPersonImageData(autograph.PersonImageName))"
+                                               OnClick="@(_ => NavigationManager.NavigateTo($"{NavigationPath.AutographImage}/{Constant.EditModeType.Update.Name}/{DataProtectorService.EncryptId(autograph.Id)}"))"
+                                               TooltipText="@autograph.ImageDisplayCount" />
                                 </MudTd>
                                 <MudTd DataLabel="Abbreviation">@autograph.PersonName</MudTd>
                                 <MudTd DataLabel="Condition">@autograph.ConditionName</MudTd>
@@ -162,20 +140,17 @@
                                                  Text="@autograph.InscriptionText" />
                                     </MudTooltip> 
                                 </MudTd>
-                                <Condition Evaluation="ShowActions">
-                                    <Match>
-                                        <MudTd DataLabel="">
-                                            <ViewAutographImagesFab AutographId="autograph.Id"
-                                                                    Size="MudBlazor.Size.Small" />
-                                            <EditGridButton OnEdit="@(_ => NavigationManager.NavigateTo($"{NavigationPath.Autographs}/{Constant.EditModeType.Update.Name}/{DataProtectorService.EncryptId(autograph.MemorabiliaId)}/{DataProtectorService.EncryptId(autograph.Id)}"))"
+                                <TableData DataLabel=""
+                                           Visible="ShowActions">
+                                    <ViewAutographImagesFab AutographId="autograph.Id"
                                                             Size="MudBlazor.Size.Small" />
-                                            <DeleteGridButton ConfirmMessage="Delete Autograph"
-                                                              OnDelete="@(_ => DeleteAutograph(context.Id))"
-                                                              ShowConfirm="true"
-                                                              Size="MudBlazor.Size.Small" />
-                                        </MudTd>
-                                    </Match>
-                                </Condition>                                
+                                    <EditGridButton OnEdit="@(_ => NavigationManager.NavigateTo($"{NavigationPath.Autographs}/{Constant.EditModeType.Update.Name}/{DataProtectorService.EncryptId(autograph.MemorabiliaId)}/{DataProtectorService.EncryptId(autograph.Id)}"))"
+                                                    Size="MudBlazor.Size.Small" />
+                                    <DeleteGridButton ConfirmMessage="Delete Autograph"
+                                                      OnDelete="@(_ => DeleteAutograph(context.Id))"
+                                                      ShowConfirm="true"
+                                                      Size="MudBlazor.Size.Small" />
+                                </TableData>
                             </RowTemplate>
                             <PagerContent>
                                 <MudTablePager />

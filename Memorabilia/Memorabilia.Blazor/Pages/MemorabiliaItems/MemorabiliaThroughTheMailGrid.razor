@@ -15,13 +15,9 @@
     </HeaderContent>
     <RowTemplate>
         <MudTd DataLabel="">
-            <MudImage @onclick="@(_ => ShowPersonProfile(context.Person.Id))"
-                      Class="rounded-lg"
-                      Elevation="5"
-                      Height="200"
-                      ObjectFit="@ObjectFit.Cover"
-                      Src="@(ImageService.GetPersonImageData(context.Person.ImageFileName))"
-                      Width="200" />
+            <Image AllowNavigation="true" 
+                   ImageData="@(ImageService.GetPersonImageData(context.Person.ImageFileName))"
+                   OnClick="@(_ => ShowPersonProfile(context.Person.Id))" />
         </MudTd>
         <MudTd DataLabel="Person">@context.Person.DisplayName</MudTd>
         <MudTd DataLabel="SentDate">@(context.SentDate.HasValue ? context.SentDate.Value.ToString("MM-dd-yyyy") : string.Empty)</MudTd>

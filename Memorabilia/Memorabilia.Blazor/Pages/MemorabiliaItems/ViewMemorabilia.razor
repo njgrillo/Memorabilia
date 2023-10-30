@@ -24,9 +24,8 @@
     </Condition>
 </DivPad2>
 <DivRowCol12Center>
-    <MudTooltip Text="Add Memorabilia">
-        <MudFab Color="MudBlazor.Color.Primary"
-                StartIcon="@Icons.Material.Outlined.AddCircleOutline"
-                OnClick="@(_ => NavigationManager.NavigateTo($"{NavigationPath.Memorabilia}/{Constant.EditModeType.Update.Name}"))" />
-    </MudTooltip>
+    <Fab Color="MudBlazor.Color.Primary"
+         OnClick="@(_ => NavigationManager.NavigateTo($"{NavigationPath.Memorabilia}/{Constant.EditModeType.Update.Name}"))"
+         StartIcon="@Icons.Material.Outlined.AddCircleOutline"
+         TooltipText="Add Memorabilia" />
 </DivRowCol12Center>

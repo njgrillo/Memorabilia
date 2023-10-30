@@ -60,11 +60,6 @@ public partial class ForTradeGrid
         _resetPaging = false;
     }
 
-    protected void OnImageLoaded()
-    {
-        StateHasChanged();
-    }
-
     public async Task OnMemorabiliaAdd(ForTradeMemorabiliaAddedNotification notification)
     {
         await _table.ReloadServerData();

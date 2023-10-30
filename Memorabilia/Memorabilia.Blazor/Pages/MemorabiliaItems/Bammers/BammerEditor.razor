@@ -16,16 +16,12 @@
                                Model="EditModel"
                                TItem="BammerEditModel">
             <AdditionalContent>
-                <Condition Evaluation="EditModel.CanHaveBammerType">
-                    <Match>
-                        <DivRowFormGroup>
-                            <Div Class="col-3">
-                                <BammerTypeDropDown SelectedValue="EditModel.BammerTypeId"
-                                                    SelectionChanged="(p) => EditModel.BammerTypeId = p" />
-                            </Div>
-                        </DivRowFormGroup>
-                    </Match>
-                </Condition>                
+                <DivRowFormGroup Visible="EditModel.CanHaveBammerType">
+                    <Div Class="col-3">
+                        <BammerTypeDropDown SelectedValue="EditModel.BammerTypeId"
+                                            SelectionChanged="(p) => EditModel.BammerTypeId = p" />
+                    </Div>
+                </DivRowFormGroup>
                 <DivRowFormGroup>
                     <Div Class="col-3">
                         <NullableIntField Label="Year"

@@ -1,15 +1,12 @@
 ﻿<DivPad2>
     <Div Class="row">
-        <Condition Evaluation="@(!IsUpgrade)">
-            <Match>
-                <Div Style="@($"width:{_featureWidth}%;")">
-                    <SubscriberLevel OnSelect="OnFreeSelect"
-                                     Role="@Memorabilia.Domain.Enums.Role.NonSubscriber"
-                                     Title="Free" />
+        <Div Style="@($"width:{_featureWidth}%;")"
+             Visible="@(!IsUpgrade)">
+            <SubscriberLevel OnSelect="OnFreeSelect"
+                             Role="@Memorabilia.Domain.Enums.Role.NonSubscriber"
+                             Title="Free" />
 
-                </Div>
-            </Match>
-        </Condition>        
+        </Div>
         <Div Style="@($"width:{_featureWidth}%;")">
             <SubscriberLevel OnSelect="OnTier1Select"
                              Role="@Memorabilia.Domain.Enums.Role.SubscriberTier1"

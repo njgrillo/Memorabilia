@@ -64,11 +64,6 @@ public partial class CollectionMemorabiliaDetailGrid
         await Load();
     }    
 
-    protected void OnImageLoaded()
-    {
-        StateHasChanged();
-    }
-
     protected async Task OnMemorabiliaSelected(MemorabiliaModel item)
     {
         if (!SelectedMemorabilia.Contains(item))

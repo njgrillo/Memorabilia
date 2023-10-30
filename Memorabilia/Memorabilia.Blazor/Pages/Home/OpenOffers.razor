@@ -23,11 +23,10 @@
         <MudTd DataLabel="Amount">@(context.Amount.ToString("c"))</MudTd>
         <MudTd DataLabel="Status">@context.OfferStatusTypeName</MudTd>
         <MudTd>
-            <MudTooltip Text="Review">
-                <MudFab Color="MudBlazor.Color.Secondary"
-                        StartIcon="@Icons.Material.Outlined.Preview"
-                        OnClick="@(_ => Review(context.Id))" />
-            </MudTooltip>
+            <Fab Color="MudBlazor.Color.Secondary"
+                 OnClick="@(_ => Review(context.Id))"
+                 StartIcon="@Icons.Material.Outlined.Preview"
+                 TooltipText="Review" />
         </MudTd>
     </RowTemplate>
     <PagerContent>

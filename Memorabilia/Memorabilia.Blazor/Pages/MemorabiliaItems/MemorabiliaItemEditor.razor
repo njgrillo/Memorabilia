@@ -73,18 +73,14 @@
                              SelectedPeopleChanged="@((people) => Model.People = people)" />
     </Match>
 </Condition>
-<Condition Evaluation="DisplaySingleTeamSelector">
-    <Match>
-        <Div Class="row">
-            <Div Class="col-6">
-                <TeamAutoComplete SelectedValue="Model.Team"
-                                  SelectionChanged="(p) => Model.Team = p"
-                                  Sport="Model.Sport" 
-                                  SportLeagueLevel="Model.SportLeagueLevel" />
-            </Div>
-        </Div>
-    </Match>
-</Condition>
+<Div Class="row" Visible="DisplaySingleTeamSelector">
+    <Div Class="col-6">
+        <TeamAutoComplete SelectedValue="Model.Team"
+                          SelectionChanged="(p) => Model.Team = p"
+                          Sport="Model.Sport"
+                          SportLeagueLevel="Model.SportLeagueLevel" />
+    </Div>
+</Div>
 <Condition Evaluation="DisplayMultiTeamSelector">
     <Match>
         <MultiTeamSelector CanToggle="CanToggleMultiTeamSelector"
