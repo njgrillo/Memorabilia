@@ -1,6 +1,5 @@
 ﻿<DivRowFormGroup>
-    <MudStack Class="col-6"
-              Row="true"
+    <RowStack Class="col-6"
               Style="margin-bottom:1%;">
         <NullableIntField Label="Begin Year"
                           Value="Model.BeginYear"
@@ -11,11 +10,10 @@
         <TeamRoleTypeAutoComplete SelectedValue="Model.TeamRoleType"
                                   SelectionChanged="(p) => Model.TeamRoleType = p"
                                   SportLeagueLevel="Model.SportLeagueLevel" />
-    </MudStack>
+    </RowStack>
 </DivRowFormGroup>
 <DivRowFormGroup>
-    <MudStack Class="col-6"
-              Row="true"
+    <RowStack Class="col-6"
               Style="margin-bottom:1%;">
         <PersonTeamAutoComplete BeginYear="Model.BeginYear"
                                 Disabled="@(EditMode == EditModeType.Update)"
@@ -28,7 +26,7 @@
         <AddUpdateMudFab EditMode="EditMode"
                          OnAdd="Add"
                          OnUpdate="Update" />
-    </MudStack>
+    </RowStack>
 </DivRowFormGroup>
 <DivRowCol12>
     <MudTable Bordered="false"

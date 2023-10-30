@@ -1,27 +1,21 @@
-﻿<Condition Evaluation="CanToggle">
-    <Match>
-        <Div Class="row">
-            <Div Class="col-3">
-                <Switch Checked="@_hasPeople"
-                        CheckedChanged="PersonCheckboxClicked"
-                        Label="@_itemTypeNameLabel" />
-            </Div>
-        </Div>
-    </Match>
-</Condition>
+﻿<Div Class="row"
+     Visible="CanToggle">
+    <Div Class="col-3">
+        <Switch Checked="@_hasPeople"
+                CheckedChanged="PersonCheckboxClicked"
+                Label="@_itemTypeNameLabel" />
+    </Div>
+</Div>
 <Div Hidden="@(!_displayPeople)">
-    <Condition Evaluation="CanFilterBySport">
-        <Match>
-            <Div Class="row"
-                 Style="margin-top:1%;margin-bottom:1%;padding-left:10px;">
-                <Div Class="col-3">
-                    <Switch Checked="@_filterPeople"
-                            CheckedChanged="PersonFilterCheckboxClicked"
-                            Label="@_itemTypeNameFilterLabel" />
-                </Div>
-            </Div>
-        </Match>
-    </Condition>
+    <Div Class="row"
+         Style="margin-top:1%;margin-bottom:1%;padding-left:10px;"
+         Visible="CanFilterBySport">
+        <Div Class="col-3">
+            <Switch Checked="@_filterPeople"
+                    CheckedChanged="PersonFilterCheckboxClicked"
+                    Label="@_itemTypeNameFilterLabel" />
+        </Div>
+    </Div>
     <Div Class="row">
         <Div Class="col-6">
             <Div Class="d-flex justify-context-between">

@@ -1,6 +1,5 @@
 ﻿<DivRowFormGroup>
-    <MudStack Class="col-6"
-              Row="true"
+    <RowStack Class="col-6"
               Style="margin-bottom:1%;">
         <InternationalHallOfFameTypeDropDown Disabled="@(EditMode == EditModeType.Update)"
                                              Label="Type"
@@ -12,7 +11,7 @@
         <AddUpdateMudFab EditMode="EditMode"
                          OnAdd="Add"
                          OnUpdate="Update" />
-    </MudStack>
+    </RowStack>
 </DivRowFormGroup>
 <Div Class="row">
     <Div Class="col-6">

@@ -1,6 +1,5 @@
 ﻿<DivRowFormGroup>
-    <MudStack Class="col-10"
-              Row="true"
+    <RowStack Class="col-10"
               Style="margin-bottom:1%;">
         <SportAutoComplete SelectedValue="Model.Sport"
                            SelectionChanged="(p) => Model.Sport = p" />
@@ -8,7 +7,7 @@
                 CheckedChanged="(p) => Model.IsPrimary = p"
                 Label="Is Primary?" />
         <AddMudFab OnAdd="Add" />
-    </MudStack>
+    </RowStack>
 </DivRowFormGroup>
 <DivRowCol12>
     <MudTable Bordered="false"

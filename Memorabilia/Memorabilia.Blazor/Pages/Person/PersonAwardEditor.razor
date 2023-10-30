@@ -1,6 +1,5 @@
 ﻿<DivRowFormGroup>
-    <MudStack Class="col-12"
-              Row="true"
+    <RowStack Class="col-12"
               Style="margin-bottom:1%;">
         <AwardTypeAutoComplete IncludeMultiSport="true" 
                                ResetValueOnEmptyText="false"
@@ -12,7 +11,7 @@
                    SelectedText="@_years"
                    SelectedTextChanged="@((p) => _years = p)" />
         <AddMudFab OnAdd="Add" />
-    </MudStack>
+    </RowStack>
 </DivRowFormGroup>
 <Div Class="row">
     <Div Class="col-12">

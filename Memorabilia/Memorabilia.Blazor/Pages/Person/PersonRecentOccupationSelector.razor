@@ -17,11 +17,10 @@
         <MudTd DataLabel="Positions">@context.PositionsDisplayText</MudTd>
         <MudTd DataLabel="Sports">@context.SportsDisplayText</MudTd>
         <MudTd DataLabel="">
-            <MudTooltip Text="Select">
-                <MudFab Color="MudBlazor.Color.Primary"
-                        StartIcon="@Icons.Material.Outlined.AddCircleOutline"
-                        OnClick="@(_ => Select(context))" />
-            </MudTooltip>
+            <Fab Color="MudBlazor.Color.Primary"
+                 OnClick="@(_ => Select(context))"
+                 StartIcon="@Icons.Material.Outlined.AddCircleOutline"
+                 TooltipText="Select" />
         </MudTd>
     </RowTemplate>
 </MudTable>

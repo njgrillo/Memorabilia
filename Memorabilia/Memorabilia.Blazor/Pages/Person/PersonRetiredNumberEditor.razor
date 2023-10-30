@@ -1,6 +1,5 @@
 ﻿<DivRowFormGroup>
-    <MudStack Class="col-12"
-              Row="true"
+    <RowStack Class="col-12"
               Style="margin-bottom:1%;">
         <FranchiseAutoComplete Disabled="@(EditMode == EditModeType.Update)"
                                SelectedValue="Model.Franchise"
@@ -12,7 +11,7 @@
         <AddUpdateMudFab EditMode="EditMode"
                          OnAdd="Add"
                          OnUpdate="Update" />
-    </MudStack>
+    </RowStack>
 </DivRowFormGroup>
 <Div Class="row">
     <Div Class="col-12">
