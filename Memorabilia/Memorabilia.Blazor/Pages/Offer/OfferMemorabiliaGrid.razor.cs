@@ -22,11 +22,6 @@ public partial class OfferMemorabiliaGrid
         Items = new List<OfferMemorabiliaModel> { Item };
     }
 
-    protected void OnImageLoaded()
-    {
-        StateHasChanged();
-    }
-
     private void ToggleChildContent(int memorabiliaItemId)
     {
         OfferMemorabiliaModel memorabiliaItem

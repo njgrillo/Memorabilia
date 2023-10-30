@@ -16,13 +16,12 @@
     </HeaderContent>
     <RowTemplate>
         <MudTd>
-            <MudIconButton @onclick="@(_ => ToggleChildContent(context.MemorabiliaId))"
-                           Icon="@context.ToggleIcon"></MudIconButton>
+            <MudIconButton Icon="@context.ToggleIcon"
+                           OnClick="@(_ => ToggleChildContent(context.MemorabiliaId))" />
         </MudTd>
         <MudTd DataLabel="">
-            <GridImage AllowNavigation="false"
-                       ImageLoaded="OnImageLoaded"
-                       ImageFileName="@context.ImageFileName"
+            <GridImage ImageFileName="@context.ImageFileName"
+                       ImageLoaded="@(_ => StateHasChanged())"
                        UserId="@context.UserId" />
         </MudTd>
         <MudTd DataLabel="Item">@context.ItemTypeName</MudTd>
@@ -77,12 +76,8 @@
                             </HeaderContent>
                             <RowTemplate Context="autograph">
                                 <MudTd DataLabel="">
-                                    <MudImage Class="rounded-lg"
-                                              Elevation="5"
-                                              Height="200"
-                                              ObjectFit="@ObjectFit.Cover"
-                                              Src="@(ImageService.GetPersonImageData(autograph.PersonImageName))"
-                                              Width="200" />
+                                    <GridImage ImageData="@(ImageService.GetPersonImageData(autograph.PersonImageName))"
+                                               ImageLoaded="@(_ => StateHasChanged())" />
                                 </MudTd>
                                 <MudTd DataLabel="Person">@autograph.PersonName</MudTd>
                                 <MudTd DataLabel="Condition">@autograph.ConditionName</MudTd>
@@ -90,19 +85,17 @@
                                 <MudTd DataLabel="Color">@autograph.ColorName</MudTd>
                                 <MudTd DataLabel="Authentications"
                                        Style="text-align:center">
-                                    <MudTooltip Text="@autograph.AuthenticationTooltip">
-                                        <MudChip Color="MudBlazor.Color.Info"
-                                                 Size="@MudBlazor.Size.Small"
-                                                 Text="@autograph.AuthenticationText" />
-                                    </MudTooltip>
+                                    <Chip Color="MudBlazor.Color.Info"
+                                          Size="@MudBlazor.Size.Small"
+                                          Text="@autograph.AuthenticationText"
+                                          TooltipText="@autograph.AuthenticationTooltip" />
                                 </MudTd>
                                 <MudTd DataLabel="Inscriptions"
                                        Style="text-align:center">
-                                    <MudTooltip Text="@autograph.InscriptionTooltip">
-                                        <MudChip Color="MudBlazor.Color.Info"
-                                                 Size="@MudBlazor.Size.Small"
-                                                 Text="@autograph.InscriptionText" />
-                                    </MudTooltip>
+                                    <Chip Color="MudBlazor.Color.Info"
+                                          Size="@MudBlazor.Size.Small"
+                                          Text="@autograph.InscriptionText"
+                                          TooltipText="@autograph.InscriptionTooltip" />
                                 </MudTd>
                                 <MudTd>
                                     <ViewAutographImagesFab AutographId="autograph.Id"

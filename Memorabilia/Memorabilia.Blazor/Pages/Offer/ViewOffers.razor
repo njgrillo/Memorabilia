@@ -5,20 +5,22 @@
           PageTitle="Offers">
     <DivPad2>
         <TabControl>
-            <MudTabPanel BadgeColor="MudBlazor.Color.Success"
-                         BadgeData="Model.OpenOffersCount"
-                         Text="Open">
+            <TabPanel BadgeColor="MudBlazor.Color.Success"
+                      BadgeData="Model.OpenOffersCount"
+                      DisplayBadge="true"
+                      Text="Open">
                 <DivRowCol12>
                     <OfferGrid Items="Model.OpenOffers" />
                 </DivRowCol12>
-            </MudTabPanel>
-            <MudTabPanel BadgeColor="MudBlazor.Color.Success"
-                         BadgeData="Model.CompletedOffersCount"
-                         Text="Completed">
+            </TabPanel>
+            <TabPanel BadgeColor="MudBlazor.Color.Success"
+                      BadgeData="Model.CompletedOffersCount"
+                      DisplayBadge="true"
+                      Text="Completed">
                 <DivRowCol12>
                     <OfferGrid Items="Model.CompletedOffers" />
                 </DivRowCol12>
-            </MudTabPanel>
+            </TabPanel>
         </TabControl>
     </DivPad2>
 </PageView>
