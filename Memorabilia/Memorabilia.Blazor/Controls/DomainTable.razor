@@ -29,11 +29,9 @@
                             StartIcon="@Icons.Material.Outlined.ModeEditOutline"
                             OnClick="@(_ => NavigationManager.NavigateTo($"{RoutePrefix}/{EditModeType.Update.Name}/{context.Id}"))" />
                 </MudTooltip>
-                <MudTooltip Text="Delete">
-                    <MudFab Color="MudBlazor.Color.Secondary"
-                            StartIcon="@Icons.Material.Outlined.DeleteOutline"
-                            OnClick="@(_ => ShowDeleteConfirm(context.Id))" />
-                </MudTooltip>
+                <DeleteGridButton ConfirmMessage="@DeleteText" 
+                                  OnDelete="@(_ => Delete(context.Id))"
+                                  ShowConfirm="true" />
             </MudTd>
         </RowTemplate>
         <PagerContent>

@@ -32,11 +32,9 @@
                 <MudTd DataLabel="Alternate Name">@context.AlternateName</MudTd>
                 <MudTd DataLabel="">
                     <GridEditButton NavigationPath="@($"{Model.RoutePrefix}/{EditModeType.Update.Name}/{context.Id}")" />
-                    <MudTooltip Text="Delete">
-                        <MudFab Color="MudBlazor.Color.Secondary"
-                                StartIcon="@Icons.Material.Outlined.DeleteOutline"
-                                OnClick="@(_ => ShowDeleteConfirm(context.Id, "Delete Sport"))" />
-                    </MudTooltip>
+                    <DeleteGridButton ConfirmMessage="Delete Sport"
+                                      OnDelete="@(_ => Delete(context.Id))"
+                                      ShowConfirm="true" />
                 </MudTd>
             </RowTemplate>
             <PagerContent>

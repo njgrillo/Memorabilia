@@ -48,11 +48,7 @@
             </Condition>
         </MudTd>
         <MudTd DataLabel="">
-            <MudTooltip Text="Delete">
-                <MudFab Color="MudBlazor.Color.Secondary"
-                        StartIcon="@Icons.Material.Outlined.DeleteOutline"
-                        OnClick="@(_ => context.IsDeleted = true)" />
-            </MudTooltip>
+            <DeleteGridButton OnDelete="@(_ => context.IsDeleted = true)" />
         </MudTd>
     </RowTemplate>
     <RowEditingTemplate>
@@ -83,6 +79,8 @@
             </Condition>
         </MudTd>
         <MudTd DataLabel="">
+            @* Figure out if this needs delete implementation *@
+            <DeleteGridButton OnDelete="@(_ => context.IsDeleted = true)" />
             <MudTooltip Text="Delete">
                 <MudFab Color="MudBlazor.Color.Secondary"
                         StartIcon="@Icons.Material.Outlined.DeleteOutline" />

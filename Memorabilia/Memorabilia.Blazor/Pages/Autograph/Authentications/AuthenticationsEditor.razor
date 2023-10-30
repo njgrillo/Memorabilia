@@ -99,11 +99,7 @@
                                             OnClick="@(_ => Edit(authentication))"
                                             StartIcon="@Icons.Material.Outlined.ModeEditOutline" />
                                 </MudTooltip>
-                                <MudTooltip Text="Delete">
-                                    <MudFab Color="MudBlazor.Color.Secondary"                                            
-                                            OnClick="@(_ => authentication.IsDeleted = true)"
-                                            StartIcon="@Icons.Material.Outlined.DeleteOutline" />
-                                </MudTooltip>
+                                <DeleteGridButton OnDelete="@(_ => authentication.IsDeleted = true)" />
                             </MudTd>
                         </RowTemplate>
                     </MudTable>

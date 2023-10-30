@@ -25,11 +25,9 @@
         <MudTd DataLabel="TotalItemsSent">@(context.TotalItemsSentCount > 0 ? context.TotalItemsSentCount.ToString() : string.Empty)</MudTd>
         <MudTd DataLabel="">
             <GridEditButton NavigationPath="@($"{NavigationPath.Transactions}/{Constant.EditModeType.Update.Name}/{DataProtectorService.EncryptId(context.MemorabiliaTransactionId)}")" />
-            <MudTooltip Text="Delete">
-                <MudFab Color="MudBlazor.Color.Secondary"
-                        StartIcon="@Icons.Material.Outlined.DeleteOutline"
-                        OnClick="@(_ => ShowDeleteTransactionConfirm(context.MemorabiliaTransactionId))" />
-            </MudTooltip>
+            <DeleteGridButton ConfirmMessage="Delete Transaction"
+                              OnDelete="@(_ => DeleteTransaction(context.MemorabiliaTransactionId))"
+                              ShowConfirm="true" />
         </MudTd>
     </RowTemplate>
     <ChildRowContent>
@@ -71,12 +69,9 @@
                                 <MudTd DataLabel="">
                                     <ViewMemorabiliaImagesFab MemorabiliaId="trade.MemorabiliaId"
                                                               Size="MudBlazor.Size.Small" />
-                                    <MudTooltip Text="Delete">
-                                        <MudFab Color="MudBlazor.Color.Secondary"
-                                                StartIcon="@Icons.Material.Outlined.DeleteOutline"
-                                                OnClick="@(_ => ShowDeleteTransactionTradeConfirm(trade.MemorabiliaTransactionId, trade.Id))"
-                                                Size="@MudBlazor.Size.Small" />
-                                    </MudTooltip>
+                                    <DeleteGridButton ConfirmMessage="Delete Trade"
+                                                      OnDelete="@(_ => DeleteTrade(trade.MemorabiliaTransactionId, trade.Id))"
+                                                      ShowConfirm="true" />
                                 </MudTd>
                             </RowTemplate>
                             <PagerContent>

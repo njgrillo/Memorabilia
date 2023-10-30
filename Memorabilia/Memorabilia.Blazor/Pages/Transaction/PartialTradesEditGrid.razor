@@ -27,11 +27,7 @@
         <MudTd DataLabel="Amount">@(context.CashIncludedAmount?.ToString("c") ?? string.Empty)</MudTd>
         <MudTd DataLabel="AmountType">@context.CashIncludedTypeName</MudTd>
         <MudTd DataLabel="">
-            <MudTooltip Text="Delete">
-                <MudFab Color="MudBlazor.Color.Secondary"
-                        StartIcon="@Icons.Material.Outlined.DeleteOutline"
-                        OnClick="@(_ => context.IsDeleted = true)" />
-            </MudTooltip>
+            <DeleteGridButton OnDelete="@(_ => context.IsDeleted = true)" />
         </MudTd>
     </RowTemplate>
     <RowEditingTemplate>

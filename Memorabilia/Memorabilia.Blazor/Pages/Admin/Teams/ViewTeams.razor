@@ -42,11 +42,9 @@
                 <MudTd DataLabel="End Year">@context.EndYear</MudTd>
                 <MudTd DataLabel="">
                     <GridEditButton NavigationPath="@($"{Model.RoutePrefix}/{EditModeType.Update.Name}/{context.Id}")" />
-                    <MudTooltip Text="Delete">
-                        <MudFab Color="MudBlazor.Color.Secondary"
-                                StartIcon="@Icons.Material.Outlined.DeleteOutline"
-                                OnClick="@(_ => ShowDeleteConfirm(context.Id, "Delete Team"))" />
-                    </MudTooltip>
+                    <DeleteGridButton ConfirmMessage="Delete Team"
+                                      OnDelete="@(_ => Delete(context.Id))"
+                                      ShowConfirm="true" />
                 </MudTd>
             </RowTemplate>
             <PagerContent>

@@ -30,17 +30,6 @@ public abstract class ViewItem<TModel, TItemModel> : CommandQuery
         await Mediator.Send(command);
     }
 
-    protected virtual async Task ShowDeleteConfirm(int id, string text)
-    {
-        var dialog = DialogService.Show<DeleteDialog>(text);
-        var result = await dialog.Result;
-
-        if (result.Canceled)
-            return;
-
-        await Delete(id);
-    }
-
     protected void ShowDeleteSuccessfulMessage(string itemTitle)
     {
         Snackbar.Add($"{itemTitle} was deleted successfully!", Severity.Success);

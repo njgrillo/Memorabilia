@@ -21,11 +21,7 @@
             <RowTemplate>
                 <MudTd DataLabel="Nickname">@context.Nickname</MudTd>
                 <MudTd DataLabel="">
-                    <MudTooltip Text="Delete">
-                        <MudFab Color="MudBlazor.Color.Secondary"
-                                StartIcon="@Icons.Material.Outlined.DeleteOutline"
-                                OnClick="@(_ => Nicknames.Remove(context))" />
-                    </MudTooltip>  
+                    <DeleteGridButton OnDelete="@(_ => context.IsDeleted = true)" />
                 </MudTd>
             </RowTemplate>
         </MudTable>

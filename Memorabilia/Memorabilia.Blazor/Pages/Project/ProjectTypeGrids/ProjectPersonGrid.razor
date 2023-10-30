@@ -134,12 +134,8 @@
             </Condition>
         </MudTd>
         <MudTd DataLabel="">
-            <MudTooltip Text="Delete">
-                <MudFab Color="MudBlazor.Color.Secondary"
-                        StartIcon="@Icons.Material.Outlined.DeleteOutline"
-                        OnClick="@(_ => Remove(projectPerson.Id, projectPerson.Person.Id, projectPerson.ItemTypeId))"
-                        Size="@MudBlazor.Size.Small" />
-            </MudTooltip>
+            <DeleteGridButton OnDelete="@(_ => Remove(projectPerson.Id, projectPerson.Person.Id, projectPerson.ItemTypeId))"
+                              Size="@MudBlazor.Size.Small" />
         </MudTd>
     </RowTemplate>
     <RowEditingTemplate>
@@ -225,12 +221,8 @@
             </Condition>
         </MudTd>
         <MudTd DataLabel="">
-            <MudTooltip Text="Delete">
-                <MudFab Color="MudBlazor.Color.Secondary"
-                        StartIcon="@Icons.Material.Outlined.DeleteOutline"
-                        OnClick="@(_ => Remove(context.Id, context.Person.Id, context.ItemTypeId))"
-                        Size="@MudBlazor.Size.Small" />
-            </MudTooltip>
+            <DeleteGridButton OnDelete="@(_ => Remove(context.Id, context.Person.Id, context.ItemTypeId))"
+                              Size="@MudBlazor.Size.Small" />
         </MudTd>
     </RowEditingTemplate>
     <PagerContent>

@@ -65,11 +65,7 @@
                                                 StartIcon="@Icons.Material.Outlined.ModeEditOutline"
                                                 OnClick="@(_ => Edit(inscription))" />
                                     </MudTooltip>
-                                    <MudTooltip Text="Delete">
-                                        <MudFab Color="MudBlazor.Color.Secondary"
-                                                StartIcon="@Icons.Material.Outlined.DeleteOutline"
-                                                OnClick="@(_ => inscription.IsDeleted = true)" />
-                                    </MudTooltip>
+                                    <DeleteGridButton OnDelete="@(_ => inscription.IsDeleted = true)" />
                                 </MudTd>
                             </RowTemplate>
                         </MudTable>

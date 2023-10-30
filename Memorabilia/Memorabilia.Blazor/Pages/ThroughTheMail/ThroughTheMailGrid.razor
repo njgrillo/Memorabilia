@@ -71,11 +71,9 @@
         </Condition>
         <MudTd DataLabel="">
             <GridEditButton NavigationPath="@($"{NavigationPath.ThroughTheMail}/{Constant.EditModeType.Update.Name}/{DataProtectorService.EncryptId(context.Id)}")" />
-            <MudTooltip Text="Delete">
-                <MudFab Color="MudBlazor.Color.Secondary"
-                            StartIcon="@Icons.Material.Outlined.DeleteOutline"
-                        OnClick="@(_ => ShowDeleteConfirm(@context.Id))" />
-            </MudTooltip>
+            <DeleteGridButton ConfirmMessage="Delete TTM"
+                              OnDelete="@(_ => Delete(context.Id))"
+                              ShowConfirm="true" />
         </MudTd>
     </RowTemplate>
     <ChildRowContent>

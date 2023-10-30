@@ -22,11 +22,10 @@
                 <MudTd DataLabel="Description">@context.Description</MudTd>
                 <MudTd DataLabel="">
                     <GridEditButton NavigationPath="@($"{NavigationPath.Collections}/{Constant.EditModeType.Update.Name}/{DataProtectorService.EncryptId(context.Id)}")" />
-                    <MudTooltip Text="Delete">
-                        <MudFab Color="MudBlazor.Color.Secondary"
-                                StartIcon="@Icons.Material.Outlined.DeleteOutline"
-                                OnClick="@(_ => ShowDeleteConfirm(@context.Id))" />
-                    </MudTooltip>
+                    <DeleteGridButton ConfirmMessage="Delete Collection"
+                                      OnDelete="@(_ => Delete(context.Id))"
+                                      ShowConfirm="true"
+                                      TooltipText="Remove from Collection" />
                 </MudTd>
             </RowTemplate>
             <PagerContent>

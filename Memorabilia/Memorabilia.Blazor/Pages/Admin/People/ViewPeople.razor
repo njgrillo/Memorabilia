@@ -58,11 +58,9 @@
                 <MudTd DataLabel="Death Date">@context.FormattedDeathDate</MudTd>
                 <MudTd DataLabel="">
                     <GridEditButton NavigationPath="@($"People/{EditModeType.Update.Name}/{context.Id}")" />
-                    <MudTooltip Text="Delete">
-                        <MudFab Color="MudBlazor.Color.Secondary"
-                                StartIcon="@Icons.Material.Outlined.DeleteOutline"
-                                OnClick="@(_ => ShowDeleteConfirm(context.Id, "Delete Person"))" />
-                    </MudTooltip>
+                    <DeleteGridButton ConfirmMessage="Delete Person"
+                                      OnDelete="@(_ => Delete(context.Id))"
+                                      ShowConfirm="true" />
                 </MudTd>
             </RowTemplate>
             <PagerContent>

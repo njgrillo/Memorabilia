@@ -32,11 +32,7 @@
                 </MudTooltip>
             </MudTd>
             <MudTd DataLabel="">
-                <MudTooltip Text="Delete">
-                    <MudFab Color="MudBlazor.Color.Secondary"
-                            StartIcon="@Icons.Material.Outlined.DeleteOutline"
-                            OnClick="@(_ => RemovePerson(context))" />
-                </MudTooltip>
+                <DeleteGridButton OnDelete="@(_ => RemovePerson(context))" />
             </MudTd>            
         </RowTemplate>
     </MudTable>

@@ -24,11 +24,9 @@
                 <MudTd DataLabel="End Date">@context.FormattedEndDate</MudTd>
                 <MudTd DataLabel="">
                     <GridEditButton NavigationPath="@($"{NavigationPath.Projects}/{Constant.EditModeType.Update.Name}/{DataProtectorService.EncryptId(context.Id)}")" />
-                    <MudTooltip Text="Delete">
-                        <MudFab Color="MudBlazor.Color.Secondary"
-                                StartIcon="@Icons.Material.Outlined.DeleteOutline"
-                                OnClick="@(_ => ShowDeleteConfirm(@context.Id))" />
-                    </MudTooltip>
+                    <DeleteGridButton ConfirmMessage="Delete Project" 
+                                      OnDelete="@(_ => Delete(context.Id))"
+                                      ShowConfirm="true" />
                 </MudTd>
             </RowTemplate>
             <PagerContent>
