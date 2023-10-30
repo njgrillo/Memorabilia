@@ -21,7 +21,7 @@
                 <MudTd DataLabel="Name">@context.Name</MudTd>
                 <MudTd DataLabel="Description">@context.Description</MudTd>
                 <MudTd DataLabel="">
-                    <GridEditButton NavigationPath="@($"{NavigationPath.Collections}/{Constant.EditModeType.Update.Name}/{DataProtectorService.EncryptId(context.Id)}")" />
+                    <NavigationGridButton NavigationPath="@($"{NavigationPath.Collections}/{Constant.EditModeType.Update.Name}/{DataProtectorService.EncryptId(context.Id)}")" />
                     <DeleteGridButton ConfirmMessage="Delete Collection"
                                       OnDelete="@(_ => Delete(context.Id))"
                                       ShowConfirm="true"

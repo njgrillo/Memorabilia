@@ -53,7 +53,7 @@
                 <MudTd DataLabel="Birth Date">@context.FormattedBirthDate</MudTd>
                 <MudTd DataLabel="Death Date">@context.FormattedDeathDate</MudTd>
                 <MudTd DataLabel="">
-                    <GridEditButton NavigationPath="@($"People/{EditModeType.Update.Name}/{context.Id}")" />
+                    <NavigationGridButton NavigationPath="@($"People/{EditModeType.Update.Name}/{context.Id}")" />
                     <DeleteGridButton ConfirmMessage="Delete Person"
                                       OnDelete="@(_ => Delete(context.Id))"
                                       ShowConfirm="true" />

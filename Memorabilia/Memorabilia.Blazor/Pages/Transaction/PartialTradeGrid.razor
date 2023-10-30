@@ -28,7 +28,7 @@
         <MudTd DataLabel="TotalAmountReceived">@(context.TotalAmountReceived > 0 ? context.TotalAmountReceived.ToString("c") : string.Empty)</MudTd>
         <MudTd DataLabel="TotalAmountSent">@(context.TotalAmountSent > 0 ? context.TotalAmountSent.ToString("c") : string.Empty)</MudTd>
         <MudTd DataLabel="">
-            <GridEditButton NavigationPath="@($"{NavigationPath.Transactions}/{Constant.EditModeType.Update.Name}/{DataProtectorService.EncryptId(context.MemorabiliaTransactionId)}")" />
+            <NavigationGridButton NavigationPath="@($"{NavigationPath.Transactions}/{Constant.EditModeType.Update.Name}/{DataProtectorService.EncryptId(context.MemorabiliaTransactionId)}")" />
             <DeleteGridButton ConfirmMessage="Delete Transaction"
                               OnDelete="@(_ => DeleteTransaction(context.MemorabiliaTransactionId))"
                               ShowConfirm="true" />

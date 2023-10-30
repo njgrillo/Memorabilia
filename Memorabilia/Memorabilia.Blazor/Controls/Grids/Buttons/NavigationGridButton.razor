@@ -1,0 +1,16 @@
+﻿<Condition Evaluation="@(!TooltipText.IsNullOrEmpty())">
+    <Match>
+        <MudTooltip Text="@TooltipText">
+            <MudFab Color="Color"
+                    OnClick="@(_ => NavigationManager.NavigateTo(NavigationPath))"
+                    StartIcon="@StartIcon" />
+        </MudTooltip>
+    </Match>
+    <NotMatch>
+        <MudFab Color="Color"
+                OnClick="@(_ => NavigationManager.NavigateTo(NavigationPath))"
+                StartIcon="@StartIcon" />
+    </NotMatch>
+</Condition>
+
+

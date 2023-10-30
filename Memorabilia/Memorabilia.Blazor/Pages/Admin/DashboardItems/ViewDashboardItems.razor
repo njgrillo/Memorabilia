@@ -27,7 +27,7 @@
                 <MudTd DataLabel="Description">@context.Name</MudTd>
                 <MudTd DataLabel="Name">@context.Description</MudTd>
                 <MudTd DataLabel="">
-                    <GridEditButton NavigationPath="@($"{Model.RoutePrefix}/{EditModeType.Update.Name}/{context.Id}")" />
+                    <NavigationGridButton NavigationPath="@($"{Model.RoutePrefix}/{EditModeType.Update.Name}/{context.Id}")" />
                     <DeleteGridButton ConfirmMessage="Delete Dashboard Item"
                                       OnDelete="@(_ => Delete(context.Id))"
                                       ShowConfirm="true" />
