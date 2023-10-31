@@ -1,12 +1,7 @@
 ﻿<Div Style="margin-top:1%;margin-left:1%;margin-right:1%">
     <PageHeader PageTitle="Register" />
     <br />
-    <Condition Evaluation="@(ValidationResultAlerts.Any())">
-        <Match>
-            <AlertPanel Alerts="ValidationResultAlerts" />
-            <br />
-        </Match>
-    </Condition>    
+    <AlertPanel Alerts="ValidationResultAlerts" />
     <DivRowFormGroup>
         <Div Class="col-3">
             <TextField Label="Email Address"
@@ -35,8 +30,12 @@
     </DivRowFormGroup>
     <br />
     <DivRowFormGroup Style="margin-left:1%;">
-        <p>Enter at least one valid Google Email Address, Microsoft Email Address or X Handle.  
-           You will use these to sign in.</p>
+        <Text Typography="Typo.body1">
+            <p>
+                Enter at least one valid Google Email Address, Microsoft Email Address or X Handle.
+                You will use these to sign in.
+            </p>
+        </Text>        
     </DivRowFormGroup>
     <DivRowFormGroup>
         <Div Class="col-3">

@@ -4,36 +4,36 @@
     <Condition Evaluation="Accomplishments.Any()">
         <Match>
             <Iterations Items="@DistinctAccomplishments">
-                <MudChip Color="MudBlazor.Color.Info"
-                         Text="Accomplishment">@(GetAccomplishmentDisplayText(context))</MudChip>
+                <Chip Color="MudBlazor.Color.Info"
+                      Text="Accomplishment">@(GetAccomplishmentDisplayText(context))</Chip>
                 </Iterations>
             </Match>
         </Condition>
     <Condition Evaluation="AllStars.Any()">
         <Match>
-            <MudChip Color="MudBlazor.Color.Success"
-                     Text="AllStar">@AllStarSummaryDisplayText</MudChip>
+            <Chip Color="MudBlazor.Color.Success"
+                  Text="AllStar">@AllStarSummaryDisplayText</Chip>
         </Match>
     </Condition>
     <Condition Evaluation="Awards.Any()">
         <Match>
             <Iterations Items="@DistinctAwards">
-                <MudChip Color="MudBlazor.Color.Warning"
-                         Text="Award">@(GetAwardDisplayText(context))</MudChip>
+                <Chip Color="MudBlazor.Color.Warning"
+                      Text="Award">@(GetAwardDisplayText(context))</Chip>
             </Iterations>
         </Match>
     </Condition>
     <Condition Evaluation="Championships.Any()">
         <Match>
-            <MudChip Color="MudBlazor.Color.Primary"
-                     Text="Championship">@ChampionshipSummaryDisplayText</MudChip>
+            <Chip Color="MudBlazor.Color.Primary"
+                  Text="Championship">@ChampionshipSummaryDisplayText</Chip>
         </Match>
     </Condition>
     <Condition Evaluation="Leaders.Any()">
         <Match>
             <Iterations Items="@DistinctLeaders">
-                <MudChip Color="MudBlazor.Color.Secondary"
-                         Text="Leader">@(GetLeaderDisplayText(context))</MudChip>
+                <Chip Color="MudBlazor.Color.Secondary"
+                      Text="Leader">@(GetLeaderDisplayText(context))</Chip>
             </Iterations>
         </Match>
     </Condition>

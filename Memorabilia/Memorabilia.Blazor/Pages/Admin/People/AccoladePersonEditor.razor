@@ -18,43 +18,44 @@
         <ChildContent>
             <Div Style="margin-bottom:1%;">
                 <TabControl>
-                    <MudTabPanel BadgeColor="MudBlazor.Color.Success"
-                                 BadgeData="EditModel.Accomplishments.Count(accomplishment => !accomplishment.IsDeleted)"
-                                 Text="Accomplishments">
+                    <TabPanel BadgeColor="MudBlazor.Color.Success"
+                              BadgeData="EditModel.Accomplishments.Count(accomplishment => !accomplishment.IsDeleted)"
+                              DisplayBadge="true"
+                              Text="Accomplishments">
                         <DivRowCol12>
                             <PersonAccomplishmentEditor Accomplishments="EditModel.Accomplishments"
                                                         Sports="EditModel.Sports" />
                         </DivRowCol12>
-                    </MudTabPanel>
-                    <Condition Evaluation="EditModel.DisplayAllStars">
-                        <Match>
-                            <MudTabPanel BadgeColor="MudBlazor.Color.Success"
-                                         BadgeData="EditModel.AllStars.Count"
-                                         Text="@EditModel.AllStarGameLabel">
-                                <DivRowCol12>
-                                    <PersonAllStarEditor AllStars="EditModel.AllStars"
-                                                         Sports="EditModel.Sports" />
-                                </DivRowCol12>
-                            </MudTabPanel>
-                        </Match>
-                    </Condition>
-                    <MudTabPanel BadgeColor="MudBlazor.Color.Success"
-                                 BadgeData="EditModel.Awards.Count(award => !award.IsDeleted)"
-                                 Text="Awards">
+                    </TabPanel>
+                    <TabPanel BadgeColor="MudBlazor.Color.Success"
+                              BadgeData="EditModel.AllStars.Count"
+                              DisplayBadge="true"
+                              Text="@EditModel.AllStarGameLabel"
+                              Visible="EditModel.DisplayAllStars">
+                        <DivRowCol12>
+                            <PersonAllStarEditor AllStars="EditModel.AllStars"
+                                                 Sports="EditModel.Sports" />
+                        </DivRowCol12>
+                    </TabPanel>
+                    <TabPanel BadgeColor="MudBlazor.Color.Success"
+                              BadgeData="EditModel.Awards.Count(award => !award.IsDeleted)"
+                              DisplayBadge="true"
+                              Text="Awards">
                         <DivRowCol12>
                             <PersonAwardEditor Awards="EditModel.Awards"
                                                Sports="EditModel.Sports" />
                         </DivRowCol12>
-                    </MudTabPanel>
-                    <MudTabPanel BadgeColor="MudBlazor.Color.Success"
-                                 BadgeData="EditModel.Leaders.Count(leader => !leader.IsDeleted)"
-                                 Text="Leaders">
+                    </TabPanel>
+                    <TabPanel BadgeColor="MudBlazor.Color.Success"
+                              BadgeData="EditModel.Leaders.Count(leader => !leader.IsDeleted)"
+                              DisplayBadge="true"
+                              Text="Leaders">
                         <DivRowCol12>
                             <PersonLeaderEditor Leaders="EditModel.Leaders"
                                                 Sports="EditModel.Sports" />
                         </DivRowCol12>
-                    </MudTabPanel>
-                    <MudTabPanel Text="Records">
+                    </TabPanel>
+                    <TabPanel Text="Records">
                         <DivRowCol12>
                             <Text>Career Records</Text>
                             <PersonCareerRecordEditor CareerRecords="EditModel.CareerRecords"
@@ -66,8 +67,8 @@
                             <PersonSingleSeasonRecordEditor SingleSeasonRecords="EditModel.SingleSeasonRecords"
                                                             Sports="EditModel.Sports" />
                         </DivRowCol12>
-                    </MudTabPanel>
-                    <MudTabPanel Text="Retired Numbers">
+                    </TabPanel>
+                    <TabPanel Text="Retired Numbers">
                         <DivRowCol12>
                             <Text>College Retired Numbers</Text>
                             <PersonCollegeRetiredNumberEditor CollegeRetiredNumbers="EditModel.CollegeRetiredNumbers"
@@ -79,7 +80,7 @@
                             <PersonRetiredNumberEditor RetiredNumbers="EditModel.RetiredNumbers"
                                                        Sports="EditModel.Sports" />
                         </DivRowCol12>
-                    </MudTabPanel>
+                    </TabPanel>
                 </TabControl>
             </Div>
         </ChildContent>

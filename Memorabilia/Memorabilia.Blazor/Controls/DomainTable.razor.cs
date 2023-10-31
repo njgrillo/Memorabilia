@@ -3,9 +3,6 @@
 public partial class DomainTable
 {
     [Inject]
-    public IDialogService DialogService { get; set; }
-
-    [Inject]
     public NavigationManager NavigationManager { get; set; }
 
     [Inject]
@@ -39,17 +36,6 @@ public partial class DomainTable
 
     private bool FilterFunc1(DomainModel model) 
         => FilterFunc(model, _search);
-
-    protected async Task ShowDeleteConfirm(int id)
-    {
-        var dialog = DialogService.Show<DeleteDialog>(DeleteText);
-        var result = await dialog.Result;
-
-        if (result.Canceled)
-            return;
-
-        await Delete(id);
-    }
 
     private async Task Delete(int id)
     {

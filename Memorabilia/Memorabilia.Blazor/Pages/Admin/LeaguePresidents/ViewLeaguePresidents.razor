@@ -13,14 +13,10 @@
                   Items="@Model.Presidents"
                   Striped="true">
             <ToolBarContent>
-                <MudText Typo="Typo.h6">@Model.PageTitle</MudText>
+                <ToolbarTitle Text="@Model.PageTitle" />
                 <MudSpacer />
-                <MudTextField @bind-Value="Search"
-                              Adornment="Adornment.Start"
-                              AdornmentIcon="@Icons.Material.Filled.Search"
-                              Class="mt-0"
-                              IconSize="MudBlazor.Size.Medium"
-                              Placeholder="Search" />
+                <ToolbarSearchField SearchText="@Search"
+                                    SearchTextChanged="@((p) => Search = p)" />
             </ToolBarContent>
             <HeaderContent>
                 <MudTh>Sport League</MudTh>
@@ -37,12 +33,10 @@
                 <MudTd DataLabel="Begin Year">@context.BeginYear?.ToString()</MudTd>
                 <MudTd DataLabel="End Year">@context.EndYear?.ToString()</MudTd>
                 <MudTd DataLabel="">
-                    <GridEditButton NavigationPath="@($"{Model.RoutePrefix}/{EditModeType.Update.Name}/{context.Id}")" />
-                    <MudTooltip Text="Delete">
-                        <MudFab Color="MudBlazor.Color.Secondary"
-                                StartIcon="@Icons.Material.Outlined.DeleteOutline"
-                                OnClick="@(_ => ShowDeleteConfirm(context.Id, "Delete President"))" />
-                    </MudTooltip>
+                    <NavigationGridButton NavigationPath="@($"{Model.RoutePrefix}/{EditModeType.Update.Name}/{context.Id}")" />
+                    <DeleteGridButton ConfirmMessage="Delete President"
+                                      OnDelete="@(_ => Delete(context.Id))"
+                                      ShowConfirm="true" />
                 </MudTd>
             </RowTemplate>
             <PagerContent>

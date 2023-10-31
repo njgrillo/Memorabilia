@@ -1,0 +1,10 @@
+﻿<MudText Typo="Typo.h6">
+    <Condition Evaluation="@(!Text.IsNullOrEmpty())">
+        <Match>
+            @Text
+        </Match>
+        <NotMatch>
+            @ChildContent
+        </NotMatch>
+    </Condition>    
+</MudText>

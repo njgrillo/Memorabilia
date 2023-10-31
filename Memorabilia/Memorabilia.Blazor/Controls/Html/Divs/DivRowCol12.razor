@@ -1,6 +1,11 @@
-﻿<Div Class="row" 
-     Hidden="@Hidden">
-    <Div Class="col-12">
-        @ChildContent
-    </Div>
-</Div>
+﻿<Condition Evaluation="Visible">
+    <Match>
+        <Div Class="row">
+            <Div Class="col-12">
+                @ChildContent
+            </Div>
+        </Div>
+    </Match>
+</Condition>
+
+

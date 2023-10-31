@@ -22,7 +22,7 @@
                   ServerData="@(new Func<TableState, Task<TableData<SignatureIdentificationModel>>>(OnRead))"
                   Striped="true">
             <ToolBarContent>
-                <MudText Typo="Typo.h6">Signature Identifications</MudText>
+                <ToolbarTitle Text="Signature Identifications" />
             </ToolBarContent>
             <HeaderContent>
                 <MudTh></MudTh>
@@ -35,17 +35,14 @@
             </HeaderContent>
             <RowTemplate>
                 <MudTd>
-                    <MudIconButton @onclick="@(_ => ToggleChildContent(context.Id))"
-                                   Icon="@context.ToggleIcon"></MudIconButton>
+                    <MudIconButton Icon="@context.ToggleIcon"
+                                   OnClick="@(_ => ToggleChildContent(context.Id))" />
                 </MudTd>
                 <MudTh>
-                    <MudImage @onclick="@(_ => OnImageClick(context))"
-                              Class="rounded-lg can-click"
-                              Elevation="5"
-                              Height="200"
-                              ObjectFit="@ObjectFit.Cover"
-                              Src="@(ImageService.GetUserImageData(context.Images.First().FileName, context.CreatedUser.Id))"
-                              Width="200" />
+                    <GridImage AllowNavigation="true" 
+                               ImageData="@(ImageService.GetUserImageData(context.Images.First().FileName, context.CreatedUser.Id))"
+                               ImageLoaded="@(_ => StateHasChanged())"
+                               OnClick="@(_ => OnImageClick(context))" />
                 </MudTh>
                 <MudTd DataLabel="ConsensusPerson">
                     @(context.ConsensusPerson?.DisplayName ?? "No results yet")
@@ -54,12 +51,11 @@
                 <MudTd DataLabel="CreatedBy">@context.CreatedUser.Username</MudTd>
                 <MudTd DataLabel="CreatedOn">@(context.CreatedDate.ToString("MM-dd-yyyy hh:mm:ss tt"))</MudTd>
                 <MudTd DataLabel="">
-                    <MudTooltip Text="Identify">
-                        <MudFab Color="MudBlazor.Color.Primary"
-                                StartIcon="@Icons.Material.Outlined.PersonSearch"
-                                OnClick="@(_ => View(context.Id))"
-                                Size="@MudBlazor.Size.Large" />
-                    </MudTooltip>
+                    <Fab Color="MudBlazor.Color.Primary"
+                         OnClick="@(_ => View(context.Id))"
+                         Size="@MudBlazor.Size.Large"
+                         StartIcon="@Icons.Material.Outlined.PersonSearch"
+                         TooltipText="Identify" />
                 </MudTd>
             </RowTemplate>
             <ChildRowContent>
@@ -80,7 +76,7 @@
                                           Items="@context.People"
                                           Striped="true">
                                     <ToolBarContent>
-                                        <MudText Typo="Typo.h6">Opinions</MudText>
+                                        <ToolbarTitle Text="Opinions" /> 
                                         <MudSpacer />
                                     </ToolBarContent>
                                     <HeaderContent>
@@ -92,10 +88,8 @@
                                     </HeaderContent>
                                     <RowTemplate Context="person">
                                         <MudTd DataLabel="">
-                                            <GridImage AllowNavigation="false"
-                                                       ImageLoaded="OnImageLoaded"
-                                                       ImageFileName="@person.Person.ImageFileName"
-                                                       IsPersonImage="true" />
+                                            <GridImage ImageData="@(ImageService.GetPersonImageData(person.Person.ImageFileName))"
+                                                       ImageLoaded="@(_ => StateHasChanged())" />
                                         </MudTd>
                                         <MudTd DataLabel="Person">@person.Person.DisplayName</MudTd>
                                         <MudTd DataLabel="Note">@person.Note</MudTd>

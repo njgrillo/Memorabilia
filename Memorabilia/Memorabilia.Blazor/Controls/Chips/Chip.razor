@@ -1,0 +1,18 @@
+﻿<Condition Evaluation="Visible">
+    <Match>
+        <Condition Evaluation="@(!TooltipText.IsNullOrEmpty())">
+            <Match>
+                <MudTooltip Text="@TooltipText">
+                    <MudChip Color="Color"
+                             Size="Size"
+                             Text="@Text" />
+                </MudTooltip>
+            </Match>
+            <NotMatch>
+                <MudChip Color="Color"
+                         Size="Size"
+                         Text="@Text" />
+            </NotMatch>
+        </Condition>
+    </Match>
+</Condition>

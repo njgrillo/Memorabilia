@@ -5,13 +5,14 @@
         <TabControl Centered="false">
             <Iterations Context="occupation"
                         Items="Model.Occupations">
-                <MudTabPanel BadgeColor="MudBlazor.Color.Success"
-                             Text="@occupation.OccupationName">
+                <TabPanel BadgeColor="MudBlazor.Color.Success"
+                          DisplayBadge="true"
+                          Text="@occupation.OccupationName">
                     <DivRowCol12>
                         <RolesProfile Occupation="occupation"
                                       Person="Person" />
                     </DivRowCol12>
-                </MudTabPanel>
+                </TabPanel>
             </Iterations>
         </TabControl>
     </Match>

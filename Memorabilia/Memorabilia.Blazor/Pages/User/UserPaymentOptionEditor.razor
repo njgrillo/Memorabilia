@@ -1,5 +1,4 @@
-﻿<MudStack Class="col-12"
-          Row="true"
+﻿<RowStack Class="col-12"
           Style="margin-bottom:1%;">
     <PaymentOptionAutoComplete Disabled="@(EditMode == EditModeType.Update)"
                                SelectedValue="EditModel.PaymentOption"
@@ -14,7 +13,7 @@
     <AddUpdateMudFab EditMode="EditMode"
                      OnAdd="Add"
                      OnUpdate="Update" />
-</MudStack>
+</RowStack>
 <Div Style="margin-left:1%;">
     <MudTable Bordered="false"
               Dense="false"
@@ -32,16 +31,8 @@
             <MudTd DataLabel="Handle">@context.PaymentHandle</MudTd>
             <MudTd DataLabel="Type">@context.PaymentOptionTypeName</MudTd>
             <MudTd DataLabel="">
-                <MudTooltip Text="Edit">
-                    <MudFab Color="MudBlazor.Color.Primary"
-                            StartIcon="@Icons.Material.Outlined.ModeEditOutline"
-                            OnClick="@(_ => Edit(context))" />
-                </MudTooltip>
-                <MudTooltip Text="Delete">
-                    <MudFab Color="MudBlazor.Color.Secondary"
-                            StartIcon="@Icons.Material.Outlined.DeleteOutline"
-                            OnClick="@(_ => Delete(context))" />
-                </MudTooltip>
+                <EditGridButton OnEdit="@(_ => Edit(context))" />
+                <DeleteGridButton OnDelete="@(_ => Delete(context))" />
             </MudTd>
         </RowTemplate>
     </MudTable>

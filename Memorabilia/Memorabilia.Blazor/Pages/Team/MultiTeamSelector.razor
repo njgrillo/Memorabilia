@@ -1,14 +1,11 @@
-﻿<Condition Evaluation="CanToggle">
-    <Match>
-        <Div Class="row">
-            <Div Class="col-3">
-                <Switch Checked="@_hasTeams"
-                        CheckedChanged="TeamCheckboxClicked"
-                        Label="@_itemTypeNameLabel" />
-            </Div>
-        </Div>
-    </Match>    
-</Condition> 
+﻿<Div Class="row"
+     Visible="CanToggle">
+    <Div Class="col-3">
+        <Switch Checked="@_hasTeams"
+                CheckedChanged="TeamCheckboxClicked"
+                Label="@_itemTypeNameLabel" />
+    </Div>
+</Div>
 <Div Class="row" 
      Hidden="@(!_displayTeams)"
      Style="margin-top:1%;margin-bottom:1%;padding-left:10px;">
@@ -40,11 +37,7 @@
             <RowTemplate>
                 <MudTd DataLabel="Team">@context.DisplayName</MudTd>
                 <MudTd DataLabel="">
-                    <MudTooltip Text="Delete">
-                        <MudFab Color="MudBlazor.Color.Secondary"
-                                StartIcon="@Icons.Material.Outlined.DeleteOutline"
-                                OnClick="@(_ => context.IsDeleted = true)" />
-                    </MudTooltip>  
+                    <DeleteGridButton OnDelete="@(_ => context.IsDeleted = true)" />
                 </MudTd>
             </RowTemplate>
         </MudTable>

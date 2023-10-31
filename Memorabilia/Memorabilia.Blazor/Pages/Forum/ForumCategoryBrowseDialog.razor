@@ -9,14 +9,10 @@
                       Items="@ForumCategory.All"
                       Striped="true">
                 <ToolBarContent>
-                    <MudText Typo="Typo.h6">Forum Categories</MudText>
+                    <ToolbarTitle Text="Forum Categories" />
                     <MudSpacer />
-                    <MudTextField @bind-Value="_search"
-                                  Adornment="Adornment.Start"
-                                  AdornmentIcon="@Icons.Material.Filled.Search"
-                                  Class="mt-0"
-                                  IconSize="MudBlazor.Size.Medium"
-                                  Placeholder="Search" />
+                    <ToolbarSearchField SearchText="@_search"
+                                        SearchTextChanged="@((p) => _search = p)" />
                 </ToolBarContent>
                 <HeaderContent>
                     <MudTh>
@@ -31,12 +27,11 @@
                     <MudTd DataLabel="Name">@item.Name</MudTd>
                     <MudTd DataLabel="Abbreviation">@item.Abbreviation</MudTd>
                     <MudTd>
-                        <MudTooltip Text="Select">
-                            <MudFab Color="MudBlazor.Color.Primary"
-                                    StartIcon="@Icons.Material.Outlined.Edit"
-                                    OnClick="@(_ => Select(@item.Id))"
-                                    Size="@MudBlazor.Size.Small" />
-                        </MudTooltip>
+                        <Fab Color="MudBlazor.Color.Primary"
+                             OnClick="@(_ => Select(@item.Id))"
+                             Size="@MudBlazor.Size.Small"
+                             StartIcon="@Icons.Material.Outlined.Edit"
+                             TooltipText="Select" />
                     </MudTd>
                 </RowTemplate>
                 <PagerContent>

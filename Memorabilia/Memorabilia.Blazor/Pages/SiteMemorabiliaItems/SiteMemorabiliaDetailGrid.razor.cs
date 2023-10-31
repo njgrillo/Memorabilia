@@ -11,9 +11,6 @@ public partial class SiteMemorabiliaDetailGrid : ReroutePage
     [Inject]
     public IMediator Mediator { get; set; }
 
-    [Inject]
-    public NavigationManager NavigationManager { get; set; }
-
     [Parameter]
     public bool CanSelect { get; set; }
 
@@ -50,9 +47,6 @@ public partial class SiteMemorabiliaDetailGrid : ReroutePage
 
     private bool _canInteract;
 
-    private MemorabiliaSearchCriteria _filter
-        = new();
-
     private bool _resetPaging;
 
     private MudTable<SiteMemorabiliaModel> _table
@@ -71,7 +65,6 @@ public partial class SiteMemorabiliaDetailGrid : ReroutePage
             return;
 
         _resetPaging = true;
-        _filter = Filter;
 
         await _table.ReloadServerData();
 

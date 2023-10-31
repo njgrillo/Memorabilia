@@ -1,6 +1,5 @@
 ﻿<DivRowFormGroup>
-    <MudStack Class="col-12"
-              Row="true"
+    <RowStack Class="col-12"
               Style="margin-bottom:1%;">
         <CollegeAutoComplete Colleges="Colleges"
                              Disabled="@(EditMode == EditModeType.Update)"
@@ -12,7 +11,7 @@
         <AddUpdateMudFab EditMode="EditMode"
                          OnAdd="Add"
                          OnUpdate="Update" />
-    </MudStack>
+    </RowStack>
 </DivRowFormGroup>
 <Div Class="row">
     <Div Class="col-12">
@@ -30,16 +29,8 @@
                 <MudTd DataLabel="College">@context.CollegeName</MudTd>
                 <MudTd DataLabel="Number">@context.PlayerNumber</MudTd>
                 <MudTd DataLabel="">
-                    <MudTooltip Text="Edit">
-                        <MudFab Color="MudBlazor.Color.Primary"
-                                StartIcon="@Icons.Material.Outlined.ModeEditOutline"
-                                OnClick="@(_ => Edit(context))" />
-                    </MudTooltip>
-                    <MudTooltip Text="Delete">
-                        <MudFab Color="MudBlazor.Color.Secondary"
-                                StartIcon="@Icons.Material.Outlined.DeleteOutline"
-                                OnClick="@(_ => context.IsDeleted = true)" />
-                    </MudTooltip>
+                    <EditGridButton OnEdit="@(_ => Edit(context))" />
+                    <DeleteGridButton OnDelete="@(_ => context.IsDeleted = true)" />
                 </MudTd>
             </RowTemplate>
         </MudTable>

@@ -7,8 +7,7 @@
     </Div>
 </DivRowFormGroup>
 <DivRowFormGroup>
-    <MudStack Class="col-6"
-              Row="true"
+    <RowStack Class="col-6"
               Style="margin-bottom:1%;">        
         <NullableIntField Label="Year"
                           Value="Model.Year"
@@ -25,7 +24,7 @@
         <AddUpdateMudFab EditMode="EditMode"
                          OnAdd="Add"
                          OnUpdate="Update" />
-    </MudStack>
+    </RowStack>
 </DivRowFormGroup>
 <Div Class="row">
     <Div Class="col-6">
@@ -49,16 +48,8 @@
                 <MudTd DataLabel="Pick">@context.Pick</MudTd>
                 <MudTd DataLabel="Overall">@context.Overall</MudTd>
                 <MudTd DataLabel="">
-                    <MudTooltip Text="Edit">
-                        <MudFab Color="MudBlazor.Color.Primary"                                
-                                StartIcon="@Icons.Material.Outlined.ModeEditOutline"
-                                OnClick="@(_ => Edit(context))" />
-                    </MudTooltip> 
-                    <MudTooltip Text="Delete">
-                        <MudFab Color="MudBlazor.Color.Secondary"
-                                StartIcon="@Icons.Material.Outlined.DeleteOutline"
-                                OnClick="@(_ => context.IsDeleted = true)" />
-                    </MudTooltip>  
+                    <EditGridButton OnEdit="@(_ => Edit(context))" />
+                    <DeleteGridButton OnDelete="@(_ => context.IsDeleted = true)" />
                 </MudTd>
             </RowTemplate>
         </MudTable>

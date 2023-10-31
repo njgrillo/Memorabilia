@@ -13,24 +13,20 @@
                                     Items="Images">
                             <MudCarouselItem Color="@MudBlazor.Color.Primary"
                                              Transition="Transition.Slide">
-                                <MudImage Class="rounded-lg"
-                                          Elevation="5"
-                                          Height="600"
-                                          ObjectFit="@ObjectFit.Fill"
-                                          Src="@(ImageService.GetUserImageData(image.FileName, UserId))"
-                                          Width="600" />
+                                <Image Height="600"
+                                       ImageData="@(ImageService.GetUserImageData(image.FileName, UserId))"
+                                       ObjectFit="@ObjectFit.Fill"                                          
+                                       Width="600" />
                             </MudCarouselItem>
                         </Iterations>
                     </MudCarousel>
                 </Div>                
             </Match>
             <NotMatch>
-                <MudImage Class="rounded-lg"
-                          Elevation="5"
-                          Height="600"
-                          ObjectFit="@ObjectFit.Fill"
-                          Src="@(ImageService.GetDomainImageData(ImageFileName.ImageNotAvailable))"
-                          Width="600" />
+                <Image Height="600"
+                       ImageData="@(ImageService.GetDomainImageData(ImageFileName.ImageNotAvailable))"
+                       ObjectFit="@ObjectFit.Fill"                          
+                       Width="600" />
             </NotMatch>
         </Condition>
     </DialogContent>

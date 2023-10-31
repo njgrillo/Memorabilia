@@ -19,11 +19,7 @@
         <MudTd DataLabel="Name">@context.Name</MudTd>
         <MudTd DataLabel="Description">@context.Description</MudTd>
         <MudTd DataLabel="">
-            <MudTooltip Text="Delete">
-                <MudFab Color="MudBlazor.Color.Secondary"
-                        StartIcon="@Icons.Material.Outlined.DeleteOutline"
-                        OnClick="@(_ => Remove(context))" />
-            </MudTooltip>
+            <DeleteGridButton OnDelete="@(_ => Remove(context))" />
         </MudTd>
     </RowTemplate>
 </MudTable>

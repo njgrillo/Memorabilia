@@ -69,23 +69,22 @@
                                SelectedTextChanged="@((p) => EditModel.Note = p)" />
                 </Div>
                 <Div Class="col-6">
-                    <MudExpansionPanels>
-                        <MudExpansionPanel Text="Collections">
+                    <ExpansionPanels>
+                        <ExpansionPanel Expanded="false" 
+                                        Text="Collections">
                             <MultiCollectionSelector SelectedCollections="EditModel.Collections" />
-                        </MudExpansionPanel>
-                        <Condition Evaluation="EditModel.ThroughTheMailIds.Any()">
-                            <Match>
-                                <MudExpansionPanel Text="Through The Mail">
-                                    <MemorabiliaThroughTheMailGrid ThroughTheMailIds="EditModel.ThroughTheMailIds" />
-                                </MudExpansionPanel>
-                            </Match>
-                        </Condition>                        
-                    </MudExpansionPanels>                    
+                        </ExpansionPanel>
+                        <ExpansionPanel Expanded="false"
+                                        Text="Through The Mail"
+                                        Visible="EditModel.ThroughTheMailIds.Any()">
+                            <MemorabiliaThroughTheMailGrid ThroughTheMailIds="EditModel.ThroughTheMailIds" />
+                        </ExpansionPanel>
+                    </ExpansionPanels>                    
                 </Div>
             </DivRowFormGroup>
             <DivRowFormGroup>
                 <Div Class="col-6">
-                    <MudStack Row="true">
+                    <RowStack>
                         <Switch Checked="@EditModel.IsNumbered"
                                 CheckedChanged="(p) => EditModel.IsNumbered = p"
                                 Label="Is Numbered?" />
@@ -98,7 +97,7 @@
                         <Switch Checked="@EditModel.ForTrade"
                                 CheckedChanged="(p) => EditModel.ForTrade = p"
                                 Label="Available For Trade?" />
-                    </MudStack>
+                    </RowStack>
                 </Div>
             </DivRowFormGroup>
             <DivRowFormGroup Hidden="@(!EditModel.IsNumbered)">

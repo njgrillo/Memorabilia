@@ -13,14 +13,10 @@
                   Items="@Model.Divisions"
                   Striped="true">
             <ToolBarContent>
-                <MudText Typo="Typo.h6">@Model.PageTitle</MudText>
+                <ToolbarTitle Text="@Model.PageTitle" />
                 <MudSpacer />
-                <MudTextField @bind-Value="Search"
-                              Adornment="Adornment.Start"
-                              AdornmentIcon="@Icons.Material.Filled.Search"
-                              Class="mt-0"
-                              IconSize="MudBlazor.Size.Medium"
-                              Placeholder="Search" />
+                <ToolbarSearchField SearchText="@Search"
+                                    SearchTextChanged="@((p) => Search = p)" />
             </ToolBarContent>
             <HeaderContent>
                 <MudTh>Conference</MudTh>
@@ -35,12 +31,10 @@
                 <MudTd DataLabel="Name">@context.Name</MudTd>
                 <MudTd DataLabel="Abbreviation">@context.Abbreviation</MudTd>
                 <MudTd DataLabel="">
-                    <GridEditButton NavigationPath="@($"{Model.RoutePrefix}/{EditModeType.Update.Name}/{context.Id}")" />
-                    <MudTooltip Text="Delete">
-                        <MudFab Color="MudBlazor.Color.Secondary"
-                                StartIcon="@Icons.Material.Outlined.DeleteOutline"
-                                OnClick="@(_ => ShowDeleteConfirm(context.Id, "Delete Division"))" />
-                    </MudTooltip>
+                    <NavigationGridButton NavigationPath="@($"{Model.RoutePrefix}/{EditModeType.Update.Name}/{context.Id}")" />
+                    <DeleteGridButton ConfirmMessage="Delete Division"
+                                      OnDelete="@(_ => Delete(context.Id))"
+                                      ShowConfirm="true" />
                 </MudTd>
             </RowTemplate>
             <PagerContent>

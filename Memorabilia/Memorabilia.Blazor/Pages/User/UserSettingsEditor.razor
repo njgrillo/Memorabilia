@@ -1,13 +1,12 @@
 ﻿<Div Style="margin-top:1%;margin-bottom:1%;margin-left:1%;margin-right:1%;">
     <Div Class="row">
         <Div Class="col-3">
-            <h3>
+            <Text Typography="Typo.h3">
                 User Settings
-            </h3>
+            </Text>
         </Div>
     </Div>
-    <MudExpansionPanel IsExpanded="true"
-                       Text="Appearance">
+    <ExpansionPanel Text="Appearance">
         <DivRowFormGroup>
             <Div Class="col-3">
                 <Switch Checked="EditModel.UseDarkTheme"
@@ -15,9 +14,8 @@
                         Label="Use Dark Theme?" />
             </Div>
         </DivRowFormGroup>
-    </MudExpansionPanel>    
-    <MudExpansionPanel IsExpanded="true"
-                       Text="Login Settings">
+    </ExpansionPanel>    
+    <ExpansionPanel Text="Login Settings">
         <DivRowFormGroup>
             <Div Class="col-3">
                 <TextField HelperText="Used for Google Authentication"
@@ -41,12 +39,11 @@
                            SelectedTextChanged="@((p) => EditModel.XHandle = p)" />
             </Div>
         </DivRowFormGroup>
-    </MudExpansionPanel>
-    <MudExpansionPanel IsExpanded="true"
-                       Text="Membership Settings">
+    </ExpansionPanel>
+    <ExpansionPanel Text="Membership Settings">
         <DivRowFormGroup>
             <Div Style="margin-left:1%;margin-bottom:1%">
-                <MudStack Row="true">
+                <RowStack>
                     <Text Typography="Typo.h6">
                         Subscription: <b>@(ApplicationStateService.SubscriberLevel)</b>
                     </Text>
@@ -60,26 +57,20 @@
                     <Text Typography="Typo.h6">
                         Status: <b>@ApplicationStateService.CurrentUser.MembershipStatus()</b>
                     </Text>
-                </MudStack>
+                </RowStack>
             </Div>                       
         </DivRowFormGroup>
         <DivRowFormGroup>
             <Div Style="margin-left:1%;">
-                <MudStack Row="true">
-                    <Condition Evaluation="@_showUpgradeMembership">
-                        <Match>
-                            <CustomButton Color="MudBlazor.Color.Success"
-                                          OnClick="@UpgradeMembership"
-                                          Text="Upgrade" />
-                        </Match>
-                    </Condition>
-                    <Condition Evaluation="@_showCancelMembership">
-                        <Match>
-                            <CustomButton Color="MudBlazor.Color.Error"
-                                          OnClick="@CancelMembership"
-                                          Text="Cancel Membership" />
-                        </Match>
-                    </Condition>
+                <RowStack>
+                    <CustomButton Color="MudBlazor.Color.Success"
+                                  OnClick="@UpgradeMembership"
+                                  Text="Upgrade"
+                                  Visible="@_showUpgradeMembership" />
+                    <CustomButton Color="MudBlazor.Color.Error"
+                                  OnClick="@CancelMembership"
+                                  Text="Cancel Membership"
+                                  Visible="@_showCancelMembership" />
                     <Condition Evaluation="@(ApplicationStateService.CurrentUser.IsActiveMember())">
                         <Match>
                             <MudLink Href="@StripeSettings.CustomerSelfManageUrl" Target="_blank">
@@ -87,22 +78,20 @@
                             </MudLink>
                         </Match>
                     </Condition>
-                </MudStack>
+                </RowStack>
             </Div>
         </DivRowFormGroup>
-    </MudExpansionPanel>
-    <MudExpansionPanel IsExpanded="true"
-                       Text="Payment Settings">
+    </ExpansionPanel>
+    <ExpansionPanel Text="Payment Settings">
         <DivRowFormGroup>
             <UserPaymentOptionEditor PaymentOptions="EditModel.PaymentOptions" />
         </DivRowFormGroup>
-    </MudExpansionPanel>
-    <MudExpansionPanel IsExpanded="true"
-                       Text="Social Medias">
+    </ExpansionPanel>
+    <ExpansionPanel Text="Social Medias">
         <DivRowFormGroup>
             <UserSocialMediaEditor SocialMedias="EditModel.SocialMedias" />
         </DivRowFormGroup>
-    </MudExpansionPanel>
+    </ExpansionPanel>
     <Div Style="margin-bottom:1%;margin-right:1%;text-align:right;">
         <SaveButton OnClick="OnSave"
                     Text="Save" />

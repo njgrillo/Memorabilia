@@ -1,12 +1,12 @@
 ﻿<Div Class="row"
      Style="margin-left:1%;margin-bottom:1%;">
-    <MudStack Row="true">
+    <RowStack>
         <Switch Checked="@_displayCompleted"
                 CheckedChanged="(p) => _displayCompleted = p"
                 Label="Display Completed?" />
         <AddButton OnClick="AddProjectPerson"
                    Text="Add Project Person" />
-    </MudStack>
+    </RowStack>
 </Div>
 <Div Style="margin-right:1%;">
     <ProjectPersonGrid AllItems="Model.People"

@@ -1,6 +1,5 @@
 ﻿<DivRowFormGroup>
-    <MudStack Class="col-10"
-              Row="true"
+    <RowStack Class="col-10"
               Style="margin-bottom:1%;">
         <OccupationAutoComplete SelectedValue="Model.Occupation"
                                 SelectionChanged="(p) => Model.Occupation = p" />
@@ -10,7 +9,7 @@
         <AddUpdateMudFab EditMode="EditMode"
                          OnAdd="Add"
                          OnUpdate="Update" />
-    </MudStack>
+    </RowStack>
 </DivRowFormGroup>
 <DivRowCol12>
     <MudTable Bordered="false"
@@ -27,16 +26,8 @@
             <MudTd DataLabel="Occupation">@context.OccupationName</MudTd>
             <MudTd DataLabel="Occupation Type">@context.OccupationTypeName</MudTd>
             <MudTd DataLabel="">
-                <MudTooltip Text="Edit">
-                    <MudFab Color="MudBlazor.Color.Primary"
-                            StartIcon="@Icons.Material.Outlined.ModeEditOutline"
-                            OnClick="@(_ => Edit(context))" />
-                </MudTooltip>
-                <MudTooltip Text="Delete">
-                    <MudFab Color="MudBlazor.Color.Secondary"
-                            StartIcon="@Icons.Material.Outlined.DeleteOutline"
-                            OnClick="@(_ => Delete(context))" />
-                </MudTooltip>
+                <EditGridButton OnEdit="@(_ => Edit(context))" />
+                <DeleteGridButton OnDelete="@(_ => context.IsDeleted = true)" />
             </MudTd>
         </RowTemplate>
     </MudTable>

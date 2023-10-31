@@ -41,18 +41,14 @@
         </Div>
     </Div>
     <br />
-    <Div Class="row">
+    <Div Class="row" Visible="_hasImage">
         <Div Class="col-3">
-            <Condition Evaluation="_hasImage">
-                <Match>
-                    <ImageEditor CanRemove="false"
-                                 HasPrimary="false"
-                                 ImageFileName="@EditModel.FileName"
-                                 ImageRootType="ImageRootType.Pewter"
-                                 ImageType="ImageType.Primary"
-                                 OnRemove="Remove" />
-                </Match>
-            </Condition>
+            <ImageEditor CanRemove="false"
+                         HasPrimary="false"
+                         ImageFileName="@EditModel.FileName"
+                         ImageRootType="ImageRootType.Pewter"
+                         ImageType="ImageType.Primary"
+                         OnRemove="Remove" />
         </Div>
     </Div>
 </PageEditor>

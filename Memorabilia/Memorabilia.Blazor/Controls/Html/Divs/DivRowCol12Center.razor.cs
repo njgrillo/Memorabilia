@@ -8,4 +8,8 @@ public partial class DivRowCol12Center
     [Parameter]
     public bool IncludePageBreakAtEnd { get; set; }
         = true;
+
+    [Parameter]
+    public bool Visible { get; set; }
+        = true;
 }

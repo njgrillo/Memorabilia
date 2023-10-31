@@ -23,11 +23,7 @@
         <RowTemplate>
             <MudTd DataLabel="Team">@context.ToString()</MudTd>
             <MudTd DataLabel="">
-                <MudTooltip Text="Delete">
-                    <MudFab Color="MudBlazor.Color.Secondary"
-                            StartIcon="@Icons.Material.Outlined.DeleteOutline"
-                            OnClick="@(_ => RemoveTeam(context))" />
-                </MudTooltip>
+                <DeleteGridButton OnDelete="@(_ => RemoveTeam(context))" />
             </MudTd>
         </RowTemplate>
     </MudTable>

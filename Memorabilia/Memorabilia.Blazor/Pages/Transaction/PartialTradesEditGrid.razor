@@ -18,7 +18,8 @@
     </HeaderContent>
     <RowTemplate>
         <MudTd DataLabel="">
-            <GridImage ImageLoaded="OnImageLoaded"
+            <GridImage AllowNavigation="true" 
+                       ImageLoaded="OnImageLoaded"
                        ImageFileName="@(context.Memorabilia.Images.FirstOrDefault(image => image.ImageTypeId == Constant.ImageType.Primary.Id)?.FileName ?? string.Empty)"
                        NavigationPath="@($"{NavigationPath.MemorabiliaImage}/{Constant.EditModeType.Update.Name}/{DataProtectorService.EncryptId(context.Memorabilia.Id)}")" />
         </MudTd>
@@ -27,16 +28,13 @@
         <MudTd DataLabel="Amount">@(context.CashIncludedAmount?.ToString("c") ?? string.Empty)</MudTd>
         <MudTd DataLabel="AmountType">@context.CashIncludedTypeName</MudTd>
         <MudTd DataLabel="">
-            <MudTooltip Text="Delete">
-                <MudFab Color="MudBlazor.Color.Secondary"
-                        StartIcon="@Icons.Material.Outlined.DeleteOutline"
-                        OnClick="@(_ => context.IsDeleted = true)" />
-            </MudTooltip>
+            <DeleteGridButton OnDelete="@(_ => context.IsDeleted = true)" />
         </MudTd>
     </RowTemplate>
     <RowEditingTemplate>
         <MudTd DataLabel="">
-            <GridImage ImageLoaded="OnImageLoaded"
+            <GridImage AllowNavigation="true" 
+                       ImageLoaded="OnImageLoaded"
                        ImageFileName="@(context.Memorabilia.Images.FirstOrDefault(image => image.ImageTypeId == Constant.ImageType.Primary.Id)?.FileName ?? string.Empty)"
                        NavigationPath="@($"{NavigationPath.MemorabiliaImage}/{Constant.EditModeType.Update.Name}/{DataProtectorService.EncryptId(context.Memorabilia.Id)}")" />
         </MudTd>

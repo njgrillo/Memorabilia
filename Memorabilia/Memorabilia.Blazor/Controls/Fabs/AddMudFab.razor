@@ -1,7 +1,24 @@
-﻿<MudTooltip Text="Add">
-    <MudFab Color="MudBlazor.Color.Primary"
-            StartIcon="@Icons.Material.Outlined.AddCircleOutline"
-            OnClick="Add" />
-</MudTooltip>
+﻿<Condition Evaluation="Visible">
+    <Match>
+        <Condition Evaluation="@(!TooltipText.IsNullOrEmpty())">
+            <Match>
+                <MudTooltip Text="@TooltipText">
+                    <MudFab Color="Color"
+                            OnClick="ButtonClicked"
+                            Size="Size"
+                            StartIcon="@StartIcon" />
+                </MudTooltip>
+            </Match>
+            <NotMatch>
+                <MudFab Color="Color"
+                        OnClick="ButtonClicked"
+                        Size="Size"
+                        StartIcon="@StartIcon" />
+            </NotMatch>
+        </Condition>
+    </Match>
+</Condition>
+
+
 
 

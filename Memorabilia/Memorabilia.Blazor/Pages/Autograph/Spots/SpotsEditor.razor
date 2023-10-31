@@ -15,24 +15,16 @@
                                MemorabiliaId="Model.MemorabiliaId" />
         </TimelineContent>
         <ImagePreview>
-            <Condition Evaluation="Model.HasMemorabiliaImages">
-                <Match>
-                    <DivRowCol12Center>
-                        <ViewMemorabiliaImagesButton MemorabiliaId="Model.MemorabiliaId" />
-                    </DivRowCol12Center>
-                </Match>
-            </Condition>
+            <DivRowCol12Center Visible="Model.HasMemorabiliaImages">
+                <ViewMemorabiliaImagesButton MemorabiliaId="Model.MemorabiliaId" />
+            </DivRowCol12Center>
         </ImagePreview>
         <ChildContent>
-            <DivRowFormGroup>
+            <DivRowFormGroup Visible="@(Model.ItemType != null)">
                 <Div Class="col-3">
-                    <Condition Evaluation="@(Model.ItemType != null)">
-                        <Match>
-                            <ItemTypeSpotDropDown ItemType="@Model.ItemType"
-                                                  SelectedValue="Model.SpotId"
-                                                  SelectionChanged="(p) => Model.SpotId = p" />
-                        </Match>
-                    </Condition>
+                    <ItemTypeSpotDropDown ItemType="@Model.ItemType"
+                                          SelectedValue="Model.SpotId"
+                                          SelectionChanged="(p) => Model.SpotId = p" />
                 </Div>
             </DivRowFormGroup>
         </ChildContent>

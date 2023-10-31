@@ -11,9 +11,6 @@ public partial class ViewSignatureIdentifications : ReroutePage
     [Inject]
     public IMediator Mediator { get; set; }
 
-    [Inject]
-    public NavigationManager NavigationManager { get; set; }  
-
     protected SignatureIdentificationsModel Model
         = new();
 

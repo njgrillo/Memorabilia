@@ -14,21 +14,17 @@
             </Div>
             <Div Class="row">
                 <Div Class="col-3">
-                    <MudStack Row="true"
-                                Spacing="0">
+                    <RowStack Spacing="0">
                         <NullableIntField Label="Rank"
-                                            Value="ProjectPerson.Rank"
-                                            ValueChanged="@((p) => ProjectPerson.Rank = p)" />
-                        <MudTooltip Text="Import Max Rank">
-                            <MudImage @onclick="@(() => ProjectPerson.Rank = MaxRank)"
-                                        Class="rounded-lg can-click"
-                                        Elevation="5"
-                                        Height="20"
-                                        ObjectFit="@ObjectFit.Cover"
-                                        Src="@(ImageService.GetDomainImageData(ImageFileName.Import))"
-                                        Width="20" />
-                        </MudTooltip>
-                    </MudStack>                        
+                                          Value="ProjectPerson.Rank"
+                                          ValueChanged="@((p) => ProjectPerson.Rank = p)" />
+                        <Image AllowNavigation="true"
+                               Height="20"
+                               ImageData="@(ImageService.GetDomainImageData(ImageFileName.Import))"
+                               OnClick="@(() => ProjectPerson.Rank = MaxRank)"
+                               TooltipText="Import Max Rank"
+                               Width="20" />
+                    </RowStack>                        
                 </Div>
                 <Div Class="col-3">
                     <PriorityTypeDropDown SelectedValue="ProjectPerson.PriorityTypeId"
@@ -44,42 +40,32 @@
                             Label="Is Upgrade?" />
                 </Div>
             </Div>
-            <Condition Evaluation="@(ProjectId > 0 && ProjectPerson.Person != null && ProjectPerson.Person.Id > 0)">
-                <Match>
-                    <Div Class="row" Style="margin-top:1%;">
-                        <Div Class="col-3">
-                            <Condition Evaluation="@(ProjectPerson.AutographId > 0)">
-                                <Match>
-                                    <MudTooltip Text="Remove link to Autograph">
-                                        <MudFab Color="MudBlazor.Color.Secondary"
-                                                StartIcon="@Icons.Material.Outlined.LinkOff"
-                                                OnClick="@(_ => ProjectPerson.AutographId = 0)" />
-                                    </MudTooltip>
-                                </Match>
-                                <NotMatch>
-                                    <MudTooltip Text="Link to Autograph">
-                                        <MudFab Color="MudBlazor.Color.Secondary"
-                                                StartIcon="@Icons.Material.Outlined.AddLink"
-                                                OnClick="@(_ => AddAutographLink(ProjectPerson))" />
-                                    </MudTooltip>
-                                </NotMatch>
-                            </Condition>
-                        </Div>
-                        <Div Class="col-3">
-                            <Condition Evaluation="@(ProjectPerson.AutographId > 0)">
-                                <Match>
-                                    <MudImage Class="rounded-lg can-click"
-                                                Elevation="5"
-                                                Height="100"
-                                                ObjectFit="@ObjectFit.Cover"
-                                                Src="@(ImageService.GetUserImageData(ProjectPerson.AutographFileName))"
-                                                Width="100" />
-                                </Match>
-                            </Condition>
-                        </Div>
-                    </Div>
-                </Match>
-            </Condition>                   
+            <Div Class="row"
+                 Style="margin-top:1%;"
+                 Visible="@(ProjectId > 0 && ProjectPerson.Person != null && ProjectPerson.Person.Id > 0)">
+                <Div Class="col-3">
+                    <Condition Evaluation="@(ProjectPerson.AutographId > 0)">
+                        <Match>
+                            <Fab Color="MudBlazor.Color.Secondary"
+                                 OnClick="@(_ => ProjectPerson.AutographId = 0)"
+                                 StartIcon="@Icons.Material.Outlined.LinkOff"
+                                 TooltipText="Remove link to Autograph" />
+                        </Match>
+                        <NotMatch>
+                            <Fab Color="MudBlazor.Color.Secondary"
+                                 OnClick="@(_ => AddAutographLink(ProjectPerson))"
+                                 StartIcon="@Icons.Material.Outlined.AddLink"
+                                 TooltipText="Link to Autograph" />
+                        </NotMatch>
+                    </Condition>
+                </Div>
+                <Div Class="col-3" 
+                     Visible="@(ProjectPerson.AutographId > 0)">
+                    <Image Height="100"
+                           ImageData="@(ImageService.GetUserImageData(ProjectPerson.AutographFileName))"
+                           Width="100" />
+                </Div>
+            </Div>
         </DivPad2>
     </DialogContent>
     <DialogActions>        

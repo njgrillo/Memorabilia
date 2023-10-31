@@ -12,7 +12,7 @@
                       TeamStep="EditModel.TeamStep" />
     </TimelineContent>
     <ChildContent>
-        <DivRowFormGroup Hidden="@(!EditModel.DisplayFranchise)">
+        <DivRowFormGroup Visible="EditModel.DisplayFranchise">
             <Div Class="col-3">
                 <SportLeagueLevelDropDown SelectedValue="EditModel.SportLeagueLevelId"
                                           SelectionChanged="(p) => EditModel.SportLeagueLevelId = p" />

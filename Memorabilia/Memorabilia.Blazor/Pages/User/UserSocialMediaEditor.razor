@@ -1,5 +1,4 @@
-﻿<MudStack Class="col-12"
-          Row="true"
+﻿<RowStack Class="col-12"
           Style="margin-bottom:1%;">
     <SocialMediaTypeAutoComplete Disabled="@(EditMode == EditModeType.Update)"
                                  SelectedValue="EditModel.SocialMediaType"
@@ -11,7 +10,7 @@
     <AddUpdateMudFab EditMode="EditMode"
                      OnAdd="Add"
                      OnUpdate="Update" />
-</MudStack>
+</RowStack>
 <Div Style="margin-left:1%;">
     <MudTable Bordered="false"
               Dense="false"
@@ -27,16 +26,8 @@
             <MudTd DataLabel="Type">@context.SocialMediaTypeName</MudTd>
             <MudTd DataLabel="Handle">@context.Handle</MudTd>
             <MudTd DataLabel="">
-                <MudTooltip Text="Edit">
-                    <MudFab Color="MudBlazor.Color.Primary"
-                            StartIcon="@Icons.Material.Outlined.ModeEditOutline"
-                            OnClick="@(_ => Edit(context))" />
-                </MudTooltip>
-                <MudTooltip Text="Delete">
-                    <MudFab Color="MudBlazor.Color.Secondary"
-                            StartIcon="@Icons.Material.Outlined.DeleteOutline"
-                            OnClick="@(_ => context.IsDeleted = true)" />
-                </MudTooltip>
+                <EditGridButton OnEdit="@(_ => Edit(context))" />
+                <DeleteGridButton OnDelete="@(_ => context.IsDeleted = true)" />
             </MudTd>
         </RowTemplate>
     </MudTable>

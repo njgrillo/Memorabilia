@@ -1,25 +1,28 @@
 ﻿<DivPad2>
     <TabControl>
-        <MudTabPanel BadgeColor="MudBlazor.Color.Error"
-                     BadgeData="_notConfiguredAwards.Length"
-                     Text="Not Configured">
+        <TabPanel BadgeColor="MudBlazor.Color.Error"
+                  BadgeData="_notConfiguredAwards.Length"
+                  DisplayBadge="true"
+                  Text="Not Configured">
             <DivRowCol12>
                 <AwardManagementGrid Awards="_notConfiguredAwards" />
             </DivRowCol12>
-        </MudTabPanel>
-        <MudTabPanel BadgeColor="MudBlazor.Color.Warning"
-                     BadgeData="_missingYearsAwards.Length"
-                     Text="Missing Year(s)">
+        </TabPanel>
+        <TabPanel BadgeColor="MudBlazor.Color.Warning"
+                  BadgeData="_missingYearsAwards.Length"
+                  DisplayBadge="true"
+                  Text="Missing Year(s)">
             <DivRowCol12>
                 <AwardManagementGrid Awards="_missingYearsAwards" />
             </DivRowCol12>
-        </MudTabPanel>
-        <MudTabPanel BadgeColor="MudBlazor.Color.Success"
-                     BadgeData="_completedAwards.Length"
-                     Text="Completed">
+        </TabPanel>
+        <TabPanel BadgeColor="MudBlazor.Color.Success"
+                  BadgeData="_completedAwards.Length"
+                  DisplayBadge="true"
+                  Text="Completed">
             <DivRowCol12>
                 <AwardManagementGrid Awards="_completedAwards" />
             </DivRowCol12>
-        </MudTabPanel>
+        </TabPanel>
     </TabControl>
 </DivPad2>

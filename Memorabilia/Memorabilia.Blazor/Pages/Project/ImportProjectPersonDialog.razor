@@ -19,15 +19,12 @@
                                           Value="BeginYear"
                                           ValueChanged="@((p) => BeginYear = p)" />
                     </Div>
-                    <Div Class="col-3">
-                        <Condition Evaluation="CanImportByYearRange">
-                            <Match>
-                                <NullableIntField Label="End Year"
-                                                  Maximum="MaxYear"
-                                                  Value="EndYear"
-                                                  ValueChanged="@((p) => EndYear = p)" />
-                            </Match>
-                        </Condition>
+                    <Div Class="col-3" 
+                         Visible="CanImportByYearRange">
+                        <NullableIntField Label="End Year"
+                                          Maximum="MaxYear"
+                                          Value="EndYear"
+                                          ValueChanged="@((p) => EndYear = p)" />
                     </Div>
                 </Div>
             </NotMatch>
@@ -47,14 +44,10 @@
                       Items="@People"
                       Striped="true">
                 <ToolBarContent>
-                    <MudText Typo="Typo.h6">People</MudText>
+                    <ToolbarTitle Text="People" />
                     <MudSpacer />
-                    <MudTextField @bind-Value="_search"
-                                  Adornment="Adornment.Start"
-                                  AdornmentIcon="@Icons.Material.Filled.Search"
-                                  Class="mt-0"
-                                  IconSize="MudBlazor.Size.Medium"
-                                  Placeholder="Search" />
+                    <ToolbarSearchField SearchText="@_search"
+                                        SearchTextChanged="@((p) => _search = p)" />
                 </ToolBarContent>
                 <HeaderContent>
                     <MudTh>
@@ -79,10 +72,8 @@
                                          CheckedChanged="(p) => PersonSelected(context)" />
                     </MudTd>
                     <MudTd DataLabel="">
-                        <GridImage AllowNavigation="false"
-                                   ImageLoaded="OnImageLoaded"
-                                   ImageFileName="@context.ImageFileName"
-                                   IsPersonImage="true" />
+                        <GridImage ImageData="@(ImageService.GetPersonImageData(context.ImageFileName))"
+                                   ImageLoaded="@(_ => StateHasChanged())" />
                     </MudTd>
                     <MudTd DataLabel="Display Name">@context.DisplayName</MudTd>
                     <MudTd DataLabel="First Name">@context.FirstName</MudTd>

@@ -18,22 +18,24 @@
         <ChildContent>
             <Div Style="margin-bottom:1%;">
                 <TabControl>
-                    <MudTabPanel BadgeColor="MudBlazor.Color.Success"
-                                 BadgeData="EditModel.Colleges.Count(college => !college.IsDeleted)"
-                                 Text="Colleges">
+                    <TabPanel BadgeColor="MudBlazor.Color.Success"
+                              BadgeData="EditModel.Colleges.Count(college => !college.IsDeleted)"
+                              DisplayBadge="true"
+                              Text="Colleges">
                         <DivRowCol12>
                             <PersonCollegeEditor Colleges="EditModel.Colleges" />
                         </DivRowCol12>
-                    </MudTabPanel>
-                    <MudTabPanel BadgeColor="MudBlazor.Color.Success"
-                                 BadgeData="EditModel.Drafts.Count(draft => !draft.IsDeleted)"
-                                 Text="Drafts">
+                    </TabPanel>
+                    <TabPanel BadgeColor="MudBlazor.Color.Success"
+                              BadgeData="EditModel.Drafts.Count(draft => !draft.IsDeleted)"
+                              DisplayBadge="true"
+                              Text="Drafts">
                         <DivRowCol12>
                             <PersonDraftEditor Drafts="EditModel.Drafts"
                                                SportIds="EditModel.SportIds" />
                         </DivRowCol12>
-                    </MudTabPanel>
-                    <MudTabPanel Text="Service">
+                    </TabPanel>
+                    <TabPanel Text="Service">
                         <Div Class="row">
                             <Div Class="col-3">
                                 <MudDatePicker @bind-Date="EditModel.DebutDate"
@@ -60,7 +62,7 @@
                                                Variant="Variant.Outlined" />
                             </Div>
                         </Div>
-                    </MudTabPanel>
+                    </TabPanel>
                 </TabControl>
             </Div>
         </ChildContent>

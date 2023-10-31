@@ -7,14 +7,10 @@
           Items="@Accomplishments"
           Striped="true">
     <ToolBarContent>
-        <MudText Typo="Typo.h6"><b>Accomplishments</b></MudText>
+        <ToolbarTitle Text="Accomplishments" />
         <MudSpacer />
-        <MudTextField @bind-Value="_search"
-                      Adornment="Adornment.Start"
-                      AdornmentIcon="@Icons.Material.Filled.Search"
-                      Class="mt-0"
-                      IconSize="MudBlazor.Size.Medium"
-                      Placeholder="Search" />
+        <ToolbarSearchField SearchText="@_search"
+                            SearchTextChanged="@((p) => _search = p)" />
     </ToolBarContent>
     <HeaderContent>
         <MudTh>Name</MudTh>
@@ -22,7 +18,7 @@
     </HeaderContent>
     <RowTemplate>
         <MudTd DataLabel="Name">@context.AccomplishmentTypeName</MudTd>
-            <MudTd DataLabel="Date/Year">@context.TimeFrame</MudTd>
+        <MudTd DataLabel="Date/Year">@context.TimeFrame</MudTd>
     </RowTemplate>
     <PagerContent>
         <MudTablePager />

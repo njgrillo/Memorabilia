@@ -19,14 +19,10 @@
                       Items="@Model.Drafts.ToList()"
                       Striped="true">
                 <ToolBarContent>
-                    <MudText Typo="Typo.h6">@Model.ResultsTitle</MudText>
+                    <ToolbarTitle Text="@Model.ResultsTitle" />
                     <MudSpacer />
-                    <MudTextField @bind-Value="Search"
-                                  Adornment="Adornment.Start"
-                                  AdornmentIcon="@Icons.Material.Filled.Search"
-                                  Class="mt-0"
-                                  IconSize="MudBlazor.Size.Medium"
-                                  Placeholder="Search" />
+                    <ToolbarSearchField SearchText="@Search"
+                                        SearchTextChanged="@((p) => Search = p)" />
                 </ToolBarContent>
                 <HeaderContent>
                     <MudTh></MudTh>
@@ -43,15 +39,10 @@
                 </HeaderContent>
                 <RowTemplate>
                     <MudTd DataLabel="">
-                        <MudTooltip>
-                            <MudImage @onclick="@(_ => ShowPersonProfileDialog(context.PersonId))"
-                                      Class="rounded-lg can-click"
-                                      Elevation="5"
-                                      Height="200"
-                                      ObjectFit="@ObjectFit.Cover"
-                                      Src="@(ImageService.GetPersonImageData(context.PersonImageFileName))"
-                                      Width="200" />
-                        </MudTooltip>
+                        <GridImage AllowNavigation="true"
+                                   ImageData="@(ImageService.GetPersonImageData(context.PersonImageFileName))"
+                                   ImageLoaded="@(_ => StateHasChanged())"
+                                   OnClick="@(_ => ShowPersonProfileDialog(context.PersonId))" />
                     </MudTd>
                     <MudTd DataLabel="Person">
                         <MudLink Href="@context.ProfileLink">@context.PersonName</MudLink>

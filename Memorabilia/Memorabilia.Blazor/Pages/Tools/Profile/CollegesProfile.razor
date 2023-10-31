@@ -6,7 +6,7 @@
           Items="@Colleges"
           Striped="true">
     <ToolBarContent>
-        <MudText Typo="Typo.h6"><b>Colleges</b></MudText>
+        <ToolbarTitle Text="Colleges" />
     </ToolBarContent>
     <HeaderContent>
         <MudTh>Name</MudTh>
@@ -16,6 +16,6 @@
     <RowTemplate>
         <MudTd DataLabel="Name">@(Constant.College.Find(context.CollegeId)?.Name ?? string.Empty)</MudTd>
         <MudTd DataLabel="Begin Year">@(context.BeginYear.HasValue ? context.BeginYear.Value : string.Empty)</MudTd>
-            <MudTd DataLabel="End Year">@(context.EndYear.HasValue ? context.EndYear.Value : string.Empty)</MudTd>
+        <MudTd DataLabel="End Year">@(context.EndYear.HasValue ? context.EndYear.Value : string.Empty)</MudTd>
     </RowTemplate>
 </MudTable>

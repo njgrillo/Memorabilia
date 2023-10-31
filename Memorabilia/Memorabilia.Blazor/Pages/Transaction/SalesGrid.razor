@@ -6,7 +6,7 @@
           ServerData="@(new Func<TableState, Task<TableData<MemorabiliaTransactionModel>>>(OnRead))"
           Striped="true">
     <ToolBarContent>
-        <MudText Typo="Typo.h6">Sales</MudText>
+        <ToolbarTitle Text="Sales" />
     </ToolBarContent>
     <HeaderContent>
         <MudTh></MudTh>
@@ -17,19 +17,17 @@
     </HeaderContent>
     <RowTemplate>
         <MudTd>
-            <MudIconButton @onclick="@(_ => ToggleChildContent(@context.MemorabiliaTransactionId))"
-                           Icon="@context.ToggleIcon"></MudIconButton>
+            <MudIconButton Icon="@context.ToggleIcon"
+                           OnClick="@(_ => ToggleChildContent(@context.MemorabiliaTransactionId))" />
         </MudTd>
         <MudTd DataLabel="Date">@(context.TransactionDate?.ToString("MM-dd-yyyy") ?? string.Empty)</MudTd>
         <MudTd DataLabel="TotalItemsSold">@context.Sales.Length.ToString()</MudTd>
         <MudTd DataLabel="TotalSoldAmount">@context.Sales.Sum(sale => (sale.SaleAmount ?? 0)).ToString("c")</MudTd>
         <MudTd DataLabel="">
-                <GridEditButton NavigationPath="@($"{NavigationPath.Transactions}/{Constant.EditModeType.Update.Name}/{DataProtectorService.EncryptId(context.MemorabiliaTransactionId)}")" />
-            <MudTooltip Text="Delete">
-                <MudFab Color="MudBlazor.Color.Secondary"
-                        StartIcon="@Icons.Material.Outlined.DeleteOutline"
-                        OnClick="@(_ => ShowDeleteTransactionConfirm(context.MemorabiliaTransactionId))" />
-            </MudTooltip>
+            <NavigationGridButton NavigationPath="@($"{NavigationPath.Transactions}/{Constant.EditModeType.Update.Name}/{DataProtectorService.EncryptId(context.MemorabiliaTransactionId)}")" />
+            <DeleteGridButton ConfirmMessage="Delete Transaction"
+                              OnDelete="@(_ => DeleteTransaction(context.MemorabiliaTransactionId))"
+                              ShowConfirm="true" />
         </MudTd>
     </RowTemplate>
     <ChildRowContent>
@@ -44,7 +42,7 @@
                                   Items="@context.Sales"
                                   Striped="true">
                             <ToolBarContent>
-                                <MudText Typo="Typo.h6">Items</MudText>
+                                <ToolbarTitle Text="Items" />
                                 <MudSpacer />
                             </ToolBarContent>
                             <HeaderContent>
@@ -55,7 +53,8 @@
                             </HeaderContent>
                             <RowTemplate Context="sale">
                                 <MudTd DataLabel="">
-                                    <GridImage ImageLoaded="OnImageLoaded"
+                                    <GridImage AllowNavigation="true" 
+                                               ImageLoaded="OnImageLoaded"
                                                ImageFileName="@(sale.Memorabilia.Images.FirstOrDefault(image => image.ImageTypeId == Constant.ImageType.Primary.Id)?.FileName ?? string.Empty)"
                                                NavigationPath="@($"{NavigationPath.MemorabiliaImage}/{Constant.EditModeType.Update.Name}/{DataProtectorService.EncryptId(sale.Memorabilia.Id)}")" />
                                 </MudTd>
@@ -63,12 +62,10 @@
                                 <MudTd DataLabel="SaleAmount">@(sale.SaleAmount?.ToString("c") ?? string.Empty)</MudTd>
                                 <MudTd DataLabel="">
                                     <ViewMemorabiliaImagesFab MemorabiliaId="sale.MemorabiliaId"
-                                                              Size="MudBlazor.Size.Large" />                                    
-                                    <MudTooltip Text="Delete">
-                                        <MudFab Color="MudBlazor.Color.Secondary"
-                                                StartIcon="@Icons.Material.Outlined.DeleteOutline"
-                                                OnClick="@(_ => ShowDeleteTransactionSaleConfirm(sale.MemorabiliaTransactionId, sale.Id))" />
-                                    </MudTooltip>
+                                                              Size="MudBlazor.Size.Large" />   
+                                    <DeleteGridButton ConfirmMessage="Delete Sale"
+                                                      OnDelete="@(_ => DeleteSale(sale.MemorabiliaTransactionId, sale.Id))"
+                                                      ShowConfirm="true" />
                                 </MudTd>
                             </RowTemplate>
                             <PagerContent>
