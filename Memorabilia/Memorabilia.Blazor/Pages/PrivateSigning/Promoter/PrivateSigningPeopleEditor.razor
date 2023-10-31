@@ -1,6 +1,6 @@
 ﻿<DivRowFormGroup>
     <Div Class="col-4">
-        <MudStack Row="true">
+        <RowStack>
             <PersonDomainAutoComplete Disabled="@(EditMode == EditModeType.Update)"
                                       IsCulturalSearch="true"
                                       SelectedValue="EditModel.Person"
@@ -13,10 +13,10 @@
                     </MudTooltip>
                 </Match>
             </Condition>
-        </MudStack>        
+        </RowStack>        
     </Div>
     <Div Class="col-3">
-        <MudStack Row="true">
+        <RowStack>
             <Condition Evaluation="EditModel.PromoterImageFileName.IsNullOrEmpty()">
                 <Match>
                     <InputFile @bind-Value="@PromoterPrivateSigningPersonImage"
@@ -25,31 +25,27 @@
                                OnChange="@LoadFile" />
                     <MudFab for="fileInputPromoterPersonImage"
                             Color="MudBlazor.Color.Secondary"
-                            HtmlTag="label"
-                            Icon="@Icons.Material.Filled.Image"
-                            Label="Load promotional image" />
+                            HtmlTag="label"                            
+                            Label="Load promotional image"
+                            StartIcon="@Icons.Material.Filled.Image" />
                 </Match>
             </Condition>
             <Condition Evaluation="@(!EditModel.PromoterImageFileName.IsNullOrEmpty())">
                 <Match>
-                    <MudImage Class="rounded-lg cant-click"
-                              Elevation="5"
-                              Height="70"
-                              ObjectFit="@ObjectFit.Cover"
-                              Src="@(ImageService.GetUserImageData(EditModel.PromoterImageFileName, ApplicationStateService.CurrentUser.Id))"
-                              Width="70" />
-                    <MudTooltip Text="Remove Image">
-                        <MudFab Color="MudBlazor.Color.Secondary"
-                                Icon="@Icons.Material.Outlined.Delete"
-                                OnClick="RemovePromoterPersonImage"
-                                Size="MudBlazor.Size.Small" />
-                    </MudTooltip>
+                    <Image Height="70"
+                           ImageData="@(ImageService.GetUserImageData(EditModel.PromoterImageFileName, ApplicationStateService.CurrentUser.Id))"
+                           Width="70" />
+                    <Fab Color="MudBlazor.Color.Secondary"
+                         OnClick="RemovePromoterPersonImage"
+                         Size="MudBlazor.Size.Small"
+                         StartIcon="@Icons.Material.Outlined.Delete"
+                         TooltipText="Remove Image" />
                 </Match>
             </Condition>
             <AddUpdateMudFab EditMode="EditMode"
                              OnAdd="Add"
                              OnUpdate="Update" />
-        </MudStack>        
+        </RowStack>        
     </Div>   
 </DivRowFormGroup>
 <DivRowFormGroup>
@@ -58,15 +54,12 @@
                 CheckedChanged="(p) => OnAllowInscriptionsChange(p)"
                 Label="Inscriptions Allowed?" />
     </Div>
-    <Condition Evaluation="@EditModel.AllowInscriptions">
-        <Match>
-            <Div Class="col-3">
-                <NullableDecimalField Label="Inscription Cost"
-                                      Value="EditModel.InscriptionCost"
-                                      ValueChanged="@((p) => EditModel.InscriptionCost = p)" />
-            </Div>            
-        </Match>
-    </Condition>
+    <Div Class="col-3"
+         Visible="@EditModel.AllowInscriptions">
+        <NullableDecimalField Label="Inscription Cost"
+                              Value="EditModel.InscriptionCost"
+                              ValueChanged="@((p) => EditModel.InscriptionCost = p)" />
+    </Div>
 </DivRowFormGroup>
 <DivRowFormGroup>
     <Div Class="col-3">
@@ -74,30 +67,27 @@
                 CheckedChanged="(p) => OnLimitSpotsChange(p)"
                 Label="Limit Spots?" />
     </Div>
-    <Condition Evaluation="LimitSpots">
-        <Match>
-            <Div Class="col-3">
-                <NullableIntField Label="Spots Available"
-                                  Value="EditModel.SpotsAvailable"
-                                  ValueChanged="@((p) => EditModel.SpotsAvailable = p)" />
-            </Div>            
-            <Div Class="col-3">
-                <NullableIntField Label="Spots Taken"
-                                  Value="EditModel.SpotsConfirmed"
-                                  ValueChanged="@((p) => EditModel.SpotsConfirmed = p)" />
-            </Div>            
-        </Match>
-    </Condition>
+    <Div Class="col-3"
+         Visible="LimitSpots">
+        <NullableIntField Label="Spots Available"
+                          Value="EditModel.SpotsAvailable"
+                          ValueChanged="@((p) => EditModel.SpotsAvailable = p)" />
+    </Div>
+    <Div Class="col-3"
+         Visible="LimitSpots">
+        <NullableIntField Label="Spots Taken"
+                          Value="EditModel.SpotsConfirmed"
+                          ValueChanged="@((p) => EditModel.SpotsConfirmed = p)" />
+    </Div>
 </DivRowFormGroup>
 <DivRowFormGroup>
-    <MudStack Class="col-12"
-              Row="true"
+    <RowStack Class="col-12"
               Style="margin-bottom:1%;">
         <TextField Label="Note"
                    Lines="10"
                    SelectedText="@EditModel.Note"
                    SelectedTextChanged="@((p) => EditModel.Note = p)" />        
-    </MudStack>
+    </RowStack>
 </DivRowFormGroup>
 <MudTable Bordered="false"
           Dense="false"
@@ -105,7 +95,7 @@
           Items="@People.Where(person => !person.IsDeleted).ToList()"
           Striped="true">
     <ToolBarContent>
-        <MudText Typo="Typo.h6">People</MudText>
+        <ToolbarTitle>People</ToolbarTitle>
     </ToolBarContent>
     <HeaderContent>
         <MudTh>Promotional Person Image</MudTh>
@@ -120,17 +110,12 @@
     </HeaderContent>
     <RowTemplate>
         <MudTd DataLabel="">
-            <Condition Evaluation="@(!context.PromoterImageFileName.IsNullOrEmpty())">
-                <Match>
-                    <GridImage AllowNavigation="false"
-                               ImageLoaded="OnImageLoaded"
-                               ImageFileName="@context.PromoterImageFileName" />
-                </Match>
-            </Condition>            
+            <GridImage ImageLoaded="@(_ => StateHasChanged())"
+                       ImageFileName="@context.PromoterImageFileName"
+                       Visible="@(!context.PromoterImageFileName.IsNullOrEmpty())" />
         </MudTd>
         <MudTd DataLabel="">
-            <GridImage AllowNavigation="false" 
-                       ImageLoaded="OnImageLoaded"
+            <GridImage ImageLoaded="@(_ => StateHasChanged())"
                        ImageFileName="@context.Person.ImageFileName"
                        IsPersonImage="true" />
         </MudTd>
@@ -141,16 +126,8 @@
         <MudTd DataLabel="SpotsConfirmed">@(context.SpotsConfirmed.HasValue ? context.SpotsConfirmed.Value : "N/A")</MudTd>
         <MudTd DataLabel="Note">@context.Note</MudTd>
         <MudTd DataLabel="">
-            <MudTooltip Text="Edit">
-                <MudFab Color="MudBlazor.Color.Primary"                                
-                        Icon="@Icons.Material.Outlined.ModeEditOutline"
-                        OnClick="@(_ => Edit(context))" />
-            </MudTooltip> 
-            <MudTooltip Text="Delete">
-                <MudFab Color="MudBlazor.Color.Secondary"
-                        Icon="@Icons.Material.Outlined.DeleteOutline"
-                        OnClick="@(_ => context.IsDeleted = true)" />
-            </MudTooltip> 
+                <EditGridButton OnEdit="@(_ => Edit(context))" />
+                <DeleteGridButton OnDelete="@(_ => context.IsDeleted = true)" />
         </MudTd>
     </RowTemplate>
     <PagerContent>

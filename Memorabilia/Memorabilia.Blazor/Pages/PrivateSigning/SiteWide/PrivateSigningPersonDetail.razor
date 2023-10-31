@@ -2,30 +2,27 @@
     <LeftRightSection LeftStyle="width:35%;"
                       RightStyle="width:65%;">
         <Left>
-            <MudStack>
-                <GridImage AllowNavigation="false"
-                           ImageLoaded="OnImageLoaded"
+            <Stack>
+                <GridImage ImageLoaded="@(_ => StateHasChanged())"
                            ImageFileName="@PrivateSigningPerson.Person.ImageFileName"
                            IsPersonImage="true" />
                 <Text Typography="Typo.h6">
                     <b>@(PrivateSigningPerson.Person.ProfileName)</b>
                 </Text>
                 @*TODO: Add accolades or awards if applicable*@
-            </MudStack>
+            </Stack>
         </Left>
         <Right>
-            <Condition Evaluation="@(PrivateSigningPerson.ExcludedItems.Length > 0)">
-                <Match>
-                    <Div Class="row">
-                        <Text Typography="Typo.h6">
-                            Person will not sign the following items:
-                        </Text>
-                    </Div>
-                    <Div Class="row">
-                        <PrivateSigningPersonExcludedItems ExcludedItems="PrivateSigningPerson.ExcludedItems" />
-                    </Div>                    
-                </Match>
-            </Condition>
+            <Div Class="row"
+                 Visible="@(PrivateSigningPerson.ExcludedItems.Length > 0)">
+                <Text Typography="Typo.h6">
+                    Person will not sign the following items:
+                </Text>
+            </Div>
+            <Div Class="row"
+                 Visible="@(PrivateSigningPerson.ExcludedItems.Length > 0)">
+                <PrivateSigningPersonExcludedItems ExcludedItems="PrivateSigningPerson.ExcludedItems" />
+            </Div>
         </Right>
     </LeftRightSection>
 </DivRowFormGroup>

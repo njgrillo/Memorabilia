@@ -31,11 +31,6 @@ public partial class ViewPrivateSignings
         _resetPaging = false;
     }
 
-    protected void OnImageLoaded()
-    {
-        StateHasChanged();
-    }
-
     protected async Task<TableData<PrivateSigningModel>> OnRead(TableState state)
     {
         var pageInfo = new PageInfo(_resetPaging ? 1 : state.Page + 1, state.PageSize);

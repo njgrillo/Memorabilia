@@ -1,11 +1,6 @@
 ﻿<DivPad2>
-    <Condition Evaluation="@(ValidationResultAlerts.Any())">
-        <Match>
-            <AlertPanel Alerts="ValidationResultAlerts" />
-        </Match>
-    </Condition>
-    <MudExpansionPanel IsExpanded="true"
-                       Text="General Details">
+    <AlertPanel Alerts="ValidationResultAlerts" />
+    <ExpansionPanel Text="General Details">
         <DivRowFormGroup>
             <Div Class="col-3">
                 <MudDatePicker @bind-Date="EditModel.SubmissionDeadlineDate"
@@ -32,25 +27,21 @@
                                    OnChange="@LoadFile" />
                         <MudFab for="fileInputPromoterImage"
                                 Color="MudBlazor.Color.Secondary"
-                                HtmlTag="label"
-                                Icon="@Icons.Material.Filled.Image"
-                                Label="Load promotional image" />
+                                HtmlTag="label"                                
+                                Label="Load promotional image"
+                                StartIcon="@Icons.Material.Filled.Image" />
                     </Match>
                 </Condition>
                 <Condition Evaluation="@(!EditModel.PromoterImageFileName.IsNullOrEmpty())">
                     <Match>
-                        <MudImage Class="rounded-lg cant-click"
-                                  Elevation="5"
-                                  Height="70"
-                                  ObjectFit="@ObjectFit.Cover"
-                                  Src="@(ImageService.GetUserImageData(EditModel.PromoterImageFileName, ApplicationStateService.CurrentUser.Id))"
-                                  Width="70" />
-                        <MudTooltip Text="Remove Image">
-                            <MudFab Color="MudBlazor.Color.Secondary"
-                                    Icon="@Icons.Material.Outlined.Delete"
-                                    OnClick="RemovePromoterImage"
-                                    Size="MudBlazor.Size.Small" />
-                        </MudTooltip>
+                        <Image Height="70"
+                               ImageData="@(ImageService.GetUserImageData(EditModel.PromoterImageFileName, ApplicationStateService.CurrentUser.Id))"
+                               Width="70" />
+                        <Fab Color="MudBlazor.Color.Secondary"                             
+                             OnClick="RemovePromoterImage"
+                             Size="MudBlazor.Size.Small"
+                             StartIcon="@Icons.Material.Outlined.Delete"
+                             TooltipText="Remove Image" />
                     </Match>
                 </Condition>
             </Div>
@@ -70,32 +61,26 @@
                            SelectedTextChanged="@((p) => EditModel.Note = p)" />
             </Div>
         </DivRowFormGroup>
-    </MudExpansionPanel>
-    <MudExpansionPanel IsExpanded="true"
-                       Text="People">
+    </ExpansionPanel>
+    <ExpansionPanel Text="People">
         <PrivateSigningPeopleEditor People="EditModel.People"
-                                    PeopleModified="OnPeopleModified" />
-    </MudExpansionPanel>
-    <MudExpansionPanel IsExpanded="true"
-                       Text="Pricing">
+                                    PeopleModified="@(_ => StateHasChanged())" />
+    </ExpansionPanel>
+    <ExpansionPanel Text="Pricing">
         <PrivateSigningPersonPriceEditor People="EditModel.People" />
-    </MudExpansionPanel>
-    <MudExpansionPanel IsExpanded="true"
-                       Text="Custom Pricing">
+    </ExpansionPanel>
+    <ExpansionPanel Text="Custom Pricing">
         <PrivateSigningPersonCustomPriceEditor People="EditModel.People" />
-    </MudExpansionPanel>
-    <MudExpansionPanel IsExpanded="true"
-                       Text="Promoter Provided Items">
+    </ExpansionPanel>
+    <ExpansionPanel Text="Promoter Provided Items">
         <PrivateSigningPromoterProvidedItemEditor ProvidedItems="EditModel.ProvidedItems" />
-    </MudExpansionPanel>
-    <MudExpansionPanel IsExpanded="true"
-                       Text="Excluded Items">
+    </ExpansionPanel>
+    <ExpansionPanel Text="Excluded Items">
         <PrivateSigningPeopleExcludedItemTypeEditor People="EditModel.People" />
-    </MudExpansionPanel>
-    <MudExpansionPanel IsExpanded="true"
-                       Text="Authentication Providers">
+    </ExpansionPanel>
+    <ExpansionPanel Text="Authentication Providers">
         <PrivateSigningAuthenticationEditor AuthenticationCompanies="EditModel.AuthenticationCompanies" />
-    </MudExpansionPanel>
+    </ExpansionPanel>
     <LeftRightSection Style="margin-top:1%;">
         <Right>
             <SaveButton OnClick="OnSave"

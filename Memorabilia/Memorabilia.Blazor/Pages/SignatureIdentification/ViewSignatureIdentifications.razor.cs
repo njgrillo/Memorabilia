@@ -51,11 +51,6 @@ public partial class ViewSignatureIdentifications : ReroutePage
         await dialog.Result;
     }
 
-    protected void OnImageLoaded()
-    {
-        StateHasChanged();
-    }
-
     protected async Task<TableData<SignatureIdentificationModel>> OnRead(TableState state)
     {
         var pageInfo = new PageInfo(_resetPaging ? 1 : state.Page + 1, state.PageSize);

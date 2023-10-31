@@ -17,17 +17,13 @@
         </Text>
     </Div>
 </DivRowFormGroup>
-<Condition Evaluation="@(!PrivateSigning.Note.IsNullOrEmpty())">
-    <Match>
-        <DivRowFormGroup>
-            <Div Class="col-12">
-                <Text Typography="Typo.h6">
-                    Promoter's Note: @(PrivateSigning.Note)
-                </Text>
-            </Div>
-        </DivRowFormGroup>
-    </Match>
-</Condition>
+<DivRowFormGroup Visible="@(!PrivateSigning.Note.IsNullOrEmpty())">
+    <Div Class="col-12">
+        <Text Typography="Typo.h6">
+            Promoter's Note: @(PrivateSigning.Note)
+        </Text>
+    </Div>
+</DivRowFormGroup>
 <Condition Evaluation="@(PrivateSigning.AuthenticationCompanies.Length > 0)">
     <Match>
         <Iterations Context="privateSigningAuthenticationCompany"

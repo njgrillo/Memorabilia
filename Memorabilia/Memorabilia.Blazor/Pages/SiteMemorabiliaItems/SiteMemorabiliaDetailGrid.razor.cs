@@ -82,11 +82,6 @@ public partial class SiteMemorabiliaDetailGrid : ReroutePage
         //TODO: Finish implentation
     }
 
-    protected void OnImageLoaded()
-    {
-        StateHasChanged();
-    }
-
     protected async Task OnMemorabiliaSelected(SiteMemorabiliaModel item)
     {
         if (!SelectedMemorabilia.Contains(item))

@@ -1,8 +1,7 @@
 ﻿<MudDialog Style="max-height:85vh;">
     <DialogContent>
         <DivRowFormGroup>
-            <MudStack Class="col-12"
-                      Row="true"
+            <RowStack Class="col-12"
                       Style="margin-bottom:1%;">
                 <TextField Label="Name"
                            SelectedText="@EditModel.Name"
@@ -11,7 +10,7 @@
                 <AddUpdateMudFab EditMode="EditMode"
                                  OnAdd="Add"
                                  OnUpdate="Update" />
-            </MudStack>
+            </RowStack>
         </DivRowFormGroup>
         <MudTable Bordered="false"
                   Dense="false"
@@ -19,7 +18,7 @@
                   Items="@CustomItemGroups"
                   Striped="true">
             <ToolBarContent>
-                <MudText Typo="Typo.h6">Custom Item Groups</MudText>
+                <ToolbarTitle>Custom Item Groups</ToolbarTitle>
             </ToolBarContent>
             <HeaderContent>
                 <MudTh>Name</MudTh>

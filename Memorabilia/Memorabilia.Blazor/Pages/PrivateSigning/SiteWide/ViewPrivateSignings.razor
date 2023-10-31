@@ -7,7 +7,7 @@
               ServerData="@(new Func<TableState, Task<TableData<PrivateSigningModel>>>(OnRead))"
               Striped="true">
         <ToolBarContent>
-            <MudText Typo="Typo.h6">Private Sigings</MudText>
+            <ToolbarTitle>Private Sigings</ToolbarTitle>
         </ToolBarContent>
         <HeaderContent>
             <MudTh></MudTh>
@@ -23,12 +23,11 @@
             <MudTd>
                 <Condition Evaluation="@(context.People.Length > 1)">
                     <Match>
-                        <MudIconButton @onclick="@(_ => ToggleChildContent(context.Id))"
-                                       Icon="@context.ToggleIcon"></MudIconButton>
+                        <MudIconButton Icon="@context.ToggleIcon"
+                                       OnClick="@(_ => ToggleChildContent(context.Id))" />
                     </Match>
                     <NotMatch>
-                        <GridImage AllowNavigation="false"
-                                   ImageLoaded="OnImageLoaded"
+                        <GridImage ImageLoaded="@(_ => StateHasChanged())"
                                    ImageFileName="@context.People.First().Person.ImageFileName"
                                    IsPersonImage="true" />
                     </NotMatch>
@@ -41,12 +40,11 @@
             <MudTd DataLabel="CreatedBy">@context.CreatedUser.Username</MudTd>
             <MudTd DataLabel="CreatedOn">@(context.CreatedDate.ToString("MM-dd-yyyy hh:mm:ss tt"))</MudTd>
             <MudTd DataLabel="">
-                <MudTooltip Text="View">
-                    <MudFab Color="MudBlazor.Color.Primary"
-                        Icon="@Icons.Material.Outlined.Preview"
-                        OnClick="@(_ => NavigationManager.NavigateTo($"{NavigationPath.PrivateSignings}/{DataProtectorService.EncryptId(context.Id)}"))"
-                        Size="@MudBlazor.Size.Small" />
-                </MudTooltip>
+                <Fab Color="MudBlazor.Color.Primary"                         
+                     OnClick="@(_ => NavigationManager.NavigateTo($"{NavigationPath.PrivateSignings}/{DataProtectorService.EncryptId(context.Id)}"))"
+                     Size="@MudBlazor.Size.Small"
+                     StartIcon="@Icons.Material.Outlined.Preview"
+                     TooltipText="View" />
             </MudTd>
         </RowTemplate>
         <ChildRowContent>
@@ -67,7 +65,7 @@
                                       Items="@context.People"
                                       Striped="true">
                                 <ToolBarContent>
-                                    <MudText Typo="Typo.h6">People</MudText>
+                                    <ToolbarTitle>People</ToolbarTitle>
                                     <MudSpacer />
                                 </ToolBarContent>
                                 <HeaderContent>
@@ -77,8 +75,7 @@
                                 </HeaderContent>
                                 <RowTemplate Context="privateSigningPerson">
                                     <MudTd>
-                                        <GridImage AllowNavigation="false"
-                                                   ImageLoaded="OnImageLoaded"
+                                        <GridImage ImageLoaded="@(_ => StateHasChanged())"
                                                    ImageFileName="@privateSigningPerson.Person.ImageFileName"
                                                    IsPersonImage="true" />
                                     </MudTd>

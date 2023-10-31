@@ -80,11 +80,6 @@ public partial class PrivateSigningPeopleEditor
         EditModel.InscriptionCost = null;
     }
 
-    protected void OnImageLoaded()
-    {
-        StateHasChanged();
-    }
-
     protected void OnLimitSpotsChange(bool limitSpots)
     {
         LimitSpots = limitSpots;

@@ -19,11 +19,6 @@ public partial class TradesEditGrid
         };
     }
 
-    protected void OnImageLoaded()
-    {
-        StateHasChanged();
-    }
-
     private void ResetItemToOriginalValues(object element)
     {
         ((MemorabiliaTransactionTradeEditModel)element).TransactionTradeTypeId = _elementBeforeEdit.TransactionTradeTypeId;

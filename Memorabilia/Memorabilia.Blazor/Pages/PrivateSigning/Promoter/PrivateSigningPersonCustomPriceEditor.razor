@@ -5,8 +5,7 @@
     </Right>
 </LeftRightSection>
 <DivRowFormGroup>
-    <MudStack Class="col-12"
-              Row="true"
+    <RowStack Class="col-12"
               Style="margin-bottom:1%;">
         <PrivateSigningPersonDropDown AvailablePeople="People.Select(person => person.Person).ToArray()"
                                       Disabled="@(EditMode == EditModeType.Update)"
@@ -23,17 +22,16 @@
         <AddUpdateMudFab EditMode="EditMode"
                          OnAdd="Add"
                          OnUpdate="Update" />
-    </MudStack>
+    </RowStack>
 </DivRowFormGroup>
 <DivRowFormGroup>
-    <MudStack Class="col-12"
-              Row="true"
+    <RowStack Class="col-12"
               Style="margin-bottom:1%;">
         <TextField Label="Note"
                    Lines="10"
                    SelectedText="@EditModel.Note"
                    SelectedTextChanged="@((p) => EditModel.Note = p)" />
-    </MudStack>
+    </RowStack>
 </DivRowFormGroup>
 <MudTable Bordered="false"
           Dense="false"
@@ -41,7 +39,7 @@
           Items="@People.SelectMany(person => person.Pricing).Where(price => !price.IsDeleted).OrderBy(price => price.Person.DisplayName).ThenBy(price => price.PrivateSigningItemGroup.Name).ToList()"
           Striped="true">
     <ToolBarContent>
-        <MudText Typo="Typo.h6">Custom Pricing</MudText>
+        <ToolbarTitle>Custom Pricing</ToolbarTitle>
     </ToolBarContent>
     <HeaderContent>
         <MudTh></MudTh>
@@ -54,8 +52,7 @@
     </HeaderContent>
     <RowTemplate>
         <MudTd DataLabel="">
-            <GridImage AllowNavigation="false"
-                       ImageLoaded="OnImageLoaded"
+            <GridImage ImageLoaded="@(_ => StateHasChanged())"
                        ImageFileName="@GetPerson(context.Person.Id).ImageFileName"
                        IsPersonImage="true" />
         </MudTd>
@@ -65,16 +62,8 @@
         <MudTd DataLabel="ShippingCost">@(context.ShippingCost?.ToString("c") ?? string.Empty)</MudTd>
         <MudTd DataLabel="Note">@context.Note</MudTd>
         <MudTd DataLabel="">
-            <MudTooltip Text="Edit">
-                <MudFab Color="MudBlazor.Color.Primary"
-                        Icon="@Icons.Material.Outlined.ModeEditOutline"
-                        OnClick="@(_ => Edit(context))" />
-            </MudTooltip>
-            <MudTooltip Text="Delete">
-                <MudFab Color="MudBlazor.Color.Secondary"
-                        Icon="@Icons.Material.Outlined.DeleteOutline"
-                        OnClick="@(_ => context.IsDeleted = true)" />
-            </MudTooltip>
+                <EditGridButton OnEdit="@(_ => Edit(context))" />
+                <DeleteGridButton OnDelete="@(_ => context.IsDeleted = true)" />
         </MudTd>
     </RowTemplate>
     <PagerContent>

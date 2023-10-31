@@ -1,6 +1,5 @@
 ﻿<DivRowFormGroup>
-    <MudStack Class="col-12"
-              Row="true"
+    <RowStack Class="col-12"
               Style="margin-bottom:1%;">
         <PrivateSigningPersonDropDown AvailablePeople="People.Select(person => person.Person).ToArray()"
                                       SelectedValue="EditModel.Person.Id"
@@ -8,17 +7,16 @@
         <ItemTypeAutoComplete SelectedValue="EditModel.ItemType"
                               SelectionChanged="(p) => EditModel.ItemType = p" />
         <AddMudFab OnAdd="Add" />
-    </MudStack>
+    </RowStack>
 </DivRowFormGroup>
 <DivRowFormGroup>
-    <MudStack Class="col-12"
-              Row="true"
+    <RowStack Class="col-12"
               Style="margin-bottom:1%;">
         <TextField Label="Note"
                    Lines="10"
                    SelectedText="@EditModel.Note"
                    SelectedTextChanged="@((p) => EditModel.Note = p)" />
-    </MudStack>
+    </RowStack>
 </DivRowFormGroup>
 <MudTable Bordered="false"
           Dense="false"
@@ -26,7 +24,7 @@
           Items="@Items"
           Striped="true">
     <ToolBarContent>
-        <MudText Typo="Typo.h6">Excluded Items</MudText>
+        <ToolbarTitle>Excluded Items</ToolbarTitle>
     </ToolBarContent>
     <HeaderContent>
         <MudTh></MudTh>
@@ -36,19 +34,14 @@
     </HeaderContent>
     <RowTemplate>
         <MudTd DataLabel="">
-            <GridImage AllowNavigation="false"
-                       ImageLoaded="OnImageLoaded"
+            <GridImage ImageLoaded="@(_ => StateHasChanged())"
                        ImageFileName="@GetPerson(context.Person.Id).ImageFileName"
                        IsPersonImage="true" />
         </MudTd>
         <MudTd DataLabel="Name">@GetPerson(context.Person.Id).ProfileName</MudTd>
         <MudTd DataLabel="Item">@context.ItemType?.Name</MudTd>
         <MudTd DataLabel="">
-            <MudTooltip Text="Delete">
-                <MudFab Color="MudBlazor.Color.Secondary"
-                    Icon="@Icons.Material.Outlined.DeleteOutline"
-                    OnClick="@(_ => context.IsDeleted = true)" />
-            </MudTooltip>
+            <DeleteGridButton OnDelete="@(_ => context.IsDeleted = true)" />
         </MudTd>
     </RowTemplate>
     <PagerContent>

@@ -19,11 +19,6 @@ public partial class SalesEditGrid
         };
     }
 
-    protected void OnImageLoaded()
-    {
-        StateHasChanged();
-    }
-
     private void ResetItemToOriginalValues(object element)
     {
         ((MemorabiliaTransactionSaleEditModel)element).SaleAmount = _elementBeforeEdit.SaleAmount;

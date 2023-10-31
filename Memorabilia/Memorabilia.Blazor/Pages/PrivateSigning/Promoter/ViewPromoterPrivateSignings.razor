@@ -13,7 +13,7 @@
               ServerData="@(new Func<TableState, Task<TableData<PromoterPrivateSigningModel>>>(OnRead))"
               Striped="true">
         <ToolBarContent>
-            <MudText Typo="Typo.h6">My Private Signings</MudText>
+            <ToolbarTitle>My Private Signings</ToolbarTitle>
         </ToolBarContent>
         <HeaderContent>
             <MudTh></MudTh>
@@ -31,29 +31,21 @@
             <MudTd>
                 <Condition Evaluation="@(context.People.Length > 1)">
                     <Match>
-                        <MudIconButton @onclick="@(_ => ToggleChildContent(context.Id))"
-                                       Icon="@context.ToggleIcon"></MudIconButton>
+                        <MudIconButton Icon="@context.ToggleIcon"
+                                       OnClick="@(_ => ToggleChildContent(context.Id))" />
                     </Match>
                 </Condition>
             </MudTd>
             <MudTd>
-                <Condition Evaluation="@(!context.PromoterImageFileName.IsNullOrEmpty())">
-                    <Match>
-                        <GridImage AllowNavigation="false"
-                                   ImageLoaded="OnImageLoaded"
-                                   ImageFileName="@context.PromoterImageFileName" />
-                    </Match>
-                </Condition>                
+                <GridImage ImageLoaded="@(_ => StateHasChanged())"
+                           ImageFileName="@context.PromoterImageFileName"
+                           Visible="@(!context.PromoterImageFileName.IsNullOrEmpty())" />
             </MudTd>
             <MudTd>
-                <Condition Evaluation="@(context.People.Length == 1)">
-                    <Match>
-                        <GridImage AllowNavigation="false"
-                                   ImageLoaded="OnImageLoaded"
-                                   ImageFileName="@context.People.First().Person.ImageFileName"
-                                   IsPersonImage="true" />
-                    </Match>
-                </Condition>
+                <GridImage ImageLoaded="@(_ => StateHasChanged())"
+                           ImageFileName="@context.People.First().Person.ImageFileName"
+                           IsPersonImage="true"
+                           Visible="@(context.People.Length == 1)" />
             </MudTd>
             <MudTd DataLabel="Person">@(context.People.Any() ? (context.People.Length > 1 ? "Multiple People" : context.People.First().Person.DisplayName) : string.Empty)</MudTd>
             <MudTd DataLabel="SubmissionDeadlineDate">@(context.SubmissionDeadlineDate.ToString("MM-dd-yyyy"))</MudTd>
@@ -62,12 +54,8 @@
             <MudTd DataLabel="Note">@context.Note</MudTd>
             <MudTd DataLabel="CreatedOn">@(context.CreatedDate.ToString("MM-dd-yyyy hh:mm:ss tt"))</MudTd>
             <MudTd DataLabel="">
-                <MudTooltip Text="Edit">
-                    <MudFab Color="MudBlazor.Color.Primary"
-                            Icon="@Icons.Material.Outlined.ModeEditOutline"
-                            OnClick="@(_ => NavigationManager.NavigateTo($"{NavigationPath.MyPrivateSigningsEdit}/{DataProtectorService.EncryptId(context.Id)}"))"
-                            Size="@MudBlazor.Size.Small" />
-                </MudTooltip>
+                <EditGridButton OnEdit="@(_ => NavigationManager.NavigateTo($"{NavigationPath.MyPrivateSigningsEdit}/{DataProtectorService.EncryptId(context.Id)}"))"
+                                Size="@MudBlazor.Size.Small" />
             </MudTd>
         </RowTemplate>
         <ChildRowContent>
@@ -88,7 +76,7 @@
                                     Items="@context.People"
                                     Striped="true">
                                 <ToolBarContent>
-                                    <MudText Typo="Typo.h6">People</MudText>
+                                    <ToolbarTitle>People</ToolbarTitle>
                                     <MudSpacer />
                                 </ToolBarContent>
                                 <HeaderContent>
@@ -98,8 +86,7 @@
                                 </HeaderContent>
                                 <RowTemplate Context="privateSigningPerson">
                                     <MudTd>
-                                        <GridImage AllowNavigation="false"
-                                                   ImageLoaded="OnImageLoaded"
+                                        <GridImage ImageLoaded="@(_ => StateHasChanged())"
                                                    ImageFileName="@privateSigningPerson.Person.ImageFileName"
                                                    IsPersonImage="true" />
                                     </MudTd>

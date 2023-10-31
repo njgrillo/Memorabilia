@@ -55,11 +55,6 @@ public partial class ImportProjectPersonDialog
         MudDialog.Close(DialogResult.Ok(SelectedPeople.ToArray()));
     }
 
-    protected void OnImageLoaded()
-    {
-        StateHasChanged();
-    }
-
 
     protected void OnSelectAll()
     {

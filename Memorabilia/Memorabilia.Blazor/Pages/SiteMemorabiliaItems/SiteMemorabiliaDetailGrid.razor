@@ -34,8 +34,7 @@
                            OnClick="@(_ => ToggleChildContent(context.Id))" />
         </MudTd>
         <MudTd DataLabel="">
-            <GridImage AllowNavigation="false" 
-                       ImageLoaded="OnImageLoaded"
+            <GridImage ImageLoaded="@(_ => StateHasChanged())"
                        ImageFileName="@context.ImageFileName"
                        UserId="@context.UserId" />
         </MudTd>

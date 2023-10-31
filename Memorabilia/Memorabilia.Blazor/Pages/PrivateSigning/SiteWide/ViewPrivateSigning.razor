@@ -1,24 +1,24 @@
 ﻿<DivPad2>
-    <MudExpansionPanel IsExpanded="true"
-                       Text="Private Signing Details">
+    <ExpansionPanel Text="Private Signing Details">
         <PrivateSigningDetail PrivateSigning="Model" />
-    </MudExpansionPanel>
+    </ExpansionPanel>
     <Condition Evaluation="@(Model.People.Length > 1)">
         <Match>
-            <Div Class="row" Style="margin-top:1%;">
+            <Div Class="row" 
+                 Style="margin-top:1%;">
                 <PrivateSigningPersonDetail PrivateSigningPerson="Model.People.First()" />
             </Div>
         </Match>
         <NotMatch>
-            <MudExpansionPanel IsExpanded="true"
-                               Text="Signers">
+            <ExpansionPanel Text="Signers">
                 <Iterations Context="privateSigingPerson"
                             Items="Model.People">
-                    <Div Class="row" Style="margin-top:1%;">
+                    <Div Class="row" 
+                         Style="margin-top:1%;">
                         <PrivateSigningPersonDetail PrivateSigningPerson="privateSigingPerson" />
                     </Div>
                 </Iterations>
-            </MudExpansionPanel>
+            </ExpansionPanel>
         </NotMatch>
     </Condition>    
 </DivPad2>

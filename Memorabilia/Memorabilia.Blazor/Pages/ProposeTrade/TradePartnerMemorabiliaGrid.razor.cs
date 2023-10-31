@@ -23,11 +23,6 @@ public partial class TradePartnerMemorabiliaGrid
     private MudTable<ProposeTradeMemorabiliaEditModel> _table
         = new();
 
-    protected void OnImageLoaded()
-    {
-        StateHasChanged();
-    }
-
     protected void OnMemorabiliaSelected(ProposeTradeMemorabiliaEditModel item)
     {
         if (!SelectedMemorabilia.Contains(item))

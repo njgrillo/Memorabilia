@@ -21,11 +21,6 @@ public partial class PartialTradesEditGrid
         };
     }
 
-    protected void OnImageLoaded()
-    {
-        StateHasChanged();
-    }
-
     private void ResetItemToOriginalValues(object element)
     {
         ((MemorabiliaTransactionTradeEditModel)element).CashIncludedAmount = _elementBeforeEdit.CashIncludedAmount;

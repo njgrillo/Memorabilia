@@ -82,11 +82,6 @@ public partial class PrivateSigningEditor
         }
     }
 
-    protected void OnPeopleModified()
-    {
-        StateHasChanged();
-    }
-
     protected async Task OnSave()
     {
         var command = new SavePrivateSigning.Command(EditModel);
